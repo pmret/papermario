@@ -3415,8 +3415,8 @@ enum EventSupressFlags {
 enum PartnerActions {
     PARTNER_ACTION_NONE             = 0, // generic state
     PARTNER_ACTION_USE              = 1, // generic state
-    PARTNER_ACTION_KOOPER_1         = 1,
-    PARTNER_ACTION_KOOPER_2         = 2,
+    PARTNER_ACTION_KOOPER_GATHER    = 1,
+    PARTNER_ACTION_KOOPER_TOSS      = 2,
     PARTNER_ACTION_BOMBETTE_1       = 1,
     PARTNER_ACTION_BOMBETTE_2       = 2,
     PARTNER_ACTION_BOMBETTE_3       = 3,

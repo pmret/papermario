@@ -205,7 +205,7 @@ API_CALLABLE(KooperUseAbility) {
     f32 posX, posY, posZ, hitLength;
     f32 testLength;
     s32 actionState;
-    f32 clamp;
+    f32 moveAngle;
     f32 colheight;
     f32 angleToStartPos;
 
@@ -233,13 +233,16 @@ API_CALLABLE(KooperUseAbility) {
 
         if (!KooperTriggeredBattle) {
             actionState = playerStatus->actionState;
-            if (actionState == ACTION_STATE_IDLE || actionState == ACTION_STATE_WALK || actionState == ACTION_STATE_RUN) {
+            if (actionState == ACTION_STATE_IDLE
+             || actionState == ACTION_STATE_WALK
+             || actionState == ACTION_STATE_RUN
+            ) {
                 script->USE_STATE = SHELL_TOSS_STATE_BEGIN;
             } else {
                 return ApiStatus_DONE2;
             }
         } else if (partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE) {
-            partnerActionStatus->partnerActionState = PARTNER_ACTION_KOOPER_1;
+            partnerActionStatus->partnerActionState = PARTNER_ACTION_KOOPER_GATHER;
             partnerActionStatus->actingPartner = PARTNER_KOOPER;
             script->USE_STATE = SHELL_TOSS_STATE_HOLD;
             kooper->currentAnim = ANIM_WorldKooper_SpinShell;
@@ -249,259 +252,265 @@ API_CALLABLE(KooperUseAbility) {
 
     switch (script->USE_STATE) {
         case SHELL_TOSS_STATE_BEGIN:
-            if (playerStatus->inputEnabledCounter == 0) {
-                if (playerStatus->timeInAir == 0) {
-                    if (kooper->flags & NPC_FLAG_GROUNDED) {
-                        disable_player_input();
-                        script->functionTemp[2] = playerStatus->inputEnabledCounter;
-                        ShellTossControlsPlayer = TRUE;
-                        ShellTossHitboxState = SHELL_TOSS_HITBOX_DISABLED;
-                        KooperHasItem = FALSE;
-                        kooper->flags &= ~(NPC_FLAG_GRAVITY | NPC_FLAG_JUMPING | NPC_FLAG_8);
-                        kooper->flags |= (NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION);
-                        partnerActionStatus->actingPartner = PARTNER_KOOPER;
-                        partnerActionStatus->partnerActionState = PARTNER_ACTION_KOOPER_1;
-                        ShellTossPlayerFacingLeft = partner_force_player_flip_done();
-                        enable_npc_blur(kooper);
-                        kooper->duration = 4;
-                        kooper->yaw = atan2(kooper->pos.x, kooper->pos.z,
-                                            playerStatus->position.x, playerStatus->position.z);
-                        script->USE_STATE++;
-                    } else {
-                        return ApiStatus_DONE2;
-                    }
-                } else {
-                    return ApiStatus_DONE2;
-                }
-            } else {
+            if (playerStatus->inputEnabledCounter != 0
+             || playerStatus->timeInAir != 0
+             || !(kooper->flags & NPC_FLAG_GROUNDED)
+            ) {
                 return ApiStatus_DONE2;
             }
+
+            disable_player_input();
+            script->functionTemp[2] = playerStatus->inputEnabledCounter;
+            ShellTossControlsPlayer = TRUE;
+            ShellTossHitboxState = SHELL_TOSS_HITBOX_DISABLED;
+            KooperHasItem = FALSE;
+            kooper->flags &= ~(NPC_FLAG_GRAVITY | NPC_FLAG_JUMPING | NPC_FLAG_8);
+            kooper->flags |= (NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION);
+            partnerActionStatus->actingPartner = PARTNER_KOOPER;
+            partnerActionStatus->partnerActionState = PARTNER_ACTION_KOOPER_GATHER;
+            ShellTossPlayerFacingLeft = partner_force_player_flip_done();
+            enable_npc_blur(kooper);
+            kooper->duration = 4;
+            kooper->yaw = atan2(kooper->pos.x, kooper->pos.z,
+                                playerStatus->position.x, playerStatus->position.z);
+            script->USE_STATE++;
             break;
 
         case SHELL_TOSS_STATE_GATHER:
             if (playerStatus->actionState == ACTION_STATE_HIT_FIRE
-                || playerStatus->actionState == ACTION_STATE_KNOCKBACK
-                || playerStatus->actionState == ACTION_STATE_HIT_LAVA
-                || playerStatus->timeInAir != 0
+             || playerStatus->actionState == ACTION_STATE_KNOCKBACK
+             || playerStatus->actionState == ACTION_STATE_HIT_LAVA
+             || playerStatus->timeInAir != 0
             ) {
                 suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
                 script->USE_STATE = SHELL_TOSS_STATE_FINISH;
                 break;
-            } else {
-                suggest_player_anim_allow_backward(ANIM_Mario1_BeforeJump);
-                kooper->moveToPos.x = ShellTossPosX = playerStatus->position.x;
-                kooper->moveToPos.y = ShellTossPosY = playerStatus->position.y;
-                kooper->moveToPos.z = ShellTossPosZ = playerStatus->position.z;
-                kooper->currentAnim = ANIM_WorldKooper_Run;
-                add_vec2D_polar(&kooper->moveToPos.x, &kooper->moveToPos.z,
-                                playerStatus->colliderDiameter / 3, playerStatus->targetYaw);
-                clamp = clamp_angle(playerStatus->targetYaw + (ShellTossPlayerFacingLeft ? 90.0f : -90.0f));
-                add_vec2D_polar(&kooper->moveToPos.x, &kooper->moveToPos.z,
-                                playerStatus->colliderDiameter / 4, clamp);
-                kooper->pos.x += (kooper->moveToPos.x - kooper->pos.x) / kooper->duration;
-                kooper->pos.y += (kooper->moveToPos.y - kooper->pos.y) / kooper->duration;
-                kooper->pos.z += (kooper->moveToPos.z - kooper->pos.z) / kooper->duration;
-
-                kooper->duration--;
-                if (kooper->duration != 0) {
-                    break;
-                }
-
-                disable_npc_blur(kooper);
-                if (script->functionTemp[2] < playerStatus->inputEnabledCounter) {
-                    if (!(playerStatus->animFlags & PA_FLAG_CHANGING_MAP)) {
-                        suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
-                    } else {
-                        suggest_player_anim_allow_backward(ANIM_Mario1_Run);
-                    }
-                    script->USE_STATE = SHELL_TOSS_STATE_FINISH;
-                    break;
-                } else {
-                    kooper->yaw = playerStatus->targetYaw;
-                    kooper->jumpVelocity = 18.0f;
-                    kooper->jumpScale = 3.0f;
-                    kooper->currentAnim = ANIM_WorldKooper_EnterShell;
-                    kooper->collisionHeight = 12;
-
-                    kooper->moveToPos.y = playerStatus->position.y;
-                    kooper->moveToPos.z = playerStatus->position.y + playerStatus->colliderHeight / 3;
-                    playerStatus->flags |= PS_FLAG_JUMPING;
-                    gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
-
-                    suggest_player_anim_allow_backward(ANIM_Mario1_Jump);
-                    ShellTossKickFalling = FALSE;
-                    sfx_play_sound_at_npc(SOUND_JUMP_2081, SOUND_SPACE_MODE_0, NPC_PARTNER);
-                    script->USE_STATE = SHELL_TOSS_STATE_JUMP;
-                }
             }
+
+            suggest_player_anim_allow_backward(ANIM_Mario1_BeforeJump);
+            kooper->moveToPos.x = ShellTossPosX = playerStatus->position.x;
+            kooper->moveToPos.y = ShellTossPosY = playerStatus->position.y;
+            kooper->moveToPos.z = ShellTossPosZ = playerStatus->position.z;
+            kooper->currentAnim = ANIM_WorldKooper_Run;
+            add_vec2D_polar(&kooper->moveToPos.x, &kooper->moveToPos.z,
+                            playerStatus->colliderDiameter / 3, playerStatus->targetYaw);
+            moveAngle = clamp_angle(playerStatus->targetYaw + (ShellTossPlayerFacingLeft ? 90.0f : -90.0f));
+            add_vec2D_polar(&kooper->moveToPos.x, &kooper->moveToPos.z,
+                            playerStatus->colliderDiameter / 4, moveAngle);
+            kooper->pos.x += (kooper->moveToPos.x - kooper->pos.x) / kooper->duration;
+            kooper->pos.y += (kooper->moveToPos.y - kooper->pos.y) / kooper->duration;
+            kooper->pos.z += (kooper->moveToPos.z - kooper->pos.z) / kooper->duration;
+
+            kooper->duration--;
+            if (kooper->duration != 0) {
+                break;
+            }
+
+            disable_npc_blur(kooper);
+            if (script->functionTemp[2] < playerStatus->inputEnabledCounter) {
+                if (!(playerStatus->animFlags & PA_FLAG_CHANGING_MAP)) {
+                    suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
+                } else {
+                    suggest_player_anim_allow_backward(ANIM_Mario1_Run);
+                }
+                script->USE_STATE = SHELL_TOSS_STATE_FINISH;
+                break;
+            }
+
+            kooper->yaw = playerStatus->targetYaw;
+            kooper->jumpVelocity = 18.0f;
+            kooper->jumpScale = 3.0f;
+            kooper->currentAnim = ANIM_WorldKooper_EnterShell;
+            kooper->collisionHeight = 12;
+
+            kooper->moveToPos.y = playerStatus->position.y;
+            kooper->moveToPos.z = playerStatus->position.y + playerStatus->colliderHeight / 3;
+            playerStatus->flags |= PS_FLAG_JUMPING;
+            gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
+
+            suggest_player_anim_allow_backward(ANIM_Mario1_Jump);
+            ShellTossKickFalling = FALSE;
+            sfx_play_sound_at_npc(SOUND_JUMP_2081, SOUND_SPACE_MODE_0, NPC_PARTNER);
+            script->USE_STATE = SHELL_TOSS_STATE_JUMP;
+            // fallthrough
 
         case SHELL_TOSS_STATE_JUMP:
             if (playerStatus->actionState == ACTION_STATE_HIT_FIRE
-                || playerStatus->actionState == ACTION_STATE_KNOCKBACK
-                || playerStatus->actionState == ACTION_STATE_HIT_LAVA
+             || playerStatus->actionState == ACTION_STATE_KNOCKBACK
+             || playerStatus->actionState == ACTION_STATE_HIT_LAVA
             ) {
                 script->USE_STATE = SHELL_TOSS_STATE_FINISH;
-            } else {
-                kooper->jumpVelocity -= kooper->jumpScale;
-                playerStatus->position.y += kooper->jumpVelocity;
-                if (kooper->jumpVelocity < 0.0f) {
-                    if (!ShellTossKickFalling) {
-                        ShellTossKickFalling = TRUE;
-                        suggest_player_anim_allow_backward(ANIM_Mario1_Fall);
-                    }
+                break;
+            }
+
+            kooper->jumpVelocity -= kooper->jumpScale;
+            playerStatus->position.y += kooper->jumpVelocity;
+            if (kooper->jumpVelocity < 0.0f) {
+                if (!ShellTossKickFalling) {
+                    ShellTossKickFalling = TRUE;
+                    suggest_player_anim_allow_backward(ANIM_Mario1_Fall);
+                }
+            }
+
+            posX = playerStatus->position.x;
+            posY = (playerStatus->position.y + playerStatus->colliderHeight / 2) - kooper->jumpVelocity;
+            posZ = playerStatus->position.z;
+            testLength = hitLength = playerStatus->colliderHeight / 2;
+
+            if ((npc_raycast_up(COLLISION_CHANNEL_10000, &posX, &posY, &posZ, &hitLength)) && (hitLength < testLength)) {
+                collisionStatus->currentCeiling = NpcHitQueryColliderID;
+                playerStatus->position.y = posY - playerStatus->colliderHeight;
+                kooper_vertical_hit_interactable_entity(kooper);
+            }
+
+            if (!(kooper->jumpVelocity > 0.0f) && (playerStatus->position.y < kooper->moveToPos.z)) {
+                D_802BEC5C = 0;
+                kooper->flags &= ~NPC_FLAG_IGNORE_PLAYER_COLLISION;
+                partnerActionStatus->actingPartner = PARTNER_KOOPER;
+                partnerActionStatus->partnerActionState = PARTNER_ACTION_KOOPER_TOSS;
+                kooper->rotation.z = 0.0f;
+                kooper->planarFlyDist = 0.0f;
+                kooper->moveSpeed = 8.0f;
+                kooper->currentAnim = ANIM_WorldKooper_SpinShell;
+                ShellTossHitboxState = SHELL_TOSS_HITBOX_ENABLED;
+                fx_damage_stars(3, kooper->pos.x, kooper->pos.y + kooper->collisionHeight, kooper->pos.z,
+                        sin_deg(playerStatus->targetYaw), -1.0f, -cos_deg(playerStatus->targetYaw), 3);
+                start_bounce_b();
+
+                if (ShellTossControlsPlayer) {
+                    enable_player_input();
+                    ShellTossControlsPlayer = FALSE;
                 }
 
-                posX = playerStatus->position.x;
-                posY = (playerStatus->position.y + playerStatus->colliderHeight / 2) - kooper->jumpVelocity;
-                posZ = playerStatus->position.z;
-                testLength = hitLength = playerStatus->colliderHeight / 2;
-
-                if ((npc_raycast_up(COLLISION_CHANNEL_10000, &posX, &posY, &posZ, &hitLength)) && (hitLength < testLength)) {
-                    collisionStatus->currentCeiling = NpcHitQueryColliderID;
-                    playerStatus->position.y = posY - playerStatus->colliderHeight;
-                    kooper_vertical_hit_interactable_entity(kooper);
-                }
-
-                if (!(kooper->jumpVelocity > 0.0f) && (playerStatus->position.y < kooper->moveToPos.z)) {
-                    D_802BEC5C = 0;
-                    kooper->flags &= ~NPC_FLAG_IGNORE_PLAYER_COLLISION;
-                    partnerActionStatus->actingPartner = PARTNER_KOOPER;
-                    partnerActionStatus->partnerActionState = PARTNER_ACTION_KOOPER_2;
-                    kooper->rotation.z = 0.0f;
-                    kooper->planarFlyDist = 0.0f;
-                    kooper->moveSpeed = 8.0f;
-                    kooper->currentAnim = ANIM_WorldKooper_SpinShell;
-                    ShellTossHitboxState = SHELL_TOSS_HITBOX_ENABLED;
-                    fx_damage_stars(3, kooper->pos.x, kooper->pos.y + kooper->collisionHeight, kooper->pos.z,
-                            sin_deg(playerStatus->targetYaw), -1.0f, -cos_deg(playerStatus->targetYaw), 3);
-                    start_bounce_b();
-
-                    if (ShellTossControlsPlayer) {
-                        enable_player_input();
-                        ShellTossControlsPlayer = FALSE;
-                    }
-
-                    script->USE_STATE = SHELL_TOSS_STATE_KICK;
-                    ShellTossKickFalling = FALSE;
-                    gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
-                    sfx_play_sound_at_npc(SOUND_283, SOUND_SPACE_MODE_0, NPC_PARTNER);
-                    sfx_play_sound_at_npc(SOUND_284, SOUND_SPACE_MODE_0, NPC_PARTNER);
-                }
+                script->USE_STATE = SHELL_TOSS_STATE_KICK;
+                ShellTossKickFalling = FALSE;
+                gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
+                sfx_play_sound_at_npc(SOUND_283, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                sfx_play_sound_at_npc(SOUND_284, SOUND_SPACE_MODE_0, NPC_PARTNER);
             }
             break;
 
         case SHELL_TOSS_STATE_KICK:
-            if ((playerStatus->actionState != ACTION_STATE_HIT_FIRE)
-                && (playerStatus->actionState != ACTION_STATE_KNOCKBACK)
+            if (playerStatus->actionState == ACTION_STATE_HIT_FIRE
+             || playerStatus->actionState == ACTION_STATE_KNOCKBACK
             ) {
-                posX = kooper->pos.x;
-                posY = kooper->pos.y;
-                posZ = kooper->pos.z;
-
-                if (npc_test_move_taller_with_slipping(COLLISION_CHANNEL_8000,
-                    &posX, &posY, &posZ, kooper->moveSpeed, kooper->yaw - 20.0f, 
-                    kooper->collisionHeight, kooper->collisionRadius / 2)
-                ) {
-                    if (!kooper_lateral_hit_interactable_entity(kooper)) {
-                        sfx_play_sound_at_npc(SOUND_IMMUNE, SOUND_SPACE_MODE_0, NPC_PARTNER);
-                    }
-
-                    fx_damage_stars(3, kooper->pos.x, kooper->pos.y + kooper->collisionHeight, kooper->pos.z,
-                            sin_deg(kooper->yaw), -1.0f, -cos_deg(kooper->yaw), 1);
-                    sfx_play_sound_at_npc(SOUND_0, SOUND_SPACE_MODE_0, NPC_PARTNER);
-                    script->USE_STATE = SHELL_TOSS_STATE_RETURN;
-                    break;
-                }
-
-                posX = kooper->pos.x;
-                posY = kooper->pos.y;
-                posZ = kooper->pos.z;
-                if (!(npc_test_move_taller_with_slipping(COLLISION_CHANNEL_8000,
-                        &posX, &posY, &posZ, kooper->moveSpeed, kooper->yaw + 20.0f,
-                        kooper->collisionHeight, kooper->collisionRadius / 2))
-                    && ( //TODO separate these conditions, if possible
-                        posX = kooper->pos.x,
-                        posY = kooper->pos.y,
-                        posZ = kooper->pos.z,
-                    !(npc_test_move_taller_with_slipping(COLLISION_CHANNEL_8000,
-                        &posX, &posY, &posZ, kooper->moveSpeed, kooper->yaw,
-                        kooper->collisionHeight, kooper->collisionRadius / 2)))
-                ) {
-                    kooper->pos.x = posX;
-                    kooper->pos.y = posY;
-                    kooper->pos.z = posZ;
-                    kooper->planarFlyDist += kooper->moveSpeed;
-                    spawn_surface_effects(kooper, SURFACE_INTERACT_RUN);
-                    kooper->moveSpeed += 2.0;
-
-                    if (kooper->moveSpeed > 14.0) {
-                        kooper->moveSpeed = 14.0f;
-                    }
-
-                    if (!(npc_try_snap_to_ground(kooper, 6.0f) || playerStatus->flags & (PS_FLAG_JUMPING | PS_FLAG_FALLING))) {
-                        kooper->pos.y += (playerStatus->position.y - kooper->pos.y) / 10.0f;
-                    }
-
-                    npc_do_other_npc_collision(kooper);
-
-                    if (!(kooper->flags & NPC_FLAG_COLLIDING_WITH_NPC)) {
-                        if (kooper_check_for_item_collision(kooper)) {
-                            sfx_play_sound_at_npc(SOUND_286, SOUND_SPACE_MODE_0, NPC_PARTNER);
-                            fx_damage_stars(3, kooper->pos.x, kooper->pos.y + kooper->collisionHeight, kooper->pos.z,
-                                        sin_deg(kooper->yaw), -1.0f, -cos_deg(kooper->yaw), 1);
-                            sfx_play_sound_at_npc(SOUND_0, SOUND_SPACE_MODE_0, NPC_PARTNER);
-                            script->USE_STATE = SHELL_TOSS_STATE_PICKUP;
-                            KooperShellTossHoldTime = 8;
-                            kooper->moveSpeed -= 4.0;
-                            if (kooper->moveSpeed < 0.01) {
-                                kooper->moveSpeed = 0.01f;
-                                kooper->planarFlyDist += 1.0;
-                            }
-                        } else if (ShellTossHitboxState == SHELL_TOSS_HITBOX_HIT_ENEMY) {
-                            sfx_play_sound_at_npc(SOUND_0, SOUND_SPACE_MODE_0, NPC_PARTNER);
-                            script->USE_STATE = SHELL_TOSS_STATE_HOLD;
-                            KooperShellTossHoldTime = 30;
-                            kooper->moveSpeed = 0.0f;
-                        } else {
-                            if (kooper->planarFlyDist > 140.0f) {
-                                label2:
-                                script->USE_STATE = SHELL_TOSS_STATE_RETURN;
-                                kooper->moveSpeed = 0.0f;
-                                sfx_play_sound_at_npc(SOUND_0, SOUND_SPACE_MODE_0, NPC_PARTNER);
-                            } else if (kooper->planarFlyDist > 105.0f) {
-                                kooper->moveSpeed -= 4.0;
-                                if (kooper->moveSpeed < 0.01) {
-                                    kooper->moveSpeed = 0.01f;
-                                    kooper->planarFlyDist += 1.0;
-                                }
-                            }
-                            break;
-                        }
-                    } else {
-                        //TODO get rid of label
-                        goto label2;
-                    }
-                } else {
-                    if (!kooper_lateral_hit_interactable_entity(kooper)) {
-                        sfx_play_sound_at_npc(SOUND_IMMUNE, SOUND_SPACE_MODE_0, NPC_PARTNER);
-                    }
-
-                    fx_damage_stars(3, kooper->pos.x, kooper->pos.y + kooper->collisionHeight, kooper->pos.z,
-                            sin_deg(kooper->yaw), -1.0f, -cos_deg(kooper->yaw), 1);
-                    sfx_play_sound_at_npc(SOUND_0, SOUND_SPACE_MODE_0, NPC_PARTNER);
-                    script->USE_STATE = SHELL_TOSS_STATE_RETURN;
-                }
-            } else {
                 script->USE_STATE = SHELL_TOSS_STATE_FINISH;
+                break;
             }
+
+            // check the forward collision for kooper
+            #define TEST_COLLISION_AT_ANGLE(testAngle) \
+                ( \
+                posX = kooper->pos.x, \
+                posY = kooper->pos.y, \
+                posZ = kooper->pos.z, \
+                npc_test_move_taller_with_slipping(COLLISION_CHANNEL_8000, \
+                    &posX, &posY, &posZ, kooper->moveSpeed, testAngle,  \
+                    kooper->collisionHeight, kooper->collisionRadius / 2) \
+                )
+
+            if (TEST_COLLISION_AT_ANGLE(kooper->yaw - 20.0f)) {
+                if (!kooper_lateral_hit_interactable_entity(kooper)) {
+                    sfx_play_sound_at_npc(SOUND_IMMUNE, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                }
+
+                fx_damage_stars(3, kooper->pos.x, kooper->pos.y + kooper->collisionHeight, kooper->pos.z,
+                        sin_deg(kooper->yaw), -1.0f, -cos_deg(kooper->yaw), 1);
+                sfx_play_sound_at_npc(SOUND_0, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                script->USE_STATE = SHELL_TOSS_STATE_RETURN;
+                break;
+            }
+
+            if (TEST_COLLISION_AT_ANGLE(kooper->yaw + 20.0f)) {
+                if (!kooper_lateral_hit_interactable_entity(kooper)) {
+                    sfx_play_sound_at_npc(SOUND_IMMUNE, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                }
+
+                fx_damage_stars(3, kooper->pos.x, kooper->pos.y + kooper->collisionHeight, kooper->pos.z,
+                        sin_deg(kooper->yaw), -1.0f, -cos_deg(kooper->yaw), 1);
+                sfx_play_sound_at_npc(SOUND_0, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                script->USE_STATE = SHELL_TOSS_STATE_RETURN;
+                break;
+            }
+
+             if (TEST_COLLISION_AT_ANGLE(kooper->yaw)) {
+                if (!kooper_lateral_hit_interactable_entity(kooper)) {
+                    sfx_play_sound_at_npc(SOUND_IMMUNE, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                }
+
+                fx_damage_stars(3, kooper->pos.x, kooper->pos.y + kooper->collisionHeight, kooper->pos.z,
+                        sin_deg(kooper->yaw), -1.0f, -cos_deg(kooper->yaw), 1);
+                sfx_play_sound_at_npc(SOUND_0, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                script->USE_STATE = SHELL_TOSS_STATE_RETURN;
+                break;
+            }
+            
+            kooper->pos.x = posX;
+            kooper->pos.y = posY;
+            kooper->pos.z = posZ;
+            kooper->planarFlyDist += kooper->moveSpeed;
+            spawn_surface_effects(kooper, SURFACE_INTERACT_RUN);
+
+            kooper->moveSpeed += 2.0;
+            if (kooper->moveSpeed > 14.0) {
+                kooper->moveSpeed = 14.0f;
+            }
+
+            if (!(npc_try_snap_to_ground(kooper, 6.0f) || playerStatus->flags & (PS_FLAG_JUMPING | PS_FLAG_FALLING))) {
+                kooper->pos.y += (playerStatus->position.y - kooper->pos.y) / 10.0f;
+            }
+
+            npc_do_other_npc_collision(kooper);
+
+            if ((kooper->flags & NPC_FLAG_COLLIDING_WITH_NPC)) {
+                script->USE_STATE = SHELL_TOSS_STATE_RETURN;
+                kooper->moveSpeed = 0.0f;
+                sfx_play_sound_at_npc(SOUND_0, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                break;
+            }
+
+            if (kooper_check_for_item_collision(kooper)) {
+                sfx_play_sound_at_npc(SOUND_286, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                fx_damage_stars(3, kooper->pos.x, kooper->pos.y + kooper->collisionHeight, kooper->pos.z,
+                    sin_deg(kooper->yaw), -1.0f, -cos_deg(kooper->yaw), 1);
+                sfx_play_sound_at_npc(SOUND_0, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                script->USE_STATE = SHELL_TOSS_STATE_PICKUP;
+                KooperShellTossHoldTime = 8;
+                kooper->moveSpeed -= 4.0;
+                if (kooper->moveSpeed < 0.01) {
+                    kooper->moveSpeed = 0.01f;
+                    kooper->planarFlyDist += 1.0;
+                }
+            } else if (ShellTossHitboxState == SHELL_TOSS_HITBOX_HIT_ENEMY) {
+                sfx_play_sound_at_npc(SOUND_0, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                script->USE_STATE = SHELL_TOSS_STATE_HOLD;
+                KooperShellTossHoldTime = 30;
+                kooper->moveSpeed = 0.0f;
+            } else {
+                if (kooper->planarFlyDist > 140.0f) {
+                    label2:
+                    script->USE_STATE = SHELL_TOSS_STATE_RETURN;
+                    kooper->moveSpeed = 0.0f;
+                    sfx_play_sound_at_npc(SOUND_0, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                } else if (kooper->planarFlyDist > 105.0f) {
+                    kooper->moveSpeed -= 4.0;
+                    if (kooper->moveSpeed < 0.01) {
+                        kooper->moveSpeed = 0.01f;
+                        kooper->planarFlyDist += 1.0;
+                    }
+                }
+            }    
             break;
+
         case SHELL_TOSS_STATE_PICKUP:
             posX = kooper->pos.x;
             posY = kooper->pos.y;
             posZ = kooper->pos.z;
 
-            npc_test_move_taller_with_slipping(COLLISION_CHANNEL_8000, &posX, &posY, &posZ, kooper->moveSpeed, kooper->yaw,
-                                                kooper->collisionHeight, ( kooper->collisionRadius / 2));
+            npc_test_move_taller_with_slipping(COLLISION_CHANNEL_8000,
+                &posX, &posY, &posZ, kooper->moveSpeed, kooper->yaw,
+                kooper->collisionHeight, ( kooper->collisionRadius / 2));
+                
             kooper->pos.x = posX;
             kooper->pos.y = posY;
             kooper->pos.z = posZ;
@@ -575,9 +584,9 @@ API_CALLABLE(KooperUseAbility) {
                     posY = kooper->pos.y + 8.0f;
                     posZ = kooper->pos.z;
 
-                    clamp = clamp_angle(playerStatus->targetYaw - (ShellTossPlayerFacingLeft ? 90.0f : -90.0f));
+                    moveAngle = clamp_angle(playerStatus->targetYaw - (ShellTossPlayerFacingLeft ? 90.0f : -90.0f));
 
-                    add_vec2D_polar(&posX, &posZ, 4.0f, clamp);
+                    add_vec2D_polar(&posX, &posZ, 4.0f, moveAngle);
                     heldItem->position.x = posX;
                     heldItem->position.y = posY;
                     heldItem->position.z = posZ;
@@ -714,7 +723,7 @@ void world_kooper_pre_battle(Npc* kooper) {
     KooperTriggeredBattle = FALSE;
 
     if (kooperActionStatus->partnerActionState != PARTNER_ACTION_NONE) {
-        if (kooperActionStatus->partnerActionState == PARTNER_ACTION_KOOPER_2) {
+        if (kooperActionStatus->partnerActionState == PARTNER_ACTION_KOOPER_TOSS) {
             KooperTriggeredBattle = TRUE;
         }
 
