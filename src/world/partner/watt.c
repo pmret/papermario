@@ -303,7 +303,7 @@ ApiStatus func_802BD754_31D2C4(Evt* script, s32 isInitialCall) {
                 gGameStatusPtr->keepUsingPartnerOnMapChange = 0;
                 partnerActionStatus->partnerActionState = PARTNER_ACTION_USE;
                 partnerActionStatus->actingPartner = PARTNER_WATT;
-                func_800EF4E0();
+                partner_force_player_flip_done();
                 npc->moveToPos.x = playerStatus->position.x;
                 npc->moveToPos.y = playerStatus->position.y + 5.0f;
                 npc->moveToPos.z = playerStatus->position.z;
@@ -365,7 +365,7 @@ ApiStatus func_802BD754_31D2C4(Evt* script, s32 isInitialCall) {
         D_802BE304 = 20;
         npc_set_palswap_mode_A(npc, 0);
         if (!(playerStatus->flags & PS_FLAG_HIT_FIRE)) {
-            set_action_state(0);
+            set_action_state(ACTION_STATE_IDLE);
         }
         return ApiStatus_DONE1;
     }

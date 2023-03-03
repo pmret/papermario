@@ -1745,8 +1745,8 @@ s32 entity_get_collision_flags(Entity* entity) {
     return entityFlags;
 }
 
-s32 entity_interacts_with_current_partner(s32 entityIdx) {
-    s32 ret = FALSE;
+s32 entity_try_partner_interaction_trigger(s32 entityIdx) {
+    s32 interacted = FALSE;
     u32 entityType = get_entity_type(entityIdx);
     s32 partnerID = get_current_partner_id();
     Entity* entity;
@@ -1772,7 +1772,7 @@ s32 entity_interacts_with_current_partner(s32 entityIdx) {
                 case ENTITY_TYPE_BOMBABLE_ROCK:
                     entity = get_entity_by_index(entityIdx);
                     entity->flags |= ENTITY_FLAG_PARTNER_COLLISION;
-                    ret = TRUE;
+                    interacted = TRUE;
             }
             break;
         case PARTNER_KOOPER:
@@ -1795,11 +1795,11 @@ s32 entity_interacts_with_current_partner(s32 entityIdx) {
                 case ENTITY_TYPE_SUPER_BLOCK:
                     entity = get_entity_by_index(entityIdx);
                     entity->flags |= ENTITY_FLAG_PARTNER_COLLISION;
-                    ret = TRUE;
+                    interacted = TRUE;
             }
             break;
     }
-    return ret;
+    return interacted;
 }
 
 s32 test_player_entity_aabb(Entity* entity) {

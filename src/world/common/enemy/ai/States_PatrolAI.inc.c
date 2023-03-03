@@ -69,9 +69,9 @@ void N(PatrolAI_Move)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolu
 
     if (npc->turnAroundYawAdjustment == 0) {
         if (npc->moveSpeed < 4.0) {
-            func_8003D660(npc, 0);
+            spawn_surface_effects(npc, SURFACE_INTERACT_WALK);
         } else {
-            func_8003D660(npc, 1);
+            spawn_surface_effects(npc, SURFACE_INTERACT_RUN);
         }
         //TODO strange match -- index and array are backwards!
         x = script->AI_PATROL_GOAL_INDEX[enemy->territory->patrol.points].x;
@@ -219,7 +219,7 @@ ApiStatus N(PatrolAI_Chase)(Evt* script, MobileAISettings* aiSettings, EnemyDete
         npc->duration = 25;
         script->AI_TEMP_STATE = AI_STATE_LOSE_PLAYER;
     } else {
-        func_8003D660(npc, 1);
+        spawn_surface_effects(npc, SURFACE_INTERACT_RUN);
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
         if (npc->duration > 0) {
             npc->duration--;

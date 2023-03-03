@@ -238,7 +238,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
             partnerActionStatus->partnerActionState = 1;
             partnerActionStatus->actingPartner = 9;
             playerStatus->flags |= PS_FLAG_HAZARD_INVINCIBILITY;
-            func_800EF4E0();
+            partner_force_player_flip_done();
             bow->moveToPos.x = playerStatus->position.x;
             bow->moveToPos.y = playerStatus->position.y + (playerStatus->colliderHeight * 0.5f);
             bow->moveToPos.z = playerStatus->position.z;

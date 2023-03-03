@@ -130,7 +130,7 @@ void npc_follow_npc(Npc* npc) {
             }
 
             npc->currentAnim = followData->anims->run;
-            if (!(npc->flags & NPC_FLAG_FALLING)) {
+            if (!(npc->flags & NPC_FLAG_GROUNDED)) {
                 npc->currentAnim = followData->anims->fall;
             }
 
@@ -177,7 +177,7 @@ void npc_follow_npc(Npc* npc) {
                 historyPoint = &followData->moveHistory[followData->targetPointIdx];
                 targetX = historyPoint->pos.x;
                 targetZ = historyPoint->pos.z;
-                if (npc->flags & NPC_FLAG_FALLING) {
+                if (npc->flags & NPC_FLAG_GROUNDED) {
                     if (historyPoint->isAirborne) {
                         followData->followState = NPC_FOLLOW_STATE_JUMP;
                         break;
@@ -185,12 +185,12 @@ void npc_follow_npc(Npc* npc) {
                 }
             }
 
-            if (!(npc->flags & NPC_FLAG_FALLING)) {
+            if (!(npc->flags & NPC_FLAG_GROUNDED)) {
                 npc->moveSpeed *= 0.5f;
             }
             npc->yaw = yaw;
             npc_move_heading(npc, npc->moveSpeed, yaw);
-            if ((npc->flags & NPC_FLAG_COLLDING_FORWARD_WITH_WORLD) && (npc->flags & NPC_FLAG_FALLING)) {
+            if ((npc->flags & NPC_FLAG_COLLDING_FORWARD_WITH_WORLD) && (npc->flags & NPC_FLAG_GROUNDED)) {
                 followData->followState = NPC_FOLLOW_STATE_JUMP;
             }
             break;

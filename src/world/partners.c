@@ -194,10 +194,10 @@ WorldPartner wPartners[12] = {
         .dmaDest = &world_partner_kooper_VRAM,
         .isFlying = FALSE,
         .init = world_kooper_init,
-        .takeOut = &world_kooper_take_out,
-        .update = &world_kooper_update,
-        .useAbility = &world_kooper_use_ability,
-        .putAway = &world_kooper_put_away,
+        .takeOut = &EVS_WorldKooperTakeOut,
+        .update = &EVS_WorldKooperUpdate,
+        .useAbility = &EVS_KooperUseAbility,
+        .putAway = &EVS_KooperPutAway,
         .idle = ANIM_WorldKooper_Idle,
         .testFirstStrike = world_kooper_test_first_strike,
         .canUseAbility = partner_is_idle,
@@ -574,7 +574,7 @@ s32 partner_is_flying(void) {
 }
 
 void func_800EA5B8(Npc* partner) {
-    partner->flags &= ~(NPC_FLAG_COLLIDING_WITH_NPC | NPC_FLAG_COLLDING_FORWARD_WITH_WORLD | NPC_FLAG_COLLDING_WITH_WORLD | NPC_FLAG_FALLING |
+    partner->flags &= ~(NPC_FLAG_COLLIDING_WITH_NPC | NPC_FLAG_COLLDING_FORWARD_WITH_WORLD | NPC_FLAG_COLLDING_WITH_WORLD | NPC_FLAG_GROUNDED |
                           NPC_FLAG_JUMPING);
 }
 
@@ -1252,7 +1252,7 @@ void partner_walking_follow_player(Npc* partner) {
                 partner->moveSpeed = 4.0f;
             }
             partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].run;
-            if (!(partner->flags & NPC_FLAG_FALLING)) {
+            if (!(partner->flags & NPC_FLAG_GROUNDED)) {
                 partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].fall;
             }
             while (TRUE) {
@@ -1300,28 +1300,23 @@ void partner_walking_follow_player(Npc* partner) {
                         break;
                     }
 
-                    if ((partner->flags & NPC_FLAG_FALLING) && currentSnapshot->isJumping) {
+                    if ((partner->flags & NPC_FLAG_GROUNDED) && currentSnapshot->isJumping) {
                         wPartnerFollowState = 1;
                         break;
                     }
                 }
             }
 
-            if (!(partner->flags & NPC_FLAG_FALLING)) {
+            if (!(partner->flags & NPC_FLAG_GROUNDED)) {
                 partner->moveSpeed *= 0.5f;
             }
             partner->yaw = yaw;
             npc_move_heading(partner, partner->moveSpeed, partner->yaw);
-            if (partner->moveSpeed < 4.0) {
-                var_a1 = 0;
-            } else {
-                var_a1 = 1;
-            }
-            func_8003D660(partner, var_a1);
+            spawn_surface_effects(partner, (partner->moveSpeed < 4.0) ? SURFACE_INTERACT_WALK : SURFACE_INTERACT_RUN);
             surfaceType = get_collider_flags(partner->currentFloor);
             if (surfaceType == SURFACE_TYPE_SPIKES ||
                 surfaceType == SURFACE_TYPE_LAVA ||
-                (partner->flags & (NPC_FLAG_FALLING | NPC_FLAG_COLLDING_FORWARD_WITH_WORLD)) == (NPC_FLAG_FALLING | NPC_FLAG_COLLDING_FORWARD_WITH_WORLD)) {
+                (partner->flags & (NPC_FLAG_GROUNDED | NPC_FLAG_COLLDING_FORWARD_WITH_WORLD)) == (NPC_FLAG_GROUNDED | NPC_FLAG_COLLDING_FORWARD_WITH_WORLD)) {
                 if (!func_800EA4B0(partner->currentWall)) {
                     D_8010CFBC++;
                     if (D_8010CFBC >= 40) {
@@ -1433,7 +1428,7 @@ void partner_walking_follow_player(Npc* partner) {
                         partner->jumpVelocity = 0.0f;
                         partner->pos.y = y;
                         partner->yaw = atan2(x, z, playerStatus->position.x, playerStatus->position.z);
-                        func_8003D660(partner, 2);
+                        spawn_surface_effects(partner, SURFACE_INTERACT_LAND);
                         wPartnerFollowState = 0;
                         distance = dist2D(partner->pos.x, partner->pos.z, partner->moveToPos.x, partner->moveToPos.z);
                         if (distance < 5.0) {
@@ -1509,12 +1504,7 @@ void partner_walking_follow_player(Npc* partner) {
                     }
                     partner->yaw = yaw;
                     npc_move_heading(partner, partner->moveSpeed, yaw);
-                    if (partner->moveSpeed < 4.0) {
-                        var_a1 = 0;
-                    } else {
-                        var_a1 = 1;
-                    }
-                    func_8003D660(partner, var_a1);
+                    spawn_surface_effects(partner, (partner->moveSpeed < 4.0) ? SURFACE_INTERACT_WALK : SURFACE_INTERACT_RUN);
                     distance = 1000.0f;
                     x = partner->pos.x;
                     z = partner->pos.z;
@@ -1633,12 +1623,7 @@ void partner_walking_follow_player(Npc* partner) {
                         partner->moveSpeed = wPartnerMoveSpeed;
                         partner->yaw = D_800F8034;
                         npc_move_heading(partner, partner->moveSpeed, partner->yaw);
-                        if (partner->moveSpeed < 4.0) {
-                            var_a1 = 0;
-                        } else {
-                            var_a1 = 1;
-                        }
-                        func_8003D660(partner, var_a1);
+                        spawn_surface_effects(partner, (partner->moveSpeed < 4.0) ? SURFACE_INTERACT_WALK : SURFACE_INTERACT_RUN);
                     } else {
                         partner_clear_player_tracking(partner);
                         partner->moveSpeed = 0.0f;
@@ -1663,7 +1648,7 @@ void partner_walking_follow_player(Npc* partner) {
             partner_move_to_goal(partner, FALSE);
             break;
         case 40:
-            if (partner->flags & NPC_FLAG_FALLING) {
+            if (partner->flags & NPC_FLAG_GROUNDED) {
                 if (func_800EA4B0(partner->currentFloor)) {
                     wPartnerFollowState = 50;
                     partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].idle;
@@ -1699,7 +1684,7 @@ void partner_walking_follow_player(Npc* partner) {
                 partner->jumpVelocity = 0.0f;
                 partner->pos.y = y;
                 partner->yaw = atan2(x, z, playerStatus->position.x, playerStatus->position.z);
-                func_8003D660(partner, 2);
+                spawn_surface_effects(partner, SURFACE_INTERACT_LAND);
                 wPartnerFollowState = 50;
             }
             break;
@@ -2334,7 +2319,7 @@ s32 partner_get_out(Npc* partner) {
             partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].jump;
             break;
         case 1:
-            if (partner->jumpVelocity < 0.0f && func_800397E8(partner, fabsf(partner->jumpVelocity))) {
+            if (partner->jumpVelocity < 0.0f && npc_try_snap_to_ground(partner, fabsf(partner->jumpVelocity))) {
                 wPartnerFollowState = 2;
                 break;
             }
@@ -2378,9 +2363,9 @@ s32 partner_get_out(Npc* partner) {
             partner->pos.x = partner->moveToPos.x;
             partner->pos.y = partner->moveToPos.y;
             partner->pos.z = partner->moveToPos.z;
-            if (partner->flags & 0x1000) {
+            if (partner->flags & NPC_FLAG_GROUNDED) {
                 if (!wPartner->isFlying) {
-                    func_8003D660(partner, 2);
+                    spawn_surface_effects(partner, SURFACE_INTERACT_LAND);
                 }
             }
             return TRUE;
@@ -2458,29 +2443,32 @@ void partner_clear_player_tracking(Npc* partner) {
     }
 }
 
-s32 func_800EF4E0(void) {
+// forces the player to complete a direction flip if they are currently performing one
+// the resulting camera-relative direction is returned as a boolean 'isFacingLeft'
+s32 partner_force_player_flip_done(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Camera* cameras = gCameras;
-    s32 ret;
+    s32 isFacingLeft;
 
     if (playerStatus->flipYaw[CAM_DEFAULT] == 0.0f) {
         if (!(playerStatus->spriteFacingAngle >= 90.0f) || !(playerStatus->spriteFacingAngle < 270.0f)) {
-            ret = 1;
+            isFacingLeft = TRUE;
             playerStatus->targetYaw = clamp_angle(cameras[CAM_DEFAULT].currentYaw - 90.0f);
         } else {
+            isFacingLeft = FALSE;
             playerStatus->targetYaw = clamp_angle(cameras[CAM_DEFAULT].currentYaw + 90.0f);
-            ret = 0;
         }
     } else if (get_clamped_angle_diff(cameras[CAM_DEFAULT].currentYaw, playerStatus->targetYaw) < 0.0f) {
-        ret = 1;
+        isFacingLeft = TRUE;
         playerStatus->targetYaw = clamp_angle(cameras[CAM_DEFAULT].currentYaw - 90.0f);
+        
     } else {
-        ret = 0;
+        isFacingLeft = FALSE;
         playerStatus->targetYaw = clamp_angle(cameras[CAM_DEFAULT].currentYaw + 90.0f);
     }
 
     playerStatus->currentYaw = playerStatus->targetYaw;
-    return ret;
+    return isFacingLeft;
 }
 
 void partner_enable_input(void) {
@@ -2548,7 +2536,7 @@ void partner_move_to_goal(Npc* partner, s32 isFlying) {
             if (wPartnerMoveTime != 0) {
                 wPartnerMoveTime--;
                 if (!isFlying) {
-                    if (!(partner->flags & NPC_FLAG_FALLING)) {
+                    if (!(partner->flags & NPC_FLAG_GROUNDED)) {
                         partner->pos.y = playerStatus->position.y;
                     }
                     if (partner->jumpVelocity != 0.0f) {
@@ -2592,12 +2580,7 @@ void partner_move_to_goal(Npc* partner, s32 isFlying) {
                     npc_move_heading(partner, partner->moveSpeed, partner->yaw);
                 }
 
-                if (partner->moveSpeed < 4.0) {
-                    var_a1 = 0;
-                } else {
-                    var_a1 = 1;
-                }
-                func_8003D660(partner, var_a1);
+                spawn_surface_effects(partner, (partner->moveSpeed < 4.0) ? SURFACE_INTERACT_WALK : SURFACE_INTERACT_RUN);
             } else {
                 partner->flags &= ~NPC_FLAG_IGNORE_WORLD_COLLISION;
                 partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].idle;

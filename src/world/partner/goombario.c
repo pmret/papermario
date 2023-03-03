@@ -213,7 +213,7 @@ s32 world_goombario_can_pause(Npc* goombario) {
         return FALSE;
     }
 
-    if ((goombario->flags & (NPC_FLAG_FALLING | NPC_FLAG_JUMPING)) != NPC_FLAG_FALLING) {
+    if ((goombario->flags & (NPC_FLAG_GROUNDED | NPC_FLAG_JUMPING)) != NPC_FLAG_GROUNDED) {
         return new_var = 0;
         do { } while (new_var); // why though
     }
@@ -247,7 +247,7 @@ ApiStatus func_802BD5D8_3174F8(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 40:
-            if (!(goombario->flags & NPC_FLAG_FALLING) || playerStatus->inputEnabledCounter != 0) {
+            if (!(goombario->flags & NPC_FLAG_GROUNDED) || playerStatus->inputEnabledCounter != 0) {
                 script->varTable[0] = -1;
                 return ApiStatus_DONE2;
             }

@@ -185,7 +185,7 @@ void N(CleftAI_Tackle)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
     f32 posX, posY, posZ;
     s32 phi_s1 = FALSE;
 
-    func_8003D660(npc, 1);
+    spawn_surface_effects(npc, SURFACE_INTERACT_RUN);
     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
 
     if (is_point_within_region(enemy->territory->wander.detectShape,

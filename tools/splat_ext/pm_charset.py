@@ -17,6 +17,31 @@ def next_8(n):
     else:
         return n
 
+def get_palette_idx(charset_name, char_id):
+    pal_id = 0
+    if charset_name == "standard":
+        if char_id == 0x98:
+            pal_id = 0x10
+        elif char_id == 0x99:
+            pal_id = 0x11
+        elif char_id == 0x9A:
+            pal_id = 0x15
+        elif char_id == 0x9B:
+            pal_id = 0x15
+        elif char_id == 0x9C:
+            pal_id = 0x15
+        elif char_id == 0x9D:
+            pal_id = 0x13
+        elif char_id == 0x9E:
+            pal_id = 0x13
+        elif char_id == 0x9F:
+            pal_id = 0x13
+        elif char_id == 0xA0:
+            pal_id = 0x13
+        elif char_id == 0xA1:
+            pal_id = 0x12
+    return pal_id
+
 class N64SegPm_charset(N64Segment):
     def scan(self, rom_bytes):
         data = rom_bytes[self.rom_start:self.rom_end]
@@ -39,7 +64,8 @@ class N64SegPm_charset(N64Segment):
         fs_dir.mkdir(parents=True, exist_ok=True)
 
         for i, raster in enumerate(self.rasters):
-            palette = self.sibling.palettes[0]
+            pal_idx = get_palette_idx(self.name, i)
+            palette = self.sibling.palettes[pal_idx]
 
             w = png.Writer(self.width, self.height, palette=palette)
             with open(fs_dir / f"{i:02X}.png", "wb") as f:

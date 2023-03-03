@@ -1514,7 +1514,7 @@ typedef struct ItemEntityPhysicsData {
     /* 0x10 */ f32 velx;
     /* 0x14 */ f32 velz;
     /* 0x18 */ f32 moveAngle;
-    /* 0x1C */ s32 unk_1C;
+    /* 0x1C */ s32 timeLeft;
     /* 0x20 */ s32 unk_20;
 } ItemEntityPhysicsData; // size = 0x24
 

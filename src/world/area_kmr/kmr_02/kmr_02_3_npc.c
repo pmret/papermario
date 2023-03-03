@@ -22,7 +22,7 @@ BSS u8 oldEnvR, oldEnvG, oldEnvB;
 #include "world/common/util/ChangeNpcToPartner.inc.c"
 
 API_CALLABLE(N(func_80242014_8B2084)) {
-    if (get_npc_unsafe(NPC_PARTNER)->flags & NPC_FLAG_FALLING) {
+    if (get_npc_unsafe(NPC_PARTNER)->flags & NPC_FLAG_GROUNDED) {
         return ApiStatus_DONE2;
     } else {
         return ApiStatus_BLOCK;

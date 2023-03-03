@@ -1797,8 +1797,8 @@ s32 test_item_player_collision(ItemEntity* item) {
 
     actionState = playerStatus->actionState;
 
-    if (item->flags & ITEM_ENTITY_FLAG_100) {
-        item->flags &= ~ITEM_ENTITY_FLAG_100;
+    if (item->flags & ITEM_ENTITY_FLAG_AUTO_COLLECT) {
+        item->flags &= ~ITEM_ENTITY_FLAG_AUTO_COLLECT;
         return TRUE;
     }
 
@@ -1810,7 +1810,7 @@ s32 test_item_player_collision(ItemEntity* item) {
         return FALSE;
     }
 
-    if (item->flags & ITEM_ENTITY_FLAG_200000) {
+    if (item->flags & ITEM_ENTITY_FLAG_CANT_COLLECT) {
         return FALSE;
     }
 
@@ -1949,7 +1949,7 @@ s32 test_item_entity_position(f32 x, f32 y, f32 z, f32 dist) {
             continue;
         }
 
-        if (item->flags & ITEM_ENTITY_FLAG_200000) {
+        if (item->flags & ITEM_ENTITY_FLAG_CANT_COLLECT) {
             continue;
         }
 
@@ -1967,7 +1967,7 @@ void set_item_entity_flags(s32 index, s32 flags) {
     ItemEntity* itemEntity = gCurrentItemEntities[index];
 
     itemEntity->flags |= flags;
-    if (itemEntity->flags & ITEM_ENTITY_FLAG_200000) {
+    if (itemEntity->flags & ITEM_ENTITY_FLAG_CANT_COLLECT) {
         D_801565A8 = 1;
     }
 }
@@ -1978,10 +1978,10 @@ void clear_item_entity_flags(s32 index, s32 flags) {
     itemEntity->flags &= ~flags;
 }
 
-void func_801341B0(s32 index) {
+void auto_collect_item_entity(s32 index) {
     ItemEntity* itemEntity = gCurrentItemEntities[index];
     gOverrideFlags |= GLOBAL_OVERRIDES_40;
-    itemEntity->flags |= ITEM_ENTITY_FLAG_100;
+    itemEntity->flags |= ITEM_ENTITY_FLAG_AUTO_COLLECT;
 }
 
 /// @returns TRUE when "you got X" popup is on-screen
@@ -2144,22 +2144,22 @@ void update_item_entity_collectable(ItemEntity* item) {
                 }
 
                 if (item->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1) {
-                    physData->unk_1C = 180;
-                    physData->unk_20 = 0;
+                    physData->timeLeft = 180;
+                    physData->unk_20 = FALSE;
                 } else {
                     if (!(item->flags & ITEM_ENTITY_FLAG_400000)) {
-                        physData->unk_1C = 0x11;
+                        physData->timeLeft = 17;
                     } else {
-                        physData->unk_1C = 0x14;
+                        physData->timeLeft = 20;
                     }
-                    physData->unk_20 = 0;
+                    physData->unk_20 = FALSE;
                     physData->verticalVelocity = 15.0f;
                     physData->gravity = 1.6f;
                 }
 
                 if (item->spawnType == ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS) {
-                    physData->unk_1C = 60;
-                    physData->unk_20 = 0;
+                    physData->timeLeft = 60;
+                    physData->unk_20 = FALSE;
                     physData->velx = 0.0f;
                     physData->velz = 0.0f;
                 }
@@ -2168,14 +2168,14 @@ void update_item_entity_collectable(ItemEntity* item) {
                     physData->verticalVelocity = 0.0f;
                     physData->velx = 0.0f;
                     physData->velz = 0.0f;
-                    physData->unk_20 = 1;
+                    physData->unk_20 = TRUE;
                 }
 
                 if (item->spawnType == ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS) {
                     physData->verticalVelocity = 0.0f;
                     physData->velx = 0.0f;
                     physData->velz = 0.0f;
-                    physData->unk_20 = 1;
+                    physData->unk_20 = TRUE;
                 }
 
                 if (item->flags & ITEM_ENTITY_FLAG_800) {
@@ -2185,29 +2185,28 @@ void update_item_entity_collectable(ItemEntity* item) {
                 break;
             case 1:
                 physData = item->physicsData;
-                if (item->spawnType != ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS &&
-                    item->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1 &&
-                    physData->unk_20 != 0 &&
-                    test_item_player_collision(item))
-                {
+                if (item->spawnType != ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS
+                    && item->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1
+                    && physData->unk_20
+                    && test_item_player_collision(item)
+                ) {
                     item->state = 3;
                     break;
                 }
 
-                if (!(item->flags & ITEM_ENTITY_FLAG_NEVER_VANISH)) {
-                    if (!(gOverrideFlags & (GLOBAL_OVERRIDES_200 | GLOBAL_OVERRIDES_DISABLE_BATTLES))) {
-                        if (!(item->flags & ITEM_ENTITY_FLAG_200000)) {
-                            physData->unk_1C--;
-                            if (physData->unk_1C < 0) {
-                                item->state = 2;
-                                break;
-                            }
-                        }
+                if (!(item->flags & ITEM_ENTITY_FLAG_NEVER_VANISH)
+                   && !(gOverrideFlags & (GLOBAL_OVERRIDES_200 | GLOBAL_OVERRIDES_DISABLE_BATTLES))
+                   && !(item->flags & ITEM_ENTITY_FLAG_CANT_COLLECT)
+                ) {
+                    physData->timeLeft--;
+                    if (physData->timeLeft < 0) {
+                        item->state = 2;
+                        break;
                     }
                 }
 
                 if (!(item->flags & ITEM_ENTITY_FLAG_FIXED)) {
-                    if (!(item->flags & ITEM_ENTITY_FLAG_200000)) {
+                    if (!(item->flags & ITEM_ENTITY_FLAG_CANT_COLLECT)) {
                         physData->verticalVelocity -= physData->gravity;
                         if (physData->verticalVelocity < -16.0) {
                             physData->verticalVelocity = -16.0f;
@@ -2236,7 +2235,7 @@ void update_item_entity_collectable(ItemEntity* item) {
                     outZ = item->position.z;
                     outDepth = temp + physData->verticalVelocity;
 
-                    if (physData->unk_20 == 0) {
+                    if (!physData->unk_20) {
                         hit = npc_raycast_up(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, &outDepth);
                     } else {
                         hit = npc_raycast_up(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, &outDepth);
@@ -2257,7 +2256,7 @@ void update_item_entity_collectable(ItemEntity* item) {
                     outY = item->position.y;
                     outZ = item->position.z;
 
-                    if (physData->unk_20 == 0) {
+                    if (!physData->unk_20) {
                         hit = npc_test_move_complex_with_slipping(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, 0.0f, physData->moveAngle, physData->constVelocity, physData->unk_08);
                     } else {
                         hit = npc_test_move_simple_with_slipping(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, 0.0f, physData->moveAngle, physData->constVelocity, physData->unk_08);
@@ -2280,13 +2279,13 @@ void update_item_entity_collectable(ItemEntity* item) {
                     item->spawnType != ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS &&
                     physData->verticalVelocity <= 0.0)
                 {
-                    physData->unk_20 = 1;
+                    physData->unk_20 = TRUE;
                     if (item->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1) {
                         outX = item->position.x;
                         outY = (item->position.y - physData->verticalVelocity) + 12.0f;
                         outZ = item->position.z;
                         outDepth = -physData->verticalVelocity + 12.0f;
-                        if (physData->unk_20 == 0) {
+                        if (!physData->unk_20) {
                             hit = npc_raycast_down_sides(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, &outDepth);
                         } else {
                             hit = npc_raycast_down_around(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, &outDepth, 180.0f, 20.0f);
@@ -2462,16 +2461,16 @@ void func_8013559C(ItemEntity* itemEntity) {
 
         if (itemEntity->spawnType != ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS) {
             if (itemEntity->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1) {
-                if (physicsData->unk_1C < 60) {
-                    if ((itemEntity->flags & ITEM_ENTITY_FLAG_200000) || ((gGameStatusPtr->frameCounter + flag) & 1)) {
+                if (physicsData->timeLeft < 60) {
+                    if ((itemEntity->flags & ITEM_ENTITY_FLAG_CANT_COLLECT) || ((gGameStatusPtr->frameCounter + flag) & 1)) {
                         itemEntity->flags &= ~ITEM_ENTITY_FLAG_HIDDEN;
                     } else {
                         itemEntity->flags |= ITEM_ENTITY_FLAG_HIDDEN;
                     }
                 }
             } else {
-                if (physicsData->unk_1C < 10) {
-                    itemEntity->alpha = physicsData->unk_1C * 28;
+                if (physicsData->timeLeft < 10) {
+                    itemEntity->alpha = physicsData->timeLeft * 28;
                     itemEntity->flags |= ITEM_ENTITY_FLAG_TRANSPARENT;
                 }
             }
