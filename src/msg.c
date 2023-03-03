@@ -2,6 +2,8 @@
 #include "ld_addrs.h"
 #include "message_ids.h"
 #include "sprite.h"
+#include "charset/postcard.png.h"
+#include "charset/letter_content_1.png.h"
 
 enum RewindArrowStates {
     REWIND_ARROW_STATE_INIT = 0,
@@ -680,7 +682,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                 break;
             case MSG_CHAR_READ_WAIT:
                 printer->windowState = MSG_WINDOW_STATE_WAITING;
-                printer->delayFlags |= 1;
+                printer->delayFlags |= MSG_DELAY_FLAG_1;
                 printer->delayFlags &= ~2;
                 printer->rewindArrowAnimState = REWIND_ARROW_STATE_INIT;
                 printer->rewindArrowCounter = 0;
@@ -692,7 +694,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                 break;
             case MSG_CHAR_READ_PAUSE:
                 printer->currentPrintDelay = *srcBuf++;
-                printer->delayFlags |= 1;
+                printer->delayFlags |= MSG_DELAY_FLAG_1;
                 printer->stateFlags &= ~MSG_STATE_FLAG_80;
                 break;
             case MSG_CHAR_READ_VARIANT0:
@@ -722,7 +724,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                     *printBuf++ = MSG_CHAR_PRINT_NEXT;
                     printer->nextLinePos = printer->curLinePos + (gMsgCharsets[printer->font]->newLineY + D_802EB644[printer->style]) * printer->lineCount;
                     printer->windowState = MSG_WINDOW_STATE_SCROLLING;
-                    printer->delayFlags |= 1;
+                    printer->delayFlags |= MSG_DELAY_FLAG_1;
                 }
                 printer->lineCount = 0;
                 break;
@@ -740,9 +742,9 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         if (arg == MSG_STYLE_RIGHT || arg == MSG_STYLE_LEFT || arg == MSG_STYLE_CENTER) {
                             printer->maxLinesPerPage = 3;
                         }
-                        printer->delayFlags |= 1;
+                        printer->delayFlags |= MSG_DELAY_FLAG_1;
                         printer->stateFlags |= MSG_STATE_FLAG_800000 | MSG_STATE_FLAG_800;
-                        if (nextArg != 0xC3) {
+                        if (nextArg != MSG_CHAR_UNK_C3) {
                             printer->stateFlags |= MSG_STATE_FLAG_80;
                         }
                         printer->speedSoundIDA = SOUND_11;
@@ -769,7 +771,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                             printer->windowSize.x = 280;
                             printer->windowState = MSG_WINDOW_STATE_OPENING;
                             printer->stateFlags |= MSG_STATE_FLAG_800;
-                            printer->delayFlags |= 1;
+                            printer->delayFlags |= MSG_DELAY_FLAG_1;
                             if (arg == MSG_STYLE_INSPECT) {
                                 sfx_play_sound_with_params(SOUND_21C, 0, 0, 0);
                             }
@@ -782,7 +784,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         printer->windowSize.y = *srcBuf++;
                         sfx_play_sound_with_params(SOUND_21C, 0, 0, 0);
                         printer->windowState = MSG_WINDOW_STATE_OPENING;
-                        printer->delayFlags |= 1;
+                        printer->delayFlags |= MSG_DELAY_FLAG_1;
                         printer->stateFlags |= MSG_STATE_FLAG_800;
                         break;
                     case MSG_STYLE_LAMPPOST:
@@ -793,7 +795,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                             if (!s8) {
                                 printer->windowState = MSG_WINDOW_STATE_OPENING;
                                 printer->stateFlags |= MSG_STATE_FLAG_800;
-                                printer->delayFlags |= 1;
+                                printer->delayFlags |= MSG_DELAY_FLAG_1;
                             }
                         } while (0);
                         break;
@@ -801,16 +803,16 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         arg = *srcBuf++;
                         printer->windowState = MSG_WINDOW_STATE_OPENING;
                         printer->stateFlags |= MSG_STATE_FLAG_800;
-                        printer->delayFlags |= 1;
-                        printer->letterBackgroundImg = heap_malloc(7875);
+                        printer->delayFlags |= MSG_DELAY_FLAG_1;
+                        printer->letterBackgroundImg = heap_malloc(((charset_postcard_png_width * charset_postcard_png_height) / 2));
                         romAddr = charset_ROM_START + (s32)charset_postcard_OFFSET;
-                        dma_copy(romAddr, romAddr + 7875, printer->letterBackgroundImg);
+                        dma_copy(romAddr, romAddr + ((charset_postcard_png_width * charset_postcard_png_height) / 2), printer->letterBackgroundImg);
                         printer->letterBackgroundPal = heap_malloc(0x20);
                         romAddr = charset_ROM_START + ((s32)charset_postcard_pal_OFFSET + 5);
                         dma_copy(romAddr, romAddr + 0x20, printer->letterBackgroundPal);
-                        printer->letterContentImg = heap_malloc(0x19FA);
+                        printer->letterContentImg = heap_malloc(charset_letter_content_1_png_width * charset_letter_content_1_png_height);
                         romAddr = charset_ROM_START + D_802EB5C0[arg];
-                        dma_copy(romAddr, romAddr + 0x19FA, printer->letterContentImg);
+                        dma_copy(romAddr, romAddr + (charset_letter_content_1_png_width * charset_letter_content_1_png_height), printer->letterContentImg);
                         printer->letterContentPal = heap_malloc(0x200);
                         romAddr = charset_ROM_START + D_802EB5F0[arg];
                         dma_copy(romAddr, romAddr + 0x200, printer->letterContentPal);
@@ -824,7 +826,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                             if (!s8) {
                                 printer->stateFlags |= MSG_STATE_FLAG_8000 | MSG_STATE_FLAG_800;
                                 printer->windowState = MSG_WINDOW_STATE_D;
-                                printer->delayFlags |= 1;
+                                printer->delayFlags |= MSG_DELAY_FLAG_1;
                             }
                         } while (0);
                         break;
@@ -832,8 +834,8 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         printer->windowState = MSG_WINDOW_STATE_PRINTING;
                         break;
                 }
-                if ((printer->delayFlags & 1) && (printer->delayFlags & 6)) {
-                    printer->delayFlags &= ~1;
+                if ((printer->delayFlags & MSG_DELAY_FLAG_1) && (printer->delayFlags & (MSG_DELAY_FLAG_4 | MSG_DELAY_FLAG_2))) {
+                    printer->delayFlags &= ~MSG_DELAY_FLAG_1;
                 }
                 break;
             case MSG_CHAR_READ_END:
@@ -853,8 +855,8 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                 } else {
                     printer->stateFlags |= MSG_STATE_FLAG_1;
                 }
-                printer->delayFlags |= 1;
-                printer->delayFlags &= ~2;
+                printer->delayFlags |= MSG_DELAY_FLAG_1;
+                printer->delayFlags &= ~MSG_DELAY_FLAG_2;
                 break;
             case MSG_CHAR_READ_FUNCTION:
                 switch (*srcBuf++) {
@@ -889,11 +891,11 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         *printBuf++ = *srcBuf++;
                         break;
                     case MSG_READ_FUNC_DELAY_OFF:
-                        printer->delayFlags |= 2;
+                        printer->delayFlags |= MSG_DELAY_FLAG_2;
                         break;
                     case MSG_READ_FUNC_DELAY_ON:
-                        printer->delayFlags &= ~2;
-                        printer->delayFlags |= 1;
+                        printer->delayFlags &= ~MSG_DELAY_FLAG_2;
+                        printer->delayFlags |= MSG_DELAY_FLAG_1;
                         break;
                     case MSG_READ_FUNC_SCROLL:
                         printer->lineEndPos[printer->currentLine] = printer->curLinePos;
@@ -902,7 +904,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         arg = *srcBuf++;
                         printer->nextLinePos = printer->curLinePos + (gMsgCharsets[printer->font]->newLineY + D_802EB644[printer->style]) * arg;
                         printer->windowState = MSG_WINDOW_STATE_SCROLLING;
-                        printer->delayFlags |= 1;
+                        printer->delayFlags |= MSG_DELAY_FLAG_1;
                         printer->lineCount = 0;
                         break;
                     case MSG_READ_FUNC_SIZE:
@@ -954,10 +956,10 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         arg1--;
                         printer->currentPrintDelay = printer->printDelayTime;
                         if (arg1 <= 0) {
-                            printer->delayFlags |= 1;
+                            printer->delayFlags |= MSG_DELAY_FLAG_1;
                         }
-                        if (printer->delayFlags & 6) {
-                            printer->delayFlags &= ~1;
+                        if (printer->delayFlags & (MSG_DELAY_FLAG_4 | MSG_DELAY_FLAG_2)) {
+                            printer->delayFlags &= ~MSG_DELAY_FLAG_1;
                         }
                         break;
                     case MSG_READ_FUNC_ANIM_SPRITE:
@@ -968,10 +970,10 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         *printBuf++ = *srcBuf++;
                         printer->currentPrintDelay = printer->printDelayTime;
                         if (--arg1 <= 0) {
-                            printer->delayFlags |= 1;
+                            printer->delayFlags |= MSG_DELAY_FLAG_1;
                         }
-                        if (printer->delayFlags & 6) {
-                            printer->delayFlags &= ~1;
+                        if (printer->delayFlags & (MSG_DELAY_FLAG_4 | MSG_DELAY_FLAG_2)) {
+                            printer->delayFlags &= ~MSG_DELAY_FLAG_1;
                         }
                         break;
                     case MSG_READ_FUNC_ITEM_ICON:
@@ -991,10 +993,10 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                                  romEnd, D_8015C7E0);
                         printer->currentPrintDelay = printer->printDelayTime;
                         if (--arg1 <= 0) {
-                            printer->delayFlags |= 1;
+                            printer->delayFlags |= MSG_DELAY_FLAG_1;
                         }
-                        if (printer->delayFlags & 6) {
-                            printer->delayFlags &= ~1;
+                        if (printer->delayFlags & (MSG_DELAY_FLAG_4 | MSG_DELAY_FLAG_2)) {
+                            printer->delayFlags &= ~MSG_DELAY_FLAG_1;
                         }
                         break;
                     case MSG_READ_FUNC_IMAGE:
@@ -1009,10 +1011,10 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         printer->varImageDisplayState = 0;
                         printer->varImageFadeTimer = 0;
                         if (--arg1 <= 0) {
-                            printer->delayFlags |= 1;
+                            printer->delayFlags |= MSG_DELAY_FLAG_1;
                         }
-                        if (printer->delayFlags & 6) {
-                            printer->delayFlags &= ~1;
+                        if (printer->delayFlags & (MSG_DELAY_FLAG_4 | MSG_DELAY_FLAG_2)) {
+                            printer->delayFlags &= ~MSG_DELAY_FLAG_1;
                         }
                         break;
                     case MSG_READ_FUNC_HIDE_IMAGE:
@@ -1031,7 +1033,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         *printBuf++ = *srcBuf++;
                         *printBuf++ = *srcBuf++;
                         *printBuf++ = *srcBuf++;
-                        printer->delayFlags |= 4;
+                        printer->delayFlags |= MSG_DELAY_FLAG_4;
                         break;
                     case MSG_READ_FUNC_ANIM_LOOP:
                         *printBuf++ = MSG_CHAR_PRINT_FUNCTION;
@@ -1043,9 +1045,9 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         *printBuf++ = MSG_CHAR_PRINT_FUNCTION;
                         *printBuf++ = MSG_PRINT_FUNC_ANIM_DONE;
                         *printBuf++ = *srcBuf++;
-                        printer->delayFlags &= ~4;
+                        printer->delayFlags &= ~MSG_DELAY_FLAG_4;
                         if (--arg1 <= 0) {
-                            printer->delayFlags |= 1;
+                            printer->delayFlags |= MSG_DELAY_FLAG_1;
                         }
                         break;
                     case MSG_READ_FUNC_SET_CURSOR:
@@ -1068,7 +1070,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         printer->currentOption = 0;
                         printer->selectedOption = 0;
                         printer->windowState = MSG_WINDOW_STATE_WAITING_FOR_CHOICE;
-                        printer->delayFlags |= 1;
+                        printer->delayFlags |= MSG_DELAY_FLAG_1;
                         break;
                     case MSG_READ_FUNC_SET_CANCEL:
                         printer->cancelOption = *srcBuf++;
@@ -1084,7 +1086,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         break;
                     case MSG_READ_FUNC_YIELD:
                         printer->stateFlags |= MSG_STATE_FLAG_100000 | MSG_STATE_FLAG_40;
-                        printer->delayFlags |= 1;
+                        printer->delayFlags |= MSG_DELAY_FLAG_1;
                         printer->stateFlags &= ~MSG_STATE_FLAG_80;
                         printer->stateFlags &= ~MSG_STATE_FLAG_PRINT_QUICKLY;
                         break;
@@ -1202,10 +1204,10 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                                 *printBuf++ = MSG_CHAR_PRINT_VARIANT0 + printer->fontVariant;
                                 break;
                             }
-                        } while ((printer->delayFlags & 6) || arg1 > 0);
+                        } while ((printer->delayFlags & (MSG_DELAY_FLAG_4 | MSG_DELAY_FLAG_2)) || arg1 > 0);
 
-                        if (!(printer->delayFlags & 6) && arg1 <= 0) {
-                            printer->delayFlags |= 1;
+                        if (!(printer->delayFlags & (MSG_DELAY_FLAG_4 | MSG_DELAY_FLAG_2)) && arg1 <= 0) {
+                            printer->delayFlags |= MSG_DELAY_FLAG_1;
                             printer->currentPrintDelay = printer->printDelayTime;
                         }
                         msg_play_speech_sound(printer, argQ);
@@ -1255,7 +1257,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
             default:
                 *printBuf++ = c;
                 arg1--;
-                if (printer->fontVariant == 0 && c == 0xC3) {
+                if (printer->fontVariant == 0 && c == MSG_CHAR_UNK_C3) {
                     printer->stateFlags &= ~MSG_STATE_FLAG_80;
                 } else {
                     msg_play_speech_sound(printer, c);
@@ -1266,11 +1268,11 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                 break;
         }
 
-        if (!(printer->delayFlags & 6) && arg1 <= 0) {
-            printer->delayFlags |= 1;
+        if (!(printer->delayFlags & (MSG_DELAY_FLAG_4 | MSG_DELAY_FLAG_2)) && arg1 <= 0) {
+            printer->delayFlags |= MSG_DELAY_FLAG_1;
             printer->currentPrintDelay = printer->printDelayTime;
         }
-        if (!(printer->delayFlags & 1)) {
+        if (!(printer->delayFlags & MSG_DELAY_FLAG_1)) {
             continue;
         }
         if (!s8) {
