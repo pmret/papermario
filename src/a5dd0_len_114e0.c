@@ -8,6 +8,16 @@
 #include "nu/nusys.h"
 #include "model_clear_render_tasks.h"
 
+#if VERSION_CN
+// TODO: remove if sections are split in iQue release
+extern Addr entity_jan_iwa_ROM_START;
+extern Addr entity_jan_iwa_ROM_END;
+extern Addr entity_default_ROM_START;
+extern Addr entity_default_ROM_END;
+extern Addr entity_sbk_omo_ROM_START;
+extern Addr entity_sbk_omo_ROM_END;
+#endif
+
 extern Addr MapTextureMemory;
 
 #ifdef SHIFT
