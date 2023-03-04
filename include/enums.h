@@ -3245,7 +3245,7 @@ enum ItemEntityFlags {
     ITEM_ENTITY_FLAG_10            = 0x00000010,
     ITEM_ENTITY_FLAG_HIDDEN        = 0x00000040, // do not render; player cant pickup
     ITEM_ENTITY_FLAG_80            = 0x00000080,
-    ITEM_ENTITY_FLAG_100           = 0x00000100,
+    ITEM_ENTITY_FLAG_AUTO_COLLECT  = 0x00000100,
     ITEM_ENTITY_FLAG_NEVER_VANISH  = 0x00000200,
     ITEM_ENTITY_FLAG_400           = 0x00000400,
     ITEM_ENTITY_FLAG_800           = 0x00000800,
@@ -3258,7 +3258,7 @@ enum ItemEntityFlags {
     ITEM_ENTITY_FLAG_40000         = 0x00040000,
     ITEM_ENTITY_FLAG_TRANSPARENT   = 0x00080000,
     ITEM_ENTITY_FLAG_100000        = 0x00100000,
-    ITEM_ENTITY_FLAG_200000        = 0x00200000,
+    ITEM_ENTITY_FLAG_CANT_COLLECT  = 0x00200000,
     ITEM_ENTITY_FLAG_400000        = 0x00400000,
     ITEM_ENTITY_FLAG_800000        = 0x00800000,
     ITEM_ENTITY_FLAG_1000000       = 0x01000000,
@@ -3415,8 +3415,8 @@ enum EventSupressFlags {
 enum PartnerActions {
     PARTNER_ACTION_NONE             = 0, // generic state
     PARTNER_ACTION_USE              = 1, // generic state
-    PARTNER_ACTION_KOOPER_1         = 1,
-    PARTNER_ACTION_KOOPER_2         = 2,
+    PARTNER_ACTION_KOOPER_GATHER    = 1,
+    PARTNER_ACTION_KOOPER_TOSS      = 2,
     PARTNER_ACTION_BOMBETTE_1       = 1,
     PARTNER_ACTION_BOMBETTE_2       = 2,
     PARTNER_ACTION_BOMBETTE_3       = 3,
@@ -3491,7 +3491,7 @@ enum NpcFlags {
     NPC_FLAG_GRAVITY                        = 0x00000200, // Enables gravity. Does nothing if NPC_FLAG_JUMPING is set.
     NPC_FLAG_DONT_UPDATE_SHADOW_Y           = 0x00000400, // When shadow raycasting is off, only X and Z update as NPC moves
     NPC_FLAG_JUMPING                        = 0x00000800,
-    NPC_FLAG_FALLING                        = 0x00001000,
+    NPC_FLAG_GROUNDED                       = 0x00001000, // Touching the ground
     NPC_FLAG_COLLDING_WITH_WORLD            = 0x00002000, // Colliding with world in front or to the sides of the NPC
     NPC_FLAG_COLLDING_FORWARD_WITH_WORLD    = 0x00004000, // Colliding with world directly in front of NPC
     NPC_FLAG_IGNORE_ENTITY_COLLISION        = 0x00008000,
@@ -5247,6 +5247,12 @@ enum SurfaceType {
     SURFACE_TYPE_HEDGES             = 9, ///< used within hedge maze in flo_11
     */
 };
+
+typedef enum SurfaceInteractMode {
+    SURFACE_INTERACT_WALK       = 0,
+    SURFACE_INTERACT_RUN        = 1,
+    SURFACE_INTERACT_LAND       = 2,
+} SurfaceInteractMode;
 
 //TODO -- temporarily combined with SurfaceType for map data dumper
 enum ColliderFlags {

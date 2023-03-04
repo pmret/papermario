@@ -242,7 +242,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                 parakarry->flags |= NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
                 partnerActionStatus->actingPartner = PARTNER_PARAKARRY;
                 partnerActionStatus->partnerActionState = PARTNER_ACTION_PARAKARRY_HOVER;
-                D_802BEBBC = func_800EF4E0();
+                D_802BEBBC = partner_force_player_flip_done();
                 enable_npc_blur(parakarry);
                 parakarry->yaw = atan2(parakarry->pos.x, parakarry->pos.z, playerStatus->position.x, playerStatus->position.z);
                 parakarry->duration = 4;
@@ -489,7 +489,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                                                         parakarry->pos.y = playerStatus->position.y + 32.0f,
                                                         y = parakarry->pos.y,
                                                         parakarry->pos.y = playerStatus->position.y,
-                                                        func_8003D660(parakarry, 0),
+                                                        spawn_surface_effects(parakarry, SURFACE_INTERACT_WALK),
                                                         parakarry->pos.y = y, (!tempConditional))) {
                                                 if (!phys_adjust_cam_on_landing()) {
                                                     gCameras[0].moveFlags &= ~CAMERA_MOVE_FLAG_2;

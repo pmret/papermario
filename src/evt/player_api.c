@@ -313,7 +313,7 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
                 anim = ANIM_Mario1_TiredIdle;
             }
             suggest_player_anim_allow_backward(anim);
-            func_8003D660(playerNpc, 2);
+            spawn_surface_effects(playerNpc, SURFACE_INTERACT_LAND);
         }
 
         if (mode == 0 || mode == 2) {

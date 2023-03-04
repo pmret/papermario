@@ -461,9 +461,9 @@ void npc_do_other_npc_collision(Npc* npc);
 /// @returns TRUE if a collision occurred
 s32 npc_do_player_collision(Npc* npc);
 
-void npc_do_gravity(Npc* npc);
+void npc_try_apply_gravity(Npc* npc);
 
-s32 func_800397E8(Npc* npc, f32 velocity);
+s32 npc_try_snap_to_ground(Npc* npc, f32 velocity);
 
 /// Updates all NPCs.
 void update_npcs(void);
@@ -528,7 +528,7 @@ void npc_remove_decoration(Npc* npc, s32 idx);
 
 s32 npc_update_decorations(Npc* npc);
 
-void npc__remove_decoration(Npc* npc, s32 idx);
+void npc_remove_decoration_impl(Npc* npc, s32 idx);
 
 void npc_reset_current_decoration(Npc* npc, s32 idx);
 
@@ -596,19 +596,19 @@ void func_8003D3BC(Npc* npc);
 
 void func_8003D624(Npc* npc, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
 
-void func_8003D660(Npc* npc, s32);
+void spawn_surface_effects(Npc* npc, SurfaceInteractMode mode);
 
-void func_8003D788(Npc* npc, s32);
+void spawn_default_surface_effects(Npc* npc, SurfaceInteractMode mode);
 
-void func_8003DA38(Npc* npc, s32);
+void spawn_flower_surface_effects(Npc* npc, SurfaceInteractMode mode);
 
-void func_8003DC38(Npc* npc, s32);
+void spawn_cloud_surface_effects(Npc* npc, SurfaceInteractMode mode);
 
-void func_8003DFA0(Npc* npc, s32);
+void spawn_snow_surface_effects(Npc* npc, SurfaceInteractMode mode);
 
-void func_8003E0D4(Npc* npc, s32);
+void spawn_hedge_surface_effects(Npc* npc, SurfaceInteractMode mode);
 
-void func_8003E1D0(Npc* npc, s32);
+void spawn_water_surface_effects(Npc* npc, SurfaceInteractMode mode);
 
 /// Duplicate of set_defeated().
 void COPY_set_defeated(s32 mapID, s32 encounterID);
