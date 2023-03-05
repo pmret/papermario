@@ -184,7 +184,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 40:
-            if (playerStatus->inputEnabledCounter) {
+            if (playerStatus->inputDisabledCount) {
                 return ApiStatus_DONE2;
             }
 
@@ -196,7 +196,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
             break;
         case 41:
             if ((!func_800EA52C(PARTNER_BOW) || is_starting_conversation()) &&
-                 script->functionTemp[2] < playerStatus->inputEnabledCounter
+                 script->functionTemp[2] < playerStatus->inputDisabledCount
                  && D_802BE0C4) {
 
                 enable_player_input();
@@ -206,7 +206,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
             }
             script->functionTemp[1]--;
             if (script->functionTemp[1] == 0) {
-                if (script->functionTemp[2] < playerStatus->inputEnabledCounter) {
+                if (script->functionTemp[2] < playerStatus->inputDisabledCount) {
                     if (D_802BE0C4) {
                         enable_player_input();
                         D_802BE0C4 = FALSE;
@@ -315,13 +315,13 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
                 if (func_802BD540_323E90() < 0) {
                     script->functionTemp[0]++;
                     script->functionTemp[1] = 3;
-                    script->functionTemp[2] = playerStatus->inputEnabledCounter;
+                    script->functionTemp[2] = playerStatus->inputDisabledCount;
                 }
             }
             break;
         case 3:
             if (script->functionTemp[1] == 0) {
-                if (script->functionTemp[2] < playerStatus->inputEnabledCounter) {
+                if (script->functionTemp[2] < playerStatus->inputDisabledCount) {
                     script->functionTemp[0] = 2;
                     break;
                 }

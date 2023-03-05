@@ -211,7 +211,7 @@ void entity_Tweester_idle(Entity* entity) {
         !is_picking_up_item() &&
         !(playerStatus->flags & PS_FLAG_PAUSED) &&
         (playerData->currentPartner != PARTNER_GOOMBARIO ||
-         playerStatus->inputEnabledCounter == 0 ||
+         playerStatus->inputDisabledCount == 0 ||
          playerStatus->actionState == ACTION_STATE_USE_TWEESTER
         )) {
         entity_Tweester_move(entity);

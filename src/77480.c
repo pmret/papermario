@@ -17,9 +17,8 @@
 
 extern f32 D_800F7B48;
 extern s32 D_800F7B4C;
-extern UNK_FUN_PTR(ISpyNotificationCallback);
 extern s8 D_8015A57A;
-extern s32 GoombarioGetTattleID;
+extern s32 GoombarioTattleInteractionID;
 
 s32 player_raycast_down(f32*, f32*, f32*, f32*);
 s32 player_raycast_up_corner(f32* x, f32* y, f32* z, f32* length);
@@ -29,16 +28,16 @@ void phys_update_standard(void);
 void phys_update_lava_reset(void);
 void update_player_blink(void);
 void check_for_ispy(void);
-void func_800E0330(void);
+void render_ispy_icon(void);
 void check_for_pulse_stone(void);
-void func_800E0374(void);
-void func_800E04D0(void);
-void func_800E0514(void);
+void clear_ispy_icon(void);
+void render_pulse_stone_icon(void);
+void clear_pulse_stone_icon(void);
 void check_for_conversation_prompt(void);
-void func_800E0658(void);
-void func_800E069C(void);
+void render_conversation_prompt(void);
+void clear_conversation_prompt(void);
 void check_for_interactables(void);
-void func_800E0AD0(void);
+void render_interact_prompt(void);
 void func_800E0B14(void);
 void update_partner_timers(void);
 void player_update_sprite(void);
@@ -78,7 +77,7 @@ s32 player_raycast_below(f32 yaw, f32 diameter, f32* outX, f32* outY, f32* outZ,
     z = inputZ + cosTemp;
     length = inputLength;
     hitObjectID = player_raycast_down(&x, &y, &z, &length);
-    ret = -1;
+    ret = NO_COLLIDER;
     if (hitObjectID >= 0 && length <= fabsf(*outLength)) {
         *hitRx = -gGameStatusPtr->playerGroundTraceAngles.x;
         *hitRz = -gGameStatusPtr->playerGroundTraceAngles.z;
@@ -190,7 +189,7 @@ s32 player_raycast_down(f32* x, f32* y, f32* z, f32* length) {
     f32 hitNz;
     s32 entityID, colliderID;
     Entity* entity;
-    s32 ret = -1;
+    s32 ret = NO_COLLIDER;
 
     hitDepth = *length;
     entityID = test_ray_entities(*x, *y, *z, 0.0f, -1.0f, 0.0f, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
@@ -257,7 +256,7 @@ s32 player_raycast_up_corners(PlayerStatus* player, f32* posX, f32* posY, f32* p
     startY = y;
     startZ = z + deltaZ;
 
-    ret = -1;
+    ret = NO_COLLIDER;
     hitID = player_raycast_up_corner(&startX, &startY, &startZ, &depth);
 
     if (hitID < 0) {
@@ -314,7 +313,7 @@ s32 player_raycast_up_corner(f32* x, f32* y, f32* z, f32* length) {
     f32 sx2, sy2, sz2;
     f32 startX, startY, startZ;
 
-    ret = -1;
+    ret = NO_COLLIDER;
 
      // needed to match
     sx2 = sx = *x;
@@ -371,7 +370,7 @@ s32 player_test_lateral_overlap(s32 mode, PlayerStatus* playerStatus, f32* x, f3
     s32 ret;
 
     radius = playerStatus->colliderDiameter * 0.5f;
-    ret = -1;
+    ret = NO_COLLIDER;
 
     if (!(playerStatus->flags & (PS_FLAG_FALLING | PS_FLAG_JUMPING))) {
         height = playerStatus->colliderHeight * 0.286f;
@@ -423,7 +422,7 @@ s32 player_raycast_general(s32 mode, f32 startX, f32 startY, f32 startZ, f32 dir
 
     entityID = test_ray_entities(startX, startY, startZ, dirX, dirY, dirZ, hitX, hitY, hitZ, hitDepth, hitNx, hitNy,
                                 hitNz);
-    ret = -1;
+    ret = NO_COLLIDER;
     if (entityID >= 0) {
         entity = get_entity_by_index(entityID);
         if (entity->alpha < 255) {
@@ -496,7 +495,7 @@ s32 player_test_move_without_slipping(PlayerStatus* playerStatus, f32* x, f32* y
     cosTheta = -cosTheta;
     hitDepth = depth;
     dx = radius * sinTheta;
-    ret = -1;
+    ret = NO_COLLIDER;
 
     raycastID = player_raycast_general(0, *x, *y + 0.1, *z, sinTheta, 0, cosTheta, &hitX, &hitY, &hitZ, &hitDepth, &hitNx, &hitNy, &hitNz);
     if (raycastID >= 0 && hitDepth <= depth) {
@@ -551,7 +550,7 @@ s32 player_test_move_with_slipping(PlayerStatus* playerStatus, f32* x, f32* y, f
     f32 targetDx, targetDz;
     f32 dx, dz;
     f32 depthDiff;
-    s32 ret = -1;
+    s32 ret = NO_COLLIDER;
 
     height = 0.0f;
     if (!(playerStatus->flags & (PS_FLAG_JUMPING | PS_FLAG_FALLING))) {
@@ -623,10 +622,10 @@ void update_player(void) {
         }
     }
 
-    collisionStatus->currentWall = -1;
-    collisionStatus->lastWallHammered = -1;
-    collisionStatus->currentInspect = -1;
-    collisionStatus->floorBelow = 1;
+    collisionStatus->currentWall = NO_COLLIDER;
+    collisionStatus->lastWallHammered = NO_COLLIDER;
+    collisionStatus->currentInspect = NO_COLLIDER;
+    collisionStatus->floorBelow = TRUE;
 
     update_player_input();
     playerStatus->flags &= ~PS_FLAG_SPECIAL_LAND;
@@ -687,14 +686,14 @@ void check_input_use_partner(void) {
     u32 actionState = playerStatus->actionState;
 
     if (!(playerStatus->animFlags & PA_FLAG_8BIT_MARIO)
-        && (playerStatus->animFlags & PA_FLAG_FORCE_USE_PARTNER || playerStatus->inputEnabledCounter == 0)
+        && (playerStatus->animFlags & PA_FLAG_FORCE_USE_PARTNER || playerStatus->inputDisabledCount == 0)
         && (playerStatus->pressedButtons & BUTTON_C_DOWN && !(playerStatus->flags & PS_FLAG_NO_PARTNER_USAGE))
         && !(playerStatus->pressedButtons & BUTTON_B)
         && !(playerStatus->animFlags & PA_FLAG_USING_PEACH_PHYSICS)
         && actionState <= ACTION_STATE_RUN
     ) {
         if (playerData->currentPartner == PARTNER_GOOMBARIO) {
-            GoombarioGetTattleID = playerStatus->interactingWithID;
+            GoombarioTattleInteractionID = playerStatus->interactingWithID;
         }
         partner_use_ability();
     }
@@ -775,9 +774,9 @@ void player_reset_data(void) {
                              playerStatus->position.z);
     func_800E6B68();
     func_800E0B14();
-    func_800E069C();
-    func_800E0514();
-    func_800E0374();
+    clear_conversation_prompt();
+    clear_pulse_stone_icon();
+    clear_ispy_icon();
     func_800E5520();
 }
 
@@ -952,18 +951,18 @@ s32 disable_player_input(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     playerStatus->flags |= PS_FLAG_INPUT_DISABLED;
-    playerStatus->inputEnabledCounter++;
-    return playerStatus->inputEnabledCounter;
+    playerStatus->inputDisabledCount++;
+    return playerStatus->inputDisabledCount;
 }
 
 s32 enable_player_input(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    playerStatus->inputEnabledCounter--;
-    if (playerStatus->inputEnabledCounter == 0) {
+    playerStatus->inputDisabledCount--;
+    if (playerStatus->inputDisabledCount == 0) {
         playerStatus->flags &= ~PS_FLAG_INPUT_DISABLED;
     }
-    return playerStatus->inputEnabledCounter;
+    return playerStatus->inputDisabledCount;
 }
 
 void func_800E01DC(void) {
@@ -987,10 +986,10 @@ s32 game_scripts_disabled(void) {
 }
 
 void player_render_interact_prompts(void) {
-    func_800E0658();
-    func_800E0AD0();
-    func_800E04D0();
-    func_800E0330();
+    render_conversation_prompt();
+    render_interact_prompt();
+    render_pulse_stone_icon();
+    render_ispy_icon();
 }
 
 void check_for_ispy(void) {
@@ -1000,7 +999,7 @@ void check_for_ispy(void) {
         if (!(playerStatus->animFlags &
             (PA_FLAG_SPEECH_PROMPT_AVAILABLE | PA_FLAG_INTERACT_PROMPT_AVAILABLE))) {
             dma_copy(i_spy_ROM_START, i_spy_ROM_END, i_spy_VRAM_DEF);
-            ISpyNotificationCallback = func_802B72C0_E22870;
+            ISpyNotificationCallback = ispy_notification_setup;
         }
     }
 
@@ -1009,15 +1008,15 @@ void check_for_ispy(void) {
     }
 }
 
-void func_800E0330(void) {
-    if ((gPlayerStatusPtr->animFlags & PA_FLAG_100) && (ISpyNotificationCallback != NULL)) {
-        func_802B7000_E225B0();
+void render_ispy_icon(void) {
+    if ((gPlayerStatusPtr->animFlags & PA_FLAG_ISPY_VISIBLE) && (ISpyNotificationCallback != NULL)) {
+        appendGfx_ispy_icon();
     }
 }
 
-void func_800E0374(void) {
+void clear_ispy_icon(void) {
     ISpyNotificationCallback = NULL;
-    gPlayerStatusPtr->animFlags &= ~PA_FLAG_100;
+    gPlayerStatusPtr->animFlags &= ~PA_FLAG_ISPY_VISIBLE;
 }
 
 void check_for_pulse_stone(void) {
@@ -1025,7 +1024,7 @@ void check_for_pulse_stone(void) {
     s32 dx, dy;
 
     if (PulseStoneNotificationCallback == NULL) {
-        if (gPlayerStatus.animFlags & PA_FLAG_100) {
+        if (gPlayerStatus.animFlags & PA_FLAG_ISPY_VISIBLE) {
             return;
         }
 
@@ -1039,17 +1038,17 @@ void check_for_pulse_stone(void) {
             return;
         }
 
-        if (!(gPlayerStatus.animFlags & (PA_FLAG_USING_PULSE_STONE | PA_FLAG_40))) {
+        if (!(gPlayerStatus.animFlags & (PA_FLAG_USING_PULSE_STONE | PA_FLAG_PULSE_STONE_VISIBLE))) {
             return;
         }
 
-        if (gPlayerStatus.flags & PS_FLAG_PAUSED || gPlayerStatus.inputEnabledCounter) {
+        if (gPlayerStatus.flags & PS_FLAG_PAUSED || gPlayerStatus.inputDisabledCount) {
             return;
         }
 
         if (!(gPlayerStatus.animFlags & (PA_FLAG_SPEECH_PROMPT_AVAILABLE | PA_FLAG_INTERACT_PROMPT_AVAILABLE))) {
             dma_copy(pulse_stone_ROM_START, pulse_stone_ROM_END, pulse_stone_VRAM_DEF);
-            PulseStoneNotificationCallback = func_802B7140;
+            PulseStoneNotificationCallback = pulse_stone_notification_setup;
         }
     }
 
@@ -1058,15 +1057,15 @@ void check_for_pulse_stone(void) {
     }
 }
 
-void func_800E04D0(void) {
-    if ((gPlayerStatusPtr->animFlags & PA_FLAG_40) && (PulseStoneNotificationCallback != 0)) {
-        func_802B71D4();
+void render_pulse_stone_icon(void) {
+    if ((gPlayerStatusPtr->animFlags & PA_FLAG_PULSE_STONE_VISIBLE) && (PulseStoneNotificationCallback != NULL)) {
+        appendGfx_pulse_stone_icon();
     }
 }
 
-void func_800E0514(void) {
+void clear_pulse_stone_icon(void) {
     PulseStoneNotificationCallback = NULL;
-    gPlayerStatusPtr->animFlags &= ~PA_FLAG_40;
+    gPlayerStatusPtr->animFlags &= ~PA_FLAG_PULSE_STONE_VISIBLE;
 }
 
 s32 has_valid_conversation_npc(void) {
@@ -1083,19 +1082,19 @@ s32 has_valid_conversation_npc(void) {
 }
 
 void check_for_conversation_prompt(void) {
-    if (gPlayerStatus.animFlags & PA_FLAG_100 || InteractNotificationCallback || PulseStoneNotificationCallback) {
+    if (gPlayerStatus.animFlags & PA_FLAG_ISPY_VISIBLE || InteractNotificationCallback || PulseStoneNotificationCallback != NULL) {
         return;
     }
 
     if (TalkNotificationCallback == NULL) {
-        if (gPlayerStatus.inputEnabledCounter || gPlayerStatus.flags & PS_FLAG_PAUSED) {
+        if (gPlayerStatus.inputDisabledCount || gPlayerStatus.flags & PS_FLAG_PAUSED) {
             return;
         }
 
         if (has_valid_conversation_npc()) {
             TalkNotificationCallback = NULL;
             dma_copy(speech_bubble_ROM_START, speech_bubble_ROM_END, speech_bubble_VRAM_DEF);
-            TalkNotificationCallback = func_802B70B4_E201C4;
+            TalkNotificationCallback = interact_speech_setup;
         } else {
             TalkNotificationCallback = NULL;
             return;
@@ -1107,13 +1106,13 @@ void check_for_conversation_prompt(void) {
     }
 }
 
-void func_800E0658(void) {
-    if ((gPlayerStatusPtr->animFlags & PA_FLAG_SPEECH_PROMPT_AVAILABLE) && (TalkNotificationCallback != 0)) {
-        func_802B71C8();
+void render_conversation_prompt(void) {
+    if ((gPlayerStatusPtr->animFlags & PA_FLAG_SPEECH_PROMPT_AVAILABLE) && (TalkNotificationCallback != NULL)) {
+        appendGfx_speech_bubble();
     }
 }
 
-void func_800E069C(void) {
+void clear_conversation_prompt(void) {
     TalkNotificationCallback = NULL;
     gPlayerStatusPtr->animFlags &= ~PA_FLAG_SPEECH_PROMPT_AVAILABLE;
 }
@@ -1125,41 +1124,44 @@ void func_800E06C0(s32 arg0) {
 s32 func_800E06D8(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* npc = playerStatus->encounteredNPC;
-    s32 temp = playerStatus->interactingWithID;
-    s32 wall;
+    s32 interactingID = playerStatus->interactingWithID;
+    s32 currentWall;
 
-    if (playerStatus->timeInAir || playerStatus->inputEnabledCounter) {
-            return FALSE;
-    }
-    if (gCollisionStatus.currentWall == -1) {
+    if (playerStatus->timeInAir != 0 || playerStatus->inputDisabledCount) {
         return FALSE;
     }
-    if (playerStatus->flags & PS_FLAG_HAS_CONVERSATION_NPC && !(playerStatus->flags & PS_FLAG_INPUT_DISABLED)
-        && npc != NULL && npc->flags & NPC_FLAG_10000000) {
-        playerStatus->interactingWithID = -1;
+    if (gCollisionStatus.currentWall == NO_COLLIDER) {
+        return FALSE;
+    }
+    if (playerStatus->flags & PS_FLAG_HAS_CONVERSATION_NPC
+        && !(playerStatus->flags & PS_FLAG_INPUT_DISABLED)
+        && npc != NULL
+        && npc->flags & NPC_FLAG_10000000
+    ) {
+        playerStatus->interactingWithID = NO_COLLIDER;
         return TRUE;
     }
 
-    wall = gCollisionStatus.currentWall;
-    if (!(wall & COLLISION_WITH_ENTITY_BIT)) {
-        if (!should_collider_allow_interact(wall)) {
+    currentWall = gCollisionStatus.currentWall;
+    if (!(currentWall & COLLISION_WITH_ENTITY_BIT)) {
+        if (!should_collider_allow_interact(currentWall)) {
             return FALSE;
         }
     } else if (!phys_can_player_interact()) {
-        playerStatus->interactingWithID = -1;
+        playerStatus->interactingWithID = NO_COLLIDER;
         return FALSE;
-    } else if (get_entity_type(wall) == ENTITY_TYPE_PUSH_BLOCK) {
+    } else if (get_entity_type(currentWall) == ENTITY_TYPE_PUSH_BLOCK) {
         return FALSE;
     }
 
-    if (temp == wall) {
+    if (interactingID == currentWall) {
         if (playerStatus->flags & PS_FLAG_INTERACTED) {
             return FALSE;
         }
     } else {
         playerStatus->flags &= ~PS_FLAG_INTERACTED;
     }
-    playerStatus->interactingWithID = -1;
+    playerStatus->interactingWithID = NO_COLLIDER;
 
     return TRUE;
 }
@@ -1171,14 +1173,14 @@ void check_for_interactables(void) {
     Npc* npc = gPlayerStatus.encounteredNPC;
     s32 phi_s2;
 
-    if ((playerStatus->animFlags & PA_FLAG_100) || TalkNotificationCallback || PulseStoneNotificationCallback) {
+    if ((playerStatus->animFlags & PA_FLAG_ISPY_VISIBLE) || TalkNotificationCallback || PulseStoneNotificationCallback != NULL) {
         return;
     }
 
     if (InteractNotificationCallback == NULL) {
         s32 curInteraction = gCollisionStatus.currentWall;
 
-        if (playerStatus->inputEnabledCounter != 0) {
+        if (playerStatus->inputDisabledCount != 0) {
             if (gPlayerStatus.interactingWithID != curInteraction) {
                 gPlayerStatus.interactingWithID = curInteraction;
             }
@@ -1189,7 +1191,7 @@ void check_for_interactables(void) {
             return;
         }
 
-        if (curInteraction == -1) {
+        if (curInteraction == NO_COLLIDER) {
             s32 floor = gCollisionStatus.currentFloor;
 
             if ((floor >= 0) && (floor & COLLISION_WITH_ENTITY_BIT)) {
@@ -1203,7 +1205,7 @@ void check_for_interactables(void) {
                     case ENTITY_TYPE_PUSH_BLOCK:
                     case ENTITY_TYPE_CHEST:
                     case ENTITY_TYPE_SIGNPOST:
-                        curInteraction = -1;
+                        curInteraction = NO_COLLIDER;
                         break;
                 }
             } else if (
@@ -1217,7 +1219,7 @@ void check_for_interactables(void) {
                 }
                 phi_s2 = 0;
             } else {
-                playerStatus->interactingWithID = -1;
+                playerStatus->interactingWithID = NO_COLLIDER;
                 playerStatus->flags &= ~PS_FLAG_INTERACTED;
                 return;
             }
@@ -1226,7 +1228,7 @@ void check_for_interactables(void) {
                 phi_s2 = 0;
                 if (!(curInteraction & COLLISION_WITH_NPC_BIT)) {
                     if (!should_collider_allow_interact(curInteraction)) {
-                        playerStatus->interactingWithID = -1;
+                        playerStatus->interactingWithID = NO_COLLIDER;
                         playerStatus->flags &= ~PS_FLAG_INTERACTED;
                         return;
                     }
@@ -1234,7 +1236,7 @@ void check_for_interactables(void) {
             } else {
                 if (!phys_can_player_interact()) {
                     phi_s2 = 1;
-                    playerStatus->interactingWithID = -1;
+                    playerStatus->interactingWithID = NO_COLLIDER;
                     playerStatus->flags &= ~PS_FLAG_INTERACTED;
                     return;
                 }
@@ -1266,7 +1268,7 @@ void check_for_interactables(void) {
 
     if (InteractNotificationCallback == NULL) {
         dma_copy(inspect_icon_ROM_START, inspect_icon_ROM_END, inspect_icon_VRAM_DEF);
-        InteractNotificationCallback = func_802B70B4_E201C4;
+        InteractNotificationCallback = interact_inspect_setup;
 
     }
 
@@ -1275,11 +1277,11 @@ void check_for_interactables(void) {
     }
 }
 
-void func_802B71E8_E202F8(void);
+void appendGfx_interact_prompt(void);
 
-void func_800E0AD0(void) {
-    if ((gPlayerStatusPtr->animFlags & PA_FLAG_INTERACT_PROMPT_AVAILABLE) && (InteractNotificationCallback != 0)) {
-        func_802B71E8_E202F8();
+void render_interact_prompt(void) {
+    if ((gPlayerStatusPtr->animFlags & PA_FLAG_INTERACT_PROMPT_AVAILABLE) && (InteractNotificationCallback != NULL)) {
+        appendGfx_interact_prompt();
     }
 }
 

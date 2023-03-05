@@ -2528,7 +2528,7 @@ void update_item_entity_temp(ItemEntity* itemEntity) {
                         actionState != ACTION_STATE_JUMP &&
                         actionState != ACTION_STATE_FALLING) ||
                         !playerStatus->enableCollisionOverlapsCheck ||
-                        playerStatus->inputEnabledCounter == 0) &&
+                        playerStatus->inputDisabledCount == 0) &&
                     actionState != ACTION_STATE_LAUNCH &&
                     actionState != ACTION_STATE_RIDE &&
                     actionState != ACTION_STATE_IDLE &&

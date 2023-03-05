@@ -7,17 +7,21 @@ void world_twink_init(Npc* twink) {
     twink->collisionRadius = 20;
 }
 
-ApiStatus TwinkTakeOut(Evt* script, s32 isInitialCall) {
+API_CALLABLE(TwinkTakeOut) {
     Npc* twink = script->owner2.npc;
 
     if (isInitialCall) {
         partner_init_get_out(twink);
     }
 
-    return partner_get_out(twink) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
+    if(partner_get_out(twink)) {
+        return ApiStatus_DONE1;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
-ApiStatus TwinkUpdate(Evt* script, s32 isInitialCall) {
+API_CALLABLE(TwinkUpdate) {
     PlayerData* playerData = &gPlayerData;
     Npc* twink = script->owner2.npc;
 
@@ -32,39 +36,43 @@ ApiStatus TwinkUpdate(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus TwinkUseAbility(Evt* script, s32 isInitialCall) {
+API_CALLABLE(TwinkUseAbility) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus TwinkPutAway(Evt* script, s32 isInitialCall) {
+API_CALLABLE(TwinkPutAway) {
     Npc* twink = script->owner2.npc;
 
     if (isInitialCall) {
         partner_init_put_away(twink);
     }
 
-    return partner_put_away(twink) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
+    if(partner_put_away(twink)) {
+        return ApiStatus_DONE1;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
-EvtScript world_twink_take_out = {
+EvtScript EVS_TwinkTakeOut = {
     EVT_CALL(TwinkTakeOut)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript world_twink_update = {
+EvtScript EVS_TwinkUpdate = {
     EVT_CALL(TwinkUpdate)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript world_twink_use_ability = {
+EvtScript EVS_TwinkUseAbility = {
     EVT_CALL(TwinkUseAbility)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript world_twink_put_away = {
+EvtScript EVS_TwinkPutAway = {
     EVT_CALL(TwinkPutAway)
     EVT_RETURN
     EVT_END

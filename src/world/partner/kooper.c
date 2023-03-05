@@ -252,7 +252,7 @@ API_CALLABLE(KooperUseAbility) {
 
     switch (script->USE_STATE) {
         case SHELL_TOSS_STATE_BEGIN:
-            if (playerStatus->inputEnabledCounter != 0
+            if (playerStatus->inputDisabledCount != 0
              || playerStatus->timeInAir != 0
              || !(kooper->flags & NPC_FLAG_GROUNDED)
             ) {
@@ -260,7 +260,7 @@ API_CALLABLE(KooperUseAbility) {
             }
 
             disable_player_input();
-            script->functionTemp[2] = playerStatus->inputEnabledCounter;
+            script->functionTemp[2] = playerStatus->inputDisabledCount;
             ShellTossControlsPlayer = TRUE;
             ShellTossHitboxState = SHELL_TOSS_HITBOX_DISABLED;
             KooperHasItem = FALSE;
@@ -307,7 +307,7 @@ API_CALLABLE(KooperUseAbility) {
             }
 
             disable_npc_blur(kooper);
-            if (script->functionTemp[2] < playerStatus->inputEnabledCounter) {
+            if (script->functionTemp[2] < playerStatus->inputDisabledCount) {
                 if (!(playerStatus->animFlags & PA_FLAG_CHANGING_MAP)) {
                     suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
                 } else {

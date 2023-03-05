@@ -758,7 +758,7 @@ Trigger* bind_trigger(EvtScript* script, s32 flags, s32 triggerFlagIndex, s32 tr
 
     bp.flags = flags | TRIGGER_SCRIPT_BOUND;
     bp.colliderID = triggerFlagIndex;
-    bp.unk_tr_2C = 0;
+    bp.tattleMsg = 0;
     bp.onActivateFunc = evt_trigger_on_activate_exec_script;
     bp.hasPlayerInteractPrompt = arg6;
 

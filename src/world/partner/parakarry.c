@@ -207,16 +207,16 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
 
         switch (D_802BEBC0_31CBE0) {
             case 40:
-                if (playerStatus->inputEnabledCounter == 0) {
+                if (playerStatus->inputDisabledCount == 0) {
                     D_802BEBC4 = 3;
                     D_802BEBC0_31CBE0 = 41;
-                    evt->functionTemp[2] = playerStatus->inputEnabledCounter;
+                    evt->functionTemp[2] = playerStatus->inputDisabledCount;
                 } else {
                     goto block_end_return_ApiStatus_DONE2; // TODO remove this goto
                 }
             case 41:
                 if (D_802BEBC4 == 0) {
-                    if (evt->functionTemp[2] >= playerStatus->inputEnabledCounter) {
+                    if (evt->functionTemp[2] >= playerStatus->inputDisabledCount) {
                         if (func_800EA52C(PARTNER_PARAKARRY)) {
                             D_802BEBC0_31CBE0 = 30;
                             break;
@@ -233,7 +233,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                 set_action_state(ACTION_STATE_RIDE);
                 disable_player_input();
                 disable_player_static_collisions();
-                evt->functionTemp[2] = playerStatus->inputEnabledCounter;
+                evt->functionTemp[2] = playerStatus->inputDisabledCount;
                 D_802BEBB4 = 1;
                 D_802BEBB8 = 1;
                 D_802BEBB0 = 1;
@@ -271,7 +271,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                     parakarry->pos.z += (parakarry->moveToPos.z - parakarry->pos.z) / parakarry->duration;
                     parakarry->duration--;
                     if (parakarry->duration != 0) {
-                        if (evt->functionTemp[2] < playerStatus->inputEnabledCounter) {
+                        if (evt->functionTemp[2] < playerStatus->inputDisabledCount) {
                             disable_npc_blur(parakarry);
                             D_802BEBC0_31CBE0 = 0x16;
                         }

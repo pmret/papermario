@@ -63,85 +63,92 @@ void sprite_shading_set_light_source(u32 idx, s8 flags, f32 x, f32 y, f32 z, u8 
 void create_shading_palette(Matrix4f mtx, s32 uls, s32 ult, s32 lrs, s32 lrt, s32 alpha, s32 otherModeLBits) {
     Camera* camera = &gCameras[gCurrentCameraID];
     SpriteShadingLightSource* lightSource;
-    f32 shadowX, shadowY, shadowZ;
-    f32 sp54, sp58, sp5C;
-    f32 sp60;
-    f32 sp64, var_f30, sp68;
-    f32 shadowR, shadowG, shadowB;
-    f32 sp78, sp7C, sp80;
-    f32 sp84, sp88, sp8C;
-    f32 sp90, sp94, sp98;
+    f32 shadowDirX, shadowDirY, shadowDirZ;
+    f32 posX, posY, posZ;
+    f32 facingDir;
+    f32 Mxz, Myz, Mzz;
+    f32 shadowColorR, shadowColorG, shadowColorB;
+    f32 commonColorR, commonColorG, commonColorB;
+    f32 backColorR, backColorG, backColorB;
+    f32 frontColorR, frontColorG, frontColorB;
+    f32 shadowIntensity;
+    f32 lightIntensity;
+    f32 intensityScale;
     f32 temp_f10;
-    f32 temp_f12;
     f32 temp_f16;
+    f32 temp3;
     f32 distSq;
     f32 dx, dy, dz;
-    f32 temp_f6;
-    f32 var_f0_2;
     f32 dist;
-    f32 intensityScale;
-    f32 temp3;
+    f32 invDist;
     f32 qx, qy, qz;
     f32 wx, wy, wz;
     f32 ex, ey, ez;
+    f32 Pxz, Pzz;
     s32 i;
 
-    shadowX = 0.0f;
-    shadowY = 0.0f;
-    shadowZ = 0.0f;
+    shadowDirX = 0.0f;
+    shadowDirY = 0.0f;
+    shadowDirZ = 0.0f;
 
-    sp54 = mtx[3][0];
-    sp58 = mtx[3][1];
-    sp5C = mtx[3][2];
+    posX = mtx[3][0];
+    posY = mtx[3][1];
+    posZ = mtx[3][2];
+    
+    Mxz = mtx[0][2];
+    Myz = mtx[1][2];
+    Mzz = mtx[2][2];
 
-    sp78 = 0.0f;
-    sp7C = 0.0f;
-    sp80 = 0.0f;
+    commonColorR = 0.0f;
+    commonColorG = 0.0f;
+    commonColorB = 0.0f;
 
-    sp84 = 0.0f;
-    sp88 = 0.0f;
-    sp8C = 0.0f;
+    backColorR = 0.0f;
+    backColorG = 0.0f;
+    backColorB = 0.0f;
 
-    sp64 = mtx[0][2];
-    var_f30 = mtx[1][2];
-    sp68 = mtx[2][2];
+    frontColorR = 0.0f;
+    frontColorG = 0.0f;
+    frontColorB = 0.0f;
 
-    sp90 = 0.0f;
-    sp94 = 0.0f;
-    sp98 = 0.0f;
+    shadowColorR = gSpriteShadingProfile->ambientColor.r;
+    shadowColorG = gSpriteShadingProfile->ambientColor.g;
+    shadowColorB = gSpriteShadingProfile->ambientColor.b;
 
-    shadowR = gSpriteShadingProfile->ambientColor.r;
-    shadowG = gSpriteShadingProfile->ambientColor.g;
-    shadowB = gSpriteShadingProfile->ambientColor.b;
+    Pxz = camera->perspectiveMatrix[0][2];
+    Pzz = camera->perspectiveMatrix[2][2];
 
-    if (((-sp64 * camera->perspectiveMatrix[0][2]) + (sp68 * camera->perspectiveMatrix[2][2])) < 0.0f) {
-        sp60 = 1.0f;
+    if ((-Mxz * Pxz + Mzz * Pzz) < 0.0f) {
+        facingDir = 1.0f;
     } else {
-        sp60 = -1.0f;
+        facingDir = -1.0f;
     }
 
     for (i = 0; i < ARRAY_COUNT(gSpriteShadingProfile->sources); i++) {
         lightSource = &gSpriteShadingProfile->sources[i];
         if (lightSource->flags & LIGHT_SOURCE_ENABLED) {
-            dx = sp54 - lightSource->pos.x;
-            dy = sp58 - lightSource->pos.y;
-            dz = sp5C - lightSource->pos.z;
+            dx = posX - lightSource->pos.x;
+            dy = posY - lightSource->pos.y;
+            dz = posZ - lightSource->pos.z;
 
             distSq = SQ(dx) + SQ(dy) + SQ(dz);
 
             if (distSq != 0.0f) {
                 dist = sqrtf(distSq);
-                var_f0_2 = 1.0f / dist;
+                invDist = 1.0f / dist;
             } else {
                 dist = 0.0f;
-                var_f0_2 = 0.0f;
+                invDist = 0.0f;
             }
 
-            dx *= var_f0_2;
-            dy *= var_f0_2;
-            dz *= var_f0_2;
+            // normalize dx/dy/dz
+            // they now form a normal vector pointing from light source to sprite
+            dx *= invDist;
+            dy *= invDist;
+            dz *= invDist;
 
-            if ((lightSource->flags & LIGHT_SOURCE_LINEAR_FALLOFF)) {
+            // apply falloff from light source
+            if (lightSource->flags & LIGHT_SOURCE_LINEAR_FALLOFF) {
                 if ((dist == 0.0f) && (lightSource->falloff == 0.0f)) {
                     intensityScale = 1.0f;
                 } else {
@@ -150,112 +157,117 @@ void create_shading_palette(Matrix4f mtx, s32 uls, s32 ult, s32 lrs, s32 lrt, s3
                     dy *= intensityScale;
                     dz *= intensityScale;
                 }
-            } else {
-                if ((lightSource->flags & LIGHT_SOURCE_QUADRATIC_FALLOFF) && (distSq != 0.0f || lightSource->falloff != 0.0f)) {
+            } else if (lightSource->flags & LIGHT_SOURCE_QUADRATIC_FALLOFF) {
+                if ((distSq == 0.0f) && (lightSource->falloff == 0.0f)) {
+                    intensityScale = 1.0f;
+                } else {
                     intensityScale = 1.0f / (distSq * lightSource->falloff);
                     dx *= intensityScale;
                     dy *= intensityScale;
                     dz *= intensityScale;
-                } else {
-                    intensityScale = 1.0f;
                 }
+            } else {
+                intensityScale = 1.0f;
             }
 
             if (intensityScale > 1.0f) {
                 intensityScale = 1.0f;
             }
-            shadowX += dx;
-            shadowY += dy;
-            shadowZ += dz;
+            
+            shadowDirX += dx;
+            shadowDirY += dy;
+            shadowDirZ += dz;
 
-            if (sp60 < 0.0f) {
-                ex = sp64;
-                ey = var_f30;
-                ez = -sp68;
+            if (facingDir < 0.0f) {
+                ex = Mxz;
+                ey = Myz;
+                ez = -Mzz;
             } else {
-                ex = -sp64;
-                ey = var_f30;
-                ez = sp68;
+                ex = -Mxz;
+                ey = Myz;
+                ez = Mzz;
             }
             temp_f10 = ex * dx + ey * dy + ez * dz;
 
-            if (sp60 < 0.0f) {
-                wx = sp68;
-                wy = var_f30;
-                wz = sp64;
+            if (facingDir < 0.0f) {
+                wx = Mzz;
+                wy = Myz;
+                wz = Mxz;
             } else {
-                wx = -sp68;
-                wy = var_f30;
-                wz = -sp64;
+                wx = -Mzz;
+                wy = Myz;
+                wz = -Mxz;
             }
             temp3 = wx * dx + wy * dy + wz * dz;
 
             temp_f16 = temp3;
-            temp_f12 = intensityScale * fabsf(temp_f10);
-            temp_f6 = intensityScale * fabsf(temp_f16);
+            shadowIntensity = intensityScale * fabsf(temp_f10);
+            lightIntensity  = intensityScale * fabsf(temp_f16);
             if (temp_f10 > 0.0f) {
-                sp78 += lightSource->rgb.r * temp_f12;
-                sp7C += lightSource->rgb.g * temp_f12;
-                sp80 += lightSource->rgb.b * temp_f12;
+                commonColorR += lightSource->rgb.r * shadowIntensity;
+                commonColorG += lightSource->rgb.g * shadowIntensity;
+                commonColorB += lightSource->rgb.b * shadowIntensity;
                 if (temp_f16 > 0.0f) {
-                    sp84 += lightSource->rgb.r * temp_f6;
-                    sp88 += lightSource->rgb.g * temp_f6;
-                    sp8C += lightSource->rgb.b * temp_f6;
+                    backColorR += lightSource->rgb.r * lightIntensity;
+                    backColorG += lightSource->rgb.g * lightIntensity;
+                    backColorB += lightSource->rgb.b * lightIntensity;
                 } else {
-                    sp90 += lightSource->rgb.r * temp_f6;
-                    sp94 += lightSource->rgb.g * temp_f6;
-                    sp98 += lightSource->rgb.b * temp_f6;
+                    frontColorR += lightSource->rgb.r * lightIntensity;
+                    frontColorG += lightSource->rgb.g * lightIntensity;
+                    frontColorB += lightSource->rgb.b * lightIntensity;
                 }
             } else {
-                shadowR += lightSource->rgb.r * temp_f12;
-                shadowG += lightSource->rgb.g * temp_f12;
-                shadowB += lightSource->rgb.b * temp_f12;
+                shadowColorR += lightSource->rgb.r * shadowIntensity;
+                shadowColorG += lightSource->rgb.g * shadowIntensity;
+                shadowColorB += lightSource->rgb.b * shadowIntensity;
                 if (temp_f16 > 0.0f) {
-                    sp84 += lightSource->rgb.r * temp_f6;
-                    sp88 += lightSource->rgb.g * temp_f6;
-                    sp8C += lightSource->rgb.b * temp_f6;
+                    backColorR += lightSource->rgb.r * lightIntensity;
+                    backColorG += lightSource->rgb.g * lightIntensity;
+                    backColorB += lightSource->rgb.b * lightIntensity;
                 } else {
-                    sp90 += lightSource->rgb.r * temp_f6;
-                    sp94 += lightSource->rgb.g * temp_f6;
-                    sp98 += lightSource->rgb.b * temp_f6;
+                    frontColorR += lightSource->rgb.r * lightIntensity;
+                    frontColorG += lightSource->rgb.g * lightIntensity;
+                    frontColorB += lightSource->rgb.b * lightIntensity;
                 }
             }
         }
     }
 
-    if (sp60 < 0.0f) {
-        qx = sp68;
-        qy = var_f30;
-        qz = sp64;
+    if (facingDir < 0.0f) {
+        qx = Mzz;
+        qy = Myz;
+        qz = Mxz;
     } else {
-        qx = -sp68;
-        qy = var_f30;
-        qz = -sp64;
+        qx = -Mzz;
+        qy = Myz;
+        qz = -Mxz;
     }
 
-    if (qx * shadowX + qy * shadowY + qz * shadowZ > 0.0f) {
+    if (qx * shadowDirX + qy * shadowDirY + qz * shadowDirZ > 0.0f) {
         appendGfx_shading_palette(
             mtx,
             uls, ult, lrs, lrt,
             alpha,
-            shadowX, shadowY, shadowZ,
-            shadowR, shadowG, shadowB,
-            gSpriteShadingProfile->ambientColor.r + sp78 + sp84,
-            gSpriteShadingProfile->ambientColor.g + sp7C + sp88,
-            gSpriteShadingProfile->ambientColor.b + sp80 + sp8C,
-            gSpriteShadingProfile->ambientPower, otherModeLBits
+            shadowDirX, shadowDirY, shadowDirZ,
+            shadowColorR, shadowColorG, shadowColorB,
+            gSpriteShadingProfile->ambientColor.r + commonColorR + backColorR,
+            gSpriteShadingProfile->ambientColor.g + commonColorG + backColorG,
+            gSpriteShadingProfile->ambientColor.b + commonColorB + backColorB,
+            gSpriteShadingProfile->ambientPower,
+            otherModeLBits
         );
     } else {
         appendGfx_shading_palette(
             mtx,
             uls, ult, lrs, lrt,
             alpha,
-            shadowX, shadowY, shadowZ,
-            shadowR, shadowG, shadowB,
-            gSpriteShadingProfile->ambientColor.r + sp78 + sp90,
-            gSpriteShadingProfile->ambientColor.g + sp7C + sp94,
-            gSpriteShadingProfile->ambientColor.b + sp80 + sp98,
-            gSpriteShadingProfile->ambientPower, otherModeLBits
+            shadowDirX, shadowDirY, shadowDirZ,
+            shadowColorR, shadowColorG, shadowColorB,
+            gSpriteShadingProfile->ambientColor.r + commonColorR + frontColorR,
+            gSpriteShadingProfile->ambientColor.g + commonColorG + frontColorG,
+            gSpriteShadingProfile->ambientColor.b + commonColorB + frontColorB,
+            gSpriteShadingProfile->ambientPower,
+            otherModeLBits
         );
     }
 }

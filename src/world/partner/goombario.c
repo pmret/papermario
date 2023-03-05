@@ -5,20 +5,7 @@
 #include "message_ids.h"
 #include "entity.h"
 
-typedef struct SpeechBubbleData {
-    /* 0x00 */ Npc* unk_00;
-    /* 0x04 */ Vec3f pos;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ f32 scale;
-    /* 0x18 */ s32 unk_18;
-    /* 0x1C */ f32 unk_1C;
-    /* 0x20 */ s32 unk_20;
-    /* 0x24 */ char unk_24[6];
-    /* 0x2A */ u8 unk_2A;
-    /* 0x2B */ u8 unk_2B;
-} SpeechBubbleData; /* size = 0x2C */
-
-extern SpeechBubbleData* D_802B79A8_E21858;
+extern SpeechBubbleData* SpeechBubblePtr;
 
 BSS s32 D_802BDF30;
 BSS s32 D_802BDF34;
@@ -26,7 +13,7 @@ BSS Npc* D_802BDF38;
 BSS s32 D_802BDF3C;
 BSS TweesterPhysics GoombarioTweesterPhysics;
 BSS s32 D_802BDF5C;
-BSS s32 GoombarioGetTattleID;
+BSS s32 GoombarioTattleInteractionID;
 BSS s32 D_802BDF64;
 
 s32 EntityTattles[] = {
@@ -70,14 +57,17 @@ s32 EntityTattles[] = {
     -1
 };
 
-s32 func_802BD100_317020(s32 arg0) {
+s32 world_goombario_get_trigger_tattle(s32 arg0) {
     s32 i;
 
-    for (i = 0; i < 0x40; i++) {
+    for (i = 0; i < MAX_TRIGGERS; i++) {
         Trigger* trigger = get_trigger_by_id(i);
 
-        if (trigger != NULL && trigger->flags.flags & TRIGGER_WALL_PRESS_A && trigger->location.colliderID == arg0) {
-            return trigger->unk_tr_2C;
+        if (trigger != NULL
+            && trigger->flags.flags & TRIGGER_WALL_PRESS_A
+            && trigger->location.colliderID == arg0
+        ) {
+            return trigger->tattleMsg;
         }
     }
     return 0;
@@ -88,26 +78,30 @@ void world_goombario_init(Npc* goombario) {
     goombario->collisionRadius = 20;
 }
 
-ApiStatus func_802BD188_3170A8(Evt* script, s32 isInitialCall) {
+API_CALLABLE(WorldGoombarioTakeOut) {
     Npc* goombario = script->owner2.npc;
-    GoombarioGetTattleID = -1;
+    GoombarioTattleInteractionID = -1;
 
     if (isInitialCall) {
         partner_init_get_out(goombario);
     }
 
-    return partner_get_out(goombario) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
+    if (partner_get_out(goombario)) {
+        return ApiStatus_DONE1;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
-EvtScript world_goombario_take_out = {
-    EVT_CALL(func_802BD188_3170A8)
+EvtScript EVS_GoombarioTakeOut = {
+    EVT_CALL(WorldGoombarioTakeOut)
     EVT_RETURN
     EVT_END
 };
 
 TweesterPhysics* GoombarioTweesterPhysicsPtr = &GoombarioTweesterPhysics;
 
-s32 func_802BD1D0_3170F0(Evt* script, s32 isInitialCall) {
+API_CALLABLE(WorldGoombarioUpdate) {
     PlayerData* playerData = &gPlayerData;
     Npc* npc = script->owner2.npc;
     f32 sinAngle, cosAngle, liftoffVelocity;
@@ -190,13 +184,13 @@ s32 func_802BD1D0_3170F0(Evt* script, s32 isInitialCall) {
     return 0;
 }
 
-EvtScript world_goombario_update = {
-    EVT_CALL(func_802BD1D0_3170F0)
+EvtScript EVS_GoombarioUpdate = {
+    EVT_CALL(WorldGoombarioUpdate)
     EVT_RETURN
     EVT_END
 };
 
-void func_802BD564_317484(Npc* goombario) {
+void goombario_try_cancel_tweester(Npc* goombario) {
     if (TweesterTouchingPartner) {
         TweesterTouchingPartner = NULL;
         goombario->flags = GoombarioTweesterPhysicsPtr->prevFlags;
@@ -221,7 +215,7 @@ s32 world_goombario_can_pause(Npc* goombario) {
     return TRUE;
 }
 
-ApiStatus func_802BD5D8_3174F8(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802BD5D8_3174F8) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* goombario = script->owner2.npc;
     s32 msgID;
@@ -230,63 +224,73 @@ ApiStatus func_802BD5D8_3174F8(Evt* script, s32 isInitialCall) {
     s32 v0;
     s32 i;
 
+    #define USE_STATE functionTemp[0]
+    enum {
+        USE_TATTLE_STATE_40         = 40,
+        USE_TATTLE_STATE_41         = 41,
+        USE_TATTLE_STATE_10         = 10,
+        USE_TATTLE_STATE_20         = 20,
+        USE_TATTLE_STATE_00         = 0,
+        USE_TATTLE_STATE_01         = 1,
+    };
+
     if (isInitialCall) {
-        func_802BD564_317484(goombario);
-        D_802BDF64 = 0;
+        goombario_try_cancel_tweester(goombario);
+        D_802BDF64 = FALSE;
         D_802BDF30 = 0;
         D_802BDF34 = 0;
         if (playerStatus->animFlags & PA_FLAG_SPEECH_PROMPT_AVAILABLE) {
             D_802BDF30 = 1;
-            D_802BDF38 = D_802B79A8_E21858->unk_00;
+            D_802BDF38 = SpeechBubblePtr->encounteredNPC;
         }
         if (playerStatus->animFlags & PA_FLAG_INTERACT_PROMPT_AVAILABLE) {
             D_802BDF34 = 1;
         }
-        script->functionTemp[0] = 40;
+        script->USE_STATE = USE_TATTLE_STATE_40;
     }
 
-    switch (script->functionTemp[0]) {
-        case 40:
-            if (!(goombario->flags & NPC_FLAG_GROUNDED) || playerStatus->inputEnabledCounter != 0) {
+    switch (script->USE_STATE) {
+        case USE_TATTLE_STATE_40:
+            if (!(goombario->flags & NPC_FLAG_GROUNDED) || playerStatus->inputDisabledCount != 0) {
                 script->varTable[0] = -1;
                 return ApiStatus_DONE2;
             }
             script->functionTemp[1] = 3;
             disable_player_input();
-            D_802BDF64 = 1;
-            script->functionTemp[2] = playerStatus->inputEnabledCounter;
-            script->functionTemp[0]++;
+            D_802BDF64 = TRUE;
+            script->functionTemp[2] = playerStatus->inputDisabledCount;
+            script->USE_STATE++;
             break;
-        case 41:
+        case USE_TATTLE_STATE_41:
             if (script->functionTemp[1] != 0) {
                 script->functionTemp[1]--;
             } else {
-                if (script->functionTemp[2] < playerStatus->inputEnabledCounter) {
+                if (script->functionTemp[2] < playerStatus->inputDisabledCount) {
                     script->varTable[0] = -1;
                     enable_player_input();
-                    D_802BDF64 = 0;
+                    D_802BDF64 = FALSE;
                     return ApiStatus_DONE2;
                 }
-                script->functionTemp[0] = 0;
+                script->USE_STATE = USE_TATTLE_STATE_00;
             }
             break;
-        case 0:
+        case USE_TATTLE_STATE_00:
             set_time_freeze_mode(1);
             playerStatus->flags &= ~PS_FLAG_HAS_CONVERSATION_NPC;
-            goombario->currentAnim = 0x010001;
+            goombario->currentAnim = ANIM_WorldGoombario_Idle;
             goombario->yaw = clamp_angle(gCameras[CAM_DEFAULT].currentYaw + playerStatus->spriteFacingAngle - 90.0f);
             gPartnerActionStatus.partnerActionState = 1;
             close_status_menu();
             if (D_802BDF30 != 0) {
                 script->varTable[0] = 0;
-                script->functionTemp[0] = 20;
+                script->USE_STATE = 20;
                 break;
             }
-            script->functionTemp[0] = 1;
-            /* fallthrough */
-        case 1:
-            if (GoombarioGetTattleID >= 0 && (GoombarioGetTattleID & 0x4000)) {
-                temp = get_entity_type(GoombarioGetTattleID);
+            script->USE_STATE = USE_TATTLE_STATE_01;
+            // fallthrough
+        case USE_TATTLE_STATE_01:
+            if (GoombarioTattleInteractionID >= 0 && (GoombarioTattleInteractionID & COLLISION_WITH_ENTITY_BIT)) {
+                temp = get_entity_type(GoombarioTattleInteractionID);
                 msgID = -1;
                 do {} while (0);
                 for (i = 0; EntityTattles[2 * i] != -1; i++) {
@@ -294,49 +298,49 @@ ApiStatus func_802BD5D8_3174F8(Evt* script, s32 isInitialCall) {
                         continue;
                     }
                     switch (temp) {
-                        case 22:
-                        case 25:
+                        case ENTITY_TYPE_HAMMER2_BLOCK:
+                        case ENTITY_TYPE_HAMMER2_BLOCK_TINY:
                             if (gPlayerData.hammerLevel >= 1) {
                                 msgID = MSG_EntityTattle_HammerBlock2_CanBreak;
                             }
                             break;
-                        case 23:
-                        case 26:
+                        case ENTITY_TYPE_HAMMER3_BLOCK:
+                        case ENTITY_TYPE_HAMMER3_BLOCK_TINY:
                             if (gPlayerData.hammerLevel >= 2) {
                                 msgID = MSG_EntityTattle_HammerBlock3_CanBreak;
                             }
                             break;
-                        case 36:
+                        case ENTITY_TYPE_WOODEN_CRATE:
                             if (gPlayerData.bootsLevel == 1) {
                                 msgID = MSG_EntityTattle_WoodenCrate_SpinJump;
                             } else if (gPlayerData.bootsLevel == 2) {
                                 msgID = MSG_EntityTattle_WoodenCrate_TornadoJump;
                             }
                             break;
-                        case 37:
+                        case ENTITY_TYPE_BOARDED_FLOOR:
                             if (gPlayerData.bootsLevel == 1) {
                                 msgID = MSG_EntityTattle_BoardedFloor_SpinJump;
                             } else if (gPlayerData.bootsLevel == 2) {
                                 msgID = MSG_EntityTattle_BoardedFloor_TornadoJump;
                             }
                             break;
-                        case 9:
+                        case ENTITY_TYPE_HUGE_BLUE_SWITCH:
                             if (gPlayerData.bootsLevel >= 2) {
                                 msgID = MSG_EntityTattle_BigSwitch_TornadoJump;
                             }
                             break;
-                        case 10:
+                        case ENTITY_TYPE_GREEN_STOMP_SWITCH:
                             if (gPlayerData.bootsLevel >= 2) {
                                 msgID = MSG_EntityTattle_FloorSwitch_TornadoJump;
                             }
                             break;
-                        case 49:
+                        case ENTITY_TYPE_STAR_BOX_LAUCHER:
                             if (gPlayerData.bootsLevel >= 2) {
                                 msgID = MSG_EntityTattle_JackInTheBox_TornadoJump;
                             }
                             break;
-                        case 50:
-                            if (get_entity_by_index(GoombarioGetTattleID & 0x3FFF)->dataBuf.chest->itemID == -1) {
+                        case ENTITY_TYPE_CHEST:
+                            if (get_entity_by_index(GoombarioTattleInteractionID & 0x3FFF)->dataBuf.chest->itemID == -1) {
                                 msgID = MSG_EntityTattle_EmptyChest;
                             }
                             break;
@@ -351,8 +355,8 @@ ApiStatus func_802BD5D8_3174F8(Evt* script, s32 isInitialCall) {
                 }
             }
 
-            if (GoombarioGetTattleID >= 0 && (GoombarioGetTattleID & 0x2000)) {
-                D_802BDF38 = get_npc_unsafe(GoombarioGetTattleID & 0x1FFF);
+            if (GoombarioTattleInteractionID >= 0 && (GoombarioTattleInteractionID & COLLISION_WITH_NPC_BIT)) {
+                D_802BDF38 = get_npc_unsafe(GoombarioTattleInteractionID & 0x1FFF);
                 v0 = get_enemy(D_802BDF38->npcID)->tattleMsg;
                 if (v0 != 0) {
                     msgID = v0;
@@ -372,17 +376,16 @@ ApiStatus func_802BD5D8_3174F8(Evt* script, s32 isInitialCall) {
                 return ApiStatus_DONE2;
             }
 
-            temp = 0;
-            if (GoombarioGetTattleID >= 0) {
-                temp = func_802BD100_317020(GoombarioGetTattleID);
-            } else {
-                temp = 0;
+            temp = MSG_NONE;
+            if (GoombarioTattleInteractionID >= 0) {
+                temp = world_goombario_get_trigger_tattle(GoombarioTattleInteractionID);
             }
 
-            if (temp == 0) {
+            if (temp == MSG_NONE) {
                 msgID = get_current_map_settings()->tattle.msgID;
                 if (msgID != 0) {
                     if (msgID < EVT_LIMIT) {
+                        // map uses a get_tattle function
                         script->varTable[0] = ((s32(*)(void))msgID)();
                     } else {
                         script->varTable[0] = msgID;
@@ -396,8 +399,8 @@ ApiStatus func_802BD5D8_3174F8(Evt* script, s32 isInitialCall) {
             return ApiStatus_DONE2;
     }
 
-    switch (script->functionTemp[0]) {
-        case 10:
+    switch (script->USE_STATE) {
+        case USE_TATTLE_STATE_10:
             msgID = get_current_map_settings()->tattle.msgID;
             if (msgID != 0) {
                 if (msgID < EVT_LIMIT) {
@@ -409,7 +412,7 @@ ApiStatus func_802BD5D8_3174F8(Evt* script, s32 isInitialCall) {
                 return ApiStatus_DONE2;
             }
             break;
-        case 20:
+        case USE_TATTLE_STATE_20:
             v1 = get_enemy(D_802BDF38->npcID)->tattleMsg;
             if (v1 != 0) {
                 script->varTable[0] = v1;
@@ -421,13 +424,13 @@ ApiStatus func_802BD5D8_3174F8(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_802BDB30_317A50(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802BDB30_317A50) {
     PartnerActionStatus* goombarioActionStatus = &gPartnerActionStatus;
 
     set_time_freeze_mode(TIME_FREEZE_NORMAL);
 
-    if (D_802BDF64 != 0) {
-        D_802BDF64 = 0;
+    if (D_802BDF64) {
+        D_802BDF64 = FALSE;
         enable_player_input();
     }
 
@@ -436,7 +439,7 @@ ApiStatus func_802BDB30_317A50(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-EvtScript world_goombario_use_ability = {
+EvtScript EVS_GoombarioUseAbility = {
     EVT_CALL(func_802BD5D8_3174F8)
     EVT_IF_EQ(LVar0, -1)
         EVT_RETURN
@@ -446,8 +449,7 @@ EvtScript world_goombario_use_ability = {
         EVT_RETURN
     EVT_END_IF
     EVT_IF_EQ(LVar1, 0)
-        EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldGoombario_Talk,
-                 ANIM_WorldGoombario_Idle, 0, LVar0)
+        EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 0, LVar0)
     EVT_END_IF
     EVT_WAIT(1)
     EVT_CALL(func_802BDB30_317A50)
@@ -455,18 +457,22 @@ EvtScript world_goombario_use_ability = {
     EVT_END
 };
 
-ApiStatus func_802BDB84(Evt* script, s32 isInitialCall) {
+API_CALLABLE(WorldGoombarioPutAway) {
     Npc* goombario = script->owner2.npc;
 
     if (isInitialCall) {
         partner_init_put_away(goombario);
     }
 
-    return partner_put_away(goombario) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
+    if (partner_put_away(goombario)) {
+        return ApiStatus_DONE1;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
-EvtScript world_goombario_put_away = {
-    EVT_CALL(func_802BDB84)
+EvtScript EVS_GoombarioPutAway = {
+    EVT_CALL(WorldGoombarioPutAway)
     EVT_RETURN
     EVT_END
 };

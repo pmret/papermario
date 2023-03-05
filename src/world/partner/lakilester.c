@@ -167,7 +167,7 @@ EvtScript world_lakilester_update = {
     EVT_END
 };
 
-void func_802BD678_3211C8(Npc* npc) {
+void lakilester_try_cancel_tweester(Npc* npc) {
     if (TweesterTouchingPartner != NULL) {
         TweesterTouchingPartner = NULL;
         npc->flags = LakilesterTweesterPhysicsPtr->prevFlags;
@@ -270,13 +270,20 @@ s32 func_802BD99C_3214EC(Npc* partner, f32 yOffset, f32 zOffset) {
 }
 
 void func_802BDA90_3215E0(Npc* lakilester) {
-    f32 temp_f20 = lakilester->collisionRadius * 0.8f;
-    f32 temp_f0 = clamp_angle(lakilester->yaw);
-    f32 x = lakilester->pos.x;
-    f32 y = lakilester->moveToPos.y;
-    f32 z = lakilester->pos.z;
+    f32 radius = lakilester->collisionRadius * 0.8f;
+    f32 x, y, z, yaw;
 
-    if (npc_test_move_complex_with_slipping(lakilester->collisionChannel, &x, &y, &z, 0.0f, temp_f0, lakilester->collisionHeight, temp_f20)) {
+    // combine testing boilerplate
+    #define TEST_MOVE_AT_ANGLE(testFunc, angle) \
+    ( \
+        yaw = clamp_angle(angle), \
+        x = lakilester->pos.x, \
+        y = lakilester->moveToPos.y, \
+        z = lakilester->pos.z, \
+        testFunc(lakilester->collisionChannel, &x, &y, &z, 0.0f, yaw, lakilester->collisionHeight, radius) \
+    )
+
+    if (TEST_MOVE_AT_ANGLE(npc_test_move_complex_with_slipping, lakilester->yaw)) {
         lakilester->flags |= (NPC_FLAG_COLLDING_FORWARD_WITH_WORLD | NPC_FLAG_COLLDING_WITH_WORLD);
         lakilester->currentWall = NpcHitQueryColliderID;
         lakilester->pos.x = x;
@@ -285,12 +292,7 @@ void func_802BDA90_3215E0(Npc* lakilester) {
         lakilester->flags &= ~(NPC_FLAG_COLLDING_FORWARD_WITH_WORLD | NPC_FLAG_COLLDING_WITH_WORLD);
     }
 
-    temp_f0 = clamp_angle(lakilester->yaw + 45.0f);
-    x = lakilester->pos.x;
-    y = lakilester->moveToPos.y;
-    z = lakilester->pos.z;
-
-    if (npc_test_move_taller_with_slipping(lakilester->collisionChannel, &x, &y, &z, 0.0f, temp_f0, lakilester->collisionHeight, temp_f20)) {
+    if (TEST_MOVE_AT_ANGLE(npc_test_move_taller_with_slipping, lakilester->yaw + 45.0f)) {
         lakilester->pos.x = x;
         lakilester->pos.z = z;
         lakilester->flags |= NPC_FLAG_COLLDING_WITH_WORLD;
@@ -298,12 +300,7 @@ void func_802BDA90_3215E0(Npc* lakilester) {
         lakilester->flags &= ~NPC_FLAG_COLLDING_WITH_WORLD;
     }
 
-    temp_f0 = clamp_angle(lakilester->yaw - 45.0f);
-    x = lakilester->pos.x;
-    y = lakilester->moveToPos.y;
-    z = lakilester->pos.z;
-
-    if (npc_test_move_taller_with_slipping(lakilester->collisionChannel, &x, &y, &z, 0.0f, temp_f0, lakilester->collisionHeight, temp_f20)) {
+    if (TEST_MOVE_AT_ANGLE(npc_test_move_taller_with_slipping, lakilester->yaw - 45.0f)) {
         lakilester->pos.x = x;
         lakilester->pos.z = z;
         lakilester->flags |= NPC_FLAG_COLLDING_WITH_WORLD;
@@ -311,12 +308,7 @@ void func_802BDA90_3215E0(Npc* lakilester) {
         lakilester->flags &= ~NPC_FLAG_COLLDING_WITH_WORLD;
     }
 
-    temp_f0 = clamp_angle(lakilester->yaw + 45.0f + 180.0f);
-    x = lakilester->pos.x;
-    y = lakilester->moveToPos.y;
-    z = lakilester->pos.z;
-
-    if (npc_test_move_simple_with_slipping(lakilester->collisionChannel, &x, &y, &z, 0.0f, temp_f0, lakilester->collisionHeight, temp_f20)) {
+    if (TEST_MOVE_AT_ANGLE(npc_test_move_simple_with_slipping, lakilester->yaw + 45.0f + 180.0f)) {
         lakilester->flags |= NPC_FLAG_COLLDING_WITH_WORLD;
         lakilester->pos.x = x;
         lakilester->pos.z = z;
@@ -324,12 +316,7 @@ void func_802BDA90_3215E0(Npc* lakilester) {
         lakilester->flags &= ~NPC_FLAG_COLLDING_WITH_WORLD;
     }
 
-    temp_f0 = clamp_angle(lakilester->yaw - 45.0f + 180.0f);
-    x = lakilester->pos.x;
-    y = lakilester->moveToPos.y;
-    z = lakilester->pos.z;
-
-    if (npc_test_move_simple_with_slipping(lakilester->collisionChannel, &x, &y, &z, 0.0f, temp_f0, lakilester->collisionHeight, temp_f20)) {
+    if (TEST_MOVE_AT_ANGLE(npc_test_move_simple_with_slipping, lakilester->yaw - 45.0f + 180.0f)) {
         lakilester->flags |= NPC_FLAG_COLLDING_WITH_WORLD;
         lakilester->pos.x = x;
         lakilester->pos.z = z;
@@ -535,7 +522,7 @@ s32 func_802BE6A0_3221F0(f32* arg0) {
                                       &hitDirX, &hitDirZ);
 }
 
-ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
+API_CALLABLE(LakilesterUseAbility) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     Camera* camera = &gCameras[CAM_DEFAULT];
@@ -548,15 +535,16 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
     playerStatus->animFlags &= ~PA_FLAG_RIDING_PARTNER;
 
     if (isInitialCall) {
-        func_802BD678_3211C8(npc);
+        lakilester_try_cancel_tweester(npc);
         if (!(playerStatus->animFlags & PA_FLAG_CHANGING_MAP)) {
-            npc->flags = npc->flags & ~PA_FLAG_40;
+            npc->flags = npc->flags & ~PA_FLAG_PULSE_STONE_VISIBLE;
             npc->moveToPos.x = npc->pos.x;
             npc->moveToPos.y = npc->pos.y;
             npc->moveToPos.z = npc->pos.z;
 
-            if (gGameStatusPtr->keepUsingPartnerOnMapChange ||
-                (playerStatus->animFlags & PA_FLAG_PARTNER_USAGE_FORCED)) {
+            if (gGameStatusPtr->keepUsingPartnerOnMapChange
+                || (playerStatus->animFlags & PA_FLAG_PARTNER_USAGE_FORCED)
+            ) {
                 if (playerStatus->animFlags & PA_FLAG_PARTNER_USAGE_FORCED) {
                     playerStatus->animFlags &= ~PA_FLAG_PARTNER_USAGE_FORCED;
                 }
@@ -567,12 +555,12 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
 
             if (partnerActionStatus->partnerAction_unk_1 == 0) {
                 if (gGameStatusPtr->keepUsingPartnerOnMapChange == FALSE) {
-                    if (playerStatus->actionState == ACTION_STATE_RIDE ||
-                        playerStatus->actionState == ACTION_STATE_IDLE ||
-                        playerStatus->actionState == ACTION_STATE_WALK ||
-                        playerStatus->actionState == ACTION_STATE_RUN ||
-                        playerStatus->actionState == ACTION_STATE_FALLING) {
-
+                    if (playerStatus->actionState == ACTION_STATE_RIDE
+                     || playerStatus->actionState == ACTION_STATE_IDLE
+                     || playerStatus->actionState == ACTION_STATE_WALK
+                     || playerStatus->actionState == ACTION_STATE_RUN
+                     || playerStatus->actionState == ACTION_STATE_FALLING
+                    ) {
                         playerStatus->flags |= PS_FLAG_PAUSE_DISABLED;
                     } else {
                         return ApiStatus_DONE2;
@@ -622,7 +610,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
     switch (D_802BFF14) {
         case 40:
             if (playerStatus->flags & PS_FLAG_HIT_FIRE ||
-                playerStatus->inputEnabledCounter) {
+                playerStatus->inputDisabledCount) {
 
                 playerStatus->flags &= ~PS_FLAG_PAUSE_DISABLED;
                 return ApiStatus_DONE2;
@@ -643,7 +631,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             }
 
             if (playerStatus->animFlags & PA_FLAG_CHANGING_MAP) {
-                if (script->functionTemp[2] < playerStatus->inputEnabledCounter) {
+                if (script->functionTemp[2] < playerStatus->inputDisabledCount) {
                     enable_player_input();
                     D_802BFF04 = 0;
                 }
@@ -652,7 +640,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             }
 
             if (script->functionTemp[1] == 0) {
-                if (script->functionTemp[2] < playerStatus->inputEnabledCounter) {
+                if (script->functionTemp[2] < playerStatus->inputDisabledCount) {
                     enable_player_input();
                     D_802BFF04 = 0;
                     playerStatus->flags &= ~PS_FLAG_PAUSE_DISABLED;
@@ -919,8 +907,8 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
 }
 
 
-EvtScript world_lakilester_use_ability = {
-    EVT_CALL(func_802BE724_322274)
+EvtScript EVS_LakilesterUseAbility = {
+    EVT_CALL(LakilesterUseAbility)
     EVT_RETURN
     EVT_END
 };

@@ -3578,14 +3578,14 @@ enum PlayerStatusAnimFlags {
     PA_FLAG_FORCE_USE_PARTNER                = 0x00000008, ///< triggers partner use when set
     PA_FLAG_INTERACT_PROMPT_AVAILABLE        = 0x00000010, ///< ! prompt
     PA_FLAG_SPEECH_PROMPT_AVAILABLE          = 0x00000020, ///< (...) prompt
-    PA_FLAG_40                               = 0x00000040,
+    PA_FLAG_PULSE_STONE_VISIBLE              = 0x00000040, ///< The pulse stone icon is being shown
     PA_FLAG_USING_PULSE_STONE                = 0x00000080,
-    PA_FLAG_100                              = 0x00000100,
+    PA_FLAG_ISPY_VISIBLE                     = 0x00000100, ///< The I Spy icon is being shown
     PA_FLAG_RAISED_ARMS                      = 0x00000200, ///< Sets action state to ACTION_STATE_RAISE_ARMS on idle
     PA_FLAG_SHIVERING                        = 0x00000400,
     PA_FLAG_OPENED_HIDDEN_PANEL              = 0x00000800,
     PA_FLAG_USING_PEACH_PHYSICS              = 0x00001000,
-    PA_FLAG_INVISIBLE                      = 0x00002000,
+    PA_FLAG_INVISIBLE                        = 0x00002000,
     PA_FLAG_8BIT_MARIO                       = 0x00004000,
     PA_FLAG_NPC_COLLIDED                     = 0x00008000,
     PA_FLAG_SPINNING                         = 0x00010000,

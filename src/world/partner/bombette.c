@@ -226,11 +226,11 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
 
     switch (evt->functionTemp[0]) {
         case 20:
-            if ((playerStatus->inputEnabledCounter != 0) || (playerStatus->flags & PS_FLAG_JUMPING) || !(npc->flags & NPC_FLAG_GROUNDED)) {
+            if ((playerStatus->inputDisabledCount != 0) || (playerStatus->flags & PS_FLAG_JUMPING) || !(npc->flags & NPC_FLAG_GROUNDED)) {
                 return ApiStatus_DONE2;
             }
             disable_player_input();
-            evt->functionTemp[3] = playerStatus->inputEnabledCounter;
+            evt->functionTemp[3] = playerStatus->inputDisabledCount;
             D_802BE92C = 1;
             D_802BE928 = 0;
             D_802BE930 = 0;
@@ -268,7 +268,7 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
             if (npc->duration != 0) {
                 break;
             }
-            if (evt->functionTemp[3] < playerStatus->inputEnabledCounter) {
+            if (evt->functionTemp[3] < playerStatus->inputDisabledCount) {
                 disable_npc_blur(npc);
                 temp_f0 = 0;
                 evt->functionTemp[(u8)temp_f0] = 7;
