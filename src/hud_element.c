@@ -3,6 +3,11 @@
 #include "nu/nusys.h"
 #include "ld_addrs.h"
 
+#if VERSION_CN
+// TODO: remove if section is split in iQue release
+extern Addr icon_present_ROM_START;
+#endif
+
 #define MAX_HUD_CACHE_ENTRIES 192
 
 typedef struct HudElementSize {

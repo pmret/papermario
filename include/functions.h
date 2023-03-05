@@ -816,7 +816,11 @@ s32 is_actor_hp_bar_visible(Actor*);
 void sin_cos_rad(f32 rad, f32* outSinTheta, f32* outCosTheta);
 
 void load_font(s32 font);
+#if VERSION_CN
+void load_font_data(Addr offset, u32 size, void* dest);
+#else
 void load_font_data(Addr offset, u16 size, void* dest);
+#endif
 
 void* load_asset_by_name(const char* assetName, u32* decompressedSize);
 

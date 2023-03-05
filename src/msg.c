@@ -2,8 +2,22 @@
 #include "ld_addrs.h"
 #include "message_ids.h"
 #include "sprite.h"
+
+#if !VERSION_CN
+// TODO: remove if assets are dumped in iQue release
 #include "charset/postcard.png.h"
 #include "charset/letter_content_1.png.h"
+#endif
+
+#if VERSION_CN
+// TODO: remove if section is split in iQue release
+extern Addr charset_ROM_START;
+extern Addr charset_standard_OFFSET;
+extern Addr charset_standard_pal_OFFSET;
+extern Addr charset_title_OFFSET;
+extern Addr charset_credits_pal_OFFSET;
+extern Addr charset_subtitle_OFFSET;
+#endif
 
 enum RewindArrowStates {
     REWIND_ARROW_STATE_INIT = 0,
@@ -197,7 +211,12 @@ Gfx D_8014C500[] = {
 };
 
 u8 D_8014C580[] = { 50, 80, 100, 105, 100, 0, 0, 0 };
-u8 D_8014C588[] = { 105, 100, 77, 57, 40, 27, 16, 8, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+u8 D_8014C588[] = { 105, 100, 77, 57, 40, 27, 16, 8, 3, 0, 0, 0};
+#if VERSION_CN
+u32 D_8014AD24 = 2;
+#else
+u8 D_8014C594[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+#endif
 
 s32 draw_image_with_clipping(IMG_PTR raster, s32 width, s32 height, s32 fmt, s32 bitDepth, s16 posX, s16 posY, u16 clipULx,
                              u16 clipULy, u16 clipLRx, u16 clipRLy);
@@ -244,7 +263,11 @@ void clear_printers(void) {
     load_font(0);
 }
 
+#if VERSION_CN
+void load_font_data(Addr offset, u32 size, void* dest) {
+#else
 void load_font_data(Addr offset, u16 size, void* dest) {
+#endif
     u8* base = charset_ROM_START + (s32) offset;
 
     dma_copy(base, base + size, dest);
@@ -655,6 +678,9 @@ extern s32 D_802EB5C0[];
 extern s32 D_802EB5F0[];
 extern struct_D_802EB620 D_802EB620[];
 
+#if VERSION_CN
+INCLUDE_ASM(s32, "msg", msg_copy_to_print_buffer);
+#else
 void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
     u8 arg;
     u8 argQ;
@@ -1289,6 +1315,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
     printer->srcBufferPos = (u16)(s32)(srcBuf - (s32)printer->srcBuffer);
     *printBuf = MSG_CHAR_PRINT_END;
 }
+#endif
 
 void initialize_printer(MessagePrintState* printer, s32 arg1, s32 arg2) {
     s32 i;
@@ -1550,6 +1577,13 @@ s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 msgS
         return 0;
     }
 
+#if VERSION_CN
+    if (character >= 0x5F && character<=0x8F) {
+        charWidth = 16.0;
+        return charWidth * msgScale;
+    }
+#endif
+
     if (overrideCharWidth != 0) {
         charWidth = overrideCharWidth;
     } else if (flags != 0) {
@@ -1635,7 +1669,6 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
     s32 lineWidth;
     s32 charCount;
     u16 lineIndex;
-    u16 endl;
     s32 msgStyle;
     s32 functionCode;
     u8 packedScaleY;
@@ -1653,8 +1686,13 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
     u16 maxCharsPerLine;
     u16 maxLinesOnPage;
     u16 spaceCount;
+    u16 endl;
+
+    u8 c;
+    u8 prevChar;
 
     scale = 1.0f;
+    c = 0;
     lineIndex = 0;
     pageCount = 0;
     varIndex = 0;
@@ -1690,7 +1728,8 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
     lineCount = 0;
 
     do {
-        u8 c = message[i++];
+        prevChar = c;
+        c = message[i++];
         switch (c) {
             case MSG_CHAR_READ_VARIANT0:
             case MSG_CHAR_READ_VARIANT1:
@@ -1865,6 +1904,13 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
                     linesOnPage++;
                     endl = FALSE;
                 }
+
+#if VERSION_CN
+                if (prevChar >= 0x5f && prevChar <= 0x8F) {
+                    break;
+                }
+#endif
+
                 lineWidth += msg_get_print_char_width(c, font, varIndex, scale, 0, 1);
                 charCount++;
                 break;
@@ -2294,6 +2340,9 @@ void draw_message_window(MessagePrintState* printer) {
     }
 }
 
+#if VERSION_CN
+INCLUDE_ASM(s32, "msg", appendGfx_message);
+#else
 void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 additionalOffsetX, u16 additionalOffsetY,
                        u16 flag, u8 alpha) {
     SpriteRasterInfo sprRasterInfo;
@@ -3614,12 +3663,16 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
     gDPPipeSync(gMasterGfxPos++);
     D_80151338 = gMasterGfxPos;
 }
+#endif
 
 void msg_reset_gfx_state(void) {
     gDPPipeSync(gMasterGfxPos++);
     gSPDisplayList(gMasterGfxPos++, D_8014C500);
 }
 
+#if VERSION_CN
+INCLUDE_ASM(s32, "msg", msg_draw_char);
+#else
 void msg_draw_char(MessagePrintState* printer, MessageDrawState* drawState, s32 charIndex, s32 palette, s32 posX, s32 posY) {
     MessageCharset* messageCharset = gMsgCharsets[drawState->font];
     s32 fontVariant = drawState->fontVariant;
@@ -3696,6 +3749,7 @@ void msg_draw_char(MessagePrintState* printer, MessageDrawState* drawState, s32 
     gSPTextureRectangle(gMasterGfxPos++, ulx * 4, uly * 4, lrx * 4, lry * 4, G_TX_RENDERTILE, texOffsetX, texOffsetY,
                         dsdx, dtdy);
 }
+#endif
 
 void msg_draw_prim_rect(u8 r, u8 g, u8 b, u8 a, u16 posX, u16 posY, u16 sizeX, u16 sizeY) {
     u16 lrX = posX + sizeX;
