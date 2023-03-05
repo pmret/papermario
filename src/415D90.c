@@ -1955,25 +1955,13 @@ s32 func_802A4A54(void) {
 
 static const f32 padding4 = 0.0f;
 
-// getting there but needs work
-#ifdef NON_EQUIVALENT
 void func_802A5290(void* data, s32 x, s32 y) {
-    s16 temp_s1;
-    s16 temp_s1_3;
+    s32 var_t0;
     s32 temp_f6;
-    s32 temp_f6_2;
-    s32 phi_s1;
-    s32 phi_s1_2;
-    s32 t1;
-    s32 xt;
-
-    s32 lry;
-    s32 yOffset;
-    s32 uly;
-    s32 xTemp;
+    s32 xPos, yPos;
+    s32 idx;
     s32 id;
     s32 i;
-    s32 j;
 
     switch (BattleSubmenuStratsState) {
         case -1:
@@ -1983,53 +1971,64 @@ void func_802A5290(void* data, s32 x, s32 y) {
         case 30:
         case 40:
         case 41:
-            temp_s1 = -D_802AD608 * 13;
-            temp_f6 = (temp_s1 - D_802AD60C) * 0.5;
-            D_802AD60C += temp_f6;
-            if (temp_f6 == 0) {
-                D_802AD60C = temp_s1;
+            yPos = -D_802AD608 * 13;
+            var_t0 = D_802AD60C;
+            temp_f6 = (yPos - var_t0) * 0.5;
+            if (temp_f6 != 0) {
+                var_t0 += temp_f6;
+            } else {
+                var_t0 = yPos;
             }
-            t1 = D_802AD60A * 13;
+            D_802AD60C = var_t0;
 
-            xTemp = x + 4;
-            uly = y + 18;
-            yOffset = 1 + t1;
-            lry = yOffset + uly;
-            gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, xTemp, uly, x + 142, lry);
+            xPos = x + 4;
+            yPos = y + 18;
+            var_t0 = yPos + 1 + (D_802AD60A * 13);
+            gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, xPos, yPos, x + 142, var_t0);
 
-            xTemp = x + 33;
-            phi_s1 = y + (D_802AD60C + 19);
-            for (j = 0; j < D_802AD66C; phi_s1 += 13, j++) {
+            xPos = x + 33;
+            yPos = y + 19 + D_802AD60C;
+
+            idx = 0;
+            for (i = 0; i < D_802AD66C; i++, idx++) {
                 s32 palette = D_802AD614;
 
-                if (D_802AD678[j] == 5 && is_ability_active(ABILITY_QUICK_CHANGE)) {
+                if (D_802AD678[i] == 5 && is_ability_active(ABILITY_QUICK_CHANGE)) {
                     palette = MSG_PAL_37;
                 }
-                if (D_802AD690[j] == 0) {
+                if (D_802AD690[idx] == 0) {
                     palette = MSG_PAL_0B;
                 }
-                draw_msg(D_802AD658[j], xTemp, phi_s1, D_802AD624, palette, DRAW_MSG_STYLE_MENU);
+                draw_msg(D_802AD658[idx], xPos, yPos, D_802AD624, palette, DRAW_MSG_STYLE_MENU);
+                yPos += 13;
             }
 
-            xTemp = x + 24;
-            phi_s1 = D_802AD60C + y + 24;
-            for (i = 0; i < D_802AD66C; phi_s1 += 13, i++) {
-                id = D_802AD628[i];
-                hud_element_set_render_pos(id, xTemp, phi_s1);
+            xPos = x + 24;
+            yPos = D_802AD60C + y + 24;
+
+            idx = 0;
+            for (i = 0; i < D_802AD66C; i++, idx++) {
+                id = D_802AD628[idx];
+                hud_element_set_render_pos(id, xPos, yPos);
                 hud_element_set_alpha(id, D_802AD624);
                 hud_element_draw_without_clipping(id);
+                yPos += 13;
             }
 
-            temp_s1_3 = (D_802AD605 - D_802AD608) * 13;
-            temp_f6_2 = (f64) (temp_s1_3 - D_802AD60E);
-            if (temp_f6_2 != 0) {
-                D_802AD60E += temp_f6_2;
+            yPos = (D_802AD605 - D_802AD608) * 13;
+            var_t0 = D_802AD60E;
+            temp_f6 = (yPos - var_t0) * 1.0;
+            xPos = x + 10;
+            if (temp_f6 != 0) {
+                var_t0 += temp_f6;
             } else {
-                D_802AD60E = temp_s1_3;
+                var_t0 = yPos;
             }
+            D_802AD60E = var_t0;
+            yPos = y + 26 + D_802AD60E;
 
             id = D_802AD618;
-            hud_element_set_render_pos(id, x + 10, y + (D_802AD60E + 26));
+            hud_element_set_render_pos(id, xPos, yPos);
             hud_element_set_alpha(id, D_802AD624);
             hud_element_draw_clipped(id);
 
@@ -2039,20 +2038,15 @@ void func_802A5290(void* data, s32 x, s32 y) {
                 hud_element_set_alpha(id, D_802AD624);
                 hud_element_draw_clipped(id);
             }
-
             if (D_802AD609 < D_802AD66C) {
                 id = GreenArrowDownID;
                 hud_element_set_render_pos(id, x + 67, y + 100);
                 hud_element_set_alpha(id, D_802AD624);
                 hud_element_draw_clipped(id);
             }
-
             break;
     }
 }
-#else
-INCLUDE_ASM(s32, "415D90", func_802A5290);
-#endif
 
 void func_802A56F8(void* data, s32 x, s32 y) {
     draw_msg(MSG_Menus_Strategies, x + 15, y + 2, D_802AD624, MSG_PAL_33, DRAW_MSG_STYLE_MENU);
