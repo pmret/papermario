@@ -204,7 +204,7 @@ def get_hashes(bytes: Bytes, window_size: int) -> list[str]:
 
 
 def group_matches(query: str, target: str, matches: list[Match], window_size: int,
-                  min: Optional[int], max: Optional[int]) -> list[Result]:
+                  min: Optional[int], max: Optional[int], contains: Optional[int]) -> list[Result]:
     ret = []
 
     matches.sort(key=lambda m: m.query_offset)
@@ -226,6 +226,8 @@ def group_matches(query: str, target: str, matches: list[Match], window_size: in
         if min is not None and query_start + length < min:
             continue
         if max is not None and query_start > max:
+            continue
+        if contains is not None and (query_start > contains or query_start + length < contains):
             continue
 
         ret.append(Result(query, target, query_start, target_start, length))
@@ -347,7 +349,7 @@ def get_c_range(insn_start: int, insn_end: int, line_numbers: Dict[int, int]) ->
     return range
 
 
-def get_matches(query: str, window_size: int, min: Optional[int], max: Optional[int]):
+def get_matches(query: str, window_size: int, min: Optional[int], max: Optional[int], contains: Optional[int]):
     query_bytes: Optional[Bytes] = get_symbol_bytes(query)
 
     if query_bytes is None:
@@ -373,7 +375,7 @@ def get_matches(query: str, window_size: int, min: Optional[int], max: Optional[
         if not matches:
             continue
 
-        results = group_matches(query, symbol, matches, window_size, min, max)
+        results = group_matches(query, symbol, matches, window_size, min, max, contains)
         if not results:
             continue
 
@@ -413,8 +415,8 @@ def get_matches(query: str, window_size: int, min: Optional[int], max: Optional[
     return OrderedDict(sorted(ret.items(), key=lambda kv: kv[1], reverse=True))
 
 
-def do_query(query, window_size, min, max):
-    get_matches(query, window_size, min, max)
+def do_query(query, window_size, min, max, contains):
+    get_matches(query, window_size, min, max, contains)
 
 
 parser = argparse.ArgumentParser(
@@ -431,6 +433,7 @@ parser.add_argument(
 )
 parser.add_argument("--min", help="lower bound of instruction for matches against query", type=int, required=False)
 parser.add_argument("--max", help="upper bound of instruction for matches against query", type=int, required=False)
+parser.add_argument("--contains", help="All matches must contain this number'th instruction from the query", type=int, required=False)
 
 args = parser.parse_args()
 
@@ -440,4 +443,4 @@ if __name__ == "__main__":
     func_sizes = get_func_sizes()
     syms = parse_map()
 
-    do_query(args.query, args.window_size, args.min, args.max)
+    do_query(args.query, args.window_size, args.min, args.max, args.contains)
