@@ -7,14 +7,14 @@
 
 extern SpeechBubbleData* SpeechBubblePtr;
 
-BSS s32 D_802BDF30;
-BSS s32 D_802BDF34;
-BSS Npc* D_802BDF38;
-BSS s32 D_802BDF3C;
+BSS s32 TattleHadSpeechPrompt;
+BSS s32 TattleHadInteractPrompt;
+BSS Npc* TattleInteractNpc;
+BSS s32 D_802BDF3C; // unused (padding?)
 BSS TweesterPhysics GoombarioTweesterPhysics;
-BSS s32 D_802BDF5C;
+BSS s32 D_802BDF5C; // unused (padding?)
 BSS s32 GoombarioTattleInteractionID;
-BSS s32 D_802BDF64;
+BSS s32 WorldGoombarioTattleActive;
 
 s32 EntityTattles[] = {
     ENTITY_TYPE_HAMMER1_BLOCK,        MSG_EntityTattle_HammerBlock1_CanBreak,
@@ -41,8 +41,8 @@ s32 EntityTattles[] = {
     ENTITY_TYPE_PADLOCK_RED_FRAME,    MSG_EntityTattle_PadLock,
     ENTITY_TYPE_PADLOCK_RED_FACE,     MSG_EntityTattle_PadLock,
     ENTITY_TYPE_PADLOCK_BLUE_FACE,    MSG_EntityTattle_PadLock,
-    ENTITY_TYPE_SIGNPOST,             MSG_EntityTattle_0012,
-    ENTITY_TYPE_RED_ARROW_SIGNS,      MSG_EntityTattle_Sign,
+    ENTITY_TYPE_SIGNPOST,             MSG_EntityTattle_SignPost,
+    ENTITY_TYPE_RED_ARROW_SIGNS,      MSG_EntityTattle_ArrowSign,
     ENTITY_TYPE_BOMBABLE_ROCK,        MSG_EntityTattle_BombableRock,
     ENTITY_TYPE_CHEST,                MSG_EntityTattle_Chest,
     ENTITY_TYPE_WOODEN_CRATE,         MSG_EntityTattle_WoodenCrate_CantBreak,
@@ -215,80 +215,83 @@ s32 world_goombario_can_pause(Npc* goombario) {
     return TRUE;
 }
 
-API_CALLABLE(func_802BD5D8_3174F8) {
+API_CALLABLE(WorldGoombarioSelectTattleMsg) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* goombario = script->owner2.npc;
     s32 msgID;
     s32 temp; // TODO required to match (this temp needs to be used in two places for different things)
-    s32 v1;
+    s32 npcMsgID;
     s32 v0;
     s32 i;
 
     #define USE_STATE functionTemp[0]
+    #define VAR_MSG   varTable[0]
+    #define VAR_SKIP  varTable[1]
     enum {
-        USE_TATTLE_STATE_40         = 40,
-        USE_TATTLE_STATE_41         = 41,
-        USE_TATTLE_STATE_10         = 10,
-        USE_TATTLE_STATE_20         = 20,
-        USE_TATTLE_STATE_00         = 0,
-        USE_TATTLE_STATE_01         = 1,
+        USE_TATTLE_INIT         = 40,
+        USE_TATTLE_DELAY        = 41,
+        USE_TATTLE_FACE_PLAYER  = 0,
+        USE_TATTLE_CHOOSE       = 1,
+        USE_TATTLE_FORCE_MAP    = 10,
+        USE_TATTLE_FORCE_NPC    = 20,
     };
 
     if (isInitialCall) {
         goombario_try_cancel_tweester(goombario);
-        D_802BDF64 = FALSE;
-        D_802BDF30 = 0;
-        D_802BDF34 = 0;
+        WorldGoombarioTattleActive = FALSE;
+        TattleHadSpeechPrompt = FALSE;
+        TattleHadInteractPrompt = FALSE;
         if (playerStatus->animFlags & PA_FLAG_SPEECH_PROMPT_AVAILABLE) {
-            D_802BDF30 = 1;
-            D_802BDF38 = SpeechBubblePtr->encounteredNPC;
+            TattleHadSpeechPrompt = TRUE;
+            TattleInteractNpc = SpeechBubblePtr->encounteredNPC;
         }
         if (playerStatus->animFlags & PA_FLAG_INTERACT_PROMPT_AVAILABLE) {
-            D_802BDF34 = 1;
+            TattleHadInteractPrompt = TRUE;
         }
-        script->USE_STATE = USE_TATTLE_STATE_40;
+        script->USE_STATE = USE_TATTLE_INIT;
     }
 
     switch (script->USE_STATE) {
-        case USE_TATTLE_STATE_40:
+        case USE_TATTLE_INIT:
             if (!(goombario->flags & NPC_FLAG_GROUNDED) || playerStatus->inputDisabledCount != 0) {
-                script->varTable[0] = -1;
+                script->VAR_MSG = -1;
                 return ApiStatus_DONE2;
             }
             script->functionTemp[1] = 3;
             disable_player_input();
-            D_802BDF64 = TRUE;
+            WorldGoombarioTattleActive = TRUE;
             script->functionTemp[2] = playerStatus->inputDisabledCount;
             script->USE_STATE++;
             break;
-        case USE_TATTLE_STATE_41:
+        case USE_TATTLE_DELAY:
             if (script->functionTemp[1] != 0) {
                 script->functionTemp[1]--;
             } else {
                 if (script->functionTemp[2] < playerStatus->inputDisabledCount) {
-                    script->varTable[0] = -1;
+                    script->VAR_MSG = -1;
                     enable_player_input();
-                    D_802BDF64 = FALSE;
+                    WorldGoombarioTattleActive = FALSE;
                     return ApiStatus_DONE2;
                 }
-                script->USE_STATE = USE_TATTLE_STATE_00;
+                script->USE_STATE = USE_TATTLE_FACE_PLAYER;
             }
             break;
-        case USE_TATTLE_STATE_00:
+        case USE_TATTLE_FACE_PLAYER:
             set_time_freeze_mode(1);
             playerStatus->flags &= ~PS_FLAG_HAS_CONVERSATION_NPC;
             goombario->currentAnim = ANIM_WorldGoombario_Idle;
             goombario->yaw = clamp_angle(gCameras[CAM_DEFAULT].currentYaw + playerStatus->spriteFacingAngle - 90.0f);
-            gPartnerActionStatus.partnerActionState = 1;
+            gPartnerActionStatus.partnerActionState = PARTNER_ACTION_USE;
             close_status_menu();
-            if (D_802BDF30 != 0) {
-                script->varTable[0] = 0;
-                script->USE_STATE = 20;
+            if (TattleHadSpeechPrompt) {
+                script->VAR_MSG = 0;
+                script->USE_STATE = USE_TATTLE_FORCE_NPC;
                 break;
             }
-            script->USE_STATE = USE_TATTLE_STATE_01;
+            script->USE_STATE = USE_TATTLE_CHOOSE;
             // fallthrough
-        case USE_TATTLE_STATE_01:
+        case USE_TATTLE_CHOOSE:
+            // check for entity tattle
             if (GoombarioTattleInteractionID >= 0 && (GoombarioTattleInteractionID & COLLISION_WITH_ENTITY_BIT)) {
                 temp = get_entity_type(GoombarioTattleInteractionID);
                 msgID = -1;
@@ -346,77 +349,81 @@ API_CALLABLE(func_802BD5D8_3174F8) {
                             break;
                     }
                     if (msgID != -1) {
-                        script->varTable[0] = msgID;
+                        script->VAR_MSG = msgID;
                     } else {
-                        script->varTable[0] = EntityTattles[2 * i + 1];
+                        script->VAR_MSG = EntityTattles[2 * i + 1];
                     }
-                    script->varTable[1] = 0;
+                    script->VAR_SKIP = FALSE;
                     return ApiStatus_DONE2;
                 }
             }
 
+            // check for NPC tattle
             if (GoombarioTattleInteractionID >= 0 && (GoombarioTattleInteractionID & COLLISION_WITH_NPC_BIT)) {
-                D_802BDF38 = get_npc_unsafe(GoombarioTattleInteractionID & 0x1FFF);
-                v0 = get_enemy(D_802BDF38->npcID)->tattleMsg;
+                TattleInteractNpc = get_npc_unsafe(GoombarioTattleInteractionID & 0x1FFF);
+                v0 = get_enemy(TattleInteractNpc->npcID)->tattleMsg;
                 if (v0 != 0) {
                     msgID = v0;
                     if (msgID < EVT_LIMIT) {
-                        script->varTable[0] = ((s32(*)(void))msgID)();
+                        script->VAR_MSG = ((s32(*)(void))msgID)();
                     } else {
-                        script->varTable[0] = msgID;
-                        script->varTable[1] = 0;
+                        script->VAR_MSG = msgID;
+                        script->VAR_SKIP = FALSE;
                     }
                 }
                 return ApiStatus_DONE2;
             }
 
-            if (D_802BDF34 != 0) {
-                script->varTable[0] = MSG_EntityTattle_25;
-                script->varTable[1] = 0;
+            // generic interact tattle
+            if (TattleHadInteractPrompt) {
+                script->VAR_MSG = MSG_EntityTattle_Interact;
+                script->VAR_SKIP = FALSE;
                 return ApiStatus_DONE2;
             }
 
+            // check for custom trigger tattle
             temp = MSG_NONE;
             if (GoombarioTattleInteractionID >= 0) {
                 temp = world_goombario_get_trigger_tattle(GoombarioTattleInteractionID);
             }
 
+            // check map tattle
             if (temp == MSG_NONE) {
                 msgID = get_current_map_settings()->tattle.msgID;
                 if (msgID != 0) {
                     if (msgID < EVT_LIMIT) {
                         // map uses a get_tattle function
-                        script->varTable[0] = ((s32(*)(void))msgID)();
+                        script->VAR_MSG = ((s32(*)(void))msgID)();
                     } else {
-                        script->varTable[0] = msgID;
-                        script->varTable[1] = 0;
+                        script->VAR_MSG = msgID;
+                        script->VAR_SKIP = FALSE;
                     }
                 }
             } else {
-                script->varTable[0] = temp;
-                script->varTable[1] = 1;
+                script->VAR_MSG = temp;
+                script->VAR_SKIP = TRUE;
             }
             return ApiStatus_DONE2;
     }
 
     switch (script->USE_STATE) {
-        case USE_TATTLE_STATE_10:
+        case USE_TATTLE_FORCE_MAP:
             msgID = get_current_map_settings()->tattle.msgID;
             if (msgID != 0) {
                 if (msgID < EVT_LIMIT) {
-                    script->varTable[0] = ((s32(*)(void))msgID)();
+                    script->VAR_MSG = ((s32(*)(void))msgID)();
                 } else {
-                    script->varTable[0] = msgID;
-                    script->varTable[1] = 0;
+                    script->VAR_MSG = msgID;
+                    script->VAR_SKIP = FALSE;
                 }
                 return ApiStatus_DONE2;
             }
             break;
-        case USE_TATTLE_STATE_20:
-            v1 = get_enemy(D_802BDF38->npcID)->tattleMsg;
-            if (v1 != 0) {
-                script->varTable[0] = v1;
-                script->varTable[1] = 0;
+        case USE_TATTLE_FORCE_NPC:
+            npcMsgID = get_enemy(TattleInteractNpc->npcID)->tattleMsg;
+            if (npcMsgID != MSG_NONE) {
+                script->VAR_MSG = npcMsgID;
+                script->VAR_SKIP = FALSE;
                 return ApiStatus_DONE2;
             }
             break;
@@ -424,13 +431,13 @@ API_CALLABLE(func_802BD5D8_3174F8) {
     return ApiStatus_BLOCK;
 }
 
-API_CALLABLE(func_802BDB30_317A50) {
+API_CALLABLE(WorldGoombarioTattleEnd) {
     PartnerActionStatus* goombarioActionStatus = &gPartnerActionStatus;
 
     set_time_freeze_mode(TIME_FREEZE_NORMAL);
 
-    if (D_802BDF64) {
-        D_802BDF64 = FALSE;
+    if (WorldGoombarioTattleActive) {
+        WorldGoombarioTattleActive = FALSE;
         enable_player_input();
     }
 
@@ -440,19 +447,23 @@ API_CALLABLE(func_802BDB30_317A50) {
 }
 
 EvtScript EVS_GoombarioUseAbility = {
-    EVT_CALL(func_802BD5D8_3174F8)
+    EVT_CALL(WorldGoombarioSelectTattleMsg)
+    // abort without cleanup if failed to init
     EVT_IF_EQ(LVar0, -1)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(func_802BDB30_317A50)
+    // abort if no tattle message is available
+    EVT_IF_EQ(LVar0, MSG_NONE)
+        EVT_CALL(WorldGoombarioTattleEnd)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_EQ(LVar1, 0)
+    // show message if VAR_SKIP is FALSE
+    EVT_IF_EQ(LVar1, FALSE)
         EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 0, LVar0)
     EVT_END_IF
     EVT_WAIT(1)
-    EVT_CALL(func_802BDB30_317A50)
+    // cleanup
+    EVT_CALL(WorldGoombarioTattleEnd)
     EVT_RETURN
     EVT_END
 };
