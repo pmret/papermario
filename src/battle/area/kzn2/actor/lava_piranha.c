@@ -118,9 +118,9 @@ extern StaticAnimatorNode* N(AnimModel_SideHeadVine)[];
 extern StaticAnimatorNode* N(AnimModel_ExtraVine)[];
 extern AnimScript N(anim1_8021A364);
 
-extern s32 b_area_kzn2_lava_bud_idleAnimations_fiery[];
+extern s32 b_area_kzn2_lava_bud_IdleAnimations_fiery[];
 extern s32 N(DefenseTable_fiery)[];
-extern s32 b_area_kzn2_lava_bud_defenseTable_fiery[];
+extern s32 b_area_kzn2_lava_bud_DefenseTable_fiery[];
 
 API_CALLABLE(SetAnimatorFlags);
 API_CALLABLE(GetAnimatedPositionByTreeIndex);
@@ -1538,15 +1538,15 @@ EvtScript N(onDeath) = {
         EVT_CALL(SetActorVar, ACTOR_ENEMY1, 8, ANIM_LavaBud_Anim0B)
         EVT_CALL(SetActorVar, ACTOR_ENEMY2, 7, ANIM_LavaBud_Anim04)
         EVT_CALL(SetActorVar, ACTOR_ENEMY2, 8, ANIM_LavaBud_Anim0B)
-        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(b_area_kzn2_lava_bud_idleAnimations_fiery))
-        EVT_CALL(SetIdleAnimations, ACTOR_ENEMY1, 1, EVT_PTR(b_area_kzn2_lava_bud_idleAnimations_fiery))
-        EVT_CALL(SetIdleAnimations, ACTOR_ENEMY2, 1, EVT_PTR(b_area_kzn2_lava_bud_idleAnimations_fiery))
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(b_area_kzn2_lava_bud_IdleAnimations_fiery))
+        EVT_CALL(SetIdleAnimations, ACTOR_ENEMY1, 1, EVT_PTR(b_area_kzn2_lava_bud_IdleAnimations_fiery))
+        EVT_CALL(SetIdleAnimations, ACTOR_ENEMY2, 1, EVT_PTR(b_area_kzn2_lava_bud_IdleAnimations_fiery))
         EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable_fiery)))
         EVT_CALL(SetDefenseTable, ACTOR_SELF, 2, EVT_PTR(N(DefenseTable_fiery)))
-        EVT_CALL(SetDefenseTable, ACTOR_ENEMY1, 1, EVT_PTR(b_area_kzn2_lava_bud_defenseTable_fiery))
-        EVT_CALL(SetDefenseTable, ACTOR_ENEMY1, 2, EVT_PTR(b_area_kzn2_lava_bud_defenseTable_fiery))
-        EVT_CALL(SetDefenseTable, ACTOR_ENEMY2, 1, EVT_PTR(b_area_kzn2_lava_bud_defenseTable_fiery))
-        EVT_CALL(SetDefenseTable, ACTOR_ENEMY2, 2, EVT_PTR(b_area_kzn2_lava_bud_defenseTable_fiery))
+        EVT_CALL(SetDefenseTable, ACTOR_ENEMY1, 1, EVT_PTR(b_area_kzn2_lava_bud_DefenseTable_fiery))
+        EVT_CALL(SetDefenseTable, ACTOR_ENEMY1, 2, EVT_PTR(b_area_kzn2_lava_bud_DefenseTable_fiery))
+        EVT_CALL(SetDefenseTable, ACTOR_ENEMY2, 1, EVT_PTR(b_area_kzn2_lava_bud_DefenseTable_fiery))
+        EVT_CALL(SetDefenseTable, ACTOR_ENEMY2, 2, EVT_PTR(b_area_kzn2_lava_bud_DefenseTable_fiery))
         EVT_CALL(SetPartImmunityBits, ACTOR_SELF, 1, ELEMENT_FIRE, 1)
         EVT_CALL(SetPartImmunityBits, ACTOR_SELF, 2, ELEMENT_FIRE, 1)
         EVT_CALL(SetPartImmunityBits, ACTOR_ENEMY1, 1, ELEMENT_FIRE, 1)
@@ -1888,9 +1888,9 @@ EvtScript N(ignite) = {
             EVT_SUB(LVar2, 3)
             EVT_PLAY_EFFECT(EFFECT_FLAME, 1, LVar3, LVar4, LVar2, EVT_FLOAT(0.3), LVarA, 0)
             EVT_CALL(SetActorVar, ACTOR_ENEMY1, 6, LVarA)
-            EVT_CALL(SetIdleAnimations, ACTOR_ENEMY1, 1, EVT_PTR(b_area_kzn2_lava_bud_idleAnimations_fiery))
-            EVT_CALL(SetDefenseTable, ACTOR_ENEMY1, 1, EVT_PTR(b_area_kzn2_lava_bud_defenseTable_fiery))
-            EVT_CALL(SetDefenseTable, ACTOR_ENEMY1, 2, EVT_PTR(b_area_kzn2_lava_bud_defenseTable_fiery))
+            EVT_CALL(SetIdleAnimations, ACTOR_ENEMY1, 1, EVT_PTR(b_area_kzn2_lava_bud_IdleAnimations_fiery))
+            EVT_CALL(SetDefenseTable, ACTOR_ENEMY1, 1, EVT_PTR(b_area_kzn2_lava_bud_DefenseTable_fiery))
+            EVT_CALL(SetDefenseTable, ACTOR_ENEMY1, 2, EVT_PTR(b_area_kzn2_lava_bud_DefenseTable_fiery))
             EVT_CALL(SetPartEventBits, ACTOR_ENEMY1, 1, ACTOR_EVENT_FLAG_FIREY, TRUE)
             EVT_CALL(SetPartEventBits, ACTOR_ENEMY1, 2, ACTOR_EVENT_FLAG_FIREY, TRUE)
             EVT_CALL(SetActorVar, ACTOR_ENEMY1, 7, ANIM_LavaBud_Anim04)
@@ -1909,9 +1909,9 @@ EvtScript N(ignite) = {
             EVT_SUB(LVar2, 3)
             EVT_PLAY_EFFECT(EFFECT_FLAME, 1, LVar3, LVar4, LVar2, EVT_FLOAT(0.3), LVarA, 0)
             EVT_CALL(SetActorVar, ACTOR_ENEMY2, 6, LVarA)
-            EVT_CALL(SetIdleAnimations, ACTOR_ENEMY2, 1, EVT_PTR(b_area_kzn2_lava_bud_idleAnimations_fiery))
-            EVT_CALL(SetDefenseTable, ACTOR_ENEMY2, 1, EVT_PTR(b_area_kzn2_lava_bud_defenseTable_fiery))
-            EVT_CALL(SetDefenseTable, ACTOR_ENEMY2, 2, EVT_PTR(b_area_kzn2_lava_bud_defenseTable_fiery))
+            EVT_CALL(SetIdleAnimations, ACTOR_ENEMY2, 1, EVT_PTR(b_area_kzn2_lava_bud_IdleAnimations_fiery))
+            EVT_CALL(SetDefenseTable, ACTOR_ENEMY2, 1, EVT_PTR(b_area_kzn2_lava_bud_DefenseTable_fiery))
+            EVT_CALL(SetDefenseTable, ACTOR_ENEMY2, 2, EVT_PTR(b_area_kzn2_lava_bud_DefenseTable_fiery))
             EVT_CALL(SetPartEventBits, ACTOR_ENEMY2, 1, ACTOR_EVENT_FLAG_FIREY, TRUE)
             EVT_CALL(SetPartEventBits, ACTOR_ENEMY2, 2, ACTOR_EVENT_FLAG_FIREY, TRUE)
             EVT_CALL(SetActorVar, ACTOR_ENEMY2, 7, ANIM_LavaBud_Anim04)
