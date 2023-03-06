@@ -203,7 +203,7 @@ ActorBlueprint NAMESPACE = {
 };
 
 #include "common/StartRumbleWithParams.inc.c"
-#include "common/StartEnemyDrainGFX.inc.c"
+#include "common/EnemyDrainGFX.inc.c"
 
 EvtScript N(init) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))

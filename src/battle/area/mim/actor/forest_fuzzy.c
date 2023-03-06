@@ -292,7 +292,7 @@ EvtScript N(80218C48) = {
     EVT_END
 };
 
-#include "common/StartEnemyDrainGFX.inc.c"
+#include "common/EnemyDrainGFX.inc.c"
 
 EvtScript N(80219054) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)

@@ -294,7 +294,7 @@ EvtScript N(divide) = {
     EVT_END
 };
 
-#include "common/StartEnemyDrainGFX.inc.c"
+#include "common/EnemyDrainGFX.inc.c"
 
 EvtScript N(leechAttack) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
