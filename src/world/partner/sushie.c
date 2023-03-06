@@ -733,8 +733,8 @@ ApiStatus SushieUpdate(Evt* script, s32 isInitialCall) {
     }
 
     switch (SushieTweesterPhysicsPtr->state) {
-        case 0:
-            SushieTweesterPhysicsPtr->state = 1;
+        case TWEESTER_PARTNER_INIT:
+            SushieTweesterPhysicsPtr->state++;
             SushieTweesterPhysicsPtr->prevFlags = sushie->flags;
             SushieTweesterPhysicsPtr->radius = fabsf(dist2D(sushie->pos.x, sushie->pos.z,
                                                      entity->position.x, entity->position.z));
@@ -744,7 +744,7 @@ ApiStatus SushieUpdate(Evt* script, s32 isInitialCall) {
             SushieTweesterPhysicsPtr->countdown = 120;
             sushie->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
             sushie->flags &= ~NPC_FLAG_GRAVITY;
-        case 1:
+        case TWEESTER_PARTNER_ATTRACT:
             sin_cos_rad(DEG_TO_RAD(SushieTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
             sushie->pos.x = entity->position.x + (sinAngle * SushieTweesterPhysicsPtr->radius);
             sushie->pos.z = entity->position.z - (cosAngle * SushieTweesterPhysicsPtr->radius);
@@ -775,17 +775,17 @@ ApiStatus SushieUpdate(Evt* script, s32 isInitialCall) {
                 SushieTweesterPhysicsPtr->state++;
             }
             break;
-        case 2:
+        case TWEESTER_PARTNER_HOLD:
             sushie->flags = SushieTweesterPhysicsPtr->prevFlags;
             SushieTweesterPhysicsPtr->countdown = 30;
             SushieTweesterPhysicsPtr->state++;
             break;
-        case 3:
+        case TWEESTER_PARTNER_RELEASE:
             partner_walking_update_player_tracking(sushie);
             partner_walking_update_motion(sushie);
 
             if (--SushieTweesterPhysicsPtr->countdown == 0) {
-                SushieTweesterPhysicsPtr->state = 0;
+                SushieTweesterPhysicsPtr->state = TWEESTER_PARTNER_INIT;
                 TweesterTouchingPartner = NULL;
             }
             break;
@@ -804,7 +804,7 @@ void func_802BF920_320690(Npc* sushie) {
     if (TweesterTouchingPartner != NULL) {
         TweesterTouchingPartner = NULL;
         sushie->flags = SushieTweesterPhysicsPtr->prevFlags;
-        SushieTweesterPhysicsPtr->state = 0;
+        SushieTweesterPhysicsPtr->state = TWEESTER_PARTNER_INIT;
         partner_clear_player_tracking(sushie);
     }
 }

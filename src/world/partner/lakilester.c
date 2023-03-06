@@ -102,8 +102,8 @@ ApiStatus func_802BD2D4_320E24(Evt* script, s32 isInitialCall) {
     }
 
     switch (LakilesterTweesterPhysicsPtr->state) {
-        case 0:
-            LakilesterTweesterPhysicsPtr->state = 1;
+        case TWEESTER_PARTNER_INIT:
+            LakilesterTweesterPhysicsPtr->state++;
             LakilesterTweesterPhysicsPtr->prevFlags = lakilester->flags;
             LakilesterTweesterPhysicsPtr->radius = fabsf(dist2D(lakilester->pos.x, lakilester->pos.z, entity->position.x, entity->position.z));
             LakilesterTweesterPhysicsPtr->angle = atan2(entity->position.x, entity->position.z, lakilester->pos.x, lakilester->pos.z);
@@ -112,7 +112,7 @@ ApiStatus func_802BD2D4_320E24(Evt* script, s32 isInitialCall) {
             LakilesterTweesterPhysicsPtr->countdown = 120;
             lakilester->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
             lakilester->flags &= ~NPC_FLAG_GRAVITY;
-        case 1:
+        case TWEESTER_PARTNER_ATTRACT:
             sin_cos_rad(DEG_TO_RAD(LakilesterTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
             lakilester->pos.x = entity->position.x + (sinAngle * LakilesterTweesterPhysicsPtr->radius);
             lakilester->pos.z = entity->position.z - (cosAngle * LakilesterTweesterPhysicsPtr->radius);
@@ -143,17 +143,17 @@ ApiStatus func_802BD2D4_320E24(Evt* script, s32 isInitialCall) {
                 LakilesterTweesterPhysicsPtr->state++;
             }
             break;
-        case 2:
+        case TWEESTER_PARTNER_HOLD:
             lakilester->flags = LakilesterTweesterPhysicsPtr->prevFlags;
             LakilesterTweesterPhysicsPtr->countdown = 30;
             LakilesterTweesterPhysicsPtr->state++;
             break;
-        case 3:
+        case TWEESTER_PARTNER_RELEASE:
             partner_flying_update_player_tracking(lakilester);
             partner_flying_update_motion(lakilester);
 
             if (--LakilesterTweesterPhysicsPtr->countdown == 0) {
-                LakilesterTweesterPhysicsPtr->state = 0;
+                LakilesterTweesterPhysicsPtr->state = TWEESTER_PARTNER_INIT;
                 TweesterTouchingPartner = NULL;
             }
             break;
@@ -171,7 +171,7 @@ void lakilester_try_cancel_tweester(Npc* npc) {
     if (TweesterTouchingPartner != NULL) {
         TweesterTouchingPartner = NULL;
         npc->flags = LakilesterTweesterPhysicsPtr->prevFlags;
-        LakilesterTweesterPhysicsPtr->state = 0;
+        LakilesterTweesterPhysicsPtr->state = TWEESTER_PARTNER_INIT;
         partner_clear_player_tracking(npc);
     }
 }

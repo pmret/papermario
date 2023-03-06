@@ -127,8 +127,8 @@ ApiStatus WattUpdate(Evt* script, s32 isInitialCall) {
         }
 
         switch (WattTweesterPhysicsPtr->state) {
-            case 0:
-                WattTweesterPhysicsPtr->state = 1;
+            case TWEESTER_PARTNER_INIT:
+                WattTweesterPhysicsPtr->state++;
                 WattTweesterPhysicsPtr->prevFlags = watt->flags;
                 WattTweesterPhysicsPtr->radius = fabsf(dist2D(watt->pos.x, watt->pos.z,
                                                          entity->position.x, entity->position.z));
@@ -138,7 +138,7 @@ ApiStatus WattUpdate(Evt* script, s32 isInitialCall) {
                 WattTweesterPhysicsPtr->countdown = 120;
                 watt->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
                 watt->flags &= ~NPC_FLAG_GRAVITY;
-            case 1:
+            case TWEESTER_PARTNER_ATTRACT:
                 sin_cos_rad(DEG_TO_RAD(WattTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
                 watt->pos.x = (entity->position.x + (sinAngle * WattTweesterPhysicsPtr->radius));
                 watt->pos.z = (entity->position.z - (cosAngle * WattTweesterPhysicsPtr->radius));
@@ -169,16 +169,16 @@ ApiStatus WattUpdate(Evt* script, s32 isInitialCall) {
                     WattTweesterPhysicsPtr->state++;
                 }
                 break;
-            case 2:
+            case TWEESTER_PARTNER_HOLD:
                 watt->flags = WattTweesterPhysicsPtr->prevFlags;
                 WattTweesterPhysicsPtr->countdown = 30;
                 WattTweesterPhysicsPtr->state++;
                 break;
-            case 3:
+            case TWEESTER_PARTNER_RELEASE:
                 partner_flying_update_player_tracking(watt);
                 partner_flying_update_motion(watt);
                 if (--WattTweesterPhysicsPtr->countdown == 0) {
-                    WattTweesterPhysicsPtr->state = 0;
+                    WattTweesterPhysicsPtr->state = TWEESTER_PARTNER_INIT;
                     TweesterTouchingPartner = NULL;
                 }
                 break;
@@ -203,7 +203,7 @@ void func_802BD710_31D280(Npc* watt) {
     if (TweesterTouchingPartner != NULL) {
         TweesterTouchingPartner = NULL;
         watt->flags = WattTweesterPhysicsPtr->prevFlags;
-        WattTweesterPhysicsPtr->state = 0;
+        WattTweesterPhysicsPtr->state = TWEESTER_PARTNER_INIT;
         partner_clear_player_tracking(watt);
     }
 }

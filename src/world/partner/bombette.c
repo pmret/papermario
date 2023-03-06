@@ -106,8 +106,8 @@ ApiStatus func_802BD338_318088(Evt* script, s32 isInitialCall) {
     }
 
     switch (BombetteTweesterPhysicsPtr->state) {
-        case 0:
-            BombetteTweesterPhysicsPtr->state = 1;
+        case TWEESTER_PARTNER_INIT:
+            BombetteTweesterPhysicsPtr->state++;
             BombetteTweesterPhysicsPtr->prevFlags = bombette->flags;
             BombetteTweesterPhysicsPtr->radius = fabsf(dist2D(bombette->pos.x, bombette->pos.z,
                                                      entity->position.x, entity->position.z));
@@ -118,7 +118,7 @@ ApiStatus func_802BD338_318088(Evt* script, s32 isInitialCall) {
             BombetteTweesterPhysicsPtr->countdown = 120;
             bombette->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
             bombette->flags &= ~NPC_FLAG_GRAVITY;
-        case 1:
+        case TWEESTER_PARTNER_ATTRACT:
             sin_cos_rad(DEG_TO_RAD(BombetteTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
             bombette->pos.x = entity->position.x + (sinAngle * BombetteTweesterPhysicsPtr->radius);
             bombette->pos.z = entity->position.z - (cosAngle * BombetteTweesterPhysicsPtr->radius);
@@ -149,17 +149,17 @@ ApiStatus func_802BD338_318088(Evt* script, s32 isInitialCall) {
                 BombetteTweesterPhysicsPtr->state++;
             }
             break;
-        case 2:
+        case TWEESTER_PARTNER_HOLD:
             bombette->flags = BombetteTweesterPhysicsPtr->prevFlags;
-            BombetteTweesterPhysicsPtr->countdown = 0x1E;
+            BombetteTweesterPhysicsPtr->countdown = 30;
             BombetteTweesterPhysicsPtr->state++;
             break;
-        case 3:
+        case TWEESTER_PARTNER_RELEASE:
             partner_walking_update_player_tracking(bombette);
             partner_walking_update_motion(bombette);
 
             if (--BombetteTweesterPhysicsPtr->countdown == 0) {
-                BombetteTweesterPhysicsPtr->state = 0;
+                BombetteTweesterPhysicsPtr->state = TWEESTER_PARTNER_INIT;
                 TweesterTouchingPartner = NULL;
             }
             break;
@@ -177,7 +177,7 @@ void func_802BD6DC_31842C(Npc* npc) {
     if (TweesterTouchingPartner != NULL) {
         TweesterTouchingPartner = NULL;
         npc->flags = BombetteTweesterPhysicsPtr->prevFlags;
-        BombetteTweesterPhysicsPtr->state = 0;
+        BombetteTweesterPhysicsPtr->state = TWEESTER_PARTNER_INIT;
         partner_clear_player_tracking(npc);
     }
 }

@@ -61,8 +61,8 @@ ApiStatus ParakarryUpdate(Evt* script, s32 isInitialCall) {
     }
 
     switch (ParakarryTweesterPhysicsPtr->state) {
-        case 0:
-            ParakarryTweesterPhysicsPtr->state = 1;
+        case TWEESTER_PARTNER_INIT:
+            ParakarryTweesterPhysicsPtr->state++;
             ParakarryTweesterPhysicsPtr->prevFlags = parakarry->flags;
             ParakarryTweesterPhysicsPtr->radius = fabsf(dist2D(parakarry->pos.x, parakarry->pos.z,
                                                      entity->position.x, entity->position.z));
@@ -73,7 +73,7 @@ ApiStatus ParakarryUpdate(Evt* script, s32 isInitialCall) {
             ParakarryTweesterPhysicsPtr->countdown = 120;
             parakarry->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
             parakarry->flags &= ~NPC_FLAG_GRAVITY;
-        case 1:
+        case TWEESTER_PARTNER_ATTRACT:
             sin_cos_rad(DEG_TO_RAD(ParakarryTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
             parakarry->pos.x = entity->position.x + (sinAngle * ParakarryTweesterPhysicsPtr->radius);
             parakarry->pos.z = entity->position.z - (cosAngle * ParakarryTweesterPhysicsPtr->radius);
@@ -104,17 +104,17 @@ ApiStatus ParakarryUpdate(Evt* script, s32 isInitialCall) {
                 ParakarryTweesterPhysicsPtr->state++;
             }
             break;
-        case 2:
+        case TWEESTER_PARTNER_HOLD:
             parakarry->flags = ParakarryTweesterPhysicsPtr->prevFlags;
             ParakarryTweesterPhysicsPtr->countdown = 30;
             ParakarryTweesterPhysicsPtr->state++;
             break;
-        case 3:
+        case TWEESTER_PARTNER_RELEASE:
             partner_flying_update_player_tracking(parakarry);
             partner_flying_update_motion(parakarry);
 
             if (--ParakarryTweesterPhysicsPtr->countdown == 0) {
-                ParakarryTweesterPhysicsPtr->state = 0;
+                ParakarryTweesterPhysicsPtr->state = TWEESTER_PARTNER_INIT;
                 TweesterTouchingPartner = NULL;
             }
             break;
@@ -132,7 +132,7 @@ void func_802BD514_319A84(Npc* parakarry) {
     if (TweesterTouchingPartner) {
         TweesterTouchingPartner = NULL;
         parakarry->flags = ParakarryTweesterPhysicsPtr->prevFlags;
-        ParakarryTweesterPhysicsPtr->state = 0;
+        ParakarryTweesterPhysicsPtr->state = TWEESTER_PARTNER_INIT;
         partner_clear_player_tracking (parakarry);
     }
 }

@@ -3034,6 +3034,13 @@ enum JumpSubstate {
     JUMP_SUBSTATE_1                 = 1,
 };
 
+enum TweesterPartnerStates {
+    TWEESTER_PARTNER_INIT       = 0,
+    TWEESTER_PARTNER_ATTRACT    = 1,
+    TWEESTER_PARTNER_HOLD       = 2,
+    TWEESTER_PARTNER_RELEASE    = 3,
+};
+
 enum LandOnSwitchSubstate {
     LANDING_ON_SWITCH_SUBSTATE_0    = 0,
     LANDING_ON_SWITCH_SUBSTATE_1    = 1,

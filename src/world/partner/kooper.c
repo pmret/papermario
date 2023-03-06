@@ -118,8 +118,8 @@ API_CALLABLE(KooperUpdate) {
     }
 
     switch (KooperTweesterPhysicsPtr->state) {
-        case 0:
-            KooperTweesterPhysicsPtr->state = 1;
+        case TWEESTER_PARTNER_INIT:
+            KooperTweesterPhysicsPtr->state++;
             KooperTweesterPhysicsPtr->prevFlags = kooper->flags;
             KooperTweesterPhysicsPtr->radius = fabsf(dist2D(kooper->pos.x, kooper->pos.z,
                                                      entity->position.x, entity->position.z));
@@ -129,7 +129,7 @@ API_CALLABLE(KooperUpdate) {
             KooperTweesterPhysicsPtr->countdown = 120;
             kooper->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
             kooper->flags &= ~NPC_FLAG_GRAVITY;
-        case 1:
+        case TWEESTER_PARTNER_ATTRACT:
             sin_cos_rad(DEG_TO_RAD(KooperTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
 
             kooper->pos.x = entity->position.x + (sinAngle * KooperTweesterPhysicsPtr->radius);
@@ -161,17 +161,17 @@ API_CALLABLE(KooperUpdate) {
                 KooperTweesterPhysicsPtr->state++;
             }
             break;
-        case 2:
+        case TWEESTER_PARTNER_HOLD:
             kooper->flags = KooperTweesterPhysicsPtr->prevFlags;
             KooperTweesterPhysicsPtr->countdown = 30;
             KooperTweesterPhysicsPtr->state++;
             break;
-        case 3:
+        case TWEESTER_PARTNER_RELEASE:
             partner_walking_update_player_tracking(kooper);
             partner_walking_update_motion(kooper);
 
             if (--KooperTweesterPhysicsPtr->countdown == 0) {
-                KooperTweesterPhysicsPtr->state = 0;
+                KooperTweesterPhysicsPtr->state = TWEESTER_PARTNER_INIT;
                 TweesterTouchingPartner = NULL;
             }
             break;
@@ -189,7 +189,7 @@ void kooper_try_cancel_tweester(Npc* kooper) {
     if (TweesterTouchingPartner != NULL) {
         TweesterTouchingPartner = NULL;
         kooper->flags = KooperTweesterPhysicsPtr->prevFlags;
-        KooperTweesterPhysicsPtr->state = 0;
+        KooperTweesterPhysicsPtr->state = TWEESTER_PARTNER_INIT;
         partner_clear_player_tracking(kooper);
     }
 }

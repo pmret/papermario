@@ -61,8 +61,8 @@ ApiStatus BowUpdate(Evt* script, s32 isInitialCall) {
     }
 
     switch (BowTweesterPhysicsPtr->state){
-        case 0:
-            BowTweesterPhysicsPtr->state = 1;
+        case TWEESTER_PARTNER_INIT:
+            BowTweesterPhysicsPtr->state++;
             BowTweesterPhysicsPtr->prevFlags = bow->flags;
             BowTweesterPhysicsPtr->radius = fabsf(dist2D(bow->pos.x, bow->pos.z, entity->position.x, entity->position.z));
             BowTweesterPhysicsPtr->angle = atan2(entity->position.x, entity->position.z, bow->pos.x, bow->pos.z);
@@ -71,7 +71,7 @@ ApiStatus BowUpdate(Evt* script, s32 isInitialCall) {
             BowTweesterPhysicsPtr->countdown = 120;
             bow->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
             bow->flags &= ~NPC_FLAG_GRAVITY;
-        case 1:
+        case TWEESTER_PARTNER_ATTRACT:
             sin_cos_rad(DEG_TO_RAD(BowTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
             bow->pos.x = entity->position.x + (sinAngle * BowTweesterPhysicsPtr->radius);
             bow->pos.z = entity->position.z - (cosAngle * BowTweesterPhysicsPtr->radius);
@@ -100,17 +100,17 @@ ApiStatus BowUpdate(Evt* script, s32 isInitialCall) {
                 BowTweesterPhysicsPtr->state++;
             }
             break;
-        case 2:
+        case TWEESTER_PARTNER_HOLD:
             bow->flags = BowTweesterPhysicsPtr->prevFlags;
             BowTweesterPhysicsPtr->countdown = 30;
             BowTweesterPhysicsPtr->state++;
             break;
-        case 3:
+        case TWEESTER_PARTNER_RELEASE:
             partner_flying_update_player_tracking(bow);
             partner_flying_update_motion(bow);
 
             if (--BowTweesterPhysicsPtr->countdown == 0) {
-                BowTweesterPhysicsPtr->state = 0;
+                BowTweesterPhysicsPtr->state = TWEESTER_PARTNER_INIT;
                 TweesterTouchingPartner = NULL;
             }
             break;
@@ -128,7 +128,7 @@ void func_802BD4FC_323E4C(Npc* bow) {
     if (TweesterTouchingPartner != NULL) {
         TweesterTouchingPartner = NULL;
         bow->flags = BowTweesterPhysicsPtr->prevFlags;
-        BowTweesterPhysicsPtr->state = 0;
+        BowTweesterPhysicsPtr->state = TWEESTER_PARTNER_INIT;
         partner_clear_player_tracking(bow);
     }
 }

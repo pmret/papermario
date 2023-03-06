@@ -176,7 +176,7 @@ API_CALLABLE(WorldGoombarioUpdate) {
             partner_walking_update_motion(npc);
 
             if (--GoombarioTweesterPhysicsPtr->countdown == 0) {
-                GoombarioTweesterPhysicsPtr->state = 0;
+                GoombarioTweesterPhysicsPtr->state = TWEESTER_PARTNER_INIT;
                 TweesterTouchingPartner = NULL;
             }
             break;
@@ -194,7 +194,7 @@ void goombario_try_cancel_tweester(Npc* goombario) {
     if (TweesterTouchingPartner) {
         TweesterTouchingPartner = NULL;
         goombario->flags = GoombarioTweesterPhysicsPtr->prevFlags;
-        GoombarioTweesterPhysicsPtr->state = 0;
+        GoombarioTweesterPhysicsPtr->state = TWEESTER_PARTNER_INIT;
         partner_clear_player_tracking (goombario);
     }
 }
