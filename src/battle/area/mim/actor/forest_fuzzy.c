@@ -292,7 +292,7 @@ EvtScript N(80218C48) = {
     EVT_END
 };
 
-#include "common/UnkBattleFunc2.inc.c"
+#include "common/StartEnemyDrainGFX.inc.c"
 
 EvtScript N(80219054) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
@@ -426,11 +426,11 @@ EvtScript N(80219054) = {
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_214)
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 10)
-        EVT_CALL(N(UnkBattleFunc2), LVar0, LVar1, LVar2, LVar3)
+        EVT_CALL(N(StartEnemyDrainGFX), LVar0, LVar1, LVar2, LVar3)
         EVT_THREAD
             EVT_WAIT(15)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_25C)
-            EVT_CALL(N(UnkBattleFunc2_2), LVar0, LVar1, LVar2, LVar3)
+            EVT_CALL(N(EnemyDrainGFX), LVar0, LVar1, LVar2, LVar3)
         EVT_END_THREAD
         EVT_ADD(LVar0, 20)
         EVT_ADD(LVar1, 20)

@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-API_CALLABLE(N(UnkBattleFunc2)) {
+API_CALLABLE(N(StartEnemyDrainGFX)) {
     Bytecode* args = script->ptrReadPos;
     s32 x = evt_get_variable(script, *args++);
     s32 y = evt_get_variable(script, *args++);
@@ -12,7 +12,7 @@ API_CALLABLE(N(UnkBattleFunc2)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(UnkBattleFunc2_2)) {
+API_CALLABLE(N(EnemyDrainGFX)) {
     Bytecode* args = script->ptrReadPos;
     s32 x = evt_get_variable(script, *args++);
     s32 y = evt_get_variable(script, *args++);
