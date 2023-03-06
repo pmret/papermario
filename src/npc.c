@@ -540,82 +540,81 @@ s32 npc_do_player_collision(Npc* npc) {
 INCLUDE_ASM(s32, "npc", npc_do_player_collision, Npc* npc);
 #endif
 
-void npc_do_gravity(Npc* npc) {
-    if (npc->flags & NPC_FLAG_GRAVITY) {
-        if (npc->flags & NPC_FLAG_JUMPING) {
-            npc->flags &= ~NPC_FLAG_FALLING;
-        } else {
-            f32 xTemp;
-            f32 yTemp;
-            f32 zTemp;
-            f32 length, oldLength;
-            s32 hit;
+// update NPC position using gravitational acceleration = 1.0
+// if the NPC is within 16 units of the floor, they are snapped to it
+void npc_try_apply_gravity(Npc* npc) {
+    f32 x, y, z, testLength;
+    f32 length;
+    s32 hitID;
+    
+    if (!(npc->flags & NPC_FLAG_GRAVITY)) {
+        return;
+    }
 
-            npc->jumpScale = 1.0f;
-            xTemp = npc->pos.x;
-            zTemp = npc->pos.z;
+    if (npc->flags & NPC_FLAG_JUMPING) {
+        npc->flags &= ~NPC_FLAG_GROUNDED;
+        return;
+    }
 
-            npc->jumpVelocity -= npc->jumpScale;
-            npc->pos.y += npc->jumpVelocity;
-            oldLength = length = fabsf(npc->jumpVelocity) + 16.0f;
+    npc->jumpScale = 1.0f;
+    npc->jumpVelocity -= npc->jumpScale;
+    npc->pos.y += npc->jumpVelocity;
 
-            yTemp = npc->pos.y + 13.0f;
+    x = npc->pos.x;
+    y = npc->pos.y + 13;
+    z = npc->pos.z;
+    testLength = length = fabsf(npc->jumpVelocity) + 16;
 
-            if (!(npc->flags & NPC_FLAG_PARTNER)) {
-                hit = npc_raycast_down_sides(npc->collisionChannel, &xTemp, &yTemp, &zTemp, &length);
-            } else {
-                hit = npc_raycast_down_around(npc->collisionChannel, &xTemp, &yTemp, &zTemp, &length, npc->yaw,
-                                             npc->collisionRadius);
-            }
+    if (!(npc->flags & NPC_FLAG_PARTNER)) {
+        hitID = npc_raycast_down_sides(npc->collisionChannel, &x, &y, &z, &length);
+    } else {
+        hitID = npc_raycast_down_around(npc->collisionChannel, &x, &y, &z, &length, npc->yaw, npc->collisionRadius);
+    }
 
-            if (hit && length <= oldLength) {
-                npc->jumpVelocity = 0.0f;
-                npc->flags |= NPC_FLAG_FALLING;
-                npc->pos.y = yTemp;
-                npc->currentFloor = NpcHitQueryColliderID;
-            } else {
-                npc->flags &= ~NPC_FLAG_FALLING;
-            }
-        }
+    if (hitID && length <= testLength) {
+        npc->jumpVelocity = 0.0f;
+        npc->flags |= NPC_FLAG_GROUNDED;
+        npc->pos.y = y;
+        npc->currentFloor = NpcHitQueryColliderID;
+    } else {
+        npc->flags &= ~NPC_FLAG_GROUNDED;
     }
 }
 
-s32 func_800397E8(Npc* npc, f32 velocity) {
-    if (!(npc->flags & (NPC_FLAG_GRAVITY | NPC_FLAG_8))) {
-        f32 x;
-        f32 y;
-        f32 z;
-        f32 length;
-        f32 testLength;
-        s32 phi_v0;
-
-        if (npc->flags & NPC_FLAG_JUMPING) {
-            npc->flags &= ~NPC_FLAG_FALLING;
-            return FALSE;
-        }
-
-        length = testLength = fabsf(velocity) + 16;
-        x = npc->pos.x;
-        y = npc->pos.y + 13;
-        z = npc->pos.z;
-
-        if (!(npc->flags & NPC_FLAG_PARTNER)) {
-            phi_v0 = npc_raycast_down_sides(npc->collisionChannel, &x, &y, &z, &length);
-        } else {
-            phi_v0 = npc_raycast_down_around(npc->collisionChannel, &x, &y, &z, &length, npc->yaw, npc->collisionRadius);
-        }
-
-        if (phi_v0 != 0 && length <= testLength) {
-            npc->pos.y = y;
-            npc->currentFloor = NpcHitQueryColliderID;
-            npc->flags |= NPC_FLAG_FALLING;
-            return TRUE;
-        }
-    } else {
+// perform only collision traces and snapping to ground from gravity code
+s32 npc_try_snap_to_ground(Npc* npc, f32 velocity) {
+    f32 x, y, z, testLength;
+    f32 length;
+    s32 hitID;
+    
+    if (npc->flags & (NPC_FLAG_GRAVITY | NPC_FLAG_8)) {
         return FALSE;
     }
 
-    npc->flags &= ~NPC_FLAG_FALLING;
+    if (npc->flags & NPC_FLAG_JUMPING) {
+        npc->flags &= ~NPC_FLAG_GROUNDED;
+        return FALSE;
+    }
+
+    length = testLength = fabsf(velocity) + 16;
+    x = npc->pos.x;
+    y = npc->pos.y + 13;
+    z = npc->pos.z;
+
+    if (!(npc->flags & NPC_FLAG_PARTNER)) {
+        hitID = npc_raycast_down_sides(npc->collisionChannel, &x, &y, &z, &length);
+    } else {
+        hitID = npc_raycast_down_around(npc->collisionChannel, &x, &y, &z, &length, npc->yaw, npc->collisionRadius);
+    }
+
+    if (hitID != 0 && length <= testLength) {
+        npc->pos.y = y;
+        npc->currentFloor = NpcHitQueryColliderID;
+        npc->flags |= NPC_FLAG_GROUNDED;
+        return TRUE;
+    }
+
+    npc->flags &= ~NPC_FLAG_GROUNDED;
     return FALSE;
 }
 
@@ -650,8 +649,8 @@ void update_npcs(void) {
                     npc->flags &= ~(NPC_FLAG_COLLDING_FORWARD_WITH_WORLD | NPC_FLAG_COLLDING_WITH_WORLD);
 
                     npc_do_world_collision(npc);
-                    npc_do_gravity(npc);
-                    func_800397E8(npc, 0.0f);
+                    npc_try_apply_gravity(npc);
+                    npc_try_snap_to_ground(npc, 0.0f);
                     npc_do_player_collision(npc);
                     npc_do_other_npc_collision(npc);
 
@@ -1705,7 +1704,7 @@ s32 npc_draw_palswap_mode_4(Npc* npc, s32 arg1, Matrix4f mtx) {
 
                 blendAlpha = npc->alpha * npc->alpha2 / 255;
                 temp = blendAlpha < 255;
-                spriteInstanceMask = ((temp) << 31) | 0x20000000;
+                spriteInstanceMask = ((temp) << 31) | DRAW_SPRITE_OVERRIDE_PALETTES;
                 spr_draw_npc_sprite(npc->spriteInstanceID | spriteInstanceMask, arg1, blendAlpha, npc->localPalettes, mtx);
             }
         }
@@ -1713,14 +1712,14 @@ s32 npc_draw_palswap_mode_4(Npc* npc, s32 arg1, Matrix4f mtx) {
 }
 
 void npc_set_decoration(Npc* npc, s32 idx, s32 decorationType) {
-    npc__remove_decoration(npc, idx);
+    npc_remove_decoration_impl(npc, idx);
     npc->decorationType[idx] = decorationType;
     npc->changedDecoration[idx] = 1;
     npc->decorationInitialised[idx] = 0;
 }
 
 void npc_remove_decoration(Npc* npc, s32 idx) {
-    npc__remove_decoration(npc, idx);
+    npc_remove_decoration_impl(npc, idx);
 }
 
 s32 npc_update_decorations(Npc* npc) {
@@ -1753,7 +1752,7 @@ s32 npc_update_decorations(Npc* npc) {
     }
 }
 
-void npc__remove_decoration(Npc* npc, s32 idx) {
+void npc_remove_decoration_impl(Npc* npc, s32 idx) {
     switch (npc->decorationType[idx]) {
         case 0:
             npc_remove_decoration_none(npc, idx);
@@ -2160,7 +2159,9 @@ void func_8003D624(Npc* npc, s32 foldType, s32 arg2, s32 arg3, s32 arg4, s32 arg
     func_8003D3BC(npc);
 }
 
-void func_8003D660(Npc* npc, s32 arg1) {
+//TODO begin split for npc_surfaces
+
+void spawn_surface_effects(Npc* npc, SurfaceInteractMode mode) {
     PartnerActionStatus* temp = &gPartnerActionStatus;
 
     if ((npc->flags & (NPC_FLAG_TOUCHES_GROUND | NPC_FLAG_INVISIBLE)) == NPC_FLAG_TOUCHES_GROUND) {
@@ -2168,61 +2169,58 @@ void func_8003D660(Npc* npc, s32 arg1) {
             s32 surfaceType = get_collider_flags((u16)npc->currentFloor) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
             switch (surfaceType) {
                 case SURFACE_TYPE_FLOWERS:
-                    func_8003DA38(npc, arg1);
-                    return;
+                    spawn_flower_surface_effects(npc, mode);
+                    break;
                 case SURFACE_TYPE_CLOUD:
-                    func_8003DC38(npc, arg1);
-                    return;
+                    spawn_cloud_surface_effects(npc, mode);
+                    break;
                 case SURFACE_TYPE_SNOW:
                     if ((temp->partnerActionState == PARTNER_ACTION_NONE) || (temp->actingPartner != PARTNER_LAKILESTER)) {
-                        func_8003DFA0(npc, arg1);
-                        return;
+                        spawn_snow_surface_effects(npc, mode);
                     }
                     break;
                 case SURFACE_TYPE_HEDGES:
-                    func_8003E0D4(npc, arg1);
-                    return;
+                    spawn_hedge_surface_effects(npc, mode);
+                    break;
                 case SURFACE_TYPE_WATER:
-                    func_8003E1D0(npc, arg1);
-                    return;
+                    spawn_water_surface_effects(npc, mode);
+                    break;
                 case SURFACE_TYPE_SPIKES:
                 case SURFACE_TYPE_LAVA:
                 case SURFACE_TYPE_DOCK_WALL:
                 case SURFACE_TYPE_SLIDE:
                 default:
-                    func_8003D788(npc, arg1);
-                    return;
+                    spawn_default_surface_effects(npc, mode);
+                    break;
             }
         }
     }
 }
 
-static const f32 padding[2] = { 0.0f, 0.0f }; // todo remove when below funcs are decompiled
-
-void func_8003D788(Npc* npc, s32 arg1) {
-    s32 phi_a2;
+void spawn_default_surface_effects(Npc* npc, SurfaceInteractMode mode) {
+    s32 mapIsStarWay;
     f32 sinTheta;
     f32 cosTheta;
 
-    phi_a2 = 0;
+    mapIsStarWay = FALSE;
     if (gGameStatusPtr->areaID == AREA_HOS) {
-        phi_a2 = gGameStatusPtr->mapID == 2;
+        mapIsStarWay = gGameStatusPtr->mapID == 2; //TODO hard-coded map ID
     }
-    if (arg1 == 2) {
+    if (mode == SURFACE_INTERACT_LAND) {
         f32 x = npc->pos.x;
         f32 y = npc->pos.y + 0.0f;
         f32 z = npc->pos.z;
 
-        if (phi_a2 == 0) {
+        if (!mapIsStarWay) {
             fx_landing_dust(0, x, y, z, D_80077C10);
             D_80077C10 = clamp_angle(D_80077C10 + 35.0f);
         } else {
             fx_misc_particles(3, x, y, z,  13.0f, 10.0f, 1.0f, 5, 30);
         }
-    } else if (arg1 != 0) {
+    } else if (mode != SURFACE_INTERACT_WALK) {
         if (D_80077C14++ >= 4) {
             D_80077C14 = 0;
-            if (phi_a2 == 0) {
+            if (!mapIsStarWay) {
                 sin_cos_rad(DEG_TO_RAD(clamp_angle(-npc->yaw)), &sinTheta, &cosTheta);
                 fx_walking_dust(0, npc->pos.x + (npc->collisionRadius * sinTheta * 0.2f), npc->pos.y + 1.5f,
                                npc->pos.z + (npc->collisionRadius * cosTheta * 0.2f), sinTheta, cosTheta);
@@ -2235,13 +2233,13 @@ void func_8003D788(Npc* npc, s32 arg1) {
     }
 }
 
-void func_8003DA38(Npc* npc, s32 arg1) {
+void spawn_flower_surface_effects(Npc* npc, SurfaceInteractMode mode) {
     f32 theta;
     f32 sinTheta;
     f32 cosTheta;
     f32 x, y, z;
 
-    if (arg1 == 2 && D_80077C1E == 5) {
+    if (mode == SURFACE_INTERACT_LAND && D_80077C1E == 5) {
         x = npc->pos.x;
         y = npc->pos.y + + 14.0f;
         z = npc->pos.z;
@@ -2272,7 +2270,7 @@ void func_8003DA38(Npc* npc, s32 arg1) {
     }
 }
 
-void func_8003DC38(Npc* npc, s32 arg1) {
+void spawn_cloud_surface_effects(Npc* npc, SurfaceInteractMode mode) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 xTemp, yTemp, zTemp;
     f32 xTemp2, yTemp2, zTemp2;
@@ -2283,7 +2281,7 @@ void func_8003DC38(Npc* npc, s32 arg1) {
     s32 i;
 
     D_80077C2C += 0.1f;
-    if (arg1 == 2) {
+    if (mode == SURFACE_INTERACT_LAND) {
         fx_cloud_puff(npc->pos.x, (npc->pos.y + 14.0f) - 5.0f, npc->pos.z, D_80077C24);
 
         D_80077C24 = clamp_angle(D_80077C24 + 35.0f);
@@ -2324,7 +2322,7 @@ void func_8003DC38(Npc* npc, s32 arg1) {
     }
 }
 
-void func_8003DFA0(Npc* npc, s32 arg1) {
+void spawn_snow_surface_effects(Npc* npc, SurfaceInteractMode mode) {
     if (D_80077C30++ >= 4) {
         f32 temp_f20;
         f32 x;
@@ -2340,7 +2338,7 @@ void func_8003DFA0(Npc* npc, s32 arg1) {
     }
 }
 
-void func_8003E0D4(Npc* npc, s32 arg1) {
+void spawn_hedge_surface_effects(Npc* npc, SurfaceInteractMode mode) {
     if (D_80077C38++ >= 4) {
         f32 theta;
         f32 sinTheta;
@@ -2355,7 +2353,7 @@ void func_8003E0D4(Npc* npc, s32 arg1) {
     }
 }
 
-void func_8003E1D0(Npc* npc, s32 arg1) {
+void spawn_water_surface_effects(Npc* npc, SurfaceInteractMode mode) {
     if (D_80077C3A++ >= 4) {
         f32 temp_f20;
         f32 x;
@@ -2369,6 +2367,9 @@ void func_8003E1D0(Npc* npc, s32 arg1) {
                   npc->pos.z + (npc->collisionRadius * z * 0.2f), 0.0f);
     }
 }
+
+//TODO end split for npc_surfaces
+static const f32 padding[2] = { 0.0f, 0.0f }; // remove after splitting
 
 void COPY_set_defeated(s32 mapID, s32 encounterID) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;

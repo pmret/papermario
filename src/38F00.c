@@ -158,7 +158,7 @@ ApiStatus func_8005DD54(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_8005DDF0(Evt* script, s32 isInitialCall) {
-    if (~gCurrentEncounter.unk_08) {
+    if (gCurrentEncounter.unk_08 != -1) {
         return ApiStatus_DONE1;
     } else {
         return ApiStatus_BLOCK;

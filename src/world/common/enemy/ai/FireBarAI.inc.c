@@ -51,7 +51,7 @@ API_CALLABLE(N(FireBarAI_Main)) {
         data->settings = settings;
     }
 
-    if (get_time_freeze_mode() != 0) {
+    if (get_time_freeze_mode() != TIME_FREEZE_NORMAL) {
         return 0;
     }
 

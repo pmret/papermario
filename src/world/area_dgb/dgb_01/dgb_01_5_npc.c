@@ -189,7 +189,7 @@ EvtScript N(EVS_NpcInit_Tubba_Floor1) = {
 
 EvtScript N(EVS_NpcInit_Sentinel_01) = {
     EVT_SET(LVar0, GB_StoryProgress)
-    EVT_IF_GE(LVar0, -29)
+    EVT_IF_GE(LVar0, STORY_CH3_TUBBA_WOKE_UP)
         EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
         EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Sentinel_Anim01)
@@ -203,7 +203,7 @@ EvtScript N(EVS_NpcInit_Sentinel_01) = {
 
 EvtScript N(EVS_NpcInit_Sentinel_02) = {
     EVT_SET(LVar0, GB_StoryProgress)
-    EVT_IF_GE(LVar0, -29)
+    EVT_IF_GE(LVar0, STORY_CH3_TUBBA_WOKE_UP)
         EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
         EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Sentinel_Anim01)
@@ -217,7 +217,7 @@ EvtScript N(EVS_NpcInit_Sentinel_02) = {
 
 EvtScript N(EVS_NpcInit_Sentinel_03) = {
     EVT_SET(LVar0, GB_StoryProgress)
-    EVT_IF_GE(LVar0, -29)
+    EVT_IF_GE(LVar0, STORY_CH3_TUBBA_WOKE_UP)
         EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
         EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Sentinel_Anim01)
@@ -231,7 +231,7 @@ EvtScript N(EVS_NpcInit_Sentinel_03) = {
 
 EvtScript N(EVS_NpcInit_Sentinel_04) = {
     EVT_SET(LVar0, GB_StoryProgress)
-    EVT_IF_GE(LVar0, -29)
+    EVT_IF_GE(LVar0, STORY_CH3_TUBBA_WOKE_UP)
         EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
         EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Sentinel_Anim01)

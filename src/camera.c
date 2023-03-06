@@ -19,11 +19,204 @@ CameraControlSettings* test_ray_zone(f32 posX, f32 posY, f32 posZ, Collider** zo
     }
 }
 
-s32 func_800322DC(f32, f32, f32, f32, f32, f32, f32, f32, f32*, f32*, f32*);
-INCLUDE_ASM(s32, "camera", func_800322DC);
+s32 calculate_segment_intersection(f32 A1x, f32 A1z, f32 A2x, f32 A2z, f32 B1x, f32 B1z, f32 B2x, f32 B2z, f32* interX, f32* interZ, f32* squared_dist) {
+    f32 dx14;
+    f32 dx13;
+    f32 dz;
+    f32 dz12;
+    f32 dx34;
+    f32 dx12;
+    f32 dx;
+    f32 alpha;
+    f32 minus_dz12;
+    f32 B2_side;
+    f32 x;
+    f32 B1_side;
+    f32 z;
+    f32 dx12_copy;
+    f32 dz13;
+    f32 dz14;
+    f32 dz34;
+    f32 B1_side_;
 
-s32 func_800325E4(f32, f32, f32, f32, f32, f32, f32, f32, f32*, f32*, f32*);
-INCLUDE_ASM(s32, "camera", func_800325E4);
+    dx12_copy = A2x - A1x;
+    dx12 = dx12_copy;
+    dz12 = A2z - A1z;
+    dx13 = B1x - A1x;
+    dz13 = B1z - A1z;
+    dx14 = B2x - A1x;
+    dz14 = B2z - A1z;
+    minus_dz12 = -dz12;
+    dx34 = B2x - B1x;
+    dz34 = B2z - B1z;
+
+    // if distance between points on the line is 0
+    if (dx12_copy == 0.0f && dz12 == 0.0f) {
+        return FALSE;
+    }
+    // if length of second segment is 0
+    if (dx34 == 0.0f && dz34 == 0.0f) {
+        return FALSE;
+    }
+
+    B1_side_ = minus_dz12 * dx13 + dx12_copy * dz13;
+    if (B1_side_ < 0.0f) {
+        B1_side = -1.0f;
+    } else if (B1_side_ > 0.0f) {
+        B1_side = 1.0f;
+    } else {
+        B1_side = 0.0f;
+    }
+    B1_side_ = B1_side;
+
+    dx = minus_dz12 * dx14 + dx12_copy * dz14;
+    if (dx < 0.0f) {
+        B2_side = -1.0f;
+    } else if (dx > 0.0f) {
+        B2_side = 1.0f;
+    } else {
+        B2_side = 0.0f;
+    }
+
+    // B1 and B2 are on the same side relative to the line: no intersection
+    if (B1_side_ == B2_side) {
+        return FALSE;
+    }
+
+    if (fabsf(dx12) > fabsf(dx34)) {
+        /*
+        We represent intersection point P as P = B1 + alpha * (B2 - B1)
+        and solve the equation (P - A1) x (A2 - A1) = 0, where 'x' is cross product, A1 and A2 are points on the line
+        and B1 and B2 are the ends of the segment.
+        So, (B1 - A1 + alpha * (B2 - B1)) x (A2 - A1) = 0,
+        alpha = [-(B1 - A1) x (A2 - A1)] / [(B2 - B1) x (A2 - A1)]
+        */
+        // same as -(B1 - A1) x (A2 - A1)
+        alpha = A1x * dz12 - A1z * dx12 + dx12 * B1z - dz12 * B1x;
+        // divide by (B2 - B1) x (A2 - A1)
+        alpha /= dz12 * dx34 - dx12 * dz34;
+        /*
+            Now we represent P as P = A1 + beta * (A2 - A1), and we are to find beta.
+            B1 + alpha * (B2 - B1) = A1 + beta * (A2 - A1)
+            beta * (A2 - A1) = B1 + alpha * (B2 - B1) - A1
+            We use only 'x' part of this equation to find beta.
+
+            Actually this step could be omitted and we calculate intersection directly as B1 + alpha * (B2 - B1).
+            Don't know why it's done this way.
+        */
+        alpha = (B1x + dx34 * alpha - A1x) / dx12;
+        x = A1x + dx12 * alpha;
+        z = A1z + dz12 * alpha;
+    } else {
+        /*
+        We represent intersection point P as P = A1 + alpha * (A2 - A1)
+        and solve the equation (B2 - B1) x (P - B1) = 0
+        */
+        // same as (B2 - B1) x (B1 - A1)
+        alpha = B1z * dx34 + A1x * dz34 - B1z * dz34 - A1z * dx34;
+        // divide by (B2 - B1) x (A2 - A1)
+        alpha /= dz12 * dx34 - dx12 * dz34;
+        // Now we represent P as P = B1 + beta * (B2 - B1) and find beta
+        alpha = (A1x + dx12 * alpha - B1x) / dx34;
+        x = B1x + dx34 * alpha;
+        z = B1z + dz34 * alpha;
+    }
+    // (P - A1) * (P - A2) > 0 when P is outside of segment A1-A2
+    if ((x - A1x) * (x - A2x) + (z - A1z) * (z - A2z) > 0.0f) {
+        return FALSE;
+    }
+
+    dx = x - B1x;
+    dz = z - B1z;
+    *interX = x;
+    *interZ = z;
+    // distance between P and B1
+    *squared_dist = SQ(dx) + SQ(dz);
+    return TRUE;
+}
+
+s32 calculate_line_segment_intersection(f32 A1x, f32 A1z, f32 A2x, f32 A2z, f32 B1x, f32 B1z, f32 B2x, f32 B2z, f32* interX, f32* interZ, f32* squared_dist) {
+    f32 dx14;
+    f32 dx13;
+    f32 dz;
+    f32 dz12;
+    f32 dx34;
+    f32 dx12;
+    f32 dx;
+    f32 alpha;
+    f32 minus_dz12;
+    f32 B2_side;
+    f32 x;
+    f32 B1_side;
+    f32 z;
+    f32 dx12_copy;
+    f32 dz13;
+    f32 dz14;
+    f32 dz34;
+    f32 B1_side_;
+
+    dx12_copy = A2x - A1x;
+    dx12 = dx12_copy;
+    dz12 = A2z - A1z;
+    dx13 = B1x - A1x;
+    dz13 = B1z - A1z;
+    dx14 = B2x - A1x;
+    dz14 = B2z - A1z;
+    minus_dz12 = -dz12;
+    dx34 = B2x - B1x;
+    dz34 = B2z - B1z;
+
+    if (dx12_copy == 0.0f && dz12 == 0.0f) {
+        return FALSE;
+    }
+    if (dx34 == 0.0f && dz34 == 0.0f) {
+        return FALSE;
+    }
+
+    B1_side_ = minus_dz12 * dx13 + dx12_copy * dz13;
+    if (B1_side_ < 0.0f) {
+        B1_side = -1.0f;
+    } else if (B1_side_ > 0.0f) {
+        B1_side = 1.0f;
+    } else {
+        B1_side = 0.0f;
+    }
+    B1_side_ = B1_side;
+
+    dx = minus_dz12 * dx14 + dx12_copy * dz14;
+    if (dx < 0.0f) {
+        B2_side = -1.0f;
+    } else if (dx > 0.0f) {
+        B2_side = 1.0f;
+    } else {
+        B2_side = 0.0f;
+    }
+
+    if (B1_side_ == B2_side) {
+        return FALSE;
+    }
+
+    if (fabsf(dx12) > fabsf(dx34)) {
+        alpha = A1x * dz12 - A1z * dx12 + dx12 * B1z - dz12 * B1x;
+        alpha /= dz12 * dx34 - dx12 * dz34;
+        alpha = (B1x + dx34 * alpha - A1x) / dx12;
+        x = A1x + dx12 * alpha;
+        z = A1z + dz12 * alpha;
+    } else {
+        alpha = B1z * dx34 + A1x * dz34 - B1z * dz34 - A1z * dx34;
+        alpha /= dz12 * dx34 - dx12 * dz34;
+        alpha = (A1x + dx12 * alpha - B1x) / dx34;
+        x = B1x + dx34 * alpha;
+        z = B1z + dz34 * alpha;
+    }
+
+    dx = x - B1x;
+    dz = z - B1z;
+    *interX = x;
+    *interZ = z;
+    *squared_dist = SQ(dx) + SQ(dz);
+    return TRUE;
+}
 
 s32 func_800328A4(CameraControlSettings* camSettings, f32 x, f32 z) {
     f32 product1, product2;
@@ -32,20 +225,20 @@ s32 func_800328A4(CameraControlSettings* camSettings, f32 x, f32 z) {
     if (camSettings == NULL) {
         return 0;
     }
-    if (camSettings->type != CAMERA_SETTINGS_TYPE_6) {
+    if (camSettings->type != CAM_CONTROL_CONSTAIN_BETWEEN_POINTS) {
         return 0;
     }
-    delta = x - camSettings->posA.x;
-    p1 = (camSettings->posB.x - camSettings->posA.x) * delta;
+    delta = x - camSettings->points.two.Ax;
+    p1 = (camSettings->points.two.Bx - camSettings->points.two.Ax) * delta;
 
-    delta = z - camSettings->posA.z;
-    p2 = (camSettings->posB.z - camSettings->posA.z) * delta;
+    delta = z - camSettings->points.two.Az;
+    p2 = (camSettings->points.two.Bz - camSettings->points.two.Az) * delta;
 
-    delta = x - camSettings->posB.x;
-    p3 = (camSettings->posB.x - camSettings->posA.x) * delta;
+    delta = x - camSettings->points.two.Bx;
+    p3 = (camSettings->points.two.Bx - camSettings->points.two.Ax) * delta;
 
-    delta = z - camSettings->posB.z;
-    p4 = (camSettings->posB.z - camSettings->posA.z) * delta;
+    delta = z - camSettings->points.two.Bz;
+    p4 = (camSettings->points.two.Bz - camSettings->points.two.Az) * delta;
 
     product1 = p1 + p2;
     product2 = p3 + p4;
@@ -66,7 +259,7 @@ void func_80032970(Camera* camera, f32 arg1) {
     s32 flags = camera->flags & CAMERA_FLAG_1000;
     s32 a2 = flags != 0;
 
-    if (camera->currentController != NULL && camera->currentController->type == CAMERA_SETTINGS_TYPE_4) {
+    if (camera->currentController != NULL && camera->currentController->type == CAM_CONTROL_FIXED_POS_AND_ORIENTATION) {
         a2 = TRUE;
     }
 
@@ -183,7 +376,7 @@ void func_80032C64(Camera* camera) {
     settings3 = settings = test_ray_zone(camera->targetPos.x, camera->targetPos.y + 10.0f, camera->targetPos.z, NULL);
 
     if (settings != NULL) {
-        if (settings->type == CAMERA_SETTINGS_TYPE_2 || settings->type == CAMERA_SETTINGS_TYPE_5 || (s2 = func_800328A4(settings, camera->targetPos.x, camera->targetPos.z))) {
+        if (settings->type == CAM_CONTROL_CONSTRAIN_TO_LINE || settings->type == CAM_CONTROL_LOOK_AT_POINT_CONSTAIN_TO_LINE || (s2 = func_800328A4(settings, camera->targetPos.x, camera->targetPos.z))) {
             if (camera->unk_530) {
                 guPerspectiveF(camera->perspectiveMatrix, &camera->perspNorm, camera->vfov,
                                (f32)camera->viewportW / (f32)camera->viewportH, camera->nearClip, camera->farClip, 1.0f);
@@ -200,7 +393,7 @@ void func_80032C64(Camera* camera) {
             } else {
                 CameraControlSettings* aabbForZoneBelow = camera->aabbForZoneBelow;
 
-                if (!(aabbForZoneBelow != NULL && (aabbForZoneBelow->type == CAMERA_SETTINGS_TYPE_2 || aabbForZoneBelow->type == CAMERA_SETTINGS_TYPE_5 || func_800328A4(settings, camera->unk_524, camera->unk_528) != 0))) {
+                if (!(aabbForZoneBelow != NULL && (aabbForZoneBelow->type == CAM_CONTROL_CONSTRAIN_TO_LINE || aabbForZoneBelow->type == CAM_CONTROL_LOOK_AT_POINT_CONSTAIN_TO_LINE || func_800328A4(settings, camera->unk_524, camera->unk_528) != 0))) {
                     if (aabbForZoneBelow != NULL && s2 != 0) {
                         camera->unk_52C = s2;
                     } else {
@@ -233,22 +426,22 @@ void func_80032C64(Camera* camera) {
     newPosZ = camera->targetPos.z + leadAmount * sin_rad(rotationRad);
     settings = test_ray_zone(newPosX, camera->targetPos.y + 10.0f, newPosZ, &zone);
     if (settings != NULL) {
-        if (settings->type == CAMERA_SETTINGS_TYPE_2 || settings->type == CAMERA_SETTINGS_TYPE_5 || func_800328A4(camera->aabbForZoneBelow, newPosX, newPosZ) != 0) {
+        if (settings->type == CAM_CONTROL_CONSTRAIN_TO_LINE || settings->type == CAM_CONTROL_LOOK_AT_POINT_CONSTAIN_TO_LINE || func_800328A4(camera->aabbForZoneBelow, newPosX, newPosZ) != 0) {
             cond = TRUE;
-            dist = 1000000.0f;
-            if (camera->aabbForZoneBelow != NULL && camera->aabbForZoneBelow->type == CAMERA_SETTINGS_TYPE_6) {
+            dist = SQ(1000.0f);
+            if (camera->aabbForZoneBelow != NULL && camera->aabbForZoneBelow->type == CAM_CONTROL_CONSTAIN_BETWEEN_POINTS) {
                 settings2 = camera->aabbForZoneBelow;
                 cond = FALSE;
 
-                deltaPosX = settings2->posB.x - settings2->posA.x;
-                deltaPosZ = settings2->posB.z - settings2->posA.z;
+                deltaPosX = settings2->points.two.Bx - settings2->points.two.Ax;
+                deltaPosZ = settings2->points.two.Bz - settings2->points.two.Az;
 
-                if (func_800325E4(settings2->posA.x, settings2->posA.z, settings2->posA.x - deltaPosZ, settings2->posA.z + deltaPosX,
-                                  camera->targetPos.x, camera->targetPos.z, newPosX, newPosZ, &sp44, &sp48, &sp4C) && sp4C < 1000000.0f) {
+                if (calculate_line_segment_intersection(settings2->points.two.Ax, settings2->points.two.Az, settings2->points.two.Ax - deltaPosZ, settings2->points.two.Az + deltaPosX,
+                                  camera->targetPos.x, camera->targetPos.z, newPosX, newPosZ, &sp44, &sp48, &sp4C) && sp4C < SQ(1000.0f)) {
                     dist = sp4C;
                 }
                 do {
-                    if (func_800325E4(settings2->posB.x, settings2->posB.z, settings2->posB.x - deltaPosZ, settings2->posB.z + deltaPosX,
+                    if (calculate_line_segment_intersection(settings2->points.two.Bx, settings2->points.two.Bz, settings2->points.two.Bx - deltaPosZ, settings2->points.two.Bz + deltaPosX,
                                   camera->targetPos.x, camera->targetPos.z, newPosX, newPosZ, &sp44, &sp48, &sp4C) && sp4C < dist) {
                         dist = sp4C;
                     }
@@ -256,17 +449,17 @@ void func_80032C64(Camera* camera) {
             }
             if (cond) {
                 for (i = 0; i < zone->numTriangles; i++) {
-                    if (func_800322DC(zone->triangleTable[i].v1->x, zone->triangleTable[i].v1->z,
+                    if (calculate_segment_intersection(zone->triangleTable[i].v1->x, zone->triangleTable[i].v1->z,
                                       zone->triangleTable[i].v2->x, zone->triangleTable[i].v2->z,
                                       camera->targetPos.x, camera->targetPos.z, newPosX, newPosZ, &sp44, &sp48, &sp4C) && sp4C < dist) {
                         dist = sp4C;
                     }
-                    if (func_800322DC(zone->triangleTable[i].v2->x, zone->triangleTable[i].v2->z,
+                    if (calculate_segment_intersection(zone->triangleTable[i].v2->x, zone->triangleTable[i].v2->z,
                                       zone->triangleTable[i].v3->x, zone->triangleTable[i].v3->z,
                                       camera->targetPos.x, camera->targetPos.z, newPosX, newPosZ, &sp44, &sp48, &sp4C) && sp4C < dist) {
                         dist = sp4C;
                     }
-                    if (func_800322DC(zone->triangleTable[i].v3->x, zone->triangleTable[i].v3->z,
+                    if (calculate_segment_intersection(zone->triangleTable[i].v3->x, zone->triangleTable[i].v3->z,
                                       zone->triangleTable[i].v1->x, zone->triangleTable[i].v1->z,
                                       camera->targetPos.x, camera->targetPos.z, newPosX, newPosZ, &sp44, &sp48, &sp4C) && sp4C < dist) {
                         dist = sp4C;
@@ -274,7 +467,7 @@ void func_80032C64(Camera* camera) {
                 }
             }
 
-            if (dist == 1000000.0f || dist == 0) {
+            if (dist == SQ(1000.0f) || dist == 0) {
                 camera->leadAmount = 0.0f;
             } else {
                 camera->leadAmount = (camera->leadAmount > 0.0f) ? sqrtf(dist) : -sqrtf(dist);

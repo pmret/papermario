@@ -13,7 +13,7 @@ BSS s32 D_802BE938;
 BSS s32 D_802BE93C;
 BSS TweesterPhysics BombetteTweesterPhysics;
 
-void entity_interacts_with_current_partner(s32 arg0);
+void entity_try_partner_interaction_trigger(s32 arg0);
 
 void func_802BD100_317E50(Npc* npc) {
     f32 x, y, z;
@@ -48,12 +48,12 @@ void func_802BD100_317E50(Npc* npc) {
 
         if (!(angle >= 360.0f)) {
             if (NpcHitQueryColliderID >= 0 && (NpcHitQueryColliderID & COLLISION_WITH_ENTITY_BIT) != 0) {
-                entity_interacts_with_current_partner(NpcHitQueryColliderID & ~COLLISION_WITH_ENTITY_BIT);
+                entity_try_partner_interaction_trigger(NpcHitQueryColliderID & ~COLLISION_WITH_ENTITY_BIT);
             }
         }
     } else {
         if (NpcHitQueryColliderID >= 0 && (NpcHitQueryColliderID & COLLISION_WITH_ENTITY_BIT) != 0) {
-            entity_interacts_with_current_partner(NpcHitQueryColliderID & ~COLLISION_WITH_ENTITY_BIT);
+            entity_try_partner_interaction_trigger(NpcHitQueryColliderID & ~COLLISION_WITH_ENTITY_BIT);
         }
     }
 }
@@ -226,7 +226,7 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
 
     switch (evt->functionTemp[0]) {
         case 20:
-            if ((playerStatus->inputEnabledCounter != 0) || (playerStatus->flags & PS_FLAG_JUMPING) || !(npc->flags & NPC_FLAG_FALLING)) {
+            if ((playerStatus->inputEnabledCounter != 0) || (playerStatus->flags & PS_FLAG_JUMPING) || !(npc->flags & NPC_FLAG_GROUNDED)) {
                 return ApiStatus_DONE2;
             }
             disable_player_input();
@@ -238,7 +238,7 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
             npc->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_GRAVITY | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8);
             partnerActionStatus->partnerActionState = PARTNER_ACTION_USE;
             partnerActionStatus->actingPartner = PARTNER_BOMBETTE;
-            D_802BE920 = func_800EF4E0();
+            D_802BE920 = partner_force_player_flip_done();
             enable_npc_blur(npc);
             npc->duration = 4;
             npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
@@ -316,7 +316,7 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
             if (evt->functionTemp[1] < 45) {
                 if (!(npc->flags & NPC_FLAG_COLLDING_WITH_WORLD) && (D_802BE938 == 0)) {
                     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
-                    func_8003D660(npc, 0);
+                    spawn_surface_effects(npc, SURFACE_INTERACT_WALK);
                 } else {
                     D_802BE938 = 1;
                 }
@@ -396,7 +396,7 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
                     break;
             }
             exec_ShakeCam1(0, 0, 20);
-            func_8003D660(npc, 2);
+            spawn_surface_effects(npc, SURFACE_INTERACT_LAND);
             collisionStatus->bombetteExploded = 0;
             collisionStatus->bombetteExplosionPos.x = npc->pos.x;
             collisionStatus->bombetteExplosionPos.y = npc->pos.y;
@@ -460,7 +460,7 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
                 if (fabsf(playerStatus->position.y - npc->pos.y) < 500.0) {
                     evt->functionTemp[0] = 8;
                     break;
-                } else if (func_800397E8(npc, npc->jumpVelocity)) {
+                } else if (npc_try_snap_to_ground(npc, npc->jumpVelocity)) {
                     evt->functionTemp[0] = 7;
                     break;
                 }

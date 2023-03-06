@@ -438,7 +438,7 @@ void func_802BDDD8_321928(Npc* npc) {
             npc->pos.z += (z - npc->pos.z) / 5.0f;
         }
 
-        func_8003D660(npc, 1);
+        spawn_surface_effects(npc, SURFACE_INTERACT_RUN);
 
     } else {
         yaw = 90.0f;
@@ -679,7 +679,7 @@ ApiStatus func_802BE724_322274(Evt* script, s32 isInitialCall) {
             npc->flags |= (NPC_FLAG_TOUCHES_GROUND | NPC_FLAG_IGNORE_PLAYER_COLLISION);
             set_action_state(ACTION_STATE_RIDE);
             D_802BFF0C = 1;
-            func_800EF4E0();
+            partner_force_player_flip_done();
             npc->moveToPos.x = playerStatus->position.x;
             npc->moveToPos.y = playerStatus->position.y;
             npc->moveToPos.z = playerStatus->position.z;

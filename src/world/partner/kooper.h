@@ -9,9 +9,9 @@ s32 world_kooper_test_first_strike(Npc*, Npc*);
 void world_kooper_pre_battle(Npc*);
 void world_kooper_post_battle(Npc*);
 
-extern EvtScript world_kooper_take_out;
-extern EvtScript world_kooper_update;
-extern EvtScript world_kooper_use_ability;
-extern EvtScript world_kooper_put_away;
+extern EvtScript EVS_WorldKooperTakeOut;
+extern EvtScript EVS_WorldKooperUpdate;
+extern EvtScript EVS_KooperUseAbility;
+extern EvtScript EVS_KooperPutAway;
 
 #endif

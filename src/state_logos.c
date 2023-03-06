@@ -68,7 +68,7 @@ void state_init_logos(void) {
 
     nuContRmbForceStop();
     create_cameras_a();
-    gCameras[CAM_DEFAULT].updateMode = 6;
+    gCameras[CAM_DEFAULT].updateMode = CAM_UPDATE_MODE_6;
     gCameras[CAM_DEFAULT].unk_06 = TRUE;
     gCameras[CAM_DEFAULT].nearClip = 16;
     gCameras[CAM_DEFAULT].farClip = 4096;

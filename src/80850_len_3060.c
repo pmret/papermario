@@ -506,30 +506,43 @@ void status_menu_draw_stat(s32 id, s32 x, s32 y, s32 currentValue, s32 maxValue)
     }
 }
 
-#ifdef NON_MATCHING
 //regalloc issues
+#ifdef NON_MATCHING
 void update_status_menu(void) {
     UiStatus* uiStatus = &gUIStatus;
     PlayerData* playerData = &gPlayerData;
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s8 new_var;
     s32 s0;
     s32 s02;
     s32 fp;
+    s32 new_var;
     s32 s5;
     s32 s6;
     s32 id;
     s32 s4;
+    s32 s44;
     s32 s7;
     s32 s1;
+    s32 s66;
     s32 v0;
     s32 temp;
-s32 new_var2;
+
     s32 sp50;
     s32 sp54;
     s32 sp5C;
     s32 sp60;
-    s32 something;
+
+    /*
+        regalloc:
+        target  |  current     |  do while
+        ------------------------------------------
+        s5      |  sp54        |   s7
+        s6      |  s5          |   s5
+        s7      |  s6          |   s6
+        s8      |  sp50        |   sp50
+        sp50    |  s8          |   sp54
+        sp54    |  s7          |   s8
+    */
 
     if (gGameStatusPtr->creditsViewportMode >= 0 ||
         gGameStatusPtr->demoState != 0 ||
@@ -642,8 +655,6 @@ s32 new_var2;
         uiStatus->unk_3B[0] = 0;
     }
 
-    something = 174;
-
     switch (uiStatus->hidden) {
         case 0:
             uiStatus->drawPosY += 10;
@@ -671,7 +682,6 @@ s32 new_var2;
             uiStatus->drawPosY -= 5;
             if (uiStatus->drawPosY < -100) {
                 uiStatus->drawPosY = -100;
-
                 if (!uiStatus->ignoreChanges) {
                     if (playerStatus->actionState != ACTION_STATE_IDLE) {
                         uiStatus->showTimer = 0;
@@ -851,6 +861,7 @@ s32 new_var2;
     }
 
     sp54 = 0;
+    new_var = fp;
     if (uiStatus->unk_57 != 0) {
         if (uiStatus->unk_58 != 0) {
             uiStatus->unk_58--;
@@ -895,8 +906,19 @@ s32 new_var2;
             break;
         }
         s02++;
+
         hud_element_set_script(id, SPIncrementHudScripts[sp50]);
-        hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[0], s5 - 2);
+        hud_element_set_render_pos(id, new_var + sp50 * 20 + D_800F7FE8[0], s5 - 2);
+        hud_element_draw_next(id);
+
+        s1++;
+        if (s02 >= s4 || s02 >= s7 && sp54 == 0) {
+            break;
+        }
+        s02++;
+        hud_element_set_script(id, SPIncrementHudScripts[sp50]);
+
+        hud_element_set_render_pos(id, new_var + sp50 * 20 + D_800F7FE8[1], s5 - 2);
         hud_element_draw_next(id);
         s1++;
         if (s02 >= s4 || s02 >= s7 && sp54 == 0) {
@@ -904,7 +926,7 @@ s32 new_var2;
         }
         s02++;
         hud_element_set_script(id, SPIncrementHudScripts[sp50]);
-        hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[1], s5 - 2);
+        hud_element_set_render_pos(id, new_var + sp50 * 20 + D_800F7FE8[2], s5 - 2);
         hud_element_draw_next(id);
         s1++;
         if (s02 >= s4 || s02 >= s7 && sp54 == 0) {
@@ -912,7 +934,7 @@ s32 new_var2;
         }
         s02++;
         hud_element_set_script(id, SPIncrementHudScripts[sp50]);
-        hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[2], s5 - 2);
+        hud_element_set_render_pos(id, new_var + sp50 * 20 + D_800F7FE8[3], s5 - 2);
         hud_element_draw_next(id);
         s1++;
         if (s02 >= s4 || s02 >= s7 && sp54 == 0) {
@@ -920,15 +942,7 @@ s32 new_var2;
         }
         s02++;
         hud_element_set_script(id, SPIncrementHudScripts[sp50]);
-        hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[3], s5 - 2);
-        hud_element_draw_next(id);
-        s1++;
-        if (s02 >= s4 || s02 >= s7 && sp54 == 0) {
-            break;
-        }
-        s02++;
-        hud_element_set_script(id, SPIncrementHudScripts[sp50]);
-        hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[4], s5 - 2);
+        hud_element_set_render_pos(id, new_var + sp50 * 20 + D_800F7FE8[4], s5 - 2);
         hud_element_draw_next(id);
         s1++;
 
@@ -937,7 +951,7 @@ s32 new_var2;
         }
         s02++;
         hud_element_set_script(id, SPIncrementHudScripts[sp50]);
-        hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[5], s5 - 2);
+        hud_element_set_render_pos(id, new_var + sp50 * 20 + D_800F7FE8[5], s5 - 2);
         hud_element_draw_next(id);
         s1++;
 
@@ -946,7 +960,7 @@ s32 new_var2;
         }
         s02++;
         hud_element_set_script(id, SPIncrementHudScripts[sp50]);
-        hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[6], s5 - 2);
+        hud_element_set_render_pos(id, new_var + sp50 * 20 + D_800F7FE8[6], s5 - 2);
         hud_element_draw_next(id);
         s1++;
 
@@ -955,87 +969,100 @@ s32 new_var2;
         }
         s02++;
         hud_element_set_script(id, SPStarHudScripts[sp50]);
-        hud_element_set_render_pos(id, fp + 12 + sp50 * 20, s5);
+        hud_element_set_render_pos(id, new_var + 12 + sp50 * 20, s5);
         hud_element_draw_next(id);
+
         s1 = 0;
         sp50++;
         if (s02 >= s4 || s02 >= s7 && sp54 == 0) {
             break;
         }
     }
-    new_var2 = s5;
 
-    temp = playerData->maxStarPower;
-    s4 = temp * 8;
+    s4 = playerData->maxStarPower * 8;
     while (TRUE) {
         if (s02 >= s4) {
             break;
         }
         if (s1 == 0) {
+            do {
             s02++;
             hud_element_set_script(id, &HES_StatusSPEmptyIncrement);
-            hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[s1], new_var2 - 2);
+            hud_element_set_render_pos(id, new_var + sp50 * 20 + D_800F7FE8[s1], s5 - 2);
             hud_element_draw_next(id);
+                } while (0);
             if (s02 >= s4) {
                 break;
             }
             s1 = 1;
         }
         if (s1 == 1) {
+            do {
             s02++;
             hud_element_set_script(id, &HES_StatusSPEmptyIncrement);
-            hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[s1], new_var2 - 2);
+            hud_element_set_render_pos(id, new_var + sp50 * 20 + D_800F7FE8[s1], s5 - 2);
             hud_element_draw_next(id);
+                } while (0);
             if (s02 >= s4) {
                 break;
             }
             s1 = 2;
         }
         if (s1 == 2) {
+            do {
             s02++;
             hud_element_set_script(id, &HES_StatusSPEmptyIncrement);
-            hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[s1], new_var2 - 2);
+            hud_element_set_render_pos(id, new_var + sp50 * 20 + D_800F7FE8[s1], s5 - 2);
             hud_element_draw_next(id);
+                } while (0);
             if (s02 >= s4) {
                 break;
             }
             s1 = 3;
         }
         if (s1 == 3) {
+            do {
             s02++;
             hud_element_set_script(id, &HES_StatusSPEmptyIncrement);
-            hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[s1], new_var2 - 2);
+            hud_element_set_render_pos(id, new_var + sp50 * 20 + D_800F7FE8[s1], s5 - 2);
             hud_element_draw_next(id);
+                } while (0);
             if (s02 >= s4) {
                 break;
             }
             s1 = 4;
         }
         if (s1 == 4) {
+            do {
             s02++;
             hud_element_set_script(id, &HES_StatusSPEmptyIncrement);
-            hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[s1], new_var2 - 2);
+            hud_element_set_render_pos(id, new_var + sp50 * 20 + D_800F7FE8[s1], s5 - 2);
             hud_element_draw_next(id);
+                } while (0);
             if (s02 >= s4) {
                 break;
             }
             s1 = 5;
         }
         if (s1 == 5) {
+            do {
             s02++;
             hud_element_set_script(id, &HES_StatusSPEmptyIncrement);
-            hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[s1], new_var2 - 2);
+            hud_element_set_render_pos(id, new_var + sp50 * 20 + D_800F7FE8[s1], s5 - 2);
             hud_element_draw_next(id);
+                } while (0);
             if (s02 >= s4) {
                 break;
             }
             s1 = 6;
         }
         if (s1 == 6) {
+            do {
             s02++;
             hud_element_set_script(id, &HES_StatusSPEmptyIncrement);
-            hud_element_set_render_pos(id, fp + sp50 * 20 + D_800F7FE8[s1], new_var2 - 2);
+            hud_element_set_render_pos(id, new_var + sp50 * 20 + D_800F7FE8[s1], s5 - 2);
             hud_element_draw_next(id);
+                } while (0);
             if (s02 >= s4) {
                 break;
             }
@@ -1043,10 +1070,12 @@ s32 new_var2;
         }
 
         if (s1 == 7) {
+            do {
             s02++;
             hud_element_set_script(id, &HES_StatusStarEmpty);
-            hud_element_set_render_pos(id, fp + 12 + sp50 * 20, new_var2);
+            hud_element_set_render_pos(id, new_var + 12 + sp50 * 20, s5);
             hud_element_draw_next(id);
+            } while (0);
             if (s02 >= s4) {
                 break;
             }
@@ -1106,7 +1135,7 @@ void update_coin_counter(void) {
         if ((uiStatus->displayCoins == playerData->coins) || (uiStatus->unk_6C[0] <= 30)) {
             uiStatus->unk_6C[0] -= 1;
             if (uiStatus->unk_6C[0] == 0) {
-                set_window_update(WINDOW_ID_20, (s32)basic_hidden_window_update);
+                set_window_update(WINDOW_ID_CURRENCY_COUNTER, (s32)basic_hidden_window_update);
                 uiStatus->unk_6C[1] = 15;
                 D_8010CD10 = 0;
                 D_8010CD12 = 1;
@@ -1127,7 +1156,7 @@ void show_coin_counter(void) {
     s32 index;
 
     if ((D_8010CD10 != 0) || (D_8010CD12 != 0)) {
-        set_window_update(WINDOW_ID_20, WINDOW_UPDATE_HIDE);
+        set_window_update(WINDOW_ID_CURRENCY_COUNTER, WINDOW_UPDATE_HIDE);
         if (uiStatus->iconIndex12 > -1) {
             hud_element_free(uiStatus->iconIndex10);
             hud_element_free(uiStatus->iconIndex11);
@@ -1140,8 +1169,8 @@ void show_coin_counter(void) {
     }
 
     if (uiStatus->unk_6C[0] == 0) {
-        set_window_properties(WINDOW_ID_20, 32, 164, 64, 20, 0x15, coin_counter_draw_content, 0, -1);
-        set_window_update(WINDOW_ID_20, (s32)basic_window_update);
+        set_window_properties(WINDOW_ID_CURRENCY_COUNTER, 32, 164, 64, 20, WINDOW_PRIORITY_21, coin_counter_draw_content, 0, -1);
+        set_window_update(WINDOW_ID_CURRENCY_COUNTER, (s32)basic_window_update);
         index = hud_element_create(&HES_MenuTimes);
         uiStatus->iconIndex10 = index;
         hud_element_set_flags(index, HUD_ELEMENT_FLAG_80);

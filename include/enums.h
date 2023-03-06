@@ -667,6 +667,7 @@ enum SoundIDs {
     SOUND_MENU_CHANGE_TAB           = 0x000000C8,
     SOUND_MENU_NEXT                 = 0x000000C9,
     SOUND_MENU_BACK                 = 0x000000CA,
+    SOUND_CB                        = 0x000000CB,
     SOUND_CC                        = 0x000000CC,
     SOUND_CD                        = 0x000000CD,
     SOUND_CE                        = 0x000000CE,
@@ -3244,7 +3245,7 @@ enum ItemEntityFlags {
     ITEM_ENTITY_FLAG_10            = 0x00000010,
     ITEM_ENTITY_FLAG_HIDDEN        = 0x00000040, // do not render; player cant pickup
     ITEM_ENTITY_FLAG_80            = 0x00000080,
-    ITEM_ENTITY_FLAG_100           = 0x00000100,
+    ITEM_ENTITY_FLAG_AUTO_COLLECT  = 0x00000100,
     ITEM_ENTITY_FLAG_NEVER_VANISH  = 0x00000200,
     ITEM_ENTITY_FLAG_400           = 0x00000400,
     ITEM_ENTITY_FLAG_800           = 0x00000800,
@@ -3257,7 +3258,7 @@ enum ItemEntityFlags {
     ITEM_ENTITY_FLAG_40000         = 0x00040000,
     ITEM_ENTITY_FLAG_TRANSPARENT   = 0x00080000,
     ITEM_ENTITY_FLAG_100000        = 0x00100000,
-    ITEM_ENTITY_FLAG_200000        = 0x00200000,
+    ITEM_ENTITY_FLAG_CANT_COLLECT  = 0x00200000,
     ITEM_ENTITY_FLAG_400000        = 0x00400000,
     ITEM_ENTITY_FLAG_800000        = 0x00800000,
     ITEM_ENTITY_FLAG_1000000       = 0x01000000,
@@ -3414,8 +3415,8 @@ enum EventSupressFlags {
 enum PartnerActions {
     PARTNER_ACTION_NONE             = 0, // generic state
     PARTNER_ACTION_USE              = 1, // generic state
-    PARTNER_ACTION_KOOPER_1         = 1,
-    PARTNER_ACTION_KOOPER_2         = 2,
+    PARTNER_ACTION_KOOPER_GATHER    = 1,
+    PARTNER_ACTION_KOOPER_TOSS      = 2,
     PARTNER_ACTION_BOMBETTE_1       = 1,
     PARTNER_ACTION_BOMBETTE_2       = 2,
     PARTNER_ACTION_BOMBETTE_3       = 3,
@@ -3490,7 +3491,7 @@ enum NpcFlags {
     NPC_FLAG_GRAVITY                        = 0x00000200, // Enables gravity. Does nothing if NPC_FLAG_JUMPING is set.
     NPC_FLAG_DONT_UPDATE_SHADOW_Y           = 0x00000400, // When shadow raycasting is off, only X and Z update as NPC moves
     NPC_FLAG_JUMPING                        = 0x00000800,
-    NPC_FLAG_FALLING                        = 0x00001000,
+    NPC_FLAG_GROUNDED                       = 0x00001000, // Touching the ground
     NPC_FLAG_COLLDING_WITH_WORLD            = 0x00002000, // Colliding with world in front or to the sides of the NPC
     NPC_FLAG_COLLDING_FORWARD_WITH_WORLD    = 0x00004000, // Colliding with world directly in front of NPC
     NPC_FLAG_IGNORE_ENTITY_COLLISION        = 0x00008000,
@@ -3667,10 +3668,12 @@ enum PopupResult {
 
 enum WindowPriority {
     WINDOW_PRIORITY_0               = 0,
+    WINDOW_PRIORITY_1               = 1,
     WINDOW_PRIORITY_10              = 10,
     WINDOW_PRIORITY_19              = 19,
     WINDOW_PRIORITY_20              = 20,
     WINDOW_PRIORITY_21              = 21,
+    WINDOW_PRIORITY_64              = 64,
 };
 
 /// not really
@@ -5245,6 +5248,12 @@ enum SurfaceType {
     */
 };
 
+typedef enum SurfaceInteractMode {
+    SURFACE_INTERACT_WALK       = 0,
+    SURFACE_INTERACT_RUN        = 1,
+    SURFACE_INTERACT_LAND       = 2,
+} SurfaceInteractMode;
+
 //TODO -- temporarily combined with SurfaceType for map data dumper
 enum ColliderFlags {
     COLLIDER_FLAGS_UPPER_MASK        = 0x7FFFFE00, // map data dumper needs this to be first
@@ -5361,17 +5370,54 @@ enum CameraFlags {
 enum CameraMoveFlags {
     CAMERA_MOVE_IGNORE_PLAYER_Y     = 0x00000001,
     CAMERA_MOVE_FLAG_2              = 0x00000002,
-    CAMERA_MOVE_FLAG_4              = 0x00000004
+    CAMERA_MOVE_FLAG_4              = 0x00000004,
 };
 
-enum CameraSettingsType {
-    CAMERA_SETTINGS_TYPE_0  = 0,
-    CAMERA_SETTINGS_TYPE_1  = 1,
-    CAMERA_SETTINGS_TYPE_2  = 2,
-    CAMERA_SETTINGS_TYPE_3  = 3,
-    CAMERA_SETTINGS_TYPE_4  = 4,
-    CAMERA_SETTINGS_TYPE_5  = 5,
-    CAMERA_SETTINGS_TYPE_6  = 6,
+enum CameraUpdateType {
+    CAM_UPDATE_MODE_0               = 0,
+    CAM_UPDATE_MODE_1               = 1,
+    CAM_UPDATE_MODE_2               = 2,
+    CAM_UPDATE_MODE_3               = 3,
+    CAM_UPDATE_MODE_4               = 4,
+    CAM_UPDATE_MODE_5               = 5,
+    CAM_UPDATE_MODE_6               = 6,
+};
+
+enum CameraControlType {
+    // Camera follows the player, using a fixed yaw position.
+    // Uses: A/B as 2D points
+    // Yaw is defined by the line segment AB
+    // flag 0 = free forward movement (follow player)
+	// flag 1 = lock forward movement (must intersect B)
+    CAM_CONTROL_FIXED_ORIENTATION   = 0,
+
+    // Camera faces toward or away from a point with the player in the center of the frame.
+    // Use a negative boom length to look away from a point.
+    // flag 1 = Constrain to Fixed Radius
+    CAM_CONTROL_LOOK_AT_POINT       = 1,
+
+    // Camera is contrained to a point along the line segment BC.
+    // Use these near exits to stop camera movement.
+    // Uses: A/B/C as 2D points
+    // The target position is found by projecting player position onto BC along a line orthogonal to AB.
+    // If posA == posB, AB is ignored and the projection axis will be along a line orthogonal to BC with
+    // the resulting position being the closest point on BC to the player.
+    // flag 1 = Freeze Camera Position
+    CAM_CONTROL_CONSTRAIN_TO_LINE   = 2,
+
+    // Follows the player using whatever yaw value the camera initially possessed.
+    CAM_CONTROL_FOLLOW_PLAYER       = 3,
+
+    // Both position and yaw are fixed.
+    CAM_CONTROL_FIXED_POS_AND_ORIENTATION       = 4,
+
+    // Look Toward Point, Constrain to Line
+    // flag 1 = Freeze Target at Point
+    CAM_CONTROL_LOOK_AT_POINT_CONSTAIN_TO_LINE  = 5,
+
+    // Camera position is contrained to a line segment, with yaw perpendicular to the line segment.
+    // flag 1 = Disable Forward Motion
+    CAM_CONTROL_CONSTAIN_BETWEEN_POINTS         = 6,
 };
 
 enum BtlCameraPreset {
@@ -5943,7 +5989,7 @@ enum WindowId {
     WINDOW_ID_17                                = 17,
     WINDOW_ID_18                                = 18,
     WINDOW_ID_19                                = 19,
-    WINDOW_ID_20                                = 20,
+    WINDOW_ID_CURRENCY_COUNTER                  = 20,
     WINDOW_ID_21                                = 21,
     WINDOW_ID_PAUSE_MAIN                        = 22,
     WINDOW_ID_PAUSE_DECRIPTION                  = 23,
@@ -6541,12 +6587,15 @@ enum MsgStateFlags {
     MSG_STATE_FLAG_80               = 0x000080,
     MSG_STATE_FLAG_PRINT_QUICKLY    = 0x000100,
     MSG_STATE_FLAG_400              = 0x000400,
+    MSG_STATE_FLAG_800              = 0x000800,
+    MSG_STATE_FLAG_1000             = 0x001000,
     MSG_STATE_FLAG_4000             = 0x004000,
     MSG_STATE_FLAG_8000             = 0x008000,
     MSG_STATE_FLAG_10000            = 0x010000,
     MSG_STATE_FLAG_20000            = 0x020000,
     MSG_STATE_FLAG_40000            = 0x040000,
     MSG_STATE_FLAG_80000            = 0x080000,
+    MSG_STATE_FLAG_100000           = 0x100000,
     MSG_STATE_FLAG_800000           = 0x800000,
 };
 

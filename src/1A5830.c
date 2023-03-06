@@ -2087,8 +2087,72 @@ ApiStatus RunPartTo(Evt* script, s32 isInitialCall) {
     }
 }
 
+#ifdef NON_MATCHING
+f32 update_lerp_battle(s32 easing, f32 start, f32 end, s32 elapsed, s32 duration) {
+    s32 timeLeft;
+    f32 absMag;
+    f64 start2;
+    f64 start3;
+    f32 len;
+    f64 len2;
+    f32 len3;
+    f64 len4;
+    f32 t1;
+
+    switch (easing) {
+        case EASING_LINEAR:
+            return start + (end - start) * elapsed / duration;
+        case EASING_QUADRATIC_IN:
+            return start + SQ(elapsed) * (end - start) / SQ(duration);
+        case EASING_CUBIC_IN:
+            return start + CUBE(elapsed) * (end - start) / CUBE(duration);
+        case EASING_QUARTIC_IN:
+            return start + QUART(elapsed) * (end - start) / QUART(duration);
+        case EASING_COS_SLOW_OVERSHOOT:
+            len = (end - start);
+            return end - (len * cos_rad(((f32)elapsed / duration) * PI_D * 4.0) * (duration - elapsed) *
+                    (duration - elapsed)) / SQ((f32)duration);
+        case EASING_COS_FAST_OVERSHOOT:
+            len = (end - start);
+            return end - (len * cos_rad((((f32)SQ(elapsed) / duration) * PI_D * 4.0) / 15.0) * (duration - elapsed) *
+                    (duration - elapsed)) / SQ((f32)duration);
+        case EASING_QUADRATIC_OUT:
+            timeLeft = duration - elapsed;
+            return start + (end - start) - ((SQ(timeLeft) * (end - start))) / SQ(duration);
+        case EASING_CUBIC_OUT:
+            len = end - start;
+            timeLeft = duration - elapsed;
+            return start + len - ((CUBE(timeLeft) * len)) / CUBE(duration);
+        case EASING_QUARTIC_OUT:
+            len = end - start;
+            timeLeft = duration - elapsed;
+            return start + len - ((QUART(timeLeft) * len)) / QUART(duration);
+        case EASING_COS_BOUNCE:
+            absMag = cos_rad((((f32)SQ(elapsed) / duration) * PI_D * 4.0) / 40.0) * (duration - elapsed) *
+                    (duration - elapsed) / SQ((f32)duration);
+            if (absMag < 0.0f) {
+                absMag = -absMag;
+            }
+            return end - (end - start) * absMag;
+        case EASING_COS_IN_OUT:
+            len2 = end - start;
+            start2 = start;
+            return start2 + (len2 * (1.0 - cos_rad(((f32)elapsed * PI_D)       / (f32)duration)) / 2);
+        case EASING_SIN_OUT:
+            len3 = end - start;
+            return start + (len3 * sin_rad((((f32) elapsed) * (3.141592 / 2)) / ((f32) duration)));
+        case EASING_COS_IN:
+            len4 = end - start;
+            start3 = start;
+            return start3 + (len4 * (1.0 - cos_rad(((f32)elapsed * (PI_D / 2)) / (f32)duration)));
+    }
+
+    return 0.0f;
+}
+#else
 f32 update_lerp_battle(s32 easing, f32 start, f32 end, s32 elapsed, s32 duration);
 INCLUDE_ASM(s32, "1A5830", update_lerp_battle);
+#endif
 
 ApiStatus FlyToGoal(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

@@ -499,7 +499,7 @@ EvtScript N(goombario_tattle) = {
     EVT_CALL(func_802535B4, 0)
     EVT_CALL(SetCamEnabled, CAM_TATTLE, TRUE)
     EVT_CALL(SetCamFlag80, CAM_TATTLE, FALSE)
-    EVT_CALL(SetCamPerspective, CAM_TATTLE, 6, 25, 16, 1024)
+    EVT_CALL(SetCamPerspective, CAM_TATTLE, CAM_UPDATE_MODE_6, 25, 16, 1024)
     EVT_CALL(SetCamViewport, CAM_TATTLE, 37, 95, 138, 99)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)

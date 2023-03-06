@@ -284,7 +284,7 @@ void entity_CymbalPlant_idle(Entity* entity) {
                 data->unk_01++;
                 data->state++;
                 disable_player_input();
-                set_action_state(0);
+                set_action_state(ACTION_STATE_IDLE);
                 play_model_animation(entity->virtualModelIndex, Entity_CymbalPlant_AnimationGrab);
                 sfx_play_sound(SOUND_F2);
                 func_802BB8D4_E2E204(entity);
