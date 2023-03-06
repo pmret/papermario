@@ -1,87 +1,83 @@
 #include "common.h"
 
-typedef struct ISoyData {
+typedef struct ISpyNotification {
     /* 0x00 */ Vec3f pos;
     /* 0x0C */ f32 scale;
-    /* 0x10 */ s32 unk_10;
-    /* 0x14 */ s32 unk_14;
+    /* 0x10 */ char unk_10[8];
     /* 0x18 */ s32 time;
-    /* 0x1C */ s32 unk_1C;
+    /* 0x1C */ char unk_1C[4];
     /* 0x20 */ s32 flashCount;
     /* 0x24 */ s32 state;
     /* 0x28 */ s32 alpha;
-} ISoyData;
+} ISpyNotification;
 
 enum {
-    I_SPY_DELAY     = 0,
-    I_SPY_1  = 1,
-    I_SPY_2  = 2,
-    I_SPY_FADE_OUT  = 3,
+    I_SPY_DELAY         = 0, // icon waits to appear when entering map under certain conditions
+    I_SPY_APPEAR        = 1, // icon appears
+    I_SPY_OVERSHOOT     = 2, // icon scale overshoots before it begins animating
+    I_SPY_ANIMATE       = 3, // icon blinks for a second and a half and then vanishes
 };
 
-#include "i_spy.png.h"
-#include "i_spy.png.inc.c"
-#include "i_spy.pal.inc.c"
-#include "i_spy.2.pal.inc.c"
-#include "i_spy.flash.pal.inc.c"
-#include "i_spy_dlist.gfx.inc.c"
+#include "ispy_icon.png.h"
+#include "ispy_icon.png.inc.c"
+#include "ispy_icon.pal.inc.c"
+#include "ispy_icon.2.pal.inc.c"
+#include "ispy_icon.3.pal.inc.c"
+#include "ispy_icon.gfx.inc.c"
 
-BSS ISoyData D_802B7CB0;
+BSS ISpyNotification ISpyData;
+ISpyNotification* ISpyPtr = &ISpyData;
 
-ISoyData* D_802B7C78_E23228 = &D_802B7CB0;
+void ispy_notification_update(void);
 
-extern void (*ISpyNotificationCallback)(void);
-
-void func_802B735C_E2290C(void);
-
-void func_802B7000_E225B0(void) {
+void appendGfx_ispy_icon(void) {
     Matrix4f matrix1;
     Matrix4f matrix2;
     FoldImageRecPart foldImage;
-    s32 temp;
+    s32 flashPhase;
 
-    if (gPlayerStatus.animFlags & PA_FLAG_100) {
-        guScaleF(matrix1, D_802B7C78_E23228->scale, D_802B7C78_E23228->scale, D_802B7C78_E23228->scale);
+    if (gPlayerStatus.animFlags & PA_FLAG_ISPY_VISIBLE) {
+        guScaleF(matrix1, ISpyPtr->scale, ISpyPtr->scale, ISpyPtr->scale);
         guRotateF(matrix2, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
         guMtxCatF(matrix1, matrix2, matrix1);
-        guTranslateF(matrix2, D_802B7C78_E23228->pos.x, D_802B7C78_E23228->pos.y, D_802B7C78_E23228->pos.z);
+        guTranslateF(matrix2, ISpyPtr->pos.x, ISpyPtr->pos.y, ISpyPtr->pos.z);
         guMtxCatF(matrix1, matrix2, matrix2);
         guMtxF2L(matrix2, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], 3);
-        gSPDisplayList(gMasterGfxPos++, D_802B7C00_E231B0);
+        gSPDisplayList(gMasterGfxPos++, ispy_icon_gfx);
 
-        if (D_802B7C78_E23228->time < 47) {
-            D_802B7C78_E23228->flashCount++;
+        if (ISpyPtr->time < 47) {
+            ISpyPtr->flashCount++;
         }
 
-        temp = D_802B7C78_E23228->flashCount;
-        temp = temp - (temp / 12) * 12;
-        switch (temp) {
+        flashPhase = ISpyPtr->flashCount;
+        flashPhase = flashPhase - (flashPhase / 12) * 12;
+        switch (flashPhase) {
             case 0:
             case 1:
             case 2:
             case 3:
-                foldImage.palette = D_802B7BA0_E23150;
+                foldImage.palette = ispy_icon_1_pal;
                 break;
             case 4:
             case 5:
             case 6:
             case 7:
-                foldImage.palette = D_802B7BC0_E23170;
+                foldImage.palette = ispy_icon_2_pal;
                 break;
             case 8:
             case 9:
             case 10:
             case 11:
-                foldImage.palette = D_802B7BE0_E23190;
+                foldImage.palette = ispy_icon_3_pal;
                 break;
         }
-        fold_update(0, FOLD_TYPE_7, 255, 255, 255, D_802B7C78_E23228->alpha, 0);
+        fold_update(0, FOLD_TYPE_7, 255, 255, 255, ISpyPtr->alpha, 0);
 
-        foldImage.raster = D_802B7580_E22B30;
-        foldImage.width = 56;
-        foldImage.height = 56;
+        foldImage.raster = ispy_icon_img;
+        foldImage.width  = ispy_icon_img_width;
+        foldImage.height = ispy_icon_img_height;
         foldImage.xOffset = -28;
         foldImage.yOffset = 46;
         foldImage.opacity = 255;
@@ -91,73 +87,73 @@ void func_802B7000_E225B0(void) {
     }
 }
 
-void func_802B72C0_E22870(void) {
-    mem_clear(D_802B7C78_E23228, sizeof(*D_802B7C78_E23228));
+void ispy_notification_setup(void) {
+    mem_clear(ISpyPtr, sizeof(*ISpyPtr));
 
-    D_802B7C78_E23228->pos.x = gPlayerStatus.position.x;
-    D_802B7C78_E23228->pos.y = gPlayerStatus.position.y + gPlayerStatus.colliderHeight + 8.0f;
-    D_802B7C78_E23228->pos.z = gPlayerStatus.position.z;
+    ISpyPtr->pos.x = gPlayerStatus.position.x;
+    ISpyPtr->pos.y = gPlayerStatus.position.y + gPlayerStatus.colliderHeight + 8.0f;
+    ISpyPtr->pos.z = gPlayerStatus.position.z;
 
-    D_802B7C78_E23228->alpha = 255;
+    ISpyPtr->alpha = 255;
 
-    gPlayerStatus.animFlags |= PA_FLAG_100;
-    ISpyNotificationCallback = &func_802B735C_E2290C;
+    gPlayerStatus.animFlags |= PA_FLAG_ISPY_VISIBLE;
+    ISpyNotificationCallback = &ispy_notification_update;
 }
 
-void func_802B735C_E2290C(void) {
+void ispy_notification_update(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     s32 cond;
 
-    D_802B7C78_E23228->pos.y +=
-        (playerStatus->position.y + playerStatus->colliderHeight + 10.0f - D_802B7C78_E23228->pos.y) / 1.5f;
-    D_802B7C78_E23228->pos.x = playerStatus->position.x;
-    D_802B7C78_E23228->pos.z = playerStatus->position.z;
+    ISpyPtr->pos.y +=
+        (playerStatus->position.y + playerStatus->colliderHeight + 10.0f - ISpyPtr->pos.y) / 1.5f;
+    ISpyPtr->pos.x = playerStatus->position.x;
+    ISpyPtr->pos.z = playerStatus->position.z;
 
-    switch (D_802B7C78_E23228->state) {
+    switch (ISpyPtr->state) {
         case I_SPY_DELAY:
-            if (partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE &&
-                partnerActionStatus->actingPartner == PARTNER_LAKILESTER)
-            {
+            if (partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE
+             && partnerActionStatus->actingPartner == PARTNER_LAKILESTER
+            ) {
                 cond = gGameStatusPtr->keepUsingPartnerOnMapChange;
             } else {
                 cond = playerStatus->flags & (PS_FLAG_INPUT_DISABLED | PS_FLAG_NO_STATIC_COLLISION);
             }
 
             if (!cond) {
-                D_802B7C78_E23228->state++;
+                ISpyPtr->state++;
             }
             break;
-        case I_SPY_1:
+        case I_SPY_APPEAR:
             if (playerStatus->flags & PS_FLAG_PAUSED) {
-                D_802B7C78_E23228->state = I_SPY_FADE_OUT;
+                ISpyPtr->state = I_SPY_ANIMATE;
                 return;
             }
 
-            if (D_802B7C78_E23228->time++ >= 16) {
-                D_802B7C78_E23228->scale = 0.36f;
-                D_802B7C78_E23228->state++;
+            if (ISpyPtr->time++ >= 16) {
+                ISpyPtr->scale = 0.36f;
+                ISpyPtr->state++;
             }
             break;
-        case I_SPY_2:
-            D_802B7C78_E23228->scale = 0.57f;
-            D_802B7C78_E23228->state++;
+        case I_SPY_OVERSHOOT:
+            ISpyPtr->scale = 0.57f;
+            ISpyPtr->state++;
             sfx_play_sound_at_player(SOUND_17B, SOUND_SPACE_MODE_0);
             break;
-        case I_SPY_FADE_OUT:
-            D_802B7C78_E23228->scale = 0.53f;
-            if (D_802B7C78_E23228->time >= 47 || playerStatus->flags & PS_FLAG_PAUSED) {
-                D_802B7C78_E23228->alpha -= 64;
-                if (D_802B7C78_E23228->alpha < 0) {
-                    D_802B7C78_E23228->alpha = 0;
-                    D_802B7C78_E23228->time = 51;
+        case I_SPY_ANIMATE:
+            ISpyPtr->scale = 0.53f;
+            if (ISpyPtr->time >= 47 || playerStatus->flags & PS_FLAG_PAUSED) {
+                ISpyPtr->alpha -= 64;
+                if (ISpyPtr->alpha < 0) {
+                    ISpyPtr->alpha = 0;
+                    ISpyPtr->time = 51;
                 }
             }
 
-            if (D_802B7C78_E23228->time++ > 50) {
+            if (ISpyPtr->time++ > 50) {
                 gCurrentHiddenPanels.activateISpy = FALSE;
                 ISpyNotificationCallback = NULL;
-                playerStatus->animFlags &= ~PA_FLAG_100;
+                playerStatus->animFlags &= ~PA_FLAG_ISPY_VISIBLE;
             }
             break;
     }

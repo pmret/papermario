@@ -16,7 +16,7 @@ void entity_Signpost_idle(Entity* entity) {
         }
     } else {
         entity->flags &= ~ENTITY_FLAG_SHOWS_INSPECT_PROMPT;
-        playerStatus->interactingWithID = -1;
+        playerStatus->interactingWithID = NO_COLLIDER;
     }
 }
 
@@ -31,7 +31,7 @@ EntityBlueprint Entity_Signpost = {
     .flags = ENTITY_FLAG_SQUARE_SHADOW | ENTITY_FLAG_400 | ENTITY_FLAG_FIXED_SHADOW_SIZE,
     .typeDataSize = sizeof(SignpostData),
     .renderCommandList = Entity_Signpost_RenderScript,
-    .modelAnimationNodes = 0x00000000,
+    .modelAnimationNodes = NULL,
     .fpInit = NULL,
     .updateEntityScript = Entity_Signpost_Script,
     .fpHandleCollision = NULL,

@@ -145,13 +145,6 @@ typedef struct DmaTable {
     /* 0x08 */ u8* dest;
 } DmaTable;
 
-typedef struct UseItemStruct {
-    /* 0x00 */ u8* dmaStart;
-    /* 0x04 */ u8* dmaEnd;
-    /* 0x08 */ EvtScript* script;
-    /* 0x0C */ s32 unk_0C;
-} UseItemStruct;
-
 typedef struct PartnerData {
     /* 0x00 */ u8 enabled;
     /* 0x01 */ s8 level;
@@ -401,7 +394,7 @@ typedef struct Trigger {
     /*      */     void* varTablePtr[3];
     /*      */ };
     /* 0x28 */ s32* itemList;
-    /* 0x2C */ s32 unk_tr_2C; // related to Goombario somehow, custom tattle perhaps?
+    /* 0x2C */ s32 tattleMsg;
     /* 0x30 */ u8 hasPlayerInteractPrompt;
     /* 0x31 */ char unk_31[3];
     /* 0x34 */ s32 runningScriptID;
@@ -416,7 +409,7 @@ typedef struct TriggerBlueprint {
     /* 0x08 */ s32 colliderID;
     /* 0x0C */ s32 (*onActivateFunc)(struct Trigger*);
     /* 0x10 */ char unk_10[4];
-    /* 0x14 */ s32 unk_tr_2C;
+    /* 0x14 */ s32 tattleMsg;
     /* 0x18 */ s32 hasPlayerInteractPrompt;
     /* 0x1C */ s32* itemList;
 } TriggerBlueprint; // size = 0x20
@@ -1993,7 +1986,7 @@ typedef struct PlayerStatus {
     /* 0x010 */ s16 blinkTimer;
     /* 0x012 */ s16 moveFrames;
     /* 0x014 */ s8 enableCollisionOverlapsCheck;
-    /* 0x015 */ s8 inputEnabledCounter; /* whether the C-up menu can appear */
+    /* 0x015 */ s8 inputDisabledCount; /* whether the C-up menu can appear */
     /* 0x016 */ Vec3s lastGoodPosition;
     /* 0x01C */ Vec3f pushVelocity;
     /* 0x028 */ Vec3f position;
@@ -2537,5 +2530,18 @@ typedef struct LavaPiranhaVine {
     /* 0x098 */ Vec3f points[27];
     /* 0x1DC */ s32 numPoints;
 } LavaPiranhaVine;
+
+typedef struct SpeechBubbleData {
+    /* 0x00 */ Npc* encounteredNPC;
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ f32 yaw;
+    /* 0x14 */ f32 scale;
+    /* 0x18 */ s32 unk_18;
+    /* 0x1C */ f32 unk_1C; //lastPosY?
+    /* 0x20 */ s32 holdTime;
+    /* 0x24 */ char unk_24[6];
+    /* 0x2A */ u8 state;
+    /* 0x2B */ u8 brightness;
+} SpeechBubbleData; /* size = 0x2C */
 
 #endif

@@ -61,8 +61,8 @@ ApiStatus BowUpdate(Evt* script, s32 isInitialCall) {
     }
 
     switch (BowTweesterPhysicsPtr->state){
-        case 0:
-            BowTweesterPhysicsPtr->state = 1;
+        case TWEESTER_PARTNER_INIT:
+            BowTweesterPhysicsPtr->state++;
             BowTweesterPhysicsPtr->prevFlags = bow->flags;
             BowTweesterPhysicsPtr->radius = fabsf(dist2D(bow->pos.x, bow->pos.z, entity->position.x, entity->position.z));
             BowTweesterPhysicsPtr->angle = atan2(entity->position.x, entity->position.z, bow->pos.x, bow->pos.z);
@@ -71,7 +71,7 @@ ApiStatus BowUpdate(Evt* script, s32 isInitialCall) {
             BowTweesterPhysicsPtr->countdown = 120;
             bow->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
             bow->flags &= ~NPC_FLAG_GRAVITY;
-        case 1:
+        case TWEESTER_PARTNER_ATTRACT:
             sin_cos_rad(DEG_TO_RAD(BowTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
             bow->pos.x = entity->position.x + (sinAngle * BowTweesterPhysicsPtr->radius);
             bow->pos.z = entity->position.z - (cosAngle * BowTweesterPhysicsPtr->radius);
@@ -100,17 +100,17 @@ ApiStatus BowUpdate(Evt* script, s32 isInitialCall) {
                 BowTweesterPhysicsPtr->state++;
             }
             break;
-        case 2:
+        case TWEESTER_PARTNER_HOLD:
             bow->flags = BowTweesterPhysicsPtr->prevFlags;
             BowTweesterPhysicsPtr->countdown = 30;
             BowTweesterPhysicsPtr->state++;
             break;
-        case 3:
+        case TWEESTER_PARTNER_RELEASE:
             partner_flying_update_player_tracking(bow);
             partner_flying_update_motion(bow);
 
             if (--BowTweesterPhysicsPtr->countdown == 0) {
-                BowTweesterPhysicsPtr->state = 0;
+                BowTweesterPhysicsPtr->state = TWEESTER_PARTNER_INIT;
                 TweesterTouchingPartner = NULL;
             }
             break;
@@ -128,7 +128,7 @@ void func_802BD4FC_323E4C(Npc* bow) {
     if (TweesterTouchingPartner != NULL) {
         TweesterTouchingPartner = NULL;
         bow->flags = BowTweesterPhysicsPtr->prevFlags;
-        BowTweesterPhysicsPtr->state = 0;
+        BowTweesterPhysicsPtr->state = TWEESTER_PARTNER_INIT;
         partner_clear_player_tracking(bow);
     }
 }
@@ -184,7 +184,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 40:
-            if (playerStatus->inputEnabledCounter) {
+            if (playerStatus->inputDisabledCount) {
                 return ApiStatus_DONE2;
             }
 
@@ -196,7 +196,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
             break;
         case 41:
             if ((!func_800EA52C(PARTNER_BOW) || is_starting_conversation()) &&
-                 script->functionTemp[2] < playerStatus->inputEnabledCounter
+                 script->functionTemp[2] < playerStatus->inputDisabledCount
                  && D_802BE0C4) {
 
                 enable_player_input();
@@ -206,7 +206,7 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
             }
             script->functionTemp[1]--;
             if (script->functionTemp[1] == 0) {
-                if (script->functionTemp[2] < playerStatus->inputEnabledCounter) {
+                if (script->functionTemp[2] < playerStatus->inputDisabledCount) {
                     if (D_802BE0C4) {
                         enable_player_input();
                         D_802BE0C4 = FALSE;
@@ -315,13 +315,13 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
                 if (func_802BD540_323E90() < 0) {
                     script->functionTemp[0]++;
                     script->functionTemp[1] = 3;
-                    script->functionTemp[2] = playerStatus->inputEnabledCounter;
+                    script->functionTemp[2] = playerStatus->inputDisabledCount;
                 }
             }
             break;
         case 3:
             if (script->functionTemp[1] == 0) {
-                if (script->functionTemp[2] < playerStatus->inputEnabledCounter) {
+                if (script->functionTemp[2] < playerStatus->inputDisabledCount) {
                     script->functionTemp[0] = 2;
                     break;
                 }

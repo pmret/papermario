@@ -127,8 +127,8 @@ ApiStatus WattUpdate(Evt* script, s32 isInitialCall) {
         }
 
         switch (WattTweesterPhysicsPtr->state) {
-            case 0:
-                WattTweesterPhysicsPtr->state = 1;
+            case TWEESTER_PARTNER_INIT:
+                WattTweesterPhysicsPtr->state++;
                 WattTweesterPhysicsPtr->prevFlags = watt->flags;
                 WattTweesterPhysicsPtr->radius = fabsf(dist2D(watt->pos.x, watt->pos.z,
                                                          entity->position.x, entity->position.z));
@@ -138,7 +138,7 @@ ApiStatus WattUpdate(Evt* script, s32 isInitialCall) {
                 WattTweesterPhysicsPtr->countdown = 120;
                 watt->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
                 watt->flags &= ~NPC_FLAG_GRAVITY;
-            case 1:
+            case TWEESTER_PARTNER_ATTRACT:
                 sin_cos_rad(DEG_TO_RAD(WattTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
                 watt->pos.x = (entity->position.x + (sinAngle * WattTweesterPhysicsPtr->radius));
                 watt->pos.z = (entity->position.z - (cosAngle * WattTweesterPhysicsPtr->radius));
@@ -169,16 +169,16 @@ ApiStatus WattUpdate(Evt* script, s32 isInitialCall) {
                     WattTweesterPhysicsPtr->state++;
                 }
                 break;
-            case 2:
+            case TWEESTER_PARTNER_HOLD:
                 watt->flags = WattTweesterPhysicsPtr->prevFlags;
                 WattTweesterPhysicsPtr->countdown = 30;
                 WattTweesterPhysicsPtr->state++;
                 break;
-            case 3:
+            case TWEESTER_PARTNER_RELEASE:
                 partner_flying_update_player_tracking(watt);
                 partner_flying_update_motion(watt);
                 if (--WattTweesterPhysicsPtr->countdown == 0) {
-                    WattTweesterPhysicsPtr->state = 0;
+                    WattTweesterPhysicsPtr->state = TWEESTER_PARTNER_INIT;
                     TweesterTouchingPartner = NULL;
                 }
                 break;
@@ -203,7 +203,7 @@ void func_802BD710_31D280(Npc* watt) {
     if (TweesterTouchingPartner != NULL) {
         TweesterTouchingPartner = NULL;
         watt->flags = WattTweesterPhysicsPtr->prevFlags;
-        WattTweesterPhysicsPtr->state = 0;
+        WattTweesterPhysicsPtr->state = TWEESTER_PARTNER_INIT;
         partner_clear_player_tracking(watt);
     }
 }
@@ -249,16 +249,16 @@ ApiStatus func_802BD754_31D2C4(Evt* script, s32 isInitialCall) {
 
     switch (D_802BE304) {
         case 40:
-            if (playerStatus->inputEnabledCounter != 0) {
+            if (playerStatus->inputDisabledCount != 0) {
                 return ApiStatus_DONE2;
             }
             script->functionTemp[1] = 3;
             D_802BE304 = 41;
-            script->functionTemp[2] = playerStatus->inputEnabledCounter;
+            script->functionTemp[2] = playerStatus->inputDisabledCount;
             break;
         case 41:
             if (script->functionTemp[1] == 0) {
-                if (script->functionTemp[2] >= playerStatus->inputEnabledCounter) {
+                if (script->functionTemp[2] >= playerStatus->inputDisabledCount) {
                     if (!(playerStatus->animFlags & PA_FLAG_CHANGING_MAP)) {
                         if (func_800EA52C(PARTNER_WATT)) {
                             if (!is_starting_conversation()) {
@@ -435,7 +435,7 @@ void world_watt_post_battle(Npc* watt) {
     }
 }
 
-ApiStatus func_802BDE88_31D9F8(Evt* script, s32 isInitialCall) {
+API_CALLABLE(WattRidingUpdate) {
     PartnerActionStatus* wattActionStatus = &gPartnerActionStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* watt = get_npc_unsafe(NPC_PARTNER);
@@ -466,7 +466,7 @@ ApiStatus func_802BDE88_31D9F8(Evt* script, s32 isInitialCall) {
             wattActionStatus->partnerActionState = PARTNER_ACTION_WATT_SHINE;
             wattActionStatus->actingPartner = PARTNER_WATT;
             D_802BE308 = 0;
-            script->functionTemp[0] += 1;
+            script->functionTemp[0]++;
             break;
         case 1:
             world_watt_sync_held_position();
@@ -544,7 +544,7 @@ void world_watt_sync_held_position(void) {
 }
 
 EvtScript world_watt_while_riding = {
-    EVT_CALL(func_802BDE88_31D9F8)
+    EVT_CALL(WattRidingUpdate)
     EVT_RETURN
     EVT_END
 };
