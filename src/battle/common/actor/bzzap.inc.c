@@ -8,7 +8,7 @@ extern EvtScript N(takeTurn);
 extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
 
-s32 N(idleAnimations)[] = {
+s32 N(IdleAnimations)[] = {
     STATUS_NORMAL,    ANIM_Bzzap_Anim01,
     STATUS_STONE,     ANIM_Bzzap_Anim00,
     STATUS_SLEEP,     ANIM_Bzzap_Anim09,
@@ -21,12 +21,12 @@ s32 N(idleAnimations)[] = {
     STATUS_END,
 };
 
-s32 N(defenseTable)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable)[] = {
+s32 N(StatusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 60,
@@ -58,8 +58,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -7, 33 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 2, -10 },
@@ -70,8 +70,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -1, -5 },
@@ -82,8 +82,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -1, -5 },
@@ -94,8 +94,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -1, -5 },
@@ -106,8 +106,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -1, -5 },
@@ -118,8 +118,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -1, -5 },
@@ -134,7 +134,7 @@ ActorBlueprint NAMESPACE = {
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
     .initScript = &N(init),
-    .statusTable = N(statusTable),
+    .statusTable = N(StatusTable),
     .escapeChance = 40,
     .airLiftChance = 95,
     .hurricaneChance = 95,

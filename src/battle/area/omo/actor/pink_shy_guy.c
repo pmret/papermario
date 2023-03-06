@@ -5,19 +5,19 @@
 
 #define NAMESPACE b_area_omo_pink_shy_guy
 
-extern s32 N(idleAnimations_8021E41C)[];
+extern s32 N(IdleAnimations_8021E41C)[];
 extern EvtScript N(init_8021E468);
 extern EvtScript N(takeTurn_8021FDB4);
 extern EvtScript N(idle_8021E4B4);
 extern EvtScript N(handleEvent_8021E628);
 
-s32 N(defenseTable_8021E310)[] = {
+s32 N(DefenseTable_8021E310)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_SHOCK, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_8021E324)[] = {
+s32 N(StatusTable_8021E324)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 70,
@@ -46,15 +46,15 @@ enum PartIDs {
     PT_MAIN     = 1,
 };
 
-ActorPartBlueprint N(partsTable_8021E3D0)[] = {
+ActorPartBlueprint N(PartsTable_8021E3D0)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_8021E41C),
-        .defenseTable = N(defenseTable_8021E310),
+        .idleAnimations = N(IdleAnimations_8021E41C),
+        .defenseTable = N(DefenseTable_8021E310),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -1, -10 },
@@ -66,10 +66,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_SHY_GUY,
     .level = 14,
     .maxHP = 7,
-    .partCount = ARRAY_COUNT(N(partsTable_8021E3D0)),
-    .partsData = N(partsTable_8021E3D0),
+    .partCount = ARRAY_COUNT( N(PartsTable_8021E3D0)),
+    .partsData = N(PartsTable_8021E3D0),
     .initScript = &N(init_8021E468),
-    .statusTable = N(statusTable_8021E324),
+    .statusTable = N(StatusTable_8021E324),
     .escapeChance = 60,
     .airLiftChance = 85,
     .hurricaneChance = 80,
@@ -84,7 +84,7 @@ ActorBlueprint NAMESPACE = {
     .statusMessageOffset = { 10, 20 },
 };
 
-s32 N(idleAnimations_8021E41C)[] = {
+s32 N(IdleAnimations_8021E41C)[] = {
     STATUS_NORMAL,    ANIM_ShyGuy_Pink_Anim01,
     STATUS_STONE,     ANIM_ShyGuy_Pink_Anim00,
     STATUS_SLEEP,     ANIM_ShyGuy_Pink_Anim12,

@@ -15,7 +15,7 @@ extern EvtScript N(80226558);
 extern EvtScript N(80226B88);
 extern EvtScript N(80227878);
 
-s32 N(idleAnimations_80225C40)[] = {
+s32 N(IdleAnimations_80225C40)[] = {
     STATUS_NORMAL,    ANIM_BattleTubba_Anim01,
     STATUS_STONE,     ANIM_BattleTubba_Anim00,
     STATUS_SLEEP,     ANIM_BattleTubba_Anim18,
@@ -29,12 +29,12 @@ s32 N(idleAnimations_80225C40)[] = {
     STATUS_END,
 };
 
-s32 N(defenseTable_80225C94)[] = {
+s32 N(DefenseTable_80225C94)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_80225CA0)[] = {
+s32 N(StatusTable_80225CA0)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 80,
@@ -59,15 +59,15 @@ s32 N(statusTable_80225CA0)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_80225D4C)[] = {
+ActorPartBlueprint N(PartsTable_80225D4C)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -15, 75 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80225C40),
-        .defenseTable = N(defenseTable_80225C94),
+        .idleAnimations = N(IdleAnimations_80225C40),
+        .defenseTable = N(DefenseTable_80225C94),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -10 },
@@ -79,10 +79,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_TUBBA_BLUBBA_INVINCIBLE,
     .level = 70,
     .maxHP = 10,
-    .partCount = ARRAY_COUNT(N(partsTable_80225D4C)),
-    .partsData = N(partsTable_80225D4C),
+    .partCount = ARRAY_COUNT( N(PartsTable_80225D4C)),
+    .partsData = N(PartsTable_80225D4C),
     .initScript = &N(init_80225D98),
-    .statusTable = N(statusTable_80225CA0),
+    .statusTable = N(StatusTable_80225CA0),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,

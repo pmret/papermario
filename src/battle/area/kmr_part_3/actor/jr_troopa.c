@@ -6,7 +6,7 @@
 
 #define NAMESPACE b_area_kmr_part_3_jr_troopa
 
-s32 N(idleAnimations_802229F0)[] = {
+s32 N(IdleAnimations_802229F0)[] = {
     STATUS_NORMAL,    ANIM_JrTroopa_Idle,
     STATUS_STONE,     ANIM_JrTroopa_Still,
     STATUS_SLEEP,     ANIM_JrTroopa_Still,
@@ -17,12 +17,12 @@ s32 N(idleAnimations_802229F0)[] = {
     STATUS_END,
 };
 
-s32 N(defenseTable_80222A2C)[] = {
+s32 N(DefenseTable_80222A2C)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_80222A38)[] = {
+s32 N(StatusTable_80222A38)[] = {
     STATUS_NORMAL, 100,
     STATUS_DEFAULT, 100,
     STATUS_SLEEP, 100,
@@ -47,15 +47,15 @@ s32 N(statusTable_80222A38)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_80222AE4)[] = {
+ActorPartBlueprint N(PartsTable_80222AE4)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 30 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_802229F0),
-        .defenseTable = N(defenseTable_80222A2C),
+        .idleAnimations = N(IdleAnimations_802229F0),
+        .defenseTable = N(DefenseTable_80222A2C),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -69,10 +69,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_JR_TROOPA1,
     .level = 41,
     .maxHP = 5,
-    .partCount = ARRAY_COUNT(N(partsTable_80222AE4)),
-    .partsData = N(partsTable_80222AE4),
+    .partCount = ARRAY_COUNT( N(PartsTable_80222AE4)),
+    .partsData = N(PartsTable_80222AE4),
     .initScript = &N(init_80223180),
-    .statusTable = N(statusTable_80222A38),
+    .statusTable = N(StatusTable_80222A38),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -117,7 +117,7 @@ EvtScript N(80222C08) = {
     EVT_END
 };
 
-s32 N(idleAnimations_80222C6C)[] = {
+s32 N(IdleAnimations_80222C6C)[] = {
     STATUS_NORMAL,    ANIM_JrTroopa_Defeated,
     STATUS_END,
 };
@@ -166,7 +166,7 @@ EvtScript N(80222C78) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, LVarA, ANIM_JrTroopa_Collapse)
     EVT_WAIT(12)
     EVT_CALL(SetAnimation, ACTOR_SELF, LVarA, ANIM_JrTroopa_Defeated)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, LVarA, EVT_PTR(N(idleAnimations_80222C6C)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, LVarA, EVT_PTR(N(IdleAnimations_80222C6C)))
     EVT_WAIT(30)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)

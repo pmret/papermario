@@ -7,20 +7,20 @@
 
 #define NAMESPACE b_area_jan_jungle_fuzzy
 
-extern s32 N(idleAnimations_8021EADC)[];
+extern s32 N(IdleAnimations_8021EADC)[];
 extern EvtScript N(init_8021EB28);
 extern EvtScript N(takeTurn_80221628);
 extern EvtScript N(idle_8021EB8C);
 extern EvtScript N(handleEvent_8021EB9C);
 extern Formation N(specialFormation_8022180C);
 
-s32 N(defenseTable_8021E9D0)[] = {
+s32 N(DefenseTable_8021E9D0)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_FIRE, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_8021E9E4)[] = {
+s32 N(StatusTable_8021E9E4)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 95,
@@ -45,15 +45,15 @@ s32 N(statusTable_8021E9E4)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_8021EA90)[] = {
+ActorPartBlueprint  N(PartsTable_8021EA90)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 20 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_8021EADC),
-        .defenseTable = N(defenseTable_8021E9D0),
+        .idleAnimations = N(IdleAnimations_8021EADC),
+        .defenseTable = N(DefenseTable_8021E9D0),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -10 },
@@ -65,10 +65,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_JUNGLE_FUZZY,
     .level = 16,
     .maxHP = 7,
-    .partCount = ARRAY_COUNT(N(partsTable_8021EA90)),
-    .partsData = N(partsTable_8021EA90),
+    .partCount = ARRAY_COUNT( N(PartsTable_8021EA90)),
+    .partsData = N(PartsTable_8021EA90),
     .initScript = &N(init_8021EB28),
-    .statusTable = N(statusTable_8021E9E4),
+    .statusTable = N(StatusTable_8021E9E4),
     .escapeChance = 30,
     .airLiftChance = 85,
     .hurricaneChance = 80,
@@ -83,7 +83,7 @@ ActorBlueprint NAMESPACE = {
     .statusMessageOffset = { 10, 20 },
 };
 
-s32 N(idleAnimations_8021EADC)[] = {
+s32 N(IdleAnimations_8021EADC)[] = {
     STATUS_NORMAL,    ANIM_Fuzzy_Jungle_Idle,
     STATUS_STONE,     ANIM_Fuzzy_Jungle_Still,
     STATUS_SLEEP,     ANIM_Fuzzy_Jungle_Sleep,
@@ -294,7 +294,7 @@ EvtScript N(divide) = {
     EVT_END
 };
 
-#include "common/EnemyDrainGFX.inc.c"
+#include "common/SpawnEnemyDrainFX.inc.c"
 
 EvtScript N(leechAttack) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
@@ -562,11 +562,11 @@ EvtScript N(leechAttack) = {
                 EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_214)
                 EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                 EVT_ADD(LVar1, 10)
-                EVT_CALL(N(StartEnemyDrainGFX), LVar0, LVar1, LVar2, LVar3)
+                EVT_CALL(N(SpawnDrainHealthStartFX), LVar0, LVar1, LVar2, LVar3)
                 EVT_THREAD
                     EVT_WAIT(15)
                     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_25C)
-                    EVT_CALL(N(EnemyDrainGFX), LVar0, LVar1, LVar2, LVar3)
+                    EVT_CALL(N(SpawnDrainHealthContinueFX), LVar0, LVar1, LVar2, LVar3)
                 EVT_END_THREAD
                 EVT_ADD(LVar0, 20)
                 EVT_ADD(LVar1, 20)

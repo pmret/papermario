@@ -5,7 +5,7 @@
 
 #define NAMESPACE b_area_mac_master2
 
-s32 N(idleAnimations_8022B640)[] = {
+s32 N(IdleAnimations_8022B640)[] = {
     STATUS_NORMAL,    ANIM_TheMaster_Walk,
     STATUS_STONE,     ANIM_TheMaster_Still,
     STATUS_SLEEP,     ANIM_TheMaster_Sleep,
@@ -18,7 +18,7 @@ s32 N(idleAnimations_8022B640)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_8022B68C)[] = {
+s32 N(IdleAnimations_8022B68C)[] = {
     STATUS_NORMAL,    ANIM_TheMaster_AscendedWalk,
     STATUS_STONE,     ANIM_TheMaster_AscendedStill,
     STATUS_SLEEP,     ANIM_TheMaster_AscendedSleep,
@@ -31,12 +31,12 @@ s32 N(idleAnimations_8022B68C)[] = {
     STATUS_END,
 };
 
-s32 N(defenseTable_8022B6D8)[] = {
+s32 N(DefenseTable_8022B6D8)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_8022B6E4)[] = {
+s32 N(StatusTable_8022B6E4)[] = {
     STATUS_NORMAL, 50,
     STATUS_DEFAULT, 50,
     STATUS_SLEEP, 30,
@@ -61,15 +61,15 @@ s32 N(statusTable_8022B6E4)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_8022B790)[] = {
+ActorPartBlueprint N(PartsTable_8022B790)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -5, 28 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_8022B640),
-        .defenseTable = N(defenseTable_8022B6D8),
+        .idleAnimations = N(IdleAnimations_8022B640),
+        .defenseTable = N(DefenseTable_8022B6D8),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 2, -7 },
@@ -83,10 +83,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_THE_MASTER_2,
     .level = 0,
     .maxHP = 75,
-    .partCount = ARRAY_COUNT(N(partsTable_8022B790)),
-    .partsData = N(partsTable_8022B790),
+    .partCount = ARRAY_COUNT( N(PartsTable_8022B790)),
+    .partsData = N(PartsTable_8022B790),
     .initScript = &N(init_8022B7DC),
-    .statusTable = N(statusTable_8022B6E4),
+    .statusTable = N(StatusTable_8022B6E4),
     .escapeChance = 100,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -534,7 +534,7 @@ EvtScript N(nextTurn_8022CFFC) = {
                     EVT_WAIT(1)
                 EVT_END_LOOP
                 EVT_WAIT(15)
-                EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8022B68C)))
+                EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_8022B68C)))
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedRun)
                 EVT_WAIT(15)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)

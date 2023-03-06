@@ -42,7 +42,7 @@ extern EvtScript N(onSpinSmashOrNormalHit);
 extern EvtScript N(onBurnHit);
 extern EvtScript N(makeWalkingSounds);
 
-s32 N(idleAnimations)[] = {
+s32 N(IdleAnimations)[] = {
     STATUS_NORMAL, ANIM_BattleBowser_Idle,
     STATUS_STONE, ANIM_BattleBowser_Still,
     STATUS_SLEEP, ANIM_BattleBowser_Idle,
@@ -56,17 +56,17 @@ s32 N(idleAnimations)[] = {
     STATUS_END,
 };
 
-s32 N(defenseTable)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL, 1,
     ELEMENT_END,
 };
 
-s32 N(defenseTable_boosted)[] = {
+s32 N(DefenseTable_boosted)[] = {
     ELEMENT_NORMAL, 4,
     ELEMENT_END,
 };
 
-s32 N(statusTable)[] = {
+s32 N(StatusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 30,
@@ -91,7 +91,7 @@ s32 N(statusTable)[] = {
     STATUS_END,
 };
 
-s32 N(statusTable_boosted)[] = {
+s32 N(StatusTable_boosted)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 0,
@@ -123,8 +123,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -18, 72 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -8 },
@@ -139,7 +139,7 @@ ActorBlueprint NAMESPACE = {
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
     .initScript = &N(init),
-    .statusTable = N(statusTable),
+    .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -375,8 +375,8 @@ EvtScript N(handleEvent) = {
             EVT_PLAY_EFFECT(EFFECT_SHIMMER_BURST, 1, LVar0, LVar1, LVar2, EVT_FLOAT(0.7), 30, 0)
             EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_ENCHANTED, FALSE)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_TURNS_SINCE_LAST_STAR_BEAM), 0)
-            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable)))
-            EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(statusTable)))
+            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable)))
+            EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(StatusTable)))
             EVT_SET(LVar1, ANIM_BattleBowser_Hurt)
             EVT_EXEC_WAIT(N(onHit))
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_FLAGS), LVar0)
@@ -630,8 +630,8 @@ EvtScript N(useStarRod) = {
     EVT_CALL(RemoveEffect, LVarD)
     EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_ENCHANTED, TRUE)
     EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 1, ACTOR_DECORATION_RADIAL_STAR_EMITTER)
-    EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable_boosted)))
-    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(statusTable_boosted)))
+    EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable_boosted)))
+    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(StatusTable_boosted)))
     EVT_CALL(N(RemoveChillOut))
     EVT_WAIT(3)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)

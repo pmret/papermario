@@ -18,13 +18,13 @@ extern EvtScript N(nextTurn);
 extern EvtScript N(OnBurn);
 extern EvtScript N(OnDeath);
 
-s32 N(defenseTable)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_COSMIC, 99,
     ELEMENT_END,
 };
 
-s32 N(statusTable)[] = {
+s32 N(StatusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 0,
@@ -49,7 +49,7 @@ s32 N(statusTable)[] = {
     STATUS_END,
 };
 
-extern s32 N(idleAnimations)[];
+extern s32 N(IdleAnimations)[];
 
 ActorPartBlueprint N(parts)[] = {
     {
@@ -58,8 +58,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_100,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 1, -15 },
@@ -70,8 +70,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 50, 0 },
         .targetOffset = { -6, 20 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_100,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 1, -15 },
@@ -86,7 +86,7 @@ ActorBlueprint NAMESPACE = {
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
     .initScript = &N(init),
-    .statusTable = N(statusTable),
+    .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -101,7 +101,7 @@ ActorBlueprint NAMESPACE = {
     .statusMessageOffset = { 10, 20 },
 };
 
-s32 N(idleAnimations)[] = {
+s32 N(IdleAnimations)[] = {
     STATUS_NORMAL, ANIM_Monstar_Idle1,
     STATUS_STONE, ANIM_Monstar_Still,
     STATUS_SLEEP, ANIM_Monstar_Idle1,
@@ -115,7 +115,7 @@ s32 N(idleAnimations)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations2)[] = {
+s32 N(IdleAnimations2)[] = {
     STATUS_NORMAL, ANIM_Monstar_GatherStrength1,
     STATUS_END,
 };
@@ -327,7 +327,7 @@ EvtScript N(unused) = {
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Monstar_GatherStrength1)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations2)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations2)))
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 40)
     EVT_SUB(LVar2, 5)
@@ -424,7 +424,7 @@ EvtScript N(attack) = {
             EVT_SET(LVarA, LVar0)
             EVT_WAIT(170)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Monstar_Idle1)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations)))
             EVT_CALL(MakeLerp, 200, 0, 60, EASING_LINEAR)
             EVT_LABEL(1)
             EVT_CALL(UpdateLerp)
@@ -450,7 +450,7 @@ EvtScript N(attack) = {
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Monstar_Idle1)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations)))
             EVT_CALL(MakeLerp, 200, 0, 60, EASING_LINEAR)
             EVT_LABEL(2)
             EVT_CALL(UpdateLerp)

@@ -10,7 +10,7 @@ extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
 extern EvtScript N(nextTurn);
 
-s32 N(idleAnimations)[] = {
+s32 N(IdleAnimations)[] = {
     STATUS_NORMAL, ANIM_Duplighost_Anim02,
     STATUS_STONE, ANIM_Duplighost_Anim00,
     STATUS_SLEEP, ANIM_Duplighost_Anim0D,
@@ -23,22 +23,22 @@ s32 N(idleAnimations)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations2)[] = {
+s32 N(IdleAnimations2)[] = {
     STATUS_NORMAL, ANIM_Duplighost_Anim0A,
     STATUS_END,
 };
 
-s32 N(idleAnimations3)[] = {
+s32 N(IdleAnimations3)[] = {
     STATUS_NORMAL, ANIM_Duplighost_Anim04,
     STATUS_END,
 };
 
-s32 N(defenseTable)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable)[] = {
+s32 N(StatusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 60,
@@ -70,8 +70,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -5, 25 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -2, -10 },
@@ -86,7 +86,7 @@ ActorBlueprint NAMESPACE = {
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
     .initScript = &N(init),
-    .statusTable = N(statusTable),
+    .statusTable = N(StatusTable),
     .escapeChance = 50,
     .airLiftChance = 80,
     .hurricaneChance = 70,
@@ -353,7 +353,7 @@ EvtScript N(OnHitElectric) = {
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
     EVT_CALL(SetActorVar, LVarA, 8, 2)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVar0, ACTOR_PART_FLAG_INVISIBLE, TRUE)
-    EVT_CALL(SetIdleAnimations, LVarA, 1, EVT_PTR(N(idleAnimations2)))
+    EVT_CALL(SetIdleAnimations, LVarA, 1, EVT_PTR(N(IdleAnimations2)))
     EVT_CALL(SetAnimation, LVarA, 1, ANIM_Duplighost_Anim0A)
     EVT_WAIT(30)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
@@ -372,7 +372,7 @@ EvtScript N(OnHitElectric) = {
     EVT_END_IF
     EVT_CALL(ForceHomePos, LVarA, LVarB, LVarC, LVarD)
     EVT_CALL(HPBarToHome, LVarA)
-    EVT_CALL(SetIdleAnimations, LVarA, 1, EVT_PTR(N(idleAnimations)))
+    EVT_CALL(SetIdleAnimations, LVarA, 1, EVT_PTR(N(IdleAnimations)))
     EVT_CALL(SetAnimation, LVarA, 1, ANIM_Duplighost_Anim02)
     EVT_CALL(SetActorPos, ACTOR_SELF, NPC_DISPOSE_LOCATION)
     EVT_CALL(ForceHomePos, ACTOR_SELF, NPC_DISPOSE_LOCATION)
@@ -422,7 +422,7 @@ EvtScript N(OnShockHit) = {
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
     EVT_CALL(SetActorVar, LVarA, 8, 3)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVar9, ACTOR_PART_FLAG_INVISIBLE, TRUE)
-    EVT_CALL(SetIdleAnimations, LVarA, 1, EVT_PTR(N(idleAnimations2)))
+    EVT_CALL(SetIdleAnimations, LVarA, 1, EVT_PTR(N(IdleAnimations2)))
     EVT_CALL(SetAnimation, LVarA, 1, ANIM_Duplighost_Anim0A)
     EVT_WAIT(15)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
@@ -441,7 +441,7 @@ EvtScript N(OnShockHit) = {
     EVT_WAIT(20)
     EVT_CALL(AddActorDecoration, LVarA, 1, 0, ACTOR_DECORATION_SWEAT)
     EVT_CALL(SetActorYaw, LVarA, 180)
-    EVT_CALL(SetIdleAnimations, LVarA, 1, EVT_PTR(N(idleAnimations3)))
+    EVT_CALL(SetIdleAnimations, LVarA, 1, EVT_PTR(N(IdleAnimations3)))
     EVT_CALL(SetAnimation, LVarA, 1, ANIM_Duplighost_Anim04)
     EVT_CALL(SetActorSpeed, LVarA, EVT_FLOAT(8.0))
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
@@ -451,7 +451,7 @@ EvtScript N(OnShockHit) = {
     EVT_CALL(SetAnimation, LVarA, 1, ANIM_Duplighost_Anim02)
     EVT_CALL(SetActorYaw, LVarA, 0)
     EVT_CALL(RemoveActorDecoration, LVarA, 1, 0)
-    EVT_CALL(SetIdleAnimations, LVarA, 1, EVT_PTR(N(idleAnimations)))
+    EVT_CALL(SetIdleAnimations, LVarA, 1, EVT_PTR(N(IdleAnimations)))
     EVT_CALL(ForceHomePos, LVarA, LVarB, 0, LVarD)
     EVT_CALL(HPBarToHome, LVarA)
     EVT_CALL(SetActorPos, ACTOR_SELF, NPC_DISPOSE_LOCATION)

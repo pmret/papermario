@@ -17,10 +17,10 @@ API_CALLABLE(func_80231000_54CC70) {
     return ApiStatus_DONE2;
 }
 
-extern s32 N(idleAnimations)[];
-extern s32 N(idleAnimations_rock)[];
-extern s32 N(idleAnimations_damage)[];
-extern s32 N(idleAnimations_shy_guy)[];
+extern s32 N(IdleAnimations)[];
+extern s32 N(IdleAnimations_rock)[];
+extern s32 N(IdleAnimations_damage)[];
+extern s32 N(IdleAnimations_shy_guy)[];
 
 extern EvtScript N(init);
 extern EvtScript N(takeTurn);
@@ -34,12 +34,12 @@ extern EvtScript N(onSpinSmash);
 extern EvtScript N(doSpinSmashHitLastGuy);
 extern EvtScript N(doSpinSmashHit);
 
-s32 N(defenseTable)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable)[] = {
+s32 N(StatusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 60,
@@ -71,8 +71,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 20 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -84,7 +84,7 @@ ActorPartBlueprint N(parts)[] = {
         .targetOffset = { -2, 67 },
         .opacity = 255,
         .idleAnimations = NULL,
-        .defenseTable = N(defenseTable),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -8 },
@@ -96,7 +96,7 @@ ActorPartBlueprint N(parts)[] = {
         .targetOffset = { -2, 50 },
         .opacity = 255,
         .idleAnimations = NULL,
-        .defenseTable = N(defenseTable),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -8 },
@@ -108,7 +108,7 @@ ActorPartBlueprint N(parts)[] = {
         .targetOffset = { -2, 33 },
         .opacity = 255,
         .idleAnimations = NULL,
-        .defenseTable = N(defenseTable),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -8 },
@@ -120,7 +120,7 @@ ActorPartBlueprint N(parts)[] = {
         .targetOffset = { -2, 16 },
         .opacity = 255,
         .idleAnimations = NULL,
-        .defenseTable = N(defenseTable),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -8 },
@@ -131,8 +131,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_rock),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations_rock),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -143,8 +143,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_rock),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations_rock),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -155,8 +155,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_rock),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations_rock),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -167,8 +167,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_rock),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations_rock),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -179,8 +179,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_damage),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations_damage),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -191,8 +191,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_shy_guy),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations_shy_guy),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -203,8 +203,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_shy_guy),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations_shy_guy),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -215,8 +215,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_shy_guy),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations_shy_guy),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -227,8 +227,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_shy_guy),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations_shy_guy),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -243,7 +243,7 @@ ActorBlueprint NAMESPACE = {
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
     .initScript = &N(init),
-    .statusTable = N(statusTable),
+    .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -258,7 +258,7 @@ ActorBlueprint NAMESPACE = {
     .statusMessageOffset = { 10, 65 },
 };
 
-s32 N(idleAnimations)[] = {
+s32 N(IdleAnimations)[] = {
     STATUS_NORMAL, ANIM_ShyStackGuy_Anim04,
     STATUS_STONE, ANIM_ShyStackGuy_Anim00,
     STATUS_SLEEP, ANIM_ShyStackGuy_Anim00,
@@ -273,7 +273,7 @@ s32 N(idleAnimations)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations2)[] = {
+s32 N(IdleAnimations2)[] = {
     STATUS_NORMAL, ANIM_ShyStackGuy_Anim05,
     STATUS_STONE, ANIM_ShyStackGuy_Anim01,
     STATUS_SLEEP, ANIM_ShyStackGuy_Anim01,
@@ -288,7 +288,7 @@ s32 N(idleAnimations2)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations3)[] = {
+s32 N(IdleAnimations3)[] = {
     STATUS_NORMAL, ANIM_ShyStackGuy_Anim06,
     STATUS_STONE, ANIM_ShyStackGuy_Anim02,
     STATUS_SLEEP, ANIM_ShyStackGuy_Anim02,
@@ -303,7 +303,7 @@ s32 N(idleAnimations3)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations4)[] = {
+s32 N(IdleAnimations4)[] = {
     STATUS_NORMAL, ANIM_ShyStackGuy_Anim07,
     STATUS_STONE, ANIM_ShyStackGuy_Anim03,
     STATUS_SLEEP, ANIM_ShyStackGuy_Anim03,
@@ -318,17 +318,17 @@ s32 N(idleAnimations4)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_rock)[] = {
+s32 N(IdleAnimations_rock)[] = {
     STATUS_NORMAL, ANIM_ShyStackRock_Anim00,
     STATUS_END,
 };
 
-s32 N(idleAnimations_damage)[] = {
+s32 N(IdleAnimations_damage)[] = {
     STATUS_NORMAL, ANIM_ShyStackDamage_Anim00,
     STATUS_END,
 };
 
-s32 N(idleAnimations_shy_guy)[] = {
+s32 N(IdleAnimations_shy_guy)[] = {
     STATUS_NORMAL, ANIM_ShyGuy_Red_Anim01,
     STATUS_END,
 };
@@ -969,7 +969,7 @@ EvtScript N(fall_apart) = {
             EVT_CALL(SetActorVar, ACTOR_SELF, 4, ANIM_ShyStackGuy_Anim11)
             EVT_CALL(SetActorVar, ACTOR_SELF, 5, ANIM_ShyStackGuy_Anim15)
             EVT_CALL(SetActorVar, ACTOR_SELF, 6, ANIM_ShyStackGuy_Anim1C)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations2)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations2)))
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_MULTI_TARGET, FALSE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_NO_TARGET, TRUE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 3, ACTOR_PART_FLAG_NO_TARGET, FALSE)
@@ -985,7 +985,7 @@ EvtScript N(fall_apart) = {
             EVT_CALL(SetActorVar, ACTOR_SELF, 4, ANIM_ShyStackGuy_Anim12)
             EVT_CALL(SetActorVar, ACTOR_SELF, 5, ANIM_ShyStackGuy_Anim16)
             EVT_CALL(SetActorVar, ACTOR_SELF, 6, ANIM_ShyStackGuy_Anim1D)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations3)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations3)))
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 3, ACTOR_PART_FLAG_MULTI_TARGET, FALSE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 3, ACTOR_PART_FLAG_NO_TARGET, TRUE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 4, ACTOR_PART_FLAG_NO_TARGET, FALSE)
@@ -1001,7 +1001,7 @@ EvtScript N(fall_apart) = {
             EVT_CALL(SetActorVar, ACTOR_SELF, 4, ANIM_ShyStackGuy_Anim13)
             EVT_CALL(SetActorVar, ACTOR_SELF, 5, ANIM_ShyStackGuy_Anim17)
             EVT_CALL(SetActorVar, ACTOR_SELF, 6, ANIM_ShyStackGuy_Anim1E)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations4)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations4)))
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 4, ACTOR_PART_FLAG_MULTI_TARGET, FALSE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 4, ACTOR_PART_FLAG_NO_TARGET, TRUE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 5, ACTOR_PART_FLAG_NO_TARGET, FALSE)

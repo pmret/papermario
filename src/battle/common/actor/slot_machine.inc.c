@@ -13,12 +13,12 @@ s32 N(intTable1)[] = { 0, 1, 0, 2, 0, 2, 0, 2, };
 s32 N(intTable2)[] = { 0, 1, 0, 2, 1, 2, 0, 2, };
 s32 N(intTable3)[] = { 0, 1, 0, 2, 0, 2, 0, 2, };
 
-s32 N(defenseTable)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable)[] = {
+s32 N(StatusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 0,
@@ -51,7 +51,7 @@ ActorPartBlueprint N(parts)[] = {
         .targetOffset = { 0, 0 },
         .opacity = 255,
         .idleAnimations = NULL,
-        .defenseTable = N(defenseTable),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -66,7 +66,7 @@ ActorBlueprint N(slot_machine_stop) = {
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
     .initScript = &N(init),
-    .statusTable = N(statusTable),
+    .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -89,7 +89,7 @@ ActorBlueprint N(slot_machine_start) = {
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
     .initScript = &N(init),
-    .statusTable = N(statusTable),
+    .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,

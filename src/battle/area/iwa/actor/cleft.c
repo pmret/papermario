@@ -6,26 +6,26 @@
 
 #define NAMESPACE b_area_iwa_cleft
 
-extern s32 N(idleAnimations_80218838)[];
+extern s32 N(IdleAnimations_80218838)[];
 extern EvtScript N(init_802188D0);
 extern EvtScript N(idle_80218934);
 extern EvtScript N(takeTurn_8021A3EC);
 extern EvtScript N(handleEvent_80218C3C);
 
-s32 N(defenseTable_80218710)[] = {
+s32 N(DefenseTable_80218710)[] = {
     ELEMENT_NORMAL, 2,
     ELEMENT_FIRE, 99,
     ELEMENT_MAGIC, 0,
     ELEMENT_END,
 };
 
-s32 N(defenseTable_8021872C)[] = {
+s32 N(DefenseTable_8021872C)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_FIRE, 99,
     ELEMENT_END,
 };
 
-s32 N(statusTable_80218740)[] = {
+s32 N(StatusTable_80218740)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 40,
@@ -50,15 +50,15 @@ s32 N(statusTable_80218740)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_802187EC)[] = {
+ActorPartBlueprint N(PartsTable_802187EC)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 22 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80218838),
-        .defenseTable = N(defenseTable_80218710),
+        .idleAnimations = N(IdleAnimations_80218838),
+        .defenseTable = N(DefenseTable_80218710),
         .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -10 },
@@ -70,10 +70,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_CLEFT,
     .level = 10,
     .maxHP = 2,
-    .partCount = ARRAY_COUNT(N(partsTable_802187EC)),
-    .partsData = N(partsTable_802187EC),
+    .partCount = ARRAY_COUNT( N(PartsTable_802187EC)),
+    .partsData = N(PartsTable_802187EC),
     .initScript = &N(init_802188D0),
-    .statusTable = N(statusTable_80218740),
+    .statusTable = N(StatusTable_80218740),
     .escapeChance = 80,
     .airLiftChance = 40,
     .hurricaneChance = 40,
@@ -88,7 +88,7 @@ ActorBlueprint NAMESPACE = {
     .statusMessageOffset = { 10, 20 },
 };
 
-s32 N(idleAnimations_80218838)[] = {
+s32 N(IdleAnimations_80218838)[] = {
     STATUS_NORMAL,    ANIM_Cleft_Anim02,
     STATUS_STONE,     ANIM_Cleft_Anim00,
     STATUS_SLEEP,     ANIM_Cleft_Anim0C,
@@ -101,7 +101,7 @@ s32 N(idleAnimations_80218838)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_80218884)[] = {
+s32 N(IdleAnimations_80218884)[] = {
     STATUS_NORMAL,    ANIM_Cleft_Anim05,
     STATUS_STONE,     ANIM_Cleft_Anim01,
     STATUS_SLEEP,     ANIM_Cleft_Anim0D,
@@ -159,8 +159,8 @@ EvtScript N(80218944) = {
     EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Cleft_Anim03)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80218884)))
-    EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable_8021872C)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80218884)))
+    EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable_8021872C)))
     EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 0, 15)
     EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, -7)
     EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_SPIKY_TOP, FALSE)
@@ -413,8 +413,8 @@ EvtScript N(802197AC) = {
         EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, 0, LVar2)
         EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Cleft_Anim02)
-        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80218838)))
-        EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable_80218710)))
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80218838)))
+        EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable_80218710)))
         EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 0, 22)
         EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, -10)
         EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_SPIKY_TOP, TRUE)

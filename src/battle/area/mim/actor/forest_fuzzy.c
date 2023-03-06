@@ -6,19 +6,19 @@
 
 #define NAMESPACE b_area_mim_forest_fuzzy
 
-extern s32 N(idleAnimations_802184C4)[];
+extern s32 N(IdleAnimations_802184C4)[];
 extern EvtScript N(init_80218510);
 extern EvtScript N(takeTurn_8021A61C);
 extern EvtScript N(idle_80218574);
 extern EvtScript N(handleEvent_80218584);
 extern Formation N(specialFormation_8021A800);
 
-s32 N(defenseTable_802183C0)[] = {
+s32 N(DefenseTable_802183C0)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_802183CC)[] = {
+s32 N(StatusTable_802183CC)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 95,
@@ -43,15 +43,15 @@ s32 N(statusTable_802183CC)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_80218478)[] = {
+ActorPartBlueprint N(PartsTable_80218478)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 20 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_802184C4),
-        .defenseTable = N(defenseTable_802183C0),
+        .idleAnimations = N(IdleAnimations_802184C4),
+        .defenseTable = N(DefenseTable_802183C0),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -10 },
@@ -63,10 +63,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_FOREST_FUZZY,
     .level = 11,
     .maxHP = 6,
-    .partCount = ARRAY_COUNT(N(partsTable_80218478)),
-    .partsData = N(partsTable_80218478),
+    .partCount = ARRAY_COUNT( N(PartsTable_80218478)),
+    .partsData = N(PartsTable_80218478),
     .initScript = &N(init_80218510),
-    .statusTable = N(statusTable_802183CC),
+    .statusTable = N(StatusTable_802183CC),
     .escapeChance = 40,
     .airLiftChance = 90,
     .hurricaneChance = 90,
@@ -81,7 +81,7 @@ ActorBlueprint NAMESPACE = {
     .statusMessageOffset = { 10, 20 },
 };
 
-s32 N(idleAnimations_802184C4)[] = {
+s32 N(IdleAnimations_802184C4)[] = {
     STATUS_NORMAL,    ANIM_Fuzzy_Forest_Idle,
     STATUS_STONE,     ANIM_Fuzzy_Forest_Still,
     STATUS_SLEEP,     ANIM_Fuzzy_Forest_Sleep,
@@ -292,7 +292,7 @@ EvtScript N(80218C48) = {
     EVT_END
 };
 
-#include "common/EnemyDrainGFX.inc.c"
+#include "common/SpawnEnemyDrainFX.inc.c"
 
 EvtScript N(80219054) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
@@ -426,11 +426,11 @@ EvtScript N(80219054) = {
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_214)
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 10)
-        EVT_CALL(N(StartEnemyDrainGFX), LVar0, LVar1, LVar2, LVar3)
+        EVT_CALL(N(SpawnDrainHealthStartFX), LVar0, LVar1, LVar2, LVar3)
         EVT_THREAD
             EVT_WAIT(15)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_25C)
-            EVT_CALL(N(EnemyDrainGFX), LVar0, LVar1, LVar2, LVar3)
+            EVT_CALL(N(SpawnDrainHealthContinueFX), LVar0, LVar1, LVar2, LVar3)
         EVT_END_THREAD
         EVT_ADD(LVar0, 20)
         EVT_ADD(LVar1, 20)

@@ -5,18 +5,18 @@
 
 #define NAMESPACE b_area_kmr_part_2_goomnut_tree
 
-s32 N(idleAnimations_802232D0)[] = {
+s32 N(IdleAnimations_802232D0)[] = {
     STATUS_NORMAL,    ANIM_SpikyGoomnut_Still,
     STATUS_END,
 };
 
-s32 N(defenseTable_802232DC)[] = {
+s32 N(DefenseTable_802232DC)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_SMASH, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_802232F0)[] = {
+s32 N(StatusTable_802232F0)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 0,
@@ -48,7 +48,7 @@ extern EvtScript N(handleEvent_80223688);
 extern EvtScript N(shake_goomnut_tree);
 extern EvtScript N(80223DBC);
 
-ActorPartBlueprint N(partsTable_8022339C)[] = {
+ActorPartBlueprint N(PartsTable_8022339C)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
@@ -56,7 +56,7 @@ ActorPartBlueprint N(partsTable_8022339C)[] = {
         .targetOffset = { 0, 10 },
         .opacity = 255,
         .idleAnimations = NULL,
-        .defenseTable = N(defenseTable_802232DC),
+        .defenseTable = N(DefenseTable_802232DC),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -67,8 +67,8 @@ ActorPartBlueprint N(partsTable_8022339C)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 10 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_802232D0),
-        .defenseTable = N(defenseTable_802232DC),
+        .idleAnimations = N(IdleAnimations_802232D0),
+        .defenseTable = N(DefenseTable_802232DC),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -79,8 +79,8 @@ ActorPartBlueprint N(partsTable_8022339C)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 10 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_802232D0),
-        .defenseTable = N(defenseTable_802232DC),
+        .idleAnimations = N(IdleAnimations_802232D0),
+        .defenseTable = N(DefenseTable_802232DC),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -91,8 +91,8 @@ ActorPartBlueprint N(partsTable_8022339C)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 10 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_802232D0),
-        .defenseTable = N(defenseTable_802232DC),
+        .idleAnimations = N(IdleAnimations_802232D0),
+        .defenseTable = N(DefenseTable_802232DC),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -103,8 +103,8 @@ ActorPartBlueprint N(partsTable_8022339C)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 10 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_802232D0),
-        .defenseTable = N(defenseTable_802232DC),
+        .idleAnimations = N(IdleAnimations_802232D0),
+        .defenseTable = N(DefenseTable_802232DC),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -116,10 +116,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_GOOMNUT_TREE,
     .level = 1,
     .maxHP = 255,
-    .partCount = ARRAY_COUNT(N(partsTable_8022339C)),
-    .partsData = N(partsTable_8022339C),
+    .partCount = ARRAY_COUNT( N(PartsTable_8022339C)),
+    .partsData = N(PartsTable_8022339C),
     .initScript = &N(init_80223488),
-    .statusTable = N(statusTable_802232F0),
+    .statusTable = N(StatusTable_802232F0),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,

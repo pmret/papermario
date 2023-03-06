@@ -10,7 +10,7 @@ extern EvtScript N(takeTurn);
 extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
 
-s32 N(idleAnimations)[] = {
+s32 N(IdleAnimations)[] = {
     STATUS_NORMAL, ANIM_Spiny_Anim01,
     STATUS_STONE, ANIM_Spiny_Anim00,
     STATUS_SLEEP, ANIM_Spiny_Anim10,
@@ -23,7 +23,7 @@ s32 N(idleAnimations)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_flipped)[] = {
+s32 N(IdleAnimations_flipped)[] = {
     STATUS_NORMAL, ANIM_Spiny_Anim02,
     STATUS_STONE, ANIM_Spiny_Anim15,
     STATUS_SLEEP, ANIM_Spiny_Anim11,
@@ -36,22 +36,22 @@ s32 N(idleAnimations_flipped)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_2)[] = {
+s32 N(IdleAnimations_2)[] = {
     STATUS_NORMAL, ANIM_Lakitu_Anim0B,
     STATUS_END,
 };
 
-s32 N(defenseTable)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL, 3,
     ELEMENT_END,
 };
 
-s32 N(defenseTable_flipped)[] = {
+s32 N(DefenseTable_flipped)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable)[] = {
+s32 N(StatusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 60,
@@ -83,8 +83,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 20 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_FLIPABLE | ACTOR_EVENT_FLAG_200000,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -4 },
@@ -95,8 +95,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_2),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations_2),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -111,7 +111,7 @@ ActorBlueprint NAMESPACE = {
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
     .initScript = &N(init),
-    .statusTable = N(statusTable),
+    .statusTable = N(StatusTable),
     .escapeChance = 60,
     .airLiftChance = 75,
     .hurricaneChance = 75,
@@ -242,8 +242,8 @@ EvtScript N(handleEvent) = {
             EVT_END_IF
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
             EVT_CALL(SetActorVar, ACTOR_SELF, 1, 1)
-            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable_flipped)))
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_flipped)))
+            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable_flipped)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_flipped)))
             EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_200000, FALSE)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, TRUE)
             EVT_USE_BUF(N(bounceArray))
@@ -382,8 +382,8 @@ EvtScript N(takeTurn) = {
             EVT_SET_CONST(LVar2, ANIM_Spiny_Anim01)
             EVT_EXEC_WAIT(D_8029BBB4)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable)))
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations)))
+            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations)))
             EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_200000, TRUE)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, FALSE)
         EVT_END_IF

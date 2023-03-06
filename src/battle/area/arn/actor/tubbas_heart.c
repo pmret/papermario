@@ -17,7 +17,7 @@ extern EvtScript N(80224B3C);
 extern EvtScript N(80225258);
 extern EvtScript N(802255D8);
 
-s32 N(idleAnimations_80223BC0)[] = {
+s32 N(IdleAnimations_80223BC0)[] = {
     STATUS_NORMAL,    ANIM_TubbasHeart_Anim01,
     STATUS_STONE,     ANIM_TubbasHeart_Anim00,
     STATUS_SLEEP,     ANIM_TubbasHeart_Anim04,
@@ -32,7 +32,7 @@ s32 N(idleAnimations_80223BC0)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_80223C1C)[] = {
+s32 N(IdleAnimations_80223C1C)[] = {
     STATUS_NORMAL,    ANIM_TubbasHeart_Anim0B,
     STATUS_STONE,     ANIM_TubbasHeart_Anim00,
     STATUS_SLEEP,     ANIM_TubbasHeart_Anim04,
@@ -47,12 +47,12 @@ s32 N(idleAnimations_80223C1C)[] = {
     STATUS_END,
 };
 
-s32 N(defenseTable_80223C78)[] = {
+s32 N(DefenseTable_80223C78)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_80223C84)[] = {
+s32 N(StatusTable_80223C84)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 0,
@@ -77,15 +77,15 @@ s32 N(statusTable_80223C84)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_80223D30)[] = {
+ActorPartBlueprint N(PartsTable_80223D30)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80223BC0),
-        .defenseTable = N(defenseTable_80223C78),
+        .idleAnimations = N(IdleAnimations_80223BC0),
+        .defenseTable = N(DefenseTable_80223C78),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -10 },
@@ -96,8 +96,8 @@ ActorPartBlueprint N(partsTable_80223D30)[] = {
         .posOffset = { 0, 54, 0 },
         .targetOffset = { 0, -30 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80223BC0),
-        .defenseTable = N(defenseTable_80223C78),
+        .idleAnimations = N(IdleAnimations_80223BC0),
+        .defenseTable = N(DefenseTable_80223C78),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -10 },
@@ -109,10 +109,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_TUBBA_HEART,
     .level = 0,
     .maxHP = 50,
-    .partCount = ARRAY_COUNT(N(partsTable_80223D30)),
-    .partsData = N(partsTable_80223D30),
+    .partCount = ARRAY_COUNT( N(PartsTable_80223D30)),
+    .partsData = N(PartsTable_80223D30),
     .initScript = &N(init_80223DA0),
-    .statusTable = N(statusTable_80223C84),
+    .statusTable = N(StatusTable_80223C84),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -523,7 +523,7 @@ EvtScript N(80225258) = {
     EVT_PLAY_EFFECT(EFFECT_ENERGY_IN_OUT, 3, LVar0, LVar1, LVar2, LVar3, 0, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 4, LVarF)
     EVT_CALL(EnableActorGlow, ACTOR_SELF, TRUE)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80223C1C)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80223C1C)))
     EVT_RETURN
     EVT_END
 };
@@ -564,7 +564,7 @@ EvtScript N(802255D8) = {
         EVT_CALL(GetActorVar, ACTOR_SELF, 4, LVar0)
         EVT_CALL(RemoveEffect, LVar0)
         EVT_CALL(SetActorVar, ACTOR_SELF, 4, 0)
-        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80223BC0)))
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80223BC0)))
     EVT_END_IF
     EVT_CALL(PlaySound, SOUND_20F9)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)

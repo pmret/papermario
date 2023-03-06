@@ -21,7 +21,7 @@ extern Formation N(specialFormation_802273A8);
 extern Formation N(specialFormation_802273C4);
 extern Formation N(specialFormation_802273E0);
 
-s32 N(idleAnimations_802249E0)[] = {
+s32 N(IdleAnimations_802249E0)[] = {
     STATUS_NORMAL,    ANIM_GrooveGuy_Anim01,
     STATUS_STONE,     ANIM_GrooveGuy_Anim00,
     STATUS_SLEEP,     ANIM_GrooveGuy_Anim06,
@@ -34,13 +34,13 @@ s32 N(idleAnimations_802249E0)[] = {
     STATUS_END,
 };
 
-s32 N(defenseTable_80224A2C)[] = {
+s32 N(DefenseTable_80224A2C)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_SHOCK, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_80224A40)[] = {
+s32 N(StatusTable_80224A40)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 70,
@@ -71,15 +71,15 @@ enum PartIDs {
     PT_MAIN     = 1,
 };
 
-ActorPartBlueprint N(partsTable_80224AEC)[] = {
+ActorPartBlueprint N(PartsTable_80224AEC)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_802249E0),
-        .defenseTable = N(defenseTable_80224A2C),
+        .idleAnimations = N(IdleAnimations_802249E0),
+        .defenseTable = N(DefenseTable_80224A2C),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -10 },
@@ -91,10 +91,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_GROOVE_GUY,
     .level = 15,
     .maxHP = 7,
-    .partCount = ARRAY_COUNT(N(partsTable_80224AEC)),
-    .partsData = N(partsTable_80224AEC),
+    .partCount = ARRAY_COUNT( N(PartsTable_80224AEC)),
+    .partsData = N(PartsTable_80224AEC),
     .initScript = &N(init_80224B38),
-    .statusTable = N(statusTable_80224A40),
+    .statusTable = N(StatusTable_80224A40),
     .escapeChance = 50,
     .airLiftChance = 85,
     .hurricaneChance = 80,
@@ -596,7 +596,7 @@ EvtScript N(randomSummon) = {
             EVT_EXEC_WAIT(N(802271A0))
     EVT_END_SWITCH
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PT_MAIN, EVT_PTR(N(idleAnimations_802249E0)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PT_MAIN, EVT_PTR(N(IdleAnimations_802249E0)))
     EVT_RETURN
     EVT_END
 };

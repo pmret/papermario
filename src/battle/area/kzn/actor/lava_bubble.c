@@ -5,14 +5,14 @@
 
 #define NAMESPACE b_area_kzn_lava_bubble
 
-extern s32 N(idleAnimations_80218FC4)[];
-extern s32 N(idleAnimations_80219010)[];
+extern s32 N(IdleAnimations_80218FC4)[];
+extern s32 N(IdleAnimations_80219010)[];
 extern EvtScript N(init_8021901C);
 extern EvtScript N(takeTurn_8021AEA4);
 extern EvtScript N(idle_802191E4);
 extern EvtScript N(handleEvent_80219500);
 
-s32 N(defenseTable_80218E10)[] = {
+s32 N(DefenseTable_80218E10)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_WATER, -2,
     ELEMENT_ICE, -2,
@@ -21,7 +21,7 @@ s32 N(defenseTable_80218E10)[] = {
     ELEMENT_END,
 };
 
-s32 N(statusTable_80218E3C)[] = {
+s32 N(StatusTable_80218E3C)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 50,
@@ -46,15 +46,15 @@ s32 N(statusTable_80218E3C)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_80218EE8)[] = {
+ActorPartBlueprint N(PartsTable_80218EE8)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -2, 25 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80218FC4),
-        .defenseTable = N(defenseTable_80218E10),
+        .idleAnimations = N(IdleAnimations_80218FC4),
+        .defenseTable = N(DefenseTable_80218E10),
         .eventFlags = ACTOR_EVENT_FLAG_FIREY,
         .elementImmunityFlags = ELEMENT_FIRE,
         .projectileTargetOffset = { -3, -10 },
@@ -65,8 +65,8 @@ ActorPartBlueprint N(partsTable_80218EE8)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80219010),
-        .defenseTable = N(defenseTable_80218E10),
+        .idleAnimations = N(IdleAnimations_80219010),
+        .defenseTable = N(DefenseTable_80218E10),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -1, -10 },
@@ -77,8 +77,8 @@ ActorPartBlueprint N(partsTable_80218EE8)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80219010),
-        .defenseTable = N(defenseTable_80218E10),
+        .idleAnimations = N(IdleAnimations_80219010),
+        .defenseTable = N(DefenseTable_80218E10),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -1, -10 },
@@ -89,8 +89,8 @@ ActorPartBlueprint N(partsTable_80218EE8)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80219010),
-        .defenseTable = N(defenseTable_80218E10),
+        .idleAnimations = N(IdleAnimations_80219010),
+        .defenseTable = N(DefenseTable_80218E10),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -1, -10 },
@@ -101,8 +101,8 @@ ActorPartBlueprint N(partsTable_80218EE8)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80219010),
-        .defenseTable = N(defenseTable_80218E10),
+        .idleAnimations = N(IdleAnimations_80219010),
+        .defenseTable = N(DefenseTable_80218E10),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -1, -10 },
@@ -114,10 +114,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_LAVA_BUBBLE,
     .level = 17,
     .maxHP = 9,
-    .partCount = ARRAY_COUNT(N(partsTable_80218EE8)),
-    .partsData = N(partsTable_80218EE8),
+    .partCount = ARRAY_COUNT( N(PartsTable_80218EE8)),
+    .partsData = N(PartsTable_80218EE8),
     .initScript = &N(init_8021901C),
-    .statusTable = N(statusTable_80218E3C),
+    .statusTable = N(StatusTable_80218E3C),
     .escapeChance = 50,
     .airLiftChance = 90,
     .hurricaneChance = 85,
@@ -132,7 +132,7 @@ ActorBlueprint NAMESPACE = {
     .statusMessageOffset = { 10, 20 },
 };
 
-s32 N(idleAnimations_80218FC4)[] = {
+s32 N(IdleAnimations_80218FC4)[] = {
     STATUS_NORMAL,    ANIM_LavaBubble_Anim01,
     STATUS_STONE,     ANIM_LavaBubble_Anim00,
     STATUS_SLEEP,     ANIM_LavaBubble_Anim01,
@@ -145,7 +145,7 @@ s32 N(idleAnimations_80218FC4)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_80219010)[] = {
+s32 N(IdleAnimations_80219010)[] = {
     STATUS_NORMAL,    ANIM_LavaBubble_Anim01,
     STATUS_END,
 };

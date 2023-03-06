@@ -6,12 +6,12 @@
 
 #define NAMESPACE b_area_trd_part_1_bullet_bill
 
-s32 N(defenseTable_80218F60)[] = {
+s32 N(DefenseTable_80218F60)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_80218F6C)[] = {
+s32 N(StatusTable_80218F6C)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 0,
@@ -36,18 +36,18 @@ s32 N(statusTable_80218F6C)[] = {
     STATUS_END,
 };
 
-extern s32 N(idleAnimations_80219064)[];
+extern s32 N(IdleAnimations_80219064)[];
 extern EvtScript N(init_80219088);
 
-ActorPartBlueprint N(partsTable_80219018)[] = {
+ActorPartBlueprint N(PartsTable_80219018)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 16 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80219064),
-        .defenseTable = N(defenseTable_80218F60),
+        .idleAnimations = N(IdleAnimations_80219064),
+        .defenseTable = N(DefenseTable_80218F60),
         .eventFlags = ACTOR_EVENT_FLAG_FIRE_EXPLODE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -6 },
@@ -59,10 +59,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_BULLET_BILL,
     .level = 5,
     .maxHP = 2,
-    .partCount = ARRAY_COUNT(N(partsTable_80219018)),
-    .partsData = N(partsTable_80219018),
+    .partCount = ARRAY_COUNT( N(PartsTable_80219018)),
+    .partsData = N(PartsTable_80219018),
     .initScript = &N(init_80219088),
-    .statusTable = N(statusTable_80218F6C),
+    .statusTable = N(StatusTable_80218F6C),
     .escapeChance = 50,
     .airLiftChance = 100,
     .hurricaneChance = 100,
@@ -77,7 +77,7 @@ ActorBlueprint NAMESPACE = {
     .statusMessageOffset = { 10, 20 },
 };
 
-s32 N(idleAnimations_80219064)[] = {
+s32 N(IdleAnimations_80219064)[] = {
     STATUS_NORMAL,    ANIM_BulletBill_Anim01,
     STATUS_STONE,     ANIM_BulletBill_Anim00,
     STATUS_STOP,      ANIM_BulletBill_Anim00,

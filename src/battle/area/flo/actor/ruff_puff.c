@@ -10,7 +10,7 @@ extern EvtScript N(takeTurn);
 extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
 
-s32 N(idleAnimations)[] = {
+s32 N(IdleAnimations)[] = {
     STATUS_NORMAL, ANIM_TuffPuff_Idle,
     STATUS_STONE, ANIM_TuffPuff_Still,
     STATUS_SLEEP, ANIM_TuffPuff_Sleep,
@@ -22,13 +22,13 @@ s32 N(idleAnimations)[] = {
     STATUS_END,
 };
 
-s32 N(defenseTable)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_MYSTERY, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable)[] = {
+s32 N(StatusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 50,
@@ -60,8 +60,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -2, 26 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -13 },
@@ -76,7 +76,7 @@ ActorBlueprint NAMESPACE = {
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
     .initScript = &N(EVS_Init),
-    .statusTable = N(statusTable),
+    .statusTable = N(StatusTable),
     .escapeChance = 50,
     .airLiftChance = 90,
     .hurricaneChance = 90,

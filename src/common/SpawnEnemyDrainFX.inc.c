@@ -1,7 +1,7 @@
 #include "common.h"
 #include "npc.h"
 
-API_CALLABLE(N(StartEnemyDrainGFX)) {
+API_CALLABLE(N(SpawnDrainHealthStartFX)) {
     Bytecode* args = script->ptrReadPos;
     s32 x = evt_get_variable(script, *args++);
     s32 y = evt_get_variable(script, *args++);
@@ -12,7 +12,7 @@ API_CALLABLE(N(StartEnemyDrainGFX)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(EnemyDrainGFX)) {
+API_CALLABLE(N(SpawnDrainHealthContinueFX)) {
     Bytecode* args = script->ptrReadPos;
     s32 x = evt_get_variable(script, *args++);
     s32 y = evt_get_variable(script, *args++);

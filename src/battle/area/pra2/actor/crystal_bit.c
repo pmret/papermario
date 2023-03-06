@@ -12,29 +12,29 @@ extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
 extern EvtScript N(nextTurn);
 
-s32 N(idleAnimations_1)[] = {
+s32 N(IdleAnimations_1)[] = {
     STATUS_NORMAL, ANIM_CrystalKing_Anim0A,
     STATUS_END,
 };
 
-s32 N(idleAnimations_2)[] = {
+s32 N(IdleAnimations_2)[] = {
     STATUS_NORMAL, ANIM_CrystalKing_Anim0B,
     STATUS_END,
 };
 
-s32 N(idleAnimations_3)[] = {
+s32 N(IdleAnimations_3)[] = {
     STATUS_NORMAL, ANIM_CrystalKing_Anim0C,
     STATUS_END,
 };
 
-s32 N(defenseTable)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_FIRE, 0,
     ELEMENT_ICE, 99,
     ELEMENT_END,
 };
 
-s32 N(statusTable)[] = {
+s32 N(StatusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 0,
@@ -66,8 +66,8 @@ ActorPartBlueprint N(parts_1)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 16 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_1),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations_1),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_ICY,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -10 },
@@ -79,7 +79,7 @@ ActorPartBlueprint N(parts_1)[] = {
         .targetOffset = { 0, -34 },
         .opacity = 255,
         .idleAnimations = NULL,
-        .defenseTable = N(defenseTable),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_ICY,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -10 },
@@ -93,8 +93,8 @@ ActorPartBlueprint N(parts_2)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 16 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_2),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations_2),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_ICY,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -10 },
@@ -106,7 +106,7 @@ ActorPartBlueprint N(parts_2)[] = {
         .targetOffset = { 0, -34 },
         .opacity = 255,
         .idleAnimations = NULL,
-        .defenseTable = N(defenseTable),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_ICY,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -10 },
@@ -120,8 +120,8 @@ ActorPartBlueprint N(parts_3)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 16 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_3),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations_3),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_ICY,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -10 },
@@ -133,7 +133,7 @@ ActorPartBlueprint N(parts_3)[] = {
         .targetOffset = { 0, -34 },
         .opacity = 255,
         .idleAnimations = NULL,
-        .defenseTable = N(defenseTable),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_ICY,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -10 },
@@ -148,7 +148,7 @@ ActorBlueprint N(1) = {
     .partCount = ARRAY_COUNT(N(parts_1)),
     .partsData = N(parts_1),
     .initScript = &N(init),
-    .statusTable = N(statusTable),
+    .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -171,7 +171,7 @@ ActorBlueprint N(2) = {
     .partCount = ARRAY_COUNT(N(parts_2)),
     .partsData = N(parts_2),
     .initScript = &N(init),
-    .statusTable = N(statusTable),
+    .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -194,7 +194,7 @@ ActorBlueprint N(3) = {
     .partCount = ARRAY_COUNT(N(parts_3)),
     .partsData = N(parts_3),
     .initScript = &N(init),
-    .statusTable = N(statusTable),
+    .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,

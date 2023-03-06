@@ -17,8 +17,8 @@ enum N(ActorVars) {
     N(VAR_SUMMON_COUNT) = 10,
 };
 
-extern s32 N(idleAnimations)[];
-extern s32 N(idleAnimations_thrownBodyPart)[];
+extern s32 N(IdleAnimations)[];
+extern s32 N(IdleAnimations_thrownBodyPart)[];
 extern EvtScript N(init);
 extern EvtScript N(takeTurn);
 extern EvtScript N(idle);
@@ -32,12 +32,12 @@ extern EvtScript N(doSpinSmashHit);
 extern EvtScript N(onHit);
 extern EvtScript N(flee);
 
-s32 N(defenseTable)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable)[] = {
+s32 N(StatusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 90,
@@ -69,8 +69,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 20 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_200000,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -82,7 +82,7 @@ ActorPartBlueprint N(parts)[] = {
         .targetOffset = { 0, 72 },
         .opacity = 255,
         .idleAnimations = NULL,
-        .defenseTable = N(defenseTable),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_200000,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -8 },
@@ -94,7 +94,7 @@ ActorPartBlueprint N(parts)[] = {
         .targetOffset = { 0, 54 },
         .opacity = 255,
         .idleAnimations = NULL,
-        .defenseTable = N(defenseTable),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_200000,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -8 },
@@ -106,7 +106,7 @@ ActorPartBlueprint N(parts)[] = {
         .targetOffset = { 0, 36 },
         .opacity = 255,
         .idleAnimations = NULL,
-        .defenseTable = N(defenseTable),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_200000,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -8 },
@@ -118,7 +118,7 @@ ActorPartBlueprint N(parts)[] = {
         .targetOffset = { 0, 16 },
         .opacity = 255,
         .idleAnimations = NULL,
-        .defenseTable = N(defenseTable),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_200000,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -8 },
@@ -129,8 +129,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_thrownBodyPart),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations_thrownBodyPart),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_200000,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -145,7 +145,7 @@ ActorBlueprint NAMESPACE = {
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
     .initScript = &N(init),
-    .statusTable = N(statusTable),
+    .statusTable = N(StatusTable),
     .escapeChance = 70,
     .airLiftChance = 90,
     .hurricaneChance = 85,
@@ -160,7 +160,7 @@ ActorBlueprint NAMESPACE = {
     .statusMessageOffset = { 10, 65 },
 };
 
-s32 N(idleAnimations)[] = {
+s32 N(IdleAnimations)[] = {
     STATUS_NORMAL,    ANIM_Pokey_Anim04,
     STATUS_STONE,     ANIM_Pokey_Anim00,
     STATUS_SLEEP,     ANIM_Pokey_Anim25,
@@ -171,7 +171,7 @@ s32 N(idleAnimations)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_3bodyParts)[] = {
+s32 N(IdleAnimations_3bodyParts)[] = {
     STATUS_NORMAL,    ANIM_Pokey_Anim05,
     STATUS_STONE,     ANIM_Pokey_Anim01,
     STATUS_SLEEP,     ANIM_Pokey_Anim26,
@@ -182,7 +182,7 @@ s32 N(idleAnimations_3bodyParts)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_2bodyParts)[] = {
+s32 N(IdleAnimations_2bodyParts)[] = {
     STATUS_NORMAL,    ANIM_Pokey_Anim06,
     STATUS_STONE,     ANIM_Pokey_Anim02,
     STATUS_SLEEP,     ANIM_Pokey_Anim27,
@@ -193,7 +193,7 @@ s32 N(idleAnimations_2bodyParts)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_1bodyPart)[] = {
+s32 N(IdleAnimations_1bodyPart)[] = {
     STATUS_NORMAL,    ANIM_Pokey_Anim07,
     STATUS_STONE,     ANIM_Pokey_Anim03,
     STATUS_SLEEP,     ANIM_Pokey_Anim28,
@@ -204,7 +204,7 @@ s32 N(idleAnimations_1bodyPart)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_thrownBodyPart)[] = {
+s32 N(IdleAnimations_thrownBodyPart)[] = {
     STATUS_NORMAL,    ANIM_Pokey_Anim16,
     STATUS_END,
 };
@@ -1167,7 +1167,7 @@ EvtScript N(afterPartThrown) = {
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_ANIM_THROW2), ANIM_Pokey_Anim13)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_ANIM_BURN), ANIM_Pokey_Anim1A)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_ANIM_BURN2), ANIM_Pokey_Anim1B)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_3bodyParts)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_3bodyParts)))
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_MULTI_TARGET, FALSE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_NO_TARGET, TRUE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 3, ACTOR_PART_FLAG_NO_TARGET, FALSE)
@@ -1184,7 +1184,7 @@ EvtScript N(afterPartThrown) = {
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_ANIM_THROW2), ANIM_Pokey_Anim15)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_ANIM_BURN), ANIM_Pokey_Anim1C)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_ANIM_BURN2), ANIM_Pokey_Anim1D)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_2bodyParts)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_2bodyParts)))
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 3, ACTOR_PART_FLAG_MULTI_TARGET, FALSE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 3, ACTOR_PART_FLAG_NO_TARGET, TRUE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 4, ACTOR_PART_FLAG_NO_TARGET, FALSE)
@@ -1199,7 +1199,7 @@ EvtScript N(afterPartThrown) = {
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_ANIM_HIT), ANIM_Pokey_Anim0F)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_ANIM_BURN), ANIM_Pokey_Anim1E)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_ANIM_BURN2), ANIM_Pokey_Anim1F)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_1bodyPart)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_1bodyPart)))
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 4, ACTOR_PART_FLAG_MULTI_TARGET, FALSE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 4, ACTOR_PART_FLAG_NO_TARGET, TRUE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 5, ACTOR_PART_FLAG_NO_TARGET, FALSE)

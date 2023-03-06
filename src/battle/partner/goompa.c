@@ -14,17 +14,17 @@ extern EvtScript N(runAway);
 extern EvtScript N(runAwayFail);
 extern EvtScript N(executeAction);
 
-s32 N(idleAnimations)[] = {
+s32 N(IdleAnimations)[] = {
     STATUS_NORMAL, ANIM_Goompa_Walk,
     STATUS_END,
 };
 
-s32 N(defenseTable)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable)[] = {
+s32 N(StatusTable)[] = {
     STATUS_NORMAL,            100,
     STATUS_DEFAULT,           100,
     STATUS_SLEEP,             100,
@@ -53,8 +53,8 @@ ActorPartBlueprint N(parts)[] = {
     {
         .index = 1,
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable),
     },
 };
 
@@ -65,7 +65,7 @@ ActorBlueprint NAMESPACE = {
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
     .initScript = &N(init),
-    .statusTable = N(statusTable),
+    .statusTable = N(StatusTable),
     .spinSmashReq = 4,
     .powerBounceChance = 80,
     .size = { 29, 26 },

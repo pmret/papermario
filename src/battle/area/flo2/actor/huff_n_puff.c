@@ -243,7 +243,7 @@ API_CALLABLE(N(UpdateLerp)) {
 
 s32 N(TuffPuffActorIds)[32] = { };
 
-s32 N(idleAnimations)[] = {
+s32 N(IdleAnimations)[] = {
     STATUS_NORMAL, ANIM_HuffNPuff_Anim01,
     STATUS_STONE, ANIM_HuffNPuff_Anim01,
     STATUS_SLEEP, ANIM_HuffNPuff_Anim01,
@@ -258,7 +258,7 @@ s32 N(idleAnimations)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations2)[] = {
+s32 N(IdleAnimations2)[] = {
     STATUS_NORMAL, ANIM_HuffNPuff_Anim02,
     STATUS_STONE, ANIM_HuffNPuff_Anim02,
     STATUS_SLEEP, ANIM_HuffNPuff_Anim02,
@@ -273,7 +273,7 @@ s32 N(idleAnimations2)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations3)[] = {
+s32 N(IdleAnimations3)[] = {
     STATUS_NORMAL, ANIM_HuffNPuff_Anim03,
     STATUS_STONE, ANIM_HuffNPuff_Anim03,
     STATUS_SLEEP, ANIM_HuffNPuff_Anim03,
@@ -288,27 +288,27 @@ s32 N(idleAnimations3)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_charged1)[] = {
+s32 N(IdleAnimations_charged1)[] = {
     STATUS_NORMAL, ANIM_HuffNPuff_Anim11,
     STATUS_END,
 };
 
-s32 N(idleAnimations_charged2)[] = {
+s32 N(IdleAnimations_charged2)[] = {
     STATUS_NORMAL, ANIM_HuffNPuff_Anim12,
     STATUS_END,
 };
 
-s32 N(idleAnimations_charged3)[] = {
+s32 N(IdleAnimations_charged3)[] = {
     STATUS_NORMAL, ANIM_HuffNPuff_Anim13,
     STATUS_END,
 };
 
-s32 N(idleAnimations4)[] = {
+s32 N(IdleAnimations4)[] = {
     STATUS_NORMAL, ANIM_RuffPuff_Anim02,
     STATUS_END,
 };
 
-s32 N(defenseTable)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_SHOCK, 99,
     ELEMENT_MYSTERY, 0,
@@ -317,7 +317,7 @@ s32 N(defenseTable)[] = {
     ELEMENT_END,
 };
 
-s32 N(statusTable)[] = {
+s32 N(StatusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 0,
@@ -349,8 +349,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -10, 40 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -15, -50 },
@@ -361,8 +361,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations2),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations2),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -373,8 +373,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations3),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations3),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -385,8 +385,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations4),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations4),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -401,7 +401,7 @@ ActorBlueprint NAMESPACE = {
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
     .initScript = &N(EVS_Init),
-    .statusTable = N(statusTable),
+    .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -2219,9 +2219,9 @@ EvtScript N(electricCharge) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_HuffNPuff_Anim11)
     EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_HuffNPuff_Anim12)
     EVT_CALL(SetAnimation, ACTOR_SELF, 3, ANIM_HuffNPuff_Anim13)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_charged1)))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(idleAnimations_charged2)))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 3, EVT_PTR(N(idleAnimations_charged3)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_charged1)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(IdleAnimations_charged2)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 3, EVT_PTR(N(IdleAnimations_charged3)))
     EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_ELECTRIFIED, TRUE)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_35C)
     EVT_CALL(N(StartRumbleWithParams), 70, 120)
@@ -2272,9 +2272,9 @@ EvtScript N(attackGroundLightning) = {
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_EFFECT_SNAKING_STATIC), LVar0)
     EVT_CALL(RemoveEffect, LVar0)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations)))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(idleAnimations2)))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 3, EVT_PTR(N(idleAnimations3)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(IdleAnimations2)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 3, EVT_PTR(N(IdleAnimations3)))
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_HuffNPuff_Anim0E)
     EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_HuffNPuff_Anim0F)
     EVT_CALL(SetAnimation, ACTOR_SELF, 3, ANIM_HuffNPuff_Anim10)
@@ -2363,9 +2363,9 @@ EvtScript N(electicCharge_copy) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_HuffNPuff_Anim11)
     EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_HuffNPuff_Anim12)
     EVT_CALL(SetAnimation, ACTOR_SELF, 3, ANIM_HuffNPuff_Anim13)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_charged1)))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(idleAnimations_charged2)))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 3, EVT_PTR(N(idleAnimations_charged3)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_charged1)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(IdleAnimations_charged2)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 3, EVT_PTR(N(IdleAnimations_charged3)))
     EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_ELECTRIFIED, TRUE)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_35C)
     EVT_CALL(N(StartRumbleWithParams), 70, 120)
@@ -2436,9 +2436,9 @@ EvtScript N(attackDirectLightning) = {
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_EFFECT_SNAKING_STATIC), LVar0)
     EVT_CALL(RemoveEffect, LVar0)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations)))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(idleAnimations2)))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 3, EVT_PTR(N(idleAnimations3)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(IdleAnimations2)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 3, EVT_PTR(N(IdleAnimations3)))
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_HuffNPuff_Anim0E)
     EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_HuffNPuff_Anim0F)
     EVT_CALL(SetAnimation, ACTOR_SELF, 3, ANIM_HuffNPuff_Anim10)
