@@ -1416,7 +1416,7 @@ void status_menu_stop_blinking_sp(void) {
     }
 }
 
-void status_menu_start_blinking_sp_bars(s8 numBarsToBlink) {
+void status_menu_start_blinking_sp_bars(s32 numBarsToBlink) {
     UiStatus* uiStatus = &gUIStatus;
 
     uiStatus->spBarsToBlink = numBarsToBlink;
