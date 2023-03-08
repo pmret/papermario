@@ -184,8 +184,258 @@ segments:
     - [0x8D0DD0, c, mac_06_1_main]
     - [0x8D1290, c, mac_06_2_whale]
     - [0x8D1C50, c, mac_06_3_npc]
+  - name: tik_01
+    dir: world/area_tik/tik_01
+    type: code
+    start: 0x8D5740
+    vram: 0x80240000
+    subsegments:
+    - [0x8D5740, c, tik_01_0_header]
+    - [0x8D5740, c, tik_01_1_music]
+    - [0x8D5740, c, tik_01_2_main]
+    - [0x8D5D30, c, tik_01_3_drips]
+    - [0x8D60A0, c, tik_01_4_entity]
+    - [0x8D6170, c, tik_01_5_npc]
+  - name: tik_02
+    dir: world/area_tik/tik_02
+    type: code
+    start: 0x8D89D0
+    vram: 0x80240000
+    subsegments:
+    - [0x8D89D0, c, tik_02_0_header]
+    - [0x8D89D0, c, tik_02_1_music]
+    - [0x8D89D0, c, tik_02_2_main]
+    - [0x8D8CE0, c, tik_02_3_entity]
+    - [0x8D8FA0, c, tik_02_4_drips]
+    - [0x8D9310, c, tik_02_5_npc]
+  - name: tik_03
+    dir: world/area_tik/tik_03
+    type: code
+    start: 0x8DAD90
+    vram: 0x80240000
+    subsegments:
+    - [0x8DAD90, c, tik_03_0_header]
+    - [0x8DAD90, c, tik_03_1_music]
+    - [0x8DAD90, c, tik_03_2_main]
+    - [0x8DB380, c, tik_03_3_drips]
+    - [0x8DB6F0, c, tik_03_4_platforms]
+    - [0x8DB750, c, tik_03_5_entity]
+    - [0x8DB750, c, tik_03_6_demo]
+  - name: tik_04
+    dir: world/area_tik/tik_04
+    type: code
+    start: 0x8DDCC0
+    vram: 0x80240000
+    subsegments:
+    - [0x8DDCC0, c, tik_04_0_header]
+    - [0x8DDCC0, c, tik_04_1_music]
+    - [0x8DDCC0, c, tik_04_2_main]
+    - [0x8DE2B0, c, tik_04_3_drips]
+    - [0x8DE620, c, tik_04_4_platforms]
+    - [0x8DE930, c, tik_04_5_npc]
+  - name: tik_05
+    dir: world/area_tik/tik_05
+    type: code
+    start: 0x8E1050
+    vram: 0x80240000
+    subsegments:
+    - [0x8E1050, c, tik_05_0_header]
+    - [0x8E1050, c, tik_05_1_music]
+    - [0x8E1050, c, tik_05_2_main]
+    - [0x8E1360, c, tik_05_3_drips]
+    - [0x8E16D0, c, tik_05_4_entity]
+    - [0x8E1AA0, c, tik_05_5_npc]
+  - name: tik_06
+    dir: world/area_tik/tik_06
+    type: code
+    start: 0x8E3170
+    vram: 0x80240000
+    subsegments:
+    - [0x8E3170, c, tik_06_0_header]
+    - [0x8E3170, c, tik_06_1_music]
+    - [0x8E3170, c, tik_06_2_main]
+    - [0x8E3760, c, tik_06_3_drips]
+    - [0x8E3AD0, c, tik_06_4_entity]
+  - name: tik_07
+    dir: world/area_tik/tik_07
+    type: code
+    start: 0x8E5E70
+    vram: 0x80240000
+    subsegments:
+    - [0x8E5E70, c, tik_07_0_header]
+    - [0x8E5E70, c, tik_07_1_music]
+    - [0x8E5E70, c, tik_07_2_main]
+    - [0x8E6150, c, tik_07_3_entity]
+    - [0x8E6E90, c, tik_07_4_drips]
+    - [0x8E7200, c, tik_07_5_platforms]
+    - [0x8E7260, c, tik_07_6_npc]
+  - name: tik_08
+    dir: world/area_tik/tik_08
+    type: code
+    start: 0x8EB080
+    vram: 0x80240000
+    subsegments:
+    - [0x8EB080, c, tik_08_0_header]
+    - [0x8EB080, c, tik_08_1_music]
+    - [0x8EB080, c, tik_08_2_main]
+    - [0x8EB670, c, tik_08_3_drips]
+    - [0x8EB9E0, c, tik_08_4_entity]
+    - [0x8EBAB0, c, tik_08_5_npc]
+  - name: tik_09
+    dir: world/area_tik/tik_09
+    type: code
+    start: 0x8EE450
+    vram: 0x80240000
+    subsegments:
+    - [0x8EE450, c, tik_09_0_header]
+    - [0x8EE450, c, tik_09_1_music]
+    - [0x8EE450, c, tik_09_2_main]
+    - [0x8EEA40, c, tik_09_3_drips]
+    - [0x8EEDB0, c, tik_09_4_entity]
+    - [0x8EEE80, c, tik_09_5_npc]
+  - name: tik_10
+    dir: world/area_tik/tik_10
+    type: code
+    start: 0x8F2650
+    vram: 0x80240000
+    subsegments:
+    - [0x8F2650, c, tik_10_0_header]
+    - [0x8F2650, c, tik_10_1_music]
+    - [0x8F2650, c, tik_10_2_main]
+    - [0x8F2960, c, tik_10_3_drips]
+    - [0x8F2CD0, c, tik_10_4_entity]
+  - name: tik_12
+    dir: world/area_tik/tik_12
+    type: code
+    start: 0x8F4E60
+    vram: 0x80240000
+    subsegments:
+    - [0x8F4E60, c, tik_12_0_header]
+    - [0x8F4E60, c, tik_12_1_music]
+    - [0x8F4E60, c, tik_12_2_main]
+    - [0x8F5450, c, tik_12_3_drips]
+    - [0x8F57C0, c, tik_12_4_entity]
+    - [0x8F67C0, c, tik_12_5_npc]
+  - name: tik_14
+    dir: world/area_tik/tik_14
+    type: code
+    start: 0x8F9890
+    vram: 0x80240000
+    subsegments:
+    - [0x8F9890, c, tik_14_0_header]
+    - [0x8F9890, c, tik_14_1_music]
+    - [0x8F9890, c, tik_14_2_main]
+    - [0x8F9E80, c, tik_14_3_drips]
+    - [0x8FA1F0, c, tik_14_4_entity]
+  - name: tik_15
+    dir: world/area_tik/tik_15
+    type: code
+    start: 0x8FBE30
+    vram: 0x80240000
+    subsegments:
+    - [0x8FBE30, c, tik_15_0_header]
+    - [0x8FBE30, c, tik_15_1_music]
+    - [0x8FBE30, c, tik_15_2_main]
+    - [0x8FC420, c, tik_15_3_entity]
+    - [0x8FC420, c, tik_15_4_drips]
+    - [0x8FC790, c, tik_15_5_npc]
+  - name: tik_17
+    dir: world/area_tik/tik_17
+    type: code
+    start: 0x8FECB0
+    vram: 0x80240000
+    subsegments:
+    - [0x8FECB0, c, tik_17_0_header]
+    - [0x8FECB0, c, tik_17_1_music]
+    - [0x8FECE0, c, tik_17_2_entity]
+    - [0x8FFA20, c, tik_17_3_main]
+  - name: tik_18
+    dir: world/area_tik/tik_18
+    type: code
+    start: 0x901970
+    vram: 0x80240000
+    subsegments:
+    - [0x901970, c, tik_18_0_header]
+    - [0x901970, c, tik_18_1_music]
+    - [0x901970, c, tik_18_2_main]
+    - [0x901C80, c, tik_18_3_drips]
+    - [0x901FF0, c, tik_18_4_npc]
+    - [0x901FF0, c, tik_18_5_entity]
+  - name: tik_19
+    dir: world/area_tik/tik_19
+    type: code
+    start: 0x903870
+    vram: 0x80240000
+    subsegments:
+    - [0x903870, c, tik_19_0_header]
+    - [0x903870, c, tik_19_1_music]
+    - [0x903870, c, tik_19_2_main]
+    - [0x903E60, c, tik_19_3_entity]
+  - name: tik_20
+    dir: world/area_tik/tik_20
+    type: code
+    start: 0x9065E0
+    vram: 0x80240000
+    subsegments:
+    - [0x9065E0, c, tik_20_0_header]
+    - [0x9065E0, c, tik_20_1_music]
+    - [0x9065E0, c, tik_20_2_main]
+    - [0x906F40, c, tik_20_3_npc]
+    - [0x907720, c, tik_20_4_entity]
+  - name: tik_21
+    dir: world/area_tik/tik_21
+    type: code
+    start: 0x909A30
+    vram: 0x80240000
+    subsegments:
+    - [0x909A30, c, tik_21_0_header]
+    - [0x909A30, c, tik_21_1_music]
+    - [0x909A30, c, tik_21_2_main]
+    - [0x90A390, c, tik_21_3_entity]
+  - name: tik_22
+    dir: world/area_tik/tik_22
+    type: code
+    start: 0x90C150
+    vram: 0x80240000
+    subsegments:
+    - [0x90C150, c, tik_22_0_header]
+    - [0x90C150, c, tik_22_1_music]
+    - [0x90C180, c, tik_22_2_main]
+  - name: tik_23
+    dir: world/area_tik/tik_23
+    type: code
+    start: 0x90E660
+    vram: 0x80240000
+    subsegments:
+    - [0x90E660, c, tik_23_0_header]
+    - [0x90E660, c, tik_23_1_music]
+    - [0x90E660, c, tik_23_2_main]
+    - [0x90EFC0, c, tik_23_3_entity]
+    - [0x90EFC0, c, tik_23_4_npc]
+  - name: tik_24
+    dir: world/area_tik/tik_24
+    type: code
+    start: 0x911D10
+    vram: 0x80240000
+    subsegments:
+    - [0x911D10, c, tik_24_0_header]
+    - [0x911D60, c, tik_24_1_music]
+    - [0x911D60, c, tik_24_2_main]
+    - [0x912070, c, tik_24_3_drips]
+    - [0x9123E0, c, tik_24_4_entity]
+    - [0x9123E0, c, tik_24_5_npc]
+  - name: tik_25
+    dir: world/area_tik/tik_25
+    type: code
+    start: 0x914210
+    vram: 0x80240000
+    subsegments:
+    - [0x914210, c, tik_25_0_header]
+    - [0x914210, c, tik_25_1_music]
+    - [0x914210, c, tik_25_2_main]
+    - [0x914890, c, tik_25_3_entity]
 
-  - [0x8D5740, bin]
+  - [0x915CA0, bin]
 
   - start: 0x1e937b8
     align: 8

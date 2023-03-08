@@ -1279,9 +1279,6 @@ NpcData N(NpcData_Ninji) = {
 };
 
 BSS PopupMenu D_80262C38;
-#if VERSION_PAL
-BSS static s32 pad[5];
-#endif
 BSS s32 D_80262F68;
 BSS s32 D_80262F6C[13];
 

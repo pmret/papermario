@@ -2980,6 +2980,26 @@ enum DoorSounds {
 // TODO: remove and split shading profiles
 enum ShadingProfile {
     SHADING_NONE = 0xFFFFFFFF,
+    SHADING_TIK_01 = 0,
+    SHADING_TIK_02,
+    SHADING_TIK_03,
+    SHADING_TIK_04,
+    SHADING_TIK_05,
+    SHADING_TIK_06,
+    SHADING_TIK_07,
+    SHADING_TIK_08,
+    SHADING_TIK_09,
+    SHADING_TIK_10,
+    SHADING_TIK_12,
+    SHADING_TIK_14,
+    SHADING_TIK_15,
+    SHADING_TIK_18,
+    SHADING_TIK_20,
+    SHADING_TIK_21,
+    SHADING_TIK_22,
+    SHADING_TIK_23,
+    SHADING_TIK_24,
+    SHADING_TIK_25,
 };
 #endif
 
