@@ -15,7 +15,7 @@ void N(func_8024033C_A1B43C)(void) {
     f32 angle = sins(N(D_80243BCC_A1ECCC)) * (1.0f / 32768.0f) * 45.0f;
     N(D_80243BCC_A1ECCC) += 0x400;
     guRotate(&gDisplayContext->matrixStack[gMatrixListPos], angle, 0.0f, 1.0f, 0.0f);
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
     mdl_get_copied_vertices(VTX_COPY_1, &firstVertex, &copiedVertices, &numVertices);
 
@@ -29,8 +29,8 @@ void N(func_8024033C_A1B43C)(void) {
         colors[2] = colors[0] * temp3 / 0x10000;
     }
 
-    gSPClearGeometryMode(gMasterGfxPos++, G_CULL_BOTH);
-    gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(VTX_COPY_1));
+    gSPClearGeometryMode(gMainGfxPos++, G_CULL_BOTH);
+    gSPDisplayList(gMainGfxPos++, mdl_get_copied_gfx(VTX_COPY_1));
     N(D_80243BCE_A1ECCE) += 0x666;
 }
 
@@ -55,7 +55,7 @@ void N(func_8024060C_A1B70C)(void) {
         colors[2] = colors[0] * temp3 / 0x10000;
     }
 
-    gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(VTX_COPY_2));
+    gSPDisplayList(gMainGfxPos++, mdl_get_copied_gfx(VTX_COPY_2));
     N(D_80243BD0_A1ECD0) += (s32)RAD_TO_BINANG(25.1898);
 }
 
@@ -76,7 +76,7 @@ void N(build_gfx_aurora)(void) {
         vtxDst->v.ob[1] = vtxSrc->v.ob[1] + v0 / 0x8000;
     }
 
-    gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(VTX_COPY_0));
+    gSPDisplayList(gMainGfxPos++, mdl_get_copied_gfx(VTX_COPY_0));
     N(AuroraPhaseAngle) += 0xA3;
 }
 
@@ -87,7 +87,7 @@ void N(build_gfx_lamp_halos)(void) {
 
     N(HaloScalePhaseAngle) += (s32)RAD_TO_BINANG(25.1720);
     guScale(&gDisplayContext->matrixStack[gMatrixListPos], scale, scale, scale);
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
               G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 }
 

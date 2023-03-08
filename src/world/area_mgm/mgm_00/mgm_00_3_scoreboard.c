@@ -48,11 +48,11 @@ Gfx N(Gfx_RecordDisplay_Init)[] = {
 
 void N(draw_record_display)(RecordDisplayData* data, s32 alpha) {
     if (alpha > 0) {
-        gSPDisplayList(gMasterGfxPos++, N(Gfx_RecordDisplay_Init));
-        gDPPipeSync(gMasterGfxPos++);
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 16, 120, 24, alpha * 0.65);
-        gDPFillRectangle(gMasterGfxPos++, 48, 53, 272, 129);
-        gDPPipeSync(gMasterGfxPos++);
+        gSPDisplayList(gMainGfxPos++, N(Gfx_RecordDisplay_Init));
+        gDPPipeSync(gMainGfxPos++);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, 16, 120, 24, alpha * 0.65);
+        gDPFillRectangle(gMainGfxPos++, 48, 53, 272, 129);
+        gDPPipeSync(gMainGfxPos++);
         msg_draw_frame(45, 50, 230, 82, MSG_STYLE_INSPECT, 0, 1, (s32)(alpha * 0.55), alpha); // cast needed if signature isn't present
         if (data->gameType == MINIGAME_TYPE_JUMP) {
             draw_msg(MSG_MGM_001C, 66, 57, alpha, MSG_PAL_TEAL, 0);

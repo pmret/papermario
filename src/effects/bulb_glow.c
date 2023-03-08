@@ -185,8 +185,8 @@ void bulb_glow_appendGfx(void* effect) {
         brightness = 0x7F;
     }
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     temp_s1 = &D_E0078918[temp_s2];
     glowExtent = temp_s1->unk_10;
@@ -203,14 +203,14 @@ void bulb_glow_appendGfx(void* effect) {
         return;
     }
 
-    gSPDisplayList(gMasterGfxPos++, D_E0078900[temp_s2]);
+    gSPDisplayList(gMainGfxPos++, D_E0078900[temp_s2]);
     temp_v0 = &D_E00789AC[data->unk_20];
     colorScale = (brightness * 2);
     r = temp_v0->r * colorScale / 255;
     g = temp_v0->g * colorScale / 255;
     b = temp_v0->b * colorScale / 255;
 
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, r, g, b, 0x7F);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, r, g, b, 0x7F);
 
     // temp_s1 = E0078948
     //   unk_00 = 64
@@ -251,7 +251,7 @@ void bulb_glow_appendGfx(void* effect) {
     numRects = (yMax - yMin) / rectHeight;
 
     for (i = yStart / rectHeight; i < numRects && (i + 1) * rectHeight + yMin < SCREEN_HEIGHT; i++) {
-        gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE,
+        gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE,
             // uls = 183 << 2
             (s32) (xMin * temp_s1->unk_08) << 2,
             // This code is correct due to being masked to 12 bits
@@ -265,7 +265,7 @@ void bulb_glow_appendGfx(void* effect) {
             (s32) (temp_s1->unk_04 * 21 - i * temp_s1->unk_14 * temp_s1->unk_0C) << 2);
 
         for (j = 0; j < 1; j++) {
-            gDPLoadMultiTile(gMasterGfxPos++,
+            gDPLoadMultiTile(gMainGfxPos++,
                 // Offset the image to the rows being loaded
                 VIRTUAL_TO_PHYSICAL(nuGfxCfb_ptr + (i * rectHeight + yMin) * (SCREEN_WIDTH * sizeof(u16))),
                 TMEM_ADDR(TMEM_SIZE/2), G_TX_RENDERTILE + 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, 0,
@@ -274,7 +274,7 @@ void bulb_glow_appendGfx(void* effect) {
                 // lrs = 311 - 1, lrt = 8 - 1
                 xMax - 1, rectHeight - 1,
                 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 9, 8, G_TX_NOLOD, G_TX_NOLOD);
-            gSPTextureRectangle(gMasterGfxPos++,
+            gSPTextureRectangle(gMainGfxPos++,
                 // xl = 183 << 2, yl = (43 << 2, 51 << 2, 59 << 2, ...)
                 (xMin + xStart) << 2, (i * rectHeight + yMin) << 2,
                 // xr = 311 << 2, yh = (51 << 2, 59 << 2, 67 << 2, ...)
@@ -283,7 +283,7 @@ void bulb_glow_appendGfx(void* effect) {
                 // s = 183 << 5, t = 0
                 ((xMin + xStart) & 0x1FF) << 5, 0,
                 1 << 10, 1 << 10);
-            gDPPipeSync(gMasterGfxPos++);
+            gDPPipeSync(gMainGfxPos++);
         }
     }
 }

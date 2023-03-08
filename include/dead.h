@@ -108,7 +108,7 @@
 #define entity_upgrade_block_hide_content dead_entity_upgrade_block_hide_content
 #define fx_misc_particles dead_fx_misc_particles
 #define transform_point dead_transform_point
-#define gMasterGfxPos dead_gMasterGfxPos
+#define gMainGfxPos dead_gMainGfxPos
 #define osVirtualToPhysical dead_osVirtualToPhysical
 #define nuGfxZBuffer dead_nuGfxZBuffer
 #define nuGfxCfb_ptr dead_nuGfxCfb_ptr

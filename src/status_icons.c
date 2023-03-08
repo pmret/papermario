@@ -592,19 +592,19 @@ void draw_all_status_icons(void* data) {
     Camera* camera = &gCameras[gCurrentCameraID];
     int i;
 
-    gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 12, 20, SCREEN_WIDTH - 12, SCREEN_HEIGHT - 20);
-    gDPPipeSync(gMasterGfxPos++);
-    gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
-    gDPSetTexturePersp(gMasterGfxPos++, G_TP_NONE);
-    gDPSetTextureLOD(gMasterGfxPos++, G_TL_TILE);
-    gDPSetTextureDetail(gMasterGfxPos++, G_TD_CLAMP);
-    gDPSetTextureConvert(gMasterGfxPos++, G_TC_FILT);
-    gDPSetCombineKey(gMasterGfxPos++, G_CK_NONE);
-    gDPSetAlphaCompare(gMasterGfxPos++, G_AC_NONE);
-    gDPNoOp(gMasterGfxPos++);
-    gDPSetColorDither(gMasterGfxPos++, G_CD_DISABLE);
-    gDPSetAlphaDither(gMasterGfxPos++, G_AD_DISABLE);
-    gSPTexture(gMasterGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
+    gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, 12, 20, SCREEN_WIDTH - 12, SCREEN_HEIGHT - 20);
+    gDPPipeSync(gMainGfxPos++);
+    gDPSetCycleType(gMainGfxPos++, G_CYC_1CYCLE);
+    gDPSetTexturePersp(gMainGfxPos++, G_TP_NONE);
+    gDPSetTextureLOD(gMainGfxPos++, G_TL_TILE);
+    gDPSetTextureDetail(gMainGfxPos++, G_TD_CLAMP);
+    gDPSetTextureConvert(gMainGfxPos++, G_TC_FILT);
+    gDPSetCombineKey(gMainGfxPos++, G_CK_NONE);
+    gDPSetAlphaCompare(gMainGfxPos++, G_AC_NONE);
+    gDPNoOp(gMainGfxPos++);
+    gDPSetColorDither(gMainGfxPos++, G_CD_DISABLE);
+    gDPSetAlphaDither(gMainGfxPos++, G_AD_DISABLE);
+    gSPTexture(gMainGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
 
     for (i = 0, icon = D_800A0F44; i < MAX_ICONS; i++, icon++) {
         if (icon->flags == 0) {

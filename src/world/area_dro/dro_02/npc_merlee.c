@@ -209,7 +209,7 @@ u32 N(appendGfx_ritual_card)(RitualCard* card, Matrix4f mtxParent) {
         return 1;
     }
 
-    gSPDisplayList(gMasterGfxPos++, N(card_setup_gfx));
+    gSPDisplayList(gMainGfxPos++, N(card_setup_gfx));
 
     if (card->unk_00 == 1 || card->unk_00 == 4 || card->unk_00 == 5) {
         guTranslateF(mtxTemp, card->pos.x, card->pos.y, card->pos.z);
@@ -219,53 +219,53 @@ u32 N(appendGfx_ritual_card)(RitualCard* card, Matrix4f mtxParent) {
         guRotateF(mtxTemp, card->pitch, 1.0f, 0.0f, 0.0f);
         guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
         guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
-        gSPMatrix(gMasterGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        gSPMatrix(gMainGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
         if (card->unk_00 == 1 || card->unk_00 == 4) {
-            gSPDisplayList(gMasterGfxPos++, N(card_1_gfx));
+            gSPDisplayList(gMainGfxPos++, N(card_1_gfx));
         }
 
         if (card->unk_00 == 1 || card->unk_00 == 5) {
             spr_get_player_raster_info(&rasterInfo, card->spriteID, card->rasterIndex);
-            gDPSetTextureLUT(gMasterGfxPos++, G_TT_RGBA16);
-            gDPLoadTLUT_pal16(gMasterGfxPos++, 0, rasterInfo.defaultPal);
-            gDPLoadTextureTile_4b(gMasterGfxPos++, rasterInfo.raster, G_IM_FMT_CI, rasterInfo.width, rasterInfo.height,
+            gDPSetTextureLUT(gMainGfxPos++, G_TT_RGBA16);
+            gDPLoadTLUT_pal16(gMainGfxPos++, 0, rasterInfo.defaultPal);
+            gDPLoadTextureTile_4b(gMainGfxPos++, rasterInfo.raster, G_IM_FMT_CI, rasterInfo.width, rasterInfo.height,
                                     0, 0, rasterInfo.width - 1, rasterInfo.height - 1, 0,
                                     G_TX_CLAMP, G_TX_CLAMP, 8, 8, G_TX_NOLOD, G_TX_NOLOD);
             guTranslateF(mtxTransform, card->xoffset + 30 - rasterInfo.width / 2, 0.0f, 0.0f);
             guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
-            gSPMatrix(gMasterGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-            gSPDisplayList(gMasterGfxPos++, N(card_2_gfx));
-            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+            gSPMatrix(gMainGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPDisplayList(gMainGfxPos++, N(card_2_gfx));
+            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
         }
-        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
         return 1;
     }
 
     if (card->unk_00 == 2) {
-        gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 256 * 4, 256 * 4, 287 * 4, 287 * 4);
+        gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, 256 * 4, 256 * 4, 287 * 4, 287 * 4);
         guTranslateF(mtxTemp, N(RitualCards)[0].pos.x, N(RitualCards)[0].pos.y, N(RitualCards)[0].pos.z);
         guMtxCatF(mtxTemp, mtxParent, mtxTransform);
         guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
-        gSPMatrix(gMasterGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        gSPMatrix(gMainGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         ret = fold_appendGfx_component(evt_get_variable(N(CreatorScript), RITUAL_VAR_FOLDER_1), &foldImage, FOLD_STATE_FLAG_10 | FOLD_STATE_FLAG_20, mtxTransform);
-        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
         return ret;
     }
 
     if (card->unk_00 == 3) {
-        gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 256 * 4, 256 * 4, 287 * 4, 287 * 4);
+        gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, 256 * 4, 256 * 4, 287 * 4, 287 * 4);
         guTranslateF(mtxTemp, N(RitualCards)[0].pos.x, N(RitualCards)[0].pos.y, N(RitualCards)[0].pos.z);
         guMtxCatF(mtxTemp, mtxParent, mtxTransform);
         guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
-        gSPMatrix(gMasterGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        gSPMatrix(gMainGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         fold_appendGfx_component(evt_get_variable(N(CreatorScript), RITUAL_VAR_FOLDER_2), &foldImage, FOLD_STATE_FLAG_10 | FOLD_STATE_FLAG_20, mtxTransform);
         fold_appendGfx_component(evt_get_variable(N(CreatorScript), RITUAL_VAR_FOLDER_3), &foldImage, FOLD_STATE_FLAG_10 | FOLD_STATE_FLAG_20, mtxTransform);
-        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
         guTranslateF(mtxTemp, N(RitualCards)[0].pos.x, N(RitualCards)[0].pos.y, N(RitualCards)[0].pos.z);
         guMtxCatF(mtxTemp, mtxParent, mtxTransform);
         guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
-        gSPMatrix(gMasterGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        gSPMatrix(gMainGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         spr_get_player_raster_info(&rasterInfo, card->spriteID, card->rasterIndex);
         foldImage.raster = rasterInfo.raster;
         foldImage.palette = rasterInfo.defaultPal;
@@ -275,7 +275,7 @@ u32 N(appendGfx_ritual_card)(RitualCard* card, Matrix4f mtxParent) {
         foldImage.yOffset = rasterInfo.height / 2;
         foldImage.opacity = 255;
         ret = fold_appendGfx_component(evt_get_variable(N(CreatorScript), RITUAL_VAR_FOLDER_4), &foldImage, FOLD_STATE_FLAG_10, mtxTransform);
-        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
         return ret;
     }
 

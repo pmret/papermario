@@ -221,7 +221,7 @@ void entity_TriggerBlock_enable_player_input(void) {
 }
 
 void entity_ItemBlock_setupGfx(s32 entityIndex) {
-    Gfx* gfx = gMasterGfxPos;
+    Gfx* gfx = gMainGfxPos;
     Entity* entity = get_entity_by_index(entityIndex);
 
     gDPSetTextureLUT(gfx++, G_TT_NONE);
@@ -235,7 +235,7 @@ void entity_ItemBlock_setupGfx(s32 entityIndex) {
         gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, entity->alpha);
     }
 
-    gMasterGfxPos = gfx;
+    gMainGfxPos = gfx;
 }
 
 void entity_ItemBlock_init(Entity* entity) {

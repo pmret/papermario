@@ -21,20 +21,20 @@ void N(appendGfx_FallingSprite)(void) {
     Matrix4f tempMtx;
     u32 animFrame;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
-    gSPClearGeometryMode(gMasterGfxPos++, G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN |
+    gDPPipeSync(gMainGfxPos++);
+    gDPSetCycleType(gMainGfxPos++, G_CYC_1CYCLE);
+    gSPClearGeometryMode(gMainGfxPos++, G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN |
                          G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH);
-    gSPSetGeometryMode(gMasterGfxPos++, G_ZBUFFER | G_SHADE | G_SHADING_SMOOTH);
-    gSPTexture(gMasterGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
-    gDPSetTextureLOD(gMasterGfxPos++, G_TL_TILE);
-    gDPSetTexturePersp(gMasterGfxPos++, G_TP_PERSP);
-    gDPSetTextureFilter(gMasterGfxPos++, G_TF_BILERP);
-    gDPSetColorDither(gMasterGfxPos++, G_CD_DISABLE);
-    gDPSetTextureDetail(gMasterGfxPos++, G_TD_CLAMP);
-    gDPSetTextureConvert(gMasterGfxPos++, G_TC_FILT);
-    gDPSetCombineKey(gMasterGfxPos++, G_CK_NONE);
-    gDPSetAlphaCompare(gMasterGfxPos++, G_AC_NONE);
+    gSPSetGeometryMode(gMainGfxPos++, G_ZBUFFER | G_SHADE | G_SHADING_SMOOTH);
+    gSPTexture(gMainGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
+    gDPSetTextureLOD(gMainGfxPos++, G_TL_TILE);
+    gDPSetTexturePersp(gMainGfxPos++, G_TP_PERSP);
+    gDPSetTextureFilter(gMainGfxPos++, G_TF_BILERP);
+    gDPSetColorDither(gMainGfxPos++, G_CD_DISABLE);
+    gDPSetTextureDetail(gMainGfxPos++, G_TD_CLAMP);
+    gDPSetTextureConvert(gMainGfxPos++, G_TC_FILT);
+    gDPSetCombineKey(gMainGfxPos++, G_CK_NONE);
+    gDPSetAlphaCompare(gMainGfxPos++, G_AC_NONE);
 
     guTranslateF(transformMtx, falling->pos.x, falling->pos.y, falling->pos.z);
     guRotateF(tempMtx, falling->rot.x, 1.0f, 0.0f, 0.0f);
@@ -46,7 +46,7 @@ void N(appendGfx_FallingSprite)(void) {
     guScaleF(tempMtx, falling->scale.x, falling->scale.y, falling->scale.z);
     guMtxCatF(tempMtx, transformMtx, transformMtx);
     guMtxF2L(transformMtx, &gDisplayContext->matrixStack[gMatrixListPos]);
-    gSPMatrix(gMasterGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]),
+    gSPMatrix(gMainGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]),
         G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     //TODO use SPR_RASTER_Mario8_XYZ here once they are defined
@@ -72,7 +72,7 @@ void N(appendGfx_FallingSprite)(void) {
     recPart.opacity = 255;
     fold_appendGfx_component(falling->foldStateID, &recPart, 0, transformMtx);
 
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
 
 API_CALLABLE(N(InitializeFallingSprite)) {

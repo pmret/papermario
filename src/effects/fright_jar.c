@@ -123,27 +123,27 @@ void fright_jar_appendGfx(void* effect) {
     Matrix4f sp50;
     s32 i;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     shim_guTranslateF(sp10, data->unk_04, data->unk_08, data->unk_0C);
     shim_guScaleF(sp50, -data->unk_28, data->unk_28, data->unk_28);
     shim_guMtxCatF(sp50, sp10, sp10);
     shim_guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPMatrix(gMasterGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gSPDisplayList(gMasterGfxPos++, D_09008BE0_3CA780);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gSPDisplayList(gMainGfxPos++, D_09008BE0_3CA780);
 
     idx = 54 - unk_14;
     if (idx < 0) {
         idx = 0;
     }
 
-    gSPVertex(gMasterGfxPos++, &D_09004040_3C5BE0[idx], 22, 0);
+    gSPVertex(gMainGfxPos++, &D_09004040_3C5BE0[idx], 22, 0);
 
     alpha = D_E00C2990[unk_14 % 16];
-    gDPSetEnvColor(gMasterGfxPos++, 0, 0, 0, alpha);
+    gDPSetEnvColor(gMainGfxPos++, 0, 0, 0, alpha);
 
     for (i = 0; i < 10; i++) {
         s32 temp1;
@@ -163,59 +163,59 @@ void fright_jar_appendGfx(void* effect) {
             temp3 = 255.0f;
         }
 
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->unk_18, data->unk_1C, data->unk_20, temp3);
-        gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 64, &D_09002020_3C3BC0);
-        gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 7, 14, G_TX_NOMIRROR | G_TX_CLAMP, 7, 14);
-        gDPLoadSync(gMasterGfxPos++);
-        gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, 0, temp1 * 4, 254, (temp1 + 15) * 4);
-        gDPPipeSync(gMasterGfxPos++);
-        gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 8, 0, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 7, 14, G_TX_NOMIRROR | G_TX_CLAMP, 7, 14);
-        gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0, temp1 * 4, 508, (temp1 + 15) * 4);
-        gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0, temp2 * 128.0f * 4.0f, 2000, 2000);
-        gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 64, &D_09000000_3C1BA0);
-        gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x80, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 7, 14, G_TX_NOMIRROR | G_TX_CLAMP, 7, 14);
-        gDPLoadSync(gMasterGfxPos++);
-        gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, 0, temp1 * 4, 254, (temp1 + 15) * 4);
-        gDPPipeSync(gMasterGfxPos++);
-        gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 8, 0x80, 1, 1, G_TX_NOMIRROR | G_TX_CLAMP, 7, 14, G_TX_NOMIRROR | G_TX_CLAMP, 7, 14);
-        gDPSetTileSize(gMasterGfxPos++, 1, 0, temp1 * 4, 508, (temp1 + 15) * 4);
-        gDPSetTileSize(gMasterGfxPos++, 1, 0, temp2 * 128.0f * 4.0f, 2000, 2000);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, data->unk_18, data->unk_1C, data->unk_20, temp3);
+        gDPSetTextureImage(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 64, &D_09002020_3C3BC0);
+        gDPSetTile(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 7, 14, G_TX_NOMIRROR | G_TX_CLAMP, 7, 14);
+        gDPLoadSync(gMainGfxPos++);
+        gDPLoadTile(gMainGfxPos++, G_TX_LOADTILE, 0, temp1 * 4, 254, (temp1 + 15) * 4);
+        gDPPipeSync(gMainGfxPos++);
+        gDPSetTile(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 8, 0, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 7, 14, G_TX_NOMIRROR | G_TX_CLAMP, 7, 14);
+        gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, 0, temp1 * 4, 508, (temp1 + 15) * 4);
+        gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, 0, temp2 * 128.0f * 4.0f, 2000, 2000);
+        gDPSetTextureImage(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 64, &D_09000000_3C1BA0);
+        gDPSetTile(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 8, 0x80, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 7, 14, G_TX_NOMIRROR | G_TX_CLAMP, 7, 14);
+        gDPLoadSync(gMainGfxPos++);
+        gDPLoadTile(gMainGfxPos++, G_TX_LOADTILE, 0, temp1 * 4, 254, (temp1 + 15) * 4);
+        gDPPipeSync(gMainGfxPos++);
+        gDPSetTile(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 8, 0x80, 1, 1, G_TX_NOMIRROR | G_TX_CLAMP, 7, 14, G_TX_NOMIRROR | G_TX_CLAMP, 7, 14);
+        gDPSetTileSize(gMainGfxPos++, 1, 0, temp1 * 4, 508, (temp1 + 15) * 4);
+        gDPSetTileSize(gMainGfxPos++, 1, 0, temp2 * 128.0f * 4.0f, 2000, 2000);
 
         switch (i) {
             case 0:
-                gSP2Triangles(gMasterGfxPos++, 0, 1, 2, 0, 0, 2, 3, 0);
+                gSP2Triangles(gMainGfxPos++, 0, 1, 2, 0, 0, 2, 3, 0);
                 break;
             case 1:
-                gSP2Triangles(gMasterGfxPos++, 1, 4, 5, 0, 1, 5, 2, 0);
+                gSP2Triangles(gMainGfxPos++, 1, 4, 5, 0, 1, 5, 2, 0);
                 break;
             case 2:
-                gSP2Triangles(gMasterGfxPos++, 4, 6, 7, 0, 4, 7, 5, 0);
+                gSP2Triangles(gMainGfxPos++, 4, 6, 7, 0, 4, 7, 5, 0);
                 break;
             case 3:
-                gSP2Triangles(gMasterGfxPos++, 6, 8, 9, 0, 6, 9, 7, 0);
+                gSP2Triangles(gMainGfxPos++, 6, 8, 9, 0, 6, 9, 7, 0);
                 break;
             case 4:
-                gSP2Triangles(gMasterGfxPos++, 8, 10, 11, 0, 8, 11, 9, 0);
+                gSP2Triangles(gMainGfxPos++, 8, 10, 11, 0, 8, 11, 9, 0);
                 break;
             case 5:
-                gSP2Triangles(gMasterGfxPos++, 10, 12, 13, 0, 10, 13, 11, 0);
+                gSP2Triangles(gMainGfxPos++, 10, 12, 13, 0, 10, 13, 11, 0);
                 break;
             case 6:
-                gSP2Triangles(gMasterGfxPos++, 12, 14, 15, 0, 12, 15, 13, 0);
+                gSP2Triangles(gMainGfxPos++, 12, 14, 15, 0, 12, 15, 13, 0);
                 break;
             case 7:
-                gSP2Triangles(gMasterGfxPos++, 14, 16, 17, 0, 14, 17, 15, 0);
+                gSP2Triangles(gMainGfxPos++, 14, 16, 17, 0, 14, 17, 15, 0);
                 break;
             case 8:
-                gSP2Triangles(gMasterGfxPos++, 16, 18, 19, 0, 16, 19, 17, 0);
+                gSP2Triangles(gMainGfxPos++, 16, 18, 19, 0, 16, 19, 17, 0);
                 break;
             case 9:
-                gSP2Triangles(gMasterGfxPos++, 18, 20, 21, 0, 18, 21, 19, 0);
+                gSP2Triangles(gMainGfxPos++, 18, 20, 21, 0, 18, 21, 19, 0);
                 break;
         }
 
-        gDPPipeSync(gMasterGfxPos++);
+        gDPPipeSync(gMainGfxPos++);
     }
 
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }

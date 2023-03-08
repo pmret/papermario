@@ -23,8 +23,8 @@ glabel render_hud_element
 /* D82AC 801413CC 30428000 */  andi      $v0, $v0, 0x8000
 /* D82B0 801413D0 1040000C */  beqz      $v0, .LIQUE_80141404
 /* D82B4 801413D4 3C05E300 */   lui      $a1, (0xE3001201 >> 16)
-/* D82B8 801413D8 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
-/* D82BC 801413DC 24639244 */  addiu     $v1, $v1, %lo(gMasterGfxPos)
+/* D82B8 801413D8 3C03800A */  lui       $v1, %hi(gMainGfxPos)
+/* D82BC 801413DC 24639244 */  addiu     $v1, $v1, %lo(gMainGfxPos)
 /* D82C0 801413E0 8C620000 */  lw        $v0, 0x0($v1)
 /* D82C4 801413E4 34A51201 */  ori       $a1, $a1, (0xE3001201 & 0xFFFF)
 /* D82C8 801413E8 0040202D */  daddu     $a0, $v0, $zero
@@ -35,8 +35,8 @@ glabel render_hud_element
 /* D82DC 801413FC 0805050A */  j         .LIQUE_80141428
 /* D82E0 80141400 AC820004 */   sw       $v0, 0x4($a0)
 .LIQUE_80141404:
-/* D82E4 80141404 3C04800A */  lui       $a0, %hi(gMasterGfxPos)
-/* D82E8 80141408 24849244 */  addiu     $a0, $a0, %lo(gMasterGfxPos)
+/* D82E4 80141404 3C04800A */  lui       $a0, %hi(gMainGfxPos)
+/* D82E8 80141408 24849244 */  addiu     $a0, $a0, %lo(gMainGfxPos)
 /* D82EC 8014140C 8C820000 */  lw        $v0, 0x0($a0)
 /* D82F0 80141410 34A51201 */  ori       $a1, $a1, (0xE3001201 & 0xFFFF)
 /* D82F4 80141414 0040182D */  daddu     $v1, $v0, $zero
@@ -268,8 +268,8 @@ glabel render_hud_element
 /* D8660 80141780 00452821 */   addu     $a1, $v0, $a1
 /* D8664 80141784 3C06DA38 */  lui       $a2, (0xDA380002 >> 16)
 /* D8668 80141788 34C60002 */  ori       $a2, $a2, (0xDA380002 & 0xFFFF)
-/* D866C 8014178C 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
-/* D8670 80141790 24639244 */  addiu     $v1, $v1, %lo(gMasterGfxPos)
+/* D866C 8014178C 3C03800A */  lui       $v1, %hi(gMainGfxPos)
+/* D8670 80141790 24639244 */  addiu     $v1, $v1, %lo(gMainGfxPos)
 /* D8674 80141794 0000382D */  daddu     $a3, $zero, $zero
 /* D8678 80141798 8C620000 */  lw        $v0, 0x0($v1)
 /* D867C 8014179C 96040000 */  lhu       $a0, 0x0($s0)
@@ -410,8 +410,8 @@ glabel render_hud_element
 /* D8864 80141984 3529FFFF */  ori       $t1, $t1, (0xFF67FFFF & 0xFFFF)
 /* D8868 80141988 3C078016 */  lui       $a3, %hi(D_80159180)
 /* D886C 8014198C 24E7B500 */  addiu     $a3, $a3, %lo(D_80159180)
-/* D8870 80141990 3C0C800A */  lui       $t4, %hi(gMasterGfxPos)
-/* D8874 80141994 258C9244 */  addiu     $t4, $t4, %lo(gMasterGfxPos)
+/* D8870 80141990 3C0C800A */  lui       $t4, %hi(gMainGfxPos)
+/* D8874 80141994 258C9244 */  addiu     $t4, $t4, %lo(gMainGfxPos)
 /* D8878 80141998 3C068015 */  lui       $a2, %hi(D_8014F0C8)
 /* D887C 8014199C 24C6D858 */  addiu     $a2, $a2, %lo(D_8014F0C8)
 /* D8880 801419A0 8CE50000 */  lw        $a1, 0x0($a3)
@@ -562,8 +562,8 @@ glabel render_hud_element
 /* D8AB4 80141BD4 AD820000 */  sw        $v0, 0x0($t4)
 /* D8AB8 80141BD8 AD640010 */  sw        $a0, 0x10($t3)
 /* D8ABC 80141BDC AD630014 */  sw        $v1, 0x14($t3)
-/* D8AC0 80141BE0 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
-/* D8AC4 80141BE4 24639244 */  addiu     $v1, $v1, %lo(gMasterGfxPos)
+/* D8AC0 80141BE0 3C03800A */  lui       $v1, %hi(gMainGfxPos)
+/* D8AC4 80141BE4 24639244 */  addiu     $v1, $v1, %lo(gMainGfxPos)
 /* D8AC8 80141BE8 02C0382D */  daddu     $a3, $s6, $zero
 /* D8ACC 80141BEC 3C02FD70 */  lui       $v0, (0xFD700000 >> 16)
 /* D8AD0 80141BF0 8C660000 */  lw        $a2, 0x0($v1)
@@ -636,8 +636,8 @@ glabel render_hud_element
 /* D8BC0 80141CE0 3C080500 */  lui       $t0, (0x5000204 >> 16)
 /* D8BC4 80141CE4 35080204 */  ori       $t0, $t0, (0x5000204 & 0xFFFF)
 /* D8BC8 80141CE8 3C090500 */  lui       $t1, (0x5000406 >> 16)
-/* D8BCC 80141CEC 3C05800A */  lui       $a1, %hi(gMasterGfxPos)
-/* D8BD0 80141CF0 24A59244 */  addiu     $a1, $a1, %lo(gMasterGfxPos)
+/* D8BCC 80141CEC 3C05800A */  lui       $a1, %hi(gMainGfxPos)
+/* D8BD0 80141CF0 24A59244 */  addiu     $a1, $a1, %lo(gMainGfxPos)
 /* D8BD4 80141CF4 35290406 */  ori       $t1, $t1, (0x5000406 & 0xFFFF)
 /* D8BD8 80141CF8 8CA40000 */  lw        $a0, 0x0($a1)
 /* D8BDC 80141CFC 3C02E700 */  lui       $v0, (0xE7000000 >> 16)
@@ -693,8 +693,8 @@ glabel render_hud_element
 /* D8CA4 80141DC4 AC80002C */  sw        $zero, 0x2C($a0)
 /* D8CA8 80141DC8 3C03D838 */  lui       $v1, (0xD8380002 >> 16)
 .LIQUE_80141DCC:
-/* D8CAC 80141DCC 3C04800A */  lui       $a0, %hi(gMasterGfxPos)
-/* D8CB0 80141DD0 24849244 */  addiu     $a0, $a0, %lo(gMasterGfxPos)
+/* D8CAC 80141DCC 3C04800A */  lui       $a0, %hi(gMainGfxPos)
+/* D8CB0 80141DD0 24849244 */  addiu     $a0, $a0, %lo(gMainGfxPos)
 /* D8CB4 80141DD4 8C820000 */  lw        $v0, 0x0($a0)
 /* D8CB8 80141DD8 34630002 */  ori       $v1, $v1, (0xD8380002 & 0xFFFF)
 /* D8CBC 80141DDC 0040282D */  daddu     $a1, $v0, $zero

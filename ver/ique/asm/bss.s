@@ -163,7 +163,7 @@ dlabel gBGMPlayerA
 dlabel gFirstStrikeMessagePos
 .space 4
 
-dlabel gMasterGfxPos
+dlabel gMainGfxPos
 .space 4
 
 dlabel D_8009A670

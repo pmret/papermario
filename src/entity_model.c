@@ -248,17 +248,17 @@ void appendGfx_entity_model(EntityModel* model) {
     Matrix4f foldMtx;
 
     gDisplayContext->matrixStack[gMatrixListPos] = model->transform;
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     if (!(model->flags & ENTITY_MODEL_FLAG_USE_IMAGE)) {
         if (!(model->flags & ENTITY_MODEL_FLAG_10000)) {
             s32 cond;
 
-            gDPPipeSync(gMasterGfxPos++);
-            gDPSetRenderMode(gMasterGfxPos++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 255, 255);
-            gDPSetCombineMode(gMasterGfxPos++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
-            gDPSetAlphaCompare(gMasterGfxPos++, G_AC_NONE);
-            gSPSetOtherMode(gMasterGfxPos++, G_SETOTHERMODE_H, G_MDSFT_ALPHADITHER, 18, G_AD_DISABLE | G_CD_DISABLE | G_CK_NONE | G_TC_FILT | G_TF_POINT | G_TT_NONE | G_TL_TILE | G_TD_CLAMP | G_TP_NONE | G_CYC_1CYCLE);
+            gDPPipeSync(gMainGfxPos++);
+            gDPSetRenderMode(gMainGfxPos++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 255, 255);
+            gDPSetCombineMode(gMainGfxPos++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
+            gDPSetAlphaCompare(gMainGfxPos++, G_AC_NONE);
+            gSPSetOtherMode(gMainGfxPos++, G_SETOTHERMODE_H, G_MDSFT_ALPHADITHER, 18, G_AD_DISABLE | G_CD_DISABLE | G_CK_NONE | G_TC_FILT | G_TF_POINT | G_TT_NONE | G_TL_TILE | G_TD_CLAMP | G_TP_NONE | G_CYC_1CYCLE);
 
             cond = FALSE;
             if (entity_fog_enabled && !(model->flags & ENTITY_MODEL_FLAG_FOG_DISABLED)) {
@@ -268,107 +268,107 @@ void appendGfx_entity_model(EntityModel* model) {
                 case FALSE:
                     switch (model->renderMode) {
                         case RENDER_MODE_SURFACE_OPA:
-                            gSPDisplayList(gMasterGfxPos++, D_8014B7F8);
+                            gSPDisplayList(gMainGfxPos++, D_8014B7F8);
                             break;
                         case RENDER_MODE_DECAL_OPA:
-                            gSPDisplayList(gMasterGfxPos++, D_8014B820);
+                            gSPDisplayList(gMainGfxPos++, D_8014B820);
                             break;
                         case RENDER_MODE_INTERSECTING_OPA:
-                            gSPDisplayList(gMasterGfxPos++, D_8014B848);
+                            gSPDisplayList(gMainGfxPos++, D_8014B848);
                             break;
                         case RENDER_MODE_ALPHATEST:
-                            gSPDisplayList(gMasterGfxPos++, D_8014B870);
+                            gSPDisplayList(gMainGfxPos++, D_8014B870);
                             break;
                         case RENDER_MODE_SURFACE_XLU_LAYER1:
                         case RENDER_MODE_SURFACE_XLU_LAYER2:
                         case RENDER_MODE_SURFACE_XLU_LAYER3:
-                            gSPDisplayList(gMasterGfxPos++, D_8014B898);
+                            gSPDisplayList(gMainGfxPos++, D_8014B898);
                             break;
                         case RENDER_MODE_SURFACE_XLU_NO_AA:
-                            gSPDisplayList(gMasterGfxPos++, D_8014B9B0);
+                            gSPDisplayList(gMainGfxPos++, D_8014B9B0);
                             break;
                         case RENDER_MODE_DECAL_XLU:
                         case RENDER_MODE_1E:
-                            gSPDisplayList(gMasterGfxPos++, D_8014B8C0);
+                            gSPDisplayList(gMainGfxPos++, D_8014B8C0);
                             break;
                         case RENDER_MODE_DECAL_XLU_NOAA:
                         case RENDER_MODE_SHADOW:
-                            gSPDisplayList(gMasterGfxPos++, D_8014B9D8);
+                            gSPDisplayList(gMainGfxPos++, D_8014B9D8);
                             break;
                         case RENDER_MODE_INTERSECTING_XLU:
-                            gSPDisplayList(gMasterGfxPos++, D_8014B8E8);
+                            gSPDisplayList(gMainGfxPos++, D_8014B8E8);
                             break;
                         case RENDER_MODE_28:
-                            gSPDisplayList(gMasterGfxPos++, D_8014BA00);
+                            gSPDisplayList(gMainGfxPos++, D_8014BA00);
                             break;
                         case RENDER_MODE_ALPHATEST_ONESIDED:
-                            gSPDisplayList(gMasterGfxPos++, D_8014B988);
+                            gSPDisplayList(gMainGfxPos++, D_8014B988);
                             break;
                         case RENDER_MODE_SURFACE_OPA_NO_ZB:
                         case RENDER_MODE_2A:
-                            gSPDisplayList(gMasterGfxPos++, D_8014BA48);
+                            gSPDisplayList(gMainGfxPos++, D_8014BA48);
                             break;
                         case RENDER_MODE_ALPHATEST_NO_ZB:
                         case RENDER_MODE_2B:
-                            gSPDisplayList(gMasterGfxPos++, D_8014BA70);
+                            gSPDisplayList(gMainGfxPos++, D_8014BA70);
                             break;
                         case RENDER_MODE_SURFACE_XLU_NO_ZB:
                         case RENDER_MODE_2C:
-                            gSPDisplayList(gMasterGfxPos++, D_8014BA98);
+                            gSPDisplayList(gMainGfxPos++, D_8014BA98);
                             break;
                         case RENDER_MODE_2D:
-                            gSPDisplayList(gMasterGfxPos++, D_8014BAE8);
+                            gSPDisplayList(gMainGfxPos++, D_8014BAE8);
                             break;
                     }
                     break;
                 case TRUE:
                     switch (model->renderMode) {
                         case RENDER_MODE_SURFACE_OPA:
-                            gSPDisplayList(gMasterGfxPos++, D_8014BE78);
+                            gSPDisplayList(gMainGfxPos++, D_8014BE78);
                             break;
                         case RENDER_MODE_DECAL_OPA:
-                            gSPDisplayList(gMasterGfxPos++, D_8014BEA0);
+                            gSPDisplayList(gMainGfxPos++, D_8014BEA0);
                             break;
                         case RENDER_MODE_INTERSECTING_OPA:
-                            gSPDisplayList(gMasterGfxPos++, D_8014BEC8);
+                            gSPDisplayList(gMainGfxPos++, D_8014BEC8);
                             break;
                         case RENDER_MODE_ALPHATEST:
-                            gSPDisplayList(gMasterGfxPos++, D_8014BEF0);
+                            gSPDisplayList(gMainGfxPos++, D_8014BEF0);
                             break;
                         case RENDER_MODE_SURFACE_XLU_LAYER1:
-                            gSPDisplayList(gMasterGfxPos++, D_8014BF18);
+                            gSPDisplayList(gMainGfxPos++, D_8014BF18);
                             break;
                         case RENDER_MODE_DECAL_XLU:
-                            gSPDisplayList(gMasterGfxPos++, D_8014BF40);
+                            gSPDisplayList(gMainGfxPos++, D_8014BF40);
                             break;
                         case RENDER_MODE_INTERSECTING_XLU:
-                            gSPDisplayList(gMasterGfxPos++, D_8014BF68);
+                            gSPDisplayList(gMainGfxPos++, D_8014BF68);
                             break;
                     }
-                    gDPSetFogColor(gMasterGfxPos++, entity_fog_red, entity_fog_green, entity_fog_blue, entity_fog_alpha);
-                    gSPFogPosition(gMasterGfxPos++, entity_fog_dist_min, entity_fog_dist_max);
+                    gDPSetFogColor(gMainGfxPos++, entity_fog_red, entity_fog_green, entity_fog_blue, entity_fog_alpha);
+                    gSPFogPosition(gMainGfxPos++, entity_fog_dist_min, entity_fog_dist_max);
                     break;
             }
-            gSPClearGeometryMode(gMasterGfxPos++, G_LIGHTING);
+            gSPClearGeometryMode(gMainGfxPos++, G_LIGHTING);
             if (!entity_fog_enabled || (model->flags & ENTITY_MODEL_FLAG_FOG_DISABLED)) {
-                gDPSetCombineMode(gMasterGfxPos++, G_CC_MODULATEIA, G_CC_MODULATEIA);
+                gDPSetCombineMode(gMainGfxPos++, G_CC_MODULATEIA, G_CC_MODULATEIA);
             } else {
-                gDPSetCombineLERP(gMasterGfxPos++, TEXEL0, 0, SHADE, 0, TEXEL0, 0, 0, TEXEL0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+                gDPSetCombineLERP(gMainGfxPos++, TEXEL0, 0, SHADE, 0, TEXEL0, 0, 0, TEXEL0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
             }
         }
         if (model->vertexArray != NULL) {
-            gSPSegment(gMasterGfxPos++, D_80154374, VIRTUAL_TO_PHYSICAL(model->vertexArray));
+            gSPSegment(gMainGfxPos++, D_80154374, VIRTUAL_TO_PHYSICAL(model->vertexArray));
         }
-        gDPPipeSync(gMasterGfxPos++);
+        gDPPipeSync(gMainGfxPos++);
 
         if (model->fpSetupGfxCallback != NULL) {
             model->fpSetupGfxCallback(model->setupGfxCallbackArg0);
         }
-        gDPPipeSync(gMasterGfxPos++);
+        gDPPipeSync(gMainGfxPos++);
 
-        gSPDisplayList(gMasterGfxPos++, model->gfx.displayList);
-        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-        gDPPipeSync(gMasterGfxPos++);
+        gSPDisplayList(gMainGfxPos++, model->gfx.displayList);
+        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+        gDPPipeSync(gMainGfxPos++);
 
         if (!(model->flags & ENTITY_MODEL_FLAG_REFLECT)) {
             return;
@@ -379,18 +379,18 @@ void appendGfx_entity_model(EntityModel* model) {
         guMtxCatF(mtx, mtx2, mtx);
         guMtxF2L(mtx, &model->transform);
         gDisplayContext->matrixStack[gMatrixListPos] = model->transform;
-        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, model->gfx.displayList);
+        gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        gSPDisplayList(gMainGfxPos++, model->gfx.displayList);
     } else {
         SpriteRasterInfo* imageData;
 
-        gDPPipeSync(gMasterGfxPos++);
-        gSPClearGeometryMode(gMasterGfxPos++, G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH);
-        gSPSetGeometryMode(gMasterGfxPos++, G_ZBUFFER | G_SHADE | G_LIGHTING | G_SHADING_SMOOTH);
-        gSPSetLights1(gMasterGfxPos++, D_8014C268);
-        gSPTexture(gMasterGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
-        gDPSetAlphaCompare(gMasterGfxPos++, G_AC_NONE);
-        gSPSetOtherMode(gMasterGfxPos++, G_SETOTHERMODE_H, G_MDSFT_ALPHADITHER, 18, G_AD_DISABLE | G_CD_DISABLE | G_CK_NONE | G_TC_FILT | G_TF_BILERP | G_TT_NONE | G_TL_TILE | G_TD_CLAMP | G_TP_PERSP | G_CYC_1CYCLE);
+        gDPPipeSync(gMainGfxPos++);
+        gSPClearGeometryMode(gMainGfxPos++, G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH);
+        gSPSetGeometryMode(gMainGfxPos++, G_ZBUFFER | G_SHADE | G_LIGHTING | G_SHADING_SMOOTH);
+        gSPSetLights1(gMainGfxPos++, D_8014C268);
+        gSPTexture(gMainGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
+        gDPSetAlphaCompare(gMainGfxPos++, G_AC_NONE);
+        gSPSetOtherMode(gMainGfxPos++, G_SETOTHERMODE_H, G_MDSFT_ALPHADITHER, 18, G_AD_DISABLE | G_CD_DISABLE | G_CK_NONE | G_TC_FILT | G_TF_BILERP | G_TT_NONE | G_TL_TILE | G_TD_CLAMP | G_TP_PERSP | G_CYC_1CYCLE);
 
         imageData = model->gfx.imageData;
         foldImage.raster = imageData->raster;
@@ -404,8 +404,8 @@ void appendGfx_entity_model(EntityModel* model) {
         fold_appendGfx_component(0, &foldImage, 0, foldMtx);
     }
 
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-    gDPPipeSync(gMasterGfxPos++);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+    gDPPipeSync(gMainGfxPos++);
 }
 
 
@@ -576,7 +576,7 @@ void draw_entity_model_E(s32 modelIdx, Mtx* transformMtx) {
     model->transform = *transformMtx;
     model->vertexArray = NULL;
     gDisplayContext->matrixStack[gMatrixListPos] = model->transform;
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     if (!(model->flags & ENTITY_MODEL_FLAG_USE_IMAGE)) {
         s32 cond = FALSE;
         if (entity_fog_enabled && !(model->flags & ENTITY_MODEL_FLAG_FOG_DISABLED)) {
@@ -586,99 +586,99 @@ void draw_entity_model_E(s32 modelIdx, Mtx* transformMtx) {
             case FALSE:
                 switch (model->renderMode) {
                     case RENDER_MODE_SURFACE_OPA:
-                        gSPDisplayList(gMasterGfxPos++, D_8014B7F8);
+                        gSPDisplayList(gMainGfxPos++, D_8014B7F8);
                         break;
                     case RENDER_MODE_DECAL_OPA:
-                        gSPDisplayList(gMasterGfxPos++, D_8014B820);
+                        gSPDisplayList(gMainGfxPos++, D_8014B820);
                         break;
                     case RENDER_MODE_INTERSECTING_OPA:
-                        gSPDisplayList(gMasterGfxPos++, D_8014B848);
+                        gSPDisplayList(gMainGfxPos++, D_8014B848);
                         break;
                     case RENDER_MODE_ALPHATEST:
-                        gSPDisplayList(gMasterGfxPos++, D_8014B870);
+                        gSPDisplayList(gMainGfxPos++, D_8014B870);
                         break;
                     case RENDER_MODE_SURFACE_XLU_LAYER1:
                     case RENDER_MODE_SURFACE_XLU_LAYER2:
                     case RENDER_MODE_SURFACE_XLU_LAYER3:
-                        gSPDisplayList(gMasterGfxPos++, D_8014B898);
+                        gSPDisplayList(gMainGfxPos++, D_8014B898);
                         break;
                     case RENDER_MODE_SURFACE_XLU_NO_AA:
-                        gSPDisplayList(gMasterGfxPos++, D_8014B9B0);
+                        gSPDisplayList(gMainGfxPos++, D_8014B9B0);
                         break;
                     case RENDER_MODE_DECAL_XLU:
                     case RENDER_MODE_1E:
-                        gSPDisplayList(gMasterGfxPos++, D_8014B8C0);
+                        gSPDisplayList(gMainGfxPos++, D_8014B8C0);
                         break;
                     case RENDER_MODE_DECAL_XLU_NOAA:
                     case RENDER_MODE_SHADOW:
-                        gSPDisplayList(gMasterGfxPos++, D_8014B9D8);
+                        gSPDisplayList(gMainGfxPos++, D_8014B9D8);
                         break;
                     case RENDER_MODE_INTERSECTING_XLU:
-                        gSPDisplayList(gMasterGfxPos++, D_8014B8E8);
+                        gSPDisplayList(gMainGfxPos++, D_8014B8E8);
                         break;
                     case RENDER_MODE_28:
-                        gSPDisplayList(gMasterGfxPos++, D_8014BA00);
+                        gSPDisplayList(gMainGfxPos++, D_8014BA00);
                         break;
                     case RENDER_MODE_ALPHATEST_ONESIDED:
-                        gSPDisplayList(gMasterGfxPos++, D_8014B988);
+                        gSPDisplayList(gMainGfxPos++, D_8014B988);
                         break;
                     case RENDER_MODE_SURFACE_OPA_NO_ZB:
                     case RENDER_MODE_2A:
-                        gSPDisplayList(gMasterGfxPos++, D_8014BA48);
+                        gSPDisplayList(gMainGfxPos++, D_8014BA48);
                         break;
                     case RENDER_MODE_ALPHATEST_NO_ZB:
                     case RENDER_MODE_2B:
-                        gSPDisplayList(gMasterGfxPos++, D_8014BA70);
+                        gSPDisplayList(gMainGfxPos++, D_8014BA70);
                         break;
                     case RENDER_MODE_SURFACE_XLU_NO_ZB:
                     case RENDER_MODE_2C:
-                        gSPDisplayList(gMasterGfxPos++, D_8014BA98);
+                        gSPDisplayList(gMainGfxPos++, D_8014BA98);
                         break;
                     case RENDER_MODE_2D:
-                        gSPDisplayList(gMasterGfxPos++, D_8014BAE8);
+                        gSPDisplayList(gMainGfxPos++, D_8014BAE8);
                         break;
                 }
                 break;
             case TRUE:
                 switch (model->renderMode) {
                     case RENDER_MODE_SURFACE_OPA:
-                        gSPDisplayList(gMasterGfxPos++, D_8014BE78);
+                        gSPDisplayList(gMainGfxPos++, D_8014BE78);
                         break;
                     case RENDER_MODE_DECAL_OPA:
-                        gSPDisplayList(gMasterGfxPos++, D_8014BEA0);
+                        gSPDisplayList(gMainGfxPos++, D_8014BEA0);
                         break;
                     case RENDER_MODE_INTERSECTING_OPA:
-                        gSPDisplayList(gMasterGfxPos++, D_8014BEC8);
+                        gSPDisplayList(gMainGfxPos++, D_8014BEC8);
                         break;
                     case RENDER_MODE_ALPHATEST:
-                        gSPDisplayList(gMasterGfxPos++, D_8014BEF0);
+                        gSPDisplayList(gMainGfxPos++, D_8014BEF0);
                         break;
                     case RENDER_MODE_SURFACE_XLU_LAYER1:
-                        gSPDisplayList(gMasterGfxPos++, D_8014BF18);
+                        gSPDisplayList(gMainGfxPos++, D_8014BF18);
                         break;
                     case RENDER_MODE_DECAL_XLU:
-                        gSPDisplayList(gMasterGfxPos++, D_8014BF40);
+                        gSPDisplayList(gMainGfxPos++, D_8014BF40);
                         break;
                     case RENDER_MODE_INTERSECTING_XLU:
-                        gSPDisplayList(gMasterGfxPos++, D_8014BF68);
+                        gSPDisplayList(gMainGfxPos++, D_8014BF68);
                         break;
                 }
-                gDPSetFogColor(gMasterGfxPos++, entity_fog_red, entity_fog_green, entity_fog_blue, entity_fog_alpha);
-                gSPFogPosition(gMasterGfxPos++, entity_fog_dist_min, entity_fog_dist_max);
+                gDPSetFogColor(gMainGfxPos++, entity_fog_red, entity_fog_green, entity_fog_blue, entity_fog_alpha);
+                gSPFogPosition(gMainGfxPos++, entity_fog_dist_min, entity_fog_dist_max);
                 break;
         }
-        gSPClearGeometryMode(gMasterGfxPos++, G_LIGHTING);
+        gSPClearGeometryMode(gMainGfxPos++, G_LIGHTING);
         if (!entity_fog_enabled || (model->flags & ENTITY_MODEL_FLAG_FOG_DISABLED)) {
-            gDPSetCombineMode(gMasterGfxPos++, G_CC_MODULATEIA, G_CC_MODULATEIA);
+            gDPSetCombineMode(gMainGfxPos++, G_CC_MODULATEIA, G_CC_MODULATEIA);
         } else {
-            gDPSetCombineLERP(gMasterGfxPos++, TEXEL0, 0, SHADE, 0, TEXEL0, 0, 0, TEXEL0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
+            gDPSetCombineLERP(gMainGfxPos++, TEXEL0, 0, SHADE, 0, TEXEL0, 0, 0, TEXEL0, COMBINED, 0, SHADE, 0, 0, 0, 0, COMBINED);
         }
         if (model->vertexArray != NULL) {
-            gSPSegment(gMasterGfxPos++, D_80154374, VIRTUAL_TO_PHYSICAL(model->vertexArray));
+            gSPSegment(gMainGfxPos++, D_80154374, VIRTUAL_TO_PHYSICAL(model->vertexArray));
         }
-        gSPDisplayList(gMasterGfxPos++, model->gfx.displayList);
-        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-        gDPPipeSync(gMasterGfxPos++);
+        gSPDisplayList(gMainGfxPos++, model->gfx.displayList);
+        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+        gDPPipeSync(gMainGfxPos++);
         if (!(model->flags & ENTITY_MODEL_FLAG_REFLECT)) {
             return;
         }
@@ -688,18 +688,18 @@ void draw_entity_model_E(s32 modelIdx, Mtx* transformMtx) {
         guMtxCatF(mtx, mtx2, mtx);
         guMtxF2L(mtx, &model->transform);
         gDisplayContext->matrixStack[gMatrixListPos] = model->transform;
-        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, model->gfx.displayList);
+        gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        gSPDisplayList(gMainGfxPos++, model->gfx.displayList);
     } else {
         SpriteRasterInfo* imageData;
 
-        gDPPipeSync(gMasterGfxPos++);
-        gSPClearGeometryMode(gMasterGfxPos++, G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH);
-        gSPSetGeometryMode(gMasterGfxPos++, G_ZBUFFER | G_SHADE | G_LIGHTING | G_SHADING_SMOOTH);
-        gSPSetLights1(gMasterGfxPos++, D_8014C268);
-        gSPTexture(gMasterGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
-        gDPSetAlphaCompare(gMasterGfxPos++, G_AC_NONE);
-        gSPSetOtherMode(gMasterGfxPos++, G_SETOTHERMODE_H, G_MDSFT_ALPHADITHER, 18, G_AD_DISABLE | G_CD_DISABLE | G_CK_NONE | G_TC_FILT | G_TF_BILERP | G_TT_NONE | G_TL_TILE | G_TD_CLAMP | G_TP_PERSP | G_CYC_1CYCLE);
+        gDPPipeSync(gMainGfxPos++);
+        gSPClearGeometryMode(gMainGfxPos++, G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH);
+        gSPSetGeometryMode(gMainGfxPos++, G_ZBUFFER | G_SHADE | G_LIGHTING | G_SHADING_SMOOTH);
+        gSPSetLights1(gMainGfxPos++, D_8014C268);
+        gSPTexture(gMainGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
+        gDPSetAlphaCompare(gMainGfxPos++, G_AC_NONE);
+        gSPSetOtherMode(gMainGfxPos++, G_SETOTHERMODE_H, G_MDSFT_ALPHADITHER, 18, G_AD_DISABLE | G_CD_DISABLE | G_CK_NONE | G_TC_FILT | G_TF_BILERP | G_TT_NONE | G_TL_TILE | G_TD_CLAMP | G_TP_PERSP | G_CYC_1CYCLE);
 
         imageData = model->gfx.imageData;
         foldImage.raster = imageData->raster;
@@ -713,8 +713,8 @@ void draw_entity_model_E(s32 modelIdx, Mtx* transformMtx) {
         fold_appendGfx_component(0, &foldImage, 0, foldMtx);
     }
 
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-    gDPPipeSync(gMasterGfxPos++);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+    gDPPipeSync(gMainGfxPos++);
 }
 
 void set_entity_model_render_command_list(s32 idx, EntityModelScript* cmdList) {

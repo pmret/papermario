@@ -306,10 +306,10 @@ void misc_particles_appendGfx(void* effect) {
     Matrix4f unused;
     s32 i;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
-    gDPSetEnvColor(gMasterGfxPos++, particle->glowColor.r, particle->glowColor.g, particle->glowColor.b, particle->glowColor.a);
-    gSPDisplayList(gMasterGfxPos++, D_E00E4DA8[variation]);
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gDPSetEnvColor(gMainGfxPos++, particle->glowColor.r, particle->glowColor.g, particle->glowColor.b, particle->glowColor.a);
+    gSPDisplayList(gMainGfxPos++, D_E00E4DA8[variation]);
 
     particle++;
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, particle++) {
@@ -317,22 +317,22 @@ void misc_particles_appendGfx(void* effect) {
             shim_guPositionF(mtxTransform, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, particle->scale * alphaScale, particle->pos.x, particle->pos.y, particle->pos.z);
             shim_guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-            gDPSetPrimColor(gMasterGfxPos++, 0, 80 - particle->animTime, particle->innerColor.r, particle->innerColor.g, particle->innerColor.b, alphaScale * particle->innerColor.a);
-            gDPSetTileSize(gMasterGfxPos++, 1,
+            gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gDPSetPrimColor(gMainGfxPos++, 0, 80 - particle->animTime, particle->innerColor.r, particle->innerColor.g, particle->innerColor.b, alphaScale * particle->innerColor.a);
+            gDPSetTileSize(gMainGfxPos++, 1,
                 (s32) particle->unk_5C * 4,
                 (s32) particle->unk_60 * 4,
                 ((s32) particle->unk_5C + 15) * 4,
                 ((s32) particle->unk_60 + 15) * 4);
 
             if (variation == 2) {
-                gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE,
+                gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE,
                     ((i & 0x1F) * 32     ) * 4, 31 * 4,
                     ((i & 0x1F) * 32 + 31) * 4, 31 * 4);
             }
 
-            gSPDisplayList(gMasterGfxPos++, D_E00E4D90[variation]);
-            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+            gSPDisplayList(gMainGfxPos++, D_E00E4D90[variation]);
+            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
         }
     }
 }

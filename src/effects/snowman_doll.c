@@ -292,15 +292,15 @@ void snowman_doll_appendGfx(void* effect) {
     Matrix4f sp18;
     Matrix4f sp58;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     shim_guTranslateF(sp18, data->unk_04, data->unk_08, data->unk_0C);
     shim_guScaleF(sp58, data->unk_28, data->unk_28, data->unk_28);
     shim_guMtxCatF(sp58, sp18, sp18);
     shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     shim_guTranslateF(sp18, data->unk_30, data->unk_34, data->unk_38);
     shim_guScaleF(sp58, data->unk_48, data->unk_4C, data->unk_48);
@@ -309,10 +309,10 @@ void snowman_doll_appendGfx(void* effect) {
     shim_guMtxCatF(sp58, sp18, sp18);
     shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->unk_18, data->unk_1C, data->unk_20, unk_24);
-    gSPDisplayList(gMasterGfxPos++, D_090037A8_3C1148);
-    gSPDisplayList(gMasterGfxPos++, D_09003818_3C11B8);
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, data->unk_18, data->unk_1C, data->unk_20, unk_24);
+    gSPDisplayList(gMainGfxPos++, D_090037A8_3C1148);
+    gSPDisplayList(gMainGfxPos++, D_09003818_3C11B8);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }

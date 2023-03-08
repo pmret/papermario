@@ -30,7 +30,7 @@ u8 D_802BCAA0_E313F0[] = {
 };
 
 void entity_StarBoxLauncher_setupGfx(s32 entityIndex) {
-    Gfx* gfxPos = gMasterGfxPos;
+    Gfx* gfxPos = gMainGfxPos;
     Entity* entity = get_entity_by_index(entityIndex);
     StarBoxLauncherData* data = entity->dataBuf.starBoxLauncher;
     Matrix4f sp10;
@@ -56,7 +56,7 @@ void entity_StarBoxLauncher_setupGfx(s32 entityIndex) {
     gDPSetTextureFilter(gfxPos++, G_TF_BILERP);
     gDPSetTileSize(gfxPos++, G_TX_RENDERTILE, data->faceTexOffset * 4, 0, (data->faceTexOffset + 124) * 4, 31 * 4);
 
-    gMasterGfxPos = gfxPos;
+    gMainGfxPos = gfxPos;
 }
 
 void entity_StarBoxLauncher_check_launch(Entity* entity) {

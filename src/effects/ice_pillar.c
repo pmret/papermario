@@ -153,8 +153,8 @@ void ice_pillar_appendGfx(void* effect) {
     Matrix4f sp10, sp50;
     Camera* camera;
     
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     camera = &gCameras[gCurrentCameraID];
     shim_guTranslateF(sp10, data->pos.x, data->pos.y, data->pos.z);
@@ -162,12 +162,12 @@ void ice_pillar_appendGfx(void* effect) {
     shim_guMtxCatF(sp50, sp10, sp10);
     shim_guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], 
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], 
               G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPMatrix(gMasterGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->prim.r, data->prim.g, data->prim.b, alpha);
-    gDPSetEnvColor(gMasterGfxPos++, data->env.r, data->env.g, data->env.b, data->env.a);
-    gSPDisplayList(gMasterGfxPos++, D_E011E800[0]);
-    gSPDisplayList(gMasterGfxPos++, D_E011E7F0[data->unk_24]);
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, data->prim.r, data->prim.g, data->prim.b, alpha);
+    gDPSetEnvColor(gMainGfxPos++, data->env.r, data->env.g, data->env.b, data->env.a);
+    gSPDisplayList(gMainGfxPos++, D_E011E800[0]);
+    gSPDisplayList(gMainGfxPos++, D_E011E7F0[data->unk_24]);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }

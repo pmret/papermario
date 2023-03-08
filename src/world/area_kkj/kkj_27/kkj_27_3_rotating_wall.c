@@ -25,8 +25,8 @@ API_CALLABLE(N(SetSpillLightAmount)) {
 
 void N(setup_gfx_spill_light)(void) {
     if (N(SpillLightAmount) > 0) {
-        gDPSetCombineLERP(gMasterGfxPos++, TEXEL0, 0, SHADE, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0, SHADE, 0, 0, 0, 0, PRIMITIVE);
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, N(SpillLightAmount));
+        gDPSetCombineLERP(gMainGfxPos++, TEXEL0, 0, SHADE, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0, SHADE, 0, 0, 0, 0, PRIMITIVE);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, N(SpillLightAmount));
     }
 }
 

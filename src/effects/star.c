@@ -211,26 +211,26 @@ void star_appendGfx(void* effect) {
     Matrix4f sp60;
     s32 i;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, unk_240, data->unk_04, data->unk_08, data->unk_0C);
     shim_guRotateF(sp60, data->unk_24, 0.0f, 0.0f, 1.0f);
     shim_guMtxCatF(sp60, sp20, sp20);
     shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 80, unk_244, unk_248, unk_24C, 255);
-    gDPSetEnvColor(gMasterGfxPos++, 127, 127, 127, 127);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gDPSetPrimColor(gMainGfxPos++, 0, 80, unk_244, unk_248, unk_24C, 255);
+    gDPSetEnvColor(gMainGfxPos++, 127, 127, 127, 127);
 
-    gSPDisplayList(gMasterGfxPos++, (data->unk_38 >= 2) ? D_09001650_333CF0 : D_09001530_333BD0);
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-    gDPPipeSync(gMasterGfxPos++);
+    gSPDisplayList(gMainGfxPos++, (data->unk_38 >= 2) ? D_09001650_333CF0 : D_09001530_333BD0);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+    gDPPipeSync(gMainGfxPos++);
 
     if (unk_38 == 3) {
-        gSPDisplayList(gMasterGfxPos++, D_090017D0_333E70);
+        gSPDisplayList(gMainGfxPos++, D_090017D0_333E70);
     } else {
-        gSPDisplayList(gMasterGfxPos++, D_09001780_333E20);
+        gSPDisplayList(gMainGfxPos++, D_09001780_333E20);
     }
 
     data->unk_3C++;
@@ -250,18 +250,18 @@ void star_appendGfx(void* effect) {
             idx = (baseIdx - i + 8) % 8;
             gDisplayContext->matrixStack[gMatrixListPos] = data->unk_40[idx];
 
-            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-            gSPVertex(gMasterGfxPos++, &D_09001400_333AA0[i * 2], 2, i * 2);
-            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+            gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPVertex(gMainGfxPos++, &D_09001400_333AA0[i * 2], 2, i * 2);
+            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
         }
 
         for (i = 0; i < 4; i++) {
             s32 i2 = i * 2;
-            gSP2Triangles(gMasterGfxPos++,
+            gSP2Triangles(gMainGfxPos++,
                 i2    , i2 + 1, i2 + 2, i2,
                 i2 + 1, i2 + 3, i2 + 2, i2 + 1);
         }
 
-        gDPPipeSync(gMasterGfxPos++);
+        gDPPipeSync(gMainGfxPos++);
     }
 }

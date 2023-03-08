@@ -17,7 +17,7 @@ BSS MessagePrintState* SaveBlockTutorialPrinter;
 BSS MessagePrintState* SaveBlockResultPrinter;
 
 void entity_SaveBlock_setupGfx(s32 index) {
-    Gfx* gfxPos = gMasterGfxPos;
+    Gfx* gfxPos = gMainGfxPos;
     Entity* entity = get_entity_by_index(index);
     SaveBlockData* blockData = entity->dataBuf.saveBlock;
     Matrix4f sp18;
@@ -50,7 +50,7 @@ void entity_SaveBlock_setupGfx(s32 index) {
     gSPDisplayList(gfxPos++, dlist);
     gSPPopMatrix(gfxPos++, G_MTX_MODELVIEW);
 
-    gMasterGfxPos = gfxPos;
+    gMainGfxPos = gfxPos;
 }
 
 void entity_SaveBlock_idle(Entity* entity) {

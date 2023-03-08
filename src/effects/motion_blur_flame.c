@@ -149,9 +149,9 @@ void motion_blur_flame_appendGfx(void* effect) {
     s32 t6;
     s32 var_v1;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
-    gSPDisplayList(gMasterGfxPos++, D_E00A29D0[temp_a2]);
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPDisplayList(gMainGfxPos++, D_E00A29D0[temp_a2]);
 
     for (i = 0; i < 4; i++) {
         f32 temp_f12 = data->unk_1C[i];
@@ -178,7 +178,7 @@ void motion_blur_flame_appendGfx(void* effect) {
             temp_v0_2 = (data->unk_60 * temp_a0) >> 9;
             temp_v0_3 = (data->unk_64 * temp_a0) >> 9;
 
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0,
+            gDPSetPrimColor(gMainGfxPos++, 0, 0,
                 (temp_v1 * temp_a0) >> 8,
                 (temp_v0_2 * temp_a0) >> 8,
                 (temp_v0_3 * temp_a0) >> 8,
@@ -198,7 +198,7 @@ void motion_blur_flame_appendGfx(void* effect) {
                 envB = 127;
             }
 
-            gDPSetEnvColor(gMasterGfxPos++, envR, envG, envB, 0);
+            gDPSetEnvColor(gMainGfxPos++, envR, envG, envB, 0);
 
             s3 = sp48 - temp_s5;
             t6 = s3 + temp_s5 * 2;
@@ -234,14 +234,14 @@ void motion_blur_flame_appendGfx(void* effect) {
                     break;
                 }
 
-                gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE,
+                gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE,
                     (s32) (s3 * temp_s1->unk_08) * 4,
                     (s32) (temp_s1->unk_04 * 20 - var_t2_2 * temp_s1->unk_14 * temp_s1->unk_0C) * 4,
                     (s32) (s3 * temp_s1->unk_08 + temp_s1->unk_00) * 4,
                     (s32) (temp_s1->unk_04 * 21 - var_t2_2 * temp_s1->unk_14 * temp_s1->unk_0C) * 4);
 
                 for (var_t4 = 0; var_t4 < 2; var_t4++) {
-                    gDPLoadMultiTile(gMasterGfxPos++, VIRTUAL_TO_PHYSICAL(nuGfxCfb_ptr + uly * SCREEN_WIDTH),
+                    gDPLoadMultiTile(gMainGfxPos++, VIRTUAL_TO_PHYSICAL(nuGfxCfb_ptr + uly * SCREEN_WIDTH),
                         0x0100, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, SCREEN_HEIGHT,
                         s3 + var_a1,
                         0,
@@ -250,7 +250,7 @@ void motion_blur_flame_appendGfx(void* effect) {
                         0,
                         G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 9, 8, G_TX_NOLOD, G_TX_NOLOD
                     );
-                    gSPTextureRectangle(gMasterGfxPos++,
+                    gSPTextureRectangle(gMainGfxPos++,
                         (s3 + var_a1) * 4,
                         uly * 4,
                         t6 * 4,
@@ -261,7 +261,7 @@ void motion_blur_flame_appendGfx(void* effect) {
                         0x0400,
                         0x0400
                     );
-                    gDPPipeSync(gMasterGfxPos++);
+                    gDPPipeSync(gMainGfxPos++);
                 }
                 var_t2_2++;
             }

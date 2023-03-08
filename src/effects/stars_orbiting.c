@@ -112,17 +112,17 @@ void func_E005E334(EffectInstance* effect) {
         Gfx* dlist = D_E005E670[0];
         Gfx* dlist2 = D_E005E674[0];
 
-        gDPPipeSync(gMasterGfxPos++);
-        gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
-        gSPDisplayList(gMasterGfxPos++, dlist2);
+        gDPPipeSync(gMainGfxPos++);
+        gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+        gSPDisplayList(gMainGfxPos++, dlist2);
 
         shim_guTranslateF(sp18, part->pos.x, part->pos.y, part->pos.z);
         shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
         shim_guMtxCatF(sp58, sp18, sp98);
         shim_guMtxF2L(sp98, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 220, 220, 40, 255);
+        gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, 220, 220, 40, 255);
 
         part++;
         for (i = 1; i < effect->numParts; i++, part++) {
@@ -131,11 +131,11 @@ void func_E005E334(EffectInstance* effect) {
             shim_guMtxCatF(sp58, sp18, sp18);
             shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-            gSPDisplayList(gMasterGfxPos++, dlist);
-            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+            gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPDisplayList(gMainGfxPos++, dlist);
+            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
         }
 
-        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     }
 }

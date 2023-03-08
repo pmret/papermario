@@ -89,7 +89,7 @@ void N(func_802A123C_72C7EC(void)) {
     if (D_802A25E4 < 6) {
         if (D_802A25E4 > 0) {
             draw_box(0, WINDOW_STYLE_7, 106, 86, 0, 36, 36, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
-            gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 108, 90, 139, 118);
+            gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, 108, 90, 139, 118);
 
             for (i = 0; i < ARRAY_COUNT(D_802A25C8); i++) {
                 id = D_802A25C8[i];

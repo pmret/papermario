@@ -7,7 +7,7 @@ extern Gfx Entity_ArrowSign_RenderRotatedSign[];
 extern Mtx Entity_ArrowSign_mtxSign;
 
 void entity_ArrowSign_setupGfx(s32 entityIndex) {
-    Gfx* gfxPos = gMasterGfxPos;
+    Gfx* gfxPos = gMainGfxPos;
     Entity* entity = get_entity_by_index(entityIndex);
     ArrowSignData* data = entity->dataBuf.arrowSign;
     Matrix4f sp18;
@@ -23,7 +23,7 @@ void entity_ArrowSign_setupGfx(s32 entityIndex) {
     gfx = ENTITY_ADDR(entity, Gfx*, Entity_ArrowSign_RenderRotatedSign);
     gSPDisplayList(gfxPos++, gfx);
     gSPPopMatrix(gfxPos++, G_MTX_MODELVIEW);
-    gMasterGfxPos = gfxPos;
+    gMainGfxPos = gfxPos;
 }
 
 void entity_ArrowSign_idle(void) {

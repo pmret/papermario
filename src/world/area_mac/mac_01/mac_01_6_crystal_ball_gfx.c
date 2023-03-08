@@ -18,17 +18,17 @@ void N(gfx_build_crystal_ball_pre)(void) {
                     -50.0f, 63.0f, 95.0f,
                     31.0f, 63.0f, 95.0f,
                     64, 64);
-    gSPLookAtX(gMasterGfxPos++, &gDisplayContext->lookAt.l[0]);
-    gSPLookAtY(gMasterGfxPos++, &gDisplayContext->lookAt.l[1]);
-    gDPSetHilite1Tile(gMasterGfxPos++, G_TX_RENDERTILE, &gDisplayContext->hilite, 64, 64);
-    gDPSetHilite2Tile(gMasterGfxPos++, G_TX_MIRROR, &gDisplayContext->hilite, 64, 64);
-    gSPTexture(gMasterGfxPos++, 0x1000, 0x1000, 0, G_TX_RENDERTILE, G_ON);
-    gSPSetGeometryMode(gMasterGfxPos++, G_TEXTURE_GEN);
+    gSPLookAtX(gMainGfxPos++, &gDisplayContext->lookAt.l[0]);
+    gSPLookAtY(gMainGfxPos++, &gDisplayContext->lookAt.l[1]);
+    gDPSetHilite1Tile(gMainGfxPos++, G_TX_RENDERTILE, &gDisplayContext->hilite, 64, 64);
+    gDPSetHilite2Tile(gMainGfxPos++, G_TX_MIRROR, &gDisplayContext->hilite, 64, 64);
+    gSPTexture(gMainGfxPos++, 0x1000, 0x1000, 0, G_TX_RENDERTILE, G_ON);
+    gSPSetGeometryMode(gMainGfxPos++, G_TEXTURE_GEN);
 }
 
 void N(gfx_build_crystal_ball_post)(void) {
-    gSPClearGeometryMode(gMasterGfxPos++, G_TEXTURE_GEN);
-    gSPEndDisplayList(gMasterGfxPos++);
+    gSPClearGeometryMode(gMainGfxPos++, G_TEXTURE_GEN);
+    gSPEndDisplayList(gMainGfxPos++);
 }
 
 void N(gfx_build_inside_crystal_ball)(void) {
@@ -84,43 +84,43 @@ void N(gfx_build_inside_crystal_ball)(void) {
     f20 += camera->viewportStartX;
     f22 += camera->viewportStartY;
 
-    gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
-    gDPSetRenderMode(gMasterGfxPos++, Z_CMP | CVG_DST_CLAMP | ZMODE_OPA | FORCE_BL | G_RM_PASS, Z_CMP | CVG_DST_CLAMP | ZMODE_OPA | FORCE_BL | GBL_c2(G_BL_CLR_IN, G_BL_0, G_BL_CLR_IN, G_BL_1));
-    gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxZBuffer));
-    gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, PRIMITIVE, 0, 0, 0, 0, 0, 0, 0, PRIMITIVE, 0, 0, 0, 0);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 248, 240, 240, 0);
-    gDPPipeSync(gMasterGfxPos++);
-    gSPDisplayList(gMasterGfxPos++, model->modelNode->displayData->displayList);
-    gDPPipeSync(gMasterGfxPos++);
-    gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxCfb_ptr));
-    gDPSetDepthSource(gMasterGfxPos++, G_ZS_PRIM);
-    gDPSetPrimDepth(gMasterGfxPos++, 32734, 0);
-    gDPSetRenderMode(gMasterGfxPos++, G_RM_ZB_OPA_DECAL, G_RM_ZB_OPA_DECAL2);
-    gDPSetTextureFilter(gMasterGfxPos++, G_TF_POINT);
-    gDPSetTexturePersp(gMasterGfxPos++, G_TP_NONE);
-    gSPTexture(gMasterGfxPos++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
-    gDPSetTextureLUT(gMasterGfxPos++, G_TT_NONE);
-    gDPSetTextureDetail(gMasterGfxPos++, G_TD_CLAMP);
-    gDPSetTextureLOD(gMasterGfxPos++, G_TL_TILE);
-    gDPPipeSync(gMasterGfxPos++);
+    gDPSetCycleType(gMainGfxPos++, G_CYC_1CYCLE);
+    gDPSetRenderMode(gMainGfxPos++, Z_CMP | CVG_DST_CLAMP | ZMODE_OPA | FORCE_BL | G_RM_PASS, Z_CMP | CVG_DST_CLAMP | ZMODE_OPA | FORCE_BL | GBL_c2(G_BL_CLR_IN, G_BL_0, G_BL_CLR_IN, G_BL_1));
+    gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxZBuffer));
+    gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, PRIMITIVE, 0, 0, 0, 0, 0, 0, 0, PRIMITIVE, 0, 0, 0, 0);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, 248, 240, 240, 0);
+    gDPPipeSync(gMainGfxPos++);
+    gSPDisplayList(gMainGfxPos++, model->modelNode->displayData->displayList);
+    gDPPipeSync(gMainGfxPos++);
+    gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxCfb_ptr));
+    gDPSetDepthSource(gMainGfxPos++, G_ZS_PRIM);
+    gDPSetPrimDepth(gMainGfxPos++, 32734, 0);
+    gDPSetRenderMode(gMainGfxPos++, G_RM_ZB_OPA_DECAL, G_RM_ZB_OPA_DECAL2);
+    gDPSetTextureFilter(gMainGfxPos++, G_TF_POINT);
+    gDPSetTexturePersp(gMainGfxPos++, G_TP_NONE);
+    gSPTexture(gMainGfxPos++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
+    gDPSetTextureLUT(gMainGfxPos++, G_TT_NONE);
+    gDPSetTextureDetail(gMainGfxPos++, G_TD_CLAMP);
+    gDPSetTextureLOD(gMainGfxPos++, G_TL_TILE);
+    gDPPipeSync(gMainGfxPos++);
 
     ulx = f20 / 32.0f * 32.0f - 8.0f;
     uly = f22 / 32.0f * 32.0f - 8.0f;
     if (ulx >= 0 && uly >= 0 && ulx + 40 < SCREEN_WIDTH && uly + 40 < SCREEN_HEIGHT) {
-        gDPLoadTextureTile(gMasterGfxPos++, osVirtualToPhysical(nuGfxCfb_ptr), G_IM_FMT_RGBA, G_IM_SIZ_16b,
+        gDPLoadTextureTile(gMainGfxPos++, osVirtualToPhysical(nuGfxCfb_ptr), G_IM_FMT_RGBA, G_IM_SIZ_16b,
                            SCREEN_WIDTH, SCREEN_HEIGHT, ulx, uly, ulx + 31, uly + 31, 0,
                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-        gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, TEXEL0, 0, 0, 0, 0, 0, 0, 0, TEXEL0, 0, 0, 0, 0);
-        gSPScisTextureRectangle(gMasterGfxPos++, (ulx - 8) * 4, (uly - 8) * 4, (ulx + 24) * 4, (uly + 24) * 4,
+        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, TEXEL0, 0, 0, 0, 0, 0, 0, 0, TEXEL0, 0, 0, 0, 0);
+        gSPScisTextureRectangle(gMainGfxPos++, (ulx - 8) * 4, (uly - 8) * 4, (ulx + 24) * 4, (uly + 24) * 4,
                                 G_TX_RENDERTILE, (ulx & 0x1F) << 5, (uly & 0x1F) << 5, 700, 700);
     }
 
-    gDPPipeSync(gMasterGfxPos++);
-    gDPSetDepthSource(gMasterGfxPos++, G_ZS_PIXEL);
-    gDPSetRenderMode(gMasterGfxPos++, G_RM_AA_ZB_XLU_SURF, G_RM_AA_ZB_XLU_SURF2);
-    gDPSetCombineMode(gMasterGfxPos++, G_CC_SHADE, G_CC_SHADE);
-    gDPSetTexturePersp(gMasterGfxPos++, G_TP_PERSP);
-    gSPTexture(gMasterGfxPos++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF);
+    gDPPipeSync(gMainGfxPos++);
+    gDPSetDepthSource(gMainGfxPos++, G_ZS_PIXEL);
+    gDPSetRenderMode(gMainGfxPos++, G_RM_AA_ZB_XLU_SURF, G_RM_AA_ZB_XLU_SURF2);
+    gDPSetCombineMode(gMainGfxPos++, G_CC_SHADE, G_CC_SHADE);
+    gDPSetTexturePersp(gMainGfxPos++, G_TP_PERSP);
+    gSPTexture(gMainGfxPos++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF);
 }
 
 EvtScript N(EVS_SetupCrystalBallGfx) = {

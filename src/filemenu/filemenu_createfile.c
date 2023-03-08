@@ -143,14 +143,14 @@ void filemenu_draw_contents_choose_name(
                 yOffset = 15 * row + 4;
                 if (layer == 0) {
                     page = currentPage;
-                    gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE,
+                    gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE,
                                   baseX,
                                   baseY + yOffset,
                                   baseX + width,
                                   baseY + yOffset + changeLayoutOffset);
                 } else {
                     page = previousPage;
-                    gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE,
+                    gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE,
                                   baseX,
                                   baseY + yOffset + changeLayoutOffset,
                                   baseX + width,
@@ -194,7 +194,7 @@ void filemenu_draw_contents_choose_name(
                 }
             }
         }
-        gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, baseX, baseY, baseX + width, baseY + height);
+        gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, baseX, baseY, baseX + width, baseY + height);
     } else {
         for (col = 0; col < menu->numCols; col++) {
             for (row = 0; row < menu->numRows; row++) {

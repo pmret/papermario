@@ -216,39 +216,39 @@ void bombette_breaking_appendGfx(void* effect) {
 
     timeLeft *= 4;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
     shim_guTranslateF(sp20, data->center.x, data->center.y, data->center.z);
     shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
-    shim_mdl_draw_hidden_panel_surface(&gMasterGfxPos, data->treeIndex);
+    shim_mdl_draw_hidden_panel_surface(&gMainGfxPos, data->treeIndex);
 
     data++;
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, data++) {
         shim_guPositionF(sp20, timeLeft + (130 * i), timeLeft - (40 * i), timeLeft + (80 * i), unk_40,
                          data->unk_14.x, data->unk_14.y, data->unk_14.z);
         shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
-        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+        gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                   G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, D_E0084E1C[type]);
-        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gSPDisplayList(gMainGfxPos++, D_E0084E1C[type]);
+        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     }
 
-    gSPDisplayList(gMasterGfxPos++, sp64);
+    gSPDisplayList(gMainGfxPos++, sp64);
 
     data = ((EffectInstance*)effect)->data.bombetteBreaking;
     data++;
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, data++) {
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 255, (data->alpha * mainAlpha) / 255);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 255, (data->alpha * mainAlpha) / 255);
         shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, unk_38,
                          data->center.x, data->center.y, data->center.z);
         shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
-        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+        gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                   G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, sp60);
-        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gSPDisplayList(gMainGfxPos++, sp60);
+        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     }
 
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }

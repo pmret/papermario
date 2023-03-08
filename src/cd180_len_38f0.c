@@ -202,137 +202,137 @@ void _render_transition_stencil(u8 arg0, f32 arg1, ScreenOverlay* overlay) {
 
     switch (arg0) {
         case 0:
-            gDPPipeSync(gMasterGfxPos++);
-            gDPSetColorDither(gMasterGfxPos++, G_CD_MAGICSQ);
-            gDPSetAlphaDither(gMasterGfxPos++, G_AD_PATTERN);
-            gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
+            gDPPipeSync(gMainGfxPos++);
+            gDPSetColorDither(gMainGfxPos++, G_CD_MAGICSQ);
+            gDPSetAlphaDither(gMainGfxPos++, G_AD_PATTERN);
+            gDPSetCycleType(gMainGfxPos++, G_CYC_1CYCLE);
             if (arg1 == 255.0f) {
-                gDPSetRenderMode(gMasterGfxPos++, CVG_DST_SAVE | G_RM_OPA_SURF, CVG_DST_SAVE | G_RM_OPA_SURF2);
+                gDPSetRenderMode(gMainGfxPos++, CVG_DST_SAVE | G_RM_OPA_SURF, CVG_DST_SAVE | G_RM_OPA_SURF2);
             } else {
-                gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
+                gDPSetRenderMode(gMainGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
             }
-            gDPSetCombineMode(gMasterGfxPos++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, s3, s4, s5, arg1);
-            gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-            gDPFillRectangle(gMasterGfxPos++, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
-            gDPSetColorDither(gMasterGfxPos++, G_CD_DISABLE);
+            gDPSetCombineMode(gMainGfxPos++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, s3, s4, s5, arg1);
+            gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+            gDPFillRectangle(gMainGfxPos++, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
+            gDPSetColorDither(gMainGfxPos++, G_CD_DISABLE);
             return;
         case 1:
-            gDPPipeSync(gMasterGfxPos++);
-            gDPSetColorDither(gMasterGfxPos++, G_CD_MAGICSQ);
-            gDPSetAlphaDither(gMasterGfxPos++, G_AD_PATTERN);
-            gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
+            gDPPipeSync(gMainGfxPos++);
+            gDPSetColorDither(gMainGfxPos++, G_CD_MAGICSQ);
+            gDPSetAlphaDither(gMainGfxPos++, G_AD_PATTERN);
+            gDPSetCycleType(gMainGfxPos++, G_CYC_1CYCLE);
             if (arg1 == 255.0f) {
-                gDPSetRenderMode(gMasterGfxPos++, CVG_DST_SAVE | G_RM_OPA_SURF, CVG_DST_SAVE | G_RM_OPA_SURF2);
+                gDPSetRenderMode(gMainGfxPos++, CVG_DST_SAVE | G_RM_OPA_SURF, CVG_DST_SAVE | G_RM_OPA_SURF2);
             } else {
-                gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
+                gDPSetRenderMode(gMainGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
             }
-            gDPSetCombineMode(gMasterGfxPos++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, s3, s4, s5, arg1);
-            gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-            gDPFillRectangle(gMasterGfxPos++, camera->viewportStartX, camera->viewportStartY,
+            gDPSetCombineMode(gMainGfxPos++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, s3, s4, s5, arg1);
+            gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+            gDPFillRectangle(gMainGfxPos++, camera->viewportStartX, camera->viewportStartY,
                              camera->viewportStartX + camera->viewportW, camera->viewportStartY + camera->viewportH);
-            gDPSetColorDither(gMasterGfxPos++, G_CD_DISABLE);
+            gDPSetColorDither(gMainGfxPos++, G_CD_DISABLE);
             return;
     }
 
     guOrtho(&matrixStack[gMatrixListPos], 0.0f, 320.0f, 0.0f, 240.0f, -1000.0f, 1000.0f, 1.0f);
-    gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+    gSPMatrix(gMainGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
 
     switch (arg0) {
         case 4:
-            gSPDisplayList(gMasterGfxPos++, Gfx_LoadStencilTex_Mario);
+            gSPDisplayList(gMainGfxPos++, Gfx_LoadStencilTex_Mario);
             func_80139F10(160, 120, arg1, s3, s4, s5, arg1 * f28 / 255.0f, gCurrentCameraID);
             break;
         case 7:
-            gSPDisplayList(gMasterGfxPos++, Gfx_LoadStencilTex_Mario);
+            gSPDisplayList(gMainGfxPos++, Gfx_LoadStencilTex_Mario);
             func_80139F10(160, 120, arg1, s3, s4, s5, arg1 * f28 / 255.0f, -1);
             break;
         case 5:
-            gSPDisplayList(gMasterGfxPos++, Gfx_LoadStencilTex_Star);
+            gSPDisplayList(gMainGfxPos++, Gfx_LoadStencilTex_Star);
             func_80139F10(160, 120, arg1, s3, s4, s5, arg1 * f28 / 255.0f, gCurrentCameraID);
             break;
         case 8:
-            gSPDisplayList(gMasterGfxPos++, Gfx_LoadStencilTex_Star);
+            gSPDisplayList(gMainGfxPos++, Gfx_LoadStencilTex_Star);
             func_80139F10(160, 120, arg1, s3, s4, s5, arg1 * f28 / 255.0f, -1);
             break;
         case 3:
-            gSPDisplayList(gMasterGfxPos++, Gfx_LoadStencilTex_SharpCircle);
+            gSPDisplayList(gMainGfxPos++, Gfx_LoadStencilTex_SharpCircle);
             func_80139F10(s1, s2, arg1, 0, 0, 0, 0, gCurrentCameraID);
             break;
         case 6:
-            gSPDisplayList(gMasterGfxPos++, Gfx_LoadStencilTex_SharpCircle);
+            gSPDisplayList(gMainGfxPos++, Gfx_LoadStencilTex_SharpCircle);
             func_80139F10(s1, s2, arg1, 0, 0, 0, 0, -1);
             break;
         case 2:
             s0 = arg1;
             guTranslate(&matrixStack[gMatrixListPos], 80.0f, 120.0f, 0.0f);
-            gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            gSPMatrix(gMainGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             guScale(&matrixStack[gMatrixListPos], (1.0f - s0 / 255.0f) * 0.8, (1.0f - s0 / 255.0f) * 0.8, 1.0f);
-            gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPMatrix(gMainGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
             guRotate(&matrixStack[gMatrixListPos], s0 * 0.5f, 0.0f, 0.0f, 1.0f);
-            gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-            gSPDisplayList(gMasterGfxPos++, D_8014E8F0);
-            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+            gSPMatrix(gMainGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPDisplayList(gMainGfxPos++, D_8014E8F0);
+            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 
             guTranslate(&matrixStack[gMatrixListPos], 240.0f, 120.0f, 0.0f);
-            gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            gSPMatrix(gMainGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             guScale(&matrixStack[gMatrixListPos], (1.0f - s0 / 255.0f) * 0.8, (1.0f - s0 / 255.0f) * 0.8, 1.0f);
-            gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPMatrix(gMainGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
             guRotate(&matrixStack[gMatrixListPos], s0 * 0.5f, 0.0f, 0.0f, 1.0f);
-            gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-            gSPDisplayList(gMasterGfxPos++, D_8014E8F0);
-            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+            gSPMatrix(gMainGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPDisplayList(gMainGfxPos++, D_8014E8F0);
+            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 
             guTranslate(&matrixStack[gMatrixListPos], 0.0f, 0.0f, 0.0f);
-            gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-            gSPDisplayList(gMasterGfxPos++, D_8014EA48);
-            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+            gSPMatrix(gMainGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            gSPDisplayList(gMainGfxPos++, D_8014EA48);
+            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
             break;
         case 9:
             s0 = arg1;
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, 0);
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, 0);
             guTranslate(&matrixStack[gMatrixListPos], s1, SCREEN_HEIGHT - s2, 0.0f);
-            gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            gSPMatrix(gMainGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             guScale(&matrixStack[gMatrixListPos], (1.0f - s0 / 255.0f) * 0.8, (1.0f - s0 / 255.0f) * 0.8, 1.0f);
-            gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPMatrix(gMainGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
             guRotate(&matrixStack[gMatrixListPos], -s0, 0.0f, 0.0f, 1.0f);
-            gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-            gSPDisplayList(gMasterGfxPos++, D_8014E8F0);
-            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+            gSPMatrix(gMainGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPDisplayList(gMainGfxPos++, D_8014E8F0);
+            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 
             guTranslate(&matrixStack[gMatrixListPos], s6, SCREEN_HEIGHT - s7, 0.0f);
-            gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            gSPMatrix(gMainGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             guScale(&matrixStack[gMatrixListPos], (1.0f - s0 / 255.0f) * 0.8, (1.0f - s0 / 255.0f) * 0.8, 1.0f);
-            gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPMatrix(gMainGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
             guRotate(&matrixStack[gMatrixListPos], -s0, 0.0f, 0.0f, 1.0f);
-            gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-            gSPDisplayList(gMasterGfxPos++, D_8014E8F0);
-            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+            gSPMatrix(gMainGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPDisplayList(gMainGfxPos++, D_8014E8F0);
+            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 
             guTranslate(&matrixStack[gMatrixListPos], 0.0f, 0.0f, 0.0f);
-            gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, f28);
-            gSPDisplayList(gMasterGfxPos++, D_8014E9A8);
-            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+            gSPMatrix(gMainGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, f28);
+            gSPDisplayList(gMainGfxPos++, D_8014E9A8);
+            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
             break;
         case 10:
             s0 = arg1;
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, 0);
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, 0);
             guTranslate(&matrixStack[gMatrixListPos], s1, SCREEN_HEIGHT - s2, 0.0f);
-            gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            gSPMatrix(gMainGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             guScale(&matrixStack[gMatrixListPos], (1.0f - s0 / 255.0f) * 0.8, (1.0f - s0 / 255.0f) * 0.8, 1.0f);
-            gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPMatrix(gMainGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
             guRotate(&matrixStack[gMatrixListPos], (f32)(-s0) * 0.5, 0.0f, 0.0f, 1.0f);
-            gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-            gSPDisplayList(gMasterGfxPos++, D_8014E8F0);
-            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+            gSPMatrix(gMainGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPDisplayList(gMainGfxPos++, D_8014E8F0);
+            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 
             guTranslate(&matrixStack[gMatrixListPos], 0.0f, 0.0f, 0.0f);
-            gSPMatrix(gMasterGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, f28);
-            gSPDisplayList(gMasterGfxPos++, D_8014E9A8);
-            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+            gSPMatrix(gMainGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, f28);
+            gSPDisplayList(gMainGfxPos++, D_8014E9A8);
+            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
             v0 = arg1 + 40;
             if (arg1 > 170) {
                 v0 = 170;
@@ -340,14 +340,14 @@ void _render_transition_stencil(u8 arg0, f32 arg1, ScreenOverlay* overlay) {
             func_80138D88(0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1, v0);
             break;
         case 11:
-            gSPDisplayList(gMasterGfxPos++, Gfx_LoadStencilTex_BlurryCircle);
+            gSPDisplayList(gMainGfxPos++, Gfx_LoadStencilTex_BlurryCircle);
             func_80138E54(1, s6, s7, f28, arg1);
             break;
         case 12:
             func_80138D88(s1, s2, s6, s7, arg1);
             break;
         case 13:
-            gSPDisplayList(gMasterGfxPos++, Gfx_LoadStencilTex_BlurryCircle);
+            gSPDisplayList(gMainGfxPos++, Gfx_LoadStencilTex_BlurryCircle);
             func_80138E54(0, s1, s2, f28, arg1);
             break;
         case 14:
@@ -355,7 +355,7 @@ void _render_transition_stencil(u8 arg0, f32 arg1, ScreenOverlay* overlay) {
             break;
     }
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCameraID], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCameraID], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
 }
 
 void set_screen_overlay_params_front(u8 type, f32 zoom) {

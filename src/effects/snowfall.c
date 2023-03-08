@@ -183,11 +183,11 @@ void snowfall_appendGfx(void* effect) {
         }
 
         if (unk_28 != 0) {
-            gDPPipeSync(gMasterGfxPos++);
-            gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+            gDPPipeSync(gMainGfxPos++);
+            gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-            gSPDisplayList(gMasterGfxPos++, D_09000C00_38DC70);
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 255, unk_28);
+            gSPDisplayList(gMainGfxPos++, D_09000C00_38DC70);
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 255, unk_28);
 
             shim_guRotateF(sp18, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
             shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
@@ -200,15 +200,15 @@ void snowfall_appendGfx(void* effect) {
                     shim_guTranslateF(sp18, data->unk_08, data->unk_0C, data->unk_10);
                     shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-                    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+                    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                               G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-                    gSPMatrix(gMasterGfxPos++, mtx,
+                    gSPMatrix(gMainGfxPos++, mtx,
                               G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-                    gSPDisplayList(gMasterGfxPos++, dlist);
-                    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+                    gSPDisplayList(gMainGfxPos++, dlist);
+                    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
                 }
             }
-            gDPPipeSync(gMasterGfxPos++);
+            gDPPipeSync(gMainGfxPos++);
         }
     }
 }

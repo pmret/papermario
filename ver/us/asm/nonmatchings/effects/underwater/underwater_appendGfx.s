@@ -8,8 +8,8 @@ glabel underwater_appendGfx
 /* 3B91FC E00BA62C 3C07FF10 */  lui       $a3, 0xff10
 /* 3B9200 E00BA630 34E7013F */  ori       $a3, $a3, 0x13f
 /* 3B9204 E00BA634 0000682D */  daddu     $t5, $zero, $zero
-/* 3B9208 E00BA638 3C02800A */  lui       $v0, %hi(gMasterGfxPos)
-/* 3B920C E00BA63C 2442A66C */  addiu     $v0, $v0, %lo(gMasterGfxPos)
+/* 3B9208 E00BA638 3C02800A */  lui       $v0, %hi(gMainGfxPos)
+/* 3B920C E00BA63C 2442A66C */  addiu     $v0, $v0, %lo(gMainGfxPos)
 /* 3B9210 E00BA640 0040402D */  daddu     $t0, $v0, $zero
 /* 3B9214 E00BA644 AFB200B8 */  sw        $s2, 0xb8($sp)
 /* 3B9218 E00BA648 3C12FD10 */  lui       $s2, 0xfd10
@@ -154,8 +154,8 @@ glabel underwater_appendGfx
 /* 3B9440 E00BA870 27A40020 */  addiu     $a0, $sp, 0x20
 /* 3B9444 E00BA874 3C130001 */  lui       $s3, 1
 /* 3B9448 E00BA878 36731630 */  ori       $s3, $s3, 0x1630
-/* 3B944C E00BA87C 3C10800A */  lui       $s0, %hi(gMasterGfxPos)
-/* 3B9450 E00BA880 2610A66C */  addiu     $s0, $s0, %lo(gMasterGfxPos)
+/* 3B944C E00BA87C 3C10800A */  lui       $s0, %hi(gMainGfxPos)
+/* 3B9450 E00BA880 2610A66C */  addiu     $s0, $s0, %lo(gMainGfxPos)
 /* 3B9454 E00BA884 8E080000 */  lw        $t0, ($s0)
 /* 3B9458 E00BA888 3C05C2A0 */  lui       $a1, 0xc2a0
 /* 3B945C E00BA88C 3C03800A */  lui       $v1, %hi(nuGfxCfb_ptr)
@@ -490,8 +490,8 @@ glabel underwater_appendGfx
 /* 3B9958 E00BAD88 3C06FF10 */  lui       $a2, 0xff10
 /* 3B995C E00BAD8C 34C6013F */  ori       $a2, $a2, 0x13f
 /* 3B9960 E00BAD90 3C07DA38 */  lui       $a3, 0xda38
-/* 3B9964 E00BAD94 3C05800A */  lui       $a1, %hi(gMasterGfxPos)
-/* 3B9968 E00BAD98 24A5A66C */  addiu     $a1, $a1, %lo(gMasterGfxPos)
+/* 3B9964 E00BAD94 3C05800A */  lui       $a1, %hi(gMainGfxPos)
+/* 3B9968 E00BAD98 24A5A66C */  addiu     $a1, $a1, %lo(gMainGfxPos)
 /* 3B996C E00BAD9C 8CA30000 */  lw        $v1, ($a1)
 /* 3B9970 E00BADA0 3C04800A */  lui       $a0, %hi(nuGfxZBuffer)
 /* 3B9974 E00BADA4 8C84A5DC */  lw        $a0, %lo(nuGfxZBuffer)($a0)

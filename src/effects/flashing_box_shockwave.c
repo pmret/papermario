@@ -144,31 +144,31 @@ void flashing_box_shockwave_appendGfx(void* effect) {
 
     shim_guRotateF(sp98, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     shim_guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
     shim_guMtxCatF(sp98, sp18, sp18);
     shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->unk_30, data->unk_34, data->unk_38, data->unk_18);
-    gDPSetEnvColor(gMasterGfxPos++, data->unk_3C, data->unk_40, data->unk_44, 0);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, data->unk_30, data->unk_34, data->unk_38, data->unk_18);
+    gDPSetEnvColor(gMainGfxPos++, data->unk_3C, data->unk_40, data->unk_44, 0);
 
     if ((unk_00 == 0 || unk_00 == 1) && unk_20 % 2) {
         shim_guScaleF(sp18, data->unk_28, data->unk_2C, 15.0f / 14);
         shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, D_09000600_3936A0);
-        gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, unk_20 * 8, unk_20 * 8, unk_20 * 8 + 128, unk_20 * 8 + 128);
-        gSPDisplayList(gMasterGfxPos++, D_090008E8_393988);
-        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+        gSPDisplayList(gMainGfxPos++, D_09000600_3936A0);
+        gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, unk_20 * 8, unk_20 * 8, unk_20 * 8 + 128, unk_20 * 8 + 128);
+        gSPDisplayList(gMainGfxPos++, D_090008E8_393988);
+        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     }
 
     if (unk_00 >= 1 && unk_00 <= 3) {
         if (unk_00 == 1) {
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 0, data->unk_14);
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 0, data->unk_14);
         }
 
         shim_guTranslateF(sp18, 0.0f, data->unk_2C, 0.0f);
@@ -176,11 +176,11 @@ void flashing_box_shockwave_appendGfx(void* effect) {
         shim_guMtxCatF(sp58, sp18, sp18);
         shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, D_09000950_3939F0);
-        gSPDisplayList(gMasterGfxPos++, D_09000FF8_394098);
-        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+        gSPDisplayList(gMainGfxPos++, D_09000950_3939F0);
+        gSPDisplayList(gMainGfxPos++, D_09000FF8_394098);
+        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     }
 
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }

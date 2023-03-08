@@ -262,8 +262,8 @@ glabel appendGfx_shading_palette
 /* DE3E4 80147504 3C0CE404 */  lui       $t4, (0xE4040004 >> 16)
 /* DE3E8 80147508 358C0004 */  ori       $t4, $t4, (0xE4040004 & 0xFFFF)
 /* DE3EC 8014750C 3C0E1000 */  lui       $t6, (0x10000400 >> 16)
-/* DE3F0 80147510 3C17800A */  lui       $s7, %hi(gMasterGfxPos)
-/* DE3F4 80147514 26F79244 */  addiu     $s7, $s7, %lo(gMasterGfxPos)
+/* DE3F0 80147510 3C17800A */  lui       $s7, %hi(gMainGfxPos)
+/* DE3F4 80147514 26F79244 */  addiu     $s7, $s7, %lo(gMainGfxPos)
 /* DE3F8 80147518 35CE0400 */  ori       $t6, $t6, (0x10000400 & 0xFFFF)
 /* DE3FC 8014751C 3C05FA00 */  lui       $a1, (0xFA000000 >> 16)
 /* DE400 80147520 00131E00 */  sll       $v1, $s3, 24
@@ -485,8 +485,8 @@ glabel appendGfx_shading_palette
 /* DE758 80147878 AEE20000 */  sw        $v0, 0x0($s7)
 /* DE75C 8014787C AD440048 */  sw        $a0, 0x48($t2)
 /* DE760 80147880 AD43004C */  sw        $v1, 0x4C($t2)
-/* DE764 80147884 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
-/* DE768 80147888 24639244 */  addiu     $v1, $v1, %lo(gMasterGfxPos)
+/* DE764 80147884 3C03800A */  lui       $v1, %hi(gMainGfxPos)
+/* DE768 80147888 24639244 */  addiu     $v1, $v1, %lo(gMainGfxPos)
 /* DE76C 8014788C 8C620000 */  lw        $v0, 0x0($v1)
 /* DE770 80147890 461ED002 */  mul.s     $f0, $f26, $f30
 /* DE774 80147894 00000000 */  nop

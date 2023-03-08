@@ -111,20 +111,20 @@ void rising_bubble_appendGfx(void* effect) {
     Matrix4f sp20;
     Matrix4f sp60;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     if (data->pos.y >= data->unk_24) {
         s32 uls;
         s32 ult;
 
-        gSPDisplayList(gMasterGfxPos++, D_E0046614[0]);
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 127, 127, 127, data->unk_14);
+        gSPDisplayList(gMainGfxPos++, D_E0046614[0]);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, 127, 127, 127, data->unk_14);
 
         uls = 0;
         ult = data->unk_20;
 
-        gDPSetTileSize(gMasterGfxPos++, 1,
+        gDPSetTileSize(gMainGfxPos++, 1,
             (uls     ) * 4, (ult     ) * 4,
             (uls + 32) * 4, (ult + 32) * 4);
 
@@ -132,22 +132,22 @@ void rising_bubble_appendGfx(void* effect) {
         shim_guScaleF(sp60, data->unk_10, 1.0f, data->unk_10);
         shim_guMtxCatF(sp60, sp20, sp20);
     } else {
-        gSPDisplayList(gMasterGfxPos++, D_E0046618[0]);
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 255, data->unk_14);
-        gDPSetEnvColor(gMasterGfxPos++, 128, 128, 255, data->unk_14);
+        gSPDisplayList(gMainGfxPos++, D_E0046618[0]);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 255, data->unk_14);
+        gDPSetEnvColor(gMainGfxPos++, 128, 128, 255, data->unk_14);
 
         shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, data->unk_10, data->pos.x, data->pos.y, data->pos.z);
     }
 
     shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
     if (data->pos.y >= data->unk_24) {
-        gSPDisplayList(gMasterGfxPos++, D_E0046600[0]);
+        gSPDisplayList(gMainGfxPos++, D_E0046600[0]);
     } else {
-        gSPDisplayList(gMasterGfxPos++, D_E0046604[(lifeTime >> 1) & 3]);
+        gSPDisplayList(gMainGfxPos++, D_E0046604[(lifeTime >> 1) & 3]);
     }
 
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-    gDPPipeSync(gMasterGfxPos++);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+    gDPPipeSync(gMainGfxPos++);
 }

@@ -274,7 +274,7 @@ void func_E01166E8(s32 arg0, SomethingRotatingFXData* part) {
     shim_guMtxCatF(sp60, sp20, sp20);
     shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
               G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 }
 
@@ -284,36 +284,36 @@ void something_rotating_appendGfx(void* effect) {
     s32 l, t;
     s32 i;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    gSPDisplayList(gMasterGfxPos++, D_090042E0_3FE790);
-    gDPSetEnvColor(gMasterGfxPos++, 0, 0, 0, 255);
+    gSPDisplayList(gMainGfxPos++, D_090042E0_3FE790);
+    gDPSetEnvColor(gMainGfxPos++, 0, 0, 0, 255);
 
     data++;
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, data++) {
         if (data->state != 5) {
             func_E01166E8(1, data);
             if (data->primAlpha != 255) {
-                gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, data->primAlpha);
-                gDPSetEnvColor(gMasterGfxPos++, data->env.r, data->env.g, data->env.b, 0x78);
-                gSPDisplayList(gMasterGfxPos++, D_E0116C6C[0]);
+                gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, data->primAlpha);
+                gDPSetEnvColor(gMainGfxPos++, data->env.r, data->env.g, data->env.b, 0x78);
+                gSPDisplayList(gMainGfxPos++, D_E0116C6C[0]);
 
                 l = ((unk_14 * 4.0f) * 100.0f) * (1.0 / 1024);
                 t = ((unk_14 * 4.0f) * 40.0f) * (1.0 / 1024);
-                gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, l, t, l + 0xFC, t + 0xFC);
+                gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, l, t, l + 0xFC, t + 0xFC);
 
                 l = ((unk_14 * 4.0f) * 200.0f) * (1.0 / 1024);
                 t = ((unk_14 * 4.0f) * 90.0f) * (1.0 / 1024);
-                gDPSetTileSize(gMasterGfxPos++, 1, l, t, l + 0xFC, t + 0xFC);
-                gSPDisplayList(gMasterGfxPos++, D_E0116C64[0]);
+                gDPSetTileSize(gMainGfxPos++, 1, l, t, l + 0xFC, t + 0xFC);
+                gSPDisplayList(gMainGfxPos++, D_E0116C64[0]);
             } else {
-                gSPDisplayList(gMasterGfxPos++, D_E0116C68[0]);
-                gDPSetEnvColor(gMasterGfxPos++, data->env.r, data->env.g, data->env.b, data->unk_25);
-                gSPDisplayList(gMasterGfxPos++, D_E0116C70[i - 1]);
-                gSPDisplayList(gMasterGfxPos++, D_E0116C60[0]);
+                gSPDisplayList(gMainGfxPos++, D_E0116C68[0]);
+                gDPSetEnvColor(gMainGfxPos++, data->env.r, data->env.g, data->env.b, data->unk_25);
+                gSPDisplayList(gMainGfxPos++, D_E0116C70[i - 1]);
+                gSPDisplayList(gMainGfxPos++, D_E0116C60[0]);
             }
-            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
         }
     }
 }

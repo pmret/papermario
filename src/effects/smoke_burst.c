@@ -109,36 +109,36 @@ void smoke_burst_appendGfx(void* effect) {
     Matrix4f sp20;
     Matrix4f sp60;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
-    gSPDisplayList(gMasterGfxPos++, dlist2);
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPDisplayList(gMainGfxPos++, dlist2);
 
     shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, data->unk_10, data->pos.x, data->pos.y, data->pos.z);
     shim_guRotateF(sp60, 20.0f, 0.0f, 0.0f, 1.0f);
     shim_guMtxCatF(sp60, sp20, sp20);
     shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->rgba.r, data->rgba.g, data->rgba.b, data->rgba.a);
-    gDPSetEnvColor(gMasterGfxPos++, 0, 0, 0, envAlpha);
-    gDPSetAlphaCompare(gMasterGfxPos++, G_AC_DITHER);
-    gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE,
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, data->rgba.r, data->rgba.g, data->rgba.b, data->rgba.a);
+    gDPSetEnvColor(gMainGfxPos++, 0, 0, 0, envAlpha);
+    gDPSetAlphaCompare(gMainGfxPos++, G_AC_DITHER);
+    gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE,
         (unk_20_s32 * 32     ) * 4, 0,
         (unk_20_s32 * 32 + 31) * 4, 31 * 4);
 
     temp_a1 = unk_20_s32 * 32 + 32;
 
     if (cond) {
-        gDPSetTileSize(gMasterGfxPos++, 1,
+        gDPSetTileSize(gMainGfxPos++, 1,
             (temp_a1     ) * 4, 32 * 4,
             (temp_a1 + 31) * 4, 63 * 4);
     } else {
-        gDPSetTileSize(gMasterGfxPos++, 1,
+        gDPSetTileSize(gMainGfxPos++, 1,
             (temp_a1     ) * 4, 0,
             (temp_a1 + 31) * 4, 31 * 4);
     }
 
-    gSPDisplayList(gMasterGfxPos++, dlist);
-    gDPSetAlphaCompare(gMasterGfxPos++, G_AC_NONE);
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gSPDisplayList(gMainGfxPos++, dlist);
+    gDPSetAlphaCompare(gMainGfxPos++, G_AC_NONE);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }

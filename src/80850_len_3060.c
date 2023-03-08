@@ -702,7 +702,7 @@ void update_status_menu(void) {
             break;
     }
 
-    gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 12, 20, SCREEN_WIDTH - 12, SCREEN_HEIGHT - 20);
+    gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, 12, 20, SCREEN_WIDTH - 12, SCREEN_HEIGHT - 20);
     fp = uiStatus->drawPosX;
     s5 = uiStatus->drawPosY;
     draw_box(0, WINDOW_STYLE_5, fp,       s5, 0, 174, 35, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);

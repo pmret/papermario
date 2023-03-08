@@ -69,9 +69,9 @@ void appendGfx_interact_prompt(void) {
         guMtxCatF(sp38, sp78, sp78);
         guMtxF2L(sp78, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+        gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                   G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, &inspect_icon_gfx);
+        gSPDisplayList(gMainGfxPos++, &inspect_icon_gfx);
 
         sp20.raster  = inspect_icon_img;
         sp20.palette = inspect_icon_pal;
@@ -85,7 +85,7 @@ void appendGfx_interact_prompt(void) {
                     InspectIconPtr->brightness, InspectIconPtr->brightness, InspectIconPtr->brightness, 255, 0x448);
         fold_appendGfx_component(0, &sp20, 0, sp78);
 
-        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     }
 }
 

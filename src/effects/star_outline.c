@@ -206,9 +206,9 @@ void star_outline_appendGfx(void* effect) {
         unk_34 = 0;
     }
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
-    gSPDisplayList(gMasterGfxPos++, D_E0126BC8[0]);
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPDisplayList(gMainGfxPos++, D_E0126BC8[0]);
 
     if (unk_34 != 0) {
         shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, (f32) ((f64) data->unk_54 * 0.4), data->pos.x, data->pos.y, data->pos.z);
@@ -216,18 +216,18 @@ void star_outline_appendGfx(void* effect) {
         shim_guMtxCatF(sp60, sp20, sp20);
         shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
         if (data->unk_00 == 0) {
-            gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
+            gDPSetRenderMode(gMainGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
         } else {
-            gDPSetRenderMode(gMasterGfxPos++, G_RM_ZB_CLD_SURF, G_RM_ZB_CLD_SURF2);
+            gDPSetRenderMode(gMainGfxPos++, G_RM_ZB_CLD_SURF, G_RM_ZB_CLD_SURF2);
         }
 
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, unk_18, unk_1C, unk_20, unk_34 >> 1);
-        gDPSetEnvColor(gMasterGfxPos++, unk_28, unk_2C, unk_30, unk_34 >> 1);
-        gSPDisplayList(gMasterGfxPos++, D_E0126BC4[0]);
-        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, unk_18, unk_1C, unk_20, unk_34 >> 1);
+        gDPSetEnvColor(gMainGfxPos++, unk_28, unk_2C, unk_30, unk_34 >> 1);
+        gSPDisplayList(gMainGfxPos++, D_E0126BC4[0]);
+        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     }
 
     shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, data->unk_38 * 0.4, data->pos.x, data->pos.y, data->pos.z);
@@ -235,25 +235,25 @@ void star_outline_appendGfx(void* effect) {
     shim_guMtxCatF(sp60, sp20, sp20);
     shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     if (unk_34 != 0) {
         if (data->unk_00 == 0) {
-            gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
+            gDPSetRenderMode(gMainGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
         } else {
-            gDPSetRenderMode(gMasterGfxPos++, G_RM_ZB_CLD_SURF, G_RM_ZB_CLD_SURF2);
+            gDPSetRenderMode(gMainGfxPos++, G_RM_ZB_CLD_SURF, G_RM_ZB_CLD_SURF2);
         }
-        gSPDisplayList(gMasterGfxPos++, D_E0126BC4[0]);
+        gSPDisplayList(gMainGfxPos++, D_E0126BC4[0]);
     }
 
     if (data->unk_00 == 0) {
-        gDPSetRenderMode(gMasterGfxPos++, G_RM_AA_XLU_SURF, G_RM_AA_XLU_SURF2);
+        gDPSetRenderMode(gMainGfxPos++, G_RM_AA_XLU_SURF, G_RM_AA_XLU_SURF2);
     } else {
-        gDPSetRenderMode(gMasterGfxPos++, G_RM_AA_ZB_XLU_SURF, G_RM_AA_ZB_XLU_SURF2);
+        gDPSetRenderMode(gMainGfxPos++, G_RM_AA_ZB_XLU_SURF, G_RM_AA_ZB_XLU_SURF2);
     }
 
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, unk_18, unk_1C, unk_20, unk_24);
-    gDPSetEnvColor(gMasterGfxPos++, unk_28, unk_2C, unk_30, unk_24);
-    gSPDisplayList(gMasterGfxPos++, D_E0126BC0[0]);
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, unk_18, unk_1C, unk_20, unk_24);
+    gDPSetEnvColor(gMainGfxPos++, unk_28, unk_2C, unk_30, unk_24);
+    gSPDisplayList(gMainGfxPos++, D_E0126BC0[0]);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
