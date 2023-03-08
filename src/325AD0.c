@@ -52,7 +52,6 @@ s32 func_E0200044(s32 max, s32 idx) {
     return lookupVal % (max + 1);
 }
 
-
 #ifdef NON_EQUIVALENT
 void func_E02000AC(s32 arg0, s32 arg1) {
     s32 i, j;

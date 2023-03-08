@@ -1425,21 +1425,18 @@ s32 btl_submenu_moves_update(void) {
 
 const f32 padding3 = 0.0f;
 
-// needs a lot of work -- args should be (void* data, s32 x, s32 y)
-#ifdef NON_MATCHING
 void func_802A3C98(void* data, s32 x, s32 y) {
+    s32 var_t0;
+    s32 temp_f6;
+    s32 xPos, yPos;
+    s32 yRenderPos;
     s32 palette;
     s32 num;
+    s32 v0;
+    s32 a0;
+    s32 idx;
     s32 id;
     s32 i;
-
-    s32 var_t0;
-    s32 var_t0_4;
-    s32 temp_f6_2;
-    s32 moveOptX;
-    s32 moveOptY;
-    s32 t2;
-    s32 temp1;
 
     switch (battle_menu_moveState) {
         case -1:
@@ -1449,46 +1446,64 @@ void func_802A3C98(void* data, s32 x, s32 y) {
         case 30:
         case 40:
         case 41:
-            temp_f6_2 = ((-battle_menu_moveScrollLine * 13) - battle_menu_moveScrollOffset) * 0.5;
-            var_t0 = battle_menu_moveScrollOffset + temp_f6_2;
-            if (temp_f6_2 == 0) {
-                var_t0 = -battle_menu_moveScrollLine * 13;
+            yPos = -battle_menu_moveScrollLine * 13;
+            var_t0 = battle_menu_moveScrollOffset;
+            temp_f6 = (yPos - var_t0) * 0.5;
+            if (temp_f6 == 0) {
+                var_t0 = yPos;
+            } else {
+                var_t0 += temp_f6;
             }
             battle_menu_moveScrollOffset = var_t0;
-            t2 = D_802AD10E * 13;
 
-            moveOptY = y + (battle_menu_moveScrollOffset + 19);
-            moveOptX = x + 31;
-
-            temp1 = y + 18 + (t2 + 1);
-
+            xPos = x + 2;
+            yPos = y + 18;
+            var_t0 = yPos + 1 + (D_802AD10E * 13);
             gDPSetScissor(
                 gMasterGfxPos++, G_SC_NON_INTERLACE,
-                x + 2,
-                y + 18,
+                xPos,
+                yPos,
                 x + 153,
-                temp1
+                var_t0
             );
 
-            for (i = 0; i < BattleMenu_Moves_OptionCount; i++) {
-                if ((i >= battle_menu_moveScrollLine - 1) && (i <= battle_menu_moveScrollLine + D_802AD10E)) {
+            xPos = x + 31;
+            yPos = y + 19 + battle_menu_moveScrollOffset;
+
+            idx = 0;
+            for (i = 0; i < BattleMenu_Moves_OptionCount; i++, idx++) {
+                if (i >= battle_menu_moveScrollLine - 1 && battle_menu_moveScrollLine + D_802AD10E >= i) {
                     palette = BattleMenu_Moves_TextColor;
-                    if (BattleMenu_Moves_OptionEnabled[BattleMenu_Moves_OptionIndexMap[i]] <= 0) {
+
+                    if (BattleMenu_Moves_OptionEnabled[BattleMenu_Moves_OptionIndexMap[idx]] <= 0) {
                         palette = MSG_PAL_0B;
                     }
 
-                    if (battle_menu_moveOptionNames[BattleMenu_Moves_OptionIndexMap[i]] >= 0) {
-                        draw_msg(battle_menu_moveOptionNames[BattleMenu_Moves_OptionIndexMap[i]], moveOptX, moveOptY, BattleMenu_Moves_TextAlpha, palette, DRAW_MSG_STYLE_MENU);
+                    if (battle_menu_moveOptionNames[BattleMenu_Moves_OptionIndexMap[idx]] >= 0) {
+                        draw_msg(
+                            battle_menu_moveOptionNames[BattleMenu_Moves_OptionIndexMap[idx]],
+                            xPos, yPos, BattleMenu_Moves_TextAlpha, palette, 1
+                        );
                     }
 
-                    num = battle_menu_moveOptionDisplayCosts[BattleMenu_Moves_OptionIndexMap[i]] - battle_menu_moveOptionDisplayCostReductions[BattleMenu_Moves_OptionIndexMap[i]];
-                    if ((battle_menu_moveOptionDisplayCosts[BattleMenu_Moves_OptionIndexMap[i]] != 0) && (num <= 0)) {
+                    if (BattleMenu_Moves_OptionEnabled[BattleMenu_Moves_OptionIndexMap[idx]] <= 0) {
+                        a0 = battle_menu_moveOptionDisplayCostReductions[BattleMenu_Moves_OptionIndexMap[idx]];
+                        do {} while (0);
+                        v0 = battle_menu_moveOptionDisplayCosts[BattleMenu_Moves_OptionIndexMap[idx]];
+                    } else {
+                        a0 = battle_menu_moveOptionDisplayCostReductions[BattleMenu_Moves_OptionIndexMap[idx]];
+                        do {} while (0);
+                        v0 = battle_menu_moveOptionDisplayCosts[BattleMenu_Moves_OptionIndexMap[idx]];
+                    }
+                    num = v0 - a0;
+
+                    if (v0 != 0 && num <= 0) {
                         num = 1;
                     }
 
-                    if (!BattleMenu_UsingSpiritsSubmenu) {
+                    if (!BattleMenu_UsingSpiritsSubmenu ) {
                         if (i == battle_menu_moveCursorPos) {
-                            if (num == 0 || (BattleMenu_Moves_OptionEnabled[BattleMenu_Moves_OptionIndexMap[i]] <= 0)) {
+                            if (num == 0 || BattleMenu_Moves_OptionEnabled[BattleMenu_Moves_OptionIndexMap[idx]] <= 0) {
                                 status_menu_stop_blinking_fp();
                             } else {
                                 status_menu_start_blinking_fp();
@@ -1496,10 +1511,13 @@ void func_802A3C98(void* data, s32 x, s32 y) {
                         }
                     } else {
                         if (i == battle_menu_moveCursorPos) {
-                            if (num == 0 || (BattleMenu_Moves_OptionEnabled[BattleMenu_Moves_OptionIndexMap[i]] <= 0)) {
+                            if (num == 0 || BattleMenu_Moves_OptionEnabled[BattleMenu_Moves_OptionIndexMap[idx]] <= 0) {
                                 status_menu_stop_blinking_sp();
                             } else {
-                                status_menu_start_blinking_sp_bars(battle_menu_moveOptionDisplayCosts[BattleMenu_Moves_OptionIndexMap[i]]);
+                                a0 = battle_menu_moveOptionDisplayCosts[BattleMenu_Moves_OptionIndexMap[idx]];
+                                status_menu_start_blinking_sp_bars(
+                                    battle_menu_moveOptionDisplayCosts[BattleMenu_Moves_OptionIndexMap[idx]]
+                                );
                             }
                         }
                     }
@@ -1516,54 +1534,73 @@ void func_802A3C98(void* data, s32 x, s32 y) {
                             break;
                     }
 
-                    if (BattleMenu_Moves_OptionEnabled[BattleMenu_Moves_OptionIndexMap[i]] <= 0) {
+                    if (BattleMenu_Moves_OptionEnabled[BattleMenu_Moves_OptionIndexMap[idx]] <= 0) {
                         palette = MSG_PAL_0B;
                     }
 
-                    if (battle_menu_moveOptionDisplayCosts[BattleMenu_Moves_OptionIndexMap[i]] != 0) {
-                        id = BattleMenu_Moves_OptionCostUnitIDs[i];
+                    if (battle_menu_moveOptionDisplayCosts[BattleMenu_Moves_OptionIndexMap[idx]] != 0) {
+                        id = BattleMenu_Moves_OptionCostUnitIDs[idx];
+
                         if (!BattleMenu_UsingSpiritsSubmenu) {
-                            draw_number(num, moveOptX + 108, moveOptY, DRAW_NUMBER_CHARSET_THIN, palette, BattleMenu_Moves_TextAlpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
-                            if (BattleMenu_Moves_OptionEnabled[BattleMenu_Moves_OptionIndexMap[i]] <= 0) {
+                            draw_number(
+                                num, xPos + 108, yPos, DRAW_NUMBER_CHARSET_THIN, palette, BattleMenu_Moves_TextAlpha,
+                                DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT
+                            );
+                            if (BattleMenu_Moves_OptionEnabled[BattleMenu_Moves_OptionIndexMap[idx]] <= 0) {
                                 hud_element_set_script(id, &HES_NotEnoughFP);
                             }
-                            moveOptX += 116;
+                            yRenderPos = yPos + 7;
+                            hud_element_set_render_pos(id, xPos + 116, yRenderPos);
                         } else {
-                            draw_number(num, moveOptX + 93, moveOptY, DRAW_NUMBER_CHARSET_THIN, palette, BattleMenu_Moves_TextAlpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
-                            if (BattleMenu_Moves_OptionEnabled[BattleMenu_Moves_OptionIndexMap[i]] <= 0) {
+                            draw_number(
+                                num, xPos + 93, yPos, DRAW_NUMBER_CHARSET_THIN, palette, BattleMenu_Moves_TextAlpha,
+                                DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT
+                            );
+                            if (BattleMenu_Moves_OptionEnabled[BattleMenu_Moves_OptionIndexMap[idx]] <= 0) {
                                 hud_element_set_script(id, &HES_NotEnoughPOW);
                             }
-                            moveOptX += 102;
+                            yRenderPos = yPos + 7;
+                            hud_element_set_render_pos(id, xPos + 102, yRenderPos);
                         }
-                        hud_element_set_render_pos(id, moveOptX, moveOptY + 7);
                         hud_element_set_alpha(id, BattleMenu_Moves_TextAlpha);
                         hud_element_draw_without_clipping(id);
                     }
-                    moveOptY += 13;
                 }
+                yPos += 13;
             }
 
-            moveOptX = x + 24;
-            moveOptY = battle_menu_moveScrollOffset + y + 24;
-            for (i = 0; i < BattleMenu_Moves_OptionCount; i++) {
-                if (i >= (battle_menu_moveScrollLine - 1) && i <= (battle_menu_moveScrollLine + D_802AD10E)) {
-                    id = BattleMenu_Moves_OptionIDs[i];
-                    hud_element_set_render_pos(id, moveOptX, moveOptY);
+            xPos = x + 24;
+            yPos = battle_menu_moveScrollOffset + y + 24;
+
+            idx = 0;
+            for (i = 0; i < BattleMenu_Moves_OptionCount; i++, idx++) {
+                if (i < battle_menu_moveScrollLine - 1) {
+                    yPos += 13;
+                } else if (battle_menu_moveScrollLine + D_802AD10E < i) {
+                    yPos += 13;
+                } else {
+                    id = BattleMenu_Moves_OptionIDs[idx];
+                    hud_element_set_render_pos(id, xPos, yPos);
                     hud_element_set_alpha(id, BattleMenu_Moves_TextAlpha);
                     hud_element_draw_without_clipping(id);
+                    yPos += 13;
                 }
-                moveOptY += 13;
             }
 
-            temp_f6_2 =  (f64) ((battle_menu_moveCursorPos - battle_menu_moveScrollLine) * 13 - D_802AD112);
-            var_t0_4 = D_802AD112 + temp_f6_2;
-            if (temp_f6_2 == 0) {
-                var_t0_4 = (battle_menu_moveCursorPos - battle_menu_moveScrollLine) * 13;
+            yPos = (battle_menu_moveCursorPos - battle_menu_moveScrollLine) * 13;
+            var_t0 = D_802AD112;
+            temp_f6 = (yPos - D_802AD112) * 1.0;
+            xPos = x + 10;
+            if (temp_f6 == 0) {
+                var_t0 = yPos;
+            } else {
+                var_t0 += temp_f6;
             }
-            D_802AD112 = var_t0_4;
+            D_802AD112 = var_t0;
+            yPos =  y + 26 + D_802AD112;
 
             id = BattleMenu_Moves_CursorID;
-            hud_element_set_render_pos(id, x + 10, y + (var_t0_4 + 26));
+            hud_element_set_render_pos(id, xPos, yPos);
             hud_element_set_alpha(id, BattleMenu_Moves_TextAlpha);
             hud_element_draw_without_clipping(id);
 
@@ -1591,9 +1628,6 @@ void func_802A3C98(void* data, s32 x, s32 y) {
             break;
     }
 }
-#else
-INCLUDE_ASM(s32, "415D90", func_802A3C98);
-#endif
 
 void func_802A43DC(void* data, s32 x, s32 y) {
     s32 msgID;
