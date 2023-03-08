@@ -184,7 +184,7 @@ segments:
     - [0x8D0DD0, c, mac_06_1_main]
     - [0x8D1290, c, mac_06_2_whale]
     - [0x8D1C50, c, mac_06_3_npc]
-    
+
   - [0x8D5740, bin]
 
   - start: 0x1e937b8
