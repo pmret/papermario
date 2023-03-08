@@ -1542,14 +1542,20 @@ void func_802A3C98(void* data, s32 x, s32 y) {
                         id = BattleMenu_Moves_OptionCostUnitIDs[idx];
 
                         if (!BattleMenu_UsingSpiritsSubmenu) {
-                            draw_number(num, xPos + 108, yPos, 1, palette, BattleMenu_Moves_TextAlpha, 3);
+                            draw_number(
+                                num, xPos + 108, yPos, DRAW_NUMBER_CHARSET_THIN, palette, BattleMenu_Moves_TextAlpha,
+                                DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT
+                            );
                             if (BattleMenu_Moves_OptionEnabled[BattleMenu_Moves_OptionIndexMap[idx]] <= 0) {
                                 hud_element_set_script(id, &HES_NotEnoughFP);
                             }
                             yRenderPos = yPos + 7;
                             hud_element_set_render_pos(id, xPos + 116, yRenderPos);
                         } else {
-                            draw_number(num, xPos + 93, yPos, 1, palette, BattleMenu_Moves_TextAlpha, 3);
+                            draw_number(
+                                num, xPos + 93, yPos, DRAW_NUMBER_CHARSET_THIN, palette, BattleMenu_Moves_TextAlpha,
+                                DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT
+                            );
                             if (BattleMenu_Moves_OptionEnabled[BattleMenu_Moves_OptionIndexMap[idx]] <= 0) {
                                 hud_element_set_script(id, &HES_NotEnoughPOW);
                             }
