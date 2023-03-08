@@ -1425,19 +1425,18 @@ s32 btl_submenu_moves_update(void) {
 
 const f32 padding3 = 0.0f;
 
-// needs a lot of work -- args should be (void* data, s32 x, s32 y)
-#ifdef NON_MATCHING
 void func_802A3C98(void* data, s32 x, s32 y) {
     s32 var_t0;
     s32 temp_f6;
     s32 xPos, yPos;
     s32 yRenderPos;
+    s32 palette;
+    s32 num;
+    s32 v0;
+    s32 a0;
     s32 idx;
     s32 id;
     s32 i;
-    s32 palette;
-    s32 num;
-    s32 other;
 
     switch (battle_menu_moveState) {
         case -1:
@@ -1473,8 +1472,6 @@ void func_802A3C98(void* data, s32 x, s32 y) {
 
             idx = 0;
             for (i = 0; i < BattleMenu_Moves_OptionCount; i++, idx++) {
-                s16 some = 13;
-
                 if (i >= battle_menu_moveScrollLine - 1 && battle_menu_moveScrollLine + D_802AD10E >= i) {
                     palette = BattleMenu_Moves_TextColor;
 
@@ -1489,15 +1486,22 @@ void func_802A3C98(void* data, s32 x, s32 y) {
                         );
                     }
 
-                    var_t0 = battle_menu_moveOptionDisplayCostReductions[BattleMenu_Moves_OptionIndexMap[idx]];
-                    other = battle_menu_moveOptionDisplayCosts[BattleMenu_Moves_OptionIndexMap[idx]];
-                    num = other - var_t0;
+                    if (BattleMenu_Moves_OptionEnabled[BattleMenu_Moves_OptionIndexMap[idx]] <= 0) {
+                        a0 = battle_menu_moveOptionDisplayCostReductions[BattleMenu_Moves_OptionIndexMap[idx]];
+                        do {} while (0);
+                        v0 = battle_menu_moveOptionDisplayCosts[BattleMenu_Moves_OptionIndexMap[idx]];
+                    } else {
+                        a0 = battle_menu_moveOptionDisplayCostReductions[BattleMenu_Moves_OptionIndexMap[idx]];
+                        do {} while (0);
+                        v0 = battle_menu_moveOptionDisplayCosts[BattleMenu_Moves_OptionIndexMap[idx]];
+                    }
+                    num = v0 - a0;
 
-                    if (other != 0 && num <= 0) {
+                    if (v0 != 0 && num <= 0) {
                         num = 1;
                     }
 
-                    if (BattleMenu_UsingSpiritsSubmenu == 0) {
+                    if (!BattleMenu_UsingSpiritsSubmenu ) {
                         if (i == battle_menu_moveCursorPos) {
                             if (num == 0 || BattleMenu_Moves_OptionEnabled[BattleMenu_Moves_OptionIndexMap[idx]] <= 0) {
                                 status_menu_stop_blinking_fp();
@@ -1510,6 +1514,7 @@ void func_802A3C98(void* data, s32 x, s32 y) {
                             if (num == 0 || BattleMenu_Moves_OptionEnabled[BattleMenu_Moves_OptionIndexMap[idx]] <= 0) {
                                 status_menu_stop_blinking_sp();
                             } else {
+                                a0 = battle_menu_moveOptionDisplayCosts[BattleMenu_Moves_OptionIndexMap[idx]];
                                 status_menu_start_blinking_sp_bars(
                                     battle_menu_moveOptionDisplayCosts[BattleMenu_Moves_OptionIndexMap[idx]]
                                 );
@@ -1536,17 +1541,17 @@ void func_802A3C98(void* data, s32 x, s32 y) {
                     if (battle_menu_moveOptionDisplayCosts[BattleMenu_Moves_OptionIndexMap[idx]] != 0) {
                         id = BattleMenu_Moves_OptionCostUnitIDs[idx];
 
-                        if (BattleMenu_UsingSpiritsSubmenu == 0) {
+                        if (!BattleMenu_UsingSpiritsSubmenu) {
                             draw_number(num, xPos + 108, yPos, 1, palette, BattleMenu_Moves_TextAlpha, 3);
                             if (BattleMenu_Moves_OptionEnabled[BattleMenu_Moves_OptionIndexMap[idx]] <= 0) {
-                                hud_element_set_script(id, HES_NotEnoughFP);
+                                hud_element_set_script(id, &HES_NotEnoughFP);
                             }
                             yRenderPos = yPos + 7;
                             hud_element_set_render_pos(id, xPos + 116, yRenderPos);
                         } else {
                             draw_number(num, xPos + 93, yPos, 1, palette, BattleMenu_Moves_TextAlpha, 3);
                             if (BattleMenu_Moves_OptionEnabled[BattleMenu_Moves_OptionIndexMap[idx]] <= 0) {
-                                hud_element_set_script(id, HES_NotEnoughPOW);
+                                hud_element_set_script(id, &HES_NotEnoughPOW);
                             }
                             yRenderPos = yPos + 7;
                             hud_element_set_render_pos(id, xPos + 102, yRenderPos);
@@ -1555,7 +1560,7 @@ void func_802A3C98(void* data, s32 x, s32 y) {
                         hud_element_draw_without_clipping(id);
                     }
                 }
-                yPos += some;
+                yPos += 13;
             }
 
             xPos = x + 24;
@@ -1608,7 +1613,7 @@ void func_802A3C98(void* data, s32 x, s32 y) {
             }
 
             if (battle_menu_moveState == -1) {
-                if (BattleMenu_UsingSpiritsSubmenu == 0) {
+                if (!BattleMenu_UsingSpiritsSubmenu) {
                     status_menu_stop_blinking_fp();
                 } else {
                     status_menu_stop_blinking_sp();
@@ -1617,9 +1622,6 @@ void func_802A3C98(void* data, s32 x, s32 y) {
             break;
     }
 }
-#else
-INCLUDE_ASM(s32, "415D90", func_802A3C98);
-#endif
 
 void func_802A43DC(void* data, s32 x, s32 y) {
     s32 msgID;
