@@ -10,7 +10,7 @@ void pause_badges_cleanup(MenuPanel* panel);
 
 static s16 gPauseBadgesItemIds[128];
 static s32 gPauseBadgesCurrentPage;
-#if !VERSION_CN
+#if !VERSION_IQUE
 static s32 D_80270284;
 #endif
 static PauseItemPage gPauseBadgesPages[20];
@@ -25,7 +25,7 @@ static s32 gPauseBadgesTargetScrollIndex;
 static s32 gPauseBadgesLevel;
 static s32 gPauseBadgesCurrentTab;
 static s32 gPauseBadgesShowNotEnoughBP;
-#if !VERSION_CN
+#if !VERSION_IQUE
 static s32 D_802703A4;
 #endif
 static s32 gPauseBadgesIconIDs[22];
@@ -35,7 +35,7 @@ static s32 gPauseBadgesIconIDs[22];
 // Invalid badge ID filled in unused slots of gPauseBadgesItemIds
 #define BADGE_INVALID 0x7FFF
 
-#if VERSION_CN
+#if VERSION_IQUE
 #define OFFSET_1_X 47
 #define OFFSET_1_Y 82
 #define OFFSET_2_X 10

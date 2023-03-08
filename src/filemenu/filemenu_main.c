@@ -27,7 +27,7 @@ extern HudScript HES_OptionStereoOff;
 
 BSS u8 filemenu_filename[8];
 
-#if VERSION_CN
+#if VERSION_IQUE
 #define OFFSET_WIDTH        5
 #define DELETE_OFFSET_X     9
 #define CENTER_CANCEL_X     30

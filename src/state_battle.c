@@ -57,7 +57,7 @@ void state_step_battle(void) {
             gGameStatusPtr->isBattle = TRUE;
             backup_map_collision_data();
 
-#if VERSION_CN
+#if VERSION_IQUE
             battle_heap_create();
 #else
             load_obfuscation_shims();

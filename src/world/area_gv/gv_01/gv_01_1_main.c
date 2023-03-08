@@ -90,7 +90,7 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(TranslateGroup, MODEL_e2, 0, 200, 0)
     EVT_CALL(TranslateGroup, MODEL_r,  0, 200, 0)
     EVT_THREAD
-#if VERSION_CN
+#if VERSION_IQUE
         EVT_WAIT(6)
         EVT_SET(LVar0, MODEL_g)
         EVT_EXEC(N(EVS_DropLetter))

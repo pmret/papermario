@@ -52,13 +52,13 @@ void boot_main(void* data) {
     crash_screen_init();
 #endif
 
-#if !VERSION_CN
+#if !VERSION_IQUE
     is_debug_init();
 #endif
     nuGfxInit();
     gGameStatusPtr->contBitPattern = nuContInit();
 
-#if VERSION_CN
+#if VERSION_IQUE
     create_audio_system();
     load_engine_data();
 #else
@@ -181,7 +181,7 @@ void gfx_task_main(void) {
     gCurrentDisplayContextIndex ^= 1;
 }
 
-#if VERSION_CN
+#if VERSION_IQUE
 NOP_FIX
 #endif
 

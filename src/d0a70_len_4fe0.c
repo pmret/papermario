@@ -2,7 +2,7 @@
 #include "ld_addrs.h"
 #include "sprite.h"
 
-#if VERSION_CN
+#if VERSION_IQUE
 // TODO: remove if section is split in iQue release
 extern Addr fold_gfx_data_ROM_START;
 #endif

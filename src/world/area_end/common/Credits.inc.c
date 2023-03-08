@@ -7,7 +7,7 @@ void dma_load_msg(u32 msgID, void* dest);
 
 BSS CreditsData N(CreditsData);
 BSS CreditsData* N(CreditsDataPtr);
-#if !VERSION_CN
+#if !VERSION_IQUE
 BSS s32 N(BSS_PAD_1)[2];
 #endif
 BSS u8 N(CreditsMessageBuffers)[23][256];

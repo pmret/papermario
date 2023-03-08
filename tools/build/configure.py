@@ -10,7 +10,7 @@ import ninja_syntax
 from glob import glob
 
 # Configuration:
-VERSIONS = ["us", "jp", "cn"]
+VERSIONS = ["us", "jp", "ique"]
 DO_SHA1_CHECK = True
 
 # Paths:
@@ -418,7 +418,7 @@ class Configure:
                     cflags = cflags.replace("gcc_272", "")
 
                 encoding = "SHIFT-JIS"
-                if version == "cn":
+                if version == "ique":
                     encoding = "EUC-JP"
 
                 # Dead cod
@@ -715,7 +715,7 @@ class Configure:
             variables={ "version": self.version, "mapfile": str(self.map_path()) },
         )
 
-        if self.version == "cn":
+        if self.version == "ique":
             ninja.build(
                 str(self.rom_path()),
                 "z64_ique",

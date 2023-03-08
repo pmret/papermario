@@ -7,7 +7,7 @@ void pause_stats_cleanup(MenuPanel* panel);
 
 static s32 gPauseStatsIconIDs[12];
 
-#if VERSION_CN
+#if VERSION_IQUE
 #define NUMBER_OFFSET_Y 2
 #define ROW_1_Y 48
 #define ROW_2_Y 49
@@ -190,7 +190,7 @@ void pause_stats_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
     level = gPlayerData.level;
     draw_box(4, &gPauseWS_10, baseX + 7, baseY + 12, 0, level >= 10 ? 0x79 : 0x71, 17, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
 
-#if !VERSION_CN
+#if !VERSION_IQUE
     hud_element_set_render_pos(gPauseStatsIconIDs[0], baseX + 61, baseY + 21);
     hud_element_draw_without_clipping(gPauseStatsIconIDs[0]);
 #endif
