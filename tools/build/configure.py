@@ -333,6 +333,7 @@ class Configure:
     def write_ninja(self, ninja: ninja_syntax.Writer, skip_outputs: Set[str], non_matching: bool, modern_gcc: bool):
         import segtypes
         import segtypes.common.data
+        import segtypes.common.asm
         import segtypes.n64.yay0
 
         assert self.linker_entries is not None
