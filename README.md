@@ -3,8 +3,8 @@
 [![Build Status][jenkins-badge]][jenkins]
 [![Progress (US)][progress-us-badge]][progress-us]
 [![Progress (JP)][progress-jp-badge]][progress-jp]
-[![Progress (JP)][progress-pal-badge]][progress-pal]
-[![Progress (JP)][progress-ique-badge]][progress-ique]
+[![Progress (PAL)][progress-pal-badge]][progress-pal]
+[![Progress (iQue)][progress-ique-badge]][progress-ique]
 [![Discord Channel][discord-badge]][discord]
 
 [jenkins]: https://jenkins.deco.mp/job/papermario/job/master
