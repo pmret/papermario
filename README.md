@@ -3,6 +3,8 @@
 [![Build Status][jenkins-badge]][jenkins]
 [![Progress (US)][progress-us-badge]][progress-us]
 [![Progress (JP)][progress-jp-badge]][progress-jp]
+[![Progress (JP)][progress-pal-badge]][progress-pal]
+[![Progress (JP)][progress-ique-badge]][progress-ique]
 [![Discord Channel][discord-badge]][discord]
 
 [jenkins]: https://jenkins.deco.mp/job/papermario/job/master
@@ -13,6 +15,12 @@
 
 [progress-jp]: https://papermar.io/progress-jp
 [progress-jp-badge]: https://img.shields.io/endpoint?url=https://papermar.io/reports/progress_jp_shield.json
+
+[progress-pal]: https://papermar.io/progress-pal
+[progress-pal-badge]: https://img.shields.io/endpoint?url=https://papermar.io/reports/progress_pal_shield.json
+
+[progress-ique]: https://papermar.io/progress-ique
+[progress-ique-badge]: https://img.shields.io/endpoint?url=https://papermar.io/reports/progress_ique_shield.json
 
 [discord]: https://discord.gg/urUm3VG
 [discord-badge]: https://img.shields.io/discord/279322074412089344?color=%237289DA&logo=discord&logoColor=ffffff
