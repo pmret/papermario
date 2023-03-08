@@ -6,7 +6,7 @@ void N(setup_gfx_fountain_water)(void) {
     f32 temp_f0 = ((sin_rad(N(FountainPumpPhase) * (1 / 32.0f)) + 1.0f) * 0.25f) + 0.75;
 
     guScale(&gDisplayContext->matrixStack[gMatrixListPos], (temp_f0 * 0.3) + 0.5, temp_f0, (temp_f0 * 0.3) + 0.5);
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
               G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     N(FountainPumpPhase)++;
 }
@@ -16,7 +16,7 @@ void N(setup_gfx_fountain_stars)(void) {
     f64 t2 = sin_rad(N(FountainPumpPhase) * 0.25f) * 2.5;
 
     guTranslate(&gDisplayContext->matrixStack[gMatrixListPos], 0.0f, t1 + t2, 0.0f);
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
               G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 }
 

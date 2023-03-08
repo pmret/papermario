@@ -181,9 +181,9 @@ void spiky_white_aura_appendGfx(void* effect) {
     Matrix4f sp58;
     s32 i;
 
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
-    gSPDisplayList(gMasterGfxPos++, D_09000440_34EBB0);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 255, part->unk_24);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPDisplayList(gMainGfxPos++, D_09000440_34EBB0);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 255, part->unk_24);
 
     for (i = 0; i < ((EffectInstance*)effect)->numParts; i++, part++) {
         shim_guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
@@ -195,9 +195,9 @@ void spiky_white_aura_appendGfx(void* effect) {
         shim_guMtxCatF(sp58, sp18, sp18);
         shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-        gDPPipeSync(gMasterGfxPos++);
-        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, D_090004E8_34EC58);
-        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gDPPipeSync(gMainGfxPos++);
+        gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+        gSPDisplayList(gMainGfxPos++, D_090004E8_34EC58);
+        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     }
 }

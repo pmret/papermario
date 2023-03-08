@@ -127,7 +127,7 @@ void filemenu_draw_rect(s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileDescriptor, 
     if (ulx >= 1280 || uly >= 960 || lrx >= 2688 || lry >= 2688) {
         return;
     }
-    gSPScisTextureRectangle(gMasterGfxPos++, ulx, uly, lrx, lry, tileDescriptor, uls, ult, dsdx, dtdy);
+    gSPScisTextureRectangle(gMainGfxPos++, ulx, uly, lrx, lry, tileDescriptor, uls, ult, dsdx, dtdy);
 }
 
 void filemenu_set_selected(MenuPanel* menu, s32 col, s32 row) {
@@ -664,11 +664,11 @@ void filemenu_update_show_name_confirm(
     s32 updateCounter = window->updateCounter;
     u32 counter;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
-    gDPSetCombineMode(gMasterGfxPos++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
-    gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, 140);
+    gDPPipeSync(gMainGfxPos++);
+    gDPSetCycleType(gMainGfxPos++, G_CYC_1CYCLE);
+    gDPSetCombineMode(gMainGfxPos++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
+    gDPSetRenderMode(gMainGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, 140);
 
     if (updateCounter < 10) {
         s32 x = updateCounter * 16;
@@ -704,11 +704,11 @@ void filemenu_update_hidden_name_confirm(
     s32 updateCounter = window->updateCounter;
 
     if (updateCounter < ARRAY_COUNT(D_80249D48)) {
-        gDPPipeSync(gMasterGfxPos++);
-        gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
-        gDPSetCombineMode(gMasterGfxPos++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
-        gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, 140 - updateCounter * 14);
+        gDPPipeSync(gMainGfxPos++);
+        gDPSetCycleType(gMainGfxPos++, G_CYC_1CYCLE);
+        gDPSetCombineMode(gMainGfxPos++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
+        gDPSetRenderMode(gMainGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, 140 - updateCounter * 14);
         filemenu_draw_rect(0, 0, 1280, 960, 0, 0, 0, 0, 0);
         *posY -= D_80249D48[updateCounter];
     } else {
@@ -784,16 +784,16 @@ void filemenu_draw_contents_copy_arrow(MenuPanel* menu, s32 baseX, s32 baseY, s3
 
             temp_f28 = -atan2(startX, startZ, endX, endZ) - 90.0f;
 
-            gSPViewport(gMasterGfxPos++, &D_80249D60);
+            gSPViewport(gMainGfxPos++, &D_80249D60);
 
             guOrthoF(sp20, 0.0f, SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f, -100.0f, 100.0f, 1.0f);
             guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+            gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                       G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-            gSPDisplayList(gMasterGfxPos++, filemenu_dl_copyarrow);
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, 128);
-            gDPSetEnvColor(gMasterGfxPos++, 0, 0, 0, 0);
+            gSPDisplayList(gMainGfxPos++, filemenu_dl_copyarrow);
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, 128);
+            gDPSetEnvColor(gMainGfxPos++, 0, 0, 0, 0);
 
             guTranslateF(sp20, startX + 4.0f, startZ + 4.0f, 0.0f);
             guScaleF(sp60, -1.0f, 1.0f, 1.0f);
@@ -802,23 +802,23 @@ void filemenu_draw_contents_copy_arrow(MenuPanel* menu, s32 baseX, s32 baseY, s3
             guMtxCatF(sp60, sp20, sp20);
             guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+            gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                       G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-            gSPDisplayList(gMasterGfxPos++, D_8024B6F0);
-            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+            gSPDisplayList(gMainGfxPos++, D_8024B6F0);
+            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 
             guTranslateF(sp60, D_80249D70[gGameStatusPtr->frameCounter % ARRAY_COUNT(D_80249D70)], 0.0f, 0.0f);
             guMtxCatF(sp60, sp20, sp20);
             guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+            gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                       G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-            gDPSetTileSize(gMasterGfxPos++, 1, (gGameStatusPtr->frameCounter * 8) % 512, 0,
+            gDPSetTileSize(gMainGfxPos++, 1, (gGameStatusPtr->frameCounter * 8) % 512, 0,
                                                ((gGameStatusPtr->frameCounter * 8) % 512) + 60, 0);
-            gSPDisplayList(gMasterGfxPos++, D_8024B708);
-            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 230, 230, 230, 255);
-            gDPSetEnvColor(gMasterGfxPos++, 232, 40, 160, 0);
+            gSPDisplayList(gMainGfxPos++, D_8024B708);
+            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, 230, 230, 230, 255);
+            gDPSetEnvColor(gMainGfxPos++, 232, 40, 160, 0);
 
             guTranslateF(sp20, startX, startZ, 0.0f);
             guScaleF(sp60, -1.0f, 1.0f, 1.0f);
@@ -827,21 +827,21 @@ void filemenu_draw_contents_copy_arrow(MenuPanel* menu, s32 baseX, s32 baseY, s3
             guMtxCatF(sp60, sp20, sp20);
             guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+            gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                       G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-            gSPDisplayList(gMasterGfxPos++, D_8024B6F0);
-            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+            gSPDisplayList(gMainGfxPos++, D_8024B6F0);
+            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 
             guTranslateF(sp60, D_80249D70[(gGameStatusPtr->frameCounter % ARRAY_COUNT(D_80249D70))], 0.0f, 0.0f);
             guMtxCatF(sp60, sp20, sp20);
             guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+            gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                       G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-            gDPSetTileSize(gMasterGfxPos++, 1, (gGameStatusPtr->frameCounter * 8) % 512, 0,
+            gDPSetTileSize(gMainGfxPos++, 1, (gGameStatusPtr->frameCounter * 8) % 512, 0,
                                                ((gGameStatusPtr->frameCounter * 8) % 512) + 60, 0);
-            gSPDisplayList(gMasterGfxPos++, D_8024B708);
-            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+            gSPDisplayList(gMainGfxPos++, D_8024B708);
+            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
         }
     }
 }

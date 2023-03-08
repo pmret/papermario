@@ -140,10 +140,10 @@ void music_note_appendGfx(void* data) {
     rgbOffset = (colorIdx * 3) % ARRAY_COUNT(D_E004C67C);
     rgbOffset = (colorIdx * 3) % ARRAY_COUNT(D_E004C67C);
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
-    gSPDisplayList(gMasterGfxPos++, D_09000FC0_35B5A0);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0,
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPDisplayList(gMainGfxPos++, D_09000FC0_35B5A0);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0,
         D_E004C67C[rgbOffset], D_E004C67C[rgbOffset + 1], D_E004C67C[rgbOffset + 2], fxData->unk_14
     );
     shim_guTranslateF(sp18, fxData->pos.x, fxData->pos.y, fxData->pos.z);
@@ -152,8 +152,8 @@ void music_note_appendGfx(void* data) {
     shim_guScaleF(sp58, fxData->unk_10, fxData->unk_10, 0.0f);
     shim_guMtxCatF(sp58, sp18, sp18);
     shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gSPDisplayList(gMasterGfxPos++, D_E004C660[dlistIdx]);
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-    gDPPipeSync(gMasterGfxPos++);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gSPDisplayList(gMainGfxPos++, D_E004C660[dlistIdx]);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+    gDPPipeSync(gMainGfxPos++);
 }

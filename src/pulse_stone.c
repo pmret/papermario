@@ -92,9 +92,9 @@ void appendGfx_pulse_stone_icon(void) {
         guMtxCatF(sp18, sp58, sp58);
         guMtxF2L(sp58, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+        gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                     G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, pulse_stone_icon_gfx);
+        gSPDisplayList(gMainGfxPos++, pulse_stone_icon_gfx);
 
         dx = abs((gGameStatusPtr->mapID % 7) - 2);
         dy = gGameStatusPtr->mapID / 7;
@@ -145,7 +145,7 @@ void appendGfx_pulse_stone_icon(void) {
         part.yOffset = 46;
         part.opacity = 255;
         fold_appendGfx_component(0, &part, 0, sp58);
-        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     }
 }
 

@@ -28,7 +28,7 @@ BSS u16 D_802BCE34;
 void entity_SpinningFlower_setupGfx(s32 entityIndex) {
     Entity* entity = get_entity_by_index(entityIndex);
     SpinningFlowerData* data = entity->dataBuf.spinningFlower;
-    Gfx* gfxPos = gMasterGfxPos;
+    Gfx* gfxPos = gMainGfxPos;
     Matrix4f sp18;
     Matrix4f sp58;
     Matrix4f sp98;
@@ -47,7 +47,7 @@ void entity_SpinningFlower_setupGfx(s32 entityIndex) {
     gfx = ENTITY_ADDR(entity, Gfx*, D_0A000D18_E9D618);
     gSPDisplayList(gfxPos++, gfx);
     gSPPopMatrix(gfxPos++, G_MTX_MODELVIEW);
-    gMasterGfxPos = gfxPos;
+    gMainGfxPos = gfxPos;
 }
 
 void func_802BB000_E2D930(Entity* entity) {
@@ -149,7 +149,7 @@ void func_802BB34C_E2DC7C(void) {
 void entity_PinkFlowerLight_setupGfx(s32 entityIndex) {
     Entity* entity = get_entity_by_index(entityIndex);
     PinkFlowerData* data = entity->dataBuf.pinkFlower;
-    Gfx* gfxPos = gMasterGfxPos;
+    Gfx* gfxPos = gMainGfxPos;
     Matrix4f sp18;
     Matrix4f sp58;
     f32 sinAngle, cosAngle;
@@ -174,7 +174,7 @@ void entity_PinkFlowerLight_setupGfx(s32 entityIndex) {
     gSPMatrix(gfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(gfxPos++, D_0A0013B8_E9C8B8);
     gSPPopMatrix(gfxPos++, G_MTX_MODELVIEW);
-    gMasterGfxPos = gfxPos;
+    gMainGfxPos = gfxPos;
 }
 
 void entity_PinkFlower_idle(Entity* entity) {

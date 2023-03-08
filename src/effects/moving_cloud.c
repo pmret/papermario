@@ -183,19 +183,19 @@ void moving_cloud_appendGfx(void* effect) {
     Matrix4f sp10;
     Matrix4f sp50;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     shim_guTranslateF(sp10, data->unk_04, data->unk_08, data->unk_0C);
     shim_guScaleF(sp50, data->unk_44, data->unk_44, data->unk_44);
     shim_guMtxCatF(sp50, sp10, sp10);
     shim_guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPMatrix(gMasterGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->unk_24, data->unk_28, data->unk_2C, unk_30);
-    gDPSetEnvColor(gMasterGfxPos++, data->unk_34, data->unk_38, data->unk_3C, data->unk_40);
-    gSPDisplayList(gMasterGfxPos++, D_E00E8634[0]);
-    gSPDisplayList(gMasterGfxPos++, D_E00E8630[0]);
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, data->unk_24, data->unk_28, data->unk_2C, unk_30);
+    gDPSetEnvColor(gMainGfxPos++, data->unk_34, data->unk_38, data->unk_3C, data->unk_40);
+    gSPDisplayList(gMainGfxPos++, D_E00E8634[0]);
+    gSPDisplayList(gMainGfxPos++, D_E00E8630[0]);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }

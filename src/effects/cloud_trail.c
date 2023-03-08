@@ -120,9 +120,9 @@ void cloud_trail_appendGfx(void* effect) {
     Matrix4f sp60;
     s32 i;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->graphics->data));
-    gSPDisplayList(gMasterGfxPos++, D_090000E0_32ED30);
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->graphics->data));
+    gSPDisplayList(gMainGfxPos++, D_090000E0_32ED30);
 
     for (i = 0; i < effectTemp->numParts; i++, part++) {
         if (part->alive) {
@@ -134,12 +134,12 @@ void cloud_trail_appendGfx(void* effect) {
             shim_guMtxCatF(sp60, sp20, sp20);
             shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 112, 96, 24, part->alpha);
-            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, 112, 96, 24, part->alpha);
+            gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                         G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-            gSPDisplayList(gMasterGfxPos++, D_090001B8_32EE08);
-            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+            gSPDisplayList(gMainGfxPos++, D_090001B8_32EE08);
+            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
         }
     }
-    gDPPipeSync(gMasterGfxPos++);
+    gDPPipeSync(gMainGfxPos++);
 }

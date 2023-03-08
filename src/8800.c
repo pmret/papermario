@@ -115,12 +115,12 @@ void render_frame(s32 flag) {
                 s32 lrx;
                 s32 lry;
 
-                gSPViewport(gMasterGfxPos++, &camera->vp);
-                gSPClearGeometryMode(gMasterGfxPos++, G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN |
+                gSPViewport(gMainGfxPos++, &camera->vp);
+                gSPClearGeometryMode(gMainGfxPos++, G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN |
                                      G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH);
-                gSPTexture(gMasterGfxPos++, 0, 0, 0, G_TX_RENDERTILE, G_OFF);
-                gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
-                gDPPipelineMode(gMasterGfxPos++, G_PM_NPRIMITIVE);
+                gSPTexture(gMainGfxPos++, 0, 0, 0, G_TX_RENDERTILE, G_OFF);
+                gDPSetCycleType(gMainGfxPos++, G_CYC_1CYCLE);
+                gDPPipelineMode(gMainGfxPos++, G_PM_NPRIMITIVE);
 
                 ulx = camera->viewportStartX;
                 uly = camera->viewportStartY;
@@ -153,29 +153,29 @@ void render_frame(s32 flag) {
                     lry = SCREEN_HEIGHT;
                 }
 
-                gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, ulx, uly, lrx, lry);
-                gDPSetTextureLOD(gMasterGfxPos++, G_TL_TILE);
-                gDPSetTextureLUT(gMasterGfxPos++, G_TT_NONE);
-                gDPSetTextureDetail(gMasterGfxPos++, G_TD_CLAMP);
-                gDPSetTexturePersp(gMasterGfxPos++, G_TP_PERSP);
-                gDPSetTextureFilter(gMasterGfxPos++, G_TF_BILERP);
-                gDPSetTextureConvert(gMasterGfxPos++, G_TC_FILT);
-                gDPSetCombineMode(gMasterGfxPos++, G_CC_SHADE, G_CC_SHADE);
-                gDPSetCombineKey(gMasterGfxPos++, G_CK_NONE);
-                gDPSetAlphaCompare(gMasterGfxPos++, G_AC_NONE);
-                gDPSetRenderMode(gMasterGfxPos++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
-                gDPSetColorDither(gMasterGfxPos++, G_CD_DISABLE);
-                gSPClipRatio(gMasterGfxPos++, FRUSTRATIO_2);
-                gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
+                gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, ulx, uly, lrx, lry);
+                gDPSetTextureLOD(gMainGfxPos++, G_TL_TILE);
+                gDPSetTextureLUT(gMainGfxPos++, G_TT_NONE);
+                gDPSetTextureDetail(gMainGfxPos++, G_TD_CLAMP);
+                gDPSetTexturePersp(gMainGfxPos++, G_TP_PERSP);
+                gDPSetTextureFilter(gMainGfxPos++, G_TF_BILERP);
+                gDPSetTextureConvert(gMainGfxPos++, G_TC_FILT);
+                gDPSetCombineMode(gMainGfxPos++, G_CC_SHADE, G_CC_SHADE);
+                gDPSetCombineKey(gMainGfxPos++, G_CK_NONE);
+                gDPSetAlphaCompare(gMainGfxPos++, G_AC_NONE);
+                gDPSetRenderMode(gMainGfxPos++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
+                gDPSetColorDither(gMainGfxPos++, G_CD_DISABLE);
+                gSPClipRatio(gMainGfxPos++, FRUSTRATIO_2);
+                gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
                                  osVirtualToPhysical(nuGfxCfb_ptr));
-                gDPPipeSync(gMasterGfxPos++);
+                gDPPipeSync(gMainGfxPos++);
 
                 if (!(camera->flags & CAMERA_FLAG_ORTHO)) {
-                    gSPPerspNormalize(gMasterGfxPos++, camera->perspNorm);
+                    gSPPerspNormalize(gMainGfxPos++, camera->perspNorm);
                 }
 
                 guMtxF2L(camera->perspectiveMatrix, &gDisplayContext->camPerspMatrix[gCurrentCamID]);
-                gSPMatrix(gMasterGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCamID], G_MTX_NOPUSH | G_MTX_LOAD |
+                gSPMatrix(gMainGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCamID], G_MTX_NOPUSH | G_MTX_LOAD |
                           G_MTX_PROJECTION);
             }
 
@@ -203,7 +203,7 @@ void render_frame(s32 flag) {
                     guOrthoF(camera->perspectiveMatrix, 0.0f, SCREEN_WIDTH, -SCREEN_HEIGHT, 0.0f, -1000.0f, 1000.0f,
                              1.0f);
                     guMtxF2L(camera->perspectiveMatrix, &gDisplayContext->camPerspMatrix[gCurrentCamID]);
-                    gSPMatrix(gMasterGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCamID], G_MTX_NOPUSH |
+                    gSPMatrix(gMainGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCamID], G_MTX_NOPUSH |
                               G_MTX_LOAD | G_MTX_PROJECTION);
                     render_hud_elements_world();
                     render_item_entities();
@@ -217,10 +217,10 @@ void render_frame(s32 flag) {
                 camera->fpDoPostRender(camera);
             }
 
-            gDPPipeSync(gMasterGfxPos++);
-            gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
+            gDPPipeSync(gMainGfxPos++);
+            gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
                              osVirtualToPhysical(nuGfxCfb_ptr));
-            gDPPipeSync(gMasterGfxPos++);
+            gDPPipeSync(gMainGfxPos++);
         }
     }
 }

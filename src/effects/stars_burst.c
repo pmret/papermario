@@ -137,9 +137,9 @@ void stars_burst_appendGfx(void* effect) {
     s32 baseIdx;
     s32 i;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
-    gSPDisplayList(gMasterGfxPos++, D_090004C0_343500);
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPDisplayList(gMainGfxPos++, D_090004C0_343500);
 
     unk_2C = part->unk_2C;
 
@@ -152,7 +152,7 @@ void stars_burst_appendGfx(void* effect) {
         s32 gIdx = baseIdx + 1 + i * 3;
         s32 bIdx = baseIdx + 2 + i * 3;
 
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, D_E0042780[rIdx % 36], D_E0042780[gIdx % 36], D_E0042780[bIdx % 36], unk_2C);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, D_E0042780[rIdx % 36], D_E0042780[gIdx % 36], D_E0042780[bIdx % 36], unk_2C);
 
         shim_guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
         shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
@@ -161,8 +161,8 @@ void stars_burst_appendGfx(void* effect) {
         shim_guMtxCatF(sp58, sp18, sp18);
         shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, dlist);
-        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+        gSPDisplayList(gMainGfxPos++, dlist);
+        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     }
 }

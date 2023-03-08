@@ -61,11 +61,11 @@ void N(appendGfx_records_impl)(GameRecords* records, s32 alpha) {
     s32 width;
 
     if (alpha > 0) {
-        gSPDisplayList(gMasterGfxPos++, N(records_screen_gfx));
-        gDPPipeSync(gMasterGfxPos++);
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 16, 120, 24, alpha * 0.65);
-        gDPFillRectangle(gMasterGfxPos++, 33, 43, 287, 192);
-        gDPPipeSync(gMasterGfxPos++);
+        gSPDisplayList(gMainGfxPos++, N(records_screen_gfx));
+        gDPPipeSync(gMainGfxPos++);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, 16, 120, 24, alpha * 0.65);
+        gDPFillRectangle(gMainGfxPos++, 33, 43, 287, 192);
+        gDPPipeSync(gMainGfxPos++);
 
         msg_draw_frame(30, 40, 260, 155, MSG_STYLE_INSPECT, MSG_PAL_WHITE, TRUE, alpha * 0.55, alpha);
         draw_msg(MSG_CH0_00FC, 206 - get_msg_width(MSG_CH0_00FC, 0), 50, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);

@@ -438,20 +438,20 @@ s32 draw_box(s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s
             }
         }
 
-        gDPPipeSync(gMasterGfxPos++);
-        gDPSetCycleType(gMasterGfxPos++, G_CYC_2CYCLE);
-        gDPSetBlendColor(gMasterGfxPos++, 0, 0, 0, 0);
-        gDPSetFogColor(gMasterGfxPos++, 0, 0, 0, darkening);
-        gDPSetRenderMode(gMasterGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_XLU_SURF2);
+        gDPPipeSync(gMainGfxPos++);
+        gDPSetCycleType(gMainGfxPos++, G_CYC_2CYCLE);
+        gDPSetBlendColor(gMainGfxPos++, 0, 0, 0, 0);
+        gDPSetFogColor(gMainGfxPos++, 0, 0, 0, darkening);
+        gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_XLU_SURF2);
         if (!(flags & DRAW_FLAG_NO_CLIP)) {
-            gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+            gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         }
 
         if (defaultStyle != NULL) {
-            Gfx* gfxPos = gMasterGfxPos;
+            Gfx* gfxPos = gMainGfxPos;
             *gfxPos = gBoxCombineModes[defaultStyle->combineModeIndex + (primA != 255 ? 2 : 0)];
         } else {
-            Gfx* gfxPos = gMasterGfxPos;
+            Gfx* gfxPos = gMainGfxPos;
             if (primA != 255) {
                 *gfxPos = customStyle->transparentCombineMode;
             } else {
@@ -459,15 +459,15 @@ s32 draw_box(s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s
             }
         }
 
-        gMasterGfxPos++;
-        gDPSetTextureFilter(gMasterGfxPos++, G_TF_POINT);
+        gMainGfxPos++;
+        gDPSetTextureFilter(gMainGfxPos++, G_TF_POINT);
 
         if (quads != NULL) {
-            gSPViewport(gMasterGfxPos++, &gBoxViewport);
+            gSPViewport(gMainGfxPos++, &gBoxViewport);
             guFrustumF(mtx1, -80.0f, 80.0f, 60.0f, -60.0f, 160.0f, 480.0f, 1.0f);
             guMtxF2L(mtx1, &gDisplayContext->matrixStack[gMatrixListPos]);
             sp154 = &gDisplayContext->matrixStack[gMatrixListPos];
-            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+            gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
             guPositionF(mtx1, rotX, rotY, rotZ, 1.0f, posX + width / 2, posY + height / 2, posZ);
             if (scaleX != 1.0f || scaleY != 1.0f) {
                 guScaleF(mtx2, scaleX, scaleY, 1.0f);
@@ -487,50 +487,50 @@ s32 draw_box(s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s
             }
             guTranslateF(mtx2, -160.0f, -120.0f, -320.0f);
             guMtxCatF(mtx1, mtx2, mtx1);
-            gSPClearGeometryMode(gMasterGfxPos++, G_CULL_BOTH | G_LIGHTING);
+            gSPClearGeometryMode(gMainGfxPos++, G_CULL_BOTH | G_LIGHTING);
             if (flags & DRAW_FLAG_CULL_BACK) {
-                gSPSetGeometryMode(gMasterGfxPos++, G_CULL_BACK);
+                gSPSetGeometryMode(gMainGfxPos++, G_CULL_BACK);
             }
             guMtxF2L(mtx1, &gDisplayContext->matrixStack[gMatrixListPos]);
-            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-            gDPSetTexturePersp(gMasterGfxPos++, G_TP_PERSP);
-            gSPPerspNormalize(gMasterGfxPos++, 20);
+            gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            gDPSetTexturePersp(gMainGfxPos++, G_TP_PERSP);
+            gSPPerspNormalize(gMainGfxPos++, 20);
         } else {
-            gDPSetTexturePersp(gMasterGfxPos++, G_TP_NONE);
+            gDPSetTexturePersp(gMainGfxPos++, G_TP_NONE);
         }
 
-        gSPTexture(gMasterGfxPos++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
-        gDPSetTextureLUT(gMasterGfxPos++, G_TT_NONE);
-        gDPSetTextureDetail(gMasterGfxPos++, G_TD_CLAMP);
-        gDPSetTextureLOD(gMasterGfxPos++, G_TL_TILE);
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, primR, primG, primB, primA);
-        gDPSetEnvColor(gMasterGfxPos++, envR, envG, envB, envA);
+        gSPTexture(gMainGfxPos++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
+        gDPSetTextureLUT(gMainGfxPos++, G_TT_NONE);
+        gDPSetTextureDetail(gMainGfxPos++, G_TD_CLAMP);
+        gDPSetTextureLOD(gMainGfxPos++, G_TL_TILE);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, primR, primG, primB, primA);
+        gDPSetEnvColor(gMainGfxPos++, envR, envG, envB, envA);
         if (bgImage != NULL) {
             switch (background->bitDepth) {
                 case G_IM_SIZ_4b:
-                    gDPLoadTextureTile_4b(gMasterGfxPos++, bgImage, bgFmt, bgWidth, bgHeight, 0, 0, bgWidth - 1, bgHeight - 1, 0, G_TX_WRAP, G_TX_WRAP, bgMasks, bgMaskt, G_TX_NOLOD, G_TX_NOLOD);
+                    gDPLoadTextureTile_4b(gMainGfxPos++, bgImage, bgFmt, bgWidth, bgHeight, 0, 0, bgWidth - 1, bgHeight - 1, 0, G_TX_WRAP, G_TX_WRAP, bgMasks, bgMaskt, G_TX_NOLOD, G_TX_NOLOD);
                     break;
                 case G_IM_SIZ_8b:
-                    gDPLoadTextureTile(gMasterGfxPos++, bgImage, bgFmt, G_IM_SIZ_8b, bgWidth, bgHeight, 0, 0, bgWidth - 1, bgHeight - 1, 0, G_TX_WRAP, G_TX_WRAP, bgMasks, bgMaskt, G_TX_NOLOD, G_TX_NOLOD);
+                    gDPLoadTextureTile(gMainGfxPos++, bgImage, bgFmt, G_IM_SIZ_8b, bgWidth, bgHeight, 0, 0, bgWidth - 1, bgHeight - 1, 0, G_TX_WRAP, G_TX_WRAP, bgMasks, bgMaskt, G_TX_NOLOD, G_TX_NOLOD);
                     break;
                 case G_IM_SIZ_16b:
-                    gDPLoadTextureTile(gMasterGfxPos++, bgImage, bgFmt, G_IM_SIZ_16b, bgWidth, bgHeight, 0, 0, bgWidth - 1, bgHeight - 1, 0, G_TX_WRAP, G_TX_WRAP, bgMasks, bgMaskt, G_TX_NOLOD, G_TX_NOLOD);
+                    gDPLoadTextureTile(gMainGfxPos++, bgImage, bgFmt, G_IM_SIZ_16b, bgWidth, bgHeight, 0, 0, bgWidth - 1, bgHeight - 1, 0, G_TX_WRAP, G_TX_WRAP, bgMasks, bgMaskt, G_TX_NOLOD, G_TX_NOLOD);
                     break;
                 case G_IM_SIZ_32b:
-                    gDPLoadTextureTile(gMasterGfxPos++, bgImage, bgFmt, G_IM_SIZ_32b, bgWidth, bgHeight, 0, 0, bgWidth - 1, bgHeight - 1, 0, G_TX_WRAP, G_TX_WRAP, bgMasks, bgMaskt, G_TX_NOLOD, G_TX_NOLOD);
+                    gDPLoadTextureTile(gMainGfxPos++, bgImage, bgFmt, G_IM_SIZ_32b, bgWidth, bgHeight, 0, 0, bgWidth - 1, bgHeight - 1, 0, G_TX_WRAP, G_TX_WRAP, bgMasks, bgMaskt, G_TX_NOLOD, G_TX_NOLOD);
                     break;
             }
 
             if (flags & DRAW_FLAG_ANIMATED_BACKGROUND) {
                 bgScrollOffsetY = (gGameStatusPtr->frameCounter * 4) & 0x1FF;
                 bgScrollOffsetX = 511 - bgScrollOffsetY;
-                gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE,
+                gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE,
                     width / 2 * 4 + bgScrollOffsetX,
                     height / 2 * 4 + bgScrollOffsetY,
                     (width / 2 + bgWidth - 1) * 4 + bgScrollOffsetX,
                     (height / 2 + bgHeight - 1) * 4 + bgScrollOffsetY);
             } else {
-                gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, width / 2 * 4, height / 2 * 4,
+                gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, width / 2 * 4, height / 2 * 4,
                                (width / 2 + bgWidth - 1) * 4, (height / 2 + bgHeight - 1)* 4);
             }
         }
@@ -545,32 +545,32 @@ s32 draw_box(s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s
 
                 switch (cornersBitDepth) {
                     case G_IM_SIZ_4b:
-                        gDPLoadMultiTile_4b(gMasterGfxPos++, cornersImage, tmem, 1, cornersFmt, cornerWidth, cornerHeight, 0, 0, cornerWidth - 1, cornerHeight - 1, 0, G_TX_CLAMP, G_TX_CLAMP, masks, maskt, G_TX_NOLOD, G_TX_NOLOD);
+                        gDPLoadMultiTile_4b(gMainGfxPos++, cornersImage, tmem, 1, cornersFmt, cornerWidth, cornerHeight, 0, 0, cornerWidth - 1, cornerHeight - 1, 0, G_TX_CLAMP, G_TX_CLAMP, masks, maskt, G_TX_NOLOD, G_TX_NOLOD);
                         cornersImage += cornerWidth * cornerHeight / 2;
                         break;
                     case G_IM_SIZ_8b:
-                        gDPLoadMultiTile(gMasterGfxPos++, cornersImage, tmem, 1, cornersFmt, G_IM_SIZ_8b, cornerWidth, cornerHeight, 0, 0, cornerWidth - 1, cornerHeight - 1, 0, G_TX_CLAMP, G_TX_CLAMP, masks, maskt, G_TX_NOLOD, G_TX_NOLOD);
+                        gDPLoadMultiTile(gMainGfxPos++, cornersImage, tmem, 1, cornersFmt, G_IM_SIZ_8b, cornerWidth, cornerHeight, 0, 0, cornerWidth - 1, cornerHeight - 1, 0, G_TX_CLAMP, G_TX_CLAMP, masks, maskt, G_TX_NOLOD, G_TX_NOLOD);
                         cornersImage += cornerWidth * cornerHeight;
                         break;
                     case G_IM_SIZ_16b:
-                        gDPLoadMultiTile(gMasterGfxPos++, cornersImage, tmem, 1, cornersFmt, G_IM_SIZ_16b, cornerWidth, cornerHeight, 0, 0, cornerWidth - 1, cornerHeight - 1, 0, G_TX_CLAMP, G_TX_CLAMP, masks, maskt, G_TX_NOLOD, G_TX_NOLOD);
+                        gDPLoadMultiTile(gMainGfxPos++, cornersImage, tmem, 1, cornersFmt, G_IM_SIZ_16b, cornerWidth, cornerHeight, 0, 0, cornerWidth - 1, cornerHeight - 1, 0, G_TX_CLAMP, G_TX_CLAMP, masks, maskt, G_TX_NOLOD, G_TX_NOLOD);
                         cornersImage += cornerWidth * cornerHeight * 2;
                         break;
                     case G_IM_SIZ_32b:
-                        gDPLoadMultiTile(gMasterGfxPos++, cornersImage, tmem, 1, cornersFmt, G_IM_SIZ_32b, cornerWidth, cornerHeight, 0, 0, cornerWidth - 1, cornerHeight - 1, 0, G_TX_CLAMP, G_TX_CLAMP, masks, maskt, G_TX_NOLOD, G_TX_NOLOD);
+                        gDPLoadMultiTile(gMainGfxPos++, cornersImage, tmem, 1, cornersFmt, G_IM_SIZ_32b, cornerWidth, cornerHeight, 0, 0, cornerWidth - 1, cornerHeight - 1, 0, G_TX_CLAMP, G_TX_CLAMP, masks, maskt, G_TX_NOLOD, G_TX_NOLOD);
                         cornersImage += cornerWidth * cornerHeight * 4;
                         break;
                 }
 
                 switch(idx) {
                     case 1:
-                        gDPSetTileSize(gMasterGfxPos++, 1, (width - cornerWidth) * 4, 0, (width - 1) * 4, (cornerHeight - 1) * 4);
+                        gDPSetTileSize(gMainGfxPos++, 1, (width - cornerWidth) * 4, 0, (width - 1) * 4, (cornerHeight - 1) * 4);
                         break;
                     case 2:
-                        gDPSetTileSize(gMasterGfxPos++, 1, 0, (height - cornerHeight) * 4, (cornerWidth - 1) * 4, (height - 1) * 4);
+                        gDPSetTileSize(gMainGfxPos++, 1, 0, (height - cornerHeight) * 4, (cornerWidth - 1) * 4, (height - 1) * 4);
                         break;
                     case 3:
-                        gDPSetTileSize(gMasterGfxPos++, 1, (width - cornerWidth) * 4, (height - cornerHeight) * 4, (width - 1) * 4, (height - 1) * 4);
+                        gDPSetTileSize(gMainGfxPos++, 1, (width - cornerWidth) * 4, (height - cornerHeight) * 4, (width - 1) * 4, (height - 1) * 4);
                         break;
                 }
 
@@ -699,26 +699,26 @@ s32 draw_box(s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s
                             quads += 12;
                             break;
                     }
-                    gSPVertex(gMasterGfxPos++, quads, 4, 0);
-                    gSP2Triangles(gMasterGfxPos++, 0, 3, 1, 0, 0, 2, 3, 0);
+                    gSPVertex(gMainGfxPos++, quads, 4, 0);
+                    gSP2Triangles(gMainGfxPos++, 0, 3, 1, 0, 0, 2, 3, 0);
                 } else {
                     switch (idx) {
                         case 0:
-                            gSPScisTextureRectangle(gMasterGfxPos++, posX * 4, posY * 4, (posX + width / 2) * 4, (posY + height / 2) * 4, G_TX_RENDERTILE, 0, 0, 0x400, 0x400);
+                            gSPScisTextureRectangle(gMainGfxPos++, posX * 4, posY * 4, (posX + width / 2) * 4, (posY + height / 2) * 4, G_TX_RENDERTILE, 0, 0, 0x400, 0x400);
                             break;
                         case 1:
-                            gSPScisTextureRectangle(gMasterGfxPos++, (posX + width / 2) * 4, posY * 4, (posX + width) * 4, (posY + height / 2) * 4, G_TX_RENDERTILE, (width / 2) * 32, 0, 0x400, 0x400);
+                            gSPScisTextureRectangle(gMainGfxPos++, (posX + width / 2) * 4, posY * 4, (posX + width) * 4, (posY + height / 2) * 4, G_TX_RENDERTILE, (width / 2) * 32, 0, 0x400, 0x400);
                             break;
                         case 2:
-                            gSPScisTextureRectangle(gMasterGfxPos++, posX * 4, (posY + height / 2) * 4, (posX + width / 2) * 4, (posY + height) * 4, G_TX_RENDERTILE, 0, (height / 2) * 32, 0x400, 0x400);
+                            gSPScisTextureRectangle(gMainGfxPos++, posX * 4, (posY + height / 2) * 4, (posX + width / 2) * 4, (posY + height) * 4, G_TX_RENDERTILE, 0, (height / 2) * 32, 0x400, 0x400);
                             break;
                         case 3:
-                            gSPScisTextureRectangle(gMasterGfxPos++, (posX + width / 2) * 4, (posY + height / 2) * 4, (posX + width) * 4, (posY + height) * 4, G_TX_RENDERTILE, (width / 2) * 32, (height / 2) * 32, 0x400, 0x400);
+                            gSPScisTextureRectangle(gMainGfxPos++, (posX + width / 2) * 4, (posY + height / 2) * 4, (posX + width) * 4, (posY + height) * 4, G_TX_RENDERTILE, (width / 2) * 32, (height / 2) * 32, 0x400, 0x400);
                             break;
                     }
 
                 }
-                gDPPipeSync(gMasterGfxPos++);
+                gDPPipeSync(gMainGfxPos++);
             }
         } else if (bgImage != NULL) {
             if (quads != NULL) {
@@ -751,49 +751,49 @@ s32 draw_box(s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s
                 quads[3].v.tc[0] = width * 32;
                 quads[3].v.tc[1] = height * 32;
 
-                gSPVertex(gMasterGfxPos++, &quads[0], 4, 0);
-                gSP2Triangles(gMasterGfxPos++, 0, 3, 1, 0, 0, 2, 3, 0);
+                gSPVertex(gMainGfxPos++, &quads[0], 4, 0);
+                gSP2Triangles(gMainGfxPos++, 0, 3, 1, 0, 0, 2, 3, 0);
             } else {
-                gSPScisTextureRectangle(gMasterGfxPos++, posX * 4, posY * 4, (posX + width) * 4, (posY + height) * 4, G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
+                gSPScisTextureRectangle(gMainGfxPos++, posX * 4, posY * 4, (posX + width) * 4, (posY + height) * 4, G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
             }
-            gDPPipeSync(gMasterGfxPos++);
+            gDPPipeSync(gMainGfxPos++);
         }
 
-        gDPSetTexturePersp(gMasterGfxPos++, G_TP_NONE);
-        gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
+        gDPSetTexturePersp(gMainGfxPos++, G_TP_NONE);
+        gDPSetCycleType(gMainGfxPos++, G_CYC_1CYCLE);
         if(fpDrawContents != NULL) {
             if (quads != NULL) {
                 void* mdl_address = mdl_get_next_texture_address(width * height * 2);
                 if(mdl_address != 0) {
-                    gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, width, OS_K0_TO_PHYSICAL(mdl_address));
-                    gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 0, 0, width, height);
-                    gDPSetCycleType(gMasterGfxPos++, G_CYC_FILL);
-                    gDPSetFillColor(gMasterGfxPos++, PACK_FILL_COLOR(primR, primG, primB, 0));
-                    gDPSetRenderMode(gMasterGfxPos++, G_RM_NOOP, G_RM_NOOP2);
-                    gDPFillRectangle(gMasterGfxPos++, 0, 0, width - 1, height - 1);
-                    gDPPipeSync(gMasterGfxPos++);
-                    gDPSetScissorFrac(gMasterGfxPos++, G_SC_NON_INTERLACE, 4, 4, (width - 1) * 4.0f, (height - 1) * 4.0f);
-                    gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
+                    gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, width, OS_K0_TO_PHYSICAL(mdl_address));
+                    gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, 0, 0, width, height);
+                    gDPSetCycleType(gMainGfxPos++, G_CYC_FILL);
+                    gDPSetFillColor(gMainGfxPos++, PACK_FILL_COLOR(primR, primG, primB, 0));
+                    gDPSetRenderMode(gMainGfxPos++, G_RM_NOOP, G_RM_NOOP2);
+                    gDPFillRectangle(gMainGfxPos++, 0, 0, width - 1, height - 1);
+                    gDPPipeSync(gMainGfxPos++);
+                    gDPSetScissorFrac(gMainGfxPos++, G_SC_NON_INTERLACE, 4, 4, (width - 1) * 4.0f, (height - 1) * 4.0f);
+                    gDPSetCycleType(gMainGfxPos++, G_CYC_1CYCLE);
 
                     fpDrawContents((s32)drawContentsArg0, 0, 0, width, height, opacity, darkening);
 
-                    gDPPipeSync(gMasterGfxPos++);
-                    gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, OS_K0_TO_PHYSICAL(nuGfxCfb_ptr));
-                    gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 0, 0, 320, 240);
-                    gSPViewport(gMasterGfxPos++, &gBoxViewport);
-                    gSPMatrix(gMasterGfxPos++, sp154, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-                    gSPTexture(gMasterGfxPos++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
-                    gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
-                    gDPSetTextureLUT(gMasterGfxPos++, G_TT_NONE);
-                    gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
-                    gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF, G_RM_NOOP2);
-                    gDPSetTexturePersp(gMasterGfxPos++, G_TP_PERSP);
-                    gDPSetTextureFilter(gMasterGfxPos++, G_TF_BILERP);
+                    gDPPipeSync(gMainGfxPos++);
+                    gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, OS_K0_TO_PHYSICAL(nuGfxCfb_ptr));
+                    gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, 0, 0, 320, 240);
+                    gSPViewport(gMainGfxPos++, &gBoxViewport);
+                    gSPMatrix(gMainGfxPos++, sp154, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+                    gSPTexture(gMainGfxPos++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
+                    gDPSetCycleType(gMainGfxPos++, G_CYC_1CYCLE);
+                    gDPSetTextureLUT(gMainGfxPos++, G_TT_NONE);
+                    gDPSetCombineMode(gMainGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+                    gDPSetRenderMode(gMainGfxPos++, G_RM_CLD_SURF, G_RM_NOOP2);
+                    gDPSetTexturePersp(gMainGfxPos++, G_TP_PERSP);
+                    gDPSetTextureFilter(gMainGfxPos++, G_TF_BILERP);
                     guTranslateF(mtx3, 0.0f, 6.0f, 0.0f);
                     guMtxF2L(mtx3, &gBoxMatrix);
                     guTranslateF(mtx3, 0.0f, -height / 2, 0.0f);
                     guMtxF2L(mtx3, &gDisplayContext->matrixStack[gMatrixListPos]);
-                    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+                    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
                     for (idx = 0; idx < height / 6; idx++) {
                         s32 extraHeight, lineHeight;
                         if (idx == height / 6 - 1) {
@@ -805,14 +805,14 @@ s32 draw_box(s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s
                             extraHeight = 1;
                         }
                         lineHeight = extraHeight + 5;
-                        gDPLoadTextureTile(gMasterGfxPos++, OS_K0_TO_PHYSICAL(mdl_address), G_IM_FMT_RGBA, G_IM_SIZ_16b, width, 0,
+                        gDPLoadTextureTile(gMainGfxPos++, OS_K0_TO_PHYSICAL(mdl_address), G_IM_FMT_RGBA, G_IM_SIZ_16b, width, 0,
                                         0, idx * 6, width - 1, idx * 6 + lineHeight, 0,
                                         G_TX_CLAMP, G_TX_CLAMP, 9, 3, G_TX_NOLOD, G_TX_NOLOD);
-                        gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, (160 - width / 2) * 4, 0, ((160 - width / 2) + width - 1) * 4, lineHeight * 4);
-                        gSPVertex(gMasterGfxPos++, &vtx_drawbox1, 4, 0);
-                        gSP2Triangles(gMasterGfxPos++, 0, 3, 1, 0, 0, 2, 3, 0);
-                        gDPPipeSync(gMasterGfxPos++);
-                        gSPMatrix(gMasterGfxPos++, &gBoxMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+                        gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, (160 - width / 2) * 4, 0, ((160 - width / 2) + width - 1) * 4, lineHeight * 4);
+                        gSPVertex(gMainGfxPos++, &vtx_drawbox1, 4, 0);
+                        gSP2Triangles(gMainGfxPos++, 0, 3, 1, 0, 0, 2, 3, 0);
+                        gDPPipeSync(gMainGfxPos++);
+                        gSPMatrix(gMainGfxPos++, &gBoxMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
                     }
                 }
             } else {
@@ -820,9 +820,9 @@ s32 draw_box(s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s
             }
         }
         if (quads != NULL) {
-            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-            gDPSetTexturePersp(gMasterGfxPos++, G_TP_NONE);
-            gDPPipeSync(gMasterGfxPos++);
+            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+            gDPSetTexturePersp(gMainGfxPos++, G_TP_NONE);
+            gDPPipeSync(gMainGfxPos++);
         }
         return FALSE;
     }

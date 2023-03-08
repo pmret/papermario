@@ -376,55 +376,55 @@ void appendGfx_shading_palette(
         highlightB = 255;
     }
 
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, shadowR, shadowG, shadowB, alpha);
-    gDPSetCombineLERP(gMasterGfxPos++, TEXEL1, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL0, COMBINED, TEXEL0, COMBINED_ALPHA,
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, shadowR, shadowG, shadowB, alpha);
+    gDPSetCombineLERP(gMainGfxPos++, TEXEL1, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL0, COMBINED, TEXEL0, COMBINED_ALPHA,
                       TEXEL0, PRIMITIVE, 0, TEXEL0, 0);
-    gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, D_80159880);
-    gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 0, 0, 16, 1);
+    gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, D_80159880);
+    gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, 0, 0, 16, 1);
 
-    gSPSetOtherMode(gMasterGfxPos++, G_SETOTHERMODE_H, 4, 18,
+    gSPSetOtherMode(gMainGfxPos++, G_SETOTHERMODE_H, 4, 18,
                     G_AD_DISABLE | G_CD_DISABLE | G_CK_NONE | G_TC_FILT | G_TF_POINT | G_TT_NONE | G_TL_TILE |
                     G_TD_CLAMP | G_TP_NONE | G_CYC_1CYCLE | G_PM_NPRIMITIVE);
 
-    gDPSetRenderMode(gMasterGfxPos++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
+    gDPSetRenderMode(gMainGfxPos++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
 
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, shadowR, shadowG, shadowB, alpha);
-    gDPSetEnvColor(gMasterGfxPos++, highlightR, highlightG, highlightB, 0);
-    gDPSetCombineLERP(gMasterGfxPos++, PRIMITIVE, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, 1,
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, shadowR, shadowG, shadowB, alpha);
+    gDPSetEnvColor(gMainGfxPos++, highlightR, highlightG, highlightB, 0);
+    gDPSetCombineLERP(gMainGfxPos++, PRIMITIVE, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, 1,
                       PRIMITIVE, ENVIRONMENT, TEXEL0_ALPHA, ENVIRONMENT, 0, 0, 0, 1);
-    gSPTextureRectangle(gMasterGfxPos++, 0, 0, 16 << 2, 1 << 2, 2, 0, 0, 4 << 10, 1 << 10);
-    gDPPipeSync(gMasterGfxPos++);
-    gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxCfb_ptr));
+    gSPTextureRectangle(gMainGfxPos++, 0, 0, 16 << 2, 1 << 2, 2, 0, 0, 4 << 10, 1 << 10);
+    gDPPipeSync(gMainGfxPos++);
+    gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxCfb_ptr));
 
     gDPSetScissor(
-        gMasterGfxPos++, 0,
+        gMainGfxPos++, 0,
         camera->viewportStartX,
         camera->viewportStartY,
         camera->viewportStartX + camera->viewportW,
         camera->viewportStartY + camera->viewportH
     );
 
-    gDPLoadTLUT_pal16(gMasterGfxPos++, 1, D_80159880);
+    gDPLoadTLUT_pal16(gMainGfxPos++, 1, D_80159880);
 
-    gSPSetOtherMode(gMasterGfxPos++, G_SETOTHERMODE_H, 4, 18,
+    gSPSetOtherMode(gMainGfxPos++, G_SETOTHERMODE_H, 4, 18,
                     G_AD_DISABLE | G_CD_MAGICSQ | G_CK_NONE | G_TC_FILT | G_TF_BILERP | G_TT_RGBA16 | G_TL_TILE |
                     G_TD_CLAMP | G_TP_PERSP | G_CYC_2CYCLE | G_PM_NPRIMITIVE);
 
-    gDPSetRenderMode(gMasterGfxPos++, G_RM_PASS, renderMode);
-    gDPSetEnvColor(gMasterGfxPos++, 100, 100, 100, 255);
+    gDPSetRenderMode(gMainGfxPos++, G_RM_PASS, renderMode);
+    gDPSetEnvColor(gMainGfxPos++, 100, 100, 100, 255);
 
     if (alpha == 255) {
-        gDPSetCombineLERP(gMasterGfxPos++, TEXEL0, 0, TEXEL1, 0, 0, 0, 0, TEXEL1, SHADE, ENVIRONMENT, COMBINED,
+        gDPSetCombineLERP(gMainGfxPos++, TEXEL0, 0, TEXEL1, 0, 0, 0, 0, TEXEL1, SHADE, ENVIRONMENT, COMBINED,
                           COMBINED, 0, 0, 0, COMBINED);
     } else {
-        gDPSetCombineLERP(gMasterGfxPos++, TEXEL0, 0, TEXEL1, 0, PRIMITIVE, 0, TEXEL1, 0, SHADE, ENVIRONMENT, COMBINED,
+        gDPSetCombineLERP(gMainGfxPos++, TEXEL0, 0, TEXEL1, 0, PRIMITIVE, 0, TEXEL1, 0, SHADE, ENVIRONMENT, COMBINED,
                           COMBINED, 0, 0, 0, COMBINED);
     }
 
     abc = var_f26;
     abc *= var_f30;
     gDPSetTileSize(
-        gMasterGfxPos++,
+        gMainGfxPos++,
         0,
         ((uls + 0x100) << 2) + (s32)abc,
         ((ult + 0x100) << 2) + (s32)temp_f28,
@@ -437,11 +437,11 @@ INCLUDE_ASM(s32, "de740_len_23f0", appendGfx_shading_palette);
 #endif
 
 void func_801491E4(Matrix4f mtx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 alpha) {
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, alpha);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, alpha);
 
     if (alpha == 255) {
-        gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, TEXEL1, 0, 0, 0, TEXEL1, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED);
+        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, TEXEL1, 0, 0, 0, TEXEL1, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED);
     } else {
-        gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED);
+        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED);
     }
 }

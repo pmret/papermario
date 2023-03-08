@@ -273,8 +273,8 @@ void func_E006A85C(LightRaysFXData* part) {
     s32 uls2 = part->unk_3C * 4.0f;
     s32 ult2 = part->unk_40 * 4.0f;
 
-    gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, uls, ult, uls + 512, ult + 256);
-    gDPSetTileSize(gMasterGfxPos++, 1, uls2, ult2, uls2 + 512, ult2 + 256);
+    gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, uls, ult, uls + 512, ult + 256);
+    gDPSetTileSize(gMainGfxPos++, 1, uls2, ult2, uls2 + 512, ult2 + 256);
 }
 
 void light_rays_appendGfx(void* effect) {
@@ -287,9 +287,9 @@ void light_rays_appendGfx(void* effect) {
     Matrix4f mtxTranslate;
     s32 i;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
-    gSPDisplayList(gMasterGfxPos++, dlist2);
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPDisplayList(gMainGfxPos++, dlist2);
 
     shim_guTranslateF(mtxTranslate, part->pos.x, part->pos.y, part->pos.z);
 
@@ -344,7 +344,7 @@ void light_rays_appendGfx(void* effect) {
             shim_guScaleF(mtxTemp, scaleX, scaleY, scaleZ);
             shim_guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
 
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 240, part->alpha);
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 240, part->alpha);
         } else {
             shim_guRotateF(mtxTemp, part->rotation.y, 0.0f, 1.0f, 0.0f);
             shim_guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
@@ -353,15 +353,15 @@ void light_rays_appendGfx(void* effect) {
             shim_guTranslateF(mtxTemp, part->unk_58, 0.0f, 0.0f);
             shim_guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
 
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 181, part->alpha);
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 181, part->alpha);
         }
 
         shim_guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, dlist);
-        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        gSPDisplayList(gMainGfxPos++, dlist);
+        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     }
 
-    gDPPipeSync(gMasterGfxPos++);
+    gDPPipeSync(gMainGfxPos++);
 }

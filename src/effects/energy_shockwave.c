@@ -144,27 +144,27 @@ void energy_shockwave_appendGfx(void* effect) {
     s32 uls2;
     s32 ult2;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
-    gSPDisplayList(gMasterGfxPos++, D_09000E60_376370);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 179, 30, data->unk_24);
-    gDPSetEnvColor(gMasterGfxPos++, data->unk_50, data->unk_51, data->unk_52, 128);
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPDisplayList(gMainGfxPos++, D_09000E60_376370);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 179, 30, data->unk_24);
+    gDPSetEnvColor(gMainGfxPos++, data->unk_50, data->unk_51, data->unk_52, 128);
 
     uls = data->unk_30 * 4;
     ult = data->unk_34 * 4;
     uls2 = data->unk_38 * 4;
     ult2 = data->unk_3C * 4;
 
-    gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, uls, ult, uls + 252, ult + 252);
-    gDPSetTileSize(gMasterGfxPos++, 1, uls2, ult2, uls2 + 124, ult2 + 124);
+    gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, uls, ult, uls + 252, ult + 252);
+    gDPSetTileSize(gMainGfxPos++, 1, uls2, ult2, uls2 + 124, ult2 + 124);
 
     shim_guTranslateF(sp10, data->unk_04, data->unk_08, data->unk_0C);
     shim_guScaleF(sp50, data->unk_1C, data->unk_1C, data->unk_1C);
     shim_guMtxCatF(sp50, sp10, sp10);
     shim_guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gSPDisplayList(gMasterGfxPos++, D_09000DC0_3762D0);
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-    gDPPipeSync(gMasterGfxPos++);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gSPDisplayList(gMainGfxPos++, D_09000DC0_3762D0);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+    gDPPipeSync(gMainGfxPos++);
 }

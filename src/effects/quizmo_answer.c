@@ -18,21 +18,21 @@ EffectInstance* quizmo_answer_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     effect = shim_create_effect_instance(&bp);
     effect->data.quizmoAnswer = NULL;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->graphics->data));
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->graphics->data));
 
     if (arg0 == 0) {
-        gSPDisplayList(gMasterGfxPos++, D_09000400_3A2840);
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 64, 64, 230);
+        gSPDisplayList(gMainGfxPos++, D_09000400_3A2840);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 64, 64, 230);
     } else {
-        gSPDisplayList(gMasterGfxPos++, D_090004A8_3A28E8);
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 80, 80, 255, 230);
+        gSPDisplayList(gMainGfxPos++, D_090004A8_3A28E8);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, 80, 80, 255, 230);
     }
 
-    gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 0, 0, 320, 240);
-    gSPTextureRectangle(gMasterGfxPos++, 512, 304, 768, 560, G_TX_RENDERTILE, 0, 1024, 1024, 1024);
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x00, NULL);
+    gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, 0, 0, 320, 240);
+    gSPTextureRectangle(gMainGfxPos++, 512, 304, 768, 560, G_TX_RENDERTILE, 0, 1024, 1024, 1024);
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x00, NULL);
 
     shim_remove_effect(effect);
     return NULL;

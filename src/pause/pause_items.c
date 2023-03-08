@@ -158,7 +158,7 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
     sp6C = baseX + 119;
     sp70 = baseY + 17;
 
-    gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x1, y1, x2, y2);
+    gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, x1, y1, x2, y2);
 
     for (i = 0; i < 3; i++) {
         for (pageIndex = 0; pageIndex < 20; pageIndex++) {
@@ -258,7 +258,7 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
     y1 = baseY + 1;
     x2 = baseX + width - 1;
     y2 = baseY + height - 1;
-    gDPPipeSync(gMasterGfxPos++);
+    gDPPipeSync(gMainGfxPos++);
 
     if (x1 <= 0) {
         x1 = 1;
@@ -278,7 +278,7 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
         y2 = SCREEN_HEIGHT - 1;
     }
 
-    gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x1, y1, x2, y2);
+    gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, x1, y1, x2, y2);
 
     if (gPauseMenuCurrentTab == 3 && gPauseItemsLevel == 1) {
         if (gPauseItemsCurrentPage > 0) {

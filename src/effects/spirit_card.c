@@ -143,26 +143,26 @@ void func_E0112330(s32 arg0, SpiritCardFXData* data) {
     shim_guMtxCatF(sp60, sp20, sp20);
     shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 }
 
 void spirit_card_appendGfx(void* effect) {
     SpiritCardFXData* data = ((EffectInstance*)effect)->data.spiritCard;
     s32 unk_00 = data->unk_00;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
-    gSPDisplayList(gMasterGfxPos++, D_090042E0_3FE790);
-    gDPSetEnvColor(gMasterGfxPos++, 0, 0, 0, 255);
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPDisplayList(gMainGfxPos++, D_090042E0_3FE790);
+    gDPSetEnvColor(gMainGfxPos++, 0, 0, 0, 255);
 
     if (unk_00 < 2) {
         func_E0112330(0, data);
 
-        gSPDisplayList(gMasterGfxPos++, D_E0112638[0]);
-        gSPDisplayList(gMasterGfxPos++, D_E0112640[data->chapter]);
-        gSPDisplayList(gMasterGfxPos++, D_E0112630[0]);
-        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gSPDisplayList(gMainGfxPos++, D_E0112638[0]);
+        gSPDisplayList(gMainGfxPos++, D_E0112640[data->chapter]);
+        gSPDisplayList(gMainGfxPos++, D_E0112630[0]);
+        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     }
 
-    gDPPipeSync(gMasterGfxPos++);
+    gDPPipeSync(gMainGfxPos++);
 }

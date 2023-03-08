@@ -196,7 +196,7 @@ extern OSDevMgr __osPiDevMgr;
 
 // gfx
 extern DisplayContext* gDisplayContext;
-extern Gfx* gMasterGfxPos;
+extern Gfx* gMainGfxPos;
 extern u16 gMatrixListPos;
 extern s32 gCurrentDisplayContextIndex;
 

@@ -1460,7 +1460,7 @@ void func_802A3C98(void* data, s32 x, s32 y) {
             yPos = y + 18;
             var_t0 = yPos + 1 + (D_802AD10E * 13);
             gDPSetScissor(
-                gMasterGfxPos++, G_SC_NON_INTERLACE,
+                gMainGfxPos++, G_SC_NON_INTERLACE,
                 xPos,
                 yPos,
                 x + 153,
@@ -2018,7 +2018,7 @@ void func_802A5290(void* data, s32 x, s32 y) {
             xPos = x + 4;
             yPos = y + 18;
             var_t0 = yPos + 1 + (D_802AD60A * 13);
-            gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, xPos, yPos, x + 142, var_t0);
+            gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, xPos, yPos, x + 142, var_t0);
 
             xPos = x + 33;
             yPos = y + 19 + D_802AD60C;

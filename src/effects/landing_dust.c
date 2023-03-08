@@ -279,9 +279,9 @@ void landing_dust_appendGfx(void* effect) {
     dlist1 = sDlists[type];
     dlist2 = sDlists2[type];
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
-    gSPDisplayList(gMasterGfxPos++, dlist2);
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPDisplayList(gMainGfxPos++, dlist2);
 
     spD8 = temp_t0 & 7;
     spDC = temp_t0 & 0x40;
@@ -291,20 +291,20 @@ void landing_dust_appendGfx(void* effect) {
     shim_guMtxCatF(mtx2, mtx1, mtx3);
     shim_guMtxF2L(mtx3, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++,
+    gSPMatrix(gMainGfxPos++,
               &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
     switch (type) {
         case 0:
         case 1:
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 230, 222, 222, 110);
-            gDPSetEnvColor(gMasterGfxPos++, 0, 0, 0, envAlpha);
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, 230, 222, 222, 110);
+            gDPSetEnvColor(gMainGfxPos++, 0, 0, 0, envAlpha);
             break;
         case 2:
         case 3:
         case 4:
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 230, 222, 222, 130);
-            gDPSetEnvColor(gMasterGfxPos++, 0, 0, 0, envAlpha);
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, 230, 222, 222, 130);
+            gDPSetEnvColor(gMainGfxPos++, 0, 0, 0, envAlpha);
             break;
     }
 
@@ -317,16 +317,16 @@ void landing_dust_appendGfx(void* effect) {
     temp_lo = spD8 * phi_a0;
     temp = temp_lo + phi_a0;
 
-    gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, temp_lo * 4, 0, temp * 4, phi_a0 * 4);
+    gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, temp_lo * 4, 0, temp * 4, phi_a0 * 4);
 
     if (spDC) {
-        gDPSetTileSize(gMasterGfxPos++, 1, temp * 4, phi_a0 * 4, (temp_lo + (phi_a0 * 2)) * 4, phi_a0 * 8);
+        gDPSetTileSize(gMainGfxPos++, 1, temp * 4, phi_a0 * 4, (temp_lo + (phi_a0 * 2)) * 4, phi_a0 * 8);
     } else {
-        gDPSetTileSize(gMasterGfxPos++, 1, temp * 4, 0,          (temp_lo + (phi_a0 * 2)) * 4, phi_a0 * 4);
+        gDPSetTileSize(gMainGfxPos++, 1, temp * 4, 0,          (temp_lo + (phi_a0 * 2)) * 4, phi_a0 * 4);
     }
 
     if (type == 2) {
-        gSPDisplayList(gMasterGfxPos++, dlist1);
+        gSPDisplayList(gMainGfxPos++, dlist1);
     }
 
     part++;
@@ -334,12 +334,12 @@ void landing_dust_appendGfx(void* effect) {
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, part++) {
         shim_guTranslateF(mtx1, part->x, part->y, part->z);
         shim_guMtxF2L(mtx1, &gDisplayContext->matrixStack[gMatrixListPos]);
-        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+        gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                   G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, dlist1);
-        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gSPDisplayList(gMainGfxPos++, dlist1);
+        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     }
 
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-    gDPPipeSync(gMasterGfxPos++);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+    gDPPipeSync(gMainGfxPos++);
 }

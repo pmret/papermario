@@ -44,8 +44,8 @@ void appendGfx_ispy_icon(void) {
         guMtxCatF(matrix1, matrix2, matrix2);
         guMtxF2L(matrix2, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], 3);
-        gSPDisplayList(gMasterGfxPos++, ispy_icon_gfx);
+        gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], 3);
+        gSPDisplayList(gMainGfxPos++, ispy_icon_gfx);
 
         if (ISpyPtr->time < 47) {
             ISpyPtr->flashCount++;
@@ -83,7 +83,7 @@ void appendGfx_ispy_icon(void) {
         foldImage.opacity = 255;
 
         fold_appendGfx_component(0, &foldImage, 0, matrix2);
-        gSPPopMatrix(gMasterGfxPos++, 0);
+        gSPPopMatrix(gMainGfxPos++, 0);
     }
 }
 

@@ -209,10 +209,10 @@ API_CALLABLE(N(SetFireplaceAlpha)) {
 }
 
 void N(setup_gfx_fireplace)(void) {
-    gDPSetCycleType(gMasterGfxPos++, G_CYC_2CYCLE);
-    gDPSetRenderMode(gMasterGfxPos++, G_RM_PASS, G_RM_AA_ZB_XLU_SURF2);
-    gDPSetCombineLERP(gMasterGfxPos++, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, 0, 0, 0, COMBINED, 0, 0, 0, PRIMITIVE);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, N(FireplaceAlpha));
+    gDPSetCycleType(gMainGfxPos++, G_CYC_2CYCLE);
+    gDPSetRenderMode(gMainGfxPos++, G_RM_PASS, G_RM_AA_ZB_XLU_SURF2);
+    gDPSetCombineLERP(gMainGfxPos++, TEXEL0, 0, TEXEL1, 0, TEXEL0, 0, TEXEL1, 0, 0, 0, 0, COMBINED, 0, 0, 0, PRIMITIVE);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, N(FireplaceAlpha));
 }
 
 EvtScript N(EVS_TexPan_Fireplace) = {

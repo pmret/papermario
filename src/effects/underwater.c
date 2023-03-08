@@ -181,47 +181,47 @@ void underwater_appendGfx(void* effect) {
 
     data = effectTemp->data.underwater;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->graphics->data));
-    gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, nuGfxZBuffer);
-    gSPDisplayList(gMasterGfxPos++, D_09000528);
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->graphics->data));
+    gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, nuGfxZBuffer);
+    gSPDisplayList(gMainGfxPos++, D_09000528);
 
     for (i = 0; i < 40; i++) {
         // todo probably a composite macro?
-        gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, &nuGfxCfb_ptr[0xF00 * i]);
-        gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 80, 0x0000, G_TX_LOADTILE, 0,
+        gDPSetTextureImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, &nuGfxCfb_ptr[0xF00 * i]);
+        gDPSetTile(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 80, 0x0000, G_TX_LOADTILE, 0,
                    G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
                    G_TX_NOLOD);
-        gDPLoadSync(gMasterGfxPos++);
-        gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, 0, 0, 0x04FC, 0x0014);
-        gDPPipeSync(gMasterGfxPos++);
-        gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 80, 0x0000, G_TX_RENDERTILE, 0,
+        gDPLoadSync(gMainGfxPos++);
+        gDPLoadTile(gMainGfxPos++, G_TX_LOADTILE, 0, 0, 0x04FC, 0x0014);
+        gDPPipeSync(gMainGfxPos++);
+        gDPSetTile(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 80, 0x0000, G_TX_RENDERTILE, 0,
                    G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
                    G_TX_NOLOD);
-        gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0, 0, 0x04FC, 0x0014);
-        gSPTextureRectangle(gMasterGfxPos++, 0, i * 0x18, 0x04FC, 20 + (i * 18), G_TX_RENDERTILE, 0, 0, 0x1000, 0x0400);
-        gDPPipeSync(gMasterGfxPos++);
+        gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, 0, 0, 0x04FC, 0x0014);
+        gSPTextureRectangle(gMainGfxPos++, 0, i * 0x18, 0x04FC, 20 + (i * 18), G_TX_RENDERTILE, 0, 0, 0x1000, 0x0400);
+        gDPPipeSync(gMainGfxPos++);
     }
 
-    gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, nuGfxCfb_ptr);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->unk_1C, data->unk_1D, data->unk_1E, data->unk_1F);
-    gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
-    gDPSetCombineLERP(gMasterGfxPos++, PRIMITIVE, 0, PRIMITIVE_ALPHA, TEXEL0, 0, 0, 0, SHADE, PRIMITIVE, 0,
+    gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, nuGfxCfb_ptr);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, data->unk_1C, data->unk_1D, data->unk_1E, data->unk_1F);
+    gDPSetCycleType(gMainGfxPos++, G_CYC_1CYCLE);
+    gDPSetCombineLERP(gMainGfxPos++, PRIMITIVE, 0, PRIMITIVE_ALPHA, TEXEL0, 0, 0, 0, SHADE, PRIMITIVE, 0,
                       PRIMITIVE_ALPHA, TEXEL0, 0, 0, 0, SHADE);
-    gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, VIRTUAL_TO_PHYSICAL(nuGfxZBuffer));
-    gDPSetRenderMode(gMasterGfxPos++, CVG_DST_SAVE | ZMODE_OPA | FORCE_BL | G_RM_PASS,
+    gDPSetTextureImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, VIRTUAL_TO_PHYSICAL(nuGfxZBuffer));
+    gDPSetRenderMode(gMainGfxPos++, CVG_DST_SAVE | ZMODE_OPA | FORCE_BL | G_RM_PASS,
                      CVG_DST_SAVE | ZMODE_OPA | FORCE_BL | GBL_c2(G_BL_CLR_IN, G_BL_0, G_BL_CLR_IN, G_BL_1));
-    gDPSetTexturePersp(gMasterGfxPos++, G_TP_PERSP);
-    gDPSetTextureFilter(gMasterGfxPos++, G_TF_BILERP);
+    gDPSetTexturePersp(gMainGfxPos++, G_TP_PERSP);
+    gDPSetTextureFilter(gMainGfxPos++, G_TF_BILERP);
 
     shim_guFrustumF(sp20, -80.0f, 80.0f, 60.0f, -60.0f, 160.0f, 640.0f, 1.0f);
     shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-    gSPClearGeometryMode(gMasterGfxPos++, G_CULL_BOTH | G_LIGHTING);
-    gSPSetGeometryMode(gMasterGfxPos++, G_SHADE | G_SHADING_SMOOTH);
-    gSPVertex(gMasterGfxPos++, D_09000428, 16, 0);
+    gSPClearGeometryMode(gMainGfxPos++, G_CULL_BOTH | G_LIGHTING);
+    gSPSetGeometryMode(gMainGfxPos++, G_SHADE | G_SHADING_SMOOTH);
+    gSPVertex(gMainGfxPos++, D_09000428, 16, 0);
 
     var_t9 = 0x18;
     for (i = 0; i < 12; i++) {
@@ -305,13 +305,13 @@ void underwater_appendGfx(void* effect) {
         }
         var_t9 += 0x10;
     }
-    gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, nuGfxZBuffer);
-    gSPDisplayList(gMasterGfxPos++, D_09000570);
-    gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, nuGfxZBuffer);
-    gDPPipeSync(gMasterGfxPos++);
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos],
+    gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, nuGfxZBuffer);
+    gSPDisplayList(gMainGfxPos++, D_09000570);
+    gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, nuGfxZBuffer);
+    gDPPipeSync(gMainGfxPos++);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos],
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-    gDPPipeSync(gMasterGfxPos++);
+    gDPPipeSync(gMainGfxPos++);
 }
 #else
 INCLUDE_ASM(s32, "effects/underwater", underwater_appendGfx);

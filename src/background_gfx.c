@@ -33,9 +33,9 @@ Gfx D_80074230[] = {
 //extern s32 timeFreezeMode; // TODO bss
 
 void gfx_init_state(void) {
-    gSPSegment(gMasterGfxPos++, 0x00, 0x0);
-    gSPDisplayList(gMasterGfxPos++, OS_K0_TO_PHYSICAL(D_80074230));
-    gSPDisplayList(gMasterGfxPos++, OS_K0_TO_PHYSICAL(D_80074210));
+    gSPSegment(gMainGfxPos++, 0x00, 0x0);
+    gSPDisplayList(gMainGfxPos++, OS_K0_TO_PHYSICAL(D_80074230));
+    gSPDisplayList(gMainGfxPos++, OS_K0_TO_PHYSICAL(D_80074210));
 }
 
 s32 gfx_frame_filter_pass_0(const u16* frameBuffer0, const u16* frameBuffer1, s32 y, s32 x, Color_RGBA8* out) {
@@ -279,21 +279,21 @@ void func_80027BAC(s32 arg0, s32 arg1) {
     s32 i;
     s32 temp = 24; // todo figure out why this is needed and can't be used elsewhere
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPTexture(gMasterGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
-    gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, arg1);
-    gDPSetCycleType(gMasterGfxPos++, G_CYC_COPY);
-    gDPSetTexturePersp(gMasterGfxPos++, G_TP_NONE);
-    gDPSetTextureLUT(gMasterGfxPos++, G_TT_NONE);
-    gDPSetRenderMode(gMasterGfxPos++, G_RM_NOOP, G_RM_NOOP2);
-    gDPSetTextureFilter(gMasterGfxPos++, G_TF_POINT);
+    gDPPipeSync(gMainGfxPos++);
+    gSPTexture(gMainGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
+    gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, arg1);
+    gDPSetCycleType(gMainGfxPos++, G_CYC_COPY);
+    gDPSetTexturePersp(gMainGfxPos++, G_TP_NONE);
+    gDPSetTextureLUT(gMainGfxPos++, G_TT_NONE);
+    gDPSetRenderMode(gMainGfxPos++, G_RM_NOOP, G_RM_NOOP2);
+    gDPSetTextureFilter(gMainGfxPos++, G_TF_POINT);
 
     for (i = 0; i < 40; i++) {
-        gDPLoadTextureTile(gMasterGfxPos++, arg0 + (0xF00 * i), G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
+        gDPLoadTextureTile(gMainGfxPos++, arg0 + (0xF00 * i), G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
                            SCREEN_HEIGHT, 0, 0, SCREEN_WIDTH - 1, 5, 0, G_TX_NOMIRROR | G_TX_WRAP,
                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
-        gSPTextureRectangle(gMasterGfxPos++, 0, i * temp, 0x04FC, (i * 24) + 20, G_TX_RENDERTILE, 0, 0, 0x1000, 0x0400);
-        gDPPipeSync(gMasterGfxPos++);
+        gSPTextureRectangle(gMainGfxPos++, 0, i * temp, 0x04FC, (i * 24) + 20, G_TX_RENDERTILE, 0, 0, 0x1000, 0x0400);
+        gDPPipeSync(gMainGfxPos++);
     }
 }
 
@@ -314,7 +314,7 @@ void gfx_draw_background(void) {
     s32 i;
     s32 a = SCREEN_COPY_TILE_HEIGHT << 2;
 
-    gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
     camera = &gCameras[gCurrentCameraID];
     bgFlags = gGameStatusPtr->backgroundFlags & BACKGROUND_RENDER_STATE_MASK;
@@ -322,16 +322,16 @@ void gfx_draw_background(void) {
     switch (bgFlags) {
         case BACKGROUND_RENDER_STATE_1:
             // Save coverage to nunGfxCfb[1] using the VISCVG render mode
-            gDPPipeSync(gMasterGfxPos++);
-            gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, nuGfxCfb[1]);
-            gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
-            gDPSetBlendColor(gMasterGfxPos++, 0x80, 0x80, 0x80, 0xFF);
-            gDPSetPrimDepth(gMasterGfxPos++, 0xFFFF, 0xFFFF);
-            gDPSetDepthSource(gMasterGfxPos++, G_ZS_PRIM);
-            gDPSetRenderMode(gMasterGfxPos++, G_RM_VISCVG, G_RM_VISCVG2);
-            gDPFillRectangle(gMasterGfxPos++, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-            gDPPipeSync(gMasterGfxPos++);
-            gDPSetDepthSource(gMasterGfxPos++, G_ZS_PIXEL);
+            gDPPipeSync(gMainGfxPos++);
+            gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, nuGfxCfb[1]);
+            gDPSetCycleType(gMainGfxPos++, G_CYC_1CYCLE);
+            gDPSetBlendColor(gMainGfxPos++, 0x80, 0x80, 0x80, 0xFF);
+            gDPSetPrimDepth(gMainGfxPos++, 0xFFFF, 0xFFFF);
+            gDPSetDepthSource(gMainGfxPos++, G_ZS_PRIM);
+            gDPSetRenderMode(gMainGfxPos++, G_RM_VISCVG, G_RM_VISCVG2);
+            gDPFillRectangle(gMainGfxPos++, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+            gDPPipeSync(gMainGfxPos++);
+            gDPSetDepthSource(gMainGfxPos++, G_ZS_PIXEL);
             gGameStatusPtr->backgroundFlags &= ~BACKGROUND_RENDER_STATE_MASK;
             gGameStatusPtr->backgroundFlags |= BACKGROUND_RENDER_STATE_2;
             break;
@@ -349,57 +349,57 @@ void gfx_draw_background(void) {
                 gPauseBackgroundFade = 128;
             }
 
-            gDPPipeSync(gMasterGfxPos++);
-            gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-            gDPSetCycleType(gMasterGfxPos++, G_CYC_FILL);
-            gDPSetRenderMode(gMasterGfxPos++, G_RM_NOOP, G_RM_NOOP2);
-            gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, nuGfxCfb_ptr);
-            gDPSetFillColor(gMasterGfxPos++, PACK_FILL_COLOR(0, 0, 0, 1));
-            gDPFillRectangle(gMasterGfxPos++, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
-            gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
-            gDPSetTexturePersp(gMasterGfxPos++, G_TP_NONE);
-            gDPSetTextureLUT(gMasterGfxPos++, G_TT_NONE);
-            gDPSetRenderMode(gMasterGfxPos++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
+            gDPPipeSync(gMainGfxPos++);
+            gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+            gDPSetCycleType(gMainGfxPos++, G_CYC_FILL);
+            gDPSetRenderMode(gMainGfxPos++, G_RM_NOOP, G_RM_NOOP2);
+            gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, nuGfxCfb_ptr);
+            gDPSetFillColor(gMainGfxPos++, PACK_FILL_COLOR(0, 0, 0, 1));
+            gDPFillRectangle(gMainGfxPos++, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
+            gDPSetCycleType(gMainGfxPos++, G_CYC_1CYCLE);
+            gDPSetTexturePersp(gMainGfxPos++, G_TP_NONE);
+            gDPSetTextureLUT(gMainGfxPos++, G_TT_NONE);
+            gDPSetRenderMode(gMainGfxPos++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
             // @bug In 1-cycle mode, the two combiner cycles should be identical. Using Texel1 here in the second cycle,
             // which is the actual cycle of the combiner used on hardware in 1-cycle mode, actually samples the next
             // pixel's texel value instead of the current pixel's. This results in a one-pixel offset.
-            gDPSetCombineLERP(gMasterGfxPos++, PRIMITIVE, TEXEL0, PRIMITIVE_ALPHA, TEXEL0, 0, 0, 0, 1, PRIMITIVE,
+            gDPSetCombineLERP(gMainGfxPos++, PRIMITIVE, TEXEL0, PRIMITIVE_ALPHA, TEXEL0, 0, 0, 0, 1, PRIMITIVE,
                               TEXEL1, PRIMITIVE_ALPHA, TEXEL1, 0, 0, 0, 1);
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 40, 40, 40, gPauseBackgroundFade);
-            gDPSetTextureFilter(gMasterGfxPos++, G_TF_POINT);
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, 40, 40, 40, gPauseBackgroundFade);
+            gDPSetTextureFilter(gMainGfxPos++, G_TF_POINT);
 
             for (i = 0; i < 40; i++) {
-                gDPLoadTextureTile(gMasterGfxPos++, nuGfxZBuffer + (i * SCREEN_WIDTH * SCREEN_COPY_TILE_HEIGHT), G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
+                gDPLoadTextureTile(gMainGfxPos++, nuGfxZBuffer + (i * SCREEN_WIDTH * SCREEN_COPY_TILE_HEIGHT), G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
                                    SCREEN_HEIGHT, 0, 0, SCREEN_WIDTH - 1, SCREEN_COPY_TILE_HEIGHT - 1, 0, G_TX_NOMIRROR | G_TX_WRAP,
                                    G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
                 // @bug Due to the previous issue with the incorrect second cycle combiner, the devs added a 1-pixel offset to texture coordinates
                 // in this texrect to compensate for the combiner error.
-                gSPTextureRectangle(gMasterGfxPos++,
+                gSPTextureRectangle(gMainGfxPos++,
                                     // ulx, uly, lrx, lry
                                     0 << 2, i * a, SCREEN_WIDTH << 2, a + (i * (SCREEN_COPY_TILE_HEIGHT << 2)),
                                     // tile
                                     G_TX_RENDERTILE,
                                     // s, t, dsdx, dtdy
                                     -1 << 5, 0 << 5, 1 << 10, 1 << 10);
-                gDPPipeSync(gMasterGfxPos++);
+                gDPPipeSync(gMainGfxPos++);
             }
             break;
         default:
             // Draw the scene's background as normal
             if (gOverrideFlags & GLOBAL_OVERRIDES_8) {
-                gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxCfb_ptr));
+                gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxCfb_ptr));
                 return;
             }
 
-            gDPSetDepthImage(gMasterGfxPos++, OS_K0_TO_PHYSICAL(nuGfxZBuffer));
-            gDPSetCycleType(gMasterGfxPos++, G_CYC_FILL);
-            gDPSetRenderMode(gMasterGfxPos++, G_RM_NOOP, G_RM_NOOP2);
-            gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_K0_TO_PHYSICAL(nuGfxZBuffer));
-            gDPSetFillColor(gMasterGfxPos++, PACK_FILL_DEPTH(G_MAXFBZ, 0));
-            gDPFillRectangle(gMasterGfxPos++, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
-            gDPPipeSync(gMasterGfxPos++);
-            gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxCfb_ptr));
-            gDPSetFillColor(gMasterGfxPos++, PACK_FILL_COLOR(camera->bgColor[0], camera->bgColor[1], camera->bgColor[2], 1));
+            gDPSetDepthImage(gMainGfxPos++, OS_K0_TO_PHYSICAL(nuGfxZBuffer));
+            gDPSetCycleType(gMainGfxPos++, G_CYC_FILL);
+            gDPSetRenderMode(gMainGfxPos++, G_RM_NOOP, G_RM_NOOP2);
+            gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_K0_TO_PHYSICAL(nuGfxZBuffer));
+            gDPSetFillColor(gMainGfxPos++, PACK_FILL_DEPTH(G_MAXFBZ, 0));
+            gDPFillRectangle(gMainGfxPos++, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
+            gDPPipeSync(gMainGfxPos++);
+            gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxCfb_ptr));
+            gDPSetFillColor(gMainGfxPos++, PACK_FILL_COLOR(camera->bgColor[0], camera->bgColor[1], camera->bgColor[2], 1));
 
             backgroundMinX = gGameStatusPtr->backgroundMinX;
             backgroundMaxX = backgroundMinX + gGameStatusPtr->backgroundMaxX;
@@ -456,37 +456,37 @@ void gfx_draw_background(void) {
             }
 
             if (!(gGameStatusPtr->backgroundFlags & BACKGROUND_FLAG_TEXTURE)) {
-                gDPFillRectangle(gMasterGfxPos++, backgroundMinX, backgroundMinY, backgroundMaxX - 1, backgroundMaxY - 1);
+                gDPFillRectangle(gMainGfxPos++, backgroundMinX, backgroundMinY, backgroundMaxX - 1, backgroundMaxY - 1);
             } else {
                 appendGfx_background_texture();
             }
 
-            gDPPipeSync(gMasterGfxPos++);
-            gDPSetCycleType(gMasterGfxPos++, G_CYC_FILL);
-            gDPSetRenderMode(gMasterGfxPos++, G_RM_NOOP, G_RM_NOOP2);
-            gDPSetFillColor(gMasterGfxPos++, PACK_FILL_COLOR(0, 0, 0, 1));
-            gDPPipeSync(gMasterGfxPos++);
+            gDPPipeSync(gMainGfxPos++);
+            gDPSetCycleType(gMainGfxPos++, G_CYC_FILL);
+            gDPSetRenderMode(gMainGfxPos++, G_RM_NOOP, G_RM_NOOP2);
+            gDPSetFillColor(gMainGfxPos++, PACK_FILL_COLOR(0, 0, 0, 1));
+            gDPPipeSync(gMainGfxPos++);
 
             if (backgroundMinY > 0) {
-                gDPFillRectangle(gMasterGfxPos++, 0, 0, SCREEN_WIDTH - 1, backgroundMinY - 1);
-                gDPNoOp(gMasterGfxPos++);
+                gDPFillRectangle(gMainGfxPos++, 0, 0, SCREEN_WIDTH - 1, backgroundMinY - 1);
+                gDPNoOp(gMainGfxPos++);
             }
 
             if (backgroundMinX > 0) {
-                gDPFillRectangle(gMasterGfxPos++, 0, backgroundMinY, backgroundMinX - 1, backgroundMaxY - 1);
-                gDPNoOp(gMasterGfxPos++);
+                gDPFillRectangle(gMainGfxPos++, 0, backgroundMinY, backgroundMinX - 1, backgroundMaxY - 1);
+                gDPNoOp(gMainGfxPos++);
             }
 
             if (backgroundMaxX < SCREEN_WIDTH) {
-                gDPFillRectangle(gMasterGfxPos++, backgroundMaxX, backgroundMinY, SCREEN_WIDTH - 1, backgroundMaxY - 1);
-                gDPNoOp(gMasterGfxPos++);
+                gDPFillRectangle(gMainGfxPos++, backgroundMaxX, backgroundMinY, SCREEN_WIDTH - 1, backgroundMaxY - 1);
+                gDPNoOp(gMainGfxPos++);
             }
 
             if (backgroundMaxY < SCREEN_HEIGHT) {
-                gDPFillRectangle(gMasterGfxPos++, 0, backgroundMaxY, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
-                gDPNoOp(gMasterGfxPos++);
+                gDPFillRectangle(gMainGfxPos++, 0, backgroundMaxY, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
+                gDPNoOp(gMainGfxPos++);
             }
             break;
     }
-    gDPPipeSync(gMasterGfxPos++);
+    gDPPipeSync(gMainGfxPos++);
 }

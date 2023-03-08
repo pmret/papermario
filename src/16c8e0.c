@@ -754,19 +754,19 @@ void tattle_cam_pre_render(Camera* camera) {
     }
 
     if (gGameStatusPtr->backgroundFlags & BACKGROUND_FLAG_TEXTURE) {
-        gDPPipeSync(gMasterGfxPos++);
-        gDPSetCycleType(gMasterGfxPos++, G_CYC_COPY);
-        gDPSetTexturePersp(gMasterGfxPos++, G_TP_NONE);
-        gDPSetTextureLUT(gMasterGfxPos++, G_TT_RGBA16);
-        gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGB, G_CC_DECALRGB);
-        gDPSetRenderMode(gMasterGfxPos++, G_RM_NOOP, G_RM_NOOP2);
-        gDPSetTextureFilter(gMasterGfxPos++, G_TF_POINT);
-        gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, cam->viewportStartX, cam->viewportStartY, cam->viewportStartX + cam->viewportW - 1, cam->viewportStartY + cam->viewportH - 1);
-        gDPPipeSync(gMasterGfxPos++);
+        gDPPipeSync(gMainGfxPos++);
+        gDPSetCycleType(gMainGfxPos++, G_CYC_COPY);
+        gDPSetTexturePersp(gMainGfxPos++, G_TP_NONE);
+        gDPSetTextureLUT(gMainGfxPos++, G_TT_RGBA16);
+        gDPSetCombineMode(gMainGfxPos++, G_CC_DECALRGB, G_CC_DECALRGB);
+        gDPSetRenderMode(gMainGfxPos++, G_RM_NOOP, G_RM_NOOP2);
+        gDPSetTextureFilter(gMainGfxPos++, G_TF_POINT);
+        gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, cam->viewportStartX, cam->viewportStartY, cam->viewportStartX + cam->viewportW - 1, cam->viewportStartY + cam->viewportH - 1);
+        gDPPipeSync(gMainGfxPos++);
         if (!fogEnabled) {
-            gDPLoadTLUT_pal256(gMasterGfxPos++, gGameStatusPtr->backgroundPalette);
+            gDPLoadTLUT_pal256(gMainGfxPos++, gGameStatusPtr->backgroundPalette);
         } else {
-            gDPLoadTLUT_pal256(gMasterGfxPos++, gTattleBgPalette);
+            gDPLoadTLUT_pal256(gMainGfxPos++, gTattleBgPalette);
         }
         bgWidth = gGameStatusPtr->backgroundMaxX;
         bgHeight = gGameStatusPtr->backgroundMaxY;
@@ -781,15 +781,15 @@ void tattle_cam_pre_render(Camera* camera) {
             if (texOffsetY > gGameStatusPtr->backgroundMaxY) {
                 texOffsetY -= gGameStatusPtr->backgroundMaxY;
             }
-            gDPLoadTextureTile(gMasterGfxPos++, gGameStatusPtr->backgroundRaster + bgWidth * texOffsetY,
+            gDPLoadTextureTile(gMainGfxPos++, gGameStatusPtr->backgroundRaster + bgWidth * texOffsetY,
                                G_IM_FMT_CI, G_IM_SIZ_8b, bgWidth, 6,
                                0, 0, 295, 5, 0,
                                G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
-            gSPTextureRectangle(gMasterGfxPos++, posX * 4, (lineHeight * i + posY) * 4,
+            gSPTextureRectangle(gMainGfxPos++, posX * 4, (lineHeight * i + posY) * 4,
                                                  (texOffsetX + posX - 1) * 4, (lineHeight * i + lineHeight - 1 + posY) * 4,
                                                  G_TX_RENDERTILE, bgWidth * 32, 0, 4096, 1024);
-            gSPTextureRectangle(gMasterGfxPos++, (texOffsetX + posX) * 4, (lineHeight * i + posY) * 4,
+            gSPTextureRectangle(gMainGfxPos++, (texOffsetX + posX) * 4, (lineHeight * i + posY) * 4,
                                                  (bgWidth + posX - 1) * 4, (lineHeight * i + lineHeight - 1 + posY) * 4,
                                                  G_TX_RENDERTILE, 0, 0, 4096, 1024);
         }
@@ -798,55 +798,55 @@ void tattle_cam_pre_render(Camera* camera) {
             if (texOffsetY > gGameStatusPtr->backgroundMaxY) {
                 texOffsetY -= gGameStatusPtr->backgroundMaxY;
             }
-            gDPLoadTextureTile(gMasterGfxPos++, gGameStatusPtr->backgroundRaster + bgWidth * texOffsetY,
+            gDPLoadTextureTile(gMainGfxPos++, gGameStatusPtr->backgroundRaster + bgWidth * texOffsetY,
                                G_IM_FMT_CI, G_IM_SIZ_8b, bgWidth, extraHeight,
                                0, 0, 295, extraHeight - 1, 0,
                                G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
-            gSPTextureRectangle(gMasterGfxPos++, posX * 4, (i * lineHeight + posY) * 4,
+            gSPTextureRectangle(gMainGfxPos++, posX * 4, (i * lineHeight + posY) * 4,
                                                  (texOffsetX + posX - 1) * 4, (bgHeight + - 1 + posY) * 4,
                                                  G_TX_RENDERTILE, bgWidth * 32, 0, 4096, 1024);
-            gSPTextureRectangle(gMasterGfxPos++, (texOffsetX + posX) * 4, (i * lineHeight + posY) * 4,
+            gSPTextureRectangle(gMainGfxPos++, (texOffsetX + posX) * 4, (i * lineHeight + posY) * 4,
                                                  (bgWidth + posX - 1) * 4, (bgHeight - 1 + posY) * 4,
                                                  G_TX_RENDERTILE, 0, 0, 4096, 1024);
         }
     }
 
-    gSPViewport(gMasterGfxPos++, &cam->vp);
-    gSPClearGeometryMode(gMasterGfxPos++, G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH);
-    gSPTexture(gMasterGfxPos++, 0, 0, 0, G_TX_RENDERTILE, G_OFF);
-    gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
-    gDPPipelineMode(gMasterGfxPos++, G_PM_NPRIMITIVE);
-    gDPSetScissorFrac(gMasterGfxPos++, G_SC_NON_INTERLACE, cam->viewportStartX * 4.0f, cam->viewportStartY * 4.0f, (cam->viewportStartX + cam->viewportW) * 4.0f, (cam->viewportStartY + cam->viewportH) * 4.0f);
-    gDPSetTextureLOD(gMasterGfxPos++, G_TL_TILE);
-    gDPSetTextureLUT(gMasterGfxPos++, G_TT_NONE);
-    gDPSetTextureDetail(gMasterGfxPos++, G_TD_CLAMP);
-    gDPSetTexturePersp(gMasterGfxPos++, G_TP_PERSP);
-    gDPSetTextureFilter(gMasterGfxPos++, G_TF_BILERP);
-    gDPSetTextureConvert(gMasterGfxPos++, G_TC_FILT);
-    gDPSetCombineMode(gMasterGfxPos++, G_CC_SHADE, G_CC_SHADE);
-    gDPSetCombineKey(gMasterGfxPos++, G_CK_NONE);
-    gDPSetAlphaCompare(gMasterGfxPos++, G_AC_NONE);
-    gDPSetRenderMode(gMasterGfxPos++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
-    gDPSetColorDither(gMasterGfxPos++, G_CD_DISABLE);
-    gSPClipRatio(gMasterGfxPos++, FRUSTRATIO_2);
-    gDPPipeSync(gMasterGfxPos++);
-    gDPSetCycleType(gMasterGfxPos++, G_CYC_FILL);
-    gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, osVirtualToPhysical(nuGfxZBuffer));
-    gDPSetFillColor(gMasterGfxPos++, PACK_FILL_DEPTH(G_MAXFBZ, 0));
-    gDPFillRectangle(gMasterGfxPos++, cam->viewportStartX, cam->viewportStartY, cam->viewportStartX + cam->viewportW - 1, cam->viewportStartY + cam->viewportH - 1);
-    gDPPipeSync(gMasterGfxPos++);
-    gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, osVirtualToPhysical(nuGfxCfb_ptr));
+    gSPViewport(gMainGfxPos++, &cam->vp);
+    gSPClearGeometryMode(gMainGfxPos++, G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH);
+    gSPTexture(gMainGfxPos++, 0, 0, 0, G_TX_RENDERTILE, G_OFF);
+    gDPSetCycleType(gMainGfxPos++, G_CYC_1CYCLE);
+    gDPPipelineMode(gMainGfxPos++, G_PM_NPRIMITIVE);
+    gDPSetScissorFrac(gMainGfxPos++, G_SC_NON_INTERLACE, cam->viewportStartX * 4.0f, cam->viewportStartY * 4.0f, (cam->viewportStartX + cam->viewportW) * 4.0f, (cam->viewportStartY + cam->viewportH) * 4.0f);
+    gDPSetTextureLOD(gMainGfxPos++, G_TL_TILE);
+    gDPSetTextureLUT(gMainGfxPos++, G_TT_NONE);
+    gDPSetTextureDetail(gMainGfxPos++, G_TD_CLAMP);
+    gDPSetTexturePersp(gMainGfxPos++, G_TP_PERSP);
+    gDPSetTextureFilter(gMainGfxPos++, G_TF_BILERP);
+    gDPSetTextureConvert(gMainGfxPos++, G_TC_FILT);
+    gDPSetCombineMode(gMainGfxPos++, G_CC_SHADE, G_CC_SHADE);
+    gDPSetCombineKey(gMainGfxPos++, G_CK_NONE);
+    gDPSetAlphaCompare(gMainGfxPos++, G_AC_NONE);
+    gDPSetRenderMode(gMainGfxPos++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
+    gDPSetColorDither(gMainGfxPos++, G_CD_DISABLE);
+    gSPClipRatio(gMainGfxPos++, FRUSTRATIO_2);
+    gDPPipeSync(gMainGfxPos++);
+    gDPSetCycleType(gMainGfxPos++, G_CYC_FILL);
+    gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, osVirtualToPhysical(nuGfxZBuffer));
+    gDPSetFillColor(gMainGfxPos++, PACK_FILL_DEPTH(G_MAXFBZ, 0));
+    gDPFillRectangle(gMainGfxPos++, cam->viewportStartX, cam->viewportStartY, cam->viewportStartX + cam->viewportW - 1, cam->viewportStartY + cam->viewportH - 1);
+    gDPPipeSync(gMainGfxPos++);
+    gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, osVirtualToPhysical(nuGfxCfb_ptr));
 
     if (!(gGameStatusPtr->backgroundFlags & BACKGROUND_FLAG_TEXTURE)) {
-        gDPSetCycleType(gMasterGfxPos++, G_CYC_FILL);
-        gDPSetFillColor(gMasterGfxPos++, PACK_FILL_COLOR(cam->bgColor[0], cam->bgColor[1], cam->bgColor[2], 1));
-        gDPFillRectangle(gMasterGfxPos++, cam->viewportStartX, cam->viewportStartY, cam->viewportStartX + cam->viewportW - 1, cam->viewportStartY + cam->viewportH - 1);
+        gDPSetCycleType(gMainGfxPos++, G_CYC_FILL);
+        gDPSetFillColor(gMainGfxPos++, PACK_FILL_COLOR(cam->bgColor[0], cam->bgColor[1], cam->bgColor[2], 1));
+        gDPFillRectangle(gMainGfxPos++, cam->viewportStartX, cam->viewportStartY, cam->viewportStartX + cam->viewportW - 1, cam->viewportStartY + cam->viewportH - 1);
     }
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPPerspNormalize(gMasterGfxPos++, cam->perspNorm);
+    gDPPipeSync(gMainGfxPos++);
+    gSPPerspNormalize(gMainGfxPos++, cam->perspNorm);
     guMtxF2L(cam->perspectiveMatrix, &gDisplayContext->camPerspMatrix[gCurrentCamID]);
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCamID], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCamID], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
 }
 
 void func_8023FF84(Camera* camera) {

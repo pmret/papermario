@@ -246,27 +246,27 @@ void fx_65_appendGfx(void* effect) {
     sp54 = data->unk_00;
     sp58 = data->unk_34;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     shim_guTranslateF(sp10, 0.0f, 0.0f, 0.0f);
     shim_guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPDisplayList(gMasterGfxPos++, D_E00CACB0[sp54]);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(gMainGfxPos++, D_E00CACB0[sp54]);
 
     if (sp54 >= 2) {
-        gDPSetCombineLERP(gMasterGfxPos++, SHADE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, SHADE, 0, 0, 0, 0, COMBINED, COMBINED, 0, PRIMITIVE, 0);
+        gDPSetCombineLERP(gMainGfxPos++, SHADE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, SHADE, 0, 0, 0, 0, COMBINED, COMBINED, 0, PRIMITIVE, 0);
     }
 
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->unk_18, data->unk_1C, data->unk_20, primAlpha);
-    gDPSetEnvColor(gMasterGfxPos++, data->unk_28, data->unk_2C, data->unk_30, 0);
-    gSPBranchList(gMasterGfxPos, gMasterGfxPos + 0x79);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, data->unk_18, data->unk_1C, data->unk_20, primAlpha);
+    gDPSetEnvColor(gMainGfxPos++, data->unk_28, data->unk_2C, data->unk_30, 0);
+    gSPBranchList(gMainGfxPos, gMainGfxPos + 0x79);
 
-    sp5C = (Vtx_t*) (gMasterGfxPos + 1);
+    sp5C = (Vtx_t*) (gMainGfxPos + 1);
     sp60 = -1;
     sp64 = (sp50 & 0x3F) << 5;
-    gMasterGfxPos += 0x79;
+    gMainGfxPos += 0x79;
 
     // use i in iteration?
     var_fp = 0;
@@ -381,12 +381,12 @@ void fx_65_appendGfx(void* effect) {
         }
 
         for (i = sp60; i < 29; i++) {
-            gSPVertex(gMasterGfxPos++, &sp5C[i * 2], 4, 0);
-            gSP2Triangles(gMasterGfxPos++, 0, 2, 1, 0, 1, 2, 3, 0);
+            gSPVertex(gMainGfxPos++, &sp5C[i * 2], 4, 0);
+            gSP2Triangles(gMainGfxPos++, 0, 2, 1, 0, 1, 2, 3, 0);
         }
     }
 
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
 #else
 INCLUDE_ASM(s32, "effects/effect_65", fx_65_appendGfx);

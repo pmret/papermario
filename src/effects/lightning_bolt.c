@@ -205,16 +205,16 @@ void lightning_bolt_appendGfx(void* effect) {
     type = data->type;
     widthScale = data->widthScale;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     shim_guScaleF(sp10, 0.1f, 0.1f, 0.1f);
     shim_guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->outerColor.r, data->outerColor.g, data->outerColor.b, alpha);
-    gDPSetEnvColor(gMasterGfxPos++, data->innerColor.r, data->innerColor.g, data->innerColor.b, 128);
-    gSPDisplayList(gMasterGfxPos++, D_09001000_3BBEA0);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, data->outerColor.r, data->outerColor.g, data->outerColor.b, alpha);
+    gDPSetEnvColor(gMainGfxPos++, data->innerColor.r, data->innerColor.g, data->innerColor.b, 128);
+    gSPDisplayList(gMainGfxPos++, D_09001000_3BBEA0);
 
     temp_a0 = lifetime - 1;
     if (type != 2) {
@@ -250,10 +250,10 @@ void lightning_bolt_appendGfx(void* effect) {
         data->edgeLength[i] = (f32) preset->width[i] * 0.1;
     }
 
-    vtxBuffer = (Vtx_t*) (gMasterGfxPos + 1);
-    vtx = (Vtx_t*) (gMasterGfxPos + 1);
-    gSPBranchList(gMasterGfxPos, gMasterGfxPos + 0x31);
-    gMasterGfxPos += 0x31;
+    vtxBuffer = (Vtx_t*) (gMainGfxPos + 1);
+    vtx = (Vtx_t*) (gMainGfxPos + 1);
+    gSPBranchList(gMainGfxPos, gMainGfxPos + 0x31);
+    gMainGfxPos += 0x31;
 
     for (i = 0; i < ARRAY_COUNT(data->boltVertexPosX); i++) {
         if (i == 0) {
@@ -310,13 +310,13 @@ void lightning_bolt_appendGfx(void* effect) {
 
     quadCount = i;
 
-    gSPVertex(gMasterGfxPos++, vtxBuffer, i * 2, 0);
-    gSPClearGeometryMode(gMasterGfxPos++, G_SHADING_SMOOTH);
+    gSPVertex(gMainGfxPos++, vtxBuffer, i * 2, 0);
+    gSPClearGeometryMode(gMainGfxPos++, G_SHADING_SMOOTH);
 
     for (i = 0; i < quadCount - 1; i++) {
-        gSP2Triangles(gMasterGfxPos++, i * 2 + 1, i * 2 + 0, i * 2 + 2, 0,
+        gSP2Triangles(gMainGfxPos++, i * 2 + 1, i * 2 + 0, i * 2 + 2, 0,
                                        i * 2 + 1, i * 2 + 2, i * 2 + 3, 0);
     }
 
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }

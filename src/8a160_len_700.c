@@ -144,17 +144,17 @@ void func_800F102C(void) {
     s32 i;
     s32 j;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x00, 0x00000000);
-    gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    gSPViewport(gMasterGfxPos++, &D_801096B0);
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x00, 0x00000000);
+    gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    gSPViewport(gMainGfxPos++, &D_801096B0);
 
     guOrthoF(sp20, 0.0f, SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f, -100.0f, 100.0f, 1.0f);
     guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-    gSPDisplayList(gMasterGfxPos++, D_80109710);
-    gDPSetEnvColor(gMasterGfxPos++, 127, 127, 127, 127);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+    gSPDisplayList(gMainGfxPos++, D_80109710);
+    gDPSetEnvColor(gMainGfxPos++, 127, 127, 127, 127);
 
     for (i = 0; i < ARRAY_COUNT(D_8010D000); i++, outer++) {
         outer = &D_8010D000[i];
@@ -170,11 +170,11 @@ void func_800F102C(void) {
                                 it->x, it->y, 0.0f);
                     guMtxF2L(sp60, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-                    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+                    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                               G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-                    gDPSetPrimColor(gMasterGfxPos++, 0, 80 - it->lodVal, it->rgba.r, it->rgba.g, it->rgba.b, it->rgba.a);
-                    gSPDisplayList(gMasterGfxPos++, D_801097D8);
-                    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+                    gDPSetPrimColor(gMainGfxPos++, 0, 80 - it->lodVal, it->rgba.r, it->rgba.g, it->rgba.b, it->rgba.a);
+                    gSPDisplayList(gMainGfxPos++, D_801097D8);
+                    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
                 }
             }
         }

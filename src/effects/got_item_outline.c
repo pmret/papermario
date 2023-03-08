@@ -116,16 +116,16 @@ void got_item_outline_appendGfx(void* effect) {
     s32 i;
 
     if (unk_18 != 0.0f) {
-        gDPPipeSync(gMasterGfxPos++);
-        gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
-        gSPDisplayList(gMasterGfxPos++, D_09008100_34DC40);
+        gDPPipeSync(gMainGfxPos++);
+        gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+        gSPDisplayList(gMainGfxPos++, D_09008100_34DC40);
 
         if (unk_00 == 0) {
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 255, data->unk_1C);
-            gDPSetEnvColor(gMasterGfxPos++, 0, 0, 0, 255);
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 255, data->unk_1C);
+            gDPSetEnvColor(gMainGfxPos++, 0, 0, 0, 255);
         } else {
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 255, data->unk_1C);
-            gDPSetEnvColor(gMasterGfxPos++, 255, 255, 0, 255);
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 255, data->unk_1C);
+            gDPSetEnvColor(gMainGfxPos++, 255, 255, 0, 255);
         }
 
         shim_guTranslateF(sp18, data->unk_04, data->unk_08, data->unk_0C);
@@ -140,7 +140,7 @@ void got_item_outline_appendGfx(void* effect) {
         shim_guMtxCatF(sp58, sp18, sp18);
         shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
         for (i = 0; i < 4; i++) {
             char* temp;
@@ -151,21 +151,21 @@ void got_item_outline_appendGfx(void* effect) {
                 temp = D_09004000_349B40[i];
             }
 
-            gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_IA, G_IM_SIZ_8b, 128, temp);
-            gDPSetTile(gMasterGfxPos++, G_IM_FMT_IA, G_IM_SIZ_8b, 16, 0, G_TX_LOADTILE, 0,
+            gDPSetTextureImage(gMainGfxPos++, G_IM_FMT_IA, G_IM_SIZ_8b, 128, temp);
+            gDPSetTile(gMainGfxPos++, G_IM_FMT_IA, G_IM_SIZ_8b, 16, 0, G_TX_LOADTILE, 0,
                        G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD,
                        G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
-            gDPLoadSync(gMasterGfxPos++);
-            gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, 0, 0, 508, 124);
-            gDPPipeSync(gMasterGfxPos++);
-            gDPSetTile(gMasterGfxPos++, G_IM_FMT_IA, G_IM_SIZ_8b, 16, 0, G_TX_RENDERTILE, 0,
+            gDPLoadSync(gMainGfxPos++);
+            gDPLoadTile(gMainGfxPos++, G_TX_LOADTILE, 0, 0, 508, 124);
+            gDPPipeSync(gMainGfxPos++);
+            gDPSetTile(gMainGfxPos++, G_IM_FMT_IA, G_IM_SIZ_8b, 16, 0, G_TX_RENDERTILE, 0,
                        G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD,
                        G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
-            gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0, 0, 508, 124);
-            gSPDisplayList(gMasterGfxPos++, D_E0036630[i]);
+            gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, 0, 0, 508, 124);
+            gSPDisplayList(gMainGfxPos++, D_E0036630[i]);
         }
 
-        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-        gDPPipeSync(gMasterGfxPos++);
+        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+        gDPPipeSync(gMainGfxPos++);
     }
 }

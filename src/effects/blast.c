@@ -111,10 +111,10 @@ void blast_appendGfx(void *effect) {
     unk_20f = unk_20;
     envAlpha = (unk_20f - unk_20) * two_fifty_six;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
-    gSPDisplayList(gMasterGfxPos++, D_09001300_37ECD0);
-    gSPDisplayList(gMasterGfxPos++, D_E007C510[unk_20]);
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPDisplayList(gMainGfxPos++, D_09001300_37ECD0);
+    gSPDisplayList(gMainGfxPos++, D_E007C510[unk_20]);
 
     shim_guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
     shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
@@ -125,19 +125,19 @@ void blast_appendGfx(void *effect) {
     shim_guMtxCatF(sp18, sp98, sp98);
     shim_guMtxF2L(sp98, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
               G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
     if (data->unk_20 > 4.0f) {
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 255, 127);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 255, 127);
     } else {
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 128, 127);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 128, 127);
     }
 
-    gDPSetEnvColor(gMasterGfxPos++, 255, 255, 139, envAlpha);
+    gDPSetEnvColor(gMainGfxPos++, 255, 255, 139, envAlpha);
 
-    gSPDisplayList(gMasterGfxPos++, dlist);
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gSPDisplayList(gMainGfxPos++, dlist);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
 #else
 INCLUDE_ASM(s32, "effects/blast", blast_appendGfx);

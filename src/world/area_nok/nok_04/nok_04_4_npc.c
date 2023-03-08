@@ -291,9 +291,9 @@ void N(build_gfx_thread)(void) {
     }
     N(ThreadData).overshootVel *= 0.5;
 
-    gSPDisplayList(gMasterGfxPos++, N(ThreadGfx));
+    gSPDisplayList(gMainGfxPos++, N(ThreadGfx));
     guTranslate(&gDisplayContext->matrixStack[gMatrixListPos], N(ThreadData).anchorPos.x, N(ThreadData).anchorPos.y, N(ThreadData).anchorPos.z);
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     segAngle = N(ThreadData).currentAngle;
     segLength = -N(ThreadData).currentLength;
@@ -301,22 +301,22 @@ void N(build_gfx_thread)(void) {
     y +=  segLength * cos_rad(N(ThreadData).currentAngle * 0 / 180.0f * PI);
 
     guPosition(&gDisplayContext->matrixStack[gMatrixListPos], 0.0f, 0.0f, segAngle, 1.0f, 0.0f, segLength, 0.0f);
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
     for (i = 1; i < NUM_THREAD_SEGMENTS; i++) {
         segAngle = N(ThreadData).currentAngle;
         segLength = -N(ThreadData).currentLength;
         x += -segLength * sin_rad(N(ThreadData).currentAngle * i / 180.0f * PI);
         y +=  segLength * cos_rad(N(ThreadData).currentAngle * i / 180.0f * PI);
-        gSPVertex(gMasterGfxPos++, N(ThreadSegmentVertices), 2, 0);
+        gSPVertex(gMainGfxPos++, N(ThreadSegmentVertices), 2, 0);
         guPosition(&gDisplayContext->matrixStack[gMatrixListPos], 0.0f, 0.0f, segAngle, 1.0f, 0.0f, segLength, 0.0f);
-        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-        gSPVertex(gMasterGfxPos++, N(ThreadSegmentVertices), 2, 2);
-        gSP2Triangles(gMasterGfxPos++, 0, 2, 1, 0, 2, 3, 1, 0);
+        gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+        gSPVertex(gMainGfxPos++, N(ThreadSegmentVertices), 2, 2);
+        gSP2Triangles(gMainGfxPos++, 0, 2, 1, 0, 2, 3, 1, 0);
     }
 
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-    gDPPipeSync(gMasterGfxPos++);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+    gDPPipeSync(gMainGfxPos++);
 
     N(ThreadData).endPoint.x = x;
     N(ThreadData).endPoint.y = y;

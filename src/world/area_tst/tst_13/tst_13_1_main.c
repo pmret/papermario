@@ -298,13 +298,13 @@ void N(build_gfx_floor)(void) {
     guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
     mdl_project_tex_coords(1, N(shockwave_gfx), sp10, NULL);
 
-    gDPPipeSync(gMasterGfxPos++);
-    gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
-    gDPSetRenderMode(gMasterGfxPos++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
-    mdl_draw_hidden_panel_surface(&gMasterGfxPos, 1);
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPDisplayList(gMasterGfxPos++, N(shockwave_gfx));
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gDPPipeSync(gMainGfxPos++);
+    gDPSetCycleType(gMainGfxPos++, G_CYC_1CYCLE);
+    gDPSetRenderMode(gMainGfxPos++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
+    mdl_draw_hidden_panel_surface(&gMainGfxPos, 1);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(gMainGfxPos++, N(shockwave_gfx));
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
 
 

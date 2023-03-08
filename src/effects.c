@@ -299,23 +299,23 @@ void render_effects_UI(void) {
                         if (cond) {
                             Camera* camera = &gCameras[gCurrentCameraID];
 
-                            gDPPipeSync(gMasterGfxPos++);
-                            gSPViewport(gMasterGfxPos++, &camera->vp);
-                            gSPClearGeometryMode(gMasterGfxPos++, G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG |
+                            gDPPipeSync(gMainGfxPos++);
+                            gSPViewport(gMainGfxPos++, &camera->vp);
+                            gSPClearGeometryMode(gMainGfxPos++, G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG |
                                                 G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD |
                                                 G_SHADING_SMOOTH | G_CLIPPING | 0x40F9FA);
-                            gSPSetGeometryMode(gMasterGfxPos++, G_ZBUFFER | G_SHADE | G_CULL_BACK | G_SHADING_SMOOTH);
-                            gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE,
+                            gSPSetGeometryMode(gMainGfxPos++, G_ZBUFFER | G_SHADE | G_CULL_BACK | G_SHADING_SMOOTH);
+                            gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE,
                                               camera->viewportStartX,
                                               camera->viewportStartY,
                                               camera->viewportStartX + camera->viewportW,
                                               camera->viewportStartY + camera->viewportH);
-                            gSPClipRatio(gMasterGfxPos++, FRUSTRATIO_2);
+                            gSPClipRatio(gMainGfxPos++, FRUSTRATIO_2);
 
                             cond = FALSE;
                             if (!(camera->flags & CAMERA_FLAG_ORTHO)) {
-                                gSPPerspNormalize(gMasterGfxPos++, camera->perspNorm);
-                                gSPMatrix(gMasterGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCameraID],
+                                gSPPerspNormalize(gMainGfxPos++, camera->perspNorm);
+                                gSPMatrix(gMainGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCameraID],
                                           G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
                             }
                         }
