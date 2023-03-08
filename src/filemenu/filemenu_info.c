@@ -2,7 +2,7 @@
 #include "filemenu.h"
 #include "hud_element.h"
 
-#if VERSION_CN
+#if VERSION_IQUE
 #define CREATE_SUCCESS_NUMBER_X 49
 #define NUMBER_OFFSET_Y 1
 #else
@@ -60,7 +60,7 @@ void filemenu_info_draw_message_contents(
             filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_HAS_BEEN_DELETED), baseX + 49, baseY + 4, 255, 0, 0);
             break;
         case 2:
-#if VERSION_CN
+#if VERSION_IQUE
             filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_COPY_FROM), baseX + 10, baseY + 7, 255, 0, 0);
             filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_FILE_26), baseX + 42, baseY + 7, 255, 0, 0);
             draw_number(filemenu_loadedFileIdx + 1, baseX + 84, baseY + 10, DRAW_NUMBER_CHARSET_NORMAL, MSG_PAL_WHITE, 255, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);

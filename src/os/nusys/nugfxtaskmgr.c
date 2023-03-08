@@ -69,7 +69,7 @@ void nuGfxTaskMgrInit(void) {
         nuGfxTask[i].msgQ = &D_800DAC90;
         nuGfxTask[i].list.t.type = M_GFXTASK;
         nuGfxTask[i].list.t.flags = 0;
-#if VERSION_CN
+#if VERSION_IQUE
         nuGfxTask[i].list.t.ucode_boot = (u64*) rspbootTextStart;
         nuGfxTask[i].list.t.ucode_boot_size = (u32) rspbootTextEnd - (u32) rspbootTextStart;
 #else

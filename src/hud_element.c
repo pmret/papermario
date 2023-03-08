@@ -3,7 +3,7 @@
 #include "nu/nusys.h"
 #include "ld_addrs.h"
 
-#if VERSION_CN
+#if VERSION_IQUE
 // TODO: remove if section is split in iQue release
 extern Addr icon_present_ROM_START;
 #endif

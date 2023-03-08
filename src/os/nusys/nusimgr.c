@@ -11,7 +11,7 @@ static void nuSiMgrThread(void* arg);
 
 extern u64 siMgrStack[NU_SI_STACK_SIZE/sizeof(u64)];
 
-#if !VERSION_JP && !VERSION_CN
+#if !VERSION_JP && !VERSION_IQUE
 u8 nuSiMgrInit(void) {
     u8 pattern;
     OSContStatus status[NU_CONT_MAXCONTROLLERS];
@@ -114,7 +114,7 @@ void nuSiMgrThread(void* arg) {
     }
 }
 
-#if VERSION_JP || VERSION_CN
+#if VERSION_JP || VERSION_IQUE
 u8 nuSiMgrInit(void) {
     u8 pattern;
     OSContStatus status[NU_CONT_MAXCONTROLLERS];

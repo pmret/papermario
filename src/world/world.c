@@ -80,7 +80,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
 
     gGameStatusPtr->playerSpriteSet = PLAYER_SPRITES_MARIO_WORLD;
 
-#if VERSION_CN
+#if VERSION_IQUE
     general_heap_create();
 #else
     load_obfuscation_shims();
@@ -152,7 +152,7 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
         load_map_bg(wMapBgName);
     }
 
-#if VERSION_CN
+#if VERSION_IQUE
     general_heap_create();
 #else
     load_obfuscation_shims();

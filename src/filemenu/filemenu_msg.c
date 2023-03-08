@@ -2,7 +2,7 @@
 #include "filemenu.h"
 #include "ld_addrs.h"
 
-#if VERSION_CN
+#if VERSION_IQUE
 // TODO: remove when charset segment is split for iQue
 extern Addr charset_standard_OFFSET;
 #endif
@@ -11,7 +11,7 @@ extern MessageCharset* gMsgCharsets[5];
 extern PAL_BIN D_802F4560[80][8];
 extern u8 filemenu_glyphBuffer[20][0x80];
 
-#if VERSION_CN
+#if VERSION_IQUE
 u8 filemenu_msg_C6[] = { 0xF7, 0xF7, 0x84, 0x05, 0x62, 0x14, 0xFD };
 u8 filemenu_msg_C7[] = { 0xFD };
 u8 filemenu_msg_C8[] = { 0xFD };
@@ -48,12 +48,12 @@ s32 filemenu_charset = 0;
 s32 filemenu_charset_raster_id = 0;
 s32 filemenu_char_color = -1;
 
-#if VERSION_CN
+#if VERSION_IQUE
 u32 filemenu_glyphBufferIndex = 0;
 #endif
 
 
-#if VERSION_CN
+#if VERSION_IQUE
 u8 filemenu_msg_01[] = { 0xF7, 0xF7, 0xF7, 0xF7, 0xF7, 0x7A, 0x14, 0x7B, 0x14, 0x79, 0x19, 0x7F, 0x06, 0x79, 0x04, 0x7A, 0x04, 0xFD };
 u8 filemenu_msg_02[] = { 0xF7, 0xF7, 0xF7, 0xF7, 0xF7, 0x7A, 0x14, 0x7B, 0x14, 0x79, 0x19, 0x7F, 0x06, 0x8C, 0x30, 0x6C, 0x12, 0xFD };
 u8 filemenu_msg_03[] = { 0x7A, 0x14, 0x7B, 0x14, 0x79, 0x19, 0x7F, 0x06, 0x89, 0x0D, 0x71, 0x15, 0xFD };
@@ -220,7 +220,7 @@ s32 filemenu_draw_char(s32 c, s32 x, s32 y, s32 flag1, s32 color, s32 flag2) {
         return charWidth;
     }
 
-#if VERSION_CN
+#if VERSION_IQUE
     if (c >= 0x100) {
         int offset;
         s32 character;
@@ -306,7 +306,7 @@ void filemenu_draw_message(u8* message, s32 x, s32 y, s32 alpha, s32 color, u32 
         filemenu_draw_char(0xF3, x, y, flag1, color, flag2);
         tmp = message;
         while (*tmp != 0xFD) {
-#if VERSION_CN
+#if VERSION_IQUE
             int ord = *tmp;
             if (ord >= MSG_CHAR_MULTIBYTE_FIRST && ord <= MSG_CHAR_MULTIBYTE_LAST) {
                 tmp++;
@@ -336,7 +336,7 @@ void filemenu_draw_file_name(u8* filename, s32 length, s32 x, s32 y, s32 alpha, 
         u32 c = filename[i];
 
         if (c != 0xF7) {
-#if VERSION_CN
+#if VERSION_IQUE
             // Numerals get drawn one pixel lower than other characters
             if (c >= MSG_CHAR_DIGIT_0 && c <= MSG_CHAR_DIGIT_9) {
                 filemenu_draw_message((u8*)c, x + (i * charWidth), y + 1, alpha, arg5, arg6);

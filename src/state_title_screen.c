@@ -409,7 +409,7 @@ void title_screen_draw_logo(f32 arg0) {
     gDPPipeSync(gMasterGfxPos++);
 }
 
-#if VERSION_CN
+#if VERSION_IQUE
 #define VAR_1 20
 #define VAR_2 628
 #else
@@ -454,7 +454,7 @@ void title_screen_draw_press_start(void) {
     gDPPipeSync(gMasterGfxPos++);
 }
 
-#if VERSION_CN
+#if VERSION_IQUE
 INCLUDE_ASM(void, "state_title_screen", title_screen_draw_copyright);
 #else
 void title_screen_draw_copyright(f32 arg0) {

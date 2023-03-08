@@ -116,7 +116,7 @@ BSS s32 filemenu_8024C0A4[3];
 BSS s32 filemenu_hudElemIDs[20];
 BSS s32 filemenu_createfile_hudElems[4];
 
-#if VERSION_CN
+#if VERSION_IQUE
 BSS u8 filemenu_glyphBuffer[20][0x80];
 #endif
 

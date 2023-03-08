@@ -28,7 +28,7 @@ BSS s8 gPauseMenuCurrentTab;
 BSS s8 D_802700D[7]; //padding
 
 static s32 gPauseTutorialFrameCounter;
-#if !VERSION_CN
+#if !VERSION_IQUE
 static s32 D_802700E4;
 #endif
 static s32 gPauseCommonIconIDs[8];

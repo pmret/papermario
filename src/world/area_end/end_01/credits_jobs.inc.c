@@ -103,7 +103,7 @@ CreditsEntry N(Credits_Jobs)[] = {
         .perCharDelayIn = 0,
         .next = 60,
     },
-#if VERSION_CN
+#if VERSION_IQUE
 // *©2000-2004* NINTENDO
 //      *©2004* IQUE
     {
@@ -209,7 +209,7 @@ CreditsEntry N(Credits_Jobs)[] = {
         .perCharDelayIn = 0,
         .next = 30,
     },
-#if VERSION_CN
+#if VERSION_IQUE
 //      *GAME BY*
 // INTELLIGENT SYSTEMS
 //  IQUE ENGINEERING

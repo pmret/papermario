@@ -3,13 +3,13 @@
 #include "message_ids.h"
 #include "sprite.h"
 
-#if !VERSION_CN
+#if !VERSION_IQUE
 // TODO: remove if assets are dumped in iQue release
 #include "charset/postcard.png.h"
 #include "charset/letter_content_1.png.h"
 #endif
 
-#if VERSION_CN
+#if VERSION_IQUE
 // TODO: remove if section is split in iQue release
 extern Addr charset_ROM_START;
 extern Addr charset_standard_OFFSET;
@@ -212,7 +212,7 @@ Gfx D_8014C500[] = {
 
 u8 D_8014C580[] = { 50, 80, 100, 105, 100, 0, 0, 0 };
 u8 D_8014C588[] = { 105, 100, 77, 57, 40, 27, 16, 8, 3, 0, 0, 0};
-#if VERSION_CN
+#if VERSION_IQUE
 u32 D_8014AD24 = 2;
 #else
 u8 D_8014C594[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -263,7 +263,7 @@ void clear_printers(void) {
     load_font(0);
 }
 
-#if VERSION_CN
+#if VERSION_IQUE
 void load_font_data(Addr offset, u32 size, void* dest) {
 #else
 void load_font_data(Addr offset, u16 size, void* dest) {
@@ -678,7 +678,7 @@ extern s32 D_802EB5C0[];
 extern s32 D_802EB5F0[];
 extern struct_D_802EB620 D_802EB620[];
 
-#if VERSION_CN
+#if VERSION_IQUE
 INCLUDE_ASM(s32, "msg", msg_copy_to_print_buffer);
 #else
 void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
@@ -1577,7 +1577,7 @@ s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 msgS
         return 0;
     }
 
-#if VERSION_CN
+#if VERSION_IQUE
     if (character >= 0x5F && character<=0x8F) {
         charWidth = 16.0;
         return charWidth * msgScale;
@@ -1905,7 +1905,7 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
                     endl = FALSE;
                 }
 
-#if VERSION_CN
+#if VERSION_IQUE
                 if (prevChar >= 0x5f && prevChar <= 0x8F) {
                     break;
                 }
@@ -2340,7 +2340,7 @@ void draw_message_window(MessagePrintState* printer) {
     }
 }
 
-#if VERSION_CN
+#if VERSION_IQUE
 INCLUDE_ASM(s32, "msg", appendGfx_message);
 #else
 void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 additionalOffsetX, u16 additionalOffsetY,
@@ -3670,7 +3670,7 @@ void msg_reset_gfx_state(void) {
     gSPDisplayList(gMasterGfxPos++, D_8014C500);
 }
 
-#if VERSION_CN
+#if VERSION_IQUE
 INCLUDE_ASM(s32, "msg", msg_draw_char);
 #else
 void msg_draw_char(MessagePrintState* printer, MessageDrawState* drawState, s32 charIndex, s32 palette, s32 posX, s32 posY) {
