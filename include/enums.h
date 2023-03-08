@@ -2976,6 +2976,11 @@ enum DoorSounds {
 
 #ifdef VERSION_US
 #include "sprite/sprite_shading_profiles.h"
+#elif VERSION_PAL
+// TODO: remove and split shading profiles
+enum ShadingProfile {
+    SHADING_NONE = 0xFFFFFFFF,
+};
 #endif
 
 enum LightSourceFlags {

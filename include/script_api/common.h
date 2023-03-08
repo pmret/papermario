@@ -337,6 +337,7 @@ ApiStatus MakeLocalVertexCopy(Evt* script, s32 isInitialCall);
 ApiStatus SetCustomGfx(Evt* script, s32 isInitialCall);
 ApiStatus SetCustomGfxBuilders(Evt* script, s32 isInitialCall);
 ApiStatus SetModelCustomGfx(Evt* script, s32 isInitialCall);
+ApiStatus GetLanguage(Evt* script, s32 isInitialCall);
 ApiStatus SetModelTexVariant(Evt* script, s32 isInitialCall);
 ApiStatus SetNpcPaletteSwapMode(Evt* script, s32 isInitialCall);
 ApiStatus SetNpcPaletteSwapLower(Evt* script, s32 isInitialCall);

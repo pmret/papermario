@@ -9,6 +9,7 @@ pipeline {
                 sh 'cp /usr/local/etc/roms/papermario.us.z64 ver/us/baserom.z64'
                 sh 'cp /usr/local/etc/roms/papermario.jp.z64 ver/jp/baserom.z64'
                 sh 'cp /usr/local/etc/roms/papermario.ique.z64 ver/ique/baserom.z64'
+                sh 'cp /usr/local/etc/roms/papermario.pal.z64 ver/pal/baserom.z64'
                 sh 'curl -L "https://github.com/pmret/gcc-papermario/releases/download/master/linux.tar.gz" | tar zx -C tools/build/cc/gcc'
                 sh 'curl -L "https://github.com/pmret/binutils-papermario/releases/download/master/linux.tar.gz" | tar zx -C tools/build/cc/gcc'
                 sh 'curl -L "https://github.com/decompals/ido-static-recomp/releases/download/v0.2/ido-5.3-recomp-ubuntu-latest.tar.gz" | tar zx -C tools/build/cc/ido5.3'
@@ -35,6 +36,7 @@ pipeline {
                         def us_progress = sh(returnStdout: true, script: "python3 progress.py us --pr-comment").trim()
                         def jp_progress = sh(returnStdout: true, script: "python3 progress.py jp --pr-comment").trim()
                         def ique_progress = sh(returnStdout: true, script: "python3 progress.py ique --pr-comment").trim()
+                        def pal_progress = sh(returnStdout: true, script: "python3 progress.py pal --pr-comment").trim()
                         def warnings = sh(returnStdout: true, script: "./tools/warnings_count/check_new_warnings.sh --jenkins").trim()
                         def comment_id = -1
 
@@ -44,9 +46,9 @@ pipeline {
                             }
                         }
 
-                        def message = "${us_progress}\n${jp_progress}\n${ique_progress}\n${warnings}"
+                        def message = "${us_progress}\n${jp_progress}\n${ique_progress}\n${pal_progress}\n${warnings}"
 
-                        if (message != "\n\n\n") {
+                        if (message != "\n\n\n\n") {
                             if (comment_id == -1) {
                                 echo message
                                 pullRequest.comment(message)
@@ -74,6 +76,9 @@ pipeline {
                 sh 'python3 progress.py ique --csv >> reports/progress_ique.csv'
                 sh 'python3 progress.py ique --shield-json > reports/progress_ique_shield.json'
 
+                sh 'python3 progress.py pal --csv >> reports/progress_pal.csv'
+                sh 'python3 progress.py pal --shield-json > reports/progress_pal_shield.json'
+
                 sh 'cat build_log.txt | grep warning | sort > tools/warnings_count/warnings.txt'
                 sh 'cp tools/warnings_count/warnings.txt reports/warnings.txt'
 
@@ -97,6 +102,9 @@ pipeline {
 
                 sh 'cat reports/progress_ique.csv >> /var/www/papermar.io/html/reports/progress_ique.csv'
                 sh 'cat reports/progress_ique_shield.json > /var/www/papermar.io/html/reports/progress_ique_shield.json'
+
+                sh 'cat reports/progress_pal.csv >> /var/www/papermar.io/html/reports/progress_pal.csv'
+                sh 'cat reports/progress_pal_shield.json > /var/www/papermar.io/html/reports/progress_pal_shield.json'
 
                 sh 'cat reports/warnings.txt > /var/www/papermar.io/html/reports/warnings.txt'
             }

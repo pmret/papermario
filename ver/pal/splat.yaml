@@ -1,0 +1,374 @@
+name: Paper Mario (PAL)
+sha1: 2111d39265a317414d359e35a7d971c4dfa5f9e1
+options:
+  basename: papermario
+  find_file_boundaries: True
+  compiler: GCC
+  mnemonic_ljust: 10
+  platform: n64
+  subalign: 8
+  asm_data_macro: "dlabel"
+
+  base_path: ../..
+  target_path: ver/pal/baserom.z64
+  extensions_path: tools/splat_ext
+  symbol_addrs_path: ver/pal/symbol_addrs.txt
+  ld_script_path: ver/pal/papermario.ld
+  ld_symbol_header_path: ver/pal/build/include/ld_addrs.h
+  src_path: src
+  asm_path: ver/pal/asm
+  asset_path: assets/pal
+  build_path: ver/pal/build
+  cache_path: ver/pal/.splat_cache
+  create_undefined_funcs_auto: False
+  create_undefined_syms_auto: False
+  undefined_funcs_auto_path: ver/us/undefined_funcs_auto.txt
+  undefined_syms_auto_path: ver/us/undefined_syms_auto.txt
+  symbol_name_format: PAL_$VRAM
+  symbol_name_format_no_rom: PAL_$VRAM_$SEG
+asset_stack:
+  - pal
+segments:
+  - name: header
+    type: header
+    start: 0
+  - [0x40, bin]
+
+
+############
+### Maps ###
+############
+  - name: machi
+    dir: world/area_mac/machi
+    type: code
+    start: 0x853440
+    vram: 0x80240000
+    subsegments:
+    - [0x853440, c, machi_0_header]
+    - [0x853440, c, machi_1_tables]
+    - [0x853440, c, machi_2_main]
+    - [0x853470, c, machi_3_entity]
+    - [0x8535F0, c, machi_4_goomba_king]
+    - [0x8535F0, c, machi_5_npc]
+    - [0x8538F0, c, machi_6_misstar]
+    - [0x853AD0, c, machi_7_partner]
+  - name: mac_00
+    dir: world/area_mac/mac_00
+    type: code
+    start: 0x856DB0
+    vram: 0x80240000
+    subsegments:
+    - [0x856DB0, c, mac_00_0_header]
+    - [0x856DB0, c, mac_00_1_music]
+    - [0x856DB0, c, mac_00_2_main]
+    - [0x8573E0, c, mac_00_3_entity]
+    - [0x8573E0, c, mac_00_4_rooms]
+    - [0x8573E0, c, mac_00_5_npc]
+    - [0x859070, c, mac_00_6_shop]
+    - [0x859070, c, mac_00_7_music_mix]
+    - [0x8591A0, c, mac_00_8_demo]
+    - [0x8591A0, c, mac_00_9_water_gfx]
+    - [0x859320, c, mac_00_10_shared_npc]
+    - [0x85A910, c, mac_00_11_intro_npc]
+    - [0x85A910, c, mac_00_12_intro]
+    - [0x85A910, c, mac_00_13_epilogue_npc]
+    - [0x85A910, c, mac_00_14_epilogue]
+
+  - [0x86C990, bin]
+
+  - start: 0x1e937b8
+    align: 8
+    type: pm_npc_sprites
+    dir: sprite
+    name: npc
+    files:
+      - WorldGoombario
+      - WorldKooper
+      - WorldBombette
+      - WorldParakarry
+      - WorldBow
+      - WorldWatt
+      - WorldSushie
+      - WorldLakilester
+      - BattleGoombario
+      - BattleKooper
+      - BattleBombette
+      - BattleParakarry
+      - BattleBow
+      - BattleWatt
+      - BattleSushie
+      - BattleLakilester
+      - KooperWithoutShell
+      - WorldEldstar
+      - WorldMamar
+      - WorldSkolar
+      - WorldMuskular
+      - WorldMisstar
+      - WorldKlevar
+      - WorldKalmar
+      - BattleEldstar
+      - BattleMamar
+      - BattleSkolar
+      - BattleMuskular
+      - BattleMisstar
+      - BattleKlevar
+      - BattleKalmar
+      - Twink
+      - JrTroopa
+      - SpikedJrTroopa
+      - SpikedParaJrTroopa
+      - MageJrTroopa
+      - ParaJrTroopa
+      - Goomba
+      - SpikedGoomba
+      - Paragoomba
+      - KoopaTroopa
+      - ParaTroopa
+      - Fuzzy
+      - Bobomb
+      - BulletBill
+      - BillBlaster
+      - MontyMole
+      - Cleft
+      - Pokey
+      - Bandit
+      - BuzzyBeetle
+      - Swooper
+      - StoneChomp
+      - LargePiranha
+      - SmallPiranha
+      - Sentinel
+      - WorldClubba
+      - BattleClubba
+      - ShyGuy
+      - GrooveGuy
+      - SkyGuy
+      - PyroGuy
+      - SpyGuy
+      - MediGuy
+      - Fuzzipede
+      - SpearGuy
+      - HeartPlant
+      - HurtPlant
+      - MBush
+      - LavaBubble
+      - KentCKoopa
+      - Dayzee
+      - Lakitu
+      - Spiny
+      - Bzzap
+      - RuffPuff
+      - SpikeTop
+      - Duplighost
+      - AlbinoDino
+      - Blooper
+      - BabyBlooper
+      - Gulpit
+      - DryBones
+      - ThrownBone
+      - BonyBeetle
+      - Magikoopa
+      - FlyingMagikoopa
+      - WorldKoopatrol
+      - Koopatrol
+      - HammerBros
+      - BushBasic
+      - BushBlocky
+      - BushDry
+      - BushLeafy
+      - BushMatted
+      - WorldKammy
+      - BattleKammy
+      - GoombaBros
+      - GoombaKing
+      - SpikyGoomnut
+      - DarkToad
+      - KoopaBros
+      - Buzzar
+      - Tutankoopa
+      - ChainChomp
+      - WorldTubba
+      - BattleTubba
+      - TubbasHeart
+      - BigLanternGhost
+      - ShySquadGuy
+      - MarshalGuy
+      - StiltGuy
+      - StiltGuyUnfold
+      - ShyStackGuy
+      - ShyStackUnfold
+      - ShyStackDamage
+      - ShyStackRock
+      - GeneralGuy
+      - GeneralGuyBomb
+      - TankGuy
+      - LavaPiranha
+      - PetitPiranha
+      - LavaBud
+      - HuffNPuff
+      - TuffPuff
+      - Monstar
+      - CrystalKing
+      - WorldBowser
+      - BattleBowser
+      - Luigi
+      - Toad
+      - Toadette
+      - VannaT
+      - ToadKid
+      - ToadGuard
+      - HarryT
+      - ToadMinister
+      - Postmaster
+      - ConductorToad
+      - TrainToad
+      - Fishmael
+      - Musician
+      - Koopa
+      - KoopaWithoutShell
+      - WorldBobomb
+      - Whacka
+      - Dryite
+      - Mouser
+      - Boo
+      - Yoshi
+      - YoshiKid
+      - Raven
+      - Bubulb
+      - Penguin
+      - ShiverToad
+      - AltBandit
+      - Goompa
+      - Goombaria
+      - Gooma
+      - Goompapa
+      - Goomama
+      - TheMaster
+      - Chan
+      - Lee
+      - Merlon
+      - ChetRippo
+      - Rowf
+      - MinhT
+      - RussT
+      - TayceT
+      - FiceT
+      - Bartender
+      - Chanterelle
+      - RipCheato
+      - ChuckQuizmo
+      - Merluvlee
+      - Merlar
+      - Merlow
+      - StarMan
+      - KoloradoWife
+      - KoopaKoot
+      - Kolorado
+      - BattleKolorado
+      - Archeologist
+      - Nomadimouse
+      - WorldMerlee
+      - BattleMerlee
+      - DisguisedMoustafa
+      - Moustafa
+      - Oaklie
+      - Bootler
+      - Yakkey
+      - GourmetGuy
+      - VillageLeader
+      - LeadersFriend
+      - RaphaelRaven
+      - Tolielup
+      - GateFlower
+      - Petunia
+      - Posie
+      - Lily
+      - Rosie
+      - Sun
+      - Lakilulu
+      - Ninji
+      - MayorPenguin
+      - MayorPenguinWife
+      - PenguinPatrol
+      - Herringway
+      - Merle
+      - StarRod
+      - Fire
+      - Coin
+      - ParadePeach
+      - ParadeKoopas
+      - ParadeBurntBowser
+      - ParadeLuigi
+      - ParadePartner
+      - ParadeYoshi
+      - ParadeKolorado
+      - ParadeChick
+      - ParadeIceShow
+      - ParadeToad
+      - ParadeTwirler
+      - ParadeDrummer
+      - ParadeBanner
+      - ParadeHorn
+      - ParadeTubba
+      - ParadeWizard
+      - ParadeMario
+      - ParadeShyGuy
+      - ParadeTwink
+      - Leaf
+
+  - [0x202f208, bin] # end of sprite data - todo: figure out what this is
+
+  - start: 0x2030000
+    name: msg_pal_en
+    type: pm_msg
+    files:
+      - 00_Intro
+      - 01_Outro
+      - 02_ToadTownGate
+      - 03_ToadTownPlaza
+      - 04_ToadTownBridge
+      - 05_ToadTownStation
+      - 06_ToadTownHousing
+      - 07_ToadTownPort
+      - 08_Minigame
+      - 09_CastleGrounds
+      - 0A_ShootingStarSummit
+      - 0B_Prologue
+      - 0C_Chapter1
+      - 0D_Chapter2
+      - 0E_Chapter3
+      - 0F_Chapter4
+      - 10_Chapter5
+      - 11_Chapter6
+      - 12_Chapter7
+      - 13_Chapter8
+      - 14_Peach
+      - 15_KootFavors
+      - 16_RussTHints
+      - 17_NewsBoard
+      - 18_GossipBoard
+      - 19_MapTattles
+      - 1A_NpcTattles
+      - 1B_EntityTattles
+      - 1C_EnemyTattles
+      - 1D_Menus
+      - 1E_Choices
+      - 1F_MenuTips
+      - 20_Documents
+      - 21_MerlonHints
+      - 22_MerluvleeHints
+      - 23_ShortItemDesc
+      - 24_ShopItemDesc
+      - 25_FullItemDesc
+      - 26_ItemNames
+      - 27_Shops
+      - 28_PartnerDesc
+      - 29_EnemyNames
+      - 2A_PlayerMoves
+      - 2B_PartnerMoves
+      - 2C_QuizQuestions
+      - 2D_QuizChoices
+      - 2E_Credits
+  - [0x2132440, bin]
+
+  - [0x4000000]

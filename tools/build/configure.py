@@ -10,7 +10,7 @@ import ninja_syntax
 from glob import glob
 
 # Configuration:
-VERSIONS = ["us", "jp", "ique"]
+VERSIONS = ["us", "jp", "ique", "pal"]
 DO_SHA1_CHECK = True
 
 # Paths:
