@@ -15571,7 +15571,7 @@ segments:
       subsegments:
       - [0xE20B30, ci4, inspect_icon, 32, 32]
       - [0xE20D30, palette, inspect_icon]
-      - [0xE20D50, gfx, inspect_icon_dlist]
+      - [0xE20D50, gfx, inspect_icon]
       - [0xE20DC8]
     - [0xE20DD0]
   - type: code
@@ -15587,7 +15587,7 @@ segments:
       subsegments:
       - [0xE215C0, ci4, speech_bubble, 32, 32]
       - [0xE217C0, palette, speech_bubble]
-      - [0xE217E0, gfx, speech_bubble_dlist]
+      - [0xE217E0, gfx, speech_bubble]
       - [0xE21858]
     - [0xE21860]
   - type: code
@@ -15601,10 +15601,10 @@ segments:
       type: .data
       name: pulse_stone
       subsegments:
-      - [0xE21EB0, ci4, pulse_stone, 56, 56]
-      - [0xE224D0, palette, pulse_stone]
-      - [0xE224F0, palette, pulse_stone.flash]
-      - [0xE22510, gfx, pulse_stone_dlist]
+      - [0xE21EB0, ci4, pulse_stone_icon, 56, 56]
+      - [0xE224D0, palette, pulse_stone_icon]
+      - [0xE224F0, palette, pulse_stone_icon.flash]
+      - [0xE22510, gfx, pulse_stone_icon]
       - [0xE22588]
     - [0xE22590]
   - type: code
@@ -15618,11 +15618,11 @@ segments:
       type: .data
       name: i_spy
       subsegments:
-      - [0xE22B30, ci4, i_spy, 56, 56]
-      - [0xE23150, palette, i_spy]
-      - [0xE23170, palette, i_spy.2]
-      - [0xE23190, palette, i_spy.flash]
-      - [0xE231B0, gfx, i_spy_dlist]
+      - [0xE22B30, ci4, ispy_icon, 56, 56]
+      - [0xE23150, palette, ispy_icon]
+      - [0xE23170, palette, ispy_icon.2]
+      - [0xE23190, palette, ispy_icon.3]
+      - [0xE231B0, gfx, ispy_icon]
       - [0xE23228]
     - [0xE23230]
   - type: code

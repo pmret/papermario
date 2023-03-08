@@ -269,12 +269,12 @@ block_17:
                 partner_disable_input();
                 D_8010CCFA = 3;
                 D_8010CD00 = 1;
-                D_8010CCFE = playerStatus->inputEnabledCounter;
+                D_8010CCFE = playerStatus->inputDisabledCount;
             }
             break;
         case 1:
             flags = ~PS_FLAG_PAUSED;
-            if ((func_800E6904() == 0) || is_picking_up_item() || D_8010CCFE < playerStatus->inputEnabledCounter) {
+            if ((func_800E6904() == 0) || is_picking_up_item() || D_8010CCFE < playerStatus->inputDisabledCount) {
                 playerStatus->flags &= flags;
                 enable_player_input();
                 partner_enable_input();

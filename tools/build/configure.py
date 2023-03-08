@@ -813,7 +813,10 @@ if __name__ == "__main__":
             shutil.rmtree(ROOT / f"assets/{version}", ignore_errors=True)
             shutil.rmtree(ROOT / f"ver/{version}/assets", ignore_errors=True)
             shutil.rmtree(ROOT / f"ver/{version}/build", ignore_errors=True)
-            os.remove(ROOT / f"ver/{version}/.splat_cache")
+            try:
+                os.remove(ROOT / f"ver/{version}/.splat_cache")
+            except OSError:
+                pass
 
     extra_cflags = ""
     extra_cppflags = ""

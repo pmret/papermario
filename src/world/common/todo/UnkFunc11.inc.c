@@ -7,7 +7,7 @@ API_CALLABLE(N(UnkFunc11)) {
     CollisionStatus* collisionStatus = &gCollisionStatus;
 
     if ((collisionStatus->pushingAgainstWall != pushableColliderID && playerStatus->actionState == ACTION_STATE_PUSHING_BLOCK) ||
-        playerStatus->enableCollisionOverlapsCheck || playerStatus->inputEnabledCounter) {
+        playerStatus->enableCollisionOverlapsCheck || playerStatus->inputDisabledCount != 0) {
         set_action_state(ACTION_STATE_IDLE);
         script->varTable[0] = 0;
         return ApiStatus_DONE2;

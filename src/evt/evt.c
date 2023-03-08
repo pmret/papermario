@@ -1029,7 +1029,7 @@ ApiStatus evt_handle_bind(Evt* script) {
     bp.colliderID = evt_get_variable(script, colliderIDVar);
     bp.varIndex = evt_get_variable_index(script, colliderIDVar);
     bp.hasPlayerInteractPrompt = hasInteractPrompt;
-    bp.unk_tr_2C = 0;
+    bp.tattleMsg = 0;
     bp.onActivateFunc = evt_trigger_on_activate_exec_script;
 
     trigger = create_trigger(&bp);
@@ -1149,7 +1149,7 @@ ApiStatus evt_handle_bind_lock(Evt* script) {
     bp.varIndex = evt_get_variable_index(script, colliderIDVar);
     bp.itemList = itemList;
     bp.onActivateFunc = evt_trigger_on_activate_lock;
-    bp.unk_tr_2C = triggerOut;
+    bp.tattleMsg = triggerOut;
     bp.hasPlayerInteractPrompt = hasInteractPrompt;
 
     trigger = create_trigger(&bp);

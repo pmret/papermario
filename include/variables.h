@@ -148,11 +148,14 @@ extern UNK_TYPE D_800E92D8;
 extern UNK_TYPE D_80147574;
 extern s8 D_8014C248[];
 
-extern UNK_FUN_PTR(PulseStoneNotificationCallback);
 extern UNK_FUN_PTR(TalkNotificationCallback);
+extern UNK_FUN_PTR(InteractNotificationCallback);
+extern UNK_FUN_PTR(ISpyNotificationCallback);
+extern UNK_FUN_PTR(PulseStoneNotificationCallback);
+
 extern Entity* TweesterTouchingPartner;
 extern Entity* TweesterTouchingPlayer;
-extern UNK_FUN_PTR(InteractNotificationCallback);
+
 extern s32 PrevPlayerDirection;
 extern s32 PeachDisguiseNpcIndex;
 extern s32 D_8010C980;

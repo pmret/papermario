@@ -7,7 +7,7 @@ void world_goombaria_init(Npc* goombaria) {
     goombaria->collisionRadius = 20;
 }
 
-ApiStatus GoombariaTakeOut(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GoombariaTakeOut) {
     Npc* goombaria = script->owner2.npc;
 
     if (isInitialCall) {
@@ -17,7 +17,7 @@ ApiStatus GoombariaTakeOut(Evt* script, s32 isInitialCall) {
     return partner_get_out(goombaria) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
-ApiStatus GoombariaUpdate(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GoombariaUpdate) {
     PlayerData* playerData = &gPlayerData;
     Npc* goombaria = script->owner2.npc;
 
@@ -32,11 +32,11 @@ ApiStatus GoombariaUpdate(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus GoombariaUseAbility(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GoombariaUseAbility) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GoombariaPutAway(Evt* script, s32 isInitialCall) {
+API_CALLABLE(GoombariaPutAway) {
     Npc* goombaria = script->owner2.npc;
 
     if (isInitialCall) {
@@ -46,25 +46,25 @@ ApiStatus GoombariaPutAway(Evt* script, s32 isInitialCall) {
     return partner_put_away(goombaria) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
-EvtScript world_goombaria_take_out = {
+EvtScript EVS_WorldGoombariaTakeOut = {
     EVT_CALL(GoombariaTakeOut)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript world_goombaria_update = {
+EvtScript EVS_WorldGoombariaUpdate = {
     EVT_CALL(GoombariaUpdate)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript world_goombaria_use_ability = {
+EvtScript EVS_WorldGoombariaUseAbility = {
     EVT_CALL(GoombariaUseAbility)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript world_goombaria_put_away = {
+EvtScript EVS_WorldGoombariaPutAway = {
     EVT_CALL(GoombariaPutAway)
     EVT_RETURN
     EVT_END

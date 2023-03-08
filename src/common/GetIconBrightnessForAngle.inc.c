@@ -1,6 +1,8 @@
 #include "common.h"
 
-s32 N(UnkAngleFunc1)(f32 angle) {
+// determines the 'brightness' of inspect and speech bubble icons as a function of angle,
+// making them appear more three-dimensional.
+s32 N(GetIconBrightnessForAngle)(f32 angle) {
     s32 angleDiff;
 
     if (angle >= 270.0f) {

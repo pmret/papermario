@@ -119,6 +119,13 @@ void _use_partner_ability(void);
 void partner_flying_follow_player(Npc*);
 void partner_move_to_goal(Npc*, s32);
 
+typedef struct UseItemStruct {
+    /* 0x00 */ u8* dmaStart;
+    /* 0x04 */ u8* dmaEnd;
+    /* 0x08 */ EvtScript* main;
+    /* 0x0C */ s32 unk_0C;
+} UseItemStruct;
+
 // Partner icons
 HudScript* wPartnerHudScripts[] = {
     &HES_Partner0, &HES_Goombario, &HES_Kooper, &HES_Bombette,
@@ -169,26 +176,26 @@ f32 D_800F8034 = 0.0f;
 s16 D_800F8038 = 0;
 s16 D_800F803A = 0;
 
-WorldPartner wPartners[12] = {
-    {}, // None
-    {
-        // Goombario
+WorldPartner wPartners[] = {
+    [PARTNER_NONE] {
+        // blank
+    },
+    [PARTNER_GOOMBARIO] {
         .dmaStart = &world_partner_goombario_ROM_START,
         .dmaEnd = &world_partner_goombario_ROM_END,
         .dmaDest = &world_partner_goombario_VRAM,
         .isFlying = FALSE,
         .init = world_goombario_init,
-        .takeOut = &world_goombario_take_out,
-        .update = &world_goombario_update,
-        .useAbility = &world_goombario_use_ability,
-        .putAway = &world_goombario_put_away,
+        .takeOut = &EVS_GoombarioTakeOut,
+        .update = &EVS_GoombarioUpdate,
+        .useAbility = &EVS_GoombarioUseAbility,
+        .putAway = &EVS_GoombarioPutAway,
         .idle = ANIM_WorldGoombario_Idle,
         .canUseAbility = world_goombario_can_pause,
         .canPlayerPause = world_goombario_can_pause,
         .preBattle = world_goombario_pre_battle,
     },
-    {
-        // Kooper
+    [PARTNER_KOOPER] {
         .dmaStart = &world_partner_kooper_ROM_START,
         .dmaEnd = &world_partner_kooper_ROM_END,
         .dmaDest = &world_partner_kooper_VRAM,
@@ -205,8 +212,7 @@ WorldPartner wPartners[12] = {
         .preBattle = world_kooper_pre_battle,
         .postBattle = world_kooper_post_battle,
     },
-    {
-        // Bombette
+    [PARTNER_BOMBETTE] {
         .dmaStart = &world_partner_bombette_ROM_START,
         .dmaEnd = &world_partner_bombette_ROM_END,
         .dmaDest = &world_partner_bombette_VRAM,
@@ -222,8 +228,7 @@ WorldPartner wPartners[12] = {
         .canPlayerPause = world_bombette_can_player_pause,
         .preBattle = world_bombette_pre_battle,
     },
-    {
-        // Parakarry
+    [PARTNER_PARAKARRY] {
         .dmaStart = &world_partner_parakarry_ROM_START,
         .dmaEnd = &world_partner_parakarry_ROM_END,
         .dmaDest = &world_partner_parakarry_VRAM,
@@ -238,21 +243,19 @@ WorldPartner wPartners[12] = {
         .preBattle = world_parakarry_pre_battle,
         .postBattle = world_parakarry_post_battle,
     },
-    {
-        // Goompa
+    [PARTNER_GOOMPA] {
         .dmaStart = &world_partner_goompa_ROM_START,
         .dmaEnd = &world_partner_goompa_ROM_END,
         .dmaDest = &world_partner_goompa_VRAM,
         .isFlying = FALSE,
         .init = world_goompa_init,
-        .takeOut = &world_goompa_take_out,
-        .update = &world_goompa_update,
-        .useAbility = &world_goompa_use_ability,
-        .putAway = &world_goompa_put_away,
+        .takeOut = &EVS_WorldGoompaTakeOut,
+        .update = &EVS_WorldGoompaUpdate,
+        .useAbility = &EVS_WorldGoompaUseAbility,
+        .putAway = &EVS_WorldGoompaPutAway,
         .idle = ANIM_Goompa_Idle,
     },
-    {
-        // Watt
+    [PARTNER_WATT] {
         .dmaStart = &world_partner_watt_ROM_START,
         .dmaEnd = &world_partner_watt_ROM_END,
         .dmaDest = &world_partner_watt_VRAM,
@@ -268,8 +271,7 @@ WorldPartner wPartners[12] = {
         .postBattle = world_watt_post_battle,
         .whileRiding = &world_watt_while_riding,
     },
-    {
-        // Sushie
+    [PARTNER_SUSHIE] {
         .dmaStart = &world_partner_sushie_ROM_START,
         .dmaEnd = &world_partner_sushie_ROM_END,
         .dmaDest = &world_partner_sushie_VRAM,
@@ -285,8 +287,7 @@ WorldPartner wPartners[12] = {
         .postBattle = world_sushie_post_battle,
         .whileRiding = &world_sushie_while_riding,
     },
-    {
-        // Lakilester
+    [PARTNER_LAKILESTER] {
         .dmaStart = &world_partner_lakilester_ROM_START,
         .dmaEnd = &world_partner_lakilester_ROM_END,
         .dmaDest = &world_partner_lakilester_VRAM,
@@ -294,7 +295,7 @@ WorldPartner wPartners[12] = {
         .init = world_lakilester_init,
         .takeOut = &world_lakilester_take_out,
         .update = &world_lakilester_update,
-        .useAbility = &world_lakilester_use_ability,
+        .useAbility = &EVS_LakilesterUseAbility,
         .putAway = &world_lakilester_put_away,
         .idle = ANIM_WorldLakilester_Idle,
         .canPlayerPause = world_partner_can_player_pause_default,
@@ -302,8 +303,7 @@ WorldPartner wPartners[12] = {
         .postBattle = world_lakilester_post_battle,
         .whileRiding = &world_lakilester_while_riding,
     },
-    {
-        // Bow
+    [PARTNER_BOW] {
         .dmaStart = &world_partner_bow_ROM_START,
         .dmaEnd = &world_partner_bow_ROM_END,
         .dmaDest = &world_partner_bow_VRAM,
@@ -318,32 +318,30 @@ WorldPartner wPartners[12] = {
         .canPlayerPause = world_partner_can_player_pause_default,
         .preBattle = world_bow_pre_battle,
     },
-    {
-        // Goombaria
+    [PARTNER_GOOMBARIA] {
         .dmaStart = &world_partner_goombaria_ROM_START,
         .dmaEnd = &world_partner_goombaria_ROM_END,
         .dmaDest = &world_partner_goombaria_VRAM,
         .isFlying = FALSE,
         .init = world_goombaria_init,
-        .takeOut = &world_goombaria_take_out,
-        .update = &world_goombaria_update,
-        .useAbility = &world_goombaria_use_ability,
-        .putAway = &world_goombaria_put_away,
+        .takeOut = &EVS_WorldGoombariaTakeOut,
+        .update = &EVS_WorldGoombariaUpdate,
+        .useAbility = &EVS_WorldGoombariaUseAbility,
+        .putAway = &EVS_WorldGoombariaPutAway,
         .idle = ANIM_Goombaria_Idle,
         .canUseAbility = partner_is_idle,
         .canPlayerPause = partner_is_idle,
     },
-    {
-        // Twink
+    [PARTNER_TWINK] {
         .dmaStart = &world_partner_twink_ROM_START,
         .dmaEnd = &world_partner_twink_ROM_END,
         .dmaDest = &world_partner_twink_VRAM,
         .isFlying = TRUE,
         .init = world_twink_init,
-        .takeOut = &world_twink_take_out,
-        .update = &world_twink_update,
-        .useAbility = &world_twink_use_ability,
-        .putAway = &world_twink_put_away,
+        .takeOut = &EVS_TwinkTakeOut,
+        .update = &EVS_TwinkUpdate,
+        .useAbility = &EVS_TwinkUseAbility,
+        .putAway = &EVS_TwinkPutAway,
         .idle = ANIM_Twink_Idle,
         .canUseAbility = partner_is_idle,
         .canPlayerPause = partner_is_idle,
@@ -356,7 +354,7 @@ f32 wSavedPartnerPosZ = 0;
 
 PartnerAnimations gPartnerAnimations[] = {
     [PARTNER_NONE] {
-        // all values are blank
+        // blank
     },
     [PARTNER_GOOMBARIO] {{
         ANIM_WorldGoombario_Still,
@@ -489,7 +487,7 @@ s32 use_consumable(s32 invSlot) {
     D_8010CD20 = invSlot;
     invSlot = gPlayerData.invItems[invSlot];
     dma_copy(UseItemDmaArgs.dmaStart, UseItemDmaArgs.dmaEnd, world_use_item_VRAM);
-    script = start_script(UseItemDmaArgs.script, EVT_PRIORITY_1, 0);
+    script = start_script(UseItemDmaArgs.main, EVT_PRIORITY_1, 0);
     script->varTable[10] = invSlot;
     return script->id;
 }

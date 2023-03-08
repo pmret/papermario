@@ -69,7 +69,7 @@ Trigger* create_trigger(TriggerBlueprint* bp) {
     trigger->varIndex = bp->varIndex;
     trigger->location.colliderID = bp->colliderID;
     trigger->itemList = bp->itemList;
-    trigger->unk_tr_2C = bp->unk_tr_2C;
+    trigger->tattleMsg = bp->tattleMsg;
     trigger->hasPlayerInteractPrompt = bp->hasPlayerInteractPrompt;
 
     trigger->onActivateFunc = bp->onActivateFunc;

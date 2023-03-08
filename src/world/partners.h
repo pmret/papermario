@@ -3,7 +3,7 @@
 
 typedef void (*PartnerFunc)(Npc* partner);
 typedef s32 (*PartnerBoolFunc)(Npc* partner);
-typedef s32 (*PartnerUnkFunc)(Npc* partner, Npc* enemy);
+typedef s32 (*PartnerTesHitFunc)(Npc* partner, Npc* enemy);
 
 typedef struct WorldPartner {
     /* 0x00 */ void* dmaStart;
@@ -16,7 +16,7 @@ typedef struct WorldPartner {
     /* 0x1C */ EvtScript* useAbility;
     /* 0x20 */ EvtScript* putAway;
     /* 0x24 */ s32 idle;
-    /* 0x28 */ PartnerUnkFunc testFirstStrike;
+    /* 0x28 */ PartnerTesHitFunc testFirstStrike;
     /* 0x2C */ PartnerBoolFunc canUseAbility;
     /* 0x30 */ PartnerBoolFunc canPlayerPause;
     /* 0x34 */ PartnerFunc preBattle;

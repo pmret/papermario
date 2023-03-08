@@ -61,8 +61,8 @@ ApiStatus ParakarryUpdate(Evt* script, s32 isInitialCall) {
     }
 
     switch (ParakarryTweesterPhysicsPtr->state) {
-        case 0:
-            ParakarryTweesterPhysicsPtr->state = 1;
+        case TWEESTER_PARTNER_INIT:
+            ParakarryTweesterPhysicsPtr->state++;
             ParakarryTweesterPhysicsPtr->prevFlags = parakarry->flags;
             ParakarryTweesterPhysicsPtr->radius = fabsf(dist2D(parakarry->pos.x, parakarry->pos.z,
                                                      entity->position.x, entity->position.z));
@@ -73,7 +73,7 @@ ApiStatus ParakarryUpdate(Evt* script, s32 isInitialCall) {
             ParakarryTweesterPhysicsPtr->countdown = 120;
             parakarry->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
             parakarry->flags &= ~NPC_FLAG_GRAVITY;
-        case 1:
+        case TWEESTER_PARTNER_ATTRACT:
             sin_cos_rad(DEG_TO_RAD(ParakarryTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
             parakarry->pos.x = entity->position.x + (sinAngle * ParakarryTweesterPhysicsPtr->radius);
             parakarry->pos.z = entity->position.z - (cosAngle * ParakarryTweesterPhysicsPtr->radius);
@@ -104,17 +104,17 @@ ApiStatus ParakarryUpdate(Evt* script, s32 isInitialCall) {
                 ParakarryTweesterPhysicsPtr->state++;
             }
             break;
-        case 2:
+        case TWEESTER_PARTNER_HOLD:
             parakarry->flags = ParakarryTweesterPhysicsPtr->prevFlags;
             ParakarryTweesterPhysicsPtr->countdown = 30;
             ParakarryTweesterPhysicsPtr->state++;
             break;
-        case 3:
+        case TWEESTER_PARTNER_RELEASE:
             partner_flying_update_player_tracking(parakarry);
             partner_flying_update_motion(parakarry);
 
             if (--ParakarryTweesterPhysicsPtr->countdown == 0) {
-                ParakarryTweesterPhysicsPtr->state = 0;
+                ParakarryTweesterPhysicsPtr->state = TWEESTER_PARTNER_INIT;
                 TweesterTouchingPartner = NULL;
             }
             break;
@@ -132,7 +132,7 @@ void func_802BD514_319A84(Npc* parakarry) {
     if (TweesterTouchingPartner) {
         TweesterTouchingPartner = NULL;
         parakarry->flags = ParakarryTweesterPhysicsPtr->prevFlags;
-        ParakarryTweesterPhysicsPtr->state = 0;
+        ParakarryTweesterPhysicsPtr->state = TWEESTER_PARTNER_INIT;
         partner_clear_player_tracking (parakarry);
     }
 }
@@ -207,16 +207,16 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
 
         switch (D_802BEBC0_31CBE0) {
             case 40:
-                if (playerStatus->inputEnabledCounter == 0) {
+                if (playerStatus->inputDisabledCount == 0) {
                     D_802BEBC4 = 3;
                     D_802BEBC0_31CBE0 = 41;
-                    evt->functionTemp[2] = playerStatus->inputEnabledCounter;
+                    evt->functionTemp[2] = playerStatus->inputDisabledCount;
                 } else {
                     goto block_end_return_ApiStatus_DONE2; // TODO remove this goto
                 }
             case 41:
                 if (D_802BEBC4 == 0) {
-                    if (evt->functionTemp[2] >= playerStatus->inputEnabledCounter) {
+                    if (evt->functionTemp[2] >= playerStatus->inputDisabledCount) {
                         if (func_800EA52C(PARTNER_PARAKARRY)) {
                             D_802BEBC0_31CBE0 = 30;
                             break;
@@ -233,7 +233,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                 set_action_state(ACTION_STATE_RIDE);
                 disable_player_input();
                 disable_player_static_collisions();
-                evt->functionTemp[2] = playerStatus->inputEnabledCounter;
+                evt->functionTemp[2] = playerStatus->inputDisabledCount;
                 D_802BEBB4 = 1;
                 D_802BEBB8 = 1;
                 D_802BEBB0 = 1;
@@ -271,7 +271,7 @@ ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
                     parakarry->pos.z += (parakarry->moveToPos.z - parakarry->pos.z) / parakarry->duration;
                     parakarry->duration--;
                     if (parakarry->duration != 0) {
-                        if (evt->functionTemp[2] < playerStatus->inputEnabledCounter) {
+                        if (evt->functionTemp[2] < playerStatus->inputDisabledCount) {
                             disable_npc_blur(parakarry);
                             D_802BEBC0_31CBE0 = 0x16;
                         }

@@ -23,10 +23,10 @@ s32 action_update_ride(void) {
 
     if (playerStatus->animFlags & PA_FLAG_RIDING_PARTNER) {
         if (partnerActionStatus->actingPartner == PARTNER_LAKILESTER) {
-            return func_802BD100_317020(oldFlags);
+            return world_goombario_get_trigger_tattle(oldFlags);
         }
         if (partnerActionStatus->actingPartner == PARTNER_SUSHIE) {
-            return func_802BD100_317020(oldFlags);
+            return world_goombario_get_trigger_tattle(oldFlags);
         }
     }
 
