@@ -1,0 +1,3 @@
+mac_01_toad_house_blanket_vtx = 0x8024B5F0; // rom:0x877F80 size:0x15E0
+mac_01_toad_house_blanket_gfx = 0x8024CBD0; // rom:0x879560
+mac_01_toad_house_blanket_img = 0x8024CD38; // rom:0x8796C8

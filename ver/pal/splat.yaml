@@ -73,8 +73,119 @@ segments:
     - [0x85A910, c, mac_00_12_intro]
     - [0x85A910, c, mac_00_13_epilogue_npc]
     - [0x85A910, c, mac_00_14_epilogue]
-
-  - [0x86C990, bin]
+  - name: mac_01
+    dir: world/area_mac/mac_01
+    type: code
+    start: 0x86C990
+    vram: 0x80240000
+    subsegments:
+    - [0x86C990, c, mac_01_0_header]
+    - [0x86C990, c, mac_01_1_music]
+    - [0x86C990, c, mac_01_2_main]
+    - [0x86C990, c, mac_01_3_entity]
+    - [0x86C990, c, mac_01_4_rooms]
+    - [0x86C990, c, mac_01_5_shop]
+    - [0x86CD50, c, mac_01_6_crystal_ball_gfx]
+    - [0x86D810, c, mac_01_7_bulletin]
+    - [0x86D8E0, c, mac_01_8_music_mix]
+    - [0x86DA10, c, mac_01_9_npc]
+    - [0x871EE0, c, mac_01_10_intro_npc]
+    - [0x872D70, c, mac_01_11_epilogue_npc]
+    - [0x872D70, c, mac_01_12_intro]
+    - [0x872E20, c, mac_01_13_foliage]
+    - [0x873060, .data, mac_01_0_header]
+    - [0x873100, .data, mac_01_1_music]
+    - [0x8732E0, .data, mac_01_2_main]
+    - [0x873D30, .data, mac_01_3_entity]
+    - [0x873DE0, .data, mac_01_4_rooms]
+    - [0x8747B0, .data, mac_01_5_shop]
+    - [0x874DD0, .data, mac_01_6_crystal_ball_gfx]
+    - [0x874EA0, .data, mac_01_7_bulletin]
+    - [0x875210, .data, mac_01_8_music_mix]
+    - start: 0x875320
+      type: .data
+      name: mac_01_9_npc
+      subsegments:
+      - [0x875320]
+      - [0x877F80, vtx_common, ../../toad_house/blanket]
+      - [0x879560, gfx_common, ../../toad_house/blanket]
+      - [0x8796C8, rgba16, ../../toad_house/blanket, 16, 32, namespaced]
+      - [0x879AC8]
+    - [0x88BB30, .data, mac_01_10_intro_npc]
+    - [0x88C440, .data, mac_01_11_epilogue_npc]
+    - [0x88E270, .data, mac_01_12_intro]
+    - [0x88E5D0, .data, mac_01_13_foliage]
+  - name: mac_02
+    dir: world/area_mac/mac_02
+    type: code
+    start: 0x88F430
+    vram: 0x80240000
+    subsegments:
+    - [0x88F430, c, mac_02_0_header]
+    - [0x88F430, c, mac_02_1_music]
+    - [0x88F430, c, mac_02_2_main]
+    - [0x88FA20, c, mac_02_3_rooms]
+    - [0x88FAE0, c, mac_02_4_foliage]
+    - [0x88FD20, c, mac_02_5_entity]
+    - [0x88FD60, c, mac_02_6_npc]
+    - [0x892820, c, mac_02_7_music_mix]
+  - name: mac_03
+    dir: world/area_mac/mac_03
+    type: code
+    start: 0x89D9B0
+    vram: 0x80240000
+    subsegments:
+    - [0x89D9B0, c, mac_03_0_header]
+    - [0x89D9B0, c, mac_03_1_music]
+    - [0x89D9B0, c, mac_03_2_main]
+    - [0x89DCD0, c, mac_03_3_train]
+    - [0x89DE60, c, mac_03_4_npc]
+    - [0x89F6B0, c, mac_03_5_entity]
+    - [0x89F6B0, c, mac_03_6_foliage]
+    - [0x89F8F0, c, mac_03_7_oinks]
+    - [0x8A0220, c, mac_03_8_demo]
+  - name: mac_04
+    dir: world/area_mac/mac_04
+    type: code
+    start: 0x8AEDE0
+    vram: 0x80240000
+    subsegments:
+    - [0x8AEDE0, c, mac_04_0_header]
+    - [0x8AEE30, c, mac_04_1_music]
+    - [0x8AEE30, c, mac_04_2_main]
+    - [0x8AEFA0, c, mac_04_3_rooms]
+    - [0x8AF000, c, mac_04_4_foliage]
+    - [0x8AF240, c, mac_04_5_shop]
+    - [0x8AF240, c, mac_04_6_npc]
+    - [0x8B0A70, c, mac_04_7_wish_scene]
+    - [0x8B0A70, c, mac_04_8_entity]
+    - [0x8B0CD0, c, mac_04_9_music_mix]
+  - name: mac_05
+    dir: world/area_mac/mac_05
+    type: code
+    start: 0x8BE3C0
+    vram: 0x80240000
+    subsegments:
+    - [0x8BE3C0, c, mac_05_0_header]
+    - [0x8BE3C0, c, mac_05_1_music]
+    - [0x8BE3C0, c, mac_05_2_entity]
+    - [0x8BE3C0, c, mac_05_3_main]
+    - [0x8BE850, c, mac_05_4_npc]
+    - [0x8C17B0, c, mac_05_5_whale]
+    - [0x8C2170, c, mac_05_6_rooms]
+    - [0x8C2170, c, mac_05_7_club64_sign]
+  - name: mac_06
+    dir: world/area_mac/mac_06
+    type: code
+    start: 0x8D0DD0
+    vram: 0x80240000
+    subsegments:
+    - [0x8D0DD0, c, mac_06_0_header]
+    - [0x8D0DD0, c, mac_06_1_main]
+    - [0x8D1290, c, mac_06_2_whale]
+    - [0x8D1C50, c, mac_06_3_npc]
+    
+  - [0x8D5740, bin]
 
   - start: 0x1e937b8
     align: 8

@@ -26,13 +26,13 @@ EvtScript N(EVS_Scene_IntroWalking) = {
     EVT_CALL(SetNpcPos, NPC_Luigi, -460, 0, 0)
     EVT_CALL(SetNpcYaw, NPC_Luigi, 90)
     EVT_THREAD
-        EVT_CALL(func_802D1270, -100, 0, EVT_FLOAT(4.0))
-        EVT_CALL(func_802D1270, -25, -25, EVT_FLOAT(4.0))
-        EVT_CALL(func_802D1270, 0, -100, EVT_FLOAT(4.0))
-        EVT_CALL(func_802D1270, 0, -400, EVT_FLOAT(4.0))
+        EVT_CALL(func_802D1270, -100, 0, EVT_FLOAT(4.0 / DT))
+        EVT_CALL(func_802D1270, -25, -25, EVT_FLOAT(4.0 / DT))
+        EVT_CALL(func_802D1270, 0, -100, EVT_FLOAT(4.0 / DT))
+        EVT_CALL(func_802D1270, 0, -400, EVT_FLOAT(4.0 / DT))
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(SetNpcSpeed, NPC_Luigi, EVT_FLOAT(4.0))
+        EVT_CALL(SetNpcSpeed, NPC_Luigi, EVT_FLOAT(4.0 / DT))
         EVT_CALL(SetNpcAnimation, NPC_Luigi, ANIM_Luigi_Run)
         EVT_CALL(NpcMoveTo, NPC_Luigi, -100, 0, 0)
         EVT_CALL(SetNpcAnimation, NPC_Luigi, ANIM_Luigi_RunBack)
@@ -42,7 +42,7 @@ EvtScript N(EVS_Scene_IntroWalking) = {
         EVT_CALL(SetNpcAnimation, NPC_Luigi, ANIM_Luigi_IdleBack)
     EVT_END_THREAD
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(MakeLerp, 300, 400, 100, EASING_LINEAR)
+    EVT_CALL(MakeLerp, 300, 400, 100 * DT, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
         EVT_CALL(GetPlayerPos, LVar2, LVar3, LVar4)
@@ -54,9 +54,9 @@ EvtScript N(EVS_Scene_IntroWalking) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_WAIT(75)
+    EVT_WAIT(75 * DT)
     EVT_CALL(GotoMap, EVT_PTR("osr_00"), osr_00_ENTRY_4)
-    EVT_WAIT(100)
+    EVT_WAIT(100 * DT)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
     EVT_END
