@@ -11,7 +11,7 @@ extern EvtScript N(takeTurn);
 extern EvtScript N(handleEvent);
 extern EvtScript N(nextTurn);
 
-s32 N(idleAnimations)[] = {
+s32 N(IdleAnimations)[] = {
     STATUS_NORMAL, ANIM_DryBones_Anim02,
     STATUS_STONE, ANIM_DryBones_Anim00,
     STATUS_SLEEP, ANIM_DryBones_Anim0E,
@@ -24,31 +24,31 @@ s32 N(idleAnimations)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_dead)[] = {
+s32 N(IdleAnimations_dead)[] = {
     STATUS_NORMAL, ANIM_DryBones_Anim01,
     STATUS_END,
 };
 
-s32 N(idleAnimations_bone)[] = {
+s32 N(IdleAnimations_bone)[] = {
     STATUS_NORMAL, ANIM_DryBones_Anim0F,
     STATUS_END,
 };
 
-s32 N(defenseTable)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL, 2,
     ELEMENT_FIRE, -10,
     ELEMENT_BLAST, -10,
     ELEMENT_END,
 };
 
-s32 N(defenseTable_dead)[] = {
+s32 N(DefenseTable_dead)[] = {
     ELEMENT_NORMAL, 99,
     ELEMENT_FIRE, -10,
     ELEMENT_BLAST, -10,
     ELEMENT_END,
 };
 
-s32 N(statusTable)[] = {
+s32 N(StatusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 0,
@@ -73,7 +73,7 @@ s32 N(statusTable)[] = {
     STATUS_END,
 };
 
-s32 N(statusTable_dead)[] = {
+s32 N(StatusTable_dead)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 0,
@@ -105,8 +105,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -8, 30 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -1, -10 },
@@ -117,8 +117,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_bone),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations_bone),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -133,7 +133,7 @@ ActorBlueprint NAMESPACE = {
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
     .initScript = &N(init),
-    .statusTable = N(statusTable),
+    .statusTable = N(StatusTable),
     .escapeChance = 50,
     .airLiftChance = 75,
     .hurricaneChance = 70,
@@ -235,9 +235,9 @@ EvtScript N(reassemble) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_DryBones_Anim08)
     EVT_WAIT(20)
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_dead)))
-    EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable_dead)))
-    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(statusTable_dead)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_dead)))
+    EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable_dead)))
+    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(StatusTable_dead)))
     EVT_CALL(ClearStatusEffects, ACTOR_SELF)
     EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -1, 10)
     EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, 0)
@@ -444,9 +444,9 @@ EvtScript N(takeTurn) = {
             EVT_WAIT(20)
             EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations)))
-            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable)))
-            EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(statusTable)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations)))
+            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable)))
+            EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(StatusTable)))
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, ACTOR_PART_FLAG_2000, FALSE)
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -8, 30)
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -10)

@@ -6,8 +6,8 @@
 
 #define NAMESPACE b_area_isk_part_1_pokey_mummy
 
-extern s32 N(idleAnimations_80218DC8)[];
-extern s32 N(idleAnimations_80218EB8)[];
+extern s32 N(IdleAnimations_80218DC8)[];
+extern s32 N(IdleAnimations_80218EB8)[];
 extern EvtScript N(init_80218EC4);
 extern EvtScript N(takeTurn_80219D88);
 extern EvtScript N(idle_80219040);
@@ -19,12 +19,12 @@ extern EvtScript N(8021B1B4);
 extern EvtScript N(8021BDE4);
 extern EvtScript N(8021C2BC);
 
-s32 N(defenseTable_80218C10)[] = {
+s32 N(DefenseTable_80218C10)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_80218C1C)[] = {
+s32 N(StatusTable_80218C1C)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 80,
@@ -49,15 +49,15 @@ s32 N(statusTable_80218C1C)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_80218CC8)[] = {
+ActorPartBlueprint N(PartsTable_80218CC8)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 20 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80218DC8),
-        .defenseTable = N(defenseTable_80218C10),
+        .idleAnimations = N(IdleAnimations_80218DC8),
+        .defenseTable = N(DefenseTable_80218C10),
         .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_200000,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -69,7 +69,7 @@ ActorPartBlueprint N(partsTable_80218CC8)[] = {
         .targetOffset = { 0, 72 },
         .opacity = 255,
         .idleAnimations = NULL,
-        .defenseTable = N(defenseTable_80218C10),
+        .defenseTable = N(DefenseTable_80218C10),
         .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_200000,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -8 },
@@ -81,7 +81,7 @@ ActorPartBlueprint N(partsTable_80218CC8)[] = {
         .targetOffset = { 0, 54 },
         .opacity = 255,
         .idleAnimations = NULL,
-        .defenseTable = N(defenseTable_80218C10),
+        .defenseTable = N(DefenseTable_80218C10),
         .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_200000,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -8 },
@@ -93,7 +93,7 @@ ActorPartBlueprint N(partsTable_80218CC8)[] = {
         .targetOffset = { 0, 36 },
         .opacity = 255,
         .idleAnimations = NULL,
-        .defenseTable = N(defenseTable_80218C10),
+        .defenseTable = N(DefenseTable_80218C10),
         .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_200000,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -8 },
@@ -105,7 +105,7 @@ ActorPartBlueprint N(partsTable_80218CC8)[] = {
         .targetOffset = { 0, 16 },
         .opacity = 255,
         .idleAnimations = NULL,
-        .defenseTable = N(defenseTable_80218C10),
+        .defenseTable = N(DefenseTable_80218C10),
         .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_200000,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -8 },
@@ -116,8 +116,8 @@ ActorPartBlueprint N(partsTable_80218CC8)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80218EB8),
-        .defenseTable = N(defenseTable_80218C10),
+        .idleAnimations = N(IdleAnimations_80218EB8),
+        .defenseTable = N(DefenseTable_80218C10),
         .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_200000,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -129,10 +129,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_POKEY_MUMMY,
     .level = 10,
     .maxHP = 4,
-    .partCount = ARRAY_COUNT(N(partsTable_80218CC8)),
-    .partsData = N(partsTable_80218CC8),
+    .partCount = ARRAY_COUNT( N(PartsTable_80218CC8)),
+    .partsData = N(PartsTable_80218CC8),
     .initScript = &N(init_80218EC4),
-    .statusTable = N(statusTable_80218C1C),
+    .statusTable = N(StatusTable_80218C1C),
     .escapeChance = 60,
     .airLiftChance = 90,
     .hurricaneChance = 85,
@@ -147,7 +147,7 @@ ActorBlueprint NAMESPACE = {
     .statusMessageOffset = { 10, 65 },
 };
 
-s32 N(idleAnimations_80218DC8)[] = {
+s32 N(IdleAnimations_80218DC8)[] = {
     STATUS_NORMAL,    ANIM_Pokey_Mummy_Anim04,
     STATUS_STONE,     ANIM_Pokey_Mummy_Anim00,
     STATUS_SLEEP,     ANIM_Pokey_Mummy_Anim25,
@@ -158,7 +158,7 @@ s32 N(idleAnimations_80218DC8)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_80218E04)[] = {
+s32 N(IdleAnimations_80218E04)[] = {
     STATUS_NORMAL,    ANIM_Pokey_Mummy_Anim05,
     STATUS_STONE,     ANIM_Pokey_Mummy_Anim01,
     STATUS_SLEEP,     ANIM_Pokey_Mummy_Anim26,
@@ -169,7 +169,7 @@ s32 N(idleAnimations_80218E04)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_80218E40)[] = {
+s32 N(IdleAnimations_80218E40)[] = {
     STATUS_NORMAL,    ANIM_Pokey_Mummy_Anim06,
     STATUS_STONE,     ANIM_Pokey_Mummy_Anim02,
     STATUS_SLEEP,     ANIM_Pokey_Mummy_Anim27,
@@ -180,7 +180,7 @@ s32 N(idleAnimations_80218E40)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_80218E7C)[] = {
+s32 N(IdleAnimations_80218E7C)[] = {
     STATUS_NORMAL,    ANIM_Pokey_Mummy_Anim07,
     STATUS_STONE,     ANIM_Pokey_Mummy_Anim03,
     STATUS_SLEEP,     ANIM_Pokey_Mummy_Anim28,
@@ -191,7 +191,7 @@ s32 N(idleAnimations_80218E7C)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_80218EB8)[] = {
+s32 N(IdleAnimations_80218EB8)[] = {
     STATUS_NORMAL,    ANIM_Pokey_Mummy_Anim16,
     STATUS_END,
 };
@@ -753,7 +753,7 @@ EvtScript N(8021B1B4) = {
             EVT_CALL(SetActorVar, ACTOR_SELF, 5, 0x00310113)
             EVT_CALL(SetActorVar, ACTOR_SELF, 6, 0x0031011A)
             EVT_CALL(SetActorVar, ACTOR_SELF, 7, 0x0031011B)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80218E04)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80218E04)))
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_MULTI_TARGET, FALSE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_NO_TARGET, TRUE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 3, ACTOR_PART_FLAG_NO_TARGET, FALSE)
@@ -770,7 +770,7 @@ EvtScript N(8021B1B4) = {
             EVT_CALL(SetActorVar, ACTOR_SELF, 5, 0x00310115)
             EVT_CALL(SetActorVar, ACTOR_SELF, 6, 0x0031011C)
             EVT_CALL(SetActorVar, ACTOR_SELF, 7, 0x0031011D)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80218E40)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80218E40)))
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 3, ACTOR_PART_FLAG_MULTI_TARGET, FALSE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 3, ACTOR_PART_FLAG_NO_TARGET, TRUE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 4, ACTOR_PART_FLAG_NO_TARGET, FALSE)
@@ -785,7 +785,7 @@ EvtScript N(8021B1B4) = {
             EVT_CALL(SetActorVar, ACTOR_SELF, 3, 0x0031010F)
             EVT_CALL(SetActorVar, ACTOR_SELF, 6, 0x0031011E)
             EVT_CALL(SetActorVar, ACTOR_SELF, 7, 0x0031011F)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80218E7C)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80218E7C)))
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 4, ACTOR_PART_FLAG_MULTI_TARGET, FALSE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 4, ACTOR_PART_FLAG_NO_TARGET, TRUE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 5, ACTOR_PART_FLAG_NO_TARGET, FALSE)

@@ -13,21 +13,21 @@ extern EvtScript N(handleEvent);
 extern EvtScript N(takeTurn);
 extern EvtScript N(flee);
 
-extern s32 N(idleAnimations)[];
-extern s32 N(idleAnimations2)[];
-extern s32 N(idleAnimations3)[];
+extern s32 N(IdleAnimations)[];
+extern s32 N(IdleAnimations2)[];
+extern s32 N(IdleAnimations3)[];
 
-s32 N(defenseTable)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(defenseTable_flying)[] = {
+s32 N(DefenseTable_flying)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable)[] = {
+s32 N(StatusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 50,
@@ -52,7 +52,7 @@ s32 N(statusTable)[] = {
     STATUS_END,
 };
 
-s32 N(statusTable_flying)[] = {
+s32 N(StatusTable_flying)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 50,
@@ -84,8 +84,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 2, 35 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -5, -12 },
@@ -99,8 +99,8 @@ ActorPartBlueprint N(parts_flying)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 2, 35 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
-        .defenseTable = N(defenseTable_flying),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable_flying),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -5, -12 },
@@ -111,8 +111,8 @@ ActorPartBlueprint N(parts_flying)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -10, 35 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations2),
-        .defenseTable = N(defenseTable_flying),
+        .idleAnimations = N(IdleAnimations2),
+        .defenseTable = N(DefenseTable_flying),
         .eventFlags = ACTOR_EVENT_FLAG_RIDING_BROOMSTICK,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -8 },
@@ -123,8 +123,8 @@ ActorPartBlueprint N(parts_flying)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations3),
-        .defenseTable = N(defenseTable_flying),
+        .idleAnimations = N(IdleAnimations3),
+        .defenseTable = N(DefenseTable_flying),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -139,7 +139,7 @@ ActorBlueprint NAMESPACE = {
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
     .initScript = &N(init),
-    .statusTable = N(statusTable),
+    .statusTable = N(StatusTable),
     .escapeChance = 40,
     .airLiftChance = 80,
     .hurricaneChance = 70,
@@ -162,7 +162,7 @@ ActorBlueprint N(flying) = {
     .partCount = ARRAY_COUNT(N(parts_flying)),
     .partsData = N(parts_flying),
     .initScript = &N(init_flying),
-    .statusTable = N(statusTable_flying),
+    .statusTable = N(StatusTable_flying),
     .escapeChance = 40,
     .airLiftChance = 95,
     .hurricaneChance = 75,
@@ -177,7 +177,7 @@ ActorBlueprint N(flying) = {
     .statusMessageOffset = { 1, 34 },
 };
 
-s32 N(idleAnimations)[] = {
+s32 N(IdleAnimations)[] = {
     STATUS_NORMAL, ANIM_Magikoopa_Green_Anim01,
     STATUS_STONE, ANIM_Magikoopa_Green_Anim00,
     STATUS_SLEEP, ANIM_Magikoopa_Green_Anim08,
@@ -190,7 +190,7 @@ s32 N(idleAnimations)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations2)[] = {
+s32 N(IdleAnimations2)[] = {
     STATUS_NORMAL, ANIM_FlyingMagikoopa_Green_Anim01,
     STATUS_STONE, ANIM_FlyingMagikoopa_Green_Anim00,
     STATUS_SLEEP, ANIM_FlyingMagikoopa_Green_Anim08,
@@ -203,7 +203,7 @@ s32 N(idleAnimations2)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations3)[] = {
+s32 N(IdleAnimations3)[] = {
     STATUS_NORMAL, ANIM_FlyingMagikoopa_Green_Anim0A,
     STATUS_END,
 };
@@ -395,7 +395,7 @@ EvtScript N(knockOff) = {
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, FALSE)
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
     EVT_CALL(SetActorType, ACTOR_SELF, ACTOR_TYPE_GREEN_MAGIKOOPA)
-    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(statusTable)))
+    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(StatusTable)))
     EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 32)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_TYPE_CHANGED, TRUE)
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)

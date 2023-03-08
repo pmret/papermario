@@ -15,7 +15,7 @@ extern EvtScript N(8021A200);
 extern EvtScript N(8021B41C);
 extern EvtScript N(8021B50C);
 
-s32 N(idleAnimations_80218B40)[] = {
+s32 N(IdleAnimations_80218B40)[] = {
     STATUS_NORMAL,    ANIM_ChainChomp_Anim01,
     STATUS_STONE,     ANIM_ChainChomp_Anim00,
     STATUS_SLEEP,     ANIM_ChainChomp_Anim07,
@@ -27,7 +27,7 @@ s32 N(idleAnimations_80218B40)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_80218B84)[] = {
+s32 N(IdleAnimations_80218B84)[] = {
     STATUS_NORMAL,    ANIM_ChainChomp_Anim03,
     STATUS_POISON,    ANIM_ChainChomp_Anim03,
     STATUS_STOP,      ANIM_ChainChomp_Anim00,
@@ -39,7 +39,7 @@ s32 N(idleAnimations_80218B84)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_80218BC8)[] = {
+s32 N(IdleAnimations_80218BC8)[] = {
     STATUS_NORMAL,    ANIM_ChainChomp_Anim04,
     STATUS_POISON,    ANIM_ChainChomp_Anim04,
     STATUS_STOP,      ANIM_ChainChomp_Anim00,
@@ -51,7 +51,7 @@ s32 N(idleAnimations_80218BC8)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_80218C0C)[] = {
+s32 N(IdleAnimations_80218C0C)[] = {
     STATUS_NORMAL,    ANIM_ChainChomp_Anim05,
     STATUS_POISON,    ANIM_ChainChomp_Anim05,
     STATUS_STOP,      ANIM_ChainChomp_Anim00,
@@ -63,12 +63,12 @@ s32 N(idleAnimations_80218C0C)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_80218C50)[] = {
+s32 N(IdleAnimations_80218C50)[] = {
     STATUS_NORMAL,    ANIM_ChainChomp_Anim02,
     STATUS_END,
 };
 
-s32 N(defenseTable_80218C5C)[] = {
+s32 N(DefenseTable_80218C5C)[] = {
     ELEMENT_NORMAL, 3,
     ELEMENT_SHOCK, 3,
     ELEMENT_FIRE, 99,
@@ -77,7 +77,7 @@ s32 N(defenseTable_80218C5C)[] = {
     ELEMENT_END,
 };
 
-s32 N(statusTable_80218C88)[] = {
+s32 N(StatusTable_80218C88)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 0,
@@ -102,15 +102,15 @@ s32 N(statusTable_80218C88)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_80218D34)[] = {
+ActorPartBlueprint N(PartsTable_80218D34)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80218B40),
-        .defenseTable = N(defenseTable_80218C5C),
+        .idleAnimations = N(IdleAnimations_80218B40),
+        .defenseTable = N(DefenseTable_80218C5C),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -121,8 +121,8 @@ ActorPartBlueprint N(partsTable_80218D34)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -13, 40 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80218B40),
-        .defenseTable = N(defenseTable_80218C5C),
+        .idleAnimations = N(IdleAnimations_80218B40),
+        .defenseTable = N(DefenseTable_80218C5C),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -16 },
@@ -133,8 +133,8 @@ ActorPartBlueprint N(partsTable_80218D34)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 12 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80218C50),
-        .defenseTable = N(defenseTable_80218C5C),
+        .idleAnimations = N(IdleAnimations_80218C50),
+        .defenseTable = N(DefenseTable_80218C5C),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -145,8 +145,8 @@ ActorPartBlueprint N(partsTable_80218D34)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 12 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80218C50),
-        .defenseTable = N(defenseTable_80218C5C),
+        .idleAnimations = N(IdleAnimations_80218C50),
+        .defenseTable = N(DefenseTable_80218C5C),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -157,8 +157,8 @@ ActorPartBlueprint N(partsTable_80218D34)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 12 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80218C50),
-        .defenseTable = N(defenseTable_80218C5C),
+        .idleAnimations = N(IdleAnimations_80218C50),
+        .defenseTable = N(DefenseTable_80218C5C),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -169,8 +169,8 @@ ActorPartBlueprint N(partsTable_80218D34)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 12 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80218C50),
-        .defenseTable = N(defenseTable_80218C5C),
+        .idleAnimations = N(IdleAnimations_80218C50),
+        .defenseTable = N(DefenseTable_80218C5C),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -181,8 +181,8 @@ ActorPartBlueprint N(partsTable_80218D34)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 12 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80218C50),
-        .defenseTable = N(defenseTable_80218C5C),
+        .idleAnimations = N(IdleAnimations_80218C50),
+        .defenseTable = N(DefenseTable_80218C5C),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -193,8 +193,8 @@ ActorPartBlueprint N(partsTable_80218D34)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 12 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80218C50),
-        .defenseTable = N(defenseTable_80218C5C),
+        .idleAnimations = N(IdleAnimations_80218C50),
+        .defenseTable = N(DefenseTable_80218C5C),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -205,8 +205,8 @@ ActorPartBlueprint N(partsTable_80218D34)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 12 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80218C50),
-        .defenseTable = N(defenseTable_80218C5C),
+        .idleAnimations = N(IdleAnimations_80218C50),
+        .defenseTable = N(DefenseTable_80218C5C),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -217,8 +217,8 @@ ActorPartBlueprint N(partsTable_80218D34)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 12 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80218C50),
-        .defenseTable = N(defenseTable_80218C5C),
+        .idleAnimations = N(IdleAnimations_80218C50),
+        .defenseTable = N(DefenseTable_80218C5C),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -230,10 +230,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_CHOMP,
     .level = 14,
     .maxHP = 4,
-    .partCount = ARRAY_COUNT(N(partsTable_80218D34)),
-    .partsData = N(partsTable_80218D34),
+    .partCount = ARRAY_COUNT( N(PartsTable_80218D34)),
+    .partsData = N(PartsTable_80218D34),
     .initScript = &N(init_80218EC4),
-    .statusTable = N(statusTable_80218C88),
+    .statusTable = N(StatusTable_80218C88),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -422,7 +422,7 @@ EvtScript N(idle_80219108) = {
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80218C0C)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80218C0C)))
     EVT_CALL(SetActorIdleJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
     EVT_CALL(SetIdleGoalToHome, ACTOR_SELF)
     EVT_CALL(GetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -454,7 +454,7 @@ EvtScript N(idle_80219108) = {
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80218BC8)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80218BC8)))
     EVT_CALL(SetActorIdleJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
     EVT_CALL(SetIdleGoalToHome, ACTOR_SELF)
     EVT_CALL(GetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -468,7 +468,7 @@ EvtScript N(idle_80219108) = {
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80218C0C)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80218C0C)))
     EVT_CALL(SetActorIdleJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
     EVT_CALL(SetIdleGoalToHome, ACTOR_SELF)
     EVT_CALL(GetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -497,7 +497,7 @@ EvtScript N(idle_80219108) = {
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80218B84)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80218B84)))
     EVT_CALL(SetActorIdleJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
     EVT_CALL(SetIdleGoalToHome, ACTOR_SELF)
     EVT_CALL(GetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)

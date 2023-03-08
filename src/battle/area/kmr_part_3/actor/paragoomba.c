@@ -6,17 +6,17 @@
 
 #define NAMESPACE b_area_kmr_part_3_paragoomba1
 
-s32 N(defenseTable_8021C1B0)[] = {
+s32 N(DefenseTable_8021C1B0)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(defenseTable_8021C1BC)[] = {
+s32 N(DefenseTable_8021C1BC)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_8021C1C8)[] = {
+s32 N(StatusTable_8021C1C8)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 100,
@@ -41,7 +41,7 @@ s32 N(statusTable_8021C1C8)[] = {
     STATUS_END,
 };
 
-s32 N(statusTable_8021C274)[] = {
+s32 N(StatusTable_8021C274)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 100,
@@ -66,24 +66,24 @@ s32 N(statusTable_8021C274)[] = {
     STATUS_END,
 };
 
-extern s32 N(idleAnimations_8021DB9C)[];
-extern s32 N(idleAnimations_8021C3D8)[];
-extern s32 N(idleAnimations_8021C470)[];
-extern s32 N(idleAnimations_8021C47C)[];
+extern s32 N(IdleAnimations_8021DB9C)[];
+extern s32 N(IdleAnimations_8021C3D8)[];
+extern s32 N(IdleAnimations_8021C470)[];
+extern s32 N(IdleAnimations_8021C47C)[];
 extern EvtScript N(init_8021F450);
 extern EvtScript N(takeTurn_8021CDFC);
 extern EvtScript N(idle_8021C4D4);
 extern EvtScript N(handleEvent_8021C808);
 
-ActorPartBlueprint N(partsTable)[] = {
+ActorPartBlueprint N(PartsTable)[] = {
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 20 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_8021DB9C),
-        .defenseTable = N(defenseTable_8021C1B0),
+        .idleAnimations = N(IdleAnimations_8021DB9C),
+        .defenseTable = N(DefenseTable_8021C1B0),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -10 },
@@ -94,8 +94,8 @@ ActorPartBlueprint N(partsTable)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_8021C3D8),
-        .defenseTable = N(defenseTable_8021C1BC),
+        .idleAnimations = N(IdleAnimations_8021C3D8),
+        .defenseTable = N(DefenseTable_8021C1BC),
         .eventFlags = ACTOR_EVENT_FLAG_GROUNDABLE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -10 },
@@ -106,8 +106,8 @@ ActorPartBlueprint N(partsTable)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -16, 24 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_8021C470),
-        .defenseTable = N(defenseTable_8021C1B0),
+        .idleAnimations = N(IdleAnimations_8021C470),
+        .defenseTable = N(DefenseTable_8021C1B0),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -10 },
@@ -118,8 +118,8 @@ ActorPartBlueprint N(partsTable)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -16, 24 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_8021C47C),
-        .defenseTable = N(defenseTable_8021C1B0),
+        .idleAnimations = N(IdleAnimations_8021C47C),
+        .defenseTable = N(DefenseTable_8021C1B0),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -10 },
@@ -131,10 +131,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_PARAGOOMBA,
     .level = 6,
     .maxHP = 2,
-    .partCount = ARRAY_COUNT(N(partsTable)),
-    .partsData = N(partsTable),
+    .partCount = ARRAY_COUNT( N(PartsTable)),
+    .partsData = N(PartsTable),
     .initScript = &N(init_8021F450),
-    .statusTable = N(statusTable_8021C274),
+    .statusTable = N(StatusTable_8021C274),
     .escapeChance = 90,
     .airLiftChance = 100,
     .hurricaneChance = 100,
@@ -149,7 +149,7 @@ ActorBlueprint NAMESPACE = {
     .statusMessageOffset = { 10, 20 },
 };
 
-s32 N(idleAnimations_8021C3D8)[] = {
+s32 N(IdleAnimations_8021C3D8)[] = {
     STATUS_NORMAL,    ANIM_Paragoomba_Idle,
     STATUS_STONE,     ANIM_Paragoomba_Still,
     STATUS_SLEEP,     ANIM_Paragoomba_Sleep,
@@ -162,7 +162,7 @@ s32 N(idleAnimations_8021C3D8)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_8021C424)[] = {
+s32 N(IdleAnimations_8021C424)[] = {
     STATUS_NORMAL,    ANIM_Paragoomba_Run,
     STATUS_STONE,     ANIM_Paragoomba_Still,
     STATUS_SLEEP,     ANIM_Paragoomba_Sleep,
@@ -175,12 +175,12 @@ s32 N(idleAnimations_8021C424)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_8021C470)[] = {
+s32 N(IdleAnimations_8021C470)[] = {
     STATUS_NORMAL,    ANIM_Paragoomba_LWingStill,
     STATUS_END,
 };
 
-s32 N(idleAnimations_8021C47C)[] = {
+s32 N(IdleAnimations_8021C47C)[] = {
     STATUS_NORMAL,    ANIM_Paragoomba_RWingStill,
     STATUS_END,
 };
@@ -209,7 +209,7 @@ EvtScript N(idle_8021C4D4) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 5)
     EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FLOAT(0.6))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(idleAnimations_8021C424)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(IdleAnimations_8021C424)))
     EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(IdleFlyToGoal, ACTOR_SELF, 0, -5, EASING_LINEAR)
     EVT_LOOP(20)
@@ -226,7 +226,7 @@ EvtScript N(idle_8021C4D4) = {
     EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FLOAT(0.6))
     EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(IdleFlyToGoal, ACTOR_SELF, 0, -5, EASING_LINEAR)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(idleAnimations_8021C3D8)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(IdleAnimations_8021C3D8)))
     EVT_LOOP(40)
         EVT_LABEL(2)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar1)
@@ -538,7 +538,7 @@ EvtScript N(8021D614) = {
     EVT_CALL(SetHomePos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Idle)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, 512, FALSE)
-    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(statusTable_8021C1C8)))
+    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(StatusTable_8021C1C8)))
     EVT_CALL(SetActorType, ACTOR_SELF, 7)
     EVT_EXEC_WAIT(N(8021DC34))
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, 0x00001000, TRUE)
@@ -548,7 +548,7 @@ EvtScript N(8021D614) = {
     EVT_END
 };
 
-s32 N(idleAnimations_8021DB9C)[] = {
+s32 N(IdleAnimations_8021DB9C)[] = {
     STATUS_NORMAL,    ANIM_Goomba_Idle,
     STATUS_STONE,     ANIM_Goomba_Still,
     STATUS_SLEEP,     ANIM_Goomba_Sleep,
@@ -561,7 +561,7 @@ s32 N(idleAnimations_8021DB9C)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_8021DBE8)[] = {
+s32 N(IdleAnimations_8021DBE8)[] = {
     STATUS_NORMAL,    ANIM_Goomba_Run,
     STATUS_STONE,     ANIM_Goomba_Still,
     STATUS_SLEEP,     ANIM_Goomba_Sleep,
@@ -602,10 +602,10 @@ EvtScript N(idle) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 5)
     EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FLOAT(1.0))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021DBE8)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_8021DBE8)))
     EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(IdleRunToGoal, ACTOR_SELF, 0)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021DB9C)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_8021DB9C)))
     EVT_LOOP(20)
         EVT_LABEL(1)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar1)
@@ -618,10 +618,10 @@ EvtScript N(idle) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 5)
     EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FLOAT(1.0))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021DBE8)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_8021DBE8)))
     EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(IdleRunToGoal, ACTOR_SELF, 0)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021DB9C)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_8021DB9C)))
     EVT_LOOP(80)
         EVT_LABEL(2)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar1)

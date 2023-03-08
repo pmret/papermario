@@ -8,7 +8,7 @@
 
 #define NAMESPACE b_area_hos_goombario_tutor
 
-s32 N(idleAnimations_80219010)[] = {
+s32 N(IdleAnimations_80219010)[] = {
     STATUS_NORMAL,    ANIM_BattleGoombario_Idle,
     STATUS_STONE,     ANIM_BattleGoombario_Still,
     STATUS_SLEEP,     ANIM_BattleGoombario_Still,
@@ -21,12 +21,12 @@ s32 N(idleAnimations_80219010)[] = {
     STATUS_END,
 };
 
-s32 N(defenseTable_8021905C)[] = {
+s32 N(DefenseTable_8021905C)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_80219068)[] = {
+s32 N(StatusTable_80219068)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 0,
@@ -51,15 +51,15 @@ s32 N(statusTable_80219068)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_80219114)[] = {
+ActorPartBlueprint N(PartsTable_80219114)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -4, 24 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80219010),
-        .defenseTable = N(defenseTable_8021905C),
+        .idleAnimations = N(IdleAnimations_80219010),
+        .defenseTable = N(DefenseTable_8021905C),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -73,10 +73,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_GOOMBARIO_TUTOR1,
     .level = 99,
     .maxHP = 99,
-    .partCount = ARRAY_COUNT(N(partsTable_80219114)),
-    .partsData = N(partsTable_80219114),
+    .partCount = ARRAY_COUNT( N(PartsTable_80219114)),
+    .partsData = N(PartsTable_80219114),
     .initScript = &N(init_80219160),
-    .statusTable = N(statusTable_80219068),
+    .statusTable = N(StatusTable_80219068),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,

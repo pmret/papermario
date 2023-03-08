@@ -6,7 +6,7 @@
 
 #define NAMESPACE b_area_kmr_part_3_para_jr_troopa
 
-s32 N(idleAnimations_80225DC0)[] = {
+s32 N(IdleAnimations_80225DC0)[] = {
     STATUS_NORMAL,    ANIM_ParaJrTroopa_Idle,
     STATUS_SLEEP,     ANIM_ParaJrTroopa_Sleep,
     STATUS_STONE,     ANIM_ParaJrTroopa_Still,
@@ -18,7 +18,7 @@ s32 N(idleAnimations_80225DC0)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_80225E04)[] = {
+s32 N(IdleAnimations_80225E04)[] = {
     STATUS_NORMAL,    ANIM_JrTroopa_Idle,
     STATUS_SLEEP,     ANIM_JrTroopa_Sleep,
     STATUS_STONE,     ANIM_JrTroopa_Still,
@@ -30,17 +30,17 @@ s32 N(idleAnimations_80225E04)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_80225E48)[] = {
+s32 N(IdleAnimations_80225E48)[] = {
     STATUS_NORMAL,    ANIM_JrTroopa_Defeated,
     STATUS_END,
 };
 
-s32 N(defenseTable_80225E54)[] = {
+s32 N(DefenseTable_80225E54)[] = {
     ELEMENT_NORMAL, 1,
     ELEMENT_END,
 };
 
-s32 N(statusTable_80225E60)[] = {
+s32 N(StatusTable_80225E60)[] = {
     STATUS_NORMAL, 100,
     STATUS_DEFAULT, 100,
     STATUS_SLEEP, 50,
@@ -65,15 +65,15 @@ s32 N(statusTable_80225E60)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_80225F0C)[] = {
+ActorPartBlueprint N(PartsTable_80225F0C)[] = {
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 35 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80225DC0),
-        .defenseTable = N(defenseTable_80225E54),
+        .idleAnimations = N(IdleAnimations_80225DC0),
+        .defenseTable = N(DefenseTable_80225E54),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -6 },
@@ -84,8 +84,8 @@ ActorPartBlueprint N(partsTable_80225F0C)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 30 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80225E04),
-        .defenseTable = N(defenseTable_80225E54),
+        .idleAnimations = N(IdleAnimations_80225E04),
+        .defenseTable = N(DefenseTable_80225E54),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -99,10 +99,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_JR_TROOPA3,
     .level = 52,
     .maxHP = 40,
-    .partCount = ARRAY_COUNT(N(partsTable_80225F0C)),
-    .partsData = N(partsTable_80225F0C),
+    .partCount = ARRAY_COUNT( N(PartsTable_80225F0C)),
+    .partsData = N(PartsTable_80225F0C),
     .initScript = &N(init_80226510),
-    .statusTable = N(statusTable_80225E60),
+    .statusTable = N(StatusTable_80225E60),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -574,7 +574,7 @@ EvtScript N(802279B0) = {
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20E5)
     EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_JrTroopa_Defeated)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(idleAnimations_80225E48)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(IdleAnimations_80225E48)))
     EVT_WAIT(60)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, 0x00400000, TRUE)
     EVT_RETURN

@@ -18,11 +18,11 @@ extern EvtScript N(takeTurn_koopa);
 extern EvtScript N(idle_koopa);
 extern EvtScript N(handleEvent_koopa);
 
-extern s32 N(idleAnimations)[];
-extern s32 N(idleAnimations2)[];
-extern s32 N(idleAnimations3)[];
+extern s32 N(IdleAnimations)[];
+extern s32 N(IdleAnimations2)[];
+extern s32 N(IdleAnimations3)[];
 
-s32 N(defenseTable)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL, 2,
     ELEMENT_SMASH, 2,
     ELEMENT_JUMP, 2,
@@ -36,12 +36,12 @@ s32 N(defenseTable2)[] = {
     ELEMENT_END,
 };
 
-s32 N(defenseTable_koopa_flipped)[] = {
+s32 N(DefenseTable_koopa_flipped)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_koopa)[] = {
+s32 N(StatusTable_koopa)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 80,
@@ -66,7 +66,7 @@ s32 N(statusTable_koopa)[] = {
     STATUS_END,
 };
 
-s32 N(statusTable)[] = {
+s32 N(StatusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 80,
@@ -98,8 +98,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -2, 36 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_FLIPABLE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -7 },
@@ -110,7 +110,7 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -4, 36 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations2),
+        .idleAnimations = N(IdleAnimations2),
         .defenseTable = N(defenseTable2),
         .eventFlags = ACTOR_EVENT_FLAG_GROUNDABLE,
         .elementImmunityFlags = 0,
@@ -122,8 +122,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 32 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations3),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations3),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -10 },
@@ -138,7 +138,7 @@ ActorBlueprint NAMESPACE = {
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
     .initScript = &N(init),
-    .statusTable = N(statusTable),
+    .statusTable = N(StatusTable),
     .escapeChance = 50,
     .airLiftChance = 90,
     .hurricaneChance = 80,
@@ -153,7 +153,7 @@ ActorBlueprint NAMESPACE = {
     .statusMessageOffset = { 8, 30 },
 };
 
-s32 N(idleAnimations2)[] = {
+s32 N(IdleAnimations2)[] = {
     STATUS_NORMAL, ANIM_ParaTroopa_Dark_Idle,
     STATUS_STONE, ANIM_ParaTroopa_Dark_Still,
     STATUS_SLEEP, ANIM_ParaTroopa_Dark_Sleep,
@@ -166,7 +166,7 @@ s32 N(idleAnimations2)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_step)[] = {
+s32 N(IdleAnimations_step)[] = {
     STATUS_NORMAL, ANIM_ParaTroopa_Dark_Idle,
     STATUS_STONE, ANIM_ParaTroopa_Dark_Still,
     STATUS_SLEEP, ANIM_ParaTroopa_Dark_Sleep,
@@ -179,7 +179,7 @@ s32 N(idleAnimations_step)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations3)[] = {
+s32 N(IdleAnimations3)[] = {
     STATUS_NORMAL, ANIM_ParaTroopa_Dark_WingsStill,
     STATUS_STONE, ANIM_ParaTroopa_Dark_Still,
     STATUS_SLEEP, ANIM_ParaTroopa_Dark_Sleep,
@@ -242,10 +242,10 @@ EvtScript N(idle) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 5)
     EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FLOAT(0.6))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(idleAnimations_step)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(IdleAnimations_step)))
     EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(IdleFlyToGoal, ACTOR_SELF, 0, -5, EASING_LINEAR)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations2)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations2)))
     EVT_LOOP(20)
         EVT_LABEL(1)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar1)
@@ -259,10 +259,10 @@ EvtScript N(idle) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 5)
     EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FLOAT(0.6))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(idleAnimations_step)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(IdleAnimations_step)))
     EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(IdleFlyToGoal, ACTOR_SELF, 0, -5, EASING_LINEAR)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(idleAnimations2)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(IdleAnimations2)))
     EVT_LOOP(40)
         EVT_LABEL(2)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar1)
@@ -628,7 +628,7 @@ EvtScript N(fall) = {
     EVT_CALL(SetHomePos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Idle)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, FALSE)
-    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(statusTable_koopa)))
+    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(StatusTable_koopa)))
     EVT_CALL(BindNextTurn, ACTOR_SELF, 0)
     EVT_EXEC_WAIT(N(init_koopa))
     EVT_CALL(SetActorType, ACTOR_SELF, ACTOR_TYPE_DARK_KOOPA)
@@ -642,7 +642,7 @@ EvtScript N(fall) = {
     EVT_END
 };
 
-s32 N(idleAnimations)[] = {
+s32 N(IdleAnimations)[] = {
     STATUS_NORMAL, ANIM_KoopaTroopa_Dark_Idle,
     STATUS_STONE, ANIM_KoopaTroopa_Dark_Still,
     STATUS_SLEEP, ANIM_KoopaTroopa_Dark_Sleep,
@@ -655,7 +655,7 @@ s32 N(idleAnimations)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_koopa_step)[] = {
+s32 N(IdleAnimations_koopa_step)[] = {
     STATUS_NORMAL, ANIM_KoopaTroopa_Dark_Walk,
     STATUS_STONE, ANIM_KoopaTroopa_Dark_Still,
     STATUS_SLEEP, ANIM_KoopaTroopa_Dark_Sleep,
@@ -668,7 +668,7 @@ s32 N(idleAnimations_koopa_step)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_koopa_active)[] = {
+s32 N(IdleAnimations_koopa_active)[] = {
     STATUS_NORMAL, ANIM_KoopaTroopa_Dark_Scramble,
     STATUS_STONE, ANIM_KoopaTroopa_Dark_Still,
     STATUS_SLEEP, ANIM_KoopaTroopa_Dark_Sleep,
@@ -681,7 +681,7 @@ s32 N(idleAnimations_koopa_active)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_koopa_step_active)[] = {
+s32 N(IdleAnimations_koopa_step_active)[] = {
     STATUS_NORMAL, ANIM_KoopaTroopa_Dark_Walk,
     STATUS_STONE, ANIM_KoopaTroopa_Dark_Still,
     STATUS_SLEEP, ANIM_KoopaTroopa_Dark_Sleep,
@@ -694,7 +694,7 @@ s32 N(idleAnimations_koopa_step_active)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_koopa_flipped)[] = {
+s32 N(IdleAnimations_koopa_flipped)[] = {
     STATUS_NORMAL, ANIM_KoopaTroopa_Dark_ToppleStruggle,
     STATUS_STONE, ANIM_KoopaTroopa_Dark_ToppleStill,
     STATUS_SLEEP, ANIM_KoopaTroopa_Dark_ToppleSleep,
@@ -716,7 +716,7 @@ EvtScript N(init_koopa) = {
         EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
     EVT_ELSE
         EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
-        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_koopa_active)))
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_koopa_active)))
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Scramble)
     EVT_END_IF
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
@@ -775,9 +775,9 @@ EvtScript N(idle_koopa) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_koopa_step)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_koopa_step)))
         EVT_CASE_EQ(1)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_koopa_step_active)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_koopa_step_active)))
     EVT_END_SWITCH
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 5)
@@ -787,12 +787,12 @@ EvtScript N(idle_koopa) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations)))
         EVT_CASE_EQ(1)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_koopa_active)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_koopa_active)))
         EVT_CASE_OR_EQ(2)
         EVT_CASE_OR_EQ(3)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_koopa_flipped)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_koopa_flipped)))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_LOOP(20)
@@ -817,9 +817,9 @@ EvtScript N(idle_koopa) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_koopa_step)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_koopa_step)))
         EVT_CASE_EQ(1)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_koopa_step_active)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_koopa_step_active)))
     EVT_END_SWITCH
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 5)
@@ -829,12 +829,12 @@ EvtScript N(idle_koopa) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations)))
         EVT_CASE_EQ(1)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_koopa_active)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_koopa_active)))
         EVT_CASE_OR_EQ(2)
         EVT_CASE_OR_EQ(3)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_koopa_flipped)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_koopa_flipped)))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_LOOP(50)
@@ -945,8 +945,8 @@ EvtScript N(handleEvent_koopa) = {
                     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 3)
             EVT_END_SWITCH
             EVT_CALL(SetActorVar, ACTOR_SELF, 9, 1)
-            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable_koopa_flipped)))
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_koopa_flipped)))
+            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable_koopa_flipped)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_koopa_flipped)))
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -5, 15)
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, 0)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, TRUE)
@@ -1378,7 +1378,7 @@ EvtScript N(koopa_standUp) = {
         EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
         EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
         EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-        EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable)))
+        EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable)))
         EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -4, 32)
         EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -4)
         EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, FALSE)
@@ -1387,10 +1387,10 @@ EvtScript N(koopa_standUp) = {
         EVT_SWITCH(LVar0)
             EVT_CASE_EQ(2)
                 EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
-                EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations)))
+                EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations)))
             EVT_CASE_EQ(3)
                 EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
-                EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_koopa_active)))
+                EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_koopa_active)))
         EVT_END_SWITCH
     EVT_END_IF
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -1411,20 +1411,20 @@ EvtScript N(takeTurn_koopa) = {
             EVT_CALL(RandInt, 1000, LVar0)
             EVT_IF_LT(LVar0, 300)
                 EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
-                EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations)))
+                EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations)))
             EVT_ELSE
                 EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
-                EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_koopa_active)))
+                EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_koopa_active)))
             EVT_END_IF
         EVT_CASE_EQ(1)
             EVT_EXEC_WAIT(N(koopa_attackDizzyTornado))
             EVT_CALL(RandInt, 1000, LVar0)
             EVT_IF_LT(LVar0, 300)
                 EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
-                EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations)))
+                EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations)))
             EVT_ELSE
                 EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
-                EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_koopa_active)))
+                EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_koopa_active)))
             EVT_END_IF
         EVT_CASE_OR_EQ(2)
         EVT_CASE_OR_EQ(3)

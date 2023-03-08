@@ -48,25 +48,25 @@ enum {
 #define VINE_1_BASE (s32) Vine1Base
 #define VINE_2_BASE (s32) Vine2Base
 
-s32 N(idleAnimations)[] = {
+s32 N(IdleAnimations)[] = {
     STATUS_NORMAL, ANIM_LavaBud_Anim03,
     STATUS_STOP, ANIM_LavaBud_Anim02,
     STATUS_END,
 };
 
-s32 N(idleAnimations_fiery)[] = {
+s32 N(IdleAnimations_fiery)[] = {
     STATUS_NORMAL, ANIM_LavaBud_Anim04,
     STATUS_STOP, ANIM_LavaBud_Anim02,
     STATUS_END,
 };
 
-s32 N(idleAnimations_wet)[] = {
+s32 N(IdleAnimations_wet)[] = {
     STATUS_NORMAL, ANIM_LavaBud_Anim0F,
     STATUS_STOP, ANIM_LavaBud_Anim0F,
     STATUS_END,
 };
 
-s32 N(defenseTable)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_WATER, 0,
     ELEMENT_ICE, 0,
@@ -75,7 +75,7 @@ s32 N(defenseTable)[] = {
     ELEMENT_END,
 };
 
-s32 N(defenseTable_fiery)[] = {
+s32 N(DefenseTable_fiery)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_WATER, -2,
     ELEMENT_ICE, -2,
@@ -84,7 +84,7 @@ s32 N(defenseTable_fiery)[] = {
     ELEMENT_END,
 };
 
-s32 N(defenseTable_wet)[] = {
+s32 N(DefenseTable_wet)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_WATER, 0,
     ELEMENT_ICE, 0,
@@ -93,7 +93,7 @@ s32 N(defenseTable_wet)[] = {
     ELEMENT_END,
 };
 
-s32 N(statusTable)[] = {
+s32 N(StatusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 75,
@@ -125,8 +125,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -8 },
@@ -138,7 +138,7 @@ ActorPartBlueprint N(parts)[] = {
         .targetOffset = { 0, 0 },
         .opacity = 255,
         .idleAnimations = NULL,
-        .defenseTable = N(defenseTable),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -8 },
@@ -153,7 +153,7 @@ ActorBlueprint NAMESPACE = {
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
     .initScript = &N(init),
-    .statusTable = N(statusTable),
+    .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -351,9 +351,9 @@ EvtScript N(onBurnHit) = {
             EVT_EXEC_WAIT(N(playModelAnimation))
             EVT_CALL(SetActorVar, ACTOR_SELF, 7, ANIM_LavaBud_Anim03)
             EVT_CALL(SetActorVar, ACTOR_SELF, 8, ANIM_LavaBud_Anim09)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_fiery)))
-            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable_fiery)))
-            EVT_CALL(SetDefenseTable, ACTOR_SELF, 2, EVT_PTR(N(defenseTable_fiery)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_fiery)))
+            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable_fiery)))
+            EVT_CALL(SetDefenseTable, ACTOR_SELF, 2, EVT_PTR(N(DefenseTable_fiery)))
             EVT_THREAD
                 EVT_WAIT(14)
                 EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
@@ -636,9 +636,9 @@ EvtScript N(onDeath) = {
             EVT_CALL(RemoveEffect, LVar0)
             EVT_CALL(SetActorVar, ACTOR_SELF, 6, 0)
         EVT_END_IF
-        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_wet)))
-        EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable_wet)))
-        EVT_CALL(SetDefenseTable, ACTOR_SELF, 2, EVT_PTR(N(defenseTable_wet)))
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_wet)))
+        EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable_wet)))
+        EVT_CALL(SetDefenseTable, ACTOR_SELF, 2, EVT_PTR(N(DefenseTable_wet)))
         EVT_CALL(SetActorVar, ACTOR_SELF, 7, ANIM_LavaBud_Anim0F)
         EVT_CALL(SetActorVar, ACTOR_SELF, 8, ANIM_LavaBud_Anim09)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_LavaBud_Anim0F)
@@ -672,7 +672,7 @@ EvtScript N(onDeath) = {
         EVT_END_IF
         EVT_CALL(LoadBattleDmaData, 21)
         EVT_EXEC_WAIT(N(playModelAnimation))
-        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_wet)))
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_wet)))
         EVT_CALL(SetActorVar, ACTOR_SELF, 7, ANIM_LavaBud_Anim0F)
         EVT_CALL(SetActorVar, ACTOR_SELF, 8, ANIM_LavaBud_Anim09)
         EVT_WAIT(29)
@@ -878,9 +878,9 @@ EvtScript N(onHit) = {
                     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     EVT_PLAY_EFFECT(EFFECT_COLD_BREATH, 0, LVar0, LVar1, LVar2, EVT_FLOAT(2.0), 45, 0)
                 EVT_END_IF
-                EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_wet)))
-                EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable_wet)))
-                EVT_CALL(SetDefenseTable, ACTOR_SELF, 2, EVT_PTR(N(defenseTable_wet)))
+                EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_wet)))
+                EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable_wet)))
+                EVT_CALL(SetDefenseTable, ACTOR_SELF, 2, EVT_PTR(N(DefenseTable_wet)))
                 EVT_CALL(SetActorVar, ACTOR_SELF, 7, ANIM_LavaBud_Anim0F)
                 EVT_CALL(SetActorVar, ACTOR_SELF, 8, ANIM_LavaBud_Anim09)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_LavaBud_Anim0F)

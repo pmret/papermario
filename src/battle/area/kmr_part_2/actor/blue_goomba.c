@@ -5,12 +5,12 @@
 
 #define NAMESPACE b_area_kmr_part_2_blue_goomba
 
-s32 N(defenseTable_802198B0)[] = {
+s32 N(DefenseTable_802198B0)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_802198BC)[] = {
+s32 N(StatusTable_802198BC)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 100,
@@ -35,7 +35,7 @@ s32 N(statusTable_802198BC)[] = {
     STATUS_END,
 };
 
-extern s32 N(idleAnimations_802199B4)[];
+extern s32 N(IdleAnimations_802199B4)[];
 extern EvtScript N(init_8021B268);
 extern EvtScript N(doDeath_8021B388);
 extern EvtScript N(takeTurn_8021A5A0);
@@ -43,15 +43,15 @@ extern EvtScript N(idle_80219A98);
 extern EvtScript N(handleEvent_80219D74);
 extern EvtScript N(takeTurn_8021B2C8);
 
-ActorPartBlueprint N(partsTable_80219968)[] = {
+ActorPartBlueprint N(PartsTable_80219968)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_802199B4),
-        .defenseTable = N(defenseTable_802198B0),
+        .idleAnimations = N(IdleAnimations_802199B4),
+        .defenseTable = N(DefenseTable_802198B0),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -3 },
@@ -63,10 +63,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_BLUE_GOOMBA_BOSS,
     .level = 20,
     .maxHP = 6,
-    .partCount = ARRAY_COUNT(N(partsTable_80219968)),
-    .partsData = N(partsTable_80219968),
+    .partCount = ARRAY_COUNT( N(PartsTable_80219968)),
+    .partsData = N(PartsTable_80219968),
     .initScript = &N(init_8021B268),
-    .statusTable = N(statusTable_802198BC),
+    .statusTable = N(StatusTable_802198BC),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -81,7 +81,7 @@ ActorBlueprint NAMESPACE = {
     .statusMessageOffset = { 8, 25 },
 };
 
-s32 N(idleAnimations_802199B4)[] = {
+s32 N(IdleAnimations_802199B4)[] = {
     STATUS_NORMAL,    ANIM_GoombaBros_Blue_Idle,
     STATUS_STONE,     ANIM_GoombaBros_Blue_Still,
     STATUS_SLEEP,     ANIM_GoombaBros_Blue_Sleep,
@@ -94,7 +94,7 @@ s32 N(idleAnimations_802199B4)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_80219A00)[] = {
+s32 N(IdleAnimations_80219A00)[] = {
     STATUS_NORMAL,    ANIM_GoombaBros_Blue_Run,
     STATUS_STONE,     ANIM_GoombaBros_Blue_Still,
     STATUS_SLEEP,     ANIM_GoombaBros_Blue_Sleep,
@@ -131,10 +131,10 @@ EvtScript N(idle_80219A98) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 5)
     EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FLOAT(1.0))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80219A00)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80219A00)))
     EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(IdleRunToGoal, ACTOR_SELF, 0)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_802199B4)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_802199B4)))
     EVT_LOOP(20)
         EVT_LABEL(1)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar1)
@@ -147,10 +147,10 @@ EvtScript N(idle_80219A98) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 5)
     EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FLOAT(1.0))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80219A00)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80219A00)))
     EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(IdleRunToGoal, ACTOR_SELF, 0)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_802199B4)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_802199B4)))
     EVT_LOOP(80)
         EVT_LABEL(2)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar1)

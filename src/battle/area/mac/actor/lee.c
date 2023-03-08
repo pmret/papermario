@@ -13,7 +13,7 @@
 
 #define NAMESPACE b_area_mac_lee
 
-s32 N(idleAnimations_8021D360)[] = {
+s32 N(IdleAnimations_8021D360)[] = {
     STATUS_NORMAL,    ANIM_Lee_Idle,
     STATUS_STONE,     ANIM_Lee_Still,
     STATUS_SLEEP,     ANIM_Lee_Sleep,
@@ -26,7 +26,7 @@ s32 N(idleAnimations_8021D360)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_8021D3AC)[] = {
+s32 N(IdleAnimations_8021D3AC)[] = {
     STATUS_NORMAL,    ANIM_Lee_Hurt,
     STATUS_END,
 };
@@ -35,12 +35,12 @@ s32 N(unk_missing_8021D3B8)[] = {
     0x00000001, 0x00A40004, 0x00000000,
 };
 
-s32 N(defenseTable_8021D3C4)[] = {
+s32 N(DefenseTable_8021D3C4)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_8021D3D0)[] = {
+s32 N(StatusTable_8021D3D0)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 60,
@@ -65,15 +65,15 @@ s32 N(statusTable_8021D3D0)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_8021D47C)[] = {
+ActorPartBlueprint N(PartsTable_8021D47C)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -5, 25 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_8021D360),
-        .defenseTable = N(defenseTable_8021D3C4),
+        .idleAnimations = N(IdleAnimations_8021D360),
+        .defenseTable = N(DefenseTable_8021D3C4),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -2, -10 },
@@ -87,10 +87,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_LEE,
     .level = 0,
     .maxHP = 20,
-    .partCount = ARRAY_COUNT(N(partsTable_8021D47C)),
-    .partsData = N(partsTable_8021D47C),
+    .partCount = ARRAY_COUNT( N(PartsTable_8021D47C)),
+    .partsData = N(PartsTable_8021D47C),
     .initScript = &N(init_8021D4C8),
-    .statusTable = N(statusTable_8021D3D0),
+    .statusTable = N(StatusTable_8021D3D0),
     .escapeChance = 100,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -372,7 +372,7 @@ EvtScript N(8021E118) = {
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
     EVT_CALL(SetActorVar, LVarA, 8, 2)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVar0, 1, TRUE)
-    EVT_CALL(SetIdleAnimations, LVarA, 1, EVT_PTR(N(idleAnimations_8021D3AC)))
+    EVT_CALL(SetIdleAnimations, LVarA, 1, EVT_PTR(N(IdleAnimations_8021D3AC)))
     EVT_CALL(SetAnimation, LVarA, 1, ANIM_Lee_Hurt)
     EVT_WAIT(30)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
@@ -391,7 +391,7 @@ EvtScript N(8021E118) = {
     EVT_END_IF
     EVT_CALL(ForceHomePos, LVarA, LVarB, LVarC, LVarD)
     EVT_CALL(HPBarToHome, LVarA)
-    EVT_CALL(SetIdleAnimations, LVarA, 1, EVT_PTR(N(idleAnimations_8021D360)))
+    EVT_CALL(SetIdleAnimations, LVarA, 1, EVT_PTR(N(IdleAnimations_8021D360)))
     EVT_CALL(SetAnimation, LVarA, 1, ANIM_Lee_Idle)
     EVT_CALL(SetActorPos, ACTOR_SELF, NPC_DISPOSE_LOCATION)
     EVT_CALL(ForceHomePos, ACTOR_SELF, NPC_DISPOSE_LOCATION)
@@ -449,7 +449,7 @@ EvtScript N(8021E5DC) = {
 
 Vec3i N(vector3D_8021E940) = { NPC_DISPOSE_LOCATION };
 
-s32 N(idleAnimations_8021E94C)[] = {
+s32 N(IdleAnimations_8021E94C)[] = {
     STATUS_NORMAL,    ANIM_BattleGoombario_Idle,
     STATUS_STONE,     ANIM_BattleGoombario_Still,
     STATUS_SLEEP,     ANIM_BattleGoombario_Still,
@@ -462,12 +462,12 @@ s32 N(idleAnimations_8021E94C)[] = {
     STATUS_END,
 };
 
-s32 N(defenseTable_8021E998)[] = {
+s32 N(DefenseTable_8021E998)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_8021E9A4)[] = {
+s32 N(StatusTable_8021E9A4)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 60,
@@ -492,15 +492,15 @@ s32 N(statusTable_8021E9A4)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_8021EA50)[] = {
+ActorPartBlueprint N(PartsTable_8021EA50)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 20 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_8021E94C),
-        .defenseTable = N(defenseTable_8021E998),
+        .idleAnimations = N(IdleAnimations_8021E94C),
+        .defenseTable = N(DefenseTable_8021E998),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -1, -9 },
@@ -514,10 +514,10 @@ ActorBlueprint N(goombario) = {
     .type = ACTOR_TYPE_LEE_GOOMBARIO,
     .level = 0,
     .maxHP = 20,
-    .partCount = ARRAY_COUNT(N(partsTable_8021EA50)),
-    .partsData = N(partsTable_8021EA50),
+    .partCount = ARRAY_COUNT( N(PartsTable_8021EA50)),
+    .partsData = N(PartsTable_8021EA50),
     .initScript = &N(init_Goombario),
-    .statusTable = N(statusTable_8021E9A4),
+    .statusTable = N(StatusTable_8021E9A4),
     .escapeChance = 100,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -1066,7 +1066,7 @@ Formation N(formation_goombario) = {
     { .actor = &N(goombario), .home = { .vec = &N(vector3D_8021E940) }},
 };
 
-s32 N(idleAnimations_80220540)[] = {
+s32 N(IdleAnimations_80220540)[] = {
     STATUS_NORMAL,    ANIM_BattleKooper_Idle,
     STATUS_STONE,     ANIM_BattleKooper_Still,
     STATUS_SLEEP,     ANIM_BattleKooper_Still,
@@ -1079,7 +1079,7 @@ s32 N(idleAnimations_80220540)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_8022058C)[] = {
+s32 N(IdleAnimations_8022058C)[] = {
     STATUS_NORMAL,    ANIM_BattleKooper_Toppled,
     STATUS_STONE,     ANIM_BattleKooper_StillToppled,
     STATUS_SLEEP,     ANIM_BattleKooper_StillToppled,
@@ -1092,17 +1092,17 @@ s32 N(idleAnimations_8022058C)[] = {
     STATUS_END,
 };
 
-s32 N(defenseTable_802205D8)[] = {
+s32 N(DefenseTable_802205D8)[] = {
     ELEMENT_NORMAL, 1,
     ELEMENT_END,
 };
 
-s32 N(defenseTable_802205E4)[] = {
+s32 N(DefenseTable_802205E4)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_802205F0)[] = {
+s32 N(StatusTable_802205F0)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 60,
@@ -1127,15 +1127,15 @@ s32 N(statusTable_802205F0)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_8022069C)[] = {
+ActorPartBlueprint N(PartsTable_8022069C)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -2, 32 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80220540),
-        .defenseTable = N(defenseTable_802205D8),
+        .idleAnimations = N(IdleAnimations_80220540),
+        .defenseTable = N(DefenseTable_802205D8),
         .eventFlags = ACTOR_EVENT_FLAG_FLIPABLE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -16 },
@@ -1149,10 +1149,10 @@ ActorBlueprint N(kooper) = {
     .type = ACTOR_TYPE_LEE_KOOPER,
     .level = 0,
     .maxHP = 20,
-    .partCount = ARRAY_COUNT(N(partsTable_8022069C)),
-    .partsData = N(partsTable_8022069C),
+    .partCount = ARRAY_COUNT( N(PartsTable_8022069C)),
+    .partsData = N(PartsTable_8022069C),
     .initScript = &N(init_Kooper),
-    .statusTable = N(statusTable_802205F0),
+    .statusTable = N(StatusTable_802205F0),
     .escapeChance = 100,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -1255,8 +1255,8 @@ EvtScript N(handleEvent_80220908) = {
         EVT_CASE_EQ(13)
             EVT_CALL(SetActorVar, ACTOR_SELF, 4, 1)
             EVT_CALL(SetActorVar, ACTOR_SELF, 5, 1)
-            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable_802205E4)))
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8022058C)))
+            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable_802205E4)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_8022058C)))
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 5, 15)
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, -6)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleKooper_Hurt)
@@ -1408,8 +1408,8 @@ EvtScript N(takeTurn_80221200) = {
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleKooper_Idle)
             EVT_CALL(SetActorVar, ACTOR_SELF, 4, 0)
-            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable_802205D8)))
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80220540)))
+            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable_802205D8)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80220540)))
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -2, 38)
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -3, -9)
         EVT_END_IF
@@ -1595,7 +1595,7 @@ Formation N(formation_kooper) = {
     { .actor = &N(kooper), .home = { .vec = &N(vector3D_8021E940) }}
 };
 
-s32 N(idleAnimations_80222290)[] = {
+s32 N(IdleAnimations_80222290)[] = {
     STATUS_NORMAL,    ANIM_BattleBombette_Idle,
     STATUS_STONE,     ANIM_BattleBombette_Still,
     STATUS_SLEEP,     ANIM_BattleBombette_Still,
@@ -1608,12 +1608,12 @@ s32 N(idleAnimations_80222290)[] = {
     STATUS_END,
 };
 
-s32 N(defenseTable_802222DC)[] = {
+s32 N(DefenseTable_802222DC)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_802222E8)[] = {
+s32 N(StatusTable_802222E8)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 60,
@@ -1638,15 +1638,15 @@ s32 N(statusTable_802222E8)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_80222394)[] = {
+ActorPartBlueprint N(PartsTable_80222394)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 22 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80222290),
-        .defenseTable = N(defenseTable_802222DC),
+        .idleAnimations = N(IdleAnimations_80222290),
+        .defenseTable = N(DefenseTable_802222DC),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -2, -7 },
@@ -1660,10 +1660,10 @@ ActorBlueprint N(bombette) = {
     .type = ACTOR_TYPE_LEE_BOMBETTE,
     .level = 0,
     .maxHP = 20,
-    .partCount = ARRAY_COUNT(N(partsTable_80222394)),
-    .partsData = N(partsTable_80222394),
+    .partCount = ARRAY_COUNT( N(PartsTable_80222394)),
+    .partsData = N(PartsTable_80222394),
     .initScript = &N(init_LeeBombette),
-    .statusTable = N(statusTable_802222E8),
+    .statusTable = N(StatusTable_802222E8),
     .escapeChance = 100,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -1949,7 +1949,7 @@ Formation N(formation_bombette) = {
     { .actor = &N(bombette), .home = { .vec = &N(vector3D_8021E940) }}
 };
 
-s32 N(idleAnimations_80223388)[] = {
+s32 N(IdleAnimations_80223388)[] = {
     STATUS_NORMAL,    ANIM_BattleParakarry_Idle,
     STATUS_STONE,     ANIM_BattleParakarry_Still,
     STATUS_SLEEP,     ANIM_BattleParakarry_Still,
@@ -1962,12 +1962,12 @@ s32 N(idleAnimations_80223388)[] = {
     STATUS_END,
 };
 
-s32 N(defenseTable_802233D4)[] = {
+s32 N(DefenseTable_802233D4)[] = {
     ELEMENT_NORMAL, 1,
     ELEMENT_END,
 };
 
-s32 N(statusTable_802233E0)[] = {
+s32 N(StatusTable_802233E0)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 60,
@@ -1992,15 +1992,15 @@ s32 N(statusTable_802233E0)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_8022348C)[] = {
+ActorPartBlueprint N(PartsTable_8022348C)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -3, 32 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80223388),
-        .defenseTable = N(defenseTable_802233D4),
+        .idleAnimations = N(IdleAnimations_80223388),
+        .defenseTable = N(DefenseTable_802233D4),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -16 },
@@ -2012,7 +2012,7 @@ ActorPartBlueprint N(partsTable_8022348C)[] = {
         .targetOffset = { -3, -18 },
         .opacity = 255,
         .idleAnimations = NULL,
-        .defenseTable = N(defenseTable_802233D4),
+        .defenseTable = N(DefenseTable_802233D4),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -16 },
@@ -2026,10 +2026,10 @@ ActorBlueprint N(parakarry) = {
     .type = ACTOR_TYPE_LEE_PARAKARRY,
     .level = 0,
     .maxHP = 20,
-    .partCount = ARRAY_COUNT(N(partsTable_8022348C)),
-    .partsData = N(partsTable_8022348C),
+    .partCount = ARRAY_COUNT( N(PartsTable_8022348C)),
+    .partsData = N(PartsTable_8022348C),
     .initScript = &N(init_Parakarry),
-    .statusTable = N(statusTable_802233E0),
+    .statusTable = N(StatusTable_802233E0),
     .escapeChance = 100,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -2311,7 +2311,7 @@ Formation N(formation_parakarry) = {
     { .actor = &N(parakarry), .home = { .vec = &N(vector3D_8021E940) }}
 };
 
-s32 N(idleAnimations_80224410)[] = {
+s32 N(IdleAnimations_80224410)[] = {
     STATUS_NORMAL,    ANIM_BattleBow_Idle,
     STATUS_STONE,     ANIM_BattleBow_Still,
     STATUS_SLEEP,     ANIM_BattleBow_Still,
@@ -2324,12 +2324,12 @@ s32 N(idleAnimations_80224410)[] = {
     STATUS_END,
 };
 
-s32 N(defenseTable_8022445C)[] = {
+s32 N(DefenseTable_8022445C)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_80224468)[] = {
+s32 N(StatusTable_80224468)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 60,
@@ -2354,15 +2354,15 @@ s32 N(statusTable_80224468)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_80224514)[] = {
+ActorPartBlueprint N(PartsTable_80224514)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80224410),
-        .defenseTable = N(defenseTable_8022445C),
+        .idleAnimations = N(IdleAnimations_80224410),
+        .defenseTable = N(DefenseTable_8022445C),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -10 },
@@ -2374,7 +2374,7 @@ ActorPartBlueprint N(partsTable_80224514)[] = {
         .targetOffset = { 0, -26 },
         .opacity = 255,
         .idleAnimations = NULL,
-        .defenseTable = N(defenseTable_8022445C),
+        .defenseTable = N(DefenseTable_8022445C),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -10 },
@@ -2388,10 +2388,10 @@ ActorBlueprint N(bow) = {
     .type = ACTOR_TYPE_LEE_BOW,
     .level = 0,
     .maxHP = 20,
-    .partCount = ARRAY_COUNT(N(partsTable_80224514)),
-    .partsData = N(partsTable_80224514),
+    .partCount = ARRAY_COUNT( N(PartsTable_80224514)),
+    .partsData = N(PartsTable_80224514),
     .initScript = &N(init_Bow),
-    .statusTable = N(statusTable_80224468),
+    .statusTable = N(StatusTable_80224468),
     .escapeChance = 100,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -2762,7 +2762,7 @@ Formation N(formation_bow) = {
     { .actor = &N(bow), .home = { .vec = &N(vector3D_8021E940) }}
 };
 
-s32 N(idleAnimations_80225974)[] = {
+s32 N(IdleAnimations_80225974)[] = {
     STATUS_NORMAL,    ANIM_BattleWatt_Idle,
     STATUS_STONE,     ANIM_BattleWatt_Still,
     STATUS_SLEEP,     ANIM_BattleWatt_Still,
@@ -2775,13 +2775,13 @@ s32 N(idleAnimations_80225974)[] = {
     STATUS_END,
 };
 
-s32 N(defenseTable_802259C0)[] = {
+s32 N(DefenseTable_802259C0)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_SHOCK, 99,
     ELEMENT_END,
 };
 
-s32 N(statusTable_802259D4)[] = {
+s32 N(StatusTable_802259D4)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 60,
@@ -2806,15 +2806,15 @@ s32 N(statusTable_802259D4)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_80225A80)[] = {
+ActorPartBlueprint N(PartsTable_80225A80)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -1, 20 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80225974),
-        .defenseTable = N(defenseTable_802259C0),
+        .idleAnimations = N(IdleAnimations_80225974),
+        .defenseTable = N(DefenseTable_802259C0),
         .eventFlags = ACTOR_EVENT_FLAG_ELECTRIFIED,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -8 },
@@ -2826,7 +2826,7 @@ ActorPartBlueprint N(partsTable_80225A80)[] = {
         .targetOffset = { -1, -30 },
         .opacity = 255,
         .idleAnimations = NULL,
-        .defenseTable = N(defenseTable_802259C0),
+        .defenseTable = N(DefenseTable_802259C0),
         .eventFlags = ACTOR_EVENT_FLAG_ELECTRIFIED,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -8 },
@@ -2840,10 +2840,10 @@ ActorBlueprint N(watt) = {
     .type = ACTOR_TYPE_LEE_WATT,
     .level = 0,
     .maxHP = 20,
-    .partCount = ARRAY_COUNT(N(partsTable_80225A80)),
-    .partsData = N(partsTable_80225A80),
+    .partCount = ARRAY_COUNT( N(PartsTable_80225A80)),
+    .partsData = N(PartsTable_80225A80),
     .initScript = &N(init_Watt),
-    .statusTable = N(statusTable_802259D4),
+    .statusTable = N(StatusTable_802259D4),
     .escapeChance = 100,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -3241,7 +3241,7 @@ Formation N(formation_watt) = {
     { .actor = &N(watt), .home = { .vec = &N(vector3D_8021E940) }}
 };
 
-s32 N(idleAnimations_8022697C)[] = {
+s32 N(IdleAnimations_8022697C)[] = {
     STATUS_NORMAL,    ANIM_BattleSushie_Idle,
     STATUS_STONE,     ANIM_BattleSushie_Still,
     STATUS_SLEEP,     ANIM_BattleSushie_Still,
@@ -3254,12 +3254,12 @@ s32 N(idleAnimations_8022697C)[] = {
     STATUS_END,
 };
 
-s32 N(defenseTable_802269C8)[] = {
+s32 N(DefenseTable_802269C8)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_802269D4)[] = {
+s32 N(StatusTable_802269D4)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 60,
@@ -3284,15 +3284,15 @@ s32 N(statusTable_802269D4)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_80226A80)[] = {
+ActorPartBlueprint N(PartsTable_80226A80)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_8022697C),
-        .defenseTable = N(defenseTable_802269C8),
+        .idleAnimations = N(IdleAnimations_8022697C),
+        .defenseTable = N(DefenseTable_802269C8),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -12 },
@@ -3306,10 +3306,10 @@ ActorBlueprint N(sushie) = {
     .type = ACTOR_TYPE_LEE_SUSHIE,
     .level = 0,
     .maxHP = 20,
-    .partCount = ARRAY_COUNT(N(partsTable_80226A80)),
-    .partsData = N(partsTable_80226A80),
+    .partCount = ARRAY_COUNT( N(PartsTable_80226A80)),
+    .partsData = N(PartsTable_80226A80),
     .initScript = &N(init_Sushie),
-    .statusTable = N(statusTable_802269D4),
+    .statusTable = N(StatusTable_802269D4),
     .escapeChance = 100,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -3715,7 +3715,7 @@ Formation N(formation_sushie) = {
     { .actor = &N(sushie), .home = { .vec = &N(vector3D_8021E940) }}
 };
 
-s32 N(idleAnimations_8022840C)[] = {
+s32 N(IdleAnimations_8022840C)[] = {
     STATUS_NORMAL,    ANIM_BattleLakilester_Idle,
     STATUS_STONE,     ANIM_BattleLakilester_Still,
     STATUS_SLEEP,     ANIM_BattleLakilester_Still,
@@ -3728,17 +3728,17 @@ s32 N(idleAnimations_8022840C)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_80228458)[] = {
+s32 N(IdleAnimations_80228458)[] = {
     STATUS_NORMAL,    ANIM_BattleLakilester_Spiny,
     STATUS_END,
 };
 
-s32 N(defenseTable_80228464)[] = {
+s32 N(DefenseTable_80228464)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_80228470)[] = {
+s32 N(StatusTable_80228470)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 60,
@@ -3763,15 +3763,15 @@ s32 N(statusTable_80228470)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_8022851C)[] = {
+ActorPartBlueprint N(PartsTable_8022851C)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -3, 33 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_8022840C),
-        .defenseTable = N(defenseTable_80228464),
+        .idleAnimations = N(IdleAnimations_8022840C),
+        .defenseTable = N(DefenseTable_80228464),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -2, -10 },
@@ -3782,8 +3782,8 @@ ActorPartBlueprint N(partsTable_8022851C)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80228458),
-        .defenseTable = N(defenseTable_80228464),
+        .idleAnimations = N(IdleAnimations_80228458),
+        .defenseTable = N(DefenseTable_80228464),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -3797,10 +3797,10 @@ ActorBlueprint N(lakilester) = {
     .type = ACTOR_TYPE_LEE_LAKILESTER,
     .level = 0,
     .maxHP = 20,
-    .partCount = ARRAY_COUNT(N(partsTable_8022851C)),
-    .partsData = N(partsTable_8022851C),
+    .partCount = ARRAY_COUNT( N(PartsTable_8022851C)),
+    .partsData = N(PartsTable_8022851C),
     .initScript = &N(init_Lakilester),
-    .statusTable = N(statusTable_80228470),
+    .statusTable = N(StatusTable_80228470),
     .escapeChance = 100,
     .airLiftChance = 0,
     .hurricaneChance = 0,

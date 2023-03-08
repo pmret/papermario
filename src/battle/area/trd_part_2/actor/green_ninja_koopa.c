@@ -6,24 +6,24 @@
 
 #define NAMESPACE b_area_trd_part_2_green_ninja_koopa
 
-extern s32 N(idleAnimations_80225670)[];
+extern s32 N(IdleAnimations_80225670)[];
 extern EvtScript N(init_80227CEC);
 extern EvtScript N(idle_80227DE0);
 extern EvtScript N(handleEvent_80227E48);
 extern EvtScript N(nextTurn_802284E4);
 extern EvtScript N(takeTurn_802284D4);
 
-s32 N(defenseTable_80225560)[] = {
+s32 N(DefenseTable_80225560)[] = {
     ELEMENT_NORMAL, 1,
     ELEMENT_END,
 };
 
-s32 N(defenseTable_8022556C)[] = {
+s32 N(DefenseTable_8022556C)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_80225578)[] = {
+s32 N(StatusTable_80225578)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 70,
@@ -48,15 +48,15 @@ s32 N(statusTable_80225578)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_80225624)[] = {
+ActorPartBlueprint N(PartsTable_80225624)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -5, 36 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80225670),
-        .defenseTable = N(defenseTable_80225560),
+        .idleAnimations = N(IdleAnimations_80225670),
+        .defenseTable = N(DefenseTable_80225560),
         .eventFlags = ACTOR_EVENT_FLAG_FLIPABLE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -68,10 +68,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_GREEN_NINJAKOOPA,
     .level = 16,
     .maxHP = 5,
-    .partCount = ARRAY_COUNT(N(partsTable_80225624)),
-    .partsData = N(partsTable_80225624),
+    .partCount = ARRAY_COUNT( N(PartsTable_80225624)),
+    .partsData = N(PartsTable_80225624),
     .initScript = &N(init_80227CEC),
-    .statusTable = N(statusTable_80225578),
+    .statusTable = N(StatusTable_80225578),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -86,7 +86,7 @@ ActorBlueprint NAMESPACE = {
     .statusMessageOffset = { 10, 20 },
 };
 
-s32 N(idleAnimations_80225670)[] = {
+s32 N(IdleAnimations_80225670)[] = {
     STATUS_NORMAL,    ANIM_KoopaBros_Green_Anim04,
     STATUS_STONE,     ANIM_KoopaBros_Green_Anim00,
     STATUS_SLEEP,     ANIM_KoopaBros_Green_Anim15,
@@ -100,7 +100,7 @@ s32 N(idleAnimations_80225670)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_802256C4)[] = {
+s32 N(IdleAnimations_802256C4)[] = {
     STATUS_NORMAL,    ANIM_KoopaBros_Green_Anim05,
     STATUS_STONE,     ANIM_KoopaBros_Green_Anim01,
     STATUS_POISON,    ANIM_KoopaBros_Green_Anim01,
@@ -111,7 +111,7 @@ s32 N(idleAnimations_802256C4)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_80225700)[] = {
+s32 N(IdleAnimations_80225700)[] = {
     STATUS_NORMAL,    ANIM_KoopaBros_Green_Anim0D,
     STATUS_STONE,     ANIM_KoopaBros_Green_Anim01,
     STATUS_POISON,    ANIM_KoopaBros_Green_Anim01,
@@ -122,7 +122,7 @@ s32 N(idleAnimations_80225700)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_8022573C)[] = {
+s32 N(IdleAnimations_8022573C)[] = {
     STATUS_NORMAL,    ANIM_KoopaBros_Green_Anim0C,
     STATUS_STONE,     ANIM_KoopaBros_Green_Anim17,
     STATUS_SLEEP,     ANIM_KoopaBros_Green_Anim17,
@@ -136,12 +136,12 @@ s32 N(idleAnimations_8022573C)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_80225790)[] = {
+s32 N(IdleAnimations_80225790)[] = {
     STATUS_NORMAL,    ANIM_KoopaBros_Green_Anim0A,
     STATUS_END,
 };
 
-s32 N(idleAnimations_8022579C)[] = {
+s32 N(IdleAnimations_8022579C)[] = {
     STATUS_NORMAL,    ANIM_KoopaBros_Green_Anim0C,
     STATUS_END,
 };
@@ -168,12 +168,12 @@ EvtScript N(802257A8) = {
             EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(3)
-                    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80225670)))
+                    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80225670)))
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaBros_Green_Anim04)
                 EVT_CASE_OR_EQ(4)
                 EVT_CASE_OR_EQ(5)
                 EVT_CASE_OR_EQ(6)
-                    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_802256C4)))
+                    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_802256C4)))
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaBros_Green_Anim05)
                 EVT_END_CASE_GROUP
             EVT_END_SWITCH
@@ -185,7 +185,7 @@ EvtScript N(802257A8) = {
                 EVT_CASE_OR_EQ(5)
                 EVT_CASE_OR_EQ(6)
                     EVT_WAIT(5)
-                    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80225700)))
+                    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80225700)))
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaBros_Green_Anim0D)
                 EVT_END_CASE_GROUP
             EVT_END_SWITCH
@@ -202,10 +202,10 @@ EvtScript N(802257A8) = {
                     EVT_CALL(GetActorVar, ACTOR_ENEMY4, 0, LVar0)
                     EVT_BITWISE_AND_CONST(LVar0, 192)
                     EVT_IF_NE(LVar0, 192)
-                        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80225700)))
+                        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80225700)))
                         EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaBros_Green_Anim0D)
                     EVT_ELSE
-                        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80225790)))
+                        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80225790)))
                         EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaBros_Green_Anim0A)
                     EVT_END_IF
                 EVT_END_CASE_GROUP
@@ -225,10 +225,10 @@ EvtScript N(802257A8) = {
                     EVT_CALL(GetActorVar, ACTOR_ENEMY4, 0, LVar0)
                     EVT_BITWISE_AND_CONST(LVar0, 192)
                     EVT_IF_NE(LVar0, 192)
-                        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80225700)))
+                        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80225700)))
                         EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaBros_Green_Anim0D)
                     EVT_ELSE
-                        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80225790)))
+                        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80225790)))
                         EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaBros_Green_Anim0A)
                     EVT_END_IF
                 EVT_END_CASE_GROUP
@@ -266,7 +266,7 @@ EvtScript N(802257A8) = {
                     EVT_CALL(N(UnkEnemyPosFunc), LVar0, LVar1, LVar2)
                     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaBros_Green_Anim0A)
-                    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80225790)))
+                    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80225790)))
                     EVT_CALL(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
                     EVT_IF_EQ(LocalFlag(0), 1)
                         EVT_CALL(N(StartRumbleWithParams), 256, 5)
@@ -275,7 +275,7 @@ EvtScript N(802257A8) = {
                         EVT_END_THREAD
                     EVT_END_IF
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaBros_Green_Anim0C)
-                    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8022579C)))
+                    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_8022579C)))
                     EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
                     EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
                     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_HIDE_HP_BAR, FALSE)
@@ -283,8 +283,8 @@ EvtScript N(802257A8) = {
                     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     EVT_CALL(ForceHomePos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     EVT_CALL(HPBarToHome, ACTOR_SELF)
-                    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8022573C)))
-                    EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable_8022556C)))
+                    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_8022573C)))
+                    EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable_8022556C)))
                     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 1)
                     EVT_CALL(SetActorVar, ACTOR_SELF, 2, 2)
                     EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 0, 18)
@@ -305,7 +305,7 @@ EvtScript N(802257A8) = {
                     EVT_CALL(N(UnkEnemyPosFunc), LVar0, LVar1, LVar2)
                     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaBros_Green_Anim0E)
-                    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80225790)))
+                    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80225790)))
                     EVT_CALL(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
                     EVT_IF_EQ(LocalFlag(0), 1)
                         EVT_CALL(N(StartRumbleWithParams), 256, 5)
@@ -321,7 +321,7 @@ EvtScript N(802257A8) = {
                     EVT_DIVF(LVar3, EVT_FLOAT(10.0))
                     EVT_PLAY_EFFECT(EFFECT_SMOKE_BURST, 0, LVar0, LVar1, LVar2, LVar3, 10, 0)
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaBros_Green_Anim0C)
-                    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8022579C)))
+                    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_8022579C)))
                     EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
                     EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
                     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_HIDE_HP_BAR, FALSE)
@@ -329,8 +329,8 @@ EvtScript N(802257A8) = {
                     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     EVT_CALL(ForceHomePos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     EVT_CALL(HPBarToHome, ACTOR_SELF)
-                    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8022573C)))
-                    EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable_8022556C)))
+                    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_8022573C)))
+                    EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable_8022556C)))
                     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 1)
                     EVT_CALL(SetActorVar, ACTOR_SELF, 2, 2)
                     EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 0, 18)
@@ -371,8 +371,8 @@ EvtScript N(802257A8) = {
                         EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
                         EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -5, 36)
                         EVT_CALL(SetActorVar, ACTOR_SELF, 1, 2)
-                        EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable_80225560)))
-                        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80225670)))
+                        EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable_80225560)))
+                        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80225670)))
                         EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaBros_Green_Anim04)
                         EVT_CALL(ResetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP)
                     EVT_END_IF
@@ -736,8 +736,8 @@ EvtScript N(handleEvent_80227E48) = {
         EVT_CASE_EQ(EVENT_FLIP_TRIGGER)
             EVT_CALL(SetActorVar, ACTOR_SELF, 1, 1)
             EVT_CALL(SetActorVar, ACTOR_SELF, 2, 2)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8022573C)))
-            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable_8022556C)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_8022573C)))
+            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable_8022556C)))
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 0, 18)
             EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar0)
             EVT_IF_EQ(LVar0, 0)

@@ -11,7 +11,7 @@ extern EvtScript N(takeTurn_8022D344);
 extern EvtScript N(idle_8022CCCC);
 extern EvtScript N(handleEvent_8022CE60);
 
-s32 N(idleAnimations_8022CB00)[] = {
+s32 N(IdleAnimations_8022CB00)[] = {
     STATUS_NORMAL,    ANIM_PyroGuy_Anim01,
     STATUS_STONE,     ANIM_PyroGuy_Anim00,
     STATUS_SLEEP,     ANIM_PyroGuy_Anim07,
@@ -24,7 +24,7 @@ s32 N(idleAnimations_8022CB00)[] = {
     STATUS_END,
 };
 
-s32 N(defenseTable_8022CB4C)[] = {
+s32 N(DefenseTable_8022CB4C)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_WATER, -2,
     ELEMENT_ICE, -2,
@@ -35,7 +35,7 @@ s32 N(defenseTable_8022CB4C)[] = {
     ELEMENT_END,
 };
 
-s32 N(statusTable_8022CB88)[] = {
+s32 N(StatusTable_8022CB88)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 70,
@@ -64,15 +64,15 @@ enum PartIDs {
     PT_MAIN     = 1,
 };
 
-ActorPartBlueprint N(partsTable_8022CC34)[] = {
+ActorPartBlueprint N(PartsTable_8022CC34)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_8022CB00),
-        .defenseTable = N(defenseTable_8022CB4C),
+        .idleAnimations = N(IdleAnimations_8022CB00),
+        .defenseTable = N(DefenseTable_8022CB4C),
         .eventFlags = ACTOR_EVENT_FLAG_FIREY,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -1, -10 },
@@ -84,10 +84,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_PYRO_GUY,
     .level = 15,
     .maxHP = 7,
-    .partCount = ARRAY_COUNT(N(partsTable_8022CC34)),
-    .partsData = N(partsTable_8022CC34),
+    .partCount = ARRAY_COUNT( N(PartsTable_8022CC34)),
+    .partsData = N(PartsTable_8022CC34),
     .initScript = &N(init_8022CC80),
-    .statusTable = N(statusTable_8022CB88),
+    .statusTable = N(StatusTable_8022CB88),
     .escapeChance = 60,
     .airLiftChance = 85,
     .hurricaneChance = 80,

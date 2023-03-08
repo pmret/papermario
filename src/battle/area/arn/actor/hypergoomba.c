@@ -6,7 +6,7 @@
 
 #define NAMESPACE b_area_arn_hypergoomba
 
-extern s32 N(idleAnimations_80219818)[];
+extern s32 N(IdleAnimations_80219818)[];
 extern EvtScript N(init_802188C0);
 extern EvtScript N(idle_802198FC);
 extern EvtScript N(handleEvent_80219BD8);
@@ -14,12 +14,12 @@ extern EvtScript N(takeTurn_802195F0);
 extern EvtScript N(nextTurn_80218950);
 extern EvtScript N(takeTurn_8021A628);
 
-s32 N(defenseTable_80218770)[] = {
+s32 N(DefenseTable_80218770)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_8021877C)[] = {
+s32 N(StatusTable_8021877C)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 80,
@@ -44,15 +44,15 @@ s32 N(statusTable_8021877C)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_80218828)[] = {
+ActorPartBlueprint N(PartsTable_80218828)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 22 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80219818),
-        .defenseTable = N(defenseTable_80218770),
+        .idleAnimations = N(IdleAnimations_80219818),
+        .defenseTable = N(DefenseTable_80218770),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -10 },
@@ -64,10 +64,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_HYPER_GOOMBA,
     .level = 12,
     .maxHP = 7,
-    .partCount = ARRAY_COUNT(N(partsTable_80218828)),
-    .partsData = N(partsTable_80218828),
+    .partCount = ARRAY_COUNT( N(PartsTable_80218828)),
+    .partsData = N(PartsTable_80218828),
     .initScript = &N(init_802188C0),
-    .statusTable = N(statusTable_8021877C),
+    .statusTable = N(StatusTable_8021877C),
     .escapeChance = 60,
     .airLiftChance = 90,
     .hurricaneChance = 90,
@@ -82,7 +82,7 @@ ActorBlueprint NAMESPACE = {
     .statusMessageOffset = { 10, 20 },
 };
 
-s32 N(idleAnimations_80218874)[] = {
+s32 N(IdleAnimations_80218874)[] = {
     STATUS_NORMAL,    ANIM_Goomba_Hyper_Sleep,
     STATUS_STONE,     ANIM_Goomba_Hyper_Still,
     STATUS_SLEEP,     ANIM_Goomba_Hyper_Sleep,
@@ -150,7 +150,7 @@ EvtScript N(802189D4) = {
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(0.5))
         EVT_END_THREAD
         EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
-        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80218874)))
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80218874)))
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Hyper_Idle)
         EVT_CALL(EnableActorGlow, ACTOR_SELF, TRUE)
         EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_ATTACK_CHARGED, TRUE)
@@ -217,7 +217,7 @@ EvtScript N(802189D4) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Hyper_Idle)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80219818)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80219818)))
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
@@ -272,7 +272,7 @@ EvtScript N(802189D4) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Goomba_Hyper_Idle)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80219818)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80219818)))
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -325,7 +325,7 @@ EvtScript N(takeTurn_802195F0) = {
     EVT_END
 };
 
-s32 N(idleAnimations_80219818)[] = {
+s32 N(IdleAnimations_80219818)[] = {
     STATUS_NORMAL,    ANIM_Goomba_Hyper_Idle,
     STATUS_STONE,     ANIM_Goomba_Hyper_Still,
     STATUS_SLEEP,     ANIM_Goomba_Hyper_Sleep,
@@ -338,7 +338,7 @@ s32 N(idleAnimations_80219818)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_80219864)[] = {
+s32 N(IdleAnimations_80219864)[] = {
     STATUS_NORMAL,    ANIM_Goomba_Hyper_Run,
     STATUS_STONE,     ANIM_Goomba_Hyper_Still,
     STATUS_SLEEP,     ANIM_Goomba_Hyper_Sleep,
@@ -375,10 +375,10 @@ EvtScript N(idle_802198FC) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 5)
     EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FLOAT(1.0))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80219864)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80219864)))
     EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(IdleRunToGoal, ACTOR_SELF, 0)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80219818)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80219818)))
     EVT_LOOP(20)
         EVT_LABEL(1)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar1)
@@ -391,10 +391,10 @@ EvtScript N(idle_802198FC) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 5)
     EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FLOAT(1.0))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80219864)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80219864)))
     EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(IdleRunToGoal, ACTOR_SELF, 0)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80219818)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80219818)))
     EVT_LOOP(80)
         EVT_LABEL(2)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar1)
@@ -453,7 +453,7 @@ EvtScript N(handleEvent_80219BD8) = {
             EVT_CALL(EnableActorGlow, ACTOR_SELF, FALSE)
             EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_ATTACK_CHARGED, FALSE)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80219818)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80219818)))
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Goomba_Hyper_Electrocute)
             EVT_EXEC_WAIT(DoShockHit)
@@ -477,7 +477,7 @@ EvtScript N(handleEvent_80219BD8) = {
             EVT_CALL(EnableActorGlow, ACTOR_SELF, FALSE)
             EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_ATTACK_CHARGED, FALSE)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80219818)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80219818)))
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Goomba_Hyper_Electrocute)
             EVT_EXEC_WAIT(DoShockHit)
@@ -493,7 +493,7 @@ EvtScript N(handleEvent_80219BD8) = {
                 EVT_CALL(EnableActorGlow, ACTOR_SELF, FALSE)
                 EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_ATTACK_CHARGED, FALSE)
                 EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-                EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80219818)))
+                EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80219818)))
             EVT_END_IF
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Goomba_Hyper_Idle)

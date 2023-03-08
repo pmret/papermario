@@ -14,7 +14,7 @@ extern EvtScript N(handleEvent_80219ED4);
 extern EvtScript N(nextTurn_80218C58);
 extern EvtScript N(8021A2E8);
 
-s32 N(idleAnimations_802189B0)[] = {
+s32 N(IdleAnimations_802189B0)[] = {
     STATUS_NORMAL,    ANIM_Fuzzipede_Anim04,
     STATUS_STONE,     ANIM_Fuzzipede_Anim00,
     STATUS_SLEEP,     ANIM_Fuzzipede_Anim29,
@@ -27,7 +27,7 @@ s32 N(idleAnimations_802189B0)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_802189FC)[] = {
+s32 N(IdleAnimations_802189FC)[] = {
     STATUS_NORMAL,    ANIM_Fuzzipede_Anim06,
     STATUS_STONE,     ANIM_Fuzzipede_Anim02,
     STATUS_SLEEP,     ANIM_Fuzzipede_Anim2A,
@@ -40,12 +40,12 @@ s32 N(idleAnimations_802189FC)[] = {
     STATUS_END,
 };
 
-s32 N(defenseTable_80218A48)[] = {
+s32 N(DefenseTable_80218A48)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_80218A54)[] = {
+s32 N(StatusTable_80218A54)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 50,
@@ -70,15 +70,15 @@ s32 N(statusTable_80218A54)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_80218B00)[] = {
+ActorPartBlueprint N(PartsTable_80218B00)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 2, 24 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_802189B0),
-        .defenseTable = N(defenseTable_80218A48),
+        .idleAnimations = N(IdleAnimations_802189B0),
+        .defenseTable = N(DefenseTable_80218A48),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -2, -10 },
@@ -90,7 +90,7 @@ ActorPartBlueprint N(partsTable_80218B00)[] = {
         .targetOffset = { 2, -16 },
         .opacity = 255,
         .idleAnimations = NULL,
-        .defenseTable = N(defenseTable_80218A48),
+        .defenseTable = N(DefenseTable_80218A48),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -2, -10 },
@@ -102,10 +102,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_FUZZIPEDE,
     .level = 43,
     .maxHP = 20,
-    .partCount = ARRAY_COUNT(N(partsTable_80218B00)),
-    .partsData = N(partsTable_80218B00),
+    .partCount = ARRAY_COUNT( N(PartsTable_80218B00)),
+    .partsData = N(PartsTable_80218B00),
     .initScript = &N(init_80218B70),
-    .statusTable = N(statusTable_80218A54),
+    .statusTable = N(StatusTable_80218A54),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -177,7 +177,7 @@ EvtScript N(80218D68) = {
     EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzipede_Anim04)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_802189B0)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_802189B0)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_802197FC)))
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING | ACTOR_FLAG_UPSIDE_DOWN, FALSE)
     EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 2, 24)
@@ -202,7 +202,7 @@ EvtScript N(80218FC8) = {
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_EXEC_WAIT(D_8029C12C)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_802189B0)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_802189B0)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_802197FC)))
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING | ACTOR_FLAG_UPSIDE_DOWN, FALSE)
     EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 2, 24)
@@ -259,7 +259,7 @@ EvtScript N(802191AC) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_802189FC)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_802189FC)))
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzipede_Anim06)
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80219ED4)))
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, TRUE)
@@ -407,7 +407,7 @@ EvtScript N(80219D68) = {
     EVT_END_IF
     EVT_CALL(func_8027D32C, ACTOR_SELF)
     EVT_EXEC_WAIT(N(8021A2E8))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_802189B0)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_802189B0)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_802197FC)))
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING | ACTOR_FLAG_UPSIDE_DOWN, FALSE)
     EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 2, 24)

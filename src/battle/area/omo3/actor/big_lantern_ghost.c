@@ -7,7 +7,7 @@
 
 #define NAMESPACE b_area_omo3_big_lantern_ghost
 
-extern s32 N(idleAnimations)[];
+extern s32 N(IdleAnimations)[];
 
 extern EvtScript N(init);
 extern EvtScript N(takeTurn);
@@ -42,7 +42,7 @@ enum N(MoveIds) {
     N(MOVE_LIGHT_BEAM) = 2,
 };
 
-s32 N(defenseTable)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
@@ -52,7 +52,7 @@ s32 N(defenseTable2)[] = {
     ELEMENT_END,
 };
 
-s32 N(statusTable)[] = {
+s32 N(StatusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 40,
@@ -84,8 +84,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 54 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -5, -10 },
@@ -96,7 +96,7 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { -40, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
+        .idleAnimations = N(IdleAnimations),
         .defenseTable = N(defenseTable2),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
@@ -113,7 +113,7 @@ ActorBlueprint NAMESPACE = {
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
     .initScript = &N(init),
-    .statusTable = N(statusTable),
+    .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -128,7 +128,7 @@ ActorBlueprint NAMESPACE = {
     .statusMessageOffset = { 20, 45 },
 };
 
-s32 N(idleAnimations)[] = {
+s32 N(IdleAnimations)[] = {
     STATUS_NORMAL, ANIM_BigLanternGhost_Anim01,
     STATUS_STONE, ANIM_BigLanternGhost_Anim00,
     STATUS_SLEEP, ANIM_BigLanternGhost_Anim0C,

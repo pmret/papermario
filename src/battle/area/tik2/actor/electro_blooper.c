@@ -95,7 +95,7 @@ extern EvtScript N(attackSpinDrop);
 extern EvtScript N(attackInkBlast);
 extern EvtScript N(charge);
 
-s32 N(idleAnimations)[] = {
+s32 N(IdleAnimations)[] = {
     STATUS_NORMAL, ANIM_Blooper_Anim00,
     STATUS_STOP, ANIM_Blooper_Anim00,
     STATUS_SLEEP, ANIM_Blooper_Anim07,
@@ -106,7 +106,7 @@ s32 N(idleAnimations)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations2)[] = {
+s32 N(IdleAnimations2)[] = {
     STATUS_NORMAL, ANIM_Blooper_Anim0C,
     STATUS_STOP, ANIM_Blooper_Anim00,
     STATUS_SLEEP, ANIM_Blooper_Anim07,
@@ -117,7 +117,7 @@ s32 N(idleAnimations2)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations3)[] = {
+s32 N(IdleAnimations3)[] = {
     STATUS_NORMAL, ANIM_Blooper_Anim00,
     STATUS_STOP, ANIM_Blooper_Anim00,
     STATUS_SLEEP, ANIM_Blooper_Anim07,
@@ -128,12 +128,12 @@ s32 N(idleAnimations3)[] = {
     STATUS_END,
 };
 
-s32 N(defenseTable)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable)[] = {
+s32 N(StatusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 50,
@@ -158,7 +158,7 @@ s32 N(statusTable)[] = {
     STATUS_END,
 };
 
-s32 N(statusTable_charged)[] = {
+s32 N(StatusTable_charged)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 25,
@@ -190,8 +190,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 80 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -203,7 +203,7 @@ ActorPartBlueprint N(parts)[] = {
         .targetOffset = { 0, 60 },
         .opacity = 255,
         .idleAnimations = NULL,
-        .defenseTable = N(defenseTable),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -37 },
@@ -218,7 +218,7 @@ ActorBlueprint NAMESPACE = {
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
     .initScript = &N(init),
-    .statusTable = N(statusTable),
+    .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -329,7 +329,7 @@ EvtScript N(idle) = {
     EVT_IF_GE(LVar4, LVar1)
         EVT_GOTO(11)
     EVT_END_IF
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations2)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations2)))
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim00)
     EVT_WAIT(9)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim0C)
@@ -350,7 +350,7 @@ EvtScript N(idle) = {
     EVT_IF_GE(LVar4, LVar1)
         EVT_GOTO(12)
     EVT_END_IF
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations2)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations2)))
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim00)
     EVT_WAIT(9)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim0C)
@@ -365,7 +365,7 @@ EvtScript N(idle) = {
         EVT_WAIT(1)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations3)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations3)))
     EVT_CALL(SetIdleGoalToHome, ACTOR_SELF)
     EVT_CALL(GetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, -10)
@@ -867,7 +867,7 @@ EvtScript N(charge) = {
     EVT_CALL(SetPartEventFlags, ACTOR_SELF, 2, ACTOR_EVENT_FLAG_ATTACK_CHARGED | ACTOR_EVENT_FLAG_ELECTRIFIED)
     EVT_CALL(func_8026ED20, ACTOR_SELF, 1, 1)
     EVT_CALL(func_8026EA7C, ACTOR_SELF, 1, 4)
-    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(statusTable_charged)))
+    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(StatusTable_charged)))
     EVT_RETURN
     EVT_END
 };
@@ -886,7 +886,7 @@ EvtScript N(discharge) = {
     EVT_END_IF
     EVT_CALL(SetPartEventFlags, ACTOR_SELF, 2, 0)
     EVT_CALL(func_8026ED20, ACTOR_SELF, 1, 0)
-    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(statusTable)))
+    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(StatusTable)))
     EVT_RETURN
     EVT_END
 };

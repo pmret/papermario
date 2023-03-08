@@ -5,7 +5,7 @@
 
 #define NAMESPACE b_area_kmr_part_3_egg_jr_troopa
 
-s32 N(idleAnimations_80224380)[] = {
+s32 N(IdleAnimations_80224380)[] = {
     STATUS_NORMAL,    ANIM_JrTroopa_Idle,
     STATUS_SLEEP,     ANIM_JrTroopa_Sleep,
     STATUS_STONE,     ANIM_JrTroopa_Still,
@@ -16,7 +16,7 @@ s32 N(idleAnimations_80224380)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_802243BC)[] = {
+s32 N(IdleAnimations_802243BC)[] = {
     STATUS_NORMAL,   ANIM_JrTroopa_Idle,
     STATUS_SLEEP,    ANIM_JrTroopa_Still,
     STATUS_STONE,    ANIM_JrTroopa_Still,
@@ -27,18 +27,18 @@ s32 N(idleAnimations_802243BC)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_802243F8)[] = {
+s32 N(IdleAnimations_802243F8)[] = {
     STATUS_NORMAL,    ANIM_JrTroopa_EggIdle,
     STATUS_STOP,      ANIM_JrTroopa_EggStill,
     STATUS_END,
 };
 
-s32 N(defenseTable_8022440C)[] = {
+s32 N(DefenseTable_8022440C)[] = {
     ELEMENT_NORMAL, 1,
     ELEMENT_END,
 };
 
-s32 N(statusTable_80224418)[] = {
+s32 N(StatusTable_80224418)[] = {
     STATUS_NORMAL, 100,
     STATUS_DEFAULT, 100,
     STATUS_SLEEP, 80,
@@ -63,15 +63,15 @@ s32 N(statusTable_80224418)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_802244C4)[] = {
+ActorPartBlueprint N(PartsTable_802244C4)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -6, 18 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80224380),
-        .defenseTable = N(defenseTable_8022440C),
+        .idleAnimations = N(IdleAnimations_80224380),
+        .defenseTable = N(DefenseTable_8022440C),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 5, -4 },
@@ -85,10 +85,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_JR_TROOPA2,
     .level = 44,
     .maxHP = 15,
-    .partCount = ARRAY_COUNT(N(partsTable_802244C4)),
-    .partsData = N(partsTable_802244C4),
+    .partCount = ARRAY_COUNT( N(PartsTable_802244C4)),
+    .partsData = N(PartsTable_802244C4),
     .initScript = &N(init_80224A94),
-    .statusTable = N(statusTable_80224418),
+    .statusTable = N(StatusTable_80224418),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -133,7 +133,7 @@ EvtScript N(802245E8) = {
     EVT_END
 };
 
-s32 N(idleAnimations_8022464C)[] = {
+s32 N(IdleAnimations_8022464C)[] = {
     STATUS_NORMAL,    ANIM_JrTroopa_Defeated,
     STATUS_END,
 };
@@ -182,7 +182,7 @@ EvtScript N(80224658) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, LVarA, ANIM_JrTroopa_Collapse)
     EVT_WAIT(12)
     EVT_CALL(SetAnimation, ACTOR_SELF, LVarA, ANIM_JrTroopa_Defeated)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, LVarA, EVT_PTR(N(idleAnimations_8022464C)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, LVarA, EVT_PTR(N(IdleAnimations_8022464C)))
     EVT_WAIT(60)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, 0x00400000, TRUE)
     EVT_RETURN
@@ -198,7 +198,7 @@ EvtScript N(80224964) = {
     EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 0, LVar0, LVar1, LVar2, -4, 0, 0)
     EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 0, LVar0, LVar1, LVar2, 4, 0, 0)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_JrTroopa_EnterEgg)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_802243F8)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_802243F8)))
     EVT_WAIT(10)
     EVT_RETURN
     EVT_END

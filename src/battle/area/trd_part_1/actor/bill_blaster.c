@@ -8,12 +8,12 @@
 
 #define NAMESPACE A(bill_blaster)
 
-s32 N(defenseTable_80219D20)[] = {
+s32 N(DefenseTable_80219D20)[] = {
     ELEMENT_NORMAL, 1,
     ELEMENT_END,
 };
 
-s32 N(statusTable_80219D2C)[] = {
+s32 N(StatusTable_80219D2C)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 0,
@@ -38,18 +38,18 @@ s32 N(statusTable_80219D2C)[] = {
     STATUS_END,
 };
 
-extern s32 N(idleAnimations_80219E48)[];
+extern s32 N(IdleAnimations_80219E48)[];
 extern EvtScript N(init_80219E6C);
 
-ActorPartBlueprint N(partsTable_80219DD8)[] = {
+ActorPartBlueprint N(PartsTable_80219DD8)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -6, 29 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80219E48),
-        .defenseTable = N(defenseTable_80219D20),
+        .idleAnimations = N(IdleAnimations_80219E48),
+        .defenseTable = N(DefenseTable_80219D20),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -9 },
@@ -60,8 +60,8 @@ ActorPartBlueprint N(partsTable_80219DD8)[] = {
         .posOffset = { 100, 0, 0 },
         .targetOffset = { -106, 29 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80219E48),
-        .defenseTable = N(defenseTable_80219D20),
+        .idleAnimations = N(IdleAnimations_80219E48),
+        .defenseTable = N(DefenseTable_80219D20),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -9 },
@@ -73,10 +73,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_BILL_BLASTER,
     .level = 10,
     .maxHP = 4,
-    .partCount = ARRAY_COUNT(N(partsTable_80219DD8)),
-    .partsData = N(partsTable_80219DD8),
+    .partCount = ARRAY_COUNT( N(PartsTable_80219DD8)),
+    .partsData = N(PartsTable_80219DD8),
     .initScript = &N(init_80219E6C),
-    .statusTable = N(statusTable_80219D2C),
+    .statusTable = N(StatusTable_80219D2C),
     .escapeChance = 0,
     .airLiftChance = 20,
     .hurricaneChance = 15,
@@ -91,7 +91,7 @@ ActorBlueprint NAMESPACE = {
     .statusMessageOffset = { 5, 25 },
 };
 
-s32 N(idleAnimations_80219E48)[] = {
+s32 N(IdleAnimations_80219E48)[] = {
     STATUS_NORMAL,    ANIM_BillBlaster_Anim01,
     STATUS_STONE,     ANIM_BillBlaster_Anim00,
     STATUS_STOP,      ANIM_BillBlaster_Anim00,

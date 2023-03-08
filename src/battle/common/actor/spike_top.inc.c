@@ -4,7 +4,7 @@
 #include "script_api/battle.h"
 #include "sprite/npc/SpikeTop.h"
 
-extern s32 N(idleAnimations)[];
+extern s32 N(IdleAnimations)[];
 extern EvtScript N(init);
 extern EvtScript N(idle);
 extern EvtScript N(spikeTop_TakeTurn_Ceiling);
@@ -12,19 +12,19 @@ extern EvtScript N(spikeTop_HandleEvent_Ceiling);
 extern EvtScript N(spikeTop_TakeTurn_Floor);
 extern EvtScript N(spikeTop_HandleEvent_Floor);
 
-s32 N(defenseTable)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL, 4,
     ELEMENT_FIRE, 99,
     ELEMENT_BLAST, 99,
     ELEMENT_END,
 };
 
-s32 N(defenseTable_8021C8CC)[] = {
+s32 N(DefenseTable_8021C8CC)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable)[] = {
+s32 N(StatusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 60,
@@ -56,8 +56,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_SPIKY_TOP | ACTOR_EVENT_FLAG_FLIPABLE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 14 },
@@ -72,7 +72,7 @@ ActorBlueprint NAMESPACE = {
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
     .initScript = &N(init),
-    .statusTable = N(statusTable),
+    .statusTable = N(StatusTable),
     .escapeChance = 60,
     .airLiftChance = 70,
     .hurricaneChance = 65,
@@ -87,7 +87,7 @@ ActorBlueprint NAMESPACE = {
     .statusMessageOffset = { 8, 13 },
 };
 
-s32 N(idleAnimations_8021C9D0)[] = {
+s32 N(IdleAnimations_8021C9D0)[] = {
     STATUS_NORMAL,    ANIM_SpikeTop_Anim03,
     STATUS_STONE,     ANIM_SpikeTop_Anim00,
     STATUS_SLEEP,     ANIM_SpikeTop_Anim1B,
@@ -100,7 +100,7 @@ s32 N(idleAnimations_8021C9D0)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations)[] = {
+s32 N(IdleAnimations)[] = {
     STATUS_NORMAL,    ANIM_SpikeTop_Anim04,
     STATUS_STONE,     ANIM_SpikeTop_Anim01,
     STATUS_SLEEP,     ANIM_SpikeTop_Anim1C,
@@ -113,7 +113,7 @@ s32 N(idleAnimations)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_8021CA68)[] = {
+s32 N(IdleAnimations_8021CA68)[] = {
     STATUS_NORMAL,    ANIM_SpikeTop_Anim05,
     STATUS_STONE,     ANIM_SpikeTop_Anim02,
     STATUS_SLEEP,     ANIM_SpikeTop_Anim1D,
@@ -142,7 +142,7 @@ EvtScript N(init) = {
         EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -9)
         EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(spikeTop_TakeTurn_Floor)))
         EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(spikeTop_HandleEvent_Floor)))
-        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021C9D0)))
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_8021C9D0)))
         EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, FALSE)
         EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_FLIPABLE, TRUE)
     EVT_END_IF
@@ -167,8 +167,8 @@ EvtScript N(spikeTop_FallDown) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(spikeTop_TakeTurn_Floor)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(spikeTop_HandleEvent_Floor)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 9, 1)
-    EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable_8021C8CC)))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021CA68)))
+    EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable_8021C8CC)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_8021CA68)))
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, FALSE)
     EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_SPIKY_TOP, FALSE)
     EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_FLIPABLE, TRUE)
@@ -373,8 +373,8 @@ EvtScript N(spikeTop_HandleEvent_Floor) = {
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 1, 20)
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -3, -8)
             EVT_CALL(SetActorVar, ACTOR_SELF, 9, 1)
-            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable_8021C8CC)))
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021CA68)))
+            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable_8021C8CC)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_8021CA68)))
             EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_SPIKY_TOP, FALSE)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, TRUE)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim13)
@@ -555,7 +555,7 @@ EvtScript N(spikeTop_TakeTurn_Ceiling) = {
     EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(spikeTop_TakeTurn_Floor)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(spikeTop_HandleEvent_Floor)))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021C9D0)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_8021C9D0)))
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, FALSE)
     EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_FLIPABLE, TRUE)
     EVT_CALL(GetIndexFromPos, ACTOR_SELF, LVar0)
@@ -711,8 +711,8 @@ EvtScript N(spikeTop_TakeTurn_Floor) = {
             EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 0, 24)
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -9)
-            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable)))
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021C9D0)))
+            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_8021C9D0)))
             EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, FALSE)
             EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_SPIKY_TOP, TRUE)

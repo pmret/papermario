@@ -6,17 +6,17 @@
 
 #define NAMESPACE b_area_hos_magikoopa
 
-s32 N(defenseTable_8021D480)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(defenseTable_8021D48C)[] = {
+s32 N(DefenseTable_flying)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_8021D498)[] = {
+s32 N(StatusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 100,
@@ -41,7 +41,7 @@ s32 N(statusTable_8021D498)[] = {
     STATUS_END,
 };
 
-s32 N(statusTable_8021D544)[] = {
+s32 N(StatusTable_flying)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 100,
@@ -66,35 +66,35 @@ s32 N(statusTable_8021D544)[] = {
     STATUS_END,
 };
 
-extern s32 N(idleAnimations_8021D6D0)[];
+extern s32 N(IdleAnimations)[];
 
-ActorPartBlueprint N(partsTable_8021D5F0)[] = {
+ActorPartBlueprint N(parts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 2, 35 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_8021D6D0),
-        .defenseTable = N(defenseTable_8021D480),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -5, -12 },
     },
 };
 
-extern s32 N(idleAnimations_8021D71C)[];
-extern s32 N(idleAnimations_8021D768)[];
+extern s32 N(IdleAnimations_flying)[];
+extern s32 N(IdleAnimations_broomstick)[];
 
-ActorPartBlueprint N(partsTable_8021D614)[] = {
+ActorPartBlueprint N(parts_flying)[] = {
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 2, 35 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_8021D6D0),
-        .defenseTable = N(defenseTable_8021D48C),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable_flying),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -5, -12 },
@@ -105,8 +105,8 @@ ActorPartBlueprint N(partsTable_8021D614)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -10, 35 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_8021D71C),
-        .defenseTable = N(defenseTable_8021D48C),
+        .idleAnimations = N(IdleAnimations_flying),
+        .defenseTable = N(DefenseTable_flying),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -8 },
@@ -117,8 +117,8 @@ ActorPartBlueprint N(partsTable_8021D614)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_8021D768),
-        .defenseTable = N(defenseTable_8021D48C),
+        .idleAnimations = N(IdleAnimations_broomstick),
+        .defenseTable = N(DefenseTable_flying),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -132,10 +132,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_MAGIKOOPA_BOSS,
     .level = 32,
     .maxHP = 8,
-    .partCount = ARRAY_COUNT(N(partsTable_8021D5F0)),
-    .partsData = N(partsTable_8021D5F0),
+    .partCount = ARRAY_COUNT(N(parts)),
+    .partsData = N(parts),
     .initScript = &N(init_8021E100),
-    .statusTable = N(statusTable_8021D498),
+    .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -157,10 +157,10 @@ ActorBlueprint N(flying) = {
     .type = ACTOR_TYPE_FLYING_MAGIKOOPA_BOSS,
     .level = 32,
     .maxHP = 8,
-    .partCount = ARRAY_COUNT(N(partsTable_8021D614)),
-    .partsData = N(partsTable_8021D614),
+    .partCount = ARRAY_COUNT(N(parts_flying)),
+    .partsData = N(parts_flying),
     .initScript = &N(init_8021E2C0),
-    .statusTable = N(statusTable_8021D544),
+    .statusTable = N(StatusTable_flying),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -175,7 +175,7 @@ ActorBlueprint N(flying) = {
     .statusMessageOffset = { 10, 20 },
 };
 
-s32 N(idleAnimations_8021D6D0)[] = {
+s32 N(IdleAnimations)[] = {
     STATUS_NORMAL,    ANIM_Magikoopa_Anim01,
     STATUS_STONE,     ANIM_Magikoopa_Anim00,
     STATUS_SLEEP,     ANIM_Magikoopa_Anim08,
@@ -188,7 +188,7 @@ s32 N(idleAnimations_8021D6D0)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_8021D71C)[] = {
+s32 N(IdleAnimations_flying)[] = {
     STATUS_NORMAL,    ANIM_FlyingMagikoopa_Anim01,
     STATUS_STONE,     ANIM_FlyingMagikoopa_Anim00,
     STATUS_SLEEP,     ANIM_FlyingMagikoopa_Anim08,
@@ -201,7 +201,7 @@ s32 N(idleAnimations_8021D71C)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_8021D768)[] = {
+s32 N(IdleAnimations_broomstick)[] = {
     STATUS_NORMAL,    ANIM_FlyingMagikoopa_Anim0A,
     STATUS_END,
 };
@@ -305,7 +305,7 @@ EvtScript N(8021D890) = {
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, FALSE)
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021E6D8)))
     EVT_CALL(SetActorType, ACTOR_SELF, 149)
-    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(statusTable_8021D498)))
+    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(StatusTable)))
     EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 32)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_TYPE_CHANGED, TRUE)
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
@@ -1204,17 +1204,17 @@ EvtScript N(init_80221478) = {
     EVT_END
 };
 
-s32 N(defenseTable_802214B4)[] = {
+s32 N(DefenseTable_802214B4)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(defenseTable_802214C0)[] = {
+s32 N(DefenseTable_802214C0)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_802214CC)[] = {
+s32 N(StatusTable_802214CC)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 0,
@@ -1239,7 +1239,7 @@ s32 N(statusTable_802214CC)[] = {
     STATUS_END,
 };
 
-s32 N(statusTable_80221578)[] = {
+s32 N(StatusTable_80221578)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 0,
@@ -1264,30 +1264,30 @@ s32 N(statusTable_80221578)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_80221624)[] = {
+ActorPartBlueprint N(PartsTable_80221624)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 2, 35 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_8021D6D0),
-        .defenseTable = N(defenseTable_802214B4),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable_802214B4),
         .eventFlags = ACTOR_EVENT_FLAG_ILLUSORY,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -5, -12 },
     },
 };
 
-ActorPartBlueprint N(partsTable_80221648)[] = {
+ActorPartBlueprint N(PartsTable_80221648)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -10, 35 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_8021D71C),
-        .defenseTable = N(defenseTable_802214C0),
+        .idleAnimations = N(IdleAnimations_flying),
+        .defenseTable = N(DefenseTable_802214C0),
         .eventFlags = ACTOR_EVENT_FLAG_ILLUSORY,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -8 },
@@ -1299,10 +1299,10 @@ ActorBlueprint N(clone) = {
     .type = ACTOR_TYPE_MAGICLONE,
     .level = 26,
     .maxHP = 11,
-    .partCount = ARRAY_COUNT(N(partsTable_80221624)),
-    .partsData = N(partsTable_80221624),
+    .partCount = ARRAY_COUNT( N(PartsTable_80221624)),
+    .partsData = N(PartsTable_80221624),
     .initScript = &N(init_8022143C),
-    .statusTable = N(statusTable_802214CC),
+    .statusTable = N(StatusTable_802214CC),
     .escapeChance = 40,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -1322,10 +1322,10 @@ ActorBlueprint N(flying_clone) = {
     .type = ACTOR_TYPE_FLYING_MAGICLONE,
     .level = 26,
     .maxHP = 11,
-    .partCount = ARRAY_COUNT(N(partsTable_80221648)),
-    .partsData = N(partsTable_80221648),
+    .partCount = ARRAY_COUNT( N(PartsTable_80221648)),
+    .partsData = N(PartsTable_80221648),
     .initScript = &N(init_80221478),
-    .statusTable = N(statusTable_80221578),
+    .statusTable = N(StatusTable_80221578),
     .escapeChance = 40,
     .airLiftChance = 0,
     .hurricaneChance = 0,

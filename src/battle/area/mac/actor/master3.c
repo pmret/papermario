@@ -5,7 +5,7 @@
 
 #define NAMESPACE b_area_mac_master3
 
-s32 N(idleAnimations_8022D9A0)[] = {
+s32 N(IdleAnimations_8022D9A0)[] = {
     STATUS_NORMAL,    ANIM_TheMaster_Walk,
     STATUS_STONE,     ANIM_TheMaster_Still,
     STATUS_SLEEP,     ANIM_TheMaster_Sleep,
@@ -18,7 +18,7 @@ s32 N(idleAnimations_8022D9A0)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_8022D9EC)[] = {
+s32 N(IdleAnimations_8022D9EC)[] = {
     STATUS_NORMAL,    ANIM_TheMaster_AscendedWalk,
     STATUS_STONE,     ANIM_TheMaster_AscendedStill,
     STATUS_SLEEP,     ANIM_TheMaster_AscendedSleep,
@@ -31,12 +31,12 @@ s32 N(idleAnimations_8022D9EC)[] = {
     STATUS_END,
 };
 
-s32 N(defenseTable_8022DA38)[] = {
+s32 N(DefenseTable_8022DA38)[] = {
     ELEMENT_NORMAL, 1,
     ELEMENT_END,
 };
 
-s32 N(statusTable_8022DA44)[] = {
+s32 N(StatusTable_8022DA44)[] = {
     STATUS_NORMAL, 50,
     STATUS_DEFAULT, 50,
     STATUS_SLEEP, 20,
@@ -61,15 +61,15 @@ s32 N(statusTable_8022DA44)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_8022DAF0)[] = {
+ActorPartBlueprint N(PartsTable_8022DAF0)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -5, 28 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_8022D9A0),
-        .defenseTable = N(defenseTable_8022DA38),
+        .idleAnimations = N(IdleAnimations_8022D9A0),
+        .defenseTable = N(DefenseTable_8022DA38),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 2, -7 },
@@ -80,8 +80,8 @@ ActorPartBlueprint N(partsTable_8022DAF0)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_8022D9A0),
-        .defenseTable = N(defenseTable_8022DA38),
+        .idleAnimations = N(IdleAnimations_8022D9A0),
+        .defenseTable = N(DefenseTable_8022DA38),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -95,10 +95,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_THE_MASTER_3,
     .level = 0,
     .maxHP = 99,
-    .partCount = ARRAY_COUNT(N(partsTable_8022DAF0)),
-    .partsData = N(partsTable_8022DAF0),
+    .partCount = ARRAY_COUNT( N(PartsTable_8022DAF0)),
+    .partsData = N(PartsTable_8022DAF0),
     .initScript = &N(init_8022DB60),
-    .statusTable = N(statusTable_8022DA44),
+    .statusTable = N(StatusTable_8022DA44),
     .escapeChance = 100,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -911,7 +911,7 @@ EvtScript N(nextTurn_80230D44) = {
                     EVT_WAIT(1)
                 EVT_END_LOOP
                 EVT_WAIT(15)
-                EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8022D9EC)))
+                EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_8022D9EC)))
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedRun)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TheMaster_AscendedUppercut)
                 EVT_WAIT(2)

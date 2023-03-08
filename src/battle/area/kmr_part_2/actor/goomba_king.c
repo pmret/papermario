@@ -6,7 +6,7 @@
 
 #define NAMESPACE b_area_kmr_part_2_goomba_king
 
-s32 N(idleAnimations_80220800)[] = {
+s32 N(IdleAnimations_80220800)[] = {
     STATUS_NORMAL,    ANIM_GoombaKing_Idle,
     STATUS_STONE,     ANIM_GoombaKing_Still,
     STATUS_SLEEP,     ANIM_GoombaKing_Sleep,
@@ -18,7 +18,7 @@ s32 N(idleAnimations_80220800)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_80220844)[] = {
+s32 N(IdleAnimations_80220844)[] = {
     STATUS_NORMAL,    ANIM_GoombaKing_Run,
     STATUS_STONE,     ANIM_GoombaKing_Still,
     STATUS_SLEEP,     ANIM_GoombaKing_Sleep,
@@ -30,7 +30,7 @@ s32 N(idleAnimations_80220844)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_80220888)[] = {
+s32 N(IdleAnimations_80220888)[] = {
     STATUS_NORMAL,   ANIM_GoombaKing_Dizzy,
     STATUS_STONE,    ANIM_GoombaKing_Still,
     STATUS_SLEEP,    ANIM_GoombaKing_Sleep,
@@ -42,7 +42,7 @@ s32 N(idleAnimations_80220888)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_802208CC)[] = {
+s32 N(IdleAnimations_802208CC)[] = {
     STATUS_NORMAL,   ANIM_GoombaKing_Angry,
     STATUS_STONE,    ANIM_GoombaKing_Still,
     STATUS_SLEEP,    ANIM_GoombaKing_Sleep,
@@ -54,12 +54,12 @@ s32 N(idleAnimations_802208CC)[] = {
     STATUS_END,
 };
 
-s32 N(defenseTable_80220910)[] = {
+s32 N(DefenseTable_80220910)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_8022091C)[] = {
+s32 N(StatusTable_8022091C)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 100,
@@ -84,15 +84,15 @@ s32 N(statusTable_8022091C)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_802209C8)[] = {
+ActorPartBlueprint N(PartsTable_802209C8)[] = {
     {
         .flags = ACTOR_PART_FLAG_20 | ACTOR_PART_FLAG_NO_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -25, 15 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80220800),
-        .defenseTable = N(defenseTable_80220910),
+        .idleAnimations = N(IdleAnimations_80220800),
+        .defenseTable = N(DefenseTable_80220910),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -104,7 +104,7 @@ ActorPartBlueprint N(partsTable_802209C8)[] = {
         .targetOffset = { 0, 80 },
         .opacity = 255,
         .idleAnimations = NULL,
-        .defenseTable = N(defenseTable_80220910),
+        .defenseTable = N(DefenseTable_80220910),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -126,10 +126,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_GOOMBA_KING,
     .level = 49,
     .maxHP = 10,
-    .partCount = ARRAY_COUNT(N(partsTable_802209C8)),
-    .partsData = N(partsTable_802209C8),
+    .partCount = ARRAY_COUNT( N(PartsTable_802209C8)),
+    .partsData = N(PartsTable_802209C8),
     .initScript = &N(init_80220A38),
-    .statusTable = N(statusTable_8022091C),
+    .statusTable = N(StatusTable_8022091C),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -186,10 +186,10 @@ EvtScript N(idle_80220B50) = {
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 5)
     EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FLOAT(1.0))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80220844)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80220844)))
     EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(IdleRunToGoal, ACTOR_SELF, 0)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80220800)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80220800)))
     EVT_WAIT(20)
     EVT_LABEL(2)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
@@ -200,10 +200,10 @@ EvtScript N(idle_80220B50) = {
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FLOAT(1.0))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80220844)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80220844)))
     EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(IdleRunToGoal, ACTOR_SELF, 0)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_80220800)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80220800)))
     EVT_WAIT(80)
     EVT_GOTO(0)
     EVT_RETURN
