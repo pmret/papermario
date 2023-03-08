@@ -34,7 +34,7 @@ pipeline {
                     if (env.CHANGE_ID) {
                         def us_progress = sh(returnStdout: true, script: "python3 progress.py us --pr-comment").trim()
                         def jp_progress = sh(returnStdout: true, script: "python3 progress.py jp --pr-comment").trim()
-                        def cn_progress = sh(returnStdout: true, script: "python3 progress.py ique --pr-comment").trim()
+                        def ique_progress = sh(returnStdout: true, script: "python3 progress.py ique --pr-comment").trim()
                         def warnings = sh(returnStdout: true, script: "./tools/warnings_count/check_new_warnings.sh --jenkins").trim()
                         def comment_id = -1
 
@@ -44,7 +44,7 @@ pipeline {
                             }
                         }
 
-                        def message = "${us_progress}\n${jp_progress}\n${cn_progress}\n${warnings}"
+                        def message = "${us_progress}\n${jp_progress}\n${ique_progress}\n${warnings}"
 
                         if (message != "\n\n\n") {
                             if (comment_id == -1) {
@@ -71,8 +71,8 @@ pipeline {
                 sh 'python3 progress.py jp --csv >> reports/progress_jp.csv'
                 sh 'python3 progress.py jp --shield-json > reports/progress_jp_shield.json'
 
-                sh 'python3 progress.py ique --csv >> reports/progress_cn.csv'
-                sh 'python3 progress.py ique --shield-json > reports/progress_cn_shield.json'
+                sh 'python3 progress.py ique --csv >> reports/progress_ique.csv'
+                sh 'python3 progress.py ique --shield-json > reports/progress_ique_shield.json'
 
                 sh 'cat build_log.txt | grep warning | sort > tools/warnings_count/warnings.txt'
                 sh 'cp tools/warnings_count/warnings.txt reports/warnings.txt'
@@ -95,8 +95,8 @@ pipeline {
                 sh 'cat reports/progress_jp.csv >> /var/www/papermar.io/html/reports/progress_jp.csv'
                 sh 'cat reports/progress_jp_shield.json > /var/www/papermar.io/html/reports/progress_jp_shield.json'
 
-                sh 'cat reports/progress_cn.csv >> /var/www/papermar.io/html/reports/progress_cn.csv'
-                sh 'cat reports/progress_cn_shield.json > /var/www/papermar.io/html/reports/progress_cn_shield.json'
+                sh 'cat reports/progress_ique.csv >> /var/www/papermar.io/html/reports/progress_ique.csv'
+                sh 'cat reports/progress_ique_shield.json > /var/www/papermar.io/html/reports/progress_ique_shield.json'
 
                 sh 'cat reports/warnings.txt > /var/www/papermar.io/html/reports/warnings.txt'
             }
