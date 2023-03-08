@@ -434,8 +434,27 @@ segments:
     - [0x914210, c, tik_25_1_music]
     - [0x914210, c, tik_25_2_main]
     - [0x914890, c, tik_25_3_entity]
+  - name: kgr_01
+    dir: world/area_kgr/kgr_01
+    type: code
+    start: 0x915CA0
+    vram: 0x80240000
+    subsegments:
+    - [0x915CA0, c, kgr_01_1_main]
+    - [0x915E00, c, kgr_01_2_wiggle]
+    - [0x9161A0, c, kgr_01_3_extra]
+  - name: kgr_02
+    dir: world/area_kgr/kgr_02
+    type: code
+    start: 0x9166E0
+    vram: 0x80240000
+    subsegments:
+    - [0x9166E0, c, kgr_02_1_main]
+    - [0x916840, c, kgr_02_2_unused]
+    - [0x916E10, c, kgr_02_3_npc]
+    - [0x916E40, c, kgr_02_4_extra]
 
-  - [0x915CA0, bin]
+  - [0x918220, bin]
 
   - start: 0x1e937b8
     align: 8
