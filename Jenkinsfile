@@ -85,7 +85,7 @@ pipeline {
                 branch 'main'
             }
             agent {
-                label 'master'
+                label 'pm_website'
             }
             steps {
                 unstash 'reports'
