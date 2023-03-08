@@ -36,12 +36,12 @@ void N(setup_gfx_bridge)(s32 index) {
         if (extendAmt == 0) {
             return;
         }
-        gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(index * 3));
+        gSPDisplayList(gMainGfxPos++, mdl_get_copied_gfx(index * 3));
     } else {
         mdl_get_copied_vertices(index * 3 + 0, &srcVtx1, &dest1, &numVertices);
         mdl_get_copied_vertices(index * 3 + 2, &srcVtx2, &dest2, &numVertices);
         N(set_bride_vertex_positions)(srcVtx1, srcVtx2, dest1, numVertices, extendAmt - 256);
-        gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(index * 3));
+        gSPDisplayList(gMainGfxPos++, mdl_get_copied_gfx(index * 3));
     }
 
 }

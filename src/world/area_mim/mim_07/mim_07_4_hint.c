@@ -54,10 +54,10 @@ void N(gfx_build_evil_rock_face)(s32 index) {
             break;
     }
 
-    gDPSetCycleType(gMasterGfxPos++, G_CYC_2CYCLE);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, N(EvilRockAlpha));
-    gDPSetCombineLERP(gMasterGfxPos++, TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0, COMBINED, 0, PRIMITIVE_ALPHA, 0, 0, 0, 0, COMBINED);
-    gDPSetRenderMode(gMasterGfxPos++, G_RM_FOG_SHADE_A, G_RM_AA_ZB_XLU_DECAL2);
+    gDPSetCycleType(gMainGfxPos++, G_CYC_2CYCLE);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, N(EvilRockAlpha));
+    gDPSetCombineLERP(gMainGfxPos++, TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0, COMBINED, 0, PRIMITIVE_ALPHA, 0, 0, 0, 0, COMBINED);
+    gDPSetRenderMode(gMainGfxPos++, G_RM_FOG_SHADE_A, G_RM_AA_ZB_XLU_DECAL2);
 }
 
 API_CALLABLE(N(TryEvilRockLaugh)) {

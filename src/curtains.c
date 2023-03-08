@@ -228,14 +228,14 @@ void render_curtains(void) {
         f32 scale;
         s8 rgb;
 
-        gDPPipeSync(gMasterGfxPos++);
-        gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxCfb_ptr));
-        gSPDisplayList(gMasterGfxPos++, &D_800760C0);
+        gDPPipeSync(gMainGfxPos++);
+        gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxCfb_ptr));
+        gSPDisplayList(gMainGfxPos++, &D_800760C0);
 
         guFrustumF(m, -80.0f, 80.0f, -60.0f, 60.0f, 160.0f, 640.0f, 1.0f);
         guMtxF2L(m, &D_8009BAA8[0]);
 
-        gSPMatrix(gMasterGfxPos++, &D_8009BAA8[0], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+        gSPMatrix(gMainGfxPos++, &D_8009BAA8[0], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
 
         scale = gCurtainScale - 0.01;
         if (scale < 1.0f) {
@@ -246,12 +246,12 @@ void render_curtains(void) {
 
         guMtxF2L(m, &D_8009BAA8[1]);
 
-        gSPMatrix(gMasterGfxPos++, &D_8009BAA8[1], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        gSPMatrix(gMainGfxPos++, &D_8009BAA8[1], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         rgb = 255.0f - (gCurtainFade * 255.0f);
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, rgb, rgb, rgb, 255);
-        gSPDisplayList(gMasterGfxPos++, &D_80076078);
-        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-        gDPPipeSync(gMasterGfxPos++);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, rgb, rgb, rgb, 255);
+        gSPDisplayList(gMainGfxPos++, &D_80076078);
+        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+        gDPPipeSync(gMainGfxPos++);
     }
 
     if (gCurtainDrawCallback != NULL) {
@@ -268,10 +268,10 @@ void render_curtains(void) {
                 alpha = 255;
             }
 
-            gSPDisplayList(gMasterGfxPos++, &D_800760C0);
-            gSPDisplayList(gMasterGfxPos++, &D_80077140);
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0xFF, 0x20, 0x10, alpha);
-            gSPDisplayList(gMasterGfxPos++, &D_800771E8);
+            gSPDisplayList(gMainGfxPos++, &D_800760C0);
+            gSPDisplayList(gMainGfxPos++, &D_80077140);
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, 0xFF, 0x20, 0x10, alpha);
+            gSPDisplayList(gMainGfxPos++, &D_800771E8);
         }
     }
 }

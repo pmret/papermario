@@ -111,7 +111,7 @@ s8 Entity_SuperBlock_PalData[] = {
 };
 
 void entity_SuperBlockContent_setupGfx(s32 entityIndex) {
-    Gfx* gfxPos = gMasterGfxPos;
+    Gfx* gfxPos = gMainGfxPos;
     Gfx* dlist;
     u8* palette;
     Entity* entity = get_entity_by_index(entityIndex);
@@ -179,7 +179,7 @@ void entity_SuperBlockContent_setupGfx(s32 entityIndex) {
     gSPDisplayList(gfxPos++, dlist);
     gSPPopMatrix(gfxPos++, G_MTX_MODELVIEW);
 
-    gMasterGfxPos = gfxPos;
+    gMainGfxPos = gfxPos;
 }
 
 void entity_SuperBlockContent_idle(Entity* entity) {

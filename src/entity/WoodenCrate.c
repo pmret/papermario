@@ -178,7 +178,7 @@ void entity_WoodenCrate_setupGfx(s32 entityIndex) {
     f32 x_inv;
     f32 y_inv;
     f32 z_inv;
-    Gfx* gfxPos = gMasterGfxPos;
+    Gfx* gfxPos = gMainGfxPos;
     Entity* entity = get_entity_by_index(entityIndex);
     WoodenCrateData* data = entity->dataBuf.crate;
     Gfx* fragmentDlist;
@@ -212,7 +212,7 @@ void entity_WoodenCrate_setupGfx(s32 entityIndex) {
         gSPPopMatrix(gfxPos++, G_MTX_MODELVIEW);
     }
 
-    gMasterGfxPos = gfxPos;
+    gMainGfxPos = gfxPos;
 }
 
 s32 entity_WoodenCrate_idle(Entity* entity) {

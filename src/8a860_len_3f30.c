@@ -1109,14 +1109,14 @@ void popup_menu_draw_menu_contents(s32* userData, s32 baseX, s32 baseY, s32 widt
         case POPUP_MENU_READ_POSTCARD:
         case POPUP_MENU_USEKEY:
         case POPUP_MENU_POST_OFFICE:
-            gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x, y, x + 112, y1);
+            gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, x, y, x + 112, y1);
             break;
         case POPUP_MENU_SWITCH_PARTNER:
         case POPUP_MENU_UPGRADE_PARTNER:
-            gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x, y, x + 90, y1);
+            gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, x, y, x + 90, y1);
             break;
         case POPUP_MENU_THROW_AWAY_ITEM:
-            gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x, y, x + 160, y1);
+            gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, x, y, x + 160, y1);
             break;
     }
 
@@ -1137,7 +1137,7 @@ void popup_menu_draw_menu_contents(s32* userData, s32 baseX, s32 baseY, s32 widt
         y = baseY;
         y1++;
     }
-    gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x, y, x + PopupContentScissorWidths[gPopupMenu->popupType], y1);
+    gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, x, y, x + PopupContentScissorWidths[gPopupMenu->popupType], y1);
     offset = 0;
     x = baseX + 32;
     y = baseY + D_8010D658 + 2;
@@ -1350,11 +1350,11 @@ void popup_menu_draw_menu_contents(s32* userData, s32 baseX, s32 baseY, s32 widt
         case POPUP_MENU_READ_POSTCARD:
         case POPUP_MENU_USEKEY:
         case POPUP_MENU_POST_OFFICE:
-            gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x, y, x + 112, y1);
+            gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, x, y, x + 112, y1);
             break;
         case POPUP_MENU_SWITCH_PARTNER:
         case POPUP_MENU_UPGRADE_PARTNER:
-            gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x, y, x + 100, y1);
+            gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, x, y, x + 100, y1);
             break;
     }
 

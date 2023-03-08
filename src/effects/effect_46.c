@@ -209,16 +209,16 @@ void fx_46_appendGfx(void* effect) {
 
     unk_00 = part->unk_00;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
-    gSPDisplayList(gMasterGfxPos++, D_09000420_38EDB0);
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPDisplayList(gMainGfxPos++, D_09000420_38EDB0);
 
     shim_guTranslateF(sp20, part->unk_08, part->unk_0C, part->unk_10);
     shim_guRotateF(sp60, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
     shim_guMtxCatF(sp60, sp20, sp20);
     shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
     part++;
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, part++) {
@@ -234,14 +234,14 @@ void fx_46_appendGfx(void* effect) {
             shim_guMtxCatF(sp60, sp20, sp20);
         }
 
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, part->unk_44, part->unk_45, part->unk_46, unk_1C);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, part->unk_44, part->unk_45, part->unk_46, unk_1C);
 
         shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, D_090003A0_38ED30);
-        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+        gSPDisplayList(gMainGfxPos++, D_090003A0_38ED30);
+        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     }
 
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }

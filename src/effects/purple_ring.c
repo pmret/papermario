@@ -195,10 +195,10 @@ void purple_ring_appendGfx(void* effect) {
     Matrix4f sp10;
     Matrix4f sp50;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
-    gSPDisplayList(gMasterGfxPos++, D_09000200_352EE0);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->unk_74, data->unk_75, data->unk_76, data->unk_68);
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPDisplayList(gMainGfxPos++, D_09000200_352EE0);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, data->unk_74, data->unk_75, data->unk_76, data->unk_68);
 
     shim_guTranslateF(sp10, data->unk_04, data->unk_08, data->unk_0C);
     shim_guMtxCatF(data->unk_1C, sp10, sp10);
@@ -206,9 +206,9 @@ void purple_ring_appendGfx(void* effect) {
     shim_guMtxCatF(sp50, sp10, sp10);
     shim_guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0, unk_5C, temp * 4, unk_5C + temp);
-    gSPDisplayList(gMasterGfxPos++, D_090004E8_3531C8);
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-    gDPPipeSync(gMasterGfxPos++);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, 0, unk_5C, temp * 4, unk_5C + temp);
+    gSPDisplayList(gMainGfxPos++, D_090004E8_3531C8);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+    gDPPipeSync(gMainGfxPos++);
 }

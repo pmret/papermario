@@ -453,7 +453,7 @@ void func_80240DA4_9087D4(void) {
         f64 uly = baseY + (fullHeight * 0.5) - (D_802417D0_909200 * 0.5);
         f64 lrx = baseX + (fullWidth * 0.5) + (D_802417CC_9091FC * 0.5);
         f64 lry = baseY + (fullHeight * 0.5) + (D_802417D0_909200 * 0.5);
-        gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, ulx, uly, lrx, lry);
+        gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, ulx, uly, lrx, lry);
         draw_box(DRAW_FLAG_NO_CLIP, &D_802417D8_909208, ulx, uly, 0, D_802417CC_9091FC, D_802417D0_909200, 180, 0, 1.0f, 1.0f,
                  0.0f, 0.0f, 0.0f, NULL, NULL, NULL, 320, 240, NULL);
     }

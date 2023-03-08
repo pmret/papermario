@@ -8,20 +8,20 @@ extern VirtualEntityList* gCurrentVirtualEntityListPtr;
 s32 create_worker_backUI(void (*updateFunc)(void), void (*drawFunc)(void));
 
 void virtual_entity_appendGfx_quad(u8 r, u8 g, u8 b, u8 a, u16 left, u16 top, u16 right, u16 bottom) {
-    gDPPipeSync(gMasterGfxPos++);
+    gDPPipeSync(gMainGfxPos++);
 
     if (a == 0xFF) {
-        gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, PRIMITIVE, 0, 0, 0, 1, 0, 0, 0, PRIMITIVE, 0, 0, 0, 1);
+        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, PRIMITIVE, 0, 0, 0, 1, 0, 0, 0, PRIMITIVE, 0, 0, 0, 1);
     } else {
-        gDPSetRenderMode(gMasterGfxPos++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
-        gDPSetCombineMode(gMasterGfxPos++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
+        gDPSetRenderMode(gMainGfxPos++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
+        gDPSetCombineMode(gMainGfxPos++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
     }
 
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, r, g, b, a);
-    gDPFillRectangle(gMasterGfxPos++, left, top, right, bottom);
-    gDPPipeSync(gMasterGfxPos++);
-    gDPSetRenderMode(gMasterGfxPos++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
-    gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, r, g, b, a);
+    gDPFillRectangle(gMainGfxPos++, left, top, right, bottom);
+    gDPPipeSync(gMainGfxPos++);
+    gDPSetRenderMode(gMainGfxPos++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
+    gDPSetCombineMode(gMainGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
 }
 
 void virtual_entity_render_quad(s32 r, s32 g, s32 b, s32 a, s32 posX, s32 posY, s32 width, s32 height) {

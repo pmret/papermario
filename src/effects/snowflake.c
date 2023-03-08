@@ -122,25 +122,25 @@ void snowflake_appendGfx(void* effect) {
     EffectInstance* effectTemp = effect;
     SnowflakeFXData* data = effectTemp->data.snowflake;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->graphics->data));
-    gSPDisplayList(gMasterGfxPos++, D_09000900_331800);
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->graphics->data));
+    gSPDisplayList(gMainGfxPos++, D_09000900_331800);
 
     shim_guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
     shim_guRotateF(spD8, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
     shim_guMtxCatF(spD8, sp18, sp118);
     shim_guMtxF2L(sp118, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, 255);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, 255);
 
     shim_guRotateF(sp58, data->unk_18, 1.0f, 0.0f, 0.0f);
     shim_guRotateF(sp98, data->unk_1C, 0.0f, 1.0f, 0.0f);
     shim_guMtxCatF(sp58, sp98, sp118);
     shim_guMtxF2L(sp118, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gSPDisplayList(gMasterGfxPos++, D_090009E8_3318E8);
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gSPDisplayList(gMainGfxPos++, D_090009E8_3318E8);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }

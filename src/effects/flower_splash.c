@@ -147,8 +147,8 @@ void flower_splash_appendGfx(void* effect) {
     FlowerFXData* data = effectTemp->data.flowerSplash;
     s32 i;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->graphics->data));
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->graphics->data));
 
     for (i = 0; i < effectTemp->numParts; i++, data++) {
         if (data->alive) {
@@ -156,12 +156,12 @@ void flower_splash_appendGfx(void* effect) {
 
             gDisplayContext->matrixStack[gMatrixListPos] = data->transformMtx;
 
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 112, 96, 24, data->primAlpha);
-            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, 112, 96, 24, data->primAlpha);
+            gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                         G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-            gSPDisplayList(gMasterGfxPos++, dlist);
-            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+            gSPDisplayList(gMainGfxPos++, dlist);
+            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
         }
     }
-    gDPPipeSync(gMasterGfxPos++);
+    gDPPipeSync(gMainGfxPos++);
 }

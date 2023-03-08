@@ -120,14 +120,14 @@ void small_gold_sparkle_appendGfx(void* effect) {
     shim_guRotateF(sp98, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
     shim_guMtxF2L(sp98, &gDisplayContext->matrixStack[gMatrixListPos]);
     spD8 = &gDisplayContext->matrixStack[gMatrixListPos++];
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
     shim_guTranslateF(sp18, part->unk_08, part->unk_0C, part->unk_10);
     shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPDisplayList(gMasterGfxPos++, D_090002C0_392700);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 15, 255);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(gMainGfxPos++, D_090002C0_392700);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 15, 255);
 
     part++;
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, part++) {
@@ -140,15 +140,15 @@ void small_gold_sparkle_appendGfx(void* effect) {
                 shim_guMtxCatF(sp58, sp18, sp18);
             }
             shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
-            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+            gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                       G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-            gSPMatrix(gMasterGfxPos++, spD8, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-            gSPDisplayList(gMasterGfxPos++, sDlists[part->unk_04 >> 1]);
-            gSPDisplayList(gMasterGfxPos++, D_09000470_3928B0);
-            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+            gSPMatrix(gMainGfxPos++, spD8, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPDisplayList(gMainGfxPos++, sDlists[part->unk_04 >> 1]);
+            gSPDisplayList(gMainGfxPos++, D_09000470_3928B0);
+            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
         }
     }
 
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-    gDPPipeSync(gMasterGfxPos++);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+    gDPPipeSync(gMainGfxPos++);
 }

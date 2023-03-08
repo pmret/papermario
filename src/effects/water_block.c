@@ -227,16 +227,16 @@ void water_block_appendGfx(void *effect) {
     s32 temp_s0;
     s32 i;
     
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->graphics->data));
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->graphics->data));
     shim_guTranslateF(sp20, data->pos.x, data->pos.y, data->pos.z);
     shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
-    gSPBranchList(gMasterGfxPos, &gMasterGfxPos[81]);
-    spA8 = (Vtx*)++gMasterGfxPos;
-    gMasterGfxPos = &gMasterGfxPos[80];
+    gSPBranchList(gMainGfxPos, &gMainGfxPos[81]);
+    spA8 = (Vtx*)++gMainGfxPos;
+    gMainGfxPos = &gMainGfxPos[80];
 
     temp_s0 = gGameStatusPtr->frameCounter * 4;
     
@@ -270,33 +270,33 @@ void water_block_appendGfx(void *effect) {
     shim_guScaleF(sp20, 0.1f, 0.1f, 0.1f);
     shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gDPSetEnvColor(gMasterGfxPos++, 0, 0, 255, data->unk_28);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 255, spA4);
-    gSPDisplayList(gMasterGfxPos++, D_090003B0_3B6FA0);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gDPSetEnvColor(gMainGfxPos++, 0, 0, 255, data->unk_28);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 255, spA4);
+    gSPDisplayList(gMainGfxPos++, D_090003B0_3B6FA0);
 
     for (i = 0; i < NUM_WATER_BLOCK_COMPONENTS; i++) {
         if (data->unk_88[i] >= 0) {
             shim_guPositionF(sp20, 0.0f, 0.0f, 0.0f, data->unk_78[i], data->unk_38[i], data->unk_48[i], 0.0f);
             shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
-            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-            gSPDisplayList(gMasterGfxPos++, D_090004A0_3B7090);
-            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+            gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPDisplayList(gMainGfxPos++, D_090004A0_3B7090);
+            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
         }
     }
 
-    gSPDisplayList(gMasterGfxPos++, D_09000300_3B6EF0);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->unk_18, data->unk_1C, data->unk_20, spA4 * 0.3);
-    gSPClearGeometryMode(gMasterGfxPos++, G_CULL_BOTH);
-    gSPSetGeometryMode(gMasterGfxPos++, G_CULL_BACK);
+    gSPDisplayList(gMainGfxPos++, D_09000300_3B6EF0);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, data->unk_18, data->unk_1C, data->unk_20, spA4 * 0.3);
+    gSPClearGeometryMode(gMainGfxPos++, G_CULL_BOTH);
+    gSPSetGeometryMode(gMainGfxPos++, G_CULL_BACK);
     
-    gSPVertex(gMasterGfxPos++, spA8, 30, 0);
+    gSPVertex(gMainGfxPos++, spA8, 30, 0);
 
-    gSPDisplayList(gMasterGfxPos++, D_090004D8_3B70C8);
+    gSPDisplayList(gMainGfxPos++, D_090004D8_3B70C8);
 
-    gSPVertex(gMasterGfxPos++, &spA8[28], 12, 0);
+    gSPVertex(gMainGfxPos++, &spA8[28], 12, 0);
 
-    gSPDisplayList(gMasterGfxPos++, D_09000538_3B7128)    
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gSPDisplayList(gMainGfxPos++, D_09000538_3B7128)    
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }

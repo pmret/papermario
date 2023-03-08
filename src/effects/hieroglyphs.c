@@ -122,34 +122,34 @@ void hieroglyphs_appendGfx(void* effect) {
     Matrix4f sp60;
     s32 i;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     shim_guTranslateF(sp20, data->pos.x, data->pos.y, data->pos.z);
     shim_guScaleF(sp60, data->unk_38, data->unk_38, data->unk_38);
     shim_guMtxCatF(sp60, sp20, sp20);
     shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPMatrix(gMasterGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->unk_18, data->unk_1C, data->unk_20, unk_24);
-    gDPSetEnvColor(gMasterGfxPos++, data->unk_28, data->unk_2C, data->unk_30, data->unk_34);
-    gSPDisplayList(gMasterGfxPos++, D_E00E29F0[0]);
-    gSPBranchList(gMasterGfxPos, gMasterGfxPos + 52);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, data->unk_18, data->unk_1C, data->unk_20, unk_24);
+    gDPSetEnvColor(gMainGfxPos++, data->unk_28, data->unk_2C, data->unk_30, data->unk_34);
+    gSPDisplayList(gMainGfxPos++, D_E00E29F0[0]);
+    gSPBranchList(gMainGfxPos, gMainGfxPos + 52);
 
-    savedGfxPos = gMasterGfxPos + 1;
+    savedGfxPos = gMainGfxPos + 1;
 
     gDPSetTileSize(savedGfxPos, G_TX_RENDERTILE,
         (lifeTime * 2      ) * 4, 0,
         (lifeTime * 2 + 127) * 4, 31 * 4);
-    gMasterGfxPos += 2;
+    gMainGfxPos += 2;
 
     shim_guRotateF(sp20, 20.0f, 1.0f, 0.0f, 0.0f);
     shim_guPositionF(sp60, 0.0f, shim_sin_deg(lifeTime * 8 + 78.75) * -30.0f, 0.0f, 1.0f, 6.0f, 0.0f, 0.0f);
     shim_guMtxCatF(sp60, sp20, sp20);
     shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
     for (i = 0; i < 16; i++) {
         f32 angle = i * 48 + lifeTime * 8;
@@ -157,19 +157,19 @@ void hieroglyphs_appendGfx(void* effect) {
         shim_guPositionF(sp20, 0.0f, shim_sin_deg(angle) * 30.0f, 6.0f, (f32) i * 0.01 + 1.0, 8.0f, 0.0f, 0.0f);
         shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-        gSPVertex(gMasterGfxPos++, &D_090010A8_3DDDF8[i * 2], 2, i * 2);
+        gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+        gSPVertex(gMainGfxPos++, &D_090010A8_3DDDF8[i * 2], 2, i * 2);
     }
 
     for (i = 0; i < 15; i++) {
         s32 i2 = i * 2;
-        gSP2Triangles(gMasterGfxPos++,
+        gSP2Triangles(gMainGfxPos++,
             i2    , i2 + 2, i2 + 1, i2,
             i2 + 1, i2 + 2, i2 + 3, i2);
     }
 
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-    gSPEndDisplayList(gMasterGfxPos++);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+    gSPEndDisplayList(gMainGfxPos++);
 
     for (i = 0; i < 2; i++) {
         s32 idx = (lifeTime + i * 4) % 17;
@@ -177,12 +177,12 @@ void hieroglyphs_appendGfx(void* effect) {
         shim_guPositionF(sp20, 0.0f, 0.0f, -0x11A + i * 0x24, 1.0f, 0.0f, 0.0f, 0.0f);
         shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, D_E00E29F4[idx], D_E00E2A08[idx], D_E00E2A1C[idx], data->unk_24);
-        gDPSetEnvColor(gMasterGfxPos++, 255, 255, 255, 0);
-        gSPDisplayList(gMasterGfxPos++, savedGfxPos);
-        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, D_E00E29F4[idx], D_E00E2A08[idx], D_E00E2A1C[idx], data->unk_24);
+        gDPSetEnvColor(gMainGfxPos++, 255, 255, 255, 0);
+        gSPDisplayList(gMainGfxPos++, savedGfxPos);
+        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     }
 
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }

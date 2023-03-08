@@ -28,7 +28,7 @@ f32 entity_HeartBlockContent_get_previous_yaw(HeartBlockContentData* data, s32 l
 void entity_HeartBlockContent__setupGfx(s32 entityIndex, Gfx* arg1) {
     Entity* entity = get_entity_by_index(entityIndex);
     HeartBlockContentData* data = entity->dataBuf.heartBlockContent;
-    Gfx* gfxPos = gMasterGfxPos;
+    Gfx* gfxPos = gMainGfxPos;
     s32 alpha;
     Matrix4f sp18;
     Gfx* dlist;
@@ -70,7 +70,7 @@ void entity_HeartBlockContent__setupGfx(s32 entityIndex, Gfx* arg1) {
     gDPSetPrimColor(gfxPos++, 0, 0, 0, 0, 0, alpha);
     gSPPopMatrix(gfxPos++, G_MTX_MODELVIEW);
 
-    gMasterGfxPos = gfxPos;
+    gMainGfxPos = gfxPos;
 }
 
 void entity_HeartBlockContent_setupGfx(s32 entityIndex) {

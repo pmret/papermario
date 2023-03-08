@@ -122,34 +122,34 @@ s32 draw_ci_image_with_clipping(IMG_PTR raster, s32 width, s32 height, s32 fmt, 
                                 s16 posY, u16 clipULx, u16 clipULy, u16 clipLRx, u16 clipRLy, u8 opacity) {
     s32 ret;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
-    gDPSetTextureFilter(gMasterGfxPos++, G_TF_POINT);
-    gDPSetTexturePersp(gMasterGfxPos++, G_TP_NONE);
+    gDPPipeSync(gMainGfxPos++);
+    gDPSetCycleType(gMainGfxPos++, G_CYC_1CYCLE);
+    gDPSetTextureFilter(gMainGfxPos++, G_TF_POINT);
+    gDPSetTexturePersp(gMainGfxPos++, G_TP_NONE);
 
     if (opacity == 255) {
-        gDPSetRenderMode(gMasterGfxPos++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
-        gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+        gDPSetRenderMode(gMainGfxPos++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
+        gDPSetCombineMode(gMainGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
     } else if (opacity == 0) {
         return 1;
     } else {
-        gDPSetRenderMode(gMasterGfxPos++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
-        gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, opacity);
+        gDPSetRenderMode(gMainGfxPos++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
+        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, opacity);
     }
 
     if (fmt == G_IM_FMT_CI) {
-        gDPSetTextureLUT(gMasterGfxPos++, G_TT_RGBA16);
+        gDPSetTextureLUT(gMainGfxPos++, G_TT_RGBA16);
         if (bitDepth == G_IM_SIZ_4b) {
-            gDPLoadTLUT_pal16(gMasterGfxPos++, 0, palette);
+            gDPLoadTLUT_pal16(gMainGfxPos++, 0, palette);
         } else {
-            gDPLoadTLUT_pal256(gMasterGfxPos++, palette);
+            gDPLoadTLUT_pal256(gMainGfxPos++, palette);
         }
     } else {
-        gDPSetTextureLUT(gMasterGfxPos++, G_TT_NONE);
+        gDPSetTextureLUT(gMainGfxPos++, G_TT_NONE);
     }
     ret = draw_image_with_clipping(raster, width, height, fmt, bitDepth, posX, posY, clipULx, clipULy, clipLRx, clipRLy);
-    gDPPipeSync(gMasterGfxPos++);
+    gDPPipeSync(gMainGfxPos++);
     return ret;
 }
 
@@ -252,20 +252,20 @@ s32 draw_image_with_clipping(u8* img, u32 width, u32 height, s32 fmt, s32 bitDep
             }
 
             if (bitDepth == G_IM_SIZ_4b) {
-                gDPLoadTextureTile_4b(gMasterGfxPos++, img, fmt, width, height,
+                gDPLoadTextureTile_4b(gMainGfxPos++, img, fmt, width, height,
                                 texRect.ulx, texRect.uly, texRect.lrx, texRect.lry, 0,
                                 G_TX_WRAP, G_TX_WRAP, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
             } else if (bitDepth == G_IM_SIZ_16b) {
-                gDPLoadTextureTile(gMasterGfxPos++, img, fmt, G_IM_SIZ_16b, width, height,
+                gDPLoadTextureTile(gMainGfxPos++, img, fmt, G_IM_SIZ_16b, width, height,
                                 texRect.ulx, texRect.uly, texRect.lrx, texRect.lry, 0,
                                 G_TX_WRAP, G_TX_WRAP, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
             } else if (bitDepth == G_IM_SIZ_8b) {
-                gDPLoadTextureTile(gMasterGfxPos++, img, fmt, G_IM_SIZ_8b, width, height,
+                gDPLoadTextureTile(gMainGfxPos++, img, fmt, G_IM_SIZ_8b, width, height,
                                 texRect.ulx, texRect.uly, texRect.lrx, texRect.lry, 0,
                                 G_TX_WRAP, G_TX_WRAP, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
             }
 
-            gSPTextureRectangle(gMasterGfxPos++, drawRect.ulx * 4, drawRect.uly * 4, drawRect.lrx * 4, drawRect.lry * 4,
+            gSPTextureRectangle(gMainGfxPos++, drawRect.ulx * 4, drawRect.uly * 4, drawRect.lrx * 4, drawRect.lry * 4,
                                 0, texOffsetX * 32, texOffsetY * 32, 1024, 1024);
 
             if (stopDrawingLine) {
@@ -388,16 +388,16 @@ s32 draw_tiled_image(IMG_PTR raster, u32 width, u32 height, u8 fmt, u8 bitDepth,
             }
 
             if (bitDepth == G_IM_SIZ_16b) {
-                gDPLoadTextureTile(gMasterGfxPos++, raster, fmt, G_IM_SIZ_16b, width, height,
+                gDPLoadTextureTile(gMainGfxPos++, raster, fmt, G_IM_SIZ_16b, width, height,
                                 texRect.ulx, texRect.uly, texRect.lrx, texRect.lry, 0,
                                 G_TX_WRAP, G_TX_WRAP, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
             } else if (bitDepth == G_IM_SIZ_4b) {
-                gDPLoadTextureTile_4b(gMasterGfxPos++, raster, fmt, width, height,
+                gDPLoadTextureTile_4b(gMainGfxPos++, raster, fmt, width, height,
                                 texRect.ulx, texRect.uly, texRect.lrx, texRect.lry, 0,
                                 G_TX_WRAP, G_TX_WRAP, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
             }
 
-            gSPTextureRectangle(gMasterGfxPos++, drawRect.ulx * 4, drawRect.uly * 4, (drawRect.lrx - stopDrawingLine) * 4, drawRect.lry * 4,
+            gSPTextureRectangle(gMainGfxPos++, drawRect.ulx * 4, drawRect.uly * 4, (drawRect.lrx - stopDrawingLine) * 4, drawRect.lry * 4,
                                 0, texOffsetX, texOffsetY, dsdx, dtdy);
 
             if (stopDrawingLine) {
@@ -575,23 +575,23 @@ s32 draw_adjustable_tiled_image(IMG_PTR raster, u32 width, u32 height, u8 fmt, u
         }
 
         if (bitDepth == G_IM_SIZ_4b) {
-            gDPLoadTextureTile_4b(gMasterGfxPos++, raster, fmt, width, height,
+            gDPLoadTextureTile_4b(gMainGfxPos++, raster, fmt, width, height,
                                   texRect.ulx, texRect.uly, texRect.lrx, texRect.lry, 0,
                                   G_TX_WRAP, G_TX_WRAP, masks, maskt, G_TX_NOLOD, G_TX_NOLOD);
         } else if (bitDepth == G_IM_SIZ_8b) {
-            gDPLoadTextureTile(gMasterGfxPos++, raster, fmt, G_IM_SIZ_8b, width, height,
+            gDPLoadTextureTile(gMainGfxPos++, raster, fmt, G_IM_SIZ_8b, width, height,
                                   texRect.ulx, texRect.uly, texRect.lrx, texRect.lry, 0,
                                   G_TX_WRAP, G_TX_WRAP, masks, maskt, G_TX_NOLOD, G_TX_NOLOD);
         } else if (bitDepth == G_IM_SIZ_16b) {
-            gDPLoadTextureTile(gMasterGfxPos++, raster, fmt, G_IM_SIZ_16b, width, height,
+            gDPLoadTextureTile(gMainGfxPos++, raster, fmt, G_IM_SIZ_16b, width, height,
                                   texRect.ulx, texRect.uly, texRect.lrx, texRect.lry, 0,
                                   G_TX_WRAP, G_TX_WRAP, masks, maskt, G_TX_NOLOD, G_TX_NOLOD);
         } else if (bitDepth == G_IM_SIZ_32b) {
-            gDPLoadTextureTile(gMasterGfxPos++, raster, fmt, G_IM_SIZ_32b, width, height,
+            gDPLoadTextureTile(gMainGfxPos++, raster, fmt, G_IM_SIZ_32b, width, height,
                                   texRect.ulx, texRect.uly, texRect.lrx, texRect.lry, 0,
                                   G_TX_WRAP, G_TX_WRAP, masks, maskt, G_TX_NOLOD, G_TX_NOLOD);
         }
-        gSPTextureRectangle(gMasterGfxPos++, drawRect.ulx * 4, drawRect.uly * 4, drawRect.lrx * 4, drawRect.lry * 4,
+        gSPTextureRectangle(gMainGfxPos++, drawRect.ulx * 4, drawRect.uly * 4, drawRect.lrx * 4, drawRect.lry * 4,
                             0, texOffsetX, texOffsetY, dsdx, dtdy);
 
         if (stopDrawing) {
@@ -674,20 +674,20 @@ void draw_coin_sparkles(ItemEntity* itemEntity) {
     guMtxCatF(sp98, sp58, spD8);
     guMtxF2L(spD8, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
-    gSPClearGeometryMode(gMasterGfxPos++, G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH);
-    gSPSetGeometryMode(gMasterGfxPos++, G_ZBUFFER | G_SHADE | G_LIGHTING | G_SHADING_SMOOTH);
-    gSPSetLights1(gMasterGfxPos++, D_8014C6C8);
-    gSPTexture(gMasterGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
-    gDPSetTextureLOD(gMasterGfxPos++, G_TL_TILE);
-    gDPSetTexturePersp(gMasterGfxPos++, G_TP_PERSP);
-    gDPSetTextureFilter(gMasterGfxPos++, G_TF_BILERP);
-    gDPSetColorDither(gMasterGfxPos++, G_CD_DISABLE);
-    gDPSetTextureDetail(gMasterGfxPos++, G_TD_CLAMP);
-    gDPSetTextureConvert(gMasterGfxPos++, G_TC_FILT);
-    gDPSetCombineKey(gMasterGfxPos++, G_CK_NONE);
-    gDPSetAlphaCompare(gMasterGfxPos++, G_AC_NONE);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gDPSetCycleType(gMainGfxPos++, G_CYC_1CYCLE);
+    gSPClearGeometryMode(gMainGfxPos++, G_ZBUFFER | G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH);
+    gSPSetGeometryMode(gMainGfxPos++, G_ZBUFFER | G_SHADE | G_LIGHTING | G_SHADING_SMOOTH);
+    gSPSetLights1(gMainGfxPos++, D_8014C6C8);
+    gSPTexture(gMainGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
+    gDPSetTextureLOD(gMainGfxPos++, G_TL_TILE);
+    gDPSetTexturePersp(gMainGfxPos++, G_TP_PERSP);
+    gDPSetTextureFilter(gMainGfxPos++, G_TF_BILERP);
+    gDPSetColorDither(gMainGfxPos++, G_CD_DISABLE);
+    gDPSetTextureDetail(gMainGfxPos++, G_TD_CLAMP);
+    gDPSetTextureConvert(gMainGfxPos++, G_TC_FILT);
+    gDPSetCombineKey(gMainGfxPos++, G_CK_NONE);
+    gDPSetAlphaCompare(gMainGfxPos++, G_AC_NONE);
 
     foldImage.raster = itemEntity->sparkleRaster;
     foldImage.palette = itemEntity->sparklePalette;
@@ -698,8 +698,8 @@ void draw_coin_sparkles(ItemEntity* itemEntity) {
     foldImage.opacity = 255;
     fold_appendGfx_component(0, &foldImage, 0, spD8);
 
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-    gDPPipeSync(gMasterGfxPos++);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+    gDPPipeSync(gMainGfxPos++);
 }
 
 ItemEntity* get_item_entity(s32 itemEntityIndex) {
@@ -1397,50 +1397,50 @@ void appendGfx_item_entity(void* data) {
 
     gDisplayContext->matrixStack[gMatrixListPos] = mtxTransform;
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
               G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     if (gSpriteShadingProfile->flags != 0) {
-        gSPDisplayList(gMasterGfxPos++, D_8014BBD8);
+        gSPDisplayList(gMainGfxPos++, D_8014BBD8);
     } else {
-        gSPDisplayList(gMasterGfxPos++, D_8014B870);
+        gSPDisplayList(gMainGfxPos++, D_8014B870);
     }
-    gSPClearGeometryMode(gMasterGfxPos++, G_CULL_BOTH | G_LIGHTING);
-    gSPDisplayList(gMasterGfxPos++, D_8014C620);
+    gSPClearGeometryMode(gMainGfxPos++, G_CULL_BOTH | G_LIGHTING);
+    gSPDisplayList(gMainGfxPos++, D_8014C620);
 
     if (itemEntity->flags & (ITEM_ENTITY_FLAG_8000000 | ITEM_ENTITY_FLAG_TRANSPARENT)) {
         if (gSpriteShadingProfile->flags != 0) {
-            gDPSetRenderMode(gMasterGfxPos++, AA_EN | IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL | G_RM_PASS,
+            gDPSetRenderMode(gMainGfxPos++, AA_EN | IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL | G_RM_PASS,
                              AA_EN | IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL |
                              GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA));
         } else {
-            gDPSetRenderMode(gMasterGfxPos++, AA_EN | IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL |
+            gDPSetRenderMode(gMainGfxPos++, AA_EN | IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL |
                              GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA),
                              AA_EN | IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL |
                              GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA));
-            gDPSetCombineLERP(gMasterGfxPos++, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0,
+            gDPSetCombineLERP(gMainGfxPos++, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0,
                               TEXEL0, 0, TEXEL0, 0, PRIMITIVE, 0);
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 255, alpha);
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 255, alpha);
         }
     }
 
     if (!(itemEntity->flags & ITEM_ENTITY_FLAG_40000)) {
-        gDPLoadTLUT_pal16(gMasterGfxPos++, 0, gHudElementCacheTablePalette[itemEntity->lookupPaletteIndex].data);
+        gDPLoadTLUT_pal16(gMainGfxPos++, 0, gHudElementCacheTablePalette[itemEntity->lookupPaletteIndex].data);
         if (gSpriteShadingProfile->flags != 0) {
-            gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 12, gHudElementCacheTableRaster[itemEntity->lookupRasterIndex].data);
-            gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR |
+            gDPSetTextureImage(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 12, gHudElementCacheTableRaster[itemEntity->lookupRasterIndex].data);
+            gDPSetTile(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR |
                        G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
-            gDPLoadSync(gMasterGfxPos++);
-            gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, 0, 0, 0x002E, 0x005C);
-            gDPPipeSync(gMasterGfxPos++);
-            gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0x0000, 1, 0, G_TX_NOMIRROR | G_TX_CLAMP, 8,
+            gDPLoadSync(gMainGfxPos++);
+            gDPLoadTile(gMainGfxPos++, G_TX_LOADTILE, 0, 0, 0x002E, 0x005C);
+            gDPPipeSync(gMainGfxPos++);
+            gDPSetTile(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0x0000, 1, 0, G_TX_NOMIRROR | G_TX_CLAMP, 8,
                        G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
-            gDPSetTileSize(gMasterGfxPos++, 1, 0x0400, 0x0400, 0x045C, 0x045C);
-            gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0x0000, G_TX_RENDERTILE, 1,
+            gDPSetTileSize(gMainGfxPos++, 1, 0x0400, 0x0400, 0x045C, 0x045C);
+            gDPSetTile(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0x0000, G_TX_RENDERTILE, 1,
                        G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
-            gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0x0100, 2, 0, G_TX_NOMIRROR | G_TX_WRAP,
+            gDPSetTile(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0x0100, 2, 0, G_TX_NOMIRROR | G_TX_WRAP,
                        G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
-            gDPSetTileSize(gMasterGfxPos++, 2, 0, 0, 0x00FC, 0);
+            gDPSetTileSize(gMainGfxPos++, 2, 0, 0, 0x00FC, 0);
 
             if (itemEntity->flags & (ITEM_ENTITY_FLAG_8000000 | ITEM_ENTITY_FLAG_TRANSPARENT)) {
                 func_801491E4(mtxTranslate, 0, 0, 0x18, 0x18, alpha);
@@ -1448,54 +1448,54 @@ void appendGfx_item_entity(void* data) {
                 func_801491E4(mtxTranslate, 0, 0, 0x18, 0x18, 255);
             }
         } else {
-            gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 12, gHudElementCacheTableRaster[itemEntity->lookupRasterIndex].data);
-            gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0x0000, G_TX_LOADTILE, 0,
+            gDPSetTextureImage(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 12, gHudElementCacheTableRaster[itemEntity->lookupRasterIndex].data);
+            gDPSetTile(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0x0000, G_TX_LOADTILE, 0,
                        G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
-            gDPLoadSync(gMasterGfxPos++);
-            gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, 0, 0, 0x002E, 0x005C);
-            gDPPipeSync(gMasterGfxPos++);
-            gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0x0000, G_TX_RENDERTILE, 0,
+            gDPLoadSync(gMainGfxPos++);
+            gDPLoadTile(gMainGfxPos++, G_TX_LOADTILE, 0, 0, 0x002E, 0x005C);
+            gDPPipeSync(gMainGfxPos++);
+            gDPSetTile(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0x0000, G_TX_RENDERTILE, 0,
                        G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
-            gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0x0400, 0x0400, 0x045C, 0x045C);
+            gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, 0x0400, 0x0400, 0x045C, 0x045C);
         }
-        gSPDisplayList(gMasterGfxPos++, D_8014C678);
+        gSPDisplayList(gMainGfxPos++, D_8014C678);
     } else {
-        gDPLoadTLUT_pal16(gMasterGfxPos++, 0, gHudElementCacheTablePalette[itemEntity->lookupPaletteIndex].data);
+        gDPLoadTLUT_pal16(gMainGfxPos++, 0, gHudElementCacheTablePalette[itemEntity->lookupPaletteIndex].data);
         if (gSpriteShadingProfile->flags != 0) {
-            gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 16, gHudElementCacheTableRaster[itemEntity->lookupRasterIndex].data);
-            gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0x0000, G_TX_LOADTILE, 0,
+            gDPSetTextureImage(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 16, gHudElementCacheTableRaster[itemEntity->lookupRasterIndex].data);
+            gDPSetTile(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0x0000, G_TX_LOADTILE, 0,
                        G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
-            gDPLoadSync(gMasterGfxPos++);
-            gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, 0, 0, 0x003E, 0x007C);
-            gDPPipeSync(gMasterGfxPos++);
-            gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0x0000, 1, 0, G_TX_NOMIRROR | G_TX_CLAMP,
+            gDPLoadSync(gMainGfxPos++);
+            gDPLoadTile(gMainGfxPos++, G_TX_LOADTILE, 0, 0, 0x003E, 0x007C);
+            gDPPipeSync(gMainGfxPos++);
+            gDPSetTile(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0x0000, 1, 0, G_TX_NOMIRROR | G_TX_CLAMP,
                        8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
-            gDPSetTileSize(gMasterGfxPos++, 1, 0x0400, 0x0400, 0x047C, 0x047C);
-            gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0x0000, G_TX_RENDERTILE, 1,
+            gDPSetTileSize(gMainGfxPos++, 1, 0x0400, 0x0400, 0x047C, 0x047C);
+            gDPSetTile(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0x0000, G_TX_RENDERTILE, 1,
                        G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
-            gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0x0100, 2, 0, G_TX_NOMIRROR | G_TX_WRAP,
+            gDPSetTile(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0x0100, 2, 0, G_TX_NOMIRROR | G_TX_WRAP,
                        G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
-            gDPSetTileSize(gMasterGfxPos++, 2, 0, 0, 0x00FC, 0);
+            gDPSetTileSize(gMainGfxPos++, 2, 0, 0, 0x00FC, 0);
             if (itemEntity->flags & (ITEM_ENTITY_FLAG_8000000 | ITEM_ENTITY_FLAG_TRANSPARENT)) {
                 func_801491E4(mtxTranslate, 0, 0, 0x20, 0x20, alpha);
             } else {
                 func_801491E4(mtxTranslate, 0, 0, 0x20, 0x20, 255);
             }
         } else {
-            gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 16, gHudElementCacheTableRaster[itemEntity->lookupRasterIndex].data);
-            gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0x0000, G_TX_LOADTILE, 0,
+            gDPSetTextureImage(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 16, gHudElementCacheTableRaster[itemEntity->lookupRasterIndex].data);
+            gDPSetTile(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0x0000, G_TX_LOADTILE, 0,
                        G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
-            gDPLoadSync(gMasterGfxPos++);
-            gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, 0, 0, 0x003E, 0x007C);
-            gDPPipeSync(gMasterGfxPos++);
-            gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0x0000, G_TX_RENDERTILE, 0,
+            gDPLoadSync(gMainGfxPos++);
+            gDPLoadTile(gMainGfxPos++, G_TX_LOADTILE, 0, 0, 0x003E, 0x007C);
+            gDPPipeSync(gMainGfxPos++);
+            gDPSetTile(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0x0000, G_TX_RENDERTILE, 0,
                        G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
-            gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0x0400, 0x0400, 0x047C, 0x047C);
+            gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, 0x0400, 0x0400, 0x047C, 0x047C);
         }
-        gSPDisplayList(gMasterGfxPos++, D_8014C6A0);
+        gSPDisplayList(gMainGfxPos++, D_8014C6A0);
     }
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-    gDPPipeSync(gMasterGfxPos++);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+    gDPPipeSync(gMainGfxPos++);
 
     if (itemEntity->itemID == ITEM_COIN) {
         draw_coin_sparkles(itemEntity);
@@ -1606,15 +1606,15 @@ void render_item_entities(void) {
                         guMtxCatF(sp98, sp58, sp58);
                         guMtxF2L(sp58, &sp18);
                         gDisplayContext->matrixStack[gMatrixListPos] = sp18;
-                        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+                        gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
                         if (gSpriteShadingProfile->flags != 0) {
-                            gSPDisplayList(gMasterGfxPos++, D_8014BBD8);
+                            gSPDisplayList(gMainGfxPos++, D_8014BBD8);
                         } else {
-                            gSPDisplayList(gMasterGfxPos++, D_8014B870);
+                            gSPDisplayList(gMainGfxPos++, D_8014B870);
                         }
-                        gSPClearGeometryMode(gMasterGfxPos++, G_LIGHTING);
-                        gSPDisplayList(gMasterGfxPos++, D_8014C620);
+                        gSPClearGeometryMode(gMainGfxPos++, G_LIGHTING);
+                        gSPDisplayList(gMainGfxPos++, D_8014C620);
 
                         alpha = 255;
                         if (item->flags & (ITEM_ENTITY_FLAG_TRANSPARENT | ITEM_ENTITY_FLAG_8000000)) {
@@ -1627,76 +1627,76 @@ void render_item_entities(void) {
                             }
                             if (item->flags & (ITEM_ENTITY_FLAG_TRANSPARENT | ITEM_ENTITY_FLAG_8000000)) {
                                 if (gSpriteShadingProfile->flags) {
-                                    gDPSetRenderMode(gMasterGfxPos++, AA_EN | IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL | G_RM_PASS,
+                                    gDPSetRenderMode(gMainGfxPos++, AA_EN | IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL | G_RM_PASS,
                                         AA_EN | IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL | GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA));
                                 } else {
-                                    gDPSetRenderMode(gMasterGfxPos++, AA_EN | IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL | GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA),
+                                    gDPSetRenderMode(gMainGfxPos++, AA_EN | IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL | GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA),
                                                                     AA_EN | IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL | GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA));
-                                    gDPSetCombineLERP(gMasterGfxPos++, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, TEXEL0, 0, PRIMITIVE, 0);
-                                    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 255, alpha);
+                                    gDPSetCombineLERP(gMainGfxPos++, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, TEXEL0, 0, PRIMITIVE, 0);
+                                    gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 255, alpha);
                                 }
                             }
                         }
 
                         if (!(item->flags & ITEM_ENTITY_FLAG_40000)) {
-                            gDPLoadTLUT_pal16(gMasterGfxPos++, 0, gHudElementCacheTablePalette[item->lookupPaletteIndex].data);
+                            gDPLoadTLUT_pal16(gMainGfxPos++, 0, gHudElementCacheTablePalette[item->lookupPaletteIndex].data);
                             if (gSpriteShadingProfile->flags) {
-                                gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 12, gHudElementCacheTableRaster[item->lookupRasterIndex].data);
-                                gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
-                                gDPLoadSync(gMasterGfxPos++);
-                                gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, 0, 0, 0x002E, 0x005C);
-                                gDPPipeSync(gMasterGfxPos++);
-                                gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0x0000, 1, 0, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
-                                gDPSetTileSize(gMasterGfxPos++, 1, 0x0400, 0x0400, 0x045C, 0x045C);
-                                gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0x0000, G_TX_RENDERTILE, 1, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
-                                gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0x0100, 2, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
-                                gDPSetTileSize(gMasterGfxPos++, 2, 0, 0, 0x00FC, 0);
+                                gDPSetTextureImage(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 12, gHudElementCacheTableRaster[item->lookupRasterIndex].data);
+                                gDPSetTile(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
+                                gDPLoadSync(gMainGfxPos++);
+                                gDPLoadTile(gMainGfxPos++, G_TX_LOADTILE, 0, 0, 0x002E, 0x005C);
+                                gDPPipeSync(gMainGfxPos++);
+                                gDPSetTile(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0x0000, 1, 0, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
+                                gDPSetTileSize(gMainGfxPos++, 1, 0x0400, 0x0400, 0x045C, 0x045C);
+                                gDPSetTile(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0x0000, G_TX_RENDERTILE, 1, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
+                                gDPSetTile(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0x0100, 2, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+                                gDPSetTileSize(gMainGfxPos++, 2, 0, 0, 0x00FC, 0);
                                 if (item->flags & (ITEM_ENTITY_FLAG_TRANSPARENT | ITEM_ENTITY_FLAG_8000000)) {
                                     func_801491E4(sp58, 0, 0, 24, 24, alpha);
                                 } else {
                                     func_801491E4(sp58, 0, 0, 24, 24, 255);
                                 }
                             } else {
-                                gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 12, gHudElementCacheTableRaster[item->lookupRasterIndex].data);
-                                gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
-                                gDPLoadSync(gMasterGfxPos++);
-                                gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, 0, 0, 0x002E, 0x005C);
-                                gDPPipeSync(gMasterGfxPos++);
-                                gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0x0000, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
-                                gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0x0400, 0x0400, 0x045C, 0x045C);
+                                gDPSetTextureImage(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 12, gHudElementCacheTableRaster[item->lookupRasterIndex].data);
+                                gDPSetTile(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
+                                gDPLoadSync(gMainGfxPos++);
+                                gDPLoadTile(gMainGfxPos++, G_TX_LOADTILE, 0, 0, 0x002E, 0x005C);
+                                gDPPipeSync(gMainGfxPos++);
+                                gDPSetTile(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0x0000, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
+                                gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, 0x0400, 0x0400, 0x045C, 0x045C);
                             }
-                            gSPDisplayList(gMasterGfxPos++, D_8014C678);
+                            gSPDisplayList(gMainGfxPos++, D_8014C678);
                         } else {
-                            gDPLoadTLUT_pal16(gMasterGfxPos++, 0, gHudElementCacheTablePalette[item->lookupPaletteIndex].data);
+                            gDPLoadTLUT_pal16(gMainGfxPos++, 0, gHudElementCacheTablePalette[item->lookupPaletteIndex].data);
                             if (gSpriteShadingProfile->flags) {
-                                gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 16, gHudElementCacheTableRaster[item->lookupRasterIndex].data);
-                                gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
-                                gDPLoadSync(gMasterGfxPos++);
-                                gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, 0, 0, 0x003E, 0x007C);
-                                gDPPipeSync(gMasterGfxPos++);
-                                gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0x0000, 1, 0, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
-                                gDPSetTileSize(gMasterGfxPos++, 1, 0x0400, 0x0400, 0x047C, 0x047C);
-                                gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0x0000, G_TX_RENDERTILE, 1, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
-                                gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0x0100, 2, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
-                                gDPSetTileSize(gMasterGfxPos++, 2, 0, 0, 0x00FC, 0);
+                                gDPSetTextureImage(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 16, gHudElementCacheTableRaster[item->lookupRasterIndex].data);
+                                gDPSetTile(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
+                                gDPLoadSync(gMainGfxPos++);
+                                gDPLoadTile(gMainGfxPos++, G_TX_LOADTILE, 0, 0, 0x003E, 0x007C);
+                                gDPPipeSync(gMainGfxPos++);
+                                gDPSetTile(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0x0000, 1, 0, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
+                                gDPSetTileSize(gMainGfxPos++, 1, 0x0400, 0x0400, 0x047C, 0x047C);
+                                gDPSetTile(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0x0000, G_TX_RENDERTILE, 1, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
+                                gDPSetTile(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0x0100, 2, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+                                gDPSetTileSize(gMainGfxPos++, 2, 0, 0, 0x00FC, 0);
                                 if (item->flags & (ITEM_ENTITY_FLAG_TRANSPARENT | ITEM_ENTITY_FLAG_8000000)) {
                                     func_801491E4(sp58, 0, 0, 32, 32, alpha);
                                 } else {
                                     func_801491E4(sp58, 0, 0, 32, 32, 255);
                                 }
                             } else {
-                                gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 16, gHudElementCacheTableRaster[item->lookupRasterIndex].data);
-                                gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
-                                gDPLoadSync(gMasterGfxPos++);
-                                gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE, 0, 0, 0x003E, 0x007C);
-                                gDPPipeSync(gMasterGfxPos++);
-                                gDPSetTile(gMasterGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0x0000, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
-                                gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, 0x0400, 0x0400, 0x047C, 0x047C);
+                                gDPSetTextureImage(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 16, gHudElementCacheTableRaster[item->lookupRasterIndex].data);
+                                gDPSetTile(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
+                                gDPLoadSync(gMainGfxPos++);
+                                gDPLoadTile(gMainGfxPos++, G_TX_LOADTILE, 0, 0, 0x003E, 0x007C);
+                                gDPPipeSync(gMainGfxPos++);
+                                gDPSetTile(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0x0000, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
+                                gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, 0x0400, 0x0400, 0x047C, 0x047C);
                             }
-                            gSPDisplayList(gMasterGfxPos++, D_8014C6A0);
+                            gSPDisplayList(gMainGfxPos++, D_8014C6A0);
                         }
-                        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-                        gDPPipeSync(gMasterGfxPos++);
+                        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+                        gDPPipeSync(gMainGfxPos++);
                     }
                 }
             }

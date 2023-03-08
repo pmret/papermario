@@ -78,7 +78,7 @@ void N(gfx_build_rowf_rug_with_ripples)(void) {
         }
     }
 
-    gSPDisplayList(gMasterGfxPos++, mdl_get_copied_gfx(VTX_COPY_0));
+    gSPDisplayList(gMainGfxPos++, mdl_get_copied_gfx(VTX_COPY_0));
 }
 
 API_CALLABLE(N(RevealRowfBadges)) {

@@ -182,14 +182,14 @@ void func_E0090444(EffectInstance* effect) {
 
     if (data->unk_24 != 0) {
         scale = data->unk_28;
-        gDPPipeSync(gMasterGfxPos++);
-        gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->graphics->data));
-        gDPSetDepthSource(gMasterGfxPos++, G_ZS_PRIM);
+        gDPPipeSync(gMainGfxPos++);
+        gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->graphics->data));
+        gDPSetDepthSource(gMainGfxPos++, G_ZS_PRIM);
         z = 200 - unk_1C;
         if (z < 0) {
             z = 0;
         }
-        gDPSetPrimDepth(gMasterGfxPos++, z, 0);
+        gDPSetPrimDepth(gMainGfxPos++, z, 0);
 
         if (unk_00 < 5) {
             shim_guTranslateF(sp18, data->unk_08, data->unk_0C, data->unk_10);
@@ -198,29 +198,29 @@ void func_E0090444(EffectInstance* effect) {
             shim_guScaleF(sp58, scale, scale, 1.0f);
             shim_guMtxCatF(sp58, sp18, sp18);
             shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
-            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+            gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                       G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 255, data->unk_14);
-            gSPDisplayList(gMasterGfxPos++, D_090015A8_391978);
-            gSPDisplayList(gMasterGfxPos++, D_E0090A40[data->unk_04]);
-            gSPDisplayList(gMasterGfxPos++, D_E0090A54[data->unk_04]);
-            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 255, data->unk_14);
+            gSPDisplayList(gMainGfxPos++, D_090015A8_391978);
+            gSPDisplayList(gMainGfxPos++, D_E0090A40[data->unk_04]);
+            gSPDisplayList(gMainGfxPos++, D_E0090A54[data->unk_04]);
+            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
         } else {
             unk_00 -= 5;
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, D_E0090A78[unk_00][0], D_E0090A78[unk_00][1], D_E0090A78[unk_00][2], data->unk_14);
-            gDPSetEnvColor(gMasterGfxPos++, D_E0090A78[unk_00][3], D_E0090A78[unk_00][4], D_E0090A78[unk_00][5], 0);
-            gSPDisplayList(gMasterGfxPos++, D_09001500_3918D0);
-            gSPDisplayList(gMasterGfxPos++, D_E0090A40[data->unk_04]);
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, D_E0090A78[unk_00][0], D_E0090A78[unk_00][1], D_E0090A78[unk_00][2], data->unk_14);
+            gDPSetEnvColor(gMainGfxPos++, D_E0090A78[unk_00][3], D_E0090A78[unk_00][4], D_E0090A78[unk_00][5], 0);
+            gSPDisplayList(gMainGfxPos++, D_09001500_3918D0);
+            gSPDisplayList(gMainGfxPos++, D_E0090A40[data->unk_04]);
 
-            gSPScisTextureRectangle(gMasterGfxPos++,
+            gSPScisTextureRectangle(gMainGfxPos++,
                 data->unk_08 * 4.0f,
                 data->unk_0C * 4.0f,
                 (data->unk_08 + 128.0f) * 4.0f,
                 (data->unk_0C + 64.0f) * 4.0f,
                 G_TX_RENDERTILE, 0, 1024, 512, 65024);
         }
-        gDPPipeSync(gMasterGfxPos++);
-        gDPSetDepthSource(gMasterGfxPos++, G_ZS_PIXEL);
-        gDPPipeSync(gMasterGfxPos++);
+        gDPPipeSync(gMainGfxPos++);
+        gDPSetDepthSource(gMainGfxPos++, G_ZS_PIXEL);
+        gDPPipeSync(gMainGfxPos++);
     }
 }

@@ -254,8 +254,8 @@ void firework_rocket_appendGfx(void* effect) {
         firework_rocket_blur_alpha = minBlurAlpha;
     }
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     mtx_0_0 = camera->perspectiveMatrix[0][0];
     mtx_0_1 = camera->perspectiveMatrix[0][1];
@@ -274,13 +274,13 @@ void firework_rocket_appendGfx(void* effect) {
     mtx_3_2 = camera->perspectiveMatrix[3][2];
     mtx_3_3 = camera->perspectiveMatrix[3][3];
 
-    gSPDisplayList(gMasterGfxPos++, D_E010ACCC[variation]);
+    gSPDisplayList(gMainGfxPos++, D_E010ACCC[variation]);
     centerX = data->pos.x;
     centerY = data->pos.y;
     centerZ = data->pos.z;
     radius = data->radius;
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->r, data->g, data->b, minBlurAlpha);
-    gDPSetEnvColor(gMasterGfxPos++, data->r, data->g, data->b, 0);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, data->r, data->g, data->b, minBlurAlpha);
+    gDPSetEnvColor(gMainGfxPos++, data->r, data->g, data->b, 0);
 
     if (isExploded == TRUE) {
         sparkDir = D_E010AF68[variation].sparks;
@@ -330,7 +330,7 @@ void firework_rocket_appendGfx(void* effect) {
             y += camera->viewportStartY;
             y *= 4.0f;
 
-            gSPScisTextureRectangle(gMasterGfxPos++,
+            gSPScisTextureRectangle(gMainGfxPos++,
                 x, y, x + 8.0f, y + 8.0f,
                 G_TX_RENDERTILE, 4 << 5, 4 << 5, 16 << 10, 16 << 10);
         }

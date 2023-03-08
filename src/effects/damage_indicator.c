@@ -198,90 +198,90 @@ void func_E003C498(EffectInstance* effect) {
     s32 numParts = part->numParts;
     s32 i;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->graphics->data));
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->graphics->data));
 
     shim_guTranslateF(sp20, part->unk_04.x, part->unk_04.y, part->unk_04.z);
     shim_guRotateF(sp60, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
     shim_guMtxCatF(sp60, sp20, sp20);
     shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
     spA0 = part->unk_34 - 1;
     lastPartIdx = effect->numParts - 1;
     part = &(effect->data.damageIndicator)[effect->numParts - 1];
 
     if (part->alpha == 255) {
-        gDPSetRenderMode(gMasterGfxPos++, G_RM_AA_TEX_EDGE, G_RM_AA_TEX_EDGE2);
-        gDPSetCombineLERP(gMasterGfxPos++, 1, 0, SHADE, PRIMITIVE, PRIMITIVE, 0, TEXEL0, 0, 1, 0, SHADE, PRIMITIVE, PRIMITIVE, 0, TEXEL0, 0);
+        gDPSetRenderMode(gMainGfxPos++, G_RM_AA_TEX_EDGE, G_RM_AA_TEX_EDGE2);
+        gDPSetCombineLERP(gMainGfxPos++, 1, 0, SHADE, PRIMITIVE, PRIMITIVE, 0, TEXEL0, 0, 1, 0, SHADE, PRIMITIVE, PRIMITIVE, 0, TEXEL0, 0);
     } else {
-        gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
-        gDPSetCombineLERP(gMasterGfxPos++, 1, 0, SHADE, PRIMITIVE, PRIMITIVE, 0, TEXEL0, 0, 1, 0, SHADE, PRIMITIVE, PRIMITIVE, 0, TEXEL0, 0);
+        gDPSetRenderMode(gMainGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
+        gDPSetCombineLERP(gMainGfxPos++, 1, 0, SHADE, PRIMITIVE, PRIMITIVE, 0, TEXEL0, 0, 1, 0, SHADE, PRIMITIVE, PRIMITIVE, 0, TEXEL0, 0);
     }
 
     for(i = 1; i < effect->numParts; i++, part--) {
         s32 rIdx = ((i + spA0) % 12) * 3;
 
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, D_E003CCF8[rIdx], D_E003CCF8[rIdx + 1], D_E003CCF8[rIdx + 2], part->alpha);
-        gSPDisplayList(gMasterGfxPos++, D_09001D40_351F60);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, D_E003CCF8[rIdx], D_E003CCF8[rIdx + 1], D_E003CCF8[rIdx + 2], part->alpha);
+        gSPDisplayList(gMainGfxPos++, D_09001D40_351F60);
 
         if (i == lastPartIdx) {
             shim_guPositionF(sp20, 0.0f, 0.0f, 0.0f, part->unk_38, part->unk_10.x, part->unk_10.y, part->unk_10.z);
             shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-            gSPDisplayList(gMasterGfxPos++, D_09002150_352370);
-            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+            gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPDisplayList(gMainGfxPos++, D_09002150_352370);
+            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 
             shim_guPositionF(sp20, 0.0f, 0.0f, 0.0f, part->unk_38, (part->unk_10.x + part->unk_04.x) * 0.5, (part->unk_10.y + part->unk_04.y) * 0.5, (part->unk_10.z + part->unk_04.z) * 0.5);
             shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-            gSPDisplayList(gMasterGfxPos++, D_09002160_352380);
-            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+            gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPDisplayList(gMainGfxPos++, D_09002160_352380);
+            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
         }
 
-        gSPDisplayList(gMasterGfxPos++, D_09001D40_351F60);
+        gSPDisplayList(gMainGfxPos++, D_09001D40_351F60);
 
         shim_guTranslateF(sp20, part->unk_04.x, part->unk_04.y, part->unk_04.z);
         shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+        gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
         shim_guScaleF(sp20, part->unk_38, part->unk_38, 1.0f);
         shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+        gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
         if (i == lastPartIdx) {
-            gSPDisplayList(gMasterGfxPos++, D_09002170_352390);
+            gSPDisplayList(gMainGfxPos++, D_09002170_352390);
         } else {
-            gSPDisplayList(gMasterGfxPos++, D_09002180_3523A0);
+            gSPDisplayList(gMainGfxPos++, D_09002180_3523A0);
         }
 
         if (i == lastPartIdx) {
-            gSPDisplayList(gMasterGfxPos++, D_090021A8_3523C8);
-            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-            gSPDisplayList(gMasterGfxPos++, D_09001DE0_352000);
+            gSPDisplayList(gMainGfxPos++, D_090021A8_3523C8);
+            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+            gSPDisplayList(gMainGfxPos++, D_09001DE0_352000);
             if (numParts < 10) {
-                gSPDisplayList(gMasterGfxPos++, D_E003CCA0[i]);
-                gSPDisplayList(gMasterGfxPos++, D_090021C0_3523E0);
+                gSPDisplayList(gMainGfxPos++, D_E003CCA0[i]);
+                gSPDisplayList(gMainGfxPos++, D_090021C0_3523E0);
             } else {
                 s32 temp = numParts % 10;
                 s32 temp2 = numParts / 10;
-                gSPDisplayList(gMasterGfxPos++, D_E003CCA0[temp]);
-                gSPDisplayList(gMasterGfxPos++, D_09002200_352420);
-                gSPDisplayList(gMasterGfxPos++, D_E003CCA0[temp2]);
-                gSPDisplayList(gMasterGfxPos++, D_090021E0_352400);
+                gSPDisplayList(gMainGfxPos++, D_E003CCA0[temp]);
+                gSPDisplayList(gMainGfxPos++, D_09002200_352420);
+                gSPDisplayList(gMainGfxPos++, D_E003CCA0[temp2]);
+                gSPDisplayList(gMainGfxPos++, D_090021E0_352400);
             }
         } else {
-            gSPDisplayList(gMasterGfxPos++, D_09002190_3523B0);
-            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+            gSPDisplayList(gMainGfxPos++, D_09002190_3523B0);
+            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
         }
 
-        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     }
 
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }

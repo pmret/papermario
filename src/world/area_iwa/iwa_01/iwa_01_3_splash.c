@@ -53,19 +53,19 @@ void N(gfx_build_splashes)(s32 index) {
             alpha = 255;
         }
 
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 230, 255, 255, 255);
-        gDPSetBlendColor(gMasterGfxPos++, 0, 0, 0, alpha);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, 230, 255, 255, 255);
+        gDPSetBlendColor(gMainGfxPos++, 0, 0, 0, alpha);
         guPosition(&gDisplayContext->matrixStack[gMatrixListPos],
                    splash->rot.x, splash->rot.y, splash->rot.z,
                    splash->scale,
                    splash->pos.x, splash->pos.y, splash->pos.z);
-        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, N(splash_gfx));
-        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+        gSPDisplayList(gMainGfxPos++, N(splash_gfx));
+        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     }
 
-    gDPSetAlphaCompare(gMasterGfxPos++, G_AC_NONE);
-    gDPPipeSync(gMasterGfxPos++);
+    gDPSetAlphaCompare(gMainGfxPos++, G_AC_NONE);
+    gDPPipeSync(gMainGfxPos++);
 }
 
 API_CALLABLE(N(InitSplashes)) {

@@ -160,8 +160,8 @@ void sun_appendGfx(void* argEffect) {
     fromRight = data->shineFromRight;
     
     if (alpha != 0) {
-        gDPPipeSync(gMasterGfxPos++);
-        gSPSegment(gMasterGfxPos++, 0x9, VIRTUAL_TO_PHYSICAL(effect->graphics->data));
+        gDPPipeSync(gMainGfxPos++);
+        gSPSegment(gMainGfxPos++, 0x9, VIRTUAL_TO_PHYSICAL(effect->graphics->data));
         
         if (!fromRight) {
             shim_guOrthoF(mtx, -1600.0f, 1600.0f, -1200.0f, 1200.0f, -100.0f, 100.0f, 1.0f);
@@ -170,25 +170,25 @@ void sun_appendGfx(void* argEffect) {
         }
         
         shim_guMtxF2L(mtx, &gDisplayContext->matrixStack[gMatrixListPos]);
-        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+        gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
             G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
         shim_guTranslateF(mtx, 0.0f, 0.0f, 0.0f);
         shim_guMtxF2L(mtx, &gDisplayContext->matrixStack[gMatrixListPos]);
-        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+        gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
             G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->primColor.r, data->primColor.g, data->primColor.b, alpha >> 1);
-        gDPSetEnvColor(gMasterGfxPos++, data->envColor.r, data->envColor.g, data->envColor.b, data->envColor.a);
-        gSPDisplayList(gMasterGfxPos++, D_E0120794[0]);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, data->primColor.r, data->primColor.g, data->primColor.b, alpha >> 1);
+        gDPSetEnvColor(gMainGfxPos++, data->envColor.r, data->envColor.g, data->envColor.b, data->envColor.a);
+        gSPDisplayList(gMainGfxPos++, D_E0120794[0]);
 
         for (i = 0; i < ARRAY_COUNT(data->texScrollAmt); i++) {
             offsetS = data->texScrollAmt[i] * 4.0f;
-            gDPSetTileSize(gMasterGfxPos++, 1, offsetS + (44 * i), 0, offsetS + (44 * i) + 252, 124);
-            gSPDisplayList(gMasterGfxPos++, D_E0120780[i]);
+            gDPSetTileSize(gMainGfxPos++, 1, offsetS + (44 * i), 0, offsetS + (44 * i) + 252, 124);
+            gSPDisplayList(gMainGfxPos++, D_E0120780[i]);
         }
-        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-        gSPMatrix(gMasterGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCameraID],
+        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+        gSPMatrix(gMainGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCameraID],
             G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-        gDPPipeSync(gMasterGfxPos++);
+        gDPPipeSync(gMainGfxPos++);
     }
 }

@@ -220,7 +220,7 @@ void func_E0082580(DisableXFXData* data) {
     shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
     shim_guMtxCatF(sp58, sp18, sp18);
     shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
               G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 }
 
@@ -236,19 +236,19 @@ void func_E00826C4(DisableXFXData* data) {
     shim_guMtxCatF(sp58, sp18, sp18);
     shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
               G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, data->alpha);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, data->alpha);
 
     if (data->alpha == 255) {
-        gDPSetRenderMode(gMasterGfxPos++, AA_EN | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA |
+        gDPSetRenderMode(gMainGfxPos++, AA_EN | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA |
                          GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM),
                          AA_EN | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA |
                          GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM));
-        gDPSetCombineMode(gMasterGfxPos++, G_CC_MODULATEIDECALA, G_CC_MODULATEIDECALA);
+        gDPSetCombineMode(gMainGfxPos++, G_CC_MODULATEIDECALA, G_CC_MODULATEIDECALA);
     } else {
-        gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
-        gDPSetCombineLERP(gMasterGfxPos++, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, TEXEL0, 0, TEXEL0, 0, SHADE, 0,
+        gDPSetRenderMode(gMainGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
+        gDPSetCombineLERP(gMainGfxPos++, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, TEXEL0, 0, TEXEL0, 0, SHADE, 0,
                           PRIMITIVE, 0, TEXEL0, 0);
     }
 }
@@ -259,8 +259,8 @@ void func_E00828B4(EffectInstance* effect) {
     s32 unk_38;
     s32 i;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->graphics->data));
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->graphics->data));
     func_E0082580(data);
     unk_38 = data->unk_38;
     type = data->type;
@@ -269,17 +269,17 @@ void func_E00828B4(EffectInstance* effect) {
     for (i = 1; i < effect->numParts; i++, data++) {
         if (unk_38 > 0 || type == 10) {
             if (type == 1) {
-                gSPDisplayList(gMasterGfxPos++, D_09002198_388548);
+                gSPDisplayList(gMainGfxPos++, D_09002198_388548);
             } else {
-                gSPDisplayList(gMasterGfxPos++, D_09002100_3884B0);
+                gSPDisplayList(gMainGfxPos++, D_09002100_3884B0);
             }
             func_E00826C4(data);
-            gSPDisplayList(gMasterGfxPos++, D_09002230_3885E0);
-            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+            gSPDisplayList(gMainGfxPos++, D_09002230_3885E0);
+            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
         }
     }
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-    gDPPipeSync(gMasterGfxPos++);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+    gDPPipeSync(gMainGfxPos++);
 }
 
 void func_E0082A84(EffectInstance* effect) {
@@ -287,8 +287,8 @@ void func_E0082A84(EffectInstance* effect) {
     s32 unk_38;
     s32 i;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->graphics->data));
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->graphics->data));
     func_E0082580(data);
     unk_38 = data->unk_38;
 
@@ -296,23 +296,23 @@ void func_E0082A84(EffectInstance* effect) {
     for (i = 1; i < effect->numParts; i++, data++) {
         func_E00826C4(data);
         if (unk_38 > 0) {
-            gSPDisplayList(gMasterGfxPos++, D_090022B0_388660);
+            gSPDisplayList(gMainGfxPos++, D_090022B0_388660);
             if (unk_38 < 10) {
-                gSPDisplayList(gMasterGfxPos++, D_E0082D00[unk_38]);
-                gSPDisplayList(gMasterGfxPos++, D_09002250_388600);
+                gSPDisplayList(gMainGfxPos++, D_E0082D00[unk_38]);
+                gSPDisplayList(gMainGfxPos++, D_09002250_388600);
             } else {
                 s32 ones = unk_38 % 10;
                 s32 tens = unk_38 / 10;
 
-                gSPDisplayList(gMasterGfxPos++, D_E0082D00[ones]);
-                gSPDisplayList(gMasterGfxPos++, D_E0082D00[tens]);
-                gSPDisplayList(gMasterGfxPos++, D_09002290_388640);
-                gSPDisplayList(gMasterGfxPos++, D_E0082D00[tens]);
-                gSPDisplayList(gMasterGfxPos++, D_09002270_388620);
+                gSPDisplayList(gMainGfxPos++, D_E0082D00[ones]);
+                gSPDisplayList(gMainGfxPos++, D_E0082D00[tens]);
+                gSPDisplayList(gMainGfxPos++, D_09002290_388640);
+                gSPDisplayList(gMainGfxPos++, D_E0082D00[tens]);
+                gSPDisplayList(gMainGfxPos++, D_09002270_388620);
             }
         }
-        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     }
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-    gDPPipeSync(gMasterGfxPos++);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+    gDPPipeSync(gMainGfxPos++);
 }

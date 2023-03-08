@@ -86,8 +86,8 @@ void sweat_appendGfx(void* effect) {
     Matrix4f sp18;
     Matrix4f sp58;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     shim_guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
     shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
@@ -96,13 +96,13 @@ void sweat_appendGfx(void* effect) {
     shim_guMtxCatF(sp58, sp18, sp18);
     shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     if (data->unk_10 > 0.0f) {
-        gSPDisplayList(gMasterGfxPos++, data->unk_00 == 0 ? D_09000200_35C750 : D_090002C8_35C818);
+        gSPDisplayList(gMainGfxPos++, data->unk_00 == 0 ? D_09000200_35C750 : D_090002C8_35C818);
     } else {
-        gSPDisplayList(gMasterGfxPos++, data->unk_00 == 0 ? D_09000390_35C8E0 : D_09000460_35C9B0);
+        gSPDisplayList(gMainGfxPos++, data->unk_00 == 0 ? D_09000390_35C8E0 : D_09000460_35C9B0);
     }
 
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }

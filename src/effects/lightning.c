@@ -223,8 +223,8 @@ void lightning_appendGfx(void* effect) {
     Matrix4f sp60;
     u16 perspNorm;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     if (unk_00 != 1 || unk_18 >= 18) {
         s32 ult2;
@@ -233,7 +233,7 @@ void lightning_appendGfx(void* effect) {
         s32 ult;
         f32* unk_28; // TODO required to match
 
-        gSPDisplayList(gMasterGfxPos++, dlist2);
+        gSPDisplayList(gMainGfxPos++, dlist2);
 
         uls = data->unk_1C * 4.0f;
         ult = data->unk_20 * 4.0f;
@@ -248,13 +248,13 @@ void lightning_appendGfx(void* effect) {
                 shim_guPerspectiveF(sp20, &perspNorm, 30.0f, (f32) camera->viewportW / (f32) camera->viewportH, 4.0f, 16384.0f, 1.0f);
                 shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-                gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+                gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
 
                 shim_guTranslateF(sp20, data->unk_04, data->unk_08, -500.0f);
                 shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-                gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-                gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 47, 198, 255);
+                gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+                gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 47, 198, 255);
                 break;
             default:
                 shim_guTranslateF(sp20, data->unk_04, data->unk_08, data->unk_0C);
@@ -264,21 +264,21 @@ void lightning_appendGfx(void* effect) {
                 shim_guMtxCatF(sp60, sp20, sp20);
                 shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-                gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-                gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 0, data->unk_10);
+                gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+                gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 0, data->unk_10);
                 break;
         }
 
-        gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, uls, ult, uls + 1020, ult + 124);
-        gDPSetTileSize(gMasterGfxPos++, 1, uls2, ult2, uls2 + 1020, ult2 + 124);
-        gSPDisplayList(gMasterGfxPos++, dlist);
-        gDPPipeSync(gMasterGfxPos++);
-        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, uls, ult, uls + 1020, ult + 124);
+        gDPSetTileSize(gMainGfxPos++, 1, uls2, ult2, uls2 + 1020, ult2 + 124);
+        gSPDisplayList(gMainGfxPos++, dlist);
+        gDPPipeSync(gMainGfxPos++);
+        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 
         if (unk_00 < 3) {
-            gSPMatrix(gMasterGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCameraID], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+            gSPMatrix(gMainGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCameraID], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
         }
 
-        gDPPipeSync(gMasterGfxPos++);
+        gDPPipeSync(gMainGfxPos++);
     }
 }

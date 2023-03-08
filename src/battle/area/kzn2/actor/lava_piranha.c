@@ -438,8 +438,8 @@ void func_8021835C_59EA3C(void* data) {
         N(VineRenderState) = 1;
     }
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPDisplayList(gMasterGfxPos++, D_8021CF40_5A3620);
+    gDPPipeSync(gMainGfxPos++);
+    gSPDisplayList(gMainGfxPos++, D_8021CF40_5A3620);
 
     for (i = 0; i < NUM_VINES; i++) {
         LavaPiranhaVine* vine = &N(VineData)[i];
@@ -452,10 +452,10 @@ void func_8021835C_59EA3C(void* data) {
         // here and leave space behind for the gSPBranchList command followed by two vertices
         // for each point in numPoints
 
-        vtxBuffer = (Vtx_t*)(gMasterGfxPos + 1);
-        gSPBranchList(gMasterGfxPos, &gMasterGfxPos[1 + 2 * (2 * numPoints)]);
-        vtx = (Vtx_t*) (++gMasterGfxPos);
-        gMasterGfxPos = &gMasterGfxPos[2 * (2 * numPoints)];
+        vtxBuffer = (Vtx_t*)(gMainGfxPos + 1);
+        gSPBranchList(gMainGfxPos, &gMainGfxPos[1 + 2 * (2 * numPoints)]);
+        vtx = (Vtx_t*) (++gMainGfxPos);
+        gMainGfxPos = &gMainGfxPos[2 * (2 * numPoints)];
 
         for (j = 0; j < numPoints; j++) {
             posX = vine->points[j].x;
@@ -505,12 +505,12 @@ void func_8021835C_59EA3C(void* data) {
         }
 
         for (j = 0; j < numPoints - 1; j++) {
-            gSPVertex(gMasterGfxPos++, &vtxBuffer[2*j], 4, 0);
-            gSP2Triangles(gMasterGfxPos++, 1, 0, 2, 0, 1, 2, 3, 0);
+            gSPVertex(gMainGfxPos++, &vtxBuffer[2*j], 4, 0);
+            gSP2Triangles(gMainGfxPos++, 1, 0, 2, 0, 1, 2, 3, 0);
         }
     }
 
-    gDPPipeSync(gMasterGfxPos++);
+    gDPPipeSync(gMainGfxPos++);
 }
 
 void N(worker_render_piranha_vines)(void) {

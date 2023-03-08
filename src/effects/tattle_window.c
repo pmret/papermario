@@ -184,7 +184,7 @@ void func_E00D8288(s32 l, s32 t, s32 r, s32 b) {
         b = SCREEN_HEIGHT - 1;
     }
 
-    gDPFillRectangle(gMasterGfxPos++, l, t, r, b);
+    gDPFillRectangle(gMainGfxPos++, l, t, r, b);
 }
 
 void func_E00D8334(TattleWindowFXData* data, s32 left, s32 top, s32 right, s32 bottom) {
@@ -194,18 +194,18 @@ void func_E00D8334(TattleWindowFXData* data, s32 left, s32 top, s32 right, s32 b
     s32 l, t, r, b;
 
     if (data->unk_34 > 0 || data->unk_35 > 0) {
-        gDPPipeSync(gMasterGfxPos++);
-        gSPTexture(gMasterGfxPos++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF);
-        gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
-        gDPSetTexturePersp(gMasterGfxPos++, G_TP_NONE);
-        gDPSetTextureDetail(gMasterGfxPos++, G_TD_CLAMP);
-        gDPSetTextureLOD(gMasterGfxPos++, G_TL_TILE);
-        gDPSetTextureLUT(gMasterGfxPos++, G_TT_NONE);
-        gDPSetTextureFilter(gMasterGfxPos++, G_TF_AVERAGE);
-        gDPSetTextureConvert(gMasterGfxPos++, G_TC_FILT);
-        gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
-        gDPSetCombineMode(gMasterGfxPos++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 24, 48, 96, 255);
+        gDPPipeSync(gMainGfxPos++);
+        gSPTexture(gMainGfxPos++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF);
+        gDPSetCycleType(gMainGfxPos++, G_CYC_1CYCLE);
+        gDPSetTexturePersp(gMainGfxPos++, G_TP_NONE);
+        gDPSetTextureDetail(gMainGfxPos++, G_TD_CLAMP);
+        gDPSetTextureLOD(gMainGfxPos++, G_TL_TILE);
+        gDPSetTextureLUT(gMainGfxPos++, G_TT_NONE);
+        gDPSetTextureFilter(gMainGfxPos++, G_TF_AVERAGE);
+        gDPSetTextureConvert(gMainGfxPos++, G_TC_FILT);
+        gDPSetRenderMode(gMainGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
+        gDPSetCombineMode(gMainGfxPos++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, 24, 48, 96, 255);
         l = left + 4;
         r = (left + right) - 4;
         t = top + 4;
@@ -223,8 +223,8 @@ void func_E00D8630(EffectInstance* effect) {
     TattleWindowFXData* data = effect->data.tattleWindow;
     s32 flags;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     if (data->scale == 1.0f && data->rot.x == 0.0f && data->rot.y == 0.0f && data->rot.z == 0.0f) {
         flags = 0;
@@ -242,5 +242,5 @@ void func_E00D8630(EffectInstance* effect) {
         data->scale, data->scale,
         data->rot.x, data->rot.y, data->rot.z,
         (void (*)(void*)) func_E00D8334, data, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
-    gDPPipeSync(gMasterGfxPos++);
+    gDPPipeSync(gMainGfxPos++);
 }

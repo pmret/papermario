@@ -157,24 +157,24 @@ void pause_spirits_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 widt
     f32 scale;
     PlayerData* playerData = get_player_data();
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPViewport(gMasterGfxPos++, &gPauseSpiritsViewport);
-    gSPDisplayList(gMasterGfxPos++, gPauseDLSpiritsBg);
+    gDPPipeSync(gMainGfxPos++);
+    gSPViewport(gMainGfxPos++, &gPauseSpiritsViewport);
+    gSPDisplayList(gMainGfxPos++, gPauseDLSpiritsBg);
 
     for (i = 0; i < 5; i++) {
-        gDPLoadTextureTile_4b(gMasterGfxPos++, pause_spirits_bg_png, G_IM_FMT_CI, 128, 110,
+        gDPLoadTextureTile_4b(gMainGfxPos++, pause_spirits_bg_png, G_IM_FMT_CI, 128, 110,
                                0, i * 22, 127, i * 22 + 21, 0,
                                G_TX_MIRROR, G_TX_CLAMP, 7, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
         pause_draw_rect((baseX + 15) * 4, (baseY + 22 + i * 22) * 4, (baseX + 271) * 4, (baseY + 22 + i * 22 + 22) * 4, 0, 16, 16 + i * 704, 0x400, 0x400);
-        gDPPipeSync(gMasterGfxPos++);
+        gDPPipeSync(gMainGfxPos++);
     }
 
     guOrthoF(matrix1, 0.0f, 320.0f, 240.0f, 0.0f, -1000.0f, 1000.0f, 1.0f);
     guMtxF2L(matrix1, &gDisplayContext->matrixStack[gMatrixListPos]);
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
     guTranslateF(matrix1, 0.0f, 0.0f, 0.0f);
     guMtxF2L(matrix1, &gDisplayContext->matrixStack[gMatrixListPos]);
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
 
     for (i = 0; i < gPauseSpiritsNumSpirits; i++) {
@@ -211,7 +211,7 @@ void pause_spirits_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 widt
         spr_draw_npc_sprite(gPauseSpiritsSpriteIDs[gPauseSpiritsIndexes[index]], 0, 0, 0, matrix1);
     }
 
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 
     x1 = baseX + 7;
     y1 = baseY + 14;
@@ -236,7 +236,7 @@ void pause_spirits_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 widt
         y2 = SCREEN_HEIGHT - 1;
     }
 
-    gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x1, y1, x2, y2);
+    gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, x1, y1, x2, y2);
     draw_box(0, &gPauseWS_25, baseX + 7, baseY + 14, 0, 272, 126, opacity, darkening, 1.0f, 1.0f, 0, 0, 0, 0, 0, 0, width, height, 0);
 
     if (gPauseMenuCurrentTab == 5) {

@@ -294,13 +294,13 @@ void pause_partners_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
     s32 portraitOffsetX;
     s32 portraitIndex;
 
-    gSPViewport(gMasterGfxPos++, &gPausePartnersViewport);
+    gSPViewport(gMainGfxPos++, &gPausePartnersViewport);
     guOrthoF(matrix, 0.0f, 320.0f, 240.0f, 0.0f, -100.0f, 100.0f, 1.0f);
     guMtxF2L(matrix, &gDisplayContext->matrixStack[gMatrixListPos]);
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
     guTranslateF(matrix, 0.0f, 0.0f, 0.0f);
     guMtxF2L(matrix, &gDisplayContext->matrixStack[gMatrixListPos]);
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     for (i = 0; i < gPausePartnersNumPartners; i++) {
         currentPos = cos_deg(i * 360 / gPausePartnersNumPartners - gPausePartnersRotAngle) * 20.0f + 0.0f;
@@ -345,7 +345,7 @@ void pause_partners_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
         spr_draw_npc_sprite(gPausePartnersSpriteIDs[gPausePartnersPartnerIdx[index]], 0, 0, NULL, matrix);
     }
 
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 
     currentTab = gPauseMenuCurrentTab;
     if (currentTab == 4) {
@@ -383,14 +383,14 @@ void pause_partners_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
 
     portraitScrollPos = (gPausePartnersRotAngle + 360.0f) * 15000.0f * gPausePartnersNumPartners / 360.0f;
     portraitScrollIndex = portraitScrollPos / 15000;
-    gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x1, y1, x2, y2);
+    gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, x1, y1, x2, y2);
     portraitOffsetX = (portraitScrollIndex * 15000 - portraitScrollPos);
     portraitOffsetX *= 0.01;
     portraitIndex = portraitScrollIndex;
     pause_partners_load_portrait(portraitIndex % gPausePartnersNumPartners);
     for (i = 0; i < 2; portraitOffsetX += 150, i++) {
-        gSPDisplayList(gMasterGfxPos++, &gPausePartnersDL);
-        gDPLoadTLUT_pal256(gMasterGfxPos++, gPausePartnersPaletteBuffers[i]);
+        gSPDisplayList(gMainGfxPos++, &gPausePartnersDL);
+        gDPLoadTLUT_pal256(gMainGfxPos++, gPausePartnersPaletteBuffers[i]);
 
         for (index = 0; index < 20; index++) {
             if (12 * index + 12 <= 105) {
@@ -399,12 +399,12 @@ void pause_partners_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
                 tileHeight = 106 - 12 * index;
             }
 
-            gDPLoadTextureTile(gMasterGfxPos++, gPausePartnersImageBuffers[i], G_IM_FMT_CI, G_IM_SIZ_8b, 150, 0,
+            gDPLoadTextureTile(gMainGfxPos++, gPausePartnersImageBuffers[i], G_IM_FMT_CI, G_IM_SIZ_8b, 150, 0,
                                 0, 12 * index, 149, 12 * index + tileHeight - 1, 0,
                                 G_TX_CLAMP, G_TX_CLAMP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
             pause_draw_rect((baseX + 130 + portraitOffsetX) * 4, (baseY + 24 + 12 * index) * 4, (baseX + 280 + portraitOffsetX) * 4, (baseY + 24 + 12 * index + tileHeight) * 4, 0, 0,
                             12 * index * 32, 0x400, 0x400);
-            gDPPipeSync(gMasterGfxPos++);
+            gDPPipeSync(gMainGfxPos++);
             if (12 * index + 12 >= 105) {
                 break;
             }
@@ -435,7 +435,7 @@ void pause_partners_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
             y2 = SCREEN_HEIGHT - 1;
         }
 
-        gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x1, y1, x2, y2);
+        gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, x1, y1, x2, y2);
     }
     draw_box(0, &gPauseWS_21, baseX + 122, baseY + 16, 0, 166, 121, opacity, darkening, 1.0f, 1.0f, 0, 0, 0, 0, 0, 0, width, height, 0);
 }

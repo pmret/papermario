@@ -185,38 +185,38 @@ s32 filemenu_draw_char(s32 c, s32 x, s32 y, s32 flag1, s32 color, s32 flag2) {
 
     if (c < 0xA2) {
         charWidth = charData->charWidthTable[c];
-        if (gMasterGfxPos != filemenu_savedGfxPos) {
-            gSPDisplayList(gMasterGfxPos++, filemenu_dl_draw_char_init);
+        if (gMainGfxPos != filemenu_savedGfxPos) {
+            gSPDisplayList(gMainGfxPos++, filemenu_dl_draw_char_init);
             filemenu_char_color = -1;
         }
 
         if (filemenu_char_color != color) {
             filemenu_char_color = color;
-            gDPLoadTLUT_pal16(gMasterGfxPos++, 0, D_802F4560[color]);
+            gDPLoadTLUT_pal16(gMainGfxPos++, 0, D_802F4560[color]);
         }
 
         if (texSizeX >= 16 && texSizeX % 16 == 0) {
-            gDPLoadTextureBlock_4b(gMasterGfxPos++, &raster[charRasterSize * c], G_IM_FMT_CI,
+            gDPLoadTextureBlock_4b(gMainGfxPos++, &raster[charRasterSize * c], G_IM_FMT_CI,
                                 texSizeX, texSizeY, 0,
                                 G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
         } else {
-            gDPLoadTextureTile_4b(gMasterGfxPos++, &raster[charRasterSize * c], G_IM_FMT_CI,
+            gDPLoadTextureTile_4b(gMainGfxPos++, &raster[charRasterSize * c], G_IM_FMT_CI,
                                 texSizeX, texSizeY,
                                 0, 0, texSizeX - 1, texSizeY - 1, 0,
                                 G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
         }
 
         if (flag2) {
-            gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0);
-            gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
+            gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0);
+            gDPSetRenderMode(gMainGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
             filemenu_draw_rect((x + 2) * 4, (y + 2) * 4, (2 + x + texSizeX) * 4, (2 + y + texSizeY) * 4, 0, 0, 0, 0x400, 0x400);
-            gDPPipeSync(gMasterGfxPos++);
-            gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
-            gDPSetRenderMode(gMasterGfxPos++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
+            gDPPipeSync(gMainGfxPos++);
+            gDPSetCombineMode(gMainGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+            gDPSetRenderMode(gMainGfxPos++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
         }
 
         filemenu_draw_rect(x * 4, y * 4, (x + texSizeX) * 4, (y + texSizeY) * 4, 0, 0, 0, 0x400, 0x400);
-        filemenu_savedGfxPos = gMasterGfxPos;
+        filemenu_savedGfxPos = gMainGfxPos;
         return charWidth;
     }
 
@@ -232,29 +232,29 @@ s32 filemenu_draw_char(s32 c, s32 x, s32 y, s32 flag1, s32 color, s32 flag2) {
 
         load_font_data(charset_standard_OFFSET + offset * 0x80, 0x80, &filemenu_glyphBuffer[*offsetPtr][0]);
 
-        if (gMasterGfxPos != filemenu_savedGfxPos) {
-            gSPDisplayList(gMasterGfxPos++, filemenu_dl_draw_char_init);
+        if (gMainGfxPos != filemenu_savedGfxPos) {
+            gSPDisplayList(gMainGfxPos++, filemenu_dl_draw_char_init);
             filemenu_char_color = -1;
         }
 
         if (filemenu_char_color != color) {
             filemenu_char_color = color;
-            gDPLoadTLUT_pal16(gMasterGfxPos++, 0, D_802F4560[color]);
+            gDPLoadTLUT_pal16(gMainGfxPos++, 0, D_802F4560[color]);
         }
 
-        gDPLoadTextureBlock_4b(gMasterGfxPos++, &filemenu_glyphBuffer[*offsetPtr][0], G_IM_FMT_CI, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+        gDPLoadTextureBlock_4b(gMainGfxPos++, &filemenu_glyphBuffer[*offsetPtr][0], G_IM_FMT_CI, 16, 16, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
         if (flag2) {
-            gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0);
-            gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
+            gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0);
+            gDPSetRenderMode(gMainGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
             filemenu_draw_rect((x + 2) * 4, (y + 2) * 4, (x + 18) * 4, (y + 18) * 4, 0, 0, 0, 0x400, 0x400);
-            gDPPipeSync(gMasterGfxPos++);
-            gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
-            gDPSetRenderMode(gMasterGfxPos++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
+            gDPPipeSync(gMainGfxPos++);
+            gDPSetCombineMode(gMainGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+            gDPSetRenderMode(gMainGfxPos++, G_RM_TEX_EDGE, G_RM_TEX_EDGE2);
         }
 
         filemenu_draw_rect(x * 4, y * 4, (x + 16) * 4, (y + 16) * 4, 0, 0, 0, 0x400, 0x400);
-        filemenu_savedGfxPos = gMasterGfxPos;
+        filemenu_savedGfxPos = gMainGfxPos;
         *offsetPtr = (*offsetPtr + 1) % 20;
 
         return 16;

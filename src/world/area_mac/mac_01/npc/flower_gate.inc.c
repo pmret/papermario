@@ -197,8 +197,8 @@ API_CALLABLE(N(SetFlowerGateGlowAlpha)) {
 }
 
 void N(gfx_build_flower_gate_glow)(void) {
-    gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, 1, SHADE, 0, PRIMITIVE, 0, 0, 0, 0, 1, SHADE, 0, PRIMITIVE, 0);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, N(FlowerGatePrimAlpha));
+    gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, 1, SHADE, 0, PRIMITIVE, 0, 0, 0, 0, 1, SHADE, 0, PRIMITIVE, 0);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, N(FlowerGatePrimAlpha));
 }
 
 API_CALLABLE(N(SetPartnerTetherClose)) {

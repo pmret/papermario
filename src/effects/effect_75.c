@@ -200,8 +200,8 @@ void fx_75_appendGfx(void* effect) {
     Matrix4f mtxTransfrom;
     Matrix4f mtxTemp;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     shim_guTranslateF(mtxTransfrom, data->pos.x, data->pos.y, data->pos.z);
     shim_guScaleF(mtxTemp, data->scale, data->scale, data->scale);
@@ -212,13 +212,13 @@ void fx_75_appendGfx(void* effect) {
     }
     shim_guMtxF2L(mtxTransfrom, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPMatrix(gMasterGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->primCol.r, data->primCol.g, data->primCol.b, data->unk_34);
-    gDPSetEnvColor(gMasterGfxPos++, data->envCol.r, data->envCol.g, data->envCol.b, data->unk_24 * data->masterAlpha / 255);
-    gSPDisplayList(gMasterGfxPos++, D_E00EAA58[0]);
-    gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, uls0, ult0, uls0 + 252, ult0 + 252);
-    gDPSetTileSize(gMasterGfxPos++, 1, uls1, ult1, uls1 + 252, ult1 + 252);
-    gSPDisplayList(gMasterGfxPos++, D_E00EAA50[type]);
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, data->primCol.r, data->primCol.g, data->primCol.b, data->unk_34);
+    gDPSetEnvColor(gMainGfxPos++, data->envCol.r, data->envCol.g, data->envCol.b, data->unk_24 * data->masterAlpha / 255);
+    gSPDisplayList(gMainGfxPos++, D_E00EAA58[0]);
+    gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, uls0, ult0, uls0 + 252, ult0 + 252);
+    gDPSetTileSize(gMainGfxPos++, 1, uls1, ult1, uls1 + 252, ult1 + 252);
+    gSPDisplayList(gMainGfxPos++, D_E00EAA50[type]);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }

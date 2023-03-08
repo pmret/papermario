@@ -42,9 +42,9 @@ void entity_Padlock_setupGfx(s32 entityIndex) {
     guMtxCatF(sp18, sp58, sp58);
     guMtxF2L(sp58, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPDisplayList(gMasterGfxPos++, data->shackleGfx);
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(gMainGfxPos++, data->shackleGfx);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
 
 void entity_Padlock_push_player(Entity* entity) {

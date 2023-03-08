@@ -144,7 +144,7 @@ void entity_BlueWarpPipe_start_bound_script(Entity* entity) {
 }
 
 void entity_BlueWarpPipe_setupGfx(s32 entityIndex) {
-    Gfx* gfxPos = gMasterGfxPos;
+    Gfx* gfxPos = gMainGfxPos;
     Entity* entity = get_entity_by_index(entityIndex);
     BlueWarpPipeData* data = entity->dataBuf.bluePipe;
     Matrix4f sp10;
@@ -157,7 +157,7 @@ void entity_BlueWarpPipe_setupGfx(s32 entityIndex) {
     gSPMatrix(gfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(gfxPos++, Entity_BlueWarpPipe_RenderBase);
     gSPPopMatrix(gfxPos++, G_MTX_MODELVIEW);
-    gMasterGfxPos = gfxPos;
+    gMainGfxPos = gfxPos;
 }
 
 void entity_init_BlueWarpPipe(Entity* entity) {

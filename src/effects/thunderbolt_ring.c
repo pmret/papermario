@@ -107,17 +107,17 @@ void thunderbolt_ring_appendGfx(void* effect) {
     Matrix4f sp60;
     s32 i;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, data->unk_28, data->pos.x, data->pos.y, data->pos.z);
     shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPDisplayList(gMasterGfxPos++, D_09000000_3B46A0);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPDisplayList(gMainGfxPos++, D_09000000_3B46A0);
 
-    savedGfxPos = gMasterGfxPos++;
-    savedGfxPos2 = gMasterGfxPos;
+    savedGfxPos = gMainGfxPos++;
+    savedGfxPos2 = gMainGfxPos;
 
     for (i = 0; i < 5; i++) {
         shim_guRotateF(sp20, i * 72 + 90, 0.0f, 0.0f, 1.0f);
@@ -127,15 +127,15 @@ void thunderbolt_ring_appendGfx(void* effect) {
         shim_guMtxCatF(sp60, sp20, sp20);
         shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, D_090000C8_3B4768);
-        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+        gSPDisplayList(gMainGfxPos++, D_090000C8_3B4768);
+        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     }
 
-    gSPEndDisplayList(gMasterGfxPos++);
-    gSPBranchList(savedGfxPos, gMasterGfxPos);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->unk_18, data->unk_1C, data->unk_20, unk_24);
-    gDPSetEnvColor(gMasterGfxPos++, 255, 255, 255, 0);
+    gSPEndDisplayList(gMainGfxPos++);
+    gSPBranchList(savedGfxPos, gMainGfxPos);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, data->unk_18, data->unk_1C, data->unk_20, unk_24);
+    gDPSetEnvColor(gMainGfxPos++, 255, 255, 255, 0);
 
     for (i = 0; i < data->unk_30 + 1; i++) {
         f32 angle = lifeTime * 8 + i * 180 / (data->unk_30 + 1);
@@ -144,11 +144,11 @@ void thunderbolt_ring_appendGfx(void* effect) {
         shim_guPositionF(sp20, 0.0f, 0.0f, i * 36, temp * data->unk_2C, 0.0f, 0.0f, 0.0f);
         shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, savedGfxPos2);
-        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+        gSPDisplayList(gMainGfxPos++, savedGfxPos2);
+        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     }
 
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-    gDPPipeSync(gMasterGfxPos++);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+    gDPPipeSync(gMainGfxPos++);
 }

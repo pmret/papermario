@@ -94,16 +94,16 @@ void ring_blast_appendGfx(void* effect) {
     Matrix4f sp20;
     Matrix4f sp60;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
-    gSPDisplayList(gMasterGfxPos++, dlist2);
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPDisplayList(gMainGfxPos++, dlist2);
 
     shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, data->unk_10, data->pos.x, data->pos.y, data->pos.z);
     shim_guRotateF(sp60, data->unk_24, 0.0f, 0.0f, 1.0f);
     shim_guMtxCatF(sp60, sp20, sp20);
     shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
     if (unk_00 == 0) {
         f32 var_f4 = 1.0f;
@@ -115,31 +115,31 @@ void ring_blast_appendGfx(void* effect) {
             }
         }
 
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, var_f4 * 255.0f, var_f4 * 18.0f, var_f4 * 59.0f, 0);
-        gDPSetEnvColor(gMasterGfxPos++, var_f4 * 255.0f, var_f4 * 53.0f, var_f4 * 24.0f, envAlpha);
-        gDPSetKeyR(gMasterGfxPos++, var_f4 * 211.0f, 0, 0);
-        gDPSetKeyGB(gMasterGfxPos++, var_f4 * 255.0f, 0, 0, var_f4 * 216.0f, 0, 0);
-        gDPSetCombineLERP(gMasterGfxPos++, TEXEL1, TEXEL0, ENV_ALPHA, TEXEL0, TEXEL1, TEXEL0, ENVIRONMENT, TEXEL0, PRIMITIVE, CENTER, COMBINED, ENVIRONMENT, 0, 0, 0, COMBINED);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, var_f4 * 255.0f, var_f4 * 18.0f, var_f4 * 59.0f, 0);
+        gDPSetEnvColor(gMainGfxPos++, var_f4 * 255.0f, var_f4 * 53.0f, var_f4 * 24.0f, envAlpha);
+        gDPSetKeyR(gMainGfxPos++, var_f4 * 211.0f, 0, 0);
+        gDPSetKeyGB(gMainGfxPos++, var_f4 * 255.0f, 0, 0, var_f4 * 216.0f, 0, 0);
+        gDPSetCombineLERP(gMainGfxPos++, TEXEL1, TEXEL0, ENV_ALPHA, TEXEL0, TEXEL1, TEXEL0, ENVIRONMENT, TEXEL0, PRIMITIVE, CENTER, COMBINED, ENVIRONMENT, 0, 0, 0, COMBINED);
     } else {
-        gDPSetCombineLERP(gMasterGfxPos++, TEXEL1, TEXEL0, ENV_ALPHA, TEXEL0, TEXEL1, TEXEL0, ENVIRONMENT, TEXEL0, 1, COMBINED, PRIMITIVE, COMBINED, 0, 0, 0, COMBINED);
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 40, 127);
-        gDPSetEnvColor(gMasterGfxPos++, 255, 255, 139, envAlpha);
+        gDPSetCombineLERP(gMainGfxPos++, TEXEL1, TEXEL0, ENV_ALPHA, TEXEL0, TEXEL1, TEXEL0, ENVIRONMENT, TEXEL0, 1, COMBINED, PRIMITIVE, COMBINED, 0, 0, 0, COMBINED);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 40, 127);
+        gDPSetEnvColor(gMainGfxPos++, 255, 255, 139, envAlpha);
     }
 
-    gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE,
+    gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE,
         (unk_20_s32 * 32     ) * 4, 0,
         (unk_20_s32 * 32 + 32) * 4, 32 * 4);
 
     if (cond) {
-        gDPSetTileSize(gMasterGfxPos++, 1,
+        gDPSetTileSize(gMainGfxPos++, 1,
             (unk_20_s32 * 32 + 32) * 4, 32 * 4,
             (unk_20_s32 * 32 + 64) * 4, 64 * 4);
     } else {
-        gDPSetTileSize(gMasterGfxPos++, 1,
+        gDPSetTileSize(gMainGfxPos++, 1,
             (unk_20_s32 * 32 + 32) * 4, 0,
             (unk_20_s32 * 32 + 64) * 4, 32 * 4);
     }
 
-    gSPDisplayList(gMasterGfxPos++, dlist);
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gSPDisplayList(gMainGfxPos++, dlist);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
