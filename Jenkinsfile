@@ -26,7 +26,7 @@ pipeline {
         stage("Comment") {
             when {
                 not {
-                    branch 'master'
+                    branch 'main'
                 }
             }
             steps {
@@ -60,7 +60,7 @@ pipeline {
         }
         stage('Report Progress') {
             when {
-                branch 'master'
+                branch 'main'
             }
             steps {
                 sh 'mkdir reports'
@@ -82,7 +82,7 @@ pipeline {
         }
         stage('Update Progress') {
             when {
-                branch 'master'
+                branch 'main'
             }
             agent {
                 label 'master'
