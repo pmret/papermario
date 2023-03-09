@@ -8,6 +8,8 @@ extern u8 MessagePlural[];
 extern u8 MessageSingular[];
 extern HudScript HES_Item_Coin;
 
+s32 shop_get_sell_price(s32 itemID);
+
 API_CALLABLE(func_802803C8);
 API_CALLABLE(func_80280410);
 API_CALLABLE(ShowShopPurchaseDialog);
@@ -365,10 +367,7 @@ API_CALLABLE(ShowShopPurchaseDialog) {
 
 void create_shop_popup_menu(PopupMenu* popup);
 
-// almost
-#ifdef NON_EQUIVALENT
 void shop_open_item_select_popup(s32 mode) {
-    PlayerData* playerData = &gPlayerData;
     PopupMenu* menu = &gGameStatusPtr->mapShop->itemSelectMenu;
     s32 numItemSlots;
     s32 popupType;
@@ -394,29 +393,33 @@ void shop_open_item_select_popup(s32 mode) {
     numEntries = 0;
 
     for (i = 0; i < numItemSlots; i++) {
+        ItemData* itemData;
+
         switch (mode) {
             case 0:
             case 1:
-                itemID = playerData->invItems[i];
+                itemID = gPlayerData.invItems[i];
+                if (itemID == ITEM_NONE) {
+                    continue;
+                }
+                itemData = &gItemTable[itemID];
                 break;
             default:
-                itemID = playerData->storedItems[i];
+                itemID = gPlayerData.storedItems[i];
+                if (itemID == ITEM_NONE) {
+                    continue;
+                }
+                itemData = &gItemTable[itemID];
                 break;
         }
 
-        if (itemID != ITEM_NONE) {
-            ItemData* itemData;
-            do {
-                itemData = &gItemTable[itemID];
-            } while (0);
-            menu->ptrIcon[numEntries] = gItemHudScripts[itemData->hudElemID].enabled;
-            menu->userIndex[numEntries] = i;
-            menu->enabled[numEntries] = TRUE;
-            menu->nameMsg[numEntries] = itemData->nameMsg;
-            menu->descMsg[numEntries] = itemData->shortDescMsg;
-            menu->value[numEntries] = shop_get_sell_price(itemID);
-            numEntries++;
-        }
+        menu->ptrIcon[numEntries] = gItemHudScripts[itemData->hudElemID].enabled;
+        menu->userIndex[numEntries] = i;
+        menu->enabled[numEntries] = TRUE;
+        menu->nameMsg[numEntries] = itemData->nameMsg;
+        menu->descMsg[numEntries] = itemData->shortDescMsg;
+        menu->value[numEntries] = shop_get_sell_price(itemID);
+        numEntries++;
     }
 
     menu->popupType = popupType;
@@ -427,9 +430,6 @@ void shop_open_item_select_popup(s32 mode) {
     func_800E98EC();
     open_status_menu_short();
 }
-#else
-INCLUDE_ASM(s32, "world/script_api/shops", shop_open_item_select_popup);
-#endif
 
 s32 shop_update_item_select_popup(s32* selectedIndex) {
     Shop* shop = gGameStatusPtr->mapShop;
