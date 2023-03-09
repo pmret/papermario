@@ -305,7 +305,7 @@ API_CALLABLE(N(SuperBlock_AnimateEnergyOrbs)) {
             }
 
             userData->scatterStateTime++;
-            if (userData->scatterStateTime >= (int)(21 * DT)) {
+            if (userData->scatterStateTime >= (s32)(21 * DT)) {
                 userData->scatterState = 1;
                 userData->scatterStateTime = 0;
             }
@@ -320,14 +320,14 @@ API_CALLABLE(N(SuperBlock_AnimateEnergyOrbs)) {
             }
 
             userData->scatterStateTime++;
-            if (userData->scatterStateTime > (int)(15 * DT)) {
+            if (userData->scatterStateTime > (s32)(15 * DT)) {
                 userData->scatterStateTime = 15 * DT;
                 userData->scatterState = 2;
             }
             break;
         case 2:
             userData->scatterStateTime++;
-            if (userData->scatterStateTime > (int)(30 * DT)) {
+            if (userData->scatterStateTime > (s32)(30 * DT)) {
                 for (i = 0; i < SUPER_BLOCK_NUM_ORBS; i++) {
                     userData->orbEffects[i]->flags |= EFFECT_INSTANCE_FLAG_10;
                 }
@@ -339,7 +339,7 @@ API_CALLABLE(N(SuperBlock_AnimateEnergyOrbs)) {
     switch (userData->gatherState) {
         case 0:
             userData->gatherStateTime++;
-            if (userData->gatherStateTime > (int)(15 * DT)) {
+            if (userData->gatherStateTime > (s32)(15 * DT)) {
                 userData->gatherState = 1;
                 userData->gatherStateTime = 0;
             }
@@ -352,7 +352,7 @@ API_CALLABLE(N(SuperBlock_AnimateEnergyOrbs)) {
             }
 
             userData->gatherStateTime++;
-            if (userData->gatherStateTime > (int)(20 * DT)) {
+            if (userData->gatherStateTime > (s32)(20 * DT)) {
                 userData->gatherState = 2;
                 userData->gatherStateTime = 0;
             }
