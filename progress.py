@@ -108,7 +108,7 @@ def main(args):
     total_size = sum(sizes.values())
     # TODO hack for now since non-jp roms aren't mapped out
     if args.version != "us":
-        total_size = 3718664
+        total_size = 3718660
     all_funcs = set(sizes.keys())
 
     nonmatching_funcs = get_nonmatching_funcs()
