@@ -88,7 +88,7 @@ EvtScript N(EVS_OnSearch_HammerBush) = {
     EVT_CALL(EnablePartnerAI)
     EVT_THREAD
 #if VERSION_PAL
-    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(3 * DT))
+        EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(3 * DT))
 #else
         EVT_CALL(ResetCam, CAM_DEFAULT, 3)
 #endif

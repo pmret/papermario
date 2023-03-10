@@ -315,7 +315,7 @@ EvtScript N(EVS_Scene_MarioRevived) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
-        EVT_THREAD
+    EVT_THREAD
         EVT_WAIT(10 * DT)
         EVT_SETF(LVar0, 0)
         EVT_SETF(LVar1, 0)
