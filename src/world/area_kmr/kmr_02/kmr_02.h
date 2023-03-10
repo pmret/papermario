@@ -39,8 +39,13 @@ enum {
 enum {
     MV_Unk_00       = MapVar(0),
     MV_Unk_01       = MapVar(1),
+#if VERSION_PAL
+    MV_Unk_04       = MapVar(5),
+    MV_Unk_05       = MapVar(6),
+#else
     MV_Unk_04       = MapVar(4),
     MV_Unk_05       = MapVar(5),
+#endif
 };
 
 enum {  

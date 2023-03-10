@@ -1,3 +1,15 @@
 mac_01_toad_house_blanket_vtx = 0x8024B5F0; // rom:0x877F80 size:0x15E0
 mac_01_toad_house_blanket_gfx = 0x8024CBD0; // rom:0x879560
 mac_01_toad_house_blanket_img = 0x8024CD38; // rom:0x8796C8
+kmr_02_heart_block_img = 0x80257B50; // rom:0x933F00
+kmr_02_heart_block_pal = 0x80257D50; // rom:0x934100
+kmr_04_hammer_block_message_img = 0x80241BF0; // rom:0x938880
+kmr_04_hammer_block_message_pal = 0x80242070; // rom:0x938D00
+kmr_20_records_screen_gfx = 0x80252D50; // rom:0x96AF00
+D_80241900 = 0x80241900; // rom:0x96D2E0
+D_80241D00 = 0x80241D00; // rom:0x96D6E0
+kmr_22_lava_piranha_vine_gfx = 0x80241F00; // rom:0x96D8E0
+kmr_23_window_ul_img = 0x802416C8; // rom:0x975468
+kmr_23_window_ur_img = 0x80241708; // rom:0x9754A8
+kmr_23_window_ll_img = 0x80241748; // rom:0x9754E8
+kmr_23_window_lr_img = 0x80241788; // rom:0x975528

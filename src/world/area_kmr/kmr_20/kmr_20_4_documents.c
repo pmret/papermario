@@ -17,7 +17,7 @@ extern HudScript HES_Item_Unused_08C;
 extern HudScript HES_Item_Unused_08C_disabled;
 
 BSS PopupMenu N(ChooseDocumentPopupMenu);
-BSS IMG_BIN N(LetterBackgroundImg)[0x3D86];
+BSS IMG_BIN N(LetterBackgroundImg)[0x3D86] ALIGNED(16);
 BSS PAL_BIN N(LetterBackgroundPal)[0x100];
 BSS char N(static_pad)[0x8]; // padding
 BSS IMG_BIN N(LetterPhotoImg)[0x3D86];

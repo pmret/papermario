@@ -228,9 +228,9 @@
 #endif
 
 #if VERSION_PAL
-#define DT (50.0/60.0)
+#define DT (50.0f/60.0f)
 #else
-#define DT (1.0)
+#define DT (1.0f)
 #endif
 
 #endif

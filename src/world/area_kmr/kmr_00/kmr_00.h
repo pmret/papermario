@@ -31,6 +31,7 @@ enum {
 
 enum {
     MV_Unk_01           = MapVar(1),
+    MV_Unk_02           = MapVar(2),
 };
 
 #define NAMESPACE kmr_00

@@ -19,22 +19,22 @@ EvtScript N(EVS_Scene_KammyWatching) = {
     EVT_CALL(SetCamPitch, CAM_DEFAULT, 8, -5)
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_WAIT(60)
+    EVT_WAIT(60 * DT)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 100, 0, -220)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 100, 190, -353)
     EVT_CALL(SetCamDistance, CAM_DEFAULT, 250)
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_WAIT(30)
+    EVT_WAIT(30 * DT)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 100, 0, -220)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 100, 190, -353)
     EVT_CALL(SetCamDistance, CAM_DEFAULT, 1000)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(0.65))
+    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(0.65 / DT))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_WAIT(30)
+    EVT_WAIT(30 * DT)
     EVT_THREAD
         EVT_CALL(GetNpcPos, NPC_Kammy, LVar7, LVar8, LVar9)
-        EVT_CALL(LoadPath, 80, EVT_PTR(N(FlightPath_Away)), ARRAY_COUNT(N(FlightPath_Away)), EASING_LINEAR)
+        EVT_CALL(LoadPath, 80 * DT, EVT_PTR(N(FlightPath_Away)), ARRAY_COUNT(N(FlightPath_Away)), EASING_LINEAR)
         EVT_LABEL(0)
         EVT_CALL(GetNextPathPos)
         EVT_ADD(LVar1, LVar7)
@@ -47,12 +47,12 @@ EvtScript N(EVS_Scene_KammyWatching) = {
         EVT_END_IF
     EVT_END_THREAD
     EVT_THREAD
-        EVT_LOOP(24)
+        EVT_LOOP(24 * DT)
             EVT_CALL(PlaySoundAtNpc, NPC_Kammy, SOUND_295, SOUND_SPACE_MODE_0)
             EVT_WAIT(4)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_WAIT(110)
+    EVT_WAIT(110 * DT)
     EVT_EXEC_WAIT(N(EVS_BadExit_kmr_24_0))
     EVT_RETURN
     EVT_END

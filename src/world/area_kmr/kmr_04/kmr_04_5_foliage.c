@@ -48,7 +48,7 @@ EvtScript N(EVS_GotHammer) = {
     EVT_PLAY_EFFECT(EFFECT_RADIAL_SHIMMER, 9, LVar5, LVar6, LVar7, EVT_FLOAT(1.0), 100)
     EVT_EXEC(N(EVS_PlayUpgradeSong))
     EVT_THREAD
-        EVT_WAIT(4)
+        EVT_WAIT(4 * DT)
         EVT_CALL(GetPlayerPos, LVar3, LVar4, LVar5)
         EVT_ADD(LVar4, 50)
         EVT_ADD(LVar5, 2)
@@ -75,19 +75,23 @@ EvtScript N(EVS_OnSearch_HammerBush) = {
     EVT_SET(MF_Unk_12, FALSE)
     EVT_EXEC(N(EVS_GotHammer))
     EVT_CALL(N(GiveWoodenHammer))
-    EVT_WAIT(30)
+    EVT_WAIT(30 * DT)
     EVT_CALL(N(SetMessageImage_HammerBlock))
     EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_Inspect_FoundHammer, 160, 40)
     EVT_SET(MF_Unk_12, TRUE)
     EVT_CALL(DisablePartnerAI, 0)
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_00AA)
     EVT_CALL(SetNpcAnimation, NPC_PARTNER, ANIM_Goompa_Idle)
     EVT_SET(GB_StoryProgress, STORY_CH0_FOUND_HAMMER)
     EVT_CALL(ClearPartnerMoveHistory, NPC_PARTNER)
     EVT_CALL(EnablePartnerAI)
     EVT_THREAD
+#if VERSION_PAL
+    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(3 * DT))
+#else
         EVT_CALL(ResetCam, CAM_DEFAULT, 3)
+#endif
     EVT_END_THREAD
     EVT_RETURN
     EVT_END
@@ -109,7 +113,7 @@ EvtScript N(EVS_OnSearchBush8) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(MakeLerp, 0, 85, 20, EASING_COS_IN_OUT)
+    EVT_CALL(MakeLerp, 0, 85, 20 * DT, EASING_COS_IN_OUT)
     EVT_LABEL(0)
     EVT_CALL(UpdateLerp)
     EVT_CALL(RotateModel, MODEL_o213, LVar0, 1, 0, 0)
@@ -118,7 +122,7 @@ EvtScript N(EVS_OnSearchBush8) = {
         EVT_GOTO(0)
     EVT_END_IF
     EVT_EXEC_WAIT(N(EVS_OnSearch_HammerBush))
-    EVT_CALL(MakeLerp, 85, 0, 20, EASING_COS_IN_OUT)
+    EVT_CALL(MakeLerp, 85, 0, 20 * DT, EASING_COS_IN_OUT)
     EVT_LABEL(10)
     EVT_CALL(UpdateLerp)
     EVT_CALL(RotateModel, MODEL_o213, LVar0, 1, 0, 0)

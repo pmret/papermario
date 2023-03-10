@@ -60,6 +60,12 @@ s32 N(RecipeFoundVars)[] = {
 void N(appendGfx_records_impl)(GameRecords* records, s32 alpha) {
     s32 width;
 
+#if VERSION_PAL
+#define charset (1)
+#else
+#define charset (0)
+#endif
+
     if (alpha > 0) {
         gSPDisplayList(gMainGfxPos++, N(records_screen_gfx));
         gDPPipeSync(gMainGfxPos++);
@@ -68,22 +74,22 @@ void N(appendGfx_records_impl)(GameRecords* records, s32 alpha) {
         gDPPipeSync(gMainGfxPos++);
 
         msg_draw_frame(30, 40, 260, 155, MSG_STYLE_INSPECT, MSG_PAL_WHITE, TRUE, alpha * 0.55, alpha);
-        draw_msg(MSG_CH0_00FC, 206 - get_msg_width(MSG_CH0_00FC, 0), 50, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+        draw_msg(MSG_CH0_00FC, 206 - get_msg_width(MSG_CH0_00FC, charset), 50, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
         draw_number(gPlayerData.totalCoinsEarned, 216, 51, 1, MSG_PAL_WHITE, alpha, 2);
-        draw_msg(MSG_CH0_00FD, 206 - get_msg_width(MSG_CH0_00FD, 0), 65, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+        draw_msg(MSG_CH0_00FD, 206 - get_msg_width(MSG_CH0_00FD, charset), 65, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
         draw_number(records->equippedBadges, 231, 66, 1, MSG_PAL_WHITE, alpha, 3);
         draw_msg(MSG_MenuTip_0034, 232, 63, alpha, MSG_PAL_WHITE, 0);
         draw_number(80, 244, 66, 1, MSG_PAL_WHITE, alpha, 2);
         if (gPlayerData.starPiecesCollected == 0) {
             draw_msg(MSG_CH0_00FA, 109, 80, alpha, MSG_PAL_WHITE, 1);
         } else {
-            draw_msg(MSG_CH0_00FB, 206 - get_msg_width(MSG_CH0_00FB, 0), 80, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+            draw_msg(MSG_CH0_00FB, 206 - get_msg_width(MSG_CH0_00FB, charset), 80, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
             draw_number(gPlayerData.starPiecesCollected, 231, 81, 1, MSG_PAL_WHITE, alpha, 3);
             draw_msg(MSG_MenuTip_0034, 232, 78, alpha, MSG_PAL_WHITE, 0);
             draw_number(160, 244, 80, 1, MSG_PAL_WHITE, alpha, 2);
         }
 
-        width = get_msg_width(MSG_CH0_00FE, 0);
+        width = get_msg_width(MSG_CH0_00FE, charset);
         if (records->recipesFoundCount == 0) {
             draw_msg(MSG_CH0_00FA, 110, 95, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
         } else {
@@ -101,27 +107,29 @@ void N(appendGfx_records_impl)(GameRecords* records, s32 alpha) {
         if (gPlayerData.quizzesAnswered == 0) {
             draw_msg(MSG_CH0_00FA, 109, 110, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
         } else {
-            draw_msg(MSG_CH0_00FF, 206 - get_msg_width(MSG_CH0_00FF, 0), 110, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+            draw_msg(MSG_CH0_00FF, 206 - get_msg_width(MSG_CH0_00FF, charset), 110, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
             draw_number(gPlayerData.quizzesCorrect, 231, 111, 1, MSG_PAL_WHITE, alpha, 3);
             draw_msg(MSG_MenuTip_0034, 232, 108, alpha, MSG_PAL_WHITE, 0);
             draw_number(gPlayerData.quizzesAnswered, 244, 111, 1, MSG_PAL_WHITE, alpha, 2);
         }
 
-        draw_msg(MSG_CH0_00F4, 206 - get_msg_width(MSG_CH0_00F4, 0), 125, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+        draw_msg(MSG_CH0_00F4, 206 - get_msg_width(MSG_CH0_00F4, charset), 125, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
         draw_number(gPlayerData.battlesCount, 216, 126, 1, MSG_PAL_WHITE, alpha, 2);
-        width = get_msg_width(MSG_CH0_00F7, 0);
+        width = get_msg_width(MSG_CH0_00F7, charset);
         draw_msg(MSG_CH0_00F7, 206 - width, 140, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
         draw_number(gPlayerData.playerFirstStrikes, 216, 141, 1, MSG_PAL_WHITE, alpha, 2);
-        draw_msg(MSG_CH0_00F8, 206 - get_msg_width(MSG_CH0_00F8, 0), 155, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+        draw_msg(MSG_CH0_00F8, 206 - get_msg_width(MSG_CH0_00F8, charset), 155, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
         draw_number(gPlayerData.enemyFirstStrikes, 216, 156, 1, MSG_PAL_WHITE, alpha, 2);
 
         if (gPlayerData.powerBounces == 0) {
             draw_msg(MSG_CH0_00FA, 109, 170, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
         } else {
-            draw_msg(MSG_CH0_00F9, 206 - get_msg_width(MSG_CH0_00F9, 0), 170, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+            draw_msg(MSG_CH0_00F9, 206 - get_msg_width(MSG_CH0_00F9, charset), 170, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
             draw_number(gPlayerData.powerBounces, 216, 171, 1, MSG_PAL_WHITE, alpha, 2);
         }
     }
+
+#undef charset
 }
 
 void N(appendGfx_records)(void* data) {

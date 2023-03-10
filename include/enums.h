@@ -3000,6 +3000,7 @@ enum ShadingProfile {
     SHADING_TIK_23,
     SHADING_TIK_24,
     SHADING_TIK_25,
+    SHADING_KMR_30 = 0x10000,
 };
 #endif
 

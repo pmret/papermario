@@ -34,6 +34,346 @@ segments:
     start: 0
   - [0x40, bin]
 
+  - type: group
+    dir: charset
+    vram: 0
+    start: 0x110CB0
+    subsegments:
+    - [0x110CB0, linker_offset,       standard]
+    - [0x110CB0, pm_charset,          standard, 16, 16, 0xA6]
+    - [0x115FB0, linker_offset,       standard_pal]
+    - [0x115FB0, pm_charset_palettes, standard,         0x50]
+    - [0x1164B0, linker_offset,       title]
+    - [0x1164B0, pm_charset,          title,    12, 15, 0x29]
+    - [0x117410, linker_offset,       subtitle]
+    - [0x117410, pm_charset,          subtitle, 12, 12, 0x29]
+    - [0x117F98, linker_offset,       credits_pal]
+    - [0x117F98, pm_charset_palettes, subtitle,         1]
+    - [0x117FA8, pm_charset_palettes, title,            1]
+    - [0x117FB8, ci8,     peach_letter, 150, 105]
+    - [0x11BD40, palette, peach_letter]
+    - [0x11BF40, linker_offset, postcard]
+    - [0x11BF40, ci4,     postcard, 150, 105]
+    - [0x11DE08, linker_offset, postcard_pal]
+    - [0x11DE08, palette, postcard]
+    - [0x11DE28, linker_offset, letter_content_1]
+    - [0x11DE28, ci8,     letter_content_1, 70, 95]
+    - [0x11F828, linker_offset, letter_content_1_pal]
+    - [0x11F828, palette, letter_content_1]
+    - [0x11FA28, linker_offset, letter_content_2]
+    - [0x11FA28, ci8,     letter_content_2, 70, 95]
+    - [0x121428, linker_offset, letter_content_2_pal]
+    - [0x121428, palette, letter_content_2]
+    - [0x121628, linker_offset, letter_content_3]
+    - [0x121628, ci8,     letter_content_3, 70, 95]
+    - [0x123028, linker_offset, letter_content_3_pal]
+    - [0x123028, palette, letter_content_3]
+    - [0x123228, linker_offset, letter_content_4]
+    - [0x123228, ci8,     letter_content_4, 70, 95]
+    - [0x124C28, linker_offset, letter_content_4_pal]
+    - [0x124C28, palette, letter_content_4]
+    - [0x124E28, linker_offset, letter_content_5]
+    - [0x124E28, ci8,     letter_content_5, 70, 95]
+    - [0x126828, linker_offset, letter_content_5_pal]
+    - [0x126828, palette, letter_content_5]
+    - [0x126A28, linker_offset, letter_content_6]
+    - [0x126A28, ci8,     letter_content_6, 70, 95]
+    - [0x128428, linker_offset, letter_content_6_pal]
+    - [0x128428, palette, letter_content_6]
+    - [0x128628, linker_offset, letter_content_7]
+    - [0x128628, ci8,     letter_content_7, 70, 95]
+    - [0x12A028, linker_offset, letter_content_7_pal]
+    - [0x12A028, palette, letter_content_7]
+    - [0x12A228, linker_offset, letter_content_8]
+    - [0x12A228, ci8,     letter_content_8, 70, 95]
+    - [0x12BC28, linker_offset, letter_content_8_pal]
+    - [0x12BC28, palette, letter_content_8]
+    - [0x12BE28, linker_offset, letter_content_9]
+    - [0x12BE28, ci8,     letter_content_9, 70, 95]
+    - [0x12D828, linker_offset, letter_content_9_pal]
+    - [0x12D828, palette, letter_content_9]
+    - [0x12DA28, linker_offset, letter_content_10]
+    - [0x12DA28, ci8,     letter_content_10, 70, 95]
+    - [0x12F428, linker_offset, letter_content_10_pal]
+    - [0x12F428, palette, letter_content_10]
+    - [0x12F628, linker_offset, letter_content_11]
+    - [0x12F628, ci8,     letter_content_11, 70, 95]
+    - [0x131028, linker_offset, letter_content_11_pal]
+    - [0x131028, palette, letter_content_11]
+    - [0x131228, linker_offset, letter_content_12]
+    - [0x131228, ci8,     letter_content_12, 70, 95]
+    - [0x132C28, linker_offset, letter_content_12_pal]
+    - [0x132C28, palette, letter_content_12]
+    - [0x132E28, bin] # length 0x18, non zero
+
+  - [0x132E40, bin]
+
+  - [0x1DA1E0, ci4,     icon/present, 32, 32]
+  - [0x1DA3E0, palette, icon/present]
+
+  - [0x1DA400, bin]
+
+  - name: world_model_anim_kzn_01
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x8219F0
+    vram: 0x80234000
+    subsegments:
+    - [0x8219F0, c, "01"]
+  - name: world_model_anim_kzn_00
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x822720
+    vram: 0x80234000
+    subsegments:
+    - [0x822720, c, "00"]
+  - name: world_model_anim_kzn_04
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x823170
+    vram: 0x80234000
+    subsegments:
+    - [0x823170, c, "04"]
+  - name: world_model_anim_kzn_05
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x8240C0
+    vram: 0x80234000
+    subsegments:
+    - [0x8240C0, c, "05"]
+  - name: world_model_anim_kzn_06
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x824DC0
+    vram: 0x80234000
+    subsegments:
+    - [0x824DC0, c, "06"]
+  - name: world_model_anim_kzn_07
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x825870
+    vram: 0x80234000
+    subsegments:
+    - [0x825870, c, "07"]
+  - name: world_model_anim_kzn_08
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x826310
+    vram: 0x80234000
+    subsegments:
+    - [0x826310, c, "08"]
+  - name: world_model_anim_kzn_09
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x8270E0
+    vram: 0x80234000
+    subsegments:
+    - [0x8270E0, c, "09"]
+  - name: world_model_anim_kzn_0A
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x827E10
+    vram: 0x80234000
+    subsegments:
+    - [0x827E10, c, "0A"]
+  - name: world_model_anim_kzn_0B
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x82AE60
+    vram: 0x80234000
+    subsegments:
+    - [0x82AE60, c, "0B"]
+  - name: world_model_anim_kzn_0C
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x82D750
+    vram: 0x80234000
+    subsegments:
+    - [0x82D750, c, "0C"]
+  - name: world_model_anim_kzn_0D
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x82FA90
+    vram: 0x80234000
+    subsegments:
+    - [0x82FA90, c, "0D"]
+  - name: world_model_anim_kzn_0E
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x830560
+    vram: 0x80234000
+    subsegments:
+    - [0x830560, c, "0E"]
+  - name: world_model_anim_kzn_02
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x830FE0
+    vram: 0x80234000
+    subsegments:
+    - [0x830FE0, c, "02"]
+  - name: world_model_anim_kzn_03
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x8334A0
+    vram: 0x80234000
+    subsegments:
+    - [0x8334A0, c, "03"]
+  - name: world_model_anim_kzn_0F
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x833EE0
+    vram: 0x80234000
+    subsegments:
+    - [0x833EE0, c, "0F"]
+  - name: world_model_anim_kzn_10
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x8368E0
+    vram: 0x80234000
+    subsegments:
+    - [0x8368E0, c, "10"]
+  - name: world_model_anim_kzn_11
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x839680
+    vram: 0x80234000
+    subsegments:
+    - [0x839680, c, "11"]
+  - name: world_model_anim_kzn_12
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x839BC0
+    vram: 0x80234000
+    subsegments:
+    - [0x839BC0, c, "12"]
+  - name: world_model_anim_kzn_13
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x83B080
+    vram: 0x80234000
+    subsegments:
+    - [0x83B080, c, "13"]
+  - name: world_model_anim_kzn_14
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x83BD50
+    vram: 0x80234000
+    subsegments:
+    - [0x83BD50, c, "14"]
+  - name: world_model_anim_kzn_15
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x83C8F0
+    vram: 0x80234000
+    subsegments:
+    - [0x83C8F0, c, "15"]
+  - name: world_model_anim_kzn_16
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x83D570
+    vram: 0x80234000
+    subsegments:
+    - [0x83D570, c, "16"]
+  - name: world_model_anim_kzn_17
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x83E110
+    vram: 0x80234000
+    subsegments:
+    - [0x83E110, c, "17"]
+  - name: world_model_anim_kzn_18
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x83E9F0
+    vram: 0x80234000
+    subsegments:
+    - [0x83E9F0, c, "18"]
+  - name: world_model_anim_kzn_19
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x83F2F0
+    vram: 0x80234000
+    subsegments:
+    - [0x83F2F0, c, "19"]
+  - name: world_model_anim_kzn_1A
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x841600
+    vram: 0x80234000
+    subsegments:
+    - [0x841600, c, "1A"]
+  - name: world_model_anim_kzn_1B
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x843010
+    vram: 0x80234000
+    subsegments:
+    - [0x843010, c, "1B"]
+  - name: world_model_anim_kzn_1C
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x843740
+    vram: 0x80234000
+    subsegments:
+    - [0x843740, c, "1C"]
+  - name: world_model_anim_kzn_1D
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x845080
+    vram: 0x80234000
+    subsegments:
+    - [0x845080, c, "1D"]
+  - name: world_model_anim_kzn_1E
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x845770
+    vram: 0x80234000
+    subsegments:
+    - [0x845770, c, "1E"]
+  - name: world_model_anim_kzn_1F
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x845970
+    vram: 0x80234000
+    subsegments:
+    - [0x845970, c, "1F"]
+  - name: world_model_anim_kzn_20
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x8461D0
+    vram: 0x80234000
+    subsegments:
+    - [0x8461D0, c, "20"]
+  - name: world_model_anim_kzn_21
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x848210
+    vram: 0x80234000
+    subsegments:
+    - [0x848210, c, "21"]
+  - name: world_model_anim_kzn_22
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x84AA00
+    vram: 0x80234000
+    subsegments:
+    - [0x84AA00, c, "22"]
+  - name: world_model_anim_kzn_23
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x84B340
+    vram: 0x80234000
+    subsegments:
+    - [0x84B340, c, "23"]
+  - name: world_model_anim_kzn_24
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x84C440
+    vram: 0x80234000
+    subsegments:
+    - [0x84C440, c, "24"]
+
+  - [0x84CF10, bin]
 
 ############
 ### Maps ###
@@ -453,8 +793,282 @@ segments:
     - [0x916840, c, kgr_02_2_unused]
     - [0x916E10, c, kgr_02_3_npc]
     - [0x916E40, c, kgr_02_4_extra]
+  - name: kmr_00
+    dir: world/area_kmr/kmr_00
+    type: code
+    start: 0x918220
+    vram: 0x80240000
+    subsegments:
+    - [0x918220, c, kmr_00_0_header]
+    - [0x918220, c, kmr_00_1_music]
+    - [0x918220, c, kmr_00_2_main]
+    - [0x918220, c, kmr_00_3_revival]
+    - [0x918F60, c, kmr_00_4_npc]
+    - [0x919020, c, kmr_00_5_entity]
+  - name: kmr_02
+    dir: world/area_kmr/kmr_02
+    type: code
+    start: 0x91C3B0
+    vram: 0x80240000
+    subsegments:
+    - [0x91C3B0, c, kmr_02_0_header]
+    - [0x91C3B0, c, kmr_02_1_music]
+    - [0x91C3B0, c, kmr_02_2_main]
+    - [0x91C740, c, kmr_02_3_npc]
+    - [0x91F420, c, kmr_02_4_rooms_1]
+    - [0x91F720, c, kmr_02_5_entity]
+    - [0x91F9F0, c, kmr_02_6_rooms_2]
+    - [0x91F9F0, c, kmr_02_7_kammy]
+    - [0x91FB10, c, kmr_02_8_foliage]
+    - [0x91FD50, c, kmr_02_9_images]
+    - [0x91FDF0, .data, kmr_02_0_header]
+    - [0x91FEE0, .data, kmr_02_1_music]
+    - [0x920050, .data, kmr_02_2_main]
+    - [0x921980, .data, kmr_02_3_npc]
+    - [0x92D7F0, .data, kmr_02_4_rooms_1]
+    - [0x930DD0, .data, kmr_02_5_entity]
+    - [0x931560, .data, kmr_02_6_rooms_2]
+    - [0x931A30, .data, kmr_02_7_kammy]
+    - [0x9333A0, .data, kmr_02_8_foliage]
+    - start: 0x933F00
+      type: .data
+      name: kmr_02_9_images
+      subsegments:
+      - [0x933F00, ci4, heart_block, 32, 32]
+      - [0x934100, palette, heart_block]
+      - [0x934120]
+  - name: kmr_03
+    dir: world/area_kmr/kmr_03
+    type: code
+    start: 0x934320
+    vram: 0x80240000
+    subsegments:
+    - [0x934320, c, kmr_03_0_header]
+    - [0x934320, c, kmr_03_1_music]
+    - [0x934320, c, kmr_03_2_main]
+    - [0x934320, c, kmr_03_3_npc]
+    - [0x934640, c, kmr_03_4_entity]
+    - [0x934730, c, kmr_03_5_foliage]
+    - [0x934970, c, kmr_03_6_fall_down]
+  - name: kmr_04
+    dir: world/area_kmr/kmr_04
+    type: code
+    start: 0x936C90
+    vram: 0x80240000
+    subsegments:
+    - [0x936C90, c, kmr_04_0_header]
+    - [0x936C90, c, kmr_04_1_music]
+    - [0x936C90, c, kmr_04_2_main]
+    - [0x936C90, c, kmr_04_3_npc]
+    - [0x936CF0, c, kmr_04_4_entity]
+    - [0x936CF0, c, kmr_04_5_foliage]
+    - [0x937100, .data, kmr_04_0_header]
+    - [0x9371F0, .data, kmr_04_1_music]
+    - [0x937290, .data, kmr_04_2_main]
+    - [0x9374F0, .data, kmr_04_3_npc]
+    - [0x938710, .data, kmr_04_4_entity]
+    - start: 0x938880
+      type: .data
+      name: kmr_04_5_foliage
+      subsegments:
+      - [0x938880, ci4, hammer_block_message, 48, 48]
+      - [0x938D00, palette, hammer_block_message]
+      - [0x938D20]
+  - name: kmr_05
+    dir: world/area_kmr/kmr_05
+    type: code
+    start: 0x93A400
+    vram: 0x80240000
+    subsegments:
+    - [0x93A400, c, kmr_05_0_header]
+    - [0x93A400, c, kmr_05_1_music]
+    - [0x93A400, c, kmr_05_2_main]
+    - [0x93A400, c, kmr_05_3_npc]
+    - [0x93B900, c, kmr_05_4_entity]
+    - [0x93B900, c, kmr_05_5_foliage]
+  - name: kmr_06
+    dir: world/area_kmr/kmr_06
+    type: code
+    start: 0x93D8A0
+    vram: 0x80240000
+    subsegments:
+    - [0x93D8A0, c, kmr_06_0_header]
+    - [0x93D8A0, c, kmr_06_1_music]
+    - [0x93D8A0, c, kmr_06_2_main]
+    - [0x93D8A0, c, kmr_06_3_npc]
+    - [0x93EDA0, c, kmr_06_4_entity]
+    - [0x93EDA0, c, kmr_06_5_sticker_sign]
+  - name: kmr_07
+    dir: world/area_kmr/kmr_07
+    type: code
+    start: 0x940150
+    vram: 0x80240000
+    subsegments:
+    - [0x940150, c, kmr_07_0_header]
+    - [0x940150, c, kmr_07_1_music]
+    - [0x940150, c, kmr_07_2_main]
+    - [0x940150, c, kmr_07_3_npc]
+    - [0x940C10, c, kmr_07_4_entity]
+  - name: kmr_09
+    dir: world/area_kmr/kmr_09
+    type: code
+    start: 0x942190
+    vram: 0x80240000
+    subsegments:
+    - [0x942190, c, kmr_09_0_header]
+    - [0x942190, c, kmr_09_1_music]
+    - [0x942190, c, kmr_09_2_main]
+    - [0x942190, c, kmr_09_3_npc]
+    - [0x9436C0, c, kmr_09_4_entity]
+  - name: kmr_10
+    dir: world/area_kmr/kmr_10
+    type: code
+    start: 0x944860
+    vram: 0x80240000
+    subsegments:
+    - [0x944860, c, kmr_10_0_header]
+    - [0x944860, c, kmr_10_1_music]
+    - [0x944860, c, kmr_10_2_main]
+    - [0x944860, c, kmr_10_3_npc]
+    - [0x944860, c, kmr_10_4_entity]
+    - [0x944C30, c, kmr_10_5_foliage]
+  - name: kmr_11
+    dir: world/area_kmr/kmr_11
+    type: code
+    start: 0x946490
+    vram: 0x80240000
+    subsegments:
+    - [0x946490, c, kmr_11_0_header]
+    - [0x946490, c, kmr_11_1_music]
+    - [0x946490, c, kmr_11_2_main]
+    - [0x946730, c, kmr_11_3_scenes]
+    - [0x946800, c, kmr_11_4_npc]
+    - [0x947350, c, kmr_11_5_entity]
+    - [0x9473B0, c, kmr_11_6_kammy]
+    - [0x9473B0, c, kmr_11_7_foliage]
+    - [0x9475F0, c, kmr_11_8_fortress_skeleton]
+    - [0x9475F0, c, kmr_11_9_fortress_animation]
+    - [0x9475F0, c, kmr_11_10_bridge_skeleton]
+    - [0x9475F0, c, kmr_11_11_bridge_animation]
+  - name: kmr_12
+    dir: world/area_kmr/kmr_12
+    type: code
+    start: 0x9576F0
+    vram: 0x80240000
+    subsegments:
+    - [0x9576F0, c, kmr_12_0_header]
+    - [0x9576F0, c, kmr_12_1_music]
+    - [0x9576F0, c, kmr_12_2_main]
+    - [0x9576F0, c, kmr_12_3_npc]
+    - [0x957720, c, kmr_12_4_entity]
+  - name: kmr_20
+    dir: world/area_kmr/kmr_20
+    type: code
+    start: 0x9581B0
+    vram: 0x80240000
+    subsegments:
+    - [0x9581B0, c, kmr_20_0_header]
+    - [0x9581B0, c, kmr_20_1_music]
+    - [0x9581E0, c, kmr_20_2_main]
+    - [0x9584E0, c, kmr_20_3_rooms]
+    - [0x958530, c, kmr_20_4_documents]
+    - [0x958F80, c, kmr_20_5_entity]
+    - [0x958FD0, c, kmr_20_6_trees]
+    - [0x959210, c, kmr_20_7_bushes]
+    - [0x959450, c, kmr_20_8_bed]
+    - [0x9597D0, c, kmr_20_9_npc_scenes]
+    - [0x9597D0, c, kmr_20_10_npc]
+    - [0x959930, c, kmr_20_11_npc_intro]
+    - [0x959F00, c, kmr_20_12_npc_epilogue]
+    - [0x95A350, c, kmr_20_13_records]
+    - [0x95AD60, .data, kmr_20_0_header]
+    - [0x95ADF0, .data, kmr_20_1_music]
+    - [0x95AF50, .data, kmr_20_2_main]
+    - [0x95C130, .data, kmr_20_3_rooms]
+    - [0x95C570, .data, kmr_20_4_documents]
+    - [0x95D890, .data, kmr_20_5_entity]
+    - [0x95DF90, .data, kmr_20_6_trees]
+    - [0x95E9A0, .data, kmr_20_7_bushes]
+    - [0x95F4C0, .data, kmr_20_8_bed]
+    - [0x962580, .data, kmr_20_9_npc_scenes]
+    - [0x962A60, .data, kmr_20_10_npc]
+    - [0x9660C0, .data, kmr_20_11_npc_intro]
+    - [0x969170, .data, kmr_20_12_npc_epilogue]
+    - start: 0x96AF00
+      type: .data
+      name: kmr_20_13_records
+      subsegments:
+      - [0x96AF00, gfx, records_screen]
+      - [0x96AF70]
+  - name: kmr_21
+    dir: world/area_kmr/kmr_21
+    type: code
+    start: 0x96B210
+    vram: 0x80240000
+    subsegments:
+    - [0x96B210, c, kmr_21_0_header]
+    - [0x96B220, c, kmr_21_1_main]
+  - name: kmr_22
+    dir: world/area_kmr/kmr_22
+    type: code
+    start: 0x96B9E0
+    vram: 0x80240000
+    subsegments:
+    - [0x96B9E0, c, kmr_22_0_header]
+    - [0x96B9F0, c, kmr_22_1_main]
+    - [0x96BC20, c, kmr_22_2_npc]
+    - [0x96C6F0, .data, kmr_22_0_header]
+    - [0x96C7C0, .data, kmr_22_1_main]
+    - start: 0x96CDF0
+      type: .data
+      name: kmr_22_2_npc
+      subsegments:
+      - [0x96C7C0]
+      - [0x96D2E0, ci4, lava_piranha_vine, 64, 32]
+      - [0x96D6E0, palette, lava_piranha_vine]
+      - [0x96D8E0, gfx, lava_piranha_vine]
+      - [0x96D9C0]
+  - name: kmr_23
+    dir: world/area_kmr/kmr_23
+    type: code
+    start: 0x973DA0
+    vram: 0x80240000
+    subsegments:
+    - [0x973DA0, c, kmr_23_0_header]
+    - [0x973DB0, c, kmr_23_1_main]
+    - [0x973DE0, c, kmr_23_2_npc]
+    - [0x974E70, .data, kmr_23_0_header]
+    - [0x974F30, .data, kmr_23_1_main]
+    - start: 0x975400
+      type: .data
+      name: kmr_23_2_npc
+      subsegments:
+      - [0x975400]
+      - [0x975468, ia8, window_ul, 8, 8]
+      - [0x9754A8, ia8, window_ur, 8, 8]
+      - [0x9754E8, ia8, window_ll, 8, 8]
+      - [0x975528, ia8, window_lr, 8, 8]
+      - [0x975568]
+  - name: kmr_24
+    dir: world/area_kmr/kmr_24
+    type: code
+    start: 0x9775B0
+    vram: 0x80240000
+    subsegments:
+    - [0x9775B0, c, kmr_24_0_header]
+    - [0x9775C0, c, kmr_24_1_main]
+  - name: kmr_30
+    dir: world/area_kmr/kmr_30
+    type: code
+    start: 0x977A40
+    vram: 0x80240000
+    subsegments:
+    - [0x977A40, c, kmr_30_0_header]
+    - [0x977A40, c, kmr_30_1_main]
+    - [0x977D50, c, kmr_30_2_npc]
+    - [0x977D50, c, kmr_30_3_the_end]
 
-  - [0x918220, bin]
+  - [0x978FB0, bin]
 
   - start: 0x1e937b8
     align: 8

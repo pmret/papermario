@@ -19,7 +19,7 @@ EvtScript N(EVS_NpcIdle_GoombaKing) = {
                 EVT_CALL(GetNpcPos, NPC_GoombaKing, LVar0, LVar1, LVar2)
                 EVT_CALL(AwaitPlayerApproach, LVar0, LVar2, 300)
                 EVT_CALL(DisablePlayerInput, TRUE)
-                EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0))
+                EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0 / DT))
                 EVT_CALL(PlayerMoveTo, -564, -64, 0)
             EVT_ELSE
                 EVT_LABEL(0)
@@ -40,23 +40,23 @@ EvtScript N(EVS_NpcIdle_GoombaKing) = {
         EVT_CALL(GetAngleToPlayer, NPC_RedGoombaBro, LVar3)
         EVT_CALL(AddVectorPolar, LVar0, LVar2, EVT_FLOAT(100.0), LVar3)
         EVT_CALL(PlaySoundAtNpc, NPC_RedGoombaBro, SOUND_10F, SOUND_SPACE_MODE_0)
-        EVT_CALL(NpcJump0, NPC_RedGoombaBro, LVar0, 0, LVar2, 30)
+        EVT_CALL(NpcJump0, NPC_RedGoombaBro, LVar0, 0, LVar2, 30 * DT)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(GetNpcPos, NPC_BlueGoombaBro, LVar0, LVar1, LVar2)
         EVT_CALL(GetAngleToPlayer, NPC_BlueGoombaBro, LVar3)
         EVT_CALL(AddVectorPolar, LVar0, LVar2, EVT_FLOAT(100.0), LVar3)
         EVT_CALL(PlaySoundAtNpc, NPC_BlueGoombaBro, SOUND_10F, SOUND_SPACE_MODE_0)
-        EVT_CALL(NpcJump0, NPC_BlueGoombaBro, LVar0, 0, LVar2, 30)
+        EVT_CALL(NpcJump0, NPC_BlueGoombaBro, LVar0, 0, LVar2, 30 * DT)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(GetNpcPos, NPC_GoombaKing, LVar0, LVar1, LVar2)
         EVT_CALL(GetAngleToPlayer, NPC_GoombaKing, LVar3)
         EVT_CALL(AddVectorPolar, LVar0, LVar2, EVT_FLOAT(100.0), LVar3)
         EVT_CALL(PlaySoundAtNpc, NPC_GoombaKing, SOUND_3E7, SOUND_SPACE_MODE_0)
-        EVT_CALL(NpcJump0, NPC_GoombaKing, LVar0, 0, LVar2, 30)
+        EVT_CALL(NpcJump0, NPC_GoombaKing, LVar0, 0, LVar2, 30 * DT)
     EVT_END_THREAD
-    EVT_WAIT(15)
+    EVT_WAIT(15 * DT)
     EVT_CALL(StartBossBattle, SONG_GOOMBA_KING_BATTLE)
     EVT_RETURN
     EVT_END
@@ -74,9 +74,9 @@ EvtScript N(EVS_Scene_BossDefeated) = {
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_CALL(N(SetCameraVFov), 25)
     EVT_CALL(SpeakToPlayer, NPC_GoombaKing, ANIM_GoombaKing_Walk, ANIM_GoombaKing_Idle, 0, MSG_CH0_00D1)
-    EVT_CALL(SetNpcSpeed, NPC_BlueGoombaBro, EVT_FLOAT(6.0))
-    EVT_CALL(SetNpcSpeed, NPC_RedGoombaBro, EVT_FLOAT(6.0))
-    EVT_CALL(SetNpcSpeed, NPC_GoombaKing, EVT_FLOAT(6.0))
+    EVT_CALL(SetNpcSpeed, NPC_BlueGoombaBro, EVT_FLOAT(6.0 / DT))
+    EVT_CALL(SetNpcSpeed, NPC_RedGoombaBro, EVT_FLOAT(6.0 / DT))
+    EVT_CALL(SetNpcSpeed, NPC_GoombaKing, EVT_FLOAT(6.0 / DT))
     EVT_CALL(SetNpcAnimation, NPC_BlueGoombaBro, ANIM_GoombaBros_Blue_Run)
     EVT_CALL(SetNpcAnimation, NPC_RedGoombaBro, ANIM_GoombaBros_Red_Run)
     EVT_CALL(SetNpcAnimation, NPC_GoombaKing, ANIM_GoombaKing_Run)
@@ -102,7 +102,7 @@ EvtScript N(EVS_Scene_BossDefeated) = {
     EVT_IF_EQ(LVar1, 1)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_WAIT(5)
+    EVT_WAIT(5 * DT)
     EVT_CALL(MakeLerp, 90, 0, 20, EASING_COS_IN_OUT)
     EVT_LABEL(1)
     EVT_CALL(UpdateLerp)
@@ -116,16 +116,16 @@ EvtScript N(EVS_Scene_BossDefeated) = {
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 5, EVT_FLOAT(2.0))
     EVT_SET(GB_StoryProgress, STORY_CH0_DEFEATED_GOOMBA_KING)
     EVT_EXEC(N(EVS_SetupMusic))
-    EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(4.0), 0, EVT_FLOAT(250.0), EVT_FLOAT(15.0), EVT_FLOAT(-7.5))
-    EVT_WAIT(10)
+    EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(4.0 / DT), 0, EVT_FLOAT(250.0), EVT_FLOAT(15.0), EVT_FLOAT(-7.5))
+    EVT_WAIT(10 * DT)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 0, MSG_CH0_00D2)
     EVT_CALL(EnablePartnerAI)
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_THREAD
         EVT_WAIT(40)
-        EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(4.0))
+        EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(4.0 / DT))
         EVT_CALL(DisablePlayerInput, FALSE)
     EVT_END_THREAD
     EVT_CALL(SetNpcPos, NPC_BlueGoombaBro, NPC_DISPOSE_LOCATION)
