@@ -1590,8 +1590,53 @@ segments:
     subsegments:
     - [0x9C7240, c, sbk_99_1_main]
     - [0x9C7240, c, sbk_99_2_entity]
+  - name: dro_01
+    dir: world/area_dro/dro_01
+    type: code
+    start: 0x9C7590
+    vram: 0x80240000
+    subsegments:
+    - [0x9C7590, c, dro_01_0_header]
+    - [0x9C7590, c, dro_01_1_music]
+    - [0x9C7590, c, dro_01_2_main]
+    - [0x9C7B70, c, dro_01_3_npc]
+    - [0x9CA9F0, c, dro_01_4_shop]
+    - [0x9CAB30, c, dro_01_5_rooms]
+    - [0x9CAB30, c, dro_01_6_entity]
+    - [0x9CAE10, c, dro_01_7_foliage]
+  - name: dro_02
+    dir: world/area_dro/dro_02
+    type: code
+    start: 0x9D55A0
+    vram: 0x80240000
+    subsegments:
+    - [0x9D55A0, c, dro_02_0_header]
+    - [0x9D55A0, c, dro_02_1_music]
+    - [0x9D55A0, c, dro_02_2_entity]
+    - [0x9D55A0, c, dro_02_3_main]
+    - [0x9D58A0, c, dro_02_4_rooms]
+    - [0x9D58A0, c, dro_02_5_npc]
+    - [0x9D9010, .data, dro_02_0_header]
+    - [0x9D9090, .data, dro_02_1_music]
+    - [0x9D9170, .data, dro_02_2_entity]
+    - [0x9D91E0, .data, dro_02_3_main]
+    - [0x9D9760, .data, dro_02_4_rooms]
+    - start: 0x9DA380
+      type: .data
+      name: dro_02_5_npc
+      subsegments:
+      - [0x9DA380]
+      - [0x9DCBC8, ci4, card, 32, 32]
+      - [0x9DCDC8, palette, card]
+      - [0x9DCDE8, vtx, card_1]
+      - [0x9DCE68, vtx, card_2]
+      - [0x9DCEA8, gfx, card_setup]
+      - [0x9DCF98, gfx, card_1]
+      - [0x9DD018, gfx, card_2]
+      - [0x9DD060]
+    - [0x9E44F0]
 
-  - [0x9C7590, bin]
+  - [0x9E4560, bin]
 
   - start: 0x1e937b8
     align: 8

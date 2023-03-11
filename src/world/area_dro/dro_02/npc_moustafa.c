@@ -23,7 +23,7 @@ EvtScript N(EVS_Moustafa_SetCamBetween) = {
     EVT_DIV(LVar2, 2)
     EVT_ADD(LVar1, 15)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(8.0))
+    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(8.0 / DT))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_RETURN
@@ -32,7 +32,7 @@ EvtScript N(EVS_Moustafa_SetCamBetween) = {
 
 EvtScript N(EVS_Moustafa_ResetCam) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0))
+    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0 / DT))
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_RETURN
     EVT_END
@@ -43,12 +43,12 @@ EvtScript N(EVS_Moustafa_Unveiling) = {
     EVT_CALL(SetNpcFlagBits, NPC_DisguisedMoustafa, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_Moustafa, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(SetNpcAnimation, NPC_DisguisedMoustafa, ANIM_DisguisedMoustafa_GrabCloak)
-    EVT_WAIT(30)
+    EVT_WAIT(30 * DT)
     EVT_CALL(SetNpcAnimation, NPC_DisguisedMoustafa, ANIM_DisguisedMoustafa_ThrownCloak)
     EVT_CALL(SetNpcAnimation, NPC_Moustafa, ANIM_Moustafa_Toss)
     EVT_CALL(SetNpcPos, NPC_Moustafa, -335, 163, -260)
     EVT_EXEC(N(EVS_PlayMoustafaMusic))
-    EVT_CALL(MakeLerp, 0, 80, 30, EASING_CUBIC_OUT)
+    EVT_CALL(MakeLerp, 0, 80, 30 * DT, EASING_CUBIC_OUT)
     EVT_LABEL(10)
     EVT_CALL(UpdateLerp)
     EVT_SET(LVar2, -335)
@@ -65,7 +65,7 @@ EvtScript N(EVS_Moustafa_Unveiling) = {
     EVT_CALL(SetNpcAnimation, NPC_Moustafa, ANIM_Moustafa_Idle)
     EVT_CALL(SetNpcFlagBits, NPC_DisguisedMoustafa, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
     EVT_CALL(SetNpcFlagBits, NPC_Moustafa, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-    EVT_WAIT(30)
+    EVT_WAIT(30 * DT)
     EVT_RETURN
     EVT_END
 };
@@ -184,11 +184,11 @@ EvtScript N(EVS_NpcInteract_Moustafa) = {
             EVT_EXEC(N(EVS_Moustafa_ResetCam))
         EVT_CASE_LT(STORY_CH2_GOT_PULSE_STONE)
             EVT_THREAD
-                EVT_WAIT(10)
+                EVT_WAIT(10 * DT)
                 EVT_CALL(func_802D2C14, 1)
             EVT_END_THREAD
             EVT_CALL(SetNpcFlagBits, NPC_DisguisedMoustafa, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-            EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0))
+            EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0 / DT))
             EVT_CALL(PlayerMoveTo, -391, -260, 0)
             EVT_CALL(InterpPlayerYaw, 90, 3)
             EVT_CALL(SetNpcFlagBits, NPC_DisguisedMoustafa, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
@@ -200,22 +200,22 @@ EvtScript N(EVS_NpcInteract_Moustafa) = {
                 EVT_EXEC_WAIT(N(EVS_Moustafa_Unveiling))
                 EVT_CALL(func_802D2C14, 0)
                 EVT_CALL(SetNpcJumpscale, NPC_Moustafa, EVT_FLOAT(1.0))
-                EVT_CALL(NpcJump0, NPC_Moustafa, -425, 140, -206, 20)
+                EVT_CALL(NpcJump0, NPC_Moustafa, -425, 140, -206, 20 * DT)
                 EVT_CALL(SpeakToPlayer, NPC_Moustafa, ANIM_Moustafa_Shout, ANIM_Moustafa_Idle, 0, MSG_CH2_00C4)
             EVT_ELSE
                 EVT_CALL(SpeakToPlayer, NPC_DisguisedMoustafa, ANIM_DisguisedMoustafa_Talk, ANIM_DisguisedMoustafa_Idle, 0, MSG_CH2_00C5)
                 EVT_EXEC_WAIT(N(EVS_Moustafa_Unveiling))
                 EVT_CALL(func_802D2C14, 0)
                 EVT_CALL(SetNpcJumpscale, NPC_Moustafa, EVT_FLOAT(1.0))
-                EVT_CALL(NpcJump0, NPC_Moustafa, -425, 140, -206, 20)
+                EVT_CALL(NpcJump0, NPC_Moustafa, -425, 140, -206, 20 * DT)
                 EVT_CALL(SpeakToPlayer, NPC_Moustafa, ANIM_Moustafa_Shout, ANIM_Moustafa_Idle, 0, MSG_CH2_00C6)
             EVT_END_IF
             EVT_CALL(SetNpcJumpscale, NPC_Moustafa, EVT_FLOAT(1.0))
-            EVT_CALL(NpcJump0, NPC_Moustafa, -337, 140, -200, 20)
+            EVT_CALL(NpcJump0, NPC_Moustafa, -337, 140, -200, 20 * DT)
             EVT_CALL(SpeakToPlayer, NPC_Moustafa, ANIM_Moustafa_Shout, ANIM_Moustafa_Idle, 0, MSG_CH2_00C7)
             EVT_CALL(SpeakToPlayer, NPC_Moustafa, ANIM_Moustafa_Shout, ANIM_Moustafa_Idle, 0, MSG_CH2_00C8)
             EVT_CALL(SetNpcJumpscale, NPC_Moustafa, EVT_FLOAT(1.0))
-            EVT_CALL(NpcJump0, NPC_Moustafa, -335, 163, -260, 20)
+            EVT_CALL(NpcJump0, NPC_Moustafa, -335, 163, -260, 20 * DT)
             EVT_CALL(SpeakToPlayer, NPC_Moustafa, ANIM_Moustafa_Shout, ANIM_Moustafa_Idle, 0, MSG_CH2_00C9)
             EVT_GIVE_KEY_REWARD(ITEM_PULSE_STONE)
             EVT_SET(GB_StoryProgress, STORY_CH2_GOT_PULSE_STONE)
