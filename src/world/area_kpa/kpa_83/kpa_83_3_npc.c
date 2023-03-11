@@ -157,10 +157,10 @@ EvtScript N(EVS_KoopaBros_FlingAway) = {
 EvtScript N(EVS_NpcIdle_Door) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0))
+    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0 / DT))
     EVT_CALL(PlayerMoveTo, -150, LVar2, 0)
     EVT_CALL(SetCamType, CAM_DEFAULT, 6, FALSE)
-    EVT_SET(LVar6, EVT_FLOAT(3.0))
+    EVT_SET(LVar6, EVT_FLOAT(3.0 / DT))
     EVT_EXEC_WAIT(N(EVS_FocusCam_LookAtDoor))
     EVT_SET(MF_DoneIntroMessage, FALSE)
     EVT_THREAD
@@ -294,14 +294,14 @@ EvtScript N(EVS_NpcIdle_Door) = {
     EVT_CALL(SetNpcAnimation, NPC_KoopaBrosYlw, ANIM_KoopaBros_Yellow_Anim1A)
     EVT_CALL(SetNpcAnimation, NPC_KoopaBrosGrn, ANIM_KoopaBros_Green_Anim1A)
     EVT_THREAD
-        EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0))
+        EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0 / DT))
         EVT_CALL(PlayerMoveTo, -50, 150, 0)
     EVT_END_THREAD
     EVT_CALL(SpeakToPlayer, NPC_KoopaBrosRed, ANIM_KoopaBros_Red_Anim1A, ANIM_KoopaBros_Red_Anim1A, 0, MSG_CH8_0054)
     EVT_SET(LVar3, 0)
     EVT_SET(LVar4, 0)
     EVT_SET(LVar5, 150)
-    EVT_SET(LVar6, EVT_FLOAT(3.0))
+    EVT_SET(LVar6, EVT_FLOAT(3.0 / DT))
     EVT_EXEC_WAIT(N(EVS_FocusCam_MidRoom))
     EVT_CALL(SetNpcAnimation, NPC_KoopaBrosRed, ANIM_KoopaBros_Red_Anim04)
     EVT_CALL(SetNpcAnimation, NPC_KoopaBrosBlk, ANIM_KoopaBros_Black_Anim04)
@@ -314,7 +314,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
     EVT_ELSE
         EVT_CALL(ContinueSpeech, NPC_KoopaBrosRed, ANIM_KoopaBros_Red_Anim14, ANIM_KoopaBros_Red_Anim04, 0, MSG_CH8_0057)
     EVT_END_IF
-    EVT_SET(LVar6, EVT_FLOAT(3.0))
+    EVT_SET(LVar6, EVT_FLOAT(3.0 / DT))
     EVT_EXEC_WAIT(N(EVS_FocusCam_LookAtDoor))
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Idle, ANIM_Toad_Red_Idle, 0, MSG_CH8_0058)
     EVT_SET(LVar3, 0)
@@ -407,13 +407,13 @@ EvtScript N(EVS_NpcIdle_Door) = {
     EVT_SET(LVar3, 100)
     EVT_SET(LVar4, 0)
     EVT_SET(LVar5, 150)
-    EVT_SET(LVar6, EVT_FLOAT(3.0))
+    EVT_SET(LVar6, EVT_FLOAT(3.0 / DT))
     EVT_EXEC_WAIT(N(EVS_FocusCam_JrTroopa))
     EVT_CALL(SpeakToPlayer, NPC_JrTroopa, ANIM_JrTroopa_Talk, ANIM_JrTroopa_Idle, 0, MSG_CH8_005C)
     EVT_SET(LVar3, 0)
     EVT_SET(LVar4, 0)
     EVT_SET(LVar5, 150)
-    EVT_SET(LVar6, EVT_FLOAT(3.0))
+    EVT_SET(LVar6, EVT_FLOAT(3.0 / DT))
     EVT_EXEC_WAIT(N(EVS_FocusCam_AfterBattle))
     EVT_CALL(SetNpcAnimation, NPC_JrTroopa, ANIM_JrTroopa_ChargeArmsUp)
     EVT_THREAD
@@ -431,7 +431,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
         EVT_SET(LVar3, 0)
         EVT_SET(LVar4, 0)
         EVT_SET(LVar5, 150)
-        EVT_SET(LVar6, EVT_FLOAT(3.0))
+        EVT_SET(LVar6, EVT_FLOAT(3.0 / DT))
         EVT_EXEC_WAIT(N(EVS_FocusCam_AfterBattle))
         EVT_CALL(ShowMessageAtScreenPos, MSG_CH8_0062, 160, 40)
         EVT_SET(MV_Sync_AfterBattleCamMovement, 1)
@@ -449,7 +449,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_SET(LVar6, EVT_FLOAT(3.0))
+    EVT_SET(LVar6, EVT_FLOAT(3.0 / DT))
     EVT_EXEC_WAIT(N(EVS_FocusCam_LookAtDoor))
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Toad_Red_Idle, ANIM_Toad_Red_Idle, 0, MSG_CH8_0063)
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)

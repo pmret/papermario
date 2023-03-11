@@ -42,7 +42,7 @@ EvtScript N(EVS_Scene_LavaShutoff) = {
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(350.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.0))
+    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.0 / DT))
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 330, 230, -150)
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_WAIT(1)
@@ -51,7 +51,7 @@ EvtScript N(EVS_Scene_LavaShutoff) = {
     EVT_THREAD
         EVT_CALL(N(MuteAmbience))
         EVT_SETF(LVar2, 1)
-        EVT_CALL(MakeLerp, 0, -20, 100, EASING_LINEAR)
+        EVT_CALL(MakeLerp, 0, -20, 100 * DT, EASING_LINEAR)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
             EVT_ADDF(LVar2, EVT_FLOAT(-0.01))
@@ -64,8 +64,8 @@ EvtScript N(EVS_Scene_LavaShutoff) = {
             EVT_END_IF
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_WAIT(50)
-    EVT_CALL(MakeLerp, 0, 255, 50, EASING_LINEAR)
+    EVT_WAIT(50 * DT)
+    EVT_CALL(MakeLerp, 0, 255, 50 * DT, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
         EVT_CALL(N(SetScreenBlackFadeAmount), LVar0)
@@ -89,7 +89,7 @@ EvtScript N(EVS_Scene_LavaShutoff) = {
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o954, COLLIDER_FLAGS_UPPER_MASK)
     EVT_SET(GF_KPA16_ShutOffLava, TRUE)
     EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_CALL(MakeLerp, 255, 0, 50, EASING_LINEAR)
+    EVT_CALL(MakeLerp, 255, 0, 50 * DT, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
         EVT_CALL(N(SetScreenBlackFadeAmount), LVar0)
@@ -98,7 +98,7 @@ EvtScript N(EVS_Scene_LavaShutoff) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_WAIT(60)
+    EVT_WAIT(60 * DT)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(GetCurrentPartnerID, LVar0)
     EVT_SWITCH(LVar0)
@@ -127,17 +127,17 @@ EvtScript N(EVS_Scene_LavaShutoff) = {
 
 EvtScript N(EVS_ChargeAtPlayer) = {
     EVT_CHILD_THREAD
-        EVT_WAIT(15)
-        EVT_CALL(SetNpcSpeed, NPC_Koopatrol_01, EVT_FLOAT(3.0))
+        EVT_WAIT(15 * DT)
+        EVT_CALL(SetNpcSpeed, NPC_Koopatrol_01, EVT_FLOAT(3.0 / DT))
         EVT_CALL(NpcMoveTo, NPC_Koopatrol_01, 650, -145, 0)
     EVT_END_CHILD_THREAD
     EVT_CHILD_THREAD
-        EVT_WAIT(10)
-        EVT_CALL(SetNpcSpeed, NPC_Koopatrol_03, EVT_FLOAT(3.5))
+        EVT_WAIT(10 * DT)
+        EVT_CALL(SetNpcSpeed, NPC_Koopatrol_03, EVT_FLOAT(3.5 / DT))
         EVT_CALL(NpcMoveTo, NPC_Koopatrol_03, 650, -165, 0)
     EVT_END_CHILD_THREAD
-    EVT_WAIT(5)
-    EVT_CALL(SetNpcSpeed, NPC_Koopatrol_02, EVT_FLOAT(4.0))
+    EVT_WAIT(5 * DT)
+    EVT_CALL(SetNpcSpeed, NPC_Koopatrol_02, EVT_FLOAT(4.0 / DT))
     EVT_CALL(NpcMoveTo, NPC_Koopatrol_02, 650, -120, 0)
     EVT_RETURN
     EVT_END
@@ -164,7 +164,7 @@ EvtScript N(EVS_NpcIdle_Guards) = {
     EVT_CALL(ShowEmote, NPC_Koopatrol_01, EMOTE_EXCLAMATION, 0, 15, EMOTER_NPC, 0, 0, 0, 0)
     EVT_CALL(ShowEmote, NPC_Koopatrol_02, EMOTE_EXCLAMATION, 0, 15, EMOTER_NPC, 0, 0, 0, 0)
     EVT_CALL(ShowEmote, NPC_Koopatrol_03, EMOTE_EXCLAMATION, 0, 15, EMOTER_NPC, 0, 0, 0, 0)
-    EVT_WAIT(15)
+    EVT_WAIT(15 * DT)
     EVT_CALL(InterpNpcYaw, NPC_Koopatrol_01, 90, 0)
     EVT_CALL(InterpNpcYaw, NPC_Koopatrol_02, 90, 0)
     EVT_CALL(InterpNpcYaw, NPC_Koopatrol_03, 90, 0)
@@ -172,7 +172,7 @@ EvtScript N(EVS_NpcIdle_Guards) = {
     EVT_CALL(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim06)
     EVT_CALL(SetNpcAnimation, NPC_Koopatrol_02, ANIM_WorldKoopatrol_Anim06)
     EVT_CALL(SetNpcAnimation, NPC_Koopatrol_03, ANIM_WorldKoopatrol_Anim06)
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 555, 230, -150)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 555, 230, -150)
     EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(300.0))
@@ -181,20 +181,20 @@ EvtScript N(EVS_NpcIdle_Guards) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_THREAD
-        EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0))
+        EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0 / DT))
         EVT_CALL(PlayerMoveTo, 680, -145, 0)
         EVT_CALL(InterpPlayerYaw, 270, 0)
     EVT_END_THREAD
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_THREAD
-        EVT_WAIT(30)
+        EVT_WAIT(30 * DT)
         EVT_CALL(SetNpcAnimation, NPC_Koopatrol_02, ANIM_WorldKoopatrol_Anim06)
-        EVT_CALL(SetNpcSpeed, NPC_Koopatrol_02, EVT_FLOAT(4.0))
+        EVT_CALL(SetNpcSpeed, NPC_Koopatrol_02, EVT_FLOAT(4.0 / DT))
         EVT_LABEL(10)
         EVT_CALL(NpcMoveTo, NPC_Koopatrol_02, 550, -165, 0)
-        EVT_WAIT(5)
+        EVT_WAIT(5 * DT)
         EVT_CALL(NpcMoveTo, NPC_Koopatrol_02, 510, -165, 0)
-        EVT_WAIT(5)
+        EVT_WAIT(5 * DT)
         EVT_CALL(GetSelfVar, 0, LVar0)
         EVT_IF_EQ(LVar0, 0)
             EVT_GOTO(10)
@@ -208,7 +208,7 @@ EvtScript N(EVS_NpcIdle_Guards) = {
         EVT_WAIT(5)
         EVT_CALL(SetNpcJumpscale, NPC_Koopatrol_03, EVT_FLOAT(1.0))
         EVT_CALL(GetNpcPos, NPC_Koopatrol_03, LVar0, LVar1, LVar2)
-        EVT_CALL(NpcJump0, NPC_Koopatrol_03, LVar0, LVar1, LVar2, 20)
+        EVT_CALL(NpcJump0, NPC_Koopatrol_03, LVar0, LVar1, LVar2, 20 * DT)
     EVT_END_THREAD
     EVT_CALL(SpeakToPlayer, NPC_Koopatrol_03, ANIM_WorldKoopatrol_Anim06, ANIM_WorldKoopatrol_Anim06, 0, MSG_CH8_0018)
     EVT_CALL(SetSelfVar, 0, 1)
@@ -225,9 +225,9 @@ EvtScript N(EVS_NpcIdle_Guards) = {
     EVT_CALL(SetNpcAnimation, NPC_Koopatrol_03, ANIM_WorldKoopatrol_Anim01)
     EVT_CALL(SpeakToPlayer, NPC_Magikoopa, ANIM_Magikoopa_Anim02, ANIM_Magikoopa_Anim01, 0, MSG_CH8_0019)
     EVT_THREAD
-        EVT_WAIT(15)
+        EVT_WAIT(15 * DT)
         EVT_CALL(InterpNpcYaw, NPC_Koopatrol_03, 90, 0)
-        EVT_WAIT(10)
+        EVT_WAIT(10 * DT)
         EVT_CALL(InterpNpcYaw, NPC_Koopatrol_01, 90, 0)
     EVT_END_THREAD
     EVT_CALL(SpeakToPlayer, NPC_Koopatrol_02, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, MSG_CH8_001A)
@@ -244,7 +244,7 @@ EvtScript N(EVS_NpcIdle_Guards) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_WAIT(30)
+        EVT_WAIT(30 * DT)
         EVT_CALL(SetNpcPos, NPC_Koopatrol_01, NPC_DISPOSE_LOCATION)
         EVT_CALL(SetNpcPos, NPC_Koopatrol_02, NPC_DISPOSE_LOCATION)
         EVT_CALL(SetNpcPos, NPC_Koopatrol_03, NPC_DISPOSE_LOCATION)
