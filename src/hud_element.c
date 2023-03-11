@@ -275,8 +275,8 @@ void hud_element_draw_rect(HudElement* hudElement, s16 texSizeX, s16 texSizeY, s
     s32 uly, lry, ulx, lrx;
     s32 masks, maskt;
     s32 screenPosOffsetScaledX, screenPosOffsetScaledY;
-    u8* imageAddr;
-    u8* paletteAddr;
+    IMG_PTR imageAddr;
+    PAL_PTR paletteAddr;
     s16 baseX, baseY;
     s32 tileMode;
     u32 flags1, flags2;
@@ -284,7 +284,7 @@ void hud_element_draw_rect(HudElement* hudElement, s16 texSizeX, s16 texSizeY, s
     s16 tempX, tempY;
 
     imageAddr = hudElement->imageAddr;
-    paletteAddr = hudElement->paletteAddr;
+    paletteAddr = (u16*) hudElement->paletteAddr;
 
     screenPosOffsetScaledX = hudElement->screenPosOffset.x * 1024;
     screenPosOffsetScaledY = hudElement->screenPosOffset.y * 1024;
@@ -1406,8 +1406,6 @@ void render_hud_elements_frontUI(void) {
     }
 }
 
-//issues with vtx assingment in case 2
-#ifdef NON_EQUIVALENT
 void render_hud_element(HudElement* hudElement) {
     Matrix4f sp20;
     Matrix4f sp60;
@@ -1420,18 +1418,17 @@ void render_hud_element(HudElement* hudElement) {
     Matrix4f sp220;
     Matrix4f sp260;
     FoldImageRecPart sp2A0;
-    f32 phi_f24, phi_f20;
+    f32 xScaleFactor, yScaleFactor;
     s32 height, width;
     HudTransform* transform;
     s32 mode;
     u32 flags;
-    u8* raster;
-    u8* palette;
+    IMG_PTR raster;
+    PAL_PTR palette;
     u32 a0, v1;
-    int nv2;
-    s32 nv;
     s32 ulx, uly, lrx, lry;
     Vtx* vtx;
+    Vtx* vtx2;
 
     if (hudElement->flags & HUD_ELEMENT_FLAG_FILTER_TEX) {
         gDPSetTextureFilter(gMainGfxPos++, G_TF_AVERAGE);
@@ -1440,20 +1437,20 @@ void render_hud_element(HudElement* hudElement) {
     }
 
     if (!(hudElement->flags & HUD_ELEMENT_FLAG_FIXEDSCALE)) {
-        phi_f24 = 1.0f;
-        phi_f20 = 1.0f;
+        xScaleFactor = 1.0f;
+        yScaleFactor = 1.0f;
     } else {
         if (!(hudElement->flags & HUD_ELEMENT_FLAG_CUSTOM_SIZE)) {
-            phi_f24 = gHudElementSizes[hudElement->tileSizePreset].width;
-            phi_f20 = gHudElementSizes[hudElement->tileSizePreset].height;
+            xScaleFactor = gHudElementSizes[hudElement->tileSizePreset].width;
+            yScaleFactor = gHudElementSizes[hudElement->tileSizePreset].height;
         } else {
-            phi_f24 = hudElement->customImageSize.x;
-            phi_f20 = hudElement->customImageSize.y;
+            xScaleFactor = hudElement->customImageSize.x;
+            yScaleFactor = hudElement->customImageSize.y;
         }
-        phi_f24 /= hudElement->unkImgScale[0];
-        phi_f24 = 1.0f / phi_f24;
-        phi_f20 /= hudElement->unkImgScale[1];
-        phi_f20 = 1.0f / phi_f20;
+        xScaleFactor /= hudElement->unkImgScale[0];
+        xScaleFactor = 1.0f / xScaleFactor;
+        yScaleFactor /= hudElement->unkImgScale[1];
+        yScaleFactor = 1.0f / yScaleFactor;
     }
 
     if (!(hudElement->flags & HUD_ELEMENT_FLAG_CUSTOM_SIZE)) {
@@ -1468,15 +1465,17 @@ void render_hud_element(HudElement* hudElement) {
 
     guTranslateF(sp1E0, transform->pivot.x, -transform->pivot.y, 0.0f);
     guTranslateF(sp220, -transform->pivot.x, transform->pivot.y, 0.0f);
-    guTranslateF(sp1A0, hudElement->renderPosX + hudElement->screenPosOffset.x + hudElement->worldPosOffset.x + transform->position.x,
-                        -hudElement->renderPosY - hudElement->screenPosOffset.y + hudElement->worldPosOffset.y + transform->position.y,
-                        - (hudElement->worldPosOffset.z / 10.0) + transform->position.z);
-    guScaleF(sp260, hudElement->uniformScale * phi_f24 * transform->scale.x,
-                    hudElement->uniformScale * phi_f20 * transform->scale.y,
+    guTranslateF(
+        sp1A0,
+        hudElement->renderPosX + hudElement->screenPosOffset.x + hudElement->worldPosOffset.x + transform->position.x,
+        -hudElement->renderPosY - hudElement->screenPosOffset.y + hudElement->worldPosOffset.y + transform->position.y,
+        - (hudElement->worldPosOffset.z / 10.0) + transform->position.z
+    );
+    guScaleF(sp260, hudElement->uniformScale * xScaleFactor * transform->scale.x,
+                    hudElement->uniformScale * yScaleFactor * transform->scale.y,
                     transform->scale.z);
     guRotateF(sp120, transform->rotation.y, 0.0f, 1.0f, 0.0f);
     guRotateF(sp160, transform->rotation.z, 0.0f, 0.0f, 1.0f);
-    nv = HUD_ELEMENT_FLAG_FMT_CI4;
     guRotateF(spE0, transform->rotation.x, 1.0f, 0.0f, 0.0f);
     guMtxCatF(sp160, spE0, sp20);
     guMtxCatF(sp20, sp120, spA0);
@@ -1485,11 +1484,12 @@ void render_hud_element(HudElement* hudElement) {
     guMtxCatF(sp60, sp220, sp20);
     guMtxCatF(sp20, sp1A0, sp60);
     guMtxF2L(sp60, &gDisplayContext->matrixStack[gMatrixListPos]);
-    gSPMatrix(gMainGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]),
+              G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     mode = 0;
     a0 = mode;
-    a0 = (hudElement->flags & nv) > a0;
+    a0 = (hudElement->flags & HUD_ELEMENT_FLAG_FMT_CI4) > a0;
     v1 = mode < (hudElement->flags & HUD_ELEMENT_FLAG_FMT_IA8);
 
     if (a0 == TRUE) {
@@ -1524,12 +1524,12 @@ void render_hud_element(HudElement* hudElement) {
             }
 
             sp2A0.raster = hudElement->imageAddr;
-            palette = hudElement->paletteAddr;
+            palette = (u16*) hudElement->paletteAddr;
+            sp2A0.width = width;
+            sp2A0.height = height;
             sp2A0.xOffset = -width / 2;
             sp2A0.yOffset = height / 2;
-            sp2A0.width = width;
             sp2A0.opacity = 255;
-            sp2A0.height = height;
             sp2A0.palette = palette;
 
             if (hudElement->flags & HUD_ELEMENT_FLAG_NO_FOLD) {
@@ -1543,44 +1543,41 @@ void render_hud_element(HudElement* hudElement) {
             }
             break;
         case 2:
-            vtx = transform->unk_30[D_80159180].vtx;
-            memcpy(&transform->unk_30[D_80159180].vtx[0], &D_8014F0C8[0], sizeof(Vtx));
-            memcpy(&transform->unk_30[D_80159180].vtx[1], &D_8014F0C8[1], sizeof(Vtx));
-            memcpy(&transform->unk_30[D_80159180].vtx[2], &D_8014F0C8[2], sizeof(Vtx));
-            memcpy(&transform->unk_30[D_80159180].vtx[3], &D_8014F0C8[3], sizeof(Vtx));
+            transform->unk_30[D_80159180].vtx[0] = D_8014F0C8[0];
+            transform->unk_30[D_80159180].vtx[1] = D_8014F0C8[1];
+            transform->unk_30[D_80159180].vtx[2] = D_8014F0C8[2];
+            transform->unk_30[D_80159180].vtx[3] = D_8014F0C8[3];
 
-            // D_8014F0C8[0] = transform->unk_30[D_80159180].vtx[0];
-            // D_8014F0C8[1] = transform->unk_30[D_80159180].vtx[1];
-            // D_8014F0C8[2] = transform->unk_30[D_80159180].vtx[2];
-            // D_8014F0C8[3] = transform->unk_30[D_80159180].vtx[3];
+            vtx2 = transform->unk_30[D_80159180].vtx;
+            vtx = vtx2;
 
-            vtx[0].v.ob[0] = -width / 2;
-            vtx[0].v.ob[1] = -height / 2;
-            vtx[0].v.ob[2] = 0;
-            vtx[0].v.tc[0] = 0;
-            vtx[0].v.tc[1] = height * 32;
-
-            vtx[1].v.ob[0] = width / 2 - 1;
-            vtx[1].v.ob[1] = -height / 2;
-            vtx[1].v.ob[2] = 0;
-            vtx[1].v.tc[0] = width * 32;
-            vtx[1].v.tc[1] = height * 32;
-
-            vtx[2].v.ob[0] = width / 2 - 1;
-            vtx[2].v.ob[1] = height / 2 - 1;
+            vtx2->v.ob[0] = -width / 2;
+            vtx2->v.ob[1] = -height / 2;
+            vtx2->v.ob[2] = 0;
+            vtx2->v.tc[0] = 0;
+            vtx2->v.tc[1] = height * 32;
+            vtx2 = vtx2 + 1;
+            vtx2[0].v.ob[0] = (width / 2) - 1;
+            vtx2[0].v.ob[1] = -height / 2;
+            vtx2[0].v.ob[2] = 0;
+            vtx2[0].v.tc[0] = width * 32;
+            vtx2[0].v.tc[1] = height * 32;
+            vtx[2].v.ob[0] = (width / 2) - 1;
+            vtx[2].v.ob[1] = (height / 2) - 1;
             vtx[2].v.ob[2] = 0;
             vtx[2].v.tc[0] = width * 32;
             vtx[2].v.tc[1] = 0;
-
             vtx[3].v.ob[0] = -width / 2;
-            vtx[3].v.ob[1] = height / 2 - 1;
+            vtx[3].v.ob[1] = (height / 2) - 1;
             vtx[3].v.ob[2] = 0;
             vtx[3].v.tc[0] = 0;
             vtx[3].v.tc[1] = 0;
 
             gDPPipeSync(gMainGfxPos++);
-            gDPSetCombineLERP(gMainGfxPos++, TEXEL0, 0, PRIMITIVE, 0, PRIMITIVE, 0, TEXEL0, 0, TEXEL0, 0, PRIMITIVE, 0, PRIMITIVE, 0, TEXEL0, 0);
-            gDPSetPrimColor(gMainGfxPos++, 0, 0, hudElement->tint.r, hudElement->tint.g, hudElement->tint.b, hudElement->opacity);
+            gDPSetCombineLERP(gMainGfxPos++, TEXEL0, 0, PRIMITIVE, 0, PRIMITIVE, 0, TEXEL0, 0, TEXEL0, 0, PRIMITIVE, 0,
+                              PRIMITIVE, 0, TEXEL0, 0);
+            gDPSetPrimColor(gMainGfxPos++, 0, 0,
+                            hudElement->tint.r, hudElement->tint.g, hudElement->tint.b, hudElement->opacity);
 
             if (!(hudElement->flags & HUD_ELEMENT_FLAG_TRANSPARENT)) {
                 if (!(hudElement->flags & HUD_ELEMENT_FLAG_ANTIALIASING)) {
@@ -1597,7 +1594,8 @@ void render_hud_element(HudElement* hudElement) {
             }
 
             gDPLoadTextureBlock(gMainGfxPos++, hudElement->imageAddr, G_IM_FMT_IA, G_IM_SIZ_8b, width, height, 0,
-                                G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+                                G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK,
+                                G_TX_NOLOD, G_TX_NOLOD);
 
             gDPSetTextureLUT(gMainGfxPos++, G_TT_NONE);
             gSPVertex(gMainGfxPos++, &transform->unk_30[D_80159180], 4, 0);
@@ -1609,9 +1607,6 @@ void render_hud_element(HudElement* hudElement) {
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     gDPPipeSync(gMainGfxPos++);
 }
-#else
-INCLUDE_ASM(void, "hud_element", render_hud_element, HudElement* hudElement);
-#endif
 
 void render_hud_elements_world(void) {
     s32 i, count, j;

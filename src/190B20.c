@@ -75,19 +75,22 @@ void create_target_list(Actor* actor, s32 arg1) {
     s32 i, j;
     f32 f6, f8, f10;
     f32 f2, f12, f14;
-    f32 f61;
     u8 sp10;
     f32 sp14;
     s32 sp18 = FALSE;
     s32 sp1C;
     s32 fp;
-
     s32 a02;
+    ActorPartBlueprint* partBlueprint;
+    s32 index1;
+    s32 index2;
+    s32 a22;
 
     if (battleStatus->currentTargetListFlags & 0x80000000) {
         actor->targetListLength = -1;
         return;
     }
+
     if (battleStatus->currentTargetListFlags & 0x8) {
         targetData->actorID = ACTOR_PLAYER;
         targetData->partID = 1;
@@ -101,7 +104,7 @@ void create_target_list(Actor* actor, s32 arg1) {
             targetData->pos.z = playerActor->homePos.z;
         }
         targetData->unk_10 = -100;
-        s5 += 1;
+        s5++;
         targetData++;
     }
 
@@ -118,7 +121,7 @@ void create_target_list(Actor* actor, s32 arg1) {
             targetData->pos.z = partnerActor->homePos.z;
         }
         targetData->unk_10 = -50;
-        s5 += 1;
+        s5++;
         targetData++;
     }
 
@@ -134,8 +137,7 @@ void create_target_list(Actor* actor, s32 arg1) {
         numParts = targetActor->numParts;
         for (j = 0; j < numParts; targetPart = targetPart->nextPart, j++) {
             if (!(targetPart->flags & 0x20000)) {
-                ActorPartBlueprint* partBlueprint = targetPart->staticData;
-                s8 partID;
+                partBlueprint = targetPart->staticData;
                 if (!(targetPart->flags & 0x100000)) {
                     fp = !arg1; // TODO ??????
                     if (fp) {
@@ -173,12 +175,11 @@ void create_target_list(Actor* actor, s32 arg1) {
                 }
 
                 targetData->actorID = ACTOR_CLASS_ENEMY | i;
-                partID = partBlueprint->index;
+                targetData->partID = partBlueprint->index;
                 targetData->pos.x = f6;
                 targetData->pos.y = f8;
                 targetData->pos.z = f10;
                 targetData->unk_10 = 0;
-                targetData->partID = partID;
 
                 if ((targetActor->flags & 0x4000) && !(targetActor->flags & 0x10)) {
                     targetData->unk_10 = 100;
@@ -253,10 +254,12 @@ void create_target_list(Actor* actor, s32 arg1) {
         if (battleStatus->currentTargetListFlags & 0x8000) {
             if (!(targetPart->flags & 0x800000) || (targetActor->flags & 0x40) || (targetPart->flags & 0x40)) {
                 a02 = 1;
-                goto END2;
+            } else {
+                a02 = 0;
             }
+        } else {
+            a02 = 0;
         }
-        a02 = 0;
 END2:
         if (a02) {
             for (j = i; j < s5 - 1; j++) {
@@ -312,7 +315,7 @@ END2:
             goto END;
         }
         if ((battleStatus->currentTargetListFlags & 0x4000) && !(targetPart->flags & 0x20)) {
-            s32 a22 = 0;
+            a22 = 0;
 
             for (j = 0; j < s5; j++) {
                 target = &targetData[j];
@@ -331,8 +334,9 @@ END2:
                 goto END;
             }
         }
+
         if (battleStatus->currentTargetListFlags & 0x2000) {
-            s32 a22 = 0;
+            a22 = 0;
 
             for (j = 0; j < s5; j++) {
                 target = &targetData[j];
@@ -351,43 +355,28 @@ END2:
                 goto END;
             }
         }
+
         if ((battleStatus->currentTargetListFlags & 0x20) && (targetActor->flags & 0x200)) {
             a02 = 1;
-            goto END;
-        }
-        if ((battleStatus->currentTargetListFlags & 0x100000) && s0->homeRow == fp + 1) {
+        } else if ((battleStatus->currentTargetListFlags & 0x100000) && s0->homeRow == fp + 1) {
             a02 = 1;
-            goto END;
-        }
-        if ((battleStatus->currentTargetListFlags & 0x200000) && s0->homeRow == fp - 1) {
+        } else if ((battleStatus->currentTargetListFlags & 0x200000) && s0->homeRow == fp - 1) {
             a02 = 1;
-            goto END;
-        }
-        if ((battleStatus->currentTargetListFlags & 0x400000) && s0->homeCol == sp1C - 1) {
+        } else if ((battleStatus->currentTargetListFlags & 0x400000) && s0->homeCol == sp1C - 1) {
             a02 = 1;
-            goto END;
-        }
-        if ((battleStatus->currentTargetListFlags & 0x800000) && s0->homeCol == sp1C + 1) {
+        } else if ((battleStatus->currentTargetListFlags & 0x800000) && s0->homeCol == sp1C + 1) {
             a02 = 1;
-            goto END;
-        }
-        if ((battleStatus->currentTargetListFlags & 0x100000) && s0->homeRow < fp) {
+        } else if ((battleStatus->currentTargetListFlags & 0x100000) && s0->homeRow < fp) {
             a02 = 1;
-            goto END;
-        }
-        if ((battleStatus->currentTargetListFlags & 0x200000) && s0->homeRow > fp) {
+        } else if ((battleStatus->currentTargetListFlags & 0x200000) && s0->homeRow > fp) {
             a02 = 1;
-            goto END;
-        }
-        if ((battleStatus->currentTargetListFlags & 0x400000) && s0->homeCol > sp1C) {
+        } else if ((battleStatus->currentTargetListFlags & 0x400000) && s0->homeCol > sp1C) {
             a02 = 1;
-            goto END;
-        }
-        if ((battleStatus->currentTargetListFlags & 0x800000) && s0->homeCol < sp1C) {
+        } else if ((battleStatus->currentTargetListFlags & 0x800000) && s0->homeCol < sp1C) {
             a02 = 1;
-            goto END;
+        } else {
+            a02 = 0;
         }
-        a02 = 0;
 END:
         if (a02) {
             for (j = i; j < s5 - 1; j++) {
@@ -398,6 +387,8 @@ END:
         }
     }
 
+    } while (0); // TODO required to match
+
     actor->targetListLength = s5;
     if (s5 == 0 && sp18) {
         gBattleStatus.flags2 |= 0x1000;
@@ -405,17 +396,18 @@ END:
         gBattleStatus.flags2 &= ~0x1000;
     }
 
+    targetIndexList = actor->targetIndexList;
     targetData = actor->targetData;
 
     s5 = actor->targetListLength;
-    targetIndexList = actor->targetIndexList;
     for (i = 0; i < s5; i++) {
         targetIndexList[i] = i;
     }
+
     for (i = 0; i < s5 - 1; i++) {
         for (j = i + 1; j < s5; j++) {
-            s32 index1 = targetIndexList[i];
-            s32 index2 = targetIndexList[j];
+            index1 = targetIndexList[i];
+            index2 = targetIndexList[j];
             s0 = &targetData[index1];
             target = &targetData[index2];
             if (s0->pos.x + s0->unk_10 * 10 > target->pos.x + target->unk_10 * 10) {
@@ -424,8 +416,6 @@ END:
             }
         }
     }
-
-    } while (0); // TODO required to match
 }
 #else
 void create_target_list(Actor* actor, s32 arg1);
@@ -578,7 +568,7 @@ void func_80263300(void) {
                 player_create_target_list(player);
 
                 if (player->targetListLength != 0) {
-                    battleStatus->menuStatus[0] += 1;
+                    battleStatus->menuStatus[0]++;
                     cond = TRUE;
                 }
             }
