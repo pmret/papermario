@@ -275,8 +275,8 @@ void hud_element_draw_rect(HudElement* hudElement, s16 texSizeX, s16 texSizeY, s
     s32 uly, lry, ulx, lrx;
     s32 masks, maskt;
     s32 screenPosOffsetScaledX, screenPosOffsetScaledY;
-    u8* imageAddr;
-    u16* paletteAddr;
+    IMG_PTR imageAddr;
+    PAL_PTR paletteAddr;
     s16 baseX, baseY;
     s32 tileMode;
     u32 flags1, flags2;
@@ -1423,8 +1423,8 @@ void render_hud_element(HudElement* hudElement) {
     HudTransform* transform;
     s32 mode;
     u32 flags;
-    u8* raster;
-    u16* palette;
+    IMG_PTR raster;
+    PAL_PTR palette;
     u32 a0, v1;
     s32 ulx, uly, lrx, lry;
     Vtx* vtx;
@@ -1517,9 +1517,9 @@ void render_hud_element(HudElement* hudElement) {
                 }
             } else {
                 if (hudElement->flags & HUD_ELEMENT_FLAG_TRANSPARENT) {
-                    fold_update(transform->foldIdx, 7, 255, 255, 255, hudElement->opacity, 0);
+                    fold_update(transform->foldIdx, FOLD_TYPE_7, 255, 255, 255, hudElement->opacity, 0);
                 } else {
-                    fold_update(transform->foldIdx, 0, 0, 0, 0, 0, 0);
+                    fold_update(transform->foldIdx, FOLD_TYPE_NONE, 0, 0, 0, 0, 0);
                 }
             }
 
