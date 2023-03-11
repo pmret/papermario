@@ -13,3 +13,6 @@ kmr_23_window_ul_img = 0x802416C8; // rom:0x975468
 kmr_23_window_ur_img = 0x80241708; // rom:0x9754A8
 kmr_23_window_ll_img = 0x80241748; // rom:0x9754E8
 kmr_23_window_lr_img = 0x80241788; // rom:0x975528
+iwa_01_splash_img = 0x802439C0; // rom:0x97F3E0
+iwa_01_splash_vtx = 0x80243DC0; // rom:0x97F7E0
+iwa_01_splash_gfx = 0x80243E00; // rom:0x97F820

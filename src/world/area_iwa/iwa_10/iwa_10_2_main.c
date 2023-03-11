@@ -40,6 +40,10 @@ EvtScript N(EVS_Main) = {
     EVT_SET(GB_WorldLocation, LOCATION_MT_RUGGED)
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_SETUP_CAMERA_ALT_NO_LEAD()
+#if VERSION_PAL
+    EVT_CALL(GetLanguage, LocalVar(0))
+    EVT_CALL(SetModelTexVariant, 37, LocalVar(0))
+#endif
     EVT_SET(GF_MAP_MtRugged, TRUE)
     EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(DefaultNPCs)))
     EVT_CALL(ClearDefeatedEnemies)
