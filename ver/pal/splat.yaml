@@ -1162,8 +1162,436 @@ segments:
     - [0x992DA0, c, iwa_11_3_train]
     - [0x993000, c, iwa_11_4_scenery]
     - [0x993090, c, iwa_11_5_npc]
+  - name: sbk_00
+    dir: world/area_sbk/sbk_00
+    type: code
+    start: 0x995600
+    vram: 0x80240000
+    subsegments:
+    - [0x995600, c, sbk_00_0_header]
+    - [0x995600, c, sbk_00_1_main]
+    - [0x995640, c, sbk_00_2_npc]
+    - [0x995660, c, sbk_00_3_entity]
+  - name: sbk_01
+    dir: world/area_sbk/sbk_01
+    type: code
+    start: 0x995E20
+    vram: 0x80240000
+    subsegments:
+    - [0x995E20, c, sbk_01_1_main]
+    - [0x995E60, c, sbk_01_2_npc]
+  - name: sbk_02
+    dir: world/area_sbk/sbk_02
+    type: code
+    start: 0x996640
+    vram: 0x80240000
+    subsegments:
+    - [0x996640, c, sbk_02_0_header]
+    - [0x996680, c, sbk_02_1_music]
+    - [0x996680, c, sbk_02_2_main]
+    - [0x996680, c, sbk_02_3_ruins]
+    - [0x996D30, c, sbk_02_4_npc]
+    - [0x997240, c, sbk_02_5_entity]
+  - name: sbk_03
+    dir: world/area_sbk/sbk_03
+    type: code
+    start: 0x99BC40
+    vram: 0x80240000
+    subsegments:
+    - [0x99BC40, c, sbk_03_1_main]
+    - [0x99BC80, c, sbk_03_2_npc]
+  - name: sbk_04
+    dir: world/area_sbk/sbk_04
+    type: code
+    start: 0x99C860
+    vram: 0x80240000
+    subsegments:
+    - [0x99C860, c, sbk_04_1_main]
+    - [0x99C8A0, c, sbk_04_2_npc]
+  - name: sbk_05
+    dir: world/area_sbk/sbk_05
+    type: code
+    start: 0x99D080
+    vram: 0x80240000
+    subsegments:
+    - [0x99D080, c, sbk_05_1_main]
+    - [0x99D0C0, c, sbk_05_2_entity]
+    - [0x99D0C0, c, sbk_05_3_npc]
+  - name: sbk_06
+    dir: world/area_sbk/sbk_06
+    type: code
+    start: 0x99E950
+    vram: 0x80240000
+    subsegments:
+    - [0x99E950, c, sbk_06_1_main]
+    - [0x99E990, c, sbk_06_2_npc]
+    - [0x99EA90, c, sbk_06_3_foliage]
+    - [0x99ECD0, c, sbk_06_4_entity]
+  - name: sbk_10
+    dir: world/area_sbk/sbk_10
+    type: code
+    start: 0x9A0010
+    vram: 0x80240000
+    subsegments:
+    - [0x9A0010, c, sbk_10_1_main]
+    - [0x9A0050, c, sbk_10_2_entity]
+  - name: sbk_11
+    dir: world/area_sbk/sbk_11
+    type: code
+    start: 0x9A03D0
+    vram: 0x80240000
+    subsegments:
+    - [0x9A03D0, c, sbk_11_1_main]
+    - [0x9A0410, c, sbk_11_2_npc]
+  - name: sbk_12
+    dir: world/area_sbk/sbk_12
+    type: code
+    start: 0x9A10D0
+    vram: 0x80240000
+    subsegments:
+    - [0x9A10D0, c, sbk_12_1_main]
+    - [0x9A1110, c, sbk_12_2_npc]
+  - name: sbk_13
+    dir: world/area_sbk/sbk_13
+    type: code
+    start: 0x9A1B70
+    vram: 0x80240000
+    subsegments:
+    - [0x9A1B70, c, sbk_13_1_main]
+    - [0x9A1BB0, c, sbk_13_2_npc]
+  - name: sbk_14
+    dir: world/area_sbk/sbk_14
+    type: code
+    start: 0x9A2A70
+    vram: 0x80240000
+    subsegments:
+    - [0x9A2A70, c, sbk_14_1_main]
+    - [0x9A2AB0, c, sbk_14_2_entity]
+  - name: sbk_15
+    dir: world/area_sbk/sbk_15
+    type: code
+    start: 0x9A3060
+    vram: 0x80240000
+    subsegments:
+    - [0x9A3060, c, sbk_15_1_main]
+    - [0x9A30A0, c, sbk_15_2_npc]
+  - name: sbk_16
+    dir: world/area_sbk/sbk_16
+    type: code
+    start: 0x9A3900
+    vram: 0x80240000
+    subsegments:
+    - [0x9A3900, c, sbk_16_1_main]
+    - [0x9A3940, c, sbk_16_2_foliage]
+  - name: sbk_20
+    dir: world/area_sbk/sbk_20
+    type: code
+    start: 0x9A4920
+    vram: 0x80240000
+    subsegments:
+    - [0x9A4920, c, sbk_20_1_main]
+    - [0x9A4960, c, sbk_20_2_entity]
+    - [0x9A4960, c, sbk_20_2_npc]
+  - name: sbk_21
+    dir: world/area_sbk/sbk_21
+    type: code
+    start: 0x9A58F0
+    vram: 0x80240000
+    subsegments:
+    - [0x9A58F0, c, sbk_21_1_main]
+  - name: sbk_22
+    dir: world/area_sbk/sbk_22
+    type: code
+    start: 0x9A5CC0
+    vram: 0x80240000
+    subsegments:
+    - [0x9A5CC0, c, sbk_22_1_main]
+    - [0x9A5D00, c, sbk_22_2_npc]
+    - [0x9A5E20, c, sbk_22_3_entity]
+  - name: sbk_23
+    dir: world/area_sbk/sbk_23
+    type: code
+    start: 0x9A6AF0
+    vram: 0x80240000
+    subsegments:
+    - [0x9A6AF0, c, sbk_23_1_main]
+    - [0x9A6B30, c, sbk_23_2_entity]
+  - name: sbk_24
+    dir: world/area_sbk/sbk_24
+    type: code
+    start: 0x9A6FC0
+    vram: 0x80240000
+    subsegments:
+    - [0x9A6FC0, c, sbk_24_1_main]
+    - [0x9A7000, c, sbk_24_2_npc]
+    - [0x9A7100, c, sbk_24_3_entity]
+    - [0x9A7100, c, sbk_24_4_foliage]
+  - name: sbk_25
+    dir: world/area_sbk/sbk_25
+    type: code
+    start: 0x9A8610
+    vram: 0x80240000
+    subsegments:
+    - [0x9A8610, c, sbk_25_1_main]
+    - [0x9A8650, c, sbk_25_2_npc]
+    - [0x9A8750, c, sbk_25_3_foliage]
+    - [0x9A8990, c, sbk_25_4_entity]
+  - name: sbk_26
+    dir: world/area_sbk/sbk_26
+    type: code
+    start: 0x9AA060
+    vram: 0x80240000
+    subsegments:
+    - [0x9AA060, c, sbk_26_1_main]
+    - [0x9AA0A0, c, sbk_26_2_npc]
+    - [0x9AA1C0, c, sbk_26_3_foliage]
+  - name: sbk_30
+    dir: world/area_sbk/sbk_30
+    type: code
+    start: 0x9AB940
+    vram: 0x80240000
+    subsegments:
+    - [0x9AB940, c, sbk_30_0_header]
+    - [0x9AB980, c, sbk_30_1_music]
+    - [0x9AB980, c, sbk_30_2_main]
+    - [0x9ABCB0, c, sbk_30_3_npc]
+    - [0x9ACF10, c, sbk_30_4_foliage]
+  - name: sbk_31
+    dir: world/area_sbk/sbk_31
+    type: code
+    start: 0x9B0390
+    vram: 0x80240000
+    subsegments:
+    - [0x9B0390, c, sbk_31_1_main]
+    - [0x9B03D0, c, sbk_31_2_npc]
+  - name: sbk_32
+    dir: world/area_sbk/sbk_32
+    type: code
+    start: 0x9B0DF0
+    vram: 0x80240000
+    subsegments:
+    - [0x9B0DF0, c, sbk_32_1_main]
+    - [0x9B0E30, c, sbk_32_2_npc]
+  - name: sbk_33
+    dir: world/area_sbk/sbk_33
+    type: code
+    start: 0x9B1D60
+    vram: 0x80240000
+    subsegments:
+    - [0x9B1D60, c, sbk_33_0_header]
+    - [0x9B1D60, c, sbk_33_1_entity]
+    - [0x9B1D60, c, sbk_33_2_main]
+  - name: sbk_34
+    dir: world/area_sbk/sbk_34
+    type: code
+    start: 0x9B2260
+    vram: 0x80240000
+    subsegments:
+    - [0x9B2260, c, sbk_34_1_main]
+    - [0x9B22A0, c, sbk_34_2_npc]
+    - [0x9B2A00, c, sbk_34_3_foliage]
+  - name: sbk_35
+    dir: world/area_sbk/sbk_35
+    type: code
+    start: 0x9B4A40
+    vram: 0x80240000
+    subsegments:
+    - [0x9B4A40, c, sbk_35_1_main]
+    - [0x9B4A80, c, sbk_35_2_npc]
+    - [0x9B4B80, c, sbk_35_3_foliage]
+  - name: sbk_36
+    dir: world/area_sbk/sbk_36
+    type: code
+    start: 0x9B61F0
+    vram: 0x80240000
+    subsegments:
+    - [0x9B61F0, c, sbk_36_1_main]
+    - [0x9B6230, c, sbk_36_2_foliage]
+    - [0x9B6470, c, sbk_36_3_entity]
+  - name: sbk_40
+    dir: world/area_sbk/sbk_40
+    type: code
+    start: 0x9B7730
+    vram: 0x80240000
+    subsegments:
+    - [0x9B7730, c, sbk_40_1_main]
+    - [0x9B7770, c, sbk_40_2_npc]
+    - [0x9B7870, c, sbk_40_3_entity]
+  - name: sbk_41
+    dir: world/area_sbk/sbk_41
+    type: code
+    start: 0x9B83D0
+    vram: 0x80240000
+    subsegments:
+    - [0x9B83D0, c, sbk_41_1_main]
+    - [0x9B8410, c, sbk_41_2_entity]
+  - name: sbk_42
+    dir: world/area_sbk/sbk_42
+    type: code
+    start: 0x9B88A0
+    vram: 0x80240000
+    subsegments:
+    - [0x9B88A0, c, sbk_42_1_main]
+    - [0x9B88E0, c, sbk_42_2_npc]
+  - name: sbk_43
+    dir: world/area_sbk/sbk_43
+    type: code
+    start: 0x9B9500
+    vram: 0x80240000
+    subsegments:
+    - [0x9B9500, c, sbk_43_1_main]
+    - [0x9B9540, c, sbk_43_2_entity]
+  - name: sbk_44
+    dir: world/area_sbk/sbk_44
+    type: code
+    start: 0x9B9930
+    vram: 0x80240000
+    subsegments:
+    - [0x9B9930, c, sbk_44_1_main]
+    - [0x9B9970, c, sbk_44_2_npc]
+  - name: sbk_45
+    dir: world/area_sbk/sbk_45
+    type: code
+    start: 0x9BA830
+    vram: 0x80240000
+    subsegments:
+    - [0x9BA830, c, sbk_45_1_main]
+    - [0x9BA870, c, sbk_45_2_entity]
+  - name: sbk_46
+    dir: world/area_sbk/sbk_46
+    type: code
+    start: 0x9BAD30
+    vram: 0x80240000
+    subsegments:
+    - [0x9BAD30, c, sbk_46_1_main]
+    - [0x9BAD70, c, sbk_46_2_npc]
+    - [0x9BAE90, c, sbk_46_3_foliage]
+    - [0x9BB0D0, c, sbk_46_4_entity]
+  - name: sbk_50
+    dir: world/area_sbk/sbk_50
+    type: code
+    start: 0x9BC9A0
+    vram: 0x80240000
+    subsegments:
+    - [0x9BC9A0, c, sbk_50_1_main]
+  - name: sbk_51
+    dir: world/area_sbk/sbk_51
+    type: code
+    start: 0x9BCD00
+    vram: 0x80240000
+    subsegments:
+    - [0x9BCD00, c, sbk_51_1_main]
+    - [0x9BCD40, c, sbk_51_2_npc]
+  - name: sbk_52
+    dir: world/area_sbk/sbk_52
+    type: code
+    start: 0x9BDA00
+    vram: 0x80240000
+    subsegments:
+    - [0x9BDA00, c, sbk_52_1_main]
+    - [0x9BDA40, c, sbk_52_2_entity]
+  - name: sbk_53
+    dir: world/area_sbk/sbk_53
+    type: code
+    start: 0x9BDE70
+    vram: 0x80240000
+    subsegments:
+    - [0x9BDE70, c, sbk_53_1_main]
+    - [0x9BDEB0, c, sbk_53_2_npc]
+  - name: sbk_54
+    dir: world/area_sbk/sbk_54
+    type: code
+    start: 0x9BE910
+    vram: 0x80240000
+    subsegments:
+    - [0x9BE910, c, sbk_54_1_main]
+    - [0x9BE950, c, sbk_54_2_entity]
+  - name: sbk_55
+    dir: world/area_sbk/sbk_55
+    type: code
+    start: 0x9BEDE0
+    vram: 0x80240000
+    subsegments:
+    - [0x9BEDE0, c, sbk_55_1_main]
+    - [0x9BEE20, c, sbk_55_2_npc]
+    - [0x9BEE40, c, sbk_55_3_foliage]
+    - [0x9BF080, c, sbk_55_4_entity]
+  - name: sbk_56
+    dir: world/area_sbk/sbk_56
+    type: code
+    start: 0x9C0350
+    vram: 0x80240000
+    subsegments:
+    - [0x9C0350, c, sbk_56_1_main]
+    - [0x9C03D0, c, sbk_56_2_entity]
+    - [0x9C1110, c, sbk_56_3_foliage]
+  - name: sbk_60
+    dir: world/area_sbk/sbk_60
+    type: code
+    start: 0x9C2D80
+    vram: 0x80240000
+    subsegments:
+    - [0x9C2D80, c, sbk_60_1_main]
+    - [0x9C2DC0, c, sbk_60_2_npc]
+  - name: sbk_61
+    dir: world/area_sbk/sbk_61
+    type: code
+    start: 0x9C3320
+    vram: 0x80240000
+    subsegments:
+    - [0x9C3320, c, sbk_61_1_main]
+    - [0x9C3360, c, sbk_61_2_entity]
+  - name: sbk_62
+    dir: world/area_sbk/sbk_62
+    type: code
+    start: 0x9C36E0
+    vram: 0x80240000
+    subsegments:
+    - [0x9C36E0, c, sbk_62_1_main]
+    - [0x9C3720, c, sbk_62_2_npc]
+  - name: sbk_63
+    dir: world/area_sbk/sbk_63
+    type: code
+    start: 0x9C4100
+    vram: 0x80240000
+    subsegments:
+    - [0x9C4100, c, sbk_63_1_main]
+    - [0x9C4140, c, sbk_63_2_npc]
+  - name: sbk_64
+    dir: world/area_sbk/sbk_64
+    type: code
+    start: 0x9C4920
+    vram: 0x80240000
+    subsegments:
+    - [0x9C4920, c, sbk_64_1_main]
+    - [0x9C4960, c, sbk_64_2_entity]
+  - name: sbk_65
+    dir: world/area_sbk/sbk_65
+    type: code
+    start: 0x9C4CE0
+    vram: 0x80240000
+    subsegments:
+    - [0x9C4CE0, c, sbk_65_1_main]
+  - name: sbk_66
+    dir: world/area_sbk/sbk_66
+    type: code
+    start: 0x9C5040
+    vram: 0x80240000
+    subsegments:
+    - [0x9C5040, c, sbk_66_1_main]
+    - [0x9C5080, c, sbk_66_2_npc]
+    - [0x9C5180, c, sbk_66_3_foliage]
+    - [0x9C53C0, c, sbk_66_4_entity]
+  - name: sbk_99
+    dir: world/area_sbk/sbk_99
+    type: code
+    start: 0x9C7240
+    vram: 0x80240000
+    subsegments:
+    - [0x9C7240, c, sbk_99_1_main]
+    - [0x9C7240, c, sbk_99_2_entity]
 
-  - [0x995600, bin]
+  - [0x9C7590, bin]
 
   - start: 0x1e937b8
     align: 8
