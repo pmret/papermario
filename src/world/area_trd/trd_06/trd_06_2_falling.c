@@ -340,14 +340,14 @@ EvtScript N(EVS_Scene_FallIntoCell) = {
         EVT_WAIT(1)
         EVT_CALL(SpeakToPlayer, NPC_Bombette, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0, MSG_CH1_00D9)
         EVT_THREAD
-            EVT_WAIT(5)
+            EVT_WAIT(5 * DT)
             EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
-            EVT_WAIT(30)
+            EVT_WAIT(30 * DT)
             EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
         EVT_END_THREAD
         EVT_CALL(EndSpeech, NPC_Bombette, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0)
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.0))
+        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.0 / DT))
         EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
         EVT_CALL(SetNpcVar, NPC_Bombette, 0, 1)
     EVT_END_IF

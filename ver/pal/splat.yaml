@@ -1824,8 +1824,123 @@ segments:
     - [0xA05540, c, isk_19_1_music]
     - [0xA05540, c, isk_19_2_main]
     - [0xA05540, c, isk_19_3_entity]
+  - name: trd_00
+    dir: world/area_trd/trd_00
+    type: code
+    start: 0xA05A70
+    vram: 0x80240000
+    subsegments:
+    - [0xA05A70, c, trd_00_0_header]
+    - [0xA05A70, c, trd_00_1_main]
+    - [0xA05D80, c, trd_00_2_entity]
+    - [0xA06040, c, trd_00_3_npc]
+  - name: trd_01
+    dir: world/area_trd/trd_01
+    type: code
+    start: 0xA08790
+    vram: 0x80240000
+    subsegments:
+    - [0xA08790, c, trd_01_0_header]
+    - [0xA08790, c, trd_01_1_main]
+    - [0xA08AA0, c, trd_01_2_entity]
+    - [0xA08B80, c, trd_01_3_npc]
+  - name: trd_02
+    dir: world/area_trd/trd_02
+    type: code
+    start: 0xA0CDE0
+    vram: 0x80240000
+    subsegments:
+    - [0xA0CDE0, c, trd_02_0_header]
+    - [0xA0CDE0, c, trd_02_1_main]
+    - [0xA0CDE0, c, trd_02_2_entity]
+    - [0xA0CEC0, c, trd_02_3_npc]
+  - name: trd_03
+    dir: world/area_trd/trd_03
+    type: code
+    start: 0xA10450
+    vram: 0x80240000
+    subsegments:
+    - [0xA10450, c, trd_03_0_header]
+    - [0xA10450, c, trd_03_1_main]
+    - [0xA104F0, c, trd_03_2_entity]
+    - [0xA104F0, c, trd_03_3_npc]
+    - [0xA10CD0, c, trd_03_4_puzzle]
+  - name: trd_04
+    dir: world/area_trd/trd_04
+    type: code
+    start: 0xA141F0
+    vram: 0x80240000
+    subsegments:
+    - [0xA141F0, c, trd_04_0_header]
+    - [0xA141F0, c, trd_04_1_main]
+    - [0xA14500, c, trd_04_2_entity]
+    - [0xA146A0, c, trd_04_3_npc]
+  - name: trd_05
+    dir: world/area_trd/trd_05
+    type: code
+    start: 0xA1A500
+    vram: 0x80240000
+    subsegments:
+    - [0xA1A500, c, trd_05_0_header]
+    - [0xA1A500, c, trd_05_1_main]
+    - [0xA1A520, c, trd_05_2_entity]
+    - [0xA1A520, c, trd_05_3_trap]
+    - [0xA1AC20, c, trd_05_4_npc]
+  - name: trd_06
+    dir: world/area_trd/trd_06
+    type: code
+    start: 0xA1D590
+    vram: 0x80240000
+    subsegments:
+    - [0xA1D590, c, trd_06_0_header]
+    - [0xA1D590, c, trd_06_1_main]
+    - [0xA1D8A0, c, trd_06_2_falling]
+    - [0xA1E080, c, trd_06_3_npc_prisoners]
+    - [0xA1E210, c, trd_06_4_npc_koopa_bros]
+    - [0xA1E2B0, c, trd_06_5_entity]
+  - name: trd_07
+    dir: world/area_trd/trd_07
+    type: code
+    start: 0xA22770
+    vram: 0x80240000
+    subsegments:
+    - [0xA22770, c, trd_07_0_header]
+    - [0xA22770, c, trd_07_1_main]
+    - [0xA22A80, c, trd_07_2_npc]
+    - [0xA24D70, c, trd_07_3_magic_doors]
+  - name: trd_08
+    dir: world/area_trd/trd_08
+    type: code
+    start: 0xA27090
+    vram: 0x80240000
+    subsegments:
+    - [0xA27090, c, trd_08_0_header]
+    - [0xA27090, c, trd_08_1_main]
+    - [0xA273A0, c, trd_08_2_entity]
+    - [0xA273A0, c, trd_08_3_npc]
+  - name: trd_09
+    dir: world/area_trd/trd_09
+    type: code
+    start: 0xA29450
+    vram: 0x80240000
+    subsegments:
+    - [0xA29450, c, trd_09_0_header]
+    - [0xA29450, c, trd_09_1_main]
+    - [0xA29450, c, trd_09_2_entity]
+    - [0xA29450, c, trd_09_3_npc]
+    - [0xA29510, c, trd_09_4_demo]
+  - name: trd_10
+    dir: world/area_trd/trd_10
+    type: code
+    start: 0xA2E700
+    vram: 0x80240000
+    subsegments:
+    - [0xA2E700, c, trd_10_0_header]
+    - [0xA2E700, c, trd_10_1_main]
+    - [0xA2EF20, c, trd_10_2_npc]
+    - [0xA2EF50, c, trd_10_3_fake_bowser]
 
-  - [0xA05A70, bin]
+  - [0xA311D0, bin]
 
   - start: 0x1e937b8
     align: 8

@@ -50,7 +50,7 @@ EvtScript N(EVS_RevealFakeBowser) = {
             EVT_WAIT(1)
             EVT_GOTO(0)
         EVT_END_IF
-    EVT_CALL(MakeLerp, 100, -100, 60, EASING_QUADRATIC_OUT)
+    EVT_CALL(MakeLerp, 100, -100, 60 * DT, EASING_QUADRATIC_OUT)
     EVT_CALL(PlaySoundAt, SOUND_3BE, SOUND_SPACE_MODE_0, 50, 0, 0)
     EVT_LABEL(10)
         EVT_CALL(UpdateLerp)
