@@ -87,6 +87,10 @@ EvtScript N(EVS_Main) = {
     EVT_SET(GB_WorldLocation, LOCATION_KOOPA_VILLAGE)
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_SETUP_CAMERA_NO_LEAD()
+#if VERSION_PAL
+    EVT_CALL(GetLanguage, LocalVar(0))
+    EVT_CALL(SetModelTexVariant, 150, LocalVar(0))
+#endif
     EVT_SET(GF_MAP_KoopaVillage, TRUE)
     EVT_SET(AF_NOK01_Dialogue_RelaxedKoopa, FALSE)
     EVT_SET(AF_NOK01_Dialogue_Bobomb_01_Crisis, FALSE)

@@ -1939,8 +1939,124 @@ segments:
     - [0xA2E700, c, trd_10_1_main]
     - [0xA2EF20, c, trd_10_2_npc]
     - [0xA2EF50, c, trd_10_3_fake_bowser]
+  - name: nok_01
+    dir: world/area_nok/nok_01
+    type: code
+    start: 0xA311D0
+    vram: 0x80240000
+    subsegments:
+    - [0xA311D0, c, nok_01_0_header]
+    - [0xA311D0, c, nok_01_1_music]
+    - [0xA311D0, c, nok_01_2_main]
+    - [0xA311D0, c, nok_01_3_entity]
+    - [0xA311D0, c, nok_01_4_npc]
+    - [0xA33930, c, nok_01_5_shop]
+    - [0xA33930, c, nok_01_6_rooms]
+    - [0xA33990, c, nok_01_7_radio]
+    - [0xA33B00, c, nok_01_8_foliage]
+  - name: nok_02
+    dir: world/area_nok/nok_02
+    type: code
+    start: 0xA42E70
+    vram: 0x80240000
+    subsegments:
+    - [0xA42E70, c, nok_02_0_header]
+    - [0xA42E70, c, nok_02_1_music]
+    - [0xA42E70, c, nok_02_2_main]
+    - [0xA435C0, c, nok_02_3_entity]
+    - [0xA437E0, c, nok_02_4_rooms]
+    - [0xA438F0, c, nok_02_5_bookshelf]
+    - [0xA438F0, c, nok_02_6_npc]
+    - [0xA46740, c, nok_02_7_demo]
+    - [0xA46830, c, nok_02_8_koot_favors]
+    - [0xA471D0, c, nok_02_9_foliage]
+    - [0xA47410, c, nok_02_10_epilogue]
+  - name: nok_03
+    dir: world/area_nok/nok_03
+    type: code
+    start: 0xA57680
+    vram: 0x80240000
+    subsegments:
+    - [0xA57680, c, nok_03_0_header]
+    - [0xA57680, c, nok_03_1_music]
+    - [0xA57680, c, nok_03_2_main]
+    - [0xA57680, c, nok_03_3_entity]
+    - [0xA57680, c, nok_03_4_npc]
+  - name: nok_04
+    dir: world/area_nok/nok_04
+    type: code
+    start: 0xA59A80
+    vram: 0x80240000
+    subsegments:
+    - [0xA59A80, c, nok_04_0_header]
+    - [0xA59A80, c, nok_04_1_music]
+    - [0xA59A80, c, nok_04_2_main]
+    - [0xA59A80, c, nok_04_3_entity]
+    - [0xA59A80, c, nok_04_4_npc]
+    - [0xA5A910, c, nok_04_5_new_partner]
+  - name: nok_11
+    dir: world/area_nok/nok_11
+    type: code
+    start: 0xA608D0
+    vram: 0x80240000
+    subsegments:
+    - [0xA608D0, c, nok_11_0_header]
+    - [0xA608D0, c, nok_11_1_music]
+    - [0xA608D0, c, nok_11_2_main]
+    - [0xA608D0, c, nok_11_3_entity]
+    - [0xA608D0, c, nok_11_4_npc]
+  - name: nok_12
+    dir: world/area_nok/nok_12
+    type: code
+    start: 0xA66680
+    vram: 0x80240000
+    subsegments:
+    - [0xA66680, c, nok_12_0_header]
+    - [0xA66680, c, nok_12_1_music]
+    - [0xA66680, c, nok_12_2_main]
+    - [0xA66800, c, nok_12_3_entity]
+    - [0xA66970, c, nok_12_4_bridge]
+    - [0xA669B0, c, nok_12_5_foliage]
+    - [0xA66BF0, c, nok_12_6_npc]
+    - [0xA68560, c, nok_12_7_demo]
+  - name: nok_13
+    dir: world/area_nok/nok_13
+    type: code
+    start: 0xA6C490
+    vram: 0x80240000
+    subsegments:
+    - [0xA6C490, c, nok_13_0_header]
+    - [0xA6C490, c, nok_13_1_music]
+    - [0xA6C490, c, nok_13_2_main]
+    - [0xA6C490, c, nok_13_3_entity]
+    - [0xA6C490, c, nok_13_4_npc]
+    - [0xA6D2B0, c, nok_13_5]
+  - name: nok_14
+    dir: world/area_nok/nok_14
+    type: code
+    start: 0xA6E6D0
+    vram: 0x80240000
+    subsegments:
+    - [0xA6E6D0, c, nok_14_0_header]
+    - [0xA6E6D0, c, nok_14_1_music]
+    - [0xA6E6D0, c, nok_14_2_main]
+    - [0xA6E850, c, nok_14_3_entity]
+    - [0xA6E850, c, nok_14_4_bridge]
+    - [0xA6E890, c, nok_14_5_npc]
+  - name: nok_15
+    dir: world/area_nok/nok_15
+    type: code
+    start: 0xA72D90
+    vram: 0x80240000
+    subsegments:
+    - [0xA72D90, c, nok_15_0_header]
+    - [0xA72D90, c, nok_15_1_music]
+    - [0xA72D90, c, nok_15_2_main]
+    - [0xA73070, c, nok_15_3_entity]
+    - [0xA73070, c, nok_15_4_npc]
+    - [0xA752D0, c, nok_15_5_foliage]
 
-  - [0xA311D0, bin]
+  - [0xA77B80, bin]
 
   - start: 0x1e937b8
     align: 8
