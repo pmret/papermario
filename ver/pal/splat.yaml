@@ -1635,8 +1635,197 @@ segments:
       - [0x9DD018, gfx, card_2]
       - [0x9DD060]
     - [0x9E44F0]
+  - name: isk_01
+    dir: world/area_isk/isk_01
+    type: code
+    start: 0x9E4560
+    vram: 0x80240000
+    subsegments:
+    - [0x9E4560, c, isk_01_0_header]
+    - [0x9E4560, c, isk_01_1_music]
+    - [0x9E4560, c, isk_01_2_main]
+    - [0x9E4560, c, isk_01_3_haze]
+    - [0x9E4560, c, isk_01_4_entity]
+  - name: isk_02
+    dir: world/area_isk/isk_02
+    type: code
+    start: 0x9E4AC0
+    vram: 0x80240000
+    subsegments:
+    - [0x9E4AC0, c, isk_02_0_header]
+    - [0x9E4AC0, c, isk_02_1_main]
+    - [0x9E4AC0, c, isk_02_2_lock]
+    - [0x9E4B00, c, isk_02_3_ambush]
+    - [0x9E4BB0, c, isk_02_4_entity]
+    - [0x9E4BB0, c, isk_02_5_npc]
+  - name: isk_03
+    dir: world/area_isk/isk_03
+    type: code
+    start: 0x9E6190
+    vram: 0x80240000
+    subsegments:
+    - [0x9E6190, c, isk_03_0_header]
+    - [0x9E6190, c, isk_03_1_main]
+    - [0x9E6190, c, isk_03_2_sand]
+    - [0x9E6190, c, isk_03_3_entity]
+    - [0x9E6190, c, isk_03_4_switch]
+  - name: isk_04
+    dir: world/area_isk/isk_04
+    type: code
+    start: 0x9E7900
+    vram: 0x80240000
+    subsegments:
+    - [0x9E7900, c, isk_04_0_header]
+    - [0x9E7900, c, isk_04_1_music]
+    - [0x9E7900, c, isk_04_2_main]
+    - [0x9E7900, c, isk_04_3_obstructions]
+    - [0x9E7940, c, isk_04_4_entity]
+    - [0x9E7940, c, isk_04_5_npc]
+    - [0x9E8230, c, isk_04_6_demo]
+  - name: isk_05
+    dir: world/area_isk/isk_05
+    type: code
+    start: 0x9E9D30
+    vram: 0x80240000
+    subsegments:
+    - [0x9E9D30, c, isk_05_0_header]
+    - [0x9E9D30, c, isk_05_1_main]
+    - [0x9E9D30, c, isk_05_2_entity]
+    - [0x9E9D30, c, isk_05_3_npc]
+  - name: isk_06
+    dir: world/area_isk/isk_06
+    type: code
+    start: 0x9ECC10
+    vram: 0x80240000
+    subsegments:
+    - [0x9ECC10, c, isk_06_0_header]
+    - [0x9ECC10, c, isk_06_1_main]
+    - [0x9ECC10, c, isk_06_2_entity]
+    - [0x9ECC10, c, isk_06_3_sand]
+    - [0x9ECC10, c, isk_06_4_switch]
+  - name: isk_07
+    dir: world/area_isk/isk_07
+    type: code
+    start: 0x9EE5C0
+    vram: 0x80240000
+    subsegments:
+    - [0x9EE5C0, c, isk_07_0_header]
+    - [0x9EE5C0, c, isk_07_1_main]
+    - [0x9EE5C0, c, isk_07_2_entity]
+    - [0x9EE5C0, c, isk_07_3_npc]
+    - [0x9EE670, c, isk_07_4_stairs]
+    - [0x9EE670, c, isk_07_5_lock]
+    - [0x9EE6B0, c, isk_07_6_switch]
+    - [0x9EE6D0, c, isk_07_7_ambush]
+  - name: isk_08
+    dir: world/area_isk/isk_08
+    type: code
+    start: 0x9F0F40
+    vram: 0x80240000
+    subsegments:
+    - [0x9F0F40, c, isk_08_0_header]
+    - [0x9F0F40, c, isk_08_1_main]
+    - [0x9F0F40, c, isk_08_2_npc]
+    - [0x9F1830, c, isk_08_3_entity]
+  - name: isk_09
+    dir: world/area_isk/isk_09
+    type: code
+    start: 0x9F2580
+    vram: 0x80240000
+    subsegments:
+    - [0x9F2580, c, isk_09_0_header]
+    - [0x9F2580, c, isk_09_1_music]
+    - [0x9F2580, c, isk_09_2_main]
+    - [0x9F2580, c, isk_09_3_entity]
+    - [0x9F2870, c, isk_09_4_stairs]
+    - [0x9F2870, c, isk_09_5_switch]
+  - name: isk_10
+    dir: world/area_isk/isk_10
+    type: code
+    start: 0x9F4B90
+    vram: 0x80240000
+    subsegments:
+    - [0x9F4B90, c, isk_10_0_header]
+    - [0x9F4B90, c, isk_10_1_main]
+    - [0x9F4B90, c, isk_10_2_entity]
+    - [0x9F5940, c, isk_10_3_bombable]
+  - name: isk_11
+    dir: world/area_isk/isk_11
+    type: code
+    start: 0x9F69D0
+    vram: 0x80240000
+    subsegments:
+    - [0x9F69D0, c, isk_11_0_header]
+    - [0x9F69D0, c, isk_11_1_music]
+    - [0x9F69D0, c, isk_11_2_main]
+    - [0x9F69D0, c, isk_11_3_entity]
+    - [0x9F69D0, c, isk_11_4_scene]
+    - [0x9F6A80, c, isk_11_5_puzzle]
+    - [0x9F6AF0, c, isk_11_6_lock]
+  - name: isk_12
+    dir: world/area_isk/isk_12
+    type: code
+    start: 0x9F9600
+    vram: 0x80240000
+    subsegments:
+    - [0x9F9600, c, isk_12_0_header]
+    - [0x9F9600, c, isk_12_1_main]
+    - [0x9F9600, c, isk_12_2_entity]
+    - [0x9F9600, c, isk_12_3_sand]
+    - [0x9F9600, c, isk_12_4_switch]
+  - name: isk_13
+    dir: world/area_isk/isk_13
+    type: code
+    start: 0x9FB730
+    vram: 0x80240000
+    subsegments:
+    - [0x9FB730, c, isk_13_0_header]
+    - [0x9FB730, c, isk_13_1_main]
+    - [0x9FB730, c, isk_13_2_entity]
+    - [0x9FB730, c, isk_13_3_npc]
+  - name: isk_14
+    dir: world/area_isk/isk_14
+    type: code
+    start: 0x9FE610
+    vram: 0x80240000
+    subsegments:
+    - [0x9FE610, c, isk_14_0_header]
+    - [0x9FE610, c, isk_14_1_main]
+    - [0x9FE610, c, isk_14_2_entity]
+    - [0x9FE610, c, isk_14_3_npc]
+  - name: isk_16
+    dir: world/area_isk/isk_16
+    type: code
+    start: 0xA01060
+    vram: 0x80240000
+    subsegments:
+    - [0xA01060, c, isk_16_0_header]
+    - [0xA01060, c, isk_16_1_main]
+    - [0xA01860, c, isk_16_2_npc]
+    - [0xA01860, c, isk_16_3_boss]
+    - [0xA01B60, c, isk_16_4_entity]
+  - name: isk_18
+    dir: world/area_isk/isk_18
+    type: code
+    start: 0xA03DE0
+    vram: 0x80240000
+    subsegments:
+    - [0xA03DE0, c, isk_18_0_header]
+    - [0xA03DE0, c, isk_18_1_main]
+    - [0xA03DE0, c, isk_18_2_npc]
+    - [0xA046D0, c, isk_18_3_entity]
+  - name: isk_19
+    dir: world/area_isk/isk_19
+    type: code
+    start: 0xA05540
+    vram: 0x80240000
+    subsegments:
+    - [0xA05540, c, isk_19_0_header]
+    - [0xA05540, c, isk_19_1_music]
+    - [0xA05540, c, isk_19_2_main]
+    - [0xA05540, c, isk_19_3_entity]
 
-  - [0x9E4560, bin]
+  - [0xA05A70, bin]
 
   - start: 0x1e937b8
     align: 8
