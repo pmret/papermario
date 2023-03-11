@@ -3017,6 +3017,7 @@ enum ShadingProfile {
     SHADING_ISK_UNUSED,
     SHADING_ISK_18,
     SHADING_ISK_19,
+    SHADING_HOS_01 = 0x00030000,
 };
 #endif
 

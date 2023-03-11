@@ -92,7 +92,7 @@ API_CALLABLE(N(AnimateBoomLengthPostHeist)) {
     camera->panActive = TRUE;
     camera->controlSettings.boomLength = N(CurrentBoomLengthPost);
     N(TargetBoomLengthPost)++;
-    if (N(TargetBoomLengthPost) < 70) {
+    if (N(TargetBoomLengthPost) < (s32)(70 * DT)) {
         return ApiStatus_BLOCK;
     }
     return ApiStatus_DONE1;
@@ -112,7 +112,7 @@ API_CALLABLE(N(AnimateViewPitchPostHeist)) {
     camera->panActive = TRUE;
     camera->controlSettings.viewPitch = N(CurrentViewPitch);
     N(TargetViewPitch)++;
-    if (N(TargetViewPitch) == 200) {
+    if (N(TargetViewPitch) == (s32)(200 * DT)) {
         return ApiStatus_DONE2;
     }
     return ApiStatus_BLOCK;
@@ -140,22 +140,22 @@ EvtScript N(EVS_ControlTwink) = {
     EVT_CALL(SetNpcAnimation, NPC_Twink, ANIM_Twink_Back)
     EVT_CALL(SetNpcYaw, NPC_Twink, 180)
     EVT_CALL(N(AnimateBoomLengthPostHeist))
-    EVT_WAIT(15)
+    EVT_WAIT(15 * DT)
     EVT_THREAD
-        EVT_WAIT(10)
+        EVT_WAIT(10 * DT)
         EVT_CALL(InterpNpcYaw, NPC_Twink, 0, 0)
         EVT_WAIT(2)
         EVT_CALL(SetNpcAnimation, NPC_Twink, ANIM_Twink_Still)
-        EVT_WAIT(20)
+        EVT_WAIT(20 * DT)
         EVT_CALL(InterpNpcYaw, NPC_Twink, 180, 0)
         EVT_WAIT(2)
         EVT_CALL(SetNpcAnimation, NPC_Twink, ANIM_Twink_Back)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_WAIT(100)
+        EVT_WAIT(100 * DT)
         EVT_CALL(N(AnimateViewPitchPostHeist))
     EVT_END_THREAD
-    EVT_CALL(LoadPath, 200, EVT_PTR(N(TwinkFlightPath)), ARRAY_COUNT(N(TwinkFlightPath)), EASING_LINEAR)
+    EVT_CALL(LoadPath, 200 * DT, EVT_PTR(N(TwinkFlightPath)), ARRAY_COUNT(N(TwinkFlightPath)), EASING_LINEAR)
     EVT_LABEL(0)
     EVT_CALL(GetNextPathPos)
     EVT_CALL(SetNpcPos, NPC_Twink, LVar1, LVar2, LVar3)
@@ -165,10 +165,10 @@ EvtScript N(EVS_ControlTwink) = {
     EVT_END_IF
     EVT_CALL(SetNpcPos, NPC_Twink, NPC_DISPOSE_LOCATION)
     EVT_THREAD
-        EVT_WAIT(85)
+        EVT_WAIT(85 * DT)
         EVT_CALL(N(BlockForever))
     EVT_END_THREAD
-    EVT_WAIT(120)
+    EVT_WAIT(120 * DT)
     EVT_CALL(N(ResumeIntroState))
     EVT_RETURN
     EVT_END

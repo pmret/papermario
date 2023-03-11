@@ -46,17 +46,17 @@ EvtScript N(EVS_Scene_PreTitle) = {
     EVT_CALL(EnableTexPanning, MODEL_k12, TRUE)
     EVT_THREAD
         EVT_SETF(LVar0, -1800)
-        EVT_LOOP(450)
+        EVT_LOOP(450 * DT)
             EVT_CALL(TranslateModel, MODEL_o3, 0, LVar0, 0)
-            EVT_ADDF(LVar0, EVT_FLOAT(1.5))
+            EVT_ADDF(LVar0, EVT_FLOAT(1.5 / DT))
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_THREAD
         EVT_SETF(LVar0, -1725)
-        EVT_LOOP(450)
+        EVT_LOOP(450 * DT)
             EVT_CALL(TranslateGroup, MODEL_kumo, 0, LVar0, 0)
-            EVT_ADDF(LVar0, EVT_FLOAT(2.5))
+            EVT_ADDF(LVar0, EVT_FLOAT(2.5 / DT))
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -70,7 +70,7 @@ EvtScript N(EVS_Scene_PreTitle) = {
         EVT_END_LOOP
         EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 4, 0, -130, 480, 0)
     EVT_END_THREAD
-    EVT_CALL(MakeLerp, 350, -200, 400, EASING_LINEAR)
+    EVT_CALL(MakeLerp, 350, -200, 400 * DT, EASING_LINEAR)
     EVT_SET(LVar2, 0)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -84,7 +84,7 @@ EvtScript N(EVS_Scene_PreTitle) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_21"), kmr_21_ENTRY_0, TRANSITION_7)
-    EVT_WAIT(100)
+    EVT_WAIT(100 * DT)
     EVT_RETURN
     EVT_END
 };

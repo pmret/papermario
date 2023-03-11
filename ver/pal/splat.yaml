@@ -113,6 +113,11 @@ segments:
 
   - [0x1DA400, bin]
 
+  - [0x227080, ci8,     title/bg_1, 264, 162]
+  - [0x231790, palette, title/bg_1]
+
+  - [0x231990, bin]
+
   - name: world_model_anim_kzn_01
     dir: world/model_anim/kzn
     type: code
@@ -2055,8 +2060,128 @@ segments:
     - [0xA73070, c, nok_15_3_entity]
     - [0xA73070, c, nok_15_4_npc]
     - [0xA752D0, c, nok_15_5_foliage]
+  - name: hos_00
+    dir: world/area_hos/hos_00
+    type: code
+    start: 0xA77B80
+    vram: 0x80240000
+    subsegments:
+    - [0xA77B80, c, hos_00_0_header]
+    - [0xA77BD0, c, hos_00_1_music]
+    - [0xA77BD0, c, hos_00_2_main]
+    - [0xA78340, c, hos_00_3_unused]
+    - [0xA78340, c, hos_00_4_npc]
+    - [0xA78370, c, hos_00_5_entity]
+    - [0xA78370, c, hos_00_6_scenes]
+    - [0xA787C0, c, hos_00_7_shade_gfx]
+  - name: hos_01
+    dir: world/area_hos/hos_01
+    type: code
+    start: 0xA7C710
+    vram: 0x80240000
+    subsegments:
+    - [0xA7C710, c, hos_01_0_header]
+    - [0xA7C710, c, hos_01_1_music]
+    - [0xA7C710, c, hos_01_2_main]
+    - [0xA7CEB0, c, hos_01_3_model_fx]
+    - [0xA7D3C0, c, hos_01_4_npc]
+    - [0xA7D4E0, c, hos_01_5_entity]
+    - [0xA7D4E0, c, hos_01_6_star_way]
+  - name: hos_02
+    dir: world/area_hos/hos_02
+    type: code
+    start: 0xA820E0
+    vram: 0x80240000
+    subsegments:
+    - [0xA820E0, c, hos_02_0_header]
+    - [0xA820E0, c, hos_02_1_music]
+    - [0xA820E0, c, hos_02_2_main]
+    - [0xA820E0, c, hos_02_3_model_fx]
+    - [0xA830B0, c, hos_02_4_unused]
+    - [0xA830D0, c, hos_02_5_npc]
+    - [0xA84BC0, c, hos_02_6_descent]
+  - name: hos_03
+    dir: world/area_hos/hos_03
+    type: code
+    start: 0xA86FC0
+    vram: 0x80240000
+    subsegments:
+    - [0xA86FC0, c, hos_03_0_header]
+    - [0xA86FC0, c, hos_03_1_music]
+    - [0xA86FC0, c, hos_03_2_main]
+    - [0xA86FF0, c, hos_03_3_model_fx]
+    - [0xA87A30, c, hos_03_4_rooms]
+    - [0xA87A30, c, hos_03_5_foliage]
+    - [0xA87C70, c, hos_03_6_npc]
+    - [0xA8A500, c, hos_03_7_shop]
+    - [0xA8A500, c, hos_03_8_entity]
+  - name: hos_04
+    dir: world/area_hos/hos_04
+    type: code
+    start: 0xA92DD0
+    vram: 0x80240000
+    subsegments:
+    - [0xA92DD0, c, hos_04_0_header]
+    - [0xA92DD0, c, hos_04_1_music]
+    - [0xA92DD0, c, hos_04_2_main]
+    - [0xA92DD0, c, hos_04_3_fountains]
+    - [0xA93390, c, hos_04_4_unused]
+    - [0xA933B0, c, hos_04_6_intro]
+    - [0xA93930, c, hos_04_7_starship]
+    - [0xA939A0, c, hos_04_8_narrator]
+  - name: hos_05
+    dir: world/area_hos/hos_05
+    type: code
+    start: 0xA96140
+    vram: 0x80240000
+    subsegments:
+    - [0xA96140, c, hos_05_0_header]
+    - [0xA96140, c, hos_05_1_music]
+    - [0xA96140, c, hos_05_2_main]
+    - [0xA96140, c, hos_05_3_misc]
+    - [0xA96970, c, hos_05_4_npc]
+    - [0xA969C0, c, hos_05_5_intro]
+    - [0xA9AB20, c, hos_05_6_narrator]
+    - [0xA9ADF0, c, hos_05_7_model_fx]
+    - [0xA9B8F0, c, hos_05_8_star_ship]
+  - name: hos_06
+    dir: world/area_hos/hos_06
+    type: code
+    start: 0xAA5380
+    vram: 0x80240000
+    subsegments:
+    - [0xAA5380, c, hos_06_0_header]
+    - [0xAA5380, c, hos_06_1_entity]
+    - [0xAA5380, c, hos_06_2_main]
+    - [0xAA5690, c, hos_06_3_merlow]
+    - [0xAA60B0, c, hos_06_4_rooms]
+    - [0xAA60D0, c, hos_06_5_merluvlee]
+    - [0xAA7350, c, hos_06_6_chest]
+  - name: hos_10
+    dir: world/area_hos/hos_10
+    type: code
+    start: 0xAAB5E0
+    vram: 0x80240000
+    subsegments:
+    - [0xAAB5E0, c, hos_10_0_header]
+    - [0xAAB600, c, hos_10_1_music]
+    - [0xAAB600, c, hos_10_2_npc1]
+    - [0xAAB600, c, hos_10_3_npc2]
+    - [0xAAB600, c, hos_10_4_main]
+    - [0xAAB600, c, hos_10_5_intro]
+    - [0xAABA40, c, hos_10_6_pre_title]
+    - [0xAABD50, c, hos_10_7_ending]
+  - name: hos_20
+    dir: world/area_hos/hos_20
+    type: code
+    start: 0xAB17D0
+    vram: 0x80240000
+    subsegments:
+    - [0xAB17D0, c, hos_20_0_header]
+    - [0xAB17D0, c, hos_20_1_main]
+    - [0xAB1AE0, c, hos_20_2_starship]
 
-  - [0xA77B80, bin]
+  - [0xAB2E00, bin]
 
   - start: 0x1e937b8
     align: 8
