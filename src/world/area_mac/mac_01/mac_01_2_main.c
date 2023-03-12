@@ -117,6 +117,10 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(SetCamBGColor, CAM_DEFAULT, 0, 0, 0)
     EVT_CALL(SetCamEnabled, CAM_DEFAULT, TRUE)
     EVT_CALL(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
+#if VERSION_PAL
+    EVT_CALL(GetLanguage, LocalVar(0))
+    EVT_CALL(SetModelTexVariant, 68, LocalVar(0))
+#endif
     EVT_SET(AF_MAC_0E, FALSE)
     EVT_SET(AF_MAC_0F, FALSE)
     EVT_SET(AF_MAC_10, FALSE)

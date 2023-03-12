@@ -296,7 +296,7 @@ API_CALLABLE(N(SuperBlock_AnimateEnergyOrbs)) {
     userData = (EnergyOrbSet*)script->userData;
     switch (userData->scatterState) {
         case 0:
-            t1 = update_lerp(EASING_CUBIC_OUT, 0.0f, 50.0f, userData->scatterStateTime, 20);
+            t1 = update_lerp(EASING_CUBIC_OUT, 0.0f, 50.0f, userData->scatterStateTime, 20 * DT);
             for (i = 0; i < SUPER_BLOCK_NUM_ORBS; i++) {
                 x = userData->posY[i] = 0.0f;
                 add_vec2D_polar(&x, &userData->posY[i], t1, N(SuperBlock_UpgradeOrbAngles)[i]);
@@ -305,7 +305,7 @@ API_CALLABLE(N(SuperBlock_AnimateEnergyOrbs)) {
             }
 
             userData->scatterStateTime++;
-            if (userData->scatterStateTime >= 21) {
+            if (userData->scatterStateTime >= (s32)(21 * DT)) {
                 userData->scatterState = 1;
                 userData->scatterStateTime = 0;
             }
@@ -320,14 +320,14 @@ API_CALLABLE(N(SuperBlock_AnimateEnergyOrbs)) {
             }
 
             userData->scatterStateTime++;
-            if (userData->scatterStateTime > 15) {
-                userData->scatterStateTime = 15;
+            if (userData->scatterStateTime > (s32)(15 * DT)) {
+                userData->scatterStateTime = 15 * DT;
                 userData->scatterState = 2;
             }
             break;
         case 2:
             userData->scatterStateTime++;
-            if (userData->scatterStateTime > 30) {
+            if (userData->scatterStateTime > (s32)(30 * DT)) {
                 for (i = 0; i < SUPER_BLOCK_NUM_ORBS; i++) {
                     userData->orbEffects[i]->flags |= EFFECT_INSTANCE_FLAG_10;
                 }
@@ -339,20 +339,20 @@ API_CALLABLE(N(SuperBlock_AnimateEnergyOrbs)) {
     switch (userData->gatherState) {
         case 0:
             userData->gatherStateTime++;
-            if (userData->gatherStateTime > 15) {
+            if (userData->gatherStateTime > (s32)(15 * DT)) {
                 userData->gatherState = 1;
                 userData->gatherStateTime = 0;
             }
             break;
         case 1:
             for (i = 0; i < SUPER_BLOCK_NUM_ORBS; i++) {
-                userData->posX[i] += update_lerp(EASING_QUADRATIC_IN, 0.0f, userData->partnerPosX[i], userData->gatherStateTime, 20);
-                userData->posY[i] += update_lerp(EASING_QUADRATIC_IN, 0.0f, userData->partnerPosY[i], userData->gatherStateTime, 20);
-                userData->posZ[i] += update_lerp(EASING_QUADRATIC_IN, 0.0f, userData->partnerPosZ[i], userData->gatherStateTime, 20);
+                userData->posX[i] += update_lerp(EASING_QUADRATIC_IN, 0.0f, userData->partnerPosX[i], userData->gatherStateTime, 20 * DT);
+                userData->posY[i] += update_lerp(EASING_QUADRATIC_IN, 0.0f, userData->partnerPosY[i], userData->gatherStateTime, 20 * DT);
+                userData->posZ[i] += update_lerp(EASING_QUADRATIC_IN, 0.0f, userData->partnerPosZ[i], userData->gatherStateTime, 20 * DT);
             }
 
             userData->gatherStateTime++;
-            if (userData->gatherStateTime > 20) {
+            if (userData->gatherStateTime > (s32)(20 * DT)) {
                 userData->gatherState = 2;
                 userData->gatherStateTime = 0;
             }
@@ -436,14 +436,14 @@ API_CALLABLE(N(SuperBlock_WaitForPlayerToLand)) {
 }
 
 EvtScript N(SuperBlock_ShowUpgradeEffects) = {
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_CALL(PlaySound, SOUND_212D)
     EVT_CALL(N(SuperBlock_GatherEnergyFX), SUPER_BLOCK_MAPVAR)
-    EVT_WAIT(85)
+    EVT_WAIT(85 * DT)
     EVT_THREAD
         EVT_CALL(PlaySound, SOUND_212E)
         EVT_CALL(N(SuperBlock_WhiteScreenFlash), 70, 70)
-        EVT_WAIT(27)
+        EVT_WAIT(27 * DT)
         EVT_CALL(PlaySound, SOUND_208E)
         EVT_CALL(N(SuperBlock_WhiteScreenFlash), 50, 50)
     EVT_END_THREAD
@@ -452,17 +452,17 @@ EvtScript N(SuperBlock_ShowUpgradeEffects) = {
         EVT_CALL(N(SuperBlock_HideBlockContent), SUPER_BLOCK_MAPVAR)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_WAIT(47)
+        EVT_WAIT(47 * DT)
         EVT_CALL(N(SuperBlock_RadiateFaintEnergyFX))
         EVT_CALL(N(SuperBlock_PartnerSparkles2))
-        EVT_WAIT(5)
+        EVT_WAIT(5 * DT)
         EVT_CALL(N(SuperBlock_PartnerSparkles4))
-        EVT_WAIT(5)
+        EVT_WAIT(5 * DT)
         EVT_CALL(N(SuperBlock_PartnerSparkles2))
     EVT_END_THREAD
     EVT_WAIT(3)
     EVT_CALL(N(SuperBlock_AnimateEnergyOrbs), SUPER_BLOCK_MAPVAR)
-    EVT_WAIT(30)
+    EVT_WAIT(30 * DT)
     EVT_RETURN
     EVT_END
 };
@@ -521,7 +521,7 @@ EvtScript N(SuperBlock_OnHit) = {
     EVT_ELSE
         EVT_CALL(func_802CF56C, 2)
     EVT_END_IF
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_00DF, 160, 40)
     EVT_CALL(ShowChoice, MSG_Choice_000D)
     EVT_CALL(CloseMessage)

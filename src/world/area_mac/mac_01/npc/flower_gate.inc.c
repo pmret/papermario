@@ -266,7 +266,11 @@ EvtScript N(EVS_FadeOutFlowerGateGlowAlpha) = {
 };
 
 EvtScript N(EVS_Scene_FlowerGateAppears) = {
+#if VERSION_PAL
+    EVT_CALL(SetCamProperties, CAM_DEFAULT, EVT_FLOAT(1.0 / DT), 266, 27, 373, 300, 15, -6)
+#else
     EVT_CALL(SetCamProperties, CAM_DEFAULT, 1, 266, 27, 373, 300, 15, -6)
+#endif
     EVT_EXEC(N(EVS_PlayFlowerGateSong))
     EVT_PLAY_EFFECT(EFFECT_LIGHT_RAYS, 0, 266, 50, 338, 1, LVar9)
     EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_2A2, SOUND_SPACE_MODE_0)
@@ -281,7 +285,7 @@ EvtScript N(EVS_Scene_FlowerGateAppears) = {
     EVT_END_THREAD
     EVT_SET(LVar0, 3)
     EVT_EXEC_GET_TID(N(EVS_ModulateFlowerGateGlowAlpha), LVar2)
-    EVT_WAIT(30)
+    EVT_WAIT(30 / DT)
     EVT_CALL(EnableModel, MODEL_r_door, TRUE)
     EVT_CALL(PlaySoundAtCollider, COLLIDER_deilitf, SOUND_2A3, SOUND_SPACE_MODE_0)
     EVT_CALL(MakeLerp, 0, 3060, 80, EASING_LINEAR)
@@ -309,7 +313,11 @@ EvtScript N(EVS_Scene_FlowerGateAppears) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_EXEC_WAIT(N(EVS_FadeOutFlowerGateGlowAlpha))
+#if VERSION_PAL
+    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(1 * DT))
+#else
     EVT_CALL(ResetCam, CAM_DEFAULT, 1)
+#endif
     EVT_EXEC(N(EVS_SetupMusic))
     EVT_RETURN
     EVT_END
@@ -331,10 +339,14 @@ s32 N(ItemList_MagicalSeeds)[] = {
 EvtScript N(EVS_MinhT_PlantSeed) = {
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(SpeakToPlayer, NPC_MinhT, ANIM_MinhT_Talk, ANIM_MinhT_Idle, 0, LVar4)
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 266, 27, 373)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 266, 27, 373)
+#if VERSION_PAL
+    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.0 / DT))
+#else
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, 1)
+#endif
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(InterpNpcYaw, NPC_SELF, 90, 1)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MinhT_Run)
@@ -354,7 +366,7 @@ EvtScript N(EVS_MinhT_PlantSeed) = {
             EVT_CALL(NpcMoveTo, NPC_SELF, 330, 407, 0)
     EVT_END_SWITCH
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MinhT_Cheer)
-    EVT_WAIT(20)
+    EVT_WAIT(20 * DT)
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_2A1, SOUND_SPACE_MODE_0)
     EVT_SWITCH(LVar5)
         EVT_CASE_EQ(0)

@@ -1,0 +1,1368 @@
+name: Paper Mario (PAL)
+sha1: 2111d39265a317414d359e35a7d971c4dfa5f9e1
+options:
+  basename: papermario
+  find_file_boundaries: True
+  compiler: GCC
+  mnemonic_ljust: 10
+  platform: n64
+  subalign: 8
+  asm_data_macro: "dlabel"
+
+  base_path: ../..
+  target_path: ver/pal/baserom.z64
+  extensions_path: tools/splat_ext
+  symbol_addrs_path: ver/pal/symbol_addrs.txt
+  ld_script_path: ver/pal/papermario.ld
+  ld_symbol_header_path: ver/pal/build/include/ld_addrs.h
+  src_path: src
+  asm_path: ver/pal/asm
+  asset_path: assets/pal
+  build_path: ver/pal/build
+  cache_path: ver/pal/.splat_cache
+  create_undefined_funcs_auto: False
+  create_undefined_syms_auto: False
+  undefined_funcs_auto_path: ver/us/undefined_funcs_auto.txt
+  undefined_syms_auto_path: ver/us/undefined_syms_auto.txt
+  symbol_name_format: PAL_$VRAM
+  symbol_name_format_no_rom: PAL_$VRAM_$SEG
+asset_stack:
+  - pal
+segments:
+  - name: header
+    type: header
+    start: 0
+  - [0x40, bin]
+
+  - type: group
+    dir: charset
+    vram: 0
+    start: 0x110CB0
+    subsegments:
+    - [0x110CB0, linker_offset,       standard]
+    - [0x110CB0, pm_charset,          standard, 16, 16, 0xA6]
+    - [0x115FB0, linker_offset,       standard_pal]
+    - [0x115FB0, pm_charset_palettes, standard,         0x50]
+    - [0x1164B0, linker_offset,       title]
+    - [0x1164B0, pm_charset,          title,    12, 15, 0x29]
+    - [0x117410, linker_offset,       subtitle]
+    - [0x117410, pm_charset,          subtitle, 12, 12, 0x29]
+    - [0x117F98, linker_offset,       credits_pal]
+    - [0x117F98, pm_charset_palettes, subtitle,         1]
+    - [0x117FA8, pm_charset_palettes, title,            1]
+    - [0x117FB8, ci8,     peach_letter, 150, 105]
+    - [0x11BD40, palette, peach_letter]
+    - [0x11BF40, linker_offset, postcard]
+    - [0x11BF40, ci4,     postcard, 150, 105]
+    - [0x11DE08, linker_offset, postcard_pal]
+    - [0x11DE08, palette, postcard]
+    - [0x11DE28, linker_offset, letter_content_1]
+    - [0x11DE28, ci8,     letter_content_1, 70, 95]
+    - [0x11F828, linker_offset, letter_content_1_pal]
+    - [0x11F828, palette, letter_content_1]
+    - [0x11FA28, linker_offset, letter_content_2]
+    - [0x11FA28, ci8,     letter_content_2, 70, 95]
+    - [0x121428, linker_offset, letter_content_2_pal]
+    - [0x121428, palette, letter_content_2]
+    - [0x121628, linker_offset, letter_content_3]
+    - [0x121628, ci8,     letter_content_3, 70, 95]
+    - [0x123028, linker_offset, letter_content_3_pal]
+    - [0x123028, palette, letter_content_3]
+    - [0x123228, linker_offset, letter_content_4]
+    - [0x123228, ci8,     letter_content_4, 70, 95]
+    - [0x124C28, linker_offset, letter_content_4_pal]
+    - [0x124C28, palette, letter_content_4]
+    - [0x124E28, linker_offset, letter_content_5]
+    - [0x124E28, ci8,     letter_content_5, 70, 95]
+    - [0x126828, linker_offset, letter_content_5_pal]
+    - [0x126828, palette, letter_content_5]
+    - [0x126A28, linker_offset, letter_content_6]
+    - [0x126A28, ci8,     letter_content_6, 70, 95]
+    - [0x128428, linker_offset, letter_content_6_pal]
+    - [0x128428, palette, letter_content_6]
+    - [0x128628, linker_offset, letter_content_7]
+    - [0x128628, ci8,     letter_content_7, 70, 95]
+    - [0x12A028, linker_offset, letter_content_7_pal]
+    - [0x12A028, palette, letter_content_7]
+    - [0x12A228, linker_offset, letter_content_8]
+    - [0x12A228, ci8,     letter_content_8, 70, 95]
+    - [0x12BC28, linker_offset, letter_content_8_pal]
+    - [0x12BC28, palette, letter_content_8]
+    - [0x12BE28, linker_offset, letter_content_9]
+    - [0x12BE28, ci8,     letter_content_9, 70, 95]
+    - [0x12D828, linker_offset, letter_content_9_pal]
+    - [0x12D828, palette, letter_content_9]
+    - [0x12DA28, linker_offset, letter_content_10]
+    - [0x12DA28, ci8,     letter_content_10, 70, 95]
+    - [0x12F428, linker_offset, letter_content_10_pal]
+    - [0x12F428, palette, letter_content_10]
+    - [0x12F628, linker_offset, letter_content_11]
+    - [0x12F628, ci8,     letter_content_11, 70, 95]
+    - [0x131028, linker_offset, letter_content_11_pal]
+    - [0x131028, palette, letter_content_11]
+    - [0x131228, linker_offset, letter_content_12]
+    - [0x131228, ci8,     letter_content_12, 70, 95]
+    - [0x132C28, linker_offset, letter_content_12_pal]
+    - [0x132C28, palette, letter_content_12]
+    - [0x132E28, bin] # length 0x18, non zero
+
+  - [0x132E40, bin]
+
+  - [0x1DA1E0, ci4,     icon/present, 32, 32]
+  - [0x1DA3E0, palette, icon/present]
+
+  - [0x1DA400, bin]
+
+  - name: world_model_anim_kzn_01
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x8219F0
+    vram: 0x80234000
+    subsegments:
+    - [0x8219F0, c, "01"]
+  - name: world_model_anim_kzn_00
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x822720
+    vram: 0x80234000
+    subsegments:
+    - [0x822720, c, "00"]
+  - name: world_model_anim_kzn_04
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x823170
+    vram: 0x80234000
+    subsegments:
+    - [0x823170, c, "04"]
+  - name: world_model_anim_kzn_05
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x8240C0
+    vram: 0x80234000
+    subsegments:
+    - [0x8240C0, c, "05"]
+  - name: world_model_anim_kzn_06
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x824DC0
+    vram: 0x80234000
+    subsegments:
+    - [0x824DC0, c, "06"]
+  - name: world_model_anim_kzn_07
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x825870
+    vram: 0x80234000
+    subsegments:
+    - [0x825870, c, "07"]
+  - name: world_model_anim_kzn_08
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x826310
+    vram: 0x80234000
+    subsegments:
+    - [0x826310, c, "08"]
+  - name: world_model_anim_kzn_09
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x8270E0
+    vram: 0x80234000
+    subsegments:
+    - [0x8270E0, c, "09"]
+  - name: world_model_anim_kzn_0A
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x827E10
+    vram: 0x80234000
+    subsegments:
+    - [0x827E10, c, "0A"]
+  - name: world_model_anim_kzn_0B
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x82AE60
+    vram: 0x80234000
+    subsegments:
+    - [0x82AE60, c, "0B"]
+  - name: world_model_anim_kzn_0C
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x82D750
+    vram: 0x80234000
+    subsegments:
+    - [0x82D750, c, "0C"]
+  - name: world_model_anim_kzn_0D
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x82FA90
+    vram: 0x80234000
+    subsegments:
+    - [0x82FA90, c, "0D"]
+  - name: world_model_anim_kzn_0E
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x830560
+    vram: 0x80234000
+    subsegments:
+    - [0x830560, c, "0E"]
+  - name: world_model_anim_kzn_02
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x830FE0
+    vram: 0x80234000
+    subsegments:
+    - [0x830FE0, c, "02"]
+  - name: world_model_anim_kzn_03
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x8334A0
+    vram: 0x80234000
+    subsegments:
+    - [0x8334A0, c, "03"]
+  - name: world_model_anim_kzn_0F
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x833EE0
+    vram: 0x80234000
+    subsegments:
+    - [0x833EE0, c, "0F"]
+  - name: world_model_anim_kzn_10
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x8368E0
+    vram: 0x80234000
+    subsegments:
+    - [0x8368E0, c, "10"]
+  - name: world_model_anim_kzn_11
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x839680
+    vram: 0x80234000
+    subsegments:
+    - [0x839680, c, "11"]
+  - name: world_model_anim_kzn_12
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x839BC0
+    vram: 0x80234000
+    subsegments:
+    - [0x839BC0, c, "12"]
+  - name: world_model_anim_kzn_13
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x83B080
+    vram: 0x80234000
+    subsegments:
+    - [0x83B080, c, "13"]
+  - name: world_model_anim_kzn_14
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x83BD50
+    vram: 0x80234000
+    subsegments:
+    - [0x83BD50, c, "14"]
+  - name: world_model_anim_kzn_15
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x83C8F0
+    vram: 0x80234000
+    subsegments:
+    - [0x83C8F0, c, "15"]
+  - name: world_model_anim_kzn_16
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x83D570
+    vram: 0x80234000
+    subsegments:
+    - [0x83D570, c, "16"]
+  - name: world_model_anim_kzn_17
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x83E110
+    vram: 0x80234000
+    subsegments:
+    - [0x83E110, c, "17"]
+  - name: world_model_anim_kzn_18
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x83E9F0
+    vram: 0x80234000
+    subsegments:
+    - [0x83E9F0, c, "18"]
+  - name: world_model_anim_kzn_19
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x83F2F0
+    vram: 0x80234000
+    subsegments:
+    - [0x83F2F0, c, "19"]
+  - name: world_model_anim_kzn_1A
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x841600
+    vram: 0x80234000
+    subsegments:
+    - [0x841600, c, "1A"]
+  - name: world_model_anim_kzn_1B
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x843010
+    vram: 0x80234000
+    subsegments:
+    - [0x843010, c, "1B"]
+  - name: world_model_anim_kzn_1C
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x843740
+    vram: 0x80234000
+    subsegments:
+    - [0x843740, c, "1C"]
+  - name: world_model_anim_kzn_1D
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x845080
+    vram: 0x80234000
+    subsegments:
+    - [0x845080, c, "1D"]
+  - name: world_model_anim_kzn_1E
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x845770
+    vram: 0x80234000
+    subsegments:
+    - [0x845770, c, "1E"]
+  - name: world_model_anim_kzn_1F
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x845970
+    vram: 0x80234000
+    subsegments:
+    - [0x845970, c, "1F"]
+  - name: world_model_anim_kzn_20
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x8461D0
+    vram: 0x80234000
+    subsegments:
+    - [0x8461D0, c, "20"]
+  - name: world_model_anim_kzn_21
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x848210
+    vram: 0x80234000
+    subsegments:
+    - [0x848210, c, "21"]
+  - name: world_model_anim_kzn_22
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x84AA00
+    vram: 0x80234000
+    subsegments:
+    - [0x84AA00, c, "22"]
+  - name: world_model_anim_kzn_23
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x84B340
+    vram: 0x80234000
+    subsegments:
+    - [0x84B340, c, "23"]
+  - name: world_model_anim_kzn_24
+    dir: world/model_anim/kzn
+    type: code
+    start: 0x84C440
+    vram: 0x80234000
+    subsegments:
+    - [0x84C440, c, "24"]
+
+  - [0x84CF10, bin]
+
+############
+### Maps ###
+############
+  - name: machi
+    dir: world/area_mac/machi
+    type: code
+    start: 0x853440
+    vram: 0x80240000
+    subsegments:
+    - [0x853440, c, machi_0_header]
+    - [0x853440, c, machi_1_tables]
+    - [0x853440, c, machi_2_main]
+    - [0x853470, c, machi_3_entity]
+    - [0x8535F0, c, machi_4_goomba_king]
+    - [0x8535F0, c, machi_5_npc]
+    - [0x8538F0, c, machi_6_misstar]
+    - [0x853AD0, c, machi_7_partner]
+  - name: mac_00
+    dir: world/area_mac/mac_00
+    type: code
+    start: 0x856DB0
+    vram: 0x80240000
+    subsegments:
+    - [0x856DB0, c, mac_00_0_header]
+    - [0x856DB0, c, mac_00_1_music]
+    - [0x856DB0, c, mac_00_2_main]
+    - [0x8573E0, c, mac_00_3_entity]
+    - [0x8573E0, c, mac_00_4_rooms]
+    - [0x8573E0, c, mac_00_5_npc]
+    - [0x859070, c, mac_00_6_shop]
+    - [0x859070, c, mac_00_7_music_mix]
+    - [0x8591A0, c, mac_00_8_demo]
+    - [0x8591A0, c, mac_00_9_water_gfx]
+    - [0x859320, c, mac_00_10_shared_npc]
+    - [0x85A910, c, mac_00_11_intro_npc]
+    - [0x85A910, c, mac_00_12_intro]
+    - [0x85A910, c, mac_00_13_epilogue_npc]
+    - [0x85A910, c, mac_00_14_epilogue]
+  - name: mac_01
+    dir: world/area_mac/mac_01
+    type: code
+    start: 0x86C990
+    vram: 0x80240000
+    subsegments:
+    - [0x86C990, c, mac_01_0_header]
+    - [0x86C990, c, mac_01_1_music]
+    - [0x86C990, c, mac_01_2_main]
+    - [0x86C990, c, mac_01_3_entity]
+    - [0x86C990, c, mac_01_4_rooms]
+    - [0x86C990, c, mac_01_5_shop]
+    - [0x86CD50, c, mac_01_6_crystal_ball_gfx]
+    - [0x86D810, c, mac_01_7_bulletin]
+    - [0x86D8E0, c, mac_01_8_music_mix]
+    - [0x86DA10, c, mac_01_9_npc]
+    - [0x871EE0, c, mac_01_10_intro_npc]
+    - [0x872D70, c, mac_01_11_epilogue_npc]
+    - [0x872D70, c, mac_01_12_intro]
+    - [0x872E20, c, mac_01_13_foliage]
+    - [0x873060, .data, mac_01_0_header]
+    - [0x873100, .data, mac_01_1_music]
+    - [0x8732E0, .data, mac_01_2_main]
+    - [0x873D30, .data, mac_01_3_entity]
+    - [0x873DE0, .data, mac_01_4_rooms]
+    - [0x8747B0, .data, mac_01_5_shop]
+    - [0x874DD0, .data, mac_01_6_crystal_ball_gfx]
+    - [0x874EA0, .data, mac_01_7_bulletin]
+    - [0x875210, .data, mac_01_8_music_mix]
+    - start: 0x875320
+      type: .data
+      name: mac_01_9_npc
+      subsegments:
+      - [0x875320]
+      - [0x877F80, vtx_common, ../../toad_house/blanket]
+      - [0x879560, gfx_common, ../../toad_house/blanket]
+      - [0x8796C8, rgba16, ../../toad_house/blanket, 16, 32, namespaced]
+      - [0x879AC8]
+    - [0x88BB30, .data, mac_01_10_intro_npc]
+    - [0x88C440, .data, mac_01_11_epilogue_npc]
+    - [0x88E270, .data, mac_01_12_intro]
+    - [0x88E5D0, .data, mac_01_13_foliage]
+  - name: mac_02
+    dir: world/area_mac/mac_02
+    type: code
+    start: 0x88F430
+    vram: 0x80240000
+    subsegments:
+    - [0x88F430, c, mac_02_0_header]
+    - [0x88F430, c, mac_02_1_music]
+    - [0x88F430, c, mac_02_2_main]
+    - [0x88FA20, c, mac_02_3_rooms]
+    - [0x88FAE0, c, mac_02_4_foliage]
+    - [0x88FD20, c, mac_02_5_entity]
+    - [0x88FD60, c, mac_02_6_npc]
+    - [0x892820, c, mac_02_7_music_mix]
+  - name: mac_03
+    dir: world/area_mac/mac_03
+    type: code
+    start: 0x89D9B0
+    vram: 0x80240000
+    subsegments:
+    - [0x89D9B0, c, mac_03_0_header]
+    - [0x89D9B0, c, mac_03_1_music]
+    - [0x89D9B0, c, mac_03_2_main]
+    - [0x89DCD0, c, mac_03_3_train]
+    - [0x89DE60, c, mac_03_4_npc]
+    - [0x89F6B0, c, mac_03_5_entity]
+    - [0x89F6B0, c, mac_03_6_foliage]
+    - [0x89F8F0, c, mac_03_7_oinks]
+    - [0x8A0220, c, mac_03_8_demo]
+  - name: mac_04
+    dir: world/area_mac/mac_04
+    type: code
+    start: 0x8AEDE0
+    vram: 0x80240000
+    subsegments:
+    - [0x8AEDE0, c, mac_04_0_header]
+    - [0x8AEE30, c, mac_04_1_music]
+    - [0x8AEE30, c, mac_04_2_main]
+    - [0x8AEFA0, c, mac_04_3_rooms]
+    - [0x8AF000, c, mac_04_4_foliage]
+    - [0x8AF240, c, mac_04_5_shop]
+    - [0x8AF240, c, mac_04_6_npc]
+    - [0x8B0A70, c, mac_04_7_wish_scene]
+    - [0x8B0A70, c, mac_04_8_entity]
+    - [0x8B0CD0, c, mac_04_9_music_mix]
+  - name: mac_05
+    dir: world/area_mac/mac_05
+    type: code
+    start: 0x8BE3C0
+    vram: 0x80240000
+    subsegments:
+    - [0x8BE3C0, c, mac_05_0_header]
+    - [0x8BE3C0, c, mac_05_1_music]
+    - [0x8BE3C0, c, mac_05_2_entity]
+    - [0x8BE3C0, c, mac_05_3_main]
+    - [0x8BE850, c, mac_05_4_npc]
+    - [0x8C17B0, c, mac_05_5_whale]
+    - [0x8C2170, c, mac_05_6_rooms]
+    - [0x8C2170, c, mac_05_7_club64_sign]
+  - name: mac_06
+    dir: world/area_mac/mac_06
+    type: code
+    start: 0x8D0DD0
+    vram: 0x80240000
+    subsegments:
+    - [0x8D0DD0, c, mac_06_0_header]
+    - [0x8D0DD0, c, mac_06_1_main]
+    - [0x8D1290, c, mac_06_2_whale]
+    - [0x8D1C50, c, mac_06_3_npc]
+  - name: tik_01
+    dir: world/area_tik/tik_01
+    type: code
+    start: 0x8D5740
+    vram: 0x80240000
+    subsegments:
+    - [0x8D5740, c, tik_01_0_header]
+    - [0x8D5740, c, tik_01_1_music]
+    - [0x8D5740, c, tik_01_2_main]
+    - [0x8D5D30, c, tik_01_3_drips]
+    - [0x8D60A0, c, tik_01_4_entity]
+    - [0x8D6170, c, tik_01_5_npc]
+  - name: tik_02
+    dir: world/area_tik/tik_02
+    type: code
+    start: 0x8D89D0
+    vram: 0x80240000
+    subsegments:
+    - [0x8D89D0, c, tik_02_0_header]
+    - [0x8D89D0, c, tik_02_1_music]
+    - [0x8D89D0, c, tik_02_2_main]
+    - [0x8D8CE0, c, tik_02_3_entity]
+    - [0x8D8FA0, c, tik_02_4_drips]
+    - [0x8D9310, c, tik_02_5_npc]
+  - name: tik_03
+    dir: world/area_tik/tik_03
+    type: code
+    start: 0x8DAD90
+    vram: 0x80240000
+    subsegments:
+    - [0x8DAD90, c, tik_03_0_header]
+    - [0x8DAD90, c, tik_03_1_music]
+    - [0x8DAD90, c, tik_03_2_main]
+    - [0x8DB380, c, tik_03_3_drips]
+    - [0x8DB6F0, c, tik_03_4_platforms]
+    - [0x8DB750, c, tik_03_5_entity]
+    - [0x8DB750, c, tik_03_6_demo]
+  - name: tik_04
+    dir: world/area_tik/tik_04
+    type: code
+    start: 0x8DDCC0
+    vram: 0x80240000
+    subsegments:
+    - [0x8DDCC0, c, tik_04_0_header]
+    - [0x8DDCC0, c, tik_04_1_music]
+    - [0x8DDCC0, c, tik_04_2_main]
+    - [0x8DE2B0, c, tik_04_3_drips]
+    - [0x8DE620, c, tik_04_4_platforms]
+    - [0x8DE930, c, tik_04_5_npc]
+  - name: tik_05
+    dir: world/area_tik/tik_05
+    type: code
+    start: 0x8E1050
+    vram: 0x80240000
+    subsegments:
+    - [0x8E1050, c, tik_05_0_header]
+    - [0x8E1050, c, tik_05_1_music]
+    - [0x8E1050, c, tik_05_2_main]
+    - [0x8E1360, c, tik_05_3_drips]
+    - [0x8E16D0, c, tik_05_4_entity]
+    - [0x8E1AA0, c, tik_05_5_npc]
+  - name: tik_06
+    dir: world/area_tik/tik_06
+    type: code
+    start: 0x8E3170
+    vram: 0x80240000
+    subsegments:
+    - [0x8E3170, c, tik_06_0_header]
+    - [0x8E3170, c, tik_06_1_music]
+    - [0x8E3170, c, tik_06_2_main]
+    - [0x8E3760, c, tik_06_3_drips]
+    - [0x8E3AD0, c, tik_06_4_entity]
+  - name: tik_07
+    dir: world/area_tik/tik_07
+    type: code
+    start: 0x8E5E70
+    vram: 0x80240000
+    subsegments:
+    - [0x8E5E70, c, tik_07_0_header]
+    - [0x8E5E70, c, tik_07_1_music]
+    - [0x8E5E70, c, tik_07_2_main]
+    - [0x8E6150, c, tik_07_3_entity]
+    - [0x8E6E90, c, tik_07_4_drips]
+    - [0x8E7200, c, tik_07_5_platforms]
+    - [0x8E7260, c, tik_07_6_npc]
+  - name: tik_08
+    dir: world/area_tik/tik_08
+    type: code
+    start: 0x8EB080
+    vram: 0x80240000
+    subsegments:
+    - [0x8EB080, c, tik_08_0_header]
+    - [0x8EB080, c, tik_08_1_music]
+    - [0x8EB080, c, tik_08_2_main]
+    - [0x8EB670, c, tik_08_3_drips]
+    - [0x8EB9E0, c, tik_08_4_entity]
+    - [0x8EBAB0, c, tik_08_5_npc]
+  - name: tik_09
+    dir: world/area_tik/tik_09
+    type: code
+    start: 0x8EE450
+    vram: 0x80240000
+    subsegments:
+    - [0x8EE450, c, tik_09_0_header]
+    - [0x8EE450, c, tik_09_1_music]
+    - [0x8EE450, c, tik_09_2_main]
+    - [0x8EEA40, c, tik_09_3_drips]
+    - [0x8EEDB0, c, tik_09_4_entity]
+    - [0x8EEE80, c, tik_09_5_npc]
+  - name: tik_10
+    dir: world/area_tik/tik_10
+    type: code
+    start: 0x8F2650
+    vram: 0x80240000
+    subsegments:
+    - [0x8F2650, c, tik_10_0_header]
+    - [0x8F2650, c, tik_10_1_music]
+    - [0x8F2650, c, tik_10_2_main]
+    - [0x8F2960, c, tik_10_3_drips]
+    - [0x8F2CD0, c, tik_10_4_entity]
+  - name: tik_12
+    dir: world/area_tik/tik_12
+    type: code
+    start: 0x8F4E60
+    vram: 0x80240000
+    subsegments:
+    - [0x8F4E60, c, tik_12_0_header]
+    - [0x8F4E60, c, tik_12_1_music]
+    - [0x8F4E60, c, tik_12_2_main]
+    - [0x8F5450, c, tik_12_3_drips]
+    - [0x8F57C0, c, tik_12_4_entity]
+    - [0x8F67C0, c, tik_12_5_npc]
+  - name: tik_14
+    dir: world/area_tik/tik_14
+    type: code
+    start: 0x8F9890
+    vram: 0x80240000
+    subsegments:
+    - [0x8F9890, c, tik_14_0_header]
+    - [0x8F9890, c, tik_14_1_music]
+    - [0x8F9890, c, tik_14_2_main]
+    - [0x8F9E80, c, tik_14_3_drips]
+    - [0x8FA1F0, c, tik_14_4_entity]
+  - name: tik_15
+    dir: world/area_tik/tik_15
+    type: code
+    start: 0x8FBE30
+    vram: 0x80240000
+    subsegments:
+    - [0x8FBE30, c, tik_15_0_header]
+    - [0x8FBE30, c, tik_15_1_music]
+    - [0x8FBE30, c, tik_15_2_main]
+    - [0x8FC420, c, tik_15_3_entity]
+    - [0x8FC420, c, tik_15_4_drips]
+    - [0x8FC790, c, tik_15_5_npc]
+  - name: tik_17
+    dir: world/area_tik/tik_17
+    type: code
+    start: 0x8FECB0
+    vram: 0x80240000
+    subsegments:
+    - [0x8FECB0, c, tik_17_0_header]
+    - [0x8FECB0, c, tik_17_1_music]
+    - [0x8FECE0, c, tik_17_2_entity]
+    - [0x8FFA20, c, tik_17_3_main]
+  - name: tik_18
+    dir: world/area_tik/tik_18
+    type: code
+    start: 0x901970
+    vram: 0x80240000
+    subsegments:
+    - [0x901970, c, tik_18_0_header]
+    - [0x901970, c, tik_18_1_music]
+    - [0x901970, c, tik_18_2_main]
+    - [0x901C80, c, tik_18_3_drips]
+    - [0x901FF0, c, tik_18_4_npc]
+    - [0x901FF0, c, tik_18_5_entity]
+  - name: tik_19
+    dir: world/area_tik/tik_19
+    type: code
+    start: 0x903870
+    vram: 0x80240000
+    subsegments:
+    - [0x903870, c, tik_19_0_header]
+    - [0x903870, c, tik_19_1_music]
+    - [0x903870, c, tik_19_2_main]
+    - [0x903E60, c, tik_19_3_entity]
+  - name: tik_20
+    dir: world/area_tik/tik_20
+    type: code
+    start: 0x9065E0
+    vram: 0x80240000
+    subsegments:
+    - [0x9065E0, c, tik_20_0_header]
+    - [0x9065E0, c, tik_20_1_music]
+    - [0x9065E0, c, tik_20_2_main]
+    - [0x906F40, c, tik_20_3_npc]
+    - [0x907720, c, tik_20_4_entity]
+  - name: tik_21
+    dir: world/area_tik/tik_21
+    type: code
+    start: 0x909A30
+    vram: 0x80240000
+    subsegments:
+    - [0x909A30, c, tik_21_0_header]
+    - [0x909A30, c, tik_21_1_music]
+    - [0x909A30, c, tik_21_2_main]
+    - [0x90A390, c, tik_21_3_entity]
+  - name: tik_22
+    dir: world/area_tik/tik_22
+    type: code
+    start: 0x90C150
+    vram: 0x80240000
+    subsegments:
+    - [0x90C150, c, tik_22_0_header]
+    - [0x90C150, c, tik_22_1_music]
+    - [0x90C180, c, tik_22_2_main]
+  - name: tik_23
+    dir: world/area_tik/tik_23
+    type: code
+    start: 0x90E660
+    vram: 0x80240000
+    subsegments:
+    - [0x90E660, c, tik_23_0_header]
+    - [0x90E660, c, tik_23_1_music]
+    - [0x90E660, c, tik_23_2_main]
+    - [0x90EFC0, c, tik_23_3_entity]
+    - [0x90EFC0, c, tik_23_4_npc]
+  - name: tik_24
+    dir: world/area_tik/tik_24
+    type: code
+    start: 0x911D10
+    vram: 0x80240000
+    subsegments:
+    - [0x911D10, c, tik_24_0_header]
+    - [0x911D60, c, tik_24_1_music]
+    - [0x911D60, c, tik_24_2_main]
+    - [0x912070, c, tik_24_3_drips]
+    - [0x9123E0, c, tik_24_4_entity]
+    - [0x9123E0, c, tik_24_5_npc]
+  - name: tik_25
+    dir: world/area_tik/tik_25
+    type: code
+    start: 0x914210
+    vram: 0x80240000
+    subsegments:
+    - [0x914210, c, tik_25_0_header]
+    - [0x914210, c, tik_25_1_music]
+    - [0x914210, c, tik_25_2_main]
+    - [0x914890, c, tik_25_3_entity]
+  - name: kgr_01
+    dir: world/area_kgr/kgr_01
+    type: code
+    start: 0x915CA0
+    vram: 0x80240000
+    subsegments:
+    - [0x915CA0, c, kgr_01_1_main]
+    - [0x915E00, c, kgr_01_2_wiggle]
+    - [0x9161A0, c, kgr_01_3_extra]
+  - name: kgr_02
+    dir: world/area_kgr/kgr_02
+    type: code
+    start: 0x9166E0
+    vram: 0x80240000
+    subsegments:
+    - [0x9166E0, c, kgr_02_1_main]
+    - [0x916840, c, kgr_02_2_unused]
+    - [0x916E10, c, kgr_02_3_npc]
+    - [0x916E40, c, kgr_02_4_extra]
+  - name: kmr_00
+    dir: world/area_kmr/kmr_00
+    type: code
+    start: 0x918220
+    vram: 0x80240000
+    subsegments:
+    - [0x918220, c, kmr_00_0_header]
+    - [0x918220, c, kmr_00_1_music]
+    - [0x918220, c, kmr_00_2_main]
+    - [0x918220, c, kmr_00_3_revival]
+    - [0x918F60, c, kmr_00_4_npc]
+    - [0x919020, c, kmr_00_5_entity]
+  - name: kmr_02
+    dir: world/area_kmr/kmr_02
+    type: code
+    start: 0x91C3B0
+    vram: 0x80240000
+    subsegments:
+    - [0x91C3B0, c, kmr_02_0_header]
+    - [0x91C3B0, c, kmr_02_1_music]
+    - [0x91C3B0, c, kmr_02_2_main]
+    - [0x91C740, c, kmr_02_3_npc]
+    - [0x91F420, c, kmr_02_4_rooms_1]
+    - [0x91F720, c, kmr_02_5_entity]
+    - [0x91F9F0, c, kmr_02_6_rooms_2]
+    - [0x91F9F0, c, kmr_02_7_kammy]
+    - [0x91FB10, c, kmr_02_8_foliage]
+    - [0x91FD50, c, kmr_02_9_images]
+    - [0x91FDF0, .data, kmr_02_0_header]
+    - [0x91FEE0, .data, kmr_02_1_music]
+    - [0x920050, .data, kmr_02_2_main]
+    - [0x921980, .data, kmr_02_3_npc]
+    - [0x92D7F0, .data, kmr_02_4_rooms_1]
+    - [0x930DD0, .data, kmr_02_5_entity]
+    - [0x931560, .data, kmr_02_6_rooms_2]
+    - [0x931A30, .data, kmr_02_7_kammy]
+    - [0x9333A0, .data, kmr_02_8_foliage]
+    - start: 0x933F00
+      type: .data
+      name: kmr_02_9_images
+      subsegments:
+      - [0x933F00, ci4, heart_block, 32, 32]
+      - [0x934100, palette, heart_block]
+      - [0x934120]
+  - name: kmr_03
+    dir: world/area_kmr/kmr_03
+    type: code
+    start: 0x934320
+    vram: 0x80240000
+    subsegments:
+    - [0x934320, c, kmr_03_0_header]
+    - [0x934320, c, kmr_03_1_music]
+    - [0x934320, c, kmr_03_2_main]
+    - [0x934320, c, kmr_03_3_npc]
+    - [0x934640, c, kmr_03_4_entity]
+    - [0x934730, c, kmr_03_5_foliage]
+    - [0x934970, c, kmr_03_6_fall_down]
+  - name: kmr_04
+    dir: world/area_kmr/kmr_04
+    type: code
+    start: 0x936C90
+    vram: 0x80240000
+    subsegments:
+    - [0x936C90, c, kmr_04_0_header]
+    - [0x936C90, c, kmr_04_1_music]
+    - [0x936C90, c, kmr_04_2_main]
+    - [0x936C90, c, kmr_04_3_npc]
+    - [0x936CF0, c, kmr_04_4_entity]
+    - [0x936CF0, c, kmr_04_5_foliage]
+    - [0x937100, .data, kmr_04_0_header]
+    - [0x9371F0, .data, kmr_04_1_music]
+    - [0x937290, .data, kmr_04_2_main]
+    - [0x9374F0, .data, kmr_04_3_npc]
+    - [0x938710, .data, kmr_04_4_entity]
+    - start: 0x938880
+      type: .data
+      name: kmr_04_5_foliage
+      subsegments:
+      - [0x938880, ci4, hammer_block_message, 48, 48]
+      - [0x938D00, palette, hammer_block_message]
+      - [0x938D20]
+  - name: kmr_05
+    dir: world/area_kmr/kmr_05
+    type: code
+    start: 0x93A400
+    vram: 0x80240000
+    subsegments:
+    - [0x93A400, c, kmr_05_0_header]
+    - [0x93A400, c, kmr_05_1_music]
+    - [0x93A400, c, kmr_05_2_main]
+    - [0x93A400, c, kmr_05_3_npc]
+    - [0x93B900, c, kmr_05_4_entity]
+    - [0x93B900, c, kmr_05_5_foliage]
+  - name: kmr_06
+    dir: world/area_kmr/kmr_06
+    type: code
+    start: 0x93D8A0
+    vram: 0x80240000
+    subsegments:
+    - [0x93D8A0, c, kmr_06_0_header]
+    - [0x93D8A0, c, kmr_06_1_music]
+    - [0x93D8A0, c, kmr_06_2_main]
+    - [0x93D8A0, c, kmr_06_3_npc]
+    - [0x93EDA0, c, kmr_06_4_entity]
+    - [0x93EDA0, c, kmr_06_5_sticker_sign]
+  - name: kmr_07
+    dir: world/area_kmr/kmr_07
+    type: code
+    start: 0x940150
+    vram: 0x80240000
+    subsegments:
+    - [0x940150, c, kmr_07_0_header]
+    - [0x940150, c, kmr_07_1_music]
+    - [0x940150, c, kmr_07_2_main]
+    - [0x940150, c, kmr_07_3_npc]
+    - [0x940C10, c, kmr_07_4_entity]
+  - name: kmr_09
+    dir: world/area_kmr/kmr_09
+    type: code
+    start: 0x942190
+    vram: 0x80240000
+    subsegments:
+    - [0x942190, c, kmr_09_0_header]
+    - [0x942190, c, kmr_09_1_music]
+    - [0x942190, c, kmr_09_2_main]
+    - [0x942190, c, kmr_09_3_npc]
+    - [0x9436C0, c, kmr_09_4_entity]
+  - name: kmr_10
+    dir: world/area_kmr/kmr_10
+    type: code
+    start: 0x944860
+    vram: 0x80240000
+    subsegments:
+    - [0x944860, c, kmr_10_0_header]
+    - [0x944860, c, kmr_10_1_music]
+    - [0x944860, c, kmr_10_2_main]
+    - [0x944860, c, kmr_10_3_npc]
+    - [0x944860, c, kmr_10_4_entity]
+    - [0x944C30, c, kmr_10_5_foliage]
+  - name: kmr_11
+    dir: world/area_kmr/kmr_11
+    type: code
+    start: 0x946490
+    vram: 0x80240000
+    subsegments:
+    - [0x946490, c, kmr_11_0_header]
+    - [0x946490, c, kmr_11_1_music]
+    - [0x946490, c, kmr_11_2_main]
+    - [0x946730, c, kmr_11_3_scenes]
+    - [0x946800, c, kmr_11_4_npc]
+    - [0x947350, c, kmr_11_5_entity]
+    - [0x9473B0, c, kmr_11_6_kammy]
+    - [0x9473B0, c, kmr_11_7_foliage]
+    - [0x9475F0, c, kmr_11_8_fortress_skeleton]
+    - [0x9475F0, c, kmr_11_9_fortress_animation]
+    - [0x9475F0, c, kmr_11_10_bridge_skeleton]
+    - [0x9475F0, c, kmr_11_11_bridge_animation]
+  - name: kmr_12
+    dir: world/area_kmr/kmr_12
+    type: code
+    start: 0x9576F0
+    vram: 0x80240000
+    subsegments:
+    - [0x9576F0, c, kmr_12_0_header]
+    - [0x9576F0, c, kmr_12_1_music]
+    - [0x9576F0, c, kmr_12_2_main]
+    - [0x9576F0, c, kmr_12_3_npc]
+    - [0x957720, c, kmr_12_4_entity]
+  - name: kmr_20
+    dir: world/area_kmr/kmr_20
+    type: code
+    start: 0x9581B0
+    vram: 0x80240000
+    subsegments:
+    - [0x9581B0, c, kmr_20_0_header]
+    - [0x9581B0, c, kmr_20_1_music]
+    - [0x9581E0, c, kmr_20_2_main]
+    - [0x9584E0, c, kmr_20_3_rooms]
+    - [0x958530, c, kmr_20_4_documents]
+    - [0x958F80, c, kmr_20_5_entity]
+    - [0x958FD0, c, kmr_20_6_trees]
+    - [0x959210, c, kmr_20_7_bushes]
+    - [0x959450, c, kmr_20_8_bed]
+    - [0x9597D0, c, kmr_20_9_npc_scenes]
+    - [0x9597D0, c, kmr_20_10_npc]
+    - [0x959930, c, kmr_20_11_npc_intro]
+    - [0x959F00, c, kmr_20_12_npc_epilogue]
+    - [0x95A350, c, kmr_20_13_records]
+    - [0x95AD60, .data, kmr_20_0_header]
+    - [0x95ADF0, .data, kmr_20_1_music]
+    - [0x95AF50, .data, kmr_20_2_main]
+    - [0x95C130, .data, kmr_20_3_rooms]
+    - [0x95C570, .data, kmr_20_4_documents]
+    - [0x95D890, .data, kmr_20_5_entity]
+    - [0x95DF90, .data, kmr_20_6_trees]
+    - [0x95E9A0, .data, kmr_20_7_bushes]
+    - [0x95F4C0, .data, kmr_20_8_bed]
+    - [0x962580, .data, kmr_20_9_npc_scenes]
+    - [0x962A60, .data, kmr_20_10_npc]
+    - [0x9660C0, .data, kmr_20_11_npc_intro]
+    - [0x969170, .data, kmr_20_12_npc_epilogue]
+    - start: 0x96AF00
+      type: .data
+      name: kmr_20_13_records
+      subsegments:
+      - [0x96AF00, gfx, records_screen]
+      - [0x96AF70]
+  - name: kmr_21
+    dir: world/area_kmr/kmr_21
+    type: code
+    start: 0x96B210
+    vram: 0x80240000
+    subsegments:
+    - [0x96B210, c, kmr_21_0_header]
+    - [0x96B220, c, kmr_21_1_main]
+  - name: kmr_22
+    dir: world/area_kmr/kmr_22
+    type: code
+    start: 0x96B9E0
+    vram: 0x80240000
+    subsegments:
+    - [0x96B9E0, c, kmr_22_0_header]
+    - [0x96B9F0, c, kmr_22_1_main]
+    - [0x96BC20, c, kmr_22_2_npc]
+    - [0x96C6F0, .data, kmr_22_0_header]
+    - [0x96C7C0, .data, kmr_22_1_main]
+    - start: 0x96CDF0
+      type: .data
+      name: kmr_22_2_npc
+      subsegments:
+      - [0x96C7C0]
+      - [0x96D2E0, ci4, lava_piranha_vine, 64, 32]
+      - [0x96D6E0, palette, lava_piranha_vine]
+      - [0x96D8E0, gfx, lava_piranha_vine]
+      - [0x96D9C0]
+  - name: kmr_23
+    dir: world/area_kmr/kmr_23
+    type: code
+    start: 0x973DA0
+    vram: 0x80240000
+    subsegments:
+    - [0x973DA0, c, kmr_23_0_header]
+    - [0x973DB0, c, kmr_23_1_main]
+    - [0x973DE0, c, kmr_23_2_npc]
+    - [0x974E70, .data, kmr_23_0_header]
+    - [0x974F30, .data, kmr_23_1_main]
+    - start: 0x975400
+      type: .data
+      name: kmr_23_2_npc
+      subsegments:
+      - [0x975400]
+      - [0x975468, ia8, window_ul, 8, 8]
+      - [0x9754A8, ia8, window_ur, 8, 8]
+      - [0x9754E8, ia8, window_ll, 8, 8]
+      - [0x975528, ia8, window_lr, 8, 8]
+      - [0x975568]
+  - name: kmr_24
+    dir: world/area_kmr/kmr_24
+    type: code
+    start: 0x9775B0
+    vram: 0x80240000
+    subsegments:
+    - [0x9775B0, c, kmr_24_0_header]
+    - [0x9775C0, c, kmr_24_1_main]
+  - name: kmr_30
+    dir: world/area_kmr/kmr_30
+    type: code
+    start: 0x977A40
+    vram: 0x80240000
+    subsegments:
+    - [0x977A40, c, kmr_30_0_header]
+    - [0x977A40, c, kmr_30_1_main]
+    - [0x977D50, c, kmr_30_2_npc]
+    - [0x977D50, c, kmr_30_3_the_end]
+
+  - [0x978FB0, bin]
+
+  - start: 0x1e937b8
+    align: 8
+    type: pm_npc_sprites
+    dir: sprite
+    name: npc
+    files:
+      - WorldGoombario
+      - WorldKooper
+      - WorldBombette
+      - WorldParakarry
+      - WorldBow
+      - WorldWatt
+      - WorldSushie
+      - WorldLakilester
+      - BattleGoombario
+      - BattleKooper
+      - BattleBombette
+      - BattleParakarry
+      - BattleBow
+      - BattleWatt
+      - BattleSushie
+      - BattleLakilester
+      - KooperWithoutShell
+      - WorldEldstar
+      - WorldMamar
+      - WorldSkolar
+      - WorldMuskular
+      - WorldMisstar
+      - WorldKlevar
+      - WorldKalmar
+      - BattleEldstar
+      - BattleMamar
+      - BattleSkolar
+      - BattleMuskular
+      - BattleMisstar
+      - BattleKlevar
+      - BattleKalmar
+      - Twink
+      - JrTroopa
+      - SpikedJrTroopa
+      - SpikedParaJrTroopa
+      - MageJrTroopa
+      - ParaJrTroopa
+      - Goomba
+      - SpikedGoomba
+      - Paragoomba
+      - KoopaTroopa
+      - ParaTroopa
+      - Fuzzy
+      - Bobomb
+      - BulletBill
+      - BillBlaster
+      - MontyMole
+      - Cleft
+      - Pokey
+      - Bandit
+      - BuzzyBeetle
+      - Swooper
+      - StoneChomp
+      - LargePiranha
+      - SmallPiranha
+      - Sentinel
+      - WorldClubba
+      - BattleClubba
+      - ShyGuy
+      - GrooveGuy
+      - SkyGuy
+      - PyroGuy
+      - SpyGuy
+      - MediGuy
+      - Fuzzipede
+      - SpearGuy
+      - HeartPlant
+      - HurtPlant
+      - MBush
+      - LavaBubble
+      - KentCKoopa
+      - Dayzee
+      - Lakitu
+      - Spiny
+      - Bzzap
+      - RuffPuff
+      - SpikeTop
+      - Duplighost
+      - AlbinoDino
+      - Blooper
+      - BabyBlooper
+      - Gulpit
+      - DryBones
+      - ThrownBone
+      - BonyBeetle
+      - Magikoopa
+      - FlyingMagikoopa
+      - WorldKoopatrol
+      - Koopatrol
+      - HammerBros
+      - BushBasic
+      - BushBlocky
+      - BushDry
+      - BushLeafy
+      - BushMatted
+      - WorldKammy
+      - BattleKammy
+      - GoombaBros
+      - GoombaKing
+      - SpikyGoomnut
+      - DarkToad
+      - KoopaBros
+      - Buzzar
+      - Tutankoopa
+      - ChainChomp
+      - WorldTubba
+      - BattleTubba
+      - TubbasHeart
+      - BigLanternGhost
+      - ShySquadGuy
+      - MarshalGuy
+      - StiltGuy
+      - StiltGuyUnfold
+      - ShyStackGuy
+      - ShyStackUnfold
+      - ShyStackDamage
+      - ShyStackRock
+      - GeneralGuy
+      - GeneralGuyBomb
+      - TankGuy
+      - LavaPiranha
+      - PetitPiranha
+      - LavaBud
+      - HuffNPuff
+      - TuffPuff
+      - Monstar
+      - CrystalKing
+      - WorldBowser
+      - BattleBowser
+      - Luigi
+      - Toad
+      - Toadette
+      - VannaT
+      - ToadKid
+      - ToadGuard
+      - HarryT
+      - ToadMinister
+      - Postmaster
+      - ConductorToad
+      - TrainToad
+      - Fishmael
+      - Musician
+      - Koopa
+      - KoopaWithoutShell
+      - WorldBobomb
+      - Whacka
+      - Dryite
+      - Mouser
+      - Boo
+      - Yoshi
+      - YoshiKid
+      - Raven
+      - Bubulb
+      - Penguin
+      - ShiverToad
+      - AltBandit
+      - Goompa
+      - Goombaria
+      - Gooma
+      - Goompapa
+      - Goomama
+      - TheMaster
+      - Chan
+      - Lee
+      - Merlon
+      - ChetRippo
+      - Rowf
+      - MinhT
+      - RussT
+      - TayceT
+      - FiceT
+      - Bartender
+      - Chanterelle
+      - RipCheato
+      - ChuckQuizmo
+      - Merluvlee
+      - Merlar
+      - Merlow
+      - StarMan
+      - KoloradoWife
+      - KoopaKoot
+      - Kolorado
+      - BattleKolorado
+      - Archeologist
+      - Nomadimouse
+      - WorldMerlee
+      - BattleMerlee
+      - DisguisedMoustafa
+      - Moustafa
+      - Oaklie
+      - Bootler
+      - Yakkey
+      - GourmetGuy
+      - VillageLeader
+      - LeadersFriend
+      - RaphaelRaven
+      - Tolielup
+      - GateFlower
+      - Petunia
+      - Posie
+      - Lily
+      - Rosie
+      - Sun
+      - Lakilulu
+      - Ninji
+      - MayorPenguin
+      - MayorPenguinWife
+      - PenguinPatrol
+      - Herringway
+      - Merle
+      - StarRod
+      - Fire
+      - Coin
+      - ParadePeach
+      - ParadeKoopas
+      - ParadeBurntBowser
+      - ParadeLuigi
+      - ParadePartner
+      - ParadeYoshi
+      - ParadeKolorado
+      - ParadeChick
+      - ParadeIceShow
+      - ParadeToad
+      - ParadeTwirler
+      - ParadeDrummer
+      - ParadeBanner
+      - ParadeHorn
+      - ParadeTubba
+      - ParadeWizard
+      - ParadeMario
+      - ParadeShyGuy
+      - ParadeTwink
+      - Leaf
+
+  - [0x202f208, bin] # end of sprite data - todo: figure out what this is
+
+  - start: 0x2030000
+    name: msg_pal_en
+    type: pm_msg
+    files:
+      - 00_Intro
+      - 01_Outro
+      - 02_ToadTownGate
+      - 03_ToadTownPlaza
+      - 04_ToadTownBridge
+      - 05_ToadTownStation
+      - 06_ToadTownHousing
+      - 07_ToadTownPort
+      - 08_Minigame
+      - 09_CastleGrounds
+      - 0A_ShootingStarSummit
+      - 0B_Prologue
+      - 0C_Chapter1
+      - 0D_Chapter2
+      - 0E_Chapter3
+      - 0F_Chapter4
+      - 10_Chapter5
+      - 11_Chapter6
+      - 12_Chapter7
+      - 13_Chapter8
+      - 14_Peach
+      - 15_KootFavors
+      - 16_RussTHints
+      - 17_NewsBoard
+      - 18_GossipBoard
+      - 19_MapTattles
+      - 1A_NpcTattles
+      - 1B_EntityTattles
+      - 1C_EnemyTattles
+      - 1D_Menus
+      - 1E_Choices
+      - 1F_MenuTips
+      - 20_Documents
+      - 21_MerlonHints
+      - 22_MerluvleeHints
+      - 23_ShortItemDesc
+      - 24_ShopItemDesc
+      - 25_FullItemDesc
+      - 26_ItemNames
+      - 27_Shops
+      - 28_PartnerDesc
+      - 29_EnemyNames
+      - 2A_PlayerMoves
+      - 2B_PartnerMoves
+      - 2C_QuizQuestions
+      - 2D_QuizChoices
+      - 2E_Credits
+  - [0x2132440, bin]
+
+  - [0x4000000]
