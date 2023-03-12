@@ -3111,8 +3111,275 @@ segments:
     vram: 0x80240000
     subsegments:
     - [0xB8C360, c, tst_20_1_main]
+  - name: jan_00
+    dir: world/area_jan/jan_00
+    type: code
+    start: 0xB8C430
+    vram: 0x80240000
+    subsegments:
+    - [0xB8C430, c, jan_00_0_header]
+    - [0xB8C430, c, jan_00_1_main]
+    - [0xB8C770, c, jan_00_2_npc]
+    - [0xB8D5D0, c, jan_00_3_entity]
+    - [0xB8D5D0, c, jan_00_4_whale]
+    - [0xB8DD90, c, jan_00_5_foliage]
+  - name: jan_01
+    dir: world/area_jan/jan_01
+    type: code
+    start: 0xB93F20
+    vram: 0x80240000
+    subsegments:
+    - [0xB93F20, c, jan_01_0_header]
+    - [0xB93F20, c, jan_01_1_music]
+    - [0xB93F20, c, jan_01_2_main]
+    - [0xB94260, c, jan_01_3_npc]
+    - [0xB950B0, c, jan_01_4_entity]
+    - [0xB950B0, c, jan_01_5_foliage]
+  - name: jan_02
+    dir: world/area_jan/jan_02
+    type: code
+    start: 0xB98360
+    vram: 0x80240000
+    subsegments:
+    - [0xB98360, c, jan_02_0_header]
+    - [0xB98360, c, jan_02_1_music]
+    - [0xB98390, c, jan_02_2_main]
+    - [0xB98790, c, jan_02_3_npc]
+    - [0xB9AA40, c, jan_02_4_entity]
+    - [0xB9AA40, c, jan_02_5_foliage]
+  - name: jan_03
+    dir: world/area_jan/jan_03
+    type: code
+    start: 0xBA0B20
+    vram: 0x80240000
+    subsegments:
+    - [0xBA0B20, c, jan_03_0_header]
+    - [0xBA0B20, c, jan_03_1_music]
+    - [0xBA0B20, c, jan_03_2_main]
+    - [0xBA1140, c, jan_03_3_shop]
+    - [0xBA1140, c, jan_03_4_npc]
+    - [0xBA3AC0, c, jan_03_5_entity]
+    - [0xBA3B70, c, jan_03_6_rooms]
+    - [0xBA3B70, c, jan_03_7_foliage]
+  - name: jan_04
+    dir: world/area_jan/jan_04
+    type: code
+    start: 0xBB0700
+    vram: 0x80240000
+    subsegments:
+    - [0xBB0700, c, jan_04_0_header]
+    - [0xBB0740, c, jan_04_1_music]
+    - [0xBB0740, c, jan_04_2_main]
+    - [0xBB0A50, c, jan_04_3_entity]
+    - [0xBB0D10, c, jan_04_4_npc]
+    - [0xBB0EA0, c, jan_04_5_unused]
+    - [0xBB0EA0, c, jan_04_6_trees]
+    - [0xBB10E0, c, jan_04_7_scenes]
+    - [0xBB1180, c, jan_04_8_treasure]
+    - [0xBB1480, c, jan_04_9_bushes]
+    - [0xBB16C0, c, jan_04_10_demo]
+  - name: jan_05
+    dir: world/area_jan/jan_05
+    type: code
+    start: 0xBB6A00
+    vram: 0x80240000
+    subsegments:
+    - [0xBB6A00, c, jan_05_0_header]
+    - [0xBB6A40, c, jan_05_1_music]
+    - [0xBB6A40, c, jan_05_2_main]
+    - [0xBB6D50, c, jan_05_3_log]
+    - [0xBB6EA0, c, jan_05_4_bushes]
+    - [0xBB71F0, c, jan_05_5_npc]
+    - [0xBB8E50, c, jan_05_6_trees]
+    - [0xBB90D0, c, jan_05_7_entity]
+  - name: jan_06
+    dir: world/area_jan/jan_06
+    type: code
+    start: 0xBBE7C0
+    vram: 0x80240000
+    subsegments:
+    - [0xBBE7C0, c, jan_06_0_header]
+    - [0xBBE7C0, c, jan_06_1_main]
+    - [0xBBEAD0, c, jan_06_2_statue]
+    - [0xBBEB70, c, jan_06_3_log]
+    - [0xBBECC0, c, jan_06_4_trees]
+    - [0xBBEF00, c, jan_06_5_entity]
+    - [0xBBEF00, c, jan_06_6_npc]
+    - [0xBC0B60, c, jan_06_7_bushes]
+  - name: jan_07
+    dir: world/area_jan/jan_07
+    type: code
+    start: 0xBC5800
+    vram: 0x80240000
+    subsegments:
+    - [0xBC5800, c, jan_07_0_header]
+    - [0xBC5800, c, jan_07_1_music]
+    - [0xBC5800, c, jan_07_2_main]
+    - [0xBC5800, c, jan_07_3_npc]
+    - [0xBC65A0, c, jan_07_4_trees]
+    - [0xBC67E0, c, jan_07_5_bushes]
+  - name: jan_08
+    dir: world/area_jan/jan_08
+    type: code
+    start: 0xBCA1B0
+    vram: 0x80240000
+    subsegments:
+    - [0xBCA1B0, c, jan_08_0_header]
+    - [0xBCA1B0, c, jan_08_1_music]
+    - [0xBCA1B0, c, jan_08_2_main]
+    - [0xBCA4C0, c, jan_08_3_bushes]
+    - [0xBCA810, c, jan_08_4_entity]
+    - [0xBCB550, c, jan_08_5_npc]
+    - [0xBCC3A0, c, jan_08_6_trees]
+  - name: jan_09
+    dir: world/area_jan/jan_09
+    type: code
+    start: 0xBD19B0
+    vram: 0x80240000
+    subsegments:
+    - [0xBD19B0, c, jan_09_0_header]
+    - [0xBD19B0, c, jan_09_1_main]
+    - [0xBD1FA0, c, jan_09_2_bushes]
+    - [0xBD22F0, c, jan_09_3_npc]
+    - [0xBD3090, c, jan_09_4_trees]
+    - [0xBD32D0, c, jan_09_5_entity]
+  - name: jan_10
+    dir: world/area_jan/jan_10
+    type: code
+    start: 0xBD8290
+    vram: 0x80240000
+    subsegments:
+    - [0xBD8290, c, jan_10_0_header]
+    - [0xBD8290, c, jan_10_1_music]
+    - [0xBD8290, c, jan_10_2_main]
+    - [0xBD85A0, c, jan_10_3_npc]
+    - [0xBD93C0, c, jan_10_4_log]
+    - [0xBD9510, c, jan_10_5_trees]
+    - [0xBD9790, c, jan_10_6_bushes]
+    - [0xBD99D0, c, jan_10_7_entity]
+  - name: jan_11
+    dir: world/area_jan/jan_11
+    type: code
+    start: 0xBDC760
+    vram: 0x80240000
+    subsegments:
+    - [0xBDC760, c, jan_11_0_header]
+    - [0xBDC760, c, jan_11_1_music]
+    - [0xBDC760, c, jan_11_2_main]
+    - [0xBDCF10, c, jan_11_3_npc]
+  - name: jan_12
+    dir: world/area_jan/jan_12
+    type: code
+    start: 0xBDEFB0
+    vram: 0x80240000
+    subsegments:
+    - [0xBDEFB0, c, jan_12_0_header]
+    - [0xBDEFB0, c, jan_12_1_main]
+    - [0xBDEFB0, c, jan_12_2_vines]
+    - [0xBDF230, c, jan_12_3_trees]
+    - [0xBDF470, c, jan_12_4_entity]
+    - [0xBDF470, c, jan_12_5_npc]
+  - name: jan_13
+    dir: world/area_jan/jan_13
+    type: code
+    start: 0xBE26B0
+    vram: 0x80240000
+    subsegments:
+    - [0xBE26B0, c, jan_13_0_header]
+    - [0xBE26B0, c, jan_13_1_main]
+    - [0xBE26B0, c, jan_13_2_puzzle]
+    - [0xBE2A40, c, jan_13_3_trees]
+    - [0xBE2C80, c, jan_13_4_entity]
+  - name: jan_14
+    dir: world/area_jan/jan_14
+    type: code
+    start: 0xBE5F50
+    vram: 0x80240000
+    subsegments:
+    - [0xBE5F50, c, jan_14_0_header]
+    - [0xBE5F50, c, jan_14_1_main]
+    - [0xBE5F50, c, jan_14_2_vines]
+    - [0xBE61D0, c, jan_14_3_trees]
+    - [0xBE6410, c, jan_14_4_npc]
+  - name: jan_15
+    dir: world/area_jan/jan_15
+    type: code
+    start: 0xBE9820
+    vram: 0x80240000
+    subsegments:
+    - [0xBE9820, c, jan_15_0_header]
+    - [0xBE9820, c, jan_15_1_main]
+    - [0xBE9820, c, jan_15_2_npc]
+    - [0xBE98E0, c, jan_15_3_trees]
+    - [0xBE9B20, c, jan_15_4_entity]
+  - name: jan_16
+    dir: world/area_jan/jan_16
+    type: code
+    start: 0xBEBF00
+    vram: 0x80240000
+    subsegments:
+    - [0xBEBF00, c, jan_16_0_header]
+    - [0xBEBF00, c, jan_16_1_music]
+    - [0xBEBF00, c, jan_16_2_main]
+    - [0xBEC200, c, jan_16_3_npc]
+    - [0xBEC200, c, jan_16_4_entity]
+    - [0xBEC200, c, jan_16_5_bushes]
+  - name: jan_17
+    dir: world/area_jan/jan_17
+    type: code
+    start: 0xBEF6C0
+    vram: 0x80240000
+    subsegments:
+    - [0xBEF6C0, c, jan_17_0_header]
+    - [0xBEF6C0, c, jan_17_1_music]
+    - [0xBEF6C0, c, jan_17_2_main]
+    - [0xBEF6E0, c, jan_17_3_entity]
+  - name: jan_18
+    dir: world/area_jan/jan_18
+    type: code
+    start: 0xBEFA90
+    vram: 0x80240000
+    subsegments:
+    - [0xBEFA90, c, jan_18_0_header]
+    - [0xBEFA90, c, jan_18_1_music]
+    - [0xBEFA90, c, jan_18_2_main]
+    - [0xBEFA90, c, jan_18_3_entity]
+  - name: jan_19
+    dir: world/area_jan/jan_19
+    type: code
+    start: 0xBEFD60
+    vram: 0x80240000
+    subsegments:
+    - [0xBEFD60, c, jan_19_0_header]
+    - [0xBEFD60, c, jan_19_1_music]
+    - [0xBEFD60, c, jan_19_2_main]
+    - [0xBEFD80, c, jan_19_3_entity]
+  - name: jan_22
+    dir: world/area_jan/jan_22
+    type: code
+    start: 0xBF0080
+    vram: 0x80240000
+    subsegments:
+    - [0xBF0080, c, jan_22_0_header]
+    - [0xBF0080, c, jan_22_1_music]
+    - [0xBF0080, c, jan_22_2_main]
+    - [0xBF0080, c, jan_22_3_npc]
+    - [0xBF10A0, c, jan_22_4_entity]
+    - [0xBF10A0, c, jan_22_5_zipline]
+    - [0xBF1450, c, jan_22_6_bushes]
+    - [0xBF17A0, c, jan_22_7_trees]
+  - name: jan_23
+    dir: world/area_jan/jan_23
+    type: code
+    start: 0xBFBBD0
+    vram: 0x80240000
+    subsegments:
+    - [0xBFBBD0, c, jan_23_0_header]
+    - [0xBFBBD0, c, jan_23_1_music]
+    - [0xBFBBD0, c, jan_23_2_main]
+    - [0xBFBBD0, c, jan_23_3_npc]
 
-  - [0xB8C430, bin]
+  - [0xBFF340, bin]
 
   - start: 0x1e937b8
     align: 8

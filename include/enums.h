@@ -3031,6 +3031,8 @@ enum ShadingProfile {
     SHADING_KKJ_25,
     SHADING_KKJ_26,
     SHADING_KKJ_27,
+    SHADING_JAN_17 = 0x00060000,
+    SHADING_JAN_19,
 };
 #endif
 

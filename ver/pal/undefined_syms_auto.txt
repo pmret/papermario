@@ -1,0 +1,1 @@
+fx_sun_undeclared = fx_sun;
