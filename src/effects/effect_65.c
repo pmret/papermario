@@ -203,6 +203,10 @@ void fx_65_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
+extern int COMBINED;
+extern int ENVIRONMENT;
+extern int SHADE;
+
 // floats and more
 #ifdef NON_MATCHING
 void fx_65_appendGfx(void* effect) {
@@ -329,7 +333,8 @@ void fx_65_appendGfx(void* effect) {
                 new_var = 24.0f;
                 //temp_v1 = data->unk_1B8[idx];
                 temp_s1 = sp50 - data->unk_1B8[idx];
-                temp_f22 = (shim_sin_deg((sp50 - data->unk_1B8[idx] * 80) * 4) * 3.0f + 16.0f + temp_s1) * sp58;
+                temp_f22 = (shim_sin_deg((sp50 - data->unk_1B8[idx] * 80) * 4) * 3.0f + 16.0f + temp_s1);
+                temp_f22 *= sp58;
                 temp_s5_2 = sp64;
                 temp_s5_2 = (data->unk_2AC[idx] * new_var) + temp_s5_2;
 

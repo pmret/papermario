@@ -19,18 +19,18 @@ void clear_trigger_data(void) {
     }
 
     gTriggerCount = 0;
-    collisionStatus->pushingAgainstWall = -1;
-    collisionStatus->currentFloor = -1;
-    collisionStatus->lastTouchedFloor = -1;
-    collisionStatus->currentCeiling = -1;
-    collisionStatus->currentInspect = -1;
+    collisionStatus->pushingAgainstWall = NO_COLLIDER;
+    collisionStatus->currentFloor = NO_COLLIDER;
+    collisionStatus->lastTouchedFloor = NO_COLLIDER;
+    collisionStatus->currentCeiling = NO_COLLIDER;
+    collisionStatus->currentInspect = NO_COLLIDER;
     collisionStatus->unk_0C = -1;
     collisionStatus->unk_0E = -1;
     collisionStatus->unk_10 = -1;
-    collisionStatus->currentWall = -1;
-    collisionStatus->lastWallHammered = -1;
+    collisionStatus->currentWall = NO_COLLIDER;
+    collisionStatus->lastWallHammered = NO_COLLIDER;
     collisionStatus->touchingWallTrigger = 0;
-    collisionStatus->bombetteExploded = -1;
+    collisionStatus->bombetteExploded = NO_COLLIDER;
     collisionStatus->bombetteExplosionPos.x = 0.0f;
     collisionStatus->bombetteExplosionPos.y = 0.0f;
     collisionStatus->bombetteExplosionPos.z = 0.0f;

@@ -169,7 +169,7 @@ void action_update_spin(void) {
         playerSpinState->spinDirection.x = sin_rad(DEG_TO_RAD(angle)) * playerSpinState->spinDirectionMagnitude;
         playerSpinState->spinDirection.y = -cos_rad(DEG_TO_RAD(angle)) * playerSpinState->spinDirectionMagnitude;
         playerStatus->currentStateTime--;
-        if ((playerStatus->currentStateTime) == 0) {
+        if (playerStatus->currentStateTime == 0) {
             playerSpinState->stopSoundTimer = 4;
             set_action_state(ACTION_STATE_IDLE);
             playerStatus->flags &= ~PS_FLAG_SPINNING;
@@ -183,7 +183,7 @@ void action_update_spin(void) {
     if (playerStatus->actionSubstate == SUBSTATE_SPIN_0) {
         if (playerStatus->animFlags & PA_FLAG_INTERRUPT_SPIN) {
             playerStatus->actionSubstate = SUBSTATE_SPIN_1;
-        } else if (gCollisionStatus.pushingAgainstWall >= 0) {
+        } else if (gCollisionStatus.pushingAgainstWall > NO_COLLIDER) {
             playerSpinState->hitWallTime++;
             if (playerSpinState->hitWallTime >= 10) {
                 playerStatus->actionSubstate = SUBSTATE_SPIN_1;

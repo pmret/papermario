@@ -193,7 +193,7 @@ void func_802BD414_31E184(Npc* npc) {
             npc->pos.z += (z - npc->pos.z) * 0.5f;
         } else {
             npc_move_heading(npc, sp24, sp20);
-            collisionStatus->pushingAgainstWall = -1;
+            collisionStatus->pushingAgainstWall = NO_COLLIDER;
         }
         sp24 = 2.0f;
         sp20 = clamp_angle(npc->yaw - 30.0f);

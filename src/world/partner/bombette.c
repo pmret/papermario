@@ -420,7 +420,7 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
             npc->jumpScale = 0.8f;
             npc->pos.y += 10.0f;
             npc->moveToPos.y = npc->pos.y;
-            collisionStatus->bombetteExploded = -1;
+            collisionStatus->bombetteExploded = NO_COLLIDER;
             collisionStatus->bombetteExplosionPos.x = npc->pos.x;
             collisionStatus->bombetteExplosionPos.y = npc->pos.y;
             collisionStatus->bombetteExplosionPos.z = npc->pos.z;
