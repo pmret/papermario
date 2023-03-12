@@ -163,13 +163,13 @@ EvtScript N(EVS_ManageSneakingScenes) = {
     EVT_CALL(SetPlayerAnimation, ANIM_Peach2_Startle)
     EVT_CALL(PlaySoundAtPlayer, SOUND_262, 0)
     EVT_CALL(ShowEmote, 0, EMOTE_EXCLAMATION, 0, 30, EMOTER_PLAYER, 0, 0, 0, 0)
-    EVT_WAIT(30)
+    EVT_WAIT(30 * DT)
     EVT_CALL(SetPlayerAnimation, ANIM_Peach1_Idle)
     EVT_THREAD
-        EVT_CALL(NpcFlyTo, NPC_PARTNER, -776, 50, -65, 10, 0, EASING_LINEAR)
+        EVT_CALL(NpcFlyTo, NPC_PARTNER, -776, 50, -65, 10 * DT, 0, EASING_LINEAR)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(PlayerMoveTo, -778, -55, 10)
+        EVT_CALL(PlayerMoveTo, -778, -55, 10 * DT)
         EVT_CALL(InterpPlayerYaw, 185, 0)
     EVT_END_THREAD
     EVT_CALL(SpeakToNpc, NPC_HammerBros, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, NPC_Koopatrol_01, MSG_Peach_006E)
@@ -187,7 +187,7 @@ EvtScript N(EVS_ManageSneakingScenes) = {
     EVT_CALL(SetCamDistance, CAM_DEFAULT, 300)
     EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(15.0), EVT_FLOAT(-10.5))
     EVT_CALL(SetCamPosA, CAM_DEFAULT, -775, -50)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0))
+    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0 / DT))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_CALL(SpeakToPlayer, NPC_PLAYER, ANIM_BattleBow_Talk, ANIM_Peach1_Idle, 5, MSG_Peach_0077)
@@ -197,20 +197,20 @@ EvtScript N(EVS_ManageSneakingScenes) = {
     EVT_CALL(SpeakToNpc, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, NPC_HammerBros, MSG_Peach_007A)
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_HammerBros, ANIM_HammerBros_Anim07)
-        EVT_CALL(NpcMoveTo, NPC_HammerBros, -820, 50, 30)
+        EVT_CALL(NpcMoveTo, NPC_HammerBros, -820, 50, 30 * DT)
         EVT_CALL(SetNpcAnimation, NPC_HammerBros, ANIM_HammerBros_Anim02)
         EVT_CALL(NpcFacePlayer, NPC_HammerBros, 0)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim06)
-        EVT_CALL(NpcMoveTo, NPC_Koopatrol_01, -840, 10, 30)
+        EVT_CALL(NpcMoveTo, NPC_Koopatrol_01, -840, 10, 30 * DT)
         EVT_CALL(SetNpcAnimation, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim01)
         EVT_CALL(NpcFacePlayer, NPC_Koopatrol_01, 0)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_WAIT(10)
+        EVT_WAIT(10 * DT)
         EVT_CALL(SetNpcAnimation, NPC_PARTNER, ANIM_Twink_Cringe)
-        EVT_CALL(LoadPath, 20, EVT_PTR(N(TwinkHide1)), ARRAY_COUNT(N(TwinkHide1)), EASING_LINEAR)
+        EVT_CALL(LoadPath, 20 * DT, EVT_PTR(N(TwinkHide1)), ARRAY_COUNT(N(TwinkHide1)), EASING_LINEAR)
         EVT_LOOP(0)
             EVT_CALL(GetNextPathPos)
             EVT_CALL(SetNpcPos, NPC_PARTNER, LVar1, LVar2, LVar3)
@@ -222,21 +222,21 @@ EvtScript N(EVS_ManageSneakingScenes) = {
         EVT_CALL(NpcFacePlayer, NPC_PARTNER, 0)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_WAIT(10)
+        EVT_WAIT(10 * DT)
         EVT_CALL(SetPlayerAnimation, ANIM_Peach2_Gasp)
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
         EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.0))
-        EVT_CALL(PlayerJump1, LVar0, LVar1, LVar2, 10)
+        EVT_CALL(PlayerJump1, LVar0, LVar1, LVar2, 10 * DT)
     EVT_END_THREAD
-    EVT_WAIT(30)
+    EVT_WAIT(30 * DT)
     EVT_CALL(SpeakToPlayer, NPC_HammerBros, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, MSG_Peach_007B)
     EVT_CALL(SpeakToPlayer, NPC_Koopatrol_01, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, MSG_Peach_007C)
     EVT_EXEC_WAIT(N(EVS_ApproachPeach))
     EVT_EXEC_WAIT(N(EVS_PickUpPeach))
     EVT_EXEC_WAIT(N(EVS_CarryPeachAway))
     EVT_CALL(SpeakToPlayer, NPC_PLAYER, ANIM_Peach2_Carried, ANIM_Peach2_Carried, 5, MSG_Peach_007D)
-    EVT_WAIT(10)
-    EVT_CALL(LoadPath, 40, EVT_PTR(N(TwinkFollowPath1)), ARRAY_COUNT(N(TwinkFollowPath1)), EASING_LINEAR)
+    EVT_WAIT(10 * DT)
+    EVT_CALL(LoadPath, 40 * DT, EVT_PTR(N(TwinkFollowPath1)), ARRAY_COUNT(N(TwinkFollowPath1)), EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(GetNextPathPos)
         EVT_CALL(SetNpcPos, NPC_PARTNER, LVar1, LVar2, LVar3)
@@ -247,15 +247,15 @@ EvtScript N(EVS_ManageSneakingScenes) = {
     EVT_END_LOOP
     EVT_CALL(SetNpcAnimation, NPC_PARTNER, ANIM_Twink_TalkSad)
     EVT_LOOP(2)
-        EVT_CALL(InterpNpcYaw, NPC_PARTNER, 270, 7)
-        EVT_WAIT(5)
-        EVT_CALL(InterpNpcYaw, NPC_PARTNER, 90, 7)
-        EVT_WAIT(5)
+        EVT_CALL(InterpNpcYaw, NPC_PARTNER, 270, 7 * DT)
+        EVT_WAIT(5 * DT)
+        EVT_CALL(InterpNpcYaw, NPC_PARTNER, 90, 7 * DT)
+        EVT_WAIT(5 * DT)
     EVT_END_LOOP
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_CALL(SetNpcAnimation, NPC_PARTNER, ANIM_Twink_Idle)
     EVT_THREAD
-        EVT_CALL(LoadPath, 30, EVT_PTR(N(TwinkFollowPath2)), ARRAY_COUNT(N(TwinkFollowPath2)), EASING_LINEAR)
+        EVT_CALL(LoadPath, 30 * DT, EVT_PTR(N(TwinkFollowPath2)), ARRAY_COUNT(N(TwinkFollowPath2)), EASING_LINEAR)
         EVT_LOOP(0)
             EVT_CALL(GetNextPathPos)
             EVT_CALL(SetNpcPos, NPC_PARTNER, LVar1, LVar2, LVar3)
@@ -265,8 +265,8 @@ EvtScript N(EVS_ManageSneakingScenes) = {
             EVT_END_IF
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_WAIT(15)
-    EVT_CALL(FadeOutMusic, 0, 1000)
+    EVT_WAIT(15 * DT)
+    EVT_CALL(FadeOutMusic, 0, 1000 * DT)
     EVT_EXEC_WAIT(N(EVS_EndPeachChapter2))
     EVT_CALL(EnablePartnerAI)
     EVT_CALL(DisablePlayerPhysics, FALSE)

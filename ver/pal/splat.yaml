@@ -2756,8 +2756,285 @@ segments:
     - [0xB25150, c, osr_04_0_header]
     - [0xB25150, c, osr_04_1_main]
     - [0xB25150, c, osr_04_2_assault]
+  - name: kkj_00
+    dir: world/area_kkj/kkj_00
+    type: code
+    start: 0xB27130
+    vram: 0x80240000
+    subsegments:
+    - [0xB27130, c, kkj_00_0_header]
+    - [0xB27170, c, kkj_00_1_music]
+    - [0xB27170, c, kkj_00_2_main]
+    - [0xB271E0, c, kkj_00_3_npc_intro]
+    - [0xB28070, c, kkj_00_4_scene_intro]
+    - [0xB28070, c, kkj_00_5_npc_ending]
+    - [0xB28070, c, kkj_00_6_scene_ending]
+  - name: kkj_01
+    dir: world/area_kkj/kkj_01
+    type: code
+    start: 0xB31010
+    vram: 0x80240000
+    subsegments:
+    - [0xB31010, c, kkj_01_0_header]
+    - [0xB31010, c, kkj_01_1_music]
+    - [0xB31010, c, kkj_01_2_main]
+    - [0xB31010, c, kkj_01_3_npc]
+  - name: kkj_02
+    dir: world/area_kkj/kkj_02
+    type: code
+    start: 0xB34BC0
+    vram: 0x80240000
+    subsegments:
+    - [0xB34BC0, c, kkj_02_0_header]
+    - [0xB34BC0, c, kkj_02_1_music]
+    - [0xB34BC0, c, kkj_02_2_main]
+    - [0xB34BC0, c, kkj_02_3_npc]
+  - name: kkj_03
+    dir: world/area_kkj/kkj_03
+    type: code
+    start: 0xB355B0
+    vram: 0x80240000
+    subsegments:
+    - [0xB355B0, c, kkj_03_0_header]
+    - [0xB355D0, c, kkj_03_1_music]
+    - [0xB355D0, c, kkj_03_2_main]
+    - [0xB358E0, c, kkj_03_3_npc]
+    - [0xB358E0, c, kkj_03_4_scenes]
+  - name: kkj_10
+    dir: world/area_kkj/kkj_10
+    type: code
+    start: 0xB369C0
+    vram: 0x80240000
+    subsegments:
+    - [0xB369C0, c, kkj_10_0_header]
+    - [0xB369C0, c, kkj_10_1_main]
+    - [0xB36A30, c, kkj_10_2_entity]
+    - [0xB36A70, c, kkj_10_3_npcs_early]
+    - [0xB37260, c, kkj_10_4_npcs_later]
+  - name: kkj_11
+    dir: world/area_kkj/kkj_11
+    type: code
+    start: 0xB39FE0
+    vram: 0x80240000
+    subsegments:
+    - [0xB39FE0, c, kkj_11_0_header]
+    - [0xB39FE0, c, kkj_11_1_main]
+    - [0xB3A050, c, kkj_11_2_entity]
+    - [0xB3A090, c, kkj_11_3_scene]
+    - [0xB3A090, c, kkj_11_4_demo]
+    - [0xB3A090, c, kkj_11_5_npcs_early]
+    - [0xB3A880, c, kkj_11_6_npcs_later]
+  - name: kkj_12
+    dir: world/area_kkj/kkj_12
+    type: code
+    start: 0xB3FF30
+    vram: 0x80240000
+    subsegments:
+    - [0xB3FF30, c, kkj_12_0_header]
+    - [0xB3FF30, c, kkj_12_1_main]
+    - [0xB3FFA0, c, kkj_12_2_npc]
+  - name: kkj_13
+    dir: world/area_kkj/kkj_13
+    type: code
+    start: 0xB41D70
+    vram: 0x80240000
+    subsegments:
+    - [0xB41D70, c, kkj_13_0_header]
+    - [0xB41D90, c, kkj_13_1_music]
+    - [0xB41D90, c, kkj_13_2_main]
+    - [0xB420A0, c, kkj_13_3_npcs_finale]
+    - [0xB42100, c, kkj_13_4_npcs_intro]
+    - [0xB42100, c, kkj_13_5_intro_scenes]
+  - name: kkj_14
+    dir: world/area_kkj/kkj_14
+    type: code
+    start: 0xB46D20
+    vram: 0x80240000
+    subsegments:
+    - [0xB46D20, c, kkj_14_0_header]
+    - [0xB46D70, c, kkj_14_1_music]
+    - [0xB46D70, c, kkj_14_2_main]
+    - [0xB470C0, c, kkj_14_3_interactables]
+    - [0xB471A0, c, kkj_14_4_npc_guards]
+    - [0xB471A0, c, kkj_14_5_npc_ch0]
+    - [0xB471A0, c, kkj_14_6_npc_ch2]
+    - [0xB471A0, c, kkj_14_7_npc_ch7]
+    - [0xB471A0, c, kkj_14_8_chapter0]
+    - [0xB471E0, c, kkj_14_9_chapter1]
+    - [0xB471E0, c, kkj_14_10_chapter2]
+    - [0xB471E0, c, kkj_14_11_chapter3]
+    - [0xB471E0, c, kkj_14_12_chapter4]
+    - [0xB471E0, c, kkj_14_13_chapter5]
+    - [0xB471E0, c, kkj_14_14_chapter6]
+    - [0xB471E0, c, kkj_14_15_chapter7]
+  - name: kkj_15
+    dir: world/area_kkj/kkj_15
+    type: code
+    start: 0xB51410
+    vram: 0x80240000
+    subsegments:
+    - [0xB51410, c, kkj_15_0_header]
+    - [0xB51410, c, kkj_15_1_music]
+    - [0xB51410, c, kkj_15_2_main]
+    - [0xB51750, c, kkj_15_3_rotating_wall]
+    - [0xB51910, c, kkj_15_4_chapter0]
+    - [0xB519E0, c, kkj_15_5_chapter1]
+    - [0xB519E0, c, kkj_15_6_chapter2]
+    - [0xB519E0, c, kkj_15_7_chapter3]
+    - [0xB51A20, c, kkj_15_8_npc_chapter0]
+    - [0xB51A20, c, kkj_15_9_npc_chapter1]
+    - [0xB51A20, c, kkj_15_10_npc_chapter3]
+  - name: kkj_16
+    dir: world/area_kkj/kkj_16
+    type: code
+    start: 0xB59290
+    vram: 0x80240000
+    subsegments:
+    - [0xB59290, c, kkj_16_0_header]
+    - [0xB59290, c, kkj_16_1_main]
+    - [0xB592F0, c, kkj_16_2_npcs_early]
+    - [0xB59AE0, c, kkj_16_3_npcs_later]
+    - [0xB5A310, c, kkj_16_4_stealth]
+    - [0xB5A310, c, kkj_16_5_entity]
+  - name: kkj_17
+    dir: world/area_kkj/kkj_17
+    type: code
+    start: 0xB5DAE0
+    vram: 0x80240000
+    subsegments:
+    - [0xB5DAE0, c, kkj_17_0_header]
+    - [0xB5DAE0, c, kkj_17_1_main]
+    - [0xB5DAE0, c, kkj_17_2_entity]
+    - [0xB5DAE0, c, kkj_17_3_chest]
+  - name: kkj_18
+    dir: world/area_kkj/kkj_18
+    type: code
+    start: 0xB5EB20
+    vram: 0x80240000
+    subsegments:
+    - [0xB5EB20, c, kkj_18_0_header]
+    - [0xB5EB20, c, kkj_18_1_music]
+    - [0xB5EB20, c, kkj_18_2_main]
+    - [0xB5EE60, c, kkj_18_3_npc]
+    - [0xB5EE60, c, kkj_18_4_gourmet]
+  - name: kkj_19
+    dir: world/area_kkj/kkj_19
+    type: code
+    start: 0xB637D0
+    vram: 0x80240000
+    subsegments:
+    - [0xB637D0, c, kkj_19_0_header]
+    - [0xB637D0, c, kkj_19_1_music]
+    - [0xB637D0, c, kkj_19_2_main]
+    - [0xB63A80, c, kkj_19_3_npcs_intro]
+    - [0xB63A80, c, kkj_19_4_npcs_peach]
+    - [0xB63A80, c, kkj_19_5_baking]
+  - name: kkj_20
+    dir: world/area_kkj/kkj_20
+    type: code
+    start: 0xB69A30
+    vram: 0x80240000
+    subsegments:
+    - [0xB69A30, c, kkj_20_0_header]
+    - [0xB69A30, c, kkj_20_1_music]
+    - [0xB69A30, c, kkj_20_2_main]
+    - [0xB69A30, c, kkj_20_3_entity]
+    - [0xB69CF0, c, kkj_20_4_npc]
+  - name: kkj_21
+    dir: world/area_kkj/kkj_21
+    type: code
+    start: 0xB6E190
+    vram: 0x80240000
+    subsegments:
+    - [0xB6E190, c, kkj_21_0_header]
+    - [0xB6E190, c, kkj_21_1_main]
+  - name: kkj_22
+    dir: world/area_kkj/kkj_22
+    type: code
+    start: 0xB6E3E0
+    vram: 0x80240000
+    subsegments:
+    - [0xB6E3E0, c, kkj_22_0_header]
+    - [0xB6E3E0, c, kkj_22_1_music]
+    - [0xB6E3E0, c, kkj_22_2_main]
+  - name: kkj_23
+    dir: world/area_kkj/kkj_23
+    type: code
+    start: 0xB6E770
+    vram: 0x80240000
+    subsegments:
+    - [0xB6E770, c, kkj_23_0_header]
+    - [0xB6E790, c, kkj_23_1_music]
+    - [0xB6E790, c, kkj_23_2_main]
+    - [0xB6E7F0, c, kkj_23_3_npcs_finale]
+    - [0xB6E850, c, kkj_23_4_npcs_peach]
+    - [0xB6F080, c, kkj_23_5_scene]
+  - name: kkj_24
+    dir: world/area_kkj/kkj_24
+    type: code
+    start: 0xB72460
+    vram: 0x80240000
+    subsegments:
+    - [0xB72460, c, kkj_24_0_header]
+    - [0xB72460, c, kkj_24_1_music]
+    - [0xB72460, c, kkj_24_2_main]
+    - [0xB72480, c, kkj_24_3_entity]
+  - name: kkj_25
+    dir: world/area_kkj/kkj_25
+    type: code
+    start: 0xB728F0
+    vram: 0x80240000
+    subsegments:
+    - [0xB728F0, c, kkj_25_0_header]
+    - [0xB72910, c, kkj_25_1_main]
+    - [0xB72910, c, kkj_25_2_npc_initial]
+    - [0xB72940, c, kkj_25_3_npc_midpoint]
+    - [0xB72970, c, kkj_25_4_npc_final]
+    - [0xB72970, c, kkj_25_5_arena]
+    - [0xB72C00, c, kkj_25_6_peach_free]
+    - [0xB73550, c, kkj_25_7_kammy_defeated]
+    - [0xB73620, c, kkj_25_8_bowser_defeated]
+    - [0xB73830, c, kkj_25_9_entity]
+  - name: kkj_26
+    dir: world/area_kkj/kkj_26
+    type: code
+    start: 0xB7F010
+    vram: 0x80240000
+    subsegments:
+    - [0xB7F010, c, kkj_26_0_header]
+    - [0xB7F010, c, kkj_26_1_main]
+    - [0xB7F040, c, kkj_26_2_scenes]
+    - [0xB7F040, c, kkj_26_3_demo]
+  - name: kkj_27
+    dir: world/area_kkj/kkj_27
+    type: code
+    start: 0xB7FC60
+    vram: 0x80240000
+    subsegments:
+    - [0xB7FC60, c, kkj_27_0_header]
+    - [0xB7FC60, c, kkj_27_1_music]
+    - [0xB7FC60, c, kkj_27_2_main]
+    - [0xB7FF70, c, kkj_27_3_rotating_wall]
+  - name: kkj_28
+    dir: world/area_kkj/kkj_28
+    type: code
+    start: 0xB80D90
+    vram: 0x80240000
+    subsegments:
+    - [0xB80D90, c, kkj_28_0_header]
+    - [0xB80D90, c, kkj_28_1_main]
+  - name: kkj_29
+    dir: world/area_kkj/kkj_29
+    type: code
+    start: 0xB80FA0
+    vram: 0x80240000
+    subsegments:
+    - [0xB80FA0, c, kkj_29_0_header]
+    - [0xB80FA0, c, kkj_29_1_main]
+    - [0xB80FD0, c, kkj_29_2_npc]
+    - [0xB80FD0, c, kkj_29_3_quiz]
 
-  - [0xB27130, bin]
+  - [0xB867F0, bin]
 
   - start: 0x1e937b8
     align: 8

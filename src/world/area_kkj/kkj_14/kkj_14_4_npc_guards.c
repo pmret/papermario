@@ -39,7 +39,7 @@ EvtScript N(EVS_Scene_TossedBackInRoom) = {
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(30)
+    EVT_WAIT(30 * DT)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_ttw, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o112, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(PlaySoundAtCollider, COLLIDER_ttw, SOUND_BASIC_DOOR_OPEN, 0)
@@ -53,8 +53,8 @@ EvtScript N(EVS_Scene_TossedBackInRoom) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_THREAD
-        EVT_WAIT(10)
-        EVT_CALL(LoadPath, 50, EVT_PTR(N(TwinkFollowPath)), ARRAY_COUNT(N(TwinkFollowPath)), EASING_LINEAR)
+        EVT_WAIT(10 * DT)
+        EVT_CALL(LoadPath, 50 * DT, EVT_PTR(N(TwinkFollowPath)), ARRAY_COUNT(N(TwinkFollowPath)), EASING_LINEAR)
         EVT_LOOP(0)
             EVT_CALL(GetNextPathPos)
             EVT_CALL(SetNpcPos, NPC_PARTNER, LVar1, LVar2, LVar3)
@@ -90,11 +90,11 @@ EvtScript N(EVS_Scene_TossedBackInRoom) = {
     EVT_END_LOOP
     EVT_CALL(SetNpcAnimation, NPC_Koopatrol_Guard_01, ANIM_WorldKoopatrol_Anim12)
     EVT_CALL(SetNpcAnimation, NPC_Koopatrol_Guard_02, ANIM_WorldKoopatrol_Anim12)
-    EVT_WAIT(20)
+    EVT_WAIT(20 * DT)
     EVT_CALL(SetPlayerAnimation, ANIM_Peach2_Thrown)
     EVT_CALL(SetNpcAnimation, NPC_Koopatrol_Guard_01, ANIM_WorldKoopatrol_Anim15)
     EVT_CALL(SetNpcAnimation, NPC_Koopatrol_Guard_02, ANIM_WorldKoopatrol_Anim15)
-    EVT_CALL(LoadPath, 15, EVT_PTR(N(PeachTossPath)), ARRAY_COUNT(N(PeachTossPath)), EASING_LINEAR)
+    EVT_CALL(LoadPath, 15 * DT, EVT_PTR(N(PeachTossPath)), ARRAY_COUNT(N(PeachTossPath)), EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(GetNextPathPos)
         EVT_CALL(SetPlayerPos, LVar1, LVar2, LVar3)
@@ -114,19 +114,19 @@ EvtScript N(EVS_Scene_TossedBackInRoom) = {
         EVT_ADD(LVar3, 5)
         EVT_LOOP(4)
             EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 1, LVar1, LVar2, LVar3, 0, 0)
-            EVT_WAIT(10)
+            EVT_WAIT(10 * DT)
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_Koopatrol_Guard_01, ANIM_WorldKoopatrol_Anim01)
-        EVT_WAIT(20)
+        EVT_WAIT(20 * DT)
         EVT_CALL(SetNpcAnimation, NPC_Koopatrol_Guard_01, ANIM_WorldKoopatrol_Anim06)
         EVT_CALL(NpcMoveTo, NPC_Koopatrol_Guard_01, -462, -30, 0)
         EVT_CALL(SetNpcPos, NPC_Koopatrol_Guard_01, NPC_DISPOSE_LOCATION)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_Koopatrol_Guard_02, ANIM_WorldKoopatrol_Anim01)
-        EVT_WAIT(20)
+        EVT_WAIT(20 * DT)
         EVT_CALL(SetNpcAnimation, NPC_Koopatrol_Guard_02, ANIM_WorldKoopatrol_Anim06)
         EVT_CALL(NpcMoveTo, NPC_Koopatrol_Guard_02, -430, -30, 0)
         EVT_CALL(SetNpcPos, NPC_Koopatrol_Guard_02, NPC_DISPOSE_LOCATION)
@@ -143,8 +143,8 @@ EvtScript N(EVS_Scene_TossedBackInRoom) = {
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_ttw, COLLIDER_FLAGS_UPPER_MASK)
         EVT_CALL(PlaySoundAtCollider, COLLIDER_ttw, SOUND_BASIC_DOOR_CLOSE, 0)
     EVT_END_THREAD
-    EVT_WAIT(60)
-    EVT_CALL(LoadPath, 50, EVT_PTR(N(TwinkApproachPath)), ARRAY_COUNT(N(TwinkApproachPath)), EASING_LINEAR)
+    EVT_WAIT(60 * DT)
+    EVT_CALL(LoadPath, 50 * DT, EVT_PTR(N(TwinkApproachPath)), ARRAY_COUNT(N(TwinkApproachPath)), EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(GetNextPathPos)
         EVT_CALL(SetNpcPos, NPC_PARTNER, LVar1, LVar2, LVar3)
@@ -183,7 +183,7 @@ EvtScript N(EVS_Scene_TossedBackInRoom) = {
         EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_Talk, ANIM_Twink_Idle, 0, LVar0)
     EVT_END_IF
     EVT_EXEC(N(EVS_SetupMusic))
-    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(1.0))
+    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(1.0 / DT))
     EVT_CALL(EnablePartnerAI)
     EVT_CALL(DisablePlayerPhysics, FALSE)
     EVT_CALL(DisablePlayerInput, FALSE)

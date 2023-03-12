@@ -36,7 +36,7 @@ EvtScript N(EVS_Scene_RotatingWall) = {
     EVT_THREAD
         EVT_CALL(PlaySoundAt, SOUND_93, 0, -250, 5, 0)
         EVT_CALL(GetPlayerPos, LVar9, LVar0, LVarA)
-        EVT_CALL(MakeLerp, 0, -450, 120, EASING_LINEAR)
+        EVT_CALL(MakeLerp, 0, -450, 120 * DT, EASING_LINEAR)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
             EVT_SETF(LVar2, LVar0)
@@ -53,7 +53,7 @@ EvtScript N(EVS_Scene_RotatingWall) = {
         EVT_CALL(EnableModel, MODEL_o182, TRUE)
         EVT_CALL(EnableModel, MODEL_o184, TRUE)
         EVT_CALL(EnableModel, MODEL_o186, TRUE)
-        EVT_CALL(MakeLerp, 8, 255, 40, EASING_LINEAR)
+        EVT_CALL(MakeLerp, 8, 255, 40 * DT, EASING_LINEAR)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
             EVT_CALL(N(SetSpillLightAmount), LVar0)
@@ -63,10 +63,10 @@ EvtScript N(EVS_Scene_RotatingWall) = {
             EVT_END_IF
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_WAIT(80)
+    EVT_WAIT(80 * DT)
     EVT_SET(GF_KKJ14_SkipSecretPassage, TRUE)
     EVT_CALL(GotoMap, EVT_PTR("kkj_15"), kkj_15_ENTRY_1)
-    EVT_WAIT(100)
+    EVT_WAIT(100 * DT)
     EVT_RETURN
     EVT_END
 };
@@ -74,16 +74,16 @@ EvtScript N(EVS_Scene_RotatingWall) = {
 EvtScript N(EVS_UseRotatingWall) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(PlayerMoveTo, -205, -10, 15)
+    EVT_CALL(PlayerMoveTo, -205, -10, 15 * DT)
     EVT_CALL(InterpPlayerYaw, 270, 5)
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_CALL(SetPlayerAnimation, ANIM_Peach3_ReachForButton)
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_CALL(PlaySoundAtCollider, COLLIDER_o193, SOUND_FA, 0)
     EVT_CALL(SetPlayerAnimation, ANIM_Peach3_PressButton)
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_CALL(SetPlayerAnimation, ANIM_Peach3_AfterPressButton)
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(1.0))
     EVT_EXEC_WAIT(N(EVS_Scene_RotatingWall))
     EVT_CALL(DisablePlayerInput, FALSE)
@@ -95,14 +95,14 @@ EvtScript N(EVS_UseRotatingWall_FirstTime) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(FacePlayerTowardPoint, -222, 0, 5)
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_CALL(SetPlayerAnimation, ANIM_Peach3_ReachForButton)
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_CALL(PlaySoundAtCollider, COLLIDER_o193, SOUND_FA, 0)
     EVT_CALL(SetPlayerAnimation, ANIM_Peach3_PressButton)
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_CALL(SetPlayerAnimation, ANIM_Peach3_AfterPressButton)
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_THREAD
         EVT_CALL(DisablePartnerAI, 0)
         EVT_CALL(SetNpcAnimation, NPC_PARTNER, ANIM_Twink_Cringe)
@@ -112,7 +112,7 @@ EvtScript N(EVS_UseRotatingWall_FirstTime) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(InterpPlayerYaw, 270, 0)
-        EVT_WAIT(10)
+        EVT_WAIT(10 * DT)
         EVT_CALL(SetPlayerAnimation, ANIM_Peach2_LookAround)
         EVT_CALL(SpeakToPlayer, NPC_PLAYER, ANIM_Peach2_Gasp, ANIM_Peach2_GaspStill, 5, MSG_Peach_0048)
     EVT_END_THREAD

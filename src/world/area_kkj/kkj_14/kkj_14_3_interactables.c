@@ -262,9 +262,9 @@ EvtScript N(EVS_OpenHiddenPassage) = {
     EVT_CALL(EnableModel, MODEL_o42, FALSE)
     EVT_CALL(EnableGroup, MODEL_g27, TRUE)
     EVT_IF_EQ(GB_StoryProgress, STORY_CH1_BEGAN_PEACH_MISSION)
-        EVT_SET(LVar0, 120)
+        EVT_SET(LVar0, 120 * DT)
     EVT_ELSE
-        EVT_SET(LVar0, 60)
+        EVT_SET(LVar0, 60 * DT)
     EVT_END_IF
     EVT_CALL(PlaySoundAtCollider, COLLIDER_o129, SOUND_FC, 0)
     EVT_CALL(MakeLerp, 255, 0, LVar0, EASING_LINEAR)
@@ -278,13 +278,13 @@ EvtScript N(EVS_OpenHiddenPassage) = {
     EVT_END_LOOP
     EVT_CALL(EnableModel, MODEL_o157, FALSE)
     EVT_CALL(SetModelFlags, MODEL_o157, 16, FALSE)
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_THREAD
-        EVT_WAIT(20)
+        EVT_WAIT(20 * DT)
         EVT_CALL(PlaySoundAt, SOUND_FB, 0, -125, 10, -120)
         EVT_PLAY_EFFECT(EFFECT_SMOKE_BURST, 0, -125, 10, -120, EVT_FLOAT(2.0), 30)
     EVT_END_THREAD
-    EVT_CALL(MakeLerp, 0, -180, 30, EASING_QUADRATIC_IN)
+    EVT_CALL(MakeLerp, 0, -180, 30 * DT, EASING_QUADRATIC_IN)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
         EVT_CALL(RotateModel, MODEL_o39, LVar0, 1, 0, 0)
@@ -293,7 +293,7 @@ EvtScript N(EVS_OpenHiddenPassage) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o129, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o130, COLLIDER_FLAGS_UPPER_MASK)
     EVT_SET(GF_KKJ14_OpenedPassage, TRUE)
@@ -368,14 +368,14 @@ EvtScript N(EVS_Inspect_HiddenButton_FirstTime) = {
             EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
             EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
             EVT_CALL(SetPanTarget, CAM_DEFAULT, -120, 25, 0)
-            EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0))
+            EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0 / DT))
             EVT_CALL(SetCamDistance, CAM_DEFAULT, 300)
             EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
             EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
         EVT_END_IF
         EVT_EXEC_WAIT(N(EVS_OpenHiddenPassage))
         EVT_IF_EQ(AF_KKJ_05, FALSE)
-            EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(3.0))
+            EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(3.0 / DT))
             EVT_CALL(SetPlayerAnimation, ANIM_Peach2_Delighted)
             EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_Twink_ShoutJoy, ANIM_Twink_ShoutJoy, 5, MSG_Peach_0047)
             EVT_SET(AF_KKJ_05, TRUE)

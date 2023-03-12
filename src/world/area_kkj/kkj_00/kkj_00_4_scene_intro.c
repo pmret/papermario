@@ -12,7 +12,7 @@ EvtScript N(EVS_OpenAndCloseFrontDoor_Intro) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_WAIT(30)
+    EVT_WAIT(30 * DT)
     EVT_CALL(MakeLerp, 80, 0, 8, EASING_QUADRATIC_OUT)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
@@ -37,11 +37,11 @@ EvtScript N(EVS_Scene_Intro) = {
         EVT_CALL(NpcMoveTo, NPC_Luigi, 20, 320, 0)
         EVT_CALL(SetNpcAnimation, NPC_Luigi, ANIM_Luigi_Idle)
     EVT_END_THREAD
-    EVT_CALL(func_802D1270, 80, 300, EVT_FLOAT(4.0))
+    EVT_CALL(func_802D1270, 80, 300, EVT_FLOAT(4.0 / DT))
     EVT_CALL(InterpPlayerYaw, 270, 5)
-    EVT_WAIT(30)
+    EVT_WAIT(30 * DT)
     EVT_CALL(SpeakToPlayer, NPC_Luigi, ANIM_Luigi_Talk, ANIM_Luigi_Idle, 0, MSG_Intro_0024)
-    EVT_WAIT(20)
+    EVT_WAIT(20 * DT)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
     EVT_END
