@@ -3529,8 +3529,125 @@ segments:
     - [0xC27280, c, mim_12_3_main]
     - [0xC27280, c, mim_12_4_npc]
     - [0xC27280, c, mim_12_5_gate]
+  - name: obk_01
+    dir: world/area_obk/obk_01
+    type: code
+    start: 0xC290A0
+    vram: 0x80240000
+    subsegments:
+    - [0xC290A0, c, obk_01_0_header]
+    - [0xC290A0, c, obk_01_1_music]
+    - [0xC290A0, c, obk_01_2_main]
+    - [0xC290A0, c, obk_01_3_chandelier]
+    - [0xC29830, c, obk_01_4_portrait]
+    - [0xC29880, c, obk_01_5_jump_scare]
+    - [0xC29880, c, obk_01_6_npc]
+    - [0xC2A1E0, c, obk_01_7_entity]
+  - name: obk_02
+    dir: world/area_obk/obk_02
+    type: code
+    start: 0xC2E990
+    vram: 0x80240000
+    subsegments:
+    - [0xC2E990, c, obk_02_0_header]
+    - [0xC2E990, c, obk_02_1_music]
+    - [0xC2E990, c, obk_02_2_main]
+    - [0xC2E990, c, obk_02_3_npc]
+    - [0xC2EBD0, c, obk_02_4_bombable]
+    - [0xC2EBD0, c, obk_02_5_clock]
+    - [0xC2EC40, c, obk_02_6_entity]
+  - name: obk_03
+    dir: world/area_obk/obk_03
+    type: code
+    start: 0xC30180
+    vram: 0x80240000
+    subsegments:
+    - [0xC30180, c, obk_03_0_header]
+    - [0xC30180, c, obk_03_1_music]
+    - [0xC30180, c, obk_03_2_main]
+    - [0xC30180, c, obk_03_3_shop]
+    - [0xC30180, c, obk_03_4_entity]
+    - [0xC302F0, c, obk_03_5_stairs]
+    - [0xC302F0, c, obk_03_6_npc]
+    - [0xC30A50, c, obk_03_7_rocking_chair]
+  - name: obk_04
+    dir: world/area_obk/obk_04
+    type: code
+    start: 0xC33D60
+    vram: 0x80240000
+    subsegments:
+    - [0xC33D60, c, obk_04_0_header]
+    - [0xC33D60, c, obk_04_1_music]
+    - [0xC33D60, c, obk_04_2_entity]
+    - [0xC33DB0, c, obk_04_3_npc]
+    - [0xC34670, c, obk_04_4_main]
+    - [0xC34670, c, obk_04_5_hole]
+    - [0xC346A0, c, obk_04_6_game]
+  - name: obk_05
+    dir: world/area_obk/obk_05
+    type: code
+    start: 0xC38F60
+    vram: 0x80240000
+    subsegments:
+    - [0xC38F60, c, obk_05_0_header]
+    - [0xC38F60, c, obk_05_1_music]
+    - [0xC38F60, c, obk_05_2_main]
+    - [0xC38FB0, c, obk_05_3_rocking_chair]
+    - [0xC396D0, c, obk_05_4_hole]
+    - [0xC39700, c, obk_05_5_npc]
+    - [0xC39940, c, obk_05_6_entity]
+  - name: obk_06
+    dir: world/area_obk/obk_06
+    type: code
+    start: 0xC3A590
+    vram: 0x80240000
+    subsegments:
+    - [0xC3A590, c, obk_06_0_header]
+    - [0xC3A590, c, obk_06_1_music]
+    - [0xC3A590, c, obk_06_2_main]
+    - [0xC3A590, c, obk_06_3_bombable]
+    - [0xC3A590, c, obk_06_4_entity]
+  - name: obk_07
+    dir: world/area_obk/obk_07
+    type: code
+    start: 0xC3AAF0
+    vram: 0x80240000
+    subsegments:
+    - [0xC3AAF0, c, obk_07_0_header]
+    - [0xC3AAF0, c, obk_07_1_music]
+    - [0xC3AAF0, c, obk_07_2_main]
+    - [0xC3AAF0, c, obk_07_3_entity]
+    - [0xC3ADB0, c, obk_07_4_fireplace]
+    - [0xC3ADB0, c, obk_07_5_npc]
+    - [0xC3AFF0, c, obk_07_6_phonograph]
+  - name: obk_08
+    dir: world/area_obk/obk_08
+    type: code
+    start: 0xC3F770
+    vram: 0x80240000
+    subsegments:
+    - [0xC3F770, c, obk_08_0_header]
+    - [0xC3F770, c, obk_08_1_music]
+    - [0xC3F770, c, obk_08_2_main]
+    - [0xC3F770, c, obk_08_3_cabinets]
+    - [0xC3FFB0, c, obk_08_4_entity]
+    - [0xC40010, c, obk_08_5_npc]
+    - [0xC40990, c, obk_08_6_game]
+  - name: obk_09
+    dir: world/area_obk/obk_09
+    type: code
+    start: 0xC466B0
+    vram: 0x80240000
+    subsegments:
+    - [0xC466B0, c, obk_09_0_header]
+    - [0xC466B0, c, obk_09_1_music]
+    - [0xC466B0, c, obk_09_2_main]
+    - [0xC466B0, c, obk_09_3_meet_bow]
+    - [0xC46840, c, obk_09_4_npc]
+    - [0xC46A00, c, obk_09_5_new_partner]
+    - [0xC46AA0, c, obk_09_6_epilogue]
 
-  - [0xC290A0, bin]
+  - [0xC490B0, bin]
 
   - start: 0x1e937b8
     align: 8
