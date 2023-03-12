@@ -3378,8 +3378,159 @@ segments:
     - [0xBFBBD0, c, jan_23_1_music]
     - [0xBFBBD0, c, jan_23_2_main]
     - [0xBFBBD0, c, jan_23_3_npc]
+  - name: mim_01
+    dir: world/area_mim/mim_01
+    type: code
+    start: 0xBFF340
+    vram: 0x80240000
+    subsegments:
+    - [0xBFF340, c, mim_01_0_header]
+    - [0xBFF340, c, mim_01_1_music]
+    - [0xBFF340, c, mim_01_2_main]
+    - [0xBFF3B0, c, mim_01_3_entity]
+    - [0xBFF3B0, c, mim_01_4_hint]
+    - [0xBFF840, c, mim_01_5_gate]
+    - [0xBFF840, c, mim_01_6_npc]
+  - name: mim_02
+    dir: world/area_mim/mim_02
+    type: code
+    start: 0xC03B00
+    vram: 0x80240000
+    subsegments:
+    - [0xC03B00, c, mim_02_0_header]
+    - [0xC03B00, c, mim_02_1_music]
+    - [0xC03B00, c, mim_02_2_main]
+    - [0xC03B70, c, mim_02_3_npc]
+    - [0xC04CE0, c, mim_02_4_gate]
+    - [0xC04CE0, c, mim_02_5_hint]
+  - name: mim_03
+    dir: world/area_mim/mim_03
+    type: code
+    start: 0xC07380
+    vram: 0x80240000
+    subsegments:
+    - [0xC07380, c, mim_03_0_header]
+    - [0xC07380, c, mim_03_1_music]
+    - [0xC07380, c, mim_03_2_main]
+    - [0xC07420, c, mim_03_3_entity]
+    - [0xC07420, c, mim_03_4_hint]
+    - [0xC078B0, c, mim_03_5_gate]
+    - [0xC078B0, c, mim_03_6_npc]
+  - name: mim_04
+    dir: world/area_mim/mim_04
+    type: code
+    start: 0xC09860
+    vram: 0x80240000
+    subsegments:
+    - [0xC09860, c, mim_04_0_header]
+    - [0xC09860, c, mim_04_1_music]
+    - [0xC09860, c, mim_04_2_main]
+    - [0xC098D0, c, mim_04_3_entity]
+    - [0xC098D0, c, mim_04_4_hint]
+    - [0xC09A60, c, mim_04_5_gate]
+    - [0xC09A60, c, mim_04_6_npc]
+  - name: mim_05
+    dir: world/area_mim/mim_05
+    type: code
+    start: 0xC0C630
+    vram: 0x80240000
+    subsegments:
+    - [0xC0C630, c, mim_05_0_header]
+    - [0xC0C630, c, mim_05_1_music]
+    - [0xC0C630, c, mim_05_2_main]
+    - [0xC0C6A0, c, mim_05_3_entity]
+    - [0xC0C6A0, c, mim_05_4_hint]
+    - [0xC0C6A0, c, mim_05_5_gate]
+    - [0xC0C6A0, c, mim_05_6_npc]
+  - name: mim_06
+    dir: world/area_mim/mim_06
+    type: code
+    start: 0xC10680
+    vram: 0x80240000
+    subsegments:
+    - [0xC10680, c, mim_06_0_header]
+    - [0xC10680, c, mim_06_1_music]
+    - [0xC10680, c, mim_06_2_main]
+    - [0xC106F0, c, mim_06_3_entity]
+    - [0xC106F0, c, mim_06_4_hint]
+    - [0xC10BF0, c, mim_06_5_gate]
+    - [0xC10BF0, c, mim_06_6_npc]
+  - name: mim_07
+    dir: world/area_mim/mim_07
+    type: code
+    start: 0xC16040
+    vram: 0x80240000
+    subsegments:
+    - [0xC16040, c, mim_07_0_header]
+    - [0xC16040, c, mim_07_1_music]
+    - [0xC16040, c, mim_07_2_main]
+    - [0xC160B0, c, mim_07_3_entity]
+    - [0xC160B0, c, mim_07_4_hint]
+    - [0xC162B0, c, mim_07_5_gate]
+    - [0xC162B0, c, mim_07_6_npc]
+  - name: mim_08
+    dir: world/area_mim/mim_08
+    type: code
+    start: 0xC19840
+    vram: 0x80240000
+    subsegments:
+    - [0xC19840, c, mim_08_0_header]
+    - [0xC19840, c, mim_08_1_music]
+    - [0xC19840, c, mim_08_2_main]
+    - [0xC198E0, c, mim_08_3_entity]
+    - [0xC198E0, c, mim_08_4_gate]
+    - [0xC198E0, c, mim_08_5_npc]
+  - name: mim_09
+    dir: world/area_mim/mim_09
+    type: code
+    start: 0xC1ED00
+    vram: 0x80240000
+    subsegments:
+    - [0xC1ED00, c, mim_09_0_header]
+    - [0xC1ED00, c, mim_09_1_music]
+    - [0xC1ED00, c, mim_09_2_main]
+    - [0xC1EDA0, c, mim_09_3_entity]
+    - [0xC1EDA0, c, mim_09_4_hint]
+    - [0xC1EDA0, c, mim_09_5_gate]
+    - [0xC1EDA0, c, mim_09_6_npc]
+  - name: mim_10
+    dir: world/area_mim/mim_10
+    type: code
+    start: 0xC218E0
+    vram: 0x80240000
+    subsegments:
+    - [0xC218E0, c, mim_10_0_header]
+    - [0xC218E0, c, mim_10_1_music]
+    - [0xC218E0, c, mim_10_2_entity]
+    - [0xC218E0, c, mim_10_3_main]
+    - [0xC218E0, c, mim_10_4_npc]
+  - name: mim_11
+    dir: world/area_mim/mim_11
+    type: code
+    start: 0xC22F70
+    vram: 0x80240000
+    subsegments:
+    - [0xC22F70, c, mim_11_0_header]
+    - [0xC22F70, c, mim_11_1_music]
+    - [0xC22F70, c, mim_11_2_main]
+    - [0xC23840, c, mim_11_3_gate]
+    - [0xC23840, c, mim_11_4_entity]
+    - [0xC23840, c, mim_11_5_npc]
+    - [0xC238F0, c, mim_11_6_foliage]
+  - name: mim_12
+    dir: world/area_mim/mim_12
+    type: code
+    start: 0xC27280
+    vram: 0x80240000
+    subsegments:
+    - [0xC27280, c, mim_12_0_header]
+    - [0xC27280, c, mim_12_1_music]
+    - [0xC27280, c, mim_12_2_entity]
+    - [0xC27280, c, mim_12_3_main]
+    - [0xC27280, c, mim_12_4_npc]
+    - [0xC27280, c, mim_12_5_gate]
 
-  - [0xBFF340, bin]
+  - [0xC290A0, bin]
 
   - start: 0x1e937b8
     align: 8

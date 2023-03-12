@@ -305,9 +305,15 @@ EvtScript N(EVS_HaveBoosCloseGate) = {
     EVT_END
 };
 
+#if VERSION_PAL
+#define VAR_1 (15.0)
+#else
+#define VAR_1 (12.0)
+#endif
+
 EvtScript N(EVS_Scene_UnlockGate) = {
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_WAIT(20)
+    EVT_WAIT(20 * DT)
     EVT_CALL(GetCurrentPartnerID, LVar6)
     EVT_CALL(BringPartnerOut, PARTNER_BOW)
     EVT_IF_NE(LVar6, PARTNER_BOW)
@@ -319,7 +325,7 @@ EvtScript N(EVS_Scene_UnlockGate) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_IF
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldBow_Talk, ANIM_WorldBow_Idle, SPEECH_FACE_SPEAKER_ONLY, MSG_CH3_006C)
     EVT_CALL(EnablePartnerAI)
@@ -327,57 +333,57 @@ EvtScript N(EVS_Scene_UnlockGate) = {
     EVT_CALL(SetNpcPos, NPC_GateBoo_02, -45, 65, -66)
     EVT_CALL(PlaySoundAtNpc, NPC_GateBoo_01, SOUND_BOO_VANISH, SOUND_SPACE_MODE_0)
     EVT_SETF(LVar0, EVT_FLOAT(0.0))
-    EVT_LOOP(20)
-        EVT_ADDF(LVar0, EVT_FLOAT(12.0))
+    EVT_LOOP(20 * DT)
+        EVT_ADDF(LVar0, EVT_FLOAT(VAR_1))
         EVT_CALL(func_802CFD30, NPC_GateBoo_01, FOLD_TYPE_7, LVar0, 0, 0, 0)
         EVT_CALL(func_802CFD30, NPC_GateBoo_02, FOLD_TYPE_7, LVar0, 0, 0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_EXEC_WAIT(N(EVS_FlyDownToGate))
     EVT_EXEC(N(EVS_FadeToGustyShading))
     EVT_SET(LVar2, 1)
     EVT_EXEC(N(EVS_OpenGate))
     EVT_EXEC_WAIT(N(EVS_HaveBoosOpenGate))
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_THREAD
-        EVT_CALL(PlayerMoveTo, 25, 0, 60)
+        EVT_CALL(PlayerMoveTo, 25, 0, 60 * DT)
     EVT_END_THREAD
-    EVT_WAIT(3)
+    EVT_WAIT(3 * DT)
     EVT_CALL(GetCurrentPartnerID, LVar6)
     EVT_IF_NE(LVar6, PARTNER_BOW)
-        EVT_CALL(NpcMoveTo, NPC_PARTNER, -38, 23, 60)
+        EVT_CALL(NpcMoveTo, NPC_PARTNER, -38, 23, 60 * DT)
     EVT_ELSE
-        EVT_WAIT(60)
+        EVT_WAIT(60 * DT)
     EVT_END_IF
     EVT_SET(LVar2, 1)
     EVT_EXEC(N(EVS_CloseGate))
     EVT_EXEC_WAIT(N(EVS_StartGustyMusic))
     EVT_EXEC_WAIT(N(EVS_HaveBoosCloseGate))
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_CALL(PlaySoundAtNpc, NPC_GateBoo_01, SOUND_BOO_APPEAR, SOUND_SPACE_MODE_0)
     EVT_SETF(LVar0, EVT_FLOAT(240.0))
-    EVT_LOOP(20)
-        EVT_SUBF(LVar0, EVT_FLOAT(12.0))
+    EVT_LOOP(20 * DT)
+        EVT_SUBF(LVar0, EVT_FLOAT(VAR_1))
         EVT_CALL(func_802CFD30, NPC_GateBoo_01, FOLD_TYPE_7, LVar0, 0, 0, 0)
         EVT_CALL(func_802CFD30, NPC_GateBoo_02, FOLD_TYPE_7, LVar0, 0, 0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetNpcPos, NPC_GateBoo_01, NPC_DISPOSE_LOCATION)
     EVT_CALL(SetNpcPos, NPC_GateBoo_02, NPC_DISPOSE_LOCATION)
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldBow_Talk, ANIM_WorldBow_Idle, 0, MSG_CH3_006D)
     EVT_CALL(EnablePartnerAI)
-    EVT_WAIT(5)
+    EVT_WAIT(5 * DT)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Jump)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.5))
-    EVT_CALL(PlayerJump, LVar0, LVar1, LVar2, 14)
+    EVT_CALL(PlayerJump, LVar0, LVar1, LVar2, 14 * DT)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Land)
     EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_SET(GB_StoryProgress, STORY_CH3_UNLOCKED_GUSTY_GULCH)
     EVT_CALL(PutPartnerAway)
     EVT_CALL(DisablePlayerInput, FALSE)
