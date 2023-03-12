@@ -54,13 +54,13 @@ EvtScript N(EVS_Scene_ShowInvitation) = {
     EVT_CALL(N(UnkFunc27), 1, -1, FOG_MODE_3)
     EVT_CALL(N(func_80240678_AACEA8), 200, 200, 200, 40, 40, 40)
     EVT_CALL(N(func_802406E0_AACF10))
-    EVT_WAIT(15)
+    EVT_WAIT(15 * DT)
     EVT_CALL(ShowMessageAtScreenPos, MSG_Intro_0022, 160, 40)
-    EVT_WAIT(12)
+    EVT_WAIT(12 * DT)
     EVT_CALL(ShowMessageAtScreenPos, MSG_Intro_0023, 160, 40)
     EVT_WAIT(3)
     EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_20"), kmr_20_ENTRY_1, TRANSITION_7)
-    EVT_WAIT(40)
+    EVT_WAIT(40 * DT)
     EVT_RETURN
     EVT_END
 };
@@ -75,17 +75,17 @@ EvtScript N(EVS_Scene_ApproachParty) = {
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_THREAD
-        EVT_CALL(PlayerMoveTo, 0, -250, 150)
+        EVT_CALL(PlayerMoveTo, 0, -250, 150 * DT)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_Luigi, ANIM_Luigi_RunBack)
         EVT_CALL(SetNpcPos, NPC_Luigi, 0, 0, 350)
-        EVT_CALL(NpcMoveTo, NPC_Luigi, 0, -200, 150)
+        EVT_CALL(NpcMoveTo, NPC_Luigi, 0, -200, 150 * DT)
         EVT_CALL(SetNpcAnimation, NPC_Luigi, ANIM_Luigi_IdleBack)
     EVT_END_THREAD
-    EVT_WAIT(100)
+    EVT_WAIT(100 * DT)
     EVT_CALL(GotoMap, EVT_PTR("kkj_00"), kkj_00_ENTRY_5)
-    EVT_WAIT(100)
+    EVT_WAIT(100 * DT)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
     EVT_END

@@ -1,6 +1,7 @@
 Entity_ScriptSpring_AnimLaunch = 0x1E4;
 Entity_SimpleSpring_AnimLaunch = 0x1E4;
 get_time_freeze_mode = 0x80027110;
+start_rumble = 0x80028E88;
 cosine = 0x80029354;
 transform_point = 0x800295A0;
 dma_copy = 0x800296BC;
@@ -446,6 +447,7 @@ CloseMessage = 0x802D3A98;
 SwitchMessage = 0x802D3AFC;
 ShowChoice = 0x802D3B6C;
 CloseChoice = 0x802D3BF8;
+CancelMessage = 0x802D3C20;
 SetMessageText = 0x802D3CEC;
 SetMessageValue = 0x802D3D44;
 HidePlayerShadow = 0x802D3DA0;

@@ -2701,8 +2701,63 @@ segments:
     - [0xB15350, c, kpa_134_4_npc]
     - [0xB15350, c, kpa_134_5_panels]
     - [0xB15350, c, kpa_134_6_entity]
+  - name: osr_00
+    dir: world/area_osr/osr_00
+    type: code
+    start: 0xB186D0
+    vram: 0x80240000
+    subsegments:
+    - [0xB186D0, c, osr_00_0_header]
+    - [0xB186D0, c, osr_00_1_music]
+    - [0xB186D0, c, osr_00_2_main]
+    - [0xB18A50, c, osr_00_3_npc_intro]
+    - [0xB18A50, c, osr_00_4_npc_epilogue]
+    - [0xB18A50, c, osr_00_5_scenes]
+  - name: osr_01
+    dir: world/area_osr/osr_01
+    type: code
+    start: 0xB1BE90
+    vram: 0x80240000
+    subsegments:
+    - [0xB1BE90, c, osr_01_0_header]
+    - [0xB1BEE0, c, osr_01_1_music]
+    - [0xB1BEE0, c, osr_01_2_main]
+    - [0xB1C1F0, c, osr_01_3_npc]
+  - name: osr_02
+    dir: world/area_osr/osr_02
+    type: code
+    start: 0xB1E010
+    vram: 0x80240000
+    subsegments:
+    - [0xB1E010, c, osr_02_0_header]
+    - [0xB1E030, c, osr_02_1_main]
+    - [0xB1E070, c, osr_02_2_entity]
+    - [0xB1E070, c, osr_02_3_npc]
+    - [0xB1E130, c, osr_02_4_npc_peach]
+  - name: osr_03
+    dir: world/area_osr/osr_03
+    type: code
+    start: 0xB22130
+    vram: 0x80240000
+    subsegments:
+    - [0xB22130, c, osr_03_0_header]
+    - [0xB22150, c, osr_03_1_main]
+    - [0xB22150, c, osr_03_2_npc]
+    - [0xB22150, c, osr_03_3_intro]
+    - [0xB221C0, c, osr_03_4_starship]
+    - [0xB221C0, c, osr_03_5_interlude]
+    - [0xB222D0, c, osr_03_6_ending]
+  - name: osr_04
+    dir: world/area_osr/osr_04
+    type: code
+    start: 0xB25150
+    vram: 0x80240000
+    subsegments:
+    - [0xB25150, c, osr_04_0_header]
+    - [0xB25150, c, osr_04_1_main]
+    - [0xB25150, c, osr_04_2_assault]
 
-  - [0xB186D0, bin]
+  - [0xB27130, bin]
 
   - start: 0x1e937b8
     align: 8
