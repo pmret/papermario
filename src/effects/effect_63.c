@@ -12,12 +12,12 @@ Gfx* D_E00C6C9C[] = {
     D_09001B70_3CF250, D_09001B70_3CF250, D_09001B70_3CF250, NULL, NULL
 };
 
-void fx_63_init(EffectInstance* effect);
-void fx_63_update(EffectInstance* effect);
-void fx_63_render(EffectInstance* effect);
-void fx_63_appendGfx(void* effect);
+void effect_63_init(EffectInstance* effect);
+void effect_63_update(EffectInstance* effect);
+void effect_63_render(EffectInstance* effect);
+void effect_63_appendGfx(void* effect);
 
-EffectInstance* fx_63_main(
+EffectInstance* effect_63_main(
     s32 arg0,
     f32 arg1,
     f32 arg2,
@@ -43,9 +43,9 @@ EffectInstance* fx_63_main(
         numParts = 1;
     }
 
-    bpPtr->init = fx_63_init;
-    bpPtr->update = fx_63_update;
-    bpPtr->renderWorld = fx_63_render;
+    bpPtr->init = effect_63_init;
+    bpPtr->update = effect_63_update;
+    bpPtr->renderWorld = effect_63_render;
     bpPtr->unk_00 = 0;
     bpPtr->unk_14 = NULL;
     bpPtr->effectID = EFFECT_63;
@@ -125,10 +125,10 @@ EffectInstance* fx_63_main(
     return effect;
 }
 
-void fx_63_init(EffectInstance* effect) {
+void effect_63_init(EffectInstance* effect) {
 }
 
-void fx_63_update(EffectInstance* effect) {
+void effect_63_update(EffectInstance* effect) {
     Effect63FXData* part = effect->data.unk_63;
     s32 unk_00 = part->unk_00;
     s32 unk_24;
@@ -146,7 +146,7 @@ void fx_63_update(EffectInstance* effect) {
     part->unk_24++;
     if (part->unk_20 == 1 && unk_00 == 1) {
         shim_load_effect(EFFECT_63);
-        fx_63_main(2, part->unk_04, part->unk_08, part->unk_0C, part->unk_10, part->unk_14, part->unk_18, 1.0f, 32, 32);
+        effect_63_main(2, part->unk_04, part->unk_08, part->unk_0C, part->unk_10, part->unk_14, part->unk_18, 1.0f, 32, 32);
     }
 
     if (part->unk_20 < 0) {
@@ -160,7 +160,7 @@ void fx_63_update(EffectInstance* effect) {
         case 0:
             if (!(unk_24 & (1 | 2))) {
                 shim_load_effect(EFFECT_63);
-                fx_63_main(1, part->unk_04, part->unk_08, part->unk_0C, part->unk_10, part->unk_14, part->unk_18, 1.0f, part->unk_1C, part->unk_1C);
+                effect_63_main(1, part->unk_04, part->unk_08, part->unk_0C, part->unk_10, part->unk_14, part->unk_18, 1.0f, part->unk_1C, part->unk_1C);
             }
             break;
         case 1:
@@ -194,11 +194,11 @@ void fx_63_update(EffectInstance* effect) {
     }
 }
 
-void fx_63_render(EffectInstance* effect) {
+void effect_63_render(EffectInstance* effect) {
     RenderTask renderTask;
     RenderTask* retTask;
 
-    renderTask.appendGfx = fx_63_appendGfx;
+    renderTask.appendGfx = effect_63_appendGfx;
     renderTask.appendGfxArg = effect;
     renderTask.distance = 10;
     renderTask.renderMode = RENDER_MODE_2D;
@@ -207,7 +207,7 @@ void fx_63_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
-void fx_63_appendGfx(void* effect) {
+void effect_63_appendGfx(void* effect) {
     Effect63FXData* part = ((EffectInstance*)effect)->data.unk_63;
     Camera* camera = &gCameras[gCurrentCameraID];
     s32 unk_34 = part->unk_34;

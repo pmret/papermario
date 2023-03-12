@@ -23,21 +23,21 @@ Gfx* D_E0128480[12] = {
 
 Gfx* D_E01284B0[] = { D_09000800_415860 };
 
-void fx_86_init(EffectInstance* effect);
-void fx_86_update(EffectInstance* effect);
-void fx_86_render(EffectInstance* effect);
-void fx_86_appendGfx(void* effect);
+void effect_86_init(EffectInstance* effect);
+void effect_86_update(EffectInstance* effect);
+void effect_86_render(EffectInstance* effect);
+void effect_86_appendGfx(void* effect);
 
-EffectInstance* fx_86_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5) {
+EffectInstance* effect_86_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5) {
     EffectBlueprint bp;
     EffectInstance* effect;
     Effect86FXData* data;
     Effect86FXData* part;
     s32 numParts = 1;
 
-    bp.init = fx_86_init;
-    bp.update = fx_86_update;
-    bp.renderWorld = fx_86_render;
+    bp.init = effect_86_init;
+    bp.update = effect_86_update;
+    bp.renderWorld = effect_86_render;
     bp.unk_00 = 0;
     bp.unk_14 = NULL;
     bp.effectID = EFFECT_86;
@@ -73,10 +73,10 @@ EffectInstance* fx_86_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32
     return effect;
 }
 
-void fx_86_init(EffectInstance* effect) {
+void effect_86_init(EffectInstance* effect) {
 }
 
-void fx_86_update(EffectInstance* effect) {
+void effect_86_update(EffectInstance* effect) {
     Effect86FXData* data = effect->data.unk_86;
 
     if (effect->flags & 0x10) {
@@ -94,11 +94,11 @@ void fx_86_update(EffectInstance* effect) {
     }
 }
 
-void fx_86_render(EffectInstance* effect) {
+void effect_86_render(EffectInstance* effect) {
     RenderTask renderTask;
     RenderTask* retTask;
 
-    renderTask.appendGfx = fx_86_appendGfx;
+    renderTask.appendGfx = effect_86_appendGfx;
     renderTask.appendGfxArg = effect;
     renderTask.distance = 10;
     renderTask.renderMode = RENDER_MODE_2D;
@@ -107,7 +107,7 @@ void fx_86_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
-void fx_86_appendGfx(void* effect) {
+void effect_86_appendGfx(void* effect) {
     Matrix4f sp10;
     Matrix4f sp50;
     Effect86FXData* part = ((EffectInstance*)effect)->data.unk_86;

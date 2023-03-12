@@ -13,12 +13,12 @@ u8 D_E008CB14[] = { 255, 255,  64 };
 u8 D_E008CB18[] = { 255,  64,  64 };
 u8 D_E008CB1C[] = { 255,  64, 255 };
 
-void fx_46_init(EffectInstance* effect);
-void fx_46_update(EffectInstance* effect);
-void fx_46_render(EffectInstance* effect);
-void fx_46_appendGfx(void* effect);
+void effect_46_init(EffectInstance* effect);
+void effect_46_update(EffectInstance* effect);
+void effect_46_render(EffectInstance* effect);
+void effect_46_appendGfx(void* effect);
 
-EffectInstance* fx_46_main(s32 arg0, PlayerStatus* arg1, f32 arg2, s32 arg3) {
+EffectInstance* effect_46_main(s32 arg0, PlayerStatus* arg1, f32 arg2, s32 arg3) {
     EffectBlueprint bp;
     EffectInstance* effect;
     Effect46FXData* part;
@@ -26,9 +26,9 @@ EffectInstance* fx_46_main(s32 arg0, PlayerStatus* arg1, f32 arg2, s32 arg3) {
     s32 index;
     s32 i;
 
-    bp.init = fx_46_init;
-    bp.update = fx_46_update;
-    bp.renderWorld = fx_46_render;
+    bp.init = effect_46_init;
+    bp.update = effect_46_update;
+    bp.renderWorld = effect_46_render;
     bp.unk_00 = 0;
     bp.unk_14 = NULL;
     bp.effectID = EFFECT_46;
@@ -123,10 +123,10 @@ EffectInstance* fx_46_main(s32 arg0, PlayerStatus* arg1, f32 arg2, s32 arg3) {
     return effect;
 }
 
-void fx_46_init(EffectInstance* effect) {
+void effect_46_init(EffectInstance* effect) {
 }
 
-void fx_46_update(EffectInstance* effect) {
+void effect_46_update(EffectInstance* effect) {
     Effect46FXData* part = effect->data.unk_46;
     s32 unk_00;
     s32 unk_24;
@@ -184,11 +184,11 @@ void fx_46_update(EffectInstance* effect) {
     }
 }
 
-void fx_46_render(EffectInstance* effect) {
+void effect_46_render(EffectInstance* effect) {
     RenderTask renderTask;
     RenderTask* retTask;
 
-    renderTask.appendGfx = fx_46_appendGfx;
+    renderTask.appendGfx = effect_46_appendGfx;
     renderTask.appendGfxArg = effect;
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_2D;
@@ -197,7 +197,7 @@ void fx_46_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
-void fx_46_appendGfx(void* effect) {
+void effect_46_appendGfx(void* effect) {
     Effect46FXData* part = ((EffectInstance*)effect)->data.unk_46;
     s32 unk_00;
     s32 unk_1C = part->unk_1C;

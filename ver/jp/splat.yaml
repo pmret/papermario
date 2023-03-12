@@ -384,23 +384,23 @@ segments:
     - [auto, .rodata, B0E0]
     - [auto, .rodata, camera]
     - [auto, .rodata, state_logos]
-    - [auto, .rodata, state_file_select] 
-    - [auto, .rodata, 111f0_len_860] 
-    - [auto, .rodata, state_intro] 
-    - [auto, .rodata, state_title_screen] 
-    - [auto, .rodata, state_demo] 
-    - [auto, .rodata, npc] 
-    - [auto, .rodata, encounter] 
-    - [auto, .rodata, status_icons] 
-    - [auto, .rodata, 23680] 
-    - [auto, .rodata, audio/28910_len_5090] 
-    - [auto, .rodata, audio/2e230_len_2190] 
-    - [auto, .rodata, audio/30450] 
-    - [auto, .rodata, audio/33450] 
-    - [auto, .rodata, audio/reverb] 
+    - [auto, .rodata, state_file_select]
+    - [auto, .rodata, 111f0_len_860]
+    - [auto, .rodata, state_intro]
+    - [auto, .rodata, state_title_screen]
+    - [auto, .rodata, state_demo]
+    - [auto, .rodata, npc]
+    - [auto, .rodata, encounter]
+    - [auto, .rodata, status_icons]
+    - [auto, .rodata, 23680]
+    - [auto, .rodata, audio/28910_len_5090]
+    - [auto, .rodata, audio/2e230_len_2190]
+    - [auto, .rodata, audio/30450]
+    - [auto, .rodata, audio/33450]
+    - [auto, .rodata, audio/reverb]
 
     - [auto, .rodata, 5B320]
-    - [auto, .rodata, world/world] 
+    - [auto, .rodata, world/world]
     - [0x74E80, rodata, os/osSetIntMask]
     - [0x74F00]
     - [auto, .rodata, os/devmgr]
@@ -990,7 +990,7 @@ segments:
     type: bin
     start: 0x3AAC90
     vram: 0xE00A2000
-  - name: _3A33D0
+  - name: effect_gfx_motion_blur_flame
     type: bin
     start: 0x3AB6D0
   - name: effect_energy_orb_wave
@@ -1074,7 +1074,7 @@ segments:
     type: bin
     start: 0x3C0ED0
     vram: 0xE00BA000
-  - name: _3B9A70
+  - name: effect_gfx_underwater
     type: bin
     start: 0x3C1D70
   - name: effect_lightning_bolt

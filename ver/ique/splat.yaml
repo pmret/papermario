@@ -1109,7 +1109,7 @@ segments:
     type: bin
     start: 0x3EB3E0
     vram: 0xE00A2000
-  - name: _3A33D0
+  - name: effect_gfx_motion_blur_flame
     type: bin
     start: 0x3EBE20
   - name: effect_energy_orb_wave
@@ -1193,7 +1193,7 @@ segments:
     type: bin
     start: 0x401620
     vram: 0xE00BA000
-  - name: _3B9A70
+  - name: effect_gfx_underwater
     type: bin
     start: 0x4024C0
   - name: effect_lightning_bolt
