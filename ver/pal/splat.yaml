@@ -3033,8 +3033,86 @@ segments:
     - [0xB80FA0, c, kkj_29_1_main]
     - [0xB80FD0, c, kkj_29_2_npc]
     - [0xB80FD0, c, kkj_29_3_quiz]
+  - name: tst_01
+    dir: world/area_tst/tst_01
+    type: code
+    start: 0xB867F0
+    vram: 0x80240000
+    subsegments:
+    - [0xB867F0, c, tst_01_1_main]
+    - [0xB867F0, c, tst_01_2_entity]
+  - name: tst_02
+    dir: world/area_tst/tst_02
+    type: code
+    start: 0xB86B20
+    vram: 0x80240000
+    subsegments:
+    - [0xB86B20, c, tst_02_1_main]
+    - [0xB86B20, c, tst_02_2_entity]
+  - name: tst_03
+    dir: world/area_tst/tst_03
+    type: code
+    start: 0xB86E70
+    vram: 0x80240000
+    subsegments:
+    - [0xB86E70, c, tst_03_1_main]
+    - [0xB86E70, c, tst_03_2_entity]
+  - name: tst_04
+    dir: world/area_tst/tst_04
+    type: code
+    start: 0xB87460
+    vram: 0x80240000
+    subsegments:
+    - [0xB87460, c, tst_04_1_main]
+    - [0xB876C0, c, tst_04_2_entity]
+    - [0xB876C0, c, tst_04_3_reflection]
+    - [0xB87AC0, c, tst_04_4_npc]
+  - name: tst_10
+    dir: world/area_tst/tst_10
+    type: code
+    start: 0xB88430
+    vram: 0x80240000
+    subsegments:
+    - [0xB88430, c, tst_10_1_main]
+  - name: tst_11
+    dir: world/area_tst/tst_11
+    type: code
+    start: 0xB88940
+    vram: 0x80240000
+    subsegments:
+    - [0xB88940, c, tst_11_1_main]
+    - [0xB88940, c, tst_11_2_extra]
+  - name: tst_12
+    dir: world/area_tst/tst_12
+    type: code
+    start: 0xB891E0
+    vram: 0x80240000
+    subsegments:
+    - [0xB891E0, c, tst_12_1_main]
+  - name: tst_13
+    dir: world/area_tst/tst_13
+    type: code
+    start: 0xB89650
+    vram: 0x80240000
+    subsegments:
+    - [0xB89650, c, tst_13_1_main]
+    - start: 0xB89A10
+      type: .data
+      name: tst_13_1_main
+      subsegments:
+      - [0xB89A10]
+      - [0xB8B900, vtx, shockwave]
+      - [0xB8BEB0, gfx, shockwave]
+      - [0xB8C240]
+  - name: tst_20
+    dir: world/area_tst/tst_20
+    type: code
+    start: 0xB8C360
+    vram: 0x80240000
+    subsegments:
+    - [0xB8C360, c, tst_20_1_main]
 
-  - [0xB867F0, bin]
+  - [0xB8C430, bin]
 
   - start: 0x1e937b8
     align: 8
