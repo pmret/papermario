@@ -104,11 +104,11 @@ API_CALLABLE(N(func_802405F0_8AC580)) {
     };
 
 #if VERSION_PAL
-#define tempVar script->varTable[11]
-#define tempVar2 script->varTable[12]
+#define VAR_1 varTable[11]
+#define VAR_2 varTable[12]
 #else
-#define tempVar script->functionTemp[3]
-#define tempVar2 script->varTable[14]
+#define VAR_1 functionTemp[3]
+#define VAR_2 varTable[14]
 #endif
 
     Bytecode* args = script->ptrReadPos;
@@ -121,10 +121,10 @@ API_CALLABLE(N(func_802405F0_8AC580)) {
         script->functionTemp[2] = evt_get_variable(script, *args++);
         script->varTable[15] = evt_get_variable(script, *args++);
         script->functionTemp[0] = FUNC_STATE_0;
-        tempVar = 0;
+        script->VAR_1 = 0;
 #if VERSION_PAL
         script->varTable[13] = 0;
-        tempVar2 = 0;
+        script->VAR_2 = 0;
         script->varTable[14] = 0;
 #endif
     }
@@ -135,9 +135,9 @@ API_CALLABLE(N(func_802405F0_8AC580)) {
             npc->pos.x = 0.0f;
             npc->pos.y = NPC_DISPOSE_POS_Y;
             npc->pos.z = -50.0f;
-            npc->moveToPos.x = tempVar * 3;
+            npc->moveToPos.x = script->VAR_1 * 3;
             npc->moveToPos.y = 3.0f;
-            if (tempVar >= script->varTable[15]) {
+            if (script->VAR_1 >= script->varTable[15]) {
                 npc->pos.y = 100.0f;
                 add_vec2D_polar(&npc->pos.x, &npc->pos.z, 70.0f / DT, npc->moveToPos.x + (script->functionTemp[2] * 51) + 153.0f);
                 npc->pos.y += (-npc->pos.z + -50.0f + 70.0f / DT) * 0.15f;
@@ -152,33 +152,33 @@ API_CALLABLE(N(func_802405F0_8AC580)) {
             npc->pos.y = 100.0f;
             add_vec2D_polar(&npc->pos.x, &npc->pos.z, 70.0f / DT, npc->moveToPos.x + (script->functionTemp[2] * 51) + 153.0f);
             npc->pos.y += (-npc->pos.z + -50.0f + 70.0f / DT) * 0.15f;
-            if ((tempVar + script->functionTemp[2]) ==
-                (((tempVar + script->functionTemp[2]) / 13) * 13)) {
+            if ((script->VAR_1 + script->functionTemp[2]) ==
+                (((script->VAR_1 + script->functionTemp[2]) / 13) * 13)) {
                 fx_sparkles(FX_SPARKLES_3, npc->pos.x, npc->pos.y + 10.0f, npc->pos.z, 10.0f);
             }
-            if (tempVar > 256) {
+            if (script->VAR_1 > 256) {
                 script->functionTemp[0] = FUNC_STATE_2;
-                tempVar2 = 0;
+                script->VAR_2 = 0;
             }
             break;
         case FUNC_STATE_2:
             npc->pos.x = 0.0f;
             npc->pos.z = -50.0f;
-            npc->pos.y = 100.0f - (tempVar2 * 0.3f);
+            npc->pos.y = 100.0f - (script->VAR_2 * 0.3f);
             add_vec2D_polar(&npc->pos.x, &npc->pos.z, 70.0f / DT, npc->moveToPos.x + (script->functionTemp[2] * 51) + 153.0f);
             npc->pos.y += (-npc->pos.z + -50.0f + 70.0f / DT) * 0.15f;
-            if ((tempVar + script->functionTemp[2]) ==
-                (((tempVar + script->functionTemp[2]) / 13) * 13)) {
+            if ((script->VAR_1 + script->functionTemp[2]) ==
+                (((script->VAR_1 + script->functionTemp[2]) / 13) * 13)) {
                 fx_sparkles(FX_SPARKLES_3, npc->pos.x, npc->pos.y + 10.0f, npc->pos.z, 10.0f);
             }
-            if (tempVar2++ > 180) {
+            if (script->VAR_2++ > 180) {
                 script->functionTemp[0] = FUNC_STATE_3;
-                tempVar2 = 0;
+                script->VAR_2 = 0;
             }
 
 #if VERSION_PAL
             script->varTable[14] += 0x10000;
-            tempVar2 = script->varTable[14] >> 16;
+            script->VAR_2 = script->varTable[14] >> 16;
 #endif
             break;
         case FUNC_STATE_3:
@@ -188,8 +188,8 @@ API_CALLABLE(N(func_802405F0_8AC580)) {
             npc->pos.y = 45.999996f;
             add_vec2D_polar(&npc->pos.x, &npc->pos.z, 70.0f / DT, npc->moveToPos.x + (script->functionTemp[2] * 51) + 153.0f);
             npc->pos.y += (-npc->pos.z + -50.0f + 70.0f / DT) * 0.15f;
-            if ((tempVar + script->functionTemp[2]) ==
-                (((tempVar + script->functionTemp[2]) / 13) * 13)) {
+            if ((script->VAR_1 + script->functionTemp[2]) ==
+                (((script->VAR_1 + script->functionTemp[2]) / 13) * 13)) {
                 fx_sparkles(FX_SPARKLES_3, npc->pos.x, npc->pos.y + 10.0f, npc->pos.z, 10.0f);
             }
             if (npc->moveToPos.y < 0.0f) {
