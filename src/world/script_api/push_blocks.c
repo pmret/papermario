@@ -133,14 +133,18 @@ API_CALLABLE(FinishPushBlockMotion) {
 API_CALLABLE(func_80282E30);
 // regalloc
 #ifdef NON_MATCHING
-ApiStatus func_80282E30(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_80282E30) {
     PushBlockGrid* grid = (PushBlockGrid*) script->varTable[10];
     Entity* entity = get_entity_by_index(script->varTable[11]);
     s32 xThing, yThing, zThing;
     s32 x, y, z;
-    s32 entityX, entityY, entityZ;
-    s32 varY, varZ;
+    s32 entityY, entityZ;
+    s32 varX, varY, varZ;
+    s32 newX, newY, newZ;
 
+    s32 temp_f4;
+    s32 temp_t2_2;
+    s32 temp_v0;
     s32 var_a0_2;
     s32 var_a1;
     s32 cellX, cellZ;
@@ -157,53 +161,52 @@ ApiStatus func_80282E30(Evt* script, s32 isInitialCall) {
     yThing = yThing - y;
     zThing = zThing - z;
     if (xThing < 0) {
-        xThing -= 25;
+        do {
+            xThing -= BLOCK_GRID_SIZE;
+        } while (0);
     }
     if (zThing < 0) {
-        zThing -= 25;
+        zThing -= BLOCK_GRID_SIZE;
     }
 
-    xThing /= 25;
-    yThing /= 25;
-    zThing /= 25;
+    xThing /= BLOCK_GRID_SIZE;
+    yThing /= BLOCK_GRID_SIZE;
+    zThing /= BLOCK_GRID_SIZE;
 
-    entityX = xThing;
+    varX = xThing;
     varZ = entityZ = zThing;
 
-    xThing *= 25;
-    yThing *= 25;
-    zThing *= 25;
+    xThing *= BLOCK_GRID_SIZE;
+    yThing *= BLOCK_GRID_SIZE;
+    zThing *= BLOCK_GRID_SIZE;
 
     script->varTable[0] = xThing += 12 + x;
     script->varTable[1] = yThing += y;
     script->varTable[2] = zThing += 12 + z;
 
     script->varTable[3] = xThing = entity->position.x;
-    script->varTable[4] = entityY = entity->position.y;
-    script->varTable[5] = entityZ = varY = entity->position.z;
+    script->varTable[4] = yThing = entity->position.y;
+    script->varTable[5] = entityZ = entity->position.z;
 
-    xThing = (xThing - grid->centerPos.x);
-    xThing /= 25;
-    var_a1 = xThing - entityX;
-
-    entityZ -= grid->centerPos.z;
-    entityZ /= 25;
-    xThing = entityZ - varZ;
-    if (var_a1 != 0 && xThing != 0) {
-        xThing = 0;
-        var_a1 = 0;
+    xThing = xThing - grid->centerPos.x;
+    entityZ = entityZ - grid->centerPos.z;
+    xThing /= BLOCK_GRID_SIZE;
+    var_a1 = xThing - varX;
+    entityZ /= BLOCK_GRID_SIZE;
+    var_a0_2 = entityZ - varZ;
+    if (var_a1 != 0 && var_a0_2 != 0) {
+        var_a0_2 = var_a1 = 0;
     }
     script->varTable[6] = var_a1;
     script->varTable[7] = 0;
-    script->varTable[8] = xThing;
+    script->varTable[8] = var_a0_2;
 
     cellX = xThing + var_a1;
-    varY = entityZ + xThing;
-    cellZ = varY;
-    if (var_a1 == 0 && xThing == 0) {
+    cellZ = entityZ + var_a0_2;
+    if (var_a1 == 0 && var_a0_2 == 0) {
         do {
             script->varTable[9] = 2;
-        } while(0);
+        } while (0);
         return ApiStatus_DONE2;
     }
 
