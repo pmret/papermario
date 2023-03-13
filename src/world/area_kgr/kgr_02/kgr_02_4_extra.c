@@ -1,5 +1,5 @@
 #include "kgr_02.h"
- 
+
 API_CALLABLE(N(HasBombetteExploded)) {
     if (gCollisionStatus.bombetteExploded >= 0) {
         script->varTable[1] = TRUE;

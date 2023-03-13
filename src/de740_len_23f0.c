@@ -94,7 +94,7 @@ void create_shading_palette(Matrix4f mtx, s32 uls, s32 ult, s32 lrs, s32 lrt, s3
     posX = mtx[3][0];
     posY = mtx[3][1];
     posZ = mtx[3][2];
-    
+
     Mxz = mtx[0][2];
     Myz = mtx[1][2];
     Mzz = mtx[2][2];
@@ -173,7 +173,7 @@ void create_shading_palette(Matrix4f mtx, s32 uls, s32 ult, s32 lrs, s32 lrt, s3
             if (intensityScale > 1.0f) {
                 intensityScale = 1.0f;
             }
-            
+
             shadowDirX += dx;
             shadowDirY += dy;
             shadowDirZ += dz;

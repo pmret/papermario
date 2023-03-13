@@ -507,7 +507,7 @@ void collision_main_lateral(void) {
     f32 xBump;
     f32 zBump;
 
-    gCollisionStatus.pushingAgainstWall = -1;
+    gCollisionStatus.pushingAgainstWall = NO_COLLIDER;
     if (playerStatus->flags & PS_FLAG_CUTSCENE_MOVEMENT) {
         speed = playerStatus->currentSpeed;
         if (playerStatus->flags & PS_FLAG_ENTERING_BATTLE) {

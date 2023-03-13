@@ -8,21 +8,21 @@ extern Gfx D_09001A20_3E4380[];
 Gfx* D_E00EAA50[2] = { D_09001A00_3E4360, D_09001A20_3E4380 };
 Gfx* D_E00EAA58[2] = { D_09001910_3E4270, NULL };
 
-void fx_75_init(EffectInstance* effect);
-void fx_75_update(EffectInstance* effect);
-void fx_75_render(EffectInstance* effect);
-void fx_75_appendGfx(void* effect);
+void effect_75_init(EffectInstance* effect);
+void effect_75_update(EffectInstance* effect);
+void effect_75_render(EffectInstance* effect);
+void effect_75_appendGfx(void* effect);
 
-EffectInstance* fx_75_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 scale, s32 arg5) {
+EffectInstance* effect_75_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 scale, s32 arg5) {
     EffectBlueprint bp;
     EffectInstance* effect;
     Effect75FXData* data;
     s32 numParts = 1;
     s32 i;
 
-    bp.init = fx_75_init;
-    bp.update = fx_75_update;
-    bp.renderWorld = fx_75_render;
+    bp.init = effect_75_init;
+    bp.update = effect_75_update;
+    bp.renderWorld = effect_75_render;
     bp.unk_00 = 0;
     bp.unk_14 = NULL;
     bp.effectID = EFFECT_75;
@@ -72,10 +72,10 @@ EffectInstance* fx_75_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 scale, s3
     return effect;
 }
 
-void fx_75_init(EffectInstance* effect) {
+void effect_75_init(EffectInstance* effect) {
 }
 
-void fx_75_update(EffectInstance* effect) {
+void effect_75_update(EffectInstance* effect) {
     Effect75FXData* data = effect->data.unk_75;
     s32 unk_14;
 
@@ -151,7 +151,7 @@ void fx_75_update(EffectInstance* effect) {
         + (data->unk_64 - data->unk_60)) * 0.5;
 }
 
-void fx_75_render(EffectInstance* effect) {
+void effect_75_render(EffectInstance* effect) {
     Effect75FXData* data = effect->data.unk_75;
     RenderTask renderTask;
     RenderTask* renderTaskPtr = &renderTask;
@@ -177,7 +177,7 @@ void fx_75_render(EffectInstance* effect) {
         outDist = 0;
     }
 
-    renderTaskPtr->appendGfx = fx_75_appendGfx;
+    renderTaskPtr->appendGfx = effect_75_appendGfx;
     renderTaskPtr->distance = -outDist;
     renderTaskPtr->appendGfxArg = effect;
     renderTaskPtr->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
@@ -189,7 +189,7 @@ void fx_75_render(EffectInstance* effect) {
 void func_E00EA664(void) {
 }
 
-void fx_75_appendGfx(void* effect) {
+void effect_75_appendGfx(void* effect) {
     Effect75FXData* data = ((EffectInstance*)effect)->data.unk_75;
     Camera* camera = &gCameras[gCurrentCameraID];
     s32 type = data->type;

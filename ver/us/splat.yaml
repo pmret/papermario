@@ -5017,7 +5017,24 @@ segments:
     subsegments:
     - [0x3A2990, c, motion_blur_flame]
     - [0x3A3360]
-  - [0x3A33D0, bin] # motion_blur_flame gfx
+  - name: effect_gfx_motion_blur_flame
+    dir: effects/gfx
+    type: code
+    start: 0x3A33D0
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3A33D0, c, motion_blur_flame]
+    - start: 0x3A33D0
+      type: .data
+      name: motion_blur_flame
+      subsegments:
+      - [0x3A33D0, i8, D_09000000_3A33D0, 16, 16]
+      - [0x3A34D0, i8, D_09000100_3A34D0, 16, 16]
+      - [0x3A35D0, gfx, D_09000200_3A35D0]
+      - [0x3A3678, gfx, D_090002A8_3A3678]
+      - [0x3A3728, gfx, D_09000358_3A3728]
+      - [0x3A37D8]
   - name: effect_energy_orb_wave
     dir: effects
     type: code
@@ -5414,9 +5431,32 @@ segments:
     subsegments:
     - [0x3B8BD0, c, underwater]
     - [0x3B9A50]
-  - start: 0x3B9A70 # underwater gfx
-    type: bin
-    align: 16
+  - name: effect_gfx_underwater
+    dir: effects/gfx
+    type: code
+    start: 0x3B9A70
+    vram: 0x09000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [0x3B9A70, c, underwater]
+    - start: 0x3B9A70
+      type: .data
+      name: underwater
+      subsegments:
+      - [0x3B9A70, i4, D_09000000_3B9A70, 16, 16]
+      - [0x3B9AF0, vtx, D_09000080_3B9AF0]
+      - [0x3B9C70, gfx, D_09000200_3B9C70]
+      - [0x3B9CB8, gfx, D_09000248_3B9CB8]
+      - [0x3B9CC8, gfx, D_09000258_3B9CC8]
+      - [0x3B9CD8, gfx, D_09000268_3B9CD8]
+      - [0x3B9CE8, gfx, D_09000278_3B9CE8]
+      - [0x3B9E10, gfx, D_090003A0_3B9E10]
+      - [0x3B9E28, vtx, D_090003B8_3B9E28]
+      - [0x3B9E58, gfx, D_090003D8_3B9E58]
+      - [0x3B9E88] # unmapped
+      - [0x3B9E98, vtx, D_09000428_3B9E98]
+      - [0x3B9F98, gfx, D_09000528_3B9F98]
+      - [0x3B9FE0, gfx, D_09000570_3B9FE0]
   - name: effect_lightning_bolt
     dir: effects
     type: code
