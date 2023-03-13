@@ -22,7 +22,11 @@ EvtScript N(EVS_EnterMap) = {
         EVT_CALL(InterpPlayerYaw, 90, 0)
         EVT_CALL(SetNpcPos, NPC_PARTNER, -175, 165, 160)
         EVT_CALL(InterpNpcYaw, NPC_PARTNER, 90, 0)
+#if VERSION_PAL
+        EVT_CALL(SetPlayerSpeed, EVT_FLOAT(4 / DT))
+#else
         EVT_CALL(SetPlayerSpeed, 4)
+#endif
         EVT_CALL(PlayerMoveTo, -55, 160, 0)
         EVT_EXEC(N(EVS_BindExitTriggers))
         EVT_RETURN
