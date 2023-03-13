@@ -691,7 +691,7 @@ API_CALLABLE(N(func_802430B4_855224)) {
     Npc* npc = get_npc_safe(-4);
     s32 outVal = -1;
 
-    if (gCollisionStatus.bombetteExploded > -1) {
+    if (gCollisionStatus.bombetteExploded >= 0) {
         f32 temp = 11.0f;
         f32 x = npc->pos.x;
         f32 y = npc->pos.y + temp;
