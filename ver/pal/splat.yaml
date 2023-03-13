@@ -4344,8 +4344,199 @@ segments:
     - [0xCC1E60, c, dgb_18_2_main]
     - [0xCC1E60, c, dgb_18_3_npc]
     - [0xCC2E10, c, dgb_18_4_entity]
+  - name: kzn_01
+    dir: world/area_kzn/kzn_01
+    type: code
+    start: 0xCC58F0
+    vram: 0x80240000
+    subsegments:
+    - [0xCC58F0, c, kzn_01_0_header]
+    - [0xCC58F0, c, kzn_01_1_main]
+    - [0xCC5C00, c, kzn_01_2_npc]
+  - name: kzn_02
+    dir: world/area_kzn/kzn_02
+    type: code
+    start: 0xCC6660
+    vram: 0x80240000
+    subsegments:
+    - [0xCC6660, c, kzn_02_0_header]
+    - [0xCC6660, c, kzn_02_1_main]
+    - [0xCC6970, c, kzn_02_2_platforms]
+    - [0xCC6B40, c, kzn_02_3_npc]
+    - [0xCC8D90, c, kzn_02_4_demo]
+  - name: kzn_03
+    dir: world/area_kzn/kzn_03
+    type: code
+    start: 0xCCCC30
+    vram: 0x80240000
+    subsegments:
+    - [0xCCCC30, c, kzn_03_0_header]
+    - [0xCCCC30, c, kzn_03_1_main]
+    - [0xCCCF40, c, kzn_03_2_npc]
+    - [0xCCF930, c, kzn_03_3_entity]
+    - [0xCCF9E0, c, kzn_03_4_ziplines]
+  - name: kzn_04
+    dir: world/area_kzn/kzn_04
+    type: code
+    start: 0xCD4050
+    vram: 0x80240000
+    subsegments:
+    - [0xCD4050, c, kzn_04_0_header]
+    - [0xCD4050, c, kzn_04_1_main]
+    - [0xCD4360, c, kzn_04_2_entity]
+    - [0xCD50A0, c, kzn_04_3_npc]
+  - name: kzn_05
+    dir: world/area_kzn/kzn_05
+    type: code
+    start: 0xCD7FF0
+    vram: 0x80240000
+    subsegments:
+    - [0xCD7FF0, c, kzn_05_0_header]
+    - [0xCD7FF0, c, kzn_05_1_main]
+  - name: kzn_06
+    dir: world/area_kzn/kzn_06
+    type: code
+    start: 0xCD8840
+    vram: 0x80240000
+    subsegments:
+    - [0xCD8840, c, kzn_06_0_header]
+    - [0xCD8840, c, kzn_06_1_main]
+    - [0xCD8B50, c, kzn_06_2_entity]
+    - [0xCD8C30, c, kzn_06_3_extra]
+  - name: kzn_07
+    dir: world/area_kzn/kzn_07
+    type: code
+    start: 0xCDA250
+    vram: 0x80240000
+    subsegments:
+    - [0xCDA250, c, kzn_07_0_header]
+    - [0xCDA250, c, kzn_07_1_music]
+    - [0xCDA250, c, kzn_07_2_main]
+    - [0xCDA970, c, kzn_07_3_entity]
+    - [0xCDAA70, c, kzn_07_4_npc]
+  - name: kzn_08
+    dir: world/area_kzn/kzn_08
+    type: code
+    start: 0xCDD3A0
+    vram: 0x80240000
+    subsegments:
+    - [0xCDD3A0, c, kzn_08_0_header]
+    - [0xCDD3A0, c, kzn_08_1_main]
+    - [0xCDDB30, c, kzn_08_2_entity]
+    - [0xCDDDF0, c, kzn_08_3_npc]
+    - [0xCE1280, c, kzn_08_4_extra]
+  - name: kzn_09
+    dir: world/area_kzn/kzn_09
+    type: code
+    start: 0xCE2C00
+    vram: 0x80240000
+    subsegments:
+    - [0xCE2C00, c, kzn_09_0_header]
+    - [0xCE2C00, c, kzn_09_1_main]
+    - [0xCE2C00, c, kzn_09_2_entity]
+    - [0xCE3940, c, kzn_09_3_zipline]
+    - [0xCE3C20, c, kzn_09_4_npc]
+  - name: kzn_10
+    dir: world/area_kzn/kzn_10
+    type: code
+    start: 0xCEA0A0
+    vram: 0x80240000
+    subsegments:
+    - [0xCEA0A0, c, kzn_10_0_header]
+    - [0xCEA0A0, c, kzn_10_1_main]
+    - [0xCEA3D0, c, kzn_10_2_tromp]
+  - name: kzn_11
+    dir: world/area_kzn/kzn_11
+    type: code
+    start: 0xCEC0C0
+    vram: 0x80240000
+    subsegments:
+    - [0xCEC0C0, c, kzn_11_0_header]
+    - [0xCEC0C0, c, kzn_11_1_main]
+    - [0xCEC3D0, c, kzn_11_2_platforms]
+    - [0xCEC520, c, kzn_11_3_npc]
+  - name: kzn_17
+    dir: world/area_kzn/kzn_17
+    type: code
+    start: 0xCF19D0
+    vram: 0x80240000
+    subsegments:
+    - [0xCF19D0, c, kzn_17_0_header]
+    - [0xCF19D0, c, kzn_17_1_main]
+    - [0xCF1CE0, c, kzn_17_2_entity]
+    - [0xCF1CE0, c, kzn_17_3_npc]
+    - [0xCF46D0, c, kzn_17_4_tromp]
+  - name: kzn_18
+    dir: world/area_kzn/kzn_18
+    type: code
+    start: 0xCF7FC0
+    vram: 0x80240000
+    subsegments:
+    - [0xCF7FC0, c, kzn_18_0_header]
+    - [0xCF8000, c, kzn_18_1_main]
+    - [0xCF8310, c, kzn_18_2_npc]
+    - [0xCF8380, c, kzn_18_3_entity]
+  - name: kzn_19
+    dir: world/area_kzn/kzn_19
+    type: code
+    start: 0xCF9AD0
+    vram: 0x80240000
+    subsegments:
+    - [0xCF9AD0, c, kzn_19_0_header]
+    - [0xCF9AD0, c, kzn_19_1_music]
+    - [0xCF9AD0, c, kzn_19_2_main]
+    - [0xCFA5D0, c, kzn_19_3_npc_settings]
+    - [0xCFA5D0, c, kzn_19_4_npc]
+    - [0xCFB800, c, kzn_19_5_eruption]
+    - [0xCFB800, c, kzn_19_6_entity]
+    - [0xCFB800, .data, kzn_19_0_header]
+    - [0xCFB880, .data, kzn_19_1_music]
+    - [0xCFB960, .data, kzn_19_2_main]
+    - [0xCFCA30, .data, kzn_19_3_npc_settings]
+    - start: 0xCFCB10
+      type: .data
+      name: kzn_19_4_npc
+      subsegments:
+      - [0xCFCB10]
+      - [0xCFCFA8, ci4, ../../lava_piranha/vine, 64, 32]
+      - [0xCFD3A8, palette, ../../lava_piranha/vine]
+      - [0xCFD5A8, gfx_common, ../../lava_piranha/vine]
+      - [0xCFD688]
+    - [0xD018D0, .data, kzn_19_5_eruption]
+    - [0xD01D90, .data, kzn_19_6_entity]
+  - name: kzn_20
+    dir: world/area_kzn/kzn_20
+    type: code
+    start: 0xD01E50
+    vram: 0x80240000
+    subsegments:
+    - [0xD01E50, c, kzn_20_0_header]
+    - [0xD01E50, c, kzn_20_1_music]
+    - [0xD01E50, c, kzn_20_2_main]
+    - [0xD02160, c, kzn_20_3_npc]
+  - name: kzn_22
+    dir: world/area_kzn/kzn_22
+    type: code
+    start: 0xD06120
+    vram: 0x80240000
+    subsegments:
+    - [0xD06120, c, kzn_22_0_header]
+    - [0xD06120, c, kzn_22_1_music]
+    - [0xD06120, c, kzn_22_2_main]
+    - [0xD06460, c, kzn_22_3_entity]
+    - [0xD06460, c, kzn_22_4_npc]
+  - name: kzn_23
+    dir: world/area_kzn/kzn_23
+    type: code
+    start: 0xD08220
+    vram: 0x80240000
+    subsegments:
+    - [0xD08220, c, kzn_23_0_header]
+    - [0xD08220, c, kzn_23_1_music]
+    - [0xD08220, c, kzn_23_2_main]
+    - [0xD08530, c, kzn_23_3_npc]
 
-  - [0xCC58F0, bin]
+  - [0xD09E40, bin]
 
   - start: 0x1e937b8
     align: 8

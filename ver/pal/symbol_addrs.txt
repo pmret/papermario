@@ -331,3 +331,6 @@ vtx_C2E800 = 0x8020D8C0; // rom:0xC9A700
 vtx_C2E8C0 = 0x8020D980; // rom:0xC9A7C0
 vtx_C2E980 = 0x8020DA40; // rom:0xC9A880
 vtx_C2EA60 = 0x8020DB20; // rom:0xC9A960
+kzn_19_lava_piranha_vine_img = 0x802434D8; // rom:0xCFCFA8
+kzn_19_lava_piranha_vine_pal = 0x802438D8; // rom:0xCFD3A8
+kzn_19_lava_piranha_vine_gfx = 0x80243AD8; // rom:0xCFD5A8

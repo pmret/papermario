@@ -86,7 +86,7 @@ EvtScript N(EVS_NpcIdle_Kolorado) = {
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH5_00F7, 160, 40)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_CALL(SetNpcPos, NPC_SELF, 290, 0, 30)
-    EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(5.0))
+    EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(5.0 / DT))
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Kolorado_Panic)
     EVT_CALL(NpcMoveTo, NPC_SELF, 640, 80, 0)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
