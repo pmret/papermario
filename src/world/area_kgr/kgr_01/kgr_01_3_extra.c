@@ -1,7 +1,7 @@
 #include "kgr_01.h"
 
 API_CALLABLE(N(HasBombetteExploded)) {
-    if (gCollisionStatus.bombetteExploded > NO_COLLIDER) {
+    if (gCollisionStatus.bombetteExploded > -1) {
         script->varTable[1] = TRUE;
     }
     return ApiStatus_DONE2;
