@@ -4,7 +4,7 @@
 #include "script_api/battle.h"
 #include "sprite/npc/BuzzyBeetle.h"
 
-extern s32 N(idleAnimations)[];
+extern s32 N(IdleAnimations)[];
 extern EvtScript N(init);
 extern EvtScript N(idle);
 extern EvtScript N(takeTurn_ceiling);
@@ -12,19 +12,19 @@ extern EvtScript N(handleEvent_ceiling);
 extern EvtScript N(takeTurn);
 extern EvtScript N(handleEvent);
 
-s32 N(defenseTable)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL, 2,
     ELEMENT_FIRE, 99,
     ELEMENT_BLAST, 99,
     ELEMENT_END,
 };
 
-s32 N(defenseTable_flipped)[] = {
+s32 N(DefenseTable_flipped)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable)[] = {
+s32 N(StatusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 90,
@@ -56,8 +56,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 16 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_FLIPABLE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 1, 7 },
@@ -72,7 +72,7 @@ ActorBlueprint NAMESPACE = {
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
     .initScript = &N(init),
-    .statusTable = N(statusTable),
+    .statusTable = N(StatusTable),
     .escapeChance = 60,
     .airLiftChance = 75,
     .hurricaneChance = 75,
@@ -87,7 +87,7 @@ ActorBlueprint NAMESPACE = {
     .statusMessageOffset = { 8, 13 },
 };
 
-s32 N(idleAnimations_normal)[] = {
+s32 N(IdleAnimations_normal)[] = {
     STATUS_NORMAL,    ANIM_BuzzyBeetle_Anim01,
     STATUS_STONE,     ANIM_BuzzyBeetle_Anim00,
     STATUS_SLEEP,     ANIM_BuzzyBeetle_Anim09,
@@ -100,7 +100,7 @@ s32 N(idleAnimations_normal)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations)[] = {
+s32 N(IdleAnimations)[] = {
     STATUS_NORMAL,    ANIM_BuzzyBeetle_Anim0F,
     STATUS_STONE,     ANIM_BuzzyBeetle_Anim0E,
     STATUS_SLEEP,     ANIM_BuzzyBeetle_Anim14,
@@ -113,7 +113,7 @@ s32 N(idleAnimations)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_flipped)[] = {
+s32 N(IdleAnimations_flipped)[] = {
     STATUS_NORMAL,    ANIM_BuzzyBeetle_Anim02,
     STATUS_STONE,     ANIM_BuzzyBeetle_Anim1A,
     STATUS_SLEEP,     ANIM_BuzzyBeetle_Anim1B,
@@ -142,7 +142,7 @@ EvtScript N(init) = {
         EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -9)
         EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
         EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
-        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_normal)))
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_normal)))
         EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, FALSE)
         EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_FLIPABLE, TRUE)
     EVT_END_IF
@@ -167,8 +167,8 @@ EvtScript N(fallOff) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 9, 1)
-    EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable_flipped)))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_flipped)))
+    EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable_flipped)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_flipped)))
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, FALSE)
     EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_SPIKY_TOP, FALSE)
     EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_FLIPABLE, TRUE)
@@ -372,8 +372,8 @@ EvtScript N(handleEvent) = {
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 0, 16)
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -9)
             EVT_CALL(SetActorVar, ACTOR_SELF, 9, 1)
-            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable_flipped)))
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_flipped)))
+            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable_flipped)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_flipped)))
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, TRUE)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BuzzyBeetle_Anim07)
             EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 12, 0)
@@ -552,7 +552,7 @@ EvtScript N(takeTurn_ceiling) = {
     EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_normal)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_normal)))
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, FALSE)
     EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_FLIPABLE, TRUE)
     EVT_CALL(GetIndexFromPos, ACTOR_SELF, LVar0)
@@ -708,8 +708,8 @@ EvtScript N(takeTurn) = {
             EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 0, 16)
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -9)
-            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(defenseTable)))
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_normal)))
+            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_normal)))
             EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, FALSE)
         EVT_END_IF

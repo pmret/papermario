@@ -183,20 +183,20 @@ void func_E011A3A0(EffectInstance* effect) {
 
 void func_E011A3BC(s16 alpha) {
     if (alpha == 255) {
-        gDPSetRenderMode(gMasterGfxPos++, AA_EN | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA |
+        gDPSetRenderMode(gMainGfxPos++, AA_EN | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA |
             GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM),
             GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM));
-        gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+        gDPSetCombineMode(gMainGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
     } else {
-        gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
-        gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0, PRIMITIVE, 0,
+        gDPSetRenderMode(gMainGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
+        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0, PRIMITIVE, 0,
                           TEXEL0, 0);
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, alpha);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, alpha);
     }
 }
 
 void func_E011A48C(s32 posX, s32 posY, s32 tile, f32 scale) {
-    gSPScisTextureRectangle(gMasterGfxPos++,
+    gSPScisTextureRectangle(gMainGfxPos++,
         posX * 4,
         posY * 4,
         (posX + 32) * 4,
@@ -206,7 +206,7 @@ void func_E011A48C(s32 posX, s32 posY, s32 tile, f32 scale) {
         1024,
         scale,
         -scale);
-    gDPPipeSync(gMasterGfxPos++);
+    gDPPipeSync(gMainGfxPos++);
 }
 
 void func_E011A700(EffectInstance* effect) {
@@ -222,10 +222,10 @@ void func_E011A700(EffectInstance* effect) {
     s32 i;
 
     if (data->unk_02 != 0) {
-        gDPPipeSync(gMasterGfxPos++);
-        gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+        gDPPipeSync(gMainGfxPos++);
+        gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-        gSPDisplayList(gMasterGfxPos++, D_E011AC20[0]);
+        gSPDisplayList(gMainGfxPos++, D_E011AC20[0]);
 
         numShown = 0;
         for (i = 0; i < ARRAY_COUNT(data->unk_0C); i++) {
@@ -233,15 +233,15 @@ void func_E011A700(EffectInstance* effect) {
 
             alpha = buffData->alpha;
             if (alpha != 0) {
-                gSPTexture(gMasterGfxPos++, 0xFFFF, 0xFFFF, 2, i, G_ON);
+                gSPTexture(gMainGfxPos++, 0xFFFF, 0xFFFF, 2, i, G_ON);
                 func_E011A3BC(alpha);
                 func_E011A48C(20 + numShown * 32, 50, i, 1024.0f);
                 numShown++;
             }
         }
 
-        gSPTexture(gMasterGfxPos++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
-        gDPSetTextureLUT(gMasterGfxPos++, G_TT_NONE);
+        gSPTexture(gMainGfxPos++, 0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON);
+        gDPSetTextureLUT(gMainGfxPos++, G_TT_NONE);
 
         numShown = 0;
         for (i = 0; i < ARRAY_COUNT(data->unk_0C); i++) {
@@ -270,7 +270,7 @@ void func_E011A700(EffectInstance* effect) {
                     }
                     dlist = D_E011AC24[idx];
                     if (dlist != NULL) {
-                        gSPDisplayList(gMasterGfxPos++, dlist);
+                        gSPDisplayList(gMainGfxPos++, dlist);
                         scale = D_E011AC4C[(s16)stateTimer] * 0.01f;
                         temp2 = (-(scale - 1.0f) * 16.0f) + 0.5;
                         x = temp2 + 20 + numShown * 32;
@@ -281,7 +281,7 @@ void func_E011A700(EffectInstance* effect) {
 
                 dlist = D_E011AC24[turnsDisplay];
                 if (dlist != NULL) {
-                    gSPDisplayList(gMasterGfxPos++, dlist);
+                    gSPDisplayList(gMainGfxPos++, dlist);
                     temp1 = D_E011AC64[(s16)stateTimer];
                     temp2 = -temp1;
                     scale = D_E011AC58[(s16)stateTimer] * 0.01f;
@@ -293,12 +293,12 @@ void func_E011A700(EffectInstance* effect) {
             }
         }
 
-        gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE,
+        gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE,
             camera->viewportStartX,
             camera->viewportStartY,
             camera->viewportStartX + camera->viewportW,
             camera->viewportStartY + camera->viewportH
         );
-        gDPPipeSync(gMasterGfxPos++);
+        gDPPipeSync(gMainGfxPos++);
     }
 }

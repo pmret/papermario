@@ -102,7 +102,7 @@ EvtScript N(EVS_RoomListener_Verdana) = {
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_BEGIN)
             EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
         EVT_CASE_EQ(ROOM_UPDATE_ENTER_DONE)
-            EVT_WAIT(30)
+            EVT_WAIT(30 * DT)
             EVT_CALL(SetGroupVisibility, MODEL_monohoshi, MODEL_GROUP_HIDDEN)
         EVT_CASE_EQ(ROOM_UPDATE_EXIT_BEGIN)
             EVT_IF_GT(GB_StoryProgress, STORY_CH0_GATE_CRUSHED)
@@ -137,29 +137,29 @@ EvtScript N(EVS_RoomListener_Verdana) = {
                         EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Thinking)
                         EVT_LOOP(3)
                             EVT_CALL(SetGroupVisibility, MODEL_monohoshi, MODEL_GROUP_VISIBLE)
-                            EVT_WAIT(10)
+                            EVT_WAIT(10 * DT)
                             EVT_CALL(SetGroupVisibility, MODEL_monohoshi, MODEL_GROUP_HIDDEN)
-                            EVT_WAIT(10)
+                            EVT_WAIT(10 * DT)
                         EVT_END_LOOP
                         EVT_CALL(FadeOutMusic, 0, 0)
                         EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_Surprise)
-                        EVT_WAIT(30)
+                        EVT_WAIT(30 * DT)
                         EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
                         EVT_CALL(InterpPlayerYaw, 233, 1)
-                        EVT_WAIT(10)
+                        EVT_WAIT(10 * DT)
                         EVT_CALL(InterpPlayerYaw, 53, 1)
-                        EVT_WAIT(15)
+                        EVT_WAIT(15 * DT)
                         EVT_CALL(InterpPlayerYaw, 233, 1)
-                        EVT_WAIT(3)
+                        EVT_WAIT(3 * DT)
                         EVT_CALL(InterpPlayerYaw, 53, 1)
-                        EVT_WAIT(3)
-                        EVT_WAIT(10)
+                        EVT_WAIT(3 * DT)
+                        EVT_WAIT(10 * DT)
                         EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_Flail)
-                        EVT_WAIT(30)
+                        EVT_WAIT(30 * DT)
                         EVT_SET(GB_StoryProgress, STORY_CH0_FELL_OFF_CLIFF)
                     EVT_END_IF
                     EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_PanicStill)
-                    EVT_WAIT(5)
+                    EVT_WAIT(5 * DT)
                     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.0))
                     EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
                     EVT_SUB(LVar1, 150)
@@ -171,7 +171,7 @@ EvtScript N(EVS_RoomListener_Verdana) = {
                     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
                     EVT_THREAD
                         EVT_LOOP(0)
-                            EVT_SUB(LVar1, 16)
+                            EVT_SUB(LVar1, 16 / DT)
                             EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
                             EVT_WAIT(1)
                         EVT_END_LOOP
@@ -180,15 +180,15 @@ EvtScript N(EVS_RoomListener_Verdana) = {
                         EVT_CALL(GetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
                         EVT_THREAD
                             EVT_LOOP(0)
-                                EVT_SUB(LVar1, 16)
+                                EVT_SUB(LVar1, 16 / DT)
                                 EVT_CALL(SetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
                                 EVT_WAIT(1)
                             EVT_END_LOOP
                         EVT_END_THREAD
                     EVT_END_IF
-                    EVT_WAIT(20)
+                    EVT_WAIT(20 * DT)
                     EVT_CALL(GotoMap, EVT_PTR("kmr_03"), kmr_03_ENTRY_2)
-                    EVT_WAIT(100)
+                    EVT_WAIT(100 * DT)
                 EVT_END_IF
             EVT_END_IF
     EVT_END_SWITCH

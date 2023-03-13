@@ -57,7 +57,7 @@ void create_audio_system(void) {
         nuAuTasks[i].next = NULL;
         nuAuTasks[i].msg = 0;
         nuAuTasks[i].list.t.type = M_AUDTASK;
-#if VERSION_CN
+#if VERSION_IQUE
         nuAuTasks[i].list.t.ucode_boot = (u64*) rspbootTextStart;
         nuAuTasks[i].list.t.ucode_boot_size = (u32) rspbootTextEnd - (u32) rspbootTextStart;
 #else

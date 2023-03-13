@@ -240,9 +240,9 @@ void pink_sparkles_appendGfx(void* effect) {
     s32 colorIdx;
     s32 i;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
-    gSPDisplayList(gMasterGfxPos++, D_09000F20_338EE0);
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPDisplayList(gMainGfxPos++, D_09000F20_338EE0);
 
     colorIdx = (part->unk_20 - 1) * 3;
 
@@ -280,12 +280,12 @@ void pink_sparkles_appendGfx(void* effect) {
                 primB = 255;
             }
 
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, primR, primG, primB, 255);
-            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-            gSPDisplayList(gMasterGfxPos++, D_E01248A0[unk_28 & 7]);
-            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, primR, primG, primB, 255);
+            gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPDisplayList(gMainGfxPos++, D_E01248A0[unk_28 & 7]);
+            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
         }
     }
 
-    gDPPipeSync(gMasterGfxPos++);
+    gDPPipeSync(gMainGfxPos++);
 }

@@ -121,19 +121,19 @@ void floating_cloud_puff_appendGfx(void* effect) {
     Matrix4f sp10;
     Matrix4f sp50;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     shim_guTranslateF(sp10, data->unk_04, data->unk_08, data->unk_0C);
     shim_guScaleF(sp50, scale, scale, scale);
     shim_guMtxCatF(sp50, sp10, sp10);
     shim_guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPMatrix(gMasterGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->unk_18, data->unk_1C, data->unk_20, unk_24);
-    gDPSetEnvColor(gMasterGfxPos++, data->unk_28, data->unk_2C, data->unk_30, 0);
-    gSPDisplayList(gMasterGfxPos++, D_09000080_3D4F10);
-    gSPDisplayList(gMasterGfxPos++, D_09000168_3D4FF8);
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, data->unk_18, data->unk_1C, data->unk_20, unk_24);
+    gDPSetEnvColor(gMainGfxPos++, data->unk_28, data->unk_2C, data->unk_30, 0);
+    gSPDisplayList(gMainGfxPos++, D_09000080_3D4F10);
+    gSPDisplayList(gMainGfxPos++, D_09000168_3D4FF8);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }

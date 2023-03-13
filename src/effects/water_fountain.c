@@ -235,30 +235,30 @@ void water_fountain_appendGfx(void *effect) {
         basePtr = D_E00B8B58;
     }
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     shim_guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
     shim_guScaleF(sp58, data->unk_34, data->unk_34, data->unk_34);
     shim_guMtxCatF(sp58, sp18, sp18);
     shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPMatrix(gMasterGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gSPDisplayList(gMasterGfxPos++, D_09000280_3B8AE0);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gSPDisplayList(gMainGfxPos++, D_09000280_3B8AE0);
 
     shim_guRotateF(sp18, data->unk_38, 0.0f, 0.0f, 1.0f);
     shim_guScaleF(sp58, data->unk_3C, data->unk_40, 1.0f);
     shim_guMtxCatF(sp58, sp18, sp18);
     shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gDPSetEnvColor(gMasterGfxPos++, data->unk_28, data->unk_2C, data->unk_30, unk_24);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gDPSetEnvColor(gMainGfxPos++, data->unk_28, data->unk_2C, data->unk_30, unk_24);
 
     temp = sp9C + 1;
     if (timeLeft >= var_s6 - temp) {
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, unk_18, unk_1C, unk_20, unk_24);
-        gSPDisplayList(gMasterGfxPos++, D_09000348_3B8BA8);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, unk_18, unk_1C, unk_20, unk_24);
+        gSPDisplayList(gMainGfxPos++, D_09000348_3B8BA8);
     }
 
     for (i = 0; i < var_s6 / 2; i++) {
@@ -276,16 +276,16 @@ void water_fountain_appendGfx(void *effect) {
                     shim_guMtxCatF(sp58, sp18, sp18);
                     shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-                    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-                    gDPSetPrimColor(gMasterGfxPos++, 0, 0, unk_18, unk_1C, unk_20, (unk_24 * basePtr[idx].unk_08) >> 8);
-                    gSPDisplayList(gMasterGfxPos++, D_09000328_3B8B88);
-                    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+                    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+                    gDPSetPrimColor(gMainGfxPos++, 0, 0, unk_18, unk_1C, unk_20, (unk_24 * basePtr[idx].unk_08) >> 8);
+                    gSPDisplayList(gMainGfxPos++, D_09000328_3B8B88);
+                    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
                 }
             }
         }
     }
 
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-    gDPPipeSync(gMasterGfxPos++);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+    gDPPipeSync(gMainGfxPos++);
 }

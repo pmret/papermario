@@ -228,75 +228,75 @@ void spr_appendGfx_component_flat(
     Matrix4f mtx,
     s32 alpha
 ) {
-    gDPLoadTLUT_pal16(gMasterGfxPos++, 0, palette);
+    gDPLoadTLUT_pal16(gMainGfxPos++, 0, palette);
     if (gSpriteShadingProfile->flags & 1) {
-        gDPScrollMultiTile2_4b(gMasterGfxPos++, raster, G_IM_FMT_CI, width, height,
+        gDPScrollMultiTile2_4b(gMainGfxPos++, raster, G_IM_FMT_CI, width, height,
                               0, 0, width - 1, height - 1, 0,
                               G_TX_CLAMP, G_TX_CLAMP, 8, 8, G_TX_NOLOD, G_TX_NOLOD,
                               256, 256);
-        gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0x0100, 2, 0, G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
-        gDPSetTileSize(gMasterGfxPos++, 2, 0, 0, 63 << 2, 0);
+        gDPSetTile(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0x0100, 2, 0, G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+        gDPSetTileSize(gMainGfxPos++, 2, 0, 0, 63 << 2, 0);
         if (gSpriteShadingProfile->flags & 2) {
             Camera* camera = &gCameras[gCurrentCamID];
             if (gGameStatusPtr->isBattle == 2) {
-                gSPViewport(gMasterGfxPos++, &D_802DF3E0);
+                gSPViewport(gMainGfxPos++, &D_802DF3E0);
             } else {
-                gSPViewport(gMasterGfxPos++, &camera->vpAlt);
+                gSPViewport(gMainGfxPos++, &camera->vpAlt);
             }
 
             if (alpha == 255) {
-                gDPSetRenderMode(gMasterGfxPos++, AA_EN | Z_CMP | Z_UPD | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA |
+                gDPSetRenderMode(gMainGfxPos++, AA_EN | Z_CMP | Z_UPD | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA |
                                  G_RM_PASS, AA_EN | Z_CMP | Z_UPD | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA |
                                  GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM));
             } else {
-                gDPSetRenderMode(gMasterGfxPos++, G_RM_PASS, G_RM_ZB_CLD_SURF2);
+                gDPSetRenderMode(gMainGfxPos++, G_RM_PASS, G_RM_ZB_CLD_SURF2);
             }
 
-            gDPSetEnvColor(gMasterGfxPos++, 0, 0, 0, alpha);
-            gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, 0, ENVIRONMENT, 0, TEXEL1, 0, 0, 0, 0, 0, 0, 0, 0, COMBINED);
-            gSPVertex(gMasterGfxPos++, vertices, 4, 0);
-            gSP2Triangles(gMasterGfxPos++, 0, 2, 1, 0, 0, 3, 2, 0);
-            gDPPipeSync(gMasterGfxPos++);
+            gDPSetEnvColor(gMainGfxPos++, 0, 0, 0, alpha);
+            gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, 0, ENVIRONMENT, 0, TEXEL1, 0, 0, 0, 0, 0, 0, 0, 0, COMBINED);
+            gSPVertex(gMainGfxPos++, vertices, 4, 0);
+            gSP2Triangles(gMainGfxPos++, 0, 2, 1, 0, 0, 3, 2, 0);
+            gDPPipeSync(gMainGfxPos++);
         }
         create_shading_palette(mtx, 0, 0, width, height, alpha, alpha == 255 ? 0x111238 : 0x104B50); // TODO make macro for render mode
     } else {
-        gDPScrollTextureBlock_4b(gMasterGfxPos++, raster, G_IM_FMT_CI, width, height, 0,
+        gDPScrollTextureBlock_4b(gMainGfxPos++, raster, G_IM_FMT_CI, width, height, 0,
                                  G_TX_CLAMP, G_TX_CLAMP, 8, 8, G_TX_NOLOD, G_TX_NOLOD,
                                  256, 256);
         if (gSpriteShadingProfile->flags & 2) {
             Camera* camera =  &gCameras[gCurrentCamID];
             if (gGameStatusPtr->isBattle == 2) {
-                gSPViewport(gMasterGfxPos++, &D_802DF3E0);
+                gSPViewport(gMainGfxPos++, &D_802DF3E0);
             } else {
-                gSPViewport(gMasterGfxPos++, &camera->vpAlt);
+                gSPViewport(gMainGfxPos++, &camera->vpAlt);
             }
             if (alpha == 255) {
-                gDPSetRenderMode(gMasterGfxPos++, AA_EN | Z_CMP | Z_UPD | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA | ALPHA_CVG_SEL | GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM), AA_EN | Z_CMP | Z_UPD | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA | ALPHA_CVG_SEL | GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM));
+                gDPSetRenderMode(gMainGfxPos++, AA_EN | Z_CMP | Z_UPD | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA | ALPHA_CVG_SEL | GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM), AA_EN | Z_CMP | Z_UPD | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA | ALPHA_CVG_SEL | GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM));
             } else {
-                gDPSetRenderMode(gMasterGfxPos++, G_RM_ZB_CLD_SURF, G_RM_ZB_CLD_SURF2);
+                gDPSetRenderMode(gMainGfxPos++, G_RM_ZB_CLD_SURF, G_RM_ZB_CLD_SURF2);
             }
 
-            gDPSetEnvColor(gMasterGfxPos++, 0, 0, 0, alpha);
-            gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, 0, ENVIRONMENT, 0, TEXEL0, 0, 0, 0, 0, 0, ENVIRONMENT, 0,
+            gDPSetEnvColor(gMainGfxPos++, 0, 0, 0, alpha);
+            gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, 0, ENVIRONMENT, 0, TEXEL0, 0, 0, 0, 0, 0, ENVIRONMENT, 0,
                               TEXEL0, 0);
-            gSPVertex(gMasterGfxPos++, vertices, 4, 0);
-            gSP2Triangles(gMasterGfxPos++, 0, 2, 1, 0, 0, 3, 2, 0);
-            gDPPipeSync(gMasterGfxPos++);
+            gSPVertex(gMainGfxPos++, vertices, 4, 0);
+            gSP2Triangles(gMainGfxPos++, 0, 2, 1, 0, 0, 3, 2, 0);
+            gDPPipeSync(gMainGfxPos++);
 
             if (alpha == 255) {
-                gDPSetRenderMode(gMasterGfxPos++, AA_EN | Z_CMP | Z_UPD | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA |
+                gDPSetRenderMode(gMainGfxPos++, AA_EN | Z_CMP | Z_UPD | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA |
                                  GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM),
                                  AA_EN | Z_CMP | Z_UPD | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA |
                                  GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM));
             } else {
-                gDPSetRenderMode(gMasterGfxPos++, G_RM_ZB_CLD_SURF, G_RM_ZB_CLD_SURF2);
+                gDPSetRenderMode(gMainGfxPos++, G_RM_ZB_CLD_SURF, G_RM_ZB_CLD_SURF2);
             }
 
-            gDPSetEnvColor(gMasterGfxPos++, 100, 100, 100, 255);
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, alpha);
-            gDPSetCombineLERP(gMasterGfxPos++, SHADE, ENVIRONMENT, TEXEL0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, SHADE,
+            gDPSetEnvColor(gMainGfxPos++, 100, 100, 100, 255);
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, alpha);
+            gDPSetCombineLERP(gMainGfxPos++, SHADE, ENVIRONMENT, TEXEL0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, SHADE,
                               ENVIRONMENT, TEXEL0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0);
-            gDPSetColorDither(gMasterGfxPos++, G_CD_MAGICSQ);
+            gDPSetColorDither(gMainGfxPos++, G_CD_MAGICSQ);
         }
     }
 
@@ -304,17 +304,17 @@ void spr_appendGfx_component_flat(
         Camera* camera =  &gCameras[gCurrentCamID];
 
         if (gGameStatusPtr->isBattle == 2) {
-            gSPViewport(gMasterGfxPos++, &D_802DF3D0);
+            gSPViewport(gMainGfxPos++, &D_802DF3D0);
             D_802DF3E0.vp.vtrans[0] = D_802DF3D0.vp.vtrans[0] + gGameStatusPtr->unk_82;
             D_802DF3E0.vp.vtrans[1] = D_802DF3D0.vp.vtrans[1] + gGameStatusPtr->unk_83;
         } else {
-            gSPViewport(gMasterGfxPos++, &camera->vp);
+            gSPViewport(gMainGfxPos++, &camera->vp);
         }
     }
 
-    gSPVertex(gMasterGfxPos++, vertices, 4, 0);
-    gSP2Triangles(gMasterGfxPos++, 0, 2, 1, 0, 0, 3, 2, 0);
-    gDPPipeSync(gMasterGfxPos++);
+    gSPVertex(gMainGfxPos++, vertices, 4, 0);
+    gSP2Triangles(gMainGfxPos++, 0, 2, 1, 0, 0, 3, 2, 0);
+    gDPPipeSync(gMainGfxPos++);
 }
 
 void spr_appendGfx_component(
@@ -354,21 +354,21 @@ void spr_appendGfx_component(
     }
 
     guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
-    gSPMatrix(gMasterGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]),
+    gSPMatrix(gMainGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]),
               G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     if (gSpriteShadingProfile->flags & 1) {
         if ((u8) opacity == 255) {
-            gSPDisplayList(gMasterGfxPos++, D_802DF460);
+            gSPDisplayList(gMainGfxPos++, D_802DF460);
         } else {
-            gSPDisplayList(gMasterGfxPos++, D_802DF490);
+            gSPDisplayList(gMainGfxPos++, D_802DF490);
         }
     } else {
         if ((u8) opacity == 255) {
-            gSPDisplayList(gMasterGfxPos++, D_802DF3F0);
+            gSPDisplayList(gMainGfxPos++, D_802DF3F0);
         } else {
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, (u8) opacity);
-            gSPDisplayList(gMasterGfxPos++, D_802DF428);
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, (u8) opacity);
+            gSPDisplayList(gMainGfxPos++, D_802DF428);
         }
     }
 
@@ -395,7 +395,7 @@ void spr_appendGfx_component(
             D_802DF540 &= ~(0x80000000 | 0x40000000 | 0x20000000 | 0x10000000);
         }
     }
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
 
 void spr_transform_point(s32 rotX, s32 rotY, s32 rotZ, f32 inX, f32 inY, f32 inZ, f32* outX, f32* outY, f32* outZ) {

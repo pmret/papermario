@@ -98,12 +98,12 @@ API_CALLABLE(N(UpdateTheEndAlpha)) {
     return ApiStatus_DONE2;
 }
 void N(gfx_build_the_end)(void) {
-    gDPSetCombineLERP(gMasterGfxPos++,
+    gDPSetCombineLERP(gMainGfxPos++,
         TEXEL0, 0, SHADE, 0,
         TEXEL0, 0, PRIMITIVE, 0,
         TEXEL0, 0, SHADE, 0,
         TEXEL0, 0, PRIMITIVE, 0);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, TheEndModelAlpha);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, TheEndModelAlpha);
 }
 
 EvtScript N(EVS_Scene_TheEnd) = {

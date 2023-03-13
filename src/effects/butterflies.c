@@ -170,8 +170,8 @@ void butterflies_appendGfx(void* effect) {
     s32 primColor = data->unk_24;
     s32 type = data->unk_00;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->graphics->data));
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->graphics->data));
 
     shim_guTranslateF(sp18, data->unk_0C, data->unk_10 + D_E00AA6EC[data->unk_2C] * 0.3f, data->unk_14);
     shim_guRotateF(sp58, data->unk_28, 0.0f, 1.0f, 0.0f);
@@ -180,12 +180,12 @@ void butterflies_appendGfx(void* effect) {
     shim_guMtxCatF(sp58, sp18, sp18);
     shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, primColor, primColor, primColor, 255);
-    gSPDisplayList(gMasterGfxPos++, D_09003880_3AE8B0);
-    gSPDisplayList(gMasterGfxPos++, D_E00AA6C0[type]);
-    gSPVertex(gMasterGfxPos++, &D_09002D40_3ADD70[data->unk_2C], 6, 0);
-    gSPDisplayList(gMasterGfxPos++, D_09003DC8_3AEDF8);
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-    gDPPipeSync(gMasterGfxPos++);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, primColor, primColor, primColor, 255);
+    gSPDisplayList(gMainGfxPos++, D_09003880_3AE8B0);
+    gSPDisplayList(gMainGfxPos++, D_E00AA6C0[type]);
+    gSPVertex(gMainGfxPos++, &D_09002D40_3ADD70[data->unk_2C], 6, 0);
+    gSPDisplayList(gMainGfxPos++, D_09003DC8_3AEDF8);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+    gDPPipeSync(gMainGfxPos++);
 }

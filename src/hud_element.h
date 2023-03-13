@@ -135,6 +135,9 @@ typedef struct PopupMenu {
     /* 0x328 */ s32 initialPos;
     /* 0x32C */ s16 result;
     /* 0x32E */ char unk_32E[0x2];
+#if VERSION_PAL
+    /* 0x330 */ char unk_330[0x14];
+#endif
 } PopupMenu; // size = 0x330
 
 typedef struct Shop {

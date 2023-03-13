@@ -7,7 +7,7 @@
 
 #define NAMESPACE b_area_omo_sky_guy
 
-extern s32 N(idleAnimations_8022B104)[];
+extern s32 N(IdleAnimations_8022B104)[];
 extern EvtScript N(init_8022987C);
 extern EvtScript N(takeTurn_8022A9D0);
 extern EvtScript N(takeTurn_8022CA9C);
@@ -16,7 +16,7 @@ extern EvtScript N(idle_8022B19C);
 extern EvtScript N(handleEvent_8022A398);
 extern EvtScript N(handleEvent_8022B310);
 
-s32 N(idleAnimations_802294C0)[] = {
+s32 N(IdleAnimations_802294C0)[] = {
     STATUS_NORMAL,    ANIM_SkyGuy_Anim01,
     STATUS_STONE,     ANIM_SkyGuy_Anim00,
     STATUS_SLEEP,     ANIM_SkyGuy_Anim04,
@@ -29,7 +29,7 @@ s32 N(idleAnimations_802294C0)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_8022950C)[] = {
+s32 N(IdleAnimations_8022950C)[] = {
     STATUS_NORMAL,    ANIM_SkyGuy_Anim10,
     STATUS_STONE,     ANIM_SkyGuy_Anim0D,
     STATUS_SLEEP,     ANIM_SkyGuy_Anim19,
@@ -42,7 +42,7 @@ s32 N(idleAnimations_8022950C)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_80229558)[] = {
+s32 N(IdleAnimations_80229558)[] = {
     STATUS_NORMAL,    ANIM_SkyGuy_Anim0F,
     STATUS_STONE,     ANIM_SkyGuy_Anim0C,
     STATUS_SLEEP,     ANIM_SkyGuy_Anim18,
@@ -55,7 +55,7 @@ s32 N(idleAnimations_80229558)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_802295A4)[] = {
+s32 N(IdleAnimations_802295A4)[] = {
     STATUS_NORMAL,    ANIM_SkyGuy_Anim11,
     STATUS_STONE,     ANIM_SkyGuy_Anim0E,
     STATUS_SLEEP,     ANIM_SkyGuy_Anim1A,
@@ -68,24 +68,24 @@ s32 N(idleAnimations_802295A4)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_802295F0)[] = {
+s32 N(IdleAnimations_802295F0)[] = {
     STATUS_NORMAL,    ANIM_SkyGuy_Anim0B,
     STATUS_END,
 };
 
-s32 N(defenseTable_802295FC)[] = {
+s32 N(DefenseTable_802295FC)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_SHOCK, 0,
     ELEMENT_END,
 };
 
-s32 N(defenseTable_80229610)[] = {
+s32 N(DefenseTable_80229610)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_SHOCK, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_80229624)[] = {
+s32 N(StatusTable_80229624)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 70,
@@ -110,7 +110,7 @@ s32 N(statusTable_80229624)[] = {
     STATUS_END,
 };
 
-s32 N(statusTable_802296D0)[] = {
+s32 N(StatusTable_802296D0)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 70,
@@ -144,15 +144,15 @@ enum PartIDs {
     PT_6        = 6,
 };
 
-ActorPartBlueprint N(partsTable_8022977C)[] = {
+ActorPartBlueprint N(PartsTable_8022977C)[] = {
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET,
         .index = PT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 32 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_8022B104),
-        .defenseTable = N(defenseTable_80229610),
+        .idleAnimations = N(IdleAnimations_8022B104),
+        .defenseTable = N(DefenseTable_80229610),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -10 },
@@ -163,8 +163,8 @@ ActorPartBlueprint N(partsTable_8022977C)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_802294C0),
-        .defenseTable = N(defenseTable_802295FC),
+        .idleAnimations = N(IdleAnimations_802294C0),
+        .defenseTable = N(DefenseTable_802295FC),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -1, -10 },
@@ -175,8 +175,8 @@ ActorPartBlueprint N(partsTable_8022977C)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 2, 50 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_8022950C),
-        .defenseTable = N(defenseTable_802295FC),
+        .idleAnimations = N(IdleAnimations_8022950C),
+        .defenseTable = N(DefenseTable_802295FC),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -1, -10 },
@@ -188,8 +188,8 @@ ActorPartBlueprint N(partsTable_8022977C)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80229558),
-        .defenseTable = N(defenseTable_802295FC),
+        .idleAnimations = N(IdleAnimations_80229558),
+        .defenseTable = N(DefenseTable_802295FC),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -1, -10 },
@@ -200,8 +200,8 @@ ActorPartBlueprint N(partsTable_8022977C)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_802295A4),
-        .defenseTable = N(defenseTable_802295FC),
+        .idleAnimations = N(IdleAnimations_802295A4),
+        .defenseTable = N(DefenseTable_802295FC),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -1, -10 },
@@ -212,8 +212,8 @@ ActorPartBlueprint N(partsTable_8022977C)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_802295F0),
-        .defenseTable = N(defenseTable_802295FC),
+        .idleAnimations = N(IdleAnimations_802295F0),
+        .defenseTable = N(DefenseTable_802295FC),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -1, -10 },
@@ -225,10 +225,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_SKY_GUY,
     .level = 14,
     .maxHP = 7,
-    .partCount = ARRAY_COUNT(N(partsTable_8022977C)),
-    .partsData = N(partsTable_8022977C),
+    .partCount = ARRAY_COUNT( N(PartsTable_8022977C)),
+    .partsData = N(PartsTable_8022977C),
     .initScript = &N(init_8022987C),
-    .statusTable = N(statusTable_80229624),
+    .statusTable = N(StatusTable_80229624),
     .escapeChance = 50,
     .airLiftChance = 90,
     .hurricaneChance = 90,
@@ -599,7 +599,7 @@ EvtScript N(takeTurn_8022A9D0) = {
     EVT_END
 };
 
-s32 N(idleAnimations_8022B104)[] = {
+s32 N(IdleAnimations_8022B104)[] = {
     STATUS_NORMAL,    ANIM_ShyGuy_Red_Anim01,
     STATUS_STONE,     ANIM_ShyGuy_Red_Anim00,
     STATUS_SLEEP,     ANIM_ShyGuy_Red_Anim12,

@@ -2960,7 +2960,7 @@ void func_8024F768(void* data) {
     if (alphaAmt > 10) {
         alphaAmt = 10;
     }
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, (alphaAmt * 255) / 10);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, (alphaAmt * 255) / 10);
 }
 
 void func_8024F7C8(void) {

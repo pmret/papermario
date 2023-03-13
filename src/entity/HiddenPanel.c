@@ -27,12 +27,12 @@ void entity_HiddenPanel_setupGfx(s32 entityIndex) {
         guTranslateF(tempMtx, entity->position.x, data->initialY + 1.0f, entity->position.z);
         guMtxCatF(tempMtx, rotMtx, tempMtx);
         guMtxF2L(tempMtx, &gDisplayContext->matrixStack[gMatrixListPos]);
-        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, ENTITY_ADDR(entity, Gfx*, Gfx_HiddenPanel_RenderHole));
-        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        gSPDisplayList(gMainGfxPos++, ENTITY_ADDR(entity, Gfx*, Gfx_HiddenPanel_RenderHole));
+        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     }
     mdl_project_tex_coords(data->modelID, data->renderDList, data->entityMatrix, entity->gfxBaseAddr);
-    mdl_draw_hidden_panel_surface(&gMasterGfxPos, data->modelID);
+    mdl_draw_hidden_panel_surface(&gMainGfxPos, data->modelID);
 }
 
 void entity_HiddenPanel_set_ispy_notification(Entity* entity) {

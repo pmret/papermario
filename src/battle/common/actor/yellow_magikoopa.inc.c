@@ -5,8 +5,8 @@
 #include "sprite/npc/Magikoopa.h"
 #include "sprite/npc/FlyingMagikoopa.h"
 
-extern s32 N(idleAnimations)[];
-extern s32 N(idleAnimations_flying)[];
+extern s32 N(IdleAnimations)[];
+extern s32 N(IdleAnimations_flying)[];
 extern s32 N(80225248)[];
 
 extern EvtScript N(init);
@@ -14,17 +14,17 @@ extern EvtScript N(takeTurn);
 extern EvtScript N(init_flying);
 extern EvtScript N(flee);
 
-s32 N(defenseTable)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(defenseTable_flying)[] = {
+s32 N(DefenseTable_flying)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable)[] = {
+s32 N(StatusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 50,
@@ -49,7 +49,7 @@ s32 N(statusTable)[] = {
     STATUS_END,
 };
 
-s32 N(statusTable_flying)[] = {
+s32 N(StatusTable_flying)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 50,
@@ -81,8 +81,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 2, 35 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -5, -12 },
@@ -96,8 +96,8 @@ ActorPartBlueprint N(parts_flying)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 2, 35 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
-        .defenseTable = N(defenseTable_flying),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable_flying),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -5, -12 },
@@ -108,8 +108,8 @@ ActorPartBlueprint N(parts_flying)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -10, 35 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_flying),
-        .defenseTable = N(defenseTable_flying),
+        .idleAnimations = N(IdleAnimations_flying),
+        .defenseTable = N(DefenseTable_flying),
         .eventFlags = ACTOR_EVENT_FLAG_RIDING_BROOMSTICK,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -8 },
@@ -121,7 +121,7 @@ ActorPartBlueprint N(parts_flying)[] = {
         .targetOffset = { 0, 0 },
         .opacity = 255,
         .idleAnimations = N(80225248),
-        .defenseTable = N(defenseTable_flying),
+        .defenseTable = N(DefenseTable_flying),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -136,7 +136,7 @@ ActorBlueprint NAMESPACE = {
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
     .initScript = &N(init),
-    .statusTable = N(statusTable),
+    .statusTable = N(StatusTable),
     .escapeChance = 40,
     .airLiftChance = 80,
     .hurricaneChance = 70,
@@ -159,7 +159,7 @@ ActorBlueprint N(flying) = {
     .partCount = ARRAY_COUNT(N(parts_flying)),
     .partsData = N(parts_flying),
     .initScript = &N(init_flying),
-    .statusTable = N(statusTable_flying),
+    .statusTable = N(StatusTable_flying),
     .escapeChance = 40,
     .airLiftChance = 95,
     .hurricaneChance = 75,
@@ -174,7 +174,7 @@ ActorBlueprint N(flying) = {
     .statusMessageOffset = { 1, 34 },
 };
 
-s32 N(idleAnimations)[] = {
+s32 N(IdleAnimations)[] = {
     STATUS_NORMAL, ANIM_Magikoopa_Yellow_Anim01,
     STATUS_STONE, ANIM_Magikoopa_Yellow_Anim00,
     STATUS_SLEEP, ANIM_Magikoopa_Yellow_Anim08,
@@ -187,7 +187,7 @@ s32 N(idleAnimations)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_flying)[] = {
+s32 N(IdleAnimations_flying)[] = {
     STATUS_NORMAL, ANIM_FlyingMagikoopa_Yellow_Anim01,
     STATUS_STONE, ANIM_FlyingMagikoopa_Yellow_Anim00,
     STATUS_SLEEP, ANIM_FlyingMagikoopa_Yellow_Anim08,
@@ -392,7 +392,7 @@ EvtScript N(knockOff) = {
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, FALSE)
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
     EVT_CALL(SetActorType, ACTOR_SELF, ACTOR_TYPE_YELLOW_MAGIKOOPA)
-    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(statusTable)))
+    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(StatusTable)))
     EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 32)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_TYPE_CHANGED, TRUE)
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)

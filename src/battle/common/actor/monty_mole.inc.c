@@ -3,19 +3,19 @@
 #include "script_api/battle.h"
 #include "sprite/npc/MontyMole.h"
 
-extern s32 N(idleAnimations)[];
-extern s32 N(idleAnimations2)[];
+extern s32 N(IdleAnimations)[];
+extern s32 N(IdleAnimations2)[];
 extern EvtScript N(init);
 extern EvtScript N(takeTurn);
 extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
 
-s32 N(defenseTable)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable)[] = {
+s32 N(StatusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 90,
@@ -47,8 +47,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -2, 16 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -7 },
@@ -59,8 +59,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, -15 },
         .targetOffset = { -2, 12 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -7 },
@@ -71,8 +71,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations2),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations2),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -87,7 +87,7 @@ ActorBlueprint NAMESPACE = {
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
     .initScript = &N(init),
-    .statusTable = N(statusTable),
+    .statusTable = N(StatusTable),
     .escapeChance = 80,
     .airLiftChance = 70,
     .hurricaneChance = 50,
@@ -102,7 +102,7 @@ ActorBlueprint NAMESPACE = {
     .statusMessageOffset = { 10, 20 },
 };
 
-s32 N(idleAnimations)[] = {
+s32 N(IdleAnimations)[] = {
     STATUS_NORMAL,    ANIM_MontyMole_Anim01,
     STATUS_STONE,     ANIM_MontyMole_Anim00,
     STATUS_SLEEP,     ANIM_MontyMole_Anim14,
@@ -115,18 +115,18 @@ s32 N(idleAnimations)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations2)[] = {
+s32 N(IdleAnimations2)[] = {
     STATUS_NORMAL,    ANIM_MontyMole_Anim0F,
     STATUS_END,
 };
 
-s32 N(idleAnimations_hole)[] = {
+s32 N(IdleAnimations_hole)[] = {
     STATUS_NORMAL,    ANIM_MontyMole_Anim12,
     STATUS_END,
 };
 
 
-s32 N(idleAnimations_unused)[] = {
+s32 N(IdleAnimations_unused)[] = {
     STATUS_NORMAL,    ANIM_MontyMole_Anim06,
     STATUS_END,
 };
@@ -138,7 +138,7 @@ ActorPartBlueprint N(parts_hole)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_hole),
+        .idleAnimations = N(IdleAnimations_hole),
         .defenseTable = NULL,
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
@@ -301,7 +301,7 @@ EvtScript N(handleEvent) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MontyMole_Anim08)
             EVT_WAIT(15)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_TARGET_ONLY | ACTOR_FLAG_NO_DMG_APPLY, TRUE)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_hole)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_hole)))
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_SET_CONST(LVar0, 1)

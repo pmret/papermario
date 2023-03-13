@@ -816,7 +816,7 @@ s32 is_actor_hp_bar_visible(Actor*);
 void sin_cos_rad(f32 rad, f32* outSinTheta, f32* outCosTheta);
 
 void load_font(s32 font);
-#if VERSION_CN
+#if VERSION_IQUE
 void load_font_data(Addr offset, u32 size, void* dest);
 #else
 void load_font_data(Addr offset, u16 size, void* dest);
@@ -1021,7 +1021,7 @@ void status_menu_start_blinking_sp(void);
 void status_menu_stop_blinking_fp(void);
 void status_menu_stop_blinking_hp(void);
 void status_menu_stop_blinking_sp(void);
-void status_menu_start_blinking_sp_bars(s8 numBarsToBlink);
+void status_menu_start_blinking_sp_bars(s32 numBarsToBlink);
 void status_menu_draw_number(s32 iconID, s32 x, s32 y, s32 value, s32 numDigits);
 void status_menu_draw_stat(s32 id, s32 x, s32 y, s32, s32);
 void set_background_size(s16, s16, s16, s16);

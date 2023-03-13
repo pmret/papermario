@@ -453,7 +453,7 @@ void func_80240DA4_9087D4(void) {
         f64 uly = baseY + (fullHeight * 0.5) - (D_802417D0_909200 * 0.5);
         f64 lrx = baseX + (fullWidth * 0.5) + (D_802417CC_9091FC * 0.5);
         f64 lry = baseY + (fullHeight * 0.5) + (D_802417D0_909200 * 0.5);
-        gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, ulx, uly, lrx, lry);
+        gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, ulx, uly, lrx, lry);
         draw_box(DRAW_FLAG_NO_CLIP, &D_802417D8_909208, ulx, uly, 0, D_802417CC_9091FC, D_802417D0_909200, 180, 0, 1.0f, 1.0f,
                  0.0f, 0.0f, 0.0f, NULL, NULL, NULL, 320, 240, NULL);
     }
@@ -468,23 +468,23 @@ EvtScript N(EVS_Scene_EndOfChapter) = {
     EVT_END_THREAD
     EVT_WAIT(1)
     EVT_THREAD
-        EVT_CALL(N(AddCardAngularVelocity), 10)
+        EVT_CALL(N(AddCardAngularVelocity), 10 / DT)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(N(AccelerateCardSpin), 20, 150)
+        EVT_CALL(N(AccelerateCardSpin), 20, 150 * DT)
     EVT_END_THREAD
-    EVT_CALL(N(MakeCardFloatUpward), 5, 0, 60, 150)
+    EVT_CALL(N(MakeCardFloatUpward), 5, 0, 60, 150 * DT)
     EVT_WAIT(30)
-    EVT_CALL(N(ShowRadialShimmer), 1, 120)
-    EVT_CALL(N(FadeInSpiritNpc), 60)
-    EVT_WAIT(30)
+    EVT_CALL(N(ShowRadialShimmer), 1, 120 * DT)
+    EVT_CALL(N(FadeInSpiritNpc), 60 * DT)
+    EVT_WAIT(30 * DT)
     EVT_CALL(N(FlashScreenWhite))
-    EVT_CALL(N(SpinDownStarSpirit), 1800, 100)
+    EVT_CALL(N(SpinDownStarSpirit), 1800, 100 * DT)
     EVT_CALL(N(EndOfChapterBounceIn), 36, 0, 55, 60)
     EVT_THREAD
         EVT_CALL(N(AddCardAngularVelocity), 0)
     EVT_END_THREAD
-    EVT_WAIT(60)
+    EVT_WAIT(60 * DT)
     EVT_SET(MF_Unk_0B, TRUE)
     EVT_WAIT(1)
     EVT_CALL(SetNpcAnimation, NPC_StarSpirit, ENEMY_ANIM_8)
@@ -510,7 +510,7 @@ EvtScript N(EVS_Scene_EndOfChapter) = {
     EVT_END_SWITCH
     EVT_CALL(ShowMessageAtScreenPos, LVar1, 160, 40)
     EVT_CALL(N(ShowMessagesBehindCurtains))
-    EVT_WAIT(15)
+    EVT_WAIT(15 * DT)
     EVT_SET(AF_JAN01_TreeDrop_StarPiece, TRUE)
     EVT_RETURN
     EVT_END

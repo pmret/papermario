@@ -12,12 +12,12 @@ Gfx* D_E00C6C9C[] = {
     D_09001B70_3CF250, D_09001B70_3CF250, D_09001B70_3CF250, NULL, NULL
 };
 
-void fx_63_init(EffectInstance* effect);
-void fx_63_update(EffectInstance* effect);
-void fx_63_render(EffectInstance* effect);
-void fx_63_appendGfx(void* effect);
+void effect_63_init(EffectInstance* effect);
+void effect_63_update(EffectInstance* effect);
+void effect_63_render(EffectInstance* effect);
+void effect_63_appendGfx(void* effect);
 
-EffectInstance* fx_63_main(
+EffectInstance* effect_63_main(
     s32 arg0,
     f32 arg1,
     f32 arg2,
@@ -43,9 +43,9 @@ EffectInstance* fx_63_main(
         numParts = 1;
     }
 
-    bpPtr->init = fx_63_init;
-    bpPtr->update = fx_63_update;
-    bpPtr->renderWorld = fx_63_render;
+    bpPtr->init = effect_63_init;
+    bpPtr->update = effect_63_update;
+    bpPtr->renderWorld = effect_63_render;
     bpPtr->unk_00 = 0;
     bpPtr->unk_14 = NULL;
     bpPtr->effectID = EFFECT_63;
@@ -125,10 +125,10 @@ EffectInstance* fx_63_main(
     return effect;
 }
 
-void fx_63_init(EffectInstance* effect) {
+void effect_63_init(EffectInstance* effect) {
 }
 
-void fx_63_update(EffectInstance* effect) {
+void effect_63_update(EffectInstance* effect) {
     Effect63FXData* part = effect->data.unk_63;
     s32 unk_00 = part->unk_00;
     s32 unk_24;
@@ -146,7 +146,7 @@ void fx_63_update(EffectInstance* effect) {
     part->unk_24++;
     if (part->unk_20 == 1 && unk_00 == 1) {
         shim_load_effect(EFFECT_63);
-        fx_63_main(2, part->unk_04, part->unk_08, part->unk_0C, part->unk_10, part->unk_14, part->unk_18, 1.0f, 32, 32);
+        effect_63_main(2, part->unk_04, part->unk_08, part->unk_0C, part->unk_10, part->unk_14, part->unk_18, 1.0f, 32, 32);
     }
 
     if (part->unk_20 < 0) {
@@ -160,7 +160,7 @@ void fx_63_update(EffectInstance* effect) {
         case 0:
             if (!(unk_24 & (1 | 2))) {
                 shim_load_effect(EFFECT_63);
-                fx_63_main(1, part->unk_04, part->unk_08, part->unk_0C, part->unk_10, part->unk_14, part->unk_18, 1.0f, part->unk_1C, part->unk_1C);
+                effect_63_main(1, part->unk_04, part->unk_08, part->unk_0C, part->unk_10, part->unk_14, part->unk_18, 1.0f, part->unk_1C, part->unk_1C);
             }
             break;
         case 1:
@@ -194,11 +194,11 @@ void fx_63_update(EffectInstance* effect) {
     }
 }
 
-void fx_63_render(EffectInstance* effect) {
+void effect_63_render(EffectInstance* effect) {
     RenderTask renderTask;
     RenderTask* retTask;
 
-    renderTask.appendGfx = fx_63_appendGfx;
+    renderTask.appendGfx = effect_63_appendGfx;
     renderTask.appendGfxArg = effect;
     renderTask.distance = 10;
     renderTask.renderMode = RENDER_MODE_2D;
@@ -207,7 +207,7 @@ void fx_63_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
-void fx_63_appendGfx(void* effect) {
+void effect_63_appendGfx(void* effect) {
     Effect63FXData* part = ((EffectInstance*)effect)->data.unk_63;
     Camera* camera = &gCameras[gCurrentCameraID];
     s32 unk_34 = part->unk_34;
@@ -221,11 +221,11 @@ void fx_63_appendGfx(void* effect) {
     s32 i;
 
     if (part->unk_00 != 0) {
-        gDPPipeSync(gMasterGfxPos++);
-        gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, part->unk_28, part->unk_2C, part->unk_30, unk_34);
-        gDPSetEnvColor(gMasterGfxPos++, part->unk_38, part->unk_3C, part->unk_40, part->unk_44);
-        gSPDisplayList(gMasterGfxPos++, D_E00C6C9C[unk_00]);
+        gDPPipeSync(gMainGfxPos++);
+        gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, part->unk_28, part->unk_2C, part->unk_30, unk_34);
+        gDPSetEnvColor(gMainGfxPos++, part->unk_38, part->unk_3C, part->unk_40, part->unk_44);
+        gSPDisplayList(gMainGfxPos++, D_E00C6C9C[unk_00]);
 
         for (i = 0; i < ((EffectInstance*)effect)->numParts; i++, part++) {
             part->unk_4C += part->unk_54;
@@ -251,18 +251,18 @@ void fx_63_appendGfx(void* effect) {
             shim_guMtxCatF(sp58, sp18, sp18);
             shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-            gSPMatrix(gMasterGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+            gSPMatrix(gMainGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
             shim_guScaleF(sp18, part->unk_70, part->unk_6C, 1.0f);
             shim_guRotateF(sp58, part->unk_74, 0.0f, 0.0f, 1.0f);
             shim_guMtxCatF(sp58, sp18, sp18);
             shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-            gDPSetTileSize(gMasterGfxPos++, 1, tempX, tempY, (tempX + 0x3F) * 4, (tempY + 0xF) * 4);
-            gSPDisplayList(gMasterGfxPos++, D_E00C6C90[unk_00]);
-            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+            gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+            gDPSetTileSize(gMainGfxPos++, 1, tempX, tempY, (tempX + 0x3F) * 4, (tempY + 0xF) * 4);
+            gSPDisplayList(gMainGfxPos++, D_E00C6C90[unk_00]);
+            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
         }
     }
 }

@@ -193,19 +193,19 @@ void cold_breath_appendGfx(void* effect) {
     s32 envAlpha;
     s32 cond;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     shim_guTranslateF(sp20, data->unk_04, data->unk_08, data->unk_0C);
     shim_guScaleF(sp60, data->unk_40, data->unk_40, data->unk_40);
     shim_guMtxCatF(sp60, sp20, sp20);
     shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPMatrix(gMasterGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->unk_18, data->unk_1C, data->unk_20, 0.5 * unk24);
-    gDPSetAlphaDither(gMasterGfxPos++, G_AD_NOISE);
-    gSPDisplayList(gMasterGfxPos++, D_E00DE84C[unk00]);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, data->unk_18, data->unk_1C, data->unk_20, 0.5 * unk24);
+    gDPSetAlphaDither(gMainGfxPos++, G_AD_NOISE);
+    gSPDisplayList(gMainGfxPos++, D_E00DE84C[unk00]);
 
     unkIndex = (unk14 < 30 ? unk14 : 29) + unk00 * 30;
     temp1 = D_E00DE96C[unkIndex];
@@ -214,7 +214,7 @@ void cold_breath_appendGfx(void* effect) {
 
     shim_guPositionF(sp20, 0.0f, 0.0f, -temp1, temp2 * 0.01f, temp3, 0.0f, 0.0f);
     shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
     temp_f32 = D_E00DE910[unkIndex] * 5.0f / 256.0f;
     temp_s32 = temp_f32;
@@ -223,16 +223,16 @@ void cold_breath_appendGfx(void* effect) {
     cond = temp_s32 >= 4;
     if (temp_s32 < 5) {
         if (cond) {
-            gDPSetTileSize(gMasterGfxPos++, 1, 0, 0, 0, 0);
+            gDPSetTileSize(gMainGfxPos++, 1, 0, 0, 0, 0);
         } else {
-            gDPSetTileSize(gMasterGfxPos++, 1, 0, 0, 31 << 2, 127 << 2);
+            gDPSetTileSize(gMainGfxPos++, 1, 0, 0, 31 << 2, 127 << 2);
         }
-        gDPSetEnvColor(gMasterGfxPos++, data->unk_28, data->unk_2C, data->unk_30, envAlpha);
-        gSPDisplayList(gMasterGfxPos++, D_E00DE810[unk00][temp_s32]);
+        gDPSetEnvColor(gMainGfxPos++, data->unk_28, data->unk_2C, data->unk_30, envAlpha);
+        gSPDisplayList(gMainGfxPos++, D_E00DE810[unk00][temp_s32]);
     }
 
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-    gDPSetAlphaDither(gMasterGfxPos++, G_AD_DISABLE);
-    gDPPipeSync(gMasterGfxPos++);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+    gDPSetAlphaDither(gMainGfxPos++, G_AD_DISABLE);
+    gDPPipeSync(gMainGfxPos++);
 }

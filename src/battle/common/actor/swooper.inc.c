@@ -3,18 +3,18 @@
 #include "script_api/battle.h"
 #include "sprite/npc/Swooper.h"
 
-extern s32 N(idleAnimations)[];
+extern s32 N(IdleAnimations)[];
 extern EvtScript N(init);
 extern EvtScript N(takeTurn);
 extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
 
-s32 N(defenseTable)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable)[] = {
+s32 N(StatusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 80,
@@ -46,8 +46,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 29 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 1, 15 },
@@ -62,7 +62,7 @@ ActorBlueprint NAMESPACE = {
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
     .initScript = &N(init),
-    .statusTable = N(statusTable),
+    .statusTable = N(StatusTable),
     .escapeChance = 50,
     .airLiftChance = 100,
     .hurricaneChance = 95,
@@ -77,7 +77,7 @@ ActorBlueprint NAMESPACE = {
     .statusMessageOffset = { 10, -20 },
 };
 
-s32 N(idleAnimations)[] = {
+s32 N(IdleAnimations)[] = {
     STATUS_NORMAL,    ANIM_Swooper_Anim0C,
     STATUS_STONE,     ANIM_Swooper_Anim0B,
     STATUS_SLEEP,     ANIM_Swooper_Anim0F,
@@ -90,7 +90,7 @@ s32 N(idleAnimations)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_flying)[] = {
+s32 N(IdleAnimations_flying)[] = {
     STATUS_NORMAL,    ANIM_Swooper_Anim02,
     STATUS_STONE,     ANIM_Swooper_Anim01,
     STATUS_SLEEP,     ANIM_Swooper_Anim13,
@@ -129,7 +129,7 @@ EvtScript N(returnHome) = {
             EVT_CALL(AddGoalPos, ACTOR_SELF, 0, -24, 0)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, 1, EASING_SIN_OUT)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, TRUE)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations)))
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Anim0C)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar1, 24)
@@ -269,7 +269,7 @@ EvtScript N(knockDown) = {
     EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, -10)
     EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 0, 22)
     EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_flying)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_flying)))
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, TRUE)
     EVT_CALL(HPBarToHome, ACTOR_SELF)
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
@@ -392,7 +392,7 @@ EvtScript N(handleEvent) = {
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_FIRST_STRIKE)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, FALSE)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_flying)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_flying)))
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Anim02)
             EVT_CALL(SetActorPos, ACTOR_SELF, 20, 0, 0)
             EVT_CALL(HPBarToCurrent, ACTOR_SELF)

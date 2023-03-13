@@ -85,24 +85,24 @@ API_CALLABLE(N(SpinyFlipUpdatePopup)) {
 }
 
 
-s32 N(idleAnimations)[] = {
+s32 N(IdleAnimations)[] = {
     STATUS_NORMAL,  ANIM_BattleLakilester_Walk,
     STATUS_DAZE, ANIM_BattleLakilester_Injured,
     STATUS_TURN_DONE, ANIM_BattleLakilester_Still,
     STATUS_END,
 };
 
-s32 N(idleAnimations_spiny)[] = {
+s32 N(IdleAnimations_spiny)[] = {
     STATUS_NORMAL, ANIM_BattleLakilester_Spiny,
     STATUS_END,
 };
 
-s32 N(defenseTable)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable)[] = {
+s32 N(StatusTable)[] = {
     STATUS_NORMAL, 100,
     STATUS_DEFAULT, 100,
     STATUS_SLEEP, 100,
@@ -134,8 +134,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 12, 30 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -146,8 +146,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_spiny),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations_spiny),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -162,7 +162,7 @@ ActorBlueprint NAMESPACE = {
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
     .initScript = &N(init),
-    .statusTable = N(statusTable),
+    .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,

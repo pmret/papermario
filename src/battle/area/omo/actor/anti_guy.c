@@ -5,18 +5,18 @@
 
 #define NAMESPACE b_area_omo_anti_guy
 
-extern s32 N(idleAnimations_80221A14)[];
+extern s32 N(IdleAnimations_80221A14)[];
 extern EvtScript N(init_80221A60);
 extern EvtScript N(takeTurn_802233AC);
 extern EvtScript N(idle_80221AAC);
 extern EvtScript N(handleEvent_80221C20);
 
-s32 N(defenseTable_80221910)[] = {
+s32 N(DefenseTable_80221910)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_8022191C)[] = {
+s32 N(StatusTable_8022191C)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 50,
@@ -45,15 +45,15 @@ enum PartIDs {
     PT_MAIN     = 1,
 };
 
-ActorPartBlueprint N(partsTable_802219C8)[] = {
+ActorPartBlueprint N(PartsTable_802219C8)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80221A14),
-        .defenseTable = N(defenseTable_80221910),
+        .idleAnimations = N(IdleAnimations_80221A14),
+        .defenseTable = N(DefenseTable_80221910),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -1, -10 },
@@ -65,10 +65,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_ANTI_GUY,
     .level = 42,
     .maxHP = 50,
-    .partCount = ARRAY_COUNT(N(partsTable_802219C8)),
-    .partsData = N(partsTable_802219C8),
+    .partCount = ARRAY_COUNT( N(PartsTable_802219C8)),
+    .partsData = N(PartsTable_802219C8),
     .initScript = &N(init_80221A60),
-    .statusTable = N(statusTable_8022191C),
+    .statusTable = N(StatusTable_8022191C),
     .escapeChance = 50,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -83,7 +83,7 @@ ActorBlueprint NAMESPACE = {
     .statusMessageOffset = { 10, 20 },
 };
 
-s32 N(idleAnimations_80221A14)[] = {
+s32 N(IdleAnimations_80221A14)[] = {
     STATUS_NORMAL,    ANIM_ShyGuy_Black_Anim01,
     STATUS_STONE,     ANIM_ShyGuy_Black_Anim00,
     STATUS_SLEEP,     ANIM_ShyGuy_Black_Anim12,

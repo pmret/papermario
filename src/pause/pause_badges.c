@@ -10,7 +10,7 @@ void pause_badges_cleanup(MenuPanel* panel);
 
 static s16 gPauseBadgesItemIds[128];
 static s32 gPauseBadgesCurrentPage;
-#if !VERSION_CN
+#if !VERSION_IQUE
 static s32 D_80270284;
 #endif
 static PauseItemPage gPauseBadgesPages[20];
@@ -25,7 +25,7 @@ static s32 gPauseBadgesTargetScrollIndex;
 static s32 gPauseBadgesLevel;
 static s32 gPauseBadgesCurrentTab;
 static s32 gPauseBadgesShowNotEnoughBP;
-#if !VERSION_CN
+#if !VERSION_IQUE
 static s32 D_802703A4;
 #endif
 static s32 gPauseBadgesIconIDs[22];
@@ -35,7 +35,7 @@ static s32 gPauseBadgesIconIDs[22];
 // Invalid badge ID filled in unused slots of gPauseBadgesItemIds
 #define BADGE_INVALID 0x7FFF
 
-#if VERSION_CN
+#if VERSION_IQUE
 #define OFFSET_1_X 47
 #define OFFSET_1_Y 82
 #define OFFSET_2_X 10
@@ -354,7 +354,7 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
     if (y2 >= SCREEN_HEIGHT - 1) {
         y2 = SCREEN_HEIGHT - 1;
     }
-    gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x1, y1, x2, y2);
+    gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, x1, y1, x2, y2);
 
     badgeIndex = 0;
     for (i = 0; i < 3; i++) {
@@ -495,12 +495,12 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
                     orbColorG1 = 255;
                     orbColorB1 = 100;
 
-                    gSPDisplayList(gMasterGfxPos++, gPauseDLOrbs);
-                    gDPSetTextureFilter(gMasterGfxPos++, G_TF_BILERP);
+                    gSPDisplayList(gMainGfxPos++, gPauseDLOrbs);
+                    gDPSetTextureFilter(gMainGfxPos++, G_TF_BILERP);
 
                     if (isEquipped == 0) {
                         for (j = 0; j < numOrbs; j++) {
-                            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 227, 227, 227, 255);
+                            gDPSetPrimColor(gMainGfxPos++, 0, 0, 227, 227, 227, 255);
                             orbX = baseX + 235 + pause_badges_scroll_offset_x(posX) + 1 + (j % 5) * 6;
                             orbY = baseY + 17 + pause_badges_scroll_offset_y(posY) + orbOffsetY;
                             if (numOrbs >= 5) {
@@ -509,9 +509,9 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
                             pause_badges_draw_bp_orbs(0, orbX, orbY);
                         }
 
-                        gDPPipeSync(gMasterGfxPos++);
-                        gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
-                        gDPSetPrimColor(gMasterGfxPos++, 0, 0, orbColorR1, orbColorG1, orbColorB1, 128);
+                        gDPPipeSync(gMainGfxPos++);
+                        gDPSetRenderMode(gMainGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
+                        gDPSetPrimColor(gMainGfxPos++, 0, 0, orbColorR1, orbColorG1, orbColorB1, 128);
 
                         for (j = 0; j < numOrbs; j++) {
                             if (j < bpAvailable) {
@@ -524,7 +524,7 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
                             }
                         }
                     } else {
-                        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 255, 100, 255);
+                        gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 255, 100, 255);
                         for (j = 0; j < numOrbs; j++) {
                             orbX = baseX + 235 + pause_badges_scroll_offset_x(posX) + 1 + (j % 5) * 6;
                             orbY = baseY + 17 + pause_badges_scroll_offset_y(posY) + orbOffsetY;
@@ -533,7 +533,7 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
                             }
                             pause_badges_draw_bp_orbs(2, orbX, orbY);
                         }
-                        gDPPipeSync(gMasterGfxPos++);
+                        gDPPipeSync(gMainGfxPos++);
                     }
                 }
             }
@@ -544,7 +544,7 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
     y1 = baseY + 1;
     x2 = baseX + width - 1;
     y2 = baseY + height - 1;
-    gDPPipeSync(gMasterGfxPos++);
+    gDPPipeSync(gMainGfxPos++);
 
     if (x1 <= 0) {
         x1 = 1;
@@ -564,7 +564,7 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
         y2 = SCREEN_HEIGHT - 1;
     }
 
-    gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, x1, y1, x2, y2);
+    gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, x1, y1, x2, y2);
 
     if (gPauseMenuCurrentTab == 2 && gPauseBadgesLevel == 1) {
         if (gPauseBadgesCurrentPage > 0) {
@@ -595,37 +595,37 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
     orbColorG = 255;
     orbColorB = 100;
     maxBP = playerData->maxBP;
-    gSPDisplayList(gMasterGfxPos++, gPauseDLOrbs);
-    gDPSetTextureFilter(gMasterGfxPos++, G_TF_BILERP);
+    gSPDisplayList(gMainGfxPos++, gPauseDLOrbs);
+    gDPSetTextureFilter(gMainGfxPos++, G_TF_BILERP);
     for (orbIndex = 0; orbIndex < maxBP; orbIndex++) {
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 227, 227, 227, 255);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, 227, 227, 227, 255);
         pause_badges_draw_bp_orbs(0, baseX + 11 + (orbIndex % 10) * 6, baseY + 92 + (orbIndex / 10) * 8);
     }
 
-    gDPPipeSync(gMasterGfxPos++);
+    gDPPipeSync(gMainGfxPos++);
     if (canBeEquipped) {
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, orbColorR, orbColorG, orbColorB, 255);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, orbColorR, orbColorG, orbColorB, 255);
         for (orbIndex = 0; orbIndex < bpAvailable - costBP; orbIndex++) {
             pause_badges_draw_bp_orbs(2, baseX + 11 +(orbIndex % 10) * 6, baseY + 92 + (orbIndex / 10) * 8);
         }
 
-        gDPPipeSync(gMasterGfxPos++);
+        gDPPipeSync(gMainGfxPos++);
         orbBlinkValue = (sin_deg(gGameStatusPtr->frameCounter * 15) + 1.0f) * 0.2 + 0.5;
-        gDPSetRenderMode(gMasterGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
+        gDPSetRenderMode(gMainGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
 
         orbBlinkOpacity = orbBlinkValue * 255.0f;
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, orbColorR, orbColorG, orbColorB, orbBlinkOpacity);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, orbColorR, orbColorG, orbColorB, orbBlinkOpacity);
 
         for (orbIndex = bpAvailable - costBP; orbIndex < bpAvailable; orbIndex++) {
             pause_badges_draw_bp_orbs(2, baseX + 11 +(orbIndex % 10) * 6, baseY + 92 + (orbIndex / 10) * 8);
         }
-        gDPPipeSync(gMasterGfxPos++);
+        gDPPipeSync(gMainGfxPos++);
     } else {
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, orbColorR, orbColorG, orbColorB, 255);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, orbColorR, orbColorG, orbColorB, 255);
         for (orbIndex = 0; orbIndex < bpAvailable; orbIndex++) {
             pause_badges_draw_bp_orbs(2, baseX + 11 + (orbIndex % 10) * 6, baseY + 92 + (orbIndex / 10) * 8);
         }
-        gDPPipeSync(gMasterGfxPos++);
+        gDPPipeSync(gMainGfxPos++);
     }
 
     draw_box(DRAW_FLAG_NO_CLIP, &gPauseWS_13, gPauseBadgesCurrentTab == 0 ? baseX + 9 : baseX, baseY + 7, 0,

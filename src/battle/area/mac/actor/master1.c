@@ -5,7 +5,7 @@
 
 #define NAMESPACE b_area_mac_master1
 
-s32 N(idleAnimations_8022A260)[] = {
+s32 N(IdleAnimations_8022A260)[] = {
     STATUS_NORMAL,    ANIM_TheMaster_Walk,
     STATUS_STONE,     ANIM_TheMaster_Still,
     STATUS_SLEEP,     ANIM_TheMaster_Sleep,
@@ -18,12 +18,12 @@ s32 N(idleAnimations_8022A260)[] = {
     STATUS_END,
 };
 
-s32 N(defenseTable_8022A2AC)[] = {
+s32 N(DefenseTable_8022A2AC)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_8022A2B8)[] = {
+s32 N(StatusTable_8022A2B8)[] = {
     STATUS_NORMAL, 50,
     STATUS_DEFAULT, 50,
     STATUS_SLEEP, 40,
@@ -48,15 +48,15 @@ s32 N(statusTable_8022A2B8)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_8022A364)[] = {
+ActorPartBlueprint N(PartsTable_8022A364)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -5, 28 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_8022A260),
-        .defenseTable = N(defenseTable_8022A2AC),
+        .idleAnimations = N(IdleAnimations_8022A260),
+        .defenseTable = N(DefenseTable_8022A2AC),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 2, -7 },
@@ -70,10 +70,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_THE_MASTER_1,
     .level = 0,
     .maxHP = 50,
-    .partCount = ARRAY_COUNT(N(partsTable_8022A364)),
-    .partsData = N(partsTable_8022A364),
+    .partCount = ARRAY_COUNT( N(PartsTable_8022A364)),
+    .partsData = N(PartsTable_8022A364),
     .initScript = &N(init_8022A3B0),
-    .statusTable = N(statusTable_8022A2B8),
+    .statusTable = N(StatusTable_8022A2B8),
     .escapeChance = 100,
     .airLiftChance = 0,
     .hurricaneChance = 0,

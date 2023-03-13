@@ -106,26 +106,26 @@ void shiny_flare_appendGfx(void* effect) {
     Matrix4f sp10;
     Matrix4f sp50;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     shim_guTranslateF(sp10, data->pos.x, data->pos.y, data->pos.z);
     shim_guScaleF(sp50, scale, scale, scale);
     shim_guMtxCatF(sp50, sp10, sp10);
     shim_guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPMatrix(gMasterGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gSPDisplayList(gMasterGfxPos++, D_09000240_3D79B0);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->unk_18, data->unk_1C, data->unk_20, unk_24);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gSPDisplayList(gMainGfxPos++, D_09000240_3D79B0);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, data->unk_18, data->unk_1C, data->unk_20, unk_24);
 
     idx = data->lifeTime * 3;
 
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0,
+    gDPSetPrimColor(gMainGfxPos++, 0, 0,
         D_E00DA500[idx % ARRAY_COUNT(D_E00DA500)    ],
         D_E00DA500[idx % ARRAY_COUNT(D_E00DA500) + 1],
         D_E00DA500[idx % ARRAY_COUNT(D_E00DA500) + 2],
         unk_24);
-    gSPDisplayList(gMasterGfxPos++, D_090002E0_3D7A50);
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gSPDisplayList(gMainGfxPos++, D_090002E0_3D7A50);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }

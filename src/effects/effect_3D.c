@@ -4,12 +4,12 @@
 extern Gfx D_09000240_37D3C0[];
 extern Gfx D_090002E8_37D468[];
 
-void fx_3D_init(EffectInstance* effect);
-void fx_3D_update(EffectInstance* effect);
-void fx_3D_render(EffectInstance* effect);
-void fx_3D_appendGfx(void* effect);
+void effect_3D_init(EffectInstance* effect);
+void effect_3D_update(EffectInstance* effect);
+void effect_3D_render(EffectInstance* effect);
+void effect_3D_appendGfx(void* effect);
 
-void fx_3D_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, s32 arg7, EffectInstance** outEffect) {
+void effect_3D_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, s32 arg7, EffectInstance** outEffect) {
     EffectBlueprint bp;
     EffectBlueprint* bpPtr = &bp;
     EffectInstance* effect;
@@ -62,9 +62,9 @@ void fx_3D_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 
                 arg6 *= 8.0f;
 
                 bpPtr->unk_00 = 0;
-                bpPtr->init = fx_3D_init;
-                bpPtr->update = fx_3D_update;
-                bpPtr->renderWorld = fx_3D_render;
+                bpPtr->init = effect_3D_init;
+                bpPtr->update = effect_3D_update;
+                bpPtr->renderWorld = effect_3D_render;
                 bpPtr->unk_14 = NULL;
                 bpPtr->effectID = EFFECT_3D;
 
@@ -111,10 +111,10 @@ void fx_3D_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 
     }
 }
 
-void fx_3D_init(EffectInstance* effect) {
+void effect_3D_init(EffectInstance* effect) {
 }
 
-void fx_3D_update(EffectInstance* effect) {
+void effect_3D_update(EffectInstance* effect) {
     Effect3DFXData* part = effect->data.unk_3D;
     s32 unk_04 = part->unk_04;
     s32 unk_5C;
@@ -198,11 +198,11 @@ void fx_3D_update(EffectInstance* effect) {
     }
 }
 
-void fx_3D_render(EffectInstance* effect) {
+void effect_3D_render(EffectInstance* effect) {
     RenderTask renderTask;
     RenderTask* retTask;
 
-    renderTask.appendGfx = fx_3D_appendGfx;
+    renderTask.appendGfx = effect_3D_appendGfx;
     renderTask.appendGfxArg = effect;
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_2D;
@@ -214,24 +214,24 @@ void fx_3D_render(EffectInstance* effect) {
 void func_E007A884(void) {
 }
 
-void fx_3D_appendGfx(void* effect) {
+void effect_3D_appendGfx(void* effect) {
     Effect3DFXData* part = ((EffectInstance*)effect)->data.unk_3D;
     Matrix4f sp18;
     Matrix4f sp58;
     s32 i;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
-    gSPDisplayList(gMasterGfxPos++, D_09000240_37D3C0);
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPDisplayList(gMainGfxPos++, D_09000240_37D3C0);
 
     shim_guTranslateF(sp18, part->pos.x, part->pos.y, part->pos.z);
     shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     part++;
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, part++) {
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 200, 255, 255, part->unk_58);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, 200, 255, 255, part->unk_58);
 
         shim_guTranslateF(sp18, part->pos.x, part->pos.y, part->pos.z);
         shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
@@ -242,11 +242,11 @@ void fx_3D_appendGfx(void* effect) {
         shim_guMtxCatF(sp58, sp18, sp18);
         shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, D_090002E8_37D468);
-        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+        gSPDisplayList(gMainGfxPos++, D_090002E8_37D468);
+        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     }
 
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-    gDPPipeSync(gMasterGfxPos++);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+    gDPPipeSync(gMainGfxPos++);
 }

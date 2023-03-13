@@ -52,13 +52,13 @@ void boot_main(void* data) {
     crash_screen_init();
 #endif
 
-#if !VERSION_CN
+#if !VERSION_IQUE
     is_debug_init();
 #endif
     nuGfxInit();
     gGameStatusPtr->contBitPattern = nuContInit();
 
-#if VERSION_CN
+#if VERSION_IQUE
     create_audio_system();
     load_engine_data();
 #else
@@ -118,23 +118,23 @@ void gfx_task_main(void) {
 
     gMatrixListPos = 0;
     gDisplayContext = &D_80164000[gCurrentDisplayContextIndex];
-    gMasterGfxPos = gDisplayContext->mainGfx;
+    gMainGfxPos = gDisplayContext->mainGfx;
     temp = D_80073E04;
     gfx_init_state();
 
-    gDPSetDepthImage(gMasterGfxPos++, OS_K0_TO_PHYSICAL(nuGfxZBuffer));
-    gDPSetColorImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(temp));
-    gDPSetScissor(gMasterGfxPos++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    gSPTexture(gMasterGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
-    gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
-    gDPSetTexturePersp(gMasterGfxPos++, G_TP_NONE);
-    gDPSetTextureLUT(gMasterGfxPos++, G_TT_NONE);
-    gDPSetRenderMode(gMasterGfxPos++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
-    gDPSetTextureFilter(gMasterGfxPos++, G_TF_POINT);
-    gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, 0, 0, 0, 0, TEXEL0, 0, 0, 0, 0, 0, 0, 0, TEXEL0);
-    gDPSetAlphaCompare(gMasterGfxPos++, G_AC_THRESHOLD);
-    gDPSetBlendColor(gMasterGfxPos++, 0, 0, 0, 127);
-    gDPLoadTextureTile_4b(gMasterGfxPos++, D_80073E10, G_IM_FMT_I, 128, 8, 0, 0, 127, 7, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPSetDepthImage(gMainGfxPos++, OS_K0_TO_PHYSICAL(nuGfxZBuffer));
+    gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(temp));
+    gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    gSPTexture(gMainGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
+    gDPSetCycleType(gMainGfxPos++, G_CYC_1CYCLE);
+    gDPSetTexturePersp(gMainGfxPos++, G_TP_NONE);
+    gDPSetTextureLUT(gMainGfxPos++, G_TT_NONE);
+    gDPSetRenderMode(gMainGfxPos++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
+    gDPSetTextureFilter(gMainGfxPos++, G_TF_POINT);
+    gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, 0, 0, 0, 0, TEXEL0, 0, 0, 0, 0, 0, 0, 0, TEXEL0);
+    gDPSetAlphaCompare(gMainGfxPos++, G_AC_THRESHOLD);
+    gDPSetBlendColor(gMainGfxPos++, 0, 0, 0, 127);
+    gDPLoadTextureTile_4b(gMainGfxPos++, D_80073E10, G_IM_FMT_I, 128, 8, 0, 0, 127, 7, 0, G_TX_NOMIRROR | G_TX_WRAP,
                           G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
 
     for (i = 0; i < 20; i++) {
@@ -147,25 +147,25 @@ void gfx_task_main(void) {
             if (t < 0) {
                 continue;
             }
-            gSPTextureRectangle(gMasterGfxPos++, ((i * 8) + 160) * 4,
+            gSPTextureRectangle(gMainGfxPos++, ((i * 8) + 160) * 4,
                                                  ((j * 8)) * 4,
                                                  ((i * 8) + 168) * 4,
                                                  ((j * 8) + 8) * 4,
                                                  G_TX_RENDERTILE,
                                                  (t * 8) * 32, 0, 0x0400, 0x0400);
-            gSPTextureRectangle(gMasterGfxPos++, ((i * 8) + 160) * 4,
+            gSPTextureRectangle(gMainGfxPos++, ((i * 8) + 160) * 4,
                                                  (232 - (j * 8)) * 4,
                                                  ((i * 8) + 168) * 4,
                                                  (240 - (j * 8)) * 4,
                                                  G_TX_RENDERTILE,
                                                  (t * 8) * 32, 7 * 32, 0x0400, -0x0400);
-            gSPTextureRectangle(gMasterGfxPos++, (152 - (i * 8)) * 4,
+            gSPTextureRectangle(gMainGfxPos++, (152 - (i * 8)) * 4,
                                                  ((j * 8)) * 4,
                                                  (160 - (i * 8)) * 4,
                                                  ((j * 8) + 8) * 4,
                                                  G_TX_RENDERTILE,
                                                  (t * 8 + 7) * 32, 0, -0x0400, 0x0400);
-            gSPTextureRectangle(gMasterGfxPos++, (152 - (i * 8)) * 4,
+            gSPTextureRectangle(gMainGfxPos++, (152 - (i * 8)) * 4,
                                                  (232 - (j * 8)) * 4,
                                                  (160 - (i * 8)) * 4,
                                                  (240 - (j * 8)) * 4,
@@ -175,13 +175,13 @@ void gfx_task_main(void) {
     }
 
     D_80074010++;
-    gDPFullSync(gMasterGfxPos++);
-    gSPEndDisplayList(gMasterGfxPos++);
-    nuGfxTaskStart(gDisplayContext->mainGfx, (u32)(gMasterGfxPos - gDisplayContext->mainGfx) * 8, NU_GFX_UCODE_F3DEX, NU_SC_TASK_LODABLE);
+    gDPFullSync(gMainGfxPos++);
+    gSPEndDisplayList(gMainGfxPos++);
+    nuGfxTaskStart(gDisplayContext->mainGfx, (u32)(gMainGfxPos - gDisplayContext->mainGfx) * 8, NU_GFX_UCODE_F3DEX, NU_SC_TASK_LODABLE);
     gCurrentDisplayContextIndex ^= 1;
 }
 
-#if VERSION_CN
+#if VERSION_IQUE
 NOP_FIX
 #endif
 

@@ -23,21 +23,21 @@ Gfx* D_E0128480[12] = {
 
 Gfx* D_E01284B0[] = { D_09000800_415860 };
 
-void fx_86_init(EffectInstance* effect);
-void fx_86_update(EffectInstance* effect);
-void fx_86_render(EffectInstance* effect);
-void fx_86_appendGfx(void* effect);
+void effect_86_init(EffectInstance* effect);
+void effect_86_update(EffectInstance* effect);
+void effect_86_render(EffectInstance* effect);
+void effect_86_appendGfx(void* effect);
 
-EffectInstance* fx_86_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5) {
+EffectInstance* effect_86_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5) {
     EffectBlueprint bp;
     EffectInstance* effect;
     Effect86FXData* data;
     Effect86FXData* part;
     s32 numParts = 1;
 
-    bp.init = fx_86_init;
-    bp.update = fx_86_update;
-    bp.renderWorld = fx_86_render;
+    bp.init = effect_86_init;
+    bp.update = effect_86_update;
+    bp.renderWorld = effect_86_render;
     bp.unk_00 = 0;
     bp.unk_14 = NULL;
     bp.effectID = EFFECT_86;
@@ -73,10 +73,10 @@ EffectInstance* fx_86_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32
     return effect;
 }
 
-void fx_86_init(EffectInstance* effect) {
+void effect_86_init(EffectInstance* effect) {
 }
 
-void fx_86_update(EffectInstance* effect) {
+void effect_86_update(EffectInstance* effect) {
     Effect86FXData* data = effect->data.unk_86;
 
     if (effect->flags & 0x10) {
@@ -94,11 +94,11 @@ void fx_86_update(EffectInstance* effect) {
     }
 }
 
-void fx_86_render(EffectInstance* effect) {
+void effect_86_render(EffectInstance* effect) {
     RenderTask renderTask;
     RenderTask* retTask;
 
-    renderTask.appendGfx = fx_86_appendGfx;
+    renderTask.appendGfx = effect_86_appendGfx;
     renderTask.appendGfxArg = effect;
     renderTask.distance = 10;
     renderTask.renderMode = RENDER_MODE_2D;
@@ -107,7 +107,7 @@ void fx_86_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
-void fx_86_appendGfx(void* effect) {
+void effect_86_appendGfx(void* effect) {
     Matrix4f sp10;
     Matrix4f sp50;
     Effect86FXData* part = ((EffectInstance*)effect)->data.unk_86;
@@ -115,19 +115,19 @@ void fx_86_appendGfx(void* effect) {
     s32 primAlpha = part->unk_24;
     s32 dlistIdx = part->unk_00;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     shim_guTranslateF(sp10, part->unk_04, part->unk_08, part->unk_0C);
     shim_guScaleF(sp50, part->unk_34, part->unk_34, part->unk_34);
     shim_guMtxCatF(sp50, sp10, sp10);
     shim_guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPMatrix(gMasterGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, part->unk_18, part->unk_1C, part->unk_20, primAlpha);
-    gDPSetEnvColor(gMasterGfxPos++, part->unk_28, part->unk_2C, part->unk_30, 0);
-    gSPDisplayList(gMasterGfxPos++, D_E01284B0[0]);
-    gSPDisplayList(gMasterGfxPos++, D_E0128480[dlistIdx % ARRAY_COUNT(D_E0128480)]);
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, part->unk_18, part->unk_1C, part->unk_20, primAlpha);
+    gDPSetEnvColor(gMainGfxPos++, part->unk_28, part->unk_2C, part->unk_30, 0);
+    gSPDisplayList(gMainGfxPos++, D_E01284B0[0]);
+    gSPDisplayList(gMainGfxPos++, D_E0128480[dlistIdx % ARRAY_COUNT(D_E0128480)]);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }

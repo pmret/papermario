@@ -38,22 +38,22 @@ Gfx N(Gfx_TexSetup_TitleImage)[] = {
 void worker_render_title_image(void) {
     s32 i;
 
-    gSPDisplayList(gMasterGfxPos++, N(Gfx_TexSetup_TitleImage));
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, TitlePrimAlpha);
-    gDPPipeSync(gMasterGfxPos++);
+    gSPDisplayList(gMainGfxPos++, N(Gfx_TexSetup_TitleImage));
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, TitlePrimAlpha);
+    gDPPipeSync(gMainGfxPos++);
 
     for (i = 0; i < 56; i++) {
-        gDPLoadTextureTile(gMasterGfxPos++, &TitleImage[1600 * i], G_IM_FMT_RGBA, G_IM_SIZ_32b, 200, 112,
+        gDPLoadTextureTile(gMainGfxPos++, &TitleImage[1600 * i], G_IM_FMT_RGBA, G_IM_SIZ_32b, 200, 112,
                            0, 0, 199, 1, 0,
                            G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
-        gSPTextureRectangle(gMasterGfxPos++,
+        gSPTextureRectangle(gMainGfxPos++,
             /* ulx */ 60 * 4,
             /* uly */ (i * 2 + TitlePosY) * 4,
             /* lrx */ 260 * 4,
             /* lry */ ((i * 2 + 2) + TitlePosY) * 4,
             G_TX_RENDERTILE, 0, 0, 1024, 1024);
     }
-    gDPPipeSync(gMasterGfxPos++);
+    gDPPipeSync(gMainGfxPos++);
 }
 
 API_CALLABLE(N(LoadTitleImage)) {
@@ -68,6 +68,7 @@ API_CALLABLE(N(LoadTitleImage)) {
     return ApiStatus_DONE2;
 }
 
+#if !VERSION_PAL
 API_CALLABLE(N(AwaitConfirmInput)) {
     u32 pressedButtons = gGameStatusPtr->pressedButtons[0];
     if (pressedButtons & (BUTTON_A | BUTTON_START)) {
@@ -76,6 +77,7 @@ API_CALLABLE(N(AwaitConfirmInput)) {
         return ApiStatus_BLOCK;
     }
 }
+#endif
 
 API_CALLABLE(N(SetTitlePrimAlpha)) {
     TitlePrimAlpha = script->varTable[0];
@@ -89,9 +91,9 @@ API_CALLABLE(N(SetTitlePosY)) {
 
 EvtScript N(EVS_Scene_ShowTitle) = {
     EVT_CALL(N(LoadTitleImage))
-    EVT_WAIT(15)
+    EVT_WAIT(15 * DT)
     EVT_THREAD
-        EVT_CALL(MakeLerp, 0, 255, 100, EASING_CUBIC_OUT)
+        EVT_CALL(MakeLerp, 0, 255, 100 * DT, EASING_CUBIC_OUT)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
             EVT_CALL(N(SetTitlePrimAlpha))
@@ -101,7 +103,7 @@ EvtScript N(EVS_Scene_ShowTitle) = {
             EVT_END_IF
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(MakeLerp, 106, 56, 100, EASING_CUBIC_OUT)
+    EVT_CALL(MakeLerp, 106, 56, 100 * DT, EASING_CUBIC_OUT)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
         EVT_CALL(N(SetTitlePosY))
@@ -110,8 +112,8 @@ EvtScript N(EVS_Scene_ShowTitle) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_WAIT(30)
-    EVT_CALL(MakeLerp, 255, 0, 50, EASING_QUADRATIC_IN)
+    EVT_WAIT(30 * DT)
+    EVT_CALL(MakeLerp, 255, 0, 50 * DT, EASING_QUADRATIC_IN)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
         EVT_CALL(N(SetTitlePrimAlpha))
@@ -120,9 +122,9 @@ EvtScript N(EVS_Scene_ShowTitle) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_WAIT(15)
+    EVT_WAIT(15 * DT)
     EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_22"), kmr_22_ENTRY_0, TRANSITION_6)
-    EVT_WAIT(100)
+    EVT_WAIT(100 * DT)
     EVT_RETURN
     EVT_END
 };

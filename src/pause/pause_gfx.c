@@ -276,7 +276,7 @@ Gfx gPauseDLAvailable[] = {
     gsSPEndDisplayList(),
 };
 
-#if VERSION_CN
+#if VERSION_IQUE
 #undef pause_prompt_check_abilities_png_height
 #define pause_prompt_check_abilities_png_height 16
 #endif
@@ -318,7 +318,7 @@ Gfx gPauseDLSpiritsBg[] = {
     gsSPEndDisplayList(),
 };
 
-#if VERSION_CN
+#if VERSION_IQUE
 s8 gPauseMsg_17[] = { 0x8F, 0x0C, 0x75, 0x12, 0xFD };
 s8 gPauseMsg_18[] = { 0x7B, 0x0E, 0x7C, 0x0E, 0xFD };
 s8 gPauseMsg_19[] = { 0x77, 0x10, 0x74, 0x0D, 0xFD };
@@ -445,7 +445,7 @@ void pause_draw_menu_label(s32 index, s32 x, s32 y) {
         xOffset = 160;
     }
 
-    gSPDisplayList(gMasterGfxPos++, gPauseDLLabels[index]);
+    gSPDisplayList(gMainGfxPos++, gPauseDLLabels[index]);
     pause_draw_rect(x * 4, y * 4, (x + xOffset) * 4, (y + 16) * 4, 0, 0, 0, 0x400, 0x400);
 }
 

@@ -217,8 +217,8 @@ void emote_appendGfx(void* effect) {
     Matrix4f sp58;
     s32 i;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     if (type != 1) {
         shim_guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
@@ -234,9 +234,9 @@ void emote_appendGfx(void* effect) {
         shim_guMtxCatF(sp58, sp18, sp18);
         shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, D_09002170_336DE0);
-        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        gSPDisplayList(gMainGfxPos++, D_09002170_336DE0);
+        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     } else {
         if (part->unk_38 == 0) {
             for (i = 0; i < 3; i++, part++) {
@@ -249,17 +249,17 @@ void emote_appendGfx(void* effect) {
                 shim_guMtxCatF(sp58, sp18, sp18);
                 shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-                gDPSetPrimColor(gMasterGfxPos++, 0, 0, 235, 28, 0, 255);
-                gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-                gSPDisplayList(gMasterGfxPos++, D_09002578_3371E8);
-                gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+                gDPSetPrimColor(gMainGfxPos++, 0, 0, 235, 28, 0, 255);
+                gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+                gSPDisplayList(gMainGfxPos++, D_09002578_3371E8);
+                gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
             }
         }
 
         return;
     }
 
-    gSPMatrix(gMasterGfxPos++, matrix, G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, matrix, G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     unk_38 = part->unk_38;
     dlist = D_E0020CA4[type];
@@ -271,14 +271,14 @@ void emote_appendGfx(void* effect) {
             h = 16;
             uls = 128 - unk_38 * 16;
             ult = 0;
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 220, 0, 0, 255);
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, 220, 0, 0, 255);
             break;
         case 2:
             w = 32;
             h = 48;
             uls = 128 - unk_38 * 32;
             ult = 0;
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 220, 0, 0, 255);
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, 220, 0, 0, 255);
             break;
         case 3:
             w = 32;
@@ -286,7 +286,7 @@ void emote_appendGfx(void* effect) {
             uls = 128 - unk_38 * 32;
             ult = 0;
             idx = (part->unk_2C * 3) % (ARRAY_COUNT(D_E0020D94) / 3);
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, D_E0020D94[idx], D_E0020D94[idx + 1], D_E0020D94[idx + 2], 255);
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, D_E0020D94[idx], D_E0020D94[idx + 1], D_E0020D94[idx + 2], 255);
             break;
         case 4:
             w = 32;
@@ -297,14 +297,14 @@ void emote_appendGfx(void* effect) {
     }
 
     if (dlist != NULL) {
-        gSPDisplayList(gMasterGfxPos++, dlist);
+        gSPDisplayList(gMainGfxPos++, dlist);
     }
 
-    gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, uls * 4, ult * 4, (uls + w) * 4, (ult + h) * 4);
+    gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, uls * 4, ult * 4, (uls + w) * 4, (ult + h) * 4);
 
     if (dlist2 != NULL) {
-        gSPDisplayList(gMasterGfxPos++, dlist2);
+        gSPDisplayList(gMainGfxPos++, dlist2);
     }
 
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }

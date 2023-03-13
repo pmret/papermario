@@ -164,8 +164,8 @@ void flower_trail_appendGfx(void* argEffect) {
     Gfx* dlist;
     s32 i;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->graphics->data));
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->graphics->data));
 
     for (i = 0; i < effect->numParts; i++, part++) {
         if (part->alive) {
@@ -177,13 +177,13 @@ void flower_trail_appendGfx(void* argEffect) {
 
             gDisplayContext->matrixStack[gMatrixListPos] = part->transformMtx;
 
-            gDPPipeSync(gMasterGfxPos++);
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, 112, 96, 24, part->primAlpha);
-            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+            gDPPipeSync(gMainGfxPos++);
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, 112, 96, 24, part->primAlpha);
+            gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                         G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-            gSPDisplayList(gMasterGfxPos++, dlist);
-            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+            gSPDisplayList(gMainGfxPos++, dlist);
+            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
         }
     }
-    gDPPipeSync(gMasterGfxPos++);
+    gDPPipeSync(gMainGfxPos++);
 }

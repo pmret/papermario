@@ -13,7 +13,7 @@ extern EvtScript N(handleEvent);
 
 BSS s32 N(thread_dropCoin)[1];
 
-s32 N(idleAnimations)[] = {
+s32 N(IdleAnimations)[] = {
     STATUS_NORMAL,    ANIM_Bandit_Anim01,
     STATUS_STONE,     ANIM_Bandit_Anim00,
     STATUS_SLEEP,     ANIM_Bandit_Anim10,
@@ -26,7 +26,7 @@ s32 N(idleAnimations)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_holdCoin)[] = {
+s32 N(IdleAnimations_holdCoin)[] = {
     STATUS_NORMAL,    ANIM_Bandit_Anim02,
     STATUS_STONE,     ANIM_Bandit_Anim04,
     STATUS_SLEEP,     ANIM_Bandit_Anim10,
@@ -39,17 +39,17 @@ s32 N(idleAnimations_holdCoin)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_coin)[] = {
+s32 N(IdleAnimations_coin)[] = {
     STATUS_NORMAL,    ANIM_Bandit_Anim14,
     STATUS_END,
 };
 
-s32 N(defenseTable)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable)[] = {
+s32 N(StatusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 70,
@@ -81,8 +81,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -2, 28 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -12 },
@@ -93,8 +93,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 30, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_coin),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations_coin),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -108,8 +108,8 @@ ActorPartBlueprint N(parts_coin)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_coin),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations_coin),
+        .defenseTable = N(DefenseTable),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -124,7 +124,7 @@ ActorBlueprint NAMESPACE = {
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
     .initScript = &N(init),
-    .statusTable = N(statusTable),
+    .statusTable = N(StatusTable),
     .escapeChance = 40,
     .airLiftChance = 90,
     .hurricaneChance = 90,
@@ -147,7 +147,7 @@ ActorBlueprint N(coin) = {
     .partCount = ARRAY_COUNT(N(parts_coin)),
     .partsData = N(parts_coin),
     .initScript = &N(init_coin),
-    .statusTable = N(statusTable),
+    .statusTable = N(StatusTable),
     .escapeChance = 40,
     .airLiftChance = 90,
     .hurricaneChance = 90,
@@ -201,7 +201,7 @@ EvtScript N(dropCoin) = {
         EVT_CASE_EQ(0)
         EVT_CASE_EQ(1)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations)))
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, FALSE)
             EVT_CALL(SummonEnemy, EVT_PTR(N(formation_coin)), 0)
             EVT_SET(LVarA, LVar0)
@@ -659,7 +659,7 @@ EvtScript N(takeTurn) = {
                     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
                     EVT_CALL(SetGoalPos, ACTOR_SELF, LVarA, LVarB, LVarC)
                     EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
-                    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_holdCoin)))
+                    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_holdCoin)))
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bandit_Anim0E)
                     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
                     EVT_WAIT(7)

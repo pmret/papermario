@@ -4,11 +4,25 @@
 BSS EffectInstance* N(ChapterEffect);
 BSS s32 N(ChapterEffectTime);
 
-s16 N(AnimTextOffsets)[] = {
+#if VERSION_PAL
+#define CHUNK_SIZE (8)
+#else
+#define CHUNK_SIZE (10)
+#endif
+
+
+s16 N(AnimTextOffsets)[CHUNK_SIZE * 2] = {
+#if VERSION_PAL
+    310, 270, 240, 210,
+    180, 150, 120, 100,
+     80,  50,  24,  12,
+      5,   3,   2,   1,
+#else
     310, 290, 270, 250, 230,
     210, 190, 170, 150, 130, 
     110,  90,  70,  50,  32,
      16,   8,   4,   2,   1,
+#endif
 };
 
 API_CALLABLE(N(ManageEffects)) {
@@ -29,7 +43,7 @@ API_CALLABLE(N(ManageEffects)) {
 
     x = xOffset + 117;
     if (N(ChapterEffectTime) >= 0) {
-        if (N(ChapterEffectTime) < 20) {
+        if (N(ChapterEffectTime) < 2 * CHUNK_SIZE) {
             x -= N(AnimTextOffsets)[N(ChapterEffectTime)];
         }
     } else {
@@ -40,9 +54,9 @@ API_CALLABLE(N(ManageEffects)) {
     N(ChapterEffect)->data.chapterChange->chapterPos.y = y;
 
     x = xOffset + 117;
-    if (N(ChapterEffectTime) >= 10) {
-        if (N(ChapterEffectTime) < 30) {
-            y -= N(AnimTextOffsets)[N(ChapterEffectTime) - 10];
+    if (N(ChapterEffectTime) >= CHUNK_SIZE) {
+        if (N(ChapterEffectTime) < 3 * CHUNK_SIZE) {
+            y -= N(AnimTextOffsets)[N(ChapterEffectTime) - CHUNK_SIZE];
         }
     } else {
         y = -252;
@@ -51,9 +65,9 @@ API_CALLABLE(N(ManageEffects)) {
     N(ChapterEffect)->data.chapterChange->endOfPos.y = y;
 
     x = 280;
-    if (N(ChapterEffectTime) >= 20) {
-        if (N(ChapterEffectTime) < 40) {
-            x += N(AnimTextOffsets)[N(ChapterEffectTime) - 20];
+    if (N(ChapterEffectTime) >= 2 * CHUNK_SIZE) {
+        if (N(ChapterEffectTime) < 4 * CHUNK_SIZE) {
+            x += N(AnimTextOffsets)[N(ChapterEffectTime) - 2 * CHUNK_SIZE];
         }
     } else {
         x = 590;

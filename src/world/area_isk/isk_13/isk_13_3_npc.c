@@ -25,28 +25,28 @@ void N(func_80241610_990DF0)(void) {
     SpriteRasterInfo spriteRaster;
     Matrix4f transformMtx, tempMtx;
     
-    gSPViewport(gMasterGfxPos++, &cam->vp);
+    gSPViewport(gMainGfxPos++, &cam->vp);
     if (!(cam->flags & CAMERA_FLAG_ORTHO)) {
-        gSPPerspNormalize(gMasterGfxPos++, cam->perspNorm);
+        gSPPerspNormalize(gMainGfxPos++, cam->perspNorm);
     }
     guMtxF2L(cam->perspectiveMatrix, &gDisplayContext->camPerspMatrix[gCurrentCameraID]);
     
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCameraID],
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCameraID],
         G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
-    gDPPipeSync(gMasterGfxPos++);
-    gDPSetCycleType(gMasterGfxPos++, G_CYC_1CYCLE);
-    gSPClearGeometryMode(gMasterGfxPos++, G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING
+    gDPPipeSync(gMainGfxPos++);
+    gDPSetCycleType(gMainGfxPos++, G_CYC_1CYCLE);
+    gSPClearGeometryMode(gMainGfxPos++, G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING
         | G_TEXTURE_GEN | G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH);
-    gSPSetGeometryMode(gMasterGfxPos++, G_ZBUFFER | G_SHADE | G_SHADING_SMOOTH);
-    gSPTexture(gMasterGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
-    gDPSetTextureLOD(gMasterGfxPos++, G_TL_TILE);
-    gDPSetTexturePersp(gMasterGfxPos++, G_TP_PERSP);
-    gDPSetTextureFilter(gMasterGfxPos++, G_TF_BILERP);
-    gDPSetColorDither(gMasterGfxPos++, G_CD_DISABLE);
-    gDPSetTextureDetail(gMasterGfxPos++, G_TD_CLAMP);
-    gDPSetTextureConvert(gMasterGfxPos++, G_TC_FILT);
-    gDPSetCombineKey(gMasterGfxPos++, G_CK_NONE);
-    gDPSetAlphaCompare(gMasterGfxPos++, G_AC_NONE);
+    gSPSetGeometryMode(gMainGfxPos++, G_ZBUFFER | G_SHADE | G_SHADING_SMOOTH);
+    gSPTexture(gMainGfxPos++, -1, -1, 0, G_TX_RENDERTILE, G_ON);
+    gDPSetTextureLOD(gMainGfxPos++, G_TL_TILE);
+    gDPSetTexturePersp(gMainGfxPos++, G_TP_PERSP);
+    gDPSetTextureFilter(gMainGfxPos++, G_TF_BILERP);
+    gDPSetColorDither(gMainGfxPos++, G_CD_DISABLE);
+    gDPSetTextureDetail(gMainGfxPos++, G_TD_CLAMP);
+    gDPSetTextureConvert(gMainGfxPos++, G_TC_FILT);
+    gDPSetCombineKey(gMainGfxPos++, G_CK_NONE);
+    gDPSetAlphaCompare(gMainGfxPos++, G_AC_NONE);
     
     guTranslateF(transformMtx, ambush->pos.x, ambush->pos.y, ambush->pos.z);
     guRotateF(tempMtx, ambush->rot.y + gCameras[gCurrentCameraID].currentYaw + ambush->renderYaw, 0.0f, 1.0f, 0.0f);
@@ -58,7 +58,7 @@ void N(func_80241610_990DF0)(void) {
     guScaleF(tempMtx, ambush->scale.x, ambush->scale.y, ambush->scale.z);
     guMtxCatF(tempMtx, transformMtx, transformMtx);
     guMtxF2L(transformMtx, &gDisplayContext->matrixStack[gMatrixListPos]);
-    gSPMatrix(gMasterGfxPos++, OS_PHYSICAL_TO_K0(&gDisplayContext->matrixStack[gMatrixListPos++]),
+    gSPMatrix(gMainGfxPos++, OS_PHYSICAL_TO_K0(&gDisplayContext->matrixStack[gMatrixListPos++]),
         G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     
     if (ambush->useBitingAnim) {
@@ -79,7 +79,7 @@ void N(func_80241610_990DF0)(void) {
     
     fold_update(ambush->foldID, FOLD_TYPE_8, ambush->color.r, ambush->color.g, ambush->color.b, ambush->color.a, 0);
     fold_appendGfx_component(ambush->foldID, &foldImg, 0, transformMtx);
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
 
 API_CALLABLE(N(func_80241BA8_991388)) {

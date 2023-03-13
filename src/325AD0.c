@@ -52,65 +52,64 @@ s32 func_E0200044(s32 max, s32 idx) {
     return lookupVal % (max + 1);
 }
 
-
 #ifdef NON_EQUIVALENT
 void func_E02000AC(s32 arg0, s32 arg1) {
     s32 i, j;
 
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 128, 128, 128, 255);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, 128, 128, 128, 255);
 
     for (i = 0; i < 10; i++) {
-        gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 80, nuGfxCfb_ptr);
-        gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b,
+        gDPSetTextureImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 80, nuGfxCfb_ptr);
+        gDPSetTile(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b,
                 (((((79)-(0)+1) * G_IM_SIZ_16b_TILE_BYTES)+7)>>3), 0,
                 G_TX_LOADTILE, 0,
                 G_TX_WRAP, 6, G_TX_NOLOD,
                 G_TX_WRAP, 7, G_TX_NOLOD);
-        gDPLoadSync(gMasterGfxPos++);
-        gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE,
+        gDPLoadSync(gMainGfxPos++);
+        gDPLoadTile(gMainGfxPos++, G_TX_LOADTILE,
                     (0)<<G_TEXTURE_IMAGE_FRAC,
                     (i * 6)<<G_TEXTURE_IMAGE_FRAC,
                     (79)<<G_TEXTURE_IMAGE_FRAC,
                     (i * 6 + 5)<<G_TEXTURE_IMAGE_FRAC);
-        gDPPipeSync(gMasterGfxPos++);
-        gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b,
+        gDPPipeSync(gMainGfxPos++);
+        gDPSetTile(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b,
                 (((((79)-(0)+1) * G_IM_SIZ_16b_TILE_BYTES)+7)>>3), 0,
                 G_TX_RENDERTILE, 0,
                 G_TX_WRAP, 6, G_TX_NOLOD,
                 G_TX_WRAP, 7, G_TX_NOLOD);
-        gDPLoadTile(gMasterGfxPos++, G_TX_RENDERTILE,
+        gDPLoadTile(gMainGfxPos++, G_TX_RENDERTILE,
                     (arg0)<<G_TEXTURE_IMAGE_FRAC,
                     (arg1 + i * 6)<<G_TEXTURE_IMAGE_FRAC,
                     (arg0 + 79)<<G_TEXTURE_IMAGE_FRAC,
                     (arg1 + i * 6 + 5)<<G_TEXTURE_IMAGE_FRAC);
-        gDPLoadTile(gMasterGfxPos++, G_TX_RENDERTILE + 1,
+        gDPLoadTile(gMainGfxPos++, G_TX_RENDERTILE + 1,
                     (arg0)<<G_TEXTURE_IMAGE_FRAC,
                     (arg1 + i * 6)<<G_TEXTURE_IMAGE_FRAC,
                     (arg0 + 79)<<G_TEXTURE_IMAGE_FRAC,
                     (arg1 + i * 6 + 5)<<G_TEXTURE_IMAGE_FRAC);
 
         for (j = 0; j < 1; j++) {
-            gDPSetTextureImage(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, nuGfxCfb_ptr);
-            gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b,
+            gDPSetTextureImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, nuGfxCfb_ptr);
+            gDPSetTile(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b,
                         (((((320)-(0)+1) * G_IM_SIZ_16b_TILE_BYTES)+7)>>3), 0x100,
                         G_TX_LOADTILE, 0,
                         G_TX_WRAP, 6, G_TX_NOLOD,
                         G_TX_WRAP, 7, G_TX_NOLOD);
-            gDPLoadSync(gMasterGfxPos++);
-            gDPLoadTile(gMasterGfxPos++, G_TX_LOADTILE,
+            gDPLoadSync(gMainGfxPos++);
+            gDPLoadTile(gMainGfxPos++, G_TX_LOADTILE,
                         (arg0)<<G_TEXTURE_IMAGE_FRAC,
                         (arg1 + i * 6)<<G_TEXTURE_IMAGE_FRAC,
                         (arg0 + 80 - 1)<<G_TEXTURE_IMAGE_FRAC,
                         (arg1 + i * 6 + 5)<<G_TEXTURE_IMAGE_FRAC);
-            gDPPipeSync(gMasterGfxPos++);
-            gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b,
+            gDPPipeSync(gMainGfxPos++);
+            gDPSetTile(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b,
                     (((((320)-(0)+1) * G_IM_SIZ_16b_TILE_BYTES)+7)>>3), 0,
                     G_TX_RENDERTILE + 1, 0,
                     G_TX_WRAP, 6, G_TX_NOLOD,
                     G_TX_WRAP, 7, G_TX_NOLOD);
-            gDPTextureRectangle(gMasterGfxPos++, arg0 * 4, (arg1 + i * 6) * 4, (arg0 + 80) * 4, (arg1 + i * 6 + 6) * 4, 0, arg0 * 32, arg1 * 32, 0x400, 0x400);
+            gDPTextureRectangle(gMainGfxPos++, arg0 * 4, (arg1 + i * 6) * 4, (arg0 + 80) * 4, (arg1 + i * 6 + 6) * 4, 0, arg0 * 32, arg1 * 32, 0x400, 0x400);
         }
-        gDPPipeSync(gMasterGfxPos++);
+        gDPPipeSync(gMainGfxPos++);
     }
 }
 #else

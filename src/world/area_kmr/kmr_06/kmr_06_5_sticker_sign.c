@@ -29,7 +29,7 @@ void N(appendGfx_sticker)(void* renderData) {
     PAL_PTR pal = (PAL_PTR) evt_get_variable(NULL, MV_StickerPalette);
     u32 foldFlags = FOLD_STATE_FLAG_400;
     
-    gDPPipeSync(gMasterGfxPos++);
+    gDPPipeSync(gMainGfxPos++);
     guTranslateF(mtxTransform, sticker->pos.x, sticker->pos.y, sticker->pos.z);
     guRotateF(mtxTemp, sticker->yaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
@@ -38,7 +38,7 @@ void N(appendGfx_sticker)(void* renderData) {
     guScaleF(mtxTemp, sticker->scale.x, sticker->scale.y, sticker->scale.z);
     guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
     guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
-    gSPMatrix(gMasterGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]),
+    gSPMatrix(gMainGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]),
         G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     
     foldImage.raster = img;
@@ -55,7 +55,7 @@ void N(appendGfx_sticker)(void* renderData) {
     fold_update(0, FOLD_TYPE_NONE, 0, 0, 0, 0, 0);
     fold_appendGfx_component(0, &foldImage, foldFlags, mtxTransform);
     
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
 
 void N(worker_render_sticker)(void) {

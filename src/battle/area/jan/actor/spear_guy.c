@@ -7,7 +7,7 @@
 
 #define NAMESPACE b_area_jan_spear_guy
 
-extern s32 N(idleAnimations_8021BF40)[];
+extern s32 N(IdleAnimations_8021BF40)[];
 extern EvtScript N(init_80218980);
 extern EvtScript N(takeTurn_8021BCB4);
 extern EvtScript N(handleEvent_80218E3C);
@@ -20,7 +20,7 @@ extern EvtScript N(8021BF8C);
 extern Formation N(specialFormation_8021A8C0);
 extern Formation N(specialFormation_8021A8DC);
 
-s32 N(idleAnimations_802185C0)[] = {
+s32 N(IdleAnimations_802185C0)[] = {
     STATUS_NORMAL,    ANIM_SpearGuy_Anim04,
     STATUS_STONE,     ANIM_SpearGuy_Anim02,
     STATUS_SLEEP,     ANIM_SpearGuy_Anim0D,
@@ -33,7 +33,7 @@ s32 N(idleAnimations_802185C0)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_8021860C)[] = {
+s32 N(IdleAnimations_8021860C)[] = {
     STATUS_NORMAL,    ANIM_SpearGuy_Anim03,
     STATUS_STONE,     ANIM_SpearGuy_Anim0D,
     STATUS_SLEEP,     ANIM_SpearGuy_Anim0D,
@@ -46,29 +46,29 @@ s32 N(idleAnimations_8021860C)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_80218658)[] = {
+s32 N(IdleAnimations_80218658)[] = {
     STATUS_NORMAL,    ANIM_SpearGuy_Anim14,
     STATUS_END,
 };
 
-s32 N(idleAnimations_80218664)[] = {
+s32 N(IdleAnimations_80218664)[] = {
     STATUS_NORMAL,    ANIM_SpearGuy_Anim19,
     STATUS_END,
 };
 
-s32 N(defenseTable_80218670)[] = {
+s32 N(DefenseTable_80218670)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_FIRE, 0,
     ELEMENT_END,
 };
 
-s32 N(defenseTable_80218684)[] = {
+s32 N(DefenseTable_80218684)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_SHOCK, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_80218698)[] = {
+s32 N(StatusTable_80218698)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 70,
@@ -93,7 +93,7 @@ s32 N(statusTable_80218698)[] = {
     STATUS_END,
 };
 
-s32 N(statusTable_80218744)[] = {
+s32 N(StatusTable_80218744)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 70,
@@ -118,15 +118,15 @@ s32 N(statusTable_80218744)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_802187F0)[] = {
+ActorPartBlueprint N(PartsTable_802187F0)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 2,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 22 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_802185C0),
-        .defenseTable = N(defenseTable_80218670),
+        .idleAnimations = N(IdleAnimations_802185C0),
+        .defenseTable = N(DefenseTable_80218670),
         .eventFlags = ACTOR_EVENT_FLAG_SPIKY_FRONT,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -3, -8 },
@@ -137,8 +137,8 @@ ActorPartBlueprint N(partsTable_802187F0)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_8021BF40),
-        .defenseTable = N(defenseTable_80218684),
+        .idleAnimations = N(IdleAnimations_8021BF40),
+        .defenseTable = N(DefenseTable_80218684),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -1, -10 },
@@ -149,8 +149,8 @@ ActorPartBlueprint N(partsTable_802187F0)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80218658),
-        .defenseTable = N(defenseTable_80218684),
+        .idleAnimations = N(IdleAnimations_80218658),
+        .defenseTable = N(DefenseTable_80218684),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -161,8 +161,8 @@ ActorPartBlueprint N(partsTable_802187F0)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80218664),
-        .defenseTable = N(defenseTable_80218684),
+        .idleAnimations = N(IdleAnimations_80218664),
+        .defenseTable = N(DefenseTable_80218684),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -174,10 +174,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_SPEAR_GUY,
     .level = 16,
     .maxHP = 7,
-    .partCount = ARRAY_COUNT(N(partsTable_802187F0)),
-    .partsData = N(partsTable_802187F0),
+    .partCount = ARRAY_COUNT( N(PartsTable_802187F0)),
+    .partsData = N(PartsTable_802187F0),
     .initScript = &N(init_80218980),
-    .statusTable = N(statusTable_80218698),
+    .statusTable = N(StatusTable_80218698),
     .escapeChance = 50,
     .airLiftChance = 85,
     .hurricaneChance = 80,
@@ -197,11 +197,11 @@ EvtScript N(setSpearStance) = {
         EVT_CASE_EQ(2)
         EVT_CASE_EQ(0)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(idleAnimations_802185C0)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(IdleAnimations_802185C0)))
             EVT_CALL(SetPartEventFlags, ACTOR_SELF, 2, 0x00010000)
         EVT_CASE_EQ(1)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(idleAnimations_8021860C)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(IdleAnimations_8021860C)))
             EVT_CALL(SetPartEventFlags, ACTOR_SELF, 2, 16)
     EVT_END_SWITCH
     EVT_RETURN
@@ -229,7 +229,7 @@ EvtScript N(init_80218980) = {
         EVT_CASE_OR_EQ(4)
         EVT_CASE_OR_EQ(6)
             EVT_CALL(SetPartEventBits, ACTOR_SELF, 2, ACTOR_EVENT_FLAG_SPIKY_FRONT, FALSE)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(idleAnimations_8021860C)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(IdleAnimations_8021860C)))
             EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_SpearGuy_Anim03)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
@@ -264,16 +264,16 @@ EvtScript N(idle_80218BE0) = {
         EVT_CASE_EQ(0)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FEAR | STATUS_FLAG_DIZZY)
-                EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(idleAnimations_8021860C)))
+                EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(IdleAnimations_8021860C)))
                 EVT_CALL(SetPartEventBits, ACTOR_SELF, 2, ACTOR_EVENT_FLAG_SPIKY_TOP, TRUE)
                 EVT_CALL(SetPartEventBits, ACTOR_SELF, 2, ACTOR_EVENT_FLAG_SPIKY_FRONT, FALSE)
             EVT_ELSE
-                EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(idleAnimations_802185C0)))
+                EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(IdleAnimations_802185C0)))
                 EVT_CALL(SetPartEventBits, ACTOR_SELF, 2, ACTOR_EVENT_FLAG_SPIKY_TOP, FALSE)
                 EVT_CALL(SetPartEventBits, ACTOR_SELF, 2, ACTOR_EVENT_FLAG_SPIKY_FRONT, TRUE)
             EVT_END_IF
         EVT_CASE_EQ(1)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(idleAnimations_8021860C)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(IdleAnimations_8021860C)))
             EVT_CALL(SetPartEventBits, ACTOR_SELF, 2, ACTOR_EVENT_FLAG_SPIKY_TOP, TRUE)
             EVT_CALL(SetPartEventBits, ACTOR_SELF, 2, ACTOR_EVENT_FLAG_SPIKY_FRONT, FALSE)
     EVT_END_SWITCH
@@ -646,7 +646,7 @@ EvtScript N(summonBackup) = {
             EVT_CALL(GetActorVar, LVar1, 0, LVar4)
             EVT_IF_EQ(LVar4, 0)
                 EVT_CALL(SetActorVar, LVar1, 0, 1)
-                EVT_CALL(SetIdleAnimations, LVar1, 2, EVT_PTR(N(idleAnimations_8021860C)))
+                EVT_CALL(SetIdleAnimations, LVar1, 2, EVT_PTR(N(IdleAnimations_8021860C)))
                 EVT_CALL(SetPartEventFlags, LVar1, 2, 16)
                 EVT_CALL(SetAnimation, LVar1, 2, ANIM_SpearGuy_Anim03)
             EVT_END_IF
@@ -777,7 +777,7 @@ EvtScript N(becomeShyGuy) = {
     EVT_EXEC_WAIT(N(8021BF8C))
     EVT_CALL(SetActorType, ACTOR_SELF, ACTOR_TYPE_SHY_GUY)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_TYPE_CHANGED, TRUE)
-    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(statusTable_80218744)))
+    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(StatusTable_80218744)))
     EVT_CALL(HPBarToHome, ACTOR_SELF)
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
     EVT_RETURN
@@ -1088,7 +1088,7 @@ EvtScript N(takeTurn_8021BCB4) = {
     EVT_END
 };
 
-s32 N(idleAnimations_8021BF40)[] = {
+s32 N(IdleAnimations_8021BF40)[] = {
     STATUS_NORMAL,    ANIM_ShyGuy_Red_Anim01,
     STATUS_STONE,     ANIM_ShyGuy_Red_Anim00,
     STATUS_SLEEP,     ANIM_ShyGuy_Red_Anim12,

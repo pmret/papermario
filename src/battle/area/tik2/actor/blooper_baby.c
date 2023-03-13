@@ -89,7 +89,7 @@ extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
 extern EvtScript N(onDeath);
 
-s32 N(idleAnimations)[] = {
+s32 N(IdleAnimations)[] = {
     STATUS_NORMAL, ANIM_BabyBlooper_Anim00,
     STATUS_STOP, ANIM_BabyBlooper_Anim00,
     STATUS_SLEEP, ANIM_BabyBlooper_Anim06,
@@ -100,7 +100,7 @@ s32 N(idleAnimations)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations2)[] = {
+s32 N(IdleAnimations2)[] = {
     STATUS_NORMAL, ANIM_BabyBlooper_Anim01,
     STATUS_STOP, ANIM_BabyBlooper_Anim00,
     STATUS_SLEEP, ANIM_BabyBlooper_Anim06,
@@ -111,7 +111,7 @@ s32 N(idleAnimations2)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations3)[] = {
+s32 N(IdleAnimations3)[] = {
     STATUS_NORMAL, ANIM_BabyBlooper_Anim00,
     STATUS_STOP, ANIM_BabyBlooper_Anim00,
     STATUS_SLEEP, ANIM_BabyBlooper_Anim06,
@@ -122,12 +122,12 @@ s32 N(idleAnimations3)[] = {
     STATUS_END,
 };
 
-s32 N(defenseTable)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable)[] = {
+s32 N(StatusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 100,
@@ -159,8 +159,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 85 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -172,7 +172,7 @@ ActorPartBlueprint N(parts)[] = {
         .targetOffset = { 0, 0 },
         .opacity = 255,
         .idleAnimations = NULL,
-        .defenseTable = N(defenseTable),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 1, -13 },
@@ -187,7 +187,7 @@ ActorBlueprint NAMESPACE = {
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
     .initScript = &N(init),
-    .statusTable = N(statusTable),
+    .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -203,7 +203,7 @@ ActorBlueprint NAMESPACE = {
 };
 
 #include "common/StartRumbleWithParams.inc.c"
-#include "common/UnkBattleFunc2.inc.c"
+#include "common/SpawnEnemyDrainFX.inc.c"
 
 EvtScript N(init) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
@@ -251,7 +251,7 @@ EvtScript N(idle) = {
     EVT_IF_GE(LVar4, LVar1)
         EVT_GOTO(11)
     EVT_END_IF
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations2)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations2)))
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BabyBlooper_Anim00)
     EVT_WAIT(9)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BabyBlooper_Anim01)
@@ -272,7 +272,7 @@ EvtScript N(idle) = {
     EVT_IF_GE(LVar4, LVar1)
         EVT_GOTO(12)
     EVT_END_IF
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations2)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations2)))
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BabyBlooper_Anim00)
     EVT_WAIT(9)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BabyBlooper_Anim01)
@@ -287,7 +287,7 @@ EvtScript N(idle) = {
         EVT_WAIT(1)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations3)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations3)))
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, -5)
@@ -563,11 +563,11 @@ EvtScript N(takeTurn) = {
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_214)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar1, 10)
-            EVT_CALL(N(UnkBattleFunc2), LVar0, LVar1, LVar2, LVar3)
+            EVT_CALL(N(SpawnDrainHealthStartFX), LVar0, LVar1, LVar2, LVar3)
             EVT_THREAD
                 EVT_WAIT(15)
                 EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_25C)
-                EVT_CALL(N(UnkBattleFunc2_2), LVar0, LVar1, LVar2, LVar3)
+                EVT_CALL(N(SpawnDrainHealthContinueFX), LVar0, LVar1, LVar2, LVar3)
             EVT_END_THREAD
             EVT_ADD(LVar0, 20)
             EVT_ADD(LVar1, 20)

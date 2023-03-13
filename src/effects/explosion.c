@@ -168,8 +168,8 @@ void explosion_appendGfx(void* effect) {
     s32 primB;
     s32 cond;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     shim_guTranslateF(sp18, part->pos.x, part->pos.y, part->pos.z);
     shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
@@ -178,23 +178,23 @@ void explosion_appendGfx(void* effect) {
 
     part++;
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     if (part->unk_00 != -1) {
-        gSPDisplayList(gMasterGfxPos++, D_09000840_3447B0);
+        gSPDisplayList(gMainGfxPos++, D_09000840_3447B0);
 
         shim_guScaleF(sp18, part->unk_20, part->unk_20, 1.0f);
         shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, 240, part->unk_38);
-        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, D_090008F0_344860);
-        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 240, part->unk_38);
+        gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+        gSPDisplayList(gMainGfxPos++, D_090008F0_344860);
+        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     }
 
     part++;
 
-    gSPDisplayList(gMasterGfxPos++, D_09000910_344880);
+    gSPDisplayList(gMainGfxPos++, D_09000910_344880);
 
     shim_guScaleF(sp18, part->unk_20, part->unk_20, part->unk_20);
     shim_guRotateF(sp58, part->unk_28, 0.0f, 0.0f, 1.0f);
@@ -220,9 +220,9 @@ void explosion_appendGfx(void* effect) {
         primB = 255;
     }
 
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 255, 255, primB, primAlpha);
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gSPDisplayList(gMasterGfxPos++, D_E00328B0[unk_34 % 3]);
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, primB, primAlpha);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gSPDisplayList(gMainGfxPos++, D_E00328B0[unk_34 % 3]);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }

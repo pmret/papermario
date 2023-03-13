@@ -6,7 +6,7 @@
 
 #define NAMESPACE b_area_trd_part_1_bob_omb
 
-s32 N(idleAnimations_8021A510)[] = {
+s32 N(IdleAnimations_8021A510)[] = {
     STATUS_NORMAL,    ANIM_Bobomb_Anim02,
     STATUS_STONE,     ANIM_Bobomb_Anim00,
     STATUS_SLEEP,     ANIM_Bobomb_Anim18,
@@ -19,7 +19,7 @@ s32 N(idleAnimations_8021A510)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_8021A55C)[] = {
+s32 N(IdleAnimations_8021A55C)[] = {
     STATUS_NORMAL,    ANIM_Bobomb_Anim05,
     STATUS_STONE,     ANIM_Bobomb_Anim01,
     STATUS_SLEEP,     ANIM_Bobomb_Anim18,
@@ -32,12 +32,12 @@ s32 N(idleAnimations_8021A55C)[] = {
     STATUS_END,
 };
 
-s32 N(defenseTable_8021A5A8)[] = {
+s32 N(DefenseTable_8021A5A8)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_8021A5B4)[] = {
+s32 N(StatusTable_8021A5B4)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 75,
@@ -62,7 +62,7 @@ s32 N(statusTable_8021A5B4)[] = {
     STATUS_END,
 };
 
-s32 N(statusTable_8021A660)[] = {
+s32 N(StatusTable_8021A660)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 0,
@@ -87,15 +87,15 @@ s32 N(statusTable_8021A660)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_8021A70C)[] = {
+ActorPartBlueprint N(PartsTable_8021A70C)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_8021A510),
-        .defenseTable = N(defenseTable_8021A5A8),
+        .idleAnimations = N(IdleAnimations_8021A510),
+        .defenseTable = N(DefenseTable_8021A5A8),
         .eventFlags = ACTOR_EVENT_FLAG_EXPLODE_ON_IGNITION,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -9 },
@@ -109,10 +109,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_BOB_OMB,
     .level = 6,
     .maxHP = 3,
-    .partCount = ARRAY_COUNT(N(partsTable_8021A70C)),
-    .partsData = N(partsTable_8021A70C),
+    .partCount = ARRAY_COUNT( N(PartsTable_8021A70C)),
+    .partsData = N(PartsTable_8021A70C),
     .initScript = &N(init_8021A758),
-    .statusTable = N(statusTable_8021A5B4),
+    .statusTable = N(StatusTable_8021A5B4),
     .escapeChance = 70,
     .airLiftChance = 90,
     .hurricaneChance = 90,
@@ -155,10 +155,10 @@ EvtScript N(ignite) = {
     EVT_END_IF
     EVT_LABEL(0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021A55C)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_8021A55C)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021B4A8)))
     EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_EXPLODE_ON_CONTACT, TRUE)
-    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(statusTable_8021A660)))
+    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(StatusTable_8021A660)))
     EVT_CALL(PlayLoopingSoundAtActor, ACTOR_SELF, 0, 0x80000001)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bobomb_Anim05)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -177,9 +177,9 @@ EvtScript N(ignite) = {
 EvtScript N(8021A9C8) = {
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021ACE8)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations_8021A510)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_8021A510)))
     EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_EXPLODE_ON_CONTACT, FALSE)
-    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(statusTable_8021A5B4)))
+    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(StatusTable_8021A5B4)))
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar2, 2)
     EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 3, LVar0, LVar1, LVar2, 0, 0)

@@ -10,8 +10,8 @@ glabel blast_appendGfx
 /* 37D698 E007C208 AFB300E4 */  sw        $s3, 0xe4($sp)
 /* 37D69C E007C20C 3C130001 */  lui       $s3, 1
 /* 37D6A0 E007C210 AFB400E8 */  sw        $s4, 0xe8($sp)
-/* 37D6A4 E007C214 3C14800A */  lui       $s4, %hi(gMasterGfxPos)
-/* 37D6A8 E007C218 2694A66C */  addiu     $s4, $s4, %lo(gMasterGfxPos)
+/* 37D6A4 E007C214 3C14800A */  lui       $s4, %hi(gMainGfxPos)
+/* 37D6A8 E007C218 2694A66C */  addiu     $s4, $s4, %lo(gMainGfxPos)
 /* 37D6AC E007C21C AFBF00F0 */  sw        $ra, 0xf0($sp)
 /* 37D6B0 E007C220 AFB500EC */  sw        $s5, 0xec($sp)
 /* 37D6B4 E007C224 AFB200E0 */  sw        $s2, 0xe0($sp)
@@ -163,8 +163,8 @@ glabel blast_appendGfx
 .LE007C468:
 /* 37D8F8 E007C468 ACA20004 */  sw        $v0, 4($a1)
 /* 37D8FC E007C46C 3C07D838 */  lui       $a3, 0xd838
-/* 37D900 E007C470 3C05800A */  lui       $a1, %hi(gMasterGfxPos)
-/* 37D904 E007C474 24A5A66C */  addiu     $a1, $a1, %lo(gMasterGfxPos)
+/* 37D900 E007C470 3C05800A */  lui       $a1, %hi(gMainGfxPos)
+/* 37D904 E007C474 24A5A66C */  addiu     $a1, $a1, %lo(gMainGfxPos)
 /* 37D908 E007C478 34E70002 */  ori       $a3, $a3, 2
 /* 37D90C E007C47C 3C02FB00 */  lui       $v0, 0xfb00
 /* 37D910 E007C480 8CA40000 */  lw        $a0, ($a1)

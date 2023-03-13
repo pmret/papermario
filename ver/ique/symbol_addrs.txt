@@ -428,7 +428,7 @@ piEventBuf = 0x800af6f8;
 piEventQueue = 0x800af6e0; // size:24
 __osEventStateTab = 0x800d825c; // size:0x110
 __osThreadSave = 0x800AF740;
-gMasterGfxPos = 0x80099244;
+gMainGfxPos = 0x80099244;
 
 piEventQueue = 0x800af6e0; // size:24
 __osFinalrom = 0x80099238;

@@ -244,25 +244,25 @@ void state_drawUI_logos(void) {
 void appendGfx_intro_logos(void) {
     s32 i;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gDPSetRenderMode(gMasterGfxPos++, G_RM_NOOP, G_RM_NOOP2);
-    gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGB, G_CC_DECALRGB);
-    gDPSetCycleType(gMasterGfxPos++, G_CYC_FILL);
-    gDPSetFillColor(gMasterGfxPos++, PACK_FILL_COLOR(224, 224, 224, 1));
-    gDPFillRectangle(gMasterGfxPos++, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
-    gDPPipeSync(gMasterGfxPos++);
+    gDPPipeSync(gMainGfxPos++);
+    gDPSetRenderMode(gMainGfxPos++, G_RM_NOOP, G_RM_NOOP2);
+    gDPSetCombineMode(gMainGfxPos++, G_CC_DECALRGB, G_CC_DECALRGB);
+    gDPSetCycleType(gMainGfxPos++, G_CYC_FILL);
+    gDPSetFillColor(gMainGfxPos++, PACK_FILL_COLOR(224, 224, 224, 1));
+    gDPFillRectangle(gMainGfxPos++, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
+    gDPPipeSync(gMainGfxPos++);
 
     switch (gGameStatusPtr->introState) {
         case INTRO_STATE_0:
         case INTRO_STATE_1:
         case INTRO_STATE_2:
-            gSPDisplayList(gMasterGfxPos++, D_80077908);
+            gSPDisplayList(gMainGfxPos++, D_80077908);
             for (i = 0; i < 7; i++) {
-                gDPLoadTextureTile(gMasterGfxPos++, gLogosImage1 + i * 0x1000, G_IM_FMT_RGBA, G_IM_SIZ_16b, 128, 112,
+                gDPLoadTextureTile(gMainGfxPos++, gLogosImage1 + i * 0x1000, G_IM_FMT_RGBA, G_IM_SIZ_16b, 128, 112,
                                    0, 0, 127, 15, 0,
                                    G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
-                gSPTextureRectangle(gMasterGfxPos++, 96 * 4, (64 + i * 16) * 4, 224 * 4, (80 + i * 16) * 4, G_TX_RENDERTILE, 0, 0, 1024, 1024);
-                gDPPipeSync(gMasterGfxPos++);
+                gSPTextureRectangle(gMainGfxPos++, 96 * 4, (64 + i * 16) * 4, 224 * 4, (80 + i * 16) * 4, G_TX_RENDERTILE, 0, 0, 1024, 1024);
+                gDPPipeSync(gMainGfxPos++);
             }
             break;
         case INTRO_STATE_3:
@@ -275,17 +275,17 @@ void appendGfx_intro_logos(void) {
         case INTRO_STATE_8:
         case INTRO_STATE_9:
 #endif
-            gSPDisplayList(gMasterGfxPos++, D_80077908);
+            gSPDisplayList(gMainGfxPos++, D_80077908);
             for (i = 0; i < 6; i++) {
-                gDPLoadTextureTile(gMasterGfxPos++, gLogosImage2 + i * 0x1000, G_IM_FMT_RGBA, G_IM_SIZ_16b, 256, 48,
+                gDPLoadTextureTile(gMainGfxPos++, gLogosImage2 + i * 0x1000, G_IM_FMT_RGBA, G_IM_SIZ_16b, 256, 48,
                                    0, 0, 255, 7, 0,
                                    G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
                 gSPTextureRectangle(
-                        gMasterGfxPos++,
+                        gMainGfxPos++,
                         32 * 4, (LOGO_1_Y + i * 8) * 4,
                         288 * 4, (LOGO_1_Y + 8 + i * 8) * 4,
                         G_TX_RENDERTILE, 0, 0, 1024, 1024);
-                gDPPipeSync(gMasterGfxPos++);
+                gDPPipeSync(gMainGfxPos++);
             }
 #if !VERSION_JP
             break;
@@ -293,17 +293,17 @@ void appendGfx_intro_logos(void) {
         case INTRO_STATE_7:
         case INTRO_STATE_8:
         case INTRO_STATE_9:
-            gSPDisplayList(gMasterGfxPos++, D_80077908);
+            gSPDisplayList(gMainGfxPos++, D_80077908);
 #endif
             for (i = 0; i < 14; i++) {
-                gDPLoadTextureTile(gMasterGfxPos++, gLogosImage3 + i * 0x1000, G_IM_FMT_RGBA, G_IM_SIZ_16b, 256, 112,
+                gDPLoadTextureTile(gMainGfxPos++, gLogosImage3 + i * 0x1000, G_IM_FMT_RGBA, G_IM_SIZ_16b, 256, 112,
                                    0, 0, 255, 7, 0,
                                    G_TX_WRAP, G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
-                gSPTextureRectangle(gMasterGfxPos++,
+                gSPTextureRectangle(gMainGfxPos++,
                                     32 * 4, (LOGO_2_Y + i * 8) * 4,
                                     288 * 4, (LOGO_2_Y + 8 + i * 8) * 4,
                                     G_TX_RENDERTILE, 0, 0, 1024, 1024);
-                gDPPipeSync(gMasterGfxPos++);
+                gDPPipeSync(gMainGfxPos++);
             }
             break;
     }

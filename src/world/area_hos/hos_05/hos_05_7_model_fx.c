@@ -53,10 +53,10 @@ API_CALLABLE(N(SetWorldColorParams)) {
 #define NAME_SUFFIX
 
 void N(setup_gfx_light_beam)(void) {
-    gDPSetCombineLERP(gMasterGfxPos++,
+    gDPSetCombineLERP(gMainGfxPos++,
         TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0,
         TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, StarShrineLightBeamAlpha & 0xFF);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, StarShrineLightBeamAlpha & 0xFF);
 }
 
 API_CALLABLE(N(SetLightBeamAlpha)) {
@@ -69,10 +69,10 @@ API_CALLABLE(N(SetLightBeamAlpha)) {
 s32 N(StarshipShimmerAmt) = 255;
 
 void N(setup_gfx_starship_shimmer)(void) {
-    gDPSetCombineLERP(gMasterGfxPos++,
+    gDPSetCombineLERP(gMainGfxPos++,
         TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0,
         TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, N(StarshipShimmerAmt));
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, N(StarshipShimmerAmt));
 }
 
 API_CALLABLE(N(SetStarshipShimmerAmt)) {
@@ -85,10 +85,10 @@ API_CALLABLE(N(SetStarshipShimmerAmt)) {
 s32 N(UnusedAlphaParam) = 255;
 
 void N(setup_gfx_unused)(void) {
-    gDPSetCombineLERP(gMasterGfxPos++,
+    gDPSetCombineLERP(gMainGfxPos++,
         TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0,
         TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, N(UnusedAlphaParam));
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, N(UnusedAlphaParam));
 }
 
 API_CALLABLE(N(SetUnusedAlphaParam)) {

@@ -69,8 +69,8 @@ glabel draw_image_with_clipping
 /* C43F4 8012D514 018B6021 */  addu      $t4, $t4, $t3
 /* C43F8 8012D518 8FB50088 */  lw        $s5, 0x88($sp)
 /* C43FC 8012D51C 8FB60088 */  lw        $s6, 0x88($sp)
-/* C4400 8012D520 3C08800A */  lui       $t0, %hi(gMasterGfxPos)
-/* C4404 8012D524 25089244 */  addiu     $t0, $t0, %lo(gMasterGfxPos)
+/* C4400 8012D520 3C08800A */  lui       $t0, %hi(gMainGfxPos)
+/* C4404 8012D524 25089244 */  addiu     $t0, $t0, %lo(gMainGfxPos)
 /* C4408 8012D528 A3A00020 */  sb        $zero, 0x20($sp)
 /* C440C 8012D52C AFA90024 */  sw        $t1, 0x24($sp)
 /* C4410 8012D530 AFAC0034 */  sw        $t4, 0x34($sp)

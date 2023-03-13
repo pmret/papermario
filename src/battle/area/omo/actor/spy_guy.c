@@ -11,7 +11,7 @@ extern EvtScript N(takeTurn_802293DC);
 extern EvtScript N(idle_802276C4);
 extern EvtScript N(handleEvent_80227ABC);
 
-s32 N(idleAnimations_80227400)[] = {
+s32 N(IdleAnimations_80227400)[] = {
     STATUS_NORMAL,    ANIM_SpyGuy_Anim03,
     STATUS_STONE,     ANIM_SpyGuy_Anim01,
     STATUS_SLEEP,     ANIM_SpyGuy_Anim0F,
@@ -24,7 +24,7 @@ s32 N(idleAnimations_80227400)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_8022744C)[] = {
+s32 N(IdleAnimations_8022744C)[] = {
     STATUS_NORMAL,    ANIM_SpyGuy_Anim02,
     STATUS_STONE,     ANIM_SpyGuy_Anim00,
     STATUS_SLEEP,     ANIM_SpyGuy_Anim0F,
@@ -37,18 +37,18 @@ s32 N(idleAnimations_8022744C)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_80227498)[] = {
+s32 N(IdleAnimations_80227498)[] = {
     STATUS_NORMAL,    ANIM_SpyGuy_Anim10,
     STATUS_END,
 };
 
-s32 N(defenseTable_802274A4)[] = {
+s32 N(DefenseTable_802274A4)[] = {
     ELEMENT_NORMAL,     0,
     ELEMENT_SHOCK,      0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_802274B8)[] = {
+s32 N(StatusTable_802274B8)[] = {
     STATUS_NORMAL,      0,
     STATUS_DEFAULT,     0,
     STATUS_SLEEP,       70,
@@ -78,15 +78,15 @@ enum PartIDs {
     PT_2        = 2,
 };
 
-ActorPartBlueprint N(partsTable_80227564)[] = {
+ActorPartBlueprint N(PartsTable_80227564)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 30 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80227400),
-        .defenseTable = N(defenseTable_802274A4),
+        .idleAnimations = N(IdleAnimations_80227400),
+        .defenseTable = N(DefenseTable_802274A4),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -1, -13 },
@@ -97,8 +97,8 @@ ActorPartBlueprint N(partsTable_80227564)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_80227498),
-        .defenseTable = N(defenseTable_802274A4),
+        .idleAnimations = N(IdleAnimations_80227498),
+        .defenseTable = N(DefenseTable_802274A4),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -1, -10 },
@@ -110,10 +110,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_SPY_GUY,
     .level = 15,
     .maxHP = 7,
-    .partCount = ARRAY_COUNT(N(partsTable_80227564)),
-    .partsData = N(partsTable_80227564),
+    .partCount = ARRAY_COUNT( N(PartsTable_80227564)),
+    .partsData = N(PartsTable_80227564),
     .initScript = &N(init_802275D4),
-    .statusTable = N(statusTable_802274B8),
+    .statusTable = N(StatusTable_802274B8),
     .escapeChance = 50,
     .airLiftChance = 85,
     .hurricaneChance = 80,
@@ -137,7 +137,7 @@ EvtScript N(init_802275D4) = {
     EVT_CALL(GetInstigatorValue, ACTOR_SELF, LVar0)
     EVT_IF_NE(LVar0, 0)
         EVT_CALL(SetActorVar, ACTOR_SELF, 2, 0)
-        EVT_CALL(SetIdleAnimations, ACTOR_SELF, PT_MAIN, EVT_PTR(N(idleAnimations_8022744C)))
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, PT_MAIN, EVT_PTR(N(IdleAnimations_8022744C)))
         EVT_CALL(SetAnimation, ACTOR_SELF, PT_MAIN, ANIM_SpyGuy_Anim02)
     EVT_END_IF
     EVT_RETURN
@@ -181,7 +181,7 @@ EvtScript N(802276D4) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_CALL(SetActorVar, ACTOR_SELF, 2, 1)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PT_MAIN, EVT_PTR(N(idleAnimations_80227400)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PT_MAIN, EVT_PTR(N(IdleAnimations_80227400)))
             EVT_CALL(SetAnimation, ACTOR_SELF, PT_MAIN, ANIM_SpyGuy_Anim17)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.4))
@@ -192,7 +192,7 @@ EvtScript N(802276D4) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, PT_MAIN, ANIM_SpyGuy_Anim03)
         EVT_CASE_EQ(1)
             EVT_CALL(SetActorVar, ACTOR_SELF, 2, 0)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PT_MAIN, EVT_PTR(N(idleAnimations_8022744C)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PT_MAIN, EVT_PTR(N(IdleAnimations_8022744C)))
             EVT_CALL(SetAnimation, ACTOR_SELF, PT_MAIN, ANIM_SpyGuy_Anim18)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.4))
@@ -608,7 +608,7 @@ EvtScript N(takeTurn_802293DC) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_IF_EQ(LVar0, PHASE_FIRST_STRIKE)
         EVT_CALL(SetActorVar, ACTOR_SELF, 2, 0)
-        EVT_CALL(SetIdleAnimations, ACTOR_SELF, PT_MAIN, EVT_PTR(N(idleAnimations_8022744C)))
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, PT_MAIN, EVT_PTR(N(IdleAnimations_8022744C)))
         EVT_CALL(SetAnimation, ACTOR_SELF, PT_MAIN, ANIM_SpyGuy_Anim02)
     EVT_END_IF
     EVT_CALL(GetActorVar, ACTOR_SELF, 2, LVar0)

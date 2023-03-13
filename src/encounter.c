@@ -8,7 +8,7 @@
 #include "sprite.h"
 #include "model.h"
 
-#if !VERSION_JP && !VERSION_CN
+#if !VERSION_JP && !VERSION_IQUE
 // TODO: remove this conditional when more of the JP rom has been processed
 #include "sprite/npc/BattleMerlee.h"
 #else

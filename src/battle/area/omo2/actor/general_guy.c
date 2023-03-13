@@ -18,20 +18,20 @@ extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
 extern EvtScript N(attack_throw_bomb);
 extern EvtScript N(attack_lightning_shot);
-extern s32 N(idleAnimations)[];
-extern s32 N(idleAnimations_bomb)[];
+extern s32 N(IdleAnimations)[];
+extern s32 N(IdleAnimations_bomb)[];
 extern Formation N(formation_shy_squad);
 
 #include "common/FadeBackgroundToBlack.inc.c"
 
 #include "common/UnfadeBackgroundToBlack.inc.c"
 
-s32 N(defenseTable)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable)[] = {
+s32 N(StatusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 0,
@@ -63,8 +63,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 30 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -1, -10 },
@@ -75,8 +75,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_bomb),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations_bomb),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -1, -10 },
@@ -91,7 +91,7 @@ ActorBlueprint NAMESPACE = {
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
     .initScript = &N(init),
-    .statusTable = N(statusTable),
+    .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -106,7 +106,7 @@ ActorBlueprint NAMESPACE = {
     .statusMessageOffset = { 10, 20 },
 };
 
-s32 N(idleAnimations)[] = {
+s32 N(IdleAnimations)[] = {
     STATUS_NORMAL, ANIM_GeneralGuy_Anim02,
     STATUS_STONE, ANIM_GeneralGuy_Anim00,
     STATUS_SLEEP, ANIM_GeneralGuy_Anim00,
@@ -121,12 +121,12 @@ s32 N(idleAnimations)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations_bomb)[] = {
+s32 N(IdleAnimations_bomb)[] = {
     STATUS_NORMAL, ANIM_GeneralGuyBomb_Anim00,
     STATUS_END,
 };
 
-s32 N(idleAnimations3)[] = {
+s32 N(IdleAnimations3)[] = {
     STATUS_NORMAL, ANIM_GeneralGuy_Anim0E,
     STATUS_POISON, ANIM_GeneralGuy_Anim0E,
     STATUS_STOP, ANIM_GeneralGuy_Anim00,

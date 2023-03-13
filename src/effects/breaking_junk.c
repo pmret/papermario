@@ -137,21 +137,21 @@ void breaking_junk_appendGfx(void* effect) {
     s32 alpha = data->primA;
     s32 i;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
-    gSPDisplayList(gMasterGfxPos++, D_E01187C0[0]);
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPDisplayList(gMainGfxPos++, D_E01187C0[0]);
 
     for (i = 0; i < ((EffectInstance*)effect)->numParts; i++, data++) {
         shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, data->scale * 0.5, data->pos.x, data->pos.y, data->pos.z);
         shim_guRotateF(sp60, data->rot, 0.0f, 0.0f, 1.0f);
         shim_guMtxCatF(sp60, sp20, sp20);
         shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
-        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->primR, data->primG, data->primB, alpha);
-        gDPSetEnvColor(gMasterGfxPos++, data->envR, data->envG, data->envB, data->envA);
-        gSPDisplayList(gMasterGfxPos++, D_E01187B0[(u32)i % ARRAY_COUNT(D_E01187B0)]);
-        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, data->primR, data->primG, data->primB, alpha);
+        gDPSetEnvColor(gMainGfxPos++, data->envR, data->envG, data->envB, data->envA);
+        gSPDisplayList(gMainGfxPos++, D_E01187B0[(u32)i % ARRAY_COUNT(D_E01187B0)]);
+        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     }
 
-    gDPPipeSync(gMasterGfxPos++);
+    gDPPipeSync(gMainGfxPos++);
 }

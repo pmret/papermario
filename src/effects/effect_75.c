@@ -8,21 +8,21 @@ extern Gfx D_09001A20_3E4380[];
 Gfx* D_E00EAA50[2] = { D_09001A00_3E4360, D_09001A20_3E4380 };
 Gfx* D_E00EAA58[2] = { D_09001910_3E4270, NULL };
 
-void fx_75_init(EffectInstance* effect);
-void fx_75_update(EffectInstance* effect);
-void fx_75_render(EffectInstance* effect);
-void fx_75_appendGfx(void* effect);
+void effect_75_init(EffectInstance* effect);
+void effect_75_update(EffectInstance* effect);
+void effect_75_render(EffectInstance* effect);
+void effect_75_appendGfx(void* effect);
 
-EffectInstance* fx_75_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 scale, s32 arg5) {
+EffectInstance* effect_75_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 scale, s32 arg5) {
     EffectBlueprint bp;
     EffectInstance* effect;
     Effect75FXData* data;
     s32 numParts = 1;
     s32 i;
 
-    bp.init = fx_75_init;
-    bp.update = fx_75_update;
-    bp.renderWorld = fx_75_render;
+    bp.init = effect_75_init;
+    bp.update = effect_75_update;
+    bp.renderWorld = effect_75_render;
     bp.unk_00 = 0;
     bp.unk_14 = NULL;
     bp.effectID = EFFECT_75;
@@ -72,10 +72,10 @@ EffectInstance* fx_75_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 scale, s3
     return effect;
 }
 
-void fx_75_init(EffectInstance* effect) {
+void effect_75_init(EffectInstance* effect) {
 }
 
-void fx_75_update(EffectInstance* effect) {
+void effect_75_update(EffectInstance* effect) {
     Effect75FXData* data = effect->data.unk_75;
     s32 unk_14;
 
@@ -151,7 +151,7 @@ void fx_75_update(EffectInstance* effect) {
         + (data->unk_64 - data->unk_60)) * 0.5;
 }
 
-void fx_75_render(EffectInstance* effect) {
+void effect_75_render(EffectInstance* effect) {
     Effect75FXData* data = effect->data.unk_75;
     RenderTask renderTask;
     RenderTask* renderTaskPtr = &renderTask;
@@ -177,7 +177,7 @@ void fx_75_render(EffectInstance* effect) {
         outDist = 0;
     }
 
-    renderTaskPtr->appendGfx = fx_75_appendGfx;
+    renderTaskPtr->appendGfx = effect_75_appendGfx;
     renderTaskPtr->distance = -outDist;
     renderTaskPtr->appendGfxArg = effect;
     renderTaskPtr->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
@@ -189,7 +189,7 @@ void fx_75_render(EffectInstance* effect) {
 void func_E00EA664(void) {
 }
 
-void fx_75_appendGfx(void* effect) {
+void effect_75_appendGfx(void* effect) {
     Effect75FXData* data = ((EffectInstance*)effect)->data.unk_75;
     Camera* camera = &gCameras[gCurrentCameraID];
     s32 type = data->type;
@@ -200,8 +200,8 @@ void fx_75_appendGfx(void* effect) {
     Matrix4f mtxTransfrom;
     Matrix4f mtxTemp;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     shim_guTranslateF(mtxTransfrom, data->pos.x, data->pos.y, data->pos.z);
     shim_guScaleF(mtxTemp, data->scale, data->scale, data->scale);
@@ -212,13 +212,13 @@ void fx_75_appendGfx(void* effect) {
     }
     shim_guMtxF2L(mtxTransfrom, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPMatrix(gMasterGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gDPSetPrimColor(gMasterGfxPos++, 0, 0, data->primCol.r, data->primCol.g, data->primCol.b, data->unk_34);
-    gDPSetEnvColor(gMasterGfxPos++, data->envCol.r, data->envCol.g, data->envCol.b, data->unk_24 * data->masterAlpha / 255);
-    gSPDisplayList(gMasterGfxPos++, D_E00EAA58[0]);
-    gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, uls0, ult0, uls0 + 252, ult0 + 252);
-    gDPSetTileSize(gMasterGfxPos++, 1, uls1, ult1, uls1 + 252, ult1 + 252);
-    gSPDisplayList(gMasterGfxPos++, D_E00EAA50[type]);
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, data->primCol.r, data->primCol.g, data->primCol.b, data->unk_34);
+    gDPSetEnvColor(gMainGfxPos++, data->envCol.r, data->envCol.g, data->envCol.b, data->unk_24 * data->masterAlpha / 255);
+    gSPDisplayList(gMainGfxPos++, D_E00EAA58[0]);
+    gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, uls0, ult0, uls0 + 252, ult0 + 252);
+    gDPSetTileSize(gMainGfxPos++, 1, uls1, ult1, uls1 + 252, ult1 + 252);
+    gSPDisplayList(gMainGfxPos++, D_E00EAA50[type]);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }

@@ -17,7 +17,7 @@ API_CALLABLE(N(SetActorLevelToZero)) {
 
 #include "common/UnkBattleFunc1.inc.c"
 
-extern s32 N(idleAnimations)[];
+extern s32 N(IdleAnimations)[];
 extern EvtScript N(init);
 extern EvtScript N(takeTurn);
 extern EvtScript N(idle);
@@ -33,7 +33,7 @@ extern EvtScript N(shy_guy_idle);
 extern EvtScript N(shy_guy_handleEvent);
 
 
-s32 N(idleAnimations2)[] = {
+s32 N(IdleAnimations2)[] = {
     STATUS_NORMAL, ANIM_StiltGuy_Anim01,
     STATUS_STONE, ANIM_StiltGuy_Anim00,
     STATUS_SLEEP, ANIM_StiltGuy_Anim04,
@@ -47,7 +47,7 @@ s32 N(idleAnimations2)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations3)[] = {
+s32 N(IdleAnimations3)[] = {
     STATUS_NORMAL, ANIM_StiltGuyUnfold_Anim00,
     STATUS_END,
 };
@@ -57,13 +57,13 @@ s32 N(defenseTable2)[] = {
     ELEMENT_END,
 };
 
-s32 N(defenseTable)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_SHOCK, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable)[] = {
+s32 N(StatusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 60,
@@ -120,8 +120,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -1, -10 },
@@ -132,7 +132,7 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 40 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations2),
+        .idleAnimations = N(IdleAnimations2),
         .defenseTable = N(defenseTable2),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
@@ -168,7 +168,7 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations3),
+        .idleAnimations = N(IdleAnimations3),
         .defenseTable = N(defenseTable2),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
@@ -180,7 +180,7 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations3),
+        .idleAnimations = N(IdleAnimations3),
         .defenseTable = N(defenseTable2),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
@@ -192,7 +192,7 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations3),
+        .idleAnimations = N(IdleAnimations3),
         .defenseTable = N(defenseTable2),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
@@ -204,7 +204,7 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations3),
+        .idleAnimations = N(IdleAnimations3),
         .defenseTable = N(defenseTable2),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
@@ -220,7 +220,7 @@ ActorBlueprint NAMESPACE = {
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
     .initScript = &N(init),
-    .statusTable = N(statusTable),
+    .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -906,7 +906,7 @@ EvtScript N(shy_guy_on_spin_smash) = {
     EVT_END
 };
 
-s32 N(idleAnimations)[] = {
+s32 N(IdleAnimations)[] = {
     STATUS_NORMAL, ANIM_ShyGuy_Red_Anim01,
     STATUS_STONE, ANIM_ShyGuy_Red_Anim00,
     STATUS_SLEEP, ANIM_ShyGuy_Red_Anim12,

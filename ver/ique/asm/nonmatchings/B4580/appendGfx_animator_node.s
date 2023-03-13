@@ -69,8 +69,8 @@ glabel appendGfx_animator_node
 /* B4E00 8011DF20 3C06E300 */  lui       $a2, (0xE3001001 >> 16)
 /* B4E04 8011DF24 34C61001 */  ori       $a2, $a2, (0xE3001001 & 0xFFFF)
 /* B4E08 8011DF28 3C07D9FD */  lui       $a3, (0xD9FDFFFF >> 16)
-/* B4E0C 8011DF2C 3C09800A */  lui       $t1, %hi(gMasterGfxPos)
-/* B4E10 8011DF30 25299244 */  addiu     $t1, $t1, %lo(gMasterGfxPos)
+/* B4E0C 8011DF2C 3C09800A */  lui       $t1, %hi(gMainGfxPos)
+/* B4E10 8011DF30 25299244 */  addiu     $t1, $t1, %lo(gMainGfxPos)
 /* B4E14 8011DF34 34E7FFFF */  ori       $a3, $a3, (0xD9FDFFFF & 0xFFFF)
 /* B4E18 8011DF38 8D280000 */  lw        $t0, 0x0($t1)
 /* B4E1C 8011DF3C 96020000 */  lhu       $v0, 0x0($s0)
@@ -146,8 +146,8 @@ glabel appendGfx_animator_node
 /* B4F2C 8011E04C AC640000 */  sw        $a0, 0x0($v1)
 /* B4F30 8011E050 AC620004 */  sw        $v0, 0x4($v1)
 .LIQUE_8011E054:
-/* B4F34 8011E054 3C10800A */  lui       $s0, %hi(gMasterGfxPos)
-/* B4F38 8011E058 26109244 */  addiu     $s0, $s0, %lo(gMasterGfxPos)
+/* B4F34 8011E054 3C10800A */  lui       $s0, %hi(gMainGfxPos)
+/* B4F38 8011E058 26109244 */  addiu     $s0, $s0, %lo(gMainGfxPos)
 /* B4F3C 8011E05C 8E020000 */  lw        $v0, 0x0($s0)
 /* B4F40 8011E060 3C11E700 */  lui       $s1, (0xE7000000 >> 16)
 /* B4F44 8011E064 0040182D */  daddu     $v1, $v0, $zero
@@ -307,8 +307,8 @@ glabel appendGfx_animator_node
 /* B5170 8011E290 1462FFC0 */  bne       $v1, $v0, .LIQUE_8011E194
 /* B5174 8011E294 26940001 */   addiu    $s4, $s4, 0x1
 .LIQUE_8011E298:
-/* B5178 8011E298 3C05800A */  lui       $a1, %hi(gMasterGfxPos)
-/* B517C 8011E29C 24A59244 */  addiu     $a1, $a1, %lo(gMasterGfxPos)
+/* B5178 8011E298 3C05800A */  lui       $a1, %hi(gMainGfxPos)
+/* B517C 8011E29C 24A59244 */  addiu     $a1, $a1, %lo(gMainGfxPos)
 /* B5180 8011E2A0 0260202D */  daddu     $a0, $s3, $zero
 /* B5184 8011E2A4 8CA30000 */  lw        $v1, 0x0($a1)
 /* B5188 8011E2A8 3C02DF00 */  lui       $v0, (0xDF000000 >> 16)
@@ -323,8 +323,8 @@ glabel appendGfx_animator_node
 /* B51AC 8011E2CC AC820004 */  sw        $v0, 0x4($a0)
 .LIQUE_8011E2D0:
 /* B51B0 8011E2D0 0000882D */  daddu     $s1, $zero, $zero
-/* B51B4 8011E2D4 3C03800A */  lui       $v1, %hi(gMasterGfxPos)
-/* B51B8 8011E2D8 24639244 */  addiu     $v1, $v1, %lo(gMasterGfxPos)
+/* B51B4 8011E2D4 3C03800A */  lui       $v1, %hi(gMainGfxPos)
+/* B51B8 8011E2D8 24639244 */  addiu     $v1, $v1, %lo(gMainGfxPos)
 /* B51BC 8011E2DC 8C620000 */  lw        $v0, 0x0($v1)
 /* B51C0 8011E2E0 02C0802D */  daddu     $s0, $s6, $zero
 /* B51C4 8011E2E4 0040202D */  daddu     $a0, $v0, $zero

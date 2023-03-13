@@ -14,7 +14,7 @@ for line in fileinput.input():
         problems.append((filename, line_number, bad_symbol_name))
 
 for filename, line_number, bad_symbol_name in problems:
-    url = f"https://raw.githubusercontent.com/pmret/papermario/master/{filename}"
+    url = f"https://raw.githubusercontent.com/pmret/papermario/main/{filename}"
     old_lines = requests.get(url).text.splitlines()
 
     old_line = old_lines[line_number - 1].strip()

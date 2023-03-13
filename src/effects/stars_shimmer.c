@@ -291,9 +291,9 @@ void stars_shimmer_appendGfx(void* effect) {
 
     type = data->state;
 
-    gDPPipeSync(gMasterGfxPos++);
-    gSPSegment(gMasterGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
-    gSPDisplayList(gMasterGfxPos++, D_09000F20_338EE0);
+    gDPPipeSync(gMainGfxPos++);
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
+    gSPDisplayList(gMainGfxPos++, D_09000F20_338EE0);
 
     temp_s4 = (data->lifeTime - 1) * 3;
     shim_guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
@@ -315,7 +315,7 @@ void stars_shimmer_appendGfx(void* effect) {
             gf = 0.8f;
             bf = 0.7f;
             if (data->unk_00 != 0) {
-                gDPSetRenderMode(gMasterGfxPos++, G_RM_ZB_CLD_SURF, G_RM_ZB_CLD_SURF2);
+                gDPSetRenderMode(gMainGfxPos++, G_RM_ZB_CLD_SURF, G_RM_ZB_CLD_SURF2);
             }
             break;
         case 5:
@@ -353,12 +353,12 @@ void stars_shimmer_appendGfx(void* effect) {
             if (b > 255) {
                 b = 255;
             }
-            gDPSetPrimColor(gMasterGfxPos++, 0, 0, r, g, b, 255);
-            gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, r, g, b, 255);
+            gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                       G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-            gSPDisplayList(gMasterGfxPos++, D_E0044DB0[unk_28 & 7]);
-            gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+            gSPDisplayList(gMainGfxPos++, D_E0044DB0[unk_28 & 7]);
+            gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
         }
     }
-    gDPPipeSync(gMasterGfxPos++);
+    gDPPipeSync(gMainGfxPos++);
 }

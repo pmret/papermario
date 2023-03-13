@@ -10,7 +10,7 @@ extern EvtScript N(handleEvent_8021B3D0);
 extern EvtScript N(bite);
 extern EvtScript N(breath);
 
-s32 N(idleAnimations_8021B0A0)[] = {
+s32 N(IdleAnimations_8021B0A0)[] = {
     STATUS_NORMAL,    ANIM_LargePiranha_Putrid_Anim01,
     STATUS_STONE,     ANIM_LargePiranha_Putrid_Anim00,
     STATUS_SLEEP,     ANIM_LargePiranha_Putrid_Anim00,
@@ -23,13 +23,13 @@ s32 N(idleAnimations_8021B0A0)[] = {
     STATUS_END,
 };
 
-s32 N(defenseTable_8021B0EC)[] = {
+s32 N(DefenseTable_8021B0EC)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_FIRE, 0,
     ELEMENT_END,
 };
 
-s32 N(statusTable_8021B100)[] = {
+s32 N(StatusTable_8021B100)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 95,
@@ -54,15 +54,15 @@ s32 N(statusTable_8021B100)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(partsTable_8021B1AC)[] = {
+ActorPartBlueprint N(PartsTable_8021B1AC)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = 1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -15, 50 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations_8021B0A0),
-        .defenseTable = N(defenseTable_8021B0EC),
+        .idleAnimations = N(IdleAnimations_8021B0A0),
+        .defenseTable = N(DefenseTable_8021B0EC),
         .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 3, -14 },
@@ -74,10 +74,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_PUTRID_PIRANHA,
     .level = 17,
     .maxHP = 12,
-    .partCount = ARRAY_COUNT(N(partsTable_8021B1AC)),
-    .partsData = N(partsTable_8021B1AC),
+    .partCount = ARRAY_COUNT( N(PartsTable_8021B1AC)),
+    .partsData = N(PartsTable_8021B1AC),
     .initScript = &N(init_8021B1F8),
-    .statusTable = N(statusTable_8021B100),
+    .statusTable = N(StatusTable_8021B100),
     .escapeChance = 60,
     .airLiftChance = 20,
     .hurricaneChance = 20,

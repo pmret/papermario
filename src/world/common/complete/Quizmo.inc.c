@@ -31,6 +31,10 @@
 extern s16 MessagePlural;
 extern s16 MessageSingular;
 
+#if VERSION_PAL
+extern u8 MessagePlural_de[];
+#endif
+
 BSS s32 N(Quizmo_Worker);
 // needed for kmr_02
 #ifndef QUIZMO_PRE_STATIC_PAD
@@ -1112,7 +1116,16 @@ EvtScript N(EVS_Quizmo_QuizMain) = {
             EVT_IF_EQ(GB_CompletedQuizzes, 1)
                 EVT_CALL(SetMessageText, EVT_PTR(MessageSingular), 1)
             EVT_ELSE
+#if VERSION_PAL
+                EVT_CALL(GetLanguage, LocalVar(0))
+                EVT_IF_EQ(LocalVar(0), 1)
+                    EVT_CALL(SetMessageText, EVT_PTR(MessagePlural_de), 1)
+                EVT_ELSE
+                    EVT_CALL(SetMessageText, EVT_PTR(MessagePlural), 1)
+                EVT_END_IF
+#else
                 EVT_CALL(SetMessageText, EVT_PTR(MessagePlural), 1)
+#endif
             EVT_END_IF
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ChuckQuizmo_Talk, ANIM_ChuckQuizmo_Idle, 0, MSG_MGM_000F)
         EVT_END_IF

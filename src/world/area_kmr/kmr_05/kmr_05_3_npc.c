@@ -6,8 +6,8 @@
 
 EvtScript N(EVS_GoompaRemark) = {
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_WAIT(10)
-    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0))
+    EVT_WAIT(10 * DT)
+    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0 / DT))
     EVT_CALL(PlayerMoveTo, -60, -19, 0)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_Goompa_Talk, ANIM_Goompa_Idle, 0, MSG_CH0_00B7)

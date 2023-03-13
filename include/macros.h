@@ -227,4 +227,10 @@
 #define VLA 0
 #endif
 
+#if VERSION_PAL
+#define DT (50.0f/60.0f)
+#else
+#define DT (1.0f)
+#endif
+
 #endif

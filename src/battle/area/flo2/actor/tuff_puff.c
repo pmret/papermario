@@ -20,7 +20,7 @@ extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
 extern EvtScript N(nextTurn);
 
-s32 N(idleAnimations)[] = {
+s32 N(IdleAnimations)[] = {
     STATUS_NORMAL, ANIM_RuffPuff_Anim02,
     STATUS_STONE, ANIM_RuffPuff_Anim00,
     STATUS_SLEEP, ANIM_RuffPuff_Anim02,
@@ -35,7 +35,7 @@ s32 N(idleAnimations)[] = {
     STATUS_END,
 };
 
-s32 N(idleAnimations2)[] = {
+s32 N(IdleAnimations2)[] = {
     STATUS_NORMAL, ANIM_RuffPuff_Anim03,
     STATUS_STONE, ANIM_RuffPuff_Anim01,
     STATUS_SLEEP, ANIM_RuffPuff_Anim03,
@@ -50,7 +50,7 @@ s32 N(idleAnimations2)[] = {
     STATUS_END,
 };
 
-s32 N(defenseTable)[] = {
+s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL, 0,
     ELEMENT_SHOCK, 99,
     ELEMENT_MYSTERY, 0,
@@ -59,7 +59,7 @@ s32 N(defenseTable)[] = {
     ELEMENT_END,
 };
 
-s32 N(statusTable)[] = {
+s32 N(StatusTable)[] = {
     STATUS_NORMAL, 0,
     STATUS_DEFAULT, 0,
     STATUS_SLEEP, 0,
@@ -91,8 +91,8 @@ ActorPartBlueprint N(parts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(idleAnimations),
-        .defenseTable = N(defenseTable),
+        .idleAnimations = N(IdleAnimations),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -104,7 +104,7 @@ ActorPartBlueprint N(parts)[] = {
         .targetOffset = { 0, -50 },
         .opacity = 255,
         .idleAnimations = NULL,
-        .defenseTable = N(defenseTable),
+        .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
@@ -119,7 +119,7 @@ ActorBlueprint NAMESPACE = {
     .partCount = ARRAY_COUNT(N(parts)),
     .partsData = N(parts),
     .initScript = &N(init),
-    .statusTable = N(statusTable),
+    .statusTable = N(StatusTable),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -146,7 +146,7 @@ EvtScript N(init) = {
         EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -1, 9)
         EVT_CALL(SetTargetOffset, ACTOR_SELF, 2, -1, -41)
         EVT_CALL(SetActorSize, ACTOR_SELF, 20, 25)
-        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations)))
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations)))
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_RuffPuff_Anim02)
         EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_IS_BIG), 0)
     EVT_ELSE
@@ -155,7 +155,7 @@ EvtScript N(init) = {
         EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 1, 14)
         EVT_CALL(SetTargetOffset, ACTOR_SELF, 2, 1, -36)
         EVT_CALL(SetActorSize, ACTOR_SELF, 28, 35)
-        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(idleAnimations2)))
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations2)))
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_RuffPuff_Anim03)
         EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_IS_BIG), 1)
     EVT_END_IF

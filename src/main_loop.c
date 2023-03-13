@@ -157,32 +157,32 @@ void step_game_loop(void) {
 
 void gfx_task_background(void) {
     gDisplayContext = &D_80164000[gCurrentDisplayContextIndex];
-    gMasterGfxPos = &gDisplayContext->backgroundGfx[0];
+    gMainGfxPos = &gDisplayContext->backgroundGfx[0];
 
     gfx_init_state();
     gfx_draw_background();
 
-    gDPFullSync(gMasterGfxPos++);
-    gSPEndDisplayList(gMasterGfxPos++);
+    gDPFullSync(gMainGfxPos++);
+    gSPEndDisplayList(gMainGfxPos++);
 
     // TODO these << 3 >> 3 shouldn't be necessary. There's almost definitely something we're missing here...
-    ASSERT((s32)((u32)((gMasterGfxPos - gDisplayContext->backgroundGfx) << 3) >> 3) < ARRAY_COUNT(
+    ASSERT((s32)((u32)((gMainGfxPos - gDisplayContext->backgroundGfx) << 3) >> 3) < ARRAY_COUNT(
                gDisplayContext->backgroundGfx))
 
-    nuGfxTaskStart(&gDisplayContext->backgroundGfx[0], (u32)(gMasterGfxPos - gDisplayContext->backgroundGfx) * 8,
+    nuGfxTaskStart(&gDisplayContext->backgroundGfx[0], (u32)(gMainGfxPos - gDisplayContext->backgroundGfx) * 8,
                    NU_GFX_UCODE_F3DEX2, NU_SC_NOSWAPBUFFER);
 }
 
 void gfx_draw_frame(void) {
     gMatrixListPos = 0;
-    gMasterGfxPos = &gDisplayContext->mainGfx[0];
+    gMainGfxPos = &gDisplayContext->mainGfx[0];
 
     if (gOverrideFlags & GLOBAL_OVERRIDES_8) {
         gCurrentDisplayContextIndex = gCurrentDisplayContextIndex ^ 1;
         return;
     }
 
-    gSPMatrix(gMasterGfxPos++, &MasterIdentityMtx, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, &MasterIdentityMtx, G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     spr_render_init();
 
@@ -238,12 +238,12 @@ void gfx_draw_frame(void) {
         }
     }
 
-    ASSERT((s32)(((u32)(gMasterGfxPos - gDisplayContext->mainGfx) << 3) >> 3) < ARRAY_COUNT(gDisplayContext->mainGfx));
+    ASSERT((s32)(((u32)(gMainGfxPos - gDisplayContext->mainGfx) << 3) >> 3) < ARRAY_COUNT(gDisplayContext->mainGfx));
 
-    gDPFullSync(gMasterGfxPos++);
-    gSPEndDisplayList(gMasterGfxPos++);
+    gDPFullSync(gMainGfxPos++);
+    gSPEndDisplayList(gMainGfxPos++);
 
-    nuGfxTaskStart(gDisplayContext->mainGfx, (u32)(gMasterGfxPos - gDisplayContext->mainGfx) * 8, NU_GFX_UCODE_F3DEX2,
+    nuGfxTaskStart(gDisplayContext->mainGfx, (u32)(gMainGfxPos - gDisplayContext->mainGfx) * 8, NU_GFX_UCODE_F3DEX2,
                    NU_SC_TASK_LODABLE | NU_SC_SWAPBUFFER);
     gCurrentDisplayContextIndex = gCurrentDisplayContextIndex ^ 1;
     crash_screen_set_draw_info(nuGfxCfb_ptr, SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -358,6 +358,6 @@ s32 get_time_freeze_mode(void) {
     return timeFreezeMode;
 }
 
-#if VERSION_CN
+#if VERSION_IQUE
 static const f32 rodata_padding[] = {0.0f, 0.0f};
 #endif

@@ -2,7 +2,7 @@
 #include "filemenu.h"
 #include "fio.h"
 
-#if VERSION_CN
+#if VERSION_IQUE
 #define DELETE_FILE_DELETE_X            20
 #define DELETE_FILE_FILE_X              50
 #define DELETE_FILE_NUMBER_X            93

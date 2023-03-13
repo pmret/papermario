@@ -56,9 +56,9 @@ void appendGfx_speech_bubble(void) {
         guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
         guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-        gSPMatrix(gMasterGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
+        gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                   G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-        gSPDisplayList(gMasterGfxPos++, &speech_bubble_gfx);
+        gSPDisplayList(gMainGfxPos++, &speech_bubble_gfx);
 
         foldImg.raster  = speech_bubble_img;
         foldImg.palette = speech_bubble_pal;
@@ -72,7 +72,7 @@ void appendGfx_speech_bubble(void) {
                     SpeechBubblePtr->brightness, SpeechBubblePtr->brightness, SpeechBubblePtr->brightness, 255, 0x440);
         fold_appendGfx_component(0, &foldImg, 0x40, mtxTransform);
 
-        gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+        gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     }
 }
 

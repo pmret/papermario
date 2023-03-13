@@ -2,7 +2,7 @@
 #include "ld_addrs.h"
 #include "sprite.h"
 
-#if VERSION_CN
+#if VERSION_IQUE
 // TODO: remove if section is split in iQue release
 extern Addr fold_gfx_data_ROM_START;
 #endif
@@ -724,18 +724,18 @@ void func_8013B1B0(FoldState* state, Matrix4f mtx) {
     s32 t1;
     s32 t2;
 
-    gDPPipeSync(gMasterGfxPos++);
+    gDPPipeSync(gMainGfxPos++);
 
     if (!(state->flags & FOLD_STATE_FLAG_10)) {
-        gSPDisplayList(gMasterGfxPos++, DefaultFoldSetupGfx);
+        gSPDisplayList(gMainGfxPos++, DefaultFoldSetupGfx);
         if (state->flags & FOLD_STATE_FLAG_NO_FILTERING) {
-            gDPSetTextureFilter(gMasterGfxPos++, G_TF_POINT);
+            gDPSetTextureFilter(gMainGfxPos++, G_TF_POINT);
         }
         if (state->flags & FOLD_STATE_FLAG_G_CULL_BACK) {
-            gSPSetGeometryMode(gMasterGfxPos++, G_CULL_BACK);
+            gSPSetGeometryMode(gMainGfxPos++, G_CULL_BACK);
         }
         if (state->flags & FOLD_STATE_FLAG_G_CULL_FRONT) {
-            gSPSetGeometryMode(gMasterGfxPos++, G_CULL_FRONT);
+            gSPSetGeometryMode(gMainGfxPos++, G_CULL_FRONT);
         }
 
         fold = &D_8014EE98[state->renderType];
@@ -777,9 +777,9 @@ void func_8013B1B0(FoldState* state, Matrix4f mtx) {
         }
 
         if (state->flags & FOLD_STATE_FLAG_40) {
-            gSPClearGeometryMode(gMasterGfxPos++, G_ZBUFFER);
+            gSPClearGeometryMode(gMainGfxPos++, G_ZBUFFER);
         } else {
-            gSPSetGeometryMode(gMasterGfxPos++, G_ZBUFFER);
+            gSPSetGeometryMode(gMainGfxPos++, G_ZBUFFER);
             if (cond) {
                 mode1 |= 0x10;
                 mode2 |= 0x10;
@@ -789,77 +789,77 @@ void func_8013B1B0(FoldState* state, Matrix4f mtx) {
             }
         }
         state->unk_78 = mode2;
-        gDPSetRenderMode(gMasterGfxPos++, mode1, mode2);
+        gDPSetRenderMode(gMainGfxPos++, mode1, mode2);
 
         switch (renderType) {
             case FOLD_RENDER_TYPE_1:
-                gDPSetCombineMode(gMasterGfxPos++, G_CC_MODULATEIDECALA_PRIM, G_CC_MODULATEIDECALA_PRIM);
-                gDPSetPrimColor(gMasterGfxPos++, 0, 0, state->unk_1C[1][0], state->unk_1C[1][1], state->unk_1C[1][2], 0);
+                gDPSetCombineMode(gMainGfxPos++, G_CC_MODULATEIDECALA_PRIM, G_CC_MODULATEIDECALA_PRIM);
+                gDPSetPrimColor(gMainGfxPos++, 0, 0, state->unk_1C[1][0], state->unk_1C[1][1], state->unk_1C[1][2], 0);
                 break;
             case FOLD_RENDER_TYPE_2:
                 if (primColor <= 0) {
                     return;
                 }
-                gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL0,
+                gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL0,
                                   TEXEL0, 0, PRIMITIVE, 0);
-                gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, primColor);
+                gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, primColor);
                 break;
             case FOLD_RENDER_TYPE_3:
                 if (primColor <= 0) {
                     return;
                 }
-                gDPSetCombineMode(gMasterGfxPos++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
-                gDPSetPrimColor(gMasterGfxPos++, 0, 0, state->unk_1C[1][0], state->unk_1C[1][1],
+                gDPSetCombineMode(gMainGfxPos++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
+                gDPSetPrimColor(gMainGfxPos++, 0, 0, state->unk_1C[1][0], state->unk_1C[1][1],
                                 state->unk_1C[1][2], primColor);
                 break;
             case FOLD_RENDER_TYPE_4:
-                gDPSetCombineLERP(gMasterGfxPos++, 1, PRIMITIVE, TEXEL0, PRIMITIVE, 0, 0, 0, TEXEL0, 1, PRIMITIVE,
+                gDPSetCombineLERP(gMainGfxPos++, 1, PRIMITIVE, TEXEL0, PRIMITIVE, 0, 0, 0, TEXEL0, 1, PRIMITIVE,
                                   TEXEL0, PRIMITIVE, 0, 0, 0, TEXEL0);
-                gDPSetPrimColor(gMasterGfxPos++, 0, 0, state->unk_1C[1][0], state->unk_1C[1][1], state->unk_1C[1][2], 0);
+                gDPSetPrimColor(gMainGfxPos++, 0, 0, state->unk_1C[1][0], state->unk_1C[1][1], state->unk_1C[1][2], 0);
                 break;
             case FOLD_RENDER_TYPE_5:
                 if (primColor <= 0) {
                     return;
                 }
-                gDPSetCombineLERP(gMasterGfxPos++, 1, 0, TEXEL0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 1, 0, TEXEL0,
+                gDPSetCombineLERP(gMainGfxPos++, 1, 0, TEXEL0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 1, 0, TEXEL0,
                                   PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0);
-                gDPSetPrimColor(gMasterGfxPos++, 0, 0, state->unk_1C[1][0], state->unk_1C[1][1],
+                gDPSetPrimColor(gMainGfxPos++, 0, 0, state->unk_1C[1][0], state->unk_1C[1][1],
                                 state->unk_1C[1][2], primColor);
                 break;
             case FOLD_RENDER_TYPE_6:
-                gDPSetCombineMode(gMasterGfxPos++, G_CC_MODULATEIDECALA, G_CC_MODULATEIDECALA);
-                gSPSetGeometryMode(gMasterGfxPos++, G_SHADE | G_SHADING_SMOOTH);
-                gSPClearGeometryMode(gMasterGfxPos++, G_LIGHTING);
+                gDPSetCombineMode(gMainGfxPos++, G_CC_MODULATEIDECALA, G_CC_MODULATEIDECALA);
+                gSPSetGeometryMode(gMainGfxPos++, G_SHADE | G_SHADING_SMOOTH);
+                gSPClearGeometryMode(gMainGfxPos++, G_LIGHTING);
                 break;
             case FOLD_RENDER_TYPE_9:
-                gDPSetCombineLERP(gMasterGfxPos++, 1, SHADE, TEXEL0, SHADE, 0, 0, 0, TEXEL0, 1, SHADE, TEXEL0, SHADE,
+                gDPSetCombineLERP(gMainGfxPos++, 1, SHADE, TEXEL0, SHADE, 0, 0, 0, TEXEL0, 1, SHADE, TEXEL0, SHADE,
                                   0, 0, 0, TEXEL0);
-                gSPSetGeometryMode(gMasterGfxPos++, G_SHADE | G_SHADING_SMOOTH);
-                gSPClearGeometryMode(gMasterGfxPos++, G_LIGHTING);
+                gSPSetGeometryMode(gMainGfxPos++, G_SHADE | G_SHADING_SMOOTH);
+                gSPClearGeometryMode(gMainGfxPos++, G_LIGHTING);
                 break;
             case FOLD_RENDER_TYPE_7:
-                gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0,
+                gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0,
                                   SHADE, 0);
-                gSPSetGeometryMode(gMasterGfxPos++, G_SHADE | G_SHADING_SMOOTH);
-                gSPClearGeometryMode(gMasterGfxPos++, G_LIGHTING);
+                gSPSetGeometryMode(gMainGfxPos++, G_SHADE | G_SHADING_SMOOTH);
+                gSPClearGeometryMode(gMainGfxPos++, G_LIGHTING);
                 break;
             case FOLD_RENDER_TYPE_8:
-                gDPSetCombineMode(gMasterGfxPos++, G_CC_MODULATEIA, G_CC_MODULATEIA);
-                gSPSetGeometryMode(gMasterGfxPos++, G_SHADE | G_SHADING_SMOOTH);
-                gSPClearGeometryMode(gMasterGfxPos++, G_LIGHTING);
+                gDPSetCombineMode(gMainGfxPos++, G_CC_MODULATEIA, G_CC_MODULATEIA);
+                gSPSetGeometryMode(gMainGfxPos++, G_SHADE | G_SHADING_SMOOTH);
+                gSPClearGeometryMode(gMainGfxPos++, G_LIGHTING);
                 break;
             case FOLD_RENDER_TYPE_A:
-                gDPSetCombineLERP(gMasterGfxPos++, 1, SHADE, TEXEL0, SHADE, TEXEL0, 0, SHADE, 0, 1, SHADE, TEXEL0,
+                gDPSetCombineLERP(gMainGfxPos++, 1, SHADE, TEXEL0, SHADE, TEXEL0, 0, SHADE, 0, 1, SHADE, TEXEL0,
                                   SHADE, TEXEL0, 0, SHADE, 0);
-                gSPSetGeometryMode(gMasterGfxPos++, G_SHADE | G_SHADING_SMOOTH);
-                gSPClearGeometryMode(gMasterGfxPos++, G_LIGHTING);
+                gSPSetGeometryMode(gMainGfxPos++, G_SHADE | G_SHADING_SMOOTH);
+                gSPClearGeometryMode(gMainGfxPos++, G_LIGHTING);
                 break;
             case FOLD_RENDER_TYPE_B:
                 if (state->flags & (FOLD_STATE_FLAG_2000 | FOLD_STATE_FLAG_8000)) {
                     Camera* currentCam = &gCameras[gCurrentCameraID];
 
-                    gDPSetCombineMode(gMasterGfxPos++, G_CC_MODULATEIDECALA, G_CC_MODULATEIDECALA);
-                    gSPSetGeometryMode(gMasterGfxPos++, G_SHADE | G_LIGHTING | G_SHADING_SMOOTH);
+                    gDPSetCombineMode(gMainGfxPos++, G_CC_MODULATEIDECALA, G_CC_MODULATEIDECALA);
+                    gSPSetGeometryMode(gMainGfxPos++, G_SHADE | G_LIGHTING | G_SHADING_SMOOTH);
 
                     angle1 = cosine(currentCam->currentYaw) * 120.0f;
                     angle2 = cosine(currentCam->currentYaw + 90.0f) * 120.0f;
@@ -869,24 +869,24 @@ void func_8013B1B0(FoldState* state, Matrix4f mtx) {
                     D_8014EE18.l[1].l.dir[0] = angle1;
                     D_8014EE18.l[0].l.dir[2] = angle2;
                     D_8014EE18.l[1].l.dir[2] = t2;
-                    gSPSetLights2(gMasterGfxPos++, D_8014EE18);
+                    gSPSetLights2(gMainGfxPos++, D_8014EE18);
                     break;
                 }
-                gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+                gDPSetCombineMode(gMainGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
                 break;
             case FOLD_RENDER_TYPE_C:
                 if (state->unk_1C[1][0] == 0) {
                     primColor = state->unk_1C[1][3] * alphaComp;
-                    gDPSetCombineLERP(gMasterGfxPos++, NOISE, PRIMITIVE, PRIMITIVE, TEXEL0, TEXEL0, 0, PRIMITIVE, 0,
+                    gDPSetCombineLERP(gMainGfxPos++, NOISE, PRIMITIVE, PRIMITIVE, TEXEL0, TEXEL0, 0, PRIMITIVE, 0,
                                       NOISE, PRIMITIVE, PRIMITIVE, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
-                    gDPSetPrimColor(gMasterGfxPos++, 0, 0, state->unk_1C[1][1], state->unk_1C[1][1],
+                    gDPSetPrimColor(gMainGfxPos++, 0, 0, state->unk_1C[1][1], state->unk_1C[1][1],
                                     state->unk_1C[1][1],primColor);
                 } else if (state->unk_1C[1][0] == 1) {
                     primColor = state->unk_1C[1][3] * alphaComp;
-                    gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL0,
+                    gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL0,
                                       TEXEL0, 0, PRIMITIVE, 0);
-                    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, primColor);
-                    gDPSetAlphaCompare(gMasterGfxPos++, G_AC_DITHER);
+                    gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, primColor);
+                    gDPSetAlphaCompare(gMainGfxPos++, G_AC_DITHER);
                 } else if (state->unk_1C[1][0] == 2) {
                     blendColor = state->unk_1C[1][3] + state->unk_1C[1][1];
                     if (blendColor > 255) {
@@ -894,28 +894,28 @@ void func_8013B1B0(FoldState* state, Matrix4f mtx) {
                     }
 
                     primColor = state->unk_1C[1][3] * alphaComp;
-                    gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL0,
+                    gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL0,
                                       TEXEL0, 0, PRIMITIVE, 0);
-                    gDPSetAlphaDither(gMasterGfxPos++, G_AD_NOISE);
-                    gDPSetAlphaCompare(gMasterGfxPos++, G_AC_THRESHOLD);
-                    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, primColor);
-                    gDPSetBlendColor(gMasterGfxPos++, 0, 0, 0, blendColor);
+                    gDPSetAlphaDither(gMainGfxPos++, G_AD_NOISE);
+                    gDPSetAlphaCompare(gMainGfxPos++, G_AC_THRESHOLD);
+                    gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, primColor);
+                    gDPSetBlendColor(gMainGfxPos++, 0, 0, 0, blendColor);
                 }
                 break;
             case FOLD_RENDER_TYPE_D:
-                gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, PRIMITIVE, 0, 0, 0, TEXEL0, 0, 0, 0, PRIMITIVE, 0, 0, 0,
+                gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, PRIMITIVE, 0, 0, 0, TEXEL0, 0, 0, 0, PRIMITIVE, 0, 0, 0,
                                   TEXEL0);
-                gDPSetPrimColor(gMasterGfxPos++, 0, 0, state->unk_1C[1][0], state->unk_1C[1][1], state->unk_1C[1][2], 0);
+                gDPSetPrimColor(gMainGfxPos++, 0, 0, state->unk_1C[1][0], state->unk_1C[1][1], state->unk_1C[1][2], 0);
                 break;
             case FOLD_RENDER_TYPE_0:
             case FOLD_RENDER_TYPE_E:
             case FOLD_RENDER_TYPE_10:
-                gDPSetCombineMode(gMasterGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
+                gDPSetCombineMode(gMainGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
                 break;
             case FOLD_RENDER_TYPE_F:
-                gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0,
+                gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0,
                                   PRIMITIVE, 0);
-                gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, state->unk_1C[1][1]);
+                gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, state->unk_1C[1][1]);
                 break;
         }
     }
@@ -933,16 +933,16 @@ void func_8013B1B0(FoldState* state, Matrix4f mtx) {
             break;
         case FOLD_MESH_TYPE_4:
             func_8013CFA8(state, mtx);
-            gDPPipeSync(gMasterGfxPos++);
+            gDPPipeSync(gMainGfxPos++);
             func_8013E904(state, mtx);
             break;
     }
 
-    gDPPipeSync(gMasterGfxPos++);
+    gDPPipeSync(gMainGfxPos++);
 
     if (state->renderType == FOLD_RENDER_TYPE_C) {
-        gDPSetAlphaCompare(gMasterGfxPos++, G_AC_NONE);
-        gDPSetAlphaDither(gMasterGfxPos++, G_AD_DISABLE);
+        gDPSetAlphaCompare(gMainGfxPos++, G_AC_NONE);
+        gDPSetAlphaDither(gMainGfxPos++, G_AD_DISABLE);
     }
 }
 
@@ -1326,8 +1326,8 @@ void func_8013CFA8(FoldState* state, Matrix4f mtx) {
     s32 i;
 
     if (!(state->flags & FOLD_STATE_FLAG_20)) {
-        gDPSetTextureLUT(gMasterGfxPos++, G_TT_RGBA16);
-        gDPLoadTLUT_pal16(gMasterGfxPos++, 0, fold_currentImage->palette);
+        gDPSetTextureLUT(gMainGfxPos++, G_TT_RGBA16);
+        gDPLoadTLUT_pal16(gMainGfxPos++, 0, fold_currentImage->palette);
     }
 
     i = state->firstVtxIdx;
@@ -1351,7 +1351,7 @@ void func_8013CFA8(FoldState* state, Matrix4f mtx) {
                     || state->renderType == FOLD_RENDER_TYPE_F
                     || state->renderType == FOLD_RENDER_TYPE_7)
             ) {
-                gDPScrollMultiTile2_4b(gMasterGfxPos++,
+                gDPScrollMultiTile2_4b(gMainGfxPos++,
                     fold_currentImage->raster, G_IM_FMT_CI,
                     fold_currentImage->width, fold_currentImage->height, // img size
                     uls, ult, // top left
@@ -1361,10 +1361,10 @@ void func_8013CFA8(FoldState* state, Matrix4f mtx) {
                     8, 8, // mask
                     G_TX_NOLOD, G_TX_NOLOD, // shift,
                     0x100, 0x100); // scroll
-                gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0x0100, 2, 0,
+                gDPSetTile(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0x0100, 2, 0,
                             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP,
                             G_TX_NOMASK, G_TX_NOLOD);
-                gDPSetTileSize(gMasterGfxPos++, 2, 0, 0, 252, 0);
+                gDPSetTileSize(gMainGfxPos++, 2, 0, 0, 252, 0);
 
                 alpha = 255;
                 switch (state->renderType) {
@@ -1383,29 +1383,29 @@ void func_8013CFA8(FoldState* state, Matrix4f mtx) {
                     cam = &gCameras[gCurrentCamID];
 
                     if (gGameStatusPtr->isBattle == 2) {
-                        gSPViewport(gMasterGfxPos++, &D_8014EE50);
+                        gSPViewport(gMainGfxPos++, &D_8014EE50);
                     } else {
-                        gSPViewport(gMasterGfxPos++, &cam->vpAlt);
+                        gSPViewport(gMainGfxPos++, &cam->vpAlt);
                     }
 
-                    gDPSetRenderMode(gMasterGfxPos++, G_RM_PASS, state->unk_78);
+                    gDPSetRenderMode(gMainGfxPos++, G_RM_PASS, state->unk_78);
 
                     if (alpha == -1) {
-                        gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, 0, SHADE, 0, TEXEL1, 0, 0, 0, 0, 0, 0,
+                        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, 0, SHADE, 0, TEXEL1, 0, 0, 0, 0, 0, 0,
                                             0, 0, COMBINED);
                     } else {
-                        gDPSetEnvColor(gMasterGfxPos++, 0, 0, 0, alpha);
-                        gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, 0, ENVIRONMENT, 0, TEXEL1, 0, 0, 0, 0,
+                        gDPSetEnvColor(gMainGfxPos++, 0, 0, 0, alpha);
+                        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, 0, ENVIRONMENT, 0, TEXEL1, 0, 0, 0, 0,
                                             0, 0, 0, 0, COMBINED);
                     }
 
-                    gSPVertex(gMasterGfxPos++, &fold_vtxBuf[i], 4, 0);
-                    gSP2Triangles(gMasterGfxPos++, 0, 2, 1, 0, 1, 2, 3, 0);
-                    gDPPipeSync(gMasterGfxPos++);
+                    gSPVertex(gMainGfxPos++, &fold_vtxBuf[i], 4, 0);
+                    gSP2Triangles(gMainGfxPos++, 0, 2, 1, 0, 1, 2, 3, 0);
+                    gDPPipeSync(gMainGfxPos++);
                 }
                 create_shading_palette(mtx, uls, ult, lrs, lrt, alpha, state->unk_78);
             } else {
-                gDPScrollTextureTile_4b(gMasterGfxPos++,
+                gDPScrollTextureTile_4b(gMainGfxPos++,
                     fold_currentImage->raster, G_IM_FMT_CI,
                     fold_currentImage->width, fold_currentImage->height, // img size
                     uls, ult, // top left
@@ -1421,15 +1421,15 @@ void func_8013CFA8(FoldState* state, Matrix4f mtx) {
                     cam = &gCameras[gCurrentCamID];
 
                     if (gGameStatusPtr->isBattle == 2) {
-                        gSPViewport(gMasterGfxPos++, &D_8014EE50);
+                        gSPViewport(gMainGfxPos++, &D_8014EE50);
                     } else {
-                        gSPViewport(gMasterGfxPos++, &cam->vpAlt);
+                        gSPViewport(gMainGfxPos++, &cam->vpAlt);
                     }
 
                     if (alpha2 == 255) {
-                        gDPSetRenderMode(gMasterGfxPos++, G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2);
+                        gDPSetRenderMode(gMainGfxPos++, G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2);
                     } else {
-                        gDPSetRenderMode(gMasterGfxPos++, G_RM_ZB_XLU_SURF, G_RM_ZB_XLU_SURF2);
+                        gDPSetRenderMode(gMainGfxPos++, G_RM_ZB_XLU_SURF, G_RM_ZB_XLU_SURF2);
                     }
 
                     switch (state->renderType) {
@@ -1446,28 +1446,28 @@ void func_8013CFA8(FoldState* state, Matrix4f mtx) {
                     }
 
                     if (alpha2 == -1) {
-                        gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, 0, SHADE, 0, TEXEL0, 0, 0, 0, 0, 0, SHADE, 0, TEXEL0, 0);
+                        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, 0, SHADE, 0, TEXEL0, 0, 0, 0, 0, 0, SHADE, 0, TEXEL0, 0);
                     } else {
-                        gDPSetEnvColor(gMasterGfxPos++, 0, 0, 0, alpha2);
-                        gDPSetCombineLERP(gMasterGfxPos++, 0, 0, 0, 0, ENVIRONMENT, 0, TEXEL0, 0, 0, 0, 0, 0,
+                        gDPSetEnvColor(gMainGfxPos++, 0, 0, 0, alpha2);
+                        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, 0, ENVIRONMENT, 0, TEXEL0, 0, 0, 0, 0, 0,
                                         ENVIRONMENT, 0, TEXEL0, 0);
                     }
 
-                    gSPVertex(gMasterGfxPos++, &fold_vtxBuf[i], 4, 0);
-                    gSP2Triangles(gMasterGfxPos++, 0, 2, 1, 0, 1, 2, 3, 0);
-                    gDPPipeSync(gMasterGfxPos++);
+                    gSPVertex(gMainGfxPos++, &fold_vtxBuf[i], 4, 0);
+                    gSP2Triangles(gMainGfxPos++, 0, 2, 1, 0, 1, 2, 3, 0);
+                    gDPPipeSync(gMainGfxPos++);
 
                     if (alpha2 == 255) {
-                        gDPSetRenderMode(gMasterGfxPos++, G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2);
+                        gDPSetRenderMode(gMainGfxPos++, G_RM_AA_ZB_TEX_EDGE, G_RM_AA_ZB_TEX_EDGE2);
                     } else {
-                        gDPSetRenderMode(gMasterGfxPos++, G_RM_ZB_XLU_SURF, G_RM_ZB_XLU_SURF2);
+                        gDPSetRenderMode(gMainGfxPos++, G_RM_ZB_XLU_SURF, G_RM_ZB_XLU_SURF2);
                     }
 
-                    gDPSetEnvColor(gMasterGfxPos++, 100, 100, 100, 255);
-                    gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, alpha2);
-                    gDPSetCombineLERP(gMasterGfxPos++, SHADE, ENVIRONMENT, TEXEL0, TEXEL0, 0, 0, 0, TEXEL0, SHADE,
+                    gDPSetEnvColor(gMainGfxPos++, 100, 100, 100, 255);
+                    gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, alpha2);
+                    gDPSetCombineLERP(gMainGfxPos++, SHADE, ENVIRONMENT, TEXEL0, TEXEL0, 0, 0, 0, TEXEL0, SHADE,
                                     ENVIRONMENT, TEXEL0, TEXEL0, 0, 0, 0, TEXEL0);
-                    gDPSetColorDither(gMasterGfxPos++, G_CD_MAGICSQ);
+                    gDPSetColorDither(gMainGfxPos++, G_CD_MAGICSQ);
                 }
             }
         }
@@ -1475,16 +1475,16 @@ void func_8013CFA8(FoldState* state, Matrix4f mtx) {
         if ((gSpriteShadingProfile->flags & 2) && D_80156954[0][0].arrayIdx != 0 && (state->flags & someFlags)) {
             cam = &gCameras[gCurrentCamID];
             if (gGameStatusPtr->isBattle == 2) {
-                gSPViewport(gMasterGfxPos++, &D_8014EE40);
+                gSPViewport(gMainGfxPos++, &D_8014EE40);
                 D_8014EE50.vp.vtrans[0] = D_8014EE40.vp.vtrans[0] + gGameStatusPtr->unk_82;
                 D_8014EE50.vp.vtrans[1] = D_8014EE40.vp.vtrans[1] + gGameStatusPtr->unk_83;
             } else {
-                gSPViewport(gMasterGfxPos++, &cam->vp);
+                gSPViewport(gMainGfxPos++, &cam->vp);
             }
         }
 
-        gSPVertex(gMasterGfxPos++, &fold_vtxBuf[i], 4, 0);
-        gSP2Triangles(gMasterGfxPos++, 0, 2, 1, 0, 1, 2, 3, 0);
+        gSPVertex(gMainGfxPos++, &fold_vtxBuf[i], 4, 0);
+        gSP2Triangles(gMainGfxPos++, 0, 2, 1, 0, 1, 2, 3, 0);
 
         if (i + 3 >= state->lastVtxIdx) {
             break;
@@ -1499,8 +1499,8 @@ void func_8013DAB4(FoldState* state, Matrix4f mtx) {
     s32 firstVtxIdx;
 
     if (!(state->flags & FOLD_STATE_FLAG_20)) {
-        gDPSetTextureLUT(gMasterGfxPos++, G_TT_RGBA16);
-        gDPLoadTLUT_pal16(gMasterGfxPos++, 0, fold_currentImage->palette);
+        gDPSetTextureLUT(gMainGfxPos++, G_TT_RGBA16);
+        gDPLoadTLUT_pal16(gMainGfxPos++, 0, fold_currentImage->palette);
     }
 
     firstVtxIdx = state->firstVtxIdx;
@@ -1518,7 +1518,7 @@ void func_8013DAB4(FoldState* state, Matrix4f mtx) {
                     || state->renderType == FOLD_RENDER_TYPE_2
                     || state->renderType == FOLD_RENDER_TYPE_7)) {
                     s32 alpha = 255;
-                    gDPScrollMultiTile2_4b(gMasterGfxPos++,
+                    gDPScrollMultiTile2_4b(gMainGfxPos++,
                         fold_currentImage->raster, G_IM_FMT_CI,
                         fold_currentImage->width, fold_currentImage->height, // img size
                         (fold_vtxBuf[ulIdx].v.tc[0] >> 5) - 0x100, (fold_vtxBuf[ulIdx].v.tc[1] >> 5) - 0x100, // top left
@@ -1528,8 +1528,8 @@ void func_8013DAB4(FoldState* state, Matrix4f mtx) {
                         8, 8, // mask
                         G_TX_NOLOD, G_TX_NOLOD, // shift,
                         0x100, 0x100); // scroll
-                    gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0x0100, 2, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
-                    gDPSetTileSize(gMasterGfxPos++, 2, 0, 0, 63 << 2, 0);
+                    gDPSetTile(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0x0100, 2, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
+                    gDPSetTileSize(gMainGfxPos++, 2, 0, 0, 63 << 2, 0);
                     switch (state->renderType) {
                         case FOLD_RENDER_TYPE_0:
                             alpha = 255;
@@ -1547,7 +1547,7 @@ void func_8013DAB4(FoldState* state, Matrix4f mtx) {
                                            (fold_vtxBuf[lrIdx].v.tc[0] >> 5) - 0x100, (fold_vtxBuf[lrIdx].v.tc[1] >> 5) - 0x100,
                                            alpha, state->unk_78);
                 } else {
-                    gDPScrollTextureTile_4b(gMasterGfxPos++,
+                    gDPScrollTextureTile_4b(gMainGfxPos++,
                         fold_currentImage->raster, G_IM_FMT_CI,
                         fold_currentImage->width, fold_currentImage->height, // img size
                         (fold_vtxBuf[ulIdx].v.tc[0] >> 5) - 0x100, (fold_vtxBuf[ulIdx].v.tc[1] >> 5) - 0x100, // top left
@@ -1560,11 +1560,11 @@ void func_8013DAB4(FoldState* state, Matrix4f mtx) {
                 }
             }
 
-            gSPVertex(gMasterGfxPos++, &fold_vtxBuf[ulIdx], 1, 0);
-            gSPVertex(gMasterGfxPos++, &fold_vtxBuf[urIdx], 1, 1);
-            gSPVertex(gMasterGfxPos++, &fold_vtxBuf[llIdx], 1, 2);
-            gSPVertex(gMasterGfxPos++, &fold_vtxBuf[lrIdx], 1, 3);
-            gSP2Triangles(gMasterGfxPos++, 0, 2, 1, 0, 1, 2, 3, 0);
+            gSPVertex(gMainGfxPos++, &fold_vtxBuf[ulIdx], 1, 0);
+            gSPVertex(gMainGfxPos++, &fold_vtxBuf[urIdx], 1, 1);
+            gSPVertex(gMainGfxPos++, &fold_vtxBuf[llIdx], 1, 2);
+            gSPVertex(gMainGfxPos++, &fold_vtxBuf[lrIdx], 1, 3);
+            gSP2Triangles(gMainGfxPos++, 0, 2, 1, 0, 1, 2, 3, 0);
         }
     }
 }
@@ -1575,11 +1575,11 @@ void func_8013E2F0(FoldState* state, Matrix4f mtx) {
     }
 
     guScale(&gDisplayContext->matrixStack[gMatrixListPos], 0.1f, 0.1f, 0.1f);
-    gSPMatrix(gMasterGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gSPMatrix(gMainGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
     if (!(state->flags & FOLD_STATE_FLAG_20)) {
-        gDPSetTextureLUT(gMasterGfxPos++, G_TT_RGBA16);
-        gDPLoadTLUT_pal16(gMasterGfxPos++, 0, fold_currentImage->palette);
+        gDPSetTextureLUT(gMainGfxPos++, G_TT_RGBA16);
+        gDPLoadTLUT_pal16(gMainGfxPos++, 0, fold_currentImage->palette);
         if ((gSpriteShadingProfile->flags & 1)
             && (state->flags & (FOLD_STATE_FLAG_100000 | FOLD_STATE_FLAG_80000))
             && (state->renderType == FOLD_RENDER_TYPE_0
@@ -1588,14 +1588,14 @@ void func_8013E2F0(FoldState* state, Matrix4f mtx) {
                 || state->renderType == FOLD_RENDER_TYPE_B)
         ) {
             s32 alpha = 255;
-            gDPScrollMultiTile2_4b(gMasterGfxPos++, fold_currentImage->raster, G_IM_FMT_CI,
+            gDPScrollMultiTile2_4b(gMainGfxPos++, fold_currentImage->raster, G_IM_FMT_CI,
                                     fold_currentImage->width, fold_currentImage->height,
                                     0, 0, fold_currentImage->width - 1, fold_currentImage->height - 1, 0,
                                     G_TX_CLAMP, G_TX_CLAMP, 8, 8, G_TX_NOLOD, G_TX_NOLOD,
                                     256, 256);
-            gDPSetTile(gMasterGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0x0100, 2, 0,
+            gDPSetTile(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0x0100, 2, 0,
                             G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
-            gDPSetTileSize(gMasterGfxPos++, 2, 0, 0, 252, 0);
+            gDPSetTileSize(gMainGfxPos++, 2, 0, 0, 252, 0);
 
             switch (state->renderType) {
                 case FOLD_RENDER_TYPE_0:
@@ -1612,15 +1612,15 @@ void func_8013E2F0(FoldState* state, Matrix4f mtx) {
             }
             create_shading_palette(mtx, 0, 0, fold_currentImage->width, fold_currentImage->height, alpha, state->unk_78);
         } else {
-            gDPScrollTextureTile_4b(gMasterGfxPos++, fold_currentImage->raster, G_IM_FMT_CI,
+            gDPScrollTextureTile_4b(gMainGfxPos++, fold_currentImage->raster, G_IM_FMT_CI,
                                     fold_currentImage->width, fold_currentImage->height,
                                     0, 0, fold_currentImage->width - 1, fold_currentImage->height - 1, 0,
                                     G_TX_CLAMP, G_TX_CLAMP, 8, 8, G_TX_NOLOD, G_TX_NOLOD,
                                     256, 256);
         }
     }
-    gSPDisplayList(gMasterGfxPos++, state->gfxBufs[gCurrentDisplayContextIndex]);
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gSPDisplayList(gMainGfxPos++, state->gfxBufs[gCurrentDisplayContextIndex]);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
 
 void func_8013E904(FoldState* state, Matrix4f mtx) {
@@ -1631,19 +1631,19 @@ void func_8013E904(FoldState* state, Matrix4f mtx) {
     s32 lrs, lrt;
 
     guScale(&gDisplayContext->matrixStack[gMatrixListPos], (f32)fold_currentImage->width / 100.0, (f32)fold_currentImage->height / 100.0, 1.0f);
-    gSPMatrix(gMasterGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gDPSetRenderMode(gMasterGfxPos++, G_RM_ZB_XLU_DECAL, G_RM_ZB_XLU_DECAL2);
+    gSPMatrix(gMainGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]), G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+    gDPSetRenderMode(gMainGfxPos++, G_RM_ZB_XLU_DECAL, G_RM_ZB_XLU_DECAL2);
 
     if (state->renderType == FOLD_RENDER_TYPE_F) {
         s32 temp = state->unk_1C[1][1];
-        gDPSetPrimColor(gMasterGfxPos++, 0, 0, 0, 0, 0, temp);
-        gDPSetCombineLERP(gMasterGfxPos++, TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, temp);
+        gDPSetCombineLERP(gMainGfxPos++, TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0);
     } else {
-        gDPSetCombineMode(gMasterGfxPos++, G_CC_MODULATEIA, G_CC_MODULATEIA);
+        gDPSetCombineMode(gMainGfxPos++, G_CC_MODULATEIA, G_CC_MODULATEIA);
     }
-    gDPSetTextureLUT(gMasterGfxPos++, G_TT_RGBA16);
-    gDPLoadTLUT_pal16(gMasterGfxPos++, 0, ufs->palette);
-    gDPScrollTextureTile_4b(gMasterGfxPos++, ufs->raster, G_IM_FMT_CI, ufs->width, ufs->height,
+    gDPSetTextureLUT(gMainGfxPos++, G_TT_RGBA16);
+    gDPLoadTLUT_pal16(gMainGfxPos++, 0, ufs->palette);
+    gDPScrollTextureTile_4b(gMainGfxPos++, ufs->raster, G_IM_FMT_CI, ufs->width, ufs->height,
                           0, 0, ufs->width - 1, ufs->height - 1, 0,
                           G_TX_WRAP, G_TX_WRAP, shifts, shiftt, G_TX_NOLOD, G_TX_NOLOD,
                           256, 256);
@@ -1652,12 +1652,12 @@ void func_8013E904(FoldState* state, Matrix4f mtx) {
     ult = state->unk_3C[1][1];
     lrs = ufs->width * 4 + state->unk_3C[1][0];
     lrt = ufs->height * 4 + state->unk_3C[1][1];
-    gDPSetTileSize(gMasterGfxPos++, G_TX_RENDERTILE, uls, ult, lrs, lrt);
+    gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, uls, ult, lrs, lrt);
 
     state->unk_3C[1][0] = (s32)(state->unk_3C[1][0] + ufs->unk_0C) % (ufs->width * 4);
     state->unk_3C[1][1] = (s32)(state->unk_3C[1][1] + ufs->unk_10) % (ufs->height * 4);
-    gSPDisplayList(gMasterGfxPos++, ufs->unk_14);
-    gSPPopMatrix(gMasterGfxPos++, G_MTX_MODELVIEW);
+    gSPDisplayList(gMainGfxPos++, ufs->unk_14);
+    gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
 
 void func_8013EE48(FoldState* state) {

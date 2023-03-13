@@ -1,0 +1,19 @@
+#include "effects/gfx/D_09000000_3B9A70.png.inc.c"
+#include "effects/gfx/D_09000080_3B9AF0.vtx.inc.c"
+#include "effects/gfx/D_09000200_3B9C70.gfx.inc.c"
+#include "effects/gfx/D_09000248_3B9CB8.gfx.inc.c"
+#include "effects/gfx/D_09000258_3B9CC8.gfx.inc.c"
+#include "effects/gfx/D_09000268_3B9CD8.gfx.inc.c"
+#include "effects/gfx/D_09000278_3B9CE8.gfx.inc.c"
+#include "effects/gfx/D_090003A0_3B9E10.gfx.inc.c"
+#include "effects/gfx/D_090003B8_3B9E28.vtx.inc.c"
+#include "effects/gfx/D_090003D8_3B9E58.gfx.inc.c"
+
+// TODO ???
+u8 D_09000418_3B9E88[] = {
+    0x2, 0x80, 0x1, 0xE0, 0x1, 0xFF, 0x0, 0x0, 0x2, 0x80, 0x1, 0xE0, 0x1, 0xFF, 0x0, 0x0
+};
+
+#include "effects/gfx/D_09000428_3B9E98.vtx.inc.c"
+#include "effects/gfx/D_09000528_3B9F98.gfx.inc.c"
+#include "effects/gfx/D_09000570_3B9FE0.gfx.inc.c"
