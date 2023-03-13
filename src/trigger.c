@@ -30,7 +30,7 @@ void clear_trigger_data(void) {
     collisionStatus->currentWall = NO_COLLIDER;
     collisionStatus->lastWallHammered = NO_COLLIDER;
     collisionStatus->touchingWallTrigger = 0;
-    collisionStatus->bombetteExploded = NO_COLLIDER;
+    collisionStatus->bombetteExploded = -1;
     collisionStatus->bombetteExplosionPos.x = 0.0f;
     collisionStatus->bombetteExplosionPos.y = 0.0f;
     collisionStatus->bombetteExplosionPos.z = 0.0f;
