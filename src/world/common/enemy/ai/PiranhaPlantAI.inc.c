@@ -266,7 +266,7 @@ void N(PiranhaPlantAI_13)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
     }
 }
 
-void N(PiranhaPlantAI_LosePlayer)(Evt *script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(PiranhaPlantAI_LosePlayer)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 retVal;

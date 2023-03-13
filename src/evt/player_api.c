@@ -508,7 +508,7 @@ ApiStatus DisablePartner(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus UseEntryHeading(Evt *script, s32 isInitialCall) {
+ApiStatus UseEntryHeading(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     MapSettings* mapSettings = get_current_map_settings();
     s32 var1 = evt_get_variable(script, *args++);

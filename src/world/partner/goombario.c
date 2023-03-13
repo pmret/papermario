@@ -5,18 +5,20 @@
 #include "message_ids.h"
 #include "entity.h"
 
+#define NAMESPACE world_goombario
+
 extern SpeechBubbleData* SpeechBubblePtr;
 
-BSS s32 TattleHadSpeechPrompt;
-BSS s32 TattleHadInteractPrompt;
-BSS Npc* TattleInteractNpc;
-BSS s32 D_802BDF3C; // unused (padding?)
-BSS TweesterPhysics GoombarioTweesterPhysics;
-BSS s32 D_802BDF5C; // unused (padding?)
-BSS s32 GoombarioTattleInteractionID;
-BSS s32 WorldGoombarioTattleActive;
+BSS s32 N(HadSpeechPrompt);
+BSS s32 N(HadInteractPrompt);
+BSS Npc* N(InteractNpc);
+BSS s32 N(D_802BDF3C); // unused (padding?)
+BSS TweesterPhysics N(TweesterPhysicsData);
+BSS s32 N(D_802BDF5C); // unused (padding?)
+BSS s32 WorldTattleInteractionID;
+BSS s32 N(IsTattleActive);
 
-s32 EntityTattles[] = {
+s32 N(EntityTattles)[] = {
     ENTITY_TYPE_HAMMER1_BLOCK,        MSG_EntityTattle_HammerBlock1_CanBreak,
     ENTITY_TYPE_HAMMER1_BLOCK_TINY,   MSG_EntityTattle_HammerBlock1_CanBreak,
     ENTITY_TYPE_HAMMER2_BLOCK,        MSG_EntityTattle_HammerBlock2_CantBreak,
@@ -57,7 +59,7 @@ s32 EntityTattles[] = {
     -1
 };
 
-s32 world_goombario_get_trigger_tattle(s32 arg0) {
+s32 N(get_trigger_tattle)(s32 tattleColliderID) {
     s32 i;
 
     for (i = 0; i < MAX_TRIGGERS; i++) {
@@ -65,7 +67,7 @@ s32 world_goombario_get_trigger_tattle(s32 arg0) {
 
         if (trigger != NULL
             && trigger->flags.flags & TRIGGER_WALL_PRESS_A
-            && trigger->location.colliderID == arg0
+            && trigger->location.colliderID == tattleColliderID
         ) {
             return trigger->tattleMsg;
         }
@@ -73,14 +75,14 @@ s32 world_goombario_get_trigger_tattle(s32 arg0) {
     return 0;
 }
 
-void world_goombario_init(Npc* goombario) {
+void N(init)(Npc* goombario) {
     goombario->collisionHeight = 24;
     goombario->collisionRadius = 20;
 }
 
-API_CALLABLE(WorldGoombarioTakeOut) {
+API_CALLABLE(N(TakeOut)) {
     Npc* goombario = script->owner2.npc;
-    GoombarioTattleInteractionID = -1;
+    WorldTattleInteractionID = -1;
 
     if (isInitialCall) {
         partner_init_get_out(goombario);
@@ -93,15 +95,15 @@ API_CALLABLE(WorldGoombarioTakeOut) {
     }
 }
 
-EvtScript EVS_GoombarioTakeOut = {
-    EVT_CALL(WorldGoombarioTakeOut)
+EvtScript EVS_WorldGoombario_TakeOut = {
+    EVT_CALL(N(TakeOut))
     EVT_RETURN
     EVT_END
 };
 
-TweesterPhysics* GoombarioTweesterPhysicsPtr = &GoombarioTweesterPhysics;
+TweesterPhysics* GoombarioTweesterPhysicsPtr = &N(TweesterPhysicsData);
 
-API_CALLABLE(WorldGoombarioUpdate) {
+API_CALLABLE(N(Update)) {
     PlayerData* playerData = &gPlayerData;
     Npc* npc = script->owner2.npc;
     f32 sinAngle, cosAngle, liftoffVelocity;
@@ -184,13 +186,13 @@ API_CALLABLE(WorldGoombarioUpdate) {
     return 0;
 }
 
-EvtScript EVS_GoombarioUpdate = {
-    EVT_CALL(WorldGoombarioUpdate)
+EvtScript EVS_WorldGoombario_Update = {
+    EVT_CALL(N(Update))
     EVT_RETURN
     EVT_END
 };
 
-void goombario_try_cancel_tweester(Npc* goombario) {
+void N(try_cancel_tweester)(Npc* goombario) {
     if (TweesterTouchingPartner) {
         TweesterTouchingPartner = NULL;
         goombario->flags = GoombarioTweesterPhysicsPtr->prevFlags;
@@ -199,7 +201,7 @@ void goombario_try_cancel_tweester(Npc* goombario) {
     }
 }
 
-s32 world_goombario_can_pause(Npc* goombario) {
+s32 N(can_pause)(Npc* goombario) {
     PartnerActionStatus* goombarioActionStatus = &gPartnerActionStatus;
     s32 new_var;
 
@@ -215,13 +217,13 @@ s32 world_goombario_can_pause(Npc* goombario) {
     return TRUE;
 }
 
-API_CALLABLE(WorldGoombarioSelectTattleMsg) {
+API_CALLABLE(N(SelectTattleMsg)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* goombario = script->owner2.npc;
     s32 msgID;
     s32 temp; // TODO required to match (this temp needs to be used in two places for different things)
     s32 npcMsgID;
-    s32 v0;
+    s32 enemyTattleMsg;
     s32 i;
 
     #define USE_STATE functionTemp[0]
@@ -237,16 +239,16 @@ API_CALLABLE(WorldGoombarioSelectTattleMsg) {
     };
 
     if (isInitialCall) {
-        goombario_try_cancel_tweester(goombario);
-        WorldGoombarioTattleActive = FALSE;
-        TattleHadSpeechPrompt = FALSE;
-        TattleHadInteractPrompt = FALSE;
+        N(try_cancel_tweester)(goombario);
+        N(IsTattleActive) = FALSE;
+        N(HadSpeechPrompt) = FALSE;
+        N(HadInteractPrompt) = FALSE;
         if (playerStatus->animFlags & PA_FLAG_SPEECH_PROMPT_AVAILABLE) {
-            TattleHadSpeechPrompt = TRUE;
-            TattleInteractNpc = SpeechBubblePtr->encounteredNPC;
+            N(HadSpeechPrompt) = TRUE;
+            N(InteractNpc) = SpeechBubblePtr->encounteredNPC;
         }
         if (playerStatus->animFlags & PA_FLAG_INTERACT_PROMPT_AVAILABLE) {
-            TattleHadInteractPrompt = TRUE;
+            N(HadInteractPrompt) = TRUE;
         }
         script->USE_STATE = USE_TATTLE_INIT;
     }
@@ -259,7 +261,7 @@ API_CALLABLE(WorldGoombarioSelectTattleMsg) {
             }
             script->functionTemp[1] = 3;
             disable_player_input();
-            WorldGoombarioTattleActive = TRUE;
+            N(IsTattleActive) = TRUE;
             script->functionTemp[2] = playerStatus->inputDisabledCount;
             script->USE_STATE++;
             break;
@@ -270,7 +272,7 @@ API_CALLABLE(WorldGoombarioSelectTattleMsg) {
                 if (script->functionTemp[2] < playerStatus->inputDisabledCount) {
                     script->VAR_MSG = -1;
                     enable_player_input();
-                    WorldGoombarioTattleActive = FALSE;
+                    N(IsTattleActive) = FALSE;
                     return ApiStatus_DONE2;
                 }
                 script->USE_STATE = USE_TATTLE_FACE_PLAYER;
@@ -283,7 +285,7 @@ API_CALLABLE(WorldGoombarioSelectTattleMsg) {
             goombario->yaw = clamp_angle(gCameras[CAM_DEFAULT].currentYaw + playerStatus->spriteFacingAngle - 90.0f);
             gPartnerActionStatus.partnerActionState = PARTNER_ACTION_USE;
             close_status_menu();
-            if (TattleHadSpeechPrompt) {
+            if (N(HadSpeechPrompt)) {
                 script->VAR_MSG = 0;
                 script->USE_STATE = USE_TATTLE_FORCE_NPC;
                 break;
@@ -292,12 +294,12 @@ API_CALLABLE(WorldGoombarioSelectTattleMsg) {
             // fallthrough
         case USE_TATTLE_CHOOSE:
             // check for entity tattle
-            if (GoombarioTattleInteractionID >= 0 && (GoombarioTattleInteractionID & COLLISION_WITH_ENTITY_BIT)) {
-                temp = get_entity_type(GoombarioTattleInteractionID);
+            if (WorldTattleInteractionID >= 0 && (WorldTattleInteractionID & COLLISION_WITH_ENTITY_BIT)) {
+                temp = get_entity_type(WorldTattleInteractionID);
                 msgID = -1;
                 do {} while (0);
-                for (i = 0; EntityTattles[2 * i] != -1; i++) {
-                    if (EntityTattles[2 * i] != temp) {
+                for (i = 0; N(EntityTattles)[2 * i] != -1; i++) {
+                    if (N(EntityTattles)[2 * i] != temp) {
                         continue;
                     }
                     switch (temp) {
@@ -343,7 +345,7 @@ API_CALLABLE(WorldGoombarioSelectTattleMsg) {
                             }
                             break;
                         case ENTITY_TYPE_CHEST:
-                            if (get_entity_by_index(GoombarioTattleInteractionID & 0x3FFF)->dataBuf.chest->itemID == -1) {
+                            if (get_entity_by_index(WorldTattleInteractionID & 0x3FFF)->dataBuf.chest->itemID == -1) {
                                 msgID = MSG_EntityTattle_EmptyChest;
                             }
                             break;
@@ -351,7 +353,7 @@ API_CALLABLE(WorldGoombarioSelectTattleMsg) {
                     if (msgID != -1) {
                         script->VAR_MSG = msgID;
                     } else {
-                        script->VAR_MSG = EntityTattles[2 * i + 1];
+                        script->VAR_MSG = N(EntityTattles)[2 * i + 1];
                     }
                     script->VAR_SKIP = FALSE;
                     return ApiStatus_DONE2;
@@ -359,11 +361,11 @@ API_CALLABLE(WorldGoombarioSelectTattleMsg) {
             }
 
             // check for NPC tattle
-            if (GoombarioTattleInteractionID >= 0 && (GoombarioTattleInteractionID & COLLISION_WITH_NPC_BIT)) {
-                TattleInteractNpc = get_npc_unsafe(GoombarioTattleInteractionID & 0x1FFF);
-                v0 = get_enemy(TattleInteractNpc->npcID)->tattleMsg;
-                if (v0 != 0) {
-                    msgID = v0;
+            if (WorldTattleInteractionID >= 0 && (WorldTattleInteractionID & COLLISION_WITH_NPC_BIT)) {
+                N(InteractNpc) = get_npc_unsafe(WorldTattleInteractionID & 0x1FFF);
+                enemyTattleMsg = get_enemy(N(InteractNpc)->npcID)->tattleMsg;
+                if (enemyTattleMsg != 0) {
+                    msgID = enemyTattleMsg;
                     if (msgID < EVT_LIMIT) {
                         script->VAR_MSG = ((s32(*)(void))msgID)();
                     } else {
@@ -375,7 +377,7 @@ API_CALLABLE(WorldGoombarioSelectTattleMsg) {
             }
 
             // generic interact tattle
-            if (TattleHadInteractPrompt) {
+            if (N(HadInteractPrompt)) {
                 script->VAR_MSG = MSG_EntityTattle_Interact;
                 script->VAR_SKIP = FALSE;
                 return ApiStatus_DONE2;
@@ -383,8 +385,8 @@ API_CALLABLE(WorldGoombarioSelectTattleMsg) {
 
             // check for custom trigger tattle
             temp = MSG_NONE;
-            if (GoombarioTattleInteractionID >= 0) {
-                temp = world_goombario_get_trigger_tattle(GoombarioTattleInteractionID);
+            if (WorldTattleInteractionID >= 0) {
+                temp = N(get_trigger_tattle)(WorldTattleInteractionID);
             }
 
             // check map tattle
@@ -420,7 +422,7 @@ API_CALLABLE(WorldGoombarioSelectTattleMsg) {
             }
             break;
         case USE_TATTLE_FORCE_NPC:
-            npcMsgID = get_enemy(TattleInteractNpc->npcID)->tattleMsg;
+            npcMsgID = get_enemy(N(InteractNpc)->npcID)->tattleMsg;
             if (npcMsgID != MSG_NONE) {
                 script->VAR_MSG = npcMsgID;
                 script->VAR_SKIP = FALSE;
@@ -431,13 +433,13 @@ API_CALLABLE(WorldGoombarioSelectTattleMsg) {
     return ApiStatus_BLOCK;
 }
 
-API_CALLABLE(WorldGoombarioTattleEnd) {
+API_CALLABLE(N(TattleEnd)) {
     PartnerActionStatus* goombarioActionStatus = &gPartnerActionStatus;
 
     set_time_freeze_mode(TIME_FREEZE_NORMAL);
 
-    if (WorldGoombarioTattleActive) {
-        WorldGoombarioTattleActive = FALSE;
+    if (N(IsTattleActive)) {
+        N(IsTattleActive) = FALSE;
         enable_player_input();
     }
 
@@ -446,15 +448,15 @@ API_CALLABLE(WorldGoombarioTattleEnd) {
     return ApiStatus_DONE2;
 }
 
-EvtScript EVS_GoombarioUseAbility = {
-    EVT_CALL(WorldGoombarioSelectTattleMsg)
+EvtScript EVS_WorldGoombario_UseAbility = {
+    EVT_CALL(N(SelectTattleMsg))
     // abort without cleanup if failed to init
     EVT_IF_EQ(LVar0, -1)
         EVT_RETURN
     EVT_END_IF
     // abort if no tattle message is available
     EVT_IF_EQ(LVar0, MSG_NONE)
-        EVT_CALL(WorldGoombarioTattleEnd)
+        EVT_CALL(N(TattleEnd))
         EVT_RETURN
     EVT_END_IF
     // show message if VAR_SKIP is FALSE
@@ -463,12 +465,12 @@ EvtScript EVS_GoombarioUseAbility = {
     EVT_END_IF
     EVT_WAIT(1)
     // cleanup
-    EVT_CALL(WorldGoombarioTattleEnd)
+    EVT_CALL(N(TattleEnd))
     EVT_RETURN
     EVT_END
 };
 
-API_CALLABLE(WorldGoombarioPutAway) {
+API_CALLABLE(N(PutAway)) {
     Npc* goombario = script->owner2.npc;
 
     if (isInitialCall) {
@@ -482,13 +484,13 @@ API_CALLABLE(WorldGoombarioPutAway) {
     }
 }
 
-EvtScript EVS_GoombarioPutAway = {
-    EVT_CALL(WorldGoombarioPutAway)
+EvtScript EVS_WorldGoombario_PutAway = {
+    EVT_CALL(N(PutAway))
     EVT_RETURN
     EVT_END
 };
 
-void world_goombario_pre_battle(Npc* goombario) {
+void N(pre_battle)(Npc* goombario) {
     PartnerActionStatus* goombarioActionStatus = &gPartnerActionStatus;
 
     if (goombarioActionStatus->partnerActionState != PARTNER_ACTION_NONE) {

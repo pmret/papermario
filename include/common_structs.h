@@ -23,6 +23,9 @@ typedef void NoArgCallback(void*);
 #define IMG_BIN u8
 #define PAL_BIN u16
 
+typedef s32 b32;
+typedef s8 b8;
+
 typedef u32 AnimID;
 
 typedef struct {

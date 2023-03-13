@@ -13,7 +13,7 @@ void N(SpearGuyAI_LoiterInit)(Evt* script, MobileAISettings* aiSettings, EnemyDe
     script->AI_TEMP_STATE = AI_STATE_LOITER;
 }
 
-void N(SpearGuyAI_Loiter)(Evt *script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
+void N(SpearGuyAI_Loiter)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 d100;
@@ -80,7 +80,7 @@ void N(SpearGuyAI_Loiter)(Evt *script, MobileAISettings* aiSettings, EnemyDetect
 // prerequisites
 #include "world/common/enemy/ai/WanderMeleeAI.inc.c"
 
-ApiStatus N(SpearGuyAI_Main)(Evt *script, s32 isInitialCall) {
+ApiStatus N(SpearGuyAI_Main)(Evt* script, s32 isInitialCall) {
     Enemy* enemy = script->owner1.enemy;
     Npc *npc = get_npc_unsafe(enemy->npcID);
     Bytecode* args = script->ptrReadPos;

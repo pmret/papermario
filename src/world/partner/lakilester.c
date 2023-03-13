@@ -61,7 +61,7 @@ void world_lakilester_init(Npc* npc) {
     npc->moveToPos.z = npc->pos.z;
 }
 
-ApiStatus func_802BD29C_320DEC(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802BD29C_320DEC) {
     Npc* lakilester = script->owner2.npc;
 
     if (isInitialCall) {
@@ -79,7 +79,7 @@ EvtScript world_lakilester_take_out = {
 
 TweesterPhysics* LakilesterTweesterPhysicsPtr = &LakilesterTweesterPhysics;
 
-ApiStatus func_802BD2D4_320E24(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802BD2D4_320E24) {
     PlayerData* playerData = &gPlayerData;
     Npc* lakilester = script->owner2.npc;
     f32 sinAngle, cosAngle, liftoffVelocity;
@@ -913,7 +913,7 @@ EvtScript EVS_LakilesterUseAbility = {
     EVT_END
 };
 
-ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802BF4F0_323040) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     Camera* cam = &gCameras[CAM_DEFAULT];

@@ -1286,7 +1286,7 @@ ApiStatus PlayerFallToGoal(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus PlayerLandJump(Evt *script, s32 isInitialCall) {
+ApiStatus PlayerLandJump(Evt* script, s32 isInitialCall) {
     Actor* player = gBattleStatus.playerActor;
     ActorState* walkMovement = &player->state;
 

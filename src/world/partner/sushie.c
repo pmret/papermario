@@ -321,7 +321,7 @@ s32 func_802BE280_31EFF0(s32 arg0, f32* x, f32* y, f32* z, f32 length, f32 radiu
     return hitResult;
 }
 
-ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802BE3A4_31F114) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
     CollisionStatus* collisionStatus = &gCollisionStatus;
@@ -713,7 +713,7 @@ EvtScript world_sushie_take_out = {
 
 TweesterPhysics* SushieTweesterPhysicsPtr = &SushieTweesterPhysics;
 
-ApiStatus SushieUpdate(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SushieUpdate) {
     Npc* sushie = script->owner2.npc;
     f32 sinAngle, cosAngle, liftoffVelocity;
     Entity* entity;

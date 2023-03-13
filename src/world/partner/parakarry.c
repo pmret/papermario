@@ -21,7 +21,7 @@ void world_parakarry_init(Npc* parakarry) {
     D_802BEBC4 = 0;
 }
 
-ApiStatus ParakarryTakeOut(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ParakarryTakeOut) {
     Npc* parakarry = script->owner2.npc;
 
     if (isInitialCall) {
@@ -39,7 +39,7 @@ EvtScript world_parakarry_take_out = {
 
 TweesterPhysics* ParakarryTweesterPhysicsPtr = &ParakarryTweesterPhysics;
 
-ApiStatus ParakarryUpdate(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ParakarryUpdate) {
     PlayerData* playerData = &gPlayerData;
     Npc* parakarry = script->owner2.npc;
     f32 sinAngle, cosAngle, liftoffVelocity;
@@ -578,7 +578,7 @@ EvtScript world_parakarry_use_ability = {
     EVT_END
 };
 
-ApiStatus ParakarryPutAway(Evt* script, s32 isInitialCall) {
+API_CALLABLE(ParakarryPutAway) {
     Npc* parakarry = script->owner2.npc;
 
     if (isInitialCall) {

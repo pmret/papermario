@@ -21,7 +21,7 @@ void world_bow_init(Npc* bow) {
     D_802BE0C0 = FALSE;
 }
 
-ApiStatus BowTakeOut(Evt* script, s32 isInitialCall) {
+API_CALLABLE(BowTakeOut) {
     Npc* bow = script->owner2.npc;
 
     if (isInitialCall) {
@@ -39,7 +39,7 @@ EvtScript world_bow_take_out = {
 
 TweesterPhysics* BowTweesterPhysicsPtr = &BowTweesterPhysics;
 
-ApiStatus BowUpdate(Evt* script, s32 isInitialCall) {
+API_CALLABLE(BowUpdate) {
     PlayerData* playerData = &gPlayerData;
     Npc* bow = script->owner2.npc;
     f32 sinAngle, cosAngle, liftoffVelocity;
@@ -155,7 +155,7 @@ s32 func_802BD540_323E90(void) {
     return player_test_lateral_overlap(0, playerStatus, &x, &y, &z, playerStatus->colliderDiameter, yaw);
 }
 
-ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
+API_CALLABLE(BowUseAbility) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
@@ -374,7 +374,7 @@ void func_802BDDF0_324740(Npc* bow) {
     D_802BE0C0 = FALSE;
 }
 
-ApiStatus func_802BDF08_324858(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802BDF08_324858) {
     Npc* bow = script->owner2.npc;
 
     if (isInitialCall) {

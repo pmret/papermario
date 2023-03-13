@@ -2,14 +2,14 @@
 #include "goompa.h"
 #include "../src/world/partners.h"
 
-API_CALLABLE(GoompaUpdate);
+#define NAMESPACE world_goompa
 
-void world_goompa_init(Npc* partner) {
+void N(init)(Npc* partner) {
     partner->collisionHeight = 24;
     partner->collisionRadius = 20;
 }
 
-API_CALLABLE(GoompaTakeOut) {
+API_CALLABLE(N(TakeOut)) {
     Npc* goompa = script->owner2.npc;
 
     if (isInitialCall) {
@@ -23,16 +23,16 @@ API_CALLABLE(GoompaTakeOut) {
     }
 }
 
-EvtScript EVS_WorldGoompaTakeOut = {
-    EVT_CALL(GoompaTakeOut)
+EvtScript EVS_WorldGoompa_TakeOut = {
+    EVT_CALL(N(TakeOut))
     EVT_RETURN
     EVT_END
 };
 
-BSS TweesterPhysics GoompaTweesterPhysics;
-TweesterPhysics* GoompaTweesterPhysicsPtr = &GoompaTweesterPhysics;
+BSS TweesterPhysics N(TweesterPhysicsData);
+TweesterPhysics* GoompaTweesterPhysicsPtr = &N(TweesterPhysicsData);
 
-API_CALLABLE(GoompaUpdate) {
+API_CALLABLE(N(Update)) {
     PlayerData* playerData = &gPlayerData;
     Npc* goompa = script->owner2.npc;
     f32 sinAngle, cosAngle, liftoffVelocity;
@@ -114,13 +114,13 @@ API_CALLABLE(GoompaUpdate) {
     return ApiStatus_BLOCK;
 }
 
-EvtScript EVS_WorldGoompaUpdate = {
-    EVT_CALL(GoompaUpdate)
+EvtScript EVS_WorldGoompa_Update = {
+    EVT_CALL(N(Update))
     EVT_RETURN
     EVT_END
 };
 
-void goompa_try_cancel_tweester(Npc* goompa) {
+void N(try_cancel_tweester)(Npc* goompa) {
     if (TweesterTouchingPartner != NULL) {
         TweesterTouchingPartner = NULL;
         goompa->flags = GoompaTweesterPhysicsPtr->prevFlags;
@@ -129,17 +129,17 @@ void goompa_try_cancel_tweester(Npc* goompa) {
     }
 }
 
-API_CALLABLE(GoompaUseAbility) {
+API_CALLABLE(N(UseAbility)) {
     return ApiStatus_DONE2;
 }
 
-EvtScript EVS_WorldGoompaUseAbility = {
-    EVT_CALL(GoompaUseAbility)
+EvtScript EVS_WorldGoompa_UseAbility = {
+    EVT_CALL(N(UseAbility))
     EVT_RETURN
     EVT_END
 };
 
-API_CALLABLE(GoompaPutAway) {
+API_CALLABLE(N(PutAway)) {
     Npc* goompa = script->owner2.npc;
 
     if (isInitialCall) {
@@ -153,8 +153,8 @@ API_CALLABLE(GoompaPutAway) {
     }
 }
 
-EvtScript EVS_WorldGoompaPutAway = {
-    EVT_CALL(GoompaPutAway)
+EvtScript EVS_WorldGoompa_PutAway = {
+    EVT_CALL(N(PutAway))
     EVT_RETURN
     EVT_END
 };

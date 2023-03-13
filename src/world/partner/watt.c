@@ -61,7 +61,7 @@ void world_watt_init(Npc* npc) {
     WattStaticEffect = NULL;
 }
 
-ApiStatus func_802BD27C_31CDEC(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802BD27C_31CDEC) {
     Npc* watt = script->owner2.npc;
 
     if (isInitialCall) {
@@ -85,7 +85,7 @@ TweesterPhysics* WattTweesterPhysicsPtr = &WattTweesterPhysics;
 
 s32 D_802BE278_31DDE8 = 0;
 
-ApiStatus WattUpdate(Evt* script, s32 isInitialCall) {
+API_CALLABLE(WattUpdate) {
     PlayerData* playerData = &gPlayerData;
     Npc* watt = script->owner2.npc;
     f32 sinAngle, cosAngle, liftoffVelocity;
@@ -123,7 +123,7 @@ ApiStatus WattUpdate(Evt* script, s32 isInitialCall) {
                 WattStaticEffect->data.staticStatus->unk_0C = watt->pos.z;
             }
 
-            return 0;
+            return ApiStatus_BLOCK;
         }
 
         switch (WattTweesterPhysicsPtr->state) {
@@ -190,7 +190,7 @@ ApiStatus WattUpdate(Evt* script, s32 isInitialCall) {
             WattStaticEffect->data.staticStatus->unk_0C = watt->pos.z;
         }
     }
-    return 0;
+    return ApiStatus_BLOCK;
 }
 
 EvtScript world_watt_update = {
@@ -208,7 +208,7 @@ void func_802BD710_31D280(Npc* watt) {
     }
 }
 
-ApiStatus func_802BD754_31D2C4(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802BD754_31D2C4) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     Npc* npc = script->owner2.npc;
