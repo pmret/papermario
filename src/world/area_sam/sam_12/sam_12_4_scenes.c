@@ -113,6 +113,9 @@ EvtScript N(EVS_MarioSleeping) = {
     EVT_END
 };
 
+#define LOOPCOUNT_1 ((s32)(5 * DT) * 10)
+#define LOOPCOUNT_2 ((s32)(10 * DT) * 10)
+
 EvtScript N(EVS_Scene_MeetMerlar) = {
     EVT_LABEL(1)
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -129,23 +132,23 @@ EvtScript N(EVS_Scene_MeetMerlar) = {
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 160, 0, 0)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 160, 0, 0)
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0))
+    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0 / DT))
     EVT_CALL(PlayerMoveTo, 90, 0, 0)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(20)
+    EVT_WAIT(20 * DT)
     EVT_EXEC_GET_TID(N(EVS_SpawnStarStoneSparkles), LVar9)
-    EVT_WAIT(100)
+    EVT_WAIT(100 * DT)
     EVT_CALL(SetNpcPos, NPC_Merlar, 200, 50, 0)
     EVT_EXEC(N(EVS_SpawnMerlarSparkles))
     EVT_CALL(PlaySoundAtNpc, NPC_Merlar, SOUND_139, 0)
     EVT_SETF(LVar0, EVT_FLOAT(0.0))
-    EVT_LOOP(100)
+    EVT_LOOP(LOOPCOUNT_2)
         EVT_ADDF(LVar0, EVT_FLOAT(1.0))
         EVT_CALL(func_802CFD30, NPC_Merlar, FOLD_TYPE_7, LVar0, 0, 0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_EXEC_GET_TID(N(EVS_MerlarFlickering), LVar8)
-    EVT_WAIT(30)
+    EVT_WAIT(30 * DT)
     EVT_CALL(SpeakToPlayer, NPC_Merlar, ANIM_Merlar_Talk, ANIM_Merlar_Hover, 0, MSG_CH7_0133)
     EVT_CALL(GetNpcPos, NPC_Merlar, LVar0, LVar1, LVar2)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -165,8 +168,8 @@ EvtScript N(EVS_Scene_MeetMerlar) = {
     EVT_EXEC_GET_TID(N(EVS_MarioSleeping), LVarA)
     EVT_CALL(EndSpeech, NPC_Merlar, ANIM_Merlar_Talk, ANIM_Merlar_Hover, 0)
     EVT_SETF(LVar0, EVT_FLOAT(0.0))
-    EVT_LOOP(50)
-        EVT_ADDF(LVar0, EVT_FLOAT(5.1))
+    EVT_LOOP(LOOPCOUNT_1)
+        EVT_ADDF(LVar0, EVT_FLOAT(255.0 / LOOPCOUNT_1))
         EVT_CALL(N(SetScreenFadeAmount), LVar0)
         EVT_WAIT(1)
     EVT_END_LOOP
@@ -174,8 +177,8 @@ EvtScript N(EVS_Scene_MeetMerlar) = {
     EVT_THREAD
         EVT_SET(MF_DoneFadingIn, FALSE)
         EVT_SETF(LVar0, EVT_FLOAT(255.0))
-        EVT_LOOP(100)
-            EVT_ADDF(LVar0, EVT_FLOAT(-2.55))
+        EVT_LOOP(LOOPCOUNT_2)
+            EVT_ADDF(LVar0, EVT_FLOAT(-255.0 / LOOPCOUNT_2))
             EVT_CALL(N(SetScreenFadeAmount), LVar0)
             EVT_WAIT(1)
         EVT_END_LOOP
@@ -187,16 +190,16 @@ EvtScript N(EVS_Scene_MeetMerlar) = {
             EVT_WAIT(1)
             EVT_GOTO(6)
         EVT_END_IF
-    EVT_WAIT(30)
+    EVT_WAIT(30 * DT)
     EVT_CALL(RemoveEffect, LVar7)
     EVT_KILL_THREAD(LVarA)
     EVT_CALL(PlaySoundAtPlayer, SOUND_2F1, 0)
     EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_JoltAwake)
-    EVT_WAIT(30)
+    EVT_WAIT(30 * DT)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_NodYes)
-    EVT_WAIT(20)
+    EVT_WAIT(20 * DT)
     EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
-    EVT_WAIT(30)
+    EVT_WAIT(30 * DT)
     EVT_CALL(GetNpcPos, NPC_Merlar, LVar0, LVar1, LVar2)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -207,10 +210,10 @@ EvtScript N(EVS_Scene_MeetMerlar) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_CALL(SpeakToPlayer, NPC_Merlar, ANIM_Merlar_Talk, ANIM_Merlar_Hover, 0, MSG_CH7_0137)
-    EVT_WAIT(30)
+    EVT_WAIT(30 * DT)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 230, 0, 0)
     EVT_CALL(SetCamPosB, CAM_DEFAULT, EVT_FLOAT(230.0), EVT_FLOAT(60.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.0))
+    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.0 / DT))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_THREAD
@@ -221,8 +224,8 @@ EvtScript N(EVS_Scene_MeetMerlar) = {
     EVT_END_THREAD
     EVT_WAIT(10)
     EVT_SETF(LVar0, EVT_FLOAT(0.0))
-    EVT_LOOP(50)
-        EVT_ADDF(LVar0, EVT_FLOAT(0.62))
+    EVT_LOOP(LOOPCOUNT_1)
+        EVT_ADDF(LVar0, EVT_FLOAT(31.0 / LOOPCOUNT_1))
         EVT_CALL(N(SetItemPositionF), MV_StarStoneItemID, EVT_FLOAT(230.0), LVar0, EVT_FLOAT(0.0))
         EVT_WAIT(1)
     EVT_END_LOOP
@@ -243,8 +246,8 @@ EvtScript N(EVS_Scene_MeetMerlar) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_SETF(LVar0, EVT_FLOAT(100.0))
-    EVT_LOOP(100)
-        EVT_ADDF(LVar0, EVT_FLOAT(-1.0))
+    EVT_LOOP(LOOPCOUNT_2)
+        EVT_ADDF(LVar0, EVT_FLOAT(-100.0 / LOOPCOUNT_2))
         EVT_CALL(func_802CFD30, NPC_Merlar, FOLD_TYPE_7, LVar0, 0, 0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP

@@ -84,7 +84,7 @@ EvtScript N(EVS_Mayor_HandOverBucket) = {
         EVT_END_LOOP
         EVT_CALL(SetItemPos, MV_BucketItemID, NPC_DISPOSE_LOCATION)
     EVT_END_THREAD
-    EVT_CALL(NpcMoveTo, NPC_MayorPenguin, LVar0, LVar2, 10)
+    EVT_CALL(NpcMoveTo, NPC_MayorPenguin, LVar0, LVar2, 10 * DT)
     EVT_RETURN
     EVT_END
 };
@@ -121,7 +121,7 @@ EvtScript N(EVS_NpcInteract_MayorPenguin) = {
                 EVT_IF_EQ(LVar1, 1)
                     EVT_GOTO(10)
                 EVT_END_IF
-            EVT_WAIT(20)
+            EVT_WAIT(20 * DT)
             EVT_CALL(MakeLerp, 70, 0, 30, EASING_LINEAR)
             EVT_LABEL(20)
                 EVT_CALL(UpdateLerp)
@@ -135,7 +135,7 @@ EvtScript N(EVS_NpcInteract_MayorPenguin) = {
             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_MayorPenguin_Carry)
             EVT_CALL(InterpNpcYaw, NPC_SELF, 180, 0)
             EVT_EXEC_GET_TID(N(EVS_Mayor_CarryBucket), LVarA)
-            EVT_WAIT(10)
+            EVT_WAIT(10 * DT)
             EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
             EVT_IF_EQ(MV_PlayerLeftOfMayor, 0)
                 EVT_ADD(LVar2, -40)
@@ -157,7 +157,7 @@ EvtScript N(EVS_NpcInteract_MayorPenguin) = {
             EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
             EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_MayorPenguin_Talk, ANIM_MayorPenguin_Idle, 0, MSG_CH7_003D)
-            EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(3.0))
+            EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(3.0 / DT))
             EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
             EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
             EVT_SET(GB_StoryProgress, STORY_CH7_GOT_SNOWMAN_BUCKET)

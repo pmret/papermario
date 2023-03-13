@@ -4775,8 +4775,185 @@ segments:
     - [0xD60AE0, c, flo_25_4_entity]
     - [0xD60AE0, c, flo_25_5_foliage]
     - [0xD60D20, c, flo_25_6_vine]
+  - name: sam_01
+    dir: world/area_sam/sam_01
+    type: code
+    start: 0xD63A90
+    vram: 0x80240000
+    subsegments:
+    - [0xD63A90, c, sam_01_0_header]
+    - [0xD63A90, c, sam_01_1_music]
+    - [0xD63A90, c, sam_01_2_main]
+    - [0xD63DA0, c, sam_01_3_rooms]
+    - [0xD63DA0, c, sam_01_4_npc]
+    - [0xD65510, c, sam_01_5_scenes]
+    - [0xD65720, c, sam_01_6_entity]
+  - name: sam_02
+    dir: world/area_sam/sam_02
+    type: code
+    start: 0xD71690
+    vram: 0x80240000
+    subsegments:
+    - [0xD71690, c, sam_02_0_header]
+    - [0xD71690, c, sam_02_1_music]
+    - [0xD71690, c, sam_02_2_main]
+    - [0xD71EC0, c, sam_02_3_rooms]
+    - [0xD71EC0, c, sam_02_4_npc]
+    - [0xD73250, c, sam_02_5_entity]
+    - [0xD73250, c, sam_02_6_shop]
+  - name: sam_03
+    dir: world/area_sam/sam_03
+    type: code
+    start: 0xD7D070
+    vram: 0x80240000
+    subsegments:
+    - [0xD7D070, c, sam_03_0_header]
+    - [0xD7D070, c, sam_03_1_music]
+    - [0xD7D070, c, sam_03_2_main]
+    - [0xD7D070, c, sam_03_3_npc1]
+    - [0xD7D0C0, c, sam_03_4_npc2]
+  - name: sam_04
+    dir: world/area_sam/sam_04
+    type: code
+    start: 0xD7F580
+    vram: 0x80240000
+    subsegments:
+    - [0xD7F580, c, sam_04_0_header]
+    - [0xD7F580, c, sam_04_1_music]
+    - [0xD7F580, c, sam_04_2_main]
+    - [0xD7F7C0, c, sam_04_3_snowmen]
+    - [0xD7F890, c, sam_04_4_npc]
+    - [0xD7FC80, c, sam_04_5_entity]
+  - name: sam_05
+    dir: world/area_sam/sam_05
+    type: code
+    start: 0xD84790
+    vram: 0x80240000
+    subsegments:
+    - [0xD84790, c, sam_05_0_header]
+    - [0xD84790, c, sam_05_1_music]
+    - [0xD84790, c, sam_05_2_main]
+    - [0xD84790, c, sam_05_3_entity]
+    - [0xD84790, c, sam_05_4_npc]
+    - [0xD864D0, c, sam_05_5_scenes]
+    - [0xD864D0, c, sam_05_6_monstar_gfx]
+    - [0xD864D0, c, sam_05_7_monstar_vtx]
+    - [0xD864D0, .data, sam_05_0_header]
+    - [0xD86530, .data, sam_05_1_music]
+    - [0xD86560, .data, sam_05_2_main]
+    - [0xD86840, .data, sam_05_3_entity]
+    - start: 0xD868B0
+      type: .data
+      name: sam_05_4_npc
+      subsegments:
+      - [0xD868B0]
+      - [0xD86F00, ci4, monstar, 32, 32]
+      - [0xD87100, ia4, monstar_blank1, 32, 32]
+      - [0xD87300, ia4, monstar_blank2, 32, 32]
+      - [0xD87500, ia4, monstar_blank3, 32, 32]
+      - [0xD87700, palette, monstar]
+      - [0xD87720]
+    - [0xD8A590, .data, sam_05_5_scenes]
+    - start: 0xD8B730
+      type: .data
+      name: sam_05_6_monstar_gfx
+      subsegments:
+      - [0xD8B730, gfx, monstar]
+    - start: 0xD8B840
+      type: .data
+      name: sam_05_7_monstar_vtx
+      subsegments:
+      - [0xD8B840, vtx, monstar]
+    - [0xD8BC60]
+  - name: sam_06
+    dir: world/area_sam/sam_06
+    type: code
+    start: 0xD8BE40
+    vram: 0x80240000
+    subsegments:
+    - [0xD8BE40, c, sam_06_0_header]
+    - [0xD8BE40, c, sam_06_1_music]
+    - [0xD8BE40, c, sam_06_2_main]
+    - [0xD8C390, c, sam_06_3_rooms]
+    - [0xD8C390, c, sam_06_4_npc]
+    - [0xD8E460, c, sam_06_5_entity]
+  - name: sam_07
+    dir: world/area_sam/sam_07
+    type: code
+    start: 0xD97CE0
+    vram: 0x80240000
+    subsegments:
+    - [0xD97CE0, c, sam_07_0_header]
+    - [0xD97CE0, c, sam_07_1_music]
+    - [0xD97CE0, c, sam_07_2_main]
+    - [0xD97CE0, c, sam_07_3_entity]
+    - [0xD97CE0, c, sam_07_4_frozen_pit]
+    - [0xD98330, c, sam_07_5_npc]
+  - name: sam_08
+    dir: world/area_sam/sam_08
+    type: code
+    start: 0xD9BC30
+    vram: 0x80240000
+    subsegments:
+    - [0xD9BC30, c, sam_08_0_header]
+    - [0xD9BC30, c, sam_08_1_music]
+    - [0xD9BC30, c, sam_08_2_main]
+    - [0xD9BC30, c, sam_08_3_entity]
+    - [0xD9C970, c, sam_08_4_npc]
+    - [0xD9D240, c, sam_08_5_scenes]
+  - name: sam_09
+    dir: world/area_sam/sam_09
+    type: code
+    start: 0xDA22A0
+    vram: 0x80240000
+    subsegments:
+    - [0xDA22A0, c, sam_09_0_header]
+    - [0xDA22A0, c, sam_09_1_music]
+    - [0xDA22A0, c, sam_09_2_main]
+    - [0xDA22A0, c, sam_09_3_entity]
+    - [0xDA22A0, c, sam_09_4_sockets]
+  - name: sam_10
+    dir: world/area_sam/sam_10
+    type: code
+    start: 0xDA37B0
+    vram: 0x80240000
+    subsegments:
+    - [0xDA37B0, c, sam_10_0_header]
+    - [0xDA37B0, c, sam_10_1_music]
+    - [0xDA37B0, c, sam_10_2_main]
+    - [0xDA37B0, c, sam_10_3_entity]
+    - [0xDA3AA0, c, sam_10_4_stairs]
+    - [0xDA3B80, c, sam_10_5_npc]
+  - name: sam_11
+    dir: world/area_sam/sam_11
+    type: code
+    start: 0xDA6580
+    vram: 0x80240000
+    subsegments:
+    - [0xDA6580, c, sam_11_0_header]
+    - [0xDA65C0, c, sam_11_1_music]
+    - [0xDA65C0, c, sam_11_2_main]
+    - [0xDA6800, c, sam_11_3_rooms]
+    - [0xDA68E0, c, sam_11_4_entity]
+    - [0xDA6D50, c, sam_11_5_npc]
+    - [0xDA8020, c, sam_11_6_pond]
+    - [0xDA86F0, c, sam_11_7_staircase]
+    - [0xDA86F0, c, sam_11_8_pond_anim]
+    - [0xDA86F0, c, sam_11_9_pond_skele]
+  - name: sam_12
+    dir: world/area_sam/sam_12
+    type: code
+    start: 0xDB7A10
+    vram: 0x80240000
+    subsegments:
+    - [0xDB7A10, c, sam_12_0_header]
+    - [0xDB7A10, c, sam_12_1_music]
+    - [0xDB7A10, c, sam_12_2_main]
+    - [0xDB7A10, c, sam_12_3_npc]
+    - [0xDB7AA0, c, sam_12_4_scenes]
+    - [0xDB7DB0, c, sam_12_5_entity]
 
-  - [0xD63A90, bin]
+  - [0xDB9030, bin]
 
   - start: 0x1e937b8
     align: 8

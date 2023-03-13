@@ -111,23 +111,23 @@ EvtScript N(EVS_SnowmanMove) = {
 };
 
 EvtScript N(EVS_Scene_SnowmenSpeak) = {
-    EVT_WAIT(20)
+    EVT_WAIT(20 * DT)
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(GetNpcPos, NPC_Snowman_03, LVar0, LVar1, LVar2)
         EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
         EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
         EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(300.0))
         EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(15.0), EVT_FLOAT(-8.0))
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(10.0))
+        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(10.0 / DT))
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
         EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
         EVT_CALL(SpeakToPlayer, NPC_Snowman_03, ANIM_Toad_Red_Idle, ANIM_Toad_Red_Idle, 0, MSG_CH7_011B)
         EVT_CALL(GetNpcPos, NPC_Snowman_06, LVar0, LVar1, LVar2)
         EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0))
+        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0 / DT))
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
         EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-        EVT_WAIT(15)
+        EVT_WAIT(15 * DT)
         EVT_CALL(SpeakToPlayer, NPC_Snowman_06, ANIM_Toad_Red_Idle, ANIM_Toad_Red_Idle, 0, MSG_CH7_011C)
     EVT_ELSE
         EVT_CALL(GetNpcPos, NPC_Snowman_06, LVar0, LVar1, LVar2)
@@ -135,16 +135,16 @@ EvtScript N(EVS_Scene_SnowmenSpeak) = {
         EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
         EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(300.0))
         EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(15.0), EVT_FLOAT(-8.0))
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(10.0))
+        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(10.0 / DT))
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
         EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
         EVT_CALL(SpeakToPlayer, NPC_Snowman_06, ANIM_Toad_Red_Idle, ANIM_Toad_Red_Idle, 0, MSG_CH7_011C)
         EVT_CALL(GetNpcPos, NPC_Snowman_03, LVar0, LVar1, LVar2)
         EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0))
+        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0 / DT))
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
         EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-        EVT_WAIT(15)
+        EVT_WAIT(15 * DT)
         EVT_CALL(SpeakToPlayer, NPC_Snowman_03, ANIM_Toad_Red_Idle, ANIM_Toad_Red_Idle, 0, MSG_CH7_011B)
     EVT_END_IF
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 0, 0, -140)
@@ -161,7 +161,7 @@ EvtScript N(EVS_Scene_SnowmenSpeak) = {
     EVT_CALL(SetNpcFlagBits, NPC_Snowman_06, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
     EVT_WAIT(1)
     EVT_THREAD
-        EVT_WAIT(22)
+        EVT_WAIT(22 * DT)
         EVT_CALL(DisablePlayerPhysics, TRUE)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Flail)
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -177,30 +177,30 @@ EvtScript N(EVS_Scene_SnowmenSpeak) = {
             EVT_SETF(LVar7, LVar2)
             EVT_CALL(AddVectorPolar, LVar6, LVar7, EVT_FLOAT(20.0), LVar8)
             EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(2.0))
-            EVT_CALL(PlayerJump1, LVar6, 0, LVar7, 16)
+            EVT_CALL(PlayerJump1, LVar6, 0, LVar7, 16 * DT)
             EVT_ADDF(LVar8, EVT_FLOAT(180.0))
-            EVT_WAIT(6)
+            EVT_WAIT(6 * DT)
         EVT_END_LOOP
-        EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(2.0))
-        EVT_CALL(PlayerJump1, 0, 0, 0, 16)
+        EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(2.0 / DT))
+        EVT_CALL(PlayerJump1, 0, 0, 0, 16 * DT)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
         EVT_CALL(InterpPlayerYaw, 0, 0)
         EVT_CALL(DisablePlayerPhysics, FALSE)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_WAIT(110)
+        EVT_WAIT(110 * DT)
         EVT_CALL(DisablePartnerAI, 0)
         EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_WALK)
         EVT_CALL(SetNpcJumpscale, NPC_PARTNER, EVT_FLOAT(0.0))
         EVT_CALL(NpcJump1, NPC_PARTNER, 50, 0, 0, 22)
         EVT_CALL(SetNpcAnimation, NPC_PARTNER, PARTNER_ANIM_IDLE)
-        EVT_WAIT(110)
+        EVT_WAIT(110 * DT)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_WAIT(22)
+        EVT_WAIT(22 * DT)
         EVT_LOOP(5)
-            EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 6, EVT_FLOAT(2.0))
-            EVT_WAIT(16)
+            EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 6 * DT, EVT_FLOAT(2.0))
+            EVT_WAIT(16 * DT)
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_SET(LVar0, NPC_Snowman_01)
@@ -240,7 +240,7 @@ EvtScript N(EVS_Scene_SnowmenSpeak) = {
     EVT_SETF(LVar3, EVT_FLOAT(-180.0))
     EVT_SETF(LVar4, EVT_FLOAT(5.0))
     EVT_EXEC_WAIT(N(EVS_SnowmanMove))
-    EVT_WAIT(80)
+    EVT_WAIT(80 * DT)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 200, EVT_FLOAT(1.0))
     EVT_END_THREAD
@@ -251,11 +251,11 @@ EvtScript N(EVS_Scene_SnowmenSpeak) = {
                 EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 4, LVar0, 0, -260, 0)
                 EVT_ADD(LVar0, 60)
             EVT_END_LOOP
-            EVT_WAIT(20)
+            EVT_WAIT(20 * DT)
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_THREAD
-        EVT_WAIT(40)
+        EVT_WAIT(40 * DT)
         EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 0, 0, -240)
         EVT_CALL(SetPanTarget, CAM_DEFAULT, 0, 0, -240)
         EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(300.0))
@@ -263,7 +263,7 @@ EvtScript N(EVS_Scene_SnowmenSpeak) = {
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_END_THREAD
     EVT_CALL(PlaySoundAt, SOUND_38D, 0, 0, 0, -300)
-    EVT_CALL(MakeLerp, 0, 100, 200, EASING_COS_IN_OUT)
+    EVT_CALL(MakeLerp, 0, 100, 200 * DT, EASING_COS_IN_OUT)
     EVT_LABEL(0)
     EVT_CALL(UpdateLerp)
     EVT_CALL(TranslateModel, MODEL_o65, 0, LVar0, 0)
@@ -273,7 +273,7 @@ EvtScript N(EVS_Scene_SnowmenSpeak) = {
     EVT_IF_EQ(LVar1, 1)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_WAIT(60)
+    EVT_WAIT(60 * DT)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 100, EVT_FLOAT(0.3))
     EVT_END_THREAD
@@ -284,7 +284,7 @@ EvtScript N(EVS_Scene_SnowmenSpeak) = {
         EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 4, LVar0, 0, LVar2, 0)
     EVT_END_THREAD
     EVT_CALL(PlaySoundAt, SOUND_38E, 0, 0, 0, -300)
-    EVT_CALL(MakeLerp, 0, 80, 100, EASING_COS_IN_OUT)
+    EVT_CALL(MakeLerp, 0, 80, 100 * DT, EASING_COS_IN_OUT)
     EVT_LABEL(1)
     EVT_CALL(UpdateLerp)
     EVT_CALL(TranslateModel, MODEL_o65, 0, 100, 0)
@@ -295,12 +295,12 @@ EvtScript N(EVS_Scene_SnowmenSpeak) = {
     EVT_IF_EQ(LVar1, 1)
         EVT_GOTO(1)
     EVT_END_IF
-    EVT_WAIT(60)
+    EVT_WAIT(60 * DT)
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(10.0))
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(30)
+    EVT_WAIT(30 * DT)
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH7_011E, 160, 40)
     EVT_CALL(EnablePartnerAI)
     EVT_CALL(UpdateColliderTransform, COLLIDER_o78)
