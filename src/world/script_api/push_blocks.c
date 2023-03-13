@@ -3,7 +3,7 @@
 
 extern PushBlockGrid* wPushBlockGrids[8];
 
-// outVars for values returned by FetchPushedBlockProperties (func_80282E30)
+// outVars for values returned by FetchPushedBlockProperties
 enum {
     BLOCK_PROP_X    = LVar0,
     BLOCK_PROP_Y    = LVar1,
@@ -129,25 +129,16 @@ API_CALLABLE(FinishPushBlockMotion) {
     return ApiStatus_DONE1;
 }
 
-//TODO FetchPushedBlockProperties
-API_CALLABLE(func_80282E30);
-// regalloc
-#ifdef NON_MATCHING
-API_CALLABLE(func_80282E30) {
+API_CALLABLE(FetchPushedBlockProperties) {
     PushBlockGrid* grid = (PushBlockGrid*) script->varTable[10];
     Entity* entity = get_entity_by_index(script->varTable[11]);
-    s32 xThing, yThing, zThing;
     s32 x, y, z;
-    s32 entityY, entityZ;
-    s32 varX, varY, varZ;
-    s32 newX, newY, newZ;
-
-    s32 temp_f4;
-    s32 temp_t2_2;
-    s32 temp_v0;
-    s32 var_a0_2;
-    s32 var_a1;
+    s32 xThing, yThing, zThing;
+    s32 entityX, entityY, entityZ;
+    s32 varX, varZ;
+    s32 deltaX, deltaZ;
     s32 cellX, cellZ;
+    s32 x2, z2;
 
     x = grid->centerPos.x;
     y = grid->centerPos.y;
@@ -157,13 +148,12 @@ API_CALLABLE(func_80282E30) {
     yThing = gPlayerStatus.position.y;
     zThing = gPlayerStatus.position.z;
 
-    xThing = xThing - x;
-    yThing = yThing - y;
-    zThing = zThing - z;
+    xThing -= x;
+    yThing -= y;
+    zThing -= z;
+
     if (xThing < 0) {
-        do {
-            xThing -= BLOCK_GRID_SIZE;
-        } while (0);
+        xThing -= BLOCK_GRID_SIZE;
     }
     if (zThing < 0) {
         zThing -= BLOCK_GRID_SIZE;
@@ -174,46 +164,54 @@ API_CALLABLE(func_80282E30) {
     zThing /= BLOCK_GRID_SIZE;
 
     varX = xThing;
-    varZ = entityZ = zThing;
+    varZ = zThing;
 
     xThing *= BLOCK_GRID_SIZE;
     yThing *= BLOCK_GRID_SIZE;
     zThing *= BLOCK_GRID_SIZE;
 
-    script->varTable[0] = xThing += 12 + x;
-    script->varTable[1] = yThing += y;
-    script->varTable[2] = zThing += 12 + z;
+    xThing += (BLOCK_GRID_SIZE / 2) + x;
+    yThing += y;
+    zThing += (BLOCK_GRID_SIZE / 2) + z;
 
-    script->varTable[3] = xThing = entity->position.x;
-    script->varTable[4] = yThing = entity->position.y;
+    script->varTable[0] = xThing;
+    script->varTable[1] = yThing;
+    script->varTable[2] = zThing;
+
+    script->varTable[3] = entityX = entity->position.x;
+    script->varTable[4] = entityY = entity->position.y;
     script->varTable[5] = entityZ = entity->position.z;
 
-    xThing = xThing - grid->centerPos.x;
-    entityZ = entityZ - grid->centerPos.z;
-    xThing /= BLOCK_GRID_SIZE;
-    var_a1 = xThing - varX;
-    entityZ /= BLOCK_GRID_SIZE;
-    var_a0_2 = entityZ - varZ;
-    if (var_a1 != 0 && var_a0_2 != 0) {
-        var_a0_2 = var_a1 = 0;
-    }
-    script->varTable[6] = var_a1;
-    script->varTable[7] = 0;
-    script->varTable[8] = var_a0_2;
+    xThing = entityX - grid->centerPos.x;
+    zThing = entityZ - grid->centerPos.z;
+    x2 = xThing / BLOCK_GRID_SIZE;
+    z2 = zThing / BLOCK_GRID_SIZE;
 
-    cellX = xThing + var_a1;
-    cellZ = entityZ + var_a0_2;
-    if (var_a1 == 0 && var_a0_2 == 0) {
+    deltaX = x2 - varX;
+    deltaZ = z2 - varZ;
+
+    if (deltaX != 0 && deltaZ != 0) {
+        deltaX = deltaZ = 0;
+    }
+
+    script->varTable[6] = deltaX;
+    script->varTable[7] = 0;
+    script->varTable[8] = deltaZ;
+
+    cellX = x2 + deltaX;
+    cellZ = z2 + deltaZ;
+
+    if (deltaX == 0 && deltaZ == 0) {
         do {
             script->varTable[9] = 2;
         } while (0);
         return ApiStatus_DONE2;
     }
 
-    if ((cellX < grid->numCellsX) && (cellX >= 0) &&
-        (cellZ < grid->numCellsZ) && (cellZ >= 0) &&
-        (grid->cells[cellX + (cellZ * grid->numCellsX)] == PUSH_GRID_EMPTY) &&
-        (gCollisionStatus.pushingAgainstWall != -1))
+    if (cellX < grid->numCellsX && cellX >= 0
+        && cellZ < grid->numCellsZ && cellZ >= 0
+        && grid->cells[cellX + (cellZ * grid->numCellsX)] == PUSH_GRID_EMPTY
+        && gCollisionStatus.pushingAgainstWall != NO_COLLIDER)
     {
         script->varTable[9] = 0;
     } else {
@@ -221,9 +219,6 @@ API_CALLABLE(func_80282E30) {
     }
     return ApiStatus_DONE2;
 }
-#else
-INCLUDE_ASM(s32, "world/script_api/push_blocks", func_80282E30);
-#endif
 
 API_CALLABLE(ClearPushedBlockFromGrid) {
     PushBlockGrid* grid = script->varTablePtr[10];
@@ -295,7 +290,7 @@ EvtScript EVS_PushWall_PushBlock = {
     EVT_SET(LVarA, LVar0) // grid system
     EVT_SET(LVarB, LVar1) // block entity ID
     // check cell where the block will move to
-    EVT_CALL(func_80282E30)
+    EVT_CALL(FetchPushedBlockProperties)
     EVT_CALL(FacePlayerTowardPoint, BLOCK_PROP_I, BLOCK_PROP_K, 0)
     EVT_IF_NE(LVar9, PUSH_BLOCK_INVALID)
         EVT_CALL(MovePlayerTowardBlock)
