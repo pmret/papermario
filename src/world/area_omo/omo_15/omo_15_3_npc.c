@@ -22,33 +22,33 @@ s32 N(BeginSurroundCrowdPositions)[] = {
 
 EvtScript N(EVS_Scene_MeetingGeneralGuy) = {
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_WAIT(30)
+    EVT_WAIT(30 * DT)
     EVT_THREAD
-        EVT_WAIT(10)
+        EVT_WAIT(10 * DT)
         EVT_CALL(GetPartnerInUse, LVar0)
         EVT_IF_NE(LVar0, PARTNER_NONE)
             EVT_CALL(InterruptUsePartner)
-            EVT_WAIT(30)
+            EVT_WAIT(30 * DT)
             EVT_CALL(func_802D2C14, 1)
             EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-            EVT_WAIT(45)
+            EVT_WAIT(45 * DT)
             EVT_CALL(func_802D2C14, 0)
         EVT_END_IF
     EVT_END_THREAD
     EVT_CALL(SpeakToPlayer, NPC_GeneralGuy, ANIM_GeneralGuy_Anim0A, ANIM_GeneralGuy_Anim02, 0, MSG_CH4_005F)
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 250, -50, 10)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 250, -50, 10)
     EVT_CALL(SetCamPosB, CAM_DEFAULT, EVT_FLOAT(205.0), EVT_FLOAT(11.0))
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
-    EVT_WAIT(20)
+    EVT_WAIT(20 * DT)
     EVT_CALL(SpeakToPlayer, NPC_GeneralGuy, ANIM_GeneralGuy_Anim0A, ANIM_GeneralGuy_Anim02, 0, MSG_CH4_0060)
-    EVT_WAIT(20)
+    EVT_WAIT(20 * DT)
     EVT_CALL(SpeakToPlayer, NPC_GeneralGuy, ANIM_GeneralGuy_Anim0A, ANIM_GeneralGuy_Anim02, 0, MSG_CH4_0061)
-    EVT_WAIT(20)
+    EVT_WAIT(20 * DT)
     EVT_CALL(SpeakToPlayer, NPC_GeneralGuy, ANIM_GeneralGuy_Anim0A, ANIM_GeneralGuy_Anim02, 0, MSG_CH4_0062)
-    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0))
+    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0 / DT))
     EVT_CALL(PlayerMoveTo, -200, 0, 0)
     EVT_SET(LVar0, NPC_ShyGuy_01)
     EVT_LOOP(9)
@@ -58,7 +58,7 @@ EvtScript N(EVS_Scene_MeetingGeneralGuy) = {
     EVT_CALL(SetNpcAnimation, NPC_GeneralGuy, ANIM_GeneralGuy_Anim0C)
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH4_0063, 160, 40)
     EVT_CALL(SetNpcAnimation, NPC_GeneralGuy, ANIM_GeneralGuy_Anim02)
-    EVT_WAIT(20)
+    EVT_WAIT(20 * DT)
     EVT_SET(LVar0, NPC_ShyGuy_01)
     EVT_LOOP(9)
         EVT_CALL(SetNpcAnimation, LVar0, ANIM_ShyGuy_Red_Anim01)
@@ -66,7 +66,7 @@ EvtScript N(EVS_Scene_MeetingGeneralGuy) = {
     EVT_END_LOOP
     EVT_CALL(SpeakToPlayer, NPC_GeneralGuy, ANIM_GeneralGuy_Anim02, ANIM_GeneralGuy_Anim0A, 0, MSG_CH4_0064)
     EVT_THREAD
-        EVT_WAIT(10)
+        EVT_WAIT(10 * DT)
         EVT_CALL(PlaySound, SOUND_8000004D)
         EVT_SET(LVar0, NPC_ShyGuy_01)
         EVT_LOOP(9)
@@ -90,7 +90,7 @@ EvtScript N(EVS_Scene_MeetingGeneralGuy) = {
         EVT_ADD(LVar0, 1)
     EVT_END_LOOP
     EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(90.0))
-    EVT_WAIT(20)
+    EVT_WAIT(20 * DT)
     // wait for battle to be over
     EVT_LABEL(5)
         EVT_CALL(GetNpcVar, NPC_ShyGuy_09, 0, LVar0)
@@ -106,10 +106,10 @@ EvtScript N(EVS_Scene_MeetingGeneralGuy) = {
     EVT_END_IF
     EVT_CALL(InterpPlayerYaw, 90, 0)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 150, 0, 0)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.5))
+    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.5 / DT))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(FadeOutMusic, 0, 3000)
+    EVT_CALL(FadeOutMusic, 0, 3000 * DT)
     EVT_EXEC(N(EVS_TrySpawningStarCard))
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN

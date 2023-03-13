@@ -5360,8 +5360,217 @@ segments:
     - [0xE059C0, c, pra_40_1_music]
     - [0xE059C0, c, pra_40_2_main]
     - [0xE068C0, c, pra_40_3_entity]
+  - name: omo_01
+    dir: world/area_omo/omo_01
+    type: code
+    start: 0xE06EE0
+    vram: 0x80240000
+    subsegments:
+    - [0xE06EE0, c, omo_01_0_header]
+    - [0xE06EE0, c, omo_01_1_music]
+    - [0xE06EE0, c, omo_01_2_main]
+    - [0xE06EE0, c, omo_01_3_gizmos]
+    - [0xE07140, c, omo_01_4_npc]
+    - [0xE07B10, c, omo_01_5_entity]
+  - name: omo_02
+    dir: world/area_omo/omo_02
+    type: code
+    start: 0xE094C0
+    vram: 0x80240000
+    subsegments:
+    - [0xE094C0, c, omo_02_0_header]
+    - [0xE094C0, c, omo_02_1_music]
+    - [0xE094C0, c, omo_02_2_main]
+    - [0xE094C0, c, omo_02_3_entity]
+    - [0xE09500, c, omo_02_4_gizmos]
+    - [0xE09780, c, omo_02_5_barricade]
+    - [0xE09E30, c, omo_02_6_npc]
+  - name: omo_03
+    dir: world/area_omo/omo_03
+    type: code
+    start: 0xE11230
+    vram: 0x80240000
+    subsegments:
+    - [0xE11230, c, omo_03_0_header]
+    - [0xE11230, c, omo_03_1_music]
+    - [0xE11230, c, omo_03_2_main]
+    - [0xE11230, c, omo_03_3_gizmos]
+    - [0xE11230, c, omo_03_4_entity]
+    - [0xE11250, c, omo_03_5_npc]
+    - [0xE11250, c, omo_03_6_train]
+    - [0xE11AC0, c, omo_03_7_train_drop]
+    - [0xE11AC0, c, omo_03_8_epilogue]
+  - name: omo_04
+    dir: world/area_omo/omo_04
+    type: code
+    start: 0xE194A0
+    vram: 0x80240000
+    subsegments:
+    - [0xE194A0, c, omo_04_0_header]
+    - [0xE194A0, c, omo_04_1_music]
+    - [0xE194A0, c, omo_04_2_main]
+    - [0xE194A0, c, omo_04_3_gizmos]
+    - [0xE194A0, c, omo_04_4_entity]
+    - [0xE19840, c, omo_04_5_npc]
+    - [0xE1B2E0, c, omo_04_6_scenes]
+  - name: omo_05
+    dir: world/area_omo/omo_05
+    type: code
+    start: 0xE1E360
+    vram: 0x80240000
+    subsegments:
+    - [0xE1E360, c, omo_05_0_header]
+    - [0xE1E360, c, omo_05_1_music]
+    - [0xE1E360, c, omo_05_2_main]
+    - [0xE1E360, c, omo_05_3_gizmos]
+    - [0xE1E360, c, omo_05_4_npc]
+    - [0xE20760, c, omo_05_5_entity]
+  - name: omo_06
+    dir: world/area_omo/omo_06
+    type: code
+    start: 0xE239B0
+    vram: 0x80240000
+    subsegments:
+    - [0xE239B0, c, omo_06_0_header]
+    - [0xE239B0, c, omo_06_1_music]
+    - [0xE239B0, c, omo_06_2_main]
+    - [0xE239B0, c, omo_06_3_gizmos]
+    - [0xE239B0, c, omo_06_4_train]
+    - [0xE24220, c, omo_06_5_npc]
+    - [0xE24220, c, omo_06_6_entity]
+  - name: omo_07
+    dir: world/area_omo/omo_07
+    type: code
+    start: 0xE29410
+    vram: 0x80240000
+    subsegments:
+    - [0xE29410, c, omo_07_0_header]
+    - [0xE29410, c, omo_07_1_music]
+    - [0xE29410, c, omo_07_2_main]
+    - [0xE29410, c, omo_07_3_gizmos]
+    - [0xE29410, c, omo_07_4_npc]
+    - [0xE2C330, c, omo_07_5_entity]
+    - [0xE2C630, c, omo_07_6_scenes]
+  - name: omo_08
+    dir: world/area_omo/omo_08
+    type: code
+    start: 0xE30530
+    vram: 0x80240000
+    subsegments:
+    - [0xE30530, c, omo_08_0_header]
+    - [0xE30530, c, omo_08_1_music]
+    - [0xE30530, c, omo_08_2_main]
+    - [0xE30530, c, omo_08_3_boxes]
+    - [0xE30530, c, omo_08_4_train]
+    - [0xE30DA0, c, omo_08_5_entity]
+    - [0xE30DA0, c, omo_08_6_npc]
+  - name: omo_09
+    dir: world/area_omo/omo_09
+    type: code
+    start: 0xE38EF0
+    vram: 0x80240000
+    subsegments:
+    - [0xE38EF0, c, omo_09_0_header]
+    - [0xE38EF0, c, omo_09_1_music]
+    - [0xE38EF0, c, omo_09_2_main]
+    - [0xE38EF0, c, omo_09_3_conveyors]
+    - [0xE391C0, c, omo_09_4_slot_machine]
+    - [0xE395D0, c, omo_09_5_gizmos]
+    - [0xE39610, c, omo_09_6_entity]
+    - [0xE398D0, c, omo_09_7_npc]
+    - [0xE3C500, c, omo_09_8_scenes]
+  - name: omo_10
+    dir: world/area_omo/omo_10
+    type: code
+    start: 0xE43C30
+    vram: 0x80240000
+    subsegments:
+    - [0xE43C30, c, omo_10_0_header]
+    - [0xE43C30, c, omo_10_1_music]
+    - [0xE43C30, c, omo_10_2_main]
+    - [0xE43C30, c, omo_10_3_gizmos]
+    - [0xE43C30, c, omo_10_4_train]
+    - [0xE444A0, c, omo_10_5_npc]
+    - [0xE444A0, c, omo_10_6_entity]
+  - name: omo_11
+    dir: world/area_omo/omo_11
+    type: code
+    start: 0xE48B60
+    vram: 0x80240000
+    subsegments:
+    - [0xE48B60, c, omo_11_0_header]
+    - [0xE48B60, c, omo_11_1_music]
+    - [0xE48B60, c, omo_11_2_main]
+    - [0xE48B60, c, omo_11_3_gizmos]
+    - [0xE492F0, c, omo_11_4_entity]
+    - [0xE4A030, c, omo_11_5_npc]
+  - name: omo_12
+    dir: world/area_omo/omo_12
+    type: code
+    start: 0xE4B640
+    vram: 0x80240000
+    subsegments:
+    - [0xE4B640, c, omo_12_0_header]
+    - [0xE4B640, c, omo_12_1_music]
+    - [0xE4B640, c, omo_12_2_main]
+    - [0xE4B640, c, omo_12_3_npc]
+    - [0xE4BA60, c, omo_12_4_new_partner]
+  - name: omo_13
+    dir: world/area_omo/omo_13
+    type: code
+    start: 0xE4E7C0
+    vram: 0x80240000
+    subsegments:
+    - [0xE4E7C0, c, omo_13_0_header]
+    - [0xE4E7C0, c, omo_13_1_music]
+    - [0xE4E7C0, c, omo_13_2_main]
+    - [0xE4E7C0, c, omo_13_3_gizmos]
+    - [0xE4EA40, c, omo_13_4_npc]
+    - [0xE4F9F0, c, omo_13_5_entity]
+  - name: omo_14
+    dir: world/area_omo/omo_14
+    type: code
+    start: 0xE519E0
+    vram: 0x80240000
+    subsegments:
+    - [0xE519E0, c, omo_14_0_header]
+    - [0xE519E0, c, omo_14_1_music]
+    - [0xE519E0, c, omo_14_2_main]
+    - [0xE51B40, c, omo_14_3_npc]
+  - name: omo_15
+    dir: world/area_omo/omo_15
+    type: code
+    start: 0xE54AA0
+    vram: 0x80240000
+    subsegments:
+    - [0xE54AA0, c, omo_15_0_header]
+    - [0xE54AA0, c, omo_15_1_music]
+    - [0xE54AA0, c, omo_15_2_main]
+    - [0xE552A0, c, omo_15_3_npc]
+  - name: omo_16
+    dir: world/area_omo/omo_16
+    type: code
+    start: 0xE58200
+    vram: 0x80240000
+    subsegments:
+    - [0xE58200, c, omo_16_0_header]
+    - [0xE58200, c, omo_16_1_main]
+    - [0xE58200, c, omo_16_2_train]
+    - [0xE58800, c, omo_16_3_npc]
+  - name: omo_17
+    dir: world/area_omo/omo_17
+    type: code
+    start: 0xE5B1D0
+    vram: 0x80240000
+    subsegments:
+    - [0xE5B1D0, c, omo_17_0_header]
+    - [0xE5B1D0, c, omo_17_1_main]
+    - [0xE5B1D0, c, omo_17_2_gizmos]
+    - [0xE5B1D0, c, omo_17_3_train]
+    - [0xE5B730, c, omo_17_4_npc]
+    - [0xE5E8E0, c, omo_17_5_entity]
 
-  - [0xE06EE0, bin]
+  - [0xE62D30, bin]
 
   - start: 0x1e937b8
     align: 8
