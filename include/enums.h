@@ -3049,6 +3049,7 @@ enum ShadingProfile {
     SHADING_ARN_11,
     SHADING_ARN_12,
     SHADING_ARN_13,
+    SHADING_DGB_06 = 0x00090000,
 };
 #endif
 
