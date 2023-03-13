@@ -332,6 +332,12 @@ EvtScript N(EVS_NpcInit_Clubba_03_Aux) = {
     EVT_END
 };
 
+#if VERSION_PAL
+#define CLUBBA_EXTRA_FLAGS (ENEMY_FLAG_IGNORE_PARTNER | ENEMY_FLAG_IGNORE_TOUCH)
+#else
+#define CLUBBA_EXTRA_FLAGS (0)
+#endif
+
 NpcData N(NpcData_Clubba_01)[] = {
     {
         .id = NPC_Clubba_01,
@@ -339,7 +345,7 @@ NpcData N(NpcData_Clubba_01)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Clubba_01),
         .settings = &N(NpcSettings_Clubba),
-        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | CLUBBA_EXTRA_FLAGS,
         .drops = NO_DROPS,
         .animations = FROST_CLUBBA_ANIMS,
     },
@@ -349,7 +355,7 @@ NpcData N(NpcData_Clubba_01)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Clubba_01_Aux),
         .settings = &N(NpcSettings_Clubba),
-        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_400000 | CLUBBA_EXTRA_FLAGS,
         .drops = NO_DROPS,
         .animations = FROST_CLUBBA_ANIMS,
     },
@@ -362,7 +368,7 @@ NpcData N(NpcData_Clubba_02)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Clubba_02),
         .settings = &N(NpcSettings_Clubba),
-        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | CLUBBA_EXTRA_FLAGS,
         .drops = NO_DROPS,
         .animations = FROST_CLUBBA_ANIMS,
     },
@@ -372,7 +378,7 @@ NpcData N(NpcData_Clubba_02)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Clubba_02_Aux),
         .settings = &N(NpcSettings_Clubba),
-        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_400000 | CLUBBA_EXTRA_FLAGS,
         .drops = NO_DROPS,
         .animations = FROST_CLUBBA_ANIMS,
     },
@@ -385,7 +391,7 @@ NpcData N(NpcData_Clubba_03)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Clubba_03),
         .settings = &N(NpcSettings_Clubba),
-        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_100000 | ENEMY_FLAG_400000 | CLUBBA_EXTRA_FLAGS,
         .drops = NO_DROPS,
         .animations = FROST_CLUBBA_ANIMS,
     },
@@ -395,7 +401,7 @@ NpcData N(NpcData_Clubba_03)[] = {
         .yaw = 270,
         .init = &N(EVS_NpcInit_Clubba_03_Aux),
         .settings = &N(NpcSettings_Clubba),
-        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_400000,
+        .flags = ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_HAS_NO_SPRITE | ENEMY_FLAG_400000 | CLUBBA_EXTRA_FLAGS,
         .drops = NO_DROPS,
         .animations = FROST_CLUBBA_ANIMS,
     },

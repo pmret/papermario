@@ -4952,8 +4952,416 @@ segments:
     - [0xDB7A10, c, sam_12_3_npc]
     - [0xDB7AA0, c, sam_12_4_scenes]
     - [0xDB7DB0, c, sam_12_5_entity]
+  - name: pra_01
+    dir: world/area_pra/pra_01
+    type: code
+    start: 0xDB9030
+    vram: 0x80240000
+    subsegments:
+    - [0xDB9030, c, pra_01_0_header]
+    - [0xDB9050, c, pra_01_1_music]
+    - [0xDB9050, c, pra_01_2_main]
+    - [0xDB9FB0, c, pra_01_3_npc]
+    - [0xDBA3E0, c, pra_01_4_entity]
+  - name: pra_02
+    dir: world/area_pra/pra_02
+    type: code
+    start: 0xDBBFE0
+    vram: 0x80240000
+    subsegments:
+    - [0xDBBFE0, c, pra_02_0_header]
+    - [0xDBC000, c, pra_02_1_music]
+    - [0xDBC000, c, pra_02_2_main]
+    - [0xDBCF00, c, pra_02_3_npc]
+    - [0xDBD2F0, c, pra_02_4_entity]
+  - name: pra_03
+    dir: world/area_pra/pra_03
+    type: code
+    start: 0xDBFCA0
+    vram: 0x80240000
+    subsegments:
+    - [0xDBFCA0, c, pra_03_0_header]
+    - [0xDBFCC0, c, pra_03_1_music]
+    - [0xDBFCC0, c, pra_03_2_main]
+    - [0xDBFCC0, c, pra_03_3_entity]
+  - name: pra_04
+    dir: world/area_pra/pra_04
+    type: code
+    start: 0xDC0680
+    vram: 0x80240000
+    subsegments:
+    - [0xDC0680, c, pra_04_0_header]
+    - [0xDC06A0, c, pra_04_1_music]
+    - [0xDC06A0, c, pra_04_2_main]
+    - [0xDC06A0, c, pra_04_3_entity]
+    - [0xDC0830, c, pra_04_4_npc]
+  - name: pra_05
+    dir: world/area_pra/pra_05
+    type: code
+    start: 0xDC1BA0
+    vram: 0x80240000
+    subsegments:
+    - [0xDC1BA0, c, pra_05_0_header]
+    - [0xDC1BC0, c, pra_05_1_music]
+    - [0xDC1BC0, c, pra_05_2_main]
+    - [0xDC2AC0, c, pra_05_3_entity]
+  - name: pra_06
+    dir: world/area_pra/pra_06
+    type: code
+    start: 0xDC3420
+    vram: 0x80240000
+    subsegments:
+    - [0xDC3420, c, pra_06_0_header]
+    - [0xDC3420, c, pra_06_1_music]
+    - [0xDC3420, c, pra_06_2_main]
+    - [0xDC4370, c, pra_06_3_entity]
+  - name: pra_09
+    dir: world/area_pra/pra_09
+    type: code
+    start: 0xDC4880
+    vram: 0x80240000
+    subsegments:
+    - [0xDC4880, c, pra_09_0_header]
+    - [0xDC48A0, c, pra_09_1_music]
+    - [0xDC48A0, c, pra_09_2_main]
+    - [0xDC57A0, c, pra_09_3_npc]
+  - name: pra_10
+    dir: world/area_pra/pra_10
+    type: code
+    start: 0xDCB2A0
+    vram: 0x80240000
+    subsegments:
+    - [0xDCB2A0, c, pra_10_0_header]
+    - [0xDCB2C0, c, pra_10_1_music]
+    - [0xDCB2C0, c, pra_10_2_main]
+    - [0xDCC1C0, c, pra_10_3_npc]
+  - name: pra_11
+    dir: world/area_pra/pra_11
+    type: code
+    start: 0xDCD4F0
+    vram: 0x80240000
+    subsegments:
+    - [0xDCD4F0, c, pra_11_0_header]
+    - [0xDCD510, c, pra_11_1_music]
+    - [0xDCD510, c, pra_11_2_main]
+    - [0xDCE410, c, pra_11_3_entity]
+  - name: pra_12
+    dir: world/area_pra/pra_12
+    type: code
+    start: 0xDCED00
+    vram: 0x80240000
+    subsegments:
+    - [0xDCED00, c, pra_12_0_header]
+    - [0xDCED00, c, pra_12_1_music]
+    - [0xDCED00, c, pra_12_2_main]
+    - [0xDCFC50, c, pra_12_3_entity]
+  - name: pra_13
+    dir: world/area_pra/pra_13
+    type: code
+    start: 0xDD05D0
+    vram: 0x80240000
+    subsegments:
+    - [0xDD05D0, c, pra_13_0_header]
+    - [0xDD05F0, c, pra_13_1_music]
+    - [0xDD05F0, c, pra_13_2_main]
+    - [0xDD14F0, c, pra_13_3_npc]
+  - name: pra_14
+    dir: world/area_pra/pra_14
+    type: code
+    start: 0xDD3CF0
+    vram: 0x80240000
+    subsegments:
+    - [0xDD3CF0, c, pra_14_0_header]
+    - [0xDD3D10, c, pra_14_1_music]
+    - [0xDD3D10, c, pra_14_2_main]
+    - [0xDD4C10, c, pra_14_3_entity]
+  - name: pra_15
+    dir: world/area_pra/pra_15
+    type: code
+    start: 0xDD5800
+    vram: 0x80240000
+    subsegments:
+    - [0xDD5800, c, pra_15_0_header]
+    - [0xDD5820, c, pra_15_1_music]
+    - [0xDD5820, c, pra_15_2_main]
+    - [0xDD5840, c, pra_15_3_entity]
+  - name: pra_16
+    dir: world/area_pra/pra_16
+    type: code
+    start: 0xDD5B10
+    vram: 0x80240000
+    subsegments:
+    - [0xDD5B10, c, pra_16_0_header]
+    - [0xDD5B30, c, pra_16_1_music]
+    - [0xDD5B30, c, pra_16_2_main]
+  - name: pra_18
+    dir: world/area_pra/pra_18
+    type: code
+    start: 0xDD7610
+    vram: 0x80240000
+    subsegments:
+    - [0xDD7610, c, pra_18_0_header]
+    - [0xDD7630, c, pra_18_1_music]
+    - [0xDD7630, c, pra_18_2_main]
+    - [0xDD8530, c, pra_18_3_npc]
+  - name: pra_19
+    dir: world/area_pra/pra_19
+    type: code
+    start: 0xDDA9A0
+    vram: 0x80240000
+    subsegments:
+    - [0xDDA9A0, c, pra_19_0_header]
+    - [0xDDA9C0, c, pra_19_1_music]
+    - [0xDDA9C0, c, pra_19_2_main]
+    - [0xDDB8C0, c, pra_19_3_npc]
+  - name: pra_20
+    dir: world/area_pra/pra_20
+    type: code
+    start: 0xDE2390
+    vram: 0x80240000
+    subsegments:
+    - [0xDE2390, c, pra_20_0_header]
+    - [0xDE23B0, c, pra_20_1_music]
+    - [0xDE23B0, c, pra_20_2_main]
+  - name: pra_21
+    dir: world/area_pra/pra_21
+    type: code
+    start: 0xDE3F10
+    vram: 0x80240000
+    subsegments:
+    - [0xDE3F10, c, pra_21_0_header]
+    - [0xDE3F30, c, pra_21_1_music]
+    - [0xDE3F30, c, pra_21_2_main]
+    - [0xDE3F30, c, pra_21_3_entity]
+  - name: pra_22
+    dir: world/area_pra/pra_22
+    type: code
+    start: 0xDE4870
+    vram: 0x80240000
+    subsegments:
+    - [0xDE4870, c, pra_22_0_header]
+    - [0xDE4890, c, pra_22_1_music]
+    - [0xDE4890, c, pra_22_2_main]
+    - [0xDE4A40, c, pra_22_3_entity]
+  - name: pra_27
+    dir: world/area_pra/pra_27
+    type: code
+    start: 0xDE59E0
+    vram: 0x80240000
+    subsegments:
+    - [0xDE59E0, c, pra_27_0_header]
+    - [0xDE59E0, c, pra_27_1_music]
+    - [0xDE59E0, c, pra_27_2_main]
+    - [0xDE6930, c, pra_27_3_entity]
+  - name: pra_28
+    dir: world/area_pra/pra_28
+    type: code
+    start: 0xDE7290
+    vram: 0x80240000
+    subsegments:
+    - [0xDE7290, c, pra_28_0_header]
+    - [0xDE7290, c, pra_28_1_music]
+    - [0xDE7290, c, pra_28_2_main]
+    - [0xDE81E0, c, pra_28_3_entity]
+  - name: pra_29
+    dir: world/area_pra/pra_29
+    type: code
+    start: 0xDE8B40
+    vram: 0x80240000
+    subsegments:
+    - [0xDE8B40, c, pra_29_0_header]
+    - [0xDE8B60, c, pra_29_1_music]
+    - [0xDE8B60, c, pra_29_2_entity]
+    - [0xDE8B60, c, pra_29_3_main]
+    - [0xDE9A60, c, pra_29_4_bridge]
+  - name: pra_31
+    dir: world/area_pra/pra_31
+    type: code
+    start: 0xDEAD50
+    vram: 0x80240000
+    subsegments:
+    - [0xDEAD50, c, pra_31_0_header]
+    - [0xDEAD70, c, pra_31_1_music]
+    - [0xDEAD70, c, pra_31_2_npc]
+    - [0xDEB260, c, pra_31_3_main]
+    - [0xDEB260, c, pra_31_4_puzzle]
+    - [0xDEBE00, c, pra_31_5_texture_1]
+    - [0xDEBE00, c, pra_31_6_texture_2]
+    - [0xDEBE00, c, pra_31_7_texture_3]
+    - [0xDEBE00, c, pra_31_8_stairs_skele]
+    - [0xDEBE00, c, pra_31_9_stairs_anim]
+    - [0xDEBE00, c, pra_31_10_stairs_lights]
+    - [0xDEBE00, c, pra_31_11_stairs_vtx]
+    - [0xDEBE00, .data, pra_31_0_header]
+    - [0xDEBE70, .data, pra_31_1_music]
+    - [0xDEBEB0, .data, pra_31_2_npc]
+    - [0xDECE10, .data, pra_31_3_main]
+    - [0xDED240, .data, pra_31_4_puzzle]
+    - start: 0xDEE260
+      type: .data
+      name: pra_31_5_texture_1
+      subsegments:
+      - [0xDEE260, ci4, texture_1, 64, 64]
+      - [0xDEEA60, palette, texture_1]
+      - [0xDEEA80, gfx, texture_1]
+      - [0xDEEB40]
+    - start: 0xDEEB40
+      type: .data
+      name: pra_31_6_texture_2
+      subsegments:
+      - [0xDEEB40, ci4, texture_2, 64, 64]
+      - [0xDEF340, palette, texture_2]
+      - [0xDEF360, gfx, texture_2]
+      - [0xDEF410]
+    - start: 0xDEF410
+      type: .data
+      name: pra_31_7_texture_3
+      subsegments:
+      - [0xDEF410, rgba16, texture_3, 32, 32]
+      - [0xDEFC10, gfx, texture_3]
+      - [0xDEFCA0]
+    - start: 0xDEFCA0
+      type: .data
+      name: pra_31_8_stairs_skele
+      subsegments:
+      - [0xDEFCA0, gfx, unk_01]
+      - [0xDEFD18, gfx, unk_02]
+      - [0xDEFD50, gfx, unk_03]
+      - [0xDEFDB8, gfx, unk_04]
+      - [0xDEFDF0, gfx, unk_05]
+      - [0xDEFE68, gfx, unk_06]
+      - [0xDEFEA0, gfx, unk_07]
+      - [0xDEFF18, gfx, unk_08]
+      - [0xDEFF50, gfx, unk_09]
+      - [0xDEFFB8, gfx, unk_10]
+      - [0xDEFFF0, gfx, unk_11]
+      - [0xDF0068, gfx, unk_12]
+      - [0xDF00A0, gfx, unk_13]
+      - [0xDF0118, gfx, unk_14]
+      - [0xDF0150, gfx, unk_15]
+      - [0xDF01B8, gfx, unk_16]
+      - [0xDF01F0, gfx, unk_17]
+      - [0xDF0268, gfx, unk_18]
+      - [0xDF02A0, gfx, unk_19]
+      - [0xDF0318, gfx, unk_20]
+      - [0xDF0350, gfx, unk_21]
+      - [0xDF03B8, gfx, unk_22]
+      - [0xDF03F0, gfx, unk_23]
+      - [0xDF0468, gfx, unk_24]
+      - [0xDF04A0, gfx, unk_25]
+      - [0xDF0518, gfx, unk_26]
+      - [0xDF0550, gfx, unk_27]
+      - [0xDF05B8, gfx, unk_28]
+      - [0xDF0618, gfx, unk_29]
+      - [0xDF0680, gfx, unk_30]
+      - [0xDF06C8, gfx, unk_31]
+      - [0xDF0758, gfx, unk_32]
+      - [0xDF0780, gfx, unk_33]
+      - [0xDF07A8, gfx, unk_34]
+      - [0xDF07D0]
+    - [0xDF0E80, .data, pra_31_9_stairs_anim]
+    - [0xDF2470, .data, pra_31_10_stairs_lights]
+    - start: 0xDF2490
+      type: .data
+      name: pra_31_11_stairs_vtx
+      subsegments:
+      - [0xDF2490]
+      - [0xDF2810, vtx, stairs]
+      - [0xDF29D0]
+    - [0xDF29D0]
+  - name: pra_32
+    dir: world/area_pra/pra_32
+    type: code
+    start: 0xDF29F0
+    vram: 0x80240000
+    subsegments:
+    - [0xDF29F0, c, pra_32_0_header]
+    - [0xDF2A10, c, pra_32_1_music]
+    - [0xDF2A10, c, pra_32_2_main]
+    - [0xDF3230, c, pra_32_3_npc]
+  - name: pra_33
+    dir: world/area_pra/pra_33
+    type: code
+    start: 0xDF56D0
+    vram: 0x80240000
+    subsegments:
+    - [0xDF56D0, c, pra_33_0_header]
+    - [0xDF56F0, c, pra_33_1_music]
+    - [0xDF56F0, c, pra_33_2_main]
+    - [0xDF65F0, c, pra_33_3_entity]
+  - name: pra_34
+    dir: world/area_pra/pra_34
+    type: code
+    start: 0xDF73A0
+    vram: 0x80240000
+    subsegments:
+    - [0xDF73A0, c, pra_34_0_header]
+    - [0xDF73C0, c, pra_34_1_music]
+    - [0xDF73C0, c, pra_34_2_main]
+    - [0xDF83A0, c, pra_34_3_entity]
+  - name: pra_35
+    dir: world/area_pra/pra_35
+    type: code
+    start: 0xDF9240
+    vram: 0x80240000
+    subsegments:
+    - [0xDF9240, c, pra_35_0_header]
+    - [0xDF9260, c, pra_35_1_music]
+    - [0xDF9260, c, pra_35_2_main]
+    - [0xDFA160, c, pra_35_3_npc]
+    - [0xDFBB90, c, pra_35_4_entity]
+  - name: pra_36
+    dir: world/area_pra/pra_36
+    type: code
+    start: 0xDFD6F0
+    vram: 0x80240000
+    subsegments:
+    - [0xDFD6F0, c, pra_36_0_header]
+    - [0xDFD6F0, c, pra_36_1_music]
+    - [0xDFD6F0, c, pra_36_2_main]
+    - [0xDFE640, c, pra_36_3_npc]
+  - name: pra_37
+    dir: world/area_pra/pra_37
+    type: code
+    start: 0xDFEF30
+    vram: 0x80240000
+    subsegments:
+    - [0xDFEF30, c, pra_37_0_header]
+    - [0xDFEF30, c, pra_37_1_music]
+    - [0xDFEF30, c, pra_37_2_main]
+    - [0xDFFE80, c, pra_37_3_npc]
+  - name: pra_38
+    dir: world/area_pra/pra_38
+    type: code
+    start: 0xE015E0
+    vram: 0x80240000
+    subsegments:
+    - [0xE015E0, c, pra_38_0_header]
+    - [0xE015E0, c, pra_38_1_music]
+    - [0xE015E0, c, pra_38_2_main]
+    - [0xE02530, c, pra_38_3_npc]
+  - name: pra_39
+    dir: world/area_pra/pra_39
+    type: code
+    start: 0xE03880
+    vram: 0x80240000
+    subsegments:
+    - [0xE03880, c, pra_39_0_header]
+    - [0xE03880, c, pra_39_1_music]
+    - [0xE03880, c, pra_39_2_main]
+    - [0xE047D0, c, pra_39_3_npc]
+  - name: pra_40
+    dir: world/area_pra/pra_40
+    type: code
+    start: 0xE059A0
+    vram: 0x80240000
+    subsegments:
+    - [0xE059A0, c, pra_40_0_header]
+    - [0xE059C0, c, pra_40_1_music]
+    - [0xE059C0, c, pra_40_2_main]
+    - [0xE068C0, c, pra_40_3_entity]
 
-  - [0xDB9030, bin]
+  - [0xE06EE0, bin]
 
   - start: 0x1e937b8
     align: 8
