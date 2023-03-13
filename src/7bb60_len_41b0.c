@@ -92,7 +92,7 @@ s32 collision_main_above(void) {
     if (hitResult >= 0) {
         if (playerStatus->actionState != ACTION_STATE_FALLING
             && playerStatus->actionState != ACTION_STATE_STEP_DOWN
-            && collisionStatus->currentFloor < 0
+            && collisionStatus->currentFloor <= NO_COLLIDER
         ) {
             if (sp2C <= fabsf(new_var + playerStatus->gravityIntegrator[0])) {
                 do {

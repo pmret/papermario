@@ -90,7 +90,7 @@ EvtScript EVS_WorldBombette_TakeOut = {
 };
 
 BSS TweesterPhysics N(TweesterPhysicsData);
-TweesterPhysics* TweesterPhysicsPtr = &N(TweesterPhysicsData);
+TweesterPhysics* N(TweesterPhysicsPtr) = &N(TweesterPhysicsData);
 
 API_CALLABLE(N(Update)) {
     PlayerData* playerData = &gPlayerData;
@@ -100,7 +100,7 @@ API_CALLABLE(N(Update)) {
 
     if (isInitialCall) {
         partner_walking_enable(bombette, 1);
-        mem_clear(TweesterPhysicsPtr, sizeof(TweesterPhysics));
+        mem_clear(N(TweesterPhysicsPtr), sizeof(TweesterPhysics));
         TweesterTouchingPartner = NULL;
     }
 
@@ -114,61 +114,61 @@ API_CALLABLE(N(Update)) {
         return ApiStatus_BLOCK;
     }
 
-    switch (TweesterPhysicsPtr->state) {
+    switch (N(TweesterPhysicsPtr)->state) {
         case TWEESTER_PARTNER_INIT:
-            TweesterPhysicsPtr->state++;
-            TweesterPhysicsPtr->prevFlags = bombette->flags;
-            TweesterPhysicsPtr->radius = fabsf(dist2D(bombette->pos.x, bombette->pos.z,
+            N(TweesterPhysicsPtr)->state++;
+            N(TweesterPhysicsPtr)->prevFlags = bombette->flags;
+            N(TweesterPhysicsPtr)->radius = fabsf(dist2D(bombette->pos.x, bombette->pos.z,
                                                      entity->position.x, entity->position.z));
-            TweesterPhysicsPtr->angle = atan2(entity->position.x, entity->position.z,
+            N(TweesterPhysicsPtr)->angle = atan2(entity->position.x, entity->position.z,
                                               bombette->pos.x, bombette->pos.z);
-            TweesterPhysicsPtr->angularVelocity = 6.0f;
-            TweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
-            TweesterPhysicsPtr->countdown = 120;
+            N(TweesterPhysicsPtr)->angularVelocity = 6.0f;
+            N(TweesterPhysicsPtr)->liftoffVelocityPhase = 50.0f;
+            N(TweesterPhysicsPtr)->countdown = 120;
             bombette->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
             bombette->flags &= ~NPC_FLAG_GRAVITY;
         case TWEESTER_PARTNER_ATTRACT:
-            sin_cos_rad(DEG_TO_RAD(TweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
-            bombette->pos.x = entity->position.x + (sinAngle * TweesterPhysicsPtr->radius);
-            bombette->pos.z = entity->position.z - (cosAngle * TweesterPhysicsPtr->radius);
-            TweesterPhysicsPtr->angle = clamp_angle(TweesterPhysicsPtr->angle - TweesterPhysicsPtr->angularVelocity);
+            sin_cos_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->angle), &sinAngle, &cosAngle);
+            bombette->pos.x = entity->position.x + (sinAngle * N(TweesterPhysicsPtr)->radius);
+            bombette->pos.z = entity->position.z - (cosAngle * N(TweesterPhysicsPtr)->radius);
+            N(TweesterPhysicsPtr)->angle = clamp_angle(N(TweesterPhysicsPtr)->angle - N(TweesterPhysicsPtr)->angularVelocity);
 
-            if (TweesterPhysicsPtr->radius > 20.0f) {
-                TweesterPhysicsPtr->radius--;
-            } else if (TweesterPhysicsPtr->radius < 19.0f) {
-                TweesterPhysicsPtr->radius++;
+            if (N(TweesterPhysicsPtr)->radius > 20.0f) {
+                N(TweesterPhysicsPtr)->radius--;
+            } else if (N(TweesterPhysicsPtr)->radius < 19.0f) {
+                N(TweesterPhysicsPtr)->radius++;
             }
 
-            liftoffVelocity = sin_rad(DEG_TO_RAD(TweesterPhysicsPtr->liftoffVelocityPhase)) * 3.0f;
-            TweesterPhysicsPtr->liftoffVelocityPhase += 3.0f;
+            liftoffVelocity = sin_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->liftoffVelocityPhase)) * 3.0f;
+            N(TweesterPhysicsPtr)->liftoffVelocityPhase += 3.0f;
 
-            if (TweesterPhysicsPtr->liftoffVelocityPhase > 150.0f) {
-                TweesterPhysicsPtr->liftoffVelocityPhase = 150.0f;
+            if (N(TweesterPhysicsPtr)->liftoffVelocityPhase > 150.0f) {
+                N(TweesterPhysicsPtr)->liftoffVelocityPhase = 150.0f;
             }
 
             bombette->pos.y += liftoffVelocity;
-            bombette->renderYaw = clamp_angle(360.0f - TweesterPhysicsPtr->angle);
-            TweesterPhysicsPtr->angularVelocity += 0.8;
+            bombette->renderYaw = clamp_angle(360.0f - N(TweesterPhysicsPtr)->angle);
+            N(TweesterPhysicsPtr)->angularVelocity += 0.8;
 
-            if (TweesterPhysicsPtr->angularVelocity > 40.0f) {
-                TweesterPhysicsPtr->angularVelocity = 40.0f;
+            if (N(TweesterPhysicsPtr)->angularVelocity > 40.0f) {
+                N(TweesterPhysicsPtr)->angularVelocity = 40.0f;
             }
 
-            if (--TweesterPhysicsPtr->countdown == 0) {
-                TweesterPhysicsPtr->state++;
+            if (--N(TweesterPhysicsPtr)->countdown == 0) {
+                N(TweesterPhysicsPtr)->state++;
             }
             break;
         case TWEESTER_PARTNER_HOLD:
-            bombette->flags = TweesterPhysicsPtr->prevFlags;
-            TweesterPhysicsPtr->countdown = 30;
-            TweesterPhysicsPtr->state++;
+            bombette->flags = N(TweesterPhysicsPtr)->prevFlags;
+            N(TweesterPhysicsPtr)->countdown = 30;
+            N(TweesterPhysicsPtr)->state++;
             break;
         case TWEESTER_PARTNER_RELEASE:
             partner_walking_update_player_tracking(bombette);
             partner_walking_update_motion(bombette);
 
-            if (--TweesterPhysicsPtr->countdown == 0) {
-                TweesterPhysicsPtr->state = TWEESTER_PARTNER_INIT;
+            if (--N(TweesterPhysicsPtr)->countdown == 0) {
+                N(TweesterPhysicsPtr)->state = TWEESTER_PARTNER_INIT;
                 TweesterTouchingPartner = NULL;
             }
             break;
@@ -185,8 +185,8 @@ EvtScript EVS_WorldBombette_Update = {
 void N(try_cancel_tweester)(Npc* npc) {
     if (TweesterTouchingPartner != NULL) {
         TweesterTouchingPartner = NULL;
-        npc->flags = TweesterPhysicsPtr->prevFlags;
-        TweesterPhysicsPtr->state = TWEESTER_PARTNER_INIT;
+        npc->flags = N(TweesterPhysicsPtr)->prevFlags;
+        N(TweesterPhysicsPtr)->state = TWEESTER_PARTNER_INIT;
         partner_clear_player_tracking(npc);
     }
 }

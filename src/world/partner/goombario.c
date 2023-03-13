@@ -101,7 +101,7 @@ EvtScript EVS_WorldGoombario_TakeOut = {
     EVT_END
 };
 
-TweesterPhysics* GoombarioTweesterPhysicsPtr = &N(TweesterPhysicsData);
+TweesterPhysics* N(TweesterPhysicsPtr) = &N(TweesterPhysicsData);
 
 API_CALLABLE(N(Update)) {
     PlayerData* playerData = &gPlayerData;
@@ -111,7 +111,7 @@ API_CALLABLE(N(Update)) {
 
     if (isInitialCall) {
         partner_walking_enable(npc, 1);
-        mem_clear(GoombarioTweesterPhysicsPtr, sizeof(TweesterPhysics));
+        mem_clear(N(TweesterPhysicsPtr), sizeof(TweesterPhysics));
         TweesterTouchingPartner = NULL;
     }
 
@@ -124,61 +124,61 @@ API_CALLABLE(N(Update)) {
         return 0;
     }
 
-    switch (GoombarioTweesterPhysicsPtr->state) {
+    switch (N(TweesterPhysicsPtr)->state) {
         case 0:
-            GoombarioTweesterPhysicsPtr->state = 1;
-            GoombarioTweesterPhysicsPtr->prevFlags = npc->flags;
-            GoombarioTweesterPhysicsPtr->radius = fabsf(dist2D(npc->pos.x, npc->pos.z, entity->position.x, entity->position.z));
-            GoombarioTweesterPhysicsPtr->angle = atan2(entity->position.x, entity->position.z, npc->pos.x, npc->pos.z);
-            GoombarioTweesterPhysicsPtr->angularVelocity = 6.0f;
-            GoombarioTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
-            GoombarioTweesterPhysicsPtr->countdown = 120;
+            N(TweesterPhysicsPtr)->state = 1;
+            N(TweesterPhysicsPtr)->prevFlags = npc->flags;
+            N(TweesterPhysicsPtr)->radius = fabsf(dist2D(npc->pos.x, npc->pos.z, entity->position.x, entity->position.z));
+            N(TweesterPhysicsPtr)->angle = atan2(entity->position.x, entity->position.z, npc->pos.x, npc->pos.z);
+            N(TweesterPhysicsPtr)->angularVelocity = 6.0f;
+            N(TweesterPhysicsPtr)->liftoffVelocityPhase = 50.0f;
+            N(TweesterPhysicsPtr)->countdown = 120;
             npc->flags |= NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_CAMERA_FOR_YAW;
             npc->flags &= ~NPC_FLAG_GRAVITY;
         case 1:
-            sin_cos_rad(DEG_TO_RAD(GoombarioTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
+            sin_cos_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->angle), &sinAngle, &cosAngle);
 
-            npc->pos.x = entity->position.x + (sinAngle * GoombarioTweesterPhysicsPtr->radius);
-            npc->pos.z = entity->position.z - (cosAngle * GoombarioTweesterPhysicsPtr->radius);
-            GoombarioTweesterPhysicsPtr->angle = clamp_angle(GoombarioTweesterPhysicsPtr->angle - GoombarioTweesterPhysicsPtr->angularVelocity);
+            npc->pos.x = entity->position.x + (sinAngle * N(TweesterPhysicsPtr)->radius);
+            npc->pos.z = entity->position.z - (cosAngle * N(TweesterPhysicsPtr)->radius);
+            N(TweesterPhysicsPtr)->angle = clamp_angle(N(TweesterPhysicsPtr)->angle - N(TweesterPhysicsPtr)->angularVelocity);
 
-            if (GoombarioTweesterPhysicsPtr->radius > 20.0f) {
-                GoombarioTweesterPhysicsPtr->radius--;
-            } else if (GoombarioTweesterPhysicsPtr->radius < 19.0f) {
-                GoombarioTweesterPhysicsPtr->radius++;
+            if (N(TweesterPhysicsPtr)->radius > 20.0f) {
+                N(TweesterPhysicsPtr)->radius--;
+            } else if (N(TweesterPhysicsPtr)->radius < 19.0f) {
+                N(TweesterPhysicsPtr)->radius++;
             }
 
-            liftoffVelocity = sin_rad(DEG_TO_RAD(GoombarioTweesterPhysicsPtr->liftoffVelocityPhase)) * 3.0f;
-            GoombarioTweesterPhysicsPtr->liftoffVelocityPhase += 3.0f;
+            liftoffVelocity = sin_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->liftoffVelocityPhase)) * 3.0f;
+            N(TweesterPhysicsPtr)->liftoffVelocityPhase += 3.0f;
 
-            if (GoombarioTweesterPhysicsPtr->liftoffVelocityPhase > 150.0f) {
-                GoombarioTweesterPhysicsPtr->liftoffVelocityPhase = 150.0f;
+            if (N(TweesterPhysicsPtr)->liftoffVelocityPhase > 150.0f) {
+                N(TweesterPhysicsPtr)->liftoffVelocityPhase = 150.0f;
             }
 
             npc->pos.y += liftoffVelocity;
 
-            npc->renderYaw = clamp_angle(360.0f - GoombarioTweesterPhysicsPtr->angle);
-            GoombarioTweesterPhysicsPtr->angularVelocity += 0.8;
+            npc->renderYaw = clamp_angle(360.0f - N(TweesterPhysicsPtr)->angle);
+            N(TweesterPhysicsPtr)->angularVelocity += 0.8;
 
-            if (GoombarioTweesterPhysicsPtr->angularVelocity > 40.0f) {
-                GoombarioTweesterPhysicsPtr->angularVelocity = 40.0f;
+            if (N(TweesterPhysicsPtr)->angularVelocity > 40.0f) {
+                N(TweesterPhysicsPtr)->angularVelocity = 40.0f;
             }
 
-            if (--GoombarioTweesterPhysicsPtr->countdown == 0) {
-                GoombarioTweesterPhysicsPtr->state++;
+            if (--N(TweesterPhysicsPtr)->countdown == 0) {
+                N(TweesterPhysicsPtr)->state++;
             }
             break;
         case 2:
-            npc->flags = GoombarioTweesterPhysicsPtr->prevFlags;
-            GoombarioTweesterPhysicsPtr->countdown = 30;
-            GoombarioTweesterPhysicsPtr->state++;
+            npc->flags = N(TweesterPhysicsPtr)->prevFlags;
+            N(TweesterPhysicsPtr)->countdown = 30;
+            N(TweesterPhysicsPtr)->state++;
             break;
         case 3:
             partner_walking_update_player_tracking(npc);
             partner_walking_update_motion(npc);
 
-            if (--GoombarioTweesterPhysicsPtr->countdown == 0) {
-                GoombarioTweesterPhysicsPtr->state = TWEESTER_PARTNER_INIT;
+            if (--N(TweesterPhysicsPtr)->countdown == 0) {
+                N(TweesterPhysicsPtr)->state = TWEESTER_PARTNER_INIT;
                 TweesterTouchingPartner = NULL;
             }
             break;
@@ -186,20 +186,20 @@ API_CALLABLE(N(Update)) {
     return 0;
 }
 
+void N(try_cancel_tweester)(Npc* goombario) {
+    if (TweesterTouchingPartner) {
+        TweesterTouchingPartner = NULL;
+        goombario->flags = N(TweesterPhysicsPtr)->prevFlags;
+        N(TweesterPhysicsPtr)->state = TWEESTER_PARTNER_INIT;
+        partner_clear_player_tracking (goombario);
+    }
+}
+
 EvtScript EVS_WorldGoombario_Update = {
     EVT_CALL(N(Update))
     EVT_RETURN
     EVT_END
 };
-
-void N(try_cancel_tweester)(Npc* goombario) {
-    if (TweesterTouchingPartner) {
-        TweesterTouchingPartner = NULL;
-        goombario->flags = GoombarioTweesterPhysicsPtr->prevFlags;
-        GoombarioTweesterPhysicsPtr->state = TWEESTER_PARTNER_INIT;
-        partner_clear_player_tracking (goombario);
-    }
-}
 
 s32 N(can_pause)(Npc* goombario) {
     PartnerActionStatus* goombarioActionStatus = &gPartnerActionStatus;

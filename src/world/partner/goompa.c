@@ -30,7 +30,7 @@ EvtScript EVS_WorldGoompa_TakeOut = {
 };
 
 BSS TweesterPhysics N(TweesterPhysicsData);
-TweesterPhysics* GoompaTweesterPhysicsPtr = &N(TweesterPhysicsData);
+TweesterPhysics* N(TweesterPhysicsPtr) = &N(TweesterPhysicsData);
 
 API_CALLABLE(N(Update)) {
     PlayerData* playerData = &gPlayerData;
@@ -40,7 +40,7 @@ API_CALLABLE(N(Update)) {
 
     if (isInitialCall) {
         partner_walking_enable(goompa, 1);
-        mem_clear(GoompaTweesterPhysicsPtr, sizeof(TweesterPhysics));
+        mem_clear(N(TweesterPhysicsPtr), sizeof(TweesterPhysics));
         TweesterTouchingPartner = NULL;
     }
 
@@ -53,60 +53,60 @@ API_CALLABLE(N(Update)) {
         return ApiStatus_BLOCK;
     }
 
-    switch (GoompaTweesterPhysicsPtr->state) {
+    switch (N(TweesterPhysicsPtr)->state) {
         case TWEESTER_PARTNER_INIT:
-            GoompaTweesterPhysicsPtr->state++;
-            GoompaTweesterPhysicsPtr->prevFlags = goompa->flags;
-            GoompaTweesterPhysicsPtr->radius = fabsf(dist2D(goompa->pos.x, goompa->pos.z,
+            N(TweesterPhysicsPtr)->state++;
+            N(TweesterPhysicsPtr)->prevFlags = goompa->flags;
+            N(TweesterPhysicsPtr)->radius = fabsf(dist2D(goompa->pos.x, goompa->pos.z,
                                                     entity->position.x, entity->position.z));
-            GoompaTweesterPhysicsPtr->angle = atan2(entity->position.x, entity->position.z, goompa->pos.x, goompa->pos.z);
-            GoompaTweesterPhysicsPtr->angularVelocity = 6.0f;
-            GoompaTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
-            GoompaTweesterPhysicsPtr->countdown = 120;
+            N(TweesterPhysicsPtr)->angle = atan2(entity->position.x, entity->position.z, goompa->pos.x, goompa->pos.z);
+            N(TweesterPhysicsPtr)->angularVelocity = 6.0f;
+            N(TweesterPhysicsPtr)->liftoffVelocityPhase = 50.0f;
+            N(TweesterPhysicsPtr)->countdown = 120;
             goompa->flags |= NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_CAMERA_FOR_YAW;
             goompa->flags &= ~NPC_FLAG_GRAVITY;
         case TWEESTER_PARTNER_ATTRACT:
-            sin_cos_rad(DEG_TO_RAD(GoompaTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
-            goompa->pos.x = entity->position.x + (sinAngle * GoompaTweesterPhysicsPtr->radius);
-            goompa->pos.z = entity->position.z - (cosAngle * GoompaTweesterPhysicsPtr->radius);
-            GoompaTweesterPhysicsPtr->angle = clamp_angle(GoompaTweesterPhysicsPtr->angle - GoompaTweesterPhysicsPtr->angularVelocity);
+            sin_cos_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->angle), &sinAngle, &cosAngle);
+            goompa->pos.x = entity->position.x + (sinAngle * N(TweesterPhysicsPtr)->radius);
+            goompa->pos.z = entity->position.z - (cosAngle * N(TweesterPhysicsPtr)->radius);
+            N(TweesterPhysicsPtr)->angle = clamp_angle(N(TweesterPhysicsPtr)->angle - N(TweesterPhysicsPtr)->angularVelocity);
 
-            if (GoompaTweesterPhysicsPtr->radius > 20.0f) {
-                GoompaTweesterPhysicsPtr->radius--;
-            } else if (GoompaTweesterPhysicsPtr->radius < 19.0f) {
-                GoompaTweesterPhysicsPtr->radius++;
+            if (N(TweesterPhysicsPtr)->radius > 20.0f) {
+                N(TweesterPhysicsPtr)->radius--;
+            } else if (N(TweesterPhysicsPtr)->radius < 19.0f) {
+                N(TweesterPhysicsPtr)->radius++;
             }
 
-            liftoffVelocity = sin_rad(DEG_TO_RAD(GoompaTweesterPhysicsPtr->liftoffVelocityPhase)) * 3.0f;
-            GoompaTweesterPhysicsPtr->liftoffVelocityPhase += 3.0f;
+            liftoffVelocity = sin_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->liftoffVelocityPhase)) * 3.0f;
+            N(TweesterPhysicsPtr)->liftoffVelocityPhase += 3.0f;
 
-            if (GoompaTweesterPhysicsPtr->liftoffVelocityPhase > 150.0f) {
-                GoompaTweesterPhysicsPtr->liftoffVelocityPhase = 150.0f;
+            if (N(TweesterPhysicsPtr)->liftoffVelocityPhase > 150.0f) {
+                N(TweesterPhysicsPtr)->liftoffVelocityPhase = 150.0f;
             }
 
             goompa->pos.y += liftoffVelocity;
-            goompa->renderYaw = clamp_angle(360.0f - GoompaTweesterPhysicsPtr->angle);
-            GoompaTweesterPhysicsPtr->angularVelocity += 0.8;
+            goompa->renderYaw = clamp_angle(360.0f - N(TweesterPhysicsPtr)->angle);
+            N(TweesterPhysicsPtr)->angularVelocity += 0.8;
 
-            if (GoompaTweesterPhysicsPtr->angularVelocity > 40.0f) {
-                GoompaTweesterPhysicsPtr->angularVelocity = 40.0f;
+            if (N(TweesterPhysicsPtr)->angularVelocity > 40.0f) {
+                N(TweesterPhysicsPtr)->angularVelocity = 40.0f;
             }
 
-            if (--GoompaTweesterPhysicsPtr->countdown == 0) {
-                GoompaTweesterPhysicsPtr->state++;
+            if (--N(TweesterPhysicsPtr)->countdown == 0) {
+                N(TweesterPhysicsPtr)->state++;
             }
             break;
         case TWEESTER_PARTNER_HOLD:
-            goompa->flags = GoompaTweesterPhysicsPtr->prevFlags;
-            GoompaTweesterPhysicsPtr->countdown = 30;
-            GoompaTweesterPhysicsPtr->state++;
+            goompa->flags = N(TweesterPhysicsPtr)->prevFlags;
+            N(TweesterPhysicsPtr)->countdown = 30;
+            N(TweesterPhysicsPtr)->state++;
             break;
         case TWEESTER_PARTNER_RELEASE:
             partner_walking_update_player_tracking(goompa);
             partner_walking_update_motion(goompa);
 
-            if (--GoompaTweesterPhysicsPtr->countdown == 0) {
-                GoompaTweesterPhysicsPtr->state = TWEESTER_PARTNER_INIT;
+            if (--N(TweesterPhysicsPtr)->countdown == 0) {
+                N(TweesterPhysicsPtr)->state = TWEESTER_PARTNER_INIT;
                 TweesterTouchingPartner = NULL;
             }
             break;
@@ -123,8 +123,8 @@ EvtScript EVS_WorldGoompa_Update = {
 void N(try_cancel_tweester)(Npc* goompa) {
     if (TweesterTouchingPartner != NULL) {
         TweesterTouchingPartner = NULL;
-        goompa->flags = GoompaTweesterPhysicsPtr->prevFlags;
-        GoompaTweesterPhysicsPtr->state = TWEESTER_PARTNER_INIT;
+        goompa->flags = N(TweesterPhysicsPtr)->prevFlags;
+        N(TweesterPhysicsPtr)->state = TWEESTER_PARTNER_INIT;
         partner_clear_player_tracking(goompa);
     }
 }

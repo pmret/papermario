@@ -262,7 +262,7 @@ void func_802BD414_31E184(Npc* npc) {
             bss_802BFEF4 = 1;
             playerStatus->renderMode = RENDER_MODE_ALPHATEST;
             func_802DDFF8(playerStatus->trueAnimation, 4, 2, 0, 0, 0, 0);
-            func_8003D624(npc, 4, 2, 0, 0, 0, 0);
+            func_8003D624(npc, FOLD_TYPE_4, 2, 0, 0, 0, 0);
         }
         if (bss_802BFEE8 >= 10 && (!(partnerActionStatus->currentButtons & BUTTON_C_DOWN) || bss_802BFEE8 >= 30)) {
             npc->currentAnim = ANIM_WorldSushie_Rise;
@@ -295,7 +295,7 @@ void func_802BD414_31E184(Npc* npc) {
             if (bss_802BFEF4 != 0) {
                 bss_802BFEF4 = 0;
                 func_802DDFF8(ANIM_Mario1_Idle, 0, 0, 0, 0, 0, 0);
-                func_8003D624(npc, 0, 0, 0, 0, 0, 0);
+                func_8003D624(npc, FOLD_TYPE_NONE, 0, 0, 0, 0, 0);
             }
             bss_802BFEE4 = 0;
             npc->currentAnim = ANIM_WorldSushie_Ride;
@@ -375,7 +375,7 @@ API_CALLABLE(func_802BE3A4_31F114) {
             suggest_player_anim_always_forward(ANIM_MarioW2_RideSushie);
             disable_player_shadow();
             disable_npc_shadow(npc);
-            func_8003D624(npc, 4, 2, 0, 0, 0, 0);
+            func_8003D624(npc, FOLD_TYPE_4, 2, 0, 0, 0, 0);
             npc->currentAnim = ANIM_WorldSushie_Ride;
             npc->moveSpeed = playerStatus->runSpeed;
             npc->jumpScale = 0.0f;
@@ -444,7 +444,7 @@ API_CALLABLE(func_802BE3A4_31F114) {
             npc->flags |= NPC_FLAG_8;
             npc->flags &= ~(NPC_FLAG_GRAVITY | NPC_FLAG_IGNORE_WORLD_COLLISION);
             disable_npc_shadow(npc);
-            func_8003D624(npc, 4, 2, 0, 0, 0, 0);
+            func_8003D624(npc, FOLD_TYPE_4, 2, 0, 0, 0, 0);
             npc->currentAnim = ANIM_WorldSushie_Ride;
             playerStatus->flags |= PS_FLAG_MOVEMENT_LOCKED;
             dist = dist2D(playerStatus->position.x, playerStatus->position.z, npc->moveToPos.x, npc->moveToPos.z);
@@ -669,7 +669,7 @@ API_CALLABLE(func_802BE3A4_31F114) {
                 partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
                 partnerActionStatus->actingPartner = 0;
                 func_802DDFF8(ANIM_Mario1_Idle, 0, 0, 0, 0, 0, 0);
-                func_8003D624(npc, 0, 0, 0, 0, 0, 0);
+                func_8003D624(npc, FOLD_TYPE_NONE, 0, 0, 0, 0, 0);
                 return ApiStatus_DONE1;
             }
             npc->duration--;

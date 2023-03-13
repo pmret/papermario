@@ -96,7 +96,7 @@ EvtScript EVS_WorldKooper_TakeOut = {
 };
 
 BSS TweesterPhysics N(TweesterPhysicsData);
-TweesterPhysics* KooperTweesterPhysicsPtr = &N(TweesterPhysicsData);
+TweesterPhysics* N(TweesterPhysicsPtr) = &N(TweesterPhysicsData);
 
 API_CALLABLE(N(Update)) {
     PlayerData* playerData = &gPlayerData;
@@ -106,7 +106,7 @@ API_CALLABLE(N(Update)) {
 
     if (isInitialCall) {
         partner_walking_enable(kooper, 1);
-        mem_clear(KooperTweesterPhysicsPtr, sizeof(TweesterPhysics));
+        mem_clear(N(TweesterPhysicsPtr), sizeof(TweesterPhysics));
         TweesterTouchingPartner = NULL;
     }
 
@@ -119,61 +119,61 @@ API_CALLABLE(N(Update)) {
         return ApiStatus_BLOCK;
     }
 
-    switch (KooperTweesterPhysicsPtr->state) {
+    switch (N(TweesterPhysicsPtr)->state) {
         case TWEESTER_PARTNER_INIT:
-            KooperTweesterPhysicsPtr->state++;
-            KooperTweesterPhysicsPtr->prevFlags = kooper->flags;
-            KooperTweesterPhysicsPtr->radius = fabsf(dist2D(kooper->pos.x, kooper->pos.z,
+            N(TweesterPhysicsPtr)->state++;
+            N(TweesterPhysicsPtr)->prevFlags = kooper->flags;
+            N(TweesterPhysicsPtr)->radius = fabsf(dist2D(kooper->pos.x, kooper->pos.z,
                                                      entity->position.x, entity->position.z));
-            KooperTweesterPhysicsPtr->angle = atan2(entity->position.x, entity->position.z, kooper->pos.x, kooper->pos.z);
-            KooperTweesterPhysicsPtr->angularVelocity = 6.0f;
-            KooperTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
-            KooperTweesterPhysicsPtr->countdown = 120;
+            N(TweesterPhysicsPtr)->angle = atan2(entity->position.x, entity->position.z, kooper->pos.x, kooper->pos.z);
+            N(TweesterPhysicsPtr)->angularVelocity = 6.0f;
+            N(TweesterPhysicsPtr)->liftoffVelocityPhase = 50.0f;
+            N(TweesterPhysicsPtr)->countdown = 120;
             kooper->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
             kooper->flags &= ~NPC_FLAG_GRAVITY;
         case TWEESTER_PARTNER_ATTRACT:
-            sin_cos_rad(DEG_TO_RAD(KooperTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
+            sin_cos_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->angle), &sinAngle, &cosAngle);
 
-            kooper->pos.x = entity->position.x + (sinAngle * KooperTweesterPhysicsPtr->radius);
-            kooper->pos.z = entity->position.z - (cosAngle * KooperTweesterPhysicsPtr->radius);
+            kooper->pos.x = entity->position.x + (sinAngle * N(TweesterPhysicsPtr)->radius);
+            kooper->pos.z = entity->position.z - (cosAngle * N(TweesterPhysicsPtr)->radius);
 
-            KooperTweesterPhysicsPtr->angle = clamp_angle(KooperTweesterPhysicsPtr->angle - KooperTweesterPhysicsPtr->angularVelocity);
-            if (KooperTweesterPhysicsPtr->radius > 20.0f) {
-                KooperTweesterPhysicsPtr->radius--;
-            } else if (KooperTweesterPhysicsPtr->radius < 19.0f) {
-                KooperTweesterPhysicsPtr->radius++;
+            N(TweesterPhysicsPtr)->angle = clamp_angle(N(TweesterPhysicsPtr)->angle - N(TweesterPhysicsPtr)->angularVelocity);
+            if (N(TweesterPhysicsPtr)->radius > 20.0f) {
+                N(TweesterPhysicsPtr)->radius--;
+            } else if (N(TweesterPhysicsPtr)->radius < 19.0f) {
+                N(TweesterPhysicsPtr)->radius++;
             }
 
-            liftoffVelocity = sin_rad(DEG_TO_RAD(KooperTweesterPhysicsPtr->liftoffVelocityPhase)) * 3.0f;
+            liftoffVelocity = sin_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->liftoffVelocityPhase)) * 3.0f;
 
-            KooperTweesterPhysicsPtr->liftoffVelocityPhase += 3.0f;
+            N(TweesterPhysicsPtr)->liftoffVelocityPhase += 3.0f;
 
-            if (KooperTweesterPhysicsPtr->liftoffVelocityPhase > 150.0f) {
-                KooperTweesterPhysicsPtr->liftoffVelocityPhase = 150.0f;
+            if (N(TweesterPhysicsPtr)->liftoffVelocityPhase > 150.0f) {
+                N(TweesterPhysicsPtr)->liftoffVelocityPhase = 150.0f;
             }
             kooper->pos.y += liftoffVelocity;
 
-            kooper->renderYaw = clamp_angle(360.0f - KooperTweesterPhysicsPtr->angle);
-            KooperTweesterPhysicsPtr->angularVelocity += 0.8;
-            if (KooperTweesterPhysicsPtr->angularVelocity > 40.0f) {
-                KooperTweesterPhysicsPtr->angularVelocity = 40.0f;
+            kooper->renderYaw = clamp_angle(360.0f - N(TweesterPhysicsPtr)->angle);
+            N(TweesterPhysicsPtr)->angularVelocity += 0.8;
+            if (N(TweesterPhysicsPtr)->angularVelocity > 40.0f) {
+                N(TweesterPhysicsPtr)->angularVelocity = 40.0f;
             }
 
-            if (--KooperTweesterPhysicsPtr->countdown == 0) {
-                KooperTweesterPhysicsPtr->state++;
+            if (--N(TweesterPhysicsPtr)->countdown == 0) {
+                N(TweesterPhysicsPtr)->state++;
             }
             break;
         case TWEESTER_PARTNER_HOLD:
-            kooper->flags = KooperTweesterPhysicsPtr->prevFlags;
-            KooperTweesterPhysicsPtr->countdown = 30;
-            KooperTweesterPhysicsPtr->state++;
+            kooper->flags = N(TweesterPhysicsPtr)->prevFlags;
+            N(TweesterPhysicsPtr)->countdown = 30;
+            N(TweesterPhysicsPtr)->state++;
             break;
         case TWEESTER_PARTNER_RELEASE:
             partner_walking_update_player_tracking(kooper);
             partner_walking_update_motion(kooper);
 
-            if (--KooperTweesterPhysicsPtr->countdown == 0) {
-                KooperTweesterPhysicsPtr->state = TWEESTER_PARTNER_INIT;
+            if (--N(TweesterPhysicsPtr)->countdown == 0) {
+                N(TweesterPhysicsPtr)->state = TWEESTER_PARTNER_INIT;
                 TweesterTouchingPartner = NULL;
             }
             break;
@@ -181,20 +181,20 @@ API_CALLABLE(N(Update)) {
     return ApiStatus_BLOCK;
 }
 
+void N(try_cancel_tweester)(Npc* kooper) {
+    if (TweesterTouchingPartner != NULL) {
+        TweesterTouchingPartner = NULL;
+        kooper->flags = N(TweesterPhysicsPtr)->prevFlags;
+        N(TweesterPhysicsPtr)->state = TWEESTER_PARTNER_INIT;
+        partner_clear_player_tracking(kooper);
+    }
+}
+
 EvtScript EVS_WorldKooper_Update = {
     EVT_CALL(N(Update))
     EVT_RETURN
     EVT_END
 };
-
-void N(try_cancel_tweester)(Npc* kooper) {
-    if (TweesterTouchingPartner != NULL) {
-        TweesterTouchingPartner = NULL;
-        kooper->flags = KooperTweesterPhysicsPtr->prevFlags;
-        KooperTweesterPhysicsPtr->state = TWEESTER_PARTNER_INIT;
-        partner_clear_player_tracking(kooper);
-    }
-}
 
 API_CALLABLE(N(UseAbility)) {
     Camera* cam;
