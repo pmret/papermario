@@ -1619,25 +1619,6 @@ typedef struct ColliderTriangle {
     /* 0x3E */ char unk_3E[2];
 } ColliderTriangle; // size = 0x40
 
-typedef struct PartnerBlueprint {
-    /* 0x00 */ s32 dmaStart;
-    /* 0x04 */ s32 dmaEnd;
-    /* 0x08 */ s32 dmaDest;
-    /* 0x0C */ s32 isFlying;
-    /* 0x10 */ UNK_FUN_PTR(fpInit);
-    /* 0x14 */ EvtScript* spScriptA;
-    /* 0x18 */ EvtScript* spScriptB;
-    /* 0x1C */ EvtScript* spScriptC;
-    /* 0x20 */ EvtScript* spScriptD;
-    /* 0x24 */ s32 idleAnim;
-    /* 0x28 */ UNK_FUN_PTR(fpFuncA);
-    /* 0x2C */ UNK_FUN_PTR(fpFuncB);
-    /* 0x30 */ UNK_FUN_PTR(fpFuncC);
-    /* 0x34 */ UNK_FUN_PTR(fpFuncD);
-    /* 0x38 */ UNK_FUN_PTR(fpFuncE);
-    /* 0x3C */ EvtScript* spScriptX;
-} PartnerBlueprint; // size = 0x40
-
 typedef struct FontRasterSet {
     /* 0x00 */ u8 sizeX;
     /* 0x01 */ u8 sizeY;

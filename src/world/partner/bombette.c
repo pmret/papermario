@@ -202,7 +202,7 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     Camera* camera = &gCameras[CAM_DEFAULT];
     Npc* npc = evt->owner2.npc;
-    u16 temp_ret = ApiStatus_BLOCK;
+    u16 temp_ret;
     f32 x;
     f32 y;
     f32 z;
@@ -215,17 +215,31 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
     s32 var_v0_5;
     f32 temp1;
 
+    #define USE_STATE functionTemp[0]
+    enum {
+        BLAST_STATE_20     = 20,
+        BLAST_STATE_21     = 21,
+        BLAST_STATE_1      = 1,
+        BLAST_STATE_2      = 2,
+        BLAST_STATE_3      = 3,
+        BLAST_STATE_4      = 4,
+        BLAST_STATE_5      = 5,
+        BLAST_STATE_6      = 6,
+        BLAST_STATE_7      = 7,
+        BLAST_STATE_8      = 8,
+    };
+
     if (gCurrentEncounter.unk_08 != 0) {
         return ApiStatus_BLOCK;
     }
 
     if (isInitialCall) {
         func_802BD6DC_31842C(npc);
-        evt->functionTemp[0] = 20;
+        evt->USE_STATE = BLAST_STATE_20;
     }
 
-    switch (evt->functionTemp[0]) {
-        case 20:
+    switch (evt->USE_STATE) {
+        case BLAST_STATE_20:
             if ((playerStatus->inputDisabledCount != 0) || (playerStatus->flags & PS_FLAG_JUMPING) || !(npc->flags & NPC_FLAG_GROUNDED)) {
                 return ApiStatus_DONE2;
             }
@@ -243,15 +257,15 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
             npc->duration = 4;
             npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
             suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
-            evt->functionTemp[0] = 21;
-        case 21:
+            evt->USE_STATE = BLAST_STATE_21;
+        case BLAST_STATE_21:
             if (playerStatus->actionState == ACTION_STATE_HIT_FIRE || playerStatus->actionState == ACTION_STATE_KNOCKBACK) {
                 disable_npc_blur(npc);
-                evt->functionTemp[0] = 7;
+                evt->USE_STATE = BLAST_STATE_7;
                 break;
             }
             if (playerStatus->flags & PS_FLAG_JUMPING) {
-                evt->functionTemp[0] = 7;
+                evt->USE_STATE = BLAST_STATE_7;
                 break;
             }
             npc->moveToPos.x = playerStatus->position.x;
@@ -281,11 +295,11 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
             suggest_player_anim_allow_backward(ANIM_MarioW1_Lift);
             npc->yaw = playerStatus->targetYaw;
             npc->currentAnim = ANIM_WorldBombette_Walk;
-            evt->functionTemp[0] = 1;
+            evt->USE_STATE = BLAST_STATE_1;
             evt->functionTemp[1] = 10;
-        case 1:
+        case BLAST_STATE_1:
             if (playerStatus->actionState == ACTION_STATE_HIT_FIRE || playerStatus->actionState == ACTION_STATE_KNOCKBACK) {
-                evt->functionTemp[0] = 7;
+                evt->USE_STATE = BLAST_STATE_7;
                 break;
             }
             npc->pos.y = playerStatus->position.y + playerStatus->colliderHeight;
@@ -306,11 +320,11 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
             npc->flags |= NPC_FLAG_GRAVITY;
             npc->flags &= ~NPC_FLAG_IGNORE_PLAYER_COLLISION;
             npc->moveSpeed = 1.0f;
-            evt->functionTemp[0] = 2;
+            evt->USE_STATE = BLAST_STATE_2;
             evt->functionTemp[1] = 50;
-        case 2:
+        case BLAST_STATE_2:
             if ((playerStatus->animFlags & PA_FLAG_INTERRUPT_USE_PARTNER) || (playerStatus->actionState == ACTION_STATE_HIT_FIRE || playerStatus->actionState == ACTION_STATE_KNOCKBACK)) {
-                evt->functionTemp[0] = 7;
+                evt->USE_STATE = BLAST_STATE_7;
                 break;
             }
             if (evt->functionTemp[1] < 45) {
@@ -332,7 +346,7 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
                 npc->currentAnim = ANIM_WorldBombette_AboutToExplode;
                 npc->flags &= ~NPC_FLAG_GRAVITY;
                 evt->functionTemp[1] = 2;
-                evt->functionTemp[0] = 3;
+                evt->USE_STATE = BLAST_STATE_3;
                 if (D_802BE92C != 0) {
                     D_802BE92C = 0;
                     enable_player_input();
@@ -366,15 +380,15 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
                 }
                 npc->currentAnim = ANIM_WorldBombette_AboutToExplode;
                 evt->functionTemp[1] = 20;
-                evt->functionTemp[0] = 3;
+                evt->USE_STATE = BLAST_STATE_3;
                 if (playerStatus->actionState == ACTION_STATE_IDLE) {
                     suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
                 }
             }
     }
 
-    switch (evt->functionTemp[0]) {
-        case 3:
+    switch (evt->USE_STATE) {
+        case BLAST_STATE_3:
             if (evt->functionTemp[1] != 0) {
                 evt->functionTemp[1]--;
                 break;
@@ -405,9 +419,9 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
             D_802BE928 = 1;
             partnerActionStatus->partnerActionState = PARTNER_ACTION_BOMBETTE_2;
             evt->functionTemp[1] = 3;
-            evt->functionTemp[0]++;
+            evt->USE_STATE++;
             break;
-        case 4:
+        case BLAST_STATE_4:
             if (evt->functionTemp[1] != 0) {
                 evt->functionTemp[1]--;
                 break;
@@ -432,9 +446,9 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
                 evt->functionTemp[2] = -1;
             }
             evt->functionTemp[1] = 10;
-            evt->functionTemp[0] = 5;
+            evt->USE_STATE = BLAST_STATE_5;
             break;
-        case 5:
+        case BLAST_STATE_5:
             npc->pos.y += npc->jumpVelocity;
             npc->jumpVelocity -= npc->jumpScale;
             npc->rotation.z -= (evt->functionTemp[2] * 79) / 2;
@@ -452,16 +466,16 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
             npc->jumpVelocity = 0.0f;
             npc->currentAnim = ANIM_WorldBombette_Aftermath;
             npc->flags |= NPC_FLAG_JUMPING;
-            evt->functionTemp[0] = 6;
+            evt->USE_STATE = BLAST_STATE_6;
             break;
-        case 6:
+        case BLAST_STATE_6:
             if (npc->pos.y + 10.0f < playerStatus->position.y + playerStatus->colliderHeight) {
                 npc->flags &= ~NPC_FLAG_JUMPING;
                 if (fabsf(playerStatus->position.y - npc->pos.y) < 500.0) {
-                    evt->functionTemp[0] = 8;
+                    evt->USE_STATE = BLAST_STATE_8;
                     break;
                 } else if (npc_try_snap_to_ground(npc, npc->jumpVelocity)) {
-                    evt->functionTemp[0] = 7;
+                    evt->USE_STATE = BLAST_STATE_7;
                     break;
                 }
             }
@@ -475,8 +489,10 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
             break;
     }
 
-    switch (evt->functionTemp[0]) {
-        case 7:
+    //TODO clean up this return
+    temp_ret = ApiStatus_BLOCK;
+    switch (evt->USE_STATE) {
+        case BLAST_STATE_7:
             if (playerStatus->actionState == ACTION_STATE_IDLE) {
                 suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
             }
@@ -500,7 +516,7 @@ ApiStatus func_802BD758_3184A8(Evt *evt, s32 isInitialCall) {
             }
             temp_ret = ApiStatus_DONE2;
             return temp_ret;
-        case 8:
+        case BLAST_STATE_8:
             if (D_802BE92C != 0) {
                 D_802BE92C = 0;
                 enable_player_input();
