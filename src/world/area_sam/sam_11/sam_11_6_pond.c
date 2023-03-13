@@ -68,7 +68,7 @@ API_CALLABLE(N(GetBombetteExplodeGround)) {
     Npc* partner = get_npc_safe(NPC_PARTNER);
     s32 colliderID = NO_COLLIDER;
 
-    if (gCollisionStatus.bombetteExploded > -1) {
+    if (gCollisionStatus.bombetteExploded >= 0) {
         f32 depth = 11.0f;
         f32 x = partner->pos.x;
         f32 y = partner->pos.y + depth;
