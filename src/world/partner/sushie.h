@@ -12,6 +12,6 @@ extern EvtScript EVS_WorldSushie_TakeOut;
 extern EvtScript EVS_WorldSushie_Update;
 extern EvtScript EVS_WorldSushie_UseAbility;
 extern EvtScript EVS_WorldSushie_PutAway;
-extern EvtScript EVS_WorldSushie_Riding;
+extern EvtScript EVS_WorldSushie_EnterMap;
 
 #endif

@@ -235,7 +235,7 @@ typedef struct Npc {
     /* 0x034 */ f32 renderYaw;
     /* 0x038 */ Vec3f pos;
     /* 0x044 */ Vec3f rotation;
-    /* 0x050 */ f32 rotationVerticalPivotOffset;
+    /* 0x050 */ f32 rotationPivotOffsetY;
     /* 0x054 */ Vec3f scale;
     /* 0x060 */ Vec3f moveToPos;
     /* 0x06C */ Vec3f colliderPos; /* used during collision with player */

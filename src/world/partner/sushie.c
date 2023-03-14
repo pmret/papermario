@@ -890,7 +890,7 @@ API_CALLABLE(func_802BFAB8_320828) {
                 suggest_player_anim_always_forward(ANIM_MarioW2_RideSushie);
                 if ((partnerNPC->yaw >= 0.0f) && (partnerNPC->yaw <= 180.0f)) {
                     partnerNPC->yawCamOffset = partnerNPC->yaw;
-                    partnerNPC->isFacingAway = 1;
+                    partnerNPC->isFacingAway = TRUE;
                 }
             }
 
@@ -925,7 +925,7 @@ API_CALLABLE(func_802BFAB8_320828) {
     return ApiStatus_BLOCK;
 }
 
-EvtScript EVS_WorldSushie_Riding = {
+EvtScript EVS_WorldSushie_EnterMap = {
     EVT_CALL(func_802BFAB8_320828)
     EVT_RETURN
     EVT_END

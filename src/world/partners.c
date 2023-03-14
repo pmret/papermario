@@ -269,7 +269,7 @@ WorldPartner wPartners[] = {
         .canPlayerPause = world_partner_can_player_pause_default,
         .preBattle = world_watt_pre_battle,
         .postBattle = world_watt_post_battle,
-        .whileRiding = &EVS_WorldWatt_Riding,
+        .onEnterMap = &EVS_WorldWatt_EnterMap,
     },
     [PARTNER_SUSHIE] {
         .dmaStart = &world_partner_sushie_ROM_START,
@@ -285,7 +285,7 @@ WorldPartner wPartners[] = {
         .canPlayerPause = world_partner_can_player_pause_default,
         .preBattle = world_sushie_pre_battle,
         .postBattle = world_sushie_post_battle,
-        .whileRiding = &EVS_WorldSushie_Riding,
+        .onEnterMap = &EVS_WorldSushie_EnterMap,
     },
     [PARTNER_LAKILESTER] {
         .dmaStart = &world_partner_lakilester_ROM_START,
@@ -301,7 +301,7 @@ WorldPartner wPartners[] = {
         .canPlayerPause = world_partner_can_player_pause_default,
         .preBattle = world_lakilester_pre_battle,
         .postBattle = world_lakilester_post_battle,
-        .whileRiding = &evs_worldlakilester_riding,
+        .onEnterMap = &EVS_WorldLakilester_EnterMap,
     },
     [PARTNER_BOW] {
         .dmaStart = &world_partner_bow_ROM_START,
@@ -546,20 +546,25 @@ s32 func_800EA52C(s32 partnerID) {
         return FALSE;
     }
 
-    if (playerActionState == ACTION_STATE_IDLE || playerActionState == ACTION_STATE_WALK || playerActionState == ACTION_STATE_RUN) {
+    // any partner
+    if (playerActionState == ACTION_STATE_IDLE
+     || playerActionState == ACTION_STATE_WALK
+     || playerActionState == ACTION_STATE_RUN
+    ) {
         ret = TRUE;
     }
 
+    // check specific partners
     if (partnerID == PARTNER_BOW) {
         if (playerActionState == ACTION_STATE_RIDE) {
             ret = TRUE;
         }
     } else if (partnerID == PARTNER_PARAKARRY) {
-        if ((playerActionState != ACTION_STATE_RIDE) && (playerActionState != ACTION_STATE_IDLE) && (playerActionState != ACTION_STATE_WALK)) {
-            if (playerActionState == ACTION_STATE_RUN) {
-                ret = TRUE;
-            }
-        } else {
+        if (playerActionState == ACTION_STATE_RIDE
+         || playerActionState == ACTION_STATE_IDLE
+         || playerActionState == ACTION_STATE_WALK
+         || playerActionState == ACTION_STATE_RUN
+        ) {
             ret = TRUE;
         }
     }
@@ -956,13 +961,13 @@ void func_800EB2A4(s32 partnerID) {
 }
 
 s32 partner_use_ability(void) {
-    PartnerActionStatus* actionStatus = &gPartnerActionStatus;
+    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
 
-    if (!is_starting_conversation() &&
-        wPartner != NULL &&
-        (wPartner->canUseAbility == NULL || wPartner->canUseAbility(wPartnerNpc)))
+    if (!is_starting_conversation()
+        && wPartner != NULL
+        && (wPartner->canUseAbility == NULL || wPartner->canUseAbility(wPartnerNpc)))
     {
-        if (gGameStatusPtr->multiplayerEnabled && (actionStatus->currentButtons & BUTTON_B)) {
+        if (gGameStatusPtr->multiplayerEnabled && (partnerStatus->currentButtons & BUTTON_B)) {
             sfx_play_sound(SOUND_MENU_ERROR);
         } else if (wCurrentPartnerId != PARTNER_NONE) {
             D_8010CFE0 = 1;
@@ -975,7 +980,10 @@ s32 partner_use_ability(void) {
 }
 
 s32 partner_player_can_pause(void) {
-    if (wPartner != NULL && wPartner->canPlayerPause != NULL && !wPartner->canPlayerPause(wPartnerNpc)) {
+    if (wPartner != NULL
+        && wPartner->canPlayerPause != NULL
+        && !wPartner->canPlayerPause(wPartnerNpc)
+    ) {
         return FALSE;
     }
     return TRUE;
@@ -1046,13 +1054,13 @@ s32 partner_test_enemy_collision(Npc* enemy) {
     return FALSE;
 }
 
-EvtScript* partner_get_ride_script(void) {
+EvtScript* partner_get_enter_map_script(void) {
     WorldPartner* partner = wPartner;
 
     if (partner == NULL) {
         return NULL;
     }
-    return partner->whileRiding;
+    return partner->onEnterMap;
 }
 
 void partner_handle_before_battle(void) {

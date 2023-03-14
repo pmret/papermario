@@ -13,17 +13,17 @@ BSS s32 N(AbilityStateTime);
 BSS TweesterPhysics N(TweesterPhysicsData);
 
 enum {
-    AIR_LIFT_NONE       = 0, // only used for initial value
+    AIR_LIFT_NONE       = 0,  // only used for initial value
     // next two states lock input for a few frames, during which the ability can be canceled
     AIR_LIFT_INIT       = 40,
     AIR_LIFT_DELAY      = 41,
     AIR_LIFT_BEGIN      = 30,
     AIR_LIFT_GATHER     = 31,
-    AIR_LIFT_PICKUP     = 1, // pick up the player and lift them into the air
-    AIR_LIFT_CARRY      = 2, // carry the player through the air
-    AIR_LIFT_HOLD       = 6, // remain in one position for a short period of time
-    AIR_LIFT_JUMP       = 20, // player jumped off while being carried
-    AIR_LIFT_DROP       = 21, // dropping the player
+    AIR_LIFT_PICKUP     = 1,   // pick up the player and lift them into the air
+    AIR_LIFT_CARRY      = 2,   // carry the player through the air
+    AIR_LIFT_HOLD       = 6,   // remain in one position for a short period of time
+    AIR_LIFT_JUMP       = 20,  // player jumped off while being carried
+    AIR_LIFT_DROP       = 21,  // dropping the player
     AIR_LIFT_CANCEL     = 22,
 };
 

@@ -12,6 +12,6 @@ extern EvtScript EVS_WorldLakilester_TakeOut;
 extern EvtScript EVS_WorldLakilester_Update;
 extern EvtScript EVS_WorldLakilester_UseAbility;
 extern EvtScript EVS_WorldLakilester_PutAway;
-extern EvtScript evs_worldlakilester_riding;
+extern EvtScript EVS_WorldLakilester_EnterMap;
 
 #endif

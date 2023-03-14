@@ -12,6 +12,6 @@ extern EvtScript EVS_WorldWatt_TakeOut;
 extern EvtScript EVS_WorldWatt_Update;
 extern EvtScript EVS_WorldWatt_UseAbility;
 extern EvtScript EVS_WorldWatt_PutAway;
-extern EvtScript EVS_WorldWatt_Riding;
+extern EvtScript EVS_WorldWatt_EnterMap;
 
 #endif

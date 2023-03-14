@@ -1133,7 +1133,7 @@ API_CALLABLE(func_802BFBA0_3236F0) {
             if (script->varTable[12] != 0) {
                 if (temp_f2 >= 0.0f && temp_f2 <= 180.0f) {
                     npc->yawCamOffset = temp_f2;
-                    npc->isFacingAway = 1;
+                    npc->isFacingAway = TRUE;
                 }
             }
 
@@ -1177,7 +1177,7 @@ API_CALLABLE(func_802BFBA0_3236F0) {
     return ApiStatus_BLOCK;
 }
 
-EvtScript evs_worldlakilester_riding = {
+EvtScript EVS_WorldLakilester_EnterMap = {
     EVT_CALL(func_802BFBA0_3236F0)
     EVT_RETURN
     EVT_END

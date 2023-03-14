@@ -259,8 +259,7 @@ API_CALLABLE(N(UseAbility)) {
             bow->currentAnim = ANIM_WorldBow_Walk;
             bow->yaw = playerStatus->targetYaw;
             add_vec2D_polar(&bow->moveToPos.x, &bow->moveToPos.z, -2.0f, gCameras[gCurrentCameraID].currentYaw);
-            add_vec2D_polar(&bow->moveToPos.x, &bow->moveToPos.z,
-                            playerStatus->colliderDiameter * 0.5f, bow->yaw);
+            add_vec2D_polar(&bow->moveToPos.x, &bow->moveToPos.z, playerStatus->colliderDiameter * 0.5f, bow->yaw);
             bow->duration = 5;
             bow->yaw = atan2(bow->pos.x, bow->pos.z, playerStatus->position.x, playerStatus->position.z);
             set_action_state(ACTION_STATE_RIDE);
@@ -289,7 +288,6 @@ API_CALLABLE(N(UseAbility)) {
                 }
                 break;
             }
-
             N(end_outta_sight_cleanup)(bow);
             return ApiStatus_DONE2;
 
@@ -311,7 +309,6 @@ API_CALLABLE(N(UseAbility)) {
                 bow->pos.z = playerStatus->position.z - N(OuttaSightPosZ);
                 break;
             }
-
             N(end_outta_sight_cleanup)(bow);
             return ApiStatus_DONE2;
 
@@ -372,7 +369,7 @@ void N(end_outta_sight_cleanup)(Npc* bow) {
     playerStatus->alpha1 = 255;
     func_8003D624(bow, FOLD_TYPE_NONE, 0, 0, 0, 0, 0);
     bow->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
-    get_shadow_by_index(bow->shadowIndex)->alpha = playerStatus->alpha1 >> 1;
+    get_shadow_by_index(bow->shadowIndex)->alpha = playerStatus->alpha1 / 2;
 
     if (N(LockingPlayerInput)) {
         enable_player_input();

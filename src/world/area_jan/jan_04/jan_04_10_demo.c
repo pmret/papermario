@@ -105,7 +105,7 @@ API_CALLABLE(N(SetupDemoScene)) {
 
     switch (N(DemoInitState)) {
         case 0:
-            rideScriptSrc = partner_get_ride_script();
+            rideScriptSrc = partner_get_enter_map_script();
             if (rideScriptSrc != NULL) {
                 Evt* newScript;
 
@@ -114,8 +114,8 @@ API_CALLABLE(N(SetupDemoScene)) {
                 newScript->varTable[1] = playerStatus->position.x - 10.0f;
                 newScript->varTable[2] = playerStatus->position.y;
                 newScript->varTable[3] = playerStatus->position.z;
-                D_8024A290 = newScript;
                 newScript->varTable[12] = 1;
+                D_8024A290 = newScript;
             }
             break;
         case 1:

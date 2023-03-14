@@ -121,7 +121,7 @@ s32 create_npc_impl(NpcBlueprint* blueprint, AnimID* animList, s32 isPeachNpc) {
     npc->colliderPos.x = 0.0f;
     npc->colliderPos.y = 0.0f;
     npc->colliderPos.z = 0.0f;
-    npc->rotationVerticalPivotOffset = 0.0f;
+    npc->rotationPivotOffsetY = 0.0f;
     npc->rotation.x = 0.0f;
     npc->rotation.y = 0.0f;
     npc->rotation.z = 0.0f;
@@ -143,7 +143,7 @@ s32 create_npc_impl(NpcBlueprint* blueprint, AnimID* animList, s32 isPeachNpc) {
     npc->foldType = 0;
     npc->foldArg5 = 0;
     npc->collisionChannel = COLLISION_CHANNEL_20000;
-    npc->isFacingAway = 0;
+    npc->isFacingAway = FALSE;
     npc->yawCamOffset = 0;
     npc->turnAroundYawAdjustment = 0;
     npc->currentFloor = NO_COLLIDER;
@@ -821,8 +821,8 @@ void appendGfx_npc(void* data) {
         guMtxCatF(mtx2, mtx1, mtx1);
     }
 
-    if (npc->rotationVerticalPivotOffset != 0.0f) {
-        guTranslateF(mtx2, 0.0f, npc->rotationVerticalPivotOffset, 0.0f);
+    if (npc->rotationPivotOffsetY != 0.0f) {
+        guTranslateF(mtx2, 0.0f, npc->rotationPivotOffsetY, 0.0f);
         guMtxCatF(mtx2, mtx1, mtx1);
     }
 
@@ -841,8 +841,8 @@ void appendGfx_npc(void* data) {
         guMtxCatF(mtx2, mtx1, mtx1);
     }
 
-    if (npc->rotationVerticalPivotOffset != 0.0f) {
-        guTranslateF(mtx2, 0.0f, -npc->rotationVerticalPivotOffset, 0.0f);
+    if (npc->rotationPivotOffsetY != 0.0f) {
+        guTranslateF(mtx2, 0.0f, -npc->rotationPivotOffsetY, 0.0f);
         guMtxCatF(mtx2, mtx1, mtx1);
     }
 
