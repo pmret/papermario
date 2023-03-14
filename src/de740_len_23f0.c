@@ -272,6 +272,12 @@ void create_shading_palette(Matrix4f mtx, s32 uls, s32 ult, s32 lrs, s32 lrt, s3
     }
 }
 
+extern int ENVIRONMENT;
+extern int SHADE;
+extern int COMBINED;
+extern int COMBINED_ALPHA;
+extern int TEXEL0_ALPHA;
+
 // float regalloc
 #ifdef NON_MATCHING
 void appendGfx_shading_palette(
@@ -289,19 +295,17 @@ void appendGfx_shading_palette(
     f32 temp_f2;
     f32 var_f26;
     f32 temp_f28 = 0;
-    f32 temp_f6;
     f32 temp_f6_2;
     f32 var_f12;
-    f32 var_f12_2;
     f32 var_f20;
     f32 var_f30;
-    f32 abc;
+    f32 var_f26_2;
     f32 ex, ey, ez;
-    f32 s1, s2, s3;
+    float new_var3;
 
-    f32 new_var;
+    f32 a1, a2;
 
-    var_f12 = (shadowX * shadowX) + (shadowY * shadowY) + (shadowZ * shadowZ);
+    var_f12 = SQ(shadowX) + SQ(shadowY) + SQ(shadowZ);
 
     if (var_f12 < 1.0) {
         ambientPower *= var_f12;
@@ -329,33 +333,34 @@ void appendGfx_shading_palette(
         ez = mtx[2][2];
     }
 
-    s1 = ex * shadowX;
+    a1 = ((ex * shadowX) + (ey * shadowY)) + (ez * shadowZ);
+    new_var3 = a1;
+    temp_f2 = camera->perspectiveMatrix[2][2];
+    var_f12 = camera->perspectiveMatrix[0][2];
 
-    new_var = (s1 + (ey * shadowY)) + (ez * shadowZ);
-    ex = camera->perspectiveMatrix[2][2];
-    //temp_f6_2 = (shadowX * (-ex)) + (shadowZ * camera->perspectiveMatrix[0][2]);
-    temp_f2 = -ex;
-    temp_f1 = shadowX;
-    temp_f6_2 = (temp_f1 * temp_f2) + (shadowZ * camera->perspectiveMatrix[0][2]);
-
-    if (new_var > 0.0f) {
+    var_f26 = var_f12;
+    a1 = shadowX * -temp_f2;
+    temp_f6_2 = a1 + (var_f26 * shadowZ) ;
+    if (new_var3 > 0.0f) {
         var_f26 = ambientPower * temp_f6_2;
     } else {
-        var_f26 = ambientPower;
-        var_f26 = var_f26 * temp_f6_2;
+        temp_f2 = ambientPower;
+        var_f26 = temp_f2 * temp_f6_2;
     }
-    var_f20 = SQ(temp_f1) + SQ(shadowZ);
+
+    var_f20 = SQ(shadowX) + SQ(shadowZ);
     if (var_f20 != 0.0f) {
         var_f20 = sqrtf(var_f20);
     }
     temp_f0 = -mtx[0][1];
     temp_f1 = mtx[1][1];
     temp_f2 = mtx[2][1];
-    var_f12_2 = SQ(temp_f0) + SQ(temp_f2);
-    if (var_f12_2 != 0.0f) {
-        var_f12_2 = sqrtf(var_f12_2);
+    var_f12 = SQ(temp_f0) + SQ(temp_f2);
+    if (var_f12 != 0.0f) {
+        var_f12 = sqrtf(var_f12);
     }
-    temp_f28 = -((var_f20 * var_f12_2) + (shadowY * temp_f1)) * ambientPower;
+
+    temp_f28 = -((var_f20 * var_f12) + (shadowY * temp_f1)) * ambientPower;
 
     if (shadowR > 255) {
         shadowR = 255;
@@ -421,14 +426,14 @@ void appendGfx_shading_palette(
                           COMBINED, 0, 0, 0, COMBINED);
     }
 
-    abc = var_f26;
-    abc *= var_f30;
+    var_f26_2 = var_f26;
+    var_f26_2 *= var_f30;
     gDPSetTileSize(
         gMainGfxPos++,
         0,
-        ((uls + 0x100) << 2) + (s32)abc,
+        ((uls + 0x100) << 2) + (s32)var_f26_2,
         ((ult + 0x100) << 2) + (s32)temp_f28,
-        ((lrs + 0x100 - 1) << 2) + (s32)abc,
+        ((lrs + 0x100 - 1) << 2) + (s32)var_f26_2,
         ((lrt + 0x100 - 1) << 2) + (s32)temp_f28
     );
 }

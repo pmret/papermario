@@ -3036,7 +3036,6 @@ void appendGfx_model(void* data) {
     s8 renderMode;
     s32 texturingMode;
     s32 renderModeIdx;
-    s32 new_var;
     s32 flags = model->flags;
 
     ModelNode* modelNode;
@@ -5690,64 +5689,47 @@ Gfx* mdl_get_copied_gfx(s32 copyIndex) {
     return gfxCopy;
 }
 
-#ifdef WIP
-void mdl_project_tex_coords(s32 modelID, Gfx* destGfx, f32 (*destMtx)[4], void* destVertices) {
-    s32 numVertices;
+void mdl_project_tex_coords(s32 modelID, Gfx* arg1, Matrix4f arg2, Vtx* arg3) {
+    s32 sp18;
     Vtx* baseVtx;
-    s32 gfxCount;
+    s32 sp20;
+    f32 v1tc1;
+    f32 v2tc1;
     f32 sp2C;
+    f32 v0tc1;
     f32 sp40;
-    Vtx* temp_a0;
-    f32 temp_f10;
-    f32 temp_f12;
-    f32 temp_f12_2;
-    f32 temp_f14;
-    f32 temp_f14_2;
-    f32 temp_f2;
-    f32 temp_f2_2;
-    f32 temp_f4_2;
-    f32 temp_f4_3;
-    f32 temp_f8;
-    f32 temp_f8_3;
-    f32 var_f0;
-    f32 var_f10;
-    f32 var_f24;
-    f32 var_f26;
-    f32 var_f2;
-    f32 var_f30;
-    f32 var_f6;
-    f32 var_f6_2;
-
+    f32 v1tc0;
+    f32 v1ob2;
+    f32 ob2;
+    f32 ob1;
     f32 v0ob0;
     f32 v0ob2;
     f32 v0tc0;
-    f32 v0tc1;
-
-    f32 v1ob0;
-    f32 v1ob2;
     f32 v2ob0;
-    f32 v1tc0;
-    f32 v1tc1;
-    f32 v2ob2;
     f32 v2tc0;
-    f32 v2tc1;
-
+    f32 v1ob0;
+    f32 v2ob2;
     f32 ob0;
-    f32 ob1;
-    f32 ob2;
-
-    f32 tc0;
+    f32 var_f10;
+    f32 var_f24;
+    f32 var_f26;
     f32 tc1;
-
-    s32 cn0;
-    s32 cn1;
-    s32 cn2;
-    s32 cmd;
+    f32 var_f30;
+    f32 tc0;
+    f32 var_f6_2;
     s32 i;
+    u32 cnB;
+    u32 cnG;
+    u32 cnR;
+    f32 var_f20;
 
     s32 listIndex;
     Model* model;
     Gfx* dlist;
+    s32 cmd;
+    Vtx* tempVert;
+
+    s8 zero = 0; // TODO needed to match
 
     listIndex = get_model_list_index_from_tree_index(modelID & 0xFFFF);
     model = get_model_from_list_index(listIndex);
@@ -5755,22 +5737,21 @@ void mdl_project_tex_coords(s32 modelID, Gfx* destGfx, f32 (*destMtx)[4], void* 
 
     while (TRUE) {
         cmd = dlist->words.w0 >> 0x18;
-        //temp_a0 = var_v0->words.w1;
+        tempVert = (Vtx*)dlist->words.w1;
         if (cmd == G_ENDDL) {
             break;
         }
-
         if (cmd == G_VTX) {
-            baseVtx = dlist->words.w1;
+            baseVtx = tempVert;
             break;
         }
         dlist++;
     }
 
-    v0ob0 = baseVtx[0].v.ob[0];
-    v0ob2 = baseVtx[0].v.ob[2];
-    v0tc0 = baseVtx[0].v.tc[0];
-    v0tc1 = baseVtx[0].v.tc[1];
+    v0ob0 = baseVtx[zero].v.ob[0];
+    v0ob2 = baseVtx[zero].v.ob[2];
+    v0tc0 = baseVtx[zero].v.tc[0];
+    v0tc1 = baseVtx[zero].v.tc[1];
 
     v1ob0 = baseVtx[1].v.ob[0];
     v1ob2 = baseVtx[1].v.ob[2];
@@ -5782,59 +5763,81 @@ void mdl_project_tex_coords(s32 modelID, Gfx* destGfx, f32 (*destMtx)[4], void* 
     v2tc0 = baseVtx[2].v.tc[0];
     v2tc1 = baseVtx[2].v.tc[1];
 
-    cn0 = baseVtx[0].v.cn[0];
-    cn1 = baseVtx[0].v.cn[1];
-    cn2 = baseVtx[0].v.cn[2];
+    cnR = baseVtx[0].v.cn[0];
+    cnG = baseVtx[0].v.cn[1];
+    cnB = baseVtx[0].v.cn[2];
 
     if (v0ob0 != v1ob0) {
-        temp_f14_2 = v0ob0 - v1ob0;
-        temp_f8_3 = v0tc0 - v1tc0;
-        temp_f2_2 = (v0ob0 - v2ob0) / temp_f14_2;
-        temp_f12_2 = v0ob2 - v1ob2;
-        temp_f10 = (temp_f2_2 * temp_f12_2) - (v0ob2 - v2ob2);
-        sp40 = ((temp_f2_2 * temp_f8_3) - (v0tc0 - v2tc0)) / temp_f10;
-        temp_f4_3 = v0tc1 - v1tc1;
-        var_f30 = (temp_f8_3 - (temp_f12_2 * sp40)) / temp_f14_2;
-        var_f26 = ((temp_f2_2 * temp_f4_3) - (v0tc1 - v2tc1)) / temp_f10;
-        var_f2 = var_f26 * v0ob2;
-        var_f24 = (temp_f4_3 - (temp_f12_2 * var_f26)) / temp_f14_2;
-        var_f6 = (v0tc0 - (var_f30 * v0ob0)) - (sp40 * v0ob2);
-        var_f0 = v0tc1 - (var_f24 * v0ob0);
+        f32 f2 = v0ob0 - v2ob0;
+        f32 f14 = v0ob0 - v1ob0;
+        f32 f8 = v0tc0 - v1tc0;
+        f32 f2a = f2 / f14;
+        f32 f0 = f2a * f8;
+        f32 f12 = v0ob2 - v1ob2;
+        f32 f10 = f2a * f12;
+        f32 f4 = v0tc0 - v2tc0;
+        f32 f6 = v0ob2 - v2ob2;
+        f32 f0a = f0 - f4;
+        f32 f10a = f10 - f6;
+
+        f32 f0b, f4a, f2b, f8a, f6a, f0c, f8b, f2c, f12a, f2d, f4b, f0d, f6b, f0e;
+
+        sp40 = f0a / f10a; // used later
+        f0b = f12 * sp40;
+        f4a = v0tc1 - v1tc1;
+        f2b = f2a * f4a;
+        f8a = f8 - f0b;
+        var_f30 = f8a / f14; // used later
+        f6a = var_f30 * v0ob0;
+        f0c = v0tc1 - v2tc1;
+        f2c = f2b - f0c;
+        var_f26 = f2c / f10a; // used later
+        f12a = f12 * var_f26;
+        var_f24 = (f4a - f12a) / f14; // used later
+        sp2C = v0tc0 - f6a - sp40 * v0ob2; // used later
+        var_f20 = v0tc1 - var_f24 * v0ob0 - var_f26 * v0ob2; // used later
     } else {
-        temp_f14 = (v0ob2 - v1ob2);
-        temp_f8 = v0tc0 - v1tc0;
-        temp_f2 = (v0ob2 - v2ob2) / temp_f14;
-        temp_f12 = v0ob0 - v1ob0;
-        temp_f10 = (temp_f2 * temp_f12) - (v0ob0 - v2ob0);
-        var_f30 = ((temp_f2 * temp_f8) - (v0tc0 - v2tc0)) / temp_f10;
-        temp_f4_2 = v0tc1 - v1tc1;
-        sp40 = (temp_f8 - (temp_f12 * var_f30)) / temp_f14;
-        var_f24 = ((temp_f2 * temp_f4_2) - (v0tc1 - v2tc1)) / temp_f10;
-        var_f26 = (temp_f4_2 - (temp_f12 * var_f24)) / temp_f14;
-        var_f2 = var_f26 * v0ob2;
-        var_f6 = (v0tc0 - (var_f30 * v0ob0)) - (sp40 * v0ob2);
-        var_f0 = v0tc1 - (var_f24 * v0ob0);
+        f32 f2 = v0ob2 - v2ob2;
+        f32 f14 = v0ob2 - v1ob2;
+        f32 f8 = v0tc0 - v1tc0;
+        f32 f12 = v0ob0 - v1ob0;
+        f32 f4 = v0tc0 - v2tc0;
+        f32 f6 = v0ob0 - v2ob0;
+        f32 f0 = f2 / f14 * f8;
+        f32 f10 = f2 / f14 * f12;
+
+        f32 f0b, f4a, f2b, f8a, f6a, f0c, f8b, f2c, f12a, f2d, f4b, f0d, f6b, f0e;
+
+        var_f30 = (f0 - f4) / (f10 - f6); // used later
+        f0b = f12 * var_f30;
+        f6a = var_f30 * v0ob0;
+        f4a = v0tc1 - v1tc1;
+        f2b = f2 / f14 * f4a;
+        f8a = f8 - f0b;
+        sp40 = f8a / f14; // used later
+        f8b = sp40 * v0ob2;
+        f0c = v0tc1 - v2tc1;
+        var_f24 = (f2b - f0c) / (f10 - f6); // used later
+        var_f26 = (f4a - f12 * var_f24) / f14; // used later
+        sp2C = v0tc0 - f6a - f8b; // used later
+        var_f20 = v0tc1 - var_f24 * v0ob0 - var_f26 * v0ob2; // used later
     }
-    sp2C = var_f6;
 
-    mdl_get_vertex_count(destGfx, &numVertices, &baseVtx, &gfxCount, destVertices);
+    mdl_get_vertex_count(arg1, &sp18, &baseVtx, &sp20, arg3);
 
-    for (i = 0; i < numVertices; i++) {
+    for (i = 0; i < sp18; i++) {
         ob0 = baseVtx->v.ob[0];
         ob1 = baseVtx->v.ob[1];
         ob2 = baseVtx->v.ob[2];
-
-        if (destMtx != NULL) {
-            var_f10 = (destMtx[0][0] * ob0) + (destMtx[1][0] * ob1) + (destMtx[2][0] * ob2) + destMtx[3][0];
-            var_f6_2 = (destMtx[0][2] * ob0) + (destMtx[1][2] * ob1) + (destMtx[2][2] * ob2) + destMtx[3][2];
+        if (arg2 != NULL) {
+            var_f10 = (arg2[0][0] * ob0) + (arg2[1][0] * ob1) + (arg2[2][0] * ob2) + arg2[3][0];
+            var_f6_2 = (arg2[0][2] * ob0) + (arg2[1][2] * ob1) + (arg2[2][2] * ob2) + arg2[3][2];
         } else {
             var_f10 = ob0;
             var_f6_2 = ob2;
         }
-
         tc0 = (var_f30 * var_f10) + (sp40 * var_f6_2) + sp2C;
-        tc1 = (var_f24 * var_f10) + (var_f26 * var_f6_2) + (var_f0 - var_f2);
-
+        tc1 = (var_f24 * var_f10) + (var_f26 * var_f6_2) + var_f20;
         if (tc0 < 0.0f) {
             tc0 -= 0.5;
         } else if (tc0 > 0.0f) {
@@ -5849,15 +5852,12 @@ void mdl_project_tex_coords(s32 modelID, Gfx* destGfx, f32 (*destMtx)[4], void* 
 
         baseVtx->v.tc[0] = tc0;
         baseVtx->v.tc[1] = tc1;
-        baseVtx->v.cn[0] = cn0;
-        baseVtx->v.cn[1] = cn1;
-        baseVtx->v.cn[2] = cn2;
+        baseVtx->v.cn[0] = cnR;
+        baseVtx->v.cn[1] = cnG;
+        baseVtx->v.cn[2] = cnB;
         baseVtx++;
     }
 }
-#else
-INCLUDE_ASM(s32, "a5dd0_len_114e0", mdl_project_tex_coords);
-#endif
 
 // Checks if the center of a model is visible.
 // If `depthQueryID` is nonnegative, the depth buffer is checked to see if the model's center is occluded by geometry.
