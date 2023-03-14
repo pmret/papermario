@@ -5729,12 +5729,11 @@ void mdl_project_tex_coords(s32 modelID, Gfx* arg1, Matrix4f arg2, Vtx* arg3) {
     s32 cmd;
     Vtx* tempVert;
 
-    s8 zero; // TODO needed to match
+    s8 zero = 0; // TODO needed to match
 
     listIndex = get_model_list_index_from_tree_index(modelID & 0xFFFF);
     model = get_model_from_list_index(listIndex);
     dlist = model->modelNode->displayData->displayList;
-    zero = 0;
 
     while (TRUE) {
         cmd = dlist->words.w0 >> 0x18;
