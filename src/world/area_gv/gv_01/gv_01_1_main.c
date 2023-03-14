@@ -45,7 +45,7 @@ EvtScript N(EVS_DropLastLetter) = {
 };
 
 #if VERSION_PAL
-EvtScript N(EVT_E8C6F8) = {
+EvtScript N(EVS_E8C6F8) = {
     EVT_CALL(EnableGroup, 20, 0)
     EVT_CALL(EnableGroup, 22, 0)
     EVT_CALL(EnableGroup, 24, 0)
@@ -93,7 +93,7 @@ EvtScript N(EVT_E8C6F8) = {
     EVT_END
 };
 
-EvtScript N(EVT_E8CA04) = {
+EvtScript N(EVS_E8CA04) = {
     EVT_CALL(EnableGroup, 4, 0)
     EVT_CALL(EnableGroup, 6, 0)
     EVT_CALL(EnableGroup, 8, 0)
@@ -191,9 +191,9 @@ EvtScript N(EVS_Main) = {
 #if VERSION_PAL
     EVT_CALL(GetLanguage, LVar0)
     EVT_IF_EQ(LVar0, 3)
-        EVT_EXEC(N(EVT_E8CA04))
+        EVT_EXEC(N(EVS_E8CA04))
     EVT_ELSE
-        EVT_EXEC(N(EVT_E8C6F8))
+        EVT_EXEC(N(EVS_E8C6F8))
     EVT_END_IF
 #else
     EVT_CALL(TranslateGroup, MODEL_g,  0, 200, 0)
