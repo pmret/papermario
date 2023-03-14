@@ -45,6 +45,8 @@ EvtScript N(EVS_DropLastLetter) = {
 };
 
 #if VERSION_PAL
+// TODO: define MODEL_ constants for PAL version of gv_01 map
+
 EvtScript N(EVS_E8C6F8) = {
     EVT_CALL(EnableGroup, 20, 0)
     EVT_CALL(EnableGroup, 22, 0)
