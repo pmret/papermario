@@ -22,8 +22,8 @@ EvtScript N(EVS_Main) = {
     EVT_IF_EQ(LocalVar(0), 3)
         EVT_SET(LocalVar(0), 2)
     EVT_END_IF
-    EVT_CALL(SetModelTexVariant, 92, LocalVar(0))
-    EVT_CALL(SetModelTexVariant, 93, LocalVar(0))
+    EVT_CALL(SetModelTexVariant, MODEL_s1, LocalVar(0))
+    EVT_CALL(SetModelTexVariant, MODEL_s2, LocalVar(0))
 #endif
     EVT_IF_EQ(GF_OMO09_SpawnedPeachChoice3, FALSE)
         EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(KammySceneNPCs)))

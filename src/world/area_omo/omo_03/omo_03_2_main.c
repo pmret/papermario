@@ -53,12 +53,12 @@ EvtScript N(EVS_Main) = {
         EVT_IF_GE(LocalVar(0), 2)
             EVT_SUB(LocalVar(0), 2)
         EVT_END_IF
-        EVT_CALL(SetModelTexVariant, 104, LocalVar(0))
-        EVT_CALL(SetModelTexVariant, 105, LocalVar(0))
-        EVT_CALL(SetModelTexVariant, 106, LocalVar(0))
-        EVT_CALL(SetModelTexVariant, 107, LocalVar(0))
-        EVT_CALL(SetModelTexVariant, 108, LocalVar(0))
-        EVT_CALL(SetModelTexVariant, 109, LocalVar(0))
+        EVT_CALL(SetModelTexVariant, MODEL_s, LocalVar(0))
+        EVT_CALL(SetModelTexVariant, MODEL_a, LocalVar(0))
+        EVT_CALL(SetModelTexVariant, MODEL_t, LocalVar(0))
+        EVT_CALL(SetModelTexVariant, MODEL_i, LocalVar(0))
+        EVT_CALL(SetModelTexVariant, MODEL_o, LocalVar(0))
+        EVT_CALL(SetModelTexVariant, MODEL_n, LocalVar(0))
 #endif
     EVT_SET(AF_OMO_05, FALSE)
     EVT_SET(GF_MAP_ShyGuysToybox, TRUE)

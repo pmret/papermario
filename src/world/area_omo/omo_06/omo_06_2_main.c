@@ -43,12 +43,12 @@ EvtScript N(EVS_Main) = {
         EVT_IF_GE(LocalVar(0), 2)
             EVT_SUB(LocalVar(0), 2)
         EVT_END_IF
-        EVT_CALL(SetModelTexVariant, 76, LocalVar(0))
-        EVT_CALL(SetModelTexVariant, 77, LocalVar(0))
-        EVT_CALL(SetModelTexVariant, 78, LocalVar(0))
-        EVT_CALL(SetModelTexVariant, 79, LocalVar(0))
-        EVT_CALL(SetModelTexVariant, 80, LocalVar(0))
-        EVT_CALL(SetModelTexVariant, 81, LocalVar(0))
+        EVT_CALL(SetModelTexVariant, MODEL_s, LocalVar(0))
+        EVT_CALL(SetModelTexVariant, MODEL_a, LocalVar(0))
+        EVT_CALL(SetModelTexVariant, MODEL_t, LocalVar(0))
+        EVT_CALL(SetModelTexVariant, MODEL_i, LocalVar(0))
+        EVT_CALL(SetModelTexVariant, MODEL_o, LocalVar(0))
+        EVT_CALL(SetModelTexVariant, MODEL_n, LocalVar(0))
 #endif
     EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(DefaultNPCs)))
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
