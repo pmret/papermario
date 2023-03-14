@@ -14,6 +14,8 @@ def get_version_date(version):
         return "Map Ver.00/11/07 15:36"
     elif version == "jp":
         return "Map Ver.00/07/05 19:13"
+    elif version == "pal":
+        return "Map Ver.01/03/23 16:30"
     else:
         return "Map Ver.??/??/?? ??:??"
 

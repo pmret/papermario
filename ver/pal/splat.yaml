@@ -5678,6 +5678,179 @@ segments:
 
   - [0xE8D120, bin]
 
+#############
+### Audio ###
+#############
+  - [0x13A0000, bin, SBN]
+  - [0x13A07C0, bin, bgm/Battle_Fanfare_02] # BGM start
+  - [0x13A2160, bin, bgm/Hey_You_03]
+  - [0x13A3740, bin, bgm/The_Goomba_King_s_Decree_07]
+  - [0x13A43F0, bin, bgm/Attack_of_the_Koopa_Bros_08]
+  - [0x13A73C0, bin, bgm/Trojan_Bowser_09]
+  - [0x13A8D40, bin, bgm/Chomp_Attack_0A]
+  - [0x13A9600, bin, bgm/Ghost_Gulping_0B]
+  - [0x13AA550, bin, bgm/Keeping_Pace_0C]
+  - [0x13ABAE0, bin, bgm/Go_Mario_Go_0D]
+  - [0x13ADEC0, bin, bgm/Huffin_and_Puffin_0E]
+  - [0x13AFD20, bin, bgm/Freeze_0F]
+  - [0x13B10D0, bin, bgm/Winning_a_Battle_8B]
+  - [0x13B16C0, bin, bgm/Winning_a_Battle_and_Level_Up_8E]
+  - [0x13B2320, bin, bgm/Jr_Troopa_Battle_04]
+  - [0x13B3C20, bin, bgm/Final_Bowser_Battle_interlude_05]
+  - [0x13B5F40, bin, bgm/Master_Battle_2C]
+  - [0x13B6F80, bin, bgm/Game_Over_87]
+  - [0x13B71D0, bin, bgm/Resting_at_the_Toad_House_88]
+  - [0x13B7370, bin, bgm/Running_around_the_Heart_Pillar_in_Ch1_84]
+  - [0x13B7570, bin, bgm/Tutankoopa_s_Warning_45]
+  - [0x13B8940, bin, bgm/Kammy_Koopa_s_Theme_46]
+  - [0x13B93D0, bin, bgm/Jr_Troopa_s_Theme_47]
+  - [0x13B9BC0, bin, bgm/Goomba_King_s_Theme_50]
+  - [0x13BA6F0, bin, bgm/Koopa_Bros_Defeated_51]
+  - [0x13BABD0, bin, bgm/Koopa_Bros_Theme_52]
+  - [0x13BC810, bin, bgm/Tutankoopa_s_Warning_2_53]
+  - [0x13BDBF0, bin, bgm/Tutankoopa_s_Theme_54]
+  - [0x13BF2E0, bin, bgm/Tubba_Blubba_s_Theme_55]
+  - [0x13C0FF0, bin, bgm/General_Guy_s_Theme_56]
+  - [0x13C1780, bin, bgm/Lava_Piranha_s_Theme_57]
+  - [0x13C2A00, bin, bgm/Huff_N_Puff_s_Theme_58]
+  - [0x13C3A00, bin, bgm/Crystal_King_s_Theme_59]
+  - [0x13C4810, bin, bgm/Blooper_s_Theme_5A]
+  - [0x13C5240, bin, bgm/Midboss_Theme_5B]
+  - [0x13C6260, bin, bgm/Monstar_s_Theme_5C]
+  - [0x13C7840, bin, bgm/Moustafa_s_Theme_86]
+  - [0x13C7E20, bin, bgm/Fuzzy_Searching_Minigame_85]
+  - [0x13C8E20, bin, bgm/Phonograph_in_Mansion_44]
+  - [0x13C9AC0, bin, bgm/Toad_Town_00]
+  - [0x13CE130, bin, bgm/Bill_Blaster_Theme_48]
+  - [0x13CEF90, bin, bgm/Monty_Mole_Theme_in_Flower_Fields_49]
+  - [0x13D0590, bin, bgm/Shy_Guys_in_Toad_Town_4A]
+  - [0x13D18B0, bin, bgm/Whale_s_Problem_4C]
+  - [0x13D2220, bin, bgm/Toad_Town_Sewers_4B]
+  - [0x13D3060, bin, bgm/Unused_Theme_4D]
+  - [0x13D3AA0, bin, bgm/Mario_s_House_Prologue_3E]
+  - [0x13D3F10, bin, bgm/Peach_s_Party_3F]
+  - [0x13D54E0, bin, bgm/Goomba_Village_01]
+  - [0x13D5ED0, bin, bgm/Pleasant_Path_11]
+  - [0x13D6690, bin, bgm/Fuzzy_s_Took_My_Shell_12]
+  - [0x13D79E0, bin, bgm/Koopa_Village_13]
+  - [0x13D8570, bin, bgm/Koopa_Bros_Fortress_14]
+  - [0x13D9160, bin, bgm/Dry_Dry_Ruins_18]
+  - [0x13DA0D0, bin, bgm/Dry_Dry_Ruins_Mystery_19]
+  - [0x13DA450, bin, bgm/Mt_Rugged_16]
+  - [0x13DAF20, bin, bgm/Dry_Dry_Desert_Oasis_17]
+  - [0x13DC130, bin, bgm/Dry_Dry_Outpost_15]
+  - [0x13DCCC0, bin, bgm/Forever_Forest_1A]
+  - [0x13DE130, bin, bgm/Boo_s_Mansion_1B]
+  - [0x13DF3E0, bin, bgm/Bow_s_Theme_1C]
+  - [0x13E0F00, bin, bgm/Gusty_Gulch_Adventure_1D]
+  - [0x13E2F30, bin, bgm/Tubba_Blubba_s_Castle_1E]
+  - [0x13E5500, bin, bgm/The_Castle_Crumbles_1F]
+  - [0x13E65E0, bin, bgm/Shy_Guy_s_Toy_Box_20]
+  - [0x13E74A0, bin, bgm/Toy_Train_Travel_21]
+  - [0x13E7E10, bin, bgm/Big_Lantern_Ghost_s_Theme_22]
+  - [0x13E8410, bin, bgm/Jade_Jungle_24]
+  - [0x13EA880, bin, bgm/Deep_Jungle_25]
+  - [0x13EBC00, bin, bgm/Lavalava_Island_26]
+  - [0x13EE690, bin, bgm/Search_for_the_Fearsome_5_27]
+  - [0x13F0A00, bin, bgm/Raphael_the_Raven_28]
+  - [0x13F2520, bin, bgm/Hot_Times_in_Mt_Lavalava_29]
+  - [0x13F5C80, bin, bgm/Escape_from_Mt_Lavalava_2A]
+  - [0x13F8ED0, bin, bgm/Cloudy_Climb_32]
+  - [0x13F92B0, bin, bgm/Puff_Puff_Machine_33]
+  - [0x13FAFF0, bin, bgm/Flower_Fields_30]
+  - [0x13FC8D0, bin, bgm/Flower_Fields_Sunny_31]
+  - [0x13FDF40, bin, bgm/Sun_s_Tower_34]
+  - [0x13FF500, bin, bgm/Sun_s_Celebration_35]
+  - [0x1401700, bin, bgm/Shiver_City_38]
+  - [0x1402E50, bin, bgm/Detective_Mario_39]
+  - [0x1404220, bin, bgm/Snow_Road_3A]
+  - [0x1404CB0, bin, bgm/Over_Shiver_Mountain_3B]
+  - [0x1405B30, bin, bgm/Starborn_Valley_3C]
+  - [0x1406690, bin, bgm/Sanctuary_3D]
+  - [0x1406B70, bin, bgm/Crystal_Palace_37]
+  - [0x1407F80, bin, bgm/Star_Haven_60]
+  - [0x1409640, bin, bgm/Shooting_Star_Summit_61]
+  - [0x140A050, bin, bgm/Legendary_Star_Ship_62]
+  - [0x140C270, bin, bgm/Star_Sanctuary_63]
+  - [0x140CED0, bin, bgm/Bowser_s_Castle_-_Caves_65]
+  - [0x140EE40, bin, bgm/Bowser_s_Castle_64]
+  - [0x1413390, bin, bgm/Star_Elevator_2B]
+  - [0x14151F0, bin, bgm/Goomba_Bros_Defeated_7E]
+  - [0x14159C0, bin, bgm/Farewell_Twink_70]
+  - [0x1417200, bin, bgm/Peach_Cooking_71]
+  - [0x1417680, bin, bgm/Gourmet_Guy_72]
+  - [0x1418600, bin, bgm/Hope_on_the_Balcony_Peach_1_73]
+  - [0x1419070, bin, bgm/Peach_s_Theme_2_74]
+  - [0x141A0C0, bin, bgm/Peach_Sneaking_75]
+  - [0x141AA40, bin, bgm/Peach_Captured_76]
+  - [0x141AD90, bin, bgm/Quiz_Show_Intro_77]
+  - [0x141BEA0, bin, bgm/Unconscious_Mario_78]
+  - [0x141C780, bin, bgm/Petunia_s_Theme_89]
+  - [0x141DC00, bin, bgm/Flower_Fields_Door_appears_8A]
+  - [0x141E190, bin, bgm/Beanstalk_7B]
+  - [0x141EE20, bin, bgm/Lakilester_s_Theme_7D]
+  - [0x1420230, bin, bgm/The_Sun_s_Back_7F]
+  - [0x1421260, bin, bgm/Shiver_City_in_Crisis_79]
+  - [0x1422460, bin, bgm/Solved_Shiver_City_Mystery_7A]
+  - [0x1422D00, bin, bgm/Merlon_s_Spell_7C]
+  - [0x1423DC0, bin, bgm/Bowser_s_Theme_66]
+  - [0x1425590, bin, bgm/Train_Travel_80]
+  - [0x14260E0, bin, bgm/Whale_Trip_81]
+  - [0x1427000, bin, bgm/Chanterelle_s_Song_8C]
+  - [0x1427610, bin, bgm/Boo_s_Game_8D]
+  - [0x1428B30, bin, bgm/Dry_Dry_Ruins_rises_up_83]
+  - [0x1429570, bin, bgm/End_of_Chapter_40]
+  - [0x142AAF0, bin, bgm/Beginning_of_Chapter_41]
+  - [0x142B820, bin, bgm/Hammer_and_Jump_Upgrade_42]
+  - [0x142BD90, bin, bgm/Found_Baby_Yoshi_s_4E]
+  - [0x142C360, bin, bgm/New_Partner_JAP_96]
+  - [0x142D110, bin, bgm/Unused_YI_Fanfare_4F]
+  - [0x142D3E0, bin, bgm/Unused_YI_Fanfare_2_5D]
+  - [0x1430880, bin, bgm/Peach_s_Castle_inside_Bubble_5E]
+  - [0x1432A50, bin, bgm/Angry_Bowser_67]
+  - [0x1435510, bin, bgm/Bowser_s_Castle_explodes_5F]
+  - [0x1436280, bin, bgm/Peach_s_Wish_68]
+  - [0x1438520, bin, bgm/File_Select_69]
+  - [0x1438F90, bin, bgm/Title_Screen_6A]
+  - [0x143B830, bin, bgm/Peach_s_Castle_in_Crisis_6B]
+  - [0x143D3B0, bin, bgm/Mario_falls_from_Bowser_s_Castle_6C]
+  - [0x143D690, bin, bgm/Peach_s_Arrival_6D]
+  - [0x143EF30, bin, bgm/Star_Rod_Recovered_6F]
+  - [0x143FA30, bin, bgm/Mario_s_House_94]
+  - [0x14408A0, bin, bgm/Bowser_s_Attacks_95]
+  - [0x1443C60, bin, bgm/End_Parade_1_90]
+  - [0x14485F0, bin, bgm/End_Parade_2_91]
+  - [0x144BE90, bin, bgm/Ths_End_6E]
+  - [0x144CC80, bin, bgm/Koopa_Radio_Station_2D]
+  - [0x144D210, bin, bgm/Ths_End_Low_Frequency__2E]
+  - [0x144D8F0, bin, bgm/SMW_Remix_2F]
+  - [0x144DE70, bin, bgm/New_Partner_82] # BGM end
+  - [0x144E860, bin, FAE860] # more audio stuff
+  - [0x1DE25C0, bin, 19425C0] # INIT file
+###############
+### Sprites ###
+###############
+  - [0x1DE2C40, bin, 1942C40]
+  - [0x1DF0000, bin, 1943000] # sprite data build metadata (build date, major file divisions)
+
+  # player sprite raster table:
+  - [0x1DF0020, bin, 1943020] # Player sprite table
+
+  - [0x1E8D970, bin] # Player sprite Yay0 table (offsets to the following 13 entries)
+  - { start: 0x1E8D9A8, type: yay0, align: 8, name: 19E09A8 }
+  - { start: 0x1E8E390, type: yay0, align: 8, name: 19E1390 }
+  - { start: 0x1E8E888, type: yay0, align: 8, name: 19E1888 }
+  - { start: 0x1E8F330, type: yay0, align: 8, name: 19E2330 }
+  - { start: 0x1E8FDE0, type: yay0, align: 8, name: 19E2DE0 }
+  - { start: 0x1E90208, type: yay0, align: 8, name: 19E3208 }
+  - { start: 0x1E90BA8, type: yay0, align: 8, name: 19E3BA8 }
+  - { start: 0x1E90FD8, type: yay0, align: 8, name: 19E3FD8 }
+  - { start: 0x1E91828, type: yay0, align: 8, name: 19E4828 }
+  - { start: 0x1E91BE0, type: yay0, align: 8, name: 19E4BE0 }
+  - { start: 0x1E92758, type: yay0, align: 8, name: 19E5758 }
+  - { start: 0x1E92950, type: yay0, align: 8, name: 19E5950 }
+  - { start: 0x1E932A0, type: yay0, align: 8, name: 19E62A0 }
+
   - start: 0x1e937b8
     align: 8
     type: pm_npc_sprites
@@ -5972,5 +6145,14 @@ segments:
       - 2D_QuizChoices
       - 2E_Credits
   - [0x2132440, bin]
+
+  - [0x21B0000, bin] # German
+  - [0x2330000, bin] # French
+  - [0x24B0000, bin] # Spanish
+
+  - [0x2600000, pm_map_data, mapfs]
+  - [0x2FD7362, bin]
+
+  - [0x3000000, bin] # Duplicate of 0x2000000-0x3000000
 
   - [0x4000000]

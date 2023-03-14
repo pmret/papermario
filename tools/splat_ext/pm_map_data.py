@@ -105,7 +105,7 @@ class N64SegPm_map_data(N64Segment):
                     w = png.Writer(150, 105, palette=parse_palette(bytes[:0x200]))
                     w.write_array(f, bytes[0x200:])
             elif name == "title_data":
-                if "ver/us" in str(options.opts.target_path):
+                if "ver/us" in str(options.opts.target_path) or "ver/pal" in str(options.opts.target_path):
                     w = 200
                     h = 112
                     img = n64img.image.RGBA32(
