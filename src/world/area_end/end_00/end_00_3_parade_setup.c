@@ -1152,7 +1152,7 @@ EvtScript N(EVS_ManageNpcPool) = {
 
 EvtScript N(EVS_ParadePhase_PlayCredits) = {
 #if VERSION_PAL
-    EVT_WAIT(150)
+    EVT_WAIT(180 * DT)
 #else
     EVT_WAIT(240)
 #endif
