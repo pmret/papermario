@@ -5601,8 +5601,74 @@ segments:
     - [0xE74620, c, end_01_5_flower_float]
     - [0xE74620, c, end_01_6_shyguy_float]
     - [0xE74920, c, end_01_7_peach_float]
+  - name: mgm_00
+    dir: world/area_mgm/mgm_00
+    type: code
+    start: 0xE7AE20
+    vram: 0x80240000
+    subsegments:
+    - [0xE7AE20, c, mgm_00_0_header]
+    - [0xE7AE20, c, mgm_00_1_main]
+    - [0xE7B100, c, mgm_00_2_npc]
+    - [0xE7C000, c, mgm_00_3_scoreboard]
+  - name: mgm_01
+    dir: world/area_mgm/mgm_01
+    type: code
+    start: 0xE7F190
+    vram: 0x80240000
+    subsegments:
+    - [0xE7F190, c, mgm_01_0_header]
+    - [0xE7F190, c, mgm_01_1_main]
+    - [0xE7F360, c, mgm_01_2_npc]
+    - [0xE80940, c, mgm_01_3_entity]
+    - [0xE80940, c, mgm_01_4_images]
+    - [0xE80940, .data, mgm_01_0_header]
+    - [0xE80990, .data, mgm_01_1_main]
+    - [0xE80C00, .data, mgm_01_2_npc]
+    - [0xE81E10, .data, mgm_01_3_entity]
+    - start: 0xE81EB0
+      type: .data
+      name: mgm_01_4_images
+      subsegments:
+      - [0xE81EB0, ci4, panel_1_coin, 32, 32]
+      - [0xE820B0, palette, panel_1_coin]
+      - [0xE820D0, ci4, panel_5_coins, 32, 32]
+      - [0xE822D0, palette, panel_5_coins]
+      - [0xE822F0, ci4, panel_times_5, 32, 32]
+      - [0xE824F0, palette, panel_times_5]
+      - [0xE82510, ci4, panel_bowser, 32, 32]
+      - [0xE82710, palette, panel_bowser]
+      - [0xE82730]
+  - name: mgm_02
+    dir: world/area_mgm/mgm_02
+    type: code
+    start: 0xE827F0
+    vram: 0x80240000
+    subsegments:
+    - [0xE827F0, c, mgm_02_0_header]
+    - [0xE827F0, c, mgm_02_1_main]
+    - [0xE827F0, c, mgm_02_2_npc]
+    - [0xE84BF0, c, mgm_02_3_images]
+    - [0xE84C20, .data, mgm_02_0_header]
+    - [0xE84C70, .data, mgm_02_1_main]
+    - [0xE84E70, .data, mgm_02_2_npc]
+    - start: 0xE8AB70
+      type: .data
+      name: mgm_02_3_images
+      subsegments:
+      - [0xE8AB70, ci4, panel_peach, 32, 32]
+      - [0xE8AD70, palette, panel_peach]
+      - [0xE8AD90]
+  - name: mgm_03
+    dir: world/area_mgm/mgm_03
+    type: code
+    start: 0xE8AED0
+    vram: 0x80240000
+    subsegments:
+    - [0xE8AED0, c, mgm_03_0_header]
+    - [0xE8AED0, c, mgm_03_1_main]
 
-  - [0xE7AE20, bin]
+  - [0xE8AFB0, bin]
 
   - start: 0x1e937b8
     align: 8

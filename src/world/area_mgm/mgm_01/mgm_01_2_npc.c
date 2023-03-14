@@ -67,7 +67,6 @@ typedef struct JumpGameData {
 
 extern s32 MessagePlural;
 extern s32 MessageSingular;
-extern MessageImageData N(MsgImgs_Panels);
 
 extern s8 N(BlockPosX)[NUM_BLOCKS];
 extern s8 N(BlockPosY)[NUM_BLOCKS];
@@ -657,6 +656,10 @@ API_CALLABLE(N(GetCoinCount)) {
     return ApiStatus_DONE2;
 }
 
+#if VERSION_PAL
+API_CALLABLE(N(SetMsgVars_BlocksRemaining));
+INCLUDE_ASM(ApiStatus, "world/area_mgm/mgm_01/mgm_01_2_npc", N(SetMsgVars_BlocksRemaining))
+#else
 API_CALLABLE(N(SetMsgVars_BlocksRemaining)) {
     Enemy* scorekeeper = get_enemy(SCOREKEEPER_ENEMY_IDX);
     s32 remaining = (scorekeeper->varTable[TOTAL_BLOCKS_VAR_IDX] - scorekeeper->varTable[BROKEN_BLOCKS_VAR_IDX]) + 1;
@@ -666,14 +669,10 @@ API_CALLABLE(N(SetMsgVars_BlocksRemaining)) {
 
     return ApiStatus_DONE2;
 }
+#endif
 
 API_CALLABLE(N(HideCoinCounter)) {
     hide_coin_counter_immediately();
-    return ApiStatus_DONE2;
-}
-
-API_CALLABLE(N(SetMsgImgs_Panels)) {
-    set_message_images(&N(MsgImgs_Panels));
     return ApiStatus_DONE2;
 }
 
@@ -996,7 +995,15 @@ EvtScript N(EVS_NpcInteract_Toad) = {
         EVT_WAIT(1)
     EVT_ELSE
         EVT_CALL(N(SetMsgVars_BlocksRemaining))
+#if VERSION_PAL
+        EVT_IF_EQ(LocalVar(13), 1)
+            EVT_CALL(SpeakToPlayer, 0, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_PAL_MGM_0036)
+        EVT_ELSE
+            EVT_CALL(SpeakToPlayer, 0, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0033)
+        EVT_END_IF
+#else
         EVT_CALL(SpeakToPlayer, NPC_Toad, ANIM_Toad_Red_Talk, ANIM_Toad_Red_Idle, 0, MSG_MGM_0033)
+#endif
     EVT_END_IF
     EVT_RETURN
     EVT_END
