@@ -67,7 +67,7 @@ EvtScript N(EVS_ItemPrompt_StarStoneSocket) = {
     EVT_CALL(PlaySoundAt, SOUND_1EB, 0, -117, 179, -32)
     EVT_WAIT(30)
     EVT_THREAD
-        EVT_CALL(MakeLerp, -32, -55, 100, EASING_COS_IN_OUT)
+        EVT_CALL(MakeLerp, -32, -55, 100 * DT, EASING_COS_IN_OUT)
         EVT_LABEL(1)
         EVT_CALL(UpdateLerp)
         EVT_CALL(SetItemPos, MV_StarStoneItemID, -117, 179, LVar0)
@@ -77,7 +77,7 @@ EvtScript N(EVS_ItemPrompt_StarStoneSocket) = {
         EVT_END_IF
     EVT_END_THREAD
     EVT_CALL(PlaySoundAtCollider, COLLIDER_o61, SOUND_39C, 0)
-    EVT_CALL(MakeLerp, 0, -23, 100, EASING_COS_IN_OUT)
+    EVT_CALL(MakeLerp, 0, -23, 100 * DT, EASING_COS_IN_OUT)
     EVT_LABEL(2)
     EVT_CALL(UpdateLerp)
     EVT_CALL(TranslateGroup, MODEL_g51, 0, 0, LVar0)

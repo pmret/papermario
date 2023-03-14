@@ -17,7 +17,7 @@ EvtScript N(EVS_NpcInteract_GateFlower) = {
         EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
         EVT_CALL(SetCamDistance, CAM_DEFAULT, 350)
         EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(18.5), EVT_FLOAT(-7.5))
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0))
+        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0 / DT))
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
         EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Yellow_Talk, ANIM_GateFlower_Yellow_Idle, 0, MSG_CH6_0042)
@@ -35,7 +35,7 @@ EvtScript N(EVS_NpcInteract_GateFlower) = {
                 EVT_SET(LVar7, LVar0)
                 EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_2095, SOUND_SPACE_MODE_0)
                 EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GateFlower_Yellow_Eat)
-                EVT_WAIT(20)
+                EVT_WAIT(20 * DT)
                 EVT_CALL(RemoveItemEntity, LVar7)
                 EVT_SWITCH(LVar8)
                     EVT_CASE_EQ(160)
@@ -77,7 +77,7 @@ EvtScript N(EVS_NpcInteract_GateFlower) = {
                         EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_2096, SOUND_SPACE_MODE_0)
                         EVT_CALL(MakeItemEntity, LVar8, 125, 20, 0, ITEM_SPAWN_MODE_DECORATION, 0)
                         EVT_SET(LVar7, LVar0)
-                        EVT_WAIT(5)
+                        EVT_WAIT(5 * DT)
                         EVT_CALL(GetAngleToPlayer, NPC_SELF, LVar0)
                         EVT_IF_LT(LVar0, 180)
                             EVT_CALL(MakeLerp, 0, 100, 7, EASING_LINEAR)
@@ -125,9 +125,9 @@ EvtScript N(EVS_NpcInteract_GateFlower) = {
                 EVT_END_SWITCH
         EVT_END_SWITCH
         EVT_THREAD
-            EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(6.0))
+            EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(6.0 / DT))
         EVT_END_THREAD
-        EVT_WAIT(10)
+        EVT_WAIT(10 * DT)
     EVT_ELSE
         EVT_IF_LT(GB_StoryProgress, STORY_CH6_STAR_SPIRIT_RESCUED)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_GateFlower_Yellow_HappyTalk, ANIM_GateFlower_Yellow_HappyIdle, 0, MSG_CH6_0047)

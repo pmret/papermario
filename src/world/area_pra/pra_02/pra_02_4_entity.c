@@ -81,7 +81,7 @@ EvtScript N(EVS_ManagePoundableSwitch) = {
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_IF_EQ(GF_PRA02_DoorColorToggle, FALSE)
-        EVT_CALL(MakeLerp, 0, -250, 250, EASING_LINEAR)
+        EVT_CALL(MakeLerp, 0, -250, 250 * DT, EASING_LINEAR)
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittse, COLLIDER_FLAGS_UPPER_MASK)
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittne, COLLIDER_FLAGS_UPPER_MASK)
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_deilittse2, COLLIDER_FLAGS_UPPER_MASK)
@@ -89,7 +89,7 @@ EvtScript N(EVS_ManagePoundableSwitch) = {
         EVT_SET(GF_PRA02_DoorColorToggle, TRUE)
         EVT_EXEC(N(EVS_LowerPoundableSwitch))
     EVT_ELSE
-        EVT_CALL(MakeLerp, -250, 0, 250, EASING_LINEAR)
+        EVT_CALL(MakeLerp, -250, 0, 250 * DT, EASING_LINEAR)
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittse2, COLLIDER_FLAGS_UPPER_MASK)
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittne2, COLLIDER_FLAGS_UPPER_MASK)
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_deilittse, COLLIDER_FLAGS_UPPER_MASK)
@@ -108,8 +108,8 @@ EvtScript N(EVS_ManagePoundableSwitch) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(PlaySound, SOUND_3F)
-        EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 250, EVT_FLOAT(0.5))
-        EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10, EVT_FLOAT(1.5))
+        EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 250 * DT, EVT_FLOAT(0.5))
+        EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 10 * DT, EVT_FLOAT(1.5))
         EVT_CALL(PlaySound, SOUND_40)
     EVT_END_THREAD
     EVT_LABEL(0)
@@ -119,7 +119,7 @@ EvtScript N(EVS_ManagePoundableSwitch) = {
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(0)
         EVT_END_IF
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_IF_EQ(GF_PRA02_DoorColorToggle, TRUE)
         EVT_CALL(SetGroupVisibility, MODEL_g307, MODEL_GROUP_HIDDEN)
         EVT_CALL(SetGroupVisibility, MODEL_g308, MODEL_GROUP_VISIBLE)

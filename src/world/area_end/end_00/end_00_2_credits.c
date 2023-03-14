@@ -2,9 +2,15 @@
 
 #include "../common/Credits.inc.c"
 
+#if VERSION_PAL
+#include "credits_title_pal.inc.c"
+#include "credits_jobs_pal.inc.c"
+#include "credits_names_pal.inc.c"
+#else
 #include "credits_title.inc.c"
 #include "credits_jobs.inc.c"
 #include "credits_names.inc.c"
+#endif
 
 EvtScript N(EVS_InitCredits) = {
     EVT_CALL(N(InitCredits))

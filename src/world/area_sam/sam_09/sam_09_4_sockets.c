@@ -82,7 +82,7 @@ API_CALLABLE(N(CreateConsumableItemList)) {
 
 EvtScript N(EVS_PlaceItemInSocket) = {
     EVT_CALL(PlaySoundAtCollider, LVar4, SOUND_1DD, 0)
-    EVT_CALL(MakeLerp, 0, 130, 30, EASING_LINEAR)
+    EVT_CALL(MakeLerp, 0, 130, 30 * DT, EASING_LINEAR)
     EVT_LABEL(0)
         EVT_CALL(UpdateLerp)
         EVT_CALL(TranslateModel, LVar2, 0, LVar0, 0)
@@ -97,7 +97,7 @@ EvtScript N(EVS_PlaceItemInSocket) = {
 
 EvtScript N(EVS_TakeItemFromSocket) = {
     EVT_CALL(PlaySoundAtCollider, LVar4, SOUND_1DE, 0)
-    EVT_CALL(MakeLerp, 130, 0, 30, EASING_CUBIC_IN)
+    EVT_CALL(MakeLerp, 130, 0, 30 * DT, EASING_CUBIC_IN)
     EVT_LABEL(0)
     EVT_CALL(UpdateLerp)
     EVT_CALL(TranslateModel, LVar2, 0, LVar0, 0)

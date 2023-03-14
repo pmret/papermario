@@ -53,13 +53,13 @@ EvtScript N(EVS_SetupHerringway) = {
         EVT_END_LOOP
         EVT_CALL(SetNpcFlagBits, NPC_Herringway, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
         EVT_CALL(SetNpcAnimation, NPC_Herringway, ANIM_Herringway_Walk)
-        EVT_CALL(NpcMoveTo, NPC_Herringway, -265, 275, 20)
+        EVT_CALL(NpcMoveTo, NPC_Herringway, -265, 275, 20 * DT)
         EVT_EXEC(N(EVS_OpenAndCloseMayorsDoor))
-        EVT_WAIT(20)
-        EVT_CALL(NpcMoveTo, NPC_Herringway, -290, 157, 20)
-        EVT_WAIT(20)
+        EVT_WAIT(20 * DT)
+        EVT_CALL(NpcMoveTo, NPC_Herringway, -290, 157, 20 * DT)
+        EVT_WAIT(20 * DT)
         EVT_THREAD
-            EVT_CALL(NpcMoveTo, NPC_Herringway, -228, 91, 20)
+            EVT_CALL(NpcMoveTo, NPC_Herringway, -228, 91, 20 * DT)
             EVT_CALL(SetNpcAnimation, NPC_Herringway, ANIM_Herringway_Idle)
             EVT_CALL(InterpNpcYaw, NPC_Herringway, 270, 0)
             EVT_CALL(SetNpcFlagBits, NPC_Herringway, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)

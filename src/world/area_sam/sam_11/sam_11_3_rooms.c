@@ -44,7 +44,7 @@ EvtScript N(EVS_RoomListener_LeftHouse) = {
             EVT_IF_EQ(GB_StoryProgress, STORY_CH7_SPOKE_WITH_HERRINGWAY)
                 EVT_IF_EQ(GF_SAM11_LeftHerringwaysHouse, FALSE)
                     EVT_THREAD
-                        EVT_WAIT(30)
+                        EVT_WAIT(30 * DT)
                         EVT_CALL(MakeLerp, 0, 255, 20, EASING_LINEAR)
                         EVT_LOOP(0)
                             EVT_CALL(UpdateLerp)
@@ -54,10 +54,10 @@ EvtScript N(EVS_RoomListener_LeftHouse) = {
                                 EVT_BREAK_LOOP
                             EVT_END_IF
                         EVT_END_LOOP
-                        EVT_WAIT(10)
+                        EVT_WAIT(10 * DT)
                         EVT_CALL(SetNpcAnimation, NPC_Herringway, ANIM_Herringway_Walk)
                         EVT_CALL(PlayerFaceNpc, NPC_Herringway, FALSE)
-                        EVT_CALL(NpcMoveTo, NPC_Herringway, -500, 0, 50)
+                        EVT_CALL(NpcMoveTo, NPC_Herringway, -500, 0, 50 * DT)
                         EVT_CALL(SetNpcFlagBits, NPC_Herringway, NPC_FLAG_GRAVITY, FALSE)
                         EVT_CALL(SetNpcPos, NPC_Herringway, NPC_DISPOSE_LOCATION)
                     EVT_END_THREAD

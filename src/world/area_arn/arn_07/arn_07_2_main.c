@@ -155,19 +155,19 @@ EvtScript N(EVS_Scene_TubbaReunion) = {
     EVT_CALL(RotateModel, MODEL_o39, 80, 0, -1, 0)
     EVT_CALL(PlaySoundAtNpc, NPC_TubbasHeart, SOUND_20C8, SOUND_SPACE_MODE_0)
     EVT_CALL(SetNpcJumpscale, NPC_TubbasHeart, EVT_FLOAT(2.5))
-    EVT_CALL(NpcJump0, NPC_TubbasHeart, 0, 20, -120, 8)
+    EVT_CALL(NpcJump0, NPC_TubbasHeart, 0, 20, -120, 8 * DT)
     EVT_WAIT(1)
     EVT_CALL(PlaySoundAtNpc, NPC_TubbasHeart, SOUND_20C8, SOUND_SPACE_MODE_0)
-    EVT_CALL(NpcJump0, NPC_TubbasHeart, 0, 10, -60, 12)
+    EVT_CALL(NpcJump0, NPC_TubbasHeart, 0, 10, -60, 12 * DT)
     EVT_WAIT(1)
     EVT_CALL(PlaySoundAtNpc, NPC_TubbasHeart, SOUND_20C8, SOUND_SPACE_MODE_0)
-    EVT_CALL(NpcJump0, NPC_TubbasHeart, 0, 0, 0, 12)
+    EVT_CALL(NpcJump0, NPC_TubbasHeart, 0, 0, 0, 12 * DT)
     EVT_WAIT(1)
     EVT_CALL(SetNpcVar, NPC_TubbasHeart, 0, 0)
     EVT_THREAD
         EVT_LOOP(0)
             EVT_CALL(PlaySoundAtNpc, NPC_TubbasHeart, SOUND_20C8, SOUND_SPACE_MODE_0)
-            EVT_CALL(NpcJump0, NPC_TubbasHeart, 0, 0, 0, 10)
+            EVT_CALL(NpcJump0, NPC_TubbasHeart, 0, 0, 0, 10 * DT)
             EVT_WAIT(1)
             EVT_CALL(GetNpcVar, NPC_TubbasHeart, 0, LVar0)
             EVT_IF_EQ(LVar0, 1)
@@ -205,7 +205,7 @@ EvtScript N(EVS_Scene_TubbaReunion) = {
     EVT_CALL(NpcJump0, NPC_TubbasHeart, 150, 0, 20, 12)
     EVT_WAIT(1)
     EVT_THREAD
-        EVT_WAIT(4)
+        EVT_WAIT(4 * DT)
         EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
         EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(2.0), EVT_FLOAT(-9.0))
         EVT_CALL(SetCamDistance, CAM_DEFAULT, 700)
@@ -222,10 +222,10 @@ EvtScript N(EVS_Scene_TubbaReunion) = {
     EVT_CALL(EnableNpcShadow, NPC_TubbasHeart, FALSE)
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim23)
-        EVT_WAIT(20)
+        EVT_WAIT(20 * DT)
         EVT_CALL(SetNpcAnimation, NPC_Tubba, ANIM_WorldTubba_Anim06)
     EVT_END_THREAD
-    EVT_WAIT(20)
+    EVT_WAIT(20 * DT)
     EVT_THREAD
         EVT_CALL(PlaySoundAtCollider, COLLIDER_tt3, SOUND_BASIC_DOOR_OPEN, SOUND_SPACE_MODE_0)
         EVT_CALL(MakeLerp, 0, 80, 10, EASING_LINEAR)
@@ -239,7 +239,7 @@ EvtScript N(EVS_Scene_TubbaReunion) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_THREAD
-        EVT_WAIT(30)
+        EVT_WAIT(30 * DT)
         EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 236, 0, -46)
         EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0))
         EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(8.0), EVT_FLOAT(-9.0))
@@ -251,7 +251,7 @@ EvtScript N(EVS_Scene_TubbaReunion) = {
     EVT_CALL(SetPlayerPos, 0, 20, -195)
     EVT_CALL(SetNpcPos, NPC_PARTNER, 0, 20, -195)
     EVT_CALL(EnablePartnerAI)
-    EVT_CALL(PlayerMoveTo, 0, 0, 45)
+    EVT_CALL(PlayerMoveTo, 0, 0, 45 * DT)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_tt3, COLLIDER_FLAGS_UPPER_MASK)
     EVT_THREAD
         EVT_CALL(MakeLerp, 80, 0, 10, EASING_LINEAR)
@@ -265,11 +265,11 @@ EvtScript N(EVS_Scene_TubbaReunion) = {
         EVT_END_LOOP
         EVT_CALL(PlaySoundAtCollider, COLLIDER_tt3, SOUND_BASIC_DOOR_CLOSE, SOUND_SPACE_MODE_0)
     EVT_END_THREAD
-    EVT_CALL(PlayerMoveTo, 200, 0, 35)
-    EVT_WAIT(5)
+    EVT_CALL(PlayerMoveTo, 200, 0, 35 * DT)
+    EVT_WAIT(5 * DT)
     EVT_CALL(SpeakToPlayer, NPC_Tubba, ANIM_WorldTubba_Anim10, ANIM_WorldTubba_Anim06, 0, MSG_CH3_00C8)
     EVT_CALL(SetNpcVar, NPC_Tubba, 0, 1)
-    EVT_WAIT(30)
+    EVT_WAIT(30 * DT)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
     EVT_END
