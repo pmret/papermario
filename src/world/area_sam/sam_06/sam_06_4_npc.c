@@ -70,8 +70,8 @@ MAP_STATIC_PAD(1,key_item);
 
 #if VERSION_PAL
 #include "sprite/npc/ShiverToad.h"
-#define ANIM_TALK ANIM_ShiverToad_Red_Talk
-#define ANIM_IDLE ANIM_ShiverToad_Red_Idle
+#define TOADHOUSE_ANIM_TALK ANIM_ShiverToad_Red_Talk
+#define TOADHOUSE_ANIM_IDLE ANIM_ShiverToad_Red_Idle
 #endif
 
 #include "world/common/complete/ToadHouseBlanketAnim.inc.c"

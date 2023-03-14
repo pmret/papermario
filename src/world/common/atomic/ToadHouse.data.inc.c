@@ -40,12 +40,12 @@ EvtScript N(EVS_ToadHouse_Unk2) = {
     EVT_END
 };
 
-#ifndef ANIM_TALK
-#define ANIM_TALK ANIM_Toad_Red_Talk
+#ifndef TOADHOUSE_ANIM_TALK
+#define TOADHOUSE_ANIM_TALK ANIM_Toad_Red_Talk
 #endif
 
-#ifndef ANIM_IDLE
-#define ANIM_IDLE ANIM_Toad_Red_Idle
+#ifndef TOADHOUSE_ANIM_IDLE
+#define TOADHOUSE_ANIM_IDLE ANIM_Toad_Red_Idle
 #endif
 
 EvtScript N(EVS_NpcInteract_ToadHouseKeeper) = {
@@ -61,14 +61,14 @@ EvtScript N(EVS_NpcInteract_ToadHouseKeeper) = {
     EVT_IF_EQ(LVar1, 0)
         EVT_SET(LVar8, LVar0)
     EVT_END_IF
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TALK, ANIM_IDLE, 0, LVar8)
+    EVT_CALL(SpeakToPlayer, NPC_SELF, TOADHOUSE_ANIM_TALK, TOADHOUSE_ANIM_IDLE, 0, LVar8)
     EVT_CALL(ShowChoice, MSG_Choice_0006)
     EVT_WAIT(3)
     EVT_IF_EQ(LVar0, 1)
-        EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_TALK, ANIM_IDLE, 0, LVar9)
+        EVT_CALL(ContinueSpeech, NPC_SELF, TOADHOUSE_ANIM_TALK, TOADHOUSE_ANIM_IDLE, 0, LVar9)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_TALK, ANIM_IDLE, 0, LVarA)
+    EVT_CALL(ContinueSpeech, NPC_SELF, TOADHOUSE_ANIM_TALK, TOADHOUSE_ANIM_IDLE, 0, LVarA)
     EVT_CALL(SetPlayerJumpscale, 1)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
@@ -108,7 +108,7 @@ EvtScript N(EVS_NpcInteract_ToadHouseKeeper) = {
     EVT_EXEC_WAIT(N(EVS_ToadHouse_ReturnFromRest))
     EVT_CALL(DisablePlayerPhysics, FALSE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_TALK, ANIM_IDLE, 0, LVarB)
+    EVT_CALL(SpeakToPlayer, NPC_SELF, TOADHOUSE_ANIM_TALK, TOADHOUSE_ANIM_IDLE, 0, LVarB)
     EVT_CALL(N(ToadHouse_ShowStatusMenu))
     EVT_RETURN
     EVT_END
