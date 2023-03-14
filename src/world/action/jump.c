@@ -34,7 +34,7 @@ void initialize_jump(void) {
     suggest_player_anim_allow_backward(anim);
 
     collisionStatus->lastTouchedFloor = collisionStatus->currentFloor;
-    collisionStatus->currentFloor = -1;
+    collisionStatus->currentFloor = NO_COLLIDER;
 }
 
 void action_update_jump(void) {

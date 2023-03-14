@@ -135,7 +135,7 @@ void action_update_use_spinning_flower(void) {
                 playerStatus->actionSubstate = SUBSTATE_SPIN_UP;
                 playerStatus->currentStateTime = 30;
                 D_802B6EE0 = 0.0f;
-                gCollisionStatus.currentFloor = -1;
+                gCollisionStatus.currentFloor = NO_COLLIDER;
                 exec_entity_commandlist(get_entity_by_index(SpinningFlower_EntityIndex));
             }
             break;

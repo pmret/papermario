@@ -30,8 +30,8 @@ void func_800E6860(void) {
     if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE && gPartnerActionStatus.actingPartner == PARTNER_BOW) {
         Npc* partner = get_npc_unsafe(NPC_PARTNER);
 
-        func_802DDEE4(PLAYER_SPRITE_MAIN, -1, 7, 0, 0, 0, playerStatus->alpha1, 0);
-        func_8003D624(partner, 7, playerStatus->alpha1, 0, 0, 0, 0);
+        func_802DDEE4(PLAYER_SPRITE_MAIN, -1, FOLD_TYPE_7, 0, 0, 0, playerStatus->alpha1, 0);
+        func_8003D624(partner, FOLD_TYPE_7, playerStatus->alpha1, 0, 0, 0, 0);
         playerStatus->alpha2 = 0;
     }
 }

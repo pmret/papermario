@@ -5,6 +5,8 @@
 #include "sprite/npc/WorldSushie.h"
 #include "sprite.h"
 
+#define NAMESPACE world_sushie
+
 BSS f32 OriginalPlayerY;
 BSS s32 bss_802BFEE4;
 BSS s32 bss_802BFEE8;
@@ -262,7 +264,7 @@ void func_802BD414_31E184(Npc* npc) {
             bss_802BFEF4 = 1;
             playerStatus->renderMode = RENDER_MODE_ALPHATEST;
             func_802DDFF8(playerStatus->trueAnimation, 4, 2, 0, 0, 0, 0);
-            func_8003D624(npc, 4, 2, 0, 0, 0, 0);
+            func_8003D624(npc, FOLD_TYPE_4, 2, 0, 0, 0, 0);
         }
         if (bss_802BFEE8 >= 10 && (!(partnerActionStatus->currentButtons & BUTTON_C_DOWN) || bss_802BFEE8 >= 30)) {
             npc->currentAnim = ANIM_WorldSushie_Rise;
@@ -295,7 +297,7 @@ void func_802BD414_31E184(Npc* npc) {
             if (bss_802BFEF4 != 0) {
                 bss_802BFEF4 = 0;
                 func_802DDFF8(ANIM_Mario1_Idle, 0, 0, 0, 0, 0, 0);
-                func_8003D624(npc, 0, 0, 0, 0, 0, 0);
+                func_8003D624(npc, FOLD_TYPE_NONE, 0, 0, 0, 0, 0);
             }
             bss_802BFEE4 = 0;
             npc->currentAnim = ANIM_WorldSushie_Ride;
@@ -321,7 +323,7 @@ s32 func_802BE280_31EFF0(s32 arg0, f32* x, f32* y, f32* z, f32 length, f32 radiu
     return hitResult;
 }
 
-ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802BE3A4_31F114) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
     CollisionStatus* collisionStatus = &gCollisionStatus;
@@ -375,7 +377,7 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
             suggest_player_anim_always_forward(ANIM_MarioW2_RideSushie);
             disable_player_shadow();
             disable_npc_shadow(npc);
-            func_8003D624(npc, 4, 2, 0, 0, 0, 0);
+            func_8003D624(npc, FOLD_TYPE_4, 2, 0, 0, 0, 0);
             npc->currentAnim = ANIM_WorldSushie_Ride;
             npc->moveSpeed = playerStatus->runSpeed;
             npc->jumpScale = 0.0f;
@@ -444,7 +446,7 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
             npc->flags |= NPC_FLAG_8;
             npc->flags &= ~(NPC_FLAG_GRAVITY | NPC_FLAG_IGNORE_WORLD_COLLISION);
             disable_npc_shadow(npc);
-            func_8003D624(npc, 4, 2, 0, 0, 0, 0);
+            func_8003D624(npc, FOLD_TYPE_4, 2, 0, 0, 0, 0);
             npc->currentAnim = ANIM_WorldSushie_Ride;
             playerStatus->flags |= PS_FLAG_MOVEMENT_LOCKED;
             dist = dist2D(playerStatus->position.x, playerStatus->position.z, npc->moveToPos.x, npc->moveToPos.z);
@@ -669,7 +671,7 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
                 partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
                 partnerActionStatus->actingPartner = 0;
                 func_802DDFF8(ANIM_Mario1_Idle, 0, 0, 0, 0, 0, 0);
-                func_8003D624(npc, 0, 0, 0, 0, 0, 0);
+                func_8003D624(npc, FOLD_TYPE_NONE, 0, 0, 0, 0, 0);
                 return ApiStatus_DONE1;
             }
             npc->duration--;
@@ -678,7 +680,7 @@ ApiStatus func_802BE3A4_31F114(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-EvtScript world_sushie_use_ability = {
+EvtScript EVS_WorldSushie_UseAbility = {
     EVT_CALL(func_802BE3A4_31F114)
     EVT_RETURN
     EVT_END
@@ -695,7 +697,7 @@ void world_sushie_init(Npc* sushie) {
     bss_802BFEF4 = 0;
 }
 
-s32 SushieTakeOut(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SushieTakeOut) {
     Npc* sushie = script->owner2.npc;
 
     if (isInitialCall) {
@@ -705,7 +707,7 @@ s32 SushieTakeOut(Evt* script, s32 isInitialCall) {
     return partner_get_out(sushie) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
-EvtScript world_sushie_take_out = {
+EvtScript EVS_WorldSushie_TakeOut = {
     EVT_CALL(SushieTakeOut)
     EVT_RETURN
     EVT_END
@@ -713,7 +715,7 @@ EvtScript world_sushie_take_out = {
 
 TweesterPhysics* SushieTweesterPhysicsPtr = &SushieTweesterPhysics;
 
-ApiStatus SushieUpdate(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SushieUpdate) {
     Npc* sushie = script->owner2.npc;
     f32 sinAngle, cosAngle, liftoffVelocity;
     Entity* entity;
@@ -794,7 +796,7 @@ ApiStatus SushieUpdate(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-EvtScript world_sushie_update = {
+EvtScript EVS_WorldSushie_Update = {
     EVT_CALL(SushieUpdate)
     EVT_RETURN
     EVT_END
@@ -809,7 +811,7 @@ void func_802BF920_320690(Npc* sushie) {
     }
 }
 
-s32 SushiePutAway(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SushiePutAway) {
     Npc* sushie = script->owner2.npc;
 
     if (isInitialCall) {
@@ -820,7 +822,7 @@ s32 SushiePutAway(Evt* script, s32 isInitialCall) {
     return partner_put_away(sushie) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
-EvtScript world_sushie_put_away = {
+EvtScript EVS_WorldSushie_PutAway = {
     EVT_CALL(SushiePutAway)
     EVT_RETURN
     EVT_END
@@ -850,7 +852,7 @@ void world_sushie_post_battle(Npc* sushie) {
     }
 }
 
-s32 func_802BFAB8_320828(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802BFAB8_320828) {
     Npc* partnerNPC = get_npc_unsafe(NPC_PARTNER);
     PlayerStatus* playerStatus = &gPlayerStatus;
 
@@ -923,7 +925,7 @@ s32 func_802BFAB8_320828(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-EvtScript world_sushie_while_riding = {
+EvtScript EVS_WorldSushie_Riding = {
     EVT_CALL(func_802BFAB8_320828)
     EVT_RETURN
     EVT_END

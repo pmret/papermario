@@ -42,7 +42,7 @@ void entity_BlueWarpPipe_wait_for_player_to_get_off(Entity* entity) {
                 }
                 break;
             case 1:
-                if (gCollisionStatus.currentFloor < 0) {
+                if (gCollisionStatus.currentFloor <= NO_COLLIDER) {
                     pipeData->timer = 2;
                 }
                 break;

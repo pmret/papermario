@@ -2,9 +2,8 @@
 #include "../partners.h"
 #include "npc.h"
 
-BSS TweesterPhysics D_802B6370;
-
-TweesterPhysics* PlayerTweesterPhysics = &D_802B6370;
+BSS TweesterPhysics PlayerTweesterPhysicsData;
+TweesterPhysics* PlayerTweesterPhysicsPtr = &PlayerTweesterPhysicsData;
 
 enum {
     SUBSTATE_LAUNCH     = 0,
@@ -24,43 +23,43 @@ void action_update_use_tweester(void) {
         playerStatus->flags |= (PS_FLAG_ROTATION_LOCKED | PS_FLAG_FLYING);
         suggest_player_anim_allow_backward(ANIM_MarioW2_FlailArms);
         playerStatus->actionSubstate = SUBSTATE_LAUNCH;
-        mem_clear(PlayerTweesterPhysics, sizeof(*PlayerTweesterPhysics));
-        PlayerTweesterPhysics->radius = fabsf(dist2D(playerStatus->position.x, playerStatus->position.z, entity->position.x, entity->position.z));
-        PlayerTweesterPhysics->angle = atan2(entity->position.x, entity->position.z, playerStatus->position.x, playerStatus->position.z);
-        PlayerTweesterPhysics->angularVelocity = 6.0f;
-        PlayerTweesterPhysics->liftoffVelocityPhase = 50.0f;
-        PlayerTweesterPhysics->countdown = 120;
+        mem_clear(PlayerTweesterPhysicsPtr, sizeof(*PlayerTweesterPhysicsPtr));
+        PlayerTweesterPhysicsPtr->radius = fabsf(dist2D(playerStatus->position.x, playerStatus->position.z, entity->position.x, entity->position.z));
+        PlayerTweesterPhysicsPtr->angle = atan2(entity->position.x, entity->position.z, playerStatus->position.x, playerStatus->position.z);
+        PlayerTweesterPhysicsPtr->angularVelocity = 6.0f;
+        PlayerTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
+        PlayerTweesterPhysicsPtr->countdown = 120;
         sfx_play_sound_at_player(SOUND_TWEESTER_LAUNCH, SOUND_SPACE_MODE_0);
     }
 
     switch (playerStatus->actionSubstate) {
         case SUBSTATE_LAUNCH:
-            sin_cos_rad(DEG_TO_RAD(PlayerTweesterPhysics->angle), &sinAngle, &cosAngle);
+            sin_cos_rad(DEG_TO_RAD(PlayerTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
 
-            playerStatus->position.x = entity->position.x + (sinAngle * PlayerTweesterPhysics->radius);
-            playerStatus->position.z = entity->position.z - (cosAngle * PlayerTweesterPhysics->radius);
+            playerStatus->position.x = entity->position.x + (sinAngle * PlayerTweesterPhysicsPtr->radius);
+            playerStatus->position.z = entity->position.z - (cosAngle * PlayerTweesterPhysicsPtr->radius);
 
-            PlayerTweesterPhysics->angle = clamp_angle(PlayerTweesterPhysics->angle - PlayerTweesterPhysics->angularVelocity);
+            PlayerTweesterPhysicsPtr->angle = clamp_angle(PlayerTweesterPhysicsPtr->angle - PlayerTweesterPhysicsPtr->angularVelocity);
 
-            if (PlayerTweesterPhysics->radius > 20.0f) {
-                PlayerTweesterPhysics->radius--;
-            } else if (PlayerTweesterPhysics->radius < 19.0f) {
-                PlayerTweesterPhysics->radius++;
+            if (PlayerTweesterPhysicsPtr->radius > 20.0f) {
+                PlayerTweesterPhysicsPtr->radius--;
+            } else if (PlayerTweesterPhysicsPtr->radius < 19.0f) {
+                PlayerTweesterPhysicsPtr->radius++;
             }
 
-            liftoffVelocity = sin_rad(DEG_TO_RAD(PlayerTweesterPhysics->liftoffVelocityPhase))  * 3.0f;
-            PlayerTweesterPhysics->liftoffVelocityPhase += 3.0f;
-            if (PlayerTweesterPhysics->liftoffVelocityPhase > 150.0f) {
-                PlayerTweesterPhysics->liftoffVelocityPhase = 150.0f;
+            liftoffVelocity = sin_rad(DEG_TO_RAD(PlayerTweesterPhysicsPtr->liftoffVelocityPhase))  * 3.0f;
+            PlayerTweesterPhysicsPtr->liftoffVelocityPhase += 3.0f;
+            if (PlayerTweesterPhysicsPtr->liftoffVelocityPhase > 150.0f) {
+                PlayerTweesterPhysicsPtr->liftoffVelocityPhase = 150.0f;
             }
 
             playerStatus->position.y += liftoffVelocity;
-            playerStatus->spriteFacingAngle = clamp_angle(360.0f - PlayerTweesterPhysics->angle);
-            PlayerTweesterPhysics->angularVelocity += 0.6;
-            if (PlayerTweesterPhysics->angularVelocity > 40.0f) {
-                PlayerTweesterPhysics->angularVelocity = 40.0f;
+            playerStatus->spriteFacingAngle = clamp_angle(360.0f - PlayerTweesterPhysicsPtr->angle);
+            PlayerTweesterPhysicsPtr->angularVelocity += 0.6;
+            if (PlayerTweesterPhysicsPtr->angularVelocity > 40.0f) {
+                PlayerTweesterPhysicsPtr->angularVelocity = 40.0f;
             }
-            if (--PlayerTweesterPhysics->countdown == 0) {
+            if (--PlayerTweesterPhysicsPtr->countdown == 0) {
                 playerStatus->actionSubstate++; // SUBSTATE_DONE
                 entity_start_script(entity);
             }

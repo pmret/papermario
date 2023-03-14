@@ -261,8 +261,8 @@ void spawn_drops(Enemy* enemy) {
         dropCount += encounter->damageTaken / 2;
         encounter->damageTaken = 0;
     }
-    if (encounter->merleeCoinBonus != 0) {
-        encounter->merleeCoinBonus = 0;
+    if (encounter->hasMerleeCoinBonus) {
+        encounter->hasMerleeCoinBonus = FALSE;
         dropCount *= 3;
     }
     if (is_ability_active(ABILITY_MONEY_MONEY) != 0) {
@@ -322,7 +322,7 @@ s32 get_coin_drop_amount(Enemy* enemy) {
         amt += currentEncounter->damageTaken / 2;
     }
 
-    if (currentEncounter->merleeCoinBonus) {
+    if (currentEncounter->hasMerleeCoinBonus) {
         amt *= 3;
     }
 

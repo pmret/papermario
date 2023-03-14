@@ -5,6 +5,8 @@
 #include "sprite/npc/WorldWatt.h"
 #include "sprite.h"
 
+#define NAMESPACE world_watt
+
 void force_player_anim(AnimID);
 void func_802BE014_31DB84(void);
 
@@ -61,7 +63,7 @@ void world_watt_init(Npc* npc) {
     WattStaticEffect = NULL;
 }
 
-ApiStatus func_802BD27C_31CDEC(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802BD27C_31CDEC) {
     Npc* watt = script->owner2.npc;
 
     if (isInitialCall) {
@@ -75,7 +77,7 @@ ApiStatus func_802BD27C_31CDEC(Evt* script, s32 isInitialCall) {
     }
 }
 
-EvtScript world_watt_take_out = {
+EvtScript EVS_WorldWatt_TakeOut = {
     EVT_CALL(func_802BD27C_31CDEC)
     EVT_RETURN
     EVT_END
@@ -85,13 +87,13 @@ TweesterPhysics* WattTweesterPhysicsPtr = &WattTweesterPhysics;
 
 s32 D_802BE278_31DDE8 = 0;
 
-ApiStatus WattUpdate(Evt* script, s32 isInitialCall) {
+API_CALLABLE(WattUpdate) {
     PlayerData* playerData = &gPlayerData;
     Npc* watt = script->owner2.npc;
     f32 sinAngle, cosAngle, liftoffVelocity;
     Entity* entity;
 
-    if (gPartnerActionStatus.partnerAction_unk_1 == 0) {
+    if (!gPartnerActionStatus.partnerAction_unk_1) {
         if (isInitialCall) {
             partner_flying_enable(watt, 1);
             mem_clear(WattTweesterPhysicsPtr, sizeof(TweesterPhysics));
@@ -123,7 +125,7 @@ ApiStatus WattUpdate(Evt* script, s32 isInitialCall) {
                 WattStaticEffect->data.staticStatus->unk_0C = watt->pos.z;
             }
 
-            return 0;
+            return ApiStatus_BLOCK;
         }
 
         switch (WattTweesterPhysicsPtr->state) {
@@ -190,10 +192,10 @@ ApiStatus WattUpdate(Evt* script, s32 isInitialCall) {
             WattStaticEffect->data.staticStatus->unk_0C = watt->pos.z;
         }
     }
-    return 0;
+    return ApiStatus_BLOCK;
 }
 
-EvtScript world_watt_update = {
+EvtScript EVS_WorldWatt_Update = {
     EVT_CALL(WattUpdate)
     EVT_RETURN
     EVT_END
@@ -208,7 +210,7 @@ void func_802BD710_31D280(Npc* watt) {
     }
 }
 
-ApiStatus func_802BD754_31D2C4(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802BD754_31D2C4) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     Npc* npc = script->owner2.npc;
@@ -216,7 +218,7 @@ ApiStatus func_802BD754_31D2C4(Evt* script, s32 isInitialCall) {
     if (isInitialCall) {
         func_802BD710_31D280(npc);
         if (!(playerStatus->animFlags & PA_FLAG_CHANGING_MAP)) {
-            if (partnerActionStatus->partnerAction_unk_1 == 0) {
+            if (!partnerActionStatus->partnerAction_unk_1) {
                 if ((partnerActionStatus->partnerActionState != ACTION_STATE_IDLE) ||
                     (func_800EA52C(PARTNER_WATT) && !is_starting_conversation()))
                 {
@@ -235,7 +237,7 @@ ApiStatus func_802BD754_31D2C4(Evt* script, s32 isInitialCall) {
                     return ApiStatus_DONE2;
                 }
             } else {
-                partnerActionStatus->partnerAction_unk_1 = 0;
+                partnerActionStatus->partnerAction_unk_1 = FALSE;
                 playerStatus->animFlags |= (PA_FLAG_USING_WATT | PA_FLAG_WATT_IN_HANDS);
                 func_802BE014_31DB84();
                 npc->currentAnim = ANIM_WorldWatt_Idle;
@@ -379,13 +381,13 @@ ApiStatus func_802BD754_31D2C4(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-EvtScript world_watt_use_ability = {
+EvtScript EVS_WorldWatt_UseAbility = {
     EVT_CALL(func_802BD754_31D2C4)
     EVT_RETURN
     EVT_END
 };
 
-s32 WattPutAway(Evt* script, s32 isInitialCall) {
+API_CALLABLE(WattPutAway) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* wattActionStatus = &gPartnerActionStatus;
     Npc* watt = script->owner2.npc;
@@ -407,7 +409,7 @@ s32 WattPutAway(Evt* script, s32 isInitialCall) {
     }
 }
 
-EvtScript world_watt_put_away = {
+EvtScript EVS_WorldWatt_PutAway = {
     EVT_CALL(WattPutAway)
     EVT_RETURN
     EVT_END
@@ -418,7 +420,7 @@ void world_watt_pre_battle(Npc* watt) {
 
     if (D_802BE30C != 0) {
         wattActionStatus->npc = *watt;
-        wattActionStatus->partnerAction_unk_1 = 1;
+        wattActionStatus->partnerAction_unk_1 = TRUE;
         partner_clear_player_tracking(watt);
     }
 
@@ -435,7 +437,7 @@ void world_watt_post_battle(Npc* watt) {
     }
 }
 
-API_CALLABLE(WattRidingUpdate) {
+API_CALLABLE(N(Riding)) {
     PartnerActionStatus* wattActionStatus = &gPartnerActionStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* watt = get_npc_unsafe(NPC_PARTNER);
@@ -543,8 +545,8 @@ void world_watt_sync_held_position(void) {
     }
 }
 
-EvtScript world_watt_while_riding = {
-    EVT_CALL(WattRidingUpdate)
+EvtScript EVS_WorldWatt_Riding = {
+    EVT_CALL(N(Riding))
     EVT_RETURN
     EVT_END
 };

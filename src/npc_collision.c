@@ -615,6 +615,8 @@ s32 npc_test_move_simple_without_slipping(s32 ignoreFlags, f32* x, f32* y, f32* 
     return hitID >= 0;
 }
 
+// traces lateral collision at position +10, +15, +20, and one unit below height
+// returns number of traces that hit
 s32 npc_test_move_complex_with_slipping(s32 ignoreFlags, f32* x, f32* y, f32* z, f32 length, f32 yaw, f32 height,
                                         f32 radius) {
     f32 startX;

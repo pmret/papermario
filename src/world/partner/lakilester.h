@@ -8,10 +8,10 @@ void world_lakilester_init(Npc*);
 void world_lakilester_pre_battle(Npc*);
 void world_lakilester_post_battle(Npc*);
 
-extern EvtScript world_lakilester_take_out;
-extern EvtScript world_lakilester_update;
-extern EvtScript EVS_LakilesterUseAbility;
-extern EvtScript world_lakilester_put_away;
-extern EvtScript world_lakilester_while_riding;
+extern EvtScript EVS_WorldLakilester_TakeOut;
+extern EvtScript EVS_WorldLakilester_Update;
+extern EvtScript EVS_WorldLakilester_UseAbility;
+extern EvtScript EVS_WorldLakilester_PutAway;
+extern EvtScript evs_worldlakilester_riding;
 
 #endif

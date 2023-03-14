@@ -146,8 +146,8 @@ s32 create_npc_impl(NpcBlueprint* blueprint, AnimID* animList, s32 isPeachNpc) {
     npc->isFacingAway = 0;
     npc->yawCamOffset = 0;
     npc->turnAroundYawAdjustment = 0;
-    npc->currentFloor = -1;
-    npc->currentWall = -1;
+    npc->currentFloor = NO_COLLIDER;
+    npc->currentWall = NO_COLLIDER;
     npc->palSwapType = 0;
     npc->palSwapPrevType = 0;
     npc->screenSpaceOffset2D[0] = 0.0f;
@@ -644,8 +644,8 @@ void update_npcs(void) {
                         npc->collisionChannel &= ~COLLISION_IGNORE_ENTITIES;
                     }
 
-                    npc->currentFloor = -1;
-                    npc->currentWall = -1;
+                    npc->currentFloor = NO_COLLIDER;
+                    npc->currentWall = NO_COLLIDER;
                     npc->flags &= ~(NPC_FLAG_COLLDING_FORWARD_WITH_WORLD | NPC_FLAG_COLLDING_WITH_WORLD);
 
                     npc_do_world_collision(npc);

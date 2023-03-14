@@ -18,7 +18,7 @@
 extern f32 D_800F7B48;
 extern s32 D_800F7B4C;
 extern s8 D_8015A57A;
-extern s32 GoombarioTattleInteractionID;
+extern s32 WorldTattleInteractionID;
 
 s32 player_raycast_down(f32*, f32*, f32*, f32*);
 s32 player_raycast_up_corner(f32* x, f32* y, f32* z, f32* length);
@@ -693,7 +693,7 @@ void check_input_use_partner(void) {
         && actionState <= ACTION_STATE_RUN
     ) {
         if (playerData->currentPartner == PARTNER_GOOMBARIO) {
-            GoombarioTattleInteractionID = playerStatus->interactingWithID;
+            WorldTattleInteractionID = playerStatus->interactingWithID;
         }
         partner_use_ability();
     }

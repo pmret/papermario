@@ -55,7 +55,7 @@ void N(ParatroopaAI_Dive)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
     }
 }
 
-void N(ParatroopaAI_Overshoot)(Evt *script, MobileAISettings *arg1, EnemyDetectVolume *arg2)
+void N(ParatroopaAI_Overshoot)(Evt* script, MobileAISettings *arg1, EnemyDetectVolume *arg2)
 {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);

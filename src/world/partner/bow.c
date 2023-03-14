@@ -3,43 +3,49 @@
 #include "npc.h"
 #include "sprite/npc/WorldBow.h"
 
-BSS s32 D_802BE0C0;
-BSS s32 D_802BE0C4; // This seems to have something to do with input being disabled
-BSS TweesterPhysics BowTweesterPhysics;
-BSS s32 D_802BE0E4;
-BSS s32 D_802BE0E8;
-BSS s32 D_802BE0EC;
+#define NAMESPACE world_bow
 
-void func_802BDDF0_324740(Npc* partner);
-s32 func_802BD540_323E90(void);
+BSS b32 N(IsHiding);
+BSS b32 N(LockingPlayerInput);
+BSS TweesterPhysics N(TweesterPhysicsData);
+BSS s32 N(OuttaSightPosX);
+BSS s32 N(OuttaSightPosY);
+BSS s32 N(OuttaSightPosZ);
 
-void world_bow_init(Npc* bow) {
+void N(end_outta_sight_cleanup)(Npc* partner);
+s32 N(check_for_treadmill_overlaps)(void);
+
+void N(init)(Npc* bow) {
     bow->collisionHeight = 26;
     bow->collisionRadius = 24;
     bow->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
-    D_802BE0C4 = FALSE;
-    D_802BE0C0 = FALSE;
+    N(LockingPlayerInput) = FALSE;
+    N(IsHiding) = FALSE;
 }
 
-ApiStatus BowTakeOut(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(TakeOut)) {
     Npc* bow = script->owner2.npc;
 
     if (isInitialCall) {
         partner_init_get_out(bow);
     }
 
-    return partner_get_out(bow) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
+    if (partner_get_out(bow)) {
+        return ApiStatus_DONE1;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
-EvtScript world_bow_take_out = {
-    EVT_CALL(BowTakeOut)
+EvtScript EVS_WorldBow_TakeOut = {
+    EVT_CALL(N(TakeOut))
     EVT_RETURN
     EVT_END
 };
 
-TweesterPhysics* BowTweesterPhysicsPtr = &BowTweesterPhysics;
+TweesterPhysics* N(TweesterPhysicsPtr) = &N(TweesterPhysicsData);
 
-ApiStatus BowUpdate(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(Update)) {
     PlayerData* playerData = &gPlayerData;
     Npc* bow = script->owner2.npc;
     f32 sinAngle, cosAngle, liftoffVelocity;
@@ -47,7 +53,7 @@ ApiStatus BowUpdate(Evt* script, s32 isInitialCall) {
 
     if (isInitialCall) {
         partner_flying_enable(bow, 1);
-        mem_clear(BowTweesterPhysicsPtr, sizeof(TweesterPhysics));
+        mem_clear(N(TweesterPhysicsPtr), sizeof(*N(TweesterPhysicsPtr)));
         TweesterTouchingPartner = NULL;
     }
 
@@ -57,93 +63,94 @@ ApiStatus BowUpdate(Evt* script, s32 isInitialCall) {
     if (entity == NULL) {
         partner_flying_update_player_tracking(bow);
         partner_flying_update_motion(bow);
-        return 0;
+        return ApiStatus_BLOCK;
     }
 
-    switch (BowTweesterPhysicsPtr->state){
+    switch (N(TweesterPhysicsPtr)->state){
         case TWEESTER_PARTNER_INIT:
-            BowTweesterPhysicsPtr->state++;
-            BowTweesterPhysicsPtr->prevFlags = bow->flags;
-            BowTweesterPhysicsPtr->radius = fabsf(dist2D(bow->pos.x, bow->pos.z, entity->position.x, entity->position.z));
-            BowTweesterPhysicsPtr->angle = atan2(entity->position.x, entity->position.z, bow->pos.x, bow->pos.z);
-            BowTweesterPhysicsPtr->angularVelocity = 6.0f;
-            BowTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
-            BowTweesterPhysicsPtr->countdown = 120;
+            N(TweesterPhysicsPtr)->state++;
+            N(TweesterPhysicsPtr)->prevFlags = bow->flags;
+            N(TweesterPhysicsPtr)->radius = fabsf(dist2D(bow->pos.x, bow->pos.z, entity->position.x, entity->position.z));
+            N(TweesterPhysicsPtr)->angle = atan2(entity->position.x, entity->position.z, bow->pos.x, bow->pos.z);
+            N(TweesterPhysicsPtr)->angularVelocity = 6.0f;
+            N(TweesterPhysicsPtr)->liftoffVelocityPhase = 50.0f;
+            N(TweesterPhysicsPtr)->countdown = 120;
             bow->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
             bow->flags &= ~NPC_FLAG_GRAVITY;
         case TWEESTER_PARTNER_ATTRACT:
-            sin_cos_rad(DEG_TO_RAD(BowTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
-            bow->pos.x = entity->position.x + (sinAngle * BowTweesterPhysicsPtr->radius);
-            bow->pos.z = entity->position.z - (cosAngle * BowTweesterPhysicsPtr->radius);
-            BowTweesterPhysicsPtr->angle = clamp_angle(BowTweesterPhysicsPtr->angle - BowTweesterPhysicsPtr->angularVelocity);
-            if (BowTweesterPhysicsPtr->radius > 20.0f) {
-                BowTweesterPhysicsPtr->radius -= 1.0f;
-            } else if (BowTweesterPhysicsPtr->radius < 19.0f) {
-                BowTweesterPhysicsPtr->radius++;
+            sin_cos_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->angle), &sinAngle, &cosAngle);
+            bow->pos.x = entity->position.x + (sinAngle * N(TweesterPhysicsPtr)->radius);
+            bow->pos.z = entity->position.z - (cosAngle * N(TweesterPhysicsPtr)->radius);
+            N(TweesterPhysicsPtr)->angle = clamp_angle(N(TweesterPhysicsPtr)->angle - N(TweesterPhysicsPtr)->angularVelocity);
+            if (N(TweesterPhysicsPtr)->radius > 20.0f) {
+                N(TweesterPhysicsPtr)->radius -= 1.0f;
+            } else if (N(TweesterPhysicsPtr)->radius < 19.0f) {
+                N(TweesterPhysicsPtr)->radius++;
             }
 
-            liftoffVelocity = sin_rad(DEG_TO_RAD(BowTweesterPhysicsPtr->liftoffVelocityPhase)) * 3.0f;
-            BowTweesterPhysicsPtr->liftoffVelocityPhase += 3.0f;
+            liftoffVelocity = sin_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->liftoffVelocityPhase)) * 3.0f;
+            N(TweesterPhysicsPtr)->liftoffVelocityPhase += 3.0f;
 
-            if (BowTweesterPhysicsPtr->liftoffVelocityPhase > 150.0f) {
-                BowTweesterPhysicsPtr->liftoffVelocityPhase = 150.0f;
+            if (N(TweesterPhysicsPtr)->liftoffVelocityPhase > 150.0f) {
+                N(TweesterPhysicsPtr)->liftoffVelocityPhase = 150.0f;
             }
 
             bow->pos.y += liftoffVelocity;
-            bow->renderYaw = clamp_angle(360.0f - BowTweesterPhysicsPtr->angle);
-            BowTweesterPhysicsPtr->angularVelocity += 0.8;
+            bow->renderYaw = clamp_angle(360.0f - N(TweesterPhysicsPtr)->angle);
+            N(TweesterPhysicsPtr)->angularVelocity += 0.8;
 
-            if (BowTweesterPhysicsPtr->angularVelocity > 40.0f) {
-                BowTweesterPhysicsPtr->angularVelocity = 40.0f;
+            if (N(TweesterPhysicsPtr)->angularVelocity > 40.0f) {
+                N(TweesterPhysicsPtr)->angularVelocity = 40.0f;
             }
-            if (--BowTweesterPhysicsPtr->countdown == 0) {
-                BowTweesterPhysicsPtr->state++;
+            if (--N(TweesterPhysicsPtr)->countdown == 0) {
+                N(TweesterPhysicsPtr)->state++;
             }
             break;
         case TWEESTER_PARTNER_HOLD:
-            bow->flags = BowTweesterPhysicsPtr->prevFlags;
-            BowTweesterPhysicsPtr->countdown = 30;
-            BowTweesterPhysicsPtr->state++;
+            bow->flags = N(TweesterPhysicsPtr)->prevFlags;
+            N(TweesterPhysicsPtr)->countdown = 30;
+            N(TweesterPhysicsPtr)->state++;
             break;
         case TWEESTER_PARTNER_RELEASE:
             partner_flying_update_player_tracking(bow);
             partner_flying_update_motion(bow);
 
-            if (--BowTweesterPhysicsPtr->countdown == 0) {
-                BowTweesterPhysicsPtr->state = TWEESTER_PARTNER_INIT;
+            if (--N(TweesterPhysicsPtr)->countdown == 0) {
+                N(TweesterPhysicsPtr)->state = TWEESTER_PARTNER_INIT;
                 TweesterTouchingPartner = NULL;
             }
             break;
     }
-    return 0;
+    return ApiStatus_BLOCK;
 }
 
-EvtScript world_bow_update = {
-    EVT_CALL(BowUpdate)
+EvtScript EVS_WorldBow_Update = {
+    EVT_CALL(N(Update))
     EVT_RETURN
     EVT_END
 };
 
-void func_802BD4FC_323E4C(Npc* bow) {
+void N(try_cancel_tweester)(Npc* bow) {
     if (TweesterTouchingPartner != NULL) {
         TweesterTouchingPartner = NULL;
-        bow->flags = BowTweesterPhysicsPtr->prevFlags;
-        BowTweesterPhysicsPtr->state = TWEESTER_PARTNER_INIT;
+        bow->flags = N(TweesterPhysicsPtr)->prevFlags;
+        N(TweesterPhysicsPtr)->state = TWEESTER_PARTNER_INIT;
         partner_clear_player_tracking(bow);
     }
 }
 
-s32 func_802BD540_323E90(void) {
+// check whether the player would collide with an obstacle while on a treadmill in AREA_OMO
+s32 N(check_for_treadmill_overlaps)(void) {
+    PlayerStatus* playerStatus = &gPlayerStatus;
     f32 x, y, z;
     f32 yaw;
-    PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (gGameStatusPtr->areaID != AREA_OMO) {
-        return -1;
+        return NO_COLLIDER;
     }
 
     if (playerStatus->pushVelocity.x == 0.0f && playerStatus->pushVelocity.z == 0.0f) {
-        return -1;
+        return NO_COLLIDER;
     }
 
     yaw = atan2(0.0f, 0.0f, playerStatus->pushVelocity.x, playerStatus->pushVelocity.z);
@@ -155,35 +162,42 @@ s32 func_802BD540_323E90(void) {
     return player_test_lateral_overlap(0, playerStatus, &x, &y, &z, playerStatus->colliderDiameter, yaw);
 }
 
-ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(UseAbility)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
     Npc* bow = script->owner2.npc;
-    f32 distance;
+    f32 stickInputMag;
+
+    #define USE_STATE functionTemp[0]
+    enum {
+        // first two states lock input for a few frames, during which the ability can be canceled
+        OUTTA_SIGHT_INIT        = 40,
+        OUTTA_SIGHT_DELAY       = 41,
+        OUTTA_SIGHT_BEGIN       = 20,
+        OUTTA_SIGHT_GATHER      = 21, // move to player
+        OUTTA_SIGHT_VANISH      = 1,  // hide
+        OUTTA_SIGHT_IDLE        = 2,  // remain hidden
+        OUTTA_SIGHT_REAPPEAR    = 3,
+    };
 
     if (isInitialCall) {
-        func_802BD4FC_323E4C(bow);
-        if (!(playerStatus->animFlags & PA_FLAG_CHANGING_MAP)) {
-            if (func_800EA52C(PARTNER_BOW)) {
-                if (playerStatus->animFlags & PA_FLAG_PARTNER_USAGE_FORCED) {
-                    playerStatus->animFlags &= ~PA_FLAG_PARTNER_USAGE_FORCED;
-                    script->functionTemp[2] = disable_player_input();
-                    D_802BE0C4 = TRUE;
-                    script->functionTemp[0] = 20;
-                } else {
-                    script->functionTemp[0] = 40;
-                }
-            } else {
-                return ApiStatus_DONE2;
-            }
-        } else {
+        N(try_cancel_tweester)(bow);
+        if (playerStatus->animFlags & PA_FLAG_CHANGING_MAP || !func_800EA52C(PARTNER_BOW)) {
             return ApiStatus_DONE2;
+        }
+        if (playerStatus->animFlags & PA_FLAG_PARTNER_USAGE_FORCED) {
+            playerStatus->animFlags &= ~PA_FLAG_PARTNER_USAGE_FORCED;
+            script->functionTemp[2] = disable_player_input();
+            N(LockingPlayerInput) = TRUE;
+            script->USE_STATE = OUTTA_SIGHT_BEGIN;
+        } else {
+            script->USE_STATE = OUTTA_SIGHT_INIT;
         }
     }
 
-    switch (script->functionTemp[0]) {
-        case 40:
+    switch (script->USE_STATE) {
+        case OUTTA_SIGHT_INIT:
             if (playerStatus->inputDisabledCount) {
                 return ApiStatus_DONE2;
             }
@@ -191,49 +205,49 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
             playerStatus->flags |= PS_FLAG_PAUSE_DISABLED;
             script->functionTemp[1] = 3;
             script->functionTemp[2] = disable_player_input();
-            D_802BE0C4 = TRUE;
-            script->functionTemp[0]++;
+            N(LockingPlayerInput) = TRUE;
+            script->USE_STATE++; // OUTTA_SIGHT_DELAY
             break;
-        case 41:
-            if ((!func_800EA52C(PARTNER_BOW) || is_starting_conversation()) &&
-                 script->functionTemp[2] < playerStatus->inputDisabledCount
-                 && D_802BE0C4) {
-
+        case OUTTA_SIGHT_DELAY:
+            if ((!func_800EA52C(PARTNER_BOW) || is_starting_conversation())
+                && script->functionTemp[2] < playerStatus->inputDisabledCount
+                && N(LockingPlayerInput)
+            ) {
                 enable_player_input();
-                D_802BE0C4 = FALSE;
+                N(LockingPlayerInput) = FALSE;
                 playerStatus->flags &= ~PS_FLAG_PAUSE_DISABLED;
                 return ApiStatus_DONE2;
             }
             script->functionTemp[1]--;
             if (script->functionTemp[1] == 0) {
                 if (script->functionTemp[2] < playerStatus->inputDisabledCount) {
-                    if (D_802BE0C4) {
+                    if (N(LockingPlayerInput)) {
                         enable_player_input();
-                        D_802BE0C4 = FALSE;
+                        N(LockingPlayerInput) = FALSE;
                     }
                     playerStatus->flags &= ~PS_FLAG_PAUSE_DISABLED;
                     return ApiStatus_DONE2;
                 }
-                script->functionTemp[0] = 20;
+                script->USE_STATE = OUTTA_SIGHT_BEGIN;
             }
             break;
     }
 
-    switch (script->functionTemp[0]) {
-        case 20:
+    switch (script->USE_STATE) {
+        case OUTTA_SIGHT_BEGIN:
             if (playerStatus->flags & PS_FLAG_HIT_FIRE) {
                 playerStatus->flags &= ~PS_FLAG_PAUSE_DISABLED;
-                if (D_802BE0C4) {
+                if (N(LockingPlayerInput)) {
                     enable_player_input();
-                    D_802BE0C4 = FALSE;
+                    N(LockingPlayerInput) = FALSE;
                 }
                 return ApiStatus_DONE2;
             }
             if (script->functionTemp[2] != 0) {
-                D_802BE0C4 = TRUE;
+                N(LockingPlayerInput) = TRUE;
             }
 
-            D_802BE0C0 = TRUE;
+            N(IsHiding) = TRUE;
             bow->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_GRAVITY);
             partnerActionStatus->partnerActionState = 1;
             partnerActionStatus->actingPartner = 9;
@@ -251,9 +265,10 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
             bow->yaw = atan2(bow->pos.x, bow->pos.z, playerStatus->position.x, playerStatus->position.z);
             set_action_state(ACTION_STATE_RIDE);
             suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
-            script->functionTemp[0]++;
+            script->USE_STATE++; // OUTTA_SIGHT_GATHER
             break;
-        case 21:
+
+        case OUTTA_SIGHT_GATHER:
             if (collisionStatus->currentFloor >= 0 && !(playerStatus->animFlags & PA_FLAG_CHANGING_MAP)) {
                 bow->moveToPos.x = playerStatus->position.x;
                 bow->moveToPos.y = playerStatus->position.y + (playerStatus->colliderHeight * 0.5f);
@@ -261,68 +276,74 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
                 bow->pos.x += ((bow->moveToPos.x - bow->pos.x) / bow->duration);
                 bow->pos.y += ((bow->moveToPos.y - bow->pos.y) / bow->duration);
                 bow->pos.z += ((bow->moveToPos.z - bow->pos.z) / bow->duration);
-                D_802BE0E4 = playerStatus->position.x - bow->pos.x;
-                D_802BE0E8 = playerStatus->position.y - bow->pos.y;
-                D_802BE0EC = playerStatus->position.z - bow->pos.z;
+                N(OuttaSightPosX) = playerStatus->position.x - bow->pos.x;
+                N(OuttaSightPosY) = playerStatus->position.y - bow->pos.y;
+                N(OuttaSightPosZ) = playerStatus->position.z - bow->pos.z;
                 bow->duration--;
                 if (bow->duration == 0) {
                     bow->yaw = playerStatus->targetYaw;
-                    func_8003D624(bow, 7, playerStatus->alpha1, 0, 0, 0, 0);
+                    func_8003D624(bow, FOLD_TYPE_7, playerStatus->alpha1, 0, 0, 0, 0);
                     suggest_player_anim_always_forward(ANIM_Mario1_Crouch);
                     sfx_play_sound_at_npc(SOUND_BOW_VANISH, SOUND_SPACE_MODE_0, NPC_PARTNER);
-                    script->functionTemp[0] = 1;
+                    script->USE_STATE = OUTTA_SIGHT_VANISH;
                 }
                 break;
             }
 
-            func_802BDDF0_324740(bow);
+            N(end_outta_sight_cleanup)(bow);
             return ApiStatus_DONE2;
-        case 1:
+
+        case OUTTA_SIGHT_VANISH:
             if (collisionStatus->currentFloor >= 0) {
                 playerStatus->alpha1 -= 8;
                 if (playerStatus->alpha1 <= 128) {
                     playerStatus->alpha1 = 128;
                     bow->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
-                    script->functionTemp[0]++;
+                    script->USE_STATE++; // OUTTA_SIGHT_IDLE
                     playerStatus->flags &= ~PS_FLAG_PAUSE_DISABLED;
                     bow->flags |= NPC_FLAG_IGNORE_WORLD_COLLISION;
                 }
 
                 get_shadow_by_index(bow->shadowIndex)->alpha = playerStatus->alpha1 >> 1;
-                func_8003D624(bow, 7, playerStatus->alpha1, 0, 0, 0, 0);
-                bow->pos.x = playerStatus->position.x - D_802BE0E4;
-                bow->pos.y = playerStatus->position.y - D_802BE0E8;
-                bow->pos.z = playerStatus->position.z - D_802BE0EC;
+                func_8003D624(bow, FOLD_TYPE_7, playerStatus->alpha1, 0, 0, 0, 0);
+                bow->pos.x = playerStatus->position.x - N(OuttaSightPosX);
+                bow->pos.y = playerStatus->position.y - N(OuttaSightPosY);
+                bow->pos.z = playerStatus->position.z - N(OuttaSightPosZ);
                 break;
             }
 
-            func_802BDDF0_324740(bow);
+            N(end_outta_sight_cleanup)(bow);
             return ApiStatus_DONE2;
-        case 2:
-            if (collisionStatus->currentFloor < 0) {
-                func_802BDDF0_324740(bow);
+
+        case OUTTA_SIGHT_IDLE:
+            if (collisionStatus->currentFloor <= NO_COLLIDER) {
+                N(end_outta_sight_cleanup)(bow);
                 return ApiStatus_DONE2;
             }
 
-            bow->pos.x = playerStatus->position.x - D_802BE0E4;
-            bow->pos.y = playerStatus->position.y - D_802BE0E8;
-            bow->pos.z = playerStatus->position.z - D_802BE0EC;
+            bow->pos.x = playerStatus->position.x - N(OuttaSightPosX);
+            bow->pos.y = playerStatus->position.y - N(OuttaSightPosY);
+            bow->pos.z = playerStatus->position.z - N(OuttaSightPosZ);
 
-            distance = dist2D(0.0f, 0.0f, partnerActionStatus->stickX, partnerActionStatus->stickY);
-            if ((collisionStatus->currentFloor < 0) || distance > 10.0f ||
-                 partnerActionStatus->pressedButtons & (BUTTON_B | BUTTON_C_DOWN) ||
-                 playerStatus->flags & PS_FLAG_HIT_FIRE) {
-                if (func_802BD540_323E90() < 0) {
-                    script->functionTemp[0]++;
+            stickInputMag = dist2D(0.0f, 0.0f, partnerActionStatus->stickX, partnerActionStatus->stickY);
+            if ((collisionStatus->currentFloor <= NO_COLLIDER)
+                || stickInputMag > 10.0f
+                || partnerActionStatus->pressedButtons & (BUTTON_B | BUTTON_C_DOWN)
+                || playerStatus->flags & PS_FLAG_HIT_FIRE
+            ) {
+                // prevent exiting from the ground while underneath a wall
+                if (N(check_for_treadmill_overlaps)() <= NO_COLLIDER) {
+                    script->USE_STATE++; // OUTTA_SIGHT_REAPPEAR
                     script->functionTemp[1] = 3;
                     script->functionTemp[2] = playerStatus->inputDisabledCount;
                 }
             }
             break;
-        case 3:
+
+        case OUTTA_SIGHT_REAPPEAR:
             if (script->functionTemp[1] == 0) {
                 if (script->functionTemp[2] < playerStatus->inputDisabledCount) {
-                    script->functionTemp[0] = 2;
+                    script->USE_STATE = OUTTA_SIGHT_IDLE;
                     break;
                 }
             } else {
@@ -331,35 +352,35 @@ ApiStatus BowUseAbility(Evt* script, s32 isInitialCall) {
             }
 
             sfx_play_sound_at_npc(SOUND_BOW_APPEAR, SOUND_SPACE_MODE_0, NPC_PARTNER);
-            func_802BDDF0_324740(bow);
+            N(end_outta_sight_cleanup)(bow);
             return ApiStatus_DONE1;
     }
     return ApiStatus_BLOCK;
 }
 
-EvtScript world_bow_use_ability = {
-    EVT_CALL(BowUseAbility)
+EvtScript EVS_WorldBow_UseAbility = {
+    EVT_CALL(N(UseAbility))
     EVT_RETURN
     EVT_END
 };
 
-void func_802BDDF0_324740(Npc* bow) {
+void N(end_outta_sight_cleanup)(Npc* bow) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     s32 actionState;
 
     playerStatus->alpha1 = 255;
-    func_8003D624(bow, 0, 0, 0, 0, 0, 0);
+    func_8003D624(bow, FOLD_TYPE_NONE, 0, 0, 0, 0, 0);
     bow->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
     get_shadow_by_index(bow->shadowIndex)->alpha = playerStatus->alpha1 >> 1;
 
-    if (D_802BE0C4) {
+    if (N(LockingPlayerInput)) {
         enable_player_input();
     }
 
     playerStatus->flags &= ~(PS_FLAG_HAZARD_INVINCIBILITY | PS_FLAG_JUMPING);
     bow->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_INVISIBLE);
-    D_802BE0C4 = FALSE;
+    N(LockingPlayerInput) = FALSE;
     actionState = ACTION_STATE_IDLE;
 
     if (playerStatus->flags & PS_FLAG_HIT_FIRE) {
@@ -371,39 +392,43 @@ void func_802BDDF0_324740(Npc* bow) {
     partnerActionStatus->actingPartner = 0;
     playerStatus->flags &= ~PS_FLAG_PAUSE_DISABLED;
     partner_clear_player_tracking(bow);
-    D_802BE0C0 = FALSE;
+    N(IsHiding) = FALSE;
 }
 
-ApiStatus func_802BDF08_324858(Evt* script, s32 isInitialCall) {
+API_CALLABLE(N(PutAway)) {
     Npc* bow = script->owner2.npc;
 
     if (isInitialCall) {
         partner_init_put_away(bow);
-        if (D_802BE0C0) {
+        if (N(IsHiding)) {
             sfx_play_sound_at_npc(SOUND_BOW_APPEAR, SOUND_SPACE_MODE_0, NPC_PARTNER);
         }
-        func_802BDDF0_324740(bow);
+        N(end_outta_sight_cleanup)(bow);
     }
 
-    return partner_put_away(bow) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
+    if (partner_put_away(bow)) {
+        return ApiStatus_DONE1;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
-EvtScript world_bow_put_away = {
-    EVT_CALL(func_802BDF08_324858)
+EvtScript EVS_WorldBow_PutAway = {
+    EVT_CALL(N(PutAway))
     EVT_RETURN
     EVT_END
 };
 
-void world_bow_pre_battle(Npc* bow) {
+void N(pre_battle)(Npc* bow) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
 
-    if (D_802BE0C0) {
+    if (N(IsHiding)) {
         enable_player_input();
         set_action_state(ACTION_STATE_IDLE);
         partner_clear_player_tracking(bow);
-        partnerActionStatus->partnerActionState = 0;
-        partnerActionStatus->actingPartner = 0;
-        D_802BE0C0 = FALSE;
+        partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
+        partnerActionStatus->actingPartner = PARTNER_NONE;
+        N(IsHiding) = FALSE;
         bow->flags &= ~NPC_FLAG_INVISIBLE;
     }
 }

@@ -2820,7 +2820,7 @@ ApiStatus func_8027CC10(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus EnemyDamageTarget(Evt *script, s32 isInitialCall) {
+ApiStatus EnemyDamageTarget(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 actorID = evt_get_variable(script, *args++);
@@ -2929,7 +2929,7 @@ ApiStatus EnemyFollowupAfflictTarget(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus EnemyTestTarget(Evt *script, s32 isInitialCall) {
+ApiStatus EnemyTestTarget(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     BattleStatus* battleStatus = &gBattleStatus;
     s32 actorID = evt_get_variable(script, *args++);

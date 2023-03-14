@@ -3,6 +3,8 @@
 #include "effects.h"
 #include "sprite/npc/WorldLakilester.h"
 
+#define NAMESPACE world_lakilester
+
 BSS s32 D_802BFF00;
 BSS s32 D_802BFF04;
 BSS s32 D_802BFF08;
@@ -61,7 +63,7 @@ void world_lakilester_init(Npc* npc) {
     npc->moveToPos.z = npc->pos.z;
 }
 
-ApiStatus func_802BD29C_320DEC(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802BD29C_320DEC) {
     Npc* lakilester = script->owner2.npc;
 
     if (isInitialCall) {
@@ -71,7 +73,7 @@ ApiStatus func_802BD29C_320DEC(Evt* script, s32 isInitialCall) {
     return partner_get_out(lakilester) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
-EvtScript world_lakilester_take_out = {
+EvtScript EVS_WorldLakilester_TakeOut = {
     EVT_CALL(func_802BD29C_320DEC)
     EVT_RETURN
     EVT_END
@@ -79,7 +81,7 @@ EvtScript world_lakilester_take_out = {
 
 TweesterPhysics* LakilesterTweesterPhysicsPtr = &LakilesterTweesterPhysics;
 
-ApiStatus func_802BD2D4_320E24(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802BD2D4_320E24) {
     PlayerData* playerData = &gPlayerData;
     Npc* lakilester = script->owner2.npc;
     f32 sinAngle, cosAngle, liftoffVelocity;
@@ -161,7 +163,7 @@ ApiStatus func_802BD2D4_320E24(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-EvtScript world_lakilester_update = {
+EvtScript EVS_WorldLakilester_Update = {
     EVT_CALL(func_802BD2D4_320E24)
     EVT_RETURN
     EVT_END
@@ -553,7 +555,7 @@ API_CALLABLE(LakilesterUseAbility) {
                 D_802BFF14 = 40;
             }
 
-            if (partnerActionStatus->partnerAction_unk_1 == 0) {
+            if (!partnerActionStatus->partnerAction_unk_1) {
                 if (gGameStatusPtr->keepUsingPartnerOnMapChange == FALSE) {
                     if (playerStatus->actionState == ACTION_STATE_RIDE
                      || playerStatus->actionState == ACTION_STATE_IDLE
@@ -567,7 +569,7 @@ API_CALLABLE(LakilesterUseAbility) {
                     }
                 }
             } else {
-                partnerActionStatus->partnerAction_unk_1 = 0;
+                partnerActionStatus->partnerAction_unk_1 = FALSE;
                 playerStatus->flags &= ~PS_FLAG_PAUSE_DISABLED;
                 npc->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8);
                 npc->flags |= NPC_FLAG_IGNORE_PLAYER_COLLISION;
@@ -825,7 +827,7 @@ API_CALLABLE(LakilesterUseAbility) {
             D_802BFF14++;
             /* fallthrough */
         case 5:
-            gCameras[0].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
+            gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
             playerStatus->position.y += npc->jumpVelocity;
             sp2C = playerStatus->colliderHeight * 0.5f;
 
@@ -851,9 +853,9 @@ API_CALLABLE(LakilesterUseAbility) {
             break;
         }
 
-        gCameras[0].targetPos.x = playerStatus->position.x;
-        gCameras[0].targetPos.y = npc->moveToPos.y;
-        gCameras[0].targetPos.z = playerStatus->position.z;
+        gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
+        gCameras[CAM_DEFAULT].targetPos.y = npc->moveToPos.y;
+        gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
 
         if (D_802BFF14 == 10) {
             D_802BFF0C = 0;
@@ -907,13 +909,13 @@ API_CALLABLE(LakilesterUseAbility) {
 }
 
 
-EvtScript EVS_LakilesterUseAbility = {
+EvtScript EVS_WorldLakilester_UseAbility = {
     EVT_CALL(LakilesterUseAbility)
     EVT_RETURN
     EVT_END
 };
 
-ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802BF4F0_323040) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     Camera* cam = &gCameras[CAM_DEFAULT];
@@ -1045,7 +1047,7 @@ ApiStatus func_802BF4F0_323040(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-EvtScript world_lakilester_put_away = {
+EvtScript EVS_WorldLakilester_PutAway = {
     EVT_CALL(func_802BF4F0_323040)
     EVT_RETURN
     EVT_END
@@ -1056,7 +1058,7 @@ void world_lakilester_pre_battle(Npc* npc) {
 
     if (D_802BFF0C) {
         partnerActionStatus->npc = *npc;
-        partnerActionStatus->partnerAction_unk_1 = 1;
+        partnerActionStatus->partnerAction_unk_1 = TRUE;
         enable_player_static_collisions();
         enable_player_input();
         set_action_state(ACTION_STATE_IDLE);
@@ -1070,7 +1072,7 @@ void world_lakilester_pre_battle(Npc* npc) {
 void world_lakilester_post_battle(Npc* npc) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
 
-    if (partnerActionStatus->partnerAction_unk_1 != 0) {
+    if (partnerActionStatus->partnerAction_unk_1) {
         if (D_802BFF0C) {
             *npc = partnerActionStatus->npc;
             gGameStatusPtr->keepUsingPartnerOnMapChange = 1;
@@ -1090,22 +1092,19 @@ void func_802BFB44_323694(f32 arg0) {
     add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, arg0, currentCamera->currentYaw);
 }
 
-s32 func_802BFBA0_3236F0(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802BFBA0_3236F0) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* npc = get_npc_unsafe(NPC_PARTNER);
     f32 temp_f0, temp_f2, temp_f4;
     f32* temp_s0_2;
     s32 temp_v0_2;
-    s32 tempVar;
 
     if (isInitialCall) {
         script->functionTemp[0] = 0;
     }
 
-    tempVar = script->functionTemp[0];
-
-    switch (tempVar) {
+    switch (script->functionTemp[0]) {
         case 0:
             if (script->varTable[12] == 0) {
                 temp_f0 = playerStatus->position.x;
@@ -1163,7 +1162,7 @@ s32 func_802BFBA0_3236F0(Evt* script, s32 isInitialCall) {
 
             if (script->functionTemp[1] == 0) {
                 if (script->varTable[12] != 0) {
-                    partnerActionStatus->partnerAction_unk_1 = tempVar;
+                    partnerActionStatus->partnerAction_unk_1 = TRUE;
                     set_action_state(ACTION_STATE_RIDE);
                     partnerActionStatus->actingPartner = PARTNER_NONE;
                     partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
@@ -1178,7 +1177,7 @@ s32 func_802BFBA0_3236F0(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-EvtScript world_lakilester_while_riding = {
+EvtScript evs_worldlakilester_riding = {
     EVT_CALL(func_802BFBA0_3236F0)
     EVT_RETURN
     EVT_END

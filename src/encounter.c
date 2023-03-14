@@ -1400,7 +1400,7 @@ void update_encounters_pre_battle(void) {
                 load_battle(encounter->battle);
                 currentEncounter->unk_07 = 1;
                 currentEncounter->unk_08 = 0;
-                currentEncounter->merleeCoinBonus = 0;
+                currentEncounter->hasMerleeCoinBonus = FALSE;
                 currentEncounter->damageTaken = 0;
                 currentEncounter->coinsEarned = 0;
                 currentEncounter->fadeOutAccel = 0;
@@ -1433,7 +1433,7 @@ void update_encounters_pre_battle(void) {
             currentEncounter->unk_08 = 1;
             currentEncounter->unk_07 = 1;
             currentEncounter->battleOutcome = OUTCOME_PLAYER_WON;
-            currentEncounter->merleeCoinBonus = 0;
+            currentEncounter->hasMerleeCoinBonus = FALSE;
             currentEncounter->damageTaken = 0;
             gEncounterState = ENCOUNTER_STATE_POST_BATTLE;
             currentEncounter->coinsEarned = 0;
@@ -1638,7 +1638,7 @@ void update_encounters_post_battle(void) {
             }
             break;
         case ENCOUNTER_SUBSTATE_POST_BATTLE_WON_CHECK_MERLEE_BONUS:
-            if (currentEncounter->merleeCoinBonus != 0) {
+            if (currentEncounter->hasMerleeCoinBonus) {
                 if (get_coin_drop_amount(currentEncounter->currentEnemy) != 0) {
                     D_800A0BB0 = start_script(&D_80077C44, EVT_PRIORITY_A, 0);
                     D_800A0BB0->groupFlags = 0;
@@ -1651,7 +1651,7 @@ void update_encounters_post_battle(void) {
             gEncounterSubState = ENCOUNTER_SUBSTATE_POST_BATTLE_PLAY_NPC_DEFEAT;
             break;
         case ENCOUNTER_SUBSTATE_POST_BATTLE_PLAY_NPC_DEFEAT:
-            if ((currentEncounter->merleeCoinBonus != 0) && (get_coin_drop_amount(currentEncounter->currentEnemy) != 0)) {
+            if (currentEncounter->hasMerleeCoinBonus && (get_coin_drop_amount(currentEncounter->currentEnemy) != 0)) {
                 currentEncounter->fadeOutAccel += 4;
                 currentEncounter->fadeOutAmount -= currentEncounter->fadeOutAccel;
                 if (currentEncounter->fadeOutAmount < 0) {
