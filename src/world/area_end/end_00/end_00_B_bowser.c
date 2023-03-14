@@ -17,12 +17,6 @@ EvtScript N(EVS_JrTroopa_SpinningDodge) = {
     EVT_END
 };
 
-#if VERSION_PAL
-#define KAMMY_JRTROOPA_SPEED 1.045
-#else
-#define KAMMY_JRTROOPA_SPEED 0.87
-#endif
-
 EvtScript N(EVS_ParadePhase_Bowser) = {
     EVT_WAIT(10 * DT)
     EVT_CALL(SetNpcJumpscale, NPC_JrTroopa, EVT_FLOAT(0.5))
@@ -199,9 +193,9 @@ EvtScript N(EVS_ParadePhase_Bowser) = {
     EVT_SETF(LVar1, 2470)
     EVT_CHILD_THREAD
         EVT_LOOP(0)
-            EVT_ADDF(LVar0, EVT_FLOAT(KAMMY_JRTROOPA_SPEED))
+            EVT_ADDF(LVar0, EVT_FLOAT(0.8702 / DT))
             EVT_CALL(SetNpcPos, NPC_Kammy, LVar0, 0, 0)
-            EVT_ADDF(LVar1, EVT_FLOAT(KAMMY_JRTROOPA_SPEED))
+            EVT_ADDF(LVar1, EVT_FLOAT(0.8702 / DT))
             EVT_CALL(SetNpcPos, NPC_JrTroopa, LVar1, 0, 0)
             EVT_WAIT(1)
         EVT_END_LOOP
