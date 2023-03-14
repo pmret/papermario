@@ -1092,7 +1092,7 @@ void func_802BFB44_323694(f32 arg0) {
     add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, arg0, currentCamera->currentYaw);
 }
 
-API_CALLABLE(func_802BFBA0_3236F0) {
+API_CALLABLE(N(EnterMap)) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* npc = get_npc_unsafe(NPC_PARTNER);
@@ -1106,7 +1106,7 @@ API_CALLABLE(func_802BFBA0_3236F0) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            if (script->varTable[12] == 0) {
+            if (!script->varTable[12]) {
                 temp_f0 = playerStatus->position.x;
                 npc->pos.x = temp_f0;
                 npc->moveToPos.x = temp_f0;
@@ -1130,7 +1130,7 @@ API_CALLABLE(func_802BFBA0_3236F0) {
             temp_f2 = atan2(npc->pos.x, npc->pos.z, script->varTable[1], script->varTable[3]);
             npc->yaw = temp_f2;
 
-            if (script->varTable[12] != 0) {
+            if (script->varTable[12]) {
                 if (temp_f2 >= 0.0f && temp_f2 <= 180.0f) {
                     npc->yawCamOffset = temp_f2;
                     npc->isFacingAway = TRUE;
@@ -1161,7 +1161,7 @@ API_CALLABLE(func_802BFBA0_3236F0) {
             script->functionTemp[1] -= 1;
 
             if (script->functionTemp[1] == 0) {
-                if (script->varTable[12] != 0) {
+                if (script->varTable[12]) {
                     partnerActionStatus->partnerAction_unk_1 = TRUE;
                     set_action_state(ACTION_STATE_RIDE);
                     partnerActionStatus->actingPartner = PARTNER_NONE;
@@ -1178,7 +1178,7 @@ API_CALLABLE(func_802BFBA0_3236F0) {
 }
 
 EvtScript EVS_WorldLakilester_EnterMap = {
-    EVT_CALL(func_802BFBA0_3236F0)
+    EVT_CALL(N(EnterMap))
     EVT_RETURN
     EVT_END
 };

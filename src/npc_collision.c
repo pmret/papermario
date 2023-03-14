@@ -70,7 +70,7 @@ s32 npc_raycast_down(s32 ignoreFlags, f32* startX, f32* startY, f32* startZ, f32
     return colliderID;
 }
 
-s32 npc_raycast_down_around(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32* hitDepth, f32 yaw, f32 radius) {
+b32 npc_raycast_down_around(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32* hitDepth, f32 yaw, f32 radius) {
     f32 startX;
     f32 startY;
     f32 startZ;

@@ -19,16 +19,16 @@ BSS f32 bss_802BFF00;
 BSS f32 bss_802BFF04;
 BSS f32 bss_802BFF08;
 BSS s32 bss_802BFF0C;
-BSS TweesterPhysics SushieTweesterPhysics;
+BSS TweesterPhysics N(TweesterPhysicsData);
 
 f32 D_802BFDB0_320B20 = 0.0f;
 f32 D_802BFDB4_320B24 = 0.0f;
 f32 D_802BFDB8_320B28 = 0.0f;
 f32 D_802BFDBC_320B2C = 0.0f;
 
-void func_802BF920_320690(Npc* sushie);
+void N(try_cancel_tweester)(Npc* sushie);
 
-void func_802BD100_31DE70(void) {
+void N(func_802BD100_31DE70)(void) {
     Npc* partnerNPC = get_npc_unsafe(NPC_PARTNER);
     PlayerStatus* playerStatus = &gPlayerStatus;
     Camera* camera = &gCameras[CAM_DEFAULT];
@@ -49,49 +49,49 @@ void func_802BD100_31DE70(void) {
         camera->currentYaw + playerStatus->spriteFacingAngle - 90.0f + phi_v1)) * -4.0f;
 }
 
-void func_802BD20C_31DF7C(f32* arg0, f32* arg1) {
-    f32 temp_f22;
-    f32 phi_f20;
+void N(func_802BD20C_31DF7C)(f32* arg0, f32* arg1) {
+    f32 moveAngle;
+    f32 moveSpeed;
     f32 stickY = gPartnerActionStatus.stickY;
     f32 stickX = gPartnerActionStatus.stickX;
 
     D_802BFDB0_320B20 = stickX;
     D_802BFDB4_320B24 = stickY;
-    temp_f22 = clamp_angle(atan2(0.0f, 0.0f, stickX, -stickY) + gCameras[CAM_DEFAULT].currentYaw);
-    phi_f20 = 0.0f;
+    moveAngle = clamp_angle(atan2(0.0f, 0.0f, stickX, -stickY) + gCameras[CAM_DEFAULT].currentYaw);
+    moveSpeed = 0.0f;
 
     if (dist2D(0.0f, 0.0f, D_802BFDB0_320B20, -D_802BFDB4_320B24) >= 1.0) {
         if (SQ(D_802BFDB0_320B20) + SQ(D_802BFDB4_320B24) > 3025.0f) {
             if (bss_802BFEE4) {
-                phi_f20 = 2.0f;
+                moveSpeed = 2.0f;
             } else {
-                phi_f20 = 4.0f;
+                moveSpeed = 4.0f;
             }
         } else {
-            phi_f20 = 2.0f;
+            moveSpeed = 2.0f;
         }
     }
 
-    *arg0 = temp_f22;
-    *arg1 = phi_f20;
+    *arg0 = moveAngle;
+    *arg1 = moveSpeed;
 }
 
-void func_802BD368_31E0D8(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5) {
+void N(func_802BD368_31E0D8)(s32 ignoreFlags, f32 posX, f32 posY, f32 posZ, f32 yaw, f32 radius) {
     CollisionStatus* collisionStatus = &gCollisionStatus;
-    f32 sp20;
+    f32 depth;
 
-    arg2 += 100.0f;
-    sp20 = 200.0f;
+    posY += 100.0f;
+    depth = 200.0f;
 
-    if (npc_raycast_down_around(arg0, &arg1, &arg2, &arg3, &sp20, arg4, arg5) == 0) {
+    if (!npc_raycast_down_around(ignoreFlags, &posX, &posY, &posZ, &depth, yaw, radius)) {
         collisionStatus->currentFloor = NO_COLLIDER;
     } else {
         collisionStatus->currentFloor = NpcHitQueryColliderID;
-        OriginalPlayerY = arg2;
+        OriginalPlayerY = posY;
     }
 }
 
-void func_802BD414_31E184(Npc* npc) {
+void N(func_802BD414_31E184)(Npc* npc) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
@@ -102,7 +102,7 @@ void func_802BD414_31E184(Npc* npc) {
     f32 x, y, z;
     f32 sp3C;
 
-    func_802BD20C_31DF7C(&sp20, &sp24);
+    N(func_802BD20C_31DF7C)(&sp20, &sp24);
     if (bss_802BFEE4 != 0) {
         var_f20 = 80.0f;
     } else {
@@ -218,7 +218,7 @@ void func_802BD414_31E184(Npc* npc) {
         }
     }
     if (bss_802BFEE4 == 0) {
-        func_802BD368_31E0D8(npc->collisionChannel, npc->pos.x, npc->pos.y, npc->pos.z, npc->yaw,
+        N(func_802BD368_31E0D8)(npc->collisionChannel, npc->pos.x, npc->pos.y, npc->pos.z, npc->yaw,
                              npc->collisionRadius * 0.5f);
         if (bss_802BFEE4 == 0) {
             npc->moveSpeed = 3.0f;
@@ -279,7 +279,7 @@ void func_802BD414_31E184(Npc* npc) {
     sp3C = (npc->collisionHeight * 0.5f) + playerStatus->colliderHeight;
     if (npc_raycast_up_corners(npc->collisionChannel, &x, &y, &z, &sp3C, npc->yaw, npc->collisionRadius * 0.3f) >= 0) {
         npc->moveToPos.y += (((npc->moveToPos.y - y) + sp3C) - ((npc->collisionHeight * 0.5f) + playerStatus->colliderHeight)) * 0.2f;
-        if (bss_802BFEE8 == ((bss_802BFEE8 / 9) * 9)) {
+        if (bss_802BFEE8 % 9 == 0) {
             fx_rising_bubble(0, npc->pos.x, npc->moveToPos.y + (npc->collisionHeight * 0.5f), npc->pos.z,
                              (OriginalPlayerY - npc->moveToPos.y) - (npc->collisionHeight * 0.5f));
         }
@@ -289,7 +289,7 @@ void func_802BD414_31E184(Npc* npc) {
             bss_802BFF08 = 1.8f;
         }
         npc->moveToPos.y += bss_802BFF08;
-        if (bss_802BFEE8 == ((bss_802BFEE8 / 9) * 9)) {
+        if (bss_802BFEE8 % 9 == 0) {
             fx_rising_bubble(0, npc->pos.x, npc->moveToPos.y + npc->collisionHeight * 0.5f, npc->pos.z,
                              (OriginalPlayerY - npc->moveToPos.y) - npc->collisionHeight * 0.5f);
         }
@@ -307,7 +307,7 @@ void func_802BD414_31E184(Npc* npc) {
     }
 }
 
-s32 func_802BE280_31EFF0(s32 arg0, f32* x, f32* y, f32* z, f32 length, f32 radius, f32* yaw) {
+s32 N(func_802BE280_31EFF0)(s32 arg0, f32* x, f32* y, f32* z, f32 length, f32 radius, f32* yaw) {
     f32 sinAngle, cosAngle, hitX, hitY, hitZ, totalLength, hitNx, hitNy, hitNz;
     s32 hitResult;
 
@@ -323,7 +323,7 @@ s32 func_802BE280_31EFF0(s32 arg0, f32* x, f32* y, f32* z, f32 length, f32 radiu
     return hitResult;
 }
 
-API_CALLABLE(func_802BE3A4_31F114) {
+API_CALLABLE(N(UseAbility)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
     CollisionStatus* collisionStatus = &gCollisionStatus;
@@ -343,7 +343,7 @@ API_CALLABLE(func_802BE3A4_31F114) {
     s32 t;
 
     if (isInitialCall) {
-        func_802BF920_320690(npc);
+        N(try_cancel_tweester)(npc);
         bss_802BFEFC = 0.0f;
         bss_802BFEF8 = 0.0f;
         bss_802BFF00 = 0.0f;
@@ -396,7 +396,7 @@ API_CALLABLE(func_802BE3A4_31F114) {
                 x = playerStatus->position.x;
                 y = playerStatus->position.y;
                 z = playerStatus->position.z;
-                collider = func_802BE280_31EFF0(0, &x, &y, &z, playerStatus->colliderDiameter * 0.5f,
+                collider = N(func_802BE280_31EFF0)(0, &x, &y, &z, playerStatus->colliderDiameter * 0.5f,
                                                 2.0f * playerStatus->colliderDiameter, &angle);
                 colliderFlags = -1;
                 if (collider >= 0) {
@@ -502,7 +502,7 @@ API_CALLABLE(func_802BE3A4_31F114) {
             break;
         case 1:
             playerStatus->animFlags |= PA_FLAG_RIDING_PARTNER;
-            func_802BD414_31E184(npc);
+            N(func_802BD414_31E184)(npc);
             if (bss_802BFEE4 == 0) {
                 script->functionTemp[2]++;
                 if (script->functionTemp[2] > 20) {
@@ -510,7 +510,7 @@ API_CALLABLE(func_802BE3A4_31F114) {
                 }
                 npc->pos.y = npc->moveToPos.y + (abs(script->functionTemp[2]) * 0.125f);
                 if (script->functionTemp[2] == 5) {
-                    func_802BD20C_31DF7C(&angle, &sp34);
+                    N(func_802BD20C_31DF7C)(&angle, &sp34);
                     if (bss_802BFEE4 == 0) {
                         if (sp34 != 0.0f) {
                             sfx_play_sound_at_npc(SOUND_2015, SOUND_SPACE_MODE_0, NPC_PARTNER);
@@ -526,7 +526,7 @@ API_CALLABLE(func_802BE3A4_31F114) {
                 npc->pos.y = npc->moveToPos.y;
             }
             if (!(playerStatus->animFlags & PA_FLAG_RIDING_PARTNER)) {
-                func_802BD100_31DE70();
+                N(func_802BD100_31DE70)();
             }
 
             if (bss_802BFEE4 == 1) {
@@ -681,12 +681,12 @@ API_CALLABLE(func_802BE3A4_31F114) {
 }
 
 EvtScript EVS_WorldSushie_UseAbility = {
-    EVT_CALL(func_802BE3A4_31F114)
+    EVT_CALL(N(UseAbility))
     EVT_RETURN
     EVT_END
 };
 
-void world_sushie_init(Npc* sushie) {
+void N(init)(Npc* sushie) {
     sushie->collisionHeight = 24;
     sushie->collisionRadius = 36;
     sushie->collisionChannel = COLLISION_CHANNEL_10000;
@@ -697,32 +697,36 @@ void world_sushie_init(Npc* sushie) {
     bss_802BFEF4 = 0;
 }
 
-API_CALLABLE(SushieTakeOut) {
+API_CALLABLE(N(TakeOut)) {
     Npc* sushie = script->owner2.npc;
 
     if (isInitialCall) {
         partner_init_get_out(sushie);
     }
 
-    return partner_get_out(sushie) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
+    if (partner_get_out(sushie)) {
+        return ApiStatus_DONE1;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
 EvtScript EVS_WorldSushie_TakeOut = {
-    EVT_CALL(SushieTakeOut)
+    EVT_CALL(N(TakeOut))
     EVT_RETURN
     EVT_END
 };
 
-TweesterPhysics* SushieTweesterPhysicsPtr = &SushieTweesterPhysics;
+TweesterPhysics* N(TweesterPhysicsPtr) = &N(TweesterPhysicsData);
 
-API_CALLABLE(SushieUpdate) {
+API_CALLABLE(N(Update)) {
     Npc* sushie = script->owner2.npc;
     f32 sinAngle, cosAngle, liftoffVelocity;
     Entity* entity;
 
     if (isInitialCall) {
         partner_walking_enable(sushie, 1);
-        mem_clear(SushieTweesterPhysicsPtr, sizeof(TweesterPhysics));
+        mem_clear(N(TweesterPhysicsPtr), sizeof(TweesterPhysics));
         TweesterTouchingPartner = NULL;
     }
 
@@ -734,60 +738,60 @@ API_CALLABLE(SushieUpdate) {
         return ApiStatus_BLOCK;
     }
 
-    switch (SushieTweesterPhysicsPtr->state) {
+    switch (N(TweesterPhysicsPtr)->state) {
         case TWEESTER_PARTNER_INIT:
-            SushieTweesterPhysicsPtr->state++;
-            SushieTweesterPhysicsPtr->prevFlags = sushie->flags;
-            SushieTweesterPhysicsPtr->radius = fabsf(dist2D(sushie->pos.x, sushie->pos.z,
+            N(TweesterPhysicsPtr)->state++;
+            N(TweesterPhysicsPtr)->prevFlags = sushie->flags;
+            N(TweesterPhysicsPtr)->radius = fabsf(dist2D(sushie->pos.x, sushie->pos.z,
                                                      entity->position.x, entity->position.z));
-            SushieTweesterPhysicsPtr->angle = atan2(entity->position.x, entity->position.z, sushie->pos.x, sushie->pos.z);
-            SushieTweesterPhysicsPtr->angularVelocity = 6.0f;
-            SushieTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
-            SushieTweesterPhysicsPtr->countdown = 120;
+            N(TweesterPhysicsPtr)->angle = atan2(entity->position.x, entity->position.z, sushie->pos.x, sushie->pos.z);
+            N(TweesterPhysicsPtr)->angularVelocity = 6.0f;
+            N(TweesterPhysicsPtr)->liftoffVelocityPhase = 50.0f;
+            N(TweesterPhysicsPtr)->countdown = 120;
             sushie->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
             sushie->flags &= ~NPC_FLAG_GRAVITY;
         case TWEESTER_PARTNER_ATTRACT:
-            sin_cos_rad(DEG_TO_RAD(SushieTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
-            sushie->pos.x = entity->position.x + (sinAngle * SushieTweesterPhysicsPtr->radius);
-            sushie->pos.z = entity->position.z - (cosAngle * SushieTweesterPhysicsPtr->radius);
-            SushieTweesterPhysicsPtr->angle = clamp_angle(SushieTweesterPhysicsPtr->angle - SushieTweesterPhysicsPtr->angularVelocity);
+            sin_cos_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->angle), &sinAngle, &cosAngle);
+            sushie->pos.x = entity->position.x + (sinAngle * N(TweesterPhysicsPtr)->radius);
+            sushie->pos.z = entity->position.z - (cosAngle * N(TweesterPhysicsPtr)->radius);
+            N(TweesterPhysicsPtr)->angle = clamp_angle(N(TweesterPhysicsPtr)->angle - N(TweesterPhysicsPtr)->angularVelocity);
 
-            if (SushieTweesterPhysicsPtr->radius > 20.0f) {
-                SushieTweesterPhysicsPtr->radius--;
-            } else if (SushieTweesterPhysicsPtr->radius < 19.0f) {
-                SushieTweesterPhysicsPtr->radius++;
+            if (N(TweesterPhysicsPtr)->radius > 20.0f) {
+                N(TweesterPhysicsPtr)->radius--;
+            } else if (N(TweesterPhysicsPtr)->radius < 19.0f) {
+                N(TweesterPhysicsPtr)->radius++;
             }
 
-            liftoffVelocity = sin_rad(DEG_TO_RAD(SushieTweesterPhysicsPtr->liftoffVelocityPhase)) * 3.0f;
-            SushieTweesterPhysicsPtr->liftoffVelocityPhase += 3.0f;
+            liftoffVelocity = sin_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->liftoffVelocityPhase)) * 3.0f;
+            N(TweesterPhysicsPtr)->liftoffVelocityPhase += 3.0f;
 
-            if (SushieTweesterPhysicsPtr->liftoffVelocityPhase > 150.0f) {
-                SushieTweesterPhysicsPtr->liftoffVelocityPhase = 150.0f;
+            if (N(TweesterPhysicsPtr)->liftoffVelocityPhase > 150.0f) {
+                N(TweesterPhysicsPtr)->liftoffVelocityPhase = 150.0f;
             }
 
             sushie->pos.y += liftoffVelocity;
-            sushie->renderYaw = clamp_angle(360.0f - SushieTweesterPhysicsPtr->angle);
-            SushieTweesterPhysicsPtr->angularVelocity += 0.8;
+            sushie->renderYaw = clamp_angle(360.0f - N(TweesterPhysicsPtr)->angle);
+            N(TweesterPhysicsPtr)->angularVelocity += 0.8;
 
-            if (SushieTweesterPhysicsPtr->angularVelocity > 40.0f) {
-                SushieTweesterPhysicsPtr->angularVelocity = 40.0f;
+            if (N(TweesterPhysicsPtr)->angularVelocity > 40.0f) {
+                N(TweesterPhysicsPtr)->angularVelocity = 40.0f;
             }
 
-            if (--SushieTweesterPhysicsPtr->countdown == 0) {
-                SushieTweesterPhysicsPtr->state++;
+            if (--N(TweesterPhysicsPtr)->countdown == 0) {
+                N(TweesterPhysicsPtr)->state++;
             }
             break;
         case TWEESTER_PARTNER_HOLD:
-            sushie->flags = SushieTweesterPhysicsPtr->prevFlags;
-            SushieTweesterPhysicsPtr->countdown = 30;
-            SushieTweesterPhysicsPtr->state++;
+            sushie->flags = N(TweesterPhysicsPtr)->prevFlags;
+            N(TweesterPhysicsPtr)->countdown = 30;
+            N(TweesterPhysicsPtr)->state++;
             break;
         case TWEESTER_PARTNER_RELEASE:
             partner_walking_update_player_tracking(sushie);
             partner_walking_update_motion(sushie);
 
-            if (--SushieTweesterPhysicsPtr->countdown == 0) {
-                SushieTweesterPhysicsPtr->state = TWEESTER_PARTNER_INIT;
+            if (--N(TweesterPhysicsPtr)->countdown == 0) {
+                N(TweesterPhysicsPtr)->state = TWEESTER_PARTNER_INIT;
                 TweesterTouchingPartner = NULL;
             }
             break;
@@ -797,21 +801,21 @@ API_CALLABLE(SushieUpdate) {
 }
 
 EvtScript EVS_WorldSushie_Update = {
-    EVT_CALL(SushieUpdate)
+    EVT_CALL(N(Update))
     EVT_RETURN
     EVT_END
 };
 
-void func_802BF920_320690(Npc* sushie) {
+void N(try_cancel_tweester)(Npc* sushie) {
     if (TweesterTouchingPartner != NULL) {
         TweesterTouchingPartner = NULL;
-        sushie->flags = SushieTweesterPhysicsPtr->prevFlags;
-        SushieTweesterPhysicsPtr->state = TWEESTER_PARTNER_INIT;
+        sushie->flags = N(TweesterPhysicsPtr)->prevFlags;
+        N(TweesterPhysicsPtr)->state = TWEESTER_PARTNER_INIT;
         partner_clear_player_tracking(sushie);
     }
 }
 
-API_CALLABLE(SushiePutAway) {
+API_CALLABLE(N(PutAway)) {
     Npc* sushie = script->owner2.npc;
 
     if (isInitialCall) {
@@ -823,12 +827,12 @@ API_CALLABLE(SushiePutAway) {
 }
 
 EvtScript EVS_WorldSushie_PutAway = {
-    EVT_CALL(SushiePutAway)
+    EVT_CALL(N(PutAway))
     EVT_RETURN
     EVT_END
 };
 
-void world_sushie_pre_battle(Npc* sushie) {
+void N(pre_battle)(Npc* sushie) {
     PartnerActionStatus* sushieActionStatus = &gPartnerActionStatus;
 
     if (bss_802BFEEC) {
@@ -843,7 +847,7 @@ void world_sushie_pre_battle(Npc* sushie) {
     sushieActionStatus->actingPartner = PARTNER_SUSHIE;
 }
 
-void world_sushie_post_battle(Npc* sushie) {
+void N(post_battle)(Npc* sushie) {
     PartnerActionStatus* sushieActionStatus = &gPartnerActionStatus;
 
     if (sushieActionStatus->partnerAction_unk_1) {
@@ -852,7 +856,7 @@ void world_sushie_post_battle(Npc* sushie) {
     }
 }
 
-API_CALLABLE(func_802BFAB8_320828) {
+API_CALLABLE(N(EnterMap)) {
     Npc* partnerNPC = get_npc_unsafe(NPC_PARTNER);
     PlayerStatus* playerStatus = &gPlayerStatus;
 
@@ -869,7 +873,7 @@ API_CALLABLE(func_802BFAB8_320828) {
             partnerNPC->pos.x = playerStatus->position.x;
             partnerNPC->pos.z = playerStatus->position.z;
             partnerNPC->pos.y = playerStatus->position.y;
-            func_802BD368_31E0D8(partnerNPC->collisionChannel, partnerNPC->pos.x, partnerNPC->pos.y, partnerNPC->pos.z,
+            N(func_802BD368_31E0D8)(partnerNPC->collisionChannel, partnerNPC->pos.x, partnerNPC->pos.y, partnerNPC->pos.z,
                                 partnerNPC->yaw, partnerNPC->collisionRadius * 0.5f);
             partnerNPC->pos.y = OriginalPlayerY - (partnerNPC->collisionHeight * 0.5f);
             partnerNPC->yaw = atan2(partnerNPC->pos.x, partnerNPC->pos.z, script->varTable[1], script->varTable[3]);
@@ -893,13 +897,12 @@ API_CALLABLE(func_802BFAB8_320828) {
                     partnerNPC->isFacingAway = TRUE;
                 }
             }
-
             script->functionTemp[1] = 25;
             script->functionTemp[0] = 1;
             break;
         case 1:
             npc_move_heading(partnerNPC, partnerNPC->moveSpeed, partnerNPC->yaw);
-            func_802BD100_31DE70();
+            N(func_802BD100_31DE70)();
 
             if (!(script->functionTemp[1] & 3)) {
                 fx_rising_bubble(0, partnerNPC->pos.x, partnerNPC->moveToPos.y +
@@ -911,22 +914,19 @@ API_CALLABLE(func_802BFAB8_320828) {
                 if (script->varTable[12] == 1) {
                     set_action_state(ACTION_STATE_RIDE);
                     partner_use_ability();
-                    return ApiStatus_DONE2;
+                } else {
+                    enable_player_static_collisions();
+                    enable_player_input();
                 }
-
-                enable_player_static_collisions();
-                enable_player_input();
                 return ApiStatus_DONE2;
             }
-
             break;
     }
-
     return ApiStatus_BLOCK;
 }
 
 EvtScript EVS_WorldSushie_EnterMap = {
-    EVT_CALL(func_802BFAB8_320828)
+    EVT_CALL(N(EnterMap))
     EVT_RETURN
     EVT_END
 };
