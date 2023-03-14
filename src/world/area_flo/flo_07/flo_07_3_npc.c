@@ -44,7 +44,7 @@ EvtScript N(EVS_MakeCrystalBerry) = {
     EVT_THREAD
         EVT_CALL(SetCamDistance, CAM_DEFAULT, 300)
         EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(18.0), EVT_FLOAT(-7.5))
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(0.5))
+        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(0.5 / DT))
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_END_THREAD
     EVT_CALL(PlaySound, SOUND_8000006B)
@@ -53,10 +53,10 @@ EvtScript N(EVS_MakeCrystalBerry) = {
     EVT_KILL_THREAD(MV_GroundShakingScript)
     EVT_CALL(SetCamDistance, CAM_DEFAULT, 350)
     EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(18.0), EVT_FLOAT(-7.5))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(8.0))
+    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(8.0 / DT))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, LVar2)
     EVT_IF_LT(LVar0, -250)
@@ -68,7 +68,7 @@ EvtScript N(EVS_MakeCrystalBerry) = {
     EVT_CALL(PlaySound, SOUND_3BC | SOUND_ID_TRIGGER_CHANGE_SOUND)
     EVT_CALL(func_802D62E4, SOUND_3BC)
     EVT_SET(AF_FLO_MadeCrystalBerry, TRUE)
-    EVT_WAIT(20)
+    EVT_WAIT(20 * DT)
     EVT_CALL(SpeakToPlayer, NPC_Posie, ANIM_Posie_Talk, ANIM_Posie_Idle, 0, MSG_CH6_006A)
     EVT_SET(GB_StoryProgress, STORY_CH6_GOT_CRYSTAL_BERRY)
     EVT_RETURN
@@ -87,10 +87,10 @@ EvtScript N(EVS_NpcInteract_Posie) = {
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Posie_Talk, ANIM_Posie_Idle, 0, MSG_CH6_0071)
             EVT_END_IF
         EVT_CASE_LT(STORY_CH6_GOT_FERTILE_SOIL)
-            EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(4.0), 0, EVT_FLOAT(350.0), EVT_FLOAT(18.0), EVT_FLOAT(-7.5))
+            EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(4.0 / DT), 0, EVT_FLOAT(350.0), EVT_FLOAT(18.0), EVT_FLOAT(-7.5))
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Posie_Talk, ANIM_Posie_Idle, 0, MSG_CH6_0065)
             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Posie_GiveItem)
-            EVT_WAIT(20)
+            EVT_WAIT(20 * DT)
             EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Posie_Still)
             EVT_GIVE_KEY_REWARD(ITEM_FERTILE_SOIL)
             EVT_SET(GB_StoryProgress, STORY_CH6_GOT_FERTILE_SOIL)
@@ -98,7 +98,7 @@ EvtScript N(EVS_NpcInteract_Posie) = {
             EVT_IF_EQ(GF_FLO12_RosieRequestedSomethingBeautiful, TRUE)
                 EVT_EXEC_WAIT(N(EVS_MakeCrystalBerry))
             EVT_END_IF
-            EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(4.0))
+            EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(4.0 / DT))
         EVT_CASE_LT(STORY_CH6_GOT_CRYSTAL_BERRY)
             EVT_IF_EQ(GF_FLO12_RosieRequestedSomethingBeautiful, TRUE)
                 EVT_IF_EQ(AF_FLO_MadeCrystalBerry, FALSE)

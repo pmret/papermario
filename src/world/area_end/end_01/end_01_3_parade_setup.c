@@ -67,7 +67,7 @@ API_CALLABLE(N(UpdateCameraScroll)) {
     Camera* camera = &gCameras[gCurrentCameraID];
 
     camera->panActive = TRUE;
-    camera->movePos.x += PARADE_SCROLL_RATE;
+    camera->movePos.x += PARADE_SCROLL_RATE / DT;
     return ApiStatus_DONE2;
 }
 
@@ -79,7 +79,7 @@ API_CALLABLE(N(AddScrollToNpcPos)) {
         *npc = get_npc_unsafe(evt_get_variable(script, *args++));
     }
 
-    (*npc)->pos.x += PARADE_SCROLL_RATE;
+    (*npc)->pos.x += PARADE_SCROLL_RATE / DT;
 
     return ApiStatus_BLOCK;
 }
@@ -108,7 +108,7 @@ EvtScript N(EVS_UpdateScrollPos) = {
     EVT_LOOP(0)
         EVT_CALL(N(UpdateCameraScroll))
         EVT_CALL(TranslateGroup, MODEL_bg, LVar1, 0, 0)
-        EVT_ADDF(LVar1, EVT_FLOAT(PARADE_SCROLL_RATE))
+        EVT_ADDF(LVar1, EVT_FLOAT(PARADE_SCROLL_RATE / DT))
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN

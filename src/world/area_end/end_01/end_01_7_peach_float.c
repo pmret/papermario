@@ -106,8 +106,8 @@ EvtScript N(EVS_Twink) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_WAIT(30)
-    EVT_CALL(LoadPath, 60, EVT_PTR(N(TwinkFlightPath)), ARRAY_COUNT(N(TwinkFlightPath)), EASING_LINEAR)
+    EVT_WAIT(30 * DT)
+    EVT_CALL(LoadPath, 60 * DT, EVT_PTR(N(TwinkFlightPath)), ARRAY_COUNT(N(TwinkFlightPath)), EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(GetNextPathPos)
         EVT_CALL(SetNpcPos, NPC_Twink, LVar1, LVar2, LVar3)
@@ -116,10 +116,10 @@ EvtScript N(EVS_Twink) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_CALL(InterpNpcYaw, NPC_Twink, 270, 0)
-    EVT_WAIT(70)
-    EVT_CALL(NpcFlyTo, NPC_Twink, -249, 120, 0, 10, -10, EASING_LINEAR)
+    EVT_WAIT(70 * DT)
+    EVT_CALL(NpcFlyTo, NPC_Twink, -249, 120, 0, 10 * DT, -10, EASING_LINEAR)
     EVT_CALL(SetNpcPos, NPC_Twink, 0, -500, 0)
     EVT_RETURN
     EVT_END
@@ -127,28 +127,28 @@ EvtScript N(EVS_Twink) = {
 
 EvtScript N(EVS_Mario) = {
     EVT_LOOP(5)
-        EVT_CALL(InterpNpcYaw, NPC_Mario, 90, 7)
-        EVT_WAIT(45)
-        EVT_CALL(InterpNpcYaw, NPC_Mario, 270, 7)
-        EVT_WAIT(45)
+        EVT_CALL(InterpNpcYaw, NPC_Mario, 90, 7 * DT)
+        EVT_WAIT(45 * DT)
+        EVT_CALL(InterpNpcYaw, NPC_Mario, 270, 7 * DT)
+        EVT_WAIT(45 * DT)
     EVT_END_LOOP
-    EVT_WAIT(40)
+    EVT_WAIT(40 * DT)
     EVT_CALL(SetNpcAnimation, NPC_Mario, ANIM_ParadeMario_Surprise)
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_CALL(SetNpcAnimation, NPC_Mario, ANIM_ParadeMario_LookUp)
-    EVT_WAIT(30)
+    EVT_WAIT(30 * DT)
     EVT_CALL(InterpNpcYaw, NPC_Mario, 90, 0)
-    EVT_WAIT(70)
+    EVT_WAIT(70 * DT)
     EVT_CALL(SetNpcAnimation, NPC_Mario, ANIM_ParadeMario_WaveUp)
-    EVT_WAIT(60)
+    EVT_WAIT(60 * DT)
     EVT_CALL(SetNpcAnimation, NPC_Mario, ANIM_ParadeMario_LookUp)
-    EVT_WAIT(60)
+    EVT_WAIT(60 * DT)
     EVT_CALL(SetNpcAnimation, NPC_Mario, ANIM_ParadeMario_Idle)
-    EVT_WAIT(40)
+    EVT_WAIT(40 * DT)
     EVT_CALL(SetNpcAnimation, NPC_Mario, ANIM_ParadeMario_NodYes)
-    EVT_WAIT(30)
+    EVT_WAIT(30 * DT)
     EVT_CALL(SetNpcAnimation, NPC_Mario, ANIM_ParadeMario_Idle)
-    EVT_WAIT(30)
+    EVT_WAIT(30 * DT)
     EVT_CALL(SetNpcAnimation, NPC_Mario, ANIM_ParadeMario_WalkBack)
     EVT_CALL(GetNpcPos, NPC_Mario, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 5)
@@ -157,7 +157,7 @@ EvtScript N(EVS_Mario) = {
     EVT_LOOP(7)
         EVT_ADD(LVar1, -5)
         EVT_CALL(SetNpcPos, NPC_Mario, LVar0, LVar1, LVar2)
-        EVT_WAIT(5)
+        EVT_WAIT(5 * DT)
     EVT_END_LOOP
     EVT_CALL(SetNpcPos, NPC_Mario, LVar0, 0, LVar2)
     EVT_RETURN
@@ -166,32 +166,32 @@ EvtScript N(EVS_Mario) = {
 
 EvtScript N(EVS_Peach) = {
     EVT_LOOP(5)
-        EVT_CALL(InterpNpcYaw, NPC_Peach, 90, 7)
-        EVT_WAIT(45)
-        EVT_CALL(InterpNpcYaw, NPC_Peach, 270, 7)
-        EVT_WAIT(45)
+        EVT_CALL(InterpNpcYaw, NPC_Peach, 90, 7 * DT)
+        EVT_WAIT(45 * DT)
+        EVT_CALL(InterpNpcYaw, NPC_Peach, 270, 7 * DT)
+        EVT_WAIT(45 * DT)
     EVT_END_LOOP
-    EVT_WAIT(40)
+    EVT_WAIT(40 * DT)
     EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_ParadePeach_ShadeRaiseArms)
-    EVT_WAIT(60)
+    EVT_WAIT(60 * DT)
     EVT_CALL(InterpNpcYaw, NPC_Peach, 90, 0)
-    EVT_WAIT(40)
+    EVT_WAIT(40 * DT)
     EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_ParadePeach_ShadeWaveFast)
-    EVT_WAIT(60)
+    EVT_WAIT(60 * DT)
     EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_ParadePeach_ShadeIdle)
-    EVT_WAIT(60)
+    EVT_WAIT(60 * DT)
     EVT_CALL(InterpNpcYaw, NPC_Peach, 270, 0)
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_ParadePeach_ShadeRaiseArms)
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_ParadePeach_ShadeTalk)
-    EVT_WAIT(20)
+    EVT_WAIT(20 * DT)
     EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_ParadePeach_ShadeLowerArms)
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_ParadePeach_ShadeIdle)
-    EVT_WAIT(20)
+    EVT_WAIT(20 * DT)
     EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_ParadePeach_ShadeSlightBow)
-    EVT_WAIT(40)
+    EVT_WAIT(40 * DT)
     EVT_CALL(SetNpcAnimation, NPC_Peach, ANIM_ParadePeach_ShadeWalkBack)
     EVT_CALL(GetNpcPos, NPC_Peach, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, -5)
@@ -200,7 +200,7 @@ EvtScript N(EVS_Peach) = {
     EVT_LOOP(7)
         EVT_ADD(LVar1, -5)
         EVT_CALL(SetNpcPos, NPC_Peach, LVar0, LVar1, LVar2)
-        EVT_WAIT(5)
+        EVT_WAIT(5 * DT)
     EVT_END_LOOP
     EVT_CALL(SetNpcPos, NPC_Peach, LVar0, 0, LVar2)
     EVT_RETURN
@@ -250,7 +250,7 @@ EvtScript N(EVS_Twirler) = {
             EVT_WAIT(5)
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
-    EVT_CALL(SetNpcSpeed, LVar0, EVT_FLOAT(PARADE_SCROLL_RATE))
+    EVT_CALL(SetNpcSpeed, LVar0, EVT_FLOAT(PARADE_SCROLL_RATE / DT))
     EVT_CALL(GetNpcPos, LVar0, LVar2, LVar3, LVar4)
     EVT_ADD(LVar2, -600)
     EVT_CALL(NpcMoveTo, LVar0, LVar2, LVar4, 0)
@@ -259,7 +259,7 @@ EvtScript N(EVS_Twirler) = {
 };
 
 EvtScript N(EVS_StandardBearer) = {
-    EVT_CALL(SetNpcSpeed, LVar0, EVT_FLOAT(PARADE_SCROLL_RATE))
+    EVT_CALL(SetNpcSpeed, LVar0, EVT_FLOAT(PARADE_SCROLL_RATE / DT))
     EVT_CALL(GetNpcPos, LVar0, LVar1, LVar2, LVar3)
     EVT_ADD(LVar1, -600)
     EVT_CALL(NpcMoveTo, LVar0, LVar1, LVar2, 0)
@@ -293,7 +293,7 @@ EvtScript N(EVS_ParadePhase_Toads2) = {
     EVT_EXEC(N(EVS_StandardBearer))
     EVT_SETF(LVar0, 0)
     EVT_LOOP(500)
-        EVT_SUBF(LVar0, EVT_FLOAT(PARADE_SCROLL_RATE))
+        EVT_SUBF(LVar0, EVT_FLOAT(PARADE_SCROLL_RATE / DT))
         EVT_CALL(TranslateGroup, MODEL_kinoko, LVar0, 0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
@@ -304,12 +304,12 @@ EvtScript N(EVS_ParadePhase_Toads2) = {
 EvtScript N(EVS_MarioPeachExit) = {
     // walk away into the distance
     EVT_THREAD
-        EVT_CALL(NpcMoveTo, NPC_Mario, -259, -150, 240)
+        EVT_CALL(NpcMoveTo, NPC_Mario, -259, -150, 240 * DT)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(NpcMoveTo, NPC_Peach, -229, -150, 240)
+        EVT_CALL(NpcMoveTo, NPC_Peach, -229, -150, 240 * DT)
     EVT_END_THREAD
-    EVT_WAIT(60)
+    EVT_WAIT(60 * DT)
     // slowly pan camera up
     EVT_CALL(GetCamPosition, CAM_DEFAULT, LVar0, LVar1, LVar2)
     EVT_SETF(LVar1, EVT_FLOAT(0.0))

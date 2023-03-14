@@ -15,13 +15,13 @@ EvtScript N(EVS_Scene_MonstarAppears) = {
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH7_00E0, 160, 40)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Monstar_Idle1)
     EVT_CALL(SetNpcPos, NPC_Monstar, 635, 85, 0)
-    EVT_CALL(NpcMoveTo, NPC_Monstar, 615, 0, 10)
+    EVT_CALL(NpcMoveTo, NPC_Monstar, 615, 0, 10 * DT)
     EVT_LABEL(2)
     EVT_CALL(GetNpcPos, NPC_Monstar, LVar0, LVar1, LVar2)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(250.0))
     EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(15.0), EVT_FLOAT(-15.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.0))
+    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.0 / DT))
     EVT_ADD(LVar0, -25)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
@@ -48,7 +48,7 @@ EvtScript N(EVS_Scene_MonstarAppears) = {
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(5)
+    EVT_WAIT(5 * DT)
     EVT_CALL(SpeakToPlayer, NPC_Monstar, ANIM_Monstar_Talk, ANIM_Monstar_Idle1, 256, 0, 100, MSG_CH7_00E2)
     EVT_CALL(ShowChoice, MSG_Choice_0015)
     EVT_IF_EQ(LVar0, 0)
@@ -58,7 +58,7 @@ EvtScript N(EVS_Scene_MonstarAppears) = {
         EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
         EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(450.0))
         EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(15.0), EVT_FLOAT(-5.0))
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.0))
+        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.0 / DT))
         EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -135,9 +135,9 @@ EvtScript N(EVS_StarKid_LookAroundPanic) = {
     EVT_WAIT(LVar0)
     EVT_LOOP(0)
         EVT_CALL(InterpNpcYaw, LVarA, 90, 0)
-        EVT_WAIT(7)
+        EVT_WAIT(7 * DT)
         EVT_CALL(InterpNpcYaw, LVarA, 270, 0)
-        EVT_WAIT(7)
+        EVT_WAIT(7 * DT)
     EVT_END_LOOP
     EVT_RETURN
     EVT_END
@@ -145,15 +145,15 @@ EvtScript N(EVS_StarKid_LookAroundPanic) = {
 
 EvtScript N(EVS_StarKid_RunAway) = {
     EVT_IF_EQ(LVarA, NPC_StarKid_01)
-        EVT_ADD(LVarB, 40)
+        EVT_ADD(LVarB, 40 * DT)
     EVT_END_IF
     EVT_EXEC_GET_TID(N(EVS_StarKid_LookAroundPanic), LVar9)
-    EVT_ADD(LVarB, 20)
+    EVT_ADD(LVarB, 20 * DT)
     EVT_WAIT(LVarB)
     EVT_KILL_THREAD(LVar9)
     EVT_CALL(PlaySoundAtNpc, LVarA, SOUND_13E, 0)
     EVT_CALL(GetNpcPos, LVarA, LVar7, LVar8, LVar9)
-    EVT_CALL(LoadPath, 60, EVT_PTR(N(RelativeFleePath)), ARRAY_COUNT(N(RelativeFleePath)), EASING_LINEAR)
+    EVT_CALL(LoadPath, 60 * DT, EVT_PTR(N(RelativeFleePath)), ARRAY_COUNT(N(RelativeFleePath)), EASING_LINEAR)
     EVT_LABEL(0)
         EVT_CALL(GetNextPathPos)
         EVT_ADD(LVar1, LVar7)
@@ -202,7 +202,7 @@ EvtScript N(EVS_StarKidsFlee) = {
     EVT_END_LOOP
     EVT_CALL(PlaySoundAtNpc, NPC_Monstar, SOUND_13D, 0)
     EVT_THREAD
-        EVT_CALL(NpcMoveTo, NPC_Monstar, 615, -5, 10)
+        EVT_CALL(NpcMoveTo, NPC_Monstar, 615, -5, 10 * DT)
     EVT_END_THREAD
     EVT_EXEC(N(EVS_StarKid_SpawnSparkles))
     EVT_CALL(MakeLerp, 220, 0, 90, EASING_COS_IN_OUT)
@@ -224,7 +224,7 @@ EvtScript N(EVS_StarKidsFlee) = {
         EVT_GOTO(0)
     EVT_END_IF
     EVT_CALL(SetNpcPos, NPC_Monstar, NPC_DISPOSE_LOCATION)
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_USE_BUF(EVT_PTR(N(StarKidList)))
     EVT_SET(LVarB, 0)
     EVT_LOOP(0)
@@ -235,7 +235,7 @@ EvtScript N(EVS_StarKidsFlee) = {
         EVT_EXEC(N(EVS_StarKid_RunAway))
         EVT_ADD(LVarB, 1)
     EVT_END_LOOP
-    EVT_WAIT(100)
+    EVT_WAIT(100 * DT)
     EVT_RETURN
     EVT_END
 };
@@ -268,7 +268,7 @@ EvtScript N(EVS_Scene_MonstarDefeated) = {
     EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(450.0))
     EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(15.0), EVT_FLOAT(-5.0))
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.0))
+    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.0 / DT))
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
     EVT_EXEC(N(EVS_SetupMusic))

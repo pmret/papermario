@@ -51,7 +51,7 @@ EvtScript N(EVS_CloseDoors) = {
 EvtScript N(EVS_AdvanceBoo1) = {
     EVT_CALL(GetNpcPos, NPC_Boo_01, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 200)
-    EVT_CALL(NpcMoveTo, NPC_Boo_01, LVar0, LVar2, 46)
+    EVT_CALL(NpcMoveTo, NPC_Boo_01, LVar0, LVar2, 46 * DT)
     EVT_RETURN
     EVT_END
 };
@@ -59,7 +59,7 @@ EvtScript N(EVS_AdvanceBoo1) = {
 EvtScript N(EVS_AdvanceBoo2) = {
     EVT_CALL(GetNpcPos, NPC_Boo_02, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 200)
-    EVT_CALL(NpcMoveTo, NPC_Boo_02, LVar0, LVar2, 50)
+    EVT_CALL(NpcMoveTo, NPC_Boo_02, LVar0, LVar2, 50 * DT)
     EVT_RETURN
     EVT_END
 };
@@ -67,7 +67,7 @@ EvtScript N(EVS_AdvanceBoo2) = {
 EvtScript N(EVS_AdvanceBoo3) = {
     EVT_CALL(GetNpcPos, NPC_Boo_03, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 200)
-    EVT_CALL(NpcMoveTo, NPC_Boo_03, LVar0, LVar2, 53)
+    EVT_CALL(NpcMoveTo, NPC_Boo_03, LVar0, LVar2, 53 * DT)
     EVT_RETURN
     EVT_END
 };
@@ -75,7 +75,7 @@ EvtScript N(EVS_AdvanceBoo3) = {
 EvtScript N(EVS_AdvanceBoo4) = {
     EVT_CALL(GetNpcPos, NPC_Boo_04, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 200)
-    EVT_CALL(NpcMoveTo, NPC_Boo_04, LVar0, LVar2, 46)
+    EVT_CALL(NpcMoveTo, NPC_Boo_04, LVar0, LVar2, 46 * DT)
     EVT_RETURN
     EVT_END
 };
@@ -83,7 +83,7 @@ EvtScript N(EVS_AdvanceBoo4) = {
 EvtScript N(EVS_AdvanceBoo5) = {
     EVT_CALL(GetNpcPos, NPC_Boo_05, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 200)
-    EVT_CALL(NpcMoveTo, NPC_Boo_05, LVar0, LVar2, 50)
+    EVT_CALL(NpcMoveTo, NPC_Boo_05, LVar0, LVar2, 50 * DT)
     EVT_RETURN
     EVT_END
 };
@@ -91,7 +91,7 @@ EvtScript N(EVS_AdvanceBoo5) = {
 EvtScript N(EVS_AdvanceBoo6) = {
     EVT_CALL(GetNpcPos, NPC_Boo_06, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 200)
-    EVT_CALL(NpcMoveTo, NPC_Boo_06, LVar0, LVar2, 53)
+    EVT_CALL(NpcMoveTo, NPC_Boo_06, LVar0, LVar2, 53 * DT)
     EVT_RETURN
     EVT_END
 };
@@ -109,7 +109,7 @@ EvtScript N(EVS_AdvanceBooPhalanx) = {
 
 EvtScript N(EVS_BraceDoor1) = {
     EVT_CALL(SetNpcJumpscale, NPC_Boo_01, EVT_FLOAT(-0.2))
-    EVT_CALL(NpcJump0, NPC_Boo_01, 257, 30, -90, 5)
+    EVT_CALL(NpcJump0, NPC_Boo_01, 257, 30, -90, 5 * DT)
     EVT_CALL(EnableNpcShadow, NPC_Boo_01, FALSE)
     EVT_CALL(SetNpcAnimation, NPC_Boo_01, ANIM_Boo_Tan_Flail)
     EVT_RETURN
@@ -118,7 +118,7 @@ EvtScript N(EVS_BraceDoor1) = {
 
 EvtScript N(EVS_BraceDoor2) = {
     EVT_CALL(SetNpcJumpscale, NPC_Boo_02, EVT_FLOAT(-0.3))
-    EVT_CALL(NpcJump0, NPC_Boo_02, 272, 112, -81, 12)
+    EVT_CALL(NpcJump0, NPC_Boo_02, 272, 112, -81, 12 * DT)
     EVT_CALL(EnableNpcShadow, NPC_Boo_02, FALSE)
     EVT_CALL(SetNpcAnimation, NPC_Boo_02, ANIM_Boo_Tan_Flail)
     EVT_RETURN
@@ -127,7 +127,7 @@ EvtScript N(EVS_BraceDoor2) = {
 
 EvtScript N(EVS_BraceDoor3) = {
     EVT_CALL(SetNpcJumpscale, NPC_Boo_03, EVT_FLOAT(-0.4))
-    EVT_CALL(NpcJump0, NPC_Boo_03, 237, 120, -118, 10)
+    EVT_CALL(NpcJump0, NPC_Boo_03, 237, 120, -118, 10 * DT)
     EVT_CALL(EnableNpcShadow, NPC_Boo_03, FALSE)
     EVT_CALL(SetNpcAnimation, NPC_Boo_03, ANIM_Boo_Tan_Flail)
     EVT_RETURN
@@ -136,7 +136,7 @@ EvtScript N(EVS_BraceDoor3) = {
 
 EvtScript N(EVS_BraceDoor4) = {
     EVT_CALL(SetNpcJumpscale, NPC_Boo_04, EVT_FLOAT(-0.3))
-    EVT_CALL(NpcJump0, NPC_Boo_04, 280, 60, -79, 8)
+    EVT_CALL(NpcJump0, NPC_Boo_04, 280, 60, -79, 8 * DT)
     EVT_CALL(EnableNpcShadow, NPC_Boo_04, FALSE)
     EVT_CALL(SetNpcAnimation, NPC_Boo_04, ANIM_Boo_Tan_Flail)
     EVT_RETURN
@@ -145,7 +145,7 @@ EvtScript N(EVS_BraceDoor4) = {
 
 EvtScript N(EVS_BraceDoor5) = {
     EVT_CALL(SetNpcJumpscale, NPC_Boo_05, EVT_FLOAT(-0.4))
-    EVT_CALL(NpcJump0, NPC_Boo_05, 250, 81, -97, 9)
+    EVT_CALL(NpcJump0, NPC_Boo_05, 250, 81, -97, 9 * DT)
     EVT_CALL(EnableNpcShadow, NPC_Boo_05, FALSE)
     EVT_CALL(SetNpcAnimation, NPC_Boo_05, ANIM_Boo_Tan_Flail)
     EVT_RETURN
@@ -154,7 +154,7 @@ EvtScript N(EVS_BraceDoor5) = {
 
 EvtScript N(EVS_BraceDoor6) = {
     EVT_CALL(SetNpcJumpscale, NPC_Boo_06, EVT_FLOAT(-0.5))
-    EVT_CALL(NpcJump0, NPC_Boo_06, 227, 43, -123, 15)
+    EVT_CALL(NpcJump0, NPC_Boo_06, 227, 43, -123, 15 * DT)
     EVT_CALL(EnableNpcShadow, NPC_Boo_06, FALSE)
     EVT_CALL(SetNpcAnimation, NPC_Boo_06, ANIM_Boo_Tan_Flail)
     EVT_RETURN
@@ -201,8 +201,8 @@ EvtScript N(EVS_LeaderBooShivering) = {
 EvtScript N(EVS_TubbaTaunting) = {
     EVT_SET_GROUP(EVT_GROUP_EF)
     EVT_LOOP(0)
-        EVT_CALL(RandInt, 50, LVar0)
-        EVT_ADD(LVar0, 80)
+        EVT_CALL(RandInt, 50 * DT, LVar0)
+        EVT_ADD(LVar0, 80 * DT)
         EVT_WAIT(LVar0)
         EVT_IF_EQ(MV_PreventTaunting, FALSE)
             EVT_CALL(DisablePlayerInput, TRUE)
@@ -233,7 +233,7 @@ EvtScript N(EVS_Scene_BoosApproachManor) = {
     EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(40)
+    EVT_WAIT(40 * DT)
     EVT_CALL(SetNpcPos, NPC_Boo_01, -60, 10, -70)
     EVT_CALL(SetNpcPos, NPC_Boo_02, -100, 10, -110)
     EVT_CALL(SetNpcPos, NPC_Boo_03, -140, 10, -150)
@@ -241,14 +241,14 @@ EvtScript N(EVS_Scene_BoosApproachManor) = {
     EVT_CALL(SetNpcPos, NPC_Boo_05, -140, 10, -70)
     EVT_CALL(SetNpcPos, NPC_Boo_06, -180, 10, -100)
     EVT_EXEC_WAIT(N(EVS_AdvanceBooPhalanx))
-    EVT_WAIT(60)
+    EVT_WAIT(60 * DT)
     EVT_CALL(InterpNpcYaw, NPC_Boo_01, 270, 1)
     EVT_CALL(SpeakToPlayer, NPC_Boo_01, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 5, MSG_CH3_00DB)
     EVT_CALL(SpeakToPlayer, NPC_Boo_05, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 5, MSG_CH3_00DC)
     EVT_CALL(SpeakToPlayer, NPC_Boo_01, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 5, MSG_CH3_00DD)
     EVT_CALL(PlaySoundAt, SOUND_B4, SOUND_SPACE_MODE_0, 240, 10, -125)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 20, EVT_FLOAT(2.0))
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_CALL(PlaySoundAt, SOUND_B4, SOUND_SPACE_MODE_0, 240, 10, -125)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 20, EVT_FLOAT(2.0))
     EVT_CALL(InterpNpcYaw, NPC_Boo_01, 90, 1)
@@ -263,7 +263,7 @@ EvtScript N(EVS_Scene_BoosApproachManor) = {
 };
 
 EvtScript N(EVS_Scene_EscapeFromTubba) = {
-    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(8.0))
+    EVT_CALL(SetPlayerSpeed, EVT_FLOAT(8.0 / DT))
     EVT_CALL(PlayerMoveTo, 184, -44, 0)
     EVT_CALL(PlaySoundAtNpc, NPC_Boo_01, SOUND_262, SOUND_SPACE_MODE_0)
     EVT_CALL(PlaySoundAtNpc, NPC_Boo_02, SOUND_262, SOUND_SPACE_MODE_0)
@@ -277,13 +277,13 @@ EvtScript N(EVS_Scene_EscapeFromTubba) = {
     EVT_CALL(ShowEmote, NPC_Boo_04, EMOTE_EXCLAMATION, 45, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_CALL(ShowEmote, NPC_Boo_05, EMOTE_EXCLAMATION, 45, 20, EMOTER_NPC, 0, 0, 0, 0)
     EVT_CALL(ShowEmote, NPC_Boo_06, EMOTE_EXCLAMATION, 45, 20, EMOTER_NPC, 0, 0, 0, 0)
-    EVT_WAIT(50)
+    EVT_WAIT(50 * DT)
     EVT_SET(LVar2, 1)
     EVT_EXEC(N(EVS_CloseDoors))
     EVT_EXEC(N(EVS_BoosBraceDoor))
-    EVT_WAIT(20)
+    EVT_WAIT(20 * DT)
     EVT_CALL(SetCamType, CAM_DEFAULT, 6, TRUE)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(6.0))
+    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(6.0 / DT))
     EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(15.0), EVT_FLOAT(-15.0))
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -295,11 +295,11 @@ EvtScript N(EVS_Scene_EscapeFromTubba) = {
     EVT_CALL(SpeakToPlayer, NPC_Boo_01, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_00DF)
     EVT_KILL_THREAD(LVarA)
     EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SpeakUp)
-    EVT_WAIT(20)
+    EVT_WAIT(20 * DT)
     EVT_CALL(SpeakToPlayer, NPC_Boo_01, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_00E0)
-    EVT_WAIT(20)
+    EVT_WAIT(20 * DT)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_NodYes)
-    EVT_WAIT(20)
+    EVT_WAIT(20 * DT)
     EVT_CALL(SpeakToPlayer, NPC_Boo_01, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_00E1)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(GetCurrentPartnerID, LVar0)
@@ -317,7 +317,7 @@ EvtScript N(EVS_Scene_EscapeFromTubba) = {
     EVT_END_SWITCH
     EVT_CALL(EnablePartnerAI)
     EVT_CALL(SetCamType, CAM_DEFAULT, 4, FALSE)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(6.0))
+    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(6.0 / DT))
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -326,12 +326,12 @@ EvtScript N(EVS_Scene_EscapeFromTubba) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
     EVT_CALL(PlaySoundAt, SOUND_B4, SOUND_SPACE_MODE_0, 240, 10, -125)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 20, EVT_FLOAT(2.0))
-    EVT_WAIT(5)
+    EVT_WAIT(5 * DT)
     EVT_CALL(PlaySoundAt, SOUND_B4, SOUND_SPACE_MODE_0, 240, 10, -125)
     EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 20, EVT_FLOAT(2.0))
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH3_00E7, 160, 40)
     EVT_EXEC_WAIT(N(EVS_BraceDoor1))
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_CALL(SpeakToPlayer, NPC_Boo_01, ANIM_Boo_Tan_Flail, ANIM_Boo_Tan_Flail, 5, MSG_CH3_00E8)
     EVT_CALL(SetNpcAnimation, NPC_Boo_01, ANIM_Boo_Tan_Flail)
     EVT_EXEC(N(EVS_TubbaTaunting))

@@ -3,37 +3,37 @@
 
 EvtScript N(EVS_ParadePhase_Luigi) = {
     EVT_CALL(PlaySound, SOUND_89)
-    EVT_WAIT(80)
+    EVT_WAIT(80 * DT)
     EVT_THREAD
-        EVT_LOOP(9)
+        EVT_LOOP(9 * DT)
             EVT_CALL(PlaySoundAtNpc, NPC_Luigi, SOUND_11, SOUND_SPACE_MODE_0)
             EVT_WAIT(15)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(NpcMoveTo, NPC_Luigi, PARADE_START, 0, 120)
+    EVT_CALL(NpcMoveTo, NPC_Luigi, PARADE_START, 0, 120 * DT)
     EVT_CALL(SetNpcAnimation, NPC_Luigi, ANIM_ParadeLuigi_Idle)
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_CALL(InterpNpcYaw, NPC_Luigi, 90, 0)
-    EVT_WAIT(25)
+    EVT_WAIT(25 * DT)
     EVT_CALL(StopSound, SOUND_89)
-    EVT_WAIT(15)
+    EVT_WAIT(15 * DT)
     EVT_THREAD
-        EVT_WAIT(10)
-        EVT_LOOP(4)
+        EVT_WAIT(10 * DT)
+        EVT_LOOP(4 * DT)
             EVT_CALL(PlaySoundAtNpc, NPC_Luigi, SOUND_14, SOUND_SPACE_MODE_0)
             EVT_WAIT(15)
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_CALL(SetNpcAnimation, NPC_Luigi, ANIM_ParadeLuigi_BlowWhistle)
-    EVT_WAIT(30)
-    EVT_WAIT(30)
+    EVT_WAIT(30 * DT)
+    EVT_WAIT(30 * DT)
     EVT_CALL(SetNpcAnimation, NPC_Luigi, ANIM_ParadeLuigi_MarchInPlace)
-    EVT_WAIT(7)
+    EVT_WAIT(7 * DT)
     EVT_CALL(SetMusicTrack, 0, SONG_PARADE_DAY, 0, 8)
-    EVT_WAIT(120)
-    EVT_WAIT(100)
+    EVT_WAIT(120 * DT)
+    EVT_WAIT(100 * DT)
     EVT_CALL(InterpNpcYaw, NPC_Luigi, 270, 0)
-    EVT_WAIT(30)
+    EVT_WAIT(30 * DT)
     EVT_RETURN
     EVT_END
 };

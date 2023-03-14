@@ -130,50 +130,50 @@ EvtScript N(EVS_HoldPosition_GourmetGuy) = {
 };
 
 EvtScript N(EVS_YoshiKids) = {
-    EVT_WAIT(20)
+    EVT_WAIT(20 * DT)
     EVT_CALL(SetNpcJumpscale, NPC_YoshiKidGreen, EVT_FLOAT(1.0))
-    EVT_CALL(NpcJump0, NPC_YoshiKidGreen, 680, 0, 0, 20)
-    EVT_CALL(NpcJump0, NPC_YoshiKidGreen, 740, 0, 0, 10)
+    EVT_CALL(NpcJump0, NPC_YoshiKidGreen, 680, 0, 0, 20 * DT)
+    EVT_CALL(NpcJump0, NPC_YoshiKidGreen, 740, 0, 0, 10 * DT)
     EVT_CALL(SetNpcAnimation, NPC_YoshiKidGreen, ANIM_YoshiKid_Green_Idle)
     EVT_LOOP(2)
-        EVT_CALL(InterpNpcYaw, NPC_YoshiKidGreen, 270, 7)
-        EVT_WAIT(10)
-        EVT_CALL(InterpNpcYaw, NPC_YoshiKidGreen, 90, 7)
-        EVT_WAIT(10)
+        EVT_CALL(InterpNpcYaw, NPC_YoshiKidGreen, 270, 7 * DT)
+        EVT_WAIT(10 * DT)
+        EVT_CALL(InterpNpcYaw, NPC_YoshiKidGreen, 90, 7 * DT)
+        EVT_WAIT(10 * DT)
     EVT_END_LOOP
-    EVT_CALL(InterpNpcYaw, NPC_YoshiKidGreen, 270, 7)
-    EVT_WAIT(10)
+    EVT_CALL(InterpNpcYaw, NPC_YoshiKidGreen, 270, 7 * DT)
+    EVT_WAIT(10 * DT)
     EVT_THREAD
         EVT_CALL(GetNpcPos, NPC_YoshiKidGreen, LVar0, LVar1, LVar2)
         EVT_CALL(NpcJump0, NPC_YoshiKidGreen, LVar0, LVar1, LVar2, 7)
         EVT_CALL(SetNpcAnimation, NPC_YoshiKidGreen, ANIM_YoshiKid_Green_Run)
-        EVT_CALL(NpcMoveTo, NPC_YoshiKidGreen, 980, 0, 60)
+        EVT_CALL(NpcMoveTo, NPC_YoshiKidGreen, 980, 0, 60 * DT)
         EVT_CALL(SetNpcAnimation, NPC_YoshiKidGreen, ANIM_YoshiKid_Green_LookUp)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(SetNpcPos, NPC_YoshiKidBlue, 660, 0, 0)
-        EVT_CALL(NpcMoveTo, NPC_YoshiKidBlue, 940, 0, 70)
+        EVT_CALL(NpcMoveTo, NPC_YoshiKidBlue, 940, 0, 70 * DT)
         EVT_CALL(SetNpcAnimation, NPC_YoshiKidBlue, ANIM_YoshiKid_Blue_LookUp)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_WAIT(10)
+        EVT_WAIT(10 * DT)
         EVT_CALL(SetNpcPos, NPC_YoshiKidPurple, 660, 0, 0)
-        EVT_CALL(NpcMoveTo, NPC_YoshiKidPurple, 900, 0, 60)
+        EVT_CALL(NpcMoveTo, NPC_YoshiKidPurple, 900, 0, 60 * DT)
         EVT_CALL(SetNpcAnimation, NPC_YoshiKidPurple, ANIM_YoshiKid_Purple_LookUp)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_WAIT(20)
+        EVT_WAIT(20 * DT)
         EVT_CALL(SetNpcPos, NPC_YoshiKidYellow, 660, 0, 0)
-        EVT_CALL(NpcMoveTo, NPC_YoshiKidYellow, 860, 0, 50)
+        EVT_CALL(NpcMoveTo, NPC_YoshiKidYellow, 860, 0, 50 * DT)
         EVT_CALL(SetNpcAnimation, NPC_YoshiKidYellow, ANIM_YoshiKid_Yellow_LookUp)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_WAIT(30)
+        EVT_WAIT(30 * DT)
         EVT_CALL(SetNpcPos, NPC_YoshiKidRed, 660, 0, 0)
-        EVT_CALL(NpcMoveTo, NPC_YoshiKidRed, 820, 0, 40)
+        EVT_CALL(NpcMoveTo, NPC_YoshiKidRed, 820, 0, 40 * DT)
         EVT_CALL(SetNpcAnimation, NPC_YoshiKidRed, ANIM_YoshiKid_Red_LookUp)
     EVT_END_THREAD
-    EVT_WAIT(70)
+    EVT_WAIT(70 * DT)
     EVT_EXEC_GET_TID(N(EVS_HoldPosition_Yoshis), LVarA)
     EVT_LOOP(0)
         EVT_WAIT(1)
@@ -188,20 +188,20 @@ EvtScript N(EVS_YoshiKids) = {
     EVT_CALL(SetNpcAnimation, NPC_YoshiKidYellow, ANIM_YoshiKid_Yellow_Idle)
     EVT_CALL(SetNpcAnimation, NPC_YoshiKidRed, ANIM_YoshiKid_Red_Idle)
     EVT_CALL(InterpNpcYaw, NPC_YoshiKidGreen, 270, 0)
-    EVT_WAIT(5)
+    EVT_WAIT(5 * DT)
     EVT_LOOP(3)
         EVT_CALL(InterpNpcYaw, NPC_YoshiKidPurple, 270, 0)
-        EVT_WAIT(5)
+        EVT_WAIT(5 * DT)
         EVT_CALL(InterpNpcYaw, NPC_YoshiKidBlue, 270, 0)
-        EVT_WAIT(5)
+        EVT_WAIT(5 * DT)
         EVT_CALL(InterpNpcYaw, NPC_YoshiKidYellow, 270, 0)
-        EVT_WAIT(5)
+        EVT_WAIT(5 * DT)
         EVT_CALL(InterpNpcYaw, NPC_YoshiKidPurple, 90, 0)
-        EVT_WAIT(5)
+        EVT_WAIT(5 * DT)
         EVT_CALL(InterpNpcYaw, NPC_YoshiKidBlue, 90, 0)
-        EVT_WAIT(5)
+        EVT_WAIT(5 * DT)
         EVT_CALL(InterpNpcYaw, NPC_YoshiKidYellow, 90, 0)
-        EVT_WAIT(5)
+        EVT_WAIT(5 * DT)
     EVT_END_LOOP
     EVT_LOOP(0)
         EVT_WAIT(1)
@@ -220,7 +220,7 @@ EvtScript N(EVS_YoshiKids) = {
     EVT_CALL(SetNpcAnimation, NPC_YoshiKidYellow, ANIM_YoshiKid_Yellow_EatMiss)
     EVT_CALL(SetNpcYaw, NPC_YoshiKidRed, 90)
     EVT_CALL(SetNpcAnimation, NPC_YoshiKidRed, ANIM_YoshiKid_Red_EatMiss)
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_EXEC(N(EVS_Puffs_Hurt))
     EVT_THREAD
         EVT_CALL(GetNpcPos, NPC_HuffNPuffBody, LVar0, LVar1, LVar2)
@@ -271,47 +271,47 @@ EvtScript N(EVS_YoshiKids) = {
             EVT_END_IF
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_WAIT(40)
+    EVT_WAIT(40 * DT)
     EVT_CALL(SetNpcAnimation, NPC_YoshiKidGreen, ANIM_YoshiKid_Green_Exhale)
     EVT_CALL(SetNpcAnimation, NPC_YoshiKidBlue, ANIM_YoshiKid_Blue_Exhale)
     EVT_CALL(SetNpcAnimation, NPC_YoshiKidPurple, ANIM_YoshiKid_Purple_Exhale)
     EVT_CALL(SetNpcAnimation, NPC_YoshiKidYellow, ANIM_YoshiKid_Yellow_Exhale)
     EVT_CALL(SetNpcAnimation, NPC_YoshiKidRed, ANIM_YoshiKid_Red_Exhale)
-    EVT_WAIT(50)
+    EVT_WAIT(50 * DT)
     EVT_KILL_THREAD(LVarA)
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_YoshiKidGreen, ANIM_YoshiKid_Green_Run)
         EVT_CALL(GetNpcPos, NPC_YoshiKidGreen, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 300)
-        EVT_CALL(NpcMoveTo, NPC_YoshiKidGreen, LVar0, LVar2, 75)
+        EVT_CALL(NpcMoveTo, NPC_YoshiKidGreen, LVar0, LVar2, 75 * DT)
         EVT_CALL(SetNpcPos, NPC_YoshiKidGreen, 0, -500, 0)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_YoshiKidBlue, ANIM_YoshiKid_Blue_Run)
         EVT_CALL(GetNpcPos, NPC_YoshiKidBlue, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 300)
-        EVT_CALL(NpcMoveTo, NPC_YoshiKidBlue, LVar0, LVar2, 75)
+        EVT_CALL(NpcMoveTo, NPC_YoshiKidBlue, LVar0, LVar2, 75 * DT)
         EVT_CALL(SetNpcPos, NPC_YoshiKidBlue, 0, -500, 0)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_YoshiKidPurple, ANIM_YoshiKid_Purple_Run)
         EVT_CALL(GetNpcPos, NPC_YoshiKidPurple, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 300)
-        EVT_CALL(NpcMoveTo, NPC_YoshiKidPurple, LVar0, LVar2, 75)
+        EVT_CALL(NpcMoveTo, NPC_YoshiKidPurple, LVar0, LVar2, 75 * DT)
         EVT_CALL(SetNpcPos, NPC_YoshiKidPurple, 0, -500, 0)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_YoshiKidYellow, ANIM_YoshiKid_Yellow_Run)
         EVT_CALL(GetNpcPos, NPC_YoshiKidYellow, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 300)
-        EVT_CALL(NpcMoveTo, NPC_YoshiKidYellow, LVar0, LVar2, 75)
+        EVT_CALL(NpcMoveTo, NPC_YoshiKidYellow, LVar0, LVar2, 75 * DT)
         EVT_CALL(SetNpcPos, NPC_YoshiKidYellow, 0, -500, 0)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_YoshiKidRed, ANIM_YoshiKid_Red_Run)
         EVT_CALL(GetNpcPos, NPC_YoshiKidRed, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 300)
-        EVT_CALL(NpcMoveTo, NPC_YoshiKidRed, LVar0, LVar2, 75)
+        EVT_CALL(NpcMoveTo, NPC_YoshiKidRed, LVar0, LVar2, 75 * DT)
         EVT_CALL(SetNpcPos, NPC_YoshiKidRed, 0, -500, 0)
     EVT_END_THREAD
     EVT_RETURN
@@ -327,7 +327,7 @@ EvtScript N(EVS_ParadePhase_HuffNPuff) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_WAIT(10)
+        EVT_WAIT(10 * DT)
         EVT_CALL(SetNpcFlagBits, NPC_HuffNPuffBody, NPC_FLAG_TOUCHES_GROUND, FALSE)
         EVT_CALL(SetNpcFlagBits, NPC_HuffNPuffFace, NPC_FLAG_TOUCHES_GROUND, FALSE)
         EVT_CALL(SetNpcFlagBits, NPC_HuffNPuffArms, NPC_FLAG_TOUCHES_GROUND, FALSE)
@@ -349,22 +349,22 @@ EvtScript N(EVS_ParadePhase_HuffNPuff) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_EXEC_GET_TID(N(EVS_HoldPosition_Puffs), LVarA)
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_KILL_THREAD(LVarB)
     EVT_CALL(SetNpcAnimation, NPC_GourmetGuy, ANIM_GourmetGuy_Leap)
     EVT_CALL(GetNpcPos, NPC_GourmetGuy, LVar0, LVar1, LVar2)
     EVT_CALL(NpcJump0, NPC_GourmetGuy, LVar0, LVar1, LVar2, 10)
     EVT_CALL(SetNpcAnimation, NPC_GourmetGuy, ANIM_GourmetGuy_TalkSurprise)
     EVT_EXEC_GET_TID(N(EVS_HoldPosition_GourmetGuy), LVarB)
-    EVT_WAIT(130)
+    EVT_WAIT(130 * DT)
     EVT_EXEC(N(EVS_Puffs_Surprise))
-    EVT_WAIT(30)
+    EVT_WAIT(30 * DT)
     EVT_CALL(InterpNpcYaw, NPC_HuffNPuffBody, 90, 0)
     EVT_CALL(InterpNpcYaw, NPC_HuffNPuffFace, 90, 0)
     EVT_CALL(InterpNpcYaw, NPC_HuffNPuffArms, 90, 0)
     EVT_CALL(InterpNpcYaw, NPC_TuffPuff1, 90, 0)
     EVT_CALL(InterpNpcYaw, NPC_TuffPuff2, 90, 0)
-    EVT_WAIT(30)
+    EVT_WAIT(30 * DT)
     EVT_THREAD
         EVT_CALL(MakeLerp, 0, 90, 3, EASING_LINEAR)
         EVT_LOOP(0)
@@ -394,7 +394,7 @@ EvtScript N(EVS_ParadePhase_HuffNPuff) = {
         EVT_EXEC_WAIT(N(EVS_Puffs_Retreat))
         EVT_EXEC(N(EVS_Puffs_Surprise))
         EVT_EXEC_GET_TID(N(EVS_HoldPosition_Puffs), LVarA)
-        EVT_WAIT(10)
+        EVT_WAIT(10 * DT)
         EVT_KILL_THREAD(LVarB)
         EVT_CALL(SetNpcAnimation, NPC_GourmetGuy, ANIM_GourmetGuy_Walk)
         EVT_CALL(GetNpcPos, NPC_GourmetGuy, LVar0, LVar1, LVar2)
@@ -402,47 +402,47 @@ EvtScript N(EVS_ParadePhase_HuffNPuff) = {
         EVT_CALL(NpcMoveTo, NPC_GourmetGuy, LVar0, LVar2, 10)
         EVT_CALL(SetNpcAnimation, NPC_GourmetGuy, ANIM_GourmetGuy_Idle)
         EVT_EXEC_GET_TID(N(EVS_HoldPosition_GourmetGuy), LVarB)
-        EVT_WAIT(10)
+        EVT_WAIT(10 * DT)
     EVT_END_LOOP
     EVT_KILL_THREAD(LVarA)
     EVT_THREAD
         EVT_CALL(GetNpcPos, NPC_HuffNPuffBody, LVar0, LVar1, LVar2)
-        EVT_CALL(NpcJump0, NPC_HuffNPuffBody, LVar0, LVar1, LVar2, 10)
+        EVT_CALL(NpcJump0, NPC_HuffNPuffBody, LVar0, LVar1, LVar2, 10 * DT)
         EVT_ADD(LVar0, -200)
-        EVT_CALL(NpcMoveTo, NPC_HuffNPuffBody, LVar0, LVar2, 50)
+        EVT_CALL(NpcMoveTo, NPC_HuffNPuffBody, LVar0, LVar2, 50 * DT)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(GetNpcPos, NPC_HuffNPuffFace, LVar0, LVar1, LVar2)
-        EVT_CALL(NpcJump0, NPC_HuffNPuffFace, LVar0, LVar1, LVar2, 10)
+        EVT_CALL(NpcJump0, NPC_HuffNPuffFace, LVar0, LVar1, LVar2, 10 * DT)
         EVT_ADD(LVar0, -200)
-        EVT_CALL(NpcMoveTo, NPC_HuffNPuffFace, LVar0, LVar2, 50)
+        EVT_CALL(NpcMoveTo, NPC_HuffNPuffFace, LVar0, LVar2, 50 * DT)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(GetNpcPos, NPC_HuffNPuffArms, LVar0, LVar1, LVar2)
-        EVT_CALL(NpcJump0, NPC_HuffNPuffArms, LVar0, LVar1, LVar2, 10)
+        EVT_CALL(NpcJump0, NPC_HuffNPuffArms, LVar0, LVar1, LVar2, 10 * DT)
         EVT_ADD(LVar0, -200)
-        EVT_CALL(NpcMoveTo, NPC_HuffNPuffArms, LVar0, LVar2, 50)
+        EVT_CALL(NpcMoveTo, NPC_HuffNPuffArms, LVar0, LVar2, 50 * DT)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(GetNpcPos, NPC_TuffPuff1, LVar0, LVar1, LVar2)
-        EVT_CALL(NpcJump0, NPC_TuffPuff1, LVar0, LVar1, LVar2, 10)
+        EVT_CALL(NpcJump0, NPC_TuffPuff1, LVar0, LVar1, LVar2, 10 * DT)
         EVT_ADD(LVar0, -200)
-        EVT_CALL(NpcMoveTo, NPC_TuffPuff1, LVar0, LVar2, 50)
+        EVT_CALL(NpcMoveTo, NPC_TuffPuff1, LVar0, LVar2, 50 * DT)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(GetNpcPos, NPC_TuffPuff2, LVar0, LVar1, LVar2)
-        EVT_CALL(NpcJump0, NPC_TuffPuff2, LVar0, LVar1, LVar2, 10)
+        EVT_CALL(NpcJump0, NPC_TuffPuff2, LVar0, LVar1, LVar2, 10 * DT)
         EVT_ADD(LVar0, -200)
-        EVT_CALL(NpcMoveTo, NPC_TuffPuff2, LVar0, LVar2, 50)
+        EVT_CALL(NpcMoveTo, NPC_TuffPuff2, LVar0, LVar2, 50 * DT)
     EVT_END_THREAD
-    EVT_WAIT(30)
+    EVT_WAIT(30 * DT)
     EVT_CALL(SetNpcAnimation, NPC_GourmetGuy, ANIM_GourmetGuy_Inspect)
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_CALL(SetNpcAnimation, NPC_GourmetGuy, ANIM_GourmetGuy_Walk)
     EVT_KILL_THREAD(LVarB)
     EVT_CALL(GetNpcPos, NPC_GourmetGuy, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, -300)
-    EVT_CALL(NpcMoveTo, NPC_GourmetGuy, LVar0, LVar2, 50)
+    EVT_CALL(NpcMoveTo, NPC_GourmetGuy, LVar0, LVar2, 50 * DT)
     EVT_RETURN
     EVT_END
 };

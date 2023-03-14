@@ -29,6 +29,27 @@ EvtScript N(D_80243C40_E123E0) = {
     EVT_END
 };
 
+#if VERSION_PAL
+s32  N(pal_unkdata)[] = {
+  230, 238, 234, 246,
+};
+
+s32 N(pal_unkdata_2)[] = {
+    45, 41, 43, 37
+};
+
+Gfx N(Gfx_RecordDisplay_Init)[] = {
+    gsDPSetCycleType(G_CYC_1CYCLE),
+    gsDPSetRenderMode(G_RM_XLU_SURF, G_RM_XLU_SURF2),
+    gsDPSetCombineMode(G_CC_PRIMITIVE, G_CC_PRIMITIVE),
+    gsDPSetColorDither(G_CD_DISABLE),
+    gsDPSetAlphaDither(G_AD_DISABLE),
+    gsDPSetCombineKey(G_CK_NONE),
+    gsDPSetAlphaCompare(G_AC_NONE),
+    gsDPNoOp(),
+    gsSPEndDisplayList(),
+};
+#else
 Gfx N(Gfx_RecordDisplay_Init)[] = {
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_XLU_SURF, G_RM_XLU_SURF2),
@@ -45,7 +66,12 @@ Gfx N(Gfx_RecordDisplay_Init)[] = {
     gsDPFillRectangle(44, 132, 276, 133),
     gsSPEndDisplayList(),
 };
+#endif
 
+#if VERSION_PAL
+void N(draw_record_display)(RecordDisplayData* data, s32 alpha);
+INCLUDE_ASM(void, "world/area_mgm/mgm_00/mgm_00_3_scoreboard", N(draw_record_display));
+#else
 void N(draw_record_display)(RecordDisplayData* data, s32 alpha) {
     if (alpha > 0) {
         gSPDisplayList(gMainGfxPos++, N(Gfx_RecordDisplay_Init));
@@ -74,6 +100,7 @@ void N(draw_record_display)(RecordDisplayData* data, s32 alpha) {
         draw_msg(MSG_MGM_0021, 223, 108, alpha, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
     }
 }
+#endif
 
 void N(animate_and_draw_record)(void* renderData) {
     RecordDisplayData* data = (RecordDisplayData*)evt_get_variable(NULL, MV_RecordDisplayData);

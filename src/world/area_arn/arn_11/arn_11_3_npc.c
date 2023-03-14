@@ -12,7 +12,7 @@ EvtScript N(EVS_NpcIdle_TubbasHeart) = {
     EVT_END_LOOP
     EVT_THREAD
         EVT_CALL(SetCamType, CAM_DEFAULT, 6, TRUE)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0))
+        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0 / DT))
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 50)
         EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
@@ -80,19 +80,19 @@ EvtScript N(EVS_Scene_HeartEscape) = {
         EVT_CALL(SetCamDistance, CAM_DEFAULT, 450)
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_END_THREAD
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_CALL(PlayerFaceNpc, NPC_TubbasHeart, TRUE)
     EVT_LOOP(2)
         EVT_CALL(GetNpcPos, NPC_TubbasHeart, LVar0, LVar1, LVar2)
         EVT_CALL(SetNpcJumpscale, NPC_TubbasHeart, EVT_FLOAT(2.5))
         EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_20C8, SOUND_SPACE_MODE_0)
-        EVT_CALL(NpcJump0, NPC_TubbasHeart, LVar0, LVar1, LVar2, 12)
+        EVT_CALL(NpcJump0, NPC_TubbasHeart, LVar0, LVar1, LVar2, 12 * DT)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_THREAD
-        EVT_WAIT(10)
+        EVT_WAIT(10 * DT)
         EVT_CALL(SetCamType, CAM_DEFAULT, 4, TRUE)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.0))
+        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.0 / DT))
         EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(17.0), EVT_FLOAT(-7.0))
         EVT_CALL(SetCamDistance, CAM_DEFAULT, 450)
         EVT_CALL(SetCamPosA, CAM_DEFAULT, -56, 70)
@@ -108,7 +108,7 @@ EvtScript N(EVS_Scene_HeartEscape) = {
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_20C8, SOUND_SPACE_MODE_0)
-        EVT_CALL(NpcJump0, NPC_TubbasHeart, LVar0, LVar1, LVar2, 12)
+        EVT_CALL(NpcJump0, NPC_TubbasHeart, LVar0, LVar1, LVar2, 12 * DT)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_EXEC(N(EVS_Heart_OpenDoor))
@@ -118,11 +118,11 @@ EvtScript N(EVS_Scene_HeartEscape) = {
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_20C8, SOUND_SPACE_MODE_0)
-        EVT_CALL(NpcJump0, NPC_TubbasHeart, LVar0, LVar1, LVar2, 12)
+        EVT_CALL(NpcJump0, NPC_TubbasHeart, LVar0, LVar1, LVar2, 12 * DT)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_EXEC(N(EVS_Heart_CloseDoor))
-    EVT_WAIT(30)
+    EVT_WAIT(30 * DT)
     EVT_CALL(SetCamType, CAM_DEFAULT, 6, TRUE)
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)

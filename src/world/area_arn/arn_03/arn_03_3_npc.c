@@ -38,37 +38,37 @@ EvtScript N(EVS_NpcInteract_Boo_01) = {
 
 EvtScript N(EVS_NpcIdle_Boo_01) = {
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_WAIT(25)
+    EVT_WAIT(25 * DT)
     EVT_THREAD
-        EVT_WAIT(50)
+        EVT_WAIT(50 * DT)
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
         EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
         EVT_CALL(SetCamDistance, CAM_DEFAULT, 325)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0))
+        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0 / DT))
         EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_WAIT(20)
+        EVT_WAIT(20 * DT)
         EVT_CALL(GetCurrentPartnerID, LVar6)
         EVT_IF_NE(LVar6, PARTNER_BOW)
             EVT_CALL(BringPartnerOut, PARTNER_BOW)
             EVT_CALL(DisablePartnerAI, 0)
             EVT_WAIT(1)
             EVT_CALL(NpcFaceNpc, NPC_PARTNER, NPC_SELF, 0)
-            EVT_WAIT(5)
+            EVT_WAIT(5 * DT)
             EVT_CALL(SetNpcJumpscale, NPC_PARTNER, 0)
             EVT_IF_EQ(LVar6, PARTNER_PARAKARRY)
-                EVT_CALL(NpcJump0, NPC_PARTNER, -81, 176, 171, 20)
+                EVT_CALL(NpcJump0, NPC_PARTNER, -81, 176, 171, 20 * DT)
             EVT_ELSE
-                EVT_CALL(NpcJump0, NPC_PARTNER, -81, 186, 171, 20)
+                EVT_CALL(NpcJump0, NPC_PARTNER, -81, 186, 171, 20 * DT)
             EVT_END_IF
             EVT_CALL(EnablePartnerAI)
         EVT_END_IF
     EVT_END_THREAD
     EVT_CALL(SetNpcJumpscale, NPC_SELF, 0)
-    EVT_CALL(NpcJump0, NPC_SELF, -8, 186, 159, 60)
-    EVT_WAIT(15)
+    EVT_CALL(NpcJump0, NPC_SELF, -8, 186, 159, 60 * DT)
+    EVT_WAIT(15 * DT)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(InterpNpcYaw, NPC_SELF, -4, 0)
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 5, MSG_CH3_006E)
@@ -79,22 +79,26 @@ EvtScript N(EVS_NpcIdle_Boo_01) = {
     EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldBow_Talk, ANIM_WorldBow_Idle, 5, MSG_CH3_0071)
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 5, MSG_CH3_0072)
     EVT_CALL(EnablePartnerAI)
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_CALL(GetCurrentPartnerID, LVar6)
     EVT_IF_NE(LVar6, PARTNER_BOW)
         EVT_CALL(PutPartnerAway)
     EVT_END_IF
     EVT_THREAD
-        EVT_CALL(NpcMoveTo, NPC_SELF, 30, 125, 30)
+        EVT_CALL(NpcMoveTo, NPC_SELF, 30, 125, 30 * DT)
         EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 0)
     EVT_END_THREAD
     EVT_CALL(func_802CF56C, 2)
-    EVT_WAIT(15)
+    EVT_WAIT(15 * DT)
     EVT_SET(GB_StoryProgress, STORY_CH3_ARRIVED_AT_GHOST_TOWN)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
+#if VERSION_PAL
+    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3 / DT))
+#else
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, 3)
+#endif
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
@@ -153,7 +157,7 @@ EvtScript N(EVS_NpcInteract_Boo_02) = {
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0, MSG_CH3_007F)
             EVT_CALL(EndSpeech, NPC_SELF, ANIM_Boo_Tan_Talk, ANIM_Boo_Tan_Idle, 0)
             EVT_SET(MV_Unk_00, 0)
-            EVT_SET(MV_Unk_01, 450)
+            EVT_SET(MV_Unk_01, 450 * DT)
             EVT_SET(GF_ARN03_WaitingForPackage, TRUE)
             EVT_THREAD
                 EVT_LOOP(0)
