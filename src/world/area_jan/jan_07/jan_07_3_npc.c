@@ -143,6 +143,10 @@ EvtScript N(EVS_NpcInit_YoshiKid) = {
 };
 
 EvtScript N(EVS_NpcIdle_PutridPiranha) = {
+#if VERSION_PAL
+    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_TOUCH, 1)
+    EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_IGNORE_PARTNER, 1)
+#else
     EVT_CHILD_THREAD
         EVT_LOOP(0)
             EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
@@ -156,6 +160,7 @@ EvtScript N(EVS_NpcIdle_PutridPiranha) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
+#endif
     EVT_CALL(SetNpcCollisionSize, NPC_PutridPiranha_01, 48, 40)
     EVT_CALL(SetNpcCollisionSize, NPC_PutridPiranha_02, 48, 40)
     EVT_CALL(AwaitPlayerApproach, 60, 20, 140)

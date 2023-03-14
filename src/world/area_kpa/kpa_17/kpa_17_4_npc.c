@@ -68,12 +68,12 @@ EvtScript N(EVS_BlastWall) = {
     EVT_SET(GF_KPA17_BombedWall, TRUE)
     EVT_CALL(WaitForPlayerInputEnabled)
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_WAIT(80)
+    EVT_WAIT(80 * DT)
     EVT_CALL(DisablePartnerAI, 0)
-    EVT_WAIT(5)
+    EVT_WAIT(5 * DT)
     EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldBombette_Talk, ANIM_WorldBombette_Idle, 0, MSG_CH8_0016)
     EVT_CALL(EnablePartnerAI)
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_UNBIND
     EVT_RETURN

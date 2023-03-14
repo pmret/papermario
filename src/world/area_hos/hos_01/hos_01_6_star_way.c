@@ -32,7 +32,11 @@ EvtScript N(EVS_Scene_StarWayOpened) = {
     EVT_WAIT(10)
     EVT_CALL(ShowMessageAtScreenPos, MSG_HOS_005D, 160, 40)
     EVT_CALL(SetMusicTrack, 0, SONG_STAR_WAY_OPENS, 0, 8)
+#if VERSION_PAL
+    EVT_WAIT(30)
+#else
     EVT_WAIT(10)
+#endif
     EVT_CALL(EnableModel, MODEL_power, TRUE)
     EVT_SET(MV_StarBeamState, 1)
         EVT_LABEL(10)

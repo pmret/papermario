@@ -23,6 +23,9 @@ EvtScript N(EVS_Main) = {
     EVT_SETUP_CAMERA_ALT_NO_LEAD()
     EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(DefaultNPCs)))
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
+#if VERSION_PAL
+    EVT_CALL(SetMusicTrack, 0, SONG_DRY_DRY_RUINS, 0, 8)
+#else
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH2_SOLVED_ARTIFACT_PUZZLE)
             EVT_CALL(SetMusicTrack, 0, SONG_DRY_DRY_RUINS, 0, 8)
@@ -31,6 +34,7 @@ EvtScript N(EVS_Main) = {
         EVT_CASE_GE(STORY_CH2_DEFEATED_TUTANKOOPA)
             EVT_CALL(SetMusicTrack, 0, SONG_DRY_DRY_RUINS, 0, 8)
     EVT_END_SWITCH
+#endif
     EVT_CALL(TranslateGroup, MODEL_g304, 0, 65, 0)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deilittw, COLLIDER_FLAGS_UPPER_MASK)
     EVT_IF_EQ(GF_ISK05_Hammer2Block, FALSE)

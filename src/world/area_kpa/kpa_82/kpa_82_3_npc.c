@@ -94,7 +94,7 @@ MAP_STATIC_PAD(1,choice);
 
 EvtScript N(EVS_SetCam_MeetingDoor) = {
     EVT_CALL(SetCamType, CAM_DEFAULT, 4, FALSE)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0))
+    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0 / DT))
     EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(11.0), EVT_FLOAT(-10.0))
     EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(450.0))
     EVT_CALL(SetCamPosA, CAM_DEFAULT, EVT_FLOAT(88.0), EVT_FLOAT(256.6))
@@ -108,7 +108,7 @@ EvtScript N(EVS_SetCam_MeetingDoor) = {
 
 EvtScript N(EVS_SetCam_AfterBattle) = {
     EVT_CALL(SetCamType, CAM_DEFAULT, 4, FALSE)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0))
+    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0 / DT))
     EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(5.0), EVT_FLOAT(-14.0))
     EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(375.0))
     EVT_CALL(SetCamPosA, CAM_DEFAULT, EVT_FLOAT(88.0), EVT_FLOAT(256.6))
@@ -176,7 +176,7 @@ EvtScript N(EVS_SetCam_BeforeBattle) = {
 };
 
 EvtScript N(EVS_SetDoorRots) = {
-    EVT_CALL(MakeLerp, 0, 60, 30, EASING_LINEAR)
+    EVT_CALL(MakeLerp, 0, 60, 30 * DT, EASING_LINEAR)
     EVT_CALL(PlaySound, SOUND_225)
     EVT_LABEL(0)
         EVT_CALL(UpdateLerp)
@@ -196,7 +196,7 @@ EvtScript N(EVS_SetDoorRots) = {
 };
 
 EvtScript N(EVS_CloseDoors) = {
-    EVT_CALL(MakeLerp, 60, 0, 30, EASING_LINEAR)
+    EVT_CALL(MakeLerp, 60, 0, 30 * DT, EASING_LINEAR)
     EVT_CALL(PlaySound, SOUND_226)
     EVT_LABEL(0)
         EVT_CALL(UpdateLerp)
@@ -220,7 +220,7 @@ EvtScript N(EVS_ReleaseFrom_Door_0) = {
     EVT_CALL(SetNpcPos, NPC_SELF, -100, 0, 0)
     EVT_CALL(RandInt, 40, LVar1)
     EVT_ADD(LVar1, -120)
-    EVT_CALL(NpcMoveTo, NPC_SELF, LVar1, 150, 30)
+    EVT_CALL(NpcMoveTo, NPC_SELF, LVar1, 150, 30 * DT)
     EVT_CALL(SetNpcAnimation, NPC_SELF, LVar4)
     EVT_CALL(BindNpcAI, NPC_SELF, LVar5)
     EVT_RETURN
@@ -232,7 +232,7 @@ EvtScript N(EVS_ReleaseFrom_Door_1) = {
     EVT_CALL(SetNpcPos, NPC_SELF, 0, 0, 0)
     EVT_CALL(RandInt, 40, LVar1)
     EVT_ADD(LVar1, -20)
-    EVT_CALL(NpcMoveTo, NPC_SELF, LVar1, 150, 30)
+    EVT_CALL(NpcMoveTo, NPC_SELF, LVar1, 150, 30 * DT)
     EVT_CALL(SetNpcAnimation, NPC_SELF, LVar4)
     EVT_CALL(BindNpcAI, NPC_SELF, LVar5)
     EVT_RETURN
@@ -244,7 +244,7 @@ EvtScript N(EVS_ReleaseFrom_Door_2) = {
     EVT_CALL(SetNpcPos, NPC_SELF, 100, 0, 0)
     EVT_CALL(RandInt, 40, LVar1)
     EVT_ADD(LVar1, 80)
-    EVT_CALL(NpcMoveTo, NPC_SELF, LVar1, 150, 30)
+    EVT_CALL(NpcMoveTo, NPC_SELF, LVar1, 150, 30 * DT)
     EVT_CALL(SetNpcAnimation, NPC_SELF, LVar4)
     EVT_CALL(BindNpcAI, NPC_SELF, LVar5)
     EVT_RETURN
@@ -253,8 +253,8 @@ EvtScript N(EVS_ReleaseFrom_Door_2) = {
 
 EvtScript N(EVS_WithdrawTo_Door_0) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, LVar3)
-    EVT_CALL(RandInt, 20, LVar1)
-    EVT_ADD(LVar1, 20)
+    EVT_CALL(RandInt, 20 * DT, LVar1)
+    EVT_ADD(LVar1, 20 * DT)
     EVT_CALL(NpcMoveTo, NPC_SELF, -100, 0, LVar1)
     EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_RETURN
@@ -263,8 +263,8 @@ EvtScript N(EVS_WithdrawTo_Door_0) = {
 
 EvtScript N(EVS_WithdrawTo_Door_1) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, LVar3)
-    EVT_CALL(RandInt, 20, LVar1)
-    EVT_ADD(LVar1, 20)
+    EVT_CALL(RandInt, 20 * DT, LVar1)
+    EVT_ADD(LVar1, 20 * DT)
     EVT_CALL(NpcMoveTo, NPC_SELF, 0, 0, LVar1)
     EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_RETURN
@@ -273,8 +273,8 @@ EvtScript N(EVS_WithdrawTo_Door_1) = {
 
 EvtScript N(EVS_WithdrawTo_Door_2) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, LVar3)
-    EVT_CALL(RandInt, 20, LVar1)
-    EVT_ADD(LVar1, 20)
+    EVT_CALL(RandInt, 20 * DT, LVar1)
+    EVT_ADD(LVar1, 20 * DT)
     EVT_CALL(NpcMoveTo, NPC_SELF, 100, 0, LVar1)
     EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)
     EVT_RETURN
@@ -496,42 +496,42 @@ EvtScript N(EVS_Withdraw_Bobomb_Door_0) = {
 
 s32 N(QS_Release_Wave_0)[] = {
     QS_NEXT(NPC_DarkTroopa_01,  N(EVS_Release_DarkTroopa))
-    QS_WAIT(5)
+    QS_WAIT(5 * DT)
     QS_NEXT(NPC_Goomba_01,      N(EVS_Release_Goomba))
-    QS_WAIT(5)
+    QS_WAIT(5 * DT)
     QS_NEXT(NPC_DarkTroopa_02,  N(EVS_Release_DarkTroopa))
-    QS_WAIT(5)
+    QS_WAIT(5 * DT)
     QS_NEXT(NPC_Goomba_02,      N(EVS_Release_Goomba))
-    QS_WAIT(5) 
+    QS_WAIT(5 * DT)
     QS_NEXT(NPC_Goomba_03,      N(EVS_Release_Goomba))
-    QS_WAIT(5)
+    QS_WAIT(5 * DT)
     QS_NEXT(NPC_DarkTroopa_03,  N(EVS_Release_DarkTroopa))
-    QS_WAIT(5)
+    QS_WAIT(5 * DT)
     QS_NEXT(NPC_Goomba_04,      N(EVS_Release_Goomba))
     QS_END
 };
 
 s32 N(QS_Release_Wave_1)[] = {
     QS_NEXT(NPC_RedShyGuy_01,   N(EVS_Release_RedShyGuy))
-    QS_WAIT(5)
+    QS_WAIT(5 * DT)
     QS_NEXT(NPC_RedShyGuy_02,   N(EVS_Release_RedShyGuy))
-    QS_WAIT(10)
+    QS_WAIT(10 * DT)
     QS_NEXT(NPC_RedShyGuy_03,   N(EVS_Release_RedShyGuy))
-    QS_WAIT(8)
+    QS_WAIT(8 * DT)
     QS_NEXT(NPC_BlueShyGuy_01,  N(EVS_Release_BlueShyGuy))
-    QS_WAIT(3)
+    QS_WAIT(3 * DT)
     QS_NEXT(NPC_BlueShyGuy_02,  N(EVS_Release_BlueShyGuy))
-    QS_WAIT(6)
+    QS_WAIT(6 * DT)
     QS_NEXT(NPC_BlueShyGuy_03,  N(EVS_Release_BlueShyGuy))
-    QS_WAIT(7)
+    QS_WAIT(7 * DT)
     QS_NEXT(NPC_BlueShyGuy_04,  N(EVS_Release_BlueShyGuy))
-    QS_WAIT(5)
+    QS_WAIT(5 * DT)
     QS_NEXT(NPC_GreenShyGuy_01, N(EVS_Release_GreenShyGuy))
-    QS_WAIT(4)
+    QS_WAIT(4 * DT)
     QS_NEXT(NPC_GreenShyGuy_02, N(EVS_Release_GreenShyGuy))
-    QS_WAIT(6)
+    QS_WAIT(6 * DT)
     QS_NEXT(NPC_GreenShyGuy_03, N(EVS_Release_GreenShyGuy))
-    QS_WAIT(5)
+    QS_WAIT(5 * DT)
     QS_NEXT(NPC_GreenShyGuy_04, N(EVS_Release_GreenShyGuy))
     QS_END
 };
@@ -540,84 +540,84 @@ s32 N(QS_Release_Wave_2)[] = {
     QS_NEXT(NPC_RedShyGuy_01,   N(EVS_Release_RedShyGuy_Door_1))
     QS_NEXT(NPC_BlueShyGuy_01,  N(EVS_Release_BlueShyGuy_Door_2))
     QS_NEXT(NPC_Bobomb_01,      N(EVS_Release_Bobomb_Door_0))
-    QS_WAIT(5)
+    QS_WAIT(5 * DT)
     QS_NEXT(NPC_RedShyGuy_02,   N(EVS_Release_RedShyGuy_Door_1))
     QS_NEXT(NPC_BlueShyGuy_02,  N(EVS_Release_BlueShyGuy_Door_2))
     QS_NEXT(NPC_Bobomb_02,      N(EVS_Release_Bobomb_Door_0))
-    QS_WAIT(5)
+    QS_WAIT(5 * DT)
     QS_NEXT(NPC_BlueShyGuy_03,  N(EVS_Release_BlueShyGuy_Door_2))
-    QS_WAIT(5)
+    QS_WAIT(5 * DT)
     QS_NEXT(NPC_BlueShyGuy_04,  N(EVS_Release_BlueShyGuy_Door_2))
     QS_END
 };
 
 s32 N(QS_Release_Wave_3)[] = {
     QS_NEXT(NPC_Goomba_01,      N(EVS_Release_Goomba))
-    QS_WAIT(8)
+    QS_WAIT(8 * DT)
     QS_NEXT(NPC_KoopaTroopa_01, N(EVS_Release_KoopaTroopa))
     QS_NEXT(NPC_KoopaTroopa_02, N(EVS_Release_KoopaTroopa))
-    QS_WAIT(5)
+    QS_WAIT(5 * DT)
     QS_NEXT(NPC_BlueShyGuy_01,  N(EVS_Release_BlueShyGuy))
     QS_NEXT(NPC_GreenShyGuy_01, N(EVS_Release_GreenShyGuy))
     QS_NEXT(NPC_BlueShyGuy_02,  N(EVS_Release_BlueShyGuy))
-    QS_WAIT(8)
+    QS_WAIT(8 * DT)
     QS_NEXT(NPC_Goomba_02,      N(EVS_Release_Goomba))
     QS_NEXT(NPC_BlueShyGuy_03,  N(EVS_Release_BlueShyGuy))
-    QS_WAIT(5)
+    QS_WAIT(5 * DT)
     QS_NEXT(NPC_KoopaTroopa_03, N(EVS_Release_KoopaTroopa))
-    QS_WAIT(5)
+    QS_WAIT(5 * DT)
     QS_NEXT(NPC_KoopaTroopa_04, N(EVS_Release_KoopaTroopa))
     QS_END
 };
 
 s32 N(QS_Release_Wave_4)[] = {
     QS_NEXT(NPC_Goomba_01,      N(EVS_Release_Goomba))
-    QS_WAIT(5)
+    QS_WAIT(5 * DT)
     QS_NEXT(NPC_KoopaTroopa_01, N(EVS_Release_KoopaTroopa))
-    QS_WAIT(5)
+    QS_WAIT(5 * DT)
     QS_NEXT(NPC_DarkTroopa_01,  N(EVS_Release_DarkTroopa))
     QS_END
 };
 
 s32 N(QS_Release_Wave_5)[] = {
     QS_NEXT(NPC_RedShyGuy_01,   N(EVS_Release_RedShyGuy))
-    QS_WAIT(5)
+    QS_WAIT(5 * DT)
     QS_NEXT(NPC_RedShyGuy_02,   N(EVS_Release_RedShyGuy))
-    QS_WAIT(4)
+    QS_WAIT(4 * DT)
     QS_NEXT(NPC_GreenShyGuy_01, N(EVS_Release_GreenShyGuy))
-    QS_WAIT(8)
+    QS_WAIT(8 * DT)
     QS_NEXT(NPC_Bobomb_01,      N(EVS_Release_Bobomb))
-    QS_WAIT(5)
+    QS_WAIT(5 * DT)
     QS_NEXT(NPC_Bobomb_02,      N(EVS_Release_Bobomb))
-    QS_WAIT(8)
+    QS_WAIT(8 * DT)
     QS_NEXT(NPC_Bobomb_03,      N(EVS_Release_Bobomb))
-    QS_WAIT(5)
+    QS_WAIT(5 * DT)
     QS_NEXT(NPC_KoopaTroopa_01, N(EVS_Release_KoopaTroopa))
-    QS_WAIT(10)
+    QS_WAIT(10 * DT)
     QS_NEXT(NPC_KoopaTroopa_02, N(EVS_Release_KoopaTroopa))
-    QS_WAIT(5)
+    QS_WAIT(5 * DT)
     QS_NEXT(NPC_KoopaTroopa_03, N(EVS_Release_KoopaTroopa))
-    QS_WAIT(8)
+    QS_WAIT(8 * DT)
     QS_NEXT(NPC_KoopaTroopa_04, N(EVS_Release_KoopaTroopa))
     QS_END
 };
 
 s32 N(QS_Release_Wave_6)[] = {
     QS_NEXT(NPC_DarkTroopa_01,  N(EVS_Release_DarkTroopa))
-    QS_WAIT(10)
+    QS_WAIT(10 * DT)
     QS_NEXT(NPC_BlueShyGuy_01,  N(EVS_Release_BlueShyGuy))
     QS_NEXT(NPC_Goomba_01,      N(EVS_Release_Goomba))
-    QS_WAIT(5)
+    QS_WAIT(5 * DT)
     QS_NEXT(NPC_BlueShyGuy_02,  N(EVS_Release_BlueShyGuy))
     QS_NEXT(NPC_Goomba_02,      N(EVS_Release_Goomba))
-    QS_WAIT(5)
+    QS_WAIT(5 * DT)
     QS_NEXT(NPC_Goomba_03,      N(EVS_Release_Goomba))
     QS_NEXT(NPC_DarkTroopa_02,  N(EVS_Release_DarkTroopa))
-    QS_WAIT(8)
+    QS_WAIT(8 * DT)
     QS_NEXT(NPC_DarkTroopa_03,  N(EVS_Release_DarkTroopa))
-    QS_WAIT(5)
+    QS_WAIT(5 * DT)
     QS_NEXT(NPC_RedShyGuy_01,   N(EVS_Release_RedShyGuy))
-    QS_WAIT(5)
+    QS_WAIT(5 * DT)
     QS_NEXT(NPC_RedShyGuy_02,   N(EVS_Release_RedShyGuy))
     QS_END
 };
@@ -841,7 +841,7 @@ EvtScript N(EVS_AskQuestion) = {
 
 EvtScript N(EVS_ShowUnknownCard) = {
     EVT_CALL(EnableModel, MODEL_m_, TRUE)
-    EVT_CALL(MakeLerp, 180, LVar0, 60, EASING_QUADRATIC_IN)
+    EVT_CALL(MakeLerp, 180, LVar0, 60 * DT, EASING_QUADRATIC_IN)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
         EVT_IF_GE(LVar0, 360)
@@ -878,7 +878,7 @@ EvtScript N(EVS_TetherResultCardToDummyPos) = {
 
 EvtScript N(EVS_ScaleResultCard) = {
     EVT_CALL(EnableModel, LVarA, TRUE)
-    EVT_CALL(MakeLerp, 100, 50, 30, EASING_LINEAR)
+    EVT_CALL(MakeLerp, 100, 50, 30 * DT, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
         EVT_SETF(LVar6, LVar0)
@@ -930,7 +930,7 @@ EvtScript N(EVS_MoveCardToScoreboard) = {
             EVT_SET(LVar2, 3)
     EVT_END_SWITCH
     EVT_CALL(SetNpcJumpscale, NPC_Dummy, EVT_FLOAT(0.0))
-    EVT_CALL(NpcJump1, NPC_Dummy, LVar0, LVar1, LVar2, 30)
+    EVT_CALL(NpcJump1, NPC_Dummy, LVar0, LVar1, LVar2, 30 * DT)
     EVT_CALL(SetNpcPos, NPC_Dummy, 184, 20, 150)
     EVT_KILL_THREAD(LVarB)
     EVT_RETURN
@@ -980,33 +980,33 @@ EvtScript N(EVS_GetWrongScoreboardModel) = {
 };
 
 EvtScript N(EVS_ShowResultCard) = {
-    EVT_SET(LVar6, EVT_FLOAT(2.0))
+    EVT_SET(LVar6, EVT_FLOAT(2.0 / DT))
     EVT_EXEC_WAIT(N(EVS_SetCam_ViewRoom))
     EVT_WAIT(5)
     EVT_IF_EQ(MV_LastAnswerResult, ANSWER_CORRECT)
         EVT_SET(LVar0, 2160)
         EVT_EXEC_WAIT(N(EVS_ShowUnknownCard))
         EVT_CALL(PlaySound, SOUND_21C)
-        EVT_WAIT(10)
+        EVT_WAIT(10 * DT)
         EVT_CALL(EnableGroup, MODEL_g47, FALSE)
         EVT_SET(LVarA, MODEL_m_kai)
         EVT_EXEC_WAIT(N(EVS_MoveCardToScoreboard))
         EVT_EXEC_WAIT(N(EVS_GetCorrectScoreboardModel))
         EVT_CALL(EnableModel, MODEL_m_kai, FALSE)
         EVT_CALL(EnableModel, LVar0, TRUE)
-        EVT_WAIT(30)
+        EVT_WAIT(30 * DT)
     EVT_ELSE
         EVT_SET(LVar0, 2340)
         EVT_EXEC_WAIT(N(EVS_ShowUnknownCard))
         EVT_CALL(PlaySound, SOUND_MENU_ERROR)
-        EVT_WAIT(10)
+        EVT_WAIT(10 * DT)
         EVT_CALL(EnableGroup, MODEL_g47, FALSE)
         EVT_SET(LVarA, MODEL_b_kai)
         EVT_EXEC_WAIT(N(EVS_MoveCardToScoreboard))
         EVT_EXEC_WAIT(N(EVS_GetWrongScoreboardModel))
         EVT_CALL(EnableModel, MODEL_b_kai, FALSE)
         EVT_CALL(EnableModel, LVar0, TRUE)
-        EVT_WAIT(30)
+        EVT_WAIT(30 * DT)
     EVT_END_IF
     EVT_EXEC_WAIT(N(EVS_SetCam_AfterResult))
     EVT_RETURN
@@ -1025,12 +1025,12 @@ EvtScript N(EVS_NpcIdle_Door) = {
     EVT_SET(MF_Sync_MusicChange, FALSE)
     EVT_THREAD
         EVT_CALL(SetMusicTrack, 0, SONG_FINAL_BOWSER_BATTLE, 1, 8)
-        EVT_WAIT(150)
+        EVT_WAIT(150 * DT)
         EVT_IF_NE(MF_Sync_MusicChange, FALSE)
             EVT_GOTO(5)
         EVT_END_IF
         EVT_CALL(FadeOutMusic, 0, 250)
-        EVT_WAIT(15)
+        EVT_WAIT(15 * DT)
         EVT_IF_NE(MF_Sync_MusicChange, FALSE)
             EVT_GOTO(5)
         EVT_END_IF
@@ -1082,24 +1082,24 @@ EvtScript N(EVS_NpcIdle_Door) = {
     EVT_SET(AB_KPA82_RightAnswers, 0)
     EVT_SET(AB_KPA82_WrongAnswers, 0)
     EVT_LABEL(10)
-        EVT_SET(LVar6, EVT_FLOAT(2.0))
+        EVT_SET(LVar6, EVT_FLOAT(2.0 / DT))
         EVT_EXEC_WAIT(N(EVS_SetCam_ViewRoom))
         EVT_SET(MF_Sync_MusicChange, TRUE)
         EVT_WAIT(2)
         EVT_CALL(SetMusicTrack, 0, SONG_NORMAL_BATTLE, 0, 8)
         EVT_EXEC_WAIT(N(EVS_SetDoorRots))
         EVT_EXEC_WAIT(N(EVS_Release_Wave))
-        EVT_WAIT(200)
+        EVT_WAIT(200 * DT)
         EVT_THREAD
             EVT_CALL(ShowMessageAtScreenPos, MSG_CH8_0034, 300, 200)
             EVT_SET(MV_Sync_TimesUp, TRUE)
         EVT_END_THREAD
-        EVT_WAIT(60)
+        EVT_WAIT(60 * DT)
         EVT_EXEC_WAIT(N(EVS_Withdraw_Wave))
-        EVT_WAIT(35)
+        EVT_WAIT(35 * DT)
         EVT_EXEC_WAIT(N(EVS_CloseDoors))
         EVT_EXEC(N(EVS_SetupMusic))
-        EVT_WAIT(30)
+        EVT_WAIT(30 * DT)
         EVT_LABEL(12)
             EVT_WAIT(1)
             EVT_IF_EQ(MV_Sync_TimesUp, FALSE)
@@ -1134,7 +1134,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
         EVT_GOTO(10)
     EVT_LABEL(20)
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim01, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH8_0041)
-    EVT_SET(LVar6, EVT_FLOAT(2.0))
+    EVT_SET(LVar6, EVT_FLOAT(2.0 / DT))
     EVT_EXEC_WAIT(N(EVS_SetCam_ViewRoom))
     EVT_CALL(SetNpcPos, NPC_AntiGuy_01, -100, 0, 0)
     EVT_CALL(SetNpcPos, NPC_AntiGuy_02, 0, 0, 0)
@@ -1145,20 +1145,20 @@ EvtScript N(EVS_NpcIdle_Door) = {
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_ShyGuy_Black_Anim01, ANIM_ShyGuy_Black_Anim01, 0, MSG_CH8_0042)
     EVT_CALL(PlayerFaceNpc, NPC_AntiGuy_02, 5)
     EVT_CALL(GetPlayerPos, LVar3, LVar4, LVar5)
-    EVT_SET(LVar6, EVT_FLOAT(3.0))
+    EVT_SET(LVar6, EVT_FLOAT(3.0 / DT))
     EVT_EXEC_WAIT(N(EVS_SetCam_BeforeBattle))
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_AntiGuy_01, ANIM_ShyGuy_Black_Anim04)
-        EVT_CALL(NpcMoveTo, NPC_AntiGuy_01, LVar0, LVar2, 30)
+        EVT_CALL(NpcMoveTo, NPC_AntiGuy_01, LVar0, LVar2, 30 * DT)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_AntiGuy_02, ANIM_ShyGuy_Black_Anim04)
-        EVT_CALL(NpcMoveTo, NPC_AntiGuy_02, LVar0, LVar2, 30)
+        EVT_CALL(NpcMoveTo, NPC_AntiGuy_02, LVar0, LVar2, 30 * DT)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_AntiGuy_03, ANIM_ShyGuy_Black_Anim04)
-        EVT_CALL(NpcMoveTo, NPC_AntiGuy_03, LVar0, LVar2, 30)
+        EVT_CALL(NpcMoveTo, NPC_AntiGuy_03, LVar0, LVar2, 30 * DT)
     EVT_END_THREAD
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(SetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
@@ -1170,7 +1170,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
     EVT_THREAD
         EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o166, COLLIDER_FLAGS_UPPER_MASK)
         EVT_CALL(DisablePlayerPhysics, TRUE)
-        EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0))
+        EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0 / DT))
         EVT_CALL(PlayerMoveTo, 120, 145, 0)
         EVT_CALL(InterpPlayerYaw, 90, 0)
         EVT_CALL(DisablePlayerPhysics, FALSE)
@@ -1178,7 +1178,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(DisablePartnerAI, 0)
-        EVT_CALL(SetNpcSpeed, NPC_PARTNER, EVT_FLOAT(3.5))
+        EVT_CALL(SetNpcSpeed, NPC_PARTNER, EVT_FLOAT(3.5 * DT))
         EVT_CALL(InterpNpcYaw, NPC_PARTNER, 90, 0)
         EVT_CALL(NpcMoveTo, NPC_PARTNER, 80, 145, 0)
         EVT_CALL(EnablePartnerAI)

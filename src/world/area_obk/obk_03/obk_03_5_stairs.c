@@ -39,7 +39,7 @@ EvtScript N(EVS_Cam_FocusOnStairs) = {
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     EVT_SUB(LVar1, 15)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0))
+    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0 / DT))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_RETURN
     EVT_END
@@ -70,7 +70,7 @@ EvtScript N(EVS_Cam_ResetFocus) = {
     EVT_SET(LVarA, delay) \
     EVT_EXEC(N(EVS_PlayDropStepFX)) \
     EVT_SET(LVar0, dist) \
-    EVT_SET(LVar1, 5) \
+    EVT_SET(LVar1, 5 * DT) \
     EVT_SET(LVar2, modelID) \
     EVT_EXEC(N(EVS_DropStep)) \
     EVT_WAIT(5)
@@ -87,7 +87,7 @@ EvtScript N(EVS_Cam_ResetFocus) = {
     EVT_SET(LVarA, delay) \
     EVT_EXEC(N(EVS_PlayDropStepFX)) \
     EVT_SET(LVar0, dist) \
-    EVT_SET(LVar1, 5) \
+    EVT_SET(LVar1, 5 * DT) \
     EVT_SET(LVar2, modelID) \
     EVT_EXEC(N(EVS_DropStep)) \
     EVT_WAIT(5)
@@ -104,7 +104,7 @@ EvtScript N(EVS_Cam_ResetFocus) = {
     EVT_SET(LVarA, delay) \
     EVT_EXEC(N(EVS_PlayDropStepFX)) \
     EVT_SET(LVar0, dist) \
-    EVT_SET(LVar1, 5) \
+    EVT_SET(LVar1, 5 * DT) \
     EVT_SET(LVar2, modelID) \
     EVT_EXEC(N(EVS_DropStep)) \
     EVT_WAIT(5)
@@ -121,7 +121,7 @@ EvtScript N(EVS_Cam_ResetFocus) = {
     EVT_SET(LVarA, delay) \
     EVT_EXEC(N(EVS_PlayDropStepFX)) \
     EVT_SET(LVar0, dist) \
-    EVT_SET(LVar1, 2) \
+    EVT_SET(LVar1, 2 * DT) \
     EVT_SET(LVar2, modelID) \
     EVT_EXEC_WAIT(N(EVS_DropStep)) \
 
@@ -155,7 +155,7 @@ EvtScript N(EVS_Scene_DropSteps) = {
     EVT_DROP_STEP_L(-75,  -10, 188,  4,   0, MODEL_k8)
     EVT_CALL(EnableModel, MODEL_kage, TRUE)
     EVT_CALL(EnableModel, MODEL_kage_no, FALSE)
-    EVT_WAIT(30)
+    EVT_WAIT(30 * DT)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_k1, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_k2, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_k3, COLLIDER_FLAGS_UPPER_MASK)

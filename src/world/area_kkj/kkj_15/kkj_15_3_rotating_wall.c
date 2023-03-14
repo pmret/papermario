@@ -28,11 +28,11 @@ EvtScript N(EVS_AnimateRotatingWall_AlmostCaught) = {
     EVT_CALL(GetPlayerPos, LVar7, LVar0, LVar8)
     EVT_CALL(GetNpcPos, NPC_PARTNER, LVar9, LVar0, LVarA)
     EVT_THREAD
-        EVT_WAIT(180)
+        EVT_WAIT(180 * DT)
         EVT_CALL(SetPlayerAnimation, ANIM_Peach2_LookAround)
     EVT_END_THREAD
     EVT_CALL(PlaySoundAt, SOUND_93, 0, 50, 5, -200)
-    EVT_CALL(MakeLerp, 0, -1800, 360, EASING_LINEAR)
+    EVT_CALL(MakeLerp, 0, -1800, 360 * DT, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
         EVT_SETF(LVar2, LVar0)
@@ -57,7 +57,7 @@ EvtScript N(EVS_AnimateRotatingWall_Default) = {
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_o96, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(GetPlayerPos, LVar7, LVar0, LVar8)
     EVT_CALL(GetNpcPos, NPC_PARTNER, LVar9, LVar0, LVarA)
-    EVT_CALL(MakeLerp, -1350, -1800, 90, EASING_LINEAR)
+    EVT_CALL(MakeLerp, -1350, -1800, 90 * DT, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
         EVT_SETF(LVar2, LVar0)
@@ -99,7 +99,11 @@ EvtScript N(EVS_RotatingWall_FirstTime) = {
     EVT_THREAD
         EVT_CALL(SetPanTarget, CAM_DEFAULT, 50, 10, -35)
         EVT_CALL(SetCamDistance, CAM_DEFAULT, 400)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(0.8))
+#if VERSION_PAL
+        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(0.961))
+#else
+        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(0.8 / DT))
+#endif
         EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_END_THREAD
     EVT_EXEC_WAIT(N(EVS_AnimateRotatingWall_Default))

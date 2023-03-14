@@ -2,7 +2,7 @@
 
 API_CALLABLE(N(GetPendulumAngle)) {
     script->varTable[0] = sin_deg(script->varTable[1]) * 10.0f;
-    script->varTable[1] = clamp_angle(script->varTable[1] + 6);
+    script->varTable[1] = clamp_angle(script->varTable[1] + (s32)(6 * DT));
     return ApiStatus_DONE2;
 }
 
@@ -17,7 +17,7 @@ EvtScript N(EVS_UpdateClock) = {
         EVT_LABEL(10)
         EVT_CALL(RotateModel, MODEL_na, LVar0, 0, 0, 1)
         EVT_ADD(LVar0, -6)
-        EVT_WAIT(30)
+        EVT_WAIT(30 * DT)
         EVT_GOTO(10)
     EVT_END_THREAD
     EVT_THREAD
@@ -25,7 +25,7 @@ EvtScript N(EVS_UpdateClock) = {
         EVT_LABEL(20)
         EVT_CALL(RotateModel, MODEL_mi, LVar0, 0, 0, 1)
         EVT_ADD(LVar0, -1)
-        EVT_WAIT(60)
+        EVT_WAIT(60 * DT)
         EVT_GOTO(20)
     EVT_END_THREAD
     EVT_THREAD

@@ -107,7 +107,7 @@ EvtScript N(EVS_NpcIdle_JrTroopa) = {
         EVT_DIV(LVar2, 2)
         EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
         EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0))
+        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4.0 / DT))
         EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(300.0))
         EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(20.0), EVT_FLOAT(-6.0))
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
@@ -149,11 +149,11 @@ EvtScript N(EVS_NpcDefeat_JrTroopa) = {
         EVT_CALL(InterpNpcYaw, NPC_SELF, 330, 0)
     EVT_END_IF
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_JrTroopa_ChargeArmsUp)
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_CALL(NpcMoveTo, NPC_SELF, LVar0, LVar1, 15)
     EVT_SET(GF_MIM10_Defeated_JrTroopa, TRUE)
     EVT_EXEC_WAIT(N(EVS_PlayForestMusic))
-    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(4.0))
+    EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(4.0 / DT))
     EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_RETURN
     EVT_END

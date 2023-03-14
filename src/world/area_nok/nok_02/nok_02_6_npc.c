@@ -60,11 +60,16 @@ EvtScript N(EVS_NpcInteract_Kooper) = {
         EVT_CALL(SetPanTarget, CAM_DEFAULT, 0, 0, -180)
         EVT_CALL(SetCamDistance, CAM_DEFAULT, 375)
         EVT_CALL(SetCamPitch, CAM_DEFAULT, 17, EVT_FLOAT(-5.5))
+
+#if VERSION_PAL
+        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(4 / DT))
+#else
         EVT_CALL(SetCamSpeed, CAM_DEFAULT, 4)
+#endif
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
         EVT_CALL(SetGroupVisibility, MODEL_g111, MODEL_GROUP_VISIBLE)
         EVT_THREAD
-            EVT_WAIT(10)
+            EVT_WAIT(10 * DT)
             EVT_CALL(PlaySoundAt, SOUND_BASIC_DOOR_OPEN, 0, 0, 0, -180)
             EVT_CALL(MakeLerp, 0, 90, 15, EASING_COS_FAST_OVERSHOOT)
             EVT_LABEL(10)
@@ -76,28 +81,28 @@ EvtScript N(EVS_NpcInteract_Kooper) = {
                 EVT_END_IF
         EVT_END_THREAD
         EVT_THREAD
-            EVT_CALL(PlayerMoveTo, -25, -130, 10)
+            EVT_CALL(PlayerMoveTo, -25, -130, 10 * DT)
             EVT_CALL(PlayerFaceNpc, NPC_Kooper, FALSE)
         EVT_END_THREAD
         EVT_THREAD
             EVT_CALL(N(SwitchToPartner), 1)
             EVT_CALL(DisablePartnerAI, 0)
-            EVT_CALL(NpcMoveTo, NPC_PARTNER, -55, -130, 15)
+            EVT_CALL(NpcMoveTo, NPC_PARTNER, -55, -130, 15 * DT)
             EVT_CALL(NpcFaceNpc, NPC_PARTNER, NPC_Kooper, 0)
             EVT_CALL(EnablePartnerAI)
         EVT_END_THREAD
         EVT_CALL(SetNpcFlagBits, NPC_Kooper, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
         EVT_CALL(SetNpcPos, NPC_Kooper, 0, 0, -207)
         EVT_CALL(SetNpcAnimation, NPC_Kooper, ANIM_KooperWithoutShell_Idle)
-        EVT_WAIT(35)
+        EVT_WAIT(35 * DT)
         EVT_CALL(SetNpcAnimation, NPC_Kooper, ANIM_KooperWithoutShell_Run)
         EVT_THREAD
-            EVT_LOOP(30)
+            EVT_LOOP(30 * DT)
                 EVT_CALL(PlayerFaceNpc, NPC_Kooper, FALSE)
                 EVT_WAIT(1)
             EVT_END_LOOP
         EVT_END_THREAD
-        EVT_CALL(NpcMoveTo, NPC_Kooper, 0, -148, 20)
+        EVT_CALL(NpcMoveTo, NPC_Kooper, 0, -148, 20 * DT)
         EVT_THREAD
             EVT_CALL(MakeLerp, 90, 0, 30, EASING_COS_IN_OUT)
             EVT_LABEL(20)
@@ -110,44 +115,56 @@ EvtScript N(EVS_NpcInteract_Kooper) = {
             EVT_CALL(PlaySoundAt, SOUND_BASIC_DOOR_CLOSE, 0, 0, 0, -180)
             EVT_CALL(SetGroupVisibility, MODEL_g111, MODEL_GROUP_HIDDEN)
         EVT_END_THREAD
-        EVT_CALL(NpcMoveTo, NPC_Kooper, 25, -130, 10)
+        EVT_CALL(NpcMoveTo, NPC_Kooper, 25, -130, 10 * DT)
         EVT_CALL(SetNpcAnimation, NPC_Kooper, ANIM_KooperWithoutShell_Idle)
         EVT_CALL(NpcFacePlayer, NPC_Kooper, 0)
         EVT_CALL(SetNpcFlagBits, NPC_Kooper, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
-        EVT_WAIT(10)
+        EVT_WAIT(10 * DT)
         EVT_CALL(SpeakToPlayer, NPC_Kooper, ANIM_KooperWithoutShell_Celebrate, ANIM_KooperWithoutShell_Idle, 0, MSG_CH1_00B5)
         EVT_CALL(SetPlayerAnimation, ANIM_Mario1_NodYes)
-        EVT_WAIT(15)
+        EVT_WAIT(15 * DT)
         EVT_CALL(EndSpeech, NPC_Kooper, ANIM_KooperWithoutShell_Talk, ANIM_KooperWithoutShell_Idle, 0)
         EVT_CALL(SetNpcAnimation, NPC_Kooper, ANIM_KooperWithoutShell_Celebrate)
-        EVT_WAIT(30)
+        EVT_WAIT(30 * DT)
         EVT_CALL(SetNpcAnimation, NPC_Kooper, ANIM_KooperWithoutShell_Idle)
         EVT_CALL(EndSpeech, NPC_Kooper, ANIM_KooperWithoutShell_Talk, ANIM_KooperWithoutShell_Idle, 0)
+#if VERSION_PAL
+        EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(6 / DT), 30, EVT_FLOAT(225.0), EVT_FLOAT(17.0), EVT_FLOAT(-8.5))
+#else
         EVT_CALL(AdjustCam, CAM_DEFAULT, 6, 30, EVT_FLOAT(225.0), EVT_FLOAT(17.0), EVT_FLOAT(-8.5))
-        EVT_WAIT(5)
+#endif
+        EVT_WAIT(5 * DT)
         EVT_CALL(SpeakToPlayer, NPC_Kooper, ANIM_KooperWithoutShell_Talk, ANIM_KooperWithoutShell_Idle, 0, MSG_CH1_00B6)
-        EVT_WAIT(10)
+        EVT_WAIT(10 * DT)
         EVT_CALL(SetNpcAnimation, NPC_Kooper, ANIM_KooperWithoutShell_Bow)
-        EVT_WAIT(30)
+        EVT_WAIT(30 * DT)
         EVT_CALL(SetNpcAnimation, NPC_Kooper, ANIM_KooperWithoutShell_Idle)
         EVT_CALL(EndSpeech, NPC_Kooper, ANIM_KooperWithoutShell_Talk, ANIM_KooperWithoutShell_Idle, 0)
+#if VERSION_PAL
+        EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(4 / DT), -30, EVT_FLOAT(225.0), EVT_FLOAT(17.0), EVT_FLOAT(-8.5))
+#else
         EVT_CALL(AdjustCam, CAM_DEFAULT, 4, -30, EVT_FLOAT(225.0), EVT_FLOAT(17.0), EVT_FLOAT(-8.5))
-        EVT_WAIT(10)
+#endif
+        EVT_WAIT(10 * DT)
         EVT_THREAD
-            EVT_WAIT(3)
+            EVT_WAIT(3 * DT)
             EVT_CALL(PlayerFaceNpc, NPC_PARTNER, FALSE)
         EVT_END_THREAD
         EVT_CALL(DisablePartnerAI, 0)
         EVT_CALL(SpeakToPlayer, NPC_PARTNER, ANIM_WorldGoombario_Talk, ANIM_WorldGoombario_Idle, 0, MSG_CH1_00B7)
         EVT_CALL(EnablePartnerAI)
         EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(90.0), 0, EVT_FLOAT(375.0), EVT_FLOAT(17.0), EVT_FLOAT(-5.5))
-        EVT_WAIT(10)
+        EVT_WAIT(10 * DT)
         EVT_CALL(PlayerFaceNpc, NPC_Kooper, FALSE)
-        EVT_WAIT(10)
+        EVT_WAIT(10 * DT)
         EVT_CALL(SpeakToPlayer, NPC_Kooper, ANIM_KooperWithoutShell_Talk, ANIM_KooperWithoutShell_Idle, 0, MSG_CH1_00B8)
         EVT_CALL(BindNpcInteract, NPC_Kooper, EVT_PTR(N(EVS_NpcInteract_Kooper)))
         EVT_THREAD
-            EVT_CALL(ResetCam, CAM_DEFAULT, 3)
+#if VERSION_PAL
+        EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(3.0 / DT))
+#else
+        EVT_CALL(ResetCam, CAM_DEFAULT, 3)
+#endif
         EVT_END_THREAD
         EVT_RETURN
     EVT_END_IF
@@ -184,12 +201,12 @@ EvtScript N(EVS_FuzzyBoss_PlayerEntersKoopersHouse) = {
     EVT_LABEL(10)
         EVT_THREAD
             EVT_CALL(SetNpcJumpscale, NPC_KoopersShell, 2)
-            EVT_CALL(NpcJump0, NPC_KoopersShell, LVarD, 0, LVarC, 12)
+            EVT_CALL(NpcJump0, NPC_KoopersShell, LVarD, 0, LVarC, 12 * DT)
         EVT_END_THREAD
         EVT_WAIT(1)
         EVT_CALL(SetNpcJumpscale, NPC_FuzzyBoss, 2)
         EVT_CALL(PlaySoundAtNpc, NPC_FuzzyBoss, SOUND_331, 0)
-        EVT_CALL(NpcJump0, NPC_FuzzyBoss, LVarA, 0, LVarC, 12)
+        EVT_CALL(NpcJump0, NPC_FuzzyBoss, LVarA, 0, LVarC, 12 * DT)
         EVT_CALL(IsPlayerWithin, 0, -400, 130, LVar0)
         EVT_IF_EQ(LVar0, 0)
             EVT_GOTO(10)
@@ -198,7 +215,7 @@ EvtScript N(EVS_FuzzyBoss_PlayerEntersKoopersHouse) = {
     EVT_SET(LVarB, 0)
     EVT_SET(LVarC, 0)
     EVT_SET(LVarD, -514)
-    EVT_SET(LVarE, 15)
+    EVT_SET(LVarE, 15 * DT)
     EVT_THREAD
         EVT_CALL(SetNpcJumpscale, NPC_KoopersShell, 2)
         EVT_CALL(NpcJump0, NPC_KoopersShell, LVarB, LVarC, LVarD, LVarE)

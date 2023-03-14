@@ -74,7 +74,7 @@ EvtScript N(EVS_Main) = {
     EVT_SETUP_CAMERA_NO_LEAD()
 #if VERSION_PAL
     EVT_CALL(GetLanguage, LocalVar(0))
-    EVT_CALL(SetModelTexVariant, 10, LocalVar(0))
+    EVT_CALL(SetModelTexVariant, MODEL_mushroom_kingdom, LocalVar(0))
 #endif
     EVT_IF_GE(GB_StoryProgress, STORY_CH0_KAMMY_RETURNED_TO_BOWSER)
         EVT_SET(GF_MAP_ToadTown, TRUE)

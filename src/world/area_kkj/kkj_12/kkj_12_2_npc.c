@@ -68,7 +68,7 @@ EvtScript N(EVS_NpcInteract_Koopatrol_02) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(N(GetPeachDisguise), LVar0)
     EVT_IF_EQ(LVar0, PEACH_DISGUISE_CLUBBA)
-        EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(5.0), 0, EVT_FLOAT(350.0), EVT_FLOAT(15.0), EVT_FLOAT(-7.0))
+        EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(5.0 / DT), 0, EVT_FLOAT(350.0), EVT_FLOAT(15.0), EVT_FLOAT(-7.0))
         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldKoopatrol_Anim09, ANIM_WorldKoopatrol_Anim02, 0, MSG_Peach_0147)
         EVT_THREAD
             EVT_LOOP(0)
@@ -81,28 +81,28 @@ EvtScript N(EVS_NpcInteract_Koopatrol_02) = {
         EVT_END_THREAD
         EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
         EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldKoopatrol_Anim05)
-        EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(2.0))
+        EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(2.0 / DT))
         EVT_CALL(NpcMoveTo, NPC_SELF, 1050, 0, 0)
         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldKoopatrol_Anim09, ANIM_WorldKoopatrol_Anim02, 0, MSG_Peach_0148)
         EVT_CALL(NpcMoveTo, NPC_SELF, 900, 0, 0)
         EVT_CALL(SetNpcPos, NPC_SELF, 0, -500, 0)
         EVT_SET(GF_KKJ12_TrickedGuard, TRUE)
         EVT_BIND_TRIGGER(EVT_PTR(N(EVS_ExitDoors_kkj_13_0)), TRIGGER_WALL_PRESS_A, COLLIDER_deilit2, 1, 0)
-        EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(4.0))
+        EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(4.0 / DT))
         EVT_CALL(DisablePlayerInput, FALSE)
         EVT_RETURN
     EVT_END_IF
     EVT_IF_EQ(GF_KKJ11_TrickedGuard, FALSE)
-        EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(5.0), 0, EVT_FLOAT(350.0), EVT_FLOAT(15.0), EVT_FLOAT(-7.0))
+        EVT_CALL(AdjustCam, CAM_DEFAULT, EVT_FLOAT(5.0 / DT), 0, EVT_FLOAT(350.0), EVT_FLOAT(15.0), EVT_FLOAT(-7.0))
         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldKoopatrol_Anim09, ANIM_WorldKoopatrol_Anim02, 0, MSG_Peach_0144)
-        EVT_WAIT(10)
+        EVT_WAIT(10 * DT)
         EVT_SET(LVar0, ITEM_PEACH_KEY1)
         EVT_CALL(ShowGotItem, LVar0, TRUE, 0)
         EVT_CALL(AddKeyItem, LVar0)
         EVT_SET(GF_KKJ11_TrickedGuard, TRUE)
         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldKoopatrol_Anim09, ANIM_WorldKoopatrol_Anim02, 0, MSG_Peach_0145)
         EVT_CALL(InterpNpcYaw, NPC_SELF, 270, 0)
-        EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(5.0))
+        EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(5.0 / DT))
     EVT_ELSE
         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldKoopatrol_Anim09, ANIM_WorldKoopatrol_Anim02, 16, MSG_Peach_0146)
     EVT_END_IF

@@ -21,7 +21,7 @@ EvtScript N(EVS_NpcIdle_FuzzyBoss) = {
         EVT_IF_LT(LVar6, 100)
             EVT_ADD(LVar3, 100)
             EVT_CALL(PlaySoundAtNpc, NPC_Fuzzy_03, SOUND_B0000017, 0)
-            EVT_CALL(NpcJump0, NPC_Fuzzy_03, LVar3, LVar4, LVar5, 10)
+            EVT_CALL(NpcJump0, NPC_Fuzzy_03, LVar3, LVar4, LVar5, 10 * DT)
             EVT_SET(GB_StoryProgress, STORY_CH1_FUZZY_THIEF_RAN_AWAY)
         EVT_END_IF
         EVT_IF_GT(LVar3, 1200)

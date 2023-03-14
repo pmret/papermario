@@ -121,9 +121,14 @@ EvtScript N(EVS_Scene_BowserTrapsMario) = {
             EVT_WAIT(1)
             EVT_GOTO(0)
         EVT_END_IF
+#if VERSION_PAL
+    EVT_CALL(DisablePlayerInput, TRUE)
+#endif
     EVT_THREAD
         EVT_WAIT(1)
+#if !VERSION_PAL
         EVT_CALL(DisablePlayerInput, TRUE)
+#endif
         EVT_CALL(PlayerFaceNpc, NPC_Bowser_01, FALSE)
         EVT_CALL(GetPartnerInUse, LVar0)
         EVT_CALL(GetCurrentPartnerID, LVar1)

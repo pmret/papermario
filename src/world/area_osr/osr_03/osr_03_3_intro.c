@@ -57,7 +57,7 @@ EvtScript N(EVS_UnusedFalling2) = {
 
 EvtScript N(EVS_AnimateSwingingChains) = {
     EVT_LOOP(0)
-        EVT_CALL(MakeLerp, 90, -90, 30, EASING_LINEAR)
+        EVT_CALL(MakeLerp, 90, -90, 30 * DT, EASING_LINEAR)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
             EVT_CALL(TranslateGroup, MODEL_ku_ta, 0, MV_CastleLiftDist, 0)
@@ -73,7 +73,7 @@ EvtScript N(EVS_AnimateSwingingChains) = {
             EVT_CALL(RotateGroup, MODEL_ku_ta, -20, 0, 0, 1)
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_CALL(MakeLerp, -90, 90, 30, EASING_LINEAR)
+        EVT_CALL(MakeLerp, -90, 90, 30 * DT, EASING_LINEAR)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
             EVT_CALL(TranslateGroup, MODEL_ku_ta, 0, MV_CastleLiftDist, 0)
@@ -96,7 +96,7 @@ EvtScript N(EVS_AnimateSwingingChains) = {
 
 EvtScript N(EVS_AnimateSpinningRing) = {
     EVT_LOOP(0)
-        EVT_CALL(MakeLerp, 45, -45, 60, EASING_QUADRATIC_OUT)
+        EVT_CALL(MakeLerp, 45, -45, 60 * DT, EASING_QUADRATIC_OUT)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
             EVT_CALL(TranslateGroup, MODEL_wa, 0, MV_CastleLiftDist, 0)
@@ -106,7 +106,7 @@ EvtScript N(EVS_AnimateSpinningRing) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(MakeLerp, -45, 45, 60, EASING_QUADRATIC_OUT)
+        EVT_CALL(MakeLerp, -45, 45, 60 * DT, EASING_QUADRATIC_OUT)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
             EVT_CALL(TranslateGroup, MODEL_wa, 0, MV_CastleLiftDist, 0)
@@ -125,7 +125,7 @@ EvtScript N(EVS_AnimateCastle) = {
     EVT_SET(MV_CastleLiftDist, 0)
     EVT_EXEC(N(EVS_AnimateSwingingChains))
     EVT_EXEC(N(EVS_AnimateSpinningRing))
-    EVT_CALL(MakeLerp, -800, 4500, 400, EASING_LINEAR)
+    EVT_CALL(MakeLerp, -800, 4500, 400 * DT, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
         EVT_SET(MV_CastleLiftDist, LVar0)
@@ -222,9 +222,9 @@ EvtScript N(MV_Scene_CastleAscending) = {
     EVT_CALL(SetPanTarget, CAM_DEFAULT, -50, 200, 0)
     EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(1000.0))
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(0.75))
-    EVT_WAIT(180)
+    EVT_WAIT(180 * DT)
     EVT_CALL(GotoMap, EVT_PTR("kkj_13"), kkj_13_ENTRY_2)
-    EVT_WAIT(100)
+    EVT_WAIT(100 * DT)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
     EVT_END
@@ -267,7 +267,7 @@ EvtScript N(MV_Scene_PlayerTossedOut) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
-    EVT_CALL(LoadPath, 90, EVT_PTR(N(FlightPath_TossedOut)), ARRAY_COUNT(N(FlightPath_TossedOut)), EASING_LINEAR)
+    EVT_CALL(LoadPath, 90 * DT, EVT_PTR(N(FlightPath_TossedOut)), ARRAY_COUNT(N(FlightPath_TossedOut)), EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(GetNextPathPos)
         EVT_CALL(SetPlayerPos, LVar1, LVar2, LVar3)
