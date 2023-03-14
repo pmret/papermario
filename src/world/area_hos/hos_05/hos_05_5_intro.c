@@ -1673,9 +1673,9 @@ u16 N(BowserSilhouetteLeapY)[] = {
 };
 
 #if VERSION_PAL
-#define CONST_UNK (233)
+#define BOWSER_APPEARS_TIME (233)
 #else
-#define CONST_UNK (268)
+#define BOWSER_APPEARS_TIME (268)
 #endif
 
 API_CALLABLE(N(AnimateStorybookPages)) {
@@ -1733,7 +1733,7 @@ API_CALLABLE(N(AnimateStorybookPages)) {
             break;
         case STORY_PAGE_STATE_BOWSER_ANIM:
             if (N(CurrentStoryPageTime) != 0) {
-                if (N(CurrentStoryPageTime) < N(StoryPageDuration)[N(CurrentStoryPageIdx)] - CONST_UNK) {
+                if (N(CurrentStoryPageTime) < N(StoryPageDuration)[N(CurrentStoryPageIdx)] - BOWSER_APPEARS_TIME) {
                     u32 timeLeft = N(BowserSilhouetteTime) - ARRAY_COUNT(N(BowserSilhouetteShakeY));
 
                     if (N(BowserSilhouetteTime) < ARRAY_COUNT(N(BowserSilhouetteShakeY))) {

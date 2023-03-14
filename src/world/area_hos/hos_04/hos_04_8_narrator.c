@@ -3,18 +3,18 @@
 #include "../common/Narrator.inc.c"
 
 #if VERSION_PAL
-#define DURATION_44 (35)
-#define DURATION_89 (73)
+#define DURATION_INTRO_MSG (35)
+#define DURATION_BLANK (73)
 #else
-#define DURATION_44 (44)
-#define DURATION_89 (89)
+#define DURATION_INTRO_MSG (44)
+#define DURATION_BLANK (89)
 #endif
 
 IntroMessage N(HeistMessageList)[] = {
-    { INTRO_MSG_BLANK, DURATION_89 },
-    { MSG_Intro_001B, DURATION_44 },
-    { MSG_Intro_001C, DURATION_44 },
-    { MSG_Intro_001D, DURATION_44 },
+    { INTRO_MSG_BLANK, DURATION_BLANK },
+    { MSG_Intro_001B, DURATION_INTRO_MSG },
+    { MSG_Intro_001C, DURATION_INTRO_MSG },
+    { MSG_Intro_001D, DURATION_INTRO_MSG },
     {}, // end of list
 };
 
