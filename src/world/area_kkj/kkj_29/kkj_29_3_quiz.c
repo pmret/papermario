@@ -979,7 +979,7 @@ EvtScript N(EVS_ManageQuizGame) = {
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -230, 0, -140)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, -230, 0, -140)
 #if VERSION_PAL
-    EVT_CALL(SetCamSpeed, CAM_DEFAULT, 0xF24A7E58) // EVT_FLOAT(0.96)
+    EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(0.961))
 #else
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(0.8))
 #endif

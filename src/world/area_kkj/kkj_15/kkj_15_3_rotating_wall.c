@@ -100,7 +100,7 @@ EvtScript N(EVS_RotatingWall_FirstTime) = {
         EVT_CALL(SetPanTarget, CAM_DEFAULT, 50, 10, -35)
         EVT_CALL(SetCamDistance, CAM_DEFAULT, 400)
 #if VERSION_PAL
-        EVT_CALL(SetCamSpeed, CAM_DEFAULT, 0xF24A7E58)
+        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(0.961))
 #else
         EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(0.8 / DT))
 #endif

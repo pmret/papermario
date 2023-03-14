@@ -38,7 +38,7 @@ EvtScript N(EVS_NpcIdle_ShopOwner) = {
             EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVarA, LVarB, LVarC)
             EVT_CALL(SetCamDistance, CAM_DEFAULT, -350)
 #if VERSION_PAL
-            EVT_CALL(0x802CEEF0, 0, 0xF24A7E58) // Should be EVT_FLOAT(0.8 * DT) or 0.96, but that gets rounded 1 byte off
+            EVT_CALL(SetCamSpeed, 0, EVT_FLOAT(0.961))
 #else
             EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(0.8))
 #endif
