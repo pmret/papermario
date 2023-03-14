@@ -4,6 +4,7 @@
 extern PushBlockGrid* wPushBlockGrids[8];
 
 // outVars for values returned by FetchPushedBlockProperties
+// TODO fix ordering (swap XYZ, IJK)
 enum {
     BLOCK_PROP_X    = LVar0,
     BLOCK_PROP_Y    = LVar1,
@@ -132,7 +133,7 @@ API_CALLABLE(FinishPushBlockMotion) {
 API_CALLABLE(FetchPushedBlockProperties) {
     PushBlockGrid* grid = (PushBlockGrid*) script->varTable[10];
     Entity* entity = get_entity_by_index(script->varTable[11]);
-    s32 x, y, z;
+    s32 gridCenterX, gridCenterY, gridCenterZ;
     s32 xThing, yThing, zThing;
     s32 entityX, entityY, entityZ;
     s32 varX, varZ;
@@ -140,17 +141,17 @@ API_CALLABLE(FetchPushedBlockProperties) {
     s32 cellX, cellZ;
     s32 x2, z2;
 
-    x = grid->centerPos.x;
-    y = grid->centerPos.y;
-    z = grid->centerPos.z;
+    gridCenterX = grid->centerPos.x;
+    gridCenterY = grid->centerPos.y;
+    gridCenterZ = grid->centerPos.z;
 
     xThing = gPlayerStatus.position.x;
     yThing = gPlayerStatus.position.y;
     zThing = gPlayerStatus.position.z;
 
-    xThing -= x;
-    yThing -= y;
-    zThing -= z;
+    xThing -= gridCenterX;
+    yThing -= gridCenterY;
+    zThing -= gridCenterZ;
 
     if (xThing < 0) {
         xThing -= BLOCK_GRID_SIZE;
@@ -170,9 +171,9 @@ API_CALLABLE(FetchPushedBlockProperties) {
     yThing *= BLOCK_GRID_SIZE;
     zThing *= BLOCK_GRID_SIZE;
 
-    xThing += (BLOCK_GRID_SIZE / 2) + x;
-    yThing += y;
-    zThing += (BLOCK_GRID_SIZE / 2) + z;
+    xThing += (BLOCK_GRID_SIZE / 2) + gridCenterX;
+    yThing += gridCenterY;
+    zThing += (BLOCK_GRID_SIZE / 2) + gridCenterZ;
 
     script->varTable[0] = xThing;
     script->varTable[1] = yThing;
