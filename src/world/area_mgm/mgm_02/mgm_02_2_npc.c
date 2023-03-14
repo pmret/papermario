@@ -12,11 +12,7 @@ void partner_enable_input(void);
 
 #define PLAY_COST   10
 #define PLAY_TIME   ((s32)(900 * DT))
-#if VERSION_PAL
-#define FRAME_RATE 25
-#else
-#define FRAME_RATE 30
-#endif
+#define FRAME_RATE ((s32)(30 * DT))
 #define NUM_BOXES   35
 #define NUM_PANELS  10
 
