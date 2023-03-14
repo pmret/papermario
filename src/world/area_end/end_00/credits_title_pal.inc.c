@@ -1,0 +1,35 @@
+#include "../common/Credits.h"
+
+CreditsEntry N(Credits_Title)[] = {
+    {
+        .msgID = MSG_Credits_0000,
+        .posX = STANDARD_POS_X,
+        .posY = 173,
+        .palette = 1,
+        .appearMode = CREDITS_APPEAR_MODE_00,
+        .appearTime = STANDARD_APPEAR_TIME,
+        .perCharDelayIn = 0,
+        .holdMode = CREDITS_HOLD_MODE_00,
+        .holdTime = 120 * DT,
+        .vanishMode = CREDITS_VANISH_MODE_00,
+        .vanishTime = 40 * DT,
+        .perCharDelayOut = 0,
+        .next = 40 * DT,
+        .flags = CREDITS_FLAG_1,
+    },
+    {
+        .msgID = MSG_Credits_0001,
+        .posX = STANDARD_POS_X,
+        .posY = 191,
+        .appearMode = CREDITS_APPEAR_MODE_00,
+        .appearTime = STANDARD_APPEAR_TIME,
+        .perCharDelayIn = 0,
+        .holdMode = CREDITS_HOLD_MODE_00,
+        .holdTime = 67,
+        .vanishMode = CREDITS_VANISH_MODE_00,
+        .vanishTime = 40 * DT,
+        .perCharDelayOut = 0,
+        .next = -1,
+        .flags = CREDITS_FLAG_1,
+    },
+};

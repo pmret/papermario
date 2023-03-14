@@ -69,18 +69,18 @@ EvtScript N(EVS_Amayze_Dayzees) = {
 EvtScript N(EVS_Sun) = {
     EVT_THREAD
         EVT_CALL(SetNpcPos, NPC_SunSad, -2185, 130, -30)
-        EVT_CALL(NpcFlyTo, NPC_SunSad, -2185, 50, -30, 10, 0, EASING_LINEAR)
-        EVT_CALL(NpcFlyTo, NPC_SunSad, -2045, 50, -30, 70, 0, EASING_LINEAR)
+        EVT_CALL(NpcFlyTo, NPC_SunSad, -2185, 50, -30, 10 * DT, 0, EASING_LINEAR)
+        EVT_CALL(NpcFlyTo, NPC_SunSad, -2045, 50, -30, 70 * DT, 0, EASING_LINEAR)
         EVT_CALL(SetNpcAnimation, NPC_SunSad, ANIM_Sun_TalkPleased)
-        EVT_CALL(NpcFlyTo, NPC_SunSad, -1645, 50, -30, 200, 0, EASING_LINEAR)
+        EVT_CALL(NpcFlyTo, NPC_SunSad, -1645, 50, -30, 200 * DT, 0, EASING_LINEAR)
         EVT_CALL(SetNpcPos, NPC_SunSad, 0, -500, 0)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(SetNpcPos, NPC_SunHappy, -2185, 130, -30)
-        EVT_CALL(NpcFlyTo, NPC_SunHappy, -2185, 50, -30, 10, 0, EASING_LINEAR)
-        EVT_CALL(NpcFlyTo, NPC_SunHappy, -2045, 50, -30, 70, 0, EASING_LINEAR)
+        EVT_CALL(NpcFlyTo, NPC_SunHappy, -2185, 50, -30, 10 * DT, 0, EASING_LINEAR)
+        EVT_CALL(NpcFlyTo, NPC_SunHappy, -2045, 50, -30, 70 * DT, 0, EASING_LINEAR)
         EVT_CALL(SetNpcAnimation, NPC_SunHappy, ANIM_Sun_FireTalkPleased)
-        EVT_CALL(NpcFlyTo, NPC_SunHappy, -1645, 50, -30, 200, 0, EASING_LINEAR)
+        EVT_CALL(NpcFlyTo, NPC_SunHappy, -1645, 50, -30, 200 * DT, 0, EASING_LINEAR)
         EVT_CALL(SetNpcPos, NPC_SunHappy, 0, -500, 0)
     EVT_END_THREAD
     EVT_RETURN

@@ -5569,8 +5569,40 @@ segments:
     - [0xE5B1D0, c, omo_17_3_train]
     - [0xE5B730, c, omo_17_4_npc]
     - [0xE5E8E0, c, omo_17_5_entity]
+  - name: end_00
+    dir: world/area_end/end_00
+    type: code
+    start: 0xE62D30
+    vram: 0x80240000
+    subsegments:
+    - [0xE62D30, c, end_00_0_header]
+    - [0xE62D50, c, end_00_1_main]
+    - [0xE62D50, c, end_00_2_credits]
+    - [0xE653B0, c, end_00_3_parade_setup]
+    - [0xE65630, c, end_00_4_allies]
+    - [0xE65630, c, end_00_5_koopas]
+    - [0xE65840, c, end_00_6_caravan]
+    - [0xE65840, c, end_00_7_boos]
+    - [0xE65870, c, end_00_8_yoshis]
+    - [0xE65870, c, end_00_9_huff_n_puff]
+    - [0xE65870, c, end_00_A_crystal_king]
+    - [0xE65870, c, end_00_B_bowser]
+  - name: end_01
+    dir: world/area_end/end_01
+    type: code
+    start: 0xE71930
+    vram: 0x80240000
+    subsegments:
+    - [0xE71930, c, end_01_0_header]
+    - [0xE71940, c, end_01_1_main]
+    - [0xE71960, c, end_01_2_credits]
+    - [0xE73FC0, c, end_01_3_parade_setup]
+    - [0xE741F0, c, end_01_4_opera_float]
+    - [0xE74620, c, end_01_5_flower_float]
+    - [0xE74620, c, end_01_6_shyguy_float]
+    - [0xE74920, c, end_01_7_peach_float]
 
-  - [0xE62D30, bin]
+  - [0xE7AE20, bin]
 
   - start: 0x1e937b8
     align: 8
