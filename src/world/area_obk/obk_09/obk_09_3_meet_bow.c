@@ -3,12 +3,6 @@
 
 #include "world/common/util/ChangeNpcToPartner.inc.c"
 
-#if VERSION_PAL
-#define VAR_1 (15.0)
-#else
-#define VAR_1 (12.0)
-#endif
-
 EvtScript N(EVS_Scene_MeetBow) = {
     EVT_IF_GE(GB_StoryProgress, STORY_CH3_BOW_JOINED_PARTY)
         EVT_RETURN
@@ -53,7 +47,7 @@ EvtScript N(EVS_Scene_MeetBow) = {
     EVT_CALL(PlaySoundAtNpc, NPC_Bow, SOUND_BOO_VANISH, SOUND_SPACE_MODE_0)
     EVT_SETF(LVar0, EVT_FLOAT(0.0))
     EVT_LOOP(20 * DT)
-        EVT_ADDF(LVar0, EVT_FLOAT(VAR_1))
+        EVT_ADDF(LVar0, EVT_FLOAT(240.0 / (s32)(20 * DT)))
         EVT_CALL(func_802CFD30, NPC_Bow, FOLD_TYPE_7, LVar0, 0, 0, 0)
         EVT_CALL(func_802CFD30, NPC_Bootler, FOLD_TYPE_7, LVar0, 0, 0, 0)
         EVT_WAIT(1)

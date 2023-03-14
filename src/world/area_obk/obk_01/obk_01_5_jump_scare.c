@@ -1,12 +1,6 @@
 #include "obk_01.h"
 #include "effects.h"
 
-#if VERSION_PAL
-#define VAR_1 (15.0)
-#else
-#define VAR_1 (12.0)
-#endif
-
 EvtScript N(EVS_Scene_JumpScareBoo) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(GetPlayerPos, LVar3, LVar4, LVar5)
@@ -37,7 +31,7 @@ EvtScript N(EVS_Scene_JumpScareBoo) = {
     EVT_WAIT(15)
     EVT_SETF(LVar0, EVT_FLOAT(240.0))
     EVT_LOOP(20 * DT)
-        EVT_SUBF(LVar0, EVT_FLOAT(VAR_1))
+        EVT_SUBF(LVar0, EVT_FLOAT(240.0 / (s32)(20 * DT)))
         EVT_CALL(func_802CFD30, NPC_JumpScareBoo, FOLD_TYPE_7, LVar0, 0, 0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP

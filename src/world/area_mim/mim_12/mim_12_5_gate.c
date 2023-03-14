@@ -305,12 +305,6 @@ EvtScript N(EVS_HaveBoosCloseGate) = {
     EVT_END
 };
 
-#if VERSION_PAL
-#define VAR_1 (15.0)
-#else
-#define VAR_1 (12.0)
-#endif
-
 EvtScript N(EVS_Scene_UnlockGate) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_WAIT(20 * DT)
@@ -334,7 +328,7 @@ EvtScript N(EVS_Scene_UnlockGate) = {
     EVT_CALL(PlaySoundAtNpc, NPC_GateBoo_01, SOUND_BOO_VANISH, SOUND_SPACE_MODE_0)
     EVT_SETF(LVar0, EVT_FLOAT(0.0))
     EVT_LOOP(20 * DT)
-        EVT_ADDF(LVar0, EVT_FLOAT(VAR_1))
+        EVT_ADDF(LVar0, EVT_FLOAT(240.0 / (s32)(20 * DT)))
         EVT_CALL(func_802CFD30, NPC_GateBoo_01, FOLD_TYPE_7, LVar0, 0, 0, 0)
         EVT_CALL(func_802CFD30, NPC_GateBoo_02, FOLD_TYPE_7, LVar0, 0, 0, 0)
         EVT_WAIT(1)
@@ -364,7 +358,7 @@ EvtScript N(EVS_Scene_UnlockGate) = {
     EVT_CALL(PlaySoundAtNpc, NPC_GateBoo_01, SOUND_BOO_APPEAR, SOUND_SPACE_MODE_0)
     EVT_SETF(LVar0, EVT_FLOAT(240.0))
     EVT_LOOP(20 * DT)
-        EVT_SUBF(LVar0, EVT_FLOAT(VAR_1))
+        EVT_SUBF(LVar0, EVT_FLOAT(240.0 / (s32)(20 * DT)))
         EVT_CALL(func_802CFD30, NPC_GateBoo_01, FOLD_TYPE_7, LVar0, 0, 0, 0)
         EVT_CALL(func_802CFD30, NPC_GateBoo_02, FOLD_TYPE_7, LVar0, 0, 0, 0)
         EVT_WAIT(1)
