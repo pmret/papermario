@@ -18,7 +18,7 @@ EvtScript N(EVS_JrTroopa_SpinningDodge) = {
 };
 
 #if VERSION_PAL
-#define KAMMY_JRTROOPA_SPEED 1.044921875
+#define KAMMY_JRTROOPA_SPEED 1.045
 #else
 #define KAMMY_JRTROOPA_SPEED 0.87
 #endif

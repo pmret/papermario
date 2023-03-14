@@ -5,9 +5,9 @@ EvtScript N(EVS_CaravanStopMarching) = {
     EVT_SETF(LVar1, LVar1)
     EVT_LOOP(0)
 #if VERSION_PAL
-    EVT_ADDF(LVar1, EVT_FLOAT(1.044921875))
+        EVT_ADDF(LVar1, EVT_FLOAT(1.045))
 #else
-        EVT_ADDF(LVar1, EVT_FLOAT(0.87 / DT))
+        EVT_ADDF(LVar1, EVT_FLOAT(0.87))
 #endif
         EVT_CALL(SetNpcPos, LVar0, LVar1, LVar2, LVar3)
         EVT_WAIT(1)
@@ -22,9 +22,9 @@ EvtScript N(EVS_MoustafaStopMarching) = {
     EVT_SETF(LVar0, LVar0)
     EVT_LOOP(0)
 #if VERSION_PAL
-    EVT_ADDF(LVar0, EVT_FLOAT(1.044921875))
+        EVT_ADDF(LVar0, EVT_FLOAT(1.045))
 #else
-        EVT_ADDF(LVar0, EVT_FLOAT(0.87 / DT))
+        EVT_ADDF(LVar0, EVT_FLOAT(0.87))
 #endif
         EVT_CALL(SetNpcPos, NPC_Moustafa, LVar0, 0, 0)
         EVT_WAIT(1)
