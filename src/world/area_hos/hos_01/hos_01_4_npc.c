@@ -106,7 +106,7 @@ EvtScript N(EVS_Scene_StarSpiritsPlea) = {
     EVT_SETF(MV_AlphaAmt_Others, EVT_FLOAT(-80.0))
     EVT_LOOP(20 * DT)
 #if VERSION_PAL
-        EVT_ADDF(MV_AlphaAmt_Others, EVT_FLOAT(7.203125))
+        EVT_ADDF(MV_AlphaAmt_Others, EVT_FLOAT(7.203))
 #else
         EVT_ADDF(MV_AlphaAmt_Others, EVT_FLOAT(6.0))
 #endif
