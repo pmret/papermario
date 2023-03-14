@@ -35,7 +35,7 @@ EvtScript N(EVS_SetupHoles) = {
     EVT_CALL(func_802CA988, 0, LVar2, LVar3, LVar4, LVar5)
     EVT_CALL(N(AwaitFallDownHole))
 #if VERSION_PAL
-    EVT_CALL(SetPlayerActionState, 0)
+    EVT_CALL(SetPlayerActionState, ACTION_STATE_IDLE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
 #endif
     EVT_CALL(InterruptUsePartner)
