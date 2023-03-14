@@ -2250,7 +2250,7 @@ typedef struct TweesterPhysics {
 
 typedef struct PartnerActionStatus {
     /* 0x000 */ s8 partnerActionState;
-    /* 0x001 */ s8 partnerAction_unk_1;
+    /* 0x001 */ b8 partnerAction_unk_1;
     /* 0x002 */ s8 partnerAction_unk_2;
     /* 0x003 */ s8 actingPartner;
     /* 0x004 */ s16 stickX;

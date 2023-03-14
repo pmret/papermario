@@ -30,7 +30,11 @@ API_CALLABLE(N(TakeOut)) {
         partner_init_get_out(bow);
     }
 
-    return partner_get_out(bow) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
+    if (partner_get_out(bow)) {
+        return ApiStatus_DONE1;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
 EvtScript EVS_WorldBow_TakeOut = {

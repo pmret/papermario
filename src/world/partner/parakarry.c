@@ -2,44 +2,65 @@
 #include "../src/world/partners.h"
 #include "sprite/npc/WorldParakarry.h"
 
-BSS s32 D_802BEBB0;
-BSS s32 D_802BEBB4;
-BSS s32 D_802BEBB8;
-BSS s32 D_802BEBBC;
-BSS s32 D_802BEBC0_31CBE0;
-BSS s32 D_802BEBC4;
-BSS TweesterPhysics ParakarryTweesterPhysics;
+#define NAMESPACE world_parakarry
 
-void world_parakarry_init(Npc* parakarry) {
+BSS b32 N(UsingAbility);
+BSS b32 N(LockingPlayerInput);
+BSS b32 N(PlayerCollisionDisabled); // minor bug: never gets properly reset to FALSE
+BSS b32 N(PlayerWasFacingLeft);
+BSS s32 N(UseAbilityState);
+BSS s32 N(AbilityStateTime);
+BSS TweesterPhysics N(TweesterPhysicsData);
+
+enum {
+    AIR_LIFT_NONE       = 0, // only used for initial value
+    // next two states lock input for a few frames, during which the ability can be canceled
+    AIR_LIFT_INIT       = 40,
+    AIR_LIFT_DELAY      = 41,
+    AIR_LIFT_BEGIN      = 30,
+    AIR_LIFT_GATHER     = 31,
+    AIR_LIFT_PICKUP     = 1, // pick up the player and lift them into the air
+    AIR_LIFT_CARRY      = 2, // carry the player through the air
+    AIR_LIFT_HOLD       = 6, // remain in one position for a short period of time
+    AIR_LIFT_JUMP       = 20, // player jumped off while being carried
+    AIR_LIFT_DROP       = 21, // dropping the player
+    AIR_LIFT_CANCEL     = 22,
+};
+
+void N(init)(Npc* parakarry) {
     parakarry->collisionHeight = 37;
     parakarry->collisionRadius = 40;
-    D_802BEBB0 = 0;
-    D_802BEBC0_31CBE0 = 0;
-    D_802BEBB4 = 0;
-    D_802BEBB8 = 0;
-    D_802BEBBC = 0;
-    D_802BEBC4 = 0;
+    N(UsingAbility)  = FALSE;
+    N(UseAbilityState) = AIR_LIFT_NONE;
+    N(LockingPlayerInput) = FALSE;
+    N(PlayerCollisionDisabled) = FALSE;
+    N(PlayerWasFacingLeft) = FALSE;
+    N(AbilityStateTime) = 0;
 }
 
-API_CALLABLE(ParakarryTakeOut) {
+API_CALLABLE(N(TakeOut)) {
     Npc* parakarry = script->owner2.npc;
 
     if (isInitialCall) {
         partner_init_get_out(parakarry);
     }
 
-    return partner_get_out(parakarry) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
+    if (partner_get_out(parakarry)) {
+        return ApiStatus_DONE1;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
-EvtScript world_parakarry_take_out = {
-    EVT_CALL(ParakarryTakeOut)
+EvtScript EVS_WorldParakarry_TakeOut = {
+    EVT_CALL(N(TakeOut))
     EVT_RETURN
     EVT_END
 };
 
-TweesterPhysics* ParakarryTweesterPhysicsPtr = &ParakarryTweesterPhysics;
+TweesterPhysics* N(TweesterPhysicsPtr) = &N(TweesterPhysicsData);
 
-API_CALLABLE(ParakarryUpdate) {
+API_CALLABLE(N(Update)) {
     PlayerData* playerData = &gPlayerData;
     Npc* parakarry = script->owner2.npc;
     f32 sinAngle, cosAngle, liftoffVelocity;
@@ -47,7 +68,7 @@ API_CALLABLE(ParakarryUpdate) {
 
     if (isInitialCall) {
         partner_flying_enable(parakarry, 1);
-        mem_clear(ParakarryTweesterPhysicsPtr, sizeof(TweesterPhysics));
+        mem_clear(N(TweesterPhysicsPtr), sizeof(TweesterPhysics));
         TweesterTouchingPartner = NULL;
     }
 
@@ -60,61 +81,61 @@ API_CALLABLE(ParakarryUpdate) {
         return ApiStatus_BLOCK;
     }
 
-    switch (ParakarryTweesterPhysicsPtr->state) {
+    switch (N(TweesterPhysicsPtr)->state) {
         case TWEESTER_PARTNER_INIT:
-            ParakarryTweesterPhysicsPtr->state++;
-            ParakarryTweesterPhysicsPtr->prevFlags = parakarry->flags;
-            ParakarryTweesterPhysicsPtr->radius = fabsf(dist2D(parakarry->pos.x, parakarry->pos.z,
+            N(TweesterPhysicsPtr)->state++;
+            N(TweesterPhysicsPtr)->prevFlags = parakarry->flags;
+            N(TweesterPhysicsPtr)->radius = fabsf(dist2D(parakarry->pos.x, parakarry->pos.z,
                                                      entity->position.x, entity->position.z));
-            ParakarryTweesterPhysicsPtr->angle = atan2(entity->position.x, entity->position.z,
+            N(TweesterPhysicsPtr)->angle = atan2(entity->position.x, entity->position.z,
                                               parakarry->pos.x, parakarry->pos.z);
-            ParakarryTweesterPhysicsPtr->angularVelocity = 6.0f;
-            ParakarryTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
-            ParakarryTweesterPhysicsPtr->countdown = 120;
+            N(TweesterPhysicsPtr)->angularVelocity = 6.0f;
+            N(TweesterPhysicsPtr)->liftoffVelocityPhase = 50.0f;
+            N(TweesterPhysicsPtr)->countdown = 120;
             parakarry->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
             parakarry->flags &= ~NPC_FLAG_GRAVITY;
         case TWEESTER_PARTNER_ATTRACT:
-            sin_cos_rad(DEG_TO_RAD(ParakarryTweesterPhysicsPtr->angle), &sinAngle, &cosAngle);
-            parakarry->pos.x = entity->position.x + (sinAngle * ParakarryTweesterPhysicsPtr->radius);
-            parakarry->pos.z = entity->position.z - (cosAngle * ParakarryTweesterPhysicsPtr->radius);
-            ParakarryTweesterPhysicsPtr->angle = clamp_angle(ParakarryTweesterPhysicsPtr->angle - ParakarryTweesterPhysicsPtr->angularVelocity);
+            sin_cos_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->angle), &sinAngle, &cosAngle);
+            parakarry->pos.x = entity->position.x + (sinAngle * N(TweesterPhysicsPtr)->radius);
+            parakarry->pos.z = entity->position.z - (cosAngle * N(TweesterPhysicsPtr)->radius);
+            N(TweesterPhysicsPtr)->angle = clamp_angle(N(TweesterPhysicsPtr)->angle - N(TweesterPhysicsPtr)->angularVelocity);
 
-            if (ParakarryTweesterPhysicsPtr->radius > 20.0f) {
-                ParakarryTweesterPhysicsPtr->radius--;
-            } else if (ParakarryTweesterPhysicsPtr->radius < 19.0f) {
-                ParakarryTweesterPhysicsPtr->radius++;
+            if (N(TweesterPhysicsPtr)->radius > 20.0f) {
+                N(TweesterPhysicsPtr)->radius--;
+            } else if (N(TweesterPhysicsPtr)->radius < 19.0f) {
+                N(TweesterPhysicsPtr)->radius++;
             }
 
-            liftoffVelocity = sin_rad(DEG_TO_RAD(ParakarryTweesterPhysicsPtr->liftoffVelocityPhase)) * 3.0f;
-            ParakarryTweesterPhysicsPtr->liftoffVelocityPhase += 3.0f;
+            liftoffVelocity = sin_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->liftoffVelocityPhase)) * 3.0f;
+            N(TweesterPhysicsPtr)->liftoffVelocityPhase += 3.0f;
 
-            if (ParakarryTweesterPhysicsPtr->liftoffVelocityPhase > 150.0f) {
-                ParakarryTweesterPhysicsPtr->liftoffVelocityPhase = 150.0f;
+            if (N(TweesterPhysicsPtr)->liftoffVelocityPhase > 150.0f) {
+                N(TweesterPhysicsPtr)->liftoffVelocityPhase = 150.0f;
             }
 
             parakarry->pos.y += liftoffVelocity;
-            parakarry->renderYaw = clamp_angle(360.0f - ParakarryTweesterPhysicsPtr->angle);
-            ParakarryTweesterPhysicsPtr->angularVelocity += 0.8;
+            parakarry->renderYaw = clamp_angle(360.0f - N(TweesterPhysicsPtr)->angle);
+            N(TweesterPhysicsPtr)->angularVelocity += 0.8;
 
-            if (ParakarryTweesterPhysicsPtr->angularVelocity > 40.0f) {
-                ParakarryTweesterPhysicsPtr->angularVelocity = 40.0f;
+            if (N(TweesterPhysicsPtr)->angularVelocity > 40.0f) {
+                N(TweesterPhysicsPtr)->angularVelocity = 40.0f;
             }
 
-            if (--ParakarryTweesterPhysicsPtr->countdown == 0) {
-                ParakarryTweesterPhysicsPtr->state++;
+            if (--N(TweesterPhysicsPtr)->countdown == 0) {
+                N(TweesterPhysicsPtr)->state++;
             }
             break;
         case TWEESTER_PARTNER_HOLD:
-            parakarry->flags = ParakarryTweesterPhysicsPtr->prevFlags;
-            ParakarryTweesterPhysicsPtr->countdown = 30;
-            ParakarryTweesterPhysicsPtr->state++;
+            parakarry->flags = N(TweesterPhysicsPtr)->prevFlags;
+            N(TweesterPhysicsPtr)->countdown = 30;
+            N(TweesterPhysicsPtr)->state++;
             break;
         case TWEESTER_PARTNER_RELEASE:
             partner_flying_update_player_tracking(parakarry);
             partner_flying_update_motion(parakarry);
 
-            if (--ParakarryTweesterPhysicsPtr->countdown == 0) {
-                ParakarryTweesterPhysicsPtr->state = TWEESTER_PARTNER_INIT;
+            if (--N(TweesterPhysicsPtr)->countdown == 0) {
+                N(TweesterPhysicsPtr)->state = TWEESTER_PARTNER_INIT;
                 TweesterTouchingPartner = NULL;
             }
             break;
@@ -122,514 +143,534 @@ API_CALLABLE(ParakarryUpdate) {
     return ApiStatus_BLOCK;
 }
 
-EvtScript world_parakarry_update = {
-    EVT_CALL(ParakarryUpdate)
+EvtScript EVS_WorldParakarry_Update = {
+    EVT_CALL(N(Update))
     EVT_RETURN
     EVT_END
 };
 
-void func_802BD514_319A84(Npc* parakarry) {
+void N(try_cancel_tweester)(Npc* parakarry) {
     if (TweesterTouchingPartner) {
         TweesterTouchingPartner = NULL;
-        parakarry->flags = ParakarryTweesterPhysicsPtr->prevFlags;
-        ParakarryTweesterPhysicsPtr->state = TWEESTER_PARTNER_INIT;
+        parakarry->flags = N(TweesterPhysicsPtr)->prevFlags;
+        N(TweesterPhysicsPtr)->state = TWEESTER_PARTNER_INIT;
         partner_clear_player_tracking (parakarry);
     }
 }
 
-s32 func_802BD558_319AC8(void) {
-    f32 sp28, sp2C, sp30, sp34, sp38, sp3C, sp40, sp44;
+s32 N(update_current_floor)(void) {
+    f32 x, y, z, length, hitRx, hitRz, hitDirX, hitDirZ;
     f32 colliderBaseHeight = gPlayerStatus.colliderHeight;
-    s32 raycastResult;
+    s32 hitResult;
     s32 surfaceType;
 
-    sp28 = gPlayerStatus.position.x;
-    sp2C = gPlayerStatus.position.y + (colliderBaseHeight * 0.5);
-    sp30 = gPlayerStatus.position.z;
-    sp34 = colliderBaseHeight * 0.5f;
+    x = gPlayerStatus.position.x;
+    y = gPlayerStatus.position.y + (colliderBaseHeight * 0.5);
+    z = gPlayerStatus.position.z;
+    length = colliderBaseHeight / 2.0f;
 
-    raycastResult = player_raycast_below_cam_relative(&gPlayerStatus, &sp28, &sp2C, &sp30, &sp34, &sp38,
-                                                      &sp3C, &sp40, &sp44);
+    hitResult = player_raycast_below_cam_relative(&gPlayerStatus, &x, &y, &z, &length, &hitRx,
+                                                      &hitRz, &hitDirX, &hitDirZ);
 
-    surfaceType = get_collider_flags(raycastResult) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
+    surfaceType = get_collider_flags(hitResult) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
     if (surfaceType == SURFACE_TYPE_SPIKES || surfaceType == SURFACE_TYPE_LAVA) {
         gPlayerStatus.hazardType = HAZARD_TYPE_SPIKES;
-        D_802BEBC0_31CBE0 = 0x15;
         gPlayerStatus.flags |= PS_FLAG_HIT_FIRE;
+        N(UseAbilityState) = AIR_LIFT_DROP;
     }
 
-    return raycastResult;
+    return hitResult;
 }
 
-ApiStatus func_802BD660_319BD0(Evt* evt, s32 isInitialCall) {
+API_CALLABLE(N(UseAbility)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
-    Npc* parakarry = evt->owner2.npc;
+    Npc* parakarry = script->owner2.npc;
     s32 buttonTemp = BUTTON_A;
-    f32 x, y, z, sp30, sp2C;
-    f32 diffZPlayer, diffXPlayer, diffZParakarry, diffXParakarry;
-    f32 tempX, tempZ;
-    s32 testMove;
-    u32 tempFrameCounterU32, tempFrameCounterTwoU32;
-    s32 tempConditional;
-    s32 diffTemp;
-    f32 tempYaw;
+    f32 x, y, z, yaw, length;
+    f32 playerDeltaX, playerDeltaZ;
+    f32 parakarryDeltaX, parakarryDeltaZ;
     f32 halfCollisionHeight;
-    u16 tempFrameCounter, tempFrameCounterTwo;
+    s32 hitCount;
+    b32 hitAbove;
 
-    if (gCurrentEncounter.unk_08 == 0) {
-        if (isInitialCall) {
-            func_802BD514_319A84(parakarry);
-            if (!(playerStatus->animFlags & PA_FLAG_CHANGING_MAP)) {
-                if (partnerActionStatus->partnerAction_unk_1 == 0) {
-                    if (!func_800EA52C(PARTNER_PARAKARRY)) {
-                        return ApiStatus_DONE2;
-                    }
-                    D_802BEBC0_31CBE0 = 0x28;
-                    parakarry->flags &= ~NPC_FLAG_COLLDING_FORWARD_WITH_WORLD;
-                    parakarry->flags |= NPC_FLAG_COLLDING_WITH_WORLD;
-                } else {
-                    partnerActionStatus->partnerAction_unk_1 = 0;
-                    set_action_state(ACTION_STATE_RIDE);
-                    parakarry->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_GRAVITY);
-                    D_802BEBB0 = 1;
-                    gCameras[0].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
-                    parakarry->currentAnim = ANIM_WorldParakarry_CarryLight;
-                    partnerActionStatus->actingPartner = PARTNER_PARAKARRY;
-                    partnerActionStatus->partnerActionState = PARTNER_ACTION_PARAKARRY_HOVER;
-                    parakarry->flags &= ~NPC_FLAG_COLLDING_FORWARD_WITH_WORLD;
-                    parakarry->flags |= NPC_FLAG_COLLDING_WITH_WORLD;
-                }
-            } else {
-                return ApiStatus_DONE2;
-            }
-        }
+    if (gCurrentEncounter.unk_08 != 0) {
+         return ApiStatus_BLOCK;
+    }
 
-        switch (D_802BEBC0_31CBE0) {
-            case 40:
-                if (playerStatus->inputDisabledCount == 0) {
-                    D_802BEBC4 = 3;
-                    D_802BEBC0_31CBE0 = 41;
-                    evt->functionTemp[2] = playerStatus->inputDisabledCount;
-                } else {
-                    goto block_end_return_ApiStatus_DONE2; // TODO remove this goto
-                }
-            case 41:
-                if (D_802BEBC4 == 0) {
-                    if (evt->functionTemp[2] >= playerStatus->inputDisabledCount) {
-                        if (func_800EA52C(PARTNER_PARAKARRY)) {
-                            D_802BEBC0_31CBE0 = 30;
-                            break;
-                        }
-                    }
-                    return ApiStatus_DONE2;
-                }
-                D_802BEBC4--;
-                break;
-        }
-
-        switch (D_802BEBC0_31CBE0) {
-            case 30:
-                set_action_state(ACTION_STATE_RIDE);
-                disable_player_input();
-                disable_player_static_collisions();
-                evt->functionTemp[2] = playerStatus->inputDisabledCount;
-                D_802BEBB4 = 1;
-                D_802BEBB8 = 1;
-                D_802BEBB0 = 1;
-                gCameras[0].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
-                parakarry->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_GRAVITY);
-                parakarry->flags |= NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
-                partnerActionStatus->actingPartner = PARTNER_PARAKARRY;
-                partnerActionStatus->partnerActionState = PARTNER_ACTION_PARAKARRY_HOVER;
-                D_802BEBBC = partner_force_player_flip_done();
-                enable_npc_blur(parakarry);
-                parakarry->yaw = atan2(parakarry->pos.x, parakarry->pos.z, playerStatus->position.x, playerStatus->position.z);
-                parakarry->duration = 4;
-                D_802BEBC0_31CBE0++;
-                break;
-            case 31:
-                if (playerStatus->actionState == ACTION_STATE_HIT_FIRE || playerStatus->actionState == ACTION_STATE_HIT_LAVA || playerStatus->actionState == ACTION_STATE_KNOCKBACK
-                        || playerStatus->actionState == ACTION_STATE_JUMP  || playerStatus->actionState == ACTION_STATE_HOP) {
-                    disable_npc_blur(parakarry);
-                    D_802BEBC0_31CBE0 = 21;
-                } else {
-                    suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
-                    parakarry->moveToPos.x = playerStatus->position.x;
-                    parakarry->moveToPos.y = playerStatus->position.y + 32.0f;
-                    parakarry->moveToPos.z = playerStatus->position.z;
-                    parakarry->currentAnim = ANIM_WorldParakarry_Run;
-                    add_vec2D_polar(&parakarry->moveToPos.x, &parakarry->moveToPos.z, 0.0f, playerStatus->targetYaw);
-                    tempYaw = playerStatus->targetYaw;
-
-                    tempYaw += (D_802BEBBC == 0) ? 90.0f : -90.0f;
-
-                    add_vec2D_polar(&parakarry->moveToPos.x, &parakarry->moveToPos.z, 5.0f, clamp_angle(tempYaw));
-
-                    parakarry->pos.x += (parakarry->moveToPos.x - parakarry->pos.x) / parakarry->duration;
-                    parakarry->pos.y += (parakarry->moveToPos.y - parakarry->pos.y) / parakarry->duration;
-                    parakarry->pos.z += (parakarry->moveToPos.z - parakarry->pos.z) / parakarry->duration;
-                    parakarry->duration--;
-                    if (parakarry->duration != 0) {
-                        if (evt->functionTemp[2] < playerStatus->inputDisabledCount) {
-                            disable_npc_blur(parakarry);
-                            D_802BEBC0_31CBE0 = 0x16;
-                        }
-                    } else {
-                        disable_npc_blur(parakarry);
-                        parakarry->yaw = playerStatus->targetYaw;
-                        parakarry->moveSpeed = 0.2f;
-                        parakarry->currentAnim = ANIM_WorldParakarry_CarryHeavy;
-                        parakarry->planarFlyDist = 0;
-                        suggest_player_anim_always_forward(ANIM_MarioW2_HoldOnto);
-                        sfx_play_sound_at_npc(SOUND_2009, SOUND_SPACE_MODE_0, NPC_PARTNER);
-                        gCollisionStatus.lastTouchedFloor = -1;
-                        gCollisionStatus.currentFloor = -1;
-                        parakarry->currentFloor = -1;
-                        D_802BEBC4 = 0x14;
-                        D_802BEBC0_31CBE0 = 1;
-                    }
-                }
-                break;
-            case 1:
-                if (playerStatus->actionState != ACTION_STATE_HIT_FIRE && playerStatus->actionState != ACTION_STATE_HIT_LAVA && playerStatus->actionState != ACTION_STATE_KNOCKBACK) {
-                    if (partnerActionStatus->pressedButtons & (BUTTON_A | BUTTON_B | BUTTON_C_DOWN)) {
-                        D_802BEBC0_31CBE0 = (partnerActionStatus->pressedButtons & BUTTON_A) ? 0x14 : 0x15;
-                        suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
-                    } else {
-                        tempFrameCounter = gGameStatusPtr->frameCounter;
-                        tempFrameCounterU32 = tempFrameCounter;
-                        tempFrameCounterU32 /= 6;
-                        if (!((tempFrameCounter - tempFrameCounterU32 * 6) & 0xFFFF)) {
-                            sfx_play_sound_at_npc(SOUND_2009, SOUND_SPACE_MODE_0, NPC_PARTNER);
-                        }
-                        sp2C = fabsf(sin_rad(DEG_TO_RAD((20 - D_802BEBC4) * 18))) * 1.3;
-                        playerStatus->position.y += sp2C;
-                        parakarry->pos.y += sp2C;
-                        x = parakarry->pos.x;
-                        y = parakarry->pos.y + parakarry->collisionHeight * 0.5f;
-                        z = parakarry->pos.z;
-                        sp2C = parakarry->collisionHeight * 0.5f;
-                        halfCollisionHeight = sp2C;
-
-                        if (npc_raycast_up(COLLISION_CHANNEL_10000, &x, &y, &z, &sp2C)) {
-                            if (sp2C < halfCollisionHeight) {
-                                D_802BEBC4 = 0;
-                            }
-                        }
-
-                        x = playerStatus->position.x;
-                        z = playerStatus->position.z;
-                        sp2C = playerStatus->colliderHeight * 0.5f;
-                        y = playerStatus->position.y + playerStatus->colliderHeight * 0.5f;
-                        halfCollisionHeight = playerStatus->spriteFacingAngle - 90.0f + gCameras[gCurrentCameraID].currentYaw;
-                        if (player_raycast_up_corners(playerStatus, &x, &y, &z, &sp2C, halfCollisionHeight) >= 0) {
-                            suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
-                            D_802BEBC0_31CBE0 = 0x15;
-                            break;
-                        }
-
-                        x = playerStatus->position.x;
-                        y = playerStatus->position.y;
-                        z = playerStatus->position.z;
-                        if (npc_test_move_complex_with_slipping(COLLISION_CHANNEL_10000, &x, &y, &z, parakarry->moveSpeed, parakarry->yaw, playerStatus->colliderHeight, playerStatus->colliderDiameter) >= 2) {
-                            playerStatus->position.x += (x - playerStatus->position.x) * 0.125f;
-                            playerStatus->position.z += (z - playerStatus->position.z) * 0.125f;
-                            parakarry->pos.x += (x - parakarry->pos.x) * 0.125f;
-                            parakarry->pos.z += (z - parakarry->pos.z) * 0.125f;
-                        }
-
-                        x = parakarry->pos.x;
-                        y = parakarry->pos.y;
-                        z = parakarry->pos.z;
-                        testMove = npc_test_move_complex_with_slipping(COLLISION_CHANNEL_10000, &x, &y, &z, parakarry->moveSpeed, parakarry->yaw, parakarry->collisionHeight, parakarry->collisionRadius);
-                        if (testMove >= 2) {
-                            tempX = x;
-                            tempZ = z;
-                            diffXParakarry = (x - parakarry->pos.x) * 0.125f;
-                            diffZParakarry = (z - parakarry->pos.z) * 0.125f;
-
-                            x = parakarry->pos.x + diffXParakarry;
-                            z = parakarry->pos.z + diffZParakarry;
-                            x = parakarry->pos.x;
-                            y = parakarry->pos.y;
-                            diffXPlayer = (tempX - playerStatus->position.x) * 0.125f;
-                            diffZPlayer = (tempZ - playerStatus->position.z) * 0.125f;
-                            z = parakarry->pos.z;
-                            testMove = npc_test_move_complex_with_slipping(COLLISION_CHANNEL_10000, &x, &y, &z, parakarry->moveSpeed, parakarry->yaw, parakarry->collisionHeight, parakarry->collisionRadius);
-                            if (testMove == 0) {
-                                playerStatus->position.x += diffXPlayer;
-                                playerStatus->position.z += diffZPlayer;
-                                parakarry->pos.x += diffXParakarry;
-                                parakarry->pos.z += diffZParakarry;
-                            }
-                        }
-
-                        if (testMove == 0 && !(playerStatus->animFlags & PA_FLAG_NPC_COLLIDED)) {
-                            add_vec2D_polar(&parakarry->pos.x, &parakarry->pos.z, parakarry->moveSpeed, parakarry->yaw);
-                            add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, parakarry->moveSpeed, parakarry->yaw);
-                            parakarry->planarFlyDist += parakarry->moveSpeed;
-                        }
-
-                        x = playerStatus->position.x;
-                        y = playerStatus->position.y + playerStatus->colliderHeight * 0.5f;
-                        z = playerStatus->position.z;
-                        sp2C = playerStatus->colliderHeight * 0.5f;
-                        if (npc_raycast_down_around(COLLISION_CHANNEL_10000, &x, &y, &z, &sp2C, parakarry->yaw, parakarry->collisionRadius)) {
-                            s32 surfaceType = get_collider_flags(NpcHitQueryColliderID) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
-                            if (surfaceType == SURFACE_TYPE_SPIKES || surfaceType == SURFACE_TYPE_LAVA) {
-                                playerStatus->hazardType = HAZARD_TYPE_SPIKES;
-                                D_802BEBC0_31CBE0 = 0x15;
-                                playerStatus->flags |= PS_FLAG_HIT_FIRE;
-                            }
-
-                            playerStatus->position.y += (y - playerStatus->position.y) * 0.25f;
-                            parakarry->pos.y = playerStatus->position.y + 32.0f;
-                        }
-                        if (!(parakarry->flags & NPC_FLAG_COLLDING_FORWARD_WITH_WORLD)) {
-                            gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
-                            gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
-                            gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
-                            if (D_802BEBC4 != 0) {
-                                D_802BEBC4--;
-                            } else {
-                                parakarry->jumpVelocity = -0.5f;
-                                parakarry->jumpScale = -0.01f;
-                                parakarry->moveToPos.y = playerStatus->position.y;
-                                parakarry->duration = 0;
-                                parakarry->currentAnim = ANIM_WorldParakarry_CarryHeavy;
-                                parakarry->animationSpeed = 1.8f;
-                                gCollisionStatus.currentFloor = -1;
-                                D_802BEBC0_31CBE0++;
-                            }
-                        } else {
-                            suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
-                            D_802BEBC0_31CBE0 = 0x15;
-                        }
-                    }
-                } else {
-                    D_802BEBC0_31CBE0 = 0x15;
-                }
-                break;
-            case 2:
-                gCollisionStatus.currentFloor = func_802BD558_319AC8();
-                if (playerStatus->actionState != ACTION_STATE_HIT_FIRE && playerStatus->actionState != ACTION_STATE_HIT_LAVA && playerStatus->actionState != ACTION_STATE_KNOCKBACK) {
-                    suggest_player_anim_always_forward(ANIM_MarioW2_HoldOnto);
-                    if (!(playerStatus->flags & PS_FLAG_HIT_FIRE)) {
-                        if (partnerActionStatus->pressedButtons & (BUTTON_A | BUTTON_B | BUTTON_C_DOWN)) {
-                            if (partnerActionStatus->pressedButtons & buttonTemp) {   // TODO find a way to remove this while still loading 0x15 instead of moving it from register
-                                if (!parakarry->pos.x) {
-
-                                }
-                            }
-                            D_802BEBC0_31CBE0 = (partnerActionStatus->pressedButtons & BUTTON_A) ? 0x14 : 0x15;
-                        } else {
-
-                            tempFrameCounterTwoU32 = gGameStatusPtr->frameCounter;
-                            tempFrameCounterTwo = tempFrameCounterTwoU32;
-                            tempFrameCounterTwoU32 /= 6;
-                            if (!((tempFrameCounterTwo - tempFrameCounterTwoU32 * 6) & 0xFFFF)) {
-                                sfx_play_sound_at_npc(SOUND_2009, SOUND_SPACE_MODE_0, NPC_PARTNER);
-                            }
-
-                            parakarry->jumpVelocity -= parakarry->jumpScale;
-                            if (parakarry->jumpVelocity > 0.0) {
-                                parakarry->jumpVelocity = 0.0f;
-                            }
-
-                            parakarry->pos.y += parakarry->jumpVelocity;
-                            playerStatus->position.y += parakarry->jumpVelocity;
-                            if (!(playerStatus->animFlags & PA_FLAG_NPC_COLLIDED)) {
-                                parakarry->moveSpeed += 0.1;
-                                if (parakarry->moveSpeed > 2.0) {
-                                    parakarry->moveSpeed = 2.0f;
-                                }
-
-                                add_vec2D_polar(&parakarry->pos.x, &parakarry->pos.z, parakarry->moveSpeed, parakarry->yaw);
-                                add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, parakarry->moveSpeed, parakarry->yaw);
-                                parakarry->planarFlyDist += parakarry->moveSpeed;
-                                parakarry->animationSpeed -= 0.05;
-                                if (parakarry->animationSpeed < 1.5) {
-                                    parakarry->animationSpeed = 1.5f;
-                                }
-                                if (parakarry->planarFlyDist > 80.0f) {
-                                    parakarry->animationSpeed += 0.5;
-                                }
-                                if (!(playerStatus->animFlags & PA_FLAG_NPC_COLLIDED)) {
-                                    x = playerStatus->position.x;
-                                    y = playerStatus->position.y;
-                                    z = playerStatus->position.z;
-                                    if (npc_test_move_complex_with_slipping(COLLISION_CHANNEL_10000, &x, &y, &z, parakarry->moveSpeed, parakarry->yaw, playerStatus->colliderHeight, playerStatus->colliderDiameter)) {
-                                        suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
-                                        D_802BEBC0_31CBE0 = 0x15;
-                                    } else {
-                                        x = parakarry->pos.x;
-                                        y = parakarry->pos.y;
-                                        z = parakarry->pos.z;
-                                        if (!npc_test_move_complex_with_slipping(COLLISION_CHANNEL_10000, &x, &y, &z, parakarry->moveSpeed, parakarry->yaw, parakarry->collisionHeight, parakarry->collisionRadius)) {
-                                            tempConditional = FALSE;
-                                            x = parakarry->pos.x;
-                                            y = parakarry->pos.y + parakarry->collisionHeight * 0.5f;
-                                            z = parakarry->pos.z;
-                                            sp2C = parakarry->collisionHeight * 0.5f;
-
-                                            halfCollisionHeight = sp2C;
-                                            if (npc_raycast_up(COLLISION_CHANNEL_10000, &x, &y, &z, &sp2C) && (sp2C < halfCollisionHeight)) {
-                                                parakarry->pos.y =  y - parakarry->collisionHeight;
-                                                playerStatus->position.y =  parakarry->pos.y - 32.0f;
-                                                tempConditional = TRUE;
-                                            }
-                                            x = playerStatus->position.x;
-                                            y = playerStatus->position.y + (playerStatus->colliderHeight * 0.5f);
-                                            z = playerStatus->position.z;
-                                            sp2C = playerStatus->colliderHeight * 0.5f;
-
-                                            if (!npc_raycast_down_around(COLLISION_CHANNEL_10000, &x, &y, &z, &sp2C, parakarry->yaw, parakarry->collisionRadius)
-                                                    || (playerStatus->position.y += (y - playerStatus->position.y) * 0.25f,
-                                                        parakarry->pos.y = playerStatus->position.y + 32.0f,
-                                                        y = parakarry->pos.y,
-                                                        parakarry->pos.y = playerStatus->position.y,
-                                                        spawn_surface_effects(parakarry, SURFACE_INTERACT_WALK),
-                                                        parakarry->pos.y = y, (!tempConditional))) {
-                                                if (!phys_adjust_cam_on_landing()) {
-                                                    gCameras[0].moveFlags &= ~CAMERA_MOVE_FLAG_2;
-                                                }
-                                                gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
-                                                gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
-                                                gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
-                                                if (!(parakarry->flags & NPC_FLAG_COLLDING_FORWARD_WITH_WORLD)) {
-                                                    parakarry->duration++;
-                                                    if (!(parakarry->planarFlyDist < 100.0f)) {
-                                                        D_802BEBC4 = 5;
-                                                        D_802BEBC0_31CBE0 = 6;
-                                                    }
-                                                    break;
-                                                }
-                                            } else {
-                                                D_802BEBC0_31CBE0 = 21;
-                                                break;
-                                            }
-                                        }
-                                        suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
-                                        D_802BEBC0_31CBE0 = 21;
-                                    }
-                                    break;
-                                }
-                            }
-                            suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
-                            D_802BEBC0_31CBE0 = 21;
-                        }
-                    } else {
-                        D_802BEBC0_31CBE0 = 20;
-                    }
-                } else {
-                    D_802BEBC0_31CBE0 = 21;
-                }
-                break;
-            case 6:
-                if (D_802BEBC4 != 0) {
-                    D_802BEBC4--;
-                } else {
-                    D_802BEBC0_31CBE0 = 21;
-                }
-                break;
-        }
-
-        if (D_802BEBC0_31CBE0 == 0x16 || D_802BEBC0_31CBE0 == 0x15 || D_802BEBC0_31CBE0 == 0x14) {
-            parakarry->currentAnim = ANIM_WorldParakarry_Idle;
-            D_802BEBB0 = 0;
-            parakarry->jumpVelocity = 0.0f;
-            parakarry->flags &= ~NPC_FLAG_JUMPING;
-            parakarry->animationSpeed = 1.0f;
-            partner_clear_player_tracking(parakarry);
-            partnerActionStatus->actingPartner = PARTNER_NONE;
-            partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
-            enable_partner_ai();
-            sfx_stop_sound(SOUND_2009);
-            if (D_802BEBB4 != 0) {
-                enable_player_input();
-            }
-            if (D_802BEBB8 != 0) {
-                enable_player_static_collisions();
-            }
-            if (!(playerStatus->flags & PS_FLAG_HIT_FIRE)) {
-                if (D_802BEBC0_31CBE0 == 0x14) {
-                    start_bounce_b();
-                } else if (D_802BEBC0_31CBE0 == 0x15) {
-                    start_falling();
-                    gravity_use_fall_parms();
-                    playerStatus->flags |= PS_FLAG_SCRIPTED_FALL;
-                } else {
-                    set_action_state(ACTION_STATE_IDLE);
-                }
-            } else {
-                set_action_state(ACTION_STATE_HIT_LAVA);
-            }
-block_end_return_ApiStatus_DONE2:
+    if (isInitialCall) {
+        N(try_cancel_tweester)(parakarry);
+        if ((playerStatus->animFlags & PA_FLAG_CHANGING_MAP)) {
             return ApiStatus_DONE2;
         }
+
+        if (!partnerActionStatus->partnerAction_unk_1) {
+            if (!func_800EA52C(PARTNER_PARAKARRY)) {
+                return ApiStatus_DONE2;
+            }
+            N(UseAbilityState) = AIR_LIFT_INIT;
+            parakarry->flags &= ~NPC_FLAG_COLLDING_FORWARD_WITH_WORLD;
+            parakarry->flags |= NPC_FLAG_COLLDING_WITH_WORLD;
+        } else {
+            partnerActionStatus->partnerAction_unk_1 = FALSE;
+            set_action_state(ACTION_STATE_RIDE);
+            parakarry->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_GRAVITY);
+            N(UsingAbility)  = TRUE;
+            gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
+            parakarry->currentAnim = ANIM_WorldParakarry_CarryLight;
+            partnerActionStatus->actingPartner = PARTNER_PARAKARRY;
+            partnerActionStatus->partnerActionState = PARTNER_ACTION_PARAKARRY_HOVER;
+            parakarry->flags &= ~NPC_FLAG_COLLDING_FORWARD_WITH_WORLD;
+            parakarry->flags |= NPC_FLAG_COLLDING_WITH_WORLD;
+        }
     }
+
+    switch (N(UseAbilityState)) {
+        case AIR_LIFT_INIT:
+            if (playerStatus->inputDisabledCount != 0) {
+                return ApiStatus_DONE2;
+            }
+            N(AbilityStateTime) = 3;
+            N(UseAbilityState) = AIR_LIFT_DELAY;
+            script->functionTemp[2] = playerStatus->inputDisabledCount;
+            // fallthrough
+        case AIR_LIFT_DELAY:
+            if (N(AbilityStateTime) == 0) {
+                if (script->functionTemp[2] < playerStatus->inputDisabledCount || !func_800EA52C(PARTNER_PARAKARRY)) {
+                    return ApiStatus_DONE2;
+                }
+                N(UseAbilityState) = AIR_LIFT_BEGIN;
+            } else {
+                N(AbilityStateTime)--;
+            }
+            break;
+    }
+
+    switch (N(UseAbilityState)) {
+        case AIR_LIFT_BEGIN:
+            set_action_state(ACTION_STATE_RIDE);
+            disable_player_input();
+            disable_player_static_collisions();
+            script->functionTemp[2] = playerStatus->inputDisabledCount;
+            N(LockingPlayerInput) = TRUE;
+            N(PlayerCollisionDisabled) = TRUE;
+            N(UsingAbility) = TRUE;
+            gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
+            parakarry->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_GRAVITY);
+            parakarry->flags |= NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
+            partnerActionStatus->actingPartner = PARTNER_PARAKARRY;
+            partnerActionStatus->partnerActionState = PARTNER_ACTION_PARAKARRY_HOVER;
+            N(PlayerWasFacingLeft) = partner_force_player_flip_done();
+            enable_npc_blur(parakarry);
+            parakarry->yaw = atan2(parakarry->pos.x, parakarry->pos.z, playerStatus->position.x, playerStatus->position.z);
+            parakarry->duration = 4;
+            N(UseAbilityState)++; // AIR_LIFT_GATHER
+            break;
+        case AIR_LIFT_GATHER:
+            if (playerStatus->actionState == ACTION_STATE_HIT_FIRE
+             || playerStatus->actionState == ACTION_STATE_HIT_LAVA
+             || playerStatus->actionState == ACTION_STATE_KNOCKBACK
+             || playerStatus->actionState == ACTION_STATE_JUMP 
+             || playerStatus->actionState == ACTION_STATE_HOP
+            ) {
+                disable_npc_blur(parakarry);
+                N(UseAbilityState) = AIR_LIFT_DROP;
+            } else {
+                suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
+                parakarry->moveToPos.x = playerStatus->position.x;
+                parakarry->moveToPos.y = playerStatus->position.y + 32.0f;
+                parakarry->moveToPos.z = playerStatus->position.z;
+                parakarry->currentAnim = ANIM_WorldParakarry_Run;
+                add_vec2D_polar(&parakarry->moveToPos.x, &parakarry->moveToPos.z, 0.0f, playerStatus->targetYaw);
+                yaw = playerStatus->targetYaw;
+
+                yaw += !N(PlayerWasFacingLeft) ? 90.0f : -90.0f;
+
+                add_vec2D_polar(&parakarry->moveToPos.x, &parakarry->moveToPos.z, 5.0f, clamp_angle(yaw));
+
+                parakarry->pos.x += (parakarry->moveToPos.x - parakarry->pos.x) / parakarry->duration;
+                parakarry->pos.y += (parakarry->moveToPos.y - parakarry->pos.y) / parakarry->duration;
+                parakarry->pos.z += (parakarry->moveToPos.z - parakarry->pos.z) / parakarry->duration;
+                parakarry->duration--;
+                if (parakarry->duration != 0) {
+                    if (script->functionTemp[2] < playerStatus->inputDisabledCount) {
+                        disable_npc_blur(parakarry);
+                        N(UseAbilityState) = AIR_LIFT_CANCEL;
+                    }
+                } else {
+                    disable_npc_blur(parakarry);
+                    parakarry->yaw = playerStatus->targetYaw;
+                    parakarry->moveSpeed = 0.2f;
+                    parakarry->currentAnim = ANIM_WorldParakarry_CarryHeavy;
+                    parakarry->planarFlyDist = 0;
+                    suggest_player_anim_always_forward(ANIM_MarioW2_HoldOnto);
+                    sfx_play_sound_at_npc(SOUND_2009, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                    gCollisionStatus.lastTouchedFloor = NO_COLLIDER;
+                    gCollisionStatus.currentFloor = NO_COLLIDER;
+                    parakarry->currentFloor = NO_COLLIDER;
+                    N(AbilityStateTime) = 20;
+                    N(UseAbilityState) = AIR_LIFT_PICKUP;
+                }
+            }
+            break;
+        case AIR_LIFT_PICKUP:
+            if (playerStatus->actionState == ACTION_STATE_HIT_FIRE
+             || playerStatus->actionState == ACTION_STATE_HIT_LAVA
+             || playerStatus->actionState == ACTION_STATE_KNOCKBACK
+            ) {
+                N(UseAbilityState) = AIR_LIFT_DROP;
+                break;
+            }
+            // handle jump/cancel inputs
+            if (partnerActionStatus->pressedButtons & (BUTTON_A | BUTTON_B | BUTTON_C_DOWN)) {
+                N(UseAbilityState) = (partnerActionStatus->pressedButtons & BUTTON_A) ? AIR_LIFT_JUMP : AIR_LIFT_DROP;
+                suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
+                break;
+            }
+
+            if (gGameStatusPtr->frameCounter % 6 == 0) {
+                sfx_play_sound_at_npc(SOUND_2009, SOUND_SPACE_MODE_0, NPC_PARTNER);
+            }
+
+            length = fabsf(sin_rad(DEG_TO_RAD((20 - N(AbilityStateTime)) * 18))) * 1.3;
+            playerStatus->position.y += length;
+            parakarry->pos.y += length;
+            x = parakarry->pos.x;
+            y = parakarry->pos.y + parakarry->collisionHeight / 2.0f;
+            z = parakarry->pos.z;
+            length = parakarry->collisionHeight / 2.0f;
+            halfCollisionHeight = length;
+
+            if (npc_raycast_up(COLLISION_CHANNEL_10000, &x, &y, &z, &length)) {
+                if (length < halfCollisionHeight) {
+                    N(AbilityStateTime) = 0;
+                }
+            }
+
+            length = playerStatus->colliderHeight / 2.0f;
+            x = playerStatus->position.x;
+            y = playerStatus->position.y + playerStatus->colliderHeight / 2.0f;
+            z = playerStatus->position.z;
+            halfCollisionHeight = playerStatus->spriteFacingAngle - 90.0f + gCameras[gCurrentCameraID].currentYaw;
+            if (player_raycast_up_corners(playerStatus, &x, &y, &z, &length, halfCollisionHeight) >= 0) {
+                suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
+                N(UseAbilityState) = AIR_LIFT_DROP;
+                break;
+            }
+
+            x = playerStatus->position.x;
+            y = playerStatus->position.y;
+            z = playerStatus->position.z;
+            hitCount = npc_test_move_complex_with_slipping(COLLISION_CHANNEL_10000, &x, &y, &z, parakarry->moveSpeed, parakarry->yaw, playerStatus->colliderHeight, playerStatus->colliderDiameter);
+            if (hitCount > 1) {
+                playerStatus->position.x += (x - playerStatus->position.x) / 8.0f;
+                playerStatus->position.z += (z - playerStatus->position.z) / 8.0f;
+                parakarry->pos.x += (x - parakarry->pos.x) / 8.0f;
+                parakarry->pos.z += (z - parakarry->pos.z) / 8.0f;
+            }
+
+            x = parakarry->pos.x;
+            y = parakarry->pos.y;
+            z = parakarry->pos.z;
+            hitCount = npc_test_move_complex_with_slipping(COLLISION_CHANNEL_10000, &x, &y, &z, parakarry->moveSpeed, parakarry->yaw, parakarry->collisionHeight, parakarry->collisionRadius);
+            if (hitCount > 1) {
+                playerDeltaX = (x - playerStatus->position.x) / 8.0f;
+                playerDeltaZ = (z - playerStatus->position.z) / 8.0f;
+                parakarryDeltaX = (x - parakarry->pos.x) / 8.0f;
+                parakarryDeltaZ = (z - parakarry->pos.z) / 8.0f;
+                
+                x = parakarry->pos.x + parakarryDeltaX;
+                z = parakarry->pos.z + parakarryDeltaZ;
+                
+                x = parakarry->pos.x;
+                y = parakarry->pos.y;
+                z = parakarry->pos.z;
+                hitCount = npc_test_move_complex_with_slipping(COLLISION_CHANNEL_10000, &x, &y, &z, parakarry->moveSpeed, parakarry->yaw, parakarry->collisionHeight, parakarry->collisionRadius);
+                if (hitCount == 0) {
+                    playerStatus->position.x += playerDeltaX;
+                    playerStatus->position.z += playerDeltaZ;
+                    parakarry->pos.x += parakarryDeltaX;
+                    parakarry->pos.z += parakarryDeltaZ;
+                }
+            }
+
+            if (hitCount == 0 && !(playerStatus->animFlags & PA_FLAG_NPC_COLLIDED)) {
+                add_vec2D_polar(&parakarry->pos.x, &parakarry->pos.z, parakarry->moveSpeed, parakarry->yaw);
+                add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, parakarry->moveSpeed, parakarry->yaw);
+                parakarry->planarFlyDist += parakarry->moveSpeed;
+            }
+
+            x = playerStatus->position.x;
+            y = playerStatus->position.y + playerStatus->colliderHeight / 2.0f;
+            z = playerStatus->position.z;
+            length = playerStatus->colliderHeight / 2.0f;
+            if (npc_raycast_down_around(COLLISION_CHANNEL_10000, &x, &y, &z, &length, parakarry->yaw, parakarry->collisionRadius)) {
+                s32 surfaceType = get_collider_flags(NpcHitQueryColliderID) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
+                if (surfaceType == SURFACE_TYPE_SPIKES || surfaceType == SURFACE_TYPE_LAVA) {
+                    playerStatus->hazardType = HAZARD_TYPE_SPIKES;
+                    playerStatus->flags |= PS_FLAG_HIT_FIRE;
+                    N(UseAbilityState) = AIR_LIFT_DROP;
+                }
+
+                playerStatus->position.y += (y - playerStatus->position.y) / 4.0f;
+                parakarry->pos.y = playerStatus->position.y + 32.0f;
+            }
+
+            if (parakarry->flags & NPC_FLAG_COLLDING_FORWARD_WITH_WORLD) {
+                suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
+                N(UseAbilityState) = AIR_LIFT_DROP;
+                break;
+            }
+
+            gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
+            gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
+            gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
+            if (N(AbilityStateTime) != 0) {
+                N(AbilityStateTime)--;
+            } else {
+                parakarry->jumpVelocity = -0.5f;
+                parakarry->jumpScale = -0.01f;
+                parakarry->moveToPos.y = playerStatus->position.y;
+                parakarry->duration = 0;
+                parakarry->currentAnim = ANIM_WorldParakarry_CarryHeavy;
+                parakarry->animationSpeed = 1.8f;
+                gCollisionStatus.currentFloor = NO_COLLIDER;
+                N(UseAbilityState)++; // AIR_LIFT_CARRY
+            }  
+            break;
+        case AIR_LIFT_CARRY:
+            gCollisionStatus.currentFloor = N(update_current_floor)();
+            if (playerStatus->actionState == ACTION_STATE_HIT_FIRE
+             || playerStatus->actionState == ACTION_STATE_HIT_LAVA
+             || playerStatus->actionState == ACTION_STATE_KNOCKBACK
+            ) {
+                N(UseAbilityState) = AIR_LIFT_DROP;
+                break;
+            }
+            
+            suggest_player_anim_always_forward(ANIM_MarioW2_HoldOnto);
+            if (playerStatus->flags & PS_FLAG_HIT_FIRE) {
+                N(UseAbilityState) = AIR_LIFT_JUMP;
+                break;
+            }
+
+            // handle jump/cancel inputs
+            if (partnerActionStatus->pressedButtons & (BUTTON_A | BUTTON_B | BUTTON_C_DOWN)) {
+                if (partnerActionStatus->pressedButtons & buttonTemp) {   // TODO find a way to remove this while still loading 0x15 instead of moving it from register
+                    if (!parakarry->pos.x) {
+
+                    }
+                }
+                N(UseAbilityState) = (partnerActionStatus->pressedButtons & BUTTON_A) ? AIR_LIFT_JUMP : AIR_LIFT_DROP;
+                break;
+            }
+
+            if (gGameStatusPtr->frameCounter % 6 == 0) {
+                sfx_play_sound_at_npc(SOUND_2009, SOUND_SPACE_MODE_0, NPC_PARTNER);
+            }
+
+            parakarry->jumpVelocity -= parakarry->jumpScale;
+            if (parakarry->jumpVelocity > 0.0) {
+                parakarry->jumpVelocity = 0.0f;
+            }
+
+            parakarry->pos.y += parakarry->jumpVelocity;
+            playerStatus->position.y += parakarry->jumpVelocity;
+            if (!(playerStatus->animFlags & PA_FLAG_NPC_COLLIDED)) {
+                parakarry->moveSpeed += 0.1;
+                if (parakarry->moveSpeed > 2.0) {
+                    parakarry->moveSpeed = 2.0f;
+                }
+
+                add_vec2D_polar(&parakarry->pos.x, &parakarry->pos.z, parakarry->moveSpeed, parakarry->yaw);
+                add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, parakarry->moveSpeed, parakarry->yaw);
+                parakarry->planarFlyDist += parakarry->moveSpeed;
+                parakarry->animationSpeed -= 0.05;
+                if (parakarry->animationSpeed < 1.5) {
+                    parakarry->animationSpeed = 1.5f;
+                }
+                if (parakarry->planarFlyDist > 80.0f) {
+                    parakarry->animationSpeed += 0.5;
+                }
+                if (!(playerStatus->animFlags & PA_FLAG_NPC_COLLIDED)) {
+                    x = playerStatus->position.x;
+                    y = playerStatus->position.y;
+                    z = playerStatus->position.z;
+                    if (npc_test_move_complex_with_slipping(COLLISION_CHANNEL_10000,
+                            &x, &y, &z, parakarry->moveSpeed, parakarry->yaw,
+                            playerStatus->colliderHeight, playerStatus->colliderDiameter)
+                    ) {
+                        suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
+                        N(UseAbilityState) = AIR_LIFT_DROP;
+                        break;
+                    }
+
+                    x = parakarry->pos.x;
+                    y = parakarry->pos.y;
+                    z = parakarry->pos.z;
+                    if (!npc_test_move_complex_with_slipping(COLLISION_CHANNEL_10000,
+                            &x, &y, &z, parakarry->moveSpeed, parakarry->yaw,
+                            parakarry->collisionHeight, parakarry->collisionRadius)
+                    ) {
+                        hitAbove = FALSE;
+                        x = parakarry->pos.x;
+                        y = parakarry->pos.y + parakarry->collisionHeight / 2.0f;
+                        z = parakarry->pos.z;
+                        length = parakarry->collisionHeight / 2.0f;
+
+                        halfCollisionHeight = length;
+                        if (npc_raycast_up(COLLISION_CHANNEL_10000, &x, &y, &z, &length) && (length < halfCollisionHeight)) {
+                            parakarry->pos.y =  y - parakarry->collisionHeight;
+                            playerStatus->position.y = parakarry->pos.y - 32.0f;
+                            hitAbove = TRUE;
+                        }
+                        x = playerStatus->position.x;
+                        y = playerStatus->position.y + playerStatus->colliderHeight / 2.0f;
+                        z = playerStatus->position.z;
+                        length = playerStatus->colliderHeight / 2.0f;
+
+                        if (npc_raycast_down_around(COLLISION_CHANNEL_10000, &x, &y, &z, &length, parakarry->yaw, parakarry->collisionRadius)) {
+                            playerStatus->position.y += (y - playerStatus->position.y) / 4.0f;
+                            parakarry->pos.y = playerStatus->position.y + 32.0f;
+                            y = parakarry->pos.y;
+                            parakarry->pos.y = playerStatus->position.y;
+                            spawn_surface_effects(parakarry, SURFACE_INTERACT_WALK);
+                            parakarry->pos.y = y;
+
+                            if (hitAbove) {
+                                N(UseAbilityState) = AIR_LIFT_DROP;
+                                break;
+                            }
+                        }
+
+                        if (!phys_adjust_cam_on_landing()) {
+                            gCameras[CAM_DEFAULT].moveFlags &= ~CAMERA_MOVE_FLAG_2;
+                        }
+                        gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
+                        gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
+                        gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
+                        if (!(parakarry->flags & NPC_FLAG_COLLDING_FORWARD_WITH_WORLD)) {
+                            parakarry->duration++;
+                            if (!(parakarry->planarFlyDist < 100.0f)) {
+                                N(AbilityStateTime) = 5;
+                                N(UseAbilityState) = AIR_LIFT_HOLD;
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+            suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
+            N(UseAbilityState) = AIR_LIFT_DROP;
+            break;
+        case AIR_LIFT_HOLD:
+            if (N(AbilityStateTime) != 0) {
+                N(AbilityStateTime)--;
+            } else {
+                N(UseAbilityState) = AIR_LIFT_DROP;
+            }
+            break;
+    }
+
+    if (N(UseAbilityState) == AIR_LIFT_JUMP
+     || N(UseAbilityState) == AIR_LIFT_DROP
+     || N(UseAbilityState) == AIR_LIFT_CANCEL
+    ) {
+        parakarry->currentAnim = ANIM_WorldParakarry_Idle;
+        N(UsingAbility)  = FALSE;
+        parakarry->jumpVelocity = 0.0f;
+        parakarry->flags &= ~NPC_FLAG_JUMPING;
+        parakarry->animationSpeed = 1.0f;
+        partner_clear_player_tracking(parakarry);
+        partnerActionStatus->actingPartner = PARTNER_NONE;
+        partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
+        enable_partner_ai();
+        sfx_stop_sound(SOUND_2009);
+        if (N(LockingPlayerInput)) {
+            enable_player_input();
+        }
+        if (N(PlayerCollisionDisabled)) {
+            enable_player_static_collisions();
+        }
+        if ((playerStatus->flags & PS_FLAG_HIT_FIRE)) {
+            set_action_state(ACTION_STATE_HIT_LAVA);
+        } else if (N(UseAbilityState) == AIR_LIFT_JUMP) {
+            start_bounce_b();
+        } else if (N(UseAbilityState) == AIR_LIFT_DROP) {
+            start_falling();
+            gravity_use_fall_parms();
+            playerStatus->flags |= PS_FLAG_SCRIPTED_FALL;
+        } else {
+            set_action_state(ACTION_STATE_IDLE);
+        }
+        return ApiStatus_DONE2;
+    }
+    
     return ApiStatus_BLOCK;
 }
 
-EvtScript world_parakarry_use_ability = {
-    EVT_CALL(func_802BD660_319BD0)
+EvtScript EVS_WorldParakarry_UseAbility = {
+    EVT_CALL(N(UseAbility))
     EVT_RETURN
     EVT_END
 };
 
-API_CALLABLE(ParakarryPutAway) {
+API_CALLABLE(N(PutAway)) {
     Npc* parakarry = script->owner2.npc;
 
     if (isInitialCall) {
         partner_init_put_away(parakarry);
     }
 
-    return partner_put_away(parakarry) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
+    if (partner_put_away(parakarry)) {
+        return ApiStatus_DONE1;
+    } else {
+        return ApiStatus_BLOCK;
+    }
 }
 
-EvtScript world_parakarry_put_away = {
-    EVT_CALL(ParakarryPutAway)
+EvtScript EVS_WorldParakarry_PutAway = {
+    EVT_CALL(N(PutAway))
     EVT_RETURN
     EVT_END
 };
 
-void world_parakarry_pre_battle(Npc* parakarry) {
-    PartnerActionStatus* parakarryActionStatus = &gPartnerActionStatus;
+void N(pre_battle)(Npc* parakarry) {
+    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
 
-    if (D_802BEBB0) {
-        if (D_802BEBB8) {
+    if (N(UsingAbility)) {
+        if (N(PlayerCollisionDisabled)) {
             enable_player_static_collisions();
         }
 
-        if (D_802BEBB4) {
+        if (N(LockingPlayerInput)) {
             enable_player_input();
         }
 
         set_action_state(ACTION_STATE_IDLE);
-        parakarryActionStatus->npc = *parakarry;
-        parakarryActionStatus->partnerAction_unk_1 = 1;
+        partnerStatus->npc = *parakarry;
+        partnerStatus->partnerAction_unk_1 = TRUE;
         partner_clear_player_tracking(parakarry);
     }
 
-    parakarryActionStatus->actingPartner = PARTNER_PARAKARRY;
+    partnerStatus->actingPartner = PARTNER_PARAKARRY;
 }
 
-void world_parakarry_post_battle(Npc* parakarry) {
-    PartnerActionStatus* parakarryActionStatus = &gPartnerActionStatus;
+void N(post_battle)(Npc* parakarry) {
+    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
 
-    if (parakarryActionStatus->partnerAction_unk_1 != 0) {
-        if (D_802BEBB8) {
+    if (partnerStatus->partnerAction_unk_1) {
+        if (N(PlayerCollisionDisabled)) {
             disable_player_static_collisions();
         }
-        if (D_802BEBB4) {
+        if (N(LockingPlayerInput)) {
             disable_player_input();
         }
 
         set_action_state(ACTION_STATE_RIDE);
-        *parakarry = parakarryActionStatus->npc;
-        parakarryActionStatus->actingPartner = PARTNER_NONE;
-        parakarryActionStatus->partnerActionState = PARTNER_ACTION_NONE;
+        *parakarry = partnerStatus->npc;
+        partnerStatus->actingPartner = PARTNER_NONE;
+        partnerStatus->partnerActionState = PARTNER_ACTION_NONE;
         partner_clear_player_tracking(parakarry);
         partner_use_ability();
     }

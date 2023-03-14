@@ -380,7 +380,7 @@ typedef struct EncounterStatus {
     /* 0x008 */ s8 unk_08;
     /* 0x009 */ s8 battleOutcome; /* 0 = won, 1 = lost */
     /* 0x00A */ s8 battleTriggerCooldown; ///< set to 15 after victory, 45 after fleeing
-    /* 0x00B */ s8 merleeCoinBonus; /* triple coins when != 0 */
+    /* 0x00B */ b8 hasMerleeCoinBonus; /* triple coins when TRUE */
     /* 0x00C */ u8 damageTaken; /* valid after battle */
     /* 0x00D */ char unk_0D;
     /* 0x00E */ s16 coinsEarned; /* valid after battle */

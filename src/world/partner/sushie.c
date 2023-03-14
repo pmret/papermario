@@ -5,6 +5,8 @@
 #include "sprite/npc/WorldSushie.h"
 #include "sprite.h"
 
+#define NAMESPACE world_sushie
+
 BSS f32 OriginalPlayerY;
 BSS s32 bss_802BFEE4;
 BSS s32 bss_802BFEE8;
@@ -678,7 +680,7 @@ API_CALLABLE(func_802BE3A4_31F114) {
     return ApiStatus_BLOCK;
 }
 
-EvtScript world_sushie_use_ability = {
+EvtScript EVS_WorldSushie_UseAbility = {
     EVT_CALL(func_802BE3A4_31F114)
     EVT_RETURN
     EVT_END
@@ -695,7 +697,7 @@ void world_sushie_init(Npc* sushie) {
     bss_802BFEF4 = 0;
 }
 
-s32 SushieTakeOut(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SushieTakeOut) {
     Npc* sushie = script->owner2.npc;
 
     if (isInitialCall) {
@@ -705,7 +707,7 @@ s32 SushieTakeOut(Evt* script, s32 isInitialCall) {
     return partner_get_out(sushie) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
-EvtScript world_sushie_take_out = {
+EvtScript EVS_WorldSushie_TakeOut = {
     EVT_CALL(SushieTakeOut)
     EVT_RETURN
     EVT_END
@@ -794,7 +796,7 @@ API_CALLABLE(SushieUpdate) {
     return ApiStatus_BLOCK;
 }
 
-EvtScript world_sushie_update = {
+EvtScript EVS_WorldSushie_Update = {
     EVT_CALL(SushieUpdate)
     EVT_RETURN
     EVT_END
@@ -809,7 +811,7 @@ void func_802BF920_320690(Npc* sushie) {
     }
 }
 
-s32 SushiePutAway(Evt* script, s32 isInitialCall) {
+API_CALLABLE(SushiePutAway) {
     Npc* sushie = script->owner2.npc;
 
     if (isInitialCall) {
@@ -820,7 +822,7 @@ s32 SushiePutAway(Evt* script, s32 isInitialCall) {
     return partner_put_away(sushie) ? ApiStatus_DONE1 : ApiStatus_BLOCK;
 }
 
-EvtScript world_sushie_put_away = {
+EvtScript EVS_WorldSushie_PutAway = {
     EVT_CALL(SushiePutAway)
     EVT_RETURN
     EVT_END
@@ -850,7 +852,7 @@ void world_sushie_post_battle(Npc* sushie) {
     }
 }
 
-s32 func_802BFAB8_320828(Evt* script, s32 isInitialCall) {
+API_CALLABLE(func_802BFAB8_320828) {
     Npc* partnerNPC = get_npc_unsafe(NPC_PARTNER);
     PlayerStatus* playerStatus = &gPlayerStatus;
 
@@ -923,7 +925,7 @@ s32 func_802BFAB8_320828(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-EvtScript world_sushie_while_riding = {
+EvtScript EVS_WorldSushie_Riding = {
     EVT_CALL(func_802BFAB8_320828)
     EVT_RETURN
     EVT_END

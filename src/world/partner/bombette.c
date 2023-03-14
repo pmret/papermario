@@ -10,9 +10,9 @@ BSS b32 N(PlayingFuseSound);
 BSS b32 N(IsBlasting); // TRUE for 3 frames while using ability
 BSS b32 N(LockingPlayerInput);
 BSS b32 N(MaintainPosAfterBlast);
-BSS b32 N(D_802BE934);
-BSS b32 N(D_802BE938);
-BSS s32 N(D_802BE93C);
+BSS b32 N(TriggeredEarlyDetonation);
+BSS b32 N(MovementBlocked);
+BSS s32 N(D_802BE93C); // unused (padding?)
 
 void entity_try_partner_interaction_trigger(s32 arg0);
 
@@ -193,7 +193,7 @@ void N(try_cancel_tweester)(Npc* npc) {
 
 s32 N(can_use_ability)(Npc* npc) {
     if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) {
-        N(D_802BE934) = TRUE;
+        N(TriggeredEarlyDetonation) = TRUE;
         return FALSE;
     }
     return TRUE;
@@ -248,7 +248,7 @@ API_CALLABLE(N(UseAbility)) {
             N(LockingPlayerInput) = TRUE;
             N(IsBlasting) = FALSE;
             N(MaintainPosAfterBlast) = FALSE;
-            N(D_802BE934) = FALSE;
+            N(TriggeredEarlyDetonation) = FALSE;
             npc->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_GRAVITY | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8);
             partnerActionStatus->partnerActionState = PARTNER_ACTION_USE;
             partnerActionStatus->actingPartner = PARTNER_BOMBETTE;
@@ -318,7 +318,7 @@ API_CALLABLE(N(UseAbility)) {
             add_vec2D_polar(&npc->pos.x, &npc->pos.z, 0.0f, npc->yaw);
             npc->currentAnim = ANIM_WorldBombette_WalkLit;
             npc->jumpVelocity = 0.0f;
-            N(D_802BE938) = FALSE;
+            N(MovementBlocked) = FALSE;
             npc->flags |= NPC_FLAG_GRAVITY;
             npc->flags &= ~NPC_FLAG_IGNORE_PLAYER_COLLISION;
             npc->moveSpeed = 1.0f;
@@ -331,11 +331,11 @@ API_CALLABLE(N(UseAbility)) {
                 break;
             }
             if (script->functionTemp[1] < 45) {
-                if (!(npc->flags & NPC_FLAG_COLLDING_WITH_WORLD) && !N(D_802BE938)) {
+                if (!(npc->flags & NPC_FLAG_COLLDING_WITH_WORLD) && !N(MovementBlocked)) {
                     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
                     spawn_surface_effects(npc, SURFACE_INTERACT_WALK);
                 } else {
-                    N(D_802BE938) = TRUE;
+                    N(MovementBlocked) = TRUE;
                 }
             }
 
@@ -386,7 +386,7 @@ API_CALLABLE(N(UseAbility)) {
                     N(LockingPlayerInput) = FALSE;
                     enable_player_input();
                 }
-            } else if (!N(D_802BE934)) {
+            } else if (!N(TriggeredEarlyDetonation)) {
                 if (script->functionTemp[1] != 0) {
                     script->functionTemp[1]--;
                     break;
@@ -517,7 +517,7 @@ API_CALLABLE(N(UseAbility)) {
             partnerActionStatus->actingPartner = PARTNER_NONE;
             npc->jumpVelocity = 0.0f;
             N(IsBlasting) = FALSE;
-            N(D_802BE934) = FALSE;
+            N(TriggeredEarlyDetonation) = FALSE;
             npc->pos.y = playerStatus->position.y;
             npc->rotation.x = 0.0f;
             npc->rotation.z = 0.0f;
@@ -545,7 +545,7 @@ API_CALLABLE(N(UseAbility)) {
             npc->pos.y = playerStatus->position.y;
             npc->pos.z = playerStatus->position.z;
             N(IsBlasting) = FALSE;
-            N(D_802BE934) = FALSE;
+            N(TriggeredEarlyDetonation) = FALSE;
             if (!N(PlayerWasFacingLeft)) {
                 add_vec2D_polar(&npc->pos.x, &npc->pos.z, playerStatus->colliderDiameter / 4, clamp_angle(playerStatus->targetYaw + 90.0f));
             } else {

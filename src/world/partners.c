@@ -234,10 +234,10 @@ WorldPartner wPartners[] = {
         .dmaDest = &world_partner_parakarry_VRAM,
         .isFlying = TRUE,
         .init = world_parakarry_init,
-        .takeOut = &world_parakarry_take_out,
-        .update = &world_parakarry_update,
-        .useAbility = &world_parakarry_use_ability,
-        .putAway = &world_parakarry_put_away,
+        .takeOut = &EVS_WorldParakarry_TakeOut,
+        .update = &EVS_WorldParakarry_Update,
+        .useAbility = &EVS_WorldParakarry_UseAbility,
+        .putAway = &EVS_WorldParakarry_PutAway,
         .idle = ANIM_WorldParakarry_Idle,
         .canPlayerPause = partner_is_idle,
         .preBattle = world_parakarry_pre_battle,
@@ -261,15 +261,15 @@ WorldPartner wPartners[] = {
         .dmaDest = &world_partner_watt_VRAM,
         .isFlying = TRUE,
         .init = world_watt_init,
-        .takeOut = &world_watt_take_out,
-        .update = &world_watt_update,
-        .useAbility = &world_watt_use_ability,
-        .putAway = &world_watt_put_away,
+        .takeOut = &EVS_WorldWatt_TakeOut,
+        .update = &EVS_WorldWatt_Update,
+        .useAbility = &EVS_WorldWatt_UseAbility,
+        .putAway = &EVS_WorldWatt_PutAway,
         .idle = ANIM_WorldWatt_Idle,
         .canPlayerPause = world_partner_can_player_pause_default,
         .preBattle = world_watt_pre_battle,
         .postBattle = world_watt_post_battle,
-        .whileRiding = &world_watt_while_riding,
+        .whileRiding = &EVS_WorldWatt_Riding,
     },
     [PARTNER_SUSHIE] {
         .dmaStart = &world_partner_sushie_ROM_START,
@@ -277,15 +277,15 @@ WorldPartner wPartners[] = {
         .dmaDest = &world_partner_sushie_VRAM,
         .isFlying = FALSE,
         .init = world_sushie_init,
-        .takeOut = &world_sushie_take_out,
-        .update = &world_sushie_update,
-        .useAbility = &world_sushie_use_ability,
-        .putAway = &world_sushie_put_away,
+        .takeOut = &EVS_WorldSushie_TakeOut,
+        .update = &EVS_WorldSushie_Update,
+        .useAbility = &EVS_WorldSushie_UseAbility,
+        .putAway = &EVS_WorldSushie_PutAway,
         .idle = ANIM_WorldSushie_Idle,
         .canPlayerPause = world_partner_can_player_pause_default,
         .preBattle = world_sushie_pre_battle,
         .postBattle = world_sushie_post_battle,
-        .whileRiding = &world_sushie_while_riding,
+        .whileRiding = &EVS_WorldSushie_Riding,
     },
     [PARTNER_LAKILESTER] {
         .dmaStart = &world_partner_lakilester_ROM_START,
@@ -293,15 +293,15 @@ WorldPartner wPartners[] = {
         .dmaDest = &world_partner_lakilester_VRAM,
         .isFlying = TRUE,
         .init = world_lakilester_init,
-        .takeOut = &world_lakilester_take_out,
-        .update = &world_lakilester_update,
-        .useAbility = &EVS_LakilesterUseAbility,
-        .putAway = &world_lakilester_put_away,
+        .takeOut = &EVS_WorldLakilester_TakeOut,
+        .update = &EVS_WorldLakilester_Update,
+        .useAbility = &EVS_WorldLakilester_UseAbility,
+        .putAway = &EVS_WorldLakilester_PutAway,
         .idle = ANIM_WorldLakilester_Idle,
         .canPlayerPause = world_partner_can_player_pause_default,
         .preBattle = world_lakilester_pre_battle,
         .postBattle = world_lakilester_post_battle,
-        .whileRiding = &world_lakilester_while_riding,
+        .whileRiding = &evs_worldlakilester_riding,
     },
     [PARTNER_BOW] {
         .dmaStart = &world_partner_bow_ROM_START,
@@ -338,10 +338,10 @@ WorldPartner wPartners[] = {
         .dmaDest = &world_partner_twink_VRAM,
         .isFlying = TRUE,
         .init = world_twink_init,
-        .takeOut = &EVS_TwinkTakeOut,
-        .update = &EVS_TwinkUpdate,
-        .useAbility = &EVS_TwinkUseAbility,
-        .putAway = &EVS_TwinkPutAway,
+        .takeOut = &EVS_WorldTwink_TakeOut,
+        .update = &EVS_WorldTwink_Update,
+        .useAbility = &EVS_WorldTwink_UseAbility,
+        .putAway = &EVS_WorldTwink_PutAway,
         .idle = ANIM_Twink_Idle,
         .canUseAbility = partner_is_idle,
         .canPlayerPause = partner_is_idle,
@@ -925,7 +925,7 @@ void partner_init_after_battle(s32 partnerID) {
         D_8010CFE0 = 1;
         NextPartnerID = partnerID;
         actionStatus->partnerActionState = 0;
-        actionStatus->partnerAction_unk_1 = 0;
+        actionStatus->partnerAction_unk_1 = FALSE;
 
         if (wCurrentPartnerId != PARTNER_NONE && partnerID != PARTNER_NONE) {
             NextPartnerCommand = PARTNER_CMD_INSTA_SWITCH;
@@ -1029,7 +1029,7 @@ void partner_initialize_data(void) {
     D_8010CFC4 = 0;
     actionStatus->actingPartner = 0;
     actionStatus->inputDisabled = 0;
-    actionStatus->partnerAction_unk_1 = 0;
+    actionStatus->partnerAction_unk_1 = FALSE;
     actionStatus->partnerActionState = 0;
     actionStatus->unk_358 = 0;
     actionStatus->partnerAction_unk_2 = 0;
@@ -1221,7 +1221,7 @@ void partner_walking_update_motion(Npc* partner) {
 
 void partner_walking_follow_player(Npc* partner) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    Camera* cameras = &gCameras[0];
+    Camera* cameras = &gCameras[CAM_DEFAULT];
     s32 surfaceType;
     f32 moveHistoryX, moveHistoryY, moveHistoryZ;
     f32 x, y, z;

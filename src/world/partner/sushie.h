@@ -8,10 +8,10 @@ void world_sushie_init(Npc*);
 void world_sushie_pre_battle(Npc*);
 void world_sushie_post_battle(Npc*);
 
-extern EvtScript world_sushie_take_out;
-extern EvtScript world_sushie_update;
-extern EvtScript world_sushie_use_ability;
-extern EvtScript world_sushie_put_away;
-extern EvtScript world_sushie_while_riding;
+extern EvtScript EVS_WorldSushie_TakeOut;
+extern EvtScript EVS_WorldSushie_Update;
+extern EvtScript EVS_WorldSushie_UseAbility;
+extern EvtScript EVS_WorldSushie_PutAway;
+extern EvtScript EVS_WorldSushie_Riding;
 
 #endif

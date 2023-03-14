@@ -2,12 +2,14 @@
 #include "../partners.h"
 #include "twink.h"
 
-void world_twink_init(Npc* twink) {
+#define NAMESPACE world_twink
+
+void N(init)(Npc* twink) {
     twink->collisionHeight = 20;
     twink->collisionRadius = 20;
 }
 
-API_CALLABLE(TwinkTakeOut) {
+API_CALLABLE(N(TakeOut)) {
     Npc* twink = script->owner2.npc;
 
     if (isInitialCall) {
@@ -21,7 +23,7 @@ API_CALLABLE(TwinkTakeOut) {
     }
 }
 
-API_CALLABLE(TwinkUpdate) {
+API_CALLABLE(N(Update)) {
     PlayerData* playerData = &gPlayerData;
     Npc* twink = script->owner2.npc;
 
@@ -36,11 +38,11 @@ API_CALLABLE(TwinkUpdate) {
     return ApiStatus_BLOCK;
 }
 
-API_CALLABLE(TwinkUseAbility) {
+API_CALLABLE(N(UseAbility)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(TwinkPutAway) {
+API_CALLABLE(N(PutAway)) {
     Npc* twink = script->owner2.npc;
 
     if (isInitialCall) {
@@ -54,26 +56,26 @@ API_CALLABLE(TwinkPutAway) {
     }
 }
 
-EvtScript EVS_TwinkTakeOut = {
-    EVT_CALL(TwinkTakeOut)
+EvtScript EVS_WorldTwink_TakeOut = {
+    EVT_CALL(N(TakeOut))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript EVS_TwinkUpdate = {
-    EVT_CALL(TwinkUpdate)
+EvtScript EVS_WorldTwink_Update = {
+    EVT_CALL(N(Update))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript EVS_TwinkUseAbility = {
-    EVT_CALL(TwinkUseAbility)
+EvtScript EVS_WorldTwink_UseAbility = {
+    EVT_CALL(N(UseAbility))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript EVS_TwinkPutAway = {
-    EVT_CALL(TwinkPutAway)
+EvtScript EVS_WorldTwink_PutAway = {
+    EVT_CALL(N(PutAway))
     EVT_RETURN
     EVT_END
 };
