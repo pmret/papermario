@@ -204,7 +204,7 @@ API_CALLABLE(N(UseAbility)) {
             return ApiStatus_DONE2;
         }
 
-        if (!partnerActionStatus->partnerAction_unk_1) {
+        if (!partnerActionStatus->shouldResumeAbility) {
             if (!func_800EA52C(PARTNER_PARAKARRY)) {
                 return ApiStatus_DONE2;
             }
@@ -212,7 +212,7 @@ API_CALLABLE(N(UseAbility)) {
             parakarry->flags &= ~NPC_FLAG_COLLDING_FORWARD_WITH_WORLD;
             parakarry->flags |= NPC_FLAG_COLLDING_WITH_WORLD;
         } else {
-            partnerActionStatus->partnerAction_unk_1 = FALSE;
+            partnerActionStatus->shouldResumeAbility = FALSE;
             set_action_state(ACTION_STATE_RIDE);
             parakarry->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_GRAVITY);
             N(UsingAbility)  = TRUE;
@@ -649,7 +649,7 @@ void N(pre_battle)(Npc* parakarry) {
 
         set_action_state(ACTION_STATE_IDLE);
         partnerStatus->npc = *parakarry;
-        partnerStatus->partnerAction_unk_1 = TRUE;
+        partnerStatus->shouldResumeAbility = TRUE;
         partner_clear_player_tracking(parakarry);
     }
 
@@ -659,7 +659,7 @@ void N(pre_battle)(Npc* parakarry) {
 void N(post_battle)(Npc* parakarry) {
     PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
 
-    if (partnerStatus->partnerAction_unk_1) {
+    if (partnerStatus->shouldResumeAbility) {
         if (N(PlayerCollisionDisabled)) {
             disable_player_static_collisions();
         }

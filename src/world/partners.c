@@ -632,7 +632,7 @@ void _use_partner_ability(void) {
     PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (!partnerActionStatus->inputDisabled) {
+    if (!partnerActionStatus->inputDisabledCount) {
         partnerActionStatus->stickX = gGameStatusPtr->stickX[gGameStatusPtr->multiplayerEnabled];
         partnerActionStatus->stickY = gGameStatusPtr->stickY[gGameStatusPtr->multiplayerEnabled];
         partnerActionStatus->currentButtons = gGameStatusPtr->currentButtons[gGameStatusPtr->multiplayerEnabled];
@@ -924,13 +924,13 @@ void switch_to_partner(s32 partnerID) {
 
 void partner_init_after_battle(s32 partnerID) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* actionStatus = &gPartnerActionStatus;
+    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
 
     if (wCurrentPartnerId != partnerID) {
         D_8010CFE0 = 1;
         NextPartnerID = partnerID;
-        actionStatus->partnerActionState = 0;
-        actionStatus->partnerAction_unk_1 = FALSE;
+        partnerStatus->partnerActionState = 0;
+        partnerStatus->shouldResumeAbility = FALSE;
 
         if (wCurrentPartnerId != PARTNER_NONE && partnerID != PARTNER_NONE) {
             NextPartnerCommand = PARTNER_CMD_INSTA_SWITCH;
@@ -1007,9 +1007,9 @@ void partner_reset_data(void) {
     NextPartnerCommand = PARTNER_CMD_RESET;
     wCurrentPartnerId = currentPartner;
 
-    if (gGameStatusPtr->keepUsingPartnerOnMapChange != 0) {
+    if (gGameStatusPtr->keepUsingPartnerOnMapChange) {
         gPartnerActionStatus.partnerActionState = 1;
-        gGameStatusPtr->keepUsingPartnerOnMapChange = 0;
+        gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
     }
 
     wPartner = NULL;
@@ -1029,18 +1029,18 @@ void partner_reset_data(void) {
 }
 
 void partner_initialize_data(void) {
-    PartnerActionStatus* actionStatus = &gPartnerActionStatus;
+    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
 
     wCurrentPartnerId = 0;
     D_8010CFE0 = 0;
     NextPartnerCommand = PARTNER_CMD_NONE;
     D_8010CFC4 = 0;
-    actionStatus->actingPartner = 0;
-    actionStatus->inputDisabled = 0;
-    actionStatus->partnerAction_unk_1 = FALSE;
-    actionStatus->partnerActionState = 0;
-    actionStatus->unk_358 = 0;
-    actionStatus->partnerAction_unk_2 = 0;
+    partnerStatus->actingPartner = 0;
+    partnerStatus->inputDisabledCount = 0;
+    partnerStatus->shouldResumeAbility = FALSE;
+    partnerStatus->partnerActionState = 0;
+    partnerStatus->unk_358 = 0;
+    partnerStatus->partnerAction_unk_2 = FALSE;
     wPartner = NULL;
     wSavedPartnerPosX = 0;
     wSavedPartnerPosY = 0;
@@ -1078,7 +1078,7 @@ void partner_handle_before_battle(void) {
 }
 
 void partner_handle_after_battle(void) {
-    PartnerActionStatus* actionStatus = &gPartnerActionStatus;
+    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
     PlayerData* playerData = &gPlayerData;
 
     if (wCurrentPartnerId != PARTNER_NONE) {
@@ -1093,10 +1093,10 @@ void partner_handle_after_battle(void) {
 
         NextPartnerCommand = PARTNER_CMD_INIT;
 
-        if (playerData->currentPartner != PARTNER_WATT && actionStatus->actingPartner == PARTNER_WATT) {
+        if (playerData->currentPartner != PARTNER_WATT && partnerStatus->actingPartner == PARTNER_WATT) {
             gPlayerStatusPtr->animFlags &= ~PA_FLAG_USING_WATT;
             gPlayerStatusPtr->animFlags &= ~PA_FLAG_WATT_IN_HANDS;
-            actionStatus->actingPartner = PARTNER_NONE;
+            partnerStatus->actingPartner = PARTNER_NONE;
         }
 
         if (wPartner->postBattle != NULL) {
@@ -1200,15 +1200,15 @@ void partner_walking_update_player_tracking(Npc* partner) {
 
 void partner_walking_update_motion(Npc* partner) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* actionStatus = &gPartnerActionStatus;
+    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
 
     if (gGameStatusPtr->multiplayerEnabled == 0 || playerStatus->flags & (PS_FLAG_INPUT_DISABLED | PS_FLAG_NO_STATIC_COLLISION)
-        || actionStatus->inputDisabled != 0 || actionStatus->partnerAction_unk_2 != 0) {
+        || partnerStatus->inputDisabledCount != 0 || partnerStatus->partnerAction_unk_2) {
         if (!(playerStatus->animFlags & PA_FLAG_OPENED_HIDDEN_PANEL)) {
             partner_walking_follow_player(partner);
         }
-        if (actionStatus->pressedButtons & (BUTTON_Z | BUTTON_B | BUTTON_C_LEFT | BUTTON_C_DOWN)) {
-            actionStatus->partnerAction_unk_2 = 0;
+        if (partnerStatus->pressedButtons & (BUTTON_Z | BUTTON_B | BUTTON_C_LEFT | BUTTON_C_DOWN)) {
+            partnerStatus->partnerAction_unk_2 = FALSE;
         }
     }
 
@@ -1781,14 +1781,14 @@ void partner_flying_update_motion(Npc* partner) {
 
     if (gGameStatusPtr->multiplayerEnabled == 0 ||
         (playerStatus->flags & (PS_FLAG_INPUT_DISABLED | PS_FLAG_NO_STATIC_COLLISION)) ||
-        partnerActionStatus->inputDisabled ||
-        partnerActionStatus->partnerAction_unk_2 != 0)
+        partnerActionStatus->inputDisabledCount ||
+        partnerActionStatus->partnerAction_unk_2)
     {
         if (!(playerStatus->animFlags & PA_FLAG_OPENED_HIDDEN_PANEL) || D_800F8020 == 0) {
             partner_flying_follow_player(partner);
         }
         if (partnerActionStatus->pressedButtons & (BUTTON_B | BUTTON_Z | BUTTON_C_DOWN | BUTTON_C_LEFT)) {
-            partnerActionStatus->partnerAction_unk_2 = 0;
+            partnerActionStatus->partnerAction_unk_2 = FALSE;
         }
     }
     if (wPartnerFollowState != 50 && fabsf(partner->pos.y - playerStatus->position.y) > 1000.0f) {
@@ -2478,18 +2478,18 @@ s32 partner_force_player_flip_done(void) {
 }
 
 void partner_enable_input(void) {
-    PartnerActionStatus* actionStatus = &gPartnerActionStatus;
+    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
 
-    actionStatus->inputDisabled--;
-    if (actionStatus->inputDisabled < 0) {
-        actionStatus->inputDisabled = 0;
+    partnerStatus->inputDisabledCount--;
+    if (partnerStatus->inputDisabledCount < 0) {
+        partnerStatus->inputDisabledCount = 0;
     }
 }
 
 void partner_disable_input(void) {
-    PartnerActionStatus* actionStatus = &gPartnerActionStatus;
+    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
 
-    actionStatus->inputDisabled++;
+    partnerStatus->inputDisabledCount++;
 }
 
 void partner_do_player_collision(Npc* partner) {

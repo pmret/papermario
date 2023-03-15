@@ -889,7 +889,7 @@ void N(pre_battle)(Npc* sushie) {
 
     if (N(IsRiding)) {
         sushieActionStatus->npc = *sushie;
-        sushieActionStatus->partnerAction_unk_1 = TRUE;
+        sushieActionStatus->shouldResumeAbility = TRUE;
         enable_player_static_collisions();
         enable_player_input();
         set_action_state(ACTION_STATE_IDLE);
@@ -902,7 +902,7 @@ void N(pre_battle)(Npc* sushie) {
 void N(post_battle)(Npc* sushie) {
     PartnerActionStatus* sushieActionStatus = &gPartnerActionStatus;
 
-    if (sushieActionStatus->partnerAction_unk_1) {
+    if (sushieActionStatus->shouldResumeAbility) {
         *sushie = sushieActionStatus->npc;
         partner_use_ability();
     }

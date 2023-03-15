@@ -2251,15 +2251,15 @@ typedef struct TweesterPhysics {
 
 typedef struct PartnerActionStatus {
     /* 0x000 */ s8 partnerActionState;
-    /* 0x001 */ b8 partnerAction_unk_1;
-    /* 0x002 */ s8 partnerAction_unk_2;
+    /* 0x001 */ b8 shouldResumeAbility;
+    /* 0x002 */ b8 partnerAction_unk_2;
     /* 0x003 */ s8 actingPartner;
     /* 0x004 */ s16 stickX;
     /* 0x006 */ s16 stickY;
     /* 0x008 */ s32 currentButtons;
     /* 0x00C */ s32 pressedButtons;
     /* 0x010 */ s32 heldButtons;
-    /* 0x014 */ s8 inputDisabled;
+    /* 0x014 */ s8 inputDisabledCount;
     /* 0x015 */ char unk_15[3];
     /* 0x018 */ Npc npc;
     /* 0x358 */ s32 unk_358;

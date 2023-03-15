@@ -1611,7 +1611,7 @@ void update_encounters_post_battle(void) {
                 partner_handle_after_battle();
             }
             D_8009A63C = FALSE;
-            if (partnerActionStatus->partnerAction_unk_1) {
+            if (partnerActionStatus->shouldResumeAbility) {
                 D_8009A63C = TRUE;
             } else if (D_8009A670 == 0 &&
                        !(gPlayerStatus.flags & (PS_FLAG_JUMPING | PS_FLAG_FALLING)) &&
