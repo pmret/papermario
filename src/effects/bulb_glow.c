@@ -153,10 +153,8 @@ void func_E0078274(void) {
 
 #define TMEM_ADDR(x) (x / sizeof(u64))
 
-// wip
-#ifdef WIP
 void bulb_glow_appendGfx(void* effect) {
-    BulbGlowFXData* data = ((EffectInstance*) effect)->data.bulbGlow; //s0
+    BulbGlowFXData* data = ((EffectInstance*)effect)->data.bulbGlow;
     f32 centerX;
     f32 centerY;
     s32 xMin;
@@ -167,22 +165,21 @@ void bulb_glow_appendGfx(void* effect) {
     s32 glowExtent;
     s32 colorScale;
     s32 brightness;
-    s32 xMax;
     s32 yMax;
     s32 xStart;
+    s32 xMax;
     s32 isPointVisible;
     s32 yStart;
     UnkBulbGlow* temp_s1;
     Color_RGB8* temp_v0;
-
     s32 i;
     s32 j;
-    s32 r, g, b;
+    u8 r, g, b;
 
     brightness = data->unk_10;
     temp_s2 = data->unk_00;
-    if (brightness > 0x7F) {
-        brightness = 0x7F;
+    if (brightness > 127) {
+        brightness = 127;
     }
 
     gDPPipeSync(gMainGfxPos++);
@@ -194,7 +191,6 @@ void bulb_glow_appendGfx(void* effect) {
 
     isPointVisible = shim_is_point_visible(data->pos.x, data->pos.y, data->pos.z, data->unk_1C, &centerX, &centerY);
 
-    // There are 6 UnkStruct entries in the array at E0078918, so this refers to the last one
     if (temp_s2 == 5) {
         isPointVisible = TRUE;
     }
@@ -205,28 +201,12 @@ void bulb_glow_appendGfx(void* effect) {
 
     gSPDisplayList(gMainGfxPos++, D_E0078900[temp_s2]);
     temp_v0 = &D_E00789AC[data->unk_20];
-    colorScale = (brightness * 2);
+    colorScale = brightness * 2;
     r = temp_v0->r * colorScale / 255;
     g = temp_v0->g * colorScale / 255;
     b = temp_v0->b * colorScale / 255;
 
-    gDPSetPrimColor(gMainGfxPos++, 0, 0, r, g, b, 0x7F);
-
-    // temp_s1 = E0078948
-    //   unk_00 = 64
-    //   unk_04 = 64
-    //   unk_08 = 1.0f
-    //   unk_0C = 1.0f
-    //   unk_10 = 64 (glow_extent)
-    //   unk_14 = 8 (rect_height)
-
-    // x_center = 247
-    // y_center = 107
-    // glow_extent = 64
-    // x_min = 183
-    // x_max = 311
-    // y_min = 43
-    // y_max = 171
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, r, g, b, 127);
 
     xMin = centerX - glowExtent;
     xMax = xMin + glowExtent * 2;
@@ -250,44 +230,31 @@ void bulb_glow_appendGfx(void* effect) {
 
     numRects = (yMax - yMin) / rectHeight;
 
-    for (i = yStart / rectHeight; i < numRects && (i + 1) * rectHeight + yMin < SCREEN_HEIGHT; i++) {
+    for (i = yStart / rectHeight; i < numRects; i++) {
+        s32 y = yMin + i * rectHeight;
+        if (y + rectHeight >= SCREEN_HEIGHT) {
+            break;
+        }
+
         gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE,
-            // uls = 183 << 2
             (s32) (xMin * temp_s1->unk_08) << 2,
-            // This code is correct due to being masked to 12 bits
-            // However, the wrapping may not be intended from the developer's perspective so it may be a bug
-            // ult = (256 << 2, 248 << 2, 240 << 2, ...)
             (s32) (temp_s1->unk_04 * 20 - i * temp_s1->unk_14 * temp_s1->unk_0C) << 2,
-            // lrs = 247 << 2
             (s32) (xMin * temp_s1->unk_08 + temp_s1->unk_00) << 2,
-            // This code is correct as well, same as above
-            // lrt = (320 << 2, 312 << 2, 304 << 2, ...)
             (s32) (temp_s1->unk_04 * 21 - i * temp_s1->unk_14 * temp_s1->unk_0C) << 2);
 
         for (j = 0; j < 1; j++) {
             gDPLoadMultiTile(gMainGfxPos++,
-                // Offset the image to the rows being loaded
-                VIRTUAL_TO_PHYSICAL(nuGfxCfb_ptr + (i * rectHeight + yMin) * (SCREEN_WIDTH * sizeof(u16))),
+                VIRTUAL_TO_PHYSICAL(nuGfxCfb_ptr + y * SCREEN_WIDTH),
                 TMEM_ADDR(TMEM_SIZE/2), G_TX_RENDERTILE + 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, 0,
-                // uls = 183, ult = 0
-                (xMin + xStart), 0,
-                // lrs = 311 - 1, lrt = 8 - 1
-                xMax - 1, rectHeight - 1,
+                xMin + xStart, 0, xMax - 1, rectHeight - 1,
                 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 9, 8, G_TX_NOLOD, G_TX_NOLOD);
             gSPTextureRectangle(gMainGfxPos++,
-                // xl = 183 << 2, yl = (43 << 2, 51 << 2, 59 << 2, ...)
-                (xMin + xStart) << 2, (i * rectHeight + yMin) << 2,
-                // xr = 311 << 2, yh = (51 << 2, 59 << 2, 67 << 2, ...)
-                xMax << 2, ((i + 1) * rectHeight + yMin) << 2,
+                (xMin + xStart) << 2, y << 2,
+                xMax << 2, (y + rectHeight) << 2,
                 G_TX_RENDERTILE,
-                // s = 183 << 5, t = 0
                 ((xMin + xStart) & 0x1FF) << 5, 0,
                 1 << 10, 1 << 10);
             gDPPipeSync(gMainGfxPos++);
         }
     }
 }
-#else
-INCLUDE_ASM(s32, "effects/bulb_glow", bulb_glow_appendGfx);
-#endif
-
