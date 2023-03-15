@@ -71,7 +71,7 @@ API_CALLABLE(N(MagikoopaAI_SpellMain)) {
             npc1->pos.z = NPC_DISPOSE_POS_Z;
             enemy->varTable[0] = 0;
             script->functionTemp[0] = 1;
-            /* fallthrough */
+            // fallthrough
         case 1:
             if (enemy->varTable[0] == 1) {
                 s32 duration;
@@ -118,7 +118,7 @@ API_CALLABLE(N(MagikoopaAI_SpellMain)) {
                 npc1->pos.y += npc1->jumpVelocity;
                 break;
             }
-            /* fallthrough */
+            // fallthrough
         case 3:
             npc1->jumpVelocity = 0.0f;
             npc1->moveSpeed = 0.0f;

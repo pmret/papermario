@@ -53,7 +53,7 @@ API_CALLABLE(N(Update)) {
 
     if (isInitialCall) {
         partner_flying_enable(bow, 1);
-        mem_clear(N(TweesterPhysicsPtr), sizeof(*N(TweesterPhysicsPtr)));
+        mem_clear(N(TweesterPhysicsPtr), sizeof(TweesterPhysics));
         TweesterTouchingPartner = NULL;
     }
 

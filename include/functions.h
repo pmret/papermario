@@ -759,9 +759,9 @@ void pulse_stone_notification_setup(void);
 void appendGfx_speech_bubble(void);
 void appendGfx_pulse_stone_icon(void);
 void ispy_notification_setup(void);
-s32 lakilester_raycast_below(void);
+
 void world_watt_sync_held_position(void);
-void func_802BFB44_323694(f32 arg0);
+s32 world_lakilester_can_dismount(void);
 
 void initialize_curtains(void);
 void update_curtains(void);

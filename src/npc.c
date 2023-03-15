@@ -1500,7 +1500,7 @@ s32 npc_draw_palswap_mode_2(Npc* npc, s32 arg1, s32 arg2, Matrix4f mtx) {
                 npc->palSwapLerpAlpha = 0;
                 npc->palSwapState = 1;
             }
-            /* fallthrough */
+            // fallthrough
         case 1:
             npc->palSwapLerpAlpha += 25600 / npc->unk_30E;
             if (npc->palSwapLerpAlpha > 25500) {
@@ -1531,7 +1531,7 @@ s32 npc_draw_palswap_mode_2(Npc* npc, s32 arg1, s32 arg2, Matrix4f mtx) {
                 npc->palSwapLerpAlpha = 0;
                 npc->palSwapState = 3;
             }
-            /* fallthrough */
+            // fallthrough
         case 3:
             npc->palSwapLerpAlpha += 25600 / npc->unk_312;
             if (npc->palSwapLerpAlpha > 25500) {
@@ -1622,7 +1622,7 @@ s32 npc_draw_palswap_mode_4(Npc* npc, s32 arg1, Matrix4f mtx) {
                 npc->palSwapLerpAlpha = 0;
                 npc->palSwapState = 1;
             }
-            /* fallthrough */
+            // fallthrough
         case 1:
             npc->palSwapLerpAlpha += 25600 / npc->unk_30E;
             if (npc->palSwapLerpAlpha > 25500) {
@@ -1663,7 +1663,7 @@ s32 npc_draw_palswap_mode_4(Npc* npc, s32 arg1, Matrix4f mtx) {
                 npc->palSwapLerpAlpha = 0;
                 npc->palSwapState = 3;
             }
-            /* fallthrough */
+            // fallthrough
         case 3:
             npc->palSwapLerpAlpha += 25600 / npc->unk_312;
             if (npc->palSwapLerpAlpha > 25500) {

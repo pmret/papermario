@@ -815,7 +815,7 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         break;
                     case MSG_STYLE_LAMPPOST:
                         printer->windowSize.y = *srcBuf++;
-                        /* fallthrough */
+                        // fallthrough
                     case MSG_STYLE_SIGN:
                         do {
                             if (!s8) {
@@ -1812,20 +1812,20 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
                         break;
                     case MSG_READ_FUNC_CUSTOM_VOICE:
                         i++;
-                        /* fallthrough */
+                        // fallthrough
                     temp = 4;
                     case MSG_READ_FUNC_IMAGE:
                         i += temp;
-                        /* fallthrough */
+                        // fallthrough
                     case MSG_READ_FUNC_ANIM_SPRITE:
                     case MSG_READ_FUNC_ANIM_DELAY:
                         i++;
-                        /* fallthrough */
+                        // fallthrough
                     case MSG_READ_FUNC_SPEED:
                     case MSG_READ_FUNC_SET_X:
                     case MSG_READ_FUNC_ANIM_LOOP:
                         i++;
-                        /* fallthrough */
+                        // fallthrough
                     case MSG_READ_FUNC_COLOR:
                     case MSG_READ_FUNC_SPACING:
                     case MSG_READ_FUNC_SCROLL:
@@ -1897,7 +1897,7 @@ void get_msg_properties(s32 msgID, s32* height, s32* width, s32* maxLineChars, s
             case MSG_CHAR_READ_FULL_SPACE:
             case MSG_CHAR_READ_HALF_SPACE:
                 spaceCount++;
-                /* fallthrough */
+                // fallthrough
             default:
                 if (endl) {
                     lineCount++;
@@ -2069,7 +2069,7 @@ void msg_update_rewind_arrow(s32 printerIndex) {
             printer->rewindArrowCounter = 0;
             printer->rewindArrowSwingPhase = 0;
             printer->rewindArrowAnimState = REWIND_ARROW_STATE_GROW;
-            /* fallthrough */
+            // fallthrough
         case REWIND_ARROW_STATE_GROW:
             temp = printer->rewindArrowCounter;
             scale = temp * 0.2 + 0.5;

@@ -11,7 +11,7 @@ void force_player_anim(AnimID);
 void N(update_player_carry_anim)(void);
 
 BSS b32 N(D_802BE300);
-BSS s32 N(UseAbilityState);
+BSS s32 N(AbilityState);
 BSS b32 N(D_802BE308);
 BSS b32 N(IsPlayerHolding);
 BSS EffectInstance* N(StaticEffect);
@@ -67,7 +67,7 @@ void N(init)(Npc* npc) {
     N(D_802BE308) = FALSE;
     N(D_802BE300) = FALSE;
     N(IsPlayerHolding) = FALSE;
-    N(UseAbilityState) = SHINING_STATE_BEGIN;
+    N(AbilityState) = SHINING_STATE_BEGIN;
     N(StaticEffect) = NULL;
 }
 
@@ -238,32 +238,32 @@ API_CALLABLE(N(UseAbility)) {
 
             if (gGameStatusPtr->keepUsingPartnerOnMapChange) {
                 if (playerStatus->animFlags & (PA_FLAG_USING_WATT | PA_FLAG_WATT_IN_HANDS)) {
-                    N(UseAbilityState) = SHINING_STATE_BEGIN;
+                    N(AbilityState) = SHINING_STATE_BEGIN;
                 } else {
-                    N(UseAbilityState) = SHINING_STATE_INIT;
+                    N(AbilityState) = SHINING_STATE_INIT;
                 }
             } else if (playerStatus->animFlags & PA_FLAG_USING_WATT) {
-                N(UseAbilityState) = SHINING_STATE_RELEASE;
+                N(AbilityState) = SHINING_STATE_RELEASE;
             } else {
-                N(UseAbilityState) = SHINING_STATE_INIT;
+                N(AbilityState) = SHINING_STATE_INIT;
             }
         } else {
             partnerActionStatus->partnerAction_unk_1 = FALSE;
             playerStatus->animFlags |= (PA_FLAG_USING_WATT | PA_FLAG_WATT_IN_HANDS);
             N(update_player_carry_anim)();
             npc->currentAnim = ANIM_WorldWatt_Idle;
-            N(UseAbilityState) = SHINING_STATE_HOLDING;
+            N(AbilityState) = SHINING_STATE_HOLDING;
             script->functionTemp[1] = 2;
         }
     }
 
-    switch (N(UseAbilityState)) {
+    switch (N(AbilityState)) {
         case SHINING_STATE_INIT:
             if (playerStatus->inputDisabledCount != 0) {
                 return ApiStatus_DONE2;
             }
             script->functionTemp[1] = 3;
-            N(UseAbilityState) = SHINING_STATE_DELAY;
+            N(AbilityState) = SHINING_STATE_DELAY;
             script->functionTemp[2] = playerStatus->inputDisabledCount;
             break;
         case SHINING_STATE_DELAY:
@@ -275,14 +275,14 @@ API_CALLABLE(N(UseAbility)) {
                 ) {
                     return ApiStatus_DONE2;
                 }
-                N(UseAbilityState) = SHINING_STATE_BEGIN;
+                N(AbilityState) = SHINING_STATE_BEGIN;
                 break;
             }
             script->functionTemp[1]--;
             break;
     }
 
-    switch (N(UseAbilityState)) {
+    switch (N(AbilityState)) {
         case SHINING_STATE_BEGIN:
             if (gGameStatusPtr->keepUsingPartnerOnMapChange) {
                 playerStatus->animFlags |= PA_FLAG_USING_WATT;
@@ -303,7 +303,7 @@ API_CALLABLE(N(UseAbility)) {
                 N(update_player_carry_anim)();
                 npc_set_palswap_mode_A(npc, 1);
                 script->functionTemp[1] = 2;
-                N(UseAbilityState) = SHINING_STATE_HOLDING;
+                N(AbilityState) = SHINING_STATE_HOLDING;
             } else {
                 playerStatus->animFlags |= PA_FLAG_USING_WATT;
                 N(IsPlayerHolding) = TRUE;
@@ -319,7 +319,7 @@ API_CALLABLE(N(UseAbility)) {
                 add_vec2D_polar(&npc->moveToPos.x, &npc->moveToPos.z, 15.0f, playerStatus->targetYaw);
                 npc->duration = 8;
                 npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
-                N(UseAbilityState)++; // SHINING_STATE_GATHER
+                N(AbilityState)++; // SHINING_STATE_GATHER
             }
             break;
         case SHINING_STATE_GATHER:
@@ -334,14 +334,14 @@ API_CALLABLE(N(UseAbility)) {
                 playerStatus->animFlags |= PA_FLAG_WATT_IN_HANDS;
                 N(update_player_carry_anim)();
                 script->functionTemp[1] = 2;
-                N(UseAbilityState) = SHINING_STATE_HOLDING;
+                N(AbilityState) = SHINING_STATE_HOLDING;
             }
             break;
         case SHINING_STATE_HOLDING:
             N(sync_held_position)();
             // immediately cancel state on touching fire
             if ((playerStatus->flags & PS_FLAG_HIT_FIRE)) {
-                N(UseAbilityState) = SHINING_STATE_RELEASE;
+                N(AbilityState) = SHINING_STATE_RELEASE;
                 break;
             }
             if (playerStatus->actionState == ACTION_STATE_USE_SPINNING_FLOWER) {
@@ -360,12 +360,12 @@ API_CALLABLE(N(UseAbility)) {
                     || actionState == ACTION_STATE_LAND)
                 && partnerActionStatus->pressedButtons & BUTTON_B
             ) {
-                N(UseAbilityState) = SHINING_STATE_RELEASE;
+                N(AbilityState) = SHINING_STATE_RELEASE;
             }
             break;
     }
 
-    if (N(UseAbilityState) == SHINING_STATE_RELEASE) {
+    if (N(AbilityState) == SHINING_STATE_RELEASE) {
         playerStatus->animFlags &= ~(PA_FLAG_WATT_IN_HANDS | PA_FLAG_USING_WATT);
         npc->currentAnim = ANIM_WorldWatt_Idle;
         partner_clear_player_tracking(npc);
@@ -373,7 +373,7 @@ API_CALLABLE(N(UseAbility)) {
         partnerActionStatus->actingPartner = PARTNER_NONE;
         partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
         gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
-        N(UseAbilityState) = SHINING_STATE_BEGIN;
+        N(AbilityState) = SHINING_STATE_BEGIN;
         npc_set_palswap_mode_A(npc, 0);
         if (!(playerStatus->flags & PS_FLAG_HIT_FIRE)) {
             set_action_state(ACTION_STATE_IDLE);

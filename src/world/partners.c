@@ -692,7 +692,7 @@ void _use_partner_ability(void) {
                     sfx_play_sound(SOUND_E);
                     wPartner->init(wPartnerNpc);
                     PartnerCommandState += 1;
-                    // fall through
+                    // fallthrough
                 case 2: // take out new partner
                     wPartnerCurrentScript = start_script(wPartner->takeOut, EVT_PRIORITY_14, EVT_FLAG_RUN_IMMEDIATELY);
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
@@ -734,7 +734,7 @@ void _use_partner_ability(void) {
                     wPartnerNpc->scale.z = 1.0f;
                     wPartner->init(wPartnerNpc);
                     PartnerCommandState += 1;
-                    // fall through
+                    // fallthrough
                 case 2:
                     PartnerCommandState += 1;
                     break;
@@ -787,7 +787,7 @@ void _use_partner_ability(void) {
                     create_partner_npc();
                     wPartner->init(wPartnerNpc);
                     PartnerCommandState += 1;
-                    // fall through
+                    // fallthrough
                 case 1: // take out new partner
                     wPartnerCurrentScript = start_script(wPartner->takeOut, EVT_PRIORITY_14, EVT_FLAG_RUN_IMMEDIATELY);
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
@@ -865,7 +865,7 @@ void _use_partner_ability(void) {
                     disable_player_input();
                     wPartner->init(wPartnerNpc);
                     PartnerCommandState += 1;
-                    // fall through
+                    // fallthrough
                 case 1:
                     PartnerCommandState += 1;
                     break;
@@ -1602,7 +1602,7 @@ void partner_walking_follow_player(Npc* partner) {
                     yaw = atan2(partner->pos.x, partner->pos.z, partner->moveToPos.x, partner->moveToPos.z);
                     partner->yaw = D_800F8034 = yaw;
                     D_8010CFCE++;
-                    /* fallthrough */
+                    // fallthrough
                 case 1:
                     if (wPartnerMoveTime != 0) {
                         wPartnerMoveTime--;
@@ -2123,7 +2123,7 @@ void partner_flying_follow_player(Npc* partner) {
                         yaw = atan2(partner->pos.x, partner->pos.z, partner->moveToPos.x, partner->moveToPos.z);
                         partner->yaw = D_800F8034 = yaw;
                         D_8010CFCE++;
-                        /* fallthrough */
+                        // fallthrough
                     case 1:
                         if (wPartnerMoveTime != 0) {
                             x = partner->pos.x;

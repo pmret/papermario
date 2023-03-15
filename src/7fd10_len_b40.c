@@ -102,7 +102,7 @@ s32 can_pause(s32 currentButtons, s32 pressedButtons) {
                     }
                 } else if (partnerActionStatus->actingPartner == PARTNER_LAKILESTER) {
                     if (actionState == ACTION_STATE_RIDE) {
-                        if (lakilester_raycast_below()) {
+                        if (world_lakilester_can_dismount()) {
                             return TRUE;
                         }
                         sfx_play_sound(SOUND_MENU_ERROR);
