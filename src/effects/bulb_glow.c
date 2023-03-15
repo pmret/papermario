@@ -154,25 +154,24 @@ void func_E0078274(void) {
 #define TMEM_ADDR(x) (x / sizeof(u64))
 
 void bulb_glow_appendGfx(void* effect) {
-    f32 x_center;
-    f32 y_center;
-    s32 x_min;
-    s32 num_rects;
-    s32 y_min;
+    BulbGlowFXData* data = ((EffectInstance*)effect)->data.bulbGlow;
+    f32 centerX;
+    f32 centerY;
+    s32 xMin;
+    s32 numRects;
+    s32 yMin;
     s32 temp_s2;
-    s32 rect_height;
-    s32 glow_extent;
-    s32 color_scale;
+    s32 rectHeight;
+    s32 glowExtent;
+    s32 colorScale;
     s32 brightness;
-    s32 y_max;
-    s32 x_start;
-    s32 x_max;
-    s32 var_v1;
-    s32 y_start;
+    s32 yMax;
+    s32 xStart;
+    s32 xMax;
+    s32 isPointVisible;
+    s32 yStart;
     UnkBulbGlow* temp_s1;
     Color_RGB8* temp_v0;
-
-    BulbGlowFXData* data = ((EffectInstance*)effect)->data.bulbGlow;
     s32 i;
     s32 j;
     u8 r, g, b;
@@ -187,73 +186,73 @@ void bulb_glow_appendGfx(void* effect) {
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     temp_s1 = &D_E0078918[temp_s2];
-    glow_extent = temp_s1->unk_10;
-    rect_height = temp_s1->unk_14;
+    glowExtent = temp_s1->unk_10;
+    rectHeight = temp_s1->unk_14;
 
-    var_v1 = shim_is_point_visible(data->pos.x, data->pos.y, data->pos.z, data->unk_1C, &x_center, &y_center);
+    isPointVisible = shim_is_point_visible(data->pos.x, data->pos.y, data->pos.z, data->unk_1C, &centerX, &centerY);
 
     if (temp_s2 == 5) {
-        var_v1 = TRUE;
+        isPointVisible = TRUE;
     }
 
-    if (!var_v1 || x_center < 0.0f || y_center < 0.0f || x_center >= SCREEN_WIDTH || y_center >= SCREEN_HEIGHT) {
+    if (!isPointVisible || centerX < 0.0f || centerY < 0.0f || centerX >= SCREEN_WIDTH || centerY >= SCREEN_HEIGHT) {
         return;
     }
 
     gSPDisplayList(gMainGfxPos++, D_E0078900[temp_s2]);
     temp_v0 = &D_E00789AC[data->unk_20];
-    color_scale = brightness * 2;
-    r = temp_v0->r * color_scale / 255;
-    g = temp_v0->g * color_scale / 255;
-    b = temp_v0->b * color_scale / 255;
+    colorScale = brightness * 2;
+    r = temp_v0->r * colorScale / 255;
+    g = temp_v0->g * colorScale / 255;
+    b = temp_v0->b * colorScale / 255;
 
     gDPSetPrimColor(gMainGfxPos++, 0, 0, r, g, b, 127);
 
-    x_min = x_center - glow_extent;
-    x_max = x_min + glow_extent * 2;
-    y_min = y_center - glow_extent;
-    y_max = y_min + glow_extent * 2;
+    xMin = centerX - glowExtent;
+    xMax = xMin + glowExtent * 2;
+    yMin = centerY - glowExtent;
+    yMax = yMin + glowExtent * 2;
 
-    x_start = 0;
-    if (x_min < 0) {
-        x_start = -x_min;
+    xStart = 0;
+    if (xMin < 0) {
+        xStart = -xMin;
     }
-    y_start = 0;
-    if (y_min < 0) {
-        y_start = -y_min;
+    yStart = 0;
+    if (yMin < 0) {
+        yStart = -yMin;
     }
-    if (x_max > SCREEN_WIDTH) {
-        x_max = SCREEN_WIDTH - 1;
+    if (xMax > SCREEN_WIDTH) {
+        xMax = SCREEN_WIDTH - 1;
     }
-    if (y_max > SCREEN_HEIGHT) {
-        y_max = SCREEN_HEIGHT - 1;
+    if (yMax > SCREEN_HEIGHT) {
+        yMax = SCREEN_HEIGHT - 1;
     }
 
-    num_rects = (y_max - y_min) / rect_height;
+    numRects = (yMax - yMin) / rectHeight;
 
-    for (i = y_start / rect_height; i < num_rects; i++) {
-        s32 y = y_min + i * rect_height;
-        if (y + rect_height >= SCREEN_HEIGHT) {
+    for (i = yStart / rectHeight; i < numRects; i++) {
+        s32 y = yMin + i * rectHeight;
+        if (y + rectHeight >= SCREEN_HEIGHT) {
             break;
         }
 
         gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE,
-            (s32) (x_min * temp_s1->unk_08) << 2,
+            (s32) (xMin * temp_s1->unk_08) << 2,
             (s32) (temp_s1->unk_04 * 20 - i * temp_s1->unk_14 * temp_s1->unk_0C) << 2,
-            (s32) (x_min * temp_s1->unk_08 + temp_s1->unk_00) << 2,
+            (s32) (xMin * temp_s1->unk_08 + temp_s1->unk_00) << 2,
             (s32) (temp_s1->unk_04 * 21 - i * temp_s1->unk_14 * temp_s1->unk_0C) << 2);
 
         for (j = 0; j < 1; j++) {
             gDPLoadMultiTile(gMainGfxPos++,
                 VIRTUAL_TO_PHYSICAL(nuGfxCfb_ptr + y * SCREEN_WIDTH),
                 TMEM_ADDR(TMEM_SIZE/2), G_TX_RENDERTILE + 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, 0,
-                x_min + x_start, 0, x_max - 1, rect_height - 1,
+                xMin + xStart, 0, xMax - 1, rectHeight - 1,
                 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 9, 8, G_TX_NOLOD, G_TX_NOLOD);
             gSPTextureRectangle(gMainGfxPos++,
-                (x_min + x_start) << 2, y << 2,
-                x_max << 2, (y + rect_height) << 2,
+                (xMin + xStart) << 2, y << 2,
+                xMax << 2, (y + rectHeight) << 2,
                 G_TX_RENDERTILE,
-                ((x_min + x_start) & 0x1FF) << 5, 0,
+                ((xMin + xStart) & 0x1FF) << 5, 0,
                 1 << 10, 1 << 10);
             gDPPipeSync(gMainGfxPos++);
         }
