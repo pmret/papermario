@@ -6,6 +6,7 @@
 #include "rumble.h"
 #include "sprite.h"
 #include "model.h"
+#include "gcc/string.h"
 
 s32 WorldReverbModeMapping[] = { 0, 1, 2, 3 };
 

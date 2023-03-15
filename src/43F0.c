@@ -1,5 +1,6 @@
 #include "common.h"
 #include "nu/nusys.h"
+#include "gcc/string.h"
 
 u16 heap_nextMallocID = 0;
 

@@ -1269,7 +1269,7 @@ s32 func_802DE8DC(s32 spriteIdx, s32 compListIdx, s32* outX, s32* outY, s32* out
     u32* spriteData;
 
     if (sprite->componentList == NULL) {
-        return;
+        return; // bug: does not return a value
     }
 
     animID = sprite->currentAnimID;
@@ -1297,7 +1297,7 @@ s32 func_802DE8DC(s32 spriteIdx, s32 compListIdx, s32* outX, s32* outY, s32* out
             }
         }
     } else {
-        return;
+        return; // bug: does not return a value
     }
     return -1;
 }

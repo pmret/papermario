@@ -37,7 +37,7 @@
 
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0]))
 
-#if !defined(PERMUTER)
+#if !defined(PERMUTER) && !defined(M2CTX) && defined(OLD_GCC)
 #define NOP_FIX __asm__(".set nogpopt");
 #define NOP_UNFIX __asm__(".set gpopt");
 #else
