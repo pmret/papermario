@@ -513,23 +513,15 @@ void update_status_menu(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 sp50;
     s32 sp54;
-    s32 sp5C;
-    s32 sp60;
-
-    s32 s0;
     s32 i;
     s32 x;
     s32 y;
     s32 showStat;
     s32 id;
     s32 limit;
-    s32 s44;
     s32 s7;
     s32 s1;
-    s32 s66;
-    s32 v0;
     s32 spBars;
-    s32 s51, fp1;
     s32 maxStarPower;
 
     if (gGameStatusPtr->creditsViewportMode >= 0 ||
