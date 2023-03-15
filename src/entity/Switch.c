@@ -87,7 +87,7 @@ void entity_HugeBlueSwitch_idle(Entity* entity) {
 void entity_small_switch_idle(Entity* entity) {
     SwitchData* data = entity->dataBuf.swtch;
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
 
     entity_switch_fall_down(entity);
 
@@ -111,7 +111,7 @@ void entity_small_switch_idle(Entity* entity) {
         return;
     }
 
-    if (partnerActionStatus->actingPartner == PARTNER_PARAKARRY && partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE) {
+    if (partnerStatus->actingPartner == PARTNER_PARAKARRY && partnerStatus->partnerActionState != PARTNER_ACTION_NONE) {
         return;
     }
 

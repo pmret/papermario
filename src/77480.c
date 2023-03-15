@@ -794,7 +794,7 @@ s32 func_800DFCF4(void) {
 
 s32 get_overriding_player_anim(s32 anim) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
 
     if (playerStatus->actionState == ACTION_STATE_USE_SPINNING_FLOWER
         && anim != ANIM_Mario1_Flail
@@ -803,13 +803,13 @@ s32 get_overriding_player_anim(s32 anim) {
         return -1;
     }
 
-    if (partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE) {
-        if (partnerActionStatus->actingPartner == PARTNER_LAKILESTER && anim == ANIM_Mario1_Idle) {
+    if (partnerStatus->partnerActionState != PARTNER_ACTION_NONE) {
+        if (partnerStatus->actingPartner == PARTNER_LAKILESTER && anim == ANIM_Mario1_Idle) {
             anim = ANIM_MarioW2_RideLaki;
         }
 
-        if (partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE
-            && partnerActionStatus->actingPartner == PARTNER_BOW
+        if (partnerStatus->partnerActionState != PARTNER_ACTION_NONE
+            && partnerStatus->actingPartner == PARTNER_BOW
             && anim != ANIM_Mario1_Crouch
             && anim != ANIM_Mario1_Idle
         ) {
@@ -817,7 +817,7 @@ s32 get_overriding_player_anim(s32 anim) {
         }
     }
 
-    if (anim == ANIM_Mario1_ThumbsUp && partnerActionStatus->partnerActionState == PARTNER_ACTION_USE) {
+    if (anim == ANIM_Mario1_ThumbsUp && partnerStatus->partnerActionState == PARTNER_ACTION_USE) {
         return -1;
     }
 

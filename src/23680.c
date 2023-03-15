@@ -417,7 +417,7 @@ s32 is_point_within_region(s32 shape, f32 pointX, f32 pointY, f32 centerX, f32 c
 s32 basic_ai_check_player_dist(EnemyDetectVolume* territory, Enemy* enemy, f32 radius, f32 fwdPosOffset, s8 useWorldYaw) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerActionStatus;
+    PartnerActionStatus* partnerStatus;
     f32 x, y, z;
     f32 dist;
     s32 skipCheckForPlayer;
@@ -426,13 +426,13 @@ s32 basic_ai_check_player_dist(EnemyDetectVolume* territory, Enemy* enemy, f32 r
         return FALSE;
     }
 
-    partnerActionStatus = &gPartnerActionStatus;
-    if (partnerActionStatus->actingPartner == PARTNER_BOW && partnerActionStatus->partnerActionState
+    partnerStatus = &gPartnerActionStatus;
+    if (partnerStatus->actingPartner == PARTNER_BOW && partnerStatus->partnerActionState
             && !(territory->detectFlags & AI_TERRITORY_IGNORE_HIDING)) {
         return FALSE;
     }
 
-    if (partnerActionStatus->actingPartner == PARTNER_SUSHIE && partnerActionStatus->partnerActionState
+    if (partnerStatus->actingPartner == PARTNER_SUSHIE && partnerStatus->partnerActionState
             && !(territory->detectFlags & AI_TERRITORY_IGNORE_HIDING)) {
         return FALSE;
     }

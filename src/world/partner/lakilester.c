@@ -539,7 +539,7 @@ s32 N(func_802BE6A0_3221F0)(f32* arg0) {
 
 API_CALLABLE(N(UseAbility)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
     Camera* camera = &gCameras[CAM_DEFAULT];
     Npc* npc = script->owner2.npc;
     s32 colliderHeightTemp;
@@ -568,7 +568,7 @@ API_CALLABLE(N(UseAbility)) {
                 N(AbilityState) = RIDE_STATE_40;
             }
 
-            if (!partnerActionStatus->shouldResumeAbility) {
+            if (!partnerStatus->shouldResumeAbility) {
                 if (!gGameStatusPtr->keepUsingPartnerOnMapChange) {
                     if (playerStatus->actionState == ACTION_STATE_RIDE
                      || playerStatus->actionState == ACTION_STATE_IDLE
@@ -582,7 +582,7 @@ API_CALLABLE(N(UseAbility)) {
                     }
                 }
             } else {
-                partnerActionStatus->shouldResumeAbility = FALSE;
+                partnerStatus->shouldResumeAbility = FALSE;
                 playerStatus->flags &= ~PS_FLAG_PAUSE_DISABLED;
                 npc->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8);
                 npc->flags |= NPC_FLAG_IGNORE_PLAYER_COLLISION;
@@ -592,8 +592,8 @@ API_CALLABLE(N(UseAbility)) {
                 N(D_802BFF0C) = 1;
                 npc->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8);
                 npc->flags |= (NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_TOUCHES_GROUND);
-                partnerActionStatus->actingPartner = PARTNER_LAKILESTER;
-                partnerActionStatus->partnerActionState = PARTNER_ACTION_LAKILESTER_1;
+                partnerStatus->actingPartner = PARTNER_LAKILESTER;
+                partnerStatus->partnerActionState = PARTNER_ACTION_LAKILESTER_1;
                 gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
                 npc->pos.x = playerStatus->position.x;
                 npc->pos.y = npc->moveToPos.y;
@@ -745,8 +745,8 @@ API_CALLABLE(N(UseAbility)) {
                     set_action_state(ACTION_STATE_RIDE);
                     suggest_player_anim_always_forward(ANIM_MarioW2_RideLaki);
                     disable_player_shadow();
-                    partnerActionStatus->actingPartner = PARTNER_LAKILESTER;
-                    partnerActionStatus->partnerActionState = PARTNER_ACTION_LAKILESTER_1;
+                    partnerStatus->actingPartner = PARTNER_LAKILESTER;
+                    partnerStatus->partnerActionState = PARTNER_ACTION_LAKILESTER_1;
                     playerStatus->flags &= ~PS_FLAG_PAUSE_DISABLED;
                     gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
                     N(D_802BFF18) = 0;
@@ -766,7 +766,7 @@ API_CALLABLE(N(UseAbility)) {
             } else {
                 npc->duration--;
                 if (npc->duration != 0) {
-                    if (partnerActionStatus->pressedButtons & (BUTTON_B | D_CBUTTONS) && N(can_dismount)()) {
+                    if (partnerStatus->pressedButtons & (BUTTON_B | D_CBUTTONS) && N(can_dismount)()) {
                         N(AbilityState) = 3;
                     }
                     break;
@@ -785,12 +785,12 @@ API_CALLABLE(N(UseAbility)) {
                 N(D_802BFF18) = N(D_802BFF18) - 18;
             }
 
-            if (partnerActionStatus->inputDisabledCount == FALSE) {
+            if (partnerStatus->inputDisabledCount == FALSE) {
                 playerStatus->targetYaw = npc->yaw;
             }
 
             if (!(playerStatus->flags & PS_FLAG_HIT_FIRE)) {
-                if (partnerActionStatus->pressedButtons & (BUTTON_B | D_CBUTTONS)) {
+                if (partnerStatus->pressedButtons & (BUTTON_B | D_CBUTTONS)) {
                     if (N(can_dismount)()) {
                         N(AbilityState) = RIDE_STATE_03;
                     } else {
@@ -881,8 +881,8 @@ API_CALLABLE(N(UseAbility)) {
             gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
 
             if (playerStatus->flags & PS_FLAG_HIT_FIRE) {
-                partnerActionStatus->actingPartner = PARTNER_NONE;
-                partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
+                partnerStatus->actingPartner = PARTNER_NONE;
+                partnerStatus->partnerActionState = PARTNER_ACTION_NONE;
 
                 if (N(LockingPlayerInput)) {
                     N(LockingPlayerInput) = FALSE;
@@ -903,8 +903,8 @@ API_CALLABLE(N(UseAbility)) {
 
         if (N(AbilityState) == RIDE_STATE_11) {
             npc->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_TOUCHES_GROUND | NPC_FLAG_8);
-            partnerActionStatus->actingPartner = PARTNER_NONE;
-            partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
+            partnerStatus->actingPartner = PARTNER_NONE;
+            partnerStatus->partnerActionState = PARTNER_ACTION_NONE;
             playerStatus->flags &= ~PS_FLAG_PAUSE_DISABLED;
             if (N(LockingPlayerInput)) {
                 N(LockingPlayerInput) = FALSE;
@@ -936,7 +936,7 @@ enum {
 
 API_CALLABLE(N(PutAway)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
     Camera* cam = &gCameras[CAM_DEFAULT];
     Npc* lakilester = script->owner2.npc;
     f32 sp20, sp24, sp28, sp2C;
@@ -1020,8 +1020,8 @@ API_CALLABLE(N(PutAway)) {
             enable_player_shadow();
 
             if (playerStatus->flags & PS_FLAG_HIT_FIRE) {
-                partnerActionStatus->actingPartner = PARTNER_NONE;
-                partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
+                partnerStatus->actingPartner = PARTNER_NONE;
+                partnerStatus->partnerActionState = PARTNER_ACTION_NONE;
                 if (N(LockingPlayerInput)) {
                     N(LockingPlayerInput) = FALSE;
                     enable_player_input();
@@ -1044,8 +1044,8 @@ API_CALLABLE(N(PutAway)) {
             N(PutAwayState)++;
             break;
         case PUT_AWAY_STATE_4:
-            partnerActionStatus->actingPartner = PARTNER_NONE;
-            partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
+            partnerStatus->actingPartner = PARTNER_NONE;
+            partnerStatus->partnerActionState = PARTNER_ACTION_NONE;
             playerStatus->flags &= ~PS_FLAG_PAUSE_DISABLED;
 
             if (N(LockingPlayerInput)) {
@@ -1073,31 +1073,31 @@ EvtScript EVS_WorldLakilester_PutAway = {
 };
 
 void N(pre_battle)(Npc* npc) {
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
 
     if (N(D_802BFF0C) != 0) {
-        partnerActionStatus->npc = *npc;
-        partnerActionStatus->shouldResumeAbility = TRUE;
+        partnerStatus->npc = *npc;
+        partnerStatus->shouldResumeAbility = TRUE;
         enable_player_static_collisions();
         enable_player_input();
         set_action_state(ACTION_STATE_IDLE);
         partner_clear_player_tracking(npc);
     }
 
-    partnerActionStatus->actingPartner = PARTNER_LAKILESTER;
+    partnerStatus->actingPartner = PARTNER_LAKILESTER;
     N(D_802BFF18) = 0;
 }
 
 void N(post_battle)(Npc* npc) {
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
 
-    if (partnerActionStatus->shouldResumeAbility) {
+    if (partnerStatus->shouldResumeAbility) {
         if (N(D_802BFF0C) != 0) {
-            *npc = partnerActionStatus->npc;
+            *npc = partnerStatus->npc;
             gGameStatusPtr->keepUsingPartnerOnMapChange = TRUE;
             set_action_state(ACTION_STATE_RIDE);
-            partnerActionStatus->actingPartner = PARTNER_NONE;
-            partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
+            partnerStatus->actingPartner = PARTNER_NONE;
+            partnerStatus->partnerActionState = PARTNER_ACTION_NONE;
             disable_player_input();
             partner_use_ability();
         }

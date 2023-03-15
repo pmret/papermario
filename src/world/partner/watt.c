@@ -220,7 +220,7 @@ void N(try_cancel_tweester)(Npc* watt) {
 
 API_CALLABLE(N(UseAbility)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
     Npc* npc = script->owner2.npc;
     s32 actionState;
 
@@ -229,8 +229,8 @@ API_CALLABLE(N(UseAbility)) {
         if ((playerStatus->animFlags & PA_FLAG_CHANGING_MAP)) {
             return ApiStatus_DONE2;
         }
-        if (!partnerActionStatus->shouldResumeAbility) {
-            if (partnerActionStatus->partnerActionState == ACTION_STATE_IDLE
+        if (!partnerStatus->shouldResumeAbility) {
+            if (partnerStatus->partnerActionState == ACTION_STATE_IDLE
                 && (!func_800EA52C(PARTNER_WATT) || is_starting_conversation()))
             {
                 return ApiStatus_DONE2;
@@ -248,7 +248,7 @@ API_CALLABLE(N(UseAbility)) {
                 N(AbilityState) = SHINING_STATE_INIT;
             }
         } else {
-            partnerActionStatus->shouldResumeAbility = FALSE;
+            partnerStatus->shouldResumeAbility = FALSE;
             playerStatus->animFlags |= (PA_FLAG_USING_WATT | PA_FLAG_WATT_IN_HANDS);
             N(update_player_carry_anim)();
             npc->currentAnim = ANIM_WorldWatt_Idle;
@@ -290,8 +290,8 @@ API_CALLABLE(N(UseAbility)) {
                 npc->flags |= NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_8;
                 npc->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_GRAVITY);
                 gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
-                partnerActionStatus->partnerActionState = PARTNER_ACTION_USE;
-                partnerActionStatus->actingPartner = PARTNER_WATT;
+                partnerStatus->partnerActionState = PARTNER_ACTION_USE;
+                partnerStatus->actingPartner = PARTNER_WATT;
                 npc->moveToPos.x = playerStatus->position.x;
                 npc->moveToPos.y = playerStatus->position.y + 5.0f;
                 npc->moveToPos.z = playerStatus->position.z;
@@ -309,8 +309,8 @@ API_CALLABLE(N(UseAbility)) {
                 N(IsPlayerHolding) = TRUE;
                 npc->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_GRAVITY);
                 gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
-                partnerActionStatus->partnerActionState = PARTNER_ACTION_USE;
-                partnerActionStatus->actingPartner = PARTNER_WATT;
+                partnerStatus->partnerActionState = PARTNER_ACTION_USE;
+                partnerStatus->actingPartner = PARTNER_WATT;
                 partner_force_player_flip_done();
                 npc->moveToPos.x = playerStatus->position.x;
                 npc->moveToPos.y = playerStatus->position.y + 5.0f;
@@ -330,7 +330,7 @@ API_CALLABLE(N(UseAbility)) {
             if (npc->duration == 0) {
                 npc->yaw = playerStatus->targetYaw;
                 npc->currentAnim = ANIM_WorldWatt_Idle;
-                partnerActionStatus->actingPartner = PARTNER_WATT;
+                partnerStatus->actingPartner = PARTNER_WATT;
                 playerStatus->animFlags |= PA_FLAG_WATT_IN_HANDS;
                 N(update_player_carry_anim)();
                 script->functionTemp[1] = 2;
@@ -358,7 +358,7 @@ API_CALLABLE(N(UseAbility)) {
                     || actionState == ACTION_STATE_WALK
                     || actionState == ACTION_STATE_RUN
                     || actionState == ACTION_STATE_LAND)
-                && partnerActionStatus->pressedButtons & BUTTON_B
+                && partnerStatus->pressedButtons & BUTTON_B
             ) {
                 N(AbilityState) = SHINING_STATE_RELEASE;
             }
@@ -370,8 +370,8 @@ API_CALLABLE(N(UseAbility)) {
         npc->currentAnim = ANIM_WorldWatt_Idle;
         partner_clear_player_tracking(npc);
         N(IsPlayerHolding) = FALSE;
-        partnerActionStatus->actingPartner = PARTNER_NONE;
-        partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
+        partnerStatus->actingPartner = PARTNER_NONE;
+        partnerStatus->partnerActionState = PARTNER_ACTION_NONE;
         gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
         N(AbilityState) = SHINING_STATE_BEGIN;
         npc_set_palswap_mode_A(npc, 0);

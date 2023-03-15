@@ -184,7 +184,7 @@ s32 N(update_current_floor)(void) {
 
 API_CALLABLE(N(UseAbility)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
     Npc* parakarry = script->owner2.npc;
     s32 buttonTemp = BUTTON_A;
     f32 x, y, z, yaw, length;
@@ -204,7 +204,7 @@ API_CALLABLE(N(UseAbility)) {
             return ApiStatus_DONE2;
         }
 
-        if (!partnerActionStatus->shouldResumeAbility) {
+        if (!partnerStatus->shouldResumeAbility) {
             if (!func_800EA52C(PARTNER_PARAKARRY)) {
                 return ApiStatus_DONE2;
             }
@@ -212,14 +212,14 @@ API_CALLABLE(N(UseAbility)) {
             parakarry->flags &= ~NPC_FLAG_COLLDING_FORWARD_WITH_WORLD;
             parakarry->flags |= NPC_FLAG_COLLDING_WITH_WORLD;
         } else {
-            partnerActionStatus->shouldResumeAbility = FALSE;
+            partnerStatus->shouldResumeAbility = FALSE;
             set_action_state(ACTION_STATE_RIDE);
             parakarry->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_GRAVITY);
             N(UsingAbility)  = TRUE;
             gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
             parakarry->currentAnim = ANIM_WorldParakarry_CarryLight;
-            partnerActionStatus->actingPartner = PARTNER_PARAKARRY;
-            partnerActionStatus->partnerActionState = PARTNER_ACTION_PARAKARRY_HOVER;
+            partnerStatus->actingPartner = PARTNER_PARAKARRY;
+            partnerStatus->partnerActionState = PARTNER_ACTION_PARAKARRY_HOVER;
             parakarry->flags &= ~NPC_FLAG_COLLDING_FORWARD_WITH_WORLD;
             parakarry->flags |= NPC_FLAG_COLLDING_WITH_WORLD;
         }
@@ -258,8 +258,8 @@ API_CALLABLE(N(UseAbility)) {
             gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
             parakarry->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_GRAVITY);
             parakarry->flags |= NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
-            partnerActionStatus->actingPartner = PARTNER_PARAKARRY;
-            partnerActionStatus->partnerActionState = PARTNER_ACTION_PARAKARRY_HOVER;
+            partnerStatus->actingPartner = PARTNER_PARAKARRY;
+            partnerStatus->partnerActionState = PARTNER_ACTION_PARAKARRY_HOVER;
             N(PlayerWasFacingLeft) = partner_force_player_flip_done();
             enable_npc_blur(parakarry);
             parakarry->yaw = atan2(parakarry->pos.x, parakarry->pos.z, playerStatus->position.x, playerStatus->position.z);
@@ -322,8 +322,8 @@ API_CALLABLE(N(UseAbility)) {
                 break;
             }
             // handle jump/cancel inputs
-            if (partnerActionStatus->pressedButtons & (BUTTON_A | BUTTON_B | BUTTON_C_DOWN)) {
-                N(AbilityState) = (partnerActionStatus->pressedButtons & BUTTON_A) ? AIR_LIFT_JUMP : AIR_LIFT_DROP;
+            if (partnerStatus->pressedButtons & (BUTTON_A | BUTTON_B | BUTTON_C_DOWN)) {
+                N(AbilityState) = (partnerStatus->pressedButtons & BUTTON_A) ? AIR_LIFT_JUMP : AIR_LIFT_DROP;
                 suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
                 break;
             }
@@ -455,13 +455,13 @@ API_CALLABLE(N(UseAbility)) {
             }
 
             // handle jump/cancel inputs
-            if (partnerActionStatus->pressedButtons & (BUTTON_A | BUTTON_B | BUTTON_C_DOWN)) {
-                if (partnerActionStatus->pressedButtons & buttonTemp) {   // TODO find a way to remove this while still loading 0x15 instead of moving it from register
+            if (partnerStatus->pressedButtons & (BUTTON_A | BUTTON_B | BUTTON_C_DOWN)) {
+                if (partnerStatus->pressedButtons & buttonTemp) {   // TODO find a way to remove this while still loading 0x15 instead of moving it from register
                     if (!parakarry->pos.x) {
 
                     }
                 }
-                N(AbilityState) = (partnerActionStatus->pressedButtons & BUTTON_A) ? AIR_LIFT_JUMP : AIR_LIFT_DROP;
+                N(AbilityState) = (partnerStatus->pressedButtons & BUTTON_A) ? AIR_LIFT_JUMP : AIR_LIFT_DROP;
                 break;
             }
 
@@ -582,8 +582,8 @@ API_CALLABLE(N(UseAbility)) {
         parakarry->flags &= ~NPC_FLAG_JUMPING;
         parakarry->animationSpeed = 1.0f;
         partner_clear_player_tracking(parakarry);
-        partnerActionStatus->actingPartner = PARTNER_NONE;
-        partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
+        partnerStatus->actingPartner = PARTNER_NONE;
+        partnerStatus->partnerActionState = PARTNER_ACTION_NONE;
         enable_partner_ai();
         sfx_stop_sound(SOUND_2009);
         if (N(LockingPlayerInput)) {

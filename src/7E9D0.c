@@ -27,7 +27,7 @@ void func_800E5520(void) {
 }
 
 s32 phys_adjust_cam_on_landing(void) {
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
     GameStatus* gameStatus = gGameStatusPtr;
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 ret = 1;
@@ -160,7 +160,7 @@ s32 phys_adjust_cam_on_landing(void) {
         } else {
             gCameras[CAM_DEFAULT].moveFlags &= ~CAMERA_MOVE_IGNORE_PLAYER_Y;
         }
-    } else if (partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE && partnerActionStatus->actingPartner == PARTNER_PARAKARRY) {
+    } else if (partnerStatus->partnerActionState != PARTNER_ACTION_NONE && partnerStatus->actingPartner == PARTNER_PARAKARRY) {
         gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_FLAG_2;
     } else {
         gCameras[CAM_DEFAULT].moveFlags &= ~CAMERA_MOVE_FLAG_2;
@@ -215,7 +215,7 @@ void phys_reset_spin_history(void) {
 
 void phys_update_action_state(void) {
     Camera* cameras = gCameras;
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerSpinState* playerSpinState = &gPlayerSpinState;
 
@@ -266,7 +266,7 @@ void phys_update_action_state(void) {
                 cond = FALSE;
             }
 
-            if ((partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE) && !(playerStatus->flags & PS_FLAG_PAUSED) && cond) {
+            if ((partnerStatus->partnerActionState == PARTNER_ACTION_NONE) && !(playerStatus->flags & PS_FLAG_PAUSED) && cond) {
                 set_action_state(ACTION_STATE_TALK);
             }
             check_input_spin();

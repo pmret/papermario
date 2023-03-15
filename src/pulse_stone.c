@@ -29,13 +29,13 @@ void pulse_stone_notification_update(void);
 
 s32 should_cancel_pulse_stone(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
     s8 actionState = playerStatus->actionState;
 
     // could be written more clearly if these two condtions were inverted
     if (actionState != ACTION_STATE_USE_TWEESTER) {
-        if (!(partnerActionStatus->partnerActionState == PARTNER_ACTION_USE
-            && (partnerActionStatus->actingPartner == PARTNER_BOW || partnerActionStatus->actingPartner == PARTNER_PARAKARRY))
+        if (!(partnerStatus->partnerActionState == PARTNER_ACTION_USE
+            && (partnerStatus->actingPartner == PARTNER_BOW || partnerStatus->actingPartner == PARTNER_PARAKARRY))
         ) {
             return FALSE;
         }

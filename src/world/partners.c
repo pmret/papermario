@@ -629,26 +629,26 @@ void _use_partner_ability(void) {
     static u32 PartnerCommand; // goes into BSS, needs to be static for the function to match
 
     PlayerData* playerData = &gPlayerData;
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (!partnerActionStatus->inputDisabledCount) {
-        partnerActionStatus->stickX = gGameStatusPtr->stickX[gGameStatusPtr->multiplayerEnabled];
-        partnerActionStatus->stickY = gGameStatusPtr->stickY[gGameStatusPtr->multiplayerEnabled];
-        partnerActionStatus->currentButtons = gGameStatusPtr->currentButtons[gGameStatusPtr->multiplayerEnabled];
-        partnerActionStatus->pressedButtons = gGameStatusPtr->pressedButtons[gGameStatusPtr->multiplayerEnabled];
-        partnerActionStatus->heldButtons = gGameStatusPtr->heldButtons[gGameStatusPtr->multiplayerEnabled];
+    if (!partnerStatus->inputDisabledCount) {
+        partnerStatus->stickX = gGameStatusPtr->stickX[gGameStatusPtr->multiplayerEnabled];
+        partnerStatus->stickY = gGameStatusPtr->stickY[gGameStatusPtr->multiplayerEnabled];
+        partnerStatus->currentButtons = gGameStatusPtr->currentButtons[gGameStatusPtr->multiplayerEnabled];
+        partnerStatus->pressedButtons = gGameStatusPtr->pressedButtons[gGameStatusPtr->multiplayerEnabled];
+        partnerStatus->heldButtons = gGameStatusPtr->heldButtons[gGameStatusPtr->multiplayerEnabled];
     } else {
-        partnerActionStatus->stickX = 0;
-        partnerActionStatus->stickY = 0;
-        partnerActionStatus->currentButtons = 0;
-        partnerActionStatus->pressedButtons = 0;
-        partnerActionStatus->heldButtons = 0;
+        partnerStatus->stickX = 0;
+        partnerStatus->stickY = 0;
+        partnerStatus->currentButtons = 0;
+        partnerStatus->pressedButtons = 0;
+        partnerStatus->heldButtons = 0;
     }
 
     if (playerStatus->animFlags & PA_FLAG_INTERRUPT_USE_PARTNER) {
         playerStatus->animFlags &= ~PA_FLAG_INTERRUPT_USE_PARTNER;
-        partnerActionStatus->pressedButtons |= BUTTON_B | BUTTON_C_DOWN;
+        partnerStatus->pressedButtons |= BUTTON_B | BUTTON_C_DOWN;
         playerStatus->animFlags |= PA_FLAG_PARTNER_USAGE_STOPPED;
     }
 
@@ -870,7 +870,7 @@ void _use_partner_ability(void) {
                     PartnerCommandState += 1;
                     break;
                 case 2:
-                    if (partnerActionStatus->partnerActionState != 1) {
+                    if (partnerStatus->partnerActionState != 1) {
                         wSavedPartnerPosX = playerStatus->position.x;
                         wSavedPartnerPosY = playerStatus->position.y;
                         wSavedPartnerPosZ = playerStatus->position.z;
@@ -1774,21 +1774,21 @@ void partner_flying_update_player_tracking(Npc* partner) {
 
 void partner_flying_update_motion(Npc* partner) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
     f32 x, y, z, hitDepth;
     f32 var_f0;
     f32 var_f2;
 
     if (gGameStatusPtr->multiplayerEnabled == 0 ||
         (playerStatus->flags & (PS_FLAG_INPUT_DISABLED | PS_FLAG_NO_STATIC_COLLISION)) ||
-        partnerActionStatus->inputDisabledCount ||
-        partnerActionStatus->partnerAction_unk_2)
+        partnerStatus->inputDisabledCount ||
+        partnerStatus->partnerAction_unk_2)
     {
         if (!(playerStatus->animFlags & PA_FLAG_OPENED_HIDDEN_PANEL) || D_800F8020 == 0) {
             partner_flying_follow_player(partner);
         }
-        if (partnerActionStatus->pressedButtons & (BUTTON_B | BUTTON_Z | BUTTON_C_DOWN | BUTTON_C_LEFT)) {
-            partnerActionStatus->partnerAction_unk_2 = FALSE;
+        if (partnerStatus->pressedButtons & (BUTTON_B | BUTTON_Z | BUTTON_C_DOWN | BUTTON_C_LEFT)) {
+            partnerStatus->partnerAction_unk_2 = FALSE;
         }
     }
     if (wPartnerFollowState != 50 && fabsf(partner->pos.y - playerStatus->position.y) > 1000.0f) {

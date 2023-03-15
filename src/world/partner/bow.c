@@ -164,7 +164,7 @@ s32 N(check_for_treadmill_overlaps)(void) {
 
 API_CALLABLE(N(UseAbility)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
     Npc* bow = script->owner2.npc;
     f32 stickInputMag;
@@ -249,8 +249,8 @@ API_CALLABLE(N(UseAbility)) {
 
             N(IsHiding) = TRUE;
             bow->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_GRAVITY);
-            partnerActionStatus->partnerActionState = 1;
-            partnerActionStatus->actingPartner = 9;
+            partnerStatus->partnerActionState = 1;
+            partnerStatus->actingPartner = 9;
             playerStatus->flags |= PS_FLAG_HAZARD_INVINCIBILITY;
             partner_force_player_flip_done();
             bow->moveToPos.x = playerStatus->position.x;
@@ -322,10 +322,10 @@ API_CALLABLE(N(UseAbility)) {
             bow->pos.y = playerStatus->position.y - N(OuttaSightPosY);
             bow->pos.z = playerStatus->position.z - N(OuttaSightPosZ);
 
-            stickInputMag = dist2D(0.0f, 0.0f, partnerActionStatus->stickX, partnerActionStatus->stickY);
+            stickInputMag = dist2D(0.0f, 0.0f, partnerStatus->stickX, partnerStatus->stickY);
             if ((collisionStatus->currentFloor <= NO_COLLIDER)
                 || stickInputMag > 10.0f
-                || partnerActionStatus->pressedButtons & (BUTTON_B | BUTTON_C_DOWN)
+                || partnerStatus->pressedButtons & (BUTTON_B | BUTTON_C_DOWN)
                 || playerStatus->flags & PS_FLAG_HIT_FIRE
             ) {
                 // prevent exiting from the ground while underneath a wall
@@ -363,7 +363,7 @@ EvtScript EVS_WorldBow_UseAbility = {
 
 void N(end_outta_sight_cleanup)(Npc* bow) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
     s32 actionState;
 
     playerStatus->alpha1 = 255;
@@ -385,8 +385,8 @@ void N(end_outta_sight_cleanup)(Npc* bow) {
     }
 
     set_action_state(actionState);
-    partnerActionStatus->partnerActionState = 0;
-    partnerActionStatus->actingPartner = 0;
+    partnerStatus->partnerActionState = 0;
+    partnerStatus->actingPartner = 0;
     playerStatus->flags &= ~PS_FLAG_PAUSE_DISABLED;
     partner_clear_player_tracking(bow);
     N(IsHiding) = FALSE;
@@ -417,14 +417,14 @@ EvtScript EVS_WorldBow_PutAway = {
 };
 
 void N(pre_battle)(Npc* bow) {
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
 
     if (N(IsHiding)) {
         enable_player_input();
         set_action_state(ACTION_STATE_IDLE);
         partner_clear_player_tracking(bow);
-        partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
-        partnerActionStatus->actingPartner = PARTNER_NONE;
+        partnerStatus->partnerActionState = PARTNER_ACTION_NONE;
+        partnerStatus->actingPartner = PARTNER_NONE;
         N(IsHiding) = FALSE;
         bow->flags &= ~NPC_FLAG_INVISIBLE;
     }

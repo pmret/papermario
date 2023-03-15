@@ -42,7 +42,7 @@ API_CALLABLE(N(WaitWhileConveyorPaused)) {
 API_CALLABLE(N(AddConveyorPush)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* partner = get_npc_unsafe(NPC_PARTNER);
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
     f32 x, y, z;
     f32 outLength;
     f32 hitRx, hitRz;
@@ -57,8 +57,8 @@ API_CALLABLE(N(AddConveyorPush)) {
     }
 
     one = 1;
-    if (partnerActionStatus->actingPartner == PARTNER_BOW) {
-        if (partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE && playerStatus->alpha1 == 128) {
+    if (partnerStatus->actingPartner == PARTNER_BOW) {
+        if (partnerStatus->partnerActionState != PARTNER_ACTION_NONE && playerStatus->alpha1 == 128) {
             x = playerStatus->position.x;
             y = playerStatus->position.y;
             z = playerStatus->position.z;
@@ -79,8 +79,8 @@ API_CALLABLE(N(AddConveyorPush)) {
         }
     }
     one = 1;
-    if (partnerActionStatus->actingPartner != PARTNER_LAKILESTER ||
-        partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE)
+    if (partnerStatus->actingPartner != PARTNER_LAKILESTER ||
+        partnerStatus->partnerActionState == PARTNER_ACTION_NONE)
     {
         for (i = 0; i < ARRAY_COUNT(N(ConveyorColliders)); i++) {
             if (gCollisionStatus.currentFloor == N(ConveyorColliders)[i] ||
@@ -91,8 +91,8 @@ API_CALLABLE(N(AddConveyorPush)) {
             }
 
             if (partner->currentFloor == N(ConveyorColliders)[i] &&
-                ((partnerActionStatus->actingPartner != PARTNER_KOOPER) ||
-                 (partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE)))
+                ((partnerStatus->actingPartner != PARTNER_KOOPER) ||
+                 (partnerStatus->partnerActionState == PARTNER_ACTION_NONE)))
             {
                 partner->pos.x += N(ConveyorPushVels)[i][0];
                 partner->pos.z += N(ConveyorPushVels)[i][one]; // TODO needed to match

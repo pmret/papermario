@@ -5,7 +5,7 @@
 BSS f32 D_802B6770_E27C80;
 
 s32 action_update_ride(void) {
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 oldFlags = playerStatus->flags;
 
@@ -22,10 +22,10 @@ s32 action_update_ride(void) {
     }
 
     if (playerStatus->animFlags & PA_FLAG_RIDING_PARTNER) {
-        if (partnerActionStatus->actingPartner == PARTNER_LAKILESTER) {
+        if (partnerStatus->actingPartner == PARTNER_LAKILESTER) {
             return world_goombario_get_trigger_tattle(oldFlags);
         }
-        if (partnerActionStatus->actingPartner == PARTNER_SUSHIE) {
+        if (partnerStatus->actingPartner == PARTNER_SUSHIE) {
             return world_goombario_get_trigger_tattle(oldFlags);
         }
     }

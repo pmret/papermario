@@ -202,7 +202,7 @@ API_CALLABLE(N(UseAbility)) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
     PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* kooper = script->owner2.npc;
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
     f32 posX, posY, posZ, hitLength;
     f32 testLength;
@@ -243,9 +243,9 @@ API_CALLABLE(N(UseAbility)) {
             } else {
                 return ApiStatus_DONE2;
             }
-        } else if (partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE) {
-            partnerActionStatus->partnerActionState = PARTNER_ACTION_KOOPER_GATHER;
-            partnerActionStatus->actingPartner = PARTNER_KOOPER;
+        } else if (partnerStatus->partnerActionState == PARTNER_ACTION_NONE) {
+            partnerStatus->partnerActionState = PARTNER_ACTION_KOOPER_GATHER;
+            partnerStatus->actingPartner = PARTNER_KOOPER;
             script->USE_STATE = SHELL_TOSS_STATE_HOLD;
             kooper->currentAnim = ANIM_WorldKooper_SpinShell;
             N(ShellTossHoldTime) = 30;
@@ -268,8 +268,8 @@ API_CALLABLE(N(UseAbility)) {
             N(HasItem) = FALSE;
             kooper->flags &= ~(NPC_FLAG_GRAVITY | NPC_FLAG_JUMPING | NPC_FLAG_8);
             kooper->flags |= (NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION);
-            partnerActionStatus->actingPartner = PARTNER_KOOPER;
-            partnerActionStatus->partnerActionState = PARTNER_ACTION_KOOPER_GATHER;
+            partnerStatus->actingPartner = PARTNER_KOOPER;
+            partnerStatus->partnerActionState = PARTNER_ACTION_KOOPER_GATHER;
             N(PlayerWasFacingLeft) = partner_force_player_flip_done();
             enable_npc_blur(kooper);
             kooper->duration = 4;
@@ -368,8 +368,8 @@ API_CALLABLE(N(UseAbility)) {
             if (!(kooper->jumpVelocity > 0.0f) && (playerStatus->position.y < kooper->moveToPos.z)) {
                 N(D_802BEC5C) = 0;
                 kooper->flags &= ~NPC_FLAG_IGNORE_PLAYER_COLLISION;
-                partnerActionStatus->actingPartner = PARTNER_KOOPER;
-                partnerActionStatus->partnerActionState = PARTNER_ACTION_KOOPER_TOSS;
+                partnerStatus->actingPartner = PARTNER_KOOPER;
+                partnerStatus->partnerActionState = PARTNER_ACTION_KOOPER_TOSS;
                 kooper->rotation.z = 0.0f;
                 kooper->planarFlyDist = 0.0f;
                 kooper->moveSpeed = 8.0f;
@@ -615,8 +615,8 @@ API_CALLABLE(N(UseAbility)) {
         ShellTossHitboxState = SHELL_TOSS_HITBOX_DISABLED;
         kooper->flags |= NPC_FLAG_IGNORE_PLAYER_COLLISION;
         kooper->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_IGNORE_WORLD_COLLISION);
-        partnerActionStatus->actingPartner = PARTNER_NONE;
-        partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
+        partnerStatus->actingPartner = PARTNER_NONE;
+        partnerStatus->partnerActionState = PARTNER_ACTION_NONE;
         kooper->jumpVelocity = 0.0f;
         kooper->collisionHeight = 24;
         kooper->currentAnim = ANIM_WorldKooper_Walk;

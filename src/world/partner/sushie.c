@@ -350,7 +350,7 @@ API_CALLABLE(N(UseAbility)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
     CollisionStatus* collisionStatus = &gCollisionStatus;
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
     Npc* sushie = script->owner2.npc;
     s32 surfaceType;
     f32 x, y, z, dist;
@@ -415,9 +415,9 @@ API_CALLABLE(N(UseAbility)) {
                 sushie->currentAnim = ANIM_WorldSushie_Ride;
                 sushie->moveSpeed = playerStatus->runSpeed;
                 sushie->jumpScale = 0.0f;
-                partnerActionStatus->partnerActionState = PARTNER_ACTION_USE;
+                partnerStatus->partnerActionState = PARTNER_ACTION_USE;
                 gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
-                partnerActionStatus->actingPartner = PARTNER_SUSHIE;
+                partnerStatus->actingPartner = PARTNER_SUSHIE;
                 N(DiveState) = DIVE_STATE_NONE;
                 N(DiveTime) = 0;
                 script->functionTemp[2] = 0;
@@ -534,9 +534,9 @@ API_CALLABLE(N(UseAbility)) {
             playerStatus->position.z = sushie->pos.z;
             playerStatus->targetYaw = sushie->yaw;
             sushie->moveSpeed = 3.0f;
-            partnerActionStatus->partnerActionState = PARTNER_ACTION_USE;
+            partnerStatus->partnerActionState = PARTNER_ACTION_USE;
             gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
-            partnerActionStatus->actingPartner = PARTNER_SUSHIE;
+            partnerStatus->actingPartner = PARTNER_SUSHIE;
             N(DiveState) = DIVE_STATE_NONE;
             N(DiveTime) = 0;
             script->functionTemp[2] = 0;
@@ -597,7 +597,7 @@ API_CALLABLE(N(UseAbility)) {
             gCameras[CAM_DEFAULT].targetPos.x = sushie->pos.x;
             gCameras[CAM_DEFAULT].targetPos.y = N(WaterSurfaceY);
             gCameras[CAM_DEFAULT].targetPos.z = sushie->pos.z;
-            if ((partnerActionStatus->pressedButtons & (BUTTON_B | BUTTON_C_DOWN)) || N(TouchDockTime) >= 30) {
+            if ((partnerStatus->pressedButtons & (BUTTON_B | BUTTON_C_DOWN)) || N(TouchDockTime) >= 30) {
                 if (N(IsUnderwater)) {
                     break;
                 }
@@ -720,8 +720,8 @@ API_CALLABLE(N(UseAbility)) {
                 sushie->flags |= NPC_FLAG_GRAVITY;
                 sushie->flags &= ~NPC_FLAG_IGNORE_WORLD_COLLISION;
                 gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
-                partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
-                partnerActionStatus->actingPartner = 0;
+                partnerStatus->partnerActionState = PARTNER_ACTION_NONE;
+                partnerStatus->actingPartner = 0;
                 func_802DDFF8(ANIM_Mario1_Idle, 0, 0, 0, 0, 0, 0);
                 func_8003D624(sushie, FOLD_TYPE_NONE, 0, 0, 0, 0, 0);
                 return ApiStatus_DONE1;

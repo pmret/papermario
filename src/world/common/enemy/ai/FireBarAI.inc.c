@@ -15,7 +15,7 @@ enum {
 
 API_CALLABLE(N(FireBarAI_Main)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
     Bytecode* args = script->ptrReadPos;
     FireBarAISettings* settings;
     FireBarData* data;
@@ -69,10 +69,10 @@ API_CALLABLE(N(FireBarAI_Main)) {
         }
         if (!(data->flags & 2) && !(playerStatus->flags & PS_FLAG_HAZARD_INVINCIBILITY)) {
             dY = playerStatus->position.y - npc->pos.y;
-            if (partnerActionStatus->partnerActionState == PARTNER_ACTION_USE) {
-                if (partnerActionStatus->actingPartner == PARTNER_LAKILESTER) {
+            if (partnerStatus->partnerActionState == PARTNER_ACTION_USE) {
+                if (partnerStatus->actingPartner == PARTNER_LAKILESTER) {
                     dY = partnerNpc->pos.y - npc->pos.y;
-                } else if (partnerActionStatus->actingPartner == PARTNER_PARAKARRY) {
+                } else if (partnerStatus->actingPartner == PARTNER_PARAKARRY) {
                     dY = (playerStatus->position.y - 10.0f) - npc->pos.y;
                 }
             }
