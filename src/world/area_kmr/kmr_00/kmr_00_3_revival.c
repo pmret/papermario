@@ -152,8 +152,7 @@ API_CALLABLE(N(func_802405F0_8AC580)) {
             npc->pos.y = 100.0f;
             add_vec2D_polar(&npc->pos.x, &npc->pos.z, 70.0f / DT, npc->moveToPos.x + (script->functionTemp[2] * 51) + 153.0f);
             npc->pos.y += (-npc->pos.z + -50.0f + 70.0f / DT) * 0.15f;
-            if ((script->VAR_1 + script->functionTemp[2]) ==
-                (((script->VAR_1 + script->functionTemp[2]) / 13) * 13)) {
+            if ((script->VAR_1 + script->functionTemp[2]) % 13 == 0) {
                 fx_sparkles(FX_SPARKLES_3, npc->pos.x, npc->pos.y + 10.0f, npc->pos.z, 10.0f);
             }
             if (script->VAR_1 > 256) {
@@ -167,8 +166,7 @@ API_CALLABLE(N(func_802405F0_8AC580)) {
             npc->pos.y = 100.0f - (script->VAR_2 * 0.3f);
             add_vec2D_polar(&npc->pos.x, &npc->pos.z, 70.0f / DT, npc->moveToPos.x + (script->functionTemp[2] * 51) + 153.0f);
             npc->pos.y += (-npc->pos.z + -50.0f + 70.0f / DT) * 0.15f;
-            if ((script->VAR_1 + script->functionTemp[2]) ==
-                (((script->VAR_1 + script->functionTemp[2]) / 13) * 13)) {
+            if ((script->VAR_1 + script->functionTemp[2]) % 13 == 0) {
                 fx_sparkles(FX_SPARKLES_3, npc->pos.x, npc->pos.y + 10.0f, npc->pos.z, 10.0f);
             }
             if (script->VAR_2++ > 180) {
@@ -188,8 +186,7 @@ API_CALLABLE(N(func_802405F0_8AC580)) {
             npc->pos.y = 45.999996f;
             add_vec2D_polar(&npc->pos.x, &npc->pos.z, 70.0f / DT, npc->moveToPos.x + (script->functionTemp[2] * 51) + 153.0f);
             npc->pos.y += (-npc->pos.z + -50.0f + 70.0f / DT) * 0.15f;
-            if ((script->VAR_1 + script->functionTemp[2]) ==
-                (((script->VAR_1 + script->functionTemp[2]) / 13) * 13)) {
+            if ((script->VAR_1 + script->functionTemp[2]) % 13 == 0) {
                 fx_sparkles(FX_SPARKLES_3, npc->pos.x, npc->pos.y + 10.0f, npc->pos.z, 10.0f);
             }
             if (npc->moveToPos.y < 0.0f) {

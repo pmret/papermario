@@ -90,7 +90,7 @@ void ice_pillar_update(EffectInstance* effect) {
             EffectInstance* iceShard;
 
             iceShard = ice_shard_main(
-                (i - ((i / 2) * 2)) + 2, 
+                (i % 2) + 2, 
                 (data->pos.x + shim_rand_int(20)) - 10.0f, 
                 data->pos.y + (shim_rand_int(40) * data->scale), 
                 data->pos.z + 3.0f, 

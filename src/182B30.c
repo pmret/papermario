@@ -3256,7 +3256,7 @@ void func_8025C918(s32 isNpcSprite, ActorPart* part, s32 yaw, s32 arg3) {
     baseAngle = decor->unk75C;
 
     if (decor->unk75C >= 360) {
-        decor->unk75C = baseAngle - ((baseAngle / 360) * 360);
+        decor->unk75C = baseAngle % 360;
     }
 
     for (i = 0; i < ARRAY_COUNT(rbuf); i++) {

@@ -52,7 +52,7 @@ void appendGfx_ispy_icon(void) {
         }
 
         flashPhase = ISpyPtr->flashCount;
-        flashPhase = flashPhase - (flashPhase / 12) * 12;
+        flashPhase = flashPhase % 12;
         switch (flashPhase) {
             case 0:
             case 1:

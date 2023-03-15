@@ -5368,6 +5368,7 @@ enum ColliderFlags {
     SURFACE_TYPE_LAVA               = 3,
     SURFACE_TYPE_SPIKES             = 2,
     SURFACE_TYPE_WATER              = 1,
+    SURFACE_TYPE_INVALID            = -1,
 
     COLLIDER_FLAG_SAFE_FLOOR        = 0x00000100,
     COLLIDER_FLAG_IGNORE_SHELL      = 0x00008000,

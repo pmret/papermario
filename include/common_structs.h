@@ -26,6 +26,7 @@ typedef void NoArgCallback(void*);
 typedef s32 b32;
 typedef s8 b8;
 
+typedef s32 HitID;
 typedef u32 AnimID;
 
 typedef struct {

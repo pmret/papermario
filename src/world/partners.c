@@ -2143,7 +2143,7 @@ void partner_flying_follow_player(Npc* partner) {
                             x = partner->pos.x;
                             y = partner->pos.y;
                             z = partner->pos.z;
-                            if (npc_test_move_taller_with_slipping(0, &x, &y, &z, partner->moveSpeed, partner->yaw, partner->collisionHeight, partner->collisionRadius) != 0) {
+                            if (npc_test_move_taller_with_slipping(0, &x, &y, &z, partner->moveSpeed, partner->yaw, partner->collisionHeight, partner->collisionRadius)) {
                                 partner->pos.x += (x - partner->pos.x) / 5.0f;
                                 partner->pos.z += (z - partner->pos.z) / 5.0f;
                             } else {
