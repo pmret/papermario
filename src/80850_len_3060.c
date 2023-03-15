@@ -892,15 +892,45 @@ void update_status_menu(void) {
                 while (TRUE) {
                     i++;
                     s1++;
-                    if (i >= limit) { break; } i++; s1++;
-                    if (i >= limit) { break; } i++; s1++;
-                    if (i >= limit) { break; } i++; s1++;
-                    if (i >= limit) { break; } i++; s1++;
-                    if (i >= limit) { break; } i++; s1++;
-                    if (i >= limit) { break; } i++; s1++;
-                    if (i >= limit) { break; } i++; s1 = 0;
+                    if (i >= limit) {
+                        break;
+                    }
+                    i++;
+                    s1++;
+                    if (i >= limit) {
+                        break;
+                    }
+                    i++;
+                    s1++;
+                    if (i >= limit) {
+                        break;
+                    }
+                    i++;
+                    s1++;
+                    if (i >= limit) {
+                        break;
+                    }
+                    i++;
+                    s1++;
+                    if (i >= limit) {
+                        break;
+                    }
+                    i++;
+                    s1++;
+                    if (i >= limit) {
+                        break;
+                    }
+                    i++;
+                    s1++;
+                    if (i >= limit) {
+                        break;
+                    }
+                    i++;
+                    s1 = 0;
                     sp50++;
-                    if (i >= limit) { break; }
+                    if (i >= limit) {
+                        break;
+                    }
                 }
             }
         }
