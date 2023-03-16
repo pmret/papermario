@@ -918,7 +918,7 @@ EvtScript N(healAll) = {
         EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_FlyingMagikoopa_Anim01)
     EVT_END_IF
     EVT_WAIT(5)
-    EVT_CALL(EnemyCreateTargetList, 0x00008002)
+    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_SET(LocalFlag(0), 0)
@@ -1176,7 +1176,7 @@ EvtScript N(attackMagicBlast) = {
 };
 
 EvtScript N(findPlaceForClone) = {
-    EVT_CALL(EnemyCreateTargetList, 0x00008002)
+    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
@@ -1399,7 +1399,7 @@ Formation N(formation_clone_flying) = {
 };
 
 EvtScript N(makeClone) = {
-    EVT_CALL(CountPlayerTargets, ACTOR_SELF, 0x00008002, LVar0)
+    EVT_CALL(CountPlayerTargets, ACTOR_SELF, TARGET_FLAG_2 | TARGET_FLAG_8000, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_EXEC_WAIT(N(flee))
         EVT_RETURN
@@ -1498,7 +1498,7 @@ EvtScript N(makeClone) = {
 EvtScript N(boostAttack) = {
     EVT_SET(LocalFlag(0), 0)
     EVT_LABEL(10)
-    EVT_CALL(EnemyCreateTargetList, 0x00008002)
+    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
@@ -1524,7 +1524,7 @@ EvtScript N(boostAttack) = {
         EVT_CALL(SetBattleVar, 2, -1)
         EVT_GOTO(10)
     EVT_END_IF
-    EVT_CALL(CountPlayerTargets, ACTOR_SELF, 0x00008002, LVar0)
+    EVT_CALL(CountPlayerTargets, ACTOR_SELF, TARGET_FLAG_2 | TARGET_FLAG_8000, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_EXEC_WAIT(N(flee))
         EVT_RETURN
@@ -1610,7 +1610,7 @@ EvtScript N(boostAttack) = {
 EvtScript N(boostDefense) = {
     EVT_SET(LocalFlag(0), 0)
     EVT_LABEL(10)
-    EVT_CALL(EnemyCreateTargetList, 0x00008002)
+    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
@@ -1636,7 +1636,7 @@ EvtScript N(boostDefense) = {
         EVT_CALL(SetBattleVar, 2, -1)
         EVT_GOTO(10)
     EVT_END_IF
-    EVT_CALL(CountPlayerTargets, ACTOR_SELF, 0x00008002, LVar0)
+    EVT_CALL(CountPlayerTargets, ACTOR_SELF, TARGET_FLAG_2 | TARGET_FLAG_8000, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_EXEC_WAIT(N(flee))
         EVT_RETURN
@@ -1722,7 +1722,7 @@ EvtScript N(boostDefense) = {
 EvtScript N(electrify) = {
     EVT_SET(LocalFlag(0), 0)
     EVT_LABEL(10)
-    EVT_CALL(EnemyCreateTargetList, 0x00008002)
+    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
@@ -1748,7 +1748,7 @@ EvtScript N(electrify) = {
         EVT_CALL(SetBattleVar, 2, -1)
         EVT_GOTO(10)
     EVT_END_IF
-    EVT_CALL(CountPlayerTargets, ACTOR_SELF, 0x00008002, LVar0)
+    EVT_CALL(CountPlayerTargets, ACTOR_SELF, TARGET_FLAG_2 | TARGET_FLAG_8000, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_EXEC_WAIT(N(flee))
         EVT_RETURN
@@ -1839,7 +1839,7 @@ EvtScript N(electrify) = {
 EvtScript N(makeTransparent) = {
     EVT_SET(LocalFlag(0), 0)
     EVT_LABEL(10)
-    EVT_CALL(EnemyCreateTargetList, 0x00008002)
+    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
@@ -1865,7 +1865,7 @@ EvtScript N(makeTransparent) = {
         EVT_CALL(SetBattleVar, 2, -1)
         EVT_GOTO(10)
     EVT_END_IF
-    EVT_CALL(CountPlayerTargets, ACTOR_SELF, 0x00008002, LVar0)
+    EVT_CALL(CountPlayerTargets, ACTOR_SELF, TARGET_FLAG_2 | TARGET_FLAG_8000, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_EXEC_WAIT(N(flee))
         EVT_RETURN
@@ -1959,7 +1959,7 @@ EvtScript N(takeTurn) = {
         EVT_GOTO(20)
     EVT_END_IF
     EVT_SET(LVarA, 0)
-    EVT_CALL(EnemyCreateTargetList, 0x00008002)
+    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_SET(LocalFlag(0), 0)
@@ -1993,7 +1993,7 @@ EvtScript N(takeTurn) = {
         EVT_GOTO(10)
     EVT_END_IF
     EVT_SET(LVarA, 0)
-    EVT_CALL(EnemyCreateTargetList, 0x00008002)
+    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(1)
     EVT_SET(LocalFlag(0), 0)
@@ -2027,7 +2027,7 @@ EvtScript N(takeTurn) = {
         EVT_GOTO(10)
     EVT_END_IF
     EVT_SET(LVarA, 0)
-    EVT_CALL(EnemyCreateTargetList, 0x00008002)
+    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(2)
     EVT_SET(LocalFlag(0), 0)
@@ -2062,7 +2062,7 @@ EvtScript N(takeTurn) = {
     EVT_END_IF
     EVT_GOTO(20)
     EVT_LABEL(10)
-    EVT_CALL(CountPlayerTargets, ACTOR_SELF, 0x00008002, LVar0)
+    EVT_CALL(CountPlayerTargets, ACTOR_SELF, TARGET_FLAG_2 | TARGET_FLAG_8000, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_EXEC_WAIT(N(flee))
         EVT_RETURN
@@ -2097,7 +2097,7 @@ EvtScript N(takeTurn) = {
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_HEAL_ONE_COUNTER), LVar0)
             EVT_IF_LT(LVar0, 2)
                 EVT_SETF(LVar9, EVT_FLOAT(100.0))
-                EVT_CALL(EnemyCreateTargetList, 0x00008002)
+                EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
                 EVT_CALL(InitTargetIterator)
                 EVT_LABEL(11)
                 EVT_SET(LocalFlag(0), 0)

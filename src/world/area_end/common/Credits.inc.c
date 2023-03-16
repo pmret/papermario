@@ -1,6 +1,12 @@
 #include "common.h"
 #include "Credits.h"
 
+#if VERSION_PAL
+#define CREDITS_MESSAGE_BUFFER_COUNT (24)
+#else
+#define CREDITS_MESSAGE_BUFFER_COUNT (23)
+#endif
+
 s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 msgScale, s32 overrideCharWidth, u8 flags);
 void msg_get_glyph(s32 font, s32 variation, s32 charIndex, s32 palette, MesasgeFontGlyphData* out);
 void dma_load_msg(u32 msgID, void* dest);
@@ -10,7 +16,7 @@ BSS CreditsData* N(CreditsDataPtr);
 #if !VERSION_IQUE
 BSS s32 N(BSS_PAD_1)[2];
 #endif
-BSS u8 N(CreditsMessageBuffers)[23][256];
+BSS u8 N(CreditsMessageBuffers)[CREDITS_MESSAGE_BUFFER_COUNT][256];
 BSS Mtx N(CreditsProjMatrices)[2];
 
 enum {
@@ -144,7 +150,7 @@ void N(CharAnim_FadeIn_1)(CreditsLine* line, CreditsChar* chr) {
     f32 posY = chr->posY;
     f32 alpha;
 
-    alpha = update_lerp(0, 0.0f, 255.0f, chr->fadeInTime, line->appearTime);
+    alpha = update_lerp(EASING_LINEAR, 0.0f, 255.0f, chr->fadeInTime, line->appearTime);
     if (alpha > 255.0f) {
         alpha = 255.0;
     }

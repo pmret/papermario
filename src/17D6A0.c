@@ -3398,7 +3398,7 @@ void btl_update_message_popup(void* data) {
                             case BTL_MSG_40:
                             case BTL_MSG_41:
                                 hud_element_set_script(D_8029F642, &HES_PressAButton);
-                                /* fallthrough */
+                                // fallthrough
                             case BTL_MSG_2E:
                             case BTL_MSG_30:
                             case BTL_MSG_3C:

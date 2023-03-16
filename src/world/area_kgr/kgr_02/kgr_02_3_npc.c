@@ -1,7 +1,7 @@
 #include "kgr_02.h"
 
 API_CALLABLE(N(AwaitPartnerWatt)) {
-    if (gPartnerActionStatus.actingPartner == PARTNER_WATT) {
+    if (gPartnerStatus.actingPartner == PARTNER_WATT) {
         return ApiStatus_DONE2;
     } else {
         return ApiStatus_BLOCK;
@@ -9,7 +9,7 @@ API_CALLABLE(N(AwaitPartnerWatt)) {
 }
 
 API_CALLABLE(N(AwaitPartnerNotWatt)) {
-    if (gPartnerActionStatus.actingPartner != PARTNER_WATT) {
+    if (gPartnerStatus.actingPartner != PARTNER_WATT) {
         return ApiStatus_DONE2;
     } else {
         return ApiStatus_BLOCK;

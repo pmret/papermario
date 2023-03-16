@@ -122,16 +122,20 @@ EvtScript N(EVS_Scene_KammySetAmbush) = {
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_WAIT(60)
+    EVT_WAIT(60 * DT)
     EVT_EXEC_GET_TID(N(EVS_PlayKammyFlightSounds), MV_FlightSoundsScriptID)
     EVT_SET(MF_KammyFlying, TRUE)
     EVT_THREAD
-        EVT_WAIT(100)
+        EVT_WAIT(100 * DT)
         EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(350.0))
+#if VERSION_PAL
+        EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2 / DT))
+#else
         EVT_CALL(SetCamSpeed, CAM_DEFAULT, 2)
+#endif
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_END_THREAD
-    EVT_CALL(LoadPath, 150, EVT_PTR(N(FlightPath_Kammy1)), ARRAY_COUNT(N(FlightPath_Kammy1)), EASING_LINEAR)
+    EVT_CALL(LoadPath, 150 * DT, EVT_PTR(N(FlightPath_Kammy1)), ARRAY_COUNT(N(FlightPath_Kammy1)), EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(GetNextPathPos)
         EVT_CALL(SetNpcPos, NPC_Kammy, LVar1, LVar2, LVar3)
@@ -166,7 +170,7 @@ EvtScript N(EVS_Scene_KammySetAmbush) = {
         EVT_WAIT(3)
         EVT_CALL(SetNpcRotation, NPC_Kammy, 0, 0, 0)
     EVT_END_THREAD
-    EVT_CALL(LoadPath, 10, EVT_PTR(N(FlightPath_Kammy2)), ARRAY_COUNT(N(FlightPath_Kammy2)), EASING_LINEAR)
+    EVT_CALL(LoadPath, 10 * DT, EVT_PTR(N(FlightPath_Kammy2)), ARRAY_COUNT(N(FlightPath_Kammy2)), EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(GetNextPathPos)
         EVT_CALL(SetNpcPos, NPC_Kammy, LVar1, LVar2, LVar3)
@@ -175,52 +179,52 @@ EvtScript N(EVS_Scene_KammySetAmbush) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_WAIT(15)
+    EVT_WAIT(15 * DT)
     EVT_CALL(SetNpcVar, NPC_Kammy, 0, 1)
     EVT_CALL(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim13)
-    EVT_WAIT(45)
+    EVT_WAIT(45 * DT)
     EVT_CALL(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim0E)
     EVT_CALL(GetNpcPos, NPC_Kammy, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 25)
     EVT_ADD(LVar1, 38)
     EVT_CALL(PlaySoundAt, SOUND_207A, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
     EVT_PLAY_EFFECT(EFFECT_GATHER_ENERGY_PINK, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 100)
-    EVT_WAIT(100)
+    EVT_WAIT(100 * DT)
     EVT_CALL(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim0F)
     EVT_ADD(LVar0, 55)
     EVT_CALL(PlaySoundAt, SOUND_2098, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
     EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar0, 0, 0, 1, 15, 3, 8)
-    EVT_WAIT(5)
+    EVT_WAIT(5 * DT)
     EVT_IF_NE(AB_OMO_CurrentPeachChoice, 2)
         EVT_CALL(SetNpcPos, MV_AmbushID, LVar0, 0, 0)
     EVT_ELSE
         EVT_CALL(MakeItemEntity, MV_AmbushID, LVar0, 0, 0, ITEM_SPAWN_MODE_DECORATION, 0)
     EVT_END_IF
-    EVT_WAIT(10)
+    EVT_WAIT(10 * DT)
     EVT_CALL(SetNpcAnimation, NPC_Kammy, ANIM_WorldKammy_Anim13)
-    EVT_WAIT(45)
+    EVT_WAIT(45 * DT)
     EVT_SWITCH(AB_OMO_CurrentPeachChoice)
         EVT_CASE_EQ(0)
             EVT_CALL(SpeakToPlayer, NPC_Kammy, ANIM_WorldKammy_Anim16, ANIM_WorldKammy_Anim13, 517, MSG_CH4_0036)
-            EVT_WAIT(30)
+            EVT_WAIT(30 * DT)
             EVT_CALL(SpeakToPlayer, NPC_Kammy, ANIM_WorldKammy_Anim16, ANIM_WorldKammy_Anim13, 517, MSG_CH4_0037)
         EVT_CASE_EQ(1)
             EVT_CALL(SpeakToPlayer, NPC_Kammy, ANIM_WorldKammy_Anim16, ANIM_WorldKammy_Anim13, 517, MSG_CH4_0038)
-            EVT_WAIT(10)
+            EVT_WAIT(10 * DT)
             EVT_CALL(SpeakToPlayer, NPC_Kammy, ANIM_WorldKammy_Anim16, ANIM_WorldKammy_Anim13, 517, MSG_CH4_0039)
         EVT_CASE_EQ(2)
             EVT_CALL(SpeakToPlayer, NPC_Kammy, ANIM_WorldKammy_Anim16, ANIM_WorldKammy_Anim13, 517, MSG_CH4_0034)
-            EVT_WAIT(30)
+            EVT_WAIT(30 * DT)
             EVT_CALL(SpeakToPlayer, NPC_Kammy, ANIM_WorldKammy_Anim16, ANIM_WorldKammy_Anim13, 517, MSG_CH4_0035)
     EVT_END_SWITCH
     EVT_CALL(SetNpcVar, NPC_Kammy, 0, 0)
-    EVT_WAIT(5)
+    EVT_WAIT(5 * DT)
     EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(500.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_EXEC_GET_TID(N(EVS_PlayKammyFlightSounds), MV_FlightSoundsScriptID)
     EVT_SET(MF_KammyFlying, TRUE)
     EVT_THREAD
-        EVT_CALL(LoadPath, 130, EVT_PTR(N(FlightPath_Kammy3)), ARRAY_COUNT(N(FlightPath_Kammy3)), EASING_LINEAR)
+        EVT_CALL(LoadPath, 130 * DT, EVT_PTR(N(FlightPath_Kammy3)), ARRAY_COUNT(N(FlightPath_Kammy3)), EASING_LINEAR)
         EVT_LOOP(0)
             EVT_CALL(GetNextPathPos)
             EVT_CALL(SetNpcPos, NPC_Kammy, LVar1, LVar2, LVar3)
@@ -230,14 +234,14 @@ EvtScript N(EVS_Scene_KammySetAmbush) = {
             EVT_END_IF
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_WAIT(90)
+    EVT_WAIT(90 * DT)
     EVT_IF_NE(AB_OMO_CurrentPeachChoice, 2)
         EVT_CALL(PlaySoundAtNpc, MV_AmbushID, SOUND_263, SOUND_SPACE_MODE_0)
         EVT_CALL(ShowEmote, MV_AmbushID, EMOTE_QUESTION, 0, 20, EMOTER_NPC, 0, 0, 0, 0)
-        EVT_WAIT(5)
+        EVT_WAIT(5 * DT)
     EVT_END_IF
     EVT_CALL(GotoMap, EVT_PTR("omo_04"), omo_04_ENTRY_0)
-    EVT_WAIT(100)
+    EVT_WAIT(100 * DT)
     EVT_RETURN
     EVT_END
 };

@@ -1079,7 +1079,7 @@ EvtScript D_80298948 = {
 
 EvtScript ForceNextTarget = {
     EVT_CALL(GetOwnerID, LVarA)
-    EVT_CALL(EnemyCreateTargetList, 32770)
+    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
@@ -1093,7 +1093,7 @@ EvtScript ForceNextTarget = {
     EVT_IF_NE(LVar0, -1)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_CALL(EnemyCreateTargetList, 32770)
+    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(1)
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
@@ -1107,7 +1107,7 @@ EvtScript ForceNextTarget = {
     EVT_IF_NE(LVar0, -1)
         EVT_GOTO(1)
     EVT_END_IF
-    EVT_CALL(EnemyCreateTargetList, 32770)
+    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(2)
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
@@ -1730,7 +1730,7 @@ EvtScript DoScareAway = {
 };
 
 EvtScript D_8029B494 = {
-    EVT_CALL(PlayerCreateTargetList, 65540)
+    EVT_CALL(PlayerCreateTargetList, TARGET_FLAG_4 | TARGET_FLAG_10000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(GetOwnerID, LVar1)

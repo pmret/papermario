@@ -18,7 +18,7 @@ void record_jump_apex(void) {
 s32 can_trigger_loading_zone(void) {
     PlayerData* playerData = &gPlayerData;
     s32 actionState = gPlayerStatusPtr->actionState;
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
 
     if (actionState == ACTION_STATE_IDLE ||
         actionState == ACTION_STATE_WALK ||
@@ -31,17 +31,17 @@ s32 can_trigger_loading_zone(void) {
 
     if (actionState == ACTION_STATE_RIDE) {
         if (playerData->currentPartner == PARTNER_LAKILESTER || playerData->currentPartner == PARTNER_BOW) {
-            if (partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE) {
+            if (partnerStatus->partnerActionState != PARTNER_ACTION_NONE) {
                 return TRUE;
             } else {
                 gPlayerStatusPtr->animFlags |= PA_FLAG_INTERRUPT_USE_PARTNER;
                 return FALSE;
             }
         } else {
-            if (partnerActionStatus->actingPartner == PARTNER_WATT || partnerActionStatus->actingPartner == PARTNER_SUSHIE) {
-                return partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE;
+            if (partnerStatus->actingPartner == PARTNER_WATT || partnerStatus->actingPartner == PARTNER_SUSHIE) {
+                return partnerStatus->partnerActionState != PARTNER_ACTION_NONE;
             }
-            if (partnerActionStatus->actingPartner == PARTNER_PARAKARRY) {
+            if (partnerStatus->actingPartner == PARTNER_PARAKARRY) {
                 gPlayerStatusPtr->animFlags |= PA_FLAG_INTERRUPT_USE_PARTNER;
                 return FALSE;
             }
@@ -334,7 +334,7 @@ void phys_update_falling(void) {
 
 void player_handle_floor_collider_type(s32 colliderID) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
 
     if (colliderID >= 0) {
         s32 surfaceType = get_collider_flags(colliderID) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
@@ -345,7 +345,7 @@ void player_handle_floor_collider_type(s32 colliderID) {
                 set_action_state(ACTION_STATE_LAND);
                 break;
             case SURFACE_TYPE_LAVA:
-                if ((*(s32*)(&partnerActionStatus->partnerActionState) & 0xFF0000FF) != 0x01000009) {
+                if ((*(s32*)(&partnerStatus->partnerActionState) & 0xFF0000FF) != 0x01000009) {
                     if (playerStatus->blinkTimer == 0) {
                         if (playerStatus->actionState != ACTION_STATE_HIT_LAVA) {
                             playerStatus->hazardType = HAZARD_TYPE_LAVA;
@@ -357,7 +357,7 @@ void player_handle_floor_collider_type(s32 colliderID) {
                 }
                 break;
             case SURFACE_TYPE_SPIKES:
-                if ((*(s32*)(&partnerActionStatus->partnerActionState) & 0xFF0000FF) != 0x01000009) {
+                if ((*(s32*)(&partnerStatus->partnerActionState) & 0xFF0000FF) != 0x01000009) {
                     if (playerStatus->blinkTimer == 0) {
                         if (playerStatus->actionState != ACTION_STATE_HIT_FIRE) {
                             playerStatus->hazardType = HAZARD_TYPE_SPIKES;
@@ -877,7 +877,7 @@ s32 phys_is_on_sloped_ground(void) {
 
 void phys_main_collision_below(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
     f32 collHeightHalf = playerStatus->colliderHeight * 0.5f;
     f32 playerX = playerStatus->position.x;
@@ -925,7 +925,7 @@ void phys_main_collision_below(void) {
             s32 surfaceType = get_collider_flags(colliderID) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
             switch (surfaceType) {
                 case SURFACE_TYPE_SPIKES:
-                    if (partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE || partnerActionStatus->actingPartner != PARTNER_BOW) {
+                    if (partnerStatus->partnerActionState == PARTNER_ACTION_NONE || partnerStatus->actingPartner != PARTNER_BOW) {
                         if (playerStatus->blinkTimer == 0) {
                             if (playerStatus->actionState != ACTION_STATE_HIT_LAVA) {
                                 playerStatus->hazardType = HAZARD_TYPE_SPIKES;
@@ -937,7 +937,7 @@ void phys_main_collision_below(void) {
                     }
                     break;
                 case SURFACE_TYPE_LAVA:
-                    if (partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE || partnerActionStatus->actingPartner != PARTNER_BOW) {
+                    if (partnerStatus->partnerActionState == PARTNER_ACTION_NONE || partnerStatus->actingPartner != PARTNER_BOW) {
                         if (playerStatus->blinkTimer == 0) {
                             if (playerStatus->actionState != ACTION_STATE_HIT_LAVA) {
                                 playerStatus->hazardType = HAZARD_TYPE_LAVA;
@@ -1165,13 +1165,13 @@ s32 phys_check_interactable_collision(void) {
 }
 
 s32 phys_can_player_interact(void) {
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 ret = TRUE;
 
-    if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) {
-        if (gPartnerActionStatus.actingPartner == PARTNER_BOMBETTE) {
-            if (gPartnerActionStatus.partnerActionState <= PARTNER_ACTION_BOMBETTE_2) {
+    if (gPartnerStatus.partnerActionState != PARTNER_ACTION_NONE) {
+        if (gPartnerStatus.actingPartner == PARTNER_BOMBETTE) {
+            if (gPartnerStatus.partnerActionState <= PARTNER_ACTION_BOMBETTE_2) {
                 ret = FALSE;
             }
         } else {

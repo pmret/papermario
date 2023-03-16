@@ -8,22 +8,22 @@ BSS b32 N(UsingAbility);
 BSS b32 N(LockingPlayerInput);
 BSS b32 N(PlayerCollisionDisabled); // minor bug: never gets properly reset to FALSE
 BSS b32 N(PlayerWasFacingLeft);
-BSS s32 N(UseAbilityState);
+BSS s32 N(AbilityState);
 BSS s32 N(AbilityStateTime);
 BSS TweesterPhysics N(TweesterPhysicsData);
 
 enum {
-    AIR_LIFT_NONE       = 0, // only used for initial value
+    AIR_LIFT_NONE       = 0,  // only used for initial value
     // next two states lock input for a few frames, during which the ability can be canceled
     AIR_LIFT_INIT       = 40,
     AIR_LIFT_DELAY      = 41,
     AIR_LIFT_BEGIN      = 30,
     AIR_LIFT_GATHER     = 31,
-    AIR_LIFT_PICKUP     = 1, // pick up the player and lift them into the air
-    AIR_LIFT_CARRY      = 2, // carry the player through the air
-    AIR_LIFT_HOLD       = 6, // remain in one position for a short period of time
-    AIR_LIFT_JUMP       = 20, // player jumped off while being carried
-    AIR_LIFT_DROP       = 21, // dropping the player
+    AIR_LIFT_PICKUP     = 1,   // pick up the player and lift them into the air
+    AIR_LIFT_CARRY      = 2,   // carry the player through the air
+    AIR_LIFT_HOLD       = 6,   // remain in one position for a short period of time
+    AIR_LIFT_JUMP       = 20,  // player jumped off while being carried
+    AIR_LIFT_DROP       = 21,  // dropping the player
     AIR_LIFT_CANCEL     = 22,
 };
 
@@ -31,7 +31,7 @@ void N(init)(Npc* parakarry) {
     parakarry->collisionHeight = 37;
     parakarry->collisionRadius = 40;
     N(UsingAbility)  = FALSE;
-    N(UseAbilityState) = AIR_LIFT_NONE;
+    N(AbilityState) = AIR_LIFT_NONE;
     N(LockingPlayerInput) = FALSE;
     N(PlayerCollisionDisabled) = FALSE;
     N(PlayerWasFacingLeft) = FALSE;
@@ -176,7 +176,7 @@ s32 N(update_current_floor)(void) {
     if (surfaceType == SURFACE_TYPE_SPIKES || surfaceType == SURFACE_TYPE_LAVA) {
         gPlayerStatus.hazardType = HAZARD_TYPE_SPIKES;
         gPlayerStatus.flags |= PS_FLAG_HIT_FIRE;
-        N(UseAbilityState) = AIR_LIFT_DROP;
+        N(AbilityState) = AIR_LIFT_DROP;
     }
 
     return hitResult;
@@ -184,7 +184,7 @@ s32 N(update_current_floor)(void) {
 
 API_CALLABLE(N(UseAbility)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     Npc* parakarry = script->owner2.npc;
     s32 buttonTemp = BUTTON_A;
     f32 x, y, z, yaw, length;
@@ -204,34 +204,34 @@ API_CALLABLE(N(UseAbility)) {
             return ApiStatus_DONE2;
         }
 
-        if (!partnerActionStatus->partnerAction_unk_1) {
+        if (!partnerStatus->shouldResumeAbility) {
             if (!func_800EA52C(PARTNER_PARAKARRY)) {
                 return ApiStatus_DONE2;
             }
-            N(UseAbilityState) = AIR_LIFT_INIT;
+            N(AbilityState) = AIR_LIFT_INIT;
             parakarry->flags &= ~NPC_FLAG_COLLDING_FORWARD_WITH_WORLD;
             parakarry->flags |= NPC_FLAG_COLLDING_WITH_WORLD;
         } else {
-            partnerActionStatus->partnerAction_unk_1 = FALSE;
+            partnerStatus->shouldResumeAbility = FALSE;
             set_action_state(ACTION_STATE_RIDE);
             parakarry->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_GRAVITY);
             N(UsingAbility)  = TRUE;
             gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
             parakarry->currentAnim = ANIM_WorldParakarry_CarryLight;
-            partnerActionStatus->actingPartner = PARTNER_PARAKARRY;
-            partnerActionStatus->partnerActionState = PARTNER_ACTION_PARAKARRY_HOVER;
+            partnerStatus->actingPartner = PARTNER_PARAKARRY;
+            partnerStatus->partnerActionState = PARTNER_ACTION_PARAKARRY_HOVER;
             parakarry->flags &= ~NPC_FLAG_COLLDING_FORWARD_WITH_WORLD;
             parakarry->flags |= NPC_FLAG_COLLDING_WITH_WORLD;
         }
     }
 
-    switch (N(UseAbilityState)) {
+    switch (N(AbilityState)) {
         case AIR_LIFT_INIT:
             if (playerStatus->inputDisabledCount != 0) {
                 return ApiStatus_DONE2;
             }
             N(AbilityStateTime) = 3;
-            N(UseAbilityState) = AIR_LIFT_DELAY;
+            N(AbilityState) = AIR_LIFT_DELAY;
             script->functionTemp[2] = playerStatus->inputDisabledCount;
             // fallthrough
         case AIR_LIFT_DELAY:
@@ -239,14 +239,14 @@ API_CALLABLE(N(UseAbility)) {
                 if (script->functionTemp[2] < playerStatus->inputDisabledCount || !func_800EA52C(PARTNER_PARAKARRY)) {
                     return ApiStatus_DONE2;
                 }
-                N(UseAbilityState) = AIR_LIFT_BEGIN;
+                N(AbilityState) = AIR_LIFT_BEGIN;
             } else {
                 N(AbilityStateTime)--;
             }
             break;
     }
 
-    switch (N(UseAbilityState)) {
+    switch (N(AbilityState)) {
         case AIR_LIFT_BEGIN:
             set_action_state(ACTION_STATE_RIDE);
             disable_player_input();
@@ -258,13 +258,13 @@ API_CALLABLE(N(UseAbility)) {
             gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
             parakarry->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_GRAVITY);
             parakarry->flags |= NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
-            partnerActionStatus->actingPartner = PARTNER_PARAKARRY;
-            partnerActionStatus->partnerActionState = PARTNER_ACTION_PARAKARRY_HOVER;
+            partnerStatus->actingPartner = PARTNER_PARAKARRY;
+            partnerStatus->partnerActionState = PARTNER_ACTION_PARAKARRY_HOVER;
             N(PlayerWasFacingLeft) = partner_force_player_flip_done();
             enable_npc_blur(parakarry);
             parakarry->yaw = atan2(parakarry->pos.x, parakarry->pos.z, playerStatus->position.x, playerStatus->position.z);
             parakarry->duration = 4;
-            N(UseAbilityState)++; // AIR_LIFT_GATHER
+            N(AbilityState)++; // AIR_LIFT_GATHER
             break;
         case AIR_LIFT_GATHER:
             if (playerStatus->actionState == ACTION_STATE_HIT_FIRE
@@ -274,7 +274,7 @@ API_CALLABLE(N(UseAbility)) {
              || playerStatus->actionState == ACTION_STATE_HOP
             ) {
                 disable_npc_blur(parakarry);
-                N(UseAbilityState) = AIR_LIFT_DROP;
+                N(AbilityState) = AIR_LIFT_DROP;
             } else {
                 suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
                 parakarry->moveToPos.x = playerStatus->position.x;
@@ -295,7 +295,7 @@ API_CALLABLE(N(UseAbility)) {
                 if (parakarry->duration != 0) {
                     if (script->functionTemp[2] < playerStatus->inputDisabledCount) {
                         disable_npc_blur(parakarry);
-                        N(UseAbilityState) = AIR_LIFT_CANCEL;
+                        N(AbilityState) = AIR_LIFT_CANCEL;
                     }
                 } else {
                     disable_npc_blur(parakarry);
@@ -309,7 +309,7 @@ API_CALLABLE(N(UseAbility)) {
                     gCollisionStatus.currentFloor = NO_COLLIDER;
                     parakarry->currentFloor = NO_COLLIDER;
                     N(AbilityStateTime) = 20;
-                    N(UseAbilityState) = AIR_LIFT_PICKUP;
+                    N(AbilityState) = AIR_LIFT_PICKUP;
                 }
             }
             break;
@@ -318,12 +318,12 @@ API_CALLABLE(N(UseAbility)) {
              || playerStatus->actionState == ACTION_STATE_HIT_LAVA
              || playerStatus->actionState == ACTION_STATE_KNOCKBACK
             ) {
-                N(UseAbilityState) = AIR_LIFT_DROP;
+                N(AbilityState) = AIR_LIFT_DROP;
                 break;
             }
             // handle jump/cancel inputs
-            if (partnerActionStatus->pressedButtons & (BUTTON_A | BUTTON_B | BUTTON_C_DOWN)) {
-                N(UseAbilityState) = (partnerActionStatus->pressedButtons & BUTTON_A) ? AIR_LIFT_JUMP : AIR_LIFT_DROP;
+            if (partnerStatus->pressedButtons & (BUTTON_A | BUTTON_B | BUTTON_C_DOWN)) {
+                N(AbilityState) = (partnerStatus->pressedButtons & BUTTON_A) ? AIR_LIFT_JUMP : AIR_LIFT_DROP;
                 suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
                 break;
             }
@@ -354,7 +354,7 @@ API_CALLABLE(N(UseAbility)) {
             halfCollisionHeight = playerStatus->spriteFacingAngle - 90.0f + gCameras[gCurrentCameraID].currentYaw;
             if (player_raycast_up_corners(playerStatus, &x, &y, &z, &length, halfCollisionHeight) >= 0) {
                 suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
-                N(UseAbilityState) = AIR_LIFT_DROP;
+                N(AbilityState) = AIR_LIFT_DROP;
                 break;
             }
 
@@ -409,7 +409,7 @@ API_CALLABLE(N(UseAbility)) {
                 if (surfaceType == SURFACE_TYPE_SPIKES || surfaceType == SURFACE_TYPE_LAVA) {
                     playerStatus->hazardType = HAZARD_TYPE_SPIKES;
                     playerStatus->flags |= PS_FLAG_HIT_FIRE;
-                    N(UseAbilityState) = AIR_LIFT_DROP;
+                    N(AbilityState) = AIR_LIFT_DROP;
                 }
 
                 playerStatus->position.y += (y - playerStatus->position.y) / 4.0f;
@@ -418,7 +418,7 @@ API_CALLABLE(N(UseAbility)) {
 
             if (parakarry->flags & NPC_FLAG_COLLDING_FORWARD_WITH_WORLD) {
                 suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
-                N(UseAbilityState) = AIR_LIFT_DROP;
+                N(AbilityState) = AIR_LIFT_DROP;
                 break;
             }
 
@@ -435,7 +435,7 @@ API_CALLABLE(N(UseAbility)) {
                 parakarry->currentAnim = ANIM_WorldParakarry_CarryHeavy;
                 parakarry->animationSpeed = 1.8f;
                 gCollisionStatus.currentFloor = NO_COLLIDER;
-                N(UseAbilityState)++; // AIR_LIFT_CARRY
+                N(AbilityState)++; // AIR_LIFT_CARRY
             }  
             break;
         case AIR_LIFT_CARRY:
@@ -444,24 +444,24 @@ API_CALLABLE(N(UseAbility)) {
              || playerStatus->actionState == ACTION_STATE_HIT_LAVA
              || playerStatus->actionState == ACTION_STATE_KNOCKBACK
             ) {
-                N(UseAbilityState) = AIR_LIFT_DROP;
+                N(AbilityState) = AIR_LIFT_DROP;
                 break;
             }
             
             suggest_player_anim_always_forward(ANIM_MarioW2_HoldOnto);
             if (playerStatus->flags & PS_FLAG_HIT_FIRE) {
-                N(UseAbilityState) = AIR_LIFT_JUMP;
+                N(AbilityState) = AIR_LIFT_JUMP;
                 break;
             }
 
             // handle jump/cancel inputs
-            if (partnerActionStatus->pressedButtons & (BUTTON_A | BUTTON_B | BUTTON_C_DOWN)) {
-                if (partnerActionStatus->pressedButtons & buttonTemp) {   // TODO find a way to remove this while still loading 0x15 instead of moving it from register
+            if (partnerStatus->pressedButtons & (BUTTON_A | BUTTON_B | BUTTON_C_DOWN)) {
+                if (partnerStatus->pressedButtons & buttonTemp) {   // TODO find a way to remove this while still loading 0x15 instead of moving it from register
                     if (!parakarry->pos.x) {
 
                     }
                 }
-                N(UseAbilityState) = (partnerActionStatus->pressedButtons & BUTTON_A) ? AIR_LIFT_JUMP : AIR_LIFT_DROP;
+                N(AbilityState) = (partnerStatus->pressedButtons & BUTTON_A) ? AIR_LIFT_JUMP : AIR_LIFT_DROP;
                 break;
             }
 
@@ -501,7 +501,7 @@ API_CALLABLE(N(UseAbility)) {
                             playerStatus->colliderHeight, playerStatus->colliderDiameter)
                     ) {
                         suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
-                        N(UseAbilityState) = AIR_LIFT_DROP;
+                        N(AbilityState) = AIR_LIFT_DROP;
                         break;
                     }
 
@@ -538,7 +538,7 @@ API_CALLABLE(N(UseAbility)) {
                             parakarry->pos.y = y;
 
                             if (hitAbove) {
-                                N(UseAbilityState) = AIR_LIFT_DROP;
+                                N(AbilityState) = AIR_LIFT_DROP;
                                 break;
                             }
                         }
@@ -553,7 +553,7 @@ API_CALLABLE(N(UseAbility)) {
                             parakarry->duration++;
                             if (!(parakarry->planarFlyDist < 100.0f)) {
                                 N(AbilityStateTime) = 5;
-                                N(UseAbilityState) = AIR_LIFT_HOLD;
+                                N(AbilityState) = AIR_LIFT_HOLD;
                             }
                             break;
                         }
@@ -561,20 +561,20 @@ API_CALLABLE(N(UseAbility)) {
                 }
             }
             suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
-            N(UseAbilityState) = AIR_LIFT_DROP;
+            N(AbilityState) = AIR_LIFT_DROP;
             break;
         case AIR_LIFT_HOLD:
             if (N(AbilityStateTime) != 0) {
                 N(AbilityStateTime)--;
             } else {
-                N(UseAbilityState) = AIR_LIFT_DROP;
+                N(AbilityState) = AIR_LIFT_DROP;
             }
             break;
     }
 
-    if (N(UseAbilityState) == AIR_LIFT_JUMP
-     || N(UseAbilityState) == AIR_LIFT_DROP
-     || N(UseAbilityState) == AIR_LIFT_CANCEL
+    if (N(AbilityState) == AIR_LIFT_JUMP
+     || N(AbilityState) == AIR_LIFT_DROP
+     || N(AbilityState) == AIR_LIFT_CANCEL
     ) {
         parakarry->currentAnim = ANIM_WorldParakarry_Idle;
         N(UsingAbility)  = FALSE;
@@ -582,8 +582,8 @@ API_CALLABLE(N(UseAbility)) {
         parakarry->flags &= ~NPC_FLAG_JUMPING;
         parakarry->animationSpeed = 1.0f;
         partner_clear_player_tracking(parakarry);
-        partnerActionStatus->actingPartner = PARTNER_NONE;
-        partnerActionStatus->partnerActionState = PARTNER_ACTION_NONE;
+        partnerStatus->actingPartner = PARTNER_NONE;
+        partnerStatus->partnerActionState = PARTNER_ACTION_NONE;
         enable_partner_ai();
         sfx_stop_sound(SOUND_2009);
         if (N(LockingPlayerInput)) {
@@ -594,9 +594,9 @@ API_CALLABLE(N(UseAbility)) {
         }
         if ((playerStatus->flags & PS_FLAG_HIT_FIRE)) {
             set_action_state(ACTION_STATE_HIT_LAVA);
-        } else if (N(UseAbilityState) == AIR_LIFT_JUMP) {
+        } else if (N(AbilityState) == AIR_LIFT_JUMP) {
             start_bounce_b();
-        } else if (N(UseAbilityState) == AIR_LIFT_DROP) {
+        } else if (N(AbilityState) == AIR_LIFT_DROP) {
             start_falling();
             gravity_use_fall_parms();
             playerStatus->flags |= PS_FLAG_SCRIPTED_FALL;
@@ -636,7 +636,7 @@ EvtScript EVS_WorldParakarry_PutAway = {
 };
 
 void N(pre_battle)(Npc* parakarry) {
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
 
     if (N(UsingAbility)) {
         if (N(PlayerCollisionDisabled)) {
@@ -649,7 +649,7 @@ void N(pre_battle)(Npc* parakarry) {
 
         set_action_state(ACTION_STATE_IDLE);
         partnerStatus->npc = *parakarry;
-        partnerStatus->partnerAction_unk_1 = TRUE;
+        partnerStatus->shouldResumeAbility = TRUE;
         partner_clear_player_tracking(parakarry);
     }
 
@@ -657,9 +657,9 @@ void N(pre_battle)(Npc* parakarry) {
 }
 
 void N(post_battle)(Npc* parakarry) {
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
 
-    if (partnerStatus->partnerAction_unk_1) {
+    if (partnerStatus->shouldResumeAbility) {
         if (N(PlayerCollisionDisabled)) {
             disable_player_static_collisions();
         }

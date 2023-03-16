@@ -61,8 +61,8 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_SETUP_CAMERA_NO_LEAD()
 #if VERSION_PAL
-    EVT_CALL(GetLanguage, LocalVar(0))
-    EVT_CALL(SetModelTexVariant, MODEL_o110, LocalVar(0))
+    EVT_CALL(GetLanguage, LVar0)
+    EVT_CALL(SetModelTexVariant, MODEL_o110, LVar0)
 #endif
     EVT_SET(AF_MAC_20, FALSE)
     EVT_SET(AF_MAC_21, FALSE)

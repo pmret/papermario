@@ -3646,8 +3646,2037 @@ segments:
     - [0xC46840, c, obk_09_4_npc]
     - [0xC46A00, c, obk_09_5_new_partner]
     - [0xC46AA0, c, obk_09_6_epilogue]
+  - name: arn_02
+    dir: world/area_arn/arn_02
+    type: code
+    start: 0xC490B0
+    vram: 0x80240000
+    subsegments:
+    - [0xC490B0, c, arn_02_0_header]
+    - [0xC490B0, c, arn_02_1_music]
+    - [0xC490B0, c, arn_02_2_main]
+    - [0xC490B0, c, arn_02_3_entity]
+    - [0xC490B0, c, arn_02_4_npc]
+  - name: arn_03
+    dir: world/area_arn/arn_03
+    type: code
+    start: 0xC4AC90
+    vram: 0x80240000
+    subsegments:
+    - [0xC4AC90, c, arn_03_0_header]
+    - [0xC4AC90, c, arn_03_1_music]
+    - [0xC4AC90, c, arn_03_2_main]
+    - [0xC4AC90, c, arn_03_3_npc]
+    - [0xC4C3B0, c, arn_03_4_entity]
+  - name: arn_04
+    dir: world/area_arn/arn_04
+    type: code
+    start: 0xC4F6B0
+    vram: 0x80240000
+    subsegments:
+    - [0xC4F6B0, c, arn_04_0_header]
+    - [0xC4F6B0, c, arn_04_1_music]
+    - [0xC4F6B0, c, arn_04_2_main]
+    - [0xC4F6B0, c, arn_04_3_npc]
+    - [0xC52A20, c, arn_04_4_entity]
+  - name: arn_05
+    dir: world/area_arn/arn_05
+    type: code
+    start: 0xC53AE0
+    vram: 0x80240000
+    subsegments:
+    - [0xC53AE0, c, arn_05_0_header]
+    - [0xC53AE0, c, arn_05_1_music]
+    - [0xC53AE0, c, arn_05_2_main]
+    - [0xC53AE0, c, arn_05_3_npc]
+    - [0xC54DE0, c, arn_05_4_entity]
+  - name: arn_07
+    dir: world/area_arn/arn_07
+    type: code
+    start: 0xC58CF0
+    vram: 0x80240000
+    subsegments:
+    - [0xC58CF0, c, arn_07_0_header]
+    - [0xC58CF0, c, arn_07_1_music]
+    - [0xC58CF0, c, arn_07_2_main]
+    - [0xC594F0, c, arn_07_3_windmill]
+    - [0xC59560, c, arn_07_4_entity]
+    - [0xC59640, c, arn_07_5_npc]
+  - name: arn_08
+    dir: world/area_arn/arn_08
+    type: code
+    start: 0xC606A0
+    vram: 0x80240000
+    subsegments:
+    - [0xC606A0, c, arn_08_0_header]
+    - [0xC606A0, c, arn_08_1_music]
+    - [0xC606A0, c, arn_08_2_main]
+    - [0xC606A0, c, arn_08_3_well]
+    - [0xC60760, c, arn_08_4_gears]
+    - [0xC60760, c, arn_08_5_demo]
+    - [0xC60930, c, arn_08_6_npc]
+    - [0xC60930, c, arn_08_7_entity]
+  - name: arn_09
+    dir: world/area_arn/arn_09
+    type: code
+    start: 0xC61F60
+    vram: 0x80240000
+    subsegments:
+    - [0xC61F60, c, arn_09_0_header]
+    - [0xC61F60, c, arn_09_1_music]
+    - [0xC61F60, c, arn_09_2_main]
+    - [0xC61F60, c, arn_09_3_entity]
+    - [0xC61F60, c, arn_09_4_launch]
+    - [0xC61F60, c, arn_09_5_npc]
+  - name: arn_10
+    dir: world/area_arn/arn_10
+    type: code
+    start: 0xC62900
+    vram: 0x80240000
+    subsegments:
+    - [0xC62900, c, arn_10_0_header]
+    - [0xC62900, c, arn_10_1_music]
+    - [0xC62900, c, arn_10_2_main]
+    - [0xC62900, c, arn_10_3_npc]
+    - [0xC62900, c, arn_10_4_entity]
+  - name: arn_11
+    dir: world/area_arn/arn_11
+    type: code
+    start: 0xC63580
+    vram: 0x80240000
+    subsegments:
+    - [0xC63580, c, arn_11_0_header]
+    - [0xC63580, c, arn_11_1_music]
+    - [0xC63580, c, arn_11_2_main]
+    - [0xC63580, c, arn_11_3_npc]
+  - name: arn_12
+    dir: world/area_arn/arn_12
+    type: code
+    start: 0xC64690
+    vram: 0x80240000
+    subsegments:
+    - [0xC64690, c, arn_12_0_header]
+    - [0xC64690, c, arn_12_1_music]
+    - [0xC64690, c, arn_12_2_main]
+    - [0xC64690, c, arn_12_3_npc]
+    - [0xC64690, c, arn_12_4_entity]
+  - name: arn_13
+    dir: world/area_arn/arn_13
+    type: code
+    start: 0xC65310
+    vram: 0x80240000
+    subsegments:
+    - [0xC65310, c, arn_13_0_header]
+    - [0xC65310, c, arn_13_1_music]
+    - [0xC65310, c, arn_13_2_main]
+    - [0xC65310, c, arn_13_3_npc]
+    - [0xC65310, c, arn_13_4_entity]
+  - name: dgb_00
+    dir: world/area_dgb/dgb_00
+    type: code
+    start: 0xC65FA0
+    vram: 0x80240000
+    subsegments:
+    - [0xC65FA0, c, dgb_00_0_header]
+    - [0xC65FA0, c, dgb_00_1_music]
+    - [0xC65FA0, c, dgb_00_2_main]
+    - [0xC66000, c, dgb_00_3_npc]
+    - [0xC66050, c, dgb_00_4_entity]
+  - name: dgb_01
+    dir: world/area_dgb/dgb_01
+    type: code
+    start: 0xC69780
+    vram: 0x80240000
+    subsegments:
+    - [0xC69780, c, dgb_01_0_header]
+    - [0xC69780, c, dgb_01_1_music]
+    - [0xC69780, c, dgb_01_2_main]
+    - [0xC69780, c, dgb_01_3_bridges]
+    - [0xC697C0, c, dgb_01_4_entity]
+    - [0xC698A0, c, dgb_01_5_npc]
+    - [0xC6CB70, c, dgb_01_6_img0]
+    - [0xC6CB70, c, dgb_01_6_img1]
+    - [0xC6CB70, c, dgb_01_6_img2]
+    - [0xC6CB70, c, dgb_01_6_img3]
+    - [0xC6CB70, c, dgb_01_6_img4]
+    - [0xC6CB70, c, dgb_01_6_img5]
+    - [0xC6CB70, c, dgb_01_6_img6]
+    - [0xC6CB70, c, dgb_01_6_img7]
+    - [0xC6CB70, c, dgb_01_7]
+    - [0xC6CB70, .data, dgb_01_0_header]
+    - [0xC6CC20, .data, dgb_01_1_music]
+    - [0xC6CCD0, .data, dgb_01_2_main]
+    - [0xC6D670, .data, dgb_01_3_bridges]
+    - [0xC6E250, .data, dgb_01_4_entity]
+    - [0xC6E450, .data, dgb_01_5_npc]
+    - start: 0xC706F0
+      type: .data
+      name: dgb_01_6_img0
+      subsegments:
+      - [0xC706F0, rgba16, img0, 64, 32]
+      - [0xC716F0, gfx, img0]
+    - start: 0xC71770
+      type: .data
+      name: dgb_01_6_img1
+      subsegments:
+      - [0xC71770, rgba16, img1, 64, 32]
+      - [0xC72770, gfx, img1]
+    - start: 0xC727F0
+      type: .data
+      name: dgb_01_6_img2
+      subsegments:
+      - [0xC727F0, rgba16, img2, 32, 32]
+      - [0xC72FF0, gfx, img2]
+    - start: 0xC73070
+      type: .data
+      name: dgb_01_6_img3
+      subsegments:
+      - [0xC73070, rgba16, img3, 16, 32]
+      - [0xC73470, gfx, img3]
+    - start: 0xC734F0
+      type: .data
+      name: dgb_01_6_img4
+      subsegments:
+      - [0xC734F0, rgba16, img4, 16, 32]
+      - [0xC738F0, gfx, img4]
+    - start: 0xC73970
+      type: .data
+      name: dgb_01_6_img5
+      subsegments:
+      - [0xC73970, rgba16, img5, 16, 32]
+      - [0xC73D70, gfx, img5]
+    - start: 0xC73DF0
+      type: .data
+      name: dgb_01_6_img6
+      subsegments:
+      - [0xC73DF0, rgba16, img6, 32, 32]
+      - [0xC745F0, gfx, img6]
+    - start: 0xC74670
+      type: .data
+      name: dgb_01_6_img7
+      subsegments:
+      - [0xC74670, rgba16, img7, 32, 32]
+      - [0xC74E70, gfx, img7]
+    - [0xC74EF0, .data, dgb_01_7] # TODO needs additioanl cleanup and gfx splitting
+  - name: dgb_01_smash_bridges
+    type: code
+    dir: world/area_dgb
+    start: 0xC8CE40
+    vram: 0x80200000
+    subsegments:
+    - [0xC8CE40, c, dgb_01_smash_bridges]
+    - start: 0xC8CE40
+      type: .data
+      name: dgb_01_smash_bridges
+      subsegments:
+      - [0xC8CE40, vtx, vtx/C20F40]
+      - [0xC8D000, vtx, vtx/C21100]
+      - [0xC8D030, vtx, vtx/C21130]
+      - [0xC8D0E0, vtx, vtx/C211E0]
+      - [0xC8D0F0, vtx, vtx/C211F0]
+      - [0xC8D140, vtx, vtx/C21240]
+      - [0xC8D260, vtx, vtx/C21360]
+      - [0xC8D2C0, vtx, vtx/C213C0]
+      - [0xC8D4A0, vtx, vtx/C215A0]
+      - [0xC8D600, vtx, vtx/C21700]
+      - [0xC8D670, vtx, vtx/C21770]
+      - [0xC8D710, vtx, vtx/C21810]
+      - [0xC8D830, vtx, vtx/C21930]
+      - [0xC8D9E0, vtx, vtx/C21AE0]
+      - [0xC8DA20, vtx, vtx/C21B20]
+      - [0xC8DAD0, vtx, vtx/C21BD0]
+      - [0xC8DB90, vtx, vtx/C21C90]
+      - [0xC8DC30, vtx, vtx/C21D30]
+      - [0xC8DCD0, vtx, vtx/C21DD0]
+      - [0xC8DD00, vtx, vtx/C21E00]
+      - [0xC8DE30, vtx, vtx/C21F30]
+      - [0xC8DF50, vtx, vtx/C22050]
+      - [0xC8E090, vtx, vtx/C22190]
+      - [0xC8E1D0, vtx, vtx/C222D0]
+      - [0xC8E230, vtx, vtx/C22330]
+      - [0xC8E3A0, vtx, vtx/C224A0]
+      - [0xC8E3E0, vtx, vtx/C224E0]
+      - [0xC8E410, vtx, vtx/C22510]
+      - [0xC8E520, vtx, vtx/C22620]
+      - [0xC8E680, vtx, vtx/C22780]
+      - [0xC8E710, vtx, vtx/C22810]
+      - [0xC8E770, vtx, vtx/C22870]
+      - [0xC8E7F0, vtx, vtx/C228F0]
+      - [0xC8E850, vtx, vtx/C22950]
+      - [0xC8E8F0, vtx, vtx/C229F0]
+      - [0xC8EA00, vtx, vtx/C22B00]
+      - [0xC8EB00, vtx, vtx/C22C00]
+      - [0xC8ED00, vtx, vtx/C22E00]
+      - [0xC8EDC0, vtx, vtx/C22EC0]
+      - [0xC8EFA0, vtx, vtx/C230A0]
+      - [0xC8F140, vtx, vtx/C23240]
+      - [0xC8F160, vtx, vtx/C23260]
+      - [0xC8F1A0, vtx, vtx/C232A0]
+      - [0xC8F230, vtx, vtx/C23330]
+      - [0xC8F2D0, vtx, vtx/C233D0]
+      - [0xC8F380, vtx, vtx/C23480]
+      - [0xC8F3B0, vtx, vtx/C234B0]
+      - [0xC8F4C0, vtx, vtx/C235C0]
+      - [0xC8F5E0, vtx, vtx/C236E0]
+      - [0xC8F710, vtx, vtx/C23810]
+      - [0xC8F7B0, vtx, vtx/C238B0]
+      - [0xC8F8D0, vtx, vtx/C239D0]
+      - [0xC8F970, vtx, vtx/C23A70]
+      - [0xC8FA70, vtx, vtx/C23B70]
+      - [0xC8FAA0, vtx, vtx/C23BA0]
+      - [0xC8FB70, vtx, vtx/C23C70]
+      - [0xC8FB90, vtx, vtx/C23C90]
+      - [0xC8FBE0, vtx, vtx/C23CE0]
+      - [0xC8FC20, vtx, vtx/C23D20]
+      - [0xC8FC60, vtx, vtx/C23D60]
+      - [0xC8FCD0, vtx, vtx/C23DD0]
+      - [0xC8FD00, vtx, vtx/C23E00]
+      - [0xC8FD20, vtx, vtx/C23E20]
+      - [0xC8FD50, vtx, vtx/C23E50]
+      - [0xC8FE10, vtx, vtx/C23F10]
+      - [0xC8FED0, vtx, vtx/C23FD0]
+      - [0xC8FFD0, vtx, vtx/C240D0]
+      - [0xC900D0, vtx, vtx/C241D0]
+      - [0xC90250, vtx, vtx/C24350]
+      - [0xC90410, vtx, vtx/C24510]
+      - [0xC90440, vtx, vtx/C24540]
+      - [0xC90500, vtx, vtx/C24600]
+      - [0xC90590, vtx, vtx/C24690]
+      - [0xC90620, vtx, vtx/C24720]
+      - [0xC90630, vtx, vtx/C24730]
+      - [0xC90740, vtx, vtx/C24840]
+      - [0xC90860, vtx, vtx/C24960]
+      - [0xC90880, vtx, vtx/C24980]
+      - [0xC909D0, vtx, vtx/C24AD0]
+      - [0xC909F0, vtx, vtx/C24AF0]
+      - [0xC90BD0, vtx, vtx/C24CD0]
+      - [0xC90DB0, vtx, vtx/C24EB0]
+      - [0xC90E30, vtx, vtx/C24F30]
+      - [0xC90EB0, vtx, vtx/C24FB0]
+      - [0xC90F50, vtx, vtx/C25050]
+      - [0xC91150, vtx, vtx/C25250]
+      - [0xC91210, vtx, vtx/C25310]
+      - [0xC91250, vtx, vtx/C25350]
+      - [0xC91400, vtx, vtx/C25500]
+      - [0xC91500, vtx, vtx/C25600]
+      - [0xC915D0, vtx, vtx/C256D0]
+      - [0xC91610, vtx, vtx/C25710]
+      - [0xC916D0, vtx, vtx/C257D0]
+      - [0xC916F0, vtx, vtx/C257F0]
+      - [0xC91800, vtx, vtx/C25900]
+      - [0xC91850, vtx, vtx/C25950]
+      - [0xC91930, vtx, vtx/C25A30]
+      - [0xC919B0, vtx, vtx/C25AB0]
+      - [0xC91A30, vtx, vtx/C25B30]
+      - [0xC91AD0, vtx, vtx/C25BD0]
+      - [0xC91B00, vtx, vtx/C25C00]
+      - [0xC91B20, vtx, vtx/C25C20]
+      - [0xC91B80, vtx, vtx/C25C80]
+      - [0xC91BF0, vtx, vtx/C25CF0]
+      - [0xC91C30, vtx, vtx/C25D30]
+      - [0xC91CA0, vtx, vtx/C25DA0]
+      - [0xC91CD0, vtx, vtx/C25DD0]
+      - [0xC91DA0, vtx, vtx/C25EA0]
+      - [0xC91E00, vtx, vtx/C25F00]
+      - [0xC91E90, vtx, vtx/C25F90]
+      - [0xC91F40, vtx, vtx/C26040]
+      - [0xC91F90, vtx, vtx/C26090]
+      - [0xC92030, vtx, vtx/C26130]
+      - [0xC92150, vtx, vtx/C26250]
+      - [0xC92190, vtx, vtx/C26290]
+      - [0xC921D0, vtx, vtx/C262D0]
+      - [0xC92210, vtx, vtx/C26310]
+      - [0xC92250, vtx, vtx/C26350]
+      - [0xC92290, vtx, vtx/C26390]
+      - [0xC922D0, vtx, vtx/C263D0]
+      - [0xC92310, vtx, vtx/C26410]
+      - [0xC92350, vtx, vtx/C26450]
+      - [0xC92390, vtx, vtx/C26490]
+      - [0xC923D0, vtx, vtx/C264D0]
+      - [0xC92410, vtx, vtx/C26510]
+      - [0xC92450, vtx, vtx/C26550]
+      - [0xC92490, vtx, vtx/C26590]
+      - [0xC924D0, vtx, vtx/C265D0]
+      - [0xC92510, vtx, vtx/C26610]
+      - [0xC92550, vtx, vtx/C26650]
+      - [0xC92590, vtx, vtx/C26690]
+      - [0xC925D0, vtx, vtx/C266D0]
+      - [0xC92610, vtx, vtx/C26710]
+      - [0xC92650, vtx, vtx/C26750]
+      - [0xC92790, vtx, vtx/C26890]
+      - [0xC92960, vtx, vtx/C26A60]
+      - [0xC929E0, vtx, vtx/C26AE0]
+      - [0xC92BC0, vtx, vtx/C26CC0]
+      - [0xC92DB0, vtx, vtx/C26EB0]
+      - [0xC92E40, vtx, vtx/C26F40]
+      - [0xC92EB0, vtx, vtx/C26FB0]
+      - [0xC93010, vtx, vtx/C27110]
+      - [0xC93080, vtx, vtx/C27180]
+      - [0xC93120, vtx, vtx/C27220]
+      - [0xC93200, vtx, vtx/C27300]
+      - [0xC932A0, vtx, vtx/C273A0]
+      - [0xC93360, vtx, vtx/C27460]
+      - [0xC93480, vtx, vtx/C27580]
+      - [0xC93640, vtx, vtx/C27740]
+      - [0xC93670, vtx, vtx/C27770]
+      - [0xC93780, vtx, vtx/C27880]
+      - [0xC93940, vtx, vtx/C27A40]
+      - [0xC93970, vtx, vtx/C27A70]
+      - [0xC93A80, vtx, vtx/C27B80]
+      - [0xC93C60, vtx, vtx/C27D60]
+      - [0xC93E20, vtx, vtx/C27F20]
+      - [0xC93EC0, vtx, vtx/C27FC0]
+      - [0xC93EE0, vtx, vtx/C27FE0]
+      - [0xC93F80, vtx, vtx/C28080]
+      - [0xC94010, vtx, vtx/C28110]
+      - [0xC94090, vtx, vtx/C28190]
+      - [0xC940B0, vtx, vtx/C281B0]
+      - [0xC940E0, vtx, vtx/C281E0]
+      - [0xC941D0, vtx, vtx/C282D0]
+      - [0xC941F0, vtx, vtx/C282F0]
+      - [0xC94210, vtx, vtx/C28310]
+      - [0xC94320, vtx, vtx/C28420]
+      - [0xC943F0, vtx, vtx/C284F0]
+      - [0xC94450, vtx, vtx/C28550]
+      - [0xC94590, vtx, vtx/C28690]
+      - [0xC94620, vtx, vtx/C28720]
+      - [0xC946A0, vtx, vtx/C287A0]
+      - [0xC94790, vtx, vtx/C28890]
+      - [0xC94870, vtx, vtx/C28970]
+      - [0xC94970, vtx, vtx/C28A70]
+      - [0xC94AB0, vtx, vtx/C28BB0]
+      - [0xC94C90, vtx, vtx/C28D90]
+      - [0xC94E70, vtx, vtx/C28F70]
+      - [0xC95050, vtx, vtx/C29150]
+      - [0xC95230, vtx, vtx/C29330]
+      - [0xC95370, vtx, vtx/C29470]
+      - [0xC953A0, vtx, vtx/C294A0]
+      - [0xC953F0, vtx, vtx/C294F0]
+      - [0xC95440, vtx, vtx/C29540]
+      - [0xC95470, vtx, vtx/C29570]
+      - [0xC954B0, vtx, vtx/C295B0]
+      - [0xC95530, vtx, vtx/C29630]
+      - [0xC95550, vtx, vtx/C29650]
+      - [0xC955C0, vtx, vtx/C296C0]
+      - [0xC95650, vtx, vtx/C29750]
+      - [0xC956F0, vtx, vtx/C297F0]
+      - [0xC957E0, vtx, vtx/C298E0]
+      - [0xC95940, vtx, vtx/C29A40]
+      - [0xC959B0, vtx, vtx/C29AB0]
+      - [0xC95AB0, vtx, vtx/C29BB0]
+      - [0xC95BD0, vtx, vtx/C29CD0]
+      - [0xC95D00, vtx, vtx/C29E00]
+      - [0xC95E50, vtx, vtx/C29F50]
+      - [0xC95F80, vtx, vtx/C2A080]
+      - [0xC96080, vtx, vtx/C2A180]
+      - [0xC961C0, vtx, vtx/C2A2C0]
+      - [0xC962C0, vtx, vtx/C2A3C0]
+      - [0xC96440, vtx, vtx/C2A540]
+      - [0xC96600, vtx, vtx/C2A700]
+      - [0xC96640, vtx, vtx/C2A740]
+      - [0xC96690, vtx, vtx/C2A790]
+      - [0xC967D0, vtx, vtx/C2A8D0]
+      - [0xC969B0, vtx, vtx/C2AAB0]
+      - [0xC96B90, vtx, vtx/C2AC90]
+      - [0xC96C20, vtx, vtx/C2AD20]
+      - [0xC96C70, vtx, vtx/C2AD70]
+      - [0xC96D50, vtx, vtx/C2AE50]
+      - [0xC96D70, vtx, vtx/C2AE70]
+      - [0xC96DB0, vtx, vtx/C2AEB0]
+      - [0xC96E60, vtx, vtx/C2AF60]
+      - [0xC96E80, vtx, vtx/C2AF80]
+      - [0xC96F10, vtx, vtx/C2B010]
+      - [0xC96F50, vtx, vtx/C2B050]
+      - [0xC97120, vtx, vtx/C2B220]
+      - [0xC97150, vtx, vtx/C2B250]
+      - [0xC971D0, vtx, vtx/C2B2D0]
+      - [0xC97240, vtx, vtx/C2B340]
+      - [0xC972C0, vtx, vtx/C2B3C0]
+      - [0xC972E0, vtx, vtx/C2B3E0]
+      - [0xC97310, vtx, vtx/C2B410]
+      - [0xC97460, vtx, vtx/C2B560]
+      - [0xC975D0, vtx, vtx/C2B6D0]
+      - [0xC97700, vtx, vtx/C2B800]
+      - [0xC97750, vtx, vtx/C2B850]
+      - [0xC977E0, vtx, vtx/C2B8E0]
+      - [0xC978B0, vtx, vtx/C2B9B0]
+      - [0xC97950, vtx, vtx/C2BA50]
+      - [0xC97A50, vtx, vtx/C2BB50]
+      - [0xC97C50, vtx, vtx/C2BD50]
+      - [0xC97D50, vtx, vtx/C2BE50]
+      - [0xC97E50, vtx, vtx/C2BF50]
+      - [0xC97E60, vtx, vtx/C2BF60]
+      - [0xC97ED0, vtx, vtx/C2BFD0]
+      - [0xC97F80, vtx, vtx/C2C080]
+      - [0xC97FB0, vtx, vtx/C2C0B0]
+      - [0xC97FF0, vtx, vtx/C2C0F0]
+      - [0xC98030, vtx, vtx/C2C130]
+      - [0xC980C0, vtx, vtx/C2C1C0]
+      - [0xC98200, vtx, vtx/C2C300]
+      - [0xC983E0, vtx, vtx/C2C4E0]
+      - [0xC985C0, vtx, vtx/C2C6C0]
+      - [0xC987A0, vtx, vtx/C2C8A0]
+      - [0xC98920, vtx, vtx/C2CA20]
+      - [0xC98AA0, vtx, vtx/C2CBA0]
+      - [0xC98C20, vtx, vtx/C2CD20]
+      - [0xC98DA0, vtx, vtx/C2CEA0]
+      - [0xC98DD0, vtx, vtx/C2CED0]
+      - [0xC98E00, vtx, vtx/C2CF00]
+      - [0xC98EC0, vtx, vtx/C2CFC0]
+      - [0xC99040, vtx, vtx/C2D140]
+      - [0xC99070, vtx, vtx/C2D170]
+      - [0xC990A0, vtx, vtx/C2D1A0]
+      - [0xC99160, vtx, vtx/C2D260]
+      - [0xC992E0, vtx, vtx/C2D3E0]
+      - [0xC99310, vtx, vtx/C2D410]
+      - [0xC99340, vtx, vtx/C2D440]
+      - [0xC99400, vtx, vtx/C2D500]
+      - [0xC99460, vtx, vtx/C2D560]
+      - [0xC994C0, vtx, vtx/C2D5C0]
+      - [0xC99520, vtx, vtx/C2D620]
+      - [0xC99560, vtx, vtx/C2D660]
+      - [0xC995A0, vtx, vtx/C2D6A0]
+      - [0xC995E0, vtx, vtx/C2D6E0]
+      - [0xC99730, vtx, vtx/C2D830]
+      - [0xC997F0, vtx, vtx/C2D8F0]
+      - [0xC99920, vtx, vtx/C2DA20]
+      - [0xC99AE0, vtx, vtx/C2DBE0]
+      - [0xC99BB0, vtx, vtx/C2DCB0]
+      - [0xC99C50, vtx, vtx/C2DD50]
+      - [0xC99C90, vtx, vtx/C2DD90]
+      - [0xC99DA0, vtx, vtx/C2DEA0]
+      - [0xC99EC0, vtx, vtx/C2DFC0]
+      - [0xC99F20, vtx, vtx/C2E020]
+      - [0xC9A0E0, vtx, vtx/C2E1E0]
+      - [0xC9A1B0, vtx, vtx/C2E2B0]
+      - [0xC9A260, vtx, vtx/C2E360]
+      - [0xC9A290, vtx, vtx/C2E390]
+      - [0xC9A3A0, vtx, vtx/C2E4A0]
+      - [0xC9A4D0, vtx, vtx/C2E5D0]
+      - [0xC9A520, vtx, vtx/C2E620]
+      - [0xC9A6B0, vtx, vtx/C2E7B0]
+      - [0xC9A700, vtx, vtx/C2E800]
+      - [0xC9A7C0, vtx, vtx/C2E8C0]
+      - [0xC9A880, vtx, vtx/C2E980]
+      - [0xC9A960, vtx, vtx/C2EA60]
+  - name: dgb_02
+    dir: world/area_dgb/dgb_02
+    type: code
+    start: 0xC9AAA0
+    vram: 0x80240000
+    subsegments:
+    - [0xC9AAA0, c, dgb_02_0_header]
+    - [0xC9AAA0, c, dgb_02_1_music]
+    - [0xC9AAA0, c, dgb_02_2_main]
+    - [0xC9AAA0, c, dgb_02_3_npc]
+  - name: dgb_03
+    dir: world/area_dgb/dgb_03
+    type: code
+    start: 0xC9D3E0
+    vram: 0x80240000
+    subsegments:
+    - [0xC9D3E0, c, dgb_03_0_header]
+    - [0xC9D3E0, c, dgb_03_1_music]
+    - [0xC9D3E0, c, dgb_03_2_main]
+    - [0xC9D3E0, c, dgb_03_3_clock]
+    - [0xC9D550, c, dgb_03_4_entity]
+    - [0xC9D630, c, dgb_03_5_npc]
+  - name: dgb_04
+    dir: world/area_dgb/dgb_04
+    type: code
+    start: 0xCA2430
+    vram: 0x80240000
+    subsegments:
+    - [0xCA2430, c, dgb_04_0_header]
+    - [0xCA2430, c, dgb_04_1_music]
+    - [0xCA2430, c, dgb_04_2_main]
+    - [0xCA2430, c, dgb_04_3_npc]
+    - [0xCA4800, c, dgb_04_4_entity]
+  - name: dgb_05
+    dir: world/area_dgb/dgb_05
+    type: code
+    start: 0xCA6910
+    vram: 0x80240000
+    subsegments:
+    - [0xCA6910, c, dgb_05_0_header]
+    - [0xCA6910, c, dgb_05_1_music]
+    - [0xCA6910, c, dgb_05_2_main]
+    - [0xCA6910, c, dgb_05_3_hole]
+    - [0xCA6970, c, dgb_05_4_entity]
+    - [0xCA6970, c, dgb_05_5_npc]
+  - name: dgb_06
+    dir: world/area_dgb/dgb_06
+    type: code
+    start: 0xCA8F80
+    vram: 0x80240000
+    subsegments:
+    - [0xCA8F80, c, dgb_06_0_header]
+    - [0xCA8F80, c, dgb_06_1_music]
+    - [0xCA8F80, c, dgb_06_2_main]
+    - [0xCA8F80, c, dgb_06_3_entity]
+    - [0xCA9240, c, dgb_06_4_npc]
+  - name: dgb_07
+    dir: world/area_dgb/dgb_07
+    type: code
+    start: 0xCA9AF0
+    vram: 0x80240000
+    subsegments:
+    - [0xCA9AF0, c, dgb_07_0_header]
+    - [0xCA9AF0, c, dgb_07_1_music]
+    - [0xCA9AF0, c, dgb_07_2_main]
+    - [0xCA9AF0, c, dgb_07_3_entity]
+    - [0xCA9AF0, c, dgb_07_4_npc]
+  - name: dgb_08
+    dir: world/area_dgb/dgb_08
+    type: code
+    start: 0xCABCB0
+    vram: 0x80240000
+    subsegments:
+    - [0xCABCB0, c, dgb_08_0_header]
+    - [0xCABCB0, c, dgb_08_1_music]
+    - [0xCABCB0, c, dgb_08_2_main]
+    - [0xCABCB0, c, dgb_08_3_npc]
+    - [0xCAF940, c, dgb_08_4_entity]
+  - name: dgb_09
+    dir: world/area_dgb/dgb_09
+    type: code
+    start: 0xCB2AE0
+    vram: 0x80240000
+    subsegments:
+    - [0xCB2AE0, c, dgb_09_0_header]
+    - [0xCB2AE0, c, dgb_09_1_music]
+    - [0xCB2AE0, c, dgb_09_2_main]
+    - [0xCB2AE0, c, dgb_09_3_breakable]
+    - [0xCB2AE0, c, dgb_09_4_npc]
+  - name: dgb_10
+    dir: world/area_dgb/dgb_10
+    type: code
+    start: 0xCB8290
+    vram: 0x80240000
+    subsegments:
+    - [0xCB8290, c, dgb_10_0_header]
+    - [0xCB8290, c, dgb_10_1_music]
+    - [0xCB8290, c, dgb_10_2_main]
+    - [0xCB8290, c, dgb_10_3_hole]
+    - [0xCB8480, c, dgb_10_4_entity]
+  - name: dgb_11
+    dir: world/area_dgb/dgb_11
+    type: code
+    start: 0xCB9300
+    vram: 0x80240000
+    subsegments:
+    - [0xCB9300, c, dgb_11_0_header]
+    - [0xCB9300, c, dgb_11_1_music]
+    - [0xCB9300, c, dgb_11_2_main]
+    - [0xCB9300, c, dgb_11_3_entity]
+  - name: dgb_12
+    dir: world/area_dgb/dgb_12
+    type: code
+    start: 0xCB9E10
+    vram: 0x80240000
+    subsegments:
+    - [0xCB9E10, c, dgb_12_0_header]
+    - [0xCB9E10, c, dgb_12_1_music]
+    - [0xCB9E10, c, dgb_12_2_main]
+    - [0xCB9E10, c, dgb_12_3_spikes]
+    - [0xCB9E10, c, dgb_12_4_entity]
+  - name: dgb_13
+    dir: world/area_dgb/dgb_13
+    type: code
+    start: 0xCBA880
+    vram: 0x80240000
+    subsegments:
+    - [0xCBA880, c, dgb_13_0_header]
+    - [0xCBA880, c, dgb_13_1_music]
+    - [0xCBA880, c, dgb_13_2_main]
+    - [0xCBA880, c, dgb_13_3_entity]
+    - [0xCBA880, c, dgb_13_4_drawer]
+  - name: dgb_14
+    dir: world/area_dgb/dgb_14
+    type: code
+    start: 0xCBAF50
+    vram: 0x80240000
+    subsegments:
+    - [0xCBAF50, c, dgb_14_0_header]
+    - [0xCBAF50, c, dgb_14_1_music]
+    - [0xCBAF50, c, dgb_14_2_main]
+    - [0xCBAF50, c, dgb_14_3_entity]
+  - name: dgb_15
+    dir: world/area_dgb/dgb_15
+    type: code
+    start: 0xCBB430
+    vram: 0x80240000
+    subsegments:
+    - [0xCBB430, c, dgb_15_0_header]
+    - [0xCBB430, c, dgb_15_1_music]
+    - [0xCBB430, c, dgb_15_2_main]
+    - [0xCBB430, c, dgb_15_3_npc]
+    - [0xCBCBC0, c, dgb_15_4_entity]
+  - name: dgb_16
+    dir: world/area_dgb/dgb_16
+    type: code
+    start: 0xCBE460
+    vram: 0x80240000
+    subsegments:
+    - [0xCBE460, c, dgb_16_0_header]
+    - [0xCBE460, c, dgb_16_1_music]
+    - [0xCBE460, c, dgb_16_2_main]
+    - [0xCBE460, c, dgb_16_3_entity]
+    - [0xCBE460, c, dgb_16_4_npc]
+  - name: dgb_17
+    dir: world/area_dgb/dgb_17
+    type: code
+    start: 0xCC1980
+    vram: 0x80240000
+    subsegments:
+    - [0xCC1980, c, dgb_17_0_header]
+    - [0xCC1980, c, dgb_17_1_music]
+    - [0xCC1980, c, dgb_17_2_main]
+    - [0xCC1980, c, dgb_17_3_entity]
+  - name: dgb_18
+    dir: world/area_dgb/dgb_18
+    type: code
+    start: 0xCC1E60
+    vram: 0x80240000
+    subsegments:
+    - [0xCC1E60, c, dgb_18_0_header]
+    - [0xCC1E60, c, dgb_18_1_music]
+    - [0xCC1E60, c, dgb_18_2_main]
+    - [0xCC1E60, c, dgb_18_3_npc]
+    - [0xCC2E10, c, dgb_18_4_entity]
+  - name: kzn_01
+    dir: world/area_kzn/kzn_01
+    type: code
+    start: 0xCC58F0
+    vram: 0x80240000
+    subsegments:
+    - [0xCC58F0, c, kzn_01_0_header]
+    - [0xCC58F0, c, kzn_01_1_main]
+    - [0xCC5C00, c, kzn_01_2_npc]
+  - name: kzn_02
+    dir: world/area_kzn/kzn_02
+    type: code
+    start: 0xCC6660
+    vram: 0x80240000
+    subsegments:
+    - [0xCC6660, c, kzn_02_0_header]
+    - [0xCC6660, c, kzn_02_1_main]
+    - [0xCC6970, c, kzn_02_2_platforms]
+    - [0xCC6B40, c, kzn_02_3_npc]
+    - [0xCC8D90, c, kzn_02_4_demo]
+  - name: kzn_03
+    dir: world/area_kzn/kzn_03
+    type: code
+    start: 0xCCCC30
+    vram: 0x80240000
+    subsegments:
+    - [0xCCCC30, c, kzn_03_0_header]
+    - [0xCCCC30, c, kzn_03_1_main]
+    - [0xCCCF40, c, kzn_03_2_npc]
+    - [0xCCF930, c, kzn_03_3_entity]
+    - [0xCCF9E0, c, kzn_03_4_ziplines]
+  - name: kzn_04
+    dir: world/area_kzn/kzn_04
+    type: code
+    start: 0xCD4050
+    vram: 0x80240000
+    subsegments:
+    - [0xCD4050, c, kzn_04_0_header]
+    - [0xCD4050, c, kzn_04_1_main]
+    - [0xCD4360, c, kzn_04_2_entity]
+    - [0xCD50A0, c, kzn_04_3_npc]
+  - name: kzn_05
+    dir: world/area_kzn/kzn_05
+    type: code
+    start: 0xCD7FF0
+    vram: 0x80240000
+    subsegments:
+    - [0xCD7FF0, c, kzn_05_0_header]
+    - [0xCD7FF0, c, kzn_05_1_main]
+  - name: kzn_06
+    dir: world/area_kzn/kzn_06
+    type: code
+    start: 0xCD8840
+    vram: 0x80240000
+    subsegments:
+    - [0xCD8840, c, kzn_06_0_header]
+    - [0xCD8840, c, kzn_06_1_main]
+    - [0xCD8B50, c, kzn_06_2_entity]
+    - [0xCD8C30, c, kzn_06_3_extra]
+  - name: kzn_07
+    dir: world/area_kzn/kzn_07
+    type: code
+    start: 0xCDA250
+    vram: 0x80240000
+    subsegments:
+    - [0xCDA250, c, kzn_07_0_header]
+    - [0xCDA250, c, kzn_07_1_music]
+    - [0xCDA250, c, kzn_07_2_main]
+    - [0xCDA970, c, kzn_07_3_entity]
+    - [0xCDAA70, c, kzn_07_4_npc]
+  - name: kzn_08
+    dir: world/area_kzn/kzn_08
+    type: code
+    start: 0xCDD3A0
+    vram: 0x80240000
+    subsegments:
+    - [0xCDD3A0, c, kzn_08_0_header]
+    - [0xCDD3A0, c, kzn_08_1_main]
+    - [0xCDDB30, c, kzn_08_2_entity]
+    - [0xCDDDF0, c, kzn_08_3_npc]
+    - [0xCE1280, c, kzn_08_4_extra]
+  - name: kzn_09
+    dir: world/area_kzn/kzn_09
+    type: code
+    start: 0xCE2C00
+    vram: 0x80240000
+    subsegments:
+    - [0xCE2C00, c, kzn_09_0_header]
+    - [0xCE2C00, c, kzn_09_1_main]
+    - [0xCE2C00, c, kzn_09_2_entity]
+    - [0xCE3940, c, kzn_09_3_zipline]
+    - [0xCE3C20, c, kzn_09_4_npc]
+  - name: kzn_10
+    dir: world/area_kzn/kzn_10
+    type: code
+    start: 0xCEA0A0
+    vram: 0x80240000
+    subsegments:
+    - [0xCEA0A0, c, kzn_10_0_header]
+    - [0xCEA0A0, c, kzn_10_1_main]
+    - [0xCEA3D0, c, kzn_10_2_tromp]
+  - name: kzn_11
+    dir: world/area_kzn/kzn_11
+    type: code
+    start: 0xCEC0C0
+    vram: 0x80240000
+    subsegments:
+    - [0xCEC0C0, c, kzn_11_0_header]
+    - [0xCEC0C0, c, kzn_11_1_main]
+    - [0xCEC3D0, c, kzn_11_2_platforms]
+    - [0xCEC520, c, kzn_11_3_npc]
+  - name: kzn_17
+    dir: world/area_kzn/kzn_17
+    type: code
+    start: 0xCF19D0
+    vram: 0x80240000
+    subsegments:
+    - [0xCF19D0, c, kzn_17_0_header]
+    - [0xCF19D0, c, kzn_17_1_main]
+    - [0xCF1CE0, c, kzn_17_2_entity]
+    - [0xCF1CE0, c, kzn_17_3_npc]
+    - [0xCF46D0, c, kzn_17_4_tromp]
+  - name: kzn_18
+    dir: world/area_kzn/kzn_18
+    type: code
+    start: 0xCF7FC0
+    vram: 0x80240000
+    subsegments:
+    - [0xCF7FC0, c, kzn_18_0_header]
+    - [0xCF8000, c, kzn_18_1_main]
+    - [0xCF8310, c, kzn_18_2_npc]
+    - [0xCF8380, c, kzn_18_3_entity]
+  - name: kzn_19
+    dir: world/area_kzn/kzn_19
+    type: code
+    start: 0xCF9AD0
+    vram: 0x80240000
+    subsegments:
+    - [0xCF9AD0, c, kzn_19_0_header]
+    - [0xCF9AD0, c, kzn_19_1_music]
+    - [0xCF9AD0, c, kzn_19_2_main]
+    - [0xCFA5D0, c, kzn_19_3_npc_settings]
+    - [0xCFA5D0, c, kzn_19_4_npc]
+    - [0xCFB800, c, kzn_19_5_eruption]
+    - [0xCFB800, c, kzn_19_6_entity]
+    - [0xCFB800, .data, kzn_19_0_header]
+    - [0xCFB880, .data, kzn_19_1_music]
+    - [0xCFB960, .data, kzn_19_2_main]
+    - [0xCFCA30, .data, kzn_19_3_npc_settings]
+    - start: 0xCFCB10
+      type: .data
+      name: kzn_19_4_npc
+      subsegments:
+      - [0xCFCB10]
+      - [0xCFCFA8, ci4, ../../lava_piranha/vine, 64, 32]
+      - [0xCFD3A8, palette, ../../lava_piranha/vine]
+      - [0xCFD5A8, gfx_common, ../../lava_piranha/vine]
+      - [0xCFD688]
+    - [0xD018D0, .data, kzn_19_5_eruption]
+    - [0xD01D90, .data, kzn_19_6_entity]
+  - name: kzn_20
+    dir: world/area_kzn/kzn_20
+    type: code
+    start: 0xD01E50
+    vram: 0x80240000
+    subsegments:
+    - [0xD01E50, c, kzn_20_0_header]
+    - [0xD01E50, c, kzn_20_1_music]
+    - [0xD01E50, c, kzn_20_2_main]
+    - [0xD02160, c, kzn_20_3_npc]
+  - name: kzn_22
+    dir: world/area_kzn/kzn_22
+    type: code
+    start: 0xD06120
+    vram: 0x80240000
+    subsegments:
+    - [0xD06120, c, kzn_22_0_header]
+    - [0xD06120, c, kzn_22_1_music]
+    - [0xD06120, c, kzn_22_2_main]
+    - [0xD06460, c, kzn_22_3_entity]
+    - [0xD06460, c, kzn_22_4_npc]
+  - name: kzn_23
+    dir: world/area_kzn/kzn_23
+    type: code
+    start: 0xD08220
+    vram: 0x80240000
+    subsegments:
+    - [0xD08220, c, kzn_23_0_header]
+    - [0xD08220, c, kzn_23_1_music]
+    - [0xD08220, c, kzn_23_2_main]
+    - [0xD08530, c, kzn_23_3_npc]
+  - name: flo_00
+    dir: world/area_flo/flo_00
+    type: code
+    start: 0xD09E40
+    vram: 0x80240000
+    subsegments:
+    - [0xD09E40, c, flo_00_0_header]
+    - [0xD09E40, c, flo_00_1_music]
+    - [0xD09E40, c, flo_00_2_main]
+    - [0xD09E80, c, flo_00_3_npc]
+    - [0xD0AD50, c, flo_00_4_epilogue]
+    - [0xD0AD50, c, flo_00_5_beanstalk]
+    - [0xD0B220, c, flo_00_6_entity]
+  - name: flo_03
+    dir: world/area_flo/flo_03
+    type: code
+    start: 0xD131C0
+    vram: 0x80240000
+    subsegments:
+    - [0xD131C0, c, flo_03_0_header]
+    - [0xD131C0, c, flo_03_1_music]
+    - [0xD131C0, c, flo_03_2_main]
+    - [0xD13200, c, flo_03_3_npc]
+    - [0xD135B0, c, flo_03_4_foliage]
+    - [0xD137F0, c, flo_03_5_entity]
+  - name: flo_07
+    dir: world/area_flo/flo_07
+    type: code
+    start: 0xD18110
+    vram: 0x80240000
+    subsegments:
+    - [0xD18110, c, flo_07_0_header]
+    - [0xD18110, c, flo_07_1_music]
+    - [0xD18110, c, flo_07_2_main]
+    - [0xD184F0, c, flo_07_3_npc]
+  - name: flo_08
+    dir: world/area_flo/flo_08
+    type: code
+    start: 0xD1AC60
+    vram: 0x80240000
+    subsegments:
+    - [0xD1AC60, c, flo_08_0_header]
+    - [0xD1AC60, c, flo_08_1_music]
+    - [0xD1AC60, c, flo_08_2_entity]
+    - [0xD1B9A0, c, flo_08_3_main]
+    - [0xD1B9E0, c, flo_08_4_npc]
+    - [0xD1C860, c, flo_08_5_foliage]
+    - [0xD1CAA0, c, flo_08_6_vines]
+  - name: flo_09
+    dir: world/area_flo/flo_09
+    type: code
+    start: 0xD20F20
+    vram: 0x80240000
+    subsegments:
+    - [0xD20F20, c, flo_09_0_header]
+    - [0xD20F20, c, flo_09_1_music]
+    - [0xD20F20, c, flo_09_2_main]
+    - [0xD20F60, c, flo_09_3_vines]
+    - [0xD21000, c, flo_09_4_foliage]
+    - [0xD21240, c, flo_09_5_npc]
+  - name: flo_10
+    dir: world/area_flo/flo_10
+    type: code
+    start: 0xD25120
+    vram: 0x80240000
+    subsegments:
+    - [0xD25120, c, flo_10_0_header]
+    - [0xD25160, c, flo_10_1_music]
+    - [0xD25160, c, flo_10_2_entity]
+    - [0xD25160, c, flo_10_3_main]
+    - [0xD251A0, c, flo_10_4_fountain]
+    - [0xD255D0, c, flo_10_5_npc]
+    - [0xD255D0, c, flo_10_6_waterfx]
+    - [0xD26350, c, flo_10_7_foliage]
+  - name: flo_11
+    dir: world/area_flo/flo_11
+    type: code
+    start: 0xD29BF0
+    vram: 0x80240000
+    subsegments:
+    - [0xD29BF0, c, flo_11_0_header]
+    - [0xD29BF0, c, flo_11_1_music]
+    - [0xD29BF0, c, flo_11_2_main]
+    - [0xD29F10, c, flo_11_3_npc]
+    - [0xD29F10, c, flo_11_4_entity]
+  - name: flo_12
+    dir: world/area_flo/flo_12
+    type: code
+    start: 0xD2CD50
+    vram: 0x80240000
+    subsegments:
+    - [0xD2CD50, c, flo_12_0_header]
+    - [0xD2CD50, c, flo_12_1_music]
+    - [0xD2CD50, c, flo_12_2_main]
+    - [0xD2CD90, c, flo_12_3_npc]
+  - name: flo_13
+    dir: world/area_flo/flo_13
+    type: code
+    start: 0xD2F730
+    vram: 0x80240000
+    subsegments:
+    - [0xD2F730, c, flo_13_0_header]
+    - [0xD2F730, c, flo_13_1_music]
+    - [0xD2F730, c, flo_13_2_entity]
+    - [0xD2F730, c, flo_13_3_main]
+    - [0xD2F770, c, flo_13_4_npc]
+    - [0xD32D00, c, flo_13_5_new_partner]
+  - name: flo_14
+    dir: world/area_flo/flo_14
+    type: code
+    start: 0xD37230
+    vram: 0x80240000
+    subsegments:
+    - [0xD37230, c, flo_14_0_header]
+    - [0xD37230, c, flo_14_1_music]
+    - [0xD37230, c, flo_14_2_main]
+    - [0xD37570, c, flo_14_3_bubbles]
+    - [0xD37D40, c, flo_14_4_npc]
+    - [0xD39590, c, flo_14_5_entity]
+    - [0xD39590, c, flo_14_6_logs]
+  - name: flo_15
+    dir: world/area_flo/flo_15
+    type: code
+    start: 0xD3C5E0
+    vram: 0x80240000
+    subsegments:
+    - [0xD3C5E0, c, flo_15_0_header]
+    - [0xD3C5E0, c, flo_15_1_music]
+    - [0xD3C5E0, c, flo_15_2_main]
+    - [0xD3C5E0, c, flo_15_3_npc]
+    - [0xD3C5E0, c, flo_15_4_entity]
+    - [0xD3C5E0, c, flo_15_5_stairs]
+  - name: flo_16
+    dir: world/area_flo/flo_16
+    type: code
+    start: 0xD3DD50
+    vram: 0x80240000
+    subsegments:
+    - [0xD3DD50, c, flo_16_0_header]
+    - [0xD3DD50, c, flo_16_1_music]
+    - [0xD3DD50, c, flo_16_2_main]
+    - [0xD3DD90, c, flo_16_3_vines]
+    - [0xD3DE30, c, flo_16_4_entity]
+    - [0xD3EBA0, c, flo_16_5_npc]
+    - [0xD40690, c, flo_16_6_puzzle]
+  - name: flo_17
+    dir: world/area_flo/flo_17
+    type: code
+    start: 0xD43200
+    vram: 0x80240000
+    subsegments:
+    - [0xD43200, c, flo_17_0_header]
+    - [0xD43200, c, flo_17_1_music]
+    - [0xD43200, c, flo_17_2_main]
+    - [0xD43240, c, flo_17_3_logs]
+    - [0xD43270, c, flo_17_4_npc]
+    - [0xD46420, c, flo_17_5_entity]
+  - name: flo_18
+    dir: world/area_flo/flo_18
+    type: code
+    start: 0xD485C0
+    vram: 0x80240000
+    subsegments:
+    - [0xD485C0, c, flo_18_0_header]
+    - [0xD485C0, c, flo_18_1_music]
+    - [0xD485C0, c, flo_18_2_main]
+    - [0xD48900, c, flo_18_3_machine]
+    - [0xD48AF0, c, flo_18_4_npc]
+    - [0xD48B50, c, flo_18_5_foliage]
+  - name: flo_19
+    dir: world/area_flo/flo_19
+    type: code
+    start: 0xD4F610
+    vram: 0x80240000
+    subsegments:
+    - [0xD4F610, c, flo_19_0_header]
+    - [0xD4F610, c, flo_19_1_music]
+    - [0xD4F610, c, flo_19_2_entity]
+    - [0xD4F610, c, flo_19_3_main]
+    - [0xD4F950, c, flo_19_4_clouds]
+    - [0xD4FAE0, c, flo_19_5_beanstalk]
+  - name: flo_21
+    dir: world/area_flo/flo_21
+    type: code
+    start: 0xD52620
+    vram: 0x80240000
+    subsegments:
+    - [0xD52620, c, flo_21_0_header]
+    - [0xD52620, c, flo_21_1_music]
+    - [0xD52620, c, flo_21_2_main]
+    - [0xD53160, c, flo_21_3_clouds]
+    - [0xD532F0, c, flo_21_4_npc]
+  - name: flo_22
+    dir: world/area_flo/flo_22
+    type: code
+    start: 0xD58160
+    vram: 0x80240000
+    subsegments:
+    - [0xD58160, c, flo_22_0_header]
+    - [0xD58160, c, flo_22_1_music]
+    - [0xD58160, c, flo_22_2_main]
+    - [0xD581A0, c, flo_22_3_npc]
+    - [0xD581A0, c, flo_22_4_well]
+    - [0xD581B0, c, flo_22_5_foliage]
+  - name: flo_23
+    dir: world/area_flo/flo_23
+    type: code
+    start: 0xD5A180
+    vram: 0x80240000
+    subsegments:
+    - [0xD5A180, c, flo_23_0_header]
+    - [0xD5A180, c, flo_23_1_music]
+    - [0xD5A180, c, flo_23_2_main]
+    - [0xD5A1C0, c, flo_23_3_npc]
+    - [0xD5AE50, c, flo_23_4_entity]
+  - name: flo_24
+    dir: world/area_flo/flo_24
+    type: code
+    start: 0xD5C860
+    vram: 0x80240000
+    subsegments:
+    - [0xD5C860, c, flo_24_0_header]
+    - [0xD5C860, c, flo_24_1_music]
+    - [0xD5C860, c, flo_24_2_main]
+    - [0xD5C8A0, c, flo_24_3_foliage]
+    - [0xD5CAE0, c, flo_24_4_water]
+    - [0xD5CDF0, c, flo_24_5_entity]
+  - name: flo_25
+    dir: world/area_flo/flo_25
+    type: code
+    start: 0xD5EAF0
+    vram: 0x80240000
+    subsegments:
+    - [0xD5EAF0, c, flo_25_0_header]
+    - [0xD5EAF0, c, flo_25_1_music]
+    - [0xD5EAF0, c, flo_25_2_main]
+    - [0xD5EB30, c, flo_25_3_npc]
+    - [0xD60AE0, c, flo_25_4_entity]
+    - [0xD60AE0, c, flo_25_5_foliage]
+    - [0xD60D20, c, flo_25_6_vine]
+  - name: sam_01
+    dir: world/area_sam/sam_01
+    type: code
+    start: 0xD63A90
+    vram: 0x80240000
+    subsegments:
+    - [0xD63A90, c, sam_01_0_header]
+    - [0xD63A90, c, sam_01_1_music]
+    - [0xD63A90, c, sam_01_2_main]
+    - [0xD63DA0, c, sam_01_3_rooms]
+    - [0xD63DA0, c, sam_01_4_npc]
+    - [0xD65510, c, sam_01_5_scenes]
+    - [0xD65720, c, sam_01_6_entity]
+  - name: sam_02
+    dir: world/area_sam/sam_02
+    type: code
+    start: 0xD71690
+    vram: 0x80240000
+    subsegments:
+    - [0xD71690, c, sam_02_0_header]
+    - [0xD71690, c, sam_02_1_music]
+    - [0xD71690, c, sam_02_2_main]
+    - [0xD71EC0, c, sam_02_3_rooms]
+    - [0xD71EC0, c, sam_02_4_npc]
+    - [0xD73250, c, sam_02_5_entity]
+    - [0xD73250, c, sam_02_6_shop]
+  - name: sam_03
+    dir: world/area_sam/sam_03
+    type: code
+    start: 0xD7D070
+    vram: 0x80240000
+    subsegments:
+    - [0xD7D070, c, sam_03_0_header]
+    - [0xD7D070, c, sam_03_1_music]
+    - [0xD7D070, c, sam_03_2_main]
+    - [0xD7D070, c, sam_03_3_npc1]
+    - [0xD7D0C0, c, sam_03_4_npc2]
+  - name: sam_04
+    dir: world/area_sam/sam_04
+    type: code
+    start: 0xD7F580
+    vram: 0x80240000
+    subsegments:
+    - [0xD7F580, c, sam_04_0_header]
+    - [0xD7F580, c, sam_04_1_music]
+    - [0xD7F580, c, sam_04_2_main]
+    - [0xD7F7C0, c, sam_04_3_snowmen]
+    - [0xD7F890, c, sam_04_4_npc]
+    - [0xD7FC80, c, sam_04_5_entity]
+  - name: sam_05
+    dir: world/area_sam/sam_05
+    type: code
+    start: 0xD84790
+    vram: 0x80240000
+    subsegments:
+    - [0xD84790, c, sam_05_0_header]
+    - [0xD84790, c, sam_05_1_music]
+    - [0xD84790, c, sam_05_2_main]
+    - [0xD84790, c, sam_05_3_entity]
+    - [0xD84790, c, sam_05_4_npc]
+    - [0xD864D0, c, sam_05_5_scenes]
+    - [0xD864D0, c, sam_05_6_monstar_gfx]
+    - [0xD864D0, c, sam_05_7_monstar_vtx]
+    - [0xD864D0, .data, sam_05_0_header]
+    - [0xD86530, .data, sam_05_1_music]
+    - [0xD86560, .data, sam_05_2_main]
+    - [0xD86840, .data, sam_05_3_entity]
+    - start: 0xD868B0
+      type: .data
+      name: sam_05_4_npc
+      subsegments:
+      - [0xD868B0]
+      - [0xD86F00, ci4, monstar, 32, 32]
+      - [0xD87100, ia4, monstar_blank1, 32, 32]
+      - [0xD87300, ia4, monstar_blank2, 32, 32]
+      - [0xD87500, ia4, monstar_blank3, 32, 32]
+      - [0xD87700, palette, monstar]
+      - [0xD87720]
+    - [0xD8A590, .data, sam_05_5_scenes]
+    - start: 0xD8B730
+      type: .data
+      name: sam_05_6_monstar_gfx
+      subsegments:
+      - [0xD8B730, gfx, monstar]
+    - start: 0xD8B840
+      type: .data
+      name: sam_05_7_monstar_vtx
+      subsegments:
+      - [0xD8B840, vtx, monstar]
+    - [0xD8BC60]
+  - name: sam_06
+    dir: world/area_sam/sam_06
+    type: code
+    start: 0xD8BE40
+    vram: 0x80240000
+    subsegments:
+    - [0xD8BE40, c, sam_06_0_header]
+    - [0xD8BE40, c, sam_06_1_music]
+    - [0xD8BE40, c, sam_06_2_main]
+    - [0xD8C390, c, sam_06_3_rooms]
+    - [0xD8C390, c, sam_06_4_npc]
+    - [0xD8E460, c, sam_06_5_entity]
+  - name: sam_07
+    dir: world/area_sam/sam_07
+    type: code
+    start: 0xD97CE0
+    vram: 0x80240000
+    subsegments:
+    - [0xD97CE0, c, sam_07_0_header]
+    - [0xD97CE0, c, sam_07_1_music]
+    - [0xD97CE0, c, sam_07_2_main]
+    - [0xD97CE0, c, sam_07_3_entity]
+    - [0xD97CE0, c, sam_07_4_frozen_pit]
+    - [0xD98330, c, sam_07_5_npc]
+  - name: sam_08
+    dir: world/area_sam/sam_08
+    type: code
+    start: 0xD9BC30
+    vram: 0x80240000
+    subsegments:
+    - [0xD9BC30, c, sam_08_0_header]
+    - [0xD9BC30, c, sam_08_1_music]
+    - [0xD9BC30, c, sam_08_2_main]
+    - [0xD9BC30, c, sam_08_3_entity]
+    - [0xD9C970, c, sam_08_4_npc]
+    - [0xD9D240, c, sam_08_5_scenes]
+  - name: sam_09
+    dir: world/area_sam/sam_09
+    type: code
+    start: 0xDA22A0
+    vram: 0x80240000
+    subsegments:
+    - [0xDA22A0, c, sam_09_0_header]
+    - [0xDA22A0, c, sam_09_1_music]
+    - [0xDA22A0, c, sam_09_2_main]
+    - [0xDA22A0, c, sam_09_3_entity]
+    - [0xDA22A0, c, sam_09_4_sockets]
+  - name: sam_10
+    dir: world/area_sam/sam_10
+    type: code
+    start: 0xDA37B0
+    vram: 0x80240000
+    subsegments:
+    - [0xDA37B0, c, sam_10_0_header]
+    - [0xDA37B0, c, sam_10_1_music]
+    - [0xDA37B0, c, sam_10_2_main]
+    - [0xDA37B0, c, sam_10_3_entity]
+    - [0xDA3AA0, c, sam_10_4_stairs]
+    - [0xDA3B80, c, sam_10_5_npc]
+  - name: sam_11
+    dir: world/area_sam/sam_11
+    type: code
+    start: 0xDA6580
+    vram: 0x80240000
+    subsegments:
+    - [0xDA6580, c, sam_11_0_header]
+    - [0xDA65C0, c, sam_11_1_music]
+    - [0xDA65C0, c, sam_11_2_main]
+    - [0xDA6800, c, sam_11_3_rooms]
+    - [0xDA68E0, c, sam_11_4_entity]
+    - [0xDA6D50, c, sam_11_5_npc]
+    - [0xDA8020, c, sam_11_6_pond]
+    - [0xDA86F0, c, sam_11_7_staircase]
+    - [0xDA86F0, c, sam_11_8_pond_anim]
+    - [0xDA86F0, c, sam_11_9_pond_skele]
+  - name: sam_12
+    dir: world/area_sam/sam_12
+    type: code
+    start: 0xDB7A10
+    vram: 0x80240000
+    subsegments:
+    - [0xDB7A10, c, sam_12_0_header]
+    - [0xDB7A10, c, sam_12_1_music]
+    - [0xDB7A10, c, sam_12_2_main]
+    - [0xDB7A10, c, sam_12_3_npc]
+    - [0xDB7AA0, c, sam_12_4_scenes]
+    - [0xDB7DB0, c, sam_12_5_entity]
+  - name: pra_01
+    dir: world/area_pra/pra_01
+    type: code
+    start: 0xDB9030
+    vram: 0x80240000
+    subsegments:
+    - [0xDB9030, c, pra_01_0_header]
+    - [0xDB9050, c, pra_01_1_music]
+    - [0xDB9050, c, pra_01_2_main]
+    - [0xDB9FB0, c, pra_01_3_npc]
+    - [0xDBA3E0, c, pra_01_4_entity]
+  - name: pra_02
+    dir: world/area_pra/pra_02
+    type: code
+    start: 0xDBBFE0
+    vram: 0x80240000
+    subsegments:
+    - [0xDBBFE0, c, pra_02_0_header]
+    - [0xDBC000, c, pra_02_1_music]
+    - [0xDBC000, c, pra_02_2_main]
+    - [0xDBCF00, c, pra_02_3_npc]
+    - [0xDBD2F0, c, pra_02_4_entity]
+  - name: pra_03
+    dir: world/area_pra/pra_03
+    type: code
+    start: 0xDBFCA0
+    vram: 0x80240000
+    subsegments:
+    - [0xDBFCA0, c, pra_03_0_header]
+    - [0xDBFCC0, c, pra_03_1_music]
+    - [0xDBFCC0, c, pra_03_2_main]
+    - [0xDBFCC0, c, pra_03_3_entity]
+  - name: pra_04
+    dir: world/area_pra/pra_04
+    type: code
+    start: 0xDC0680
+    vram: 0x80240000
+    subsegments:
+    - [0xDC0680, c, pra_04_0_header]
+    - [0xDC06A0, c, pra_04_1_music]
+    - [0xDC06A0, c, pra_04_2_main]
+    - [0xDC06A0, c, pra_04_3_entity]
+    - [0xDC0830, c, pra_04_4_npc]
+  - name: pra_05
+    dir: world/area_pra/pra_05
+    type: code
+    start: 0xDC1BA0
+    vram: 0x80240000
+    subsegments:
+    - [0xDC1BA0, c, pra_05_0_header]
+    - [0xDC1BC0, c, pra_05_1_music]
+    - [0xDC1BC0, c, pra_05_2_main]
+    - [0xDC2AC0, c, pra_05_3_entity]
+  - name: pra_06
+    dir: world/area_pra/pra_06
+    type: code
+    start: 0xDC3420
+    vram: 0x80240000
+    subsegments:
+    - [0xDC3420, c, pra_06_0_header]
+    - [0xDC3420, c, pra_06_1_music]
+    - [0xDC3420, c, pra_06_2_main]
+    - [0xDC4370, c, pra_06_3_entity]
+  - name: pra_09
+    dir: world/area_pra/pra_09
+    type: code
+    start: 0xDC4880
+    vram: 0x80240000
+    subsegments:
+    - [0xDC4880, c, pra_09_0_header]
+    - [0xDC48A0, c, pra_09_1_music]
+    - [0xDC48A0, c, pra_09_2_main]
+    - [0xDC57A0, c, pra_09_3_npc]
+  - name: pra_10
+    dir: world/area_pra/pra_10
+    type: code
+    start: 0xDCB2A0
+    vram: 0x80240000
+    subsegments:
+    - [0xDCB2A0, c, pra_10_0_header]
+    - [0xDCB2C0, c, pra_10_1_music]
+    - [0xDCB2C0, c, pra_10_2_main]
+    - [0xDCC1C0, c, pra_10_3_npc]
+  - name: pra_11
+    dir: world/area_pra/pra_11
+    type: code
+    start: 0xDCD4F0
+    vram: 0x80240000
+    subsegments:
+    - [0xDCD4F0, c, pra_11_0_header]
+    - [0xDCD510, c, pra_11_1_music]
+    - [0xDCD510, c, pra_11_2_main]
+    - [0xDCE410, c, pra_11_3_entity]
+  - name: pra_12
+    dir: world/area_pra/pra_12
+    type: code
+    start: 0xDCED00
+    vram: 0x80240000
+    subsegments:
+    - [0xDCED00, c, pra_12_0_header]
+    - [0xDCED00, c, pra_12_1_music]
+    - [0xDCED00, c, pra_12_2_main]
+    - [0xDCFC50, c, pra_12_3_entity]
+  - name: pra_13
+    dir: world/area_pra/pra_13
+    type: code
+    start: 0xDD05D0
+    vram: 0x80240000
+    subsegments:
+    - [0xDD05D0, c, pra_13_0_header]
+    - [0xDD05F0, c, pra_13_1_music]
+    - [0xDD05F0, c, pra_13_2_main]
+    - [0xDD14F0, c, pra_13_3_npc]
+  - name: pra_14
+    dir: world/area_pra/pra_14
+    type: code
+    start: 0xDD3CF0
+    vram: 0x80240000
+    subsegments:
+    - [0xDD3CF0, c, pra_14_0_header]
+    - [0xDD3D10, c, pra_14_1_music]
+    - [0xDD3D10, c, pra_14_2_main]
+    - [0xDD4C10, c, pra_14_3_entity]
+  - name: pra_15
+    dir: world/area_pra/pra_15
+    type: code
+    start: 0xDD5800
+    vram: 0x80240000
+    subsegments:
+    - [0xDD5800, c, pra_15_0_header]
+    - [0xDD5820, c, pra_15_1_music]
+    - [0xDD5820, c, pra_15_2_main]
+    - [0xDD5840, c, pra_15_3_entity]
+  - name: pra_16
+    dir: world/area_pra/pra_16
+    type: code
+    start: 0xDD5B10
+    vram: 0x80240000
+    subsegments:
+    - [0xDD5B10, c, pra_16_0_header]
+    - [0xDD5B30, c, pra_16_1_music]
+    - [0xDD5B30, c, pra_16_2_main]
+  - name: pra_18
+    dir: world/area_pra/pra_18
+    type: code
+    start: 0xDD7610
+    vram: 0x80240000
+    subsegments:
+    - [0xDD7610, c, pra_18_0_header]
+    - [0xDD7630, c, pra_18_1_music]
+    - [0xDD7630, c, pra_18_2_main]
+    - [0xDD8530, c, pra_18_3_npc]
+  - name: pra_19
+    dir: world/area_pra/pra_19
+    type: code
+    start: 0xDDA9A0
+    vram: 0x80240000
+    subsegments:
+    - [0xDDA9A0, c, pra_19_0_header]
+    - [0xDDA9C0, c, pra_19_1_music]
+    - [0xDDA9C0, c, pra_19_2_main]
+    - [0xDDB8C0, c, pra_19_3_npc]
+  - name: pra_20
+    dir: world/area_pra/pra_20
+    type: code
+    start: 0xDE2390
+    vram: 0x80240000
+    subsegments:
+    - [0xDE2390, c, pra_20_0_header]
+    - [0xDE23B0, c, pra_20_1_music]
+    - [0xDE23B0, c, pra_20_2_main]
+  - name: pra_21
+    dir: world/area_pra/pra_21
+    type: code
+    start: 0xDE3F10
+    vram: 0x80240000
+    subsegments:
+    - [0xDE3F10, c, pra_21_0_header]
+    - [0xDE3F30, c, pra_21_1_music]
+    - [0xDE3F30, c, pra_21_2_main]
+    - [0xDE3F30, c, pra_21_3_entity]
+  - name: pra_22
+    dir: world/area_pra/pra_22
+    type: code
+    start: 0xDE4870
+    vram: 0x80240000
+    subsegments:
+    - [0xDE4870, c, pra_22_0_header]
+    - [0xDE4890, c, pra_22_1_music]
+    - [0xDE4890, c, pra_22_2_main]
+    - [0xDE4A40, c, pra_22_3_entity]
+  - name: pra_27
+    dir: world/area_pra/pra_27
+    type: code
+    start: 0xDE59E0
+    vram: 0x80240000
+    subsegments:
+    - [0xDE59E0, c, pra_27_0_header]
+    - [0xDE59E0, c, pra_27_1_music]
+    - [0xDE59E0, c, pra_27_2_main]
+    - [0xDE6930, c, pra_27_3_entity]
+  - name: pra_28
+    dir: world/area_pra/pra_28
+    type: code
+    start: 0xDE7290
+    vram: 0x80240000
+    subsegments:
+    - [0xDE7290, c, pra_28_0_header]
+    - [0xDE7290, c, pra_28_1_music]
+    - [0xDE7290, c, pra_28_2_main]
+    - [0xDE81E0, c, pra_28_3_entity]
+  - name: pra_29
+    dir: world/area_pra/pra_29
+    type: code
+    start: 0xDE8B40
+    vram: 0x80240000
+    subsegments:
+    - [0xDE8B40, c, pra_29_0_header]
+    - [0xDE8B60, c, pra_29_1_music]
+    - [0xDE8B60, c, pra_29_2_entity]
+    - [0xDE8B60, c, pra_29_3_main]
+    - [0xDE9A60, c, pra_29_4_bridge]
+  - name: pra_31
+    dir: world/area_pra/pra_31
+    type: code
+    start: 0xDEAD50
+    vram: 0x80240000
+    subsegments:
+    - [0xDEAD50, c, pra_31_0_header]
+    - [0xDEAD70, c, pra_31_1_music]
+    - [0xDEAD70, c, pra_31_2_npc]
+    - [0xDEB260, c, pra_31_3_main]
+    - [0xDEB260, c, pra_31_4_puzzle]
+    - [0xDEBE00, c, pra_31_5_texture_1]
+    - [0xDEBE00, c, pra_31_6_texture_2]
+    - [0xDEBE00, c, pra_31_7_texture_3]
+    - [0xDEBE00, c, pra_31_8_stairs_skele]
+    - [0xDEBE00, c, pra_31_9_stairs_anim]
+    - [0xDEBE00, c, pra_31_10_stairs_lights]
+    - [0xDEBE00, c, pra_31_11_stairs_vtx]
+    - [0xDEBE00, .data, pra_31_0_header]
+    - [0xDEBE70, .data, pra_31_1_music]
+    - [0xDEBEB0, .data, pra_31_2_npc]
+    - [0xDECE10, .data, pra_31_3_main]
+    - [0xDED240, .data, pra_31_4_puzzle]
+    - start: 0xDEE260
+      type: .data
+      name: pra_31_5_texture_1
+      subsegments:
+      - [0xDEE260, ci4, texture_1, 64, 64]
+      - [0xDEEA60, palette, texture_1]
+      - [0xDEEA80, gfx, texture_1]
+      - [0xDEEB40]
+    - start: 0xDEEB40
+      type: .data
+      name: pra_31_6_texture_2
+      subsegments:
+      - [0xDEEB40, ci4, texture_2, 64, 64]
+      - [0xDEF340, palette, texture_2]
+      - [0xDEF360, gfx, texture_2]
+      - [0xDEF410]
+    - start: 0xDEF410
+      type: .data
+      name: pra_31_7_texture_3
+      subsegments:
+      - [0xDEF410, rgba16, texture_3, 32, 32]
+      - [0xDEFC10, gfx, texture_3]
+      - [0xDEFCA0]
+    - start: 0xDEFCA0
+      type: .data
+      name: pra_31_8_stairs_skele
+      subsegments:
+      - [0xDEFCA0, gfx, unk_01]
+      - [0xDEFD18, gfx, unk_02]
+      - [0xDEFD50, gfx, unk_03]
+      - [0xDEFDB8, gfx, unk_04]
+      - [0xDEFDF0, gfx, unk_05]
+      - [0xDEFE68, gfx, unk_06]
+      - [0xDEFEA0, gfx, unk_07]
+      - [0xDEFF18, gfx, unk_08]
+      - [0xDEFF50, gfx, unk_09]
+      - [0xDEFFB8, gfx, unk_10]
+      - [0xDEFFF0, gfx, unk_11]
+      - [0xDF0068, gfx, unk_12]
+      - [0xDF00A0, gfx, unk_13]
+      - [0xDF0118, gfx, unk_14]
+      - [0xDF0150, gfx, unk_15]
+      - [0xDF01B8, gfx, unk_16]
+      - [0xDF01F0, gfx, unk_17]
+      - [0xDF0268, gfx, unk_18]
+      - [0xDF02A0, gfx, unk_19]
+      - [0xDF0318, gfx, unk_20]
+      - [0xDF0350, gfx, unk_21]
+      - [0xDF03B8, gfx, unk_22]
+      - [0xDF03F0, gfx, unk_23]
+      - [0xDF0468, gfx, unk_24]
+      - [0xDF04A0, gfx, unk_25]
+      - [0xDF0518, gfx, unk_26]
+      - [0xDF0550, gfx, unk_27]
+      - [0xDF05B8, gfx, unk_28]
+      - [0xDF0618, gfx, unk_29]
+      - [0xDF0680, gfx, unk_30]
+      - [0xDF06C8, gfx, unk_31]
+      - [0xDF0758, gfx, unk_32]
+      - [0xDF0780, gfx, unk_33]
+      - [0xDF07A8, gfx, unk_34]
+      - [0xDF07D0]
+    - [0xDF0E80, .data, pra_31_9_stairs_anim]
+    - [0xDF2470, .data, pra_31_10_stairs_lights]
+    - start: 0xDF2490
+      type: .data
+      name: pra_31_11_stairs_vtx
+      subsegments:
+      - [0xDF2490]
+      - [0xDF2810, vtx, stairs]
+      - [0xDF29D0]
+    - [0xDF29D0]
+  - name: pra_32
+    dir: world/area_pra/pra_32
+    type: code
+    start: 0xDF29F0
+    vram: 0x80240000
+    subsegments:
+    - [0xDF29F0, c, pra_32_0_header]
+    - [0xDF2A10, c, pra_32_1_music]
+    - [0xDF2A10, c, pra_32_2_main]
+    - [0xDF3230, c, pra_32_3_npc]
+  - name: pra_33
+    dir: world/area_pra/pra_33
+    type: code
+    start: 0xDF56D0
+    vram: 0x80240000
+    subsegments:
+    - [0xDF56D0, c, pra_33_0_header]
+    - [0xDF56F0, c, pra_33_1_music]
+    - [0xDF56F0, c, pra_33_2_main]
+    - [0xDF65F0, c, pra_33_3_entity]
+  - name: pra_34
+    dir: world/area_pra/pra_34
+    type: code
+    start: 0xDF73A0
+    vram: 0x80240000
+    subsegments:
+    - [0xDF73A0, c, pra_34_0_header]
+    - [0xDF73C0, c, pra_34_1_music]
+    - [0xDF73C0, c, pra_34_2_main]
+    - [0xDF83A0, c, pra_34_3_entity]
+  - name: pra_35
+    dir: world/area_pra/pra_35
+    type: code
+    start: 0xDF9240
+    vram: 0x80240000
+    subsegments:
+    - [0xDF9240, c, pra_35_0_header]
+    - [0xDF9260, c, pra_35_1_music]
+    - [0xDF9260, c, pra_35_2_main]
+    - [0xDFA160, c, pra_35_3_npc]
+    - [0xDFBB90, c, pra_35_4_entity]
+  - name: pra_36
+    dir: world/area_pra/pra_36
+    type: code
+    start: 0xDFD6F0
+    vram: 0x80240000
+    subsegments:
+    - [0xDFD6F0, c, pra_36_0_header]
+    - [0xDFD6F0, c, pra_36_1_music]
+    - [0xDFD6F0, c, pra_36_2_main]
+    - [0xDFE640, c, pra_36_3_npc]
+  - name: pra_37
+    dir: world/area_pra/pra_37
+    type: code
+    start: 0xDFEF30
+    vram: 0x80240000
+    subsegments:
+    - [0xDFEF30, c, pra_37_0_header]
+    - [0xDFEF30, c, pra_37_1_music]
+    - [0xDFEF30, c, pra_37_2_main]
+    - [0xDFFE80, c, pra_37_3_npc]
+  - name: pra_38
+    dir: world/area_pra/pra_38
+    type: code
+    start: 0xE015E0
+    vram: 0x80240000
+    subsegments:
+    - [0xE015E0, c, pra_38_0_header]
+    - [0xE015E0, c, pra_38_1_music]
+    - [0xE015E0, c, pra_38_2_main]
+    - [0xE02530, c, pra_38_3_npc]
+  - name: pra_39
+    dir: world/area_pra/pra_39
+    type: code
+    start: 0xE03880
+    vram: 0x80240000
+    subsegments:
+    - [0xE03880, c, pra_39_0_header]
+    - [0xE03880, c, pra_39_1_music]
+    - [0xE03880, c, pra_39_2_main]
+    - [0xE047D0, c, pra_39_3_npc]
+  - name: pra_40
+    dir: world/area_pra/pra_40
+    type: code
+    start: 0xE059A0
+    vram: 0x80240000
+    subsegments:
+    - [0xE059A0, c, pra_40_0_header]
+    - [0xE059C0, c, pra_40_1_music]
+    - [0xE059C0, c, pra_40_2_main]
+    - [0xE068C0, c, pra_40_3_entity]
+  - name: omo_01
+    dir: world/area_omo/omo_01
+    type: code
+    start: 0xE06EE0
+    vram: 0x80240000
+    subsegments:
+    - [0xE06EE0, c, omo_01_0_header]
+    - [0xE06EE0, c, omo_01_1_music]
+    - [0xE06EE0, c, omo_01_2_main]
+    - [0xE06EE0, c, omo_01_3_gizmos]
+    - [0xE07140, c, omo_01_4_npc]
+    - [0xE07B10, c, omo_01_5_entity]
+  - name: omo_02
+    dir: world/area_omo/omo_02
+    type: code
+    start: 0xE094C0
+    vram: 0x80240000
+    subsegments:
+    - [0xE094C0, c, omo_02_0_header]
+    - [0xE094C0, c, omo_02_1_music]
+    - [0xE094C0, c, omo_02_2_main]
+    - [0xE094C0, c, omo_02_3_entity]
+    - [0xE09500, c, omo_02_4_gizmos]
+    - [0xE09780, c, omo_02_5_barricade]
+    - [0xE09E30, c, omo_02_6_npc]
+  - name: omo_03
+    dir: world/area_omo/omo_03
+    type: code
+    start: 0xE11230
+    vram: 0x80240000
+    subsegments:
+    - [0xE11230, c, omo_03_0_header]
+    - [0xE11230, c, omo_03_1_music]
+    - [0xE11230, c, omo_03_2_main]
+    - [0xE11230, c, omo_03_3_gizmos]
+    - [0xE11230, c, omo_03_4_entity]
+    - [0xE11250, c, omo_03_5_npc]
+    - [0xE11250, c, omo_03_6_train]
+    - [0xE11AC0, c, omo_03_7_train_drop]
+    - [0xE11AC0, c, omo_03_8_epilogue]
+  - name: omo_04
+    dir: world/area_omo/omo_04
+    type: code
+    start: 0xE194A0
+    vram: 0x80240000
+    subsegments:
+    - [0xE194A0, c, omo_04_0_header]
+    - [0xE194A0, c, omo_04_1_music]
+    - [0xE194A0, c, omo_04_2_main]
+    - [0xE194A0, c, omo_04_3_gizmos]
+    - [0xE194A0, c, omo_04_4_entity]
+    - [0xE19840, c, omo_04_5_npc]
+    - [0xE1B2E0, c, omo_04_6_scenes]
+  - name: omo_05
+    dir: world/area_omo/omo_05
+    type: code
+    start: 0xE1E360
+    vram: 0x80240000
+    subsegments:
+    - [0xE1E360, c, omo_05_0_header]
+    - [0xE1E360, c, omo_05_1_music]
+    - [0xE1E360, c, omo_05_2_main]
+    - [0xE1E360, c, omo_05_3_gizmos]
+    - [0xE1E360, c, omo_05_4_npc]
+    - [0xE20760, c, omo_05_5_entity]
+  - name: omo_06
+    dir: world/area_omo/omo_06
+    type: code
+    start: 0xE239B0
+    vram: 0x80240000
+    subsegments:
+    - [0xE239B0, c, omo_06_0_header]
+    - [0xE239B0, c, omo_06_1_music]
+    - [0xE239B0, c, omo_06_2_main]
+    - [0xE239B0, c, omo_06_3_gizmos]
+    - [0xE239B0, c, omo_06_4_train]
+    - [0xE24220, c, omo_06_5_npc]
+    - [0xE24220, c, omo_06_6_entity]
+  - name: omo_07
+    dir: world/area_omo/omo_07
+    type: code
+    start: 0xE29410
+    vram: 0x80240000
+    subsegments:
+    - [0xE29410, c, omo_07_0_header]
+    - [0xE29410, c, omo_07_1_music]
+    - [0xE29410, c, omo_07_2_main]
+    - [0xE29410, c, omo_07_3_gizmos]
+    - [0xE29410, c, omo_07_4_npc]
+    - [0xE2C330, c, omo_07_5_entity]
+    - [0xE2C630, c, omo_07_6_scenes]
+  - name: omo_08
+    dir: world/area_omo/omo_08
+    type: code
+    start: 0xE30530
+    vram: 0x80240000
+    subsegments:
+    - [0xE30530, c, omo_08_0_header]
+    - [0xE30530, c, omo_08_1_music]
+    - [0xE30530, c, omo_08_2_main]
+    - [0xE30530, c, omo_08_3_boxes]
+    - [0xE30530, c, omo_08_4_train]
+    - [0xE30DA0, c, omo_08_5_entity]
+    - [0xE30DA0, c, omo_08_6_npc]
+  - name: omo_09
+    dir: world/area_omo/omo_09
+    type: code
+    start: 0xE38EF0
+    vram: 0x80240000
+    subsegments:
+    - [0xE38EF0, c, omo_09_0_header]
+    - [0xE38EF0, c, omo_09_1_music]
+    - [0xE38EF0, c, omo_09_2_main]
+    - [0xE38EF0, c, omo_09_3_conveyors]
+    - [0xE391C0, c, omo_09_4_slot_machine]
+    - [0xE395D0, c, omo_09_5_gizmos]
+    - [0xE39610, c, omo_09_6_entity]
+    - [0xE398D0, c, omo_09_7_npc]
+    - [0xE3C500, c, omo_09_8_scenes]
+  - name: omo_10
+    dir: world/area_omo/omo_10
+    type: code
+    start: 0xE43C30
+    vram: 0x80240000
+    subsegments:
+    - [0xE43C30, c, omo_10_0_header]
+    - [0xE43C30, c, omo_10_1_music]
+    - [0xE43C30, c, omo_10_2_main]
+    - [0xE43C30, c, omo_10_3_gizmos]
+    - [0xE43C30, c, omo_10_4_train]
+    - [0xE444A0, c, omo_10_5_npc]
+    - [0xE444A0, c, omo_10_6_entity]
+  - name: omo_11
+    dir: world/area_omo/omo_11
+    type: code
+    start: 0xE48B60
+    vram: 0x80240000
+    subsegments:
+    - [0xE48B60, c, omo_11_0_header]
+    - [0xE48B60, c, omo_11_1_music]
+    - [0xE48B60, c, omo_11_2_main]
+    - [0xE48B60, c, omo_11_3_gizmos]
+    - [0xE492F0, c, omo_11_4_entity]
+    - [0xE4A030, c, omo_11_5_npc]
+  - name: omo_12
+    dir: world/area_omo/omo_12
+    type: code
+    start: 0xE4B640
+    vram: 0x80240000
+    subsegments:
+    - [0xE4B640, c, omo_12_0_header]
+    - [0xE4B640, c, omo_12_1_music]
+    - [0xE4B640, c, omo_12_2_main]
+    - [0xE4B640, c, omo_12_3_npc]
+    - [0xE4BA60, c, omo_12_4_new_partner]
+  - name: omo_13
+    dir: world/area_omo/omo_13
+    type: code
+    start: 0xE4E7C0
+    vram: 0x80240000
+    subsegments:
+    - [0xE4E7C0, c, omo_13_0_header]
+    - [0xE4E7C0, c, omo_13_1_music]
+    - [0xE4E7C0, c, omo_13_2_main]
+    - [0xE4E7C0, c, omo_13_3_gizmos]
+    - [0xE4EA40, c, omo_13_4_npc]
+    - [0xE4F9F0, c, omo_13_5_entity]
+  - name: omo_14
+    dir: world/area_omo/omo_14
+    type: code
+    start: 0xE519E0
+    vram: 0x80240000
+    subsegments:
+    - [0xE519E0, c, omo_14_0_header]
+    - [0xE519E0, c, omo_14_1_music]
+    - [0xE519E0, c, omo_14_2_main]
+    - [0xE51B40, c, omo_14_3_npc]
+  - name: omo_15
+    dir: world/area_omo/omo_15
+    type: code
+    start: 0xE54AA0
+    vram: 0x80240000
+    subsegments:
+    - [0xE54AA0, c, omo_15_0_header]
+    - [0xE54AA0, c, omo_15_1_music]
+    - [0xE54AA0, c, omo_15_2_main]
+    - [0xE552A0, c, omo_15_3_npc]
+  - name: omo_16
+    dir: world/area_omo/omo_16
+    type: code
+    start: 0xE58200
+    vram: 0x80240000
+    subsegments:
+    - [0xE58200, c, omo_16_0_header]
+    - [0xE58200, c, omo_16_1_main]
+    - [0xE58200, c, omo_16_2_train]
+    - [0xE58800, c, omo_16_3_npc]
+  - name: omo_17
+    dir: world/area_omo/omo_17
+    type: code
+    start: 0xE5B1D0
+    vram: 0x80240000
+    subsegments:
+    - [0xE5B1D0, c, omo_17_0_header]
+    - [0xE5B1D0, c, omo_17_1_main]
+    - [0xE5B1D0, c, omo_17_2_gizmos]
+    - [0xE5B1D0, c, omo_17_3_train]
+    - [0xE5B730, c, omo_17_4_npc]
+    - [0xE5E8E0, c, omo_17_5_entity]
+  - name: end_00
+    dir: world/area_end/end_00
+    type: code
+    start: 0xE62D30
+    vram: 0x80240000
+    subsegments:
+    - [0xE62D30, c, end_00_0_header]
+    - [0xE62D50, c, end_00_1_main]
+    - [0xE62D50, c, end_00_2_credits]
+    - [0xE653B0, c, end_00_3_parade_setup]
+    - [0xE65630, c, end_00_4_allies]
+    - [0xE65630, c, end_00_5_koopas]
+    - [0xE65840, c, end_00_6_caravan]
+    - [0xE65840, c, end_00_7_boos]
+    - [0xE65870, c, end_00_8_yoshis]
+    - [0xE65870, c, end_00_9_huff_n_puff]
+    - [0xE65870, c, end_00_A_crystal_king]
+    - [0xE65870, c, end_00_B_bowser]
+  - name: end_01
+    dir: world/area_end/end_01
+    type: code
+    start: 0xE71930
+    vram: 0x80240000
+    subsegments:
+    - [0xE71930, c, end_01_0_header]
+    - [0xE71940, c, end_01_1_main]
+    - [0xE71960, c, end_01_2_credits]
+    - [0xE73FC0, c, end_01_3_parade_setup]
+    - [0xE741F0, c, end_01_4_opera_float]
+    - [0xE74620, c, end_01_5_flower_float]
+    - [0xE74620, c, end_01_6_shyguy_float]
+    - [0xE74920, c, end_01_7_peach_float]
+  - name: mgm_00
+    dir: world/area_mgm/mgm_00
+    type: code
+    start: 0xE7AE20
+    vram: 0x80240000
+    subsegments:
+    - [0xE7AE20, c, mgm_00_0_header]
+    - [0xE7AE20, c, mgm_00_1_main]
+    - [0xE7B100, c, mgm_00_2_npc]
+    - [0xE7C000, c, mgm_00_3_scoreboard]
+  - name: mgm_01
+    dir: world/area_mgm/mgm_01
+    type: code
+    start: 0xE7F190
+    vram: 0x80240000
+    subsegments:
+    - [0xE7F190, c, mgm_01_0_header]
+    - [0xE7F190, c, mgm_01_1_main]
+    - [0xE7F360, c, mgm_01_2_npc]
+    - [0xE80940, c, mgm_01_3_entity]
+    - [0xE80940, c, mgm_01_4_images]
+    - [0xE80940, .data, mgm_01_0_header]
+    - [0xE80990, .data, mgm_01_1_main]
+    - [0xE80C00, .data, mgm_01_2_npc]
+    - [0xE81E10, .data, mgm_01_3_entity]
+    - start: 0xE81EB0
+      type: .data
+      name: mgm_01_4_images
+      subsegments:
+      - [0xE81EB0, ci4, panel_1_coin, 32, 32]
+      - [0xE820B0, palette, panel_1_coin]
+      - [0xE820D0, ci4, panel_5_coins, 32, 32]
+      - [0xE822D0, palette, panel_5_coins]
+      - [0xE822F0, ci4, panel_times_5, 32, 32]
+      - [0xE824F0, palette, panel_times_5]
+      - [0xE82510, ci4, panel_bowser, 32, 32]
+      - [0xE82710, palette, panel_bowser]
+      - [0xE82730]
+  - name: mgm_02
+    dir: world/area_mgm/mgm_02
+    type: code
+    start: 0xE827F0
+    vram: 0x80240000
+    subsegments:
+    - [0xE827F0, c, mgm_02_0_header]
+    - [0xE827F0, c, mgm_02_1_main]
+    - [0xE827F0, c, mgm_02_2_npc]
+    - [0xE84BF0, c, mgm_02_3_images]
+    - [0xE84C20, .data, mgm_02_0_header]
+    - [0xE84C70, .data, mgm_02_1_main]
+    - [0xE84E70, .data, mgm_02_2_npc]
+    - start: 0xE8AB70
+      type: .data
+      name: mgm_02_3_images
+      subsegments:
+      - [0xE8AB70, ci4, panel_peach, 32, 32]
+      - [0xE8AD70, palette, panel_peach]
+      - [0xE8AD90]
+  - name: mgm_03
+    dir: world/area_mgm/mgm_03
+    type: code
+    start: 0xE8AED0
+    vram: 0x80240000
+    subsegments:
+    - [0xE8AED0, c, mgm_03_0_header]
+    - [0xE8AED0, c, mgm_03_1_main]
+  - name: gv_01
+    dir: world/area_gv/gv_01
+    type: code
+    start: 0xE8AFB0
+    vram: 0x80240000
+    subsegments:
+    - [0xE8AFB0, c, gv_01_0_header]
+    - [0xE8AFB0, c, gv_01_1_main]
 
-  - [0xC490B0, bin]
+  - [0xE8D120, bin]
 
   - start: 0x1e937b8
     align: 8

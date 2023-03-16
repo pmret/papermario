@@ -201,7 +201,7 @@ void entity_Tweester_move(Entity* entity) {
 
 void entity_Tweester_idle(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     PlayerData* playerData = &gPlayerData;
     TweesterData* data = entity->dataBuf.tweester;
     f32 delta;
@@ -265,7 +265,7 @@ void entity_Tweester_idle(Entity* entity) {
 
     entity->rotation.y = -gCameras[CAM_DEFAULT].currentYaw;
 
-    if (partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE || partnerActionStatus->actingPartner != PARTNER_BOW) {
+    if (partnerStatus->partnerActionState == PARTNER_ACTION_NONE || partnerStatus->actingPartner != PARTNER_BOW) {
         if (playerStatus->actionState == ACTION_STATE_USE_TWEESTER) {
             Npc* npc = npc_find_closest_simple(entity->position.x, entity->position.y, entity->position.z, 50.0f);
             if (npc != NULL && (npc->flags & NPC_FLAG_PARTNER)) {

@@ -2,6 +2,7 @@
 #include "ld_addrs.h"
 #include "world/actions.h"
 #include "sprite.h"
+#include "world/partner/watt.h"
 
 #ifdef SHIFT
 #define inspect_icon_VRAM_DEF inspect_icon_VRAM
@@ -781,12 +782,12 @@ void player_reset_data(void) {
 }
 
 s32 func_800DFCF4(void) {
-    if (gPartnerActionStatus.partnerActionState == PARTNER_ACTION_USE &&
-        (gPartnerActionStatus.actingPartner == PARTNER_WATT
-        || gPartnerActionStatus.actingPartner == PARTNER_BOW
-        || gPartnerActionStatus.actingPartner == PARTNER_SUSHIE
-        || gPartnerActionStatus.actingPartner == PARTNER_PARAKARRY
-        || gPartnerActionStatus.actingPartner == PARTNER_LAKILESTER)) {
+    if (gPartnerStatus.partnerActionState == PARTNER_ACTION_USE &&
+        (gPartnerStatus.actingPartner == PARTNER_WATT
+        || gPartnerStatus.actingPartner == PARTNER_BOW
+        || gPartnerStatus.actingPartner == PARTNER_SUSHIE
+        || gPartnerStatus.actingPartner == PARTNER_PARAKARRY
+        || gPartnerStatus.actingPartner == PARTNER_LAKILESTER)) {
         return FALSE;
     }
     return TRUE;
@@ -794,7 +795,7 @@ s32 func_800DFCF4(void) {
 
 s32 get_overriding_player_anim(s32 anim) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
 
     if (playerStatus->actionState == ACTION_STATE_USE_SPINNING_FLOWER
         && anim != ANIM_Mario1_Flail
@@ -803,13 +804,13 @@ s32 get_overriding_player_anim(s32 anim) {
         return -1;
     }
 
-    if (partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE) {
-        if (partnerActionStatus->actingPartner == PARTNER_LAKILESTER && anim == ANIM_Mario1_Idle) {
+    if (partnerStatus->partnerActionState != PARTNER_ACTION_NONE) {
+        if (partnerStatus->actingPartner == PARTNER_LAKILESTER && anim == ANIM_Mario1_Idle) {
             anim = ANIM_MarioW2_RideLaki;
         }
 
-        if (partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE
-            && partnerActionStatus->actingPartner == PARTNER_BOW
+        if (partnerStatus->partnerActionState != PARTNER_ACTION_NONE
+            && partnerStatus->actingPartner == PARTNER_BOW
             && anim != ANIM_Mario1_Crouch
             && anim != ANIM_Mario1_Idle
         ) {
@@ -817,7 +818,7 @@ s32 get_overriding_player_anim(s32 anim) {
         }
     }
 
-    if (anim == ANIM_Mario1_ThumbsUp && partnerActionStatus->partnerActionState == PARTNER_ACTION_USE) {
+    if (anim == ANIM_Mario1_ThumbsUp && partnerStatus->partnerActionState == PARTNER_ACTION_USE) {
         return -1;
     }
 
@@ -882,8 +883,8 @@ void update_player_blink(void) {
     u8 phi_v1;
     u8* alpha;
 
-    if (gPartnerActionStatus.actingPartner == PARTNER_BOW) {
-        outtaSight = gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE;
+    if (gPartnerStatus.actingPartner == PARTNER_BOW) {
+        outtaSight = gPartnerStatus.partnerActionState != PARTNER_ACTION_NONE;
     }
 
     if (playerStatus->blinkTimer > 0) {
@@ -977,7 +978,7 @@ s32 game_scripts_disabled(void) {
     s32 ret = FALSE;
 
     if (gGameStatusPtr->disableScripts && (gGameStatusPtr->currentButtons[0] & BUTTON_R)) {
-        if (gPartnerActionStatus.partnerActionState == PARTNER_ACTION_NONE) {
+        if (gPartnerStatus.partnerActionState == PARTNER_ACTION_NONE) {
             set_action_state(ACTION_STATE_IDLE);
         }
         ret = TRUE;
@@ -1042,7 +1043,7 @@ void check_for_pulse_stone(void) {
             return;
         }
 
-        if (gPlayerStatus.flags & PS_FLAG_PAUSED || gPlayerStatus.inputDisabledCount) {
+        if (gPlayerStatus.flags & PS_FLAG_PAUSED || gPlayerStatus.inputDisabledCount != 0) {
             return;
         }
 
@@ -1127,7 +1128,7 @@ s32 func_800E06D8(void) {
     s32 interactingID = playerStatus->interactingWithID;
     s32 currentWall;
 
-    if (playerStatus->timeInAir != 0 || playerStatus->inputDisabledCount) {
+    if (playerStatus->timeInAir != 0 || playerStatus->inputDisabledCount != 0) {
         return FALSE;
     }
     if (gCollisionStatus.currentWall == NO_COLLIDER) {

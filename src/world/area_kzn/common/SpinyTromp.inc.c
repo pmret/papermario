@@ -7,8 +7,8 @@ API_CALLABLE(N(SpinyTrompHit)) {
 }
 
 API_CALLABLE(N(SpinyTromp_GetActingPartner)) {
-    if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) {
-        script->varTable[0] = gPartnerActionStatus.actingPartner;
+    if (gPartnerStatus.partnerActionState != PARTNER_ACTION_NONE) {
+        script->varTable[0] = gPartnerStatus.actingPartner;
     } else {
         script->varTable[0] = -1;
     }

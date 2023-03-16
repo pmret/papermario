@@ -44,6 +44,115 @@ EvtScript N(EVS_DropLastLetter) = {
     //@bug not terminated!
 };
 
+#if VERSION_PAL
+// TODO: define MODEL_ constants for PAL version of gv_01 map
+
+EvtScript N(EVS_E8C6F8) = {
+    EVT_CALL(EnableGroup, 20, 0)
+    EVT_CALL(EnableGroup, 22, 0)
+    EVT_CALL(EnableGroup, 24, 0)
+    EVT_CALL(EnableGroup, 26, 0)
+    EVT_CALL(EnableGroup, 28, 0)
+    EVT_CALL(EnableGroup, 30, 0)
+    EVT_CALL(EnableGroup, 32, 0)
+    EVT_CALL(EnableGroup, 34, 0)
+    EVT_CALL(EnableGroup, 36, 0)
+    EVT_CALL(EnableGroup, 38, 0)
+    EVT_CALL(EnableGroup, 40, 0)
+    EVT_CALL(TranslateGroup, 4, 0, 200, 0)
+    EVT_CALL(TranslateGroup, 6, 0, 200, 0)
+    EVT_CALL(TranslateGroup, 8, 0, 200, 0)
+    EVT_CALL(TranslateGroup, 10, 0, 200, 0)
+    EVT_CALL(TranslateGroup, 12, 0, 200, 0)
+    EVT_CALL(TranslateGroup, 14, 0, 200, 0)
+    EVT_CALL(TranslateGroup, 16, 0, 200, 0)
+    EVT_CALL(TranslateGroup, 18, 0, 200, 0)
+    EVT_WAIT(5)
+    EVT_SET(LVar0, 4)
+    EVT_EXEC(N(EVS_DropLetter))
+    EVT_WAIT(5)
+    EVT_SET(LVar0, 6)
+    EVT_EXEC(N(EVS_DropLetter))
+    EVT_WAIT(10)
+    EVT_SET(LVar0, 8)
+    EVT_EXEC(N(EVS_DropLetter))
+    EVT_WAIT(5)
+    EVT_SET(LVar0, 10)
+    EVT_EXEC(N(EVS_DropLetter))
+    EVT_WAIT(5)
+    EVT_SET(LVar0, 12)
+    EVT_EXEC(N(EVS_DropLetter))
+    EVT_WAIT(5)
+    EVT_SET(LVar0, 14)
+    EVT_EXEC(N(EVS_DropLetter))
+    EVT_WAIT(5)
+    EVT_SET(LVar0, 16)
+    EVT_EXEC(N(EVS_DropLetter))
+    EVT_WAIT(15)
+    EVT_SET(LVar0, 18)
+    EVT_EXEC(N(EVS_DropLastLetter))
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript N(EVS_E8CA04) = {
+    EVT_CALL(EnableGroup, 4, 0)
+    EVT_CALL(EnableGroup, 6, 0)
+    EVT_CALL(EnableGroup, 8, 0)
+    EVT_CALL(EnableGroup, 10, 0)
+    EVT_CALL(EnableGroup, 12, 0)
+    EVT_CALL(EnableGroup, 14, 0)
+    EVT_CALL(EnableGroup, 16, 0)
+    EVT_CALL(EnableGroup, 18, 0)
+    EVT_CALL(TranslateGroup, 20, 0, 200, 0)
+    EVT_CALL(TranslateGroup, 22, 0, 200, 0)
+    EVT_CALL(TranslateGroup, 24, 0, 200, 0)
+    EVT_CALL(TranslateGroup, 26, 0, 200, 0)
+    EVT_CALL(TranslateGroup, 28, 0, 200, 0)
+    EVT_CALL(TranslateGroup, 30, 0, 200, 0)
+    EVT_CALL(TranslateGroup, 32, 0, 200, 0)
+    EVT_CALL(TranslateGroup, 34, 0, 200, 0)
+    EVT_CALL(TranslateGroup, 36, 0, 200, 0)
+    EVT_CALL(TranslateGroup, 38, 0, 200, 0)
+    EVT_CALL(TranslateGroup, 40, 0, 200, 0)
+    EVT_WAIT(5)
+    EVT_SET(LVar0, 20)
+    EVT_EXEC(N(EVS_DropLetter))
+    EVT_WAIT(4)
+    EVT_SET(LVar0, 22)
+    EVT_EXEC(N(EVS_DropLetter))
+    EVT_WAIT(7)
+    EVT_SET(LVar0, 24)
+    EVT_EXEC(N(EVS_DropLetter))
+    EVT_WAIT(4)
+    EVT_SET(LVar0, 26)
+    EVT_EXEC(N(EVS_DropLetter))
+    EVT_WAIT(4)
+    EVT_SET(LVar0, 28)
+    EVT_EXEC(N(EVS_DropLetter))
+    EVT_WAIT(4)
+    EVT_SET(LVar0, 30)
+    EVT_EXEC(N(EVS_DropLetter))
+    EVT_WAIT(7)
+    EVT_SET(LVar0, 32)
+    EVT_EXEC(N(EVS_DropLetter))
+    EVT_WAIT(4)
+    EVT_SET(LVar0, 34)
+    EVT_EXEC(N(EVS_DropLetter))
+    EVT_WAIT(4)
+    EVT_SET(LVar0, 36)
+    EVT_EXEC(N(EVS_DropLetter))
+    EVT_WAIT(4)
+    EVT_SET(LVar0, 38)
+    EVT_EXEC(N(EVS_DropLetter))
+    EVT_WAIT(12)
+    EVT_SET(LVar0, 40)
+    EVT_EXEC(N(EVS_DropLastLetter))
+    EVT_RETURN
+    EVT_END
+};
+#endif
+
 EvtScript N(EVS_Main) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(ModifyGlobalOverrideFlags, 0, GLOBAL_OVERRIDES_20000)
@@ -75,12 +184,20 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(SetMusicTrack, 0, SONG_GAME_OVER, 0, 8)
     EVT_CALL(ClearAmbientSounds, 0)
     EVT_THREAD
-        EVT_WAIT(200)
+        EVT_WAIT(200 * DT)
         EVT_CALL(N(FadeToTitleScreen))
         EVT_CALL(N(ChangeStateToTitleScreen))
-        EVT_WAIT(100)
+        EVT_WAIT(100 * DT)
     EVT_END_THREAD
     EVT_CALL(SetMotionBlurParams, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 128, 10)
+#if VERSION_PAL
+    EVT_CALL(GetLanguage, LVar0)
+    EVT_IF_EQ(LVar0, 3)
+        EVT_EXEC(N(EVS_E8CA04))
+    EVT_ELSE
+        EVT_EXEC(N(EVS_E8C6F8))
+    EVT_END_IF
+#else
     EVT_CALL(TranslateGroup, MODEL_g,  0, 200, 0)
     EVT_CALL(TranslateGroup, MODEL_a,  0, 200, 0)
     EVT_CALL(TranslateGroup, MODEL_m,  0, 200, 0)
@@ -131,6 +248,7 @@ EvtScript N(EVS_Main) = {
         EVT_EXEC(N(EVS_DropLastLetter))
 #endif
     EVT_END_THREAD
+#endif
     EVT_THREAD
         EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 0, 10, 0)
         EVT_CALL(SetPanTarget, CAM_DEFAULT, 0, 0, 0)
@@ -150,7 +268,7 @@ API_CALLABLE(N(FadeToTitleScreen)) {
         set_curtain_fade(0);
     }
 
-    script->functionTemp[0] += 5;
+    script->functionTemp[0] += (s32)(5 / DT);
     if (script->functionTemp[0] > 255) {
         script->functionTemp[0] = 255;
     }
@@ -165,7 +283,7 @@ API_CALLABLE(N(ChangeStateToTitleScreen)) {
     gGameStatusPtr->isBattle = FALSE;
     gGameStatusPtr->unk_76 = 0;
     gGameStatusPtr->disableScripts = 0;
-    gGameStatusPtr->keepUsingPartnerOnMapChange = 0;
+    gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
     gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
     general_heap_create();
     clear_render_tasks();

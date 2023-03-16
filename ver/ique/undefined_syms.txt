@@ -794,7 +794,7 @@ HES_MoveDiamondDisabled = 0x801077b8;
 HES_MoveDiamond = 0x80107718;
 npc_test_move_simple_with_slipping = 0x800dc024;
 SetNpcPos = 0x802cdcb0;
-gPartnerActionStatus = 0x8010cf90;
+gPartnerStatus = 0x8010cf90;
 SetNpcAnimation = 0x802ce0f4;
 GetNpcPos = 0x802cf0f4;
 partner_reset_data = 0x800e9854;
@@ -901,7 +901,7 @@ D_800A08E8 = 0x8009d2f8;
 D_800A08EC = 0x8009d2fc;
 gNpcPlayerCollisionsEnabled = 0x8009d5a4;
 wPartnerNpc = 0x8010ad10;
-gPartnerActionStatus = 0x8010cf90;
+gPartnerStatus = 0x8010cf90;
 gPlayerStatus = 0x8010d3a8;
 
 D_801A6000 = 0x801a6000;

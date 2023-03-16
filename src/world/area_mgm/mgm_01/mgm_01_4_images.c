@@ -50,3 +50,8 @@ MessageImageData N(MsgImgs_Panels)[] = {
         .bitDepth = G_IM_SIZ_4b,
     }
 };
+
+API_CALLABLE(N(SetMsgImgs_Panels)) {
+    set_message_images(N(MsgImgs_Panels));
+    return ApiStatus_DONE2;
+}

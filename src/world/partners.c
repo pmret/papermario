@@ -153,14 +153,7 @@ HudScript* SPStarHudScripts[] = { &HES_StatusStar1, &HES_StatusStar3, &HES_Statu
     &HES_StatusStar5, &HES_StatusStar6, &HES_StatusStar7
 };
 
-// TODO: make array when update_status_menu is decompiled
-s32 D_800F7FE8 = -1;
-s32 D_800F7FEC = 1;
-s32 D_800F7FF0 = 2;
-s32 D_800F7FF4 = 4;
-s32 D_800F7FF8 = 5;
-s32 D_800F7FFC = 7;
-s32 D_800F8000[] = { 8, 0, 0, 0 };
+s32 StatusMenuSPIncrementOffsets[] = { -1, 1, 2, 4, 5, 7, 8, 0, 0, 0 };
 UseItemStruct UseItemDmaArgs = {
     world_use_item_ROM_START,
     world_use_item_ROM_END,
@@ -269,7 +262,7 @@ WorldPartner wPartners[] = {
         .canPlayerPause = world_partner_can_player_pause_default,
         .preBattle = world_watt_pre_battle,
         .postBattle = world_watt_post_battle,
-        .whileRiding = &EVS_WorldWatt_Riding,
+        .onEnterMap = &EVS_WorldWatt_EnterMap,
     },
     [PARTNER_SUSHIE] {
         .dmaStart = &world_partner_sushie_ROM_START,
@@ -285,7 +278,7 @@ WorldPartner wPartners[] = {
         .canPlayerPause = world_partner_can_player_pause_default,
         .preBattle = world_sushie_pre_battle,
         .postBattle = world_sushie_post_battle,
-        .whileRiding = &EVS_WorldSushie_Riding,
+        .onEnterMap = &EVS_WorldSushie_EnterMap,
     },
     [PARTNER_LAKILESTER] {
         .dmaStart = &world_partner_lakilester_ROM_START,
@@ -301,7 +294,7 @@ WorldPartner wPartners[] = {
         .canPlayerPause = world_partner_can_player_pause_default,
         .preBattle = world_lakilester_pre_battle,
         .postBattle = world_lakilester_post_battle,
-        .whileRiding = &evs_worldlakilester_riding,
+        .onEnterMap = &EVS_WorldLakilester_EnterMap,
     },
     [PARTNER_BOW] {
         .dmaStart = &world_partner_bow_ROM_START,
@@ -530,7 +523,7 @@ s32 func_800EA4B0(s32 collisionID) {
 }
 
 s32 partner_is_idle(Npc* partner) {
-    return gPartnerActionStatus.partnerActionState == PARTNER_ACTION_NONE;
+    return gPartnerStatus.partnerActionState == PARTNER_ACTION_NONE;
 }
 
 s32 world_partner_can_player_pause_default(Npc* partner) {
@@ -546,20 +539,25 @@ s32 func_800EA52C(s32 partnerID) {
         return FALSE;
     }
 
-    if (playerActionState == ACTION_STATE_IDLE || playerActionState == ACTION_STATE_WALK || playerActionState == ACTION_STATE_RUN) {
+    // any partner
+    if (playerActionState == ACTION_STATE_IDLE
+     || playerActionState == ACTION_STATE_WALK
+     || playerActionState == ACTION_STATE_RUN
+    ) {
         ret = TRUE;
     }
 
+    // check specific partners
     if (partnerID == PARTNER_BOW) {
         if (playerActionState == ACTION_STATE_RIDE) {
             ret = TRUE;
         }
     } else if (partnerID == PARTNER_PARAKARRY) {
-        if ((playerActionState != ACTION_STATE_RIDE) && (playerActionState != ACTION_STATE_IDLE) && (playerActionState != ACTION_STATE_WALK)) {
-            if (playerActionState == ACTION_STATE_RUN) {
-                ret = TRUE;
-            }
-        } else {
+        if (playerActionState == ACTION_STATE_RIDE
+         || playerActionState == ACTION_STATE_IDLE
+         || playerActionState == ACTION_STATE_WALK
+         || playerActionState == ACTION_STATE_RUN
+        ) {
             ret = TRUE;
         }
     }
@@ -624,27 +622,27 @@ void _use_partner_ability(void) {
     static u32 PartnerCommand; // goes into BSS, needs to be static for the function to match
 
     PlayerData* playerData = &gPlayerData;
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (!partnerActionStatus->inputDisabled) {
-        partnerActionStatus->stickX = gGameStatusPtr->stickX[gGameStatusPtr->multiplayerEnabled];
-        partnerActionStatus->stickY = gGameStatusPtr->stickY[gGameStatusPtr->multiplayerEnabled];
-        partnerActionStatus->currentButtons = gGameStatusPtr->currentButtons[gGameStatusPtr->multiplayerEnabled];
-        partnerActionStatus->pressedButtons = gGameStatusPtr->pressedButtons[gGameStatusPtr->multiplayerEnabled];
-        partnerActionStatus->heldButtons = gGameStatusPtr->heldButtons[gGameStatusPtr->multiplayerEnabled];
+    if (partnerStatus->inputDisabledCount == 0) {
+        partnerStatus->stickX = gGameStatusPtr->stickX[gGameStatusPtr->multiplayerEnabled];
+        partnerStatus->stickY = gGameStatusPtr->stickY[gGameStatusPtr->multiplayerEnabled];
+        partnerStatus->currentButtons = gGameStatusPtr->currentButtons[gGameStatusPtr->multiplayerEnabled];
+        partnerStatus->pressedButtons = gGameStatusPtr->pressedButtons[gGameStatusPtr->multiplayerEnabled];
+        partnerStatus->heldButtons = gGameStatusPtr->heldButtons[gGameStatusPtr->multiplayerEnabled];
     } else {
-        partnerActionStatus->stickX = 0;
-        partnerActionStatus->stickY = 0;
-        partnerActionStatus->currentButtons = 0;
-        partnerActionStatus->pressedButtons = 0;
-        partnerActionStatus->heldButtons = 0;
+        partnerStatus->stickX = 0;
+        partnerStatus->stickY = 0;
+        partnerStatus->currentButtons = 0;
+        partnerStatus->pressedButtons = 0;
+        partnerStatus->heldButtons = 0;
     }
 
     if (playerStatus->animFlags & PA_FLAG_INTERRUPT_USE_PARTNER) {
         playerStatus->animFlags &= ~PA_FLAG_INTERRUPT_USE_PARTNER;
-        partnerActionStatus->pressedButtons |= BUTTON_B | BUTTON_C_DOWN;
-        playerStatus->animFlags |= PA_FLAG_PARTNER_USAGE_STOPPED;
+        partnerStatus->pressedButtons |= BUTTON_B | BUTTON_C_DOWN;
+        playerStatus->animFlags |= PA_FLAG_FORCED_PARTNER_ABILITY_END;
     }
 
     if (NextPartnerCommand != PARTNER_CMD_NONE) {
@@ -687,7 +685,7 @@ void _use_partner_ability(void) {
                     sfx_play_sound(SOUND_E);
                     wPartner->init(wPartnerNpc);
                     PartnerCommandState += 1;
-                    // fall through
+                    // fallthrough
                 case 2: // take out new partner
                     wPartnerCurrentScript = start_script(wPartner->takeOut, EVT_PRIORITY_14, EVT_FLAG_RUN_IMMEDIATELY);
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
@@ -729,7 +727,7 @@ void _use_partner_ability(void) {
                     wPartnerNpc->scale.z = 1.0f;
                     wPartner->init(wPartnerNpc);
                     PartnerCommandState += 1;
-                    // fall through
+                    // fallthrough
                 case 2:
                     PartnerCommandState += 1;
                     break;
@@ -782,7 +780,7 @@ void _use_partner_ability(void) {
                     create_partner_npc();
                     wPartner->init(wPartnerNpc);
                     PartnerCommandState += 1;
-                    // fall through
+                    // fallthrough
                 case 1: // take out new partner
                     wPartnerCurrentScript = start_script(wPartner->takeOut, EVT_PRIORITY_14, EVT_FLAG_RUN_IMMEDIATELY);
                     wPartnerCurrentScript->owner2.npc = wPartnerNpc;
@@ -860,12 +858,12 @@ void _use_partner_ability(void) {
                     disable_player_input();
                     wPartner->init(wPartnerNpc);
                     PartnerCommandState += 1;
-                    // fall through
+                    // fallthrough
                 case 1:
                     PartnerCommandState += 1;
                     break;
                 case 2:
-                    if (partnerActionStatus->partnerActionState != 1) {
+                    if (partnerStatus->partnerActionState != 1) {
                         wSavedPartnerPosX = playerStatus->position.x;
                         wSavedPartnerPosY = playerStatus->position.y;
                         wSavedPartnerPosZ = playerStatus->position.z;
@@ -919,13 +917,13 @@ void switch_to_partner(s32 partnerID) {
 
 void partner_init_after_battle(s32 partnerID) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* actionStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
 
     if (wCurrentPartnerId != partnerID) {
         D_8010CFE0 = 1;
         NextPartnerID = partnerID;
-        actionStatus->partnerActionState = 0;
-        actionStatus->partnerAction_unk_1 = FALSE;
+        partnerStatus->partnerActionState = 0;
+        partnerStatus->shouldResumeAbility = FALSE;
 
         if (wCurrentPartnerId != PARTNER_NONE && partnerID != PARTNER_NONE) {
             NextPartnerCommand = PARTNER_CMD_INSTA_SWITCH;
@@ -956,13 +954,13 @@ void func_800EB2A4(s32 partnerID) {
 }
 
 s32 partner_use_ability(void) {
-    PartnerActionStatus* actionStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
 
-    if (!is_starting_conversation() &&
-        wPartner != NULL &&
-        (wPartner->canUseAbility == NULL || wPartner->canUseAbility(wPartnerNpc)))
+    if (!is_starting_conversation()
+        && wPartner != NULL
+        && (wPartner->canUseAbility == NULL || wPartner->canUseAbility(wPartnerNpc)))
     {
-        if (gGameStatusPtr->multiplayerEnabled && (actionStatus->currentButtons & BUTTON_B)) {
+        if (gGameStatusPtr->multiplayerEnabled && (partnerStatus->currentButtons & BUTTON_B)) {
             sfx_play_sound(SOUND_MENU_ERROR);
         } else if (wCurrentPartnerId != PARTNER_NONE) {
             D_8010CFE0 = 1;
@@ -975,7 +973,10 @@ s32 partner_use_ability(void) {
 }
 
 s32 partner_player_can_pause(void) {
-    if (wPartner != NULL && wPartner->canPlayerPause != NULL && !wPartner->canPlayerPause(wPartnerNpc)) {
+    if (wPartner != NULL
+        && wPartner->canPlayerPause != NULL
+        && !wPartner->canPlayerPause(wPartnerNpc)
+    ) {
         return FALSE;
     }
     return TRUE;
@@ -992,16 +993,16 @@ void partner_reset_data(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 currentPartner = gPlayerData.currentPartner;
 
-    mem_clear(&gPartnerActionStatus, sizeof(gPartnerActionStatus));
+    mem_clear(&gPartnerStatus, sizeof(gPartnerStatus));
     get_worker(create_worker_frontUI(_use_partner_ability, NULL));
 
     D_8010CFE0 = 1;
     NextPartnerCommand = PARTNER_CMD_RESET;
     wCurrentPartnerId = currentPartner;
 
-    if (gGameStatusPtr->keepUsingPartnerOnMapChange != 0) {
-        gPartnerActionStatus.partnerActionState = 1;
-        gGameStatusPtr->keepUsingPartnerOnMapChange = 0;
+    if (gGameStatusPtr->keepUsingPartnerOnMapChange) {
+        gPartnerStatus.partnerActionState = 1;
+        gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
     }
 
     wPartner = NULL;
@@ -1021,18 +1022,18 @@ void partner_reset_data(void) {
 }
 
 void partner_initialize_data(void) {
-    PartnerActionStatus* actionStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
 
     wCurrentPartnerId = 0;
     D_8010CFE0 = 0;
     NextPartnerCommand = PARTNER_CMD_NONE;
     D_8010CFC4 = 0;
-    actionStatus->actingPartner = 0;
-    actionStatus->inputDisabled = 0;
-    actionStatus->partnerAction_unk_1 = FALSE;
-    actionStatus->partnerActionState = 0;
-    actionStatus->unk_358 = 0;
-    actionStatus->partnerAction_unk_2 = 0;
+    partnerStatus->actingPartner = 0;
+    partnerStatus->inputDisabledCount = 0;
+    partnerStatus->shouldResumeAbility = FALSE;
+    partnerStatus->partnerActionState = 0;
+    partnerStatus->unk_358 = 0;
+    partnerStatus->partnerAction_unk_2 = FALSE;
     wPartner = NULL;
     wSavedPartnerPosX = 0;
     wSavedPartnerPosY = 0;
@@ -1046,13 +1047,13 @@ s32 partner_test_enemy_collision(Npc* enemy) {
     return FALSE;
 }
 
-EvtScript* partner_get_ride_script(void) {
+EvtScript* partner_get_enter_map_script(void) {
     WorldPartner* partner = wPartner;
 
     if (partner == NULL) {
         return NULL;
     }
-    return partner->whileRiding;
+    return partner->onEnterMap;
 }
 
 void partner_handle_before_battle(void) {
@@ -1070,7 +1071,7 @@ void partner_handle_before_battle(void) {
 }
 
 void partner_handle_after_battle(void) {
-    PartnerActionStatus* actionStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     PlayerData* playerData = &gPlayerData;
 
     if (wCurrentPartnerId != PARTNER_NONE) {
@@ -1085,10 +1086,10 @@ void partner_handle_after_battle(void) {
 
         NextPartnerCommand = PARTNER_CMD_INIT;
 
-        if (playerData->currentPartner != PARTNER_WATT && actionStatus->actingPartner == PARTNER_WATT) {
+        if (playerData->currentPartner != PARTNER_WATT && partnerStatus->actingPartner == PARTNER_WATT) {
             gPlayerStatusPtr->animFlags &= ~PA_FLAG_USING_WATT;
             gPlayerStatusPtr->animFlags &= ~PA_FLAG_WATT_IN_HANDS;
-            actionStatus->actingPartner = PARTNER_NONE;
+            partnerStatus->actingPartner = PARTNER_NONE;
         }
 
         if (wPartner->postBattle != NULL) {
@@ -1192,15 +1193,15 @@ void partner_walking_update_player_tracking(Npc* partner) {
 
 void partner_walking_update_motion(Npc* partner) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* actionStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
 
     if (gGameStatusPtr->multiplayerEnabled == 0 || playerStatus->flags & (PS_FLAG_INPUT_DISABLED | PS_FLAG_NO_STATIC_COLLISION)
-        || actionStatus->inputDisabled != 0 || actionStatus->partnerAction_unk_2 != 0) {
+        || partnerStatus->inputDisabledCount != 0 || partnerStatus->partnerAction_unk_2) {
         if (!(playerStatus->animFlags & PA_FLAG_OPENED_HIDDEN_PANEL)) {
             partner_walking_follow_player(partner);
         }
-        if (actionStatus->pressedButtons & (BUTTON_Z | BUTTON_B | BUTTON_C_LEFT | BUTTON_C_DOWN)) {
-            actionStatus->partnerAction_unk_2 = 0;
+        if (partnerStatus->pressedButtons & (BUTTON_Z | BUTTON_B | BUTTON_C_LEFT | BUTTON_C_DOWN)) {
+            partnerStatus->partnerAction_unk_2 = FALSE;
         }
     }
 
@@ -1594,7 +1595,7 @@ void partner_walking_follow_player(Npc* partner) {
                     yaw = atan2(partner->pos.x, partner->pos.z, partner->moveToPos.x, partner->moveToPos.z);
                     partner->yaw = D_800F8034 = yaw;
                     D_8010CFCE++;
-                    /* fallthrough */
+                    // fallthrough
                 case 1:
                     if (wPartnerMoveTime != 0) {
                         wPartnerMoveTime--;
@@ -1766,21 +1767,21 @@ void partner_flying_update_player_tracking(Npc* partner) {
 
 void partner_flying_update_motion(Npc* partner) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     f32 x, y, z, hitDepth;
     f32 var_f0;
     f32 var_f2;
 
     if (gGameStatusPtr->multiplayerEnabled == 0 ||
         (playerStatus->flags & (PS_FLAG_INPUT_DISABLED | PS_FLAG_NO_STATIC_COLLISION)) ||
-        partnerActionStatus->inputDisabled ||
-        partnerActionStatus->partnerAction_unk_2 != 0)
+        partnerStatus->inputDisabledCount ||
+        partnerStatus->partnerAction_unk_2)
     {
         if (!(playerStatus->animFlags & PA_FLAG_OPENED_HIDDEN_PANEL) || D_800F8020 == 0) {
             partner_flying_follow_player(partner);
         }
-        if (partnerActionStatus->pressedButtons & (BUTTON_B | BUTTON_Z | BUTTON_C_DOWN | BUTTON_C_LEFT)) {
-            partnerActionStatus->partnerAction_unk_2 = 0;
+        if (partnerStatus->pressedButtons & (BUTTON_B | BUTTON_Z | BUTTON_C_DOWN | BUTTON_C_LEFT)) {
+            partnerStatus->partnerAction_unk_2 = FALSE;
         }
     }
     if (wPartnerFollowState != 50 && fabsf(partner->pos.y - playerStatus->position.y) > 1000.0f) {
@@ -2115,7 +2116,7 @@ void partner_flying_follow_player(Npc* partner) {
                         yaw = atan2(partner->pos.x, partner->pos.z, partner->moveToPos.x, partner->moveToPos.z);
                         partner->yaw = D_800F8034 = yaw;
                         D_8010CFCE++;
-                        /* fallthrough */
+                        // fallthrough
                     case 1:
                         if (wPartnerMoveTime != 0) {
                             x = partner->pos.x;
@@ -2135,7 +2136,7 @@ void partner_flying_follow_player(Npc* partner) {
                             x = partner->pos.x;
                             y = partner->pos.y;
                             z = partner->pos.z;
-                            if (npc_test_move_taller_with_slipping(0, &x, &y, &z, partner->moveSpeed, partner->yaw, partner->collisionHeight, partner->collisionRadius) != 0) {
+                            if (npc_test_move_taller_with_slipping(0, &x, &y, &z, partner->moveSpeed, partner->yaw, partner->collisionHeight, partner->collisionRadius)) {
                                 partner->pos.x += (x - partner->pos.x) / 5.0f;
                                 partner->pos.z += (z - partner->pos.z) / 5.0f;
                             } else {
@@ -2459,7 +2460,7 @@ s32 partner_force_player_flip_done(void) {
     } else if (get_clamped_angle_diff(cameras[CAM_DEFAULT].currentYaw, playerStatus->targetYaw) < 0.0f) {
         isFacingLeft = TRUE;
         playerStatus->targetYaw = clamp_angle(cameras[CAM_DEFAULT].currentYaw - 90.0f);
-        
+
     } else {
         isFacingLeft = FALSE;
         playerStatus->targetYaw = clamp_angle(cameras[CAM_DEFAULT].currentYaw + 90.0f);
@@ -2470,18 +2471,18 @@ s32 partner_force_player_flip_done(void) {
 }
 
 void partner_enable_input(void) {
-    PartnerActionStatus* actionStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
 
-    actionStatus->inputDisabled--;
-    if (actionStatus->inputDisabled < 0) {
-        actionStatus->inputDisabled = 0;
+    partnerStatus->inputDisabledCount--;
+    if (partnerStatus->inputDisabledCount < 0) {
+        partnerStatus->inputDisabledCount = 0;
     }
 }
 
 void partner_disable_input(void) {
-    PartnerActionStatus* actionStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
 
-    actionStatus->inputDisabled++;
+    partnerStatus->inputDisabledCount++;
 }
 
 void partner_do_player_collision(Npc* partner) {

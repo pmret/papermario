@@ -981,7 +981,7 @@ EvtScript N(attackShellMissile) = {
 };
 
 EvtScript N(findTarget) = {
-    EVT_CALL(EnemyCreateTargetList, 0x00008002)
+    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(1)
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
@@ -1001,7 +1001,7 @@ EvtScript N(findTarget) = {
     EVT_SET(LocalFlag(2), 0)
     EVT_SET(LocalFlag(3), 0)
     EVT_SET(LocalFlag(4), 0)
-    EVT_CALL(EnemyCreateTargetList, 0x00008002)
+    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
@@ -1135,7 +1135,7 @@ EvtScript N(summonFriend) = {
 
 EvtScript N(findPlacesToSummon) = {
     EVT_SET(LVar9, 0)
-    EVT_CALL(EnemyCreateTargetList, 0x00008002)
+    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)

@@ -250,7 +250,7 @@ void sfx_compute_spatialized_sound_params_full(f32 x, f32 y, f32 z, s16* volume,
         offsetX = 0.0f;
     }
 
-    volAmtOffsetX = update_lerp(0, 1.0f, 0.0f, offsetX, 200);
+    volAmtOffsetX = update_lerp(EASING_LINEAR, 1.0f, 0.0f, offsetX, 200);
     if (volAmtOffsetX < 0.0) {
         volAmtOffsetX = 0.0f;
     }
@@ -260,7 +260,7 @@ void sfx_compute_spatialized_sound_params_full(f32 x, f32 y, f32 z, s16* volume,
         offsetY = 0.0f;
     }
 
-    volAmtDeltaY = update_lerp(0, 1.0f, 0.0f, offsetY, 130);
+    volAmtDeltaY = update_lerp(EASING_LINEAR, 1.0f, 0.0f, offsetY, 130);
     if (volAmtDeltaY < 0.0) {
         volAmtDeltaY = 0.0f;
     }
@@ -270,7 +270,7 @@ void sfx_compute_spatialized_sound_params_full(f32 x, f32 y, f32 z, s16* volume,
         depth = 0.0f;
     }
 
-    volAmtDepth = update_lerp(0, 1.0f, 0.0f, depth, 250);
+    volAmtDepth = update_lerp(EASING_LINEAR, 1.0f, 0.0f, depth, 250);
     if (volAmtDepth < 0.0) {
         volAmtDepth = 0.0f;
     }

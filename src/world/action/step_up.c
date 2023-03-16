@@ -40,7 +40,7 @@ void action_update_step_up(void) {
             if (!(playerStatus->animFlags & PA_FLAG_USING_WATT)) {
                 anim = ANIM_Mario1_Walk;
             } else {
-                anim = ANIM_MarioW1_Carry;
+                anim = ANIM_MarioW1_CarryWalk;
             }
             suggest_player_anim_allow_backward(anim);
         } else {

@@ -40,7 +40,7 @@
 #define gCurrentCameraID dead_gCurrentCameraID
 #define add_vec2D_polar dead_add_vec2D_polar
 #define gCurrentCamID dead_gCurrentCamID
-#define gPartnerActionStatus dead_gPartnerActionStatus
+#define gPartnerStatus dead_gPartnerStatus
 #define get_npc_safe dead_get_npc_safe
 #define sfx_adjust_env_sound_pos dead_sfx_adjust_env_sound_pos
 #define fx_star_spirits_energy dead_fx_star_spirits_energy

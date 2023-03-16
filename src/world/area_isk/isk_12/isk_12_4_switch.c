@@ -8,11 +8,11 @@ EvtScript N(EVS_OnTouch_DrainSwitch) = {
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_LABEL(5)
-    EVT_WAIT(1)
-    EVT_CALL(PartnerCanUseAbility, LVar0)
-    EVT_IF_EQ(LVar0, TRUE)
-        EVT_GOTO(5)
-    EVT_END_IF
+        EVT_WAIT(1)
+        EVT_CALL(PartnerCanUseAbility, LVar0)
+        EVT_IF_EQ(LVar0, TRUE)
+            EVT_GOTO(5)
+        EVT_END_IF
     EVT_CALL(GetNpcPos, NPC_PARTNER, LVar0, LVar1, LVar2)
     EVT_IF_LT(LVar1, -470)
         EVT_THREAD

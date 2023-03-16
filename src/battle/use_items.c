@@ -170,7 +170,7 @@ API_CALLABLE(LoadMysteryItemScript) {
     s32* itemPtr;
     s32 i;
 
-    battleStatus->currentTargetListFlags = item->targetFlags | ITEM_TARGET_FLAG_8000;
+    battleStatus->currentTargetListFlags = item->targetFlags | TARGET_FLAG_8000;
     battleStatus->currentAttackElement = 0;
 
     player_create_target_list(actor);

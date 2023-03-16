@@ -118,7 +118,7 @@ ApiStatus SetNpcRotationPivot(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    npc->rotationVerticalPivotOffset = value;
+    npc->rotationPivotOffsetY = value;
     return ApiStatus_DONE2;
 }
 
@@ -952,16 +952,16 @@ ApiStatus GetCurrentPartnerID(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus PartnerCanUseAbility(Evt* script, s32 isInitialCall) {
-    Bytecode arg0 = *script->ptrReadPos;
+    Bytecode outVar = *script->ptrReadPos;
 
-    evt_set_variable(script, arg0, partner_can_use_ability());
+    evt_set_variable(script, outVar, partner_can_use_ability());
     return ApiStatus_DONE2;
 }
 
 ApiStatus PartnerIsFlying(Evt* script, s32 isInitialCall) {
-    Bytecode arg0 = *script->ptrReadPos;
+    Bytecode outVar = *script->ptrReadPos;
 
-    evt_set_variable(script, arg0, partner_is_flying());
+    evt_set_variable(script, outVar, partner_is_flying());
     return ApiStatus_DONE2;
 }
 

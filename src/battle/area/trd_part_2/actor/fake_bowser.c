@@ -252,7 +252,7 @@ EvtScript N(init_8021A968) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(ForceHomePos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(HPBarToHome, ACTOR_SELF)
-    EVT_CALL(SetPartTargetFlagBits, ACTOR_SELF, 2, 4, TRUE)
+    EVT_CALL(SetPartTargetFlagBits, ACTOR_SELF, 2, ACTOR_PART_TARGET_FLAG_4, TRUE)
     EVT_RETURN
     EVT_END
 };
@@ -2340,7 +2340,7 @@ EvtScript N(80221DB4) = {
 
 EvtScript N(80222C44) = {
     EVT_SET(LVarA, 0)
-    EVT_CALL(PlayerCreateTargetList, 0x00008002)
+    EVT_CALL(PlayerCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
@@ -2371,7 +2371,7 @@ EvtScript N(80222C44) = {
     EVT_SET(LocalFlag(0), 0)
     EVT_SET(LVarB, LVarA)
     EVT_SUB(LVarB, 1)
-    EVT_CALL(PlayerCreateTargetList, 0x00008002)
+    EVT_CALL(PlayerCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(1)
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
@@ -2417,7 +2417,7 @@ EvtScript N(80222C44) = {
 
 EvtScript N(802230E8) = {
     EVT_SET(LVarA, 0)
-    EVT_CALL(PlayerCreateTargetList, 0x00008002)
+    EVT_CALL(PlayerCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
@@ -2457,7 +2457,7 @@ EvtScript N(802230E8) = {
         EVT_ADD(LVar0, 1)
     EVT_END_LOOP
     EVT_SET(LVar2, 0)
-    EVT_CALL(PlayerCreateTargetList, 0x00008002)
+    EVT_CALL(PlayerCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(1)
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)

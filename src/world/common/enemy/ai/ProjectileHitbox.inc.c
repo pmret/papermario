@@ -28,10 +28,10 @@ s32 N(ProjectileHitbox_GetUsableProjectileID)(Evt* script) {
         if (fabsf(deltaAngle) > 75.0 || (2.0 * npc->collisionHeight <= fabsf(npc->pos.y - gPlayerStatusPtr->position.y))) {
            return -1;
         }
-        if (gPartnerActionStatus.actingPartner == PARTNER_BOW) {
+        if (gPartnerStatus.actingPartner == PARTNER_BOW) {
             return -1;
         }
-        if (gPartnerActionStatus.actingPartner == PARTNER_SUSHIE) {
+        if (gPartnerStatus.actingPartner == PARTNER_SUSHIE) {
             return -1;
         }
 

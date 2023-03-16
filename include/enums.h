@@ -2176,11 +2176,36 @@ enum ItemTypeFlags {
     ITEM_TYPE_FLAG_ENTITY_FULLSIZE      = 0x1000,
 };
 
-enum ItemTargetFlags {
-    ITEM_TARGET_FLAG_ENEMY              = 0x0001,
-    ITEM_TARGET_FLAG_2                  = 0x0002,
-    ITEM_TARGET_FLAG_PLAYER             = 0x0008,
-    ITEM_TARGET_FLAG_8000               = 0x8000
+enum TargetFlags {
+    TARGET_FLAG_ENEMY              = 0x00000001,
+    TARGET_FLAG_2                  = 0x00000002,
+    TARGET_FLAG_4                  = 0x00000004,
+    TARGET_FLAG_PLAYER             = 0x00000008,
+    TARGET_FLAG_10                 = 0x00000010,
+    TARGET_FLAG_20                 = 0x00000020,
+    TARGET_FLAG_40                 = 0x00000040,
+    TARGET_FLAG_80                 = 0x00000080,
+    TARGET_FLAG_100                = 0x00000100,
+    TARGET_FLAG_400                = 0x00000400,
+    TARGET_FLAG_800                = 0x00000800,
+    TARGET_FLAG_1000               = 0x00001000,
+    TARGET_FLAG_2000               = 0x00002000,
+    TARGET_FLAG_4000               = 0x00004000,
+    TARGET_FLAG_8000               = 0x00008000,
+    TARGET_FLAG_10000              = 0x00010000,
+    TARGET_FLAG_20000              = 0x00020000,
+    TARGET_FLAG_40000              = 0x00040000,
+    TARGET_FLAG_100000             = 0x00100000,
+    TARGET_FLAG_200000             = 0x00200000,
+    TARGET_FLAG_400000             = 0x00400000,
+    TARGET_FLAG_800000             = 0x00800000,
+    TARGET_FLAG_80000000           = 0x80000000,
+};
+
+enum ActorPartTargetFlags {
+    ACTOR_PART_TARGET_FLAG_1    = 0x01,
+    ACTOR_PART_TARGET_FLAG_2    = 0x02,
+    ACTOR_PART_TARGET_FLAG_4    = 0x04,
 };
 
 enum PlayerSprites {
@@ -2341,14 +2366,14 @@ enum PlayerAnims {
     ANIM_MarioB3_Hammer2_Charged            = 0x00050007,
     ANIM_MarioB3_Hammer3_Charging           = 0x00050008,
     ANIM_MarioB3_Hammer3_Charged            = 0x00050009,
-    ANIM_MarioW1_Carry                      = 0x00060000,
+    ANIM_MarioW1_CarryWalk                  = 0x00060000,
     ANIM_MarioW1_CarryAbove                 = 0x00060001,
     ANIM_MarioW1_CarryRun                   = 0x00060002,
     ANIM_MarioW1_CarryAboveRun              = 0x00060003,
     ANIM_MarioW1_PushToward                 = 0x00060004,
     ANIM_MarioW1_TakeItem                   = 0x00060005,
     ANIM_MarioW1_PlaceItem                  = 0x00060006,
-    ANIM_MarioW1_PlaceRecord                = 0x00060007,
+    ANIM_MarioW1_CarryIdle                  = 0x00060007,
     ANIM_MarioW1_TakeItemSquashed           = 0x00060008,
     ANIM_MarioW1_JumpWatt                   = 0x00060009,
     ANIM_MarioW1_FallWatt                   = 0x0006000A,
@@ -3044,6 +3069,29 @@ enum ShadingProfile {
     SHADING_MIM_09,
     SHADING_MIM_11,
     SHADING_MIM_12,
+    SHADING_ARN_09 = 0x00080000,
+    SHADING_ARN_10,
+    SHADING_ARN_11,
+    SHADING_ARN_12,
+    SHADING_ARN_13,
+    SHADING_DGB_06 = 0x00090000,
+    SHADING_KZN_01 = 0x000A0000,
+    SHADING_KZN_02,
+    SHADING_KZN_03,
+    SHADING_KZN_04,
+    SHADING_KZN_05,
+    SHADING_KZN_06,
+    SHADING_KZN_07,
+    SHADING_KZN_08,
+    SHADING_KZN_09,
+    SHADING_KZN_10,
+    SHADING_KZN_11,
+    SHADING_KZN_17,
+    SHADING_KZN_18,
+    SHADING_KZN_19,
+    SHADING_KZN_20,
+    SHADING_KZN_22,
+    SHADING_KZN_23,
 };
 #endif
 
@@ -3686,7 +3734,7 @@ enum PlayerStatusAnimFlags {
     /* This allows dismounting from Lakilester, even if in a precarious situation (like over spikes, lava, or water). */
     PA_FLAG_DISMOUNTING_ALLOWED              = 0x20000000,
     /* This flag is set when partner usage was interrupted by a script, and it prevents menu sounds (like the error sound) from playing for script-initiated player actions */
-    PA_FLAG_PARTNER_USAGE_STOPPED            = 0x40000000,
+    PA_FLAG_FORCED_PARTNER_ABILITY_END       = 0x40000000,
     /* This one's really weird. Seems to have something to do with the direction Mario is facing, but I'm not sure what it's actually supposed to be achieving. */
     PA_FLAG_80000000                         = 0x80000000,
 };
@@ -5345,6 +5393,7 @@ enum ColliderFlags {
     SURFACE_TYPE_LAVA               = 3,
     SURFACE_TYPE_SPIKES             = 2,
     SURFACE_TYPE_WATER              = 1,
+    SURFACE_TYPE_INVALID            = -1,
 
     COLLIDER_FLAG_SAFE_FLOOR        = 0x00000100,
     COLLIDER_FLAG_IGNORE_SHELL      = 0x00008000,
@@ -5571,41 +5620,6 @@ enum BtlCameraPreset {
     BTL_CAM_PRESET_71,
     BTL_CAM_PRESET_72,
     BTL_CAM_PRESET_73,
-};
-
-enum MoveDataFlags {
-    MOVE_DATA_FLAG_SINGLE_TARGET     = 0x00000001,
-    MOVE_DATA_FLAG_2                 = 0x00000002,
-    MOVE_DATA_FLAG_4                 = 0x00000004,
-    MOVE_DATA_FLAG_TARGET_PLAYER     = 0x00000008,
-    MOVE_DATA_FLAG_10                = 0x00000010,
-    MOVE_DATA_FLAG_20                = 0x00000020,
-    MOVE_DATA_FLAG_40                = 0x00000040,
-    MOVE_DATA_FLAG_80                = 0x00000080,
-    MOVE_DATA_FLAG_100               = 0x00000100,
-    MOVE_DATA_FLAG_200               = 0x00000200,
-    MOVE_DATA_FLAG_400               = 0x00000400,
-    MOVE_DATA_FLAG_800               = 0x00000800,
-    MOVE_DATA_FLAG_1000              = 0x00001000,
-    MOVE_DATA_FLAG_2000              = 0x00002000,
-    MOVE_DATA_FLAG_4000              = 0x00004000,
-    MOVE_DATA_FLAG_8000              = 0x00008000,
-    MOVE_DATA_FLAG_10000             = 0x00010000,
-    MOVE_DATA_FLAG_20000             = 0x00020000,
-    MOVE_DATA_FLAG_40000             = 0x00040000,
-    MOVE_DATA_FLAG_80000             = 0x00080000,
-    MOVE_DATA_FLAG_100000            = 0x00100000,
-    MOVE_DATA_FLAG_200000            = 0x00200000,
-    MOVE_DATA_FLAG_400000            = 0x00400000,
-    MOVE_DATA_FLAG_800000            = 0x00800000,
-    MOVE_DATA_FLAG_1000000           = 0x01000000,
-    MOVE_DATA_FLAG_2000000           = 0x02000000,
-    MOVE_DATA_FLAG_4000000           = 0x04000000,
-    MOVE_DATA_FLAG_8000000           = 0x08000000,
-    MOVE_DATA_FLAG_10000000          = 0x10000000,
-    MOVE_DATA_FLAG_20000000          = 0x20000000,
-    MOVE_DATA_FLAG_40000000          = 0x40000000,
-    MOVE_DATA_FLAG_80000000          = 0x80000000,
 };
 
 enum MoveActionTips {

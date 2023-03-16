@@ -457,7 +457,7 @@ HitResult calc_partner_damage_enemy(void) {
             if (!(targetPart->flags & ACTOR_PART_FLAG_2000)
                 && !(gBattleStatus.flags1 & BS_FLAGS1_TUTORIAL_BATTLE)
                 && !partImmuneToElement
-                && !(targetPart->targetFlags & ACTOR_PART_FLAG_4)
+                && !(targetPart->targetFlags & ACTOR_PART_TARGET_FLAG_4)
             ) {
                 target->currentHP -= damageDealt;
 
@@ -638,7 +638,7 @@ HitResult calc_partner_damage_enemy(void) {
                 && dispatchEvent != EVENT_DEATH
                 && dispatchEvent != EVENT_SPIN_SMASH_DEATH
                 && dispatchEvent != EVENT_EXPLODE_TRIGGER
-                && !(targetPart->targetFlags & ACTOR_PART_FLAG_4)
+                && !(targetPart->targetFlags & ACTOR_PART_TARGET_FLAG_4)
             ) {
                 #define INFLICT_STATUS(STATUS_TYPE) \
                     if ((battleStatus->currentAttackStatus & STATUS_FLAG_##STATUS_TYPE) && \
@@ -750,7 +750,7 @@ HitResult calc_partner_damage_enemy(void) {
                 func_802664DC(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 0);
             }
 
-            if (!(targetPart->targetFlags & ACTOR_PART_FLAG_4)) {
+            if (!(targetPart->targetFlags & ACTOR_PART_TARGET_FLAG_4)) {
                 func_802666E4(target, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
             }
         }

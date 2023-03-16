@@ -26,6 +26,7 @@ typedef void NoArgCallback(void*);
 typedef s32 b32;
 typedef s8 b8;
 
+typedef s32 HitID;
 typedef u32 AnimID;
 
 typedef struct {
@@ -235,7 +236,7 @@ typedef struct Npc {
     /* 0x034 */ f32 renderYaw;
     /* 0x038 */ Vec3f pos;
     /* 0x044 */ Vec3f rotation;
-    /* 0x050 */ f32 rotationVerticalPivotOffset;
+    /* 0x050 */ f32 rotationPivotOffsetY;
     /* 0x054 */ Vec3f scale;
     /* 0x060 */ Vec3f moveToPos;
     /* 0x06C */ Vec3f colliderPos; /* used during collision with player */
@@ -2248,22 +2249,22 @@ typedef struct TweesterPhysics {
     /* 0x18 */ f32 liftoffVelocityPhase;
 } TweesterPhysics; // size = 0x1C
 
-typedef struct PartnerActionStatus {
+typedef struct PartnerStatus {
     /* 0x000 */ s8 partnerActionState;
-    /* 0x001 */ b8 partnerAction_unk_1;
-    /* 0x002 */ s8 partnerAction_unk_2;
+    /* 0x001 */ b8 shouldResumeAbility;
+    /* 0x002 */ b8 partnerAction_unk_2;
     /* 0x003 */ s8 actingPartner;
     /* 0x004 */ s16 stickX;
     /* 0x006 */ s16 stickY;
     /* 0x008 */ s32 currentButtons;
     /* 0x00C */ s32 pressedButtons;
     /* 0x010 */ s32 heldButtons;
-    /* 0x014 */ s8 inputDisabled;
+    /* 0x014 */ s8 inputDisabledCount;
     /* 0x015 */ char unk_15[3];
     /* 0x018 */ Npc npc;
     /* 0x358 */ s32 unk_358;
     /* 0x35C */ char unk_35C[0x4];
-} PartnerActionStatus; // size = 0x360
+} PartnerStatus; // size = 0x360
 
 typedef struct SpriteRasterInfo {
     /* 0x00 */ IMG_PTR raster;

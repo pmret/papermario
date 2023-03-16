@@ -500,7 +500,7 @@ EvtScript N(summonSpiny) = {
 };
 
 EvtScript N(findPlacesForSummon) = {
-    EVT_CALL(EnemyCreateTargetList, 0x00008002)
+    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(GetOwnerTarget, LVar0, LVar5)
@@ -543,7 +543,7 @@ EvtScript N(findPlacesForSummon) = {
 
 EvtScript N(calcSummonChance) = {
     EVT_SET(LVar9, 0)
-    EVT_CALL(EnemyCreateTargetList, 0x00008002)
+    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)

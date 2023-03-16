@@ -1,7 +1,7 @@
 #include "world/common/todo/GetFloorCollider.inc.c"
 
 API_CALLABLE(N(IsPartnerBow)) {
-    if (gPartnerActionStatus.actingPartner == PARTNER_BOW) {
+    if (gPartnerStatus.actingPartner == PARTNER_BOW) {
         script->varTable[0] = TRUE;
     } else {
         script->varTable[0] = FALSE;
