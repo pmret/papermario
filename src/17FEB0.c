@@ -180,7 +180,7 @@ HitResult calc_item_damage_enemy(void) {
 
         if (!(targetPart->flags & ACTOR_PART_FLAG_2000)
             && !partImmuneToElement
-            && !(targetPart->targetFlags & ACTOR_PART_FLAG_4)
+            && !(targetPart->targetFlags & ACTOR_PART_TARGET_FLAG_4)
         ) {
             target->currentHP -= attackDamage;
             if (target->currentHP <= 0) {
@@ -199,7 +199,7 @@ HitResult calc_item_damage_enemy(void) {
         sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
         return HIT_RESULT_NO_DAMAGE;
     }
-    
+
     if (battleStatus->currentAttackElement & DAMAGE_TYPE_DEATH) {
         battleStatus->lastAttackDamage = 0;
         dispatchEvent = EVENT_DEATH;
@@ -443,7 +443,7 @@ HitResult calc_item_damage_enemy(void) {
             } else {
                 func_802664DC(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 0);
             }
-            if (!(targetPart->targetFlags & 4)) {
+            if (!(targetPart->targetFlags & ACTOR_PART_TARGET_FLAG_4)) {
                 func_802666E4(target, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
             }
         }

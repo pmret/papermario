@@ -16,7 +16,7 @@ API_CALLABLE(N(SetupDemoPlayerMove)) {
     battleStatus->selectedMoveID = 0;
     battleStatus->currentAttackElement = 0;
     playerData->invItems[0] = selectedItemID;
-    battleStatus->currentTargetListFlags = gItemTable[playerData->invItems[0]].targetFlags | ITEM_TARGET_FLAG_8000;
+    battleStatus->currentTargetListFlags = gItemTable[playerData->invItems[0]].targetFlags | TARGET_FLAG_8000;
 
     player_create_target_list(player);
     player->selectedTargetIndex = 0;

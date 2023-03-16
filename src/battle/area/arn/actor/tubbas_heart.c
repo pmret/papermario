@@ -137,7 +137,7 @@ EvtScript N(init_80223DA0) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_802245C8)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80223E98)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80224038)))
-    EVT_CALL(SetPartTargetFlagBits, ACTOR_SELF, 2, 2, TRUE)
+    EVT_CALL(SetPartTargetFlagBits, ACTOR_SELF, 2, ACTOR_PART_TARGET_FLAG_2, TRUE)
     EVT_RETURN
     EVT_END
 };
