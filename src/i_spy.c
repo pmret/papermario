@@ -52,7 +52,7 @@ void appendGfx_ispy_icon(void) {
         }
 
         flashPhase = ISpyPtr->flashCount;
-        flashPhase = flashPhase - (flashPhase / 12) * 12;
+        flashPhase = flashPhase % 12;
         switch (flashPhase) {
             case 0:
             case 1:
@@ -102,7 +102,7 @@ void ispy_notification_setup(void) {
 
 void ispy_notification_update(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     s32 cond;
 
     ISpyPtr->pos.y +=
@@ -112,8 +112,8 @@ void ispy_notification_update(void) {
 
     switch (ISpyPtr->state) {
         case I_SPY_DELAY:
-            if (partnerActionStatus->partnerActionState != PARTNER_ACTION_NONE
-             && partnerActionStatus->actingPartner == PARTNER_LAKILESTER
+            if (partnerStatus->partnerActionState != PARTNER_ACTION_NONE
+             && partnerStatus->actingPartner == PARTNER_LAKILESTER
             ) {
                 cond = gGameStatusPtr->keepUsingPartnerOnMapChange;
             } else {

@@ -139,7 +139,7 @@ void entity_StarBoxLauncher_launch(Entity* entity) {
             data->faceTexOffset = D_802BCAA0_E313F0[0];
             data->faceAnimTimer = D_802BCAA0_E313F0[1];
             sfx_play_sound(SOUND_2085);
-            /* fallthrough */
+            // fallthrough
         case 1:
             temp = entity->position.y;
             entity->position.y = temp + 8.0 * sin_rad(DEG_TO_RAD(data->riseSpeedPhase));

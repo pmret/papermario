@@ -47,7 +47,7 @@ s32 N(CleftAI_CanSeePlayer)(Evt* script, MobileAISettings* aiSettings, EnemyDete
     if (fabsf(npc->pos.y - gPlayerStatusPtr->position.y) >= 40.0f) {
         seesPlayer = FALSE;
     }
-    if (gPartnerActionStatus.actingPartner == PARTNER_BOW) {
+    if (gPartnerStatus.actingPartner == PARTNER_BOW) {
         seesPlayer = FALSE;
     }
     return seesPlayer;

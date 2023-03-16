@@ -85,7 +85,7 @@ API_CALLABLE(N(SwooperAI_Main)) {
                 x = npc->pos.x;
                 y = npc->pos.y;
                 z = npc->pos.z;
-                if (npc_test_move_simple_with_slipping(npc->collisionChannel, &x, &y, &z, npc->moveSpeed, npc->yaw, npc->collisionHeight, npc->collisionRadius) != 0) {
+                if (npc_test_move_simple_with_slipping(npc->collisionChannel, &x, &y, &z, npc->moveSpeed, npc->yaw, npc->collisionHeight, npc->collisionRadius)) {
                     npc->moveSpeed = 0.0f;
                 }
                 npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);

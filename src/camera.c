@@ -270,7 +270,7 @@ void func_80032970(Camera* camera, f32 arg1) {
         camera->unk_510 = 0.0f;
     } else {
         if (gPlayerStatusPtr->animFlags & PA_FLAG_RIDING_PARTNER) {
-            stickX = gPartnerActionStatus.stickX;
+            stickX = gPartnerStatus.stickX;
         } else {
             stickX = gPlayerStatusPtr->stickAxis[0];
         }

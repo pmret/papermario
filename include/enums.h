@@ -2341,14 +2341,14 @@ enum PlayerAnims {
     ANIM_MarioB3_Hammer2_Charged            = 0x00050007,
     ANIM_MarioB3_Hammer3_Charging           = 0x00050008,
     ANIM_MarioB3_Hammer3_Charged            = 0x00050009,
-    ANIM_MarioW1_Carry                      = 0x00060000,
+    ANIM_MarioW1_CarryWalk                  = 0x00060000,
     ANIM_MarioW1_CarryAbove                 = 0x00060001,
     ANIM_MarioW1_CarryRun                   = 0x00060002,
     ANIM_MarioW1_CarryAboveRun              = 0x00060003,
     ANIM_MarioW1_PushToward                 = 0x00060004,
     ANIM_MarioW1_TakeItem                   = 0x00060005,
     ANIM_MarioW1_PlaceItem                  = 0x00060006,
-    ANIM_MarioW1_PlaceRecord                = 0x00060007,
+    ANIM_MarioW1_CarryIdle                  = 0x00060007,
     ANIM_MarioW1_TakeItemSquashed           = 0x00060008,
     ANIM_MarioW1_JumpWatt                   = 0x00060009,
     ANIM_MarioW1_FallWatt                   = 0x0006000A,
@@ -3709,7 +3709,7 @@ enum PlayerStatusAnimFlags {
     /* This allows dismounting from Lakilester, even if in a precarious situation (like over spikes, lava, or water). */
     PA_FLAG_DISMOUNTING_ALLOWED              = 0x20000000,
     /* This flag is set when partner usage was interrupted by a script, and it prevents menu sounds (like the error sound) from playing for script-initiated player actions */
-    PA_FLAG_PARTNER_USAGE_STOPPED            = 0x40000000,
+    PA_FLAG_FORCED_PARTNER_ABILITY_END       = 0x40000000,
     /* This one's really weird. Seems to have something to do with the direction Mario is facing, but I'm not sure what it's actually supposed to be achieving. */
     PA_FLAG_80000000                         = 0x80000000,
 };
@@ -5368,6 +5368,7 @@ enum ColliderFlags {
     SURFACE_TYPE_LAVA               = 3,
     SURFACE_TYPE_SPIKES             = 2,
     SURFACE_TYPE_WATER              = 1,
+    SURFACE_TYPE_INVALID            = -1,
 
     COLLIDER_FLAG_SAFE_FLOOR        = 0x00000100,
     COLLIDER_FLAG_IGNORE_SHELL      = 0x00008000,

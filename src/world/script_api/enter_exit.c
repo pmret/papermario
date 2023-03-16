@@ -4,16 +4,16 @@
 extern s32 DoorModelsSwingCCW[3];
 extern s32 DoorModelsSwingCW[3];
 
-API_CALLABLE(CheckRideScriptForEnterExit) {
+API_CALLABLE(CheckUsingRideablePartner) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     script->varTable[10] = 0;
-    if (partner_get_ride_script() != NULL) {
-        if (gPartnerActionStatus.partnerActionState == ACTION_STATE_IDLE) {
+    if (partner_get_enter_map_script() != NULL) {
+        if (gPartnerStatus.partnerActionState == ACTION_STATE_IDLE) {
             script->varTable[10] = 0;
         } else {
             script->varTable[10] = 1;
-            script->varTablePtr[11] = partner_get_ride_script();
+            script->varTablePtr[11] = partner_get_enter_map_script();
             script->varTable[13] = playerStatus->targetYaw;
         }
     }
@@ -199,7 +199,7 @@ API_CALLABLE(SetupSplitDoubleDoors) {
 
 EvtScript EnterWalk = {
     EVT_CALL(ShortenPartnerTetherDistance)
-    EVT_CALL(CheckRideScriptForEnterExit)
+    EVT_CALL(CheckUsingRideablePartner)
     EVT_CALL(UseEntryHeading, 60, 15)
     EVT_IF_EQ(LVarA, 0)
         EVT_CALL(TeleportPartnerToPlayer)
@@ -221,7 +221,7 @@ EvtScript EnterWalk = {
 
 EvtScript EnterWalkShort = {
     EVT_CALL(ShortenPartnerTetherDistance)
-    EVT_CALL(CheckRideScriptForEnterExit)
+    EVT_CALL(CheckUsingRideablePartner)
     EVT_CALL(UseEntryHeading, 40, 15)
     EVT_IF_EQ(LVarA, 0)
         EVT_CALL(TeleportPartnerToPlayer)
@@ -243,7 +243,7 @@ EvtScript EnterWalkShort = {
 
 EvtScript EnterWalkCustom = {
     EVT_CALL(ShortenPartnerTetherDistance)
-    EVT_CALL(CheckRideScriptForEnterExit)
+    EVT_CALL(CheckUsingRideablePartner)
     EVT_CALL(UseEntryHeading, LVar1, LVar4)
     EVT_IF_EQ(LVarA, 0)
         EVT_CALL(TeleportPartnerToPlayer)
@@ -265,7 +265,7 @@ EvtScript EnterWalkCustom = {
 EvtScript EnterPostPipe = {
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(ShortenPartnerTetherDistance)
-    EVT_CALL(CheckRideScriptForEnterExit)
+    EVT_CALL(CheckUsingRideablePartner)
     EVT_CALL(EnterPlayerPostPipe)
     EVT_CALL(ResetPartnerTetherDistance)
     EVT_CALL(DisablePlayerPhysics, FALSE)
@@ -285,7 +285,7 @@ EvtScript EnterSavePoint = {
 EvtScript ExitWalk = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(ShortenPartnerTetherDistance)
-    EVT_CALL(CheckRideScriptForEnterExit)
+    EVT_CALL(CheckUsingRideablePartner)
     EVT_IF_EQ(LVarA, 0)
         EVT_CALL(PlayerMoveTo, LVar1, LVar3, 15)
     EVT_ELSE
@@ -364,7 +364,7 @@ EvtScript BaseExitDoor = {
     EVT_ADD(LVarB, 180)
     EVT_CALL(InterpPlayerYaw, LVarB, 2)
     EVT_CALL(ModifyColliderFlags, 0, LVar1, COLLIDER_FLAGS_UPPER_MASK)
-    EVT_CALL(PlaySoundAt, 0x90000000, 0, LVarC, LVarD, LVarE)
+    EVT_CALL(PlaySoundAt, SOUND_DOOR_OPEN, 0, LVarC, LVarD, LVarE)
     EVT_CALL(MakeLerp, 0, 80, 10, EASING_LINEAR)
     EVT_LABEL(0)
     EVT_CALL(UpdateLerp)
@@ -389,7 +389,7 @@ EvtScript BaseExitDoor = {
         EVT_GOTO(0)
     EVT_END_IF
     EVT_CALL(UseExitHeading, 40, LVar9)
-    EVT_CALL(CheckRideScriptForEnterExit)
+    EVT_CALL(CheckUsingRideablePartner)
     EVT_IF_EQ(LVarA, 0)
         EVT_CALL(PlayerMoveTo, LVar1, LVar3, 15)
     EVT_ELSE
@@ -426,7 +426,7 @@ EvtScript BaseEnterDoor = {
     EVT_END_LOOP
     EVT_CALL(GetEntryCoords, LVar0, LVar7, LVar8, LVar9, LVarB)
     EVT_CALL(InterpPlayerYaw, LVarB, 2)
-    EVT_CALL(CheckRideScriptForEnterExit)
+    EVT_CALL(CheckUsingRideablePartner)
     EVT_IF_EQ(LVarA, 0)
         EVT_CALL(TeleportPartnerToPlayer)
         EVT_CALL(PlayerMoveToDoor, 10)
@@ -438,7 +438,7 @@ EvtScript BaseEnterDoor = {
     EVT_END_IF
     EVT_THREAD
         EVT_WAIT(8)
-        EVT_CALL(PlaySoundAt, 0x90000001, 0, LVar7, LVar8, LVar9)
+        EVT_CALL(PlaySoundAt, SOUND_DOOR_CLOSE, 0, LVar7, LVar8, LVar9)
     EVT_END_THREAD
     EVT_CALL(MakeLerp, -80, 0, 10, EASING_LINEAR)
     EVT_LABEL(0)

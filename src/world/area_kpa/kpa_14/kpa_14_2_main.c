@@ -4,8 +4,8 @@
 #include "world/common/atomic/TexturePan.inc.c"
 
 API_CALLABLE(N(GetActingPartner)) {
-    if (gPartnerActionStatus.partnerActionState != 0) {
-        script->varTable[9] = gPartnerActionStatus.actingPartner;
+    if (gPartnerStatus.partnerActionState != 0) {
+        script->varTable[9] = gPartnerStatus.actingPartner;
     } else {
         script->varTable[9] = -1;
     }

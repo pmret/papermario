@@ -125,7 +125,7 @@ void N(PiranhaPlantAI_10)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
                 sp20 = gPlayerStatusPtr->position.x;
                 sp24 = gPlayerStatusPtr->position.y + 18.0;
                 sp28 = gPlayerStatusPtr->position.z;
-                if (npc_test_move_simple_with_slipping(npc->collisionChannel, &sp20, &sp24, &sp28, moveSpeed, yaw2, npc->collisionHeight, npc->collisionRadius) != 0) {
+                if (npc_test_move_simple_with_slipping(npc->collisionChannel, &sp20, &sp24, &sp28, moveSpeed, yaw2, npc->collisionHeight, npc->collisionRadius)) {
                     sp20 = gPlayerStatusPtr->position.x;
                     sp24 = gPlayerStatusPtr->position.y + 45.0;
                     sp28 = gPlayerStatusPtr->position.z;
@@ -154,7 +154,7 @@ void N(PiranhaPlantAI_10)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
                 sp20 = gPlayerStatusPtr->position.x;
                 sp24 = gPlayerStatusPtr->position.y + 18.0;
                 sp28 = gPlayerStatusPtr->position.z;
-                if (npc_test_move_simple_with_slipping(npc->collisionChannel, &sp20, &sp24, &sp28, moveSpeed, yaw2, npc->collisionHeight, npc->collisionRadius) != 0) {
+                if (npc_test_move_simple_with_slipping(npc->collisionChannel, &sp20, &sp24, &sp28, moveSpeed, yaw2, npc->collisionHeight, npc->collisionRadius)) {
                     posRadius = dist2D(gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z, sp20, sp28);
                     npc->pos.x = gPlayerStatusPtr->position.x;
                     npc->pos.z = gPlayerStatusPtr->position.z;

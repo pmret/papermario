@@ -121,7 +121,7 @@ s32 create_npc_impl(NpcBlueprint* blueprint, AnimID* animList, s32 isPeachNpc) {
     npc->colliderPos.x = 0.0f;
     npc->colliderPos.y = 0.0f;
     npc->colliderPos.z = 0.0f;
-    npc->rotationVerticalPivotOffset = 0.0f;
+    npc->rotationPivotOffsetY = 0.0f;
     npc->rotation.x = 0.0f;
     npc->rotation.y = 0.0f;
     npc->rotation.z = 0.0f;
@@ -143,7 +143,7 @@ s32 create_npc_impl(NpcBlueprint* blueprint, AnimID* animList, s32 isPeachNpc) {
     npc->foldType = 0;
     npc->foldArg5 = 0;
     npc->collisionChannel = COLLISION_CHANNEL_20000;
-    npc->isFacingAway = 0;
+    npc->isFacingAway = FALSE;
     npc->yawCamOffset = 0;
     npc->turnAroundYawAdjustment = 0;
     npc->currentFloor = NO_COLLIDER;
@@ -417,9 +417,9 @@ void npc_do_other_npc_collision(Npc* npc) {
                         if (!(thisBuf + otherBuf <= dist)) {
                             collision = FALSE;
                             if (npc->flags & NPC_FLAG_PARTNER) {
-                                collision = gPartnerActionStatus.partnerActionState == PARTNER_ACTION_NONE;
+                                collision = gPartnerStatus.partnerActionState == PARTNER_ACTION_NONE;
                             } else if (!(otherNpc->flags & NPC_FLAG_PARTNER) ||
-                                        gPartnerActionStatus.partnerActionState == PARTNER_ACTION_NONE)
+                                        gPartnerStatus.partnerActionState == PARTNER_ACTION_NONE)
                             {
                                 collision = TRUE;
                             }
@@ -821,8 +821,8 @@ void appendGfx_npc(void* data) {
         guMtxCatF(mtx2, mtx1, mtx1);
     }
 
-    if (npc->rotationVerticalPivotOffset != 0.0f) {
-        guTranslateF(mtx2, 0.0f, npc->rotationVerticalPivotOffset, 0.0f);
+    if (npc->rotationPivotOffsetY != 0.0f) {
+        guTranslateF(mtx2, 0.0f, npc->rotationPivotOffsetY, 0.0f);
         guMtxCatF(mtx2, mtx1, mtx1);
     }
 
@@ -841,8 +841,8 @@ void appendGfx_npc(void* data) {
         guMtxCatF(mtx2, mtx1, mtx1);
     }
 
-    if (npc->rotationVerticalPivotOffset != 0.0f) {
-        guTranslateF(mtx2, 0.0f, -npc->rotationVerticalPivotOffset, 0.0f);
+    if (npc->rotationPivotOffsetY != 0.0f) {
+        guTranslateF(mtx2, 0.0f, -npc->rotationPivotOffsetY, 0.0f);
         guMtxCatF(mtx2, mtx1, mtx1);
     }
 
@@ -1500,7 +1500,7 @@ s32 npc_draw_palswap_mode_2(Npc* npc, s32 arg1, s32 arg2, Matrix4f mtx) {
                 npc->palSwapLerpAlpha = 0;
                 npc->palSwapState = 1;
             }
-            /* fallthrough */
+            // fallthrough
         case 1:
             npc->palSwapLerpAlpha += 25600 / npc->unk_30E;
             if (npc->palSwapLerpAlpha > 25500) {
@@ -1531,7 +1531,7 @@ s32 npc_draw_palswap_mode_2(Npc* npc, s32 arg1, s32 arg2, Matrix4f mtx) {
                 npc->palSwapLerpAlpha = 0;
                 npc->palSwapState = 3;
             }
-            /* fallthrough */
+            // fallthrough
         case 3:
             npc->palSwapLerpAlpha += 25600 / npc->unk_312;
             if (npc->palSwapLerpAlpha > 25500) {
@@ -1622,7 +1622,7 @@ s32 npc_draw_palswap_mode_4(Npc* npc, s32 arg1, Matrix4f mtx) {
                 npc->palSwapLerpAlpha = 0;
                 npc->palSwapState = 1;
             }
-            /* fallthrough */
+            // fallthrough
         case 1:
             npc->palSwapLerpAlpha += 25600 / npc->unk_30E;
             if (npc->palSwapLerpAlpha > 25500) {
@@ -1663,7 +1663,7 @@ s32 npc_draw_palswap_mode_4(Npc* npc, s32 arg1, Matrix4f mtx) {
                 npc->palSwapLerpAlpha = 0;
                 npc->palSwapState = 3;
             }
-            /* fallthrough */
+            // fallthrough
         case 3:
             npc->palSwapLerpAlpha += 25600 / npc->unk_312;
             if (npc->palSwapLerpAlpha > 25500) {
@@ -2162,7 +2162,7 @@ void func_8003D624(Npc* npc, s32 foldType, s32 arg2, s32 arg3, s32 arg4, s32 arg
 //TODO begin split for npc_surfaces
 
 void spawn_surface_effects(Npc* npc, SurfaceInteractMode mode) {
-    PartnerActionStatus* temp = &gPartnerActionStatus;
+    PartnerStatus* temp = &gPartnerStatus;
 
     if ((npc->flags & (NPC_FLAG_TOUCHES_GROUND | NPC_FLAG_INVISIBLE)) == NPC_FLAG_TOUCHES_GROUND) {
         if (npc->moveSpeed != 0.0f) {

@@ -1775,7 +1775,7 @@ void func_80133A94(s32 idx, s32 itemID) {
 #ifdef NON_EQUIVALENT
 s32 test_item_player_collision(ItemEntity* item) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     EncounterStatus* encounterStatus = &gCurrentEncounter;
     Camera* camera = &gCameras[gCurrentCameraID];
     s32 actionState;
@@ -1832,7 +1832,7 @@ s32 test_item_player_collision(ItemEntity* item) {
         return FALSE;
     }
 
-    if (partnerActionStatus->partnerActionState != 0 && partnerActionStatus->actingPartner == 9) {
+    if (partnerStatus->partnerActionState != 0 && partnerStatus->actingPartner == 9) {
         return FALSE;
     }
 

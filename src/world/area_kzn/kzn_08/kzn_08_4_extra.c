@@ -32,7 +32,7 @@ API_CALLABLE(N(func_80243EE0_C75360)) {
         return ApiStatus_BLOCK;
     }
 
-    if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) {
+    if (gPartnerStatus.partnerActionState != PARTNER_ACTION_NONE) {
         if (playerData->currentPartner == PARTNER_WATT) {
             if (!script->functionTemp[1]) {
                 script->functionTemp[1] = TRUE;

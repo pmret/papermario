@@ -1117,8 +1117,8 @@ EvtScript N(EVS_Quizmo_QuizMain) = {
                 EVT_CALL(SetMessageText, EVT_PTR(MessageSingular), 1)
             EVT_ELSE
 #if VERSION_PAL
-                EVT_CALL(GetLanguage, LocalVar(0))
-                EVT_IF_EQ(LocalVar(0), 1)
+                EVT_CALL(GetLanguage, LVar0)
+                EVT_IF_EQ(LVar0, 1)
                     EVT_CALL(SetMessageText, EVT_PTR(MessagePlural_de), 1)
                 EVT_ELSE
                     EVT_CALL(SetMessageText, EVT_PTR(MessagePlural), 1)

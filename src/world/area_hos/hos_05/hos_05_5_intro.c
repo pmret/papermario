@@ -698,7 +698,7 @@ API_CALLABLE(N(CamPushIn_BowserInhale)) {
     N(interp_value_with_easing)(INTRO_MATH_EASING_LINEAR, 121.6f, 90.0f, N(CamMoveInhaleTime), 40.0f, &N(BoomLengthInhale));
     camera->panActive = TRUE;
     camera->controlSettings.boomLength = N(BoomLengthInhale);
-    if ((N(CamMoveInhaleTime) == ((N(CamMoveInhaleTime) / 5) * 5)) && (N(BoomLengthInhale) != 90.0f)) {
+    if (N(CamMoveInhaleTime) % 5 == 0 && N(BoomLengthInhale) != 90.0f) {
         f32 temp_f4 = resolve_npc(script, NPC_Bowser_Body)->pos.y - 150.0f;
 
         fx_fire_breath(
@@ -1023,21 +1023,21 @@ ApiStatus func_802428C8_A2CB08(Evt* script, s32 isInitialCall) {
             break;
     }
 
-    vec01->x = evt_get_float_variable(script, LocalVar(0));
-    vec01->y = evt_get_float_variable(script, LocalVar(1));
-    vec01->z = evt_get_float_variable(script, LocalVar(2));
+    vec01->x = evt_get_float_variable(script, LVar0);
+    vec01->y = evt_get_float_variable(script, LVar1);
+    vec01->z = evt_get_float_variable(script, LVar2);
 
     vec2 = &vec01[2];
     vec01++;
 
     if (temp_s6 != 2) {
-        vec01->x = (evt_get_float_variable(script, LocalVar(0)) * temp_f28) + (vec2->x * (1.0f - temp_f28));
-        vec01->y = (evt_get_float_variable(script, LocalVar(1)) * temp_f28) + (vec2->y * (1.0f - temp_f28)) + sp10;
-        vec01->z = (evt_get_float_variable(script, LocalVar(2)) * temp_f28) + (vec2->z * (1.0f - temp_f28));
+        vec01->x = (evt_get_float_variable(script, LVar0) * temp_f28) + (vec2->x * (1.0f - temp_f28));
+        vec01->y = (evt_get_float_variable(script, LVar1) * temp_f28) + (vec2->y * (1.0f - temp_f28)) + sp10;
+        vec01->z = (evt_get_float_variable(script, LVar2) * temp_f28) + (vec2->z * (1.0f - temp_f28));
     } else {
-        vec01->x = ((evt_get_float_variable(script, LocalVar(0)) * temp_f28) + (vec2->x * (1.0f - temp_f28))) - 50.0f;
-        vec01->y = (evt_get_float_variable(script, LocalVar(1)) * temp_f28) + (vec2->y * (1.0f - temp_f28)) + sp10;
-        vec01->z = ((evt_get_float_variable(script, LocalVar(2)) * temp_f28) + (vec2->z * (1.0f - temp_f28))) - 50.0f;
+        vec01->x = ((evt_get_float_variable(script, LVar0) * temp_f28) + (vec2->x * (1.0f - temp_f28))) - 50.0f;
+        vec01->y = (evt_get_float_variable(script, LVar1) * temp_f28) + (vec2->y * (1.0f - temp_f28)) + sp10;
+        vec01->z = ((evt_get_float_variable(script, LVar2) * temp_f28) + (vec2->z * (1.0f - temp_f28))) - 50.0f;
     }
     script->varTable[0] = s5;
     script->varTablePtr[1] = unkData;

@@ -2914,9 +2914,9 @@ API_CALLABLE(func_80219188_465618) {
                         wattEffectData->effect2->flags |= EFFECT_INSTANCE_FLAG_10;
                         wattEffectData->effect2 = NULL;
                     }
-                    wattEffectData->effect1->data.staticStatus->unk_04 = x;
-                    wattEffectData->effect1->data.staticStatus->unk_08 = y;
-                    wattEffectData->effect1->data.staticStatus->unk_0C = z;
+                    wattEffectData->effect1->data.staticStatus->pos.x = x;
+                    wattEffectData->effect1->data.staticStatus->pos.y = y;
+                    wattEffectData->effect1->data.staticStatus->pos.z = z;
                     break;
                 case 1:
                     if (wattEffectData->effect1 != NULL) {
@@ -2927,9 +2927,9 @@ API_CALLABLE(func_80219188_465618) {
                         wattEffectData->effect2 = fx_static_status(1, x, y, z, (actor->debuff != STATUS_SHRINK) ? 1.0f : 0.4f, 5, 0);
 
                     }
-                    wattEffectData->effect2->data.staticStatus->unk_04 = x;
-                    wattEffectData->effect2->data.staticStatus->unk_08 = y;
-                    wattEffectData->effect2->data.staticStatus->unk_0C = z;
+                    wattEffectData->effect2->data.staticStatus->pos.x = x;
+                    wattEffectData->effect2->data.staticStatus->pos.y = y;
+                    wattEffectData->effect2->data.staticStatus->pos.z = z;
                     break;
             }
         } else {
