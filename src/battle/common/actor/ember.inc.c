@@ -235,7 +235,7 @@ EvtScript N(8021B2FC) = {
 };
 
 EvtScript N(8021B398) = {
-    EVT_CALL(EnemyCreateTargetList, 0x00008002)
+    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(GetOwnerTarget, LVar0, LVar5)

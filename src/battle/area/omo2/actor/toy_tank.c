@@ -178,7 +178,7 @@ EvtScript N(init) = {
     EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_idle))
     EVT_CALL(EnableModel, 62, FALSE)
     EVT_CALL(SetAnimatedModelRootPosition, 0, 200, 0, 0)
-    EVT_CALL(SetPartTargetFlagBits, ACTOR_SELF, 3, 1, TRUE)
+    EVT_CALL(SetPartTargetFlagBits, ACTOR_SELF, 3, ACTOR_PART_TARGET_FLAG_1, TRUE)
     EVT_CALL(GetModelCenter, 39)
     EVT_PLAY_EFFECT(EFFECT_BULB_GLOW, 2, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), LVar5, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 5, LVar5)

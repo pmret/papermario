@@ -860,7 +860,7 @@ EvtScript N(8021B998) = {
         EVT_WAIT(4)
         EVT_EXEC_WAIT(N(8021B6AC))
     EVT_END_CHILD_THREAD
-    EVT_CALL(EnemyCreateTargetList, 0x00018004)
+    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_4 | TARGET_FLAG_8000 | TARGET_FLAG_10000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(GetOwnerID, LVar1)

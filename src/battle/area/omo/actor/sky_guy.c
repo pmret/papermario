@@ -259,7 +259,7 @@ EvtScript N(init_8022987C) = {
     EVT_SUB(LVar1, 5)
     EVT_CALL(ForceHomePos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(HPBarToHome, ACTOR_SELF)
-    EVT_CALL(SetPartTargetFlagBits, ACTOR_SELF, PT_3, 4, TRUE)
+    EVT_CALL(SetPartTargetFlagBits, ACTOR_SELF, PT_3, ACTOR_PART_TARGET_FLAG_4, TRUE)
     EVT_RETURN
     EVT_END
 };

@@ -398,7 +398,7 @@ EvtScript N(healOneAlly) = {
 };
 
 EvtScript N(findTargetsToHeal) = {
-    EVT_CALL(EnemyCreateTargetList, 2)
+    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)

@@ -634,7 +634,7 @@ EvtScript N(summonBackup) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_SpearGuy_Anim0E)
     EVT_WAIT(20)
     EVT_CALL(GetOriginalActorType, ACTOR_SELF, LVar0)
-    EVT_CALL(EnemyCreateTargetList, 0x00008004)
+    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_4 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(GetOwnerTarget, LVar1, LVar2)
@@ -657,7 +657,7 @@ EvtScript N(summonBackup) = {
         EVT_GOTO(0)
     EVT_END_IF
     EVT_SET(LocalFlag(0), 0)
-    EVT_CALL(EnemyCreateTargetList, 0x00008004)
+    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_4 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(1)
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
@@ -925,7 +925,7 @@ EvtScript N(spearThrow) = {
 };
 
 EvtScript N(8021B770) = {
-    EVT_CALL(EnemyCreateTargetList, 0x00008002)
+    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(GetOwnerTarget, LVar0, LVar5)
@@ -968,7 +968,7 @@ EvtScript N(8021B770) = {
 
 EvtScript N(8021B96C) = {
     EVT_SET(LVar9, 0)
-    EVT_CALL(EnemyCreateTargetList, 0x00008002)
+    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
@@ -1002,7 +1002,7 @@ EvtScript N(8021B96C) = {
 EvtScript N(8021BB18) = {
     EVT_CALL(GetIndexFromHome, ACTOR_SELF, LVarA)
     EVT_SET(LocalFlag(0), 0)
-    EVT_CALL(EnemyCreateTargetList, 0x00008004)
+    EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_4 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
@@ -1073,7 +1073,7 @@ EvtScript N(takeTurn_8021BCB4) = {
             EVT_EXEC_WAIT(N(8021BB18))
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(2)
-            EVT_CALL(EnemyCreateTargetList, 0x00008002)
+            EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
             EVT_CALL(GetTargetListLength, LVar0)
             EVT_IF_EQ(LVar0, 1)
                 EVT_EXEC_WAIT(N(spearThrow))
