@@ -41,8 +41,8 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_SETUP_CAMERA_ALT_NO_LEAD()
 #if VERSION_PAL
-    EVT_CALL(GetLanguage, LocalVar(0))
-    EVT_CALL(SetModelTexVariant, MODEL_o110, LocalVar(0))
+    EVT_CALL(GetLanguage, LVar0)
+    EVT_CALL(SetModelTexVariant, MODEL_o110, LVar0)
 #endif
     EVT_SET(GF_MAP_MtRugged, TRUE)
     EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(DefaultNPCs)))
