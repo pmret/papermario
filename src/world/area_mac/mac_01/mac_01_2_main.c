@@ -118,8 +118,8 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(SetCamEnabled, CAM_DEFAULT, TRUE)
     EVT_CALL(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
 #if VERSION_PAL
-    EVT_CALL(GetLanguage, LocalVar(0))
-    EVT_CALL(SetModelTexVariant, MODEL_k11, LocalVar(0))
+    EVT_CALL(GetLanguage, LVar0)
+    EVT_CALL(SetModelTexVariant, MODEL_k11, LVar0)
 #endif
     EVT_SET(AF_MAC_0E, FALSE)
     EVT_SET(AF_MAC_0F, FALSE)

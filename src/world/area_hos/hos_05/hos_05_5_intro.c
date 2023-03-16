@@ -1023,21 +1023,21 @@ ApiStatus func_802428C8_A2CB08(Evt* script, s32 isInitialCall) {
             break;
     }
 
-    vec01->x = evt_get_float_variable(script, LocalVar(0));
-    vec01->y = evt_get_float_variable(script, LocalVar(1));
-    vec01->z = evt_get_float_variable(script, LocalVar(2));
+    vec01->x = evt_get_float_variable(script, LVar0);
+    vec01->y = evt_get_float_variable(script, LVar1);
+    vec01->z = evt_get_float_variable(script, LVar2);
 
     vec2 = &vec01[2];
     vec01++;
 
     if (temp_s6 != 2) {
-        vec01->x = (evt_get_float_variable(script, LocalVar(0)) * temp_f28) + (vec2->x * (1.0f - temp_f28));
-        vec01->y = (evt_get_float_variable(script, LocalVar(1)) * temp_f28) + (vec2->y * (1.0f - temp_f28)) + sp10;
-        vec01->z = (evt_get_float_variable(script, LocalVar(2)) * temp_f28) + (vec2->z * (1.0f - temp_f28));
+        vec01->x = (evt_get_float_variable(script, LVar0) * temp_f28) + (vec2->x * (1.0f - temp_f28));
+        vec01->y = (evt_get_float_variable(script, LVar1) * temp_f28) + (vec2->y * (1.0f - temp_f28)) + sp10;
+        vec01->z = (evt_get_float_variable(script, LVar2) * temp_f28) + (vec2->z * (1.0f - temp_f28));
     } else {
-        vec01->x = ((evt_get_float_variable(script, LocalVar(0)) * temp_f28) + (vec2->x * (1.0f - temp_f28))) - 50.0f;
-        vec01->y = (evt_get_float_variable(script, LocalVar(1)) * temp_f28) + (vec2->y * (1.0f - temp_f28)) + sp10;
-        vec01->z = ((evt_get_float_variable(script, LocalVar(2)) * temp_f28) + (vec2->z * (1.0f - temp_f28))) - 50.0f;
+        vec01->x = ((evt_get_float_variable(script, LVar0) * temp_f28) + (vec2->x * (1.0f - temp_f28))) - 50.0f;
+        vec01->y = (evt_get_float_variable(script, LVar1) * temp_f28) + (vec2->y * (1.0f - temp_f28)) + sp10;
+        vec01->z = ((evt_get_float_variable(script, LVar2) * temp_f28) + (vec2->z * (1.0f - temp_f28))) - 50.0f;
     }
     script->varTable[0] = s5;
     script->varTablePtr[1] = unkData;
