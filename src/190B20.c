@@ -72,19 +72,18 @@ void create_target_list(Actor* actor, s32 arg1) {
     s32 i, j;
     f32 targetX, targetY, targetZ;
     f32 f2, f12, f14;
-    f32 f61;
     u8 overlayType;
     f32 overlayZoom;
     s32 sp18 = FALSE;
     s32 col;
     s32 row;
-
     s32 skip;
 
     if (battleStatus->currentTargetListFlags & TARGET_FLAG_80000000) {
         actor->targetListLength = -1;
         return;
     }
+
     if (battleStatus->currentTargetListFlags & TARGET_FLAG_PLAYER) {
         targetDataList->actorID = ACTOR_PLAYER;
         targetDataList->partID = 1;
@@ -98,7 +97,7 @@ void create_target_list(Actor* actor, s32 arg1) {
             targetDataList->pos.z = playerActor->homePos.z;
         }
         targetDataList->unk_10 = -100;
-        numTargets += 1;
+        numTargets++;
         targetDataList++;
     }
 
@@ -115,7 +114,7 @@ void create_target_list(Actor* actor, s32 arg1) {
             targetDataList->pos.z = partnerActor->homePos.z;
         }
         targetDataList->unk_10 = -50;
-        numTargets += 1;
+        numTargets++;
         targetDataList++;
     }
 
