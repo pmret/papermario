@@ -1,3 +1,9 @@
+D_8021C940_5A3020 = 0x8021C940; // rom:0x5F5EB0
+D_8021CD40_5A3420 = 0x8021CD40; // rom:0x5F62B0
+D_8021CF40_5A3620 = 0x8021CF40; // rom:0x5F64B0
+monstar_bubbles = 0x80223680; // rom:0x69B6F0
+battle_area_sam2_actor_img_png = 0x8021A098; // rom:0x692108
+battle_area_sam2_actor_img_pal = 0x8021A298; // rom:0x692308
 mac_01_toad_house_blanket_vtx = 0x8024B5F0; // rom:0x877F80 size:0x15E0
 mac_01_toad_house_blanket_gfx = 0x8024CBD0; // rom:0x879560
 mac_01_toad_house_blanket_img = 0x8024CD38; // rom:0x8796C8

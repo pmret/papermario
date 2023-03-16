@@ -3092,6 +3092,8 @@ enum ShadingProfile {
     SHADING_KZN_20,
     SHADING_KZN_22,
     SHADING_KZN_23,
+    SHADING_UNUSED = 0x000B0000,
+    SHADING_BTL_ISK = 0x000C0000,
 };
 #endif
 

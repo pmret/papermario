@@ -118,6 +118,857 @@ segments:
 
   - [0x231990, bin]
 
+
+####################
+### Battle Areas ###
+####################
+  - dir: battle/area/kmr_part_1
+    type: code
+    start: 0x4836F0
+    vram: 0x80218000
+    subalign: 4
+    subsegments:
+    - [0x4836F0, c, area]
+    - [0x4836F0, c, actor/goomba]
+    - [0x483970, c, actor/spiked_goomba]
+    - [0x483BF0, c, actor/paragoomba]
+    - [0x483ED0, c, stage/kmr_02]
+    - [0x483ED0, c, stage/kmr_03]
+    - [0x484140, c, stage/kmr_04]
+    - [0x4843B0, c, stage/kmr_05]
+    - [0x484620, c, stage/kmr_06]
+    - [0x4848D0]
+  - dir: battle/area/kmr_part_2
+    type: code
+    start: 0x48C7E0
+    vram: 0x80218000
+    subalign: 4
+    subsegments:
+    - [0x48C7E0, c, area]
+    - [0x48C7E0, c, actor/blue_goomba]
+    - [0x48CA60, c, actor/red_goomba]
+    - [0x48CCE0, c, actor/blue_goomba2]
+    - [0x48CF90, c, actor/red_goomba2]
+    - [0x48D240, c, actor/goomba_king]
+    - [0x48D2F0, c, actor/goomnut_tree]
+    - [0x48D530, c, stage/kmr_02]
+    - [0x48D530, c, stage/kmr_03]
+    - [0x48D7A0, c, stage/kmr_04]
+    - [0x48DA10, c, stage/kmr_05]
+    - [0x48DC80, c, stage/kmr_06]
+    - [0x48DF30]
+  - dir: battle/area/kmr_part_3
+    type: code
+    start: 0x49A190
+    vram: 0x80218000
+    subalign: 4
+    subsegments:
+    - [0x49A190, c, area]
+    - [0x49A190, c, actor/spiked_goomba]
+    - [0x49A410, c, actor/paragoomba]
+    - [0x49A6F0, c, actor/paragoomba2]
+    - [0x49A9D0, c, actor/jr_troopa]
+    - [0x49A9D0, c, actor/egg_jr_troopa]
+    - [0x49A9D0, c, actor/para_jr_troopa]
+    - [0x49AAA0, c, actor/spiked_para_jr_troopa]
+    - [0x49AC60, c, actor/mage_jr_troopa]
+    - [0x49AC60, c, actor/final_jr_troopa]
+    - [0x49B170, c, stage/kmr_02]
+    - [0x49B170, c, stage/kmr_03]
+    - [0x49B3E0, c, stage/kmr_04]
+    - [0x49B650, c, stage/kmr_05]
+    - [0x49B8C0, c, stage/kmr_06]
+    - [0x49BB70, c, stage/nok_01]
+    - [0x49BB70, c, stage/mim_01]
+    - [0x49BBD0, c, stage/sam_01]
+    - [0x49BEF0, c, stage/mac_01]
+    - [0x49C340, c, stage/kpa_01]
+    - [0x49C340]
+  - dir: battle/area/mac
+    type: code
+    start: 0x4B71E0
+    vram: 0x80218000
+    subsegments:
+    - [0x4B71E0, c, actor/chan]
+    - [0x4B72B0, c, actor/lee]
+    - [0x4B8AE0, c, actor/master1]
+    - [0x4B8AE0, c, actor/master2]
+    - [0x4B8AE0, c, actor/master3]
+    - [0x4B8AE0, c, stage/mac_01]
+    - [0x4B8F30, c, stage/mac_02]
+    - [0x4B8F30, c, area]
+    - [0x4B8F30]
+  - dir: battle/area/hos
+    type: code
+    start: 0x4D1E00
+    vram: 0x80218000
+    subsegments:
+    - [0x4D1E00, c, actor/goombario_tutor]
+    - [0x4D1E20, c, actor/ember]
+    - [0x4D1F50, c, actor/magikoopa]
+    - [0x4D22C0, c, stage/hos_01]
+    - [0x4D2E10, c, stage/hos_00]
+    - [0x4D2E10, c, stage/hos_02]
+    - [0x4D2E10, c, area]
+    - [0x4D2E10]
+  - dir: battle/area/nok
+    type: code
+    start: 0x4DFEF0
+    vram: 0x80218000
+    subalign: 4
+    subsegments:
+    - [0x4DFEF0, c, area]
+    - [0x4DFEF0, c, actor/goomba]
+    - [0x4E0170, c, actor/paragoomba]
+    - [0x4E0450, c, actor/spiked_goomba]
+    - [0x4E06D0, c, actor/koopa_troopa]
+    - [0x4E07A0, c, actor/fuzzy]
+    - [0x4E0910, c, actor/paratroopa]
+    - [0x4E0A40, c, actor/kent_c_koopa]
+    - [0x4E0D10, c, stage/nok_01]
+    - [0x4E0D10, c, stage/nok_02]
+    - [0x4E0D10, c, stage/nok_03]
+    - [0x4E0D10, c, stage/nok_04]
+    - [0x4E0D10]
+  - dir: battle/area/trd_part_1
+    type: code
+    start: 0x4F3DF0
+    vram: 0x80218000
+    subsegments:
+    - [0x4F3DF0, c, area]
+    - [0x4F3DF0, c, actor/bullet_bill]
+    - [0x4F3DF0, c, actor/bill_blaster]
+    - [0x4F3E10, c, actor/bob_omb]
+    - [0x4F3E10, c, actor/koopa_troopa]
+    - [0x4F3EE0, c, actor/paratroopa]
+    - [0x4F4010, c, stage/trd_01]
+    - [0x4F4010, c, stage/trd_02]
+    - [0x4F4010, c, stage/trd_02b]
+    - [0x4F4010, c, stage/trd_03]
+    - [0x4F4280, c, stage/trd_04]
+    - [0x4F4280, c, stage/trd_05]
+    - [0x4F4280, c, stage/trd_00]
+    - [0x4F4280, c, stage/trd_02c]
+    - [0x4F4280, c, stage/trd_02d]
+    - [0x4F4280, c, stage/trd_05b]
+    - [0x4F4280, c, stage/trd_05c]
+    - [0x4F4280, c, stage/trd_05d]
+    - [0x4F4280, c, stage/trd_05e]
+    - [0x4F4280, c, stage/trd_05f]
+    - [0x4F4280]
+  - dir: battle/area/trd_part_2
+    type: code
+    start: 0x503F40
+    vram: 0x80218000
+    subalign: 4
+    subsegments:
+    - [0x503F40, c, area]
+    - [0x503F40, c, actor/fake_bowser]
+    - [0x504320, c, actor/green_ninja_koopa]
+    - [0x504AE0, c, actor/red_ninja_koopa]
+    - [0x5052A0, c, actor/blue_ninja_koopa]
+    - [0x505A60, c, actor/yellow_ninja_koopa]
+    - [0x506220, c, stage/trd_00]
+    - [0x506220, c, stage/trd_01]
+    - [0x506220, c, stage/trd_02]
+    - [0x506220, c, stage/trd_02b]
+    - [0x506220, c, stage/trd_03]
+    - [0x506490, c, stage/trd_04]
+    - [0x506490, c, stage/trd_05]
+    - [0x506490, c, stage/trd_05b]
+    - [0x506490, c, stage/trd_05c]
+    - [0x506490, c, stage/trd_05d]
+    - [0x506490, c, stage/trd_05e]
+    - [0x506490, c, stage/trd_05f]
+    - [0x506490]
+  - dir: battle/area/trd_part_3
+    type: code
+    start: 0x521F00
+    vram: 0x80218000
+    subsegments:
+    - [0x521F00, c, area]
+    - [0x521F00, c, actor/eldstar]
+    - [0x522120, c, stage/nok_01]
+    - [0x522120]
+  - dir: battle/area/iwa
+    type: code
+    start: 0x522F40
+    vram: 0x80218000
+    subalign: 4
+    subsegments:
+    - [0x522F40, c, area]
+    - [0x522F40, c, actor/cleft]
+    - [0x523000, c, actor/monty_mole]
+    - [0x523000, c, actor/buzzar]
+    - [0x523060, c, actor/whacka]
+    - [0x5230B0, c, stage/iwa_01]
+    - [0x523100, c, stage/iwa_01b]
+    - [0x523100, c, stage/iwa_02]
+    - [0x523150]
+  - dir: battle/area/sbk
+    type: code
+    start: 0x52D330
+    vram: 0x80218000
+    subsegments:
+    - [0x52D330, c, actor/pokey]
+    - [0x52D400, c, actor/bandit]
+    - [0x52D400, c, stage/sbk_02]
+    - [0x52D5B0, c, area]
+    - [0x52D5B0]
+  - dir: battle/area/isk_part_1
+    type: code
+    start: 0x535490
+    vram: 0x80218000
+    subsegments:
+    - [0x535490, c, actor/pokey_mummy]
+    - [0x535560, c, actor/swooper]
+    - [0x535630, c, actor/buzzy_beetle]
+    - [0x535700, c, actor/stone_chomp]
+    - [0x535D40, c, stage/isk_00]
+    - [0x535D40, c, stage/isk_01]
+    - [0x535D40, c, stage/isk_02]
+    - [0x535D40, c, stage/isk_03]
+    - [0x535D40, c, stage/isk_04]
+    - [0x535E10, c, stage/isk_05]
+    - [0x535EE0, c, stage/isk_06]
+    - [0x535F50, c, stage/isk_07]
+    - [0x535FC0, c, stage/isk_03b]
+    - [0x535FC0, c, stage/isk_02b]
+    - [0x535FC0, c, stage/isk_02c]
+    - [0x535FC0, c, stage/isk_06b]
+    - [0x536030, c, stage/isk_08]
+    - [0x5360A0, c, area]
+    - [0x5360A0]
+  - dir: battle/area/isk_part_2
+    type: code
+    start: 0x5421F0
+    vram: 0x80218000
+    subsegments:
+    - [0x5421F0, c, actor/chain_chomp]
+    - [0x542880, c, actor/tutankoopa]
+    - [0x542A40, c, stage/isk_00]
+    - [0x542A40, c, stage/isk_01]
+    - [0x542A40, c, stage/isk_02]
+    - [0x542A40, c, stage/isk_02b]
+    - [0x542A40, c, stage/isk_02c]
+    - [0x542A40, c, stage/isk_03]
+    - [0x542A40, c, stage/isk_03b]
+    - [0x542A40, c, stage/isk_04]
+    - [0x542B10, c, stage/isk_05]
+    - [0x542BE0, c, stage/isk_06]
+    - [0x542C50, c, stage/isk_06b]
+    - [0x542CC0, c, stage/isk_07]
+    - [0x542D30, c, area]
+    - [0x542D30]
+  - dir: battle/area/mim
+    type: code
+    start: 0x54A930
+    vram: 0x80218000
+    subsegments:
+    - [0x54A930, c, actor/forest_fuzzy]
+    - [0x54AAA0, c, actor/bzzap]
+    - [0x54AC90, c, actor/piranha_plant]
+    - [0x54AC90, c, stage/mim_01]
+    - [0x54ACF0, c, area]
+    - [0x54ACF0]
+  - dir: battle/area/arn
+    type: code
+    start: 0x5517A0
+    vram: 0x80218000
+    subsegments:
+    - [0x5517A0, c, actor/hypergoomba]
+    - [0x551A80, c, actor/hyper_paragoomba]
+    - [0x551D60, c, actor/hyper_cleft]
+    - [0x551E20, c, actor/tubbas_heart]
+    - [0x551F10, c, actor/tubba_blubba]
+    - [0x551F10, c, stage/arn_01]
+    - [0x551F10, c, stage/arn_02]
+    - [0x551F10, c, stage/arn_03]
+    - [0x551F10, c, stage/arn_04]
+    - [0x551F10, c, stage/arn_05]
+    - [0x551F10, c, stage/arn_06]
+    - [0x551F10, c, area]
+    - [0x551F10]
+  - dir: battle/area/dgb
+    type: code
+    start: 0x561D70
+    vram: 0x80218000
+    subsegments:
+    - [0x561D70, c, actor/clubba]
+    - [0x561D70, c, actor/tubba_blubba]
+    - [0x561D70, c, stage/dgb_01]
+    - [0x561D70, c, stage/dgb_02]
+    - [0x561D70, c, stage/dgb_03]
+    - [0x561D70, c, stage/dgb_04]
+    - [0x561D70, c, stage/dgb_05]
+    - [0x561D70, c, area]
+    - [0x561D70]
+  - dir: battle/area/omo
+    type: code
+    start: 0x565320
+    vram: 0x80218000
+    subsegments:
+    - [0x565320, c, actor/red_shy_guy]
+    - [0x5653F0, c, actor/blue_shy_guy]
+    - [0x5654C0, c, actor/yellow_shy_guy]
+    - [0x565590, c, actor/pink_shy_guy]
+    - [0x565660, c, actor/green_shy_guy]
+    - [0x565730, c, actor/anti_guy]
+    - [0x565800, c, actor/medi_guy]
+    - [0x5659E0, c, actor/groove_guy]
+    - [0x565BA0, c, actor/spy_guy]
+    - [0x5660D0, c, actor/sky_guy]
+    - [0x566200, c, actor/pyro_guy]
+    - [0x5662D0, c, stage/omo_01]
+    - [0x5664E0, c, stage/omo_02]
+    - [0x5664E0, c, stage/omo_03]
+    - [0x5664E0, c, stage/omo_03b]
+    - [0x5664E0, c, stage/omo_04]
+    - [0x566530, c, stage/omo_05]
+    - [0x566530, c, stage/omo_05b]
+    - [0x566530, c, stage/omo_06]
+    - [0x566530, c, stage/omo_07]
+    - [0x566530, c, area]
+    - [0x566530]
+  - dir: battle/area/omo2
+    type: code
+    start: 0x57E490
+    vram: 0x80218000
+    subsegments:
+    - [0x57E490, c, actor/general_guy]
+    - [0x57E5B0, c, actor/toy_tank]
+    - [0x57E6E0, c, actor/light_bulb]
+    - [0x57E7C0, c, stage/omo_07]
+    - [0x57E7C0, c, area]
+    - [0x57E7C0]
+  - dir: battle/area/omo2_1
+    type: code
+    start: 0x596360
+    vram: 0x80231000
+    subsegments:
+    - [0x596360, c, actor/shy_squad]
+    - [0x596410]
+  - dir: battle/area/omo2_2
+    type: code
+    start: 0x59B1D0
+    vram: 0x80231000
+    subsegments:
+    - [0x59B1D0, c, actor/stilt_guy]
+    - [0x59B2F0]
+  - dir: battle/area/omo2_3
+    type: code
+    start: 0x59FA60
+    vram: 0x80231000
+    subsegments:
+    - [0x59FA60, c, actor/shy_stack]
+    - [0x59FA90]
+  - dir: battle/area/omo2_4
+    type: code
+    start: 0x5A5230
+    vram: 0x80231000
+    subsegments:
+    - [0x5A5230, c, actor/signal_guy]
+    - [0x5A5230]
+  - dir: battle/area/omo2_5
+    type: code
+    start: 0x5A59A0
+    vram: 0x80231000
+    subsegments:
+    - [0x5A59A0, c, actor/shy_squad_dup]
+    - [0x5A59A0]
+  - dir: battle/area/omo2_6
+    type: code
+    start: 0x5A9A80
+    vram: 0x80231000
+    subsegments:
+    - [0x5A9A80, c, actor/shy_guy_dup]
+    - [0x5A9A80,]
+  - dir: battle/area/omo3
+    type: code
+    start: 0x5AA1D0
+    vram: 0x80218000
+    subsegments:
+    - [0x5AA1D0, c, actor/big_lantern_ghost]
+    - [0x5AA660, c, stage/omo_01]
+    - [0x5AA870, c, stage/omo_02]
+    - [0x5AA870, c, stage/omo_03]
+    - [0x5AA870, c, stage/omo_03b]
+    - [0x5AA870, c, stage/omo_04]
+    - [0x5AA8C0, c, stage/omo_05]
+    - [0x5AA8C0, c, stage/omo_05b]
+    - [0x5AA8C0, c, stage/omo_06]
+    - [0x5AA8C0, c, stage/omo_07]
+    - [0x5AA8C0, c, actor/goomba]
+    - [0x5AAB40, c, actor/clubba]
+    - [0x5AAB40, c, actor/fuzzy]
+    - [0x5AACB0, c, actor/hammer_bro]
+    - [0x5AACB0, c, actor/pokey]
+    - [0x5AAD80, c, actor/koopatrol]
+    - [0x5AAEB0, c, actor/red_shy_guy]
+    - [0x5AAF80, c, area]
+    - [0x5AAF80]
+  - dir: battle/area/kgr
+    type: code
+    start: 0x5C1130
+    vram: 0x80218000
+    subsegments:
+    - [0x5C1130, c, actor/fuzzipede]
+    - [0x5C1690, c, stage/kgr_01]
+    - [0x5C1AE0, c, area]
+    - [0x5C1AE0]
+  - dir: battle/area/jan
+    type: code
+    start: 0x5C67B0
+    vram: 0x80218000
+    subsegments:
+    - [0x5C67B0, c, actor/spear_guy]
+    - [0x5C6880, c, actor/hurt_plant]
+    - [0x5C6950, c, actor/jungle_fuzzy]
+    - [0x5C6AC0, c, actor/m_bush]
+    - [0x5C6AC0, c, actor/medi_guy]
+    - [0x5C6CA0, c, actor/spike_top]
+    - [0x5C6D70, c, stage/jan_00]
+    - [0x5C6D70, c, stage/jan_01]
+    - [0x5C6D70, c, stage/jan_01b]
+    - [0x5C6D70, c, stage/jan_02]
+    - [0x5C6D70, c, stage/jan_03]
+    - [0x5C6D70, c, stage/jan_03b]
+    - [0x5C6D70, c, stage/jan_04]
+    - [0x5C6D70, c, stage/jan_04b]
+    - [0x5C6D70, c, area]
+    - [0x5C6D70]
+  - dir: battle/area/jan2
+    type: code
+    start: 0x5D77D0
+    vram: 0x80218000
+    subsegments:
+    - [0x5D77D0, c, actor/putrid_piranha]
+    - [0x5D7A20, c, actor/white_magikoopa]
+    - [0x5D7E90, c, stage/jan_00]
+    - [0x5D7E90, c, stage/jan_01]
+    - [0x5D7E90, c, stage/jan_01b]
+    - [0x5D7E90, c, stage/jan_02]
+    - [0x5D7E90, c, stage/jan_03]
+    - [0x5D7E90, c, stage/jan_03b]
+    - [0x5D7E90, c, stage/jan_04]
+    - [0x5D7E90, c, stage/jan_04b]
+    - [0x5D7E90, c, area]
+    - [0x5D7E90]
+  - dir: battle/area/kzn
+    type: code
+    start: 0x5DF180
+    vram: 0x80218000
+    subsegments:
+    - [0x5DF180, c, actor/lava_bubble]
+    - [0x5DF2B0, c, actor/putrid_piranha]
+    - [0x5DF500, c, actor/spike_top]
+    - [0x5DF5D0, c, actor/medi_guy]
+    - [0x5DF7B0, c, actor/red_magikoopa]
+    - [0x5DFB20, c, actor/white_magikoopa]
+    - [0x5DFF90, c, stage/kzn_01]
+    - [0x5DFF90, c, stage/kzn_01b]
+    - [0x5DFF90, c, stage/kzn_02]
+    - [0x5DFF90, c, stage/kzn_04]
+    - [0x5DFF90, c, stage/kzn_04b]
+    - [0x5DFF90, c, stage/kzn_04c]
+    - [0x5DFF90, c, stage/kzn_05]
+    - [0x5DFF90, c, area]
+    - [0x5DFF90]
+  - dir: battle/area/kzn2
+    type: code
+    start: 0x5F1570
+    vram: 0x80218000
+    subsegments:
+    - [0x5F1570, c, anim/unused_gfx]
+    - [0x5F1570, c, anim/lava_piranha_anim]
+    - [0x5F1570, c, actor/lava_piranha]
+    - [0x5F22B0, c, actor/petit_piranha]
+    - [0x5F2360, c, actor/lava_bud]
+    - [0x5F23C0, c, actor/petit_piranha_bomb]
+    - [0x5F23C0, c, stage/kzn_01]
+    - [0x5F23C0, c, stage/kzn_01b]
+    - [0x5F23C0, c, stage/kzn_02]
+    - [0x5F23C0, c, stage/kzn_04]
+    - [0x5F23C0, c, stage/kzn_04b]
+    - [0x5F23C0, c, stage/kzn_04c]
+    - [0x5F23C0, c, stage/kzn_05]
+    - [0x5F23C0, c, area]
+    - start: 0x5F23C0
+      type: .data
+      name: anim/unused_gfx
+      subsegments:
+      - [0x5F23C0, vtx, vtx1]
+      - [0x5F2540, vtx, vtx2]
+      - [0x5F2660, vtx, vtx3]
+      - [0x5F27C0, vtx, vtx4]
+      - [0x5F28C0, vtx, vtx5]
+      - [0x5F2A20, vtx, vtx6]
+      - [0x5F2BC0, vtx, vtx7]
+      - [0x5F2D40, vtx, vtx8]
+      - [0x5F2EC0, vtx, vtx9]
+      - [0x5F3020, vtx, vtx10]
+      - [0x5F3140, vtx, vtx11]
+      - [0x5F3170, vtx, vtx12]
+      - [0x5F31A0, vtx, vtx13]
+      - [0x5F31D0, vtx, vtx14]
+      - [0x5F3200, vtx, vtx15]
+      - [0x5F3230, vtx, vtx16]
+      - [0x5F3260, vtx, vtx17]
+      - [0x5F3290, vtx, vtx18]
+      - [0x5F32C0, gfx, gfx1]
+      - [0x5F3390, gfx, gfx2]
+      - [0x5F33D0, gfx, gfx3]
+      - [0x5F3420, gfx, gfx4]
+      - [0x5F3470, gfx, gfx5]
+      - [0x5F34C0, gfx, gfx6]
+      - [0x5F3520, gfx, gfx7]
+      - [0x5F3570, gfx, gfx8]
+      - [0x5F35B0, gfx, gfx9]
+      - [0x5F3600, gfx, gfx10]
+      - [0x5F3640, gfx, gfx11]
+    - [0x5F3690, .data, anim/lava_piranha_anim]
+    - start: 0x5F5D10
+      type: .data
+      name: actor/lava_piranha
+      subsegments:
+      - [0x5F5D10]
+      - [0x5F5EB0, ci4, lava_piranha_vine, 64, 32]
+      - [0x5F62B0, palette, lava_piranha_vine]
+      - [0x5F64B0, gfx, lava_piranha_vine]
+      - [0x5F6588]
+    - [0x5FD440, .data, actor/petit_piranha]
+    - [0x5FE630, .data, actor/lava_bud]
+    - [0x601C90, .data, actor/petit_piranha_bomb]
+    - [0x601EF0, .data, stage/kzn_01]
+    - [0x601F90, .data, stage/kzn_01b]
+    - [0x602020, .data, stage/kzn_02]
+    - [0x602550, .data, stage/kzn_04]
+    - [0x602AE0, .data, stage/kzn_04b]
+    - [0x603070, .data, stage/kzn_04c]
+    - [0x6035B0, .data, stage/kzn_05]
+    - [0x603F00, .data, area]
+    - [0x6041B0]
+  - dir: battle/area/flo
+    type: code
+    start: 0x604340
+    vram: 0x80218000
+    subsegments:
+    - [0x604340, c, actor/lakitu]
+    - [0x604340, c, actor/spiny]
+    - [0x604340, c, actor/crazee_dayzee]
+    - [0x604340, c, actor/bzzap]
+    - [0x604530, c, actor/amazy_dayzee]
+    - [0x604530, c, actor/ruff_puff]
+    - [0x6046C0, c, actor/medi_guy]
+    - [0x6048A0, c, actor/red_magikoopa]
+    - [0x604C10, c, actor/green_magikoopa]
+    - [0x604F80, c, actor/white_magikoopa]
+    - [0x6053F0, c, actor/yellow_magikoopa]
+    - [0x605760, c, stage/flo_01]
+    - [0x605820, c, stage/flo_01b]
+    - [0x6058E0, c, stage/flo_01c]
+    - [0x6059A0, c, stage/flo_02]
+    - [0x605A60, c, stage/flo_02b]
+    - [0x605B20, c, stage/flo_02c]
+    - [0x605BE0, c, stage/flo_03]
+    - [0x605E30, c, stage/flo_04]
+    - [0x606080, c, stage/flo_05]
+    - [0x606140, c, stage/flo_06]
+    - [0x606200, c, area]
+    - [0x606200]
+  - dir: battle/area/flo2
+    type: code
+    start: 0x621520
+    vram: 0x80218000
+    subsegments:
+    - [0x621520, c, actor/huff_n_puff]
+    - [0x622160, c, actor/tuff_puff]
+    - [0x6222F0, c, actor/monty_mole_boss]
+    - [0x6222F0, c, actor/spike]
+    - [0x6222F0, c, stage/flo_01]
+    - [0x6223B0, c, stage/flo_01b]
+    - [0x622470, c, stage/flo_01c]
+    - [0x622530, c, stage/flo_02]
+    - [0x6225F0, c, stage/flo_02b]
+    - [0x6226B0, c, stage/flo_02c]
+    - [0x622770, c, stage/flo_03]
+    - [0x6229C0, c, stage/flo_04]
+    - [0x622C10, c, stage/flo_05]
+    - [0x622CD0, c, stage/flo_06]
+    - [0x622D90, c, area]
+    - [0x622D90]
+  - dir: battle/area/tik
+    type: code
+    start: 0x63F320
+    vram: 0x80218000
+    subsegments:
+    - [0x63F320, c, actor/dark_koopa]
+    - [0x63F3F0, c, actor/dark_paratroopa]
+    - [0x63F520, c, actor/gloomba]
+    - [0x63F7A0, c, actor/spiked_gloomba]
+    - [0x63FA20, c, actor/paragloomba]
+    - [0x63FD00, c, actor/buzzy_beetle]
+    - [0x63FDD0, c, actor/spike_top]
+    - [0x63FEA0, c, actor/spiny]
+    - [0x63FEA0, c, stage/tik_01]
+    - [0x640340, c, stage/tik_02]
+    - [0x6407E0, c, stage/tik_03]
+    - [0x640C80, c, stage/tik_04]
+    - [0x6410D0, c, stage/tik_05]
+    - [0x6413E0, c, area]
+    - [0x6413E0]
+  - dir: battle/area/tik2
+    type: code
+    start: 0x65B940
+    vram: 0x80218000
+    subsegments:
+    - [0x65B940, c, actor/blooper]
+    - [0x65BB40, c, actor/electro_blooper]
+    - [0x65BFC0, c, actor/super_blooper]
+    - [0x65C360, c, actor/blooper_baby]
+    - [0x65C520, c, stage/tik_01]
+    - [0x65C9C0, c, stage/tik_02]
+    - [0x65CE60, c, stage/tik_03]
+    - [0x65D300, c, stage/tik_04]
+    - [0x65D750, c, stage/tik_05]
+    - [0x65DA60, c, area]
+    - [0x65DA60]
+  - dir: battle/area/tik3
+    type: code
+    start: 0x66B580
+    vram: 0x80218000
+    subsegments:
+    - [0x66B580, c, actor/swooper]
+    - [0x66B650, c, actor/swoopula]
+    - [0x66B890, c, stage/tik_01]
+    - [0x66BD30, c, stage/tik_02]
+    - [0x66C1D0, c, stage/tik_03]
+    - [0x66C670, c, stage/tik_04]
+    - [0x66CAC0, c, stage/tik_05]
+    - [0x66CDD0, c, area]
+    - [0x66CDD0]
+  - dir: battle/area/sam
+    type: code
+    start: 0x676A30
+    vram: 0x80218000
+    subsegments:
+    - [0x676A30, c, actor/duplighost]
+    - [0x678020, c, actor/gulpit]
+    - [0x678020, c, actor/gulpit_rocks]
+    - [0x678020, c, actor/white_clubba]
+    - [0x678020, c, actor/frost_piranha]
+    - [0x678270, c, actor/gray_magikoopa]
+    - [0x6785E0, c, stage/sam_01]
+    - [0x678900, c, stage/sam_02]
+    - [0x678C20, c, stage/sam_02b]
+    - [0x678F40, c, stage/sam_02c]
+    - [0x679260, c, stage/sam_02d]
+    - [0x679580, c, stage/sam_03]
+    - [0x6798C0, c, area]
+    - [0x6798C0]
+  - dir: battle/area/sam2
+    type: code
+    start: 0x690070
+    vram: 0x80218000
+    subsegments:
+    - [0x690070, c, actor/monstar]
+    - [0x6905A0, c, actor/paragoomba]
+    - [0x690880, c, actor/gray_magikoopa]
+    - [0x690BF0, c, stage/sam_01]
+    - [0x690F10, c, stage/sam_02]
+    - [0x691230, c, stage/sam_02b]
+    - [0x691550, c, stage/sam_02c]
+    - [0x691870, c, stage/sam_02d]
+    - [0x691B90, c, stage/sam_03]
+    - [0x691ED0, c, area]
+    - [0x691ED0, c, dlist]
+    - start: 0x691ED0
+      type: .data
+      name: actor/monstar
+      subsegments:
+      - [0x691ED0]
+      - [0x692108, ci4, actor/img, 32, 32]
+      - [0x692308, palette, actor/img]
+      - [0x692328]
+    - [0x693F00, .data, actor/paragoomba]
+    - [0x6971A0, .data, actor/gray_magikoopa]
+    - [0x699E60, .data, stage/sam_01]
+    - [0x69A270, .data, stage/sam_02]
+    - [0x69A6B0, .data, stage/sam_02b]
+    - [0x69AA00, .data, stage/sam_02c]
+    - [0x69AD70, .data, stage/sam_02d]
+    - [0x69B0F0, .data, stage/sam_03]
+    - [0x69B500, .data, area]
+    - [0x69B5E0, .data, dlist]
+    - start: 0x69B6F0
+      type: .data
+      name: vtx
+      subsegments:
+      - [0x69B6F0, vtx, monstar_bubbles]
+    - [0x69BB10]
+  - dir: battle/area/pra
+    type: code
+    start: 0x69BCA0
+    vram: 0x80218000
+    subsegments:
+    - [0x69BCA0, c, actor/swoopula]
+    - [0x69BEE0, c, actor/albino_dino]
+    - [0x69BEE0, c, actor/white_clubba]
+    - [0x69BEE0, c, actor/red_magikoopa]
+    - [0x69C310, c, actor/green_magikoopa]
+    - [0x69C680, c, actor/yellow_magikoopa]
+    - [0x69C9F0, c, actor/gray_magikoopa]
+    - [0x69CD60, c, actor/white_magikoopa]
+    - [0x69D1D0, c, stage/pra_01]
+    - [0x69D1D0, c, stage/pra_02]
+    - [0x69D1D0, c, stage/pra_03]
+    - [0x69D1D0, c, stage/pra_03b]
+    - [0x69D1D0, c, stage/pra_03c]
+    - [0x69D1D0, c, stage/pra_04]
+    - [0x69D1D0, c, area]
+    - [0x69D1D0]
+  - dir: battle/area/pra2
+    type: code
+    start: 0x6B35E0
+    vram: 0x80218000
+    subsegments:
+    - [0x6B35E0, c, actor/crystal_king]
+    - [0x6B3BB0, c, actor/crystal_bit]
+    - [0x6B3CA0, c, stage/sam_04]
+    - [0x6B3FE0, c, area]
+    - [0x6B3FE0]
+  - dir: battle/area/pra3
+    type: code
+    start: 0x6BCC10
+    vram: 0x80218000
+    subsegments:
+    - [0x6BCC10, c, actor/duplighost]
+    - [0x6BE200, c, actor/swoopula]
+    - [0x6BE440, c, actor/white_clubba]
+    - [0x6BE440, c, actor/red_magikoopa]
+    - [0x6BE7B0, c, actor/gray_magikoopa]
+    - [0x6BEB20, c, stage/pra_01]
+    - [0x6BEB20, c, stage/pra_02]
+    - [0x6BEB20, c, stage/pra_03]
+    - [0x6BEB20, c, stage/pra_03b]
+    - [0x6BEB20, c, stage/pra_03c]
+    - [0x6BEB20, c, stage/pra_04]
+    - [0x6BEB20, c, area]
+    - [0x6BEB20]
+  - dir: battle/area/kpa
+    type: code
+    start: 0x6D78C0
+    vram: 0x80218000
+    subsegments:
+    - [0x6D78C0, c, actor/bony_beetle]
+    - [0x6D7990, c, actor/dry_bones]
+    - [0x6D7990, c, actor/hammer_bro]
+    - [0x6D7990, c, actor/koopatrol]
+    - [0x6D7AC0, c, actor/magikoopa]
+    - [0x6D7FC0, c, actor/ember]
+    - [0x6D80F0, c, stage/kpa_01]
+    - [0x6D80F0, c, stage/kpa_01b]
+    - [0x6D80F0, c, stage/kpa_02]
+    - [0x6D80F0, c, stage/kpa_03]
+    - [0x6D80F0, c, stage/kpa_04]
+    - [0x6D80F0, c, stage/kpa_04b]
+    - [0x6D80F0, c, stage/kpa_04c]
+    - [0x6D80F0, c, stage/kpa_05]
+    - [0x6D80F0, c, stage/kpa_07]
+    - [0x6D80F0, c, stage/kpa_08]
+    - [0x6D80F0, c, stage/kpa_09]
+    - [0x6D80F0, c, stage/kpa_11]
+    - [0x6D80F0, c, stage/kpa_13]
+    - [0x6D80F0, c, stage/kpa_14]
+    - [0x6D80F0, c, area]
+    - [0x6D80F0]
+  - dir: battle/area/kpa2
+    type: code
+    start: 0x6F2090
+    vram: 0x80218000
+    subsegments:
+    - [0x6F2090, c, actor/bowser]
+    - [0x6F21B0, c, actor/bowser_intro]
+    - [0x6F2F90, c, actor/bowser_phase_1]
+    - [0x6F4350, c, actor/bowser_phase_2]
+    - [0x6F59E0, c, actor/bowser_phase_3]
+    - [0x6F7320, c, stage/kpa_01]
+    - [0x6F7320, c, stage/kpa_02]
+    - [0x6F7320, c, stage/kpa_03]
+    - [0x6F7370, c, area]
+    - [0x6F7370]
+  - dir: battle/area/kpa3
+    type: code
+    start: 0x70EA20
+    vram: 0x80218000
+    subsegments:
+    - [0x70EA20, c, actor/anti_guy]
+    - [0x70EAF0, c, actor/duplighost]
+    - [0x7100E0, c, stage/kpa_01]
+    - [0x7100E0, c, area]
+    - [0x7100E0]
+  - dir: battle/area/kpa4
+    type: code
+    start: 0x71EF00
+    vram: 0x80218000
+    subsegments:
+    - [0x71EF00, c, actor/bombshell_bill_blaster]
+    - [0x71EF20, c, actor/bombshell_bill]
+    - [0x71EF20, c, actor/koopatrol]
+    - [0x71F050, c, actor/magikoopa]
+    - [0x71F550, c, stage/kpa_01]
+    - [0x71F550, c, stage/kpa_01b]
+    - [0x71F550, c, stage/kpa_02]
+    - [0x71F550, c, stage/kpa_03]
+    - [0x71F550, c, stage/kpa_04]
+    - [0x71F550, c, stage/kpa_04b]
+    - [0x71F550, c, stage/kpa_04c]
+    - [0x71F550, c, stage/kpa_05]
+    - [0x71F550, c, stage/kpa_07]
+    - [0x71F550, c, stage/kpa_08]
+    - [0x71F550, c, stage/kpa_09]
+    - [0x71F550, c, stage/kpa_11]
+    - [0x71F550, c, stage/kpa_13]
+    - [0x71F550, c, stage/kpa_14]
+    - [0x71F550, c, area]
+    - [0x71F550]
+  - dir: battle/area/kkj
+    type: code
+    start: 0x72EC30
+    vram: 0x80218000
+    subsegments:
+    - [0x72EC30, c, area]
+    - [0x72EC30, c, actor/kammy_koopa]
+    - [0x72F180, c, stage/kpa_05]
+    - [0x72F1D0]
+  - dir: battle/area/dig
+    type: code
+    start: 0x730C50
+    vram: 0x80218000
+    subsegments:
+    - [0x730C50, c, actor/koopa_troopa]
+    - [0x730D20, c, actor/fuzzy]
+    - [0x730E90, c, actor/pokey]
+    - [0x730F60, c, actor/bandit]
+    - [0x730F60, c, actor/red_shy_guy]
+    - [0x731030, c, actor/tubba_blubba]
+    - [0x731030, c, actor/monty_mole]
+    - [0x731030, c, actor/whacka]
+    - [0x731080, c, stage/dig_01]
+    - [0x731080, c, stage/dig_02]
+    - [0x731080, c, stage/dig_03]
+    - [0x731230, c, stage/dig_04]
+    - [0x731280, c, stage/dig_05]
+    - [0x731280, c, area]
+    - [0x731280, c, script/dig_01]
+    - [0x731330, c, script/dig_02]
+    - [0x7313C0, c, script/dig_03]
+    - [0x731440, c, script/dig_04]
+    - [0x7314E0, c, script/dig_05]
+    - [0x731500]
+
+  - [0x743A60, bin]
+
   - name: world_model_anim_kzn_01
     dir: world/model_anim/kzn
     type: code
