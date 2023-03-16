@@ -4,7 +4,7 @@
 extern HudScript* TimesHudScript;
 extern HudScript* SPIncrementHudScripts[];
 extern HudScript* SPStarHudScripts[];
-extern s32 D_800F7FE8[];
+extern s32 StatusMenuSPIncrementOffsets[];
 
 extern s16 D_8010CD10;
 extern s16 D_8010CD12;
@@ -685,8 +685,8 @@ void update_status_menu(void) {
     gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, 12, 20, SCREEN_WIDTH - 12, SCREEN_HEIGHT - 20);
     x = uiStatus->drawPosX;
     y = uiStatus->drawPosY;
-    draw_box(0, WINDOW_STYLE_5, x,       y, 0, 174, 35, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, 320, 240, NULL);
-    draw_box(0, WINDOW_STYLE_6, x + 174, y, 0, 122, 25, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, 320, 240, NULL);
+    draw_box(0, WINDOW_STYLE_5, x,       y, 0, 174, 35, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
+    draw_box(0, WINDOW_STYLE_6, x + 174, y, 0, 122, 25, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
 
     if (uiStatus->hpBlinkTimer > 0) {
         uiStatus->hpBlinkTimer--;
@@ -853,7 +853,7 @@ void update_status_menu(void) {
     spBars = uiStatus->displaySP / 256;
     limit = uiStatus->displaySP % 256;
     limit /= 32;
-    limit = limit + spBars * 8;
+    limit += spBars * 8;
     if (uiStatus->unk_57 == 1) {
         spBars = playerData->specialBarsFilled / 256;
         limit = playerData->specialBarsFilled % 256;
@@ -890,41 +890,13 @@ void update_status_menu(void) {
             do {} while (0);
             if (sp50 < limit) {
                 while (TRUE) {
-                    i++;
-                    s1++;
-                    if (i >= limit) {
-                        break;
-                    }
-                    i++;
-                    s1++;
-                    if (i >= limit) {
-                        break;
-                    }
-                    i++;
-                    s1++;
-                    if (i >= limit) {
-                        break;
-                    }
-                    i++;
-                    s1++;
-                    if (i >= limit) {
-                        break;
-                    }
-                    i++;
-                    s1++;
-                    if (i >= limit) {
-                        break;
-                    }
-                    i++;
-                    s1++;
-                    if (i >= limit) {
-                        break;
-                    }
-                    i++;
-                    s1++;
-                    if (i >= limit) {
-                        break;
-                    }
+                    i++; s1++; if (i >= limit) { break; }
+                    i++; s1++; if (i >= limit) { break; }
+                    i++; s1++; if (i >= limit) { break; }
+                    i++; s1++; if (i >= limit) { break; }
+                    i++; s1++; if (i >= limit) { break; }
+                    i++; s1++; if (i >= limit) { break; }
+                    i++; s1++; if (i >= limit) { break; }
                     i++;
                     s1 = 0;
                     sp50++;
@@ -943,7 +915,7 @@ void update_status_menu(void) {
         i++;
 
         hud_element_set_script(id, SPIncrementHudScripts[sp50]);
-        hud_element_set_render_pos(id, x + sp50 * 20 + D_800F7FE8[0], y - 2);
+        hud_element_set_render_pos(id, x + sp50 * 20 + StatusMenuSPIncrementOffsets[0], y - 2);
         hud_element_draw_next(id);
 
         s1++;
@@ -953,7 +925,7 @@ void update_status_menu(void) {
         i++;
         hud_element_set_script(id, SPIncrementHudScripts[sp50]);
 
-        hud_element_set_render_pos(id, x + sp50 * 20 + D_800F7FE8[1], y - 2);
+        hud_element_set_render_pos(id, x + sp50 * 20 + StatusMenuSPIncrementOffsets[1], y - 2);
         hud_element_draw_next(id);
         s1++;
         if (i >= limit || i >= s7 && !sp54) {
@@ -961,7 +933,7 @@ void update_status_menu(void) {
         }
         i++;
         hud_element_set_script(id, SPIncrementHudScripts[sp50]);
-        hud_element_set_render_pos(id, x + sp50 * 20 + D_800F7FE8[2], y - 2);
+        hud_element_set_render_pos(id, x + sp50 * 20 + StatusMenuSPIncrementOffsets[2], y - 2);
         hud_element_draw_next(id);
         s1++;
         if (i >= limit || i >= s7 && !sp54) {
@@ -969,7 +941,7 @@ void update_status_menu(void) {
         }
         i++;
         hud_element_set_script(id, SPIncrementHudScripts[sp50]);
-        hud_element_set_render_pos(id, x + sp50 * 20 + D_800F7FE8[3], y - 2);
+        hud_element_set_render_pos(id, x + sp50 * 20 + StatusMenuSPIncrementOffsets[3], y - 2);
         hud_element_draw_next(id);
         s1++;
         if (i >= limit || i >= s7 && !sp54) {
@@ -977,16 +949,7 @@ void update_status_menu(void) {
         }
         i++;
         hud_element_set_script(id, SPIncrementHudScripts[sp50]);
-        hud_element_set_render_pos(id, x + sp50 * 20 + D_800F7FE8[4], y - 2);
-        hud_element_draw_next(id);
-        s1++;
-
-        if (i >= limit || i >= s7 && !sp54) {
-            break;
-        }
-        i++;
-        hud_element_set_script(id, SPIncrementHudScripts[sp50]);
-        hud_element_set_render_pos(id, x + sp50 * 20 + D_800F7FE8[5], y - 2);
+        hud_element_set_render_pos(id, x + sp50 * 20 + StatusMenuSPIncrementOffsets[4], y - 2);
         hud_element_draw_next(id);
         s1++;
 
@@ -995,7 +958,16 @@ void update_status_menu(void) {
         }
         i++;
         hud_element_set_script(id, SPIncrementHudScripts[sp50]);
-        hud_element_set_render_pos(id, x + sp50 * 20 + D_800F7FE8[6], y - 2);
+        hud_element_set_render_pos(id, x + sp50 * 20 + StatusMenuSPIncrementOffsets[5], y - 2);
+        hud_element_draw_next(id);
+        s1++;
+
+        if (i >= limit || i >= s7 && !sp54) {
+            break;
+        }
+        i++;
+        hud_element_set_script(id, SPIncrementHudScripts[sp50]);
+        hud_element_set_render_pos(id, x + sp50 * 20 + StatusMenuSPIncrementOffsets[6], y - 2);
         hud_element_draw_next(id);
         s1++;
 
@@ -1023,7 +995,7 @@ void update_status_menu(void) {
         if (s1 == 0) {
             i++;
             hud_element_set_script(id, &HES_StatusSPEmptyIncrement);
-            hud_element_set_render_pos(id, x + sp50 * 20 + D_800F7FE8[s1], y - 2);
+            hud_element_set_render_pos(id, x + sp50 * 20 + StatusMenuSPIncrementOffsets[s1], y - 2);
             hud_element_draw_next(id);
             if (i >= limit) {
                 break;
@@ -1033,7 +1005,7 @@ void update_status_menu(void) {
         if (s1 == 1) {
             i++;
             hud_element_set_script(id, &HES_StatusSPEmptyIncrement);
-            hud_element_set_render_pos(id, x + sp50 * 20 + D_800F7FE8[s1], y - 2);
+            hud_element_set_render_pos(id, x + sp50 * 20 + StatusMenuSPIncrementOffsets[s1], y - 2);
             hud_element_draw_next(id);
             if (i >= limit) {
                 break;
@@ -1043,7 +1015,7 @@ void update_status_menu(void) {
         if (s1 == 2) {
             i++;
             hud_element_set_script(id, &HES_StatusSPEmptyIncrement);
-            hud_element_set_render_pos(id, x + sp50 * 20 + D_800F7FE8[s1], y - 2);
+            hud_element_set_render_pos(id, x + sp50 * 20 + StatusMenuSPIncrementOffsets[s1], y - 2);
             hud_element_draw_next(id);
             if (i >= limit) {
                 break;
@@ -1053,7 +1025,7 @@ void update_status_menu(void) {
         if (s1 == 3) {
             i++;
             hud_element_set_script(id, &HES_StatusSPEmptyIncrement);
-            hud_element_set_render_pos(id, x + sp50 * 20 + D_800F7FE8[s1], y - 2);
+            hud_element_set_render_pos(id, x + sp50 * 20 + StatusMenuSPIncrementOffsets[s1], y - 2);
             hud_element_draw_next(id);
             if (i >= limit) {
                 break;
@@ -1063,7 +1035,7 @@ void update_status_menu(void) {
         if (s1 == 4) {
             i++;
             hud_element_set_script(id, &HES_StatusSPEmptyIncrement);
-            hud_element_set_render_pos(id, x + sp50 * 20 + D_800F7FE8[s1], y - 2);
+            hud_element_set_render_pos(id, x + sp50 * 20 + StatusMenuSPIncrementOffsets[s1], y - 2);
             hud_element_draw_next(id);
             if (i >= limit) {
                 break;
@@ -1073,7 +1045,7 @@ void update_status_menu(void) {
         if (s1 == 5) {
             i++;
             hud_element_set_script(id, &HES_StatusSPEmptyIncrement);
-            hud_element_set_render_pos(id, x + sp50 * 20 + D_800F7FE8[s1], y - 2);
+            hud_element_set_render_pos(id, x + sp50 * 20 + StatusMenuSPIncrementOffsets[s1], y - 2);
             hud_element_draw_next(id);
             if (i >= limit) {
                 break;
@@ -1083,7 +1055,7 @@ void update_status_menu(void) {
         if (s1 == 6) {
             i++;
             hud_element_set_script(id, &HES_StatusSPEmptyIncrement);
-            hud_element_set_render_pos(id, x + sp50 * 20 + D_800F7FE8[s1], y - 2);
+            hud_element_set_render_pos(id, x + sp50 * 20 + StatusMenuSPIncrementOffsets[s1], y - 2);
             hud_element_draw_next(id);
             if (i >= limit) {
                 break;

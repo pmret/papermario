@@ -153,7 +153,7 @@ HudScript* SPStarHudScripts[] = { &HES_StatusStar1, &HES_StatusStar3, &HES_Statu
     &HES_StatusStar5, &HES_StatusStar6, &HES_StatusStar7
 };
 
-s32 D_800F7FE8[] = { -1, 1, 2, 4, 5, 7, 8, 0, 0, 0 };
+s32 StatusMenuSPIncrementOffsets[] = { -1, 1, 2, 4, 5, 7, 8, 0, 0, 0 };
 UseItemStruct UseItemDmaArgs = {
     world_use_item_ROM_START,
     world_use_item_ROM_END,
