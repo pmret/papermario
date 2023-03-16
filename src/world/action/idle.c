@@ -48,9 +48,7 @@ void action_update_idle(void) {
     playerStatus->currentStateTime++;
 
     if (playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED) {
-
-        playerStatus->flags &= ~(PS_FLAG_ACTION_STATE_CHANGED
-            | PS_FLAG_ARMS_RAISED | PS_FLAG_AIRBORNE);
+        playerStatus->flags &= ~(PS_FLAG_ACTION_STATE_CHANGED | PS_FLAG_ARMS_RAISED | PS_FLAG_AIRBORNE);
         wasMoving = TRUE;
         playerStatus->actionSubstate = SUBSTATE_IDLE_DEFAULT;
         playerStatus->currentStateTime = 0;
@@ -66,7 +64,7 @@ void action_update_idle(void) {
         } else if (playerStatus->prevActionState == ACTION_STATE_IDLE) {
             anim = ANIM_MarioW1_TakeItem;
         } else {
-            anim = ANIM_MarioW1_PlaceRecord;
+            anim = ANIM_MarioW1_CarryIdle;
         }
         suggest_player_anim_allow_backward(anim);
     }

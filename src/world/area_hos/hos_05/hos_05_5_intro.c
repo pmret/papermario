@@ -698,7 +698,7 @@ API_CALLABLE(N(CamPushIn_BowserInhale)) {
     N(interp_value_with_easing)(INTRO_MATH_EASING_LINEAR, 121.6f, 90.0f, N(CamMoveInhaleTime), 40.0f, &N(BoomLengthInhale));
     camera->panActive = TRUE;
     camera->controlSettings.boomLength = N(BoomLengthInhale);
-    if ((N(CamMoveInhaleTime) == ((N(CamMoveInhaleTime) / 5) * 5)) && (N(BoomLengthInhale) != 90.0f)) {
+    if (N(CamMoveInhaleTime) % 5 == 0 && N(BoomLengthInhale) != 90.0f) {
         f32 temp_f4 = resolve_npc(script, NPC_Bowser_Body)->pos.y - 150.0f;
 
         fx_fire_breath(

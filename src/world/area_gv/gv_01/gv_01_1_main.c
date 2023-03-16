@@ -283,7 +283,7 @@ API_CALLABLE(N(ChangeStateToTitleScreen)) {
     gGameStatusPtr->isBattle = FALSE;
     gGameStatusPtr->unk_76 = 0;
     gGameStatusPtr->disableScripts = 0;
-    gGameStatusPtr->keepUsingPartnerOnMapChange = 0;
+    gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
     gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
     general_heap_create();
     clear_render_tasks();

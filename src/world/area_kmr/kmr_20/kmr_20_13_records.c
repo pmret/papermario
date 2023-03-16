@@ -146,7 +146,7 @@ void N(appendGfx_records)(void* data) {
             // fallthrough
         case RECORDS_STATE_FADING_IN:
             records->lerpTime++;
-            records->alpha = update_lerp(0, 32.0f, 255.0f, records->lerpTime, 3);
+            records->alpha = update_lerp(EASING_LINEAR, 32.0f, 255.0f, records->lerpTime, 3);
             records->lastAlpha = records->alpha;
             if (records->lerpTime >= 3) {
                 records->state = RECORDS_STATE_IDLE;
@@ -170,7 +170,7 @@ void N(appendGfx_records)(void* data) {
             // fallthrough
         case RECORDS_STATE_FADING_OUT:
             records->lerpTime++;
-            records->alpha = update_lerp(0, records->lastAlpha, 0.0f, records->lerpTime, 3);
+            records->alpha = update_lerp(EASING_LINEAR, records->lastAlpha, 0.0f, records->lerpTime, 3);
             if (records->lerpTime >= 3) {
                 records->state = RECORDS_STATE_DONE;
             }

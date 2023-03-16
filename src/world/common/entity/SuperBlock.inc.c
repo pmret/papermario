@@ -429,7 +429,7 @@ API_CALLABLE(N(SuperBlock_PartnerSparkles4)) {
 
 API_CALLABLE(N(SuperBlock_WaitForPlayerToLand)) {
     script->varTable[0] = FALSE;
-    if ((gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) && (gPartnerActionStatus.actingPartner == PARTNER_BOMBETTE)) {
+    if ((gPartnerStatus.partnerActionState != PARTNER_ACTION_NONE) && (gPartnerStatus.actingPartner == PARTNER_BOMBETTE)) {
         script->varTable[0] = TRUE;
     }
     return ApiStatus_DONE2;

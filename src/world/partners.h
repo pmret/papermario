@@ -21,7 +21,7 @@ typedef struct WorldPartner {
     /* 0x30 */ PartnerBoolFunc canPlayerPause;
     /* 0x34 */ PartnerFunc preBattle;
     /* 0x38 */ PartnerFunc postBattle;
-    /* 0x3C */ EvtScript* whileRiding;
+    /* 0x3C */ EvtScript* onEnterMap;
 } WorldPartner; // size = 0x40
 
 extern Npc* wPartnerNpc; // wPartnerNpc

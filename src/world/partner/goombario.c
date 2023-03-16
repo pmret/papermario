@@ -202,10 +202,10 @@ EvtScript EVS_WorldGoombario_Update = {
 };
 
 s32 N(can_pause)(Npc* goombario) {
-    PartnerActionStatus* goombarioActionStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     s32 new_var;
 
-    if (goombarioActionStatus->partnerActionState != PARTNER_ACTION_NONE) {
+    if (partnerStatus->partnerActionState != PARTNER_ACTION_NONE) {
         return FALSE;
     }
 
@@ -283,7 +283,7 @@ API_CALLABLE(N(SelectTattleMsg)) {
             playerStatus->flags &= ~PS_FLAG_HAS_CONVERSATION_NPC;
             goombario->currentAnim = ANIM_WorldGoombario_Idle;
             goombario->yaw = clamp_angle(gCameras[CAM_DEFAULT].currentYaw + playerStatus->spriteFacingAngle - 90.0f);
-            gPartnerActionStatus.partnerActionState = PARTNER_ACTION_USE;
+            gPartnerStatus.partnerActionState = PARTNER_ACTION_USE;
             close_status_menu();
             if (N(HadSpeechPrompt)) {
                 script->VAR_MSG = 0;
@@ -434,7 +434,7 @@ API_CALLABLE(N(SelectTattleMsg)) {
 }
 
 API_CALLABLE(N(TattleEnd)) {
-    PartnerActionStatus* goombarioActionStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
 
     set_time_freeze_mode(TIME_FREEZE_NORMAL);
 
@@ -443,8 +443,8 @@ API_CALLABLE(N(TattleEnd)) {
         enable_player_input();
     }
 
-    goombarioActionStatus->partnerActionState = PARTNER_ACTION_NONE;
-    goombarioActionStatus->actingPartner = PARTNER_NONE;
+    partnerStatus->partnerActionState = PARTNER_ACTION_NONE;
+    partnerStatus->actingPartner = PARTNER_NONE;
     return ApiStatus_DONE2;
 }
 
@@ -491,17 +491,17 @@ EvtScript EVS_WorldGoombario_PutAway = {
 };
 
 void N(pre_battle)(Npc* goombario) {
-    PartnerActionStatus* goombarioActionStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
 
-    if (goombarioActionStatus->partnerActionState != PARTNER_ACTION_NONE) {
+    if (partnerStatus->partnerActionState != PARTNER_ACTION_NONE) {
         set_time_freeze_mode(TIME_FREEZE_NORMAL);
         enable_player_input();
         cancel_current_message();
         partner_clear_player_tracking(goombario);
-        goombarioActionStatus->partnerActionState = PARTNER_ACTION_NONE;
-        goombarioActionStatus->actingPartner = PARTNER_NONE;
+        partnerStatus->partnerActionState = PARTNER_ACTION_NONE;
+        partnerStatus->actingPartner = PARTNER_NONE;
         disable_npc_blur(goombario);
     }
 
-    goombarioActionStatus->actingPartner = PARTNER_GOOMBARIO;
+    partnerStatus->actingPartner = PARTNER_GOOMBARIO;
 }

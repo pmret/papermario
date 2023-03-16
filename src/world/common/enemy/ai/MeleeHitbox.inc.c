@@ -86,11 +86,11 @@ s32 N(MeleeHitbox_CanSeePlayer)(Evt* script) {
         ret = FALSE;
     }
 
-    if (gPartnerActionStatus.actingPartner == PARTNER_BOW) {
+    if (gPartnerStatus.actingPartner == PARTNER_BOW) {
         ret = FALSE;
     }
 
-    if (gPartnerActionStatus.actingPartner == PARTNER_SUSHIE) {
+    if (gPartnerStatus.actingPartner == PARTNER_SUSHIE) {
         ret = FALSE;
     }
 

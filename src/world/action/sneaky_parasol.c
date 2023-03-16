@@ -205,7 +205,7 @@ void action_update_parasol(void) {
                     playerStatus->actionSubstate++; // SUBSTATE_DISGUISE_DONE
                     playerStatus->spriteFacingAngle = 180;
                     disguiseNpc = get_npc_by_index(PeachDisguiseNpcIndex);
-                    disguiseNpc->isFacingAway = 1;
+                    disguiseNpc->isFacingAway = TRUE;
                     disguiseNpc->yaw = clamp_angle((cam->currentYaw - playerStatus->spriteFacingAngle) - 90);
                     disguiseNpc->yawCamOffset = disguiseNpc->yaw;
                 }
@@ -217,7 +217,7 @@ void action_update_parasol(void) {
                     playerStatus->spriteFacingAngle = 0;
                     playerStatus->actionSubstate++; // SUBSTATE_DISGUISE_DONE
                     disguiseNpc = get_npc_by_index(PeachDisguiseNpcIndex);
-                    disguiseNpc->isFacingAway = 0;
+                    disguiseNpc->isFacingAway = FALSE;
                     disguiseNpc->yaw = clamp_angle((cam->currentYaw - playerStatus->spriteFacingAngle) - 90);
                     disguiseNpc->yawCamOffset = disguiseNpc->yaw;
                 }

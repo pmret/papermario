@@ -80,9 +80,9 @@ API_CALLABLE(N(WattFXUpdate)) {
                     sWattEffectData_effect2->flags |= EFFECT_INSTANCE_FLAG_10;
                     sWattEffectData_effect2 = NULL;
                 }
-                sWattEffectData_effect1->data.staticStatus->unk_04 = x;
-                sWattEffectData_effect1->data.staticStatus->unk_08 = y;
-                sWattEffectData_effect1->data.staticStatus->unk_0C = z;
+                sWattEffectData_effect1->data.staticStatus->pos.x = x;
+                sWattEffectData_effect1->data.staticStatus->pos.y = y;
+                sWattEffectData_effect1->data.staticStatus->pos.z = z;
                 break;
             case 1:
                 if (sWattEffectData_effect1 != NULL) {
@@ -92,9 +92,9 @@ API_CALLABLE(N(WattFXUpdate)) {
                 if (sWattEffectData_effect2 == NULL) {
                     sWattEffectData_effect2 = fx_static_status(1, x, y, z, 1.0f, 5, 0);
                 }
-                sWattEffectData_effect2->data.staticStatus->unk_04 = x;
-                sWattEffectData_effect2->data.staticStatus->unk_08 = y;
-                sWattEffectData_effect2->data.staticStatus->unk_0C = z;
+                sWattEffectData_effect2->data.staticStatus->pos.x = x;
+                sWattEffectData_effect2->data.staticStatus->pos.y = y;
+                sWattEffectData_effect2->data.staticStatus->pos.z = z;
                 break;
         }
     } else {

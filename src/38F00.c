@@ -89,11 +89,11 @@ ApiStatus func_8005DB00(Evt* script, s32 isInitialCall) {
     Npc* npc;
     f32 targetDir, npcYaw;
     PlayerStatus* playerStatus;
-    PartnerActionStatus* partnerStatus;
+    PartnerStatus* partnerStatus;
 
     npc = get_npc_unsafe(script->owner1.enemy->npcID);
     playerStatus = &gPlayerStatus;
-    partnerStatus = &gPartnerActionStatus;
+    partnerStatus = &gPartnerStatus;
 
     if (isInitialCall) {
         script->functionTemp[0] = 0;

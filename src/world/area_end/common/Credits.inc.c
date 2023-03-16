@@ -150,7 +150,7 @@ void N(CharAnim_FadeIn_1)(CreditsLine* line, CreditsChar* chr) {
     f32 posY = chr->posY;
     f32 alpha;
 
-    alpha = update_lerp(0, 0.0f, 255.0f, chr->fadeInTime, line->appearTime);
+    alpha = update_lerp(EASING_LINEAR, 0.0f, 255.0f, chr->fadeInTime, line->appearTime);
     if (alpha > 255.0f) {
         alpha = 255.0;
     }

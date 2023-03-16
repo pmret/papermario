@@ -190,7 +190,7 @@ dlabel D_8010D6A8
 dlabel gBoxQuadBuffer
 .space 0x1500
 
-dlabel gPartnerActionStatus
+dlabel gPartnerStatus
 .space 0x360
 
 dlabel gSpinHistoryPosY

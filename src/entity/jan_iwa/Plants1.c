@@ -267,7 +267,7 @@ void func_802BB98C_E2E2BC(Entity* entity) {
 
 void entity_CymbalPlant_idle(Entity* entity) {
     CymbalPlantData* data = entity->dataBuf.cymbalPlant;
-    PartnerActionStatus* partnerActionStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 yaw;
     f32 targetYaw;
@@ -275,7 +275,7 @@ void entity_CymbalPlant_idle(Entity* entity) {
     switch (data->state) {
         case 0:
             if (entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) {
-                if (partnerActionStatus->actingPartner != 0) {
+                if (partnerStatus->actingPartner != 0) {
                     playerStatus->animFlags |= PA_FLAG_INTERRUPT_USE_PARTNER;
                 }
                 func_800EF300();
@@ -334,7 +334,7 @@ void entity_CymbalPlant_idle(Entity* entity) {
             }
             break;
         case 6:
-            if (!(entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) && partnerActionStatus->partnerActionState == PARTNER_ACTION_NONE) {
+            if (!(entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) && partnerStatus->partnerActionState == PARTNER_ACTION_NONE) {
                 data->state = 0;
                 enable_partner_ai();
                 phys_adjust_cam_on_landing();

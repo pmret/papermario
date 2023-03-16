@@ -95,9 +95,9 @@ API_CALLABLE(N(InterpSpriteShadingColor)) {
     }
 
     script->varTable[6]++;
-    shadingProfile->ambientColor.r = update_lerp(0, script->varTable[3], script->varTable[0], script->varTable[6], 20);
-    shadingProfile->ambientColor.g = update_lerp(0, script->varTable[4], script->varTable[1], script->varTable[6], 20);
-    shadingProfile->ambientColor.b = update_lerp(0, script->varTable[5], script->varTable[2], script->varTable[6], 20);
+    shadingProfile->ambientColor.r = update_lerp(EASING_LINEAR, script->varTable[3], script->varTable[0], script->varTable[6], 20);
+    shadingProfile->ambientColor.g = update_lerp(EASING_LINEAR, script->varTable[4], script->varTable[1], script->varTable[6], 20);
+    shadingProfile->ambientColor.b = update_lerp(EASING_LINEAR, script->varTable[5], script->varTable[2], script->varTable[6], 20);
 
     if (script->varTable[6] == 20) {
         if (script->varTable[0] == 255) {
@@ -118,7 +118,7 @@ API_CALLABLE(N(MoveNpcAlongArc)) {
     }
 
     if (script->varTable[6] > 0) {
-        angle = update_lerp(0, script->varTable[3], script->varTable[4], (f32) script->varTable[6], (f32) script->varTable[5]);
+        angle = update_lerp(EASING_LINEAR, script->varTable[3], script->varTable[4], (f32) script->varTable[6], (f32) script->varTable[5]);
         sin_cos_deg(angle, &sinAngle, &cosAngle);
         npc->pos.x = script->varTable[1] + (script->varTable[7] * sinAngle);
         npc->pos.z = script->varTable[2] + (script->varTable[7] * cosAngle);

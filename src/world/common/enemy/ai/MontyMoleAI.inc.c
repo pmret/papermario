@@ -57,7 +57,7 @@ static s32 N(MontyMoleAI_CanAttack)(Evt* script, EnemyDetectVolume* territory, f
         retVal = FALSE;
     }
     // check for bow hiding
-    if (gPartnerActionStatus.actingPartner == PARTNER_BOW) {
+    if (gPartnerStatus.actingPartner == PARTNER_BOW) {
         retVal = FALSE;
     }
     return retVal;

@@ -230,7 +230,7 @@ void phys_main_collision_below(void);
 void phys_peach_update(void);
 void check_input_spin(void);
 
-s32 npc_test_move_simple_without_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);
+b32 npc_test_move_simple_without_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);
 
 void update_collider_transform(s16 colliderID);
 void get_collider_center(s32 colliderID, f32* x, f32* y, f32* z);
@@ -403,19 +403,19 @@ s32 create_shadow_type(s32 type, f32 x, f32 y, f32 z);
 s32 is_point_within_region(s32 shape, f32 pointX, f32 pointY, f32 centerX, f32 centerY, f32 sizeX, f32 sizeZ);
 PlayerData* get_player_data(void);
 
-s32 npc_raycast_down_around(s32, f32*, f32*, f32*, f32*, f32, f32);
+b32 npc_raycast_down_around(s32, f32*, f32*, f32*, f32*, f32, f32);
 s32 npc_raycast_down_sides(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32* hitDepth);
 s32 npc_raycast_up(s32, f32*, f32*, f32*, f32*);
 s32 npc_raycast_up_corners(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32* hitDepth, f32 yaw, f32 radius);
 s32 player_raycast_up_corners(PlayerStatus*, f32*, f32*, f32*, f32*, f32);
 s32 player_raycast_below_cam_relative(PlayerStatus* playerStatus, f32* outX, f32* outY, f32* outZ, f32* outLength,
                                       f32* hitRx, f32* hitRz, f32* hitDirX, f32* hitDirZ);
-s32 npc_test_move_taller_with_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);
-s32 npc_test_move_simple_with_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);
+b32 npc_test_move_taller_with_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);
+b32 npc_test_move_simple_with_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);
 s32 npc_test_move_complex_with_slipping(s32, f32*, f32*, f32*, f32, f32, f32, f32);
 
 // Partner
-EvtScript* partner_get_ride_script(void);
+EvtScript* partner_get_enter_map_script(void);
 void partner_handle_before_battle(void);
 void partner_walking_update_player_tracking(Npc* partner);
 void partner_walking_update_motion(Npc* partner);
@@ -759,9 +759,6 @@ void pulse_stone_notification_setup(void);
 void appendGfx_speech_bubble(void);
 void appendGfx_pulse_stone_icon(void);
 void ispy_notification_setup(void);
-s32 lakilester_raycast_below(void);
-void world_watt_sync_held_position(void);
-void func_802BFB44_323694(f32 arg0);
 
 void initialize_curtains(void);
 void update_curtains(void);

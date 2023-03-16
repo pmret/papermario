@@ -70,7 +70,7 @@ s32 npc_raycast_down(s32 ignoreFlags, f32* startX, f32* startY, f32* startZ, f32
     return colliderID;
 }
 
-s32 npc_raycast_down_around(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32* hitDepth, f32 yaw, f32 radius) {
+b32 npc_raycast_down_around(s32 ignoreFlags, f32* posX, f32* posY, f32* posZ, f32* hitDepth, f32 yaw, f32 radius) {
     f32 startX;
     f32 startY;
     f32 startZ;
@@ -490,7 +490,7 @@ s32 npc_test_move_with_slipping(s32 ignoreFlags, f32* x, f32* y, f32* z, f32 len
     f32 inverseOutCosTheta;
     s32 raycastHitID;
     s32 phi_s5;
-    s32 phi_s2 = -1;
+    s32 hitResult = NO_COLLIDER;
     f32 a, b;
 
     sin_cos_rad(DEG_TO_RAD(yaw), &outSinTheta, &outCosTheta);
@@ -518,7 +518,7 @@ s32 npc_test_move_with_slipping(s32 ignoreFlags, f32* x, f32* y, f32* z, f32 len
         *x += a + outX;
         *z += b + outY;
         NpcHitQueryColliderID = raycastHitID;
-        phi_s2 = raycastHitID;
+        hitResult = raycastHitID;
     }
 
     if (phi_s5 == 0) {
@@ -526,7 +526,7 @@ s32 npc_test_move_with_slipping(s32 ignoreFlags, f32* x, f32* y, f32* z, f32 len
         *z += aZ;
     }
 
-    return phi_s2;
+    return hitResult;
 }
 
 s32 npc_test_move_without_slipping(s32 ignoreFlags, f32* x, f32* y, f32* z, f32 length, f32 yaw, f32 radius) {
@@ -566,7 +566,7 @@ s32 npc_test_move_without_slipping(s32 ignoreFlags, f32* x, f32* y, f32* z, f32 
     return ret;
 }
 
-s32 npc_test_move_taller_with_slipping(s32 ignoreFlags, f32* x, f32* y, f32* z, f32 length, f32 yaw, f32 height,
+b32 npc_test_move_taller_with_slipping(s32 ignoreFlags, f32* x, f32* y, f32* z, f32 length, f32 yaw, f32 height,
                                        f32 radius) {
     f32 xTemp = *x;
     f32 yTemp = *y + height - 1.0f;
@@ -582,14 +582,14 @@ s32 npc_test_move_taller_with_slipping(s32 ignoreFlags, f32* x, f32* y, f32* z, 
         *x = xTemp;
         *z = zTemp;
     } else {
-        ret = 1;
+        ret = TRUE;
         *x = xTemp;
         *z = zTemp;
     }
     return ret;
 }
 
-s32 npc_test_move_simple_with_slipping(s32 ignoreFlags, f32* x, f32* y, f32* z, f32 length, f32 yaw, f32 height,
+b32 npc_test_move_simple_with_slipping(s32 ignoreFlags, f32* x, f32* y, f32* z, f32 length, f32 yaw, f32 height,
                                        f32 radius) {
     f32 tempX = *x;
     f32 tempY = *y + 10.01f;
@@ -602,7 +602,7 @@ s32 npc_test_move_simple_with_slipping(s32 ignoreFlags, f32* x, f32* y, f32* z, 
     return hitID >= 0;
 }
 
-s32 npc_test_move_simple_without_slipping(s32 ignoreFlags, f32* x, f32* y, f32* z, f32 length, f32 yaw, f32 height,
+b32 npc_test_move_simple_without_slipping(s32 ignoreFlags, f32* x, f32* y, f32* z, f32 length, f32 yaw, f32 height,
                                           f32 radius) {
     f32 tempX = *x;
     f32 tempY = *y + 10.01f;
