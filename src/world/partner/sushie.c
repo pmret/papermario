@@ -68,7 +68,7 @@ void N(get_movement_from_input)(f32* outAngle, f32* outSpeed) {
     moveSpeed = 0.0f;
 
     if (dist2D(0.0f, 0.0f, N(InputStickX), -N(InputStickY)) >= 1.0) {
-        if (SQ(N(InputStickX)) + SQ(N(InputStickY)) > SQ(55.0f)) {
+        if (SQ(N(InputStickX)) + SQ(N(InputStickY)) > SQ(55)) {
             if (N(DiveState) != DIVE_STATE_NONE) {
                 moveSpeed = 2.0f;
             } else {
@@ -83,7 +83,7 @@ void N(get_movement_from_input)(f32* outAngle, f32* outSpeed) {
     *outSpeed = moveSpeed;
 }
 
-void N(func_802BD368_31E0D8)(s32 ignoreFlags, f32 posX, f32 posY, f32 posZ, f32 yaw, f32 radius) {
+void N(test_for_water_level)(s32 ignoreFlags, f32 posX, f32 posY, f32 posZ, f32 yaw, f32 radius) {
     CollisionStatus* collisionStatus = &gCollisionStatus;
     f32 depth;
 
@@ -235,7 +235,7 @@ void N(update_riding_physics)(Npc* sushie) {
     // update diving state
 
     if (N(DiveState) == DIVE_STATE_NONE) {
-        N(func_802BD368_31E0D8)(sushie->collisionChannel, sushie->pos.x, sushie->pos.y, sushie->pos.z,
+        N(test_for_water_level)(sushie->collisionChannel, sushie->pos.x, sushie->pos.y, sushie->pos.z,
                 sushie->yaw, sushie->collisionRadius * 0.5f);
         if (N(DiveState) == DIVE_STATE_NONE) {
             sushie->moveSpeed = 3.0f;
@@ -327,7 +327,7 @@ void N(update_riding_physics)(Npc* sushie) {
     }
 }
 
-s32 N(func_802BE280_31EFF0)(s32 unused, f32* x, f32* y, f32* z, f32 length, f32 radius, f32* yaw) {
+s32 N(test_ray_to_wall_center)(s32 unused, f32* x, f32* y, f32* z, f32 length, f32 radius, f32* yaw) {
     f32 sinAngle, cosAngle, totalLength;
     f32 hitX, hitY, hitZ;
     f32 hitNx, hitNy, hitNz;
@@ -435,7 +435,7 @@ API_CALLABLE(N(UseAbility)) {
             x = playerStatus->position.x;
             y = playerStatus->position.y;
             z = playerStatus->position.z;
-            collider = N(func_802BE280_31EFF0)(0, &x, &y, &z,
+            collider = N(test_ray_to_wall_center)(0, &x, &y, &z,
                     playerStatus->colliderDiameter * 0.5f, 2.0f * playerStatus->colliderDiameter, &angle);
             // check surface type for wall
             surfaceType = SURFACE_TYPE_INVALID;
@@ -925,7 +925,7 @@ API_CALLABLE(N(EnterMap)) {
             partnerNPC->pos.x = playerStatus->position.x;
             partnerNPC->pos.z = playerStatus->position.z;
             partnerNPC->pos.y = playerStatus->position.y;
-            N(func_802BD368_31E0D8)(partnerNPC->collisionChannel, partnerNPC->pos.x, partnerNPC->pos.y, partnerNPC->pos.z,
+            N(test_for_water_level)(partnerNPC->collisionChannel, partnerNPC->pos.x, partnerNPC->pos.y, partnerNPC->pos.z,
                                 partnerNPC->yaw, partnerNPC->collisionRadius * 0.5f);
             partnerNPC->pos.y = N(WaterSurfaceY) - (partnerNPC->collisionHeight * 0.5f);
             partnerNPC->yaw = atan2(partnerNPC->pos.x, partnerNPC->pos.z, script->varTable[1], script->varTable[3]);

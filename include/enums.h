@@ -3709,7 +3709,7 @@ enum PlayerStatusAnimFlags {
     /* This allows dismounting from Lakilester, even if in a precarious situation (like over spikes, lava, or water). */
     PA_FLAG_DISMOUNTING_ALLOWED              = 0x20000000,
     /* This flag is set when partner usage was interrupted by a script, and it prevents menu sounds (like the error sound) from playing for script-initiated player actions */
-    PA_FLAG_PARTNER_USAGE_STOPPED            = 0x40000000,
+    PA_FLAG_FORCED_PARTNER_ABILITY_END      = 0x40000000,
     /* This one's really weird. Seems to have something to do with the direction Mario is facing, but I'm not sure what it's actually supposed to be achieving. */
     PA_FLAG_80000000                         = 0x80000000,
 };

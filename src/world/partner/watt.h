@@ -8,6 +8,8 @@ void world_watt_init(Npc*);
 void world_watt_pre_battle(Npc*);
 void world_watt_post_battle(Npc*);
 
+void world_watt_sync_held_position(void);
+
 extern EvtScript EVS_WorldWatt_TakeOut;
 extern EvtScript EVS_WorldWatt_Update;
 extern EvtScript EVS_WorldWatt_UseAbility;

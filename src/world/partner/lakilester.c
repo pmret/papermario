@@ -8,36 +8,51 @@
 BSS s32 N(PutAwayState);
 BSS b32 N(LockingPlayerInput);
 BSS b32 N(PlayerCollisionDisabled);
-BSS s32 N(D_802BFF0C);
-BSS b32 N(D_802BFF10);
+BSS s32 N(MountState);
+BSS b32 N(UpdatePushingWall);
 BSS s32 N(AbilityState);
-BSS s32 N(D_802BFF18);
-BSS s32 N(D_802BFF1C);
-BSS s32 N(D_802BFF20);
-BSS s32 N(D_802BFF24);
-BSS f32 N(D_802BFF28);
+BSS s32 N(PlayerBounceOffset);
+BSS s32 N(MoveSoundsTime);
+BSS s32 N(MovePitchAdjustment);
+BSS s32 N(MountingDeltaY);
+BSS f32 N(CurrentGroundPitch);
 BSS s32 N(D_802BFF2C); // unused (padding?)
 
 enum {
-    RIDE_STATE_40           = 40,
-    RIDE_STATE_41           = 41,
+    RIDE_STATE_BEGIN            = 40,
+    RIDE_STATE_DELAY            = 41,
     RIDE_STATE_MOUNT_1          = 100,
     RIDE_STATE_MOUNT_2          = 101,
     RIDE_STATE_MOUNT_3          = 102,
     RIDE_STATE_MOUNT_4          = 103,
-    RIDE_STATE_104          = 104,
-
+    RIDE_STATE_START_RIDING     = 104, // cannot dismount until this state is done
     RIDE_STATE_RIDING           = 1,
-    RIDE_STATE_03           = 3,
-    RIDE_STATE_04           = 4,
-    RIDE_STATE_05           = 5,
-    RIDE_STATE_10           = 10,
-    RIDE_STATE_11           = 11,
+    RIDE_STATE_DISMOUNT_1       = 3,
+    RIDE_STATE_DISMOUNT_2       = 4,
+    RIDE_STATE_DISMOUNT_3       = 5,
+    RIDE_STATE_FINISH_1         = 10,
+    RIDE_STATE_FINISH_2         = 11,
 };
 
-void N(func_802BFB44_323694)(f32 arg0);
+// states for putting lakilester away, paralleling ride states
+enum {
+    PUT_AWAY_DISMOUNT_1         = 0,
+    PUT_AWAY_DISMOUNT_2         = 1,
+    PUT_AWAY_DISMOUNT_3         = 2,
+    PUT_AWAY_FINISH_1           = 3,
+    PUT_AWAY_FINISH_2           = 4,
+    PUT_AWAY_FINISH_3           = 5,
+};
 
-void N(func_802BD100_320C50)(void) {
+enum {
+    MOUNT_STATE_NONE            = 0,
+    MOUNT_STATE_IN_PROGRESS     = 1,
+    MOUNT_STATE_DONE            = 2,
+};
+
+void N(offset_player_from_camera)(f32 arg0);
+
+void N(sync_player_position)(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* lakilester = get_npc_unsafe(NPC_PARTNER);
     f32 speed;
@@ -53,27 +68,27 @@ void N(func_802BD100_320C50)(void) {
     }
 
     playerStatus->position.x = lakilester->pos.x;
-    playerStatus->position.y = lakilester->pos.y + 10.0f + (abs(N(D_802BFF18)) * 0.34f);
+    playerStatus->position.y = lakilester->pos.y + 10.0f + abs(N(PlayerBounceOffset)) * 0.34f;
     playerStatus->position.z = lakilester->pos.z;
     add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, 2.0f, gCameras[gCurrentCameraID].currentYaw);
 }
 
-void N(init)(Npc* npc) {
-    npc->collisionHeight = 38;
-    npc->collisionRadius = 36;
-    npc->collisionChannel = COLLISION_CHANNEL_10000;
-    N(D_802BFF18) = 0;
+void N(init)(Npc* lakilester) {
+    lakilester->collisionHeight = 38;
+    lakilester->collisionRadius = 36;
+    lakilester->collisionChannel = COLLISION_CHANNEL_10000;
+    N(PlayerBounceOffset) = 0;
     N(LockingPlayerInput) = FALSE;
     N(PlayerCollisionDisabled) = FALSE;
-    N(D_802BFF0C) = 0;
-    N(D_802BFF10) = TRUE;
-    N(D_802BFF1C) = 0;
-    N(D_802BFF20) = 0;
-    N(D_802BFF24) = 0;
-    N(D_802BFF28) = 0;
-    npc->moveToPos.x = npc->pos.x;
-    npc->moveToPos.y = npc->pos.y;
-    npc->moveToPos.z = npc->pos.z;
+    N(MountState) = MOUNT_STATE_NONE;
+    N(UpdatePushingWall) = TRUE;
+    N(MoveSoundsTime) = 0;
+    N(MovePitchAdjustment) = 0;
+    N(MountingDeltaY) = 0;
+    N(CurrentGroundPitch) = 0;
+    lakilester->moveToPos.x = lakilester->pos.x;
+    lakilester->moveToPos.y = lakilester->pos.y;
+    lakilester->moveToPos.z = lakilester->pos.z;
 }
 
 API_CALLABLE(N(TakeOut)) {
@@ -187,98 +202,100 @@ EvtScript EVS_WorldLakilester_Update = {
     EVT_END
 };
 
-void N(try_cancel_tweester)(Npc* npc) {
+void N(try_cancel_tweester)(Npc* lakilester) {
     if (TweesterTouchingPartner != NULL) {
         TweesterTouchingPartner = NULL;
-        npc->flags = N(TweesterPhysicsPtr)->prevFlags;
+        lakilester->flags = N(TweesterPhysicsPtr)->prevFlags;
         N(TweesterPhysicsPtr)->state = TWEESTER_PARTNER_INIT;
-        partner_clear_player_tracking(npc);
+        partner_clear_player_tracking(lakilester);
     }
 }
 
-void N(func_802BD6BC_32120C)(f32* outAngle, f32* outMagnitude) {
+void N(get_movement_from_input)(f32* outAngle, f32* outSpeed) {
     PartnerStatus* partnerStatus = &gPartnerStatus;
     f32 stickX = partnerStatus->stickX;
     f32 stickY = partnerStatus->stickY;
-    f32 angle = clamp_angle(atan2(0.0f, 0.0f, stickX, -stickY) + gCameras[CAM_DEFAULT].currentYaw);
-    f32 magnitude = 0.0f;
+    f32 moveAngle = clamp_angle(atan2(0.0f, 0.0f, stickX, -stickY) + gCameras[CAM_DEFAULT].currentYaw);
+    f32 moveSpeed = 0.0f;
 
     if (dist2D(0.0f, 0.0f, stickX, -stickY) >= 1.0) {
-        magnitude = 3.0f;
-        if (SQ(stickX) + SQ(stickY) > 3025.0f) {
-            magnitude = 6.0f;
+        moveSpeed = 3.0f;
+        if (SQ(stickX) + SQ(stickY) > SQ(55)) {
+            moveSpeed = 6.0f;
         }
     }
 
-    *outAngle = angle;
-    *outMagnitude = magnitude;
+    *outAngle = moveAngle;
+    *outSpeed = moveSpeed;
 }
 
-// Returns whether or not it is safe to dismount Lakilester
 s32 N(can_dismount)(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Camera* currentCamera;
     f32 hitDirX, hitDirZ;
     f32 hitRx, hitRz;
     f32 outX, outY, outZ, outLength;
-    Npc* npc = get_npc_unsafe(NPC_PARTNER);
-    s32 colliderTypeID;
-    s32 raycastResult;
-    s32 ret;
+    Npc* lakilester = get_npc_unsafe(NPC_PARTNER);
+    s32 temp;
+    s32 hitResult;
+    s32 canDismount;
+    s32 entityType;
 
     if (playerStatus->animFlags & PA_FLAG_DISMOUNTING_ALLOWED) {
         playerStatus->animFlags &= ~PA_FLAG_DISMOUNTING_ALLOWED;
         return TRUE;
     }
 
-    ret = FALSE;
+    canDismount = FALSE;
     outLength = 16.0f;
-    outY = npc->moveToPos.y + 7.0f;
+    outY = lakilester->moveToPos.y + 7.0f;
     outX = playerStatus->position.x;
     outZ = playerStatus->position.z;
     currentCamera = &gCameras[gCurrentCameraID];
     add_vec2D_polar(&outX, &outZ, 2.0f, currentCamera->currentYaw);
-    raycastResult = player_raycast_below_cam_relative(playerStatus, &outX, &outY, &outZ, &outLength, &hitRx, &hitRz,
+    hitResult = player_raycast_below_cam_relative(playerStatus, &outX, &outY, &outZ, &outLength, &hitRx, &hitRz,
                                                       &hitDirX, &hitDirZ);
-    colliderTypeID = raycastResult;
+    temp = hitResult;
 
     //TODO find better match
-    if (outLength <= 16.0f && colliderTypeID >= 0) {
-        if (!(colliderTypeID & COLLISION_WITH_ENTITY_BIT) || !(get_entity_type(colliderTypeID) - 0x2E < 2)){
-            colliderTypeID = get_collider_flags(colliderTypeID) & 0xFF; //TODO surface type
-            if (!(colliderTypeID == SURFACE_TYPE_WATER || colliderTypeID == SURFACE_TYPE_SPIKES || colliderTypeID == SURFACE_TYPE_LAVA)) { //
-                ret = FALSE;
-                if (colliderTypeID != SURFACE_TYPE_SLIDE) {
-                    npc->moveToPos.x = outX;
-                    npc->moveToPos.y = outY;
-                    npc->moveToPos.z = outZ;
-                    ret = TRUE;
+    if (outLength <= 16.0f && temp >= 0) {
+        if (!(temp & COLLISION_WITH_ENTITY_BIT) ||
+            (entityType = get_entity_type(temp),
+            !(entityType == ENTITY_TYPE_SIMPLE_SPRING || entityType == ENTITY_TYPE_SCRIPT_SPRING))
+        ) {
+            temp = get_collider_flags(temp) & COLLIDER_FLAGS_SURFACE_TYPE_MASK; //TODO 'temp' is now 'surfaceType'
+            if (!(temp == SURFACE_TYPE_WATER || temp == SURFACE_TYPE_SPIKES || temp == SURFACE_TYPE_LAVA)) {
+                if (temp != SURFACE_TYPE_SLIDE) {
+                    lakilester->moveToPos.x = outX;
+                    lakilester->moveToPos.y = outY;
+                    lakilester->moveToPos.z = outZ;
+                    canDismount = TRUE;
                 }
             }
         }
     }
-
-    return ret;
+    return canDismount;
 }
 
-s32 N(func_802BD99C_3214EC)(Npc* partner, f32 yOffset, f32 zOffset) {
-    f32 outX = gPlayerStatus.position.x;
-    f32 outY = gPlayerStatus.position.y + yOffset;
-    f32 outZ = gPlayerStatus.position.z;
-    f32 outLength = zOffset;
+s32 N(test_mounting_height_adjustment)(Npc* lakilester, f32 height, f32 dist) {
+    f32 x = gPlayerStatus.position.x;
+    f32 y = gPlayerStatus.position.y + height;
+    f32 z = gPlayerStatus.position.z;
+    f32 depth = dist;
     f32 hitRx, hitRz;
     f32 hitDirX, hitDirZ;
     f32 deltaY;
 
-    N(D_802BFF24) = 0;
+    N(MountingDeltaY) = 0;
 
-    if (player_raycast_below_cam_relative(&gPlayerStatus, &outX, &outY, &outZ, &outLength, &hitRx, &hitRz,
-                                          &hitDirX, &hitDirZ) >= 0) {
-        deltaY = outY - partner->moveToPos.y;
+    if (player_raycast_below_cam_relative(&gPlayerStatus, &x, &y, &z, &depth,
+            &hitRx, &hitRz, &hitDirX, &hitDirZ) > NO_COLLIDER)
+    {
+        deltaY = y - lakilester->moveToPos.y;
         if (deltaY != 0.0f) {
             if (fabs(deltaY) < 10.0) {
-                N(D_802BFF24) = deltaY;
-                partner->moveToPos.y = outY;
+                N(MountingDeltaY) = deltaY;
+                lakilester->moveToPos.y = y;
                 return TRUE;
             } else {
                 return FALSE;
@@ -289,7 +306,7 @@ s32 N(func_802BD99C_3214EC)(Npc* partner, f32 yOffset, f32 zOffset) {
     return FALSE;
 }
 
-void N(func_802BDA90_3215E0)(Npc* lakilester) {
+void N(apply_riding_static_collisions)(Npc* lakilester) {
     f32 radius = lakilester->collisionRadius * 0.8f;
     f32 x, y, z, yaw;
 
@@ -345,13 +362,12 @@ void N(func_802BDA90_3215E0)(Npc* lakilester) {
     }
 }
 
-void N(func_802BDDD8_321928)(Npc* npc) {
+void N(update_riding_physics)(Npc* lakilester) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
     PartnerStatus* partnerStatus = &gPartnerStatus;
-    f32 hitDepth, sp40, sp44, sp48, sp4C, sp50, sp54;
-    f32 yaw = 0.0f;
-    f32 moveSpeed = 0.0f;
+    f32 hitDepth, sp40, sp44, sp48, sp4C, sinAngle, cosAngle;
+    f32 moveAngle, moveSpeed;
     f32 x, y, z;
     f32 temp_f0_3;
     s32 raycastBelowResult;
@@ -360,203 +376,204 @@ void N(func_802BDDD8_321928)(Npc* npc) {
     s32 pitchShift;
     f32 height;
 
-    N(func_802BD6BC_32120C)(&yaw, &moveSpeed);
+    moveAngle = 0.0f;
+    moveSpeed = 0.0f;
+    N(get_movement_from_input)(&moveAngle, &moveSpeed);
 
-    currentSurfaceType = get_collider_flags(npc->currentFloor) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
+    currentSurfaceType = get_collider_flags(lakilester->currentFloor) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
     if (currentSurfaceType == SURFACE_TYPE_LAVA) {
         moveSpeed *= 0.5f;
     }
 
-    if (N(D_802BFF28) >= 20.0f) {
+    if (N(CurrentGroundPitch) >= 20.0f) {
         moveSpeed *= 0.8f;
     }
 
-    npc->moveSpeed = moveSpeed;
+    lakilester->moveSpeed = moveSpeed;
 
     if (moveSpeed != 0.0f) {
-        N(D_802BFF1C)++;
-        N(D_802BFF20)++;
-        if (N(D_802BFF1C) % 8 == 0) {
-            if (N(D_802BFF20) >= 120) {
-                N(D_802BFF20) = 0;
+        N(MoveSoundsTime)++;
+        N(MovePitchAdjustment)++;
+        if (N(MoveSoundsTime) % 8 == 0) {
+            if (N(MovePitchAdjustment) >= 120) {
+                N(MovePitchAdjustment) = 0;
             }
 
-            if (N(D_802BFF20) < 60) {
-                pitchShift = update_lerp(0,  0.0f, 100.0f, N(D_802BFF20), 60);
+            if (N(MovePitchAdjustment) < 60) {
+                pitchShift = update_lerp(EASING_LINEAR,  0.0f, 100.0f, N(MovePitchAdjustment), 60);
                 sfx_play_sound_with_params(SOUND_295, 0, 64, pitchShift);
             } else {
-                pitchShift = update_lerp(0, 100.0f, 0.0f, N(D_802BFF20) - 60, 60);
+                pitchShift = update_lerp(EASING_LINEAR, 100.0f, 0.0f, N(MovePitchAdjustment) - 60, 60);
                 sfx_play_sound_with_params(SOUND_295, 0, 64, pitchShift);
             }
         }
     }
 
-    x = npc->pos.x;
-    y = npc->moveToPos.y;
-    z = npc->pos.z;
+    x = lakilester->pos.x;
+    y = lakilester->moveToPos.y;
+    z = lakilester->pos.z;
 
-    if (npc_test_move_taller_with_slipping(npc->collisionChannel, &x, &y, &z,
-        npc->collisionRadius, npc->yaw, npc->collisionHeight, npc->collisionRadius))
+    if (npc_test_move_taller_with_slipping(lakilester->collisionChannel, &x, &y, &z,
+        lakilester->collisionRadius, lakilester->yaw, lakilester->collisionHeight, lakilester->collisionRadius))
     {
         collisionStatus->currentInspect = (partnerStatus->pressedButtons & BUTTON_A) ? NpcHitQueryColliderID : NO_COLLIDER;
     }
 
     if (moveSpeed != 0.0f) {
-        npc->yaw = yaw;
-        x = npc->pos.x;
-        y = npc->moveToPos.y;
-        z = npc->pos.z;
-        if (npc_test_move_complex_with_slipping(npc->collisionChannel, &x, &y, &z,
-            npc->moveSpeed, npc->yaw, npc->collisionHeight, npc->collisionRadius))
+        lakilester->yaw = moveAngle;
+        x = lakilester->pos.x;
+        y = lakilester->moveToPos.y;
+        z = lakilester->pos.z;
+        if (npc_test_move_complex_with_slipping(lakilester->collisionChannel, &x, &y, &z,
+            lakilester->moveSpeed, lakilester->yaw, lakilester->collisionHeight, lakilester->collisionRadius))
         {
-            if (N(D_802BFF10)) {
+            if (N(UpdatePushingWall)) {
                 collisionStatus->pushingAgainstWall = NpcHitQueryColliderID;
             }
-            npc->pos.x += (x - npc->pos.x) / 5.0f;
-            npc->pos.z += (z - npc->pos.z) / 5.0f;
+            lakilester->pos.x += (x - lakilester->pos.x) / 5.0f;
+            lakilester->pos.z += (z - lakilester->pos.z) / 5.0f;
         } else {
-            npc_move_heading(npc, npc->moveSpeed, yaw);
-            if (N(D_802BFF10)) {
+            npc_move_heading(lakilester, lakilester->moveSpeed, moveAngle);
+            if (N(UpdatePushingWall)) {
                 collisionStatus->pushingAgainstWall = NO_COLLIDER;
             }
         }
 
-        yaw = clamp_angle(npc->yaw - 30.0f);
-        x = npc->pos.x;
-        y = npc->moveToPos.y;
-        z = npc->pos.z;
-        if (npc_test_move_taller_with_slipping(npc->collisionChannel, &x, &y, &z,
-            npc->moveSpeed, yaw, npc->collisionHeight, npc->collisionRadius))
+        moveAngle = clamp_angle(lakilester->yaw - 30.0f);
+        x = lakilester->pos.x;
+        y = lakilester->moveToPos.y;
+        z = lakilester->pos.z;
+        if (npc_test_move_taller_with_slipping(lakilester->collisionChannel, &x, &y, &z,
+            lakilester->moveSpeed, moveAngle, lakilester->collisionHeight, lakilester->collisionRadius))
         {
-            npc->pos.x += (x - npc->pos.x) / 5.0f;
-            npc->pos.z += (z - npc->pos.z) / 5.0f;
+            lakilester->pos.x += (x - lakilester->pos.x) / 5.0f;
+            lakilester->pos.z += (z - lakilester->pos.z) / 5.0f;
         }
 
-        yaw = clamp_angle(npc->yaw + 30.0f);
-        x = npc->pos.x;
-        y = npc->moveToPos.y;
-        z = npc->pos.z;
-        if (npc_test_move_taller_with_slipping(npc->collisionChannel, &x, &y, &z,
-            npc->moveSpeed, yaw, npc->collisionHeight, npc->collisionRadius))
+        moveAngle = clamp_angle(lakilester->yaw + 30.0f);
+        x = lakilester->pos.x;
+        y = lakilester->moveToPos.y;
+        z = lakilester->pos.z;
+        if (npc_test_move_taller_with_slipping(lakilester->collisionChannel, &x, &y, &z,
+            lakilester->moveSpeed, moveAngle, lakilester->collisionHeight, lakilester->collisionRadius))
         {
-            npc->pos.x += (x - npc->pos.x) / 5.0f;
-            npc->pos.z += (z - npc->pos.z) / 5.0f;
+            lakilester->pos.x += (x - lakilester->pos.x) / 5.0f;
+            lakilester->pos.z += (z - lakilester->pos.z) / 5.0f;
         }
 
-        spawn_surface_effects(npc, SURFACE_INTERACT_RUN);
+        spawn_surface_effects(lakilester, SURFACE_INTERACT_RUN);
 
     } else {
-        yaw = 90.0f;
-        x = npc->pos.x;
-        y = npc->moveToPos.y;
-        z = npc->pos.z;
-        if (npc_test_move_taller_with_slipping(npc->collisionChannel, &x, &y, &z,
-            4.0f, yaw, npc->collisionHeight, npc->collisionRadius))
+        moveAngle = 90.0f;
+        x = lakilester->pos.x;
+        y = lakilester->moveToPos.y;
+        z = lakilester->pos.z;
+        if (npc_test_move_taller_with_slipping(lakilester->collisionChannel, &x, &y, &z,
+            4.0f, moveAngle, lakilester->collisionHeight, lakilester->collisionRadius))
         {
-            npc->pos.x += (x - npc->pos.x) / 5.0f;
-            npc->pos.z += (z - npc->pos.z) / 5.0f;
+            lakilester->pos.x += (x - lakilester->pos.x) / 5.0f;
+            lakilester->pos.z += (z - lakilester->pos.z) / 5.0f;
         }
 
-        yaw = 270.0f;
-        x = npc->pos.x;
-        y = npc->moveToPos.y;
-        z = npc->pos.z;
-        if (npc_test_move_taller_with_slipping(npc->collisionChannel, &x, &y, &z,
-            4.0f, yaw, npc->collisionHeight, npc->collisionRadius))
+        moveAngle = 270.0f;
+        x = lakilester->pos.x;
+        y = lakilester->moveToPos.y;
+        z = lakilester->pos.z;
+        if (npc_test_move_taller_with_slipping(lakilester->collisionChannel, &x, &y, &z,
+            4.0f, moveAngle, lakilester->collisionHeight, lakilester->collisionRadius))
         {
-            npc->pos.x += (x - npc->pos.x) / 5.0f;
-            npc->pos.z += (z - npc->pos.z) / 5.0f;
+            lakilester->pos.x += (x - lakilester->pos.x) / 5.0f;
+            lakilester->pos.z += (z - lakilester->pos.z) / 5.0f;
         }
     }
 
-    N(func_802BDA90_3215E0)(npc);
-    npc->moveToPos.y -= npc->jumpScale;
-    hitDepth = npc->collisionHeight + 2;
-    y = npc->moveToPos.y + 12.0f;
+    N(apply_riding_static_collisions)(lakilester);
+    lakilester->moveToPos.y -= lakilester->jumpScale;
+    hitDepth = lakilester->collisionHeight + 2;
+    y = lakilester->moveToPos.y + 12.0f;
     x = playerStatus->position.x;
     z = playerStatus->position.z;
     add_vec2D_polar(&x, &z, 2.0f, gCameras[gCurrentCameraID].currentYaw);
     raycastBelowResult = player_raycast_below_cam_relative(playerStatus, &x, &y, &z, &hitDepth, &sp40,
                                                             &sp44, &sp48, &sp4C);
-    N(D_802BFF28) = get_player_normal_pitch();
+    N(CurrentGroundPitch) = get_player_normal_pitch();
     height = 12.0f;
 
-    if (N(D_802BFF28) != 0.0f) {
+    if (N(CurrentGroundPitch) != 0.0f) {
         height = 32.0f;
     }
 
-    if (N(D_802BFF28) > 0.0f && raycastBelowResult >= 0) {
-        sin_cos_rad(DEG_TO_RAD(N(D_802BFF28)), &sp50, &sp54);
-        npc->pos.y = (npc->pos.y + fabs((sp50 / sp54) * playerStatus->runSpeed));
+    if (N(CurrentGroundPitch) > 0.0f && raycastBelowResult >= 0) {
+        sin_cos_rad(DEG_TO_RAD(N(CurrentGroundPitch)), &sinAngle, &cosAngle);
+        lakilester->pos.y = (lakilester->pos.y + fabs((sinAngle / cosAngle) * playerStatus->runSpeed));
     }
 
-    if (hitDepth <= height && raycastBelowResult >= 0) {
-        playerStatus->lastGoodPosition.x = npc->pos.x;
-        playerStatus->lastGoodPosition.y = npc->pos.y;
-        playerStatus->lastGoodPosition.z = npc->pos.z;
+    if (hitDepth <= height && raycastBelowResult > NO_COLLIDER) {
+        playerStatus->lastGoodPosition.x = lakilester->pos.x;
+        playerStatus->lastGoodPosition.y = lakilester->pos.y;
+        playerStatus->lastGoodPosition.z = lakilester->pos.z;
         collisionStatus->currentFloor = raycastBelowResult;
 
-        npc->currentFloor = raycastBelowResult;
-        npc->moveToPos.y = y;
-        npc->moveToPos.x = x;
-        npc->moveToPos.z = z;
-        npc->jumpScale = 0.0f;
+        lakilester->currentFloor = raycastBelowResult;
+        lakilester->moveToPos.y = y;
+        lakilester->moveToPos.x = x;
+        lakilester->moveToPos.z = z;
+        lakilester->jumpScale = 0.0f;
         playerStatus->timeInAir = 0;
 
-        belowSurfaceType = get_collider_flags(raycastBelowResult) & 0xFF;
+        belowSurfaceType = get_collider_flags(raycastBelowResult) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
         if (belowSurfaceType == SURFACE_TYPE_LAVA) {
-            npc->currentAnim = ANIM_WorldLakilester_StrainWalk;
-            npc->moveSpeed = moveSpeed * 0.5f;
+            lakilester->currentAnim = ANIM_WorldLakilester_StrainWalk;
+            lakilester->moveSpeed = moveSpeed * 0.5f;
         } else {
-            npc->currentAnim = ANIM_WorldLakilester_Walk;
-            npc->moveSpeed = moveSpeed;
+            lakilester->currentAnim = ANIM_WorldLakilester_Walk;
+            lakilester->moveSpeed = moveSpeed;
         }
         return;
     }
 
     collisionStatus->currentFloor = NO_COLLIDER;
     playerStatus->timeInAir++;
-    npc->currentFloor = NO_COLLIDER;
-    npc->jumpScale += 1.8;
+    lakilester->currentFloor = NO_COLLIDER;
+    lakilester->jumpScale += 1.8;
 
-    if (npc->jumpScale > 12.0f) {
-        npc->jumpScale = 12.0f;
+    if (lakilester->jumpScale > 12.0f) {
+        lakilester->jumpScale = 12.0f;
     }
 }
 
-s32 N(func_802BE6A0_3221F0)(f32* arg0) {
+s32 N(test_dismount_height)(f32* posY) {
     f32 colliderHeight = gPlayerStatus.colliderHeight;
     f32 hitDirX, hitDirZ;
     f32 hitRx, hitRz;
-    f32 x, z;
+    f32 posX, posZ;
 
-    *arg0 = gPlayerStatus.position.y + colliderHeight;
-    x = gPlayerStatus.position.x;
-    z = gPlayerStatus.position.z;
+    *posY = gPlayerStatus.position.y + colliderHeight;
+    posX = gPlayerStatus.position.x;
+    posZ = gPlayerStatus.position.z;
 
-    player_raycast_below_cam_relative(&gPlayerStatus, &x, arg0, &z, &colliderHeight, &hitRx, &hitRz,
-                                      &hitDirX, &hitDirZ);
+    return player_raycast_below_cam_relative(&gPlayerStatus, &posX, posY, &posZ,
+            &colliderHeight, &hitRx, &hitRz, &hitDirX, &hitDirZ);
 }
 
 API_CALLABLE(N(UseAbility)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerStatus* partnerStatus = &gPartnerStatus;
     Camera* camera = &gCameras[CAM_DEFAULT];
-    Npc* npc = script->owner2.npc;
-    s32 colliderHeightTemp;
-    f32 x, y, z, sp2C;
+    Npc* lakilester = script->owner2.npc;
+    f32 x, y, z, dist;
     f32 yaw, camYaw;
     s32 i;
 
     playerStatus->animFlags &= ~PA_FLAG_RIDING_PARTNER;
 
     if (isInitialCall) {
-        N(try_cancel_tweester)(npc);
+        N(try_cancel_tweester)(lakilester);
         if (!(playerStatus->animFlags & PA_FLAG_CHANGING_MAP)) {
-            npc->flags = npc->flags & ~PA_FLAG_PULSE_STONE_VISIBLE;
-            npc->moveToPos.x = npc->pos.x;
-            npc->moveToPos.y = npc->pos.y;
-            npc->moveToPos.z = npc->pos.z;
+            lakilester->flags = lakilester->flags & ~PA_FLAG_PULSE_STONE_VISIBLE;
+            lakilester->moveToPos.x = lakilester->pos.x;
+            lakilester->moveToPos.y = lakilester->pos.y;
+            lakilester->moveToPos.z = lakilester->pos.z;
 
             if (gGameStatusPtr->keepUsingPartnerOnMapChange
                 || (playerStatus->animFlags & PA_FLAG_PARTNER_USAGE_FORCED)
@@ -566,7 +583,7 @@ API_CALLABLE(N(UseAbility)) {
                 }
                 N(AbilityState) = RIDE_STATE_MOUNT_1;
             } else {
-                N(AbilityState) = RIDE_STATE_40;
+                N(AbilityState) = RIDE_STATE_BEGIN;
             }
 
             if (!partnerStatus->shouldResumeAbility) {
@@ -585,25 +602,25 @@ API_CALLABLE(N(UseAbility)) {
             } else {
                 partnerStatus->shouldResumeAbility = FALSE;
                 playerStatus->flags &= ~PS_FLAG_PAUSE_DISABLED;
-                npc->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8);
-                npc->flags |= NPC_FLAG_IGNORE_PLAYER_COLLISION;
+                lakilester->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8);
+                lakilester->flags |= NPC_FLAG_IGNORE_PLAYER_COLLISION;
                 set_action_state(ACTION_STATE_RIDE);
                 suggest_player_anim_always_forward(ANIM_MarioW2_RideLaki);
-                npc->currentAnim = ANIM_WorldLakilester_Walk;
-                N(D_802BFF0C) = 1;
-                npc->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8);
-                npc->flags |= (NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_TOUCHES_GROUND);
+                lakilester->currentAnim = ANIM_WorldLakilester_Walk;
+                N(MountState) = MOUNT_STATE_IN_PROGRESS; // unexpected
+                lakilester->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8);
+                lakilester->flags |= (NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_TOUCHES_GROUND);
                 partnerStatus->actingPartner = PARTNER_LAKILESTER;
                 partnerStatus->partnerActionState = PARTNER_ACTION_LAKILESTER_1;
                 gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
-                npc->pos.x = playerStatus->position.x;
-                npc->pos.y = npc->moveToPos.y;
-                npc->pos.z = playerStatus->position.z;
-                npc->currentAnim = ANIM_WorldLakilester_Walk;
-                playerStatus->position.y = npc->pos.y + 10.0f;
-                npc->moveSpeed = 3.0f;
-                npc->jumpScale = 0.0f;
-                npc->yaw = playerStatus->targetYaw;
+                lakilester->pos.x = playerStatus->position.x;
+                lakilester->pos.y = lakilester->moveToPos.y;
+                lakilester->pos.z = playerStatus->position.z;
+                lakilester->currentAnim = ANIM_WorldLakilester_Walk;
+                playerStatus->position.y = lakilester->pos.y + 10.0f;
+                lakilester->moveSpeed = 3.0f;
+                lakilester->jumpScale = 0.0f;
+                lakilester->yaw = playerStatus->targetYaw;
                 suggest_player_anim_always_forward(ANIM_MarioW2_RideLaki);
                 set_action_state(ACTION_STATE_RIDE);
                 disable_player_static_collisions();
@@ -614,9 +631,9 @@ API_CALLABLE(N(UseAbility)) {
                     N(LockingPlayerInput) = TRUE;
                 }
 
-                N(D_802BFF18) = 0;
+                N(PlayerBounceOffset) = 0;
                 N(AbilityState) = RIDE_STATE_RIDING;
-                npc->flags |= NPC_FLAG_IGNORE_WORLD_COLLISION;
+                lakilester->flags |= NPC_FLAG_IGNORE_WORLD_COLLISION;
             }
         } else {
             return ApiStatus_DONE2;
@@ -624,17 +641,17 @@ API_CALLABLE(N(UseAbility)) {
     }
 
     switch (N(AbilityState)) {
-        case RIDE_STATE_40:
-            if (playerStatus->flags & PS_FLAG_HIT_FIRE || playerStatus->inputDisabledCount) {
+        case RIDE_STATE_BEGIN:
+            if (playerStatus->flags & PS_FLAG_HIT_FIRE || playerStatus->inputDisabledCount != 0) {
                 playerStatus->flags &= ~PS_FLAG_PAUSE_DISABLED;
                 return ApiStatus_DONE2;
             }
             script->functionTemp[1] = 3;
             script->functionTemp[2] = disable_player_input();
             N(LockingPlayerInput) = TRUE;
-            N(AbilityState)++; // RIDE_STATE_41
+            N(AbilityState)++; // RIDE_STATE_DELAY
             break;
-        case RIDE_STATE_41:
+        case RIDE_STATE_DELAY:
             if (playerStatus->flags & PS_FLAG_HIT_FIRE) {
                 playerStatus->flags &= ~PS_FLAG_PAUSE_DISABLED;
                 if (N(LockingPlayerInput)) {
@@ -677,33 +694,33 @@ API_CALLABLE(N(UseAbility)) {
                 N(LockingPlayerInput) = TRUE;
             }
 
-            npc->flags &= ~NPC_FLAG_8;
-            npc->flags |= (NPC_FLAG_TOUCHES_GROUND | NPC_FLAG_IGNORE_PLAYER_COLLISION);
+            lakilester->flags &= ~NPC_FLAG_8;
+            lakilester->flags |= (NPC_FLAG_TOUCHES_GROUND | NPC_FLAG_IGNORE_PLAYER_COLLISION);
             set_action_state(ACTION_STATE_RIDE);
-            N(D_802BFF0C) = 1;
+            N(MountState) = MOUNT_STATE_IN_PROGRESS;
             partner_force_player_flip_done();
-            npc->moveToPos.x = playerStatus->position.x;
-            npc->moveToPos.y = playerStatus->position.y;
-            npc->moveToPos.z = playerStatus->position.z;
+            lakilester->moveToPos.x = playerStatus->position.x;
+            lakilester->moveToPos.y = playerStatus->position.y;
+            lakilester->moveToPos.z = playerStatus->position.z;
             yaw = 0.0f;
 
             for (i = 0; i < 4; i++) {
-                x = npc->moveToPos.x;
-                y = npc->moveToPos.y;
-                z = npc->moveToPos.z;
-                npc_test_move_simple_with_slipping(0x10000, &x, &y, &z, npc->moveSpeed,
-                                                    yaw, npc->collisionHeight, npc->collisionRadius);
-                npc->moveToPos.x = x;
-                npc->moveToPos.y = y;
-                npc->moveToPos.z = z;
+                x = lakilester->moveToPos.x;
+                y = lakilester->moveToPos.y;
+                z = lakilester->moveToPos.z;
+                npc_test_move_simple_with_slipping(COLLISION_CHANNEL_10000, &x, &y, &z, lakilester->moveSpeed,
+                                                    yaw, lakilester->collisionHeight, lakilester->collisionRadius);
+                lakilester->moveToPos.x = x;
+                lakilester->moveToPos.y = y;
+                lakilester->moveToPos.z = z;
                 yaw += 90.0f;
             }
 
-            npc->yaw = atan2(npc->pos.x, npc->pos.z, npc->moveToPos.x, npc->moveToPos.z);
-            npc->duration = 12;
-            npc->currentAnim = ANIM_WorldLakilester_Walk;
-            npc->jumpVelocity = 8.0f;
-            npc->jumpScale = 1.4f;
+            lakilester->yaw = atan2(lakilester->pos.x, lakilester->pos.z, lakilester->moveToPos.x, lakilester->moveToPos.z);
+            lakilester->duration = 12;
+            lakilester->currentAnim = ANIM_WorldLakilester_Walk;
+            lakilester->jumpVelocity = 8.0f;
+            lakilester->jumpScale = 1.4f;
             suggest_player_anim_allow_backward(ANIM_Mario1_BeforeJump);
             N(AbilityState) = RIDE_STATE_MOUNT_2;
             break;
@@ -716,33 +733,32 @@ API_CALLABLE(N(UseAbility)) {
             // fallthrough
         case RIDE_STATE_MOUNT_4:
             if (!(playerStatus->flags & PS_FLAG_HIT_FIRE)) {
-                npc->pos.x += (npc->moveToPos.x - npc->pos.x) / npc->duration;
-                npc->pos.z += (npc->moveToPos.z - npc->pos.z) / npc->duration;
-                npc->pos.y += (npc->moveToPos.y - npc->pos.y) / npc->duration;
-                playerStatus->position.y += npc->jumpVelocity;
-                colliderHeightTemp = playerStatus->colliderHeight;
-                N(func_802BD99C_3214EC)(npc, colliderHeightTemp, (colliderHeightTemp * 2));
-                playerStatus->position.y += N(D_802BFF24);
-                npc->pos.y += N(D_802BFF24);
-                npc->jumpVelocity -= npc->jumpScale;
+                lakilester->pos.x += (lakilester->moveToPos.x - lakilester->pos.x) / lakilester->duration;
+                lakilester->pos.z += (lakilester->moveToPos.z - lakilester->pos.z) / lakilester->duration;
+                lakilester->pos.y += (lakilester->moveToPos.y - lakilester->pos.y) / lakilester->duration;
+                playerStatus->position.y += lakilester->jumpVelocity;
+                N(test_mounting_height_adjustment)(lakilester, playerStatus->colliderHeight, 2 * playerStatus->colliderHeight);
+                playerStatus->position.y += N(MountingDeltaY);
+                lakilester->pos.y += N(MountingDeltaY);
+                lakilester->jumpVelocity -= lakilester->jumpScale;
 
-                if (npc->jumpVelocity <= 0.0f) {
+                if (lakilester->jumpVelocity <= 0.0f) {
                     suggest_player_anim_allow_backward(ANIM_Mario1_Fall);
                 }
 
-                npc->duration--;
+                lakilester->duration--;
 
-                if (npc->duration > 0) {
-                    if (npc->duration == 1) {
-                        add_vec2D_polar(&npc->pos.x, &npc->pos.z, -2.0f,
+                if (lakilester->duration > 0) {
+                    if (lakilester->duration == 1) {
+                        add_vec2D_polar(&lakilester->pos.x, &lakilester->pos.z, -2.0f,
                                         gCameras[gCurrentCameraID].currentYaw);
                     }
                 } else {
-                    playerStatus->position.y = npc->pos.y + 10.0f;
-                    npc->moveSpeed = playerStatus->runSpeed;
-                    npc->jumpScale = 0.0f;
-                    npc->yaw = playerStatus->targetYaw;
-                    npc->duration = 3;
+                    playerStatus->position.y = lakilester->pos.y + 10.0f;
+                    lakilester->moveSpeed = playerStatus->runSpeed;
+                    lakilester->jumpScale = 0.0f;
+                    lakilester->yaw = playerStatus->targetYaw;
+                    lakilester->duration = 3;
                     set_action_state(ACTION_STATE_RIDE);
                     suggest_player_anim_always_forward(ANIM_MarioW2_RideLaki);
                     disable_player_shadow();
@@ -750,64 +766,64 @@ API_CALLABLE(N(UseAbility)) {
                     partnerStatus->partnerActionState = PARTNER_ACTION_LAKILESTER_1;
                     playerStatus->flags &= ~PS_FLAG_PAUSE_DISABLED;
                     gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
-                    N(D_802BFF18) = 0;
-                    N(D_802BFF0C) = 2;
-                    N(func_802BFB44_323694)(2.0f);
-                    N(AbilityState) = RIDE_STATE_104;
+                    N(PlayerBounceOffset) = 0;
+                    N(MountState) = MOUNT_STATE_DONE;
+                    N(offset_player_from_camera)(2.0f);
+                    N(AbilityState) = RIDE_STATE_START_RIDING;
                     playerStatus->animFlags |= PA_FLAG_RIDING_PARTNER;
                 }
             } else {
-                N(AbilityState) = RIDE_STATE_10;
+                N(AbilityState) = RIDE_STATE_FINISH_1;
             }
             break;
-        case RIDE_STATE_104:
+        case RIDE_STATE_START_RIDING:
             if (playerStatus->flags & PS_FLAG_HIT_FIRE) {
-                N(AbilityState) = RIDE_STATE_10;
+                N(AbilityState) = RIDE_STATE_FINISH_1;
                 break;
-            } else {
-                npc->duration--;
-                if (npc->duration != 0) {
-                    if (partnerStatus->pressedButtons & (BUTTON_B | D_CBUTTONS) && N(can_dismount)()) {
-                        N(AbilityState) = RIDE_STATE_03;
-                    }
-                    break;
-                } else {
-                    N(AbilityState) = RIDE_STATE_RIDING;
-                    npc->flags |= NPC_FLAG_IGNORE_WORLD_COLLISION;
-                }
             }
-        case RIDE_STATE_RIDING:
-            N(func_802BDDD8_321928)(npc);
-            playerStatus->animFlags |= PA_FLAG_RIDING_PARTNER;
-            N(D_802BFF18)++;
-            npc->pos.y = npc->moveToPos.y + 2.0f;
-
-            if (N(D_802BFF18) >= 10) {
-                N(D_802BFF18) = N(D_802BFF18) - 18;
-            }
-
-            if (partnerStatus->inputDisabledCount == FALSE) {
-                playerStatus->targetYaw = npc->yaw;
-            }
-
-            if (!(playerStatus->flags & PS_FLAG_HIT_FIRE)) {
+            lakilester->duration--;
+            if (lakilester->duration != 0) {
                 if (partnerStatus->pressedButtons & (BUTTON_B | D_CBUTTONS)) {
                     if (N(can_dismount)()) {
-                        N(AbilityState) = RIDE_STATE_03;
-                    } else {
-                        if (!(playerStatus->animFlags & PA_FLAG_PARTNER_USAGE_STOPPED)) {
-                            sfx_play_sound_at_npc(SOUND_MENU_ERROR, SOUND_SPACE_MODE_0, NPC_PARTNER);
-                        }
-                        playerStatus->animFlags &= ~PA_FLAG_PARTNER_USAGE_STOPPED;
+                        N(AbilityState) = RIDE_STATE_DISMOUNT_1;
                     }
                 }
+                break;
             } else {
-                N(AbilityState) = RIDE_STATE_10;
+                N(AbilityState) = RIDE_STATE_RIDING;
+                lakilester->flags |= NPC_FLAG_IGNORE_WORLD_COLLISION;
+            }
+            // fallthrough
+        case RIDE_STATE_RIDING:
+            N(update_riding_physics)(lakilester);
+            playerStatus->animFlags |= PA_FLAG_RIDING_PARTNER;
+            lakilester->pos.y = lakilester->moveToPos.y + 2.0f;
+
+            N(PlayerBounceOffset)++;
+            if (N(PlayerBounceOffset) >= 10) {
+                N(PlayerBounceOffset) -= 18;
+            }
+
+            if (partnerStatus->inputDisabledCount == 0) {
+                playerStatus->targetYaw = lakilester->yaw;
+            }
+            if (playerStatus->flags & PS_FLAG_HIT_FIRE) {
+                N(AbilityState) = RIDE_STATE_FINISH_1;
                 break;
             }
+            if (partnerStatus->pressedButtons & (BUTTON_B | D_CBUTTONS)) {
+                if (N(can_dismount)()) {
+                    N(AbilityState) = RIDE_STATE_DISMOUNT_1;
+                } else {
+                    if (!(playerStatus->animFlags & PA_FLAG_FORCED_PARTNER_ABILITY_END)) {
+                        sfx_play_sound_at_npc(SOUND_MENU_ERROR, SOUND_SPACE_MODE_0, NPC_PARTNER);
+                    }
+                    playerStatus->animFlags &= ~PA_FLAG_FORCED_PARTNER_ABILITY_END;
+                }
+            }
             break;
-        case RIDE_STATE_03:
-            npc->flags &= ~NPC_FLAG_IGNORE_WORLD_COLLISION;
+        case RIDE_STATE_DISMOUNT_1:
+            lakilester->flags &= ~NPC_FLAG_IGNORE_WORLD_COLLISION;
             playerStatus->flags |= PS_FLAG_PAUSE_DISABLED;
             N(can_dismount)();
             camYaw = camera->currentYaw;
@@ -816,32 +832,32 @@ API_CALLABLE(N(UseAbility)) {
             } else {
                 yaw = (0.0f + camYaw) - 90.0f;
             }
-            npc->yaw = yaw;
-            sp2C = dist2D(playerStatus->position.x, playerStatus->position.z,
-                            npc->moveToPos.x, npc->moveToPos.z);
-            npc->yaw = atan2(playerStatus->position.x, playerStatus->position.z,
-                            npc->moveToPos.x, npc->moveToPos.z);
-            npc->duration = 14;
-            npc->jumpScale = 1.2f;
+            lakilester->yaw = yaw;
+            dist = dist2D(playerStatus->position.x, playerStatus->position.z,
+                            lakilester->moveToPos.x, lakilester->moveToPos.z);
+            lakilester->yaw = atan2(playerStatus->position.x, playerStatus->position.z,
+                            lakilester->moveToPos.x, lakilester->moveToPos.z);
+            lakilester->duration = 14;
+            lakilester->jumpScale = 1.2f;
 
-            if (npc->moveToPos.y > npc->pos.y) {
-                npc->jumpVelocity = ((npc->moveToPos.y - npc->pos.y) / 14.0f) + 6.0f;
+            if (lakilester->moveToPos.y > lakilester->pos.y) {
+                lakilester->jumpVelocity = 6.0f + (lakilester->moveToPos.y - lakilester->pos.y) / 14.0f;
             } else {
-                npc->jumpVelocity = 6.0f;
+                lakilester->jumpVelocity = 6.0f;
             }
 
-            npc->moveSpeed = sp2C / npc->duration;
+            lakilester->moveSpeed = dist / lakilester->duration;
             suggest_player_anim_allow_backward(ANIM_Mario1_BeforeJump);
             N(AbilityState)++;
             break;
-        case RIDE_STATE_04:
+        case RIDE_STATE_DISMOUNT_2:
             suggest_player_anim_allow_backward(ANIM_Mario1_Jump);
             N(AbilityState)++;
             // fallthrough
-        case RIDE_STATE_05:
+        case RIDE_STATE_DISMOUNT_3:
             gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
-            playerStatus->position.y += npc->jumpVelocity;
-            sp2C = playerStatus->colliderHeight * 0.5f;
+            playerStatus->position.y += lakilester->jumpVelocity;
+            dist = playerStatus->colliderHeight * 0.5f;
 
             x = playerStatus->position.x;
             y = playerStatus->position.y + (playerStatus->colliderHeight * 0.5f);
@@ -849,29 +865,29 @@ API_CALLABLE(N(UseAbility)) {
 
             yaw = playerStatus->spriteFacingAngle - 90.0f + gCameras[gCurrentCameraID].currentYaw;
 
-            if (player_raycast_up_corners(playerStatus, &x, &y, &z, &sp2C, yaw) >= 0) {
-                N(AbilityState) = RIDE_STATE_10;
+            if (player_raycast_up_corners(playerStatus, &x, &y, &z, &dist, yaw) >= 0) {
+                N(AbilityState) = RIDE_STATE_FINISH_1;
                 break;
             }
 
-            npc->jumpVelocity -= npc->jumpScale;
-            add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, npc->moveSpeed, npc->yaw);
+            lakilester->jumpVelocity -= lakilester->jumpScale;
+            add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, lakilester->moveSpeed, lakilester->yaw);
 
             func_800E4AD8(0);
-            if (N(func_802BE6A0_3221F0)(&y) >= 0) {
-                N(AbilityState) = RIDE_STATE_10;
+            if (N(test_dismount_height)(&y) > NO_COLLIDER) {
+                N(AbilityState) = RIDE_STATE_FINISH_1;
                 playerStatus->position.y = y;
             }
             break;
         }
 
         gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
-        gCameras[CAM_DEFAULT].targetPos.y = npc->moveToPos.y;
+        gCameras[CAM_DEFAULT].targetPos.y = lakilester->moveToPos.y;
         gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
 
-        if (N(AbilityState) == RIDE_STATE_10) {
-            N(D_802BFF0C) = 0;
-            npc->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_TOUCHES_GROUND | NPC_FLAG_8);
+        if (N(AbilityState) == RIDE_STATE_FINISH_1) {
+            N(MountState) = MOUNT_STATE_NONE;
+            lakilester->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_TOUCHES_GROUND | NPC_FLAG_8);
 
             if (N(PlayerCollisionDisabled)) {
                 N(PlayerCollisionDisabled) = FALSE;
@@ -890,7 +906,7 @@ API_CALLABLE(N(UseAbility)) {
                     enable_player_input();
                 }
 
-                partner_clear_player_tracking(npc);
+                partner_clear_player_tracking(lakilester);
                 set_action_state(ACTION_STATE_HIT_FIRE);
                 playerStatus->flags &= ~PS_FLAG_PAUSE_DISABLED;
                 return ApiStatus_DONE1;
@@ -898,12 +914,12 @@ API_CALLABLE(N(UseAbility)) {
 
             set_action_state(ACTION_STATE_FALLING);
             gravity_use_fall_parms();
-            N(AbilityState) = RIDE_STATE_11;
+            N(AbilityState) = RIDE_STATE_FINISH_2;
             return ApiStatus_BLOCK;
         }
-
-        if (N(AbilityState) == RIDE_STATE_11) {
-            npc->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_TOUCHES_GROUND | NPC_FLAG_8);
+        
+        if (N(AbilityState) == RIDE_STATE_FINISH_2) {
+            lakilester->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_TOUCHES_GROUND | NPC_FLAG_8);
             partnerStatus->actingPartner = PARTNER_NONE;
             partnerStatus->partnerActionState = PARTNER_ACTION_NONE;
             playerStatus->flags &= ~PS_FLAG_PAUSE_DISABLED;
@@ -913,10 +929,11 @@ API_CALLABLE(N(UseAbility)) {
             }
 
             gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
-            partner_clear_player_tracking(npc);
+            partner_clear_player_tracking(lakilester);
             func_800EF3D4(2);
             return ApiStatus_DONE1;
         }
+
         return ApiStatus_BLOCK;
 }
 
@@ -924,15 +941,6 @@ EvtScript EVS_WorldLakilester_UseAbility = {
     EVT_CALL(N(UseAbility))
     EVT_RETURN
     EVT_END
-};
-
-enum {
-    PUT_AWAY_STATE_0           = 0,
-    PUT_AWAY_STATE_1           = 1,
-    PUT_AWAY_STATE_2           = 2,
-    PUT_AWAY_STATE_3           = 3,
-    PUT_AWAY_STATE_4           = 4,
-    PUT_AWAY_STATE_5           = 5,
 };
 
 API_CALLABLE(N(PutAway)) {
@@ -944,7 +952,7 @@ API_CALLABLE(N(PutAway)) {
     f32 yaw;
 
     if (isInitialCall) {
-        N(PutAwayState) = (N(D_802BFF0C) == 0) ? PUT_AWAY_STATE_3 : PUT_AWAY_STATE_0;
+        N(PutAwayState) = (N(MountState) == MOUNT_STATE_NONE) ? PUT_AWAY_FINISH_1 : PUT_AWAY_DISMOUNT_1;
         partner_init_put_away(lakilester);
         N(can_dismount)();
         playerStatus->animFlags &= ~PA_FLAG_RIDING_PARTNER;
@@ -952,7 +960,7 @@ API_CALLABLE(N(PutAway)) {
     }
 
     switch (N(PutAwayState)) {
-        case PUT_AWAY_STATE_0:
+        case PUT_AWAY_DISMOUNT_1:
             N(can_dismount)();
             yaw = cam->currentYaw;
             if ((playerStatus->spriteFacingAngle >= 90.0f) && (playerStatus->spriteFacingAngle < 270.0f)) {
@@ -977,10 +985,10 @@ API_CALLABLE(N(PutAway)) {
             suggest_player_anim_allow_backward(ANIM_Mario1_BeforeJump);
             N(PutAwayState)++;
             break;
-        case PUT_AWAY_STATE_1:
+        case PUT_AWAY_DISMOUNT_2:
             suggest_player_anim_allow_backward(ANIM_Mario1_Jump);
             N(PutAwayState)++;
-        case PUT_AWAY_STATE_2:
+        case PUT_AWAY_DISMOUNT_3:
             playerStatus->position.y += lakilester->jumpVelocity;
             lakilester->jumpVelocity -= lakilester->jumpScale;
             add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z,
@@ -999,7 +1007,7 @@ API_CALLABLE(N(PutAway)) {
             if (npc_raycast_down_around(0, &sp20, &sp24, &sp28, &sp2C,
                                        lakilester->yaw, lakilester->collisionRadius)) {
 
-                N(PutAwayState) = PUT_AWAY_STATE_3;
+                N(PutAwayState) = PUT_AWAY_FINISH_1;
                 playerStatus->position.y = sp24;
             }
             break;
@@ -1010,7 +1018,7 @@ API_CALLABLE(N(PutAway)) {
     gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
 
     switch (N(PutAwayState)) {
-        case PUT_AWAY_STATE_3:
+        case PUT_AWAY_FINISH_1:
             lakilester->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8);
 
             if (N(PlayerCollisionDisabled)) {
@@ -1029,13 +1037,13 @@ API_CALLABLE(N(PutAway)) {
                 }
 
                 gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
-                N(D_802BFF0C) = 0;
+                N(MountState) = MOUNT_STATE_NONE;
                 partner_clear_player_tracking(lakilester);
                 set_action_state(ACTION_STATE_HIT_FIRE);
                 return ApiStatus_DONE1;
             }
 
-            if (N(D_802BFF0C) == 0) {
+            if (N(MountState) == MOUNT_STATE_NONE) {
                 phys_main_collision_below();
             } else {
                 set_action_state(ACTION_STATE_FALLING);
@@ -1044,7 +1052,7 @@ API_CALLABLE(N(PutAway)) {
 
             N(PutAwayState)++;
             break;
-        case PUT_AWAY_STATE_4:
+        case PUT_AWAY_FINISH_2:
             partnerStatus->actingPartner = PARTNER_NONE;
             partnerStatus->partnerActionState = PARTNER_ACTION_NONE;
             playerStatus->flags &= ~PS_FLAG_PAUSE_DISABLED;
@@ -1054,11 +1062,11 @@ API_CALLABLE(N(PutAway)) {
                 enable_player_input();
             }
             gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
-            N(D_802BFF0C) = 0;
+            N(MountState) = MOUNT_STATE_NONE;
             partner_clear_player_tracking(lakilester);
             N(PutAwayState)++;
             break;
-        case PUT_AWAY_STATE_5:
+        case PUT_AWAY_FINISH_3:
             if (partner_put_away(lakilester)) {
                 return ApiStatus_DONE1;
             }
@@ -1073,28 +1081,28 @@ EvtScript EVS_WorldLakilester_PutAway = {
     EVT_END
 };
 
-void N(pre_battle)(Npc* npc) {
+void N(pre_battle)(Npc* lakilester) {
     PartnerStatus* partnerStatus = &gPartnerStatus;
 
-    if (N(D_802BFF0C) != 0) {
-        partnerStatus->npc = *npc;
+    if (N(MountState) != MOUNT_STATE_NONE) {
+        partnerStatus->npc = *lakilester;
         partnerStatus->shouldResumeAbility = TRUE;
         enable_player_static_collisions();
         enable_player_input();
         set_action_state(ACTION_STATE_IDLE);
-        partner_clear_player_tracking(npc);
+        partner_clear_player_tracking(lakilester);
     }
 
     partnerStatus->actingPartner = PARTNER_LAKILESTER;
-    N(D_802BFF18) = 0;
+    N(PlayerBounceOffset) = 0;
 }
 
-void N(post_battle)(Npc* npc) {
+void N(post_battle)(Npc* lakilester) {
     PartnerStatus* partnerStatus = &gPartnerStatus;
 
     if (partnerStatus->shouldResumeAbility) {
-        if (N(D_802BFF0C) != 0) {
-            *npc = partnerStatus->npc;
+        if (N(MountState) != MOUNT_STATE_NONE) {
+            *lakilester = partnerStatus->npc;
             gGameStatusPtr->keepUsingPartnerOnMapChange = TRUE;
             set_action_state(ACTION_STATE_RIDE);
             partnerStatus->actingPartner = PARTNER_NONE;
@@ -1105,17 +1113,17 @@ void N(post_battle)(Npc* npc) {
     }
 }
 
-void N(func_802BFB44_323694)(f32 arg0) {
+void N(offset_player_from_camera)(f32 speed) {
     Camera* currentCamera = &gCameras[gCurrentCameraID];
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, arg0, currentCamera->currentYaw);
+    add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, speed, currentCamera->currentYaw);
 }
 
 API_CALLABLE(N(EnterMap)) {
     PartnerStatus* partnerStatus = &gPartnerStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
-    Npc* npc = get_npc_unsafe(NPC_PARTNER);
+    Npc* lakilester = get_npc_unsafe(NPC_PARTNER);
     f32 temp_f0, temp_f2, temp_f4;
     f32* temp_s0_2;
     s32 temp_v0_2;
@@ -1128,32 +1136,32 @@ API_CALLABLE(N(EnterMap)) {
         case 0:
             if (!script->varTable[12]) {
                 temp_f0 = playerStatus->position.x;
-                npc->pos.x = temp_f0;
-                npc->moveToPos.x = temp_f0;
+                lakilester->pos.x = temp_f0;
+                lakilester->moveToPos.x = temp_f0;
                 temp_f4 = playerStatus->position.z;
-                npc->pos.z = temp_f4;
-                npc->moveToPos.z = temp_f4;
-                playerStatus->position.y = npc->pos.y + 10.0f;
+                lakilester->pos.z = temp_f4;
+                lakilester->moveToPos.z = temp_f4;
+                playerStatus->position.y = lakilester->pos.y + 10.0f;
                 partner_kill_ability_script();
             } else {
                 set_action_state(ACTION_STATE_RIDE);
                 disable_player_static_collisions();
                 disable_player_input();
-                npc->moveToPos.x = npc->pos.x = playerStatus->position.x;
-                npc->moveToPos.y = npc->pos.y = playerStatus->position.y;
-                npc->moveToPos.z = npc->pos.z = playerStatus->position.z;
-                playerStatus->position.y = npc->pos.y + 10.0f;
+                lakilester->moveToPos.x = lakilester->pos.x = playerStatus->position.x;
+                lakilester->moveToPos.y = lakilester->pos.y = playerStatus->position.y;
+                lakilester->moveToPos.z = lakilester->pos.z = playerStatus->position.z;
+                playerStatus->position.y = lakilester->pos.y + 10.0f;
             }
 
             script->functionTemp[1] = script->varTable[4];
             temp_s0_2 = (f32*)&script->varTable[5];
-            temp_f2 = atan2(npc->pos.x, npc->pos.z, script->varTable[1], script->varTable[3]);
-            npc->yaw = temp_f2;
+            temp_f2 = atan2(lakilester->pos.x, lakilester->pos.z, script->varTable[1], script->varTable[3]);
+            lakilester->yaw = temp_f2;
 
             if (script->varTable[12]) {
                 if (temp_f2 >= 0.0f && temp_f2 <= 180.0f) {
-                    npc->yawCamOffset = temp_f2;
-                    npc->isFacingAway = TRUE;
+                    lakilester->yawCamOffset = temp_f2;
+                    lakilester->isFacingAway = TRUE;
                 }
             }
 
@@ -1161,23 +1169,23 @@ API_CALLABLE(N(EnterMap)) {
             playerStatus->anim = ANIM_MarioW2_RideLaki;
             playerStatus->animNotifyValue = 0;
             playerStatus->flags |= PS_FLAG_FACE_FORWARDS;
-            N(func_802BFB44_323694)(2.0f);
+            N(offset_player_from_camera)(2.0f);
             gGameStatusPtr->keepUsingPartnerOnMapChange = TRUE;
-            npc->flags |= NPC_FLAG_IGNORE_PLAYER_COLLISION;
-            npc->moveSpeed = *temp_s0_2;
-            npc->jumpScale = 0.0f;
-            N(D_802BFF10) = FALSE;
-            N(D_802BFF18) = 0;
+            lakilester->flags |= NPC_FLAG_IGNORE_PLAYER_COLLISION;
+            lakilester->moveSpeed = *temp_s0_2;
+            lakilester->jumpScale = 0.0f;
+            N(UpdatePushingWall) = FALSE;
+            N(PlayerBounceOffset) = 0;
             script->functionTemp[0] = 1;
             break;
 
         case 1:
-            npc_move_heading(npc, npc->moveSpeed, npc->yaw);
-            playerStatus->position.x = npc->pos.x;
-            playerStatus->position.y = npc->pos.y + 10.0f;
-            playerStatus->position.z = npc->pos.z;
-            playerStatus->targetYaw = npc->yaw;
-            N(func_802BFB44_323694)(2.0f);
+            npc_move_heading(lakilester, lakilester->moveSpeed, lakilester->yaw);
+            playerStatus->position.x = lakilester->pos.x;
+            playerStatus->position.y = lakilester->pos.y + 10.0f;
+            playerStatus->position.z = lakilester->pos.z;
+            playerStatus->targetYaw = lakilester->yaw;
+            N(offset_player_from_camera)(2.0f);
             script->functionTemp[1] -= 1;
 
             if (script->functionTemp[1] == 0) {

@@ -7,7 +7,6 @@
 void world_goombario_init(Npc* partner);
 s32 world_goombario_can_pause(Npc* partner);
 void world_goombario_pre_battle(Npc* partner);
-s32 world_goombario_get_trigger_tattle(s32 arg0);
 
 extern EvtScript EVS_WorldGoombario_TakeOut;
 extern EvtScript EVS_WorldGoombario_Update;

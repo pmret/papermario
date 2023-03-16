@@ -632,7 +632,7 @@ void _use_partner_ability(void) {
     PartnerStatus* partnerStatus = &gPartnerStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (!partnerStatus->inputDisabledCount) {
+    if (partnerStatus->inputDisabledCount == 0) {
         partnerStatus->stickX = gGameStatusPtr->stickX[gGameStatusPtr->multiplayerEnabled];
         partnerStatus->stickY = gGameStatusPtr->stickY[gGameStatusPtr->multiplayerEnabled];
         partnerStatus->currentButtons = gGameStatusPtr->currentButtons[gGameStatusPtr->multiplayerEnabled];
@@ -649,7 +649,7 @@ void _use_partner_ability(void) {
     if (playerStatus->animFlags & PA_FLAG_INTERRUPT_USE_PARTNER) {
         playerStatus->animFlags &= ~PA_FLAG_INTERRUPT_USE_PARTNER;
         partnerStatus->pressedButtons |= BUTTON_B | BUTTON_C_DOWN;
-        playerStatus->animFlags |= PA_FLAG_PARTNER_USAGE_STOPPED;
+        playerStatus->animFlags |= PA_FLAG_FORCED_PARTNER_ABILITY_END;
     }
 
     if (NextPartnerCommand != PARTNER_CMD_NONE) {

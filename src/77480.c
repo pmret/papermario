@@ -2,6 +2,7 @@
 #include "ld_addrs.h"
 #include "world/actions.h"
 #include "sprite.h"
+#include "world/partner/watt.h"
 
 #ifdef SHIFT
 #define inspect_icon_VRAM_DEF inspect_icon_VRAM
@@ -1042,7 +1043,7 @@ void check_for_pulse_stone(void) {
             return;
         }
 
-        if (gPlayerStatus.flags & PS_FLAG_PAUSED || gPlayerStatus.inputDisabledCount) {
+        if (gPlayerStatus.flags & PS_FLAG_PAUSED || gPlayerStatus.inputDisabledCount != 0) {
             return;
         }
 
@@ -1127,7 +1128,7 @@ s32 func_800E06D8(void) {
     s32 interactingID = playerStatus->interactingWithID;
     s32 currentWall;
 
-    if (playerStatus->timeInAir != 0 || playerStatus->inputDisabledCount) {
+    if (playerStatus->timeInAir != 0 || playerStatus->inputDisabledCount != 0) {
         return FALSE;
     }
     if (gCollisionStatus.currentWall == NO_COLLIDER) {

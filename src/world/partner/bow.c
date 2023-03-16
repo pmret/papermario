@@ -198,7 +198,7 @@ API_CALLABLE(N(UseAbility)) {
 
     switch (script->USE_STATE) {
         case OUTTA_SIGHT_INIT:
-            if (playerStatus->inputDisabledCount) {
+            if (playerStatus->inputDisabledCount != 0) {
                 return ApiStatus_DONE2;
             }
 

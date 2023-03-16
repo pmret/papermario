@@ -63,9 +63,9 @@ API_CALLABLE(N(StarSpiritEffectFunc3)) {
 
     switch (ptr->unk_44) {
         case 0:
-            ptr->unk_04 = update_lerp(5, ptr->unk_10, ptr->unk_1C, ptr->unk_46, ptr->unk_3C);
-            ptr->unk_00 = update_lerp(0, ptr->unk_0C, ptr->unk_18, ptr->unk_46, ptr->unk_3C);
-            ptr->unk_08 = update_lerp(0, ptr->unk_14, ptr->unk_20, ptr->unk_46, ptr->unk_3C);
+            ptr->unk_04 = update_lerp(EASING_CUBIC_OUT, ptr->unk_10, ptr->unk_1C, ptr->unk_46, ptr->unk_3C);
+            ptr->unk_00 = update_lerp(EASING_LINEAR, ptr->unk_0C, ptr->unk_18, ptr->unk_46, ptr->unk_3C);
+            ptr->unk_08 = update_lerp(EASING_LINEAR, ptr->unk_14, ptr->unk_20, ptr->unk_46, ptr->unk_3C);
             ptr->unk_50->data.starSpiritsEnergy->unk_08 = ptr->unk_00;
             ptr->unk_50->data.starSpiritsEnergy->unk_0C = ptr->unk_04;
             ptr->unk_50->data.starSpiritsEnergy->unk_10 = ptr->unk_08;
@@ -99,7 +99,7 @@ API_CALLABLE(N(StarSpiritEffectFunc3)) {
             }
             break;
         case 3:
-            ptr->unk_30 = update_lerp(0, 36.0f, 19.0f, ptr->unk_46, 120);
+            ptr->unk_30 = update_lerp(EASING_LINEAR, 36.0f, 19.0f, ptr->unk_46, 120);
             ptr->unk_46++;
             if (ptr->unk_46 >= 120) {
                 ptr->unk_4C = 0;
@@ -117,8 +117,8 @@ API_CALLABLE(N(StarSpiritEffectFunc3)) {
 
     switch (ptr->unk_4A) {
         case 1:
-            ptr->unk_2C = update_lerp(4, ptr->unk_34, 1440.0f, ptr->unk_4C, 120);
-            ptr->unk_04 = update_lerp(0xA, ptr->unk_1C, ptr->unk_24, ptr->unk_4C, 120);
+            ptr->unk_2C = update_lerp(EASING_QUADRATIC_OUT, ptr->unk_34, 1440.0f, ptr->unk_4C, 120);
+            ptr->unk_04 = update_lerp(EASING_COS_IN_OUT, ptr->unk_1C, ptr->unk_24, ptr->unk_4C, 120);
             ptr->unk_4C++;
             if (ptr->unk_4C >= 120) {
                 ptr->unk_4C = 270;

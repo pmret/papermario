@@ -6,6 +6,7 @@
 #include "sprite.h"
 #include "pause/pause_common.h"
 #include "world/partners.h"
+#include "world/partner/lakilester.h"
 
 BSS s16 D_8010C9C0;
 BSS char D_8010C9C4[0x4];
@@ -274,7 +275,7 @@ block_17:
             break;
         case 1:
             flags = ~PS_FLAG_PAUSED;
-            if ((func_800E6904() == 0) || is_picking_up_item() || D_8010CCFE < playerStatus->inputDisabledCount) {
+            if ((func_800E6904() == 0) || is_picking_up_item() || D_8010CCFE < playerStatus->inputDisabledCount != 0) {
                 playerStatus->flags &= flags;
                 enable_player_input();
                 partner_enable_input();

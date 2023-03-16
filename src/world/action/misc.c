@@ -1,18 +1,16 @@
 #include "common.h"
 #include "world/actions.h"
-#include "world/partner/goombario.h"
+#include "world/partner/sushie.h"
+#include "world/partner/lakilester.h"
 
 BSS f32 D_802B6770_E27C80;
 
-s32 action_update_ride(void) {
+void action_update_ride(void) {
     PartnerStatus* partnerStatus = &gPartnerStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s32 oldFlags = playerStatus->flags;
-
+    
     if (playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED) {
-        playerStatus->flags &= ~(
-            PS_FLAG_ACTION_STATE_CHANGED | PS_FLAG_ARMS_RAISED | PS_FLAG_AIRBORNE
-        );
+        playerStatus->flags &= ~(PS_FLAG_ACTION_STATE_CHANGED | PS_FLAG_ARMS_RAISED | PS_FLAG_AIRBORNE);
         playerStatus->actionSubstate = 0;
         playerStatus->currentStateTime = 0;
         playerStatus->timeInAir = 0;
@@ -23,16 +21,11 @@ s32 action_update_ride(void) {
 
     if (playerStatus->animFlags & PA_FLAG_RIDING_PARTNER) {
         if (partnerStatus->actingPartner == PARTNER_LAKILESTER) {
-            return world_goombario_get_trigger_tattle(oldFlags);
-        }
-        if (partnerStatus->actingPartner == PARTNER_SUSHIE) {
-            return world_goombario_get_trigger_tattle(oldFlags);
+            world_lakilester_sync_player_position();
+        } else if (partnerStatus->actingPartner == PARTNER_SUSHIE) {
+            world_sushie_sync_player_position();
         }
     }
-
-    #ifdef AVOID_UB
-        return 0;
-    #endif
 }
 
 void action_update_state_23(void) {
@@ -54,8 +47,7 @@ void action_update_state_23(void) {
     f32 playerOffsetTempVar;
 
     if (playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED) {
-        playerStatus->flags &= ~(PS_FLAG_ACTION_STATE_CHANGED
-            | PS_FLAG_ARMS_RAISED | PS_FLAG_AIRBORNE);
+        playerStatus->flags &= ~(PS_FLAG_ACTION_STATE_CHANGED | PS_FLAG_ARMS_RAISED | PS_FLAG_AIRBORNE);
         playerStatus->actionSubstate = 0;
         playerStatus->currentStateTime = 0;
         playerStatus->timeInAir = 0;

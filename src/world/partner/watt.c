@@ -8,6 +8,7 @@
 #define NAMESPACE world_watt
 
 void force_player_anim(AnimID);
+void N(sync_held_position)(void);
 void N(update_player_carry_anim)(void);
 
 BSS b32 N(D_802BE300);

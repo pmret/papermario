@@ -463,7 +463,7 @@ s32 basic_ai_check_player_dist(EnemyDetectVolume* territory, Enemy* enemy, f32 r
         y = npc->pos.y + npc->collisionHeight * 0.5;
         z = npc->pos.z;
         dist = dist2D(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
-        if (npc_test_move_simple_with_slipping(0x50000,
+        if (npc_test_move_simple_with_slipping(COLLISION_CHANNEL_10000 | COLLISION_IGNORE_ENTITIES,
                 &x, &y, &z,
                 dist, atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z),
                 0.1f, 0.1f)) {

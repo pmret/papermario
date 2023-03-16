@@ -760,9 +760,6 @@ void appendGfx_speech_bubble(void);
 void appendGfx_pulse_stone_icon(void);
 void ispy_notification_setup(void);
 
-void world_watt_sync_held_position(void);
-s32 world_lakilester_can_dismount(void);
-
 void initialize_curtains(void);
 void update_curtains(void);
 // render_curtains
