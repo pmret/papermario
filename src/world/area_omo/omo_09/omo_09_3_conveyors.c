@@ -23,7 +23,7 @@ s32 N(ShouldPauseConveyor)(void) {
         return TRUE;
     }
 
-    if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE &&
+    if (gPartnerStatus.partnerActionState != PARTNER_ACTION_NONE &&
         (playerData->currentPartner == PARTNER_GOOMBARIO || playerData->currentPartner == PARTNER_SUSHIE))
     {
         return TRUE;
@@ -42,7 +42,7 @@ API_CALLABLE(N(WaitWhileConveyorPaused)) {
 API_CALLABLE(N(AddConveyorPush)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* partner = get_npc_unsafe(NPC_PARTNER);
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     f32 x, y, z;
     f32 outLength;
     f32 hitRx, hitRz;

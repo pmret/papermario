@@ -27,7 +27,7 @@ void func_800E5520(void) {
 }
 
 s32 phys_adjust_cam_on_landing(void) {
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     GameStatus* gameStatus = gGameStatusPtr;
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 ret = 1;
@@ -215,7 +215,7 @@ void phys_reset_spin_history(void) {
 
 void phys_update_action_state(void) {
     Camera* cameras = gCameras;
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerSpinState* playerSpinState = &gPlayerSpinState;
 
@@ -364,7 +364,7 @@ void set_action_state(s32 actionState) {
         partner = playerData->currentPartner;
 
         if (partner == PARTNER_SUSHIE || partner == PARTNER_LAKILESTER || partner == PARTNER_PARAKARRY) {
-            if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) {
+            if (gPartnerStatus.partnerActionState != PARTNER_ACTION_NONE) {
                 playerStatus->animFlags |= PA_FLAG_INTERRUPT_USE_PARTNER;
                 playerStatus->flags |= PS_FLAG_HIT_FIRE;
                 return;
@@ -455,7 +455,7 @@ s32 check_input_hammer(void) {
             return FALSE;
         }
 
-        if (gPartnerActionStatus.partnerActionState == PARTNER_ACTION_USE && playerData->currentPartner == PARTNER_WATT) {
+        if (gPartnerStatus.partnerActionState == PARTNER_ACTION_USE && playerData->currentPartner == PARTNER_WATT) {
             return FALSE;
         }
 

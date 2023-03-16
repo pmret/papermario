@@ -267,7 +267,7 @@ void func_802BB98C_E2E2BC(Entity* entity) {
 
 void entity_CymbalPlant_idle(Entity* entity) {
     CymbalPlantData* data = entity->dataBuf.cymbalPlant;
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 yaw;
     f32 targetYaw;

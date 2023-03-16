@@ -102,7 +102,7 @@ API_CALLABLE(N(Update)) {
     f32 sinAngle, cosAngle, liftoffVelocity;
     Entity* entity;
 
-    if (!gPartnerActionStatus.shouldResumeAbility) {
+    if (!gPartnerStatus.shouldResumeAbility) {
         if (isInitialCall) {
             partner_flying_enable(watt, 1);
             mem_clear(N(TweesterPhysicsPtr), sizeof(TweesterPhysics));
@@ -220,7 +220,7 @@ void N(try_cancel_tweester)(Npc* watt) {
 
 API_CALLABLE(N(UseAbility)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     Npc* npc = script->owner2.npc;
     s32 actionState;
 
@@ -397,15 +397,15 @@ EvtScript EVS_WorldWatt_UseAbility = {
 
 API_CALLABLE(N(PutAway)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* wattActionStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     Npc* watt = script->owner2.npc;
 
     if (isInitialCall) {
         N(dispose_static_effect)();
         partner_init_put_away(watt);
         force_player_anim(ANIM_Mario1_Idle);
-        wattActionStatus->actingPartner = PARTNER_NONE;
-        wattActionStatus->partnerActionState = PARTNER_ACTION_NONE;
+        partnerStatus->actingPartner = PARTNER_NONE;
+        partnerStatus->partnerActionState = PARTNER_ACTION_NONE;
         playerStatus->animFlags &= ~(PA_FLAG_WATT_IN_HANDS | PA_FLAG_USING_WATT);
         gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
     }
@@ -424,11 +424,11 @@ EvtScript EVS_WorldWatt_PutAway = {
 };
 
 void N(pre_battle)(Npc* watt) {
-    PartnerActionStatus* wattActionStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
 
     if (N(IsPlayerHolding)) {
-        wattActionStatus->npc = *watt;
-        wattActionStatus->shouldResumeAbility = TRUE;
+        partnerStatus->npc = *watt;
+        partnerStatus->shouldResumeAbility = TRUE;
         partner_clear_player_tracking(watt);
     }
 
@@ -436,17 +436,17 @@ void N(pre_battle)(Npc* watt) {
 }
 
 void N(post_battle)(Npc* watt) {
-    PartnerActionStatus* wattActionStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
 
-    if (wattActionStatus->shouldResumeAbility) {
-        *watt = wattActionStatus->npc;
+    if (partnerStatus->shouldResumeAbility) {
+        *watt = partnerStatus->npc;
         partner_use_ability();
         N(create_static_effect)(watt);
     }
 }
 
 API_CALLABLE(N(EnterMap)) {
-    PartnerActionStatus* wattActionStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* watt = get_npc_unsafe(NPC_PARTNER);
 
@@ -473,8 +473,8 @@ API_CALLABLE(N(EnterMap)) {
             watt->flags |= NPC_FLAG_IGNORE_PLAYER_COLLISION;
             playerStatus->animFlags |= (PA_FLAG_WATT_IN_HANDS | PA_FLAG_USING_WATT);
             gGameStatusPtr->keepUsingPartnerOnMapChange = TRUE;
-            wattActionStatus->partnerActionState = PARTNER_ACTION_WATT_SHINE;
-            wattActionStatus->actingPartner = PARTNER_WATT;
+            partnerStatus->partnerActionState = PARTNER_ACTION_WATT_SHINE;
+            partnerStatus->actingPartner = PARTNER_WATT;
             N(D_802BE308) = FALSE;
             script->functionTemp[0]++;
             break;
@@ -517,7 +517,7 @@ void N(sync_held_position)(void) {
     f32 spriteFacingAngle;
     s32 angleOffset;
 
-    if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) {
+    if (gPartnerStatus.partnerActionState != PARTNER_ACTION_NONE) {
         spriteFacingAngle = gPlayerStatusPtr->spriteFacingAngle;
         if ((spriteFacingAngle < 90.0f) || (spriteFacingAngle > 270.0f)) {
             if (!(gPlayerStatusPtr->trueAnimation & SPRITE_ID_BACK_FACING)) {

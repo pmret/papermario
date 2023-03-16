@@ -28,7 +28,7 @@ API_CALLABLE(N(GetActingPartner)) {
     Bytecode* args = script->ptrReadPos;
     s32 outVar = *args++;
 
-    evt_set_variable(script, outVar, gPartnerActionStatus.actingPartner);
+    evt_set_variable(script, outVar, gPartnerStatus.actingPartner);
     return ApiStatus_DONE2;
 }
 

@@ -19,19 +19,20 @@ BSS f32 N(D_802BFF28);
 BSS s32 N(D_802BFF2C); // unused (padding?)
 
 enum {
-    RIDE_STATE_01           = 1,
+    RIDE_STATE_40           = 40,
+    RIDE_STATE_41           = 41,
+    RIDE_STATE_MOUNT_1          = 100,
+    RIDE_STATE_MOUNT_2          = 101,
+    RIDE_STATE_MOUNT_3          = 102,
+    RIDE_STATE_MOUNT_4          = 103,
+    RIDE_STATE_104          = 104,
+
+    RIDE_STATE_RIDING           = 1,
     RIDE_STATE_03           = 3,
     RIDE_STATE_04           = 4,
     RIDE_STATE_05           = 5,
     RIDE_STATE_10           = 10,
     RIDE_STATE_11           = 11,
-    RIDE_STATE_40           = 40,
-    RIDE_STATE_41           = 41,
-    RIDE_STATE_100          = 100,
-    RIDE_STATE_101          = 101,
-    RIDE_STATE_102          = 102,
-    RIDE_STATE_103          = 103,
-    RIDE_STATE_104          = 104,
 };
 
 void N(func_802BFB44_323694)(f32 arg0);
@@ -196,9 +197,9 @@ void N(try_cancel_tweester)(Npc* npc) {
 }
 
 void N(func_802BD6BC_32120C)(f32* outAngle, f32* outMagnitude) {
-    PartnerActionStatus* lakilesterActionStatus = &gPartnerActionStatus;
-    f32 stickX = lakilesterActionStatus->stickX;
-    f32 stickY = lakilesterActionStatus->stickY;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
+    f32 stickX = partnerStatus->stickX;
+    f32 stickY = partnerStatus->stickY;
     f32 angle = clamp_angle(atan2(0.0f, 0.0f, stickX, -stickY) + gCameras[CAM_DEFAULT].currentYaw);
     f32 magnitude = 0.0f;
 
@@ -347,7 +348,7 @@ void N(func_802BDA90_3215E0)(Npc* lakilester) {
 void N(func_802BDDD8_321928)(Npc* npc) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     f32 hitDepth, sp40, sp44, sp48, sp4C, sp50, sp54;
     f32 yaw = 0.0f;
     f32 moveSpeed = 0.0f;
@@ -539,7 +540,7 @@ s32 N(func_802BE6A0_3221F0)(f32* arg0) {
 
 API_CALLABLE(N(UseAbility)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     Camera* camera = &gCameras[CAM_DEFAULT];
     Npc* npc = script->owner2.npc;
     s32 colliderHeightTemp;
@@ -563,7 +564,7 @@ API_CALLABLE(N(UseAbility)) {
                 if (playerStatus->animFlags & PA_FLAG_PARTNER_USAGE_FORCED) {
                     playerStatus->animFlags &= ~PA_FLAG_PARTNER_USAGE_FORCED;
                 }
-                N(AbilityState) = RIDE_STATE_100;
+                N(AbilityState) = RIDE_STATE_MOUNT_1;
             } else {
                 N(AbilityState) = RIDE_STATE_40;
             }
@@ -614,7 +615,7 @@ API_CALLABLE(N(UseAbility)) {
                 }
 
                 N(D_802BFF18) = 0;
-                N(AbilityState) = RIDE_STATE_01;
+                N(AbilityState) = RIDE_STATE_RIDING;
                 npc->flags |= NPC_FLAG_IGNORE_WORLD_COLLISION;
             }
         } else {
@@ -659,7 +660,7 @@ API_CALLABLE(N(UseAbility)) {
                     playerStatus->flags &= ~PS_FLAG_PAUSE_DISABLED;
                     return ApiStatus_DONE2;
                 }
-                N(AbilityState) = RIDE_STATE_100;
+                N(AbilityState) = RIDE_STATE_MOUNT_1;
                 break;
             }
             script->functionTemp[1]--;
@@ -667,7 +668,7 @@ API_CALLABLE(N(UseAbility)) {
     }
 
     switch (N(AbilityState)) {
-        case RIDE_STATE_100:
+        case RIDE_STATE_MOUNT_1:
             disable_player_static_collisions();
             N(PlayerCollisionDisabled) = TRUE;
 
@@ -704,16 +705,16 @@ API_CALLABLE(N(UseAbility)) {
             npc->jumpVelocity = 8.0f;
             npc->jumpScale = 1.4f;
             suggest_player_anim_allow_backward(ANIM_Mario1_BeforeJump);
-            N(AbilityState) = RIDE_STATE_101;
+            N(AbilityState) = RIDE_STATE_MOUNT_2;
             break;
-        case RIDE_STATE_101:
+        case RIDE_STATE_MOUNT_2:
             sfx_play_sound_at_npc(SOUND_JUMP_2081, SOUND_SPACE_MODE_0, NPC_PARTNER);
             suggest_player_anim_allow_backward(ANIM_Mario1_Jump);
             // fallthrough
-        case RIDE_STATE_102:
+        case RIDE_STATE_MOUNT_3:
             N(AbilityState)++;
             // fallthrough
-        case RIDE_STATE_103:
+        case RIDE_STATE_MOUNT_4:
             if (!(playerStatus->flags & PS_FLAG_HIT_FIRE)) {
                 npc->pos.x += (npc->moveToPos.x - npc->pos.x) / npc->duration;
                 npc->pos.z += (npc->moveToPos.z - npc->pos.z) / npc->duration;
@@ -767,15 +768,15 @@ API_CALLABLE(N(UseAbility)) {
                 npc->duration--;
                 if (npc->duration != 0) {
                     if (partnerStatus->pressedButtons & (BUTTON_B | D_CBUTTONS) && N(can_dismount)()) {
-                        N(AbilityState) = 3;
+                        N(AbilityState) = RIDE_STATE_03;
                     }
                     break;
                 } else {
-                    N(AbilityState) = 1;
+                    N(AbilityState) = RIDE_STATE_RIDING;
                     npc->flags |= NPC_FLAG_IGNORE_WORLD_COLLISION;
                 }
             }
-        case RIDE_STATE_01:
+        case RIDE_STATE_RIDING:
             N(func_802BDDD8_321928)(npc);
             playerStatus->animFlags |= PA_FLAG_RIDING_PARTNER;
             N(D_802BFF18)++;
@@ -936,7 +937,7 @@ enum {
 
 API_CALLABLE(N(PutAway)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     Camera* cam = &gCameras[CAM_DEFAULT];
     Npc* lakilester = script->owner2.npc;
     f32 sp20, sp24, sp28, sp2C;
@@ -1073,7 +1074,7 @@ EvtScript EVS_WorldLakilester_PutAway = {
 };
 
 void N(pre_battle)(Npc* npc) {
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
 
     if (N(D_802BFF0C) != 0) {
         partnerStatus->npc = *npc;
@@ -1089,7 +1090,7 @@ void N(pre_battle)(Npc* npc) {
 }
 
 void N(post_battle)(Npc* npc) {
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
 
     if (partnerStatus->shouldResumeAbility) {
         if (N(D_802BFF0C) != 0) {
@@ -1112,7 +1113,7 @@ void N(func_802BFB44_323694)(f32 arg0) {
 }
 
 API_CALLABLE(N(EnterMap)) {
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* npc = get_npc_unsafe(NPC_PARTNER);
     f32 temp_f0, temp_f2, temp_f4;

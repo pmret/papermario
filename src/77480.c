@@ -781,12 +781,12 @@ void player_reset_data(void) {
 }
 
 s32 func_800DFCF4(void) {
-    if (gPartnerActionStatus.partnerActionState == PARTNER_ACTION_USE &&
-        (gPartnerActionStatus.actingPartner == PARTNER_WATT
-        || gPartnerActionStatus.actingPartner == PARTNER_BOW
-        || gPartnerActionStatus.actingPartner == PARTNER_SUSHIE
-        || gPartnerActionStatus.actingPartner == PARTNER_PARAKARRY
-        || gPartnerActionStatus.actingPartner == PARTNER_LAKILESTER)) {
+    if (gPartnerStatus.partnerActionState == PARTNER_ACTION_USE &&
+        (gPartnerStatus.actingPartner == PARTNER_WATT
+        || gPartnerStatus.actingPartner == PARTNER_BOW
+        || gPartnerStatus.actingPartner == PARTNER_SUSHIE
+        || gPartnerStatus.actingPartner == PARTNER_PARAKARRY
+        || gPartnerStatus.actingPartner == PARTNER_LAKILESTER)) {
         return FALSE;
     }
     return TRUE;
@@ -794,7 +794,7 @@ s32 func_800DFCF4(void) {
 
 s32 get_overriding_player_anim(s32 anim) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
 
     if (playerStatus->actionState == ACTION_STATE_USE_SPINNING_FLOWER
         && anim != ANIM_Mario1_Flail
@@ -882,8 +882,8 @@ void update_player_blink(void) {
     u8 phi_v1;
     u8* alpha;
 
-    if (gPartnerActionStatus.actingPartner == PARTNER_BOW) {
-        outtaSight = gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE;
+    if (gPartnerStatus.actingPartner == PARTNER_BOW) {
+        outtaSight = gPartnerStatus.partnerActionState != PARTNER_ACTION_NONE;
     }
 
     if (playerStatus->blinkTimer > 0) {
@@ -977,7 +977,7 @@ s32 game_scripts_disabled(void) {
     s32 ret = FALSE;
 
     if (gGameStatusPtr->disableScripts && (gGameStatusPtr->currentButtons[0] & BUTTON_R)) {
-        if (gPartnerActionStatus.partnerActionState == PARTNER_ACTION_NONE) {
+        if (gPartnerStatus.partnerActionState == PARTNER_ACTION_NONE) {
             set_action_state(ACTION_STATE_IDLE);
         }
         ret = TRUE;

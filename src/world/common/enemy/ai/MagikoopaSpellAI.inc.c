@@ -26,7 +26,7 @@ s32 N(MagikoopaAI_CanShootSpell)(Evt* script, f32 arg1, f32 arg2, EnemyDetectVol
             return -1;
         }
 
-        if (gPartnerActionStatus.actingPartner == PARTNER_BOW || gPartnerActionStatus.actingPartner == PARTNER_SUSHIE) {
+        if (gPartnerStatus.actingPartner == PARTNER_BOW || gPartnerStatus.actingPartner == PARTNER_SUSHIE) {
             return -1;
         }
 

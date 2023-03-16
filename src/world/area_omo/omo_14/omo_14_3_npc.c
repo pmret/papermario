@@ -60,8 +60,8 @@ API_CALLABLE(N(SimpleMoveNPC)) {
 }
 
 API_CALLABLE(N(GetActingPartner)) {
-    if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) {
-        script->varTable[9] = gPartnerActionStatus.actingPartner;
+    if (gPartnerStatus.partnerActionState != PARTNER_ACTION_NONE) {
+        script->varTable[9] = gPartnerStatus.actingPartner;
     } else {
         script->varTable[9] = -1;
     }
@@ -69,7 +69,7 @@ API_CALLABLE(N(GetActingPartner)) {
 }
 
 API_CALLABLE(N(IsPartnerWatt)) {
-    if (gPartnerActionStatus.actingPartner == PARTNER_WATT) {
+    if (gPartnerStatus.actingPartner == PARTNER_WATT) {
         script->varTable[1] = TRUE;
     } else {
         script->varTable[1] = FALSE;

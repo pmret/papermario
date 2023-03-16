@@ -257,7 +257,7 @@ extern s32 D_802EC390[];
 extern s32 D_802EC3B0[];
 extern s32 D_802EC3D0[];
 
-extern PartnerActionStatus gPartnerActionStatus; // something with partners
+extern PartnerStatus gPartnerStatus; // something with partners
 extern UiStatus gUIStatus;
 extern PlayerStatus gPlayerStatus;
 extern PlayerSpinState gPlayerSpinState;

@@ -5,7 +5,7 @@
 BSS f32 D_802B6770_E27C80;
 
 s32 action_update_ride(void) {
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 oldFlags = playerStatus->flags;
 

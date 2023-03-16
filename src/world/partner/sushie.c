@@ -59,8 +59,8 @@ void N(sync_player_position)(void) {
 void N(get_movement_from_input)(f32* outAngle, f32* outSpeed) {
     f32 moveAngle;
     f32 moveSpeed;
-    f32 stickY = gPartnerActionStatus.stickY;
-    f32 stickX = gPartnerActionStatus.stickX;
+    f32 stickY = gPartnerStatus.stickY;
+    f32 stickX = gPartnerStatus.stickX;
 
     N(InputStickX) = stickX;
     N(InputStickY) = stickY;
@@ -100,7 +100,7 @@ void N(func_802BD368_31E0D8)(s32 ignoreFlags, f32 posX, f32 posY, f32 posZ, f32 
 
 void N(update_riding_physics)(Npc* sushie) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
     f32 moveSpeedDamping;
     f32 moveAngle, moveSpeed;
@@ -350,7 +350,7 @@ API_CALLABLE(N(UseAbility)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
     CollisionStatus* collisionStatus = &gCollisionStatus;
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     Npc* sushie = script->owner2.npc;
     s32 surfaceType;
     f32 x, y, z, dist;
@@ -885,25 +885,25 @@ EvtScript EVS_WorldSushie_PutAway = {
 };
 
 void N(pre_battle)(Npc* sushie) {
-    PartnerActionStatus* sushieActionStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
 
     if (N(IsRiding)) {
-        sushieActionStatus->npc = *sushie;
-        sushieActionStatus->shouldResumeAbility = TRUE;
+        partnerStatus->npc = *sushie;
+        partnerStatus->shouldResumeAbility = TRUE;
         enable_player_static_collisions();
         enable_player_input();
         set_action_state(ACTION_STATE_IDLE);
         partner_clear_player_tracking(sushie);
     }
 
-    sushieActionStatus->actingPartner = PARTNER_SUSHIE;
+    partnerStatus->actingPartner = PARTNER_SUSHIE;
 }
 
 void N(post_battle)(Npc* sushie) {
-    PartnerActionStatus* sushieActionStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
 
-    if (sushieActionStatus->shouldResumeAbility) {
-        *sushie = sushieActionStatus->npc;
+    if (partnerStatus->shouldResumeAbility) {
+        *sushie = partnerStatus->npc;
         partner_use_ability();
     }
 }

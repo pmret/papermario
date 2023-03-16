@@ -15,7 +15,7 @@ enum {
 
 API_CALLABLE(N(FireBarAI_Main)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     Bytecode* args = script->ptrReadPos;
     FireBarAISettings* settings;
     FireBarData* data;

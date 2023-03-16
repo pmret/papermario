@@ -202,7 +202,7 @@ API_CALLABLE(N(UseAbility)) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
     PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* kooper = script->owner2.npc;
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
     f32 posX, posY, posZ, hitLength;
     f32 testLength;
@@ -721,11 +721,11 @@ s32 N(test_first_strike)(Npc* kooper, Npc* enemy) {
 
 void N(pre_battle)(Npc* kooper) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* kooperActionStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     N(TriggeredBattle) = FALSE;
 
-    if (kooperActionStatus->partnerActionState != PARTNER_ACTION_NONE) {
-        if (kooperActionStatus->partnerActionState == PARTNER_ACTION_KOOPER_TOSS) {
+    if (partnerStatus->partnerActionState != PARTNER_ACTION_NONE) {
+        if (partnerStatus->partnerActionState == PARTNER_ACTION_KOOPER_TOSS) {
             N(TriggeredBattle) = TRUE;
         }
 
@@ -746,8 +746,8 @@ void N(pre_battle)(Npc* kooper) {
         partner_clear_player_tracking(kooper);
         disable_npc_blur(kooper);
 
-        kooperActionStatus->actingPartner = PARTNER_NONE;
-        kooperActionStatus->partnerActionState = PARTNER_ACTION_NONE;
+        partnerStatus->actingPartner = PARTNER_NONE;
+        partnerStatus->partnerActionState = PARTNER_ACTION_NONE;
     }
 }
 

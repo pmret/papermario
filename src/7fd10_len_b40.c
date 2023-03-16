@@ -27,7 +27,7 @@ extern s32 D_8008EEF0[];
 void func_800E6860(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE && gPartnerActionStatus.actingPartner == PARTNER_BOW) {
+    if (gPartnerStatus.partnerActionState != PARTNER_ACTION_NONE && gPartnerStatus.actingPartner == PARTNER_BOW) {
         Npc* partner = get_npc_unsafe(NPC_PARTNER);
 
         func_802DDEE4(PLAYER_SPRITE_MAIN, -1, FOLD_TYPE_7, 0, 0, 0, playerStatus->alpha1, 0);
@@ -37,7 +37,7 @@ void func_800E6860(void) {
 }
 
 s32 func_800E6904(void) {
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 actionState = playerStatus->actionState;
 
@@ -69,7 +69,7 @@ s32 func_800E6904(void) {
 }
 
 s32 can_pause(s32 currentButtons, s32 pressedButtons) {
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     s32 actionState = gPlayerStatus.actionState;
 
     if (!(gPlayerStatus.animFlags & PA_FLAG_CHANGING_MAP)
@@ -181,7 +181,7 @@ s32 setup_item_popup(PopupMenu* menu) {
 void check_input_open_menus(void) {
     static s16 D_8010C9C0;
 
-    PartnerActionStatus* partnerStatus;
+    PartnerStatus* partnerStatus;
     PlayerStatus* playerStatus;
     PlayerData* playerData;
     PopupMenu* popup;
@@ -191,7 +191,7 @@ void check_input_open_menus(void) {
     s32 currentButtons;
     s8* partnerActionState;
 
-    partnerStatus = &gPartnerActionStatus;
+    partnerStatus = &gPartnerStatus;
     playerStatus = &gPlayerStatus;
     playerData = &gPlayerData;
     popup = &D_8010C9C8;

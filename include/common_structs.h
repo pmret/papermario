@@ -2249,7 +2249,7 @@ typedef struct TweesterPhysics {
     /* 0x18 */ f32 liftoffVelocityPhase;
 } TweesterPhysics; // size = 0x1C
 
-typedef struct PartnerActionStatus {
+typedef struct PartnerStatus {
     /* 0x000 */ s8 partnerActionState;
     /* 0x001 */ b8 shouldResumeAbility;
     /* 0x002 */ b8 partnerAction_unk_2;
@@ -2264,7 +2264,7 @@ typedef struct PartnerActionStatus {
     /* 0x018 */ Npc npc;
     /* 0x358 */ s32 unk_358;
     /* 0x35C */ char unk_35C[0x4];
-} PartnerActionStatus; // size = 0x360
+} PartnerStatus; // size = 0x360
 
 typedef struct SpriteRasterInfo {
     /* 0x00 */ IMG_PTR raster;

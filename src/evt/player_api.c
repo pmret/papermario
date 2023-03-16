@@ -772,7 +772,7 @@ ApiStatus GetPartnerInUse(Evt* script, s32 isInitialCall) {
     PlayerData* playerData = &gPlayerData;
     s32 currentPartner = PARTNER_NONE;
 
-    if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) {
+    if (gPartnerStatus.partnerActionState != PARTNER_ACTION_NONE) {
         currentPartner = playerData->currentPartner;
     }
 

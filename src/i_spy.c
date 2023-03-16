@@ -102,7 +102,7 @@ void ispy_notification_setup(void) {
 
 void ispy_notification_update(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     s32 cond;
 
     ISpyPtr->pos.y +=

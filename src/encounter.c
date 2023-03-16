@@ -661,7 +661,7 @@ void update_encounters_neutral(void) {
                 gGameStatusPtr->debugEnemyContact == DEBUG_CONTACT_CANT_TOUCH ||
                 (playerStatus->flags & PS_FLAG_ARMS_RAISED) ||
                 (gOverrideFlags & GLOBAL_OVERRIDES_40) ||
-                gPartnerActionStatus.actingPartner == PARTNER_BOW ||
+                gPartnerStatus.actingPartner == PARTNER_BOW ||
                 (enemy->flags & ENEMY_FLAG_PASSIVE) ||
                 (gOverrideFlags & (GLOBAL_OVERRIDES_DISABLE_BATTLES | GLOBAL_OVERRIDES_200 | GLOBAL_OVERRIDES_400 | GLOBAL_OVERRIDES_800)) ||
                 is_picking_up_item()) {
@@ -1570,7 +1570,7 @@ void update_encounters_post_battle(void) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;
     PlayerStatus* playerStatus = &gPlayerStatus;
     PlayerData* playerData = &gPlayerData;
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     Encounter* encounter;
     Evt* script;
     Enemy* enemy;
@@ -2281,7 +2281,7 @@ s32 check_conversation_trigger(void) {
     playerY = playerStatus->position.y;
     playerZ = playerStatus->position.z;
 
-    if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) {
+    if (gPartnerStatus.partnerActionState != PARTNER_ACTION_NONE) {
         return FALSE;
     }
 

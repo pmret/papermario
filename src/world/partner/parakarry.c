@@ -184,7 +184,7 @@ s32 N(update_current_floor)(void) {
 
 API_CALLABLE(N(UseAbility)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     Npc* parakarry = script->owner2.npc;
     s32 buttonTemp = BUTTON_A;
     f32 x, y, z, yaw, length;
@@ -636,7 +636,7 @@ EvtScript EVS_WorldParakarry_PutAway = {
 };
 
 void N(pre_battle)(Npc* parakarry) {
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
 
     if (N(UsingAbility)) {
         if (N(PlayerCollisionDisabled)) {
@@ -657,7 +657,7 @@ void N(pre_battle)(Npc* parakarry) {
 }
 
 void N(post_battle)(Npc* parakarry) {
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
 
     if (partnerStatus->shouldResumeAbility) {
         if (N(PlayerCollisionDisabled)) {

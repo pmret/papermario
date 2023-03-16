@@ -530,7 +530,7 @@ s32 func_800EA4B0(s32 collisionID) {
 }
 
 s32 partner_is_idle(Npc* partner) {
-    return gPartnerActionStatus.partnerActionState == PARTNER_ACTION_NONE;
+    return gPartnerStatus.partnerActionState == PARTNER_ACTION_NONE;
 }
 
 s32 world_partner_can_player_pause_default(Npc* partner) {
@@ -629,7 +629,7 @@ void _use_partner_ability(void) {
     static u32 PartnerCommand; // goes into BSS, needs to be static for the function to match
 
     PlayerData* playerData = &gPlayerData;
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (!partnerStatus->inputDisabledCount) {
@@ -924,7 +924,7 @@ void switch_to_partner(s32 partnerID) {
 
 void partner_init_after_battle(s32 partnerID) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
 
     if (wCurrentPartnerId != partnerID) {
         D_8010CFE0 = 1;
@@ -961,7 +961,7 @@ void func_800EB2A4(s32 partnerID) {
 }
 
 s32 partner_use_ability(void) {
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
 
     if (!is_starting_conversation()
         && wPartner != NULL
@@ -1000,7 +1000,7 @@ void partner_reset_data(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 currentPartner = gPlayerData.currentPartner;
 
-    mem_clear(&gPartnerActionStatus, sizeof(gPartnerActionStatus));
+    mem_clear(&gPartnerStatus, sizeof(gPartnerStatus));
     get_worker(create_worker_frontUI(_use_partner_ability, NULL));
 
     D_8010CFE0 = 1;
@@ -1008,7 +1008,7 @@ void partner_reset_data(void) {
     wCurrentPartnerId = currentPartner;
 
     if (gGameStatusPtr->keepUsingPartnerOnMapChange) {
-        gPartnerActionStatus.partnerActionState = 1;
+        gPartnerStatus.partnerActionState = 1;
         gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
     }
 
@@ -1029,7 +1029,7 @@ void partner_reset_data(void) {
 }
 
 void partner_initialize_data(void) {
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
 
     wCurrentPartnerId = 0;
     D_8010CFE0 = 0;
@@ -1078,7 +1078,7 @@ void partner_handle_before_battle(void) {
 }
 
 void partner_handle_after_battle(void) {
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     PlayerData* playerData = &gPlayerData;
 
     if (wCurrentPartnerId != PARTNER_NONE) {
@@ -1200,7 +1200,7 @@ void partner_walking_update_player_tracking(Npc* partner) {
 
 void partner_walking_update_motion(Npc* partner) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
 
     if (gGameStatusPtr->multiplayerEnabled == 0 || playerStatus->flags & (PS_FLAG_INPUT_DISABLED | PS_FLAG_NO_STATIC_COLLISION)
         || partnerStatus->inputDisabledCount != 0 || partnerStatus->partnerAction_unk_2) {
@@ -1774,7 +1774,7 @@ void partner_flying_update_player_tracking(Npc* partner) {
 
 void partner_flying_update_motion(Npc* partner) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     f32 x, y, z, hitDepth;
     f32 var_f0;
     f32 var_f2;
@@ -2478,7 +2478,7 @@ s32 partner_force_player_flip_done(void) {
 }
 
 void partner_enable_input(void) {
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
 
     partnerStatus->inputDisabledCount--;
     if (partnerStatus->inputDisabledCount < 0) {
@@ -2487,7 +2487,7 @@ void partner_enable_input(void) {
 }
 
 void partner_disable_input(void) {
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
 
     partnerStatus->inputDisabledCount++;
 }

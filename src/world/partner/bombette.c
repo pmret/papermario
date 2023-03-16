@@ -192,7 +192,7 @@ void N(try_cancel_tweester)(Npc* npc) {
 }
 
 s32 N(can_use_ability)(Npc* npc) {
-    if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) {
+    if (gPartnerStatus.partnerActionState != PARTNER_ACTION_NONE) {
         N(TriggeredEarlyDetonation) = TRUE;
         return FALSE;
     }
@@ -200,13 +200,13 @@ s32 N(can_use_ability)(Npc* npc) {
 }
 
 s32 N(can_player_pause)(Npc* npc) {
-    return gPartnerActionStatus.partnerActionState == PARTNER_ACTION_NONE;
+    return gPartnerStatus.partnerActionState == PARTNER_ACTION_NONE;
 }
 
 API_CALLABLE(N(UseAbility)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     Camera* camera = &gCameras[CAM_DEFAULT];
     Npc* npc = script->owner2.npc;
     u16 temp_ret;
@@ -643,9 +643,9 @@ s32 N(test_first_strike)(Npc* bombette, Npc* enemy) {
 
 void N(pre_battle)(Npc* bombette) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* bombetteActionStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
 
-    if (bombetteActionStatus->partnerActionState != PARTNER_ACTION_NONE) {
+    if (partnerStatus->partnerActionState != PARTNER_ACTION_NONE) {
         if (N(LockingPlayerInput)) {
             enable_player_input();
         }
@@ -658,8 +658,8 @@ void N(pre_battle)(Npc* bombette) {
         set_action_state(ACTION_STATE_IDLE);
         partner_clear_player_tracking(bombette);
 
-        bombetteActionStatus->partnerActionState = PARTNER_ACTION_NONE;
-        bombetteActionStatus->actingPartner = 0;
+        partnerStatus->partnerActionState = PARTNER_ACTION_NONE;
+        partnerStatus->actingPartner = 0;
 
         bombette->pos.x = playerStatus->position.x;
         bombette->pos.y = playerStatus->position.y;

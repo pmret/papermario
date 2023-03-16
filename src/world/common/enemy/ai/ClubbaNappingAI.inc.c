@@ -53,14 +53,14 @@ void N(ClubbaNappingAI_Sleep)(Evt* script, MobileAISettings* aiSettings, EnemyDe
         }
 
         if (playerData->currentPartner == PARTNER_KOOPER) {
-            if (gPartnerActionStatus.partnerActionState == playerData->currentPartner) {
+            if (gPartnerStatus.partnerActionState == playerData->currentPartner) {
                 shouldWakeUp = TRUE;
             }
         }
     }
 
-    if (((playerData->currentPartner == PARTNER_GOOMBARIO) && (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE)) ||
-        ((playerData->currentPartner == PARTNER_BOMBETTE) && (gPartnerActionStatus.partnerActionState == PARTNER_ACTION_BOMBETTE_2))) {
+    if (((playerData->currentPartner == PARTNER_GOOMBARIO) && (gPartnerStatus.partnerActionState != PARTNER_ACTION_NONE)) ||
+        ((playerData->currentPartner == PARTNER_BOMBETTE) && (gPartnerStatus.partnerActionState == PARTNER_ACTION_BOMBETTE_2))) {
         posX = npc->pos.x;
         posZ = npc->pos.z;
         add_vec2D_polar(&posX, &posZ, 0.0f, npc->yaw);

@@ -9,7 +9,7 @@ API_CALLABLE(CheckUsingRideablePartner) {
 
     script->varTable[10] = 0;
     if (partner_get_enter_map_script() != NULL) {
-        if (gPartnerActionStatus.partnerActionState == ACTION_STATE_IDLE) {
+        if (gPartnerStatus.partnerActionState == ACTION_STATE_IDLE) {
             script->varTable[10] = 0;
         } else {
             script->varTable[10] = 1;

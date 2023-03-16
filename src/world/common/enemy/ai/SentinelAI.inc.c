@@ -143,7 +143,7 @@ void N(SentinelAI_Descend)(Evt* script, MobileAISettings* aiSettings, EnemyDetec
         } else {
             npc->rotation.y = 0.0f;
             npc->flags &= ~NPC_FLAG_200000;
-            if (gPartnerActionStatus.actingPartner != PARTNER_BOW) {
+            if (gPartnerStatus.actingPartner != PARTNER_BOW) {
                 disable_player_input();
                 partner_disable_input();
                 npc->duration = 0;
@@ -208,7 +208,7 @@ void N(SentinelAI_GrabPlayer)(Evt* script, MobileAISettings* aiSettings, EnemyDe
 
     npc->duration++;
     if (npc->duration >= 3) {
-        if (gPartnerActionStatus.actingPartner != PARTNER_BOW) {
+        if (gPartnerStatus.actingPartner != PARTNER_BOW) {
             npc->duration = 0;
             script->AI_TEMP_STATE = AI_STATE_SENTINEL_CAUGHT_PLAYER;
         } else {

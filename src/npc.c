@@ -417,9 +417,9 @@ void npc_do_other_npc_collision(Npc* npc) {
                         if (!(thisBuf + otherBuf <= dist)) {
                             collision = FALSE;
                             if (npc->flags & NPC_FLAG_PARTNER) {
-                                collision = gPartnerActionStatus.partnerActionState == PARTNER_ACTION_NONE;
+                                collision = gPartnerStatus.partnerActionState == PARTNER_ACTION_NONE;
                             } else if (!(otherNpc->flags & NPC_FLAG_PARTNER) ||
-                                        gPartnerActionStatus.partnerActionState == PARTNER_ACTION_NONE)
+                                        gPartnerStatus.partnerActionState == PARTNER_ACTION_NONE)
                             {
                                 collision = TRUE;
                             }
@@ -2162,7 +2162,7 @@ void func_8003D624(Npc* npc, s32 foldType, s32 arg2, s32 arg3, s32 arg4, s32 arg
 //TODO begin split for npc_surfaces
 
 void spawn_surface_effects(Npc* npc, SurfaceInteractMode mode) {
-    PartnerActionStatus* temp = &gPartnerActionStatus;
+    PartnerStatus* temp = &gPartnerStatus;
 
     if ((npc->flags & (NPC_FLAG_TOUCHES_GROUND | NPC_FLAG_INVISIBLE)) == NPC_FLAG_TOUCHES_GROUND) {
         if (npc->moveSpeed != 0.0f) {

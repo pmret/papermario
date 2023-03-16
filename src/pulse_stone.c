@@ -29,7 +29,7 @@ void pulse_stone_notification_update(void);
 
 s32 should_cancel_pulse_stone(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     s8 actionState = playerStatus->actionState;
 
     // could be written more clearly if these two condtions were inverted

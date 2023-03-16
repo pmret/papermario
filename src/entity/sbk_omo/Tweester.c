@@ -201,7 +201,7 @@ void entity_Tweester_move(Entity* entity) {
 
 void entity_Tweester_idle(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     PlayerData* playerData = &gPlayerData;
     TweesterData* data = entity->dataBuf.tweester;
     f32 delta;

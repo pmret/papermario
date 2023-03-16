@@ -18,7 +18,7 @@ void record_jump_apex(void) {
 s32 can_trigger_loading_zone(void) {
     PlayerData* playerData = &gPlayerData;
     s32 actionState = gPlayerStatusPtr->actionState;
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
 
     if (actionState == ACTION_STATE_IDLE ||
         actionState == ACTION_STATE_WALK ||
@@ -334,7 +334,7 @@ void phys_update_falling(void) {
 
 void player_handle_floor_collider_type(s32 colliderID) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
 
     if (colliderID >= 0) {
         s32 surfaceType = get_collider_flags(colliderID) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
@@ -877,7 +877,7 @@ s32 phys_is_on_sloped_ground(void) {
 
 void phys_main_collision_below(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
     f32 collHeightHalf = playerStatus->colliderHeight * 0.5f;
     f32 playerX = playerStatus->position.x;
@@ -1165,13 +1165,13 @@ s32 phys_check_interactable_collision(void) {
 }
 
 s32 phys_can_player_interact(void) {
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 ret = TRUE;
 
-    if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) {
-        if (gPartnerActionStatus.actingPartner == PARTNER_BOMBETTE) {
-            if (gPartnerActionStatus.partnerActionState <= PARTNER_ACTION_BOMBETTE_2) {
+    if (gPartnerStatus.partnerActionState != PARTNER_ACTION_NONE) {
+        if (gPartnerStatus.actingPartner == PARTNER_BOMBETTE) {
+            if (gPartnerStatus.partnerActionState <= PARTNER_ACTION_BOMBETTE_2) {
                 ret = FALSE;
             }
         } else {

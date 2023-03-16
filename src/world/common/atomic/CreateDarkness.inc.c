@@ -11,7 +11,7 @@ API_CALLABLE(N(DarkRoomUpdate)) {
     
     set_screen_overlay_center_worldpos(1, 1, playerStatus->position.x, playerStatus->position.y + 8.0f, playerStatus->position.z);
     
-    if (gPartnerActionStatus.partnerActionState != PARTNER_ACTION_NONE) {
+    if (gPartnerStatus.partnerActionState != PARTNER_ACTION_NONE) {
         if (playerData->currentPartner == PARTNER_WATT) {
             if (!script->functionTemp[1]) {
                 script->functionTemp[1] = TRUE;

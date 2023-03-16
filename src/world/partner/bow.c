@@ -164,7 +164,7 @@ s32 N(check_for_treadmill_overlaps)(void) {
 
 API_CALLABLE(N(UseAbility)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
     Npc* bow = script->owner2.npc;
     f32 stickInputMag;
@@ -363,7 +363,7 @@ EvtScript EVS_WorldBow_UseAbility = {
 
 void N(end_outta_sight_cleanup)(Npc* bow) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
     s32 actionState;
 
     playerStatus->alpha1 = 255;
@@ -417,7 +417,7 @@ EvtScript EVS_WorldBow_PutAway = {
 };
 
 void N(pre_battle)(Npc* bow) {
-    PartnerActionStatus* partnerStatus = &gPartnerActionStatus;
+    PartnerStatus* partnerStatus = &gPartnerStatus;
 
     if (N(IsHiding)) {
         enable_player_input();
