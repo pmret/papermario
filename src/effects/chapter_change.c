@@ -65,6 +65,23 @@ UnkStruct D_E010E838[] = {
     {              NULL,   0,  0,   0,  0 }
 };
 
+#if VERSION_PAL
+UnkStruct D_E010E838_b[] = {
+    { D_0900C080_3F7EE0, 0,  0, 128, 10 },
+    { D_0900C168_3F7FC8, 0, 10, 128, 10 },
+    { D_0900C1B0_3F8010, 0, 20, 128, 10 },
+    { D_0900C1F8_3F8058, 0, 30, 128, 10 },
+    {              NULL, 0,  0,   0,  0 }
+};
+
+UnkStruct D_E010E838_c[] = {
+        { D_0900C240_3F80A0, 128,  0, 104, 20 },
+        { D_0900C328_3F8188, 128, 20, 104, 20 },
+        { D_0900C370_3F81D0, 232,  0,  16, 40 },
+        {              NULL,   0,  0,   0,  0 }
+};
+#endif
+
 UnkStruct D_E010E868[] = {
     { D_0900BE40_3F7CA0, 128, -33, 64, 64 },
     {              NULL,   0,   0,  0,  0 },
@@ -83,6 +100,34 @@ UnkStruct D_E010E868[] = {
     { D_0900C038_3F7E98, 128, -33, 64, 64 },
     {              NULL,   0,   0,  0,  0 }
 };
+
+#if VERSION_PAL
+u32 pal_data[] = {
+        0x00000000,
+        0x00000000,
+        0x00000000,
+        0xE010E61C,
+        0xE010E5E4,
+        0xE010E5E4,
+        0xE010E5E4,
+        0xE010E5E4,
+        0xE010E5E4,
+        0xE010E5E4,
+        0xE010E5E4,
+        0xE010E5E4,
+        0xE010E60C,
+        0xE010E61C,
+        0xE010E61C,
+        0xE010E61C,
+        0xE010E61C,
+        0xE010E61C,
+        0xE010E61C,
+        0xE010E61C,
+        0xE010E61C,
+        0xE010E61C,
+        0x00000000,
+};
+#endif
 
 void chapter_change_init(EffectInstance* effect);
 void chapter_change_update(EffectInstance* effect);
@@ -211,6 +256,9 @@ void chapter_change_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
+#if VERSION_PAL
+INCLUDE_ASM(void, "effects/chapter_change", chapter_change_appendGfx);
+#else
 void chapter_change_appendGfx(void* effect) {
     ChapterChangeFXData* data = ((EffectInstance*)effect)->data.chapterChange;
     s32 unk_2C = data->unk_2C;
@@ -268,3 +316,4 @@ void chapter_change_appendGfx(void* effect) {
 
     gDPPipeSync(gMainGfxPos++);
 }
+#endif
