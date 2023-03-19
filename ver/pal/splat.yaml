@@ -5175,7 +5175,91 @@ segments:
     - [0x7314E0, c, script/dig_05]
     - [0x731500]
 
-  - [0x743A60, bin]
+#######################
+### Battle Partners ###
+#######################
+  - name: battle_partner_goompa
+    dir: battle/partner
+    type: code
+    start: 0x743A60
+    vram: 0x80238000
+    subsegments:
+    - [0x743A60, c, goompa]
+    - [0x743A60]
+  - name: battle_partner_goombario
+    dir: battle/partner
+    type: code
+    start: 0x744010
+    vram: 0x80238000
+    subsegments:
+    - [0x744010, c, goombario]
+    - [0x7451C0]
+  - name: battle_partner_kooper
+    dir: battle/partner
+    type: code
+    start: 0x748DB0
+    vram: 0x80238000
+    subsegments:
+    - [0x748DB0, c, kooper]
+    - [0x7491E0]
+  - name: battle_partner_bombette
+    dir: battle/partner
+    type: code
+    start: 0x74DC40
+    vram: 0x80238000
+    subsegments:
+    - [0x74DC40, c, bombette]
+    - [0x74E280]
+  - name: battle_partner_parakarry
+    dir: battle/partner
+    type: code
+    start: 0x752CB0
+    vram: 0x80238000
+    subsegments:
+    - [0x752CB0, c, parakarry]
+    - [0x7544C0]
+  - name: battle_partner_watt
+    dir: battle/partner
+    type: code
+    start: 0x756A20
+    vram: 0x80238000
+    subsegments:
+    - [0x756A20, c, watt]
+    - [0x7579B0, .data, watt]
+  - name: battle_partner_sushie
+    dir: battle/partner
+    type: code
+    start: 0x75ABD0
+    vram: 0x80238000
+    subsegments:
+    - [0x75ABD0, c, sushie]
+    - [0x75BAA0]
+  - name: battle_partner_lakilester
+    dir: battle/partner
+    type: code
+    start: 0x75EC40
+    vram: 0x80238000
+    subsegments:
+    - [0x75EC40, c, lakilester]
+    - [0x760E10]
+  - name: battle_partner_bow
+    dir: battle/partner
+    type: code
+    start: 0x763E20
+    vram: 0x80238000
+    subsegments:
+    - [0x763E20, c, bow]
+    - [0x764120]
+  - name: battle_partner_twink
+    dir: battle/partner
+    type: code
+    start: 0x767C20
+    vram: 0x80238000
+    subsegments:
+    - [0x767C20, c, twink]
+    - [0x767CF0]
+
+  - [0x768780, bin]
 
   - name: world_model_anim_kzn_01
     dir: world/model_anim/kzn
