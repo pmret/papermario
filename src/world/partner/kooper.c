@@ -330,6 +330,13 @@ API_CALLABLE(N(UseAbility)) {
             playerStatus->flags |= PS_FLAG_JUMPING;
             gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
 
+#if VERSION_PAL
+            playerStatus->gravityIntegrator[0] = 0;
+            playerStatus->gravityIntegrator[1] = 0;
+            playerStatus->gravityIntegrator[2] = 0;
+            playerStatus->gravityIntegrator[3] = 0;
+#endif
+
             suggest_player_anim_allow_backward(ANIM_Mario1_Jump);
             N(ShellTossKickFalling) = FALSE;
             sfx_play_sound_at_npc(SOUND_JUMP_2081, SOUND_SPACE_MODE_0, NPC_PARTNER);

@@ -118,6 +118,101 @@ segments:
 
   - [0x231990, bin]
 
+  - type: code
+    dir: world/partner
+    name: world_partner_goombario
+    start: 0x33FDD0
+    vram: 0x802BD100
+    subsegments:
+    - [0x33FDD0, c, goombario]
+    - [0x340910]
+  - type: code
+    dir: world/partner
+    name: world_partner_bombette
+    start: 0x340C00
+    vram: 0x802BD100
+    subsegments:
+    - [0x340C00, c, bombette]
+    - [0x342380]
+  - type: code
+    dir: world/partner
+    name: world_partner_parakarry
+    start: 0x342420
+    vram: 0x802BD100
+    subsegments:
+    - [0x342420, c, parakarry]
+    - [0x343DB0]
+  - type: code
+    dir: world/partner
+    name: world_partner_kooper
+    start: 0x343ED0
+    vram: 0x802BD100
+    subsegments:
+    - [0x343ED0, c, kooper]
+    - [0x345920]
+  - type: code
+    dir: world/partner
+    name: world_partner_watt
+    start: 0x345A30
+    vram: 0x802BD100
+    subsegments:
+    - [0x345A30, c, watt]
+    - [0x346B80]
+  - type: code
+    dir: world/partner
+    name: world_partner_sushie
+    start: 0x346C30
+    vram: 0x802BD100
+    subsegments:
+    - [0x346C30, c, sushie]
+    - [0x3498E0]
+  - type: code
+    dir: world/partner
+    name: world_partner_lakilester
+    start: 0x349A10
+    vram: 0x802BD100
+    subsegments:
+    - [0x349A10, c, lakilester]
+    - [0x34C770]
+  - type: code
+    dir: world/partner
+    name: world_partner_bow
+    start: 0x34C810
+    vram: 0x802BD100
+    subsegments:
+    - [0x34C810, c, bow]
+    - [0x34D6F0]
+  - type: code
+    dir: world/partner
+    name: world_partner_goompa
+    start: 0x34D7D0
+    vram: 0x802BD100
+    subsegments:
+    - [0x34D7D0, c, goompa]
+    - [0x34DC40]
+  - type: code
+    dir: world/partner
+    name: world_partner_goombaria
+    start: 0x34DCD0
+    vram: 0x802BD100
+    subsegments:
+    - [0x34DCD0, c, goombaria]
+    - [0x34DDC0]
+  - type: code
+    dir: world/partner
+    name: world_partner_twink
+    start: 0x34DE30
+    vram: 0x802BD100
+    subsegments:
+    - [0x34DE30, c, twink]
+    - [0x34DF20]
+  - type: code
+    start: 0x34DF90
+    name: world_use_item
+    vram: 0x802C0000
+    subsegments:
+    - [0x34DF90, c, world_use_item]
+    - [0x34E3A0]
 
 ###############
 ### Effects ###
