@@ -196,7 +196,7 @@ API_CALLABLE(N(AwaitPlayerPressATimer)) {
 // unlike the common import, does not mask out 0xF0000 from itemID
 #if VERSION_PAL
 API_CALLABLE(N(GetItemNameRaw));
-INCLUDE_ASM(ApiResult, "world/area_kkj/kkj_19/kkj_19_5_baking", N(GetItemNameRaw));
+INCLUDE_ASM(ApiResult, "world/area_kkj/kkj_19/kkj_19_5_baking", kkj_19_GetItemNameRaw);
 #else
 API_CALLABLE(N(GetItemNameRaw)) {
     Bytecode* args = script->ptrReadPos;

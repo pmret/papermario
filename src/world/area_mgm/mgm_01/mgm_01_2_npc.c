@@ -658,7 +658,7 @@ API_CALLABLE(N(GetCoinCount)) {
 
 #if VERSION_PAL
 API_CALLABLE(N(SetMsgVars_BlocksRemaining));
-INCLUDE_ASM(ApiStatus, "world/area_mgm/mgm_01/mgm_01_2_npc", N(SetMsgVars_BlocksRemaining))
+INCLUDE_ASM(ApiStatus, "world/area_mgm/mgm_01/mgm_01_2_npc", mgm_01_SetMsgVars_BlocksRemaining)
 #else
 API_CALLABLE(N(SetMsgVars_BlocksRemaining)) {
     Enemy* scorekeeper = get_enemy(SCOREKEEPER_ENEMY_IDX);
