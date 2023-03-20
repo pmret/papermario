@@ -17,7 +17,7 @@ dlabel D_E00CACD8
 
 .section .text
 
-glabel fx_65_appendGfx
+glabel effect_65_appendGfx
 /* 3D09CC E00CA4CC 27BDFF38 */  addiu     $sp, $sp, -0xc8
 /* 3D09D0 E00CA4D0 0080482D */  daddu     $t1, $a0, $zero
 /* 3D09D4 E00CA4D4 3C0ADB06 */  lui       $t2, 0xdb06
