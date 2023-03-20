@@ -1925,31 +1925,31 @@ typedef struct ThrowSpinyFXData {
 } ThrowSpinyFXData; //sizeof 0x6C
 
 typedef struct Effect65FXData {
-    /* 0x000 */ s32 unk_00;
+    /* 0x000 */ s32 variation;
     /* 0x004 */ f32 unk_04;
     /* 0x008 */ f32 unk_08;
     /* 0x00C */ f32 unk_0C;
-    /* 0x010 */ s32 unk_10;
-    /* 0x014 */ s32 unk_14;
-    /* 0x018 */ s32 unk_18;
-    /* 0x01C */ s32 unk_1C;
-    /* 0x020 */ s32 unk_20;
-    /* 0x024 */ s32 unk_24;
-    /* 0x028 */ s32 unk_28;
-    /* 0x02C */ s32 unk_2C;
-    /* 0x030 */ s32 unk_30;
-    /* 0x034 */ f32 unk_34;
+    /* 0x010 */ s32 timeLeft;
+    /* 0x014 */ s32 lifeTime;
+    /* 0x018 */ s32 primR;
+    /* 0x01C */ s32 primG;
+    /* 0x020 */ s32 primB;
+    /* 0x024 */ s32 alpha;
+    /* 0x028 */ s32 envR;
+    /* 0x02C */ s32 envG;
+    /* 0x030 */ s32 envB;
+    /* 0x034 */ f32 scale;
     /* 0x038 */ Vec3f pos;
-    /* 0x044 */ f32 unk_44;
-    /* 0x048 */ f32 unk_48;
-    /* 0x04C */ f32 unk_4C;
-    /* 0x050 */ f32 unk_50[30];
-    /* 0x0C8 */ f32 unk_C8[30];
-    /* 0x140 */ f32 unk_140[30];
-    /* 0x1B8 */ s32 unk_1B8[30];
-    /* 0x230 */ s32 unk_230[30]; // a bool
-    /* 0x2A8 */ s32 unk_2A8;
-    /* 0x2AC */ f32 unk_2AC[30];
+    /* 0x044 */ f32 pathJitterX;
+    /* 0x048 */ f32 pathJitterY;
+    /* 0x04C */ f32 pathJitterZ;
+    /* 0x050 */ f32 pathX[30];
+    /* 0x0C8 */ f32 pathY[30];
+    /* 0x140 */ f32 pathZ[30];
+    /* 0x1B8 */ s32 pathTimestamp[30];
+    /* 0x230 */ s32 pathPointEnabled[30]; // a bool
+    /* 0x2A8 */ s32 lastPointIndex;
+    /* 0x2AC */ f32 pathLength[30];
 } Effect65FXData; // size = 0x324
 
 typedef struct TubbaHeartAttackFXData {
