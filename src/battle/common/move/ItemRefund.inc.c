@@ -3,6 +3,11 @@
 
 static s32 itemIcon;
 
+extern s32 gCurrentLanguage;
+extern HudScript HES_Refund_de;
+extern HudScript HES_Refund_fr;
+extern HudScript HES_Refund_es;
+
 // Returns time to sleep for on $x.
 API_CALLABLE(N(GiveRefund)) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -13,6 +18,7 @@ API_CALLABLE(N(GiveRefund)) {
     f32 posZ;
     f32 facingAngleSign = 0.0f;
     s32 sleepTime = 0;
+    s32 tempIcon;
 
     if (player_team_is_ability_active(player, ABILITY_REFUND) && sellValue > 0) {
         s32 iconX;
@@ -40,8 +46,30 @@ API_CALLABLE(N(GiveRefund)) {
         posZ = player->currentPos.z;
 
         get_screen_coords(gCurrentCameraID, posX, posY, posZ, &iconX, &iconY, &iconZ);
+
+#if VERSION_PAL
+        switch(gCurrentLanguage) {
+            case 0:
+                itemIcon = tempIcon = hud_element_create(&HES_Refund);
+                itemIcon = tempIcon;
+                break;
+            case 1:
+                itemIcon = tempIcon = hud_element_create(&HES_Refund_de);
+                itemIcon = tempIcon;
+                break;
+            case 2:
+                itemIcon = tempIcon = hud_element_create(&HES_Refund_fr);
+                itemIcon = tempIcon;
+                break;
+            case 3:
+                itemIcon = tempIcon = hud_element_create(&HES_Refund_es);
+                break;
+        }
+        hud_element_set_render_pos(tempIcon, iconX + 36, iconY - 63);
+#else
         itemIcon = hud_element_create(&HES_Refund);
         hud_element_set_render_pos(itemIcon, iconX + 36, iconY - 63);
+#endif
     }
 
     script->varTable[0] = sleepTime;
