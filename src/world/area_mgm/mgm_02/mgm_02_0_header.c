@@ -2,7 +2,7 @@
 
 #if VERSION_PAL
 s32 N(get_tattle)(void);
-INCLUDE_ASM(void, "world/area_mgm/mgm_02/mgm_02_0_header", N(get_tattle));
+INCLUDE_ASM(void, "world/area_mgm/mgm_02/mgm_02_0_header", mgm_02_get_tattle);
 #endif
 
 EntryList N(Entrances) = {
