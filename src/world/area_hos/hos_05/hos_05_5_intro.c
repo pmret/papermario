@@ -897,14 +897,14 @@ ApiStatus func_802428C8_A2CB08(Evt* script, s32 isInitialCall) {
     Vec3f* vec01; // vectors 0, 1
     Vec3f* vec2; // vector 2
     f32 angle;
+    f32 angle2;
     s32 s4;
     s32 s5;
-
+    f32 new_var;
 
     sp10 = evt_get_float_variable(script, *args++);
     temp_f28 = evt_get_float_variable(script, *args++);
     temp_a0 = evt_get_variable(script, ArrayVar(0));
-
 
     effect = temp_a0;
 
@@ -958,7 +958,7 @@ ApiStatus func_802428C8_A2CB08(Evt* script, s32 isInitialCall) {
             unkData->unk_18.z = zPos;
             break;
         case 4:
-            unkData = &N(D_8024F3F8)->unk_18;
+            unkData = &N(D_8024F3F8)[3];
             vec01 = &unkData->unk_00;
             s5 = 30;
             angle = 90.0f;
@@ -966,9 +966,10 @@ ApiStatus func_802428C8_A2CB08(Evt* script, s32 isInitialCall) {
             s4 = 3;
             yPos = yPos * 4.0f;
             temp_f24 = sin_deg(yPos + 205.72);
-            xPos = effect->data.somethingRotating->pos.x + (sin_deg(angle) * 50.0f * temp_f24);
+            new_var = temp_f24;
+            xPos = effect->data.somethingRotating->pos.x + (sin_deg(angle) * 50.0f * new_var);
             yPos = effect->data.somethingRotating->pos.y + (cos_deg(yPos + 205.72) * 50.0f);
-            zPos = effect->data.somethingRotating->pos.z + (sin_deg(angle) * 50.0f * temp_f24);
+            zPos = effect->data.somethingRotating->pos.z + (sin_deg(angle) * 50.0f * new_var);
             unkData->unk_18.x = xPos;
             unkData->unk_18.y = yPos;
             unkData->unk_18.z = zPos;
@@ -1032,13 +1033,15 @@ ApiStatus func_802428C8_A2CB08(Evt* script, s32 isInitialCall) {
 
     if (temp_s6 != 2) {
         vec01->x = (evt_get_float_variable(script, LVar0) * temp_f28) + (vec2->x * (1.0f - temp_f28));
-        vec01->y = (evt_get_float_variable(script, LVar1) * temp_f28) + (vec2->y * (1.0f - temp_f28)) + sp10;
+        new_var = evt_get_float_variable(script, LVar1);
+        vec01->y = (new_var * temp_f28) + (vec2->y * (1.0f - temp_f28)) + sp10;
         vec01->z = (evt_get_float_variable(script, LVar2) * temp_f28) + (vec2->z * (1.0f - temp_f28));
     } else {
         vec01->x = ((evt_get_float_variable(script, LVar0) * temp_f28) + (vec2->x * (1.0f - temp_f28))) - 50.0f;
         vec01->y = (evt_get_float_variable(script, LVar1) * temp_f28) + (vec2->y * (1.0f - temp_f28)) + sp10;
         vec01->z = ((evt_get_float_variable(script, LVar2) * temp_f28) + (vec2->z * (1.0f - temp_f28))) - 50.0f;
     }
+
     script->varTable[0] = s5;
     script->varTablePtr[1] = unkData;
     script->varTable[2] = s4;
