@@ -119,6 +119,13 @@ API_CALLABLE(N(Add1Coin)) {
 }
 
 EvtScript N(init) = {
+#if VERSION_PAL
+    EVT_CALL(GetLanguage, LVar0)
+    EVT_IF_EQ(LVar0, 3)
+        EVT_SET(LVar0, 2)
+    EVT_END_IF
+    EVT_CALL(SetModelTexVariant, 28, LVar0)
+#endif
     EVT_USE_ARRAY(N(slot_machine_buffer))
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
@@ -281,7 +288,9 @@ EvtScript N(idle) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_THREAD
+#if !VERSION_PAL
                 EVT_CALL(func_8026BF48, 1)
+#endif
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
                 EVT_CALL(SetBattleCamTarget, 0, 100, 0)
                 EVT_CALL(SetBattleCamOffsetZ, 0)
@@ -329,11 +338,22 @@ EvtScript N(idle) = {
                 EVT_SET(ArrayVar(2), 0)
                 EVT_SET(ArrayVar(3), 0)
                 EVT_SET(ArrayVar(4), 0)
+#if !VERSION_PAL
                 EVT_CALL(func_8026BF48, 0)
+#endif
             EVT_END_THREAD
+#if VERSION_PAL
+            EVT_WAIT(75)
+            EVT_CALL(UseBattleCamPreset, 2)
+            EVT_CALL(MoveBattleCamOver, 25)
+            EVT_WAIT(30)
+#endif
             EVT_SET(ArrayVar(1), 2)
             EVT_BREAK_LOOP
         EVT_END_LOOP
+#if VERSION_PAL
+        EVT_CALL(func_8026BF48, 0)
+#endif
     EVT_END_IF
     EVT_LABEL(1)
     EVT_WAIT(1)
@@ -386,6 +406,9 @@ EvtScript N(handleEvent) = {
                     EVT_WAIT(1)
                     EVT_CALL(TranslateModel, 29, 0, 0, 0)
                     EVT_IF_EQ(ArrayVar(2), 1)
+#if VERSION_PAL
+                        EVT_CALL(func_8026BF48, 1)
+#endif
                         EVT_SET(ArrayVar(8), 100)
                         EVT_SET(ArrayVar(9), 150)
                         EVT_SET(ArrayVar(10), 200)
@@ -408,6 +431,9 @@ EvtScript N(handleEvent) = {
                     EVT_WAIT(1)
                     EVT_CALL(TranslateModel, 29, 0, 0, 0)
                     EVT_IF_EQ(ArrayVar(3), 1)
+#if VERSION_PAL
+                        EVT_CALL(func_8026BF48, 1)
+#endif
                         EVT_SET(ArrayVar(8), 150)
                         EVT_SET(ArrayVar(9), 100)
                         EVT_SET(ArrayVar(10), 200)
@@ -430,6 +456,9 @@ EvtScript N(handleEvent) = {
                     EVT_WAIT(1)
                     EVT_CALL(TranslateModel, 29, 0, 0, 0)
                     EVT_IF_EQ(ArrayVar(4), 1)
+#if VERSION_PAL
+                        EVT_CALL(func_8026BF48, 1)
+#endif
                         EVT_SET(ArrayVar(8), 200)
                         EVT_SET(ArrayVar(9), 150)
                         EVT_SET(ArrayVar(10), 100)

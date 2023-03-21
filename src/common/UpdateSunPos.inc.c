@@ -11,7 +11,9 @@ API_CALLABLE(N(UpdateSunPos)) {
     f32 z;
     f32 angle;
     // Needed to make stack allocations line up
+#if !VERSION_PAL
     s8 unused[0x40];
+#endif
 
     angle = evt_get_variable(script, *args++) / 10.0;
     angle = angle * TAU;

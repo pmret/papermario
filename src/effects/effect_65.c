@@ -1,6 +1,8 @@
 #include "common.h"
 #include "effects_internal.h"
 
+#define MAX_POINTS (30)
+
 void effect_65_init(EffectInstance* effect);
 void effect_65_update(EffectInstance* effect);
 void effect_65_render(EffectInstance* effect);
@@ -11,12 +13,12 @@ extern Gfx D_09000400_3D15E0[];
 Gfx* D_E00CACB0[] = { D_09000400_3D15E0, D_09000400_3D15E0, D_09000400_3D15E0, D_09000400_3D15E0 };
 
 EffectInstance* effect_65_main(
-    s32 arg0,
-    f32 arg1,
-    f32 arg2,
-    f32 arg3,
-    f32 arg4,
-    s32 arg5
+    s32 variation,
+    f32 posX,
+    f32 posY,
+    f32 posZ,
+    f32 scale,
+    s32 duration
 ) {
     EffectBlueprint bp;
     EffectInstance* effect;
@@ -36,75 +38,75 @@ EffectInstance* effect_65_main(
     data = effect->data.unk_65 = shim_general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.unk_65 != NULL);
 
-    data->unk_00 = arg0;
-    data->unk_14 = 0;
-    if (arg5 <= 0) {
-        data->unk_10 = 1000;
+    data->variation = variation;
+    data->lifeTime = 0;
+    if (duration <= 0) {
+        data->timeLeft = 1000;
     } else {
-        data->unk_10 = arg5;
+        data->timeLeft = duration;
     }
-    data->unk_04 = arg1;
-    data->unk_08 = arg2;
-    data->unk_0C = arg3;
-    data->unk_34 = arg4;
+    data->unk_04 = posX;
+    data->unk_08 = posY;
+    data->unk_0C = posZ;
+    data->scale = scale;
 
-    switch (arg0) {
+    switch (variation) {
         case 0:
-            data->unk_18 = 255;
-            data->unk_1C = 255;
-            data->unk_20 = 255;
-            data->unk_28 = 225;
-            data->unk_2C = 225;
-            data->unk_30 = 225;
-            data->unk_24 = 255;
+            data->primR = 255;
+            data->primG = 255;
+            data->primB = 255;
+            data->envR = 225;
+            data->envG = 225;
+            data->envB = 225;
+            data->alpha = 255;
             break;
         case 1:
-            data->unk_18 = 255;
-            data->unk_1C = 245;
-            data->unk_20 = 230;
-            data->unk_28 = 45;
-            data->unk_2C = 35;
-            data->unk_30 = 15;
-            data->unk_24 = 255;
+            data->primR = 255;
+            data->primG = 245;
+            data->primB = 230;
+            data->envR = 45;
+            data->envG = 35;
+            data->envB = 15;
+            data->alpha = 255;
             break;
         case 2:
-            data->unk_18 = 255;
-            data->unk_1C = 0;
-            data->unk_20 = 0;
-            data->unk_28 = 155;
-            data->unk_2C = 125;
-            data->unk_30 = 125;
-            data->unk_24 = 255;
+            data->primR = 255;
+            data->primG = 0;
+            data->primB = 0;
+            data->envR = 155;
+            data->envG = 125;
+            data->envB = 125;
+            data->alpha = 255;
             break;
         case 3:
-            data->unk_18 = 255;
-            data->unk_1C = 255;
-            data->unk_20 = 255;
-            data->unk_28 = 255;
-            data->unk_2C = 65;
-            data->unk_30 = 20;
-            data->unk_24 = 255;
+            data->primR = 255;
+            data->primG = 255;
+            data->primB = 255;
+            data->envR = 255;
+            data->envG = 65;
+            data->envB = 20;
+            data->alpha = 255;
             break;
     }
 
-    data->pos.x = arg1;
-    data->pos.y = arg2;
-    data->pos.z = arg3;
+    data->pos.x = posX;
+    data->pos.y = posY;
+    data->pos.z = posZ;
 
-    for (i = 0; i < ARRAY_COUNT(data->unk_230); i++) {
-        data->unk_230[i] = FALSE;
+    for (i = 0; i < MAX_POINTS; i++) {
+        data->pathPointEnabled[i] = FALSE;
     }
 
-    data->unk_2A8 = 0;
-    data->unk_50[0] = arg1;
-    data->unk_C8[0] = arg2;
-    data->unk_140[0] = arg3;
-    data->unk_230[0] = TRUE;
-    data->unk_1B8[0] = 0;
-    data->unk_2AC[0] = 0;
-    data->unk_44 = shim_rand_int(30) + 10;
-    data->unk_48 = 0;
-    data->unk_4C = 0;
+    data->lastPointIndex = 0;
+    data->pathX[0] = posX;
+    data->pathY[0] = posY;
+    data->pathZ[0] = posZ;
+    data->pathPointEnabled[0] = TRUE;
+    data->pathTimestamp[0] = 0;
+    data->pathLength[0] = 0;
+    data->pathJitterX = shim_rand_int(30) + 10;
+    data->pathJitterY = 0;
+    data->pathJitterZ = 0;
 
     return effect;
 }
@@ -114,79 +116,80 @@ void effect_65_init(EffectInstance* effect) {
 
 void effect_65_update(EffectInstance* effect) {
     Effect65FXData* data = effect->data.unk_65;
-    s32 unk_00 = data->unk_00;
-    s32 unk_14;
-    f32 unk_2AC;
+    s32 variation = data->variation;
+    s32 lifeTime;
+    f32 pathLength;
     f32 posX;
     f32 posY;
     f32 posZ;
-    f32 tempX;
-    f32 tempY;
-    f32 tempZ;
+    f32 lastPointX;
+    f32 lastPointY;
+    f32 lastPointZ;
     f32 dist;
     s32 idx;
 
-    if (effect->flags & 0x10) {
-        effect->flags &= ~0x10;
-        data->unk_10 = 16;
+    if (effect->flags & EFFECT_INSTANCE_FLAG_10) {
+        effect->flags &= ~EFFECT_INSTANCE_FLAG_10;
+        data->timeLeft = 16;
     }
 
-    if (data->unk_10 < 1000) {
-        data->unk_10--;
+    if (data->timeLeft < 1000) {
+        data->timeLeft--;
     }
 
-    data->unk_14++;
-    if (data->unk_10 < 0) {
+    data->lifeTime++;
+    if (data->timeLeft < 0) {
         shim_remove_effect(effect);
         return;
     }
 
-    unk_14 = data->unk_14;
+    lifeTime = data->lifeTime;
 
-    if (data->unk_10 < 16) {
-        data->unk_24 = data->unk_10 * 16;
+    if (data->timeLeft < 16) {
+        data->alpha = data->timeLeft * 16;
     }
 
-    if (unk_00 == 3) {
-        data->unk_44 += shim_rand_int(10) - 5;
-        data->unk_48 += shim_rand_int(10) - 5;
-        data->pos.x += data->unk_44;
-        data->pos.y += data->unk_48;
-        data->pos.z += data->unk_4C;
+    if (variation == 3) {
+        data->pathJitterX += shim_rand_int(10) - 5;
+        data->pathJitterY += shim_rand_int(10) - 5;
+        data->pos.x += data->pathJitterX;
+        data->pos.y += data->pathJitterY;
+        data->pos.z += data->pathJitterZ;
     }
 
-    idx = data->unk_2A8 % 30;
+    idx = data->lastPointIndex % MAX_POINTS;
 
     posX = data->pos.x;
     posY = data->pos.y;
     posZ = data->pos.z;
 
-    tempX = data->unk_50[idx];
-    tempY = data->unk_C8[idx];
-    tempZ = data->unk_140[idx];
+    lastPointX = data->pathX[idx];
+    lastPointY = data->pathY[idx];
+    lastPointZ = data->pathZ[idx];
 
-    if (posX != tempX || posY != tempY || posZ != tempZ) {
-        unk_2AC = data->unk_2AC[idx];
+    if (posX != lastPointX || posY != lastPointY || posZ != lastPointZ) {
+        // add new point to the trajectory
+        pathLength = data->pathLength[idx];
 
-        data->unk_2A8++;
-        if (data->unk_2A8 >= 30) {
-            data->unk_2A8 = 0;
+        data->lastPointIndex++;
+        if (data->lastPointIndex >= MAX_POINTS) {
+            data->lastPointIndex = 0;
         }
 
-        idx = data->unk_2A8;
+        idx = data->lastPointIndex;
 
-        data->unk_230[idx] = TRUE;
-        data->unk_50[idx] = posX;
-        data->unk_C8[idx] = posY;
-        data->unk_140[idx] = posZ;
-        data->unk_1B8[idx] = unk_14;
+        data->pathPointEnabled[idx] = TRUE;
+        data->pathX[idx] = posX;
+        data->pathY[idx] = posY;
+        data->pathZ[idx] = posZ;
+        data->pathTimestamp[idx] = lifeTime;
 
-        dist = SQ(posX - tempX) + SQ(posY - tempY) + SQ(posZ - tempZ);
+        dist = SQ(posX - lastPointX) + SQ(posY - lastPointY) + SQ(posZ - lastPointZ);
         if (dist != 0.0f) {
             dist = shim_sqrtf(dist);
         }
 
-        data->unk_2AC[idx] = unk_2AC + dist;
+        data->pathLength[idx] = pathLength + dist;
     }
 }
 
@@ -203,196 +206,186 @@ void effect_65_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
-extern int COMBINED;
-extern int ENVIRONMENT;
-extern int SHADE;
-
-// floats and more
-#ifdef NON_MATCHING
 void effect_65_appendGfx(void* effect) {
-    Effect65FXData* data = ((EffectInstance*)effect)->data.unk_65; //s6
-    Matrix4f sp10;
-    f32 padding[2];
-    s32 sp50;
-    s32 sp54;
-    Vtx_t* sp5C;
+    Effect65FXData* data = ((EffectInstance*)effect)->data.unk_65;
+    Matrix4f mtx;
+    s32 lifeTime;
+    s32 variation;
+    f32 scale;
+    Vtx_t* vtxBuffer;
     Vtx_t* vtx;
-    s32 sp60;
-    s32 sp64;
-    s32 sp68;
-    f32 temp_f0;
-    f32 temp_f20;
-    f32 sp58;
-    f32 temp_f22;
-    f32 temp_f24;
-    f32 temp_f26;
-    f32 temp_f28;
-    f32 temp_f2;
-    f32 var_f12;
-    f32 var_f20;
-    f32 var_f30;
-    s32 primAlpha;
-    s32 temp_s5_2;
-    s32 var_fp;
-    s32 temp_s1;
-    s32 a;
-    s32 r, g, b;
+    s32 firstPointIdx;
+    s32 baseTexOffset;
+    s32 phase;
+    f32 deltaY;
+    f32 deltaX;
 
-    s32 idx; //s3
-    s32 next; //v1
+    f32 width;
+    f32 pathPointX;
+    f32 pathPointY;
+    f32 pathPointZ;
+    f32 deltaAngle;
+    f32 prevAngle;
+    f32 nextAngle;
+    f32 angle;
+    s32 primAlpha;
+    s32 texOffsetX;
+    s32 numPoints;
+    s32 pathPointLifetime;
+    s32 r, g, b, a;
+    f32 deltaZ;
+
+    s32 idx;
+    s32 next;
     s32 prev;
     s32 i;
+    s32 fadeOutPhase;
 
-    float new_var;
-
-    primAlpha = data->unk_24;
-    sp50 = data->unk_14;
-    sp54 = data->unk_00;
-    sp58 = data->unk_34;
+    lifeTime = data->lifeTime;
+    primAlpha = data->alpha;
+    variation = data->variation;
+    scale = data->scale;
 
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guTranslateF(sp10, 0.0f, 0.0f, 0.0f);
-    shim_guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
+    shim_guTranslateF(mtx, 0.0f, 0.0f, 0.0f);
+    shim_guMtxF2L(mtx, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    gSPDisplayList(gMainGfxPos++, D_E00CACB0[sp54]);
+    gSPDisplayList(gMainGfxPos++, D_E00CACB0[variation]);
 
-    if (sp54 >= 2) {
+    if (variation >= 2) {
         gDPSetCombineLERP(gMainGfxPos++, SHADE, ENVIRONMENT, TEXEL0, ENVIRONMENT, TEXEL0, 0, SHADE, 0, 0, 0, 0, COMBINED, COMBINED, 0, PRIMITIVE, 0);
     }
 
-    gDPSetPrimColor(gMainGfxPos++, 0, 0, data->unk_18, data->unk_1C, data->unk_20, primAlpha);
-    gDPSetEnvColor(gMainGfxPos++, data->unk_28, data->unk_2C, data->unk_30, 0);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, data->primR, data->primG, data->primB, primAlpha);
+    gDPSetEnvColor(gMainGfxPos++, data->envR, data->envG, data->envB, 0);
     gSPBranchList(gMainGfxPos, gMainGfxPos + 0x79);
 
-    sp5C = (Vtx_t*) (gMainGfxPos + 1);
-    sp60 = -1;
-    sp64 = (sp50 & 0x3F) << 5;
+    vtxBuffer = (Vtx_t*) (gMainGfxPos + 1);
+    firstPointIdx = -1;
+    baseTexOffset = (lifeTime & 0x3F) << 5;
     gMainGfxPos += 0x79;
 
-    // use i in iteration?
-    var_fp = 0;
-    for (i = 0; i < 30; i++) {
+    numPoints = 0;
+    for (i = 0; i < MAX_POINTS; i++) {
         s32 a1 = i + 1;
-        s32 idx = (data->unk_2A8 + a1) % 30;
-        if (data->unk_230[idx]) {
-            var_fp++;
+        s32 idx = (data->lastPointIndex + a1) % MAX_POINTS;
+        if (data->pathPointEnabled[idx]) {
+            numPoints++;
         }
     }
 
-    var_fp--;
-    if (var_fp > 0) {
-        sp68 = 0;
-        for (i = 0; i < 30; i++) {
+    numPoints--;
+    if (numPoints > 0) {
+        phase = 0;
+        for (i = 0; i < MAX_POINTS; i++) {
             s32 a1 = i + 1;
-            vtx = &sp5C[i * 2];
-            prev = sp68 / var_fp;
-            idx = (data->unk_2A8 + a1) % 30;
-            a = shim_sin_deg(prev) * 255.0f;
+            vtx = &vtxBuffer[i * 2];
+            fadeOutPhase = phase / numPoints;
+            idx = (data->lastPointIndex + a1) % MAX_POINTS;
+
+            a = shim_sin_deg(fadeOutPhase) * 255.0f;
             if (a > 200) {
                 a = 200;
             }
 
-            if (data->unk_230[idx]) {
-                if (sp60 == -1) {
-                    do {
-                        next = idx + 1;
-                        if (next >= 30) {
-                            next = 0;
-                        }
-                        sp60 = i;
-                        var_f30 = -shim_atan2(data->unk_C8[next], -data->unk_50[next], data->unk_C8[idx], -data->unk_50[idx]);
-                    } while (0); // TODO required to match
-                } else {
-                    if (i != 29) {
-                        next = idx + 1;
-                        prev = idx - 1;
-                        if (next >= 30) {
-                            next = 0;
-                        }
-                        if (prev < 0) {
-                            prev = 29;
-                        }
-                        var_f20 = -shim_atan2(data->unk_C8[next], -data->unk_50[next], data->unk_C8[idx], -data->unk_50[idx]);
-                        var_f12 = -shim_atan2(data->unk_C8[idx], -data->unk_50[idx], data->unk_C8[prev], -data->unk_50[prev]);
-                        temp_f2 = var_f12 - var_f20;
-                        if (temp_f2 > 180.0f) {
-                            var_f20 += 360.0f;
-                        } else if (temp_f2 < -180.0f) {
-                            var_f12 += 360.0f;
-                        }
-                        var_f30 = (var_f20 + var_f12);
-                        var_f30 *= 0.5;
-                    }
-                }
-                temp_f24 = data->unk_50[idx];
-                temp_f26 = data->unk_C8[idx];
-                temp_f28 = data->unk_140[idx];
-                new_var = 24.0f;
-                //temp_v1 = data->unk_1B8[idx];
-                temp_s1 = sp50 - data->unk_1B8[idx];
-                temp_f22 = (shim_sin_deg((sp50 - data->unk_1B8[idx] * 80) * 4) * 3.0f + 16.0f + temp_s1);
-                temp_f22 *= sp58;
-                temp_s5_2 = sp64;
-                temp_s5_2 = (data->unk_2AC[idx] * new_var) + temp_s5_2;
-
-                do {} while (0);
-
-                r = 255;
-                g = 255;
-                b = 255 - temp_s1 * 100;
-                if (b < 0) {
-                    g = (f32) b * 0.8 + 255.0;
-                    b = 0;
-                    if (g < 0) {
-                        r = (f32) g * 0.4 + 255.0;
-                        g = 0;
-                        sp54 = r < 0;
-                        if (sp54) {
-                            r = 0;
-                        }
-                    }
-                }
-
-                temp_f20 = temp_f22 * shim_sin_deg(var_f30);
-                temp_f0 = temp_f22 * shim_cos_deg(var_f30);
-
-                vtx->ob[0] = temp_f24 + temp_f20;
-                vtx->ob[1] = temp_f26 + temp_f0;
-                vtx->ob[2] = temp_f28 + 0.0f;
-                vtx->tc[0] = temp_s5_2;
-                vtx->tc[1] = 0x400;
-                vtx->cn[0] = r;
-                vtx->cn[1] = g;
-                vtx->cn[2] = b;
-                vtx->cn[3] = a;
-                vtx++;
-
-                vtx->ob[0] = temp_f24 - temp_f20;
-                vtx->ob[1] = temp_f26 - temp_f0;
-                vtx->ob[2] = temp_f28 + 0.0f;
-                vtx->tc[0] = temp_s5_2;
-                vtx->tc[1] = 0;
-                vtx->cn[0] = r;
-                vtx->cn[1] = g;
-                vtx->cn[2] = b;
-                vtx->cn[3] = a;
-                vtx++;
-
-                sp68 += 180;
+            if (!data->pathPointEnabled[idx]) {
+                continue;
             }
+
+            if (firstPointIdx == -1) {
+                next = idx + 1;
+                if (next >= MAX_POINTS) {
+                    next = 0;
+                }
+                firstPointIdx = i;
+                angle = -shim_atan2(data->pathY[next], -data->pathX[next], data->pathY[idx], -data->pathX[idx]);
+            } else {
+                if (i != MAX_POINTS - 1) {
+                    next = idx + 1;
+                    prev = idx - 1;
+                    if (next >= MAX_POINTS) {
+                        next = 0;
+                    }
+                    if (prev < 0) {
+                        prev = MAX_POINTS - 1;
+                    }
+                    nextAngle = -shim_atan2(data->pathY[next], -data->pathX[next], data->pathY[idx], -data->pathX[idx]);
+                    prevAngle = -shim_atan2(data->pathY[idx], -data->pathX[idx], data->pathY[prev], -data->pathX[prev]);
+                    deltaAngle = prevAngle - nextAngle;
+                    if (deltaAngle > 180.0f) {
+                        nextAngle += 360.0f;
+                    } else if (deltaAngle < -180.0f) {
+                        prevAngle += 360.0f;
+                    }
+                    angle = nextAngle + prevAngle;
+                    angle *= 0.5;
+                }
+            }
+            pathPointX = data->pathX[idx];
+            pathPointY = data->pathY[idx];
+            pathPointZ = data->pathZ[idx];
+            pathPointLifetime = lifeTime - data->pathTimestamp[idx];
+            width = shim_sin_deg((lifeTime - data->pathTimestamp[idx] * 80) * 4) * 3.0f + 16.0f + pathPointLifetime;
+
+            width *= scale;
+            if (variation >= 0) {
+                texOffsetX = (data->pathLength[idx] * 24.0f) + baseTexOffset;
+            } else {
+                texOffsetX = (data->pathLength[idx] * 24.0f) + baseTexOffset;
+            }
+
+            r = 255;
+            g = 255;
+            b = 255 - pathPointLifetime * 100;
+            if (b < 0) {
+                g = (f32) b * 0.8 + 255.0;
+                b = 0;
+                if (g < 0) {
+                    r = (f32) g * 0.4 + 255.0;
+                    g = 0;
+                    if (r < 0) {
+                        r = 0;
+                    }
+                }
+            }
+
+            deltaX = width * shim_sin_deg(angle);
+            deltaY = width * shim_cos_deg(angle);
+            deltaZ = 0.0f;
+
+            vtx->ob[0] = pathPointX + deltaX;
+            vtx->ob[1] = pathPointY + deltaY;
+            vtx->ob[2] = pathPointZ + deltaZ;
+            vtx->tc[0] = texOffsetX;
+            vtx->tc[1] = 0x400;
+            vtx->cn[0] = r;
+            vtx->cn[1] = g;
+            vtx->cn[2] = b;
+            vtx->cn[3] = a;
+            vtx++;
+
+            vtx->ob[0] = pathPointX - deltaX;
+            vtx->ob[1] = pathPointY - deltaY;
+            vtx->ob[2] = pathPointZ + deltaZ;
+            vtx->tc[0] = texOffsetX;
+            vtx->tc[1] = 0;
+            vtx->cn[0] = r;
+            vtx->cn[1] = g;
+            vtx->cn[2] = b;
+            vtx->cn[3] = a;
+            vtx++;
+
+            phase += 180;
         }
 
-        for (i = sp60; i < 29; i++) {
-            gSPVertex(gMainGfxPos++, &sp5C[i * 2], 4, 0);
+        for (i = firstPointIdx; i < MAX_POINTS - 1; i++) {
+            gSPVertex(gMainGfxPos++, &vtxBuffer[i * 2], 4, 0);
             gSP2Triangles(gMainGfxPos++, 0, 2, 1, 0, 1, 2, 3, 0);
         }
     }
 
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
-#else
-INCLUDE_ASM(s32, "effects/effect_65", effect_65_appendGfx);
-#endif

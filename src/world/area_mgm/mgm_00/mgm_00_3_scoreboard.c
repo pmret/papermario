@@ -70,7 +70,7 @@ Gfx N(Gfx_RecordDisplay_Init)[] = {
 
 #if VERSION_PAL
 void N(draw_record_display)(RecordDisplayData* data, s32 alpha);
-INCLUDE_ASM(void, "world/area_mgm/mgm_00/mgm_00_3_scoreboard", N(draw_record_display));
+INCLUDE_ASM(void, "world/area_mgm/mgm_00/mgm_00_3_scoreboard", mgm_00_draw_record_display);
 #else
 void N(draw_record_display)(RecordDisplayData* data, s32 alpha) {
     if (alpha > 0) {

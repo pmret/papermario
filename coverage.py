@@ -76,6 +76,7 @@ def stuff(version):
                     if not os.listdir(folder[0]):
                         os.removedirs(folder[0])
 
-stuff("us")
 stuff("jp")
+stuff("us")
+stuff("pal")
 stuff("ique")

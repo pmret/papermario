@@ -3668,7 +3668,7 @@ void func_8025D71C(ActorPart* part, s32 decorationIndex) {
             effect->data.unk_65->pos.x = part->currentPos.x;
             effect->data.unk_65->pos.y = part->currentPos.y;
             effect->data.unk_65->pos.z = part->currentPos.z;
-            effect->data.unk_65->unk_34 = decor->unk_8C6[decorationIndex].unk00 / 100.0f;
+            effect->data.unk_65->scale = decor->unk_8C6[decorationIndex].unk00 / 100.0f;
             break;
     }
 }

@@ -289,7 +289,7 @@ API_CALLABLE(N(OnHitBox)) {
 
 #if VERSION_PAL
 API_CALLABLE(N(SetBoxContents));
-INCLUDE_ASM(ApiResult, "world/area_mgm/mgm_02/mgm_02_2_npc", N(SetBoxContents));
+INCLUDE_ASM(ApiResult, "world/area_mgm/mgm_02/mgm_02_2_npc", mgm_02_SetBoxContents);
 #else
 API_CALLABLE(N(SetBoxContents)) {
     s32 initialConfiguration;
@@ -417,7 +417,7 @@ API_CALLABLE(N(SetBoxContents)) {
 
 #if VERSION_PAL
 API_CALLABLE(N(RunMinigame));
-INCLUDE_ASM(ApiResult, "world/area_mgm/mgm_02/mgm_02_2_npc", N(RunMinigame));
+INCLUDE_ASM(ApiResult, "world/area_mgm/mgm_02/mgm_02_2_npc", mgm_02_RunMinigame);
 #else
 API_CALLABLE(N(RunMinigame)) {
     SmashGameData* data;

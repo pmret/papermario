@@ -2041,7 +2041,7 @@ EvtScript N(attackWindBreath) = {
         EVT_CALL(SetupMashMeter, 5, 20, 40, 60, 80, 100)
         EVT_WAIT(10)
         EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
-        EVT_CALL(action_command_whirlwind_start, 0, 200, 3)
+        EVT_CALL(action_command_whirlwind_start, 0, 200 * DT, 3)
         EVT_THREAD
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_SCALE_X), LVar2)
             EVT_SET(LVar3, LVar2)
@@ -4521,7 +4521,7 @@ EvtScript N(attackTuffPuffs) = {
     EVT_IF_FLAG(LVar0, 0x00000200)
         EVT_ADD(LVar9, 1)
     EVT_END_IF
-    EVT_SET(LVarA, 30)
+    EVT_SET(LVarA, 30 * DT)
     EVT_SUB(LVarA, LVar9)
     EVT_SET(LVar3, 0)
     EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_TUFF_PUFF_BIT_ARRAY), LVar0)
