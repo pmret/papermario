@@ -796,14 +796,14 @@ BSS char N(D_8024F37C)[0x4];
 BSS s32 N(D_8024F380);
 BSS char N(D_8024F384)[0x74];
 
-typedef struct UnkHos05Struct {
-    /* 0x00 */ Vec3f unk_00;
-    /* 0x0C */ Vec3f unk_0C;
-    /* 0x18 */ Vec3f unk_18;
-    /* 0x24 */ f32 unk_24;
-} UnkHos05Struct; // size = 0x28
+typedef struct UnkHos05Path {
+    /* 0x00 */ Vec3f startPoint;
+    /* 0x0C */ Vec3f midPoint;
+    /* 0x18 */ Vec3f endPoint;
+    /* 0x24 */ char unk_24[4];
+} UnkHos05Path; // size = 0x28
 
-BSS UnkHos05Struct N(D_8024F3F8)[7];
+BSS UnkHos05Path N(D_8024F3F8)[7];
 
 BSS StoryGraphicData N(StoryGraphics);
 
@@ -882,172 +882,194 @@ API_CALLABLE(N(CamMove_OrbitKammy)) {
     }
 }
 
-// float regalloc stuff
-#ifdef WIP
-ApiStatus func_802428C8_A2CB08(Evt* script, s32 isInitialCall) {
+// TODO document this function
+API_CALLABLE(func_802428C8_A2CB08) {
     Bytecode* args = script->ptrReadPos;
-    s32 temp_s6 = evt_get_variable(script, *args++);
-    f32 sp10;
-    f32 temp_f28;
-    EffectInstance* temp_a0;
+    s32 arg0 = evt_get_variable(script, *args++);
+    f32 arg1 = evt_get_float_variable(script, *args++);
+    f32 arg2 = evt_get_float_variable(script, *args++);
+    EffectInstance* arrayVar0;
     f32 xPos, yPos, zPos;
-    f32 temp_f24;
     EffectInstance* effect;
-    UnkHos05Struct* unkData;
-    Vec3f* vec01; // vectors 0, 1
-    Vec3f* vec2; // vector 2
-    f32 angle;
-    s32 s4;
-    s32 s5;
+    UnkHos05Path* path;
+    Vec3f* point;
+    Vec3f* endPoint;
+    s32 numPoints;
+    s32 pathTime;
+    s32 i;
 
+    arrayVar0 = (EffectInstance*) evt_get_variable(script, ArrayVar(0));
+    effect = arrayVar0;
 
-    sp10 = evt_get_float_variable(script, *args++);
-    temp_f28 = evt_get_float_variable(script, *args++);
-    temp_a0 = evt_get_variable(script, ArrayVar(0));
-
-
-    effect = temp_a0;
-
-    switch (temp_s6) {
+    // set endPoint
+    switch (arg0) {
         case 1:
-            unkData = &N(D_8024F3F8)[0];
-            vec01 = &unkData->unk_00;
-            s5 = 30;
-            s4 = 3;
-            angle = 90.0f;
-            yPos = (u32) (effect->data.somethingRotating->unk_14 + 30);
-            yPos = yPos * 4.0f;
-            temp_f24 = sin_deg(yPos + 51.43);
-            xPos = effect->data.somethingRotating->pos.x + (sin_deg(angle) * 50.0f * temp_f24);
-            yPos = effect->data.somethingRotating->pos.y + (cos_deg(yPos + 51.43) * 50.0f);
-            zPos = effect->data.somethingRotating->pos.z + (sin_deg(angle) * 50.0f * temp_f24);
-            unkData->unk_18.x = xPos;
-            unkData->unk_18.y = yPos;
-            unkData->unk_18.z = zPos;
+            path = &N(D_8024F3F8)[0];
+            i = 1;
+            point = &path->startPoint;
+            pathTime = 30;
+            numPoints = 3;
+            {
+                f32 angle = 90.0f;
+                u32 unk_14 = effect->data.somethingRotating->unk_14 + 30;
+                f32 angle3 = unk_14 * 4.0f + (f32) i * 51.43;
+                f32 radius = 50.0f;
+                f32 temp_f24 = sin_deg(angle3);
+                xPos = effect->data.somethingRotating->pos.x + sin_deg(angle) * radius * temp_f24 ;
+                yPos = effect->data.somethingRotating->pos.y + cos_deg(angle3) * radius;
+                // @bug should be `zPos = effect->data.somethingRotating->pos.z + cos_deg(angle) * radius * temp_f24;`
+                zPos = effect->data.somethingRotating->pos.z + sin_deg(angle) * radius * temp_f24;
+                path->endPoint.x = xPos;
+                path->endPoint.y = yPos;
+                path->endPoint.z = zPos;
+            }
             break;
         case 2:
-            unkData = &N(D_8024F3F8)[1];
-            vec01 = &unkData->unk_00;
-            s5 = 30;
-            s4 = 3;
-            angle = 90.0f;
-            yPos = (u32) (effect->data.somethingRotating->unk_14 + 30);
-            yPos = yPos * 4.0f;
-            temp_f24 = sin_deg(yPos + 360.01);
-            xPos = effect->data.somethingRotating->pos.x + (sin_deg(angle) * 50.0f * temp_f24);
-            yPos = effect->data.somethingRotating->pos.y + (cos_deg(yPos + 360.01) * 50.0f);
-            zPos = effect->data.somethingRotating->pos.z + (sin_deg(angle) * 50.0f * temp_f24);
-            unkData->unk_18.x = xPos;
-            unkData->unk_18.y = yPos;
-            unkData->unk_18.z = zPos;
+            path = &N(D_8024F3F8)[1];
+            i = 7;
+            point = &path->startPoint;
+            pathTime = 30;
+            numPoints = 3;
+            {
+                f32 angle = 90.0f;
+                u32 unk_14 = effect->data.somethingRotating->unk_14 + 30;
+                f32 angle3 = unk_14 * 4.0f + (f32) i * 51.43;
+                f32 radius = 50.0f;
+                f32 temp_f24 = sin_deg(angle3);
+                xPos = effect->data.somethingRotating->pos.x + sin_deg(angle) * radius * temp_f24 ;
+                yPos = effect->data.somethingRotating->pos.y + cos_deg(angle3) * radius;
+                zPos = effect->data.somethingRotating->pos.z + sin_deg(angle) * radius * temp_f24;
+                path->endPoint.x = xPos;
+                path->endPoint.y = yPos;
+                path->endPoint.z = zPos;
+            }
             break;
         case 3:
-            unkData = &N(D_8024F3F8)[2];
-            vec01 = &unkData->unk_00;
-            s5 = 30;
-            s4 = 3;
-            angle = 90.0f;
-            yPos = (u32) (effect->data.somethingRotating->unk_14 + 30);
-            yPos = yPos * 4.0f;
-            temp_f24 = sin_deg(yPos + 154.29);
-            xPos = effect->data.somethingRotating->pos.x + (sin_deg(angle) * 50.0f * temp_f24);
-            yPos = effect->data.somethingRotating->pos.y + (cos_deg(yPos + 154.29) * 50.0f);
-            zPos = effect->data.somethingRotating->pos.z + (sin_deg(angle) * 50.0f * temp_f24);
-            unkData->unk_18.x = xPos;
-            unkData->unk_18.y = yPos;
-            unkData->unk_18.z = zPos;
+            path = &N(D_8024F3F8)[2];
+            i = 3;
+            point = &path->startPoint;
+            pathTime = 30;
+            numPoints = 3;
+            {
+                f32 angle = 90.0f;
+                u32 unk_14 = effect->data.somethingRotating->unk_14 + 30;
+                f32 angle3 = unk_14 * 4.0f + (f32) i * 51.43;
+                f32 radius = 50.0f;
+                f32 temp_f24 = sin_deg(angle3);
+                xPos = effect->data.somethingRotating->pos.x + sin_deg(angle) * radius * temp_f24 ;
+                yPos = effect->data.somethingRotating->pos.y + cos_deg(angle3) * radius;
+                zPos = effect->data.somethingRotating->pos.z + sin_deg(angle) * radius * temp_f24;
+                path->endPoint.x = xPos;
+                path->endPoint.y = yPos;
+                path->endPoint.z = zPos;
+            }
             break;
         case 4:
-            unkData = &N(D_8024F3F8)->unk_18;
-            vec01 = &unkData->unk_00;
-            s5 = 30;
-            angle = 90.0f;
-            yPos = (u32) (effect->data.somethingRotating->unk_14 + 30);
-            s4 = 3;
-            yPos = yPos * 4.0f;
-            temp_f24 = sin_deg(yPos + 205.72);
-            xPos = effect->data.somethingRotating->pos.x + (sin_deg(angle) * 50.0f * temp_f24);
-            yPos = effect->data.somethingRotating->pos.y + (cos_deg(yPos + 205.72) * 50.0f);
-            zPos = effect->data.somethingRotating->pos.z + (sin_deg(angle) * 50.0f * temp_f24);
-            unkData->unk_18.x = xPos;
-            unkData->unk_18.y = yPos;
-            unkData->unk_18.z = zPos;
+            path = &N(D_8024F3F8)[3];
+            i = 4;
+            point = &path->startPoint;
+            pathTime = 30;
+            {
+                f32 angle = 90.0f;
+                u32 unk_14 = effect->data.somethingRotating->unk_14 + 30;
+                f32 angle3 = unk_14 * 4.0f + (f32) i * 51.43;
+                f32 radius = 50.0f;
+                f32 temp_f24 = sin_deg(angle3);
+                numPoints = 3;
+                xPos = effect->data.somethingRotating->pos.x + sin_deg(angle) * radius * temp_f24 ;
+                yPos = effect->data.somethingRotating->pos.y + cos_deg(angle3) * radius;
+                zPos = effect->data.somethingRotating->pos.z + sin_deg(angle) * radius * temp_f24;
+                path->endPoint.x = xPos;
+                path->endPoint.y = yPos;
+                path->endPoint.z = zPos;
+            }
             break;
         case 5:
-            unkData = &N(D_8024F3F8)[4];
-            vec01 = &unkData->unk_00;
-            s5 = 30;
-            s4 = 3;
-            angle = 90.0f;
-            yPos = (u32) (effect->data.somethingRotating->unk_14 + 30);
-            yPos = yPos * 4.0f;
-            temp_f24 = sin_deg(yPos + 308.58);
-            xPos = effect->data.somethingRotating->pos.x + (sin_deg(angle) * 50.0f * temp_f24);
-            yPos = effect->data.somethingRotating->pos.y + (cos_deg(yPos + 308.58) * 50.0f);
-            zPos = effect->data.somethingRotating->pos.z + (sin_deg(angle) * 50.0f * temp_f24);
-            unkData->unk_18.x = xPos;
-            unkData->unk_18.y = yPos;
-            unkData->unk_18.z = zPos;
+            path = &N(D_8024F3F8)[4];
+            i = 6;
+            point = &path->startPoint;
+            pathTime = 30;
+            numPoints = 3;
+            {
+                f32 angle = 90.0f;
+                u32 unk_14 = effect->data.somethingRotating->unk_14 + 30;
+                f32 angle3 = unk_14 * 4.0f + (f32) i * 51.43;
+                f32 radius = 50.0f;
+                f32 temp_f24 = sin_deg(angle3);
+                xPos = effect->data.somethingRotating->pos.x + sin_deg(angle) * radius * temp_f24 ;
+                yPos = effect->data.somethingRotating->pos.y + cos_deg(angle3) * radius;
+                zPos = effect->data.somethingRotating->pos.z + sin_deg(angle) * radius * temp_f24;
+                path->endPoint.x = xPos;
+                path->endPoint.y = yPos;
+                path->endPoint.z = zPos;
+            }
             break;
         case 6:
-            unkData = &N(D_8024F3F8)[5];
-            vec01 = &unkData->unk_00;
-            s5 = 30;
-            s4 = 3;
-            angle = 90.0f;
-            yPos = (u32) (effect->data.somethingRotating->unk_14 + 30);
-            yPos = yPos * 4.0f;
-            temp_f24 = sin_deg(yPos + 102.86);
-            xPos = effect->data.somethingRotating->pos.x + (sin_deg(angle) * 50.0f * temp_f24);
-            yPos = effect->data.somethingRotating->pos.y + (cos_deg(yPos + 102.86) * 50.0f);
-            zPos = effect->data.somethingRotating->pos.z + (sin_deg(angle) * 50.0f * temp_f24);
-            unkData->unk_18.x = xPos;
-            unkData->unk_18.y = yPos;
-            unkData->unk_18.z = zPos;
+            path = &N(D_8024F3F8)[5];
+            i = 2;
+            point = &path->startPoint;
+            pathTime = 30;
+            numPoints = 3;
+            {
+                f32 angle = 90.0f;
+                u32 unk_14 = effect->data.somethingRotating->unk_14 + 30;
+                f32 angle3 = unk_14 * 4.0f + (f32) i * 51.43;
+                f32 radius = 50.0f;
+                f32 temp_f24 = sin_deg(angle3);
+                xPos = effect->data.somethingRotating->pos.x + sin_deg(angle) * radius * temp_f24 ;
+                yPos = effect->data.somethingRotating->pos.y + cos_deg(angle3) * radius;
+                zPos = effect->data.somethingRotating->pos.z + sin_deg(angle) * radius * temp_f24;
+                path->endPoint.x = xPos;
+                path->endPoint.y = yPos;
+                path->endPoint.z = zPos;
+            }
             break;
         default:
-            unkData = &N(D_8024F3F8)[6];
-            vec01 = &unkData->unk_00;
-            s5 = 30;
-            s4 = 3;
-            angle = 90.0f;
-            yPos = (u32) (effect->data.somethingRotating->unk_14 + 30);
-            yPos = yPos * 4.0f;
-            temp_f24 = sin_deg(yPos + 257.15);
-            xPos = effect->data.somethingRotating->pos.x + (sin_deg(angle) * 50.0f * temp_f24);
-            yPos = effect->data.somethingRotating->pos.y + (cos_deg(yPos + 257.15) * 50.0f);
-            zPos = effect->data.somethingRotating->pos.z + (sin_deg(angle) * 50.0f * temp_f24);
-            unkData->unk_18.x = xPos;
-            unkData->unk_18.y = yPos;
-            unkData->unk_18.z = zPos;
+            path = &N(D_8024F3F8)[6];
+            i = 5;
+            point = &path->startPoint;
+            pathTime = 30;
+            numPoints = 3;
+            {
+                f32 angle = 90.0f;
+                u32 unk_14 = effect->data.somethingRotating->unk_14 + 30;
+                f32 angle3 = unk_14 * 4.0f + (f32) i * 51.43;
+                f32 radius = 50.0f;
+                f32 temp_f24 = sin_deg(angle3);
+                xPos = effect->data.somethingRotating->pos.x + sin_deg(angle) * radius * temp_f24 ;
+                yPos = effect->data.somethingRotating->pos.y + cos_deg(angle3) * radius;
+                zPos = effect->data.somethingRotating->pos.z + sin_deg(angle) * radius * temp_f24;
+                path->endPoint.x = xPos;
+                path->endPoint.y = yPos;
+                path->endPoint.z = zPos;
+            }
             break;
     }
 
-    vec01->x = evt_get_float_variable(script, LVar0);
-    vec01->y = evt_get_float_variable(script, LVar1);
-    vec01->z = evt_get_float_variable(script, LVar2);
+    // set startPoint
+    point->x = evt_get_float_variable(script, LVar0);
+    point->y = evt_get_float_variable(script, LVar1);
+    point->z = evt_get_float_variable(script, LVar2);
 
-    vec2 = &vec01[2];
-    vec01++;
+    endPoint = &point[2];
+    point++;
 
-    if (temp_s6 != 2) {
-        vec01->x = (evt_get_float_variable(script, LVar0) * temp_f28) + (vec2->x * (1.0f - temp_f28));
-        vec01->y = (evt_get_float_variable(script, LVar1) * temp_f28) + (vec2->y * (1.0f - temp_f28)) + sp10;
-        vec01->z = (evt_get_float_variable(script, LVar2) * temp_f28) + (vec2->z * (1.0f - temp_f28));
+    // set midPoint
+    if (arg0 != 2) {
+        point->x = (evt_get_float_variable(script, LVar0) * arg2) + (endPoint->x * (1.0f - arg2));
+        point->y = (evt_get_float_variable(script, LVar1) * arg2) + (endPoint->y * (1.0f - arg2)) + arg1;
+        point->z = (evt_get_float_variable(script, LVar2) * arg2) + (endPoint->z * (1.0f - arg2));
     } else {
-        vec01->x = ((evt_get_float_variable(script, LVar0) * temp_f28) + (vec2->x * (1.0f - temp_f28))) - 50.0f;
-        vec01->y = (evt_get_float_variable(script, LVar1) * temp_f28) + (vec2->y * (1.0f - temp_f28)) + sp10;
-        vec01->z = ((evt_get_float_variable(script, LVar2) * temp_f28) + (vec2->z * (1.0f - temp_f28))) - 50.0f;
+        point->x = ((evt_get_float_variable(script, LVar0) * arg2) + (endPoint->x * (1.0f - arg2))) - 50.0f;
+        point->y = (evt_get_float_variable(script, LVar1) * arg2) + (endPoint->y * (1.0f - arg2)) + arg1;
+        point->z = ((evt_get_float_variable(script, LVar2) * arg2) + (endPoint->z * (1.0f - arg2))) - 50.0f;
     }
-    script->varTable[0] = s5;
-    script->varTablePtr[1] = unkData;
-    script->varTable[2] = s4;
+
+    script->varTable[0] = pathTime;
+    script->varTablePtr[1] = path;
+    script->varTable[2] = numPoints;
     return ApiStatus_DONE2;
 }
-#else
-API_CALLABLE(func_802428C8_A2CB08);
-INCLUDE_ASM(s32, "world/area_hos/hos_05/A2AAC0", func_802428C8_A2CB08);
-#endif
 
 EvtScript N(EVS_UpdateWorldFogParams) = {
     EVT_SET(LVar0, 120)
