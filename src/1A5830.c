@@ -810,35 +810,35 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
     return hitResult;
 }
 
-// missing one move, not equivalent
-#ifdef NON_EQUIVALENT
 s32 dispatch_damage_event_actor(Actor* actor, s32 damageAmount, s32 originalEvent, s32 stopMotion) {
     BattleStatus* battleStatus = &gBattleStatus;
-    ActorState* state;
+    ActorState* state = &actor->state;
     s32 dispatchEvent = originalEvent;
     s32 currentAttackDamage;
     s32 hpChangeCounter;
+    s32 hpChange;
+    s32 flagCheck;
+    s32 new_var;
 
     battleStatus->currentAttackDamage = damageAmount;
-    currentAttackDamage = battleStatus->currentAttackDamage;
-
-    actor->hpChangeCounter += currentAttackDamage;
-    hpChangeCounter = actor->hpChangeCounter;
-    actor->damageCounter += hpChangeCounter;
-    actor->hpChangeCounter -= hpChangeCounter;
+    hpChange = (s16) damageAmount;
+    actor->hpChangeCounter += hpChange;
+    new_var = actor->hpChangeCounter;
+    hpChange = new_var;
+    actor->damageCounter += hpChange;
+    actor->hpChangeCounter -= hpChange;
     battleStatus->lastAttackDamage = 0;
-    do { } while (0);
-    actor->currentHP -= hpChangeCounter;
-    state = &actor->state;
+    actor->currentHP -= hpChange;
+
     if (actor->currentHP <= 0) {
         dispatchEvent = EVENT_DEATH;
         battleStatus->lastAttackDamage += actor->currentHP;
         actor->currentHP = 0;
     }
-    battleStatus->lastAttackDamage += currentAttackDamage;
+
+    battleStatus->lastAttackDamage += hpChange;
     actor->lastDamageTaken = battleStatus->lastAttackDamage;
     battleStatus->unk_19A = 0;
-
     if (battleStatus->flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
         if (dispatchEvent == EVENT_HIT_COMBO) {
             dispatchEvent = EVENT_HIT;
@@ -856,7 +856,7 @@ s32 dispatch_damage_event_actor(Actor* actor, s32 damageAmount, s32 originalEven
         }
     }
 
-    if (stopMotion == 0) {
+    if (!stopMotion) {
         s32 oldTargetActorID = actor->targetActorID;
 
         if (func_80263230(actor, actor) != 0) {
@@ -878,10 +878,6 @@ s32 dispatch_damage_event_actor(Actor* actor, s32 damageAmount, s32 originalEven
     dispatch_event_actor(actor, dispatchEvent);
     return 0;
 }
-#else
-s32 dispatch_damage_event_actor(Actor* actor, s32 damageAmount, s32 originalEvent, s32 stopMotion);
-INCLUDE_ASM(s32, "1A5830", dispatch_damage_event_actor);
-#endif
 
 s32 dispatch_damage_event_actor_0(Actor* actor, s32 damageAmount, s32 event) {
     return dispatch_damage_event_actor(actor, damageAmount, event, FALSE);

@@ -896,7 +896,6 @@ s32 dispatch_damage_event_partner(s32 damageAmount, s32 event, s32 stopMotion) {
     ActorState* state = &partner->state;
     s32 hpChange;
     s32 flagCheck;
-    s32 oldHP;
 
     battleStatus->currentAttackDamage = damageAmount;
 
@@ -909,12 +908,10 @@ s32 dispatch_damage_event_partner(s32 damageAmount, s32 event, s32 stopMotion) {
     partner->hpChangeCounter -= hpChange;
     battleStatus->lastAttackDamage = 0;
     partner->currentHP -= hpChange;
-    oldHP = partner->currentHP;
 
-
-    if (partner->currentHP < 1) {
+    if (partner->currentHP <= 0) {
         event = EVENT_DEATH;
-        battleStatus->lastAttackDamage += oldHP;
+        battleStatus->lastAttackDamage += partner->currentHP;
         partner->currentHP = 0;
     }
 
