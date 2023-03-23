@@ -48,7 +48,7 @@ API_CALLABLE(N(GiveRefund)) {
         get_screen_coords(gCurrentCameraID, posX, posY, posZ, &iconX, &iconY, &iconZ);
 
 #if VERSION_PAL
-        switch(gCurrentLanguage) {
+        switch (gCurrentLanguage) {
             case 0:
                 itemIcon = tempIcon = hud_element_create(&HES_Refund);
                 itemIcon = tempIcon;
