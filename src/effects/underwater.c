@@ -2,6 +2,10 @@
 #include "effects_internal.h"
 #include "nu/nusys.h"
 
+extern Vtx D_09000428_3B9E98[];
+extern Gfx D_09000528_3B9F98[];
+extern Gfx D_09000570_3B9FE0[];
+
 void underwater_init(EffectInstance* effect);
 void underwater_update(EffectInstance* effect);
 void underwater_render(EffectInstance* effect);
@@ -28,23 +32,23 @@ EffectInstance* underwater_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4
     ASSERT(effect->data.underwater != NULL);
 
     data->unk_00 = arg0;
-    data->unk_14 = 0;
+    data->lifeTime = 0;
     if (arg5 <= 0) {
-        data->unk_10 = 1000;
+        data->timeLeft = 1000;
     } else {
-        data->unk_10 = arg5;
+        data->timeLeft = arg5;
     }
-    data->unk_1F = 0;
+    data->waterColor.a = 0;
     data->unk_04 = arg1;
     data->unk_08 = arg2;
     data->unk_0C = arg3;
     data->unk_18 = arg4;
-    data->unk_1C = 10;
-    data->unk_1D = 110;
-    data->unk_1E = 255;
-    data->unk_20 = 190;
-    data->unk_21 = 220;
-    data->unk_22 = 255;
+    data->waterColor.r = 10;
+    data->waterColor.g = 110;
+    data->waterColor.b = 255;
+    data->unk_20.r = 190;
+    data->unk_20.g = 220;
+    data->unk_20.b = 255;
 
     for (i = 0; i < ARRAY_COUNT(data->unk_23); i++) {
         for (j = 0; j < ARRAY_COUNT(data->unk_23[0]); j++) {
@@ -61,45 +65,45 @@ void underwater_init(EffectInstance* effect) {
 
 void underwater_update(EffectInstance* effect) {
     UnderwaterFXData* data = effect->data.underwater;
-    s32 unk_10;
-    s32 unk_14;
-    s32 var_a0;
+    s32 timeLeft;
+    s32 lifeTime;
+    s32 alpha;
     f32 factor;
     s32 i;
     s32 j;
 
     if (effect->flags & EFFECT_INSTANCE_FLAG_10) {
         effect->flags &= ~EFFECT_INSTANCE_FLAG_10;
-        data->unk_10 = 32;
+        data->timeLeft = 32;
     }
 
-    if (data->unk_10 < 1000) {
-        data->unk_10--;
+    if (data->timeLeft < 1000) {
+        data->timeLeft--;
     }
 
-    data->unk_14++;
+    data->lifeTime++;
 
-    if (data->unk_10 < 0) {
+    if (data->timeLeft < 0) {
         shim_remove_effect(effect);
         return;
     }
 
-    unk_10 = data->unk_10;
-    unk_14 = data->unk_14;
+    timeLeft = data->timeLeft;
+    lifeTime = data->lifeTime;
 
-    var_a0 = 255;
-    if (unk_10 < 32) {
-        var_a0 = unk_10 * 8;
+    alpha = 255;
+    if (timeLeft < 32) {
+        alpha = timeLeft * 8;
     }
-    if (unk_14 < 16) {
-        var_a0 = unk_14 * 16 + 15;
+    if (lifeTime < 16) {
+        alpha = lifeTime * 16 + 15;
     }
 
-    data->unk_1F = (f32) var_a0;
-    factor = (f32) var_a0 / 255.0f;
+    data->waterColor.a = (f32) alpha;
+    factor = (f32) alpha / 255.0f;
 
     for (i = 1; i < ARRAY_COUNT(data->unk_23) - 1; i++) {
-        data->unk_23[i][6] = shim_sin_deg(-((unk_14 - i) * 20)) * -64.0f * factor;
+        data->unk_23[i][6] = shim_sin_deg(-((lifeTime - i) * 20)) * -64.0f * factor;
     }
 
     for (i = 1; i < ARRAY_COUNT(data->unk_23) - 1; i++) {
@@ -119,7 +123,7 @@ void underwater_update(EffectInstance* effect) {
             data->unk_11A[i][j] += temp1 + temp2 - m11 * 0.7;
             data->unk_11A[i][j] *= 0.98;
 
-            if (unk_10 < 32) {
+            if (timeLeft < 32) {
                 data->unk_23[i][j] *= factor;
             }
         }
@@ -147,172 +151,139 @@ void underwater_render(EffectInstance* effect) {
 void func_E00BA618(void) {
 }
 
-extern Vtx D_09000428[];
-extern Gfx D_09000528[];
-extern Gfx D_09000570[];
-
-#ifdef WIP
 void underwater_appendGfx(void* effect) {
-    EffectInstance* effectTemp = effect;
-    UnderwaterFXData* data;
-    Matrix4f sp20;
-    s32 temp_a0_3;
-    s32 temp_a1_5;
-    s32 temp_a1_6;
-    s32 temp_a1_7;
-    s32 temp_a2_2;
-    s32 temp_s3;
-    s32 temp_t7;
-    s32 temp_t8;
-    s32 temp_v1_2;
-    s32 temp_v1_4;
-    s32 var_a0;
-    s32 var_s1;
-    s32 var_s2;
-    s32 cond;
-    s32 var_t3_2;
-    s32 var_t4;
-    s32 var_t9;
-    s32 var_v1;
-    u32 temp_v1_3;
-
-    s32 i;
-    s32 j;
-
-    data = effectTemp->data.underwater;
+    UnderwaterFXData* data = ((EffectInstance*)effect)->data.underwater;
+    s32 alpha = data->waterColor.a;
+    s32 x, y;
+    s32 dxRight, dxLeft, dyTop, dyBottom;
+    s32 edgeX, edgeY;
+    s32 vtxIdx;
+    Matrix4f mtx;
+    Matrix4f unused_matrix;
+    s32 i, j;
 
     gDPPipeSync(gMainGfxPos++);
-    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->graphics->data));
+    gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
     gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, nuGfxZBuffer);
-    gSPDisplayList(gMainGfxPos++, D_09000528);
+    gSPDisplayList(gMainGfxPos++, D_09000528_3B9F98);
 
+    // copy image from framebuffer to zbuffer
     for (i = 0; i < 40; i++) {
-        // todo probably a composite macro?
-        gDPSetTextureImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, &nuGfxCfb_ptr[0xF00 * i]);
-        gDPSetTile(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 80, 0x0000, G_TX_LOADTILE, 0,
-                   G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
-                   G_TX_NOLOD);
-        gDPLoadSync(gMainGfxPos++);
-        gDPLoadTile(gMainGfxPos++, G_TX_LOADTILE, 0, 0, 0x04FC, 0x0014);
-        gDPPipeSync(gMainGfxPos++);
-        gDPSetTile(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 80, 0x0000, G_TX_RENDERTILE, 0,
-                   G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK,
-                   G_TX_NOLOD);
-        gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, 0, 0, 0x04FC, 0x0014);
-        gSPTextureRectangle(gMainGfxPos++, 0, i * 0x18, 0x04FC, 20 + (i * 18), G_TX_RENDERTILE, 0, 0, 0x1000, 0x0400);
+        gDPLoadTextureTile(
+            gMainGfxPos++, nuGfxCfb_ptr + SCREEN_WIDTH * i * 6,
+            G_IM_FMT_RGBA, G_IM_SIZ_16b,
+            SCREEN_WIDTH, 6,
+            0, 0, SCREEN_WIDTH - 1, 5, 0,
+            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP,
+            G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+        gSPTextureRectangle(
+            gMainGfxPos++,
+            0 * 4, (i * 6) * 4,
+            (SCREEN_WIDTH - 1) * 4, (i * 6 + 5) * 4,
+            G_TX_RENDERTILE, 0, 0, 0x1000, 0x0400);
         gDPPipeSync(gMainGfxPos++);
     }
 
     gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, nuGfxCfb_ptr);
-    gDPSetPrimColor(gMainGfxPos++, 0, 0, data->unk_1C, data->unk_1D, data->unk_1E, data->unk_1F);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, data->waterColor.r, data->waterColor.g, data->waterColor.b, alpha >> 1);
     gDPSetCycleType(gMainGfxPos++, G_CYC_1CYCLE);
-    gDPSetCombineLERP(gMainGfxPos++, PRIMITIVE, 0, PRIMITIVE_ALPHA, TEXEL0, 0, 0, 0, SHADE, PRIMITIVE, 0,
-                      PRIMITIVE_ALPHA, TEXEL0, 0, 0, 0, SHADE);
-    gDPSetTextureImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, VIRTUAL_TO_PHYSICAL(nuGfxZBuffer));
-    gDPSetRenderMode(gMainGfxPos++, CVG_DST_SAVE | ZMODE_OPA | FORCE_BL | G_RM_PASS,
-                     CVG_DST_SAVE | ZMODE_OPA | FORCE_BL | GBL_c2(G_BL_CLR_IN, G_BL_0, G_BL_CLR_IN, G_BL_1));
+    gDPSetCombineLERP(gMainGfxPos++, PRIMITIVE, 0, PRIMITIVE_ALPHA, TEXEL0, 0, 0, 0, SHADE, PRIMITIVE, 0, PRIMITIVE_ALPHA, TEXEL0, 0, 0, 0, SHADE);
+    gDPSetTextureImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, OS_K0_TO_PHYSICAL(nuGfxZBuffer));
+    gDPSetRenderMode(gMainGfxPos++, CVG_DST_SAVE | ZMODE_OPA | FORCE_BL | G_RM_PASS, CVG_DST_SAVE | ZMODE_OPA | FORCE_BL | GBL_c2(G_BL_CLR_IN, G_BL_0, G_BL_CLR_IN, G_BL_1));
     gDPSetTexturePersp(gMainGfxPos++, G_TP_PERSP);
     gDPSetTextureFilter(gMainGfxPos++, G_TF_BILERP);
 
-    shim_guFrustumF(sp20, -80.0f, 80.0f, 60.0f, -60.0f, 160.0f, 640.0f, 1.0f);
-    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
-
-    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
-              G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+    shim_guFrustumF(mtx, -80.0f, 80.0f, 60.0f, -60.0f, 160.0f, 640.0f, 1.0f);
+    shim_guMtxF2L(mtx, &gDisplayContext->matrixStack[gMatrixListPos]);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
     gSPClearGeometryMode(gMainGfxPos++, G_CULL_BOTH | G_LIGHTING);
     gSPSetGeometryMode(gMainGfxPos++, G_SHADE | G_SHADING_SMOOTH);
-    gSPVertex(gMainGfxPos++, D_09000428, 16, 0);
+    gSPVertex(gMainGfxPos++, D_09000428_3B9E98, 16, 0);
 
-    var_t9 = 0x18;
-    for (i = 0; i < 12; i++) {
-        var_s2 = 0;
-        if (i == 0) {
-            var_a0 = -4;
-            var_s2 = 1;
+    for (j = 0; j < 12; j++) {
+        y = j * 16 + 24;
+        edgeY = FALSE;
+
+        if (j == 0) {
+            dyTop = -4;
+            edgeY = TRUE;
         } else {
-            var_a0 = 0;
+            dyTop = 0;
         }
-        var_v1 = 0;
-        if (i == 11) {
-            var_v1 = 4;
-            var_s2 = 1;
-        }
-        temp_t8 = (var_t9 + var_a0) * 4;
-        temp_v1_2 = var_t9 + var_v1;
-        temp_s3 = (temp_v1_2 + 0x10) * 4;
 
-        for (j = 0; j < 12; j++) {
-            cond = FALSE;
-            temp_t7 = (j * 0x10) + 0x10;
-            if (j == 0) {
-                var_t3_2 = -4;
-                cond = TRUE;
+        if (j == 11) {
+            dyBottom = 4;
+            edgeY = TRUE;
+        } else {
+            dyBottom = 0;
+        }
+
+        for (i = 0; i < 18; i++) {
+            x = i * 16 + 16;
+            edgeX = FALSE;
+
+            if (i == 0) {
+                dxLeft = -4;
+                edgeX = TRUE;
             } else {
-                var_t3_2 = 0;
+                dxLeft = 0;
             }
-            var_s1 = 0;
-            if (j == 0x11) {
-                var_s1 = 4;
-                cond = TRUE;
+
+            if (i == 17) {
+                dxRight = 4;
+                edgeX = TRUE;
+            } else {
+                dxRight = 0;
             }
-            temp_a2_2 = temp_t7 + var_s1;
-            temp_a0_3 = temp_t7 + var_t3_2;
 
-            temp_v1_3 = ((((s32) ((((temp_a2_2 - (temp_a0_3 - 0x10)) + 1) * 2) + 7) >> 3) & 0x1FF) << 9) | 0xF5100000;
+            gDPSetTile(
+                gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b,
+                (((((x + dxRight + 16) - (x + dxLeft)) + 1) * 2) + 7) >> 3, 0x0000,
+                G_TX_LOADTILE, 0,
+                G_TX_NOMIRROR | G_TX_CLAMP, 6, G_TX_NOLOD,
+                G_TX_NOMIRROR | G_TX_CLAMP, 6, G_TX_NOLOD);
+            gDPLoadSync(gMainGfxPos++);
+            gDPLoadTile(gMainGfxPos++, G_TX_LOADTILE,
+                (x + dxLeft) * 4,
+                (y + dyTop) * 4,
+                (x + dxRight + 16) * 4,
+                (y + dyBottom + 16) * 4);
+            gDPPipeSync(gMainGfxPos++);
+            gDPSetTile(
+                gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b,
+                (((((x + dxRight + 16) - (x + dxLeft)) + 1) * 2) + 7) >> 3, 0x0000,
+                G_TX_RENDERTILE, 0,
+                G_TX_NOMIRROR | G_TX_CLAMP, 6, G_TX_NOLOD,
+                G_TX_NOMIRROR | G_TX_CLAMP, 6, G_TX_NOLOD);
+            gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE,
+                0, 0, (x + dxRight + 31) * 4, (y + dyBottom + 31) * 4);
 
-            temp_a3->words.w0 = temp_v1_3;
-            temp_a3->words.w1 = 0x07098260;
-
-            temp_a1_4->words.w0 = E600000000000000
-
-            temp_a1_4->unk8 = (s32) ((((temp_a0_3 * 4) & 0xFFF) << 0xC) | (temp_t8 & 0xFFF) | 0xF4000000);
-            temp_a1_4->unkC = (s32) (((((temp_a2_2 + 0x10) * 4) & 0xFFF) << 0xC) | ((temp_s3 & 0xFFF) | 0x07000000));
-
-            temp_a1_4->unk10 = E700000000000000
-
-            temp_a1_4->unk18 = temp_v1_3;
-            temp_a1_4->unk1C = 00098260
-
-            temp_a1_4->unk20 = F2000000
-            temp_a1_4->unk24 = (s32) (((((temp_a2_2 + 0x1F) * 4) & 0xFFF) << 0xC) | (((temp_v1_2 + 0x1F) * 4) & 0xFFF));
-            if (!cond || (var_t4 = 0xC, (var_s2 == 0))) {
-                var_t4 = 4;
-                if (!cond) {
-                    var_t4 = (-var_s2) & 8;
+            if (edgeX && edgeY) {
+                vtxIdx = 12;
+            } else {
+                vtxIdx = 4;
+                if (!edgeX) {
+                    if (!edgeY) {
+                        vtxIdx = 0;
+                    } else {
+                        vtxIdx = 8;
+                    }
                 }
             }
-            temp_a1_5 = j * 0xD;
 
-            temp_a0_4->words.w0 = (var_t4 * 2) | 0x02180000;
-            temp_a0_4->words.w1 = ((temp_t7 + var_t3_2) << 0x12) | (temp_t8 + (data + (i + temp_a1_5))->unk23);
-
-            temp_v1_4 = j * 0xD;
-            temp_a2_3->words.w0 = ((var_t4 + 1) * 2) | 0x02180000;
-            temp_a2_3->words.w1 = ((temp_t7 + var_s1 + 0x10) << 0x12) | (temp_t8 + (data + (i + temp_v1_4))->unk23);
-
-            temp_a2_3->unk8 = (s32) (((var_t4 + 2) * 2) | 0x02180000);
-            temp_a2_3->unkC = (s32) (((temp_t7 + var_t3_2) << 0x12) | (temp_s3 + (data + (i + (temp_a1_5 + 1)))->unk23));
-
-            temp_a1_6 = (var_t4 + 3) * 2;
-            temp_a2_3->unk10 = (s32) (temp_a1_6 | 0x02180000);
-            temp_a2_3->unk14 = (s32) (((temp_t7 + var_s1 + 0x10) << 0x12) | (temp_s3 + (data + (i + (temp_v1_4 + 1)))->unk23));
-
-            temp_a1_7 = temp_a1_6 & 0xFF;
-            temp_a2_3->unk18 = (s32) (((var_t4 * 2) << 0x10) | (temp_a1_7 << 8) | ((var_t4 + 1) * 2) | 0x06000000);
-            temp_a2_3->unk1C = (s32) (((var_t4 * 2) << 0x10) | (((var_t4 + 2) * 2) << 8) | temp_a1_7);
-
-            temp_a2_3->unk20 = E700000000000000;
+            gSPModifyVertex(gMainGfxPos++, vtxIdx    , G_MWO_POINT_XYSCREEN, ((x + dxLeft        ) << 0x12) | ((y + dyTop          ) * 4 + data->unk_23[i    ][j    ]));
+            gSPModifyVertex(gMainGfxPos++, vtxIdx + 1, G_MWO_POINT_XYSCREEN, ((x + dxRight + 0x10) << 0x12) | ((y + dyTop          ) * 4 + data->unk_23[i + 1][j    ]));
+            gSPModifyVertex(gMainGfxPos++, vtxIdx + 2, G_MWO_POINT_XYSCREEN, ((x + dxLeft        ) << 0x12) | ((y + dyBottom + 0x10) * 4 + data->unk_23[i    ][j + 1]));
+            gSPModifyVertex(gMainGfxPos++, vtxIdx + 3, G_MWO_POINT_XYSCREEN, ((x + dxRight + 0x10) << 0x12) | ((y + dyBottom + 0x10) * 4 + data->unk_23[i + 1][j + 1]));
+            gSP2Triangles(gMainGfxPos++, vtxIdx, vtxIdx + 3, vtxIdx + 1, 0, vtxIdx, vtxIdx + 2, vtxIdx + 3, 0);
+            gDPPipeSync(gMainGfxPos++);
         }
-        var_t9 += 0x10;
     }
+
     gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, nuGfxZBuffer);
-    gSPDisplayList(gMainGfxPos++, D_09000570);
-    gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, nuGfxZBuffer);
+    gSPDisplayList(gMainGfxPos++, D_09000570_3B9FE0);
+    gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, nuGfxCfb_ptr);
     gDPPipeSync(gMainGfxPos++);
-    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos],
-              G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCameraID], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
     gDPPipeSync(gMainGfxPos++);
 }
-#else
-INCLUDE_ASM(s32, "effects/underwater", underwater_appendGfx);
-#endif

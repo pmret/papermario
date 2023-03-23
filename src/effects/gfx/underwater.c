@@ -9,9 +9,12 @@
 #include "effects/gfx/D_090003B8_3B9E28.vtx.inc.c"
 #include "effects/gfx/D_090003D8_3B9E58.gfx.inc.c"
 
-// TODO ???
-u8 D_09000418_3B9E88[] = {
-    0x2, 0x80, 0x1, 0xE0, 0x1, 0xFF, 0x0, 0x0, 0x2, 0x80, 0x1, 0xE0, 0x1, 0xFF, 0x0, 0x0
+// unused
+Vp D_09000418_3B9E88 = {
+    .vp = {
+        .vscale = { 640, 480, 511, 0 },
+        .vtrans = { 640, 480, 511, 0 }
+    }
 };
 
 #include "effects/gfx/D_09000428_3B9E98.vtx.inc.c"
