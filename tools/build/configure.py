@@ -29,12 +29,7 @@ def exec_shell(command: List[str]) -> str:
 
 def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, extra_cppflags: str, extra_cflags: str, use_ccache: bool, shift: bool, debug: bool):
     # platform-specific
-    if sys.platform  == "darwin":
-        iconv = "tools/iconv.py UTF-8 $encoding"
-    elif sys.platform == "linux":
-        iconv = "iconv --from UTF-8 --to $encoding"
-    else:
-        raise Exception(f"unsupported platform {sys.platform}")
+    iconv = "iconv --from UTF-8 --to $encoding"
 
     ccache = ""
 
@@ -418,7 +413,7 @@ class Configure:
                     task = "cc_272"
                     cflags = cflags.replace("gcc_272", "")
 
-                encoding = "SHIFT-JIS"
+                encoding = "CP932" # similar to SHIFT-JIS, but includes backslash and tilde
                 if version == "ique":
                     encoding = "EUC-JP"
 
