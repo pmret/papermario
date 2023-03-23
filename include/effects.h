@@ -1752,16 +1752,11 @@ typedef struct UnderwaterFXData {
     /* 0x004 */ f32 unk_04;
     /* 0x008 */ f32 unk_08;
     /* 0x00C */ f32 unk_0C;
-    /* 0x010 */ s32 unk_10;
-    /* 0x014 */ s32 unk_14;
+    /* 0x010 */ s32 timeLeft;
+    /* 0x014 */ s32 lifeTime;
     /* 0x018 */ f32 unk_18;
-    /* 0x01C */ u8 unk_1C;
-    /* 0x01D */ u8 unk_1D;
-    /* 0x01E */ u8 unk_1E;
-    /* 0x01F */ u8 unk_1F;
-    /* 0x020 */ u8 unk_20;
-    /* 0x021 */ u8 unk_21;
-    /* 0x022 */ u8 unk_22;
+    /* 0x01C */ Color_RGBA8 waterColor;
+    /* 0x020 */ Color_RGB8 unk_20;
     /* 0x023 */ s8 unk_23[19][13];
     /* 0x11A */ s16 unk_11A[19][13];
 } UnderwaterFXData; // size = 0x308
