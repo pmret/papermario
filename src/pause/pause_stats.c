@@ -150,7 +150,7 @@ void pause_stats_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
     s16 hammerLevel;
     s32 powHudElemID;
     s32 powIncrements;
-    s32 powDrawnCount;
+    s32 powIncIdx;
     s32 curIncrement;
     s32 drawingFirst;
     s32 powBarIdx;
@@ -280,27 +280,29 @@ void pause_stats_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
     drawingFirst = TRUE;
     curIncrement = 0;
     powBarIdx = 0; // which bar of the power meter we're drawing
-    powDrawnCount = 0;
+    powIncIdx = 0; // which increment of the bar we're drawing
     powHudElemID = gPauseStatsIconIDs[STAT_ICON_STAR];
 
-    #define DRAW_NEXT_POW_ICON(hudElemScript, posX, posY) \
+    #define DRAW_NEXT_POW_ICON(powHudElemScript, powPosX, powPosY) \
         curIncrement++; \
-        hud_element_set_script(powHudElemID, hudElemScript); \
-        hud_element_set_render_pos(powHudElemID, posX, posY); \
+        hud_element_set_script(powHudElemID, powHudElemScript); \
+        hud_element_set_render_pos(powHudElemID, powPosX, powPosY); \
         if (drawingFirst) { \
             hud_element_draw_without_clipping(powHudElemID); \
             drawingFirst = FALSE; \
         } else { \
             hud_element_draw_next(powHudElemID); \
         } \
-        powDrawnCount++;
+        powIncIdx++;
 
-    // draw empty bars
+    // get number of full power increments
     playerData = &gPlayerData;
     powFullBars = playerData->specialBarsFilled / 256;
-    powIncrements = playerData->specialBarsFilled % 256;
-    powIncrements /= 32;
-    powIncrements += powFullBars * 8;
+    powIncrements = playerData->specialBarsFilled % 256; // get remainder in unfilled bar
+    powIncrements /= 32; // subdivide unfilled bar into 8 segments (8 = 256/32)
+    powIncrements += powFullBars * 8; // add 8 increments per full bar
+
+    // draw filled bars
     while (TRUE) {
         if (curIncrement >= powIncrements) {
             break;
@@ -350,78 +352,80 @@ void pause_stats_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
 
         DRAW_NEXT_POW_ICON(gPauseStatsStarElements[powBarIdx], baseX + 152 + (powBarIdx * 20), baseY + 77);
 
-        powDrawnCount = 0;
-        powBarIdx += 1;
+        powIncIdx = 0;
+        powBarIdx++;
         if (curIncrement >= powIncrements) {
             break;
         }
     }
 
-    // draw empty bars
+    // get number of total power increments
     powFullBars = playerData->maxStarPower;
     powIncrements = 8 * powFullBars;
+
+    // draw empty bars
     while (TRUE) {
         if (curIncrement >= powIncrements) {
             break;
         }
 
-        if (powDrawnCount == 0) {
+        if (powIncIdx == 0) {
             DRAW_NEXT_POW_ICON(&HES_StatusSPEmptyIncrement, baseX + 140 + (powBarIdx * 20) + D_8024F46C[0], baseY + 75);
             if (curIncrement >= powIncrements) {
                 break;
             }
         }
 
-        if (powDrawnCount == 1) {
+        if (powIncIdx == 1) {
             DRAW_NEXT_POW_ICON(&HES_StatusSPEmptyIncrement, baseX + 140 + (powBarIdx * 20) + D_8024F46C[1], baseY + 75);
             if (curIncrement >= powIncrements) {
                 break;
             }
         }
 
-        if (powDrawnCount == 2) {
+        if (powIncIdx == 2) {
             DRAW_NEXT_POW_ICON(&HES_StatusSPEmptyIncrement, baseX + 140 + (powBarIdx * 20) + D_8024F46C[2], baseY + 75);
             if (curIncrement >= powIncrements) {
                 break;
             }
         }
 
-        if (powDrawnCount == 3) {
+        if (powIncIdx == 3) {
             DRAW_NEXT_POW_ICON(&HES_StatusSPEmptyIncrement, baseX + 140 + (powBarIdx * 20) + D_8024F46C[3], baseY + 75);
             if (curIncrement >= powIncrements) {
                 break;
             }
         }
 
-        if (powDrawnCount == 4) {
+        if (powIncIdx == 4) {
             DRAW_NEXT_POW_ICON(&HES_StatusSPEmptyIncrement, baseX + 140 + (powBarIdx * 20) + D_8024F46C[4], baseY + 75);
             if (curIncrement >= powIncrements) {
                 break;
             }
         }
 
-        if (powDrawnCount == 5) {
+        if (powIncIdx == 5) {
             DRAW_NEXT_POW_ICON(&HES_StatusSPEmptyIncrement, baseX + 140 + (powBarIdx * 20) + D_8024F46C[5], baseY + 75);
             if (curIncrement >= powIncrements) {
                 break;
             }
         }
 
-        if (powDrawnCount == 6) {
+        if (powIncIdx == 6) {
             DRAW_NEXT_POW_ICON(&HES_StatusSPEmptyIncrement, baseX + 140 + (powBarIdx * 20) + D_8024F46C[6], baseY + 75);
             if (curIncrement >= powIncrements) {
                 break;
             }
         }
 
-        if (powDrawnCount == 7) {
+        if (powIncIdx == 7) {
             DRAW_NEXT_POW_ICON(&HES_StatusStarEmpty, baseX + 152 + (powBarIdx * 20), baseY + 77);
             if (curIncrement >= powIncrements) {
                 break;
             }
         }
 
-        powDrawnCount = 0;
+        powIncIdx = 0;
         powBarIdx++;
     }
 
