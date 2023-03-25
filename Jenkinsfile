@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Setup') {
             steps {
-                ROMS=(papermario.us.z64 papermario.jp.z64 papermario.ique.z64 papermario.pal.z64)
+                ROMS=("papermario.us.z64" "papermario.jp.z64" "papermario.ique.z64" "papermario.pal.z64")
                 for ROM in "${ROMS[@]}"
                 do 
                     region=${ROM%%.*}
