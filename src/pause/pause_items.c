@@ -212,7 +212,7 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
 
                 if (i == 0) {
                     if (isNone) {
-                        draw_msg(pause_get_menu_msg(0x4E), sp6C + pause_items_scroll_offset_x(posX) + itemOffsetX,
+                        draw_msg(pause_get_menu_msg(PAUSE_MSG_4E), sp6C + pause_items_scroll_offset_x(posX) + itemOffsetX,
                                 sp70 + pause_items_scroll_offset_y(posY) + itemOffsetY, 255, palette, style);
                     } else {
                         if (gItemTable[itemID].nameMsg) {
@@ -296,7 +296,7 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
          91, 34, 255, gPauseItemsCurrentTab == 1 ? 128 : 0, 0, 0,
          0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 
-    msg = pause_get_menu_msg(0x4F);
+    msg = pause_get_menu_msg(PAUSE_MSG_4F);
     msgX = baseX + 12;
     if (gPauseItemsCurrentTab == 0) {
         msgX = baseX + 21;
@@ -312,7 +312,7 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
          91, 34, 255, gPauseItemsCurrentTab == 0 ? 128 : 0, 0, 0,
          0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 
-    msg = pause_get_menu_msg(0x50);
+    msg = pause_get_menu_msg(PAUSE_MSG_50);
     msgX = baseX + 25;
     if (gPauseItemsCurrentTab == 1) {
         msgX = baseX + 34;
@@ -546,9 +546,9 @@ void pause_items_handle_input(MenuPanel* panel) {
         }
     } else {
         if (gPauseItemsCurrentTab == 1) {
-            gPauseCurrentDescMsg = pause_get_menu_msg(0x51);
+            gPauseCurrentDescMsg = pause_get_menu_msg(PAUSE_MSG_51);
         } else {
-            gPauseCurrentDescMsg = pause_get_menu_msg(0x52);
+            gPauseCurrentDescMsg = pause_get_menu_msg(PAUSE_MSG_52);
         }
 
         gPauseCurrentDescIconScript = NULL;
