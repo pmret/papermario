@@ -67,7 +67,7 @@ pipeline {
             steps {
                 sh 'mkdir reports'
 
-                parallel(
+                parallel{
                     "us": {
                         sh 'python3 progress.py us --csv >> reports/progress_us.csv'
                         sh 'python3 progress.py us --shield-json > reports/progress_us_shield.json'
@@ -88,7 +88,7 @@ pipeline {
                         sh 'cat build_log.txt | grep warning | sort > tools/warnings_count/warnings.txt'
                         sh 'cp tools/warnings_count/warnings.txt reports/warnings.txt'
                     }
-                )
+                }
 
                 stash includes: 'reports/*', name: 'reports'
             }
@@ -102,7 +102,7 @@ pipeline {
             }
             steps {
                 unstash 'reports'
-                parallel(
+                parallel{
                     "us": {
                         sh 'cat reports/progress_us.csv >> /var/www/papermar.io/html/reports/progress_us.csv'
                         sh 'cat reports/progress_us_shield.json > /var/www/papermar.io/html/reports/progress_us_shield.json'
@@ -122,7 +122,7 @@ pipeline {
                     "warnings": {
                         sh 'cat reports/warnings.txt > /var/www/papermar.io/html/reports/warnings.txt'
                     }
-                )
+                }
             }
         }
     }
