@@ -295,6 +295,11 @@ void pause_stats_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
         } \
         powIncIdx++;
 
+    #define BREAK_IF_DONE() \
+        if (curIncrement >= powIncrements) { \
+            break; \
+        }
+
     // get number of full power increments
     playerData = &gPlayerData;
     powFullBars = playerData->specialBarsFilled / 256;
@@ -304,59 +309,33 @@ void pause_stats_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
 
     // draw filled bars
     while (TRUE) {
-        if (curIncrement >= powIncrements) {
-            break;
-        }
+        BREAK_IF_DONE()
+        DRAW_NEXT_POW_ICON(gPauseStatsSPIncElements[powBarIdx], baseX + 140 + (powBarIdx * 20) + D_8024F46C[0], baseY + 75)
 
-        DRAW_NEXT_POW_ICON(gPauseStatsSPIncElements[powBarIdx], baseX + 140 + (powBarIdx * 20) + D_8024F46C[0], baseY + 75);
+        BREAK_IF_DONE()
+        DRAW_NEXT_POW_ICON(gPauseStatsSPIncElements[powBarIdx], baseX + 140 + (powBarIdx * 20) + D_8024F46C[1], baseY + 75)
 
-        if (curIncrement >= powIncrements) {
-            break;
-        }
+        BREAK_IF_DONE()
+        DRAW_NEXT_POW_ICON(gPauseStatsSPIncElements[powBarIdx], baseX + 140 + (powBarIdx * 20) + D_8024F46C[2], baseY + 75)
 
-        DRAW_NEXT_POW_ICON(gPauseStatsSPIncElements[powBarIdx], baseX + 140 + (powBarIdx * 20) + D_8024F46C[1], baseY + 75);
+        BREAK_IF_DONE()
+        DRAW_NEXT_POW_ICON(gPauseStatsSPIncElements[powBarIdx], baseX + 140 + (powBarIdx * 20) + D_8024F46C[3], baseY + 75)
 
-        if (curIncrement >= powIncrements) {
-            break;
-        }
+        BREAK_IF_DONE()
+        DRAW_NEXT_POW_ICON(gPauseStatsSPIncElements[powBarIdx], baseX + 140 + (powBarIdx * 20) + D_8024F46C[4], baseY + 75)
 
-        DRAW_NEXT_POW_ICON(gPauseStatsSPIncElements[powBarIdx], baseX + 140 + (powBarIdx * 20) + D_8024F46C[2], baseY + 75);
+        BREAK_IF_DONE()
+        DRAW_NEXT_POW_ICON(gPauseStatsSPIncElements[powBarIdx], baseX + 140 + (powBarIdx * 20) + D_8024F46C[5], baseY + 75)
+
+        BREAK_IF_DONE()
+        DRAW_NEXT_POW_ICON(gPauseStatsSPIncElements[powBarIdx], baseX + 140 + (powBarIdx * 20) + D_8024F46C[6], baseY + 75)
         
-        if (curIncrement >= powIncrements) {
-            break;
-        }
-
-        DRAW_NEXT_POW_ICON(gPauseStatsSPIncElements[powBarIdx], baseX + 140 + (powBarIdx * 20) + D_8024F46C[3], baseY + 75);
-
-        if (curIncrement >= powIncrements) {
-            break;
-        }
-
-        DRAW_NEXT_POW_ICON(gPauseStatsSPIncElements[powBarIdx], baseX + 140 + (powBarIdx * 20) + D_8024F46C[4], baseY + 75);
-        
-        if (curIncrement >= powIncrements) {
-            break;
-        }
-
-        DRAW_NEXT_POW_ICON(gPauseStatsSPIncElements[powBarIdx], baseX + 140 + (powBarIdx * 20) + D_8024F46C[5], baseY + 75);
-        
-        if (curIncrement >= powIncrements) {
-            break;
-        }
-        
-        DRAW_NEXT_POW_ICON(gPauseStatsSPIncElements[powBarIdx], baseX + 140 + (powBarIdx * 20) + D_8024F46C[6], baseY + 75);
-        
-        if (curIncrement >= powIncrements) {
-            break;
-        }
-
-        DRAW_NEXT_POW_ICON(gPauseStatsStarElements[powBarIdx], baseX + 152 + (powBarIdx * 20), baseY + 77);
+        BREAK_IF_DONE()
+        DRAW_NEXT_POW_ICON(gPauseStatsStarElements[powBarIdx], baseX + 152 + (powBarIdx * 20), baseY + 77)
 
         powIncIdx = 0;
         powBarIdx++;
-        if (curIncrement >= powIncrements) {
-            break;
-        }
+        BREAK_IF_DONE()
     }
 
     // get number of total power increments
@@ -365,64 +344,46 @@ void pause_stats_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
 
     // draw empty bars
     while (TRUE) {
-        if (curIncrement >= powIncrements) {
-            break;
-        }
+        BREAK_IF_DONE()
 
         if (powIncIdx == 0) {
-            DRAW_NEXT_POW_ICON(&HES_StatusSPEmptyIncrement, baseX + 140 + (powBarIdx * 20) + D_8024F46C[0], baseY + 75);
-            if (curIncrement >= powIncrements) {
-                break;
-            }
+            DRAW_NEXT_POW_ICON(&HES_StatusSPEmptyIncrement, baseX + 140 + (powBarIdx * 20) + D_8024F46C[0], baseY + 75)
+            BREAK_IF_DONE()
         }
 
         if (powIncIdx == 1) {
-            DRAW_NEXT_POW_ICON(&HES_StatusSPEmptyIncrement, baseX + 140 + (powBarIdx * 20) + D_8024F46C[1], baseY + 75);
-            if (curIncrement >= powIncrements) {
-                break;
-            }
+            DRAW_NEXT_POW_ICON(&HES_StatusSPEmptyIncrement, baseX + 140 + (powBarIdx * 20) + D_8024F46C[1], baseY + 75)
+            BREAK_IF_DONE()
         }
 
         if (powIncIdx == 2) {
-            DRAW_NEXT_POW_ICON(&HES_StatusSPEmptyIncrement, baseX + 140 + (powBarIdx * 20) + D_8024F46C[2], baseY + 75);
-            if (curIncrement >= powIncrements) {
-                break;
-            }
+            DRAW_NEXT_POW_ICON(&HES_StatusSPEmptyIncrement, baseX + 140 + (powBarIdx * 20) + D_8024F46C[2], baseY + 75)
+            BREAK_IF_DONE()
         }
 
         if (powIncIdx == 3) {
-            DRAW_NEXT_POW_ICON(&HES_StatusSPEmptyIncrement, baseX + 140 + (powBarIdx * 20) + D_8024F46C[3], baseY + 75);
-            if (curIncrement >= powIncrements) {
-                break;
-            }
+            DRAW_NEXT_POW_ICON(&HES_StatusSPEmptyIncrement, baseX + 140 + (powBarIdx * 20) + D_8024F46C[3], baseY + 75)
+            BREAK_IF_DONE()
         }
 
         if (powIncIdx == 4) {
-            DRAW_NEXT_POW_ICON(&HES_StatusSPEmptyIncrement, baseX + 140 + (powBarIdx * 20) + D_8024F46C[4], baseY + 75);
-            if (curIncrement >= powIncrements) {
-                break;
-            }
+            DRAW_NEXT_POW_ICON(&HES_StatusSPEmptyIncrement, baseX + 140 + (powBarIdx * 20) + D_8024F46C[4], baseY + 75)
+            BREAK_IF_DONE()
         }
 
         if (powIncIdx == 5) {
-            DRAW_NEXT_POW_ICON(&HES_StatusSPEmptyIncrement, baseX + 140 + (powBarIdx * 20) + D_8024F46C[5], baseY + 75);
-            if (curIncrement >= powIncrements) {
-                break;
-            }
+            DRAW_NEXT_POW_ICON(&HES_StatusSPEmptyIncrement, baseX + 140 + (powBarIdx * 20) + D_8024F46C[5], baseY + 75)
+            BREAK_IF_DONE()
         }
 
         if (powIncIdx == 6) {
-            DRAW_NEXT_POW_ICON(&HES_StatusSPEmptyIncrement, baseX + 140 + (powBarIdx * 20) + D_8024F46C[6], baseY + 75);
-            if (curIncrement >= powIncrements) {
-                break;
-            }
+            DRAW_NEXT_POW_ICON(&HES_StatusSPEmptyIncrement, baseX + 140 + (powBarIdx * 20) + D_8024F46C[6], baseY + 75)
+            BREAK_IF_DONE()
         }
 
         if (powIncIdx == 7) {
-            DRAW_NEXT_POW_ICON(&HES_StatusStarEmpty, baseX + 152 + (powBarIdx * 20), baseY + 77);
-            if (curIncrement >= powIncrements) {
-                break;
-            }
+            DRAW_NEXT_POW_ICON(&HES_StatusStarEmpty, baseX + 152 + (powBarIdx * 20), baseY + 77)
+            BREAK_IF_DONE()
         }
 
         powIncIdx = 0;
