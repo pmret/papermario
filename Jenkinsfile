@@ -6,10 +6,13 @@ pipeline {
     stages {
         stage('Setup') {
             steps {
-                sh 'cp /usr/local/etc/roms/papermario.us.z64 ver/us/baserom.z64'
-                sh 'cp /usr/local/etc/roms/papermario.jp.z64 ver/jp/baserom.z64'
-                sh 'cp /usr/local/etc/roms/papermario.ique.z64 ver/ique/baserom.z64'
-                sh 'cp /usr/local/etc/roms/papermario.pal.z64 ver/pal/baserom.z64'
+                ROMS=(papermario.us.z64 papermario.jp.z64 papermario.ique.z64 papermario.pal.z64)
+                for ROM in "${ROMS[@]}"
+                do 
+                    region=${ROM%%.*}
+                    sh "cp /usr/local/etc/roms/$ROM ver/$region/baserom.z64"
+                done
+
                 sh 'curl -L "https://github.com/pmret/gcc-papermario/releases/download/master/linux.tar.gz" | tar zx -C tools/build/cc/gcc'
                 sh 'curl -L "https://github.com/pmret/binutils-papermario/releases/download/master/linux.tar.gz" | tar zx -C tools/build/cc/gcc'
                 sh 'curl -L "https://github.com/decompals/ido-static-recomp/releases/download/v0.2/ido-5.3-recomp-ubuntu-latest.tar.gz" | tar zx -C tools/build/cc/ido5.3'
@@ -67,20 +70,28 @@ pipeline {
             steps {
                 sh 'mkdir reports'
 
-                sh 'python3 progress.py us --csv >> reports/progress_us.csv'
-                sh 'python3 progress.py us --shield-json > reports/progress_us_shield.json'
-
-                sh 'python3 progress.py jp --csv >> reports/progress_jp.csv'
-                sh 'python3 progress.py jp --shield-json > reports/progress_jp_shield.json'
-
-                sh 'python3 progress.py ique --csv >> reports/progress_ique.csv'
-                sh 'python3 progress.py ique --shield-json > reports/progress_ique_shield.json'
-
-                sh 'python3 progress.py pal --csv >> reports/progress_pal.csv'
-                sh 'python3 progress.py pal --shield-json > reports/progress_pal_shield.json'
-
-                sh 'cat build_log.txt | grep warning | sort > tools/warnings_count/warnings.txt'
-                sh 'cp tools/warnings_count/warnings.txt reports/warnings.txt'
+                parallel(
+                    "us": {
+                        sh 'python3 progress.py us --csv >> reports/progress_us.csv'
+                        sh 'python3 progress.py us --shield-json > reports/progress_us_shield.json'
+                    },
+                    "jp": {
+                        sh 'python3 progress.py jp --csv >> reports/progress_jp.csv'
+                        sh 'python3 progress.py jp --shield-json > reports/progress_jp_shield.json'
+                    },
+                    "ique": {
+                        sh 'python3 progress.py ique --csv >> reports/progress_ique.csv'
+                        sh 'python3 progress.py ique --shield-json > reports/progress_ique_shield.json'
+                    },
+                    "pal": {
+                        sh 'python3 progress.py pal --csv >> reports/progress_pal.csv'
+                        sh 'python3 progress.py pal --shield-json > reports/progress_pal_shield.json'
+                    },
+                    "warnings": {
+                        sh 'cat build_log.txt | grep warning | sort > tools/warnings_count/warnings.txt'
+                        sh 'cp tools/warnings_count/warnings.txt reports/warnings.txt'
+                    }
+                )
 
                 stash includes: 'reports/*', name: 'reports'
             }
@@ -94,19 +105,27 @@ pipeline {
             }
             steps {
                 unstash 'reports'
-                sh 'cat reports/progress_us.csv >> /var/www/papermar.io/html/reports/progress_us.csv'
-                sh 'cat reports/progress_us_shield.json > /var/www/papermar.io/html/reports/progress_us_shield.json'
-
-                sh 'cat reports/progress_jp.csv >> /var/www/papermar.io/html/reports/progress_jp.csv'
-                sh 'cat reports/progress_jp_shield.json > /var/www/papermar.io/html/reports/progress_jp_shield.json'
-
-                sh 'cat reports/progress_ique.csv >> /var/www/papermar.io/html/reports/progress_ique.csv'
-                sh 'cat reports/progress_ique_shield.json > /var/www/papermar.io/html/reports/progress_ique_shield.json'
-
-                sh 'cat reports/progress_pal.csv >> /var/www/papermar.io/html/reports/progress_pal.csv'
-                sh 'cat reports/progress_pal_shield.json > /var/www/papermar.io/html/reports/progress_pal_shield.json'
-
-                sh 'cat reports/warnings.txt > /var/www/papermar.io/html/reports/warnings.txt'
+                parallel(
+                    "us": {
+                        sh 'cat reports/progress_us.csv >> /var/www/papermar.io/html/reports/progress_us.csv'
+                        sh 'cat reports/progress_us_shield.json > /var/www/papermar.io/html/reports/progress_us_shield.json'
+                    },
+                    "jp": {
+                        sh 'cat reports/progress_jp.csv >> /var/www/papermar.io/html/reports/progress_jp.csv'
+                        sh 'cat reports/progress_jp_shield.json > /var/www/papermar.io/html/reports/progress_jp_shield.json'
+                    },
+                    "ique": {
+                        sh 'cat reports/progress_ique.csv >> /var/www/papermar.io/html/reports/progress_ique.csv'
+                        sh 'cat reports/progress_ique_shield.json > /var/www/papermar.io/html/reports/progress_ique_shield.json'
+                    },
+                    "pal": {
+                        sh 'cat reports/progress_pal.csv >> /var/www/papermar.io/html/reports/progress_pal.csv'
+                        sh 'cat reports/progress_pal_shield.json > /var/www/papermar.io/html/reports/progress_pal_shield.json'
+                    },
+                    "warnings": {
+                        sh 'cat reports/warnings.txt > /var/www/papermar.io/html/reports/warnings.txt'
+                    }
+                )
             }
         }
     }
