@@ -68,23 +68,23 @@ pipeline {
                 sh 'mkdir reports'
 
                 parallel{
-                    stage('us'): {
+                    stage('us') {
                         sh 'python3 progress.py us --csv >> reports/progress_us.csv'
                         sh 'python3 progress.py us --shield-json > reports/progress_us_shield.json'
                     },
-                    stage('jp'): {
+                    stage('jp') {
                         sh 'python3 progress.py jp --csv >> reports/progress_jp.csv'
                         sh 'python3 progress.py jp --shield-json > reports/progress_jp_shield.json'
                     },
-                    stage('ique'): {
+                    stage('ique') {
                         sh 'python3 progress.py ique --csv >> reports/progress_ique.csv'
                         sh 'python3 progress.py ique --shield-json > reports/progress_ique_shield.json'
                     },
-                    stage('pal'): {
+                    stage('pal') {
                         sh 'python3 progress.py pal --csv >> reports/progress_pal.csv'
                         sh 'python3 progress.py pal --shield-json > reports/progress_pal_shield.json'
                     },
-                    stage('warnings'): {
+                    stage('warnings') {
                         sh 'cat build_log.txt | grep warning | sort > tools/warnings_count/warnings.txt'
                         sh 'cp tools/warnings_count/warnings.txt reports/warnings.txt'
                     }
@@ -103,23 +103,23 @@ pipeline {
             steps {
                 unstash 'reports'
                 parallel{
-                    stage('us'): {
+                    stage('us') {
                         sh 'cat reports/progress_us.csv >> /var/www/papermar.io/html/reports/progress_us.csv'
                         sh 'cat reports/progress_us_shield.json > /var/www/papermar.io/html/reports/progress_us_shield.json'
                     },
-                    stage('jp'): {
+                    stage('jp') {
                         sh 'cat reports/progress_jp.csv >> /var/www/papermar.io/html/reports/progress_jp.csv'
                         sh 'cat reports/progress_jp_shield.json > /var/www/papermar.io/html/reports/progress_jp_shield.json'
                     },
-                    stage('ique'): {
+                    stage('ique') {
                         sh 'cat reports/progress_ique.csv >> /var/www/papermar.io/html/reports/progress_ique.csv'
                         sh 'cat reports/progress_ique_shield.json > /var/www/papermar.io/html/reports/progress_ique_shield.json'
                     },
-                    stage('pal'): {
+                    stage('pal') {
                         sh 'cat reports/progress_pal.csv >> /var/www/papermar.io/html/reports/progress_pal.csv'
                         sh 'cat reports/progress_pal_shield.json > /var/www/papermar.io/html/reports/progress_pal_shield.json'
                     },
-                    stage('warnings'): {
+                    stage('warnings') {
                         sh 'cat reports/warnings.txt > /var/www/papermar.io/html/reports/warnings.txt'
                     }
                 }
