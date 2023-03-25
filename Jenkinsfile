@@ -6,13 +6,10 @@ pipeline {
     stages {
         stage('Setup') {
             steps {
-                ROMS=("papermario.us.z64" "papermario.jp.z64" "papermario.ique.z64" "papermario.pal.z64")
-                for ROM in "${ROMS[@]}"
-                do 
-                    region=${ROM%%.*}
-                    sh "cp /usr/local/etc/roms/$ROM ver/$region/baserom.z64"
-                done
-
+                sh 'cp /usr/local/etc/roms/papermario.us.z64 ver/us/baserom.z64'
+                sh 'cp /usr/local/etc/roms/papermario.jp.z64 ver/jp/baserom.z64'
+                sh 'cp /usr/local/etc/roms/papermario.ique.z64 ver/ique/baserom.z64'
+                sh 'cp /usr/local/etc/roms/papermario.pal.z64 ver/pal/baserom.z64'
                 sh 'curl -L "https://github.com/pmret/gcc-papermario/releases/download/master/linux.tar.gz" | tar zx -C tools/build/cc/gcc'
                 sh 'curl -L "https://github.com/pmret/binutils-papermario/releases/download/master/linux.tar.gz" | tar zx -C tools/build/cc/gcc'
                 sh 'curl -L "https://github.com/decompals/ido-static-recomp/releases/download/v0.2/ido-5.3-recomp-ubuntu-latest.tar.gz" | tar zx -C tools/build/cc/ido5.3'
