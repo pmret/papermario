@@ -18,16 +18,12 @@ def unpack_color(s):
     return r, g, b, a
 
 def pack_color(r, g, b, a):
-    r = floor(31 * (r / 255))
-    g = floor(31 * (g / 255))
-    b = floor(31 * (b / 255))
+    r = r >> 3
+    g = g >> 3
+    b = b >> 3
+    a = a >> 7
 
-    s = round(a / 0xFF)
-    s |= (r & 0x1F) << 11
-    s |= (g & 0x1F) << 6
-    s |= (b & 0x1F) << 1
-
-    return s
+    return (r << 11) | (g << 6) | (b << 1) | a
 
 def rgb_to_intensity(r, g, b):
     return round(r * 0.2126 + g * 0.7152 + 0.0722 * b)
