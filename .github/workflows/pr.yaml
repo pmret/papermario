@@ -14,6 +14,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Git
+        run: |
+          git log --oneline --graph
+          git log --oneline --graph HEAD main
       - name: Lint
         uses: cpp-linter/cpp-linter-action@v2
         id: linter
