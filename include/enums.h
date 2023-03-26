@@ -6835,4 +6835,13 @@ enum WindowStyles {
     WINDOW_STYLE_MAX    = 22,
 };
 
+#if VERSION_PAL
+enum Language {
+    LANGUAGE_EN = 0,
+    LANGUAGE_DE = 1,
+    LANGUAGE_FR = 2,
+    LANGUAGE_ES = 3,
+};
+#endif
+
 #endif

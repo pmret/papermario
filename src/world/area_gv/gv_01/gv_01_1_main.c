@@ -192,7 +192,7 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(SetMotionBlurParams, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 128, 10)
 #if VERSION_PAL
     EVT_CALL(GetLanguage, LVar0)
-    EVT_IF_EQ(LVar0, 3)
+    EVT_IF_EQ(LVar0, LANGUAGE_ES)
         EVT_EXEC(N(EVS_E8CA04))
     EVT_ELSE
         EVT_EXEC(N(EVS_E8C6F8))

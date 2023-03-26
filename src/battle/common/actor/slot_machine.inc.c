@@ -121,7 +121,7 @@ API_CALLABLE(N(Add1Coin)) {
 EvtScript N(init) = {
 #if VERSION_PAL
     EVT_CALL(GetLanguage, LVar0)
-    EVT_IF_EQ(LVar0, 3)
+    EVT_IF_EQ(LVar0, LANGUAGE_ES)
         EVT_SET(LVar0, 2)
     EVT_END_IF
     EVT_CALL(SetModelTexVariant, 28, LVar0)

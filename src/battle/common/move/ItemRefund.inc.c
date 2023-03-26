@@ -49,19 +49,19 @@ API_CALLABLE(N(GiveRefund)) {
 
 #if VERSION_PAL
         switch (gCurrentLanguage) {
-            case 0:
+            case LANGUAGE_EN:
                 itemIcon = tempIcon = hud_element_create(&HES_Refund);
                 itemIcon = tempIcon;
                 break;
-            case 1:
+            case LANGUAGE_DE:
                 itemIcon = tempIcon = hud_element_create(&HES_Refund_de);
                 itemIcon = tempIcon;
                 break;
-            case 2:
+            case LANGUAGE_FR:
                 itemIcon = tempIcon = hud_element_create(&HES_Refund_fr);
                 itemIcon = tempIcon;
                 break;
-            case 3:
+            case LANGUAGE_ES:
                 itemIcon = tempIcon = hud_element_create(&HES_Refund_es);
                 break;
         }
