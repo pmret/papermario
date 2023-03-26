@@ -14,8 +14,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Fetch base branch
-        run: git fetch origin $GITHUB_BASE_REF
+        with:
+          fetch-depth: 0
       - name: Run clang-format
         run: |
           git clang-format-14 main --diff
