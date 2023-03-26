@@ -12,4 +12,4 @@ jobs:
         uses: git fetch origin $GITHUB_BASE_REF
       - name: Run clang-format
         run: |
-          git clang-format main --diff --binary `which clang-format-14`
+          git clang-format-14 main --diff
