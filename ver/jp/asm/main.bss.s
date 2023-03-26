@@ -328,16 +328,16 @@ dlabel D_800A0970
 dlabel TitleScreen_GfxData
 .space 4
 
-dlabel TitleScreen_GfxData_tile
+dlabel TitleScreen_GfxData_PressStart
 .space 4
 
-dlabel TitleScreen_GfxData_tile4b
+dlabel TitleScreen_GfxData_Copyright
 .space 4
 
-dlabel TitleScreen_GfxData_block
+dlabel TitleScreen_GfxData_Logo
 .space 4
 
-dlabel JP_800A0980
+dlabel TitleScreen_GfxData_CopyrightPalette
 .space 4
 
 dlabel D_800A0988
