@@ -1337,8 +1337,8 @@ enum {
 };
 
 #if VERSION_PAL
-#define CONST_1 0x8C
-#define CONST_2 0x98
+#define CONST_1 140
+#define CONST_2 152
 #else
 #define CONST_1 165
 #define CONST_2 177

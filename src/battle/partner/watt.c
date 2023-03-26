@@ -983,13 +983,7 @@ EvtScript N(powerShock) = {
     EVT_CALL(MoveBattleCamOver, 80)
     EVT_CALL(N(WattFXDisable))
     EVT_CALL(N(TargetParalyzeChance))
-#if VERSION_PAL
-    // (72 * DT = 60)
-    // TODO: maybe use (75 * DT) - 3
-    EVT_CALL(action_command_power_shock_start, 0, 59, 3, LVar0)
-#else
-    EVT_CALL(action_command_power_shock_start, 0, 72 * DT, 3, LVar0)
-#endif
+    EVT_CALL(action_command_power_shock_start, 0, 75 * DT - 3, 3, LVar0)
     EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 15)
     EVT_ADD(LVar2, 5)

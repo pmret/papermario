@@ -1103,12 +1103,7 @@ EvtScript N(bomb) = {
     EVT_CALL(StopSound, SOUND_287)
     EVT_SWITCH(LVar2)
         EVT_CASE_EQ(MOVE_BOMB)
-#if VERSION_PAL
-            // 7 * DT = 5
-            EVT_SET(LVar0, 6)
-#else
-            EVT_SET(LVar0, 7 * DT)
-#endif
+            EVT_SET(LVar0, 6 * DT + 1)
         EVT_CASE_EQ(MOVE_POWER_BOMB)
             EVT_SET(LVar0, 12 * DT)
         EVT_CASE_EQ(MOVE_MEGA_BOMB)

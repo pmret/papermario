@@ -553,12 +553,7 @@ EvtScript N(shellToss) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-#if VERSION_PAL
-    // 47 * DT = 39
-    EVT_CALL(action_command_hammer_start, 0, 38, 3)
-#else
-    EVT_CALL(action_command_hammer_start, 0, 47 * DT, 3)
-#endif
+    EVT_CALL(action_command_hammer_start, 0, 50 * DT - 3, 3)
     EVT_CALL(SetActionResult, 0)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_ShellSpinSlowest)
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_200C)
