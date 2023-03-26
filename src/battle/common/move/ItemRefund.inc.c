@@ -3,11 +3,6 @@
 
 static s32 itemIcon;
 
-extern s32 gCurrentLanguage;
-extern HudScript HES_Refund_de;
-extern HudScript HES_Refund_fr;
-extern HudScript HES_Refund_es;
-
 // Returns time to sleep for on $x.
 API_CALLABLE(N(GiveRefund)) {
     BattleStatus* battleStatus = &gBattleStatus;
