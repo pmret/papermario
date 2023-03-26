@@ -1,0 +1,19 @@
+BasedOnStyle: Google
+IndentWidth: 4
+UseTab: Never
+ColumnLimit: 120
+
+AllowShortIfStatementsOnASingleLine: false
+AllowShortBlocksOnASingleLine: false
+
+BreakBeforeBraces: Custom
+BraceWrapping:
+  # Place opening brace on next line if the statement is multi-line
+  # e.g.
+  #  if (very
+  #      long
+  #      condition)
+  #  {
+  AfterControlStatement: MultiLine
+
+BreakBeforeBinaryOperators: All
