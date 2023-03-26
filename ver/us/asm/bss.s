@@ -398,16 +398,16 @@ dlabel D_800A0968
 dlabel D_800A0970
 .space 4
 
-dlabel D_800A0974
+dlabel TitleData
 .space 4
 
-dlabel D_800A0978
+dlabel TitleData_tile
 .space 4
 
-dlabel D_800A097C
+dlabel TitleData_tile4b
 .space 4
 
-dlabel D_800A0980
+dlabel TitleData_block
 .space 4
 
 dlabel D_800A0984

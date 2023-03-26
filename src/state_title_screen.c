@@ -33,14 +33,16 @@ SaveMetadata gSaveSlotMetadata[4] = {
 };
 
 u8 gSaveSlotHasData[4] = {TRUE, TRUE, TRUE, TRUE};
-s32 D_80077A28 = 0;
-s32 D_80077A2C = 0;
-s32 D_80077A30 = 0;
+
+s32 TitleScreen_PressStart_Alpha = 0; // the transparency of "PRESS START" text
+s32 TitleScreen_PressStart_isVisibile = 0; // toggles the visibility of "PRESS START"
+s32 TitleScreen_PressStart_BlinkCounter = 0; // counts to 16, then toggles TitleScreen_PressStart_isVisibile
+
 s32 D_80077A34[1] = {0};
 
 Lights1 D_80077A38 = gdSPDefLights1(255, 255, 255, 0, 0, 0, 0, 0, 0);
 
-Gfx D_80077A50[] = {
+Gfx title_screen[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_CLD_SURF, G_RM_CLD_SURF2),
@@ -62,17 +64,17 @@ Gfx D_80077A50[] = {
 };
 
 typedef struct TitleDataStruct {
-    /* 0x0 */ s32 unk_00;
-    /* 0x4 */ s32 unk_04;
-    /* 0x8 */ s32 unk_08;
+    /* 0x0 */ s32 img_tile;
+    /* 0x4 */ s32 img_tile4b;
+    /* 0x8 */ s32 img_block;
     /* 0xC */ s32 img2_pal;
 } TitleDataStruct; // size = 0x10
 
 extern s16 D_800A0970;
-extern TitleDataStruct* D_800A0974;
-extern s32* D_800A0978;
-extern s32* D_800A097C;
-extern s32* D_800A0980;
+extern TitleDataStruct* TitleData;
+extern s32* TitleData_tile;
+extern s32* TitleData_tile4b;
+extern s32* TitleData_block;
 #if VERSION_JP
 extern s32* JP_800A0980;
 #endif
@@ -102,15 +104,15 @@ void state_init_title_screen(void) {
     gGameStatusPtr->creditsViewportMode = -1;
     intro_logos_update_fade();
     titleData = load_asset_by_name("title_data", &titleDataSize);
-    titleDataDst = D_800A0974 = heap_malloc(titleDataSize);
+    titleDataDst = TitleData = heap_malloc(titleDataSize);
     decode_yay0(titleData, titleDataDst);
     general_heap_free(titleData);
 
-    D_800A0978 = (s32*)(D_800A0974->unk_00 + (s32) D_800A0974);
-    D_800A097C = (s32*)(D_800A0974->unk_04 + (s32) D_800A0974);
-    D_800A0980 = (s32*)(D_800A0974->unk_08 + (s32) D_800A0974);
+    TitleData_tile = (s32*)(TitleData->img_tile + (s32) TitleData);
+    TitleData_tile4b = (s32*)(TitleData->img_tile4b + (s32) TitleData);
+    TitleData_block = (s32*)(TitleData->img_block + (s32) TitleData);
 #if VERSION_JP
-    JP_800A0980 = (s32*)(D_800A0974->img2_pal + (s32) D_800A0974);
+    JP_800A0980 = (s32*)(TitleData->img2_pal + (s32) TitleData);
 #endif
 
     create_cameras_a();
@@ -300,9 +302,9 @@ void state_step_title_screen(void) {
 void state_drawUI_title_screen(void) {
     switch (gGameStatusPtr->introState) {
         case INTRO_STATE_0:
-            D_80077A28 = 0;
-            D_80077A2C = 0;
-            D_80077A30 = 0;
+            TitleScreen_PressStart_Alpha = 0;
+            TitleScreen_PressStart_isVisibile = 0;
+            TitleScreen_PressStart_BlinkCounter = 0;
             draw_title_screen_NOP();
             break;
         case INTRO_STATE_2:
@@ -384,13 +386,13 @@ void title_screen_draw_logo(f32 arg0) {
     s32 yOffset;
     s32 i;
 
-    gSPDisplayList(gMainGfxPos++, D_80077A50);
+    gSPDisplayList(gMainGfxPos++, title_screen);
     gDPPipeSync(gMainGfxPos++);
     yOffset = -100 * arg0;
 
     for (i = 0; i < TITLE_NUM_TILES; i++) {
         // Load a tile from the logo texture
-        gDPLoadTextureTile(gMainGfxPos++, &D_800A0978[i * TITLE_TILE_PIXELS], G_IM_FMT_RGBA, G_IM_SIZ_32b,
+        gDPLoadTextureTile(gMainGfxPos++, &TitleData_tile[i * TITLE_TILE_PIXELS], G_IM_FMT_RGBA, G_IM_SIZ_32b,
                            TITLE_WIDTH, TITLE_TILE_HEIGHT, // width, height
                            0, 0, (TITLE_WIDTH - 1), (TITLE_TILE_HEIGHT - 1), // uls, ult, lrs, lrt
                            0, // pal
@@ -418,37 +420,37 @@ void title_screen_draw_logo(f32 arg0) {
 #endif
 
 void title_screen_draw_press_start(void) {
-    switch (D_80077A2C) {
+    switch (TitleScreen_PressStart_isVisibile) {
         case 0:
-            D_80077A28 -= 128;
-            if (D_80077A28 < 0) {
-                D_80077A28 = 0;
+            TitleScreen_PressStart_Alpha -= 128;
+            if (TitleScreen_PressStart_Alpha < 0) {
+                TitleScreen_PressStart_Alpha = 0;
             }
 
-            D_80077A30++;
-            if (D_80077A30 >= 16) {
-                D_80077A30 = 0;
-                D_80077A2C = 1;
+            TitleScreen_PressStart_BlinkCounter++;
+            if (TitleScreen_PressStart_BlinkCounter >= 16) {
+                TitleScreen_PressStart_BlinkCounter = 0;
+                TitleScreen_PressStart_isVisibile = 1;
             }
             break;
         case 1:
-            D_80077A28 += 128;
-            if (D_80077A28 > 255) {
-                D_80077A28 = 255;
+            TitleScreen_PressStart_Alpha += 128;
+            if (TitleScreen_PressStart_Alpha > 255) {
+                TitleScreen_PressStart_Alpha = 255;
             }
 
-            D_80077A30++;
-            if (D_80077A30 >= 16) {
-                D_80077A30 = 0;
-                D_80077A2C = 0;
+            TitleScreen_PressStart_BlinkCounter++;
+            if (TitleScreen_PressStart_BlinkCounter >= 16) {
+                TitleScreen_PressStart_BlinkCounter = 0;
+                TitleScreen_PressStart_isVisibile = 0;
             }
     }
 
-    gSPDisplayList(gMainGfxPos++, D_80077A50);
+    gSPDisplayList(gMainGfxPos++, title_screen);
     gDPSetCombineMode(gMainGfxPos++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
-    gDPSetPrimColor(gMainGfxPos++, 0, 0, 248, 240, 152, D_80077A28);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, 248, 240, 152, TitleScreen_PressStart_Alpha);
     gDPPipeSync(gMainGfxPos++);
-    gDPLoadTextureBlock(gMainGfxPos++, D_800A0980, G_IM_FMT_IA, G_IM_SIZ_8b, 128, VAR_1, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gDPLoadTextureBlock(gMainGfxPos++, TitleData_block, G_IM_FMT_IA, G_IM_SIZ_8b, 128, VAR_1, 0, G_TX_NOMIRROR | G_TX_WRAP,
               G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
     gSPTextureRectangle(gMainGfxPos++, 384, 548, 896, VAR_2, G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
     gDPPipeSync(gMainGfxPos++);
@@ -461,7 +463,7 @@ void title_screen_draw_copyright(f32 arg0) {
     s32 alpha;
     s32 i;
 
-    gSPDisplayList(gMainGfxPos++, &D_80077A50);
+    gSPDisplayList(gMainGfxPos++, &title_screen);
 #if VERSION_JP
     gDPSetTextureLUT(gMainGfxPos++, G_TT_RGBA16);
 #endif
@@ -479,7 +481,7 @@ void title_screen_draw_copyright(f32 arg0) {
 
 #if VERSION_JP
     gDPLoadTLUT_pal16(gMainGfxPos++, 0, JP_800A0980);
-    gDPLoadTextureTile_4b(gMainGfxPos++, D_800A097C, G_IM_FMT_CI, 128, 0, 0, 0, 127, 31, 0,
+    gDPLoadTextureTile_4b(gMainGfxPos++, TitleData_tile4b, G_IM_FMT_CI, 128, 0, 0, 0, 127, 31, 0,
                           G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                           G_TX_NOLOD);
     gSPTextureRectangle(gMainGfxPos++, 388, 764, 900, 892, G_TX_RENDERTILE,
@@ -487,7 +489,7 @@ void title_screen_draw_copyright(f32 arg0) {
 #else
     for (i = 0; i < 2; i++) {
         alpha = 0; // TODO figure out why this is needed
-        gDPLoadTextureTile(gMainGfxPos++, &D_800A097C[0x240 * i], G_IM_FMT_IA, G_IM_SIZ_8b, 144, 32, 0, 0, 143, 15, 0,
+        gDPLoadTextureTile(gMainGfxPos++, &TitleData_tile4b[0x240 * i], G_IM_FMT_IA, G_IM_SIZ_8b, 144, 32, 0, 0, 143, 15, 0,
                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                            G_TX_NOLOD);
         gSPTextureRectangle(gMainGfxPos++, 356, 764 + (0x40 * i), 932, 828 + (0x40 * i), G_TX_RENDERTILE,

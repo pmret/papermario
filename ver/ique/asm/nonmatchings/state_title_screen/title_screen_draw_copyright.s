@@ -23,8 +23,8 @@ glabel title_screen_draw_copyright
 /* 12904 80037504 24A50008 */  addiu     $a1, $a1, 0x8
 /* 12908 80037508 ACE50000 */  sw        $a1, 0x0($a3)
 /* 1290C 8003750C AC620000 */  sw        $v0, 0x0($v1)
-/* 12910 80037510 3C028007 */  lui       $v0, %hi(D_80077A50)
-/* 12914 80037514 244266B0 */  addiu     $v0, $v0, %lo(D_80077A50)
+/* 12910 80037510 3C028007 */  lui       $v0, %hi(title_screen)
+/* 12914 80037514 244266B0 */  addiu     $v0, $v0, %lo(title_screen)
 /* 12918 80037518 46006302 */  mul.s     $f12, $f12, $f0
 /* 1291C 8003751C 00000000 */  nop
 /* 12920 80037520 AC620004 */  sw        $v0, 0x4($v1)
@@ -62,8 +62,8 @@ glabel title_screen_draw_copyright
 /* 12998 80037598 25299244 */  addiu     $t1, $t1, %lo(gMainGfxPos)
 /* 1299C 8003759C 3C10FD68 */  lui       $s0, (0xFD68008F >> 16)
 /* 129A0 800375A0 3610008F */  ori       $s0, $s0, (0xFD68008F & 0xFFFF)
-/* 129A4 800375A4 3C16800A */  lui       $s6, %hi(D_800A097C)
-/* 129A8 800375A8 26D6D38C */  addiu     $s6, $s6, %lo(D_800A097C)
+/* 129A4 800375A4 3C16800A */  lui       $s6, %hi(TitleData_tile4b)
+/* 129A8 800375A8 26D6D38C */  addiu     $s6, $s6, %lo(TitleData_tile4b)
 /* 129AC 800375AC 3C0EF568 */  lui       $t6, (0xF5682400 >> 16)
 /* 129B0 800375B0 35CE2400 */  ori       $t6, $t6, (0xF5682400 & 0xFFFF)
 /* 129B4 800375B4 3C150700 */  lui       $s5, (0x7000000 >> 16)
