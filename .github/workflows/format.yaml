@@ -1,7 +1,5 @@
 name: Format
 on: [pull_request]
-branches:
-  - main
 
 jobs:
   format-modified:
@@ -10,5 +8,5 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          git fetch origin main
+          git fetch origin $GITHUB_BASE_REF
           git clang-format main --diff
