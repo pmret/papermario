@@ -17,7 +17,9 @@ jobs:
       - name: Git
         run: |
           git log --oneline --graph
-          git log --oneline --graph HEAD main
+          git fetch main
+          git log --oneline --graph
+          git log --oneline --graph HEAD origin/main
       - name: Lint
         uses: cpp-linter/cpp-linter-action@v2
         id: linter
