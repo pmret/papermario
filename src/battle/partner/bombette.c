@@ -1054,15 +1054,20 @@ EvtScript N(bomb) = {
             EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
             EVT_CALL(AddGoalPos, ACTOR_PARTNER, -40, 0, 0)
     EVT_END_SWITCH
-    EVT_CALL(MoveBattleCamOver, 60)
+    EVT_CALL(MoveBattleCamOver, 60 * DT)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar2)
         EVT_CASE_EQ(MOVE_BOMB)
-            EVT_CALL(action_command_bomb_start, 0, 57, 3, 0)
+            EVT_CALL(action_command_bomb_start, 0, 57 * DT, 3, 0)
         EVT_CASE_EQ(MOVE_POWER_BOMB)
-            EVT_CALL(action_command_bomb_start, 0, 72, 3, 1)
+#if VERSION_PAL
+            // 72 * DT = 60
+            EVT_CALL(action_command_bomb_start, 0, 59, 3, 1)
+#else
+            EVT_CALL(action_command_bomb_start, 0, 72 * DT, 3, 1)
+#endif
         EVT_CASE_EQ(MOVE_MEGA_BOMB)
-            EVT_CALL(action_command_bomb_start, 0, 87, 3, 2)
+            EVT_CALL(action_command_bomb_start, 0, 87 * DT, 3, 2)
     EVT_END_SWITCH
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_287)
     EVT_CHILD_THREAD
@@ -1071,23 +1076,23 @@ EvtScript N(bomb) = {
         EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
         EVT_SWITCH(LVar2)
             EVT_CASE_EQ(MOVE_BOMB)
-                EVT_SET(LVar0, 45)
+                EVT_SET(LVar0, 45 * DT)
             EVT_CASE_EQ(MOVE_POWER_BOMB)
-                EVT_SET(LVar0, 50)
+                EVT_SET(LVar0, 50 * DT)
             EVT_CASE_EQ(MOVE_MEGA_BOMB)
-                EVT_SET(LVar0, 50)
+                EVT_SET(LVar0, 50 * DT)
         EVT_END_SWITCH
-        EVT_CALL(RunToGoal, ACTOR_PARTNER, 45)
+        EVT_CALL(RunToGoal, ACTOR_PARTNER, 45 * DT)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_AboutToExplode)
         EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
     EVT_END_CHILD_THREAD
     EVT_SWITCH(LVar2)
         EVT_CASE_EQ(MOVE_BOMB)
-            EVT_SET(LVar0, 45)
+            EVT_SET(LVar0, 45 * DT)
         EVT_CASE_EQ(MOVE_POWER_BOMB)
-            EVT_SET(LVar0, 50)
+            EVT_SET(LVar0, 50 * DT)
         EVT_CASE_EQ(MOVE_MEGA_BOMB)
-            EVT_SET(LVar0, 50)
+            EVT_SET(LVar0, 50 * DT)
     EVT_END_SWITCH
     EVT_WAIT(LVar0)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
@@ -1098,11 +1103,11 @@ EvtScript N(bomb) = {
     EVT_CALL(StopSound, SOUND_287)
     EVT_SWITCH(LVar2)
         EVT_CASE_EQ(MOVE_BOMB)
-            EVT_SET(LVar0, 7)
+            EVT_SET(LVar0, 6 * DT + 1)
         EVT_CASE_EQ(MOVE_POWER_BOMB)
-            EVT_SET(LVar0, 12)
+            EVT_SET(LVar0, 12 * DT)
         EVT_CASE_EQ(MOVE_MEGA_BOMB)
-            EVT_SET(LVar0, 20)
+            EVT_SET(LVar0, 20 * DT)
     EVT_END_SWITCH
     EVT_LOOP(LVar0)
         EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, EVT_FLOAT(0.5), 0, 0)

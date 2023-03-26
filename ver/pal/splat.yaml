@@ -118,6 +118,101 @@ segments:
 
   - [0x231990, bin]
 
+  - type: code
+    dir: world/partner
+    name: world_partner_goombario
+    start: 0x33FDD0
+    vram: 0x802BD100
+    subsegments:
+    - [0x33FDD0, c, goombario]
+    - [0x340910]
+  - type: code
+    dir: world/partner
+    name: world_partner_bombette
+    start: 0x340C00
+    vram: 0x802BD100
+    subsegments:
+    - [0x340C00, c, bombette]
+    - [0x342380]
+  - type: code
+    dir: world/partner
+    name: world_partner_parakarry
+    start: 0x342420
+    vram: 0x802BD100
+    subsegments:
+    - [0x342420, c, parakarry]
+    - [0x343DB0]
+  - type: code
+    dir: world/partner
+    name: world_partner_kooper
+    start: 0x343ED0
+    vram: 0x802BD100
+    subsegments:
+    - [0x343ED0, c, kooper]
+    - [0x345920]
+  - type: code
+    dir: world/partner
+    name: world_partner_watt
+    start: 0x345A30
+    vram: 0x802BD100
+    subsegments:
+    - [0x345A30, c, watt]
+    - [0x346B80]
+  - type: code
+    dir: world/partner
+    name: world_partner_sushie
+    start: 0x346C30
+    vram: 0x802BD100
+    subsegments:
+    - [0x346C30, c, sushie]
+    - [0x3498E0]
+  - type: code
+    dir: world/partner
+    name: world_partner_lakilester
+    start: 0x349A10
+    vram: 0x802BD100
+    subsegments:
+    - [0x349A10, c, lakilester]
+    - [0x34C770]
+  - type: code
+    dir: world/partner
+    name: world_partner_bow
+    start: 0x34C810
+    vram: 0x802BD100
+    subsegments:
+    - [0x34C810, c, bow]
+    - [0x34D6F0]
+  - type: code
+    dir: world/partner
+    name: world_partner_goompa
+    start: 0x34D7D0
+    vram: 0x802BD100
+    subsegments:
+    - [0x34D7D0, c, goompa]
+    - [0x34DC40]
+  - type: code
+    dir: world/partner
+    name: world_partner_goombaria
+    start: 0x34DCD0
+    vram: 0x802BD100
+    subsegments:
+    - [0x34DCD0, c, goombaria]
+    - [0x34DDC0]
+  - type: code
+    dir: world/partner
+    name: world_partner_twink
+    start: 0x34DE30
+    vram: 0x802BD100
+    subsegments:
+    - [0x34DE30, c, twink]
+    - [0x34DF20]
+  - type: code
+    start: 0x34DF90
+    name: world_use_item
+    vram: 0x802C0000
+    subsegments:
+    - [0x34DF90, c, world_use_item]
+    - [0x34E3A0]
 
 ###############
 ### Effects ###
@@ -5080,7 +5175,413 @@ segments:
     - [0x7314E0, c, script/dig_05]
     - [0x731500]
 
-  - [0x743A60, bin]
+#######################
+### Battle Partners ###
+#######################
+  - name: battle_partner_goompa
+    dir: battle/partner
+    type: code
+    start: 0x743A60
+    vram: 0x80238000
+    subsegments:
+    - [0x743A60, c, goompa]
+    - [0x743A60]
+  - name: battle_partner_goombario
+    dir: battle/partner
+    type: code
+    start: 0x744010
+    vram: 0x80238000
+    subsegments:
+    - [0x744010, c, goombario]
+    - [0x7451C0]
+  - name: battle_partner_kooper
+    dir: battle/partner
+    type: code
+    start: 0x748DB0
+    vram: 0x80238000
+    subsegments:
+    - [0x748DB0, c, kooper]
+    - [0x7491E0]
+  - name: battle_partner_bombette
+    dir: battle/partner
+    type: code
+    start: 0x74DC40
+    vram: 0x80238000
+    subsegments:
+    - [0x74DC40, c, bombette]
+    - [0x74E280]
+  - name: battle_partner_parakarry
+    dir: battle/partner
+    type: code
+    start: 0x752CB0
+    vram: 0x80238000
+    subsegments:
+    - [0x752CB0, c, parakarry]
+    - [0x7544C0]
+  - name: battle_partner_watt
+    dir: battle/partner
+    type: code
+    start: 0x756A20
+    vram: 0x80238000
+    subsegments:
+    - [0x756A20, c, watt]
+    - [0x7579B0, .data, watt]
+  - name: battle_partner_sushie
+    dir: battle/partner
+    type: code
+    start: 0x75ABD0
+    vram: 0x80238000
+    subsegments:
+    - [0x75ABD0, c, sushie]
+    - [0x75BAA0]
+  - name: battle_partner_lakilester
+    dir: battle/partner
+    type: code
+    start: 0x75EC40
+    vram: 0x80238000
+    subsegments:
+    - [0x75EC40, c, lakilester]
+    - [0x760E10]
+  - name: battle_partner_bow
+    dir: battle/partner
+    type: code
+    start: 0x763E20
+    vram: 0x80238000
+    subsegments:
+    - [0x763E20, c, bow]
+    - [0x764120]
+  - name: battle_partner_twink
+    dir: battle/partner
+    type: code
+    start: 0x767C20
+    vram: 0x80238000
+    subsegments:
+    - [0x767C20, c, twink]
+    - [0x767CF0]
+
+####################
+### Battle Items ###
+####################
+  - name: mushroom
+    dir: battle/move/item
+    type: code
+    start: 0x768780
+    vram: 0x802A1000
+    subsegments:
+    - [0x768780, c, mushroom]
+    - [0x768E00]
+  - name: fire_flower
+    dir: battle/move/item
+    type: code
+    start: 0x769C10
+    vram: 0x802A1000
+    subsegments:
+    - [0x769C10, c, fire_flower]
+    - [0x76A090]
+  - name: dusty_hammer
+    dir: battle/move/item
+    type: code
+    start: 0x76AA00
+    vram: 0x802A1000
+    subsegments:
+    - [0x76AA00, c, dusty_hammer]
+    - start: 0x76ACC0
+      type: .data
+      name: dusty_hammer
+      subsegments:
+      - [0x76ACC0]
+      - [0x76B280, ci4, dusty_hammer, 32, 32]
+      - [0x76B480, palette, dusty_hammer]
+      - [0x76B4A0]
+  - name: pow_block
+    dir: battle/move/item
+    type: code
+    start: 0x76B900
+    vram: 0x802A1000
+    subsegments:
+    - [0x76B900, c, pow_block]
+    - [0x76BD20]
+  - name: pebble
+    dir: battle/move/item
+    type: code
+    start: 0x76CAA0
+    vram: 0x802A1000
+    subsegments:
+    - [0x76CAA0, c, pebble]
+    - start: 0x76CD60
+      type: .data
+      name: pebble
+      subsegments:
+      - [0x76CD60]
+      - [0x76D320, ci4, pebble, 32, 32]
+      - [0x76D520, palette, pebble]
+      - [0x76D540]
+  - name: volt_shroom
+    dir: battle/move/item
+    type: code
+    start: 0x76D9A0
+    vram: 0x802A1000
+    subsegments:
+    - [0x76D9A0, c, volt_shroom]
+    - [0x76DCA0]
+  - name: thunder_rage
+    dir: battle/move/item
+    type: code
+    start: 0x76E3D0
+    vram: 0x802A1000
+    subsegments:
+    - [0x76E3D0, c, thunder_rage]
+    - [0x76E8F0]
+  - name: snowman_doll
+    dir: battle/move/item
+    type: code
+    start: 0x76F0E0
+    vram: 0x802A1000
+    subsegments:
+    - [0x76F0E0, c, snowman_doll]
+    - [0x76F5A0]
+  - name: dried_shroom
+    dir: battle/move/item
+    type: code
+    start: 0x770010
+    vram: 0x802A1000
+    subsegments:
+    - [0x770010, c, dried_shroom]
+    - [0x7703D0]
+  - name: shooting_star
+    dir: battle/move/item
+    type: code
+    start: 0x770B20
+    vram: 0x802A1000
+    subsegments:
+    - [0x770B20, c, shooting_star]
+    - [0x7710F0]
+  - name: sleepy_sheep
+    dir: battle/move/item
+    type: code
+    start: 0x771A80
+    vram: 0x802A1000
+    subsegments:
+    - [0x771A80, c, sleepy_sheep]
+    - start: 0x772470
+      type: .data
+      name: sleepy_sheep
+      subsegments:
+      - [0x772470]
+      - [0x772A30, ci4, sleepy_sheep1, 56, 48]
+      - [0x772F70, palette, sleepy_sheep1]
+      - [0x772F90, ci4, sleepy_sheep2, 56, 48]
+      - [0x7734D0, palette, sleepy_sheep2]
+      - [0x7734F0, ci4, sleepy_sheep3, 56, 48]
+      - [0x773A30, palette, sleepy_sheep3]
+      - [0x773A50]
+  - name: stone_cap
+    dir: battle/move/item
+    type: code
+    start: 0x774A50
+    vram: 0x802A1000
+    subsegments:
+    - [0x774A50, c, stone_cap]
+    - [0x774EA0]
+  - name: tasty_tonic
+    dir: battle/move/item
+    type: code
+    start: 0x775530
+    vram: 0x802A1000
+    subsegments:
+    - [0x775530, c, tasty_tonic]
+    - [0x775890]
+  - name: thunder_bolt
+    dir: battle/move/item
+    type: code
+    start: 0x7760F0
+    vram: 0x802A1000
+    subsegments:
+    - [0x7760F0, c, thunder_bolt]
+    - [0x776610]
+  - name: ultra_shroom
+    dir: battle/move/item
+    type: code
+    start: 0x776DB0
+    vram: 0x802A1000
+    subsegments:
+    - [0x776DB0, c, ultra_shroom]
+    - [0x777170]
+  - name: unknown_item
+    dir: battle/move/item
+    type: code
+    start: 0x7778F0
+    vram: 0x802A1000
+    subsegments:
+    - [0x7778F0, c, unknown_item]
+    - [0x777CB0]
+  - name: super_soda
+    dir: battle/move/item
+    type: code
+    start: 0x778410
+    vram: 0x802A1000
+    subsegments:
+    - [0x778410, c, super_soda]
+    - [0x7789C0]
+  - name: hustle_drink
+    dir: battle/move/item
+    type: code
+    start: 0x779710
+    vram: 0x802A1000
+    subsegments:
+    - [0x779710, c, hustle_drink]
+    - [0x779A70]
+  - name: stop_watch
+    dir: battle/move/item
+    type: code
+    start: 0x77A600
+    vram: 0x802A1000
+    subsegments:
+    - [0x77A600, c, stop_watch]
+    - [0x77A9E0]
+  - name: dizzy_dial
+    dir: battle/move/item
+    type: code
+    start: 0x77B1C0
+    vram: 0x802A1000
+    subsegments:
+    - [0x77B1C0, c, dizzy_dial]
+    - [0x77B610]
+  - name: please_come_back
+    dir: battle/move/item
+    type: code
+    start: 0x77BF10
+    vram: 0x802A1000
+    subsegments:
+    - [0x77BF10, c, please_come_back]
+    - [0x77C1D0]
+  - name: egg_missile
+    dir: battle/move/item
+    type: code
+    start: 0x77C870
+    vram: 0x802A1000
+    subsegments:
+    - [0x77C870, c, egg_missile]
+    - start: 0x77CC00
+      type: .data
+      name: egg_missile
+      subsegments:
+      - [0x77CC00]
+      - [0x77D1C0, ci4, egg_missile1, 32, 32]
+      - [0x77D3C0, palette, egg_missile1]
+      - [0x77D3E0, ci4, egg_missile2, 32, 32]
+      - [0x77D5E0, palette, egg_missile2]
+      - [0x77D600, ci4, egg_missile3, 32, 32]
+      - [0x77D800, palette, egg_missile3]
+      - [0x77D820, ci4, egg_missile4, 32, 32]
+      - [0x77DA20, palette, egg_missile4]
+      - [0x77DA40]
+  - name: insecticide_herb
+    dir: battle/move/item
+    type: code
+    start: 0x77E180
+    vram: 0x802A1000
+    subsegments:
+    - [0x77E180, c, insecticide_herb]
+    - start: 0x77E620
+      type: .data
+      name: insecticide_herb
+      subsegments:
+      - [0x77E620]
+      - [0x77EBE0, ci4, insecticide_herb, 32, 32]
+      - [0x77EDE0, palette, insecticide_herb]
+      - [0x77EE00]
+  - name: fright_jar
+    dir: battle/move/item
+    type: code
+    start: 0x77F3C0
+    vram: 0x802A1000
+    subsegments:
+    - [0x77F3C0, c, fright_jar]
+    - [0x77F7A0]
+  - name: mystery
+    dir: battle/move/item
+    type: code
+    start: 0x7800E0
+    vram: 0x802A1000
+    subsegments:
+    - [0x7800E0, c, mystery]
+    - start: 0x780AB0
+      type: .data
+      name: mystery
+      subsegments:
+      - [0x780AB0]
+      - [0x781070, ci4, mystery, 32, 32]
+      - [0x781270, palette, mystery]
+      - [0x781290]
+  - name: repel_gel
+    dir: battle/move/item
+    type: code
+    start: 0x781720
+    vram: 0x802A1000
+    subsegments:
+    - [0x781720, c, repel_gel]
+    - [0x781A40]
+  - name: life_shroom
+    dir: battle/move/item
+    type: code
+    start: 0x782160
+    vram: 0x802A1000
+    subsegments:
+    - [0x782160, c, life_shroom]
+    - [0x7826E0]
+  - name: coconut
+    dir: battle/move/item
+    type: code
+    start: 0x7833D0
+    vram: 0x802A1000
+    subsegments:
+    - [0x7833D0, c, coconut]
+    - start: 0x783690
+      type: .data
+      name: coconut
+      subsegments:
+      - [0x783690]
+      - [0x783C50, ci4, coconut, 32, 32]
+      - [0x783E50, palette, coconut]
+      - [0x783E70]
+  - name: electro_pop
+    dir: battle/move/item
+    type: code
+    start: 0x7842D0
+    vram: 0x802A1000
+    subsegments:
+    - [0x7842D0, c, electro_pop]
+    - [0x7847A0]
+  - name: strange_cake
+    dir: battle/move/item
+    type: code
+    start: 0x784FB0
+    vram: 0x802A1000
+    subsegments:
+    - [0x784FB0, c, strange_cake]
+    - start: 0x785AE0
+      type: .data
+      name: strange_cake
+      subsegments:
+      - [0x785AE0]
+      - [0x7860A0, ci4, strange_cake1, 32, 32]
+      - [0x7862A0, palette, strange_cake1]
+      - [0x7862C0, ci4, strange_cake2, 32, 32]
+      - [0x7864C0, palette, strange_cake2]
+      - [0x7864E0, ci4, strange_cake3, 32, 32]
+      - [0x7866E0, palette, strange_cake3]
+      - [0x786700]
+  - name: food
+    dir: battle/move/item
+    type: code
+    start: 0x786CF0
+    vram: 0x802A1000
+    subsegments:
+    - [0x786CF0, c, food]
+    - [0x7873A0]
+
+  - [0x788240, bin]
 
   - name: world_model_anim_kzn_01
     dir: world/model_anim/kzn

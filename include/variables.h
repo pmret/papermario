@@ -263,4 +263,8 @@ extern PlayerStatus gPlayerStatus;
 extern PlayerSpinState gPlayerSpinState;
 extern PlayerData gPlayerData;
 
+#if VERSION_PAL
+extern s32 gCurrentLanguage;
+#endif
+
 #endif

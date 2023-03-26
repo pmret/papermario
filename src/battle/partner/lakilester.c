@@ -459,7 +459,7 @@ API_CALLABLE(N(SpinyFlipActionCommand)) {
             if (sAimingTimer != 0) {
                 sAimingTimer--;
             } else {
-                sAimingTimer = 80;
+                sAimingTimer = (s32)(80 * DT);
                 hud_element_set_script(hudStick, &HES_StickTapRight);
                 sfx_play_sound_at_position(SOUND_312, SOUND_SPACE_MODE_0, 0.0f, 0.0f, 0.0f);
                 script->functionTemp[0] = 2;
@@ -846,10 +846,10 @@ EvtScript N(spinyFlip) = {
     EVT_ADD(LVar0, 8)
     EVT_ADD(LVar1, 40)
     EVT_ADD(LVar2, 5)
-    EVT_PLAY_EFFECT(EFFECT_ENERGY_IN_OUT, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 80, 0)
+    EVT_PLAY_EFFECT(EFFECT_ENERGY_IN_OUT, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 80 * DT, 0)
     EVT_CALL(SetActorVar, ACTOR_PARTNER, 0, 1)
     EVT_THREAD
-        EVT_LOOP(40)
+        EVT_LOOP(40 * DT)
             EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 1, 0, 0)
             EVT_CALL(SetPartDispOffset, ACTOR_PARTNER, 2, 1, 0, 0)
             EVT_WAIT(1)
@@ -968,11 +968,11 @@ EvtScript N(spinySurge) = {
     EVT_CALL(GetActorLevel, ACTOR_PARTNER, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_SET(LVarA, 60)
+            EVT_SET(LVarA, 60 * DT)
         EVT_CASE_EQ(1)
-            EVT_SET(LVarA, 60)
+            EVT_SET(LVarA, 60 * DT)
         EVT_CASE_EQ(2)
-            EVT_SET(LVarA, 60)
+            EVT_SET(LVarA, 60 * DT)
     EVT_END_SWITCH
     EVT_SET(LVarB, LVarA)
     EVT_ADD(LVarB, -3)
@@ -1336,6 +1336,14 @@ enum {
     STATE_EXHALE   =  1,
 };
 
+#if VERSION_PAL
+#define CONST_1 140
+#define CONST_2 152
+#else
+#define CONST_1 165
+#define CONST_2 177
+#endif
+
 API_CALLABLE(N(ProcessHurricane)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partner = battleStatus->partnerActor;
@@ -1367,7 +1375,7 @@ API_CALLABLE(N(ProcessHurricane)) {
     switch (script->functionTemp[0]) {
         case 0:
             partner->state.angle = 0.0f;
-            partner->state.moveTime = 165;
+            partner->state.moveTime = CONST_1;
             partner->state.moveArcAmplitude = 0;
             sIsHurricaneActive = TRUE;
             D_8023D338 = 255;
@@ -1381,7 +1389,7 @@ API_CALLABLE(N(ProcessHurricane)) {
             effect->data.huffPuffBreath->envG = 240;
             effect->data.huffPuffBreath->envB = 240;
 
-            hurricaneState->unk_54 = 177;
+            hurricaneState->unk_54 = CONST_2;
             hurricaneState->breathSizeIncrease = 0;
             hurricaneState->unk_46 = 0;
             hurricaneState->state = 0;
@@ -1700,21 +1708,21 @@ EvtScript N(hurricane) = {
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_Idle)
     EVT_WAIT(15)
     EVT_CALL(N(InitHurricane))
-    EVT_CALL(action_command_hurricane_start, 0, 147, 3, LVar0)
+    EVT_CALL(action_command_hurricane_start, 0, 147 * DT, 3, LVar0)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
     EVT_CALL(SetActorRotationOffset, ACTOR_PARTNER, 0, 20, 0)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
     EVT_CALL(SetBattleCamTarget, 35, 54, 0)
     EVT_CALL(SetBattleCamOffsetZ, 0)
     EVT_CALL(SetBattleCamZoom, 430)
-    EVT_CALL(MoveBattleCamOver, 150)
+    EVT_CALL(MoveBattleCamOver, 150 * DT)
     EVT_CALL(func_8024ECF8, 0, 0, 1)
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_288)
     EVT_THREAD
         EVT_CALL(N(ProcessHurricane))
     EVT_END_THREAD
     EVT_WAIT(2)
-    EVT_LOOP(150)
+    EVT_LOOP(150 * DT)
         EVT_CALL(N(IsHurricaneActive))
         EVT_IF_EQ(LVar0, 0)
             EVT_BREAK_LOOP

@@ -40,7 +40,7 @@ EvtScript N(EVS_Main) = {
 #if VERSION_PAL
     EVT_CALL(GetLanguage, LVar0)
     EVT_SWITCH(LVar0)
-        EVT_IF_GE(LVar0, 2)
+        EVT_IF_GE(LVar0, LANGUAGE_FR) // or LANGUAGE_ES
             EVT_SUB(LVar0, 2)
         EVT_END_IF
         EVT_CALL(SetModelTexVariant, MODEL_s, LVar0)
