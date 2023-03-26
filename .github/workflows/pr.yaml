@@ -18,8 +18,11 @@ jobs:
           fetch-depth: 0
       - name: Git
         run: |
-          git log --oneline --graph
-          git log --oneline --graph HEAD origin/main
+          git log --oneline --graph --max-count=100
+          git log --oneline --graph --max-count=100 HEAD origin/main
+      - name: clang-format
+        run: |
+          git clang-format --diff HEAD origin/main
       - name: Lint
         uses: cpp-linter/cpp-linter-action@v2
         id: linter
