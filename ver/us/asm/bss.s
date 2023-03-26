@@ -398,16 +398,16 @@ dlabel D_800A0968
 dlabel D_800A0970
 .space 4
 
-dlabel TitleScreen_GfxData
+dlabel TitleScreen_ImgList
 .space 4
 
-dlabel TitleScreen_GfxData_Logo
+dlabel TitleScreen_ImgList_Logo
 .space 4
 
-dlabel TitleScreen_GfxData_Copyright
+dlabel TitleScreen_ImgList_Copyright
 .space 4
 
-dlabel TitleScreen_GfxData_PressStart
+dlabel TitleScreen_ImgList_PressStart
 .space 4
 
 dlabel D_800A0984
