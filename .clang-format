@@ -1,3 +1,7 @@
+DisableFormat: true # clang-format supports many filetypes...
+---
+Language: Cpp
+DisableFormat: false # ...but we only care about C files
 BasedOnStyle: Google
 IndentWidth: 4
 UseTab: Never
@@ -17,3 +21,5 @@ BraceWrapping:
   AfterControlStatement: MultiLine
 
 BreakBeforeBinaryOperators: All
+
+...
