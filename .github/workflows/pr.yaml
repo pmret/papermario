@@ -8,3 +8,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: ./coverage.py --fail-undeleted
+  clang-format:
+    name: See what clang-format thinks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Fetch base branch
+        uses: git fetch origin $GITHUB_BASE_REF
+      - name: Run clang-format
+        run: |
+          git clang-format-14 main --diff
