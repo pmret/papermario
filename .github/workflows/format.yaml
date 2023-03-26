@@ -1,0 +1,14 @@
+name: Format
+on: [pull_request]
+branches:
+  - main
+
+jobs:
+  format-modified:
+    name: See what clang-format thinks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          git fetch origin main
+          git clang-format main --diff
