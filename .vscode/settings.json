@@ -35,6 +35,9 @@
     ],
     "[c]": {
         "editor.wordSeparators": "`~!@#%^&*()-=+[{]}\\|;:'\",.<>/?", // no $, for scripts
+        "editor.formatOnSave": true,
+        "editor.formatOnSaveMode": "modifications",
+        "editor.defaultFormatter": "xaver.clang-format",
     },
     "files.associations": {
         "*.h": "c",
