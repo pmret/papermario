@@ -6,7 +6,10 @@ jobs:
     name: See what clang-format thinks
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - run: |
-          git fetch origin $GITHUB_BASE_REF
-          git clang-format main --diff
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Fetch main
+        uses: git fetch origin $GITHUB_BASE_REF
+      - name: Run clang-format
+        run: |
+          git clang-format main --diff --binary `which clang-format-14`
