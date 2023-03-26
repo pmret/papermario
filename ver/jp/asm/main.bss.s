@@ -325,16 +325,16 @@ dlabel D_800A0964
 dlabel D_800A0970
 .space 4
 
-dlabel TitleData
+dlabel TitleScreen_GfxData
 .space 4
 
-dlabel TitleData_tile
+dlabel TitleScreen_GfxData_tile
 .space 4
 
-dlabel TitleData_tile4b
+dlabel TitleScreen_GfxData_tile4b
 .space 4
 
-dlabel TitleData_block
+dlabel TitleScreen_GfxData_block
 .space 4
 
 dlabel JP_800A0980
