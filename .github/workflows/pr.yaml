@@ -14,10 +14,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: Git
         run: |
-          git log --oneline --graph
-          git fetch main
           git log --oneline --graph
           git log --oneline --graph HEAD origin/main
       - name: Lint
