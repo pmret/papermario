@@ -19,8 +19,8 @@ EvtScript N(EVS_Main) = {
     EVT_SETUP_CAMERA_DEFAULT()
 #if VERSION_PAL
     EVT_CALL(GetLanguage, LVar0)
-    EVT_IF_EQ(LVar0, 3)
-        EVT_SET(LVar0, 2)
+    EVT_IF_EQ(LVar0, LANGUAGE_ES)
+        EVT_SET(LVar0, LANGUAGE_FR)
     EVT_END_IF
     EVT_CALL(SetModelTexVariant, MODEL_s1, LVar0)
     EVT_CALL(SetModelTexVariant, MODEL_s2, LVar0)
