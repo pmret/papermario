@@ -17,7 +17,7 @@ ApiStatus GetDamageIntensity(Evt* script, s32 isInitialCall) {
         script->varTable[0] = 3;
     }
 // i hate indenting my code!
-    return ApiStatus_DONE2;
+              return ApiStatus_DONE2;
 }
 
 ApiStatus AddEffectOffset(Evt* script, s32 isInitialCall) {
