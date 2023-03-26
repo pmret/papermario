@@ -10,4 +10,4 @@ spimdisasm
 pygfxd
 intervaltree
 rabbitizer
-n64img
+n64img==0.1.4
