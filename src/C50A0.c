@@ -1771,36 +1771,30 @@ void func_80133A94(s32 idx, s32 itemID) {
     item_entity_load(item);
 }
 
-// float/stack crap
-#ifdef NON_EQUIVALENT
-s32 test_item_player_collision(ItemEntity* item) {
+b32 test_item_player_collision(ItemEntity* item) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     PartnerStatus* partnerStatus = &gPartnerStatus;
     EncounterStatus* encounterStatus = &gCurrentEncounter;
     Camera* camera = &gCameras[gCurrentCameraID];
-    s32 actionState;
-    f32 t;
-    f32 itemX;
-    f32 itemY;
-    f32 itemZ;
-    f32 playerX;
-    f32 playerY;
-    f32 playerZ;
-
-    f32 sp10;
-    f32 new_var2;
-    f32 sp14;
-    f32 sp1C;
-    f32 sp20;
-    f32 sp24;
-    f32 zDiff;
-    f32 temp_f14;
-    f32 xDiff;
+    s32 actionState = playerStatus->actionState;
+    f32 distThreshold;
+    f32 itemX, itemY, itemZ;
+    f32 tmpX, tmpZ;
+    f32 playerX, playerY, playerZ;
+    f32 colliderHeightHalf;
+    f32 colliderDiameterQuart;
+    f32 spriteFacingAngle;
+    f32 playerY2;
+    f32 xDiff, zDiff;
+    f32 dist;
     f32 angle;
-    s32 cond;
-    f32 f1;
-
-    actionState = playerStatus->actionState;
+    b32 cond;
+    // below weird temps required to match
+    f32 fourteen;
+    f32 yTopThreshold;
+    f32 yBottomThreshold;
+    f32 tmpFourteen;
+    f32 tmpYTopThreshold;
 
     if (item->flags & ITEM_ENTITY_FLAG_AUTO_COLLECT) {
         item->flags &= ~ITEM_ENTITY_FLAG_AUTO_COLLECT;
@@ -1819,24 +1813,35 @@ s32 test_item_player_collision(ItemEntity* item) {
         return FALSE;
     }
 
+    tmpFourteen = 14.0f;
     if (isPickingUpItem) {
         return FALSE;
     }
 
-    cond = item->flags;
-    if (cond & ITEM_ENTITY_FLAG_HIDDEN) {
+    fourteen = tmpFourteen;
+    tmpYTopThreshold = 18.0f;
+    yBottomThreshold = 27.0f;
+
+    cond = item->flags; // required to match
+    if (item->flags & ITEM_ENTITY_FLAG_HIDDEN) {
         return FALSE;
     }
 
+    yTopThreshold = tmpYTopThreshold;
     if (get_time_freeze_mode() != TIME_FREEZE_NORMAL) {
         return FALSE;
     }
 
-    if (partnerStatus->partnerActionState != 0 && partnerStatus->actingPartner == 9) {
+    if (partnerStatus->partnerActionState != PARTNER_ACTION_NONE && partnerStatus->actingPartner == PARTNER_BOW) {
         return FALSE;
     }
 
-    if ((actionState == 0x1D || actionState == 0x1E || actionState == 0x1F) && item->itemID != ITEM_COIN) {
+    if (
+        (actionState == ACTION_STATE_USE_SPINNING_FLOWER
+         || actionState == ACTION_STATE_USE_MUNCHLESIA
+         || actionState == ACTION_STATE_USE_TWEESTER)
+        && item->itemID != ITEM_COIN)
+    {
         return FALSE;
     }
 
@@ -1845,23 +1850,23 @@ s32 test_item_player_collision(ItemEntity* item) {
     }
 
     cond = FALSE;
-    sp1C = playerStatus->colliderHeight / 2;
+    colliderHeightHalf = playerStatus->colliderHeight / 2;
     playerX = playerStatus->position.x;
     playerY = playerStatus->position.y;
     playerZ = playerStatus->position.z;
 
-    sp20 = playerStatus->colliderDiameter / 4;
-    if (playerStatus->spriteFacingAngle < 180.0f) {
-        temp_f14 = clamp_angle(camera->currentYaw - 90.0f);
+    colliderDiameterQuart = playerStatus->colliderDiameter / 4;
+    spriteFacingAngle = playerStatus->spriteFacingAngle;
+    if (spriteFacingAngle < 180.0f) {
+        spriteFacingAngle = clamp_angle(camera->currentYaw - 90.0f);
     } else {
-        temp_f14 = clamp_angle(camera->currentYaw + 90.0f);
+        spriteFacingAngle = clamp_angle(camera->currentYaw + 90.0f);
     }
 
-    new_var2 = playerY;
-    sp10 = playerX;
-    sp24 = playerY;
-    sp14 = playerZ;
-    if (get_clamped_angle_diff(camera->currentYaw, temp_f14) < 0.0f) {
+    tmpX = playerX;
+    playerY2 = playerY;
+    tmpZ = playerZ;
+    if (get_clamped_angle_diff(camera->currentYaw, spriteFacingAngle) < 0.0f) {
         angle = clamp_angle(camera->currentYaw - 90.0f);
         if (playerStatus->trueAnimation & 0x01000000) {
             angle = clamp_angle(angle + 30.0f);
@@ -1872,28 +1877,37 @@ s32 test_item_player_collision(ItemEntity* item) {
             angle = clamp_angle(angle - 30.0f);
         }
     }
-    add_vec2D_polar(&sp10, &sp14, 24.0f, angle);
+
+    add_vec2D_polar(&tmpX, &tmpZ, 24.0f, angle);
+
     itemX = item->position.x;
     itemY = item->position.y;
     itemZ = item->position.z;
-    xDiff = itemX - playerX;
-    zDiff = itemZ - playerZ;
-    t = 13.5f;
-    f1 = sqrtf(SQ(xDiff) + SQ(zDiff));
-    if (!(sp20 + t <= f1) &&
-        !(itemY + 27.0f < new_var2) &&
-        !(playerY + sp1C < itemY))
-    {
-        cond = TRUE;
-    }
 
-    if (playerStatus->actionState == 0x12 && (playerStatus->flags & 0x01000000)) {
-        xDiff = itemX - sp10;
-        zDiff = itemZ - sp14;
-        f1 = sqrtf(SQ(xDiff) + SQ(zDiff));
-        if (!(14.0f + t <= f1) &&
-            !(itemY + 27.0f < sp24) &&
-            !(playerY + 18.0f < itemY))
+    do {
+        do {
+            distThreshold = 13.5f;
+        } while (0); // required to match
+
+        xDiff = itemX - playerX;
+        zDiff = itemZ - playerZ;
+
+        dist = sqrtf(SQ(xDiff) + SQ(zDiff));
+        if (!(colliderDiameterQuart + distThreshold <= dist) &&
+            !(itemY + yBottomThreshold < playerY) &&
+            !(playerY + colliderHeightHalf < itemY))
+        {
+            cond = TRUE;
+        }
+    } while (0); // required to match
+
+    if (playerStatus->actionState == ACTION_STATE_HAMMER && (playerStatus->flags & PS_FLAG_HAMMER_CHECK)) {
+        xDiff = itemX - tmpX;
+        zDiff = itemZ - tmpZ;
+        dist = sqrtf(SQ(xDiff) + SQ(zDiff));
+        if (!(fourteen + distThreshold <= dist)
+            && !(itemY + yBottomThreshold < playerY2)
+            && !(playerY2 + yTopThreshold < itemY))
         {
             cond = TRUE;
         }
@@ -1916,9 +1930,6 @@ s32 test_item_player_collision(ItemEntity* item) {
     }
     return FALSE;
 }
-#else
-INCLUDE_ASM(s32, "C50A0", test_item_player_collision);
-#endif
 
 s32 test_item_entity_position(f32 x, f32 y, f32 z, f32 dist) {
     ItemEntity* item;
