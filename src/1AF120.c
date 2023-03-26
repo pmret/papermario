@@ -16,6 +16,7 @@ ApiStatus GetDamageIntensity(Evt* script, s32 isInitialCall) {
     } else {
         script->varTable[0] = 3;
     }
+// i hate indenting my code!
     return ApiStatus_DONE2;
 }
 
