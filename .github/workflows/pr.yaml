@@ -9,14 +9,13 @@ jobs:
       - uses: actions/checkout@v2
       - run: ./coverage.py --fail-undeleted
   lint:
-    name: Lint/format
+    name: Format and lint
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - uses: cpp-linter/cpp-linter-action@v2
+      - name: Lint
+        uses: cpp-linter/cpp-linter-action@v2
         id: linter
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -24,7 +23,7 @@ jobs:
           style: file
           lines-changed-only: diff
           tidy-checks: ''
-
-      - name: Fail fast?!
+          version: '15'
+      - name: Fail if lint failed
         if: steps.linter.outputs.checks-failed > 0
-        run: echo "Some files failed the linting checks!"
+        run: exit 1
