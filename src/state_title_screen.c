@@ -35,8 +35,8 @@ SaveMetadata gSaveSlotMetadata[4] = {
 u8 gSaveSlotHasData[4] = {TRUE, TRUE, TRUE, TRUE};
 
 s32 TitleScreen_PressStart_Alpha = 0; // the opacity of "PRESS START" text
-s32 TitleScreen_PressStart_isVisible = FALSE; // toggles the visibility of "PRESS START"
-s32 TitleScreen_PressStart_BlinkCounter = 0; // counts to 16, then toggles TitleScreen_PressStart_isVisible
+b32 TitleScreen_PressStart_IsVisible = FALSE; // toggles the visibility of "PRESS START"
+s32 TitleScreen_PressStart_BlinkCounter = 0; // counts to 16, then toggles TitleScreen_PressStart_IsVisible
 
 s32 D_80077A34[1] = {0};
 
@@ -303,7 +303,7 @@ void state_drawUI_title_screen(void) {
     switch (gGameStatusPtr->introState) {
         case INTRO_STATE_0:
             TitleScreen_PressStart_Alpha = 0;
-            TitleScreen_PressStart_isVisible = FALSE;
+            TitleScreen_PressStart_IsVisible = FALSE;
             TitleScreen_PressStart_BlinkCounter = 0;
             draw_title_screen_NOP();
             break;
@@ -420,7 +420,7 @@ void title_screen_draw_logo(f32 arg0) {
 #endif
 
 void title_screen_draw_press_start(void) {
-    switch (TitleScreen_PressStart_isVisible) {
+    switch (TitleScreen_PressStart_IsVisible) {
         case FALSE:
             TitleScreen_PressStart_Alpha -= 128;
             if (TitleScreen_PressStart_Alpha < 0) {
@@ -430,7 +430,7 @@ void title_screen_draw_press_start(void) {
             TitleScreen_PressStart_BlinkCounter++;
             if (TitleScreen_PressStart_BlinkCounter >= 16) {
                 TitleScreen_PressStart_BlinkCounter = 0;
-                TitleScreen_PressStart_isVisible = TRUE;
+                TitleScreen_PressStart_IsVisible = TRUE;
             }
             break;
         case TRUE:
@@ -442,7 +442,7 @@ void title_screen_draw_press_start(void) {
             TitleScreen_PressStart_BlinkCounter++;
             if (TitleScreen_PressStart_BlinkCounter >= 16) {
                 TitleScreen_PressStart_BlinkCounter = 0;
-                TitleScreen_PressStart_isVisible = FALSE;
+                TitleScreen_PressStart_IsVisible = FALSE;
             }
     }
 
