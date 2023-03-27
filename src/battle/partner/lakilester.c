@@ -1337,11 +1337,11 @@ enum {
 };
 
 #if VERSION_PAL
-#define CONST_1 140
-#define CONST_2 152
+#define HURRICANE_PARTNER_MOVE_TIME 140
+#define HURRICANE_UNUSED_TIME 152
 #else
-#define CONST_1 165
-#define CONST_2 177
+#define HURRICANE_PARTNER_MOVE_TIME 165
+#define HURRICANE_UNUSED_TIME 177
 #endif
 
 API_CALLABLE(N(ProcessHurricane)) {
@@ -1375,7 +1375,7 @@ API_CALLABLE(N(ProcessHurricane)) {
     switch (script->functionTemp[0]) {
         case 0:
             partner->state.angle = 0.0f;
-            partner->state.moveTime = CONST_1;
+            partner->state.moveTime = HURRICANE_PARTNER_MOVE_TIME;
             partner->state.moveArcAmplitude = 0;
             sIsHurricaneActive = TRUE;
             D_8023D338 = 255;
@@ -1389,7 +1389,7 @@ API_CALLABLE(N(ProcessHurricane)) {
             effect->data.huffPuffBreath->envG = 240;
             effect->data.huffPuffBreath->envB = 240;
 
-            hurricaneState->unk_54 = CONST_2;
+            hurricaneState->unk_54 = HURRICANE_UNUSED_TIME;
             hurricaneState->breathSizeIncrease = 0;
             hurricaneState->unk_46 = 0;
             hurricaneState->state = 0;
