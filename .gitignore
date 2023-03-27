@@ -24,6 +24,8 @@ build.ninja
 *.ld
 *.elf
 *.z64
+*.v64
+*.n64
 *.Yay0
 *.msg.h
 *.i
