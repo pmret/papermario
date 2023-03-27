@@ -22,7 +22,9 @@ jobs:
           git log --oneline --graph --max-count=100 HEAD origin/main
       - name: clang-format
         run: |
+          git config --global color.ui always
           git clang-format-14 --diff origin/main HEAD
+          git config --global color.ui auto
       - name: Lint
         uses: cpp-linter/cpp-linter-action@v2
         id: linter
