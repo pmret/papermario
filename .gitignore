@@ -24,9 +24,10 @@ build.ninja
 *.ld
 *.elf
 *.z64
+*.v64
+*.n64
 *.Yay0
 *.msg.h
-*.bin
 *.i
 *.o
 *.zip
@@ -41,7 +42,12 @@ build/
 /tools/permuter_settings.toml
 
 # Assets
-/assets/*
+# ** DO NOT UNIGNORE THESE FILES!! SEE THE FOLLOWING LINK IF YOU'RE MODDING ASSETS:**
+# https://github.com/pmret/papermario/wiki/Asset-overrides
+/assets/us
+/assets/jp
+/assets/pal
+/assets/ique
 
 # Star Rod
 /sprite/SpriteTable.xml
