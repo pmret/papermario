@@ -1,0 +1,27 @@
+#!/usr/bin/env python3
+
+import os
+
+ROM = "ver/current/build/papermario.z64"
+EMULATOR_PATHS = [
+    "/usr/bin/cen64",
+    "/usr/bin/ares",
+    "/Applications/ares.app/Contents/MacOS/ares",
+    "/usr/bin/mupen64plus",
+    "/usr/bin/retroarch",
+    "C:\\Program Files (x86)\\Project64 2.3\\Project64.exe",
+]
+
+def main():
+    if os.system(f"ninja {ROM}") != 0:
+        print("Build failed")
+        return
+
+    for path in EMULATOR_PATHS:
+        if os.path.exists(path):
+            os.system(f"{path} {ROM}")
+            return
+    print("No emulator found")
+
+if __name__ == "__main__":
+    main()
