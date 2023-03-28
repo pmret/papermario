@@ -1060,12 +1060,7 @@ EvtScript N(bomb) = {
         EVT_CASE_EQ(MOVE_BOMB)
             EVT_CALL(action_command_bomb_start, 0, 57 * DT, 3, 0)
         EVT_CASE_EQ(MOVE_POWER_BOMB)
-#if VERSION_PAL
-            // 72 * DT = 60
-            EVT_CALL(action_command_bomb_start, 0, 59, 3, 1)
-#else
-            EVT_CALL(action_command_bomb_start, 0, 72 * DT, 3, 1)
-#endif
+            EVT_CALL(action_command_bomb_start, 0, 73 * DT - 1, 3, 1)
         EVT_CASE_EQ(MOVE_MEGA_BOMB)
             EVT_CALL(action_command_bomb_start, 0, 87 * DT, 3, 2)
     EVT_END_SWITCH
