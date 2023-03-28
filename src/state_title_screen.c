@@ -66,8 +66,8 @@ Gfx D_80077A50[] = {
 typedef struct TitleDataStruct {
     /* 0x0 */ s32 logo;
     /* 0x4 */ s32 copyright;
-    /* 0x8 */ s32 press_start;
-    /* 0xC */ s32 copyright_palette;
+    /* 0x8 */ s32 pressStart;
+    /* 0xC */ s32 copyrightPalette;
 } TitleDataStruct; // size = 0x10
 
 extern s16 D_800A0970;
@@ -110,9 +110,9 @@ void state_init_title_screen(void) {
 
     TitleScreen_ImgList_Logo = (s32*)(TitleScreen_ImgList->logo + (s32) TitleScreen_ImgList);
     TitleScreen_ImgList_Copyright = (s32*)(TitleScreen_ImgList->copyright + (s32) TitleScreen_ImgList);
-    TitleScreen_ImgList_PressStart = (s32*)(TitleScreen_ImgList->press_start + (s32) TitleScreen_ImgList);
+    TitleScreen_ImgList_PressStart = (s32*)(TitleScreen_ImgList->pressStart + (s32) TitleScreen_ImgList);
 #if VERSION_JP
-    TitleScreen_ImgList_CopyrightPalette = (s32*)(TitleScreen_ImgList->copyright_palette + (s32) TitleScreen_ImgList);
+    TitleScreen_ImgList_CopyrightPalette = (s32*)(TitleScreen_ImgList->copyrightPalette + (s32) TitleScreen_ImgList);
 #endif
 
     create_cameras_a();
