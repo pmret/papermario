@@ -425,9 +425,7 @@ void pause_stats_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
 
     // draw empty bars
     while (TRUE) {
-        if (curIncrement >= powIncrements) {
-            break;
-        }
+        BREAK_IF_DONE()
 
         if (powIncIdx == 0) {
             curIncrement++;
