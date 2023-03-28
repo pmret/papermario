@@ -66,12 +66,42 @@ s16 gPauseWindowFlipDownAngles_2[] = {  10,  25,  42,  60,  80 };
 s32 gPauseTutorialState = -1;
 s32 gPauseTutorialInputState = 3;
 s32 gPauseTutorialButtons[] = { BUTTON_A, BUTTON_STICK_RIGHT, BUTTON_A, BUTTON_A, BUTTON_A, BUTTON_A, BUTTON_START };
-s32 gPauseTutorialDescMessages[] = { 9, 10, 11, 12, 13, 14, 15 };
-s32 gPauseTutorialCmdMessages[] = { 16, 17, 18, 19, 20, 21, 22 };
-s32 D_8024F074[] = { 2, 3, 4, 5, 6, 7, 8 }; // unused
+
+s32 gPauseTutorialDescMessages[] = {
+    PAUSE_MSG_TUT_DESC_1,
+    PAUSE_MSG_TUT_DESC_2,
+    PAUSE_MSG_TUT_DESC_3,
+    PAUSE_MSG_TUT_DESC_4,
+    PAUSE_MSG_TUT_DESC_5,
+    PAUSE_MSG_TUT_DESC_6,
+    PAUSE_MSG_TUT_DESC_7,
+};
+
+s32 gPauseTutorialCmdMessages[] = {
+    PAUSE_MSG_TUT_CMD_1,
+    PAUSE_MSG_TUT_CMD_2,
+    PAUSE_MSG_TUT_CMD_3,
+    PAUSE_MSG_TUT_CMD_4,
+    PAUSE_MSG_TUT_CMD_5,
+    PAUSE_MSG_TUT_CMD_6,
+    PAUSE_MSG_TUT_CMD_7,
+};
+
+ // unused
+s32 D_8024F074[] = {
+    PAUSE_MSG_TUT_UNUSED_1,
+    PAUSE_MSG_TUT_UNUSED_2,
+    PAUSE_MSG_TUT_UNUSED_3,
+    PAUSE_MSG_TUT_UNUSED_4,
+    PAUSE_MSG_TUT_UNUSED_5,
+    PAUSE_MSG_TUT_UNUSED_6,
+    PAUSE_MSG_TUT_UNUSED_7,
+};
+
 s32 gPauseTutorialIconIDs[] = { 5, 4, 5, 5, 5, 5, 6 };
 u8 gPauseMenuTextScrollInterpEasingLUT[] = { 0, 1, 2, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8};
 u8 gPauseMenuPageScrollInterpEasingLUT[] = { 0, 1, 2, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8};
+
 s32 gPauseTutorialSpriteAnims[][4] = {
     {
         ANIM_Goombaria_Still,
@@ -553,9 +583,9 @@ void pause_tutorial_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
         gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     }
 
-    get_msg_properties(pause_get_menu_msg(1), &msgHeight, &msgWidth, &msgMaxLineChars, &msgNumLines, &msgMaxLinesPerPage, NULL, 1);
+    get_msg_properties(pause_get_menu_msg(PAUSE_MSG_TUT_NAME_BADGES), &msgHeight, &msgWidth, &msgMaxLineChars, &msgNumLines, &msgMaxLinesPerPage, NULL, 1);
     margin = (s32)(width - msgWidth) >> 1;
-    draw_msg(pause_get_menu_msg(1), baseX + margin, baseY, 255, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
+    draw_msg(pause_get_menu_msg(PAUSE_MSG_TUT_NAME_BADGES), baseX + margin, baseY, 255, MSG_PAL_WHITE, DRAW_MSG_STYLE_MENU);
     gPauseTutorialScrollPos += pause_interp_text_scroll(gPauseTutorialState * 140 - gPauseTutorialScrollPos);
     gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, baseX + 1, baseY + 1, baseX + width - 1, baseY + height - 1);
     state = gPauseTutorialState;
@@ -600,7 +630,7 @@ void pause_init(void) {
     gPauseDescTextOffset = 0;
     gPauseDescTextMaxPos = 0;
     gPauseShownDescIconScript = 0;
-    gPauseCurrentDescMsg = 0;
+    gPauseCurrentDescMsg = MSG_NONE;
     gPauseCurrentDescIconScript = 0;
     gPauseMenuCurrentTab = 0;
 

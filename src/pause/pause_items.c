@@ -1,4 +1,5 @@
 #include "pause_common.h"
+#include "message_ids.h"
 
 void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
 void pause_items_init(MenuPanel* panel);
@@ -212,7 +213,7 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
 
                 if (i == 0) {
                     if (isNone) {
-                        draw_msg(pause_get_menu_msg(0x4E), sp6C + pause_items_scroll_offset_x(posX) + itemOffsetX,
+                        draw_msg(pause_get_menu_msg(PAUSE_MSG_BAGDE_DESC_NONE), sp6C + pause_items_scroll_offset_x(posX) + itemOffsetX,
                                 sp70 + pause_items_scroll_offset_y(posY) + itemOffsetY, 255, palette, style);
                     } else {
                         if (gItemTable[itemID].nameMsg) {
@@ -296,7 +297,7 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
          91, 34, 255, gPauseItemsCurrentTab == 1 ? 128 : 0, 0, 0,
          0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 
-    msg = pause_get_menu_msg(0x4F);
+    msg = pause_get_menu_msg(PAUSE_MSG_KEY_ITEMS);
     msgX = baseX + 12;
     if (gPauseItemsCurrentTab == 0) {
         msgX = baseX + 21;
@@ -312,7 +313,7 @@ void pause_items_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
          91, 34, 255, gPauseItemsCurrentTab == 0 ? 128 : 0, 0, 0,
          0, 0, 0, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 
-    msg = pause_get_menu_msg(0x50);
+    msg = pause_get_menu_msg(PAUSE_MSG_CONSUMABLES);
     msgX = baseX + 25;
     if (gPauseItemsCurrentTab == 1) {
         msgX = baseX + 34;
@@ -541,14 +542,14 @@ void pause_items_handle_input(MenuPanel* panel) {
         if (gPauseItemsSelectedItem != ITEM_NONE_STANDIN && gPauseItemsSelectedItem != ITEM_INVALID && gPauseItemsSelectedItem != 0) {
             gPauseCurrentDescMsg = gItemTable[gPauseItemsSelectedItem].fullDescMsg;
         } else {
-            gPauseCurrentDescMsg = 0;
+            gPauseCurrentDescMsg = MSG_NONE;
             gPauseCurrentDescIconScript = NULL;
         }
     } else {
         if (gPauseItemsCurrentTab == 1) {
-            gPauseCurrentDescMsg = pause_get_menu_msg(0x51);
+            gPauseCurrentDescMsg = pause_get_menu_msg(PAUSE_MSG_DESC_CONSUMABLES);
         } else {
-            gPauseCurrentDescMsg = pause_get_menu_msg(0x52);
+            gPauseCurrentDescMsg = pause_get_menu_msg(PAUSE_MSG_DESC_KEY_ITEMS);
         }
 
         gPauseCurrentDescIconScript = NULL;
