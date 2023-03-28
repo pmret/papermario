@@ -87,10 +87,21 @@ s32 gPauseTutorialCmdMessages[] = {
     PAUSE_MSG_TUT_CMD_7,
 };
 
-s32 D_8024F074[] = { 2, 3, 4, 5, 6, 7, 8 }; // unused
+ // unused
+s32 D_8024F074[] = {
+    PAUSE_MSG_TUT_UNUSED_1,
+    PAUSE_MSG_TUT_UNUSED_2,
+    PAUSE_MSG_TUT_UNUSED_3,
+    PAUSE_MSG_TUT_UNUSED_4,
+    PAUSE_MSG_TUT_UNUSED_5,
+    PAUSE_MSG_TUT_UNUSED_6,
+    PAUSE_MSG_TUT_UNUSED_7,
+};
+
 s32 gPauseTutorialIconIDs[] = { 5, 4, 5, 5, 5, 5, 6 };
 u8 gPauseMenuTextScrollInterpEasingLUT[] = { 0, 1, 2, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8};
 u8 gPauseMenuPageScrollInterpEasingLUT[] = { 0, 1, 2, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8};
+
 s32 gPauseTutorialSpriteAnims[][4] = {
     {
         ANIM_Goombaria_Still,
