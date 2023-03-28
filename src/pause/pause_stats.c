@@ -38,10 +38,36 @@ typedef struct {
     s32 baseMsgID;
 } StatsEntryData; // size = 0xC
 
-HudScript* gStatsMenuElements[] = { &HES_MarioHeadSmall, &HES_StatBoots0, &HES_StatHammer0,
-                                    &HES_StatusCoin, &HES_StatusStarPoint, &HES_StatStarPiece_1,
-                                    &HES_Clock, &HES_StatusHeart, &HES_StatFp_1, &HES_StatBp,
-                                    &HES_StatusStar1, &HES_StatTimes};
+enum {
+    STAT_ICON_MARIO         = 0,
+    STAT_ICON_BOOTS         = 1,
+    STAT_ICON_HAMMER        = 2,
+    STAT_ICON_COIN          = 3,
+    STAT_ICON_STAR_POINT    = 4,
+    STAT_ICON_STAR_PIECE    = 5,
+    STAT_ICON_CLOCK         = 6,
+    STAT_ICON_HP            = 7,
+    STAT_ICON_FP            = 8,
+    STAT_ICON_BP            = 9,
+    STAT_ICON_STAR          = 10,
+    STAT_ICON_TIMES         = 11,
+};
+
+HudScript* gStatsMenuElements[] = {
+    [STAT_ICON_MARIO]       &HES_MarioHeadSmall,
+    [STAT_ICON_BOOTS]       &HES_StatBoots0,
+    [STAT_ICON_HAMMER]      &HES_StatHammer0,
+    [STAT_ICON_COIN]        &HES_StatusCoin,
+    [STAT_ICON_STAR_POINT]  &HES_StatusStarPoint,
+    [STAT_ICON_STAR_PIECE]  &HES_StatStarPiece_1,
+    [STAT_ICON_CLOCK]       &HES_Clock,
+    [STAT_ICON_HP]          &HES_StatusHeart,
+    [STAT_ICON_FP]          &HES_StatFp_1,
+    [STAT_ICON_BP]          &HES_StatBp,
+    [STAT_ICON_STAR]        &HES_StatusStar1,
+    [STAT_ICON_TIMES]       &HES_StatTimes,
+};
+
 HudScript* gStatsBootsElements[] = { &HES_StatBoots0, &HES_StatBoots1, &HES_StatBoots2, &HES_StatBoots3 };
 HudScript* gStatsHammerElements[] = { &HES_StatHammer0, &HES_StatHammer1, &HES_StatHammer2, &HES_StatHammer3 };
 s32 gPauseStatsBootsMessages[] = { 59, 60, 61, 62 };
@@ -56,18 +82,18 @@ s8 gPauseStatsGridData[] = {
     3, 10
 };
 StatsEntryData gStatsMenuEntries[] = {
-    {.cursorX =   9, .cursorY =  20, .baseMsgID = 33},
-    {.cursorX =  17, .cursorY =  55, .baseMsgID = 34},
-    {.cursorX =  17, .cursorY =  90, .baseMsgID = 35},
-    {.cursorX =  17, .cursorY = 124, .baseMsgID = 36},
-    {.cursorX = 138, .cursorY =  28, .baseMsgID = 37},
-    {.cursorX = 138, .cursorY =  53, .baseMsgID = 40},
-    {.cursorX = 132, .cursorY =  76, .baseMsgID = 44},
-    {.cursorX = 125, .cursorY =  91, .baseMsgID = 45},
-    {.cursorX = 125, .cursorY = 106, .baseMsgID = 46},
-    {.cursorX = 125, .cursorY = 121, .baseMsgID = 47},
-    {.cursorX = 125, .cursorY = 138, .baseMsgID = 49}
-};
+    { .cursorX =   9, .cursorY =  20, .baseMsgID = PAUSE_MSG_TIP_CONTROLS },
+    { .cursorX =  17, .cursorY =  55, .baseMsgID = PAUSE_MSG_TIP_HP },
+    { .cursorX =  17, .cursorY =  90, .baseMsgID = PAUSE_MSG_TIP_FP },
+    { .cursorX =  17, .cursorY = 124, .baseMsgID = PAUSE_MSG_TIP_BP },
+    { .cursorX = 138, .cursorY =  28, .baseMsgID = PAUSE_MSG_TIP_BOOTS_1 },
+    { .cursorX = 138, .cursorY =  53, .baseMsgID = PAUSE_MSG_TIP_HAMMER_0 },
+    { .cursorX = 132, .cursorY =  76, .baseMsgID = PAUSE_MSG_TIP_STAR_POWER },
+    { .cursorX = 125, .cursorY =  91, .baseMsgID = PAUSE_MSG_TIP_STAR_POINTS },
+    { .cursorX = 125, .cursorY = 106, .baseMsgID = PAUSE_MSG_TIP_COINS },
+    { .cursorX = 125, .cursorY = 121, .baseMsgID = PAUSE_MSG_TIP_SECRETS },
+    { .cursorX = 125, .cursorY = 138, .baseMsgID = PAUSE_MSG_TIP_TIME },
+}; 
 HudScript* gPauseStatsSPIncElements[] = { &HES_StatusSPIncrement1, &HES_StatusSPIncrement3,
                                           &HES_StatusSPIncrement2, &HES_StatusSPIncrement4,
                                           &HES_StatusSPIncrement5, &HES_StatusSPIncrement6,
@@ -122,81 +148,99 @@ void pause_stats_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
     PlayerData* playerData;
     s16 bootsLevel;
     s16 hammerLevel;
-    s32 icon10;
-    s32 limit;
-    s32 var_s2_2;
-    s32 var_s3_2;
-    s32 cond;
-    s32 elemIdx;
+    s32 powHudElemID;
+    s32 powIncrements;
+    s32 powIncIdx;
+    s32 curIncrement;
+    b32 drawingFirst;
+    s32 powBarIdx;
     s32 boxWidth;
     s16 level;
-    s32 frameCounter;
-    s32 maxStarPower;
+    s32 frameCount;
+    s32 powFullBars;
 
-    hud_element_set_render_pos(gPauseStatsIconIDs[3], baseX + 143, baseY + 109);
-    hud_element_draw_without_clipping(gPauseStatsIconIDs[3]);
-    draw_msg(pause_get_menu_msg(0x32), baseX + 155, baseY + 101, 255, 0xA, 1);
-    draw_number(gPlayerData.coins, baseX + 281, baseY + 101 + NUMBER_OFFSET_Y, 1, 0xA, 255, 3);
-    hud_element_set_render_pos(gPauseStatsIconIDs[11], baseX + 248, baseY + 108);
-    hud_element_draw_without_clipping(gPauseStatsIconIDs[11]);
-    hud_element_set_render_pos(gPauseStatsIconIDs[4], baseX + 143, baseY + 0x5E);
-    hud_element_draw_without_clipping(gPauseStatsIconIDs[4]);
-    draw_msg(pause_get_menu_msg(51), baseX + 155, baseY + 86, 255, 0xA, 1);
-    draw_number(gPlayerData.starPoints, baseX + 281, baseY + 86 + NUMBER_OFFSET_Y, 1, 0xA, 255, 3);
-    hud_element_set_render_pos(gPauseStatsIconIDs[11], baseX + 248, baseY + 93);
-    hud_element_draw_without_clipping(gPauseStatsIconIDs[11]);
-    hud_element_set_render_pos(gPauseStatsIconIDs[5], baseX + 143, baseY + 123);
-    hud_element_draw_without_clipping(gPauseStatsIconIDs[5]);
-    draw_msg(pause_get_menu_msg(0x34), baseX + 155, baseY + 116, 255, 0xA, 1);
-    draw_number(gPlayerData.starPieces, baseX + 281, baseY + 116 + NUMBER_OFFSET_Y, 1, 0xA, 255, 3);
-    hud_element_set_render_pos(gPauseStatsIconIDs[11], baseX + 248, baseY + 123);
-    hud_element_draw_without_clipping(gPauseStatsIconIDs[11]);
-    pause_draw_menu_label(0, baseX + 21, baseY + 35);
-    hud_element_set_render_pos(gPauseStatsIconIDs[7], baseX + 52, baseY + 57);
-    hud_element_draw_without_clipping(gPauseStatsIconIDs[7]);
-    draw_msg(pause_get_menu_msg(0x36), baseX + COL_A_X, baseY + ROW_1_Y, 255, 0, 1);
+    // draw coin count
+    hud_element_set_render_pos(gPauseStatsIconIDs[STAT_ICON_COIN], baseX + 143, baseY + 109);
+    hud_element_draw_without_clipping(gPauseStatsIconIDs[STAT_ICON_COIN]);
+    draw_msg(pause_get_menu_msg(PAUSE_MSG_LBL_COINS), baseX + 155, baseY + 101, 255, MSG_PAL_STANDARD, 1);
+    draw_number(gPlayerData.coins, baseX + 281, baseY + 101 + NUMBER_OFFSET_Y, 1, MSG_PAL_STANDARD, 255, 3);
+    hud_element_set_render_pos(gPauseStatsIconIDs[STAT_ICON_TIMES], baseX + 248, baseY + 108);
+    hud_element_draw_without_clipping(gPauseStatsIconIDs[STAT_ICON_TIMES]);
+
+    // draw star point count
+    hud_element_set_render_pos(gPauseStatsIconIDs[STAT_ICON_STAR_POINT], baseX + 143, baseY + 94);
+    hud_element_draw_without_clipping(gPauseStatsIconIDs[STAT_ICON_STAR_POINT]);
+    draw_msg(pause_get_menu_msg(PAUSE_MSG_LBL_STAR_POINTS), baseX + 155, baseY + 86, 255, MSG_PAL_STANDARD, 1);
+    draw_number(gPlayerData.starPoints, baseX + 281, baseY + 86 + NUMBER_OFFSET_Y, 1, MSG_PAL_STANDARD, 255, 3);
+    hud_element_set_render_pos(gPauseStatsIconIDs[STAT_ICON_TIMES], baseX + 248, baseY + 93);
+    hud_element_draw_without_clipping(gPauseStatsIconIDs[STAT_ICON_TIMES]);
+
+    // draw star piece count
+    hud_element_set_render_pos(gPauseStatsIconIDs[STAT_ICON_STAR_PIECE], baseX + 143, baseY + 123);
+    hud_element_draw_without_clipping(gPauseStatsIconIDs[STAT_ICON_STAR_PIECE]);
+    draw_msg(pause_get_menu_msg(PAUSE_MSG_LBL_STAR_PIECES), baseX + 155, baseY + 116, 255, MSG_PAL_STANDARD, 1);
+    draw_number(gPlayerData.starPieces, baseX + 281, baseY + 116 + NUMBER_OFFSET_Y, 1, MSG_PAL_STANDARD, 255, 3);
+    hud_element_set_render_pos(gPauseStatsIconIDs[STAT_ICON_TIMES], baseX + 248, baseY + 123);
+    hud_element_draw_without_clipping(gPauseStatsIconIDs[STAT_ICON_TIMES]);
+
+    // draw HP count
+    pause_draw_menu_label(PAUSE_LBL_HP, baseX + 21, baseY + 35);
+    hud_element_set_render_pos(gPauseStatsIconIDs[STAT_ICON_HP], baseX + 52, baseY + 57);
+    hud_element_draw_without_clipping(gPauseStatsIconIDs[STAT_ICON_HP]);
+    draw_msg(pause_get_menu_msg(PAUSE_MSG_LBL_HP), baseX + COL_A_X, baseY + ROW_1_Y, 255, MSG_PAL_WHITE, 1);
     draw_number(gPlayerData.curHP, baseX + 78, baseY + 51, 1, 0, 255, 3);
-    draw_msg(pause_get_menu_msg(0x39), baseX + COL_B_X, baseY + ROW_2_Y, 255, 0, 1);
+    draw_msg(pause_get_menu_msg(PAUSE_MSG_SLASH), baseX + COL_B_X, baseY + ROW_2_Y, 255, MSG_PAL_WHITE, 1);
     draw_number(gPlayerData.curMaxHP, baseX + COL_C_X, baseY + ROW_2_Y + NUMBER_OFFSET_Y, 1, 0, 255, 3);
-    pause_draw_menu_label(1, baseX + 21, baseY + 69);
-    hud_element_set_render_pos(gPauseStatsIconIDs[8], baseX + 52, baseY + 92);
-    hud_element_draw_without_clipping(gPauseStatsIconIDs[8]);
-    draw_msg(pause_get_menu_msg(0x37), baseX + COL_A_X, baseY + ROW_3_Y, 255, 0, 1);
-    draw_number(gPlayerData.curFP, baseX + 78, baseY + 85, 1, 0, 255, 3);
-    draw_msg(pause_get_menu_msg(0x39), baseX + COL_B_X, baseY + ROW_3_Y, 255, 0, 1);
-    draw_number(gPlayerData.curMaxFP, baseX + COL_C_X, baseY + ROW_3_Y + NUMBER_OFFSET_Y, 1, 0, 255, 3);
-    pause_draw_menu_label(2, baseX + 21, baseY + 103);
-    hud_element_set_render_pos(gPauseStatsIconIDs[9], baseX + 52, baseY + 126);
-    hud_element_draw_without_clipping(gPauseStatsIconIDs[9]);
-    draw_msg(pause_get_menu_msg(0x38), baseX + COL_A_X, baseY + ROW_4_Y, 255, 0, 1);
-    draw_number(gPlayerData.maxBP, baseX + 78, baseY + 119, 1, 0, 255, 3);
-    hud_element_set_render_pos(gPauseStatsIconIDs[6], baseX + 143, baseY + 140);
-    hud_element_draw_without_clipping(gPauseStatsIconIDs[6]);
-    draw_msg(pause_get_menu_msg(0x35), baseX + 155, baseY + 133, 255, 0xA, 1);
 
-    frameCounter = gPlayerData.frameCounter;
-    if (frameCounter > 21599999) {
-        frameCounter = 21599999;
+    // draw FP count
+    pause_draw_menu_label(PAUSE_LBL_FP, baseX + 21, baseY + 69);
+    hud_element_set_render_pos(gPauseStatsIconIDs[STAT_ICON_FP], baseX + 52, baseY + 92);
+    hud_element_draw_without_clipping(gPauseStatsIconIDs[STAT_ICON_FP]);
+    draw_msg(pause_get_menu_msg(PAUSE_MSG_LBL_FP), baseX + COL_A_X, baseY + ROW_3_Y, 255, MSG_PAL_WHITE, 1);
+    draw_number(gPlayerData.curFP, baseX + 78, baseY + 85, 1, MSG_PAL_WHITE, 255, 3);
+    draw_msg(pause_get_menu_msg(PAUSE_MSG_SLASH), baseX + COL_B_X, baseY + ROW_3_Y, 255, MSG_PAL_WHITE, 1);
+    draw_number(gPlayerData.curMaxFP, baseX + COL_C_X, baseY + ROW_3_Y + NUMBER_OFFSET_Y, 1, MSG_PAL_WHITE, 255, 3);
+
+    // draw BP count
+    pause_draw_menu_label(PAUSE_LBL_BP, baseX + 21, baseY + 103);
+    hud_element_set_render_pos(gPauseStatsIconIDs[STAT_ICON_BP], baseX + 52, baseY + 126);
+    hud_element_draw_without_clipping(gPauseStatsIconIDs[STAT_ICON_BP]);
+    draw_msg(pause_get_menu_msg(PAUSE_MSG_LBL_BP), baseX + COL_A_X, baseY + ROW_4_Y, 255, MSG_PAL_WHITE, 1);
+    draw_number(gPlayerData.maxBP, baseX + 78, baseY + 119, 1, MSG_PAL_WHITE, 255, 3);
+
+    #define MINUTE (60 * 60)
+    #define HOUR   (MINUTE * 60)
+
+    // draw play time
+    hud_element_set_render_pos(gPauseStatsIconIDs[STAT_ICON_CLOCK], baseX + 143, baseY + 140);
+    hud_element_draw_without_clipping(gPauseStatsIconIDs[STAT_ICON_CLOCK]);
+    draw_msg(pause_get_menu_msg(PAUSE_MSG_LBL_TIME), baseX + 155, baseY + 133, 255, MSG_PAL_STANDARD, 1);
+    frameCount = gPlayerData.frameCounter;
+    if (frameCount >= (100 * HOUR)) {
+        frameCount = (100 * HOUR) - 1;
     }
-    draw_number((frameCounter / 2160000) % 10, baseX + 237, baseY + 133 + NUMBER_OFFSET_Y, 1, 0xA, 255, 2);
-    draw_number((frameCounter / 216000) - ((frameCounter / 2160000) * 10), baseX + 246, baseY + 133 + NUMBER_OFFSET_Y, 1, 0xA, 255, 2);
-    draw_msg(pause_get_menu_msg(0x3A), baseX + 257, baseY + 132, 255, 0xA, 1);
-    draw_msg(pause_get_menu_msg(0x3A), baseX + 257, baseY + 127, 255, 0xA, 1);
-    draw_number((frameCounter / 36000) - ((frameCounter / 216000) * 6), baseX + 264, baseY + 133 + NUMBER_OFFSET_Y, 1, 0xA, 255, 2);
-    draw_number((frameCounter / 3600) - ((frameCounter / 36000) * 10), baseX + 273, baseY + 133 + NUMBER_OFFSET_Y, 1, 0xA, 255, 2);
+    // draw hours
+    draw_number((frameCount / (10 * HOUR)) % 10, baseX + 237, baseY + 133 + NUMBER_OFFSET_Y, 1, MSG_PAL_STANDARD, 255, 2);
+    draw_number((frameCount / HOUR) % 10, baseX + 246, baseY + 133 + NUMBER_OFFSET_Y, 1, MSG_PAL_STANDARD, 255, 2);
+    draw_msg(pause_get_menu_msg(PAUSE_MSG_DOT), baseX + 257, baseY + 132, 255, MSG_PAL_STANDARD, 1);
+    draw_msg(pause_get_menu_msg(PAUSE_MSG_DOT), baseX + 257, baseY + 127, 255, MSG_PAL_STANDARD, 1);
+    // draw minutes
+    draw_number((frameCount / (10 * MINUTE)) % 6, baseX + 264, baseY + 133 + NUMBER_OFFSET_Y, 1, MSG_PAL_STANDARD, 255, 2);
+    draw_number((frameCount / MINUTE) % 10, baseX + 273, baseY + 133 + NUMBER_OFFSET_Y, 1, MSG_PAL_STANDARD, 255, 2);
 
     bootsLevel = gPlayerData.bootsLevel;
     hammerLevel = gPlayerData.hammerLevel;
     level = gPlayerData.level;
-    draw_box(4, &gPauseWS_10, baseX + 7, baseY + 12, 0, level >= 10 ? 0x79 : 0x71, 17, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
+    draw_box(4, &gPauseWS_10, baseX + 7, baseY + 12, 0, level >= 10 ? 121 : 113, 17, 255, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NULL, NULL, NULL, SCREEN_WIDTH, SCREEN_HEIGHT, NULL);
 
+    // draw level
 #if !VERSION_IQUE
-    hud_element_set_render_pos(gPauseStatsIconIDs[0], baseX + 61, baseY + 21);
-    hud_element_draw_without_clipping(gPauseStatsIconIDs[0]);
+    hud_element_set_render_pos(gPauseStatsIconIDs[STAT_ICON_MARIO], baseX + 61, baseY + 21);
+    hud_element_draw_without_clipping(gPauseStatsIconIDs[STAT_ICON_MARIO]);
 #endif
-    draw_msg(pause_get_menu_msg(0x43), baseX + 16, baseY + 14, 255, 0, 1);
-    draw_msg(pause_get_menu_msg(0x44), baseX + POS_1_X, baseY + 14, 255, 0, 1);
-    draw_number(level, baseX + POS_2_X, baseY + 14 + NUMBER_OFFSET_Y, 1, 0, 255, 2);
+    draw_msg(pause_get_menu_msg(PAUSE_MSG_MARIO), baseX + 16, baseY + 14, 255, MSG_PAL_WHITE, 1);
+    draw_msg(pause_get_menu_msg(PAUSE_MSG_LEVEL), baseX + POS_1_X, baseY + 14, 255, MSG_PAL_WHITE, 1);
+    draw_number(level, baseX + POS_2_X, baseY + 14 + NUMBER_OFFSET_Y, 1, MSG_PAL_WHITE, 255, 2);
 
     bootsLevel++;
     if (bootsLevel < 0) {
@@ -214,301 +258,319 @@ void pause_stats_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
         hammerLevel = 3;
     }
 
-    pause_draw_menu_label(3, baseX + 137, baseY + 10);
-    pause_draw_menu_label(4, baseX + 137, baseY + 35);
+    pause_draw_menu_label(PAUSE_LBL_BOOTS,  baseX + 137, baseY + 10);
+    pause_draw_menu_label(PAUSE_LBL_HAMMER, baseX + 137, baseY + 35);
 
-    hud_element_set_script(gPauseStatsIconIDs[1], gStatsBootsElements[bootsLevel]);
-    hud_element_set_render_pos(gPauseStatsIconIDs[1], baseX + 163, baseY + 29);
-    hud_element_draw_without_clipping(gPauseStatsIconIDs[1]);
-    draw_msg(pause_get_menu_msg(gPauseStatsBootsMessages[bootsLevel]), baseX + 176, baseY + 23, 255, 0, 1);
-    hud_element_set_script(gPauseStatsIconIDs[2], gStatsHammerElements[hammerLevel]);
-    hud_element_set_render_pos(gPauseStatsIconIDs[2], baseX + 163, baseY + 54);
-    hud_element_draw_without_clipping(gPauseStatsIconIDs[2]);
-    draw_msg(pause_get_menu_msg(gPauseStatsHammerMessages[hammerLevel]), baseX + 176, baseY + 48, 255, 0, 1);
-    pause_draw_menu_label(6, baseX + 130, baseY + 69);
-    pause_draw_menu_label(5, baseX + 138, baseY + 60);
-    cond = TRUE;
-    var_s3_2 = 0;
-    elemIdx = 0;
-    var_s2_2 = 0;
-    icon10 = gPauseStatsIconIDs[10];
+    // draw boots
+    hud_element_set_script(gPauseStatsIconIDs[STAT_ICON_BOOTS], gStatsBootsElements[bootsLevel]);
+    hud_element_set_render_pos(gPauseStatsIconIDs[STAT_ICON_BOOTS], baseX + 163, baseY + 29);
+    hud_element_draw_without_clipping(gPauseStatsIconIDs[STAT_ICON_BOOTS]);
+    draw_msg(pause_get_menu_msg(gPauseStatsBootsMessages[bootsLevel]), baseX + 176, baseY + 23, 255, MSG_PAL_WHITE, 1);
 
+    // draw hammer
+    hud_element_set_script(gPauseStatsIconIDs[STAT_ICON_HAMMER], gStatsHammerElements[hammerLevel]);
+    hud_element_set_render_pos(gPauseStatsIconIDs[STAT_ICON_HAMMER], baseX + 163, baseY + 54);
+    hud_element_draw_without_clipping(gPauseStatsIconIDs[STAT_ICON_HAMMER]);
+    draw_msg(pause_get_menu_msg(gPauseStatsHammerMessages[hammerLevel]), baseX + 176, baseY + 48, 255, MSG_PAL_WHITE, 1);
+
+    // draw star power bar
+    pause_draw_menu_label(PAUSE_LBL_STATS,  baseX + 130, baseY + 69);
+    pause_draw_menu_label(PAUSE_LBL_ENERGY, baseX + 138, baseY + 60);
+
+    drawingFirst = TRUE;
+    curIncrement = 0;
+    powBarIdx = 0; // which bar of the power meter we're drawing
+    powIncIdx = 0; // which increment of the bar we're drawing
+    powHudElemID = gPauseStatsIconIDs[STAT_ICON_STAR];
+
+    // get number of full power increments
     playerData = &gPlayerData;
-    maxStarPower = playerData->specialBarsFilled / 256;
-    limit = playerData->specialBarsFilled % 256;
-    limit /= 32;
-    limit += maxStarPower * 8;
+    powFullBars = playerData->specialBarsFilled / 256;
+    powIncrements = playerData->specialBarsFilled % 256; // get remainder in unfilled bar
+    powIncrements /= 32; // subdivide unfilled bar into 8 segments (8 = 256/32)
+    powIncrements += powFullBars * 8; // add 8 increments per full bar
 
+    // draw filled bars
     while (TRUE) {
-
-        if (var_s3_2 >= limit) {
-            break;
-        }
-        var_s3_2++;
-        hud_element_set_script(icon10, gPauseStatsSPIncElements[elemIdx]);
-        hud_element_set_render_pos(icon10, baseX + 140 + (elemIdx * 20) + D_8024F46C[0], baseY + 75);
-        if (cond) {
-            hud_element_draw_without_clipping(icon10);
-            cond = FALSE;
-        } else {
-            hud_element_draw_next(icon10);
-        }
-        var_s2_2++;
-
-        if (var_s3_2 >= limit) {
-            break;
-        }
-        var_s3_2++;
-        hud_element_set_script(icon10, gPauseStatsSPIncElements[elemIdx]);
-        hud_element_set_render_pos(icon10, baseX + 140 + (elemIdx * 20) + D_8024F46C[1], baseY + 75);
-        if (cond) {
-            hud_element_draw_without_clipping(icon10);
-            cond = FALSE;
-        } else {
-            hud_element_draw_next(icon10);
-        }
-        var_s2_2++;
-
-        if (var_s3_2 >= limit) {
+        if (curIncrement >= powIncrements) {
             break;
         }
 
-        var_s3_2++;
-        hud_element_set_script(icon10, gPauseStatsSPIncElements[elemIdx]);
-        hud_element_set_render_pos(icon10, baseX + 140 + (elemIdx * 20) + D_8024F46C[2], baseY + 75);
-        if (cond) {
-            hud_element_draw_without_clipping(icon10);
-            cond = FALSE;
+        curIncrement++;
+        hud_element_set_script(powHudElemID, gPauseStatsSPIncElements[powBarIdx]);
+        hud_element_set_render_pos(powHudElemID, baseX + 140 + (powBarIdx * 20) + D_8024F46C[0], baseY + 75);
+        if (drawingFirst) {
+            hud_element_draw_without_clipping(powHudElemID);
+            drawingFirst = FALSE;
         } else {
-            hud_element_draw_next(icon10);
+            hud_element_draw_next(powHudElemID);
         }
-        var_s2_2++;
+        powIncIdx++;
 
-        if (var_s3_2 >= limit) {
+        if (curIncrement >= powIncrements) {
             break;
         }
 
-        var_s3_2++;
-        hud_element_set_script(icon10, gPauseStatsSPIncElements[elemIdx]);
-        hud_element_set_render_pos(icon10, baseX + 140 + (elemIdx * 20) + D_8024F46C[3], baseY + 75);
-        if (cond) {
-            hud_element_draw_without_clipping(icon10);
-            cond = FALSE;
+        curIncrement++;
+        hud_element_set_script(powHudElemID, gPauseStatsSPIncElements[powBarIdx]);
+        hud_element_set_render_pos(powHudElemID, baseX + 140 + (powBarIdx * 20) + D_8024F46C[1], baseY + 75);
+        if (drawingFirst) {
+            hud_element_draw_without_clipping(powHudElemID);
+            drawingFirst = FALSE;
         } else {
-            hud_element_draw_next(icon10);
+            hud_element_draw_next(powHudElemID);
         }
-        var_s2_2++;
+        powIncIdx++;
 
-        if (var_s3_2 >= limit) {
+        if (curIncrement >= powIncrements) {
             break;
         }
 
-        var_s3_2++;
-        hud_element_set_script(icon10, gPauseStatsSPIncElements[elemIdx]);
-        hud_element_set_render_pos(icon10, baseX + 140 + (elemIdx * 20) + D_8024F46C[4], baseY + 75);
-        if (cond) {
-            hud_element_draw_without_clipping(icon10);
-            cond = FALSE;
+        curIncrement++;
+        hud_element_set_script(powHudElemID, gPauseStatsSPIncElements[powBarIdx]);
+        hud_element_set_render_pos(powHudElemID, baseX + 140 + (powBarIdx * 20) + D_8024F46C[2], baseY + 75);
+        if (drawingFirst) {
+            hud_element_draw_without_clipping(powHudElemID);
+            drawingFirst = FALSE;
         } else {
-            hud_element_draw_next(icon10);
+            hud_element_draw_next(powHudElemID);
         }
-        var_s2_2++;
+        powIncIdx++;
 
-        if (var_s3_2 >= limit) {
-            break;
-        }
-        var_s3_2++;
-        hud_element_set_script(icon10, gPauseStatsSPIncElements[elemIdx]);
-        hud_element_set_render_pos(icon10, baseX + 140 + (elemIdx * 20) + D_8024F46C[5], baseY + 75);
-        if (cond) {
-            hud_element_draw_without_clipping(icon10);
-            cond = FALSE;
-        } else {
-            hud_element_draw_next(icon10);
-        }
-        var_s2_2++;
-        if (var_s3_2 >= limit) {
-            break;
-        }
-        var_s3_2++;
-        hud_element_set_script(icon10, gPauseStatsSPIncElements[elemIdx]);
-        hud_element_set_render_pos(icon10, baseX + 140 + (elemIdx * 20) + D_8024F46C[6], baseY + 75);
-        if (cond) {
-            hud_element_draw_without_clipping(icon10);
-            cond = FALSE;
-        } else {
-            hud_element_draw_next(icon10);
-        }
-        var_s2_2++;
-
-        if (var_s3_2 >= limit) {
+        if (curIncrement >= powIncrements) {
             break;
         }
 
-        var_s3_2++;
-        hud_element_set_script(icon10, gPauseStatsStarElements[elemIdx]);
-        hud_element_set_render_pos(icon10, baseX + 0x98 + (elemIdx * 20), baseY + 0x4D);
-        if (cond) {
-            hud_element_draw_without_clipping(icon10);
-            cond = FALSE;
+        curIncrement++;
+        hud_element_set_script(powHudElemID, gPauseStatsSPIncElements[powBarIdx]);
+        hud_element_set_render_pos(powHudElemID, baseX + 140 + (powBarIdx * 20) + D_8024F46C[3], baseY + 75);
+        if (drawingFirst) {
+            hud_element_draw_without_clipping(powHudElemID);
+            drawingFirst = FALSE;
         } else {
-            hud_element_draw_next(icon10);
+            hud_element_draw_next(powHudElemID);
         }
-        var_s2_2 = 0;
-        elemIdx += 1;
-        if (var_s3_2 >= limit) {
+        powIncIdx++;
+
+        if (curIncrement >= powIncrements) {
+            break;
+        }
+
+        curIncrement++;
+        hud_element_set_script(powHudElemID, gPauseStatsSPIncElements[powBarIdx]);
+        hud_element_set_render_pos(powHudElemID, baseX + 140 + (powBarIdx * 20) + D_8024F46C[4], baseY + 75);
+        if (drawingFirst) {
+            hud_element_draw_without_clipping(powHudElemID);
+            drawingFirst = FALSE;
+        } else {
+            hud_element_draw_next(powHudElemID);
+        }
+        powIncIdx++;
+
+        if (curIncrement >= powIncrements) {
+            break;
+        }
+
+        curIncrement++;
+        hud_element_set_script(powHudElemID, gPauseStatsSPIncElements[powBarIdx]);
+        hud_element_set_render_pos(powHudElemID, baseX + 140 + (powBarIdx * 20) + D_8024F46C[5], baseY + 75);
+        if (drawingFirst) {
+            hud_element_draw_without_clipping(powHudElemID);
+            drawingFirst = FALSE;
+        } else {
+            hud_element_draw_next(powHudElemID);
+        }
+        powIncIdx++;
+
+        if (curIncrement >= powIncrements) {
+            break;
+        }
+
+        curIncrement++;
+        hud_element_set_script(powHudElemID, gPauseStatsSPIncElements[powBarIdx]);
+        hud_element_set_render_pos(powHudElemID, baseX + 140 + (powBarIdx * 20) + D_8024F46C[6], baseY + 75);
+        if (drawingFirst) {
+            hud_element_draw_without_clipping(powHudElemID);
+            drawingFirst = FALSE;
+        } else {
+            hud_element_draw_next(powHudElemID);
+        }
+        powIncIdx++;
+
+        if (curIncrement >= powIncrements) {
+            break;
+        }
+
+        curIncrement++;
+        hud_element_set_script(powHudElemID, gPauseStatsStarElements[powBarIdx]);
+        hud_element_set_render_pos(powHudElemID, baseX + 152 + (powBarIdx * 20), baseY + 77);
+        if (drawingFirst) {
+            hud_element_draw_without_clipping(powHudElemID);
+            drawingFirst = FALSE;
+        } else {
+            hud_element_draw_next(powHudElemID);
+        }
+        powIncIdx++;
+
+        powIncIdx = 0;
+        powBarIdx += 1;
+        if (curIncrement >= powIncrements) {
             break;
         }
     }
+    
+    // get number of total power increments
+    powFullBars = playerData->maxStarPower;
+    powIncrements = 8 * powFullBars;
 
-    maxStarPower = playerData->maxStarPower;
-    limit = 8 * maxStarPower;
+    // draw empty bars
     while (TRUE) {
-        if (var_s3_2 >= limit) {
+        if (curIncrement >= powIncrements) {
             break;
         }
 
-        if (var_s2_2 == 0) {
-            var_s3_2++;
-            hud_element_set_script(icon10, &HES_StatusSPEmptyIncrement);
-            hud_element_set_render_pos(icon10, baseX + 140 + (elemIdx * 20) + D_8024F46C[0], baseY + 75);
-            if (cond) {
-                hud_element_draw_without_clipping(icon10);
-                cond = FALSE;
+        if (powIncIdx == 0) {
+            curIncrement++;
+            hud_element_set_script(powHudElemID, &HES_StatusSPEmptyIncrement);
+            hud_element_set_render_pos(powHudElemID, baseX + 140 + (powBarIdx * 20) + D_8024F46C[0], baseY + 75);
+            if (drawingFirst) {
+                hud_element_draw_without_clipping(powHudElemID);
+                drawingFirst = FALSE;
             } else {
-                hud_element_draw_next(icon10);
+                hud_element_draw_next(powHudElemID);
             }
-            if (var_s3_2 >= limit) {
+            if (curIncrement >= powIncrements) {
                 break;
             }
-            var_s2_2++;
+            powIncIdx++;
         }
 
-        if (var_s2_2 == 1) {
-            var_s3_2++;
-            hud_element_set_script(icon10, &HES_StatusSPEmptyIncrement);
-            hud_element_set_render_pos(icon10, baseX + 140 + (elemIdx * 20) + D_8024F46C[1], baseY + 75);
-            if (cond) {
-                hud_element_draw_without_clipping(icon10);
-                cond = FALSE;
+        if (powIncIdx == 1) {
+            curIncrement++;
+            hud_element_set_script(powHudElemID, &HES_StatusSPEmptyIncrement);
+            hud_element_set_render_pos(powHudElemID, baseX + 140 + (powBarIdx * 20) + D_8024F46C[1], baseY + 75);
+            if (drawingFirst) {
+                hud_element_draw_without_clipping(powHudElemID);
+                drawingFirst = FALSE;
             } else {
-                hud_element_draw_next(icon10);
+                hud_element_draw_next(powHudElemID);
             }
-            if (var_s3_2 >= limit) {
+            powIncIdx++;
+
+            if (curIncrement >= powIncrements) {
                 break;
             }
-            var_s2_2++;
         }
 
-
-        if (var_s2_2 == 2) {
-            var_s3_2++;
-            hud_element_set_script(icon10, &HES_StatusSPEmptyIncrement);
-            hud_element_set_render_pos(icon10, baseX + 140 + (elemIdx * 20) + D_8024F46C[2], baseY + 75);
-            if (cond) {
-                hud_element_draw_without_clipping(icon10);
-                cond = FALSE;
+        if (powIncIdx == 2) {
+            curIncrement++;
+            hud_element_set_script(powHudElemID, &HES_StatusSPEmptyIncrement);
+            hud_element_set_render_pos(powHudElemID, baseX + 140 + (powBarIdx * 20) + D_8024F46C[2], baseY + 75);
+            if (drawingFirst) {
+                hud_element_draw_without_clipping(powHudElemID);
+                drawingFirst = FALSE;
             } else {
-                hud_element_draw_next(icon10);
+                hud_element_draw_next(powHudElemID);
             }
-            if (var_s3_2 >= limit) {
+            powIncIdx++;
+
+            if (curIncrement >= powIncrements) {
                 break;
             }
-            var_s2_2++;
         }
 
-
-        if (var_s2_2 == 3) {
-            var_s3_2++;
-            hud_element_set_script(icon10, &HES_StatusSPEmptyIncrement);
-            hud_element_set_render_pos(icon10, baseX + 140 + (elemIdx * 20) + D_8024F46C[3], baseY + 75);
-            if (cond) {
-                hud_element_draw_without_clipping(icon10);
-                cond = FALSE;
+        if (powIncIdx == 3) {
+            curIncrement++;
+            hud_element_set_script(powHudElemID, &HES_StatusSPEmptyIncrement);
+            hud_element_set_render_pos(powHudElemID, baseX + 140 + (powBarIdx * 20) + D_8024F46C[3], baseY + 75);
+            if (drawingFirst) {
+                hud_element_draw_without_clipping(powHudElemID);
+                drawingFirst = FALSE;
             } else {
-                hud_element_draw_next(icon10);
+                hud_element_draw_next(powHudElemID);
             }
-            if (var_s3_2 >= limit) {
+            powIncIdx++;
+
+            if (curIncrement >= powIncrements) {
                 break;
             }
-            var_s2_2++;
         }
 
-
-        if (var_s2_2 == 4) {
-            var_s3_2++;
-            hud_element_set_script(icon10, &HES_StatusSPEmptyIncrement);
-            hud_element_set_render_pos(icon10, baseX + 140 + (elemIdx * 20) + D_8024F46C[4], baseY + 75);
-            if (cond) {
-                hud_element_draw_without_clipping(icon10);
-                cond = FALSE;
+        if (powIncIdx == 4) {
+            curIncrement++;
+            hud_element_set_script(powHudElemID, &HES_StatusSPEmptyIncrement);
+            hud_element_set_render_pos(powHudElemID, baseX + 140 + (powBarIdx * 20) + D_8024F46C[4], baseY + 75);
+            if (drawingFirst) {
+                hud_element_draw_without_clipping(powHudElemID);
+                drawingFirst = FALSE;
             } else {
-                hud_element_draw_next(icon10);
+                hud_element_draw_next(powHudElemID);
             }
-            if (var_s3_2 >= limit) {
+            powIncIdx++;
+            
+            if (curIncrement >= powIncrements) {
                 break;
             }
-            var_s2_2++;
         }
 
-
-        if (var_s2_2 == 5) {
-            var_s3_2++;
-            hud_element_set_script(icon10, &HES_StatusSPEmptyIncrement);
-            hud_element_set_render_pos(icon10, baseX + 140 + (elemIdx * 20) + D_8024F46C[5], baseY + 75);
-            if (cond) {
-                hud_element_draw_without_clipping(icon10);
-                cond = FALSE;
+        if (powIncIdx == 5) {
+            curIncrement++;
+            hud_element_set_script(powHudElemID, &HES_StatusSPEmptyIncrement);
+            hud_element_set_render_pos(powHudElemID, baseX + 140 + (powBarIdx * 20) + D_8024F46C[5], baseY + 75);
+            if (drawingFirst) {
+                hud_element_draw_without_clipping(powHudElemID);
+                drawingFirst = FALSE;
             } else {
-                hud_element_draw_next(icon10);
+                hud_element_draw_next(powHudElemID);
             }
-            if (var_s3_2 >= limit) {
+            powIncIdx++;
+
+            if (curIncrement >= powIncrements) {
                 break;
             }
-
-            var_s2_2++;
         }
 
-
-        if (var_s2_2 == 6) {
-            var_s3_2++;
-            hud_element_set_script(icon10, &HES_StatusSPEmptyIncrement);
-            hud_element_set_render_pos(icon10, baseX + 140 + (elemIdx * 20) + D_8024F46C[6], baseY + 75);
-            if (cond) {
-                hud_element_draw_without_clipping(icon10);
-                cond = FALSE;
+        if (powIncIdx == 6) {
+            curIncrement++;
+            hud_element_set_script(powHudElemID, &HES_StatusSPEmptyIncrement);
+            hud_element_set_render_pos(powHudElemID, baseX + 140 + (powBarIdx * 20) + D_8024F46C[6], baseY + 75);
+            if (drawingFirst) {
+                hud_element_draw_without_clipping(powHudElemID);
+                drawingFirst = FALSE;
             } else {
-                hud_element_draw_next(icon10);
+                hud_element_draw_next(powHudElemID);
             }
-            if (var_s3_2 >= limit) {
+            powIncIdx++;
+
+            if (curIncrement >= powIncrements) {
                 break;
             }
-            var_s2_2++;
         }
 
-        if (var_s2_2 == 7) {
-            var_s3_2++;
-            hud_element_set_script(icon10, &HES_StatusStarEmpty);
-            hud_element_set_render_pos(icon10, baseX + 152 + (elemIdx * 20), baseY + 0x4D);
-            if (cond) {
-                hud_element_draw_without_clipping(icon10);
-                cond = FALSE;
+        if (powIncIdx == 7) {
+            curIncrement++;
+            hud_element_set_script(powHudElemID, &HES_StatusStarEmpty);
+            hud_element_set_render_pos(powHudElemID, baseX + 152 + (powBarIdx * 20), baseY + 77);
+            if (drawingFirst) {
+                hud_element_draw_without_clipping(powHudElemID);
+                drawingFirst = FALSE;
             } else {
-                hud_element_draw_next(icon10);
+                hud_element_draw_next(powHudElemID);
             }
-            if (var_s3_2 >= limit) {
+            powIncIdx++;
+
+            if (curIncrement >= powIncrements) {
                 break;
             }
-            var_s2_2 = 0;
         }
-        var_s2_2 = 0;
-        elemIdx++;
+        powIncIdx = 0;
+        powBarIdx++;
     }
 
     if (gPauseMenuCurrentTab == 1) {
         StatsEntryData* entry = &gStatsMenuEntries[menu->selected];
 
-        pause_set_cursor_pos(0x1F, baseX + entry->cursorX, baseY + entry->cursorY);
+        pause_set_cursor_pos(WINDOW_ID_PAUSE_STATS, baseX + entry->cursorX, baseY + entry->cursorY);
     }
 }
 
@@ -610,15 +672,15 @@ void pause_stats_handle_input(MenuPanel* panel) {
     }
 
     switch (gStatsMenuEntries[panel->selected].baseMsgID) {
-        case 0x25:
+        case PAUSE_MSG_TIP_BOOTS_1:
             if (adjustedBootsLevel > 1) {
                 msgOffset = adjustedBootsLevel - 1;
             }
             break;
-        case 0x28:
+        case PAUSE_MSG_TIP_HAMMER_0:
             msgOffset = adjustedHammerLevel;
             break;
-        case 0x2F:
+        case PAUSE_MSG_TIP_SECRETS:
             if (evt_get_variable(NULL, GF_Tutorial_GotStarPiece)) {
                 msgOffset = 1;
             }

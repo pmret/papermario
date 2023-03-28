@@ -517,7 +517,7 @@ void pause_map_handle_input(MenuPanel* tab) {
 
     gPauseCurrentDescIconScript = 0;
     if (gPauseMapCursorCurrentOption == -1) {
-        gPauseCurrentDescMsg = 0;
+        gPauseCurrentDescMsg = MSG_NONE;
         return;
     }
 

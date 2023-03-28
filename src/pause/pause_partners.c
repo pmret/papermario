@@ -354,7 +354,7 @@ void pause_partners_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
         }
 
         if (gPauseMenuCurrentTab == currentTab && gPausePartnersLevel == 0) {
-            pause_draw_menu_label(8, 18, 158);
+            pause_draw_menu_label(PAUSE_LBL_ABILITIES, 18, 158);
         }
     }
 
@@ -529,7 +529,7 @@ void pause_partners_draw_movelist(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
 }
 
 void pause_partners_draw_movelist_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
-    draw_msg(pause_get_menu_msg(0x55), baseX + 12, baseY + 1, 255, -1, DRAW_MSG_STYLE_MENU);
+    draw_msg(pause_get_menu_msg(PAUSE_MSG_PARTNER_ABILITIES), baseX + 12, baseY + 1, 255, -1, DRAW_MSG_STYLE_MENU);
 }
 
 void pause_partners_draw_movelist_flower(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
