@@ -50,7 +50,7 @@ D_8009A5EC = 0x800991b8;
 
 __osContPifRam + 0x3C = 0x800AF94C;
 __osEepromTimerQ = 0x800d8e20;
-D_800A097C = 0x8009d38c;
+TitleScreen_ImgList_Copyright = 0x8009d38c;
 __osBbIsBb = 0x80000388;
 
 main_BSS_START = 0x80099170;
