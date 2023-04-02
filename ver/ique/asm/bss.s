@@ -406,16 +406,16 @@ dlabel D_800A0968
 dlabel D_800A0970
 .space 4
 
-dlabel D_800A0974
+dlabel TitleScreen_ImgList
 .space 4
 
-dlabel D_800A0978
+dlabel TitleScreen_ImgList_Logo
 .space 4
 
-dlabel D_800A097C
+dlabel TitleScreen_ImgList_Copyright
 .space 4
 
-dlabel D_800A0980
+dlabel TitleScreen_ImgList_PressStart
 .space 4
 
 dlabel D_800A0984

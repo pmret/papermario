@@ -210,6 +210,11 @@ typedef HudElement* HudElementList[320];
 extern HudScript HES_AnimatedHandPointer;
 extern HudScript HES_StatusCoin;
 extern HudScript HES_Refund;
+#if VERSION_PAL
+extern HudScript HES_Refund_de;
+extern HudScript HES_Refund_fr;
+extern HudScript HES_Refund_es;
+#endif
 extern HudScript HES_MenuTimes;
 
 typedef struct PartnerPopupProperties {

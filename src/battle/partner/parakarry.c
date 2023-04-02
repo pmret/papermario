@@ -187,7 +187,11 @@ API_CALLABLE(N(ShellShotActionCommand)) {
             state->angle = state->unk_18.x + rand_int(state->unk_18.y - state->unk_18.x - 2.0f);
             hudTargetRotation = 0;
             shellShotTimer = 90;
+#if VERSION_PAL
+            state->velocity = 4.0f;
+#else
             state->velocity = 3.0f;
+#endif
             battleStatus->unk_86 = 0;
             action_command_init_status();
             func_80269118();
@@ -1140,14 +1144,14 @@ EvtScript N(airLift) = {
     EVT_CALL(PartnerTestEnemy, LVar0, DAMAGE_TYPE_AIR_LIFT, SUPPRESS_EVENT_SPIKY_FRONT, 0, 0, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(N(AirLiftChance))
     EVT_IF_NE(LVar0, -1)
-        EVT_CALL(action_command_air_lift_start, 0, 87, 3, 0)
+        EVT_CALL(action_command_air_lift_start, 0, 87 * DT, 3, 0)
         EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
         EVT_CHILD_THREAD
             EVT_WAIT(1)
             EVT_CALL(GetActionResult, LVar1)
             EVT_DIV(LVar1, 10)
             EVT_ADD(LVar1, 1)
-            EVT_LOOP(88)
+            EVT_LOOP(88 * DT)
                 EVT_CALL(GetActionResult, LVar0)
                 EVT_SET(LVar2, LVar1)
                 EVT_MUL(LVar2, 10)
@@ -1160,7 +1164,7 @@ EvtScript N(airLift) = {
                 EVT_WAIT(1)
             EVT_END_LOOP
         EVT_END_CHILD_THREAD
-        EVT_WAIT(90)
+        EVT_WAIT(90 * DT)
         EVT_CALL(GetActionSuccessCopy, LVar0)
     EVT_ELSE
         EVT_CALL(CloseActionCommandInfo)
@@ -1213,7 +1217,7 @@ EvtScript N(airRaid) = {
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_Run)
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 15, -2, EASING_LINEAR)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_Idle)
-    EVT_CALL(action_command_air_raid_start, 0, 90, 3)
+    EVT_CALL(action_command_air_raid_start, 0, 90 * DT, 3)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
     EVT_WAIT(2)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_PreDive)

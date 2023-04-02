@@ -252,7 +252,7 @@ void pause_spirits_draw_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, 
         if (playerData->maxStarPower > gPauseSpiritsIndexes[menu->selected]) {
             msgID = gPauseSpiritsIndexes[menu->selected] + MSG_Menus_SpiritName_Eldstar;
         } else {
-            msgID = pause_get_menu_msg(0x56);
+            msgID = pause_get_menu_msg(PAUSE_MSG_UNKNOWN_SPIRIT);
         }
         draw_msg(msgID, baseX + ((width - get_msg_width(msgID, 0)) >> 1), baseY + 1, 255, MSG_PAL_WHITE, 0);
     }
@@ -373,7 +373,7 @@ void pause_spirits_handle_input(MenuPanel* panel) {
     gPauseCurrentDescIconScript = 0;
 
     if (get_player_data()->maxStarPower <= gPauseSpiritsIndexes[panel->selected]) {
-        gPauseCurrentDescMsg = pause_get_menu_msg(0x56);
+        gPauseCurrentDescMsg = pause_get_menu_msg(PAUSE_MSG_UNKNOWN_SPIRIT);
     } else {
         gPauseCurrentDescMsg = MSG_Menus_SpiritDesc_Eldstar + gPauseSpiritsIndexes[panel->selected];
     }
