@@ -81,24 +81,29 @@ def read_symbol_addrs():
             if "_ROM_START" in line or "_ROM_END" in line:
                 continue
 
-            main, ext = line.rstrip().split(";")
-            opt = ext.split("//")[-1].strip().split(" ")
+            main_split = line.rstrip().split(";")
+            main = main_split[0]
 
             dead = False
+            opts = []
             type = ""
             rom = -1
 
-            for thing in list(opt):
-                if thing.strip() == "":
-                    opt.remove(thing)
-                if "type:" in thing:
-                    type = thing.split(":")[1]
-                    opt.remove(thing)
-                elif "rom:" in thing:
-                    rom = int(thing.split(":")[1], 16)
-                    opt.remove(thing)
-                elif "dead:" in thing:
-                    dead = True
+            if len(main_split) > 1:
+                ext = main_split[1]
+                opts = ext.split("//")[-1].strip().split(" ")
+
+                for opt in list(opts):
+                    if opt.strip() == "":
+                        opts.remove(opt)
+                    if "type:" in opt:
+                        type = opt.split(":")[1]
+                        opts.remove(opt)
+                    elif "rom:" in opt:
+                        rom = int(opt.split(":")[1], 16)
+                        opts.remove(opt)
+                    elif "dead:" in opt:
+                        dead = True
 
             eqsplit = main.split(" = ")
             if len(eqsplit) != 2:
@@ -108,9 +113,9 @@ def read_symbol_addrs():
             name, addr = main.split(" = ")
 
             if not dead:
-                symbol_addrs.append([name, int(addr, 0), type, rom, opt])
+                symbol_addrs.append([name, int(addr, 0), type, rom, opts])
             else:
-                dead_symbols.append([name, int(addr, 0), type, rom, opt])
+                dead_symbols.append([name, int(addr, 0), type, rom, opts])
 
 def read_elf():
     try:
