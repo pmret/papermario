@@ -1928,7 +1928,7 @@ void npc_update_decoration_charged(Npc* npc, s32 idx) {
     s32 temp3;
 
     if (!npc->decorationInitialised[idx]) {
-        func_802DE894(npc->spriteInstanceID, FOLD_TYPE_11, 20, 0, 0, 255, 0);
+        func_802DE894(npc->spriteInstanceID, FOLD_UPD_ALLOC_COLOR_BUF, 20, 0, 0, 255, 0);
         npc->decorationInitialised[idx] = TRUE;
     }
     if (npc->decorationInitialised[idx] == TRUE) {
@@ -1944,7 +1944,7 @@ void npc_update_decoration_charged(Npc* npc, s32 idx) {
         }
 
         for (temp3 = 255, i = 0; i < 20; i++) {
-            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_C, i, (sp50[i] << 24) | (sp38[i] << 16) | (sp20[i] << 8) | temp3, 0, 255, 0);
+            func_802DE894(npc->spriteInstanceID, FOLD_UPD_COLOR_BUF_SET_C, i, (sp50[i] << 24) | (sp38[i] << 16) | (sp20[i] << 8) | temp3, 0, 255, 0);
         }
     }
 }

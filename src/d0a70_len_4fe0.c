@@ -25,8 +25,8 @@ typedef struct {
     /* 0x18 */ char unk_18[0x4];
     /* 0x1C */ s32 unk_1C[2][4];
     /* 0x3C */ f32 unk_3C[2][4];
-    /* 0x5C */ u8* buf;
-    /* 0x60 */ u16 bufSize;
+    /* 0x5C */ Color_RGBA8* colorBuf;
+    /* 0x60 */ u16 colorBufCount;
     /* 0x62 */ char unk_62[0x2];
     /* 0x64 */ u8* unk_64;
     /* 0x68 */ Vtx* vtxBufs[2];
@@ -164,7 +164,7 @@ void func_8013E2F0(FoldState*, Matrix4f mtx);
 void func_8013E904(FoldState*, Matrix4f mtx);
 void func_8013EE48(FoldState* state);
 void func_8013EE68(FoldState* state);
-void func_8013F1F8(FoldState* state);
+void fold_mesh_load_colors(FoldState* state);
 
 void func_8013A370(s16 arg0) {
     D_8014EE60 = arg0;
@@ -217,16 +217,16 @@ void func_8013A4D0(void) {
     }
 
     for (i = 1; i < ARRAY_COUNT(*D_80156954); i++) {
-        if ((*D_80156954)[i].flags & FOLD_STATE_FLAG_ENABLED && (*D_80156954)[i].buf != NULL) {
-            s32 temp = (*D_80156954)[i].savedType2; // TODO find a better way to match
-
-            if (temp == FOLD_TYPE_B || (*D_80156954)[i].savedType2 == FOLD_TYPE_C) {
+        if ((*D_80156954)[i].flags & FOLD_STATE_FLAG_ENABLED && (*D_80156954)[i].colorBuf != NULL) {
+            if ((*D_80156954)[i].savedType2 == FOLD_UPD_COLOR_BUF_SET_B) {
                 continue;
             }
-
-            general_heap_free((*D_80156954)[i].buf);
-            (*D_80156954)[i].buf = NULL;
-            (*D_80156954)[i].bufSize = 0;
+            if ((*D_80156954)[i].savedType2 == FOLD_UPD_COLOR_BUF_SET_C) {
+                continue;
+            }
+            general_heap_free((*D_80156954)[i].colorBuf);
+            (*D_80156954)[i].colorBuf = NULL;
+            (*D_80156954)[i].colorBufCount = 0;
         }
     }
 }
@@ -381,8 +381,8 @@ void fold_clear_state_data(FoldState* state) {
     state->vtxBufs[1] = NULL;
     state->gfxBufs[0] = NULL;
     state->gfxBufs[1] = NULL;
-    state->buf = NULL;
-    state->bufSize = 0;
+    state->colorBuf = NULL;
+    state->colorBufCount = 0;
 }
 
 void fold_init_state(FoldState* state) {
@@ -423,6 +423,7 @@ void fold_update(u32 idx, FoldType type, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
     FoldState* state = &(*D_80156954)[idx];
     s32 oldFlags;
     s32 t1;
+    u8 r, g, b, a;
 
     if (!(state->flags & FOLD_STATE_FLAG_ENABLED) || (idx >= 90)) {
         return;
@@ -459,12 +460,12 @@ void fold_update(u32 idx, FoldType type, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
             state->meshType = FOLD_MESH_TYPE_0;
             state->unk_1C[1][0] = -1;
             return;
-        case FOLD_TYPE_11:
-            if (state->buf != NULL) {
-                heap_free(state->buf);
+        case FOLD_UPD_ALLOC_COLOR_BUF:
+            if (state->colorBuf != NULL) {
+                heap_free(state->colorBuf);
             }
-            state->bufSize = arg2 * 4;
-            state->buf = heap_malloc(state->bufSize);
+            state->colorBufCount = arg2 * 4;
+            state->colorBuf = heap_malloc(state->colorBufCount);
             return;
         case FOLD_TYPE_F:
         case FOLD_TYPE_10:
@@ -551,38 +552,42 @@ void fold_update(u32 idx, FoldType type, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
                 state->renderType = FOLD_RENDER_TYPE_5;
             }
             break;
-        case FOLD_TYPE_B:
-            if (arg2 < state->bufSize) {
-                t1 = (u32) arg3 >> 0x18; // required to match
-                state->buf[arg2 * 4 + 0] = (u32) arg3 >> 0x18;
-                state->buf[arg2 * 4 + 1] = (u32) arg3 >> 0x10;
-                state->buf[arg2 * 4 + 2] = (u32) arg3 >> 0x08;
-                do {
-                    state->buf[arg2 * 4 + 3] = arg3;
-                } while (0); // required to match
+        case FOLD_UPD_COLOR_BUF_SET_B:
+            if (arg2 < state->colorBufCount) {
+                // unpack and store color
+                r = (arg3 & 0xFF000000) >> 24;
+                g = (arg3 & 0xFF0000) >> 16;
+                b = (arg3 & 0xFF00) >> 8;
+                a = (arg3 & 0xFF);
+                state->colorBuf[arg2].r = r;
+                state->colorBuf[arg2].g = g;
+                state->colorBuf[arg2].b = b;
+                state->colorBuf[arg2].a = a;
 
                 state->meshType = FOLD_MESH_TYPE_0;
 
-                if ((arg3 & 0xFF) == 0xFF) {
+                if (a == 255) {
                     state->renderType = FOLD_RENDER_TYPE_6;
                 } else {
                     state->renderType = FOLD_RENDER_TYPE_8;
                 }
             }
             break;
-        case FOLD_TYPE_C:
-            if (arg2 < state->bufSize) {
-                t1 = (u32) arg3 >> 0x18; // required to match
-                state->buf[arg2 * 4 + 0] = t1;
-                state->buf[arg2 * 4 + 1] = (u32) arg3 >> 0x10;
-                state->buf[arg2 * 4 + 2] = (u32) arg3 >> 0x08;
-                do {
-                    state->buf[arg2 * 4 + 3] = arg3;
-                } while (0); // required to match
+        case FOLD_UPD_COLOR_BUF_SET_C:
+            if (arg2 < state->colorBufCount) {
+                // unpack and store color
+                r = (arg3 & 0xFF000000) >> 24;
+                g = (arg3 & 0xFF0000) >> 16;
+                b = (arg3 & 0xFF00) >> 8;
+                a = (arg3 & 0xFF);
+                state->colorBuf[arg2].r = r;
+                state->colorBuf[arg2].g = g;
+                state->colorBuf[arg2].b = b;
+                state->colorBuf[arg2].a = a;
 
                 state->meshType = FOLD_MESH_TYPE_0;
 
-                if ((arg3 & 0xFF) == 0xFF) {
+                if (a == 255) {
                     state->renderType = FOLD_RENDER_TYPE_9;
                 } else {
                     state->renderType = FOLD_RENDER_TYPE_A;
@@ -703,16 +708,16 @@ void func_8013B0EC(FoldState* state) {
     }
 
     switch (state->savedType2) {
-        case FOLD_TYPE_B:
-        case FOLD_TYPE_C:
-            func_8013F1F8(state);
+        case FOLD_UPD_COLOR_BUF_SET_B:
+        case FOLD_UPD_COLOR_BUF_SET_C:
+            fold_mesh_load_colors(state);
             break;
     }
 }
 
 void func_8013B1B0(FoldState* state, Matrix4f mtx) {
     s16 cond = FALSE;
-    s32 primColor = state->unk_1C[1][3];
+    s32 alpha = state->unk_1C[1][3];
     s32 renderType = state->renderType;
     s8 angle1;
     s8 angle2;
@@ -763,7 +768,7 @@ void func_8013B1B0(FoldState* state, Matrix4f mtx) {
                     renderType = FOLD_RENDER_TYPE_A;
                     break;
             }
-            primColor = state->unk_1C[1][3] * alphaComp;
+            alpha = state->unk_1C[1][3] * alphaComp;
             mode1 = 0x404B40;
             mode2 = 0x104B40;
             cond = TRUE;
@@ -797,20 +802,20 @@ void func_8013B1B0(FoldState* state, Matrix4f mtx) {
                 gDPSetPrimColor(gMainGfxPos++, 0, 0, state->unk_1C[1][0], state->unk_1C[1][1], state->unk_1C[1][2], 0);
                 break;
             case FOLD_RENDER_TYPE_2:
-                if (primColor <= 0) {
+                if (alpha <= 0) {
                     return;
                 }
                 gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL0,
                                   TEXEL0, 0, PRIMITIVE, 0);
-                gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, primColor);
+                gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, alpha);
                 break;
             case FOLD_RENDER_TYPE_3:
-                if (primColor <= 0) {
+                if (alpha <= 0) {
                     return;
                 }
                 gDPSetCombineMode(gMainGfxPos++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
                 gDPSetPrimColor(gMainGfxPos++, 0, 0, state->unk_1C[1][0], state->unk_1C[1][1],
-                                state->unk_1C[1][2], primColor);
+                                state->unk_1C[1][2], alpha);
                 break;
             case FOLD_RENDER_TYPE_4:
                 gDPSetCombineLERP(gMainGfxPos++, 1, PRIMITIVE, TEXEL0, PRIMITIVE, 0, 0, 0, TEXEL0, 1, PRIMITIVE,
@@ -818,13 +823,13 @@ void func_8013B1B0(FoldState* state, Matrix4f mtx) {
                 gDPSetPrimColor(gMainGfxPos++, 0, 0, state->unk_1C[1][0], state->unk_1C[1][1], state->unk_1C[1][2], 0);
                 break;
             case FOLD_RENDER_TYPE_5:
-                if (primColor <= 0) {
+                if (alpha <= 0) {
                     return;
                 }
                 gDPSetCombineLERP(gMainGfxPos++, 1, 0, TEXEL0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 1, 0, TEXEL0,
                                   PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0);
                 gDPSetPrimColor(gMainGfxPos++, 0, 0, state->unk_1C[1][0], state->unk_1C[1][1],
-                                state->unk_1C[1][2], primColor);
+                                state->unk_1C[1][2], alpha);
                 break;
             case FOLD_RENDER_TYPE_6:
                 gDPSetCombineMode(gMainGfxPos++, G_CC_MODULATEIDECALA, G_CC_MODULATEIDECALA);
@@ -876,16 +881,16 @@ void func_8013B1B0(FoldState* state, Matrix4f mtx) {
                 break;
             case FOLD_RENDER_TYPE_C:
                 if (state->unk_1C[1][0] == 0) {
-                    primColor = state->unk_1C[1][3] * alphaComp;
+                    alpha = state->unk_1C[1][3] * alphaComp;
                     gDPSetCombineLERP(gMainGfxPos++, NOISE, PRIMITIVE, PRIMITIVE, TEXEL0, TEXEL0, 0, PRIMITIVE, 0,
                                       NOISE, PRIMITIVE, PRIMITIVE, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
                     gDPSetPrimColor(gMainGfxPos++, 0, 0, state->unk_1C[1][1], state->unk_1C[1][1],
-                                    state->unk_1C[1][1],primColor);
+                                    state->unk_1C[1][1], alpha);
                 } else if (state->unk_1C[1][0] == 1) {
-                    primColor = state->unk_1C[1][3] * alphaComp;
+                    alpha = state->unk_1C[1][3] * alphaComp;
                     gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL0,
                                       TEXEL0, 0, PRIMITIVE, 0);
-                    gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, primColor);
+                    gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, alpha);
                     gDPSetAlphaCompare(gMainGfxPos++, G_AC_DITHER);
                 } else if (state->unk_1C[1][0] == 2) {
                     blendColor = state->unk_1C[1][3] + state->unk_1C[1][1];
@@ -893,12 +898,12 @@ void func_8013B1B0(FoldState* state, Matrix4f mtx) {
                         blendColor = 255;
                     }
 
-                    primColor = state->unk_1C[1][3] * alphaComp;
+                    alpha = state->unk_1C[1][3] * alphaComp;
                     gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL0,
                                       TEXEL0, 0, PRIMITIVE, 0);
                     gDPSetAlphaDither(gMainGfxPos++, G_AD_NOISE);
                     gDPSetAlphaCompare(gMainGfxPos++, G_AC_THRESHOLD);
-                    gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, primColor);
+                    gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, alpha);
                     gDPSetBlendColor(gMainGfxPos++, 0, 0, 0, blendColor);
                 }
                 break;
@@ -1745,15 +1750,15 @@ void func_8013EE68(FoldState* state) {
     }
 }
 
-void func_8013F1F8(FoldState* state) {
+void fold_mesh_load_colors(FoldState* state) {
     f32 alpha = (f32)fold_currentImage->alphaMultiplier / 255.0;
     s32 vtxCount = state->lastVtxIdx - state->firstVtxIdx;
     s32 i;
 
     for (i = 0; i <= vtxCount; i++) {
-        fold_vtxBuf[state->firstVtxIdx + i].v.cn[0] = state->buf[i * 4 + 0];
-        fold_vtxBuf[state->firstVtxIdx + i].v.cn[1] = state->buf[i * 4 + 1];
-        fold_vtxBuf[state->firstVtxIdx + i].v.cn[2] = state->buf[i * 4 + 2];
-        fold_vtxBuf[state->firstVtxIdx + i].v.cn[3] = state->buf[i * 4 + 3] * alpha;
+        fold_vtxBuf[state->firstVtxIdx + i].v.cn[0] = state->colorBuf[i].r;
+        fold_vtxBuf[state->firstVtxIdx + i].v.cn[1] = state->colorBuf[i].g;
+        fold_vtxBuf[state->firstVtxIdx + i].v.cn[2] = state->colorBuf[i].b;
+        fold_vtxBuf[state->firstVtxIdx + i].v.cn[3] = state->colorBuf[i].a * alpha;
     }
 }

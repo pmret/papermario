@@ -5994,13 +5994,13 @@ typedef enum FoldType {
     FOLD_TYPE_8                       = 0x8,    // color overlay?
     FOLD_TYPE_9                       = 0x9,
     FOLD_TYPE_A                       = 0xA,
-    FOLD_TYPE_B                       = 0xB,
-    FOLD_TYPE_C                       = 0xC,
+    FOLD_UPD_COLOR_BUF_SET_B          = 0xB,
+    FOLD_UPD_COLOR_BUF_SET_C          = 0xC,
     FOLD_TYPE_D                       = 0xD,    // noisy hologram -- used for ghostly star spirits and merlar
     FOLD_TYPE_E                       = 0xE,
     FOLD_TYPE_F                       = 0xF,
     FOLD_TYPE_10                      = 0x10,
-    FOLD_TYPE_11                      = 0x11,
+    FOLD_UPD_ALLOC_COLOR_BUF          = 0x11,   // args: count
 } FoldType;
 
 typedef enum FoldRenderType {
