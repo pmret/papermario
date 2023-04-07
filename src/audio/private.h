@@ -54,7 +54,7 @@ Instrument* au_get_instrument(AuGlobals* globals, u32 bank, u32 patch, EnvelopeD
 void au_get_bgm_player_and_file(u32 playerIndex, BGMHeader** outCurrentTrackData, BGMPlayer** outPlayer);
 void au_get_bgm_player(u32 playerIndex, BGMPlayer** outPlayer);
 AuResult au_load_song_files(u32 arg0, BGMHeader* arg1, BGMPlayer* arg2);
-AuResult func_80053E58(s32 arg0, BGMHeader* arg1);
+AuResult func_80053E58(s32 songID, BGMHeader* arg1);
 BGMPlayer* func_80053F64(s32 arg0);
 AuResult au_ambient_load(u32 arg0);
 BGMPlayer* func_80054248(u8 arg0);

@@ -594,8 +594,8 @@ void pause_stats_init(MenuPanel* panel) {
 
 void pause_stats_handle_input(MenuPanel* panel) {
     s32 initialSelection = panel->selected;
-    s16 adjustedBootsLevel;
-    s16 adjustedHammerLevel;
+    s16 bootsMsgIdx;
+    s16 hammerMsgIdx;
     s32 msgOffset;
 
     if (gPauseHeldButtons & BUTTON_STICK_LEFT) {
@@ -652,33 +652,33 @@ void pause_stats_handle_input(MenuPanel* panel) {
     }
 
     msgOffset = 0;
-    adjustedBootsLevel = gPlayerData.bootsLevel;
-    adjustedHammerLevel = gPlayerData.hammerLevel;
+    bootsMsgIdx = gPlayerData.bootsLevel;
+    hammerMsgIdx = gPlayerData.hammerLevel;
 
-    adjustedBootsLevel++;
-    if (adjustedBootsLevel < 0) {
-        adjustedBootsLevel = 0;
+    bootsMsgIdx++;
+    if (bootsMsgIdx < 0) {
+        bootsMsgIdx = 0;
     }
-    if (adjustedBootsLevel > 3) {
-        adjustedBootsLevel = 3;
+    if (bootsMsgIdx > 3) {
+        bootsMsgIdx = 3;
     }
 
-    adjustedHammerLevel++;
-    if (adjustedHammerLevel < 0) {
-        adjustedHammerLevel = 0;
+    hammerMsgIdx++;
+    if (hammerMsgIdx < 0) {
+        hammerMsgIdx = 0;
     }
-    if (adjustedHammerLevel > 3) {
-        adjustedHammerLevel = 3;
+    if (hammerMsgIdx > 3) {
+        hammerMsgIdx = 3;
     }
 
     switch (gStatsMenuEntries[panel->selected].baseMsgID) {
         case PAUSE_MSG_TIP_BOOTS_1:
-            if (adjustedBootsLevel > 1) {
-                msgOffset = adjustedBootsLevel - 1;
+            if (bootsMsgIdx > 1) {
+                msgOffset = bootsMsgIdx - 1;
             }
             break;
         case PAUSE_MSG_TIP_HAMMER_0:
-            msgOffset = adjustedHammerLevel;
+            msgOffset = hammerMsgIdx;
             break;
         case PAUSE_MSG_TIP_SECRETS:
             if (evt_get_variable(NULL, GF_Tutorial_GotStarPiece)) {

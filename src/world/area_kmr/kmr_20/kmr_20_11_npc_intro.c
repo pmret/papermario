@@ -77,8 +77,8 @@ EvtScript N(EVS_Player_EnterPipe_Intro) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(func_802D286C, 0x00000800)
-    EVT_CALL(func_802D2520, ANIM_Mario1_Idle, FOLD_TYPE_5, 2, 1, 1, 0)
+    EVT_CALL(SetPlayerFoldFlags, FOLD_STATE_FLAG_800)
+    EVT_CALL(UpdatePlayerFold, ANIM_Mario1_Idle, FOLD_UPD_SET_ANIM, FOLD_ANIM_VERTICAL_PIPE_CURL, 1, 1, 0)
     EVT_WAIT(25)
     EVT_RETURN
     EVT_END
@@ -107,8 +107,8 @@ EvtScript N(EVS_Luigi_EnterPipe_Intro) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(func_802CFE2C, NPC_Scene_Luigi, 0x00000800)
-    EVT_CALL(func_802CFD30, NPC_Scene_Luigi, FOLD_TYPE_5, 2, 1, 1, 0)
+    EVT_CALL(SetNpcFoldFlags, NPC_Scene_Luigi, FOLD_STATE_FLAG_800)
+    EVT_CALL(SetNpcFoldParams, NPC_Scene_Luigi, FOLD_UPD_SET_ANIM, FOLD_ANIM_VERTICAL_PIPE_CURL, 1, 1, 0)
     EVT_WAIT(25)
     EVT_RETURN
     EVT_END

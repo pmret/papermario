@@ -256,7 +256,7 @@ typedef struct Npc {
     /* 0x09C */ s16 foldArg2;
     /* 0x09E */ s16 foldArg3;
     /* 0x0A0 */ s16 foldArg4;
-    /* 0x0A2 */ u16 foldArg5;
+    /* 0x0A2 */ u16 foldFlags;
     /* 0x0A4 */ s8 npcID;
     /* 0x0A5 */ char unk_A5;
     /* 0x0A6 */ s16 collisionRadius;

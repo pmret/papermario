@@ -406,9 +406,9 @@ replace_funcs = {
     "func_8027D434"             :{0:"ActorIDs"},
     "SetProjectileTargetOffset"             :{0:"ActorIDs"},
     "GetInstigatorValue"             :{0:"ActorIDs"},
-    "func_802CFD30"             :{0:"NpcIDs"},
-    "func_802CFE2C"             :{0:"NpcIDs"},
-    "func_802D2520"             :{0:"PlayerAnims"},
+    "SetNpcFoldParams"             :{0:"NpcIDs"},
+    "SetNpcFoldFlags"             :{0:"NpcIDs"},
+    "UpdatePlayerFold"             :{0:"PlayerAnims"},
 
     "GetAnimation"              :{0:"ActorIDs", 2:"CustomAnim"},
     "GetActorFlags"             :{0:"ActorIDs", 1:"ActorFlags"},

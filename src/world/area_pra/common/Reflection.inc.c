@@ -97,10 +97,10 @@ void N(worker_reflect_player_wall)(void) {
             if (playerStatus->alpha1 != D_802D9D70) {
                 if (playerStatus->alpha1 < 254) {
                     renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
-                    func_802DDEE4(PLAYER_SPRITE_AUX2, -1, FOLD_TYPE_7, 0, 0, 0, playerStatus->alpha1, 0);
+                    func_802DDEE4(PLAYER_SPRITE_AUX2, -1, FOLD_UPD_SET_ALPHA, 0, 0, 0, playerStatus->alpha1, 0);
                 } else {
                     renderMode = RENDER_MODE_ALPHATEST;
-                    func_802DDEE4(PLAYER_SPRITE_AUX2, -1, FOLD_TYPE_NONE, 0, 0, 0, 0, 0);
+                    func_802DDEE4(PLAYER_SPRITE_AUX2, -1, FOLD_UPD_CLEAR, 0, 0, 0, 0, 0);
                 }
             }
             D_802D9D70 = playerStatus->alpha1;
@@ -172,10 +172,10 @@ void N(worker_reflect_player_floor)(void) {
             if (playerStatus->alpha1 != D_802D9D71) {
                 if (playerStatus->alpha1 < 254) {
                     renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
-                    func_802DDEE4(PLAYER_SPRITE_AUX1, -1, FOLD_TYPE_7, 0, 0, 0, playerStatus->alpha1, 0);
+                    func_802DDEE4(PLAYER_SPRITE_AUX1, -1, FOLD_UPD_SET_ALPHA, 0, 0, 0, playerStatus->alpha1, 0);
                 } else {
                     renderMode = RENDER_MODE_ALPHATEST;
-                    func_802DDEE4(PLAYER_SPRITE_AUX1, -1, FOLD_TYPE_NONE, 0, 0, 0, 0, 0);
+                    func_802DDEE4(PLAYER_SPRITE_AUX1, -1, FOLD_UPD_CLEAR, 0, 0, 0, 0, 0);
                 }
             }
             D_802D9D71 = playerStatus->alpha1;

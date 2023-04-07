@@ -52,7 +52,7 @@ void N(appendGfx_sticker)(void* renderData) {
     if (sticker->yaw != 0.0 || sticker->pitch != 0.0) {
         foldFlags |= FOLD_STATE_FLAG_2000;
     }
-    fold_update(0, FOLD_TYPE_NONE, 0, 0, 0, 0, 0);
+    fold_update(0, FOLD_UPD_CLEAR, 0, 0, 0, 0, 0);
     fold_appendGfx_component(0, &foldImage, foldFlags, mtxTransform);
     
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
