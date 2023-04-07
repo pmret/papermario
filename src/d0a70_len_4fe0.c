@@ -102,12 +102,13 @@ typedef struct UnkFoldStruct {
     /* 0x14 */ Gfx* unk_14;
 } UnkFoldStruct; // size = 0x18
 
-typedef struct KeyframeVtx {
+// 'compressed' vertex data for animated fold keyframes
+typedef struct FoldVtx {
     /* 0x00 */ s16 ob[3];
     /* 0x06 */ u8 tc[2];
     /* 0x08 */ s8 cn[3];
     /* 0x0B */ char unk_0B;
-} KeyframeVtx; // size = 0x0C
+} FoldVtx; // size = 0x0C
 
 typedef FoldState FoldStateList[MAX_FOLD_STATES];
 
@@ -1202,8 +1203,8 @@ void fold_mesh_anim_update(FoldState* state) {
     s32 absKeyframeInterval;
     s32 nextKeyIdx;
     s32 curKeyIdx;
-    KeyframeVtx* curKeyframe = NULL;
-    KeyframeVtx* nextKeyframe = NULL;
+    FoldVtx* curKeyframe = NULL;
+    FoldVtx* nextKeyframe = NULL;
     s32 keyframeInterval = state->ints.raw[0][1];
     s32 animStep = state->ints.raw[0][2];
     s32 curSubframe = state->floats.anim.curFrame;
@@ -1247,13 +1248,13 @@ void fold_mesh_anim_update(FoldState* state) {
     }
 
     // find the current + next keyframe vertex data
-    curKeyframe = heap_malloc(header->vtxCount * sizeof(KeyframeVtx));
-    romStart = (u8*)((s32)fold_gfx_data_ROM_START + header->keyframesOffset + curKeyIdx * header->vtxCount * sizeof(KeyframeVtx));
-    dma_copy(romStart, romStart + header->vtxCount * sizeof(KeyframeVtx), curKeyframe);
+    curKeyframe = heap_malloc(header->vtxCount * sizeof(FoldVtx));
+    romStart = (u8*)((s32)fold_gfx_data_ROM_START + header->keyframesOffset + curKeyIdx * header->vtxCount * sizeof(FoldVtx));
+    dma_copy(romStart, romStart + header->vtxCount * sizeof(FoldVtx), curKeyframe);
     if (keyframeInterval > 1) {
         nextKeyframe = heap_malloc(header->vtxCount * sizeof(*nextKeyframe));
-        romStart = (u8*)((s32)fold_gfx_data_ROM_START + header->keyframesOffset + nextKeyIdx * header->vtxCount * sizeof(KeyframeVtx));
-        dma_copy(romStart, romStart + header->vtxCount * sizeof(KeyframeVtx), nextKeyframe);
+        romStart = (u8*)((s32)fold_gfx_data_ROM_START + header->keyframesOffset + nextKeyIdx * header->vtxCount * sizeof(FoldVtx));
+        dma_copy(romStart, romStart + header->vtxCount * sizeof(FoldVtx), nextKeyframe);
     }
 
     lerpAlpha = (f32) curSubframe / (f32) keyframeInterval;
