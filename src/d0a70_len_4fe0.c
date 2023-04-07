@@ -123,7 +123,7 @@ extern s8 D_80156958[2];
 extern s32 D_80156960[2];
 extern s32 D_80156968[2];
 extern s8 D_80156970;
-extern FoldAnimHeader fold_groupDescriptors[4];
+extern FoldAnimHeader FoldAnimHeaders[4];
 
 // Data
 FoldImageRec* fold_currentImage = &D_80156920;
@@ -146,7 +146,7 @@ Vp D_8014EE50 = {
     }
 };
 
-u16 D_8014EE60 = 300;
+u16 FoldVtxBufferCapacity = 300;
 
 Gfx DefaultFoldSetupGfx[] = {
     gsSPClearGeometryMode(G_CULL_BOTH | G_LIGHTING),
@@ -222,15 +222,15 @@ void fold_wavy_init(FoldState* state);
 void fold_mesh_wavy_update(FoldState* state);
 void fold_mesh_load_colors(FoldState* state);
 
-void func_8013A370(s16 arg0) {
-    D_8014EE60 = arg0;
+void fold_set_vtx_buf_capacity(s16 arg0) {
+    FoldVtxBufferCapacity = arg0;
 }
 
 void fold_init(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(D_80156948); i++) {
-        D_80156948[i] = _heap_malloc(&heap_spriteHead, D_8014EE60 * sizeof(*(D_80156948[0])));
+        D_80156948[i] = _heap_malloc(&heap_spriteHead, FoldVtxBufferCapacity * sizeof(Vtx));
     }
 
     D_80156954 = (FoldStateList*)_heap_malloc(&heap_spriteHead, ARRAY_COUNT(*D_80156954) * sizeof((*D_80156954)[0]));
@@ -1137,7 +1137,7 @@ void fold_mesh_make_grid(FoldState* state) {
 
 FoldAnimHeader* fold_load_anim(FoldState* state) {
     u8* romStart = FoldAnimOffsets[state->ints.anim.type] + fold_gfx_data_ROM_START;
-    FoldAnimHeader* header = &fold_groupDescriptors[state->arrayIdx];
+    FoldAnimHeader* anim = &FoldAnimHeaders[state->arrayIdx];
 
     if (state->curAnimOffset != romStart) {
         u8* romEnd;
@@ -1145,7 +1145,7 @@ FoldAnimHeader* fold_load_anim(FoldState* state) {
 
         state->curAnimOffset = romStart;
 
-        dma_copy(state->curAnimOffset, state->curAnimOffset + sizeof(*header), header);
+        dma_copy(state->curAnimOffset, state->curAnimOffset + sizeof(*anim), anim);
 
         if (state->vtxBufs[0] != NULL) {
             fold_add_to_gfx_cache(state->vtxBufs[0], 1);
@@ -1165,13 +1165,13 @@ FoldAnimHeader* fold_load_anim(FoldState* state) {
             fold_add_to_gfx_cache(state->gfxBufs[1], 1);
             state->gfxBufs[1] = NULL;
         }
-        state->vtxBufs[0] = heap_malloc(header->vtxCount * sizeof(Vtx));
-        state->vtxBufs[1] = heap_malloc(header->vtxCount * sizeof(Vtx));
-        state->gfxBufs[0] = heap_malloc(header->gfxCount * sizeof(Gfx));
-        state->gfxBufs[1] = heap_malloc(header->gfxCount * sizeof(Gfx));
+        state->vtxBufs[0] = heap_malloc(anim->vtxCount * sizeof(Vtx));
+        state->vtxBufs[1] = heap_malloc(anim->vtxCount * sizeof(Vtx));
+        state->gfxBufs[0] = heap_malloc(anim->gfxCount * sizeof(Gfx));
+        state->gfxBufs[1] = heap_malloc(anim->gfxCount * sizeof(Gfx));
 
-        romStart = fold_gfx_data_ROM_START + (s32)header->gfxOffset;
-        romEnd = romStart + header->gfxCount * sizeof(Gfx);
+        romStart = fold_gfx_data_ROM_START + (s32)anim->gfxOffset;
+        romEnd = romStart + anim->gfxCount * sizeof(Gfx);
         dma_copy(romStart, romEnd, state->gfxBufs[0]);
         dma_copy(romStart, romEnd, state->gfxBufs[1]);
 
@@ -1189,14 +1189,14 @@ FoldAnimHeader* fold_load_anim(FoldState* state) {
 
                 // If this command is a vertex command, adjust the vertex buffer address
                 if (cmd == G_VTX) {
-                    gfxBuffer[j-1].words.w1 = ((((s32) gfxBuffer[j-1].words.w1 - header->keyframesOffset) / 3) * 4) +
+                    gfxBuffer[j-1].words.w1 = ((((s32) gfxBuffer[j-1].words.w1 - anim->keyframesOffset) / 3) * 4) +
                                               (s32) state->vtxBufs[i];
                 }
             } while (cmd != G_ENDDL);
         }
     }
 
-    return header;
+    return anim;
 }
 
 void fold_mesh_anim_update(FoldState* state) {
