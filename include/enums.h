@@ -5963,8 +5963,9 @@ enum FoldStateFlags {
     FOLD_STATE_FLAG_ENABLED           = 0x00000001,
     FOLD_STATE_FLAG_G_CULL_BACK       = 0x00000002,
     FOLD_STATE_FLAG_G_CULL_FRONT      = 0x00000004,
-    FOLD_STATE_FLAG_10                = 0x00000010,
-    FOLD_STATE_FLAG_20                = 0x00000020,
+    FOLD_STATE_FLAG_8                 = 0x00000008,
+    FOLD_STATE_FLAG_SKIP_GFX_SETUP    = 0x00000010,
+    FOLD_STATE_FLAG_SKIP_TEX_SETUP    = 0x00000020,
     FOLD_STATE_FLAG_40                = 0x00000040,
     FOLD_STATE_FLAG_80                = 0x00000080,
     FOLD_STATE_FLAG_100               = 0x00000100,
@@ -5983,50 +5984,73 @@ enum FoldStateFlags {
 };
 
 typedef enum FoldType {
-    FOLD_TYPE_NONE                    = 0x0,
-    FOLD_TYPE_1                       = 0x1,
-    FOLD_TYPE_2                       = 0x2,
-    FOLD_TYPE_3                       = 0x3,
-    FOLD_TYPE_4                       = 0x4,
-    FOLD_TYPE_5                       = 0x5,
-    FOLD_TYPE_6                       = 0x6,
-    FOLD_TYPE_7                       = 0x7,
-    FOLD_TYPE_8                       = 0x8,    // color overlay?
+    FOLD_UPD_CLEAR                    = 0x0,    // or FOLD_UPD_INIT?
+    FOLD_TYPE_1                       = 0x1,    // unused?
+    FOLD_TYPE_2                       = 0x2,    // unused?
+    FOLD_TYPE_3                       = 0x3,    // after goomba 'sticker' ambush in kmr_09 unfurls
+    FOLD_UPD_WAVY                     = 0x4,    // Kolorado when injured and Sushie when underwater (* note: Sushie fold rendering is bugged and only occurs *before* going underwater)
+    FOLD_UPD_SET_ANIM                 = 0x5,
+    FOLD_UPD_SET_COLOR                = 0x6,    // modulate color (args: R, G, B)
+    FOLD_UPD_SET_ALPHA                = 0x7,    // modulate alpha (args: A)
+    FOLD_UPD_SET_TINT                 = 0x8,    // modulate color+alpha (args: R, G, B, A)
     FOLD_TYPE_9                       = 0x9,
     FOLD_TYPE_A                       = 0xA,
     FOLD_UPD_COLOR_BUF_SET_B          = 0xB,
     FOLD_UPD_COLOR_BUF_SET_C          = 0xC,
-    FOLD_TYPE_D                       = 0xD,    // noisy hologram -- used for ghostly star spirits and merlar
+    FOLD_UPD_HOLOGRAM                 = 0xD,    // ghostly star spirits and merlar (args: ???, staticAmt, ???, alphaAmt)
     FOLD_TYPE_E                       = 0xE,
     FOLD_TYPE_F                       = 0xF,
-    FOLD_TYPE_10                      = 0x10,
+    FOLD_TYPE_10                      = 0x10,   // unused?
     FOLD_UPD_ALLOC_COLOR_BUF          = 0x11,   // args: count
 } FoldType;
 
+typedef enum FoldAnim {
+    FOLD_ANIM_SHOCK                   = 0x00, // used for Goombaria and Goompapa when Kammy drops the hammer block
+    FOLD_ANIM_SHIVER                  = 0x01, // used when Goombaria gives Mario a kiss
+    FOLD_ANIM_VERTICAL_PIPE_CURL      = 0x02, // vertical pipe curl
+    FOLD_ANIM_HORIZONTAL_PIPE_CURL    = 0x03, // horizontal pipe curl
+    FOLD_ANIM_STARTLE                 = 0x04, // used when Koopa Bros are surprised by Mario
+    FOLD_ANIM_FLUTTER_DOWN            = 0x05, // player falling like paper
+    FOLD_ANIM_UNFURL                  = 0x06, // used by Goomba 'stickers' that ambush Mario in kmr
+    FOLD_ANIM_GET_IN_BED              = 0x07, // Mario gets into bed
+    FOLD_ANIM_SPIRIT_CAPTURE          = 0x08, // Eldstar being captured
+    FOLD_ANIM_09                      = 0x09, // unused?
+    FOLD_ANIM_0A                      = 0x0A, // unused?
+    FOLD_ANIM_0B                      = 0x0B, // unused?
+    FOLD_ANIM_TUTANKOOPA_GATHER       = 0x0C, // tutankoopa 3
+    FOLD_ANIM_TUTANKOOPA_SWIRL_2      = 0x0D, // tutankoopa 2
+    FOLD_ANIM_TUTANKOOPA_SWIRL_1      = 0x0E, // tutankoopa 1
+    FOLD_ANIM_SHUFFLE_CARDS           = 0x0F,
+    FOLD_ANIM_FLIP_CARD_1             = 0x10, // flip card 1
+    FOLD_ANIM_FLIP_CARD_2             = 0x11, // flip card 2
+    FOLD_ANIM_FLIP_CARD_3             = 0x12, // flip card 3
+    FOLD_ANIM_CYMBAL_CRUSH            = 0x13, // used when Mario is crushed in a Cymbal Plant
+} FoldAnim;
+
 typedef enum FoldRenderType {
-    FOLD_RENDER_TYPE_0                  = 0x0,
-    FOLD_RENDER_TYPE_1                  = 0x1,
-    FOLD_RENDER_TYPE_2                  = 0x2,
-    FOLD_RENDER_TYPE_3                  = 0x3,
-    FOLD_RENDER_TYPE_4                  = 0x4,
-    FOLD_RENDER_TYPE_5                  = 0x5,
-    FOLD_RENDER_TYPE_6                  = 0x6,
-    FOLD_RENDER_TYPE_7                  = 0x7,
-    FOLD_RENDER_TYPE_8                  = 0x8,
-    FOLD_RENDER_TYPE_9                  = 0x9,
-    FOLD_RENDER_TYPE_A                  = 0xA,
-    FOLD_RENDER_TYPE_B                  = 0xB,
-    FOLD_RENDER_TYPE_C                  = 0xC,
-    FOLD_RENDER_TYPE_D                  = 0xD,
-    FOLD_RENDER_TYPE_E                  = 0xE,
-    FOLD_RENDER_TYPE_F                  = 0xF,
-    FOLD_RENDER_TYPE_10                 = 0x10,
+    FOLD_RENDER_TYPE_0                = 0x0,
+    FOLD_RENDER_TYPE_1                = 0x1,
+    FOLD_RENDER_TYPE_2                = 0x2,
+    FOLD_RENDER_TYPE_3                = 0x3,
+    FOLD_RENDER_TYPE_4                = 0x4,
+    FOLD_RENDER_TYPE_5                = 0x5,
+    FOLD_RENDER_TYPE_6                = 0x6,
+    FOLD_RENDER_TYPE_7                = 0x7,
+    FOLD_RENDER_TYPE_8                = 0x8,
+    FOLD_RENDER_TYPE_9                = 0x9,
+    FOLD_RENDER_TYPE_A                = 0xA,
+    FOLD_RENDER_TYPE_B                = 0xB,
+    FOLD_RENDER_HOLOGRAM              = 0xC,
+    FOLD_RENDER_TYPE_D                = 0xD,
+    FOLD_RENDER_TYPE_E                = 0xE,
+    FOLD_RENDER_TYPE_F                = 0xF,
+    FOLD_RENDER_TYPE_10               = 0x10,
 } FoldRenderType;
 
 typedef enum FoldMeshType {
     FOLD_MESH_TYPE_0                  = 0x0,
     FOLD_MESH_TYPE_1                  = 0x1,
-    FOLD_MESH_TYPE_2                  = 0x2,
+    FOLD_MESH_ANIMATED                = 0x2,
     FOLD_MESH_TYPE_3                  = 0x3,
     FOLD_MESH_TYPE_4                  = 0x4,
 } FoldMeshType;

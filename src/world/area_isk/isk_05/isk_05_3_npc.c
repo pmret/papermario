@@ -71,7 +71,7 @@ void N(func_80241610_97F0E0)(void) {
     foldImg.yOffset = (spriteRaster.height / 2);
     foldImg.opacity = 255;
 
-    fold_update(ambush->foldID, FOLD_TYPE_7, 255, 255, 255, ambush->alpha, 0);
+    fold_update(ambush->foldID, FOLD_UPD_SET_ALPHA, 255, 255, 255, ambush->alpha, 0);
     fold_appendGfx_component(ambush->foldID, &foldImg, 0, transformMtx);
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
@@ -218,7 +218,7 @@ EvtScript N(EVS_NpcIdle_StoneChomp) = {
     EVT_CALL(EnableNpcShadow, NPC_SELF, TRUE)
     EVT_WAIT(1)
     EVT_CALL(N(DestroyAmbushWorker))
-    EVT_CALL(func_802CFD30, NPC_SELF, FOLD_TYPE_NONE, 0, 0, 0, 0)
+    EVT_CALL(SetNpcFoldParams, NPC_SELF, FOLD_UPD_CLEAR, 0, 0, 0, 0)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(BindNpcAI, NPC_SELF, EVT_PTR(N(EVS_NpcAI_StoneChomp)))
     EVT_RETURN

@@ -965,7 +965,7 @@ ApiStatus PartnerIsFlying(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802CFD30(Evt* script, s32 isInitialCall) {
+ApiStatus SetNpcFoldParams(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 npcId = evt_get_variable(script, *args++);
     Bytecode foldType = evt_get_variable(script, *args++);
@@ -979,21 +979,21 @@ ApiStatus func_802CFD30(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    func_8003D624(npc, foldType, var2, var3, var4, var5, npc->foldArg5);
+    npc_set_fold_params(npc, foldType, var2, var3, var4, var5, npc->foldFlags);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802CFE2C(Evt* script, s32 isInitialCall) {
+ApiStatus SetNpcFoldFlags(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 npcId = evt_get_variable(script, *args++);
-    Bytecode arg1 = *args;
+    Bytecode flags = *args;
     Npc* npc = resolve_npc(script, npcId);
 
     if (npc == NULL) {
         return ApiStatus_DONE2;
     }
 
-    npc->foldArg5 = arg1;
+    npc->foldFlags = flags;
     return ApiStatus_DONE2;
 }
 

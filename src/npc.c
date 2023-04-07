@@ -141,7 +141,7 @@ s32 create_npc_impl(NpcBlueprint* blueprint, AnimID* animList, s32 isPeachNpc) {
     npc->animationSpeed = 1.0f;
     npc->renderYaw = 0.0f;
     npc->foldType = 0;
-    npc->foldArg5 = 0;
+    npc->foldFlags = 0;
     npc->collisionChannel = COLLISION_CHANNEL_20000;
     npc->isFacingAway = FALSE;
     npc->yawCamOffset = 0;
@@ -1148,7 +1148,7 @@ void appendGfx_npc_blur(void* data) {
             x = blur->x[index];
             y = blur->y[index];
             z = blur->z[index];
-            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_7, 255, 255, 255, 120 - (var_s5 * 20), 0);
+            func_802DE894(npc->spriteInstanceID, FOLD_UPD_SET_ALPHA, 255, 255, 255, 120 - (var_s5 * 20), 0);
             yaw = npc->renderYaw;
             guTranslateF(sp20, x, y, z);
 
@@ -2086,76 +2086,76 @@ void func_8003D3BC(Npc* npc) {
     s32 foldArg2 = npc->foldArg2;
     s32 foldArg3 = npc->foldArg3;
     s32 foldArg4 = npc->foldArg4;
-    s32 foldArg5 = npc->foldArg5;
+    s32 foldFlags = npc->foldFlags;
 
-    func_802DE894(npc->spriteInstanceID, FOLD_TYPE_NONE, 0, 0, 0, 0, 0);
+    func_802DE894(npc->spriteInstanceID, FOLD_UPD_CLEAR, 0, 0, 0, 0, 0);
 
     switch (foldType) {
-        case FOLD_TYPE_NONE:
+        case FOLD_UPD_CLEAR:
             npc->renderMode = RENDER_MODE_ALPHATEST;
-            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_NONE, 0, 0, 0, 0, foldArg5);
+            func_802DE894(npc->spriteInstanceID, FOLD_UPD_CLEAR, 0, 0, 0, 0, foldFlags);
             break;
         case FOLD_TYPE_2:
         case FOLD_TYPE_3:
             npc->renderMode = RENDER_MODE_ALPHATEST;
             // fallthrough
         case FOLD_TYPE_1:
-            func_802DE894(npc->spriteInstanceID, foldType, 0, 0, 0, 0, foldArg5);
+            func_802DE894(npc->spriteInstanceID, foldType, 0, 0, 0, 0, foldFlags);
             break;
-        case FOLD_TYPE_4:
+        case FOLD_UPD_WAVY:
             npc->renderMode = RENDER_MODE_ALPHATEST;
-            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_4, foldArg1, foldArg2, foldArg3, 0, foldArg5);
+            func_802DE894(npc->spriteInstanceID, FOLD_UPD_WAVY, foldArg1, foldArg2, foldArg3, 0, foldFlags);
             break;
-        case FOLD_TYPE_6:
+        case FOLD_UPD_SET_COLOR:
             npc->renderMode = RENDER_MODE_ALPHATEST;
-            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_6, foldArg1, foldArg2, foldArg3, 255, foldArg5);
+            func_802DE894(npc->spriteInstanceID, FOLD_UPD_SET_COLOR, foldArg1, foldArg2, foldArg3, 255, foldFlags);
             break;
-        case FOLD_TYPE_7:
+        case FOLD_UPD_SET_ALPHA:
             npc->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
-            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_7, 255, 255, 255, foldArg1, foldArg5);
+            func_802DE894(npc->spriteInstanceID, FOLD_UPD_SET_ALPHA, 255, 255, 255, foldArg1, foldFlags);
             break;
-        case FOLD_TYPE_8:
+        case FOLD_UPD_SET_TINT:
             npc->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
-            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_8, foldArg1, foldArg2, foldArg3, foldArg4, foldArg5);
+            func_802DE894(npc->spriteInstanceID, FOLD_UPD_SET_TINT, foldArg1, foldArg2, foldArg3, foldArg4, foldFlags);
             break;
         case FOLD_TYPE_9:
             npc->renderMode = RENDER_MODE_ALPHATEST;
-            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_9, foldArg1, foldArg2, foldArg3, 255, foldArg5);
+            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_9, foldArg1, foldArg2, foldArg3, 255, foldFlags);
             break;
         case FOLD_TYPE_A:
             npc->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
-            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_A, foldArg1, foldArg2, foldArg3, foldArg4, foldArg5);
+            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_A, foldArg1, foldArg2, foldArg3, foldArg4, foldFlags);
             break;
-        case FOLD_TYPE_5:
+        case FOLD_UPD_SET_ANIM:
             npc->renderMode = RENDER_MODE_ALPHATEST;
-            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_5, foldArg1, foldArg2, foldArg3, 0, foldArg5);
+            func_802DE894(npc->spriteInstanceID, FOLD_UPD_SET_ANIM, foldArg1, foldArg2, foldArg3, 0, foldFlags);
             break;
-        case FOLD_TYPE_D:
+        case FOLD_UPD_HOLOGRAM:
             npc->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
-            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_D, foldArg1, foldArg2, foldArg3, foldArg4, foldArg5);
+            func_802DE894(npc->spriteInstanceID, FOLD_UPD_HOLOGRAM, foldArg1, foldArg2, foldArg3, foldArg4, foldFlags);
             break;
         case FOLD_TYPE_E:
             npc->renderMode = RENDER_MODE_ALPHATEST;
-            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_E, foldArg1, foldArg2, foldArg3, 255, foldArg5);
+            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_E, foldArg1, foldArg2, foldArg3, 255, foldFlags);
             break;
         case FOLD_TYPE_F:
             npc->renderMode = RENDER_MODE_ALPHATEST;
-            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_F, foldArg1, 255, 0, 255, foldArg5);
+            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_F, foldArg1, 255, 0, 255, foldFlags);
             break;
         case FOLD_TYPE_10:
             npc->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
-            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_F, foldArg1, foldArg2, 0, foldArg2, foldArg5);
+            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_F, foldArg1, foldArg2, 0, foldArg2, foldFlags);
             break;
     }
 }
 
-void func_8003D624(Npc* npc, s32 foldType, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+void npc_set_fold_params(Npc* npc, s32 foldType, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
     npc->foldType = foldType;
     npc->foldArg1 = arg2;
     npc->foldArg2 = arg3;
     npc->foldArg3 = arg4;
     npc->foldArg4 = arg5;
-    npc->foldArg5 = arg6;
+    npc->foldFlags = arg6;
     func_8003D3BC(npc);
 }
 

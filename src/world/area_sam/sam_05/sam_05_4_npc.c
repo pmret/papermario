@@ -84,7 +84,7 @@ API_CALLABLE(N(UpdateMonstarSpriteEffects)) {
     }
 
     if (enemy->varTable[3] == 0) {
-        func_802DE780(npc->spriteInstanceID, 1, FOLD_TYPE_7, 255, 255, 255, 0, 0);
+        func_802DE780(npc->spriteInstanceID, 1, FOLD_UPD_SET_ALPHA, 255, 255, 255, 0, 0);
         return ApiStatus_BLOCK;
     }
 
