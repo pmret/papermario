@@ -128,7 +128,7 @@ EvtScript N(EVS_Pipe_EnterVertical) = {
     EVT_CALL(SetPlayerPos, LVar1, LVar2, LVar3)
     EVT_CALL(InterpPlayerYaw, LVar4, 0)
     EVT_CALL(PlaySound, SOUND_ENTER_PIPE)
-    EVT_CALL(SetPlayerFoldFlags, FOLD_STATE_FLAG_100)
+    EVT_CALL(SetPlayerFoldFlags, FOLD_STATE_FLAG_REVERSE_ANIM)
     EVT_CALL(UpdatePlayerFold, ANIM_Mario1_Still, FOLD_UPD_SET_ANIM, FOLD_ANIM_VERTICAL_PIPE_CURL, 1, 1, 0)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_LOOP(40)
@@ -202,7 +202,7 @@ EvtScript N(EVS_Pipe_EnterHorizontal) = {
         EVT_WAIT(25)
         EVT_CALL(HidePlayerShadow, FALSE)
     EVT_END_THREAD
-    EVT_CALL(SetPlayerFoldFlags, FOLD_STATE_FLAG_100 | FOLD_STATE_FLAG_800)
+    EVT_CALL(SetPlayerFoldFlags, FOLD_STATE_FLAG_REVERSE_ANIM | FOLD_STATE_FLAG_800)
     EVT_CALL(UpdatePlayerFold, ANIM_Mario1_Idle, FOLD_UPD_SET_ANIM, FOLD_ANIM_HORIZONTAL_PIPE_CURL, 1, 1, 0)
     EVT_LOOP(40)
         EVT_CALL(N(Pipe_GetPointAheadOfPlayer), EVT_FLOAT(1.0))

@@ -216,12 +216,12 @@ EvtScript N(EVS_Scene_KammyStrikes) = {
     EVT_EXEC_WAIT(N(EVS_SummonGateBlock))
     EVT_THREAD
         EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_PanicHoverStill)
-        EVT_CALL(SetPlayerFoldFlags, FOLD_STATE_FLAG_100)
+        EVT_CALL(SetPlayerFoldFlags, FOLD_STATE_FLAG_REVERSE_ANIM)
         EVT_CALL(UpdatePlayerFold, ANIM_MarioW2_PanicHoverStill, FOLD_UPD_SET_ANIM, FOLD_ANIM_SHOCK, 1, 1, 0)
         EVT_WAIT(13 * DT)
         EVT_CALL(UpdatePlayerFold, ANIM_MarioW2_PanicHoverStill, FOLD_UPD_CLEAR, 0, 0, 0, 0)
         EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_PanicHover)
-        EVT_CALL(SetPlayerFoldFlags, FOLD_STATE_FLAG_100)
+        EVT_CALL(SetPlayerFoldFlags, FOLD_STATE_FLAG_REVERSE_ANIM)
         EVT_CALL(UpdatePlayerFold, ANIM_MarioW2_PanicHover, FOLD_UPD_SET_ANIM, FOLD_ANIM_SHOCK, 1, 1, 0)
         EVT_WAIT(13 * DT)
         EVT_CALL(UpdatePlayerFold, ANIM_MarioW2_PanicHover, FOLD_UPD_CLEAR, 0, 0, 0, 0)
@@ -234,7 +234,7 @@ EvtScript N(EVS_Scene_KammyStrikes) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_Goombaria, ANIM_Goombaria_Shock)
-        EVT_CALL(SetNpcFoldFlags, NPC_Goombaria, FOLD_STATE_FLAG_100)
+        EVT_CALL(SetNpcFoldFlags, NPC_Goombaria, FOLD_STATE_FLAG_REVERSE_ANIM)
         EVT_CALL(SetNpcFoldParams, NPC_Goombaria, FOLD_UPD_SET_ANIM, FOLD_ANIM_SHOCK, 1, 1, 0)
         EVT_CALL(SetNpcJumpscale, NPC_Goombaria, EVT_FLOAT(1.5))
         EVT_CALL(GetNpcPos, NPC_Goombaria, LVar0, LVar1, LVar2)
@@ -242,7 +242,7 @@ EvtScript N(EVS_Scene_KammyStrikes) = {
         EVT_CALL(SetNpcAnimation, NPC_Goombaria, ANIM_Goombaria_LookUp)
         EVT_CALL(SetNpcFoldParams, NPC_Goombaria, FOLD_UPD_CLEAR, 0, 0, 0, 0)
     EVT_END_THREAD
-    EVT_CALL(SetNpcFoldFlags, NPC_Goompapa, FOLD_STATE_FLAG_100)
+    EVT_CALL(SetNpcFoldFlags, NPC_Goompapa, FOLD_STATE_FLAG_REVERSE_ANIM)
     EVT_CALL(SetNpcFoldParams, NPC_Goompapa, FOLD_UPD_SET_ANIM, FOLD_ANIM_SHOCK, 1, 1, 0)
     EVT_CALL(SetNpcAnimation, NPC_Goompapa, ANIM_Goompapa_Shock)
     EVT_CALL(SetNpcJumpscale, NPC_Goompapa, EVT_FLOAT(1.2))

@@ -5967,12 +5967,12 @@ enum FoldStateFlags {
     FOLD_STATE_FLAG_SKIP_GFX_SETUP    = 0x00000010,
     FOLD_STATE_FLAG_SKIP_TEX_SETUP    = 0x00000020,
     FOLD_STATE_FLAG_40                = 0x00000040,
-    FOLD_STATE_FLAG_80                = 0x00000080,
-    FOLD_STATE_FLAG_100               = 0x00000100,
+    FOLD_STATE_FLAG_LOOP_ANIM         = 0x00000080,
+    FOLD_STATE_FLAG_REVERSE_ANIM      = 0x00000100, // fold animation plays backwards (from end to start)
     FOLD_STATE_FLAG_200               = 0x00000200,
     FOLD_STATE_FLAG_400               = 0x00000400,
     FOLD_STATE_FLAG_800               = 0x00000800,
-    FOLD_STATE_FLAG_1000              = 0x00001000,
+    FOLD_STATE_FLAG_ANIM_DONE         = 0x00001000,
     FOLD_STATE_FLAG_2000              = 0x00002000,
     FOLD_STATE_FLAG_4000              = 0x00004000,
     FOLD_STATE_FLAG_8000              = 0x00008000,
@@ -6011,19 +6011,19 @@ typedef enum FoldAnim {
     FOLD_ANIM_HORIZONTAL_PIPE_CURL    = 0x03, // horizontal pipe curl
     FOLD_ANIM_STARTLE                 = 0x04, // used when Koopa Bros are surprised by Mario
     FOLD_ANIM_FLUTTER_DOWN            = 0x05, // player falling like paper
-    FOLD_ANIM_UNFURL                  = 0x06, // used by Goomba 'stickers' that ambush Mario in kmr
+    FOLD_ANIM_UNFURL                  = 0x06, // used by Goomba 'stickers' that ambush Mario in area_kmr
     FOLD_ANIM_GET_IN_BED              = 0x07, // Mario gets into bed
     FOLD_ANIM_SPIRIT_CAPTURE          = 0x08, // Eldstar being captured
-    FOLD_ANIM_09                      = 0x09, // unused?
-    FOLD_ANIM_0A                      = 0x0A, // unused?
-    FOLD_ANIM_0B                      = 0x0B, // unused?
+    FOLD_ANIM_UNUSED_1                = 0x09, // unused
+    FOLD_ANIM_UNUSED_2                = 0x0A, // unused
+    FOLD_ANIM_UNUSED_3                = 0x0B, // unused
     FOLD_ANIM_TUTANKOOPA_GATHER       = 0x0C, // tutankoopa 3
     FOLD_ANIM_TUTANKOOPA_SWIRL_2      = 0x0D, // tutankoopa 2
     FOLD_ANIM_TUTANKOOPA_SWIRL_1      = 0x0E, // tutankoopa 1
-    FOLD_ANIM_SHUFFLE_CARDS           = 0x0F,
-    FOLD_ANIM_FLIP_CARD_1             = 0x10, // flip card 1
-    FOLD_ANIM_FLIP_CARD_2             = 0x11, // flip card 2
-    FOLD_ANIM_FLIP_CARD_3             = 0x12, // flip card 3
+    FOLD_ANIM_SHUFFLE_CARDS           = 0x0F, // merlee spell-casting card shuffle
+    FOLD_ANIM_FLIP_CARD_1             = 0x10, // merlee spell-casting card flip 1
+    FOLD_ANIM_FLIP_CARD_2             = 0x11, // merlee spell-casting card flip 2
+    FOLD_ANIM_FLIP_CARD_3             = 0x12, // merlee spell-casting card flip 3
     FOLD_ANIM_CYMBAL_CRUSH            = 0x13, // used when Mario is crushed in a Cymbal Plant
 } FoldAnim;
 
