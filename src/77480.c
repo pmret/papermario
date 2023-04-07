@@ -1551,7 +1551,7 @@ void appendGfx_player(void* data) {
             playerStatus->animFlags = playerStatus->animFlags & ~PA_FLAG_SHIVERING;
             playerStatus->shiverTime = 22;
             func_802DDEE4(PLAYER_SPRITE_MAIN, -1, 0, 0, 0, 0, 0, 0);
-            func_802DDFF8(playerStatus->anim, 5, 1, 1, 1, 0, 0);
+            func_802DDFF8(playerStatus->anim, FOLD_UPD_SET_ANIM, FOLD_ANIM_SHIVER, 1, 1, 0, 0);
         }
 
         if (playerStatus->shiverTime != 0) {
@@ -1614,7 +1614,7 @@ void appendGfx_player_spin(void* data) {
                 tint = 100;
             }
 
-            func_802DDFF8(0, FOLD_TYPE_6, tint, tint, tint, 255, 0);
+            func_802DDFF8(PLAYER_SPRITE_MAIN, FOLD_UPD_SET_COLOR, tint, tint, tint, 255, 0);
 
             guRotateF(rotation, yaw, 0.0f, -1.0f, 0.0f);
             guRotateF(mtx, clamp_angle(playerStatus->pitch), 0.0f, 0.0f, 1.0f);
