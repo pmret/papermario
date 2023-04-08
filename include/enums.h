@@ -6048,11 +6048,11 @@ typedef enum FoldRenderType {
 } FoldRenderType;
 
 typedef enum FoldMeshType {
-    FOLD_MESH_TYPE_0                  = 0x0,
-    FOLD_MESH_TYPE_1                  = 0x1,
+    FOLD_MESH_DEFAULT                 = 0x0,
+    FOLD_MESH_GRID_WAVY               = 0x1,
     FOLD_MESH_ANIMATED                = 0x2,
-    FOLD_MESH_TYPE_3                  = 0x3,
-    FOLD_MESH_TYPE_4                  = 0x4,
+    FOLD_MESH_GRID_UNUSED             = 0x3,
+    FOLD_MESH_STRIP                   = 0x4,
 } FoldMeshType;
 
 enum MoveType {

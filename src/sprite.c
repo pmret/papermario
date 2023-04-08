@@ -969,11 +969,11 @@ s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 alphaIn, PAL_PTR* 
     return TRUE;
 }
 
-s32 func_802DDEC4(s32 arg0) {
-    return spr_playerCurrentAnimInfo[arg0].notifyValue;
+s32 func_802DDEC4(s32 spriteIdx) {
+    return spr_playerCurrentAnimInfo[spriteIdx].notifyValue;
 }
 
-void func_802DDEE4(s32 spriteIdx, s32 compIdx, FoldType foldType, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7) {
+void spr_set_player_fold_update_comp(s32 spriteIdx, s32 compIdx, FoldType foldType, s32 foldArg1, s32 foldArg2, s32 foldArg3, s32 foldArg4, s32 flags) {
     SpriteComponent* component;
     SpriteComponent** componentListIt;
     s32 i;
@@ -985,7 +985,7 @@ void func_802DDEE4(s32 spriteIdx, s32 compIdx, FoldType foldType, s32 arg3, s32 
         while (*componentListIt != PTR_LIST_END) {
             component = *componentListIt;
             if (compIdx == -1 || i == compIdx) {
-                fold_update(component->unk_4C & 0xFF, foldType, arg3, arg4, arg5, arg6, arg7);
+                fold_update(component->unk_4C & 0xFF, foldType, foldArg1, foldArg2, foldArg3, foldArg4, flags);
                 if (foldType != 0) {
                     component->unk_4C |= 0x10000000;
                 } else {
@@ -998,8 +998,9 @@ void func_802DDEE4(s32 spriteIdx, s32 compIdx, FoldType foldType, s32 arg3, s32 
     }
 }
 
-void func_802DDFF8(s32 animID, FoldType foldType, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
-    func_802DDEE4(PLAYER_SPRITE_MAIN, -1, foldType, arg2, arg3, arg4, arg5, arg6);
+// applied to all components
+void spr_set_player_fold_update_all(s32 animID, FoldType foldType, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+    spr_set_player_fold_update_comp(PLAYER_SPRITE_MAIN, -1, foldType, arg2, arg3, arg4, arg5, arg6);
 }
 
 void spr_get_player_raster_info(SpriteRasterInfo* out, s32 playerSpriteID, s32 rasterIndex) {

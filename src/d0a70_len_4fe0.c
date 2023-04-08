@@ -13,6 +13,8 @@ typedef union FoldIntVars {
     s32 savedArgs[2][4];
     struct {
         s32 type;
+        s32 interval;
+        s32 step;
     } anim;
     struct {
         Vec3i mag;
@@ -45,8 +47,8 @@ typedef struct {
     /* 0x02 */ u8 renderType;
     /* 0x03 */ u8 subdivX;
     /* 0x04 */ u8 subdivY;
-    /* 0x05 */ s8 savedType1;
-    /* 0x06 */ s8 savedType2;
+    /* 0x05 */ s8 lastAnimCmd;
+    /* 0x06 */ s8 lastColorCmd;
     /* 0x07 */ char unk_07[0x1];
     /* 0x08 */ u16 firstVtxIdx;
     /* 0x0A */ u16 lastVtxIdx;
@@ -159,7 +161,7 @@ Gfx DefaultFoldSetupGfx[] = {
 };
 
 //TODO figure out bits
-FoldRenderMode D_8014EE98[17] = {
+FoldRenderMode D_8014EE98[] = {
     [FOLD_RENDER_TYPE_0]     { 0x00441208, 0x00111208, FALSE },
     [FOLD_RENDER_TYPE_1]     { 0x00441208, 0x00111208, FALSE },
     [FOLD_RENDER_TYPE_2]     { 0x00404B40, 0x00104B40, TRUE },
@@ -267,17 +269,17 @@ void func_8013A4D0(void) {
     (*D_80156954)[0].flags |= FOLD_STATE_FLAG_ENABLED;
 
     for (i = 1; i < ARRAY_COUNT(*D_80156954); i++) {
-        if (((*D_80156954)[i].flags & FOLD_STATE_FLAG_ENABLED) && (*D_80156954)[i].savedType1 != FOLD_UPD_SET_ANIM) {
+        if (((*D_80156954)[i].flags & FOLD_STATE_FLAG_ENABLED) && (*D_80156954)[i].lastAnimCmd != FOLD_UPD_SET_ANIM) {
             fold_clear_state_gfx(&(*D_80156954)[i]);
         }
     }
 
     for (i = 1; i < ARRAY_COUNT(*D_80156954); i++) {
         if ((*D_80156954)[i].flags & FOLD_STATE_FLAG_ENABLED && (*D_80156954)[i].colorBuf != NULL) {
-            if ((*D_80156954)[i].savedType2 == FOLD_UPD_COLOR_BUF_SET_B) {
+            if ((*D_80156954)[i].lastColorCmd == FOLD_UPD_COLOR_BUF_SET_B) {
                 continue;
             }
-            if ((*D_80156954)[i].savedType2 == FOLD_UPD_COLOR_BUF_SET_C) {
+            if ((*D_80156954)[i].lastColorCmd == FOLD_UPD_COLOR_BUF_SET_C) {
                 continue;
             }
             general_heap_free((*D_80156954)[i].colorBuf);
@@ -445,10 +447,10 @@ void fold_init_state(FoldState* state) {
     s32 j;
 
     state->unk_10 = -1;
-    state->savedType1 = FOLD_UPD_CLEAR;
-    state->savedType2 = FOLD_UPD_CLEAR;
+    state->lastAnimCmd = FOLD_UPD_CLEAR;
+    state->lastColorCmd = FOLD_UPD_CLEAR;
     state->flags = 0;
-    state->meshType = FOLD_MESH_TYPE_0;
+    state->meshType = FOLD_MESH_DEFAULT;
     state->renderType = FOLD_RENDER_TYPE_0;
     state->firstVtxIdx = 0;
     state->lastVtxIdx = 0;
@@ -491,9 +493,9 @@ void fold_update(u32 idx, FoldType type, s32 foldArg1, s32 foldArg2, s32 foldArg
             fold_clear_state_gfx(state);
             fold_init_state(state);
             state->flags = oldFlags;
-            state->savedType1 = FOLD_UPD_CLEAR;
-            state->savedType2 = FOLD_UPD_CLEAR;
-            state->meshType = FOLD_MESH_TYPE_0;
+            state->lastAnimCmd = FOLD_UPD_CLEAR;
+            state->lastColorCmd = FOLD_UPD_CLEAR;
+            state->meshType = FOLD_MESH_DEFAULT;
             state->renderType = FOLD_RENDER_TYPE_0;
             state->ints.raw[0][0] = -1;
             state->ints.raw[1][0] = -1;
@@ -506,13 +508,13 @@ void fold_update(u32 idx, FoldType type, s32 foldArg1, s32 foldArg2, s32 foldArg
             }
             return;
         case FOLD_TYPE_1:
-            state->savedType1 = FOLD_UPD_CLEAR;
+            state->lastAnimCmd = FOLD_UPD_CLEAR;
             state->renderType = FOLD_RENDER_TYPE_0;
             state->ints.raw[0][0] = -1;
             return;
         case FOLD_TYPE_2:
-            state->savedType2 = FOLD_UPD_CLEAR;
-            state->meshType = FOLD_MESH_TYPE_0;
+            state->lastColorCmd = FOLD_UPD_CLEAR;
+            state->meshType = FOLD_MESH_DEFAULT;
             state->ints.raw[1][0] = -1;
             return;
         case FOLD_UPD_ALLOC_COLOR_BUF:
@@ -524,38 +526,45 @@ void fold_update(u32 idx, FoldType type, s32 foldArg1, s32 foldArg2, s32 foldArg
             return;
         case FOLD_TYPE_F:
         case FOLD_TYPE_10:
-            if (type == state->savedType2 && foldArg1 == state->ints.raw[1][0] && foldArg2 == state->ints.raw[1][1]) {
+            if (type == state->lastColorCmd
+                && foldArg1 == state->ints.raw[1][0]
+                && foldArg2 == state->ints.raw[1][1]
+            ) {
+                // no paramaters have changed
                 return;
             }
             break;
         case FOLD_UPD_SET_ANIM:
-            if (state->savedType1 == type && state->ints.raw[0][0] == foldArg1 && state->ints.raw[0][1] == foldArg2 &&
-                state->ints.raw[0][2] == foldArg3)
-            {
+            if (state->lastAnimCmd == type
+                && state->ints.anim.type == foldArg1
+                && state->ints.anim.interval == foldArg2
+                && state->ints.anim.step == foldArg3
+            ) {
+                // no paramaters have changed
                 return;
             }
             break;
         default:
-            if (type != FOLD_UPD_HOLOGRAM && state->savedType2 == FOLD_UPD_HOLOGRAM) {
-                state->meshType = FOLD_MESH_TYPE_0;
+            if (type != FOLD_UPD_HOLOGRAM && state->lastColorCmd == FOLD_UPD_HOLOGRAM) {
+                state->meshType = FOLD_MESH_DEFAULT;
                 state->subdivX = 1;
                 state->subdivY = 1;
             }
             break;
     }
 
-    if (type != FOLD_UPD_SET_ANIM && state->savedType1 == FOLD_UPD_SET_ANIM) {
-        state->savedType1 = FOLD_UPD_CLEAR;
+    if (type != FOLD_UPD_SET_ANIM && state->lastAnimCmd == FOLD_UPD_SET_ANIM) {
+        state->lastAnimCmd = FOLD_UPD_CLEAR;
     }
 
     if (type == FOLD_UPD_WAVY || type == FOLD_UPD_SET_ANIM) {
-        state->savedType1 = type;
+        state->lastAnimCmd = type;
         state->ints.savedArgs[0][0] = foldArg1;
         state->ints.savedArgs[0][1] = foldArg2;
         state->ints.savedArgs[0][2] = foldArg3;
         state->ints.savedArgs[0][3] = foldArg4;
     } else if (type >= FOLD_UPD_SET_COLOR && type <= FOLD_TYPE_10) {
-        state->savedType2 = type;
+        state->lastColorCmd = type;
         state->ints.savedArgs[1][0] = foldArg1;
         state->ints.savedArgs[1][1] = foldArg2;
         state->ints.savedArgs[1][2] = foldArg3;
@@ -566,17 +575,17 @@ void fold_update(u32 idx, FoldType type, s32 foldArg1, s32 foldArg2, s32 foldArg
     if (flags != 0) {
         state->flags |= flags;
     }
-    state->meshType = FOLD_MESH_TYPE_0;
+    state->meshType = FOLD_MESH_DEFAULT;
 
     switch (type) {
         case FOLD_TYPE_3:
-            state->meshType = FOLD_MESH_TYPE_0;
+            state->meshType = FOLD_MESH_DEFAULT;
             state->renderType = FOLD_RENDER_TYPE_0;
             break;
         case FOLD_UPD_WAVY:
             state->subdivX = 4;
             state->subdivY = 4;
-            state->meshType = FOLD_MESH_TYPE_1;
+            state->meshType = FOLD_MESH_GRID_WAVY;
             fold_wavy_init(state);
             break;
         case FOLD_UPD_SET_ANIM:
@@ -623,7 +632,7 @@ void fold_update(u32 idx, FoldType type, s32 foldArg1, s32 foldArg2, s32 foldArg
                 state->colorBuf[foldArg1].b = b;
                 state->colorBuf[foldArg1].a = a;
 
-                state->meshType = FOLD_MESH_TYPE_0;
+                state->meshType = FOLD_MESH_DEFAULT;
 
                 if (a == 255) {
                     state->renderType = FOLD_RENDER_TYPE_6;
@@ -644,7 +653,7 @@ void fold_update(u32 idx, FoldType type, s32 foldArg1, s32 foldArg2, s32 foldArg
                 state->colorBuf[foldArg1].b = b;
                 state->colorBuf[foldArg1].a = a;
 
-                state->meshType = FOLD_MESH_TYPE_0;
+                state->meshType = FOLD_MESH_DEFAULT;
 
                 if (a == 255) {
                     state->renderType = FOLD_RENDER_TYPE_9;
@@ -661,7 +670,7 @@ void fold_update(u32 idx, FoldType type, s32 foldArg1, s32 foldArg2, s32 foldArg
             break;
         case FOLD_TYPE_F:
         case FOLD_TYPE_10:
-            state->meshType = FOLD_MESH_TYPE_4;
+            state->meshType = FOLD_MESH_STRIP;
             if (foldArg2 >= 255) {
                 state->renderType = FOLD_RENDER_TYPE_E;
             } else {
@@ -717,7 +726,7 @@ s32 fold_appendGfx_component(s32 idx, FoldImageRecPart* image, u32 flagBits, Mat
     if (state->flags & FOLD_STATE_FLAG_ANIM_DONE) {
         state->ints.raw[0][0] = -1;
         state->ints.raw[1][0] = -1;
-        state->savedType1 = FOLD_UPD_CLEAR;
+        state->lastAnimCmd = FOLD_UPD_CLEAR;
         state->meshType = 0;
         state->renderType = FOLD_RENDER_TYPE_0;
         state->flags &= ~(FOLD_STATE_FLAG_ANIM_DONE | FOLD_STATE_FLAG_800 | FOLD_STATE_FLAG_REVERSE_ANIM | FOLD_STATE_FLAG_LOOP_ANIM);
@@ -726,9 +735,9 @@ s32 fold_appendGfx_component(s32 idx, FoldImageRecPart* image, u32 flagBits, Mat
     } else if (state->flags & FOLD_STATE_FLAG_4000) {
         ret = 2;
     } else if (state->flags & FOLD_STATE_FLAG_20000) {
-        state->savedType1 = FOLD_UPD_CLEAR;
-        state->savedType2 = FOLD_UPD_CLEAR;
-        state->meshType = FOLD_MESH_TYPE_0;
+        state->lastAnimCmd = FOLD_UPD_CLEAR;
+        state->lastColorCmd = FOLD_UPD_CLEAR;
+        state->meshType = FOLD_MESH_DEFAULT;
         state->renderType = FOLD_RENDER_TYPE_0;
         state->ints.raw[0][0] = -1;
         state->ints.raw[1][0] = -1;
@@ -740,7 +749,7 @@ s32 fold_appendGfx_component(s32 idx, FoldImageRecPart* image, u32 flagBits, Mat
 
 void func_8013B0EC(FoldState* state) {
     switch (state->meshType) {
-        case FOLD_MESH_TYPE_3:
+        case FOLD_MESH_GRID_UNUSED:
             if (state->ints.raw[1][2] == 0) {
                 state->subdivX = 1;
                 state->subdivY = 16;
@@ -748,25 +757,26 @@ void func_8013B0EC(FoldState* state) {
                 state->subdivX = 1;
                 state->subdivY = 1;
             }
-        case FOLD_MESH_TYPE_1:
+            // fallthrough
+        case FOLD_MESH_GRID_WAVY:
             fold_mesh_make_grid(state);
             break;
         case FOLD_MESH_ANIMATED:
             fold_mesh_anim_update(state);
             break;
-        case FOLD_MESH_TYPE_0:
-        case FOLD_MESH_TYPE_4:
+        case FOLD_MESH_DEFAULT:
+        case FOLD_MESH_STRIP:
             fold_mesh_make_strip(state);
             break;
         default:
             return;
     }
 
-    if (state->savedType1 == FOLD_UPD_WAVY) {
+    if (state->lastAnimCmd == FOLD_UPD_WAVY) {
         fold_mesh_wavy_update(state);
     }
 
-    switch (state->savedType2) {
+    switch (state->lastColorCmd) {
         case FOLD_UPD_COLOR_BUF_SET_B:
         case FOLD_UPD_COLOR_BUF_SET_C:
             fold_mesh_load_colors(state);
@@ -991,17 +1001,17 @@ void func_8013B1B0(FoldState* state, Matrix4f mtx) {
     }
 
     switch (state->meshType) {
-        case FOLD_MESH_TYPE_0:
+        case FOLD_MESH_DEFAULT:
             func_8013CFA8(state, mtx);
             break;
-        case FOLD_MESH_TYPE_1:
-        case FOLD_MESH_TYPE_3:
+        case FOLD_MESH_GRID_WAVY:
+        case FOLD_MESH_GRID_UNUSED:
             func_8013DAB4(state, mtx);
             break;
         case FOLD_MESH_ANIMATED:
             func_8013E2F0(state, mtx);
             break;
-        case FOLD_MESH_TYPE_4:
+        case FOLD_MESH_STRIP:
             func_8013CFA8(state, mtx);
             gDPPipeSync(gMainGfxPos++);
             func_8013E904(state, mtx);
@@ -1017,33 +1027,36 @@ void func_8013B1B0(FoldState* state, Matrix4f mtx) {
 }
 
 void fold_mesh_make_strip(FoldState* state) {
-    s32 yOffset;
-    s32 xOffset;
-    s32 widthIncrement;
-    s32 heightIncrement;
-    s32 heightIncrement120;
+    s32 offsetY;
+    s32 offsetX;
+    s32 stepY;
+    s32 rightColor;
+    s32 leftColor;
     s32 temp2;
-    s32 i;
+    s32 nextY;
 
-    widthIncrement = 0x1000 / fold_currentImage->width;
-    if (widthIncrement > fold_currentImage->height) {
-        widthIncrement = fold_currentImage->height;
+    stepY = (128 * 32) / fold_currentImage->width;
+    if (stepY > fold_currentImage->height) {
+        stepY = fold_currentImage->height;
     }
 
-    xOffset = fold_currentImage->xOffset;
-    yOffset = fold_currentImage->yOffset;
+    offsetX = fold_currentImage->xOffset;
+    offsetY = fold_currentImage->yOffset;
     state->firstVtxIdx = fold_vtxCount;
 
-    fold_vtxBuf[fold_vtxCount].v.ob[0] = xOffset;
-    fold_vtxBuf[fold_vtxCount].v.ob[1] = yOffset;
+    // create first pair of vertices to begin the strip
+    // 'left' side
+    fold_vtxBuf[fold_vtxCount].v.ob[0] = offsetX;
+    fold_vtxBuf[fold_vtxCount].v.ob[1] = offsetY;
     fold_vtxBuf[fold_vtxCount].v.ob[2] = 0;
-    fold_vtxBuf[fold_vtxCount].v.tc[0] = 0x2000;
-    fold_vtxBuf[fold_vtxCount].v.tc[1] = temp2 = 0x2000; // required to match
+    fold_vtxBuf[fold_vtxCount].v.tc[0] = (0 + 256) * 32;
+    fold_vtxBuf[fold_vtxCount].v.tc[1] = temp2 = (0 + 256) * 32; // required to match
     fold_vtxBuf[fold_vtxCount].v.cn[0] = 240;
     fold_vtxBuf[fold_vtxCount].v.cn[1] = 240;
     fold_vtxBuf[fold_vtxCount].v.cn[2] = 240;
-    fold_vtxBuf[fold_vtxCount + 1].v.ob[0] = fold_currentImage->width + xOffset;
-    fold_vtxBuf[fold_vtxCount + 1].v.ob[1] = yOffset;
+    // 'right' side
+    fold_vtxBuf[fold_vtxCount + 1].v.ob[0] = fold_currentImage->width + offsetX;
+    fold_vtxBuf[fold_vtxCount + 1].v.ob[1] = offsetY;
     fold_vtxBuf[fold_vtxCount + 1].v.ob[2] = 0;
     fold_vtxBuf[fold_vtxCount + 1].v.tc[0] = (fold_currentImage->width + 256) * 32;
     fold_vtxBuf[fold_vtxCount + 1].v.tc[1] = temp2;
@@ -1051,36 +1064,44 @@ void fold_mesh_make_strip(FoldState* state) {
     fold_vtxBuf[fold_vtxCount + 1].v.cn[1] = 120;
     fold_vtxBuf[fold_vtxCount + 1].v.cn[2] = 120;
 
-    for (i = widthIncrement; ; i += widthIncrement) {
-        heightIncrement = (i * 120) / fold_currentImage->height;
-        heightIncrement120 = heightIncrement + 120;
+    // create remaining pairs of vertices along the strip
+    nextY = stepY;
+    while (TRUE) {
+        rightColor = (nextY * 120) / fold_currentImage->height;
+        leftColor = rightColor + 120;
         fold_vtxCount += 2;
-        fold_vtxBuf[fold_vtxCount].v.ob[0] = xOffset;
-        fold_vtxBuf[fold_vtxCount].v.ob[1] = yOffset - widthIncrement;
-        fold_vtxBuf[fold_vtxCount].v.ob[2] = 0;
-        fold_vtxBuf[fold_vtxCount].v.tc[0] = 0x2000;
-        fold_vtxBuf[fold_vtxCount].v.tc[1] = (i + 256) * 32;
-        fold_vtxBuf[fold_vtxCount].v.cn[0] = heightIncrement120;
-        fold_vtxBuf[fold_vtxCount].v.cn[1] = heightIncrement120;
-        fold_vtxBuf[fold_vtxCount].v.cn[2] = heightIncrement120;
-        fold_vtxBuf[fold_vtxCount + 1].v.ob[0] = fold_currentImage->width + xOffset;
-        fold_vtxBuf[fold_vtxCount + 1].v.ob[1] = yOffset - widthIncrement;
-        fold_vtxBuf[fold_vtxCount + 1].v.ob[2] = 0;
-        fold_vtxBuf[fold_vtxCount + 1].v.tc[0] = (fold_currentImage->width + 256) * 32;
-        fold_vtxBuf[fold_vtxCount + 1].v.tc[1] = (i + 256) * 32;
-        fold_vtxBuf[fold_vtxCount + 1].v.cn[0] = heightIncrement;
-        fold_vtxBuf[fold_vtxCount + 1].v.cn[1] = heightIncrement;
-        fold_vtxBuf[fold_vtxCount + 1].v.cn[2] = heightIncrement;
 
-        if (i != fold_currentImage->height) {
-            yOffset -= widthIncrement;
-            if (fold_currentImage->height < i + widthIncrement) {
-                widthIncrement = fold_currentImage->height - i;
+        // 'left' side
+        fold_vtxBuf[fold_vtxCount].v.ob[0] = offsetX;
+        fold_vtxBuf[fold_vtxCount].v.ob[1] = offsetY - stepY;
+        fold_vtxBuf[fold_vtxCount].v.ob[2] = 0;
+        fold_vtxBuf[fold_vtxCount].v.tc[0] = (0 + 256) * 32;
+        fold_vtxBuf[fold_vtxCount].v.tc[1] = (nextY + 256) * 32;
+        fold_vtxBuf[fold_vtxCount].v.cn[0] = leftColor;
+        fold_vtxBuf[fold_vtxCount].v.cn[1] = leftColor;
+        fold_vtxBuf[fold_vtxCount].v.cn[2] = leftColor;
+
+        // 'right' side
+        fold_vtxBuf[fold_vtxCount + 1].v.ob[0] = fold_currentImage->width + offsetX;
+        fold_vtxBuf[fold_vtxCount + 1].v.ob[1] = offsetY - stepY;
+        fold_vtxBuf[fold_vtxCount + 1].v.ob[2] = 0;
+
+        fold_vtxBuf[fold_vtxCount + 1].v.tc[0] = (fold_currentImage->width + 256) * 32;
+        fold_vtxBuf[fold_vtxCount + 1].v.tc[1] = (nextY + 256) * 32;
+        fold_vtxBuf[fold_vtxCount + 1].v.cn[0] = rightColor;
+        fold_vtxBuf[fold_vtxCount + 1].v.cn[1] = rightColor;
+        fold_vtxBuf[fold_vtxCount + 1].v.cn[2] = rightColor;
+
+        if (nextY != fold_currentImage->height) {
+            offsetY -= stepY;
+            if (fold_currentImage->height < nextY + stepY) {
+                stepY = fold_currentImage->height - nextY;
             }
         } else {
             fold_vtxCount += 2;
             break;
         }
+        nextY += stepY;
     }
 
     state->lastVtxIdx = fold_vtxCount - 1;
@@ -1205,8 +1226,8 @@ void fold_mesh_anim_update(FoldState* state) {
     s32 curKeyIdx;
     FoldVtx* curKeyframe = NULL;
     FoldVtx* nextKeyframe = NULL;
-    s32 keyframeInterval = state->ints.raw[0][1];
-    s32 animStep = state->ints.raw[0][2];
+    s32 keyframeInterval = state->ints.anim.interval;
+    s32 animStep = state->ints.anim.step;
     s32 curSubframe = state->floats.anim.curFrame;
     FoldAnimHeader* header = fold_load_anim(state);
     u8* romStart;
@@ -1711,8 +1732,8 @@ void func_8013E904(FoldState* state, Matrix4f mtx) {
     gDPSetRenderMode(gMainGfxPos++, G_RM_ZB_XLU_DECAL, G_RM_ZB_XLU_DECAL2);
 
     if (state->renderType == FOLD_RENDER_TYPE_F) {
-        s32 temp = state->ints.raw[1][1];
-        gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, temp);
+        s32 alpha = state->ints.raw[1][1];
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, alpha);
         gDPSetCombineLERP(gMainGfxPos++, TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0);
     } else {
         gDPSetCombineMode(gMainGfxPos++, G_CC_MODULATEIA, G_CC_MODULATEIA);

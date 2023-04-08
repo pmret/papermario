@@ -133,9 +133,9 @@ s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 arg2, PAL_PTR* pal
 
 s32 func_802DDEC4(s32 arg0);
 
-void func_802DDEE4(s32, s32, FoldType, s32, s32, s32, s32, s32);
+void spr_set_player_fold_update_comp(s32, s32, FoldType, s32, s32, s32, s32, s32);
 
-void func_802DDFF8(s32, FoldType, s32, s32, s32, s32, s32);
+void spr_set_player_fold_update_all(s32, FoldType, s32, s32, s32, s32, s32);
 
 IMG_PTR spr_get_player_raster(s32 rasterIndex, s32 playerSpriteID);
 

@@ -865,7 +865,7 @@ void appendGfx_npc(void* data) {
         }
     } else {
         npc_draw_with_palswap(npc, renderYaw, mtx1);
-        npc->animNotifyValue = func_802DDEC4(1);
+        npc->animNotifyValue = func_802DDEC4(PLAYER_SPRITE_AUX1);
     }
 
     if (npc->flags & NPC_FLAG_REFLECT_WALL) {
