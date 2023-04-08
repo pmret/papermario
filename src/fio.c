@@ -1,5 +1,6 @@
 #include "fio.h"
 #include "PR/os_flash.h"
+#include "gcc/string.h"
 
 extern SaveData D_8009A6B0;
 extern s32 logicalSaveInfo[4][2];

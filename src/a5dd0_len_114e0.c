@@ -7,6 +7,7 @@
 #include "effects.h"
 #include "nu/nusys.h"
 #include "model_clear_render_tasks.h"
+#include "gcc/string.h"
 
 #if VERSION_IQUE
 // TODO: remove if sections are split in iQue release
@@ -36,10 +37,7 @@ extern Addr WorldEntityHeapBase;
 
 typedef struct Fog {
     /* 0x00 */ s32 enabled;
-    /* 0x04 */ s32 r;
-    /* 0x08 */ s32 g;
-    /* 0x0C */ s32 b;
-    /* 0x10 */ s32 a;
+    /* 0x04 */ Color4i color;
     /* 0x14 */ s32 startDistance;
     /* 0x18 */ s32 endDistance;
 } Fog; // size = 0x1C
@@ -3401,10 +3399,10 @@ void appendGfx_model(void* data) {
                     break;
             }
             gSPDisplayList((*gfxPos)++, D_8014AFC0[renderModeIdx]);
-            gDPSetFogColor((*gfxPos)++, gCurrentFogSettings->r,
-                                            gCurrentFogSettings->g,
-                                            gCurrentFogSettings->b,
-                                            gCurrentFogSettings->a);
+            gDPSetFogColor((*gfxPos)++, gCurrentFogSettings->color.r,
+                                            gCurrentFogSettings->color.g,
+                                            gCurrentFogSettings->color.b,
+                                            gCurrentFogSettings->color.a);
             gSPFogPosition((*gfxPos)++, gCurrentFogSettings->startDistance, gCurrentFogSettings->endDistance);
             break;
         case 4:
@@ -3472,9 +3470,9 @@ void appendGfx_model(void* data) {
                     gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_CLD_SURF2);
                     break;
             }
-            gDPSetFogColor((*gfxPos)++, gCurrentFogSettings->r,
-                                            gCurrentFogSettings->g,
-                                            gCurrentFogSettings->b,
+            gDPSetFogColor((*gfxPos)++, gCurrentFogSettings->color.r,
+                                            gCurrentFogSettings->color.g,
+                                            gCurrentFogSettings->color.b,
                                             mdl_bgMultiplyColorA);
             gDPSetBlendColor((*gfxPos)++, mdl_bgMultiplyColorR,
                                               mdl_bgMultiplyColorG,
@@ -3546,14 +3544,14 @@ void appendGfx_model(void* data) {
             }
             gSPDisplayList((*gfxPos)++, D_8014AFC0[renderModeIdx]);
 
-            fogR = (gCurrentFogSettings->r * (255 - mdl_bgMultiplyColorA) + mdl_bgMultiplyColorR * mdl_bgMultiplyColorA) / 255;
-            fogG = (gCurrentFogSettings->g * (255 - mdl_bgMultiplyColorA) + mdl_bgMultiplyColorG * mdl_bgMultiplyColorA) / 255;
-            fogB = (gCurrentFogSettings->b * (255 - mdl_bgMultiplyColorA) + mdl_bgMultiplyColorB * mdl_bgMultiplyColorA) / 255;
+            fogR = (gCurrentFogSettings->color.r * (255 - mdl_bgMultiplyColorA) + mdl_bgMultiplyColorR * mdl_bgMultiplyColorA) / 255;
+            fogG = (gCurrentFogSettings->color.g * (255 - mdl_bgMultiplyColorA) + mdl_bgMultiplyColorG * mdl_bgMultiplyColorA) / 255;
+            fogB = (gCurrentFogSettings->color.b * (255 - mdl_bgMultiplyColorA) + mdl_bgMultiplyColorB * mdl_bgMultiplyColorA) / 255;
 
             fogMin = (gCurrentFogSettings->startDistance * (255 - mdl_bgMultiplyColorA) + 900 * mdl_bgMultiplyColorA) / 255;
             fogMax = (gCurrentFogSettings->endDistance * (255 - mdl_bgMultiplyColorA) + 1000 * mdl_bgMultiplyColorA) / 255;
 
-            gDPSetFogColor(gMainGfxPos++,  fogR, fogG, fogB, gCurrentFogSettings->a);
+            gDPSetFogColor(gMainGfxPos++, fogR, fogG, fogB, gCurrentFogSettings->color.a);
             gSPFogPosition((*gfxPos)++, fogMin, fogMax);
             break;
         case 10:
@@ -4043,12 +4041,12 @@ void clear_model_data(void) {
     }
 
     *gBackgroundFogModePtr = FOG_MODE_0;
-    gCurrentFogSettings->r = 10;
-    gCurrentFogSettings->g = 10;
-    gCurrentFogSettings->b = 10;
+    gCurrentFogSettings->color.r = 10;
+    gCurrentFogSettings->color.g = 10;
+    gCurrentFogSettings->color.b = 10;
     gCurrentFogSettings->startDistance = 950;
     gCurrentFogSettings->enabled = FALSE;
-    gCurrentFogSettings->a = 0;
+    gCurrentFogSettings->color.a = 0;
     gCurrentFogSettings->endDistance = 1000;
 
     for (i = 0; i < ARRAY_COUNT(texPannerAuxV); i++) {
@@ -5381,10 +5379,10 @@ void set_world_fog_dist(s32 start, s32 end) {
 }
 
 void set_world_fog_color(s32 r, s32 g, s32 b, s32 a) {
-    gCurrentFogSettings->r = r;
-    gCurrentFogSettings->g = g;
-    gCurrentFogSettings->b = b;
-    gCurrentFogSettings->a = a;
+    gCurrentFogSettings->color.r = r;
+    gCurrentFogSettings->color.g = g;
+    gCurrentFogSettings->color.b = b;
+    gCurrentFogSettings->color.a = a;
 }
 
 s32 is_world_fog_enabled(void) {
@@ -5397,10 +5395,10 @@ void get_world_fog_distance(s32* start, s32* end) {
 }
 
 void get_world_fog_color(s32* r, s32* g, s32* b, s32* a) {
-    *r = gCurrentFogSettings->r;
-    *g = gCurrentFogSettings->g;
-    *b = gCurrentFogSettings->b;
-    *a = gCurrentFogSettings->a;
+    *r = gCurrentFogSettings->color.r;
+    *g = gCurrentFogSettings->color.g;
+    *b = gCurrentFogSettings->color.b;
+    *a = gCurrentFogSettings->color.a;
 }
 
 void set_tex_panner(Model* model, s32 texPannerID) {
@@ -5682,7 +5680,7 @@ Gfx* mdl_get_copied_gfx(s32 copyIndex) {
     Gfx* gfxCopy = mlvc->gfxCopy[selector];
 
     mlvc->selector++;
-    if (mlvc->selector >= 2) {
+    if (mlvc->selector > ARRAY_COUNT(mlvc->gfxCopy) - 1) {
         mlvc->selector = 0;
     }
 
@@ -6277,7 +6275,7 @@ void execute_render_tasks(void) {
     }
 
     mdl_renderTaskQueueIdx++;
-    if (mdl_renderTaskQueueIdx > 2) {
+    if (mdl_renderTaskQueueIdx > ARRAY_COUNT(mdl_renderTaskLists) - 1) {
         mdl_renderTaskQueueIdx = 0;
     }
     mdl_renderTaskCount = 0;

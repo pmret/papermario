@@ -160,7 +160,7 @@ typedef struct HeartBlockContentData {
     /* 0x01C */ f32 sparkleTrailRadius;
     /* 0x020 */ f32 bouncePhase;
     /* 0x024 */ u16 yawBufferPos;
-    /* 0x024 */ s16 unk_26;
+    /* 0x026 */ s16 unk_26;
     /* 0x028 */ f32 yawBuffer[10];
     /* 0x050 */ f32 unk_50;
     /* 0x054 */ f32 rotationRate;

@@ -446,17 +446,22 @@ void npc_do_other_npc_collision(Npc* npc) {
 // float regalloc
 #ifdef NON_MATCHING
 s32 npc_do_player_collision(Npc* npc) {
+    f32 sp10;
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 xDiff, zDiff;
+    f32 xDiff2, zDiff2;
     f32 npcColliderX, npcColliderZ;
     f32 playerX, playerZ;
-    f32 tempX, tempZ;
 
-    f32 temp_f0;
-    f32 temp_f22_2;
-    f32 temp_f24;
+    f32 theta;
+    f32 dist;
     f32 temp_f24_2;
-    f32 temp_f28;
+    f32 targetYaw;
+    f32 new_var;
+    f32 xSub;
+    f32 zSub;
+    f32 collRad, collDiam;
+    int new_var2;
 
     if (npc->flags & NPC_FLAG_IGNORE_PLAYER_COLLISION) {
         return FALSE;
@@ -480,55 +485,55 @@ s32 npc_do_player_collision(Npc* npc) {
 
     playerX = playerStatus->position.x;
     playerZ = playerStatus->position.z;
-    tempX = npc->pos.x;
-    tempZ = npc->pos.z;
+    xDiff = playerX - npc->pos.x;
+    zDiff = playerZ - npc->pos.z;
 
-    xDiff = playerX - tempX;
-    zDiff = playerZ - tempZ;
-
-    temp_f22_2 = (npc->collisionRadius / 2) + (f32)(playerStatus->colliderDiameter / 2);
-    if (temp_f22_2 < sqrtf(SQ(xDiff) + SQ(zDiff))) {
+    sp10 = (npc->collisionRadius / 2) + (f32)(playerStatus->colliderDiameter / 2);
+    npcColliderZ = zDiff;
+    temp_f24_2 = xDiff;
+    dist = sqrtf(SQ(temp_f24_2) + SQ(npcColliderZ));
+    if (sp10 < dist) {
         return FALSE;
     }
 
     playerStatus->animFlags |= 0x8000;
-    //playerX = playerStatus->position.x;
     npcColliderX = npc->colliderPos.x;
     npcColliderZ = npc->colliderPos.z;
-    tempX = playerX - npcColliderX;
-    tempZ = playerZ - npcColliderZ;
+    zSub = sp10;
+    xDiff = playerX - npcColliderX;
+    zDiff = playerZ - npcColliderZ;
 
-    //temp_f24 = sqrtf(SQ(tempX) + SQ(tempZ));
-    xDiff = tempZ;
-    temp_f24 = sqrtf((tempX * tempX) + (xDiff * xDiff));
+    dist = xSub = sqrtf(SQ(xDiff) + SQ(zDiff));
 
-    temp_f0 = atan2(playerX, playerZ, npcColliderX, npcColliderZ);
-    temp_f28 = playerStatus->targetYaw;
-    temp_f24_2 = temp_f22_2 - temp_f24;
-    temp_f24 = temp_f24_2 * sin_rad(DEG_TO_RAD(temp_f0));
-    playerZ = -temp_f24_2 * cos_rad(DEG_TO_RAD(temp_f0));
+    theta = atan2(playerX, playerZ, npcColliderX, npcColliderZ);
+    targetYaw = playerStatus->targetYaw;
+
+    temp_f24_2 = zSub - dist;
+
+    xSub = temp_f24_2 * sin_rad(DEG_TO_RAD(theta));
+    zSub = -temp_f24_2 * cos_rad(DEG_TO_RAD(theta));
     if (playerStatus->animFlags & PA_FLAG_RIDING_PARTNER) {
-        if (fabsf(get_clamped_angle_diff(temp_f0, temp_f28)) < 45.0f) {
-            playerStatus->position.x -= temp_f24;
-            playerStatus->position.z -= playerZ;
-            wPartnerNpc->pos.x -= temp_f24;
-            wPartnerNpc->pos.z -= playerZ;
+        if (fabsf(get_clamped_angle_diff(theta, targetYaw)) < 45.0f) {
+            playerStatus->position.x -= xSub;
+            playerStatus->position.z -= zSub;
+            wPartnerNpc->pos.x -= xSub;
+            wPartnerNpc->pos.z -= zSub;
         } else {
-            playerStatus->position.x -= temp_f24 * 0.5f;
-            playerStatus->position.z -= playerZ * 0.5f;
-            wPartnerNpc->pos.x -= temp_f24 * 0.5f;
-            wPartnerNpc->pos.z -= playerZ * 0.5f;
+            playerStatus->position.x -= xSub * 0.5f;
+            playerStatus->position.z -= zSub * 0.5f;
+            wPartnerNpc->pos.x -= xSub * 0.5f;
+            wPartnerNpc->pos.z -= zSub * 0.5f;
         }
     } else {
         if (playerStatus->flags & (PS_FLAG_JUMPING | PS_FLAG_FALLING)) {
-            playerStatus->position.x -= temp_f24 * 0.4f;
-            playerStatus->position.z -= playerZ * 0.4f;
-        } else if (fabsf(get_clamped_angle_diff(temp_f0, temp_f28)) < 45.0f) {
-            playerStatus->position.x -= temp_f24;
-            playerStatus->position.z -= playerZ;
+            playerStatus->position.x -= xSub * 0.4f;
+            playerStatus->position.z -= zSub * 0.4f;
+        } else if (fabsf(get_clamped_angle_diff(theta, targetYaw)) < 45.0f) {
+            playerStatus->position.x -= xSub;
+            playerStatus->position.z -= zSub;
         } else {
-            playerStatus->position.x -= temp_f24 * 0.5f;
-            playerStatus->position.z -= playerZ * 0.5f;
+            playerStatus->position.x -= xSub * 0.5f;
+            playerStatus->position.z -= zSub * 0.5f;
         }
     }
     npc->pos.x = npc->colliderPos.x;
@@ -546,7 +551,7 @@ void npc_try_apply_gravity(Npc* npc) {
     f32 x, y, z, testLength;
     f32 length;
     s32 hitID;
-    
+
     if (!(npc->flags & NPC_FLAG_GRAVITY)) {
         return;
     }
@@ -586,7 +591,7 @@ s32 npc_try_snap_to_ground(Npc* npc, f32 velocity) {
     f32 x, y, z, testLength;
     f32 length;
     s32 hitID;
-    
+
     if (npc->flags & (NPC_FLAG_GRAVITY | NPC_FLAG_8)) {
         return FALSE;
     }
