@@ -839,7 +839,7 @@ segments:
     - [0xDC470, c, dc470_len_14c0]
     - [0xDD930, c, audio/ambience]
     - [0xDDAF0, c, windows]
-    - [0xDE740, c, de740_len_23f0]
+    - [0xDE740, c, sprite_shading]
     - [0xDF950, c, audio/sfx]
     - [0xE0B30, c, audio/e0b30_len_b80]
     - [0xE16B0, .data, a5dd0_len_114e0]

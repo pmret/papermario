@@ -272,14 +272,6 @@ void create_shading_palette(Matrix4f mtx, s32 uls, s32 ult, s32 lrs, s32 lrt, s3
     }
 }
 
-extern int ENVIRONMENT;
-extern int SHADE;
-extern int COMBINED;
-extern int COMBINED_ALPHA;
-extern int TEXEL0_ALPHA;
-
-// float regalloc
-#ifdef NON_MATCHING
 void appendGfx_shading_palette(
     Matrix4f mtx,
     s32 uls, s32 ult, s32 lrs, s32 lrt,
@@ -290,20 +282,20 @@ void appendGfx_shading_palette(
     s32 ambientPower, s32 renderMode)
 {
     Camera* camera = &gCameras[gCurrentCameraID];
-    f32 temp_f0;
-    f32 temp_f1;
-    f32 temp_f2;
-    f32 var_f26;
-    f32 temp_f28 = 0;
-    f32 temp_f6_2;
+    f32 mtx01;
+    f32 mtx11;
+    f32 mtx21;
+    f32 offsetXComp;
+    f32 offsetYComp = 0;
+    f32 apMag;
     f32 var_f12;
+    f32 var_f12_2;
     f32 var_f20;
-    f32 var_f30;
-    f32 var_f26_2;
+    f32 facingDir;
     f32 ex, ey, ez;
-    float new_var3;
-
-    f32 a1, a2;
+    f32 offsetX, offsetY;
+    f32 pm02, pm12, pm22;
+    f32 t1;
 
     var_f12 = SQ(shadowX) + SQ(shadowY) + SQ(shadowZ);
 
@@ -315,15 +307,16 @@ void appendGfx_shading_palette(
     }
     shadowX *= var_f12;
     shadowY *= var_f12;
+    pm02 = var_f12; // TODO required to match
     shadowZ *= var_f12;
 
-    if ((-mtx[0][2] * camera->perspectiveMatrix[0][2]) + (mtx[2][2] * camera->perspectiveMatrix[2][2]) < 0.0f) {
-        var_f30 = 1.0f;
+    if (((-mtx[0][2] * camera->perspectiveMatrix[0][2]) + (mtx[2][2] * camera->perspectiveMatrix[2][2])) < 0.0f) {
+        facingDir = 1.0f;
     } else {
-        var_f30 = -1.0f;
+        facingDir = -1.0f;
     }
 
-    if (var_f30 < 0.0f) {
+    if (facingDir < 0.0f) {
         ex = mtx[0][2];
         ey = mtx[1][2];
         ez = -mtx[2][2];
@@ -333,34 +326,41 @@ void appendGfx_shading_palette(
         ez = mtx[2][2];
     }
 
-    a1 = ((ex * shadowX) + (ey * shadowY)) + (ez * shadowZ);
-    new_var3 = a1;
-    temp_f2 = camera->perspectiveMatrix[2][2];
-    var_f12 = camera->perspectiveMatrix[0][2];
+    pm02 = camera->perspectiveMatrix[0][2];
+    pm12 = camera->perspectiveMatrix[1][2];
+    pm22 = camera->perspectiveMatrix[2][2];
 
-    var_f26 = var_f12;
-    a1 = shadowX * -temp_f2;
-    temp_f6_2 = a1 + (var_f26 * shadowZ) ;
-    if (new_var3 > 0.0f) {
-        var_f26 = ambientPower * temp_f6_2;
+    t1 = (ex * shadowX) + (ey * shadowY) + (ez * shadowZ);
+    apMag = (shadowX * -pm22) + (shadowZ * pm02);
+
+    if (t1 > 0.0f) {
+        offsetXComp = ambientPower * apMag;
+    } else if (ambientPower > 1.0f)  {
+        offsetXComp = ambientPower * apMag;
     } else {
-        temp_f2 = ambientPower;
-        var_f26 = temp_f2 * temp_f6_2;
-    }
+        // TODO grossness required to match
+        // a temp s16 for ambientPower works as well as the explicit casting in both places
+        offsetX = -1.0f;
+        offsetY = (s16) ambientPower > offsetX;
+        if ((s16) ambientPower > offsetX) {
+            offsetXComp = ambientPower * apMag;
+        } else {
+            offsetXComp = ambientPower * apMag;
+        }
+  }
 
     var_f20 = SQ(shadowX) + SQ(shadowZ);
     if (var_f20 != 0.0f) {
         var_f20 = sqrtf(var_f20);
     }
-    temp_f0 = -mtx[0][1];
-    temp_f1 = mtx[1][1];
-    temp_f2 = mtx[2][1];
-    var_f12 = SQ(temp_f0) + SQ(temp_f2);
-    if (var_f12 != 0.0f) {
-        var_f12 = sqrtf(var_f12);
+    mtx01 = -mtx[0][1];
+    mtx11 = mtx[1][1];
+    mtx21 = mtx[2][1];
+    var_f12_2 = SQ(mtx01) + SQ(mtx21);
+    if (var_f12_2 != 0.0f) {
+        var_f12_2 = sqrtf(var_f12_2);
     }
-
-    temp_f28 = -((var_f20 * var_f12) + (shadowY * temp_f1)) * ambientPower;
+    offsetYComp = -((var_f20 * var_f12_2) + (shadowY * mtx11)) * ambientPower;
 
     if (shadowR > 255) {
         shadowR = 255;
@@ -426,20 +426,17 @@ void appendGfx_shading_palette(
                           COMBINED, 0, 0, 0, COMBINED);
     }
 
-    var_f26_2 = var_f26;
-    var_f26_2 *= var_f30;
+    offsetX = offsetXComp * facingDir;
+    offsetY = offsetYComp;
     gDPSetTileSize(
         gMainGfxPos++,
         0,
-        ((uls + 0x100) << 2) + (s32)var_f26_2,
-        ((ult + 0x100) << 2) + (s32)temp_f28,
-        ((lrs + 0x100 - 1) << 2) + (s32)var_f26_2,
-        ((lrt + 0x100 - 1) << 2) + (s32)temp_f28
+        ((uls + 0x100) << 2) + (s32)offsetX,
+        ((ult + 0x100) << 2) + (s32)offsetY,
+        ((lrs + 0x100 - 1) << 2) + (s32)offsetX,
+        ((lrt + 0x100 - 1) << 2) + (s32)offsetY
     );
 }
-#else
-INCLUDE_ASM(s32, "de740_len_23f0", appendGfx_shading_palette);
-#endif
 
 void func_801491E4(Matrix4f mtx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 alpha) {
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, alpha);
