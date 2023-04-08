@@ -50,7 +50,7 @@ BSS s32 D_802DB26C; // unused?
 
 // player_api
 BSS Npc playerNpcData;
-BSS u16 D_802DB5B0;
+BSS u16 PlayerFoldFlags;
 BSS s32 D_802DB5B4[3]; // unused
 BSS VirtualEntityList bBattleVirtualEntityList;
 BSS VirtualEntityList wWorldVirtualEntityList;

@@ -574,7 +574,7 @@ dlabel D_80156968
 dlabel D_80156970
 .space 0x00000010
 
-dlabel fold_groupDescriptors
+dlabel FoldAnimHeaders
 .space 0x000005a0
 
 dlabel fold_gfxDataCache

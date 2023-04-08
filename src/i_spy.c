@@ -73,7 +73,7 @@ void appendGfx_ispy_icon(void) {
                 foldImage.palette = ispy_icon_3_pal;
                 break;
         }
-        fold_update(0, FOLD_TYPE_7, 255, 255, 255, ISpyPtr->alpha, 0);
+        fold_update(0, FOLD_UPD_SET_ALPHA, 255, 255, 255, ISpyPtr->alpha, 0);
 
         foldImage.raster = ispy_icon_img;
         foldImage.width  = ispy_icon_img_width;

@@ -80,9 +80,10 @@ void appendGfx_interact_prompt(void) {
         sp20.xOffset = -16;
         sp20.yOffset = 26;
         sp20.opacity = 255;
-        fold_update(0, FOLD_TYPE_NONE, 0, 0, 0, 0, 0x440);
-        fold_update(0, FOLD_TYPE_6,
-                    InspectIconPtr->brightness, InspectIconPtr->brightness, InspectIconPtr->brightness, 255, 0x448);
+        fold_update(0, FOLD_UPD_CLEAR, 0, 0, 0, 0, FOLD_STATE_FLAG_400 | FOLD_STATE_FLAG_40);
+        fold_update(0, FOLD_UPD_SET_COLOR,
+                    InspectIconPtr->brightness, InspectIconPtr->brightness, InspectIconPtr->brightness, 255,
+                    FOLD_STATE_FLAG_400 | FOLD_STATE_FLAG_40 | FOLD_STATE_FLAG_8);
         fold_appendGfx_component(0, &sp20, 0, sp78);
 
         gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);

@@ -50,7 +50,7 @@ void N(gfx_build_knocked_down_player)(void) {
     part.yOffset = rasterInfo.height;
     part.opacity = 255;
 
-    fold_appendGfx_component(temp_v0->foldID, &part, 0.0f, sp40);
+    fold_appendGfx_component(temp_v0->foldID, &part, 0, sp40);
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
 
