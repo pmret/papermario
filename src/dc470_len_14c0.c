@@ -1,5 +1,6 @@
 #include "common.h"
 #include "model.h"
+#include "gcc/string.h"
 
 char gCloudyFlowerFieldsBg[] = "fla_bg";
 char gSunnyFlowerFieldsBg[] = "flb_bg";

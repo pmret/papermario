@@ -8,4 +8,4 @@ def apply(config, args):
     config['source_directories'] = ['src', f'{ver_dir}asm', 'include', f'{ver_dir}assets']
     config['make_command'] = ['ninja']
     config['objdump_flags'] = ['-M','reg-names=32']
-    config['expected_directory'] = f'{ver_dir}/expected/'
+    config['expected_dir'] = f'{ver_dir}/expected/'

@@ -416,7 +416,7 @@ segments:
     - [0xDB3E0, c, dc470_len_14c0]
     - [0xDC8A0, c, audio/ambience]
     - [0xDCA60, c, windows]
-    - [0xDD6B0, c, de740_len_23f0]
+    - [0xDD6B0, c, sprite_shading]
     - [0xDE8C0, c, audio/sfx]
     - [0xDFAA0, c, audio/e0b30_len_b80]
     - [0xE0620, .data, a5dd0_len_114e0]
