@@ -1,3 +1,16 @@
+pause_image_1439F0_png = 0x80254C00; // rom:0x149A40
+pause_image_143BF0_png = 0x80254E00; // rom:0x149C40
+pause_image_143FF0_png = 0x80255200; // rom:0x14A040
+pause_world_map_png = 0x80255600; // rom:0x14A440
+pause_world_map_pal = 0x8026E600; // rom:0x163440
+pause_spirits_bg_png = 0x8026E800; // rom:0x163640
+pause_spirits_bg_pal = 0x80270380; // rom:0x1651C0
+pause_orbs_png = 0x80270580; // rom:0x1653C0
+pause_map_location_png = 0x80270780; // rom:0x1655C0
+pause_map_path_marker_png = 0x80270880; // rom:0x1656C0
+pause_arrows_png = 0x80270980; // rom:0x1657C0
+pause_stats_bar_png = 0x80270B80; // rom:0x1659C0
+pause_stats_bar_pal = 0x80270E00; // rom:0x165C40
 D_09000000_326410 = 0x9000000; // rom:0x34F1D0
 D_09000200_326610 = 0x9000200; // rom:0x34F3D0
 D_09000220_326630 = 0x9000220; // rom:0x34F3F0

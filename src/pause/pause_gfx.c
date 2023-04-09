@@ -10,6 +10,7 @@
 #include "pause/map_location.png.h"
 #include "pause/map_path_marker.png.h"
 #include "pause/map_arrows.png.h"
+#if !VERSION_PAL
 #include "pause/banner_hp.png.h"
 #include "pause/banner_fp.png.h"
 #include "pause/banner_bp.png.h"
@@ -18,6 +19,24 @@
 #include "pause/banner_star_energy.png.h"
 #include "pause/available.png.h"
 #include "pause/prompt_check_abilities.png.h"
+#else
+#define pause_banner_hp_png_width 64
+#define pause_banner_hp_png_height 16
+#define pause_available_png_width 64
+#define pause_available_png_height 16
+#define pause_prompt_check_abilities_png_width 128
+#define pause_prompt_check_abilities_png_height 16
+#define pause_banner_star_energy_png_width 48
+#define pause_banner_star_energy_png_height 16
+#define pause_banner_boots_png_width 48
+#define pause_banner_boots_png_height 16
+#define pause_banner_bp_png_width 64
+#define pause_banner_bp_png_height 16
+#define pause_banner_fp_png_width 64
+#define pause_banner_fp_png_height 16
+#define pause_banner_hammer_png_width 48
+#define pause_banner_hammer_png_height 16
+#endif
 #include "pause/stats_bar.png.h"
 
 #include "pause/image_1439F0.png.inc.c"
@@ -31,6 +50,7 @@
 #include "pause/map_location.png.inc.c"
 #include "pause/map_path_marker.png.inc.c"
 #include "pause/map_arrows.png.inc.c"
+#if !VERSION_PAL
 #include "pause/banner_hp.png.inc.c"
 #include "pause/banner_hp.pal.inc.c"
 #include "pause/banner_fp.png.inc.c"
@@ -47,8 +67,28 @@
 #include "pause/available.pal.inc.c"
 #include "pause/prompt_check_abilities.png.inc.c"
 #include "pause/prompt_check_abilities.pal.inc.c"
+#endif
 #include "pause/stats_bar.png.inc.c"
 #include "pause/stats_bar.pal.inc.c"
+
+#if VERSION_PAL
+extern u8 pause_prompt_check_abilities_png[];
+extern u8 pause_available_png[];
+extern u8 pause_available_pal[];
+extern u8 pause_banner_star_energy_png[];
+extern u8 pause_prompt_check_abilities_pal[];
+extern u8 pause_banner_hammer_png[];
+extern u8 pause_banner_hammer_pal[];
+extern u8 pause_banner_boots_png[];
+extern u8 pause_banner_hp_pal[];
+extern u8 pause_banner_hp_png[];
+extern u8 pause_banner_fp_pal[];
+extern u8 pause_banner_fp_png[];
+extern u8 pause_banner_bp_pal[];
+extern u8 pause_banner_bp_png[];
+extern u8 pause_banner_boots_pal[];
+extern u8 pause_banner_star_energy_pal[];
+#endif
 
 Gfx gPauseDLBannerHp[] = {
     gsDPPipeSync(),
@@ -318,6 +358,26 @@ Gfx gPauseDLSpiritsBg[] = {
     gsSPEndDisplayList(),
 };
 
+#if VERSION_PAL
+u8 D_PAL_80271B10[] = { 0x71, 0x71, 0x78, 0x71 };
+u8 D_PAL_80271B14[] = { 0x6A, 0x6A, 0x72, 0x6A };
+u8 D_PAL_80271B18[] = { 0x10, 0x10, 0x0F, 0x10 };
+u8 D_PAL_80271B1C[] = { 0x3D, 0x3D, 0x3C, 0x3D };
+u8 D_PAL_80271B20[] = { 0x43, 0x43, 0x42, 0x43 };
+u8 D_PAL_80271B24[] = { 0x8F, 0x7F, 0x88, 0x7C };
+u8 D_PAL_80271B28[] = { 0x9B, 0x88, 0x93, 0x84 };
+u8 D_PAL_80271B2C[] = { 0x1A, 0x1F, 0x23, 0x18 };
+u8 D_PAL_80271B30[] = { 0x00, 0x26, 0x36, 0x1A };
+u8 D_PAL_80271B34[] = { 0x19, 0x19, 0x16, 0x12 };
+u8 D_PAL_80271B38[] = { 0x0C, 0x08, 0x0B, 0x08 };
+u8 D_PAL_80271B3C[] = { 0x85, 0x80, 0x80, 0x80 };
+u8 D_PAL_80271B40[] = { 0x8C, 0x96, 0x96, 0x96 };
+u8 D_PAL_80271B44[] = { 0x7D, 0x87, 0x87, 0x87 };
+u8 D_PAL_80271B48[] = { 0x66, 0x70, 0x70, 0x70 };
+u8 D_PAL_80271B4C[] = { 0x0C, 0x0C, 0x12, 0x0C };
+u8 D_PAL_80271B50[] = { 0x50, 0x60, 0x52, 0x5F };
+#endif
+
 #if VERSION_IQUE
 u8 gPauseMsg_17[] = { 0x8F, 0x0C, 0x75, 0x12, 0xFD };
 u8 gPauseMsg_18[] = { 0x7B, 0x0E, 0x7C, 0x0E, 0xFD };
@@ -354,7 +414,7 @@ u8 gPauseMsg_53[] = { 0x28, 0x30, 0xFD };
 u8 gPauseMsg_54[] = { 0x26, 0x30, 0xFD };
 u8 gPauseMsg_55[] = { 0x6A, 0x11, 0x8B, 0x06, 0xFD };
 u8 gPauseMsg_56[] = { 0x74, 0x08, 0x74, 0x08, 0x74, 0x08, 0xFD };
-#else
+#elif VERSION_US
 u8 gPauseMsg_17[] = { 0x33, 0x54, 0x41, 0x54, 0x53, 0xFD };                                                                   // Stats[End]
 u8 gPauseMsg_18[] = { 0x22, 0x41, 0x44, 0x47, 0x45, 0xFD };                                                                   // Badge[End]
 u8 gPauseMsg_19[] = { 0x29, 0x54, 0x45, 0x4D, 0x53, 0xFD };                                                                   // Items[End]
@@ -390,6 +450,38 @@ u8 gPauseMsg_53[] = { MSG_CHAR_UPPER_H, MSG_CHAR_UPPER_P, MSG_CHAR_READ_END };  
 u8 gPauseMsg_54[] = { MSG_CHAR_UPPER_F, MSG_CHAR_UPPER_P, MSG_CHAR_READ_END };                                                // FP[End]
 u8 gPauseMsg_55[] = { 0x21, 0x42, 0x49, 0x4C, 0x49, 0x54, 0x49, 0x45, 0x53, 0xFD };                                           // Abilities[End]
 u8 gPauseMsg_56[] = { MSG_CHAR_QUESTION, MSG_CHAR_QUESTION, MSG_CHAR_QUESTION, MSG_CHAR_READ_END };                                                                               // ???[End]
+#elif VERSION_PAL
+#define gPauseMsg_32 MSG_PAL_Menu_0039 /* Coins */
+#define gPauseMsg_33 MSG_PAL_Menu_003A /* Star Points */
+#define gPauseMsg_34 MSG_PAL_Menu_003B /* Star Pieces */
+#define gPauseMsg_35 MSG_PAL_Menu_003C /* Play Time */
+#define gPauseMsg_36 MSG_PAL_Menu_003D /* HP */
+#define gPauseMsg_37 MSG_PAL_Menu_003E /* FP */
+#define gPauseMsg_38 MSG_PAL_Menu_003F /* BP */
+#define gPauseMsg_39 MSG_PAL_Menu_0040 /* / */
+#define gPauseMsg_3A MSG_PAL_Menu_0041 /* . */
+#define gPauseMsg_3C MSG_PAL_Menu_0042 /* Boots */
+#define gPauseMsg_3D MSG_PAL_Menu_0043 /* Super Boots */
+#define gPauseMsg_3E MSG_PAL_Menu_0044 /* Ultra Boots */
+#define gPauseMsg_40 MSG_PAL_Menu_0045 /* Hammer */
+#define gPauseMsg_41 MSG_PAL_Menu_0046 /* Super Hammer */
+#define gPauseMsg_42 MSG_PAL_Menu_0047 /* Ultra Hammer */
+#define gPauseMsg_43 MSG_PAL_Menu_0048 /* Mario */
+#define gPauseMsg_44 MSG_PAL_Menu_0049 /* Level */
+#define gPauseMsg_46 MSG_PAL_Menu_003F /* BP */
+#define gPauseMsg_47 MSG_PAL_Menu_004A /* All Badges */
+#define gPauseMsg_PAL_42 MSG_PAL_Menu_004B /* [END] */
+#define gPauseMsg_48 MSG_PAL_Menu_004C /* Active */
+#define gPauseMsg_49 MSG_PAL_Menu_004D /* Badges */
+#define gPauseMsg_4A MSG_PAL_Menu_004E /* Not Enough BP! */
+#define gPauseMsg_4B MSG_PAL_Menu_004F /* Don't wear more! */
+#define gPauseMsg_4F MSG_PAL_Menu_0051 /* Key Items */
+#define gPauseMsg_PAL_4B MSG_PAL_Menu_0052 /* [END] */
+#define gPauseMsg_50 MSG_PAL_Menu_0050 /* Items */
+#define gPauseMsg_53 MSG_PAL_Menu_003D /* HP */
+#define gPauseMsg_54 MSG_PAL_Menu_003E /* FP */
+#define gPauseMsg_55 MSG_PAL_Menu_0053 /* Abilities */
+#define gPauseMsg_56 MSG_PAL_Menu_0054 /* ??? */
 #endif
 
 s32 gPauseMessages[] = {
@@ -416,10 +508,12 @@ s32 gPauseMessages[] = {
     [PAUSE_MSG_TUT_CMD_5]           MSG_MenuTip_BadgeTutorial_13,
     [PAUSE_MSG_TUT_CMD_6]           MSG_MenuTip_BadgeTutorial_14,
     [PAUSE_MSG_TUT_CMD_7]           MSG_MenuTip_BadgeTutorial_15,
+#if !VERSION_PAL
     [PAUSE_MSG_17]                  (s32) gPauseMsg_17,
     [PAUSE_MSG_18]                  (s32) gPauseMsg_18,
     [PAUSE_MSG_19]                  (s32) gPauseMsg_19,
     [PAUSE_MSG_1A]                  (s32) gPauseMsg_1A,
+#endif
     [PAUSE_MSG_TAB_STATS]           MSG_MenuTip_StatsTab,
     [PAUSE_MSG_TAB_BADGES]          MSG_MenuTip_BadgesTab,
     [PAUSE_MSG_TAB_ITEMS]           MSG_MenuTip_ItemsTab,
@@ -452,11 +546,15 @@ s32 gPauseMessages[] = {
     [PAUSE_MSG_LBL_BP]              (s32) gPauseMsg_38,
     [PAUSE_MSG_SLASH]               (s32) gPauseMsg_39,
     [PAUSE_MSG_DOT]                 (s32) gPauseMsg_3A,
+#if !VERSION_PAL
     [PAUSE_MSG_3B]                  (s32) gPauseMsg_3B,
+#endif
     [PAUSE_MSG_3C]                  (s32) gPauseMsg_3C,
     [PAUSE_MSG_3D]                  (s32) gPauseMsg_3D,
     [PAUSE_MSG_3E]                  (s32) gPauseMsg_3E,
+#if !VERSION_PAL
     [PAUSE_MSG_3F]                  (s32) gPauseMsg_3F,
+#endif
     [PAUSE_MSG_40]                  (s32) gPauseMsg_40,
     [PAUSE_MSG_41]                  (s32) gPauseMsg_41,
     [PAUSE_MSG_42]                  (s32) gPauseMsg_42,
@@ -465,6 +563,9 @@ s32 gPauseMessages[] = {
     [PAUSE_MSG_NO_BADGE]            MSG_MenuTip_None,
     [PAUSE_MSG_BADGE_BP]            (s32) gPauseMsg_46,
     [PAUSE_MSG_ALL_BADGES]          (s32) gPauseMsg_47,
+#if VERSION_PAL
+    [PAUSE_MSG_PAL_42]              (s32) gPauseMsg_PAL_42,
+#endif
     [PAUSE_MSG_ACTIVE]              (s32) gPauseMsg_48,
     [PAUSE_MSG_BADGES]              (s32) gPauseMsg_49,
     [PAUSE_MSG_NOT_ENOUGH_BP]       (s32) gPauseMsg_4A,
@@ -473,6 +574,9 @@ s32 gPauseMessages[] = {
     [PAUSE_MSG_BAGDE_DESC_ACTIVE]   MSG_MenuTip_BadgeTab_Equipped,
     [PAUSE_MSG_BAGDE_DESC_NONE]     MSG_MenuTip_None,
     [PAUSE_MSG_KEY_ITEMS]           (s32) gPauseMsg_4F,
+#if VERSION_PAL
+    [PAUSE_MSG_PAL_4B]              (s32) gPauseMsg_PAL_4B,
+#endif
     [PAUSE_MSG_CONSUMABLES]         (s32) gPauseMsg_50,
     [PAUSE_MSG_DESC_CONSUMABLES]    MSG_MenuTip_ItemTab_Consumables,
     [PAUSE_MSG_DESC_KEY_ITEMS]      MSG_MenuTip_ItemTab_KeyItems,
@@ -498,6 +602,9 @@ s32 pause_get_menu_msg(s32 index) {
     return gPauseMessages[index];
 }
 
+#if VERSION_PAL
+INCLUDE_ASM(void, "pause/pause_gfx", pause_draw_menu_label);
+#else
 void pause_draw_menu_label(s32 index, s32 x, s32 y) {
     s32 xOffset = 64;
 
@@ -520,6 +627,7 @@ void pause_draw_menu_label(s32 index, s32 x, s32 y) {
     gSPDisplayList(gMainGfxPos++, gPauseDLLabels[index]);
     pause_draw_rect(x * 4, y * 4, (x + xOffset) * 4, (y + 16) * 4, 0, 0, 0, 0x400, 0x400);
 }
+#endif
 
 BSS s8 gPauseBufferPal1[512];
 BSS s8 gPauseBufferImg1[15752];

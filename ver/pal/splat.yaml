@@ -106,7 +106,55 @@ segments:
     - [0x132C28, palette, letter_content_12]
     - [0x132E28, bin] # length 0x18, non zero
 
-  - [0x132E40, bin]
+  - type: bin
+    name: ui_images
+    start: 0x132E40
+    vram: 0x8023E000
+
+  - type: code
+    dir: pause
+    start: 0x13B8F0
+    vram: 0x80246AB0
+    subsegments:
+    - [0x13B8F0, c, pause_main]
+    - [0x13D8E0, c, pause_tabs]
+    - [0x13E6F0, c, pause_stats]
+    - [0x13FE50, c, pause_badges]
+    - [0x142760, c, pause_items]
+    - [0x143E60, c, pause_partners]
+    - [0x145B40, c, pause_spirits]
+    - [0x146A70, c, pause_map]
+    - [0x147FC0, c, pause_gfx]
+    - [0x148130, .data, pause_main]
+    - [0x148380, .data, pause_tabs]
+    - [0x148550, .data, pause_stats]
+    - [0x148700, .data, pause_badges]
+    - [0x1488A0, .data, pause_items]
+    - [0x148930, .data, pause_partners]
+    - [0x148C40, .data, pause_spirits]
+    - [0x148DC0, .data, pause_map]
+    - start: 0x149A40
+      type: .data
+      name: pause_gfx
+      subsegments:
+      - [0x149A40, ia8,        image_1439F0, 16, 32]
+      - [0x149C40, ia8,        image_143BF0, 16, 64]
+      - [0x14A040, ia8,        image_143FF0, 16, 64]
+      - [0x14A440, ci8,        world_map, 320, 320]
+      - [0x163440, palette,    world_map]
+      - [0x163640, ci4,        spirits_bg, 128, 110]
+      - [0x1651C0, palette,    spirits_bg]
+      - [0x1653C0, rgba16,     orbs, 8, 32]
+      - [0x1655C0, ia8,        map_location, 16, 16]
+      - [0x1656C0, ia8,        map_path_marker, 16, 16]
+      - [0x1657C0, ia4,        map_arrows, 16, 64]
+      - [0x1659C0, ci4,        stats_bar, 160, 8]
+      - [0x165C40, palette,    stats_bar]
+      - [0x165E40, .data,      pause_gfx]
+    - [0x166B10, .data, pause_styles]
+    - [0x167170]
+
+  - [0x1672D0, bin]
 
   - [0x1DA1E0, ci4,     icon/present, 32, 32]
   - [0x1DA3E0, palette, icon/present]
