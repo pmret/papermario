@@ -10,7 +10,6 @@
 #include "pause/map_location.png.h"
 #include "pause/map_path_marker.png.h"
 #include "pause/map_arrows.png.h"
-#if !VERSION_PAL
 #include "pause/banner_hp.png.h"
 #include "pause/banner_fp.png.h"
 #include "pause/banner_bp.png.h"
@@ -19,24 +18,6 @@
 #include "pause/banner_star_energy.png.h"
 #include "pause/available.png.h"
 #include "pause/prompt_check_abilities.png.h"
-#else
-#define pause_banner_hp_png_width 64
-#define pause_banner_hp_png_height 16
-#define pause_available_png_width 64
-#define pause_available_png_height 16
-#define pause_prompt_check_abilities_png_width 128
-#define pause_prompt_check_abilities_png_height 16
-#define pause_banner_star_energy_png_width 48
-#define pause_banner_star_energy_png_height 16
-#define pause_banner_boots_png_width 48
-#define pause_banner_boots_png_height 16
-#define pause_banner_bp_png_width 64
-#define pause_banner_bp_png_height 16
-#define pause_banner_fp_png_width 64
-#define pause_banner_fp_png_height 16
-#define pause_banner_hammer_png_width 48
-#define pause_banner_hammer_png_height 16
-#endif
 #include "pause/stats_bar.png.h"
 
 #include "pause/image_1439F0.png.inc.c"
