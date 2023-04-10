@@ -36,7 +36,7 @@ static const double pows[] = {10e0L, 10e1L, 10e3L, 10e7L, 10e15L, 10e31L, 10e63L
 #define _D2 2
 #define _D3 3
 
-#define	ALIGN(s, align)	(((u32)(s) + ((align)-1)) & ~((align)-1))
+#define ALIGN(s, align) (((u32)(s) + ((align)-1)) & ~((align)-1))
 
 void _Ldtob(_Pft* px, char code) {
     char buff[BUFF_LEN];

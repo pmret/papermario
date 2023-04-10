@@ -25,23 +25,23 @@ typedef u8* WaveData;
 #define SAMPLE184(delta)      (((delta) + (SAMPLES / 2)) / SAMPLES) * SAMPLES
 #define FIXED_SAMPLE          SAMPLES
 
-#define N_AL_DECODER_IN	        0
-#define	N_AL_RESAMPLER_OUT	    0
-#define N_AL_TEMP_0	            0
-#define	N_AL_DECODER_OUT        0x170
-#define	N_AL_TEMP_1	            0x170
-#define	N_AL_TEMP_2	            0x2E0
-#define	N_AL_MAIN_L_OUT	        0x4E0
-#define	N_AL_MAIN_R_OUT	        0x650
-#define	N_AL_AUX_L_OUT	        0x7C0
-#define	N_AL_AUX_R_OUT	        0x930
+#define N_AL_DECODER_IN         0
+#define N_AL_RESAMPLER_OUT      0
+#define N_AL_TEMP_0             0
+#define N_AL_DECODER_OUT        0x170
+#define N_AL_TEMP_1             0x170
+#define N_AL_TEMP_2             0x2E0
+#define N_AL_MAIN_L_OUT         0x4E0
+#define N_AL_MAIN_R_OUT         0x650
+#define N_AL_AUX_L_OUT          0x7C0
+#define N_AL_AUX_R_OUT          0x930
 
 #define ALIGN16_(val) (((val) + 0xF) & 0xFFF0)
 #define AU_FILE_RELATIVE(base,offset) ((void*)((s32)(offset) + (s32)(base)))
 
 #define AUDIO_HEAP_SIZE 0x56000
  // NU_AU_AUDIO_SAMPLES ?
-#define	AUDIO_SAMPLES	184
+#define AUDIO_SAMPLES   184
 #define AUDIO_COMMAND_LIST_BUFFER_SIZE 0x4000
 
 #define ADPCMFBYTES     9

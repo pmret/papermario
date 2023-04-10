@@ -1,8 +1,8 @@
-typedef unsigned int UQItype	__attribute__ ((mode (QI)));
+typedef unsigned int UQItype    __attribute__ ((mode (QI)));
 typedef          int SItype     __attribute__ ((mode (SI)));
-typedef unsigned int USItype	__attribute__ ((mode (SI)));
-typedef		     int DItype     __attribute__ ((mode (DI)));
-typedef unsigned int UDItype	__attribute__ ((mode (DI)));
+typedef unsigned int USItype    __attribute__ ((mode (SI)));
+typedef          int DItype     __attribute__ ((mode (DI)));
+typedef unsigned int UDItype    __attribute__ ((mode (DI)));
 typedef          int word_type  __attribute__ ((mode (__word__)));
 
 #define BITS_PER_UNIT 8
@@ -24,11 +24,11 @@ typedef union {
 #define __ll_highpart(t) ((USItype) (t) / __ll_B)
 
 #ifndef OLD_GCC
-#define umul_ppmm(w1, w0, u, v)						\
-  do {									\
-    UDItype __x = (UDItype) (USItype) (u) * (USItype) (v);		\
-    (w1) = (USItype) (__x >> 32);					\
-    (w0) = (USItype) (__x);						\
+#define umul_ppmm(w1, w0, u, v)                     \
+  do {                                  \
+    UDItype __x = (UDItype) (USItype) (u) * (USItype) (v);      \
+    (w1) = (USItype) (__x >> 32);                   \
+    (w0) = (USItype) (__x);                     \
   } while (0)
 #else
 #define umul_ppmm(w1, w0, u, v)     \
@@ -40,70 +40,70 @@ typedef union {
 #endif
 
 #define sub_ddmmss(sh, sl, ah, al, bh, bl)  \
-    do {									\
-        USItype __x;						\
-        __x = (al) - (bl);					\
-        (sh) = (ah) - (bh) - (__x > (al));	\
-        (sl) = __x;							\
+    do {                                    \
+        USItype __x;                        \
+        __x = (al) - (bl);                  \
+        (sh) = (ah) - (bh) - (__x > (al));  \
+        (sl) = __x;                         \
     } while (0)
 
 #define udiv_qrnnd(q, r, n1, n0, d) \
-    do {									                                        \
-        USItype __d1, __d0, __q1, __q0;					                            \
-        USItype __r1, __r0, __m;						                            \
-        __d1 = __ll_highpart (d);						                            \
-        __d0 = __ll_lowpart (d);						                            \
-									                                                \
-        __r1 = (n1) % __d1;							                                \
-        __q1 = (n1) / __d1;							                                \
-        __m = (USItype) __q1 * __d0;					                            \
-        __r1 = __r1 * __ll_B | __ll_highpart (n0);				                    \
-        if (__r1 < __m)	{						                                    \
-            __q1--, __r1 += (d);						                            \
+    do {                                                                            \
+        USItype __d1, __d0, __q1, __q0;                                             \
+        USItype __r1, __r0, __m;                                                    \
+        __d1 = __ll_highpart (d);                                                   \
+        __d0 = __ll_lowpart (d);                                                    \
+                                                                                    \
+        __r1 = (n1) % __d1;                                                         \
+        __q1 = (n1) / __d1;                                                         \
+        __m = (USItype) __q1 * __d0;                                                \
+        __r1 = __r1 * __ll_B | __ll_highpart (n0);                                  \
+        if (__r1 < __m) {                                                           \
+            __q1--, __r1 += (d);                                                    \
             if (__r1 >= (d)) { /* i.e. we didn't get carry when adding to __r1 */   \
-                if (__r1 < __m) {						                            \
-                    __q1--, __r1 += (d);					                        \
+                if (__r1 < __m) {                                                   \
+                    __q1--, __r1 += (d);                                            \
                 }                                                                   \
             }                                                                       \
-        }									                                        \
-        __r1 -= __m;							                                    \
-									                                                \
-        __r0 = __r1 % __d1;							                                \
-        __q0 = __r1 / __d1;							                                \
-        __m = (USItype) __q0 * __d0;					                            \
-        __r0 = __r0 * __ll_B | __ll_lowpart (n0);				                    \
-        if (__r0 < __m) {							                                \
-            __q0--, __r0 += (d);						                            \
-            if (__r0 >= (d)) {						                                \
-                if (__r0 < __m) {						                            \
-                    __q0--, __r0 += (d);					                        \
+        }                                                                           \
+        __r1 -= __m;                                                                \
+                                                                                    \
+        __r0 = __r1 % __d1;                                                         \
+        __q0 = __r1 / __d1;                                                         \
+        __m = (USItype) __q0 * __d0;                                                \
+        __r0 = __r0 * __ll_B | __ll_lowpart (n0);                                   \
+        if (__r0 < __m) {                                                           \
+            __q0--, __r0 += (d);                                                    \
+            if (__r0 >= (d)) {                                                      \
+                if (__r0 < __m) {                                                   \
+                    __q0--, __r0 += (d);                                            \
                 }                                                                   \
             }                                                                       \
-        }									                                        \
-        __r0 -= __m;							                                    \
-								                                            	    \
-        (q) = (USItype) __q1 * __ll_B | __q0;				                        \
-        (r) = __r0;								                                    \
+        }                                                                           \
+        __r0 -= __m;                                                                \
+                                                                                    \
+        (q) = (USItype) __q1 * __ll_B | __q0;                                       \
+        (r) = __r0;                                                                 \
     } while (0)
 
 #define count_leading_zeros(count, x)                                           \
-    do {									                                    \
-        USItype __xr = (x);							                            \
-        USItype __a;							                                \
-									                                            \
-        if (SI_TYPE_SIZE <= 32) {						                        \
-            __a = __xr < ((USItype)1<<2*__BITS4)				                \
-                ? (__xr < ((USItype)1<<__BITS4) ? 0 : __BITS4)		            \
+    do {                                                                        \
+        USItype __xr = (x);                                                     \
+        USItype __a;                                                            \
+                                                                                \
+        if (SI_TYPE_SIZE <= 32) {                                               \
+            __a = __xr < ((USItype)1<<2*__BITS4)                                \
+                ? (__xr < ((USItype)1<<__BITS4) ? 0 : __BITS4)                  \
                 : (__xr < ((USItype)1<<3*__BITS4) ?  2*__BITS4 : 3*__BITS4);    \
-        } else {							                                    \
-            for (__a = SI_TYPE_SIZE - 8; __a > 0; __a -= 8) {		            \
-                if (((__xr >> __a) & 0xff) != 0) {				                \
-                    break;							                            \
+        } else {                                                                \
+            for (__a = SI_TYPE_SIZE - 8; __a > 0; __a -= 8) {                   \
+                if (((__xr >> __a) & 0xff) != 0) {                              \
+                    break;                                                      \
                 }                                                               \
             }                                                                   \
-        }									                                    \
-									                                            \
-        (count) = SI_TYPE_SIZE - (__clz_tab[__xr >> __a] + __a);		        \
+        }                                                                       \
+                                                                                \
+        (count) = SI_TYPE_SIZE - (__clz_tab[__xr >> __a] + __a);                \
     } while (0)
 
 static inline DItype __negdi2(DItype u) {
@@ -168,7 +168,7 @@ static inline UDItype __udivmoddi4(UDItype n, UDItype d, UDItype *rp) {
             /* qq = NN / 0d */
 
             if (d0 == 0) {
-                d0 = 1 / d0;	/* Divide intentionally by zero.  */
+                d0 = 1 / d0;    /* Divide intentionally by zero.  */
             }
 
             count_leading_zeros (bm, d0);
