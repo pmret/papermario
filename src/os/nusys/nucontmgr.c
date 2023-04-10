@@ -135,7 +135,7 @@ static s32 contReadNW(NUSiCommonMesg* mesg) {
     }
 
     if(nuContReadFunc != NULL) {
-	    (*nuContReadFunc)(mesg->mesg);
+        (*nuContReadFunc)(mesg->mesg);
     }
 
     return rtn;

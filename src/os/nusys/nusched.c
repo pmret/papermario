@@ -71,7 +71,7 @@ void nuScExecuteAudio(void) {
     NUScTask* gfxTask;
     NUScTask* audioTask;
     OSMesg msg;
-    u32	yieldFlag;
+    u32 yieldFlag;
 
     while (TRUE) {
         osRecvMesg(&nusched.audioRequestMQ, (OSMesg *) &audioTask, OS_MESG_BLOCK);
@@ -222,8 +222,8 @@ s32 nuScGetFrameRate(void) {
 }
 
 void nuScEventHandler(void) {
-    OSMesg	msg;
-    s32		beforeResetFrame;
+    OSMesg  msg;
+    s32     beforeResetFrame;
 
     nuScRetraceCounter = 0;
 
@@ -326,7 +326,7 @@ void nuScWaitTaskReady(NUScTask* task) {
 
     while (osViGetCurrentFramebuffer() == fb || osViGetNextFramebuffer() == fb) {
         nuScAddClient_inline(&client, &nusched.waitMQ, NU_SC_RETRACE_MSG);
-	    osRecvMesg(&nusched.waitMQ, NULL, OS_MESG_BLOCK);
+        osRecvMesg(&nusched.waitMQ, NULL, OS_MESG_BLOCK);
         nuScRemoveClient_inline(&client);
     }
 }
