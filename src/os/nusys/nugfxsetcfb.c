@@ -13,7 +13,7 @@ void nuGfxSetCfb(u16** framebuf, u32 framebufnum) {
     nuScSetFrameBufferNum(framebufnum);
 
     if (framebufnum > 1) {
-        s32	i;
+        s32 i;
 
         for (i = 0; i < framebufnum - 1; i++) {
             if (nuGfxCfb[i] != nuGfxCfb[i+1]) {
