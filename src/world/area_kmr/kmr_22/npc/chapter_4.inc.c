@@ -7,14 +7,14 @@ EvtScript N(EVS_NpcInit_Muskular) = {
 
 EvtScript N(EVS_NpcInit_GeneralGuy) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_GeneralGuy_Anim03)
-    EVT_CALL(SetNpcFoldParams, NPC_SELF, FOLD_TYPE_E, 80, 80, 80, 0)
+    EVT_CALL(SetNpcFoldParams, NPC_SELF, FOLD_UPD_FILL_COLOR, 80, 80, 80, 0)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_NpcInit_ShyGuy) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_ShyGuy_Red_Anim02)
-    EVT_CALL(SetNpcFoldParams, NPC_SELF, FOLD_TYPE_E, 80, 80, 80, 0)
+    EVT_CALL(SetNpcFoldParams, NPC_SELF, FOLD_UPD_FILL_COLOR, 80, 80, 80, 0)
     EVT_RETURN
     EVT_END
 };

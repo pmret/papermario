@@ -2358,6 +2358,16 @@ typedef struct SpriteShadingProfile {
     /* 0xAF */ u8 ambientPower; // ?
 } SpriteShadingProfile; // size = 0xB0
 
+typedef struct UnkFoldStruct {
+    /* 0x00 */ IMG_PTR raster;
+    /* 0x04 */ PAL_PTR palette;
+    /* 0x08 */ u16 width;
+    /* 0x0A */ u16 height;
+    /* 0x0C */ s32 offsetX;
+    /* 0x10 */ s32 offsetY;
+    /* 0x14 */ Gfx* displayList;
+} UnkFoldStruct; // size = 0x18
+
 typedef struct FoldImageRecPart {
     /* 0x00 */ IMG_PTR raster;
     /* 0x04 */ PAL_PTR palette;

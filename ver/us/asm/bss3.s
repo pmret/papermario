@@ -577,7 +577,7 @@ dlabel D_80156970
 dlabel FoldAnimHeaders
 .space 0x000005a0
 
-dlabel fold_gfxDataCache
+dlabel ImgfxDisplayListCache
 .space 0x00000040
 
 dlabel gHudElementsWorld

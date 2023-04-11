@@ -2134,17 +2134,17 @@ void func_8003D3BC(Npc* npc) {
             npc->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
             func_802DE894(npc->spriteInstanceID, FOLD_UPD_HOLOGRAM, foldArg1, foldArg2, foldArg3, foldArg4, foldFlags);
             break;
-        case FOLD_TYPE_E:
+        case FOLD_UPD_FILL_COLOR:
             npc->renderMode = RENDER_MODE_ALPHATEST;
-            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_E, foldArg1, foldArg2, foldArg3, 255, foldFlags);
+            func_802DE894(npc->spriteInstanceID, FOLD_UPD_FILL_COLOR, foldArg1, foldArg2, foldArg3, 255, foldFlags);
             break;
-        case FOLD_TYPE_F:
+        case FOLD_UPD_OVERLAY:
             npc->renderMode = RENDER_MODE_ALPHATEST;
-            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_F, foldArg1, 255, 0, 255, foldFlags);
+            func_802DE894(npc->spriteInstanceID, FOLD_UPD_OVERLAY, foldArg1, 255, 0, 255, foldFlags);
             break;
-        case FOLD_TYPE_10:
+        case FOLD_UPD_OVERLAY_XLU:
             npc->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
-            func_802DE894(npc->spriteInstanceID, FOLD_TYPE_F, foldArg1, foldArg2, 0, foldArg2, foldFlags);
+            func_802DE894(npc->spriteInstanceID, FOLD_UPD_OVERLAY, foldArg1, foldArg2, 0, foldArg2, foldFlags);
             break;
     }
 }

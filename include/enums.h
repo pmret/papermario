@@ -5998,9 +5998,9 @@ typedef enum FoldType {
     FOLD_UPD_COLOR_BUF_SET_B          = 0xB,
     FOLD_UPD_COLOR_BUF_SET_C          = 0xC,
     FOLD_UPD_HOLOGRAM                 = 0xD,    // ghostly star spirits and merlar (args: ???, staticAmt, ???, alphaAmt)
-    FOLD_TYPE_E                       = 0xE,
-    FOLD_TYPE_F                       = 0xF,
-    FOLD_TYPE_10                      = 0x10,   // unused?
+    FOLD_UPD_FILL_COLOR               = 0xE,    // used to create boss silhouettes in chapter introduction sceens
+    FOLD_UPD_OVERLAY                  = 0xF,
+    FOLD_UPD_OVERLAY_XLU              = 0x10,   // unused?
     FOLD_UPD_ALLOC_COLOR_BUF          = 0x11,   // args: count
 } FoldType;
 
@@ -6028,24 +6028,28 @@ typedef enum FoldAnim {
 } FoldAnim;
 
 typedef enum FoldRenderType {
-    FOLD_RENDER_TYPE_0                = 0x0,
-    FOLD_RENDER_TYPE_1                = 0x1,
-    FOLD_RENDER_TYPE_2                = 0x2,
-    FOLD_RENDER_TYPE_3                = 0x3,
-    FOLD_RENDER_TYPE_4                = 0x4,
-    FOLD_RENDER_TYPE_5                = 0x5,
-    FOLD_RENDER_TYPE_6                = 0x6,
-    FOLD_RENDER_TYPE_7                = 0x7,
-    FOLD_RENDER_TYPE_8                = 0x8,
-    FOLD_RENDER_TYPE_9                = 0x9,
-    FOLD_RENDER_TYPE_A                = 0xA,
-    FOLD_RENDER_TYPE_B                = 0xB,
-    FOLD_RENDER_HOLOGRAM              = 0xC,
-    FOLD_RENDER_TYPE_D                = 0xD,
-    FOLD_RENDER_TYPE_E                = 0xE,
-    FOLD_RENDER_TYPE_F                = 0xF,
-    FOLD_RENDER_TYPE_10               = 0x10,
+    FOLD_RENDER_DEFAULT               = 0x00,
+    FOLD_RENDER_MULTIPLY_RGB          = 0x01,
+    FOLD_RENDER_MULTIPLY_ALPHA        = 0x02,
+    FOLD_RENDER_MULTIPLY_RGBA         = 0x03,
+    FOLD_RENDER_MODULATE_PRIM_RGB     = 0x04,
+    FOLD_RENDER_MODULATE_PRIM_RGBA    = 0x05,
+    FOLD_RENDER_MULTIPLY_SHADE_RGB    = 0x06,
+    FOLD_RENDER_MULTIPLY_SHADE_ALPHA  = 0x07, // unused?
+    FOLD_RENDER_MULTIPLY_SHADE_RGBA   = 0x08,
+    FOLD_RENDER_MODULATE_SHADE_RGB    = 0x09,
+    FOLD_RENDER_MODULATE_SHADE_RGBA   = 0x0A,
+    FOLD_RENDER_ANIM                  = 0x0B,
+    FOLD_RENDER_HOLOGRAM              = 0x0C,
+    FOLD_RENDER_COLOR_FILL            = 0x0D,
+    FOLD_RENDER_OVERLAY_RGB           = 0x0E,
+    FOLD_RENDER_OVERLAY_RGBA          = 0x0F,
+    FOLD_RENDER_UNUSED                = 0x10,
 } FoldRenderType;
+
+enum FoldRenderModeFlags {
+    FOLD_RENDER_NO_OVERRIDE      = 1,
+};
 
 typedef enum FoldMeshType {
     FOLD_MESH_DEFAULT                 = 0x0,
@@ -6054,6 +6058,12 @@ typedef enum FoldMeshType {
     FOLD_MESH_GRID_UNUSED             = 0x3,
     FOLD_MESH_STRIP                   = 0x4,
 } FoldMeshType;
+
+enum FoldHologramTypes {
+    FOLD_HOLOGRAM_NOISE               = 0,
+    FOLD_HOLOGRAM_DITHER              = 1,
+    FOLD_HOLOGRAM_THRESHOLD           = 2,
+};
 
 enum MoveType {
     MOVE_TYPE_NONE          = 0,

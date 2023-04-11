@@ -1727,11 +1727,11 @@ EvtScript N(EVS_NpcAI_Eldstar_02) = {
     EVT_SETF(LVar0, EVT_FLOAT(100.0))
     EVT_LABEL(1)
     EVT_LOOP(50)
-        EVT_CALL(SetNpcFoldParams, NPC_SELF, FOLD_UPD_HOLOGRAM, 0, ArrayVar(0), 0, MV_Unk_01)
+        EVT_CALL(SetNpcFoldParams, NPC_SELF, FOLD_UPD_HOLOGRAM, FOLD_HOLOGRAM_NOISE, ArrayVar(0), 0, MV_Unk_01)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_LOOP(50)
-        EVT_CALL(SetNpcFoldParams, NPC_SELF, FOLD_UPD_HOLOGRAM, 0, ArrayVar(0), 0, MV_Unk_01)
+        EVT_CALL(SetNpcFoldParams, NPC_SELF, FOLD_UPD_HOLOGRAM, FOLD_HOLOGRAM_NOISE, ArrayVar(0), 0, MV_Unk_01)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_GOTO(1)

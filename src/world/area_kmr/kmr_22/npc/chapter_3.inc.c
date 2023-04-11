@@ -7,7 +7,7 @@ EvtScript N(EVS_NpcInit_Skolar) = {
 
 EvtScript N(EVS_NpcInit_Tubba) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_WorldTubba_Anim10)
-    EVT_CALL(SetNpcFoldParams, NPC_SELF, FOLD_TYPE_E, 80, 80, 80, 0)
+    EVT_CALL(SetNpcFoldParams, NPC_SELF, FOLD_UPD_FILL_COLOR, 80, 80, 80, 0)
     EVT_RETURN
     EVT_END
 };
