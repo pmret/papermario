@@ -73,7 +73,7 @@ void N(appendGfx_FallingSprite)(void) {
     foldImage.xOffset = -(rasterInfo.width / 2);
     foldImage.yOffset = rasterInfo.height / 2;
     foldImage.opacity = 255;
-    fold_appendGfx_component(falling->foldStateID, &foldImage, 0, mtxTransform);
+    imgfx_appendGfx_component(falling->foldStateID, &foldImage, 0, mtxTransform);
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
 

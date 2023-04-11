@@ -594,7 +594,7 @@ s32 npc_get_collider_below(Npc* npc);
 
 void func_8003D3BC(Npc* npc);
 
-void npc_set_fold_params(Npc* npc, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+void npc_set_imgfx_params(Npc* npc, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
 
 void spawn_surface_effects(Npc* npc, SurfaceInteractMode mode);
 

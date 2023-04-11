@@ -73,11 +73,11 @@ API_CALLABLE(N(UpdateMonstarSpriteEffects)) {
     }
 
     if (enemy->varTable[3] == 0) {
-        func_802DE780(npc->spriteInstanceID, 1, FOLD_UPD_SET_ALPHA, 255, 255, 255, 0, 0);
+        func_802DE780(npc->spriteInstanceID, 1, IMGFX_UPD_SET_ALPHA, 255, 255, 255, 0, 0);
         return ApiStatus_BLOCK;
     }
 
-    func_802DE780(npc->spriteInstanceID, 0, FOLD_UPD_ALLOC_COLOR_BUF, 20, 0, 0, 255, 0);
+    func_802DE780(npc->spriteInstanceID, 0, IMGFX_UPD_ALLOC_COLOR_BUF, 20, 0, 0, 255, 0);
     script->functionTemp[0] += 10;
     if (script->functionTemp[0] >= 360) {
         script->functionTemp[0] %= 360;
@@ -89,15 +89,15 @@ API_CALLABLE(N(UpdateMonstarSpriteEffects)) {
         sp50[i] = (cosine(script->functionTemp[0] + (i * 25) + 90) + 1.0) * 56.0;
         sp68[i] = enemy->varTable[3];
 
-        func_802DE780(npc->spriteInstanceID, 0, FOLD_UPD_COLOR_BUF_SET_C, i, (sp20[i] << 24) | (sp38[i] << 16) | (sp50[i] << 8) | sp68[i], 0, 255, 0);
+        func_802DE780(npc->spriteInstanceID, 0, IMGFX_UPD_COLOR_BUF_SET_C, i, (sp20[i] << 24) | (sp38[i] << 16) | (sp50[i] << 8) | sp68[i], 0, 255, 0);
     }
 
     if (enemy->varTable[3] == 255) {
         npc->renderMode = RENDER_MODE_ALPHATEST;
-        func_802DE780(npc->spriteInstanceID, 1, FOLD_UPD_OVERLAY, (s32) &N(MonstarDetailTexture), 255, 0, 255, 0);
+        func_802DE780(npc->spriteInstanceID, 1, IMGFX_UPD_OVERLAY, (s32) &N(MonstarDetailTexture), 255, 0, 255, 0);
     } else {
         npc->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
-        func_802DE780(npc->spriteInstanceID, 1, FOLD_UPD_OVERLAY, (s32) &N(MonstarDetailTexture), enemy->varTable[3], 0, enemy->varTable[3], 0);
+        func_802DE780(npc->spriteInstanceID, 1, IMGFX_UPD_OVERLAY, (s32) &N(MonstarDetailTexture), enemy->varTable[3], 0, enemy->varTable[3], 0);
     }
     return ApiStatus_BLOCK;
 }

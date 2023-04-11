@@ -391,7 +391,7 @@ void spr_appendGfx_component(
         foldImg.xOffset = -(width / 2);
         foldImg.yOffset = height;
         foldImg.opacity = opacity;
-        if (fold_appendGfx_component((u8) (u16) D_802DF540, &foldImg, FOLD_STATE_FLAG_80000, mtxTransform) == 1) { // todo bitfield?
+        if (imgfx_appendGfx_component((u8) (u16) D_802DF540, &foldImg, IMGFX_STATE_FLAG_80000, mtxTransform) == 1) { // todo bitfield?
             D_802DF540 &= ~(0x80000000 | 0x40000000 | 0x20000000 | 0x10000000);
         }
     }
@@ -774,7 +774,7 @@ void spr_init_sprites(s32 playerSpriteSet) {
 
     spr_allocateBtlComponentsOnWorldHeap = FALSE;
     _heap_create(&heap_spriteHead, 0x40000);
-    fold_init();
+    imgfx_init();
 
     for (i = 0; i < ARRAY_COUNT(spr_playerSprites); i++) {
         SpriteAnimData** playerSprites = spr_playerSprites;
@@ -973,7 +973,7 @@ s32 func_802DDEC4(s32 spriteIdx) {
     return spr_playerCurrentAnimInfo[spriteIdx].notifyValue;
 }
 
-void spr_set_player_fold_update_comp(s32 spriteIdx, s32 compIdx, FoldType foldType, s32 foldArg1, s32 foldArg2, s32 foldArg3, s32 foldArg4, s32 flags) {
+void spr_set_player_imgfx_update_comp(s32 spriteIdx, s32 compIdx, FoldType foldType, s32 foldArg1, s32 foldArg2, s32 foldArg3, s32 foldArg4, s32 flags) {
     SpriteComponent* component;
     SpriteComponent** componentListIt;
     s32 i;
@@ -985,7 +985,7 @@ void spr_set_player_fold_update_comp(s32 spriteIdx, s32 compIdx, FoldType foldTy
         while (*componentListIt != PTR_LIST_END) {
             component = *componentListIt;
             if (compIdx == -1 || i == compIdx) {
-                fold_update(component->unk_4C & 0xFF, foldType, foldArg1, foldArg2, foldArg3, foldArg4, flags);
+                imgfx_update(component->unk_4C & 0xFF, foldType, foldArg1, foldArg2, foldArg3, foldArg4, flags);
                 if (foldType != 0) {
                     component->unk_4C |= 0x10000000;
                 } else {
@@ -999,8 +999,8 @@ void spr_set_player_fold_update_comp(s32 spriteIdx, s32 compIdx, FoldType foldTy
 }
 
 // applied to all components
-void spr_set_player_fold_update_all(s32 animID, FoldType foldType, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
-    spr_set_player_fold_update_comp(PLAYER_SPRITE_MAIN, -1, foldType, arg2, arg3, arg4, arg5, arg6);
+void spr_set_player_imgfx_update_all(s32 animID, FoldType foldType, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+    spr_set_player_imgfx_update_comp(PLAYER_SPRITE_MAIN, -1, foldType, arg2, arg3, arg4, arg5, arg6);
 }
 
 void spr_get_player_raster_info(SpriteRasterInfo* out, s32 playerSpriteID, s32 rasterIndex) {
@@ -1242,8 +1242,8 @@ void func_802DE780(s32 spriteIdx, s32 compIdx, FoldType foldType, s32 foldArg1, 
             SpriteComponent* comp = *componentList;
 
             if (compIdx == -1 || i == compIdx) {
-                fold_update((u8)comp->unk_4C, foldType, foldArg1, foldArg2, foldArg3, foldArg4, foldArg5);
-                if (foldType != FOLD_UPD_CLEAR) {
+                imgfx_update((u8)comp->unk_4C, foldType, foldArg1, foldArg2, foldArg3, foldArg4, foldArg5);
+                if (foldType != IMGFX_UPD_CLEAR) {
                     comp->unk_4C |= 0x10000000;
                 } else {
                     comp->unk_4C &= ~0xF0000000;

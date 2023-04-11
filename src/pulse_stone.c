@@ -144,7 +144,7 @@ void appendGfx_pulse_stone_icon(void) {
         part.xOffset = -28;
         part.yOffset = 46;
         part.opacity = 255;
-        fold_appendGfx_component(0, &part, 0, sp58);
+        imgfx_appendGfx_component(0, &part, 0, sp58);
         gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     }
 }

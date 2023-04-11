@@ -556,7 +556,7 @@ dlabel D_80156920
 dlabel D_80156948
 .space 8
 
-dlabel fold_vtxBuf
+dlabel imgfx_vtxBuf
 .space 4
 
 dlabel D_80156954

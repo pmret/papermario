@@ -119,7 +119,7 @@ void N(CharAnim_FadeIn_0)(CreditsLine* line, CreditsChar* chr) {
     if (alpha > 255.0f) {
         alpha = 255.0;
     }
-    fold_update(0, FOLD_UPD_SET_ALPHA, 255, 255, 255, alpha, 0);
+    imgfx_update(0, IMGFX_UPD_SET_ALPHA, 255, 255, 255, alpha, 0);
     msg_get_glyph(chr->font, chr->variation, chr->charIndex, chr->palette, glyphPtr);
 
     posX += (glyphPtr->charWidth * 0.5);
@@ -135,7 +135,7 @@ void N(CharAnim_FadeIn_0)(CreditsLine* line, CreditsChar* chr) {
     foldImg.xOffset = -(glyphPtr->charWidth * 0.5);
     foldImg.yOffset = 0;
     foldImg.opacity = 255;
-    fold_appendGfx_component(0, &foldImg, FOLD_STATE_FLAG_40000 | FOLD_STATE_FLAG_NO_FILTERING | FOLD_STATE_FLAG_40, transformMtx);
+    imgfx_appendGfx_component(0, &foldImg, IMGFX_STATE_FLAG_40000 | IMGFX_STATE_FLAG_NO_FILTERING | IMGFX_STATE_FLAG_40, transformMtx);
 
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
@@ -155,15 +155,15 @@ void N(CharAnim_FadeIn_1)(CreditsLine* line, CreditsChar* chr) {
         alpha = 255.0;
     }
     if (chr->fadeInTime == (line->appearTime - 4)) {
-        fold_update(0, FOLD_TYPE_A, 64, 64, 64, alpha, 0);
+        imgfx_update(0, IMGFX_TYPE_A, 64, 64, 64, alpha, 0);
     } else if (chr->fadeInTime == (line->appearTime - 3)) {
-        fold_update(0, FOLD_TYPE_A, 96, 96, 96, alpha, 0);
+        imgfx_update(0, IMGFX_TYPE_A, 96, 96, 96, alpha, 0);
     } else if (chr->fadeInTime == (line->appearTime - 2)) {
-        fold_update(0, FOLD_TYPE_A, 127, 127, 127, alpha, 0);
+        imgfx_update(0, IMGFX_TYPE_A, 127, 127, 127, alpha, 0);
     } else if (chr->fadeInTime == (line->appearTime - 1)) {
-        fold_update(0, FOLD_TYPE_A, 80, 80, 80, alpha, 0);
+        imgfx_update(0, IMGFX_TYPE_A, 80, 80, 80, alpha, 0);
     } else {
-        fold_update(0, FOLD_UPD_SET_ALPHA, 255, 255, 255, alpha, 0);
+        imgfx_update(0, IMGFX_UPD_SET_ALPHA, 255, 255, 255, alpha, 0);
     }
     msg_get_glyph(chr->font, chr->variation, chr->charIndex, chr->palette, glyphPtr);
 
@@ -180,7 +180,7 @@ void N(CharAnim_FadeIn_1)(CreditsLine* line, CreditsChar* chr) {
     foldImg.xOffset = -(glyphPtr->charWidth * 0.5);
     foldImg.yOffset = 0;
     foldImg.opacity = 255;
-    fold_appendGfx_component(0, &foldImg, FOLD_STATE_FLAG_40000 | FOLD_STATE_FLAG_NO_FILTERING | FOLD_STATE_FLAG_40, transformMtx);
+    imgfx_appendGfx_component(0, &foldImg, IMGFX_STATE_FLAG_40000 | IMGFX_STATE_FLAG_NO_FILTERING | IMGFX_STATE_FLAG_40, transformMtx);
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
 
@@ -198,7 +198,7 @@ void N(CharAnim_FadeIn_2)(CreditsLine* line, CreditsChar* chr) {
     if (alpha > 255.0f) {
         alpha = 255.0f;
     }
-    fold_update(0, FOLD_UPD_SET_ALPHA, 255, 255, 255, alpha, 0);
+    imgfx_update(0, IMGFX_UPD_SET_ALPHA, 255, 255, 255, alpha, 0);
 
     scaleAmt = update_lerp(EASING_LINEAR, 0.2f, 2.0f, chr->fadeInTime, line->appearTime);
     if (scaleAmt > 1.0) {
@@ -223,7 +223,7 @@ void N(CharAnim_FadeIn_2)(CreditsLine* line, CreditsChar* chr) {
     foldImg.xOffset = -(glyphPtr->charWidth * 0.5);
     foldImg.yOffset = 0;
     foldImg.opacity = 255;
-    fold_appendGfx_component(0, &foldImg, FOLD_STATE_FLAG_40, transformMtx);
+    imgfx_appendGfx_component(0, &foldImg, IMGFX_STATE_FLAG_40, transformMtx);
 
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
@@ -241,7 +241,7 @@ void N(CharAnim_FadeIn_3)(CreditsLine* line, CreditsChar* chr) {
     if (alpha > 255.0f) {
         alpha = 255.0f;
     }
-    fold_update(0, FOLD_UPD_SET_ALPHA, 255, 255, 255, alpha, 0);
+    imgfx_update(0, IMGFX_UPD_SET_ALPHA, 255, 255, 255, alpha, 0);
 
     rotAngle = update_lerp(EASING_LINEAR, -75.0f, 30.0f, chr->fadeInTime, line->appearTime);
     if (rotAngle >= 0.0f) {
@@ -267,7 +267,7 @@ void N(CharAnim_FadeIn_3)(CreditsLine* line, CreditsChar* chr) {
     foldImg.xOffset = -(glyphPtr->charWidth * 0.5);
     foldImg.yOffset = 0;
     foldImg.opacity = 255;
-    fold_appendGfx_component(0, &foldImg, FOLD_STATE_FLAG_NO_FILTERING | FOLD_STATE_FLAG_40, transformMtx);
+    imgfx_appendGfx_component(0, &foldImg, IMGFX_STATE_FLAG_NO_FILTERING | IMGFX_STATE_FLAG_40, transformMtx);
 
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
@@ -280,7 +280,7 @@ void N(CharAnim_FadeIn_4)(CreditsLine* line, CreditsChar* chr) {
     f32 posX, posY, scaleAmt, rotAngle;
     f32 startX = (line->posX + line->msgWidth) - 16;
     f32 startY = line->posY + 60;
-    u32 foldFlags = FOLD_STATE_FLAG_40;
+    u32 foldFlags = IMGFX_STATE_FLAG_40;
 
     posX = update_lerp(EASING_COS_IN_OUT, startX, chr->posX, chr->fadeInTime, line->appearTime);
     posY = update_lerp(EASING_CUBIC_OUT, startY, chr->posY, chr->fadeInTime, line->appearTime);
@@ -292,14 +292,14 @@ void N(CharAnim_FadeIn_4)(CreditsLine* line, CreditsChar* chr) {
     scaleAmt = update_lerp(EASING_QUADRATIC_OUT, 2.0f, 1.0f, chr->fadeInTime, line->appearTime);
 
     if (chr->fadeInTime == line->appearTime) {
-        fold_update(0, FOLD_UPD_CLEAR, 0, 0, 0, 0, 0);
-        foldFlags |= FOLD_STATE_FLAG_NO_FILTERING;
+        imgfx_update(0, IMGFX_UPD_CLEAR, 0, 0, 0, 0, 0);
+        foldFlags |= IMGFX_STATE_FLAG_NO_FILTERING;
     } else {
         f32 alpha = update_lerp(EASING_LINEAR, 16.0f, 300.0f, chr->fadeInTime, line->appearTime);
         if (alpha > 255.0f) {
             alpha = 255.0f;
         }
-        fold_update(0, FOLD_UPD_SET_ALPHA, 255, 255, 255, alpha, 0);
+        imgfx_update(0, IMGFX_UPD_SET_ALPHA, 255, 255, 255, alpha, 0);
     }
     msg_get_glyph(chr->font, chr->variation, chr->charIndex, chr->palette, glyphPtr);
 
@@ -320,7 +320,7 @@ void N(CharAnim_FadeIn_4)(CreditsLine* line, CreditsChar* chr) {
     foldImg.xOffset = -(glyphPtr->charWidth * 0.5);
     foldImg.yOffset = 0;
     foldImg.opacity = 255;
-    fold_appendGfx_component(0, &foldImg, foldFlags, transformMtx);
+    imgfx_appendGfx_component(0, &foldImg, foldFlags, transformMtx);
 
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
@@ -349,7 +349,7 @@ void N(CharAnim_HoldClearFold)(CreditsLine* line, CreditsChar* chr) {
     f32 posX = chr->posX;
     f32 posY = chr->posY;
 
-    fold_update(0, FOLD_UPD_CLEAR, 0, 0, 0, 0, 0);
+    imgfx_update(0, IMGFX_UPD_CLEAR, 0, 0, 0, 0, 0);
     guTranslateF(transformMtx, posX, -posY, 0.0f);
     guMtxF2L (transformMtx, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gMainGfxPos++, OS_PHYSICAL_TO_K0(&gDisplayContext->matrixStack[gMatrixListPos++]),
@@ -363,7 +363,7 @@ void N(CharAnim_HoldClearFold)(CreditsLine* line, CreditsChar* chr) {
     foldImg.xOffset = -(glyphPtr->charWidth * 0.5);
     foldImg.yOffset = 0;
     foldImg.opacity = 255;
-    fold_appendGfx_component(0, &foldImg, FOLD_STATE_FLAG_40000 | FOLD_STATE_FLAG_NO_FILTERING | FOLD_STATE_FLAG_40, transformMtx);
+    imgfx_appendGfx_component(0, &foldImg, IMGFX_STATE_FLAG_40000 | IMGFX_STATE_FLAG_NO_FILTERING | IMGFX_STATE_FLAG_40, transformMtx);
 
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
@@ -391,7 +391,7 @@ void N(CharAnim_FadeOut_0)(CreditsLine* line, CreditsChar* chr) {
     f32 alpha;
 
     alpha = update_lerp(EASING_SIN_OUT, 255.0f, 0.0f, chr->fadeInTime, line->vanishTime);
-    fold_update(0, FOLD_UPD_SET_ALPHA, 255, 255, 255, alpha, 0);
+    imgfx_update(0, IMGFX_UPD_SET_ALPHA, 255, 255, 255, alpha, 0);
 
     msg_get_glyph(chr->font, chr->variation, chr->charIndex, chr->palette, glyphPtr);
 
@@ -408,7 +408,7 @@ void N(CharAnim_FadeOut_0)(CreditsLine* line, CreditsChar* chr) {
     foldImg.xOffset = -(glyphPtr->charWidth * 0.5);
     foldImg.yOffset = 0;
     foldImg.opacity = 255;
-    fold_appendGfx_component(0, &foldImg, FOLD_STATE_FLAG_NO_FILTERING | FOLD_STATE_FLAG_40, transformMtx);
+    imgfx_appendGfx_component(0, &foldImg, IMGFX_STATE_FLAG_NO_FILTERING | IMGFX_STATE_FLAG_40, transformMtx);
 
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
@@ -423,7 +423,7 @@ void N(CharAnim_FadeOut_1)(CreditsLine* line, CreditsChar* chr) {
     f32 posY = chr->posY;
 
     alpha = update_lerp(EASING_SIN_OUT, 255.0f, 0.0f, chr->fadeInTime, line->vanishTime);
-    fold_update(0, FOLD_UPD_SET_ALPHA, 255, 255, 255, alpha, 0);
+    imgfx_update(0, IMGFX_UPD_SET_ALPHA, 255, 255, 255, alpha, 0);
 
     scaleAmt = update_lerp(EASING_LINEAR, 1.0f, 0.2f, chr->fadeInTime, line->vanishTime);
     msg_get_glyph(chr->font, chr->variation, chr->charIndex, chr->palette, glyphPtr);
@@ -443,7 +443,7 @@ void N(CharAnim_FadeOut_1)(CreditsLine* line, CreditsChar* chr) {
     foldImg.xOffset = -(glyphPtr->charWidth * 0.5);
     foldImg.yOffset = 0;
     foldImg.opacity = 255;
-    fold_appendGfx_component(0, &foldImg, FOLD_STATE_FLAG_40, transformMtx);
+    imgfx_appendGfx_component(0, &foldImg, IMGFX_STATE_FLAG_40, transformMtx);
 
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
@@ -458,7 +458,7 @@ void N(CharAnim_FadeOut_2)(CreditsLine* line, CreditsChar* chr) {
     f32 posY = chr->posY;
 
     alpha = update_lerp(EASING_SIN_OUT, 255.0f, 0.0f, chr->fadeInTime, line->vanishTime);
-    fold_update(0, FOLD_UPD_SET_ALPHA, 255, 255, 255, alpha, 0);
+    imgfx_update(0, IMGFX_UPD_SET_ALPHA, 255, 255, 255, alpha, 0);
 
     rotAngle = update_lerp(EASING_LINEAR, 0.0f, 60.0f, chr->fadeInTime, line->vanishTime);
     msg_get_glyph(chr->font, chr->variation, chr->charIndex, chr->palette, glyphPtr);
@@ -478,7 +478,7 @@ void N(CharAnim_FadeOut_2)(CreditsLine* line, CreditsChar* chr) {
     foldImg.xOffset = -(glyphPtr->charWidth * 0.5);
     foldImg.yOffset = 0;
     foldImg.opacity = 255;
-    fold_appendGfx_component(0, &foldImg, FOLD_STATE_FLAG_NO_FILTERING | FOLD_STATE_FLAG_40, transformMtx);
+    imgfx_appendGfx_component(0, &foldImg, IMGFX_STATE_FLAG_NO_FILTERING | IMGFX_STATE_FLAG_40, transformMtx);
 
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }

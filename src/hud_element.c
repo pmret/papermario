@@ -1511,15 +1511,15 @@ void render_hud_element(HudElement* hudElement) {
         case 1:
             if (hudElement->flags & HUD_ELEMENT_FLAG_NO_FOLD) {
                 if (hudElement->flags & HUD_ELEMENT_FLAG_TRANSPARENT) {
-                    fold_update(0, FOLD_UPD_SET_ALPHA, 255, 255, 255, hudElement->opacity, 0);
+                    imgfx_update(0, IMGFX_UPD_SET_ALPHA, 255, 255, 255, hudElement->opacity, 0);
                 } else {
-                    fold_update(0, FOLD_UPD_CLEAR, 0, 0, 0, 0, 0);
+                    imgfx_update(0, IMGFX_UPD_CLEAR, 0, 0, 0, 0, 0);
                 }
             } else {
                 if (hudElement->flags & HUD_ELEMENT_FLAG_TRANSPARENT) {
-                    fold_update(transform->foldIdx, FOLD_UPD_SET_ALPHA, 255, 255, 255, hudElement->opacity, 0);
+                    imgfx_update(transform->foldIdx, IMGFX_UPD_SET_ALPHA, 255, 255, 255, hudElement->opacity, 0);
                 } else {
-                    fold_update(transform->foldIdx, FOLD_UPD_CLEAR, 0, 0, 0, 0, 0);
+                    imgfx_update(transform->foldIdx, IMGFX_UPD_CLEAR, 0, 0, 0, 0, 0);
                 }
             }
 
@@ -1534,12 +1534,12 @@ void render_hud_element(HudElement* hudElement) {
 
             if (hudElement->flags & HUD_ELEMENT_FLAG_NO_FOLD) {
                 if (hudElement->flags & HUD_ELEMENT_FLAG_ANTIALIASING) {
-                    fold_appendGfx_component(0, &sp2A0, FOLD_STATE_FLAG_40, sp60);
+                    imgfx_appendGfx_component(0, &sp2A0, IMGFX_STATE_FLAG_40, sp60);
                 } else {
-                    fold_appendGfx_component(0, &sp2A0, FOLD_STATE_FLAG_40, sp60);
+                    imgfx_appendGfx_component(0, &sp2A0, IMGFX_STATE_FLAG_40, sp60);
                 }
             } else {
-                fold_appendGfx_component(transform->foldIdx, &sp2A0, FOLD_STATE_FLAG_40, sp60);
+                imgfx_appendGfx_component(transform->foldIdx, &sp2A0, IMGFX_STATE_FLAG_40, sp60);
             }
             break;
         case 2:

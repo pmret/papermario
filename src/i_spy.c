@@ -73,7 +73,7 @@ void appendGfx_ispy_icon(void) {
                 foldImage.palette = ispy_icon_3_pal;
                 break;
         }
-        fold_update(0, FOLD_UPD_SET_ALPHA, 255, 255, 255, ISpyPtr->alpha, 0);
+        imgfx_update(0, IMGFX_UPD_SET_ALPHA, 255, 255, 255, ISpyPtr->alpha, 0);
 
         foldImage.raster = ispy_icon_img;
         foldImage.width  = ispy_icon_img_width;
@@ -82,7 +82,7 @@ void appendGfx_ispy_icon(void) {
         foldImage.yOffset = 46;
         foldImage.opacity = 255;
 
-        fold_appendGfx_component(0, &foldImage, 0, matrix2);
+        imgfx_appendGfx_component(0, &foldImage, 0, matrix2);
         gSPPopMatrix(gMainGfxPos++, 0);
     }
 }

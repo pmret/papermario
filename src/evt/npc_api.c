@@ -979,7 +979,7 @@ ApiStatus SetNpcFoldParams(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    npc_set_fold_params(npc, foldType, var2, var3, var4, var5, npc->foldFlags);
+    npc_set_imgfx_params(npc, foldType, var2, var3, var4, var5, npc->foldFlags);
     return ApiStatus_DONE2;
 }
 

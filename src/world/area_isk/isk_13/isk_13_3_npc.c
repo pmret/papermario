@@ -77,8 +77,8 @@ void N(func_80241610_990DF0)(void) {
     foldImg.yOffset = (spriteRaster.height / 2);
     foldImg.opacity = 255;
     
-    fold_update(ambush->foldID, FOLD_UPD_SET_TINT, ambush->color.r, ambush->color.g, ambush->color.b, ambush->color.a, 0);
-    fold_appendGfx_component(ambush->foldID, &foldImg, 0, transformMtx);
+    imgfx_update(ambush->foldID, IMGFX_UPD_SET_TINT, ambush->color.r, ambush->color.g, ambush->color.b, ambush->color.a, 0);
+    imgfx_appendGfx_component(ambush->foldID, &foldImg, 0, transformMtx);
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
 
@@ -268,7 +268,7 @@ EvtScript N(EVS_NpcDefeat_StoneChomp_Override) = {
     EVT_SET(GF_ISK13_Defeated_StoneChomp, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
     EVT_CALL(EnableNpcShadow, NPC_SELF, TRUE)
-    EVT_CALL(SetNpcFoldParams, NPC_SELF, FOLD_UPD_CLEAR, 0, 0, 0, 0)
+    EVT_CALL(SetNpcFoldParams, NPC_SELF, IMGFX_UPD_CLEAR, 0, 0, 0, 0)
     EVT_CALL(N(DestroyAmbushWorker))
     EVT_CALL(GetBattleOutcome, LVar0)
     EVT_SWITCH(LVar0)

@@ -157,10 +157,10 @@ API_CALLABLE(func_80218000_63D1E0) {
         script->functionTemp[1] = 0;
         script->functionTemp[2] = 0;
         script->functionTemp[0] = 0;
-        func_802DE780(part->spriteInstanceID, 0, FOLD_UPD_ALLOC_COLOR_BUF, 20, 0, 0, 255, 0);
+        func_802DE780(part->spriteInstanceID, 0, IMGFX_UPD_ALLOC_COLOR_BUF, 20, 0, 0, 255, 0);
     }
 
-    func_802DE780(part->spriteInstanceID, 1, FOLD_UPD_OVERLAY, (s32)&N(MonstarDetailTexture), 255, 0, 255, 0);
+    func_802DE780(part->spriteInstanceID, 1, IMGFX_UPD_OVERLAY, (s32)&N(MonstarDetailTexture), 255, 0, 255, 0);
     script->functionTemp[1] += 10;
     if (script->functionTemp[1] >= 360) {
         script->functionTemp[1] %= 360;
@@ -173,7 +173,7 @@ API_CALLABLE(func_80218000_63D1E0) {
     }
 
     for (i = 0; i < 20; i++) {
-        func_802DE780(part->spriteInstanceID, 0, FOLD_UPD_COLOR_BUF_SET_C, i, colR[i] << 0x18 | colG[i] << 0x10 | colB[i] << 8 | 255, 0, 255, 0);
+        func_802DE780(part->spriteInstanceID, 0, IMGFX_UPD_COLOR_BUF_SET_C, i, colR[i] << 0x18 | colG[i] << 0x10 | colB[i] << 8 | 255, 0, 255, 0);
     }
 
     return ApiStatus_BLOCK;

@@ -401,7 +401,7 @@ void appendGfx_entity_model(EntityModel* model) {
         foldImage.yOffset = imageData->height / 2;
         foldImage.opacity = 255;
         guMtxL2F(foldMtx, &model->transform);
-        fold_appendGfx_component(0, &foldImage, 0, foldMtx);
+        imgfx_appendGfx_component(0, &foldImage, 0, foldMtx);
     }
 
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
@@ -710,7 +710,7 @@ void draw_entity_model_E(s32 modelIdx, Mtx* transformMtx) {
         foldImage.yOffset = imageData->height / 2;
         foldImage.opacity = 255;
         guMtxL2F(foldMtx, &model->transform);
-        fold_appendGfx_component(0, &foldImage, 0, foldMtx);
+        imgfx_appendGfx_component(0, &foldImage, 0, foldMtx);
     }
 
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);

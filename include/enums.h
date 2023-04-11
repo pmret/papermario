@@ -5960,109 +5960,109 @@ enum NpcDropFlags {
 };
 
 enum FoldStateFlags {
-    FOLD_STATE_FLAG_ENABLED           = 0x00000001,
-    FOLD_STATE_FLAG_G_CULL_BACK       = 0x00000002,
-    FOLD_STATE_FLAG_G_CULL_FRONT      = 0x00000004,
-    FOLD_STATE_FLAG_8                 = 0x00000008,
-    FOLD_STATE_FLAG_SKIP_GFX_SETUP    = 0x00000010,
-    FOLD_STATE_FLAG_SKIP_TEX_SETUP    = 0x00000020,
-    FOLD_STATE_FLAG_40                = 0x00000040,
-    FOLD_STATE_FLAG_LOOP_ANIM         = 0x00000080,
-    FOLD_STATE_FLAG_REVERSE_ANIM      = 0x00000100, // fold animation plays backwards (from end to start)
-    FOLD_STATE_FLAG_200               = 0x00000200,
-    FOLD_STATE_FLAG_400               = 0x00000400,
-    FOLD_STATE_FLAG_800               = 0x00000800,
-    FOLD_STATE_FLAG_ANIM_DONE         = 0x00001000,
-    FOLD_STATE_FLAG_2000              = 0x00002000,
-    FOLD_STATE_FLAG_4000              = 0x00004000,
-    FOLD_STATE_FLAG_8000              = 0x00008000,
-    FOLD_STATE_FLAG_NO_FILTERING      = 0x00010000,
-    FOLD_STATE_FLAG_20000             = 0x00020000,
-    FOLD_STATE_FLAG_40000             = 0x00040000,
-    FOLD_STATE_FLAG_80000             = 0x00080000,
-    FOLD_STATE_FLAG_100000            = 0x00100000,
+    IMGFX_STATE_FLAG_ENABLED           = 0x00000001,
+    IMGFX_STATE_FLAG_G_CULL_BACK       = 0x00000002,
+    IMGFX_STATE_FLAG_G_CULL_FRONT      = 0x00000004,
+    IMGFX_STATE_FLAG_8                 = 0x00000008,
+    IMGFX_STATE_FLAG_SKIP_GFX_SETUP    = 0x00000010,
+    IMGFX_STATE_FLAG_SKIP_TEX_SETUP    = 0x00000020,
+    IMGFX_STATE_FLAG_40                = 0x00000040,
+    IMGFX_STATE_FLAG_LOOP_ANIM         = 0x00000080,
+    IMGFX_STATE_FLAG_REVERSE_ANIM      = 0x00000100, // fold animation plays backwards (from end to start)
+    IMGFX_STATE_FLAG_200               = 0x00000200,
+    IMGFX_STATE_FLAG_400               = 0x00000400,
+    IMGFX_STATE_FLAG_800               = 0x00000800,
+    IMGFX_STATE_FLAG_ANIM_DONE         = 0x00001000,
+    IMGFX_STATE_FLAG_2000              = 0x00002000,
+    IMGFX_STATE_FLAG_4000              = 0x00004000,
+    IMGFX_STATE_FLAG_8000              = 0x00008000,
+    IMGFX_STATE_FLAG_NO_FILTERING      = 0x00010000,
+    IMGFX_STATE_FLAG_20000             = 0x00020000,
+    IMGFX_STATE_FLAG_40000             = 0x00040000,
+    IMGFX_STATE_FLAG_80000             = 0x00080000,
+    IMGFX_STATE_FLAG_100000            = 0x00100000,
 };
 
 typedef enum FoldType {
-    FOLD_UPD_CLEAR                    = 0x0,    // or FOLD_UPD_INIT?
-    FOLD_TYPE_1                       = 0x1,    // unused?
-    FOLD_TYPE_2                       = 0x2,    // unused?
-    FOLD_TYPE_3                       = 0x3,    // after goomba 'sticker' ambush in kmr_09 unfurls
-    FOLD_UPD_WAVY                     = 0x4,    // Kolorado when injured and Sushie when underwater (* note: Sushie fold rendering is bugged and only occurs *before* going underwater)
-    FOLD_UPD_SET_ANIM                 = 0x5,
-    FOLD_UPD_SET_COLOR                = 0x6,    // modulate color (args: R, G, B)
-    FOLD_UPD_SET_ALPHA                = 0x7,    // modulate alpha (args: A)
-    FOLD_UPD_SET_TINT                 = 0x8,    // modulate color+alpha (args: R, G, B, A)
-    FOLD_TYPE_9                       = 0x9,
-    FOLD_TYPE_A                       = 0xA,
-    FOLD_UPD_COLOR_BUF_SET_B          = 0xB,
-    FOLD_UPD_COLOR_BUF_SET_C          = 0xC,
-    FOLD_UPD_HOLOGRAM                 = 0xD,    // ghostly star spirits and merlar (args: ???, staticAmt, ???, alphaAmt)
-    FOLD_UPD_FILL_COLOR               = 0xE,    // used to create boss silhouettes in chapter introduction sceens
-    FOLD_UPD_OVERLAY                  = 0xF,
-    FOLD_UPD_OVERLAY_XLU              = 0x10,   // unused?
-    FOLD_UPD_ALLOC_COLOR_BUF          = 0x11,   // args: count
+    IMGFX_UPD_CLEAR                    = 0x0,    // or IMGFX_UPD_INIT?
+    IMGFX_TYPE_1                       = 0x1,    // unused?
+    IMGFX_TYPE_2                       = 0x2,    // unused?
+    IMGFX_TYPE_3                       = 0x3,    // after goomba 'sticker' ambush in kmr_09 unfurls
+    IMGFX_UPD_WAVY                     = 0x4,    // Kolorado when injured and Sushie when underwater (* note: Sushie fold rendering is bugged and only occurs *before* going underwater)
+    IMGFX_UPD_SET_ANIM                 = 0x5,
+    IMGFX_UPD_SET_COLOR                = 0x6,    // modulate color (args: R, G, B)
+    IMGFX_UPD_SET_ALPHA                = 0x7,    // modulate alpha (args: A)
+    IMGFX_UPD_SET_TINT                 = 0x8,    // modulate color+alpha (args: R, G, B, A)
+    IMGFX_TYPE_9                       = 0x9,
+    IMGFX_TYPE_A                       = 0xA,
+    IMGFX_UPD_COLOR_BUF_SET_B          = 0xB,
+    IMGFX_UPD_COLOR_BUF_SET_C          = 0xC,
+    IMGFX_UPD_HOLOGRAM                 = 0xD,    // ghostly star spirits and merlar (args: ???, staticAmt, ???, alphaAmt)
+    IMGFX_UPD_FILL_COLOR               = 0xE,    // used to create boss silhouettes in chapter introduction sceens
+    IMGFX_UPD_OVERLAY                  = 0xF,
+    IMGFX_UPD_OVERLAY_XLU              = 0x10,   // unused?
+    IMGFX_UPD_ALLOC_COLOR_BUF          = 0x11,   // args: count
 } FoldType;
 
 typedef enum FoldAnim {
-    FOLD_ANIM_SHOCK                   = 0x00, // used for Goombaria and Goompapa when Kammy drops the hammer block
-    FOLD_ANIM_SHIVER                  = 0x01, // used when Goombaria gives Mario a kiss
-    FOLD_ANIM_VERTICAL_PIPE_CURL      = 0x02, // vertical pipe curl
-    FOLD_ANIM_HORIZONTAL_PIPE_CURL    = 0x03, // horizontal pipe curl
-    FOLD_ANIM_STARTLE                 = 0x04, // used when Koopa Bros are surprised by Mario
-    FOLD_ANIM_FLUTTER_DOWN            = 0x05, // player falling like paper
-    FOLD_ANIM_UNFURL                  = 0x06, // used by Goomba 'stickers' that ambush Mario in area_kmr
-    FOLD_ANIM_GET_IN_BED              = 0x07, // Mario gets into bed
-    FOLD_ANIM_SPIRIT_CAPTURE          = 0x08, // Eldstar being captured
-    FOLD_ANIM_UNUSED_1                = 0x09, // unused
-    FOLD_ANIM_UNUSED_2                = 0x0A, // unused
-    FOLD_ANIM_UNUSED_3                = 0x0B, // unused
-    FOLD_ANIM_TUTANKOOPA_GATHER       = 0x0C, // tutankoopa 3
-    FOLD_ANIM_TUTANKOOPA_SWIRL_2      = 0x0D, // tutankoopa 2
-    FOLD_ANIM_TUTANKOOPA_SWIRL_1      = 0x0E, // tutankoopa 1
-    FOLD_ANIM_SHUFFLE_CARDS           = 0x0F, // merlee spell-casting card shuffle
-    FOLD_ANIM_FLIP_CARD_1             = 0x10, // merlee spell-casting card flip 1
-    FOLD_ANIM_FLIP_CARD_2             = 0x11, // merlee spell-casting card flip 2
-    FOLD_ANIM_FLIP_CARD_3             = 0x12, // merlee spell-casting card flip 3
-    FOLD_ANIM_CYMBAL_CRUSH            = 0x13, // used when Mario is crushed in a Cymbal Plant
+    IMGFX_ANIM_SHOCK                   = 0x00, // used for Goombaria and Goompapa when Kammy drops the hammer block
+    IMGFX_ANIM_SHIVER                  = 0x01, // used when Goombaria gives Mario a kiss
+    IMGFX_ANIM_VERTICAL_PIPE_CURL      = 0x02, // vertical pipe curl
+    IMGFX_ANIM_HORIZONTAL_PIPE_CURL    = 0x03, // horizontal pipe curl
+    IMGFX_ANIM_STARTLE                 = 0x04, // used when Koopa Bros are surprised by Mario
+    IMGFX_ANIM_FLUTTER_DOWN            = 0x05, // player falling like paper
+    IMGFX_ANIM_UNFURL                  = 0x06, // used by Goomba 'stickers' that ambush Mario in area_kmr
+    IMGFX_ANIM_GET_IN_BED              = 0x07, // Mario gets into bed
+    IMGFX_ANIM_SPIRIT_CAPTURE          = 0x08, // Eldstar being captured
+    IMGFX_ANIM_UNUSED_1                = 0x09, // unused
+    IMGFX_ANIM_UNUSED_2                = 0x0A, // unused
+    IMGFX_ANIM_UNUSED_3                = 0x0B, // unused
+    IMGFX_ANIM_TUTANKOOPA_GATHER       = 0x0C, // tutankoopa 3
+    IMGFX_ANIM_TUTANKOOPA_SWIRL_2      = 0x0D, // tutankoopa 2
+    IMGFX_ANIM_TUTANKOOPA_SWIRL_1      = 0x0E, // tutankoopa 1
+    IMGFX_ANIM_SHUFFLE_CARDS           = 0x0F, // merlee spell-casting card shuffle
+    IMGFX_ANIM_FLIP_CARD_1             = 0x10, // merlee spell-casting card flip 1
+    IMGFX_ANIM_FLIP_CARD_2             = 0x11, // merlee spell-casting card flip 2
+    IMGFX_ANIM_FLIP_CARD_3             = 0x12, // merlee spell-casting card flip 3
+    IMGFX_ANIM_CYMBAL_CRUSH            = 0x13, // used when Mario is crushed in a Cymbal Plant
 } FoldAnim;
 
 typedef enum FoldRenderType {
-    FOLD_RENDER_DEFAULT               = 0x00,
-    FOLD_RENDER_MULTIPLY_RGB          = 0x01,
-    FOLD_RENDER_MULTIPLY_ALPHA        = 0x02,
-    FOLD_RENDER_MULTIPLY_RGBA         = 0x03,
-    FOLD_RENDER_MODULATE_PRIM_RGB     = 0x04,
-    FOLD_RENDER_MODULATE_PRIM_RGBA    = 0x05,
-    FOLD_RENDER_MULTIPLY_SHADE_RGB    = 0x06,
-    FOLD_RENDER_MULTIPLY_SHADE_ALPHA  = 0x07, // unused?
-    FOLD_RENDER_MULTIPLY_SHADE_RGBA   = 0x08,
-    FOLD_RENDER_MODULATE_SHADE_RGB    = 0x09,
-    FOLD_RENDER_MODULATE_SHADE_RGBA   = 0x0A,
-    FOLD_RENDER_ANIM                  = 0x0B,
-    FOLD_RENDER_HOLOGRAM              = 0x0C,
-    FOLD_RENDER_COLOR_FILL            = 0x0D,
-    FOLD_RENDER_OVERLAY_RGB           = 0x0E,
-    FOLD_RENDER_OVERLAY_RGBA          = 0x0F,
-    FOLD_RENDER_UNUSED                = 0x10,
+    IMGFX_RENDER_DEFAULT               = 0x00,
+    IMGFX_RENDER_MULTIPLY_RGB          = 0x01,
+    IMGFX_RENDER_MULTIPLY_ALPHA        = 0x02,
+    IMGFX_RENDER_MULTIPLY_RGBA         = 0x03,
+    IMGFX_RENDER_MODULATE_PRIM_RGB     = 0x04,
+    IMGFX_RENDER_MODULATE_PRIM_RGBA    = 0x05,
+    IMGFX_RENDER_MULTIPLY_SHADE_RGB    = 0x06,
+    IMGFX_RENDER_MULTIPLY_SHADE_ALPHA  = 0x07, // unused?
+    IMGFX_RENDER_MULTIPLY_SHADE_RGBA   = 0x08,
+    IMGFX_RENDER_MODULATE_SHADE_RGB    = 0x09,
+    IMGFX_RENDER_MODULATE_SHADE_RGBA   = 0x0A,
+    IMGFX_RENDER_ANIM                  = 0x0B,
+    IMGFX_RENDER_HOLOGRAM              = 0x0C,
+    IMGFX_RENDER_COLOR_FILL            = 0x0D,
+    IMGFX_RENDER_OVERLAY_RGB           = 0x0E,
+    IMGFX_RENDER_OVERLAY_RGBA          = 0x0F,
+    IMGFX_RENDER_UNUSED                = 0x10,
 } FoldRenderType;
 
 enum FoldRenderModeFlags {
-    FOLD_RENDER_NO_OVERRIDE      = 1,
+    IMGFX_RENDER_NO_OVERRIDE      = 1,
 };
 
 typedef enum FoldMeshType {
-    FOLD_MESH_DEFAULT                 = 0x0,
-    FOLD_MESH_GRID_WAVY               = 0x1,
-    FOLD_MESH_ANIMATED                = 0x2,
-    FOLD_MESH_GRID_UNUSED             = 0x3,
-    FOLD_MESH_STRIP                   = 0x4,
+    IMGFX_MESH_DEFAULT                 = 0x0,
+    IMGFX_MESH_GRID_WAVY               = 0x1,
+    IMGFX_MESH_ANIMATED                = 0x2,
+    IMGFX_MESH_GRID_UNUSED             = 0x3,
+    IMGFX_MESH_STRIP                   = 0x4,
 } FoldMeshType;
 
 enum FoldHologramTypes {
-    FOLD_HOLOGRAM_NOISE               = 0,
-    FOLD_HOLOGRAM_DITHER              = 1,
-    FOLD_HOLOGRAM_THRESHOLD           = 2,
+    IMGFX_HOLOGRAM_NOISE               = 0,
+    IMGFX_HOLOGRAM_DITHER              = 1,
+    IMGFX_HOLOGRAM_THRESHOLD           = 2,
 };
 
 enum MoveType {

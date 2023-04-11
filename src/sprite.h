@@ -119,7 +119,7 @@ extern Gfx D_802DF490[];
 extern f32 spr_animUpdateTimeScale;
 extern PlayerSpriteSet spr_playerSpriteSets[7];
 
-void fold_init(void);
+void imgfx_init(void);
 
 void spr_init_sprites(s32 playerSpriteSet);
 
@@ -133,9 +133,9 @@ s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 arg2, PAL_PTR* pal
 
 s32 func_802DDEC4(s32 arg0);
 
-void spr_set_player_fold_update_comp(s32, s32, FoldType, s32, s32, s32, s32, s32);
+void spr_set_player_imgfx_update_comp(s32, s32, FoldType, s32, s32, s32, s32, s32);
 
-void spr_set_player_fold_update_all(s32, FoldType, s32, s32, s32, s32, s32);
+void spr_set_player_imgfx_update_all(s32, FoldType, s32, s32, s32, s32, s32);
 
 IMG_PTR spr_get_player_raster(s32 rasterIndex, s32 playerSpriteID);
 
