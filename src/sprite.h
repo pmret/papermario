@@ -154,13 +154,13 @@ s32 spr_get_notify_value(s32 arg0);
 
 s32 spr_free_sprite(s32 spriteInstanceID);
 
-s32 func_802DE748(s32, s32); // TODO
+s32 get_npc_comp_imgfx_idx(s32, s32);
 
-void func_802DE780(s32, s32, ImgfxType, s32, s32, s32, s32, s32);
+void set_npc_comp_imgfx(s32, s32, ImgfxType, s32, s32, s32, s32, s32);
 
-void func_802DE894(s32 arg0, ImgfxType arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+void set_npc_all_imgfx(s32 arg0, ImgfxType arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
 
-s32 func_802DE8DC(s32 spriteIdx, s32 compListIdx, s32* outX, s32* outY, s32* outZ);
+s32 spr_get_comp_position(s32 spriteIdx, s32 compListIdx, s32* outX, s32* outY, s32* outZ);
 
 s32 spr_get_npc_raster_info(SpriteRasterInfo* out, s32 npcSpriteID, s32 rasterIndex);
 

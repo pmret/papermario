@@ -5960,7 +5960,7 @@ enum NpcDropFlags {
 };
 
 enum ImgfxStateFlags {
-    IMGFX_FLAG_IN_USE              = 0x00000001,
+    IMGFX_FLAG_IN_USE               = 0x00000001,
     IMGFX_FLAG_G_CULL_BACK          = 0x00000002,
     IMGFX_FLAG_G_CULL_FRONT         = 0x00000004,
     IMGFX_FLAG_8                    = 0x00000008,
@@ -5995,8 +5995,8 @@ typedef enum ImgfxType {
     IMGFX_SET_TINT                  = 0x8,    // modulate color+alpha (args: R, G, B, A)
     IMGFX_SET_WHITE_FADE            = 0x9,
     IMGFX_SET_CREDITS_FADE          = 0xA,
-    IMGFX_COLOR_BUF_SET_B           = 0xB,
-    IMGFX_COLOR_BUF_SET_C           = 0xC,
+    IMGFX_COLOR_BUF_SET_MULTIPLY    = 0xB,
+    IMGFX_COLOR_BUF_SET_MODULATE    = 0xC,
     IMGFX_HOLOGRAM                  = 0xD,    // ghostly star spirits and merlar (args: ???, staticAmt, ???, alphaAmt)
     IMGFX_FILL_COLOR                = 0xE,    // used to create boss silhouettes in chapter introduction sceens
     IMGFX_OVERLAY                   = 0xF,

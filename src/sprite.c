@@ -1219,7 +1219,7 @@ s32 spr_free_sprite(s32 spriteInstanceID) {
     return 0;
 }
 
-s32 func_802DE748(s32 spriteIdx, s32 compIdx) {
+s32 get_npc_comp_imgfx_idx(s32 spriteIdx, s32 compIdx) {
     SpriteComponent** componentList = SpriteInstances[spriteIdx].componentList;
 
     if (componentList == NULL) {
@@ -1229,7 +1229,7 @@ s32 func_802DE748(s32 spriteIdx, s32 compIdx) {
     }
 }
 
-void func_802DE780(s32 spriteIdx, s32 compIdx, ImgfxType foldType, s32 foldArg1, s32 foldArg2, s32 foldArg3, s32 foldArg4, s32 foldArg5) {
+void set_npc_comp_imgfx(s32 spriteIdx, s32 compIdx, ImgfxType foldType, s32 foldArg1, s32 foldArg2, s32 foldArg3, s32 foldArg4, s32 foldArg5) {
     SpriteInstance* sprite = &SpriteInstances[spriteIdx];
     SpriteComponent** componentList;
     s32 i;
@@ -1255,11 +1255,11 @@ void func_802DE780(s32 spriteIdx, s32 compIdx, ImgfxType foldType, s32 foldArg1,
     }
 }
 
-void func_802DE894(s32 spriteIdx, ImgfxType foldType, s32 foldArg1, s32 foldArg2, s32 foldArg3, s32 foldArg4, s32 foldArg5) {
-    func_802DE780(spriteIdx, -1, foldType, foldArg1, foldArg2, foldArg3, foldArg4, foldArg5);
+void set_npc_all_imgfx(s32 spriteIdx, ImgfxType foldType, s32 foldArg1, s32 foldArg2, s32 foldArg3, s32 foldArg4, s32 foldArg5) {
+    set_npc_comp_imgfx(spriteIdx, -1, foldType, foldArg1, foldArg2, foldArg3, foldArg4, foldArg5);
 }
 
-s32 func_802DE8DC(s32 spriteIdx, s32 compListIdx, s32* outX, s32* outY, s32* outZ) {
+s32 spr_get_comp_position(s32 spriteIdx, s32 compListIdx, s32* outX, s32* outY, s32* outZ) {
     SpriteInstance* sprite = &SpriteInstances[spriteIdx];
     SpriteAnimComponent** animCompList;
     SpriteAnimComponent* anim;

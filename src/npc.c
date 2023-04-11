@@ -1153,7 +1153,7 @@ void appendGfx_npc_blur(void* data) {
             x = blur->x[index];
             y = blur->y[index];
             z = blur->z[index];
-            func_802DE894(npc->spriteInstanceID, IMGFX_SET_ALPHA, 255, 255, 255, 120 - (var_s5 * 20), 0);
+            set_npc_all_imgfx(npc->spriteInstanceID, IMGFX_SET_ALPHA, 255, 255, 255, 120 - (var_s5 * 20), 0);
             yaw = npc->renderYaw;
             guTranslateF(sp20, x, y, z);
 
@@ -1933,7 +1933,7 @@ void npc_update_decoration_charged(Npc* npc, s32 idx) {
     s32 temp3;
 
     if (!npc->decorationInitialised[idx]) {
-        func_802DE894(npc->spriteInstanceID, IMGFX_ALLOC_COLOR_BUF, 20, 0, 0, 255, 0);
+        set_npc_all_imgfx(npc->spriteInstanceID, IMGFX_ALLOC_COLOR_BUF, 20, 0, 0, 255, 0);
         npc->decorationInitialised[idx] = TRUE;
     }
     if (npc->decorationInitialised[idx] == TRUE) {
@@ -1949,7 +1949,7 @@ void npc_update_decoration_charged(Npc* npc, s32 idx) {
         }
 
         for (temp3 = 255, i = 0; i < 20; i++) {
-            func_802DE894(npc->spriteInstanceID, IMGFX_COLOR_BUF_SET_C, i, (sp50[i] << 24) | (sp38[i] << 16) | (sp20[i] << 8) | temp3, 0, 255, 0);
+            set_npc_all_imgfx(npc->spriteInstanceID, IMGFX_COLOR_BUF_SET_MODULATE, i, (sp50[i] << 24) | (sp38[i] << 16) | (sp20[i] << 8) | temp3, 0, 255, 0);
         }
     }
 }
@@ -2093,63 +2093,63 @@ void func_8003D3BC(Npc* npc) {
     s32 foldArg4 = npc->foldArg4;
     s32 foldFlags = npc->foldFlags;
 
-    func_802DE894(npc->spriteInstanceID, IMGFX_CLEAR, 0, 0, 0, 0, 0);
+    set_npc_all_imgfx(npc->spriteInstanceID, IMGFX_CLEAR, 0, 0, 0, 0, 0);
 
     switch (foldType) {
         case IMGFX_CLEAR:
             npc->renderMode = RENDER_MODE_ALPHATEST;
-            func_802DE894(npc->spriteInstanceID, IMGFX_CLEAR, 0, 0, 0, 0, foldFlags);
+            set_npc_all_imgfx(npc->spriteInstanceID, IMGFX_CLEAR, 0, 0, 0, 0, foldFlags);
             break;
         case IMGFX_UNK_2:
         case IMGFX_RESET:
             npc->renderMode = RENDER_MODE_ALPHATEST;
             // fallthrough
         case IMGFX_UNK_1:
-            func_802DE894(npc->spriteInstanceID, foldType, 0, 0, 0, 0, foldFlags);
+            set_npc_all_imgfx(npc->spriteInstanceID, foldType, 0, 0, 0, 0, foldFlags);
             break;
         case IMGFX_SET_WAVY:
             npc->renderMode = RENDER_MODE_ALPHATEST;
-            func_802DE894(npc->spriteInstanceID, IMGFX_SET_WAVY, foldArg1, foldArg2, foldArg3, 0, foldFlags);
+            set_npc_all_imgfx(npc->spriteInstanceID, IMGFX_SET_WAVY, foldArg1, foldArg2, foldArg3, 0, foldFlags);
             break;
         case IMGFX_SET_COLOR:
             npc->renderMode = RENDER_MODE_ALPHATEST;
-            func_802DE894(npc->spriteInstanceID, IMGFX_SET_COLOR, foldArg1, foldArg2, foldArg3, 255, foldFlags);
+            set_npc_all_imgfx(npc->spriteInstanceID, IMGFX_SET_COLOR, foldArg1, foldArg2, foldArg3, 255, foldFlags);
             break;
         case IMGFX_SET_ALPHA:
             npc->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
-            func_802DE894(npc->spriteInstanceID, IMGFX_SET_ALPHA, 255, 255, 255, foldArg1, foldFlags);
+            set_npc_all_imgfx(npc->spriteInstanceID, IMGFX_SET_ALPHA, 255, 255, 255, foldArg1, foldFlags);
             break;
         case IMGFX_SET_TINT:
             npc->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
-            func_802DE894(npc->spriteInstanceID, IMGFX_SET_TINT, foldArg1, foldArg2, foldArg3, foldArg4, foldFlags);
+            set_npc_all_imgfx(npc->spriteInstanceID, IMGFX_SET_TINT, foldArg1, foldArg2, foldArg3, foldArg4, foldFlags);
             break;
         case IMGFX_SET_WHITE_FADE:
             npc->renderMode = RENDER_MODE_ALPHATEST;
-            func_802DE894(npc->spriteInstanceID, IMGFX_SET_WHITE_FADE, foldArg1, foldArg2, foldArg3, 255, foldFlags);
+            set_npc_all_imgfx(npc->spriteInstanceID, IMGFX_SET_WHITE_FADE, foldArg1, foldArg2, foldArg3, 255, foldFlags);
             break;
         case IMGFX_SET_CREDITS_FADE:
             npc->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
-            func_802DE894(npc->spriteInstanceID, IMGFX_SET_CREDITS_FADE, foldArg1, foldArg2, foldArg3, foldArg4, foldFlags);
+            set_npc_all_imgfx(npc->spriteInstanceID, IMGFX_SET_CREDITS_FADE, foldArg1, foldArg2, foldArg3, foldArg4, foldFlags);
             break;
         case IMGFX_SET_ANIM:
             npc->renderMode = RENDER_MODE_ALPHATEST;
-            func_802DE894(npc->spriteInstanceID, IMGFX_SET_ANIM, foldArg1, foldArg2, foldArg3, 0, foldFlags);
+            set_npc_all_imgfx(npc->spriteInstanceID, IMGFX_SET_ANIM, foldArg1, foldArg2, foldArg3, 0, foldFlags);
             break;
         case IMGFX_HOLOGRAM:
             npc->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
-            func_802DE894(npc->spriteInstanceID, IMGFX_HOLOGRAM, foldArg1, foldArg2, foldArg3, foldArg4, foldFlags);
+            set_npc_all_imgfx(npc->spriteInstanceID, IMGFX_HOLOGRAM, foldArg1, foldArg2, foldArg3, foldArg4, foldFlags);
             break;
         case IMGFX_FILL_COLOR:
             npc->renderMode = RENDER_MODE_ALPHATEST;
-            func_802DE894(npc->spriteInstanceID, IMGFX_FILL_COLOR, foldArg1, foldArg2, foldArg3, 255, foldFlags);
+            set_npc_all_imgfx(npc->spriteInstanceID, IMGFX_FILL_COLOR, foldArg1, foldArg2, foldArg3, 255, foldFlags);
             break;
         case IMGFX_OVERLAY:
             npc->renderMode = RENDER_MODE_ALPHATEST;
-            func_802DE894(npc->spriteInstanceID, IMGFX_OVERLAY, foldArg1, 255, 0, 255, foldFlags);
+            set_npc_all_imgfx(npc->spriteInstanceID, IMGFX_OVERLAY, foldArg1, 255, 0, 255, foldFlags);
             break;
         case IMGFX_OVERLAY_XLU:
             npc->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
-            func_802DE894(npc->spriteInstanceID, IMGFX_OVERLAY, foldArg1, foldArg2, 0, foldArg2, foldFlags);
+            set_npc_all_imgfx(npc->spriteInstanceID, IMGFX_OVERLAY, foldArg1, foldArg2, 0, foldArg2, foldFlags);
             break;
     }
 }

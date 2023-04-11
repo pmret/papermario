@@ -289,10 +289,10 @@ void func_8013A4D0(void) {
 
     for (i = 1; i < ARRAY_COUNT(*ImgfxInstances); i++) {
         if ((*ImgfxInstances)[i].flags & IMGFX_FLAG_IN_USE && (*ImgfxInstances)[i].colorBuf != NULL) {
-            if ((*ImgfxInstances)[i].lastColorCmd == IMGFX_COLOR_BUF_SET_B) {
+            if ((*ImgfxInstances)[i].lastColorCmd == IMGFX_COLOR_BUF_SET_MULTIPLY) {
                 continue;
             }
-            if ((*ImgfxInstances)[i].lastColorCmd == IMGFX_COLOR_BUF_SET_C) {
+            if ((*ImgfxInstances)[i].lastColorCmd == IMGFX_COLOR_BUF_SET_MODULATE) {
                 continue;
             }
             general_heap_free((*ImgfxInstances)[i].colorBuf);
@@ -636,7 +636,7 @@ void imgfx_update(u32 idx, ImgfxType type, s32 foldArg1, s32 foldArg2, s32 foldA
                 state->renderType = IMGFX_RENDER_MODULATE_PRIM_RGBA;
             }
             break;
-        case IMGFX_COLOR_BUF_SET_B:
+        case IMGFX_COLOR_BUF_SET_MULTIPLY:
             if (foldArg1 < state->colorBufCount) {
                 // unpack and store color
                 r = (foldArg2 & 0xFF000000) >> 24;
@@ -657,7 +657,7 @@ void imgfx_update(u32 idx, ImgfxType type, s32 foldArg1, s32 foldArg2, s32 foldA
                 }
             }
             break;
-        case IMGFX_COLOR_BUF_SET_C:
+        case IMGFX_COLOR_BUF_SET_MODULATE:
             if (foldArg1 < state->colorBufCount) {
                 // unpack and store color
                 r = (foldArg2 & 0xFF000000) >> 24;
@@ -793,8 +793,8 @@ void imgfx_make_mesh(ImgfxState* state) {
     }
 
     switch (state->lastColorCmd) {
-        case IMGFX_COLOR_BUF_SET_B:
-        case IMGFX_COLOR_BUF_SET_C:
+        case IMGFX_COLOR_BUF_SET_MULTIPLY:
+        case IMGFX_COLOR_BUF_SET_MODULATE:
             imgfx_mesh_load_colors(state);
             break;
     }

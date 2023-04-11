@@ -3336,7 +3336,7 @@ ApiStatus EnableActorGlow(Evt* script, s32 isInitialCall) {
 
         while (it != NULL) {
             if (it->idleAnimations != NULL) {
-                func_802DE894(it->spriteInstanceID, IMGFX_CLEAR, 0, 0, 0, 0, 0);
+                set_npc_all_imgfx(it->spriteInstanceID, IMGFX_CLEAR, 0, 0, 0, 0, 0);
             }
             it = it->nextPart;
         }
