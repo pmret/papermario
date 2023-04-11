@@ -2358,7 +2358,7 @@ typedef struct SpriteShadingProfile {
     /* 0xAF */ u8 ambientPower; // ?
 } SpriteShadingProfile; // size = 0xB0
 
-typedef struct UnkFoldStruct {
+typedef struct UnkImgfxStruct {
     /* 0x00 */ IMG_PTR raster;
     /* 0x04 */ PAL_PTR palette;
     /* 0x08 */ u16 width;
@@ -2366,9 +2366,9 @@ typedef struct UnkFoldStruct {
     /* 0x0C */ s32 offsetX;
     /* 0x10 */ s32 offsetY;
     /* 0x14 */ Gfx* displayList;
-} UnkFoldStruct; // size = 0x18
+} UnkImgfxStruct; // size = 0x18
 
-typedef struct FoldImageRecPart {
+typedef struct ImgfxImageRecPart {
     /* 0x00 */ IMG_PTR raster;
     /* 0x04 */ PAL_PTR palette;
     /* 0x08 */ u16 width;
@@ -2378,9 +2378,9 @@ typedef struct FoldImageRecPart {
     /* 0x10 */ u8 opacity; // alpha?
     /* 0x11 */ char unk_11[3];
     /* 0x14 */ Gfx* dlist;
-} FoldImageRecPart; // size = 0x18
+} ImgfxImageRecPart; // size = 0x18
 
-typedef struct FoldImageRec {
+typedef struct ImgfxImageRec {
     /* 0x00 */ IMG_PTR raster;
     /* 0x04 */ PAL_PTR palette;
     /* 0x08 */ u16 width;
@@ -2394,7 +2394,7 @@ typedef struct FoldImageRec {
     /* 0x1E */ s16 unk_1E;
     /* 0x20 */ char unk_20[0x4];
     /* 0x24 */ u8 alphaMultiplier;
-} FoldImageRec; // size = 0x25
+} ImgfxImageRec; // size = 0x25
 
 typedef struct SongUpdateEvent {
     /* 0x00 */ s32 songName;

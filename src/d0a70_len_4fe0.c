@@ -7,7 +7,7 @@
 extern Addr imgfx_gfx_data_ROM_START;
 #endif
 
-typedef union FoldIntVars {
+typedef union ImgfxIntVars {
     s32 raw[2][4];
     struct {
         s32 anim[4];
@@ -39,12 +39,12 @@ typedef union FoldIntVars {
     } hologram;
     struct {
         char unk_00[0x10];
-        UnkFoldStruct* pattern;
+        UnkImgfxStruct* pattern;
         s32 alpha;
     } overlay;
-} FoldIntVars;
+} ImgfxIntVars;
 
-typedef union FoldFloatVars {
+typedef union ImgfxFloatVars {
     f32 raw[2][4];
     // type-specific anim state (sharing first 0x10 bytes)
     struct {
@@ -62,9 +62,9 @@ typedef union FoldFloatVars {
         f32 posX;
         f32 posY;
     } overlay;
-} FoldFloatVars;
+} ImgfxFloatVars;
 
-typedef struct FoldState {
+typedef struct ImgfxState {
     /* 0x00 */ u8 arrayIdx;
     /* 0x01 */ u8 meshType;
     /* 0x02 */ u8 renderType;
@@ -80,8 +80,8 @@ typedef struct FoldState {
     /* 0x10 */ s16 unk_10;
     /* 0x14 */ s32 flags;
     /* 0x18 */ char unk_18[0x4];
-    /* 0x1C */ FoldIntVars ints;
-    /* 0x3C */ FoldFloatVars floats;
+    /* 0x1C */ ImgfxIntVars ints;
+    /* 0x3C */ ImgfxFloatVars floats;
     /* 0x5C */ Color_RGBA8* colorBuf;
     /* 0x60 */ u16 colorBufCount;
     /* 0x62 */ char unk_62[0x2];
@@ -89,63 +89,63 @@ typedef struct FoldState {
     /* 0x68 */ Vtx* vtxBufs[2];
     /* 0x70 */ Gfx* gfxBufs[2];
     /* 0x78 */ s32 otherModeL;
-} FoldState; // size = 0x7C
+} ImgfxState; // size = 0x7C
 
-typedef struct FoldDataCache {
+typedef struct ImgfxCacheEntry {
     /* 0x00 */ s32* data;
     /* 0x04 */ u8 staleCooldownTimer;
     /* 0x05 */ u8 usingContextualHeap;
     /* 0x06 */ char unk_06[0x2];
-} FoldDataCache; // size = 0x8
+} ImgfxCacheEntry; // size = 0x8
 
-typedef struct FoldAnimHeader {
+typedef struct ImgfxAnimHeader {
     /* 0x00 */ s32 keyframesOffset;
     /* 0x04 */ Gfx* gfxOffset; // Gfx for creating mesh from vertices
     /* 0x08 */ u16 vtxCount; // conserved across keyframes
     /* 0x0A */ u16 gfxCount;
     /* 0x0C */ u16 keyframesCount;
     /* 0x0E */ u16 flags;
-} FoldAnimHeader; // size = 0x10
+} ImgfxAnimHeader; // size = 0x10
 
-enum FoldAnimFlags {
+enum ImgfxAnimFlags {
     IMGFX_ANIM_FLAG_ABSOLUTE_COORDS  = 1, // image-relative (in percent) when unset
 };
 
-typedef struct FoldRenderMode {
+typedef struct ImgfxRenderMode {
     /* 0x0 */ s32 mode1;
     /* 0x4 */ s32 mode2;
     /* 0x8 */ u8 flags; // only checks TRUE so far. some kind of switch?
-} FoldRenderMode; // size = 0xC
+} ImgfxRenderMode; // size = 0xC
 
 // 'compressed' vertex data for animated fold keyframes
-typedef struct FoldVtx {
+typedef struct ImgfxVtx {
     /* 0x00 */ s16 ob[3];
     /* 0x06 */ u8 tc[2];
     /* 0x08 */ s8 cn[3];
     /* 0x0B */ char unk_0B;
-} FoldVtx; // size = 0x0C
+} ImgfxVtx; // size = 0x0C
 
-typedef FoldState FoldStateList[MAX_IMGFX_STATES];
+typedef ImgfxState ImgfxInstanceList[MAX_IMGFX_STATES];
 
 extern HeapNode heap_spriteHead;
 
 // BSS
-extern FoldImageRec D_80156920;
-extern Vtx* D_80156948[2];
+extern ImgfxImageRec D_80156920;
+extern Vtx* ImgfxVtxBuffers[2];
 extern Vtx* imgfx_vtxBuf;
-extern FoldStateList* D_80156954;
+extern ImgfxInstanceList* ImgfxInstances;
 extern s8 D_80156958[2];
 extern s32 D_80156960[2];
 extern s32 D_80156968[2];
 extern s8 D_80156970;
-extern FoldAnimHeader FoldAnimHeaders[4];
+extern ImgfxAnimHeader ImgfxAnimHeaders[4];
 
 // Data
-FoldImageRec* imgfx_currentImage = &D_80156920;
+ImgfxImageRec* imgfx_currentImage = &D_80156920;
 
 u16 imgfx_vtxCount = 0;
 
-Lights2 FoldLights = gdSPDefLights2(144, 144, 144, 255, 255, 255, 0, 0, 120, 255, 255, 255, 0, 0, 136);
+Lights2 ImgfxLights = gdSPDefLights2(144, 144, 144, 255, 255, 255, 0, 0, 120, 255, 255, 255, 0, 0, 136);
 
 Vp D_8014EE40 = {
     .vp = {
@@ -161,9 +161,9 @@ Vp D_8014EE50 = {
     }
 };
 
-u16 FoldVtxBufferCapacity = 300;
+u16 ImgfxVtxBufferCapacity = 300;
 
-Gfx DefaultFoldSetupGfx[] = {
+Gfx DefaultImgfxSetupGfx[] = {
     gsSPClearGeometryMode(G_CULL_BOTH | G_LIGHTING),
     gsSPSetGeometryMode(G_ZBUFFER | G_SHADE | G_SHADING_SMOOTH),
     gsSPTexture(-1, -1, 0, G_TX_RENDERTILE, G_ON),
@@ -174,7 +174,7 @@ Gfx DefaultFoldSetupGfx[] = {
 };
 
 //TODO figure out bits
-FoldRenderMode ImgfxRenderModes[] = {
+ImgfxRenderMode ImgfxRenderModes[] = {
     [IMGFX_RENDER_DEFAULT]               { 0x00441208, 0x00111208, 0 },
     [IMGFX_RENDER_MULTIPLY_RGB]          { 0x00441208, 0x00111208, 0 },
     [IMGFX_RENDER_MULTIPLY_ALPHA]        { 0x00404B40, 0x00104B40, IMGFX_RENDER_NO_OVERRIDE },
@@ -218,41 +218,41 @@ s32 ImgfxAnimOffsets[] = {
     [IMGFX_ANIM_CYMBAL_CRUSH]          0xCA380,
 };
 
-extern FoldDataCache ImgfxDisplayListCache[8];
+extern ImgfxCacheEntry ImgfxDataCache[8];
 
-void imgfx_clear_state_gfx(FoldState* state);
-void imgfx_clear_state_data(FoldState* state);
-void imgfx_init_state(FoldState* state);
-void func_8013B0EC(FoldState* state);
-void func_8013B1B0(FoldState* state, Matrix4f mtx);
-void imgfx_mesh_make_strip(FoldState* state);
-void imgfx_mesh_make_grid(FoldState* state);
-//FoldAnimHeader* imgfx_load_anim(FoldState* state);
-void imgfx_mesh_anim_update(FoldState* state);
-void func_8013CFA8(FoldState*, Matrix4f mtx);
-void func_8013DAB4(FoldState*, Matrix4f mtx);
-void func_8013E2F0(FoldState*, Matrix4f mtx);
-void func_8013E904(FoldState*, Matrix4f mtx);
-void imgfx_wavy_init(FoldState* state);
-void imgfx_mesh_wavy_update(FoldState* state);
-void imgfx_mesh_load_colors(FoldState* state);
+void imgfx_clear_state_gfx(ImgfxState* state);
+void imgfx_clear_state_data(ImgfxState* state);
+void imgfx_init_state(ImgfxState* state);
+void func_8013B0EC(ImgfxState* state);
+void func_8013B1B0(ImgfxState* state, Matrix4f mtx);
+void imgfx_mesh_make_strip(ImgfxState* state);
+void imgfx_mesh_make_grid(ImgfxState* state);
+//ImgfxAnimHeader* imgfx_load_anim(ImgfxState* state);
+void imgfx_mesh_anim_update(ImgfxState* state);
+void func_8013CFA8(ImgfxState*, Matrix4f mtx);
+void func_8013DAB4(ImgfxState*, Matrix4f mtx);
+void func_8013E2F0(ImgfxState*, Matrix4f mtx);
+void func_8013E904(ImgfxState*, Matrix4f mtx);
+void imgfx_wavy_init(ImgfxState* state);
+void imgfx_mesh_wavy_update(ImgfxState* state);
+void imgfx_mesh_load_colors(ImgfxState* state);
 
 void imgfx_set_vtx_buf_capacity(s16 arg0) {
-    FoldVtxBufferCapacity = arg0;
+    ImgfxVtxBufferCapacity = arg0;
 }
 
 void imgfx_init(void) {
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(D_80156948); i++) {
-        D_80156948[i] = _heap_malloc(&heap_spriteHead, FoldVtxBufferCapacity * sizeof(Vtx));
+    for (i = 0; i < ARRAY_COUNT(ImgfxVtxBuffers); i++) {
+        ImgfxVtxBuffers[i] = _heap_malloc(&heap_spriteHead, ImgfxVtxBufferCapacity * sizeof(Vtx));
     }
 
-    D_80156954 = (FoldStateList*)_heap_malloc(&heap_spriteHead, ARRAY_COUNT(*D_80156954) * sizeof((*D_80156954)[0]));
+    ImgfxInstances = (ImgfxInstanceList*)_heap_malloc(&heap_spriteHead, sizeof(ImgfxInstanceList));
 
-    for (i = 0; i < ARRAY_COUNT(*D_80156954); i++) {
-        imgfx_init_state(&(*D_80156954)[i]);
-        imgfx_clear_state_data(&(*D_80156954)[i]);
+    for (i = 0; i < ARRAY_COUNT(*ImgfxInstances); i++) {
+        imgfx_init_state(&(*ImgfxInstances)[i]);
+        imgfx_clear_state_data(&(*ImgfxInstances)[i]);
     }
 
     for (i = 0; i < ARRAY_COUNT(D_80156958); i++) {
@@ -262,42 +262,42 @@ void imgfx_init(void) {
         D_80156970 = 0;
     }
 
-    for (i = 0; i < ARRAY_COUNT(ImgfxDisplayListCache); i++) {
-        ImgfxDisplayListCache[i].data = NULL;
-        ImgfxDisplayListCache[i].staleCooldownTimer = 0;
-        ImgfxDisplayListCache[i].usingContextualHeap = FALSE;
+    for (i = 0; i < ARRAY_COUNT(ImgfxDataCache); i++) {
+        ImgfxDataCache[i].data = NULL;
+        ImgfxDataCache[i].staleCooldownTimer = 0;
+        ImgfxDataCache[i].usingContextualHeap = FALSE;
     }
 
     imgfx_vtxCount = 0;
-    imgfx_vtxBuf = D_80156948[gCurrentDisplayContextIndex];
+    imgfx_vtxBuf = ImgfxVtxBuffers[gCurrentDisplayContextIndex];
 }
 
 void func_8013A4D0(void) {
     s32 i;
 
-    imgfx_vtxBuf = D_80156948[gCurrentDisplayContextIndex];
+    imgfx_vtxBuf = ImgfxVtxBuffers[gCurrentDisplayContextIndex];
     imgfx_vtxCount = 0;
-    imgfx_init_state(&(*D_80156954)[0]);
+    imgfx_init_state(&(*ImgfxInstances)[0]);
 
-    (*D_80156954)[0].flags |= IMGFX_STATE_FLAG_ENABLED;
+    (*ImgfxInstances)[0].flags |= IMGFX_STATE_FLAG_ENABLED;
 
-    for (i = 1; i < ARRAY_COUNT(*D_80156954); i++) {
-        if (((*D_80156954)[i].flags & IMGFX_STATE_FLAG_ENABLED) && (*D_80156954)[i].lastAnimCmd != IMGFX_UPD_SET_ANIM) {
-            imgfx_clear_state_gfx(&(*D_80156954)[i]);
+    for (i = 1; i < ARRAY_COUNT(*ImgfxInstances); i++) {
+        if (((*ImgfxInstances)[i].flags & IMGFX_STATE_FLAG_ENABLED) && (*ImgfxInstances)[i].lastAnimCmd != IMGFX_UPD_SET_ANIM) {
+            imgfx_clear_state_gfx(&(*ImgfxInstances)[i]);
         }
     }
 
-    for (i = 1; i < ARRAY_COUNT(*D_80156954); i++) {
-        if ((*D_80156954)[i].flags & IMGFX_STATE_FLAG_ENABLED && (*D_80156954)[i].colorBuf != NULL) {
-            if ((*D_80156954)[i].lastColorCmd == IMGFX_UPD_COLOR_BUF_SET_B) {
+    for (i = 1; i < ARRAY_COUNT(*ImgfxInstances); i++) {
+        if ((*ImgfxInstances)[i].flags & IMGFX_STATE_FLAG_ENABLED && (*ImgfxInstances)[i].colorBuf != NULL) {
+            if ((*ImgfxInstances)[i].lastColorCmd == IMGFX_UPD_COLOR_BUF_SET_B) {
                 continue;
             }
-            if ((*D_80156954)[i].lastColorCmd == IMGFX_UPD_COLOR_BUF_SET_C) {
+            if ((*ImgfxInstances)[i].lastColorCmd == IMGFX_UPD_COLOR_BUF_SET_C) {
                 continue;
             }
-            general_heap_free((*D_80156954)[i].colorBuf);
-            (*D_80156954)[i].colorBuf = NULL;
-            (*D_80156954)[i].colorBufCount = 0;
+            general_heap_free((*ImgfxInstances)[i].colorBuf);
+            (*ImgfxInstances)[i].colorBuf = NULL;
+            (*ImgfxInstances)[i].colorBufCount = 0;
         }
     }
 }
@@ -305,11 +305,11 @@ void func_8013A4D0(void) {
 void imgfx_add_to_gfx_cache(void* data, s8 usingContextualHeap) {
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(ImgfxDisplayListCache); i++) {
-        if (ImgfxDisplayListCache[i].data == NULL) {
-            ImgfxDisplayListCache[i].data = data;
-            ImgfxDisplayListCache[i].staleCooldownTimer = 4;
-            ImgfxDisplayListCache[i].usingContextualHeap = usingContextualHeap;
+    for (i = 0; i < ARRAY_COUNT(ImgfxDataCache); i++) {
+        if (ImgfxDataCache[i].data == NULL) {
+            ImgfxDataCache[i].data = data;
+            ImgfxDataCache[i].staleCooldownTimer = 4;
+            ImgfxDataCache[i].usingContextualHeap = usingContextualHeap;
             return;
         }
     }
@@ -318,21 +318,21 @@ void imgfx_add_to_gfx_cache(void* data, s8 usingContextualHeap) {
 void imgfx_update_gfx_cache(void) {
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(ImgfxDisplayListCache); i++) {
-        if (ImgfxDisplayListCache[i].data != NULL) {
-            ImgfxDisplayListCache[i].staleCooldownTimer--;
+    for (i = 0; i < ARRAY_COUNT(ImgfxDataCache); i++) {
+        if (ImgfxDataCache[i].data != NULL) {
+            ImgfxDataCache[i].staleCooldownTimer--;
 
-            if (ImgfxDisplayListCache[i].staleCooldownTimer == 0) {
-                if (ImgfxDisplayListCache[i].usingContextualHeap) {
-                    heap_free(ImgfxDisplayListCache[i].data);
-                    ImgfxDisplayListCache[i].data = NULL;
+            if (ImgfxDataCache[i].staleCooldownTimer == 0) {
+                if (ImgfxDataCache[i].usingContextualHeap) {
+                    heap_free(ImgfxDataCache[i].data);
+                    ImgfxDataCache[i].data = NULL;
                 } else {
-                    general_heap_free(ImgfxDisplayListCache[i].data);
-                    ImgfxDisplayListCache[i].data = NULL;
+                    general_heap_free(ImgfxDataCache[i].data);
+                    ImgfxDataCache[i].data = NULL;
                 }
 
-                ImgfxDisplayListCache[i].staleCooldownTimer = 0;
-                ImgfxDisplayListCache[i].usingContextualHeap = FALSE;
+                ImgfxDataCache[i].staleCooldownTimer = 0;
+                ImgfxDataCache[i].usingContextualHeap = FALSE;
             }
         }
     }
@@ -350,8 +350,8 @@ s32 func_8013A704(s32 arg0) {
     s32 i;
 
     count = 0;
-    for (i = 1; i < ARRAY_COUNT(*D_80156954); i++) {
-        if (!((*D_80156954)[i].flags & IMGFX_STATE_FLAG_ENABLED)) {
+    for (i = 1; i < ARRAY_COUNT(*ImgfxInstances); i++) {
+        if (!((*ImgfxInstances)[i].flags & IMGFX_STATE_FLAG_ENABLED)) {
             count++;
         }
     }
@@ -364,22 +364,22 @@ s32 func_8013A704(s32 arg0) {
     cond = FALSE;
     count = 0;
     iPrev = -1;
-    for (i = 1; i < ARRAY_COUNT(*D_80156954); i++) {
-        if (!((*D_80156954)[i].flags & IMGFX_STATE_FLAG_ENABLED)) {
+    for (i = 1; i < ARRAY_COUNT(*ImgfxInstances); i++) {
+        if (!((*ImgfxInstances)[i].flags & IMGFX_STATE_FLAG_ENABLED)) {
             if (!cond) {
                 ret = i;
                 cond = TRUE;
             } else {
-                (*D_80156954)[iPrev].unk_10 = i;
+                (*ImgfxInstances)[iPrev].unk_10 = i;
             }
 
-            (*D_80156954)[i].arrayIdx = i;
-            imgfx_init_state(&(*D_80156954)[i]);
+            (*ImgfxInstances)[i].arrayIdx = i;
+            imgfx_init_state(&(*ImgfxInstances)[i]);
             count++;
-            (*D_80156954)[i].flags |= IMGFX_STATE_FLAG_ENABLED;
+            (*ImgfxInstances)[i].flags |= IMGFX_STATE_FLAG_ENABLED;
             iPrev = i;
             if (count == arg0) {
-                (*D_80156954)[i].unk_10 = -1;
+                (*ImgfxInstances)[i].unk_10 = -1;
                 break;
             }
         }
@@ -390,8 +390,8 @@ s32 func_8013A704(s32 arg0) {
 
 void func_8013A854(u32 idx) {
     if (idx < MAX_IMGFX_STATES) {
-        (*D_80156954)[idx].flags = 0;
-        (*D_80156954)[idx].unk_10 = -1;
+        (*ImgfxInstances)[idx].flags = 0;
+        (*ImgfxInstances)[idx].unk_10 = -1;
     }
 }
 
@@ -400,7 +400,7 @@ void func_8013A888(u32 idx) {
         s32 temp_s0;
 
         do {
-            temp_s0 = (*D_80156954)[idx].unk_10;
+            temp_s0 = (*ImgfxInstances)[idx].unk_10;
             func_8013A854(idx);
             idx = temp_s0;
         } while (temp_s0 != -1);
@@ -415,15 +415,15 @@ s16 func_8013A8E0(s32 idx) {
     if (idx >= MAX_IMGFX_STATES) {
         return 0xFF;
     } else {
-        return (*D_80156954)[idx].unk_10;
+        return (*ImgfxInstances)[idx].unk_10;
     }
 }
 
-FoldState* imgfx_get_state(s32 idx) {
-    return &(*D_80156954)[idx];
+ImgfxState* imgfx_get_state(s32 idx) {
+    return &(*ImgfxInstances)[idx];
 }
 
-void imgfx_clear_state_gfx(FoldState* state) {
+void imgfx_clear_state_gfx(ImgfxState* state) {
     if (state->curAnimOffset != NULL) {
         state->curAnimOffset = NULL;
     }
@@ -445,7 +445,7 @@ void imgfx_clear_state_gfx(FoldState* state) {
     }
 }
 
-void imgfx_clear_state_data(FoldState* state) {
+void imgfx_clear_state_data(ImgfxState* state) {
     state->curAnimOffset = NULL;
     state->vtxBufs[0] = NULL;
     state->vtxBufs[1] = NULL;
@@ -455,7 +455,7 @@ void imgfx_clear_state_data(FoldState* state) {
     state->colorBufCount = 0;
 }
 
-void imgfx_init_state(FoldState* state) {
+void imgfx_init_state(ImgfxState* state) {
     s32 i;
     s32 j;
 
@@ -489,8 +489,8 @@ void imgfx_init_state(FoldState* state) {
     }
 }
 
-void imgfx_update(u32 idx, FoldType type, s32 foldArg1, s32 foldArg2, s32 foldArg3, s32 foldArg4, s32 flags) {
-    FoldState* state = &(*D_80156954)[idx];
+void imgfx_update(u32 idx, ImgfxType type, s32 foldArg1, s32 foldArg2, s32 foldArg3, s32 foldArg4, s32 flags) {
+    ImgfxState* state = &(*ImgfxInstances)[idx];
     s32 oldFlags;
     s32 t1;
     u8 r, g, b, a;
@@ -696,17 +696,17 @@ void imgfx_update(u32 idx, FoldType type, s32 foldArg1, s32 foldArg2, s32 foldAr
 }
 
 void imgfx_set_state_flags(s32 idx, u16 flagBits, s32 mode) {
-    if ((*D_80156954)[idx].flags & IMGFX_STATE_FLAG_ENABLED) {
+    if ((*ImgfxInstances)[idx].flags & IMGFX_STATE_FLAG_ENABLED) {
         if (mode) {
-            (*D_80156954)[idx].flags |= flagBits;
+            (*ImgfxInstances)[idx].flags |= flagBits;
         } else {
-            (*D_80156954)[idx].flags &= ~flagBits;
+            (*ImgfxInstances)[idx].flags &= ~flagBits;
         }
     }
 }
 
-s32 imgfx_appendGfx_component(s32 idx, FoldImageRecPart* image, u32 flagBits, Matrix4f mtx) {
-    FoldState* state = &(*D_80156954)[idx];
+s32 imgfx_appendGfx_component(s32 idx, ImgfxImageRecPart* image, u32 flagBits, Matrix4f mtx) {
+    ImgfxState* state = &(*ImgfxInstances)[idx];
     s32 ret = 0;
 
     if (image->opacity == 0) {
@@ -760,7 +760,7 @@ s32 imgfx_appendGfx_component(s32 idx, FoldImageRecPart* image, u32 flagBits, Ma
     return ret;
 }
 
-void func_8013B0EC(FoldState* state) {
+void func_8013B0EC(ImgfxState* state) {
     switch (state->meshType) {
         case IMGFX_MESH_GRID_UNUSED:
             if (state->ints.raw[1][2] == 0) {
@@ -797,14 +797,14 @@ void func_8013B0EC(FoldState* state) {
     }
 }
 
-void func_8013B1B0(FoldState* state, Matrix4f mtx) {
+void func_8013B1B0(ImgfxState* state, Matrix4f mtx) {
     s16 skipModeChange = FALSE;
     s32 primAlpha = state->ints.color.a;
     s32 renderType = state->renderType;
     s8 angle1;
     s8 angle2;
     f32 foldImgAlpha;
-    FoldRenderMode* renderMode;
+    ImgfxRenderMode* renderMode;
     s32 mode1;
     s32 mode2;
     s32 dirX1;
@@ -813,7 +813,7 @@ void func_8013B1B0(FoldState* state, Matrix4f mtx) {
     gDPPipeSync(gMainGfxPos++);
 
     if (!(state->flags & IMGFX_STATE_FLAG_SKIP_GFX_SETUP)) {
-        gSPDisplayList(gMainGfxPos++, DefaultFoldSetupGfx);
+        gSPDisplayList(gMainGfxPos++, DefaultImgfxSetupGfx);
         if (state->flags & IMGFX_STATE_FLAG_NO_FILTERING) {
             gDPSetTextureFilter(gMainGfxPos++, G_TF_POINT);
         }
@@ -981,11 +981,11 @@ void func_8013B1B0(FoldState* state, Matrix4f mtx) {
                     angle2 = cosine(currentCam->currentYaw + 90.0f) * 120.0f;
                     dirX1 = -angle1;
                     dirZ2 = -angle2;
-                    FoldLights.l[0].l.dir[0] = dirX1;
-                    FoldLights.l[1].l.dir[0] = angle1;
-                    FoldLights.l[0].l.dir[2] = angle2;
-                    FoldLights.l[1].l.dir[2] = dirZ2;
-                    gSPSetLights2(gMainGfxPos++, FoldLights);
+                    ImgfxLights.l[0].l.dir[0] = dirX1;
+                    ImgfxLights.l[1].l.dir[0] = angle1;
+                    ImgfxLights.l[0].l.dir[2] = angle2;
+                    ImgfxLights.l[1].l.dir[2] = dirZ2;
+                    gSPSetLights2(gMainGfxPos++, ImgfxLights);
                     break;
                 }
                 gDPSetCombineMode(gMainGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
@@ -1082,7 +1082,7 @@ void func_8013B1B0(FoldState* state, Matrix4f mtx) {
     }
 }
 
-void imgfx_mesh_make_strip(FoldState* state) {
+void imgfx_mesh_make_strip(ImgfxState* state) {
     s32 offsetY;
     s32 offsetX;
     s32 stepY;
@@ -1164,7 +1164,7 @@ void imgfx_mesh_make_strip(FoldState* state) {
     state->subdivY = ((state->lastVtxIdx - state->firstVtxIdx) - 1) / 2;
 }
 
-void imgfx_mesh_make_grid(FoldState* state) {
+void imgfx_mesh_make_grid(ImgfxState* state) {
     f32 divSizeX;
     f32 divSizeY;
     f32 posX;
@@ -1211,9 +1211,9 @@ void imgfx_mesh_make_grid(FoldState* state) {
     state->lastVtxIdx = imgfx_vtxCount - 1;
 }
 
-FoldAnimHeader* imgfx_load_anim(FoldState* state) {
+ImgfxAnimHeader* imgfx_load_anim(ImgfxState* state) {
     u8* romStart = ImgfxAnimOffsets[state->ints.anim.type] + imgfx_gfx_data_ROM_START;
-    FoldAnimHeader* anim = &FoldAnimHeaders[state->arrayIdx];
+    ImgfxAnimHeader* anim = &ImgfxAnimHeaders[state->arrayIdx];
 
     if (state->curAnimOffset != romStart) {
         u8* romEnd;
@@ -1265,8 +1265,8 @@ FoldAnimHeader* imgfx_load_anim(FoldState* state) {
 
                 // If this command is a vertex command, adjust the vertex buffer address
                 if (cmd == G_VTX) {
-                    // FoldVtx structs are 0xC bytes while Vtx are 0x10, so we need a (4/3) scaling factor
-                    // to compute a new, equivalent Vtx[i] address for an existing FoldVtx[i] address.
+                    // ImgfxVtx structs are 0xC bytes while Vtx are 0x10, so we need a (4/3) scaling factor
+                    // to compute a new, equivalent Vtx[i] address for an existing ImgfxVtx[i] address.
                     // Unfortunately, using sizeof here does not match.
                     gfxBuffer[j-1].words.w1 = ((((s32) gfxBuffer[j-1].words.w1 - anim->keyframesOffset) / 3) * 4) +
                                               (s32) state->vtxBufs[i];
@@ -1278,16 +1278,16 @@ FoldAnimHeader* imgfx_load_anim(FoldState* state) {
     return anim;
 }
 
-void imgfx_mesh_anim_update(FoldState* state) {
+void imgfx_mesh_anim_update(ImgfxState* state) {
     s32 absKeyframeInterval;
     s32 nextKeyIdx;
     s32 curKeyIdx;
-    FoldVtx* curKeyframe = NULL;
-    FoldVtx* nextKeyframe = NULL;
+    ImgfxVtx* curKeyframe = NULL;
+    ImgfxVtx* nextKeyframe = NULL;
     s32 keyframeInterval = state->ints.anim.interval;
     s32 animStep = state->ints.anim.step;
     s32 curSubframe = state->floats.anim.curFrame;
-    FoldAnimHeader* header = imgfx_load_anim(state);
+    ImgfxAnimHeader* header = imgfx_load_anim(state);
     u8* romStart;
     f32 lerpAlpha;
     s32 i;
@@ -1327,13 +1327,13 @@ void imgfx_mesh_anim_update(FoldState* state) {
     }
 
     // find the current + next keyframe vertex data
-    curKeyframe = heap_malloc(header->vtxCount * sizeof(FoldVtx));
-    romStart = (u8*)((s32)imgfx_gfx_data_ROM_START + header->keyframesOffset + curKeyIdx * header->vtxCount * sizeof(FoldVtx));
-    dma_copy(romStart, romStart + header->vtxCount * sizeof(FoldVtx), curKeyframe);
+    curKeyframe = heap_malloc(header->vtxCount * sizeof(ImgfxVtx));
+    romStart = (u8*)((s32)imgfx_gfx_data_ROM_START + header->keyframesOffset + curKeyIdx * header->vtxCount * sizeof(ImgfxVtx));
+    dma_copy(romStart, romStart + header->vtxCount * sizeof(ImgfxVtx), curKeyframe);
     if (keyframeInterval > 1) {
         nextKeyframe = heap_malloc(header->vtxCount * sizeof(*nextKeyframe));
-        romStart = (u8*)((s32)imgfx_gfx_data_ROM_START + header->keyframesOffset + nextKeyIdx * header->vtxCount * sizeof(FoldVtx));
-        dma_copy(romStart, romStart + header->vtxCount * sizeof(FoldVtx), nextKeyframe);
+        romStart = (u8*)((s32)imgfx_gfx_data_ROM_START + header->keyframesOffset + nextKeyIdx * header->vtxCount * sizeof(ImgfxVtx));
+        dma_copy(romStart, romStart + header->vtxCount * sizeof(ImgfxVtx), nextKeyframe);
     }
 
     lerpAlpha = (f32) curSubframe / (f32) keyframeInterval;
@@ -1477,7 +1477,7 @@ void imgfx_mesh_anim_update(FoldState* state) {
     state->floats.anim.curIdx = curKeyIdx;
 }
 
-void func_8013CFA8(FoldState* state, Matrix4f mtx) {
+void func_8013CFA8(ImgfxState* state, Matrix4f mtx) {
     s32 i;
 
     if (!(state->flags & IMGFX_STATE_FLAG_SKIP_TEX_SETUP)) {
@@ -1516,7 +1516,7 @@ void func_8013CFA8(FoldState* state, Matrix4f mtx) {
                     8, 8, // mask
                     G_TX_NOLOD, G_TX_NOLOD, // shift,
                     0x100, 0x100); // scroll
-                gDPSetTile(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0x0100, 2, 0,
+                gDPSetTile(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0x100, 2, 0,
                             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP,
                             G_TX_NOMASK, G_TX_NOLOD);
                 gDPSetTileSize(gMainGfxPos++, 2, 0, 0, 252, 0);
@@ -1534,7 +1534,7 @@ void func_8013CFA8(FoldState* state, Matrix4f mtx) {
                         break;
                 }
 
-                if ((gSpriteShadingProfile->flags & 2) && (D_80156954[0][0].arrayIdx != 0) && (state->flags & someFlags)) {
+                if ((gSpriteShadingProfile->flags & 2) && ((*ImgfxInstances)[0].arrayIdx != 0) && (state->flags & someFlags)) {
                     cam = &gCameras[gCurrentCamID];
 
                     if (gGameStatusPtr->isBattle == 2) {
@@ -1627,7 +1627,7 @@ void func_8013CFA8(FoldState* state, Matrix4f mtx) {
             }
         }
 
-        if ((gSpriteShadingProfile->flags & 2) && D_80156954[0][0].arrayIdx != 0 && (state->flags & someFlags)) {
+        if ((gSpriteShadingProfile->flags & 2) && (*ImgfxInstances)[0].arrayIdx != 0 && (state->flags & someFlags)) {
             cam = &gCameras[gCurrentCamID];
             if (gGameStatusPtr->isBattle == 2) {
                 gSPViewport(gMainGfxPos++, &D_8014EE40);
@@ -1649,7 +1649,7 @@ void func_8013CFA8(FoldState* state, Matrix4f mtx) {
     }
 }
 
-void func_8013DAB4(FoldState* state, Matrix4f mtx) {
+void func_8013DAB4(ImgfxState* state, Matrix4f mtx) {
     s32 i, j;
     s32 firstVtxIdx;
 
@@ -1667,7 +1667,7 @@ void func_8013DAB4(FoldState* state, Matrix4f mtx) {
             s32 lrIdx = firstVtxIdx + (i + 1) * (state->subdivX + 1) + j + 1;
             if (!(state->flags & IMGFX_STATE_FLAG_SKIP_TEX_SETUP)) {
                 if ((gSpriteShadingProfile->flags & 1) &&
-                    (*D_80156954)[0].arrayIdx != 0 &&
+                    (*ImgfxInstances)[0].arrayIdx != 0 &&
                     (state->flags & (IMGFX_STATE_FLAG_100000 | IMGFX_STATE_FLAG_80000)) &&
                     (state->renderType == IMGFX_RENDER_DEFAULT
                     || state->renderType == IMGFX_RENDER_MULTIPLY_ALPHA
@@ -1724,7 +1724,7 @@ void func_8013DAB4(FoldState* state, Matrix4f mtx) {
     }
 }
 
-void func_8013E2F0(FoldState* state, Matrix4f mtx) {
+void func_8013E2F0(ImgfxState* state, Matrix4f mtx) {
     if (state->vtxBufs[gCurrentDisplayContextIndex] == NULL || state->gfxBufs[gCurrentDisplayContextIndex] == NULL) {
         return;
     }
@@ -1778,8 +1778,8 @@ void func_8013E2F0(FoldState* state, Matrix4f mtx) {
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
 
-void func_8013E904(FoldState* state, Matrix4f mtx) {
-    UnkFoldStruct* ufs = state->ints.overlay.pattern;
+void func_8013E904(ImgfxState* state, Matrix4f mtx) {
+    UnkImgfxStruct* ufs = state->ints.overlay.pattern;
     s32 shifts = integer_log(ufs->width, 2);
     s32 shiftt = integer_log(ufs->height, 2);
     s32 uls, ult;
@@ -1815,13 +1815,13 @@ void func_8013E904(FoldState* state, Matrix4f mtx) {
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
 
-void imgfx_wavy_init(FoldState* state) {
+void imgfx_wavy_init(ImgfxState* state) {
     state->floats.wavy.phase1 = 0.0f;
     state->floats.wavy.phase2 = 50.0f;
     state->floats.wavy.phase3 = 30.0f;
 }
 
-void imgfx_mesh_wavy_update(FoldState* state) {
+void imgfx_mesh_wavy_update(ImgfxState* state) {
     Vtx* v1;
     Vtx* v2;
     Vtx* v3;
@@ -1900,7 +1900,7 @@ void imgfx_mesh_wavy_update(FoldState* state) {
     }
 }
 
-void imgfx_mesh_load_colors(FoldState* state) {
+void imgfx_mesh_load_colors(ImgfxState* state) {
     f32 alpha = (f32)imgfx_currentImage->alphaMultiplier / 255.0;
     s32 vtxCount = state->lastVtxIdx - state->firstVtxIdx;
     s32 i;

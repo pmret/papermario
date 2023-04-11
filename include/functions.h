@@ -793,8 +793,8 @@ s32 create_worker_world(WorldArgs, WorldArgs);
 
 void init_entity_models(void);
 f32 phys_get_spin_history(s32 lag, s32* x, s32* y, s32* z);
-void imgfx_update(u32, FoldType, s32, s32, s32, s32, s32);
-s32 imgfx_appendGfx_component(s32, FoldImageRecPart*, u32, Matrix4f);
+void imgfx_update(u32, ImgfxType, s32, s32, s32, s32, s32);
+s32 imgfx_appendGfx_component(s32, ImgfxImageRecPart*, u32, Matrix4f);
 void func_8013A6E8(void);
 s32 func_8013A704(s32);
 void free_worker(s32);

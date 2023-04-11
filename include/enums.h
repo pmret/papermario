@@ -5959,7 +5959,7 @@ enum NpcDropFlags {
     NPC_DROP_FLAG_80                = 0x80,
 };
 
-enum FoldStateFlags {
+enum ImgfxStateFlags {
     IMGFX_STATE_FLAG_ENABLED           = 0x00000001,
     IMGFX_STATE_FLAG_G_CULL_BACK       = 0x00000002,
     IMGFX_STATE_FLAG_G_CULL_FRONT      = 0x00000004,
@@ -5983,7 +5983,7 @@ enum FoldStateFlags {
     IMGFX_STATE_FLAG_100000            = 0x00100000,
 };
 
-typedef enum FoldType {
+typedef enum ImgfxType {
     IMGFX_UPD_CLEAR                    = 0x0,    // or IMGFX_UPD_INIT?
     IMGFX_TYPE_1                       = 0x1,    // unused?
     IMGFX_TYPE_2                       = 0x2,    // unused?
@@ -6002,9 +6002,9 @@ typedef enum FoldType {
     IMGFX_UPD_OVERLAY                  = 0xF,
     IMGFX_UPD_OVERLAY_XLU              = 0x10,   // unused?
     IMGFX_UPD_ALLOC_COLOR_BUF          = 0x11,   // args: count
-} FoldType;
+} ImgfxType;
 
-typedef enum FoldAnim {
+typedef enum ImgfxAnim {
     IMGFX_ANIM_SHOCK                   = 0x00, // used for Goombaria and Goompapa when Kammy drops the hammer block
     IMGFX_ANIM_SHIVER                  = 0x01, // used when Goombaria gives Mario a kiss
     IMGFX_ANIM_VERTICAL_PIPE_CURL      = 0x02, // vertical pipe curl
@@ -6025,9 +6025,9 @@ typedef enum FoldAnim {
     IMGFX_ANIM_FLIP_CARD_2             = 0x11, // merlee spell-casting card flip 2
     IMGFX_ANIM_FLIP_CARD_3             = 0x12, // merlee spell-casting card flip 3
     IMGFX_ANIM_CYMBAL_CRUSH            = 0x13, // used when Mario is crushed in a Cymbal Plant
-} FoldAnim;
+} ImgfxAnim;
 
-typedef enum FoldRenderType {
+typedef enum ImgfxRenderType {
     IMGFX_RENDER_DEFAULT               = 0x00,
     IMGFX_RENDER_MULTIPLY_RGB          = 0x01,
     IMGFX_RENDER_MULTIPLY_ALPHA        = 0x02,
@@ -6045,21 +6045,21 @@ typedef enum FoldRenderType {
     IMGFX_RENDER_OVERLAY_RGB           = 0x0E,
     IMGFX_RENDER_OVERLAY_RGBA          = 0x0F,
     IMGFX_RENDER_UNUSED                = 0x10,
-} FoldRenderType;
+} ImgfxRenderType;
 
-enum FoldRenderModeFlags {
+enum ImgfxRenderModeFlags {
     IMGFX_RENDER_NO_OVERRIDE      = 1,
 };
 
-typedef enum FoldMeshType {
+typedef enum ImgfxMeshType {
     IMGFX_MESH_DEFAULT                 = 0x0,
     IMGFX_MESH_GRID_WAVY               = 0x1,
     IMGFX_MESH_ANIMATED                = 0x2,
     IMGFX_MESH_GRID_UNUSED             = 0x3,
     IMGFX_MESH_STRIP                   = 0x4,
-} FoldMeshType;
+} ImgfxMeshType;
 
-enum FoldHologramTypes {
+enum ImgfxHologramTypes {
     IMGFX_HOLOGRAM_NOISE               = 0,
     IMGFX_HOLOGRAM_DITHER              = 1,
     IMGFX_HOLOGRAM_THRESHOLD           = 2,

@@ -244,7 +244,7 @@ void make_entity_model_mtx_flipZ(Matrix4f mtx) {
 void appendGfx_entity_model(EntityModel* model) {
     Matrix4f mtx;
     Matrix4f mtx2;
-    FoldImageRecPart foldImage;
+    ImgfxImageRecPart foldImage;
     Matrix4f foldMtx;
 
     gDisplayContext->matrixStack[gMatrixListPos] = model->transform;
@@ -551,7 +551,7 @@ void draw_entity_model_E(s32 modelIdx, Mtx* transformMtx) {
     EntityModel* model = (*gCurrentEntityModelList)[modelIdx & ~0x800];
     Matrix4f mtx;
     Matrix4f mtx2;
-    FoldImageRecPart foldImage;
+    ImgfxImageRecPart foldImage;
     Matrix4f foldMtx;
 
     if (model == NULL) {

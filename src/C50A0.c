@@ -660,7 +660,7 @@ void draw_coin_sparkles(ItemEntity* itemEntity) {
     Matrix4f sp58;
     Matrix4f sp98;
     Matrix4f spD8;
-    FoldImageRecPart foldImage;
+    ImgfxImageRecPart foldImage;
 
     x = D_80155D8C;
     y = D_80155D8E;

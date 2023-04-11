@@ -48,7 +48,7 @@ EvtScript N(EVS_NpcDefeat_Monstar) = {
 #include "world/area_sam/sam_05/monstar.pal.inc.c"
 #include "world/area_sam/sam_05/monstar.png.h"
 
-UnkFoldStruct N(MonstarDetailTexture) = {
+UnkImgfxStruct N(MonstarDetailTexture) = {
     .raster  = N(monstar_png),
     .palette = N(monstar_pal),
     .width   = N(monstar_png_width),

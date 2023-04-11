@@ -1417,7 +1417,7 @@ void render_hud_element(HudElement* hudElement) {
     Matrix4f sp1E0;
     Matrix4f sp220;
     Matrix4f sp260;
-    FoldImageRecPart sp2A0;
+    ImgfxImageRecPart sp2A0;
     f32 xScaleFactor, yScaleFactor;
     s32 height, width;
     HudTransform* transform;

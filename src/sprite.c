@@ -326,7 +326,7 @@ void spr_appendGfx_component(
 {
     Matrix4f mtxTransform;
     Matrix4f mtxTemp;
-    FoldImageRecPart foldImg;
+    ImgfxImageRecPart foldImg;
     s32 quadIndex;
     Quad* quad;
     s32 width;
@@ -973,7 +973,7 @@ s32 func_802DDEC4(s32 spriteIdx) {
     return spr_playerCurrentAnimInfo[spriteIdx].notifyValue;
 }
 
-void spr_set_player_imgfx_update_comp(s32 spriteIdx, s32 compIdx, FoldType foldType, s32 foldArg1, s32 foldArg2, s32 foldArg3, s32 foldArg4, s32 flags) {
+void spr_set_player_imgfx_update_comp(s32 spriteIdx, s32 compIdx, ImgfxType foldType, s32 foldArg1, s32 foldArg2, s32 foldArg3, s32 foldArg4, s32 flags) {
     SpriteComponent* component;
     SpriteComponent** componentListIt;
     s32 i;
@@ -999,7 +999,7 @@ void spr_set_player_imgfx_update_comp(s32 spriteIdx, s32 compIdx, FoldType foldT
 }
 
 // applied to all components
-void spr_set_player_imgfx_update_all(s32 animID, FoldType foldType, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+void spr_set_player_imgfx_update_all(s32 animID, ImgfxType foldType, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
     spr_set_player_imgfx_update_comp(PLAYER_SPRITE_MAIN, -1, foldType, arg2, arg3, arg4, arg5, arg6);
 }
 
@@ -1229,7 +1229,7 @@ s32 func_802DE748(s32 spriteIdx, s32 compIdx) {
     }
 }
 
-void func_802DE780(s32 spriteIdx, s32 compIdx, FoldType foldType, s32 foldArg1, s32 foldArg2, s32 foldArg3, s32 foldArg4, s32 foldArg5) {
+void func_802DE780(s32 spriteIdx, s32 compIdx, ImgfxType foldType, s32 foldArg1, s32 foldArg2, s32 foldArg3, s32 foldArg4, s32 foldArg5) {
     SpriteInstance* sprite = &SpriteInstances[spriteIdx];
     SpriteComponent** componentList;
     s32 i;
@@ -1255,7 +1255,7 @@ void func_802DE780(s32 spriteIdx, s32 compIdx, FoldType foldType, s32 foldArg1, 
     }
 }
 
-void func_802DE894(s32 spriteIdx, FoldType foldType, s32 foldArg1, s32 foldArg2, s32 foldArg3, s32 foldArg4, s32 foldArg5) {
+void func_802DE894(s32 spriteIdx, ImgfxType foldType, s32 foldArg1, s32 foldArg2, s32 foldArg3, s32 foldArg4, s32 foldArg5) {
     func_802DE780(spriteIdx, -1, foldType, foldArg1, foldArg2, foldArg3, foldArg4, foldArg5);
 }
 

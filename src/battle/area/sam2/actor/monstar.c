@@ -135,7 +135,7 @@ EvtScript N(init) = {
 #include "battle/area/sam2/actor/img.png.inc.c"
 #include "battle/area/sam2/actor/img.pal.inc.c"
 
-UnkFoldStruct N(MonstarDetailTexture) = {
+UnkImgfxStruct N(MonstarDetailTexture) = {
     .raster = battle_area_sam2_actor_img_png,
     .palette = battle_area_sam2_actor_img_pal,
     .width = battle_area_sam2_actor_img_png_width,

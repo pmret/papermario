@@ -558,13 +558,13 @@ dlabel D_80156910
 dlabel D_80156920
 .space 0x00000028
 
-dlabel D_80156948
+dlabel ImgfxVtxBuffers
 .space 8
 
 dlabel imgfx_vtxBuf
 .space 4
 
-dlabel D_80156954
+dlabel ImgfxInstances
 .space 4
 
 dlabel D_80156958
@@ -579,10 +579,10 @@ dlabel D_80156968
 dlabel D_80156970
 .space 0x00000010
 
-dlabel FoldAnimHeaders
+dlabel ImgfxAnimHeaders
 .space 0x000005a0
 
-dlabel ImgfxDisplayListCache
+dlabel ImgfxDataCache
 .space 0x00000040
 
 dlabel gHudElementsWorld

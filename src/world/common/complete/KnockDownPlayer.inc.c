@@ -7,7 +7,7 @@
 
 void N(gfx_build_knocked_down_player)(void) {
     UnkEntityStruct* temp_v0 = (UnkEntityStruct*) evt_get_variable(NULL, KNOCK_DOWN_MAP_VAR);
-    FoldImageRecPart part;
+    ImgfxImageRecPart part;
     SpriteRasterInfo rasterInfo;
     Matrix4f sp40, sp80;
 

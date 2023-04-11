@@ -203,7 +203,7 @@ API_CALLABLE(N(DestroyRitualCards)) {
 u32 N(appendGfx_ritual_card)(RitualCard* card, Matrix4f mtxParent) {
     Matrix4f mtxTransform;
     Matrix4f mtxTemp;
-    FoldImageRecPart foldImage;
+    ImgfxImageRecPart foldImage;
     SpriteRasterInfo rasterInfo;
     s32 ret;
 

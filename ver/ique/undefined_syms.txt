@@ -813,7 +813,7 @@ is_ability_active = 0x800e8128;
 
 SetNpcFlagBits = 0x802cf060;
 SetNpcRotation = 0x802cddb0;
-SetNpcFoldParams = 0x802cfd30;
+SetNpcImgfxParams = 0x802cfd30;
 npc_raycast_down_sides = 0x800daf5c;
 
 
@@ -1036,7 +1036,7 @@ TranslateGroup = 0x802c97b4;
 SetMotionBlurParams = 0x802d7cf8;
 ClearAmbientSounds = 0x802d60e8;
 SetMusicTrack = 0x802d5d4c;
-UpdatePlayerFold = 0x802d2520;
+UpdatePlayerImgfx = 0x802d2520;
 SetPlayerAnimation = 0x802d1084;
 EnableNpcShadow = 0x802cf268;
 DisablePlayerPhysics = 0x802d0de4;
@@ -1045,7 +1045,7 @@ SetPlayerPos = 0x802d0ef0;
 InterpPlayerYaw = 0x802d193c;
 UseSettingsFrom = 0x802cb860;
 GetCurrentPartnerID = 0x802cfc74;
-SetPlayerFoldFlags = 0x802d286c;
+SetPlayerImgfxFlags = 0x802d286c;
 EnablePartnerAI = 0x802cf52c;
 GetPartnerInUse = 0x802d2b0c;
 InterruptUsePartner = 0x802d2b6c;
