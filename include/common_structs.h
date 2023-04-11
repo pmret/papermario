@@ -2381,13 +2381,7 @@ typedef struct ImgfxTexture {
 } ImgfxTexture; // size = 0x18
 
 typedef struct ImgfxWorkingTexture {
-    /* 0x00 */ IMG_PTR raster;
-    /* 0x04 */ PAL_PTR palette;
-    /* 0x08 */ u16 width;
-    /* 0x0A */ u16 height;
-    /* 0x0C */ s16 xOffset;
-    /* 0x0E */ s16 yOffset;
-    /* 0x10 */ char unk_10[0x8];
+    /* 0x00 */ ImgfxTexture tex;
     /* 0x18 */ s16 unk_18;
     /* 0x1A */ char unk_1A[0x4];
     /* 0x1E */ s16 unk_1E;
