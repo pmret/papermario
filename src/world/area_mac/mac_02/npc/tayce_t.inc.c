@@ -1,3 +1,5 @@
+#include "gcc/string.h"
+
 // enum mapping itemIDs -> index in single recipe arrays and column/rows in double recipe matrix
 enum CookingIngredientID {
     iRSH = 0,   // ITEM_MUSHROOM
@@ -256,35 +258,35 @@ s8 SingleRecipesWithCookbook[] = {
 
 s8 DoubleRecipesMatrix[] = {
 /*          iRSH  iSSH  iUSH  iLSH  iVSH  iFFL  iCOC  iLIM  iLEM  iHSY  iMSY  iJAM  iAPP  iRBY  iBBY  iYBY  iGMN  iKLF  iDRP  iDRF  iSLF  iMIX  iEGG  iMEL  iSTK  iPOT  iDSH  iBUB  iBMP */
-/* iRSH */  rXXX, rHOT, rSHS, rSHS, rHOT, rHOT, rXXX, rXXX, rXXX, rHSH, rMSH, rJSH, rXXX, rXXX, rXXX, rXXX, rVSH, rVSH, rBLN, rVSH, rVSH, rSHC, rBLN, rXXX, rXXX, rBLN, rFRS, rXXX, rXXX, 
-/* iSSH */    -1, rXXX, rSHS, rSHS, rHOT, rBLN, rXXX, rXXX, rXXX, rHSU, rMSU, rJSU, rXXX, rXXX, rXXX, rXXX, rLSH, rLSH, rBLN, rVSH, rLSH, rSHC, rBLN, rXXX, rXXX, rBLN, rHOT, rXXX, rXXX, 
-/* iUSH */    -1,   -1, rXXX, rSHS, rSHS, rYUM, rXXX, rXXX, rXXX, rHUL, rMUL, rJUL, rXXX, rXXX, rXXX, rXXX, rLSH, rLSH, rYUM, rVSH, rLSH, rSWS, rYUM, rXXX, rXXX, rYUM, rSHS, rXXX, rXXX, 
-/* iLSH */    -1,   -1,   -1, rXXX, rXXX, rBLN, rXXX, rXXX, rXXX, rHSU, rMSU, rJSU, rXXX, rXXX, rXXX, rXXX, rLSH, rLSH, rBLN, rVSH, rLSH, rSWS, rBLN, rXXX, rXXX, rBLN, rSHS, rXXX, rXXX, 
-/* iVSH */    -1,   -1,   -1,   -1, rXXX, rBLN, rXXX, rXXX, rXXX, rHSU, rMSU, rJSU, rXXX, rXXX, rXXX, rXXX, rLSH, rLSH, rBLN, rTHR, rDZD, rELP, rBLN, rXXX, rXXX, rBLN, rHOT, rXXX, rXXX, 
-/* iFFL */    -1,   -1,   -1,   -1,   -1, rXXX, rXXX, rXXX, rXXX, rXXX, rXXX, rXXX, rXXX, rXXX, rXXX, rXXX, rBLN, rXXX, rXXX, rXXX, rXXX, rFIP, rEGM, rXXX, rXXX, rFZF, rFRS, rXXX, rXXX, 
-/* iCOC */    -1,   -1,   -1,   -1,   -1,   -1, rXXX, rXXX, rXXX, rTTN, rSOD, rSSH, rSOD, rSOD, rSOD, rSOD, rXXX, rSOD, rBLN, rXXX, rXXX, rCOP, rXXX, rSOD, rXXX, rBLN, rXXX, rXXX, rXXX, 
-/* iLIM */    -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rSOD, rTTN, rSOD, rSSH, rSOD, rSOD, rSOD, rSOD, rXXX, rSOD, rXXX, rXXX, rXXX, rLIC, rXXX, rSSH, rXXX, rXXX, rXXX, rXXX, rXXX, 
-/* iLEM */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rTTN, rSOD, rSSH, rSOD, rSOD, rSOD, rSOD, rXXX, rSOD, rXXX, rXXX, rXXX, rLEC, rXXX, rSSH, rXXX, rXXX, rXXX, rXXX, rXXX, 
-/* iHSY */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rSOD, rSSH, rTTN, rTTN, rTTN, rTTN, rXXX, rSOD, rXXX, rXXX, rXXX, rHNC, rXXX, rSSH, rXXX, rXXX, rXXX, rXXX, rXXX, 
-/* iMSY */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rSSH, rSOD, rSOD, rSOD, rSOD, rXXX, rSOD, rXXX, rXXX, rXXX, rKCK, rXXX, rSSH, rXXX, rXXX, rXXX, rXXX, rXXX, 
-/* iJAM */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rSSH, rSSH, rSSH, rSSH, rXXX, rSOD, rXXX, rXXX, rXXX, rJLP, rXXX, rSSH, rXXX, rXXX, rXXX, rXXX, rXXX, 
-/* iAPP */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rSOD, rSOD, rSOD, rXXX, rXXX, rXXX, rXXX, rXXX, rPIE, rXXX, rSSH, rXXX, rXXX, rXXX, rXXX, rXXX, 
-/* iRBY */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rSOD, rSOD, rXXX, rBLN, rBLN, rXXX, rSLS, rBCK, rXXX, rSSH, rXXX, rXXX, rXXX, rXXX, rXXX, 
-/* iBBY */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rSOD, rXXX, rBLN, rBLN, rXXX, rSLS, rBCK, rXXX, rSSH, rXXX, rXXX, rXXX, rXXX, rXXX, 
-/* iYBY */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rXXX, rBLN, rBLN, rXXX, rSLS, rBCK, rXXX, rSSH, rXXX, rXXX, rXXX, rXXX, rXXX, 
-/* iGMN */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rBLN, rBLN, rXXX, rBLN, rBCK, rXXX, rXXX, rXXX, rXXX, rXXX, rXXX, rXXX, 
-/* iKLF */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rKOO, rXXX, rXXX, rKCK, rXXX, rSSH, rXXX, rXXX, rXXX, rXXX, rXXX, 
-/* iDRP */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rYUM, rBLN, rXXX, rBLN, rXXX, rXXX, rBLN, rXXX, rXXX, rXXX, 
-/* iDRF */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rFFL, rXXX, rXXX, rXXX, rXXX, rYUM, rXXX, rXXX, rXXX, 
-/* iSLF */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rSTR, rBEG, rSSH, rDZD, rYUM, rXXX, rXXX, rXXX, 
-/* iMIX */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rBCK, rYCK, rKCK, rBLN, rXXX, rXXX, rXXX, 
-/* iEGG */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rXXX, rBEG, rBLN, rXXX, rXXX, rXXX, 
-/* iMEL */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rXXX, rXXX, rXXX, rXXX, rXXX, 
-/* iSTK */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rXXX, rXXX, rXXX, rXXX, 
-/* iPOT */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rXXX, rXXX, rXXX, 
-/* iDSH */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rXXX, rXXX, 
-/* iBUB */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rXXX, 
-/* iBMP */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, 
+/* iRSH */  rXXX, rHOT, rSHS, rSHS, rHOT, rHOT, rXXX, rXXX, rXXX, rHSH, rMSH, rJSH, rXXX, rXXX, rXXX, rXXX, rVSH, rVSH, rBLN, rVSH, rVSH, rSHC, rBLN, rXXX, rXXX, rBLN, rFRS, rXXX, rXXX,
+/* iSSH */    -1, rXXX, rSHS, rSHS, rHOT, rBLN, rXXX, rXXX, rXXX, rHSU, rMSU, rJSU, rXXX, rXXX, rXXX, rXXX, rLSH, rLSH, rBLN, rVSH, rLSH, rSHC, rBLN, rXXX, rXXX, rBLN, rHOT, rXXX, rXXX,
+/* iUSH */    -1,   -1, rXXX, rSHS, rSHS, rYUM, rXXX, rXXX, rXXX, rHUL, rMUL, rJUL, rXXX, rXXX, rXXX, rXXX, rLSH, rLSH, rYUM, rVSH, rLSH, rSWS, rYUM, rXXX, rXXX, rYUM, rSHS, rXXX, rXXX,
+/* iLSH */    -1,   -1,   -1, rXXX, rXXX, rBLN, rXXX, rXXX, rXXX, rHSU, rMSU, rJSU, rXXX, rXXX, rXXX, rXXX, rLSH, rLSH, rBLN, rVSH, rLSH, rSWS, rBLN, rXXX, rXXX, rBLN, rSHS, rXXX, rXXX,
+/* iVSH */    -1,   -1,   -1,   -1, rXXX, rBLN, rXXX, rXXX, rXXX, rHSU, rMSU, rJSU, rXXX, rXXX, rXXX, rXXX, rLSH, rLSH, rBLN, rTHR, rDZD, rELP, rBLN, rXXX, rXXX, rBLN, rHOT, rXXX, rXXX,
+/* iFFL */    -1,   -1,   -1,   -1,   -1, rXXX, rXXX, rXXX, rXXX, rXXX, rXXX, rXXX, rXXX, rXXX, rXXX, rXXX, rBLN, rXXX, rXXX, rXXX, rXXX, rFIP, rEGM, rXXX, rXXX, rFZF, rFRS, rXXX, rXXX,
+/* iCOC */    -1,   -1,   -1,   -1,   -1,   -1, rXXX, rXXX, rXXX, rTTN, rSOD, rSSH, rSOD, rSOD, rSOD, rSOD, rXXX, rSOD, rBLN, rXXX, rXXX, rCOP, rXXX, rSOD, rXXX, rBLN, rXXX, rXXX, rXXX,
+/* iLIM */    -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rSOD, rTTN, rSOD, rSSH, rSOD, rSOD, rSOD, rSOD, rXXX, rSOD, rXXX, rXXX, rXXX, rLIC, rXXX, rSSH, rXXX, rXXX, rXXX, rXXX, rXXX,
+/* iLEM */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rTTN, rSOD, rSSH, rSOD, rSOD, rSOD, rSOD, rXXX, rSOD, rXXX, rXXX, rXXX, rLEC, rXXX, rSSH, rXXX, rXXX, rXXX, rXXX, rXXX,
+/* iHSY */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rSOD, rSSH, rTTN, rTTN, rTTN, rTTN, rXXX, rSOD, rXXX, rXXX, rXXX, rHNC, rXXX, rSSH, rXXX, rXXX, rXXX, rXXX, rXXX,
+/* iMSY */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rSSH, rSOD, rSOD, rSOD, rSOD, rXXX, rSOD, rXXX, rXXX, rXXX, rKCK, rXXX, rSSH, rXXX, rXXX, rXXX, rXXX, rXXX,
+/* iJAM */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rSSH, rSSH, rSSH, rSSH, rXXX, rSOD, rXXX, rXXX, rXXX, rJLP, rXXX, rSSH, rXXX, rXXX, rXXX, rXXX, rXXX,
+/* iAPP */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rSOD, rSOD, rSOD, rXXX, rXXX, rXXX, rXXX, rXXX, rPIE, rXXX, rSSH, rXXX, rXXX, rXXX, rXXX, rXXX,
+/* iRBY */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rSOD, rSOD, rXXX, rBLN, rBLN, rXXX, rSLS, rBCK, rXXX, rSSH, rXXX, rXXX, rXXX, rXXX, rXXX,
+/* iBBY */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rSOD, rXXX, rBLN, rBLN, rXXX, rSLS, rBCK, rXXX, rSSH, rXXX, rXXX, rXXX, rXXX, rXXX,
+/* iYBY */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rXXX, rBLN, rBLN, rXXX, rSLS, rBCK, rXXX, rSSH, rXXX, rXXX, rXXX, rXXX, rXXX,
+/* iGMN */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rBLN, rBLN, rXXX, rBLN, rBCK, rXXX, rXXX, rXXX, rXXX, rXXX, rXXX, rXXX,
+/* iKLF */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rKOO, rXXX, rXXX, rKCK, rXXX, rSSH, rXXX, rXXX, rXXX, rXXX, rXXX,
+/* iDRP */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rYUM, rBLN, rXXX, rBLN, rXXX, rXXX, rBLN, rXXX, rXXX, rXXX,
+/* iDRF */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rFFL, rXXX, rXXX, rXXX, rXXX, rYUM, rXXX, rXXX, rXXX,
+/* iSLF */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rSTR, rBEG, rSSH, rDZD, rYUM, rXXX, rXXX, rXXX,
+/* iMIX */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rBCK, rYCK, rKCK, rBLN, rXXX, rXXX, rXXX,
+/* iEGG */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rXXX, rBEG, rBLN, rXXX, rXXX, rXXX,
+/* iMEL */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rXXX, rXXX, rXXX, rXXX, rXXX,
+/* iSTK */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rXXX, rXXX, rXXX, rXXX,
+/* iPOT */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rXXX, rXXX, rXXX,
+/* iDSH */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rXXX, rXXX,
+/* iBUB */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX, rXXX,
+/* iBMP */    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1, rXXX,
 };
 
 typedef struct ExtraCookingPair {
@@ -342,12 +344,12 @@ API_CALLABLE(N(GetCookResultForSingleRecipe)) {
     s32 resultItemID;
     s32 resultQuality;
     s32 i;
-    
+
     outVarItemID = *args++;
     outVarQuality = *args++;
     inputItem = evt_get_variable(script, *args++);
     hasCookbook = evt_get_variable(script, *args++);
-    
+
     if (inputItem == ITEM_MYSTERY) {
         if (rand_int(1000) < 500) {
             resultItemID = ITEM_MISTAKE;
@@ -495,7 +497,7 @@ const s32 CookableDiscoveredFlags[] = {
     GF_MAC02_DiscoveredRecipe_18, GF_MAC02_DiscoveredRecipe_19, GF_MAC02_DiscoveredRecipe_1A, GF_MAC02_DiscoveredRecipe_1B, GF_MAC02_DiscoveredRecipe_1C, GF_MAC02_DiscoveredRecipe_1D, GF_MAC02_DiscoveredRecipe_1E, GF_MAC02_DiscoveredRecipe_1F,
     GF_MAC02_DiscoveredRecipe_20, GF_MAC02_DiscoveredRecipe_21, GF_MAC02_DiscoveredRecipe_22, GF_MAC02_DiscoveredRecipe_23, GF_MAC02_DiscoveredRecipe_24, GF_MAC02_DiscoveredRecipe_25, GF_MAC02_DiscoveredRecipe_26, GF_MAC02_DiscoveredRecipe_27,
     GF_MAC02_DiscoveredRecipe_28, GF_MAC02_DiscoveredRecipe_29, GF_MAC02_DiscoveredRecipe_2A, GF_MAC02_DiscoveredRecipe_2B, GF_MAC02_DiscoveredRecipe_2C, GF_MAC02_DiscoveredRecipe_2D, GF_MAC02_DiscoveredRecipe_2E, GF_MAC02_DiscoveredRecipe_2F,
-    GF_MAC02_DiscoveredRecipe_30, GF_MAC02_DiscoveredRecipe_31, GF_MAC02_DiscoveredRecipe_32, GF_MAC02_DiscoveredRecipe_33 
+    GF_MAC02_DiscoveredRecipe_30, GF_MAC02_DiscoveredRecipe_31, GF_MAC02_DiscoveredRecipe_32, GF_MAC02_DiscoveredRecipe_33
 };
 
 API_CALLABLE(N(SetRecipeDiscovered)) {
@@ -610,7 +612,7 @@ EvtScript N(EVS_TayceT_FryingPanAndCake) = {
 
 s32 N(ItemList_Cookbook)[] = {
     ITEM_COOKBOOK,
-    ITEM_NONE 
+    ITEM_NONE
 };
 
 EvtScript N(EVS_TayceT_RequestCookbook) = {

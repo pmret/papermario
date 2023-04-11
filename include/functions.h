@@ -12,8 +12,6 @@ f32 fabsf(f32 f);
 f64 fabs(f64 f);
 f32 cosine(s16 arg0);
 
-s32 strcmp(const char* str1, const char* str2);
-
 void nuBoot(void);
 void boot_idle(void* data);
 void boot_main(void* data);

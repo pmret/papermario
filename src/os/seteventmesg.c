@@ -3,11 +3,11 @@
 u32 __osPreNMI = 0;
 
 void osSetEventMesg(OSEvent event, OSMesgQueue *mq, OSMesg msg) {
-	register u32 saveMask = __osDisableInt();
-	__OSEventState *es = &__osEventStateTab[event];
+    register u32 saveMask = __osDisableInt();
+    __OSEventState *es = &__osEventStateTab[event];
 
-	es->messageQueue = mq;
-	es->message = msg;
+    es->messageQueue = mq;
+    es->message = msg;
 
     if (event == OS_EVENT_PRENMI) {
         if (__osShutdown && !__osPreNMI) {
@@ -16,5 +16,5 @@ void osSetEventMesg(OSEvent event, OSMesgQueue *mq, OSMesg msg) {
         __osPreNMI = TRUE;
     }
 
-	__osRestoreInt(saveMask);
+    __osRestoreInt(saveMask);
 }
