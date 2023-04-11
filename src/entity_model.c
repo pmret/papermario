@@ -245,7 +245,7 @@ void appendGfx_entity_model(EntityModel* model) {
     Matrix4f mtx;
     Matrix4f mtx2;
     ImgfxTexture ifxImg;
-    Matrix4f foldMtx;
+    Matrix4f imgfxMtx;
 
     gDisplayContext->matrixStack[gMatrixListPos] = model->transform;
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
@@ -400,8 +400,8 @@ void appendGfx_entity_model(EntityModel* model) {
         ifxImg.xOffset = -imageData->width / 2;
         ifxImg.yOffset = imageData->height / 2;
         ifxImg.alpha = 255;
-        guMtxL2F(foldMtx, &model->transform);
-        imgfx_appendGfx_component(0, &ifxImg, 0, foldMtx);
+        guMtxL2F(imgfxMtx, &model->transform);
+        imgfx_appendGfx_component(0, &ifxImg, 0, imgfxMtx);
     }
 
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
@@ -552,7 +552,7 @@ void draw_entity_model_E(s32 modelIdx, Mtx* transformMtx) {
     Matrix4f mtx;
     Matrix4f mtx2;
     ImgfxTexture ifxImg;
-    Matrix4f foldMtx;
+    Matrix4f imgfxMtx;
 
     if (model == NULL) {
         return;
@@ -709,8 +709,8 @@ void draw_entity_model_E(s32 modelIdx, Mtx* transformMtx) {
         ifxImg.xOffset = -imageData->width / 2;
         ifxImg.yOffset = imageData->height / 2;
         ifxImg.alpha = 255;
-        guMtxL2F(foldMtx, &model->transform);
-        imgfx_appendGfx_component(0, &ifxImg, 0, foldMtx);
+        guMtxL2F(imgfxMtx, &model->transform);
+        imgfx_appendGfx_component(0, &ifxImg, 0, imgfxMtx);
     }
 
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);

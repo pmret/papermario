@@ -4,7 +4,7 @@
 #include "world/common/enemy/StoneChomp.inc.c"
 
 typedef struct StoneChompAmbushIsk05 {
-    /* 0x00 */ s32 foldID;
+    /* 0x00 */ s32 imgfxIdx;
     /* 0x04 */ s32 workerID;
     /* 0x08 */ s32 spriteIndex;
     /* 0x0C */ s32 rasterIndex;
@@ -71,8 +71,8 @@ void N(func_80241610_97F0E0)(void) {
     ifxImg.yOffset = (spriteRaster.height / 2);
     ifxImg.alpha = 255;
 
-    imgfx_update(ambush->foldID, IMGFX_SET_ALPHA, 255, 255, 255, ambush->alpha, 0);
-    imgfx_appendGfx_component(ambush->foldID, &ifxImg, 0, transformMtx);
+    imgfx_update(ambush->imgfxIdx, IMGFX_SET_ALPHA, 255, 255, 255, ambush->alpha, 0);
+    imgfx_appendGfx_component(ambush->imgfxIdx, &ifxImg, 0, transformMtx);
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
 
@@ -99,7 +99,7 @@ API_CALLABLE(N(func_80241B28_97F5F8)) {
     ambush->renderYaw = 85.0f;
     ambush->alpha = 0.0f;
 
-    ambush->foldID = 0;
+    ambush->imgfxIdx = 0;
     ambush->workerID = create_worker_frontUI(NULL, N(func_80241610_97F0E0));
     return ApiStatus_DONE2;
 }

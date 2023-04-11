@@ -999,8 +999,8 @@ void set_player_imgfx_comp(s32 spriteIdx, s32 compIdx, ImgfxType imgfx, s32 imgf
 }
 
 // applied to all components
-void set_player_imgfx_all(s32 animID, ImgfxType foldType, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
-    set_player_imgfx_comp(PLAYER_SPRITE_MAIN, -1, foldType, arg2, arg3, arg4, arg5, arg6);
+void set_player_imgfx_all(s32 animID, ImgfxType imgfxType, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+    set_player_imgfx_comp(PLAYER_SPRITE_MAIN, -1, imgfxType, arg2, arg3, arg4, arg5, arg6);
 }
 
 void spr_get_player_raster_info(SpriteRasterInfo* out, s32 playerSpriteID, s32 rasterIndex) {
@@ -1255,8 +1255,8 @@ void set_npc_imgfx_comp(s32 spriteIdx, s32 compIdx, ImgfxType imgfx, s32 imgfxAr
     }
 }
 
-void set_npc_imgfx_all(s32 spriteIdx, ImgfxType foldType, s32 imgfxArg1, s32 imgfxArg2, s32 imgfxArg3, s32 imgfxArg4, s32 imgfxArg5) {
-    set_npc_imgfx_comp(spriteIdx, -1, foldType, imgfxArg1, imgfxArg2, imgfxArg3, imgfxArg4, imgfxArg5);
+void set_npc_imgfx_all(s32 spriteIdx, ImgfxType imgfxType, s32 imgfxArg1, s32 imgfxArg2, s32 imgfxArg3, s32 imgfxArg4, s32 imgfxArg5) {
+    set_npc_imgfx_comp(spriteIdx, -1, imgfxType, imgfxArg1, imgfxArg2, imgfxArg3, imgfxArg4, imgfxArg5);
 }
 
 s32 spr_get_comp_position(s32 spriteIdx, s32 compListIdx, s32* outX, s32* outY, s32* outZ) {

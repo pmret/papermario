@@ -5,7 +5,7 @@
 
 typedef struct StoneChompAmbushIsk13 {
     /* 0x00 */ s32 useBitingAnim;
-    /* 0x04 */ s32 foldID;
+    /* 0x04 */ s32 imgfxIdx;
     /* 0x08 */ s32 workerID;
     /* 0x0C */ s32 spriteIndex;
     /* 0x10 */ s32 rasterIndex;
@@ -77,8 +77,8 @@ void N(func_80241610_990DF0)(void) {
     ifxImg.yOffset = (spriteRaster.height / 2);
     ifxImg.alpha = 255;
     
-    imgfx_update(ambush->foldID, IMGFX_SET_TINT, ambush->color.r, ambush->color.g, ambush->color.b, ambush->color.a, 0);
-    imgfx_appendGfx_component(ambush->foldID, &ifxImg, 0, transformMtx);
+    imgfx_update(ambush->imgfxIdx, IMGFX_SET_TINT, ambush->color.r, ambush->color.g, ambush->color.b, ambush->color.a, 0);
+    imgfx_appendGfx_component(ambush->imgfxIdx, &ifxImg, 0, transformMtx);
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
 
@@ -109,7 +109,7 @@ API_CALLABLE(N(func_80241BA8_991388)) {
     ambush->color.g = 128.0f;
     ambush->color.b = 255.0f;
     ambush->color.a = 0.0f;
-    ambush->foldID = 0;
+    ambush->imgfxIdx = 0;
     
     ambush->workerID = create_worker_frontUI(NULL, N(func_80241610_990DF0));
     evt_set_variable(script, MV_AmbushPtr, (s32) ambush);

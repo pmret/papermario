@@ -634,12 +634,12 @@ ApiStatus UpdatePlayerImgfx(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 a0 = *args++;
-    s32 foldType = evt_get_variable(script, *args++);
+    s32 imgfxType = evt_get_variable(script, *args++);
     s32 a2, a3, a4, a5;
 
     set_player_imgfx_all(a0, IMGFX_CLEAR, 0, 0, 0, 0, 0);
 
-    switch (foldType) {
+    switch (imgfxType) {
         case IMGFX_CLEAR:
             playerStatus->renderMode = RENDER_MODE_ALPHATEST;
             set_player_imgfx_all(a0, IMGFX_CLEAR, 0, 0, 0, 0, PlayerImgfxFlags);
@@ -648,7 +648,7 @@ ApiStatus UpdatePlayerImgfx(Evt* script, s32 isInitialCall) {
         case IMGFX_RESET:
             playerStatus->renderMode = RENDER_MODE_ALPHATEST;
         case IMGFX_UNK_1:
-            set_player_imgfx_all(a0, foldType, 0, 0, 0, 0, PlayerImgfxFlags);
+            set_player_imgfx_all(a0, imgfxType, 0, 0, 0, 0, PlayerImgfxFlags);
             break;
         case IMGFX_SET_WAVY:
             playerStatus->renderMode = RENDER_MODE_ALPHATEST;

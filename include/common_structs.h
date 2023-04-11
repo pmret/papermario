@@ -251,7 +251,7 @@ typedef struct Npc {
     /* 0x08E */ s16 duration; // TODO: name less vaguely
     /* 0x090 */ Vec3s homePos;
     /* 0x096 */ s16 unk_96;
-    /* 0x098 */ s16 foldType;
+    /* 0x098 */ s16 imgfxType;
     /* 0x09A */ s16 imgfxArg1;
     /* 0x09C */ s16 imgfxArg2;
     /* 0x09E */ s16 imgfxArg3;

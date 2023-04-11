@@ -117,7 +117,7 @@ typedef struct ImgfxRenderMode {
     /* 0x8 */ u8 flags; // only checks TRUE so far. some kind of switch?
 } ImgfxRenderMode; // size = 0xC
 
-// 'compressed' vertex data for animated fold keyframes
+// 'compressed' vertex data for animated image fx keyframes
 typedef struct ImgfxVtx {
     /* 0x00 */ s16 ob[3];
     /* 0x06 */ u8 tc[2];

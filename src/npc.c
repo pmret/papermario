@@ -140,7 +140,7 @@ s32 create_npc_impl(NpcBlueprint* blueprint, AnimID* animList, s32 isPeachNpc) {
     npc->currentAnim = blueprint->initialAnim;
     npc->animationSpeed = 1.0f;
     npc->renderYaw = 0.0f;
-    npc->foldType = 0;
+    npc->imgfxType = IMGFX_CLEAR;
     npc->imgfxFlags = 0;
     npc->collisionChannel = COLLISION_CHANNEL_20000;
     npc->isFacingAway = FALSE;
@@ -2086,7 +2086,7 @@ s32 npc_get_collider_below(Npc* npc) {
 }
 
 void func_8003D3BC(Npc* npc) {
-    s32 foldType = npc->foldType;
+    s32 imgfxType = npc->imgfxType;
     s32 imgfxArg1 = npc->imgfxArg1;
     s32 imgfxArg2 = npc->imgfxArg2;
     s32 imgfxArg3 = npc->imgfxArg3;
@@ -2095,7 +2095,7 @@ void func_8003D3BC(Npc* npc) {
 
     set_npc_imgfx_all(npc->spriteInstanceID, IMGFX_CLEAR, 0, 0, 0, 0, 0);
 
-    switch (foldType) {
+    switch (imgfxType) {
         case IMGFX_CLEAR:
             npc->renderMode = RENDER_MODE_ALPHATEST;
             set_npc_imgfx_all(npc->spriteInstanceID, IMGFX_CLEAR, 0, 0, 0, 0, imgfxFlags);
@@ -2105,7 +2105,7 @@ void func_8003D3BC(Npc* npc) {
             npc->renderMode = RENDER_MODE_ALPHATEST;
             // fallthrough
         case IMGFX_UNK_1:
-            set_npc_imgfx_all(npc->spriteInstanceID, foldType, 0, 0, 0, 0, imgfxFlags);
+            set_npc_imgfx_all(npc->spriteInstanceID, imgfxType, 0, 0, 0, 0, imgfxFlags);
             break;
         case IMGFX_SET_WAVY:
             npc->renderMode = RENDER_MODE_ALPHATEST;
@@ -2154,8 +2154,8 @@ void func_8003D3BC(Npc* npc) {
     }
 }
 
-void npc_set_imgfx_params(Npc* npc, s32 foldType, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
-    npc->foldType = foldType;
+void npc_set_imgfx_params(Npc* npc, s32 imgfxType, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+    npc->imgfxType = imgfxType;
     npc->imgfxArg1 = arg2;
     npc->imgfxArg2 = arg3;
     npc->imgfxArg3 = arg4;
