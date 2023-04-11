@@ -637,12 +637,12 @@ ApiStatus UpdatePlayerImgfx(Evt* script, s32 isInitialCall) {
     s32 foldType = evt_get_variable(script, *args++);
     s32 a2, a3, a4, a5;
 
-    spr_set_player_imgfx_update_all(a0, IMGFX_UPD_CLEAR, 0, 0, 0, 0, 0);
+    spr_set_player_imgfx_update_all(a0, IMGFX_CLEAR, 0, 0, 0, 0, 0);
 
     switch (foldType) {
-        case IMGFX_UPD_CLEAR:
+        case IMGFX_CLEAR:
             playerStatus->renderMode = RENDER_MODE_ALPHATEST;
-            spr_set_player_imgfx_update_all(a0, IMGFX_UPD_CLEAR, 0, 0, 0, 0, PlayerImgfxFlags);
+            spr_set_player_imgfx_update_all(a0, IMGFX_CLEAR, 0, 0, 0, 0, PlayerImgfxFlags);
             break;
         case IMGFX_TYPE_2:
         case IMGFX_TYPE_3:
@@ -650,47 +650,47 @@ ApiStatus UpdatePlayerImgfx(Evt* script, s32 isInitialCall) {
         case IMGFX_TYPE_1:
             spr_set_player_imgfx_update_all(a0, foldType, 0, 0, 0, 0, PlayerImgfxFlags);
             break;
-        case IMGFX_UPD_WAVY:
+        case IMGFX_SET_WAVY:
             playerStatus->renderMode = RENDER_MODE_ALPHATEST;
             a2 = evt_get_variable(script, *args++);
             a3 = evt_get_variable(script, *args++);
             a4 = evt_get_variable(script, *args++);
-            spr_set_player_imgfx_update_all(a0, IMGFX_UPD_WAVY, a2, a3, a4, 0, PlayerImgfxFlags);
+            spr_set_player_imgfx_update_all(a0, IMGFX_SET_WAVY, a2, a3, a4, 0, PlayerImgfxFlags);
             break;
-        case IMGFX_UPD_SET_COLOR:
+        case IMGFX_SET_COLOR:
             playerStatus->renderMode = RENDER_MODE_ALPHATEST;
             a2 = evt_get_variable(script, *args++);
             a3 = evt_get_variable(script, *args++);
             a4 = evt_get_variable(script, *args++);
-            spr_set_player_imgfx_update_all(a0, IMGFX_UPD_SET_COLOR, a2, a3, a4, 255, PlayerImgfxFlags);
+            spr_set_player_imgfx_update_all(a0, IMGFX_SET_COLOR, a2, a3, a4, 255, PlayerImgfxFlags);
             break;
-        case IMGFX_UPD_SET_ALPHA:
+        case IMGFX_SET_ALPHA:
             playerStatus->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
             a5 = evt_get_variable(script, *args++);
-            spr_set_player_imgfx_update_all(a0, IMGFX_UPD_SET_ALPHA, 255, 255, 255, a5, PlayerImgfxFlags);
+            spr_set_player_imgfx_update_all(a0, IMGFX_SET_ALPHA, 255, 255, 255, a5, PlayerImgfxFlags);
             break;
-        case IMGFX_UPD_SET_TINT:
-            playerStatus->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
-            a2 = evt_get_variable(script, *args++);
-            a3 = evt_get_variable(script, *args++);
-            a4 = evt_get_variable(script, *args++);
-            a5 = evt_get_variable(script, *args++);
-            spr_set_player_imgfx_update_all(a0, IMGFX_UPD_SET_TINT, a2, a3, a4, a5, PlayerImgfxFlags);
-            break;
-        case IMGFX_UPD_SET_ANIM:
-            playerStatus->renderMode = RENDER_MODE_ALPHATEST;
-            a2 = evt_get_variable(script, *args++);
-            a3 = evt_get_variable(script, *args++);
-            a4 = evt_get_variable(script, *args++);
-            spr_set_player_imgfx_update_all(a0, IMGFX_UPD_SET_ANIM, a2, a3, a4, 0, PlayerImgfxFlags);
-            break;
-        case IMGFX_UPD_HOLOGRAM:
+        case IMGFX_SET_TINT:
             playerStatus->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
             a2 = evt_get_variable(script, *args++);
             a3 = evt_get_variable(script, *args++);
             a4 = evt_get_variable(script, *args++);
             a5 = evt_get_variable(script, *args++);
-            spr_set_player_imgfx_update_all(a0, IMGFX_UPD_HOLOGRAM, a2, a3, a4, a5, PlayerImgfxFlags);
+            spr_set_player_imgfx_update_all(a0, IMGFX_SET_TINT, a2, a3, a4, a5, PlayerImgfxFlags);
+            break;
+        case IMGFX_SET_ANIM:
+            playerStatus->renderMode = RENDER_MODE_ALPHATEST;
+            a2 = evt_get_variable(script, *args++);
+            a3 = evt_get_variable(script, *args++);
+            a4 = evt_get_variable(script, *args++);
+            spr_set_player_imgfx_update_all(a0, IMGFX_SET_ANIM, a2, a3, a4, 0, PlayerImgfxFlags);
+            break;
+        case IMGFX_HOLOGRAM:
+            playerStatus->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
+            a2 = evt_get_variable(script, *args++);
+            a3 = evt_get_variable(script, *args++);
+            a4 = evt_get_variable(script, *args++);
+            a5 = evt_get_variable(script, *args++);
+            spr_set_player_imgfx_update_all(a0, IMGFX_HOLOGRAM, a2, a3, a4, a5, PlayerImgfxFlags);
             break;
     }
 

@@ -5960,48 +5960,48 @@ enum NpcDropFlags {
 };
 
 enum ImgfxStateFlags {
-    IMGFX_STATE_FLAG_ENABLED           = 0x00000001,
-    IMGFX_STATE_FLAG_G_CULL_BACK       = 0x00000002,
-    IMGFX_STATE_FLAG_G_CULL_FRONT      = 0x00000004,
-    IMGFX_STATE_FLAG_8                 = 0x00000008,
-    IMGFX_STATE_FLAG_SKIP_GFX_SETUP    = 0x00000010,
-    IMGFX_STATE_FLAG_SKIP_TEX_SETUP    = 0x00000020,
-    IMGFX_STATE_FLAG_40                = 0x00000040,
-    IMGFX_STATE_FLAG_LOOP_ANIM         = 0x00000080,
-    IMGFX_STATE_FLAG_REVERSE_ANIM      = 0x00000100, // fold animation plays backwards (from end to start)
-    IMGFX_STATE_FLAG_200               = 0x00000200,
-    IMGFX_STATE_FLAG_400               = 0x00000400,
-    IMGFX_STATE_FLAG_800               = 0x00000800,
-    IMGFX_STATE_FLAG_ANIM_DONE         = 0x00001000,
-    IMGFX_STATE_FLAG_2000              = 0x00002000,
-    IMGFX_STATE_FLAG_4000              = 0x00004000,
-    IMGFX_STATE_FLAG_8000              = 0x00008000,
-    IMGFX_STATE_FLAG_NO_FILTERING      = 0x00010000,
-    IMGFX_STATE_FLAG_20000             = 0x00020000,
-    IMGFX_STATE_FLAG_40000             = 0x00040000,
-    IMGFX_STATE_FLAG_80000             = 0x00080000,
-    IMGFX_STATE_FLAG_100000            = 0x00100000,
+    IMGFX_FLAG_ENABLED              = 0x00000001,
+    IMGFX_FLAG_G_CULL_BACK          = 0x00000002,
+    IMGFX_FLAG_G_CULL_FRONT         = 0x00000004,
+    IMGFX_FLAG_8                    = 0x00000008,
+    IMGFX_FLAG_SKIP_GFX_SETUP       = 0x00000010,
+    IMGFX_FLAG_SKIP_TEX_SETUP       = 0x00000020,
+    IMGFX_FLAG_40                   = 0x00000040,
+    IMGFX_FLAG_LOOP_ANIM            = 0x00000080,
+    IMGFX_FLAG_REVERSE_ANIM         = 0x00000100, // fold animation plays backwards (from end to start)
+    IMGFX_FLAG_200                  = 0x00000200,
+    IMGFX_FLAG_400                  = 0x00000400,
+    IMGFX_FLAG_800                  = 0x00000800,
+    IMGFX_FLAG_ANIM_DONE            = 0x00001000,
+    IMGFX_FLAG_2000                 = 0x00002000,
+    IMGFX_FLAG_4000                 = 0x00004000,
+    IMGFX_FLAG_8000                 = 0x00008000,
+    IMGFX_FLAG_NO_FILTERING         = 0x00010000,
+    IMGFX_FLAG_20000                = 0x00020000,
+    IMGFX_FLAG_40000                = 0x00040000,
+    IMGFX_FLAG_80000                = 0x00080000,
+    IMGFX_FLAG_100000               = 0x00100000,
 };
 
 typedef enum ImgfxType {
-    IMGFX_UPD_CLEAR                    = 0x0,    // or IMGFX_UPD_INIT?
-    IMGFX_TYPE_1                       = 0x1,    // unused?
-    IMGFX_TYPE_2                       = 0x2,    // unused?
-    IMGFX_TYPE_3                       = 0x3,    // after goomba 'sticker' ambush in kmr_09 unfurls
-    IMGFX_UPD_WAVY                     = 0x4,    // Kolorado when injured and Sushie when underwater (* note: Sushie fold rendering is bugged and only occurs *before* going underwater)
-    IMGFX_UPD_SET_ANIM                 = 0x5,
-    IMGFX_UPD_SET_COLOR                = 0x6,    // modulate color (args: R, G, B)
-    IMGFX_UPD_SET_ALPHA                = 0x7,    // modulate alpha (args: A)
-    IMGFX_UPD_SET_TINT                 = 0x8,    // modulate color+alpha (args: R, G, B, A)
-    IMGFX_TYPE_9                       = 0x9,
-    IMGFX_TYPE_A                       = 0xA,
-    IMGFX_UPD_COLOR_BUF_SET_B          = 0xB,
-    IMGFX_UPD_COLOR_BUF_SET_C          = 0xC,
-    IMGFX_UPD_HOLOGRAM                 = 0xD,    // ghostly star spirits and merlar (args: ???, staticAmt, ???, alphaAmt)
-    IMGFX_UPD_FILL_COLOR               = 0xE,    // used to create boss silhouettes in chapter introduction sceens
-    IMGFX_UPD_OVERLAY                  = 0xF,
-    IMGFX_UPD_OVERLAY_XLU              = 0x10,   // unused?
-    IMGFX_UPD_ALLOC_COLOR_BUF          = 0x11,   // args: count
+    IMGFX_CLEAR                     = 0x0,    // or IMGFX_INIT?
+    IMGFX_TYPE_1                    = 0x1,    // unused?
+    IMGFX_TYPE_2                    = 0x2,    // unused?
+    IMGFX_TYPE_3                    = 0x3,    // after goomba 'sticker' ambush in kmr_09 unfurls
+    IMGFX_SET_WAVY                  = 0x4,    // Kolorado when injured and Sushie when underwater (* note: Sushie fold rendering is bugged and only occurs *before* going underwater)
+    IMGFX_SET_ANIM                  = 0x5,
+    IMGFX_SET_COLOR                 = 0x6,    // modulate color (args: R, G, B)
+    IMGFX_SET_ALPHA                 = 0x7,    // modulate alpha (args: A)
+    IMGFX_SET_TINT                  = 0x8,    // modulate color+alpha (args: R, G, B, A)
+    IMGFX_TYPE_9                    = 0x9,
+    IMGFX_TYPE_A                    = 0xA,
+    IMGFX_COLOR_BUF_SET_B           = 0xB,
+    IMGFX_COLOR_BUF_SET_C           = 0xC,
+    IMGFX_HOLOGRAM                  = 0xD,    // ghostly star spirits and merlar (args: ???, staticAmt, ???, alphaAmt)
+    IMGFX_FILL_COLOR                = 0xE,    // used to create boss silhouettes in chapter introduction sceens
+    IMGFX_OVERLAY                   = 0xF,
+    IMGFX_OVERLAY_XLU               = 0x10,   // unused?
+    IMGFX_ALLOC_COLOR_BUF           = 0x11,   // args: count
 } ImgfxType;
 
 typedef enum ImgfxAnim {
@@ -6035,7 +6035,7 @@ typedef enum ImgfxRenderType {
     IMGFX_RENDER_MODULATE_PRIM_RGB     = 0x04,
     IMGFX_RENDER_MODULATE_PRIM_RGBA    = 0x05,
     IMGFX_RENDER_MULTIPLY_SHADE_RGB    = 0x06,
-    IMGFX_RENDER_MULTIPLY_SHADE_ALPHA  = 0x07, // unused?
+    IMGFX_RENDER_MULTIPLY_SHADE_ALPHA  = 0x07,
     IMGFX_RENDER_MULTIPLY_SHADE_RGBA   = 0x08,
     IMGFX_RENDER_MODULATE_SHADE_RGB    = 0x09,
     IMGFX_RENDER_MODULATE_SHADE_RGBA   = 0x0A,

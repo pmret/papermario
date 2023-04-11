@@ -550,7 +550,7 @@ dlabel screen_overlay_backZoom
 dlabel D_80156910
 .space 0x00000010
 
-dlabel D_80156920
+dlabel ImgfxCurrentTexture
 .space 0x00000028
 
 dlabel ImgfxVtxBuffers

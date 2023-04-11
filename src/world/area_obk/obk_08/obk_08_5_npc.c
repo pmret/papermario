@@ -35,10 +35,10 @@ void N(func_80240920_BD4190)(Npc* npc) {
     if (npc->yaw > 340.0f || npc->yaw < 20.0f) {
         npc->renderMode = RENDER_MODE_ALPHATEST;
         npc->foldFlags = 0;
-        npc_set_imgfx_params(npc, IMGFX_UPD_CLEAR, 0, 0, 0, 0, npc->foldFlags);
+        npc_set_imgfx_params(npc, IMGFX_CLEAR, 0, 0, 0, 0, npc->foldFlags);
     } else {
         npc->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
-        npc_set_imgfx_params(npc, IMGFX_UPD_SET_ALPHA, gPlayerStatusPtr->alpha1, 0, 0, 0, npc->foldFlags);
+        npc_set_imgfx_params(npc, IMGFX_SET_ALPHA, gPlayerStatusPtr->alpha1, 0, 0, 0, npc->foldFlags);
         npc->foldArg1 = 255;
     }
 }

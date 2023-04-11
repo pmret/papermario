@@ -1132,7 +1132,7 @@ void btl_delete_actor(Actor* actor) {
         }
 
         if (part->idleAnimations != NULL) {
-            func_802DE894(part->spriteInstanceID, IMGFX_UPD_CLEAR, 0, 0, 0, 0, 0);
+            func_802DE894(part->spriteInstanceID, IMGFX_CLEAR, 0, 0, 0, 0, 0);
 
             ASSERT(spr_free_sprite(part->spriteInstanceID) == 0);
 

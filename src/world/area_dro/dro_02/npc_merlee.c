@@ -173,16 +173,16 @@ API_CALLABLE(N(CreateRitualCards)) {
     N(CreatorScript) = script;
 
     ret = func_8013A704(1);
-    imgfx_update(ret, IMGFX_UPD_SET_ANIM, IMGFX_ANIM_SHUFFLE_CARDS, 1, 1, 0, IMGFX_STATE_FLAG_800);
+    imgfx_update(ret, IMGFX_SET_ANIM, IMGFX_ANIM_SHUFFLE_CARDS, 1, 1, 0, IMGFX_FLAG_800);
     evt_set_variable(script, RITUAL_VAR_FOLDER_1, ret);
     ret = func_8013A704(1);
-    imgfx_update(ret, IMGFX_UPD_SET_ANIM, IMGFX_ANIM_FLIP_CARD_1, 1, 1, 0, IMGFX_STATE_FLAG_800);
+    imgfx_update(ret, IMGFX_SET_ANIM, IMGFX_ANIM_FLIP_CARD_1, 1, 1, 0, IMGFX_FLAG_800);
     evt_set_variable(script, RITUAL_VAR_FOLDER_2, ret);
     ret = func_8013A704(1);
-    imgfx_update(ret, IMGFX_UPD_SET_ANIM, IMGFX_ANIM_FLIP_CARD_2, 1, 1, 0, IMGFX_STATE_FLAG_800);
+    imgfx_update(ret, IMGFX_SET_ANIM, IMGFX_ANIM_FLIP_CARD_2, 1, 1, 0, IMGFX_FLAG_800);
     evt_set_variable(script, RITUAL_VAR_FOLDER_3, ret);
     ret = func_8013A704(1);
-    imgfx_update(ret, IMGFX_UPD_SET_ANIM, IMGFX_ANIM_FLIP_CARD_3, 1, 1, 0, IMGFX_STATE_FLAG_800);
+    imgfx_update(ret, IMGFX_SET_ANIM, IMGFX_ANIM_FLIP_CARD_3, 1, 1, 0, IMGFX_FLAG_800);
     evt_set_variable(script, RITUAL_VAR_FOLDER_4, ret);
 
     evt_set_variable(script, RITUAL_VAR_WORKER, create_worker_world(
@@ -203,7 +203,7 @@ API_CALLABLE(N(DestroyRitualCards)) {
 u32 N(appendGfx_ritual_card)(RitualCard* card, Matrix4f mtxParent) {
     Matrix4f mtxTransform;
     Matrix4f mtxTemp;
-    ImgfxImageRecPart foldImage;
+    ImgfxTexture ifxImg;
     SpriteRasterInfo rasterInfo;
     s32 ret;
 
@@ -250,7 +250,7 @@ u32 N(appendGfx_ritual_card)(RitualCard* card, Matrix4f mtxParent) {
         guMtxCatF(mtxTemp, mtxParent, mtxTransform);
         guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
         gSPMatrix(gMainGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-        ret = imgfx_appendGfx_component(evt_get_variable(N(CreatorScript), RITUAL_VAR_FOLDER_1), &foldImage, IMGFX_STATE_FLAG_SKIP_GFX_SETUP | IMGFX_STATE_FLAG_SKIP_TEX_SETUP, mtxTransform);
+        ret = imgfx_appendGfx_component(evt_get_variable(N(CreatorScript), RITUAL_VAR_FOLDER_1), &ifxImg, IMGFX_FLAG_SKIP_GFX_SETUP | IMGFX_FLAG_SKIP_TEX_SETUP, mtxTransform);
         gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
         return ret;
     }
@@ -261,22 +261,22 @@ u32 N(appendGfx_ritual_card)(RitualCard* card, Matrix4f mtxParent) {
         guMtxCatF(mtxTemp, mtxParent, mtxTransform);
         guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
         gSPMatrix(gMainGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-        imgfx_appendGfx_component(evt_get_variable(N(CreatorScript), RITUAL_VAR_FOLDER_2), &foldImage, IMGFX_STATE_FLAG_SKIP_GFX_SETUP | IMGFX_STATE_FLAG_SKIP_TEX_SETUP, mtxTransform);
-        imgfx_appendGfx_component(evt_get_variable(N(CreatorScript), RITUAL_VAR_FOLDER_3), &foldImage, IMGFX_STATE_FLAG_SKIP_GFX_SETUP | IMGFX_STATE_FLAG_SKIP_TEX_SETUP, mtxTransform);
+        imgfx_appendGfx_component(evt_get_variable(N(CreatorScript), RITUAL_VAR_FOLDER_2), &ifxImg, IMGFX_FLAG_SKIP_GFX_SETUP | IMGFX_FLAG_SKIP_TEX_SETUP, mtxTransform);
+        imgfx_appendGfx_component(evt_get_variable(N(CreatorScript), RITUAL_VAR_FOLDER_3), &ifxImg, IMGFX_FLAG_SKIP_GFX_SETUP | IMGFX_FLAG_SKIP_TEX_SETUP, mtxTransform);
         gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
         guTranslateF(mtxTemp, N(RitualCards)[0].pos.x, N(RitualCards)[0].pos.y, N(RitualCards)[0].pos.z);
         guMtxCatF(mtxTemp, mtxParent, mtxTransform);
         guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
         gSPMatrix(gMainGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]), G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         spr_get_player_raster_info(&rasterInfo, card->spriteID, card->rasterIndex);
-        foldImage.raster = rasterInfo.raster;
-        foldImage.palette = rasterInfo.defaultPal;
-        foldImage.width = rasterInfo.width;
-        foldImage.height = rasterInfo.height;
-        foldImage.xOffset = -(rasterInfo.width / 2);
-        foldImage.yOffset = rasterInfo.height / 2;
-        foldImage.opacity = 255;
-        ret = imgfx_appendGfx_component(evt_get_variable(N(CreatorScript), RITUAL_VAR_FOLDER_4), &foldImage, IMGFX_STATE_FLAG_SKIP_GFX_SETUP, mtxTransform);
+        ifxImg.raster = rasterInfo.raster;
+        ifxImg.palette = rasterInfo.defaultPal;
+        ifxImg.width = rasterInfo.width;
+        ifxImg.height = rasterInfo.height;
+        ifxImg.xOffset = -(rasterInfo.width / 2);
+        ifxImg.yOffset = rasterInfo.height / 2;
+        ifxImg.alpha = 255;
+        ret = imgfx_appendGfx_component(evt_get_variable(N(CreatorScript), RITUAL_VAR_FOLDER_4), &ifxImg, IMGFX_FLAG_SKIP_GFX_SETUP, mtxTransform);
         gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
         return ret;
     }

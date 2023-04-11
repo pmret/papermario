@@ -15,7 +15,7 @@ BSS FallingSprite N(Falling);
 
 void N(appendGfx_FallingSprite)(void) {
     FallingSprite* falling = &N(Falling);
-    ImgfxImageRecPart recPart;
+    ImgfxTexture ifxImg;
     SpriteRasterInfo info;
     Matrix4f transformMtx;
     Matrix4f tempMtx;
@@ -63,14 +63,14 @@ void N(appendGfx_FallingSprite)(void) {
     }
 
     spr_get_player_raster_info(&info, falling->playerSpriteID, falling->rasterID);
-    recPart.raster  = info.raster;
-    recPart.palette = info.defaultPal;
-    recPart.width   = info.width;
-    recPart.height  = info.height;
-    recPart.xOffset = -(info.width / 2);
-    recPart.yOffset = (info.height / 2);
-    recPart.opacity = 255;
-    imgfx_appendGfx_component(falling->foldStateID, &recPart, 0, transformMtx);
+    ifxImg.raster  = info.raster;
+    ifxImg.palette = info.defaultPal;
+    ifxImg.width   = info.width;
+    ifxImg.height  = info.height;
+    ifxImg.xOffset = -(info.width / 2);
+    ifxImg.yOffset = (info.height / 2);
+    ifxImg.alpha = 255;
+    imgfx_appendGfx_component(falling->foldStateID, &ifxImg, 0, transformMtx);
 
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }

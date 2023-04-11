@@ -21,7 +21,7 @@ typedef struct StoneChompAmbushIsk13 {
 void N(func_80241610_990DF0)(void) {
     StoneChompAmbushIsk13* ambush = (StoneChompAmbushIsk13*) evt_get_variable(NULL, MV_AmbushPtr);
     Camera* cam = &gCameras[gCurrentCameraID];
-    ImgfxImageRecPart foldImg;
+    ImgfxTexture ifxImg;
     SpriteRasterInfo spriteRaster;
     Matrix4f transformMtx, tempMtx;
     
@@ -69,16 +69,16 @@ void N(func_80241610_990DF0)(void) {
         }
     }
     spr_get_npc_raster_info(&spriteRaster, ambush->spriteIndex, ambush->rasterIndex);
-    foldImg.raster  = spriteRaster.raster;
-    foldImg.palette = spriteRaster.defaultPal;
-    ambush->width = foldImg.width  = spriteRaster.width;
-    ambush->height = foldImg.height = spriteRaster.height;
-    foldImg.xOffset = -(spriteRaster.width / 2);
-    foldImg.yOffset = (spriteRaster.height / 2);
-    foldImg.opacity = 255;
+    ifxImg.raster  = spriteRaster.raster;
+    ifxImg.palette = spriteRaster.defaultPal;
+    ambush->width = ifxImg.width  = spriteRaster.width;
+    ambush->height = ifxImg.height = spriteRaster.height;
+    ifxImg.xOffset = -(spriteRaster.width / 2);
+    ifxImg.yOffset = (spriteRaster.height / 2);
+    ifxImg.alpha = 255;
     
-    imgfx_update(ambush->foldID, IMGFX_UPD_SET_TINT, ambush->color.r, ambush->color.g, ambush->color.b, ambush->color.a, 0);
-    imgfx_appendGfx_component(ambush->foldID, &foldImg, 0, transformMtx);
+    imgfx_update(ambush->foldID, IMGFX_SET_TINT, ambush->color.r, ambush->color.g, ambush->color.b, ambush->color.a, 0);
+    imgfx_appendGfx_component(ambush->foldID, &ifxImg, 0, transformMtx);
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
 
@@ -268,7 +268,7 @@ EvtScript N(EVS_NpcDefeat_StoneChomp_Override) = {
     EVT_SET(GF_ISK13_Defeated_StoneChomp, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
     EVT_CALL(EnableNpcShadow, NPC_SELF, TRUE)
-    EVT_CALL(SetNpcImgfxParams, NPC_SELF, IMGFX_UPD_CLEAR, 0, 0, 0, 0)
+    EVT_CALL(SetNpcImgfxParams, NPC_SELF, IMGFX_CLEAR, 0, 0, 0, 0)
     EVT_CALL(N(DestroyAmbushWorker))
     EVT_CALL(GetBattleOutcome, LVar0)
     EVT_SWITCH(LVar0)

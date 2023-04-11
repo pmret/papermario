@@ -17,7 +17,7 @@ typedef struct FallingSprite {
 BSS FallingSprite N(Falling);
 
 void N(appendGfx_FallingSprite)(void) {
-    ImgfxImageRecPart foldImage;
+    ImgfxTexture ifxImg;
     SpriteRasterInfo rasterInfo;
     Matrix4f mtxTransform;
     Matrix4f mtxTemp;
@@ -66,14 +66,14 @@ void N(appendGfx_FallingSprite)(void) {
     }
 
     spr_get_player_raster_info(&rasterInfo, falling->playerSpriteID, falling->rasterID);
-    foldImage.raster = rasterInfo.raster;
-    foldImage.palette = rasterInfo.defaultPal;
-    falling->width  = foldImage.width = rasterInfo.width;
-    falling->height = foldImage.height = rasterInfo.height;
-    foldImage.xOffset = -(rasterInfo.width / 2);
-    foldImage.yOffset = rasterInfo.height / 2;
-    foldImage.opacity = 255;
-    imgfx_appendGfx_component(falling->foldStateID, &foldImage, 0, mtxTransform);
+    ifxImg.raster = rasterInfo.raster;
+    ifxImg.palette = rasterInfo.defaultPal;
+    falling->width  = ifxImg.width = rasterInfo.width;
+    falling->height = ifxImg.height = rasterInfo.height;
+    ifxImg.xOffset = -(rasterInfo.width / 2);
+    ifxImg.yOffset = rasterInfo.height / 2;
+    ifxImg.alpha = 255;
+    imgfx_appendGfx_component(falling->foldStateID, &ifxImg, 0, mtxTransform);
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
 

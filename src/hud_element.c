@@ -1417,7 +1417,7 @@ void render_hud_element(HudElement* hudElement) {
     Matrix4f sp1E0;
     Matrix4f sp220;
     Matrix4f sp260;
-    ImgfxImageRecPart sp2A0;
+    ImgfxTexture ifxImg;
     f32 xScaleFactor, yScaleFactor;
     s32 height, width;
     HudTransform* transform;
@@ -1511,35 +1511,35 @@ void render_hud_element(HudElement* hudElement) {
         case 1:
             if (hudElement->flags & HUD_ELEMENT_FLAG_NO_FOLD) {
                 if (hudElement->flags & HUD_ELEMENT_FLAG_TRANSPARENT) {
-                    imgfx_update(0, IMGFX_UPD_SET_ALPHA, 255, 255, 255, hudElement->opacity, 0);
+                    imgfx_update(0, IMGFX_SET_ALPHA, 255, 255, 255, hudElement->opacity, 0);
                 } else {
-                    imgfx_update(0, IMGFX_UPD_CLEAR, 0, 0, 0, 0, 0);
+                    imgfx_update(0, IMGFX_CLEAR, 0, 0, 0, 0, 0);
                 }
             } else {
                 if (hudElement->flags & HUD_ELEMENT_FLAG_TRANSPARENT) {
-                    imgfx_update(transform->foldIdx, IMGFX_UPD_SET_ALPHA, 255, 255, 255, hudElement->opacity, 0);
+                    imgfx_update(transform->foldIdx, IMGFX_SET_ALPHA, 255, 255, 255, hudElement->opacity, 0);
                 } else {
-                    imgfx_update(transform->foldIdx, IMGFX_UPD_CLEAR, 0, 0, 0, 0, 0);
+                    imgfx_update(transform->foldIdx, IMGFX_CLEAR, 0, 0, 0, 0, 0);
                 }
             }
 
-            sp2A0.raster = hudElement->imageAddr;
+            ifxImg.raster = hudElement->imageAddr;
             palette = (u16*) hudElement->paletteAddr;
-            sp2A0.width = width;
-            sp2A0.height = height;
-            sp2A0.xOffset = -width / 2;
-            sp2A0.yOffset = height / 2;
-            sp2A0.opacity = 255;
-            sp2A0.palette = palette;
+            ifxImg.width = width;
+            ifxImg.height = height;
+            ifxImg.xOffset = -width / 2;
+            ifxImg.yOffset = height / 2;
+            ifxImg.alpha = 255;
+            ifxImg.palette = palette;
 
             if (hudElement->flags & HUD_ELEMENT_FLAG_NO_FOLD) {
                 if (hudElement->flags & HUD_ELEMENT_FLAG_ANTIALIASING) {
-                    imgfx_appendGfx_component(0, &sp2A0, IMGFX_STATE_FLAG_40, sp60);
+                    imgfx_appendGfx_component(0, &ifxImg, IMGFX_FLAG_40, sp60);
                 } else {
-                    imgfx_appendGfx_component(0, &sp2A0, IMGFX_STATE_FLAG_40, sp60);
+                    imgfx_appendGfx_component(0, &ifxImg, IMGFX_FLAG_40, sp60);
                 }
             } else {
-                imgfx_appendGfx_component(transform->foldIdx, &sp2A0, IMGFX_STATE_FLAG_40, sp60);
+                imgfx_appendGfx_component(transform->foldIdx, &ifxImg, IMGFX_FLAG_40, sp60);
             }
             break;
         case 2:

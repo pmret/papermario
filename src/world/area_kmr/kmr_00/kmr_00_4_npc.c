@@ -75,12 +75,12 @@ EvtScript N(EVS_NpcAux_StarSpirit) = {
     EVT_LABEL(1)
     EVT_LOOP(50)
         EVT_ADDF(LVar0, EVT_FLOAT(0.8))
-        EVT_CALL(SetNpcImgfxParams, NPC_SELF, IMGFX_UPD_HOLOGRAM, IMGFX_HOLOGRAM_NOISE, ArrayVar(0), MV_Unk_01, LVar0)
+        EVT_CALL(SetNpcImgfxParams, NPC_SELF, IMGFX_HOLOGRAM, IMGFX_HOLOGRAM_NOISE, ArrayVar(0), MV_Unk_01, LVar0)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_LOOP(50)
         EVT_ADDF(LVar0, EVT_FLOAT(-0.8))
-        EVT_CALL(SetNpcImgfxParams, NPC_SELF, IMGFX_UPD_HOLOGRAM, IMGFX_HOLOGRAM_NOISE, ArrayVar(0), MV_Unk_01, LVar0)
+        EVT_CALL(SetNpcImgfxParams, NPC_SELF, IMGFX_HOLOGRAM, IMGFX_HOLOGRAM_NOISE, ArrayVar(0), MV_Unk_01, LVar0)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_GOTO(1)

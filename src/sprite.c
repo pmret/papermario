@@ -326,7 +326,7 @@ void spr_appendGfx_component(
 {
     Matrix4f mtxTransform;
     Matrix4f mtxTemp;
-    ImgfxImageRecPart foldImg;
+    ImgfxTexture ifxImg;
     s32 quadIndex;
     Quad* quad;
     s32 width;
@@ -384,14 +384,14 @@ void spr_appendGfx_component(
     if (quad != NULL) {
         spr_appendGfx_component_flat(quad, cache->image, palette, width, height, rotY, mtxTransform, (u8) opacity);
     } else {
-        foldImg.raster = cache->image;
-        foldImg.palette = palette;
-        foldImg.width = width;
-        foldImg.height = height;
-        foldImg.xOffset = -(width / 2);
-        foldImg.yOffset = height;
-        foldImg.opacity = opacity;
-        if (imgfx_appendGfx_component((u8) (u16) D_802DF540, &foldImg, IMGFX_STATE_FLAG_80000, mtxTransform) == 1) { // todo bitfield?
+        ifxImg.raster  = cache->image;
+        ifxImg.palette = palette;
+        ifxImg.width   = width;
+        ifxImg.height  = height;
+        ifxImg.xOffset = -(width / 2);
+        ifxImg.yOffset = height;
+        ifxImg.alpha = opacity;
+        if (imgfx_appendGfx_component((u8) (u16) D_802DF540, &ifxImg, IMGFX_FLAG_80000, mtxTransform) == 1) { // todo bitfield?
             D_802DF540 &= ~(0x80000000 | 0x40000000 | 0x20000000 | 0x10000000);
         }
     }
@@ -1243,7 +1243,7 @@ void func_802DE780(s32 spriteIdx, s32 compIdx, ImgfxType foldType, s32 foldArg1,
 
             if (compIdx == -1 || i == compIdx) {
                 imgfx_update((u8)comp->unk_4C, foldType, foldArg1, foldArg2, foldArg3, foldArg4, foldArg5);
-                if (foldType != IMGFX_UPD_CLEAR) {
+                if (foldType != IMGFX_CLEAR) {
                     comp->unk_4C |= 0x10000000;
                 } else {
                     comp->unk_4C &= ~0xF0000000;

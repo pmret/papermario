@@ -7,7 +7,7 @@
 
 void N(gfx_build_knocked_down_player)(void) {
     UnkEntityStruct* temp_v0 = (UnkEntityStruct*) evt_get_variable(NULL, KNOCK_DOWN_MAP_VAR);
-    ImgfxImageRecPart part;
+    ImgfxTexture ifxImg;
     SpriteRasterInfo rasterInfo;
     Matrix4f sp40, sp80;
 
@@ -42,15 +42,15 @@ void N(gfx_build_knocked_down_player)(void) {
               G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     spr_get_player_raster_info(&rasterInfo, temp_v0->spriteIndex, temp_v0->rasterIndex);
-    part.raster = rasterInfo.raster;
-    part.palette = rasterInfo.defaultPal;
-    temp_v0->unk_34 = part.width = rasterInfo.width;
-    temp_v0->unk_38 = part.height = rasterInfo.height;
-    part.xOffset = -(s32) (rasterInfo.width * 0.5f);
-    part.yOffset = rasterInfo.height;
-    part.opacity = 255;
+    ifxImg.raster = rasterInfo.raster;
+    ifxImg.palette = rasterInfo.defaultPal;
+    temp_v0->unk_34 = ifxImg.width = rasterInfo.width;
+    temp_v0->unk_38 = ifxImg.height = rasterInfo.height;
+    ifxImg.xOffset = -(s32) (rasterInfo.width * 0.5f);
+    ifxImg.yOffset = rasterInfo.height;
+    ifxImg.alpha = 255;
 
-    imgfx_appendGfx_component(temp_v0->foldID, &part, 0, sp40);
+    imgfx_appendGfx_component(temp_v0->foldID, &ifxImg, 0, sp40);
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
 

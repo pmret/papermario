@@ -179,9 +179,9 @@ EvtScript N(EVS_NpcAux_LavaPiranhaHead) = {
 };
 
 EvtScript N(EVS_NpcInit_LavaPiranhaHead) = {
-    EVT_CALL(SetNpcImgfxParams, NPC_LavaPiranhaHead, IMGFX_UPD_FILL_COLOR, 80, 80, 80, 0)
-    EVT_CALL(SetNpcImgfxParams, NPC_LavaBud_01, IMGFX_UPD_FILL_COLOR, 80, 80, 80, 0)
-    EVT_CALL(SetNpcImgfxParams, NPC_LavaBud_02, IMGFX_UPD_FILL_COLOR, 80, 80, 80, 0)
+    EVT_CALL(SetNpcImgfxParams, NPC_LavaPiranhaHead, IMGFX_FILL_COLOR, 80, 80, 80, 0)
+    EVT_CALL(SetNpcImgfxParams, NPC_LavaBud_01, IMGFX_FILL_COLOR, 80, 80, 80, 0)
+    EVT_CALL(SetNpcImgfxParams, NPC_LavaBud_02, IMGFX_FILL_COLOR, 80, 80, 80, 0)
     EVT_CALL(SetNpcAnimation, NPC_LavaPiranhaHead, ANIM_LavaPiranha_Anim03)
     EVT_CALL(SetNpcAnimation, NPC_LavaBud_01, ANIM_LavaBud_Anim03)
     EVT_CALL(SetNpcAnimation, NPC_LavaBud_02, ANIM_LavaBud_Anim03)
