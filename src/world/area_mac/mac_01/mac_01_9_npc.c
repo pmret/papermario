@@ -416,20 +416,20 @@ EvtScript N(EVS_MerlonBargeOut) = {
         EVT_CALL(PlayerJump1, -222, 20, -158, 8 * DT)
         EVT_WAIT(5 * DT)
         EVT_CALL(SetPlayerFlagBits, PS_FLAG_NO_FLIPPING, FALSE)
-        EVT_CALL(N(KnockDownPlayerB), 1, 37)
-        EVT_CALL(N(KnockDownPlayerD), -215, 20, -158)
+        EVT_CALL(N(KnockdownCreate), SPR_Mario1, 37) //TODO hardcoded player raster ID
+        EVT_CALL(N(KnockdownSetPos), -215, 20, -158)
         EVT_WAIT(1)
         EVT_CALL(SetPlayerPos, -215, 1000, -158)
         EVT_CALL(MakeLerp, 0, 90, 10 * DT, EASING_QUADRATIC_IN)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
-            EVT_CALL(N(KnockDownPlayerE), LVar0, 0, 0)
+            EVT_CALL(N(KnockdownSetRot), LVar0, 0, 0)
             EVT_WAIT(1)
             EVT_IF_EQ(LVar1, 0)
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(N(KnockDownPlayerD), -215, 21, -158)
+        EVT_CALL(N(KnockdownSetPos), -215, 21, -158)
         EVT_CALL(PlaySoundAtPlayer, SOUND_162, SOUND_SPACE_MODE_0)
     EVT_END_THREAD
     EVT_WAIT(50 * DT)
@@ -440,18 +440,18 @@ EvtScript N(EVS_MerlonBargeOut) = {
     EVT_CALL(GetAngleToPlayer, NPC_Merlon, LVar0)
     EVT_CALL(InterpNpcYaw, NPC_Merlon, LVar0, 5)
     EVT_CALL(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_0021)
-    EVT_CALL(N(KnockDownPlayerD), -215, 20, -158)
+    EVT_CALL(N(KnockdownSetPos), -215, 20, -158)
     EVT_CALL(MakeLerp, 90, 0, 15 * DT, EASING_QUADRATIC_OUT)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
-        EVT_CALL(N(KnockDownPlayerE), LVar0, 0, 0)
+        EVT_CALL(N(KnockdownSetRot), LVar0, 0, 0)
         EVT_WAIT(1)
         EVT_IF_EQ(LVar1, 0)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
     EVT_CALL(SetPlayerPos, -222, 20, -158)
-    EVT_CALL(N(KnockDownPlayerC))
+    EVT_CALL(N(KnockdownDestroy))
     EVT_CALL(InterpPlayerYaw, 90, 0)
     EVT_CALL(SetPlayerActionState, ACTION_STATE_JUMP)
     EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.0))

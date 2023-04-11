@@ -644,10 +644,10 @@ ApiStatus UpdatePlayerImgfx(Evt* script, s32 isInitialCall) {
             playerStatus->renderMode = RENDER_MODE_ALPHATEST;
             spr_set_player_imgfx_update_all(a0, IMGFX_CLEAR, 0, 0, 0, 0, PlayerImgfxFlags);
             break;
-        case IMGFX_TYPE_2:
-        case IMGFX_TYPE_3:
+        case IMGFX_UNK_2:
+        case IMGFX_RESET:
             playerStatus->renderMode = RENDER_MODE_ALPHATEST;
-        case IMGFX_TYPE_1:
+        case IMGFX_UNK_1:
             spr_set_player_imgfx_update_all(a0, foldType, 0, 0, 0, 0, PlayerImgfxFlags);
             break;
         case IMGFX_SET_WAVY:

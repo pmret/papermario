@@ -155,13 +155,13 @@ void N(CharAnim_FadeIn_1)(CreditsLine* line, CreditsChar* chr) {
         alpha = 255.0;
     }
     if (chr->fadeInTime == (line->appearTime - 4)) {
-        imgfx_update(0, IMGFX_TYPE_A, 64, 64, 64, alpha, 0);
+        imgfx_update(0, IMGFX_SET_CREDITS_FADE, 64, 64, 64, alpha, 0);
     } else if (chr->fadeInTime == (line->appearTime - 3)) {
-        imgfx_update(0, IMGFX_TYPE_A, 96, 96, 96, alpha, 0);
+        imgfx_update(0, IMGFX_SET_CREDITS_FADE, 96, 96, 96, alpha, 0);
     } else if (chr->fadeInTime == (line->appearTime - 2)) {
-        imgfx_update(0, IMGFX_TYPE_A, 127, 127, 127, alpha, 0);
+        imgfx_update(0, IMGFX_SET_CREDITS_FADE, 127, 127, 127, alpha, 0);
     } else if (chr->fadeInTime == (line->appearTime - 1)) {
-        imgfx_update(0, IMGFX_TYPE_A, 80, 80, 80, alpha, 0);
+        imgfx_update(0, IMGFX_SET_CREDITS_FADE, 80, 80, 80, alpha, 0);
     } else {
         imgfx_update(0, IMGFX_SET_ALPHA, 255, 255, 255, alpha, 0);
     }

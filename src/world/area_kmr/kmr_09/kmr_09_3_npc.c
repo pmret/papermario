@@ -92,7 +92,7 @@ EvtScript N(EVS_NpcIdle_Goomba_Ambush) = {
     EVT_CALL(SetNpcImgfxParams, NPC_SELF, IMGFX_SET_ANIM, IMGFX_ANIM_UNFURL, 1, 1, 0)
     EVT_WAIT(15)
     EVT_CALL(SetNpcImgfxFlags, NPC_SELF, IMGFX_FLAG_2000)
-    EVT_CALL(SetNpcImgfxParams, NPC_SELF, IMGFX_TYPE_3, 0, 0, 0, 0)
+    EVT_CALL(SetNpcImgfxParams, NPC_SELF, IMGFX_RESET, 0, 0, 0, 0)
     EVT_THREAD
         EVT_WAIT(2)
         EVT_SETF(LVar0, EVT_FLOAT(0.0))

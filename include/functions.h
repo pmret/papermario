@@ -793,8 +793,8 @@ void init_entity_models(void);
 f32 phys_get_spin_history(s32 lag, s32* x, s32* y, s32* z);
 void imgfx_update(u32, ImgfxType, s32, s32, s32, s32, s32);
 s32 imgfx_appendGfx_component(s32, ImgfxTexture*, u32, Matrix4f);
-void func_8013A6E8(void);
-s32 func_8013A704(s32);
+void imgfx_update_cache(void);
+s32 imgfx_get_free_instances(s32);
 void free_worker(s32);
 
 s32 ai_check_fwd_collisions(Npc* npc, f32 arg1, f32* arg2, f32* arg3, f32* arg4, f32* arg5);
@@ -983,7 +983,7 @@ void func_8025DBC8(ActorPart*, s32);
 void func_8025DD40(ActorPart*, s32);
 void func_8025DE88(ActorPart*, s32);
 void status_menu_ignore_changes(void);
-void func_8013A854(u32);
+void imgfx_release_instance(u32);
 
 void set_script_flags(Evt* script, s32 flags);
 void clear_script_flags(Evt* script, s32 flags);

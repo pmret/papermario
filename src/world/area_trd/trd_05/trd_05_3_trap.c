@@ -2,7 +2,7 @@
 #include "sprite.h"
 
 typedef struct FallingSprite {
-    /* 0x00 */ s32 foldStateID;
+    /* 0x00 */ s32 imgfxIdx;
     /* 0x04 */ s32 workerID;
     /* 0x08 */ s32 playerSpriteID;
     /* 0x0C */ s32 rasterID;
@@ -70,7 +70,7 @@ void N(appendGfx_FallingSprite)(void) {
     ifxImg.xOffset = -(info.width / 2);
     ifxImg.yOffset = (info.height / 2);
     ifxImg.alpha = 255;
-    imgfx_appendGfx_component(falling->foldStateID, &ifxImg, 0, transformMtx);
+    imgfx_appendGfx_component(falling->imgfxIdx, &ifxImg, 0, transformMtx);
 
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
@@ -86,13 +86,13 @@ API_CALLABLE(N(InitializeFallingSprite)) {
     falling->scale.x = SPRITE_WORLD_SCALE_F;
     falling->scale.y = SPRITE_WORLD_SCALE_F;
     falling->scale.z = SPRITE_WORLD_SCALE_F;
-    falling->foldStateID = func_8013A704(1);
+    falling->imgfxIdx = imgfx_get_free_instances(1);
     falling->workerID = create_worker_world(0, &N(appendGfx_FallingSprite));
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(DeleteFallingSprite)) {
-    func_8013A854(N(Falling).foldStateID);
+    imgfx_release_instance(N(Falling).imgfxIdx);
     free_worker(N(Falling).workerID);
     return ApiStatus_DONE2;
 }

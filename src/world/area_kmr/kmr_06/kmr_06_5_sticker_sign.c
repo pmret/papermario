@@ -5,7 +5,7 @@ extern s32 gItemIconRasterOffsets[];
 extern s32 gItemIconPaletteOffsets[];
 
 typedef struct StickerData {
-    /* 0x00 */ s32 folderID;
+    /* 0x00 */ s32 imgfxIdx;
     /* 0x04 */ s32 workerID;
     /* 0x08 */ Vec3f pos;
     /* 0x14 */ f32 pitch;
@@ -107,7 +107,7 @@ API_CALLABLE(N(CreateSticker)) {
         (u8*) (iconPalEnd + gItemIconPaletteOffsets[itemID]),
         iconPal);
     
-    sticker->folderID = func_8013A704(1);
+    sticker->imgfxIdx = imgfx_get_free_instances(1);
     sticker->workerID = create_worker_world(NULL, N(worker_render_sticker));
     evt_set_variable(script, MV_StickerData, (s32) sticker);
     evt_set_variable(script, MV_StickerImage, (s32) iconImg);

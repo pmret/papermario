@@ -168,22 +168,22 @@ API_CALLABLE(N(UndarkenWorld)) {
 }
 
 API_CALLABLE(N(CreateRitualCards)) {
-    s32 ret;
+    s32 imgfxIdx;
 
     N(CreatorScript) = script;
 
-    ret = func_8013A704(1);
-    imgfx_update(ret, IMGFX_SET_ANIM, IMGFX_ANIM_SHUFFLE_CARDS, 1, 1, 0, IMGFX_FLAG_800);
-    evt_set_variable(script, RITUAL_VAR_FOLDER_1, ret);
-    ret = func_8013A704(1);
-    imgfx_update(ret, IMGFX_SET_ANIM, IMGFX_ANIM_FLIP_CARD_1, 1, 1, 0, IMGFX_FLAG_800);
-    evt_set_variable(script, RITUAL_VAR_FOLDER_2, ret);
-    ret = func_8013A704(1);
-    imgfx_update(ret, IMGFX_SET_ANIM, IMGFX_ANIM_FLIP_CARD_2, 1, 1, 0, IMGFX_FLAG_800);
-    evt_set_variable(script, RITUAL_VAR_FOLDER_3, ret);
-    ret = func_8013A704(1);
-    imgfx_update(ret, IMGFX_SET_ANIM, IMGFX_ANIM_FLIP_CARD_3, 1, 1, 0, IMGFX_FLAG_800);
-    evt_set_variable(script, RITUAL_VAR_FOLDER_4, ret);
+    imgfxIdx = imgfx_get_free_instances(1);
+    imgfx_update(imgfxIdx, IMGFX_SET_ANIM, IMGFX_ANIM_SHUFFLE_CARDS, 1, 1, 0, IMGFX_FLAG_800);
+    evt_set_variable(script, RITUAL_VAR_FOLDER_1, imgfxIdx);
+    imgfxIdx = imgfx_get_free_instances(1);
+    imgfx_update(imgfxIdx, IMGFX_SET_ANIM, IMGFX_ANIM_FLIP_CARD_1, 1, 1, 0, IMGFX_FLAG_800);
+    evt_set_variable(script, RITUAL_VAR_FOLDER_2, imgfxIdx);
+    imgfxIdx = imgfx_get_free_instances(1);
+    imgfx_update(imgfxIdx, IMGFX_SET_ANIM, IMGFX_ANIM_FLIP_CARD_2, 1, 1, 0, IMGFX_FLAG_800);
+    evt_set_variable(script, RITUAL_VAR_FOLDER_3, imgfxIdx);
+    imgfxIdx = imgfx_get_free_instances(1);
+    imgfx_update(imgfxIdx, IMGFX_SET_ANIM, IMGFX_ANIM_FLIP_CARD_3, 1, 1, 0, IMGFX_FLAG_800);
+    evt_set_variable(script, RITUAL_VAR_FOLDER_4, imgfxIdx);
 
     evt_set_variable(script, RITUAL_VAR_WORKER, create_worker_world(
         N(card_worker_update),
@@ -192,10 +192,10 @@ API_CALLABLE(N(CreateRitualCards)) {
 }
 
 API_CALLABLE(N(DestroyRitualCards)) {
-    func_8013A854(evt_get_variable(script, RITUAL_VAR_FOLDER_1));
-    func_8013A854(evt_get_variable(script, RITUAL_VAR_FOLDER_2));
-    func_8013A854(evt_get_variable(script, RITUAL_VAR_FOLDER_3));
-    func_8013A854(evt_get_variable(script, RITUAL_VAR_FOLDER_4));
+    imgfx_release_instance(evt_get_variable(script, RITUAL_VAR_FOLDER_1));
+    imgfx_release_instance(evt_get_variable(script, RITUAL_VAR_FOLDER_2));
+    imgfx_release_instance(evt_get_variable(script, RITUAL_VAR_FOLDER_3));
+    imgfx_release_instance(evt_get_variable(script, RITUAL_VAR_FOLDER_4));
     free_worker(evt_get_variable(script, RITUAL_VAR_WORKER));
     return ApiStatus_DONE2;
 }

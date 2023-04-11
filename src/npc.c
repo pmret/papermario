@@ -2100,11 +2100,11 @@ void func_8003D3BC(Npc* npc) {
             npc->renderMode = RENDER_MODE_ALPHATEST;
             func_802DE894(npc->spriteInstanceID, IMGFX_CLEAR, 0, 0, 0, 0, foldFlags);
             break;
-        case IMGFX_TYPE_2:
-        case IMGFX_TYPE_3:
+        case IMGFX_UNK_2:
+        case IMGFX_RESET:
             npc->renderMode = RENDER_MODE_ALPHATEST;
             // fallthrough
-        case IMGFX_TYPE_1:
+        case IMGFX_UNK_1:
             func_802DE894(npc->spriteInstanceID, foldType, 0, 0, 0, 0, foldFlags);
             break;
         case IMGFX_SET_WAVY:
@@ -2123,13 +2123,13 @@ void func_8003D3BC(Npc* npc) {
             npc->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
             func_802DE894(npc->spriteInstanceID, IMGFX_SET_TINT, foldArg1, foldArg2, foldArg3, foldArg4, foldFlags);
             break;
-        case IMGFX_TYPE_9:
+        case IMGFX_SET_WHITE_FADE:
             npc->renderMode = RENDER_MODE_ALPHATEST;
-            func_802DE894(npc->spriteInstanceID, IMGFX_TYPE_9, foldArg1, foldArg2, foldArg3, 255, foldFlags);
+            func_802DE894(npc->spriteInstanceID, IMGFX_SET_WHITE_FADE, foldArg1, foldArg2, foldArg3, 255, foldFlags);
             break;
-        case IMGFX_TYPE_A:
+        case IMGFX_SET_CREDITS_FADE:
             npc->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
-            func_802DE894(npc->spriteInstanceID, IMGFX_TYPE_A, foldArg1, foldArg2, foldArg3, foldArg4, foldFlags);
+            func_802DE894(npc->spriteInstanceID, IMGFX_SET_CREDITS_FADE, foldArg1, foldArg2, foldArg3, foldArg4, foldFlags);
             break;
         case IMGFX_SET_ANIM:
             npc->renderMode = RENDER_MODE_ALPHATEST;

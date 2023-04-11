@@ -45,7 +45,7 @@ typedef struct SpriteComponent {
     /* 0x28 */ Vec3f compPos;
     /* 0x34 */ Vec3i rotation;
     /* 0x40 */ Vec3f scale;
-    /* 0x4C */ s32 unk_4C;
+    /* 0x4C */ s32 imgfxIdx;
 } SpriteComponent; // size = 0x50
 
 typedef struct PlayerCurrentAnimInfo {

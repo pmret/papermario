@@ -1517,9 +1517,9 @@ void render_hud_element(HudElement* hudElement) {
                 }
             } else {
                 if (hudElement->flags & HUD_ELEMENT_FLAG_TRANSPARENT) {
-                    imgfx_update(transform->foldIdx, IMGFX_SET_ALPHA, 255, 255, 255, hudElement->opacity, 0);
+                    imgfx_update(transform->imgfxIdx, IMGFX_SET_ALPHA, 255, 255, 255, hudElement->opacity, 0);
                 } else {
-                    imgfx_update(transform->foldIdx, IMGFX_CLEAR, 0, 0, 0, 0, 0);
+                    imgfx_update(transform->imgfxIdx, IMGFX_CLEAR, 0, 0, 0, 0, 0);
                 }
             }
 
@@ -1539,7 +1539,7 @@ void render_hud_element(HudElement* hudElement) {
                     imgfx_appendGfx_component(0, &ifxImg, IMGFX_FLAG_40, sp60);
                 }
             } else {
-                imgfx_appendGfx_component(transform->foldIdx, &ifxImg, IMGFX_FLAG_40, sp60);
+                imgfx_appendGfx_component(transform->imgfxIdx, &ifxImg, IMGFX_FLAG_40, sp60);
             }
             break;
         case 2:
@@ -2116,7 +2116,7 @@ void hud_element_create_transform_A(s32 id) {
     element->hudTransform = transform;
     ASSERT(transform != NULL);
     element->flags |= HUD_ELEMENT_FLAG_TRANSFORM;
-    transform->foldIdx = func_8013A704(1);
+    transform->imgfxIdx = imgfx_get_free_instances(1);
     transform->position.x = 0.0f;
     transform->position.y = 0.0f;
     transform->position.z = 0.0f;
@@ -2138,7 +2138,7 @@ void hud_element_create_transform_B(s32 id) {
     element->hudTransform = transform;
     ASSERT(transform != NULL);
     element->flags |= HUD_ELEMENT_FLAG_TRANSFORM | HUD_ELEMENT_FLAG_NO_FOLD;
-    transform->foldIdx = 0;
+    transform->imgfxIdx = 0;
     transform->position.x = 0.0f;
     transform->position.y = 0.0f;
     transform->position.z = 0.0f;
@@ -2158,7 +2158,7 @@ void hud_element_create_transform_C(s32 id) {
     element->hudTransform = transform;
     ASSERT(transform != NULL);
     element->flags |= HUD_ELEMENT_FLAG_40000000 | HUD_ELEMENT_FLAG_NO_FOLD | HUD_ELEMENT_FLAG_TRANSFORM;
-    transform->foldIdx = 0;
+    transform->imgfxIdx = 0;
     transform->position.x = 0.0f;
     transform->position.y = 0.0f;
     transform->position.z = 0.0f;
@@ -2176,7 +2176,7 @@ void hud_element_free_transform(s32 id) {
     HudTransform* hudTransform = hudElement->hudTransform;
 
     if (!(hudElement->flags & HUD_ELEMENT_FLAG_NO_FOLD)) {
-        func_8013A854(hudTransform->foldIdx);
+        imgfx_release_instance(hudTransform->imgfxIdx);
     }
 
     heap_free(hudElement->hudTransform);

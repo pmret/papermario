@@ -5960,7 +5960,7 @@ enum NpcDropFlags {
 };
 
 enum ImgfxStateFlags {
-    IMGFX_FLAG_ENABLED              = 0x00000001,
+    IMGFX_FLAG_IN_USE              = 0x00000001,
     IMGFX_FLAG_G_CULL_BACK          = 0x00000002,
     IMGFX_FLAG_G_CULL_FRONT         = 0x00000004,
     IMGFX_FLAG_8                    = 0x00000008,
@@ -5984,17 +5984,17 @@ enum ImgfxStateFlags {
 };
 
 typedef enum ImgfxType {
-    IMGFX_CLEAR                     = 0x0,    // or IMGFX_INIT?
-    IMGFX_TYPE_1                    = 0x1,    // unused?
-    IMGFX_TYPE_2                    = 0x2,    // unused?
-    IMGFX_TYPE_3                    = 0x3,    // after goomba 'sticker' ambush in kmr_09 unfurls
+    IMGFX_CLEAR                     = 0x0,
+    IMGFX_UNK_1                     = 0x1,    // unused?
+    IMGFX_UNK_2                     = 0x2,    // unused?
+    IMGFX_RESET                     = 0x3,    // after goomba 'sticker' ambush in kmr_09 unfurls. might be to force-terminate ANIM.
     IMGFX_SET_WAVY                  = 0x4,    // Kolorado when injured and Sushie when underwater (* note: Sushie fold rendering is bugged and only occurs *before* going underwater)
     IMGFX_SET_ANIM                  = 0x5,
     IMGFX_SET_COLOR                 = 0x6,    // modulate color (args: R, G, B)
     IMGFX_SET_ALPHA                 = 0x7,    // modulate alpha (args: A)
     IMGFX_SET_TINT                  = 0x8,    // modulate color+alpha (args: R, G, B, A)
-    IMGFX_TYPE_9                    = 0x9,
-    IMGFX_TYPE_A                    = 0xA,
+    IMGFX_SET_WHITE_FADE            = 0x9,
+    IMGFX_SET_CREDITS_FADE          = 0xA,
     IMGFX_COLOR_BUF_SET_B           = 0xB,
     IMGFX_COLOR_BUF_SET_C           = 0xC,
     IMGFX_HOLOGRAM                  = 0xD,    // ghostly star spirits and merlar (args: ???, staticAmt, ???, alphaAmt)

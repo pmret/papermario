@@ -77,7 +77,7 @@ typedef struct ImgfxState {
     /* 0x0A */ u16 lastVtxIdx;
     /* 0x0C */ u16 unk_0C;
     /* 0x0E */ s16 unk_0E;
-    /* 0x10 */ s16 unk_10;
+    /* 0x10 */ s16 nextIdx;
     /* 0x14 */ s32 flags;
     /* 0x18 */ char unk_18[0x4];
     /* 0x1C */ ImgfxIntVars ints;
@@ -220,21 +220,21 @@ s32 ImgfxAnimOffsets[] = {
 
 extern ImgfxCacheEntry ImgfxDataCache[8];
 
-void imgfx_clear_state_gfx(ImgfxState* state);
-void imgfx_clear_state_data(ImgfxState* state);
-void imgfx_init_state(ImgfxState* state);
-void func_8013B0EC(ImgfxState* state);
-void func_8013B1B0(ImgfxState* state, Matrix4f mtx);
+void imgfx_cache_instance_data(ImgfxState* state);
+void imgfx_clear_instance_data(ImgfxState* state);
+void imgfx_init_instance(ImgfxState* state);
+void imgfx_make_mesh(ImgfxState* state);
+void imgfx_appendGfx_mesh(ImgfxState* state, Matrix4f mtx);
 void imgfx_mesh_make_strip(ImgfxState* state);
 void imgfx_mesh_make_grid(ImgfxState* state);
 //ImgfxAnimHeader* imgfx_load_anim(ImgfxState* state);
 void imgfx_mesh_anim_update(ImgfxState* state);
-void func_8013CFA8(ImgfxState*, Matrix4f mtx);
-void func_8013DAB4(ImgfxState*, Matrix4f mtx);
-void func_8013E2F0(ImgfxState*, Matrix4f mtx);
-void func_8013E904(ImgfxState*, Matrix4f mtx);
+void imgfx_appendGfx_mesh_basic(ImgfxState*, Matrix4f mtx);
+void imgfx_appendGfx_mesh_grid(ImgfxState*, Matrix4f mtx);
+void imgfx_appendGfx_mesh_anim(ImgfxState*, Matrix4f mtx);
+void imgfx_appendGfx_mesh_strip(ImgfxState*, Matrix4f mtx);
 void imgfx_wavy_init(ImgfxState* state);
-void imgfx_mesh_wavy_update(ImgfxState* state);
+void imgfx_mesh_make_wavy(ImgfxState* state);
 void imgfx_mesh_load_colors(ImgfxState* state);
 
 void imgfx_set_vtx_buf_capacity(s16 arg0) {
@@ -251,8 +251,8 @@ void imgfx_init(void) {
     ImgfxInstances = (ImgfxInstanceList*)_heap_malloc(&heap_spriteHead, sizeof(ImgfxInstanceList));
 
     for (i = 0; i < ARRAY_COUNT(*ImgfxInstances); i++) {
-        imgfx_init_state(&(*ImgfxInstances)[i]);
-        imgfx_clear_state_data(&(*ImgfxInstances)[i]);
+        imgfx_init_instance(&(*ImgfxInstances)[i]);
+        imgfx_clear_instance_data(&(*ImgfxInstances)[i]);
     }
 
     for (i = 0; i < ARRAY_COUNT(D_80156958); i++) {
@@ -277,18 +277,18 @@ void func_8013A4D0(void) {
 
     imgfx_vtxBuf = ImgfxVtxBuffers[gCurrentDisplayContextIndex];
     imgfx_vtxCount = 0;
-    imgfx_init_state(&(*ImgfxInstances)[0]);
+    imgfx_init_instance(&(*ImgfxInstances)[0]);
 
-    (*ImgfxInstances)[0].flags |= IMGFX_FLAG_ENABLED;
+    (*ImgfxInstances)[0].flags |= IMGFX_FLAG_IN_USE;
 
     for (i = 1; i < ARRAY_COUNT(*ImgfxInstances); i++) {
-        if (((*ImgfxInstances)[i].flags & IMGFX_FLAG_ENABLED) && (*ImgfxInstances)[i].lastAnimCmd != IMGFX_SET_ANIM) {
-            imgfx_clear_state_gfx(&(*ImgfxInstances)[i]);
+        if (((*ImgfxInstances)[i].flags & IMGFX_FLAG_IN_USE) && (*ImgfxInstances)[i].lastAnimCmd != IMGFX_SET_ANIM) {
+            imgfx_cache_instance_data(&(*ImgfxInstances)[i]);
         }
     }
 
     for (i = 1; i < ARRAY_COUNT(*ImgfxInstances); i++) {
-        if ((*ImgfxInstances)[i].flags & IMGFX_FLAG_ENABLED && (*ImgfxInstances)[i].colorBuf != NULL) {
+        if ((*ImgfxInstances)[i].flags & IMGFX_FLAG_IN_USE && (*ImgfxInstances)[i].colorBuf != NULL) {
             if ((*ImgfxInstances)[i].lastColorCmd == IMGFX_COLOR_BUF_SET_B) {
                 continue;
             }
@@ -302,7 +302,7 @@ void func_8013A4D0(void) {
     }
 }
 
-void imgfx_add_to_gfx_cache(void* data, s8 usingContextualHeap) {
+void imgfx_add_to_cache(void* data, s8 usingContextualHeap) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(ImgfxDataCache); i++) {
@@ -315,7 +315,7 @@ void imgfx_add_to_gfx_cache(void* data, s8 usingContextualHeap) {
     }
 }
 
-void imgfx_update_gfx_cache(void) {
+void imgfx_update_cache_impl(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(ImgfxDataCache); i++) {
@@ -338,76 +338,79 @@ void imgfx_update_gfx_cache(void) {
     }
 }
 
-void func_8013A6E8(void) {
-    imgfx_update_gfx_cache();
+void imgfx_update_cache(void) {
+    imgfx_update_cache_impl();
 }
 
-s32 func_8013A704(s32 arg0) {
-    s32 count;
-    s32 cond;
+// request some number of imgfx instances. returns the id of the first assigned instance, or -1 if not enough are free.
+s32 imgfx_get_free_instances(s32 count) {
+    s32 numAssigned;
+    s32 foundAny;
     s32 iPrev;
-    s32 ret;
+    s32 firstIdx;
     s32 i;
 
-    count = 0;
+    numAssigned = 0;
     for (i = 1; i < ARRAY_COUNT(*ImgfxInstances); i++) {
-        if (!((*ImgfxInstances)[i].flags & IMGFX_FLAG_ENABLED)) {
-            count++;
+        if (!((*ImgfxInstances)[i].flags & IMGFX_FLAG_IN_USE)) {
+            numAssigned++;
         }
     }
 
-    if (count < arg0) {
+    if (numAssigned < count) {
         return -1;
     }
 
-    ret = 0;
-    cond = FALSE;
-    count = 0;
+    firstIdx = 0;
+    foundAny = FALSE;
+    numAssigned = 0;
     iPrev = -1;
     for (i = 1; i < ARRAY_COUNT(*ImgfxInstances); i++) {
-        if (!((*ImgfxInstances)[i].flags & IMGFX_FLAG_ENABLED)) {
-            if (!cond) {
-                ret = i;
-                cond = TRUE;
-            } else {
-                (*ImgfxInstances)[iPrev].unk_10 = i;
-            }
+        if ((*ImgfxInstances)[i].flags & IMGFX_FLAG_IN_USE) {
+            continue;
+        }
 
-            (*ImgfxInstances)[i].arrayIdx = i;
-            imgfx_init_state(&(*ImgfxInstances)[i]);
-            count++;
-            (*ImgfxInstances)[i].flags |= IMGFX_FLAG_ENABLED;
-            iPrev = i;
-            if (count == arg0) {
-                (*ImgfxInstances)[i].unk_10 = -1;
-                break;
-            }
+        if (!foundAny) {
+            firstIdx = i;
+            foundAny = TRUE;
+        } else {
+            (*ImgfxInstances)[iPrev].nextIdx = i;
+        }
+
+        (*ImgfxInstances)[i].arrayIdx = i;
+        imgfx_init_instance(&(*ImgfxInstances)[i]);
+        numAssigned++;
+        (*ImgfxInstances)[i].flags |= IMGFX_FLAG_IN_USE;
+        iPrev = i;
+        if (numAssigned == count) {
+            (*ImgfxInstances)[i].nextIdx = -1;
+            break;
         }
     }
 
-    return ret;
+    return firstIdx;
 }
 
-void func_8013A854(u32 idx) {
+void imgfx_release_instance(u32 idx) {
     if (idx < MAX_IMGFX_STATES) {
         (*ImgfxInstances)[idx].flags = 0;
-        (*ImgfxInstances)[idx].unk_10 = -1;
+        (*ImgfxInstances)[idx].nextIdx = -1;
     }
 }
 
-void func_8013A888(u32 idx) {
+void imgfx_release_instance_chain(u32 idx) {
     if (idx < MAX_IMGFX_STATES) {
-        s32 temp_s0;
+        s32 next;
 
         do {
-            temp_s0 = (*ImgfxInstances)[idx].unk_10;
-            func_8013A854(idx);
-            idx = temp_s0;
-        } while (temp_s0 != -1);
+            next = (*ImgfxInstances)[idx].nextIdx;
+            imgfx_release_instance(idx);
+            idx = next;
+        } while (next != -1);
     }
 }
 
-s16 func_8013A8E0(s32 idx) {
+s32 imgfx_get_next_instance(s32 idx) {
     if (idx < 0 || idx >= MAX_IMGFX_STATES) {
         return -1;
     }
@@ -415,37 +418,37 @@ s16 func_8013A8E0(s32 idx) {
     if (idx >= MAX_IMGFX_STATES) {
         return 0xFF;
     } else {
-        return (*ImgfxInstances)[idx].unk_10;
+        return (*ImgfxInstances)[idx].nextIdx;
     }
 }
 
-ImgfxState* imgfx_get_state(s32 idx) {
+ImgfxState* imgfx_get_instance(s32 idx) {
     return &(*ImgfxInstances)[idx];
 }
 
-void imgfx_clear_state_gfx(ImgfxState* state) {
+void imgfx_cache_instance_data(ImgfxState* state) {
     if (state->curAnimOffset != NULL) {
         state->curAnimOffset = NULL;
     }
     if (state->vtxBufs[0] != NULL) {
-        imgfx_add_to_gfx_cache(state->vtxBufs[0], TRUE);
+        imgfx_add_to_cache(state->vtxBufs[0], TRUE);
         state->vtxBufs[0] = NULL;
     }
     if (state->vtxBufs[1] != NULL) {
-        imgfx_add_to_gfx_cache(state->vtxBufs[1], TRUE);
+        imgfx_add_to_cache(state->vtxBufs[1], TRUE);
         state->vtxBufs[1] = NULL;
     }
     if (state->gfxBufs[0] != NULL) {
-        imgfx_add_to_gfx_cache(state->gfxBufs[0], TRUE);
+        imgfx_add_to_cache(state->gfxBufs[0], TRUE);
         state->gfxBufs[0] = NULL;
     }
     if (state->gfxBufs[1] != NULL) {
-        imgfx_add_to_gfx_cache(state->gfxBufs[1], TRUE);
+        imgfx_add_to_cache(state->gfxBufs[1], TRUE);
         state->gfxBufs[1] = NULL;
     }
 }
 
-void imgfx_clear_state_data(ImgfxState* state) {
+void imgfx_clear_instance_data(ImgfxState* state) {
     state->curAnimOffset = NULL;
     state->vtxBufs[0] = NULL;
     state->vtxBufs[1] = NULL;
@@ -455,11 +458,11 @@ void imgfx_clear_state_data(ImgfxState* state) {
     state->colorBufCount = 0;
 }
 
-void imgfx_init_state(ImgfxState* state) {
+void imgfx_init_instance(ImgfxState* state) {
     s32 i;
     s32 j;
 
-    state->unk_10 = -1;
+    state->nextIdx = -1;
     state->lastAnimCmd = IMGFX_CLEAR;
     state->lastColorCmd = IMGFX_CLEAR;
     state->flags = 0;
@@ -495,16 +498,16 @@ void imgfx_update(u32 idx, ImgfxType type, s32 foldArg1, s32 foldArg2, s32 foldA
     s32 t1;
     u8 r, g, b, a;
 
-    if (!(state->flags & IMGFX_FLAG_ENABLED) || (idx >= MAX_IMGFX_STATES)) {
+    if (!(state->flags & IMGFX_FLAG_IN_USE) || (idx >= MAX_IMGFX_STATES)) {
         return;
     }
 
     switch (type) {
         case IMGFX_CLEAR:
-        case IMGFX_TYPE_3:
+        case IMGFX_RESET:
             oldFlags = state->flags;
-            imgfx_clear_state_gfx(state);
-            imgfx_init_state(state);
+            imgfx_cache_instance_data(state);
+            imgfx_init_instance(state);
             state->flags = oldFlags;
             state->lastAnimCmd = IMGFX_CLEAR;
             state->lastColorCmd = IMGFX_CLEAR;
@@ -513,19 +516,19 @@ void imgfx_update(u32 idx, ImgfxType type, s32 foldArg1, s32 foldArg2, s32 foldA
             state->ints.raw[0][0] = -1;
             state->ints.raw[1][0] = -1;
 
-            state->flags &= IMGFX_FLAG_ENABLED;
+            state->flags &= IMGFX_FLAG_IN_USE;
             if (flags != 0) {
                 state->flags |= flags;
             } else {
                 state->flags |= flags; // required to match
             }
             return;
-        case IMGFX_TYPE_1:
+        case IMGFX_UNK_1:
             state->lastAnimCmd = IMGFX_CLEAR;
             state->renderType = IMGFX_RENDER_DEFAULT;
             state->ints.raw[0][0] = -1;
             return;
-        case IMGFX_TYPE_2:
+        case IMGFX_UNK_2:
             state->lastColorCmd = IMGFX_CLEAR;
             state->meshType = IMGFX_MESH_DEFAULT;
             state->ints.raw[1][0] = -1;
@@ -584,14 +587,14 @@ void imgfx_update(u32 idx, ImgfxType type, s32 foldArg1, s32 foldArg2, s32 foldA
         state->ints.args.color[3] = foldArg4;
     }
 
-    state->flags &= IMGFX_FLAG_ENABLED;
+    state->flags &= IMGFX_FLAG_IN_USE;
     if (flags != 0) {
         state->flags |= flags;
     }
     state->meshType = IMGFX_MESH_DEFAULT;
 
     switch (type) {
-        case IMGFX_TYPE_3:
+        case IMGFX_RESET:
             state->meshType = IMGFX_MESH_DEFAULT;
             state->renderType = IMGFX_RENDER_DEFAULT;
             break;
@@ -625,8 +628,8 @@ void imgfx_update(u32 idx, ImgfxType type, s32 foldArg1, s32 foldArg2, s32 foldA
                 state->renderType = IMGFX_RENDER_MULTIPLY_RGBA;
             }
             break;
-        case IMGFX_TYPE_9:
-        case IMGFX_TYPE_A:
+        case IMGFX_SET_WHITE_FADE:
+        case IMGFX_SET_CREDITS_FADE:
             if (foldArg4 == 255.0) {
                 state->renderType = IMGFX_RENDER_MODULATE_PRIM_RGB;
             } else {
@@ -696,7 +699,7 @@ void imgfx_update(u32 idx, ImgfxType type, s32 foldArg1, s32 foldArg2, s32 foldA
 }
 
 void imgfx_set_state_flags(s32 idx, u16 flagBits, s32 mode) {
-    if ((*ImgfxInstances)[idx].flags & IMGFX_FLAG_ENABLED) {
+    if ((*ImgfxInstances)[idx].flags & IMGFX_FLAG_IN_USE) {
         if (mode) {
             (*ImgfxInstances)[idx].flags |= flagBits;
         } else {
@@ -733,8 +736,8 @@ s32 imgfx_appendGfx_component(s32 idx, ImgfxTexture* ifxImg, u32 flagBits, Matri
         return 0;
     }
 
-    func_8013B0EC(state);
-    func_8013B1B0(state, mtx);
+    imgfx_make_mesh(state);
+    imgfx_appendGfx_mesh(state, mtx);
 
     if (state->flags & IMGFX_FLAG_ANIM_DONE) {
         state->ints.raw[0][0] = -1;
@@ -743,7 +746,7 @@ s32 imgfx_appendGfx_component(s32 idx, ImgfxTexture* ifxImg, u32 flagBits, Matri
         state->meshType = 0;
         state->renderType = IMGFX_RENDER_DEFAULT;
         state->flags &= ~(IMGFX_FLAG_ANIM_DONE | IMGFX_FLAG_800 | IMGFX_FLAG_REVERSE_ANIM | IMGFX_FLAG_LOOP_ANIM);
-        imgfx_clear_state_gfx(state);
+        imgfx_cache_instance_data(state);
         ret = 1;
     } else if (state->flags & IMGFX_FLAG_4000) {
         ret = 2;
@@ -754,13 +757,13 @@ s32 imgfx_appendGfx_component(s32 idx, ImgfxTexture* ifxImg, u32 flagBits, Matri
         state->renderType = IMGFX_RENDER_DEFAULT;
         state->ints.raw[0][0] = -1;
         state->ints.raw[1][0] = -1;
-        state->flags &= IMGFX_FLAG_ENABLED;
+        state->flags &= IMGFX_FLAG_IN_USE;
         ret = 1;
     }
     return ret;
 }
 
-void func_8013B0EC(ImgfxState* state) {
+void imgfx_make_mesh(ImgfxState* state) {
     switch (state->meshType) {
         case IMGFX_MESH_GRID_UNUSED:
             if (state->ints.raw[1][2] == 0) {
@@ -786,7 +789,7 @@ void func_8013B0EC(ImgfxState* state) {
     }
 
     if (state->lastAnimCmd == IMGFX_SET_WAVY) {
-        imgfx_mesh_wavy_update(state);
+        imgfx_mesh_make_wavy(state);
     }
 
     switch (state->lastColorCmd) {
@@ -797,7 +800,7 @@ void func_8013B0EC(ImgfxState* state) {
     }
 }
 
-void func_8013B1B0(ImgfxState* state, Matrix4f mtx) {
+void imgfx_appendGfx_mesh(ImgfxState* state, Matrix4f mtx) {
     s16 skipModeChange = FALSE;
     s32 primAlpha = state->ints.color.a;
     s32 renderType = state->renderType;
@@ -1058,19 +1061,19 @@ void func_8013B1B0(ImgfxState* state, Matrix4f mtx) {
 
     switch (state->meshType) {
         case IMGFX_MESH_DEFAULT:
-            func_8013CFA8(state, mtx);
+            imgfx_appendGfx_mesh_basic(state, mtx);
             break;
         case IMGFX_MESH_GRID_WAVY:
         case IMGFX_MESH_GRID_UNUSED:
-            func_8013DAB4(state, mtx);
+            imgfx_appendGfx_mesh_grid(state, mtx);
             break;
         case IMGFX_MESH_ANIMATED:
-            func_8013E2F0(state, mtx);
+            imgfx_appendGfx_mesh_anim(state, mtx);
             break;
         case IMGFX_MESH_STRIP:
-            func_8013CFA8(state, mtx);
+            imgfx_appendGfx_mesh_basic(state, mtx);
             gDPPipeSync(gMainGfxPos++);
-            func_8013E904(state, mtx);
+            imgfx_appendGfx_mesh_strip(state, mtx);
             break;
     }
 
@@ -1224,21 +1227,21 @@ ImgfxAnimHeader* imgfx_load_anim(ImgfxState* state) {
         dma_copy(state->curAnimOffset, state->curAnimOffset + sizeof(*anim), anim);
 
         if (state->vtxBufs[0] != NULL) {
-            imgfx_add_to_gfx_cache(state->vtxBufs[0], 1);
+            imgfx_add_to_cache(state->vtxBufs[0], 1);
             state->vtxBufs[0] = NULL;
         }
         if (state->vtxBufs[1] != NULL) {
-            imgfx_add_to_gfx_cache(state->vtxBufs[1], 1);
+            imgfx_add_to_cache(state->vtxBufs[1], 1);
             state->vtxBufs[1] = NULL;
         }
         if (state->gfxBufs[0] != NULL) {
-            imgfx_add_to_gfx_cache(state->gfxBufs[0], 1);
+            imgfx_add_to_cache(state->gfxBufs[0], 1);
             state->gfxBufs[0] = NULL;
         }
         if (state->gfxBufs[1] != NULL) {
-            // imgfx_add_to_gfx_cache(state->gfxBufs[1], 1);
+            // imgfx_add_to_cache(state->gfxBufs[1], 1);
             romEnd = (u8*) state->gfxBufs[1]; // required to match
-            imgfx_add_to_gfx_cache(state->gfxBufs[1], 1);
+            imgfx_add_to_cache(state->gfxBufs[1], 1);
             state->gfxBufs[1] = NULL;
         }
         state->vtxBufs[0] = heap_malloc(anim->vtxCount * sizeof(Vtx));
@@ -1477,7 +1480,7 @@ void imgfx_mesh_anim_update(ImgfxState* state) {
     state->floats.anim.curIdx = curKeyIdx;
 }
 
-void func_8013CFA8(ImgfxState* state, Matrix4f mtx) {
+void imgfx_appendGfx_mesh_basic(ImgfxState* state, Matrix4f mtx) {
     s32 i;
 
     if (!(state->flags & IMGFX_FLAG_SKIP_TEX_SETUP)) {
@@ -1649,7 +1652,7 @@ void func_8013CFA8(ImgfxState* state, Matrix4f mtx) {
     }
 }
 
-void func_8013DAB4(ImgfxState* state, Matrix4f mtx) {
+void imgfx_appendGfx_mesh_grid(ImgfxState* state, Matrix4f mtx) {
     s32 i, j;
     s32 firstVtxIdx;
 
@@ -1724,7 +1727,7 @@ void func_8013DAB4(ImgfxState* state, Matrix4f mtx) {
     }
 }
 
-void func_8013E2F0(ImgfxState* state, Matrix4f mtx) {
+void imgfx_appendGfx_mesh_anim(ImgfxState* state, Matrix4f mtx) {
     if (state->vtxBufs[gCurrentDisplayContextIndex] == NULL || state->gfxBufs[gCurrentDisplayContextIndex] == NULL) {
         return;
     }
@@ -1778,7 +1781,7 @@ void func_8013E2F0(ImgfxState* state, Matrix4f mtx) {
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
 
-void func_8013E904(ImgfxState* state, Matrix4f mtx) {
+void imgfx_appendGfx_mesh_strip(ImgfxState* state, Matrix4f mtx) {
     ImgfxOverlayTexture* ufs = state->ints.overlay.pattern;
     s32 shifts = integer_log(ufs->width, 2);
     s32 shiftt = integer_log(ufs->height, 2);
@@ -1792,7 +1795,9 @@ void func_8013E904(ImgfxState* state, Matrix4f mtx) {
     if (state->renderType == IMGFX_RENDER_OVERLAY_RGBA) {
         s32 alpha = state->ints.overlay.alpha;
         gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, alpha);
-        gDPSetCombineLERP(gMainGfxPos++, TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0, TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0);
+        gDPSetCombineLERP(gMainGfxPos++,
+            TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0,
+            TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0);
     } else {
         gDPSetCombineMode(gMainGfxPos++, G_CC_MODULATEIA, G_CC_MODULATEIA);
     }
@@ -1821,7 +1826,7 @@ void imgfx_wavy_init(ImgfxState* state) {
     state->floats.wavy.phase3 = 30.0f;
 }
 
-void imgfx_mesh_wavy_update(ImgfxState* state) {
+void imgfx_mesh_make_wavy(ImgfxState* state) {
     Vtx* v1;
     Vtx* v2;
     Vtx* v3;
