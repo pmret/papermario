@@ -280,7 +280,7 @@ void N(CharAnim_FadeIn_4)(CreditsLine* line, CreditsChar* chr) {
     f32 posX, posY, scaleAmt, rotAngle;
     f32 startX = (line->posX + line->msgWidth) - 16;
     f32 startY = line->posY + 60;
-    u32 foldFlags = IMGFX_FLAG_40;
+    u32 imgfxFlags = IMGFX_FLAG_40;
 
     posX = update_lerp(EASING_COS_IN_OUT, startX, chr->posX, chr->fadeInTime, line->appearTime);
     posY = update_lerp(EASING_CUBIC_OUT, startY, chr->posY, chr->fadeInTime, line->appearTime);
@@ -293,7 +293,7 @@ void N(CharAnim_FadeIn_4)(CreditsLine* line, CreditsChar* chr) {
 
     if (chr->fadeInTime == line->appearTime) {
         imgfx_update(0, IMGFX_CLEAR, 0, 0, 0, 0, 0);
-        foldFlags |= IMGFX_FLAG_NO_FILTERING;
+        imgfxFlags |= IMGFX_FLAG_NO_FILTERING;
     } else {
         f32 alpha = update_lerp(EASING_LINEAR, 16.0f, 300.0f, chr->fadeInTime, line->appearTime);
         if (alpha > 255.0f) {
@@ -320,7 +320,7 @@ void N(CharAnim_FadeIn_4)(CreditsLine* line, CreditsChar* chr) {
     ifxImg.xOffset = -(glyphPtr->charWidth * 0.5);
     ifxImg.yOffset = 0;
     ifxImg.alpha = 255;
-    imgfx_appendGfx_component(0, &ifxImg, foldFlags, transformMtx);
+    imgfx_appendGfx_component(0, &ifxImg, imgfxFlags, transformMtx);
 
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }

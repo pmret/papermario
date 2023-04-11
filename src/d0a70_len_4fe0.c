@@ -492,7 +492,7 @@ void imgfx_init_instance(ImgfxState* state) {
     }
 }
 
-void imgfx_update(u32 idx, ImgfxType type, s32 foldArg1, s32 foldArg2, s32 foldArg3, s32 foldArg4, s32 flags) {
+void imgfx_update(u32 idx, ImgfxType type, s32 imgfxArg1, s32 imgfxArg2, s32 imgfxArg3, s32 imgfxArg4, s32 flags) {
     ImgfxState* state = &(*ImgfxInstances)[idx];
     s32 oldFlags;
     s32 t1;
@@ -537,14 +537,14 @@ void imgfx_update(u32 idx, ImgfxType type, s32 foldArg1, s32 foldArg2, s32 foldA
             if (state->colorBuf != NULL) {
                 heap_free(state->colorBuf);
             }
-            state->colorBufCount = foldArg1 * 4;
+            state->colorBufCount = imgfxArg1 * 4;
             state->colorBuf = heap_malloc(state->colorBufCount);
             return;
         case IMGFX_OVERLAY:
         case IMGFX_OVERLAY_XLU:
             if (type == state->lastColorCmd
-                && foldArg1 == (s32) state->ints.overlay.pattern
-                && foldArg2 == state->ints.overlay.alpha
+                && imgfxArg1 == (s32) state->ints.overlay.pattern
+                && imgfxArg2 == state->ints.overlay.alpha
             ) {
                 // no paramaters have changed
                 return;
@@ -552,9 +552,9 @@ void imgfx_update(u32 idx, ImgfxType type, s32 foldArg1, s32 foldArg2, s32 foldA
             break;
         case IMGFX_SET_ANIM:
             if (state->lastAnimCmd == type
-                && state->ints.anim.type == foldArg1
-                && state->ints.anim.interval == foldArg2
-                && state->ints.anim.step == foldArg3
+                && state->ints.anim.type == imgfxArg1
+                && state->ints.anim.interval == imgfxArg2
+                && state->ints.anim.step == imgfxArg3
             ) {
                 // no paramaters have changed
                 return;
@@ -575,16 +575,16 @@ void imgfx_update(u32 idx, ImgfxType type, s32 foldArg1, s32 foldArg2, s32 foldA
 
     if (type == IMGFX_SET_WAVY || type == IMGFX_SET_ANIM) {
         state->lastAnimCmd = type;
-        state->ints.args.anim[0] = foldArg1;
-        state->ints.args.anim[1] = foldArg2;
-        state->ints.args.anim[2] = foldArg3;
-        state->ints.args.anim[3] = foldArg4;
+        state->ints.args.anim[0] = imgfxArg1;
+        state->ints.args.anim[1] = imgfxArg2;
+        state->ints.args.anim[2] = imgfxArg3;
+        state->ints.args.anim[3] = imgfxArg4;
     } else if (type >= IMGFX_SET_COLOR && type <= IMGFX_OVERLAY_XLU) {
         state->lastColorCmd = type;
-        state->ints.args.color[0] = foldArg1;
-        state->ints.args.color[1] = foldArg2;
-        state->ints.args.color[2] = foldArg3;
-        state->ints.args.color[3] = foldArg4;
+        state->ints.args.color[0] = imgfxArg1;
+        state->ints.args.color[1] = imgfxArg2;
+        state->ints.args.color[2] = imgfxArg3;
+        state->ints.args.color[3] = imgfxArg4;
     }
 
     state->flags &= IMGFX_FLAG_IN_USE;
@@ -614,13 +614,13 @@ void imgfx_update(u32 idx, ImgfxType type, s32 foldArg1, s32 foldArg2, s32 foldA
         case IMGFX_SET_COLOR:
         case IMGFX_SET_ALPHA:
         case IMGFX_SET_TINT:
-            if (foldArg1 >= 255 && foldArg2 >= 255 && foldArg3 >= 255 && foldArg4 >= 255) {
+            if (imgfxArg1 >= 255 && imgfxArg2 >= 255 && imgfxArg3 >= 255 && imgfxArg4 >= 255) {
                 // no color + no transparency
                 state->renderType = IMGFX_RENDER_DEFAULT;
-            } else if (foldArg4 >= 255) {
+            } else if (imgfxArg4 >= 255) {
                 // some color + no transparency
                 state->renderType = IMGFX_RENDER_MULTIPLY_RGB;
-            } else if (foldArg1 >= 255 && foldArg2 >= 255 && foldArg3 >= 255) {
+            } else if (imgfxArg1 >= 255 && imgfxArg2 >= 255 && imgfxArg3 >= 255) {
                 // no color + transparency
                 state->renderType = IMGFX_RENDER_MULTIPLY_ALPHA;
             } else {
@@ -630,23 +630,23 @@ void imgfx_update(u32 idx, ImgfxType type, s32 foldArg1, s32 foldArg2, s32 foldA
             break;
         case IMGFX_SET_WHITE_FADE:
         case IMGFX_SET_CREDITS_FADE:
-            if (foldArg4 == 255.0) {
+            if (imgfxArg4 == 255.0) {
                 state->renderType = IMGFX_RENDER_MODULATE_PRIM_RGB;
             } else {
                 state->renderType = IMGFX_RENDER_MODULATE_PRIM_RGBA;
             }
             break;
         case IMGFX_COLOR_BUF_SET_MULTIPLY:
-            if (foldArg1 < state->colorBufCount) {
+            if (imgfxArg1 < state->colorBufCount) {
                 // unpack and store color
-                r = (foldArg2 & 0xFF000000) >> 24;
-                g = (foldArg2 & 0xFF0000) >> 16;
-                b = (foldArg2 & 0xFF00) >> 8;
-                a = (foldArg2 & 0xFF);
-                state->colorBuf[foldArg1].r = r;
-                state->colorBuf[foldArg1].g = g;
-                state->colorBuf[foldArg1].b = b;
-                state->colorBuf[foldArg1].a = a;
+                r = (imgfxArg2 & 0xFF000000) >> 24;
+                g = (imgfxArg2 & 0xFF0000) >> 16;
+                b = (imgfxArg2 & 0xFF00) >> 8;
+                a = (imgfxArg2 & 0xFF);
+                state->colorBuf[imgfxArg1].r = r;
+                state->colorBuf[imgfxArg1].g = g;
+                state->colorBuf[imgfxArg1].b = b;
+                state->colorBuf[imgfxArg1].a = a;
 
                 state->meshType = IMGFX_MESH_DEFAULT;
 
@@ -658,16 +658,16 @@ void imgfx_update(u32 idx, ImgfxType type, s32 foldArg1, s32 foldArg2, s32 foldA
             }
             break;
         case IMGFX_COLOR_BUF_SET_MODULATE:
-            if (foldArg1 < state->colorBufCount) {
+            if (imgfxArg1 < state->colorBufCount) {
                 // unpack and store color
-                r = (foldArg2 & 0xFF000000) >> 24;
-                g = (foldArg2 & 0xFF0000) >> 16;
-                b = (foldArg2 & 0xFF00) >> 8;
-                a = (foldArg2 & 0xFF);
-                state->colorBuf[foldArg1].r = r;
-                state->colorBuf[foldArg1].g = g;
-                state->colorBuf[foldArg1].b = b;
-                state->colorBuf[foldArg1].a = a;
+                r = (imgfxArg2 & 0xFF000000) >> 24;
+                g = (imgfxArg2 & 0xFF0000) >> 16;
+                b = (imgfxArg2 & 0xFF00) >> 8;
+                a = (imgfxArg2 & 0xFF);
+                state->colorBuf[imgfxArg1].r = r;
+                state->colorBuf[imgfxArg1].g = g;
+                state->colorBuf[imgfxArg1].b = b;
+                state->colorBuf[imgfxArg1].a = a;
 
                 state->meshType = IMGFX_MESH_DEFAULT;
 
@@ -687,7 +687,7 @@ void imgfx_update(u32 idx, ImgfxType type, s32 foldArg1, s32 foldArg2, s32 foldA
         case IMGFX_OVERLAY:
         case IMGFX_OVERLAY_XLU:
             state->meshType = IMGFX_MESH_STRIP;
-            if (foldArg2 >= 255) {
+            if (imgfxArg2 >= 255) {
                 state->renderType = IMGFX_RENDER_OVERLAY_RGB;
             } else {
                 state->renderType = IMGFX_RENDER_OVERLAY_RGBA;
@@ -728,7 +728,7 @@ s32 imgfx_appendGfx_component(s32 idx, ImgfxTexture* ifxImg, u32 flagBits, Matri
     ImgfxCurrentTexturePtr->unk_1E  = 0;
     ImgfxCurrentTexturePtr->alphaMultiplier = ifxImg->alpha;
 
-    if ((u32)idx >= MAX_IMGFX_STATES) {
+    if (idx < 0 || idx >= MAX_IMGFX_STATES) {
         return 0;
     }
 

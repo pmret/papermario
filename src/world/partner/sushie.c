@@ -281,7 +281,7 @@ void N(update_riding_physics)(Npc* sushie) {
         if (!N(IsUnderwater) && (playerStatus->position.y + (playerStatus->colliderHeight * 0.5f) < N(WaterSurfaceY))) {
             N(IsUnderwater) = TRUE;
             playerStatus->renderMode = RENDER_MODE_ALPHATEST;
-            spr_set_player_imgfx_update_all(playerStatus->trueAnimation, IMGFX_SET_WAVY, 2, 0, 0, 0, 0);
+            set_player_imgfx_all(playerStatus->trueAnimation, IMGFX_SET_WAVY, 2, 0, 0, 0, 0);
             npc_set_imgfx_params(sushie, IMGFX_SET_WAVY, 2, 0, 0, 0, 0);
         }
         if (N(DiveTime) >= 10) {
@@ -316,7 +316,7 @@ void N(update_riding_physics)(Npc* sushie) {
         if ((N(WaterSurfaceY) - sushie->moveToPos.y) - (sushie->collisionHeight * 0.5f) <= 0.0f) {
             if (N(IsUnderwater)) {
                 N(IsUnderwater) = FALSE;
-                spr_set_player_imgfx_update_all(ANIM_Mario1_Idle, IMGFX_CLEAR, 0, 0, 0, 0, 0);
+                set_player_imgfx_all(ANIM_Mario1_Idle, IMGFX_CLEAR, 0, 0, 0, 0, 0);
                 npc_set_imgfx_params(sushie, IMGFX_CLEAR, 0, 0, 0, 0, 0);
             }
             N(DiveState) = DIVE_STATE_NONE;
@@ -722,7 +722,7 @@ API_CALLABLE(N(UseAbility)) {
                 gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
                 partnerStatus->partnerActionState = PARTNER_ACTION_NONE;
                 partnerStatus->actingPartner = 0;
-                spr_set_player_imgfx_update_all(ANIM_Mario1_Idle, IMGFX_CLEAR, 0, 0, 0, 0, 0);
+                set_player_imgfx_all(ANIM_Mario1_Idle, IMGFX_CLEAR, 0, 0, 0, 0, 0);
                 npc_set_imgfx_params(sushie, IMGFX_CLEAR, 0, 0, 0, 0, 0);
                 return ApiStatus_DONE1;
             }

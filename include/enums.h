@@ -6065,6 +6065,14 @@ enum ImgfxHologramTypes {
     IMGFX_HOLOGRAM_THRESHOLD           = 2,
 };
 
+enum SpriteCompImgfxFlags {
+    SPR_IMGFX_FLAG_10000000             = 0x10000000,
+    SPR_IMGFX_FLAG_20000000             = 0x20000000,
+    SPR_IMGFX_FLAG_40000000             = 0x40000000,
+    SPR_IMGFX_FLAG_80000000             = 0x80000000,
+    SPR_IMGFX_FLAG_ALL                  = 0xF0000000,
+};
+
 enum MoveType {
     MOVE_TYPE_NONE          = 0,
     MOVE_TYPE_HAMMER        = 1,

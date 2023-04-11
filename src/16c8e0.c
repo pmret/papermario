@@ -1132,7 +1132,7 @@ void btl_delete_actor(Actor* actor) {
         }
 
         if (part->idleAnimations != NULL) {
-            set_npc_all_imgfx(part->spriteInstanceID, IMGFX_CLEAR, 0, 0, 0, 0, 0);
+            set_npc_imgfx_all(part->spriteInstanceID, IMGFX_CLEAR, 0, 0, 0, 0, 0);
 
             ASSERT(spr_free_sprite(part->spriteInstanceID) == 0);
 

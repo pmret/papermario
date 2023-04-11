@@ -128,7 +128,7 @@ void N(MagikoopaAI_11)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
     }
     if (enemy->varTable[0] == 0) {
         if (npc->duration >= 20) {
-            set_npc_all_imgfx(npc->spriteInstanceID, IMGFX_CLEAR, 0, 0, 0, 0, 0);
+            set_npc_imgfx_all(npc->spriteInstanceID, IMGFX_CLEAR, 0, 0, 0, 0, 0);
             npc->alpha = 255;
             npc->scale.x = 1.0f;
             npc->scale.y = 1.0f;
@@ -311,7 +311,7 @@ API_CALLABLE(N(MagikoopaAI_OnPlayerWon)) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     npc->alpha = 255;
-    set_npc_all_imgfx(npc->spriteInstanceID, IMGFX_CLEAR, 0, 0, 0, 0, 0);
+    set_npc_imgfx_all(npc->spriteInstanceID, IMGFX_CLEAR, 0, 0, 0, 0, 0);
     return ApiStatus_DONE2;
 }
 

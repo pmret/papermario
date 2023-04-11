@@ -979,7 +979,7 @@ ApiStatus SetNpcImgfxParams(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    npc_set_imgfx_params(npc, foldType, var2, var3, var4, var5, npc->foldFlags);
+    npc_set_imgfx_params(npc, foldType, var2, var3, var4, var5, npc->imgfxFlags);
     return ApiStatus_DONE2;
 }
 
@@ -993,7 +993,7 @@ ApiStatus SetNpcImgfxFlags(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    npc->foldFlags = flags;
+    npc->imgfxFlags = flags;
     return ApiStatus_DONE2;
 }
 

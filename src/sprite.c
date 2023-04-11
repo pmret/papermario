@@ -376,7 +376,7 @@ void spr_appendGfx_component(
     height = cache->height;
     quadIndex = cache->quadCacheIndex;
     quad = NULL;
-    if (!(D_802DF540 & (0x80000000 | 0x40000000 | 0x20000000 | 0x10000000))) {
+    if (!(D_802DF540 & SPR_IMGFX_FLAG_ALL)) {
         quad = spr_get_quad_for_size(&quadIndex, width, height);
         cache->quadCacheIndex = quadIndex;
     }
@@ -391,8 +391,8 @@ void spr_appendGfx_component(
         ifxImg.xOffset = -(width / 2);
         ifxImg.yOffset = height;
         ifxImg.alpha = opacity;
-        if (imgfx_appendGfx_component((u8) (u16) D_802DF540, &ifxImg, IMGFX_FLAG_80000, mtxTransform) == 1) { // todo bitfield?
-            D_802DF540 &= ~(0x80000000 | 0x40000000 | 0x20000000 | 0x10000000);
+        if (imgfx_appendGfx_component((u8) D_802DF540, &ifxImg, IMGFX_FLAG_80000, mtxTransform) == 1) {
+            D_802DF540 &= ~SPR_IMGFX_FLAG_ALL;
         }
     }
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
@@ -973,7 +973,7 @@ s32 func_802DDEC4(s32 spriteIdx) {
     return spr_playerCurrentAnimInfo[spriteIdx].notifyValue;
 }
 
-void spr_set_player_imgfx_update_comp(s32 spriteIdx, s32 compIdx, ImgfxType foldType, s32 foldArg1, s32 foldArg2, s32 foldArg3, s32 foldArg4, s32 flags) {
+void set_player_imgfx_comp(s32 spriteIdx, s32 compIdx, ImgfxType imgfx, s32 imgfxArg1, s32 imgfxArg2, s32 imgfxArg3, s32 imgfxArg4, s32 flags) {
     SpriteComponent* component;
     SpriteComponent** componentListIt;
     s32 i;
@@ -985,11 +985,11 @@ void spr_set_player_imgfx_update_comp(s32 spriteIdx, s32 compIdx, ImgfxType fold
         while (*componentListIt != PTR_LIST_END) {
             component = *componentListIt;
             if (compIdx == -1 || i == compIdx) {
-                imgfx_update(component->imgfxIdx & 0xFF, foldType, foldArg1, foldArg2, foldArg3, foldArg4, flags);
-                if (foldType != 0) {
-                    component->imgfxIdx |= 0x10000000;
+                imgfx_update(component->imgfxIdx & 0xFF, imgfx, imgfxArg1, imgfxArg2, imgfxArg3, imgfxArg4, flags);
+                if (imgfx != IMGFX_CLEAR) {
+                    component->imgfxIdx |= SPR_IMGFX_FLAG_10000000;
                 } else {
-                    component->imgfxIdx &= ~0xF0000000;
+                    component->imgfxIdx &= ~SPR_IMGFX_FLAG_ALL;
                 }
             }
             componentListIt++;
@@ -999,8 +999,8 @@ void spr_set_player_imgfx_update_comp(s32 spriteIdx, s32 compIdx, ImgfxType fold
 }
 
 // applied to all components
-void spr_set_player_imgfx_update_all(s32 animID, ImgfxType foldType, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
-    spr_set_player_imgfx_update_comp(PLAYER_SPRITE_MAIN, -1, foldType, arg2, arg3, arg4, arg5, arg6);
+void set_player_imgfx_all(s32 animID, ImgfxType foldType, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+    set_player_imgfx_comp(PLAYER_SPRITE_MAIN, -1, foldType, arg2, arg3, arg4, arg5, arg6);
 }
 
 void spr_get_player_raster_info(SpriteRasterInfo* out, s32 playerSpriteID, s32 rasterIndex) {
@@ -1229,7 +1229,7 @@ s32 get_npc_comp_imgfx_idx(s32 spriteIdx, s32 compIdx) {
     }
 }
 
-void set_npc_comp_imgfx(s32 spriteIdx, s32 compIdx, ImgfxType foldType, s32 foldArg1, s32 foldArg2, s32 foldArg3, s32 foldArg4, s32 foldArg5) {
+void set_npc_imgfx_comp(s32 spriteIdx, s32 compIdx, ImgfxType imgfx, s32 imgfxArg1, s32 imgfxArg2, s32 imgfxArg3, s32 imgfxArg4, s32 imgfxArg5) {
     SpriteInstance* sprite = &SpriteInstances[spriteIdx];
     SpriteComponent** componentList;
     s32 i;
@@ -1242,11 +1242,11 @@ void set_npc_comp_imgfx(s32 spriteIdx, s32 compIdx, ImgfxType foldType, s32 fold
             SpriteComponent* comp = *componentList;
 
             if (compIdx == -1 || i == compIdx) {
-                imgfx_update((u8)comp->imgfxIdx, foldType, foldArg1, foldArg2, foldArg3, foldArg4, foldArg5);
-                if (foldType != IMGFX_CLEAR) {
-                    comp->imgfxIdx |= 0x10000000;
+                imgfx_update((u8)comp->imgfxIdx, imgfx, imgfxArg1, imgfxArg2, imgfxArg3, imgfxArg4, imgfxArg5);
+                if (imgfx != IMGFX_CLEAR) {
+                    comp->imgfxIdx |= SPR_IMGFX_FLAG_10000000;
                 } else {
-                    comp->imgfxIdx &= ~0xF0000000;
+                    comp->imgfxIdx &= ~SPR_IMGFX_FLAG_ALL;
                 }
             }
             componentList++;
@@ -1255,8 +1255,8 @@ void set_npc_comp_imgfx(s32 spriteIdx, s32 compIdx, ImgfxType foldType, s32 fold
     }
 }
 
-void set_npc_all_imgfx(s32 spriteIdx, ImgfxType foldType, s32 foldArg1, s32 foldArg2, s32 foldArg3, s32 foldArg4, s32 foldArg5) {
-    set_npc_comp_imgfx(spriteIdx, -1, foldType, foldArg1, foldArg2, foldArg3, foldArg4, foldArg5);
+void set_npc_imgfx_all(s32 spriteIdx, ImgfxType foldType, s32 imgfxArg1, s32 imgfxArg2, s32 imgfxArg3, s32 imgfxArg4, s32 imgfxArg5) {
+    set_npc_imgfx_comp(spriteIdx, -1, foldType, imgfxArg1, imgfxArg2, imgfxArg3, imgfxArg4, imgfxArg5);
 }
 
 s32 spr_get_comp_position(s32 spriteIdx, s32 compListIdx, s32* outX, s32* outY, s32* outZ) {

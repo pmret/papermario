@@ -637,37 +637,37 @@ ApiStatus UpdatePlayerImgfx(Evt* script, s32 isInitialCall) {
     s32 foldType = evt_get_variable(script, *args++);
     s32 a2, a3, a4, a5;
 
-    spr_set_player_imgfx_update_all(a0, IMGFX_CLEAR, 0, 0, 0, 0, 0);
+    set_player_imgfx_all(a0, IMGFX_CLEAR, 0, 0, 0, 0, 0);
 
     switch (foldType) {
         case IMGFX_CLEAR:
             playerStatus->renderMode = RENDER_MODE_ALPHATEST;
-            spr_set_player_imgfx_update_all(a0, IMGFX_CLEAR, 0, 0, 0, 0, PlayerImgfxFlags);
+            set_player_imgfx_all(a0, IMGFX_CLEAR, 0, 0, 0, 0, PlayerImgfxFlags);
             break;
         case IMGFX_UNK_2:
         case IMGFX_RESET:
             playerStatus->renderMode = RENDER_MODE_ALPHATEST;
         case IMGFX_UNK_1:
-            spr_set_player_imgfx_update_all(a0, foldType, 0, 0, 0, 0, PlayerImgfxFlags);
+            set_player_imgfx_all(a0, foldType, 0, 0, 0, 0, PlayerImgfxFlags);
             break;
         case IMGFX_SET_WAVY:
             playerStatus->renderMode = RENDER_MODE_ALPHATEST;
             a2 = evt_get_variable(script, *args++);
             a3 = evt_get_variable(script, *args++);
             a4 = evt_get_variable(script, *args++);
-            spr_set_player_imgfx_update_all(a0, IMGFX_SET_WAVY, a2, a3, a4, 0, PlayerImgfxFlags);
+            set_player_imgfx_all(a0, IMGFX_SET_WAVY, a2, a3, a4, 0, PlayerImgfxFlags);
             break;
         case IMGFX_SET_COLOR:
             playerStatus->renderMode = RENDER_MODE_ALPHATEST;
             a2 = evt_get_variable(script, *args++);
             a3 = evt_get_variable(script, *args++);
             a4 = evt_get_variable(script, *args++);
-            spr_set_player_imgfx_update_all(a0, IMGFX_SET_COLOR, a2, a3, a4, 255, PlayerImgfxFlags);
+            set_player_imgfx_all(a0, IMGFX_SET_COLOR, a2, a3, a4, 255, PlayerImgfxFlags);
             break;
         case IMGFX_SET_ALPHA:
             playerStatus->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
             a5 = evt_get_variable(script, *args++);
-            spr_set_player_imgfx_update_all(a0, IMGFX_SET_ALPHA, 255, 255, 255, a5, PlayerImgfxFlags);
+            set_player_imgfx_all(a0, IMGFX_SET_ALPHA, 255, 255, 255, a5, PlayerImgfxFlags);
             break;
         case IMGFX_SET_TINT:
             playerStatus->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
@@ -675,14 +675,14 @@ ApiStatus UpdatePlayerImgfx(Evt* script, s32 isInitialCall) {
             a3 = evt_get_variable(script, *args++);
             a4 = evt_get_variable(script, *args++);
             a5 = evt_get_variable(script, *args++);
-            spr_set_player_imgfx_update_all(a0, IMGFX_SET_TINT, a2, a3, a4, a5, PlayerImgfxFlags);
+            set_player_imgfx_all(a0, IMGFX_SET_TINT, a2, a3, a4, a5, PlayerImgfxFlags);
             break;
         case IMGFX_SET_ANIM:
             playerStatus->renderMode = RENDER_MODE_ALPHATEST;
             a2 = evt_get_variable(script, *args++);
             a3 = evt_get_variable(script, *args++);
             a4 = evt_get_variable(script, *args++);
-            spr_set_player_imgfx_update_all(a0, IMGFX_SET_ANIM, a2, a3, a4, 0, PlayerImgfxFlags);
+            set_player_imgfx_all(a0, IMGFX_SET_ANIM, a2, a3, a4, 0, PlayerImgfxFlags);
             break;
         case IMGFX_HOLOGRAM:
             playerStatus->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
@@ -690,7 +690,7 @@ ApiStatus UpdatePlayerImgfx(Evt* script, s32 isInitialCall) {
             a3 = evt_get_variable(script, *args++);
             a4 = evt_get_variable(script, *args++);
             a5 = evt_get_variable(script, *args++);
-            spr_set_player_imgfx_update_all(a0, IMGFX_HOLOGRAM, a2, a3, a4, a5, PlayerImgfxFlags);
+            set_player_imgfx_all(a0, IMGFX_HOLOGRAM, a2, a3, a4, a5, PlayerImgfxFlags);
             break;
     }
 
@@ -699,9 +699,9 @@ ApiStatus UpdatePlayerImgfx(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus SetPlayerImgfxFlags(Evt* script, s32 isInitialCall) {
-    s32 foldFlags = *script->ptrReadPos;
+    s32 imgfxFlags = *script->ptrReadPos;
 
-    PlayerImgfxFlags = foldFlags;
+    PlayerImgfxFlags = imgfxFlags;
     return ApiStatus_DONE2;
 }
 

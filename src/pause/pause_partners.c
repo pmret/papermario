@@ -341,7 +341,7 @@ void pause_partners_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
         } else {
             color = 255.0f - offsetZ * 95.0f * 0.125f;
         }
-        set_npc_all_imgfx(gPausePartnersSpriteIDs[gPausePartnersPartnerIdx[index]], IMGFX_SET_COLOR, color, color, color, 255, 64);
+        set_npc_imgfx_all(gPausePartnersSpriteIDs[gPausePartnersPartnerIdx[index]], IMGFX_SET_COLOR, color, color, color, 255, 64);
         spr_draw_npc_sprite(gPausePartnersSpriteIDs[gPausePartnersPartnerIdx[index]], 0, 0, NULL, matrix);
     }
 

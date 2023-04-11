@@ -27,7 +27,7 @@ void N(appendGfx_sticker)(void* renderData) {
     StickerData* sticker = (StickerData*) evt_get_variable(NULL, MV_StickerData);
     IMG_PTR img = (IMG_PTR) evt_get_variable(NULL, MV_StickerImage);
     PAL_PTR pal = (PAL_PTR) evt_get_variable(NULL, MV_StickerPalette);
-    u32 foldFlags = IMGFX_FLAG_400;
+    u32 imgfxFlags = IMGFX_FLAG_400;
     
     gDPPipeSync(gMainGfxPos++);
     guTranslateF(mtxTransform, sticker->pos.x, sticker->pos.y, sticker->pos.z);
@@ -50,10 +50,10 @@ void N(appendGfx_sticker)(void* renderData) {
     ifxImg.alpha = 255;
     
     if (sticker->yaw != 0.0 || sticker->pitch != 0.0) {
-        foldFlags |= IMGFX_FLAG_2000;
+        imgfxFlags |= IMGFX_FLAG_2000;
     }
     imgfx_update(0, IMGFX_CLEAR, 0, 0, 0, 0, 0);
-    imgfx_appendGfx_component(0, &ifxImg, foldFlags, mtxTransform);
+    imgfx_appendGfx_component(0, &ifxImg, imgfxFlags, mtxTransform);
     
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
