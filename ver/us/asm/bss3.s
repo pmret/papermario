@@ -655,7 +655,7 @@ dlabel wSpriteShadingProfileAux
 dlabel bSpriteShadingProfileAux
 .space 0x000000b0
 
-dlabel D_80159880
+dlabel SpriteShadingPalette
 .space 0x00000020
 
 dlabel wEnvSounds
