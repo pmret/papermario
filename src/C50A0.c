@@ -63,8 +63,9 @@ void func_801356CC(ItemEntity*);
 void func_801356D4(ItemEntity*);
 void func_801363A0(ItemEntity*);
 void update_item_entity_temp(ItemEntity*);
-s32 draw_image_with_clipping(IMG_PTR raster, s32 width, s32 height, s32 fmt, s32 bitDepth, s16 posX, s16 posY, u16 clipULx,
-                             u16 clipULy, u16 clipLRx, u16 clipRLy);
+s32 draw_image_with_clipping(IMG_PTR raster, u32 width, u32 height, s32 fmt, s32 bitDepth, s16 posX, s16 posY,
+                             u16 clipX, u16 clipY, u16 clipWidth, u16 clipHeight);
+
 void func_8013673C(ItemEntity* itemEntity, s32 posX, s32 posY);
 void func_801369D0(ItemEntity* itemEntity, s32 posX, s32 posY);
 void func_80136A08(ItemEntity* itemEntity, s32 posX, s32 posY);
@@ -153,7 +154,6 @@ s32 draw_ci_image_with_clipping(IMG_PTR raster, s32 width, s32 height, s32 fmt, 
     return ret;
 }
 
-#ifdef NON_EQUIVALENT
 typedef struct Rect2b {
     /* 0x00 */ s16 ulx;
     /* 0x02 */ s16 uly;
@@ -161,32 +161,32 @@ typedef struct Rect2b {
     /* 0x06 */ s16 lry;
 } Rect2b; // size = 0x08
 
-s32 draw_image_with_clipping(u8* img, u32 width, u32 height, s32 fmt, s32 bitDepth,
+s32 draw_image_with_clipping(IMG_PTR raster, u32 width, u32 height, s32 fmt, s32 bitDepth,
                      s16 posX, s16 posY,
-                     u16 clipX, u16 clipY, u16 clipWidth, u16 clipHeight) {
+                     u16 clipX, u16 clipY,
+                     u16 clipWidth, u16 clipHeight) {
     Rect2b texRect;
     Rect2b drawRect;
-    Rect ry;
-    Rect rx;
-    u16 texOffsetX, texOffsetY;
     u8 stopDrawing;
     u8 stopDrawingLine;
+    s8 zero = 0; // required to match
 
-    if (posX >= clipX + clipWidth  || posY >= clipY + clipHeight) {
-        return 0;
+    u16 texOffsetX, texOffsetY;
+
+    if (posX >= clipX + clipWidth || posY >= clipY + clipHeight) {
+        return FALSE;
     }
-
     if (clipX >= (s16)(posX + width)) {
-        return 0;
+        return FALSE;
     }
-
     if (clipY >= (s16)(posY + height)) {
-        return 0;
+        return FALSE;
     }
 
-    stopDrawing = 0;
     texRect.uly = 0;
     drawRect.uly = posY;
+    stopDrawing = 0;
+
     while (TRUE) {
         texRect.lry = texRect.uly + 31;
         drawRect.lry = drawRect.uly + 32;
@@ -201,25 +201,26 @@ s32 draw_image_with_clipping(u8* img, u32 width, u32 height, s32 fmt, s32 bitDep
         }
 
         if (drawRect.uly < clipY) {
-            drawRect.uly = clipY;
             texOffsetY = abs(posY - clipY);
+            drawRect.uly = clipY;
         }
 
         if (drawRect.lry >= clipY + clipHeight) {
+            texRect.lry = clipY + clipHeight - posY - 1;
             stopDrawing = TRUE;
             drawRect.lry = clipY + clipHeight;
-            texRect.lry = clipY + clipHeight - posY - 1;
         }
 
-        if ((u32)(texRect.lry + 1) >= height) {
-            stopDrawing = TRUE;
+        if (texRect.lry + 1 >= height) {
             texRect.lry = height - 1;
-            drawRect.lry = height + posY;
+            drawRect.lry = texRect.lry + posY + 1;
+            stopDrawing = TRUE;
         }
 
-        stopDrawingLine = 0;
-        texRect.ulx = 0;
+        texRect.ulx = zero;
         drawRect.ulx = posX;
+        stopDrawingLine = FALSE;
+
         while (TRUE) {
             texRect.lrx = texRect.ulx + 63;
             drawRect.lrx = drawRect.ulx + 64;
@@ -235,32 +236,32 @@ s32 draw_image_with_clipping(u8* img, u32 width, u32 height, s32 fmt, s32 bitDep
             }
 
             if (drawRect.ulx < clipX) {
-                drawRect.ulx = clipX;
                 texOffsetX = abs(posX - clipX);
+                drawRect.ulx = clipX;
             }
 
             if (drawRect.lrx >= clipX + clipWidth) {
+                texRect.lrx = clipX + clipWidth - posX - 1;
                 stopDrawingLine = TRUE;
                 drawRect.lrx = clipX + clipWidth;
-                texRect.lrx = clipX + clipWidth - posX - 1;
             }
 
-            if ((u32)(texRect.lrx + 1) >= width) {
-                stopDrawingLine = TRUE;
+            if (texRect.lrx + 1 >= width) {
                 texRect.lrx = width - 1;
-                drawRect.lrx = width + posX;
+                drawRect.lrx = texRect.lrx + posX + 1;
+                stopDrawingLine = TRUE;
             }
 
             if (bitDepth == G_IM_SIZ_4b) {
-                gDPLoadTextureTile_4b(gMainGfxPos++, img, fmt, width, height,
+                gDPLoadTextureTile_4b(gMainGfxPos++, raster, fmt, width, height,
                                 texRect.ulx, texRect.uly, texRect.lrx, texRect.lry, 0,
                                 G_TX_WRAP, G_TX_WRAP, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
             } else if (bitDepth == G_IM_SIZ_16b) {
-                gDPLoadTextureTile(gMainGfxPos++, img, fmt, G_IM_SIZ_16b, width, height,
+                gDPLoadTextureTile(gMainGfxPos++, raster, fmt, G_IM_SIZ_16b, width, height,
                                 texRect.ulx, texRect.uly, texRect.lrx, texRect.lry, 0,
                                 G_TX_WRAP, G_TX_WRAP, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
             } else if (bitDepth == G_IM_SIZ_8b) {
-                gDPLoadTextureTile(gMainGfxPos++, img, fmt, G_IM_SIZ_8b, width, height,
+                gDPLoadTextureTile(gMainGfxPos++, raster, fmt, G_IM_SIZ_8b, width, height,
                                 texRect.ulx, texRect.uly, texRect.lrx, texRect.lry, 0,
                                 G_TX_WRAP, G_TX_WRAP, 6, 5, G_TX_NOLOD, G_TX_NOLOD);
             }
@@ -282,11 +283,8 @@ s32 draw_image_with_clipping(u8* img, u32 width, u32 height, s32 fmt, s32 bitDep
         drawRect.uly = drawRect.lry;
     }
 
-    return 1;
+    return TRUE;
 }
-#else
-INCLUDE_ASM(s32, "C50A0", draw_image_with_clipping);
-#endif
 
 s32 draw_tiled_image(IMG_PTR raster, u32 width, u32 height, u8 fmt, u8 bitDepth,
                      s16 posX, s16 posY,
@@ -1238,8 +1236,8 @@ void item_entity_update(ItemEntity* entity) {
                 *args++;
                 *args++;
                 if (!gGameStatusPtr->isBattle) {
-                    entity->lookupRasterIndex  = *args++ & 0xFFFF;
-                    entity->lookupPaletteIndex = *args++ & 0xFFFF;
+                    entity->lookupRasterIndex  = *args++;
+                    entity->lookupPaletteIndex = *args++;
                 } else {
                     entity->lookupRasterIndex  = *args++ >> 16;
                     entity->lookupPaletteIndex = *args++ >> 16;
