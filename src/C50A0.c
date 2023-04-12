@@ -185,7 +185,7 @@ s32 draw_image_with_clipping(IMG_PTR raster, u32 width, u32 height, s32 fmt, s32
 
     texRect.uly = 0;
     drawRect.uly = posY;
-    stopDrawing = 0;
+    stopDrawing = FALSE;
 
     while (TRUE) {
         texRect.lry = texRect.uly + 31;
