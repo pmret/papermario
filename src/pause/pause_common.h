@@ -46,6 +46,11 @@ extern HudScript HES_ListPrevPage;
 extern HudScript HES_ListNextPage;
 extern HudScript HES_Dash;
 extern HudScript HES_LabelBpNeeded;
+#if VERSION_PAL
+extern HudScript HES_LabelBpNeeded_de;
+extern HudScript HES_LabelBpNeeded_fr;
+extern HudScript HES_LabelBpNeeded_es;
+#endif
 extern HudScript HES_FPCost;
 extern HudScript HES_PartnerRank;
 extern HudScript HES_MoveDiamond;
