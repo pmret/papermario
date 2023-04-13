@@ -2,11 +2,11 @@
 #include "message_ids.h"
 
 #if VERSION_PAL
-#define VAR_1 36
-#define VAR_2 220
+#define MAP_TITLE_X 36
+#define MAP_TITLE_WIDTH 220
 #else
-#define VAR_1 56
-#define VAR_2 180
+#define MAP_TITLE_X 56
+#define MAP_TITLE_WIDTH 180
 #endif
 
 extern Gfx gPauseDLWorldMap[];
@@ -126,8 +126,8 @@ MenuWindowBP gPauseMapWindowBPs[] = {
     {
         .windowID = WINDOW_ID_PAUSE_MAP_TITLE,
         .unk_01 = 0,
-        .pos = { .x = VAR_1, .y = 124 },
-        .width = VAR_2,
+        .pos = { .x = MAP_TITLE_X, .y = 124 },
+        .width = MAP_TITLE_WIDTH,
         .height = 20,
         .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = &pause_map_draw_title,

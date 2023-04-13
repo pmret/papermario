@@ -88,11 +88,11 @@ s8 gPauseStatsGridData[] = {
 };
 
 #if VERSION_PAL
-#define VAR_1 122
-#define VAR_2 127
+#define STAR_POWER_X 122
+#define COLLECTABLES_X 127
 #else
-#define VAR_1 132
-#define VAR_2 125
+#define STAR_POWER_X 132
+#define COLLECTABLES_X 125
 #endif
 
 
@@ -103,11 +103,11 @@ StatsEntryData gStatsMenuEntries[] = {
     { .cursorX =  17, .cursorY = 124, .baseMsgID = PAUSE_MSG_TIP_BP },
     { .cursorX = 138, .cursorY =  28, .baseMsgID = PAUSE_MSG_TIP_BOOTS_1 },
     { .cursorX = 138, .cursorY =  53, .baseMsgID = PAUSE_MSG_TIP_HAMMER_0 },
-    { .cursorX = VAR_1, .cursorY =  76, .baseMsgID = PAUSE_MSG_TIP_STAR_POWER },
-    { .cursorX = VAR_2, .cursorY =  91, .baseMsgID = PAUSE_MSG_TIP_STAR_POINTS },
-    { .cursorX = VAR_2, .cursorY = 106, .baseMsgID = PAUSE_MSG_TIP_COINS },
-    { .cursorX = VAR_2, .cursorY = 121, .baseMsgID = PAUSE_MSG_TIP_SECRETS },
-    { .cursorX = VAR_2, .cursorY = 138, .baseMsgID = PAUSE_MSG_TIP_TIME },
+    { .cursorX = STAR_POWER_X, .cursorY =  76, .baseMsgID = PAUSE_MSG_TIP_STAR_POWER },
+    { .cursorX = COLLECTABLES_X, .cursorY =  91, .baseMsgID = PAUSE_MSG_TIP_STAR_POINTS },
+    { .cursorX = COLLECTABLES_X, .cursorY = 106, .baseMsgID = PAUSE_MSG_TIP_COINS },
+    { .cursorX = COLLECTABLES_X, .cursorY = 121, .baseMsgID = PAUSE_MSG_TIP_SECRETS },
+    { .cursorX = COLLECTABLES_X, .cursorY = 138, .baseMsgID = PAUSE_MSG_TIP_TIME },
 };
 
 #if VERSION_PAL
