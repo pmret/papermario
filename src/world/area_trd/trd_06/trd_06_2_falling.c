@@ -17,7 +17,7 @@ typedef struct FallingSprite {
 BSS FallingSprite N(Falling);
 
 void N(appendGfx_FallingSprite)(void) {
-    ImgFxTexture ifxImg;
+    ImgFXTexture ifxImg;
     SpriteRasterInfo rasterInfo;
     Matrix4f mtxTransform;
     Matrix4f mtxTemp;

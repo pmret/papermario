@@ -326,7 +326,7 @@ void spr_appendGfx_component(
 {
     Matrix4f mtxTransform;
     Matrix4f mtxTemp;
-    ImgFxTexture ifxImg;
+    ImgFXTexture ifxImg;
     s32 quadIndex;
     Quad* quad;
     s32 width;
@@ -973,7 +973,7 @@ s32 func_802DDEC4(s32 spriteIdx) {
     return spr_playerCurrentAnimInfo[spriteIdx].notifyValue;
 }
 
-void set_player_imgfx_comp(s32 spriteIdx, s32 compIdx, ImgFxType imgfx, s32 imgfxArg1, s32 imgfxArg2, s32 imgfxArg3, s32 imgfxArg4, s32 flags) {
+void set_player_imgfx_comp(s32 spriteIdx, s32 compIdx, ImgFXType imgfx, s32 imgfxArg1, s32 imgfxArg2, s32 imgfxArg3, s32 imgfxArg4, s32 flags) {
     SpriteComponent* component;
     SpriteComponent** componentListIt;
     s32 i;
@@ -999,7 +999,7 @@ void set_player_imgfx_comp(s32 spriteIdx, s32 compIdx, ImgFxType imgfx, s32 imgf
 }
 
 // applied to all components
-void set_player_imgfx_all(s32 animID, ImgFxType imgfxType, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
+void set_player_imgfx_all(s32 animID, ImgFXType imgfxType, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {
     set_player_imgfx_comp(PLAYER_SPRITE_MAIN, -1, imgfxType, arg2, arg3, arg4, arg5, arg6);
 }
 
@@ -1229,7 +1229,7 @@ s32 get_npc_comp_imgfx_idx(s32 spriteIdx, s32 compIdx) {
     }
 }
 
-void set_npc_imgfx_comp(s32 spriteIdx, s32 compIdx, ImgFxType imgfx, s32 imgfxArg1, s32 imgfxArg2, s32 imgfxArg3, s32 imgfxArg4, s32 imgfxArg5) {
+void set_npc_imgfx_comp(s32 spriteIdx, s32 compIdx, ImgFXType imgfx, s32 imgfxArg1, s32 imgfxArg2, s32 imgfxArg3, s32 imgfxArg4, s32 imgfxArg5) {
     SpriteInstance* sprite = &SpriteInstances[spriteIdx];
     SpriteComponent** componentList;
     s32 i;
@@ -1255,7 +1255,7 @@ void set_npc_imgfx_comp(s32 spriteIdx, s32 compIdx, ImgFxType imgfx, s32 imgfxAr
     }
 }
 
-void set_npc_imgfx_all(s32 spriteIdx, ImgFxType imgfxType, s32 imgfxArg1, s32 imgfxArg2, s32 imgfxArg3, s32 imgfxArg4, s32 imgfxArg5) {
+void set_npc_imgfx_all(s32 spriteIdx, ImgFXType imgfxType, s32 imgfxArg1, s32 imgfxArg2, s32 imgfxArg3, s32 imgfxArg4, s32 imgfxArg5) {
     set_npc_imgfx_comp(spriteIdx, -1, imgfxType, imgfxArg1, imgfxArg2, imgfxArg3, imgfxArg4, imgfxArg5);
 }
 

@@ -33,7 +33,7 @@ void ispy_notification_update(void);
 void appendGfx_ispy_icon(void) {
     Matrix4f matrix1;
     Matrix4f matrix2;
-    ImgFxTexture ifxImg;
+    ImgFXTexture ifxImg;
     s32 flashPhase;
 
     if (gPlayerStatus.animFlags & PA_FLAG_ISPY_VISIBLE) {

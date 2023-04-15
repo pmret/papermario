@@ -550,16 +550,16 @@ dlabel screen_overlay_backZoom
 dlabel D_80156910
 .space 0x00000010
 
-dlabel ImgFxCurrentTexture
+dlabel ImgFXCurrentTexture
 .space 0x00000028
 
-dlabel ImgFxVtxBuffers
+dlabel ImgFXVtxBuffers
 .space 8
 
 dlabel imgfx_vtxBuf
 .space 4
 
-dlabel ImgFxInstances
+dlabel ImgFXInstances
 .space 4
 
 dlabel D_80156958
@@ -574,10 +574,10 @@ dlabel D_80156968
 dlabel D_80156970
 .space 0x00000010
 
-dlabel ImgFxAnimHeaders
+dlabel ImgFXAnimHeaders
 .space 0x000005a0
 
-dlabel ImgFxDataCache
+dlabel ImgFXDataCache
 .space 0x00000040
 
 dlabel gHudElementsWorld

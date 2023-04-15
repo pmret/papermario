@@ -149,8 +149,8 @@ EvtScript N(EVS_Player_EnterPipe_Epilogue) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(SetPlayerImgFxFlags, IMGFX_FLAG_800)
-    EVT_CALL(UpdatePlayerImgFx, ANIM_Mario1_Idle, IMGFX_SET_ANIM, IMGFX_ANIM_VERTICAL_PIPE_CURL, 1, 1, 0)
+    EVT_CALL(SetPlayerImgFXFlags, IMGFX_FLAG_800)
+    EVT_CALL(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_SET_ANIM, IMGFX_ANIM_VERTICAL_PIPE_CURL, 1, 1, 0)
     EVT_WAIT(25)
     EVT_RETURN
     EVT_END
@@ -179,8 +179,8 @@ EvtScript N(EVS_Luigi_EnterPipe_Epilogue) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(SetNpcImgFxFlags, NPC_Luigi_1, IMGFX_FLAG_800)
-    EVT_CALL(SetNpcImgFxParams, NPC_Luigi_1, IMGFX_SET_ANIM, IMGFX_ANIM_VERTICAL_PIPE_CURL, 1, 1, 0)
+    EVT_CALL(SetNpcImgFXFlags, NPC_Luigi_1, IMGFX_FLAG_800)
+    EVT_CALL(SetNpcImgFXParams, NPC_Luigi_1, IMGFX_SET_ANIM, IMGFX_ANIM_VERTICAL_PIPE_CURL, 1, 1, 0)
     EVT_WAIT(25)
     EVT_RETURN
     EVT_END

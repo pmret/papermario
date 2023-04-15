@@ -45,7 +45,7 @@ void interact_speech_setup(void) {
 }
 
 void appendGfx_speech_bubble(void) {
-    ImgFxTexture ifxImg;
+    ImgFXTexture ifxImg;
     Matrix4f mtxTemp, mtxTransform;
 
     if (gPlayerStatus.animFlags & PA_FLAG_SPEECH_PROMPT_AVAILABLE) {

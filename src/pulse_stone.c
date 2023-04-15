@@ -80,7 +80,7 @@ void pulse_stone_notification_setup(void) {
 void appendGfx_pulse_stone_icon(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Matrix4f sp18, sp58;
-    ImgFxTexture ifxImg;
+    ImgFXTexture ifxImg;
     s32 pingDelay;
     s32 dx, dy;
 

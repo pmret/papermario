@@ -21,7 +21,7 @@ static StoneChompAmbushIsk14 N(ChompAmbush);
 void N(func_80241610_993D40)(void) {
     StoneChompAmbushIsk14* ambush = &N(ChompAmbush);
     Camera* cam = &gCameras[gCurrentCameraID];
-    ImgFxTexture ifxImg;
+    ImgFXTexture ifxImg;
     SpriteRasterInfo spriteRaster;
     Matrix4f transformMtx, tempMtx;
 
@@ -165,7 +165,7 @@ EvtScript N(EVS_NpcIdle_StoneChomp) = {
     EVT_CALL(EnableNpcShadow, NPC_SELF, TRUE)
     EVT_WAIT(1)
     EVT_CALL(N(DestroyAmbushWorker))
-    EVT_CALL(SetNpcImgFxParams, NPC_SELF, IMGFX_CLEAR, 0, 0, 0, 0)
+    EVT_CALL(SetNpcImgFXParams, NPC_SELF, IMGFX_CLEAR, 0, 0, 0, 0)
     EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_4 | ENEMY_FLAG_100000, 0)
     EVT_WAIT(3)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)

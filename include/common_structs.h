@@ -2358,7 +2358,7 @@ typedef struct SpriteShadingProfile {
     /* 0xAF */ u8 ambientPower; // ?
 } SpriteShadingProfile; // size = 0xB0
 
-typedef struct ImgFxOverlayTexture {
+typedef struct ImgFXOverlayTexture {
     /* 0x00 */ IMG_PTR raster;
     /* 0x04 */ PAL_PTR palette;
     /* 0x08 */ u16 width;
@@ -2366,9 +2366,9 @@ typedef struct ImgFxOverlayTexture {
     /* 0x0C */ s32 offsetX;
     /* 0x10 */ s32 offsetY;
     /* 0x14 */ Gfx* displayList;
-} ImgFxOverlayTexture; // size = 0x18
+} ImgFXOverlayTexture; // size = 0x18
 
-typedef struct ImgFxTexture {
+typedef struct ImgFXTexture {
     /* 0x00 */ IMG_PTR raster;
     /* 0x04 */ PAL_PTR palette;
     /* 0x08 */ u16 width;
@@ -2378,16 +2378,16 @@ typedef struct ImgFxTexture {
     /* 0x10 */ u8 alpha;
     /* 0x11 */ char unk_11[3];
     /* 0x14 */ Gfx* dlist;
-} ImgFxTexture; // size = 0x18
+} ImgFXTexture; // size = 0x18
 
-typedef struct ImgFxWorkingTexture {
-    /* 0x00 */ ImgFxTexture tex;
+typedef struct ImgFXWorkingTexture {
+    /* 0x00 */ ImgFXTexture tex;
     /* 0x18 */ s16 unk_18;
     /* 0x1A */ char unk_1A[0x4];
     /* 0x1E */ s16 unk_1E;
     /* 0x20 */ char unk_20[0x4];
     /* 0x24 */ u8 alphaMultiplier;
-} ImgFxWorkingTexture; // size = 0x25
+} ImgFXWorkingTexture; // size = 0x25
 
 typedef struct SongUpdateEvent {
     /* 0x00 */ s32 songName;

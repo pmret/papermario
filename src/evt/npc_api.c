@@ -965,7 +965,7 @@ ApiStatus PartnerIsFlying(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetNpcImgFxParams(Evt* script, s32 isInitialCall) {
+ApiStatus SetNpcImgFXParams(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 npcId = evt_get_variable(script, *args++);
     Bytecode imgfxType = evt_get_variable(script, *args++);
@@ -983,7 +983,7 @@ ApiStatus SetNpcImgFxParams(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetNpcImgFxFlags(Evt* script, s32 isInitialCall) {
+ApiStatus SetNpcImgFXFlags(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 npcId = evt_get_variable(script, *args++);
     Bytecode flags = *args;

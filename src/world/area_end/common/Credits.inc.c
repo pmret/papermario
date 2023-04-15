@@ -107,7 +107,7 @@ s32 N(CreditsBufferIndex) = 0;
 
 // unused
 void N(CharAnim_FadeIn_0)(CreditsLine* line, CreditsChar* chr) {
-    ImgFxTexture ifxImg;
+    ImgFXTexture ifxImg;
     MesasgeFontGlyphData glyph;
     MesasgeFontGlyphData* glyphPtr = &glyph;
     Matrix4f transformMtx;
@@ -142,7 +142,7 @@ void N(CharAnim_FadeIn_0)(CreditsLine* line, CreditsChar* chr) {
 
 
 void N(CharAnim_FadeIn_1)(CreditsLine* line, CreditsChar* chr) {
-    ImgFxTexture ifxImg;
+    ImgFXTexture ifxImg;
     MesasgeFontGlyphData glyph;
     MesasgeFontGlyphData* glyphPtr = &glyph;
     Matrix4f transformMtx;
@@ -185,7 +185,7 @@ void N(CharAnim_FadeIn_1)(CreditsLine* line, CreditsChar* chr) {
 }
 
 void N(CharAnim_FadeIn_2)(CreditsLine* line, CreditsChar* chr) {
-    ImgFxTexture ifxImg;
+    ImgFXTexture ifxImg;
     MesasgeFontGlyphData glyph;
     MesasgeFontGlyphData* glyphPtr = &glyph;
     Matrix4f transformMtx, tempMtx;
@@ -229,7 +229,7 @@ void N(CharAnim_FadeIn_2)(CreditsLine* line, CreditsChar* chr) {
 }
 
 void N(CharAnim_FadeIn_3)(CreditsLine* line, CreditsChar* chr) {
-    ImgFxTexture ifxImg;
+    ImgFXTexture ifxImg;
     MesasgeFontGlyphData glyph;
     MesasgeFontGlyphData* glyphPtr = &glyph;
     Matrix4f transformMtx, tempMtx;
@@ -273,7 +273,7 @@ void N(CharAnim_FadeIn_3)(CreditsLine* line, CreditsChar* chr) {
 }
 
 void N(CharAnim_FadeIn_4)(CreditsLine* line, CreditsChar* chr) {
-    ImgFxTexture ifxImg;
+    ImgFXTexture ifxImg;
     MesasgeFontGlyphData glyph;
     MesasgeFontGlyphData* glyphPtr = &glyph;
     Matrix4f transformMtx, tempMtx;
@@ -341,8 +341,8 @@ void N(CharAnim_FadeIn_5)(CreditsLine* line, CreditsChar* chr) {
 }
 
 // unused
-void N(CharAnim_HoldClearImgFx)(CreditsLine* line, CreditsChar* chr) {
-    ImgFxTexture ifxImg;
+void N(CharAnim_HoldClearImgFX)(CreditsLine* line, CreditsChar* chr) {
+    ImgFXTexture ifxImg;
     MesasgeFontGlyphData glyph;
     MesasgeFontGlyphData* glyphPtr = &glyph;
     Matrix4f transformMtx;
@@ -382,7 +382,7 @@ void N(CharAnim_Hold)(CreditsLine* line, CreditsChar* chr) {
 
 // unused
 void N(CharAnim_FadeOut_0)(CreditsLine* line, CreditsChar* chr) {
-    ImgFxTexture ifxImg;
+    ImgFXTexture ifxImg;
     MesasgeFontGlyphData glyph;
     MesasgeFontGlyphData* glyphPtr = &glyph;
     Matrix4f transformMtx;
@@ -414,7 +414,7 @@ void N(CharAnim_FadeOut_0)(CreditsLine* line, CreditsChar* chr) {
 }
 
 void N(CharAnim_FadeOut_1)(CreditsLine* line, CreditsChar* chr) {
-    ImgFxTexture ifxImg;
+    ImgFXTexture ifxImg;
     MesasgeFontGlyphData glyph;
     MesasgeFontGlyphData* glyphPtr = &glyph;
     Matrix4f transformMtx, tempMtx;
@@ -449,7 +449,7 @@ void N(CharAnim_FadeOut_1)(CreditsLine* line, CreditsChar* chr) {
 }
 
 void N(CharAnim_FadeOut_2)(CreditsLine* line, CreditsChar* chr) {
-    ImgFxTexture ifxImg;
+    ImgFXTexture ifxImg;
     MesasgeFontGlyphData glyph;
     MesasgeFontGlyphData* glyphPtr = &glyph;
     Matrix4f transformMtx, tempMtx;

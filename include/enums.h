@@ -5959,7 +5959,7 @@ enum NpcDropFlags {
     NPC_DROP_FLAG_80                = 0x80,
 };
 
-enum ImgFxStateFlags {
+enum ImgFXStateFlags {
     IMGFX_FLAG_IN_USE               = 0x00000001,
     IMGFX_FLAG_G_CULL_BACK          = 0x00000002,
     IMGFX_FLAG_G_CULL_FRONT         = 0x00000004,
@@ -5983,7 +5983,7 @@ enum ImgFxStateFlags {
     IMGFX_FLAG_100000               = 0x00100000,
 };
 
-typedef enum ImgFxType {
+typedef enum ImgFXType {
     IMGFX_CLEAR                     = 0x0,
     IMGFX_UNK_1                     = 0x1,    // unused?
     IMGFX_UNK_2                     = 0x2,    // unused?
@@ -6002,9 +6002,9 @@ typedef enum ImgFxType {
     IMGFX_OVERLAY                   = 0xF,
     IMGFX_OVERLAY_XLU               = 0x10,   // unused?
     IMGFX_ALLOC_COLOR_BUF           = 0x11,   // args: count
-} ImgFxType;
+} ImgFXType;
 
-typedef enum ImgFxAnim {
+typedef enum ImgFXAnim {
     IMGFX_ANIM_SHOCK                   = 0x00, // used for Goombaria and Goompapa when Kammy drops the hammer block
     IMGFX_ANIM_SHIVER                  = 0x01, // used when Goombaria gives Mario a kiss
     IMGFX_ANIM_VERTICAL_PIPE_CURL      = 0x02, // vertical pipe curl
@@ -6025,9 +6025,9 @@ typedef enum ImgFxAnim {
     IMGFX_ANIM_FLIP_CARD_2             = 0x11, // merlee spell-casting card flip 2
     IMGFX_ANIM_FLIP_CARD_3             = 0x12, // merlee spell-casting card flip 3
     IMGFX_ANIM_CYMBAL_CRUSH            = 0x13, // used when Mario is crushed in a Cymbal Plant
-} ImgFxAnim;
+} ImgFXAnim;
 
-typedef enum ImgFxRenderType {
+typedef enum ImgFXRenderType {
     IMGFX_RENDER_DEFAULT               = 0x00,
     IMGFX_RENDER_MULTIPLY_RGB          = 0x01,
     IMGFX_RENDER_MULTIPLY_ALPHA        = 0x02,
@@ -6045,27 +6045,27 @@ typedef enum ImgFxRenderType {
     IMGFX_RENDER_OVERLAY_RGB           = 0x0E,
     IMGFX_RENDER_OVERLAY_RGBA          = 0x0F,
     IMGFX_RENDER_UNUSED                = 0x10,
-} ImgFxRenderType;
+} ImgFXRenderType;
 
-enum ImgFxRenderModeFlags {
+enum ImgFXRenderModeFlags {
     IMGFX_RENDER_NO_OVERRIDE      = 1,
 };
 
-typedef enum ImgFxMeshType {
+typedef enum ImgFXMeshType {
     IMGFX_MESH_DEFAULT                 = 0x0,
     IMGFX_MESH_GRID_WAVY               = 0x1,
     IMGFX_MESH_ANIMATED                = 0x2,
     IMGFX_MESH_GRID_UNUSED             = 0x3,
     IMGFX_MESH_STRIP                   = 0x4,
-} ImgFxMeshType;
+} ImgFXMeshType;
 
-enum ImgFxHologramTypes {
+enum ImgFXHologramTypes {
     IMGFX_HOLOGRAM_NOISE               = 0,
     IMGFX_HOLOGRAM_DITHER              = 1,
     IMGFX_HOLOGRAM_THRESHOLD           = 2,
 };
 
-enum SpriteCompImgFxFlags {
+enum SpriteCompImgFXFlags {
     SPR_IMGFX_FLAG_10000000             = 0x10000000,
     SPR_IMGFX_FLAG_20000000             = 0x20000000,
     SPR_IMGFX_FLAG_40000000             = 0x40000000,
