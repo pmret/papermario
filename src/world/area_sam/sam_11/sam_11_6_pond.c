@@ -76,7 +76,7 @@ API_CALLABLE(N(GetBombetteExplodeGround)) {
 
         depth = 12.0f;
         if (npc_raycast_down_around(partner->collisionChannel, &x, &y, &z, &depth,
-            partner->yaw, partner->collisionRadius) && depth <= 12.0f)
+            partner->yaw, partner->collisionDiameter) && depth <= 12.0f)
         {
             colliderID = NpcHitQueryColliderID;
         }

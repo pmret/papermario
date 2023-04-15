@@ -84,7 +84,7 @@ void N(FlyingMagikoopaAI_15)(Evt* arg0, MobileAISettings* arg1, EnemyDetectVolum
                 posY = npc->pos.y;
                 posZ = npc->pos.z;
                 if (npc_test_move_taller_with_slipping(0, &posX, &posY, &posZ,
-                        randomDist, npc->yaw, npc->collisionHeight, npc->collisionRadius)) {
+                        randomDist, npc->yaw, npc->collisionHeight, npc->collisionDiameter)) {
                     moveDist = dist2D(npc->pos.x, npc->pos.z, posX, posZ);
                     distToHit = moveDist;
                     if (distToHit > 160.0) {

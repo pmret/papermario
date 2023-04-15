@@ -213,7 +213,7 @@ API_CALLABLE(N(ProjectileAI_Main)) {
             y = npc->pos.y + (npc->collisionHeight * 0.5);
             z = npc->pos.z;
             if (npc_test_move_taller_with_slipping(
-                0, &x, &y, &z, npc->moveSpeed, npc->yaw, npc->collisionRadius, npc->collisionHeight) != 0)
+                0, &x, &y, &z, npc->moveSpeed, npc->yaw, npc->collisionDiameter, npc->collisionHeight) != 0)
             {
                 phi_s6 = 1;
             }
@@ -318,7 +318,7 @@ API_CALLABLE(N(ProjectileAI_Reflect)) {
             x = npc->pos.x;
             y = npc->pos.y;
             z = npc->pos.z;
-            if (npc_test_move_simple_with_slipping(0, &x, &y, &z, npc->moveSpeed, npc->yaw, npc->collisionRadius,
+            if (npc_test_move_simple_with_slipping(0, &x, &y, &z, npc->moveSpeed, npc->yaw, npc->collisionDiameter,
                 npc->collisionHeight) == 0)
             {
                 npc_move_heading(npc, npc->moveSpeed, npc->yaw);

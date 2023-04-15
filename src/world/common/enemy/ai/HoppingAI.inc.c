@@ -27,7 +27,7 @@ void N(HoppingAI_HopInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
 
         for (i = 0; i < 6; i++) {
             if (npc_test_move_simple_with_slipping(npc->collisionChannel, &x, &y, &z, 25.0f,
-                                                   npc->yaw, npc->collisionHeight, npc->collisionRadius))
+                                                   npc->yaw, npc->collisionHeight, npc->collisionDiameter))
             {
                 npc->yaw += 30.0;
             } else {
@@ -71,7 +71,7 @@ void N(HoppingAI_Hop)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolu
         posZ = npc->pos.z;
         moveSpeed = npc->moveSpeed;
         collHeight = npc->collisionHeight;
-        collRadius = npc->collisionRadius;
+        collRadius = npc->collisionDiameter;
 
         if (!npc_test_move_simple_with_slipping(npc->collisionChannel,
                 &posX, &posY, &posZ,
@@ -171,7 +171,7 @@ void N(HoppingAI_Chase)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
         posY = npc->pos.y;
         posZ = npc->pos.z;
         if (npc_test_move_simple_with_slipping(npc->collisionChannel, &posX, &posY, &posZ, npc->moveSpeed, npc->yaw,
-                                               npc->collisionHeight, npc->collisionRadius))
+                                               npc->collisionHeight, npc->collisionDiameter))
         {
             npc->moveSpeed = 0.0f;
         } else {

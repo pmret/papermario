@@ -39,8 +39,8 @@ s32 ai_check_fwd_collisions(Npc* npc, f32 time, f32* outYaw, f32* outDistFwd, f3
             npc->moveSpeed * time,
             yaw,
             npc->collisionHeight,
-            npc->collisionRadius);
-            
+            npc->collisionDiameter);
+
     if (fwdHit != 0) {
         fwdHitDist = dist2D(npc->pos.x, npc->pos.z, x1, z1);
 
@@ -51,7 +51,7 @@ s32 ai_check_fwd_collisions(Npc* npc, f32 time, f32* outYaw, f32* outDistFwd, f3
                 &x2, &y2, &z2, npc->moveSpeed * time,
                 clamp_angle(yaw + 35.0f),
                 npc->collisionHeight,
-                npc->collisionRadius) != 0) {
+                npc->collisionDiameter) != 0) {
             cwHitDist = dist2D(npc->pos.x, npc->pos.z, x2, z2);
         }
 
@@ -63,7 +63,7 @@ s32 ai_check_fwd_collisions(Npc* npc, f32 time, f32* outYaw, f32* outDistFwd, f3
                 npc->moveSpeed * time,
                 clamp_angle(yaw - 35.0f),
                 npc->collisionHeight,
-                npc->collisionRadius) != 0) {
+                npc->collisionDiameter) != 0) {
             ccwHitDist = dist2D(npc->pos.x, npc->pos.z, x3, z3);
         }
 

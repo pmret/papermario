@@ -64,7 +64,7 @@ void N(reset_static_effect)(s32 type) {
 
 void N(init)(Npc* npc) {
     npc->collisionHeight = 24;
-    npc->collisionRadius = 24;
+    npc->collisionDiameter = 24;
     N(D_802BE308) = FALSE;
     N(D_802BE300) = FALSE;
     N(IsPlayerHolding) = FALSE;
@@ -355,7 +355,7 @@ API_CALLABLE(N(UseAbility)) {
             }
             // allow stop-holding input
             actionState = playerStatus->actionState;
-            if ((actionState == ACTION_STATE_IDLE 
+            if ((actionState == ACTION_STATE_IDLE
                     || actionState == ACTION_STATE_WALK
                     || actionState == ACTION_STATE_RUN
                     || actionState == ACTION_STATE_LAND)
