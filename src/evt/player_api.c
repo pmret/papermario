@@ -4,7 +4,7 @@
 #include "world/partners.h"
 
 extern Npc playerNpcData;
-extern u16 PlayerImgfxFlags;
+extern u16 PlayerImgFxFlags;
 extern s32 D_802DB5B4[3]; // unused
 
 Npc* playerNpc = &playerNpcData;
@@ -630,7 +630,7 @@ ApiStatus WaitForPlayerInputEnabled(Evt* script, s32 isInitialCall) {
     }
 }
 
-ApiStatus UpdatePlayerImgfx(Evt* script, s32 isInitialCall) {
+ApiStatus UpdatePlayerImgFx(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 a0 = *args++;
@@ -642,32 +642,32 @@ ApiStatus UpdatePlayerImgfx(Evt* script, s32 isInitialCall) {
     switch (imgfxType) {
         case IMGFX_CLEAR:
             playerStatus->renderMode = RENDER_MODE_ALPHATEST;
-            set_player_imgfx_all(a0, IMGFX_CLEAR, 0, 0, 0, 0, PlayerImgfxFlags);
+            set_player_imgfx_all(a0, IMGFX_CLEAR, 0, 0, 0, 0, PlayerImgFxFlags);
             break;
         case IMGFX_UNK_2:
         case IMGFX_RESET:
             playerStatus->renderMode = RENDER_MODE_ALPHATEST;
         case IMGFX_UNK_1:
-            set_player_imgfx_all(a0, imgfxType, 0, 0, 0, 0, PlayerImgfxFlags);
+            set_player_imgfx_all(a0, imgfxType, 0, 0, 0, 0, PlayerImgFxFlags);
             break;
         case IMGFX_SET_WAVY:
             playerStatus->renderMode = RENDER_MODE_ALPHATEST;
             a2 = evt_get_variable(script, *args++);
             a3 = evt_get_variable(script, *args++);
             a4 = evt_get_variable(script, *args++);
-            set_player_imgfx_all(a0, IMGFX_SET_WAVY, a2, a3, a4, 0, PlayerImgfxFlags);
+            set_player_imgfx_all(a0, IMGFX_SET_WAVY, a2, a3, a4, 0, PlayerImgFxFlags);
             break;
         case IMGFX_SET_COLOR:
             playerStatus->renderMode = RENDER_MODE_ALPHATEST;
             a2 = evt_get_variable(script, *args++);
             a3 = evt_get_variable(script, *args++);
             a4 = evt_get_variable(script, *args++);
-            set_player_imgfx_all(a0, IMGFX_SET_COLOR, a2, a3, a4, 255, PlayerImgfxFlags);
+            set_player_imgfx_all(a0, IMGFX_SET_COLOR, a2, a3, a4, 255, PlayerImgFxFlags);
             break;
         case IMGFX_SET_ALPHA:
             playerStatus->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
             a5 = evt_get_variable(script, *args++);
-            set_player_imgfx_all(a0, IMGFX_SET_ALPHA, 255, 255, 255, a5, PlayerImgfxFlags);
+            set_player_imgfx_all(a0, IMGFX_SET_ALPHA, 255, 255, 255, a5, PlayerImgFxFlags);
             break;
         case IMGFX_SET_TINT:
             playerStatus->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
@@ -675,14 +675,14 @@ ApiStatus UpdatePlayerImgfx(Evt* script, s32 isInitialCall) {
             a3 = evt_get_variable(script, *args++);
             a4 = evt_get_variable(script, *args++);
             a5 = evt_get_variable(script, *args++);
-            set_player_imgfx_all(a0, IMGFX_SET_TINT, a2, a3, a4, a5, PlayerImgfxFlags);
+            set_player_imgfx_all(a0, IMGFX_SET_TINT, a2, a3, a4, a5, PlayerImgFxFlags);
             break;
         case IMGFX_SET_ANIM:
             playerStatus->renderMode = RENDER_MODE_ALPHATEST;
             a2 = evt_get_variable(script, *args++);
             a3 = evt_get_variable(script, *args++);
             a4 = evt_get_variable(script, *args++);
-            set_player_imgfx_all(a0, IMGFX_SET_ANIM, a2, a3, a4, 0, PlayerImgfxFlags);
+            set_player_imgfx_all(a0, IMGFX_SET_ANIM, a2, a3, a4, 0, PlayerImgFxFlags);
             break;
         case IMGFX_HOLOGRAM:
             playerStatus->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
@@ -690,18 +690,18 @@ ApiStatus UpdatePlayerImgfx(Evt* script, s32 isInitialCall) {
             a3 = evt_get_variable(script, *args++);
             a4 = evt_get_variable(script, *args++);
             a5 = evt_get_variable(script, *args++);
-            set_player_imgfx_all(a0, IMGFX_HOLOGRAM, a2, a3, a4, a5, PlayerImgfxFlags);
+            set_player_imgfx_all(a0, IMGFX_HOLOGRAM, a2, a3, a4, a5, PlayerImgFxFlags);
             break;
     }
 
-    PlayerImgfxFlags = 0;
+    PlayerImgFxFlags = 0;
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetPlayerImgfxFlags(Evt* script, s32 isInitialCall) {
+ApiStatus SetPlayerImgFxFlags(Evt* script, s32 isInitialCall) {
     s32 imgfxFlags = *script->ptrReadPos;
 
-    PlayerImgfxFlags = imgfxFlags;
+    PlayerImgFxFlags = imgfxFlags;
     return ApiStatus_DONE2;
 }
 

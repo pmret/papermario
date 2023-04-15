@@ -58,7 +58,7 @@ void interact_inspect_setup(void) {
 }
 
 void appendGfx_interact_prompt(void) {
-    ImgfxTexture ifxImg;
+    ImgFxTexture ifxImg;
     Matrix4f sp38, sp78;
 
     if (gPlayerStatus.animFlags & PA_FLAG_INTERACT_PROMPT_AVAILABLE) {

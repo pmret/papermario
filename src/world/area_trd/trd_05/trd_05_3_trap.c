@@ -15,7 +15,7 @@ BSS FallingSprite N(Falling);
 
 void N(appendGfx_FallingSprite)(void) {
     FallingSprite* falling = &N(Falling);
-    ImgfxTexture ifxImg;
+    ImgFxTexture ifxImg;
     SpriteRasterInfo info;
     Matrix4f transformMtx;
     Matrix4f tempMtx;

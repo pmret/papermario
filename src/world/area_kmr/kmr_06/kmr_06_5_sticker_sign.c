@@ -20,7 +20,7 @@ typedef struct StickerData {
 } StickerData;
 
 void N(appendGfx_sticker)(void* renderData) {
-    ImgfxTexture ifxImg;
+    ImgFxTexture ifxImg;
     Matrix4f mtxTransform;
     Matrix4f mtxTemp;
     

@@ -7,7 +7,7 @@
 
 void N(gfx_build_knocked_down_player)(void) {
     KnockdownData* data = (KnockdownData*) evt_get_variable(NULL, KNOCK_DOWN_MAP_VAR);
-    ImgfxTexture ifxImg;
+    ImgFxTexture ifxImg;
     SpriteRasterInfo rasterInfo;
     Matrix4f sp40, sp80;
 
