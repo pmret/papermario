@@ -77,7 +77,7 @@ s32 N(get_trigger_tattle)(s32 tattleColliderID) {
 
 void N(init)(Npc* goombario) {
     goombario->collisionHeight = 24;
-    goombario->collisionRadius = 20;
+    goombario->collisionDiameter = 20;
 }
 
 API_CALLABLE(N(TakeOut)) {

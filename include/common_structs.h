@@ -259,7 +259,7 @@ typedef struct Npc {
     /* 0x0A2 */ u16 foldFlags;
     /* 0x0A4 */ s8 npcID;
     /* 0x0A5 */ char unk_A5;
-    /* 0x0A6 */ s16 collisionRadius;
+    /* 0x0A6 */ s16 collisionDiameter;
     /* 0x0A8 */ s16 collisionHeight;
     /* 0x0AA */ s8 renderMode;
     /* 0x0AB */ s8 verticalRenderOffset;

@@ -91,8 +91,8 @@ void N(PiranhaPlantAI_10)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
 
         npc->pos.x = gPlayerStatusPtr->position.x;
         npc->pos.z = gPlayerStatusPtr->position.z;
-        add_vec2D_polar(&npc->pos.x, &npc->pos.z, npc->collisionRadius, yaw);
-        npc_move_heading(npc, moveSpeed + npc->collisionRadius, yaw2);
+        add_vec2D_polar(&npc->pos.x, &npc->pos.z, npc->collisionDiameter, yaw);
+        npc_move_heading(npc, moveSpeed + npc->collisionDiameter, yaw2);
 
         if (enemy->varTable[7] == 0) {
             if (npc->pos.x > 380.0) {
@@ -125,11 +125,11 @@ void N(PiranhaPlantAI_10)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
                 sp20 = gPlayerStatusPtr->position.x;
                 sp24 = gPlayerStatusPtr->position.y + 18.0;
                 sp28 = gPlayerStatusPtr->position.z;
-                if (npc_test_move_simple_with_slipping(npc->collisionChannel, &sp20, &sp24, &sp28, moveSpeed, yaw2, npc->collisionHeight, npc->collisionRadius)) {
+                if (npc_test_move_simple_with_slipping(npc->collisionChannel, &sp20, &sp24, &sp28, moveSpeed, yaw2, npc->collisionHeight, npc->collisionDiameter)) {
                     sp20 = gPlayerStatusPtr->position.x;
                     sp24 = gPlayerStatusPtr->position.y + 45.0;
                     sp28 = gPlayerStatusPtr->position.z;
-                    cond1 = npc_test_move_simple_with_slipping(npc->collisionChannel, &sp20, &sp24, &sp28, moveSpeed, yaw2, npc->collisionHeight, npc->collisionRadius);
+                    cond1 = npc_test_move_simple_with_slipping(npc->collisionChannel, &sp20, &sp24, &sp28, moveSpeed, yaw2, npc->collisionHeight, npc->collisionDiameter);
                     sp2C = npc->pos.x;
                     sp30 = npc->pos.y + 100.0;
                     sp34 = npc->pos.z;
@@ -141,12 +141,12 @@ void N(PiranhaPlantAI_10)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
                         sp20 = gPlayerStatusPtr->position.x;
                         sp24 = gPlayerStatusPtr->position.y + 10.0;
                         sp28 = gPlayerStatusPtr->position.z;
-                        npc_test_move_simple_with_slipping(npc->collisionChannel, &sp20, &sp24, &sp28, moveSpeed, yaw2, npc->collisionHeight, npc->collisionRadius);
+                        npc_test_move_simple_with_slipping(npc->collisionChannel, &sp20, &sp24, &sp28, moveSpeed, yaw2, npc->collisionHeight, npc->collisionDiameter);
                         posRadius = dist2D(gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z, sp20, sp28);
                         npc->pos.x = gPlayerStatusPtr->position.x;
                         npc->pos.z = gPlayerStatusPtr->position.z;
-                        add_vec2D_polar(&npc->pos.x, &npc->pos.z, npc->collisionRadius, yaw);
-                        npc_move_heading(npc, posRadius + npc->collisionRadius, yaw2);
+                        add_vec2D_polar(&npc->pos.x, &npc->pos.z, npc->collisionDiameter, yaw);
+                        npc_move_heading(npc, posRadius + npc->collisionDiameter, yaw2);
                         phi_s7 = TRUE;
                     }
                 }
@@ -154,12 +154,12 @@ void N(PiranhaPlantAI_10)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
                 sp20 = gPlayerStatusPtr->position.x;
                 sp24 = gPlayerStatusPtr->position.y + 18.0;
                 sp28 = gPlayerStatusPtr->position.z;
-                if (npc_test_move_simple_with_slipping(npc->collisionChannel, &sp20, &sp24, &sp28, moveSpeed, yaw2, npc->collisionHeight, npc->collisionRadius)) {
+                if (npc_test_move_simple_with_slipping(npc->collisionChannel, &sp20, &sp24, &sp28, moveSpeed, yaw2, npc->collisionHeight, npc->collisionDiameter)) {
                     posRadius = dist2D(gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z, sp20, sp28);
                     npc->pos.x = gPlayerStatusPtr->position.x;
                     npc->pos.z = gPlayerStatusPtr->position.z;
-                    add_vec2D_polar(&npc->pos.x, &npc->pos.z, npc->collisionRadius, yaw);
-                    npc_move_heading(npc, posRadius + npc->collisionRadius, yaw2);
+                    add_vec2D_polar(&npc->pos.x, &npc->pos.z, npc->collisionDiameter, yaw);
+                    npc_move_heading(npc, posRadius + npc->collisionDiameter, yaw2);
                 }
             }
         }

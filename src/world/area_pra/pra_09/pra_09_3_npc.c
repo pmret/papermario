@@ -89,7 +89,7 @@ API_CALLABLE(N(ChangeNpcCollisionRadius)) {
     Npc* npc1 = resolve_npc(script, script->varTable[3]);
     Npc* npc2 = resolve_npc(script, script->varTable[4]);
 
-    npc1->collisionRadius = npc2->collisionRadius;
+    npc1->collisionDiameter = npc2->collisionDiameter;
     npc1->collisionHeight = npc2->collisionHeight;
     return ApiStatus_DONE2;
 }
