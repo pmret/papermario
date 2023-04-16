@@ -150,7 +150,7 @@ API_CALLABLE(N(SpinyAI_Main)) {
                 y2 = npc->pos.y;
                 z2 = npc->pos.z;
                 if (npc_test_move_simple_with_slipping(npc->collisionChannel, &x2, &y2, &z2, npc->moveSpeed, npc->yaw, npc->collisionHeight,
-                                  npc->collisionRadius) == 0) {
+                                  npc->collisionDiameter) == 0) {
                     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
                 } else {
                     npc->moveSpeed = 0.0f;

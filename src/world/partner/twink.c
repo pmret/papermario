@@ -6,7 +6,7 @@
 
 void N(init)(Npc* twink) {
     twink->collisionHeight = 20;
-    twink->collisionRadius = 20;
+    twink->collisionDiameter = 20;
 }
 
 API_CALLABLE(N(TakeOut)) {

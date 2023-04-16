@@ -64,7 +64,7 @@ API_CALLABLE(N(MagikoopaAI_SpellMain)) {
     switch (script->functionTemp[0]) {
         case 0:
             enemy->varTable[3] = NULL;
-            npc1->collisionRadius = 20;
+            npc1->collisionDiameter = 20;
             npc1->collisionHeight = 20;
             npc1->pos.x = NPC_DISPOSE_POS_X;
             npc1->pos.y = NPC_DISPOSE_POS_Y;
@@ -131,13 +131,13 @@ API_CALLABLE(N(MagikoopaAI_SpellMain)) {
             npc1->duration++;
             if (npc1->duration < 7) {
                 npc1->pos.y -= 3.5;
-                npc1->collisionRadius = ((f32) npc1->duration * 7.0) + 20.0;
+                npc1->collisionDiameter = ((f32) npc1->duration * 7.0) + 20.0;
                 npc1->collisionHeight = ((f32) npc1->duration * 7.0) + 20.0;
             } else if (npc1->duration == 7) {
                 npc1->pos.x = NPC_DISPOSE_POS_X;
                 npc1->pos.y = NPC_DISPOSE_POS_Y;
                 npc1->pos.z = NPC_DISPOSE_POS_Z;
-                npc1->collisionRadius = 20;
+                npc1->collisionDiameter = 20;
                 npc1->collisionHeight = 20;
             } else if (npc1->duration >= 16) {
                 enemy->varTable[0] = 0;

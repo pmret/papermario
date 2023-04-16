@@ -29,7 +29,7 @@ enum {
 
 void N(init)(Npc* parakarry) {
     parakarry->collisionHeight = 37;
-    parakarry->collisionRadius = 40;
+    parakarry->collisionDiameter = 40;
     N(UsingAbility)  = FALSE;
     N(AbilityState) = AIR_LIFT_NONE;
     N(LockingPlayerInput) = FALSE;
@@ -270,7 +270,7 @@ API_CALLABLE(N(UseAbility)) {
             if (playerStatus->actionState == ACTION_STATE_HIT_FIRE
              || playerStatus->actionState == ACTION_STATE_HIT_LAVA
              || playerStatus->actionState == ACTION_STATE_KNOCKBACK
-             || playerStatus->actionState == ACTION_STATE_JUMP 
+             || playerStatus->actionState == ACTION_STATE_JUMP
              || playerStatus->actionState == ACTION_STATE_HOP
             ) {
                 disable_npc_blur(parakarry);
@@ -372,20 +372,20 @@ API_CALLABLE(N(UseAbility)) {
             x = parakarry->pos.x;
             y = parakarry->pos.y;
             z = parakarry->pos.z;
-            hitCount = npc_test_move_complex_with_slipping(COLLISION_CHANNEL_10000, &x, &y, &z, parakarry->moveSpeed, parakarry->yaw, parakarry->collisionHeight, parakarry->collisionRadius);
+            hitCount = npc_test_move_complex_with_slipping(COLLISION_CHANNEL_10000, &x, &y, &z, parakarry->moveSpeed, parakarry->yaw, parakarry->collisionHeight, parakarry->collisionDiameter);
             if (hitCount > 1) {
                 playerDeltaX = (x - playerStatus->position.x) / 8.0f;
                 playerDeltaZ = (z - playerStatus->position.z) / 8.0f;
                 parakarryDeltaX = (x - parakarry->pos.x) / 8.0f;
                 parakarryDeltaZ = (z - parakarry->pos.z) / 8.0f;
-                
+
                 x = parakarry->pos.x + parakarryDeltaX;
                 z = parakarry->pos.z + parakarryDeltaZ;
-                
+
                 x = parakarry->pos.x;
                 y = parakarry->pos.y;
                 z = parakarry->pos.z;
-                hitCount = npc_test_move_complex_with_slipping(COLLISION_CHANNEL_10000, &x, &y, &z, parakarry->moveSpeed, parakarry->yaw, parakarry->collisionHeight, parakarry->collisionRadius);
+                hitCount = npc_test_move_complex_with_slipping(COLLISION_CHANNEL_10000, &x, &y, &z, parakarry->moveSpeed, parakarry->yaw, parakarry->collisionHeight, parakarry->collisionDiameter);
                 if (hitCount == 0) {
                     playerStatus->position.x += playerDeltaX;
                     playerStatus->position.z += playerDeltaZ;
@@ -404,7 +404,7 @@ API_CALLABLE(N(UseAbility)) {
             y = playerStatus->position.y + playerStatus->colliderHeight / 2.0f;
             z = playerStatus->position.z;
             length = playerStatus->colliderHeight / 2.0f;
-            if (npc_raycast_down_around(COLLISION_CHANNEL_10000, &x, &y, &z, &length, parakarry->yaw, parakarry->collisionRadius)) {
+            if (npc_raycast_down_around(COLLISION_CHANNEL_10000, &x, &y, &z, &length, parakarry->yaw, parakarry->collisionDiameter)) {
                 s32 surfaceType = get_collider_flags(NpcHitQueryColliderID) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
                 if (surfaceType == SURFACE_TYPE_SPIKES || surfaceType == SURFACE_TYPE_LAVA) {
                     playerStatus->hazardType = HAZARD_TYPE_SPIKES;
@@ -436,7 +436,7 @@ API_CALLABLE(N(UseAbility)) {
                 parakarry->animationSpeed = 1.8f;
                 gCollisionStatus.currentFloor = NO_COLLIDER;
                 N(AbilityState)++; // AIR_LIFT_CARRY
-            }  
+            }
             break;
         case AIR_LIFT_CARRY:
             gCollisionStatus.currentFloor = N(update_current_floor)();
@@ -447,7 +447,7 @@ API_CALLABLE(N(UseAbility)) {
                 N(AbilityState) = AIR_LIFT_DROP;
                 break;
             }
-            
+
             suggest_player_anim_always_forward(ANIM_MarioW2_HoldOnto);
             if (playerStatus->flags & PS_FLAG_HIT_FIRE) {
                 N(AbilityState) = AIR_LIFT_JUMP;
@@ -510,7 +510,7 @@ API_CALLABLE(N(UseAbility)) {
                     z = parakarry->pos.z;
                     if (!npc_test_move_complex_with_slipping(COLLISION_CHANNEL_10000,
                             &x, &y, &z, parakarry->moveSpeed, parakarry->yaw,
-                            parakarry->collisionHeight, parakarry->collisionRadius)
+                            parakarry->collisionHeight, parakarry->collisionDiameter)
                     ) {
                         hitAbove = FALSE;
                         x = parakarry->pos.x;
@@ -529,7 +529,7 @@ API_CALLABLE(N(UseAbility)) {
                         z = playerStatus->position.z;
                         length = playerStatus->colliderHeight / 2.0f;
 
-                        if (npc_raycast_down_around(COLLISION_CHANNEL_10000, &x, &y, &z, &length, parakarry->yaw, parakarry->collisionRadius)) {
+                        if (npc_raycast_down_around(COLLISION_CHANNEL_10000, &x, &y, &z, &length, parakarry->yaw, parakarry->collisionDiameter)) {
                             playerStatus->position.y += (y - playerStatus->position.y) / 4.0f;
                             parakarry->pos.y = playerStatus->position.y + 32.0f;
                             y = parakarry->pos.y;
@@ -605,7 +605,7 @@ API_CALLABLE(N(UseAbility)) {
         }
         return ApiStatus_DONE2;
     }
-    
+
     return ApiStatus_BLOCK;
 }
 

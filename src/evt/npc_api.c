@@ -152,7 +152,7 @@ ApiStatus SetNpcCollisionSize(Evt* script, s32 isInitialCall) {
     }
 
     npc->collisionHeight = height;
-    npc->collisionRadius = radius;
+    npc->collisionDiameter = radius;
     return ApiStatus_DONE2;
 }
 
@@ -813,7 +813,7 @@ s32 BringPartnerOut(Evt* script, s32 isInitialCall) {
 
         wExtraPartnerNpcID = create_basic_npc(bpPointer);
         npc = get_npc_by_index(wExtraPartnerNpcID);
-        npc->collisionRadius = 10;
+        npc->collisionDiameter = 10;
         npc->collisionHeight = 10;
         npc->npcID = NPC_PARTNER;
         npc->scale.x = 0.0f;

@@ -17,7 +17,7 @@ s32 N(check_for_treadmill_overlaps)(void);
 
 void N(init)(Npc* bow) {
     bow->collisionHeight = 26;
-    bow->collisionRadius = 24;
+    bow->collisionDiameter = 24;
     bow->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
     N(LockingPlayerInput) = FALSE;
     N(IsHiding) = FALSE;
