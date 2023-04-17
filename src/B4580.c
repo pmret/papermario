@@ -815,15 +815,11 @@ void appendGfx_animator(ModelAnimator* animator) {
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
 
-#ifdef NON_EQUIVALENT
 void appendGfx_animator_node(ModelAnimator* animator, AnimatorNode* node, Matrix4f mtx) {
-    s32 i, dlSize, bufferIdx;
     DisplayListBufferHandle* bufferHandle;
-    Gfx* gfxPos;
-    s32 j;
     u32 w0,w1;
-    s32 totalVtxCount;
     s32 cmd;
+    s32 i;
 
     if (node->flags & MODEL_ANIMATOR_FLAG_HIDDEN) {
         for (i = 0; i < ARRAY_COUNT(node->children); i++) {
@@ -854,45 +850,51 @@ void appendGfx_animator_node(ModelAnimator* animator, AnimatorNode* node, Matrix
     }
     gDPPipeSync(gMainGfxPos++);
 
-    if (animator->fpRenderCallback != NULL) {
-        animator->fpRenderCallback(animator->renderCallbackArg);
-    }
+    if (animator->fpRenderCallback != NULL) animator->fpRenderCallback(animator->renderCallbackArg);
+
     gDPPipeSync(gMainGfxPos++);
 
     if (node->displayList != NULL) {
         if (node->vertexStartOffset < 0) {
             gSPDisplayList(gMainGfxPos++, node->displayList);
         } else {
-            dlSize = 0;
-            if (node->displayList[dlSize].words.w0 >> 0x18 != G_ENDDL) {
-                while (TRUE) {
-                    w0 = node->displayList[dlSize++].words.w0;
+            Gfx* gfxPos;
+            s32 vtxIdx, dlIdx;
+            s32 j = 0;
+            s32 k;
+
+            if ((node->displayList[0].words.w0 >> 0x18) != G_ENDDL) {
+                Gfx* gfxPtr = node->displayList;
+                s32 endDL = G_ENDDL;
+
+                for(;; j++) {
+                    w0 = gfxPtr->words.w0;
+                    gfxPtr++;
                     cmd = w0 >> 0x18;
-                    if (cmd == G_ENDDL) {
+                    if (cmd == endDL) {
                         break;
                     }
                 }
             }
-
-            for (bufferIdx = 0; bufferIdx < ARRAY_COUNT(D_801536C0); bufferIdx++) {
-                bufferHandle = &D_801536C0[bufferIdx];
+            j++;
+            for (k = 0; k < ARRAY_COUNT(D_801536C0); k++) {
+                bufferHandle = &D_801536C0[k];
                 if (bufferHandle->ttl < 0) {
                     break;
                 }
             }
-            ASSERT(bufferIdx < ARRAY_COUNT(D_801536C0));
+            ASSERT(k < ARRAY_COUNT(D_801536C0));
 
-            gfxPos = general_heap_malloc(dlSize * sizeof(Gfx));
-            bufferHandle->addr = gfxPos;
+            bufferHandle->addr = gfxPos = general_heap_malloc(j * sizeof(Gfx));
             ASSERT(gfxPos != NULL);
             bufferHandle->ttl = 3;
 
+            vtxIdx = 0;
+            dlIdx = 0;
 
-            totalVtxCount = 0;
-            j = 0;
             do {
-                w0 = ((s32*)node->displayList)[j++];
-                w1 = ((s32*)node->displayList)[j++];
+                w0 = ((s32*)node->displayList)[dlIdx++];
+                w1 = ((s32*)node->displayList)[dlIdx++];
                 cmd = w0 >> 0x18;
                 if (cmd == G_ENDDL) {
                     break;
@@ -900,22 +902,32 @@ void appendGfx_animator_node(ModelAnimator* animator, AnimatorNode* node, Matrix
                 if (cmd == G_VTX) {
                     s32 startIdx = _SHIFTR(w0,1,7);
                     s32 vtxCount = _SHIFTR(w0,12,8);
+                    Vtx* newBuffer;
+
                     startIdx -= vtxCount;
+
                     if (node->fcData.vtxList == NULL) {
-                        Vtx* newBuffer = &((Vtx*)w1)[node->vertexStartOffset + totalVtxCount];
+                        newBuffer = &((Vtx*)w1)[node->vertexStartOffset + vtxIdx];
                         gSPVertex(gfxPos++, newBuffer, vtxCount, startIdx);
                     } else {
-                        // if node->fcData.vtxList != NULL, all vertex buffers in gSPVertex commands are pointers to Vec3s, not to Vtx
-                        Vtx* newBuffer = animator_copy_vertices_to_buffer(animator, node, w1 + (node->vertexStartOffset + totalVtxCount) * 0x6, vtxCount, startIdx, totalVtxCount);
+                        newBuffer = animator_copy_vertices_to_buffer(
+                            animator,
+                            node,
+                            (Vec3s*)(w1 + (node->vertexStartOffset + vtxIdx) * 0x6),
+                            vtxCount,
+                            startIdx,
+                            vtxIdx
+                        );
                         gSPVertex(gfxPos++, newBuffer, vtxCount, startIdx);
                     }
-                    totalVtxCount += vtxCount;
+                    vtxIdx += vtxCount;
                 } else {
-                    gfxPos++;
-                    gfxPos->words.w0 = w0;
-                    gfxPos->words.w1 = w1;
+                    Gfx* temp[1] = {gfxPos++}; // required to match
+                    temp[0]->words.w0 = w0;
+                    temp[0]->words.w1 = w1;
                 }
             } while (TRUE);
+
             gSPEndDisplayList(gfxPos++);
             gSPDisplayList(gMainGfxPos++, bufferHandle->addr);
         }
@@ -928,12 +940,9 @@ void appendGfx_animator_node(ModelAnimator* animator, AnimatorNode* node, Matrix
         }
     }
 }
-#else
-INCLUDE_ASM(s32, "B4580", appendGfx_animator_node);
-#endif
 
-AnimatorNode* get_animator_node_for_tree_index(ModelAnimator* animator, s32 arg1) {
-    return get_animator_child_with_id(animator->rootNode, animator->staticNodeIDs[arg1 - 1]);
+AnimatorNode* get_animator_node_for_tree_index(ModelAnimator* animator, s32 node) {
+    return get_animator_child_with_id(animator->rootNode, animator->staticNodeIDs[node - 1]);
 }
 
 AnimatorNode* get_animator_node_with_id(ModelAnimator* animator, s32 id) {
