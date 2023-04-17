@@ -941,8 +941,8 @@ void appendGfx_animator_node(ModelAnimator* animator, AnimatorNode* node, Matrix
     }
 }
 
-AnimatorNode* get_animator_node_for_tree_index(ModelAnimator* animator, s32 node) {
-    return get_animator_child_with_id(animator->rootNode, animator->staticNodeIDs[node - 1]);
+AnimatorNode* get_animator_node_for_tree_index(ModelAnimator* animator, s32 arg1) {
+    return get_animator_child_with_id(animator->rootNode, animator->staticNodeIDs[arg1 - 1]);
 }
 
 AnimatorNode* get_animator_node_with_id(ModelAnimator* animator, s32 id) {
