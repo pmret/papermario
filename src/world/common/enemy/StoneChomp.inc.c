@@ -52,8 +52,8 @@ API_CALLABLE(N(StoneChompFXB)) {
     posX = ownerNpc->pos.x;
     posY = ownerNpc->pos.y + (ownerNpc->collisionHeight * 0.2f);
     posZ = ownerNpc->pos.z;
-    add_vec2D_polar(&posX, &posZ, ownerNpc->collisionRadius * 0.3f, clamp_angle(ownerNpc->renderYaw + 180.0f));
-    
+    add_vec2D_polar(&posX, &posZ, ownerNpc->collisionDiameter * 0.3f, clamp_angle(ownerNpc->renderYaw + 180.0f));
+
     if (ownerNpc->flags & NPC_FLAG_INVISIBLE) {
         for (i = 0; i < 8; i++, blurData++) {
             childNpc = blurData->npc;
@@ -63,7 +63,7 @@ API_CALLABLE(N(StoneChompFXB)) {
         }
         return ApiStatus_BLOCK;
     }
-    
+
     for (i = 0; i < 8; i++, blurData++) {
         childNpc = blurData->npc;
         if (dist3D(childNpc->pos.x, childNpc->pos.y, childNpc->pos.z, posX, posY, posZ) >= 10.0) {
@@ -78,11 +78,11 @@ API_CALLABLE(N(StoneChompFXB)) {
             blurData->offset.x = (nextX - childNpc->pos.x) * 0.7f;
             blurData->offset.y = (nextY - childNpc->pos.y) * 0.7f;
             blurData->offset.z = (nextZ - childNpc->pos.z) * 0.7f;
-            
+
             childNpc->pos.x = nextX;
             childNpc->pos.y = nextY;
             childNpc->pos.z = nextZ;
-            
+
             if (blurData->offset.y > 10.0f) {
                 blurData->offset.y = 10.0f;
             }
@@ -92,7 +92,7 @@ API_CALLABLE(N(StoneChompFXB)) {
             childNpc->pos.x += blurData->offset.x;
             childNpc->pos.z += blurData->offset.z;
         }
-        
+
         blurData->offset.y -= 1.0f;
         if (blurData->offset.y < -10.0f) {
             blurData->offset.y = -10.0f;
@@ -115,7 +115,7 @@ API_CALLABLE(N(StoneChompFXB)) {
 API_CALLABLE(N(StoneChompFXC)) {
     NpcChompBlur* blurData = get_npc_safe(script->owner2.npcID)->blur.chomp;
     s32 i;
-    
+
     for (i = 0; i < 8; i++, blurData++) {
         free_npc(blurData->npc);
     }

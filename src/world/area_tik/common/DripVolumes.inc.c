@@ -27,7 +27,7 @@ API_CALLABLE(N(CheckDripCollisionWithNPC)) {
     yVal = partner->pos.y + partner->collisionHeight - 1.5f - model->center.y;
     sqrtTemp = sqrtf(SQ(xDiff) + SQ(zDiff));
 
-    if (yVal > 0.0f && yVal < partner->collisionHeight && sqrtTemp < partner->collisionRadius * 0.5f) {
+    if (yVal > 0.0f && yVal < partner->collisionHeight && sqrtTemp < partner->collisionDiameter * 0.5f) {
         script->varTable[2] = 1;
     }
 
@@ -40,7 +40,7 @@ API_CALLABLE(N(CheckDripCollisionWithNPC)) {
             yVal = npc->pos.y + npc->collisionHeight - 1.5f - model->center.y;
             sqrtTemp = sqrtf(SQ(xDiff) + SQ(zDiff));
 
-            if (yVal > 0.0f && yVal < npc->collisionHeight && sqrtTemp < npc->collisionRadius * 0.5f) {
+            if (yVal > 0.0f && yVal < npc->collisionHeight && sqrtTemp < npc->collisionDiameter * 0.5f) {
                 script->varTable[2] = 1;
                 break;
             }

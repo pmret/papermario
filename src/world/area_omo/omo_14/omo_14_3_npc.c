@@ -5,9 +5,9 @@ API_CALLABLE(N(SurroundPlayer)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
     f32 goalPosX = playerStatus->position.x +
-        ((playerStatus->colliderDiameter + npc->collisionRadius) * 0.5f * sin_deg((npc->npcID * 360.0f) / 10.0f));
+        ((playerStatus->colliderDiameter + npc->collisionDiameter) * 0.5f * sin_deg((npc->npcID * 360.0f) / 10.0f));
     f32 goalPosZ = playerStatus->position.z -
-        ((playerStatus->colliderDiameter + npc->collisionRadius) * 0.5f * cos_deg((npc->npcID * 360.0f) / 10.0f));
+        ((playerStatus->colliderDiameter + npc->collisionDiameter) * 0.5f * cos_deg((npc->npcID * 360.0f) / 10.0f));
     f32 dist = dist2D(npc->pos.x, npc->pos.z, goalPosX, goalPosZ);
 
     if (npc->moveSpeed < dist) {

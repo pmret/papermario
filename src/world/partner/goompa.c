@@ -6,7 +6,7 @@
 
 void N(init)(Npc* partner) {
     partner->collisionHeight = 24;
-    partner->collisionRadius = 20;
+    partner->collisionDiameter = 20;
 }
 
 API_CALLABLE(N(TakeOut)) {

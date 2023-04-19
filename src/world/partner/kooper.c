@@ -56,7 +56,7 @@ void N(vertical_hit_interactable_entity)(Npc* kooper) {
 }
 
 s32 N(check_for_item_collision)(Npc* kooper) {
-    N(HeldItemIdx) = test_item_entity_position(kooper->pos.x, kooper->pos.y, kooper->pos.z, kooper->collisionRadius);
+    N(HeldItemIdx) = test_item_entity_position(kooper->pos.x, kooper->pos.y, kooper->pos.z, kooper->collisionDiameter);
 
     if (N(HeldItemIdx) < 0) {
         return FALSE;
@@ -70,7 +70,7 @@ s32 N(check_for_item_collision)(Npc* kooper) {
 
 void N(init)(Npc* kooper) {
     kooper->collisionHeight = 37;
-    kooper->collisionRadius = 24;
+    kooper->collisionDiameter = 24;
     kooper->collisionChannel = COLLISION_CHANNEL_10000;
     N(TriggeredBattle) = FALSE;
 }
@@ -415,7 +415,7 @@ API_CALLABLE(N(UseAbility)) {
                 posZ = kooper->pos.z, \
                 npc_test_move_taller_with_slipping(COLLISION_CHANNEL_8000, \
                     &posX, &posY, &posZ, kooper->moveSpeed, testAngle,  \
-                    kooper->collisionHeight, kooper->collisionRadius / 2) \
+                    kooper->collisionHeight, kooper->collisionDiameter / 2) \
                 )
 
             if (TEST_COLLISION_AT_ANGLE(kooper->yaw - 20.0f)) {
@@ -453,7 +453,7 @@ API_CALLABLE(N(UseAbility)) {
                 script->USE_STATE = SHELL_TOSS_STATE_RETURN;
                 break;
             }
-            
+
             kooper->pos.x = posX;
             kooper->pos.y = posY;
             kooper->pos.z = posZ;
@@ -508,7 +508,7 @@ API_CALLABLE(N(UseAbility)) {
                         kooper->planarFlyDist += 1.0;
                     }
                 }
-            }    
+            }
             break;
 
         case SHELL_TOSS_STATE_PICKUP:
@@ -518,8 +518,8 @@ API_CALLABLE(N(UseAbility)) {
 
             npc_test_move_taller_with_slipping(COLLISION_CHANNEL_8000,
                 &posX, &posY, &posZ, kooper->moveSpeed, kooper->yaw,
-                kooper->collisionHeight, ( kooper->collisionRadius / 2));
-                
+                kooper->collisionHeight, ( kooper->collisionDiameter / 2));
+
             kooper->pos.x = posX;
             kooper->pos.y = posY;
             kooper->pos.z = posZ;
@@ -576,7 +576,7 @@ API_CALLABLE(N(UseAbility)) {
 
             if (npc_test_move_taller_with_slipping(COLLISION_CHANNEL_8000,
                 &posX, &posY, &posZ, kooper->moveSpeed, clamp_angle(kooper->yaw + 180.0f),
-                kooper->collisionHeight, kooper->collisionRadius)
+                kooper->collisionHeight, kooper->collisionDiameter)
             ) {
                 kooper->pos.x = posX;
                 kooper->pos.y = posY;
@@ -688,10 +688,10 @@ s32 N(test_first_strike)(Npc* kooper, Npc* enemy) {
         kooperZ = kooper->pos.z;
 
         enemyCollHeight = enemy->collisionHeight;
-        enemyCollRadius = enemy->collisionRadius * 0.55;
+        enemyCollRadius = enemy->collisionDiameter * 0.55;
 
         kooperCollHeight = kooper->collisionHeight;
-        kooperCollRadius = kooper->collisionRadius * 0.8;
+        kooperCollRadius = kooper->collisionDiameter * 0.8;
 
         angleToEnemy = atan2(enemyX, enemyZ, kooperX, kooperZ);
         distToEnemy = dist2D(enemyX, enemyZ, kooperX, kooperZ);

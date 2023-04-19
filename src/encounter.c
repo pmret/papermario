@@ -683,7 +683,7 @@ void update_encounters_neutral(void) {
             npcZ = npc->pos.z;
             npcYaw = npc->yaw;
             colHeight = npc->collisionHeight;
-            colRadius = npc->collisionRadius / 2;
+            colRadius = npc->collisionDiameter / 2;
 
             if (enemy->unk_DC != 0) {
                 npcYaw = npc->yawCamOffset;
@@ -2324,7 +2324,7 @@ s32 check_conversation_trigger(void) {
             deltaX = npcX - playerX;
             deltaZ = npcZ - playerZ;
             npcCollisionHeight = encounterNpc->collisionHeight;
-            npcCollisionRadius = encounterNpc->collisionRadius;
+            npcCollisionRadius = encounterNpc->collisionDiameter;
             length = sqrtf(SQ(deltaX) + SQ(deltaZ));
 
             if ((playerColliderRadius + npcCollisionRadius <= length) ||
@@ -2543,7 +2543,7 @@ void create_encounters(void) {
 
                     newNpc = get_npc_by_index(newNpcIndex);
                     newNpc->npcID = npcData->id;
-                    newNpc->collisionRadius = npcSettings->radius;
+                    newNpc->collisionDiameter = npcSettings->radius;
                     newNpc->collisionHeight = npcSettings->height;
                     enemy->spawnPos[0] = newNpc->pos.x = npcData->pos.x;
                     enemy->spawnPos[1] = newNpc->pos.y = npcData->pos.y;
@@ -2555,8 +2555,8 @@ void create_encounters(void) {
                     newNpc->homePos.z = newNpc->pos.z;
                     set_npc_yaw(newNpc, npcData->yaw);
                     enemy->savedNpcYaw = 12345;
-                    if (newNpc->collisionRadius >= 24.0) {
-                        newNpc->shadowScale = newNpc->collisionRadius / 24.0;
+                    if (newNpc->collisionDiameter >= 24.0) {
+                        newNpc->shadowScale = newNpc->collisionDiameter / 24.0;
                     } else {
                         newNpc->shadowScale = 1.0f;
                     }

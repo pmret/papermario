@@ -82,10 +82,10 @@ ApiStatus SetPlayerCollisionSize(Evt* script, s32 isInitialCall) {
     s32 radius = evt_get_variable(script, *args++);
 
     playerNpc->collisionHeight = height;
-    playerNpc->collisionRadius = radius;
+    playerNpc->collisionDiameter = radius;
 
     playerStatus->colliderHeight = playerNpc->collisionHeight;
-    playerStatus->colliderDiameter = playerNpc->collisionRadius;
+    playerStatus->colliderDiameter = playerNpc->collisionDiameter;
 
     return ApiStatus_DONE2;
 }

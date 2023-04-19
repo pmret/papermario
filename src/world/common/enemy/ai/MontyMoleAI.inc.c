@@ -49,7 +49,7 @@ static s32 N(MontyMoleAI_CanAttack)(Evt* script, EnemyDetectVolume* territory, f
         retVal = FALSE;
     }
     // check for overlap with player
-    if (get_xz_dist_to_player(npc->pos.x, npc->pos.z) < gPlayerStatusPtr->colliderDiameter + npc->collisionRadius) {
+    if (get_xz_dist_to_player(npc->pos.x, npc->pos.z) < gPlayerStatusPtr->colliderDiameter + npc->collisionDiameter) {
         retVal = FALSE;
     }
     // check player elevation difference
@@ -66,7 +66,7 @@ static s32 N(MontyMoleAI_CanAttack)(Evt* script, EnemyDetectVolume* territory, f
 static void N(MontyMoleAI_Init)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    
+
     npc->duration = (aiSettings->moveTime / 2) + rand_int((aiSettings->moveTime / 2) + 1);
     npc->yaw = clamp_angle((npc->yaw + rand_int(60)) - 30.0f);
     if (enemy->territory->wander.moveSpeedOverride < 0) {
@@ -85,8 +85,8 @@ static void N(MontyMoleAI_Wander)(Evt* script, MobileAISettings* aiSettings, Ene
     Npc* npc = get_npc_unsafe(enemy->npcID);
     Npc dummyNpc;
     f32 hitDepth;
-    
-    if (is_point_within_region(enemy->territory->wander.wanderShape, 
+
+    if (is_point_within_region(enemy->territory->wander.wanderShape,
             enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z,
             npc->pos.x, npc->pos.z,
             enemy->territory->wander.wanderSize.x, enemy->territory->wander.wanderSize.z)) {
@@ -95,7 +95,7 @@ static void N(MontyMoleAI_Wander)(Evt* script, MobileAISettings* aiSettings, Ene
     dummyNpc.pos.x = npc->pos.x;
     dummyNpc.pos.y = npc->pos.y + 1.0f;
     dummyNpc.pos.z = npc->pos.z;
-    npc_move_heading(&dummyNpc, npc->moveSpeed + npc->collisionRadius, npc->yaw);
+    npc_move_heading(&dummyNpc, npc->moveSpeed + npc->collisionDiameter, npc->yaw);
     hitDepth = 1000.0f;
     if (npc_raycast_down_sides(0, &dummyNpc.pos.x, &dummyNpc.pos.y, &dummyNpc.pos.z, &hitDepth) && (hitDepth < 5.0f)) {
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
@@ -127,7 +127,7 @@ static void N(MontyMoleAI_Wander)(Evt* script, MobileAISettings* aiSettings, Ene
 static void N(MontyMoleAI_PreSurface)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    
+
     npc->flags &= ~NPC_FLAG_INVISIBLE;
     ai_enemy_play_sound(npc, SOUND_BURROW_SURFACE, 0);
     npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
@@ -139,7 +139,7 @@ static void N(MontyMoleAI_PreSurface)(Evt* script, MobileAISettings* aiSettings,
 static void N(MontyMoleAI_Surface)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    
+
     npc->duration--;
     if (npc->duration == 2) {
         enemy->flags &= ~MONTY_MOLE_UNK_NPC_FLAGS;
@@ -155,7 +155,7 @@ static void N(MontyMoleAI_DrawRock)(Evt* script, MobileAISettings* aiSettings, E
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 emoteOut;
-    
+
     npc->duration--;
     if ((npc->duration) <= 0) {
         if (!N(MontyMoleAI_CanAttack)(script, territory, aiSettings->alertRadius * 1.1, aiSettings->alertOffsetDist)) {
@@ -201,7 +201,7 @@ static void N(MontyMoleAI_ThrowRock)(Evt* script, MobileAISettings* aiSettings, 
 static void N(MontyMoleAI_PreBurrow)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    
+
     npc->duration--;
     if (npc->duration <= 0) {
         ai_enemy_play_sound(npc, SOUND_BURROW_DIG, 0);
@@ -214,7 +214,7 @@ static void N(MontyMoleAI_PreBurrow)(Evt* script, MobileAISettings* aiSettings, 
 static void N(MontyMoleAI_Burrow)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    
+
     npc->duration--;
     if (npc->duration == 3) {
         enemy->flags |= MONTY_MOLE_UNK_NPC_FLAGS;
@@ -232,7 +232,7 @@ API_CALLABLE(N(MontyMoleAI_Main)) {
     EnemyDetectVolume territory;
     EnemyDetectVolume* territoryPtr = &territory;
     MobileAISettings* aiSettings = (MobileAISettings*)evt_get_variable(script, *args++);
-    
+
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
     territory.pointX = enemy->territory->wander.detectPos.x;
@@ -240,7 +240,7 @@ API_CALLABLE(N(MontyMoleAI_Main)) {
     territory.sizeX = enemy->territory->wander.detectSize.x;
     territory.sizeZ = enemy->territory->wander.detectSize.z;
     territory.halfHeight = 65.0f;
-    territory.detectFlags = 0; 
+    territory.detectFlags = 0;
 
     if (isInitialCall) {
         script->AI_TEMP_STATE = AI_STATE_MOLE_INIT;
@@ -248,7 +248,7 @@ API_CALLABLE(N(MontyMoleAI_Main)) {
         npc->flags &= ~NPC_FLAG_JUMPING;
         enemy->aiFlags |= (ENEMY_AI_FLAG_8 | ENEMY_AI_FLAG_10);
     }
-    
+
     if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
         if (enemy->aiSuspendTime == 0) {
             enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
