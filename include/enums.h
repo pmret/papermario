@@ -5461,7 +5461,7 @@ enum CameraInitDataFlags {
 
 enum CameraFlags {
     CAMERA_FLAG_1                   = 0x00000001,
-    CAMERA_FLAG_DISABLED             = 0x00000002,
+    CAMERA_FLAG_DISABLED            = 0x00000002,
     CAMERA_FLAG_LEAD_PLAYER         = 0x00000004,
     CAMERA_FLAG_SHAKING             = 0x00000008,
     CAMERA_FLAG_ORTHO               = 0x00000010,
@@ -5501,12 +5501,12 @@ enum CameraMoveFlags {
 };
 
 enum CameraUpdateType {
-    CAM_UPDATE_MODE_INIT               = 0,
-    CAM_UPDATE_UNUSED_1               = 1,
+    CAM_UPDATE_MODE_INIT            = 0,
+    CAM_UPDATE_UNUSED_1             = 1,
     CAM_UPDATE_MODE_2               = 2,
-    CAM_UPDATE_FROM_ZONE               = 3,
-    CAM_UPDATE_UNUSED_4               = 4,
-    CAM_UPDATE_UNUSED_5               = 5,
+    CAM_UPDATE_FROM_ZONE            = 3,
+    CAM_UPDATE_UNUSED_4             = 4,
+    CAM_UPDATE_UNUSED_5             = 5,
     CAM_UPDATE_MODE_6               = 6,
 };
 
