@@ -21,9 +21,9 @@ ApiStatus SetCamEnabled(Evt* script, s32 isInitialCall) {
     s32 enabled = evt_get_variable(script, *args++);
 
     if (!enabled) {
-        gCameras[id].flags |= CAMERA_FLAG_ENABLED;
+        gCameras[id].flags |= CAMERA_FLAG_DISABLED;
     } else {
-        gCameras[id].flags &= ~CAMERA_FLAG_ENABLED;
+        gCameras[id].flags &= ~CAMERA_FLAG_DISABLED;
     }
     return ApiStatus_DONE2;
 }

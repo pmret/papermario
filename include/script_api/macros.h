@@ -724,22 +724,22 @@
 
 // only set perspective to standard values
 #define EVT_SETUP_CAMERA_MINIMAL() \
-    EVT_CALL(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_MODE_3, 25, 16, 4096)
+    EVT_CALL(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 4096)
 
 #define EVT_SETUP_CAMERA_DEFAULT() \
-    EVT_CALL(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_MODE_3, 25, 16, 4096) \
+    EVT_CALL(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 4096) \
     EVT_CALL(SetCamBGColor, CAM_DEFAULT, 0, 0, 0) \
     EVT_CALL(SetCamEnabled, CAM_DEFAULT, TRUE)
 
 #define EVT_SETUP_CAMERA_NO_LEAD() \
-    EVT_CALL(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_MODE_3, 25, 16, 4096) \
+    EVT_CALL(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 4096) \
     EVT_CALL(SetCamBGColor, CAM_DEFAULT, 0, 0, 0) \
     EVT_CALL(SetCamEnabled, CAM_DEFAULT, TRUE) \
     EVT_CALL(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
 
 // same as EVT_SETUP_CAMERA_NO_LEAD with calls reordered
 #define EVT_SETUP_CAMERA_ALT_NO_LEAD() \
-    EVT_CALL(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_MODE_3, 25, 16, 4096) \
+    EVT_CALL(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 4096) \
     EVT_CALL(SetCamBGColor, CAM_DEFAULT, 0, 0, 0) \
     EVT_CALL(SetCamLeadPlayer, CAM_DEFAULT, FALSE) \
     EVT_CALL(SetCamEnabled, CAM_DEFAULT, TRUE)

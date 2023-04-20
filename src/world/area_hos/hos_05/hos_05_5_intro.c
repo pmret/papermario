@@ -1743,7 +1743,7 @@ API_CALLABLE(N(AnimateStorybookPages)) {
                         N(StoryGraphicsPtr)->frontImgPosX = 0;
                         N(StoryGraphicsPtr)->frontImgPosY = 0;
                     }
-                    gCameras[CAM_DEFAULT].flags &= ~CAMERA_FLAG_ENABLED;
+                    gCameras[CAM_DEFAULT].flags &= ~CAMERA_FLAG_DISABLED;
                     N(StoryPageState)++;
                 }
             }

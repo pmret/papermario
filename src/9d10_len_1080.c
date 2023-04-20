@@ -278,8 +278,8 @@ void update_camera_mode_1(Camera* camera) {
     f32 new_var2;
     f32 tmp1;
 
-    if (camera->unk_06) {
-        camera->unk_06 = FALSE;
+    if (camera->needsInit) {
+        camera->needsInit = FALSE;
 
         deltaX = camera->lookAt_obj_target.x;
         deltaZ2 = camera->lookAt_obj_target.z;
@@ -413,9 +413,9 @@ void update_camera_mode_1(Camera* camera) {
 }
 
 void update_camera_mode_0(Camera* camera) {
-    f32 xTemp;
-    f32 yTemp;
-    f32 zTemp;
+    f32 dx;
+    f32 dy;
+    f32 dz;
 
     if (camera->needsInit) {
         camera->lookAt_obj.x = 0.0f;
@@ -428,10 +428,10 @@ void update_camera_mode_0(Camera* camera) {
     }
 
     camera->currentYaw = atan2(camera->lookAt_eye.x, camera->lookAt_eye.z, camera->lookAt_obj.x, camera->lookAt_obj.z);
-    xTemp = camera->lookAt_obj.x - camera->lookAt_eye.x;
-    yTemp = camera->lookAt_obj.y - camera->lookAt_eye.y;
-    zTemp = camera->lookAt_obj.z - camera->lookAt_eye.z;
-    camera->currentBlendedYawNegated = -atan2(0.0f, 0.0f, xTemp, zTemp);
-    xTemp = -sqrtf(SQ(xTemp) + SQ(zTemp));
-    camera->currentPitch = atan2(0.0f, 0.0f, yTemp, xTemp);
+    dx = camera->lookAt_obj.x - camera->lookAt_eye.x;
+    dy = camera->lookAt_obj.y - camera->lookAt_eye.y;
+    dz = camera->lookAt_obj.z - camera->lookAt_eye.z;
+    camera->currentBlendedYawNegated = -atan2(0.0f, 0.0f, dx, dz);
+    dx = -sqrtf(SQ(dx) + SQ(dz));
+    camera->currentPitch = atan2(0.0f, 0.0f, dy, dx);
 }
