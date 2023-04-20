@@ -3,6 +3,19 @@
 }:
 
 let
+  mach-nix = import (builtins.fetchGit {
+    url = "https://github.com/DavHau/mach-nix";
+    ref = "master";
+    rev = "8d903072c7b5426d90bc42a008242c76590af916";
+  }) { };
+
+  mach-nix-python = mach-nix.mkPython {
+    requirements = ''
+      ${builtins.readFile ./requirements.txt}
+      ${builtins.readFile ./requirements_extra.txt}
+    '';
+  };
+
   gcc-papermario = builtins.fetchurl {
     url =
       "https://github.com/pmret/gcc-papermario/releases/download/master/linux.tar.gz";
@@ -33,17 +46,18 @@ let
     sha256 = "65b42b9673b6f439e45e5dafab1eca4fc006a68cda87bdb55681f027d9fb903c";
   };
 in pkgsCross.mkShell {
-  nativeBuildInputs =
-    (with pkgsNative; [ ninja zlib libyaml patchelf glibc gcc ]);
-  buildInputs = with pkgsNative;
-    [ python3Packages.python python3Packages.venvShellHook ]
-    ++ (with pkgsCross; [ gcc binutils ]);
+  nativeBuildInputs = (with pkgsNative; [
+    ninja
+    zlib
+    libyaml
+    patchelf
+    glibc
+    gcc
+    mach-nix-python
+  ]);
+  buildInputs = (with pkgsCross; [ gcc binutils ]);
 
   # This is a very un-Nix-y way of doing things
-  # mach-nix and pip2nix both struggle with venvs, and I'm not sure how to best approach the binaries
-  venvDir = "./venv";
-  postVenvCreation =
-    "pip install -r requirements.txt -r requirements_extra.txt";
   shellHook = ''
     tar zx -C tools/build/cc/gcc -f ${gcc-papermario}
     tar zx -C tools/build/cc/gcc -f ${binutils-papermario}
@@ -53,16 +67,10 @@ in pkgsCross.mkShell {
 
     tar zx -C tools/build/cc/ido5.3 -f ${ido}
 
-    needs_patching=(
-      tools/build/cc/gcc
-      tools/build/cc/gcc2.7.2
-      tools/build/cc/ido5.3
-    )
-
-    for dir in $needs_patching; do
+    for dir in $(find tools/build/cc -type d); do
       for f in $(find $dir -type f); do
         # Silence errors instead of thinking hard about this
-        patchelf --set-interpreter "${pkgsNative.glibc}/lib/ld-linux-x86-64.so.2" $f 2>/dev/null
+        ${pkgsNative.patchelf}/bin/patchelf --set-interpreter "${pkgsNative.glibc}/lib/ld-linux-x86-64.so.2" $f 2>/dev/null
       done
     done
   '';
