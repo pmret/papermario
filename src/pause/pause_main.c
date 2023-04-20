@@ -578,7 +578,7 @@ void pause_tutorial_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
         guMtxCatF(matrix2ptr, matrix1, matrix1);
         guMtxF2L(matrix1, &gDisplayContext->matrixStack[gMatrixListPos]);
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-        func_802DE894(gPauseTutorialSprites[i], FOLD_UPD_SET_COLOR, 255, 255, 255, 255, 64);
+        set_npc_imgfx_all(gPauseTutorialSprites[i], IMGFX_SET_COLOR, 255, 255, 255, 255, 64);
         spr_draw_npc_sprite(gPauseTutorialSprites[i], 0, 0, 0, matrix1);
         gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     }

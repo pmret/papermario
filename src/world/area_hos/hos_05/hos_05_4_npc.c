@@ -278,7 +278,7 @@ EvtScript N(EVS_Scene_RecieveStarBeam) = {
     EVT_CALL(SetNpcAnimation, NPC_Klevar, ANIM_WorldKlevar_Back)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o616, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(SetZoneEnabled, ZONE_o622, FALSE)
-    EVT_CALL(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_MODE_3, 25, 16, 4096)
+    EVT_CALL(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 4096)
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.5))

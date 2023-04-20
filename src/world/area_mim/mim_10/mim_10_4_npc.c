@@ -103,7 +103,7 @@ EvtScript N(EVS_Bootler_SpookPlayer) = {
 
 EvtScript N(EVS_Scene_BootlersInvitation) = {
     EVT_CALL(N(AwaitPlayerApproachForest))
-    EVT_CALL(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_MODE_3, 25, 16, 650)
+    EVT_CALL(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 650)
     EVT_CALL(N(InitializeLightingBright))
     EVT_THREAD
         EVT_CALL(N(ReduceFogEndDist))
@@ -113,7 +113,7 @@ EvtScript N(EVS_Scene_BootlersInvitation) = {
     EVT_END_THREAD
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(SetNpcPos, NPC_Bootler, 200, 44, 0)
-    EVT_CALL(SetNpcFoldParams, NPC_Bootler, FOLD_UPD_SET_ALPHA, 0, 0, 0, 0)
+    EVT_CALL(SetNpcImgFXParams, NPC_Bootler, IMGFX_SET_ALPHA, 0, 0, 0, 0)
     EVT_SET(MV_Unk_00, TRUE)
     EVT_CALL(SetMusicTrack, 0, SONG_BOOS_MANSION, 0, 8)
     EVT_WAIT(20 * DT)
@@ -131,7 +131,7 @@ EvtScript N(EVS_Scene_BootlersInvitation) = {
     EVT_SETF(LVar0, EVT_FLOAT(0.0))
     EVT_LOOP(20 * DT)
         EVT_ADDF(LVar0, EVT_FLOAT(VAR_1))
-        EVT_CALL(SetNpcFoldParams, NPC_Bootler, FOLD_UPD_SET_ALPHA, LVar0, 0, 0, 0)
+        EVT_CALL(SetNpcImgFXParams, NPC_Bootler, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_WAIT(20 * DT)
@@ -156,7 +156,7 @@ EvtScript N(EVS_Scene_BootlersInvitation) = {
     EVT_SETF(LVar0, EVT_FLOAT(240.0))
     EVT_LOOP(20 * DT)
         EVT_SUBF(LVar0, EVT_FLOAT(VAR_1))
-        EVT_CALL(SetNpcFoldParams, NPC_Bootler, FOLD_UPD_SET_ALPHA, LVar0, 0, 0, 0)
+        EVT_CALL(SetNpcImgFXParams, NPC_Bootler, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_WAIT(25 * DT)
@@ -169,7 +169,7 @@ EvtScript N(EVS_Scene_BootlersInvitation) = {
         EVT_SETF(LVar0, EVT_FLOAT(0.0))
         EVT_LOOP(20 * DT)
             EVT_ADDF(LVar0, EVT_FLOAT(VAR_1))
-            EVT_CALL(SetNpcFoldParams, NPC_Bootler, FOLD_UPD_SET_ALPHA, LVar0, 0, 0, 0)
+            EVT_CALL(SetNpcImgFXParams, NPC_Bootler, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -182,7 +182,7 @@ EvtScript N(EVS_Scene_BootlersInvitation) = {
     EVT_SETF(LVar0, EVT_FLOAT(240.0))
     EVT_LOOP(20 * DT)
         EVT_SUBF(LVar0, EVT_FLOAT(VAR_1))
-        EVT_CALL(SetNpcFoldParams, NPC_Bootler, FOLD_UPD_SET_ALPHA, LVar0, 0, 0, 0)
+        EVT_CALL(SetNpcImgFXParams, NPC_Bootler, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_SET(GB_StoryProgress, STORY_CH3_INVITED_TO_BOOS_MANSION)

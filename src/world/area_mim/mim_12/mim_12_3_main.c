@@ -18,8 +18,8 @@ EvtScript N(EVS_EnterMap) = {
     EVT_SETF(LVar0, EVT_FLOAT(240.0))
     EVT_LOOP(20)
         EVT_SUBF(LVar0, EVT_FLOAT(12.0))
-        EVT_CALL(SetNpcFoldParams, NPC_GateBoo_01, FOLD_UPD_SET_ALPHA, LVar0, 0, 0, 0)
-        EVT_CALL(SetNpcFoldParams, NPC_GateBoo_02, FOLD_UPD_SET_ALPHA, LVar0, 0, 0, 0)
+        EVT_CALL(SetNpcImgFXParams, NPC_GateBoo_01, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
+        EVT_CALL(SetNpcImgFXParams, NPC_GateBoo_02, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_WAIT(10)
@@ -30,7 +30,7 @@ EvtScript N(EVS_EnterMap) = {
 EvtScript N(EVS_Main) = {
     EVT_SET(GB_WorldLocation, LOCATION_FOREVER_FOREST)
     EVT_CALL(SetSpriteShading, SHADING_MIM_12)
-    EVT_CALL(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_MODE_3, 25, 16, 1024)
+    EVT_CALL(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 1024)
     EVT_CALL(SetCamBGColor, CAM_DEFAULT, 0, 0, 0)
     EVT_CALL(SetCamEnabled, CAM_DEFAULT, TRUE)
     EVT_CALL(MakeNpcs, TRUE, EVT_PTR(N(DefaultNPCs)))

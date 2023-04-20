@@ -31,8 +31,8 @@ void func_800E6860(void) {
     if (gPartnerStatus.partnerActionState != PARTNER_ACTION_NONE && gPartnerStatus.actingPartner == PARTNER_BOW) {
         Npc* partner = get_npc_unsafe(NPC_PARTNER);
 
-        func_802DDEE4(PLAYER_SPRITE_MAIN, -1, FOLD_UPD_SET_ALPHA, 0, 0, 0, playerStatus->alpha1, 0);
-        npc_set_fold_params(partner, FOLD_UPD_SET_ALPHA, playerStatus->alpha1, 0, 0, 0, 0);
+        set_player_imgfx_comp(PLAYER_SPRITE_MAIN, -1, IMGFX_SET_ALPHA, 0, 0, 0, playerStatus->alpha1, 0);
+        npc_set_imgfx_params(partner, IMGFX_SET_ALPHA, playerStatus->alpha1, 0, 0, 0, 0);
         playerStatus->alpha2 = 0;
     }
 }

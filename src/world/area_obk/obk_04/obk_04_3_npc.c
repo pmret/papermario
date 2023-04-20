@@ -34,12 +34,12 @@ API_CALLABLE(N(InitHiddenBoo)) {
 void N(func_802400D0_BC7F30)(Npc* npc) {
     if (npc->yaw > 340.0f || npc->yaw < 20.0f) {
         npc->renderMode = RENDER_MODE_ALPHATEST;
-        npc->foldFlags = 0;
-        npc_set_fold_params(npc, FOLD_UPD_CLEAR, 0, 0, 0, 0, npc->foldFlags);
+        npc->imgfxFlags = 0;
+        npc_set_imgfx_params(npc, IMGFX_CLEAR, 0, 0, 0, 0, npc->imgfxFlags);
     } else {
         npc->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
-        npc_set_fold_params(npc, FOLD_UPD_SET_ALPHA, gPlayerStatusPtr->alpha1, 255, 0, 0, npc->foldFlags);
-        npc->foldArg1 = 255;
+        npc_set_imgfx_params(npc, IMGFX_SET_ALPHA, gPlayerStatusPtr->alpha1, 255, 0, 0, npc->imgfxFlags);
+        npc->imgfxArg1 = 255;
     }
 }
 
@@ -55,14 +55,14 @@ void N(func_80240198_BC7FF8)(void) {
 }
 
 void N(func_8024022C_BC808C)(void) {
-    get_npc_unsafe(NPC_KeepAwayBoo1)->foldFlags = 0;
-    get_npc_unsafe(NPC_KeepAwayBoo2)->foldFlags = 0;
-    get_npc_unsafe(NPC_KeepAwayBoo3)->foldFlags = 0;
-    get_npc_unsafe(NPC_KeepAwayBoo4)->foldFlags = 0;
-    get_npc_unsafe(NPC_KeepAwayBoo5)->foldFlags = 0;
-    get_npc_unsafe(NPC_KeepAwayBoo6)->foldFlags = 0;
-    get_npc_unsafe(NPC_KeepAwayBoo7)->foldFlags = 0;
-    get_npc_unsafe(NPC_KeepAwayBoo8)->foldFlags = 0;
+    get_npc_unsafe(NPC_KeepAwayBoo1)->imgfxFlags = 0;
+    get_npc_unsafe(NPC_KeepAwayBoo2)->imgfxFlags = 0;
+    get_npc_unsafe(NPC_KeepAwayBoo3)->imgfxFlags = 0;
+    get_npc_unsafe(NPC_KeepAwayBoo4)->imgfxFlags = 0;
+    get_npc_unsafe(NPC_KeepAwayBoo5)->imgfxFlags = 0;
+    get_npc_unsafe(NPC_KeepAwayBoo6)->imgfxFlags = 0;
+    get_npc_unsafe(NPC_KeepAwayBoo7)->imgfxFlags = 0;
+    get_npc_unsafe(NPC_KeepAwayBoo8)->imgfxFlags = 0;
 }
 
 s32 N(SetRingMovement)(s32 arg0) {

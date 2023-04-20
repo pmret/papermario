@@ -28,10 +28,10 @@ EvtScript N(EVS_SetupSarcophagi) = {
             EVT_WAIT(12)
             EVT_CALL(InterpPlayerYaw, 109, 0)
             EVT_WAIT(3)
-            EVT_CALL(UpdatePlayerFold, ANIM_Mario1_Idle, FOLD_UPD_SET_ANIM, FOLD_ANIM_SHOCK, 1, 1, 0)
+            EVT_CALL(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_SET_ANIM, IMGFX_ANIM_SHOCK, 1, 1, 0)
             EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_Shocked)
             EVT_WAIT(20)
-            EVT_CALL(UpdatePlayerFold, ANIM_Mario1_Idle, FOLD_UPD_CLEAR, 0, 0, 0, 0)
+            EVT_CALL(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_CLEAR, 0, 0, 0, 0)
             EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
         EVT_END_THREAD
         EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(2.0))

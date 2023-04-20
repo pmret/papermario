@@ -196,7 +196,7 @@ void pause_spirits_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 widt
 
         }
 
-        func_802DE894(gPauseSpiritsSpriteIDs[gPauseSpiritsIndexes[index]], FOLD_UPD_SET_TINT, color, color, color, alpha, 64);
+        set_npc_imgfx_all(gPauseSpiritsSpriteIDs[gPauseSpiritsIndexes[index]], IMGFX_SET_TINT, color, color, color, alpha, 64);
         guTranslateF(matrix1, baseX + 22 + x, baseY + 77 + y + offsetY, 0.0f);
         guRotateF(matrix2, 180.0f, 0.0f, 0.0f, 1.0f);
         guMtxCatF(matrix2, matrix1, matrix1);

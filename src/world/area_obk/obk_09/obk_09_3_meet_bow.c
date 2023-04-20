@@ -48,8 +48,8 @@ EvtScript N(EVS_Scene_MeetBow) = {
     EVT_SETF(LVar0, EVT_FLOAT(0.0))
     EVT_LOOP(20 * DT)
         EVT_ADDF(LVar0, EVT_FLOAT(240.0 / (s32)(20 * DT)))
-        EVT_CALL(SetNpcFoldParams, NPC_Bow, FOLD_UPD_SET_ALPHA, LVar0, 0, 0, 0)
-        EVT_CALL(SetNpcFoldParams, NPC_Bootler, FOLD_UPD_SET_ALPHA, LVar0, 0, 0, 0)
+        EVT_CALL(SetNpcImgFXParams, NPC_Bow, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
+        EVT_CALL(SetNpcImgFXParams, NPC_Bootler, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_WAIT(40 * DT)

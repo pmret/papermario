@@ -131,7 +131,7 @@ void N(SentinelAI_Descend)(Evt* script, MobileAISettings* aiSettings, EnemyDetec
             npc->rotation.y -= 360.0;
         }
         color = 255.0f - (cosine((s32)npc->rotation.y % 180) * 56.0f);
-        func_802DE894(npc->spriteInstanceID, FOLD_UPD_SET_COLOR, color, color, color, 255, 0);
+        set_npc_imgfx_all(npc->spriteInstanceID, IMGFX_SET_COLOR, color, color, color, 255, 0);
 
         posX = gPlayerStatusPtr->position.x;
         posY = gPlayerStatusPtr->position.y;
@@ -160,7 +160,7 @@ void N(SentinelAI_LosePlayerInit)(Evt* script, MobileAISettings* aiSettings, Ene
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     enemy->varTable[0] &= ~SENTINEL_AI_FLAG_CHASING;
-    func_802DE894(npc->spriteInstanceID, FOLD_UPD_CLEAR, 0, 0, 0, 0, 0);
+    set_npc_imgfx_all(npc->spriteInstanceID, IMGFX_CLEAR, 0, 0, 0, 0, 0);
     if (enemy->varTable[0] & SENTINEL_AI_FLAG_PLAYING_SOUND) {
         sfx_stop_sound(SOUND_80000011);
         enemy->varTable[0] &= ~SENTINEL_AI_FLAG_PLAYING_SOUND;
@@ -299,7 +299,7 @@ API_CALLABLE(N(SentinelAI_Main)) {
     switch (script->AI_TEMP_STATE) {
         case AI_STATE_SENTINEL_WANDER_INIT:
             N(FlyingAI_WanderInit)(script, aiSettings, territoryPtr);
-            func_802DE894(npc->spriteInstanceID, FOLD_UPD_CLEAR, 0, 0, 0, 0, 0);
+            set_npc_imgfx_all(npc->spriteInstanceID, IMGFX_CLEAR, 0, 0, 0, 0, 0);
             // fallthrough
         case AI_STATE_SENTINEL_WANDER:
             N(FlyingAI_Wander)(script, aiSettings, territoryPtr);

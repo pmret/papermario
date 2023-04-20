@@ -3223,9 +3223,9 @@ void func_8025C8A0(s32 isNpcSprite, ActorPart* part, s32 yaw, s32 arg3) {
     if (part->decorationTable->unk_751 != 0) {
         part->decorationTable->unk_751 = 0;
         if (isNpcSprite == SPRITE_MODE_PLAYER) {
-            func_802DDFF8(PLAYER_SPRITE_MAIN, FOLD_UPD_CLEAR, 0, 0, 0, 0, 0);
+            set_player_imgfx_all(PLAYER_SPRITE_MAIN, IMGFX_CLEAR, 0, 0, 0, 0, 0);
         } else {
-            func_802DE894(part->spriteInstanceID, FOLD_UPD_CLEAR, 0, 0, 0, 0, 0);
+            set_npc_imgfx_all(part->spriteInstanceID, IMGFX_CLEAR, 0, 0, 0, 0, 0);
         }
     }
 }
@@ -3246,9 +3246,9 @@ void func_8025C918(s32 isNpcSprite, ActorPart* part, s32 yaw, s32 arg3) {
         decor->unk_751 = 0;
         decor->unk758 = 0;
         if (isNpcSprite == SPRITE_MODE_PLAYER) {
-            func_802DDFF8(PLAYER_SPRITE_MAIN, FOLD_UPD_ALLOC_COLOR_BUF, 20, 0, 0, 255, 0);
+            set_player_imgfx_all(PLAYER_SPRITE_MAIN, IMGFX_ALLOC_COLOR_BUF, 20, 0, 0, 255, 0);
         } else {
-            func_802DE894(part->spriteInstanceID, FOLD_UPD_ALLOC_COLOR_BUF, 20, 0, 0, 255, 0);
+            set_npc_imgfx_all(part->spriteInstanceID, IMGFX_ALLOC_COLOR_BUF, 20, 0, 0, 255, 0);
         }
     }
 
@@ -3276,9 +3276,9 @@ void func_8025C918(s32 isNpcSprite, ActorPart* part, s32 yaw, s32 arg3) {
     for (i = 0; i < ARRAY_COUNT(rbuf); i++) {
         color = (rbuf[i] << 0x18) | (gbuf[i] << 0x10) | (bbuf[i] << 8) | alpha;
         if (isNpcSprite == SPRITE_MODE_PLAYER) {
-            func_802DDFF8(PLAYER_SPRITE_MAIN, FOLD_UPD_COLOR_BUF_SET_C, i, color, 0, 255, 0);
+            set_player_imgfx_all(PLAYER_SPRITE_MAIN, IMGFX_COLOR_BUF_SET_MODULATE, i, color, 0, 255, 0);
         } else {
-            func_802DE894(part->spriteInstanceID, FOLD_UPD_COLOR_BUF_SET_C, i, color, 0, 255, 0);
+            set_npc_imgfx_all(part->spriteInstanceID, IMGFX_COLOR_BUF_SET_MODULATE, i, color, 0, 255, 0);
         }
     }
 

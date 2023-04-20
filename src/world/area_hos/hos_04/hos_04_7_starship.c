@@ -26,7 +26,7 @@ EvtScript N(EVS_Starship_FlyingAway) = {
     EVT_CALL(SetPlayerActionState, ACTION_STATE_LAND)
     EVT_CALL(DisablePartnerAI, 0)
     EVT_CALL(SetNpcFlagBits, NPC_PARTNER, NPC_FLAG_GRAVITY, FALSE)
-    EVT_CALL(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_MODE_3, 45, 16, 4096)
+    EVT_CALL(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 45, 16, 4096)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -280, 0, 0)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, -280, 0, 0)
     EVT_CALL(SetCamType, CAM_DEFAULT, 0, FALSE)

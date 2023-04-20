@@ -135,15 +135,14 @@ EvtScript N(init) = {
 #include "battle/area/sam2/actor/img.png.inc.c"
 #include "battle/area/sam2/actor/img.pal.inc.c"
 
-FoldImageRecPart D_8021A2B8_63F498 = {
+ImgFXOverlayTexture N(MonstarDetailTexture) = {
     .raster = battle_area_sam2_actor_img_png,
     .palette = battle_area_sam2_actor_img_pal,
     .width = battle_area_sam2_actor_img_png_width,
     .height = battle_area_sam2_actor_img_png_height,
-    .xOffset = -1,
-    .yOffset = -4,
-    .opacity = 0,
-    .dlist = N(dlist),
+    .offsetX = -4,
+    .offsetY = 0,
+    .displayList = N(dlist),
 };
 
 API_CALLABLE(func_80218000_63D1E0) {
@@ -158,10 +157,10 @@ API_CALLABLE(func_80218000_63D1E0) {
         script->functionTemp[1] = 0;
         script->functionTemp[2] = 0;
         script->functionTemp[0] = 0;
-        func_802DE780(part->spriteInstanceID, 0, FOLD_UPD_ALLOC_COLOR_BUF, 20, 0, 0, 255, 0);
+        set_npc_imgfx_comp(part->spriteInstanceID, 0, IMGFX_ALLOC_COLOR_BUF, 20, 0, 0, 255, 0);
     }
 
-    func_802DE780(part->spriteInstanceID, 1, FOLD_TYPE_F, (s32)&D_8021A2B8_63F498, 255, 0, 255, 0);
+    set_npc_imgfx_comp(part->spriteInstanceID, 1, IMGFX_OVERLAY, (s32)&N(MonstarDetailTexture), 255, 0, 255, 0);
     script->functionTemp[1] += 10;
     if (script->functionTemp[1] >= 360) {
         script->functionTemp[1] %= 360;
@@ -174,7 +173,7 @@ API_CALLABLE(func_80218000_63D1E0) {
     }
 
     for (i = 0; i < 20; i++) {
-        func_802DE780(part->spriteInstanceID, 0, FOLD_UPD_COLOR_BUF_SET_C, i, colR[i] << 0x18 | colG[i] << 0x10 | colB[i] << 8 | 255, 0, 255, 0);
+        set_npc_imgfx_comp(part->spriteInstanceID, 0, IMGFX_COLOR_BUF_SET_MODULATE, i, colR[i] << 0x18 | colG[i] << 0x10 | colB[i] << 8 | 255, 0, 255, 0);
     }
 
     return ApiStatus_BLOCK;
