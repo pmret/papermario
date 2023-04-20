@@ -46,7 +46,7 @@ API_CALLABLE(N(UnkPhysicsFunc)) {
         channel = COLLISION_IGNORE_ENTITIES | COLLISION_CHANNEL_20000 | COLLISION_CHANNEL_10000 | COLLISION_CHANNEL_8000;
         if (npc_test_move_taller_with_slipping(channel, &x, &y, &z, r,
                     atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z),
-                    npc->collisionRadius, npc->collisionHeight))
+                    npc->collisionDiameter, npc->collisionHeight))
         {
             outVal = FALSE;
         }
@@ -125,7 +125,7 @@ API_CALLABLE(N(UpdateSearchlight)) {
         dist = dist2D(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
         if (npc_test_move_taller_with_slipping(0, &x, &y, &z, dist,
                 atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z),
-                npc->collisionRadius, npc->collisionHeight)) {
+                npc->collisionDiameter, npc->collisionHeight)) {
             outVal = 0;
         }
     }

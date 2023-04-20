@@ -54,7 +54,7 @@ void N(AvoidPlayerAI_ChaseInit)(Evt* script, MobileAISettings* npcAISettings, En
 
     if (npc_test_move_simple_without_slipping(npc->collisionChannel,
             &posXFwd, &posYFwd, &posZFwd, npc->moveSpeed * 4.5,
-            yawFwd, npc->collisionHeight, npc->collisionRadius)) {
+            yawFwd, npc->collisionHeight, npc->collisionDiameter)) {
         distFwd = dist2D(npc->pos.x, npc->pos.z, posXFwd, posZFwd);
 
         // check 'whisker' 35 degrees CW
@@ -63,7 +63,7 @@ void N(AvoidPlayerAI_ChaseInit)(Evt* script, MobileAISettings* npcAISettings, En
         posZCW = npc->pos.z;
         if (npc_test_move_simple_without_slipping(npc->collisionChannel,
                 &posXCW, &posYCW, &posZCW, npc->moveSpeed * 4.5,
-                clamp_angle(yawFwd + 35.0f), npc->collisionHeight, npc->collisionRadius)) {
+                clamp_angle(yawFwd + 35.0f), npc->collisionHeight, npc->collisionDiameter)) {
             distCW = dist2D(npc->pos.x, npc->pos.z, posXCW, posZCW);
         }
 
@@ -73,7 +73,7 @@ void N(AvoidPlayerAI_ChaseInit)(Evt* script, MobileAISettings* npcAISettings, En
         posZCCW = npc->pos.z;
         if (npc_test_move_simple_without_slipping(npc->collisionChannel,
                 &posXCCW, &posYCCW, &posZCCW, npc->moveSpeed * 4.5,
-                clamp_angle(yawFwd - 35.0f), npc->collisionHeight, npc->collisionRadius)) {
+                clamp_angle(yawFwd - 35.0f), npc->collisionHeight, npc->collisionDiameter)) {
             distCCW = dist2D(npc->pos.x, npc->pos.z, posXCCW, posZCCW);
         }
 

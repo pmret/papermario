@@ -27,7 +27,7 @@ void N(blast_affect_entities)(Npc* npc) {
         z = npc->pos.z;
         if (npc_test_move_taller_with_slipping(COLLISION_ONLY_ENTITIES,
             &x, &y, &z, 30.0f, clamp_angle(npc->yaw + angle),
-            npc->collisionHeight, npc->collisionRadius)
+            npc->collisionHeight, npc->collisionDiameter)
         ) {
             break;
         }
@@ -44,7 +44,7 @@ void N(blast_affect_entities)(Npc* npc) {
             z = npc->pos.z;
             if (npc_test_move_taller_with_slipping(COLLISION_IGNORE_ENTITIES,
                 &x, &y, &z, 30.0f, clamp_angle(npc->yaw + angle),
-                npc->collisionHeight, npc->collisionRadius)
+                npc->collisionHeight, npc->collisionDiameter)
             ) {
                 break;
             }
@@ -55,7 +55,7 @@ void N(blast_affect_entities)(Npc* npc) {
             return;
         }
     }
-    
+
     // handle entity interaction if there was a collision
     if (NpcHitQueryColliderID >= 0 && (NpcHitQueryColliderID & COLLISION_WITH_ENTITY_BIT)) {
         entity_try_partner_interaction_trigger(NpcHitQueryColliderID & ~COLLISION_WITH_ENTITY_BIT);
@@ -64,7 +64,7 @@ void N(blast_affect_entities)(Npc* npc) {
 
 void N(init)(Npc* bombette) {
     bombette->collisionHeight = 28;
-    bombette->collisionRadius = 24;
+    bombette->collisionDiameter = 24;
     N(IsBlasting) = FALSE;
     N(PlayingFuseSound) = FALSE;
 }
@@ -344,8 +344,8 @@ API_CALLABLE(N(UseAbility)) {
             y = npc->pos.y + 14.0f;
             z = npc->pos.z;
             hitDepth = 16.0f;
-            if (npc_raycast_down_around(COLLISION_CHANNEL_10000, &x, &y, &z, &hitDepth, npc->yaw, npc->collisionRadius)) {
-                s32 surfaceType = get_collider_flags(NpcHitQueryColliderID) & COLLIDER_FLAGS_SURFACE_TYPE_MASK; 
+            if (npc_raycast_down_around(COLLISION_CHANNEL_10000, &x, &y, &z, &hitDepth, npc->yaw, npc->collisionDiameter)) {
+                s32 surfaceType = get_collider_flags(NpcHitQueryColliderID) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
                 if (surfaceType == SURFACE_TYPE_SPIKES || surfaceType == SURFACE_TYPE_LAVA) {
                     if (playerStatus->actionState == ACTION_STATE_IDLE) {
                         suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
@@ -616,7 +616,7 @@ s32 N(test_first_strike)(Npc* bombette, Npc* enemy) {
     y = enemy->pos.y + (f32)(enemy->collisionHeight * 0.5) - bombette->pos.y;
     z = enemyZ - bombetteZ;
 
-    enemyRadius = enemy->collisionRadius * 0.55;
+    enemyRadius = enemy->collisionDiameter * 0.55;
     blastRadius = 35.0f;
     dist = sqrtf(SQ(x) + SQ(y) + SQ(z));
     enemyHit = FALSE;

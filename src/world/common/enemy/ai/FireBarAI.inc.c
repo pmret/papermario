@@ -59,7 +59,7 @@ API_CALLABLE(N(FireBarAI_Main)) {
     for (i = 0; i < data->npcCount; i++) {
         npc = get_npc_unsafe(data->firstNpc + i);
         if (!(data->flags & 1)) {
-            f32 radius = (i * npc->collisionRadius) * npc->scale.x;
+            f32 radius = (i * npc->collisionDiameter) * npc->scale.x;
             dX = radius * sin_deg(data->yaw);
             dZ = -radius * cos_deg(data->yaw);
             npc->pos.x = data->centerPos.x + dX;
@@ -79,7 +79,7 @@ API_CALLABLE(N(FireBarAI_Main)) {
             dX = playerStatus->position.x - npc->pos.x;
             dZ = playerStatus->position.z - npc->pos.z;
             if ((fabsf(dY) < (npc->collisionHeight * 0.8f))
-                && (sqrtf(SQ(dX) + SQ(dZ)) <= ((npc->collisionRadius * 0.5f * npc->scale.x * 0.5f) + (playerStatus->colliderDiameter * 0.5f * 0.5f)))) {
+                && (sqrtf(SQ(dX) + SQ(dZ)) <= ((npc->collisionDiameter * 0.5f * npc->scale.x * 0.5f) + (playerStatus->colliderDiameter * 0.5f * 0.5f)))) {
                 hitDetected = 1;
             }
         }
@@ -95,7 +95,7 @@ API_CALLABLE(N(FireBarAI_Main)) {
     }
     distToPlayer = dist2D(data->centerPos.x, data->centerPos.z, playerStatus->position.x, playerStatus->position.z);
     distToNpc = dist2D(data->centerPos.x, data->centerPos.z, npc->pos.x, npc->pos.z)
-        + (npc->collisionRadius * 0.5f * npc->scale.x * 0.5f) + (playerStatus->colliderDiameter * 0.5f * 0.5f);
+        + (npc->collisionDiameter * 0.5f * npc->scale.x * 0.5f) + (playerStatus->colliderDiameter * 0.5f * 0.5f);
     tempPlayerDist = distToPlayer; // needed to match
     angleToPlayer = atan2(data->centerPos.x, data->centerPos.z, playerStatus->position.x, playerStatus->position.z);
     angleToNpc = atan2(data->centerPos.x, data->centerPos.z, npc->pos.x, npc->pos.z);

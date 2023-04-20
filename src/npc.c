@@ -109,7 +109,7 @@ s32 create_npc_impl(NpcBlueprint* blueprint, AnimID* animList, s32 isPeachNpc) {
         npc->flags |= NPC_FLAG_NO_ANIMS_LOADED;
     }
 
-    npc->collisionRadius = 32;
+    npc->collisionDiameter = 32;
     npc->collisionHeight = 64;
     npc->renderMode = 13;
     npc->blur.any = NULL;
@@ -300,9 +300,9 @@ void npc_do_world_collision(Npc* npc) {
         testZ = npc->pos.z;
 
         if (!(npc->flags & NPC_FLAG_PARTNER)) {
-            hit = npc_test_move_simple_with_slipping(npc->collisionChannel, &testX, &testY, &testZ, 0, testAngle, npc->collisionHeight, npc->collisionRadius);
+            hit = npc_test_move_simple_with_slipping(npc->collisionChannel, &testX, &testY, &testZ, 0, testAngle, npc->collisionHeight, npc->collisionDiameter);
         } else {
-            hit = npc_test_move_complex_with_slipping(npc->collisionChannel, &testX, &testY, &testZ, 0, testAngle, npc->collisionHeight, npc->collisionRadius);
+            hit = npc_test_move_complex_with_slipping(npc->collisionChannel, &testX, &testY, &testZ, 0, testAngle, npc->collisionHeight, npc->collisionDiameter);
         }
 
         if (hit) {
@@ -320,9 +320,9 @@ void npc_do_world_collision(Npc* npc) {
         testZ = npc->pos.z;
 
         if (!(npc->flags & NPC_FLAG_PARTNER)) {
-            hit = npc_test_move_simple_with_slipping(npc->collisionChannel, &testX, &testY, &testZ, 0, testAngle, npc->collisionHeight, npc->collisionRadius);
+            hit = npc_test_move_simple_with_slipping(npc->collisionChannel, &testX, &testY, &testZ, 0, testAngle, npc->collisionHeight, npc->collisionDiameter);
         } else {
-            hit = npc_test_move_taller_with_slipping(npc->collisionChannel, &testX, &testY, &testZ, 0, testAngle, npc->collisionHeight, npc->collisionRadius);
+            hit = npc_test_move_taller_with_slipping(npc->collisionChannel, &testX, &testY, &testZ, 0, testAngle, npc->collisionHeight, npc->collisionDiameter);
         }
 
         if (hit) {
@@ -338,9 +338,9 @@ void npc_do_world_collision(Npc* npc) {
         testY = npc->pos.y;
         testZ = npc->pos.z;
         if (!(npc->flags & NPC_FLAG_PARTNER)) {
-            hit = npc_test_move_simple_with_slipping(npc->collisionChannel, &testX, &testY, &testZ, 0, testAngle, npc->collisionHeight, npc->collisionRadius);
+            hit = npc_test_move_simple_with_slipping(npc->collisionChannel, &testX, &testY, &testZ, 0, testAngle, npc->collisionHeight, npc->collisionDiameter);
         } else {
-            hit = npc_test_move_taller_with_slipping(npc->collisionChannel, &testX, &testY, &testZ, 0, testAngle, npc->collisionHeight, npc->collisionRadius);
+            hit = npc_test_move_taller_with_slipping(npc->collisionChannel, &testX, &testY, &testZ, 0, testAngle, npc->collisionHeight, npc->collisionDiameter);
         }
 
         if (hit != 0) {
@@ -357,7 +357,7 @@ void npc_do_world_collision(Npc* npc) {
             testY = npc->pos.y;
             testZ = npc->pos.z;
             if (npc_test_move_simple_with_slipping(npc->collisionChannel, &testX, &testY, &testZ, 0, testAngle, npc->collisionHeight,
-                              npc->collisionRadius) != 0) {
+                              npc->collisionDiameter) != 0) {
                 npc->flags |= NPC_FLAG_COLLDING_WITH_WORLD;
                 npc->pos.x = testX;
                 npc->pos.z = testZ;
@@ -370,7 +370,7 @@ void npc_do_world_collision(Npc* npc) {
             testY = npc->pos.y;
             testZ = npc->pos.z;
             if (npc_test_move_simple_with_slipping(npc->collisionChannel, &testX, &testY, &testZ, 0, testAngle, npc->collisionHeight,
-                              npc->collisionRadius) != 0) {
+                              npc->collisionDiameter) != 0) {
                 npc->flags |= NPC_FLAG_COLLDING_WITH_WORLD;
                 npc->pos.x = testX;
                 npc->pos.z = testZ;
@@ -395,7 +395,7 @@ void npc_do_other_npc_collision(Npc* npc) {
 
     if (!(npc->flags & NPC_FLAG_IGNORE_PLAYER_COLLISION)) {
         npc->flags &= ~NPC_FLAG_COLLIDING_WITH_NPC;
-        thisBuf = npc->collisionRadius * 0.5f;
+        thisBuf = npc->collisionDiameter * 0.5f;
         thisX = npc->pos.x;
         thisY = npc->pos.y;
         thisZ = npc->pos.z;
@@ -411,7 +411,7 @@ void npc_do_other_npc_collision(Npc* npc) {
                         xDiff = otherX - thisX;
                         otherZ = otherNpc->pos.z;
                         zDiff = otherZ - thisZ;
-                        otherBuf = otherNpc->collisionRadius * 0.5f;
+                        otherBuf = otherNpc->collisionDiameter * 0.5f;
                         dist = sqrtf(SQ(xDiff) + SQ(zDiff));
 
                         if (!(thisBuf + otherBuf <= dist)) {
@@ -443,31 +443,20 @@ void npc_do_other_npc_collision(Npc* npc) {
     }
 }
 
-// float regalloc
-#ifdef NON_MATCHING
 s32 npc_do_player_collision(Npc* npc) {
-    f32 sp10;
     PlayerStatus* playerStatus = &gPlayerStatus;
-    f32 xDiff, zDiff;
-    f32 xDiff2, zDiff2;
-    f32 npcColliderX, npcColliderZ;
     f32 playerX, playerZ;
-
-    f32 theta;
-    f32 dist;
-    f32 temp_f24_2;
-    f32 targetYaw;
-    f32 new_var;
-    f32 xSub;
-    f32 zSub;
-    f32 collRad, collDiam;
-    int new_var2;
+    f32 playerYaw, yaw;
+    f32 npcX, npcZ;
+    f32 dist, colDist, distToNpc;
+    f32 npcColRadius, playerColRadius;
+    f32 deltaX, deltaZ;
 
     if (npc->flags & NPC_FLAG_IGNORE_PLAYER_COLLISION) {
         return FALSE;
     }
 
-    if (npc->flags & PS_FLAG_CAMERA_DOESNT_FOLLOW) {
+    if (npc->flags & NPC_FLAG_PARTNER) {
         return FALSE;
     }
 
@@ -485,55 +474,63 @@ s32 npc_do_player_collision(Npc* npc) {
 
     playerX = playerStatus->position.x;
     playerZ = playerStatus->position.z;
-    xDiff = playerX - npc->pos.x;
-    zDiff = playerZ - npc->pos.z;
 
-    sp10 = (npc->collisionRadius / 2) + (f32)(playerStatus->colliderDiameter / 2);
-    npcColliderZ = zDiff;
-    temp_f24_2 = xDiff;
-    dist = sqrtf(SQ(temp_f24_2) + SQ(npcColliderZ));
-    if (sp10 < dist) {
+    npcColRadius = npc->collisionDiameter / 2;
+    playerColRadius = playerStatus->colliderDiameter / 2;
+
+    npcX = npc->pos.x;
+    npcZ = npc->pos.z;
+
+    deltaX = playerX - npcX;
+    deltaZ = playerZ - npcZ;
+
+    distToNpc = sqrtf(SQ(deltaX) + SQ(deltaZ));
+    colDist = npcColRadius + playerColRadius;
+    if (colDist < distToNpc) {
         return FALSE;
     }
 
-    playerStatus->animFlags |= 0x8000;
-    npcColliderX = npc->colliderPos.x;
-    npcColliderZ = npc->colliderPos.z;
-    zSub = sp10;
-    xDiff = playerX - npcColliderX;
-    zDiff = playerZ - npcColliderZ;
+    playerStatus->animFlags |= PA_FLAG_NPC_COLLIDED;
 
-    dist = xSub = sqrtf(SQ(xDiff) + SQ(zDiff));
+    npcX = npc->colliderPos.x;
+    npcZ = npc->colliderPos.z;
 
-    theta = atan2(playerX, playerZ, npcColliderX, npcColliderZ);
-    targetYaw = playerStatus->targetYaw;
+    deltaX = playerX - npcX;
+    deltaZ = playerZ - npcZ;
 
-    temp_f24_2 = zSub - dist;
+    dist = sqrtf(SQ(deltaX) + SQ(deltaZ));
+    yaw = atan2(playerX, playerZ, npcX, npcZ);
 
-    xSub = temp_f24_2 * sin_rad(DEG_TO_RAD(theta));
-    zSub = -temp_f24_2 * cos_rad(DEG_TO_RAD(theta));
+    playerYaw = playerStatus->targetYaw;
+    dist = colDist - dist;
+    deltaX = dist * sin_rad(DEG_TO_RAD(yaw));
+    deltaZ = -dist * cos_rad(DEG_TO_RAD(yaw));
+
     if (playerStatus->animFlags & PA_FLAG_RIDING_PARTNER) {
-        if (fabsf(get_clamped_angle_diff(theta, targetYaw)) < 45.0f) {
-            playerStatus->position.x -= xSub;
-            playerStatus->position.z -= zSub;
-            wPartnerNpc->pos.x -= xSub;
-            wPartnerNpc->pos.z -= zSub;
+        if (fabsf(get_clamped_angle_diff(yaw, playerYaw)) < 45.0f) {
+            playerStatus->position.x -= deltaX;
+            playerStatus->position.z -= deltaZ;
+            wPartnerNpc->pos.x -= deltaX;
+            wPartnerNpc->pos.z -= deltaZ;
         } else {
-            playerStatus->position.x -= xSub * 0.5f;
-            playerStatus->position.z -= zSub * 0.5f;
-            wPartnerNpc->pos.x -= xSub * 0.5f;
-            wPartnerNpc->pos.z -= zSub * 0.5f;
+            playerStatus->position.x -= deltaX * 0.5f;
+            playerStatus->position.z -= deltaZ * 0.5f;
+            wPartnerNpc->pos.x -= deltaX * 0.5f;
+            wPartnerNpc->pos.z -= deltaZ * 0.5f;
         }
     } else {
         if (playerStatus->flags & (PS_FLAG_JUMPING | PS_FLAG_FALLING)) {
-            playerStatus->position.x -= xSub * 0.4f;
-            playerStatus->position.z -= zSub * 0.4f;
-        } else if (fabsf(get_clamped_angle_diff(theta, targetYaw)) < 45.0f) {
-            playerStatus->position.x -= xSub;
-            playerStatus->position.z -= zSub;
+            playerStatus->position.x -= deltaX * 0.4f;
+            playerStatus->position.z -= deltaZ * 0.4f;
         } else {
-            playerStatus->position.x -= xSub * 0.5f;
-            playerStatus->position.z -= zSub * 0.5f;
+            dist = get_clamped_angle_diff(yaw, playerYaw); // required to match
+            if (fabsf(dist) < 45.0f) {
+                playerStatus->position.x -= deltaX;
+                playerStatus->position.z -= deltaZ;
+            } else {
+                playerStatus->position.x -= deltaX * 0.5f;
+                playerStatus->position.z -= deltaZ * 0.5f;
+            }
         }
     }
     npc->pos.x = npc->colliderPos.x;
@@ -541,9 +538,6 @@ s32 npc_do_player_collision(Npc* npc) {
     npc->pos.z = npc->colliderPos.z;
     return TRUE;
 }
-#else
-INCLUDE_ASM(s32, "npc", npc_do_player_collision, Npc* npc);
-#endif
 
 // update NPC position using gravitational acceleration = 1.0
 // if the NPC is within 16 units of the floor, they are snapped to it
@@ -573,7 +567,7 @@ void npc_try_apply_gravity(Npc* npc) {
     if (!(npc->flags & NPC_FLAG_PARTNER)) {
         hitID = npc_raycast_down_sides(npc->collisionChannel, &x, &y, &z, &length);
     } else {
-        hitID = npc_raycast_down_around(npc->collisionChannel, &x, &y, &z, &length, npc->yaw, npc->collisionRadius);
+        hitID = npc_raycast_down_around(npc->collisionChannel, &x, &y, &z, &length, npc->yaw, npc->collisionDiameter);
     }
 
     if (hitID && length <= testLength) {
@@ -609,7 +603,7 @@ s32 npc_try_snap_to_ground(Npc* npc, f32 velocity) {
     if (!(npc->flags & NPC_FLAG_PARTNER)) {
         hitID = npc_raycast_down_sides(npc->collisionChannel, &x, &y, &z, &length);
     } else {
-        hitID = npc_raycast_down_around(npc->collisionChannel, &x, &y, &z, &length, npc->yaw, npc->collisionRadius);
+        hitID = npc_raycast_down_around(npc->collisionChannel, &x, &y, &z, &length, npc->yaw, npc->collisionDiameter);
     }
 
     if (hitID != 0 && length <= testLength) {
@@ -706,7 +700,7 @@ void update_npcs(void) {
                                 z = npc->pos.z;
                                 hitLength = 1000.0f;
                                 entity_raycast_down(&x, &y, &z, &hitYaw, &hitPitch, &hitLength);
-                                set_npc_shadow_scale(shadow, hitLength, npc->collisionRadius);
+                                set_npc_shadow_scale(shadow, hitLength, npc->collisionDiameter);
                                 shadow->position.x = x;
                                 shadow->position.y = y;
                                 shadow->position.z = z;
@@ -1823,7 +1817,7 @@ void npc_update_decoration_bowser_aura(Npc* npc, s32 idx) {
     data->posA.x = npc->pos.x;
     data->posA.y = npc->pos.y;
     data->posA.z = npc->pos.z;
-    data->scale.x = (npc->scale.x * npc->collisionRadius) * 0.01;
+    data->scale.x = (npc->scale.x * npc->collisionDiameter) * 0.01;
     data->scale.y = (npc->scale.y * npc->collisionHeight) * 0.01;
     data->renderYaw = npc->renderYaw;
 }
@@ -2227,12 +2221,12 @@ void spawn_default_surface_effects(Npc* npc, SurfaceInteractMode mode) {
             D_80077C14 = 0;
             if (!mapIsStarWay) {
                 sin_cos_rad(DEG_TO_RAD(clamp_angle(-npc->yaw)), &sinTheta, &cosTheta);
-                fx_walking_dust(0, npc->pos.x + (npc->collisionRadius * sinTheta * 0.2f), npc->pos.y + 1.5f,
-                               npc->pos.z + (npc->collisionRadius * cosTheta * 0.2f), sinTheta, cosTheta);
+                fx_walking_dust(0, npc->pos.x + (npc->collisionDiameter * sinTheta * 0.2f), npc->pos.y + 1.5f,
+                               npc->pos.z + (npc->collisionDiameter * cosTheta * 0.2f), sinTheta, cosTheta);
             } else {
                 sin_cos_rad(DEG_TO_RAD(clamp_angle(npc->yaw)), &sinTheta, &cosTheta);
-                fx_misc_particles(3, npc->pos.x + (npc->collisionRadius * sinTheta), npc->pos.y + 1.5f,
-                              npc->pos.z + (npc->collisionRadius * cosTheta), 5.0f, 10.0f, 1.0f, 5, 30);
+                fx_misc_particles(3, npc->pos.x + (npc->collisionDiameter * sinTheta), npc->pos.y + 1.5f,
+                              npc->pos.z + (npc->collisionDiameter * cosTheta), 5.0f, 10.0f, 1.0f, 5, 30);
             }
         }
     }
@@ -2266,8 +2260,8 @@ void spawn_flower_surface_effects(Npc* npc, SurfaceInteractMode mode) {
         sinTheta = sin_rad(theta);
         cosTheta = cos_rad(theta);
 
-        x = npc->pos.x + (npc->collisionRadius * sinTheta * -0.4f);
-        z = npc->pos.z + (npc->collisionRadius * cosTheta * -0.4f);
+        x = npc->pos.x + (npc->collisionDiameter * sinTheta * -0.4f);
+        z = npc->pos.z + (npc->collisionDiameter * cosTheta * -0.4f);
         y = npc->pos.y + 15.5f;
 
         fx_flower_trail(1, x, y, z, -npc->yaw + rand_int(10) - 5.0f, D_80077C20);
@@ -2303,9 +2297,9 @@ void spawn_cloud_surface_effects(Npc* npc, SurfaceInteractMode mode) {
 
             fx_cloud_trail(
                 1,
-                npc->pos.x + (npc->collisionRadius * sinTheta * -0.3f) + xTemp,
+                npc->pos.x + (npc->collisionDiameter * sinTheta * -0.3f) + xTemp,
                 npc->pos.y + 15.5f + yTemp,
-                npc->pos.z + (npc->collisionRadius * cosTheta * -0.3f) + zTemp
+                npc->pos.z + (npc->collisionDiameter * cosTheta * -0.3f) + zTemp
             );
         }
     } else {
@@ -2320,9 +2314,9 @@ void spawn_cloud_surface_effects(Npc* npc, SurfaceInteractMode mode) {
         cosTheta = cos_rad(theta);
         fx_cloud_trail(
             1,
-            npc->pos.x + (npc->collisionRadius * sinTheta * -0.3f) + xTemp2,
+            npc->pos.x + (npc->collisionDiameter * sinTheta * -0.3f) + xTemp2,
             npc->pos.y + 15.5f + yTemp2,
-            npc->pos.z + (npc->collisionRadius * cosTheta * -0.3f) + zTemp2
+            npc->pos.z + (npc->collisionDiameter * cosTheta * -0.3f) + zTemp2
         );
     }
 }
@@ -2337,8 +2331,8 @@ void spawn_snow_surface_effects(Npc* npc, SurfaceInteractMode mode) {
         temp_f20 = DEG_TO_RAD(clamp_angle(-npc->yaw));
         x = sin_rad(temp_f20);
         z = cos_rad(temp_f20);
-        fx_footprint(npc->pos.x + (npc->collisionRadius * x * 0.2f), npc->pos.y + 1.5f,
-                  npc->pos.z + (npc->collisionRadius * z * 0.2f), -npc->yaw, D_80077C34);
+        fx_footprint(npc->pos.x + (npc->collisionDiameter * x * 0.2f), npc->pos.y + 1.5f,
+                  npc->pos.z + (npc->collisionDiameter * z * 0.2f), -npc->yaw, D_80077C34);
         D_80077C34 = !D_80077C34;
     }
 }
@@ -2353,8 +2347,8 @@ void spawn_hedge_surface_effects(Npc* npc, SurfaceInteractMode mode) {
         theta = DEG_TO_RAD(clamp_angle(-npc->yaw));
         sinTheta = sin_rad(theta);
         cosTheta = cos_rad(theta);
-        fx_falling_leaves(1, npc->pos.x + (npc->collisionRadius * sinTheta * 0.2f),
-                  40.0f, npc->pos.z + (npc->collisionRadius * cosTheta * 0.2f));
+        fx_falling_leaves(1, npc->pos.x + (npc->collisionDiameter * sinTheta * 0.2f),
+                  40.0f, npc->pos.z + (npc->collisionDiameter * cosTheta * 0.2f));
     }
 }
 
@@ -2368,8 +2362,8 @@ void spawn_water_surface_effects(Npc* npc, SurfaceInteractMode mode) {
         temp_f20 = DEG_TO_RAD(clamp_angle(-npc->yaw));
         x = sin_rad(temp_f20);
         z = cos_rad(temp_f20);
-        fx_rising_bubble(0, npc->pos.x + (npc->collisionRadius * x * 0.2f), npc->pos.y + 0.0f,
-                  npc->pos.z + (npc->collisionRadius * z * 0.2f), 0.0f);
+        fx_rising_bubble(0, npc->pos.x + (npc->collisionDiameter * x * 0.2f), npc->pos.y + 0.0f,
+                  npc->pos.z + (npc->collisionDiameter * z * 0.2f), 0.0f);
     }
 }
 

@@ -6,7 +6,7 @@
 
 void N(init)(Npc* goombaria) {
     goombaria->collisionHeight = 24;
-    goombaria->collisionRadius = 20;
+    goombaria->collisionDiameter = 20;
 }
 
 API_CALLABLE(N(TakeOut)) {

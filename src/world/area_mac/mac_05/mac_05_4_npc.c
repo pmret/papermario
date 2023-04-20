@@ -698,7 +698,7 @@ API_CALLABLE(N(func_802430B4_855224)) {
         f32 z = npc->pos.z;
 
         temp = 12.0f;
-        if (npc_raycast_down_around(npc->collisionChannel, &x, &y, &z, &temp, npc->yaw, npc->collisionRadius) &&
+        if (npc_raycast_down_around(npc->collisionChannel, &x, &y, &z, &temp, npc->yaw, npc->collisionDiameter) &&
             temp <= 12.0f)
         {
             outVal = NpcHitQueryColliderID;

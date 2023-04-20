@@ -75,7 +75,7 @@ void N(sync_player_position)(void) {
 
 void N(init)(Npc* lakilester) {
     lakilester->collisionHeight = 38;
-    lakilester->collisionRadius = 36;
+    lakilester->collisionDiameter = 36;
     lakilester->collisionChannel = COLLISION_CHANNEL_10000;
     N(PlayerBounceOffset) = 0;
     N(LockingPlayerInput) = FALSE;
@@ -307,7 +307,7 @@ s32 N(test_mounting_height_adjustment)(Npc* lakilester, f32 height, f32 dist) {
 }
 
 void N(apply_riding_static_collisions)(Npc* lakilester) {
-    f32 radius = lakilester->collisionRadius * 0.8f;
+    f32 radius = lakilester->collisionDiameter * 0.8f;
     f32 x, y, z, yaw;
 
     // combine testing boilerplate
@@ -414,7 +414,7 @@ void N(update_riding_physics)(Npc* lakilester) {
     z = lakilester->pos.z;
 
     if (npc_test_move_taller_with_slipping(lakilester->collisionChannel, &x, &y, &z,
-        lakilester->collisionRadius, lakilester->yaw, lakilester->collisionHeight, lakilester->collisionRadius))
+        lakilester->collisionDiameter, lakilester->yaw, lakilester->collisionHeight, lakilester->collisionDiameter))
     {
         collisionStatus->currentInspect = (partnerStatus->pressedButtons & BUTTON_A) ? NpcHitQueryColliderID : NO_COLLIDER;
     }
@@ -425,7 +425,7 @@ void N(update_riding_physics)(Npc* lakilester) {
         y = lakilester->moveToPos.y;
         z = lakilester->pos.z;
         if (npc_test_move_complex_with_slipping(lakilester->collisionChannel, &x, &y, &z,
-            lakilester->moveSpeed, lakilester->yaw, lakilester->collisionHeight, lakilester->collisionRadius))
+            lakilester->moveSpeed, lakilester->yaw, lakilester->collisionHeight, lakilester->collisionDiameter))
         {
             if (N(UpdatePushingWall)) {
                 collisionStatus->pushingAgainstWall = NpcHitQueryColliderID;
@@ -444,7 +444,7 @@ void N(update_riding_physics)(Npc* lakilester) {
         y = lakilester->moveToPos.y;
         z = lakilester->pos.z;
         if (npc_test_move_taller_with_slipping(lakilester->collisionChannel, &x, &y, &z,
-            lakilester->moveSpeed, moveAngle, lakilester->collisionHeight, lakilester->collisionRadius))
+            lakilester->moveSpeed, moveAngle, lakilester->collisionHeight, lakilester->collisionDiameter))
         {
             lakilester->pos.x += (x - lakilester->pos.x) / 5.0f;
             lakilester->pos.z += (z - lakilester->pos.z) / 5.0f;
@@ -455,7 +455,7 @@ void N(update_riding_physics)(Npc* lakilester) {
         y = lakilester->moveToPos.y;
         z = lakilester->pos.z;
         if (npc_test_move_taller_with_slipping(lakilester->collisionChannel, &x, &y, &z,
-            lakilester->moveSpeed, moveAngle, lakilester->collisionHeight, lakilester->collisionRadius))
+            lakilester->moveSpeed, moveAngle, lakilester->collisionHeight, lakilester->collisionDiameter))
         {
             lakilester->pos.x += (x - lakilester->pos.x) / 5.0f;
             lakilester->pos.z += (z - lakilester->pos.z) / 5.0f;
@@ -469,7 +469,7 @@ void N(update_riding_physics)(Npc* lakilester) {
         y = lakilester->moveToPos.y;
         z = lakilester->pos.z;
         if (npc_test_move_taller_with_slipping(lakilester->collisionChannel, &x, &y, &z,
-            4.0f, moveAngle, lakilester->collisionHeight, lakilester->collisionRadius))
+            4.0f, moveAngle, lakilester->collisionHeight, lakilester->collisionDiameter))
         {
             lakilester->pos.x += (x - lakilester->pos.x) / 5.0f;
             lakilester->pos.z += (z - lakilester->pos.z) / 5.0f;
@@ -480,7 +480,7 @@ void N(update_riding_physics)(Npc* lakilester) {
         y = lakilester->moveToPos.y;
         z = lakilester->pos.z;
         if (npc_test_move_taller_with_slipping(lakilester->collisionChannel, &x, &y, &z,
-            4.0f, moveAngle, lakilester->collisionHeight, lakilester->collisionRadius))
+            4.0f, moveAngle, lakilester->collisionHeight, lakilester->collisionDiameter))
         {
             lakilester->pos.x += (x - lakilester->pos.x) / 5.0f;
             lakilester->pos.z += (z - lakilester->pos.z) / 5.0f;
@@ -709,7 +709,7 @@ API_CALLABLE(N(UseAbility)) {
                 y = lakilester->moveToPos.y;
                 z = lakilester->moveToPos.z;
                 npc_test_move_simple_with_slipping(COLLISION_CHANNEL_10000, &x, &y, &z, lakilester->moveSpeed,
-                                                    yaw, lakilester->collisionHeight, lakilester->collisionRadius);
+                                                    yaw, lakilester->collisionHeight, lakilester->collisionDiameter);
                 lakilester->moveToPos.x = x;
                 lakilester->moveToPos.y = y;
                 lakilester->moveToPos.z = z;
@@ -917,7 +917,7 @@ API_CALLABLE(N(UseAbility)) {
             N(AbilityState) = RIDE_STATE_FINISH_2;
             return ApiStatus_BLOCK;
         }
-        
+
         if (N(AbilityState) == RIDE_STATE_FINISH_2) {
             lakilester->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_TOUCHES_GROUND | NPC_FLAG_8);
             partnerStatus->actingPartner = PARTNER_NONE;
@@ -1005,7 +1005,7 @@ API_CALLABLE(N(PutAway)) {
             sp28 = playerStatus->position.z;
             sp2C = playerStatus->colliderHeight;
             if (npc_raycast_down_around(0, &sp20, &sp24, &sp28, &sp2C,
-                                       lakilester->yaw, lakilester->collisionRadius)) {
+                                       lakilester->yaw, lakilester->collisionDiameter)) {
 
                 N(PutAwayState) = PUT_AWAY_FINISH_1;
                 playerStatus->position.y = sp24;

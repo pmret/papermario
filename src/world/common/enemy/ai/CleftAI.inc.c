@@ -59,7 +59,7 @@ void N(CleftAI_HidingInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetec
 
     disable_npc_shadow(npc);
     npc->collisionHeight = 22;
-    npc->collisionRadius = 24;
+    npc->collisionDiameter = 24;
     script->functionTemp[1] = 0;
     npc->duration = 0;
     npc->currentAnim = enemy->animList[8];
@@ -106,7 +106,7 @@ void N(CleftAI_Ambush)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
     if (npc->duration <= 0) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
         npc->collisionHeight = 26;
-        npc->collisionRadius = 24;
+        npc->collisionDiameter = 24;
         script->AI_TEMP_STATE = AI_STATE_CLEFT_FIND_PLAYER_INIT;
     }
 }
@@ -200,7 +200,7 @@ void N(CleftAI_Tackle)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
     posZ = npc->pos.z;
     if (npc_test_move_simple_with_slipping(npc->collisionChannel,
             &posX, &posY, &posZ,
-            1.0f, npc->yaw, npc->collisionHeight, npc->collisionRadius)) {
+            1.0f, npc->yaw, npc->collisionHeight, npc->collisionDiameter)) {
         phi_s1 = TRUE;
     }
 

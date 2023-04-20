@@ -41,7 +41,7 @@ class Symbol:
 class Bytes:
     offset: int
     normalized: str
-    bytes: list[int]
+    bytes: bytes
 
 
 def read_rom() -> bytes:
@@ -83,6 +83,7 @@ def get_symbol_bytes(func: str) -> Optional[Bytes]:
     sym = syms[func]
     bs = list(rom_bytes[sym.rom_start : sym.rom_end])
 
+    # trim nops
     while len(bs) > 0 and bs[-1] == 0:
         bs.pop()
 
@@ -92,7 +93,7 @@ def get_symbol_bytes(func: str) -> Optional[Bytes]:
     for ins in insns:
         ret.append(ins >> 2)
 
-    return Bytes(0, bytes(ret).decode("utf-8"), bs)
+    return Bytes(0, bytes(ret).decode("utf-8"), rom_bytes[sym.rom_start : sym.rom_end])
 
 
 def parse_map() -> OrderedDict[str, Symbol]:
@@ -349,7 +350,7 @@ def get_c_range(insn_start: int, insn_end: int, line_numbers: Dict[int, int]) ->
     return range
 
 
-def get_matches(query: str, window_size: int, min: Optional[int], max: Optional[int], contains: Optional[int]):
+def get_matches(query: str, window_size: int, min: Optional[int], max: Optional[int], contains: Optional[int], show_disasm: bool):
     query_bytes: Optional[Bytes] = get_symbol_bytes(query)
 
     if query_bytes is None:
@@ -366,7 +367,7 @@ def get_matches(query: str, window_size: int, min: Optional[int], max: Optional[
         if not sym_bytes:
             continue
 
-        if len(sym_bytes.bytes) < window_size:
+        if len(sym_bytes.bytes) / 4 < window_size:
             continue
 
         sym_hashes = get_hashes(sym_bytes, window_size)
@@ -375,7 +376,7 @@ def get_matches(query: str, window_size: int, min: Optional[int], max: Optional[
         if not matches:
             continue
 
-        results = group_matches(query, symbol, matches, window_size, min, max, contains)
+        results: list[Result] = group_matches(query, symbol, matches, window_size, min, max, contains)
         if not results:
             continue
 
@@ -412,11 +413,26 @@ def get_matches(query: str, window_size: int, min: Optional[int], max: Optional[
             )
             print(f"\t{query_str} matches {target_str}")
 
+            if show_disasm:
+                try:
+                    import rabbitizer
+                except ImportError:
+                    print("rabbitizer not found, cannot show disassembly")
+                    sys.exit(1)
+                result_query_bytes = query_bytes.bytes[result.query_start * 4 : result.query_end * 4]
+                result_target_bytes = sym_bytes.bytes[result.target_start * 4 : result.target_end * 4]
+
+                for i in range(0, len(result_query_bytes), 4):
+                    q_insn = rabbitizer.Instruction(int.from_bytes(result_query_bytes[i:i+4], "big"))
+                    t_insn = rabbitizer.Instruction(int.from_bytes(result_target_bytes[i:i+4], "big"))
+
+                    print(f"\t\t{q_insn.disassemble():35} | {t_insn.disassemble()}")
+
     return OrderedDict(sorted(ret.items(), key=lambda kv: kv[1], reverse=True))
 
 
-def do_query(query, window_size, min, max, contains):
-    get_matches(query, window_size, min, max, contains)
+def do_query(query, window_size, min, max, contains, show_disasm):
+    get_matches(query, window_size, min, max, contains, show_disasm)
 
 
 parser = argparse.ArgumentParser(
@@ -434,6 +450,7 @@ parser.add_argument(
 parser.add_argument("--min", help="lower bound of instruction for matches against query", type=int, required=False)
 parser.add_argument("--max", help="upper bound of instruction for matches against query", type=int, required=False)
 parser.add_argument("--contains", help="All matches must contain this number'th instruction from the query", type=int, required=False)
+parser.add_argument("--show-disasm", help="Show disassembly of matches", action="store_true", required=False)
 
 args = parser.parse_args()
 
@@ -443,4 +460,4 @@ if __name__ == "__main__":
     func_sizes = get_func_sizes()
     syms = parse_map()
 
-    do_query(args.query, args.window_size, args.min, args.max, args.contains)
+    do_query(args.query, args.window_size, args.min, args.max, args.contains, args.show_disasm)

@@ -192,7 +192,7 @@ void N(update_riding_physics)(Npc* sushie) {
         y = sushie->moveToPos.y + -6.0f;
         depth = (sushie->collisionHeight * 0.5f) + (playerStatus->colliderHeight * 0.8f);
         if (npc_test_move_taller_with_slipping(sushie->collisionChannel, &x, &y, &z,
-                sushie->moveSpeed, moveAngle, depth, sushie->collisionRadius))
+                sushie->moveSpeed, moveAngle, depth, sushie->collisionDiameter))
         {
             collisionStatus->pushingAgainstWall = NpcHitQueryColliderID;
             if ((get_collider_flags(NpcHitQueryColliderID) & COLLIDER_FLAGS_SURFACE_TYPE_MASK) == SURFACE_TYPE_DOCK_WALL) {
@@ -213,7 +213,7 @@ void N(update_riding_physics)(Npc* sushie) {
         y = sushie->moveToPos.y + -6.0f;
         depth = (sushie->collisionHeight * 0.5f) + (playerStatus->colliderHeight * 0.8f);
         if (npc_test_move_taller_with_slipping(sushie->collisionChannel, &x, &y, &z,
-                moveSpeed, moveAngle, depth, sushie->collisionRadius))
+                moveSpeed, moveAngle, depth, sushie->collisionDiameter))
         {
             sushie->pos.x += (x - sushie->pos.x) / 5.0f;
             sushie->pos.z += (z - sushie->pos.z) / 5.0f;
@@ -224,7 +224,7 @@ void N(update_riding_physics)(Npc* sushie) {
         y = sushie->moveToPos.y + -6.0f;
         depth = (sushie->collisionHeight * 0.5f) + (playerStatus->colliderHeight * 0.8f);
         if (npc_test_move_taller_with_slipping(sushie->collisionChannel, &x, &y, &z,
-                moveSpeed, moveAngle, depth, sushie->collisionRadius))
+                moveSpeed, moveAngle, depth, sushie->collisionDiameter))
         {
             sushie->pos.x += (x - sushie->pos.x) / 5.0f;
             sushie->pos.z += (z - sushie->pos.z) / 5.0f;
@@ -236,7 +236,7 @@ void N(update_riding_physics)(Npc* sushie) {
 
     if (N(DiveState) == DIVE_STATE_NONE) {
         N(test_for_water_level)(sushie->collisionChannel, sushie->pos.x, sushie->pos.y, sushie->pos.z,
-                sushie->yaw, sushie->collisionRadius * 0.5f);
+                sushie->yaw, sushie->collisionDiameter * 0.5f);
         if (N(DiveState) == DIVE_STATE_NONE) {
             sushie->moveSpeed = 3.0f;
             sushie->moveToPos.y = N(WaterSurfaceY) - (sushie->collisionHeight * 0.5f);
@@ -260,7 +260,7 @@ void N(update_riding_physics)(Npc* sushie) {
         y = sushie->pos.y;
         z = sushie->pos.z;
         depth = sushie->collisionHeight;
-        if (npc_raycast_down_around(sushie->collisionChannel, &x, &y, &z, &depth, sushie->yaw, sushie->collisionRadius)) {
+        if (npc_raycast_down_around(sushie->collisionChannel, &x, &y, &z, &depth, sushie->yaw, sushie->collisionDiameter)) {
             moveSpeedDamping = ((N(WaterSurfaceY) - (playerStatus->colliderHeight * 2)) - sushie->moveToPos.y) * 0.1f;
             sushie->moveToPos.y += moveSpeedDamping;
             if (sushie->moveToPos.y < y + 5.0f) {
@@ -297,7 +297,7 @@ void N(update_riding_physics)(Npc* sushie) {
     y = sushie->moveToPos.y;
     z = sushie->pos.z;
     depth = (sushie->collisionHeight * 0.5f) + playerStatus->colliderHeight;
-    if (npc_raycast_up_corners(sushie->collisionChannel, &x, &y, &z, &depth, sushie->yaw, sushie->collisionRadius * 0.3f) >= 0) {
+    if (npc_raycast_up_corners(sushie->collisionChannel, &x, &y, &z, &depth, sushie->yaw, sushie->collisionDiameter * 0.3f) >= 0) {
         sushie->moveToPos.y += (((sushie->moveToPos.y - y) + depth) - ((sushie->collisionHeight * 0.5f) + playerStatus->colliderHeight)) * 0.2f;
         if (N(DiveTime) % 9 == 0) {
             fx_rising_bubble(0, sushie->pos.x, sushie->moveToPos.y + (sushie->collisionHeight * 0.5f), sushie->pos.z,
@@ -463,7 +463,7 @@ API_CALLABLE(N(UseAbility)) {
             z = sushie->moveToPos.z;
             dist = 100.0f;
             collider = npc_raycast_down_around(sushie->collisionChannel, &x, &y, &z, &dist,
-                    sushie->yaw, sushie->collisionRadius);
+                    sushie->yaw, sushie->collisionDiameter);
             sushie->currentAnim = ANIM_WorldSushie_Run;
             sushie->duration = 12;
             sushie->moveToPos.y = y - (sushie->collisionHeight * 0.5f);
@@ -501,7 +501,7 @@ API_CALLABLE(N(UseAbility)) {
             script->USE_STATE++; // SWIM_STATE_EMBARK_1
             fx_rising_bubble(0, sushie->pos.x, sushie->moveToPos.y + (sushie->collisionHeight * 0.5f), sushie->pos.z, 0.0f);
             break;
-            
+
         case SWIM_STATE_EMBARK_2:
             fx_rising_bubble(0, sushie->pos.x, sushie->moveToPos.y + (sushie->collisionHeight * 0.5f), sushie->pos.z, 0.0f);
             // fallthrough
@@ -542,7 +542,7 @@ API_CALLABLE(N(UseAbility)) {
             script->functionTemp[2] = 0;
             script->USE_STATE = SWIM_STATE_RIDING;
             break;
-            
+
         case SWIM_STATE_RIDING:
             playerStatus->animFlags |= PA_FLAG_RIDING_PARTNER;
             N(update_riding_physics)(sushie);
@@ -579,8 +579,8 @@ API_CALLABLE(N(UseAbility)) {
             if (N(DiveState) == DIVE_STATE_DELAY) {
                 if (!(gGameStatusPtr->frameCounter % 19)) {
                     fx_rising_bubble(0,
-                        sushie->pos.x, 
-                        sushie->moveToPos.y + (sushie->collisionHeight * 0.5f), 
+                        sushie->pos.x,
+                        sushie->moveToPos.y + (sushie->collisionHeight * 0.5f),
                         sushie->pos.z,
                         N(WaterSurfaceY) - sushie->pos.y);
                 }
@@ -606,7 +606,7 @@ API_CALLABLE(N(UseAbility)) {
                 z = sushie->pos.z;
 
                 if (npc_test_move_taller_with_slipping(sushie->collisionChannel, &x, &y, &z, 10.0f,
-                        sushie->yaw, sushie->collisionHeight, sushie->collisionRadius)
+                        sushie->yaw, sushie->collisionHeight, sushie->collisionDiameter)
                 ) {
                     collisionStatus->pushingAgainstWall = sushie->currentWall = NpcHitQueryColliderID;
                 } else {
@@ -740,7 +740,7 @@ EvtScript EVS_WorldSushie_UseAbility = {
 
 void N(init)(Npc* sushie) {
     sushie->collisionHeight = 24;
-    sushie->collisionRadius = 36;
+    sushie->collisionDiameter = 36;
     sushie->collisionChannel = COLLISION_CHANNEL_10000;
     N(IsRiding) = FALSE;
     N(DiveState) = DIVE_STATE_NONE;
@@ -926,7 +926,7 @@ API_CALLABLE(N(EnterMap)) {
             partnerNPC->pos.z = playerStatus->position.z;
             partnerNPC->pos.y = playerStatus->position.y;
             N(test_for_water_level)(partnerNPC->collisionChannel, partnerNPC->pos.x, partnerNPC->pos.y, partnerNPC->pos.z,
-                                partnerNPC->yaw, partnerNPC->collisionRadius * 0.5f);
+                                partnerNPC->yaw, partnerNPC->collisionDiameter * 0.5f);
             partnerNPC->pos.y = N(WaterSurfaceY) - (partnerNPC->collisionHeight * 0.5f);
             partnerNPC->yaw = atan2(partnerNPC->pos.x, partnerNPC->pos.z, script->varTable[1], script->varTable[3]);
             partnerNPC->currentAnim = ANIM_WorldSushie_Ride;
