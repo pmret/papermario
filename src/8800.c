@@ -364,7 +364,7 @@ Camera* initialize_next_camera(CameraInitData* initData) {
     camera->trueRotation.y = 0.0f;
     camera->trueRotation.z = 0.0f;
     camera->updateMode = initData->updateMode;
-    camera->unk_06 = TRUE;
+    camera->needsInit = TRUE;
     camera->nearClip = initData->nearClip;
     camera->farClip = initData->farClip;
     camera->vfov = initData->vfov;

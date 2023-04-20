@@ -51,7 +51,7 @@ ApiStatus SetCamPerspective(Evt* script, s32 isInitialCall) {
     Camera* camera = &gCameras[id];
 
     camera->updateMode = mode;
-    camera->unk_06 = TRUE;
+    camera->needsInit = TRUE;
     camera->isChangingMap = TRUE;
 
     camera->vfov = vfov;
@@ -67,7 +67,7 @@ ApiStatus func_802CA90C(Evt* script, s32 isInitialCall) {
     Camera* camera = &gCameras[id];
 
     camera->updateMode = mode;
-    camera->unk_06 = FALSE;
+    camera->needsInit = FALSE;
     return ApiStatus_DONE2;
 }
 
@@ -81,7 +81,7 @@ ApiStatus func_802CA988(Evt* script, s32 isInitialCall) {
     f32 dx, dy, dz;
 
     gCameras[id].updateMode = CAM_UPDATE_MODE_2;
-    gCameras[id].unk_06 = FALSE;
+    gCameras[id].needsInit = FALSE;
     gCameras[id].auxPitch = -round(gCameras[id].currentPitch);
     gCameras[id].auxBoomLength = -gCameras[id].currentBlendedYawNegated;
 

@@ -39,8 +39,8 @@ void update_camera_mode_4(Camera* camera) {
     camera->trueRotation.x = camera->unk_70;
     camera->currentBoomLength = camera->lookAt_dist * D_8009A5EC;
     camera->currentYOffset = camera->auxBoomPitch * D_8009A5EC;
-    if (camera->unk_06) {
-        camera->unk_06 = FALSE;
+    if (camera->needsInit) {
+        camera->needsInit = FALSE;
         camera->unk_98 = 0.0f;
         camera->unk_9C = 0.0f;
         camera->lookAt_obj.x = camera->lookAt_obj_target.x;
@@ -124,8 +124,8 @@ void update_camera_mode_2(Camera *camera) {
     camera->currentYOffset = camera->auxBoomPitch * D_8009A5EC;
     camera->currentBoomYaw = camera->auxPitch;
     camera->trueRotation.x = camera->unk_70;
-    if (camera->unk_06) {
-        camera->unk_06 = 0;
+    if (camera->needsInit) {
+        camera->needsInit = FALSE;
         camera->unk_98 = 0.0f;
         camera->unk_9C = 0.0f;
 
@@ -274,11 +274,11 @@ void update_camera_mode_0(Camera* camera) {
     f32 yTemp;
     f32 zTemp;
 
-    if (camera->unk_06) {
+    if (camera->needsInit) {
         camera->lookAt_obj.x = 0.0f;
         camera->lookAt_obj.y = 0.0f;
         camera->lookAt_obj.z = 0.0f;
-        camera->unk_06 = FALSE;
+        camera->needsInit = FALSE;
         camera->lookAt_eye.x = camera->lookAt_obj.x;
         camera->lookAt_eye.y = camera->lookAt_obj.y;
         camera->lookAt_eye.z = camera->lookAt_obj.z - (1000.0f / D_8009A5EC);

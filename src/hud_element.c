@@ -688,7 +688,7 @@ void init_hud_element_list(void) {
 void func_801413F8(void) {
     set_cam_viewport(CAM_3, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
     gCameras[CAM_3].updateMode = CAM_UPDATE_MODE_2;
-    gCameras[CAM_3].unk_06 = TRUE;
+    gCameras[CAM_3].needsInit = TRUE;
     gCameras[CAM_3].lookAt_dist = 15551;
     gCameras[CAM_3].nearClip = CAM_NEAR_CLIP;
     gCameras[CAM_3].auxPitch = 0;

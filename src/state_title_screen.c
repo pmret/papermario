@@ -117,7 +117,7 @@ void state_init_title_screen(void) {
 
     create_cameras_a();
     gCameras[CAM_DEFAULT].updateMode = CAM_UPDATE_MODE_6;
-    gCameras[CAM_DEFAULT].unk_06 = TRUE;
+    gCameras[CAM_DEFAULT].needsInit = TRUE;
     gCameras[CAM_DEFAULT].nearClip = CAM_NEAR_CLIP;
     gCameras[CAM_DEFAULT].farClip = CAM_FAR_CLIP;
     gCurrentCameraID = CAM_DEFAULT;
