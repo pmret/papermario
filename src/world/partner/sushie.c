@@ -281,8 +281,8 @@ void N(update_riding_physics)(Npc* sushie) {
         if (!N(IsUnderwater) && (playerStatus->position.y + (playerStatus->colliderHeight * 0.5f) < N(WaterSurfaceY))) {
             N(IsUnderwater) = TRUE;
             playerStatus->renderMode = RENDER_MODE_ALPHATEST;
-            func_802DDFF8(playerStatus->trueAnimation, FOLD_UPD_WAVY, 2, 0, 0, 0, 0);
-            npc_set_fold_params(sushie, FOLD_UPD_WAVY, 2, 0, 0, 0, 0);
+            set_player_imgfx_all(playerStatus->trueAnimation, IMGFX_SET_WAVY, 2, 0, 0, 0, 0);
+            npc_set_imgfx_params(sushie, IMGFX_SET_WAVY, 2, 0, 0, 0, 0);
         }
         if (N(DiveTime) >= 10) {
             if (!(partnerStatus->currentButtons & BUTTON_C_DOWN) || N(DiveTime) >= 30) {
@@ -316,8 +316,8 @@ void N(update_riding_physics)(Npc* sushie) {
         if ((N(WaterSurfaceY) - sushie->moveToPos.y) - (sushie->collisionHeight * 0.5f) <= 0.0f) {
             if (N(IsUnderwater)) {
                 N(IsUnderwater) = FALSE;
-                func_802DDFF8(ANIM_Mario1_Idle, FOLD_UPD_CLEAR, 0, 0, 0, 0, 0);
-                npc_set_fold_params(sushie, FOLD_UPD_CLEAR, 0, 0, 0, 0, 0);
+                set_player_imgfx_all(ANIM_Mario1_Idle, IMGFX_CLEAR, 0, 0, 0, 0, 0);
+                npc_set_imgfx_params(sushie, IMGFX_CLEAR, 0, 0, 0, 0, 0);
             }
             N(DiveState) = DIVE_STATE_NONE;
             sushie->currentAnim = ANIM_WorldSushie_Ride;
@@ -411,7 +411,7 @@ API_CALLABLE(N(UseAbility)) {
                 suggest_player_anim_always_forward(ANIM_MarioW2_RideSushie);
                 disable_player_shadow();
                 disable_npc_shadow(sushie);
-                npc_set_fold_params(sushie, FOLD_UPD_WAVY, 2, 0, 0, 0, 0);
+                npc_set_imgfx_params(sushie, IMGFX_SET_WAVY, 2, 0, 0, 0, 0);
                 sushie->currentAnim = ANIM_WorldSushie_Ride;
                 sushie->moveSpeed = playerStatus->runSpeed;
                 sushie->jumpScale = 0.0f;
@@ -487,7 +487,7 @@ API_CALLABLE(N(UseAbility)) {
             sushie->flags |= NPC_FLAG_8;
             sushie->flags &= ~(NPC_FLAG_GRAVITY | NPC_FLAG_IGNORE_WORLD_COLLISION);
             disable_npc_shadow(sushie);
-            npc_set_fold_params(sushie, FOLD_UPD_WAVY, 2, 0, 0, 0, 0);
+            npc_set_imgfx_params(sushie, IMGFX_SET_WAVY, 2, 0, 0, 0, 0);
             sushie->currentAnim = ANIM_WorldSushie_Ride;
             playerStatus->flags |= PS_FLAG_MOVEMENT_LOCKED;
             dist = dist2D(playerStatus->position.x, playerStatus->position.z, sushie->moveToPos.x, sushie->moveToPos.z);
@@ -722,8 +722,8 @@ API_CALLABLE(N(UseAbility)) {
                 gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
                 partnerStatus->partnerActionState = PARTNER_ACTION_NONE;
                 partnerStatus->actingPartner = 0;
-                func_802DDFF8(ANIM_Mario1_Idle, FOLD_UPD_CLEAR, 0, 0, 0, 0, 0);
-                npc_set_fold_params(sushie, FOLD_UPD_CLEAR, 0, 0, 0, 0, 0);
+                set_player_imgfx_all(ANIM_Mario1_Idle, IMGFX_CLEAR, 0, 0, 0, 0, 0);
+                npc_set_imgfx_params(sushie, IMGFX_CLEAR, 0, 0, 0, 0, 0);
                 return ApiStatus_DONE1;
             }
             sushie->duration--;

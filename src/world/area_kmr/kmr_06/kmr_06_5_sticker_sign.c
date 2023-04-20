@@ -5,7 +5,7 @@ extern s32 gItemIconRasterOffsets[];
 extern s32 gItemIconPaletteOffsets[];
 
 typedef struct StickerData {
-    /* 0x00 */ s32 folderID;
+    /* 0x00 */ s32 imgfxIdx;
     /* 0x04 */ s32 workerID;
     /* 0x08 */ Vec3f pos;
     /* 0x14 */ f32 pitch;
@@ -20,14 +20,14 @@ typedef struct StickerData {
 } StickerData;
 
 void N(appendGfx_sticker)(void* renderData) {
-    FoldImageRecPart foldImage;
+    ImgFXTexture ifxImg;
     Matrix4f mtxTransform;
     Matrix4f mtxTemp;
     
     StickerData* sticker = (StickerData*) evt_get_variable(NULL, MV_StickerData);
     IMG_PTR img = (IMG_PTR) evt_get_variable(NULL, MV_StickerImage);
     PAL_PTR pal = (PAL_PTR) evt_get_variable(NULL, MV_StickerPalette);
-    u32 foldFlags = FOLD_STATE_FLAG_400;
+    u32 imgfxFlags = IMGFX_FLAG_400;
     
     gDPPipeSync(gMainGfxPos++);
     guTranslateF(mtxTransform, sticker->pos.x, sticker->pos.y, sticker->pos.z);
@@ -41,19 +41,19 @@ void N(appendGfx_sticker)(void* renderData) {
     gSPMatrix(gMainGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]),
         G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     
-    foldImage.raster = img;
-    foldImage.palette = pal;
-    foldImage.width = 32;
-    foldImage.height = 32;
-    foldImage.xOffset = -16;
-    foldImage.yOffset = 16;
-    foldImage.opacity = 255;
+    ifxImg.raster = img;
+    ifxImg.palette = pal;
+    ifxImg.width = 32;
+    ifxImg.height = 32;
+    ifxImg.xOffset = -16;
+    ifxImg.yOffset = 16;
+    ifxImg.alpha = 255;
     
     if (sticker->yaw != 0.0 || sticker->pitch != 0.0) {
-        foldFlags |= FOLD_STATE_FLAG_2000;
+        imgfxFlags |= IMGFX_FLAG_2000;
     }
-    fold_update(0, FOLD_UPD_CLEAR, 0, 0, 0, 0, 0);
-    fold_appendGfx_component(0, &foldImage, foldFlags, mtxTransform);
+    imgfx_update(0, IMGFX_CLEAR, 0, 0, 0, 0, 0);
+    imgfx_appendGfx_component(0, &ifxImg, imgfxFlags, mtxTransform);
     
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
@@ -107,7 +107,7 @@ API_CALLABLE(N(CreateSticker)) {
         (u8*) (iconPalEnd + gItemIconPaletteOffsets[itemID]),
         iconPal);
     
-    sticker->folderID = func_8013A704(1);
+    sticker->imgfxIdx = imgfx_get_free_instances(1);
     sticker->workerID = create_worker_world(NULL, N(worker_render_sticker));
     evt_set_variable(script, MV_StickerData, (s32) sticker);
     evt_set_variable(script, MV_StickerImage, (s32) iconImg);

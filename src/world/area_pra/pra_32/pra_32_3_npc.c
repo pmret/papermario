@@ -51,7 +51,7 @@ EvtScript N(EVS_Scene_CrystalKingAppears) = {
     EVT_CALL(SetMusicTrack, 0, SONG_CRYSTAL_KING_THEME, 0, 8)
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH7_016A, 160, 40)
     EVT_CALL(SetNpcPos, NPC_CrystalKing_01, 588, 200, 116)
-    EVT_CALL(SetNpcFoldParams, NPC_CrystalKing_01, FOLD_UPD_SET_ALPHA, 0, 0, 0, 0)
+    EVT_CALL(SetNpcImgFXParams, NPC_CrystalKing_01, IMGFX_SET_ALPHA, 0, 0, 0, 0)
     EVT_CALL(GetNpcPos, NPC_CrystalKing_01, LVar0, LVar1, LVar2)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, -30)
@@ -95,7 +95,7 @@ EvtScript N(EVS_Scene_CrystalKingAppears) = {
     EVT_CALL(MakeLerp, 0, 255, 120 * DT, EASING_LINEAR)
     EVT_LABEL(5)
     EVT_CALL(UpdateLerp)
-    EVT_CALL(SetNpcFoldParams, NPC_CrystalKing_01, FOLD_UPD_SET_ALPHA, LVar0, 0, 0, 0)
+    EVT_CALL(SetNpcImgFXParams, NPC_CrystalKing_01, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
     EVT_WAIT(1)
     EVT_IF_EQ(LVar1, 1)
         EVT_GOTO(5)
@@ -171,7 +171,7 @@ EvtScript N(EVS_Scene_BossDefeated) = {
     EVT_CALL(MakeLerp, 255, 122, 30 * DT, EASING_COS_IN_OUT)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
-        EVT_CALL(SetNpcFoldParams, NPC_CrystalKing_01, FOLD_UPD_SET_ALPHA, LVar0, 0, 0, 0)
+        EVT_CALL(SetNpcImgFXParams, NPC_CrystalKing_01, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
         EVT_IF_EQ(LVar1, 0)
             EVT_BREAK_LOOP
         EVT_END_IF
@@ -186,13 +186,13 @@ EvtScript N(EVS_Scene_BossDefeated) = {
     EVT_CALL(MakeLerp, 120, 0, 30 * DT, EASING_COS_IN_OUT)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
-        EVT_CALL(SetNpcFoldParams, NPC_CrystalKing_01, FOLD_UPD_SET_ALPHA, LVar0, 0, 0, 0)
+        EVT_CALL(SetNpcImgFXParams, NPC_CrystalKing_01, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
         EVT_IF_EQ(LVar1, 0)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(SetNpcFoldParams, NPC_CrystalKing_01, FOLD_UPD_SET_ALPHA, 0, 0, 0, 0)
+    EVT_CALL(SetNpcImgFXParams, NPC_CrystalKing_01, IMGFX_SET_ALPHA, 0, 0, 0, 0)
     EVT_CALL(GetNpcPos, NPC_CrystalKing_01, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 20)
     EVT_PLAY_EFFECT(EFFECT_SPARKLES, 1, LVar0, LVar1, LVar2, 40)

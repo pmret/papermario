@@ -329,8 +329,8 @@ EvtScript N(EVS_Scene_UnlockGate) = {
     EVT_SETF(LVar0, EVT_FLOAT(0.0))
     EVT_LOOP(20 * DT)
         EVT_ADDF(LVar0, EVT_FLOAT(240.0 / (s32)(20 * DT)))
-        EVT_CALL(SetNpcFoldParams, NPC_GateBoo_01, FOLD_UPD_SET_ALPHA, LVar0, 0, 0, 0)
-        EVT_CALL(SetNpcFoldParams, NPC_GateBoo_02, FOLD_UPD_SET_ALPHA, LVar0, 0, 0, 0)
+        EVT_CALL(SetNpcImgFXParams, NPC_GateBoo_01, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
+        EVT_CALL(SetNpcImgFXParams, NPC_GateBoo_02, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_WAIT(10 * DT)
@@ -359,8 +359,8 @@ EvtScript N(EVS_Scene_UnlockGate) = {
     EVT_SETF(LVar0, EVT_FLOAT(240.0))
     EVT_LOOP(20 * DT)
         EVT_SUBF(LVar0, EVT_FLOAT(240.0 / (s32)(20 * DT)))
-        EVT_CALL(SetNpcFoldParams, NPC_GateBoo_01, FOLD_UPD_SET_ALPHA, LVar0, 0, 0, 0)
-        EVT_CALL(SetNpcFoldParams, NPC_GateBoo_02, FOLD_UPD_SET_ALPHA, LVar0, 0, 0, 0)
+        EVT_CALL(SetNpcImgFXParams, NPC_GateBoo_01, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
+        EVT_CALL(SetNpcImgFXParams, NPC_GateBoo_02, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetNpcPos, NPC_GateBoo_01, NPC_DISPOSE_LOCATION)

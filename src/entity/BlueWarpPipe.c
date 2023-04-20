@@ -115,7 +115,7 @@ void entity_BlueWarpPipe_enter_pipe_init(Entity* bluePipe) {
     pipeData->timer = 25;
     playerStatus->renderMode = RENDER_MODE_ALPHATEST;
 
-    func_802DDFF8(ANIM_Mario1_Idle, FOLD_UPD_SET_ANIM, FOLD_ANIM_VERTICAL_PIPE_CURL, 1, 1, 0, 0);
+    set_player_imgfx_all(ANIM_Mario1_Idle, IMGFX_SET_ANIM, IMGFX_ANIM_VERTICAL_PIPE_CURL, 1, 1, 0, 0);
     sfx_play_sound(SOUND_ENTER_PIPE);
     disable_player_shadow();
 }
@@ -130,7 +130,7 @@ void entity_BlueWarpPipe_enter_pipe_update(Entity* entity) {
     if (pipeData->timer == -1) {
         playerStatus->renderMode = RENDER_MODE_ALPHATEST;
         playerStatus->position.y -= 50.0f;
-        func_802DDFF8(ANIM_Mario1_Idle, FOLD_UPD_CLEAR, 0, 0, 0, 0, 0);
+        set_player_imgfx_all(ANIM_Mario1_Idle, IMGFX_CLEAR, 0, 0, 0, 0, 0);
         exec_entity_commandlist(entity);
     }
 }

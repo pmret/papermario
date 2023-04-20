@@ -30,7 +30,7 @@ API_CALLABLE(N(UnkBowserFunc1)) {
         script->functionTemp[0] = 0;
 
         for (i = 0; i < 10; i++) {
-            func_802DE780(part->spriteInstanceID, i, FOLD_UPD_ALLOC_COLOR_BUF, 20, 0, 0, 255, 0);
+            set_npc_imgfx_comp(part->spriteInstanceID, i, IMGFX_ALLOC_COLOR_BUF, 20, 0, 0, 255, 0);
         }
     }
 
@@ -50,7 +50,7 @@ API_CALLABLE(N(UnkBowserFunc1)) {
         for (j = 0; j < 20; j++) {
             colorRGBA = sp20[j] << 0x18 | sp38[j] << 0x10 | sp50[j] << 8 | 0xFF;
             for (i = 0; i < 10; i++) {
-                func_802DE780(part->spriteInstanceID, i, FOLD_UPD_COLOR_BUF_SET_C, j, colorRGBA, 0, 255, 0);
+                set_npc_imgfx_comp(part->spriteInstanceID, i, IMGFX_COLOR_BUF_SET_MODULATE, j, colorRGBA, 0, 255, 0);
             }
         }
         return ApiStatus_BLOCK;
@@ -60,7 +60,7 @@ API_CALLABLE(N(UnkBowserFunc1)) {
             colorRGBA = 255;
             for (i = 0; i < 10; i++) {
                 // TODO find better match for opacity
-                func_802DE780(part->spriteInstanceID, i, FOLD_UPD_COLOR_BUF_SET_C, j, colorRGBA, 0, opacity & 0xFFFF, 0);
+                set_npc_imgfx_comp(part->spriteInstanceID, i, IMGFX_COLOR_BUF_SET_MODULATE, j, colorRGBA, 0, opacity & 0xFFFF, 0);
             }
         }
         script->functionTemp[1] = 0;

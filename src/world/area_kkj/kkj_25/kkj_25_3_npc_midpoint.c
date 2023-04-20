@@ -109,7 +109,7 @@ EvtScript N(EVS_NpcInit_Twink) = {
 };
 
 EvtScript N(EVS_NpcInit_Eldstar) = {
-    EVT_CALL(SetNpcFoldParams, NPC_Eldstar, FOLD_UPD_SET_ALPHA, 0, 0, 0, 0)
+    EVT_CALL(SetNpcImgFXParams, NPC_Eldstar, IMGFX_SET_ALPHA, 0, 0, 0, 0)
     EVT_CALL(EnableNpcShadow, NPC_Eldstar, FALSE)
     EVT_CALL(SetNpcPos, NPC_Eldstar, 100, 45, 0)
     EVT_RETURN
@@ -117,7 +117,7 @@ EvtScript N(EVS_NpcInit_Eldstar) = {
 };
 
 EvtScript N(EVS_NpcInit_Mamar) = {
-    EVT_CALL(SetNpcFoldParams, NPC_Mamar, FOLD_UPD_SET_ALPHA, 0, 0, 0, 0)
+    EVT_CALL(SetNpcImgFXParams, NPC_Mamar, IMGFX_SET_ALPHA, 0, 0, 0, 0)
     EVT_CALL(EnableNpcShadow, NPC_Mamar, FALSE)
     EVT_CALL(SetNpcPos, NPC_Mamar, 46, 45, -27)
     EVT_RETURN
@@ -125,7 +125,7 @@ EvtScript N(EVS_NpcInit_Mamar) = {
 };
 
 EvtScript N(EVS_NpcInit_Skolar) = {
-    EVT_CALL(SetNpcFoldParams, NPC_Skolar, FOLD_UPD_SET_ALPHA, 0, 0, 0, 0)
+    EVT_CALL(SetNpcImgFXParams, NPC_Skolar, IMGFX_SET_ALPHA, 0, 0, 0, 0)
     EVT_CALL(EnableNpcShadow, NPC_Skolar, FALSE)
     EVT_CALL(SetNpcPos, NPC_Skolar, 33, 45, -95)
     EVT_RETURN
@@ -133,7 +133,7 @@ EvtScript N(EVS_NpcInit_Skolar) = {
 };
 
 EvtScript N(EVS_NpcInit_Muskular) = {
-    EVT_CALL(SetNpcFoldParams, NPC_Muskular, FOLD_UPD_SET_ALPHA, 0, 0, 0, 0)
+    EVT_CALL(SetNpcImgFXParams, NPC_Muskular, IMGFX_SET_ALPHA, 0, 0, 0, 0)
     EVT_CALL(EnableNpcShadow, NPC_Muskular, FALSE)
     EVT_CALL(SetNpcPos, NPC_Muskular, 71, 45, -132)
     EVT_RETURN
@@ -141,7 +141,7 @@ EvtScript N(EVS_NpcInit_Muskular) = {
 };
 
 EvtScript N(EVS_NpcInit_Misstar) = {
-    EVT_CALL(SetNpcFoldParams, NPC_Misstar, FOLD_UPD_SET_ALPHA, 0, 0, 0, 0)
+    EVT_CALL(SetNpcImgFXParams, NPC_Misstar, IMGFX_SET_ALPHA, 0, 0, 0, 0)
     EVT_CALL(EnableNpcShadow, NPC_Misstar, FALSE)
     EVT_CALL(SetNpcPos, NPC_Misstar, 131, 45, -132)
     EVT_RETURN
@@ -149,7 +149,7 @@ EvtScript N(EVS_NpcInit_Misstar) = {
 };
 
 EvtScript N(EVS_NpcInit_Klevar) = {
-    EVT_CALL(SetNpcFoldParams, NPC_Klevar, FOLD_UPD_SET_ALPHA, 0, 0, 0, 0)
+    EVT_CALL(SetNpcImgFXParams, NPC_Klevar, IMGFX_SET_ALPHA, 0, 0, 0, 0)
     EVT_CALL(EnableNpcShadow, NPC_Klevar, FALSE)
     EVT_CALL(SetNpcPos, NPC_Klevar, 169, 45, -95)
     EVT_RETURN
@@ -157,7 +157,7 @@ EvtScript N(EVS_NpcInit_Klevar) = {
 };
 
 EvtScript N(EVS_NpcInit_Kalmar) = {
-    EVT_CALL(SetNpcFoldParams, NPC_Kalmar, FOLD_UPD_SET_ALPHA, 0, 0, 0, 0)
+    EVT_CALL(SetNpcImgFXParams, NPC_Kalmar, IMGFX_SET_ALPHA, 0, 0, 0, 0)
     EVT_CALL(EnableNpcShadow, NPC_Kalmar, FALSE)
     EVT_CALL(SetNpcPos, NPC_Kalmar, 156, 45, -27)
     EVT_RETURN

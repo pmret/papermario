@@ -118,7 +118,7 @@ EvtScript N(EVS_Scene_BeginInterlude) = {
     EVT_CALL(EnableGroup, MODEL_jimen, FALSE)
     EVT_CALL(EnableGroup, MODEL_kemuri, FALSE)
     EVT_CALL(EnableGroup, MODEL_obj, FALSE)
-    EVT_CALL(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_MODE_3, 80, 16, 4096)
+    EVT_CALL(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 80, 16, 4096)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 0, -1, 0)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 0, -1, 0)
     EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(-13.0), EVT_FLOAT(18.0))

@@ -31,11 +31,11 @@ EvtScript N(EVS_KoopaBros_SetTrap) = {
     EVT_CALL(SetNpcAnimation, NPC_KoopaBros_01, ANIM_KoopaBros_Yellow_Anim04)
     EVT_THREAD
         EVT_LOOP(8)
-            EVT_CALL(SetNpcFoldParams, NPC_KoopaBros_01, FOLD_UPD_SET_ALPHA, 0, 0, 0, 0)
-            EVT_CALL(SetNpcFoldParams, NPC_KoopaBros_02, FOLD_UPD_SET_ALPHA, 255, 0, 0, 0)
+            EVT_CALL(SetNpcImgFXParams, NPC_KoopaBros_01, IMGFX_SET_ALPHA, 0, 0, 0, 0)
+            EVT_CALL(SetNpcImgFXParams, NPC_KoopaBros_02, IMGFX_SET_ALPHA, 255, 0, 0, 0)
             EVT_WAIT(6 * DT)
-            EVT_CALL(SetNpcFoldParams, NPC_KoopaBros_01, FOLD_UPD_SET_ALPHA, 255, 0, 0, 0)
-            EVT_CALL(SetNpcFoldParams, NPC_KoopaBros_02, FOLD_UPD_SET_ALPHA, 0, 0, 0, 0)
+            EVT_CALL(SetNpcImgFXParams, NPC_KoopaBros_01, IMGFX_SET_ALPHA, 255, 0, 0, 0)
+            EVT_CALL(SetNpcImgFXParams, NPC_KoopaBros_02, IMGFX_SET_ALPHA, 0, 0, 0, 0)
             EVT_WAIT(6 * DT)
         EVT_END_LOOP
     EVT_END_THREAD

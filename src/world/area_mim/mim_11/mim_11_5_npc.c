@@ -66,7 +66,7 @@ EvtScript N(EVS_NpcInit_Bootler) = {
     EVT_SWITCH(GB_StoryProgress)
         EVT_CASE_LT(STORY_CH3_OPENED_BOOS_MANSION_GATE)
             EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)
-            EVT_CALL(SetNpcFoldParams, NPC_SELF, FOLD_UPD_SET_ALPHA, 0, 0, 0, 0)
+            EVT_CALL(SetNpcImgFXParams, NPC_SELF, IMGFX_SET_ALPHA, 0, 0, 0, 0)
         EVT_CASE_DEFAULT
             EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_END_SWITCH

@@ -275,8 +275,8 @@
 #define GetSelfVar dead_GetSelfVar
 #define GetPlayerTargetYaw dead_GetPlayerTargetYaw
 #define HidePlayerShadow dead_HidePlayerShadow
-#define SetPlayerFoldFlags dead_SetPlayerFoldFlags
-#define UpdatePlayerFold dead_UpdatePlayerFold
+#define SetPlayerImgFXFlags dead_SetPlayerImgFXFlags
+#define UpdatePlayerImgFX dead_UpdatePlayerImgFX
 #define SetPlayerFlagBits dead_SetPlayerFlagBits
 #define func_80044238 dead_func_80044238
 #define SetCamType dead_SetCamType
@@ -322,7 +322,7 @@
 #define GetSelfAnimationFromTable dead_GetSelfAnimationFromTable
 #define EVS_NpcHitRecoil dead_EVS_NpcHitRecoil
 #define SelfEnemyOverrideSyncPos dead_SelfEnemyOverrideSyncPos
-#define SetNpcFoldParams dead_SetNpcFoldParams
+#define SetNpcImgFXParams dead_SetNpcImgFXParams
 #define SetGroupVisibility dead_SetGroupVisibility
 #define Entity_HeartBlock dead_Entity_HeartBlock
 #define GetCamDistance dead_GetCamDistance

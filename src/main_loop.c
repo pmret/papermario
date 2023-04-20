@@ -187,7 +187,7 @@ void gfx_draw_frame(void) {
     spr_render_init();
 
     if (!(gOverrideFlags & GLOBAL_OVERRIDES_DISABLE_RENDER_WORLD)) {
-        render_frame(0);
+        render_frame(FALSE);
     }
 
     player_render_interact_prompts();
@@ -203,7 +203,7 @@ void gfx_draw_frame(void) {
     }
 
     if (!(gOverrideFlags & GLOBAL_OVERRIDES_DISABLE_RENDER_WORLD) && !gGameStatusPtr->disableScripts) {
-        render_frame(1);
+        render_frame(TRUE);
     }
 
     if (!(gOverrideFlags & (GLOBAL_OVERRIDES_MESSAGES_IN_FRONT_OF_CURTAINS | GLOBAL_OVERRIDES_10))) {

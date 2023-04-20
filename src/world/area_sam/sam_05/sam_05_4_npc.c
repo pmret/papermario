@@ -48,25 +48,14 @@ EvtScript N(EVS_NpcDefeat_Monstar) = {
 #include "world/area_sam/sam_05/monstar.pal.inc.c"
 #include "world/area_sam/sam_05/monstar.png.h"
 
-//TODO borrowed from sprite.c
-typedef struct UnkFoldStruct {
-    /* 0x00 */ IMG_PTR raster;
-    /* 0x04 */ PAL_PTR palette;
-    /* 0x08 */ u16 width;
-    /* 0x0A */ u16 height;
-    /* 0x0C */ s32 unk_0C;
-    /* 0x10 */ s32 unk_10;
-    /* 0x14 */ Gfx* unk_14;
-} UnkFoldStruct; // size = 0x18
-
-UnkFoldStruct N(MonstarDetailTexture) = {
+ImgFXOverlayTexture N(MonstarDetailTexture) = {
     .raster  = N(monstar_png),
     .palette = N(monstar_pal),
     .width   = N(monstar_png_width),
     .height  = N(monstar_png_height),
-    .unk_0C  = -2,
-    .unk_10  = 0,
-    .unk_14  = N(monstar_gfx),
+    .offsetX  = -2,
+    .offsetY  = 0,
+    .displayList  = N(monstar_gfx),
 };
 
 API_CALLABLE(N(UpdateMonstarSpriteEffects)) {
@@ -84,11 +73,11 @@ API_CALLABLE(N(UpdateMonstarSpriteEffects)) {
     }
 
     if (enemy->varTable[3] == 0) {
-        func_802DE780(npc->spriteInstanceID, 1, FOLD_UPD_SET_ALPHA, 255, 255, 255, 0, 0);
+        set_npc_imgfx_comp(npc->spriteInstanceID, 1, IMGFX_SET_ALPHA, 255, 255, 255, 0, 0);
         return ApiStatus_BLOCK;
     }
 
-    func_802DE780(npc->spriteInstanceID, 0, FOLD_UPD_ALLOC_COLOR_BUF, 20, 0, 0, 255, 0);
+    set_npc_imgfx_comp(npc->spriteInstanceID, 0, IMGFX_ALLOC_COLOR_BUF, 20, 0, 0, 255, 0);
     script->functionTemp[0] += 10;
     if (script->functionTemp[0] >= 360) {
         script->functionTemp[0] %= 360;
@@ -100,15 +89,15 @@ API_CALLABLE(N(UpdateMonstarSpriteEffects)) {
         sp50[i] = (cosine(script->functionTemp[0] + (i * 25) + 90) + 1.0) * 56.0;
         sp68[i] = enemy->varTable[3];
 
-        func_802DE780(npc->spriteInstanceID, 0, FOLD_UPD_COLOR_BUF_SET_C, i, (sp20[i] << 24) | (sp38[i] << 16) | (sp50[i] << 8) | sp68[i], 0, 255, 0);
+        set_npc_imgfx_comp(npc->spriteInstanceID, 0, IMGFX_COLOR_BUF_SET_MODULATE, i, (sp20[i] << 24) | (sp38[i] << 16) | (sp50[i] << 8) | sp68[i], 0, 255, 0);
     }
 
     if (enemy->varTable[3] == 255) {
         npc->renderMode = RENDER_MODE_ALPHATEST;
-        func_802DE780(npc->spriteInstanceID, 1, FOLD_TYPE_F, (s32) &N(MonstarDetailTexture), 255, 0, 255, 0);
+        set_npc_imgfx_comp(npc->spriteInstanceID, 1, IMGFX_OVERLAY, (s32) &N(MonstarDetailTexture), 255, 0, 255, 0);
     } else {
         npc->renderMode = RENDER_MODE_SURFACE_XLU_LAYER2;
-        func_802DE780(npc->spriteInstanceID, 1, FOLD_TYPE_F, (s32) &N(MonstarDetailTexture), enemy->varTable[3], 0, enemy->varTable[3], 0);
+        set_npc_imgfx_comp(npc->spriteInstanceID, 1, IMGFX_OVERLAY, (s32) &N(MonstarDetailTexture), enemy->varTable[3], 0, enemy->varTable[3], 0);
     }
     return ApiStatus_BLOCK;
 }

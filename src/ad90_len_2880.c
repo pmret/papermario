@@ -11,9 +11,10 @@ void update_camera_mode_6(Camera* camera) {
     f32 deltaZ2;
     f32 boomYaw;
     f32 new_var;
+    f32 planarDist;
 
-    if (camera->unk_06 != 0 || camera->isChangingMap) {
-        camera->unk_06 = 0;
+    if (camera->needsInit || camera->isChangingMap) {
+        camera->needsInit = FALSE;
         camera->isChangingMap = FALSE;
         camera->auxPitch = 0;
         camera->auxBoomLength = 100;
@@ -30,7 +31,7 @@ void update_camera_mode_6(Camera* camera) {
     }
     if (camera->auxPitch == 0) {
         camera->lookAt_obj.x = camera->lookAt_obj_target.x + camera->targetPos.x;
-        camera->lookAt_obj.y = camera->lookAt_obj_target.y + camera->targetPos.y + camera->auxBoomZOffset * 0.00390625;
+        camera->lookAt_obj.y = camera->lookAt_obj_target.y + camera->targetPos.y + camera->auxBoomZOffset / 256.0;
         camera->lookAt_obj.z = camera->lookAt_obj_target.z + camera->targetPos.z;
         camera->trueRotation.x = camera->auxBoomYaw;
         camera->currentBoomYaw = camera->auxBoomPitch;
@@ -42,10 +43,10 @@ void update_camera_mode_6(Camera* camera) {
         deltaX = 0.0f;
         deltaY = 0.0f;
         deltaZ = camera->currentBoomLength;
-        deltaX2 = deltaX;
-        deltaY2 = deltaY;
+        deltaX2 = 0.0f;
+        deltaY2 = 0.0f;
         boomYaw = deltaX = -deltaY2;
-        deltaZ2 = deltaZ;
+        deltaZ2 = camera->currentBoomLength;
         new_var = boomYaw;
         deltaX = deltaX2;
         deltaY = cosBoom * deltaY2 + deltaZ2 * sinBoom;
@@ -66,7 +67,8 @@ void update_camera_mode_6(Camera* camera) {
     deltaY = camera->lookAt_obj.y - camera->lookAt_eye.y;
     deltaZ = camera->lookAt_obj.z - camera->lookAt_eye.z;
     camera->currentBlendedYawNegated = -atan2(0.0f, 0.0f, deltaX, deltaZ);
-    camera->currentPitch = atan2(0.0f, 0.0f, deltaY, -sqrtf(SQ(deltaX) + SQ(deltaZ)));
+    planarDist = sqrtf(SQ(deltaX) + SQ(deltaZ));
+    camera->currentPitch = atan2(0.0f, 0.0f, deltaY, -planarDist);
     gBattleStatus.camLookatObjPos.x = camera->lookAt_obj.x;
     gBattleStatus.camLookatObjPos.y = camera->lookAt_obj.y;
     gBattleStatus.camLookatObjPos.z = camera->lookAt_obj.z;

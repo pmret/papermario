@@ -199,11 +199,10 @@ API_CALLABLE(N(update_effect)) {
 
     actorPart = get_actor_part(actor, 1);
     if (actorPart->currentAnimation == ANIM_BigLanternGhost_Anim0C) {
-        func_802DE8DC(actor->partsTable->spriteInstanceID, 0, &partX, &partY, &partZ);
+        spr_get_comp_position(actor->partsTable->spriteInstanceID, 0, &partX, &partY, &partZ);
     } else {
-        func_802DE8DC(actor->partsTable->spriteInstanceID, 1, &partX, &partY, &partZ);
+        spr_get_comp_position(actor->partsTable->spriteInstanceID, 1, &partX, &partY, &partZ);
     }
-
 
     partY += 20;
 

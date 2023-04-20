@@ -982,7 +982,7 @@ EvtScript N(EVS_GuardBoo_ReturnToPost) = {
     EVT_CALL(MakeLerp, 180, 0, 10, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
-        EVT_CALL(SetNpcFoldParams, NPC_GuardBoo, FOLD_UPD_SET_ALPHA, LVar0, 0, 0, 0)
+        EVT_CALL(SetNpcImgFXParams, NPC_GuardBoo, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
         EVT_IF_EQ(LVar1, 0)
             EVT_BREAK_LOOP
         EVT_END_IF
@@ -992,7 +992,7 @@ EvtScript N(EVS_GuardBoo_ReturnToPost) = {
     EVT_CALL(MakeLerp, 0, 180, 10, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
-        EVT_CALL(SetNpcFoldParams, NPC_GuardBoo, FOLD_UPD_SET_ALPHA, LVar0, 0, 0, 0)
+        EVT_CALL(SetNpcImgFXParams, NPC_GuardBoo, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
         EVT_IF_EQ(LVar1, 0)
             EVT_BREAK_LOOP
         EVT_END_IF
@@ -1086,7 +1086,7 @@ EvtScript N(EVS_GuardBooVanish) = {
     EVT_CALL(MakeLerp, 255, 0, 60, EASING_LINEAR)
     EVT_LABEL(0)
         EVT_CALL(UpdateLerp)
-        EVT_CALL(SetNpcFoldParams, NPC_GuardBoo, FOLD_UPD_SET_ALPHA, LVar0, 0, 0, 0)
+        EVT_CALL(SetNpcImgFXParams, NPC_GuardBoo, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
         EVT_WAIT(1)
         EVT_IF_EQ(LVar1, 1)
             EVT_GOTO(0)

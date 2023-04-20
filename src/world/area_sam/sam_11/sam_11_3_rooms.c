@@ -48,7 +48,7 @@ EvtScript N(EVS_RoomListener_LeftHouse) = {
                         EVT_CALL(MakeLerp, 0, 255, 20, EASING_LINEAR)
                         EVT_LOOP(0)
                             EVT_CALL(UpdateLerp)
-                            EVT_CALL(SetNpcFoldParams, NPC_Herringway, FOLD_UPD_SET_ALPHA, LVar0, 0, 0, 0)
+                            EVT_CALL(SetNpcImgFXParams, NPC_Herringway, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
                             EVT_WAIT(1)
                             EVT_IF_EQ(LVar1, 0)
                                 EVT_BREAK_LOOP

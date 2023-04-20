@@ -128,8 +128,8 @@ EvtScript N(EVS_Pipe_EnterVertical) = {
     EVT_CALL(SetPlayerPos, LVar1, LVar2, LVar3)
     EVT_CALL(InterpPlayerYaw, LVar4, 0)
     EVT_CALL(PlaySound, SOUND_ENTER_PIPE)
-    EVT_CALL(SetPlayerFoldFlags, FOLD_STATE_FLAG_REVERSE_ANIM)
-    EVT_CALL(UpdatePlayerFold, ANIM_Mario1_Still, FOLD_UPD_SET_ANIM, FOLD_ANIM_VERTICAL_PIPE_CURL, 1, 1, 0)
+    EVT_CALL(SetPlayerImgFXFlags, IMGFX_FLAG_REVERSE_ANIM)
+    EVT_CALL(UpdatePlayerImgFX, ANIM_Mario1_Still, IMGFX_SET_ANIM, IMGFX_ANIM_VERTICAL_PIPE_CURL, 1, 1, 0)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_LOOP(40)
         EVT_ADD(LVar1, 1)
@@ -150,7 +150,7 @@ EvtScript N(EVS_Pipe_EnterVertical) = {
         EVT_END_THREAD
     EVT_END_IF
     EVT_WAIT(2)
-    EVT_CALL(UpdatePlayerFold, ANIM_Mario1_Still, FOLD_UPD_CLEAR, 0, 0, 0, 0)
+    EVT_CALL(UpdatePlayerImgFX, ANIM_Mario1_Still, IMGFX_CLEAR, 0, 0, 0, 0)
     EVT_WAIT(1)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_CALL(DisablePlayerPhysics, FALSE)
@@ -202,8 +202,8 @@ EvtScript N(EVS_Pipe_EnterHorizontal) = {
         EVT_WAIT(25)
         EVT_CALL(HidePlayerShadow, FALSE)
     EVT_END_THREAD
-    EVT_CALL(SetPlayerFoldFlags, FOLD_STATE_FLAG_REVERSE_ANIM | FOLD_STATE_FLAG_800)
-    EVT_CALL(UpdatePlayerFold, ANIM_Mario1_Idle, FOLD_UPD_SET_ANIM, FOLD_ANIM_HORIZONTAL_PIPE_CURL, 1, 1, 0)
+    EVT_CALL(SetPlayerImgFXFlags, IMGFX_FLAG_REVERSE_ANIM | IMGFX_FLAG_800)
+    EVT_CALL(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_SET_ANIM, IMGFX_ANIM_HORIZONTAL_PIPE_CURL, 1, 1, 0)
     EVT_LOOP(40)
         EVT_CALL(N(Pipe_GetPointAheadOfPlayer), EVT_FLOAT(1.0))
         EVT_CALL(SetPlayerPos, LVar0, LVar1, LVar2)
@@ -220,7 +220,7 @@ EvtScript N(EVS_Pipe_EnterHorizontal) = {
         EVT_END_THREAD
     EVT_END_IF
     EVT_WAIT(5)
-    EVT_CALL(UpdatePlayerFold, ANIM_Mario1_Idle, FOLD_UPD_CLEAR, 0, 0, 0, 0)
+    EVT_CALL(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_CLEAR, 0, 0, 0, 0)
     EVT_CALL(ModifyColliderFlags, 1, LVarB, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(DisablePlayerPhysics, FALSE)
@@ -278,8 +278,8 @@ EvtScript N(EVS_Pipe_ExitVertical_Impl) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(SetPlayerFoldFlags, FOLD_STATE_FLAG_800)
-    EVT_CALL(UpdatePlayerFold, ANIM_Mario1_Idle, FOLD_UPD_SET_ANIM, FOLD_ANIM_VERTICAL_PIPE_CURL, 1, 1, 0)
+    EVT_CALL(SetPlayerImgFXFlags, IMGFX_FLAG_800)
+    EVT_CALL(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_SET_ANIM, IMGFX_ANIM_VERTICAL_PIPE_CURL, 1, 1, 0)
     EVT_WAIT(25)
     EVT_EXEC_WAIT(LVarC)
     EVT_RETURN
@@ -328,8 +328,8 @@ EvtScript N(EVS_Pipe_ExitHorizontal) = {
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_CALL(SetPlayerPos, LVar0, LVar6, LVar7)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Still)
-    EVT_CALL(SetPlayerFoldFlags, FOLD_STATE_FLAG_800)
-    EVT_CALL(UpdatePlayerFold, ANIM_Mario1_Still, FOLD_UPD_SET_ANIM, FOLD_ANIM_HORIZONTAL_PIPE_CURL, 1, 1, 0)
+    EVT_CALL(SetPlayerImgFXFlags, IMGFX_FLAG_800)
+    EVT_CALL(UpdatePlayerImgFX, ANIM_Mario1_Still, IMGFX_SET_ANIM, IMGFX_ANIM_HORIZONTAL_PIPE_CURL, 1, 1, 0)
     EVT_THREAD
         EVT_WAIT(8)
         EVT_CALL(HidePlayerShadow, TRUE)
