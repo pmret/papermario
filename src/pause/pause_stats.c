@@ -68,10 +68,15 @@ HudScript* gStatsMenuElements[] = {
     [STAT_ICON_TIMES]       &HES_StatTimes,
 };
 
+#if VERSION_PAL
+#define PAUSE_MSG_3B PAUSE_MSG_NO_BADGE
+#define PAUSE_MSG_3F PAUSE_MSG_NO_BADGE
+#endif
+
 HudScript* gStatsBootsElements[] = { &HES_StatBoots0, &HES_StatBoots1, &HES_StatBoots2, &HES_StatBoots3 };
 HudScript* gStatsHammerElements[] = { &HES_StatHammer0, &HES_StatHammer1, &HES_StatHammer2, &HES_StatHammer3 };
-s32 gPauseStatsBootsMessages[] = { 59, 60, 61, 62 };
-s32 gPauseStatsHammerMessages[] = { 63, 64, 65, 66 };
+s32 gPauseStatsBootsMessages[] = { PAUSE_MSG_3B, PAUSE_MSG_3C, PAUSE_MSG_3D, PAUSE_MSG_3E };
+s32 gPauseStatsHammerMessages[] = { PAUSE_MSG_3F, PAUSE_MSG_40, PAUSE_MSG_41, PAUSE_MSG_42 };
 s8 gPauseStatsGridData[] = {
     0, 4,
     1, 5,
@@ -81,6 +86,16 @@ s8 gPauseStatsGridData[] = {
     3, 9,
     3, 10
 };
+
+#if VERSION_PAL
+#define STAR_POWER_X 122
+#define COLLECTABLES_X 127
+#else
+#define STAR_POWER_X 132
+#define COLLECTABLES_X 125
+#endif
+
+
 StatsEntryData gStatsMenuEntries[] = {
     { .cursorX =   9, .cursorY =  20, .baseMsgID = PAUSE_MSG_TIP_CONTROLS },
     { .cursorX =  17, .cursorY =  55, .baseMsgID = PAUSE_MSG_TIP_HP },
@@ -88,12 +103,17 @@ StatsEntryData gStatsMenuEntries[] = {
     { .cursorX =  17, .cursorY = 124, .baseMsgID = PAUSE_MSG_TIP_BP },
     { .cursorX = 138, .cursorY =  28, .baseMsgID = PAUSE_MSG_TIP_BOOTS_1 },
     { .cursorX = 138, .cursorY =  53, .baseMsgID = PAUSE_MSG_TIP_HAMMER_0 },
-    { .cursorX = 132, .cursorY =  76, .baseMsgID = PAUSE_MSG_TIP_STAR_POWER },
-    { .cursorX = 125, .cursorY =  91, .baseMsgID = PAUSE_MSG_TIP_STAR_POINTS },
-    { .cursorX = 125, .cursorY = 106, .baseMsgID = PAUSE_MSG_TIP_COINS },
-    { .cursorX = 125, .cursorY = 121, .baseMsgID = PAUSE_MSG_TIP_SECRETS },
-    { .cursorX = 125, .cursorY = 138, .baseMsgID = PAUSE_MSG_TIP_TIME },
-}; 
+    { .cursorX = STAR_POWER_X, .cursorY =  76, .baseMsgID = PAUSE_MSG_TIP_STAR_POWER },
+    { .cursorX = COLLECTABLES_X, .cursorY =  91, .baseMsgID = PAUSE_MSG_TIP_STAR_POINTS },
+    { .cursorX = COLLECTABLES_X, .cursorY = 106, .baseMsgID = PAUSE_MSG_TIP_COINS },
+    { .cursorX = COLLECTABLES_X, .cursorY = 121, .baseMsgID = PAUSE_MSG_TIP_SECRETS },
+    { .cursorX = COLLECTABLES_X, .cursorY = 138, .baseMsgID = PAUSE_MSG_TIP_TIME },
+};
+
+#if VERSION_PAL
+s32 D_pause_80253814[] = { 0, -16, -7, -19 };
+#endif
+
 HudScript* gPauseStatsSPIncElements[] = { &HES_StatusSPIncrement1, &HES_StatusSPIncrement3,
                                           &HES_StatusSPIncrement2, &HES_StatusSPIncrement4,
                                           &HES_StatusSPIncrement5, &HES_StatusSPIncrement6,
@@ -143,6 +163,9 @@ MenuPanel gPausePanelStats = {
 };
 
 
+#if VERSION_PAL
+INCLUDE_ASM(void, "pause/pause_stats", pause_stats_draw_contents);
+#else
 void pause_stats_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     StatsEntryData* statsEntryData;
     PlayerData* playerData;
@@ -573,6 +596,7 @@ void pause_stats_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
         pause_set_cursor_pos(WINDOW_ID_PAUSE_STATS, baseX + entry->cursorX, baseY + entry->cursorY);
     }
 }
+#endif
 
 void pause_stats_init(MenuPanel* panel) {
     s32 i;
