@@ -217,7 +217,7 @@ EvtScript N(EVS_StarKidsFlee) = {
         EVT_IF_EQ(LVarA, -1)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_CALL(SetNpcFoldParams, LVarA, FOLD_UPD_SET_ALPHA, LVar2, 0, 0, 0)
+        EVT_CALL(SetNpcImgFXParams, LVarA, IMGFX_SET_ALPHA, LVar2, 0, 0, 0)
     EVT_END_LOOP
     EVT_WAIT(1)
     EVT_IF_EQ(LVar1, 1)

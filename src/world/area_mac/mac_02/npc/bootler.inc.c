@@ -8,7 +8,7 @@ EvtScript N(D_8024ACA4_82DF64) = {
     EVT_END_IF
     EVT_LOOP(10)
         EVT_ADDF(LVar0, LVar1)
-        EVT_CALL(SetNpcFoldParams, NPC_Bootler, FOLD_UPD_SET_ALPHA, LVar0, 0, 0, 0)
+        EVT_CALL(SetNpcImgFXParams, NPC_Bootler, IMGFX_SET_ALPHA, LVar0, 0, 0, 0)
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_RETURN
@@ -67,7 +67,7 @@ EvtScript N(EVS_NpcIdle_Bootler) = {
     EVT_WAIT(20 * DT)
     EVT_SETF(LVar0, EVT_FLOAT(0.0))
     EVT_CALL(SetNpcAnimation, NPC_Bootler, ANIM_Bootler_Spook)
-    EVT_CALL(SetNpcFoldParams, NPC_SELF, FOLD_UPD_SET_ALPHA, 0, 0, 0, 0)
+    EVT_CALL(SetNpcImgFXParams, NPC_SELF, IMGFX_SET_ALPHA, 0, 0, 0, 0)
     EVT_CALL(SetNpcYaw, NPC_SELF, 270)
     EVT_CALL(SetNpcPos, NPC_SELF, 500, 50, 30)
     EVT_EXEC_WAIT(N(D_8024ACA4_82DF64))

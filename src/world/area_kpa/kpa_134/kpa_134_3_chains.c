@@ -126,7 +126,7 @@ EvtScript N(EVS_LowerWaterLevel0) = {
         EVT_CALL(ShakeCam, CAM_DEFAULT, 0, 120, EVT_FLOAT(1.0))
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(func_802CA988, 0, LVar4, LVar5, LVar6, LVar7)
+        EVT_CALL(func_802CA988, CAM_DEFAULT, LVar4, LVar5, LVar6, LVar7)
         EVT_CALL(MakeLerp, LVar6, 600, 20, EASING_LINEAR)
         EVT_LABEL(10)
         EVT_CALL(UpdateLerp)
@@ -167,7 +167,7 @@ EvtScript N(EVS_LowerWaterLevel0) = {
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_migi, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_deiliaw, COLLIDER_FLAGS_UPPER_MASK)
     EVT_WAIT(10)
-    EVT_CALL(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_MODE_3, 25, 16, 4096)
+    EVT_CALL(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 4096)
     EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
     EVT_CALL(DisablePlayerPhysics, FALSE)
@@ -191,7 +191,7 @@ EvtScript N(EVS_RaiseWaterLevel1) = {
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(60)
-        EVT_CALL(func_802CA988, 0, LVar4, LVar5, LVar6, LVar7)
+        EVT_CALL(func_802CA988, CAM_DEFAULT, LVar4, LVar5, LVar6, LVar7)
         EVT_CALL(MakeLerp, LVar6, 600, 20, EASING_LINEAR)
         EVT_LABEL(10)
         EVT_CALL(UpdateLerp)
@@ -271,7 +271,7 @@ EvtScript N(EVS_RaiseWaterLevel1) = {
         EVT_CALL(EnableModel, MODEL_o388, FALSE)
     EVT_END_THREAD
     EVT_WAIT(230)
-    EVT_CALL(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_MODE_3, 25, 16, 4096)
+    EVT_CALL(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 4096)
     EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_hidari, COLLIDER_FLAGS_UPPER_MASK)
@@ -375,7 +375,7 @@ EvtScript N(EVS_LowerWaterLevel1) = {
     EVT_CALL(EnableModel, MODEL_s_sui, FALSE)
     EVT_CALL(EnableModel, MODEL_o385, TRUE)
     EVT_THREAD
-        EVT_CALL(func_802CA988, 0, LVar4, LVar5, LVar6, LVar7)
+        EVT_CALL(func_802CA988, CAM_DEFAULT, LVar4, LVar5, LVar6, LVar7)
         EVT_CALL(MakeLerp, LVar6, 600, 20, EASING_LINEAR)
         EVT_LABEL(10)
         EVT_CALL(UpdateLerp)
@@ -409,7 +409,7 @@ EvtScript N(EVS_LowerWaterLevel1) = {
     EVT_CALL(PlaySound, SOUND_22B | SOUND_ID_TRIGGER_CHANGE_SOUND)
     EVT_CALL(func_802D62E4, SOUND_22B)
     EVT_WAIT(10)
-    EVT_CALL(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_MODE_3, 25, 16, 4096)
+    EVT_CALL(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 4096)
     EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
     EVT_CALL(DisablePlayerPhysics, FALSE)
@@ -435,7 +435,7 @@ EvtScript N(EVS_RaiseWaterLevel2) = {
     EVT_CALL(EnableModel, MODEL_o385, FALSE)
     EVT_THREAD
         EVT_WAIT(60)
-        EVT_CALL(func_802CA988, 0, LVar4, LVar5, LVar6, LVar7)
+        EVT_CALL(func_802CA988, CAM_DEFAULT, LVar4, LVar5, LVar6, LVar7)
         EVT_CALL(MakeLerp, LVar6, 600, 20, EASING_LINEAR)
         EVT_LABEL(10)
         EVT_CALL(UpdateLerp)
@@ -514,7 +514,7 @@ EvtScript N(EVS_RaiseWaterLevel2) = {
         EVT_CALL(EnableModel, MODEL_o388, FALSE)
     EVT_END_THREAD
     EVT_WAIT(230)
-    EVT_CALL(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_MODE_3, 25, 16, 4096)
+    EVT_CALL(SetCamPerspective, CAM_DEFAULT, CAM_UPDATE_FROM_ZONE, 25, 16, 4096)
     EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(90.0))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
     EVT_CALL(DisablePlayerPhysics, FALSE)

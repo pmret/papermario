@@ -120,9 +120,9 @@ void N(appendGfx_test_reflection_floor)(void* data) {
     guTranslateF(sp60, playerStatus->position.x, playerStatus->position.y, 0.0f);
     guMtxCatF(sp20, sp60, sp20);
     trueAnimation = playerStatus->trueAnimation;
-    func_802DDFF8(trueAnimation, FOLD_UPD_SET_ALPHA, 255, 255, 255, 20, 0);
+    set_player_imgfx_all(trueAnimation, IMGFX_SET_ALPHA, 255, 255, 255, 20, 0);
     spr_draw_player_sprite(PLAYER_SPRITE_AUX1, 0, 0, 0, sp20);
-    func_802DDFF8(trueAnimation, FOLD_UPD_CLEAR, 0, 0, 0, 0, 0);
+    set_player_imgfx_all(trueAnimation, IMGFX_CLEAR, 0, 0, 0, 0, 0);
 }
 
 API_CALLABLE(N(PartnerReflectTest)) {

@@ -45,7 +45,7 @@ typedef struct SpriteComponent {
     /* 0x28 */ Vec3f compPos;
     /* 0x34 */ Vec3i rotation;
     /* 0x40 */ Vec3f scale;
-    /* 0x4C */ s32 unk_4C;
+    /* 0x4C */ s32 imgfxIdx;
 } SpriteComponent; // size = 0x50
 
 typedef struct PlayerCurrentAnimInfo {
@@ -119,7 +119,7 @@ extern Gfx D_802DF490[];
 extern f32 spr_animUpdateTimeScale;
 extern PlayerSpriteSet spr_playerSpriteSets[7];
 
-void fold_init(void);
+void imgfx_init(void);
 
 void spr_init_sprites(s32 playerSpriteSet);
 
@@ -133,9 +133,9 @@ s32 spr_draw_player_sprite(s32 spriteInstanceID, s32 yaw, s32 arg2, PAL_PTR* pal
 
 s32 func_802DDEC4(s32 arg0);
 
-void func_802DDEE4(s32, s32, FoldType, s32, s32, s32, s32, s32);
+void set_player_imgfx_comp(s32, s32, ImgFXType, s32, s32, s32, s32, s32);
 
-void func_802DDFF8(s32, FoldType, s32, s32, s32, s32, s32);
+void set_player_imgfx_all(s32, ImgFXType, s32, s32, s32, s32, s32);
 
 IMG_PTR spr_get_player_raster(s32 rasterIndex, s32 playerSpriteID);
 
@@ -154,13 +154,13 @@ s32 spr_get_notify_value(s32 arg0);
 
 s32 spr_free_sprite(s32 spriteInstanceID);
 
-s32 func_802DE748(s32, s32); // TODO
+s32 get_npc_comp_imgfx_idx(s32, s32);
 
-void func_802DE780(s32, s32, FoldType, s32, s32, s32, s32, s32);
+void set_npc_imgfx_comp(s32, s32, ImgFXType, s32, s32, s32, s32, s32);
 
-void func_802DE894(s32 arg0, FoldType arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
+void set_npc_imgfx_all(s32 arg0, ImgFXType arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
 
-s32 func_802DE8DC(s32 spriteIdx, s32 compListIdx, s32* outX, s32* outY, s32* outZ);
+s32 spr_get_comp_position(s32 spriteIdx, s32 compListIdx, s32* outX, s32* outY, s32* outZ);
 
 s32 spr_get_npc_raster_info(SpriteRasterInfo* out, s32 npcSpriteID, s32 rasterIndex);
 

@@ -965,10 +965,10 @@ ApiStatus PartnerIsFlying(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetNpcFoldParams(Evt* script, s32 isInitialCall) {
+ApiStatus SetNpcImgFXParams(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 npcId = evt_get_variable(script, *args++);
-    Bytecode foldType = evt_get_variable(script, *args++);
+    Bytecode imgfxType = evt_get_variable(script, *args++);
     Bytecode var2 = evt_get_variable(script, *args++);
     Bytecode var3 = evt_get_variable(script, *args++);
     Bytecode var4 = evt_get_variable(script, *args++);
@@ -979,11 +979,11 @@ ApiStatus SetNpcFoldParams(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    npc_set_fold_params(npc, foldType, var2, var3, var4, var5, npc->foldFlags);
+    npc_set_imgfx_params(npc, imgfxType, var2, var3, var4, var5, npc->imgfxFlags);
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetNpcFoldFlags(Evt* script, s32 isInitialCall) {
+ApiStatus SetNpcImgFXFlags(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 npcId = evt_get_variable(script, *args++);
     Bytecode flags = *args;
@@ -993,7 +993,7 @@ ApiStatus SetNpcFoldFlags(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    npc->foldFlags = flags;
+    npc->imgfxFlags = flags;
     return ApiStatus_DONE2;
 }
 

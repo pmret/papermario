@@ -22,8 +22,8 @@ void update_camera_mode_unused(Camera* camera) {
     f32 deltaZ2;
     f32 boomYaw;
 
-    if (camera->unk_06 || camera->isChangingMap) {
-        camera->unk_06 = FALSE;
+    if (camera->needsInit || camera->isChangingMap) {
+        camera->needsInit = FALSE;
         camera->isChangingMap = FALSE;
         camera->auxPitch = 0;
         camera->auxBoomLength = 100;
@@ -91,11 +91,11 @@ void update_camera_mode_5(Camera* camera) {
     camera->currentBoomLength = 690.0f;
     camera->currentYOffset = 47.0f;
 
-    if (camera->unk_06) {
+    if (camera->needsInit) {
         camera->unk_550 = 0.0f;
         camera->unk_70 = 0.0f;
         camera->trueRotation.x = 0.0f;
-        camera->unk_06 = FALSE;
+        camera->needsInit = FALSE;
         camera->unk_554 = 0;
         camera->lookAt_obj.x = camera->targetPos.x;
         camera->lookAt_obj.y = camera->targetPos.y + camera->currentYOffset;

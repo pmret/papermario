@@ -206,7 +206,7 @@ EvtScript N(EVS_NpcInteract_Herringway) = {
                 EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Herringway_Idle)
                 EVT_CALL(SetNpcPos, NPC_SELF, -217, 0, -38)
             EVT_END_THREAD
-            EVT_CALL(SetNpcFoldParams, NPC_SELF, FOLD_UPD_SET_ALPHA, 0, 0, 0, 0)
+            EVT_CALL(SetNpcImgFXParams, NPC_SELF, IMGFX_SET_ALPHA, 0, 0, 0, 0)
             EVT_SET(GB_StoryProgress, STORY_CH7_SPOKE_WITH_HERRINGWAY)
         EVT_CASE_LT(STORY_CH7_MAYOR_MURDER_SOLVED)
             EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_Herringway_Talk, ANIM_Herringway_Idle, 0, MSG_CH7_00D3)

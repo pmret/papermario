@@ -15,213 +15,217 @@ void update_cameras(void) {
 
     for (i = 0; i < ARRAY_COUNT(gCameras); i++) {
         Camera* cam = &gCameras[i];
+        s32 sx;
+        s32 sy;
+        s32 sz;
 
-        if (cam->flags != 0 && !(cam->flags & CAMERA_FLAG_ENABLED)) {
-            s32 sx;
-            s32 sy;
-            s32 sz;
-
-            gCurrentCamID = i;
-
-            switch (cam->updateMode) {
-                case CAM_UPDATE_MODE_3:
-                    update_camera_zone_interp(cam);
-                    break;
-                case CAM_UPDATE_MODE_0:
-                    update_camera_mode_0(cam);
-                    break;
-                case CAM_UPDATE_MODE_1:
-                    update_camera_mode_1(cam);
-                    break;
-                case CAM_UPDATE_MODE_2:
-                    update_camera_mode_2(cam);
-                    break;
-                case CAM_UPDATE_MODE_4:
-                    update_camera_mode_4(cam);
-                    break;
-                case CAM_UPDATE_MODE_5:
-                    update_camera_mode_5(cam);
-                    break;
-                case CAM_UPDATE_MODE_6:
-                default:
-                    update_camera_mode_6(cam);
-                    break;
-            }
-
-            guLookAtReflectF(cam->viewMtxPlayer, &gDisplayContext->lookAt, cam->lookAt_eye.x, cam->lookAt_eye.y, cam->lookAt_eye.z, cam->lookAt_obj.x, cam->lookAt_obj.y, cam->lookAt_obj.z, 0, 1.0f, 0);
-
-            if (!(cam->flags & CAMERA_FLAG_ORTHO)) {
-                if (cam->flags & CAMERA_FLAG_LEAD_PLAYER) {
-                    create_camera_leadplayer_matrix(cam);
-                }
-
-                guPerspectiveF(cam->perspectiveMatrix, &cam->perspNorm, cam->vfov, (f32) cam->viewportW / (f32) cam->viewportH, (f32) cam->nearClip, (f32) cam->farClip, 1.0f);
-
-                if (cam->flags & CAMERA_FLAG_SHAKING) {
-                    guMtxCatF(cam->viewMtxShaking, cam->perspectiveMatrix, cam->perspectiveMatrix);
-                }
-
-                if (cam->flags & CAMERA_FLAG_LEAD_PLAYER) {
-                    guMtxCatF(cam->viewMtxLeading, cam->perspectiveMatrix, cam->perspectiveMatrix);
-                }
-
-                guMtxCatF(cam->viewMtxPlayer, cam->perspectiveMatrix, cam->perspectiveMatrix);
-            } else {
-                f32 w = cam->viewportW;
-                f32 h = cam->viewportH;
-
-                guOrthoF(cam->perspectiveMatrix, -w * 0.5, w * 0.5, -h * 0.5, h * 0.5, -1000.0f, 1000.0f, 1.0f);
-            }
-
-            get_screen_coords(0, cam->targetPos.x, cam->targetPos.y, cam->targetPos.z, &sx, &sy, &sz);
-            cam->targetScreenCoords.x = sx;
-            cam->targetScreenCoords.y = sy;
-            cam->targetScreenCoords.z = sz;
+        if (cam->flags == 0 || cam->flags & CAMERA_FLAG_DISABLED) {
+            continue;
         }
+
+        gCurrentCamID = i;
+
+        switch (cam->updateMode) {
+            case CAM_UPDATE_FROM_ZONE:
+                update_camera_zone_interp(cam);
+                break;
+            case CAM_UPDATE_MODE_INIT:
+                update_camera_mode_0(cam);
+                break;
+            case CAM_UPDATE_UNUSED_1:
+                update_camera_mode_1(cam);
+                break;
+            case CAM_UPDATE_MODE_2:
+                update_camera_mode_2(cam);
+                break;
+            case CAM_UPDATE_UNUSED_4:
+                update_camera_mode_4(cam);
+                break;
+            case CAM_UPDATE_UNUSED_5:
+                update_camera_mode_5(cam);
+                break;
+            case CAM_UPDATE_MODE_6:
+            default:
+                update_camera_mode_6(cam);
+                break;
+        }
+
+        guLookAtReflectF(cam->viewMtxPlayer, &gDisplayContext->lookAt, cam->lookAt_eye.x, cam->lookAt_eye.y, cam->lookAt_eye.z, cam->lookAt_obj.x, cam->lookAt_obj.y, cam->lookAt_obj.z, 0, 1.0f, 0);
+
+        if (!(cam->flags & CAMERA_FLAG_ORTHO)) {
+            if (cam->flags & CAMERA_FLAG_LEAD_PLAYER) {
+                create_camera_leadplayer_matrix(cam);
+            }
+
+            guPerspectiveF(cam->perspectiveMatrix, &cam->perspNorm, cam->vfov, (f32) cam->viewportW / (f32) cam->viewportH, (f32) cam->nearClip, (f32) cam->farClip, 1.0f);
+
+            if (cam->flags & CAMERA_FLAG_SHAKING) {
+                guMtxCatF(cam->viewMtxShaking, cam->perspectiveMatrix, cam->perspectiveMatrix);
+            }
+
+            if (cam->flags & CAMERA_FLAG_LEAD_PLAYER) {
+                guMtxCatF(cam->viewMtxLeading, cam->perspectiveMatrix, cam->perspectiveMatrix);
+            }
+
+            guMtxCatF(cam->viewMtxPlayer, cam->perspectiveMatrix, cam->perspectiveMatrix);
+        } else {
+            f32 w = cam->viewportW;
+            f32 h = cam->viewportH;
+
+            guOrthoF(cam->perspectiveMatrix, -w * 0.5, w * 0.5, -h * 0.5, h * 0.5, -1000.0f, 1000.0f, 1.0f);
+        }
+
+        get_screen_coords(0, cam->targetPos.x, cam->targetPos.y, cam->targetPos.z, &sx, &sy, &sz);
+        cam->targetScreenCoords.x = sx;
+        cam->targetScreenCoords.y = sy;
+        cam->targetScreenCoords.z = sz;
     }
 
-    gCurrentCamID = 0;
+    gCurrentCamID = CAM_DEFAULT;
 }
 
-void render_frame(s32 flag) {
+void render_frame(s32 isSecondPass) {
     s32 camID;
 
-    if (!flag) {
-        gCurrentCamID = 0;
+    if (!isSecondPass) {
+        gCurrentCamID = CAM_DEFAULT;
         func_80116698();
     }
 
-    if (flag) {
+    if (isSecondPass) {
         camID = CAM_3;
     } else {
         camID = CAM_DEFAULT;
     }
 
-    flag = 1 - flag; // toggle flag 0/1
+    // first pass:  loop uses camIDs from CAM_DEFAULT to CAM_3 - 1
+    // second pass: loop only uses CAM_3
+    isSecondPass = 1 - isSecondPass;
 
-    for (; camID < ARRAY_COUNT(gCameras) - flag; camID++) {
+    for (; camID < ARRAY_COUNT(gCameras) - isSecondPass; camID++) {
         Camera* camera = &gCameras[camID];
+        u16 matrixListPos;
 
-        if (camera->flags != 0 && !(camera->flags & (CAMERA_FLAG_80 | CAMERA_FLAG_ENABLED))) {
-            u16 matrixListPos;
+        if (camera->flags == 0 || (camera->flags & (CAMERA_FLAG_80 | CAMERA_FLAG_DISABLED))) {
+            continue;
+        }
 
-            gCurrentCamID = camID;
+        gCurrentCamID = camID;
 
-            if (camera->fpDoPreRender != NULL) {
-                camera->fpDoPreRender(camera);
-            } else {
-                s32 ulx;
-                s32 uly;
-                s32 lrx;
-                s32 lry;
+        if (camera->fpDoPreRender != NULL) {
+            camera->fpDoPreRender(camera);
+        } else {
+            s32 ulx;
+            s32 uly;
+            s32 lrx;
+            s32 lry;
 
-                gSPViewport(gMainGfxPos++, &camera->vp);
-                gSPClearGeometryMode(gMainGfxPos++, G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN |
-                                     G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH);
-                gSPTexture(gMainGfxPos++, 0, 0, 0, G_TX_RENDERTILE, G_OFF);
-                gDPSetCycleType(gMainGfxPos++, G_CYC_1CYCLE);
-                gDPPipelineMode(gMainGfxPos++, G_PM_NPRIMITIVE);
+            gSPViewport(gMainGfxPos++, &camera->vp);
+            gSPClearGeometryMode(gMainGfxPos++, G_SHADE | G_CULL_BOTH | G_FOG | G_LIGHTING | G_TEXTURE_GEN |
+                                    G_TEXTURE_GEN_LINEAR | G_LOD | G_SHADING_SMOOTH);
+            gSPTexture(gMainGfxPos++, 0, 0, 0, G_TX_RENDERTILE, G_OFF);
+            gDPSetCycleType(gMainGfxPos++, G_CYC_1CYCLE);
+            gDPPipelineMode(gMainGfxPos++, G_PM_NPRIMITIVE);
 
-                ulx = camera->viewportStartX;
-                uly = camera->viewportStartY;
-                lrx = ulx + camera->viewportW;
-                lry = uly + camera->viewportH;
+            ulx = camera->viewportStartX;
+            uly = camera->viewportStartY;
+            lrx = ulx + camera->viewportW;
+            lry = uly + camera->viewportH;
 
-                if (ulx < 0) {
-                    ulx = 0;
-                }
-                if (uly < 0) {
-                    uly = 0;
-                }
-                if (lrx < 1) {
-                    lrx = 1;
-                }
-                if (lry < 1) {
-                    lry = 1;
-                }
-
-                if (ulx > SCREEN_WIDTH - 1) {
-                    ulx = SCREEN_WIDTH - 1;
-                }
-                if (uly > SCREEN_HEIGHT - 1) {
-                    uly = SCREEN_HEIGHT - 1;
-                }
-                if (lrx > SCREEN_WIDTH) {
-                    lrx = SCREEN_WIDTH;
-                }
-                if (lry > SCREEN_HEIGHT) {
-                    lry = SCREEN_HEIGHT;
-                }
-
-                gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, ulx, uly, lrx, lry);
-                gDPSetTextureLOD(gMainGfxPos++, G_TL_TILE);
-                gDPSetTextureLUT(gMainGfxPos++, G_TT_NONE);
-                gDPSetTextureDetail(gMainGfxPos++, G_TD_CLAMP);
-                gDPSetTexturePersp(gMainGfxPos++, G_TP_PERSP);
-                gDPSetTextureFilter(gMainGfxPos++, G_TF_BILERP);
-                gDPSetTextureConvert(gMainGfxPos++, G_TC_FILT);
-                gDPSetCombineMode(gMainGfxPos++, G_CC_SHADE, G_CC_SHADE);
-                gDPSetCombineKey(gMainGfxPos++, G_CK_NONE);
-                gDPSetAlphaCompare(gMainGfxPos++, G_AC_NONE);
-                gDPSetRenderMode(gMainGfxPos++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
-                gDPSetColorDither(gMainGfxPos++, G_CD_DISABLE);
-                gSPClipRatio(gMainGfxPos++, FRUSTRATIO_2);
-                gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
-                                 osVirtualToPhysical(nuGfxCfb_ptr));
-                gDPPipeSync(gMainGfxPos++);
-
-                if (!(camera->flags & CAMERA_FLAG_ORTHO)) {
-                    gSPPerspNormalize(gMainGfxPos++, camera->perspNorm);
-                }
-
-                guMtxF2L(camera->perspectiveMatrix, &gDisplayContext->camPerspMatrix[gCurrentCamID]);
-                gSPMatrix(gMainGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCamID], G_MTX_NOPUSH | G_MTX_LOAD |
-                          G_MTX_PROJECTION);
+            if (ulx < 0) {
+                ulx = 0;
+            }
+            if (uly < 0) {
+                uly = 0;
+            }
+            if (lrx < 1) {
+                lrx = 1;
+            }
+            if (lry < 1) {
+                lry = 1;
             }
 
-            camera->unkMatrix = &gDisplayContext->matrixStack[gMatrixListPos];
-            matrixListPos = gMatrixListPos++;
-            guRotate(&gDisplayContext->matrixStack[matrixListPos], -camera->trueRotation.x, 0.0f, 1.0f, 0.0f);
-            camera->vpAlt.vp.vtrans[0] = camera->vp.vp.vtrans[0] + gGameStatusPtr->unk_82;
-            camera->vpAlt.vp.vtrans[1] = camera->vp.vp.vtrans[1] + gGameStatusPtr->unk_83;
+            if (ulx > SCREEN_WIDTH - 1) {
+                ulx = SCREEN_WIDTH - 1;
+            }
+            if (uly > SCREEN_HEIGHT - 1) {
+                uly = SCREEN_HEIGHT - 1;
+            }
+            if (lrx > SCREEN_WIDTH) {
+                lrx = SCREEN_WIDTH;
+            }
+            if (lry > SCREEN_HEIGHT) {
+                lry = SCREEN_HEIGHT;
+            }
+
+            gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, ulx, uly, lrx, lry);
+            gDPSetTextureLOD(gMainGfxPos++, G_TL_TILE);
+            gDPSetTextureLUT(gMainGfxPos++, G_TT_NONE);
+            gDPSetTextureDetail(gMainGfxPos++, G_TD_CLAMP);
+            gDPSetTexturePersp(gMainGfxPos++, G_TP_PERSP);
+            gDPSetTextureFilter(gMainGfxPos++, G_TF_BILERP);
+            gDPSetTextureConvert(gMainGfxPos++, G_TC_FILT);
+            gDPSetCombineMode(gMainGfxPos++, G_CC_SHADE, G_CC_SHADE);
+            gDPSetCombineKey(gMainGfxPos++, G_CK_NONE);
+            gDPSetAlphaCompare(gMainGfxPos++, G_AC_NONE);
+            gDPSetRenderMode(gMainGfxPos++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
+            gDPSetColorDither(gMainGfxPos++, G_CD_DISABLE);
+            gSPClipRatio(gMainGfxPos++, FRUSTRATIO_2);
+            gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
+                                osVirtualToPhysical(nuGfxCfb_ptr));
+            gDPPipeSync(gMainGfxPos++);
 
             if (!(camera->flags & CAMERA_FLAG_ORTHO)) {
-                if (gCurrentCamID != CAM_3) {
-                    if (!(camera->flags & CAMERA_FLAG_RENDER_ENTITIES)) {
-                        render_entities();
-                    }
-                    if (!(camera->flags & CAMERA_FLAG_RENDER_MODELS)) {
-                        render_models();
-                    }
-                    render_player();
-                    render_npcs();
-                    render_workers_world();
-                    render_effects_world();
-                    execute_render_tasks();
-                    render_hud_elements_world();
-                } else {
-                    guOrthoF(camera->perspectiveMatrix, 0.0f, SCREEN_WIDTH, -SCREEN_HEIGHT, 0.0f, -1000.0f, 1000.0f,
-                             1.0f);
-                    guMtxF2L(camera->perspectiveMatrix, &gDisplayContext->camPerspMatrix[gCurrentCamID]);
-                    gSPMatrix(gMainGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCamID], G_MTX_NOPUSH |
-                              G_MTX_LOAD | G_MTX_PROJECTION);
-                    render_hud_elements_world();
-                    render_item_entities();
-                }
-            } else {
-                render_workers_world();
-                execute_render_tasks();
+                gSPPerspNormalize(gMainGfxPos++, camera->perspNorm);
             }
 
-            if (camera->fpDoPostRender != NULL) {
-                camera->fpDoPostRender(camera);
-            }
-
-            gDPPipeSync(gMainGfxPos++);
-            gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
-                             osVirtualToPhysical(nuGfxCfb_ptr));
-            gDPPipeSync(gMainGfxPos++);
+            guMtxF2L(camera->perspectiveMatrix, &gDisplayContext->camPerspMatrix[gCurrentCamID]);
+            gSPMatrix(gMainGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCamID], G_MTX_NOPUSH | G_MTX_LOAD |
+                        G_MTX_PROJECTION);
         }
+
+        camera->unkMatrix = &gDisplayContext->matrixStack[gMatrixListPos];
+        matrixListPos = gMatrixListPos++;
+        guRotate(&gDisplayContext->matrixStack[matrixListPos], -camera->trueRotation.x, 0.0f, 1.0f, 0.0f);
+        camera->vpAlt.vp.vtrans[0] = camera->vp.vp.vtrans[0] + gGameStatusPtr->unk_82;
+        camera->vpAlt.vp.vtrans[1] = camera->vp.vp.vtrans[1] + gGameStatusPtr->unk_83;
+
+        if (!(camera->flags & CAMERA_FLAG_ORTHO)) {
+            if (gCurrentCamID != CAM_3) {
+                if (!(camera->flags & CAMERA_FLAG_RENDER_ENTITIES)) {
+                    render_entities();
+                }
+                if (!(camera->flags & CAMERA_FLAG_RENDER_MODELS)) {
+                    render_models();
+                }
+                render_player();
+                render_npcs();
+                render_workers_world();
+                render_effects_world();
+                execute_render_tasks();
+                render_hud_elements_world();
+            } else {
+                guOrthoF(camera->perspectiveMatrix, 0.0f, SCREEN_WIDTH, -SCREEN_HEIGHT, 0.0f, -1000.0f, 1000.0f,
+                            1.0f);
+                guMtxF2L(camera->perspectiveMatrix, &gDisplayContext->camPerspMatrix[gCurrentCamID]);
+                gSPMatrix(gMainGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCamID], G_MTX_NOPUSH |
+                            G_MTX_LOAD | G_MTX_PROJECTION);
+                render_hud_elements_world();
+                render_item_entities();
+            }
+        } else {
+            render_workers_world();
+            execute_render_tasks();
+        }
+
+        if (camera->fpDoPostRender != NULL) {
+            camera->fpDoPostRender(camera);
+        }
+
+        gDPPipeSync(gMainGfxPos++);
+        gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH,
+                            osVirtualToPhysical(nuGfxCfb_ptr));
+        gDPPipeSync(gMainGfxPos++);
     }
 }
 
@@ -236,8 +240,8 @@ void create_cameras_a(void) {
         gCameras[i].flags = 0;
     }
 
-    camDataPtr->flags = CAMERA_FLAG_ENABLED;
-    camDataPtr->updateMode = CAM_UPDATE_MODE_0;
+    camDataPtr->flags = CAMERA_FLAG_DISABLED;
+    camDataPtr->updateMode = CAM_UPDATE_MODE_INIT;
     camDataPtr->viewWidth = 160;
     camDataPtr->viewHeight = 120;
     camDataPtr->viewStartX = 0;
@@ -247,8 +251,8 @@ void create_cameras_a(void) {
     camDataPtr->vfov = 50;
     initialize_next_camera(camDataPtr);
 
-    camDataPtr->flags = CAMERA_FLAG_ENABLED;
-    camDataPtr->updateMode = CAM_UPDATE_MODE_0;
+    camDataPtr->flags = CAMERA_FLAG_DISABLED;
+    camDataPtr->updateMode = CAM_UPDATE_MODE_INIT;
     camDataPtr->viewWidth = 160;
     camDataPtr->viewHeight = 120;
     camDataPtr->viewStartX = 160;
@@ -258,8 +262,8 @@ void create_cameras_a(void) {
     camDataPtr->vfov = 50;
     initialize_next_camera(camDataPtr);
 
-    camDataPtr->flags = CAMERA_FLAG_ENABLED;
-    camDataPtr->updateMode = CAM_UPDATE_MODE_0;
+    camDataPtr->flags = CAMERA_FLAG_DISABLED;
+    camDataPtr->updateMode = CAM_UPDATE_MODE_INIT;
     camDataPtr->viewWidth = 160;
     camDataPtr->viewHeight = 120;
     camDataPtr->viewStartX = 0;
@@ -269,8 +273,8 @@ void create_cameras_a(void) {
     camDataPtr->vfov = 50;
     initialize_next_camera(camDataPtr);
 
-    camDataPtr->flags = CAMERA_FLAG_ENABLED;
-    camDataPtr->updateMode = CAM_UPDATE_MODE_0;
+    camDataPtr->flags = CAMERA_FLAG_DISABLED;
+    camDataPtr->updateMode = CAM_UPDATE_MODE_INIT;
     camDataPtr->viewWidth = 160;
     camDataPtr->viewHeight = 120;
     camDataPtr->viewStartX = 160;
@@ -290,8 +294,8 @@ void create_cameras_b(void) {
         gCameras[i].flags = 0;
     }
 
-    camDataPtr->flags = CAMERA_FLAG_ENABLED;
-    camDataPtr->updateMode = CAM_UPDATE_MODE_0;
+    camDataPtr->flags = CAMERA_FLAG_DISABLED;
+    camDataPtr->updateMode = CAM_UPDATE_MODE_INIT;
     camDataPtr->viewWidth = 160;
     camDataPtr->viewHeight = 120;
     camDataPtr->viewStartX = 0;
@@ -301,8 +305,8 @@ void create_cameras_b(void) {
     camDataPtr->vfov = 50;
     initialize_next_camera(camDataPtr);
 
-    camDataPtr->flags = CAMERA_FLAG_ENABLED;
-    camDataPtr->updateMode = CAM_UPDATE_MODE_0;
+    camDataPtr->flags = CAMERA_FLAG_DISABLED;
+    camDataPtr->updateMode = CAM_UPDATE_MODE_INIT;
     camDataPtr->viewWidth = 160;
     camDataPtr->viewHeight = 120;
     camDataPtr->viewStartX = 160;
@@ -312,8 +316,8 @@ void create_cameras_b(void) {
     camDataPtr->vfov = 50;
     initialize_next_camera(camDataPtr);
 
-    camDataPtr->flags = CAMERA_FLAG_ENABLED;
-    camDataPtr->updateMode = CAM_UPDATE_MODE_0;
+    camDataPtr->flags = CAMERA_FLAG_DISABLED;
+    camDataPtr->updateMode = CAM_UPDATE_MODE_INIT;
     camDataPtr->viewWidth = 160;
     camDataPtr->viewHeight = 120;
     camDataPtr->viewStartX = 0;
@@ -323,8 +327,8 @@ void create_cameras_b(void) {
     camDataPtr->vfov = 50;
     initialize_next_camera(camDataPtr);
 
-    camDataPtr->flags = CAMERA_FLAG_ENABLED;
-    camDataPtr->updateMode = CAM_UPDATE_MODE_0;
+    camDataPtr->flags = CAMERA_FLAG_DISABLED;
+    camDataPtr->updateMode = CAM_UPDATE_MODE_INIT;
     camDataPtr->viewWidth = 160;
     camDataPtr->viewHeight = 120;
     camDataPtr->viewStartX = 160;
@@ -364,7 +368,7 @@ Camera* initialize_next_camera(CameraInitData* initData) {
     camera->trueRotation.y = 0.0f;
     camera->trueRotation.z = 0.0f;
     camera->updateMode = initData->updateMode;
-    camera->unk_06 = TRUE;
+    camera->needsInit = TRUE;
     camera->nearClip = initData->nearClip;
     camera->farClip = initData->farClip;
     camera->vfov = initData->vfov;

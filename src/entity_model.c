@@ -244,8 +244,8 @@ void make_entity_model_mtx_flipZ(Matrix4f mtx) {
 void appendGfx_entity_model(EntityModel* model) {
     Matrix4f mtx;
     Matrix4f mtx2;
-    FoldImageRecPart foldImage;
-    Matrix4f foldMtx;
+    ImgFXTexture ifxImg;
+    Matrix4f imgfxMtx;
 
     gDisplayContext->matrixStack[gMatrixListPos] = model->transform;
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
@@ -393,15 +393,15 @@ void appendGfx_entity_model(EntityModel* model) {
         gSPSetOtherMode(gMainGfxPos++, G_SETOTHERMODE_H, G_MDSFT_ALPHADITHER, 18, G_AD_DISABLE | G_CD_DISABLE | G_CK_NONE | G_TC_FILT | G_TF_BILERP | G_TT_NONE | G_TL_TILE | G_TD_CLAMP | G_TP_PERSP | G_CYC_1CYCLE);
 
         imageData = model->gfx.imageData;
-        foldImage.raster = imageData->raster;
-        foldImage.palette = imageData->defaultPal;
-        foldImage.width = imageData->width;
-        foldImage.height = imageData->height;
-        foldImage.xOffset = -imageData->width / 2;
-        foldImage.yOffset = imageData->height / 2;
-        foldImage.opacity = 255;
-        guMtxL2F(foldMtx, &model->transform);
-        fold_appendGfx_component(0, &foldImage, 0, foldMtx);
+        ifxImg.raster = imageData->raster;
+        ifxImg.palette = imageData->defaultPal;
+        ifxImg.width = imageData->width;
+        ifxImg.height = imageData->height;
+        ifxImg.xOffset = -imageData->width / 2;
+        ifxImg.yOffset = imageData->height / 2;
+        ifxImg.alpha = 255;
+        guMtxL2F(imgfxMtx, &model->transform);
+        imgfx_appendGfx_component(0, &ifxImg, 0, imgfxMtx);
     }
 
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
@@ -551,8 +551,8 @@ void draw_entity_model_E(s32 modelIdx, Mtx* transformMtx) {
     EntityModel* model = (*gCurrentEntityModelList)[modelIdx & ~0x800];
     Matrix4f mtx;
     Matrix4f mtx2;
-    FoldImageRecPart foldImage;
-    Matrix4f foldMtx;
+    ImgFXTexture ifxImg;
+    Matrix4f imgfxMtx;
 
     if (model == NULL) {
         return;
@@ -702,15 +702,15 @@ void draw_entity_model_E(s32 modelIdx, Mtx* transformMtx) {
         gSPSetOtherMode(gMainGfxPos++, G_SETOTHERMODE_H, G_MDSFT_ALPHADITHER, 18, G_AD_DISABLE | G_CD_DISABLE | G_CK_NONE | G_TC_FILT | G_TF_BILERP | G_TT_NONE | G_TL_TILE | G_TD_CLAMP | G_TP_PERSP | G_CYC_1CYCLE);
 
         imageData = model->gfx.imageData;
-        foldImage.raster = imageData->raster;
-        foldImage.palette = imageData->defaultPal;
-        foldImage.width = imageData->width;
-        foldImage.height = imageData->height;
-        foldImage.xOffset = -imageData->width / 2;
-        foldImage.yOffset = imageData->height / 2;
-        foldImage.opacity = 255;
-        guMtxL2F(foldMtx, &model->transform);
-        fold_appendGfx_component(0, &foldImage, 0, foldMtx);
+        ifxImg.raster = imageData->raster;
+        ifxImg.palette = imageData->defaultPal;
+        ifxImg.width = imageData->width;
+        ifxImg.height = imageData->height;
+        ifxImg.xOffset = -imageData->width / 2;
+        ifxImg.yOffset = imageData->height / 2;
+        ifxImg.alpha = 255;
+        guMtxL2F(imgfxMtx, &model->transform);
+        imgfx_appendGfx_component(0, &ifxImg, 0, imgfxMtx);
     }
 
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);

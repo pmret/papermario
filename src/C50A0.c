@@ -658,7 +658,7 @@ void draw_coin_sparkles(ItemEntity* itemEntity) {
     Matrix4f sp58;
     Matrix4f sp98;
     Matrix4f spD8;
-    FoldImageRecPart foldImage;
+    ImgFXTexture ifxImg;
 
     x = D_80155D8C;
     y = D_80155D8E;
@@ -687,14 +687,14 @@ void draw_coin_sparkles(ItemEntity* itemEntity) {
     gDPSetCombineKey(gMainGfxPos++, G_CK_NONE);
     gDPSetAlphaCompare(gMainGfxPos++, G_AC_NONE);
 
-    foldImage.raster = itemEntity->sparkleRaster;
-    foldImage.palette = itemEntity->sparklePalette;
-    foldImage.width = itemEntity->sparkleWidth;
-    foldImage.height = itemEntity->sparkleHeight;
-    foldImage.xOffset = -itemEntity->sparkleWidth / 2;
-    foldImage.yOffset = itemEntity->sparkleHeight / 2;
-    foldImage.opacity = 255;
-    fold_appendGfx_component(0, &foldImage, 0, spD8);
+    ifxImg.raster = itemEntity->sparkleRaster;
+    ifxImg.palette = itemEntity->sparklePalette;
+    ifxImg.width = itemEntity->sparkleWidth;
+    ifxImg.height = itemEntity->sparkleHeight;
+    ifxImg.xOffset = -itemEntity->sparkleWidth / 2;
+    ifxImg.yOffset = itemEntity->sparkleHeight / 2;
+    ifxImg.alpha = 255;
+    imgfx_appendGfx_component(0, &ifxImg, 0, spD8);
 
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     gDPPipeSync(gMainGfxPos++);

@@ -80,7 +80,7 @@ void pulse_stone_notification_setup(void) {
 void appendGfx_pulse_stone_icon(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Matrix4f sp18, sp58;
-    FoldImageRecPart part;
+    ImgFXTexture ifxImg;
     s32 pingDelay;
     s32 dx, dy;
 
@@ -124,7 +124,7 @@ void appendGfx_pulse_stone_icon(void) {
                 break;
         }
 
-        part.palette = pulse_stone_icon_1_pal;
+        ifxImg.palette = pulse_stone_icon_1_pal;
         if (pingDelay >= 0) {
             PulseStonePtr->pingTime++;
             if (PulseStonePtr->pingTime >= pingDelay + 2) {
@@ -132,19 +132,19 @@ void appendGfx_pulse_stone_icon(void) {
                 sfx_play_sound_at_player(SOUND_7D, SOUND_SPACE_MODE_0);
             }
             if (PulseStonePtr->pingTime < 2) {
-                part.palette = pulse_stone_icon_2_pal;
+                ifxImg.palette = pulse_stone_icon_2_pal;
             } else {
-                part.palette = pulse_stone_icon_1_pal;
+                ifxImg.palette = pulse_stone_icon_1_pal;
             }
         }
 
-        part.raster  = pulse_stone_icon_img;
-        part.width   = pulse_stone_icon_img_width;
-        part.height  = pulse_stone_icon_img_height;
-        part.xOffset = -28;
-        part.yOffset = 46;
-        part.opacity = 255;
-        fold_appendGfx_component(0, &part, 0, sp58);
+        ifxImg.raster  = pulse_stone_icon_img;
+        ifxImg.width   = pulse_stone_icon_img_width;
+        ifxImg.height  = pulse_stone_icon_img_height;
+        ifxImg.xOffset = -28;
+        ifxImg.yOffset = 46;
+        ifxImg.alpha = 255;
+        imgfx_appendGfx_component(0, &ifxImg, 0, sp58);
         gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     }
 }

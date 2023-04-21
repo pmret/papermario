@@ -1480,11 +1480,11 @@ void render_player_model(void) {
                     }
 
                     playerStatus->renderMode = renderModeTemp;
-                    func_802DDEE4(PLAYER_SPRITE_MAIN, -1, 7, 0, 0, 0, playerStatus->alpha1, 0);
+                    set_player_imgfx_comp(PLAYER_SPRITE_MAIN, -1, IMGFX_SET_ALPHA, 0, 0, 0, playerStatus->alpha1, 0);
 
                 } else {
                     playerStatus->renderMode = RENDER_MODE_ALPHATEST;
-                    func_802DDEE4(PLAYER_SPRITE_MAIN, -1, 0, 0, 0, 0, 0, 0);
+                    set_player_imgfx_comp(PLAYER_SPRITE_MAIN, -1, IMGFX_CLEAR, 0, 0, 0, 0, 0);
                 }
             }
 
@@ -1542,7 +1542,7 @@ void appendGfx_player(void* data) {
         guMtxCatF(sp20, spA0, sp20);
         guTranslateF(sp60, 0.0f, playerStatus->colliderHeight * 0.5f, 0.0f);
         guMtxCatF(sp20, sp60, sp20);
-        guScaleF(spE0, SPRITE_WORLD_SCALE_F, SPRITE_WORLD_SCALE_D, SPRITE_WORLD_SCALE_D);
+        guScaleF(spE0, SPRITE_WORLD_SCALE_D, SPRITE_WORLD_SCALE_D, SPRITE_WORLD_SCALE_D);
         guMtxCatF(sp20, spE0, sp20);
         guTranslateF(sp60, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z);
         guMtxCatF(sp20, sp60, sp20);
@@ -1550,14 +1550,14 @@ void appendGfx_player(void* data) {
         if (playerStatus->animFlags & PA_FLAG_SHIVERING) {
             playerStatus->animFlags = playerStatus->animFlags & ~PA_FLAG_SHIVERING;
             playerStatus->shiverTime = 22;
-            func_802DDEE4(PLAYER_SPRITE_MAIN, -1, 0, 0, 0, 0, 0, 0);
-            func_802DDFF8(playerStatus->anim, FOLD_UPD_SET_ANIM, FOLD_ANIM_SHIVER, 1, 1, 0, 0);
+            set_player_imgfx_comp(PLAYER_SPRITE_MAIN, -1, IMGFX_CLEAR, 0, 0, 0, 0, 0);
+            set_player_imgfx_all(playerStatus->anim, IMGFX_SET_ANIM, IMGFX_ANIM_SHIVER, 1, 1, 0, 0);
         }
 
         if (playerStatus->shiverTime != 0) {
             playerStatus->shiverTime--;
             if (playerStatus->shiverTime == 0) {
-                func_802DDEE4(PLAYER_SPRITE_MAIN, -1, 0, 0, 0, 0, 0, 0);
+                set_player_imgfx_comp(PLAYER_SPRITE_MAIN, -1, IMGFX_CLEAR, 0, 0, 0, 0, 0);
             }
         }
 
@@ -1614,7 +1614,7 @@ void appendGfx_player_spin(void* data) {
                 tint = 100;
             }
 
-            func_802DDFF8(PLAYER_SPRITE_MAIN, FOLD_UPD_SET_COLOR, tint, tint, tint, 255, 0);
+            set_player_imgfx_all(PLAYER_SPRITE_MAIN, IMGFX_SET_COLOR, tint, tint, tint, 255, 0);
 
             guRotateF(rotation, yaw, 0.0f, -1.0f, 0.0f);
             guRotateF(mtx, clamp_angle(playerStatus->pitch), 0.0f, 0.0f, 1.0f);
@@ -1633,7 +1633,7 @@ void appendGfx_player_spin(void* data) {
 
             px = playerStatus->position.x;
             pz = playerStatus->position.z;
-            func_802DDEE4(PLAYER_SPRITE_MAIN, -1, 7, 0, 0, 0, 64, 0);
+            set_player_imgfx_comp(PLAYER_SPRITE_MAIN, -1, IMGFX_SET_ALPHA, 0, 0, 0, 64, 0);
             guRotateF(mtx, yaw, 0.0f, -1.0f, 0.0f);
             guRotateF(rotation, yaw, 0.0f, -1.0f, 0.0f);
             guRotateF(mtx, blurAngle, 0.0f, 1.0f, 0.0f);

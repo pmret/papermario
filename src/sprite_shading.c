@@ -6,7 +6,7 @@ extern SpriteShadingProfile wSpriteShadingProfile;
 extern SpriteShadingProfile bSpriteShadingProfile;
 extern SpriteShadingProfile wSpriteShadingProfileAux;
 extern SpriteShadingProfile bSpriteShadingProfileAux;
-extern s8 D_80159880[0x20];
+extern PAL_BIN SpriteShadingPalette[16];
 
 void appendGfx_shading_palette(Matrix4f mtx, s32 uls, s32 ult, s32 lrs, s32 lrt, s32 alpha,
                              f32 shadowX, f32 shadowY, f32 shadowZ,
@@ -384,7 +384,7 @@ void appendGfx_shading_palette(
     gDPSetPrimColor(gMainGfxPos++, 0, 0, shadowR, shadowG, shadowB, alpha);
     gDPSetCombineLERP(gMainGfxPos++, TEXEL1, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL0, COMBINED, TEXEL0, COMBINED_ALPHA,
                       TEXEL0, PRIMITIVE, 0, TEXEL0, 0);
-    gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, D_80159880);
+    gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, SpriteShadingPalette);
     gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, 0, 0, 16, 1);
 
     gSPSetOtherMode(gMainGfxPos++, G_SETOTHERMODE_H, 4, 18,
@@ -409,7 +409,7 @@ void appendGfx_shading_palette(
         camera->viewportStartY + camera->viewportH
     );
 
-    gDPLoadTLUT_pal16(gMainGfxPos++, 1, D_80159880);
+    gDPLoadTLUT_pal16(gMainGfxPos++, 1, SpriteShadingPalette);
 
     gSPSetOtherMode(gMainGfxPos++, G_SETOTHERMODE_H, 4, 18,
                     G_AD_DISABLE | G_CD_MAGICSQ | G_CK_NONE | G_TC_FILT | G_TF_BILERP | G_TT_RGBA16 | G_TL_TILE |
@@ -442,8 +442,12 @@ void func_801491E4(Matrix4f mtx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 alp
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, alpha);
 
     if (alpha == 255) {
-        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, TEXEL1, 0, 0, 0, TEXEL1, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED);
+        gDPSetCombineLERP(gMainGfxPos++,
+            0, 0, 0, TEXEL1, 0, 0, 0, TEXEL1,
+            0, 0, 0, COMBINED, 0, 0, 0, COMBINED);
     } else {
-        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED);
+        gDPSetCombineLERP(gMainGfxPos++,
+            0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0,
+            0, 0, 0, COMBINED, 0, 0, 0, COMBINED);
     }
 }

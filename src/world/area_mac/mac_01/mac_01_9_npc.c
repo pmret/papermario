@@ -416,20 +416,20 @@ EvtScript N(EVS_MerlonBargeOut) = {
         EVT_CALL(PlayerJump1, -222, 20, -158, 8 * DT)
         EVT_WAIT(5 * DT)
         EVT_CALL(SetPlayerFlagBits, PS_FLAG_NO_FLIPPING, FALSE)
-        EVT_CALL(N(KnockDownPlayerB), 1, 37)
-        EVT_CALL(N(KnockDownPlayerD), -215, 20, -158)
+        EVT_CALL(N(KnockdownCreate), SPR_Mario1, 37) //TODO hardcoded player raster ID
+        EVT_CALL(N(KnockdownSetPos), -215, 20, -158)
         EVT_WAIT(1)
         EVT_CALL(SetPlayerPos, -215, 1000, -158)
         EVT_CALL(MakeLerp, 0, 90, 10 * DT, EASING_QUADRATIC_IN)
         EVT_LOOP(0)
             EVT_CALL(UpdateLerp)
-            EVT_CALL(N(KnockDownPlayerE), LVar0, 0, 0)
+            EVT_CALL(N(KnockdownSetRot), LVar0, 0, 0)
             EVT_WAIT(1)
             EVT_IF_EQ(LVar1, 0)
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(N(KnockDownPlayerD), -215, 21, -158)
+        EVT_CALL(N(KnockdownSetPos), -215, 21, -158)
         EVT_CALL(PlaySoundAtPlayer, SOUND_162, SOUND_SPACE_MODE_0)
     EVT_END_THREAD
     EVT_WAIT(50 * DT)
@@ -440,18 +440,18 @@ EvtScript N(EVS_MerlonBargeOut) = {
     EVT_CALL(GetAngleToPlayer, NPC_Merlon, LVar0)
     EVT_CALL(InterpNpcYaw, NPC_Merlon, LVar0, 5)
     EVT_CALL(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_0021)
-    EVT_CALL(N(KnockDownPlayerD), -215, 20, -158)
+    EVT_CALL(N(KnockdownSetPos), -215, 20, -158)
     EVT_CALL(MakeLerp, 90, 0, 15 * DT, EASING_QUADRATIC_OUT)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)
-        EVT_CALL(N(KnockDownPlayerE), LVar0, 0, 0)
+        EVT_CALL(N(KnockdownSetRot), LVar0, 0, 0)
         EVT_WAIT(1)
         EVT_IF_EQ(LVar1, 0)
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
     EVT_CALL(SetPlayerPos, -222, 20, -158)
-    EVT_CALL(N(KnockDownPlayerC))
+    EVT_CALL(N(KnockdownDestroy))
     EVT_CALL(InterpPlayerYaw, 90, 0)
     EVT_CALL(SetPlayerActionState, ACTION_STATE_JUMP)
     EVT_CALL(SetPlayerJumpscale, EVT_FLOAT(1.0))
@@ -1792,8 +1792,8 @@ EvtScript N(EVS_ToadHouse_GetInBed) = {
     EVT_CALL(InterpPlayerYaw, 263, 1)
     EVT_CALL(HidePlayerShadow, TRUE)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Still)
-    EVT_CALL(SetPlayerFoldFlags, FOLD_STATE_FLAG_800)
-    EVT_CALL(UpdatePlayerFold, ANIM_Mario1_Idle, FOLD_UPD_SET_ANIM, FOLD_ANIM_GET_IN_BED, 1, 1, 0)
+    EVT_CALL(SetPlayerImgFXFlags, IMGFX_FLAG_800)
+    EVT_CALL(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_SET_ANIM, IMGFX_ANIM_GET_IN_BED, 1, 1, 0)
     EVT_THREAD
         EVT_WAIT(60)
         EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_SleepStanding)
@@ -1814,7 +1814,7 @@ EvtScript N(EVS_ToadHouse_GetInBed) = {
 EvtScript N(EVS_ToadHouse_ReturnFromRest) = {
     EVT_EXEC(N(EVS_SetupMusic))
     EVT_CALL(HidePlayerShadow, FALSE)
-    EVT_CALL(UpdatePlayerFold, ANIM_Mario1_Idle, FOLD_UPD_CLEAR, 0, 0, 0, 0)
+    EVT_CALL(UpdatePlayerImgFX, ANIM_Mario1_Idle, IMGFX_CLEAR, 0, 0, 0, 0)
     EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0))
     EVT_CALL(SetPlayerPos, 568, 20, -186)
     EVT_CALL(PlayerMoveTo, 525, -168, 20)

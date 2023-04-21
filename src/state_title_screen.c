@@ -117,15 +117,15 @@ void state_init_title_screen(void) {
 
     create_cameras_a();
     gCameras[CAM_DEFAULT].updateMode = CAM_UPDATE_MODE_6;
-    gCameras[CAM_DEFAULT].unk_06 = TRUE;
+    gCameras[CAM_DEFAULT].needsInit = TRUE;
     gCameras[CAM_DEFAULT].nearClip = CAM_NEAR_CLIP;
     gCameras[CAM_DEFAULT].farClip = CAM_FAR_CLIP;
     gCurrentCameraID = CAM_DEFAULT;
     gCameras[CAM_DEFAULT].vfov = 25.0f;
-    gCameras[CAM_DEFAULT].flags |= CAMERA_FLAG_ENABLED;
-    gCameras[CAM_BATTLE].flags |= CAMERA_FLAG_ENABLED;
-    gCameras[CAM_TATTLE].flags |= CAMERA_FLAG_ENABLED;
-    gCameras[CAM_3].flags |= CAMERA_FLAG_ENABLED;
+    gCameras[CAM_DEFAULT].flags |= CAMERA_FLAG_DISABLED;
+    gCameras[CAM_BATTLE].flags |= CAMERA_FLAG_DISABLED;
+    gCameras[CAM_TATTLE].flags |= CAMERA_FLAG_DISABLED;
+    gCameras[CAM_3].flags |= CAMERA_FLAG_DISABLED;
     set_cam_viewport(0, 12, 28, 296, 184);
     gCameras[CAM_DEFAULT].auxBoomLength = 40;
     gCameras[CAM_DEFAULT].bgColor[0] = 0;
@@ -370,8 +370,8 @@ void appendGfx_title_screen(void) {
     gDPSetTextureConvert(gMainGfxPos++, G_TC_FILT);
     gDPSetCombineKey(gMainGfxPos++, G_CK_NONE);
     gDPSetAlphaCompare(gMainGfxPos++, G_AC_NONE);
-    render_frame(0);
-    render_frame(1);
+    render_frame(FALSE);
+    render_frame(TRUE);
 }
 
 void draw_title_screen_NOP(void) {

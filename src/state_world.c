@@ -20,7 +20,7 @@ void state_step_world(void) {
 void state_drawUI_world(void) {
     draw_status_ui();
     draw_encounter_ui();
-    func_8013A6E8();
+    imgfx_update_cache();
 }
 
 void state_world_draw_aux_ui(void) {

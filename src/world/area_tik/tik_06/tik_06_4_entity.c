@@ -11,7 +11,7 @@ EvtScript N(EVS_MonitorPlayerFallDown) = {
         EVT_IF_GE(LVar1, -10)
             EVT_GOTO(0)
         EVT_END_IF
-    EVT_CALL(func_802CA988, 0, LVar2, LVar3, LVar4, LVar5)
+    EVT_CALL(func_802CA988, CAM_DEFAULT, LVar2, LVar3, LVar4, LVar5)
     EVT_LABEL(1)
         EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
         EVT_WAIT(1)

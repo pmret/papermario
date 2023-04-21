@@ -294,9 +294,9 @@ EvtScript N(EVS_HuffNPuff_Defeat_Flashing) = {
             EVT_CALL(MakeLerp, 0, 255, 10, EASING_QUADRATIC_OUT)
             EVT_LOOP(0)
                 EVT_CALL(UpdateLerp)
-                EVT_CALL(SetNpcFoldParams, NPC_HuffNPuff_01, FOLD_TYPE_9, LVar0, LVar0, LVar0, 0)
-                EVT_CALL(SetNpcFoldParams, NPC_HuffNPuff_02, FOLD_TYPE_9, LVar0, LVar0, LVar0, 0)
-                EVT_CALL(SetNpcFoldParams, NPC_HuffNPuff_03, FOLD_TYPE_9, LVar0, LVar0, LVar0, 0)
+                EVT_CALL(SetNpcImgFXParams, NPC_HuffNPuff_01, IMGFX_SET_WHITE_FADE, LVar0, LVar0, LVar0, 0)
+                EVT_CALL(SetNpcImgFXParams, NPC_HuffNPuff_02, IMGFX_SET_WHITE_FADE, LVar0, LVar0, LVar0, 0)
+                EVT_CALL(SetNpcImgFXParams, NPC_HuffNPuff_03, IMGFX_SET_WHITE_FADE, LVar0, LVar0, LVar0, 0)
                 EVT_WAIT(1)
                 EVT_IF_EQ(LVar1, 0)
                     EVT_BREAK_LOOP

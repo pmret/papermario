@@ -3,7 +3,7 @@
 
 typedef struct FallingSprite {
     /* 0x00 */ s32 animationEnabled;
-    /* 0x04 */ s32 foldStateID;
+    /* 0x04 */ s32 imgfxIdx;
     /* 0x08 */ s32 workerID;
     /* 0x0C */ s32 playerSpriteID;
     /* 0x10 */ s32 rasterID;
@@ -17,7 +17,7 @@ typedef struct FallingSprite {
 BSS FallingSprite N(Falling);
 
 void N(appendGfx_FallingSprite)(void) {
-    FoldImageRecPart foldImage;
+    ImgFXTexture ifxImg;
     SpriteRasterInfo rasterInfo;
     Matrix4f mtxTransform;
     Matrix4f mtxTemp;
@@ -66,14 +66,14 @@ void N(appendGfx_FallingSprite)(void) {
     }
 
     spr_get_player_raster_info(&rasterInfo, falling->playerSpriteID, falling->rasterID);
-    foldImage.raster = rasterInfo.raster;
-    foldImage.palette = rasterInfo.defaultPal;
-    falling->width  = foldImage.width = rasterInfo.width;
-    falling->height = foldImage.height = rasterInfo.height;
-    foldImage.xOffset = -(rasterInfo.width / 2);
-    foldImage.yOffset = rasterInfo.height / 2;
-    foldImage.opacity = 255;
-    fold_appendGfx_component(falling->foldStateID, &foldImage, 0, mtxTransform);
+    ifxImg.raster = rasterInfo.raster;
+    ifxImg.palette = rasterInfo.defaultPal;
+    falling->width  = ifxImg.width = rasterInfo.width;
+    falling->height = ifxImg.height = rasterInfo.height;
+    ifxImg.xOffset = -(rasterInfo.width / 2);
+    ifxImg.yOffset = rasterInfo.height / 2;
+    ifxImg.alpha = 255;
+    imgfx_appendGfx_component(falling->imgfxIdx, &ifxImg, 0, mtxTransform);
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
 
@@ -94,13 +94,13 @@ API_CALLABLE(N(InitializeFallingSprite)) {
     falling->scale.y = SPRITE_WORLD_SCALE_F;
     falling->scale.z = SPRITE_WORLD_SCALE_F;
    
-    falling->foldStateID = func_8013A704(1);
+    falling->imgfxIdx = imgfx_get_free_instances(1);
     falling->workerID = create_worker_world(0, &N(appendGfx_FallingSprite));
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(DeleteFallingSprite)) {
-    func_8013A854(N(Falling).foldStateID);
+    imgfx_release_instance(N(Falling).imgfxIdx);
     free_worker(N(Falling).workerID);
     return ApiStatus_DONE2;
 }

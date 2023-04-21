@@ -45,7 +45,7 @@ EvtScript N(EVS_Kolorado_TrompImpact) = {
     EVT_CALL(SetNpcRotationPivot, NPC_Kolorado, 13)
     EVT_CALL(SetNpcRotation, NPC_Kolorado, 0, 0, 250)
     EVT_CALL(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_HurtStill)
-    EVT_CALL(SetNpcFoldParams, NPC_Kolorado, FOLD_UPD_WAVY, EVT_FLOAT(3.0), EVT_FLOAT(3.0), 0, 0)
+    EVT_CALL(SetNpcImgFXParams, NPC_Kolorado, IMGFX_SET_WAVY, EVT_FLOAT(3.0), EVT_FLOAT(3.0), 0, 0)
     EVT_CALL(PlaySoundAtNpc, NPC_Kolorado, SOUND_HIT_PLAYER_NORMAL, SOUND_SPACE_MODE_0)
     EVT_THREAD
         EVT_CALL(SetNpcCollisionSize, NPC_Kolorado, 20, 24)
@@ -70,7 +70,7 @@ EvtScript N(EVS_Kolorado_HurtInit) = {
     EVT_CALL(SetNpcRotationPivot, NPC_Kolorado, 13)
     EVT_CALL(SetNpcRotation, NPC_Kolorado, 0, 0, 250)
     EVT_CALL(SetNpcAnimation, NPC_Kolorado, ANIM_Kolorado_HurtStill)
-    EVT_CALL(SetNpcFoldParams, NPC_Kolorado, FOLD_UPD_WAVY, EVT_FLOAT(3.0), EVT_FLOAT(3.0), 0, 0)
+    EVT_CALL(SetNpcImgFXParams, NPC_Kolorado, IMGFX_SET_WAVY, EVT_FLOAT(3.0), EVT_FLOAT(3.0), 0, 0)
     EVT_RETURN
     EVT_END
 };
