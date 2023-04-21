@@ -23,8 +23,6 @@ static s32 gPauseTabsIconIDs[6];
 static s32 gPauseTabsPreviousTab;
 static s32 gPauseTabsHorizScrollPos;
 
-HudScript* gPauseTabsHudScripts[] = { &HES_HeaderStats, &HES_HeaderBadges, &HES_HeaderItems,
-                            &HES_HeaderParty, &HES_HeaderSpirits, &HES_HeaderMap };
 #if VERSION_PAL
 extern HudScript HES_HeaderStats_de;
 extern HudScript HES_HeaderBadges_de;
@@ -47,19 +45,27 @@ extern HudScript HES_HeaderParty_es;
 extern HudScript HES_HeaderSpirits_es;
 extern HudScript HES_HeaderMap_es;
 
-HudScript* gPauseTabsHudScripts_de_fr_es[][6] = {
-        // TODO: add English to this array
-        {
-                &HES_HeaderStats_de, &HES_HeaderBadges_de, &HES_HeaderItems_de,
-                &HES_HeaderParty_de, &HES_HeaderSpirits_de, &HES_HeaderMap_de
-        }, {
-                &HES_HeaderStats_fr, &HES_HeaderBadges_fr, &HES_HeaderItems_fr,
-                &HES_HeaderParty_fr, &HES_HeaderSpirits_fr, &HES_HeaderMap_fr
-        }, {
-                &HES_HeaderStats_es, &HES_HeaderBadges_es, &HES_HeaderItems_es,
-                &HES_HeaderParty_es, &HES_HeaderSpirits_es, &HES_HeaderMap_es
-        },
+HudScript* gPauseTabsHudScripts[][6] = {
+    [LANGUAGE_EN] = {
+        &HES_HeaderStats, &HES_HeaderBadges, &HES_HeaderItems,
+        &HES_HeaderParty, &HES_HeaderSpirits, &HES_HeaderMap
+    },
+    [LANGUAGE_DE] = {
+        &HES_HeaderStats_de, &HES_HeaderBadges_de, &HES_HeaderItems_de,
+        &HES_HeaderParty_de, &HES_HeaderSpirits_de, &HES_HeaderMap_de
+    },
+    [LANGUAGE_FR] = {
+        &HES_HeaderStats_fr, &HES_HeaderBadges_fr, &HES_HeaderItems_fr,
+        &HES_HeaderParty_fr, &HES_HeaderSpirits_fr, &HES_HeaderMap_fr
+    },
+    [LANGUAGE_ES] = {
+        &HES_HeaderStats_es, &HES_HeaderBadges_es, &HES_HeaderItems_es,
+        &HES_HeaderParty_es, &HES_HeaderSpirits_es, &HES_HeaderMap_es
+    },
 };
+#else
+HudScript* gPauseTabsHudScripts[] = { &HES_HeaderStats, &HES_HeaderBadges, &HES_HeaderItems,
+                            &HES_HeaderParty, &HES_HeaderSpirits, &HES_HeaderMap };
 #endif
 s8 gPauseTabsGridData[] = { 0, 1, 2, 3, 4, 5 };
 u8 gPauseTabsPanelIDs[] = { 1, 2, 3, 4, 5, 6 };

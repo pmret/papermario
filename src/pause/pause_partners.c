@@ -35,28 +35,32 @@ static f32 gPausePartnersRotAngle;
 static s32 gPausePartnersLevel;
 static s32 gPausePartnersNumPartners;
 
-HudScript* gPausePartnersIconScripts[] = {
-    &HES_FPCost, &HES_StatFp_1, &HES_PartnerRank, &HES_PartnerRank,
-    &HES_MoveDiamond, &HES_MoveBlueOrb, &HES_MoveGreenOrb, &HES_MoveRedOrb
-};
-
 #if VERSION_PAL
 extern HudScript HES_FPCost_de;
 extern HudScript HES_FPCost_fr;
 extern HudScript HES_FPCost_es;
 
-HudScript* gPausePartnersIconScripts_de[] = {
-    &HES_FPCost_de, &HES_StatFp_1, &HES_PartnerRank, &HES_PartnerRank,
-    &HES_MoveDiamond, &HES_MoveBlueOrb, &HES_MoveGreenOrb, &HES_MoveRedOrb
+HudScript* gPausePartnersIconScripts[][8] = {
+    [LANGUAGE_EN] = {
+        &HES_FPCost, &HES_StatFp_1, &HES_PartnerRank, &HES_PartnerRank,
+        &HES_MoveDiamond, &HES_MoveBlueOrb, &HES_MoveGreenOrb, &HES_MoveRedOrb
+    },
+    [LANGUAGE_DE] = {
+        &HES_FPCost_de, &HES_StatFp_1, &HES_PartnerRank, &HES_PartnerRank,
+        &HES_MoveDiamond, &HES_MoveBlueOrb, &HES_MoveGreenOrb, &HES_MoveRedOrb
+    },
+    [LANGUAGE_FR] = {
+        &HES_FPCost_fr, &HES_StatFp_1, &HES_PartnerRank, &HES_PartnerRank,
+        &HES_MoveDiamond, &HES_MoveBlueOrb, &HES_MoveGreenOrb, &HES_MoveRedOrb
+    },
+    [LANGUAGE_ES] = {
+        &HES_FPCost_es, &HES_StatFp_1, &HES_PartnerRank, &HES_PartnerRank,
+        &HES_MoveDiamond, &HES_MoveBlueOrb, &HES_MoveGreenOrb, &HES_MoveRedOrb
+    },
 };
-
-HudScript* gPausePartnersIconScripts_fr[] = {
-    &HES_FPCost_fr, &HES_StatFp_1, &HES_PartnerRank, &HES_PartnerRank,
-    &HES_MoveDiamond, &HES_MoveBlueOrb, &HES_MoveGreenOrb, &HES_MoveRedOrb
-};
-
-HudScript* gPausePartnersIconScripts_es[] = {
-    &HES_FPCost_es, &HES_StatFp_1, &HES_PartnerRank, &HES_PartnerRank,
+#else
+HudScript* gPausePartnersIconScripts[] = {
+    &HES_FPCost, &HES_StatFp_1, &HES_PartnerRank, &HES_PartnerRank,
     &HES_MoveDiamond, &HES_MoveBlueOrb, &HES_MoveGreenOrb, &HES_MoveRedOrb
 };
 #endif

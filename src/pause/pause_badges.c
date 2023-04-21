@@ -50,11 +50,7 @@ static s32 gPauseBadgesIconIDs[22];
 #define OFFSET_3_Y 74
 #endif
 
-#if !VERSION_PAL
-// TODO: find a neat way to do this
-#define LANGUAGE_EN 0
-#endif
-
+#if VERSION_PAL
 HudScript* gPauseBadgesElements[][22] = {
     [LANGUAGE_EN] = {
         &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
@@ -64,7 +60,6 @@ HudScript* gPauseBadgesElements[][22] = {
         &HES_StatBp, &HES_ListPrevPage, &HES_ListNextPage,
         &HES_Dash, &HES_LabelBpNeeded, &HES_StatusStar1
     },
-#if VERSION_PAL
     [LANGUAGE_DE] = {
         &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
         &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
@@ -89,8 +84,17 @@ HudScript* gPauseBadgesElements[][22] = {
         &HES_StatBp, &HES_ListPrevPage, &HES_ListNextPage,
         &HES_Dash, &HES_LabelBpNeeded_es, &HES_StatusStar1
     },
-#endif
 };
+#else
+HudScript* gPauseBadgesElements[] = {
+    &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
+    &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
+    &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
+    &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
+    &HES_StatBp, &HES_ListPrevPage, &HES_ListNextPage,
+    &HES_Dash, &HES_LabelBpNeeded, &HES_StatusStar1
+};
+#endif
 
 MenuWindowBP gPauseBadgesWindowBPs[] = {
     {
@@ -848,7 +852,7 @@ void pause_badges_init(MenuPanel* panel) {
     }
 
     for (i = 0; i < ARRAY_COUNT(gPauseBadgesIconIDs); i++) {
-        s32 iconID = hud_element_create(gPauseBadgesElements[0][i]);
+        s32 iconID = hud_element_create(gPauseBadgesElements[i]);
 
         gPauseBadgesIconIDs[i] = iconID;
         hud_element_set_flags(iconID, HUD_ELEMENT_FLAG_80);
