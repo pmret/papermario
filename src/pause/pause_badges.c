@@ -50,6 +50,42 @@ static s32 gPauseBadgesIconIDs[22];
 #define OFFSET_3_Y 74
 #endif
 
+#if VERSION_PAL
+HudScript* gPauseBadgesElements[][22] = {
+    [LANGUAGE_EN] = {
+        &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
+        &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
+        &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
+        &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
+        &HES_StatBp, &HES_ListPrevPage, &HES_ListNextPage,
+        &HES_Dash, &HES_LabelBpNeeded, &HES_StatusStar1
+    },
+    [LANGUAGE_DE] = {
+        &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
+        &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
+        &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
+        &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
+        &HES_StatBp, &HES_ListPrevPage, &HES_ListNextPage,
+        &HES_Dash, &HES_LabelBpNeeded_de, &HES_StatusStar1
+    },
+    [LANGUAGE_FR] = {
+        &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
+        &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
+        &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
+        &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
+        &HES_StatBp, &HES_ListPrevPage, &HES_ListNextPage,
+        &HES_Dash, &HES_LabelBpNeeded_fr, &HES_StatusStar1
+    },
+    [LANGUAGE_ES] = {
+        &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
+        &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
+        &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
+        &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
+        &HES_StatBp, &HES_ListPrevPage, &HES_ListNextPage,
+        &HES_Dash, &HES_LabelBpNeeded_es, &HES_StatusStar1
+    },
+};
+#else
 HudScript* gPauseBadgesElements[] = {
     &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
     &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
@@ -58,6 +94,8 @@ HudScript* gPauseBadgesElements[] = {
     &HES_StatBp, &HES_ListPrevPage, &HES_ListNextPage,
     &HES_Dash, &HES_LabelBpNeeded, &HES_StatusStar1
 };
+#endif
+
 MenuWindowBP gPauseBadgesWindowBPs[] = {
     {
         .windowID = WINDOW_ID_PAUSE_BADGES,
@@ -277,6 +315,9 @@ void pause_badges_draw_bp_orbs(s32 orbState, s32 x, s32 y) {
     }
 }
 
+#if VERSION_PAL
+INCLUDE_ASM(void, "pause/pause_badges", pause_badges_draw_contents);
+#else
 void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     s32 pageIndex, i;
     s32 badgeIndex;
@@ -705,6 +746,7 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
         }
     }
 }
+#endif
 
 void pause_badges_load_badges(s32 onlyEquipped) {
     PlayerData* playerData = &gPlayerData;
@@ -790,6 +832,9 @@ void pause_badges_load_badges(s32 onlyEquipped) {
     gPauseBadgesTargetScrollPos = gPauseBadgesCurrentScrollPos = pause_badges_get_pos_y(0, 0);
 }
 
+#if VERSION_PAL
+INCLUDE_ASM(void, "pause/pause_badges", pause_badges_init);
+#else
 void pause_badges_init(MenuPanel* panel) {
     s32 i;
 
@@ -819,6 +864,7 @@ void pause_badges_init(MenuPanel* panel) {
     setup_pause_menu_tab(gPauseBadgesWindowBPs, ARRAY_COUNT(gPauseBadgesWindowBPs));
     panel->initialized = TRUE;
 }
+#endif
 
 void pause_badges_handle_input(MenuPanel* panel) {
     s32 selectedIndex = gPauseBadgesSelectedIndex;
@@ -964,7 +1010,7 @@ void pause_badges_handle_input(MenuPanel* panel) {
             gPauseCurrentDescIconScript = NULL;
         }
     } else {
-        gPauseCurrentDescMsg = pause_get_menu_msg(gPauseBadgesCurrentTab == 0 ? 0x4C : 0x4D);
+        gPauseCurrentDescMsg = pause_get_menu_msg(gPauseBadgesCurrentTab == 0 ? PAUSE_MSG_BAGDE_DESC_ALL : PAUSE_MSG_BAGDE_DESC_ACTIVE);
         gPauseCurrentDescIconScript = NULL;
     }
 
