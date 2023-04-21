@@ -4142,9 +4142,9 @@ void mdl_create_model(ModelBlueprint* bp, s32 arg1) {
     if (prop != NULL) {
         model->texPannerID = prop->data.s & 0xF;
     } else {
-        model->texPannerID = 0;
+        model->texPannerID = TEX_PANNER_0;
     }
-    model->customGfxIndex = 0;
+    model->customGfxIndex = CUSTOM_GFX_0;
 
     if (node->type != SHAPE_TYPE_GROUP) {
         prop = get_model_property(node, MODEL_PROP_KEY_RENDER_MODE);
@@ -4213,17 +4213,17 @@ void mdl_create_model(ModelBlueprint* bp, s32 arg1) {
 
 // Mysterious no-op
 void iterate_models(void) {
-    Model* nonNull;
-    Model* ret;
+    Model* last = NULL;
+    Model* mdl;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentModels); i++) {
-        ret = (*gCurrentModels)[i];
-        if (ret != NULL) {
-            nonNull = ret;
+        mdl = (*gCurrentModels)[i];
+        if (mdl != NULL) {
+            last = mdl;
         }
     }
-    ret = nonNull;
+    mdl = last;
 }
 
 void func_80116698(void) {
@@ -4284,9 +4284,10 @@ void func_80116698(void) {
             if (!(mtg->flags & MODEL_TRANSFORM_GROUP_FLAG_1000)) {
                 if (mtg->matrixMode != 0) {
                     mtg->matrixMode--;
-                    if (!(mtg->matrixMode & 0xFF)) {
+                    if (mtg->matrixMode == 0) {
                         mtg->matrixA = *mtg->transformMtx;
                     }
+                    // store transformMtx on stack
                     mtx = mtg->transformMtx;
                     mtg->transformMtx = &gDisplayContext->matrixStack[gMatrixListPos++];
                     *mtg->transformMtx = *mtx;
@@ -5473,7 +5474,6 @@ void build_custom_gfx(void) {
 
 // weird temps necessary to match
 /// @returns TRUE if mtx is NULL or identity.
-// TODO takes a Matrix4f, not a Matrix4s - types being weird
 s32 is_identity_fixed_mtx(Mtx* mtx) {
     s32* mtxIt = (s32*)mtx;
     s32* identityIt;
