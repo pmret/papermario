@@ -3,7 +3,7 @@
 
 #include "common.h"
 
-extern MenuPanel* filemenu_menus[4];
+extern MenuPanel* filemenu_menus[];
 
 extern s32 filemenu_iterFileIdx;
 extern s32 filemenu_pressedButtons;
@@ -18,6 +18,12 @@ extern s32 filemenu_8024C0A4[3];
 extern s32 filemenu_hudElemIDs[20];
 extern s32 filemenu_createfile_hudElems[4];
 extern u8 filemenu_filename[8];
+
+#if VERSION_PAL
+extern s32 D_802517D0[1];
+extern s32 D_802517D4[1];
+extern u16 D_802517E0[2][0x400];
+#endif
 
 #define WINDOW_UPDATE_FUNC(name) void (name)( \
     s32 windowIdx,\
@@ -50,6 +56,10 @@ WINDOW_UPDATE_FUNC(filemenu_update_hidden_name_confirm);
 WINDOW_UPDATE_FUNC(main_menu_window_update);
 
 WINDOW_UPDATE_FUNC(filemenu_update_show_title);
+
+#if VERSION_PAL
+WINDOW_UPDATE_FUNC(filemenu_pal_80248018);
+#endif
 
 void filemenu_draw_file_name(u8*, s32, s32, s32, s32, s32, s32, s32);
 void filemenu_draw_contents_title(MenuPanel*, s32, s32, s32, s32, s32, s32);

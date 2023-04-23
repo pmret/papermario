@@ -10,6 +10,12 @@
 #define CREATE_SUCCESS_NUMBER_X 48
 #endif
 
+#if VERSION_PAL
+#define PAGE_ID (3)
+#else
+#define PAGE_ID (4)
+#endif
+
 u8 filemenu_info_gridData[] = {
     0, 0, 0, 0
 };
@@ -47,6 +53,9 @@ MenuPanel filemenu_info_menuBP = {
     .fpCleanup = &filemenu_info_cleanup
 };
 
+#if VERSION_PAL
+INCLUDE_ASM(void, "filemenu/filemenu_info", filemenu_info_draw_message_contents);
+#else
 void filemenu_info_draw_message_contents(
     MenuPanel* menu,
     s32 baseX, s32 baseY,
@@ -89,6 +98,7 @@ void filemenu_info_draw_message_contents(
     }
     filemenu_set_cursor_alpha(0);
 }
+#endif
 
 void filemenu_info_init(MenuPanel* tab) {
     s32 i;
@@ -116,7 +126,7 @@ void filemenu_info_handle_input(MenuPanel* menu) {
                 set_window_update(WINDOW_ID_FILEMENU_OPTION_RIGHT, (s32)filemenu_update_show_options_bottom);
                 filemenu_set_selected(menu, 0, 2);
                 break;
-            case 4:
+            case PAGE_ID:
                 menu->page = 0;
                 set_window_update(WINDOW_ID_FILEMENU_STEREO, (s32)filemenu_update_show_options_left);
                 set_window_update(WINDOW_ID_FILEMENU_MONO, (s32)filemenu_update_show_options_right);
@@ -124,10 +134,12 @@ void filemenu_info_handle_input(MenuPanel* menu) {
                 set_window_update(WINDOW_ID_FILEMENU_OPTION_RIGHT, (s32)filemenu_update_show_options_bottom);
                 filemenu_set_selected(menu, 1, 2);
                 break;
+#if !VERSION_PAL
             case 2:
                 menu->page = 2;
                 filemenu_set_selected(menu, 1, 2);
                 break;
+#endif
         }
         set_window_update(WINDOW_ID_FILEMENU_INFO, WINDOW_UPDATE_HIDE);
     }

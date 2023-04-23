@@ -10,9 +10,18 @@ extern MenuPanel filemenu_main_menuBP;
 extern MenuPanel filemenu_yesno_menuBP;
 extern MenuPanel filemenu_info_menuBP;
 extern MenuPanel filemenu_createfile_menuBP;
+extern MenuPanel filemenu_pal_menuBP;
 
 HudScript* filemenu_cursor_hudElemScripts[] = { &HES_AnimatedCursorHand };
-MenuPanel* filemenu_menus[] = { &filemenu_main_menuBP, &filemenu_yesno_menuBP, &filemenu_info_menuBP, &filemenu_createfile_menuBP };
+MenuPanel* filemenu_menus[] = {
+    &filemenu_main_menuBP,
+    &filemenu_yesno_menuBP,
+    &filemenu_info_menuBP,
+    &filemenu_createfile_menuBP,
+#if VERSION_PAL
+    &filemenu_pal_menuBP,
+#endif
+};
 s32 filemenu_cursor_posX = SCREEN_WIDTH / 2;
 s32 filemenu_cursor_posY = -SCREEN_HEIGHT / 2;
 s32 filemenu_cursor_alpha = 0;
@@ -21,7 +30,9 @@ s32 filemenu_cursor_targetY = -SCREEN_HEIGHT / 2;
 s32 filemenu_cursorGoalAlpha = 0;
 s32 filemenu_cursorGoalAlpha2 = 0;
 s32 D_80249BB0 = TRUE;
+#if !VERSION_PAL
 s32 D_80249BB4 = 0;
+#endif
 s32 D_80249BB8 = 0;
 s16 D_80249BBC[16] = { 315, 303, 283, 260, 235, 210, 185, 160, 135, 110, 85, 60, 37, 17, 5, 0 };
 s16 D_80249BDC[16] = { 315, 303, 283, 260, 235, 210, 185, 160, 135, 110, 85, 60, 37, 17, 5, 0 };
@@ -39,6 +50,50 @@ s16 D_80249CF4[16] = { 180, 173, 161, 148, 134, 120, 105, 91, 77, 62, 48, 34, 21
 s16 D_80249D14[16] = { 0, 2, 9, 21, 34, 48, 62, 77, 91, 105, 120, 134, 148, 161, 173, 180 };
 s16 D_80249D34[10] = { 185, 160, 135, 110, 85, 60, 37, 17, 5, 0 };
 s16 D_80249D48[10] = { 0, 5, 17, 37, 60, 85, 110, 135, 160, 185};
+
+#if VERSION_PAL
+s16 D_filemenu_8024EB5C[] = {
+        0x00D2,
+        0x00B6,
+        0x00A2,
+        0x0091,
+        0x0082,
+        0x0075,
+        0x0069,
+        0x005C,
+        0x0050,
+        0x0043,
+        0x0037,
+        0x002A,
+        0x001E,
+        0x0012,
+        0x0008,
+        0x0002,
+        0x0000,
+};
+
+s16 D_filemenu_8024EB80[] = {
+        0xFFFE,
+        0xFFF8,
+        0xFFEE,
+        0xFFE2,
+        0xFFD6,
+        0xFFC9,
+        0xFFBD,
+        0xFFB0,
+        0xFFA4,
+        0xFF97,
+        0xFF8B,
+        0xFF7E,
+        0xFF72,
+        0xFF65,
+        0xFF59,
+        0xFF4C,
+        0xFF40,
+        0xFF33,
+};
+#endif
+
 s32 D_80249D4C = 0; // padding?
 Vp D_80249D60 = {
     .vp = {
@@ -115,6 +170,12 @@ BSS s32 filemenu_cursorHudElemID[1];
 BSS s32 filemenu_8024C0A4[3];
 BSS s32 filemenu_hudElemIDs[20];
 BSS s32 filemenu_createfile_hudElems[4];
+
+#if VERSION_PAL
+BSS s32 D_802517D0[1];
+BSS s32 D_802517D4[1];
+BSS u16 D_802517E0[2][0x400] ALIGNED(16);
+#endif
 
 #if VERSION_IQUE
 BSS u8 filemenu_glyphBuffer[20][0x80];
@@ -717,6 +778,96 @@ void filemenu_update_hidden_name_confirm(
     }
 }
 
+#if VERSION_PAL
+void filemenu_update_pal_80247f40(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, f32* scaleX, f32* scaleY, f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity) {
+    Window* temp_t0;
+    s32 var_a1;
+    s32 var_a3;
+    s32 var_v1;
+
+    temp_t0 = &gWindows[windowIndex];
+    var_a1 = temp_t0->updateCounter;
+
+    var_a3 = 0;
+    switch (windowIndex) {
+        case 0x38:
+            var_a3 = 0;
+            break;
+        case 0x39:
+            var_a3 = 1;
+            break;
+        case 0x3A:
+            var_a3 = 2;
+            break;
+        case 0x3B:
+            var_a3 = 3;
+            break;
+    }
+    var_v1 = gCurrentLanguage;
+    var_v1 -= var_a3;
+    if (var_v1 < 0) {
+        var_v1 = -var_v1;
+    }
+    var_a1 -= (var_v1 * 3);
+    if (var_a1 < 0) {
+        var_a1 = 0;
+    }
+    if (var_a1 == 0) {
+        temp_t0->flags &= 0xFB;
+    }
+    if (var_a1 < ARRAY_COUNT(D_filemenu_8024EB5C)) {
+        *posX -= D_filemenu_8024EB5C[var_a1];
+    } else {
+        *posX -= D_filemenu_8024EB5C[ARRAY_COUNT(D_filemenu_8024EB5C) - 1];
+        temp_t0->flags &= 0xF7;
+    }
+}
+
+void filemenu_pal_80248018(s32 windowIdx, s32* flags, s32* posX, s32* posY, s32* posZ, f32* scaleX, f32* scaleY, f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity) {
+    Window* temp_t0;
+    s32 var_a1;
+    s32 var_a3;
+    s32 var_v1;
+
+    temp_t0 = &gWindows[windowIdx];
+    var_a1 = temp_t0->updateCounter;
+
+    var_a3 = 0;
+    switch (windowIdx) {
+        case 0x38:
+            var_a3 = 0;
+            break;
+        case 0x39:
+            var_a3 = 1;
+            break;
+        case 0x3A:
+            var_a3 = 2;
+            break;
+        case 0x3B:
+            var_a3 = 3;
+            break;
+    }
+    var_v1 = gCurrentLanguage;
+    var_v1 -= var_a3;
+    if (var_v1 < 0) {
+        var_v1 = -var_v1;
+    }
+    var_a1 -= (var_v1 * 3);
+    if (var_a1 < 0) {
+        var_a1 = 0;
+    }
+    if (var_a1 < ARRAY_COUNT(D_filemenu_8024EB80)) {
+        *posX -= D_filemenu_8024EB80[var_a1];
+    } else {
+        *posX -= D_filemenu_8024EB80[ARRAY_COUNT(D_filemenu_8024EB80) - 1];
+        temp_t0->flags = (temp_t0->flags & 0xF7) | 4;
+    }
+    if (var_a1 >= 0x10) {
+        filemenu_cursor_alpha = 0;
+    }
+}
+#endif
+
 void filemenu_draw_cursor(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     s32 temp_a1;
 
@@ -732,6 +883,11 @@ void filemenu_draw_cursor(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 
     }
 }
 
+#if VERSION_PAL
+#define PAGE_ID (3)
+#else
+#define PAGE_ID (4)
+#endif
 
 void filemenu_draw_contents_copy_arrow(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity,
                                        s32 darkening)
@@ -742,7 +898,7 @@ void filemenu_draw_contents_copy_arrow(MenuPanel* menu, s32 baseX, s32 baseY, s3
     f32 endX, endZ;
     f32 temp_f28;
 
-    if (menu0->page == 4 && menu0->selected < 4) {
+    if (menu0->page == PAGE_ID && menu0->selected < 4) {
         if (menu0->selected != filemenu_loadedFileIdx && filemenu_currentMenu != 2) {
             switch (filemenu_loadedFileIdx) {
                 case 0:
@@ -846,6 +1002,9 @@ void filemenu_draw_contents_copy_arrow(MenuPanel* menu, s32 baseX, s32 baseY, s3
     }
 }
 
+#if VERSION_PAL
+INCLUDE_ASM(void, "filemenu/filemenu_common", filemenu_init);
+#else
 // TODO bad match, look into
 void filemenu_init(s32 arg0) {
     MenuPanel** panelIt;
@@ -901,6 +1060,7 @@ void filemenu_init(s32 arg0) {
     }
     update_window_hierarchy(23, 64);
 }
+#endif
 
 // TODO bad match, look into
 void filemenu_cleanup(void) {
