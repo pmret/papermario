@@ -1,3 +1,7 @@
+// Tacye T cooking implementation.
+// Expects Tayce T's NPC ID to be available as enum member NPC_TayceT.
+
+#include "common.h"
 #include "gcc/string.h"
 
 // enum mapping itemIDs -> index in single recipe arrays and column/rows in double recipe matrix
@@ -421,7 +425,7 @@ API_CALLABLE(N(GetCookResultForDoubleRecipe)) {
     }
     // if the matrix was mistake or not in range, check the extra recipes
     if (resultIdx == 0) {
-        for (i = 0; i < 8; i++) {
+        for (i = 0; i < ARRAY_COUNT(ExtraDoubleRecipes); i++) {
             if (((ExtraDoubleRecipes[i].inputA == inputItemA) && (ExtraDoubleRecipes[i].inputB == inputItemB))
              || ((ExtraDoubleRecipes[i].inputA == inputItemB) && (ExtraDoubleRecipes[i].inputB == inputItemA))) {
                 resultIdx = ExtraDoubleRecipes[i].output;
