@@ -1158,7 +1158,7 @@ EvtScript N(8023AE8C) = {
     EVT_END_IF
     EVT_IF_EQ(LVar0, 0)
     EVT_ELSE
-        EVT_CALL(ShowVariableMessageBox, BTL_MSG_2A, 60, LVarA)
+        EVT_CALL(ShowVariableMessageBox, BTL_MSG_TURBO_CHARGE_BEGIN, 60, LVarA)
     EVT_END_IF
     EVT_CALL(WaitForMessageBoxDone)
     EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_20000000, FALSE)
@@ -1229,7 +1229,7 @@ EvtScript N(8023B450) = {
     EVT_END_IF
     EVT_IF_EQ(LVar0, 0)
     EVT_ELSE
-        EVT_CALL(ShowVariableMessageBox, BTL_MSG_2A, 60, LVarA)
+        EVT_CALL(ShowVariableMessageBox, BTL_MSG_TURBO_CHARGE_BEGIN, 60, LVarA)
     EVT_END_IF
     EVT_CALL(WaitForMessageBoxDone)
     EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_20000000, FALSE)

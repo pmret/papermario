@@ -3251,7 +3251,7 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
             break;
         case 3:
             if (script->functionTemp[3] == 0) {
-                btl_show_variable_battle_message(BTL_MSG_1D, 60, attackBoost);
+                btl_show_variable_battle_message(BTL_MSG_ATTACK_UP, 60, attackBoost);
                 script->functionTemp[0] = 4;
             } else {
                 script->functionTemp[3]--;
@@ -3375,7 +3375,7 @@ ApiStatus BoostDefense(Evt* script, s32 isInitialCall) {
             break;
         case 3:
             if (script->functionTemp[3] == 0) {
-                btl_show_variable_battle_message(BTL_MSG_1E, 60, defenseBoost);
+                btl_show_variable_battle_message(BTL_MSG_DEFENCE_UP, 60, defenseBoost);
                 script->functionTemp[0] = 4;
             } else {
                 script->functionTemp[3]--;
@@ -3481,7 +3481,7 @@ ApiStatus VanishActor(Evt* script, s32 isInitialCall) {
             break;
         case 3:
             if (script->functionTemp[3] == 0) {
-                btl_show_variable_battle_message(BTL_MSG_21, 60, vanished);
+                btl_show_variable_battle_message(BTL_MSG_ENEMY_TRANSPARENT, 60, vanished);
                 script->functionTemp[0] = 4;
             } else {
                 script->functionTemp[3]--;
@@ -3587,7 +3587,7 @@ ApiStatus ElectrifyActor(Evt* script, s32 isInitialCall) {
             break;
         case 3:
             if (script->functionTemp[3] == 0) {
-                btl_show_variable_battle_message(BTL_MSG_22, 60, electrified);
+                btl_show_variable_battle_message(BTL_MSG_ENEMY_CHARGED, 60, electrified);
                 script->functionTemp[0] = 4;
             } else {
                 script->functionTemp[3]--;

@@ -95,7 +95,7 @@ EvtScript N(EVS_UseMove0) = {
         EVT_CALL(N(func_802A133C_761C5C))
         EVT_CALL(ShowVariableMessageBox, LVar0, 60, 3)
     EVT_ELSE
-        EVT_CALL(ShowMessageBox, BTL_MSG_08, 60)
+        EVT_CALL(ShowMessageBox, BTL_MSG_CANT_CHARGE, 60)
     EVT_END_IF
     EVT_LABEL(0)
     EVT_WAIT(1)

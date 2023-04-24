@@ -125,7 +125,7 @@ HitResult calc_item_damage_enemy(void) {
 
     if (target->stoneStatus == STATUS_STONE) {
         sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
-        func_8024EFE0(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, 1);
+        show_immune_bonk(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, 1);
         show_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 0);
         if (gBattleStatus.flags1 & (BS_FLAGS1_40 | BS_FLAGS1_200)) {
             return HIT_RESULT_1;
@@ -195,7 +195,7 @@ HitResult calc_item_damage_enemy(void) {
 
     if (targetPart->flags & ACTOR_PART_FLAG_2000) {
         dispatch_event_actor(target, dispatchEvent);
-        func_8024EFE0(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, 3);
+        show_immune_bonk(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, 3);
         sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
         return HIT_RESULT_NO_DAMAGE;
     }
@@ -435,7 +435,7 @@ HitResult calc_item_damage_enemy(void) {
     if (!(target->flags & ACTOR_FLAG_NO_DMG_POPUP)) {
         if (battleStatus->lastAttackDamage == 0) {
             if (!sp1C && !wasStatusInflicted) {
-                func_8024EFE0(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, 3);
+                show_immune_bonk(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, 3);
             }
         } else if (!partImmuneToElement) {
             if (battleStatus->currentAttackElement & (DAMAGE_TYPE_SMASH | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS)) {
@@ -467,42 +467,42 @@ HitResult calc_item_damage_enemy(void) {
     }
 
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_SLEEP) && wasStatusInflicted) {
-        script = start_script(&DoSleepHit, EVT_PRIORITY_A, 0);
+        script = start_script(&EVS_PlaySleepHitFX, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_SLEEP, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_DIZZY) && wasStatusInflicted) {
-        script = start_script(&DoDizzyHit, EVT_PRIORITY_A, 0);
+        script = start_script(&EVS_PlayDizzyHitFX, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_PARALYZE) && wasStatusInflicted) {
-        script = start_script(&DoParalyzeHit, EVT_PRIORITY_A, 0);
+        script = start_script(&EVS_PlayParalyzeHitFX, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_POISON) && wasStatusInflicted) {
-        script = start_script(&DoPoisonHit, EVT_PRIORITY_A, 0);
+        script = start_script(&EVS_PlayPoisonHitFX, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_STOP) && wasStatusInflicted) {
-        script = start_script(&DoStopHit, EVT_PRIORITY_A, 0);
+        script = start_script(&EVS_PlayStopHitFX, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_FROZEN) && wasStatusInflicted) {
-        script = start_script(&DoFreezeHit, EVT_PRIORITY_A, 0);
+        script = start_script(&EVS_PlayFreezeHitFX, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
@@ -510,7 +510,7 @@ HitResult calc_item_damage_enemy(void) {
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_SHRINK) && wasStatusInflicted) {
-        script = start_script(&DoShrinkHit, EVT_PRIORITY_A, 0);
+        script = start_script(&EVS_PlayShrinkHitFX, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;

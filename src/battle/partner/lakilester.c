@@ -1205,7 +1205,7 @@ EvtScript N(cloudNine_normal) = {
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_WAIT(10)
     EVT_IF_GT(LVarA, 0)
-        EVT_CALL(ShowMessageBox, BTL_MSG_28, 60)
+        EVT_CALL(ShowMessageBox, BTL_MSG_CLOUD_NINE_BEGIN, 60)
         EVT_CALL(WaitForMessageBoxDone)
     EVT_END_IF
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_8, TRUE)
@@ -1312,7 +1312,7 @@ EvtScript N(cloudNine_immobile) = {
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_WAIT(10)
     EVT_IF_GT(LVarA, 0)
-        EVT_CALL(ShowMessageBox, BTL_MSG_28, 60)
+        EVT_CALL(ShowMessageBox, BTL_MSG_CLOUD_NINE_BEGIN, 60)
         EVT_CALL(WaitForMessageBoxDone)
     EVT_END_IF
     EVT_RETURN

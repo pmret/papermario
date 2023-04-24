@@ -744,7 +744,7 @@ void state_step_demo(void);
 void state_drawUI_demo(void);
 void game_mode_set_fpDrawAuxUI(s32 i, void (*fn)(void));
 
-void func_80260A60(void);
+void btl_set_player_idle_anims(void);
 
 void shim_create_audio_system_obfuscated(void);
 void shim_load_engine_data_obfuscated(void);
@@ -959,7 +959,7 @@ void set_message_msg(s32 msgID, s32 index);
 void set_message_value(s32 value, s32 index);
 s32 store_item(s32 itemID);
 void open_status_menu_short(void);
-void func_8024EFE0(f32 x, f32 y, f32 z, s32, s32, s32);
+void show_immune_bonk(f32 x, f32 y, f32 z, s32, s32, s32);
 void func_802664DC(f32 x, f32 y, f32 z, s32 attack, s32 a);
 s32 dispatch_damage_event_partner(s32 damageAmount, s32 event, s32 stopMotion);
 void disable_actor_blur(Actor*);

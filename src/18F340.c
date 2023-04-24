@@ -22,7 +22,7 @@ BSS s32 D_8029FB90;
 BSS f32 D_8029FB94;
 BSS EffectInstance* BattleMerleeOrbEffect;
 BSS EffectInstance* BattleMerleeWaveEffect;
-BSS s32 D_8029FBA0;
+BSS s32 RefundHudElem;
 BSS s16 D_8029FBA4;
 BSS s32 D_8029FBA8;
 BSS s32 D_8029FBAC;
@@ -30,7 +30,7 @@ BSS s32 D_8029FBB0[3];
 
 API_CALLABLE(func_802749F8);
 
-void func_80260A60(void) {
+void btl_set_player_idle_anims(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     ActorPart* actorPart = &battleStatus->playerActor->partsTable[0];
 
@@ -156,7 +156,7 @@ API_CALLABLE(func_80260DD8) {
 }
 
 API_CALLABLE(func_80260E38) {
-    btl_show_battle_message(BTL_MSG_31, 60);
+    btl_show_battle_message(BTL_MSG_ACTION_TIP_03, 60);
     return ApiStatus_DONE2;
 }
 
@@ -167,12 +167,13 @@ API_CALLABLE(func_80260E5C) {
     return ApiStatus_DONE2;
 }
 
+// out LVar0: time caller should wait for coin spawns
 API_CALLABLE(GiveRefund) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     s32 sellValue = gItemTable[battleStatus->moveArgument].sellValue;
     f32 facingAngleSign = 0.0f;
-    s32 sleepTime = 0;
+    s32 delayTime = 0;
     f32 posX, posY, posZ;
     posY = player->currentPos.y + player->size.y;
 
@@ -180,6 +181,7 @@ API_CALLABLE(GiveRefund) {
         s32 i;
         s32 iconPosX, iconPosY, iconPosZ;
 
+        // 75% of the item's sell value, rounded up
         sellValue = (sellValue * 75 + 99) / 100;
 
         for (i = 0; i < sellValue; i++) {
@@ -191,17 +193,17 @@ API_CALLABLE(GiveRefund) {
             facingAngleSign += 30.0f;
         }
 
-        sleepTime = (i * 3) + 30;
+        delayTime = (i * 3) + 30;
 
         posX = player->currentPos.x;
         posY = player->currentPos.y;
         posZ = player->currentPos.z;
         get_screen_coords(gCurrentCameraID, posX, posY, posZ, &iconPosX, &iconPosY, &iconPosZ);
-        D_8029FBA0 = hud_element_create(&HES_Refund);
-        hud_element_set_render_pos(D_8029FBA0, iconPosX + 36, iconPosY - 63);
+        RefundHudElem = hud_element_create(&HES_Refund);
+        hud_element_set_render_pos(RefundHudElem, iconPosX + 36, iconPosY - 63);
     }
 
-    script->varTable[0] = sleepTime;
+    script->varTable[0] = delayTime;
 
     return ApiStatus_DONE2;
 }
@@ -210,7 +212,7 @@ API_CALLABLE(GiveRefundCleanup) {
     s32 sellValue = gItemTable[gBattleStatus.moveArgument].sellValue;
 
     if (player_team_is_ability_active(gBattleStatus.playerActor, ABILITY_REFUND) && sellValue > 0) {
-        hud_element_free(D_8029FBA0);
+        hud_element_free(RefundHudElem);
     }
 
     return ApiStatus_DONE2;
@@ -1568,7 +1570,7 @@ EvtScript EVS_MerleeRunOut = {
         EVT_RETURN
     EVT_END_IF
     EVT_WAIT(15)
-    EVT_CALL(ShowMessageBox, BTL_MSG_03, 60)
+    EVT_CALL(ShowMessageBox, BTL_MSG_MERLEE_DONE, 60)
     EVT_CALL(WaitForMessageBoxDone)
     EVT_RETURN
     EVT_END

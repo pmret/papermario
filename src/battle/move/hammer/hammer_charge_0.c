@@ -219,9 +219,9 @@ EvtScript N(EVS_802A3948) = {
         EVT_WAIT(4)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
         EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
-        EVT_CALL(ShowVariableMessageBox, BTL_MSG_04, 60, 1)
+        EVT_CALL(ShowVariableMessageBox, BTL_MSG_CHARGE_HAMMER, 60, 1)
     EVT_ELSE
-        EVT_CALL(ShowMessageBox, BTL_MSG_08, 60)
+        EVT_CALL(ShowMessageBox, BTL_MSG_CANT_CHARGE, 60)
     EVT_END_IF
     EVT_LABEL(0)
     EVT_WAIT(1)
@@ -270,9 +270,9 @@ EvtScript N(EVS_802A3C90) = {
         EVT_WAIT(4)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
         EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
-        EVT_CALL(ShowVariableMessageBox, BTL_MSG_04, 60, 1)
+        EVT_CALL(ShowVariableMessageBox, BTL_MSG_CHARGE_HAMMER, 60, 1)
     EVT_ELSE
-        EVT_CALL(ShowMessageBox, BTL_MSG_08, 60)
+        EVT_CALL(ShowMessageBox, BTL_MSG_CANT_CHARGE, 60)
     EVT_END_IF
     EVT_LABEL(0)
     EVT_WAIT(1)
@@ -321,9 +321,9 @@ EvtScript N(EVS_802A3FD8) = {
         EVT_WAIT(4)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
         EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
-        EVT_CALL(ShowVariableMessageBox, BTL_MSG_04, 60, 1)
+        EVT_CALL(ShowVariableMessageBox, BTL_MSG_CHARGE_HAMMER, 60, 1)
     EVT_ELSE
-        EVT_CALL(ShowMessageBox, BTL_MSG_08, 60)
+        EVT_CALL(ShowMessageBox, BTL_MSG_CANT_CHARGE, 60)
     EVT_END_IF
     EVT_LABEL(0)
     EVT_WAIT(1)

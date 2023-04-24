@@ -114,10 +114,10 @@ void popup_menu_draw_menu_contents(s32* userData, s32 baseX, s32 baseY, s32 widt
 void popup_menu_draw_title_contents(s32* userData, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
 void func_800F48F4(s32* userData, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
 void func_800F4944(s32* userData, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
-void func_800F4C1C(PopupMessage* popup, s32 x, s32 y);
-void popup_draw_cost_icon(PopupMessage* popup, s32 x, s32 y);
-void popup_draw_already_have_partner(PopupMessage* popup, s32 x, s32 y);
-void func_800F4D28(PopupMessage* popup, s32 x, s32 y);
+void func_800F4C1C(s32* userData, s32 x, s32 y);
+void popup_draw_cost_icon(s32* userData, s32 x, s32 y);
+void popup_draw_already_have_partner(s32* userData, s32 x, s32 y);
+void func_800F4D28(s32* userData, s32 x, s32 y);
 
 void hide_popup_menu(void) {
     if (PopupNotBattle) {
@@ -1547,7 +1547,7 @@ void func_800F4944(s32* userData, s32 baseX, s32 baseY, s32 width, s32 height, s
     }
 }
 
-void func_800F4C1C(PopupMessage* popup, s32 x, s32 y) {
+void func_800F4C1C(s32* userData, s32 x, s32 y) {
     s32 msg = MSG_Menus_0069;
     s32 xPos = x + 11;
     s32 yPos = y + 8;
@@ -1558,7 +1558,7 @@ void func_800F4C1C(PopupMessage* popup, s32 x, s32 y) {
     draw_msg(msg, xPos, yPos, 255, MSG_PAL_0F, 0);
 }
 
-void popup_draw_cost_icon(PopupMessage* popup, s32 x, s32 y) {
+void popup_draw_cost_icon(s32* userData, s32 x, s32 y) {
     s32 hudElement;
     s32 xPos;
     s32 yPos;
@@ -1583,11 +1583,11 @@ void popup_draw_cost_icon(PopupMessage* popup, s32 x, s32 y) {
     hud_element_draw_clipped(hudElement);
 }
 
-void popup_draw_already_have_partner(PopupMessage* popup, s32 x, s32 y) {
+void popup_draw_already_have_partner(s32* userData, s32 x, s32 y) {
     draw_msg(MSG_Menus_006B, x + 16, y + 2, 255, MSG_PAL_0F, 0);
 }
 
-void func_800F4D28(PopupMessage* popup, s32 x, s32 y) {
+void func_800F4D28(s32* userData, s32 x, s32 y) {
     s32 hudElement = PopupMenu_TitleIconHEID;
     PlayerData* playerData = &gPlayerData;
     s32 xPos = x + 14;

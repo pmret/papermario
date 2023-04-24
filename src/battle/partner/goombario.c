@@ -469,9 +469,9 @@ API_CALLABLE(N(PlayChargeFX)) {
 
 API_CALLABLE(N(GetChargeMessage)) {
     if (N(isCharged) == 0) {
-        script->varTable[0] = 36;
+        script->varTable[0] = BTL_MSG_CHARGE_GOOMBARIO;
     } else {
-        script->varTable[0] = 37;
+        script->varTable[0] = BTL_MSG_CHARGE_GOOMBARIO_MORE;
     }
 
     return ApiStatus_DONE2;
@@ -1515,15 +1515,15 @@ EvtScript N(charge) = {
         EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
         EVT_SWITCH(LVar2)
             EVT_CASE_EQ(MOVE_TATTLE)
-                EVT_CALL(ShowMessageBox, BTL_MSG_24, 60)
+                EVT_CALL(ShowMessageBox, BTL_MSG_CHARGE_GOOMBARIO, 60)
             EVT_CASE_EQ(MOVE_CHARGE)
                 EVT_CALL(N(GetChargeMessage))
                 EVT_CALL(ShowMessageBox, LVar0, 60)
             EVT_CASE_EQ(MOVE_MULTIBONK)
-                EVT_CALL(ShowMessageBox, BTL_MSG_24, 60)
+                EVT_CALL(ShowMessageBox, BTL_MSG_CHARGE_GOOMBARIO, 60)
         EVT_END_SWITCH
     EVT_ELSE
-        EVT_CALL(ShowMessageBox, BTL_MSG_08, 60)
+        EVT_CALL(ShowMessageBox, BTL_MSG_CANT_CHARGE, 60)
     EVT_END_IF
     EVT_LABEL(0)
     EVT_WAIT(1)

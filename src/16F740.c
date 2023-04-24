@@ -766,7 +766,7 @@ void btl_state_update_begin_player_turn(void) {
                         fx_water_splash(1, player->currentPos.x + 15.0f, player->currentPos.y + 22.0f, player->currentPos.z + 5.0f, 1.0f, 24);
                         battleStatus->waterBlockEffect = NULL;
                         sfx_play_sound(SOUND_299);
-                        btl_show_battle_message(BTL_MSG_27, 60);
+                        btl_show_battle_message(BTL_MSG_WATER_BLOCK_END, 60);
                         gBattleSubState = BTL_SUBSTATE_BEGIN_PLAYER_TURN_AWAIT_WATER_BLOCK;
                     } else {
                         gBattleSubState = BTL_SUBSTATE_BEGIN_PLAYER_TURN_CHECK_CLOUD_NINE;
@@ -792,7 +792,7 @@ void btl_state_update_begin_player_turn(void) {
                 if (battleStatus->cloudNineTurnsLeft <= 0) {
                     remove_effect(battleStatus->cloudNineEffect);
                     battleStatus->cloudNineEffect = NULL;
-                    btl_show_battle_message(BTL_MSG_29, 60);
+                    btl_show_battle_message(BTL_MSG_CLOUD_NINE_END, 60);
                     gBattleSubState = BTL_SUBSTATE_BEGIN_PLAYER_TURN_AWAIT_CLOUD_NINE;
                 } else {
                     gBattleSubState = BTL_SUBSTATE_BEGIN_PLAYER_TURN_CHECK_TURBO_CHARGE;
@@ -818,7 +818,7 @@ void btl_state_update_begin_player_turn(void) {
                     battleStatus->turboChargeTurnsLeft--;
                     battleStatus->buffEffect->data.partnerBuff->unk_0C[FX_BUFF_DATA_TURBO_CHARGE].turnsLeft = battleStatus->turboChargeTurnsLeft;
                     if (battleStatus->turboChargeTurnsLeft <= 0) {
-                        btl_show_battle_message(BTL_MSG_2B, 60);
+                        btl_show_battle_message(BTL_MSG_TURBO_CHARGE_END, 60);
                         gBattleSubState = BTL_SUBSTATE_BEGIN_PLAYER_TURN_AWAIT_TURBO_CHARGE;
                     } else {
                         gBattleSubState = BTL_SUBSTATE_BEGIN_PLAYER_TURN_TRY_STATUS_DAMAGE;
@@ -1647,7 +1647,7 @@ void btl_state_update_end_turn(void) {
             partner->disableDismissTimer = 0;
         }
 
-        func_80260A60();
+        btl_set_player_idle_anims();
         gBattleStatus.flags1 &= ~BS_FLAGS1_PLAYER_DEFENDING;
         playerData->specialBarsFilled += 32;
         if (playerData->specialBarsFilled > playerData->maxStarPower * 256) {
@@ -2650,7 +2650,7 @@ void btl_state_update_player_move(void) {
                 if (battleStatus->selectedMoveID != MOVE_NONE) {
                     tipIndex = gMoveTable[battleStatus->selectedMoveID].actionTip;
                     if (tipIndex >= 0) {
-                        btl_show_battle_message(BTL_MSG_2E + tipIndex, 60);
+                        btl_show_battle_message(BTL_MSG_ACTION_TIP_00 + tipIndex, 60);
                     }
                 }
             }
@@ -2813,28 +2813,28 @@ void btl_state_update_player_move(void) {
                 btl_cam_use_preset(BTL_CAM_PRESET_D);
                 switch (actor->statusAfflicted) {
                     case 4:
-                        messageIndex = BTL_MSG_12;
+                        messageIndex = BTL_MSG_ENEMY_DAZED;
                         break;
                     case 6:
-                        messageIndex = BTL_MSG_13;
+                        messageIndex = BTL_MSG_ENEMY_ASLEEP;
                         break;
                     case 7:
-                        messageIndex = BTL_MSG_14;
+                        messageIndex = BTL_MSG_ENEMY_FROZEN;
                         break;
                     case 9:
-                        messageIndex = BTL_MSG_15;
+                        messageIndex = BTL_MSG_ENEMY_POISONED;
                         break;
                     case 10:
-                        messageIndex = BTL_MSG_16;
+                        messageIndex = BTL_MSG_ENEMY_SHRUNK;
                         break;
                     case 5:
-                        messageIndex = BTL_MSG_17;
+                        messageIndex = BTL_MSG_ENEMY_PARALYZED;
                         break;
                     case 11:
-                        messageIndex = BTL_MSG_18;
+                        messageIndex = BTL_MSG_ENEMY_ELECTRIFIED;
                         break;
                     case 8:
-                        messageIndex = BTL_MSG_19;
+                        messageIndex = BTL_MSG_ENEMY_CANT_MOVE;
                         break;
                     default:
                         messageIndex = 0;
@@ -2875,25 +2875,25 @@ void btl_state_update_player_move(void) {
                 btl_cam_use_preset(BTL_CAM_PRESET_33);
                 switch (player->statusAfflicted) {
                     case 4:
-                        messageIndex = BTL_MSG_0A;
+                        messageIndex = BTL_MSG_PLAYER_DAZED;
                         break;
                     case 6:
-                        messageIndex = BTL_MSG_0B;
+                        messageIndex = BTL_MSG_PLAYER_ASLEEP;
                         break;
                     case 7:
-                        messageIndex = BTL_MSG_0C;
+                        messageIndex = BTL_MSG_PLAYER_FROZEN;
                         break;
                     case 9:
-                        messageIndex = BTL_MSG_0D;
+                        messageIndex = BTL_MSG_PLAYER_POISONED;
                         break;
                     case 10:
-                        messageIndex = BTL_MSG_0E;
+                        messageIndex = BTL_MSG_PLAYER_SHRUNK;
                         break;
                     case 5:
-                        messageIndex = BTL_MSG_0F;
+                        messageIndex = BTL_MSG_PLAYER_PARALYZED;
                         break;
                     case 11:
-                        messageIndex = BTL_MSG_10;
+                        messageIndex = BTL_MSG_PLAYER_CHARGED;
                         break;
                     default:
                         messageIndex = 0;
@@ -3275,7 +3275,7 @@ void btl_state_update_partner_move(void) {
 
             if (partner->statusAfflicted == STATUS_DAZE && !btl_are_all_enemies_defeated()) {
                 btl_cam_use_preset(BTL_CAM_PRESET_54);
-                btl_show_battle_message(BTL_MSG_23, 60);
+                btl_show_battle_message(BTL_MSG_PARTNER_INJURED, 60);
                 partner->statusAfflicted = 0;
                 partner->disableDismissTimer = 0;
                 gBattleSubState = BTL_SUBSTATE_PARTNER_MOVE_AWAIT_PARTNER_STATUS_POPUP;
@@ -3322,28 +3322,28 @@ void btl_state_update_partner_move(void) {
                 switchCondition = enemyActor->statusAfflicted - 4;
                 switch (switchCondition) {
                     case 0:
-                        messageIndex = BTL_MSG_12;
+                        messageIndex = BTL_MSG_ENEMY_DAZED;
                         break;
                     case 2:
-                        messageIndex = BTL_MSG_13;
+                        messageIndex = BTL_MSG_ENEMY_ASLEEP;
                         break;
                     case 3:
-                        messageIndex = BTL_MSG_14;
+                        messageIndex = BTL_MSG_ENEMY_FROZEN;
                         break;
                     case 5:
-                        messageIndex = BTL_MSG_15;
+                        messageIndex = BTL_MSG_ENEMY_POISONED;
                         break;
                     case 6:
-                        messageIndex = BTL_MSG_16;
+                        messageIndex = BTL_MSG_ENEMY_SHRUNK;
                         break;
                     case 1:
-                        messageIndex = BTL_MSG_17;
+                        messageIndex = BTL_MSG_ENEMY_PARALYZED;
                         break;
                     case 7:
-                        messageIndex = BTL_MSG_18;
+                        messageIndex = BTL_MSG_ENEMY_ELECTRIFIED;
                         break;
                     case 4:
-                        messageIndex = BTL_MSG_19;
+                        messageIndex = BTL_MSG_ENEMY_CANT_MOVE;
                         break;
                     default:
                         messageIndex = 0;
@@ -3679,22 +3679,22 @@ void btl_state_update_enemy_move(void) {
 
                             switch (player->statusAfflicted) {
                                 case STATUS_DIZZY:
-                                    messageIndex = BTL_MSG_0A;
+                                    messageIndex = BTL_MSG_PLAYER_DAZED;
                                     break;
                                 case STATUS_SLEEP:
-                                    messageIndex = BTL_MSG_0B;
+                                    messageIndex = BTL_MSG_PLAYER_ASLEEP;
                                     break;
                                 case STATUS_FROZEN:
-                                    messageIndex = BTL_MSG_0C;
+                                    messageIndex = BTL_MSG_PLAYER_FROZEN;
                                     break;
                                 case STATUS_POISON:
-                                    messageIndex = BTL_MSG_0D;
+                                    messageIndex = BTL_MSG_PLAYER_POISONED;
                                     break;
                                 case STATUS_SHRINK:
-                                    messageIndex = BTL_MSG_0E;
+                                    messageIndex = BTL_MSG_PLAYER_SHRUNK;
                                     break;
                                 case STATUS_PARALYZE:
-                                    messageIndex = BTL_MSG_0F;
+                                    messageIndex = BTL_MSG_PLAYER_PARALYZED;
                                     break;
                                 default:
                                     messageIndex = 0;
@@ -3738,7 +3738,7 @@ void btl_state_update_enemy_move(void) {
                     player->flags |= ACTOR_FLAG_8000000 | ACTOR_FLAG_4000000;
                     partner->flags |= ACTOR_FLAG_8000000 | ACTOR_FLAG_4000000;
                     btl_cam_use_preset(BTL_CAM_PRESET_54);
-                    btl_show_battle_message(BTL_MSG_23, 60);
+                    btl_show_battle_message(BTL_MSG_PARTNER_INJURED, 60);
                     partner->statusAfflicted = 0;
                     gBattleSubState = BTL_SUBSTATE_ENEMY_MOVE_AWAIT_PARTNER_POPUP_DONE;
                 } else {

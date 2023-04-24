@@ -416,7 +416,7 @@ EvtScript N(EVS_UsePower) = {
     EVT_WAIT(5)
     EVT_CALL(func_802A1528_7905F8)
     EVT_IF_EQ(LVar0, 1)
-        EVT_CALL(ShowMessageBox, BTL_MSG_2C, 60)
+        EVT_CALL(ShowMessageBox, BTL_MSG_CHILL_OUT_BEGIN, 60)
     EVT_END_IF
     EVT_CALL(func_80276EFC)
     EVT_EXEC_WAIT(N(802A222C))

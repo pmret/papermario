@@ -467,7 +467,7 @@ EvtScript N(takeTurn) = {
     EVT_CALL(JumpToGoal, ACTOR_SELF, 16, FALSE, TRUE, FALSE)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BabyBlooper_Anim08)
-    EVT_CALL(ShowMessageBox, BTL_MSG_31, 0x00007FFF)
+    EVT_CALL(ShowMessageBox, BTL_MSG_ACTION_TIP_03, 0x00007FFF)
     EVT_CALL(ShowActionHud, TRUE)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_STOP_LEECH)
     EVT_CALL(action_command_stop_leech_init)

@@ -1126,7 +1126,7 @@ EvtScript N(waterBlock) = {
     EVT_CALL(SetActorYaw, ACTOR_PARTNER, 0)
     EVT_IF_EQ(LVarA, 0)
     EVT_ELSE
-        EVT_CALL(ShowVariableMessageBox, BTL_MSG_26, 60, LVarA)
+        EVT_CALL(ShowVariableMessageBox, BTL_MSG_WATER_BLOCK_BEGIN, 60, LVarA)
     EVT_END_IF
     EVT_CALL(WaitForMessageBoxDone)
     EVT_RETURN

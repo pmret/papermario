@@ -2302,18 +2302,18 @@ typedef struct VirtualEntity {
 typedef VirtualEntity* VirtualEntityList[0x40];
 
 typedef struct Message {
-    /* 0x00 */ s32 unk_00;
+    /* 0x00 */ b32 unk_00;
     /* 0x04 */ s32 unk_04;
     /* 0x08 */ Vec3f accel;
     /* 0x14 */ Vec3f vel;
-    /* 0x20 */ s32 unk_20;
+    /* 0x20 */ s32 appearTime;
     /* 0x24 */ s32 unk_24;
     /* 0x28 */ f32 rotZ;
     /* 0x2C */ f32 rotVelZ;
     /* 0x30 */ f32 rotY;
     /* 0x34 */ f32 scale;
     /* 0x38 */ Vec3f pos;
-    /* 0x44 */ s32 unk_44;
+    /* 0x44 */ s32 deleteTime;
     /* 0x48 */ f32 unk_48;
 } Message; // size = 0x4C
 
@@ -2327,8 +2327,8 @@ typedef struct PopupMessage {
     /* 0x10 */ s16 active;
     /* 0x12 */ s16 messageIndex;
     /* 0x14 */ s16 duration;
-    /* 0x16 */ s8 unk_16;
-    /* 0x17 */ s8 unk_17;
+    /* 0x16 */ s8 showMsgState;
+    /* 0x17 */ s8 needsInit;
     /* 0x18 */ Message* message;
 } PopupMessage; // size = 0x1C
 
