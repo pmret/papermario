@@ -68,6 +68,29 @@ HudScript HES_HeaderSpirits = HES_TEMPLATE_CI_CUSTOM_SIZE(ui_pause_label_spirits
 
 HudScript HES_HeaderMap = HES_TEMPLATE_CI_CUSTOM_SIZE(ui_pause_label_map, 48, 16);
 
+#if VERSION_PAL
+HudScript HES_HeaderStats_de = HES_TEMPLATE_CI_CUSTOM_SIZE(de_ui_pause_label_stats, 48, 16);
+HudScript HES_HeaderBadges_de = HES_TEMPLATE_CI_CUSTOM_SIZE(de_ui_pause_label_badges, 48, 16);
+HudScript HES_HeaderItems_de = HES_TEMPLATE_CI_CUSTOM_SIZE(de_ui_pause_label_items, 48, 16);
+HudScript HES_HeaderParty_de = HES_TEMPLATE_CI_CUSTOM_SIZE(de_ui_pause_label_party, 48, 16);
+HudScript HES_HeaderSpirits_de = HES_TEMPLATE_CI_CUSTOM_SIZE(de_ui_pause_label_spirits, 48, 16);
+HudScript HES_HeaderMap_de = HES_TEMPLATE_CI_CUSTOM_SIZE(de_ui_pause_label_map, 48, 16);
+
+HudScript HES_HeaderStats_fr = HES_TEMPLATE_CI_CUSTOM_SIZE(fr_ui_pause_label_stats, 48, 16);
+HudScript HES_HeaderBadges_fr = HES_TEMPLATE_CI_CUSTOM_SIZE(fr_ui_pause_label_badges, 48, 16);
+HudScript HES_HeaderItems_fr = HES_TEMPLATE_CI_CUSTOM_SIZE(fr_ui_pause_label_items, 48, 16);
+HudScript HES_HeaderParty_fr = HES_TEMPLATE_CI_CUSTOM_SIZE(fr_ui_pause_label_party, 48, 16);
+HudScript HES_HeaderSpirits_fr = HES_TEMPLATE_CI_CUSTOM_SIZE(fr_ui_pause_label_spirits, 48, 16);
+HudScript HES_HeaderMap_fr = HES_TEMPLATE_CI_CUSTOM_SIZE(fr_ui_pause_label_map, 48, 16);
+
+HudScript HES_HeaderStats_es = HES_TEMPLATE_CI_CUSTOM_SIZE(es_ui_pause_label_stats, 48, 16);
+HudScript HES_HeaderBadges_es = HES_TEMPLATE_CI_CUSTOM_SIZE(es_ui_pause_label_badges, 48, 16);
+HudScript HES_HeaderItems_es = HES_TEMPLATE_CI_CUSTOM_SIZE(es_ui_pause_label_items, 48, 16);
+HudScript HES_HeaderParty_es = HES_TEMPLATE_CI_CUSTOM_SIZE(es_ui_pause_label_party, 48, 16);
+HudScript HES_HeaderSpirits_es = HES_TEMPLATE_CI_CUSTOM_SIZE(es_ui_pause_label_spirits, 48, 16);
+HudScript HES_HeaderMap_es = HES_TEMPLATE_CI_CUSTOM_SIZE(es_ui_pause_label_map, 48, 16);
+#endif
+
 HudScript HES_SmallText0 = HES_TEMPLATE_CI_CUSTOM_SIZE(ui_pause_small_digit_0, 8, 8);
 
 HudScript HES_SmallText1 = HES_TEMPLATE_CI_CUSTOM_SIZE(ui_pause_small_digit_1, 8, 8);
@@ -101,6 +124,23 @@ HudScript HES_OptionMonoOff = HES_TEMPLATE_CI_CUSTOM_SIZE(ui_files_option_mono_o
 HudScript HES_OptionStereoOn = HES_TEMPLATE_CI_CUSTOM_SIZE(ui_files_option_stereo_on, 64, 16);
 
 HudScript HES_OptionStereoOff = HES_TEMPLATE_CI_CUSTOM_SIZE(ui_files_option_stereo_off, 64, 16);
+
+#if VERSION_PAL
+HudScript HES_OptionMonoOn_de = HES_TEMPLATE_CI_CUSTOM_SIZE(de_ui_files_option_mono_on, 64, 16);
+HudScript HES_OptionMonoOff_de = HES_TEMPLATE_CI_CUSTOM_SIZE(de_ui_files_option_mono_off, 64, 16);
+HudScript HES_OptionStereoOn_de = HES_TEMPLATE_CI_CUSTOM_SIZE(de_ui_files_option_stereo_on, 64, 16);
+HudScript HES_OptionStereoOff_de = HES_TEMPLATE_CI_CUSTOM_SIZE(de_ui_files_option_stereo_off, 64, 16);
+
+HudScript HES_OptionMonoOn_fr = HES_TEMPLATE_CI_CUSTOM_SIZE(fr_ui_files_option_mono_on, 64, 16);
+HudScript HES_OptionMonoOff_fr = HES_TEMPLATE_CI_CUSTOM_SIZE(fr_ui_files_option_mono_off, 64, 16);
+HudScript HES_OptionStereoOn_fr = HES_TEMPLATE_CI_CUSTOM_SIZE(fr_ui_files_option_stereo_on, 64, 16);
+HudScript HES_OptionStereoOff_fr = HES_TEMPLATE_CI_CUSTOM_SIZE(fr_ui_files_option_stereo_off, 64, 16);
+
+HudScript HES_OptionMonoOn_es = HES_TEMPLATE_CI_CUSTOM_SIZE(es_ui_files_option_mono_on, 64, 16);
+HudScript HES_OptionMonoOff_es = HES_TEMPLATE_CI_CUSTOM_SIZE(es_ui_files_option_mono_off, 64, 16);
+HudScript HES_OptionStereoOn_es = HES_TEMPLATE_CI_CUSTOM_SIZE(es_ui_files_option_stereo_on, 64, 16);
+HudScript HES_OptionStereoOff_es = HES_TEMPLATE_CI_CUSTOM_SIZE(es_ui_files_option_stereo_off, 64, 16);
+#endif
 
 HudScript HES_Spirit1 = HES_TEMPLATE_CI_CUSTOM_SIZE(ui_files_eldstar, 16, 16);
 
@@ -151,6 +191,12 @@ HudScript HES_133F40_133FC0 = HES_TEMPLATE_CI_CUSTOM_SIZE(ui_pause_unused_z_up_a
 HudScript HES_133FE0_134060 = HES_TEMPLATE_CI_CUSTOM_SIZE(ui_pause_unused_r_down_arrow, 16, 16);
 
 HudScript HES_LabelBpNeeded = HES_TEMPLATE_CI_CUSTOM_SIZE(ui_pause_bp_needed, 48, 8);
+
+#if VERSION_PAL
+HudScript HES_LabelBpNeeded_de = HES_TEMPLATE_CI_CUSTOM_SIZE(de_ui_pause_bp_needed, 48, 8);
+HudScript HES_LabelBpNeeded_fr = HES_TEMPLATE_CI_CUSTOM_SIZE(fr_ui_pause_bp_needed, 48, 8);
+HudScript HES_LabelBpNeeded_es = HES_TEMPLATE_CI_CUSTOM_SIZE(es_ui_pause_bp_needed, 48, 8);
+#endif
 
 HudScript HES_MarioHeadLarge = HES_TEMPLATE_CI_CUSTOM_SIZE(ui_pause_mario_large, 32, 32);
 
