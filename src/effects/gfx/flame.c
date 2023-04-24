@@ -38,7 +38,7 @@ Gfx D_090009E0_354590[] = {
     gsDPSetTexturePersp(G_TP_NONE),
     gsDPSetTextureFilter(G_TF_BILERP),
     gsDPSetRenderMode(G_RM_PASS, G_RM_CLD_SURF2),
-    gsDPSetCombineLERP(0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1),
+    gsDPSetCombineMode(PM_CC_CONST_ALPHA_1, PM_CC_CONST_ALPHA_1),
     gsSPTextureRectangle(0, 0, 0x0080, 0x0100, G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400),
     gsDPPipeSync(),
     gsDPSetCombineLERP(TEXEL0, TEXEL1, TEXEL0, TEXEL1, 1, TEXEL0, TEXEL1, 1, 0, 0, 0, COMBINED, COMBINED, TEXEL1, TEXEL1, TEXEL1),

@@ -225,6 +225,46 @@
 #define PM_CC_05        TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0
 #define PM_CC_06        COMBINED, 0, PRIMITIVE_ALPHA, 0, 0, 0, 0, COMBINED
 #define PM_CC_07        0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0
+#define PM_CC_08        0, 0, 0, PRIMITIVE, 0, 0, 0, 1
+#define PM_CC_09        0, 0, 0, PRIMITIVE, 0, 0, 0, 0
+#define PM_CC_0A        0, 0, 0, 0, ENVIRONMENT, 0, TEXEL0, 0
+#define PM_CC_0B        0, 0, 0, 0, ENVIRONMENT, 0, TEXEL1, 0
+#define PM_CC_0C        0, 0, 0, 0, 0, 0, 0, COMBINED
+#define PM_CC_0D        0, 0, 0, 0, SHADE, 0, TEXEL1, 0
+#define PM_CC_0E        0, 0, 0, TEXEL0, 0, 0, 0, 0
+#define PM_CC_0F        0, 0, 0, TEXEL0, 0, 0, 0, 1
+#define PM_CC_10        0, 0, 0, TEXEL0, 0, 0, 0, PRIMITIVE
+#define PM_CC_11        0, 0, 0, TEXEL0, SHADE, 0, TEXEL0, 0
+#define PM_CC_12        0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0
+#define PM_CC_13        TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL1
+
+#define PM_CC_14        PRIMITIVE, ENVIRONMENT, TEXEL1, ENVIRONMENT, PRIMITIVE, 0, TEXEL1, 0
+#define PM_CC_15        PRIMITIVE, ENVIRONMENT, TEXEL1, ENVIRONMENT, 0, 0, 0, TEXEL1
+
+#define PM_CC_16        COMBINED, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED
+#define PM_CC_17        COMBINED, 0, PRIMITIVE, ENVIRONMENT, 0, 0, 0, COMBINED
+
+// custom cycle1 modes for window styles
+#define PM_CC_WINDOW_2              PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, TEXEL1
+#define PM_CC_WINDOW_3              PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, PRIMITIVE, 0, TEXEL1, 0
+#define PM_CC_WINDOW_4              PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, PRIMITIVE
+#define PM_CC_WINDOW_5              0, 0, 0, TEXEL1, 0, 0, 0, TEXEL1
+#define PM_CC_WINDOW_6              0, 0, 0, TEXEL1, PRIMITIVE, 0, TEXEL1, 0
+#define PM_CC_WINDOW_7              PRIMITIVE, ENVIRONMENT, TEXEL0, ENVIRONMENT, 0, 0, 0, 1
+// custom cycle2 modes for window styles
+#define PM_CC_WINDOW_1              COMBINED, 0, TEXEL0, 0, 0, 0, 0, COMBINED
+
+#define PM_CC_IMGFX_COLOR_FILL      0, 0, 0, PRIMITIVE, 0, 0, 0, TEXEL0
+#define PM_CC_IMGFX_HOLOGRAM        NOISE, PRIMITIVE, PRIMITIVE, TEXEL0, TEXEL0, 0, PRIMITIVE, 0
+
+#define PM_CC_MSG_NOISE_OUTLINE     NOISE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0
+#define PM_CC_MSG_STATIC            NOISE, TEXEL0, ENVIRONMENT, TEXEL0, 0, 0, 0, TEXEL0
+
+#define PM_CC_CANDLE_1              TEXEL0, TEXEL1, TEXEL0, 1, 1, TEXEL0, TEXEL1, 1
+#define PM_CC_CANDLE_2              0, PRIMITIVE, COMBINED, ENVIRONMENT, COMBINED, TEXEL1, TEXEL1, TEXEL1
+
+#define PM_CC_CONST_ALPHA_1         0, 0, 0, 0, 0, 0, 0, 1
+#define PM_CC_CONST_0               0, 0, 0, 0, 0, 0, 0, 0
 
 #ifdef OLD_GCC
 #define VLA 0

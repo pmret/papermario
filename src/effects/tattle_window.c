@@ -26,10 +26,8 @@ WindowStyleCustom D_E00D87E0 = {
         .size3 = {16, 8},
         .size4 = {16, 8},
     },
-    .opaqueCombineMode = gsDPSetCombineLERP(PRIMITIVE, ENVIRONMENT, TEXEL1, ENVIRONMENT, 0, 0, 0, TEXEL1, 0, 0, 0,
-                                            COMBINED, 0, 0, 0, COMBINED),
-    .transparentCombineMode = gsDPSetCombineLERP(PRIMITIVE, ENVIRONMENT, TEXEL1, ENVIRONMENT, PRIMITIVE, 0, TEXEL1, 0,
-                                                 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
+    .opaqueCombineMode = gsDPSetCombineMode(PM_CC_15, G_CC_PASS2),
+    .transparentCombineMode = gsDPSetCombineMode(PM_CC_14, G_CC_PASS2),
     .color1 = { 61, 74, 188, 255 },
     .color2 = { 0, 25, 28, 255},
 };

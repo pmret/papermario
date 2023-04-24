@@ -4441,7 +4441,7 @@ void btl_state_update_end_demo_battle(void) {
             }
 
             if (D_802809F6 != -1) {
-                gGameStatusPtr->nextDemoScene = 0x12;
+                gGameStatusPtr->nextDemoScene = 18;
             }
 
             btl_set_state(BATTLE_STATE_0);

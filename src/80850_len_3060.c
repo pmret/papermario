@@ -524,11 +524,11 @@ void update_status_menu(void) {
     s32 spBars;
     s32 maxStarPower;
 
-    if (gGameStatusPtr->creditsViewportMode >= 0 ||
-        gGameStatusPtr->demoState != 0 ||
-        (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH) ||
-        evt_get_variable(NULL, GB_StoryProgress) >= STORY_EPILOGUE)
-    {
+    if (gGameStatusPtr->creditsViewportMode >= 0
+        || gGameStatusPtr->demoState != DEMO_STATE_NONE
+        || (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH)
+        || evt_get_variable(NULL, GB_StoryProgress) >= STORY_EPILOGUE
+    ) {
         return;
     }
 

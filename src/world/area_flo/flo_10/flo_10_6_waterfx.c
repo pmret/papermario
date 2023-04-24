@@ -230,7 +230,7 @@ void N(UnkModelFunc001)(void) {
         gDPSetRenderMode(gMainGfxPos++, Z_CMP | CVG_DST_CLAMP | ZMODE_OPA | FORCE_BL | G_RM_PASS,
                          Z_CMP | CVG_DST_CLAMP | ZMODE_OPA | FORCE_BL | GBL_c2(G_BL_CLR_IN, G_BL_0, G_BL_CLR_IN, G_BL_1));
         gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxZBuffer));
-        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, PRIMITIVE, 0, 0, 0, 0, 0, 0, 0, PRIMITIVE, 0, 0, 0, 0);
+        gDPSetCombineMode(gMainGfxPos++, PM_CC_09, PM_CC_09);
         gDPSetPrimColor(gMainGfxPos++, 0, 0, 248, 240, 240, 0);
         gDPPipeSync(gMainGfxPos++);
 
@@ -247,7 +247,7 @@ void N(UnkModelFunc001)(void) {
         gDPSetTextureLUT(gMainGfxPos++, G_TT_NONE);
         gDPSetTextureDetail(gMainGfxPos++, G_TD_CLAMP);
         gDPSetTextureLOD(gMainGfxPos++, G_TL_TILE);
-        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, TEXEL0, 0, 0, 0, PRIMITIVE, 0, 0, 0, TEXEL0, 0, 0, 0, PRIMITIVE);
+        gDPSetCombineMode(gMainGfxPos++, PM_CC_10, PM_CC_10);
         gDPPipeSync(gMainGfxPos++);
 
         N(UnkModelFunc000)(temp_f24, temp_f26, temp_f20, temp_f22);

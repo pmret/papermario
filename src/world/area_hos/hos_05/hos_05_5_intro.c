@@ -1326,7 +1326,7 @@ Gfx N(gfx_setup_story_viewport)[] = {
     gsDPSetTextureConvert(G_TC_FILT),
     gsDPSetTexturePersp(G_TP_NONE),
     gsDPSetTextureLUT(G_TT_RGBA16),
-    gsDPSetCombineLERP(0, 0, 0, TEXEL0, 0, 0, 0, PRIMITIVE, 0, 0, 0, TEXEL0, 0, 0, 0, PRIMITIVE),
+    gsDPSetCombineMode(PM_CC_10, PM_CC_10),
     gsDPSetScissor(G_SC_NON_INTERLACE, 29, 28, 291, 190),
     gsDPSetColorDither(G_CD_DISABLE),
     gsDPSetAlphaDither(G_AD_PATTERN),

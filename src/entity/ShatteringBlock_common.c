@@ -175,7 +175,7 @@ void entity_shattering_setupGfx(s32 entityIndex) {
             gDPSetRenderMode(gfxPos++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
             gDPSetCombineMode(gfxPos++, G_CC_MODULATEIA, G_CC_MODULATEIA);
         } else {
-            gDPSetCombineLERP(gfxPos++, 0, 0, 0, TEXEL0, SHADE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0);
+            gDPSetCombineMode(gfxPos++, PM_CC_11, PM_CC_12);
             gDPSetPrimColor(gfxPos++, 0, 0, 0, 0, 0, data->alpha);
         }
 

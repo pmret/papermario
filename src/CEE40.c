@@ -43,7 +43,7 @@ void func_80138740(s32 x1, s32 y1, s32 x2, s32 y2, f32 arg4) {
     }
 
     gDPSetCycleType(gMainGfxPos++, G_CYC_1CYCLE);
-    gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, TEXEL0, 0, 0, 0, PRIMITIVE, 0, 0, 0, TEXEL0, 0, 0, 0, PRIMITIVE);
+    gDPSetCombineMode(gMainGfxPos++, PM_CC_10, PM_CC_10);
     gDPSetRenderMode(gMainGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
     gDPSetColorDither(gMainGfxPos++, G_CD_DISABLE);
     gDPSetAlphaDither(gMainGfxPos++, G_AD_NOISE);
@@ -185,7 +185,7 @@ void func_80138E54(s32 arg0, s32 arg1, s32 arg2, f32 arg3, f32 arg4) {
     gDPSetTexturePersp(gMainGfxPos++, G_TP_NONE);
     gDPSetColorImage(gMainGfxPos++, G_IM_FMT_I, G_IM_SIZ_8b, 64, osVirtualToPhysical(nuGfxZBuffer));
     gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, 0, 0, 64, 64);
-    gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, TEXEL0, 0, 0, 0, 1, 0, 0, 0, TEXEL0, 0, 0, 0, 1);
+    gDPSetCombineMode(gMainGfxPos++, PM_CC_0F, PM_CC_0F);
 
     for (i = 0; i < 4; i++) {
         gDPLoadTextureTile(gMainGfxPos++, osVirtualToPhysical(&nuGfxZBuffer[i * 2048]), G_IM_FMT_RGBA, G_IM_SIZ_32b, 64, 16, 0, 0, 63, 15, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
@@ -264,7 +264,7 @@ void func_80139F10(s32 arg0, s32 arg1, f32 alpha, s32 primR, s32 primG, s32 prim
 
     gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, x1, y1, x2, y2);
     if (alpha == 255.0f) {
-        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, PRIMITIVE, 0, 0, 0, 1, 0, 0, 0, PRIMITIVE, 0, 0, 0, 1);
+        gDPSetCombineMode(gMainGfxPos++, PM_CC_08, PM_CC_08);
     }
     gDPSetPrimColor(gMainGfxPos++, 0, 0, primR, primG, primB, primA);
     texScale = (255.0f - alpha) * 10.5f / 255.0f + 0.09; // range from

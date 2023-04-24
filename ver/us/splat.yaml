@@ -300,20 +300,20 @@ segments:
       type: .data
       name: curtains
       subsegments:
-      - [0x4F9E0, i4, sprite/unk_checkers, 16, 32]
+      - [0x4F9E0, i4, theater/walls, 16, 32]
       - [0x4FAE0]
-      - [0x4FB30, rgba32, sprite/curtains, 32, 32]
+      - [0x4FB30, rgba32, theater/curtains, 32, 32] #TODO: flip
       - [0x50B30]
-      - [0x50B80, ci4, sprite/checkers, 32, 16]
-      - [0x50C80, palette, sprite/checkers]
+      - [0x50B80, ci4, theater/floor, 32, 16] #TODO: flip
+      - [0x50C80, palette, theater/floor]
       - [0x50CA0]
-      - [0x50D20, vtx, vtx/curtains1]
-      - [0x50D80, vtx, vtx/curtains2]
-      - [0x50DE0, vtx, vtx/curtains3]
-      - [0x50F70, vtx, vtx/curtains4]
-      - [0x50FB0, vtx, vtx/curtains5]
-      - [0x50FF0, vtx, vtx/curtains6]
-      - [0x511E0, vtx, vtx/curtains7]
+      - [0x50D20, vtx, theater/left_wall_vtx]
+      - [0x50D80, vtx, theater/right_wall_vtx]
+      - [0x50DE0, vtx, theater/floor_vtx]
+      - [0x50F70, vtx, theater/left_inset_shadow_vtx]
+      - [0x50FB0, vtx, theater/right_inset_shadow_vtx]
+      - [0x50FF0, vtx, theater/curtain_vtx]
+      - [0x511E0, vtx, theater/wall_shadows_vtx]
       - [0x51260]
       - [0x51540, ia8, ui/no_controller, 128, 32]
       - [0x52540]

@@ -4340,6 +4340,8 @@ enum DemoState {
     DEMO_STATE_NONE         = 0,
     DEMO_STATE_ACTIVE       = 1,
     DEMO_STATE_CHANGE_MAP   = 2,
+    DEMO_STATE_4            = 4,
+    DEMO_STATE_DONE         = 5,
 };
 
 enum MapLoadType {

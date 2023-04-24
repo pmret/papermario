@@ -253,7 +253,7 @@ void spr_appendGfx_component_flat(
             }
 
             gDPSetEnvColor(gMainGfxPos++, 0, 0, 0, alpha);
-            gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, 0, ENVIRONMENT, 0, TEXEL1, 0, 0, 0, 0, 0, 0, 0, 0, COMBINED);
+            gDPSetCombineMode(gMainGfxPos++, PM_CC_0B, PM_CC_0C);
             gSPVertex(gMainGfxPos++, vertices, 4, 0);
             gSP2Triangles(gMainGfxPos++, 0, 2, 1, 0, 0, 3, 2, 0);
             gDPPipeSync(gMainGfxPos++);
@@ -277,7 +277,7 @@ void spr_appendGfx_component_flat(
             }
 
             gDPSetEnvColor(gMainGfxPos++, 0, 0, 0, alpha);
-            gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, 0, ENVIRONMENT, 0, TEXEL0, 0, 0, 0, 0, 0, ENVIRONMENT, 0, TEXEL0, 0);
+            gDPSetCombineMode(gMainGfxPos++, PM_CC_0A, PM_CC_0A);
             gSPVertex(gMainGfxPos++, vertices, 4, 0);
             gSP2Triangles(gMainGfxPos++, 0, 2, 1, 0, 0, 3, 2, 0);
             gDPPipeSync(gMainGfxPos++);

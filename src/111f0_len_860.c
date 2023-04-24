@@ -45,7 +45,7 @@ void state_step_enter_world(void) {
 
                 gGameStatusPtr->prevArea = gGameStatusPtr->areaID;
                 set_time_freeze_mode(TIME_FREEZE_NORMAL);
-                if (gGameStatusPtr->demoState == 0) {
+                if (gGameStatusPtr->demoState == DEMO_STATE_NONE) {
                     disable_player_input();
                 }
                 update_cameras();
@@ -75,7 +75,7 @@ void state_step_enter_world(void) {
             update_cameras();
 
             if (update_enter_map_screen_overlay(&gMapTransitionAlpha) != 0) {
-                if (gGameStatusPtr->demoState == 0) {
+                if (gGameStatusPtr->demoState == DEMO_STATE_NONE) {
                     enable_player_input();
                 }
                 set_screen_overlay_params_front(255, -1.0f);
@@ -123,7 +123,7 @@ void state_step_change_map(void) {
             gMapTransitionState++;
             break;
         case 2:
-            if (gGameStatusPtr->demoState != 0) {
+            if (gGameStatusPtr->demoState != DEMO_STATE_NONE) {
                 set_game_mode(GAME_MODE_DEMO);
             }
 
@@ -135,7 +135,7 @@ void state_step_change_map(void) {
                 load_map_by_IDs(gGameStatusPtr->areaID, gGameStatusPtr->mapID, 0);
                 set_time_freeze_mode(TIME_FREEZE_NORMAL);
                 nuContRmbForceStopEnd();
-                if (gGameStatusPtr->demoState == 0) {
+                if (gGameStatusPtr->demoState == DEMO_STATE_NONE) {
                     disable_player_input();
                 }
                 update_cameras();
@@ -163,7 +163,7 @@ void state_step_change_map(void) {
             update_cameras();
 
             if (update_enter_map_screen_overlay(&gMapTransitionAlpha) != 0) {
-                if (gGameStatusPtr->demoState == 0) {
+                if (gGameStatusPtr->demoState == DEMO_STATE_NONE) {
                     enable_player_input();
                 }
                 set_screen_overlay_params_front(255, -1.0f);

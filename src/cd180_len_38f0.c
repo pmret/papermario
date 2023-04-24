@@ -509,7 +509,7 @@ s16 update_exit_map_screen_overlay(s16* progress) {
             r = g = b = 208;
             type = 1;
             amt = 10;
-            if (gGameStatusPtr->demoState == 2) {
+            if (gGameStatusPtr->demoState == DEMO_STATE_CHANGE_MAP) {
                 gGameStatusPtr->nextDemoScene = 18;
             }
             break;
@@ -521,7 +521,7 @@ s16 update_exit_map_screen_overlay(s16* progress) {
             type = 1;
             break;
         case TRANSITION_7:
-            if (gGameStatusPtr->demoState == 2) {
+            if (gGameStatusPtr->demoState == DEMO_STATE_CHANGE_MAP) {
                 gGameStatusPtr->nextDemoScene = 18;
             }
             r = g = b = 208;

@@ -448,7 +448,7 @@ void btl_update(void) {
 
         if (cond || D_802809F6 != -1) {
             if (D_802809F6 == -1) {
-                if (gGameStatusPtr->demoState == 2) {
+                if (gGameStatusPtr->demoState == DEMO_STATE_CHANGE_MAP) {
                     u8 paramType;
                     f32 paramAmount;
 

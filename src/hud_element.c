@@ -516,7 +516,7 @@ void hud_element_draw_rect(HudElement* hudElement, s16 texSizeX, s16 texSizeY, s
                         }
                     } else {
                         gDPSetRenderMode(gMainGfxPos++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
-                        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0);
+                        gDPSetCombineMode(gMainGfxPos++, PM_CC_07, PM_CC_07);
                         gDPSetPrimColor(gMainGfxPos++, 0, 0, 40, 40, 40, 72);
                     }
 

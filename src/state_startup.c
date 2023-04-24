@@ -29,7 +29,7 @@ void state_step_startup(void) {
     gGameStatusPtr->creditsViewportMode = -1;
     gGameStatusPtr->demoFlags = 0;
     gGameStatusPtr->unk_A9 = -1;
-    gGameStatusPtr->demoState = 0;
+    gGameStatusPtr->demoState = DEMO_STATE_NONE;
 
     general_heap_create();
     clear_render_tasks();

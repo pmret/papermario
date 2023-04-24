@@ -1489,7 +1489,7 @@ void draw_encounters_pre_battle(void) {
                 otherZ = playerZ;
             }
 
-            if (gGameStatusPtr->demoState == 2) {
+            if (gGameStatusPtr->demoState == DEMO_STATE_CHANGE_MAP) {
                 set_screen_overlay_params_back(10, encounter->fadeOutAmount);
                 set_screen_overlay_alpha(1, 255.0f);
                 set_screen_overlay_color(1, 0, 0, 0);

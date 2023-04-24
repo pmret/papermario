@@ -140,20 +140,10 @@ DemoSceneData DemoScenes[] = {
     {} // final entry blank
 };
 
-#if VERSION_JP
-char versionString[] = "Prg Ver.00/07/06 22:22";
-#elif VERSION_US
-char versionString[] = "Prg Ver.00/12/05 16:54";
-#elif VERSION_IQUE
-char versionString[] = "Prg Ver.04/05/18 10:52";
-#else
-char versionString[] = "Prg Ver.??/??/?? ??:??";
-#endif
-
 void state_init_demo(void) {
-    if (gGameStatusPtr->demoState == 0) {
+    if (gGameStatusPtr->demoState == DEMO_STATE_NONE) {
         gGameStatusPtr->nextDemoScene = 0;
-        gGameStatusPtr->demoState = 1;
+        gGameStatusPtr->demoState = DEMO_STATE_ACTIVE;
     }
 
     gGameStatusPtr->demoButtonInput = 0;
@@ -174,10 +164,10 @@ void state_step_demo(void) {
     s16 mapID;
     s16 areaID;
 
-    if (gGameStatusPtr->demoState == 4) {
+    if (gGameStatusPtr->demoState == DEMO_STATE_4) {
         mode = DEMO_SCENE_DONE;
     }
-    if (gGameStatusPtr->demoState == 5) {
+    if (gGameStatusPtr->demoState == DEMO_STATE_DONE) {
         mode = DEMO_SCENE_EXIT;
     }
 
@@ -188,7 +178,7 @@ void state_step_demo(void) {
             gGameStatusPtr->introState = INTRO_STATE_3;
             gOverrideFlags |= GLOBAL_OVERRIDES_8;
             intro_logos_update_fade();
-            gGameStatusPtr->demoState = 5;
+            gGameStatusPtr->demoState = DEMO_STATE_DONE;
             break;
         case DEMO_SCENE_EXIT:
             if (gGameStatusPtr->introState != INTRO_STATE_0) {
@@ -197,7 +187,7 @@ void state_step_demo(void) {
 
             if (gGameStatusPtr->introState == INTRO_STATE_0) {
                 gGameStatusPtr->nextDemoScene = 0;
-                gGameStatusPtr->demoState = 0;
+                gGameStatusPtr->demoState = DEMO_STATE_NONE;
                 gGameStatusPtr->peachFlags = 0;
                 enable_sounds();
                 gGameStatusPtr->isBattle = FALSE;
@@ -283,5 +273,15 @@ void state_step_demo(void) {
 void state_drawUI_demo(void) {
 
 }
+
+#if VERSION_JP
+char versionString[] = "Prg Ver.00/07/06 22:22";
+#elif VERSION_US
+char versionString[] = "Prg Ver.00/12/05 16:54";
+#elif VERSION_IQUE
+char versionString[] = "Prg Ver.04/05/18 10:52";
+#else
+char versionString[] = "Prg Ver.??/??/?? ??:??";
+#endif
 
 static const f32 pad[] = {0.0f, 0.0f};
