@@ -3,6 +3,12 @@
 
 #include "effects.h"
 
+#ifdef PRINT_ON_PANIC
+// TODO: provide shim for func_80025F44 instead
+#define ASSERT(condition) if (!(condition)) { while (TRUE) {} }
+#define PANIC() while (TRUE) {}
+#endif
+
 s32 func_E0200000(s32);
 s32 func_E0200044(s32, s32);
 
