@@ -218,6 +218,10 @@
 #define DMG_STATUS_ALWAYS(typeFlag, duration) (STATUS_FLAG_80000000 | STATUS_FLAG_RIGHT_ON | typeFlag | (duration << 8))
 #define DMG_STATUS_IGNORE_RES(typeFlag, duration) (typeFlag | (duration << 8) | STATUS_CHANCE_IGNORE_RES)
 
+#define PM_CC_01        0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0
+#define PM_CC_02        0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0
+#define PM_CC_03        0, 0, 0, COMBINED, 0, 0, 0, COMBINED
+
 #ifdef OLD_GCC
 #define VLA 0
 #else

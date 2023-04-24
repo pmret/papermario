@@ -442,12 +442,8 @@ void func_801491E4(Matrix4f mtx, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 alp
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, alpha);
 
     if (alpha == 255) {
-        gDPSetCombineLERP(gMainGfxPos++,
-            0, 0, 0, TEXEL1, 0, 0, 0, TEXEL1,
-            0, 0, 0, COMBINED, 0, 0, 0, COMBINED);
+        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, TEXEL1, 0, 0, 0, TEXEL1, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED);
     } else {
-        gDPSetCombineLERP(gMainGfxPos++,
-            0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0,
-            0, 0, 0, COMBINED, 0, 0, 0, COMBINED);
+        gDPSetCombineMode(gMainGfxPos++, PM_CC_02, PM_CC_03);
     }
 }

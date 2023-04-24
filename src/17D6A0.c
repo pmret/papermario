@@ -2585,7 +2585,7 @@ Vtx BtlBonkModelVtx[] = {
 Gfx BtlBonkModelGfx[] = {
     gsDPPipeSync(),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
-    gsDPSetCombineLERP(0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0),
+    gsDPSetCombineMode(PM_CC_01, PM_CC_02),
     gsDPSetTexturePersp(G_TP_PERSP),
     gsDPSetTextureDetail(G_TD_CLAMP),
     gsDPSetTextureLOD(G_TL_TILE),

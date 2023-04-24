@@ -896,9 +896,7 @@ void imgfx_appendGfx_mesh(ImgFXState* state, Matrix4f mtx) {
                 if (primAlpha <= 0) {
                     return;
                 }
-                gDPSetCombineLERP(gMainGfxPos++,
-                    0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0,
-                    0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
+                gDPSetCombineMode(gMainGfxPos++, PM_CC_02, PM_CC_02);
                 gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, primAlpha);
                 break;
             case IMGFX_RENDER_MULTIPLY_RGBA:
@@ -1010,9 +1008,7 @@ void imgfx_appendGfx_mesh(ImgFXState* state, Matrix4f mtx) {
                     primAlpha = state->ints.hologram.alphaAmt * ifxImgAlpha;
                     // color: texture
                     // alpha: texture * prim
-                    gDPSetCombineLERP(gMainGfxPos++,
-                        0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0,
-                        0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
+                    gDPSetCombineMode(gMainGfxPos++, PM_CC_02, PM_CC_02);
                     gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, primAlpha);
                     gDPSetAlphaCompare(gMainGfxPos++, G_AC_DITHER);
                 } else if (state->ints.hologram.mode == IMGFX_HOLOGRAM_THRESHOLD) {
@@ -1023,9 +1019,7 @@ void imgfx_appendGfx_mesh(ImgFXState* state, Matrix4f mtx) {
                     primAlpha = state->ints.hologram.alphaAmt * ifxImgAlpha;
                     // color: texture
                     // alpha: texture * prim
-                    gDPSetCombineLERP(gMainGfxPos++,
-                        0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0,
-                        0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
+                    gDPSetCombineMode(gMainGfxPos++, PM_CC_02, PM_CC_02);
                     gDPSetAlphaDither(gMainGfxPos++, G_AD_NOISE);
                     gDPSetAlphaCompare(gMainGfxPos++, G_AC_THRESHOLD);
                     gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, primAlpha);
@@ -1051,9 +1045,7 @@ void imgfx_appendGfx_mesh(ImgFXState* state, Matrix4f mtx) {
             case IMGFX_RENDER_OVERLAY_RGBA:
                 // color: texture
                 // alpha: texture * prim
-                gDPSetCombineLERP(gMainGfxPos++, 
-                    0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0,
-                    0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
+                gDPSetCombineMode(gMainGfxPos++, PM_CC_02, PM_CC_02);
                 gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, state->ints.overlay.alpha);
                 break;
         }

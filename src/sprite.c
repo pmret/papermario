@@ -62,7 +62,7 @@ Gfx D_802DF3F0[] = {
 
 Gfx D_802DF428[] = {
     gsSPClearGeometryMode(G_CULL_BOTH | G_LIGHTING),
-    gsDPSetCombineLERP(0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0),
+    gsDPSetCombineMode(PM_CC_02, PM_CC_02),
     gsSPTexture(-1, -1, 0, G_TX_RENDERTILE, G_ON),
     gsSPSetGeometryMode(G_ZBUFFER | G_SHADE | G_SHADING_SMOOTH),
     gsDPSetRenderMode(G_RM_ZB_CLD_SURF, G_RM_ZB_CLD_SURF2),
