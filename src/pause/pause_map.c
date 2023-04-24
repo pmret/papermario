@@ -1,6 +1,14 @@
 #include "pause_common.h"
 #include "message_ids.h"
 
+#if VERSION_PAL
+#define MAP_TITLE_X 36
+#define MAP_TITLE_WIDTH 220
+#else
+#define MAP_TITLE_X 56
+#define MAP_TITLE_WIDTH 180
+#endif
+
 extern Gfx gPauseDLWorldMap[];
 extern u8 pause_world_map_png[];
 extern Gfx gPauseDLPathPoints[];
@@ -98,6 +106,7 @@ PauseMapSpace gPauseMapSpaces[] = {
     { .pos = { .x =  88, .y =  22 }, .parent = 31, .pathLength =  3, .path = gPauseMapPaths[32], .afterRequirement = STORY_EPILOGUE,                    .id = LOCATION_PEACHS_CASTLE },
     { .pos = { .x =  98, .y = 147 }, .parent =  0, .pathLength =  0, .path = gPauseMapPaths[33], .afterRequirement = STORY_61,                          .id = LOCATION_MARIOS_HOUSE }
 };
+
 s32 gPauseMapArrowWobble[] = { 0, 2, 3, 3, 4, 4, 4, 4, 3, 2, 1, 0 };
 MenuWindowBP gPauseMapWindowBPs[] = {
     {
@@ -117,8 +126,8 @@ MenuWindowBP gPauseMapWindowBPs[] = {
     {
         .windowID = WINDOW_ID_PAUSE_MAP_TITLE,
         .unk_01 = 0,
-        .pos = { .x = 56, .y = 124 },
-        .width = 180,
+        .pos = { .x = MAP_TITLE_X, .y = 124 },
+        .width = MAP_TITLE_WIDTH,
         .height = 20,
         .priority = WINDOW_PRIORITY_0,
         .fpDrawContents = &pause_map_draw_title,
