@@ -46,7 +46,7 @@ void state_init_language_select(void) {
     D_800A0932[0] = 0;
     disable_player_input();
     set_time_freeze_mode(TIME_FREEZE_FULL);
-    set_screen_overlay_params_front(0, D_800A0932[0]);
+    set_screen_overlay_params_front(STENCIL_TYPE_0, D_800A0932[0]);
 }
 
 void state_init_file_select(void) {
@@ -99,7 +99,7 @@ void state_step_language_select(void) {
                 if (D_800A0932[0] > 255) {
                     D_800A0932[0] = 255;
                 }
-                set_screen_overlay_params_front(0, D_800A0932[0]);
+                set_screen_overlay_params_front(STENCIL_TYPE_0, D_800A0932[0]);
                 if (D_800A0932[0] == 255) {
 
                     D_800A0931 = 1;
@@ -156,7 +156,7 @@ void state_step_language_select(void) {
                     nuPiReadRomOverlay(&D_8007798C);
                     filemenu_init(TRUE);
                     gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
-                    set_screen_overlay_params_front(255, 255.0f);
+                    set_screen_overlay_params_front(STENCIL_TYPE_NONE, 255.0f);
                 }
                 if (D_800A0930 >= 0) {
                     break;
@@ -168,7 +168,7 @@ void state_step_language_select(void) {
             if (D_800A0932[0] < 0) {
                 D_800A0932[0] = 0;
             }
-            set_screen_overlay_params_front(0, D_800A0932[0]);
+            set_screen_overlay_params_front(STENCIL_TYPE_0, D_800A0932[0]);
             break;
     }
 }
@@ -213,10 +213,10 @@ void state_drawUI_file_select(void) {
 void state_init_exit_language_select(void) {
     if (D_800A0932[0] > 0) {
         D_800A0931 = 0;
-        set_screen_overlay_params_front(0, D_800A0932[0]);
+        set_screen_overlay_params_front(STENCIL_TYPE_0, D_800A0932[0]);
     } else {
         D_800A0931 = 1;
-        set_screen_overlay_params_front(0, D_800A0932[0]);
+        set_screen_overlay_params_front(STENCIL_TYPE_0, D_800A0932[0]);
     }
     D_800A0930 = 1;
     gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
@@ -228,9 +228,9 @@ void state_init_exit_file_select(void) {
     D_800A0930 = 0;
 
     if (func_80244BC4() == 0) {
-        set_map_transition_effect(7);
+        set_map_transition_effect(TRANSITION_7);
     } else {
-        set_map_transition_effect(8);
+        set_map_transition_effect(TRANSITION_8);
         gOverrideFlags &= ~GLOBAL_OVERRIDES_WINDOWS_IN_FRONT_OF_CURTAINS;
         bgm_set_song(0, -1, 0, 1000, 8);
     }
@@ -245,7 +245,7 @@ void state_step_exit_language_select(void) {
                 if (D_800A0932[0] < 0) {
                     D_800A0932[0] = 0;
                 }
-                set_screen_overlay_params_front(0, D_800A0932[0]);
+                set_screen_overlay_params_front(STENCIL_TYPE_0, D_800A0932[0]);
                 if (D_800A0932[0] == 0) {
                     D_800A0931 = 1;
                 }
@@ -259,7 +259,7 @@ void state_step_exit_language_select(void) {
                 if (D_800A0932[0] > 255) {
                     D_800A0932[0] = 255;
                 }
-                set_screen_overlay_params_front(0U, D_800A0932[0]);
+                set_screen_overlay_params_front(STENCIL_TYPE_0, D_800A0932[0]);
                 if (D_800A0932[0] == 255) {
                     D_800A0931 = 2;
                 }
@@ -339,7 +339,7 @@ void state_step_exit_language_select(void) {
                 if (D_800A0932[0] < 0) {
                     D_800A0932[0] = 0;
                 }
-                set_screen_overlay_params_front(0, D_800A0932[0]);
+                set_screen_overlay_params_front(STENCIL_TYPE_0, D_800A0932[0]);
             }
             break;
         case 3:
@@ -355,7 +355,7 @@ void state_step_exit_language_select(void) {
                 if (D_800A0932[0] < 0) {
                     D_800A0932[0] = 0;
                 }
-                set_screen_overlay_params_front(0, D_800A0932[0]);
+                set_screen_overlay_params_front(STENCIL_TYPE_0, D_800A0932[0]);
             }
             break;
         case 4:
@@ -366,7 +366,7 @@ void state_step_exit_language_select(void) {
             update_effects();
             enable_player_input();
             set_game_mode(GAME_MODE_CHANGE_MAP);
-            set_screen_overlay_params_front(255, -1.0f);
+            set_screen_overlay_params_front(STENCIL_TYPE_NONE, -1.0f);
             break;
         }
 }

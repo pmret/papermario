@@ -238,7 +238,7 @@ void func_80138E54(s32 arg0, s32 arg1, s32 arg2, f32 arg3, f32 arg4) {
     }
 }
 
-void func_80139F10(s32 arg0, s32 arg1, f32 alpha, s32 primR, s32 primG, s32 primB, s32 primA, s32 camID) {
+void appendGfx_screen_transition_stencil(s32 arg0, s32 arg1, f32 progress, s32 primR, s32 primG, s32 primB, s32 primA, s32 camID) {
     s32 x1, y1, x2, y2, t5, t6;
     f32 texScale;
 
@@ -258,16 +258,16 @@ void func_80139F10(s32 arg0, s32 arg1, f32 alpha, s32 primR, s32 primG, s32 prim
         t6 = 0;
     }
 
-    if (alpha == 0.0f) {
+    if (progress == 0.0f) {
         return;
     }
 
     gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, x1, y1, x2, y2);
-    if (alpha == 255.0f) {
+    if (progress == 255.0f) {
         gDPSetCombineMode(gMainGfxPos++, PM_CC_08, PM_CC_08);
     }
     gDPSetPrimColor(gMainGfxPos++, 0, 0, primR, primG, primB, primA);
-    texScale = (255.0f - alpha) * 10.5f / 255.0f + 0.09; // range from
+    texScale = (255.0f - progress) * 10.5f / 255.0f + 0.09; // range from
     gSPTextureRectangle(gMainGfxPos++, x1 * 4, y1 * 4, x2 * 4, y2 * 4, G_TX_RENDERTILE,
                         (t5 - arg0) * 32.0f / texScale + 16.0f + 1024.0f, (t6 - arg1) * 32.0f / texScale + 16.0f + 1024.0f,
                         1024.0f / texScale, 1024.0f / texScale);

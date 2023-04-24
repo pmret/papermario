@@ -244,7 +244,7 @@ void create_target_list(Actor* actor, s32 arg1) {
             goto END2;
         }
         if (!(gBattleStatus.flags2 & BS_FLAGS2_4000) && battleStatus->darknessMode > 0) {
-            get_screen_overlay_params(1, &overlayType, &overlayZoom);
+            get_screen_overlay_params(SCREEN_LAYER_BACK, &overlayType, &overlayZoom);
             if (overlayZoom >= 215.0f) {
                 skip = TRUE;
                 sp18 = 1;

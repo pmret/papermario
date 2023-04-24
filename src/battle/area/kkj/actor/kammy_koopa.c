@@ -200,36 +200,36 @@ API_CALLABLE(N(BlockAppear)) {
 API_CALLABLE(func_8021833C_6DC0DC) {
     if (isInitialCall) {
         script->functionTemp[0] = 20;
-        set_screen_overlay_center(1, 0, 0, 0);
-        set_screen_overlay_center(1, 1, 320, 240);
-        set_screen_overlay_params_back(12, 150);
+        set_screen_overlay_center(SCREEN_LAYER_BACK, 0, 0, 0);
+        set_screen_overlay_center(SCREEN_LAYER_BACK, 1, 320, 240);
+        set_screen_overlay_params_back(STENCIL_TYPE_C, 150);
     }
     if (script->functionTemp[0] != 0) {
         script->functionTemp[0]--;
         return ApiStatus_BLOCK;
     }
 
-    set_screen_overlay_center(1, 0, 0, 0);
-    set_screen_overlay_center(1, 1, 320, 240);
-    set_screen_overlay_params_back(0xFF, -1);
+    set_screen_overlay_center(SCREEN_LAYER_BACK, 0, 0, 0);
+    set_screen_overlay_center(SCREEN_LAYER_BACK, 1, 320, 240);
+    set_screen_overlay_params_back(STENCIL_TYPE_NONE, -1);
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(func_802183EC_6DC18C) {
     if (isInitialCall) {
         script->functionTemp[0] = 30;
-        set_screen_overlay_center(1, 0, 0, 0);
-        set_screen_overlay_center(1, 1, 320, 240);
-        set_screen_overlay_params_back(12, 150);
+        set_screen_overlay_center(SCREEN_LAYER_BACK, 0, 0, 0);
+        set_screen_overlay_center(SCREEN_LAYER_BACK, 1, 320, 240);
+        set_screen_overlay_params_back(STENCIL_TYPE_C, 150);
     }
     if (script->functionTemp[0] != 0) {
         script->functionTemp[0]--;
         return ApiStatus_BLOCK;
     }
 
-    set_screen_overlay_center(1, 0, 0, 0);
-    set_screen_overlay_center(1, 1, 320, 240);
-    set_screen_overlay_params_back(0xFF, -1);
+    set_screen_overlay_center(SCREEN_LAYER_BACK, 0, 0, 0);
+    set_screen_overlay_center(SCREEN_LAYER_BACK, 1, 320, 240);
+    set_screen_overlay_params_back(STENCIL_TYPE_NONE, -1);
     return ApiStatus_DONE2;
 }
 

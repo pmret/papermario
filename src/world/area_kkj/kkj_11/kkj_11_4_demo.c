@@ -188,7 +188,7 @@ EvtScript N(EVS_ProvideDemoInputs) = {
         EVT_RETURN
     EVT_END_IF
     EVT_SET(GF_DemoSceneDone, TRUE)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("kkj_11"), kkj_11_ENTRY_2, TRANSITION_2)
+    EVT_CALL(GotoMapSpecial, EVT_PTR("kkj_11"), kkj_11_ENTRY_2, TRANSITION_FADE_TO_BLACK_FAST)
     EVT_WAIT(110)
     EVT_RETURN
     EVT_END

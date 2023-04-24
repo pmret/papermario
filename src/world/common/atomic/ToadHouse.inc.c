@@ -18,7 +18,7 @@ API_CALLABLE(N(ToadHouse_UpdateScreenOverlay)) {
     s32 type = evt_get_variable(script, *args++);
     s32 zoom = evt_get_variable(script, *args++);
 
-    set_screen_overlay_center(0, 0, 190, 145);
+    set_screen_overlay_center(SCREEN_LAYER_FRONT, 0, 190, 145);
     set_screen_overlay_params_front(type, zoom);
     return ApiStatus_DONE2;
 }
@@ -79,7 +79,7 @@ API_CALLABLE(N(ToadHouse_InitScreenOverlay)) {
     s32 g = evt_get_variable(script, *args++);
     s32 b = evt_get_variable(script, *args++);
 
-    set_screen_overlay_color(0, r, g, b);
+    set_screen_overlay_color(SCREEN_LAYER_FRONT, r, g, b);
     return ApiStatus_DONE2;
 }
 

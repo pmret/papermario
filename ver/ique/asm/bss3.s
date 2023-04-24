@@ -717,7 +717,7 @@ dlabel D_8015A57C
 dlabel mdl_textureHandles
 .space 0x00002200
 
-dlabel D_8015C790
+dlabel ScreenOverlays
 .space 0x00000030
 
 dlabel AmbientSoundData

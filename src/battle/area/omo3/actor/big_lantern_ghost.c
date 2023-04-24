@@ -145,8 +145,8 @@ s32 N(IdleAnimations)[] = {
 API_CALLABLE(N(init_overlay)) {
     get_actor(script->owner1.actorID);
 
-    set_screen_overlay_params_back(13, 220.0f);
-    set_screen_overlay_alpha(1, 200.0f);
+    set_screen_overlay_params_back(STENCIL_TYPE_D, 220.0f);
+    set_screen_overlay_alpha(SCREEN_LAYER_BACK, 200.0f);
     return ApiStatus_DONE2;
 }
 
@@ -180,7 +180,7 @@ API_CALLABLE(N(update_effect)) {
     s32 compListIdx;
 
     if (actor == NULL) {
-        set_screen_overlay_alpha(1, 0.0f);
+        set_screen_overlay_alpha(SCREEN_LAYER_BACK, 0.0f);
         return ApiStatus_BLOCK;
     }
 
@@ -259,8 +259,8 @@ API_CALLABLE(N(update_effect)) {
             break;
     }
 
-    set_screen_overlay_alpha(1, opacity);
-    set_screen_overlay_center_worldpos(1, 0, posX + partX, posY + partY, posZ + partZ);
+    set_screen_overlay_alpha(SCREEN_LAYER_BACK, opacity);
+    set_screen_overlay_center_worldpos(SCREEN_LAYER_BACK, 0, posX + partX, posY + partY, posZ + partZ);
 
     actorState->varTable[N(VAR_LANTERN_X)] = posX + partX;
     actorState->varTable[N(VAR_LANTERN_Y)] = posY + partY;

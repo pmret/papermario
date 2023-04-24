@@ -26,7 +26,7 @@ EvtScript N(EVS_ProvideDemoInputs1) = {
         EVT_RETURN
     EVT_END_IF
     EVT_SET(GF_DemoSceneDone, TRUE)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("nok_12"), nok_12_ENTRY_2, TRANSITION_2)
+    EVT_CALL(GotoMapSpecial, EVT_PTR("nok_12"), nok_12_ENTRY_2, TRANSITION_FADE_TO_BLACK_FAST)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -105,7 +105,7 @@ EvtScript N(EVS_ProvideDemoInputs2) = {
         EVT_RETURN
     EVT_END_IF
     EVT_SET(GF_DemoSceneDone, TRUE)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("nok_12"), nok_12_ENTRY_2, TRANSITION_2)
+    EVT_CALL(GotoMapSpecial, EVT_PTR("nok_12"), nok_12_ENTRY_2, TRANSITION_FADE_TO_BLACK_FAST)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END

@@ -8,8 +8,8 @@ API_CALLABLE(N(FlashScreenWhite)) {
     }
     switch (script->functionTemp[2]) {
         case 0: // fading in
-            set_screen_overlay_color(0, 208, 208, 208);
-            set_screen_overlay_params_front(1, script->functionTemp[1]);
+            set_screen_overlay_color(SCREEN_LAYER_FRONT, 208, 208, 208);
+            set_screen_overlay_params_front(STENCIL_TYPE_1, script->functionTemp[1]);
             if (script->functionTemp[1] == 255) {
                 script->functionTemp[2] = 1;
                 break;
@@ -21,8 +21,8 @@ API_CALLABLE(N(FlashScreenWhite)) {
             script->functionTemp[1] = 255;
             break;
         case 1: // fading out
-            set_screen_overlay_color(0, 208, 208, 208);
-            set_screen_overlay_params_front(1, script->functionTemp[1]);
+            set_screen_overlay_color(SCREEN_LAYER_FRONT, 208, 208, 208);
+            set_screen_overlay_params_front(STENCIL_TYPE_1, script->functionTemp[1]);
             if (script->functionTemp[1] == 0) {
                 return ApiStatus_DONE2;
             }

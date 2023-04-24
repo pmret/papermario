@@ -12,7 +12,7 @@ void state_init_enter_demo(void) {
 
 void state_init_enter_world(void) {
     D_800A0948 = 1;
-    set_map_transition_effect(8);
+    set_map_transition_effect(TRANSITION_8);
     init_enter_world_shared();
 }
 
@@ -78,7 +78,7 @@ void state_step_enter_world(void) {
                 if (gGameStatusPtr->demoState == DEMO_STATE_NONE) {
                     enable_player_input();
                 }
-                set_screen_overlay_params_front(255, -1.0f);
+                set_screen_overlay_params_front(STENCIL_TYPE_NONE, -1.0f);
                 set_game_mode(GAME_MODE_CHANGE_MAP);
             }
             break;
@@ -166,7 +166,7 @@ void state_step_change_map(void) {
                 if (gGameStatusPtr->demoState == DEMO_STATE_NONE) {
                     enable_player_input();
                 }
-                set_screen_overlay_params_front(255, -1.0f);
+                set_screen_overlay_params_front(STENCIL_TYPE_NONE, -1.0f);
                 set_game_mode(GAME_MODE_CHANGE_MAP);
             }
             break;
@@ -219,7 +219,7 @@ void func_8003646C(void) {
             if (gMapTransitionAlpha < 0) {
                 gMapTransitionAlpha = 0;
                 gMapTransitionState++;
-                set_screen_overlay_params_front(255, -1.0f);
+                set_screen_overlay_params_front(STENCIL_TYPE_NONE, -1.0f);
                 set_game_mode(GAME_MODE_CHANGE_MAP);
             }
             update_npcs();
@@ -229,7 +229,7 @@ void func_8003646C(void) {
             break;
     }
 
-    set_screen_overlay_params_front(0, gMapTransitionAlpha);
+    set_screen_overlay_params_front(STENCIL_TYPE_0, gMapTransitionAlpha);
 }
 
 void func_80036640(void) {

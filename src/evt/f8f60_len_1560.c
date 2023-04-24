@@ -211,7 +211,7 @@ ApiStatus func_802D4BDC(Evt* script, s32 initialCall) {
             *t1 = 255;
         }
 
-        set_screen_overlay_params_back(10, *t1);
+        set_screen_overlay_params_back(STENCIL_TYPE_A, *t1);
     }
 
     return ApiStatus_BLOCK;
@@ -230,7 +230,7 @@ ApiStatus func_802D4C4C(Evt* script, s32 initialCall) {
     if (*t0 == 0) {
         t1v = *t1;
         if (t1v == 0) {
-            set_screen_overlay_params_back(255, -1.0f);
+            set_screen_overlay_params_back(STENCIL_TYPE_NONE, -1.0f);
             return ApiStatus_DONE2;
         }
         t1v -= 10;
@@ -238,7 +238,7 @@ ApiStatus func_802D4C4C(Evt* script, s32 initialCall) {
         if (t1v < 0) {
             *t1 = 0;
         }
-        set_screen_overlay_params_back(10, *t1);
+        set_screen_overlay_params_back(STENCIL_TYPE_A, *t1);
     }
 
     return ApiStatus_BLOCK;
@@ -249,9 +249,9 @@ ApiStatus func_802D4CC4(Evt* script, s32 initialCall) {
     s32 value = evt_get_variable(script, *args++);
 
     if (value < 0) {
-        set_screen_overlay_params_back(255, -1.0f);
+        set_screen_overlay_params_back(STENCIL_TYPE_NONE, -1.0f);
     } else {
-        set_screen_overlay_params_back(10, value);
+        set_screen_overlay_params_back(STENCIL_TYPE_A, value);
     }
 
     return ApiStatus_DONE2;
@@ -261,15 +261,15 @@ ApiStatus func_802D4D14(Evt* script, s32 initialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 value = evt_get_float_variable(script, *args++);
 
-    set_screen_overlay_center(0, 0, 0xC, 0x14);
-    set_screen_overlay_center(0, 1, 0x134, 0xDC);
-    set_screen_overlay_params_front(0xC, value);
+    set_screen_overlay_center(SCREEN_LAYER_FRONT, 0, 12, 20);
+    set_screen_overlay_center(SCREEN_LAYER_FRONT, 1, 308, 220);
+    set_screen_overlay_params_front(STENCIL_TYPE_C, value);
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802D4D88(Evt* script, s32 initialCall) {
-    set_screen_overlay_params_front(0xC, 0);
+    set_screen_overlay_params_front(STENCIL_TYPE_C, 0);
     return ApiStatus_DONE2;
 }
 

@@ -151,8 +151,8 @@ void state_init_demo(void) {
     gGameStatusPtr->demoStickY = 0;
 
     disable_sounds();
-    set_map_transition_effect(2);
-    set_screen_overlay_params_front(0, 255.0f);
+    set_map_transition_effect(TRANSITION_FADE_TO_BLACK_FAST);
+    set_screen_overlay_params_front(STENCIL_TYPE_0, 255.0f);
     clear_saved_variables();
     clear_script_list();
 }
@@ -234,9 +234,9 @@ void state_step_demo(void) {
             evt_set_variable(NULL, GB_StoryProgress, demoSceneData->storyProgress);
 
             if (gGameStatusPtr->nextDemoScene == 0) {
-                set_map_transition_effect(3);
+                set_map_transition_effect(TRANSITION_3);
             } else {
-                set_map_transition_effect(2);
+                set_map_transition_effect(TRANSITION_FADE_TO_BLACK_FAST);
             }
 
             set_game_mode(GAME_MODE_ENTER_DEMO_WORLD);
@@ -252,9 +252,9 @@ void state_step_demo(void) {
             evt_set_variable(NULL, GB_StoryProgress, demoSceneData->storyProgress);
 
             if (gGameStatusPtr->nextDemoScene == 0) {
-                set_map_transition_effect(3);
+                set_map_transition_effect(TRANSITION_3);
             } else {
-                set_map_transition_effect(2);
+                set_map_transition_effect(TRANSITION_FADE_TO_BLACK_FAST);
             }
 
             set_game_mode(GAME_MODE_ENTER_DEMO_WORLD);

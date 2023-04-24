@@ -1410,14 +1410,14 @@ void btl_state_draw_celebration(void) {
                 }
             }
 
-            set_screen_overlay_params_front(0, bFadeToBlackAmt);
+            set_screen_overlay_params_front(STENCIL_TYPE_0, bFadeToBlackAmt);
             break;
         case BTL_SUBSTATE_CELEBRATE_LEVEL_UP_DESTROY_HUD:
-            set_screen_overlay_params_front(0, bFadeToBlackAmt);
+            set_screen_overlay_params_front(STENCIL_TYPE_0, bFadeToBlackAmt);
             break;
         case BTL_SUBSTATE_CELEBRATE_WALK_AWAY:
             if (bFadeToBlackAmt != 0) {
-                set_screen_overlay_params_front(0, bFadeToBlackAmt);
+                set_screen_overlay_params_front(STENCIL_TYPE_0, bFadeToBlackAmt);
             }
             break;
     }

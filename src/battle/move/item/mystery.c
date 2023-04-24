@@ -127,7 +127,7 @@ s32 N(func_802A13E4_72C994)(Evt* script, s32 isInitialCall) {
                 u8 type;
                 f32 zoom;
 
-                get_screen_overlay_params(1, &type, &zoom);
+                get_screen_overlay_params(SCREEN_LAYER_BACK, &type, &zoom);
                 if (zoom >= 215.0f) {
                     D_802A25FC = N(D_802A229C_72D84C);
                 }

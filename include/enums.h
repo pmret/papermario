@@ -2970,24 +2970,49 @@ enum Locations {
 };
 
 typedef enum ScreenTransition {
-    TRANSITION_0        = 0,
-    TRANSITION_1        = 1,
-    TRANSITION_2        = 2,
-    TRANSITION_3        = 3,
-    TRANSITION_4        = 4,
-    TRANSITION_5        = 5,
-    TRANSITION_6        = 6,
-    TRANSITION_7        = 7,
-    TRANSITION_8        = 8,
-    TRANSITION_9        = 9,
-    TRANSITION_10       = 10,
-    TRANSITION_11       = 11,
-    TRANSITION_12       = 12,
-    TRANSITION_13       = 13,
-    TRANSITION_14       = 14,
-    TRANSITION_15       = 15,
-    TRANSITION_16       = 16,
+    TRANSITION_0                    = 0,    
+    TRANSITION_1                    = 1,    // FADE_TO_BLACK
+    TRANSITION_FADE_TO_BLACK_FAST   = 2, 
+    TRANSITION_3                    = 3,
+    TRANSITION_4                    = 4,    // SLOW_FADE_TO_BLACK
+    TRANSITION_5                    = 5,
+    TRANSITION_6                    = 6,
+    TRANSITION_7                    = 7,
+    TRANSITION_8                    = 8,
+    TRANSITION_9                    = 9,
+    TRANSITION_10                   = 10,
+    TRANSITION_11                   = 11,
+    TRANSITION_12                   = 12,
+    TRANSITION_13                   = 13,
+    TRANSITION_14                   = 14,
+    TRANSITION_15                   = 15,
+    TRANSITION_16                   = 16,
 } ScreenTransition;
+
+enum ScreenLayer {
+    SCREEN_LAYER_FRONT         = 0,
+    SCREEN_LAYER_BACK          = 1,
+};
+
+typedef enum StencilType {
+    STENCIL_TYPE_NONE       = -1,
+    STENCIL_TYPE_0          = 0,
+    STENCIL_TYPE_1          = 1,
+    STENCIL_TYPE_2          = 2,
+    STENCIL_TYPE_3          = 3,
+    STENCIL_TYPE_MARIO_1    = 4,
+    STENCIL_TYPE_STAR_1     = 5,
+    STENCIL_TYPE_6          = 6,
+    STENCIL_TYPE_MARIO_2    = 7,
+    STENCIL_TYPE_STAR_2     = 8,
+    STENCIL_TYPE_9          = 9,
+    STENCIL_TYPE_A          = 0xA,
+    STENCIL_TYPE_B          = 0xB,  // watt darkness?
+    STENCIL_TYPE_C          = 0xC,
+    STENCIL_TYPE_D          = 0xD,
+    STENCIL_TYPE_E          = 0xE,
+    STENCIL_TYPE_F          = 0xF,
+} StencilType;
 
 enum DoorSounds {
     DOOR_SOUNDS_BASIC               = 0,

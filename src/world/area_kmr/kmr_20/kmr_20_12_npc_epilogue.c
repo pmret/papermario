@@ -27,7 +27,7 @@ API_CALLABLE(N(func_80242084_8EDEA4)) {
         script->functionTemp[1] = 255;
     }
 
-    set_screen_overlay_params_front(0, script->functionTemp[1]);
+    set_screen_overlay_params_front(STENCIL_TYPE_0, script->functionTemp[1]);
 
     if (script->functionTemp[1] == 255) {
         return ApiStatus_DONE2;
@@ -47,7 +47,7 @@ API_CALLABLE(N(func_802420EC_8EDF0C)) {
         return ApiStatus_DONE2;
     }
 
-    set_screen_overlay_params_front(0, script->functionTemp[1]);
+    set_screen_overlay_params_front(STENCIL_TYPE_0, script->functionTemp[1]);
     return ApiStatus_BLOCK;
 }
 

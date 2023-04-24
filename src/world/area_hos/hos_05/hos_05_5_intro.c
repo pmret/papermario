@@ -1368,8 +1368,8 @@ void N(appendGfx_image_strips)(s32 baseX, s32 baseY, IMG_PTR img, PAL_PTR pal, s
         gDPSetTextureLUT(gMainGfxPos++, G_TT_NONE);
     }
 
-    get_screen_overlay_params(1, &overlayType, &overlayAlphaBack);
-    get_screen_overlay_params(0, &overlayType, &overlayAlphaFront);
+    get_screen_overlay_params(SCREEN_LAYER_BACK, &overlayType, &overlayAlphaBack);
+    get_screen_overlay_params(SCREEN_LAYER_FRONT, &overlayType, &overlayAlphaFront);
     alpha = alpha * (255.0f - overlayAlphaBack) * (255.0f - overlayAlphaFront) / 255.0f / 255.0f;
     if (alpha != 255) {
         gDPSetCombineMode(gMainGfxPos++, PM_CC_01, PM_CC_01);
@@ -1440,7 +1440,7 @@ void N(worker_draw_story_graphics)(void) {
         gDPSetRenderMode(gMainGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
         gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, N(StoryGraphicsPtr)->storyPageAlpha);
     }
-    get_screen_overlay_params(1, &overlayType, &overlayAlpha);
+    get_screen_overlay_params(SCREEN_LAYER_BACK, &overlayType, &overlayAlpha);
     if (overlayAlpha != 0.0f) {
         gDPSetCombineLERP(gMainGfxPos++, PRIMITIVE, TEXEL0, PRIMITIVE_ALPHA, TEXEL0, 0, 0, 0, 1, PRIMITIVE, TEXEL0, PRIMITIVE_ALPHA, TEXEL0, 0, 0, 0, 1);
         gDPSetPrimColor(gMainGfxPos++, 0, 0, 208, 208, 208, (s32) overlayAlpha);
@@ -1969,18 +1969,18 @@ API_CALLABLE(N(AnimKammy_FlyOff)) {
 API_CALLABLE(N(func_80244934_A2EB74)) {
     if (isInitialCall) {
         script->functionTemp[0] = 0;
-        set_screen_overlay_params_back(1, 255.0f);
-        set_screen_overlay_color(1, 250, 250, 250);
+        set_screen_overlay_params_back(STENCIL_TYPE_1, 255.0f);
+        set_screen_overlay_color(SCREEN_LAYER_BACK, 250, 250, 250);
         return ApiStatus_BLOCK;
     }
     script->functionTemp[0]++;
     if (script->functionTemp[0] == 10) {
-        set_screen_overlay_params_back(0, 0.0f);
-        set_screen_overlay_color(1, 250, 250, 250);
+        set_screen_overlay_params_back(STENCIL_TYPE_0, 0.0f);
+        set_screen_overlay_color(SCREEN_LAYER_BACK, 250, 250, 250);
         return ApiStatus_DONE2;
     }
-    set_screen_overlay_params_back(1, (10 - script->functionTemp[0]) * 25);
-    set_screen_overlay_color(1, 250, 250, 250);
+    set_screen_overlay_params_back(STENCIL_TYPE_1, (10 - script->functionTemp[0]) * 25);
+    set_screen_overlay_color(SCREEN_LAYER_BACK, 250, 250, 250);
     return ApiStatus_BLOCK;
 }
 
