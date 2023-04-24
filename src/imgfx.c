@@ -1,10 +1,11 @@
 #include "common.h"
 #include "ld_addrs.h"
 #include "sprite.h"
+#include "imgfx.h"
 
 #if VERSION_IQUE
 // TODO: remove if section is split in iQue release
-extern Addr imgfx_gfx_data_ROM_START;
+extern Addr imgfx_data_ROM_START;
 #endif
 
 typedef union ImgFXIntVars {
@@ -98,15 +99,6 @@ typedef struct ImgFXCacheEntry {
     /* 0x06 */ char unk_06[0x2];
 } ImgFXCacheEntry; // size = 0x8
 
-typedef struct ImgFXAnimHeader {
-    /* 0x00 */ s32 keyframesOffset;
-    /* 0x04 */ Gfx* gfxOffset; // Gfx for creating mesh from vertices
-    /* 0x08 */ u16 vtxCount; // conserved across keyframes
-    /* 0x0A */ u16 gfxCount;
-    /* 0x0C */ u16 keyframesCount;
-    /* 0x0E */ u16 flags;
-} ImgFXAnimHeader; // size = 0x10
-
 enum ImgFXAnimFlags {
     IMGFX_ANIM_FLAG_ABSOLUTE_COORDS  = 1, // image-relative (in percent) when unset
 };
@@ -116,14 +108,6 @@ typedef struct ImgFXRenderMode {
     /* 0x4 */ s32 mode2;
     /* 0x8 */ u8 flags; // only checks TRUE so far. some kind of switch?
 } ImgFXRenderMode; // size = 0xC
-
-// 'compressed' vertex data for animated image fx keyframes
-typedef struct ImgFXVtx {
-    /* 0x00 */ s16 ob[3];
-    /* 0x06 */ u8 tc[2];
-    /* 0x08 */ s8 cn[3];
-    /* 0x0B */ char unk_0B;
-} ImgFXVtx; // size = 0x0C
 
 typedef ImgFXState ImgFXInstanceList[MAX_IMGFX_INSTANCES];
 
@@ -194,28 +178,49 @@ ImgFXRenderMode ImgFXRenderModes[] = {
     [IMGFX_RENDER_UNUSED]                { 0x00441208, 0x00111208, 0 },
 };
 
-// all relative to imgfx_gfx_data_ROM_START
-s32 ImgFXAnimOffsets[] = {
-    [IMGFX_ANIM_SHOCK]                 0x14358,
-    [IMGFX_ANIM_SHIVER]                0x18200,
-    [IMGFX_ANIM_VERTICAL_PIPE_CURL]    0x1A858,
-    [IMGFX_ANIM_HORIZONTAL_PIPE_CURL]  0x1E830,
-    [IMGFX_ANIM_STARTLE]               0x29458,
-    [IMGFX_ANIM_FLUTTER_DOWN]          0x314E0,
-    [IMGFX_ANIM_UNFURL]                0x33498,
-    [IMGFX_ANIM_GET_IN_BED]            0x38988,
-    [IMGFX_ANIM_SPIRIT_CAPTURE]        0x39228,
-    [IMGFX_ANIM_UNUSED_1]              0x5B7A8,
-    [IMGFX_ANIM_UNUSED_2]              0x7CF10,
-    [IMGFX_ANIM_UNUSED_3]              0x86490,
-    [IMGFX_ANIM_TUTANKOOPA_GATHER]     0x96258,
-    [IMGFX_ANIM_TUTANKOOPA_SWIRL_2]    0xA1820,
-    [IMGFX_ANIM_TUTANKOOPA_SWIRL_1]    0xACDE8,
-    [IMGFX_ANIM_SHUFFLE_CARDS]         0xBBF68,
-    [IMGFX_ANIM_FLIP_CARD_1]           0xC0490,
-    [IMGFX_ANIM_FLIP_CARD_2]           0xC49B8,
-    [IMGFX_ANIM_FLIP_CARD_3]           0xC6150,
-    [IMGFX_ANIM_CYMBAL_CRUSH]          0xCA380,
+extern Addr shock_header;
+extern Addr shiver_header;
+extern Addr vertical_pipe_curl_header;
+extern Addr horizontal_pipe_curl_header;
+extern Addr startle_header;
+extern Addr flutter_down_header;
+extern Addr unfurl_header;
+extern Addr get_in_bed_header;
+extern Addr spirit_capture_header;
+extern Addr unused_1_header;
+extern Addr unused_2_header;
+extern Addr unused_3_header;
+extern Addr tutankoopa_gather_header;
+extern Addr tutankoopa_swirl_2_header;
+extern Addr tutankoopa_swirl_1_header;
+extern Addr shuffle_cards_header;
+extern Addr flip_card_1_header;
+extern Addr flip_card_2_header;
+extern Addr flip_card_3_header;
+extern Addr cymbal_crush_header;
+
+// all relative to imgfx_data_ROM_START
+u8* ImgFXAnimOffsets[] = {
+    [IMGFX_ANIM_SHOCK]                 shock_header,
+    [IMGFX_ANIM_SHIVER]                shiver_header,
+    [IMGFX_ANIM_VERTICAL_PIPE_CURL]    vertical_pipe_curl_header,
+    [IMGFX_ANIM_HORIZONTAL_PIPE_CURL]  horizontal_pipe_curl_header,
+    [IMGFX_ANIM_STARTLE]               startle_header,
+    [IMGFX_ANIM_FLUTTER_DOWN]          flutter_down_header,
+    [IMGFX_ANIM_UNFURL]                unfurl_header,
+    [IMGFX_ANIM_GET_IN_BED]            get_in_bed_header,
+    [IMGFX_ANIM_SPIRIT_CAPTURE]        spirit_capture_header,
+    [IMGFX_ANIM_UNUSED_1]              unused_1_header,
+    [IMGFX_ANIM_UNUSED_2]              unused_2_header,
+    [IMGFX_ANIM_UNUSED_3]              unused_3_header,
+    [IMGFX_ANIM_TUTANKOOPA_GATHER]     tutankoopa_gather_header,
+    [IMGFX_ANIM_TUTANKOOPA_SWIRL_2]    tutankoopa_swirl_2_header,
+    [IMGFX_ANIM_TUTANKOOPA_SWIRL_1]    tutankoopa_swirl_1_header,
+    [IMGFX_ANIM_SHUFFLE_CARDS]         shuffle_cards_header,
+    [IMGFX_ANIM_FLIP_CARD_1]           flip_card_1_header,
+    [IMGFX_ANIM_FLIP_CARD_2]           flip_card_2_header,
+    [IMGFX_ANIM_FLIP_CARD_3]           flip_card_3_header,
+    [IMGFX_ANIM_CYMBAL_CRUSH]          cymbal_crush_header,
 };
 
 extern ImgFXCacheEntry ImgFXDataCache[8];
@@ -1051,7 +1056,7 @@ void imgfx_appendGfx_mesh(ImgFXState* state, Matrix4f mtx) {
             case IMGFX_RENDER_OVERLAY_RGBA:
                 // color: texture
                 // alpha: texture * prim
-                gDPSetCombineLERP(gMainGfxPos++, 
+                gDPSetCombineLERP(gMainGfxPos++,
                     0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0,
                     0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
                 gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, state->ints.overlay.alpha);
@@ -1215,7 +1220,7 @@ void imgfx_mesh_make_grid(ImgFXState* state) {
 }
 
 ImgFXAnimHeader* imgfx_load_anim(ImgFXState* state) {
-    u8* romStart = ImgFXAnimOffsets[state->ints.anim.type] + imgfx_gfx_data_ROM_START;
+    u8* romStart = (s32) ImgFXAnimOffsets[state->ints.anim.type] + imgfx_data_ROM_START;
     ImgFXAnimHeader* anim = &ImgFXAnimHeaders[state->arrayIdx];
 
     if (state->curAnimOffset != romStart) {
@@ -1249,7 +1254,7 @@ ImgFXAnimHeader* imgfx_load_anim(ImgFXState* state) {
         state->gfxBufs[0] = heap_malloc(anim->gfxCount * sizeof(Gfx));
         state->gfxBufs[1] = heap_malloc(anim->gfxCount * sizeof(Gfx));
 
-        romStart = imgfx_gfx_data_ROM_START + (s32)anim->gfxOffset;
+        romStart = imgfx_data_ROM_START + (s32)anim->gfxOffset;
         romEnd = romStart + anim->gfxCount * sizeof(Gfx);
         dma_copy(romStart, romEnd, state->gfxBufs[0]);
         dma_copy(romStart, romEnd, state->gfxBufs[1]);
@@ -1271,7 +1276,7 @@ ImgFXAnimHeader* imgfx_load_anim(ImgFXState* state) {
                     // ImgFXVtx structs are 0xC bytes while Vtx are 0x10, so we need a (4/3) scaling factor
                     // to compute a new, equivalent Vtx[i] address for an existing ImgFXVtx[i] address.
                     // Unfortunately, using sizeof here does not match.
-                    gfxBuffer[j-1].words.w1 = ((((s32) gfxBuffer[j-1].words.w1 - anim->keyframesOffset) / 3) * 4) +
+                    gfxBuffer[j-1].words.w1 = ((((s32) gfxBuffer[j-1].words.w1 - (s32) anim->keyframesOffset) / 3) * 4) +
                                               (s32) state->vtxBufs[i];
                 }
             } while (cmd != G_ENDDL);
@@ -1331,11 +1336,11 @@ void imgfx_mesh_anim_update(ImgFXState* state) {
 
     // find the current + next keyframe vertex data
     curKeyframe = heap_malloc(header->vtxCount * sizeof(ImgFXVtx));
-    romStart = (u8*)((s32)imgfx_gfx_data_ROM_START + header->keyframesOffset + curKeyIdx * header->vtxCount * sizeof(ImgFXVtx));
+    romStart = (u8*)((s32)imgfx_data_ROM_START + (s32) header->keyframesOffset + curKeyIdx * header->vtxCount * sizeof(ImgFXVtx));
     dma_copy(romStart, romStart + header->vtxCount * sizeof(ImgFXVtx), curKeyframe);
     if (keyframeInterval > 1) {
         nextKeyframe = heap_malloc(header->vtxCount * sizeof(*nextKeyframe));
-        romStart = (u8*)((s32)imgfx_gfx_data_ROM_START + header->keyframesOffset + nextKeyIdx * header->vtxCount * sizeof(ImgFXVtx));
+        romStart = (u8*)((s32)imgfx_data_ROM_START + (s32) header->keyframesOffset + nextKeyIdx * header->vtxCount * sizeof(ImgFXVtx));
         dma_copy(romStart, romStart + header->vtxCount * sizeof(ImgFXVtx), nextKeyframe);
     }
 
