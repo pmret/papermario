@@ -277,8 +277,7 @@ void spr_appendGfx_component_flat(
             }
 
             gDPSetEnvColor(gMainGfxPos++, 0, 0, 0, alpha);
-            gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, 0, ENVIRONMENT, 0, TEXEL0, 0, 0, 0, 0, 0, ENVIRONMENT, 0,
-                              TEXEL0, 0);
+            gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, 0, ENVIRONMENT, 0, TEXEL0, 0, 0, 0, 0, 0, ENVIRONMENT, 0, TEXEL0, 0);
             gSPVertex(gMainGfxPos++, vertices, 4, 0);
             gSP2Triangles(gMainGfxPos++, 0, 2, 1, 0, 0, 3, 2, 0);
             gDPPipeSync(gMainGfxPos++);
@@ -294,8 +293,7 @@ void spr_appendGfx_component_flat(
 
             gDPSetEnvColor(gMainGfxPos++, 100, 100, 100, 255);
             gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, alpha);
-            gDPSetCombineLERP(gMainGfxPos++, SHADE, ENVIRONMENT, TEXEL0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, SHADE,
-                              ENVIRONMENT, TEXEL0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0);
+            gDPSetCombineLERP(gMainGfxPos++, SHADE, ENVIRONMENT, TEXEL0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, SHADE, ENVIRONMENT, TEXEL0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0);
             gDPSetColorDither(gMainGfxPos++, G_CD_MAGICSQ);
         }
     }

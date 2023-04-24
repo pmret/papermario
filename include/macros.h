@@ -220,7 +220,11 @@
 
 #define PM_CC_01        0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0
 #define PM_CC_02        0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0
-#define PM_CC_03        0, 0, 0, COMBINED, 0, 0, 0, COMBINED
+#define PM_CC_03        TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0
+#define PM_CC_04        PRIMITIVE, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0
+#define PM_CC_05        TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0
+#define PM_CC_06        COMBINED, 0, PRIMITIVE_ALPHA, 0, 0, 0, 0, COMBINED
+#define PM_CC_07        0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0
 
 #ifdef OLD_GCC
 #define VLA 0

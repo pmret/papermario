@@ -949,9 +949,7 @@ void imgfx_appendGfx_mesh(ImgFXState* state, Matrix4f mtx) {
             case IMGFX_RENDER_MULTIPLY_SHADE_ALPHA:
                 // color: texture
                 // alpha: texture * vtx color
-                gDPSetCombineLERP(gMainGfxPos++,
-                    0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0,
-                    0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0);
+                gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0);
                 gSPSetGeometryMode(gMainGfxPos++, G_SHADE | G_SHADING_SMOOTH);
                 gSPClearGeometryMode(gMainGfxPos++, G_LIGHTING);
                 break;
@@ -1029,9 +1027,7 @@ void imgfx_appendGfx_mesh(ImgFXState* state, Matrix4f mtx) {
             case IMGFX_RENDER_COLOR_FILL:
                 // color: prim
                 // alpha: texture
-                gDPSetCombineLERP(gMainGfxPos++,
-                    0, 0, 0, PRIMITIVE, 0, 0, 0, TEXEL0,
-                    0, 0, 0, PRIMITIVE, 0, 0, 0, TEXEL0);
+                gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, PRIMITIVE, 0, 0, 0, TEXEL0, 0, 0, 0, PRIMITIVE, 0, 0, 0, TEXEL0);
                 gDPSetPrimColor(gMainGfxPos++, 0, 0, state->ints.color.r, state->ints.color.g,
                                 state->ints.color.b, 0);
                 break;
@@ -1541,12 +1537,10 @@ void imgfx_appendGfx_mesh_basic(ImgFXState* state, Matrix4f mtx) {
                     gDPSetRenderMode(gMainGfxPos++, G_RM_PASS, state->otherModeL);
 
                     if (alpha == -1) {
-                        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, 0, SHADE, 0, TEXEL1, 0, 0, 0, 0, 0, 0,
-                                            0, 0, COMBINED);
+                        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, 0, SHADE, 0, TEXEL1, 0, 0, 0, 0, 0, 0, 0, 0, COMBINED);
                     } else {
                         gDPSetEnvColor(gMainGfxPos++, 0, 0, 0, alpha);
-                        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, 0, ENVIRONMENT, 0, TEXEL1, 0, 0, 0, 0,
-                                            0, 0, 0, 0, COMBINED);
+                        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, 0, ENVIRONMENT, 0, TEXEL1, 0, 0, 0, 0, 0, 0, 0, 0, COMBINED);
                     }
 
                     gSPVertex(gMainGfxPos++, &imgfx_vtxBuf[i], 4, 0);
@@ -1599,8 +1593,7 @@ void imgfx_appendGfx_mesh_basic(ImgFXState* state, Matrix4f mtx) {
                         gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, 0, SHADE, 0, TEXEL0, 0, 0, 0, 0, 0, SHADE, 0, TEXEL0, 0);
                     } else {
                         gDPSetEnvColor(gMainGfxPos++, 0, 0, 0, alpha2);
-                        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, 0, ENVIRONMENT, 0, TEXEL0, 0, 0, 0, 0, 0,
-                                        ENVIRONMENT, 0, TEXEL0, 0);
+                        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, 0, ENVIRONMENT, 0, TEXEL0, 0, 0, 0, 0, 0, ENVIRONMENT, 0, TEXEL0, 0);
                     }
 
                     gSPVertex(gMainGfxPos++, &imgfx_vtxBuf[i], 4, 0);
@@ -1615,8 +1608,7 @@ void imgfx_appendGfx_mesh_basic(ImgFXState* state, Matrix4f mtx) {
 
                     gDPSetEnvColor(gMainGfxPos++, 100, 100, 100, 255);
                     gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, alpha2);
-                    gDPSetCombineLERP(gMainGfxPos++, SHADE, ENVIRONMENT, TEXEL0, TEXEL0, 0, 0, 0, TEXEL0, SHADE,
-                                    ENVIRONMENT, TEXEL0, TEXEL0, 0, 0, 0, TEXEL0);
+                    gDPSetCombineLERP(gMainGfxPos++, SHADE, ENVIRONMENT, TEXEL0, TEXEL0, 0, 0, 0, TEXEL0, SHADE, ENVIRONMENT, TEXEL0, TEXEL0, 0, 0, 0, TEXEL0);
                     gDPSetColorDither(gMainGfxPos++, G_CD_MAGICSQ);
                 }
             }
@@ -1787,9 +1779,7 @@ void imgfx_appendGfx_mesh_strip(ImgFXState* state, Matrix4f mtx) {
     if (state->renderType == IMGFX_RENDER_OVERLAY_RGBA) {
         s32 alpha = state->ints.overlay.alpha;
         gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, alpha);
-        gDPSetCombineLERP(gMainGfxPos++,
-            TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0,
-            TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0);
+        gDPSetCombineMode(gMainGfxPos++, PM_CC_05, PM_CC_05);
     } else {
         gDPSetCombineMode(gMainGfxPos++, G_CC_MODULATEIA, G_CC_MODULATEIA);
     }

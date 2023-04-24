@@ -1574,8 +1574,7 @@ void render_hud_element(HudElement* hudElement) {
             vtx[3].v.tc[1] = 0;
 
             gDPPipeSync(gMainGfxPos++);
-            gDPSetCombineLERP(gMainGfxPos++, TEXEL0, 0, PRIMITIVE, 0, PRIMITIVE, 0, TEXEL0, 0, TEXEL0, 0, PRIMITIVE, 0,
-                              PRIMITIVE, 0, TEXEL0, 0);
+            gDPSetCombineLERP(gMainGfxPos++, TEXEL0, 0, PRIMITIVE, 0, PRIMITIVE, 0, TEXEL0, 0, TEXEL0, 0, PRIMITIVE, 0, PRIMITIVE, 0, TEXEL0, 0);
             gDPSetPrimColor(gMainGfxPos++, 0, 0,
                             hudElement->tint.r, hudElement->tint.g, hudElement->tint.b, hudElement->opacity);
 

@@ -3218,8 +3218,7 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
                                                msg_drawState->printBuffer[msg_drawState->drawBufferPos + 2],
                                                msg_drawState->printBuffer[msg_drawState->drawBufferPos + 2],
                                                0);
-                                gDPSetCombineLERP(gMainGfxPos++, NOISE, TEXEL0, ENVIRONMENT, TEXEL0, 0, 0, 0, TEXEL0, NOISE, TEXEL0, ENVIRONMENT,
-                                                  TEXEL0, 0, 0, 0, TEXEL0);
+                                gDPSetCombineLERP(gMainGfxPos++, NOISE, TEXEL0, ENVIRONMENT, TEXEL0, 0, 0, 0, TEXEL0, NOISE, TEXEL0, ENVIRONMENT, TEXEL0, 0, 0, 0, TEXEL0);
                                 msg_drawState->drawBufferPos += 3;
                                 break;
                             case MSG_FX_BLUR:
@@ -3562,8 +3561,7 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
                         if ((msg_drawState->effectFlags & MSG_FX_FLAG_DROP_SHADOW) && (phi_s2_5 == 0xFF)) {
                             gDPPipeSync(gMainGfxPos++);
                             gDPSetRenderMode(gMainGfxPos++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
-                            gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0,
-                                              PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0);
+                            gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0);
                             gDPSetPrimColor(gMainGfxPos++, 0, 0, 40, 40, 40, 72);
                             msg_draw_char(printer, msg_drawState,
                                           msg_drawState->printBuffer[msg_drawState->drawBufferPos],
