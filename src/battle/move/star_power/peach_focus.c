@@ -160,7 +160,7 @@ EvtScript N(802A1C60) = {
 EvtScript N(802A1E6C) = {
     EVT_CALL(GetOwnerID, LVarA)
     EVT_IF_EQ(LVarA, 0)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(PlaySound, SOUND_2047)
         EVT_THREAD
             EVT_LOOP(5)
@@ -192,7 +192,7 @@ EvtScript N(802A1E6C) = {
         EVT_CALL(EnableNpcBlur, NPC_BTL_SPIRIT, FALSE)
         EVT_CALL(DeleteNpc, NPC_BTL_SPIRIT)
     EVT_ELSE
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(PlaySound, SOUND_2045)
         EVT_THREAD
             EVT_LOOP(5)
@@ -302,7 +302,7 @@ EvtScript N(EVS_UsePower) = {
     EVT_CALL(GetActorVar, ACTOR_PARTNER, 1, LVar0)
     EVT_CALL(func_802A1518_79C4B8)
     EVT_WAIT(10)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 150)
     EVT_WAIT(1)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 120)

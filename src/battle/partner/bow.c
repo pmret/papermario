@@ -255,7 +255,7 @@ EvtScript N(handleEvent) = {
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208C)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
-            EVT_EXEC_WAIT(DoPartnerBlock)
+            EVT_EXEC_WAIT(EVS_DoPartnerBlock)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SPIKE_CONTACT)
             EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
@@ -294,7 +294,7 @@ EvtScript N(handleEvent) = {
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208C)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleBow_Block)
-            EVT_EXEC_WAIT(DoPartnerBlock)
+            EVT_EXEC_WAIT(EVS_DoPartnerBlock)
             EVT_WAIT(10)
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
@@ -394,7 +394,7 @@ EvtScript N(executeAction) = {
 
 EvtScript N(returnHome2) = {
     EVT_CALL(PartnerYieldTurn)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_E)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_04)
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOO_VANISH)
     EVT_THREAD
         EVT_SET(LVar0, 200)
@@ -706,7 +706,7 @@ EvtScript N(outtaSight) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_WAIT(15)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_CALL(N(ApplyOuttaSight))
     EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_20000000, FALSE)
@@ -715,7 +715,7 @@ EvtScript N(outtaSight) = {
 };
 
 EvtScript N(hidePlayer) = {
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_WAIT(20)
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_BOW_APPEAR)
     EVT_THREAD
@@ -736,7 +736,7 @@ EvtScript N(hidePlayer) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_CALL(PartnerYieldTurn)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 40)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 20, 0, EASING_COS_IN_OUT)
@@ -801,56 +801,56 @@ EvtScript N(spook) = {
                 EVT_IF_EQ(LVar2, 7)
                     EVT_CALL(AddBattleCamZoom, -20)
                     EVT_CALL(MoveBattleCamOver, 20)
-                    EVT_CALL(func_8024ECF8, 0, 0, 1)
+                    EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
                     EVT_SET(LVar2, 8)
                 EVT_END_IF
             EVT_CASE_GT(70)
                 EVT_IF_EQ(LVar2, 6)
                     EVT_CALL(AddBattleCamZoom, -20)
                     EVT_CALL(MoveBattleCamOver, 20)
-                    EVT_CALL(func_8024ECF8, 0, 0, 1)
+                    EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
                     EVT_SET(LVar2, 7)
                 EVT_END_IF
             EVT_CASE_GT(60)
                 EVT_IF_EQ(LVar2, 5)
                     EVT_CALL(AddBattleCamZoom, -20)
                     EVT_CALL(MoveBattleCamOver, 20)
-                    EVT_CALL(func_8024ECF8, 0, 0, 1)
+                    EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
                     EVT_SET(LVar2, 6)
                 EVT_END_IF
             EVT_CASE_GT(50)
                 EVT_IF_EQ(LVar2, 4)
                     EVT_CALL(AddBattleCamZoom, -20)
                     EVT_CALL(MoveBattleCamOver, 20)
-                    EVT_CALL(func_8024ECF8, 0, 0, 1)
+                    EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
                     EVT_SET(LVar2, 5)
                 EVT_END_IF
             EVT_CASE_GT(40)
                 EVT_IF_EQ(LVar2, 3)
                     EVT_CALL(AddBattleCamZoom, -20)
                     EVT_CALL(MoveBattleCamOver, 20)
-                    EVT_CALL(func_8024ECF8, 0, 0, 1)
+                    EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
                     EVT_SET(LVar2, 4)
                 EVT_END_IF
             EVT_CASE_GT(30)
                 EVT_IF_EQ(LVar2, 2)
                     EVT_CALL(AddBattleCamZoom, -20)
                     EVT_CALL(MoveBattleCamOver, 20)
-                    EVT_CALL(func_8024ECF8, 0, 0, 1)
+                    EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
                     EVT_SET(LVar2, 3)
                 EVT_END_IF
             EVT_CASE_GT(20)
                 EVT_IF_EQ(LVar2, 1)
                     EVT_CALL(AddBattleCamZoom, -20)
                     EVT_CALL(MoveBattleCamOver, 20)
-                    EVT_CALL(func_8024ECF8, 0, 0, 1)
+                    EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
                     EVT_SET(LVar2, 2)
                 EVT_END_IF
             EVT_CASE_GT(10)
                 EVT_IF_EQ(LVar2, 0)
                     EVT_CALL(AddBattleCamZoom, -20)
                     EVT_CALL(MoveBattleCamOver, 20)
-                    EVT_CALL(func_8024ECF8, 0, 0, 1)
+                    EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
                     EVT_SET(LVar2, 1)
                 EVT_END_IF
         EVT_END_SWITCH
@@ -861,10 +861,10 @@ EvtScript N(spook) = {
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_SpookLoop)
     EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 12, 0)
     EVT_THREAD
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(MoveBattleCamOver, 5)
         EVT_WAIT(5)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_B)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_01)
         EVT_LOOP(5)
             EVT_CALL(SetBattleCamParam, 3, 110)
             EVT_WAIT(2)
@@ -945,7 +945,7 @@ EvtScript N(spook) = {
     EVT_CALL(GetActionCommandResult, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(99)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_E)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_04)
         EVT_CASE_DEFAULT
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
     EVT_END_SWITCH

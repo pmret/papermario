@@ -340,7 +340,7 @@ EvtScript N(EVS_UseItem) = {
         EVT_CALL(N(func_802A1740_71ED90))
         EVT_CALL(N(func_802A1848_71EE98))
     EVT_END_THREAD
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_WAIT(8)
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Flail, ANIM_Mario1_Flail, ANIM_Mario1_Fall)
@@ -411,7 +411,7 @@ EvtScript N(EVS_UseItem) = {
         EVT_CALL(DeleteVirtualEntity, LVarA)
     EVT_END_THREAD
     EVT_WAIT(30)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)

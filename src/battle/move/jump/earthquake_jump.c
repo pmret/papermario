@@ -54,7 +54,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
     EVT_END_IF
     EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar3, LVar4, LVar5)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, -30, 0, 0)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_26)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_ATTACK_APPROACH)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(5.0))
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Run)
     EVT_CALL(CancelablePlayerRunToGoal, 0, LVar0)
@@ -272,7 +272,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
     EVT_END_IF
     EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar3, LVar4, LVar5)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, -30, 0, 0)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_26)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_ATTACK_APPROACH)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(5.0))
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Run)
     EVT_CALL(CancelablePlayerRunToGoal, 0, LVar0)
@@ -498,7 +498,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
     EVT_END_IF
     EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar3, LVar4, LVar5)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, -30, 0, 0)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_26)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_ATTACK_APPROACH)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(5.0))
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Run)
     EVT_CALL(CancelablePlayerRunToGoal, 0, LVar0)

@@ -724,7 +724,7 @@ EvtScript N(handleEvent) = {
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208C)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleParakarry_HurtStill)
-            EVT_EXEC_WAIT(DoPartnerBlock)
+            EVT_EXEC_WAIT(EVS_DoPartnerBlock)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SPIKE_CONTACT)
             EVT_SET_CONST(LVar0, 1)
@@ -766,7 +766,7 @@ EvtScript N(handleEvent) = {
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208C)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleParakarry_OrientShell)
-            EVT_EXEC_WAIT(DoPartnerBlock)
+            EVT_EXEC_WAIT(EVS_DoPartnerBlock)
             EVT_WAIT(10)
             EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_ExitShell)
         EVT_END_CASE_GROUP
@@ -876,7 +876,7 @@ EvtScript N(nextTurn) = {
 
 EvtScript N(returnHome2) = {
     EVT_CALL(PartnerYieldTurn)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_E)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_04)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, LVarA)
     EVT_CALL(SetActorJumpGravity, ACTOR_PARTNER, EVT_FLOAT(1.4))
     EVT_CALL(AddGoalPos, ACTOR_PARTNER, -50, 0, 0)
@@ -1172,7 +1172,7 @@ EvtScript N(airLift) = {
     EVT_END_IF
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(1)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
             EVT_CALL(GetOwnerTarget, LVar0, LVar1)
             EVT_CALL(DispatchEvent, LVar0, EVENT_BLOW_AWAY)
             EVT_CALL(N(CarryAway), LVar0)
@@ -1228,7 +1228,7 @@ EvtScript N(airRaid) = {
     EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 10, -10, EASING_COS_IN_OUT)
     EVT_WAIT(2)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(EnableActorBlur, ACTOR_PARTNER, 1)
     EVT_CHILD_THREAD
@@ -1248,7 +1248,7 @@ EvtScript N(airRaid) = {
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleParakarry_ShellFlyFastest)
     EVT_CALL(N(FlyAround))
     EVT_CALL(EnableActorBlur, ACTOR_PARTNER, 0)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(GetActionResult, LVar0)
     EVT_CALL(N(GetAirRaidDamage))
@@ -1277,7 +1277,7 @@ EvtScript N(airRaid) = {
     EVT_CALL(GetActionCommandResult, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(99)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_E)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_04)
         EVT_CASE_DEFAULT
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
     EVT_END_SWITCH

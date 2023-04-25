@@ -517,7 +517,7 @@ void btl_state_update_celebration(void) {
                 }
 
                 CelebrateStateTime = 0;
-                btl_cam_use_preset(BTL_CAM_PRESET_23);
+                btl_cam_use_preset(BTL_CAM_VICTORY);
                 EndBattleRewardStep = 0;
                 CelebrateSubstateTime = 1;
                 gBattleSubState = BTL_SUBSTATE_CELEBRATE_LOAD_STAR_POINTS;
@@ -611,7 +611,7 @@ void btl_state_update_celebration(void) {
         case BTL_SUBSTATE_CELEBRATE_LEVEL_UP_LOAD:
             if (CelebrateStateTime >= 99) {
                 playerData->level++;
-                btl_cam_use_preset(BTL_CAM_PRESET_C);
+                btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(5);
                 dma_copy(level_up_ROM_START, level_up_ROM_END, level_up_VRAM);
                 sfx_play_sound(SOUND_80000008);

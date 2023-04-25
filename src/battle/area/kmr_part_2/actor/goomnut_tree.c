@@ -367,7 +367,7 @@ EvtScript N(80223DBC) = {
     EVT_ELSE
         EVT_CALL(FallPartTo, ACTOR_SELF, 2, 10, 32, 10, 10)
     EVT_END_IF
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_CALL(SetOwnerTarget, ACTOR_ENEMY0, 2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)

@@ -13,7 +13,7 @@ extern HudScript HES_HPDrain;
 
 extern EvtScript EVS_PlayerCelebrate;
 extern EvtScript D_802988F0;
-extern EvtScript D_80298724;
+extern EvtScript EVS_OnPlayerHit;
 extern EvtScript D_80298948;
 
 extern PlayerCelebrationAnimOptions D_80280FC0;
@@ -660,7 +660,7 @@ EvtScript EVS_Peach_OnActorCreate = {
 };
 
 EvtScript EVS_MarioEnterStage = {
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_22)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_ENTRY)
     EVT_CALL(SetBattleCamTarget, -80, 35, 8)
     EVT_CALL(BattleCamTargetActor, ACTOR_PLAYER)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -703,7 +703,7 @@ EvtScript EVS_MarioEnterStage = {
 
 EvtScript EVS_PeachEnterStage = {
     EVT_CALL(func_8026BF48, 1)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_22)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_ENTRY)
     EVT_CALL(SetBattleCamTarget, -80, 35, 8)
     EVT_CALL(BattleCamTargetActor, ACTOR_PLAYER)
     EVT_CHILD_THREAD
@@ -845,7 +845,7 @@ EvtScript EVS_Player_HandleEvent = {
         EVT_CASE_OR_EQ(EVENT_SPIKE_CONTACT)
         EVT_CASE_OR_EQ(EVENT_SPIKE_DEATH)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_30)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_HIT_SPIKE)
             EVT_CALL(GetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
             EVT_SUB(LVar0, 60)
             EVT_ADD(LVar1, 40)
@@ -856,7 +856,7 @@ EvtScript EVS_Player_HandleEvent = {
             EVT_SET_CONST(LVar1, ANIM_Mario1_HurtFoot)
             EVT_SET(LVar2, 0)
             EVT_EXEC_WAIT(D_802988F0)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
             EVT_CALL(GetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
             EVT_ADD(LVar0, 30)
@@ -877,7 +877,7 @@ EvtScript EVS_Player_HandleEvent = {
         EVT_CASE_OR_EQ(EVENT_BURN_CONTACT)
         EVT_CASE_OR_EQ(EVENT_BURN_DEATH)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_31)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_HIT_HAZARD)
             EVT_CALL(GetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
             EVT_SUB(LVar0, 60)
             EVT_ADD(LVar1, 40)
@@ -901,7 +901,7 @@ EvtScript EVS_Player_HandleEvent = {
             EVT_SET_CONST(LVar1, ANIM_MarioB3_BurnHurt)
             EVT_SET(LVar2, 0)
             EVT_EXEC_WAIT(D_802988F0)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
             EVT_CALL(GetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
             EVT_ADD(LVar0, 30)
@@ -922,7 +922,7 @@ EvtScript EVS_Player_HandleEvent = {
         EVT_CASE_OR_EQ(EVENT_SHOCK_HIT)
         EVT_CASE_OR_EQ(EVENT_SHOCK_DEATH)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_31)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_HIT_HAZARD)
             EVT_CALL(GetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
             EVT_SUB(LVar0, 60)
             EVT_ADD(LVar1, 40)
@@ -934,7 +934,7 @@ EvtScript EVS_Player_HandleEvent = {
             EVT_SET_CONST(LVar1, ANIM_Mario1_HurtFoot)
             EVT_SET(LVar2, 0)
             EVT_EXEC_WAIT(D_802988F0)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
             EVT_CALL(GetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
             EVT_ADD(LVar0, 30)
@@ -991,7 +991,7 @@ EvtScript EVS_Player_HandleEvent = {
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar1, ANIM_Mario1_Hurt)
             EVT_SET(LVar2, 0)
-            EVT_EXEC_WAIT(D_80298724)
+            EVT_EXEC_WAIT(EVS_OnPlayerHit)
             EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
@@ -1140,7 +1140,7 @@ EvtScript EVS_RunAwayNoCommand = {
             EVT_END_LOOP
         EVT_END_CHILD_THREAD
         EVT_WAIT(5)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_WAIT(10)
     EVT_END_IF
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
@@ -1254,7 +1254,7 @@ EvtScript EVS_RunAwayStart = {
             EVT_END_LOOP
         EVT_END_CHILD_THREAD
         EVT_WAIT(5)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_WAIT(10)
     EVT_END_IF
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
@@ -1520,7 +1520,7 @@ EvtScript EVS_UseLifeShroom = {
     EVT_ADD(LVar1, 25)
     EVT_PLAY_EFFECT(EFFECT_RECOVER, 0, LVar0, LVar1, LVar2, LVar3)
     EVT_CALL(FreezeBattleCam, 0)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 15)
     EVT_CHILD_THREAD
         EVT_CALL(func_80261388)
@@ -1597,7 +1597,7 @@ EvtScript EVS_MerleeAttackBonus = {
     EVT_WAIT(30)
     EVT_CALL(SetNpcAnimation, NPC_BTL_MERLEE, ANIM_BattleMerlee_Release)
     EVT_CALL(func_802619B4)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 4)
     EVT_CALL(BattleMerleeFadeStageFromBlack)
     EVT_WAIT(20)
@@ -1646,7 +1646,7 @@ EvtScript EVS_MerleeDefenseBonus = {
     EVT_WAIT(30)
     EVT_CALL(SetNpcAnimation, NPC_BTL_MERLEE, ANIM_BattleMerlee_Release)
     EVT_CALL(func_802619B4)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 4)
     EVT_CALL(BattleMerleeFadeStageFromBlack)
     EVT_WAIT(20)
@@ -1700,7 +1700,7 @@ EvtScript EVS_MerleeExpBonus = {
     EVT_WAIT(30)
     EVT_CALL(SetNpcAnimation, NPC_BTL_MERLEE, ANIM_BattleMerlee_Release)
     EVT_CALL(func_802619B4)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 4)
     EVT_CALL(BattleMerleeFadeStageFromBlack)
     EVT_WAIT(20)
@@ -1730,7 +1730,7 @@ EvtScript EVS_MerleeExpBonus = {
 
 EvtScript EVS_PlayerHappy = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
-    EVT_CALL(UseBattleCamPresetWait, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPresetWait, BTL_CAM_DEFAULT)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_ThumbsUp)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_CALL(func_802619E8, LVar0, LVar1, LVar2)
@@ -1797,7 +1797,7 @@ EvtScript EVS_ApplyDizzyAttack = {
 
 
 EvtScript EVS_PlayerRegainAbility = {
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVarF, LVar1, LVar2)
     EVT_LOOP(LVar0)
         EVT_ADD(LVarF, 3)

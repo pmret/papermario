@@ -2238,7 +2238,7 @@ void btl_state_update_player_menu(void) {
                 btl_set_state(BATTLE_STATE_END_PLAYER_TURN);
                 return;
             }
-            btl_cam_use_preset(BTL_CAM_PRESET_C);
+            btl_cam_use_preset(BTL_CAM_DEFAULT);
             btl_cam_move(10);
             if (!(battleStatus->flags1 & BS_FLAGS1_PLAYER_IN_BACK)) {
                 gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_CREATE_MAIN_MENU;
@@ -3633,7 +3633,7 @@ void btl_state_update_partner_menu(void) {
         if (!func_802A58D0()) {
             btl_set_state(BATTLE_STATE_9);
         } else {
-            btl_cam_use_preset(BTL_CAM_PRESET_C);
+            btl_cam_use_preset(BTL_CAM_DEFAULT);
             battleStatus->flags1 |= BS_FLAGS1_MENU_OPEN;
             playerActor->flags &= ~(ACTOR_FLAG_4000000 | ACTOR_FLAG_8000000);
             partnerActor->flags &= ~(ACTOR_FLAG_4000000 | ACTOR_FLAG_8000000);
@@ -4496,7 +4496,7 @@ void btl_state_update_peach_menu(void) {
 
     switch (gBattleSubState) {
         case BTL_SUBSTATE_PEACH_MENU_INIT:
-            btl_cam_use_preset(BTL_CAM_PRESET_C);
+            btl_cam_use_preset(BTL_CAM_DEFAULT);
             btl_cam_move(10);
             if (!(gBattleStatus.flags1 & BS_FLAGS1_PLAYER_IN_BACK)) {
                 gBattleSubState = BTL_SUBSTATE_PEACH_CREATE_MAIN_MENU;
@@ -4706,7 +4706,7 @@ void btl_state_update_twink_menu(void) {
                 break;
             }
 
-            btl_cam_use_preset(BTL_CAM_PRESET_C);
+            btl_cam_use_preset(BTL_CAM_DEFAULT);
             btl_cam_move(10);
             if (!(gBattleStatus.flags1 & BS_FLAGS1_PLAYER_IN_BACK)) {
                 player->state.currentPos.x = player->homePos.x;

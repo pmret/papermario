@@ -253,7 +253,7 @@ EvtScript N(handleEvent) = {
             EVT_ELSE
                 EVT_SET_CONST(LVar1, ANIM_RuffPuff_Anim0D)
             EVT_END_IF
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
         EVT_CASE_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_IS_BIG), LVar1)
@@ -262,7 +262,7 @@ EvtScript N(handleEvent) = {
             EVT_ELSE
                 EVT_SET_CONST(LVar1, ANIM_RuffPuff_Anim0D)
             EVT_END_IF
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET(LVar0, 1)
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_IS_BIG), LVar1)
@@ -301,7 +301,7 @@ EvtScript N(handleEvent) = {
             EVT_ELSE
                 EVT_SET_CONST(LVar1, ANIM_RuffPuff_Anim11)
             EVT_END_IF
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_ZERO_DAMAGE)
             EVT_SET_CONST(LVar0, 1)
@@ -329,7 +329,7 @@ EvtScript N(handleEvent) = {
             EVT_ELSE
                 EVT_SET_CONST(LVar1, ANIM_RuffPuff_Anim0D)
             EVT_END_IF
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_EXEC_WAIT(N(onDeath))
             EVT_SET_CONST(LVar0, 1)
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_IS_BIG), LVar1)
@@ -338,7 +338,7 @@ EvtScript N(handleEvent) = {
             EVT_ELSE
                 EVT_SET_CONST(LVar1, ANIM_RuffPuff_Anim0D)
             EVT_END_IF
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 1)

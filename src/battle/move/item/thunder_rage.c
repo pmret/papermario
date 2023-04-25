@@ -59,7 +59,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_CHILD_THREAD
         EVT_WAIT(5)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(MoveBattleCamOver, 20)
     EVT_END_CHILD_THREAD
     EVT_CALL(N(FadeBackgroundToBlack))
@@ -85,7 +85,7 @@ EvtScript N(EVS_UseItem) = {
         EVT_IF_NE(LVar0, -1)
             EVT_GOTO(0)
         EVT_END_IF
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EVT_WAIT(30)

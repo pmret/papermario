@@ -866,7 +866,7 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(N(onHit))
             EVT_SET_CONST(LVar1, ANIM_ShySquadGuy_Anim0D)
             EVT_EXEC_WAIT(N(onShock))
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(MoveBattleCamOver, 20)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
@@ -915,7 +915,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_EQ(EVENT_30)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_ShySquadGuy_Anim0D)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_WAIT(1000)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
         EVT_CASE_DEFAULT
@@ -1176,7 +1176,7 @@ EvtScript N(attack) = {
                 EVT_END_THREAD
             EVT_END_IF
             EVT_WAIT(36)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(MoveBattleCamOver, 30)
             EVT_SET(LVar0, 15)
             EVT_CALL(GetActorVar, ACTOR_SELF, N(ACTOR_VARS_GUYS_KILLED), LVar1)
@@ -1234,7 +1234,7 @@ EvtScript N(attack) = {
         EVT_WAIT(10)
     EVT_END_LOOP
     EVT_CALL(StopSound, SOUND_3AD)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_WAIT(20)
     EVT_SET(LVar0, 15)
@@ -1278,7 +1278,7 @@ EvtScript N(flee) = {
     EVT_WAIT(30)
     EVT_CALL(ActorSpeak, MSG_CH4_0066, ACTOR_SELF, 1, -1, -1)
     EVT_CALL(func_8027D32C, ACTOR_SELF)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_SET(LVar0, 2)
     EVT_SET(LVar1, ANIM_ShySquadGuy_Anim08)

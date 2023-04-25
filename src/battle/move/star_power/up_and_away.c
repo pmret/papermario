@@ -217,7 +217,7 @@ EvtScript N(802A1E00) = {
 EvtScript N(802A200C) = {
     EVT_CALL(GetOwnerID, LVarA)
     EVT_IF_EQ(LVarA, 0)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(PlaySound, SOUND_2047)
         EVT_THREAD
             EVT_LOOP(5)
@@ -249,7 +249,7 @@ EvtScript N(802A200C) = {
         EVT_CALL(EnableNpcBlur, NPC_BTL_SPIRIT, FALSE)
         EVT_CALL(DeleteNpc, NPC_BTL_SPIRIT)
     EVT_ELSE
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(PlaySound, SOUND_2045)
         EVT_THREAD
             EVT_LOOP(5)
@@ -313,7 +313,7 @@ EvtScript N(EVS_UsePower) = {
     EVT_SET_CONST(LVar0, ANIM_BattleKalmar_Idle)
     EVT_EXEC_WAIT(N(802A1E00))
     EVT_CALL(SetNpcAnimation, NPC_BTL_SPIRIT, ANIM_BattleKalmar_Shout)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_WAIT(20)
     EVT_CALL(SetMotionBlurParams, 0, 0, 0, 320, 240, 128, 10)
     EVT_CALL(func_802A1518_7957F8)

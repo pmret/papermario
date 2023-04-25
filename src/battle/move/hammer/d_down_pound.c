@@ -102,10 +102,10 @@ EvtScript N(UseMove_Impl) = {
     EVT_END_SWITCH
     EVT_CALL(DidActionSucceed, LVar0)
     EVT_IF_GT(LVar0, FALSE)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_44)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_HAMMER_STRIKE)
         EVT_CALL(MoveBattleCamOver, 5)
     EVT_ELSE
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_44)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_HAMMER_STRIKE)
         EVT_CALL(MoveBattleCamOver, 50)
     EVT_END_IF
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)

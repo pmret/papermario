@@ -115,7 +115,7 @@ EvtScript N(sushie_handleEvent) = {
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
                 EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
-                EVT_EXEC_WAIT(DoNormalHit)
+                EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_END_IF
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
@@ -132,7 +132,7 @@ EvtScript N(sushie_handleEvent) = {
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleSushie_BurnStill)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_SET_CONST(LVar0, 1)
@@ -145,7 +145,7 @@ EvtScript N(sushie_handleEvent) = {
             EVT_EXEC_WAIT(DoSpinSmashHit)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_SET_CONST(LVar0, 1)
@@ -160,7 +160,7 @@ EvtScript N(sushie_handleEvent) = {
             EVT_EXEC_WAIT(N(OnShockDeath))
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
@@ -173,11 +173,11 @@ EvtScript N(sushie_handleEvent) = {
             EVT_EXEC_WAIT(N(OnDeath))
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 1)
@@ -211,7 +211,7 @@ EvtScript N(sushie_takeTurn) = {
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-    EVT_CALL(func_8024ECF8, -1, 1, 0)
+    EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 70, 0, 0)
@@ -228,11 +228,11 @@ EvtScript N(sushie_takeTurn) = {
     EVT_CALL(RunToGoal, ACTOR_SELF, LVarA, FALSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Idle)
     EVT_WAIT(10)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_I)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_08)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(AddBattleCamZoom, -50)
     EVT_CALL(MoveBattleCamOver, 30)
-    EVT_CALL(func_8024ECF8, 1, 1, 1)
+    EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_1, BTL_CAM_MODEX_1, TRUE)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Tense1)
     EVT_WAIT(15)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Tense2)
@@ -242,7 +242,7 @@ EvtScript N(sushie_takeTurn) = {
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LVarA, LVar0)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(MoveBattleCamOver, 20)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Jump)
             EVT_THREAD
@@ -321,7 +321,7 @@ EvtScript N(sushie_takeTurn) = {
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_WAIT(10)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Run)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
@@ -332,7 +332,7 @@ EvtScript N(sushie_takeTurn) = {
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 10)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Jump)
     EVT_THREAD
@@ -437,7 +437,7 @@ EvtScript N(sushie_takeTurn) = {
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_29A)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Idle)
             EVT_WAIT(15)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleSushie_Run)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)

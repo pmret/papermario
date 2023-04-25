@@ -5605,80 +5605,92 @@ enum CameraControlType {
 };
 
 enum BtlCameraPreset {
-    BTL_CAM_PRESET_A  = 0,
-    BTL_CAM_PRESET_B,
-    BTL_CAM_PRESET_C,
-    BTL_CAM_PRESET_D,
-    BTL_CAM_PRESET_E,
-    BTL_CAM_PRESET_F,
-    BTL_CAM_PRESET_G,
-    BTL_CAM_PRESET_H,
-    BTL_CAM_PRESET_I,
-    BTL_CAM_PRESET_9,
-    BTL_CAM_PRESET_10,
-    BTL_CAM_PRESET_11,
-    BTL_CAM_PRESET_12,
-    BTL_CAM_PRESET_13,
-    BTL_CAM_PRESET_14,
-    BTL_CAM_PRESET_15,
-    BTL_CAM_PRESET_16,
-    BTL_CAM_PRESET_17,
-    BTL_CAM_PRESET_18,
-    BTL_CAM_PRESET_19,
-    BTL_CAM_PRESET_20,
-    BTL_CAM_PRESET_21,
-    BTL_CAM_PRESET_22,
-    BTL_CAM_PRESET_23,
-    BTL_CAM_PRESET_24,
-    BTL_CAM_PRESET_25,
-    BTL_CAM_PRESET_26,
-    BTL_CAM_PRESET_27,
-    BTL_CAM_PRESET_28,
-    BTL_CAM_PRESET_29,
-    BTL_CAM_PRESET_30,
-    BTL_CAM_PRESET_31,
-    BTL_CAM_PRESET_32,
-    BTL_CAM_PRESET_33,
-    BTL_CAM_PRESET_34,
-    BTL_CAM_PRESET_35,
-    BTL_CAM_PRESET_36,
-    BTL_CAM_PRESET_37,
-    BTL_CAM_PRESET_38,
-    BTL_CAM_PRESET_39,
-    BTL_CAM_PRESET_40,
-    BTL_CAM_PRESET_41,
-    BTL_CAM_PRESET_42,
-    BTL_CAM_PRESET_43,
-    BTL_CAM_PRESET_44,
-    BTL_CAM_PRESET_45,
-    BTL_CAM_PRESET_46,
-    BTL_CAM_PRESET_47,
-    BTL_CAM_PRESET_48,
-    BTL_CAM_PRESET_49,
-    BTL_CAM_PRESET_50,
-    BTL_CAM_PRESET_51,
-    BTL_CAM_PRESET_52,
-    BTL_CAM_PRESET_53,
-    BTL_CAM_PRESET_54,
-    BTL_CAM_PRESET_55,
-    BTL_CAM_PRESET_56,
-    BTL_CAM_PRESET_57,
-    BTL_CAM_PRESET_58,
-    BTL_CAM_PRESET_59,
-    BTL_CAM_PRESET_60,
-    BTL_CAM_PRESET_61,
-    BTL_CAM_PRESET_62,
-    BTL_CAM_PRESET_63,
-    BTL_CAM_PRESET_64,
-    BTL_CAM_PRESET_65,
-    BTL_CAM_PRESET_66,
-    BTL_CAM_PRESET_67,
-    BTL_CAM_PRESET_68,
-    BTL_CAM_PRESET_69,
-    BTL_CAM_PRESET_70,
-    BTL_CAM_PRESET_71,
-    BTL_CAM_PRESET_72,
-    BTL_CAM_PRESET_73,
+    BTL_CAM_PRESET_00               = 0,    // unused?
+    BTL_CAM_PRESET_01               = 1,    // STOP
+    BTL_CAM_DEFAULT                 = 2,
+    BTL_CAM_PRESET_03               = 3,
+    BTL_CAM_PRESET_04               = 4,
+    BTL_CAM_PRESET_05               = 5,
+    BTL_CAM_PRESET_06               = 6,   // unused?
+    BTL_CAM_PRESET_07               = 7,
+    BTL_CAM_PRESET_08               = 8,
+    BTL_CAM_PRESET_09               = 9,    // unused?
+    BTL_CAM_PRESET_10               = 10,
+    BTL_CAM_PRESET_11               = 11,
+    BTL_CAM_PRESET_12               = 12,   // unused?
+    BTL_CAM_PRESET_13               = 13,
+    BTL_CAM_PRESET_14               = 14,
+    BTL_CAM_PRESET_15               = 15,
+    BTL_CAM_PRESET_16               = 16,   // unused?
+    BTL_CAM_PRESET_17               = 17,   // unused?
+    BTL_CAM_PRESET_18               = 18,   // unused?
+    BTL_CAM_PRESET_19               = 19,
+    BTL_CAM_PRESET_20               = 20,   // unused?
+    BTL_CAM_PRESET_21               = 21,   // unused?
+    BTL_CAM_PLAYER_ENTRY            = 22,
+    BTL_CAM_VICTORY                 = 23,   // closeup on party while star points are tallied
+    BTL_CAM_PRESET_24               = 24,
+    BTL_CAM_PRESET_25               = 25,   // closeup on player used when running away or being defeated
+    BTL_CAM_PLAYER_ATTACK_APPROACH  = 26,
+    BTL_CAM_PRESET_27               = 27,
+    BTL_CAM_PRESET_28               = 28,
+    BTL_CAM_PRESET_29               = 29,
+    BTL_CAM_PLAYER_HIT_SPIKE        = 30,   // player hurt via spike contact
+    BTL_CAM_PLAYER_HIT_HAZARD       = 31,   // player hurt via burn or shock contact
+    BTL_CAM_PLAYER_CHARGE_UP        = 32,
+    BTL_CAM_PLAYER_STATUS_AFFLICTED = 33,
+    BTL_CAM_PRESET_34               = 34,
+    BTL_CAM_PRESET_35               = 35,
+    BTL_CAM_PRESET_36               = 36,   // unused?
+    BTL_CAM_PRESET_37               = 37,
+    BTL_CAM_PRESET_38               = 38,
+    BTL_CAM_PRESET_39               = 39,
+    BTL_CAM_PRESET_40               = 40,
+    BTL_CAM_PRESET_41               = 41,   // unused?
+    BTL_CAM_PRESET_42               = 42,   // unused?
+    BTL_CAM_PLAYER_AIM_HAMMER       = 43,
+    BTL_CAM_PLAYER_HAMMER_STRIKE    = 44,
+    BTL_CAM_PRESET_45               = 45,   // unused?
+    BTL_CAM_PRESET_46               = 46,
+    BTL_CAM_PRESET_47               = 47,
+    BTL_CAM_PRESET_48               = 48,
+    BTL_CAM_PRESET_49               = 49,   // unused?
+    BTL_CAM_PRESET_50               = 50,
+    BTL_CAM_PRESET_51               = 51,
+    BTL_CAM_PRESET_52               = 52,
+    BTL_CAM_PRESET_53               = 53,
+    BTL_CAM_PARTNER_INJURED         = 54,   // closeup on partner after being injured
+    BTL_CAM_PRESET_55               = 55,
+    BTL_CAM_PRESET_56               = 56,   // unused?
+    BTL_CAM_PRESET_57               = 57,   // unused?
+    BTL_CAM_PRESET_58               = 58,   // unused?
+    BTL_CAM_PRESET_59               = 59,
+    BTL_CAM_PRESET_60               = 60,   // unused?
+    BTL_CAM_PRESET_61               = 61,
+    BTL_CAM_PRESET_62               = 62,
+    BTL_CAM_PRESET_63               = 63,
+    BTL_CAM_PRESET_64               = 64,   // unused?
+    BTL_CAM_PRESET_65               = 65,   // unused?
+    BTL_CAM_PRESET_66               = 66,
+    BTL_CAM_PRESET_67               = 67,   // unused?
+    BTL_CAM_PRESET_68               = 68,   // unused?
+    BTL_CAM_PRESET_69               = 69,
+    BTL_CAM_PRESET_70               = 70,   // unused?
+    BTL_CAM_PRESET_71               = 71,   // unused?
+    BTL_CAM_PRESET_72               = 72,   // unused?
+    BTL_CAM_PRESET_73               = 73,
+};
+
+enum BattleCamXModes {
+    BTL_CAM_MODEX_0         = 0,
+    BTL_CAM_MODEX_1         = 1,
+};
+
+enum BattleCamYModes {
+    BTL_CAM_MODEY_MINUS_2   = -2,
+    BTL_CAM_MODEY_MINUS_1   = -1,
+    BTL_CAM_MODEY_0         = 0,
+    BTL_CAM_MODEY_1         = 1,
 };
 
 enum MoveActionTips {
