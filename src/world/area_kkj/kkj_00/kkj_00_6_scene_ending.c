@@ -6,7 +6,7 @@ API_CALLABLE(N(FadeScreenToWhite)) {
     }
 
     set_screen_overlay_color(SCREEN_LAYER_FRONT, 208, 208, 208);
-    set_screen_overlay_params_front(STENCIL_TYPE_1, script->functionTemp[1]);
+    set_screen_overlay_params_front(STENCIL_TYPE_VIEWPORT_COLOR, script->functionTemp[1]);
 
     if (script->functionTemp[1] == 255) {
         return ApiStatus_DONE2;

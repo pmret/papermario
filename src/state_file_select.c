@@ -46,7 +46,7 @@ void state_init_language_select(void) {
     D_800A0932[0] = 0;
     disable_player_input();
     set_time_freeze_mode(TIME_FREEZE_FULL);
-    set_screen_overlay_params_front(STENCIL_TYPE_0, D_800A0932[0]);
+    set_screen_overlay_params_front(STENCIL_TYPE_SCREEN_COLOR, D_800A0932[0]);
 }
 
 void state_init_file_select(void) {
@@ -99,7 +99,7 @@ void state_step_language_select(void) {
                 if (D_800A0932[0] > 255) {
                     D_800A0932[0] = 255;
                 }
-                set_screen_overlay_params_front(STENCIL_TYPE_0, D_800A0932[0]);
+                set_screen_overlay_params_front(STENCIL_TYPE_SCREEN_COLOR, D_800A0932[0]);
                 if (D_800A0932[0] == 255) {
 
                     D_800A0931 = 1;
@@ -168,7 +168,7 @@ void state_step_language_select(void) {
             if (D_800A0932[0] < 0) {
                 D_800A0932[0] = 0;
             }
-            set_screen_overlay_params_front(STENCIL_TYPE_0, D_800A0932[0]);
+            set_screen_overlay_params_front(STENCIL_TYPE_SCREEN_COLOR, D_800A0932[0]);
             break;
     }
 }
@@ -213,10 +213,10 @@ void state_drawUI_file_select(void) {
 void state_init_exit_language_select(void) {
     if (D_800A0932[0] > 0) {
         D_800A0931 = 0;
-        set_screen_overlay_params_front(STENCIL_TYPE_0, D_800A0932[0]);
+        set_screen_overlay_params_front(STENCIL_TYPE_SCREEN_COLOR, D_800A0932[0]);
     } else {
         D_800A0931 = 1;
-        set_screen_overlay_params_front(STENCIL_TYPE_0, D_800A0932[0]);
+        set_screen_overlay_params_front(STENCIL_TYPE_SCREEN_COLOR, D_800A0932[0]);
     }
     D_800A0930 = 1;
     gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
@@ -245,7 +245,7 @@ void state_step_exit_language_select(void) {
                 if (D_800A0932[0] < 0) {
                     D_800A0932[0] = 0;
                 }
-                set_screen_overlay_params_front(STENCIL_TYPE_0, D_800A0932[0]);
+                set_screen_overlay_params_front(STENCIL_TYPE_SCREEN_COLOR, D_800A0932[0]);
                 if (D_800A0932[0] == 0) {
                     D_800A0931 = 1;
                 }
@@ -259,7 +259,7 @@ void state_step_exit_language_select(void) {
                 if (D_800A0932[0] > 255) {
                     D_800A0932[0] = 255;
                 }
-                set_screen_overlay_params_front(STENCIL_TYPE_0, D_800A0932[0]);
+                set_screen_overlay_params_front(STENCIL_TYPE_SCREEN_COLOR, D_800A0932[0]);
                 if (D_800A0932[0] == 255) {
                     D_800A0931 = 2;
                 }
@@ -339,7 +339,7 @@ void state_step_exit_language_select(void) {
                 if (D_800A0932[0] < 0) {
                     D_800A0932[0] = 0;
                 }
-                set_screen_overlay_params_front(STENCIL_TYPE_0, D_800A0932[0]);
+                set_screen_overlay_params_front(STENCIL_TYPE_SCREEN_COLOR, D_800A0932[0]);
             }
             break;
         case 3:
@@ -355,7 +355,7 @@ void state_step_exit_language_select(void) {
                 if (D_800A0932[0] < 0) {
                     D_800A0932[0] = 0;
                 }
-                set_screen_overlay_params_front(STENCIL_TYPE_0, D_800A0932[0]);
+                set_screen_overlay_params_front(STENCIL_TYPE_SCREEN_COLOR, D_800A0932[0]);
             }
             break;
         case 4:

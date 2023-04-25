@@ -229,7 +229,7 @@ void func_8003646C(void) {
             break;
     }
 
-    set_screen_overlay_params_front(STENCIL_TYPE_0, gMapTransitionAlpha);
+    set_screen_overlay_params_front(STENCIL_TYPE_SCREEN_COLOR, gMapTransitionAlpha);
 }
 
 void func_80036640(void) {

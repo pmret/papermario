@@ -343,7 +343,7 @@ extern EvtScript EVS_MerleeExpBonus;
 extern EvtScript EVS_PlayerHappy;
 extern EvtScript EVS_ApplyDizzyAttack;
 extern EvtScript EVS_PlayerRegainAbility;
-extern EvtScript UseMystery;
+extern EvtScript EVS_UseMystery;
 extern EvtScript EVS_PlaySleepHitFX;
 extern EvtScript EVS_PlayDizzyHitFX;
 extern EvtScript EVS_PlayParalyzeHitFX;

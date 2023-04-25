@@ -274,7 +274,7 @@ API_CALLABLE(N(FadeToTitleScreen)) {
     }
 
     set_screen_overlay_color(SCREEN_LAYER_BACK, 208, 208, 208);
-    set_screen_overlay_params_back(STENCIL_TYPE_0, script->functionTemp[0]);
+    set_screen_overlay_params_back(STENCIL_TYPE_SCREEN_COLOR, script->functionTemp[0]);
     set_screen_overlay_alpha(SCREEN_LAYER_BACK, 0);
     return script->functionTemp[0] == 255;
 }

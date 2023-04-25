@@ -38,7 +38,7 @@ API_CALLABLE(N(DarkRoomUpdate)) {
     }
     
     set_screen_overlay_alpha(SCREEN_LAYER_BACK, script->functionTemp[0]);
-    set_screen_overlay_params_back(STENCIL_TYPE_B, 255.0f);
+    set_screen_overlay_params_back(STENCIL_TYPE_WORLD_DARKNESS, 255.0f);
     
     return ApiStatus_BLOCK;
 }

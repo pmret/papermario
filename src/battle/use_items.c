@@ -200,7 +200,7 @@ API_CALLABLE(LoadMysteryItemScript) {
     return ApiStatus_DONE2;
 }
 
-EvtScript UseMystery = {
+EvtScript EVS_UseMystery = {
     EVT_WAIT(2)
     EVT_CALL(LoadMysteryItemScript)
     EVT_EXEC_WAIT(LVar0)

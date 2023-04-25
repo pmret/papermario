@@ -40,7 +40,7 @@ API_CALLABLE(N(ScreenWhiteFlashOn)) {
     }
 
     set_screen_overlay_color(SCREEN_LAYER_FRONT, 160, 160, 160);
-    set_screen_overlay_params_front(STENCIL_TYPE_1, script->functionTemp[1]);
+    set_screen_overlay_params_front(STENCIL_TYPE_VIEWPORT_COLOR, script->functionTemp[1]);
 
     if (script->functionTemp[1] == 255) {
         return ApiStatus_DONE2;
@@ -61,7 +61,7 @@ API_CALLABLE(N(ScreenWhiteFlashOff)) {
     }
 
     set_screen_overlay_color(SCREEN_LAYER_FRONT, 160, 160, 160);
-    set_screen_overlay_params_front(STENCIL_TYPE_1, script->functionTemp[1]);
+    set_screen_overlay_params_front(STENCIL_TYPE_VIEWPORT_COLOR, script->functionTemp[1]);
 
     if (script->functionTemp[1] == 0) {
         return ApiStatus_DONE2;

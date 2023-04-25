@@ -152,7 +152,7 @@ void state_init_demo(void) {
 
     disable_sounds();
     set_map_transition_effect(TRANSITION_FADE_TO_BLACK_FAST);
-    set_screen_overlay_params_front(STENCIL_TYPE_0, 255.0f);
+    set_screen_overlay_params_front(STENCIL_TYPE_SCREEN_COLOR, 255.0f);
     clear_saved_variables();
     clear_script_list();
 }

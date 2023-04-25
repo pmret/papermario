@@ -228,7 +228,7 @@ API_CALLABLE(N(FlashScreenWhite)) {
     switch(script->functionTemp[0]) {
         case FADE_TO_WHITE:
             set_screen_overlay_color(SCREEN_LAYER_FRONT, 208, 208, 208);
-            set_screen_overlay_params_front(STENCIL_TYPE_1, data->screenWhiteness);
+            set_screen_overlay_params_front(STENCIL_TYPE_VIEWPORT_COLOR, data->screenWhiteness);
             if (data->screenWhiteness == 255) {
                 data->spiritCardEffect->flags |= EFFECT_INSTANCE_FLAG_10;
                 data->spiritCardEffect = NULL;
@@ -251,7 +251,7 @@ API_CALLABLE(N(FlashScreenWhite)) {
             }
             break;
         case BACK_TO_NORMAL:
-            set_screen_overlay_params_front(STENCIL_TYPE_1, data->screenWhiteness);
+            set_screen_overlay_params_front(STENCIL_TYPE_VIEWPORT_COLOR, data->screenWhiteness);
             if (data->screenWhiteness == 0) {
                 set_curtain_scale_goal(1.0f);
                 return ApiStatus_DONE1;

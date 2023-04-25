@@ -421,19 +421,19 @@ void btl_update(void) {
         if (battleStatus->darknessMode > BTL_DARKNESS_STATE_NONE) {
             set_screen_overlay_color(SCREEN_LAYER_BACK, 0, 0, 0);
             if (partner == NULL) {
-                set_screen_overlay_params_back(STENCIL_TYPE_0, 215.0f);
+                set_screen_overlay_params_back(STENCIL_TYPE_SCREEN_COLOR, 215.0f);
             } else if (playerData->currentPartner == PARTNER_WATT) {
                 paramAmount -= 10.0f;
                 if (paramAmount < 0.0f) {
                     paramAmount = 0.0f;
                 }
-                set_screen_overlay_params_back(STENCIL_TYPE_0, paramAmount);
+                set_screen_overlay_params_back(STENCIL_TYPE_SCREEN_COLOR, paramAmount);
             } else {
                 paramAmount += 10.0f;
                 if (paramAmount > 215.0f) {
                     paramAmount = 215.0f;
                 }
-                set_screen_overlay_params_back(STENCIL_TYPE_0, paramAmount);
+                set_screen_overlay_params_back(STENCIL_TYPE_SCREEN_COLOR, paramAmount);
             }
         } else if (battleStatus->darknessMode < BTL_DARKNESS_STATE_NONE) {
             paramAmount -= 10.0f;
@@ -442,7 +442,7 @@ void btl_update(void) {
                 set_screen_overlay_params_back(STENCIL_TYPE_NONE, -1.0f);
                 battleStatus->darknessMode = BTL_DARKNESS_STATE_NONE;
             } else {
-                set_screen_overlay_params_back(STENCIL_TYPE_0, paramAmount);
+                set_screen_overlay_params_back(STENCIL_TYPE_SCREEN_COLOR, paramAmount);
             }
         }
 
@@ -455,7 +455,7 @@ void btl_update(void) {
                     get_screen_overlay_params(SCREEN_LAYER_FRONT, &paramType, &paramAmount);
                     if (paramType == (u8) STENCIL_TYPE_NONE) {
                         D_802809F6 = 0;
-                        set_screen_overlay_params_front(STENCIL_TYPE_0, 0.0f);
+                        set_screen_overlay_params_front(STENCIL_TYPE_SCREEN_COLOR, 0.0f);
                     }
                 }
             } else if (D_802809F6 == 255) {
@@ -468,7 +468,7 @@ void btl_update(void) {
                     D_802809F6 = 255;
                 }
 
-                set_screen_overlay_params_front(STENCIL_TYPE_0, D_802809F6);
+                set_screen_overlay_params_front(STENCIL_TYPE_SCREEN_COLOR, D_802809F6);
                 set_screen_overlay_color(SCREEN_LAYER_FRONT, 208, 208, 208);
                 intro_logos_set_fade_alpha(255);
                 intro_logos_set_fade_color(224);

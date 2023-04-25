@@ -9,7 +9,7 @@ static s32 D_802A1CD0;
 #include "battle/common/move/ItemRefund.inc.c"
 
 void func_802A123C_727B4C(void) {
-    func_80138D88(0, 0, 320, 240, 160.0f);
+    draw_prev_frame_buffer_at_screen_pos(0, 0, 320, 240, 160.0f);
 }
 
 API_CALLABLE(N(func_802A1270_727B80)) {

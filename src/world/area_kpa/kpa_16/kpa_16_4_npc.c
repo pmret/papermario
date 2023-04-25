@@ -7,7 +7,7 @@ API_CALLABLE(N(SetScreenBlackFadeAmount)) {
     Bytecode* args = script->ptrReadPos;
     f32 amount = evt_get_variable(script, *args++);
 
-    set_screen_overlay_params_front(STENCIL_TYPE_0, amount);
+    set_screen_overlay_params_front(STENCIL_TYPE_SCREEN_COLOR, amount);
     return ApiStatus_DONE2;
 }
 

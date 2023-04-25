@@ -2990,28 +2990,28 @@ typedef enum ScreenTransition {
 } ScreenTransition;
 
 enum ScreenLayer {
-    SCREEN_LAYER_FRONT         = 0,
-    SCREEN_LAYER_BACK          = 1,
+    SCREEN_LAYER_FRONT              = 0,
+    SCREEN_LAYER_BACK               = 1,
 };
 
 typedef enum StencilType {
-    STENCIL_TYPE_NONE       = -1,
-    STENCIL_TYPE_0          = 0,
-    STENCIL_TYPE_1          = 1,
-    STENCIL_TYPE_2          = 2,
-    STENCIL_TYPE_3          = 3,
-    STENCIL_TYPE_MARIO_1    = 4,
-    STENCIL_TYPE_STAR_1     = 5,
-    STENCIL_TYPE_6          = 6,
-    STENCIL_TYPE_MARIO_2    = 7,
-    STENCIL_TYPE_STAR_2     = 8,
-    STENCIL_TYPE_9          = 9,
-    STENCIL_TYPE_A          = 0xA,
-    STENCIL_TYPE_B          = 0xB,  // watt darkness?
-    STENCIL_TYPE_C          = 0xC,
-    STENCIL_TYPE_D          = 0xD,
-    STENCIL_TYPE_E          = 0xE,
-    STENCIL_TYPE_F          = 0xF,
+    STENCIL_TYPE_NONE                   = -1,
+    STENCIL_TYPE_SCREEN_COLOR           = 0,
+    STENCIL_TYPE_VIEWPORT_COLOR         = 1,
+    STENCIL_TYPE_2                      = 2,
+    STENCIL_TYPE_VIEWPORT_SPOTLIGHT     = 3,
+    STENCIL_TYPE_VIEWPORT_MARIO         = 4,
+    STENCIL_TYPE_VIEWPORT_STAR          = 5,
+    STENCIL_TYPE_SCREEN_SPOTLIGHT       = 6,
+    STENCIL_TYPE_SCREEN_MARIO           = 7,
+    STENCIL_TYPE_SCREEN_STAR            = 8,
+    STENCIL_TYPE_9                      = 9,
+    STENCIL_TYPE_START_BATTLE           = 10,
+    STENCIL_TYPE_WORLD_DARKNESS         = 11,
+    STENCIL_TYPE_BLUR                   = 12,
+    STENCIL_TYPE_BATTLE_DARKNESS        = 13,
+    STENCIL_TYPE_UNUSED_1               = 14,
+    STENCIL_TYPE_UNUSED_2               = 15,
 } StencilType;
 
 enum DoorSounds {

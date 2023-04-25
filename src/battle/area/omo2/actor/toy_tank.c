@@ -58,7 +58,7 @@ API_CALLABLE(N(UpdateBulbGlow)) {
 API_CALLABLE(func_802181F4_52B894) {
     Bytecode* args = script->ptrReadPos;
     get_actor(script->owner1.actorID);
-    set_screen_overlay_params_back(STENCIL_TYPE_D, evt_get_variable(script, *args));
+    set_screen_overlay_params_back(STENCIL_TYPE_BATTLE_DARKNESS, evt_get_variable(script, *args));
     return ApiStatus_DONE2;
 }
 

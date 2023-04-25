@@ -245,7 +245,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_CALL(N(func_802A13E4_72C994))
     EVT_WAIT(2)
     EVT_IF_NE(LVar0, 133)
-        EVT_JUMP(EVT_PTR(UseMystery))
+        EVT_JUMP(EVT_PTR(EVS_UseMystery))
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(CreateVirtualEntity, LVarA, EVT_PTR(N(modelCommandList)))

@@ -27,13 +27,13 @@ API_CALLABLE(N(SetLightOriginAndPower)) {
 
     set_screen_overlay_center_worldpos(SCREEN_LAYER_BACK, 1, x, y, z);
     set_screen_overlay_alpha(SCREEN_LAYER_BACK, alpha);
-    set_screen_overlay_params_back(STENCIL_TYPE_B, 255.0f);
+    set_screen_overlay_params_back(STENCIL_TYPE_WORLD_DARKNESS, 255.0f);
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(SetLightOff)) {
     set_screen_overlay_alpha(SCREEN_LAYER_BACK, 0.0f);
-    set_screen_overlay_params_back(STENCIL_TYPE_B, 0.0f);
+    set_screen_overlay_params_back(STENCIL_TYPE_WORLD_DARKNESS, 0.0f);
     return ApiStatus_DONE2;
 }
 

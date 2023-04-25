@@ -35,6 +35,6 @@ s32 intro_logos_fade_out(s16 addAlpha) {
 }
 
 void intro_logos_update_fade(void) {
-    set_screen_overlay_params_front(STENCIL_TYPE_0, gGameStatusPtr->bootAlpha);
+    set_screen_overlay_params_front(STENCIL_TYPE_SCREEN_COLOR, gGameStatusPtr->bootAlpha);
     set_screen_overlay_color(SCREEN_LAYER_FRONT, gGameStatusPtr->bootBlue, gGameStatusPtr->bootGreen, gGameStatusPtr->bootRed);
 }
