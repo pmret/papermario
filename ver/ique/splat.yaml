@@ -445,20 +445,7 @@ segments:
     - [0xE47C0, .data, windows]
     - [0xE4940, .data, audio/sfx]
     - [0xE4D60, .data, audio/e0b30_len_b80]
-    - [0xE4DB0, .rodata, a5dd0_len_114e0]
-    - [0xE54D0, .rodata, B4580]
-    - [0xE5720, .rodata, entity_model]
-    - [0xE59E0, .rodata, msg]
-    - [0xE60B0, .rodata, C50A0]
-    - [0xE6510, .rodata, cd180_len_38f0]
-    - [0xE65F0, .rodata, CEE40]
-    - [0xE6620, .rodata, imgfx]
-    - [0xE67B0, .rodata, hud_element]
-    - [0xE6890, .rodata, background]
-    - [0xE68B0, .rodata, windows]
-    - [0xE68C0, .rodata, audio/sfx]
-    - [0xE6900, .rodata, audio/e0b30_len_b80]
-    - [0xE6920]
+    - [0xE4DB0]
   - name: evt
     dir: evt
     type: code

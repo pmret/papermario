@@ -2596,7 +2596,31 @@ segments:
   - [0x2435F0, ia8,     title/tape, 128, 128]
   - [0x2475F0, ci8,     title/bowser_silhouette, 128, 128]
   - [0x24B5F0, palette, title/bowser_silhouette]
-  - [0x24B7F0, bin, imgfx_gfx_data] # TODO extract into better format?
+  - start: 0x24B7F0
+    type: pm_imgfx_data
+    name: imgfx_data
+    vram: 0
+    animations:
+    - ["shock", 0x14358]
+    - ["shiver", 0x18200]
+    - ["vertical_pipe_curl", 0x1A858]
+    - ["horizontal_pipe_curl", 0x1E830]
+    - ["startle", 0x29458]
+    - ["flutter_down", 0x314E0]
+    - ["unfurl", 0x33498]
+    - ["get_in_bed", 0x38988]
+    - ["spirit_capture", 0x39228]
+    - ["unused_1", 0x5B7A8]
+    - ["unused_2", 0x7CF10]
+    - ["unused_3", 0x86490]
+    - ["tutankoopa_gather", 0x96258]
+    - ["tutankoopa_swirl_2", 0xA1820]
+    - ["tutankoopa_swirl_1", 0xACDE8]
+    - ["shuffle_cards", 0xBBF68]
+    - ["flip_card_1", 0xC0490]
+    - ["flip_card_2", 0xC49B8]
+    - ["flip_card_3", 0xC6150]
+    - ["cymbal_crush", 0xCA380]
   - [0x315B80, pm_sprite_shading_profiles, sprite_shading_profiles]
   - type: code
     start: 0x3169F0
