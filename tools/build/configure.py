@@ -217,6 +217,8 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, extra_cppflags: str,
 
     ninja.rule("pm_sprite_shading_profiles", command=f"$python {BUILD_TOOLS}/sprite/sprite_shading_profiles.py $in $out $header_path")
 
+    ninja.rule("pm_imgfx_data", command=f"$python {BUILD_TOOLS}/imgfx/imgfx_data.py $in $out")
+
     with Path("tools/permuter_settings.toml").open("w") as f:
         f.write(f"compiler_command = \"{cc} {CPPFLAGS.replace('$version', 'us')} {cflags} -DPERMUTER -fforce-addr\"\n")
         f.write(f"assembler_command = \"{cross}as -EB -march=vr4300 -mtune=vr4300 -Iinclude\"\n")
@@ -257,7 +259,7 @@ class Configure:
         if assets:
             modes.extend(["bin", "yay0", "img", "vtx", "vtx_common", "gfx", "gfx_common", "pm_map_data", "pm_msg",
                           "pm_npc_sprites", "pm_charset","pm_charset_palettes", "pm_effect_loads", "pm_effect_shims",
-                          "pm_sprite_shading_profiles"])
+                          "pm_sprite_shading_profiles", "pm_imgfx_data"])
         if code:
             modes.extend(["code", "c", "data", "rodata"])
 
@@ -366,12 +368,12 @@ class Configure:
                     order_only.append("generated_headers_" + self.version)
 
                 ninja.build(
-                    object_strs, # $out
-                    task,
-                    self.resolve_src_paths(src_paths), # $in
-                    variables={ "version": self.version, **variables },
+                    outputs=object_strs, # $out
+                    rule=task,
+                    inputs=self.resolve_src_paths(src_paths), # $in
                     implicit=implicit,
                     order_only=order_only,
+                    variables={ "version": self.version, **variables },
                     implicit_outputs=implicit_outputs
                 )
 
@@ -688,6 +690,15 @@ class Configure:
                     "header_path": header_path,
                 })
                 build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
+            elif seg.type == "pm_imgfx_data":
+                c_file_path = Path(f"assets/{self.version}") / "imgfx" / (seg.name + ".c")
+                build(c_file_path, entry.src_paths, "pm_imgfx_data")
+
+                build(entry.object_path, [c_file_path], "cc" if not modern_gcc else "cc_modern", variables={
+                    "cflags": "",
+                    "cppflags": f"-DVERSION_{self.version.upper()}",
+                    "encoding": "CP932", # similar to SHIFT-JIS, but includes backslash and tilde
+                })
             elif seg.type == "linker" or seg.type == "linker_offset":
                 pass
             else:
