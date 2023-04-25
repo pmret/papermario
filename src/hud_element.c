@@ -486,7 +486,7 @@ void hud_element_draw_rect(HudElement* hudElement, s16 texSizeX, s16 texSizeY, s
                     if (!(hudElement->flags & HUD_ELEMENT_FLAG_TRANSPARENT)) {
                         gDPSetCombineMode(gMainGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
                     } else {
-                        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
+                        gDPSetCombineMode(gMainGfxPos++, PM_CC_01, PM_CC_02);
                     }
 
                     if (hudElement->flags & HUD_ELEMENT_FLAG_TRANSPARENT) {
@@ -516,7 +516,7 @@ void hud_element_draw_rect(HudElement* hudElement, s16 texSizeX, s16 texSizeY, s
                         }
                     } else {
                         gDPSetRenderMode(gMainGfxPos++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
-                        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0);
+                        gDPSetCombineMode(gMainGfxPos++, PM_CC_07, PM_CC_07);
                         gDPSetPrimColor(gMainGfxPos++, 0, 0, 40, 40, 40, 72);
                     }
 
@@ -1574,8 +1574,7 @@ void render_hud_element(HudElement* hudElement) {
             vtx[3].v.tc[1] = 0;
 
             gDPPipeSync(gMainGfxPos++);
-            gDPSetCombineLERP(gMainGfxPos++, TEXEL0, 0, PRIMITIVE, 0, PRIMITIVE, 0, TEXEL0, 0, TEXEL0, 0, PRIMITIVE, 0,
-                              PRIMITIVE, 0, TEXEL0, 0);
+            gDPSetCombineLERP(gMainGfxPos++, TEXEL0, 0, PRIMITIVE, 0, PRIMITIVE, 0, TEXEL0, 0, TEXEL0, 0, PRIMITIVE, 0, PRIMITIVE, 0, TEXEL0, 0);
             gDPSetPrimColor(gMainGfxPos++, 0, 0,
                             hudElement->tint.r, hudElement->tint.g, hudElement->tint.b, hudElement->opacity);
 

@@ -9,7 +9,7 @@ API_CALLABLE(N(DarkRoomUpdate)) {
         script->functionTemp[1] = FALSE;
     }
     
-    set_screen_overlay_center_worldpos(1, 1, playerStatus->position.x, playerStatus->position.y + 8.0f, playerStatus->position.z);
+    set_screen_overlay_center_worldpos(SCREEN_LAYER_BACK, 1, playerStatus->position.x, playerStatus->position.y + 8.0f, playerStatus->position.z);
     
     if (gPartnerStatus.partnerActionState != PARTNER_ACTION_NONE) {
         if (playerData->currentPartner == PARTNER_WATT) {
@@ -37,8 +37,8 @@ API_CALLABLE(N(DarkRoomUpdate)) {
         script->functionTemp[0] = 255;
     }
     
-    set_screen_overlay_alpha(1, script->functionTemp[0]);
-    set_screen_overlay_params_back(0xB, 255.0f);
+    set_screen_overlay_alpha(SCREEN_LAYER_BACK, script->functionTemp[0]);
+    set_screen_overlay_params_back(OVERLAY_WORLD_DARKNESS, 255.0f);
     
     return ApiStatus_BLOCK;
 }

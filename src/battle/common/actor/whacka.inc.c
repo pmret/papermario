@@ -131,12 +131,12 @@ EvtScript N(handleEvent) = {
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2073)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
         EVT_CASE_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Whacka_Hurt)
             EVT_EXEC_WAIT(N(spawnWhackasBump))
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_CALL(RandInt, 100, LVar0)
             EVT_IF_LE(LVar0, 100)
                 EVT_EXEC_WAIT(N(die))
@@ -147,7 +147,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
             EVT_SET_CONST(LVar2, ANIM_Whacka_Idle)
             EVT_EXEC_WAIT(N(spawnWhackasBump))
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_CALL(RandInt, 100, LVar0)
             EVT_IF_LE(LVar0, 100)
                 EVT_EXEC_WAIT(N(die))
@@ -158,14 +158,14 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
             EVT_SET_CONST(LVar2, ANIM_Whacka_Idle)
             EVT_EXEC_WAIT(N(spawnWhackasBump))
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_IF_GE(100, 100)
                 EVT_EXEC_WAIT(N(die))
                 EVT_RETURN
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
                 EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
-                EVT_EXEC_WAIT(DoDeath)
+                EVT_EXEC_WAIT(EVS_DoDeath)
                 EVT_RETURN
             EVT_END_IF
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
@@ -187,7 +187,7 @@ EvtScript N(handleEvent) = {
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
                 EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
-                EVT_EXEC_WAIT(DoDeath)
+                EVT_EXEC_WAIT(EVS_DoDeath)
                 EVT_RETURN
             EVT_END_IF
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
@@ -206,7 +206,7 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_ZERO_DAMAGE)
             EVT_SET_CONST(LVar0, 1)
@@ -234,7 +234,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Whacka_Hurt)
             EVT_EXEC_WAIT(N(spawnWhackasBump))
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_WAIT(10)
             EVT_IF_GE(100, 100)
                 EVT_EXEC_WAIT(N(die))
@@ -242,7 +242,7 @@ EvtScript N(handleEvent) = {
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
                 EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
-                EVT_EXEC_WAIT(DoDeath)
+                EVT_EXEC_WAIT(EVS_DoDeath)
                 EVT_RETURN
             EVT_END_IF
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)

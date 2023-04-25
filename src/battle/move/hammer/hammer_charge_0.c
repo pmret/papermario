@@ -117,7 +117,7 @@ EvtScript N(EVS_802A3348) = {
                     EVT_END_THREAD
             EVT_END_SWITCH
     EVT_END_SWITCH
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_44)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_HAMMER_STRIKE)
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, 0, 16)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
         EVT_EXEC_WAIT(N(EVS_Hammer_ReturnHome_C))
@@ -184,7 +184,7 @@ EvtScript N(EVS_UseMove0) = {
 };
 
 EvtScript N(EVS_802A3948) = {
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_32)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_CHARGE_UP)
     EVT_WAIT(10)
     EVT_THREAD
         EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_156)
@@ -198,7 +198,7 @@ EvtScript N(EVS_802A3948) = {
     EVT_WAIT(3)
     EVT_CALL(func_802A11CC_74F2FC, LVar0, LVar1, LVar2, EVT_FLOAT(0.8))
     EVT_WAIT(30)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 5)
     EVT_CALL(N(IsHammerMaxCharged))
     EVT_IF_EQ(LVar0, 0)
@@ -219,9 +219,9 @@ EvtScript N(EVS_802A3948) = {
         EVT_WAIT(4)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
         EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
-        EVT_CALL(ShowVariableMessageBox, BTL_MSG_04, 60, 1)
+        EVT_CALL(ShowVariableMessageBox, BTL_MSG_CHARGE_HAMMER, 60, 1)
     EVT_ELSE
-        EVT_CALL(ShowMessageBox, BTL_MSG_08, 60)
+        EVT_CALL(ShowMessageBox, BTL_MSG_CANT_CHARGE, 60)
     EVT_END_IF
     EVT_LABEL(0)
     EVT_WAIT(1)
@@ -235,7 +235,7 @@ EvtScript N(EVS_802A3948) = {
 };
 
 EvtScript N(EVS_802A3C90) = {
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_32)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_CHARGE_UP)
     EVT_WAIT(10)
     EVT_THREAD
         EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_156)
@@ -249,7 +249,7 @@ EvtScript N(EVS_802A3C90) = {
     EVT_WAIT(3)
     EVT_CALL(func_802A11CC_74F2FC, LVar0, LVar1, LVar2, EVT_FLOAT(0.8))
     EVT_WAIT(30)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 5)
     EVT_CALL(N(IsHammerMaxCharged))
     EVT_IF_EQ(LVar0, 0)
@@ -270,9 +270,9 @@ EvtScript N(EVS_802A3C90) = {
         EVT_WAIT(4)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
         EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
-        EVT_CALL(ShowVariableMessageBox, BTL_MSG_04, 60, 1)
+        EVT_CALL(ShowVariableMessageBox, BTL_MSG_CHARGE_HAMMER, 60, 1)
     EVT_ELSE
-        EVT_CALL(ShowMessageBox, BTL_MSG_08, 60)
+        EVT_CALL(ShowMessageBox, BTL_MSG_CANT_CHARGE, 60)
     EVT_END_IF
     EVT_LABEL(0)
     EVT_WAIT(1)
@@ -286,7 +286,7 @@ EvtScript N(EVS_802A3C90) = {
 };
 
 EvtScript N(EVS_802A3FD8) = {
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_32)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_CHARGE_UP)
     EVT_WAIT(10)
     EVT_THREAD
         EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_156)
@@ -300,7 +300,7 @@ EvtScript N(EVS_802A3FD8) = {
     EVT_WAIT(3)
     EVT_CALL(func_802A11CC_74F2FC, LVar0, LVar1, LVar2, EVT_FLOAT(0.8))
     EVT_WAIT(30)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 5)
     EVT_CALL(N(IsHammerMaxCharged))
     EVT_IF_EQ(LVar0, 0)
@@ -321,9 +321,9 @@ EvtScript N(EVS_802A3FD8) = {
         EVT_WAIT(4)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
         EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
-        EVT_CALL(ShowVariableMessageBox, BTL_MSG_04, 60, 1)
+        EVT_CALL(ShowVariableMessageBox, BTL_MSG_CHARGE_HAMMER, 60, 1)
     EVT_ELSE
-        EVT_CALL(ShowMessageBox, BTL_MSG_08, 60)
+        EVT_CALL(ShowMessageBox, BTL_MSG_CANT_CHARGE, 60)
     EVT_END_IF
     EVT_LABEL(0)
     EVT_WAIT(1)

@@ -59,7 +59,7 @@ EvtScript N(EVS_Scene_ShowInvitation) = {
     EVT_WAIT(12 * DT)
     EVT_CALL(ShowMessageAtScreenPos, MSG_Intro_0023, 160, 40)
     EVT_WAIT(3)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_20"), kmr_20_ENTRY_1, TRANSITION_7)
+    EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_20"), kmr_20_ENTRY_1, TRANSITION_SLOW_FADE_TO_WHITE)
     EVT_WAIT(40 * DT)
     EVT_RETURN
     EVT_END

@@ -185,7 +185,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_GeneralGuy_Anim05)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET(LVar0, 1)
@@ -200,7 +200,7 @@ EvtScript N(handleEvent) = {
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_GeneralGuy_Anim09)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_SET_CONST(LVar0, 1)
@@ -212,7 +212,7 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(DoSpinSmashHit)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_GeneralGuy_Anim05)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_SET_CONST(LVar0, 1)
@@ -235,11 +235,11 @@ EvtScript N(handleEvent) = {
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_GeneralGuy_Anim05)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_GeneralGuy_Anim05)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_END_FIRST_STRIKE)
             EVT_SET_CONST(LVar0, 1)
@@ -253,7 +253,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_EQ(EVENT_30)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_GeneralGuy_Anim05)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_WAIT(1000)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
             EVT_SET_CONST(LVar0, 1)
@@ -299,7 +299,7 @@ EvtScript N(attack_throw_bomb) = {
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_THREAD
         EVT_WAIT(35)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(MoveBattleCamOver, 30)
     EVT_END_THREAD
     EVT_WAIT(5)
@@ -356,7 +356,7 @@ EvtScript N(attack_throw_bomb) = {
             EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 2, EVT_FLOAT(0.1))
             EVT_CALL(FlyPartTo, ACTOR_SELF, 2, LVar0, LVar1, LVar2, 0, 30, EASING_LINEAR)
             EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
             EVT_SUB(LVar0, 65)
             EVT_SET(LVar1, -5)
@@ -433,7 +433,7 @@ EvtScript N(attack_lightning_shot) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_GeneralGuy_Anim03)
     EVT_WAIT(20)
     EVT_CALL(SetActorVar, ACTOR_ENEMY1, 6, 1)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_THREAD
         EVT_CALL(N(FadeBackgroundToBlack))

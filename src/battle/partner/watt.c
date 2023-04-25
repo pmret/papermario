@@ -556,7 +556,7 @@ EvtScript N(handleEvent) = {
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208C)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1,  ANIM_BattleWatt_Hurt)
-            EVT_EXEC_WAIT(DoPartnerBlock)
+            EVT_EXEC_WAIT(EVS_DoPartnerBlock)
             EVT_CALL(N(WattFXBounce))
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SPIKE_CONTACT)
@@ -602,7 +602,7 @@ EvtScript N(handleEvent) = {
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208C)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleWatt_Block)
-            EVT_EXEC_WAIT(DoPartnerBlock)
+            EVT_EXEC_WAIT(EVS_DoPartnerBlock)
             EVT_WAIT(10)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_LIFE_SHROOM_PROC)
@@ -705,7 +705,7 @@ EvtScript N(executeAction) = {
 };
 
 EvtScript N(returnHome2) = {
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_E)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_04)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Run)
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 30, 0, EASING_COS_IN_OUT)
@@ -896,7 +896,7 @@ EvtScript N(electroDash) = {
     EVT_CALL(CloseActionCommandInfo)
     EVT_CALL(N(ElectroDashFXDisable))
     EVT_CALL(StopLoopingSoundAtActor, ACTOR_PARTNER, 0)
-    EVT_CALL(func_80269EAC, 19)
+    EVT_CALL(SetDamageSource, DMG_SRC_ELECTRO_DASH)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Strain)
     EVT_CALL(func_8026EA7C, ACTOR_SELF, 1, 10)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
@@ -1109,7 +1109,7 @@ EvtScript N(8023AE8C) = {
     EVT_CALL(action_command_water_block_start, 0, 100 * DT, 3)
     EVT_CALL(AddBattleCamZoom, -75)
     EVT_CALL(MoveBattleCamOver, 100 * DT)
-    EVT_CALL(func_8024ECF8, 0, 0, 1)
+    EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
     EVT_THREAD
         EVT_CALL(EnableActorBlur, ACTOR_PARTNER, 1)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Strain)
@@ -1142,7 +1142,7 @@ EvtScript N(8023AE8C) = {
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EVT_END_THREAD
     EVT_WAIT(30)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 10)
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208E)
     EVT_CALL(GetActionCommandResult, LVar0)
@@ -1158,7 +1158,7 @@ EvtScript N(8023AE8C) = {
     EVT_END_IF
     EVT_IF_EQ(LVar0, 0)
     EVT_ELSE
-        EVT_CALL(ShowVariableMessageBox, BTL_MSG_2A, 60, LVarA)
+        EVT_CALL(ShowVariableMessageBox, BTL_MSG_TURBO_CHARGE_BEGIN, 60, LVarA)
     EVT_END_IF
     EVT_CALL(WaitForMessageBoxDone)
     EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_20000000, FALSE)
@@ -1192,7 +1192,7 @@ EvtScript N(8023B450) = {
     EVT_CALL(action_command_water_block_start, 0, 100 * DT, 3)
     EVT_CALL(AddBattleCamZoom, -100)
     EVT_CALL(MoveBattleCamOver, 100 * DT)
-    EVT_CALL(func_8024ECF8, 0, 0, 1)
+    EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
     EVT_THREAD
         EVT_CALL(EnableActorBlur, ACTOR_PARTNER, 1)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Strain)
@@ -1213,7 +1213,7 @@ EvtScript N(8023B450) = {
     EVT_CALL(AddBattleCamZoom, 100)
     EVT_CALL(MoveBattleCamOver, 5)
     EVT_WAIT(30)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 10)
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208E)
     EVT_CALL(GetActionCommandResult, LVar0)
@@ -1229,7 +1229,7 @@ EvtScript N(8023B450) = {
     EVT_END_IF
     EVT_IF_EQ(LVar0, 0)
     EVT_ELSE
-        EVT_CALL(ShowVariableMessageBox, BTL_MSG_2A, 60, LVarA)
+        EVT_CALL(ShowVariableMessageBox, BTL_MSG_TURBO_CHARGE_BEGIN, 60, LVarA)
     EVT_END_IF
     EVT_CALL(WaitForMessageBoxDone)
     EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_20000000, FALSE)
@@ -1287,7 +1287,7 @@ EvtScript N(megaShock) = {
     EVT_PLAY_EFFECT(EFFECT_RADIAL_SHIMMER, 8, LVar0, LVar1, LVar2, EVT_FLOAT(1.3), 90 * DT, 0)
     EVT_CALL(AddBattleCamZoom, -100)
     EVT_CALL(MoveBattleCamOver, 90 * DT)
-    EVT_CALL(func_8024ECF8, 0, 0, 1)
+    EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_StrainBigger)
     EVT_CALL(func_8026EA7C, ACTOR_SELF, 1, 10)
     EVT_CALL(N(WattFXDisable))

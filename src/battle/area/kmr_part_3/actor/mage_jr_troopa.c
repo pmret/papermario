@@ -186,7 +186,7 @@ EvtScript N(8022A880) = {
 EvtScript N(8022ABA8) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_H)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_07)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(SetBattleCamOffsetZ, 38)
     EVT_CALL(SetBattleCamZoom, 256)
@@ -197,7 +197,7 @@ EvtScript N(8022ABA8) = {
 
 EvtScript N(8022AC40) = {
     EVT_CALL(func_802535B4, 1)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 12)
     EVT_RETURN
     EVT_END
@@ -250,17 +250,17 @@ EvtScript N(handleEvent_8022ADD8) = {
         EVT_CASE_EQ(9)
             EVT_SET_CONST(LVar0, 0x00000001)
             EVT_SET_CONST(LVar1, ANIM_MageJrTroopa_Hurt)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
         EVT_CASE_EQ(10)
             EVT_SET_CONST(LVar0, 0x00000001)
             EVT_SET_CONST(LVar1, ANIM_MageJrTroopa_Hurt)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_EXEC_WAIT(N(8022A750))
             EVT_EXEC_WAIT(N(8022C2A4))
         EVT_CASE_EQ(32)
             EVT_SET_CONST(LVar0, 0x00000001)
             EVT_SET_CONST(LVar1, ANIM_MageJrTroopa_Hurt)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 0x00000001)
             EVT_SET_CONST(LVar1, ANIM_MageJrTroopa_Still)
@@ -391,7 +391,7 @@ EvtScript N(takeTurn_8022B4F0) = {
     EVT_PLAY_EFFECT(EFFECT_GATHER_ENERGY_PINK, 0, LVar0, LVar1, LVar2, LVar5, 30, 0)
     EVT_WAIT(30)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MageJrTroopa_SwingStaff)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, DAMAGE_TYPE_NO_CONTACT, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVarA)
         EVT_CASE_OR_EQ(6)
@@ -522,19 +522,19 @@ EvtScript N(nextTurn_8022BB44) = {
 };
 
 EvtScript N(8022BF1C) = {
-    EVT_CALL(func_8027D32C, -127)
+    EVT_CALL(func_8027D32C, ACTOR_SELF)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(func_80269E80, LVar5)
+    EVT_CALL(GetDamageSource, LVar5)
     EVT_SWITCH(LVar5)
-        EVT_CASE_OR_EQ(10)
-        EVT_CASE_OR_EQ(14)
-        EVT_CASE_OR_EQ(12)
-        EVT_CASE_OR_EQ(16)
-        EVT_CASE_OR_EQ(11)
-        EVT_CASE_OR_EQ(15)
-        EVT_CASE_OR_EQ(13)
-        EVT_CASE_OR_EQ(17)
-        EVT_CASE_OR_EQ(2)
+        EVT_CASE_OR_EQ(DMG_SRC_NEXT_SLAP_LEFT)
+        EVT_CASE_OR_EQ(DMG_SRC_NEXT_FAN_SMACK_LEFT)
+        EVT_CASE_OR_EQ(DMG_SRC_LAST_SLAP_LEFT)
+        EVT_CASE_OR_EQ(DMG_SRC_LAST_FAN_SMACK_LEFT)
+        EVT_CASE_OR_EQ(DMG_SRC_NEXT_SLAP_RIGHT)
+        EVT_CASE_OR_EQ(DMG_SRC_NEXT_FAN_SMACK_RIGHT)
+        EVT_CASE_OR_EQ(DMG_SRC_LAST_SLAP_RIGHT)
+        EVT_CASE_OR_EQ(DMG_SRC_LAST_FAN_SMACK_RIGHT)
+        EVT_CASE_OR_EQ(DMG_SRC_SPIN_SMASH)
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
             EVT_SET(LVar2, 0)

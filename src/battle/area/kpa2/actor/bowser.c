@@ -178,7 +178,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_EQ(EVENT_30)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleBowser_Hurt)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_WAIT(1000)
         EVT_CASE_DEFAULT
             EVT_SET_CONST(LVar1, ANIM_BattleBowser_Hurt)
@@ -192,16 +192,16 @@ EvtScript N(handleEvent) = {
 
 EvtScript N(onHit) = {
     EVT_SET_CONST(LVar0, 1)
-    EVT_EXEC_WAIT(DoNormalHit)
+    EVT_EXEC_WAIT(EVS_DoNormalHit)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(onDeath) = {
     EVT_SET_CONST(LVar0, 1)
-    EVT_EXEC_WAIT(DoNormalHit)
+    EVT_EXEC_WAIT(EVS_DoNormalHit)
     EVT_SET_CONST(LVar0, 1)
-    EVT_EXEC_WAIT(DoDeath)
+    EVT_EXEC_WAIT(EVS_DoDeath)
     EVT_RETURN
     EVT_END
 };
@@ -275,7 +275,7 @@ EvtScript N(attackClawSwipe) = {
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBowser_RearUpMock)
     EVT_WAIT(25)
-    EVT_CALL(func_8024ECF8, -1, 1, 0)
+    EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBowser_Swipe)
     EVT_WAIT(3)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, 0, 0, 1, BS_FLAGS1_10)
@@ -283,7 +283,7 @@ EvtScript N(attackClawSwipe) = {
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_WAIT(20)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBowser_Tantrum)
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -311,7 +311,7 @@ EvtScript N(attackClawSwipe) = {
             EVT_IF_EQ(LVarF, HIT_RESULT_10)
                 EVT_RETURN
             EVT_END_IF
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(3.0))
             EVT_SET(LVar1, ANIM_BattleBowser_Walk)
             EVT_EXEC_WAIT(N(returnHome))
@@ -335,7 +335,7 @@ EvtScript N(attackHeavyJump) = {
     EVT_CALL(AddGoalPos, ACTOR_SELF, 80, 0, 0)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(3.0))
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(func_8024ECF8, -1, 1, 0)
+    EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBowser_Idle)
     EVT_WAIT(15)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBowser_PreJump)
@@ -365,7 +365,7 @@ EvtScript N(attackHeavyJump) = {
             EVT_WAIT(3)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBowser_Idle)
             EVT_WAIT(25)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
@@ -405,7 +405,7 @@ EvtScript N(attackHeavyJump) = {
             EVT_IF_EQ(LVarF, HIT_RESULT_10)
                 EVT_RETURN
             EVT_END_IF
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(3.0))
             EVT_SET(LVar1, ANIM_BattleBowser_Walk)
             EVT_EXEC_WAIT(N(returnHome))
@@ -438,7 +438,7 @@ EvtScript N(attackFlameBreath) = {
     EVT_SUB(LVar3, 40)
     EVT_SET(LVar4, 20)
     EVT_PLAY_EFFECT(EFFECT_FIRE_BREATH, 0, LVar0, LVar1, LVar2, LVar3, LVar4, LVar5, 50, 1, 24, 0)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 100)
     EVT_WAIT(20)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBowser_FireBreathLoop)
@@ -502,7 +502,7 @@ EvtScript N(attackShockwaveDrain) = {
     EVT_SUB(LVar2, 3)
     EVT_PLAY_EFFECT(EFFECT_BULB_GLOW, 2, LVar0, 90, LVar2, EVT_FLOAT(1.0), LVarE, 0)
     EVT_WAIT(16)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 45)
     EVT_WAIT(19)
     EVT_CALL(RemoveEffect, LVarF)

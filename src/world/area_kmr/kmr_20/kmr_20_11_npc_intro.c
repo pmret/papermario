@@ -385,7 +385,7 @@ EvtScript N(EVS_Scene_BeginGame) = {
     EVT_CALL(SetMusicTrack, 0, SONG_PRISONER_PEACH_THEME, 0, 8)
     EVT_WAIT(5 * DT)
     EVT_CALL(ClearAmbientSounds, 250)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("osr_00"), osr_00_ENTRY_3, TRANSITION_7)
+    EVT_CALL(GotoMapSpecial, EVT_PTR("osr_00"), osr_00_ENTRY_3, TRANSITION_SLOW_FADE_TO_WHITE)
     EVT_WAIT(15 * DT)
     EVT_CALL(ClearAmbientSounds, 250)
     EVT_WAIT(100 * DT)

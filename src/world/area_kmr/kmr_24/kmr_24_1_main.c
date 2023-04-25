@@ -6,7 +6,7 @@ API_CALLABLE(N(ExitGame)) {
     s16 result;
     
     if (isInitialCall) {
-        set_map_transition_effect(TRANSITION_4);
+        set_map_transition_effect(TRANSITION_BEGIN_OR_END_GAME);
         script->functionTemp[1] = 0;
     }
     
@@ -55,7 +55,7 @@ EvtScript N(EVS_SaveAndContinue_Prompt) = {
             EVT_WAIT(100)
         EVT_CASE_EQ(2)
     EVT_END_SWITCH
-    EVT_CALL(GotoMapSpecial, EVT_PTR("osr_03"), osr_03_ENTRY_4, TRANSITION_11)
+    EVT_CALL(GotoMapSpecial, EVT_PTR("osr_03"), osr_03_ENTRY_4, TRANSITION_AFTER_SAVE_PROMPT)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END

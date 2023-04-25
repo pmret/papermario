@@ -343,12 +343,12 @@ EvtScript N(handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Blooper_Anim04)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Blooper_Anim04)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Blooper_Anim04)
             EVT_EXEC_WAIT(N(onDeath))
@@ -393,7 +393,7 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(N(unEnrage))
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Blooper_Anim04)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_EXEC_WAIT(N(unEnrage))
@@ -431,7 +431,7 @@ EvtScript N(handleEvent) = {
 };
 
 EvtScript N(onDeath) = {
-    EVT_EXEC_WAIT(DoDeath)
+    EVT_EXEC_WAIT(EVS_DoDeath)
     EVT_RETURN
     EVT_END
 };
@@ -648,7 +648,7 @@ EvtScript N(attackInkBlast) = {
     EVT_END_SWITCH
     EVT_WAIT(10)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(func_80269EAC, 26)
+    EVT_CALL(SetDamageSource, DMG_SRC_INK_BLAST)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_NO_CONTACT, 0, 0, 5, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_WAIT(30)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim00)
@@ -666,7 +666,7 @@ EvtScript N(makeBabies) = {
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_H)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_07)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(SetBattleCamOffsetZ, 50)
     EVT_CALL(SetBattleCamZoom, 330)
@@ -678,7 +678,7 @@ EvtScript N(makeBabies) = {
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(0.3))
     EVT_END_THREAD
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_H)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_07)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(SetBattleCamOffsetZ, 65)
     EVT_CALL(SetBattleCamZoom, 240)
@@ -689,7 +689,7 @@ EvtScript N(makeBabies) = {
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(0.4))
     EVT_END_THREAD
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_H)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_07)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(SetBattleCamOffsetZ, 80)
     EVT_CALL(SetBattleCamZoom, 150)
@@ -700,14 +700,14 @@ EvtScript N(makeBabies) = {
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(0.5))
     EVT_END_THREAD
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_H)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_07)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(SetBattleCamOffsetZ, 95)
     EVT_CALL(SetBattleCamZoom, 60)
     EVT_CALL(MoveBattleCamOver, 15)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim0B)
     EVT_WAIT(30)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim03)
     EVT_WAIT(10)
@@ -736,7 +736,7 @@ EvtScript N(getEnraged) = {
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_H)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_07)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(SetBattleCamOffsetZ, 28)
     EVT_CALL(SetBattleCamZoom, 297)
@@ -755,7 +755,7 @@ EvtScript N(getEnraged) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim0B)
     EVT_WAIT(10)
     EVT_EXEC_WAIT(N(enrage))
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_CALL(N(UnfadeBackgroundToBlack))
     EVT_CALL(EnableIdleScript, ACTOR_SELF, -1)

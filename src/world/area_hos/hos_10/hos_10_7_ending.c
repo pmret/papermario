@@ -97,8 +97,8 @@ API_CALLABLE(N(FadeScreenToWhite)) {
         script->functionTemp[1] = 0;
     }
 
-    set_screen_overlay_color(0, 208, 208, 208);
-    set_screen_overlay_params_front(1, script->functionTemp[1]);
+    set_screen_overlay_color(SCREEN_LAYER_FRONT, 208, 208, 208);
+    set_screen_overlay_params_front(OVERLAY_VIEWPORT_COLOR, script->functionTemp[1]);
 
     if (script->functionTemp[1] == 255) {
         return ApiStatus_DONE2;
@@ -549,7 +549,7 @@ EvtScript N(EVS_Scene_SpiritsFlyingAway) = {
     EVT_CALL(N(FadeScreenToWhite))
     EVT_WAIT(90)
     EVT_CALL(N(ClearCurrentPartner))
-    EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_20"), kmr_20_ENTRY_2, TRANSITION_5)
+    EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_20"), kmr_20_ENTRY_2, TRANSITION_OUTRO_END_SCENE)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END

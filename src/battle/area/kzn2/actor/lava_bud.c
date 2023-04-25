@@ -302,7 +302,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_EQ(EVENT_30)
             EVT_SET_CONST(LVar0, 1)
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar1)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_WAIT(1000)
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
@@ -428,7 +428,7 @@ EvtScript N(takeTurn) = {
                     EVT_EXEC_WAIT(N(playModelAnimation))
                     EVT_WAIT(4)
                 EVT_END_LOOP
-                EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+                EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                 EVT_CALL(MoveBattleCamOver, 15)
                 EVT_CALL(GetEnemyMaxHP, ACTOR_SELF, LVar0)
                 EVT_CALL(SetEnemyHP, ACTOR_SELF, LVar0)
@@ -514,7 +514,7 @@ EvtScript N(summonPetitPiranha) = {
         EVT_CALL(SetBattleCamOffsetZ, 30)
         EVT_CALL(MoveBattleCamOver, 30)
         EVT_WAIT(45)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(MoveBattleCamOver, 20)
     EVT_END_THREAD
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
@@ -980,7 +980,7 @@ EvtScript N(attackPetitSpit) = {
         EVT_CALL(SetBattleCamOffsetZ, 30)
         EVT_CALL(MoveBattleCamOver, 30)
         EVT_WAIT(45)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(MoveBattleCamOver, 20)
     EVT_END_THREAD
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
@@ -1036,7 +1036,7 @@ EvtScript N(attackPetitSpit) = {
             EVT_IF_EQ(LVar9, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, LVar5, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(RemoveActor, LVar5)
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -1078,7 +1078,7 @@ EvtScript N(attackPetitSpit) = {
             EVT_IF_EQ(LVar9, 10)
                 EVT_RETURN
             EVT_END_IF
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)

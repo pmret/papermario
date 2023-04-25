@@ -58,7 +58,7 @@ API_CALLABLE(N(UpdateBulbGlow)) {
 API_CALLABLE(func_802181F4_52B894) {
     Bytecode* args = script->ptrReadPos;
     get_actor(script->owner1.actorID);
-    set_screen_overlay_params_back(13, evt_get_variable(script, *args));
+    set_screen_overlay_params_back(OVERLAY_BATTLE_DARKNESS, evt_get_variable(script, *args));
     return ApiStatus_DONE2;
 }
 
@@ -298,9 +298,9 @@ EvtScript N(onHit) = {
     EVT_CALL(SetEnemyTargetOffset, ACTOR_SELF, 2, 0, 50)
     EVT_EXEC_WAIT(N(shake_tank))
     EVT_CALL(GetActorVar, ACTOR_ENEMY0, 1, LVar0)
-    EVT_CALL(func_80269E80, LVar1)
+    EVT_CALL(GetDamageSource, LVar1)
     EVT_SWITCH(LVar1)
-        EVT_CASE_EQ(19)
+        EVT_CASE_EQ(DMG_SRC_ELECTRO_DASH)
             EVT_IF_NOT_FLAG(LVar0, 0x2)
                 EVT_BITWISE_OR_CONST(LVar0, 0xE)
                 EVT_CALL(SetActorVar, ACTOR_ENEMY0, 1, LVar0)
@@ -310,11 +310,11 @@ EvtScript N(onHit) = {
                 EVT_CALL(MoveBattleCamOver, 20)
                 EVT_WAIT(20)
                 EVT_CALL(ActorSpeak, MSG_CH4_0072, ACTOR_ENEMY0, 1, ANIM_GeneralGuy_Anim05, ANIM_GeneralGuy_Anim05)
-                EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+                EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                 EVT_CALL(MoveBattleCamOver, 30)
             EVT_END_IF
-        EVT_CASE_OR_EQ(3)
-        EVT_CASE_OR_EQ(4)
+        EVT_CASE_OR_EQ(DMG_SRC_D_DOWN_POUND)
+        EVT_CASE_OR_EQ(DMG_SRC_D_DOWN_JUMP)
             EVT_IF_NOT_FLAG(LVar0, 0x4)
                 EVT_BITWISE_OR_CONST(LVar0, 0xC)
                 EVT_CALL(SetActorVar, ACTOR_ENEMY0, 1, LVar0)
@@ -324,7 +324,7 @@ EvtScript N(onHit) = {
                 EVT_CALL(MoveBattleCamOver, 20)
                 EVT_WAIT(20)
                 EVT_CALL(ActorSpeak, MSG_CH4_0073, ACTOR_ENEMY0, 1, ANIM_GeneralGuy_Anim05, ANIM_GeneralGuy_Anim05)
-                EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+                EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                 EVT_CALL(MoveBattleCamOver, 30)
             EVT_END_IF
         EVT_END_CASE_GROUP
@@ -338,7 +338,7 @@ EvtScript N(onHit) = {
                 EVT_CALL(MoveBattleCamOver, 20)
                 EVT_WAIT(20)
                 EVT_CALL(ActorSpeak, MSG_CH4_0074, ACTOR_ENEMY0, 1, ANIM_GeneralGuy_Anim05, ANIM_GeneralGuy_Anim05)
-                EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+                EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                 EVT_CALL(MoveBattleCamOver, 30)
             EVT_END_IF
     EVT_END_SWITCH
@@ -462,7 +462,7 @@ EvtScript N(update_phase) = {
 
 EvtScript N(start_stilt_guys_phase) = {
     EVT_CALL(func_802535B4, 0)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_WAIT(30)
     EVT_CALL(GetActorVar, ACTOR_ENEMY0, 1, LVar0)
@@ -498,7 +498,7 @@ EvtScript N(start_stilt_guys_phase) = {
     EVT_CALL(GetActorPos, ACTOR_ENEMY0, LVar0, LVar1, LVar2)
     EVT_CALL(SetHomePos, ACTOR_ENEMY0, LVar0, LVar1, LVar2)
     EVT_CALL(HPBarToHome, ACTOR_ENEMY0)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_CALL(func_802535B4, 1)
     EVT_CALL(func_8026BF48, 0)
@@ -517,7 +517,7 @@ EvtScript N(start_shy_stack_phase) = {
         EVT_CALL(ActorSpeak, MSG_CH4_006E, ACTOR_ENEMY0, 1, ANIM_GeneralGuy_Anim0C, ANIM_GeneralGuy_Anim02)
     EVT_ELSE
     EVT_END_IF
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_WAIT(10)
     EVT_CALL(LoadBattleSection, 43)
@@ -571,7 +571,7 @@ EvtScript N(start_shy_stack_phase) = {
         EVT_CALL(UseIdleAnimation, ACTOR_ENEMY4, TRUE)
     EVT_END_THREAD
     EVT_CALL(ActorSpeak, MSG_CH4_0070, ACTOR_ENEMY4, 1, -1, -1)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_WAIT(30)
     EVT_CALL(func_802535B4, 1)
@@ -585,13 +585,13 @@ EvtScript N(summon_stilt_guys) = {
     EVT_CALL(BattleCamTargetActor, ACTOR_ENEMY0)
     EVT_CALL(MoveBattleCamOver, 40)
     EVT_WAIT(40)
-    EVT_CALL(func_8024ECF8, 0, 1, 0)
+    EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_1, FALSE)
     EVT_CALL(GetActorVar, ACTOR_ENEMY0, 2, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(ActorSpeak, MSG_CH4_006B, ACTOR_ENEMY0, 1, ANIM_GeneralGuy_Anim0C, ANIM_GeneralGuy_Anim02)
     EVT_ELSE
     EVT_END_IF
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_WAIT(10)
     EVT_CALL(LoadBattleSection, 42)
@@ -625,7 +625,7 @@ EvtScript N(summon_stilt_guys) = {
         EVT_CALL(JumpToGoal, ACTOR_ENEMY4, 10, FALSE, TRUE, FALSE)
     EVT_END_THREAD
     EVT_CALL(ActorSpeak, MSG_CH4_006D, ACTOR_ENEMY4, 1, -1, -1)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_CALL(func_8026BF48, 0)
     EVT_RETURN
@@ -633,7 +633,7 @@ EvtScript N(summon_stilt_guys) = {
 };
 
 EvtScript N(summon_tank_squad) = {
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_WAIT(30)
     EVT_CALL(SetActorYaw, ACTOR_ENEMY0, 180)
@@ -648,12 +648,12 @@ EvtScript N(summon_tank_squad) = {
     EVT_CALL(BattleCamTargetActor, ACTOR_ENEMY0)
     EVT_CALL(MoveBattleCamOver, 40)
     EVT_WAIT(20)
-    EVT_CALL(func_8024ECF8, 0, 1, 0)
+    EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_1, FALSE)
     EVT_CALL(EndActorSpeech, ACTOR_ENEMY0, 1, -1, -1)
     EVT_CALL(SetAnimation, ACTOR_ENEMY0, 1, ANIM_GeneralGuy_Anim02)
     EVT_CALL(SetActorYaw, ACTOR_ENEMY0, 0)
     EVT_WAIT(20)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_WAIT(30)
     EVT_CALL(SetAnimation, ACTOR_ENEMY0, 1, ANIM_GeneralGuy_Anim02)
@@ -689,7 +689,7 @@ EvtScript N(summon_tank_squad) = {
         EVT_ADD(LVar0, 1)
     EVT_END_LOOP
     EVT_CALL(SetAnimation, ACTOR_ENEMY0, 1, ANIM_GeneralGuy_Anim04)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_WAIT(20)
     EVT_CALL(SetAnimation, ACTOR_ENEMY0, 1, ANIM_GeneralGuy_Anim02)
@@ -723,7 +723,7 @@ EvtScript N(start_battle_with_tank) = {
     EVT_CALL(SetPartFlagBits, ACTOR_ENEMY0, 1, ACTOR_PART_FLAG_INVISIBLE, TRUE)
     EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_close_hatch))
     EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, 1, SOUND_206B)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_CALL(func_802535B4, 1)
     EVT_CALL(func_8026BF48, 0)
@@ -764,7 +764,7 @@ EvtScript N(onDeath) = {
     EVT_CALL(SetGoalPos, ACTOR_ENEMY0, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_ENEMY0, 50, FALSE, TRUE, FALSE)
     EVT_CALL(PlaySoundAtActor, ACTOR_ENEMY0, SOUND_20E4)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_CALL(SetAnimation, ACTOR_ENEMY0, 1, ANIM_GeneralGuy_Anim10)
     EVT_CALL(GetActorPos, ACTOR_ENEMY0, LVar0, LVar1, LVar2)

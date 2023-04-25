@@ -8,8 +8,8 @@ API_CALLABLE(N(FlashScreenWhite)) {
     }
     switch (script->functionTemp[2]) {
         case 0: // fading in
-            set_screen_overlay_color(0, 208, 208, 208);
-            set_screen_overlay_params_front(1, script->functionTemp[1]);
+            set_screen_overlay_color(SCREEN_LAYER_FRONT, 208, 208, 208);
+            set_screen_overlay_params_front(OVERLAY_VIEWPORT_COLOR, script->functionTemp[1]);
             if (script->functionTemp[1] == 255) {
                 script->functionTemp[2] = 1;
                 break;
@@ -21,8 +21,8 @@ API_CALLABLE(N(FlashScreenWhite)) {
             script->functionTemp[1] = 255;
             break;
         case 1: // fading out
-            set_screen_overlay_color(0, 208, 208, 208);
-            set_screen_overlay_params_front(1, script->functionTemp[1]);
+            set_screen_overlay_color(SCREEN_LAYER_FRONT, 208, 208, 208);
+            set_screen_overlay_params_front(OVERLAY_VIEWPORT_COLOR, script->functionTemp[1]);
             if (script->functionTemp[1] == 0) {
                 return ApiStatus_DONE2;
             }
@@ -184,7 +184,7 @@ EvtScript N(EVS_Scene_CastleDestruction) = {
             EVT_END_IF
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(GotoMapSpecial, EVT_PTR("hos_10"), hos_10_ENTRY_1, TRANSITION_7)
+    EVT_CALL(GotoMapSpecial, EVT_PTR("hos_10"), hos_10_ENTRY_1, TRANSITION_SLOW_FADE_TO_WHITE)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END

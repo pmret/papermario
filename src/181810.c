@@ -372,7 +372,7 @@ ApiStatus func_802537C0(Evt* script, s32 isInitialCall) {
     s32 t3;
 
     // While loop may not be necessary in the future
-    do { get_screen_overlay_params(1, &t1, &t2); } while (0);
+    do { get_screen_overlay_params(SCREEN_LAYER_BACK, &t1, &t2); } while (0);
 
     if (t2 < 128.0f) {
         t3 = 0;

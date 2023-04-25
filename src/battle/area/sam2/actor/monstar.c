@@ -236,7 +236,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Monstar_Hurt)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET(LVar0, 1)
@@ -277,7 +277,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Monstar_Hurt)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Monstar_Hurt)
@@ -332,7 +332,7 @@ EvtScript N(unused) = {
     EVT_SUB(LVar2, 5)
     EVT_PLAY_EFFECT(EFFECT_RADIAL_SHIMMER, 10, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 300, 0)
     EVT_WAIT(75)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
@@ -409,7 +409,7 @@ EvtScript N(attack) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_WAIT(8)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 10)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 50)
@@ -494,7 +494,7 @@ EvtScript N(takeTurn) = {
     EVT_END_SWITCH
     EVT_CALL(AddActorVar, ACTOR_SELF, 3, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_RETURN
     EVT_END
@@ -507,17 +507,17 @@ EvtScript N(OnDeath) = {
         EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
         EVT_WAIT(10)
     EVT_END_IF
-    EVT_CALL(func_80269E80, LVar5)
+    EVT_CALL(GetDamageSource, LVar5)
     EVT_SWITCH(LVar5)
-        EVT_CASE_OR_EQ(10)
-        EVT_CASE_OR_EQ(14)
-        EVT_CASE_OR_EQ(12)
-        EVT_CASE_OR_EQ(16)
-        EVT_CASE_OR_EQ(11)
-        EVT_CASE_OR_EQ(15)
-        EVT_CASE_OR_EQ(13)
-        EVT_CASE_OR_EQ(17)
-        EVT_CASE_OR_EQ(2)
+        EVT_CASE_OR_EQ(DMG_SRC_NEXT_SLAP_LEFT)
+        EVT_CASE_OR_EQ(DMG_SRC_NEXT_FAN_SMACK_LEFT)
+        EVT_CASE_OR_EQ(DMG_SRC_LAST_SLAP_LEFT)
+        EVT_CASE_OR_EQ(DMG_SRC_LAST_FAN_SMACK_LEFT)
+        EVT_CASE_OR_EQ(DMG_SRC_NEXT_SLAP_RIGHT)
+        EVT_CASE_OR_EQ(DMG_SRC_NEXT_FAN_SMACK_RIGHT)
+        EVT_CASE_OR_EQ(DMG_SRC_LAST_SLAP_RIGHT)
+        EVT_CASE_OR_EQ(DMG_SRC_LAST_FAN_SMACK_RIGHT)
+        EVT_CASE_OR_EQ(DMG_SRC_SPIN_SMASH)
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
             EVT_SET(LocalFlag(0), 0)
@@ -552,8 +552,8 @@ EvtScript N(OnDeath) = {
         EVT_ADD(LVar3, 8)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
-    EVT_EXEC_WAIT(ForceNextTarget)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
+    EVT_EXEC_WAIT(EVS_ForceNextTarget)
     EVT_CALL(RemoveActor, ACTOR_SELF)
     EVT_RETURN
     EVT_END
@@ -561,9 +561,9 @@ EvtScript N(OnDeath) = {
 
 EvtScript N(OnBurn) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
-    EVT_CALL(func_80269E80, LVar3)
+    EVT_CALL(GetDamageSource, LVar3)
     EVT_SWITCH(LVar3)
-        EVT_CASE_EQ(9)
+        EVT_CASE_EQ(DMG_SRC_FIRE_SHELL)
             EVT_CALL(GetOriginalActorType, ACTOR_SELF, LVar7)
             EVT_SWITCH(LVar7)
                 EVT_CASE_OR_EQ(ACTOR_TYPE_MONTY_MOLE)

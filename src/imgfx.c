@@ -901,9 +901,7 @@ void imgfx_appendGfx_mesh(ImgFXState* state, Matrix4f mtx) {
                 if (primAlpha <= 0) {
                     return;
                 }
-                gDPSetCombineLERP(gMainGfxPos++,
-                    0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0,
-                    0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
+                gDPSetCombineMode(gMainGfxPos++, PM_CC_02, PM_CC_02);
                 gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, primAlpha);
                 break;
             case IMGFX_RENDER_MULTIPLY_RGBA:
@@ -956,9 +954,7 @@ void imgfx_appendGfx_mesh(ImgFXState* state, Matrix4f mtx) {
             case IMGFX_RENDER_MULTIPLY_SHADE_ALPHA:
                 // color: texture
                 // alpha: texture * vtx color
-                gDPSetCombineLERP(gMainGfxPos++,
-                    0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0,
-                    0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0);
+                gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, SHADE, 0);
                 gSPSetGeometryMode(gMainGfxPos++, G_SHADE | G_SHADING_SMOOTH);
                 gSPClearGeometryMode(gMainGfxPos++, G_LIGHTING);
                 break;
@@ -1003,9 +999,7 @@ void imgfx_appendGfx_mesh(ImgFXState* state, Matrix4f mtx) {
                     primAlpha = state->ints.hologram.alphaAmt * ifxImgAlpha;
                     // color: blend texure and noise
                     // alpha: texure * prim
-                    gDPSetCombineLERP(gMainGfxPos++,
-                        NOISE, PRIMITIVE, PRIMITIVE, TEXEL0, TEXEL0, 0, PRIMITIVE, 0,
-                        NOISE, PRIMITIVE, PRIMITIVE, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
+                    gDPSetCombineMode(gMainGfxPos++, PM_CC_IMGFX_HOLOGRAM, PM_CC_IMGFX_HOLOGRAM); 
                     gDPSetPrimColor(gMainGfxPos++, 0, 0,
                                     state->ints.hologram.noiseAmt,
                                     state->ints.hologram.noiseAmt,
@@ -1015,9 +1009,7 @@ void imgfx_appendGfx_mesh(ImgFXState* state, Matrix4f mtx) {
                     primAlpha = state->ints.hologram.alphaAmt * ifxImgAlpha;
                     // color: texture
                     // alpha: texture * prim
-                    gDPSetCombineLERP(gMainGfxPos++,
-                        0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0,
-                        0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
+                    gDPSetCombineMode(gMainGfxPos++, PM_CC_02, PM_CC_02);
                     gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, primAlpha);
                     gDPSetAlphaCompare(gMainGfxPos++, G_AC_DITHER);
                 } else if (state->ints.hologram.mode == IMGFX_HOLOGRAM_THRESHOLD) {
@@ -1028,9 +1020,7 @@ void imgfx_appendGfx_mesh(ImgFXState* state, Matrix4f mtx) {
                     primAlpha = state->ints.hologram.alphaAmt * ifxImgAlpha;
                     // color: texture
                     // alpha: texture * prim
-                    gDPSetCombineLERP(gMainGfxPos++,
-                        0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0,
-                        0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
+                    gDPSetCombineMode(gMainGfxPos++, PM_CC_02, PM_CC_02);
                     gDPSetAlphaDither(gMainGfxPos++, G_AD_NOISE);
                     gDPSetAlphaCompare(gMainGfxPos++, G_AC_THRESHOLD);
                     gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, primAlpha);
@@ -1040,9 +1030,7 @@ void imgfx_appendGfx_mesh(ImgFXState* state, Matrix4f mtx) {
             case IMGFX_RENDER_COLOR_FILL:
                 // color: prim
                 // alpha: texture
-                gDPSetCombineLERP(gMainGfxPos++,
-                    0, 0, 0, PRIMITIVE, 0, 0, 0, TEXEL0,
-                    0, 0, 0, PRIMITIVE, 0, 0, 0, TEXEL0);
+                gDPSetCombineMode(gMainGfxPos++, PM_CC_IMGFX_COLOR_FILL, PM_CC_IMGFX_COLOR_FILL);
                 gDPSetPrimColor(gMainGfxPos++, 0, 0, state->ints.color.r, state->ints.color.g,
                                 state->ints.color.b, 0);
                 break;
@@ -1056,9 +1044,7 @@ void imgfx_appendGfx_mesh(ImgFXState* state, Matrix4f mtx) {
             case IMGFX_RENDER_OVERLAY_RGBA:
                 // color: texture
                 // alpha: texture * prim
-                gDPSetCombineLERP(gMainGfxPos++,
-                    0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0,
-                    0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
+                gDPSetCombineMode(gMainGfxPos++, PM_CC_02, PM_CC_02);
                 gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, state->ints.overlay.alpha);
                 break;
         }
@@ -1554,12 +1540,10 @@ void imgfx_appendGfx_mesh_basic(ImgFXState* state, Matrix4f mtx) {
                     gDPSetRenderMode(gMainGfxPos++, G_RM_PASS, state->otherModeL);
 
                     if (alpha == -1) {
-                        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, 0, SHADE, 0, TEXEL1, 0, 0, 0, 0, 0, 0,
-                                            0, 0, COMBINED);
+                        gDPSetCombineMode(gMainGfxPos++, PM_CC_0D, PM_CC_0C);
                     } else {
                         gDPSetEnvColor(gMainGfxPos++, 0, 0, 0, alpha);
-                        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, 0, ENVIRONMENT, 0, TEXEL1, 0, 0, 0, 0,
-                                            0, 0, 0, 0, COMBINED);
+                        gDPSetCombineMode(gMainGfxPos++, PM_CC_0B, PM_CC_0C);
                     }
 
                     gSPVertex(gMainGfxPos++, &imgfx_vtxBuf[i], 4, 0);
@@ -1612,8 +1596,7 @@ void imgfx_appendGfx_mesh_basic(ImgFXState* state, Matrix4f mtx) {
                         gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, 0, SHADE, 0, TEXEL0, 0, 0, 0, 0, 0, SHADE, 0, TEXEL0, 0);
                     } else {
                         gDPSetEnvColor(gMainGfxPos++, 0, 0, 0, alpha2);
-                        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, 0, ENVIRONMENT, 0, TEXEL0, 0, 0, 0, 0, 0,
-                                        ENVIRONMENT, 0, TEXEL0, 0);
+                        gDPSetCombineMode(gMainGfxPos++, PM_CC_0A, PM_CC_0A);
                     }
 
                     gSPVertex(gMainGfxPos++, &imgfx_vtxBuf[i], 4, 0);
@@ -1628,8 +1611,7 @@ void imgfx_appendGfx_mesh_basic(ImgFXState* state, Matrix4f mtx) {
 
                     gDPSetEnvColor(gMainGfxPos++, 100, 100, 100, 255);
                     gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, alpha2);
-                    gDPSetCombineLERP(gMainGfxPos++, SHADE, ENVIRONMENT, TEXEL0, TEXEL0, 0, 0, 0, TEXEL0, SHADE,
-                                    ENVIRONMENT, TEXEL0, TEXEL0, 0, 0, 0, TEXEL0);
+                    gDPSetCombineLERP(gMainGfxPos++, SHADE, ENVIRONMENT, TEXEL0, TEXEL0, 0, 0, 0, TEXEL0, SHADE, ENVIRONMENT, TEXEL0, TEXEL0, 0, 0, 0, TEXEL0);
                     gDPSetColorDither(gMainGfxPos++, G_CD_MAGICSQ);
                 }
             }
@@ -1800,9 +1782,7 @@ void imgfx_appendGfx_mesh_strip(ImgFXState* state, Matrix4f mtx) {
     if (state->renderType == IMGFX_RENDER_OVERLAY_RGBA) {
         s32 alpha = state->ints.overlay.alpha;
         gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, alpha);
-        gDPSetCombineLERP(gMainGfxPos++,
-            TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0,
-            TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0);
+        gDPSetCombineMode(gMainGfxPos++, PM_CC_05, PM_CC_05);
     } else {
         gDPSetCombineMode(gMainGfxPos++, G_CC_MODULATEIA, G_CC_MODULATEIA);
     }

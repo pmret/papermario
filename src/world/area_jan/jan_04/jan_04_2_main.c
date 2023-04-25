@@ -4,7 +4,7 @@
 
 EvtScript N(EVS_GotoMap_kmr_24_0) = {
     EVT_CALL(FadeOutMusic, 0, 1500)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_24"), kmr_24_ENTRY_0, TRANSITION_9)
+    EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_24"), kmr_24_ENTRY_0, TRANSITION_MARIO_WHITE)
     EVT_WAIT(100)
 }; //@bug script not terminated
 

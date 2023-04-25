@@ -231,13 +231,13 @@ EvtScript N(handleEvent) = {
                 EVT_END_CHILD_THREAD
                 EVT_SET_CONST(LVar0, 1)
                 EVT_SET_CONST(LVar1, ANIM_MontyMole_Anim06)
-                EVT_EXEC_WAIT(DoNormalHit)
+                EVT_EXEC_WAIT(EVS_DoNormalHit)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MontyMole_Anim08)
                 EVT_WAIT(10)
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
                 EVT_SET_CONST(LVar1, ANIM_MontyMole_Anim05)
-                EVT_EXEC_WAIT(DoNormalHit)
+                EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_END_IF
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
@@ -253,7 +253,7 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(N(makeHole))
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_MontyMole_Anim0C)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
@@ -278,13 +278,13 @@ EvtScript N(handleEvent) = {
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_MontyMole_Anim05)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MontyMole_Anim06)
             EVT_WAIT(10)
             EVT_EXEC_WAIT(N(makeHole))
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_MontyMole_Anim09)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MontyMole_Anim06)
@@ -351,7 +351,7 @@ EvtScript N(takeTurn) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_IF_EQ(LVar0, PHASE_FIRST_STRIKE)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(MoveBattleCamOver, 1)
     EVT_END_IF
     EVT_CHILD_THREAD

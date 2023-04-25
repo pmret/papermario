@@ -209,7 +209,7 @@ EvtScript N(handleEvent) = {
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208C)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1,  ANIM_BattleLakilester_Hurt)
-            EVT_EXEC_WAIT(DoPartnerBlock)
+            EVT_EXEC_WAIT(EVS_DoPartnerBlock)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SPIKE_CONTACT)
             EVT_SET_CONST(LVar1,  ANIM_BattleLakilester_Hurt)
@@ -248,7 +248,7 @@ EvtScript N(handleEvent) = {
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208C)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleLakilester_Block)
-            EVT_EXEC_WAIT(DoPartnerBlock)
+            EVT_EXEC_WAIT(EVS_DoPartnerBlock)
             EVT_WAIT(10)
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
@@ -344,7 +344,7 @@ EvtScript N(executeAction) = {
 
 EvtScript N(returnHome2) = {
     EVT_CALL(PartnerYieldTurn)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_E)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_04)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_Run)
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 15, 0, EASING_COS_IN_OUT)
@@ -921,7 +921,7 @@ EvtScript N(spinyFlip) = {
     EVT_END_SWITCH
     EVT_SWITCH(LVarF)
         EVT_CASE_EQ(1)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_E)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_04)
         EVT_CASE_DEFAULT
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
     EVT_END_SWITCH
@@ -1066,7 +1066,7 @@ EvtScript N(spinySurge) = {
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(0)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_E)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_04)
         EVT_CASE_DEFAULT
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
     EVT_END_SWITCH
@@ -1141,7 +1141,7 @@ EvtScript N(cloudNine_normal) = {
     EVT_CALL(action_command_water_block_start, 0, 97, 3)
     EVT_CALL(AddBattleCamZoom, -75)
     EVT_CALL(MoveBattleCamOver, 100)
-    EVT_CALL(func_8024ECF8, 0, 0, 1)
+    EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
     EVT_WAIT(100)
     EVT_WAIT(3)
     EVT_CALL(AddBattleCamZoom, 50)
@@ -1201,11 +1201,11 @@ EvtScript N(cloudNine_normal) = {
         EVT_CALL(SetActorYaw, ACTOR_PARTNER, LVar0)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_WAIT(10)
     EVT_IF_GT(LVarA, 0)
-        EVT_CALL(ShowMessageBox, BTL_MSG_28, 60)
+        EVT_CALL(ShowMessageBox, BTL_MSG_CLOUD_NINE_BEGIN, 60)
         EVT_CALL(WaitForMessageBoxDone)
     EVT_END_IF
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_8, TRUE)
@@ -1256,7 +1256,7 @@ EvtScript N(cloudNine_immobile) = {
     EVT_CALL(action_command_water_block_start, 0, 97, 3)
     EVT_CALL(AddBattleCamZoom, -75)
     EVT_CALL(MoveBattleCamOver, 100)
-    EVT_CALL(func_8024ECF8, 0, 0, 1)
+    EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
     EVT_WAIT(100)
     EVT_WAIT(3)
     EVT_CALL(AddBattleCamZoom, 50)
@@ -1308,11 +1308,11 @@ EvtScript N(cloudNine_immobile) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(PartnerYieldTurn)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_WAIT(10)
     EVT_IF_GT(LVarA, 0)
-        EVT_CALL(ShowMessageBox, BTL_MSG_28, 60)
+        EVT_CALL(ShowMessageBox, BTL_MSG_CLOUD_NINE_BEGIN, 60)
         EVT_CALL(WaitForMessageBoxDone)
     EVT_END_IF
     EVT_RETURN
@@ -1694,7 +1694,7 @@ EvtScript N(hurricane) = {
     EVT_CALL(action_command_hurricane_init)
     EVT_CALL(SetupMashMeter, 1, 100, 0, 0, 0, 0)
     EVT_CALL(SetActionHudPrepareTime, 15)
-    EVT_CALL(func_80269EAC, 20)
+    EVT_CALL(SetDamageSource, DMG_SRC_HURRICANE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
     EVT_CALL(SetBattleCamTarget, -45, 54, 0)
     EVT_CALL(SetBattleCamOffsetZ, 0)
@@ -1716,7 +1716,7 @@ EvtScript N(hurricane) = {
     EVT_CALL(SetBattleCamOffsetZ, 0)
     EVT_CALL(SetBattleCamZoom, 430)
     EVT_CALL(MoveBattleCamOver, 150 * DT)
-    EVT_CALL(func_8024ECF8, 0, 0, 1)
+    EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_288)
     EVT_THREAD
         EVT_CALL(N(ProcessHurricane))
@@ -1737,7 +1737,7 @@ EvtScript N(hurricane) = {
     EVT_CALL(GetActionSuccessCopy, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(99)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_E)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_04)
         EVT_CASE_DEFAULT
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
     EVT_END_SWITCH

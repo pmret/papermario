@@ -13,7 +13,7 @@ void poll_rumble(void) {
 }
 
 void start_rumble(s32 freq, s32 nframes) {
-    if (gGameStatusPtr->demoState == 0) {
+    if (gGameStatusPtr->demoState == DEMO_STATE_NONE) {
         if (rumbleMaxDuration != 0) {
 #if !VERSION_JP
             s32 maxFrames = rumbleMaxDuration * 2;

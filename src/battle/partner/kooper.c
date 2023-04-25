@@ -288,7 +288,7 @@ EvtScript N(handleEvent) = {
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208C)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleKooper_Hurt)
-            EVT_EXEC_WAIT(DoPartnerBlock)
+            EVT_EXEC_WAIT(EVS_DoPartnerBlock)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SPIKE_CONTACT)
             EVT_SET_CONST(LVar1, ANIM_BattleKooper_Hurt)
@@ -328,7 +328,7 @@ EvtScript N(handleEvent) = {
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208C)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleKooper_LowerShell)
-            EVT_EXEC_WAIT(DoPartnerBlock)
+            EVT_EXEC_WAIT(EVS_DoPartnerBlock)
             EVT_WAIT(10)
             EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_ExitShell)
         EVT_END_CASE_GROUP
@@ -406,28 +406,28 @@ EvtScript N(executeAction) = {
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar2)
         EVT_CASE_EQ(MOVE_SHELL_TOSS1)
-            EVT_CALL(func_80269EAC, 6)
+            EVT_CALL(SetDamageSource, DMG_SRC_SHELL_TOSS)
             EVT_SET(LVarF, 2)
             EVT_SET(LVarE, 1)
             EVT_EXEC_WAIT(N(shellToss))
         EVT_CASE_EQ(MOVE_SHELL_TOSS2)
-            EVT_CALL(func_80269EAC, 6)
+            EVT_CALL(SetDamageSource, DMG_SRC_SHELL_TOSS)
             EVT_SET(LVarF, 3)
             EVT_SET(LVarE, 2)
             EVT_EXEC_WAIT(N(shellToss))
         EVT_CASE_EQ(MOVE_SHELL_TOSS3)
-            EVT_CALL(func_80269EAC, 6)
+            EVT_CALL(SetDamageSource, DMG_SRC_SHELL_TOSS)
             EVT_SET(LVarF, 5)
             EVT_SET(LVarE, 3)
             EVT_EXEC_WAIT(N(shellToss))
         EVT_CASE_EQ(MOVE_POWER_SHELL)
-            EVT_CALL(func_80269EAC, 7)
+            EVT_CALL(SetDamageSource, DMG_SRC_POWER_SHELL)
             EVT_EXEC_WAIT(N(powerShell))
         EVT_CASE_EQ(MOVE_DIZZY_SHELL)
-            EVT_CALL(func_80269EAC, 8)
+            EVT_CALL(SetDamageSource, DMG_SRC_DIZZY_SHELL)
             EVT_EXEC_WAIT(N(dizzyShell))
         EVT_CASE_EQ(MOVE_FIRE_SHELL)
-            EVT_CALL(func_80269EAC, 9)
+            EVT_CALL(SetDamageSource, DMG_SRC_FIRE_SHELL)
             EVT_EXEC_WAIT(N(fireShell))
     EVT_END_SWITCH
     EVT_RETURN
@@ -438,13 +438,13 @@ EvtScript N(firstStrike) = {
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar2)
         EVT_CASE_EQ(MOVE_SHELL_TOSS1)
-            EVT_CALL(func_80269EAC, 6)
+            EVT_CALL(SetDamageSource, DMG_SRC_SHELL_TOSS)
             EVT_EXEC_WAIT(N(shellTossOnFirstStrike))
         EVT_CASE_EQ(MOVE_SHELL_TOSS2)
-            EVT_CALL(func_80269EAC, 6)
+            EVT_CALL(SetDamageSource, DMG_SRC_SHELL_TOSS)
             EVT_EXEC_WAIT(N(shellTossOnFirstStrike))
         EVT_CASE_EQ(MOVE_SHELL_TOSS3)
-            EVT_CALL(func_80269EAC, 6)
+            EVT_CALL(SetDamageSource, DMG_SRC_SHELL_TOSS)
             EVT_EXEC_WAIT(N(shellTossOnFirstStrike))
     EVT_END_SWITCH
     EVT_RETURN
@@ -454,9 +454,9 @@ EvtScript N(firstStrike) = {
 EvtScript N(returnHomeOnMiss) = {
     EVT_CALL(ResetActorSounds, ACTOR_PARTNER, ACTOR_SOUND_WALK)
     EVT_THREAD
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_E)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_04)
         EVT_WAIT(30)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_END_THREAD
     EVT_CALL(PartnerYieldTurn)
     EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
@@ -619,7 +619,7 @@ EvtScript N(shellToss) = {
         EVT_GOTO(0)
     EVT_END_IF
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_200A)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(MoveBattleCamOver, 15)
     EVT_EXEC_WAIT(N(getShellTossMoveTime))
     EVT_CALL(AddActorDecoration, ACTOR_SELF, 0, 0, ACTOR_DECORATION_GREY_SMOKE_TRAIL)
@@ -790,7 +790,7 @@ EvtScript N(powerShell) = {
     EVT_END_IF
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_200B)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(MoveBattleCamOver, 15)
     EVT_SET(LVarB, 260)
     EVT_DIVF(LVarB, LVarA)
@@ -822,7 +822,7 @@ EvtScript N(powerShell) = {
         EVT_CALL(GetActionCommandResult, LVar0)
         EVT_SWITCH(LVar0)
             EVT_CASE_GT(0)
-                EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_E)
+                EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_04)
             EVT_CASE_DEFAULT
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
         EVT_END_SWITCH
@@ -845,7 +845,7 @@ EvtScript N(powerShell) = {
         EVT_CALL(GetActionCommandResult, LVar0)
         EVT_SWITCH(LVar0)
             EVT_CASE_GT(0)
-                EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_E)
+                EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_04)
             EVT_CASE_DEFAULT
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
         EVT_END_SWITCH
@@ -932,7 +932,7 @@ EvtScript N(dizzyShell) = {
         EVT_END_SWITCH
     EVT_END_LOOP
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_290)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(MoveBattleCamOver, 15)
     EVT_SET(LVarB, 300)
     EVT_DIVF(LVarB, LVarA)
@@ -977,7 +977,7 @@ EvtScript N(dizzyShell) = {
         EVT_CALL(GetActionCommandResult, LVar0)
         EVT_SWITCH(LVar0)
             EVT_CASE_GT(99)
-                EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_E)
+                EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_04)
             EVT_CASE_DEFAULT
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
         EVT_END_SWITCH
@@ -1014,7 +1014,7 @@ EvtScript N(dizzyShell) = {
         EVT_CALL(GetActionCommandResult, LVar0)
         EVT_SWITCH(LVar0)
             EVT_CASE_GT(99)
-                EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_E)
+                EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_04)
             EVT_CASE_DEFAULT
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
         EVT_END_SWITCH
@@ -1154,18 +1154,18 @@ EvtScript N(fireShell) = {
     EVT_SWITCH(LVarE)
         EVT_CASE_OR_EQ(0)
         EVT_CASE_OR_EQ(1)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
             EVT_CALL(MoveBattleCamOver, 50)
             EVT_SETF(LVarA, EVT_FLOAT(10.0))
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(2)
         EVT_CASE_OR_EQ(3)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
             EVT_CALL(MoveBattleCamOver, 30)
             EVT_SETF(LVarA, EVT_FLOAT(10.0))
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(4)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
             EVT_CALL(MoveBattleCamOver, 15)
             EVT_SETF(LVarA, EVT_FLOAT(16.0))
     EVT_END_SWITCH
@@ -1223,7 +1223,7 @@ EvtScript N(fireShell) = {
         EVT_CALL(GetActionCommandResult, LVar0)
         EVT_SWITCH(LVar0)
             EVT_CASE_GT(99)
-                EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_E)
+                EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_04)
             EVT_CASE_DEFAULT
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
         EVT_END_SWITCH
@@ -1247,7 +1247,7 @@ EvtScript N(fireShell) = {
         EVT_CALL(GetActionCommandResult, LVar0)
         EVT_SWITCH(LVar0)
             EVT_CASE_GT(99)
-                EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_E)
+                EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_04)
             EVT_CASE_DEFAULT
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
         EVT_END_SWITCH
@@ -1277,7 +1277,7 @@ EvtScript N(shellTossOnFirstStrike) = {
     EVT_ADD(LVar0, 60)
     EVT_CALL(SetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     EVT_CALL(InitTargetIterator)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(MoveBattleCamOver, 15)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_ShellSpinSlowest)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
@@ -1342,7 +1342,7 @@ EvtScript N(shellTossOnFirstStrike) = {
         EVT_CASE_EQ(MOVE_SHELL_TOSS3)
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_0)
     EVT_END_SWITCH
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(GetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 40)
     EVT_SET(LVar1, 0)

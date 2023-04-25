@@ -184,7 +184,7 @@ EvtScript N(kooper_handleEvent) = {
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
                 EVT_SET_CONST(LVar1, ANIM_BattleKooper_Hurt)
-                EVT_EXEC_WAIT(DoNormalHit)
+                EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_END_IF
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
@@ -200,7 +200,7 @@ EvtScript N(kooper_handleEvent) = {
             EVT_EXEC_WAIT(N(OnDeath))
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleKooper_BurnStill)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_SET_CONST(LVar0, 1)
@@ -213,7 +213,7 @@ EvtScript N(kooper_handleEvent) = {
             EVT_EXEC_WAIT(DoSpinSmashHit)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleKooper_Hurt)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_FLIP_TRIGGER)
             EVT_CALL(SetActorVar, ACTOR_SELF, 3, 1)
@@ -266,11 +266,11 @@ EvtScript N(kooper_handleEvent) = {
             EVT_EXEC_WAIT(N(OnDeath))
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleKooper_Hurt)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleKooper_Hurt)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar0)
@@ -386,7 +386,7 @@ EvtScript N(kooper_takeTurn) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 75)
-    EVT_CALL(func_8024ECF8, 1, 1, 1)
+    EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_1, BTL_CAM_MODEX_1, TRUE)
     EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
@@ -429,7 +429,7 @@ EvtScript N(kooper_takeTurn) = {
     EVT_END_LOOP
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_200A)
     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_0, SOUND_0)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 15)
     EVT_CALL(AddActorDecoration, ACTOR_SELF, 0, 0, ACTOR_DECORATION_GREY_SMOKE_TRAIL)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
@@ -472,7 +472,7 @@ EvtScript N(kooper_takeTurn) = {
             EVT_WAIT(10)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleKooper_ExitShell)
             EVT_WAIT(10)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(YieldTurn)
             EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleKooper_Run)
@@ -500,7 +500,7 @@ EvtScript N(kooper_takeTurn) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(MoveBattleCamOver, 8)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar0, 60)

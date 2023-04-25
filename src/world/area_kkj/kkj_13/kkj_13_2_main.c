@@ -14,7 +14,7 @@ Gfx N(setup_gfx_candle_lights)[] = {
     gsDPSetTextureConvert(G_TC_FILT),
     gsDPSetPrimColor(0, 0, 75, 31, 19, 255),
     gsDPSetEnvColor(255, 118, 77, 0),
-    gsDPSetCombineLERP(TEXEL0, TEXEL1, TEXEL0, 1, 1, TEXEL0, TEXEL1, 1, 0, PRIMITIVE, COMBINED, ENVIRONMENT, COMBINED, TEXEL1, TEXEL1, TEXEL1),
+    gsDPSetCombineMode(PM_CC_CANDLE_1, PM_CC_CANDLE_2),
     gsDPSetRenderMode(G_RM_PASS, G_RM_ZB_CLD_SURF2),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_SHADE | G_CULL_BACK | G_SHADING_SMOOTH),

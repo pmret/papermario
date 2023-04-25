@@ -39,8 +39,8 @@ API_CALLABLE(N(ScreenWhiteFlashOn)) {
         script->functionTemp[1] = 255;
     }
 
-    set_screen_overlay_color(0, 160, 160, 160);
-    set_screen_overlay_params_front(1, script->functionTemp[1]);
+    set_screen_overlay_color(SCREEN_LAYER_FRONT, 160, 160, 160);
+    set_screen_overlay_params_front(OVERLAY_VIEWPORT_COLOR, script->functionTemp[1]);
 
     if (script->functionTemp[1] == 255) {
         return ApiStatus_DONE2;
@@ -60,8 +60,8 @@ API_CALLABLE(N(ScreenWhiteFlashOff)) {
         script->functionTemp[1] = 0;
     }
 
-    set_screen_overlay_color(0, 160, 160, 160);
-    set_screen_overlay_params_front(1, script->functionTemp[1]);
+    set_screen_overlay_color(SCREEN_LAYER_FRONT, 160, 160, 160);
+    set_screen_overlay_params_front(OVERLAY_VIEWPORT_COLOR, script->functionTemp[1]);
 
     if (script->functionTemp[1] == 0) {
         return ApiStatus_DONE2;

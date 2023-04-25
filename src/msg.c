@@ -64,7 +64,7 @@ Gfx D_8014C2D8[] = {
     gsDPSetTextureFilter(G_TF_AVERAGE),
     gsDPSetRenderMode(IM_RD | CVG_DST_SAVE | ZMODE_XLU | FORCE_BL | G_RM_PASS, IM_RD | CVG_DST_SAVE | ZMODE_XLU |
                       FORCE_BL | GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA)),
-    gsDPSetCombineLERP(TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL1, 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
+    gsDPSetCombineMode(PM_CC_13, G_CC_PASS2),
     gsSPEndDisplayList(),
 };
 
@@ -2186,7 +2186,7 @@ void msg_draw_choice_pointer(MessagePrintState* printer) {
     gDPSetTextureLUT(gMainGfxPos++, G_TT_RGBA16);
     gDPLoadTLUT_pal16(gMainGfxPos++, 0, ui_point_right_pal);
     gDPSetRenderMode(gMainGfxPos++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
-    gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0);
+    gDPSetCombineMode(gMainGfxPos++, PM_CC_07, PM_CC_07);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 40, 40, 40, shadowAlpha);
     draw_image_with_clipping(ui_point_right_png, 16, 16, G_IM_FMT_CI, G_IM_SIZ_4b, posX + 2, posY + 2, 10, 10, 300, 220);
     draw_ci_image_with_clipping(ui_point_right_png, 16, 16, G_IM_FMT_CI, G_IM_SIZ_4b, ui_point_right_pal, posX, posY, 20, 20, 300, 200, pointerAlpha);
@@ -2269,7 +2269,7 @@ void draw_number(s32 value, s32 x, s32 y, s32 charset, s32 palette, s32 opacity,
         for (i = 0; i < count; i++) {
             gDPPipeSync(gMainGfxPos++);
             gDPSetRenderMode(gMainGfxPos++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
-            gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0);
+            gDPSetCombineMode(gMainGfxPos++, PM_CC_07, PM_CC_07);
             gDPSetPrimColor(gMainGfxPos++, 0, 0, 40, 40, 40, 72);
             draw_digit(raster + digits[i] * texSize, charset, digitPosX[i] + 2, y + 2);
             gDPPipeSync(gMainGfxPos++);
@@ -2281,7 +2281,7 @@ void draw_number(s32 value, s32 x, s32 y, s32 charset, s32 palette, s32 opacity,
         gDPSetCombineMode(gMainGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
     } else {
         gDPSetRenderMode(gMainGfxPos++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
-        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0);
+        gDPSetCombineMode(gMainGfxPos++, PM_CC_01, PM_CC_01);
         gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 255, opacity);
     }
 
@@ -3208,7 +3208,7 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
                                 break;
                             case MSG_FX_NOISE_OUTLINE:
                                 msg_drawState->effectFlags |= MSG_FX_FLAG_NOISE_OUTLINE;
-                                gDPSetCombineLERP(gMainGfxPos++, NOISE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0, NOISE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0);
+                                gDPSetCombineMode(gMainGfxPos++, PM_CC_MSG_NOISE_OUTLINE, PM_CC_MSG_NOISE_OUTLINE);
                                 msg_drawState->drawBufferPos += 2;
                                 break;
                             case MSG_FX_STATIC:
@@ -3218,8 +3218,7 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
                                                msg_drawState->printBuffer[msg_drawState->drawBufferPos + 2],
                                                msg_drawState->printBuffer[msg_drawState->drawBufferPos + 2],
                                                0);
-                                gDPSetCombineLERP(gMainGfxPos++, NOISE, TEXEL0, ENVIRONMENT, TEXEL0, 0, 0, 0, TEXEL0, NOISE, TEXEL0, ENVIRONMENT,
-                                                  TEXEL0, 0, 0, 0, TEXEL0);
+                                gDPSetCombineMode(gMainGfxPos++, PM_CC_MSG_STATIC, PM_CC_MSG_STATIC);
                                 msg_drawState->drawBufferPos += 3;
                                 break;
                             case MSG_FX_BLUR:
@@ -3420,7 +3419,7 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
                                                          G_BL_1MA));
 
                             }
-                            gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
+                            gDPSetCombineMode(gMainGfxPos++, PM_CC_02, PM_CC_02);
                             gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, phi_s2_5);
                         } else if ((sp96 < 0xFF) && (phi_s2_5 == 0xFF)) {
                             gDPPipeSync(gMainGfxPos++);
@@ -3562,8 +3561,7 @@ void appendGfx_message(MessagePrintState* printer, s16 posX, s16 posY, u16 addit
                         if ((msg_drawState->effectFlags & MSG_FX_FLAG_DROP_SHADOW) && (phi_s2_5 == 0xFF)) {
                             gDPPipeSync(gMainGfxPos++);
                             gDPSetRenderMode(gMainGfxPos++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
-                            gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0,
-                                              PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0);
+                            gDPSetCombineMode(gMainGfxPos++, PM_CC_07, PM_CC_07);
                             gDPSetPrimColor(gMainGfxPos++, 0, 0, 40, 40, 40, 72);
                             msg_draw_char(printer, msg_drawState,
                                           msg_drawState->printBuffer[msg_drawState->drawBufferPos],
@@ -3762,7 +3760,7 @@ void appendGfx_msg_prim_rect(u8 r, u8 g, u8 b, u8 a, u16 ulX, u16 ulY, u16 lrX, 
     gDPPipeSync(gMainGfxPos++);
 
     if (a == 255) {
-        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, PRIMITIVE, 0, 0, 0, 1, 0, 0, 0, PRIMITIVE, 0, 0, 0, 1);
+        gDPSetCombineMode(gMainGfxPos++, PM_CC_08, PM_CC_08);
     } else {
         gDPSetRenderMode(gMainGfxPos++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
         gDPSetCombineMode(gMainGfxPos++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
@@ -3863,8 +3861,7 @@ void msg_draw_speech_bubble(
                          GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA),
                          IM_RD | CVG_DST_SAVE | ZMODE_XLU | FORCE_BL |
                          GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA));
-        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0,
-                          TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
+        gDPSetCombineMode(gMainGfxPos++, PM_CC_02, PM_CC_02);
         gDPSetPrimColor(gMainGfxPos++, 0, 0, 32, 32, 32, opacity);
     }
 
@@ -3996,7 +3993,7 @@ void msg_draw_speech_arrow(MessagePrintState* printer) {
 
     gDPPipeSync(gMainGfxPos++);
     gDPSetRenderMode(gMainGfxPos++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
-    gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, TEXEL0, 0, 0, 0, 1, 0, 0, 0, TEXEL0, 0, 0, 0, 1);
+    gDPSetCombineMode(gMainGfxPos++, PM_CC_0F, PM_CC_0F);
     gDPSetTextureFilter(gMainGfxPos++, G_TF_BILERP);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 32, 32, 32, 255);
     gDPLoadTextureTile_4b(gMainGfxPos++, ui_msg_arrow_png, G_IM_FMT_CI, 16, 0, 0, 0, 15, 15, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 4, 4, G_TX_NOLOD, G_TX_NOLOD);
@@ -4054,7 +4051,7 @@ void msg_draw_frame(s32 posX, s32 posY, s32 sizeX, s32 sizeY, s32 style, s32 pal
                 gDPPipeSync(gMainGfxPos++);
                 gDPSetTextureFilter(gMainGfxPos++, G_TF_AVERAGE);
                 gDPSetRenderMode(gMainGfxPos++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
-                gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, TEXEL0, 0, 0, 0, PRIMITIVE, 0, 0, 0, TEXEL0, 0, 0, 0, PRIMITIVE);
+                gDPSetCombineMode(gMainGfxPos++, PM_CC_10, PM_CC_10);
                 if (fading == 0 || bgAlpha == 255) {
                     gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, 216);
                 } else {
@@ -4222,7 +4219,7 @@ void msg_draw_frame(s32 posX, s32 posY, s32 sizeX, s32 sizeY, s32 style, s32 pal
 
     gDPPipeSync(gMainGfxPos++);
     gDPSetRenderMode(gMainGfxPos++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
-    gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
+    gDPSetCombineMode(gMainGfxPos++, PM_CC_02, PM_CC_02);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, frameAlpha);
     gDPSetTextureLUT(gMainGfxPos++, G_TT_RGBA16);
     gDPLoadTLUT_pal16(gMainGfxPos++, 0, ui_msg_palettes[palette]);

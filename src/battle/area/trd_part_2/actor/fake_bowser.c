@@ -1556,7 +1556,7 @@ EvtScript N(nextTurn_8021F410) = {
                 EVT_CALL(GetActorVar, ACTOR_ENEMY4, 0, LVar0)
                 EVT_BITWISE_OR_CONST(LVar0, 0x8)
                 EVT_CALL(SetActorVar, ACTOR_ENEMY4, 0, LVar0)
-                EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+                EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                 EVT_WAIT(20)
             EVT_END_IF
     EVT_END_SWITCH
@@ -2948,7 +2948,7 @@ EvtScript N(takeTurn_80224D84) = {
     EVT_END_SWITCH
     EVT_CALL(GetActorVar, ACTOR_ENEMY4, 0, LVar0)
     EVT_IF_FLAG(LVar0, 0x00000200)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(MoveBattleCamOver, 15)
         EVT_SET(LVarA, 8)
         EVT_EXEC_WAIT(N(80223870))
@@ -2970,7 +2970,7 @@ EvtScript N(takeTurn_80224D84) = {
     EVT_IF_EQ(LVar0, 3)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(GetActorVar, ACTOR_ENEMY4, 0, LVar0)
     EVT_IF_NOT_FLAG(LVar0, 4)
         EVT_CALL(GetActorVar, ACTOR_SELF, 5, LVar0)

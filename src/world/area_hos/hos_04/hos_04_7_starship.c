@@ -11,7 +11,7 @@ API_CALLABLE(N(ScreenOverlayFadeIn)) {
         script->functionTemp[1] = 255;
     }
 
-    set_screen_overlay_params_front(0, script->functionTemp[1]);
+    set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, script->functionTemp[1]);
 
     if (script->functionTemp[1] == 255) {
         return ApiStatus_DONE2;

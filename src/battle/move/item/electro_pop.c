@@ -123,7 +123,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_CALL(ShowRecoveryShimmer, LVar0, LVar1, LVar2, LVar3)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EVT_WAIT(20)
-    EVT_CALL(ShowMessageBox, BTL_MSG_10, 60)
+    EVT_CALL(ShowMessageBox, BTL_MSG_PLAYER_CHARGED, 60)
     EVT_CALL(WaitForMessageBoxDone)
     EVT_EXEC_WAIT(N(PlayerGoHome))
     EVT_RETURN

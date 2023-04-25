@@ -116,7 +116,7 @@ EvtScript N(idle_8021D4E4) = {
 };
 
 EvtScript N(8021D4F4) = {
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_DIG)
@@ -142,7 +142,7 @@ EvtScript N(handleEvent_8021D60C) = {
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_SmallPiranha_Anim09)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar0, 1)
@@ -156,7 +156,7 @@ EvtScript N(handleEvent_8021D60C) = {
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_SmallPiranha_Anim0B)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_SET_CONST(LVar0, 1)
@@ -168,7 +168,7 @@ EvtScript N(handleEvent_8021D60C) = {
             EVT_EXEC_WAIT(DoSpinSmashHit)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_SmallPiranha_Anim09)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_SET_CONST(LVar0, 1)
@@ -182,7 +182,7 @@ EvtScript N(handleEvent_8021D60C) = {
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_SmallPiranha_Anim09)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
@@ -216,11 +216,11 @@ EvtScript N(handleEvent_8021D60C) = {
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_SmallPiranha_Anim09)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_SmallPiranha_Anim09)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 1)
@@ -229,7 +229,7 @@ EvtScript N(handleEvent_8021D60C) = {
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_SmallPiranha_Anim09)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_DIG)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SmallPiranha_Anim04)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
@@ -265,7 +265,7 @@ EvtScript N(takeTurn_8021DCD4) = {
         EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
         EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-        EVT_CALL(func_8024ECF8, -1, 1, 0)
+        EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
         EVT_CALL(MoveBattleCamOver, 1)
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
         EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -287,7 +287,7 @@ EvtScript N(takeTurn_8021DCD4) = {
     EVT_CALL(SetBattleCamTarget, LVar0, LVar1, LVar2)
     EVT_CALL(SetBattleCamZoom, 350)
     EVT_CALL(SetBattleCamOffsetZ, 45)
-    EVT_CALL(func_8024ECF8, -1, 1, 0)
+    EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -332,7 +332,7 @@ EvtScript N(takeTurn_8021DCD4) = {
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_WAIT(15)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
             EVT_EXEC_WAIT(N(8021D4F4))
@@ -355,7 +355,7 @@ EvtScript N(takeTurn_8021DCD4) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_WAIT(2)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SmallPiranha_Anim08)
             EVT_WAIT(15)

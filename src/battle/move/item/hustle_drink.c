@@ -112,7 +112,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_END_LOOP
     EVT_WAIT(10)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Run)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_WAIT(20)
     EVT_EXEC_WAIT(N(PlayerGoHome))

@@ -310,12 +310,12 @@ EvtScript N(handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BabyBlooper_Anim02)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BabyBlooper_Anim02)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_SET_CONST(LVar1, ANIM_BabyBlooper_Anim03)
             EVT_EXEC_WAIT(N(onDeath))
             EVT_RETURN
@@ -388,7 +388,7 @@ EvtScript N(handleEvent) = {
 
 EvtScript N(onDeath) = {
     EVT_SET_CONST(LVar0, 1)
-    EVT_EXEC_WAIT(DoDeath)
+    EVT_EXEC_WAIT(EVS_DoDeath)
     EVT_RETURN
     EVT_END
 };
@@ -467,7 +467,7 @@ EvtScript N(takeTurn) = {
     EVT_CALL(JumpToGoal, ACTOR_SELF, 16, FALSE, TRUE, FALSE)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BabyBlooper_Anim08)
-    EVT_CALL(ShowMessageBox, BTL_MSG_31, 0x00007FFF)
+    EVT_CALL(ShowMessageBox, BTL_MSG_ACTION_TIP_03, 0x00007FFF)
     EVT_CALL(ShowActionHud, TRUE)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_STOP_LEECH)
     EVT_CALL(action_command_stop_leech_init)
@@ -554,7 +554,7 @@ EvtScript N(takeTurn) = {
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
-        EVT_CALL(func_80269EAC, 1)
+        EVT_CALL(SetDamageSource, DMG_SRC_BABY_BLOOPER_SELF)
         EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_UNBLOCKABLE | DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 2, BS_FLAGS1_40)
         EVT_CALL(StartRumble, 2)
         EVT_CALL(GetLastDamage, ACTOR_PLAYER, LVar3)
@@ -654,7 +654,7 @@ EvtScript N(takeTurn) = {
     EVT_CALL(DispatchEventPlayer, EVENT_66)
     EVT_CALL(func_80269470)
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(GetStatusFlags, ACTOR_PLAYER, LVar0)
     EVT_IF_FLAG(LVar0, STATUS_FLAG_STONE)

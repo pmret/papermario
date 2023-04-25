@@ -388,13 +388,13 @@ EvtScript N(handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Blooper_Anim04)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_EXEC_WAIT(N(discharge))
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Blooper_Anim04)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_EXEC_WAIT(N(discharge))
             EVT_SET_CONST(LVar1, ANIM_Blooper_Anim04)
             EVT_EXEC_WAIT(N(onDeath))
@@ -442,7 +442,7 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(N(discharge))
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Blooper_Anim04)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_SET_CONST(LVar0, 1)
@@ -479,7 +479,7 @@ EvtScript N(handleEvent) = {
 
 EvtScript N(onDeath) = {
     EVT_SET_CONST(LVar0, 1)
-    EVT_EXEC_WAIT(DoDeath)
+    EVT_EXEC_WAIT(EVS_DoDeath)
     EVT_RETURN
     EVT_END
 };
@@ -536,7 +536,7 @@ EvtScript N(electricCharge) = {
     EVT_WAIT(10)
     EVT_EXEC_WAIT(N(charge))
     EVT_WAIT(20)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_CALL(N(UnfadeBackgroundToBlack))
     EVT_CALL(EnableIdleScript, ACTOR_SELF, -1)
@@ -589,7 +589,7 @@ EvtScript N(attackSpinDrop) = {
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.5))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 16, FALSE, TRUE, FALSE)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(MoveBattleCamOver, 20)
             EVT_IF_EQ(LVarF, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -623,7 +623,7 @@ EvtScript N(attackSpinDrop) = {
     EVT_CALL(JumpToGoal, ACTOR_SELF, 16, FALSE, TRUE, FALSE)
     EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 4, BS_FLAGS1_SP_EVT_ACTIVE)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(GetStatusFlags, ACTOR_PLAYER, LVar0)
     EVT_IF_FLAG(LVar0, STATUS_FLAG_STONE)
@@ -686,7 +686,7 @@ EvtScript N(attackElectricDrop) = {
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.5))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 16, FALSE, TRUE, FALSE)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(MoveBattleCamOver, 20)
             EVT_IF_EQ(LVarF, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -723,7 +723,7 @@ EvtScript N(attackElectricDrop) = {
     EVT_IF_NE(LVarF, HIT_RESULT_HIT_STATIC)
         EVT_EXEC_WAIT(N(discharge))
     EVT_END_IF
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(GetStatusFlags, ACTOR_PLAYER, LVar0)
     EVT_IF_FLAG(LVar0, STATUS_FLAG_STONE)
@@ -802,7 +802,7 @@ EvtScript N(attackInkBlast) = {
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(1.0))
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVarA, LVarB, LVarC)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 16, 0, EASING_LINEAR)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 10)
     EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 40, 0)
     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, -40)
@@ -833,7 +833,7 @@ EvtScript N(attackInkBlast) = {
     EVT_END_SWITCH
     EVT_WAIT(10)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(func_80269EAC, 26)
+    EVT_CALL(SetDamageSource, DMG_SRC_INK_BLAST)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_NO_CONTACT, 0, 0, 4, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_WAIT(30)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim00)

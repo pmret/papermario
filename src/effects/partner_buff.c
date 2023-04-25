@@ -189,8 +189,7 @@ void func_E011A3BC(s16 alpha) {
         gDPSetCombineMode(gMainGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
     } else {
         gDPSetRenderMode(gMainGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
-        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0, PRIMITIVE, 0,
-                          TEXEL0, 0);
+        gDPSetCombineMode(gMainGfxPos++, PM_CC_01, PM_CC_01);
         gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, alpha);
     }
 }

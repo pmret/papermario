@@ -49,7 +49,7 @@ EvtScript N(EVS_UseItem) = {
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EVT_END_THREAD
     EVT_WAIT(35)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_WAIT(10)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar3, LVar4, LVar5)
@@ -77,7 +77,7 @@ EvtScript N(EVS_UseItem) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_WAIT(80)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)

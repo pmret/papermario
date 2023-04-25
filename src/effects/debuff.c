@@ -12,7 +12,7 @@ void debuff_update(EffectInstance* effect);
 void debuff_render(EffectInstance* effect);
 void debuff_appendGfx(void* effect);
 
-EffectInstance* debuff_main(s32 arg0, f32 x, f32 y, f32 z) {
+EffectInstance* debuff_main(s32 type, f32 x, f32 y, f32 z) {
     EffectBlueprint bp;
     EffectInstance* effect;
     DebuffFXData* data;
@@ -35,45 +35,45 @@ EffectInstance* debuff_main(s32 arg0, f32 x, f32 y, f32 z) {
 
     shim_mem_clear(data, numParts * sizeof(*data));
 
-    data->unk_24 = 30;
-    data->unk_28 = 0;
-    data->unk_00 = arg0;
-    data->unk_04 = x;
-    data->unk_08 = y;
-    data->unk_0C = z;
-    data->unk_34 = 255;
+    data->timeLeft = 30;
+    data->lifetime = 0;
+    data->type = type;
+    data->pos.x = x;
+    data->pos.y = y;
+    data->pos.z = z;
+    data->alpha = 255;
 
-    if (arg0 == 0) {
-        data->unk_3B = 20;
-        data->unk_38 = 20;
-        data->unk_3C = 21;
-        data->unk_39 = 21;
-        data->unk_3D = 242;
-        data->unk_3A = 242;
+    if (type == 0) {
+        data->envCol.r  = 20;
+        data->primCol.r = 20;
+        data->envCol.g  = 21;
+        data->primCol.g = 21;
+        data->envCol.b  = 242;
+        data->primCol.b = 242;
     } else {
-        data->unk_3B = 200;
-        data->unk_38 = 200;
-        data->unk_3C = 21;
-        data->unk_39 = 21;
-        data->unk_3D = 212;
-        data->unk_3A = 212;
+        data->envCol.r  = 200;
+        data->primCol.r = 200;
+        data->envCol.g  = 21;
+        data->primCol.g = 21;
+        data->envCol.b  = 212;
+        data->primCol.b = 212;
     }
 
     data++;
     for (i = 1; i < numParts; i++, data++) {
-        s32 temp = ((i - 1) * 360) / (numParts - 1);
+        s32 angle = ((i - 1) * 360) / (numParts - 1);
         f32 temp2 = 1.0f;
 
-        data->unk_04 = shim_cos_deg(temp + 90.0f);
-        data->unk_08 = shim_sin_deg(temp + 90.0f);
-        data->unk_0C = 0.0f;
+        data->pos.x = shim_cos_deg(angle + 90.0f);
+        data->pos.y = shim_sin_deg(angle + 90.0f);
+        data->pos.z = 0.0f;
         data->unk_10 = 0.0f;
         data->unk_14 = 0.0f;
         data->unk_18 = 0.0f;
-        data->unk_1C = 0.1f;
-        data->unk_20 = 0.1f;
+        data->scaleY = 0.1f;
+        data->scaleX = 0.1f;
         data->unk_30 = temp2;
-        data->unk_2C = temp;
+        data->rotZ = angle;
     }
 
     return effect;
@@ -84,36 +84,36 @@ void debuff_init(EffectInstance* effect) {
 
 void debuff_update(EffectInstance* effect) {
     DebuffFXData* data = effect->data.debuff;
-    s32 temp;
+    s32 time;
     s32 i;
 
-    data->unk_28++;
-    data->unk_24--;
-    if (data->unk_24 < 0) {
+    data->lifetime++;
+    data->timeLeft--;
+    if (data->timeLeft < 0) {
         shim_remove_effect(effect);
         return;
     }
 
-    temp = data->unk_28;
+    time = data->lifetime;
 
-    if (temp >= 11) {
-        data->unk_34 *= 0.9;
+    if (time > 10) {
+        data->alpha *= 0.9;
     }
 
     data++;
     for (i = 1; i < effect->numParts; i++, data++) {
-        if (temp > 10) {
-            data->unk_1C += (1.0 - data->unk_1C) * 0.1;
-            data->unk_20 += (2.4f - data->unk_20) * 0.1;
+        if (time > 10) {
+            data->scaleY += (1.0 - data->scaleY) * 0.1;
+            data->scaleX += (2.4f - data->scaleX) * 0.1;
             data->unk_30 += ((100.0f - data->unk_30) * 0.07) * 0.2;
         }
-        if (temp < 10) {
-            data->unk_1C += (7.0f - data->unk_1C) * 0.05;
-            data->unk_20 += (1.0f - data->unk_20) * 0.1;
+        if (time < 10) {
+            data->scaleY += (7.0f - data->scaleY) * 0.05;
+            data->scaleX += (1.0f - data->scaleX) * 0.1;
             data->unk_30 += ((10.0f - data->unk_30) * 0.05) * 0.6;
         }
-        data->unk_04 = shim_cos_deg(data->unk_2C + 90.0f) * data->unk_30;
-        data->unk_08 = shim_sin_deg(data->unk_2C + 90.0f) * data->unk_30;
+        data->pos.x = shim_cos_deg(data->rotZ + 90.0f) * data->unk_30;
+        data->pos.y = shim_sin_deg(data->rotZ + 90.0f) * data->unk_30;
     }
 }
 
@@ -135,33 +135,33 @@ void debuff_appendGfx(void* effect) {
     DebuffFXData* data = eff->data.debuff;
     Gfx* dlist = D_E00628C0[0];
     Gfx* dlist2 = D_E00628C4[0];
-    Matrix4f sp18;
-    Matrix4f sp58;
-    Matrix4f sp98;
+    Matrix4f mtxTranslate;
+    Matrix4f mtxRotate;
+    Matrix4f mtxTransform;
     s32 i;
 
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(eff->graphics->data));
     gSPDisplayList(gMainGfxPos++, dlist2);
 
-    shim_guTranslateF(sp18, data->unk_04, data->unk_08, data->unk_0C);
-    shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-    shim_guMtxCatF(sp58, sp18, sp98);
-    shim_guMtxF2L(sp98, &gDisplayContext->matrixStack[gMatrixListPos]);
+    shim_guTranslateF(mtxTranslate, data->pos.x, data->pos.y, data->pos.z);
+    shim_guRotateF(mtxRotate, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    shim_guMtxCatF(mtxRotate, mtxTranslate, mtxTransform);
+    shim_guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++,
               &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    gDPSetPrimColor(gMainGfxPos++, 0, 0, data->unk_38, data->unk_39, data->unk_3A, data->unk_34);
-    gDPSetEnvColor(gMainGfxPos++, data->unk_3B, data->unk_3C, data->unk_3D, 0);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, data->primCol.r, data->primCol.g, data->primCol.b, data->alpha);
+    gDPSetEnvColor(gMainGfxPos++, data->envCol.r, data->envCol.g, data->envCol.b, 0);
 
     data++;
     for (i = 1; i < eff->numParts; i++, data++) {
-        shim_guTranslateF(sp18, data->unk_04, data->unk_08, data->unk_0C);
-        shim_guRotateF(sp58, data->unk_2C, 0.0f, 0.0f, 1.0f);
-        shim_guMtxCatF(sp58, sp18, sp18);
-        shim_guScaleF(sp58, data->unk_20, data->unk_1C, 1.0f);
-        shim_guMtxCatF(sp58, sp18, sp18);
-        shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+        shim_guTranslateF(mtxTranslate, data->pos.x, data->pos.y, data->pos.z);
+        shim_guRotateF(mtxRotate, data->rotZ, 0.0f, 0.0f, 1.0f);
+        shim_guMtxCatF(mtxRotate, mtxTranslate, mtxTranslate);
+        shim_guScaleF(mtxRotate, data->scaleX, data->scaleY, 1.0f);
+        shim_guMtxCatF(mtxRotate, mtxTranslate, mtxTranslate);
+        shim_guMtxF2L(mtxTranslate, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++,
                   &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);

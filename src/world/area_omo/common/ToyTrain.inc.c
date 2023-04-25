@@ -539,13 +539,13 @@ EvtScript N(EVS_TrainUnk_AltE) = {
 EvtScript N(EVS_TrainUnk_F) = {
     EVT_SWITCH(AB_OMO_6)
         EVT_CASE_EQ(0)
-            EVT_CALL(GotoMapSpecial, EVT_PTR("omo_03"), omo_03_ENTRY_3, TRANSITION_1)
+            EVT_CALL(GotoMapSpecial, EVT_PTR("omo_03"), omo_03_ENTRY_3, TRANSITION_TOY_TRAIN)
         EVT_CASE_EQ(1)
-            EVT_CALL(GotoMapSpecial, EVT_PTR("omo_06"), omo_06_ENTRY_3, TRANSITION_1)
+            EVT_CALL(GotoMapSpecial, EVT_PTR("omo_06"), omo_06_ENTRY_3, TRANSITION_TOY_TRAIN)
         EVT_CASE_EQ(2)
-            EVT_CALL(GotoMapSpecial, EVT_PTR("omo_08"), omo_08_ENTRY_2, TRANSITION_1)
+            EVT_CALL(GotoMapSpecial, EVT_PTR("omo_08"), omo_08_ENTRY_2, TRANSITION_TOY_TRAIN)
         EVT_CASE_EQ(3)
-            EVT_CALL(GotoMapSpecial, EVT_PTR("omo_10"), omo_10_ENTRY_3, TRANSITION_1)
+            EVT_CALL(GotoMapSpecial, EVT_PTR("omo_10"), omo_10_ENTRY_3, TRANSITION_TOY_TRAIN)
     EVT_END_SWITCH
     EVT_WAIT(100)
     EVT_RETURN
@@ -557,42 +557,42 @@ EvtScript N(EVS_TrainUnk_G) = {
         EVT_CASE_RANGE(0, 1)
             EVT_SWITCH(AB_OMO_6)
                 EVT_CASE_EQ(0)
-                    EVT_CALL(GotoMapSpecial, EVT_PTR("omo_03"), omo_03_ENTRY_2, TRANSITION_1)
+                    EVT_CALL(GotoMapSpecial, EVT_PTR("omo_03"), omo_03_ENTRY_2, TRANSITION_TOY_TRAIN)
                 EVT_CASE_EQ(1)
-                    EVT_CALL(GotoMapSpecial, EVT_PTR("omo_06"), omo_06_ENTRY_2, TRANSITION_1)
+                    EVT_CALL(GotoMapSpecial, EVT_PTR("omo_06"), omo_06_ENTRY_2, TRANSITION_TOY_TRAIN)
                 EVT_CASE_EQ(2)
-                    EVT_CALL(GotoMapSpecial, EVT_PTR("omo_08"), omo_08_ENTRY_1, TRANSITION_1)
+                    EVT_CALL(GotoMapSpecial, EVT_PTR("omo_08"), omo_08_ENTRY_1, TRANSITION_TOY_TRAIN)
                 EVT_CASE_EQ(3)
-                    EVT_CALL(GotoMapSpecial, EVT_PTR("omo_10"), omo_10_ENTRY_2, TRANSITION_1)
+                    EVT_CALL(GotoMapSpecial, EVT_PTR("omo_10"), omo_10_ENTRY_2, TRANSITION_TOY_TRAIN)
             EVT_END_SWITCH
         EVT_CASE_EQ(2)
             EVT_SWITCH(AB_OMO_6)
                 EVT_CASE_EQ(0)
-                    EVT_CALL(GotoMapSpecial, EVT_PTR("omo_03"), omo_03_ENTRY_2, TRANSITION_1)
+                    EVT_CALL(GotoMapSpecial, EVT_PTR("omo_03"), omo_03_ENTRY_2, TRANSITION_TOY_TRAIN)
                 EVT_CASE_EQ(1)
                     EVT_IF_EQ(GF_OMO03_BlueSwitchActivated, TRUE)
-                        EVT_CALL(GotoMapSpecial, EVT_PTR("omo_06"), omo_06_ENTRY_2, TRANSITION_1)
+                        EVT_CALL(GotoMapSpecial, EVT_PTR("omo_06"), omo_06_ENTRY_2, TRANSITION_TOY_TRAIN)
                     EVT_ELSE
-                        EVT_CALL(GotoMapSpecial, EVT_PTR("omo_03"), omo_03_ENTRY_2, TRANSITION_1)
+                        EVT_CALL(GotoMapSpecial, EVT_PTR("omo_03"), omo_03_ENTRY_2, TRANSITION_TOY_TRAIN)
                     EVT_END_IF
                 EVT_CASE_EQ(3)
-                    EVT_CALL(GotoMapSpecial, EVT_PTR("omo_10"), omo_10_ENTRY_2, TRANSITION_1)
+                    EVT_CALL(GotoMapSpecial, EVT_PTR("omo_10"), omo_10_ENTRY_2, TRANSITION_TOY_TRAIN)
             EVT_END_SWITCH
         EVT_CASE_EQ(3)
             EVT_SWITCH(AB_OMO_6)
                 EVT_CASE_EQ(0)
-                    EVT_CALL(GotoMapSpecial, EVT_PTR("omo_03"), omo_03_ENTRY_2, TRANSITION_1)
+                    EVT_CALL(GotoMapSpecial, EVT_PTR("omo_03"), omo_03_ENTRY_2, TRANSITION_TOY_TRAIN)
                 EVT_CASE_EQ(1)
                     EVT_IF_EQ(GF_OMO03_BlueSwitchActivated, TRUE)
-                        EVT_CALL(GotoMapSpecial, EVT_PTR("omo_06"), omo_06_ENTRY_2, TRANSITION_1)
+                        EVT_CALL(GotoMapSpecial, EVT_PTR("omo_06"), omo_06_ENTRY_2, TRANSITION_TOY_TRAIN)
                     EVT_ELSE
-                        EVT_CALL(GotoMapSpecial, EVT_PTR("omo_03"), omo_03_ENTRY_2, TRANSITION_1)
+                        EVT_CALL(GotoMapSpecial, EVT_PTR("omo_03"), omo_03_ENTRY_2, TRANSITION_TOY_TRAIN)
                     EVT_END_IF
                 EVT_CASE_EQ(2)
                     EVT_IF_EQ(GF_OMO03_BlueSwitchActivated, TRUE)
-                        EVT_CALL(GotoMapSpecial, EVT_PTR("omo_08"), omo_08_ENTRY_1, TRANSITION_1)
+                        EVT_CALL(GotoMapSpecial, EVT_PTR("omo_08"), omo_08_ENTRY_1, TRANSITION_TOY_TRAIN)
                     EVT_ELSE
-                        EVT_CALL(GotoMapSpecial, EVT_PTR("omo_03"), omo_03_ENTRY_2, TRANSITION_1)
+                        EVT_CALL(GotoMapSpecial, EVT_PTR("omo_03"), omo_03_ENTRY_2, TRANSITION_TOY_TRAIN)
                     EVT_END_IF
             EVT_END_SWITCH
     EVT_END_SWITCH

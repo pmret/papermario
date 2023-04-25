@@ -213,7 +213,7 @@ HitResult calc_partner_damage_enemy(void) {
 
         if (target->stoneStatus == STATUS_STONE) {
             sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
-            func_8024EFE0(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, 1);
+            show_immune_bonk(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, 1);
             show_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 0);
             if (gBattleStatus.flags1 & (BS_FLAGS1_40 | BS_FLAGS1_200)) {
                 return HIT_RESULT_1;
@@ -481,7 +481,7 @@ HitResult calc_partner_damage_enemy(void) {
                 dispatchEvent = (!(gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE)) ? EVENT_ZERO_DAMAGE : EVENT_IMMUNE;
                 sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                 dispatch_event_actor(target, dispatchEvent);
-                func_8024EFE0(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, 3);
+                show_immune_bonk(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, 3);
                 if (gBattleStatus.flags1 & (BS_FLAGS1_40 | BS_FLAGS1_200)) {
                     return HIT_RESULT_1;
                 }
@@ -741,7 +741,7 @@ HitResult calc_partner_damage_enemy(void) {
     if (!(target->flags & ACTOR_FLAG_NO_DMG_POPUP)) {
         if (battleStatus->lastAttackDamage == 0) {
             if (!tempBinary && !wasStatusInflicted) {
-                func_8024EFE0(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, 3);
+                show_immune_bonk(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, 3);
             }
         } else if (!partImmuneToElement) {
             if (battleStatus->currentAttackElement & (DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS | DAMAGE_TYPE_SMASH)) {
@@ -805,7 +805,7 @@ HitResult calc_partner_damage_enemy(void) {
     }
 
     if (battleStatus->currentAttackStatus & STATUS_FLAG_SLEEP && wasStatusInflicted) {
-        evt = start_script((EvtScript*) DoSleepHit, EVT_PRIORITY_A, 0);
+        evt = start_script((EvtScript*) EVS_PlaySleepHitFX, EVT_PRIORITY_A, 0);
         evt->varTable[0] = state->goalPos.x;
         evt->varTable[1] = state->goalPos.y;
         evt->varTable[2] = state->goalPos.z;
@@ -813,7 +813,7 @@ HitResult calc_partner_damage_enemy(void) {
     }
 
     if (battleStatus->currentAttackStatus & STATUS_FLAG_DIZZY && wasStatusInflicted) {
-        evt = start_script((EvtScript*) DoDizzyHit, EVT_PRIORITY_A, 0);
+        evt = start_script((EvtScript*) EVS_PlayDizzyHitFX, EVT_PRIORITY_A, 0);
         evt->varTable[0] = state->goalPos.x;
         evt->varTable[1] = state->goalPos.y;
         evt->varTable[2] = state->goalPos.z;
@@ -821,7 +821,7 @@ HitResult calc_partner_damage_enemy(void) {
     }
 
     if (battleStatus->currentAttackStatus & STATUS_FLAG_PARALYZE && wasStatusInflicted) {
-        evt = start_script((EvtScript*) DoParalyzeHit, EVT_PRIORITY_A, 0);
+        evt = start_script((EvtScript*) EVS_PlayParalyzeHitFX, EVT_PRIORITY_A, 0);
         evt->varTable[0] = state->goalPos.x;
         evt->varTable[1] = state->goalPos.y;
         evt->varTable[2] = state->goalPos.z;
@@ -829,7 +829,7 @@ HitResult calc_partner_damage_enemy(void) {
     }
 
     if (battleStatus->currentAttackStatus & STATUS_FLAG_POISON && wasStatusInflicted) {
-        evt = start_script((EvtScript*) DoPoisonHit, EVT_PRIORITY_A, 0);
+        evt = start_script((EvtScript*) EVS_PlayPoisonHitFX, EVT_PRIORITY_A, 0);
         evt->varTable[0] = state->goalPos.x;
         evt->varTable[1] = state->goalPos.y;
         evt->varTable[2] = state->goalPos.z;
@@ -837,7 +837,7 @@ HitResult calc_partner_damage_enemy(void) {
     }
 
     if (battleStatus->currentAttackStatus & STATUS_FLAG_STOP && wasStatusInflicted) {
-        evt = start_script((EvtScript*) DoStopHit, EVT_PRIORITY_A, 0);
+        evt = start_script((EvtScript*) EVS_PlayStopHitFX, EVT_PRIORITY_A, 0);
         evt->varTable[0] = state->goalPos.x;
         evt->varTable[1] = state->goalPos.y;
         evt->varTable[2] = state->goalPos.z;
@@ -845,7 +845,7 @@ HitResult calc_partner_damage_enemy(void) {
     }
 
     if (battleStatus->currentAttackStatus & STATUS_FLAG_FROZEN && wasStatusInflicted) {
-        evt = start_script((EvtScript*) DoFreezeHit, EVT_PRIORITY_A, 0);
+        evt = start_script((EvtScript*) EVS_PlayFreezeHitFX, EVT_PRIORITY_A, 0);
         evt->varTable[0] = state->goalPos.x;
         evt->varTable[1] = state->goalPos.y;
         evt->varTable[2] = state->goalPos.z;
@@ -854,7 +854,7 @@ HitResult calc_partner_damage_enemy(void) {
     }
 
     if (battleStatus->currentAttackStatus & STATUS_FLAG_SHRINK && wasStatusInflicted) {
-        evt = start_script((EvtScript*) DoShrinkHit, EVT_PRIORITY_A, 0);
+        evt = start_script((EvtScript*) EVS_PlayShrinkHitFX, EVT_PRIORITY_A, 0);
         evt->varTable[0] = state->goalPos.x;
         evt->varTable[1] = state->goalPos.y;
         evt->varTable[2] = state->goalPos.z;
@@ -917,7 +917,7 @@ s32 dispatch_damage_event_partner(s32 damageAmount, s32 event, s32 stopMotion) {
 
     battleStatus->lastAttackDamage += hpChange;
     partner->lastDamageTaken = battleStatus->lastAttackDamage;
-    battleStatus->unk_19A = 0;
+    battleStatus->currentDamageSource = DMG_SRC_DEFAULT;
     if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
         if (event == EVENT_HIT_COMBO) {
             event = EVENT_HIT;

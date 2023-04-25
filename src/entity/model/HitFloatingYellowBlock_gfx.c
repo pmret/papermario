@@ -20,7 +20,7 @@ Gfx Entity_HitFloatingYellowBlock_RenderBlock2[] = {
     gsSP2Triangles(16, 17, 18, 0, 16, 18, 19, 0),
     gsSP2Triangles(20, 21, 22, 0, 20, 22, 23, 0),
     gsDPPipeSync(),
-    gsDPSetCombineLERP(PRIMITIVE, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_04, PM_CC_04),
     gsSPTexture(0x0001, 0x0001, 0, G_TX_RENDERTILE, G_OFF),
     gsSPEndDisplayList(),
 };
@@ -39,7 +39,7 @@ Gfx Entity_HitFloatingYellowBlock_RenderBlock1[] = {
     gsSP2Triangles(16, 17, 18, 0, 16, 18, 19, 0),
     gsSP2Triangles(20, 7, 6, 0, 20, 6, 21, 0),
     gsDPPipeSync(),
-    gsDPSetCombineLERP(PRIMITIVE, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_04, PM_CC_04),
     gsSPTexture(0x0001, 0x0001, 0, G_TX_RENDERTILE, G_OFF),
     gsSPEndDisplayList(),
 };

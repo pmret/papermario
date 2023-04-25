@@ -8,7 +8,7 @@ EvtScript N(EVS_GotoMap_sam_02_2) = {
     EVT_IF_EQ(GF_StartedChapter7, FALSE)
         EVT_SET(GF_StartedChapter7, TRUE)
         EVT_CALL(FadeOutMusic, 0, 1500)
-        EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_22"), kmr_22_ENTRY_7, TRANSITION_6)
+        EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_22"), kmr_22_ENTRY_7, TRANSITION_BEGIN_OR_END_CHAPTER)
         EVT_WAIT(100)
         EVT_RETURN
     EVT_END_IF

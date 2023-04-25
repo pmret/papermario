@@ -244,7 +244,7 @@ void create_target_list(Actor* actor, s32 arg1) {
             goto END2;
         }
         if (!(gBattleStatus.flags2 & BS_FLAGS2_4000) && battleStatus->darknessMode > 0) {
-            get_screen_overlay_params(1, &overlayType, &overlayZoom);
+            get_screen_overlay_params(SCREEN_LAYER_BACK, &overlayType, &overlayZoom);
             if (overlayZoom >= 215.0f) {
                 skip = TRUE;
                 sp18 = 1;
@@ -2930,7 +2930,7 @@ void btl_appendGfx_prim_quad(u8 r, u8 g, u8 b, u8 a, u16 left, u16 top, u16 righ
 
     if (a == 255) {
         gDPSetRenderMode(gMainGfxPos++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
-        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, PRIMITIVE, 0, 0, 0, 1, 0, 0, 0, PRIMITIVE, 0, 0, 0, 1);
+        gDPSetCombineMode(gMainGfxPos++, PM_CC_08, PM_CC_08);
     } else {
         gDPSetRenderMode(gMainGfxPos++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
         gDPSetCombineMode(gMainGfxPos++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
