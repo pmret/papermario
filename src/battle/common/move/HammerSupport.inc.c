@@ -12,7 +12,7 @@ EvtScript N(EVS_HammerSupport_A) = {
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 32)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_26)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_ATTACK_APPROACH)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(5.0))
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Run)
     EVT_CALL(PlayerRunToGoal, 0)
@@ -22,7 +22,7 @@ EvtScript N(EVS_HammerSupport_A) = {
 
 EvtScript N(EVS_HammerSupport_B) = {
     EVT_CALL(SetGoalPos, ACTOR_PLAYER, -33, 0, 0)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_26)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_ATTACK_APPROACH)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(5.0))
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Run)
     EVT_CALL(PlayerRunToGoal, 0)
@@ -124,7 +124,7 @@ EvtScript N(EVS_HammerSupport_E) = {
 };
 
 EvtScript N(EVS_HammerSupport_F) = {
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_AIM_HAMMER)
     EVT_CALL(SetBattleCamOffsetZ, 8)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10B)
@@ -157,14 +157,14 @@ EvtScript N(EVS_HammerSupport_F) = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash1_PreSwing)
     EVT_WAIT(3)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Smash1_Swing)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_44)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_HAMMER_STRIKE)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(EVS_Hammer_ReturnHome_A) = {
     EVT_CALL(func_80276EFC)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_E)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_04)
     EVT_CALL(MoveBattleCamOver, 5)
     EVT_CALL(func_802693F0)
     EVT_WAIT(20)
@@ -221,7 +221,7 @@ EvtScript N(EVS_UseBasicHammer) = {
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
     EVT_EXEC_WAIT(N(EVS_HammerSupport_C))
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 0, 0, 0, 16)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_AIM_HAMMER)
     EVT_CALL(SetBattleCamOffsetZ, 8)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10B)
@@ -307,7 +307,7 @@ EvtScript N(EVS_UseSuperHammer) = {
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
     EVT_EXEC_WAIT(N(EVS_HammerSupport_D))
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 0, 0, 0, BS_FLAGS1_10)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_AIM_HAMMER)
     EVT_CALL(SetBattleCamOffsetZ, 8)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10B)
@@ -376,7 +376,7 @@ EvtScript N(EVS_UseUltraHammer) = {
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
     EVT_EXEC_WAIT(N(EVS_HammerSupport_E))
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 0, 0, 0, BS_FLAGS1_10)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_AIM_HAMMER)
     EVT_CALL(SetBattleCamOffsetZ, 8)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10B)
@@ -445,7 +445,7 @@ EvtScript N(EVS_Hammer_UseBasicQuake) = {
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
     EVT_EXEC_WAIT(N(EVS_HammerSupport_C))
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_AIM_HAMMER)
     EVT_CALL(AddBattleCamZoom, 80)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10B)
@@ -503,7 +503,7 @@ EvtScript N(EVS_Hammer_UseSuperQuake) = {
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
     EVT_EXEC_WAIT(N(EVS_HammerSupport_D))
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_AIM_HAMMER)
     EVT_CALL(AddBattleCamZoom, 80)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10B)
@@ -552,7 +552,7 @@ EvtScript N(EVS_Hammer_UseUltraQuake) = {
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
     EVT_EXEC_WAIT(N(EVS_HammerSupport_E))
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_AIM_HAMMER)
     EVT_CALL(AddBattleCamZoom, 80)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10B)

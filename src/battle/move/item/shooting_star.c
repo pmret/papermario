@@ -73,7 +73,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_EXEC_WAIT(N(UseItemWithEffect))
     EVT_THREAD
         EVT_WAIT(5)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(MoveBattleCamOver, 20)
     EVT_END_THREAD
     EVT_CALL(N(func_802A1444_71DBB4))
@@ -110,7 +110,7 @@ EvtScript N(EVS_UseItem) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_WAIT(90)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
@@ -130,7 +130,7 @@ EvtScript N(EVS_UseItem) = {
         EVT_GOTO(0)
     EVT_END_IF
     EVT_WAIT(20)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_EXEC_WAIT(N(PlayerGoHome))
     EVT_THREAD

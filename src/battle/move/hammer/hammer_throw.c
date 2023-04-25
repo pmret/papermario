@@ -172,7 +172,7 @@ EvtScript N(EVS_UseMove_Impl) = {
             EVT_EXEC_WAIT(N(EVS_802A4164))
     EVT_END_SWITCH
     EVT_CALL(InitTargetIterator)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_26)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_ATTACK_APPROACH)
     EVT_CALL(AddBattleCamZoom, 50)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10B)
@@ -376,7 +376,7 @@ EvtScript N(EVS_UseMove_Impl) = {
                     EVT_END_THREAD
             EVT_END_SWITCH
     EVT_END_SWITCH
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_44)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_HAMMER_STRIKE)
     EVT_CALL(MoveBattleCamOver, 10)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar1)

@@ -150,7 +150,7 @@ EntityModelScript unusedModelScript = STANDARD_ENTITY_MODEL_SCRIPT(
 EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_EGG_MISSILE)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(MoveBattleCamOver, 15)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Throw)
     EVT_CALL(PlaySound, SOUND_THROW)

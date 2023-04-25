@@ -125,7 +125,7 @@ Gfx D_8014B0B8[21][5] = {
         gsDPSetCombineMode(G_CC_MODULATEIDECALA, G_CC_PASS2),
         gsDPSetCombineMode(G_CC_MODULATEIA, G_CC_PASS2),
         gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, COMBINED, PRIMITIVE, PRIMITIVE_ALPHA, COMBINED, 0, 0, 0, COMBINED),
-        gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, COMBINED, 0, PRIMITIVE, ENVIRONMENT, 0, 0, 0, COMBINED),
+        gsDPSetCombineMode(G_CC_MODULATEIA, PM_CC_17),
     }, {
         gsDPSetCombineMode(G_CC_BLENDRGBA, G_CC_BLENDRGBA),
         gsDPSetCombineMode(G_CC_BLENDRGBA, G_CC_PASS2),
@@ -1398,7 +1398,7 @@ void func_8010FD98(void* arg0, s32 alpha) {
         gDPSetRenderMode(gMainGfxPos++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
         gDPSetCombineMode(gMainGfxPos++, G_CC_MODULATEIA, G_CC_MODULATEIA);
     } else {
-        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
+        gDPSetCombineMode(gMainGfxPos++, PM_CC_01, PM_CC_02);
         gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, alpha);
     }
 }
@@ -4142,9 +4142,9 @@ void mdl_create_model(ModelBlueprint* bp, s32 arg1) {
     if (prop != NULL) {
         model->texPannerID = prop->data.s & 0xF;
     } else {
-        model->texPannerID = 0;
+        model->texPannerID = TEX_PANNER_0;
     }
-    model->customGfxIndex = 0;
+    model->customGfxIndex = CUSTOM_GFX_0;
 
     if (node->type != SHAPE_TYPE_GROUP) {
         prop = get_model_property(node, MODEL_PROP_KEY_RENDER_MODE);
@@ -4213,17 +4213,17 @@ void mdl_create_model(ModelBlueprint* bp, s32 arg1) {
 
 // Mysterious no-op
 void iterate_models(void) {
-    Model* nonNull;
-    Model* ret;
+    Model* last = NULL;
+    Model* mdl;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentModels); i++) {
-        ret = (*gCurrentModels)[i];
-        if (ret != NULL) {
-            nonNull = ret;
+        mdl = (*gCurrentModels)[i];
+        if (mdl != NULL) {
+            last = mdl;
         }
     }
-    ret = nonNull;
+    mdl = last;
 }
 
 void func_80116698(void) {
@@ -4284,9 +4284,10 @@ void func_80116698(void) {
             if (!(mtg->flags & MODEL_TRANSFORM_GROUP_FLAG_1000)) {
                 if (mtg->matrixMode != 0) {
                     mtg->matrixMode--;
-                    if (!(mtg->matrixMode & 0xFF)) {
+                    if (mtg->matrixMode == 0) {
                         mtg->matrixA = *mtg->transformMtx;
                     }
+                    // store transformMtx on stack
                     mtx = mtg->transformMtx;
                     mtg->transformMtx = &gDisplayContext->matrixStack[gMatrixListPos++];
                     *mtg->transformMtx = *mtx;
@@ -5473,7 +5474,6 @@ void build_custom_gfx(void) {
 
 // weird temps necessary to match
 /// @returns TRUE if mtx is NULL or identity.
-// TODO takes a Matrix4f, not a Matrix4s - types being weird
 s32 is_identity_fixed_mtx(Mtx* mtx) {
     s32* mtxIt = (s32*)mtx;
     s32* identityIt;

@@ -180,7 +180,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_Spiny_Anim09)
             EVT_SET_CONST(LVar2, ANIM_Spiny_Anim0A)
             EVT_EXEC_WAIT(N(getAnimation))
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
@@ -204,7 +204,7 @@ EvtScript N(handleEvent) = {
                 EVT_EXEC_WAIT(DoBurnHit)
                 EVT_SET_CONST(LVar0, 1)
                 EVT_SET_CONST(LVar1, ANIM_Spiny_Anim0C)
-                EVT_EXEC_WAIT(DoDeath)
+                EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
                 EVT_SET_CONST(LVar1, ANIM_Spiny_Anim0D)
@@ -212,7 +212,7 @@ EvtScript N(handleEvent) = {
                 EVT_EXEC_WAIT(DoBurnHit)
                 EVT_SET_CONST(LVar0, 1)
                 EVT_SET_CONST(LVar1, ANIM_Spiny_Anim0E)
-                EVT_EXEC_WAIT(DoDeath)
+                EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_END_IF
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
@@ -231,7 +231,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_Spiny_Anim09)
             EVT_SET_CONST(LVar2, ANIM_Spiny_Anim0A)
             EVT_EXEC_WAIT(N(getAnimation))
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_FLIP_TRIGGER)
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
@@ -294,13 +294,13 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_Spiny_Anim09)
             EVT_SET_CONST(LVar2, ANIM_Spiny_Anim0A)
             EVT_EXEC_WAIT(N(getAnimation))
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Spiny_Anim09)
             EVT_SET_CONST(LVar2, ANIM_Spiny_Anim0A)
             EVT_EXEC_WAIT(N(getAnimation))
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
@@ -393,7 +393,7 @@ EvtScript N(takeTurn) = {
     EVT_END_IF
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-    EVT_CALL(func_8024ECF8, -1, 1, 0)
+    EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
     EVT_IF_EQ(LVar0, 0)
@@ -435,12 +435,12 @@ EvtScript N(takeTurn) = {
                     EVT_END_IF
                     EVT_WAIT(1)
                 EVT_END_LOOP
-                EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_B)
+                EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_01)
                 EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
                 EVT_END_IF
                 EVT_WAIT(15)
-                EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+                EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_END_THREAD
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(AddGoalPos, ACTOR_SELF, -200, 0, 0)
@@ -448,7 +448,7 @@ EvtScript N(takeTurn) = {
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
             EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
             EVT_CALL(EnableActorBlur, ACTOR_SELF, 0)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(YieldTurn)
             EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
@@ -466,7 +466,7 @@ EvtScript N(takeTurn) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(0)
         EVT_CASE_OR_EQ(2)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_Lakitu_Anim0B)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar0, 20)

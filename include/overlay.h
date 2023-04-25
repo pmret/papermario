@@ -11,7 +11,7 @@ typedef struct ScreenOverlay {
 } ScreenOverlay; // size = 0x18
 
 void _render_transition_stencil(u8, f32, ScreenOverlay*);
-void func_80139F10(s32, s32, f32, s32, s32, s32, s32, s32);
-void func_80138E54(s32, s32, s32, f32, f32);
+void appendGfx_screen_transition_stencil(s32, s32, f32, s32, s32, s32, s32, s32);
+void appendGfx_darkness_stencil(s32, s32, s32, f32, f32);
 
 #endif

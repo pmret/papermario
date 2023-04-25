@@ -80,8 +80,8 @@ void N(UpdateIntroMessages)(IntroMessage** introMessageLists) {
             }
             break;
     }
-    get_screen_overlay_params(1, &type, &zoom1);
-    get_screen_overlay_params(0, &type, &zoom2);
+    get_screen_overlay_params(SCREEN_LAYER_BACK, &type, &zoom1);
+    get_screen_overlay_params(SCREEN_LAYER_FRONT, &type, &zoom2);
     opacity = ((N(IntroMessageAlpha) * (255.0f - zoom1) * (255.0f - zoom2)) / 255.0f) / 255.0f;
     if (opacity > 0) {
         messageID = N(CurMessageList)->messageID;

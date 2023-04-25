@@ -273,9 +273,9 @@ API_CALLABLE(N(FadeToTitleScreen)) {
         script->functionTemp[0] = 255;
     }
 
-    set_screen_overlay_color(1, 208, 208, 208);
-    set_screen_overlay_params_back(0, script->functionTemp[0]);
-    set_screen_overlay_alpha(1, 0);
+    set_screen_overlay_color(SCREEN_LAYER_BACK, 208, 208, 208);
+    set_screen_overlay_params_back(OVERLAY_SCREEN_COLOR, script->functionTemp[0]);
+    set_screen_overlay_alpha(SCREEN_LAYER_BACK, 0);
     return script->functionTemp[0] == 255;
 }
 

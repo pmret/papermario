@@ -65,7 +65,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 2, -40, 55, 20, 0, 0, 0)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EVT_WAIT(20)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_THREAD
         EVT_WAIT(15)
@@ -100,7 +100,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_CALL(func_80273444, 20, 0, 0)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
@@ -111,7 +111,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_END_IF
     EVT_CALL(GetItemPower, ITEM_POW_BLOCK, LVar3, LVar4)
     EVT_CALL(ApplyShrinkFromOwner, LVar3)
-    EVT_CALL(func_80269EAC, 22)
+    EVT_CALL(SetDamageSource, DMG_SRC_POW_BLOCK)
     EVT_CALL(ItemDamageEnemy, LVar0, DAMAGE_TYPE_POW | DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, 0, LVar3, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_LABEL(1)
     EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)

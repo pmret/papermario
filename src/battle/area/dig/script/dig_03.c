@@ -23,7 +23,7 @@ API_CALLABLE(N(SetupDemoPlayerMove)) {
 }
 
 EvtScript NAMESPACE = {
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 1)
     EVT_WAIT(3)
     EVT_CALL(SetCamViewport, CAM_BATTLE, 29, 20, 262, 177)

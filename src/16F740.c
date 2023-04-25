@@ -217,7 +217,7 @@ void btl_state_update_normal_start(void) {
     switch (gBattleSubState) {
         case BTL_SUBSTATE_NORMAL_START_INIT:
             BattleEnemiesCreated = battle->formationSize;
-            set_screen_overlay_params_back(255, -1.0f);
+            set_screen_overlay_params_back(OVERLAY_NONE, -1.0f);
             compressedAsset = load_asset_by_name(stage->shape, &size);
             decode_yay0(compressedAsset, &gMapShapeData);
             general_heap_free(compressedAsset);
@@ -429,8 +429,8 @@ void btl_state_update_normal_start(void) {
                 battleStatus->controlScriptID = script->id;
             }
             if (battleStatus->darknessMode > BTL_DARKNESS_STATE_NONE) {
-                set_screen_overlay_color(1, 0, 0, 0);
-                set_screen_overlay_params_back(0, 215.0f);
+                set_screen_overlay_color(SCREEN_LAYER_BACK, 0, 0, 0);
+                set_screen_overlay_params_back(OVERLAY_SCREEN_COLOR, 215.0f);
             }
             if (is_ability_active(ABILITY_CHILL_OUT) && currentEncounter->firstStrikeType == FIRST_STRIKE_ENEMY) {
                 currentEncounter->firstStrikeType = FIRST_STRIKE_NONE;
@@ -481,7 +481,7 @@ void btl_state_update_normal_start(void) {
 
             D_8029F248++;
             if (D_8029F248 == 15) {
-                btl_cam_use_preset(BTL_CAM_PRESET_C);
+                btl_cam_use_preset(BTL_CAM_DEFAULT);
             }
 
             if (!(gGameStatusPtr->demoFlags & 1)) {
@@ -496,7 +496,7 @@ void btl_state_update_normal_start(void) {
             break;
         case BTL_SUBSTATE_NORMAL_START_DONE:
             if (battleStatus->unk_8C == 0) {
-                set_screen_overlay_params_front(255, -1.0f);
+                set_screen_overlay_params_front(OVERLAY_NONE, -1.0f);
                 btl_set_state(BATTLE_STATE_BEGIN_TURN);
             }
             break;
@@ -504,12 +504,12 @@ void btl_state_update_normal_start(void) {
 }
 
 void btl_state_draw_normal_start(void) {
-    set_screen_overlay_color(0, 0, 0, 0);
+    set_screen_overlay_color(SCREEN_LAYER_FRONT, 0, 0, 0);
 
     if (BattleScreenFadeAmt > 255) {
-        set_screen_overlay_params_front(0, 255.0f);
+        set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, 255.0f);
     } else {
-        set_screen_overlay_params_front(0, BattleScreenFadeAmt);
+        set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, BattleScreenFadeAmt);
     }
 }
 
@@ -704,7 +704,7 @@ void btl_state_update_begin_player_turn(void) {
     s32 temp;
 
     if (gBattleSubState == BTL_SUBSTATE_BEGIN_PLAYER_TURN_INIT) {
-        btl_cam_use_preset(BTL_CAM_PRESET_C);
+        btl_cam_use_preset(BTL_CAM_DEFAULT);
         btl_cam_move(5);
         gBattleSubState = BTL_SUBSTATE_BEGIN_PLAYER_TURN_RESET_STATE;
     }
@@ -766,7 +766,7 @@ void btl_state_update_begin_player_turn(void) {
                         fx_water_splash(1, player->currentPos.x + 15.0f, player->currentPos.y + 22.0f, player->currentPos.z + 5.0f, 1.0f, 24);
                         battleStatus->waterBlockEffect = NULL;
                         sfx_play_sound(SOUND_299);
-                        btl_show_battle_message(BTL_MSG_27, 60);
+                        btl_show_battle_message(BTL_MSG_WATER_BLOCK_END, 60);
                         gBattleSubState = BTL_SUBSTATE_BEGIN_PLAYER_TURN_AWAIT_WATER_BLOCK;
                     } else {
                         gBattleSubState = BTL_SUBSTATE_BEGIN_PLAYER_TURN_CHECK_CLOUD_NINE;
@@ -792,7 +792,7 @@ void btl_state_update_begin_player_turn(void) {
                 if (battleStatus->cloudNineTurnsLeft <= 0) {
                     remove_effect(battleStatus->cloudNineEffect);
                     battleStatus->cloudNineEffect = NULL;
-                    btl_show_battle_message(BTL_MSG_29, 60);
+                    btl_show_battle_message(BTL_MSG_CLOUD_NINE_END, 60);
                     gBattleSubState = BTL_SUBSTATE_BEGIN_PLAYER_TURN_AWAIT_CLOUD_NINE;
                 } else {
                     gBattleSubState = BTL_SUBSTATE_BEGIN_PLAYER_TURN_CHECK_TURBO_CHARGE;
@@ -818,7 +818,7 @@ void btl_state_update_begin_player_turn(void) {
                     battleStatus->turboChargeTurnsLeft--;
                     battleStatus->buffEffect->data.partnerBuff->unk_0C[FX_BUFF_DATA_TURBO_CHARGE].turnsLeft = battleStatus->turboChargeTurnsLeft;
                     if (battleStatus->turboChargeTurnsLeft <= 0) {
-                        btl_show_battle_message(BTL_MSG_2B, 60);
+                        btl_show_battle_message(BTL_MSG_TURBO_CHARGE_END, 60);
                         gBattleSubState = BTL_SUBSTATE_BEGIN_PLAYER_TURN_AWAIT_TURBO_CHARGE;
                     } else {
                         gBattleSubState = BTL_SUBSTATE_BEGIN_PLAYER_TURN_TRY_STATUS_DAMAGE;
@@ -1092,7 +1092,7 @@ void btl_state_update_begin_partner_turn(void) {
             gBattleSubState = BTL_SUBSTATE_BEGIN_PARTNER_TURN_END_DELAY;
         } else if ((battleStatus->flags2 & (BS_FLAGS2_4 | BS_FLAGS2_2)) != (BS_FLAGS2_4 | BS_FLAGS2_2)) {
             if (!(partner->flags & ACTOR_FLAG_NO_ATTACK)) {
-                btl_cam_use_preset(BTL_CAM_PRESET_C);
+                btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(5);
                 gBattleSubState = BTL_SUBSTATE_BEGIN_PARTNER_TURN_RESET_STATE;
             } else {
@@ -1377,7 +1377,7 @@ void btl_state_update_9(void) {
                         return;
                     }
 
-                    btl_cam_use_preset(BTL_CAM_PRESET_C);
+                    btl_cam_use_preset(BTL_CAM_DEFAULT);
                     if (partner == NULL || !(gBattleStatus.flags1 & BS_FLAGS1_PLAYER_IN_BACK)) {
                         gBattleSubState = BTL_SUBSTATE_9_4;
                     } else if (gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE) {
@@ -1578,7 +1578,7 @@ void btl_state_update_end_turn(void) {
             }
 
             if (!cond) {
-                btl_cam_use_preset(BTL_CAM_PRESET_C);
+                btl_cam_use_preset(BTL_CAM_DEFAULT);
                 gBattleSubState = BTL_SUBSTATE_END_TURN_CHECK_FOR_SWAP;
             }
         }
@@ -1647,7 +1647,7 @@ void btl_state_update_end_turn(void) {
             partner->disableDismissTimer = 0;
         }
 
-        func_80260A60();
+        btl_set_player_idle_anims();
         gBattleStatus.flags1 &= ~BS_FLAGS1_PLAYER_DEFENDING;
         playerData->specialBarsFilled += 32;
         if (playerData->specialBarsFilled > playerData->maxStarPower * 256) {
@@ -1691,7 +1691,7 @@ void btl_state_update_end_turn(void) {
         }
 
         if (!cond) {
-            btl_cam_use_preset(BTL_CAM_PRESET_C);
+            btl_cam_use_preset(BTL_CAM_DEFAULT);
             gBattleSubState = BTL_SUBSTATE_END_TURN_BEGIN_NEXT;
         }
     }
@@ -1709,7 +1709,7 @@ void btl_state_draw_end_turn(void) {
 }
 
 void btl_state_update_1C(void) {
-    btl_cam_use_preset(BTL_CAM_PRESET_C);
+    btl_cam_use_preset(BTL_CAM_DEFAULT);
     btl_set_state(BATTLE_STATE_PREPARE_MENU);
 }
 
@@ -1854,7 +1854,7 @@ void btl_state_update_victory(void) {
     }
 
     if (gBattleSubState == BTL_SUBSTATE_VICTORY_CHECK_MERLEE) {
-        btl_cam_use_preset(BTL_CAM_PRESET_C);
+        btl_cam_use_preset(BTL_CAM_DEFAULT);
         if (battleStatus->nextMerleeSpellType == MERLEE_SPELL_EXP_BOOST) {
             if (battleStatus->totalStarPoints == 0) {
                 battleStatus->nextMerleeSpellType = MERLEE_SPELL_0;
@@ -2011,7 +2011,7 @@ void btl_state_update_end_training_battle(void) {
 
     switch (gBattleSubState) {
         case BTL_SUBSTATE_END_TRAINING_RESET_CAM:
-            btl_cam_use_preset(BTL_CAM_PRESET_C);
+            btl_cam_use_preset(BTL_CAM_DEFAULT);
             D_8029F248 = 30;
             gBattleSubState = BTL_SUBSTATE_END_TRAINING_DONE;
             break;
@@ -2051,9 +2051,9 @@ void btl_state_update_end_battle(void) {
             }
             if (encounterStatus->battleOutcome == OUTCOME_PLAYER_LOST && !(gBattleStatus.flags1 & BS_FLAGS1_NO_GAME_OVER)) {
                 btl_cam_unfreeze();
-                btl_cam_use_preset(BTL_CAM_PRESET_B);
-                set_screen_overlay_color(0, 0, 0, 0);
-                set_screen_overlay_center(0, 0, 160, 120);
+                btl_cam_use_preset(BTL_CAM_PRESET_01);
+                set_screen_overlay_color(SCREEN_LAYER_FRONT, 0, 0, 0);
+                set_screen_overlay_center(SCREEN_LAYER_FRONT, 0, 160, 120);
             }
             gBattleSubState = BTL_SUBSTATE_END_BATTLE_FADE_OUT;
             break;
@@ -2149,9 +2149,9 @@ void btl_state_draw_end_battle(void) {
 
     if (gCurrentEncounter.battleOutcome == OUTCOME_PLAYER_LOST && !(gBattleStatus.flags1 & BS_FLAGS1_NO_GAME_OVER)) {
         camera->auxBoomZOffset += 256;
-        set_screen_overlay_params_front(7, BattleScreenFadeAmt);
+        set_screen_overlay_params_front(OVERLAY_SCREEN_MARIO, BattleScreenFadeAmt);
     } else {
-        set_screen_overlay_params_front(0, BattleScreenFadeAmt);
+        set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, BattleScreenFadeAmt);
     }
 }
 
@@ -2545,7 +2545,7 @@ void btl_state_update_change_partner(void) {
                     break;
                 }
             }
-            btl_cam_use_preset(BTL_CAM_PRESET_C);
+            btl_cam_use_preset(BTL_CAM_DEFAULT);
             gBattleSubState = BTL_SUBSTATE_CHANGE_PARTNER_DONE;
             break;
         case BTL_SUBSTATE_CHANGE_PARTNER_DONE:
@@ -2589,7 +2589,7 @@ void btl_state_update_player_move(void) {
         battleStatus->unk_86 = 127;
         battleStatus->blockResult = 127;
         battleStatus->lastAttackDamage = 0;
-        battleStatus->unk_19A = 0;
+        battleStatus->currentDamageSource = DMG_SRC_DEFAULT;
         gBattleStatus.flags1 &= ~BS_FLAGS1_AUTO_SUCCEED_ACTION;
         gBattleStatus.flags1 &= ~BS_FLAGS1_MENU_OPEN;
         reset_actor_turn_info();
@@ -2650,7 +2650,7 @@ void btl_state_update_player_move(void) {
                 if (battleStatus->selectedMoveID != MOVE_NONE) {
                     tipIndex = gMoveTable[battleStatus->selectedMoveID].actionTip;
                     if (tipIndex >= 0) {
-                        btl_show_battle_message(BTL_MSG_2E + tipIndex, 60);
+                        btl_show_battle_message(BTL_MSG_ACTION_TIP_00 + tipIndex, 60);
                     }
                 }
             }
@@ -2810,31 +2810,31 @@ void btl_state_update_player_move(void) {
             if (!enemyNotDone) {
                 gBattleSubState = BTL_SUBSTATE_PLAYER_MOVE_CHECK_PLAYER_STATUS;
             } else {
-                btl_cam_use_preset(BTL_CAM_PRESET_D);
+                btl_cam_use_preset(BTL_CAM_PRESET_03);
                 switch (actor->statusAfflicted) {
                     case 4:
-                        messageIndex = BTL_MSG_12;
+                        messageIndex = BTL_MSG_ENEMY_DAZED;
                         break;
                     case 6:
-                        messageIndex = BTL_MSG_13;
+                        messageIndex = BTL_MSG_ENEMY_ASLEEP;
                         break;
                     case 7:
-                        messageIndex = BTL_MSG_14;
+                        messageIndex = BTL_MSG_ENEMY_FROZEN;
                         break;
                     case 9:
-                        messageIndex = BTL_MSG_15;
+                        messageIndex = BTL_MSG_ENEMY_POISONED;
                         break;
                     case 10:
-                        messageIndex = BTL_MSG_16;
+                        messageIndex = BTL_MSG_ENEMY_SHRUNK;
                         break;
                     case 5:
-                        messageIndex = BTL_MSG_17;
+                        messageIndex = BTL_MSG_ENEMY_PARALYZED;
                         break;
                     case 11:
-                        messageIndex = BTL_MSG_18;
+                        messageIndex = BTL_MSG_ENEMY_ELECTRIFIED;
                         break;
                     case 8:
-                        messageIndex = BTL_MSG_19;
+                        messageIndex = BTL_MSG_ENEMY_CANT_MOVE;
                         break;
                     default:
                         messageIndex = 0;
@@ -2854,7 +2854,7 @@ void btl_state_update_player_move(void) {
             break;
         case BTL_SUBSTATE_PLAYER_MOVE_AWAIT_ENEMY_STATUS_POPUP:
             if (!btl_is_popup_displayed()) {
-                btl_cam_use_preset(BTL_CAM_PRESET_C);
+                btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(15);
                 D_8029F248 = 10;
                 gBattleSubState = BTL_SUBSTATE_PLAYER_MOVE_POST_ENEMY_STATUS_POPUP;
@@ -2872,28 +2872,28 @@ void btl_state_update_player_move(void) {
     switch (gBattleSubState) {
         case BTL_SUBSTATE_PLAYER_MOVE_CHECK_PLAYER_STATUS:
             if (player->statusAfflicted != 0) {
-                btl_cam_use_preset(BTL_CAM_PRESET_33);
+                btl_cam_use_preset(BTL_CAM_PLAYER_STATUS_AFFLICTED);
                 switch (player->statusAfflicted) {
                     case 4:
-                        messageIndex = BTL_MSG_0A;
+                        messageIndex = BTL_MSG_PLAYER_DAZED;
                         break;
                     case 6:
-                        messageIndex = BTL_MSG_0B;
+                        messageIndex = BTL_MSG_PLAYER_ASLEEP;
                         break;
                     case 7:
-                        messageIndex = BTL_MSG_0C;
+                        messageIndex = BTL_MSG_PLAYER_FROZEN;
                         break;
                     case 9:
-                        messageIndex = BTL_MSG_0D;
+                        messageIndex = BTL_MSG_PLAYER_POISONED;
                         break;
                     case 10:
-                        messageIndex = BTL_MSG_0E;
+                        messageIndex = BTL_MSG_PLAYER_SHRUNK;
                         break;
                     case 5:
-                        messageIndex = BTL_MSG_0F;
+                        messageIndex = BTL_MSG_PLAYER_PARALYZED;
                         break;
                     case 11:
-                        messageIndex = BTL_MSG_10;
+                        messageIndex = BTL_MSG_PLAYER_CHARGED;
                         break;
                     default:
                         messageIndex = 0;
@@ -2912,7 +2912,7 @@ void btl_state_update_player_move(void) {
             break;
         case BTL_SUBSTATE_PLAYER_MOVE_AWAIT_PLAYER_STATUS_POPUP:
             if (!btl_is_popup_displayed()) {
-                btl_cam_use_preset(BTL_CAM_PRESET_C);
+                btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(15);
                 D_8029F248 = 10;
                 gBattleSubState = BTL_SUBSTATE_PLAYER_MOVE_POST_PLAYER_STATUS_POPUP;
@@ -3061,7 +3061,7 @@ void btl_state_update_end_player_turn(void) {
     if (gBattleSubState == BTL_SUBSTATE_END_PLAYER_TURN_DONE) {
         if(!btl_check_enemies_defeated()) {
             if (battleStatus->moveCategory == BTL_MENU_TYPE_ITEMS && battleStatus->itemUsesLeft >= 2) {
-                btl_cam_use_preset(BTL_CAM_PRESET_C);
+                btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(10);
                 gBattleStatus.flags2 &= ~BS_FLAGS2_2;
             } else {
@@ -3146,7 +3146,7 @@ void btl_state_update_partner_move(void) {
             battleStatus->unk_8C = 0;
             battleStatus->unk_86 = 127;
             battleStatus->blockResult = 127;
-            battleStatus->unk_19A = 0;
+            battleStatus->currentDamageSource = DMG_SRC_DEFAULT;
             gBattleStatus.flags1 &= ~BS_FLAGS1_AUTO_SUCCEED_ACTION;
             gBattleStatus.flags1 &= ~BS_FLAGS1_MENU_OPEN;
             reset_actor_turn_info();
@@ -3164,7 +3164,7 @@ void btl_state_update_partner_move(void) {
                     enemyActor->statusAfflicted = 0;
                 }
             }
-            btl_cam_use_preset(BTL_CAM_PRESET_C);
+            btl_cam_use_preset(BTL_CAM_DEFAULT);
             gBattleSubState = BTL_SUBSTATE_PARTNER_MOVE_EXECUTE_MOVE;
             break;
         case BTL_SUBSTATE_PARTNER_MOVE_EXECUTE_MOVE:
@@ -3274,8 +3274,8 @@ void btl_state_update_partner_move(void) {
             btl_update_ko_status();
 
             if (partner->statusAfflicted == STATUS_DAZE && !btl_are_all_enemies_defeated()) {
-                btl_cam_use_preset(BTL_CAM_PRESET_54);
-                btl_show_battle_message(BTL_MSG_23, 60);
+                btl_cam_use_preset(BTL_CAM_PARTNER_INJURED);
+                btl_show_battle_message(BTL_MSG_PARTNER_INJURED, 60);
                 partner->statusAfflicted = 0;
                 partner->disableDismissTimer = 0;
                 gBattleSubState = BTL_SUBSTATE_PARTNER_MOVE_AWAIT_PARTNER_STATUS_POPUP;
@@ -3288,7 +3288,7 @@ void btl_state_update_partner_move(void) {
             if (btl_is_popup_displayed()) {
                 break;
             }
-            btl_cam_use_preset(BTL_CAM_PRESET_C);
+            btl_cam_use_preset(BTL_CAM_DEFAULT);
             btl_cam_move(15);
             D_8029F248 = 10;
             gBattleSubState = BTL_SUBSTATE_PARTNER_MOVE_POST_PARTNER_STATUS_POPUP;
@@ -3318,32 +3318,32 @@ void btl_state_update_partner_move(void) {
             if (!enemyFound) {
                 gBattleSubState = BTL_SUBSTATE_PARTNER_MOVE_DONE;
             } else {
-                btl_cam_use_preset(BTL_CAM_PRESET_D);
+                btl_cam_use_preset(BTL_CAM_PRESET_03);
                 switchCondition = enemyActor->statusAfflicted - 4;
                 switch (switchCondition) {
                     case 0:
-                        messageIndex = BTL_MSG_12;
+                        messageIndex = BTL_MSG_ENEMY_DAZED;
                         break;
                     case 2:
-                        messageIndex = BTL_MSG_13;
+                        messageIndex = BTL_MSG_ENEMY_ASLEEP;
                         break;
                     case 3:
-                        messageIndex = BTL_MSG_14;
+                        messageIndex = BTL_MSG_ENEMY_FROZEN;
                         break;
                     case 5:
-                        messageIndex = BTL_MSG_15;
+                        messageIndex = BTL_MSG_ENEMY_POISONED;
                         break;
                     case 6:
-                        messageIndex = BTL_MSG_16;
+                        messageIndex = BTL_MSG_ENEMY_SHRUNK;
                         break;
                     case 1:
-                        messageIndex = BTL_MSG_17;
+                        messageIndex = BTL_MSG_ENEMY_PARALYZED;
                         break;
                     case 7:
-                        messageIndex = BTL_MSG_18;
+                        messageIndex = BTL_MSG_ENEMY_ELECTRIFIED;
                         break;
                     case 4:
-                        messageIndex = BTL_MSG_19;
+                        messageIndex = BTL_MSG_ENEMY_CANT_MOVE;
                         break;
                     default:
                         messageIndex = 0;
@@ -3365,7 +3365,7 @@ void btl_state_update_partner_move(void) {
             break;
         case BTL_SUBSTATE_PARTNER_MOVE_AWAIT_ENEMY_STATUS_POPUP:
             if (btl_is_popup_displayed() == FALSE) {
-                btl_cam_use_preset(BTL_CAM_PRESET_C);
+                btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(15);
                 D_8029F248 = 10;
                 gBattleSubState = BTL_SUBSTATE_PARTNER_MOVE_POST_ENEMY_STATUS_POPUP;
@@ -3573,7 +3573,7 @@ void btl_state_update_enemy_move(void) {
             battleStatus->actionSuccess = 0;
             battleStatus->unk_86 = 127;
             battleStatus->blockResult = 127;
-            battleStatus->unk_19A = 0;
+            battleStatus->currentDamageSource = DMG_SRC_DEFAULT;
             reset_actor_turn_info();
             gBattleStatus.flags1 |= BS_FLAGS1_100;
             player->statusAfflicted = 0;
@@ -3675,26 +3675,26 @@ void btl_state_update_enemy_move(void) {
                             if (partner != NULL) {
                                 partner->flags |= ACTOR_FLAG_8000000 | ACTOR_FLAG_4000000;
                             }
-                            btl_cam_use_preset(BTL_CAM_PRESET_33);
+                            btl_cam_use_preset(BTL_CAM_PLAYER_STATUS_AFFLICTED);
 
                             switch (player->statusAfflicted) {
                                 case STATUS_DIZZY:
-                                    messageIndex = BTL_MSG_0A;
+                                    messageIndex = BTL_MSG_PLAYER_DAZED;
                                     break;
                                 case STATUS_SLEEP:
-                                    messageIndex = BTL_MSG_0B;
+                                    messageIndex = BTL_MSG_PLAYER_ASLEEP;
                                     break;
                                 case STATUS_FROZEN:
-                                    messageIndex = BTL_MSG_0C;
+                                    messageIndex = BTL_MSG_PLAYER_FROZEN;
                                     break;
                                 case STATUS_POISON:
-                                    messageIndex = BTL_MSG_0D;
+                                    messageIndex = BTL_MSG_PLAYER_POISONED;
                                     break;
                                 case STATUS_SHRINK:
-                                    messageIndex = BTL_MSG_0E;
+                                    messageIndex = BTL_MSG_PLAYER_SHRUNK;
                                     break;
                                 case STATUS_PARALYZE:
-                                    messageIndex = BTL_MSG_0F;
+                                    messageIndex = BTL_MSG_PLAYER_PARALYZED;
                                     break;
                                 default:
                                     messageIndex = 0;
@@ -3715,7 +3715,7 @@ void btl_state_update_enemy_move(void) {
             break;
         case BTL_SUBSTATE_ENEMY_MOVE_AWAIT_PLAYER_POPUP_DONE:
             if (!btl_is_popup_displayed()) {
-                btl_cam_use_preset(BTL_CAM_PRESET_C);
+                btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(15);
                 D_8029F248 = 10;
                 gBattleSubState = BTL_SUBSTATE_ENEMY_MOVE_POST_PLAYER_POPUP_DELAY;
@@ -3737,8 +3737,8 @@ void btl_state_update_enemy_move(void) {
                 if (partner->statusAfflicted == STATUS_DAZE) {
                     player->flags |= ACTOR_FLAG_8000000 | ACTOR_FLAG_4000000;
                     partner->flags |= ACTOR_FLAG_8000000 | ACTOR_FLAG_4000000;
-                    btl_cam_use_preset(BTL_CAM_PRESET_54);
-                    btl_show_battle_message(BTL_MSG_23, 60);
+                    btl_cam_use_preset(BTL_CAM_PARTNER_INJURED);
+                    btl_show_battle_message(BTL_MSG_PARTNER_INJURED, 60);
                     partner->statusAfflicted = 0;
                     gBattleSubState = BTL_SUBSTATE_ENEMY_MOVE_AWAIT_PARTNER_POPUP_DONE;
                 } else {
@@ -3750,7 +3750,7 @@ void btl_state_update_enemy_move(void) {
             break;
         case BTL_SUBSTATE_ENEMY_MOVE_AWAIT_PARTNER_POPUP_DONE:
             if (!btl_is_popup_displayed()) {
-                btl_cam_use_preset(BTL_CAM_PRESET_C);
+                btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(15);
                 D_8029F248 = 10;
                 gBattleSubState = BTL_SUBSTATE_ENEMY_MOVE_POST_PARTNER_POPUP_DELAY;
@@ -3849,7 +3849,7 @@ void btl_state_update_first_strike(void) {
             func_80263230(player, enemy);
             battleStatus->unk_8C = 0;
             battleStatus->lastAttackDamage = 0;
-            battleStatus->unk_19A = 0;
+            battleStatus->currentDamageSource = DMG_SRC_DEFAULT;
             gBattleStatus.flags1 &= ~BS_FLAGS1_MENU_OPEN;
             gBattleStatus.flags2 |= BS_FLAGS2_1000000;
             gBattleStatus.flags1 &= ~BS_FLAGS1_PARTNER_ACTING;
@@ -3987,7 +3987,7 @@ void btl_state_update_first_strike(void) {
 void btl_state_draw_first_stike(void) {
     if (D_802809F6 == -1 && D_8029F254 != 0) {
         if (BattleScreenFadeAmt == 0) {
-            set_screen_overlay_params_front(255, -1.0f);
+            set_screen_overlay_params_front(OVERLAY_NONE, -1.0f);
         } else {
             if (!(gGameStatusPtr->demoFlags & 1)) {
                 BattleScreenFadeAmt -= 20;
@@ -3998,7 +3998,7 @@ void btl_state_draw_first_stike(void) {
             if (BattleScreenFadeAmt < 0) {
                 BattleScreenFadeAmt = 0;
             }
-            set_screen_overlay_params_front(0, BattleScreenFadeAmt);
+            set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, BattleScreenFadeAmt);
         }
     }
 }
@@ -4052,7 +4052,7 @@ void btl_state_update_partner_striking_first(void) {
             partner->targetPartIndex = target->partID;
             battleStatus->unk_8C = 0;
             battleStatus->lastAttackDamage = 0;
-            battleStatus->unk_19A = 0;
+            battleStatus->currentDamageSource = DMG_SRC_DEFAULT;
             gBattleStatus.flags1 &= ~BS_FLAGS1_MENU_OPEN;
             gBattleStatus.flags2 |= BS_FLAGS2_1000000;
             gBattleStatus.flags1 |= BS_FLAGS1_PARTNER_ACTING;
@@ -4171,14 +4171,14 @@ void btl_state_update_partner_striking_first(void) {
 void btl_state_draw_partner_striking_first(void) {
     if (D_8029F254 != 0) {
         if (BattleScreenFadeAmt == 0) {
-            set_screen_overlay_params_front(255, -1.0f);
+            set_screen_overlay_params_front(OVERLAY_NONE, -1.0f);
         } else {
             BattleScreenFadeAmt -= 20;
             if (BattleScreenFadeAmt < 0) {
                 BattleScreenFadeAmt = 0;
             }
 
-            set_screen_overlay_params_front(0, BattleScreenFadeAmt);
+            set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, BattleScreenFadeAmt);
         }
     }
 }
@@ -4203,7 +4203,7 @@ void btl_state_update_enemy_striking_first(void) {
         case BTL_SUBSTATE_ENEMY_FIRST_STRIKE_INIT:
             battleStatus->unk_8C = 0;
             battleStatus->lastAttackDamage = 0;
-            battleStatus->unk_19A = 0;
+            battleStatus->currentDamageSource = DMG_SRC_DEFAULT;
             playerData->enemyFirstStrikes++;
             battleStatus->flags1 &= ~BS_FLAGS1_MENU_OPEN;
             D_8029F254 = 0;
@@ -4348,14 +4348,14 @@ void btl_state_update_enemy_striking_first(void) {
 void btl_state_draw_enemy_striking_first(void) {
     if (D_8029F254 != 0) {
         if (BattleScreenFadeAmt == 0) {
-            set_screen_overlay_params_front(255, -1.0f);
+            set_screen_overlay_params_front(OVERLAY_NONE, -1.0f);
         } else {
             BattleScreenFadeAmt -= 20;
             if (BattleScreenFadeAmt < 0) {
                 BattleScreenFadeAmt = 0;
             }
 
-            set_screen_overlay_params_front(0, BattleScreenFadeAmt);
+            set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, BattleScreenFadeAmt);
         }
     }
 }
@@ -4441,7 +4441,7 @@ void btl_state_update_end_demo_battle(void) {
             }
 
             if (D_802809F6 != -1) {
-                gGameStatusPtr->nextDemoScene = 0x12;
+                gGameStatusPtr->nextDemoScene = LAST_DEMO_SCENE_IDX;
             }
 
             btl_set_state(BATTLE_STATE_0);
@@ -4455,7 +4455,7 @@ const static f32 padding[] = { 0.0f, 0.0f, 0.0f };
 
 void btl_state_draw_end_demo_battle(void) {
     if (D_802809F6 == -1) {
-        set_screen_overlay_color(0, 0, 0, 0);
-        set_screen_overlay_params_front(0, BattleScreenFadeAmt);
+        set_screen_overlay_color(SCREEN_LAYER_FRONT, 0, 0, 0);
+        set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, BattleScreenFadeAmt);
     }
 }

@@ -9,6 +9,7 @@
 extern u16 gFrameBuf0[];
 extern u16 gFrameBuf1[];
 extern u16 gFrameBuf2[];
+
 u16* bFrameBuffers[] = {
     gFrameBuf0, gFrameBuf1, gFrameBuf2
 };

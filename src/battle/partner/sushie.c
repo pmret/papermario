@@ -494,7 +494,7 @@ EvtScript N(handleEvent) = {
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208C)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
-            EVT_EXEC_WAIT(DoPartnerBlock)
+            EVT_EXEC_WAIT(EVS_DoPartnerBlock)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SPIKE_CONTACT)
             EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
@@ -533,7 +533,7 @@ EvtScript N(handleEvent) = {
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208C)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleSushie_Block)
-            EVT_EXEC_WAIT(DoPartnerBlock)
+            EVT_EXEC_WAIT(EVS_DoPartnerBlock)
             EVT_WAIT(10)
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
@@ -624,7 +624,7 @@ EvtScript N(executeAction) = {
 
 EvtScript N(returnHome2) = {
     EVT_CALL(PartnerYieldTurn)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_E)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_04)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Fall)
     EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 60)
@@ -677,7 +677,7 @@ EvtScript N(returnHome) = {
 
 EvtScript N(restoreFromSquirt2) = {
     EVT_CALL(PartnerYieldTurn)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_E)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_04)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Run)
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 30, 0, EASING_COS_IN_OUT)
@@ -921,7 +921,7 @@ EvtScript N(bellyFlop) = {
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(HIT_RESULT_1)
         EVT_CASE_OR_EQ(HIT_RESULT_3)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
             EVT_CALL(MoveBattleCamOver, 8)
             EVT_EXEC_WAIT(N(returnHome2))
         EVT_END_CASE_GROUP
@@ -979,7 +979,7 @@ EvtScript N(squirt) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_297)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(MoveBattleCamOver, 10)
     EVT_CALL(PartnerTestEnemy, LVar0, DAMAGE_TYPE_WATER | DAMAGE_TYPE_NO_CONTACT, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_10)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
@@ -1110,7 +1110,7 @@ EvtScript N(waterBlock) = {
     EVT_ADD(LVarF, 6)
     EVT_PLAY_EFFECT(EFFECT_STAT_CHANGE, LVarF, LVar0, LVar1, LVar2, EVT_FLOAT(1.5), 60, 0)
     EVT_WAIT(4)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(PartnerYieldTurn)
     EVT_LABEL(10)
@@ -1126,7 +1126,7 @@ EvtScript N(waterBlock) = {
     EVT_CALL(SetActorYaw, ACTOR_PARTNER, 0)
     EVT_IF_EQ(LVarA, 0)
     EVT_ELSE
-        EVT_CALL(ShowVariableMessageBox, BTL_MSG_26, 60, LVarA)
+        EVT_CALL(ShowVariableMessageBox, BTL_MSG_WATER_BLOCK_BEGIN, 60, LVarA)
     EVT_END_IF
     EVT_CALL(WaitForMessageBoxDone)
     EVT_RETURN
@@ -1183,7 +1183,7 @@ EvtScript N(tidalWave) = {
         EVT_CALL(N(SetScaleTidalWaveCharge))
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 5)
     EVT_WAIT(10)
     EVT_CALL(EnableActorBlur, ACTOR_PARTNER, 1)
@@ -1191,7 +1191,7 @@ EvtScript N(tidalWave) = {
     EVT_CALL(SetActorPos, ACTOR_PARTNER, -220, 0, 0)
     EVT_CALL(EnableActorBlur, ACTOR_PARTNER, 0)
     EVT_WAIT(15)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(GetActionSuccessCopy, LVar0)
     EVT_SET(LVarE, LVar0)

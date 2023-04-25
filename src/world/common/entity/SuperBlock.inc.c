@@ -377,7 +377,7 @@ API_CALLABLE(N(SuperBlock_WhiteScreenFlash)) {
         script->varTable[1] = evt_get_variable(script, *args++);
         script->functionTemp[0] = 0;
         script->functionTemp[1] = 0;
-        set_screen_overlay_color(0, 208, 208, 208);
+        set_screen_overlay_color(SCREEN_LAYER_FRONT, 208, 208, 208);
     }
 
     switch (script->functionTemp[0]) {
@@ -410,7 +410,7 @@ API_CALLABLE(N(SuperBlock_WhiteScreenFlash)) {
             break;
     }
 
-    set_screen_overlay_params_front(1, script->functionTemp[1]);
+    set_screen_overlay_params_front(OVERLAY_VIEWPORT_COLOR, script->functionTemp[1]);
 
     return ret;
 }

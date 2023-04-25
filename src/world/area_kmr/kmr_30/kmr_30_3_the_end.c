@@ -98,11 +98,7 @@ API_CALLABLE(N(UpdateTheEndAlpha)) {
     return ApiStatus_DONE2;
 }
 void N(gfx_build_the_end)(void) {
-    gDPSetCombineLERP(gMainGfxPos++,
-        TEXEL0, 0, SHADE, 0,
-        TEXEL0, 0, PRIMITIVE, 0,
-        TEXEL0, 0, SHADE, 0,
-        TEXEL0, 0, PRIMITIVE, 0);
+    gDPSetCombineMode(gMainGfxPos++, PM_CC_05, PM_CC_05);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, TheEndModelAlpha);
 }
 

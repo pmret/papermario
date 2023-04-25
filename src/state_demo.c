@@ -133,27 +133,17 @@ DemoSceneData DemoScenes[] = {
         .partnerID = PARTNER_NONE,
         .storyProgress = STORY_CH1_KNOCKED_SWITCH_FROM_TREE
     },
-    {
+    [LAST_DEMO_SCENE_IDX] {
         .sceneType = DEMO_SCENE_DONE,
         .mapName = "end"
     },
     {} // final entry blank
 };
 
-#if VERSION_JP
-char versionString[] = "Prg Ver.00/07/06 22:22";
-#elif VERSION_US
-char versionString[] = "Prg Ver.00/12/05 16:54";
-#elif VERSION_IQUE
-char versionString[] = "Prg Ver.04/05/18 10:52";
-#else
-char versionString[] = "Prg Ver.??/??/?? ??:??";
-#endif
-
 void state_init_demo(void) {
-    if (gGameStatusPtr->demoState == 0) {
+    if (gGameStatusPtr->demoState == DEMO_STATE_NONE) {
         gGameStatusPtr->nextDemoScene = 0;
-        gGameStatusPtr->demoState = 1;
+        gGameStatusPtr->demoState = DEMO_STATE_ACTIVE;
     }
 
     gGameStatusPtr->demoButtonInput = 0;
@@ -161,8 +151,8 @@ void state_init_demo(void) {
     gGameStatusPtr->demoStickY = 0;
 
     disable_sounds();
-    set_map_transition_effect(2);
-    set_screen_overlay_params_front(0, 255.0f);
+    set_map_transition_effect(TRANSITION_END_DEMO_SCENE_BLACK);
+    set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, 255.0f);
     clear_saved_variables();
     clear_script_list();
 }
@@ -174,10 +164,10 @@ void state_step_demo(void) {
     s16 mapID;
     s16 areaID;
 
-    if (gGameStatusPtr->demoState == 4) {
+    if (gGameStatusPtr->demoState == DEMO_STATE_4) {
         mode = DEMO_SCENE_DONE;
     }
-    if (gGameStatusPtr->demoState == 5) {
+    if (gGameStatusPtr->demoState == DEMO_STATE_DONE) {
         mode = DEMO_SCENE_EXIT;
     }
 
@@ -188,7 +178,7 @@ void state_step_demo(void) {
             gGameStatusPtr->introState = INTRO_STATE_3;
             gOverrideFlags |= GLOBAL_OVERRIDES_8;
             intro_logos_update_fade();
-            gGameStatusPtr->demoState = 5;
+            gGameStatusPtr->demoState = DEMO_STATE_DONE;
             break;
         case DEMO_SCENE_EXIT:
             if (gGameStatusPtr->introState != INTRO_STATE_0) {
@@ -197,7 +187,7 @@ void state_step_demo(void) {
 
             if (gGameStatusPtr->introState == INTRO_STATE_0) {
                 gGameStatusPtr->nextDemoScene = 0;
-                gGameStatusPtr->demoState = 0;
+                gGameStatusPtr->demoState = DEMO_STATE_NONE;
                 gGameStatusPtr->peachFlags = 0;
                 enable_sounds();
                 gGameStatusPtr->isBattle = FALSE;
@@ -244,9 +234,9 @@ void state_step_demo(void) {
             evt_set_variable(NULL, GB_StoryProgress, demoSceneData->storyProgress);
 
             if (gGameStatusPtr->nextDemoScene == 0) {
-                set_map_transition_effect(3);
+                set_map_transition_effect(TRANSITION_END_DEMO_SCENE_WHITE);
             } else {
-                set_map_transition_effect(2);
+                set_map_transition_effect(TRANSITION_END_DEMO_SCENE_BLACK);
             }
 
             set_game_mode(GAME_MODE_ENTER_DEMO_WORLD);
@@ -262,9 +252,9 @@ void state_step_demo(void) {
             evt_set_variable(NULL, GB_StoryProgress, demoSceneData->storyProgress);
 
             if (gGameStatusPtr->nextDemoScene == 0) {
-                set_map_transition_effect(3);
+                set_map_transition_effect(TRANSITION_END_DEMO_SCENE_WHITE);
             } else {
-                set_map_transition_effect(2);
+                set_map_transition_effect(TRANSITION_END_DEMO_SCENE_BLACK);
             }
 
             set_game_mode(GAME_MODE_ENTER_DEMO_WORLD);
@@ -275,13 +265,23 @@ void state_step_demo(void) {
     }
 
     gGameStatusPtr->nextDemoScene++;
-    if (gGameStatusPtr->nextDemoScene > ARRAY_COUNT(DemoScenes) - 2) {
-        gGameStatusPtr->nextDemoScene = ARRAY_COUNT(DemoScenes) - 2;
+    if (gGameStatusPtr->nextDemoScene > LAST_DEMO_SCENE_IDX) {
+        gGameStatusPtr->nextDemoScene = LAST_DEMO_SCENE_IDX;
     }
 }
 
 void state_drawUI_demo(void) {
 
 }
+
+#if VERSION_JP
+char versionString[] = "Prg Ver.00/07/06 22:22";
+#elif VERSION_US
+char versionString[] = "Prg Ver.00/12/05 16:54";
+#elif VERSION_IQUE
+char versionString[] = "Prg Ver.04/05/18 10:52";
+#else
+char versionString[] = "Prg Ver.??/??/?? ??:??";
+#endif
 
 static const f32 pad[] = {0.0f, 0.0f};

@@ -5,58 +5,58 @@
 
 s32 dispatch_damage_event_player(s32 damageAmount, s32 event, s32 arg2);
 
-ApiStatus func_80271210(Evt* script, s32 isInitialCall) {
+ApiStatus PlaySleepHitFX(Evt* script, s32 isInitialCall) {
     fx_debuff(0, script->varTable[0], script->varTable[1], script->varTable[2]);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80271258(Evt* script, s32 isInitialCall) {
+ApiStatus PlayDizzyHitFX(Evt* script, s32 isInitialCall) {
     fx_debuff(1, script->varTable[0], script->varTable[1], script->varTable[2]);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802712A0(Evt* script, s32 isInitialCall) {
+ApiStatus PlayParalyzeHitFX(Evt* script, s32 isInitialCall) {
     EffectInstance* debuffEffect = fx_debuff(2, script->varTable[0], script->varTable[1], script->varTable[2]);
 
-    debuffEffect->data.debuff->unk_38 = 200;
-    debuffEffect->data.debuff->unk_39 = 120;
-    debuffEffect->data.debuff->unk_3A = 0;
-    debuffEffect->data.debuff->unk_3B = 234;
-    debuffEffect->data.debuff->unk_3C = 193;
-    debuffEffect->data.debuff->unk_3D = 0;
+    debuffEffect->data.debuff->primCol.r = 200;
+    debuffEffect->data.debuff->primCol.g = 120;
+    debuffEffect->data.debuff->primCol.b = 0;
+    debuffEffect->data.debuff->envCol.r = 234;
+    debuffEffect->data.debuff->envCol.g = 193;
+    debuffEffect->data.debuff->envCol.b = 0;
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80271328(Evt* script, s32 isInitialCall) {
+ApiStatus PlayPoisonHitFX(Evt* script, s32 isInitialCall) {
     EffectInstance* debuffEffect = fx_debuff(2, script->varTable[0], script->varTable[1], script->varTable[2]);
 
-    debuffEffect->data.debuff->unk_38 = 60;
-    debuffEffect->data.debuff->unk_39 = 160;
-    debuffEffect->data.debuff->unk_3A = 0;
-    debuffEffect->data.debuff->unk_3B = 90;
-    debuffEffect->data.debuff->unk_3C = 240;
-    debuffEffect->data.debuff->unk_3D = 0;
+    debuffEffect->data.debuff->primCol.r = 60;
+    debuffEffect->data.debuff->primCol.g = 160;
+    debuffEffect->data.debuff->primCol.b = 0;
+    debuffEffect->data.debuff->envCol.r = 90;
+    debuffEffect->data.debuff->envCol.g = 240;
+    debuffEffect->data.debuff->envCol.b = 0;
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_802713B0(Evt* script, s32 isInitialCall) {
+ApiStatus PlayStopHitFX(Evt* script, s32 isInitialCall) {
     EffectInstance* debuffEffect = fx_debuff(2, script->varTable[0], script->varTable[1], script->varTable[2]);
 
-    debuffEffect->data.debuff->unk_38 = 205;
-    debuffEffect->data.debuff->unk_39 = 0;
-    debuffEffect->data.debuff->unk_3A = 40;
-    debuffEffect->data.debuff->unk_3B = 205;
-    debuffEffect->data.debuff->unk_3C = 32;
-    debuffEffect->data.debuff->unk_3D = 242;
+    debuffEffect->data.debuff->primCol.r = 205;
+    debuffEffect->data.debuff->primCol.g = 0;
+    debuffEffect->data.debuff->primCol.b = 40;
+    debuffEffect->data.debuff->envCol.r = 205;
+    debuffEffect->data.debuff->envCol.g = 32;
+    debuffEffect->data.debuff->envCol.b = 242;
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8027143C(Evt* script, s32 isInitialCall) {
+ApiStatus PlayFreezeHitSnowflakeFX(Evt* script, s32 isInitialCall) {
     fx_big_snowflakes(0, script->varTable[0], script->varTable[1], script->varTable[2]);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80271484(Evt* script, s32 isInitialCall) {
+ApiStatus PlayFreezeHitParticleFX(Evt* script, s32 isInitialCall) {
     Actor* actor = (Actor*)script->varTable[3];
     f32 temp1 = actor->size.y;
     f32 temp2 = actor->size.x / 2;
@@ -66,7 +66,7 @@ ApiStatus func_80271484(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80271588(Evt* script, s32 isInitialCall) {
+ApiStatus PlayShrinkHitFX(Evt* script, s32 isInitialCall) {
     s32 i;
 
     for (i = 0; i < 20; i++) {
@@ -80,48 +80,48 @@ ApiStatus func_80271588(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-EvtScript DoSleepHit = {
-    EVT_CALL(func_80271210)
+EvtScript EVS_PlaySleepHitFX = {
+    EVT_CALL(PlaySleepHitFX)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript DoDizzyHit = {
-    EVT_CALL(func_80271258)
+EvtScript EVS_PlayDizzyHitFX = {
+    EVT_CALL(PlayDizzyHitFX)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript DoParalyzeHit = {
-    EVT_CALL(func_802712A0)
+EvtScript EVS_PlayParalyzeHitFX = {
+    EVT_CALL(PlayParalyzeHitFX)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript DoPoisonHit = {
-    EVT_CALL(func_80271328)
+EvtScript EVS_PlayPoisonHitFX = {
+    EVT_CALL(PlayPoisonHitFX)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript DoStopHit = {
-    EVT_CALL(func_802713B0)
+EvtScript EVS_PlayStopHitFX = {
+    EVT_CALL(PlayStopHitFX)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript DoFreezeHit = {
-    EVT_CALL(func_8027143C)
+EvtScript EVS_PlayFreezeHitFX = {
+    EVT_CALL(PlayFreezeHitSnowflakeFX)
     EVT_WAIT(8)
-    EVT_CALL(func_8027143C)
+    EVT_CALL(PlayFreezeHitSnowflakeFX)
     EVT_WAIT(15)
-    EVT_CALL(func_80271484)
+    EVT_CALL(PlayFreezeHitParticleFX)
     EVT_RETURN
     EVT_END
 };
 
-EvtScript DoShrinkHit = {
-    EVT_CALL(func_80271588)
+EvtScript EVS_PlayShrinkHitFX = {
+    EVT_CALL(PlayShrinkHitFX)
     EVT_RETURN
     EVT_END
 };
@@ -310,7 +310,7 @@ HitResult calc_player_damage_enemy(void) {
 
         if (target->stoneStatus == STATUS_STONE) {
             sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
-            func_8024EFE0(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, 1);
+            show_immune_bonk(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, 1);
             show_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 0);
             if (gBattleStatus.flags1 & (BS_FLAGS1_40 | BS_FLAGS1_200)) {
                 return HIT_RESULT_1;
@@ -645,7 +645,7 @@ HitResult calc_player_damage_enemy(void) {
                 dispatchEvent = (!(gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE)) ? EVENT_ZERO_DAMAGE : EVENT_IMMUNE;
                 sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                 dispatch_event_actor(target, dispatchEvent);
-                func_8024EFE0(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, 3);
+                show_immune_bonk(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, 3);
                 if (gBattleStatus.flags1 & (BS_FLAGS1_40 | BS_FLAGS1_200)) {
                     return HIT_RESULT_1;
                 }
@@ -872,7 +872,7 @@ HitResult calc_player_damage_enemy(void) {
         if (battleStatus->lastAttackDamage == 0) {
             if (!tempBinary) {
                 if (!wasStatusInflicted) {
-                    func_8024EFE0(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, 3);
+                    show_immune_bonk(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, 3);
                 }
             }
         } else if (!partImmuneToElement) {
@@ -932,7 +932,7 @@ HitResult calc_player_damage_enemy(void) {
     }
 
     if (battleStatus->currentAttackStatus & STATUS_FLAG_SLEEP && wasStatusInflicted) {
-        evt = start_script(&DoSleepHit, EVT_PRIORITY_A, 0);
+        evt = start_script(&EVS_PlaySleepHitFX, EVT_PRIORITY_A, 0);
         evt->varTable[0] = state->goalPos.x;
         evt->varTable[1] = state->goalPos.y;
         evt->varTable[2] = state->goalPos.z;
@@ -940,7 +940,7 @@ HitResult calc_player_damage_enemy(void) {
     }
 
     if (battleStatus->currentAttackStatus & STATUS_FLAG_DIZZY && wasStatusInflicted) {
-        evt = start_script(&DoDizzyHit, EVT_PRIORITY_A, 0);
+        evt = start_script(&EVS_PlayDizzyHitFX, EVT_PRIORITY_A, 0);
         evt->varTable[0] = state->goalPos.x;
         evt->varTable[1] = state->goalPos.y;
         evt->varTable[2] = state->goalPos.z;
@@ -948,7 +948,7 @@ HitResult calc_player_damage_enemy(void) {
     }
 
     if (battleStatus->currentAttackStatus & STATUS_FLAG_PARALYZE && wasStatusInflicted) {
-        evt = start_script(&DoParalyzeHit, EVT_PRIORITY_A, 0);
+        evt = start_script(&EVS_PlayParalyzeHitFX, EVT_PRIORITY_A, 0);
         evt->varTable[0] = state->goalPos.x;
         evt->varTable[1] = state->goalPos.y;
         evt->varTable[2] = state->goalPos.z;
@@ -956,7 +956,7 @@ HitResult calc_player_damage_enemy(void) {
     }
 
     if (battleStatus->currentAttackStatus & STATUS_FLAG_POISON && wasStatusInflicted) {
-        evt = start_script(&DoPoisonHit, EVT_PRIORITY_A, 0);
+        evt = start_script(&EVS_PlayPoisonHitFX, EVT_PRIORITY_A, 0);
         evt->varTable[0] = state->goalPos.x;
         evt->varTable[1] = state->goalPos.y;
         evt->varTable[2] = state->goalPos.z;
@@ -964,7 +964,7 @@ HitResult calc_player_damage_enemy(void) {
     }
 
     if (battleStatus->currentAttackStatus & STATUS_FLAG_STOP && wasStatusInflicted) {
-        evt = start_script(&DoStopHit, EVT_PRIORITY_A, 0);
+        evt = start_script(&EVS_PlayStopHitFX, EVT_PRIORITY_A, 0);
         evt->varTable[0] = state->goalPos.x;
         evt->varTable[1] = state->goalPos.y;
         evt->varTable[2] = state->goalPos.z;
@@ -972,7 +972,7 @@ HitResult calc_player_damage_enemy(void) {
     }
 
     if (battleStatus->currentAttackStatus & STATUS_FLAG_FROZEN && wasStatusInflicted) {
-        evt = start_script(&DoFreezeHit, EVT_PRIORITY_A, 0);
+        evt = start_script(&EVS_PlayFreezeHitFX, EVT_PRIORITY_A, 0);
         evt->varTable[0] = state->goalPos.x;
         evt->varTable[1] = state->goalPos.y;
         evt->varTable[2] = state->goalPos.z;
@@ -981,7 +981,7 @@ HitResult calc_player_damage_enemy(void) {
     }
 
     if (battleStatus->currentAttackStatus & STATUS_FLAG_SHRINK && wasStatusInflicted) {
-        evt = start_script(&DoShrinkHit, EVT_PRIORITY_A, 0);
+        evt = start_script(&EVS_PlayShrinkHitFX, EVT_PRIORITY_A, 0);
         evt->varTable[0] = state->goalPos.x;
         evt->varTable[1] = state->goalPos.y;
         evt->varTable[2] = state->goalPos.z;
@@ -1094,7 +1094,7 @@ s32 dispatch_damage_event_player_0(s32 damageAmount, s32 event) {
     BattleStatus* battleStatus = &gBattleStatus;
 
     battleStatus->currentAttackElement = ELEMENT_END;
-    battleStatus->unk_19A = 0;
+    battleStatus->currentDamageSource = DMG_SRC_DEFAULT;
     return dispatch_damage_event_player(damageAmount, event, FALSE);
 }
 

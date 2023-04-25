@@ -44,7 +44,7 @@ API_CALLABLE(N(PartnerRideBeanstalk)) {
 }
 
 API_CALLABLE(N(SetScreenFadeAmount)) {
-    set_screen_overlay_params_back(1, script->varTable[0]);
+    set_screen_overlay_params_back(OVERLAY_VIEWPORT_COLOR, script->varTable[0]);
     return ApiStatus_DONE2;
 }
 

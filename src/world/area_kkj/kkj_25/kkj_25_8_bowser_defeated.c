@@ -38,8 +38,8 @@ API_CALLABLE(N(FadeScreenToRedAndWhite)) {
 
     switch (script->FT_state) {
         case TEMP_FADE_TO_RED:
-            set_screen_overlay_color(0, 208, 0, 0);
-            set_screen_overlay_params_front(1, script->FT_alpha);
+            set_screen_overlay_color(SCREEN_LAYER_FRONT, 208, 0, 0);
+            set_screen_overlay_params_front(OVERLAY_VIEWPORT_COLOR, script->FT_alpha);
             if (script->FT_alpha == 255) {
                 script->FT_alpha = 0;
                 script->FT_state = TEMP_FADE_TO_WHITE;
@@ -57,7 +57,7 @@ API_CALLABLE(N(FadeScreenToRedAndWhite)) {
                 (script->FT_alpha * 208) / 255,
                 (script->FT_alpha * 208) / 255
             );
-            set_screen_overlay_params_front(1, 255.0f);
+            set_screen_overlay_params_front(OVERLAY_VIEWPORT_COLOR, 255.0f);
             if (script->FT_alpha == 255) {
                 script->FT_state = TEMP_FADE_COMPLETE;
             }
@@ -82,7 +82,7 @@ API_CALLABLE(N(FadeScreenFromWhite)) {
         script->functionTemp[1] = 255;
     }
 
-    set_screen_overlay_params_front(1, script->functionTemp[1]);
+    set_screen_overlay_params_front(OVERLAY_VIEWPORT_COLOR, script->functionTemp[1]);
 
     if (script->functionTemp[1] == 0) {
         return ApiStatus_DONE2;
