@@ -701,7 +701,7 @@ EvtScript N(80222D9C) = {
         EVT_GOTO(0)
     EVT_END_IF
     EVT_CALL(StartRumble, 1)
-    EVT_CALL(func_8026DF88, -127, 1, LVar0)
+    EVT_CALL(func_8026DF88, ACTOR_SELF, 1, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(GetActorVar, ACTOR_SELF, 2, LVar0)
         EVT_IF_EQ(LVar0, 0)
@@ -722,7 +722,7 @@ EvtScript N(80222D9C) = {
 };
 
 EvtScript N(doDeath_80222F50) = {
-    EVT_CALL(func_8027D32C, -127)
+    EVT_CALL(func_8027D32C, ACTOR_SELF)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_SET(LVar2, 0)
     EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)

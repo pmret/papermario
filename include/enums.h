@@ -2668,6 +2668,36 @@ enum ActionRatings {
     ACTION_RATING_NICE_SUPER_COMBO  = 5  ///< 'Nice' but becomes 'Super' if nice hits > 2
 };
 
+enum {
+    BTL_UNK_00      = 0,
+    BTL_UNK_01      = 1,
+    BTL_UNK_02      = 2,
+    BTL_UNK_03      = 3,
+    BTL_UNK_04      = 4,
+    BTL_UNK_05      = 5,
+    BTL_UNK_06      = 6,
+    BTL_UNK_07      = 7,
+    BTL_UNK_08      = 8,
+    BTL_UNK_09      = 9,
+    BTL_UNK_10      = 10,
+    BTL_UNK_11      = 11,
+    BTL_UNK_12      = 12,
+    BTL_UNK_13      = 13,
+    BTL_UNK_14      = 14,
+    BTL_UNK_15      = 15,
+    BTL_UNK_16      = 16,
+    BTL_UNK_17      = 17,
+    BTL_UNK_18      = 18,
+    BTL_UNK_19      = 19,
+    BTL_UNK_20      = 20,
+    BTL_UNK_21      = 21,
+    BTL_UNK_22      = 22,
+    BTL_UNK_23      = 23,
+    BTL_UNK_24      = 24,
+    BTL_UNK_25      = 25,
+    BTL_UNK_26      = 26,
+};
+
 enum Iters {
     ITER_FIRST       = -1,
     ITER_NEXT        = 0,

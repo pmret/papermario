@@ -35,7 +35,7 @@ extern EvtScript N(EVS_UseMove3_Impl);
 
 EvtScript N(EVS_UseMove) = {
     EVT_CALL(ShowActionHud, TRUE)
-    EVT_CALL(func_80269EAC, 2)
+    EVT_CALL(func_80269EAC, BTL_UNK_02)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar1)
         EVT_CASE_EQ(0)

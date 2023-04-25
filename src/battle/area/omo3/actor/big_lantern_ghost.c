@@ -863,7 +863,7 @@ EvtScript N(setGhostNoTarget) = {
 };
 
 EvtScript N(onDeath) = {
-    EVT_EXEC_WAIT(D_8029AF08)
+    EVT_EXEC_WAIT(EVS_AnimateDeath)
     EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_EFFECT), LVar0)
     EVT_CALL(RemoveEffect, LVar0)
     EVT_CALL(RemoveActor, ACTOR_SELF)

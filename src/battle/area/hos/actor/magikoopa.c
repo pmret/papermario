@@ -258,7 +258,7 @@ EvtScript N(8021D890) = {
     EVT_END_IF
     EVT_RETURN
     EVT_LABEL(0)
-    EVT_CALL(func_8027D32C, -127)
+    EVT_CALL(func_8027D32C, ACTOR_SELF)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
     EVT_IF_FLAG(LVar0, 0x80000)
         EVT_CALL(SetPartScale, ACTOR_SELF, 3, EVT_FLOAT(0.4), EVT_FLOAT(0.4), EVT_FLOAT(0.4))
@@ -324,7 +324,7 @@ EvtScript N(8021D890) = {
 EvtScript N(runAway) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
-    EVT_CALL(func_8027D32C, -127)
+    EVT_CALL(func_8027D32C, ACTOR_SELF)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_IF_NE(LVar0, 57)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
@@ -349,7 +349,7 @@ EvtScript N(runAway) = {
     EVT_CALL(YieldTurn)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_EXEC_WAIT(ForceNextTarget)
-    EVT_CALL(func_8027D32C, -127)
+    EVT_CALL(func_8027D32C, ACTOR_SELF)
     EVT_CALL(RemoveActor, ACTOR_SELF)
     EVT_RETURN
     EVT_END

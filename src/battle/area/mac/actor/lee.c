@@ -343,7 +343,7 @@ EvtScript N(8021E0E0) = {
 
 EvtScript N(8021E118) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(func_8027D32C, -127)
+    EVT_CALL(func_8027D32C, ACTOR_SELF)
     EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
     EVT_WAIT(30)
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVarA)
@@ -402,7 +402,7 @@ EvtScript N(8021E118) = {
 };
 
 EvtScript N(8021E5DC) = {
-    EVT_CALL(func_8027D32C, -127)
+    EVT_CALL(func_8027D32C, ACTOR_SELF)
     EVT_SET(LVarA, LVar0)
     EVT_SET(LVarB, LVar1)
     EVT_SET(LVarC, LVar2)
@@ -2664,17 +2664,17 @@ EvtScript N(takeTurn_80224CA0) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_SlapOnce)
             EVT_SET(LocalFlag(0), 1)
             EVT_IF_EQ(LVarA, LVar8)
-                EVT_CALL(func_80269EAC, 12)
+                EVT_CALL(func_80269EAC, BTL_UNK_12)
             EVT_ELSE
-                EVT_CALL(func_80269EAC, 10)
+                EVT_CALL(func_80269EAC, BTL_UNK_10)
             EVT_END_IF
         EVT_ELSE
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_SlapBack)
             EVT_SET(LocalFlag(0), 0)
             EVT_IF_EQ(LVarA, LVar8)
-                EVT_CALL(func_80269EAC, 13)
+                EVT_CALL(func_80269EAC, BTL_UNK_13)
             EVT_ELSE
-                EVT_CALL(func_80269EAC, 11)
+                EVT_CALL(func_80269EAC, BTL_UNK_11)
             EVT_END_IF
         EVT_END_IF
         EVT_WAIT(2)
@@ -3177,7 +3177,7 @@ EvtScript N(takeTurn_80226004) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleWatt_Idle)
-    EVT_CALL(func_8026EA7C, -127, 1, 9)
+    EVT_CALL(func_8026EA7C, ACTOR_SELF, 1, 9)
     EVT_CALL(AddBattleCamZoom, 75)
     EVT_CALL(MoveBattleCamOver, 5)
     EVT_THREAD

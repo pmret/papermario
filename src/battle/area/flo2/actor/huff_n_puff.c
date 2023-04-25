@@ -754,43 +754,43 @@ EvtScript N(OnDeath) = {
     EVT_END_IF
     EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_TUFF_PUFF_BIT_ARRAY), LVar0)
     EVT_IF_FLAG(LVar0, 0x1)
-        EVT_CALL(func_80269EAC, 0)
+        EVT_CALL(func_80269EAC, BTL_UNK_00)
         EVT_CALL(DispatchEvent, ArrayVar(0), EVENT_DEATH)
     EVT_END_IF
     EVT_IF_FLAG(LVar0, 0x2)
-        EVT_CALL(func_80269EAC, 0)
+        EVT_CALL(func_80269EAC, BTL_UNK_00)
         EVT_CALL(DispatchEvent, ArrayVar(1), EVENT_DEATH)
     EVT_END_IF
     EVT_IF_FLAG(LVar0, 0x4)
-        EVT_CALL(func_80269EAC, 0)
+        EVT_CALL(func_80269EAC, BTL_UNK_00)
         EVT_CALL(DispatchEvent, ArrayVar(2), EVENT_DEATH)
     EVT_END_IF
     EVT_IF_FLAG(LVar0, 0x8)
-        EVT_CALL(func_80269EAC, 0)
+        EVT_CALL(func_80269EAC, BTL_UNK_00)
         EVT_CALL(DispatchEvent, ArrayVar(3), EVENT_DEATH)
     EVT_END_IF
     EVT_IF_FLAG(LVar0, 0x10)
-        EVT_CALL(func_80269EAC, 0)
+        EVT_CALL(func_80269EAC, BTL_UNK_00)
         EVT_CALL(DispatchEvent, ArrayVar(4), EVENT_DEATH)
     EVT_END_IF
     EVT_IF_FLAG(LVar0, 0x20)
-        EVT_CALL(func_80269EAC, 0)
+        EVT_CALL(func_80269EAC, BTL_UNK_00)
         EVT_CALL(DispatchEvent, ArrayVar(5), EVENT_DEATH)
     EVT_END_IF
     EVT_IF_FLAG(LVar0, 0x40)
-        EVT_CALL(func_80269EAC, 0)
+        EVT_CALL(func_80269EAC, BTL_UNK_00)
         EVT_CALL(DispatchEvent, ArrayVar(6), EVENT_DEATH)
     EVT_END_IF
     EVT_IF_FLAG(LVar0, 0x80)
-        EVT_CALL(func_80269EAC, 0)
+        EVT_CALL(func_80269EAC, BTL_UNK_00)
         EVT_CALL(DispatchEvent, ArrayVar(7), EVENT_DEATH)
     EVT_END_IF
     EVT_IF_FLAG(LVar0, 0x100)
-        EVT_CALL(func_80269EAC, 0)
+        EVT_CALL(func_80269EAC, BTL_UNK_00)
         EVT_CALL(DispatchEvent, ArrayVar(8), EVENT_DEATH)
     EVT_END_IF
     EVT_IF_FLAG(LVar0, 0x200)
-        EVT_CALL(func_80269EAC, 0)
+        EVT_CALL(func_80269EAC, BTL_UNK_00)
         EVT_CALL(DispatchEvent, ArrayVar(9), EVENT_DEATH)
     EVT_END_IF
     EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_TURN_NUMBER), LVar0)
@@ -1577,7 +1577,7 @@ EvtScript N(attackBodySlam) = {
     EVT_CALL(AddGoalPos, ACTOR_SELF, 0, LVar3, 5)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 0, -30, 0)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 20, FALSE, FALSE, FALSE)
-    EVT_CALL(func_80269EAC, 24)
+    EVT_CALL(func_80269EAC, BTL_UNK_24)
     EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetActorHP, ACTOR_SELF, LVar0)

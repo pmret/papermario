@@ -1694,7 +1694,7 @@ EvtScript N(hurricane) = {
     EVT_CALL(action_command_hurricane_init)
     EVT_CALL(SetupMashMeter, 1, 100, 0, 0, 0, 0)
     EVT_CALL(SetActionHudPrepareTime, 15)
-    EVT_CALL(func_80269EAC, 20)
+    EVT_CALL(func_80269EAC, BTL_UNK_20)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
     EVT_CALL(SetBattleCamTarget, -45, 54, 0)
     EVT_CALL(SetBattleCamOffsetZ, 0)

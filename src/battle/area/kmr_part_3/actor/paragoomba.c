@@ -482,7 +482,7 @@ EvtScript N(takeTurn_8021CDFC) = {
 extern EvtScript N(8021DC34);
 
 EvtScript N(8021D614) = {
-    EVT_CALL(func_8027D32C, -127)
+    EVT_CALL(func_8027D32C, ACTOR_SELF)
     EVT_CALL(SetPartFlags, ACTOR_SELF, 2, 0x00020005)
     EVT_CALL(SetPartFlags, ACTOR_SELF, 3, 0x00120004)
     EVT_CALL(SetPartFlags, ACTOR_SELF, 4, 0x00120004)

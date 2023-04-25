@@ -890,13 +890,13 @@ EvtScript EVS_Player_HandleEvent = {
                 EVT_ADD(LVar5, 5)
                 EVT_ADD(LVar6, 4)
                 EVT_ADD(LVar7, 5)
-                EVT_CALL(PlayEffect, EFFECT_RING_BLAST, 0, LVar5, LVar6, LVar7, EVT_FLOAT(1.5), 15, 0, 0, 0, 0, 0, 0, 0)
+                EVT_PLAY_EFFECT(EFFECT_RING_BLAST, 0, LVar5, LVar6, LVar7, EVT_FLOAT(1.5), 15)
                 EVT_WAIT(2)
                 EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar5, LVar6, LVar7)
                 EVT_ADD(LVar5, -5)
                 EVT_ADD(LVar6, 18)
                 EVT_ADD(LVar7, 5)
-                EVT_CALL(PlayEffect, EFFECT_RING_BLAST, 0, LVar5, LVar6, LVar7, EVT_FLOAT(1.5), 15, 0, 0, 0, 0, 0, 0, 0)
+                EVT_PLAY_EFFECT(EFFECT_RING_BLAST, 0, LVar5, LVar6, LVar7, EVT_FLOAT(1.5), 15)
             EVT_END_CHILD_THREAD
             EVT_SET_CONST(LVar1, ANIM_MarioB3_BurnHurt)
             EVT_SET(LVar2, 0)
@@ -930,7 +930,7 @@ EvtScript EVS_Player_HandleEvent = {
             EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_HurtFoot, ANIM_Mario1_HurtFoot, ANIM_Mario1_HurtFoot)
             EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
             EVT_CALL(func_80273444, 5, 0, 1)
-            EVT_CALL(ShowShockEffect, -127)
+            EVT_CALL(ShowShockEffect, ACTOR_SELF)
             EVT_SET_CONST(LVar1, ANIM_Mario1_HurtFoot)
             EVT_SET(LVar2, 0)
             EVT_EXEC_WAIT(D_802988F0)
@@ -1110,7 +1110,7 @@ EvtScript EVS_RunAwayNoCommand = {
         EVT_CHILD_THREAD
             EVT_LOOP(2)
                 EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-                EVT_CALL(PlayEffect, EFFECT_LANDING_DUST, 1, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 0, 0, 0, 0, 0, 0, 0, 0)
+                EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, LVar0, LVar1, LVar2, EVT_FLOAT(1.0))
                 EVT_WAIT(5)
             EVT_END_LOOP
         EVT_END_CHILD_THREAD
@@ -1135,7 +1135,7 @@ EvtScript EVS_RunAwayNoCommand = {
                 EVT_SUB(LVar0, 8)
                 EVT_ADD(LVar1, 14)
                 EVT_ADD(LVar2, 5)
-                EVT_CALL(PlayEffect, EFFECT_WALKING_DUST, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), EVT_FLOAT(1.0), 0, 0, 0, 0, 0, 0, 0)
+                EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), EVT_FLOAT(1.0))
                 EVT_WAIT(5)
             EVT_END_LOOP
         EVT_END_CHILD_THREAD
@@ -1224,7 +1224,7 @@ EvtScript EVS_RunAwayStart = {
         EVT_CHILD_THREAD
             EVT_LOOP(2)
                 EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-                EVT_CALL(PlayEffect, EFFECT_LANDING_DUST, 1, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 0, 0, 0, 0, 0, 0, 0, 0)
+                EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, LVar0, LVar1, LVar2, EVT_FLOAT(1.0))
                 EVT_WAIT(5)
             EVT_END_LOOP
         EVT_END_CHILD_THREAD
@@ -1249,7 +1249,7 @@ EvtScript EVS_RunAwayStart = {
                 EVT_SUB(LVar0, 8)
                 EVT_ADD(LVar1, 14)
                 EVT_ADD(LVar2, 5)
-                EVT_CALL(PlayEffect, EFFECT_WALKING_DUST, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), EVT_FLOAT(1.0), 0, 0, 0, 0, 0, 0, 0)
+                EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), EVT_FLOAT(1.0))
                 EVT_WAIT(5)
             EVT_END_LOOP
         EVT_END_CHILD_THREAD
@@ -1316,7 +1316,7 @@ EvtScript EVS_PlayerDies = {
     EVT_CALL(SetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar2, 20)
-    EVT_CALL(PlayEffect, EFFECT_WALKING_DUST, 1, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), EVT_FLOAT(1.0), 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 1, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), EVT_FLOAT(1.0))
     EVT_WAIT(15)
     EVT_RETURN
     EVT_END
@@ -1337,7 +1337,7 @@ EvtScript D_80287404 = {
         EVT_SET(LVar3, LVar1)
         EVT_ADD(LVar3, 10)
         EVT_ADD(LVar3, 2)
-        EVT_CALL(PlayEffect, EFFECT_RADIAL_SHIMMER, 1, LVar0, LVar3, LVar2, EVT_FLOAT(1.0), 30, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_RADIAL_SHIMMER, 1, LVar0, LVar3, LVar2, EVT_FLOAT(1.0), 30)
         EVT_CALL(MakeItemEntity, LVarA, LVar0, LVar1, LVar2, 1, 0)
         EVT_SET(LVarA, LVar0)
         EVT_CALL(GiveRefund)
@@ -1354,7 +1354,7 @@ EvtScript D_80287404 = {
         EVT_SET(LVar3, LVar1)
         EVT_ADD(LVar3, 10)
         EVT_ADD(LVar3, 2)
-        EVT_CALL(PlayEffect, EFFECT_RADIAL_SHIMMER, 1, LVar0, LVar3, LVar2, EVT_FLOAT(1.0), 30, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_RADIAL_SHIMMER, 1, LVar0, LVar3, LVar2, EVT_FLOAT(1.0), 30)
         EVT_CALL(MakeItemEntity, LVarA, LVar0, LVar1, LVar2, 1, 0)
         EVT_SET(LVarA, LVar0)
         EVT_WAIT(15)
@@ -1470,7 +1470,7 @@ EvtScript EVS_UseLifeShroom = {
     EVT_END_IF
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_372)
     EVT_ADD(LVar4, 15)
-    EVT_CALL(PlayEffect, EFFECT_ENERGY_IN_OUT, 3, LVar3, LVar4, LVar5, EVT_FLOAT(1.0), 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_ENERGY_IN_OUT, 3, LVar3, LVar4, LVar5, EVT_FLOAT(1.0))
     EVT_SET(LVar0, LVarF)
     EVT_LOOP(4)
         EVT_CALL(SetItemFlags, LVarA, 64, 1)
@@ -1481,13 +1481,13 @@ EvtScript EVS_UseLifeShroom = {
     EVT_CALL(RemoveEffect, LVar0)
     EVT_CALL(RemoveItemEntity, LVarA)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2055)
-    EVT_CALL(PlayEffect, EFFECT_STARS_SHIMMER, 1, LVar3, LVar4, LVar5, 70, 70, 10, 20, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_STARS_SHIMMER, 1, LVar3, LVar4, LVar5, 70, 70, 10, 20)
     EVT_WAIT(20)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_373)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_CALL(PlayEffect, EFFECT_STARS_SHIMMER, 2, LVar0, LVar1, LVar2, 50, 20, 32, 30, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_STARS_SHIMMER, 2, LVar0, LVar1, LVar2, 50, 20, 32, 30)
     EVT_WAIT(40)
-    EVT_CALL(PlayEffect, EFFECT_STARS_SHIMMER, 2, LVar0, LVar1, LVar2, 30, 50, 32, 30, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_STARS_SHIMMER, 2, LVar0, LVar1, LVar2, 30, 50, 32, 30)
     EVT_CHILD_THREAD
         EVT_LOOP(3)
             EVT_CALL(SetActorDispOffset, ACTOR_PLAYER, 1, 0, 0)
@@ -1518,7 +1518,7 @@ EvtScript EVS_UseLifeShroom = {
     EVT_CALL(ConsumeLifeShroom)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 25)
-    EVT_CALL(PlayEffect, EFFECT_RECOVER, 0, LVar0, LVar1, LVar2, LVar3, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_RECOVER, 0, LVar0, LVar1, LVar2, LVar3)
     EVT_CALL(FreezeBattleCam, 0)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
     EVT_CALL(MoveBattleCamOver, 15)
@@ -1543,7 +1543,7 @@ EvtScript EVS_UseLifeShroom = {
         EVT_LOOP(5)
             EVT_WAIT(2)
             EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-            EVT_CALL(PlayEffect, EFFECT_MISC_PARTICLES, 2, LVar0, LVar1, LVar2, 20, 20, EVT_FLOAT(1.0), 10, 50, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_MISC_PARTICLES, 2, LVar0, LVar1, LVar2, 20, 20, EVT_FLOAT(1.0), 10, 50)
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_160)
@@ -1839,7 +1839,7 @@ EvtScript EVS_PlayerRegainAbility = {
     EVT_CALL(func_80261FB4)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 20)
-    EVT_CALL(PlayEffect, EFFECT_STARS_SHIMMER, 0, LVar0, LVar1, LVar2, 30, 30, 10, 30, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_STARS_SHIMMER, 0, LVar0, LVar1, LVar2, 30, 30, 10, 30)
     EVT_CALL(RemoveItemEntity, LVarA)
     EVT_CALL(func_8026BF48, 0)
     EVT_RETURN

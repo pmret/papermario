@@ -899,7 +899,7 @@ EvtScript N(healOne) = {
     EVT_CALL(GetEnemyMaxHP, ACTOR_SELF, LVarA)
     EVT_CALL(GetActorHP, ACTOR_SELF, LVarB)
     EVT_IF_NE(LVarA, LVarB)
-        EVT_SET(LVar8, -127)
+        EVT_SET(LVar8, ACTOR_SELF)
         EVT_GOTO(100)
     EVT_END_IF
     EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)

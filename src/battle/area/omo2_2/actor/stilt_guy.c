@@ -510,7 +510,7 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(DoImmune)
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_CALL(func_80269E80, LVar0)
-            EVT_IF_NE(LVar0, 9)
+            EVT_IF_NE(LVar0, BTL_UNK_09)
                 EVT_SET(LVar0, 2)
                 EVT_SET(LVar1, ANIM_StiltGuy_Anim09)
                 EVT_SET(LVar2, ANIM_StiltGuy_Anim0A)
@@ -796,7 +796,7 @@ EvtScript N(fallOff) = {
 };
 
 EvtScript N(onDeath) = {
-    EVT_EXEC_WAIT(D_8029AF08)
+    EVT_EXEC_WAIT(EVS_AnimateDeath)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, ACTOR_PART_FLAG_INVISIBLE, TRUE)
     EVT_CALL(GetActorVar, ACTOR_ENEMY1, 2, LVar0)

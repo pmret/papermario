@@ -653,9 +653,9 @@ EvtScript N(handleEvent) = {
                 EVT_ELSE
                     EVT_CALL(func_80269E80, LVar0)
                     EVT_SWITCH(LVar0)
-                        EVT_CASE_OR_EQ(6)
-                        EVT_CASE_OR_EQ(7)
-                        EVT_CASE_OR_EQ(9)
+                        EVT_CASE_OR_EQ(BTL_UNK_06)
+                        EVT_CASE_OR_EQ(BTL_UNK_07)
+                        EVT_CASE_OR_EQ(BTL_UNK_09)
                             EVT_EXEC_WAIT(N(80235168))
                         EVT_END_CASE_GROUP
                         EVT_CASE_DEFAULT
@@ -682,9 +682,9 @@ EvtScript N(handleEvent) = {
                 EVT_ELSE
                     EVT_CALL(func_80269E80, LVar0)
                     EVT_SWITCH(LVar0)
-                        EVT_CASE_OR_EQ(6)
-                        EVT_CASE_OR_EQ(7)
-                        EVT_CASE_OR_EQ(9)
+                        EVT_CASE_OR_EQ(BTL_UNK_06)
+                        EVT_CASE_OR_EQ(BTL_UNK_07)
+                        EVT_CASE_OR_EQ(BTL_UNK_09)
                             EVT_EXEC_WAIT(N(80235168))
                         EVT_END_CASE_GROUP
                         EVT_CASE_DEFAULT
@@ -713,9 +713,9 @@ EvtScript N(handleEvent) = {
                 EVT_ELSE
                     EVT_CALL(func_80269E80, LVarA)
                     EVT_SWITCH(LVarA)
-                        EVT_CASE_OR_EQ(6)
-                        EVT_CASE_OR_EQ(7)
-                        EVT_CASE_OR_EQ(9)
+                        EVT_CASE_OR_EQ(BTL_UNK_06)
+                        EVT_CASE_OR_EQ(BTL_UNK_07)
+                        EVT_CASE_OR_EQ(BTL_UNK_09)
                             EVT_EXEC_WAIT(N(80235168))
                         EVT_END_CASE_GROUP
                         EVT_CASE_DEFAULT
@@ -739,9 +739,9 @@ EvtScript N(handleEvent) = {
                 EVT_ELSE
                     EVT_CALL(func_80269E80, LVarA)
                     EVT_SWITCH(LVarA)
-                        EVT_CASE_OR_EQ(6)
-                        EVT_CASE_OR_EQ(7)
-                        EVT_CASE_OR_EQ(9)
+                        EVT_CASE_OR_EQ(BTL_UNK_06)
+                        EVT_CASE_OR_EQ(BTL_UNK_07)
+                        EVT_CASE_OR_EQ(BTL_UNK_09)
                             EVT_EXEC_WAIT(N(80235168))
                             EVT_SET_CONST(LVar1, -1)
                         EVT_END_CASE_GROUP
@@ -1156,7 +1156,7 @@ EvtScript N(doSpinSmashHit) = {
 
 EvtScript N(80235168) = {
     EVT_CALL(func_80269E80, LVar0)
-    EVT_IF_EQ(LVar0, 9)
+    EVT_IF_EQ(LVar0, BTL_UNK_09)
         EVT_CALL(SetAnimation, ACTOR_SELF, 10, ANIM_ShyStackDamage_Anim01)
     EVT_ELSE
         EVT_CALL(SetAnimation, ACTOR_SELF, 10, ANIM_ShyStackDamage_Anim00)
@@ -1433,7 +1433,7 @@ EvtScript N(launch_rock) = {
 };
 
 EvtScript N(onDeath) = {
-    EVT_EXEC_WAIT(D_8029AF08)
+    EVT_EXEC_WAIT(EVS_AnimateDeath)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, ACTOR_PART_FLAG_INVISIBLE, TRUE)
     EVT_CALL(GetActorVar, ACTOR_ENEMY1, 3, LVar0)
     EVT_ADD(LVar0, 1)

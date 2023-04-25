@@ -1196,7 +1196,7 @@ EvtScript N(8021FA54) = {
             EVT_END_THREAD
         EVT_END_IF
     EVT_END_IF
-    EVT_EXEC_WAIT(D_8029AF08)
+    EVT_EXEC_WAIT(EVS_AnimateDeath)
     EVT_LABEL(0)
     EVT_CALL(ActorExists, ACTOR_ENEMY1, LVar0)
     EVT_IF_NE(LVar0, FALSE)

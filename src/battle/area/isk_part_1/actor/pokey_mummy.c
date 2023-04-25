@@ -248,9 +248,9 @@ EvtScript N(handleEvent_80219050) = {
                 EVT_ELSE
                     EVT_CALL(func_80269E80, LVar0)
                     EVT_SWITCH(LVar0)
-                        EVT_CASE_OR_EQ(6)
-                        EVT_CASE_OR_EQ(7)
-                        EVT_CASE_OR_EQ(9)
+                        EVT_CASE_OR_EQ(BTL_UNK_06)
+                        EVT_CASE_OR_EQ(BTL_UNK_07)
+                        EVT_CASE_OR_EQ(BTL_UNK_09)
                             EVT_EXEC_WAIT(N(8021BDE4))
                         EVT_END_CASE_GROUP
                         EVT_CASE_DEFAULT
@@ -277,9 +277,9 @@ EvtScript N(handleEvent_80219050) = {
                 EVT_ELSE
                     EVT_CALL(func_80269E80, LVar0)
                     EVT_SWITCH(LVar0)
-                        EVT_CASE_OR_EQ(6)
-                        EVT_CASE_OR_EQ(7)
-                        EVT_CASE_OR_EQ(9)
+                        EVT_CASE_OR_EQ(BTL_UNK_06)
+                        EVT_CASE_OR_EQ(BTL_UNK_07)
+                        EVT_CASE_OR_EQ(BTL_UNK_09)
                             EVT_EXEC_WAIT(N(8021BDE4))
                         EVT_END_CASE_GROUP
                         EVT_CASE_DEFAULT
@@ -308,9 +308,9 @@ EvtScript N(handleEvent_80219050) = {
                 EVT_ELSE
                     EVT_CALL(func_80269E80, LVarA)
                     EVT_SWITCH(LVarA)
-                        EVT_CASE_OR_EQ(6)
-                        EVT_CASE_OR_EQ(7)
-                        EVT_CASE_OR_EQ(9)
+                        EVT_CASE_OR_EQ(BTL_UNK_06)
+                        EVT_CASE_OR_EQ(BTL_UNK_07)
+                        EVT_CASE_OR_EQ(BTL_UNK_09)
                             EVT_EXEC_WAIT(N(8021BDE4))
                         EVT_END_CASE_GROUP
                         EVT_CASE_DEFAULT
@@ -332,9 +332,9 @@ EvtScript N(handleEvent_80219050) = {
                 EVT_ELSE
                     EVT_CALL(func_80269E80, LVarA)
                     EVT_SWITCH(LVarA)
-                        EVT_CASE_OR_EQ(6)
-                        EVT_CASE_OR_EQ(7)
-                        EVT_CASE_OR_EQ(9)
+                        EVT_CASE_OR_EQ(BTL_UNK_06)
+                        EVT_CASE_OR_EQ(BTL_UNK_07)
+                        EVT_CASE_OR_EQ(BTL_UNK_09)
                             EVT_EXEC_WAIT(N(8021BDE4))
                         EVT_END_CASE_GROUP
                         EVT_CASE_DEFAULT

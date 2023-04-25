@@ -481,7 +481,7 @@ EvtScript N(takeTurn_8021B2C8) = {
 };
 
 EvtScript N(doDeath_8021B388) = {
-    EVT_CALL(func_8027D32C, -127)
+    EVT_CALL(func_8027D32C, ACTOR_SELF)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_SET(LVar2, 0)
     EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)

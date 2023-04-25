@@ -2589,7 +2589,7 @@ void btl_state_update_player_move(void) {
         battleStatus->unk_86 = 127;
         battleStatus->blockResult = 127;
         battleStatus->lastAttackDamage = 0;
-        battleStatus->unk_19A = 0;
+        battleStatus->unk_19A = BTL_UNK_00;
         gBattleStatus.flags1 &= ~BS_FLAGS1_AUTO_SUCCEED_ACTION;
         gBattleStatus.flags1 &= ~BS_FLAGS1_MENU_OPEN;
         reset_actor_turn_info();
@@ -3146,7 +3146,7 @@ void btl_state_update_partner_move(void) {
             battleStatus->unk_8C = 0;
             battleStatus->unk_86 = 127;
             battleStatus->blockResult = 127;
-            battleStatus->unk_19A = 0;
+            battleStatus->unk_19A = BTL_UNK_00;
             gBattleStatus.flags1 &= ~BS_FLAGS1_AUTO_SUCCEED_ACTION;
             gBattleStatus.flags1 &= ~BS_FLAGS1_MENU_OPEN;
             reset_actor_turn_info();
@@ -3573,7 +3573,7 @@ void btl_state_update_enemy_move(void) {
             battleStatus->actionSuccess = 0;
             battleStatus->unk_86 = 127;
             battleStatus->blockResult = 127;
-            battleStatus->unk_19A = 0;
+            battleStatus->unk_19A = BTL_UNK_00;
             reset_actor_turn_info();
             gBattleStatus.flags1 |= BS_FLAGS1_100;
             player->statusAfflicted = 0;
@@ -3849,7 +3849,7 @@ void btl_state_update_first_strike(void) {
             func_80263230(player, enemy);
             battleStatus->unk_8C = 0;
             battleStatus->lastAttackDamage = 0;
-            battleStatus->unk_19A = 0;
+            battleStatus->unk_19A = BTL_UNK_00;
             gBattleStatus.flags1 &= ~BS_FLAGS1_MENU_OPEN;
             gBattleStatus.flags2 |= BS_FLAGS2_1000000;
             gBattleStatus.flags1 &= ~BS_FLAGS1_PARTNER_ACTING;
@@ -4052,7 +4052,7 @@ void btl_state_update_partner_striking_first(void) {
             partner->targetPartIndex = target->partID;
             battleStatus->unk_8C = 0;
             battleStatus->lastAttackDamage = 0;
-            battleStatus->unk_19A = 0;
+            battleStatus->unk_19A = BTL_UNK_00;
             gBattleStatus.flags1 &= ~BS_FLAGS1_MENU_OPEN;
             gBattleStatus.flags2 |= BS_FLAGS2_1000000;
             gBattleStatus.flags1 |= BS_FLAGS1_PARTNER_ACTING;
@@ -4203,7 +4203,7 @@ void btl_state_update_enemy_striking_first(void) {
         case BTL_SUBSTATE_ENEMY_FIRST_STRIKE_INIT:
             battleStatus->unk_8C = 0;
             battleStatus->lastAttackDamage = 0;
-            battleStatus->unk_19A = 0;
+            battleStatus->unk_19A = BTL_UNK_00;
             playerData->enemyFirstStrikes++;
             battleStatus->flags1 &= ~BS_FLAGS1_MENU_OPEN;
             D_8029F254 = 0;

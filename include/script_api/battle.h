@@ -371,7 +371,7 @@ extern EvtScript D_8029A76C;
 extern EvtScript D_80294720;
 extern EvtScript DoImmune;
 extern EvtScript DoDeath;
-extern EvtScript D_8029AF08;
+extern EvtScript EVS_AnimateDeath;
 extern EvtScript Collapse;
 extern EvtScript DoScareAway;
 extern EvtScript DoSpinSmashHit;

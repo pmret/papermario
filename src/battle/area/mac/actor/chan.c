@@ -161,7 +161,7 @@ EvtScript N(idle_8021A11C) = {
 };
 
 EvtScript N(8021A12C) = {
-    EVT_CALL(func_8027D32C, -127)
+    EVT_CALL(func_8027D32C, ACTOR_SELF)
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 2)
     EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 0, 16)
     EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -9)

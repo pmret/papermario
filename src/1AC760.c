@@ -917,7 +917,7 @@ s32 dispatch_damage_event_partner(s32 damageAmount, s32 event, s32 stopMotion) {
 
     battleStatus->lastAttackDamage += hpChange;
     partner->lastDamageTaken = battleStatus->lastAttackDamage;
-    battleStatus->unk_19A = 0;
+    battleStatus->unk_19A = BTL_UNK_00;
     if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
         if (event == EVENT_HIT_COMBO) {
             event = EVENT_HIT;

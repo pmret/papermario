@@ -140,21 +140,21 @@ s32 N(IdleAnimations_8022464C)[] = {
 
 EvtScript N(80224658) = {
     EVT_SET(LVarA, LVar0)
-    EVT_CALL(func_8027D32C, -127)
+    EVT_CALL(func_8027D32C, ACTOR_SELF)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, LVarA, LVar1)
     EVT_WAIT(10)
     EVT_CALL(func_80269E80, LVar5)
     EVT_SWITCH(LVar5)
-        EVT_CASE_OR_EQ(10)
-        EVT_CASE_OR_EQ(14)
-        EVT_CASE_OR_EQ(12)
-        EVT_CASE_OR_EQ(16)
-        EVT_CASE_OR_EQ(11)
-        EVT_CASE_OR_EQ(15)
-        EVT_CASE_OR_EQ(13)
-        EVT_CASE_OR_EQ(17)
-        EVT_CASE_OR_EQ(2)
+        EVT_CASE_OR_EQ(BTL_UNK_10)
+        EVT_CASE_OR_EQ(BTL_UNK_14)
+        EVT_CASE_OR_EQ(BTL_UNK_12)
+        EVT_CASE_OR_EQ(BTL_UNK_16)
+        EVT_CASE_OR_EQ(BTL_UNK_11)
+        EVT_CASE_OR_EQ(BTL_UNK_15)
+        EVT_CASE_OR_EQ(BTL_UNK_13)
+        EVT_CASE_OR_EQ(BTL_UNK_17)
+        EVT_CASE_OR_EQ(BTL_UNK_02)
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
             EVT_SET(LVar2, 0)
@@ -184,7 +184,7 @@ EvtScript N(80224658) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, LVarA, ANIM_JrTroopa_Defeated)
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, LVarA, EVT_PTR(N(IdleAnimations_8022464C)))
     EVT_WAIT(60)
-    EVT_CALL(SetActorFlagBits, ACTOR_SELF, 0x00400000, TRUE)
+    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, TRUE)
     EVT_RETURN
     EVT_END
 };

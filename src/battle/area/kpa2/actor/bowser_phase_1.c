@@ -327,8 +327,8 @@ EvtScript N(handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_CALL(func_80269E80, LVar2)
             EVT_SWITCH(LVar2)
-                EVT_CASE_OR_EQ(18)
-                EVT_CASE_OR_EQ(21)
+                EVT_CASE_OR_EQ(BTL_UNK_18)
+                EVT_CASE_OR_EQ(BTL_UNK_21)
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBowser_Mock)
                     EVT_WAIT(30)
                 EVT_END_CASE_GROUP
@@ -468,15 +468,15 @@ EvtScript N(onDeath) = {
     EVT_END_IF
     EVT_CALL(func_80269E80, LVar5)
     EVT_SWITCH(LVar5)
-        EVT_CASE_OR_EQ(10)
-        EVT_CASE_OR_EQ(14)
-        EVT_CASE_OR_EQ(12)
-        EVT_CASE_OR_EQ(16)
-        EVT_CASE_OR_EQ(11)
-        EVT_CASE_OR_EQ(15)
-        EVT_CASE_OR_EQ(13)
-        EVT_CASE_OR_EQ(17)
-        EVT_CASE_OR_EQ(2)
+        EVT_CASE_OR_EQ(BTL_UNK_10)
+        EVT_CASE_OR_EQ(BTL_UNK_14)
+        EVT_CASE_OR_EQ(BTL_UNK_12)
+        EVT_CASE_OR_EQ(BTL_UNK_16)
+        EVT_CASE_OR_EQ(BTL_UNK_11)
+        EVT_CASE_OR_EQ(BTL_UNK_15)
+        EVT_CASE_OR_EQ(BTL_UNK_13)
+        EVT_CASE_OR_EQ(BTL_UNK_17)
+        EVT_CASE_OR_EQ(BTL_UNK_02)
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
             EVT_SET(LocalFlag(0), 0)
@@ -1072,7 +1072,7 @@ EvtScript N(attackHeavyJump) = {
     EVT_END_IF
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarF)
     EVT_IF_NOT_FLAG(LVarF, ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED)
-        EVT_CALL(func_80269EAC, 24)
+        EVT_CALL(func_80269EAC, BTL_UNK_24)
     EVT_END_IF
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 0, LVar0, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SET(LVar0, -1)
@@ -1268,11 +1268,11 @@ EvtScript N(attackClawSwipe) = {
     EVT_CALL(GetPartEventFlags, ACTOR_SELF, 1, LVar0)
     EVT_IF_FLAG(LVar0, ACTOR_EVENT_FLAG_ENCHANTED)
         EVT_SET(LVar0, 12)
-        EVT_CALL(func_80269EAC, 12)
+        EVT_CALL(func_80269EAC, BTL_UNK_12)
         EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, DMG_STATUS_CHANCE(STATUS_FLAG_POISON, 3, 100), LVar0, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_ELSE
         EVT_SET(LVar0, 6)
-        EVT_CALL(func_80269EAC, 12)
+        EVT_CALL(func_80269EAC, BTL_UNK_12)
         EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, DMG_STATUS_CHANCE(STATUS_FLAG_POISON, 3, 100), LVar0, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_END_IF
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
@@ -1566,7 +1566,7 @@ EvtScript N(onBurnHit) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
     EVT_CALL(func_80269E80, LVar3)
     EVT_SWITCH(LVar3)
-        EVT_CASE_EQ(9)
+        EVT_CASE_EQ(BTL_UNK_09)
             EVT_CALL(GetOriginalActorType, ACTOR_SELF, LVar7)
             EVT_SWITCH(LVar7)
                 EVT_CASE_OR_EQ(ACTOR_TYPE_MONTY_MOLE)

@@ -522,19 +522,19 @@ EvtScript N(nextTurn_8022BB44) = {
 };
 
 EvtScript N(8022BF1C) = {
-    EVT_CALL(func_8027D32C, -127)
+    EVT_CALL(func_8027D32C, ACTOR_SELF)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(func_80269E80, LVar5)
     EVT_SWITCH(LVar5)
-        EVT_CASE_OR_EQ(10)
-        EVT_CASE_OR_EQ(14)
-        EVT_CASE_OR_EQ(12)
-        EVT_CASE_OR_EQ(16)
-        EVT_CASE_OR_EQ(11)
-        EVT_CASE_OR_EQ(15)
-        EVT_CASE_OR_EQ(13)
-        EVT_CASE_OR_EQ(17)
-        EVT_CASE_OR_EQ(2)
+        EVT_CASE_OR_EQ(BTL_UNK_10)
+        EVT_CASE_OR_EQ(BTL_UNK_14)
+        EVT_CASE_OR_EQ(BTL_UNK_12)
+        EVT_CASE_OR_EQ(BTL_UNK_16)
+        EVT_CASE_OR_EQ(BTL_UNK_11)
+        EVT_CASE_OR_EQ(BTL_UNK_15)
+        EVT_CASE_OR_EQ(BTL_UNK_13)
+        EVT_CASE_OR_EQ(BTL_UNK_17)
+        EVT_CASE_OR_EQ(BTL_UNK_02)
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
             EVT_SET(LVar2, 0)
