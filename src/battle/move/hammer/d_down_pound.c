@@ -25,7 +25,7 @@ extern EvtScript N(UseMove_Impl);
 
 EvtScript N(EVS_UseMove) = {
     EVT_CALL(ShowActionHud, TRUE)
-    EVT_CALL(func_80269EAC, BTL_UNK_03)
+    EVT_CALL(SetDamageSource, DMG_SRC_D_DOWN_POUND)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar1)
         EVT_CASE_EQ(0)

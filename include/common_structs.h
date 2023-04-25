@@ -956,7 +956,7 @@ typedef struct BattleStatus {
     /* 0x197 */ s8 targetHomeIndex; /* some sort of home index used for target list construction */
     /* 0x198 */ s8 powerBounceCounter;
     /* 0x199 */ s8 wasStatusInflicted; /* during last attack */
-    /* 0x19A */ u8 unk_19A;
+    /* 0x19A */ u8 currentDamageSource;
     /* 0x19B */ char unk_19B[5];
     /* 0x1A0 */ s16 currentTargetID; /* selected? */
     /* 0x1A2 */ s8 currentTargetPart; /* selected? */

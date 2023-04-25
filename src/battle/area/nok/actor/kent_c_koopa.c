@@ -434,8 +434,8 @@ EvtScript N(handleEvent_80227E08) = {
                 EVT_SUB(LVar0, 1)
                 EVT_CALL(SetActorVar, ACTOR_SELF, 4, LVar0)
             EVT_END_IF
-            EVT_CALL(func_80269E80, LVar0)
-            EVT_IF_EQ(LVar0, BTL_UNK_22)
+            EVT_CALL(GetDamageSource, LVar0)
+            EVT_IF_EQ(LVar0, DMG_SRC_POW_BLOCK)
                 EVT_CALL(SetActorVar, ACTOR_SELF, 4, 0)
             EVT_END_IF
             EVT_CALL(GetActorVar, ACTOR_SELF, 4, LVar0)
@@ -694,7 +694,7 @@ EvtScript N(shellToss_KentC) = {
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarE)
             EVT_IF_NOT_FLAG(LVarE, STATUS_FLAG_SHRINK)
-                EVT_CALL(func_80269EAC, BTL_UNK_24)
+                EVT_CALL(SetDamageSource, DMG_SRC_CRUSH)
             EVT_END_IF
             EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, SUPPRESS_EVENT_ALL, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
             EVT_SET(LVarA, 0)
@@ -717,7 +717,7 @@ EvtScript N(shellToss_KentC) = {
         EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, 0, LVar2)
         EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-        EVT_CALL(func_80269EAC, BTL_UNK_25)
+        EVT_CALL(SetDamageSource, DMG_SRC_CRUSH_PARTNER)
         EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_ALL, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
         EVT_CALL(GetBattleFlags, LVar0)
         EVT_IF_NOT_FLAG(LVar0, BS_FLAGS1_ATK_BLOCKED)
@@ -914,7 +914,7 @@ EvtScript N(tackle_KentC) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarF)
     EVT_IF_NOT_FLAG(LVarF, 0x80000)
-        EVT_CALL(func_80269EAC, BTL_UNK_24)
+        EVT_CALL(SetDamageSource, DMG_SRC_CRUSH)
     EVT_END_IF
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, SUPPRESS_EVENT_ALL, 0, 10, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVarF)

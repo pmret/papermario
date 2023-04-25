@@ -554,7 +554,7 @@ EvtScript N(takeTurn) = {
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
-        EVT_CALL(func_80269EAC, BTL_UNK_01)
+        EVT_CALL(SetDamageSource, DMG_SRC_BABY_BLOOPER_SELF)
         EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_UNBLOCKABLE | DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 2, BS_FLAGS1_40)
         EVT_CALL(StartRumble, 2)
         EVT_CALL(GetLastDamage, ACTOR_PLAYER, LVar3)

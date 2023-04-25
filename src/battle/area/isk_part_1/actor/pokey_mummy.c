@@ -246,11 +246,11 @@ EvtScript N(handleEvent_80219050) = {
                     EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar1)
                     EVT_EXEC_WAIT(DoNormalHit)
                 EVT_ELSE
-                    EVT_CALL(func_80269E80, LVar0)
+                    EVT_CALL(GetDamageSource, LVar0)
                     EVT_SWITCH(LVar0)
-                        EVT_CASE_OR_EQ(BTL_UNK_06)
-                        EVT_CASE_OR_EQ(BTL_UNK_07)
-                        EVT_CASE_OR_EQ(BTL_UNK_09)
+                        EVT_CASE_OR_EQ(DMG_SRC_SHELL_TOSS)
+                        EVT_CASE_OR_EQ(DMG_SRC_POWER_SHELL)
+                        EVT_CASE_OR_EQ(DMG_SRC_FIRE_SHELL)
                             EVT_EXEC_WAIT(N(8021BDE4))
                         EVT_END_CASE_GROUP
                         EVT_CASE_DEFAULT
@@ -275,11 +275,11 @@ EvtScript N(handleEvent_80219050) = {
                     EVT_EXEC_WAIT(DoNormalHit)
                     EVT_WAIT(10)
                 EVT_ELSE
-                    EVT_CALL(func_80269E80, LVar0)
+                    EVT_CALL(GetDamageSource, LVar0)
                     EVT_SWITCH(LVar0)
-                        EVT_CASE_OR_EQ(BTL_UNK_06)
-                        EVT_CASE_OR_EQ(BTL_UNK_07)
-                        EVT_CASE_OR_EQ(BTL_UNK_09)
+                        EVT_CASE_OR_EQ(DMG_SRC_SHELL_TOSS)
+                        EVT_CASE_OR_EQ(DMG_SRC_POWER_SHELL)
+                        EVT_CASE_OR_EQ(DMG_SRC_FIRE_SHELL)
                             EVT_EXEC_WAIT(N(8021BDE4))
                         EVT_END_CASE_GROUP
                         EVT_CASE_DEFAULT
@@ -306,11 +306,11 @@ EvtScript N(handleEvent_80219050) = {
                 EVT_IF_EQ(LVarA, 3)
                     EVT_EXEC_WAIT(DoBurnHit)
                 EVT_ELSE
-                    EVT_CALL(func_80269E80, LVarA)
+                    EVT_CALL(GetDamageSource, LVarA)
                     EVT_SWITCH(LVarA)
-                        EVT_CASE_OR_EQ(BTL_UNK_06)
-                        EVT_CASE_OR_EQ(BTL_UNK_07)
-                        EVT_CASE_OR_EQ(BTL_UNK_09)
+                        EVT_CASE_OR_EQ(DMG_SRC_SHELL_TOSS)
+                        EVT_CASE_OR_EQ(DMG_SRC_POWER_SHELL)
+                        EVT_CASE_OR_EQ(DMG_SRC_FIRE_SHELL)
                             EVT_EXEC_WAIT(N(8021BDE4))
                         EVT_END_CASE_GROUP
                         EVT_CASE_DEFAULT
@@ -330,11 +330,11 @@ EvtScript N(handleEvent_80219050) = {
                 EVT_IF_EQ(LVarA, 3)
                     EVT_EXEC_WAIT(DoBurnHit)
                 EVT_ELSE
-                    EVT_CALL(func_80269E80, LVarA)
+                    EVT_CALL(GetDamageSource, LVarA)
                     EVT_SWITCH(LVarA)
-                        EVT_CASE_OR_EQ(BTL_UNK_06)
-                        EVT_CASE_OR_EQ(BTL_UNK_07)
-                        EVT_CASE_OR_EQ(BTL_UNK_09)
+                        EVT_CASE_OR_EQ(DMG_SRC_SHELL_TOSS)
+                        EVT_CASE_OR_EQ(DMG_SRC_POWER_SHELL)
+                        EVT_CASE_OR_EQ(DMG_SRC_FIRE_SHELL)
                             EVT_EXEC_WAIT(N(8021BDE4))
                         EVT_END_CASE_GROUP
                         EVT_CASE_DEFAULT

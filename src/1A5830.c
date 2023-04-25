@@ -838,7 +838,7 @@ s32 dispatch_damage_event_actor(Actor* actor, s32 damageAmount, s32 originalEven
 
     battleStatus->lastAttackDamage += hpChange;
     actor->lastDamageTaken = battleStatus->lastAttackDamage;
-    battleStatus->unk_19A = BTL_UNK_00;
+    battleStatus->currentDamageSource = DMG_SRC_DEFAULT;
     if (battleStatus->flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
         if (dispatchEvent == EVENT_HIT_COMBO) {
             dispatchEvent = EVENT_HIT;

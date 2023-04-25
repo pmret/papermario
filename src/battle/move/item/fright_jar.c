@@ -67,7 +67,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_IF_EQ(LVar0, 6)
         EVT_GOTO(1)
     EVT_END_IF
-    EVT_CALL(func_80269EAC, BTL_UNK_21)
+    EVT_CALL(SetDamageSource, DMG_SRC_FRIGHT_JAR)
     EVT_CALL(ItemSpookEnemy, LVar0, 1879052288, 0, 100, 0, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_LABEL(1)
     EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)

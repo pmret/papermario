@@ -351,11 +351,11 @@ EvtScript N(attackClawSwipe) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_TURN_COUNTER), LVar1)
     EVT_IF_LT(LVar1, 3)
         EVT_SET(LVar0, 1)
-        EVT_CALL(func_80269EAC, BTL_UNK_12)
+        EVT_CALL(SetDamageSource, DMG_SRC_LAST_SLAP_LEFT)
         EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_NO_CONTACT, 0, 0, LVar0, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_ELSE
         EVT_SET(LVar0, 3)
-        EVT_CALL(func_80269EAC, BTL_UNK_12)
+        EVT_CALL(SetDamageSource, DMG_SRC_LAST_SLAP_LEFT)
         EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_NO_CONTACT, 0, 0, LVar0, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_END_IF
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)

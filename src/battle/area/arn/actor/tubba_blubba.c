@@ -326,7 +326,7 @@ EvtScript N(80226558) = {
     EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_IF_NOT_FLAG(LVar5, STATUS_FLAG_SHRINK)
-        EVT_CALL(func_80269EAC, BTL_UNK_23)
+        EVT_CALL(SetDamageSource, DMG_SRC_TUBBA_SMASH)
     EVT_END_IF
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 0, 4, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
@@ -432,7 +432,7 @@ EvtScript N(80226B88) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar5)
     EVT_IF_NOT_FLAG(LVar5, STATUS_FLAG_SHRINK)
-        EVT_CALL(func_80269EAC, BTL_UNK_24)
+        EVT_CALL(SetDamageSource, DMG_SRC_CRUSH)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20EA)
     EVT_END_IF
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 0, 6, BS_FLAGS1_SP_EVT_ACTIVE)

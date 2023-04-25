@@ -339,17 +339,17 @@ EvtScript N(bow_takeTurn) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_SlapOnce)
             EVT_SET(LocalFlag(0), 1)
             EVT_IF_EQ(LVarA, LVar8)
-                EVT_CALL(func_80269EAC, BTL_UNK_12)
+                EVT_CALL(SetDamageSource, DMG_SRC_LAST_SLAP_LEFT)
             EVT_ELSE
-                EVT_CALL(func_80269EAC, BTL_UNK_10)
+                EVT_CALL(SetDamageSource, DMG_SRC_NEXT_SLAP_LEFT)
             EVT_END_IF
         EVT_ELSE
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBow_SlapBack)
             EVT_SET(LocalFlag(0), 0)
             EVT_IF_EQ(LVarA, LVar8)
-                EVT_CALL(func_80269EAC, BTL_UNK_13)
+                EVT_CALL(SetDamageSource, DMG_SRC_LAST_SLAP_RIGHT)
             EVT_ELSE
-                EVT_CALL(func_80269EAC, BTL_UNK_11)
+                EVT_CALL(SetDamageSource, DMG_SRC_NEXT_SLAP_RIGHT)
             EVT_END_IF
         EVT_END_IF
         EVT_WAIT(2)

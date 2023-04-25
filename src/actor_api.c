@@ -190,15 +190,15 @@ ApiStatus GetLastElement(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80269E80(Evt* script, s32 isInitialCall) {
-    evt_set_variable(script, *script->ptrReadPos, gBattleStatus.unk_19A);
+ApiStatus GetDamageSource(Evt* script, s32 isInitialCall) {
+    evt_set_variable(script, *script->ptrReadPos, gBattleStatus.currentDamageSource);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80269EAC(Evt* script, s32 isInitialCall) {
-    s32 a0 = *script->ptrReadPos;
+ApiStatus SetDamageSource(Evt* script, s32 isInitialCall) {
+    s32 damageSource = *script->ptrReadPos;
 
-    gBattleStatus.unk_19A = a0;
+    gBattleStatus.currentDamageSource = damageSource;
     return ApiStatus_DONE2;
 }
 

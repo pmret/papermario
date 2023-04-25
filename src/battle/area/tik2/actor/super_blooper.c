@@ -648,7 +648,7 @@ EvtScript N(attackInkBlast) = {
     EVT_END_SWITCH
     EVT_WAIT(10)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(func_80269EAC, BTL_UNK_26)
+    EVT_CALL(SetDamageSource, DMG_SRC_INK_BLAST)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_NO_CONTACT, 0, 0, 5, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_WAIT(30)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim00)

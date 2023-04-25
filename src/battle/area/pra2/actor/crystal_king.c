@@ -389,19 +389,19 @@ EvtScript N(OnHit) = {
                 EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_BIT1_ID), LVar0)
                 EVT_CALL(ActorExists, LVar0, LVar1)
                 EVT_IF_EQ(LVar1, TRUE)
-                    EVT_CALL(func_80269EAC, BTL_UNK_00)
+                    EVT_CALL(SetDamageSource, DMG_SRC_DEFAULT)
                     EVT_CALL(DispatchEvent, LVar0, EVENT_DEATH)
                 EVT_END_IF
                 EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_BIT2_ID), LVar0)
                 EVT_CALL(ActorExists, LVar0, LVar1)
                 EVT_IF_EQ(LVar1, TRUE)
-                    EVT_CALL(func_80269EAC, BTL_UNK_00)
+                    EVT_CALL(SetDamageSource, DMG_SRC_DEFAULT)
                     EVT_CALL(DispatchEvent, LVar0, EVENT_DEATH)
                 EVT_END_IF
                 EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_BIT3_ID), LVar0)
                 EVT_CALL(ActorExists, LVar0, LVar1)
                 EVT_IF_EQ(LVar1, TRUE)
-                    EVT_CALL(func_80269EAC, BTL_UNK_00)
+                    EVT_CALL(SetDamageSource, DMG_SRC_DEFAULT)
                     EVT_CALL(DispatchEvent, LVar0, EVENT_DEATH)
                 EVT_END_IF
             EVT_END_IF
@@ -485,21 +485,21 @@ EvtScript N(OnDeath) = {
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_BIT1_ID), LVar0)
             EVT_CALL(ActorExists, LVar0, LVar1)
             EVT_IF_EQ(LVar1, TRUE)
-                EVT_CALL(func_80269EAC, BTL_UNK_00)
+                EVT_CALL(SetDamageSource, DMG_SRC_DEFAULT)
                 EVT_CALL(SetActorFlagBits, LVar0, ACTOR_FLAG_NO_DMG_APPLY, TRUE)
                 EVT_CALL(DispatchEvent, LVar0, EVENT_DEATH)
             EVT_END_IF
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_BIT2_ID), LVar0)
             EVT_CALL(ActorExists, LVar0, LVar1)
             EVT_IF_EQ(LVar1, TRUE)
-                EVT_CALL(func_80269EAC, BTL_UNK_00)
+                EVT_CALL(SetDamageSource, DMG_SRC_DEFAULT)
                 EVT_CALL(SetActorFlagBits, LVar0, ACTOR_FLAG_NO_DMG_APPLY, TRUE)
                 EVT_CALL(DispatchEvent, LVar0, EVENT_DEATH)
             EVT_END_IF
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_BIT3_ID), LVar0)
             EVT_CALL(ActorExists, LVar0, LVar1)
             EVT_IF_EQ(LVar1, TRUE)
-                EVT_CALL(func_80269EAC, BTL_UNK_00)
+                EVT_CALL(SetDamageSource, DMG_SRC_DEFAULT)
                 EVT_CALL(SetActorFlagBits, LVar0, ACTOR_FLAG_NO_DMG_APPLY, TRUE)
                 EVT_CALL(DispatchEvent, LVar0, EVENT_DEATH)
             EVT_END_IF

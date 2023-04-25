@@ -227,7 +227,7 @@ EvtScript N(takeTurn_80219444) = {
     EVT_END_IF
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
     EVT_IF_EQ(LVar0, 1)
-        EVT_CALL(func_80269EAC, BTL_UNK_05)
+        EVT_CALL(SetDamageSource, DMG_SRC_TUTORIAL_GOOMBARIO)
     EVT_END_IF
     EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 1, BS_FLAGS1_SP_EVT_ACTIVE)

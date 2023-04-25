@@ -896,7 +896,7 @@ EvtScript N(electroDash) = {
     EVT_CALL(CloseActionCommandInfo)
     EVT_CALL(N(ElectroDashFXDisable))
     EVT_CALL(StopLoopingSoundAtActor, ACTOR_PARTNER, 0)
-    EVT_CALL(func_80269EAC, BTL_UNK_19)
+    EVT_CALL(SetDamageSource, DMG_SRC_ELECTRO_DASH)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Strain)
     EVT_CALL(func_8026EA7C, ACTOR_SELF, 1, 10)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)

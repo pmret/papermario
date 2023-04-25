@@ -1094,7 +1094,7 @@ s32 dispatch_damage_event_player_0(s32 damageAmount, s32 event) {
     BattleStatus* battleStatus = &gBattleStatus;
 
     battleStatus->currentAttackElement = ELEMENT_END;
-    battleStatus->unk_19A = BTL_UNK_00;
+    battleStatus->currentDamageSource = DMG_SRC_DEFAULT;
     return dispatch_damage_event_player(damageAmount, event, FALSE);
 }
 
