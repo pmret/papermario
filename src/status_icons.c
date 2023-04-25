@@ -289,8 +289,8 @@ void draw_merlee_message(void* data) {
 
     switch (popup->messageIndex) {
         case 0:
-            if (popup->unk_17 != 0) {
-                popup->unk_17 = 0;
+            if (popup->needsInit) {
+                popup->needsInit = FALSE;
                 messageID = D_80078168[popup->messageIndex];
                 width = get_msg_width(messageID, 0) + 23;
                 xPos = 160 - (width / 2);
@@ -301,8 +301,8 @@ void draw_merlee_message(void* data) {
             break;
 
         case 1:
-            if (popup->unk_17 != 0) {
-                popup->unk_17 = 0;
+            if (popup->needsInit) {
+                popup->needsInit = FALSE;
                 messageID = D_80078168[popup->messageIndex];
                 width = get_msg_width(messageID, 0) + 23;
                 xPos = 160 - (width / 2);
