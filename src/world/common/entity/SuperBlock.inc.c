@@ -410,7 +410,7 @@ API_CALLABLE(N(SuperBlock_WhiteScreenFlash)) {
             break;
     }
 
-    set_screen_overlay_params_front(STENCIL_TYPE_VIEWPORT_COLOR, script->functionTemp[1]);
+    set_screen_overlay_params_front(OVERLAY_VIEWPORT_COLOR, script->functionTemp[1]);
 
     return ret;
 }

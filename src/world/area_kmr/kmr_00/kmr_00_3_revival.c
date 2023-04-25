@@ -657,7 +657,7 @@ EvtScript N(EVS_Scene_MarioRevived) = {
     EVT_SET(GB_StoryProgress, STORY_CH0_WAKE_UP)
     EVT_CALL(DisablePlayerPhysics, FALSE)
     EVT_CALL(N(func_802405CC_8AC55C))
-    EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_02"), kmr_02_ENTRY_5, TRANSITION_10)
+    EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_02"), kmr_02_ENTRY_5, TRANSITION_MARIO_BLACK)
     EVT_RETURN
     EVT_END
 };

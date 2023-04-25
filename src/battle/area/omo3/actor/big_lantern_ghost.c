@@ -145,7 +145,7 @@ s32 N(IdleAnimations)[] = {
 API_CALLABLE(N(init_overlay)) {
     get_actor(script->owner1.actorID);
 
-    set_screen_overlay_params_back(STENCIL_TYPE_BATTLE_DARKNESS, 220.0f);
+    set_screen_overlay_params_back(OVERLAY_BATTLE_DARKNESS, 220.0f);
     set_screen_overlay_alpha(SCREEN_LAYER_BACK, 200.0f);
     return ApiStatus_DONE2;
 }

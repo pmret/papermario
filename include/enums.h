@@ -2931,62 +2931,62 @@ enum ItemSpawnModes {
 };
 
 enum Locations {
-    LOCATION_TOAD_TOWN                    = 0x00000001,
-    LOCATION_TOAD_TOWN_TUNNELS            = 0x00000002,
-    LOCATION_KOOPA_BROS_FORTRESS          = 0x00000007,
-    LOCATION_MT_RUGGED                    = 0x00000008,
-    LOCATION_DRY_DRY_OUTPOST              = 0x00000009,
-    LOCATION_DRY_DRY_DESERT               = 0x0000000A,
-    LOCATION_DRY_DRY_RUINS                = 0x0000000B,
-    LOCATION_FOREVER_FOREST               = 0x0000000C,
-    LOCATION_BOOS_MANSION                 = 0x0000000D,
-    LOCATION_TUBBAS_MANOR                 = 0x0000000F,
-    LOCATION_SHY_GUYS_TOYBOX              = 0x00000010,
-    LOCATION_MT_LAVALAVA                  = 0x00000012,
-    LOCATION_CRYSTAL_PALACE               = 0x00000015,
-    LOCATION_BOWSERS_CASTLE               = 0x00000016,
-    LOCATION_TESTING                      = 0x00000017,
-    LOCATION_NONE                         = 0x00000018,
-    LOCATION_PEACH_CASTLE_GROUNDS         = 0x00000019,
-    LOCATION_PEACHS_CASTLE                = 0x0000001A,
-    LOCATION_SHOOTING_STAR_SUMMIT         = 0x0000001B,
-    LOCATION_STAR_WAY                     = 0x0000001C,
-    LOCATION_STAR_HAVEN                   = 0x0000001D,
-    LOCATION_GOOMBA_VILLAGE               = 0x0000001E,
-    LOCATION_GOOMBA_ROAD                  = 0x0000001F,
-    LOCATION_PLEASANT_PATH                = 0x00000020,
-    LOCATION_KOOPA_VILLAGE                = 0x00000021,
-    LOCATION_GUSTY_GULCH                  = 0x00000022,
-    LOCATION_WINDY_MILL                   = 0x00000023,
-    LOCATION_JADE_JUNGLE                  = 0x00000024,
-    LOCATION_YOSHIS_VILLAGE               = 0x00000025,
-    LOCATION_FLOWER_FIELDS                = 0x00000026,
-    LOCATION_CLOUDY_CLIMB                 = 0x00000027,
-    LOCATION_SHIVER_CITY                  = 0x00000028,
-    LOCATION_SHIVER_SNOWFIELD             = 0x00000029,
-    LOCATION_STARBORN_VALLEY              = 0x0000002A,
-    LOCATION_SHIVER_MOUNTAIN              = 0x0000002B,
-    LOCATION_MARIOS_HOUSE                 = 0x0000002C,
+    LOCATION_TOAD_TOWN                  = 0x01,
+    LOCATION_TOAD_TOWN_TUNNELS          = 0x02,
+    LOCATION_KOOPA_BROS_FORTRESS        = 0x07,
+    LOCATION_MT_RUGGED                  = 0x08,
+    LOCATION_DRY_DRY_OUTPOST            = 0x09,
+    LOCATION_DRY_DRY_DESERT             = 0x0A,
+    LOCATION_DRY_DRY_RUINS              = 0x0B,
+    LOCATION_FOREVER_FOREST             = 0x0C,
+    LOCATION_BOOS_MANSION               = 0x0D,
+    LOCATION_TUBBAS_MANOR               = 0x0F,
+    LOCATION_SHY_GUYS_TOYBOX            = 0x10,
+    LOCATION_MT_LAVALAVA                = 0x12,
+    LOCATION_CRYSTAL_PALACE             = 0x15,
+    LOCATION_BOWSERS_CASTLE             = 0x16,
+    LOCATION_TESTING                    = 0x17,
+    LOCATION_NONE                       = 0x18,
+    LOCATION_PEACH_CASTLE_GROUNDS       = 0x19,
+    LOCATION_PEACHS_CASTLE              = 0x1A,
+    LOCATION_SHOOTING_STAR_SUMMIT       = 0x1B,
+    LOCATION_STAR_WAY                   = 0x1C,
+    LOCATION_STAR_HAVEN                 = 0x1D,
+    LOCATION_GOOMBA_VILLAGE             = 0x1E,
+    LOCATION_GOOMBA_ROAD                = 0x1F,
+    LOCATION_PLEASANT_PATH              = 0x20,
+    LOCATION_KOOPA_VILLAGE              = 0x21,
+    LOCATION_GUSTY_GULCH                = 0x22,
+    LOCATION_WINDY_MILL                 = 0x23,
+    LOCATION_JADE_JUNGLE                = 0x24,
+    LOCATION_YOSHIS_VILLAGE             = 0x25,
+    LOCATION_FLOWER_FIELDS              = 0x26,
+    LOCATION_CLOUDY_CLIMB               = 0x27,
+    LOCATION_SHIVER_CITY                = 0x28,
+    LOCATION_SHIVER_SNOWFIELD           = 0x29,
+    LOCATION_STARBORN_VALLEY            = 0x2A,
+    LOCATION_SHIVER_MOUNTAIN            = 0x2B,
+    LOCATION_MARIOS_HOUSE               = 0x2C,
 };
 
 typedef enum ScreenTransition {
-    TRANSITION_0                    = 0,    
-    TRANSITION_1                    = 1,    // FADE_TO_BLACK
-    TRANSITION_FADE_TO_BLACK_FAST   = 2, 
-    TRANSITION_3                    = 3,
-    TRANSITION_4                    = 4,    // SLOW_FADE_TO_BLACK
-    TRANSITION_5                    = 5,
-    TRANSITION_6                    = 6,
-    TRANSITION_7                    = 7,
-    TRANSITION_8                    = 8,
-    TRANSITION_9                    = 9,
-    TRANSITION_10                   = 10,
-    TRANSITION_11                   = 11,
-    TRANSITION_12                   = 12,
-    TRANSITION_13                   = 13,
-    TRANSITION_14                   = 14,
-    TRANSITION_15                   = 15,
-    TRANSITION_16                   = 16,
+    TRANSITION_STANDARD                 = 0,    // fade to/from black
+    TRANSITION_TOY_TRAIN                = 1,    // similar to TRANSITION_TOY_TRAIN, but fade applies to whole screen
+    TRANSITION_END_DEMO_SCENE_BLACK     = 2,    // rapidly fade to black
+    TRANSITION_END_DEMO_SCENE_WHITE     = 3,    // slow fade to white -> rapid fade in from white
+    TRANSITION_BEGIN_OR_END_GAME        = 4,    // slow fade to/from black
+    TRANSITION_OUTRO_END_SCENE          = 5,    // slow fade to/from black
+    TRANSITION_BEGIN_OR_END_CHAPTER     = 6,    // white fade in/out; standard transition for entering kmr_22 (Begin Chapter) or leaving kmr_23 (End of Chapter)
+    TRANSITION_SLOW_FADE_TO_WHITE       = 7,    // slow fade to/from white
+    TRANSITION_ENTER_WORLD              = 8,    // black Mario stencil in/out
+    TRANSITION_MARIO_WHITE              = 9,    // white Mario stencil -> white fade in; used in post ch5 scene, fading to Save and Continue? screen
+    TRANSITION_MARIO_BLACK              = 10,   // black Mario stencil -> black fade in; used after Goombaria finds Mario and he wakes up in the inn
+    TRANSITION_AFTER_SAVE_PROMPT        = 11,   // white fade out -> white star stencil
+    TRANSITION_END_PEACH_INTERLUDE      = 12,   // white star stencil -> white Mario stencil
+    TRANSITION_PEACH_CAPTURED           = 13,   // black star stencil -> black fade in
+    TRANSITION_GET_STAR_CARD            = 14,   // used for entering kmr_23 (Get Star Card / End Chapter)
+    TRANSITION_END_CHAPTER_INTERRUPTED  = 15,   // white fade out -> white Mario stencil; used in kzn_19 for Ch5
+    TRANSITION_SLOW_BLUR_MOTION         = 16,   // unused?
 } ScreenTransition;
 
 enum ScreenLayer {
@@ -2994,25 +2994,25 @@ enum ScreenLayer {
     SCREEN_LAYER_BACK               = 1,
 };
 
-typedef enum StencilType {
-    STENCIL_TYPE_NONE                   = -1,
-    STENCIL_TYPE_SCREEN_COLOR           = 0,
-    STENCIL_TYPE_VIEWPORT_COLOR         = 1,
-    STENCIL_TYPE_2                      = 2,
-    STENCIL_TYPE_VIEWPORT_SPOTLIGHT     = 3,
-    STENCIL_TYPE_VIEWPORT_MARIO         = 4,
-    STENCIL_TYPE_VIEWPORT_STAR          = 5,
-    STENCIL_TYPE_SCREEN_SPOTLIGHT       = 6,
-    STENCIL_TYPE_SCREEN_MARIO           = 7,
-    STENCIL_TYPE_SCREEN_STAR            = 8,
-    STENCIL_TYPE_9                      = 9,
-    STENCIL_TYPE_START_BATTLE           = 10,
-    STENCIL_TYPE_WORLD_DARKNESS         = 11,
-    STENCIL_TYPE_BLUR                   = 12,
-    STENCIL_TYPE_BATTLE_DARKNESS        = 13,
-    STENCIL_TYPE_UNUSED_1               = 14,
-    STENCIL_TYPE_UNUSED_2               = 15,
-} StencilType;
+typedef enum ScreenOverlayType {
+    OVERLAY_NONE                    = -1,
+    OVERLAY_SCREEN_COLOR            = 0,
+    OVERLAY_VIEWPORT_COLOR          = 1,
+    OVERLAY_TYPE_2                  = 2,
+    OVERLAY_VIEWPORT_SPOTLIGHT      = 3,
+    OVERLAY_VIEWPORT_MARIO          = 4,
+    OVERLAY_VIEWPORT_STAR           = 5,
+    OVERLAY_SCREEN_SPOTLIGHT        = 6,
+    OVERLAY_SCREEN_MARIO            = 7,
+    OVERLAY_SCREEN_STAR             = 8,
+    OVERLAY_TYPE_9                  = 9,
+    OVERLAY_START_BATTLE            = 10,
+    OVERLAY_WORLD_DARKNESS          = 11,
+    OVERLAY_BLUR                    = 12,
+    OVERLAY_BATTLE_DARKNESS         = 13,
+    OVERLAY_UNUSED_1                = 14,
+    OVERLAY_UNUSED_2                = 15,
+} ScreenOverlayType;
 
 enum DoorSounds {
     DOOR_SOUNDS_BASIC               = 0,

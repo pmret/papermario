@@ -226,7 +226,7 @@ API_CALLABLE(N(func_802447E0_805060)) {
         script->functionTemp[1] = 255;
     }
 
-    set_screen_overlay_params_front(STENCIL_TYPE_SCREEN_COLOR, script->functionTemp[1]);
+    set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, script->functionTemp[1]);
 
     if (script->functionTemp[1] == 255) {
         return ApiStatus_DONE2;
@@ -246,7 +246,7 @@ API_CALLABLE(N(func_80244848_8050C8)) {
         return ApiStatus_DONE2;
     }
 
-    set_screen_overlay_params_front(STENCIL_TYPE_SCREEN_COLOR, script->functionTemp[1]);
+    set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, script->functionTemp[1]);
     return ApiStatus_BLOCK;
 }
 

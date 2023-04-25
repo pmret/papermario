@@ -9,7 +9,7 @@ EvtScript N(EVS_ExitWalk_nok_11_0) = {
     EVT_IF_EQ(GF_StartedChapter1, FALSE)
         EVT_SET(GF_StartedChapter1, TRUE)
         EVT_CALL(FadeOutMusic, 0, 1500)
-        EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_22"), kmr_22_ENTRY_1, TRANSITION_6)
+        EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_22"), kmr_22_ENTRY_1, TRANSITION_BEGIN_OR_END_CHAPTER)
         EVT_WAIT(100)
         EVT_RETURN
     EVT_END_IF

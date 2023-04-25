@@ -212,7 +212,7 @@ ApiStatus func_802D4BDC(Evt* script, s32 isInitialCall) {
             *progress = 255;
         }
 
-        set_screen_overlay_params_back(STENCIL_TYPE_START_BATTLE, *progress);
+        set_screen_overlay_params_back(OVERLAY_START_BATTLE, *progress);
     }
 
     return ApiStatus_BLOCK;
@@ -232,7 +232,7 @@ ApiStatus func_802D4C4C(Evt* script, s32 isInitialCall) {
     if (*ready == 0) {
         t1v = *progress;
         if (t1v == 0) {
-            set_screen_overlay_params_back(STENCIL_TYPE_NONE, -1.0f);
+            set_screen_overlay_params_back(OVERLAY_NONE, -1.0f);
             return ApiStatus_DONE2;
         }
         t1v -= 10;
@@ -240,7 +240,7 @@ ApiStatus func_802D4C4C(Evt* script, s32 isInitialCall) {
         if (t1v < 0) {
             *progress = 0;
         }
-        set_screen_overlay_params_back(STENCIL_TYPE_START_BATTLE, *progress);
+        set_screen_overlay_params_back(OVERLAY_START_BATTLE, *progress);
     }
 
     return ApiStatus_BLOCK;
@@ -251,9 +251,9 @@ ApiStatus func_802D4CC4(Evt* script, s32 isInitialCall) {
     s32 value = evt_get_variable(script, *args++);
 
     if (value < 0) {
-        set_screen_overlay_params_back(STENCIL_TYPE_NONE, -1.0f);
+        set_screen_overlay_params_back(OVERLAY_NONE, -1.0f);
     } else {
-        set_screen_overlay_params_back(STENCIL_TYPE_START_BATTLE, value);
+        set_screen_overlay_params_back(OVERLAY_START_BATTLE, value);
     }
 
     return ApiStatus_DONE2;
@@ -265,13 +265,13 @@ ApiStatus func_802D4D14(Evt* script, s32 isInitialCall) {
 
     set_screen_overlay_center(SCREEN_LAYER_FRONT, 0, 12, 20);
     set_screen_overlay_center(SCREEN_LAYER_FRONT, 1, 308, 220);
-    set_screen_overlay_params_front(STENCIL_TYPE_BLUR, value);
+    set_screen_overlay_params_front(OVERLAY_BLUR, value);
 
     return ApiStatus_DONE2;
 }
 
 ApiStatus func_802D4D88(Evt* script, s32 isInitialCall) {
-    set_screen_overlay_params_front(STENCIL_TYPE_BLUR, 0);
+    set_screen_overlay_params_front(OVERLAY_BLUR, 0);
     return ApiStatus_DONE2;
 }
 

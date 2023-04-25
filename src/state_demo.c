@@ -133,7 +133,7 @@ DemoSceneData DemoScenes[] = {
         .partnerID = PARTNER_NONE,
         .storyProgress = STORY_CH1_KNOCKED_SWITCH_FROM_TREE
     },
-    {
+    [LAST_DEMO_SCENE_IDX] {
         .sceneType = DEMO_SCENE_DONE,
         .mapName = "end"
     },
@@ -151,8 +151,8 @@ void state_init_demo(void) {
     gGameStatusPtr->demoStickY = 0;
 
     disable_sounds();
-    set_map_transition_effect(TRANSITION_FADE_TO_BLACK_FAST);
-    set_screen_overlay_params_front(STENCIL_TYPE_SCREEN_COLOR, 255.0f);
+    set_map_transition_effect(TRANSITION_END_DEMO_SCENE_BLACK);
+    set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, 255.0f);
     clear_saved_variables();
     clear_script_list();
 }
@@ -234,9 +234,9 @@ void state_step_demo(void) {
             evt_set_variable(NULL, GB_StoryProgress, demoSceneData->storyProgress);
 
             if (gGameStatusPtr->nextDemoScene == 0) {
-                set_map_transition_effect(TRANSITION_3);
+                set_map_transition_effect(TRANSITION_END_DEMO_SCENE_WHITE);
             } else {
-                set_map_transition_effect(TRANSITION_FADE_TO_BLACK_FAST);
+                set_map_transition_effect(TRANSITION_END_DEMO_SCENE_BLACK);
             }
 
             set_game_mode(GAME_MODE_ENTER_DEMO_WORLD);
@@ -252,9 +252,9 @@ void state_step_demo(void) {
             evt_set_variable(NULL, GB_StoryProgress, demoSceneData->storyProgress);
 
             if (gGameStatusPtr->nextDemoScene == 0) {
-                set_map_transition_effect(TRANSITION_3);
+                set_map_transition_effect(TRANSITION_END_DEMO_SCENE_WHITE);
             } else {
-                set_map_transition_effect(TRANSITION_FADE_TO_BLACK_FAST);
+                set_map_transition_effect(TRANSITION_END_DEMO_SCENE_BLACK);
             }
 
             set_game_mode(GAME_MODE_ENTER_DEMO_WORLD);
@@ -265,8 +265,8 @@ void state_step_demo(void) {
     }
 
     gGameStatusPtr->nextDemoScene++;
-    if (gGameStatusPtr->nextDemoScene > ARRAY_COUNT(DemoScenes) - 2) {
-        gGameStatusPtr->nextDemoScene = ARRAY_COUNT(DemoScenes) - 2;
+    if (gGameStatusPtr->nextDemoScene > LAST_DEMO_SCENE_IDX) {
+        gGameStatusPtr->nextDemoScene = LAST_DEMO_SCENE_IDX;
     }
 }
 

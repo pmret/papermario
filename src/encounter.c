@@ -1405,7 +1405,7 @@ void update_encounters_pre_battle(void) {
                 currentEncounter->coinsEarned = 0;
                 currentEncounter->fadeOutAccel = 0;
                 currentEncounter->fadeOutAmount = 255;
-                set_screen_overlay_params_front(STENCIL_TYPE_SCREEN_COLOR, 255.0f);
+                set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, 255.0f);
                 gEncounterState = ENCOUNTER_STATE_POST_BATTLE;
                 D_8009A678 = 1;
                 gEncounterSubState = ENCOUNTER_SUBSTATE_POST_BATTLE_INIT;
@@ -1490,7 +1490,7 @@ void draw_encounters_pre_battle(void) {
             }
 
             if (gGameStatusPtr->demoState == DEMO_STATE_CHANGE_MAP) {
-                set_screen_overlay_params_back(STENCIL_TYPE_START_BATTLE, encounter->fadeOutAmount);
+                set_screen_overlay_params_back(OVERLAY_START_BATTLE, encounter->fadeOutAmount);
                 set_screen_overlay_alpha(SCREEN_LAYER_BACK, 255.0f);
                 set_screen_overlay_color(SCREEN_LAYER_BACK, 0, 0, 0);
                 get_screen_coords(gCurrentCameraID, playerX, playerY + 20.0f, playerZ, &pScreenX, &pScreenY, &pScreenZ);
@@ -1498,7 +1498,7 @@ void draw_encounters_pre_battle(void) {
                 set_screen_overlay_center(SCREEN_LAYER_BACK, 0, (pScreenX - oScreenX) / 2 + oScreenX,
                                               (pScreenY - oScreenY) / 2 + oScreenY);
             } else {
-                set_screen_overlay_params_front(STENCIL_TYPE_START_BATTLE, encounter->fadeOutAmount);
+                set_screen_overlay_params_front(OVERLAY_START_BATTLE, encounter->fadeOutAmount);
                 set_screen_overlay_alpha(SCREEN_LAYER_FRONT, 255.0f);
                 set_screen_overlay_color(SCREEN_LAYER_FRONT, 0, 0, 0);
                 get_screen_coords(gCurrentCameraID, playerX, playerY + 20.0f, playerZ, &pScreenX, &pScreenY, &pScreenZ);
@@ -1792,7 +1792,7 @@ void update_encounters_post_battle(void) {
             if (!D_8009A63C) {
                 suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
             }
-            set_screen_overlay_params_front(STENCIL_TYPE_NONE, -1.0f);
+            set_screen_overlay_params_front(OVERLAY_NONE, -1.0f);
             resume_all_group(EVT_GROUP_10);
             gEncounterState = ENCOUNTER_STATE_NEUTRAL;
             D_8009A678 = 1;
@@ -1907,7 +1907,7 @@ void update_encounters_post_battle(void) {
                 playerStatus->blinkTimer = 45;
                 enable_player_input();
                 partner_enable_input();
-                set_screen_overlay_params_front(STENCIL_TYPE_NONE, -1.0f);
+                set_screen_overlay_params_front(OVERLAY_NONE, -1.0f);
                 if (!D_8009A63C) {
                     currentEncounter->unk_94 = 15;
                 } else {
@@ -2006,7 +2006,7 @@ void update_encounters_post_battle(void) {
                 }
                 enable_player_input();
                 partner_enable_input();
-                set_screen_overlay_params_front(STENCIL_TYPE_NONE, -1.0f);
+                set_screen_overlay_params_front(OVERLAY_NONE, -1.0f);
                 currentEncounter->unk_94 = 15;
                 gEncounterSubState = ENCOUNTER_SUBSTATE_POST_BATTLE_LOST_TO_NEUTRAL;
             }
@@ -2044,7 +2044,7 @@ void update_encounters_post_battle(void) {
             }
             enable_player_input();
             partner_enable_input();
-            set_screen_overlay_params_front(STENCIL_TYPE_NONE, -1.0f);
+            set_screen_overlay_params_front(OVERLAY_NONE, -1.0f);
             resume_all_group(EVT_GROUP_10);
             gEncounterState = ENCOUNTER_STATE_NEUTRAL;
             D_8009A678 = 1;
@@ -2147,7 +2147,7 @@ void update_encounters_post_battle(void) {
                 currentEncounter->battleTriggerCooldown = 45;
                 enable_player_input();
                 partner_enable_input();
-                set_screen_overlay_params_front(STENCIL_TYPE_NONE, -1.0f);
+                set_screen_overlay_params_front(OVERLAY_NONE, -1.0f);
                 resume_all_group(EVT_GROUP_10);
                 gEncounterState = ENCOUNTER_STATE_NEUTRAL;
                 D_8009A678 = 1;
@@ -2186,7 +2186,7 @@ void draw_encounters_post_battle(void) {
     s32 ret = currentEncounter->fadeOutAccel;
 
     if (ret != 0) {
-        set_screen_overlay_params_front(STENCIL_TYPE_SCREEN_COLOR, currentEncounter->fadeOutAmount);
+        set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, currentEncounter->fadeOutAmount);
         set_screen_overlay_color(SCREEN_LAYER_FRONT, 0, 0, 0);
     }
 }

@@ -79,7 +79,7 @@ EvtScript N(EVS_TrySpawningStarCard) = {
     EVT_CALL(N(StarSpiritEffectFunc4), 3)
     EVT_CALL(PlaySoundAtPlayer, SOUND_138, SOUND_SPACE_MODE_0)
     EVT_CALL(DisablePlayerInput, TRUE)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_23"), kmr_23_ENTRY_4, TRANSITION_14)
+    EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_23"), kmr_23_ENTRY_4, TRANSITION_GET_STAR_CARD)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END

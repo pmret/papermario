@@ -64,7 +64,7 @@ EvtScript N(EVS_SpawnStarCard) = {
     EVT_CALL(PlaySoundAtPlayer, SOUND_138, 0)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_SET(GB_StoryProgress, STORY_CH7_STAR_SPIRIT_RESCUED)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_23"), kmr_23_ENTRY_6, TRANSITION_14)
+    EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_23"), kmr_23_ENTRY_6, TRANSITION_GET_STAR_CARD)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END
@@ -126,7 +126,7 @@ EvtScript N(EVS_RespawnStarCard) = {
     EVT_CALL(PlaySoundAtPlayer, SOUND_138, 0)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_SET(GB_StoryProgress, STORY_CH7_STAR_SPIRIT_RESCUED)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_23"), kmr_23_ENTRY_6, TRANSITION_14)
+    EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_23"), kmr_23_ENTRY_6, TRANSITION_GET_STAR_CARD)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END

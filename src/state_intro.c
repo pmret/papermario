@@ -216,8 +216,8 @@ void state_step_intro(void) {
             update_cameras();
             update_npcs();
             if (D_800A0954 == 0) {
-                set_screen_overlay_params_front(STENCIL_TYPE_NONE, -1.0f);
-                set_screen_overlay_params_back(STENCIL_TYPE_NONE, -1.0f);
+                set_screen_overlay_params_front(OVERLAY_NONE, -1.0f);
+                set_screen_overlay_params_back(OVERLAY_NONE, -1.0f);
             } else {
                 D_800A0954 -= D_800A0958;
                 if (D_800A0954 < 0) {

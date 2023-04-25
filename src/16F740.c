@@ -217,7 +217,7 @@ void btl_state_update_normal_start(void) {
     switch (gBattleSubState) {
         case BTL_SUBSTATE_NORMAL_START_INIT:
             BattleEnemiesCreated = battle->formationSize;
-            set_screen_overlay_params_back(STENCIL_TYPE_NONE, -1.0f);
+            set_screen_overlay_params_back(OVERLAY_NONE, -1.0f);
             compressedAsset = load_asset_by_name(stage->shape, &size);
             decode_yay0(compressedAsset, &gMapShapeData);
             general_heap_free(compressedAsset);
@@ -430,7 +430,7 @@ void btl_state_update_normal_start(void) {
             }
             if (battleStatus->darknessMode > BTL_DARKNESS_STATE_NONE) {
                 set_screen_overlay_color(SCREEN_LAYER_BACK, 0, 0, 0);
-                set_screen_overlay_params_back(STENCIL_TYPE_SCREEN_COLOR, 215.0f);
+                set_screen_overlay_params_back(OVERLAY_SCREEN_COLOR, 215.0f);
             }
             if (is_ability_active(ABILITY_CHILL_OUT) && currentEncounter->firstStrikeType == FIRST_STRIKE_ENEMY) {
                 currentEncounter->firstStrikeType = FIRST_STRIKE_NONE;
@@ -496,7 +496,7 @@ void btl_state_update_normal_start(void) {
             break;
         case BTL_SUBSTATE_NORMAL_START_DONE:
             if (battleStatus->unk_8C == 0) {
-                set_screen_overlay_params_front(STENCIL_TYPE_NONE, -1.0f);
+                set_screen_overlay_params_front(OVERLAY_NONE, -1.0f);
                 btl_set_state(BATTLE_STATE_BEGIN_TURN);
             }
             break;
@@ -507,9 +507,9 @@ void btl_state_draw_normal_start(void) {
     set_screen_overlay_color(SCREEN_LAYER_FRONT, 0, 0, 0);
 
     if (BattleScreenFadeAmt > 255) {
-        set_screen_overlay_params_front(STENCIL_TYPE_SCREEN_COLOR, 255.0f);
+        set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, 255.0f);
     } else {
-        set_screen_overlay_params_front(STENCIL_TYPE_SCREEN_COLOR, BattleScreenFadeAmt);
+        set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, BattleScreenFadeAmt);
     }
 }
 
@@ -2149,9 +2149,9 @@ void btl_state_draw_end_battle(void) {
 
     if (gCurrentEncounter.battleOutcome == OUTCOME_PLAYER_LOST && !(gBattleStatus.flags1 & BS_FLAGS1_NO_GAME_OVER)) {
         camera->auxBoomZOffset += 256;
-        set_screen_overlay_params_front(STENCIL_TYPE_SCREEN_MARIO, BattleScreenFadeAmt);
+        set_screen_overlay_params_front(OVERLAY_SCREEN_MARIO, BattleScreenFadeAmt);
     } else {
-        set_screen_overlay_params_front(STENCIL_TYPE_SCREEN_COLOR, BattleScreenFadeAmt);
+        set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, BattleScreenFadeAmt);
     }
 }
 
@@ -3987,7 +3987,7 @@ void btl_state_update_first_strike(void) {
 void btl_state_draw_first_stike(void) {
     if (D_802809F6 == -1 && D_8029F254 != 0) {
         if (BattleScreenFadeAmt == 0) {
-            set_screen_overlay_params_front(STENCIL_TYPE_NONE, -1.0f);
+            set_screen_overlay_params_front(OVERLAY_NONE, -1.0f);
         } else {
             if (!(gGameStatusPtr->demoFlags & 1)) {
                 BattleScreenFadeAmt -= 20;
@@ -3998,7 +3998,7 @@ void btl_state_draw_first_stike(void) {
             if (BattleScreenFadeAmt < 0) {
                 BattleScreenFadeAmt = 0;
             }
-            set_screen_overlay_params_front(STENCIL_TYPE_SCREEN_COLOR, BattleScreenFadeAmt);
+            set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, BattleScreenFadeAmt);
         }
     }
 }
@@ -4171,14 +4171,14 @@ void btl_state_update_partner_striking_first(void) {
 void btl_state_draw_partner_striking_first(void) {
     if (D_8029F254 != 0) {
         if (BattleScreenFadeAmt == 0) {
-            set_screen_overlay_params_front(STENCIL_TYPE_NONE, -1.0f);
+            set_screen_overlay_params_front(OVERLAY_NONE, -1.0f);
         } else {
             BattleScreenFadeAmt -= 20;
             if (BattleScreenFadeAmt < 0) {
                 BattleScreenFadeAmt = 0;
             }
 
-            set_screen_overlay_params_front(STENCIL_TYPE_SCREEN_COLOR, BattleScreenFadeAmt);
+            set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, BattleScreenFadeAmt);
         }
     }
 }
@@ -4348,14 +4348,14 @@ void btl_state_update_enemy_striking_first(void) {
 void btl_state_draw_enemy_striking_first(void) {
     if (D_8029F254 != 0) {
         if (BattleScreenFadeAmt == 0) {
-            set_screen_overlay_params_front(STENCIL_TYPE_NONE, -1.0f);
+            set_screen_overlay_params_front(OVERLAY_NONE, -1.0f);
         } else {
             BattleScreenFadeAmt -= 20;
             if (BattleScreenFadeAmt < 0) {
                 BattleScreenFadeAmt = 0;
             }
 
-            set_screen_overlay_params_front(STENCIL_TYPE_SCREEN_COLOR, BattleScreenFadeAmt);
+            set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, BattleScreenFadeAmt);
         }
     }
 }
@@ -4441,7 +4441,7 @@ void btl_state_update_end_demo_battle(void) {
             }
 
             if (D_802809F6 != -1) {
-                gGameStatusPtr->nextDemoScene = 18;
+                gGameStatusPtr->nextDemoScene = LAST_DEMO_SCENE_IDX;
             }
 
             btl_set_state(BATTLE_STATE_0);
@@ -4456,6 +4456,6 @@ const static f32 padding[] = { 0.0f, 0.0f, 0.0f };
 void btl_state_draw_end_demo_battle(void) {
     if (D_802809F6 == -1) {
         set_screen_overlay_color(SCREEN_LAYER_FRONT, 0, 0, 0);
-        set_screen_overlay_params_front(STENCIL_TYPE_SCREEN_COLOR, BattleScreenFadeAmt);
+        set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, BattleScreenFadeAmt);
     }
 }

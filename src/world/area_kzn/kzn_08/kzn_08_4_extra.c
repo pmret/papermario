@@ -28,7 +28,7 @@ API_CALLABLE(N(func_80243EE0_C75360)) {
     }
     if (alpha == 0.0f) {
         set_screen_overlay_alpha(SCREEN_LAYER_BACK, 0.0f);
-        set_screen_overlay_params_back(STENCIL_TYPE_WORLD_DARKNESS, 0.0f);
+        set_screen_overlay_params_back(OVERLAY_WORLD_DARKNESS, 0.0f);
         return ApiStatus_BLOCK;
     }
 
@@ -58,7 +58,7 @@ API_CALLABLE(N(func_80243EE0_C75360)) {
         script->functionTemp[0] = 255;
     }
     set_screen_overlay_alpha(SCREEN_LAYER_BACK, script->functionTemp[0]);
-    set_screen_overlay_params_back(STENCIL_TYPE_WORLD_DARKNESS, alpha);
+    set_screen_overlay_params_back(OVERLAY_WORLD_DARKNESS, alpha);
     return ApiStatus_BLOCK;
 }
 

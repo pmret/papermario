@@ -1969,17 +1969,17 @@ API_CALLABLE(N(AnimKammy_FlyOff)) {
 API_CALLABLE(N(func_80244934_A2EB74)) {
     if (isInitialCall) {
         script->functionTemp[0] = 0;
-        set_screen_overlay_params_back(STENCIL_TYPE_VIEWPORT_COLOR, 255.0f);
+        set_screen_overlay_params_back(OVERLAY_VIEWPORT_COLOR, 255.0f);
         set_screen_overlay_color(SCREEN_LAYER_BACK, 250, 250, 250);
         return ApiStatus_BLOCK;
     }
     script->functionTemp[0]++;
     if (script->functionTemp[0] == 10) {
-        set_screen_overlay_params_back(STENCIL_TYPE_SCREEN_COLOR, 0.0f);
+        set_screen_overlay_params_back(OVERLAY_SCREEN_COLOR, 0.0f);
         set_screen_overlay_color(SCREEN_LAYER_BACK, 250, 250, 250);
         return ApiStatus_DONE2;
     }
-    set_screen_overlay_params_back(STENCIL_TYPE_VIEWPORT_COLOR, (10 - script->functionTemp[0]) * 25);
+    set_screen_overlay_params_back(OVERLAY_VIEWPORT_COLOR, (10 - script->functionTemp[0]) * 25);
     set_screen_overlay_color(SCREEN_LAYER_BACK, 250, 250, 250);
     return ApiStatus_BLOCK;
 }

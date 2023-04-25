@@ -26,7 +26,7 @@ EvtScript N(EVS_EndPeachChapter4) = {
     EVT_SET(LVar0, GB_KKJ_LastPartner)
     EVT_CALL(N(RestoreFromPeachState))
     EVT_CALL(PlaySound, SOUND_DC)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("mac_04"), mac_04_ENTRY_5, TRANSITION_12)
+    EVT_CALL(GotoMapSpecial, EVT_PTR("mac_04"), mac_04_ENTRY_5, TRANSITION_END_PEACH_INTERLUDE)
     EVT_WAIT(100)
 };
 

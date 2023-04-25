@@ -4,7 +4,7 @@
 API_CALLABLE(N(SetScreenFadeAmount)) {
     Bytecode* args = script->ptrReadPos;
 
-    set_screen_overlay_params_front(STENCIL_TYPE_SCREEN_COLOR, evt_get_float_variable(script, *args++));
+    set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, evt_get_float_variable(script, *args++));
     return ApiStatus_DONE2;
 }
 

@@ -26,7 +26,7 @@ EvtScript N(EVS_EndPeachChapter0) = {
     EVT_SET(LVar0, GB_KKJ_LastPartner)
     EVT_CALL(N(RestoreFromPeachState))
     EVT_CALL(PlaySound, SOUND_DC)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_10"), kmr_10_ENTRY_0, TRANSITION_12)
+    EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_10"), kmr_10_ENTRY_0, TRANSITION_END_PEACH_INTERLUDE)
     EVT_WAIT(100)
 }; //@bug script not properly terminated
 
@@ -34,7 +34,7 @@ EvtScript N(EVS_EndPeachChapter1) = {
     EVT_SET(LVar0, GB_KKJ_LastPartner)
     EVT_CALL(N(RestoreFromPeachState))
     EVT_CALL(PlaySound, SOUND_DC)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("trd_00"), trd_00_ENTRY_5, TRANSITION_12)
+    EVT_CALL(GotoMapSpecial, EVT_PTR("trd_00"), trd_00_ENTRY_5, TRANSITION_END_PEACH_INTERLUDE)
     EVT_WAIT(100)
 }; //@bug script not properly terminated
 
@@ -42,7 +42,7 @@ EvtScript N(EVS_EndPeachChapter3) = {
     EVT_SET(LVar0, GB_KKJ_LastPartner)
     EVT_CALL(N(RestoreFromPeachState))
     EVT_CALL(PlaySound, SOUND_DC)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("arn_07"), arn_07_ENTRY_3, TRANSITION_12)
+    EVT_CALL(GotoMapSpecial, EVT_PTR("arn_07"), arn_07_ENTRY_3, TRANSITION_END_PEACH_INTERLUDE)
     EVT_WAIT(100)
 }; //@bug script not properly terminated
 

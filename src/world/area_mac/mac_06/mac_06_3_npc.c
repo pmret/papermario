@@ -195,7 +195,7 @@ EvtScript N(EVS_NpcIdle_Whale) = {
         EVT_IF_EQ(GF_StartedChapter5, FALSE)
             EVT_SET(GF_StartedChapter5, TRUE)
             EVT_CALL(FadeOutMusic, 0, 1500)
-            EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_22"), kmr_22_ENTRY_5, TRANSITION_6)
+            EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_22"), kmr_22_ENTRY_5, TRANSITION_BEGIN_OR_END_CHAPTER)
         EVT_ELSE
             EVT_CALL(GotoMap, EVT_PTR("jan_00"), jan_00_ENTRY_0)
         EVT_END_IF
