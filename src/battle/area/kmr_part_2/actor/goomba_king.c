@@ -365,14 +365,14 @@ EvtScript N(takeTurn_80221530) = {
 EvtScript N(80221680) = {
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
     EVT_IF_NOT_FLAG(LVar0, 0x80000)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
         EVT_CALL(AddBattleCamZoom, -100)
         EVT_CALL(SetBattleCamOffsetZ, 20)
         EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
         EVT_CALL(MoveBattleCamOver, 30)
         EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
     EVT_ELSE
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
         EVT_CALL(AddBattleCamZoom, -100)
         EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
         EVT_CALL(MoveBattleCamOver, 20)

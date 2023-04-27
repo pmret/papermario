@@ -252,7 +252,7 @@ EvtScript N(EVS_JumpSupport_I) = {
     EVT_END
 };
 
-EvtScript N(EVS_JumpSupport_J) = {
+EvtScript N(EVS_JumpSupport_Miss) = {
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, 0, 0, ANIM_Mario1_SpinFall)
     EVT_CALL(PlayerLandJump)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_SpinFall)

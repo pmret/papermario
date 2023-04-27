@@ -1466,31 +1466,31 @@ void btl_cam_use_preset_impl(s32 id) {
                 preset = &CamPreset_B;
                 break;
             case BTL_CAM_DEFAULT:
-                if (BattleCam_CurrentPresetID != id) {
-                    BattleCam_BoomLength = 500;
-                    BattleCam_MoveTimeLeft = 30;
-                    preset = &EVS_BattleCam_Default;
-                    break;
+                if (BattleCam_CurrentPresetID == id) {
+                    return;
                 }
-                return;
+                BattleCam_BoomLength = 500;
+                BattleCam_MoveTimeLeft = 30;
+                preset = &EVS_BattleCam_Default;
+                break;
             case BTL_CAM_PRESET_03:
-                if (BattleCam_CurrentPresetID != id) {
-                    BattleCam_BoomLength = 480;
-                    BattleCam_MoveTimeLeft = 20;
-                    BattleCam_BoomZOffset = 0;
-                    preset = &CamPreset_D;
-                    break;
+                if (BattleCam_CurrentPresetID == id) {
+                    return;
                 }
-                return;
+                BattleCam_BoomLength = 480;
+                BattleCam_MoveTimeLeft = 20;
+                BattleCam_BoomZOffset = 0;
+                preset = &CamPreset_D;
+                break;
             case BTL_CAM_PRESET_04:
-                if (BattleCam_CurrentPresetID != id) {
-                    BattleCam_BoomLength = 500;
-                    BattleCam_MoveTimeLeft = 10;
-                    BattleCam_BoomZOffset = 0;
-                    preset = &CamPreset_E;
-                    break;
+                if (BattleCam_CurrentPresetID == id) {
+                    return;
                 }
-                return;
+                BattleCam_BoomLength = 500;
+                BattleCam_MoveTimeLeft = 10;
+                BattleCam_BoomZOffset = 0;
+                preset = &CamPreset_E;
+                break;
             case BTL_CAM_PRESET_05:
                 BattleCam_BoomLength = 300;
                 BattleCam_MoveTimeLeft = 20;
@@ -1529,9 +1529,10 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_BoomLength = 200;
                 BattleCam_BoomPitch = 8;
                 BattleCam_MoveTimeLeft = 20;
-                preset = &CamPreset_F;
+                
                 BattleCam_BoomZOffset = 15;
                 BattleCam_BoomYaw = 0;
+                preset = &CamPreset_F;
                 BattleCam_ModeY = BTL_CAM_MODEY_1;
                 BattleCam_ModeX = BTL_CAM_MODEX_1;
                 break;
@@ -1922,24 +1923,24 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_BoomLength = 166;
                 BattleCam_BoomPitch = 8;
                 BattleCam_MoveTimeLeft = 1;
-                preset = &CamPreset_N;
                 BattleCam_BoomYaw = 0;
                 BattleCam_BoomZOffset = 17;
+                preset = &CamPreset_N;
                 BattleCam_ModeY = BTL_CAM_MODEY_0;
                 BattleCam_ModeX = BTL_CAM_MODEX_0;
-                BattleCam_PosZ = 0.0f;
                 BattleCam_PosX = -75.0f;
                 BattleCam_PosY = 150.0f;
+                BattleCam_PosZ = 0.0f;
                 break;
-            case BTL_CAM_PRESET_47:
+            case BTL_CAM_PARTNER_APPROACH:
                 BattleCam_BoomLength = 310;
                 BattleCam_BoomPitch = 8;
                 BattleCam_MoveTimeLeft = 30;
                 BattleCam_BoomZOffset = 16;
+                BattleCam_BoomYaw = 0;
+                preset = &CamPreset_M;
                 BattleCam_ModeY = BTL_CAM_MODEY_1;
                 BattleCam_ModeX = BTL_CAM_MODEX_1;
-                preset = &CamPreset_M;
-                BattleCam_BoomYaw = 0;
                 BattleCam_TargetActor = ACTOR_PARTNER;
                 D_8029F2A6 = FALSE;
                 break;
@@ -2110,7 +2111,7 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_TargetActor = ACTOR_PARTNER;
                 preset = &CamPreset_I;
                 break;
-            case BTL_CAM_PRESET_63:
+            case BTL_CAM_ENEMY_APPROACH:
                 BattleCam_BoomLength = 400;
                 BattleCam_BoomPitch = 8;
                 BattleCam_MoveTimeLeft = 20;

@@ -564,7 +564,7 @@ EvtScript N(takeTurn_8021B81C) = {
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetHomePos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(HPBarToHome, ACTOR_SELF)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
     EVT_CALL(GetBattlePhase, LVar0)
@@ -587,7 +587,7 @@ EvtScript N(takeTurn_8021B81C) = {
     EVT_END_IF
     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_301, 0)
     EVT_CALL(GetBattlePhase, LVar0)
-    EVT_IF_EQ(LVar0, 1)
+    EVT_IF_EQ(LVar0, PHASE_FIRST_STRIKE)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_05)
         EVT_CALL(SetBattleCamZoom, 430)
         EVT_CALL(SetBattleCamOffsetZ, 20)
@@ -721,7 +721,7 @@ EvtScript N(takeTurn_Chan) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Chan_EnterShell)

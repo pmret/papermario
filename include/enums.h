@@ -2208,6 +2208,8 @@ enum ActorPartTargetFlags {
     ACTOR_PART_TARGET_FLAG_4    = 0x04,
 };
 
+
+
 enum PlayerSprites {
     SPR_Mario1                          = 0x1,
     SPR_Mario1_Back                     = 0x2,
@@ -5652,7 +5654,7 @@ enum BtlCameraPreset {
     BTL_CAM_PLAYER_HAMMER_STRIKE    = 44,
     BTL_CAM_PRESET_45               = 45,   // unused?
     BTL_CAM_PRESET_46               = 46,
-    BTL_CAM_PRESET_47               = 47,
+    BTL_CAM_PARTNER_APPROACH        = 47,   // used by Goombario and Watt (power shock only)
     BTL_CAM_PRESET_48               = 48,
     BTL_CAM_PRESET_49               = 49,   // unused?
     BTL_CAM_PRESET_50               = 50,
@@ -5668,7 +5670,7 @@ enum BtlCameraPreset {
     BTL_CAM_PRESET_60               = 60,   // unused?
     BTL_CAM_PRESET_61               = 61,
     BTL_CAM_PRESET_62               = 62,
-    BTL_CAM_PRESET_63               = 63,
+    BTL_CAM_ENEMY_APPROACH          = 63,   // (very common)
     BTL_CAM_PRESET_64               = 64,   // unused?
     BTL_CAM_PRESET_65               = 65,   // unused?
     BTL_CAM_PRESET_66               = 66,

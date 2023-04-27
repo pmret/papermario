@@ -64,7 +64,7 @@ EvtScript N(EVS_UseMove0_ImplA) = {
     EVT_END_IF
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 0)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
-        EVT_EXEC_WAIT(N(EVS_JumpSupport_J))
+        EVT_EXEC_WAIT(N(EVS_JumpSupport_Miss))
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetActionCommandMode, LVar0)
@@ -118,7 +118,7 @@ EvtScript N(EVS_UseMove0_ImplB) = {
     EVT_EXEC_WAIT(N(EVS_JumpSupport_K))
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 0)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
-        EVT_EXEC_WAIT(N(EVS_JumpSupport_J))
+        EVT_EXEC_WAIT(N(EVS_JumpSupport_Miss))
         EVT_RETURN
     EVT_END_IF
     EVT_WAIT(1)
@@ -173,7 +173,7 @@ EvtScript N(EVS_UseMove0_ImplC) = {
     EVT_EXEC_WAIT(N(EVS_JumpSupport_K))
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 0)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
-        EVT_EXEC_WAIT(N(EVS_JumpSupport_J))
+        EVT_EXEC_WAIT(N(EVS_JumpSupport_Miss))
         EVT_RETURN
     EVT_END_IF
     EVT_WAIT(1)
@@ -337,7 +337,7 @@ EvtScript N(EVS_UseMove2_ImplA) = {
     EVT_EXEC_WAIT(N(EVS_JumpSupport_K))
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 0)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
-        EVT_EXEC_WAIT(N(EVS_JumpSupport_J))
+        EVT_EXEC_WAIT(N(EVS_JumpSupport_Miss))
         EVT_RETURN
     EVT_END_IF
     EVT_WAIT(1)
@@ -388,7 +388,7 @@ EvtScript N(EVS_UseMove2_ImplB) = {
     EVT_EXEC_WAIT(N(EVS_JumpSupport_K))
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 0)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
-        EVT_EXEC_WAIT(N(EVS_JumpSupport_J))
+        EVT_EXEC_WAIT(N(EVS_JumpSupport_Miss))
         EVT_RETURN
     EVT_END_IF
     EVT_WAIT(1)
@@ -445,7 +445,7 @@ EvtScript N(EVS_UseMove2_ImplC) = {
     EVT_EXEC_WAIT(N(EVS_JumpSupport_K))
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 0)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
-        EVT_EXEC_WAIT(N(EVS_JumpSupport_J))
+        EVT_EXEC_WAIT(N(EVS_JumpSupport_Miss))
         EVT_RETURN
     EVT_END_IF
     EVT_WAIT(1)
@@ -518,7 +518,7 @@ EvtScript N(EVS_802A4018) = {
     EVT_END_IF
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 0)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
-        EVT_EXEC_WAIT(N(EVS_JumpSupport_J))
+        EVT_EXEC_WAIT(N(EVS_JumpSupport_Miss))
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetActionCommandMode, LVar0)

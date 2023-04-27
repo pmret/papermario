@@ -18,11 +18,11 @@ BSS s32 D_802DFEB8[101];
 BSS s32 PlayerRasterSetsLoaded;
 BSS s32 PlayerRasterBufferSetOffsets[13];
 BSS s32 D_802D0084[3]; // unused?
-BSS s32 D_802E0090[0x2E0]; // correct length?
+BSS s32 PlayerRasterDmaInfo[0x2E0]; // correct length?
 
 BSS s32 PlayerRasterHeader[3];
-BSS s32 D_802E0C1C;
-BSS s32 D_802E0C20[14];
+BSS s32 D_802E0C1C; // unused
+BSS s32 D_802E0C20[14]; //TODO size linked to number of player sprites
 BSS s32 PlayerRasterCacheSize;
 BSS s32 PlayerRasterMaxSize;
 BSS s32 SpriteDataHeader[3];
@@ -127,7 +127,7 @@ SpriteAnimData* spr_load_sprite(s32 idx, s32 isPlayerSprite, s32 useTailAlloc) {
         count = D_802E0C20[idx + 1] - D_802E0C20[idx];
         nuPiReadRom(SpriteDataHeader[0] + PlayerRasterHeader[1] + sizeof(u32) * D_802E0C20[idx], D_802DFEB8, sizeof(D_802DFEB8));
         for (i = 0; i < count; i++) {
-            D_802E0090[PlayerRasterSetsLoaded++] = D_802DFEB8[i];
+            PlayerRasterDmaInfo[PlayerRasterSetsLoaded++] = D_802DFEB8[i];
         }
     }
 
@@ -178,7 +178,7 @@ void spr_init_player_raster_cache(s32 cacheSize, s32 maxRasterSize) {
 
 IMG_PTR spr_get_player_raster(s32 rasterIndex, s32 playerSpriteID) {
     PlayerSpriteCacheEntry* temp_s0;
-    u32 temp_a2;
+    u32 playerRasterInfo;
     s32 idx = -1;
     s32 i;
 
@@ -201,8 +201,11 @@ IMG_PTR spr_get_player_raster(s32 rasterIndex, s32 playerSpriteID) {
     temp_s0->rasterIndex = rasterIndex;
     temp_s0->spriteIndex = playerSpriteID;
     temp_s0->lazyDeleteTime = 2;
-    temp_a2 = D_802E0090[PlayerRasterBufferSetOffsets[playerSpriteID] + rasterIndex];
-    nuPiReadRom(SpriteDataHeader[0] + (temp_a2 & 0xFFFFF), temp_s0->raster, (temp_a2 >> 0x10) & 0xFFF0);
+
+    // each player raster info word has size and relative offset packed together
+    // upper three nibbles give size, lower 5 give offset
+    playerRasterInfo = PlayerRasterDmaInfo[PlayerRasterBufferSetOffsets[playerSpriteID] + rasterIndex];
+    nuPiReadRom(SpriteDataHeader[0] + (playerRasterInfo & 0xFFFFF), temp_s0->raster, (playerRasterInfo >> 0x10) & 0xFFF0);
     return temp_s0->raster;
 }
 
