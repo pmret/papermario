@@ -198,7 +198,7 @@ EvtScript N(802257A8) = {
                 EVT_CASE_OR_EQ(6)
                     EVT_SET_CONST(LVar0, 1)
                     EVT_SET_CONST(LVar1, ANIM_KoopaBros_Green_Anim0B)
-                    EVT_EXEC_WAIT(DoNormalHit)
+                    EVT_EXEC_WAIT(EVS_DoNormalHit)
                     EVT_CALL(GetActorVar, ACTOR_ENEMY4, 0, LVar0)
                     EVT_BITWISE_AND_CONST(LVar0, 192)
                     EVT_IF_NE(LVar0, 192)
@@ -427,7 +427,7 @@ EvtScript N(802257A8) = {
                         EVT_CALL(GetActorVar, ACTOR_ENEMY4, 3, LVar1)
                         EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_ALL, 0, LVar1, BS_FLAGS1_SP_EVT_ACTIVE)
                     EVT_END_THREAD
-                    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+                    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_37C)
                     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_0, SOUND_0)
                     EVT_CALL(EnableActorBlur, ACTOR_SELF, 1)
@@ -619,7 +619,7 @@ EvtScript N(802257A8) = {
                         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
                         EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_ALL, 0, 1, BS_FLAGS1_SP_EVT_ACTIVE)
                     EVT_END_THREAD
-                    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+                    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_37C)
                     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_0, SOUND_0)
                     EVT_CALL(EnableActorBlur, ACTOR_SELF, 1)
@@ -705,7 +705,7 @@ EvtScript N(handleEvent_80227E48) = {
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_KoopaBros_Green_Anim0B)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar0, 1)
@@ -719,7 +719,7 @@ EvtScript N(handleEvent_80227E48) = {
             EVT_EXEC_WAIT(DoBurnHit)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_KoopaBros_Green_Anim0F)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_SET_CONST(LVar0, 1)
@@ -731,7 +731,7 @@ EvtScript N(handleEvent_80227E48) = {
             EVT_EXEC_WAIT(DoSpinSmashHit)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_KoopaBros_Green_Anim0B)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_FLIP_TRIGGER)
             EVT_CALL(SetActorVar, ACTOR_SELF, 1, 1)
@@ -788,10 +788,10 @@ EvtScript N(handleEvent_80227E48) = {
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_KoopaBros_Green_Anim0B)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_KoopaBros_Green_Anim0B)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar0)

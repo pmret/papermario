@@ -33,7 +33,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_CALL(N(FadeBackgroundToBlack))
     EVT_THREAD
         EVT_WAIT(5)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(MoveBattleCamOver, 50)
     EVT_END_THREAD
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Crouch)
@@ -58,7 +58,7 @@ EvtScript N(EVS_UseItem) = {
         EVT_CALL(MoveBattleCamOver, 2)
         EVT_WAIT(2)
     EVT_END_LOOP
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
@@ -67,7 +67,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_IF_EQ(LVar0, 6)
         EVT_GOTO(1)
     EVT_END_IF
-    EVT_CALL(func_80269EAC, 21)
+    EVT_CALL(SetDamageSource, DMG_SRC_FRIGHT_JAR)
     EVT_CALL(ItemSpookEnemy, LVar0, 1879052288, 0, 100, 0, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_LABEL(1)
     EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)

@@ -175,7 +175,7 @@ EvtScript N(handleEvent_80219D74) = {
         EVT_CASE_OR_EQ(10)
             EVT_SET_CONST(LVar0, 0x00000001)
             EVT_SET_CONST(LVar1, ANIM_GoombaBros_Blue_Hurt)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(14)
             EVT_SET_CONST(LVar0, 0x00000001)
@@ -240,7 +240,7 @@ EvtScript N(handleEvent_80219D74) = {
         EVT_CASE_EQ(32)
             EVT_SET_CONST(LVar0, 0x00000001)
             EVT_SET_CONST(LVar1, ANIM_GoombaBros_Blue_Hurt)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 0x00000001)
             EVT_SET_CONST(LVar1, ANIM_GoombaBros_Blue_Hurt)
@@ -290,7 +290,7 @@ EvtScript N(takeTurn_8021A5A0) = {
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-    EVT_CALL(func_8024ECF8, -1, 1, 0)
+    EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_GoombaBros_Blue_Run)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 50, 0, 0)
@@ -369,7 +369,7 @@ EvtScript N(takeTurn_8021A5A0) = {
             EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_GoombaBros_Blue_Dizzy)
             EVT_WAIT(5)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
             EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
@@ -419,7 +419,7 @@ EvtScript N(takeTurn_8021A5A0) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(0)
         EVT_CASE_OR_EQ(2)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.1), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
             EVT_WAIT(1)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
@@ -481,7 +481,7 @@ EvtScript N(takeTurn_8021B2C8) = {
 };
 
 EvtScript N(doDeath_8021B388) = {
-    EVT_CALL(func_8027D32C, -127)
+    EVT_CALL(func_8027D32C, ACTOR_SELF)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_SET(LVar2, 0)
     EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
@@ -520,7 +520,7 @@ EvtScript N(doDeath_8021B388) = {
         EVT_CALL(ActorSpeak, MSG_CH0_00C1, ACTOR_ENEMY1, 1, -1, -1)
         EVT_CALL(EnableIdleScript, ACTOR_ENEMY1, 1)
         EVT_CALL(UseIdleAnimation, ACTOR_ENEMY1, TRUE)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(MoveBattleCamOver, 30)
         EVT_WAIT(30)
     EVT_END_IF

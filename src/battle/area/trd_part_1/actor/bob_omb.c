@@ -231,7 +231,7 @@ EvtScript N(handleEvent_8021ACE8) = {
             EVT_END_IF
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim0E)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
         EVT_CASE_EQ(EVENT_HIT)
             EVT_CALL(GetLastElement, LVarE)
             EVT_IF_FLAG(LVarE, DAMAGE_TYPE_SHOCK)
@@ -243,12 +243,12 @@ EvtScript N(handleEvent_8021ACE8) = {
                 EVT_SET_CONST(LVar0, 1)
                 EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim11)
                 EVT_SET(LVar2, -12345)
-                EVT_EXEC_WAIT(DoDeath)
+                EVT_EXEC_WAIT(EVS_DoDeath)
                 EVT_RETURN
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
                 EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim0E)
-                EVT_EXEC_WAIT(DoNormalHit)
+                EVT_EXEC_WAIT(EVS_DoNormalHit)
                 EVT_CALL(GetLastDamage, ACTOR_SELF, LVar0)
                 EVT_IF_NE(LVar0, 0)
                     EVT_EXEC_WAIT(N(ignite))
@@ -264,7 +264,7 @@ EvtScript N(handleEvent_8021ACE8) = {
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim11)
             EVT_SET(LVar2, -12345)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
@@ -282,14 +282,14 @@ EvtScript N(handleEvent_8021ACE8) = {
             EVT_EXEC_WAIT(N(8021AAE8))
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim0E)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_SHOCK_HIT)
         EVT_CASE_OR_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim10)
             EVT_SET(LVar2, -12345)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_ZERO_DAMAGE)
             EVT_SET_CONST(LVar0, 1)
@@ -316,17 +316,17 @@ EvtScript N(handleEvent_8021ACE8) = {
                 EVT_SET_CONST(LVar0, 1)
                 EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim11)
                 EVT_SET(LVar2, -12345)
-                EVT_EXEC_WAIT(DoDeath)
+                EVT_EXEC_WAIT(EVS_DoDeath)
                 EVT_RETURN
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
                 EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim0E)
-                EVT_EXEC_WAIT(DoNormalHit)
+                EVT_EXEC_WAIT(EVS_DoNormalHit)
                 EVT_WAIT(10)
                 EVT_EXEC_WAIT(N(8021AAE8))
                 EVT_SET_CONST(LVar0, 1)
                 EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim0E)
-                EVT_EXEC_WAIT(DoDeath)
+                EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_END_IF
             EVT_RETURN
         EVT_CASE_EQ(EVENT_EXPLODE_TRIGGER)
@@ -338,7 +338,7 @@ EvtScript N(handleEvent_8021ACE8) = {
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim11)
             EVT_SET(LVar2, -12345)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 1)
@@ -378,11 +378,11 @@ EvtScript N(handleEvent_8021B4A8) = {
                 EVT_EXEC_WAIT(N(8021A9C8))
                 EVT_SET_CONST(LVar0, 1)
                 EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim0E)
-                EVT_EXEC_WAIT(DoNormalHit)
+                EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
                 EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim0F)
-                EVT_EXEC_WAIT(DoNormalHit)
+                EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_END_IF
         EVT_CASE_EQ(EVENT_HIT)
             EVT_CALL(GetLastElement, LVarE)
@@ -391,28 +391,28 @@ EvtScript N(handleEvent_8021B4A8) = {
                     EVT_EXEC_WAIT(N(8021A9C8))
                     EVT_SET_CONST(LVar0, 1)
                     EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim0E)
-                    EVT_EXEC_WAIT(DoNormalHit)
+                    EVT_EXEC_WAIT(EVS_DoNormalHit)
                 EVT_CASE_FLAG(DAMAGE_TYPE_SHOCK)
                     EVT_SET_CONST(LVar0, 1)
                     EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim10)
-                    EVT_EXEC_WAIT(DoNormalHit)
+                    EVT_EXEC_WAIT(EVS_DoNormalHit)
                     EVT_EXEC_WAIT(N(8021AB54))
                     EVT_SET_CONST(LVar0, 1)
                     EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim11)
                     EVT_SET(LVar2, -12345)
-                    EVT_EXEC_WAIT(DoDeath)
+                    EVT_EXEC_WAIT(EVS_DoDeath)
                     EVT_RETURN
                 EVT_CASE_DEFAULT
                     EVT_SET_CONST(LVar0, 1)
                     EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim0F)
-                    EVT_EXEC_WAIT(DoNormalHit)
+                    EVT_EXEC_WAIT(EVS_DoNormalHit)
                     EVT_CALL(GetLastDamage, ACTOR_SELF, LVar0)
                     EVT_IF_GT(LVar0, 0)
                         EVT_EXEC_WAIT(N(8021AB54))
                         EVT_SET_CONST(LVar0, 1)
                         EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim11)
                         EVT_SET(LVar2, -12345)
-                        EVT_EXEC_WAIT(DoDeath)
+                        EVT_EXEC_WAIT(EVS_DoDeath)
                         EVT_RETURN
                     EVT_END_IF
             EVT_END_SWITCH
@@ -425,7 +425,7 @@ EvtScript N(handleEvent_8021B4A8) = {
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim11)
             EVT_SET(LVar2, -12345)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
@@ -447,7 +447,7 @@ EvtScript N(handleEvent_8021B4A8) = {
                 EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim11)
                 EVT_SET(LVar2, -12345)
             EVT_END_IF
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_SHOCK_HIT)
         EVT_CASE_OR_EQ(EVENT_SHOCK_DEATH)
@@ -455,7 +455,7 @@ EvtScript N(handleEvent_8021B4A8) = {
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim11)
             EVT_SET(LVar2, -12345)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
@@ -474,8 +474,8 @@ EvtScript N(handleEvent_8021B4A8) = {
             EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim1D)
             EVT_EXEC_WAIT(DoAirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
-            EVT_CALL(func_80269E80, LVar0)
-            EVT_IF_EQ(LVar0, 20)
+            EVT_CALL(GetDamageSource, LVar0)
+            EVT_IF_EQ(LVar0, DMG_SRC_HURRICANE)
                 EVT_EXEC_WAIT(N(8021A9C8))
                 EVT_SET_CONST(LVar0, 1)
                 EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim1C)
@@ -504,7 +504,7 @@ EvtScript N(tackleAttack) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-    EVT_CALL(func_8024ECF8, -1, 1, 0)
+    EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bobomb_Anim06)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
@@ -548,7 +548,7 @@ EvtScript N(tackleAttack) = {
             EVT_END_IF
             EVT_WAIT(5)
             EVT_CALL(YieldTurn)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
             EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bobomb_Anim06)
@@ -583,7 +583,7 @@ EvtScript N(tackleAttack) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar0, 40)
             EVT_SET(LVar1, 0)
@@ -614,7 +614,7 @@ EvtScript N(blastAttack) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-    EVT_CALL(func_8024ECF8, -1, 1, 0)
+    EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
     EVT_CALL(PlayLoopingSoundAtActor, ACTOR_SELF, 0, 0x80000001)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
@@ -635,7 +635,7 @@ EvtScript N(blastAttack) = {
             EVT_SUB(LVar0, 30)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_EXEC_WAIT(N(8021AB54))
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bobomb_Anim11)
             EVT_WAIT(10)
@@ -648,7 +648,7 @@ EvtScript N(blastAttack) = {
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, -1)
             EVT_SET(LVar2, -12345)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
@@ -665,12 +665,12 @@ EvtScript N(blastAttack) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bobomb_Anim11)
     EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_BLAST | DAMAGE_TYPE_NO_CONTACT, 0, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_WAIT(15)
     EVT_SET_CONST(LVar0, 1)
     EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim11)
     EVT_SET(LVar2, -12345)
-    EVT_EXEC_WAIT(DoDeath)
+    EVT_EXEC_WAIT(EVS_DoDeath)
     EVT_RETURN
     EVT_END
 };

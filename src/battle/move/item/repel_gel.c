@@ -34,7 +34,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_CALL(GetItemPower, ITEM_REPEL_GEL, LVar0, LVar1)
     EVT_CALL(N(func_802A123C_72DDAC))
     EVT_WAIT(20)
-    EVT_CALL(ShowMessageBox, BTL_MSG_11, 60)
+    EVT_CALL(ShowMessageBox, BTL_MSG_PLAYER_TRANSPARENT, 60)
     EVT_CALL(WaitForMessageBoxDone)
     EVT_EXEC_WAIT(N(PlayerGoHome))
     EVT_RETURN

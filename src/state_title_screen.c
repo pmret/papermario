@@ -474,8 +474,7 @@ void title_screen_draw_copyright(f32 arg0) {
         if (alpha < 0) {
             alpha = 0;
         }
-        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0,
-                          PRIMITIVE, 0);
+        gDPSetCombineMode(gMainGfxPos++, PM_CC_02, PM_CC_02);
         gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, alpha);
     }
 

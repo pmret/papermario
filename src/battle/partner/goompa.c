@@ -97,7 +97,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Goompa_Injured)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
@@ -121,7 +121,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar0, 0)
             EVT_SET_CONST(LVar1, ANIM_Goompa_Injured)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
         EVT_CASE_EQ(EVENT_33)
         EVT_CASE_EQ(EVENT_RECOVER_FROM_KO)
             EVT_SET_CONST(LVar0, 1)

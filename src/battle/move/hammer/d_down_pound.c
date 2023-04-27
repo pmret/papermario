@@ -25,7 +25,7 @@ extern EvtScript N(UseMove_Impl);
 
 EvtScript N(EVS_UseMove) = {
     EVT_CALL(ShowActionHud, TRUE)
-    EVT_CALL(func_80269EAC, 3)
+    EVT_CALL(SetDamageSource, DMG_SRC_D_DOWN_POUND)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar1)
         EVT_CASE_EQ(0)
@@ -102,10 +102,10 @@ EvtScript N(UseMove_Impl) = {
     EVT_END_SWITCH
     EVT_CALL(DidActionSucceed, LVar0)
     EVT_IF_GT(LVar0, FALSE)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_44)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_HAMMER_STRIKE)
         EVT_CALL(MoveBattleCamOver, 5)
     EVT_ELSE
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_44)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_HAMMER_STRIKE)
         EVT_CALL(MoveBattleCamOver, 50)
     EVT_END_IF
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)

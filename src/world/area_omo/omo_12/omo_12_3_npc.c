@@ -25,15 +25,15 @@ API_CALLABLE(N(SetLightOriginAndPower)) {
     s32 z = evt_get_variable(script, *args++);
     s32 alpha = evt_get_variable(script, *args++);
 
-    set_screen_overlay_center_worldpos(1, 1, x, y, z);
-    set_screen_overlay_alpha(1, alpha);
-    set_screen_overlay_params_back(0xB, 255.0f);
+    set_screen_overlay_center_worldpos(SCREEN_LAYER_BACK, 1, x, y, z);
+    set_screen_overlay_alpha(SCREEN_LAYER_BACK, alpha);
+    set_screen_overlay_params_back(OVERLAY_WORLD_DARKNESS, 255.0f);
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(SetLightOff)) {
-    set_screen_overlay_alpha(1, 0.0f);
-    set_screen_overlay_params_back(0xB, 0.0f);
+    set_screen_overlay_alpha(SCREEN_LAYER_BACK, 0.0f);
+    set_screen_overlay_params_back(OVERLAY_WORLD_DARKNESS, 0.0f);
     return ApiStatus_DONE2;
 }
 

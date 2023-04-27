@@ -640,7 +640,7 @@ void add_xz_vec3f_copy1(Vec3f* vector, f32 speed, f32 angleDeg);
 void add_xz_vec3f_copy2(Vec3f* vector, f32 speed, f32 angleDeg);
 void play_movement_dust_effects(s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angleDeg);
 
-void func_80138D88(s32, s32, s32, s32, f32);
+void draw_prev_frame_buffer_at_screen_pos(s32, s32, s32, s32, f32);
 void func_8013A4D0(void);
 
 void btl_draw_ui(void);
@@ -744,7 +744,7 @@ void state_step_demo(void);
 void state_drawUI_demo(void);
 void game_mode_set_fpDrawAuxUI(s32 i, void (*fn)(void));
 
-void func_80260A60(void);
+void btl_set_player_idle_anims(void);
 
 void shim_create_audio_system_obfuscated(void);
 void shim_load_engine_data_obfuscated(void);
@@ -959,7 +959,7 @@ void set_message_msg(s32 msgID, s32 index);
 void set_message_value(s32 value, s32 index);
 s32 store_item(s32 itemID);
 void open_status_menu_short(void);
-void func_8024EFE0(f32 x, f32 y, f32 z, s32, s32, s32);
+void show_immune_bonk(f32 x, f32 y, f32 z, s32, s32, s32);
 void func_802664DC(f32 x, f32 y, f32 z, s32 attack, s32 a);
 s32 dispatch_damage_event_partner(s32 damageAmount, s32 event, s32 stopMotion);
 void disable_actor_blur(Actor*);

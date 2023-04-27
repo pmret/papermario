@@ -121,7 +121,7 @@ void quizmo_stage_appendGfx(void* effect) {
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, microphoneRaiseAmt, microphoneRaiseAmt, microphoneRaiseAmt, 255);
-    gDPSetCombineLERP(gMainGfxPos++, TEXEL0, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, COMBINED, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED);
+    gDPSetCombineMode(gMainGfxPos++, G_CC_MODULATEIA, PM_CC_16);
     gSPDisplayList(gMainGfxPos++, D_09007230_39FDF0);
 
     if (data->unk_3C != 255) {

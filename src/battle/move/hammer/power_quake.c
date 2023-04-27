@@ -156,7 +156,7 @@ EvtScript N(EVS_802A3168) = {
     EVT_END_THREAD
     EVT_WAIT(10)
     EVT_EXEC_WAIT(N(EVS_Hammer_ReturnHome_B))
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_RETURN
     EVT_END
 };

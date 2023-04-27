@@ -84,7 +84,7 @@ EvtScript N(EVS_UseMove0_Impl) = {
                     EVT_END_THREAD
             EVT_END_SWITCH
     EVT_END_SWITCH
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_44)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_HAMMER_STRIKE)
     EVT_WAIT(1)
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, 0, 16)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
@@ -155,12 +155,12 @@ EvtScript N(EVS_UseMove1) = {
     EVT_SUB(LVar0, 32)
     EVT_SET(LVar1, 0)
     EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(UseBattleCamPresetImmediately, BTL_CAM_PRESET_43)
+    EVT_CALL(UseBattleCamPresetImmediately, BTL_CAM_PLAYER_AIM_HAMMER)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, LVarA)
     EVT_WAIT(8)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, LVarB)
     EVT_WAIT(3)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_44)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_HAMMER_STRIKE)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, LVarC)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar1)
@@ -183,7 +183,7 @@ EvtScript N(EVS_UseMove1) = {
                 EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(1.9))
             EVT_END_THREAD
     EVT_END_SWITCH
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_44)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_HAMMER_STRIKE)
     EVT_WAIT(1)
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, 0, 16)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
@@ -261,7 +261,7 @@ EvtScript N(EVS_UseMove2_Impl) = {
                     EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(1.9))
                 EVT_END_THREAD
         EVT_END_SWITCH
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_44)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_HAMMER_STRIKE)
         EVT_EXEC_WAIT(N(EVS_Hammer_ReturnHome_C))
         EVT_RETURN
     EVT_END_IF
@@ -306,7 +306,7 @@ EvtScript N(EVS_UseMove2_Impl) = {
                     EVT_END_THREAD
             EVT_END_SWITCH
     EVT_END_SWITCH
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_44)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_HAMMER_STRIKE)
     EVT_WAIT(1)
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, 0, 16)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)

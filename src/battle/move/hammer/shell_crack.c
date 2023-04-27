@@ -79,7 +79,7 @@ EvtScript N(UseMove_Impl) = {
     EVT_CALL(InitTargetIterator)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(func_802A10A4_77F2E4)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_44)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_HAMMER_STRIKE)
     EVT_WAIT(1)
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, 0, 16)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)

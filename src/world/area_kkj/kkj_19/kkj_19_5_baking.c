@@ -230,7 +230,7 @@ API_CALLABLE(N(FadeScreenToBlack)) {
         script->functionTemp[1] = 255;
     }
 
-    set_screen_overlay_params_front(0, script->functionTemp[1]);
+    set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, script->functionTemp[1]);
 
     if (script->functionTemp[1] == 255) {
         return ApiStatus_DONE2;
@@ -250,7 +250,7 @@ API_CALLABLE(N(FadeScreenFromBlack)) {
         return ApiStatus_DONE2;
     }
 
-    set_screen_overlay_params_front(0, script->functionTemp[1]);
+    set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, script->functionTemp[1]);
     return ApiStatus_BLOCK;
 }
 

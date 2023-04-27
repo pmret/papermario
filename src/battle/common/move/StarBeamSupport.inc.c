@@ -153,7 +153,7 @@ EvtScript N(802A2C20) = {
 EvtScript N(802A2E2C) = {
     EVT_CALL(GetOwnerID, LVarA)
     EVT_IF_EQ(LVarA, 0)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(PlaySound, SOUND_2047)
         EVT_THREAD
             EVT_LOOP(5)
@@ -185,7 +185,7 @@ EvtScript N(802A2E2C) = {
         EVT_CALL(EnableNpcBlur, NPC_BTL_SPIRIT, FALSE)
         EVT_CALL(DeleteNpc, NPC_BTL_SPIRIT)
     EVT_ELSE
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(PlaySound, SOUND_2045)
         EVT_THREAD
             EVT_LOOP(5)
@@ -438,7 +438,7 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
             break;
         case PEACH_STAR_BEAM_ZOOM_OUT:
             if (script->functionTemp[1] == 0) {
-                btl_cam_use_preset(BTL_CAM_PRESET_C);
+                btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(10);
                 script->functionTemp[1] = 15;
                 script->functionTemp[0] = PEACH_STAR_BEAM_SHRINK_CIRCLE;
@@ -540,7 +540,7 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
                     }
                 }
 
-                btl_cam_use_preset(BTL_CAM_PRESET_D);
+                btl_cam_use_preset(BTL_CAM_PRESET_03);
                 btl_cam_move(30);
                 script->functionTemp[1] = 15;
                 script->functionTemp[0] = PEACH_STAR_BEAM_MAKE_ADDITIONAL_EFFECTS;

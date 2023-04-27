@@ -258,7 +258,7 @@ EvtScript N(8021D890) = {
     EVT_END_IF
     EVT_RETURN
     EVT_LABEL(0)
-    EVT_CALL(func_8027D32C, -127)
+    EVT_CALL(func_8027D32C, ACTOR_SELF)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
     EVT_IF_FLAG(LVar0, 0x80000)
         EVT_CALL(SetPartScale, ACTOR_SELF, 3, EVT_FLOAT(0.4), EVT_FLOAT(0.4), EVT_FLOAT(0.4))
@@ -324,14 +324,14 @@ EvtScript N(8021D890) = {
 EvtScript N(runAway) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
-    EVT_CALL(func_8027D32C, -127)
+    EVT_CALL(func_8027D32C, ACTOR_SELF)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_IF_NE(LVar0, 57)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
         EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
         EVT_CALL(MoveBattleCamOver, 15)
         EVT_WAIT(15)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_B)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_01)
     EVT_END_IF
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(1.0))
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -347,9 +347,9 @@ EvtScript N(runAway) = {
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
     EVT_CALL(YieldTurn)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
-    EVT_EXEC_WAIT(ForceNextTarget)
-    EVT_CALL(func_8027D32C, -127)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
+    EVT_EXEC_WAIT(EVS_ForceNextTarget)
+    EVT_CALL(func_8027D32C, ACTOR_SELF)
     EVT_CALL(RemoveActor, ACTOR_SELF)
     EVT_RETURN
     EVT_END
@@ -469,12 +469,12 @@ EvtScript N(handleEvent_8021E6D8) = {
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, LVar0)
             EVT_SET_CONST(LVar0, 0x00000001)
             EVT_SET_CONST(LVar1, ANIM_Magikoopa_Anim04)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
         EVT_CASE_OR_EQ(10)
         EVT_CASE_OR_EQ(61)
             EVT_SET_CONST(LVar0, 0x00000001)
             EVT_SET_CONST(LVar1, ANIM_Magikoopa_Anim04)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_EXEC_WAIT(N(8021E46C))
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(14)
@@ -491,7 +491,7 @@ EvtScript N(handleEvent_8021E6D8) = {
             EVT_EXEC_WAIT(N(8021E46C))
             EVT_SET_CONST(LVar0, 0x00000001)
             EVT_SET_CONST(LVar1, ANIM_Magikoopa_Anim06)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(11)
             EVT_SET_CONST(LVar0, 0x00000001)
@@ -505,7 +505,7 @@ EvtScript N(handleEvent_8021E6D8) = {
             EVT_EXEC_WAIT(N(8021E46C))
             EVT_SET_CONST(LVar0, 0x00000001)
             EVT_SET_CONST(LVar1, ANIM_Magikoopa_Anim04)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(23)
             EVT_SET_CONST(LVar0, 0x00000001)
@@ -527,12 +527,12 @@ EvtScript N(handleEvent_8021E6D8) = {
         EVT_CASE_EQ(32)
             EVT_SET_CONST(LVar0, 0x00000001)
             EVT_SET_CONST(LVar1, ANIM_Magikoopa_Anim04)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_EXEC_WAIT(N(8021E46C))
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 0x00000001)
             EVT_SET_CONST(LVar1, ANIM_Magikoopa_Anim04)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(49)
             EVT_SET_CONST(LVar0, 0x00000001)
@@ -574,7 +574,7 @@ EvtScript N(handleEvent_8021E6D8) = {
         EVT_CASE_EQ(19)
             EVT_SET_CONST(LVar0, 0x00000001)
             EVT_SET_CONST(LVar1, ANIM_Magikoopa_Anim04)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_EXEC_WAIT(N(8021E46C))
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
@@ -597,20 +597,20 @@ EvtScript N(handleEvent_8021EDF0) = {
             EVT_EXEC_WAIT(N(8021D784))
             EVT_SET_CONST(LVar0, 0x00000002)
             EVT_SET_CONST(LVar1, ANIM_FlyingMagikoopa_Anim04)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
         EVT_CASE_OR_EQ(10)
         EVT_CASE_OR_EQ(12)
             EVT_EXEC_WAIT(N(8021D784))
             EVT_SET_CONST(LVar0, 0x00000002)
             EVT_SET_CONST(LVar1, ANIM_FlyingMagikoopa_Anim04)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_EXEC_WAIT(N(8021E46C))
             EVT_EXEC_WAIT(N(8021D890))
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(61)
             EVT_SET_CONST(LVar0, 0x00000002)
             EVT_SET_CONST(LVar1, ANIM_FlyingMagikoopa_Anim04)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_EXEC_WAIT(N(8021E46C))
         EVT_CASE_OR_EQ(14)
         EVT_CASE_OR_EQ(15)
@@ -630,7 +630,7 @@ EvtScript N(handleEvent_8021EDF0) = {
             EVT_EXEC_WAIT(N(8021E46C))
             EVT_SET_CONST(LVar0, 0x00000002)
             EVT_SET_CONST(LVar1, ANIM_FlyingMagikoopa_Anim06)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(11)
             EVT_SET_CONST(LVar0, 0x00000002)
@@ -644,7 +644,7 @@ EvtScript N(handleEvent_8021EDF0) = {
             EVT_EXEC_WAIT(N(8021E46C))
             EVT_SET_CONST(LVar0, 0x00000002)
             EVT_SET_CONST(LVar1, ANIM_FlyingMagikoopa_Anim04)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(23)
             EVT_SET_CONST(LVar0, 0x00000002)
@@ -666,12 +666,12 @@ EvtScript N(handleEvent_8021EDF0) = {
         EVT_CASE_EQ(32)
             EVT_SET_CONST(LVar0, 0x00000002)
             EVT_SET_CONST(LVar1, ANIM_FlyingMagikoopa_Anim04)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_EXEC_WAIT(N(8021E46C))
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 0x00000002)
             EVT_SET_CONST(LVar1, ANIM_FlyingMagikoopa_Anim04)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(56)
             EVT_CALL(SetActorPos, ACTOR_SELF, 20, 0, 0)
@@ -723,7 +723,7 @@ EvtScript N(handleEvent_8021EDF0) = {
         EVT_CASE_EQ(19)
             EVT_SET_CONST(LVar0, 0x00000002)
             EVT_SET_CONST(LVar1, ANIM_FlyingMagikoopa_Anim04)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_EXEC_WAIT(N(8021E46C))
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
@@ -803,7 +803,7 @@ EvtScript N(healOne) = {
         EVT_CALL(func_8026BF48, 0)
     EVT_END_THREAD
     EVT_CALL(WaitForBuffDone)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 10)
     EVT_WAIT(10)
     EVT_CALL(YieldTurn)
@@ -902,7 +902,7 @@ EvtScript N(healAll) = {
     EVT_END_IF
     EVT_CALL(WaitForBuffDone)
     EVT_WAIT(1)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 10)
     EVT_WAIT(10)
     EVT_CALL(YieldTurn)
@@ -932,10 +932,10 @@ EvtScript N(shapeSpell) = {
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_IF_EQ(LVar0, 1)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(MoveBattleCamOver, 1)
     EVT_ELSE
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(MoveBattleCamOver, 10)
     EVT_END_IF
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SPELL_CAST1)
@@ -1401,7 +1401,7 @@ EvtScript N(makeCopy) = {
     EVT_CALL(SetActorPos, LVarA, LVar0, LVar1, LVar2)
     EVT_SET(LVar9, LVarA)
     EVT_WAIT(15)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SPELL_CAST4)
     EVT_CALL(PlaySoundAtActor, LVar9, SOUND_SPELL_CAST4)
@@ -1550,7 +1550,7 @@ EvtScript N(boostAttack) = {
         EVT_CALL(func_8026BF48, 0)
     EVT_END_THREAD
     EVT_CALL(WaitForBuffDone)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_WAIT(10)
     EVT_CALL(YieldTurn)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -1662,7 +1662,7 @@ EvtScript N(boostDefense) = {
         EVT_CALL(func_8026BF48, 0)
     EVT_END_THREAD
     EVT_CALL(WaitForBuffDone)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_WAIT(10)
     EVT_CALL(YieldTurn)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -1779,7 +1779,7 @@ EvtScript N(electrify) = {
         EVT_CALL(func_8026BF48, 0)
     EVT_END_THREAD
     EVT_CALL(WaitForBuffDone)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_WAIT(10)
     EVT_CALL(YieldTurn)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -1891,7 +1891,7 @@ EvtScript N(vanish) = {
         EVT_CALL(func_8026BF48, 0)
     EVT_END_THREAD
     EVT_CALL(WaitForBuffDone)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_WAIT(10)
     EVT_CALL(YieldTurn)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)

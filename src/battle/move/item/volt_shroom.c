@@ -33,7 +33,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_CALL(GetItemPower, ITEM_VOLT_SHROOM, LVar0, LVar1)
     EVT_CALL(N(func_802A123C_71AA2C))
     EVT_WAIT(20)
-    EVT_CALL(ShowMessageBox, BTL_MSG_10, 60)
+    EVT_CALL(ShowMessageBox, BTL_MSG_PLAYER_CHARGED, 60)
     EVT_CALL(WaitForMessageBoxDone)
     EVT_EXEC_WAIT(N(PlayerGoHome))
     EVT_RETURN

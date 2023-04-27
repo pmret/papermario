@@ -40,7 +40,7 @@ EvtScript N(D_80240050_B1D340) = {
         EVT_ADD(LVar0, LVarA)
         EVT_ADD(LVar1, LVarB)
         EVT_ADD(LVar2, LVarE)
-        EVT_CALL(PlayEffect, EFFECT_FLOATING_FLOWER, LVar0, LVar2, LVar1, LVar3, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_FLOATING_FLOWER, LVar0, LVar2, LVar1, LVar3)
     EVT_END_LOOP
     EVT_WAIT(LVarF)
     EVT_LABEL(0)
@@ -48,7 +48,7 @@ EvtScript N(D_80240050_B1D340) = {
     EVT_CALL(RandInt, LVarD, LVar1)
     EVT_ADD(LVar0, LVarA)
     EVT_ADD(LVar1, LVarB)
-    EVT_CALL(PlayEffect, EFFECT_FLOATING_FLOWER, LVar0, LVarE, LVar1, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_FLOATING_FLOWER, LVar0, LVarE, LVar1, 200)
     EVT_WAIT(LVarF)
     EVT_GOTO(0)
     EVT_RETURN

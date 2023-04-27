@@ -204,6 +204,7 @@ class N64SegPm_sprite_shading_profiles(N64Segment):
         self.json_out = extract(data)
 
     def split(self, rom_bytes):
+        self.out_path().parent.mkdir(parents=True, exist_ok=True)
         with open(self.out_path(), "w") as f:
             f.write(self.json_out)
 

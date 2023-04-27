@@ -168,7 +168,7 @@ void radiating_energy_orb_appendGfx(void* effect) {
 
         if (scale != 0.0f) {
             gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 255, (part->unk_14 * unk_14) >> 8);
-            gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0);
+            gDPSetCombineMode(gMainGfxPos++, PM_CC_07, PM_CC_07);
 
             shim_guRotateF(sp18, part->unk_20, 0.0f, 0.0f, 1.0f);
             shim_guTranslateF(sp58, part->unk_2C, 0.0f, 0.0f);

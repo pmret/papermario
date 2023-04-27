@@ -62,7 +62,7 @@ Gfx D_802DF3F0[] = {
 
 Gfx D_802DF428[] = {
     gsSPClearGeometryMode(G_CULL_BOTH | G_LIGHTING),
-    gsDPSetCombineLERP(0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0),
+    gsDPSetCombineMode(PM_CC_02, PM_CC_02),
     gsSPTexture(-1, -1, 0, G_TX_RENDERTILE, G_ON),
     gsSPSetGeometryMode(G_ZBUFFER | G_SHADE | G_SHADING_SMOOTH),
     gsDPSetRenderMode(G_RM_ZB_CLD_SURF, G_RM_ZB_CLD_SURF2),
@@ -253,7 +253,7 @@ void spr_appendGfx_component_flat(
             }
 
             gDPSetEnvColor(gMainGfxPos++, 0, 0, 0, alpha);
-            gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, 0, ENVIRONMENT, 0, TEXEL1, 0, 0, 0, 0, 0, 0, 0, 0, COMBINED);
+            gDPSetCombineMode(gMainGfxPos++, PM_CC_0B, PM_CC_0C);
             gSPVertex(gMainGfxPos++, vertices, 4, 0);
             gSP2Triangles(gMainGfxPos++, 0, 2, 1, 0, 0, 3, 2, 0);
             gDPPipeSync(gMainGfxPos++);
@@ -277,8 +277,7 @@ void spr_appendGfx_component_flat(
             }
 
             gDPSetEnvColor(gMainGfxPos++, 0, 0, 0, alpha);
-            gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, 0, ENVIRONMENT, 0, TEXEL0, 0, 0, 0, 0, 0, ENVIRONMENT, 0,
-                              TEXEL0, 0);
+            gDPSetCombineMode(gMainGfxPos++, PM_CC_0A, PM_CC_0A);
             gSPVertex(gMainGfxPos++, vertices, 4, 0);
             gSP2Triangles(gMainGfxPos++, 0, 2, 1, 0, 0, 3, 2, 0);
             gDPPipeSync(gMainGfxPos++);
@@ -294,8 +293,7 @@ void spr_appendGfx_component_flat(
 
             gDPSetEnvColor(gMainGfxPos++, 100, 100, 100, 255);
             gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, alpha);
-            gDPSetCombineLERP(gMainGfxPos++, SHADE, ENVIRONMENT, TEXEL0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, SHADE,
-                              ENVIRONMENT, TEXEL0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0);
+            gDPSetCombineLERP(gMainGfxPos++, SHADE, ENVIRONMENT, TEXEL0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, SHADE, ENVIRONMENT, TEXEL0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0);
             gDPSetColorDither(gMainGfxPos++, G_CD_MAGICSQ);
         }
     }

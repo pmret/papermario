@@ -84,7 +84,7 @@ EvtScript N(EVS_UseMove_Impl) = {
                     EVT_END_THREAD
             EVT_END_SWITCH
     EVT_END_SWITCH
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_44)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_HAMMER_STRIKE)
     EVT_WAIT(1)
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, 0, 16)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)

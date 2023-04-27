@@ -19,7 +19,7 @@ Gfx Entity_BellbellPlant_RenderNode5[] = {
     gsSP2Triangles(4, 5, 6, 0, 5, 4, 7, 0),
     gsSP2Triangles(8, 9, 10, 0, 11, 12, 13, 0),
     gsDPPipeSync(),
-    gsDPSetCombineLERP(PRIMITIVE, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_04, PM_CC_04),
     gsSPTexture(0x0001, 0x0001, 0, G_TX_RENDERTILE, G_OFF),
     gsSPEndDisplayList(),
 };
@@ -60,7 +60,7 @@ Gfx Entity_BellbellPlant_RenderNode4[] = {
     gsSP2Triangles(1, 10, 2, 0, 2, 10, 14, 0),
     gsSP2Triangles(2, 14, 4, 0, 4, 14, 6, 0),
     gsDPPipeSync(),
-    gsDPSetCombineLERP(PRIMITIVE, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_04, PM_CC_04),
     gsSPTexture(0x0001, 0x0001, 0, G_TX_RENDERTILE, G_OFF),
     gsSPEndDisplayList(),
 };
@@ -76,7 +76,7 @@ Gfx Entity_BellbellPlant_RenderNode3[] = {
     gsSP2Triangles(4, 5, 6, 0, 5, 4, 7, 0),
     gsSP2Triangles(8, 9, 10, 0, 11, 12, 13, 0),
     gsDPPipeSync(),
-    gsDPSetCombineLERP(PRIMITIVE, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_04, PM_CC_04),
     gsSPTexture(0x0001, 0x0001, 0, G_TX_RENDERTILE, G_OFF),
     gsSPEndDisplayList(),
 };
@@ -117,7 +117,7 @@ Gfx Entity_BellbellPlant_RenderNode2[] = {
     gsSP2Triangles(8, 9, 7, 0, 8, 7, 6, 0),
     gsSP2Triangles(10, 11, 9, 0, 10, 9, 8, 0),
     gsDPPipeSync(),
-    gsDPSetCombineLERP(PRIMITIVE, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_04, PM_CC_04),
     gsSPTexture(0x0001, 0x0001, 0, G_TX_RENDERTILE, G_OFF),
     gsSPEndDisplayList(),
 };
@@ -168,7 +168,7 @@ Gfx Entity_BellbellPlant_RenderNode1[] = {
     gsSP2Triangles(18, 4, 24, 0, 18, 6, 19, 0),
     gsSP2Triangles(19, 6, 8, 0, 19, 8, 13, 0),
     gsDPPipeSync(),
-    gsDPSetCombineLERP(PRIMITIVE, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_04, PM_CC_04),
     gsSPTexture(0x0001, 0x0001, 0, G_TX_RENDERTILE, G_OFF),
     gsSPEndDisplayList(),
 };

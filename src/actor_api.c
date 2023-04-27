@@ -190,15 +190,15 @@ ApiStatus GetLastElement(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80269E80(Evt* script, s32 isInitialCall) {
-    evt_set_variable(script, *script->ptrReadPos, gBattleStatus.unk_19A);
+ApiStatus GetDamageSource(Evt* script, s32 isInitialCall) {
+    evt_set_variable(script, *script->ptrReadPos, gBattleStatus.currentDamageSource);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80269EAC(Evt* script, s32 isInitialCall) {
-    s32 a0 = *script->ptrReadPos;
+ApiStatus SetDamageSource(Evt* script, s32 isInitialCall) {
+    s32 damageSource = *script->ptrReadPos;
 
-    gBattleStatus.unk_19A = a0;
+    gBattleStatus.currentDamageSource = damageSource;
     return ApiStatus_DONE2;
 }
 
@@ -3180,7 +3180,7 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
         script->functionTempPtr[1] = actor;
         script->functionTemp[2] = attackBoost;
 
-        btl_cam_use_preset(BTL_CAM_PRESET_I);
+        btl_cam_use_preset(BTL_CAM_PRESET_08);
         btl_cam_set_zoffset(12);
         btl_cam_target_actor(actor->actorID);
         btl_cam_set_zoom(250);
@@ -3234,7 +3234,7 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
         case 2:
             if (script->functionTemp[3] == 0) {
                 dispatch_event_actor(actor, EVENT_SWAP_PARTNER);
-                btl_cam_use_preset(BTL_CAM_PRESET_C);
+                btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(15);
                 actor->isGlowing = 1;
                 actor->attackBoost += attackBoost;
@@ -3251,7 +3251,7 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
             break;
         case 3:
             if (script->functionTemp[3] == 0) {
-                btl_show_variable_battle_message(BTL_MSG_1D, 60, attackBoost);
+                btl_show_variable_battle_message(BTL_MSG_ATTACK_UP, 60, attackBoost);
                 script->functionTemp[0] = 4;
             } else {
                 script->functionTemp[3]--;
@@ -3260,7 +3260,7 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
             break;
         case 4:
             if (btl_is_popup_displayed() == 0) {
-                btl_cam_use_preset(BTL_CAM_PRESET_C);
+                btl_cam_use_preset(BTL_CAM_DEFAULT);
                 script->functionTemp[3] = 10;
                 script->functionTemp[0] = 5;
             }
@@ -3303,7 +3303,7 @@ ApiStatus BoostDefense(Evt* script, s32 isInitialCall) {
         script->functionTempPtr[1] = actor;
         script->functionTemp[2] = defenseBoost;
 
-        btl_cam_use_preset(BTL_CAM_PRESET_I);
+        btl_cam_use_preset(BTL_CAM_PRESET_08);
         btl_cam_set_zoffset(12);
         btl_cam_target_actor(actor->actorID);
         btl_cam_set_zoom(250);
@@ -3358,7 +3358,7 @@ ApiStatus BoostDefense(Evt* script, s32 isInitialCall) {
         case 2:
             if (script->functionTemp[3] == 0) {
                 dispatch_event_actor(actor, EVENT_SWAP_PARTNER);
-                btl_cam_use_preset(BTL_CAM_PRESET_C);
+                btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(15);
                 actor->isGlowing = 1;
                 actor->defenseBoost += defenseBoost;
@@ -3375,7 +3375,7 @@ ApiStatus BoostDefense(Evt* script, s32 isInitialCall) {
             break;
         case 3:
             if (script->functionTemp[3] == 0) {
-                btl_show_variable_battle_message(BTL_MSG_1E, 60, defenseBoost);
+                btl_show_variable_battle_message(BTL_MSG_DEFENCE_UP, 60, defenseBoost);
                 script->functionTemp[0] = 4;
             } else {
                 script->functionTemp[3]--;
@@ -3384,7 +3384,7 @@ ApiStatus BoostDefense(Evt* script, s32 isInitialCall) {
             break;
         case 4:
             if (btl_is_popup_displayed() == 0) {
-                btl_cam_use_preset(BTL_CAM_PRESET_C);
+                btl_cam_use_preset(BTL_CAM_DEFAULT);
                 script->functionTemp[3] = 10;
                 script->functionTemp[0] = 5;
             }
@@ -3425,7 +3425,7 @@ ApiStatus VanishActor(Evt* script, s32 isInitialCall) {
         script->functionTemp[1] = (s32) actor;
         script->functionTemp[2] = vanished;
 
-        btl_cam_use_preset(BTL_CAM_PRESET_I);
+        btl_cam_use_preset(BTL_CAM_PRESET_08);
         btl_cam_set_zoffset(12);
         btl_cam_target_actor(actor->actorID);
         btl_cam_set_zoom(250);
@@ -3469,7 +3469,7 @@ ApiStatus VanishActor(Evt* script, s32 isInitialCall) {
         case 2:
             if (script->functionTemp[3] == 0) {
                 dispatch_event_actor(actor, EVENT_SWAP_PARTNER);
-                btl_cam_use_preset(BTL_CAM_PRESET_C);
+                btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(15);
                 inflict_status(actor, 0xE, vanished);
                 script->functionTemp[3] = 15;
@@ -3481,7 +3481,7 @@ ApiStatus VanishActor(Evt* script, s32 isInitialCall) {
             break;
         case 3:
             if (script->functionTemp[3] == 0) {
-                btl_show_variable_battle_message(BTL_MSG_21, 60, vanished);
+                btl_show_variable_battle_message(BTL_MSG_ENEMY_TRANSPARENT, 60, vanished);
                 script->functionTemp[0] = 4;
             } else {
                 script->functionTemp[3]--;
@@ -3490,7 +3490,7 @@ ApiStatus VanishActor(Evt* script, s32 isInitialCall) {
             break;
         case 4:
             if (btl_is_popup_displayed() == 0) {
-                btl_cam_use_preset(BTL_CAM_PRESET_C);
+                btl_cam_use_preset(BTL_CAM_DEFAULT);
                 script->functionTemp[3] = 10;
                 script->functionTemp[0] = 5;
             }
@@ -3531,7 +3531,7 @@ ApiStatus ElectrifyActor(Evt* script, s32 isInitialCall) {
         script->functionTempPtr[1] = actor;
         script->functionTemp[2] = electrified;
 
-        btl_cam_use_preset(BTL_CAM_PRESET_I);
+        btl_cam_use_preset(BTL_CAM_PRESET_08);
         btl_cam_set_zoffset(12);
         btl_cam_target_actor(actor->actorID);
         btl_cam_set_zoom(250);
@@ -3575,7 +3575,7 @@ ApiStatus ElectrifyActor(Evt* script, s32 isInitialCall) {
         case 2:
             if (script->functionTemp[3] == 0) {
                 dispatch_event_actor(actor, EVENT_SWAP_PARTNER);
-                btl_cam_use_preset(BTL_CAM_PRESET_C);
+                btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(15);
                 inflict_status(actor, 0xB, electrified);
                 script->functionTemp[3] = 15;
@@ -3587,7 +3587,7 @@ ApiStatus ElectrifyActor(Evt* script, s32 isInitialCall) {
             break;
         case 3:
             if (script->functionTemp[3] == 0) {
-                btl_show_variable_battle_message(BTL_MSG_22, 60, electrified);
+                btl_show_variable_battle_message(BTL_MSG_ENEMY_CHARGED, 60, electrified);
                 script->functionTemp[0] = 4;
             } else {
                 script->functionTemp[3]--;
@@ -3596,7 +3596,7 @@ ApiStatus ElectrifyActor(Evt* script, s32 isInitialCall) {
             break;
         case 4:
             if (btl_is_popup_displayed() == 0) {
-                btl_cam_use_preset(BTL_CAM_PRESET_C);
+                btl_cam_use_preset(BTL_CAM_DEFAULT);
                 script->functionTemp[3] = 10;
                 script->functionTemp[0] = 5;
             }
@@ -3641,7 +3641,7 @@ ApiStatus HealActor(Evt* script, s32 isInitialCall) {
         script->functionTempPtr[1] = actor;
         script->functionTemp[2] = hpBoost;
 
-        btl_cam_use_preset(BTL_CAM_PRESET_I);
+        btl_cam_use_preset(BTL_CAM_PRESET_08);
         btl_cam_set_zoffset(12);
         btl_cam_target_actor(actor->actorID);
         btl_cam_move(10);
@@ -3692,7 +3692,7 @@ ApiStatus HealActor(Evt* script, s32 isInitialCall) {
             break;
         case 2:
             if (script->functionTemp[3] == 0) {
-                btl_cam_use_preset(BTL_CAM_PRESET_C);
+                btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(15);
                 actor->currentHP += hpBoost;
                 if (actor->maxHP < actor->currentHP) {

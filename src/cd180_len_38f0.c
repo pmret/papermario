@@ -7,9 +7,9 @@ extern f32 screen_overlay_frontZoom;
 extern s32 screen_overlay_backType;
 extern f32 screen_overlay_backZoom;
 extern s32 D_80156910;
-extern ScreenOverlay D_8015C790[2];
+extern ScreenOverlay ScreenOverlays[2];
 
-ScreenTransition D_8014C6F0 = TRANSITION_2;
+ScreenTransition CurrentScreenTransition = TRANSITION_END_DEMO_SCENE_BLACK;
 
 // padding?
 s32 D_8014C6F4[] = { 0x00000000, 0x00000000, 0x00000000, };
@@ -172,63 +172,63 @@ Gfx D_8014EA48[] = {
     gsDPSetDepthSource(G_ZS_PIXEL)
 };
 
-void _render_transition_stencil(u8 arg0, f32 arg1, ScreenOverlay* overlay) {
+void _render_transition_stencil(u8 stencilType, f32 progress, ScreenOverlay* overlay) {
     Camera* camera = &gCameras[gCurrentCameraID];
-    u8 s3, s4, s5;
-    s32 s1, s2, s6, s7;
-    f32 f28;
+    u8 colR, colG, colB;
+    s32 x1, y1, x2, y2;
+    f32 alpha;
     s16 v0;
     s16 s0;
     Mtx* matrixStack = gDisplayContext->matrixStack;
 
-    if (arg1 == 0.0f) {
+    if (progress == 0.0f) {
         return;
     }
 
     if (overlay != NULL) {
-        s3 = overlay->color.r;
-        s4 = overlay->color.g;
-        s5 = overlay->color.b;
-        s1 = overlay->screenPos[0][0];
-        s2 = overlay->screenPos[0][1];
-        s6 = overlay->screenPos[1][0];
-        s7 = overlay->screenPos[1][1];
-        f28 = overlay->alpha;
+        colR = overlay->color.r;
+        colG = overlay->color.g;
+        colB = overlay->color.b;
+        x1 = overlay->screenPos[0][0];
+        y1 = overlay->screenPos[0][1];
+        x2 = overlay->screenPos[1][0];
+        y2 = overlay->screenPos[1][1];
+        alpha = overlay->alpha;
     } else {
-        s3 = s4 = s5 = 0;
-        s1 = s2 = s6 = s7 = 0;
-        f28 = 0.0f;
+        colR = colG = colB = 0;
+        x1 = y1 = x2 = y2 = 0;
+        alpha = 0.0f;
     }
 
-    switch (arg0) {
-        case 0:
+    switch (stencilType) {
+        case OVERLAY_SCREEN_COLOR:
             gDPPipeSync(gMainGfxPos++);
             gDPSetColorDither(gMainGfxPos++, G_CD_MAGICSQ);
             gDPSetAlphaDither(gMainGfxPos++, G_AD_PATTERN);
             gDPSetCycleType(gMainGfxPos++, G_CYC_1CYCLE);
-            if (arg1 == 255.0f) {
+            if (progress == 255.0f) {
                 gDPSetRenderMode(gMainGfxPos++, CVG_DST_SAVE | G_RM_OPA_SURF, CVG_DST_SAVE | G_RM_OPA_SURF2);
             } else {
                 gDPSetRenderMode(gMainGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
             }
             gDPSetCombineMode(gMainGfxPos++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
-            gDPSetPrimColor(gMainGfxPos++, 0, 0, s3, s4, s5, arg1);
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, colR, colG, colB, progress);
             gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
             gDPFillRectangle(gMainGfxPos++, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
             gDPSetColorDither(gMainGfxPos++, G_CD_DISABLE);
             return;
-        case 1:
+        case OVERLAY_VIEWPORT_COLOR:
             gDPPipeSync(gMainGfxPos++);
             gDPSetColorDither(gMainGfxPos++, G_CD_MAGICSQ);
             gDPSetAlphaDither(gMainGfxPos++, G_AD_PATTERN);
             gDPSetCycleType(gMainGfxPos++, G_CYC_1CYCLE);
-            if (arg1 == 255.0f) {
+            if (progress == 255.0f) {
                 gDPSetRenderMode(gMainGfxPos++, CVG_DST_SAVE | G_RM_OPA_SURF, CVG_DST_SAVE | G_RM_OPA_SURF2);
             } else {
                 gDPSetRenderMode(gMainGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
             }
             gDPSetCombineMode(gMainGfxPos++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);
-            gDPSetPrimColor(gMainGfxPos++, 0, 0, s3, s4, s5, arg1);
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, colR, colG, colB, progress);
             gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
             gDPFillRectangle(gMainGfxPos++, camera->viewportStartX, camera->viewportStartY,
                              camera->viewportStartX + camera->viewportW, camera->viewportStartY + camera->viewportH);
@@ -239,33 +239,33 @@ void _render_transition_stencil(u8 arg0, f32 arg1, ScreenOverlay* overlay) {
     guOrtho(&matrixStack[gMatrixListPos], 0.0f, 320.0f, 0.0f, 240.0f, -1000.0f, 1000.0f, 1.0f);
     gSPMatrix(gMainGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
 
-    switch (arg0) {
-        case 4:
+    switch (stencilType) {
+        case OVERLAY_VIEWPORT_MARIO:
             gSPDisplayList(gMainGfxPos++, Gfx_LoadStencilTex_Mario);
-            func_80139F10(160, 120, arg1, s3, s4, s5, arg1 * f28 / 255.0f, gCurrentCameraID);
+            appendGfx_screen_transition_stencil(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, progress, colR, colG, colB, progress * alpha / 255.0f, gCurrentCameraID);
             break;
-        case 7:
+        case OVERLAY_SCREEN_MARIO:
             gSPDisplayList(gMainGfxPos++, Gfx_LoadStencilTex_Mario);
-            func_80139F10(160, 120, arg1, s3, s4, s5, arg1 * f28 / 255.0f, -1);
+            appendGfx_screen_transition_stencil(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, progress, colR, colG, colB, progress * alpha / 255.0f, -1);
             break;
-        case 5:
+        case OVERLAY_VIEWPORT_STAR:
             gSPDisplayList(gMainGfxPos++, Gfx_LoadStencilTex_Star);
-            func_80139F10(160, 120, arg1, s3, s4, s5, arg1 * f28 / 255.0f, gCurrentCameraID);
+            appendGfx_screen_transition_stencil(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, progress, colR, colG, colB, progress * alpha / 255.0f, gCurrentCameraID);
             break;
-        case 8:
+        case OVERLAY_SCREEN_STAR:
             gSPDisplayList(gMainGfxPos++, Gfx_LoadStencilTex_Star);
-            func_80139F10(160, 120, arg1, s3, s4, s5, arg1 * f28 / 255.0f, -1);
+            appendGfx_screen_transition_stencil(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, progress, colR, colG, colB, progress * alpha / 255.0f, -1);
             break;
-        case 3:
+        case OVERLAY_VIEWPORT_SPOTLIGHT:
             gSPDisplayList(gMainGfxPos++, Gfx_LoadStencilTex_SharpCircle);
-            func_80139F10(s1, s2, arg1, 0, 0, 0, 0, gCurrentCameraID);
+            appendGfx_screen_transition_stencil(x1, y1, progress, 0, 0, 0, 0, gCurrentCameraID);
             break;
-        case 6:
+        case OVERLAY_SCREEN_SPOTLIGHT:
             gSPDisplayList(gMainGfxPos++, Gfx_LoadStencilTex_SharpCircle);
-            func_80139F10(s1, s2, arg1, 0, 0, 0, 0, -1);
+            appendGfx_screen_transition_stencil(x1, y1, progress, 0, 0, 0, 0, -1);
             break;
-        case 2:
-            s0 = arg1;
+        case OVERLAY_TYPE_2:
+            s0 = progress;
             guTranslate(&matrixStack[gMatrixListPos], 80.0f, 120.0f, 0.0f);
             gSPMatrix(gMainGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             guScale(&matrixStack[gMatrixListPos], (1.0f - s0 / 255.0f) * 0.8, (1.0f - s0 / 255.0f) * 0.8, 1.0f);
@@ -289,10 +289,10 @@ void _render_transition_stencil(u8 arg0, f32 arg1, ScreenOverlay* overlay) {
             gSPDisplayList(gMainGfxPos++, D_8014EA48);
             gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
             break;
-        case 9:
-            s0 = arg1;
+        case OVERLAY_TYPE_9:
+            s0 = progress;
             gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, 0);
-            guTranslate(&matrixStack[gMatrixListPos], s1, SCREEN_HEIGHT - s2, 0.0f);
+            guTranslate(&matrixStack[gMatrixListPos], x1, SCREEN_HEIGHT - y1, 0.0f);
             gSPMatrix(gMainGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             guScale(&matrixStack[gMatrixListPos], (1.0f - s0 / 255.0f) * 0.8, (1.0f - s0 / 255.0f) * 0.8, 1.0f);
             gSPMatrix(gMainGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
@@ -301,7 +301,7 @@ void _render_transition_stencil(u8 arg0, f32 arg1, ScreenOverlay* overlay) {
             gSPDisplayList(gMainGfxPos++, D_8014E8F0);
             gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 
-            guTranslate(&matrixStack[gMatrixListPos], s6, SCREEN_HEIGHT - s7, 0.0f);
+            guTranslate(&matrixStack[gMatrixListPos], x2, SCREEN_HEIGHT - y2, 0.0f);
             gSPMatrix(gMainGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             guScale(&matrixStack[gMatrixListPos], (1.0f - s0 / 255.0f) * 0.8, (1.0f - s0 / 255.0f) * 0.8, 1.0f);
             gSPMatrix(gMainGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
@@ -312,14 +312,14 @@ void _render_transition_stencil(u8 arg0, f32 arg1, ScreenOverlay* overlay) {
 
             guTranslate(&matrixStack[gMatrixListPos], 0.0f, 0.0f, 0.0f);
             gSPMatrix(gMainGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-            gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, f28);
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, alpha);
             gSPDisplayList(gMainGfxPos++, D_8014E9A8);
             gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
             break;
-        case 10:
-            s0 = arg1;
+        case OVERLAY_START_BATTLE:
+            s0 = progress;
             gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, 0);
-            guTranslate(&matrixStack[gMatrixListPos], s1, SCREEN_HEIGHT - s2, 0.0f);
+            guTranslate(&matrixStack[gMatrixListPos], x1, SCREEN_HEIGHT - y1, 0.0f);
             gSPMatrix(gMainGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             guScale(&matrixStack[gMatrixListPos], (1.0f - s0 / 255.0f) * 0.8, (1.0f - s0 / 255.0f) * 0.8, 1.0f);
             gSPMatrix(gMainGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
@@ -330,28 +330,28 @@ void _render_transition_stencil(u8 arg0, f32 arg1, ScreenOverlay* overlay) {
 
             guTranslate(&matrixStack[gMatrixListPos], 0.0f, 0.0f, 0.0f);
             gSPMatrix(gMainGfxPos++, &matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-            gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, f28);
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, alpha);
             gSPDisplayList(gMainGfxPos++, D_8014E9A8);
             gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
-            v0 = arg1 + 40;
-            if (arg1 > 170) {
+            v0 = progress + 40;
+            if (progress > 170) {
                 v0 = 170;
             }
-            func_80138D88(0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1, v0);
+            draw_prev_frame_buffer_at_screen_pos(0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1, v0);
             break;
-        case 11:
+        case OVERLAY_WORLD_DARKNESS:
             gSPDisplayList(gMainGfxPos++, Gfx_LoadStencilTex_BlurryCircle);
-            func_80138E54(1, s6, s7, f28, arg1);
+            appendGfx_darkness_stencil(TRUE, x2, y2, alpha, progress);
             break;
-        case 12:
-            func_80138D88(s1, s2, s6, s7, arg1);
+        case OVERLAY_BLUR:
+            draw_prev_frame_buffer_at_screen_pos(x1, y1, x2, y2, progress);
             break;
-        case 13:
+        case OVERLAY_BATTLE_DARKNESS:
             gSPDisplayList(gMainGfxPos++, Gfx_LoadStencilTex_BlurryCircle);
-            func_80138E54(0, s1, s2, f28, arg1);
+            appendGfx_darkness_stencil(FALSE, x1, y1, alpha, progress);
             break;
-        case 14:
-        case 15:
+        case OVERLAY_UNUSED_1:
+        case OVERLAY_UNUSED_2:
             break;
     }
 
@@ -368,56 +368,56 @@ void set_screen_overlay_params_back(u8 type, f32 zoom) {
     screen_overlay_backZoom = zoom;
 }
 
-void get_screen_overlay_params(s32 idx, u8* type, f32* zoom) {
-    switch (idx) {
-        case 0:
+void get_screen_overlay_params(s32 layer, u8* type, f32* zoom) {
+    switch (layer) {
+        case SCREEN_LAYER_FRONT:
             *type = screen_overlay_frontType;
             *zoom = screen_overlay_frontZoom;
             break;
-        case 1:
+        case SCREEN_LAYER_BACK:
             *type = screen_overlay_backType;
             *zoom = screen_overlay_backZoom;
             break;
     }
 }
 
-void set_screen_overlay_color(s32 idx, u8 r, u8 g, u8 b) {
-    switch (idx) {
-        case 0:
-        case 1:
-            D_8015C790[idx].color.r = r;
-            D_8015C790[idx].color.g = g;
-            D_8015C790[idx].color.b = b;
+void set_screen_overlay_color(s32 layer, u8 r, u8 g, u8 b) {
+    switch (layer) {
+        case SCREEN_LAYER_FRONT:
+        case SCREEN_LAYER_BACK:
+            ScreenOverlays[layer].color.r = r;
+            ScreenOverlays[layer].color.g = g;
+            ScreenOverlays[layer].color.b = b;
             break;
     }
 }
 
-void set_screen_overlay_center(s32 idx, s32 arg1, s32 arg2, s32 arg3) {
-    switch (idx) {
-        case 0:
-        case 1:
+void set_screen_overlay_center(s32 layer, s32 arg1, s32 screenPosX, s32 screenPosY) {
+    switch (layer) {
+        case SCREEN_LAYER_FRONT:
+        case SCREEN_LAYER_BACK:
             switch (arg1) {
                 case 0:
-                    D_8015C790[idx].screenPos[0][0] = arg2;
-                    D_8015C790[idx].screenPos[0][1] = arg3;
+                    ScreenOverlays[layer].screenPos[0][0] = screenPosX;
+                    ScreenOverlays[layer].screenPos[0][1] = screenPosY;
                     break;
                 case 1:
-                    D_8015C790[idx].screenPos[1][0] = arg2;
-                    D_8015C790[idx].screenPos[1][1] = arg3;
+                    ScreenOverlays[layer].screenPos[1][0] = screenPosX;
+                    ScreenOverlays[layer].screenPos[1][1] = screenPosY;
                     break;
             }
             break;
     }
 }
 
-void set_screen_overlay_center_worldpos(s32 idx, s32 posIdx, s32 x, s32 y, s32 z) {
+void set_screen_overlay_center_worldpos(s32 layer, s32 posIdx, s32 worldPosX, s32 worldPosY, s32 worldPosZ) {
     Camera* camera = &gCameras[gCurrentCameraID];
     f32 tx, ty, tz, tw;
 
-    switch (idx) {
-        case 0:
-        case 1:
-            transform_point(camera->perspectiveMatrix, x, y, z, 1.0f, &tx, &ty, &tz, &tw);
+    switch (layer) {
+        case SCREEN_LAYER_FRONT:
+        case SCREEN_LAYER_BACK:
+            transform_point(camera->perspectiveMatrix, worldPosX, worldPosY, worldPosZ, 1.0f, &tx, &ty, &tz, &tw);
             tw = 1.0f / tw;
             tx *= tw;
             ty *= -tw;
@@ -427,23 +427,23 @@ void set_screen_overlay_center_worldpos(s32 idx, s32 posIdx, s32 x, s32 y, s32 z
 
             switch (posIdx) {
                 case 0:
-                    D_8015C790[idx].screenPos[0][0] = tx;
-                    D_8015C790[idx].screenPos[0][1] = ty;
+                    ScreenOverlays[layer].screenPos[0][0] = tx;
+                    ScreenOverlays[layer].screenPos[0][1] = ty;
                     break;
                 case 1:
-                    D_8015C790[idx].screenPos[1][0] = tx;
-                    D_8015C790[idx].screenPos[1][1] = ty;
+                    ScreenOverlays[layer].screenPos[1][0] = tx;
+                    ScreenOverlays[layer].screenPos[1][1] = ty;
                     break;
             }
             break;
     }
 }
 
-void set_screen_overlay_alpha(s32 idx, f32 alpha) {
-    switch (idx) {
-        case 0:
-        case 1:
-            D_8015C790[idx].alpha = alpha;
+void set_screen_overlay_alpha(s32 layer, f32 alpha) {
+    switch (layer) {
+        case SCREEN_LAYER_FRONT:
+        case SCREEN_LAYER_BACK:
+            ScreenOverlays[layer].alpha = alpha;
             break;
     }
 }
@@ -452,12 +452,12 @@ void clear_screen_overlays(void) {
     ScreenOverlay* it;
     s32 i;
 
-    screen_overlay_frontType = -1;
-    screen_overlay_backType = -1;
+    screen_overlay_frontType = OVERLAY_NONE;
+    screen_overlay_backType  = OVERLAY_NONE;
     screen_overlay_frontZoom = -1.0f;
-    screen_overlay_backZoom = -1.0f;
+    screen_overlay_backZoom  = -1.0f;
 
-    for (it = &D_8015C790[0], i = 0; i < ARRAY_COUNT(D_8015C790); i++, it++) {
+    for (it = &ScreenOverlays[0], i = 0; i < ARRAY_COUNT(ScreenOverlays); i++, it++) {
         it->color.b = 0;
         it->color.g = 0;
         it->color.r = 0;
@@ -477,202 +477,216 @@ void func_80138198(void) {
 }
 
 void render_screen_overlay_frontUI(void) {
-    if (screen_overlay_frontType != -1 && screen_overlay_frontZoom != -1.0f && gGameStatusPtr->isBattle != 2) {
-        _render_transition_stencil(screen_overlay_frontType, screen_overlay_frontZoom, &D_8015C790[0]);
+    if (screen_overlay_frontType != OVERLAY_NONE
+        && screen_overlay_frontZoom != -1.0f
+        && gGameStatusPtr->isBattle != 2
+    ) {
+        _render_transition_stencil(screen_overlay_frontType, screen_overlay_frontZoom, &ScreenOverlays[0]);
     }
 }
 
 void render_screen_overlay_backUI(void) {
-    if (screen_overlay_backType != -1 && screen_overlay_backZoom != -1.0f && gGameStatusPtr->isBattle != 2) {
-        _render_transition_stencil(screen_overlay_backType, screen_overlay_backZoom, &D_8015C790[1]);
+    if (screen_overlay_backType != OVERLAY_NONE
+        && screen_overlay_backZoom != -1.0f
+        && gGameStatusPtr->isBattle != 2
+    ) {
+        _render_transition_stencil(screen_overlay_backType, screen_overlay_backZoom, &ScreenOverlays[1]);
     }
 }
 
 void set_map_transition_effect(ScreenTransition transition) {
-    D_8014C6F0 = transition;
+    CurrentScreenTransition = transition;
 }
+
+enum ScreenFadeRates {
+    VERY_SLOW_FADE_RATE = 2,
+    SLOW_FADE_RATE      = 7,
+    SLOWER_FADE_RATE    = 10,
+    STANDARD_FADE_RATE  = 20,
+    FAST_FADE_RATE      = 50,
+};
 
 s16 update_exit_map_screen_overlay(s16* progress) {
     u8 overlayColor;
-    u8 type = 0;
+    u8 fadeOutType = OVERLAY_SCREEN_COLOR;
     u8 r = 0;
     u8 g = 0;
     u8 b = 0;
     s16 t = 0;
-    s32 amt = 20;
+    s32 fadeRate = STANDARD_FADE_RATE;
 
-    switch (D_8014C6F0) {
-        case TRANSITION_1:
-            type = 0;
+    switch (CurrentScreenTransition) {
+        case TRANSITION_STANDARD:
+            fadeOutType = OVERLAY_VIEWPORT_COLOR;
             break;
-        case TRANSITION_3:
+        case TRANSITION_TOY_TRAIN:
+            fadeOutType = OVERLAY_SCREEN_COLOR;
+            break;
+        case TRANSITION_END_DEMO_SCENE_BLACK:
+            fadeOutType = OVERLAY_VIEWPORT_COLOR;
+            fadeRate = FAST_FADE_RATE;
+            break;
+        case TRANSITION_END_DEMO_SCENE_WHITE:
             r = g = b = 208;
-            type = 1;
-            amt = 10;
-            if (gGameStatusPtr->demoState == 2) {
-                gGameStatusPtr->nextDemoScene = 18;
+            fadeOutType = OVERLAY_VIEWPORT_COLOR;
+            fadeRate = SLOWER_FADE_RATE;
+            if (gGameStatusPtr->demoState == DEMO_STATE_CHANGE_MAP) {
+                gGameStatusPtr->nextDemoScene = LAST_DEMO_SCENE_IDX;
             }
             break;
-        case TRANSITION_6:
+        case TRANSITION_BEGIN_OR_END_GAME:
+        case TRANSITION_OUTRO_END_SCENE:
+            fadeOutType = OVERLAY_VIEWPORT_COLOR;
+            fadeRate = SLOW_FADE_RATE;
+            break;
+        case TRANSITION_BEGIN_OR_END_CHAPTER:
             r = g = b = 208;
-            type = 1;
+            fadeOutType = OVERLAY_VIEWPORT_COLOR;
             break;
-        case TRANSITION_0:
-            type = 1;
-            break;
-        case TRANSITION_7:
-            if (gGameStatusPtr->demoState == 2) {
-                gGameStatusPtr->nextDemoScene = 18;
+        case TRANSITION_SLOW_FADE_TO_WHITE:
+            if (gGameStatusPtr->demoState == DEMO_STATE_CHANGE_MAP) {
+                gGameStatusPtr->nextDemoScene = LAST_DEMO_SCENE_IDX;
             }
             r = g = b = 208;
-            type = 1;
-            amt = 7;
+            fadeOutType = OVERLAY_VIEWPORT_COLOR;
+            fadeRate = SLOW_FADE_RATE;
             break;
-        case TRANSITION_11:
-        case TRANSITION_15:
+        case TRANSITION_AFTER_SAVE_PROMPT:
+        case TRANSITION_END_CHAPTER_INTERRUPTED:
             r = g = b = 208;
-            type = 1;
-            amt = 7;
+            fadeOutType = OVERLAY_VIEWPORT_COLOR;
+            fadeRate = SLOW_FADE_RATE;
             break;
-        case TRANSITION_4:
-        case TRANSITION_5:
-            type = 1;
-            amt = 7;
-            break;
-        case TRANSITION_14:
+        case TRANSITION_GET_STAR_CARD:
             r = g = b = 208;
-            type = 1;
-            amt = 50;
+            fadeOutType = OVERLAY_VIEWPORT_COLOR;
+            fadeRate = FAST_FADE_RATE;
             break;
-        case TRANSITION_2:
-            type = 1;
-            amt = 50;
+        case TRANSITION_ENTER_WORLD:
+            set_screen_overlay_alpha(SCREEN_LAYER_FRONT, 0.0f);
+            fadeOutType = OVERLAY_VIEWPORT_MARIO;
             break;
-        case TRANSITION_8:
-            set_screen_overlay_alpha(0, 0.0f);
-            type = 4;
-            break;
-        case TRANSITION_9:
+        case TRANSITION_MARIO_WHITE:
             r = g = b = 208;
-            set_screen_overlay_alpha(0, 0.0f);
-            type = 4;
-            amt = 7;
+            set_screen_overlay_alpha(SCREEN_LAYER_FRONT, 0.0f);
+            fadeOutType = OVERLAY_VIEWPORT_MARIO;
+            fadeRate = SLOW_FADE_RATE;
             break;
-        case TRANSITION_10:
-            set_screen_overlay_alpha(0, 0.0f);
-            type = 4;
-            amt = 7;
+        case TRANSITION_MARIO_BLACK:
+            set_screen_overlay_alpha(SCREEN_LAYER_FRONT, 0.0f);
+            fadeOutType = OVERLAY_VIEWPORT_MARIO;
+            fadeRate = SLOW_FADE_RATE;
             break;
-        case TRANSITION_12:
-            set_screen_overlay_alpha(0, 160.0f);
+        case TRANSITION_END_PEACH_INTERLUDE:
+            set_screen_overlay_alpha(SCREEN_LAYER_FRONT, 160.0f);
             r = g = b = 208;
-            type = 5;
-            amt = 7;
+            fadeOutType = OVERLAY_VIEWPORT_STAR;
+            fadeRate = SLOW_FADE_RATE;
             break;
-        case TRANSITION_13:
-            set_screen_overlay_alpha(0, 0.0f);
-            type = 5;
-            amt = 7;
+        case TRANSITION_PEACH_CAPTURED:
+            set_screen_overlay_alpha(SCREEN_LAYER_FRONT, 0.0f);
+            fadeOutType = OVERLAY_VIEWPORT_STAR;
+            fadeRate = SLOW_FADE_RATE;
             break;
-        case TRANSITION_16:
-            set_screen_overlay_center(0, 0, 15, 28);
-            set_screen_overlay_center(0, 1, 305, 156);
-            set_screen_overlay_params_front(12, 255.0f);
-            *progress = 0xFF;
+        case TRANSITION_SLOW_BLUR_MOTION:
+            set_screen_overlay_center(SCREEN_LAYER_FRONT, 0, 15, 28);
+            set_screen_overlay_center(SCREEN_LAYER_FRONT, 1, 305, 156);
+            set_screen_overlay_params_front(OVERLAY_BLUR, 255.0f);
+            *progress = 255;
             return 1;
     }
 
-    if (D_8014C6F0 == TRANSITION_5) {
+    if (CurrentScreenTransition == TRANSITION_OUTRO_END_SCENE) {
         overlayColor = ((255 - *progress) * 208) / 255;
-        set_screen_overlay_color(0, overlayColor, overlayColor, overlayColor);
-        set_screen_overlay_params_front(type, 255.0f);
-        if (*progress == 0xFF) {
+        set_screen_overlay_color(SCREEN_LAYER_FRONT, overlayColor, overlayColor, overlayColor);
+        set_screen_overlay_params_front(fadeOutType, 255.0f);
+        if (*progress == 255) {
             return 1;
         }
 
-        *progress += amt;
-        if (*progress > 0xFF) {
-            *progress = 0xFF;
+        *progress += fadeRate;
+        if (*progress > 255) {
+            *progress = 255;
         }
     } else {
         set_screen_overlay_color(t, r, g, b);
 
         if (t == 0) {
-            set_screen_overlay_params_front(type, *progress);
+            set_screen_overlay_params_front(fadeOutType, *progress);
         } else {
-            set_screen_overlay_params_back(type, *progress);
+            set_screen_overlay_params_back(fadeOutType, *progress);
         }
 
-        if (*progress == 0xFF) {
+        if (*progress == 255) {
             return 1;
         }
 
-        *progress += amt;
-        if (*progress > 0xFF) {
-            *progress = 0xFF;
+        *progress += fadeRate;
+        if (*progress > 255) {
+            *progress = 255;
         }
     }
     return 0;
 }
 
 s16 update_enter_map_screen_overlay(s16* progress) {
-    u8 frontType = 0;
-    s32 amt = 20;
+    u8 fadeInType = OVERLAY_SCREEN_COLOR;
+    s32 fadeRate = STANDARD_FADE_RATE;
     u8 ret = FALSE;
 
-    switch (D_8014C6F0) {
-        case TRANSITION_3:
-            set_screen_overlay_color(0, 208, 208, 208);
-            amt = 50;
+    switch (CurrentScreenTransition) {
+        case TRANSITION_END_DEMO_SCENE_WHITE:
+            set_screen_overlay_color(SCREEN_LAYER_FRONT, 208, 208, 208);
+            fadeRate = FAST_FADE_RATE;
             break;
-        case TRANSITION_2:
-            frontType = 1;
-            amt = 50;
+        case TRANSITION_END_DEMO_SCENE_BLACK:
+            fadeInType = OVERLAY_VIEWPORT_COLOR;
+            fadeRate = FAST_FADE_RATE;
             break;
-        case TRANSITION_4:
-        case TRANSITION_5:
-        case TRANSITION_7:
-        case TRANSITION_9:
-        case TRANSITION_10:
-            frontType = 1;
-            amt = 7;
+        case TRANSITION_BEGIN_OR_END_GAME:
+        case TRANSITION_OUTRO_END_SCENE:
+        case TRANSITION_SLOW_FADE_TO_WHITE:
+        case TRANSITION_MARIO_WHITE:
+        case TRANSITION_MARIO_BLACK:
+            fadeInType = OVERLAY_VIEWPORT_COLOR;
+            fadeRate = SLOW_FADE_RATE;
             break;
-        case TRANSITION_0:
-        case TRANSITION_1:
-        case TRANSITION_6:
-        case TRANSITION_13:
-        case TRANSITION_14:
-            frontType = 1;
+        case TRANSITION_STANDARD:
+        case TRANSITION_TOY_TRAIN:
+        case TRANSITION_BEGIN_OR_END_CHAPTER:
+        case TRANSITION_PEACH_CAPTURED:
+        case TRANSITION_GET_STAR_CARD:
+            fadeInType = OVERLAY_VIEWPORT_COLOR;
             break;
-        case TRANSITION_8:
-        case TRANSITION_15:
-            frontType = 4;
+        case TRANSITION_ENTER_WORLD:
+        case TRANSITION_END_CHAPTER_INTERRUPTED:
+            fadeInType = OVERLAY_VIEWPORT_MARIO;
             break;
-        case TRANSITION_11:
-            frontType = 5;
-            amt = 7;
+        case TRANSITION_AFTER_SAVE_PROMPT:
+            fadeInType = OVERLAY_VIEWPORT_STAR;
+            fadeRate = SLOW_FADE_RATE;
             break;
-        case TRANSITION_12:
-            frontType = 4;
-            amt = 7;
+        case TRANSITION_END_PEACH_INTERLUDE:
+            fadeInType = OVERLAY_VIEWPORT_MARIO;
+            fadeRate = SLOW_FADE_RATE;
             break;
-        case TRANSITION_16:
-            set_screen_overlay_center(0, 0, 15, 28);
-            set_screen_overlay_center(0, 1, 305, 156);
-            set_screen_overlay_params_front(12, *progress);
-            amt = 2;
+        case TRANSITION_SLOW_BLUR_MOTION:
+            set_screen_overlay_center(SCREEN_LAYER_FRONT, 0, 15, 28);
+            set_screen_overlay_center(SCREEN_LAYER_FRONT, 1, 305, 156);
+            set_screen_overlay_params_front(OVERLAY_BLUR, *progress);
+            fadeRate = VERY_SLOW_FADE_RATE;
             break;
     }
 
-    if (D_8014C6F0 != TRANSITION_16) {
-        set_screen_overlay_params_front(frontType, *progress);
+    if (CurrentScreenTransition != TRANSITION_SLOW_BLUR_MOTION) {
+        set_screen_overlay_params_front(fadeInType, *progress);
     }
 
     if (*progress == 0) {
         ret = TRUE;
     }
 
-    *progress -= amt;
+    *progress -= fadeRate;
 
     if (*progress < 0) {
         *progress = 0;

@@ -1001,7 +1001,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_EQ(EVENT_30)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_LavaPiranha_Anim09)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_WAIT(1000)
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
@@ -1096,7 +1096,7 @@ EvtScript N(takeTurn) = {
                         EVT_CALL(PlayModelAnimation, VINE_0, VINE_0_BASE)
                         EVT_WAIT(4)
                     EVT_END_LOOP
-                    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+                    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                     EVT_CALL(MoveBattleCamOver, 15)
                     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3BB)
                     EVT_SET(LVar0, ACTOR_ENEMY0)
@@ -1138,7 +1138,7 @@ EvtScript N(attackFlameSpew) = {
         EVT_CALL(SetBattleCamOffsetZ, 30)
         EVT_CALL(MoveBattleCamOver, 45)
         EVT_WAIT(57)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(MoveBattleCamOver, 15)
     EVT_END_THREAD
     EVT_CALL(OverrideBattleDmaDest, VINE_0_BASE)
@@ -1178,7 +1178,7 @@ EvtScript N(attackFlameSpew) = {
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_WAIT(15)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
@@ -1200,7 +1200,7 @@ EvtScript N(attackFlameSpew) = {
             EVT_IF_EQ(LVarF, 10)
                 EVT_RETURN
             EVT_END_IF
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -1220,7 +1220,7 @@ EvtScript N(attackFireStream) = {
         EVT_CALL(SetBattleCamOffsetZ, 30)
         EVT_CALL(MoveBattleCamOver, 45)
         EVT_WAIT(54)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(MoveBattleCamOver, 15)
     EVT_END_THREAD
     EVT_CALL(OverrideBattleDmaDest, VINE_0_BASE)
@@ -1262,7 +1262,7 @@ EvtScript N(attackFireStream) = {
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_WAIT(15)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
@@ -1284,7 +1284,7 @@ EvtScript N(attackFireStream) = {
     EVT_IF_EQ(LVarF, 10)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN

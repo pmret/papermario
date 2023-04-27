@@ -187,7 +187,7 @@ Gfx gPausePartnersDL[] = {
     gsDPSetTextureFilter(G_TF_POINT),
     gsDPSetTextureConvert(G_TC_FILT),
     gsDPSetRenderMode(G_RM_OPA_SURF, G_RM_OPA_SURF2),
-    gsDPSetCombineLERP(0, 0, 0, TEXEL0, 0, 0, 0, 1, 0, 0, 0, TEXEL0, 0, 0, 0, 1),
+    gsDPSetCombineMode(PM_CC_0F, PM_CC_0F),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_SHADE | G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPEndDisplayList()

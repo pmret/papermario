@@ -8,7 +8,7 @@ Gfx Entity_WoodenCrate_LoadTexture1[] = {
     gsDPSetTextureLUT(G_TT_RGBA16),
     gsDPLoadTLUT_pal16(0, D_0A001D60_E533A0),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
-    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_03, PM_CC_03),
     gsDPSetTextureDetail(G_TD_CLAMP),
     gsDPSetTextureLOD(G_TL_TILE),
     gsDPLoadTextureBlock_4b(D_0A001560_E52BA0, G_IM_FMT_CI, 64, 64, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 6, 6, G_TX_NOLOD, G_TX_NOLOD),

@@ -149,7 +149,7 @@ EvtScript N(handleEvent) = {
             EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Peach2_Gasp)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Twink_Hurt)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Peach1_Walk)
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
@@ -257,13 +257,13 @@ EvtScript N(executeAction) = {
     EVT_ELSE
         EVT_CALL(PartnerDamageEnemy, LVar0, 0, 0, 0, LVarF, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
     EVT_END_IF
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(MoveBattleCamOver, 10)
     EVT_CALL(AddGoalPos, ACTOR_PARTNER, 150, 100, 0)
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 15, 20, EASING_LINEAR)
     EVT_CALL(EnableActorBlur, ACTOR_PARTNER, 0)
     EVT_WAIT(20)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_LOOP(0)
         EVT_WAIT(1)
         EVT_CALL(GetActorVar, ACTOR_ENEMY0, 1, LVar0)

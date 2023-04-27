@@ -161,20 +161,20 @@ ApiStatus InterpMotionBlurParams(Evt* script, s32 isInitialCall) {
 
     if (isInitialCall) {
         script->functionTemp[0] = duration;
-        get_screen_overlay_params(1, &overlayType, &initialAmt);
+        get_screen_overlay_params(SCREEN_LAYER_BACK, &overlayType, &initialAmt);
         script->functionTemp[1] = initialAmt;
-        set_screen_overlay_center(1, 0, centerX0, centerY0);
-        set_screen_overlay_center(1, 1, centerX1, centerY1);
+        set_screen_overlay_center(SCREEN_LAYER_BACK, 0, centerX0, centerY0);
+        set_screen_overlay_center(SCREEN_LAYER_BACK, 1, centerX1, centerY1);
     }
 
-    get_screen_overlay_params(1, &overlayType, &initialAmt);
+    get_screen_overlay_params(SCREEN_LAYER_BACK, &overlayType, &initialAmt);
     // lerp from initialAmt (stored in functionTemp[1]) to finalAmt (stored in varTable[5])
     delta = (script->functionTemp[1] - finalAmt);
-    set_screen_overlay_params_back(12, (delta * script->functionTemp[0] / duration) + finalAmt);
+    set_screen_overlay_params_back(OVERLAY_BLUR, (delta * script->functionTemp[0] / duration) + finalAmt);
 
     script->functionTemp[0]--;
     if (script->functionTemp[0] < 0) {
-        set_screen_overlay_params_back(12, finalAmt);
+        set_screen_overlay_params_back(OVERLAY_BLUR, finalAmt);
         return ApiStatus_DONE2;
     }
     return ApiStatus_BLOCK;

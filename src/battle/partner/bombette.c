@@ -362,7 +362,7 @@ EvtScript N(handleEvent) = {
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208C)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleBombette_Hurt)
-            EVT_EXEC_WAIT(DoPartnerBlock)
+            EVT_EXEC_WAIT(EVS_DoPartnerBlock)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SPIKE_CONTACT)
             EVT_SET_CONST(LVar1, ANIM_BattleBombette_Hurt)
@@ -439,7 +439,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_BattleBombette_BurnHurt)
             EVT_SET_CONST(LVar2, ANIM_BattleBombette_BurnStill)
             EVT_EXEC_WAIT(DoPartnerBurn)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
             EVT_SET(LVarA, 0)
             EVT_CALL(N(PlayExplosionFX), LVar0, LVar1, LVar2)
@@ -514,7 +514,7 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(D_802977BC)
             EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Fall)
             EVT_WAIT(8)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
             EVT_SET(LVarA, 0)
             EVT_CALL(N(PlayExplosionFX), LVar0, LVar1, LVar2)
@@ -578,7 +578,7 @@ EvtScript N(handleEvent) = {
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208C)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleBombette_Block)
-            EVT_EXEC_WAIT(DoPartnerBlock)
+            EVT_EXEC_WAIT(EVS_DoPartnerBlock)
             EVT_WAIT(10)
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
@@ -687,7 +687,7 @@ EvtScript N(nextTurn) = {
 
 EvtScript N(returnHome2) = {
     EVT_CALL(PartnerYieldTurn)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_E)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_04)
     EVT_CALL(MoveBattleCamOver, 10)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBombette_Backfire2)
     EVT_CALL(GetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
@@ -1111,7 +1111,7 @@ EvtScript N(bomb) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 0, 0)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(MoveBattleCamOver, 8)
     EVT_CALL(GetActionSuccessCopy, LVar0)
     EVT_CALL(N(GetBombDamage), LVar0)
@@ -1290,7 +1290,7 @@ EvtScript N(bomb) = {
             EVT_END_IF
     EVT_END_SWITCH
     EVT_IF_GT(LF_MashEnded, 0)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_E)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_04)
         EVT_CALL(MoveBattleCamOver, 10)
     EVT_ELSE
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
@@ -1361,7 +1361,7 @@ EvtScript N(firstStrikeBodySlam) = {
     EVT_SET(LVarA, 0)
     EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     EVT_CALL(N(PlayExplosionFX), LVar0, LVar1, LVar2)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(MoveBattleCamOver, 8)
     EVT_THREAD
         EVT_CALL(StartRumble, 4)

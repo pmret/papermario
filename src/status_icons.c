@@ -209,12 +209,12 @@ void show_merlee_message(s16 messageIndex, s16 duration) {
     if (popup != NULL) {
         popup->updateFunc = update_merlee_message;
         popup->renderUIFunc = draw_merlee_message;
-        popup->unk_17 = TRUE;
+        popup->needsInit = TRUE;
         popup->unk_00 = 0;
         popup->renderWorldFunc = NULL;
         popup->messageIndex = messageIndex;
         popup->duration = duration;
-        popup->unk_16 = 0;
+        popup->showMsgState = 0;
         D_800A0F40 = 1;
     }
 }
@@ -223,12 +223,12 @@ void update_merlee_message(void* data) {
     PopupMessage* popup = data;
     s32 closeMessage = FALSE;
 
-    switch (popup->unk_16) {
+    switch (popup->showMsgState) {
         case 0:
-            popup->unk_16 = 1;
+            popup->showMsgState = 1;
             break;
         case 1:
-            popup->unk_16 = 2;
+            popup->showMsgState = 2;
             break;
         case 2:
             if (gGameStatusPtr->pressedButtons[0] & 0xC000) {
@@ -237,11 +237,11 @@ void update_merlee_message(void* data) {
             if (popup->duration != 0) {
                 popup->duration--;
             } else {
-                popup->unk_16 = 3;
+                popup->showMsgState = 3;
             }
             break;
         case 3:
-            popup->unk_16 = 4;
+            popup->showMsgState = 4;
             break;
         case 4:
             closeMessage = TRUE;
@@ -289,8 +289,8 @@ void draw_merlee_message(void* data) {
 
     switch (popup->messageIndex) {
         case 0:
-            if (popup->unk_17 != 0) {
-                popup->unk_17 = 0;
+            if (popup->needsInit) {
+                popup->needsInit = FALSE;
                 messageID = D_80078168[popup->messageIndex];
                 width = get_msg_width(messageID, 0) + 23;
                 xPos = 160 - (width / 2);
@@ -301,8 +301,8 @@ void draw_merlee_message(void* data) {
             break;
 
         case 1:
-            if (popup->unk_17 != 0) {
-                popup->unk_17 = 0;
+            if (popup->needsInit) {
+                popup->needsInit = FALSE;
                 messageID = D_80078168[popup->messageIndex];
                 width = get_msg_width(messageID, 0) + 23;
                 xPos = 160 - (width / 2);
@@ -318,8 +318,8 @@ void draw_merlee_message(void* data) {
     s32 xPos;
     s32 width;
 
-    if (popup->unk_17) {
-        popup->unk_17 = FALSE;
+    if (popup->needsInit) {
+        popup->needsInit = FALSE;
         messageID = D_80078168[popup->messageIndex];
         width = get_msg_width(messageID, 0) + 30;
         xPos = 160 - (width / 2);

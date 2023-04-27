@@ -8,7 +8,7 @@ Gfx D_0A001170_E39A00[] = {
     gsDPSetTextureLUT(G_TT_RGBA16),
     gsDPLoadTLUT_pal16(0, D_0A001150_E399E0),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
-    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_03, PM_CC_03),
     gsDPSetTextureDetail(G_TD_CLAMP),
     gsDPSetTextureLOD(G_TL_TILE),
     gsDPLoadTextureBlock_4b(D_0A001050_E398E0, G_IM_FMT_CI, 16, 32, 0, G_TX_MIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD),
@@ -335,7 +335,7 @@ Mtx Entity_ShatteringHammer3Block_FragmentsMatrices[] = {
 Gfx D_0A001898_E3A128[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
-    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_03, PM_CC_03),
     gsSPTexture(0x0080, 0x0080, 0, G_TX_RENDERTILE, G_OFF),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
@@ -375,7 +375,7 @@ Gfx D_0A001978_E3A208[] = {
 Gfx D_0A001990_E3A220[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
-    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_03, PM_CC_03),
     gsSPTexture(0x0080, 0x0080, 0, G_TX_RENDERTILE, G_OFF),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
@@ -418,7 +418,7 @@ Gfx D_0A001A88_E3A318[] = {
 Gfx D_0A001AA0_E3A330[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
-    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_03, PM_CC_03),
     gsSPTexture(0x0080, 0x0080, 0, G_TX_RENDERTILE, G_OFF),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
@@ -459,7 +459,7 @@ Gfx D_0A001B88_E3A418[] = {
 Gfx D_0A001BA0_E3A430[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
-    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_03, PM_CC_03),
     gsSPTexture(0x0080, 0x0080, 0, G_TX_RENDERTILE, G_OFF),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
@@ -497,7 +497,7 @@ Gfx D_0A001C70_E3A500[] = {
 Gfx D_0A001C88_E3A518[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
-    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_03, PM_CC_03),
     gsSPTexture(0x0080, 0x0080, 0, G_TX_RENDERTILE, G_OFF),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
@@ -534,7 +534,7 @@ Gfx D_0A001D50_E3A5E0[] = {
 Gfx D_0A001D68_E3A5F8[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
-    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_03, PM_CC_03),
     gsSPTexture(0x0080, 0x0080, 0, G_TX_RENDERTILE, G_OFF),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
@@ -572,7 +572,7 @@ Gfx D_0A001E38_E3A6C8[] = {
 Gfx D_0A001E50_E3A6E0[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
-    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_03, PM_CC_03),
     gsSPTexture(0x0080, 0x0080, 0, G_TX_RENDERTILE, G_OFF),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
@@ -608,7 +608,7 @@ Gfx D_0A001F10_E3A7A0[] = {
 Gfx D_0A001F28_E3A7B8[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
-    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_03, PM_CC_03),
     gsSPTexture(0x0080, 0x0080, 0, G_TX_RENDERTILE, G_OFF),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
@@ -644,7 +644,7 @@ Gfx D_0A001FE8_E3A878[] = {
 Gfx D_0A002000_E3A890[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
-    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_03, PM_CC_03),
     gsSPTexture(0x0080, 0x0080, 0, G_TX_RENDERTILE, G_OFF),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
@@ -678,7 +678,7 @@ Gfx D_0A0020B0_E3A940[] = {
 Gfx D_0A0020C8_E3A958[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
-    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_03, PM_CC_03),
     gsSPTexture(0x0080, 0x0080, 0, G_TX_RENDERTILE, G_OFF),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
@@ -718,7 +718,7 @@ Gfx D_0A0021A8_E3AA38[] = {
 Gfx D_0A0021C0_E3AA50[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
-    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_03, PM_CC_03),
     gsSPTexture(0x0080, 0x0080, 0, G_TX_RENDERTILE, G_OFF),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
@@ -760,7 +760,7 @@ Gfx D_0A0022B0_E3AB40[] = {
 Gfx D_0A0022C8_E3AB58[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
-    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_03, PM_CC_03),
     gsSPTexture(0x0080, 0x0080, 0, G_TX_RENDERTILE, G_OFF),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
@@ -800,7 +800,7 @@ Gfx D_0A0023A8_E3AC38[] = {
 Gfx D_0A0023C0_E3AC50[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
-    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_03, PM_CC_03),
     gsSPTexture(0x0080, 0x0080, 0, G_TX_RENDERTILE, G_OFF),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
@@ -836,7 +836,7 @@ Gfx D_0A002480_E3AD10[] = {
 Gfx D_0A002498_E3AD28[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
-    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_03, PM_CC_03),
     gsSPTexture(0x0080, 0x0080, 0, G_TX_RENDERTILE, G_OFF),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
@@ -872,7 +872,7 @@ Gfx D_0A002558_E3ADE8[] = {
 Gfx D_0A002570_E3AE00[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
-    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_03, PM_CC_03),
     gsSPTexture(0x0080, 0x0080, 0, G_TX_RENDERTILE, G_OFF),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
@@ -907,7 +907,7 @@ Gfx D_0A002628_E3AEB8[] = {
 Gfx D_0A002640_E3AED0[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
-    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_03, PM_CC_03),
     gsSPTexture(0x0080, 0x0080, 0, G_TX_RENDERTILE, G_OFF),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
@@ -942,7 +942,7 @@ Gfx D_0A0026F8_E3AF88[] = {
 Gfx D_0A002710_E3AFA0[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
-    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_03, PM_CC_03),
     gsSPTexture(0x0080, 0x0080, 0, G_TX_RENDERTILE, G_OFF),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
@@ -975,7 +975,7 @@ Gfx D_0A0027B8_E3B048[] = {
 Gfx D_0A0027D0_E3B060[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
-    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_03, PM_CC_03),
     gsSPTexture(0x0080, 0x0080, 0, G_TX_RENDERTILE, G_OFF),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
@@ -1014,7 +1014,7 @@ Gfx D_0A0028A8_E3B138[] = {
 Gfx D_0A0028C0_E3B150[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
-    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_03, PM_CC_03),
     gsSPTexture(0x0080, 0x0080, 0, G_TX_RENDERTILE, G_OFF),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
@@ -1055,7 +1055,7 @@ Gfx D_0A0029A8_E3B238[] = {
 Gfx D_0A0029C0_E3B250[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
-    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_03, PM_CC_03),
     gsSPTexture(0x0080, 0x0080, 0, G_TX_RENDERTILE, G_OFF),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
@@ -1094,7 +1094,7 @@ Gfx D_0A002A98_E3B328[] = {
 Gfx D_0A002AB0_E3B340[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
-    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_03, PM_CC_03),
     gsSPTexture(0x0080, 0x0080, 0, G_TX_RENDERTILE, G_OFF),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
@@ -1130,7 +1130,7 @@ Gfx D_0A002B70_E3B400[] = {
 Gfx D_0A002B88_E3B418[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
-    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_03, PM_CC_03),
     gsSPTexture(0x0080, 0x0080, 0, G_TX_RENDERTILE, G_OFF),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
@@ -1165,7 +1165,7 @@ Gfx D_0A002C40_E3B4D0[] = {
 Gfx D_0A002C58_E3B4E8[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
-    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_03, PM_CC_03),
     gsSPTexture(0x0080, 0x0080, 0, G_TX_RENDERTILE, G_OFF),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
@@ -1200,7 +1200,7 @@ Gfx D_0A002D10_E3B5A0[] = {
 Gfx D_0A002D28_E3B5B8[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
-    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_03, PM_CC_03),
     gsSPTexture(0x0080, 0x0080, 0, G_TX_RENDERTILE, G_OFF),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
@@ -1234,7 +1234,7 @@ Gfx D_0A002DD8_E3B668[] = {
 Gfx D_0A002DF0_E3B680[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
-    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_03, PM_CC_03),
     gsSPTexture(0x0080, 0x0080, 0, G_TX_RENDERTILE, G_OFF),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
@@ -1268,7 +1268,7 @@ Gfx D_0A002EA0_E3B730[] = {
 Gfx D_0A002EB8_E3B748[] = {
     gsDPPipeSync(),
     gsDPSetCycleType(G_CYC_1CYCLE),
-    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_03, PM_CC_03),
     gsSPTexture(0x0080, 0x0080, 0, G_TX_RENDERTILE, G_OFF),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),

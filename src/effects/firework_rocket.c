@@ -1,7 +1,7 @@
 #include "common.h"
 #include "effects_internal.h"
 
-void shim_func_80138D88(s32, s32, s32, s32, f32);
+void shim_draw_prev_frame_buffer_at_screen_pos(s32, s32, s32, s32, f32);
 
 void firework_rocket_init(EffectInstance* effect);
 void firework_rocket_render(EffectInstance* effect);
@@ -246,7 +246,7 @@ void firework_rocket_appendGfx(void* effect) {
     isExploded = data->isExploded;
     if (firework_rocket_frame_counter != gGameStatusPtr->frameCounter) {
         // draw previous frame to create motion blur effect
-        shim_func_80138D88(10, 10, SCREEN_WIDTH - 10, SCREEN_HEIGHT - 10, firework_rocket_blur_alpha * 0.8);
+        shim_draw_prev_frame_buffer_at_screen_pos(10, 10, SCREEN_WIDTH - 10, SCREEN_HEIGHT - 10, firework_rocket_blur_alpha * 0.8);
         firework_rocket_frame_counter = gGameStatusPtr->frameCounter;
         firework_rocket_blur_alpha = 0;
     }

@@ -389,19 +389,19 @@ EvtScript N(OnHit) = {
                 EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_BIT1_ID), LVar0)
                 EVT_CALL(ActorExists, LVar0, LVar1)
                 EVT_IF_EQ(LVar1, TRUE)
-                    EVT_CALL(func_80269EAC, 0)
+                    EVT_CALL(SetDamageSource, DMG_SRC_DEFAULT)
                     EVT_CALL(DispatchEvent, LVar0, EVENT_DEATH)
                 EVT_END_IF
                 EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_BIT2_ID), LVar0)
                 EVT_CALL(ActorExists, LVar0, LVar1)
                 EVT_IF_EQ(LVar1, TRUE)
-                    EVT_CALL(func_80269EAC, 0)
+                    EVT_CALL(SetDamageSource, DMG_SRC_DEFAULT)
                     EVT_CALL(DispatchEvent, LVar0, EVENT_DEATH)
                 EVT_END_IF
                 EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_BIT3_ID), LVar0)
                 EVT_CALL(ActorExists, LVar0, LVar1)
                 EVT_IF_EQ(LVar1, TRUE)
-                    EVT_CALL(func_80269EAC, 0)
+                    EVT_CALL(SetDamageSource, DMG_SRC_DEFAULT)
                     EVT_CALL(DispatchEvent, LVar0, EVENT_DEATH)
                 EVT_END_IF
             EVT_END_IF
@@ -437,7 +437,7 @@ EvtScript N(OnHit) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim19)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_IF_NE(LVar1, 0)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_FLY_THREAD_ID), LVarA)
         EVT_KILL_THREAD(LVarA)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20E3)
@@ -485,21 +485,21 @@ EvtScript N(OnDeath) = {
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_BIT1_ID), LVar0)
             EVT_CALL(ActorExists, LVar0, LVar1)
             EVT_IF_EQ(LVar1, TRUE)
-                EVT_CALL(func_80269EAC, 0)
+                EVT_CALL(SetDamageSource, DMG_SRC_DEFAULT)
                 EVT_CALL(SetActorFlagBits, LVar0, ACTOR_FLAG_NO_DMG_APPLY, TRUE)
                 EVT_CALL(DispatchEvent, LVar0, EVENT_DEATH)
             EVT_END_IF
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_BIT2_ID), LVar0)
             EVT_CALL(ActorExists, LVar0, LVar1)
             EVT_IF_EQ(LVar1, TRUE)
-                EVT_CALL(func_80269EAC, 0)
+                EVT_CALL(SetDamageSource, DMG_SRC_DEFAULT)
                 EVT_CALL(SetActorFlagBits, LVar0, ACTOR_FLAG_NO_DMG_APPLY, TRUE)
                 EVT_CALL(DispatchEvent, LVar0, EVENT_DEATH)
             EVT_END_IF
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_BIT3_ID), LVar0)
             EVT_CALL(ActorExists, LVar0, LVar1)
             EVT_IF_EQ(LVar1, TRUE)
-                EVT_CALL(func_80269EAC, 0)
+                EVT_CALL(SetDamageSource, DMG_SRC_DEFAULT)
                 EVT_CALL(SetActorFlagBits, LVar0, ACTOR_FLAG_NO_DMG_APPLY, TRUE)
                 EVT_CALL(DispatchEvent, LVar0, EVENT_DEATH)
             EVT_END_IF
@@ -560,7 +560,7 @@ EvtScript N(handleEvent) = {
                     EVT_CALL(SetOwnerID, LVar0)
                     EVT_SET_CONST(LVar0, 1)
                     EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim19)
-                    EVT_EXEC_WAIT(DoNormalHit)
+                    EVT_EXEC_WAIT(EVS_DoNormalHit)
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim09)
                 EVT_END_THREAD
             EVT_END_IF
@@ -571,13 +571,13 @@ EvtScript N(handleEvent) = {
                     EVT_CALL(SetOwnerID, LVar0)
                     EVT_SET_CONST(LVar0, 1)
                     EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim19)
-                    EVT_EXEC_WAIT(DoNormalHit)
+                    EVT_EXEC_WAIT(EVS_DoNormalHit)
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim09)
                 EVT_END_THREAD
             EVT_END_IF
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim19)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
         EVT_CASE_EQ(EVENT_HIT)
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_CLONE1_ID), LVar0)
             EVT_CALL(ActorExists, LVar0, LVar1)
@@ -586,7 +586,7 @@ EvtScript N(handleEvent) = {
                     EVT_CALL(SetOwnerID, LVar0)
                     EVT_SET_CONST(LVar0, 1)
                     EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim19)
-                    EVT_EXEC_WAIT(DoNormalHit)
+                    EVT_EXEC_WAIT(EVS_DoNormalHit)
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim09)
                 EVT_END_THREAD
             EVT_END_IF
@@ -597,13 +597,13 @@ EvtScript N(handleEvent) = {
                     EVT_CALL(SetOwnerID, LVar0)
                     EVT_SET_CONST(LVar0, 1)
                     EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim19)
-                    EVT_EXEC_WAIT(DoNormalHit)
+                    EVT_EXEC_WAIT(EVS_DoNormalHit)
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim09)
                 EVT_END_THREAD
             EVT_END_IF
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim19)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_EXEC_WAIT(N(OnHit))
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_CLONE1_ID), LVar0)
@@ -661,7 +661,7 @@ EvtScript N(handleEvent) = {
                     EVT_CALL(SetOwnerID, LVar0)
                     EVT_SET_CONST(LVar0, 1)
                     EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim19)
-                    EVT_EXEC_WAIT(DoNormalHit)
+                    EVT_EXEC_WAIT(EVS_DoNormalHit)
                 EVT_END_THREAD
             EVT_END_IF
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_CLONE2_ID), LVar0)
@@ -671,16 +671,16 @@ EvtScript N(handleEvent) = {
                     EVT_CALL(SetOwnerID, LVar0)
                     EVT_SET_CONST(LVar0, 1)
                     EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim19)
-                    EVT_EXEC_WAIT(DoNormalHit)
+                    EVT_EXEC_WAIT(EVS_DoNormalHit)
                 EVT_END_THREAD
             EVT_END_IF
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim19)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_EXEC_WAIT(N(OnDeath))
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim19)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_CLONE1_ID), LVar0)
@@ -712,7 +712,7 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(N(OnDeath))
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim21)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_THREAD
@@ -950,7 +950,7 @@ EvtScript N(AttackIcyBreath) = {
         EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, LVar0, LVar1, LVar2, 8, 0)
     EVT_END_IF
     EVT_WAIT(30)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim1C)
     EVT_WAIT(3)
@@ -984,7 +984,7 @@ EvtScript N(AttackIcyBreath) = {
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_WAIT(20)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
@@ -1016,7 +1016,7 @@ EvtScript N(AttackIcyBreath) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -1047,7 +1047,7 @@ EvtScript N(AttackIceBolt) = {
         EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, LVar0, LVar1, LVar2, 8, 0)
     EVT_END_IF
     EVT_WAIT(30)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim1C)
     EVT_WAIT(3)
@@ -1093,7 +1093,7 @@ EvtScript N(AttackIceBolt) = {
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_WAIT(20)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
@@ -1143,7 +1143,7 @@ EvtScript N(AttackIceBolt) = {
             EVT_PLAY_EFFECT(EFFECT_COLD_BREATH, 0, LVar0, LVar1, LVar2, EVT_FLOAT(2.0), 30, 0)
             EVT_CALL(func_80218344_660A94, LVarF)
             EVT_WAIT(30)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -1264,7 +1264,7 @@ EvtScript N(MakeIllusions) = {
         EVT_EXEC_GET_TID(N(FlyWithClones), LVar0)
         EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_FLY_THREAD_ID), LVar0)
     EVT_END_IF
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_B)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_01)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_CLONE1_ID), LVarA)
     EVT_CALL(SetActorPos, LVarA, LVar0, LVar1, LVar2)
@@ -1338,7 +1338,7 @@ EvtScript N(MakeIllusions) = {
     EVT_CALL(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_SHADOW, FALSE)
     EVT_CALL(SetActorFlagBits, LVarB, ACTOR_FLAG_NO_SHADOW, FALSE)
     EVT_CALL(SetActorFlagBits, LVarC, ACTOR_FLAG_NO_SHADOW, FALSE)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 150)
     EVT_THREAD
         EVT_CALL(GetActorPos, LVarA, LVar0, LVar1, LVar2)
@@ -1535,7 +1535,7 @@ EvtScript N(SummonCrystalBits) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_BIT3_ID), LVar0)
     EVT_CALL(ForceHomePos, LVar0, 42, 85, -10)
     EVT_CALL(HPBarToHome, LVar0)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
@@ -1598,7 +1598,7 @@ EvtScript N(AttackIcyBreathWithClones) = {
         EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, LVar0, LVar1, LVar2, 8, 0)
     EVT_END_IF
     EVT_WAIT(30)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim1C)
     EVT_CALL(SetAnimation, LVarA, 1, ANIM_CrystalKing_Anim1C)
@@ -1660,7 +1660,7 @@ EvtScript N(AttackIcyBreathWithClones) = {
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_WAIT(20)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(GetActorVar, ACTOR_ENEMY0, N(VAR_FLAGS), LVar0)
             EVT_BITWISE_AND_CONST(LVar0, ~N(FLAG_NOT_IDLE))
             EVT_CALL(SetActorVar, ACTOR_ENEMY0, N(VAR_FLAGS), LVar0)
@@ -1724,7 +1724,7 @@ EvtScript N(AttackIcyBreathWithClones) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_WAIT(20)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
@@ -1882,7 +1882,7 @@ EvtScript N(NormalAttack) = {
     EVT_END_IF
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim13)
     EVT_WAIT(30)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 15)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
@@ -2057,7 +2057,7 @@ EvtScript N(Heal) = {
         EVT_CALL(SetAnimation, LVarB, 1, ANIM_CrystalKing_Anim09)
     EVT_END_IF
     EVT_CALL(WaitForBuffDone)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_IF_EQ(LocalFlag(0), 1)

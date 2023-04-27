@@ -260,7 +260,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
             EVT_CALL(GetAnimation, ACTOR_SELF, 1, LVar1)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_CALL(GetOwnerID, LVar0)
@@ -293,7 +293,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 1)
             EVT_CALL(GetAnimation, ACTOR_SELF, 1, LVar1)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_DoNormalHit)
             EVT_CALL(func_8027D32C, ACTOR_SELF)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_301)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))

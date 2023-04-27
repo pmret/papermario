@@ -231,7 +231,7 @@ void entity_ItemBlock_setupGfx(s32 entityIndex) {
         gDPSetRenderMode(gfx++, G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2);
         gDPSetCombineMode(gfx++, G_CC_MODULATEIA, G_CC_MODULATEIA);
     } else {
-        gDPSetCombineLERP(gfx++, 0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
+        gDPSetCombineMode(gfx++, PM_CC_01, PM_CC_02);
         gDPSetPrimColor(gfx++, 0, 0, 0, 0, 0, entity->alpha);
     }
 

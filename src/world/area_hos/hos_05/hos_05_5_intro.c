@@ -1326,7 +1326,7 @@ Gfx N(gfx_setup_story_viewport)[] = {
     gsDPSetTextureConvert(G_TC_FILT),
     gsDPSetTexturePersp(G_TP_NONE),
     gsDPSetTextureLUT(G_TT_RGBA16),
-    gsDPSetCombineLERP(0, 0, 0, TEXEL0, 0, 0, 0, PRIMITIVE, 0, 0, 0, TEXEL0, 0, 0, 0, PRIMITIVE),
+    gsDPSetCombineMode(PM_CC_10, PM_CC_10),
     gsDPSetScissor(G_SC_NON_INTERLACE, 29, 28, 291, 190),
     gsDPSetColorDither(G_CD_DISABLE),
     gsDPSetAlphaDither(G_AD_PATTERN),
@@ -1368,13 +1368,11 @@ void N(appendGfx_image_strips)(s32 baseX, s32 baseY, IMG_PTR img, PAL_PTR pal, s
         gDPSetTextureLUT(gMainGfxPos++, G_TT_NONE);
     }
 
-    get_screen_overlay_params(1, &overlayType, &overlayAlphaBack);
-    get_screen_overlay_params(0, &overlayType, &overlayAlphaFront);
+    get_screen_overlay_params(SCREEN_LAYER_BACK, &overlayType, &overlayAlphaBack);
+    get_screen_overlay_params(SCREEN_LAYER_FRONT, &overlayType, &overlayAlphaFront);
     alpha = alpha * (255.0f - overlayAlphaBack) * (255.0f - overlayAlphaFront) / 255.0f / 255.0f;
     if (alpha != 255) {
-        gDPSetCombineLERP(gMainGfxPos++,
-            0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0,
-            0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0);
+        gDPSetCombineMode(gMainGfxPos++, PM_CC_01, PM_CC_01);
         gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, alpha);
     } else {
         gDPSetCombineMode(gMainGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
@@ -1442,11 +1440,9 @@ void N(worker_draw_story_graphics)(void) {
         gDPSetRenderMode(gMainGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
         gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, N(StoryGraphicsPtr)->storyPageAlpha);
     }
-    get_screen_overlay_params(1, &overlayType, &overlayAlpha);
+    get_screen_overlay_params(SCREEN_LAYER_BACK, &overlayType, &overlayAlpha);
     if (overlayAlpha != 0.0f) {
-        gDPSetCombineLERP(gMainGfxPos++,
-            PRIMITIVE, TEXEL0, PRIMITIVE_ALPHA, TEXEL0, 0, 0, 0, 1,
-            PRIMITIVE, TEXEL0, PRIMITIVE_ALPHA, TEXEL0, 0, 0, 0, 1);
+        gDPSetCombineLERP(gMainGfxPos++, PRIMITIVE, TEXEL0, PRIMITIVE_ALPHA, TEXEL0, 0, 0, 0, 1, PRIMITIVE, TEXEL0, PRIMITIVE_ALPHA, TEXEL0, 0, 0, 0, 1);
         gDPSetPrimColor(gMainGfxPos++, 0, 0, 208, 208, 208, (s32) overlayAlpha);
     }
 
@@ -1973,18 +1969,18 @@ API_CALLABLE(N(AnimKammy_FlyOff)) {
 API_CALLABLE(N(func_80244934_A2EB74)) {
     if (isInitialCall) {
         script->functionTemp[0] = 0;
-        set_screen_overlay_params_back(1, 255.0f);
-        set_screen_overlay_color(1, 250, 250, 250);
+        set_screen_overlay_params_back(OVERLAY_VIEWPORT_COLOR, 255.0f);
+        set_screen_overlay_color(SCREEN_LAYER_BACK, 250, 250, 250);
         return ApiStatus_BLOCK;
     }
     script->functionTemp[0]++;
     if (script->functionTemp[0] == 10) {
-        set_screen_overlay_params_back(0, 0.0f);
-        set_screen_overlay_color(1, 250, 250, 250);
+        set_screen_overlay_params_back(OVERLAY_SCREEN_COLOR, 0.0f);
+        set_screen_overlay_color(SCREEN_LAYER_BACK, 250, 250, 250);
         return ApiStatus_DONE2;
     }
-    set_screen_overlay_params_back(1, (10 - script->functionTemp[0]) * 25);
-    set_screen_overlay_color(1, 250, 250, 250);
+    set_screen_overlay_params_back(OVERLAY_VIEWPORT_COLOR, (10 - script->functionTemp[0]) * 25);
+    set_screen_overlay_color(SCREEN_LAYER_BACK, 250, 250, 250);
     return ApiStatus_BLOCK;
 }
 

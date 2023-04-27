@@ -250,7 +250,7 @@ EvtScript N(802A2020) = {
 EvtScript N(802A222C) = {
     EVT_CALL(GetOwnerID, LVarA)
     EVT_IF_EQ(LVarA, 0)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(PlaySound, SOUND_2047)
         EVT_THREAD
             EVT_LOOP(5)
@@ -282,7 +282,7 @@ EvtScript N(802A222C) = {
         EVT_CALL(EnableNpcBlur, NPC_BTL_SPIRIT, FALSE)
         EVT_CALL(DeleteNpc, NPC_BTL_SPIRIT)
     EVT_ELSE
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(PlaySound, SOUND_2045)
         EVT_THREAD
             EVT_LOOP(5)
@@ -348,7 +348,7 @@ EvtScript N(EVS_UsePower) = {
     EVT_EXEC_WAIT(N(802A2020))
     EVT_CALL(SetNpcAnimation, NPC_BTL_SPIRIT, ANIM_BattleMuskular_Shout)
     EVT_WAIT(16)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(PlaySound, SOUND_244)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(10)
@@ -416,7 +416,7 @@ EvtScript N(EVS_UsePower) = {
     EVT_WAIT(5)
     EVT_CALL(func_802A1528_7905F8)
     EVT_IF_EQ(LVar0, 1)
-        EVT_CALL(ShowMessageBox, BTL_MSG_2C, 60)
+        EVT_CALL(ShowMessageBox, BTL_MSG_CHILL_OUT_BEGIN, 60)
     EVT_END_IF
     EVT_CALL(func_80276EFC)
     EVT_EXEC_WAIT(N(802A222C))
