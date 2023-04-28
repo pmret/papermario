@@ -13,7 +13,12 @@ if __name__ == "__main__":
     inputs = [Path(p) for p in argv[2:]]
 
     sbn = SBN()
-    sbn.read(inputs)
+
+    for input in inputs:
+        # if input is a sbn.yaml, read its directory
+        if input.suffix == ".yaml":
+            sbn.read(input.parent)
+
     data = sbn.encode()
 
     with open(out, "wb") as f:

@@ -692,7 +692,7 @@ class Configure:
                 build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
             elif seg.type == "pm_sbn":
                 sbn_path = entry.object_path.with_suffix("")
-                build(sbn_path, entry.src_paths, "pm_sbn")
+                build(sbn_path, entry.src_paths, "pm_sbn") # could have non-yaml inputs be implicit
                 build(entry.object_path, [sbn_path], "bin")
             elif seg.type == "linker" or seg.type == "linker_offset":
                 pass
