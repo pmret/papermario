@@ -217,6 +217,8 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, extra_cppflags: str,
 
     ninja.rule("pm_sprite_shading_profiles", command=f"$python {BUILD_TOOLS}/sprite/sprite_shading_profiles.py $in $out $header_path")
 
+    ninja.rule("pm_sbn", command=f"$python {BUILD_TOOLS}/audio/sbn.py $out $in")
+
     with Path("tools/permuter_settings.toml").open("w") as f:
         f.write(f"compiler_command = \"{cc} {CPPFLAGS.replace('$version', 'us')} {cflags} -DPERMUTER -fforce-addr\"\n")
         f.write(f"assembler_command = \"{cross}as -EB -march=vr4300 -mtune=vr4300 -Iinclude\"\n")
@@ -257,7 +259,7 @@ class Configure:
         if assets:
             modes.extend(["bin", "yay0", "img", "vtx", "vtx_common", "gfx", "gfx_common", "pm_map_data", "pm_msg",
                           "pm_npc_sprites", "pm_charset","pm_charset_palettes", "pm_effect_loads", "pm_effect_shims",
-                          "pm_sprite_shading_profiles"])
+                          "pm_sprite_shading_profiles", "pm_sbn"])
         if code:
             modes.extend(["code", "c", "data", "rodata"])
 
@@ -688,6 +690,10 @@ class Configure:
                     "header_path": header_path,
                 })
                 build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
+            elif seg.type == "pm_sbn":
+                sbn_path = entry.object_path.with_suffix("")
+                build(sbn_path, entry.src_paths, "pm_sbn")
+                build(entry.object_path, [sbn_path], "bin")
             elif seg.type == "linker" or seg.type == "linker_offset":
                 pass
             else:
