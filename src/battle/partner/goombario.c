@@ -895,7 +895,7 @@ EvtScript N(runToTarget) = {
         EVT_SET(LVar3, LVar0)
     EVT_END_IF
     EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar3, LVar4, LVar5)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_47)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PARTNER_APPROACH)
     EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(5.0))
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleGoombario_Run)
     EVT_CALL(RunToGoal, ACTOR_PARTNER, 0)

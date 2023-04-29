@@ -304,23 +304,23 @@ void shockwave_appendGfx(void* effect) {
         envG2 = envG >> 2;
         envB2 = envB >> 2;
     }
-    
+
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
     gSPDisplayList(gMainGfxPos++, dlist2);
 
-    shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 
+    shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f,
                      data->pos.x, data->pos.y, data->pos.z);
     shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], 
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
               G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     primA = data->alpha;
 
     savedGfxPos = gMainGfxPos;
     gMainGfxPos++;
     savedGfxPos2 = gMainGfxPos;
-    
+
     data++;
     for (i = 1; i < ((EffectInstance*) effect)->numParts; i++, data++) {
         if (data->unk_4C >= 0) {
@@ -336,7 +336,7 @@ void shockwave_appendGfx(void* effect) {
             gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, 0, (s32) data->unk_3C, 0x00FC, (s32) data->unk_3C + 0x7C);
             gDPSetTileSize(gMainGfxPos++, 1, 0, (s32) data->unk_44, 0x007C, (s32) data->unk_44 + 0x7C);
 
-            gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], 
+            gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                       G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
             gSPDisplayList(gMainGfxPos++, dlist);
             gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);

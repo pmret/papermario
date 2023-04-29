@@ -302,7 +302,7 @@ segments:
         - [0x4FAC0]
         - [0x4FB10, rgba32, theater/curtains, 32, 32]
         - [0x50B10]
-        - [0x50B60, ci4, theater/floor, 32, 16] 
+        - [0x50B60, ci4, theater/floor, 32, 16]
         - [0x50C60, palette, theater/floor]
         - [0x50C80]
         - [0x50D00, vtx, theater/left_wall_vtx]

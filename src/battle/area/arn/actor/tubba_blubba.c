@@ -263,7 +263,7 @@ EvtScript N(takeTurn_802264AC) = {
 
 EvtScript N(80226558) = {
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(SetBattleCamZoom, 150)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
@@ -329,7 +329,7 @@ EvtScript N(80226558) = {
         EVT_CALL(SetDamageSource, DMG_SRC_TUBBA_SMASH)
     EVT_END_IF
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 0, 4, BS_FLAGS1_SP_EVT_ACTIVE)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(SetBattleCamZoom, 200)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
@@ -353,7 +353,7 @@ EvtScript N(80226558) = {
 
 EvtScript N(80226B88) = {
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(SetBattleCamZoom, 150)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
@@ -436,7 +436,7 @@ EvtScript N(80226B88) = {
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20EA)
     EVT_END_IF
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 0, 6, BS_FLAGS1_SP_EVT_ACTIVE)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(SetBattleCamZoom, 200)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)

@@ -165,7 +165,7 @@ void whirlwind_appendGfx(void* effect) {
     s32 i;
     EffectInstance* eff = (EffectInstance*)effect;
     WhirlwindFXData* data = eff->data.whirlwind;
-    
+
     spA0 = data->unk_10;
     primAlpha = data->primAlpha >> 1;
     spB8 = data->unk_34;
@@ -206,7 +206,7 @@ void whirlwind_appendGfx(void* effect) {
 
     // Reserve 0x88 bytes (17 commands, including this one) for a separate dynamically generated display list
     gSPBranchList(gMainGfxPos, &gMainGfxPos[17]);
-    
+
     // Get a reference to the dynamically generated display list
     triangleDisplayList = ++gMainGfxPos;
 

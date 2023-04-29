@@ -635,7 +635,7 @@ EvtScript EVS_EnterRoomDoor = {
             EVT_SET(LVarE, 20)
             EVT_EXEC_WAIT(EVS_EnterRoom_MovePlayerA)
     EVT_END_SWITCH
-    
+
     // reveal room interior and hide world
     EVT_CALL(GetDoorData)
     EVT_SET(LVar0, ROOM_VISIBILITY_SHOW)

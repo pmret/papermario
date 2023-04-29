@@ -999,7 +999,7 @@ void imgfx_appendGfx_mesh(ImgFXState* state, Matrix4f mtx) {
                     primAlpha = state->ints.hologram.alphaAmt * ifxImgAlpha;
                     // color: blend texure and noise
                     // alpha: texure * prim
-                    gDPSetCombineMode(gMainGfxPos++, PM_CC_IMGFX_HOLOGRAM, PM_CC_IMGFX_HOLOGRAM); 
+                    gDPSetCombineMode(gMainGfxPos++, PM_CC_IMGFX_HOLOGRAM, PM_CC_IMGFX_HOLOGRAM);
                     gDPSetPrimColor(gMainGfxPos++, 0, 0,
                                     state->ints.hologram.noiseAmt,
                                     state->ints.hologram.noiseAmt,

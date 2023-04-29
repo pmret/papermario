@@ -1500,7 +1500,7 @@ EvtScript N(nextTurn) = {
 EvtScript N(attackBodySlam) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(AddBattleCamZoom, -200)
     EVT_CALL(SetBattleCamOffsetZ, -30)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
@@ -2390,7 +2390,7 @@ EvtScript N(electicCharge_copy) = {
 EvtScript N(attackDirectLightning) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(AddBattleCamZoom, -100)
     EVT_CALL(SetBattleCamOffsetZ, 50)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)

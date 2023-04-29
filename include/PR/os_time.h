@@ -21,7 +21,7 @@
 
 /*---------------------------------------------------------------------*
         Copyright (C) 1998 Nintendo. (Originated by SGI)
-        
+
         $RCSfile: os_time.h,v $
         $Revision: 1.1 $
         $Date: 1998/10/09 08:01:19 $
@@ -47,7 +47,7 @@ extern "C" {
  */
 
 /*
- * Structure for time value 
+ * Structure for time value
  */
 typedef u64	OSTime;
 

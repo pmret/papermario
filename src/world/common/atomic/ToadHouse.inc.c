@@ -34,7 +34,7 @@ API_CALLABLE(N(ToadHouse_CamSetFOV)) {
 API_CALLABLE(N(ToadHouse_AwaitScriptComplete)) {
     Bytecode* args = script->ptrReadPos;
     s32 waitingScriptID = evt_get_variable(script, *args++);
-    
+
     if (!does_script_exist(waitingScriptID)) {
         return ApiStatus_DONE2;
     } else {

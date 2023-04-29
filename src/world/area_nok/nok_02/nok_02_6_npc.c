@@ -20,7 +20,7 @@ MAP_STATIC_PAD(1,key_item);
 #include "world/common/complete/LetterDelivery.inc.c"
 
 s32 N(LetterList_Kolorado)[] = {
-    ITEM_LETTER_TO_KOLORADO, ITEM_NONE 
+    ITEM_LETTER_TO_KOLORADO, ITEM_NONE
 };
 
 EvtScript N(EVS_LetterPrompt_Kolorado) = {

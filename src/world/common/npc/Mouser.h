@@ -9,7 +9,7 @@
     ANIM_Mouser_Blue_Idle, \
     ANIM_Mouser_Blue_Run, \
     ANIM_Mouser_Blue_Run, \
-    ANIM_Mouser_Blue_Run, \ 
+    ANIM_Mouser_Blue_Run, \
     ANIM_Mouser_Blue_Idle, \
     ANIM_Mouser_Blue_Idle, \
     ANIM_Mouser_Blue_Idle, \

@@ -5,7 +5,7 @@
 * Refactored the `appears_after_overlays_addr` feature so that expressions are written at the latest possible moment in the linker script. This fixes errors and warnings regarding forward references to later symbols.
 
 ### 0.13.3
-* Added a new symbol_addrs attribute `appears_after_overlays_addr:0x1234` which will modify the linker script such that the symbol's address is equal to the value of the end of the longest overlay starting with address 0x1234. It achieve this by writing a series of sym = MAX(sym, seg_vram_END) statements into the linker script. For some games, it's feasible to manually create such statements, but for games with hundreds of overlays at the same address, this is very tedious and prone to error. The new attribute allows you to have peace of mind that the symbol will end up after all of these overlays. 
+* Added a new symbol_addrs attribute `appears_after_overlays_addr:0x1234` which will modify the linker script such that the symbol's address is equal to the value of the end of the longest overlay starting with address 0x1234. It achieve this by writing a series of sym = MAX(sym, seg_vram_END) statements into the linker script. For some games, it's feasible to manually create such statements, but for games with hundreds of overlays at the same address, this is very tedious and prone to error. The new attribute allows you to have peace of mind that the symbol will end up after all of these overlays.
 
 ### 0.13.2
 * Actually implemented `ld_use_follows`. Oopz
@@ -341,10 +341,10 @@ Internally, there's a new Symbol class which stores information about a symbol a
 
 ## 0.5 The Rename Update
 * n64splat name changed to splat
-  * Some refactoring was done to support other platforms besides n64 in the future 
+  * Some refactoring was done to support other platforms besides n64 in the future
     * New `platform` option, which defaults to `n64`
   * This will cause breaking changes in custom segments, so please refer to one of the changes in one of the n64 base segments for details
-* Support for custom artifact paths 
+* Support for custom artifact paths
   * New `undefined_syms_auto_path` option
   * New `undefined_funcs_auto_path` option
   * New `cache_path` option

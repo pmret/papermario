@@ -21,7 +21,7 @@ API_CALLABLE(N(UnkActorSizeFunc)) {
     if (targetActorSizeY < targetActorSizeX) {
         targetActorLargerDimension = targetActorSizeX;
     }
-    
+
     script->varTable[3] = targetActorLargerDimension + 126;
     return ApiStatus_DONE2;
 }

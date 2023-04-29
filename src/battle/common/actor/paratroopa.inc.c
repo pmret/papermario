@@ -1049,7 +1049,7 @@ EvtScript N(takeTurn_80221DAC) = {
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_END_IF
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
         EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
         EVT_WAIT(10)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_ShellEnter)

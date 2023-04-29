@@ -162,7 +162,7 @@ EvtScript N(takeTurn_80219444) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(SetBattleCamZoom, 400)
     EVT_CALL(SetBattleCamOffsetZ, 40)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)

@@ -71,7 +71,7 @@ void ice_pillar_update(EffectInstance* effect) {
     s32 timeLeft;
     s32 lifeTime;
     s32 i;
-    
+
     if (effect->flags & 0x10) {
         effect->flags &= ~0x10;
         data->timeLeft = 16;
@@ -85,16 +85,16 @@ void ice_pillar_update(EffectInstance* effect) {
 
     if (data->timeLeft < 0) {
         shim_load_effect(EFFECT_ICE_SHARD);
-        
+
         for (i = 0; i < 20; i++) {
             EffectInstance* iceShard;
 
             iceShard = ice_shard_main(
-                (i % 2) + 2, 
-                (data->pos.x + shim_rand_int(20)) - 10.0f, 
-                data->pos.y + (shim_rand_int(40) * data->scale), 
-                data->pos.z + 3.0f, 
-                (data->scale * ((shim_rand_int(10) * 0.7 * 0.1) + 0.3)), 
+                (i % 2) + 2,
+                (data->pos.x + shim_rand_int(20)) - 10.0f,
+                data->pos.y + (shim_rand_int(40) * data->scale),
+                data->pos.z + 3.0f,
+                (data->scale * ((shim_rand_int(10) * 0.7 * 0.1) + 0.3)),
                 i + 30
             );
             iceShard->data.iceShard->animFrame = shim_rand_int(10) * 0.1;
@@ -152,7 +152,7 @@ void ice_pillar_appendGfx(void* effect) {
     s32 alpha = data->prim.a;
     Matrix4f sp10, sp50;
     Camera* camera;
-    
+
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
@@ -162,7 +162,7 @@ void ice_pillar_appendGfx(void* effect) {
     shim_guMtxCatF(sp50, sp10, sp10);
     shim_guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
 
-    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], 
+    gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
               G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPMatrix(gMainGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, data->prim.r, data->prim.g, data->prim.b, alpha);

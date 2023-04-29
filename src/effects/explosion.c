@@ -38,7 +38,7 @@ void explosion_main(s32 type, f32 x, f32 y, f32 z) {
     bpPtr->renderWorld = explosion_render;
     bpPtr->unk_14 = NULL;
     bpPtr->effectID = EFFECT_EXPLOSION;
-    
+
 
     effect = shim_create_effect_instance(bpPtr);
     effect->numParts = numParts;

@@ -138,7 +138,7 @@ EvtScript N(EVS_OnSearchBush8) = {
 FoliageModelList N(Bush1_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o181);
 
 FoliageDropList N(Bush1_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_COIN,
@@ -166,7 +166,7 @@ SearchBushConfig N(SearchBush_Bush1) = {
 FoliageModelList N(Bush2_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o212);
 
 FoliageDropList N(Bush2_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_COIN,
@@ -194,7 +194,7 @@ SearchBushConfig N(SearchBush_Bush2) = {
 FoliageModelList N(Bush3_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o235);
 
 FoliageDropList N(Bush3_Drops) = {
-    .count = 2, 
+    .count = 2,
     .drops = {
         {
             .itemID = ITEM_COIN,
@@ -229,7 +229,7 @@ SearchBushConfig N(SearchBush_Bush3) = {
 FoliageModelList N(Bush4_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o182);
 
 FoliageDropList N(Bush4_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_COIN,
@@ -257,7 +257,7 @@ SearchBushConfig N(SearchBush_Bush4) = {
 FoliageModelList N(Bush5_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o205);
 
 FoliageDropList N(Bush5_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_COIN,
@@ -335,7 +335,7 @@ FoliageModelList N(Tree1_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o237);
 FoliageModelList N(Tree1_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o236);
 
 FoliageDropList N(Tree1_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_COIN,
@@ -370,7 +370,7 @@ FoliageModelList N(Tree2_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o194);
 FoliageModelList N(Tree2_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o193);
 
 FoliageDropList N(Tree2_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_COIN,
