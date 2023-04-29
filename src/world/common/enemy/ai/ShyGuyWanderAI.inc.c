@@ -4,7 +4,7 @@
 void N(ShyGuyWanderAI_14)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territoryPtr) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    
+
     npc->moveSpeed *= 0.6;
     npc->currentAnim = enemy->animList[12];
     npc->duration = 5;
@@ -15,11 +15,11 @@ void N(ShyGuyWanderAI_15)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe((s32) enemy->npcID);
     f32 yaw = npc->yaw;
-    
+
     if (ai_check_fwd_collisions(npc, npc->moveSpeed, &yaw, NULL, NULL, NULL) == 0) {
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
     }
-    
+
     npc->duration--;
     if (npc->duration == 0) {
         npc->moveSpeed *= 0.6;
@@ -34,11 +34,11 @@ void N(ShyGuyWanderAI_16)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 yaw = npc->yaw;
-    
+
     if (ai_check_fwd_collisions(npc, npc->moveSpeed, &yaw, NULL, NULL, NULL) == 0) {
         npc_move_heading(npc, npc->moveSpeed, npc->yaw);
     }
-    
+
     npc->duration--;
     if (npc->duration == 0) {
         npc->duration = 30;
@@ -68,7 +68,7 @@ API_CALLABLE(N(ShyGuyWanderAI_Main)) {
     f32 posY;
     f32 posZ;
     f32 hitDepth;
-    
+
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
     territory.pointX = enemy->territory->wander.detectPos.x;
@@ -77,12 +77,12 @@ API_CALLABLE(N(ShyGuyWanderAI_Main)) {
     territory.sizeZ = enemy->territory->wander.detectSize.z;
     territory.halfHeight = 65.0f;
     territory.detectFlags = 0;
-    
+
    if (isInitialCall || enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
-        
+
         npc->flags &= ~NPC_FLAG_JUMPING;
         if (!enemy->territory->wander.isFlying) {
             npc->flags |= NPC_FLAG_GRAVITY;
@@ -91,7 +91,7 @@ API_CALLABLE(N(ShyGuyWanderAI_Main)) {
             npc->flags &= ~NPC_FLAG_GRAVITY;
             npc->flags |= NPC_FLAG_8;
         }
-       
+
         if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;
@@ -109,7 +109,7 @@ API_CALLABLE(N(ShyGuyWanderAI_Main)) {
             npc->pos.y = posY;
         }
     }
-    
+
     switch (script->functionTemp[0]) {
         case 0x0:
             basic_ai_wander_init(script, aiSettings, territoryPtr);

@@ -173,7 +173,7 @@ EvtScript N(EVS_802440C0) = {
 FoliageModelList N(Bush1_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o78);
 
 FoliageDropList N(Bush1_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_COIN,
@@ -256,7 +256,7 @@ SearchBushConfig N(SearchBush_Bush5) = {
 FoliageModelList N(Bush6_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o155);
 
 FoliageDropList N(Bush6_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_COIN,

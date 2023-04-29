@@ -68,7 +68,7 @@ void N(ParatroopaAI_Overshoot)(Evt* script, MobileAISettings *arg1, EnemyDetectV
     npc->pos.y += npc->jumpVelocity;
     overshootAmt = overshootAmtRaw / 100.0;
     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
-    
+
     posX = npc->pos.x;
     posY = npc->pos.y;
     posZ = npc->pos.z;
@@ -103,7 +103,7 @@ API_CALLABLE(N(ParatroopaAI_Main)) {
     EnemyDetectVolume territory;
     EnemyDetectVolume* territoryPtr = &territory;
     MobileAISettings* aiSettings = (MobileAISettings*)evt_get_variable(script, *args++);
-    
+
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
     territory.pointX = enemy->territory->wander.detectPos.x;
@@ -112,7 +112,7 @@ API_CALLABLE(N(ParatroopaAI_Main)) {
     territory.sizeZ = enemy->territory->wander.detectSize.z;
     territory.halfHeight = 120.0f;
     territory.detectFlags = 0;
-    
+
     if (isInitialCall) {
         N(FlyingAI_Init)(npc, enemy, script, aiSettings);
         enemy->varTable[8] = npc->collisionHeight;
@@ -127,7 +127,7 @@ API_CALLABLE(N(ParatroopaAI_Main)) {
         }
         enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
     }
-    
+
     switch (script->AI_TEMP_STATE) {
         case AI_STATE_WANDER_INIT:
             N(FlyingAI_WanderInit)(script, aiSettings, territoryPtr);

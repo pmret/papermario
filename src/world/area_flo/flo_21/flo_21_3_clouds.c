@@ -1,14 +1,14 @@
 #include "flo_21.h"
 
 s32 N(UnusedScaleVectors)[] = {
-    EVT_FLOAT(1.0), EVT_FLOAT(1.0), 
+    EVT_FLOAT(1.0), EVT_FLOAT(1.0),
     EVT_FLOAT(1.0), EVT_FLOAT(1.0),
     EVT_FLOAT(1.0), EVT_FLOAT(1.0),
     EVT_FLOAT(1.1), EVT_FLOAT(1.1),
-    EVT_FLOAT(1.1), EVT_FLOAT(1.1), 
     EVT_FLOAT(1.1), EVT_FLOAT(1.1),
-    EVT_FLOAT(1.0), EVT_FLOAT(1.0), 
-    EVT_FLOAT(1.0), EVT_FLOAT(1.0), 
+    EVT_FLOAT(1.1), EVT_FLOAT(1.1),
+    EVT_FLOAT(1.0), EVT_FLOAT(1.0),
+    EVT_FLOAT(1.0), EVT_FLOAT(1.0),
     EVT_FLOAT(1.0), EVT_FLOAT(1.0),
     EVT_FLOAT(0.9), EVT_FLOAT(0.9),
     EVT_FLOAT(0.9), EVT_FLOAT(0.9),

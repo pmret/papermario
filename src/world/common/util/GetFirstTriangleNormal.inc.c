@@ -19,16 +19,16 @@ void N(GetFirstTriangleNormal)(Gfx* inGfx, f32* outNx, f32* outNy, f32* outNz) {
     f32 d32x, d32y, d32z;
     f32 nx, ny, nz;
     f32 norm;
-    
+
     Vtx_t* vtxArray;
     u32 vtxCount;
     s32 vtxEnd;
     s32 i;
-    
+
     v1x = v1y = v1z = 0.0f;
     v2x = v2y = v2z = 0.0f;
     v3x = v3y = v3z = 0.0f;
-    
+
     while (TRUE) {
         u32 w0 = gfx->words.w0;
         u32 w1 = gfx->words.w1;
@@ -52,7 +52,7 @@ void N(GetFirstTriangleNormal)(Gfx* inGfx, f32* outNx, f32* outNy, f32* outNz) {
             case G_TRI1:
                 v1x = N(TriNormVertexBuffer)[((w1 >> 16) & 0xFF) / 2]->ob[0];
                 v1y = N(TriNormVertexBuffer)[((w1 >> 16) & 0xFF) / 2]->ob[1];
-                v1z = N(TriNormVertexBuffer)[((w1 >> 16) & 0xFF) / 2]->ob[2];       
+                v1z = N(TriNormVertexBuffer)[((w1 >> 16) & 0xFF) / 2]->ob[2];
                 v2x = N(TriNormVertexBuffer)[((w1 >> 8) & 0xFF) / 2]->ob[0];
                 v2y = N(TriNormVertexBuffer)[((w1 >> 8) & 0xFF) / 2]->ob[1];
                 v2z = N(TriNormVertexBuffer)[((w1 >> 8) & 0xFF) / 2]->ob[2];
@@ -67,27 +67,27 @@ void N(GetFirstTriangleNormal)(Gfx* inGfx, f32* outNx, f32* outNy, f32* outNz) {
                 v1z = N(TriNormVertexBuffer)[((w0 >> 16) & 0xFF) / 2]->ob[2];
                 v2x = N(TriNormVertexBuffer)[((w0 >> 8) & 0xFF) / 2]->ob[0];
                 v2y = N(TriNormVertexBuffer)[((w0 >> 8) & 0xFF) / 2]->ob[1];
-                v2z = N(TriNormVertexBuffer)[((w0 >> 8) & 0xFF) / 2]->ob[2]; 
+                v2z = N(TriNormVertexBuffer)[((w0 >> 8) & 0xFF) / 2]->ob[2];
                 v3x = N(TriNormVertexBuffer)[(w0 & 0xFF) / 2]->ob[0];
                 v3y = N(TriNormVertexBuffer)[(w0 & 0xFF) / 2]->ob[1];
                 v3z = N(TriNormVertexBuffer)[(w0 & 0xFF) / 2]->ob[2];
                 readState = READ_STATE_TRIANGLE;
                 break;
         }
-        
+
         if (readState != READ_STATE_CONTINUE) {
             break;
         }
         gfx++;
     }
-        
+
     if (readState == READ_STATE_TRIANGLE) {
         // get two vectors from three points
         d12x = v1x - v2x;
         d12y = v1y - v2y;
         d12z = v1z - v2z;
         d32x = v3x - v2x;
-        d32y = v3y - v2y;        
+        d32y = v3y - v2y;
         d32z = v3z - v2z;
         // cross product to get normal vector
         nx = (d12y * d32z) - (d12z * d32y);

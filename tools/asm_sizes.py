@@ -67,7 +67,7 @@ if __name__ == "__main__":
     for root, dirs, files in os.walk(asm_dir):
         for asm_dir in dirs:
             do_dir(root, asm_dir)
-    
+
     if args.alphabetical:
         print(json.dumps(dict(sorted(funcs.items(), key=lambda f: f[0])), indent=4))
     elif args.size:

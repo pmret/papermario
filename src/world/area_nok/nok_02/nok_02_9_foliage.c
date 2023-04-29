@@ -5,7 +5,7 @@
 FoliageModelList N(Bush1_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o443, MODEL_o460);
 
 FoliageDropList N(Bush1_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_KOOPA_LEAF,
@@ -87,7 +87,7 @@ SearchBushConfig N(SearchBush_Bush5) = {
 FoliageModelList N(Bush6_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o448, MODEL_o314);
 
 FoliageDropList N(Bush6_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_COIN,

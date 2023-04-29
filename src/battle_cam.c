@@ -1529,7 +1529,7 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_BoomLength = 200;
                 BattleCam_BoomPitch = 8;
                 BattleCam_MoveTimeLeft = 20;
-                
+
                 BattleCam_BoomZOffset = 15;
                 BattleCam_BoomYaw = 0;
                 preset = &CamPreset_F;

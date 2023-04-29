@@ -34,7 +34,7 @@ s32 N(TreeHidingSpotPositions)[] = {
     -82, 101, 130,
     38, 164, 130,
     158, 135, 157,
-    281, 156, 202, 
+    281, 156, 202,
 };
 
 #include "common/CosInterpMinMax.inc.c"

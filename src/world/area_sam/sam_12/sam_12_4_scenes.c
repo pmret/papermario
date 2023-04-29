@@ -52,7 +52,7 @@ s32 N(FlickeringStaticAmts)[] = {
     EVT_FLOAT(80.0),
     EVT_FLOAT(70.0),
     EVT_FLOAT(60.0),
-    EVT_FLOAT(50.0), 
+    EVT_FLOAT(50.0),
 };
 
 EvtScript N(EVS_MerlarFlickering) = {

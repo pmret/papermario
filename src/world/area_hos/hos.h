@@ -20,7 +20,7 @@ enum {
     AB_HOS_Unused_F             = AreaByte(15),
 };
 
-enum {  
+enum {
     AF_HOS06_BadgeHints         = AreaFlag(3),
     AF_HOS06_SuperBlocksHints   = AreaFlag(100),
     AF_HOS06_StarPieceHints     = AreaFlag(116),

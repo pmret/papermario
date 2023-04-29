@@ -102,22 +102,22 @@ EvtScript N(EVS_Scene_MonstarAppears) = {
 // npcID followed by initial pos Vec3i
 s32 N(StarKidList)[] = {
     NPC_StarKid_01, 615, 129, 0,
-    NPC_StarKid_02, 612, 157, 2, 
+    NPC_StarKid_02, 612, 157, 2,
     NPC_StarKid_03, 606, 146, 4,
-    NPC_StarKid_04, 649, 140, 6, 
+    NPC_StarKid_04, 649, 140, 6,
     NPC_StarKid_05, 625, 145, 0,
-    NPC_StarKid_06, 580, 131, 4, 
+    NPC_StarKid_06, 580, 131, 4,
     NPC_StarKid_07, 630,  88, 6,
-    NPC_StarKid_08, 635, 134, 0, 
+    NPC_StarKid_08, 635, 134, 0,
     NPC_StarKid_09, 625, 121, 2,
-    NPC_StarKid_10, 590, 122, 4, 
+    NPC_StarKid_10, 590, 122, 4,
     NPC_StarKid_11, 595, 108, 6,
-    NPC_StarKid_12, 600, 132, 0, 
+    NPC_StarKid_12, 600, 132, 0,
     NPC_StarKid_13, 604,  99, 2,
-    NPC_StarKid_14, 610, 114, 4, 
+    NPC_StarKid_14, 610, 114, 4,
     NPC_StarKid_15, 635, 112, 6,
-    NPC_StarKid_16, 620,  96, 0, 
-    -1, 
+    NPC_StarKid_16, 620,  96, 0,
+    -1,
 };
 
 Vec3f N(RelativeFleePath)[] = {

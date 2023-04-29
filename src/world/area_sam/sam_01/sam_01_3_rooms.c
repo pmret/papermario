@@ -208,7 +208,7 @@ s32 N(InteriorNPCs_MayorAfter)[] = {
     NPC_MayorPenguinWife,
     NPC_PenguinPatrol,
     NPC_Herringway,
-    -1 
+    -1
 };
 
 s32 N(InteriorNPCs_MiddleHouse)[] = {

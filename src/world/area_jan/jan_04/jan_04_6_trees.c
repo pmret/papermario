@@ -30,7 +30,7 @@ FoliageModelList N(Tree2_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o101, MODEL_o10
 FoliageModelList N(Tree2_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o100);
 
 FoliageDropList N(Tree2_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_LETTER_TO_RUSS_T,

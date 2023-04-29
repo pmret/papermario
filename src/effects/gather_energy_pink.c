@@ -36,7 +36,7 @@ void gather_energy_pink_main(s32 type, f32 posX, f32 posY, f32 posZ, f32 scale, 
     effect->numParts = numParts;
     data = effect->data.gatherEnergyPink = shim_general_heap_malloc(sizeof(*data));
     ASSERT (data != NULL);
-    
+
     data->unk_00 = type;
     data->unk_28 = duration;
     data->unk_2C = 0;
@@ -63,7 +63,7 @@ void gather_energy_pink_main(s32 type, f32 posX, f32 posY, f32 posZ, f32 scale, 
 
     data->unk_50 = 0;
     data->unk_54 = 0;
-    
+
     if (type == 1) {
         data->unk_3C = 96;
         data->unk_20 = scale;
