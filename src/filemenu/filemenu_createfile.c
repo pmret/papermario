@@ -101,12 +101,11 @@ void filemenu_draw_contents_file_create_header(
     s32 opacity, s32 darkening
 ) {
 #if VERSION_PAL
+    s32 temp_s2 = D_filemenu_8025095C[gCurrentLanguage]; // 36
     s32 yOffset;
     s32 xOffset;
     s32 i;
-    s32 temp_s2;
 
-    temp_s2 = D_filemenu_8025095C[gCurrentLanguage]; // 36
     filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_ENTER_A_FILE_NAME), baseX + 10, baseY + 6, 255, 0, 0);
     filemenu_draw_file_name(filemenu_filename, 8, baseX + temp_s2 + 2, baseY + 22, 255, 0, 0, 11);
     yOffset = 41;

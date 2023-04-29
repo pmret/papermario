@@ -779,16 +779,20 @@ void filemenu_update_hidden_name_confirm(
 }
 
 #if VERSION_PAL
-void filemenu_update_pal_80247f40(s32 windowIndex, s32* flags, s32* posX, s32* posY, s32* posZ, f32* scaleX, f32* scaleY, f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity) {
-    Window* temp_t0;
-    s32 var_a1;
-    s32 var_a3;
+void filemenu_update_pal_80247f40(
+    s32 windowIndex,
+    s32* flags,
+    s32* posX, s32* posY, s32* posZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
+    s32* darkening,
+    s32* opacity
+) {
+    Window* window = &gWindows[windowIndex];
+    s32 var_a1 = window->updateCounter;
+    s32 var_a3 = 0;
     s32 var_v1;
 
-    temp_t0 = &gWindows[windowIndex];
-    var_a1 = temp_t0->updateCounter;
-
-    var_a3 = 0;
     switch (windowIndex) {
         case WINDOW_ID_FILEMENU_FILE0_INFO:
             var_a3 = 0;
@@ -805,35 +809,38 @@ void filemenu_update_pal_80247f40(s32 windowIndex, s32* flags, s32* posX, s32* p
     }
     var_v1 = gCurrentLanguage;
     var_v1 -= var_a3;
-    if (var_v1 < 0) {
-        var_v1 = -var_v1;
-    }
+    var_v1 = abs(var_v1);
+
     var_a1 -= (var_v1 * 3);
     if (var_a1 < 0) {
         var_a1 = 0;
     }
     if (var_a1 == 0) {
-        temp_t0->flags &= 0xFB;
+        window->flags &= ~WINDOW_FLAG_HIDDEN;
     }
     if (var_a1 < ARRAY_COUNT(D_filemenu_8024EB5C)) {
         *posX -= D_filemenu_8024EB5C[var_a1];
     } else {
         *posX -= D_filemenu_8024EB5C[ARRAY_COUNT(D_filemenu_8024EB5C) - 1];
-        temp_t0->flags &= 0xF7;
+        window->flags &= ~WINDOW_FLAG_INITIAL_ANIMATION;
     }
 }
 
-void filemenu_pal_80248018(s32 windowIdx, s32* flags, s32* posX, s32* posY, s32* posZ, f32* scaleX, f32* scaleY, f32* rotX, f32* rotY, f32* rotZ, s32* darkening, s32* opacity) {
-    Window* temp_t0;
-    s32 var_a1;
-    s32 var_a3;
+void filemenu_pal_80248018(
+    s32 windowIndex,
+    s32* flags,
+    s32* posX, s32* posY, s32* posZ,
+    f32* scaleX, f32* scaleY,
+    f32* rotX, f32* rotY, f32* rotZ,
+    s32* darkening,
+    s32* opacity
+) {
+    Window* window = &gWindows[windowIndex];
+    s32 var_a1 = window->updateCounter;
+    s32 var_a3 = 0;
     s32 var_v1;
 
-    temp_t0 = &gWindows[windowIdx];
-    var_a1 = temp_t0->updateCounter;
-
-    var_a3 = 0;
-    switch (windowIdx) {
+    switch (windowIndex) {
         case WINDOW_ID_FILEMENU_FILE0_INFO:
             var_a3 = 0;
             break;
@@ -860,7 +867,8 @@ void filemenu_pal_80248018(s32 windowIdx, s32* flags, s32* posX, s32* posY, s32*
         *posX -= D_filemenu_8024EB80[var_a1];
     } else {
         *posX -= D_filemenu_8024EB80[ARRAY_COUNT(D_filemenu_8024EB80) - 1];
-        temp_t0->flags = (temp_t0->flags & 0xF7) | 4;
+        window->flags &= ~WINDOW_FLAG_INITIAL_ANIMATION;
+        window->flags |= WINDOW_FLAG_HIDDEN;
     }
     if (var_a1 >= 0x10) {
         filemenu_cursor_alpha = 0;
