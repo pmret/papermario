@@ -83,28 +83,28 @@ extern HudScript HES_OptionStereoOff_es;
 
 #if VERSION_PAL
 HudScript* filemenu_main_hudElemScripts[][20] = {
-    [0]={
+    [LANGUAGE_EN] = {
         &HES_Spirit1, &HES_Spirit2, &HES_Spirit3, &HES_Spirit4, &HES_Spirit5, &HES_Spirit6, &HES_Spirit7,
         &HES_Spirit1Missing, &HES_Spirit2Missing, &HES_Spirit3Missing, &HES_Spirit4Missing, &HES_Spirit5Missing,
         &HES_Spirit6Missing, &HES_Spirit7Missing, &HES_JpFile, &HES_JpFileDisabled, &HES_OptionMonoOn,
         &HES_OptionMonoOff,
         &HES_OptionStereoOn, &HES_OptionStereoOff,
     },
-    [1]={
+    [LANGUAGE_DE] = {
         &HES_Spirit1, &HES_Spirit2, &HES_Spirit3, &HES_Spirit4, &HES_Spirit5, &HES_Spirit6, &HES_Spirit7,
         &HES_Spirit1Missing, &HES_Spirit2Missing, &HES_Spirit3Missing, &HES_Spirit4Missing, &HES_Spirit5Missing,
         &HES_Spirit6Missing, &HES_Spirit7Missing, &HES_JpFile, &HES_JpFileDisabled, &HES_OptionMonoOn_de,
         &HES_OptionMonoOff_de,
         &HES_OptionStereoOn_de, &HES_OptionStereoOff_de,
     },
-    [2]={
+    [LANGUAGE_FR] = {
         &HES_Spirit1, &HES_Spirit2, &HES_Spirit3, &HES_Spirit4, &HES_Spirit5, &HES_Spirit6, &HES_Spirit7,
         &HES_Spirit1Missing, &HES_Spirit2Missing, &HES_Spirit3Missing, &HES_Spirit4Missing, &HES_Spirit5Missing,
         &HES_Spirit6Missing, &HES_Spirit7Missing, &HES_JpFile, &HES_JpFileDisabled, &HES_OptionMonoOn_fr,
         &HES_OptionMonoOff_fr,
         &HES_OptionStereoOn_fr, &HES_OptionStereoOff_fr,
     },
-    [03]={
+    [LANGUAGE_ES] = {
         &HES_Spirit1, &HES_Spirit2, &HES_Spirit3, &HES_Spirit4, &HES_Spirit5, &HES_Spirit6, &HES_Spirit7,
         &HES_Spirit1Missing, &HES_Spirit2Missing, &HES_Spirit3Missing, &HES_Spirit4Missing, &HES_Spirit5Missing,
         &HES_Spirit6Missing, &HES_Spirit7Missing, &HES_JpFile, &HES_JpFileDisabled, &HES_OptionMonoOn_es,

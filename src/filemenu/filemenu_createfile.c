@@ -104,7 +104,6 @@ void filemenu_draw_contents_file_create_header(
     s32 yOffset;
     s32 xOffset;
     s32 i;
-    s32 tempAmt;
     s32 temp_s2;
 
     temp_s2 = D_filemenu_8025095C[gCurrentLanguage]; // 36
