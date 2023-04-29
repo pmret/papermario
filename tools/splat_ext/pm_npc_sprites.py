@@ -1,7 +1,7 @@
 from segtypes.n64.segment import N64Segment
 from pathlib import Path
 import struct
-from util.n64 import Yay0decompress
+from sprite_common import AnimComponent
 from util.n64.Yay0decompress import Yay0Decompressor
 from segtypes.n64.palette import iter_in_groups
 from util.color import unpack_color
@@ -18,9 +18,9 @@ class Sprite:
         self.max_components = 0
         self.num_variations = 0
 
-        self.images = []
-        self.palettes = []
         self.animations = []
+        self.palettes = []
+        self.images = []
 
         self.image_names = []
         self.palette_names = []
@@ -50,7 +50,7 @@ class Sprite:
             anim = []
 
             for comp_offset in Sprite.read_offset_list(data[offset:]):
-                comp = Component.from_bytes(data[comp_offset:], data)
+                comp = AnimComponent.from_bytes(data[comp_offset:], data)
                 anim.append(comp)
 
             self.animations.append(anim)
@@ -60,7 +60,6 @@ class Sprite:
     @staticmethod
     def read_offset_list(data):
         l = []
-        pos = 0
 
         for offset in struct.iter_unpack(">i", data):
             if offset[0] == -1:
@@ -186,15 +185,17 @@ class Sprite:
             components = []
 
             for ComponentEl in Animation.findall("Component"):
-                comp = Component()
 
                 x, y, z = ComponentEl.get("xyz", "0,0,0").split(",")
-                comp.x = int(x)
-                comp.y = int(y)
-                comp.z = int(z)
+                x = int(x)
+                y = int(y)
+                z = int(z)
 
+                commands = []
                 for Command in ComponentEl:
-                    comp.commands.append(int(Command.get("val"), base=16))
+                    commands.append(int(Command.get("val"), base=16))
+
+                comp = AnimComponent(x, y, z, commands)
 
                 components.append(comp)
 
@@ -238,27 +239,6 @@ class Image:
         with open(path, "wb") as f:
             w.write_array(f, self.raster)
 
-class Component:
-    def __init__(self):
-        self.x = 0
-        self.y = 0
-        self.z = 0
-        self.commands = []
-
-    @staticmethod
-    def from_bytes(data, sprite_data):
-        self = Component()
-
-        commands_offset = int.from_bytes(data[0:4], byteorder="big")
-        commands_size = int.from_bytes(data[4:6], byteorder="big") # size in bytes, not length!
-        commands_data = sprite_data[commands_offset : commands_offset + commands_size]
-        self.commands = [int.from_bytes(d[0:2], byteorder="big") for d in iter_in_groups(commands_data, 2)]
-
-        self.x = int.from_bytes(data[6:8], byteorder="big", signed=True)
-        self.y = int.from_bytes(data[8:10], byteorder="big", signed=True)
-        self.z = int.from_bytes(data[10:12], byteorder="big", signed=True)
-
-        return self
 
 class N64SegPm_npc_sprites(N64Segment):
     DEFAULT_SPRITE_NAMES = [f"{i:02X}" for i in range(0xEA)]
@@ -292,7 +272,6 @@ class N64SegPm_npc_sprites(N64Segment):
         out_dir = options.opts.asset_path / self.dir / self.name
 
         data = rom_bytes[self.rom_start:self.rom_end]
-        pos = 0
 
         for i, sprite_name in enumerate(self.files):
             #self.log(f"Splitting sprite {sprite_name}...")
@@ -303,7 +282,7 @@ class N64SegPm_npc_sprites(N64Segment):
             start = int.from_bytes(data[i * 4 : (i + 1) * 4], byteorder="big")
             end = int.from_bytes(data[(i + 1) * 4 : (i + 2) * 4], byteorder="big")
 
-            sprite_data = Yay0Decompressor.decompress_python(data[start:end])
+            sprite_data = Yay0Decompressor.decompress(data[start:end], "big")
             sprite = Sprite.from_bytes(sprite_data)
 
             if sprite_name in self.sprite_cfg:
