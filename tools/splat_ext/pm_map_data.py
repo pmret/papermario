@@ -33,13 +33,13 @@ def parse_palette(data):
 
 def add_file_ext(name: str) -> str:
     if name.startswith("party_"):
-        return name + ".png"
+        return "party/" + name + ".png"
     elif name.endswith("_hit") or name.endswith("_shape"):
-        return name + ".bin"  # TODO: xml
+        return "geom/" + name + ".bin"  # TODO: xml
     elif name.endswith("_tex"):
-        return name + ".bin"  # TODO: texture archive
+        return "tex/" + name + ".bin"  # TODO: texture archive
     elif name.endswith("_bg"):
-        return name + ".png"
+        return "bg/" + name + ".png"
     else:
         return name + ".bin"
 
@@ -71,6 +71,10 @@ class N64SegPm_map_data(N64Segment):
     def split(self, rom_bytes):
         fs_dir = options.opts.asset_path / self.dir / self.name
         (fs_dir / "title").mkdir(parents=True, exist_ok=True)
+        (fs_dir / "party").mkdir(parents=True, exist_ok=True)
+        (fs_dir / "bg").mkdir(parents=True, exist_ok=True)
+        (fs_dir / "tex").mkdir(parents=True, exist_ok=True)
+        (fs_dir / "geom").mkdir(parents=True, exist_ok=True)
 
         data = rom_bytes[self.rom_start : self.rom_end]
 
@@ -176,11 +180,11 @@ class N64SegPm_map_data(N64Segment):
                         )
                         w.write_array(f, bytes[raster_offset:])
 
-                write_bg_png(bytes, path)
+                write_bg_png(bytes, fs_dir / "bg" / f"{name}.png")
 
                 # sbk_bg has an alternative palette
                 if name == "sbk_bg":
-                    write_bg_png(bytes, fs_dir / f"{name}.alt.png", header_offset=0x10)
+                    write_bg_png(bytes, fs_dir / "bg" / f"{name}.alt.png", header_offset=0x10)
             else:
                 with open(path, "wb") as f:
                     f.write(bytes)
