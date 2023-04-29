@@ -3,7 +3,7 @@
 API_CALLABLE(N(CheckGameVarRanges)) {
     GameVarRange* bytes;
     GameVarRange* flags;
-    
+
     bytes = N(GameByteTable);
     while (TRUE) {
         if (bytes->name == 0) {
@@ -12,7 +12,7 @@ API_CALLABLE(N(CheckGameVarRanges)) {
         // release version does nothing
         bytes++;
     }
-    
+
     flags = N(GameFlagTable);
     while (TRUE) {
         if (flags->name == 0) {
@@ -21,7 +21,7 @@ API_CALLABLE(N(CheckGameVarRanges)) {
         // release version does nothing
         flags++;
     }
-    
+
     return 2;
 }
 

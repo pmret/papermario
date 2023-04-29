@@ -5,7 +5,7 @@
 FoliageModelList N(Bush1_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o182);
 
 FoliageDropList N(Bush1_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_STRANGE_LEAF,

@@ -54,7 +54,7 @@ s32 N(RecipeFoundVars)[] = {
     GF_MAC02_DiscoveredRecipe_2D, GF_MAC02_DiscoveredRecipe_2F,
     GF_MAC02_DiscoveredRecipe_30, GF_MAC02_DiscoveredRecipe_31,
     GF_MAC02_DiscoveredRecipe_32, GF_MAC02_DiscoveredRecipe_33,
-    0 
+    0
 };
 
 void N(appendGfx_records_impl)(GameRecords* records, s32 alpha) {

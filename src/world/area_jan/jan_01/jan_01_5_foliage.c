@@ -19,7 +19,7 @@ FoliageModelList N(Tree2_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o85, MODEL_o86)
 FoliageModelList N(Tree2_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o84);
 
 FoliageDropList N(Tree2_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_COCONUT,
@@ -45,7 +45,7 @@ FoliageModelList N(Tree3_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o79, MODEL_o80)
 FoliageModelList N(Tree3_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o78);
 
 FoliageDropList N(Tree3_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_COCONUT,
@@ -71,7 +71,7 @@ FoliageModelList N(Tree4_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o82, MODEL_o83)
 FoliageModelList N(Tree4_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o81);
 
 FoliageDropList N(Tree4_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_COCONUT,
@@ -97,7 +97,7 @@ FoliageModelList N(Tree5_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o88, MODEL_o89)
 FoliageModelList N(Tree5_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o87);
 
 FoliageDropList N(Tree5_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_COCONUT,
@@ -123,7 +123,7 @@ FoliageModelList N(Tree6_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o104, MODEL_o10
 FoliageModelList N(Tree6_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o103);
 
 FoliageDropList N(Tree6_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_COCONUT,
@@ -149,7 +149,7 @@ FoliageModelList N(Tree7_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o113, MODEL_o11
 FoliageModelList N(Tree7_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o112);
 
 FoliageDropList N(Tree7_DropsA) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_STAR_PIECE,
@@ -162,7 +162,7 @@ FoliageDropList N(Tree7_DropsA) = {
 };
 
 FoliageDropList N(Tree7_DropsB) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_COCONUT,

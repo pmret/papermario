@@ -4,7 +4,7 @@ s32 N(ConveyorColliders)[4] = {
     COLLIDER_o904,
     COLLIDER_o906,
     COLLIDER_o907,
-    COLLIDER_o911 
+    COLLIDER_o911
 };
 
 //TODO Vec2f[4]

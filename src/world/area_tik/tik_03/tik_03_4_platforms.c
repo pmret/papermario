@@ -4,7 +4,7 @@ s32 N(PlatformColliders)[] = {
     COLLIDER_1,
     COLLIDER_2,
     COLLIDER_3,
-    COLLIDER_4, 
+    COLLIDER_4,
 };
 
 API_CALLABLE(N(PausePlatformsDuringPound)) {

@@ -58,7 +58,7 @@ s32 N(ThickTileSpawnPositions)[] = {
     -230, 1010,  50 * DT,
     -500,  940,  40 * DT,
     -350,  600,  55 * DT,
-    -1, 
+    -1,
 };
 
 EvtScript N(EVS_DropDebris_ThickTiles) = {
@@ -105,7 +105,7 @@ s32 N(LeafClumpSpawnPositions)[] = {
     -350,  600,  60 * DT,
     -230, 1200,  40 * DT,
     -340,  960,  40 * DT,
-    -1, 
+    -1,
 };
 
 EvtScript N(EVS_DropDebris_Leaves) = {

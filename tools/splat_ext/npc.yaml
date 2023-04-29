@@ -1,7 +1,7 @@
 # This file describes what to name the frame images, palettes, and animations of sprites when splitting.
 
 # GENERAL NAME CONVENTIONS:
-# 
+#
 # - Names should be short, one or two words, in PascalCase with no underscores.
 # - Prefer names to describe the actions or states depicted rather than how they are used.
 # - Sequential names start counting in decimal from 1, not 0.
@@ -20,7 +20,7 @@
 # - Names should be in the simple present tense:
 #     Sleep     GOOD
 #     Sleeping  BAD
-#   
+#
 # - Present perfect is sometimes OK when describing a state of being:
 #     e.g., Injured, Disappointed
 #

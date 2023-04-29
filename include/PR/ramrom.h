@@ -23,7 +23,7 @@
 
 /*
  * Defines for the GIO card in the Nintendo Development Station
- * 
+ *
  * The RAM on the GIO card acts as ROM for the game
  * Interrupts available between the game and the Indy host
  *
@@ -62,7 +62,7 @@
 #else
 #define RAMROM_BOOTSTRAP_OFFSET	0x400
 #define RAMROM_GAME_OFFSET	0x2000
-#endif 
+#endif
 #define RAMROM_CLOCKRATE_OFFSET	0x4
 #define RAMROM_CLOCKRATE_MASK	0xfffffff0
 #define RAMROM_BOOTADDR_OFFSET	0x8

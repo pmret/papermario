@@ -33,7 +33,7 @@ s32* N(SnowmanModelSets)[] = {
     N(CloneSet3),
     N(CloneSet4),
     N(CloneSet5),
-    N(OriginalModels), 
+    N(OriginalModels),
 };
 
 EvtScript N(EVS_SetSnowmanPosition) = {

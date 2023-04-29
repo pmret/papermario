@@ -10,6 +10,6 @@ API_CALLABLE(N(SetLightningBoltPurple)) {
     effect->data.lightningBolt->innerColor.r = 255;
     effect->data.lightningBolt->innerColor.g = 175;
     effect->data.lightningBolt->innerColor.b = 239;
-    
+
     return ApiStatus_DONE2;
 }

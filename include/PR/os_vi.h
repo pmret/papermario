@@ -21,7 +21,7 @@
 
 /*---------------------------------------------------------------------*
         Copyright (C) 1998 Nintendo. (Originated by SGI)
-        
+
         $RCSfile: os_vi.h,v $
         $Revision: 1.1 $
         $Date: 1998/10/09 08:01:20 $
@@ -69,7 +69,7 @@ typedef struct {
 typedef struct {
     u32	origin;
     u32	yScale;
-    u32	vStart;	
+    u32	vStart;
     u32	vBurst;
     u32	vIntr;
 } OSViFieldRegs;

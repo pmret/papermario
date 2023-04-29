@@ -39,7 +39,7 @@ extern "C" {
 #define OS_LOG_MAGIC            0x20736a73
 #define OS_LOG_FLOAT(x)         (*(int *) &(x))
 #define OS_LOG_VERSION          1
-    
+
 typedef struct {
     u32 magic;          /* log identifier                       */
     u32 len;            /* length of log data + log structure   */

@@ -23,7 +23,7 @@ API_CALLABLE(N(IsLastEnemy)) {
             }
         }
     }
-    
+
     if (livingEncounters != 1) {
         return ApiStatus_DONE2;
     } else {

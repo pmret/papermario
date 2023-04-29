@@ -38,7 +38,7 @@ if __name__ == "__main__":
             f.write(f"#define SPR_IMG_{sprite_name}_{image_name} 0x{i:X}\n")
         f.write("\n")
 
-        # definitions for palettes 
+        # definitions for palettes
         for p, palette_name in enumerate(sprite.palette_names):
             if palette_name == "Default":
                 f.write(f"#define SPR_PAL_{sprite_name} 0x{p:X}\n")
@@ -46,7 +46,7 @@ if __name__ == "__main__":
                 f.write(f"#define SPR_PAL_{sprite_name}_{palette_name} 0x{p:X}\n")
         f.write("\n")
 
-        # definitions for animations 
+        # definitions for animations
         for p, palette_name in enumerate(sprite.palette_names):
             for a, name in enumerate(sprite.animation_names):
                 if palette_name == "Default":

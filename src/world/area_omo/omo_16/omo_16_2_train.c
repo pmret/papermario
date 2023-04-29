@@ -67,12 +67,12 @@ EvtScript N(D_802428CC_DEE79C) = {
 
 s32 N(D_80242984_DEE854)[] = {
     -1550, EVT_FLOAT(0.0), EVT_FLOAT(90.0), 1550, EVT_FLOAT(0.0),
-    -1, -1, -1 
+    -1, -1, -1
 };
 
 s32 N(D_802429A4_DEE874)[] = {
     1550, EVT_FLOAT(0.0), EVT_FLOAT(270.0), -1550, EVT_FLOAT(0.0),
-    -1, -1, -1 
+    -1, -1, -1
 };
 
 API_CALLABLE(N(CheckForSceneSkip)) {
