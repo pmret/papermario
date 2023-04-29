@@ -108,7 +108,7 @@ void filemenu_draw_contents_file_create_header(
     s32 temp_s2;
 
     temp_s2 = D_filemenu_8025095C[gCurrentLanguage]; // 36
-    filemenu_draw_message(filemenu_get_menu_message(0x21), baseX + 10, baseY + 6, 255, 0, 0);
+    filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_ENTER_A_FILE_NAME), baseX + 10, baseY + 6, 255, 0, 0);
     filemenu_draw_file_name(filemenu_filename, 8, baseX + temp_s2 + 2, baseY + 22, 255, 0, 0, 11);
     yOffset = 41;
 
@@ -124,7 +124,7 @@ void filemenu_draw_contents_file_create_header(
 
     if (filemenu_currentMenu == 3) {
         if (filemenu_filename_pos == 8) {
-            xOffset = temp_s2 + 0x56;
+            xOffset = temp_s2 + 86;
         } else {
             xOffset = temp_s2 + 9 + filemenu_filename_pos * 11;
         }
