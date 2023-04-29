@@ -88,10 +88,9 @@ typedef struct SpriteInstance {
 
 typedef struct PlayerRastersHeader {
     /* 0x00 */ s32 indexRanges;
-    /* 0x04 */ s32 dmaInfo;
+    /* 0x04 */ s32 loadDescriptors;
     /* 0x08 */ s32 imageData;
-    /* 0x0C */ unsigned char pad_0C[4];
-} PlayerRastersHeader; // size = 0x10
+} PlayerRastersHeader; // size = 0xC
 
 typedef struct PlayerSpriteSet {
     /// Number of cache entries.

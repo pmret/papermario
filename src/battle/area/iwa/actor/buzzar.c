@@ -718,7 +718,7 @@ EvtScript N(EVS_Attack_FeatherFling) = {
     EVT_END
 };
 
-EvtScript N(EVS_LiftMarioario) = {
+EvtScript N(EVS_LiftMario) = {
     EVT_CALL(GetAnimation, ACTOR_SELF, 1, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(ANIM_Buzzar_Anim01)
@@ -929,7 +929,7 @@ EvtScript N(EVS_Attack_GrappleDrop) = {
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
     EVT_CALL(ShowActionHud, TRUE)
     EVT_CALL(action_command_break_free_start, 0, 60 * DT, 30, 3)
-    EVT_EXEC_GET_TID(N(EVS_LiftMarioario), LVarA)
+    EVT_EXEC_GET_TID(N(EVS_LiftMario), LVarA)
     EVT_WAIT(62)
     EVT_CALL(GetActionSuccessCopy, LVar0)
     EVT_IF_GT(LVar0, 0)

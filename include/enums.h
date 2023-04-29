@@ -6067,12 +6067,12 @@ typedef enum ImgFXType {
     IMGFX_SET_WHITE_FADE            = 0x9,
     IMGFX_SET_CREDITS_FADE          = 0xA,
     IMGFX_COLOR_BUF_SET_MULTIPLY    = 0xB,
-    IMGFX_COLOR_BUF_SET_MODULATE    = 0xC,
+    IMGFX_COLOR_BUF_SET_MODULATE    = 0xC,    // used for color cycling on Monstar's outline
     IMGFX_HOLOGRAM                  = 0xD,    // ghostly star spirits and merlar (args: ???, staticAmt, ???, alphaAmt)
     IMGFX_FILL_COLOR                = 0xE,    // used to create boss silhouettes in chapter introduction sceens
     IMGFX_OVERLAY                   = 0xF,
     IMGFX_OVERLAY_XLU               = 0x10,   // unused?
-    IMGFX_ALLOC_COLOR_BUF           = 0x11,   // args: count
+    IMGFX_ALLOC_COLOR_BUF           = 0x11,   // (args: count) creates buffer to set color of 'count' vertices
 } ImgFXType;
 
 typedef enum ImgFXAnim {
