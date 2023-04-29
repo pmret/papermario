@@ -293,7 +293,7 @@ void filemenu_pal_handle_input(MenuPanel* menu) {
     if (filemenu_pressedButtons & BUTTON_B) {
         if (menu->row != D_802517D4[0]) {
             menu->row = D_802517D4[0];
-            sfx_play_sound(0xCA);
+            sfx_play_sound(SOUND_MENU_BACK);
             var_a1 = 1;
         } else {
             var_s1 = 1;
@@ -303,36 +303,36 @@ void filemenu_pal_handle_input(MenuPanel* menu) {
     menu->selected = MENU_PANEL_SELECTED_GRID_DATA(menu);
     if (originalSelected != menu->selected) {
         if (var_a1 == 0) {
-            sfx_play_sound(0x2101);
+            sfx_play_sound(SOUND_2101);
         }
         switch (menu->selected) {                          /* irregular */
             case 0:
-                gCurrentLanguage = 0;
+                gCurrentLanguage = LANGUAGE_EN;
                 break;
             case 1:
-                gCurrentLanguage = 1;
+                gCurrentLanguage = LANGUAGE_DE;
                 break;
             case 2:
-                gCurrentLanguage = 2;
+                gCurrentLanguage = LANGUAGE_FR;
                 break;
             case 3:
-                gCurrentLanguage = 3;
+                gCurrentLanguage = LANGUAGE_ES;
                 break;
         }
     }
 
-    if ((filemenu_pressedButtons & 0x9000) || (var_s1 != 0)) {
-        set_window_update(0x38, (s32) &filemenu_pal_80248018);
-        set_window_update(0x39, (s32) &filemenu_pal_80248018);
-        set_window_update(0x3A, (s32) &filemenu_pal_80248018);
-        set_window_update(0x3B, (s32) &filemenu_pal_80248018);
-        set_window_update(0x2D, (s32) filemenu_update_hidden_title);
+    if ((filemenu_pressedButtons & (BUTTON_A | BUTTON_START)) || (var_s1 != 0)) {
+        set_window_update(WINDOW_ID_FILEMENU_FILE0_INFO, (s32) &filemenu_pal_80248018);
+        set_window_update(WINDOW_ID_FILEMENU_FILE1_INFO, (s32) &filemenu_pal_80248018);
+        set_window_update(WINDOW_ID_FILEMENU_FILE2_INFO, (s32) &filemenu_pal_80248018);
+        set_window_update(WINDOW_ID_FILEMENU_FILE3_INFO, (s32) &filemenu_pal_80248018);
+        set_window_update(WINDOW_ID_FILEMENU_TITLE, (s32) filemenu_update_hidden_title);
         if (var_s1 == 0) {
-            sfx_play_sound(0xF1);
+            sfx_play_sound(SOUND_F1);
         } else {
-            sfx_play_sound(0xD6);
+            sfx_play_sound(SOUND_D6);
         }
-        set_game_mode(0xD);
+        set_game_mode(GAME_MODE_END_LANGUAGE_SELECT);
     }
 }
 
