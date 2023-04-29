@@ -26,7 +26,7 @@ Install build dependencies:
 ```
 
 > **NOTE:** On Mac, if you get an error that looks like
-> 
+>
 >```sh
 >Error: Cannot install md5sha1sum because conflicting formulae are installed.
 >  coreutils: because both install `md5sum` and `sha1sum` binaries

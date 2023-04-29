@@ -3,7 +3,7 @@
 #include "common/foliage.inc.c"
 
 FoliageDropList N(Tree1_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_STAR_PIECE,

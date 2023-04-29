@@ -21,7 +21,7 @@
 
 /*---------------------------------------------------------------------*
         Copyright (C) 1998 Nintendo. (Originated by SGI)
-        
+
         $RCSfile: os.h,v $
         $Revision: 1.167 $
         $Date: 1999/01/18 13:17:43 $
@@ -81,8 +81,8 @@ extern "C" {
 
 #define	OS_MIN_STACKSIZE	72
 
-/* 
- * Leo Disk 
+/*
+ * Leo Disk
  */
 
 /* transfer mode */

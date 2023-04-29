@@ -5,7 +5,7 @@
 FoliageModelList N(Bush1_BushModels) = FOLIAGE_MODEL_LIST(MODEL_k4);
 
 FoliageDropList N(Bush1_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_COIN,
@@ -33,7 +33,7 @@ SearchBushConfig N(SearchBush_Bush1) = {
 FoliageModelList N(Bush2_BushModels) = FOLIAGE_MODEL_LIST(MODEL_k5);
 
 FoliageDropList N(Bush2_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_COIN,
@@ -61,7 +61,7 @@ SearchBushConfig N(SearchBush_Bush2) = {
 FoliageModelList N(Bush3_BushModels) = FOLIAGE_MODEL_LIST(MODEL_k6);
 
 FoliageDropList N(Bush3_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_COIN,
@@ -89,7 +89,7 @@ SearchBushConfig N(SearchBush_Bush3) = {
 FoliageModelList N(Bush4_BushModels) = FOLIAGE_MODEL_LIST(MODEL_k7);
 
 FoliageDropList N(Bush4_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_EGG,

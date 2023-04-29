@@ -11,7 +11,7 @@
 #include "world/common/npc/Twink.h"
 
 s32 N(FlyingKammyHoverOffsets)[] = {
-    1, 2, 3, 2, 1, -1, -2, -3, -2, -1, 
+    1, 2, 3, 2, 1, -1, -2, -3, -2, -1,
 };
 
 EvtScript N(EVS_NpcAux_Kammy_Broom) = {

@@ -1,7 +1,7 @@
 
 /*---------------------------------------------------------------------*
         Copyright (C) 1998 Nintendo.
-        
+
         $RCSfile: os_voice.h,v $
         $Revision: 1.2 $
         $Date: 1999/07/13 08:36:42 $
@@ -40,7 +40,7 @@ typedef struct {		/* Voice Recognition System */
   u16	answer[5];
   u16	distance[5];
 } OSVoiceData;
-	
+
 
 #endif /* defined(_LANGUAGE_C) || defined(_LANGUAGE_C_PLUS_PLUS) */
 

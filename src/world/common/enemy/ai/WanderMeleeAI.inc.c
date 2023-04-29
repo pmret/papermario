@@ -51,7 +51,7 @@ ApiStatus N(WanderMeleeAI_Main)(Evt* script, s32 isInitialCall) {
             npc->flags &= ~NPC_FLAG_GRAVITY;
             npc->flags |= NPC_FLAG_8;
         }
-        
+
         if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
             script->AI_TEMP_STATE = AI_STATE_SUSPEND;
             script->functionTemp[1] = AI_STATE_WANDER_INIT;

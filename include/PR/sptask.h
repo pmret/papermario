@@ -50,7 +50,7 @@ extern "C" {
  *	- pointer to ucode
  *	- size of ucode
  *	- pointer to initial DMEM data
- *	- size of initial DMEM data 
+ *	- size of initial DMEM data
  *	- pointer to DRAM stack
  *	- size of DRAM stack (max)
  *	- pointer to output buffer
@@ -131,7 +131,7 @@ typedef u32 OSYieldResult;
 #define OS_TASK_USR3			0x0080
 
 /*
- * Size of Yield buffer.  The taskHdrPtr->t.yield_data_ptr must point to a 
+ * Size of Yield buffer.  The taskHdrPtr->t.yield_data_ptr must point to a
  * buffer of this size.  (The size is in bytes).  ONLY If the task will NEVER
  * yield it may be a null pointer.  The buffer must be aligned to a 64 bit
  * boundary.  The taskHdrPtr->t.yield_data_ptr must be set to point to the

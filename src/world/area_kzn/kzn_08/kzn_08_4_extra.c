@@ -13,12 +13,12 @@ API_CALLABLE(N(func_80243EE0_C75360)) {
         script->functionTemp[0] = 255;
         script->functionTemp[1] = FALSE;
     }
-    
+
     set_screen_overlay_center_worldpos(SCREEN_LAYER_BACK, 1,
         playerStatus->position.x,  playerStatus->position.y + 8.0f, playerStatus->position.z);
     get_model_fog_color_parameters(&primR, &primG, &primB, &primA,
         &fogR, &fogG, &fogB, &fogStart, &fogEnd);
-    
+
     alpha = (((995 - fogStart) - 70.0f) * 255.0f) / 30.0f;
     if (alpha > 255.0f) {
         alpha = 255.0f;

@@ -15,7 +15,7 @@ API_CALLABLE(N(FlashScreenWhite)) {
                 break;
             }
             script->functionTemp[1] += 64;
-            if (script->functionTemp[1] < 256) {       
+            if (script->functionTemp[1] < 256) {
                 break;
             }
             script->functionTemp[1] = 255;
@@ -40,7 +40,7 @@ API_CALLABLE(N(BigExplosionRumble)) {
     Bytecode* args = script->ptrReadPos;
     f32 frequency;
     s32 duration;
-    
+
     if (isInitialCall) {
         duration = evt_get_variable(script, *args++);
         frequency = 2.0f * evt_get_float_variable(script, *args++);
@@ -48,16 +48,16 @@ API_CALLABLE(N(BigExplosionRumble)) {
         if (frequency > 10.0f) {
             frequency = 10.0f;
         }
-        
+
         start_rumble((u8) ((frequency / 10.0f) * 256.0f), (duration & 0xFFFF) * 2);
     }
-    
-    script->functionTemp[0]--;  
+
+    script->functionTemp[0]--;
     if (script->functionTemp[0] == 0)
     {
         return ApiStatus_DONE1;
     }
-    
+
     return ApiStatus_BLOCK;
 }
 
@@ -84,7 +84,7 @@ s32 N(ExplosionPositions)[] = {
     -400,  -400,  450,
        0,  -720,  620,
     -270,  -700,  470,
-     320,  -460,  530, 
+     320,  -460,  530,
 };
 
 EvtScript N(EVS_PlayExplosionFX) = {

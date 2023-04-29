@@ -44,7 +44,7 @@ int _Printf(outfun prout, char *arg, const char *fmt, va_list args) {
     static const char fchar[] = {' ', '+', '-', '#', '0', '\0'};
     static const int fbit[] = {FLAGS_SPACE, FLAGS_PLUS, FLAGS_MINUS, FLAGS_HASH, FLAGS_ZERO, 0};
     char ac[32];
-    
+
     x.nchar = 0;
 
     for (;;) {
@@ -53,15 +53,15 @@ int _Printf(outfun prout, char *arg, const char *fmt, va_list args) {
         for (c = *s; c != 0 && c != '%';) {
             c = *++s;
         }
-        
+
         PUT(fmt, s - fmt);
-        
+
         if (c == 0) {
             return x.nchar;
         }
-        
+
         fmt = ++s;
-        
+
         for (x.flags = 0; (t = strchr(fchar, *s)) != NULL; s++) {
             x.flags |= fbit[t - fchar];
         }
@@ -88,7 +88,7 @@ int _Printf(outfun prout, char *arg, const char *fmt, va_list args) {
         }
 
         x.qual = strchr("hlL", *s) ? *s++ : '\0';
-        
+
         if (x.qual == 'l' && *s == 'l') {
             x.qual = 'L';
             ++s;
@@ -96,22 +96,22 @@ int _Printf(outfun prout, char *arg, const char *fmt, va_list args) {
 
         _Putfld(&x, &args, *s, ac);
         x.width -= x.n0 + x.nz0 + x.n1 + x.nz1 + x.n2 + x.nz2;
-        
+
         if (!(x.flags & FLAGS_MINUS)) {
             PAD(spaces, x.width);
         }
-        
+
         PUT(ac, x.n0);
         PAD(zeroes, x.nz0);
         PUT(x.s, x.n1);
         PAD(zeroes, x.nz1);
         PUT(x.s + x.n1, x.n2);
         PAD(zeroes, x.nz2);
-        
+
         if (x.flags & FLAGS_MINUS) {
             PAD(spaces, x.width);
         }
-        
+
         fmt = s + 1;
     }
     return 0;
@@ -219,11 +219,11 @@ static void _Putfld(_Pft *x, va_list *args, char type, char *buff) {
         case 's':
             x->s = va_arg(*args, char *);
             x->n1 = strlen(x->s);
-            
+
             if (x->prec >= 0 && x->n1 > x->prec) {
                 x->n1 = x->prec;
             }
-            
+
             break;
         case '%':
             buff[x->n0++] = '%';

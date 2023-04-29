@@ -24,13 +24,13 @@ void N(func_80241610_990DF0)(void) {
     ImgFXTexture ifxImg;
     SpriteRasterInfo spriteRaster;
     Matrix4f transformMtx, tempMtx;
-    
+
     gSPViewport(gMainGfxPos++, &cam->vp);
     if (!(cam->flags & CAMERA_FLAG_ORTHO)) {
         gSPPerspNormalize(gMainGfxPos++, cam->perspNorm);
     }
     guMtxF2L(cam->perspectiveMatrix, &gDisplayContext->camPerspMatrix[gCurrentCameraID]);
-    
+
     gSPMatrix(gMainGfxPos++, &gDisplayContext->camPerspMatrix[gCurrentCameraID],
         G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
     gDPPipeSync(gMainGfxPos++);
@@ -47,7 +47,7 @@ void N(func_80241610_990DF0)(void) {
     gDPSetTextureConvert(gMainGfxPos++, G_TC_FILT);
     gDPSetCombineKey(gMainGfxPos++, G_CK_NONE);
     gDPSetAlphaCompare(gMainGfxPos++, G_AC_NONE);
-    
+
     guTranslateF(transformMtx, ambush->pos.x, ambush->pos.y, ambush->pos.z);
     guRotateF(tempMtx, ambush->rot.y + gCameras[gCurrentCameraID].currentYaw + ambush->renderYaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(tempMtx, transformMtx, transformMtx);
@@ -60,7 +60,7 @@ void N(func_80241610_990DF0)(void) {
     guMtxF2L(transformMtx, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gMainGfxPos++, OS_PHYSICAL_TO_K0(&gDisplayContext->matrixStack[gMatrixListPos++]),
         G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    
+
     if (ambush->useBitingAnim) {
         if ((gGameStatusPtr->frameCounter % 10) < 5) {
             ambush->rasterIndex = 0;
@@ -76,7 +76,7 @@ void N(func_80241610_990DF0)(void) {
     ifxImg.xOffset = -(spriteRaster.width / 2);
     ifxImg.yOffset = (spriteRaster.height / 2);
     ifxImg.alpha = 255;
-    
+
     imgfx_update(ambush->imgfxIdx, IMGFX_SET_TINT, ambush->color.r, ambush->color.g, ambush->color.b, ambush->color.a, 0);
     imgfx_appendGfx_component(ambush->imgfxIdx, &ifxImg, 0, transformMtx);
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
@@ -86,7 +86,7 @@ API_CALLABLE(N(func_80241BA8_991388)) {
     StoneChompAmbushIsk13* ambush;
     SpriteRasterInfo rasterInfo;
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
-    
+
     ambush = heap_malloc(sizeof(*ambush));
     ambush->useBitingAnim = FALSE;
     ambush->spriteIndex = SPR_StoneChomp;
@@ -110,7 +110,7 @@ API_CALLABLE(N(func_80241BA8_991388)) {
     ambush->color.b = 255.0f;
     ambush->color.a = 0.0f;
     ambush->imgfxIdx = 0;
-    
+
     ambush->workerID = create_worker_frontUI(NULL, N(func_80241610_990DF0));
     evt_set_variable(script, MV_AmbushPtr, (s32) ambush);
     return ApiStatus_DONE2;
@@ -128,7 +128,7 @@ API_CALLABLE(N(func_80241D38_991518)) {
     s32 y = evt_get_float_variable(script, *args++);
     s32 z = evt_get_float_variable(script, *args++);
     StoneChompAmbushIsk13* ambush = (StoneChompAmbushIsk13*) evt_get_variable(script, MV_AmbushPtr);
-    
+
     ambush->pos.x = x;
     ambush->pos.y = y + ambush->height * SPRITE_WORLD_SCALE_D * 0.5;
     ambush->pos.z = z;
@@ -141,7 +141,7 @@ API_CALLABLE(N(func_80241E34_991614)) {
     s32 y = evt_get_float_variable(script, *args++);
     s32 z = evt_get_float_variable(script, *args++);
     StoneChompAmbushIsk13* ambush = (StoneChompAmbushIsk13*) evt_get_variable(script, MV_AmbushPtr);
-    
+
     ambush->rot.x = x;
     ambush->rot.y = y;
     ambush->rot.z = z;
@@ -155,7 +155,7 @@ API_CALLABLE(N(func_80241EF8_9916D8)) {
     f32 g = evt_get_float_variable(script, *args++);
     f32 b = evt_get_float_variable(script, *args++);
     f32 a = evt_get_float_variable(script, *args++);
-    
+
     if (r < 0.0f) {
         r = 0.0f;
     }

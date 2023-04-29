@@ -33,28 +33,28 @@ API_CALLABLE(N(PushPartnerTest)) {
     f32 dist;
     f32 x0, x1;
     f32 z0, z1;
-    
+
     if (npc == NULL) {
         return ApiStatus_DONE2;
     }
-    
+
     dist = dist2D(npc->pos.x, npc->pos.z, -250.0f, -100.0f);
-    
+
     angle = evt_get_variable(script, LVar0) - 1;
     sinAngle = sin_rad(DEG_TO_RAD(angle));
     cosAngle = cos_rad(DEG_TO_RAD(angle));
     x0 = dist * cosAngle;
     z0 = dist * -sinAngle;
-    
+
     angle = evt_get_variable(script, LVar0);
     sinAngle = sin_rad(DEG_TO_RAD(angle));
     cosAngle = cos_rad(DEG_TO_RAD(angle));
     x1 = dist * cosAngle;
     z1 = dist * -sinAngle;
-    
+
     npc->pos.x += x1 - x0;
     npc->pos.z += z1 - z0;
-    
+
     return ApiStatus_DONE2;
 }
 

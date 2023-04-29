@@ -8,7 +8,7 @@
 #include "battle/common/move/JumpSupport.inc.c"
 
 s32 N(DifficultyTable)[] = {
-    7, 6, 5, 4, 3, 2, 1, 0 
+    7, 6, 5, 4, 3, 2, 1, 0
 };
 
 s32 N(BaseHitChance) = 200;
