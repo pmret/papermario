@@ -718,7 +718,7 @@ EvtScript N(EVS_Attack_FeatherFling) = {
     EVT_END
 };
 
-EvtScript N(EVS_LiftMarioario) = {
+EvtScript N(EVS_LiftMario) = {
     EVT_CALL(GetAnimation, ACTOR_SELF, 1, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(ANIM_Buzzar_Anim01)
@@ -766,7 +766,7 @@ EvtScript N(EVS_Attack_GrappleDrop) = {
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(SetBattleCamZoom, 240)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
@@ -929,7 +929,7 @@ EvtScript N(EVS_Attack_GrappleDrop) = {
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
     EVT_CALL(ShowActionHud, TRUE)
     EVT_CALL(action_command_break_free_start, 0, 60 * DT, 30, 3)
-    EVT_EXEC_GET_TID(N(EVS_LiftMarioario), LVarA)
+    EVT_EXEC_GET_TID(N(EVS_LiftMario), LVarA)
     EVT_WAIT(62)
     EVT_CALL(GetActionSuccessCopy, LVar0)
     EVT_IF_GT(LVar0, 0)
@@ -1015,7 +1015,7 @@ EvtScript N(EVS_Attack_ClawSwipe) = {
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_63)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(SetBattleCamZoom, 240)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)

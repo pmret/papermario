@@ -14,15 +14,15 @@ extern HeapNode heap_generalHead;
 extern HeapNode heap_spriteHead;
 
 BSS s32 spr_asset_entry[2];
-BSS s32 D_802DFEB8[101];
-BSS s32 PlayerRasterSetsLoaded;
-BSS s32 PlayerRasterBufferSetOffsets[13];
+BSS s32 PlayerRasterLoadDescBuffer[101]; //NOTE: maximum rasters supported for a single player sprite is 101
+BSS s32 PlayerRasterLoadDescNumLoaded;
+BSS s32 PlayerRasterLoadDescBeginSpriteIndex[SPR_Peach3]; //TODO size linked to number of player sprites
 BSS s32 D_802D0084[3]; // unused?
-BSS s32 D_802E0090[0x2E0]; // correct length?
+BSS s32 PlayerRasterLoadDesc[0x2E0]; // correct length?
 
-BSS s32 PlayerRasterHeader[3];
-BSS s32 D_802E0C1C;
-BSS s32 D_802E0C20[14];
+BSS PlayerRastersHeader PlayerRasterHeader;
+BSS s32 D_802E0C1C; // unused
+BSS s32 PlayerSpriteRasterSets[SPR_Peach3 + 1]; //TODO size linked to number of player sprites
 BSS s32 PlayerRasterCacheSize;
 BSS s32 PlayerRasterMaxSize;
 BSS s32 SpriteDataHeader[3];
@@ -123,11 +123,13 @@ SpriteAnimData* spr_load_sprite(s32 idx, s32 isPlayerSprite, s32 useTailAlloc) {
     }
 
     if (isPlayerSprite) {
-        PlayerRasterBufferSetOffsets[idx] = PlayerRasterSetsLoaded;
-        count = D_802E0C20[idx + 1] - D_802E0C20[idx];
-        nuPiReadRom(SpriteDataHeader[0] + PlayerRasterHeader[1] + sizeof(u32) * D_802E0C20[idx], D_802DFEB8, sizeof(D_802DFEB8));
+        PlayerRasterLoadDescBeginSpriteIndex[idx] = PlayerRasterLoadDescNumLoaded;
+        count = PlayerSpriteRasterSets[idx + 1] - PlayerSpriteRasterSets[idx];
+        // load a range of raster loading desciptors to a buffer and copy contents into PlayerRasterLoadDesc
+        nuPiReadRom(SpriteDataHeader[0] + PlayerRasterHeader.loadDescriptors + sizeof(u32) * PlayerSpriteRasterSets[idx],
+            PlayerRasterLoadDescBuffer, sizeof(PlayerRasterLoadDescBuffer));
         for (i = 0; i < count; i++) {
-            D_802E0090[PlayerRasterSetsLoaded++] = D_802DFEB8[i];
+            PlayerRasterLoadDesc[PlayerRasterLoadDescNumLoaded++] = PlayerRasterLoadDescBuffer[i];
         }
     }
 
@@ -168,17 +170,17 @@ void spr_init_player_raster_cache(s32 cacheSize, s32 maxRasterSize) {
         PlayerRasterCache[i].spriteIndex = 0xFF;
     }
 
-    for (i = 0; i < ARRAY_COUNT(PlayerRasterBufferSetOffsets); i++)    {
-        PlayerRasterBufferSetOffsets[i] = 0;
+    for (i = 0; i < ARRAY_COUNT(PlayerRasterLoadDescBeginSpriteIndex); i++)    {
+        PlayerRasterLoadDescBeginSpriteIndex[i] = 0;
     }
-    PlayerRasterSetsLoaded = 0;
+    PlayerRasterLoadDescNumLoaded = 0;
     nuPiReadRom(SpriteDataHeader[0], &PlayerRasterHeader, sizeof(PlayerRasterHeader));
-    nuPiReadRom(SpriteDataHeader[0] + PlayerRasterHeader[0], D_802E0C20, sizeof(D_802E0C20));
+    nuPiReadRom(SpriteDataHeader[0] + PlayerRasterHeader.indexRanges, PlayerSpriteRasterSets, sizeof(PlayerSpriteRasterSets));
 }
 
 IMG_PTR spr_get_player_raster(s32 rasterIndex, s32 playerSpriteID) {
-    PlayerSpriteCacheEntry* temp_s0;
-    u32 temp_a2;
+    PlayerSpriteCacheEntry* cacheEntry;
+    u32 playerRasterInfo;
     s32 idx = -1;
     s32 i;
 
@@ -197,13 +199,16 @@ IMG_PTR spr_get_player_raster(s32 rasterIndex, s32 playerSpriteID) {
         return NULL;
     }
 
-    temp_s0 = &PlayerRasterCache[idx];
-    temp_s0->rasterIndex = rasterIndex;
-    temp_s0->spriteIndex = playerSpriteID;
-    temp_s0->lazyDeleteTime = 2;
-    temp_a2 = D_802E0090[PlayerRasterBufferSetOffsets[playerSpriteID] + rasterIndex];
-    nuPiReadRom(SpriteDataHeader[0] + (temp_a2 & 0xFFFFF), temp_s0->raster, (temp_a2 >> 0x10) & 0xFFF0);
-    return temp_s0->raster;
+    cacheEntry = &PlayerRasterCache[idx];
+    cacheEntry->rasterIndex = rasterIndex;
+    cacheEntry->spriteIndex = playerSpriteID;
+    cacheEntry->lazyDeleteTime = 2;
+
+    // each player raster load descriptor has image size (in bytes) and relative offset packed into one word
+    // upper three nibbles give size / 16, lower 5 give offset
+    playerRasterInfo = PlayerRasterLoadDesc[PlayerRasterLoadDescBeginSpriteIndex[playerSpriteID] + rasterIndex];
+    nuPiReadRom(SpriteDataHeader[0] + (playerRasterInfo & 0xFFFFF), cacheEntry->raster, (playerRasterInfo >> 0x10) & 0xFFF0);
+    return cacheEntry->raster;
 }
 
 void spr_update_player_raster_cache(void) {

@@ -969,7 +969,7 @@ EvtScript N(powerShock) = {
     EVT_IF_FLAG(LVar0, ACTOR_FLAG_UPSIDE_DOWN)
         EVT_SET(LocalFlag(15), 1)
     EVT_END_IF
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_47)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PARTNER_APPROACH)
     EVT_CALL(MoveBattleCamOver, 40)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
@@ -1017,7 +1017,7 @@ EvtScript N(powerShock) = {
     EVT_ADD(LVar1, 20)
     EVT_ADD(LVar2, 5)
     EVT_CALL(N(PowerShockFX), LVar0, LVar1, LVar2)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_47)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PARTNER_APPROACH)
     EVT_CALL(AddBattleCamZoom, 100)
     EVT_CALL(MoveBattleCamOver, 5)
     EVT_THREAD
