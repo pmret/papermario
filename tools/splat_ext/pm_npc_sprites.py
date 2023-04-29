@@ -1,9 +1,14 @@
-from segtypes.n64.segment import N64Segment
+import os
+import sys
 from pathlib import Path
+
+SPLAT_EXT = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(str(Path(SPLAT_EXT)))
+
+from segtypes.n64.segment import N64Segment
 import struct
-from sprite_common import AnimComponent
+from sprite_common import AnimComponent, iter_in_groups
 from util.n64.Yay0decompress import Yay0Decompressor
-from segtypes.n64.palette import iter_in_groups
 from util.color import unpack_color
 from util import options
 import png
@@ -43,7 +48,7 @@ class Sprite:
             self.palettes.append([unpack_color(c) for c in iter_in_groups(color_data, 2)])
 
         for offset in image_offsets:
-            img = Image.from_bytes(data[offset:], data)
+            img = NpcRaster.from_bytes(data[offset:], data)
             self.images.append(img)
 
         for offset in animation_offsets:
@@ -168,7 +173,7 @@ class Sprite:
                 img_path = str(path / Raster.get("src"))
                 width, height, raster, info = png.Reader(img_path).read_flat()
 
-                image = Image()
+                image = NpcRaster()
                 image.width = width
                 image.height = height
                 image.raster = raster
@@ -210,10 +215,10 @@ class Sprite:
 
         return self
 
-class Image:
+class NpcRaster:
     @staticmethod
     def from_bytes(data, sprite_data):
-        self = Image()
+        self = NpcRaster()
 
         raster_offset = int.from_bytes(data[0:4], byteorder="big")
         self.width = data[4] & 0xFF

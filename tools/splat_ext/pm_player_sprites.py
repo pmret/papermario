@@ -1,16 +1,33 @@
 #! /usr/bin/python3
 
 from dataclasses import dataclass, field
+from math import ceil
 from pathlib import Path
 import os
 import struct
 import sys
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 import xml.etree.ElementTree as ET
+import png
 
-from sprite_common import AnimComponent, read_offset_list
+from sprite_common import AnimComponent, read_offset_list, iter_in_groups
 import pylibyaml
 import yaml as yaml_loader
+
+def unpack_color(data):
+    s = int.from_bytes(data[0:2], byteorder="big")
+
+    r = (s >> 11) & 0x1F
+    g = (s >> 6) & 0x1F
+    b = (s >> 1) & 0x1F
+    a = (s & 1) * 0xFF
+
+    r = ceil(0xFF * (r / 31))
+    g = ceil(0xFF * (g / 31))
+    b = ceil(0xFF * (b / 31))
+
+    return r, g, b, a
+
 
 TOOLS_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(str(Path(TOOLS_DIR)))
@@ -40,19 +57,34 @@ class SpriteListEntry:
 
 
 @dataclass
-class PlayerRasterReference:
+class PlayerRaster:
     offset: int
     width: int
     height: int
     default_palette: int
     special: bool
+    raster: bytearray = field(default_factory=bytearray)
 
     @staticmethod
-    def from_bytes(data: bytes, unknown_raster: bool) -> "PlayerRasterReference":
-        offset, width, height, default_palette = struct.unpack(">iBBB", data)
+    def from_bytes(metadata: bytes, is_special: bool, ci4_raster_bytes: bytes) -> "PlayerRaster":
+        offset, width, height, default_palette = struct.unpack(">iBBB", metadata)
 
-        return PlayerRasterReference(offset, width, height, default_palette, unknown_raster)
+        # Get raster bytes into ci4 format
+        raster = bytearray()
+        for i in range(width * height // 2):
+            raster.append(ci4_raster_bytes[offset + i] >> 4)
+            raster.append(ci4_raster_bytes[offset + i] & 0xF)
 
+        return PlayerRaster(offset, width, height, default_palette, is_special, raster)
+
+    def write(self, path: Path, palette: List[Tuple[int, int, int, int]]) -> None:
+        if self.special:
+            return
+
+        w = png.Writer(self.width, self.height, palette=palette)
+
+        with open(path, "wb") as f:
+            w.write_array(f, self.raster)
 
 @dataclass
 class PlayerSprite:
@@ -60,37 +92,37 @@ class PlayerSprite:
     num_variations: int
 
     animations: List[List[AnimComponent]]
-    palettes: List[bytes]
-    images: List[PlayerRasterReference]
+    palettes: List[List[Tuple[int, int, int, int]]]
+    images: List[PlayerRaster]
 
     @staticmethod
-    def from_bytes(data: bytes, raster_section: SpriteListEntry) -> "PlayerSprite":
+    def from_bytes(data: bytes, raster_section: SpriteListEntry, ci4_raster_data: bytes) -> "PlayerSprite":
         image_offsets = read_offset_list(data[int.from_bytes(data[0:4], byteorder="big"):])
         palette_offsets = read_offset_list(data[int.from_bytes(data[4:8], byteorder="big"):])
         max_components = int.from_bytes(data[8:0xC], "big")
         num_variations = int.from_bytes(data[0xC:0x10], "big")
         animation_offsets = read_offset_list(data[0x10:])
 
-        palettes: List[bytes] = []
-        images: List[PlayerRasterReference] = []
+        palettes: List[List[Tuple[int, int, int, int]]] = []
+        images: List[PlayerRaster] = []
         animations: List[List[AnimComponent]] = []
 
         # Read palettes
-        for offset in palette_offsets:
-            pal = data[offset:offset+0x20]
-            palettes.append(pal)
+        for pal_offset in palette_offsets:
+            pal = data[pal_offset:pal_offset+0x20]
+            palettes.append([unpack_color(c) for c in iter_in_groups(pal, 2)])
 
         # Read images
-        for i, offset in enumerate(image_offsets):
-            is_unknown_raster = raster_section.raster_offsets[i] == UNKNOWN_RASTER
-            image = PlayerRasterReference.from_bytes(data[offset:offset + 7], is_unknown_raster)
+        for i, metadata_offset in enumerate(image_offsets):
+            is_special = raster_section.raster_offsets[i] == SPECIAL_RASTER
+            image = PlayerRaster.from_bytes(data[metadata_offset:metadata_offset + 7], is_special, ci4_raster_data)
             images.append(image)
 
         # Read animations
-        for offset in animation_offsets:
+        for anim_offset in animation_offsets:
             anim: List[AnimComponent] = []
 
-            for comp_offset in read_offset_list(data[offset:]):
+            for comp_offset in read_offset_list(data[anim_offset:]):
                 anim.append(AnimComponent.from_bytes(data[comp_offset:], data))
             animations.append(anim)
 
@@ -158,7 +190,7 @@ raster_infos = get_raster_infos(packed_raster_info_data) # (readRasterTable)
 #     ] for group in raster_info_groups
 # ]
 
-UNKNOWN_RASTER = 0x1F880
+SPECIAL_RASTER = 0x1F880
 
 with open("assets/us/19E0970.bin", "rb") as f:
     yay0_sprite_data_chunked: bytes = f.read()
@@ -175,7 +207,7 @@ sprites = []
 for i, yay0_piece in enumerate(yay0_sprite_data):
     sprite_data = Yay0Decompressor.decompress(yay0_piece, "big")
     raster_section = raster_sections[i]
-    sprite = PlayerSprite.from_bytes(sprite_data, raster_section)
+    sprite = PlayerSprite.from_bytes(sprite_data, raster_section, ci4_raster_data)
     sprites.append(sprite)
 
 sprite_pos = 0
@@ -185,6 +217,8 @@ for s in range(len(sprite_names)):
 
     path = Path(f"assets/us/sprite/player/")
     path.mkdir(parents=True, exist_ok=True)
+
+    (path / cur_sprite_name).mkdir(parents=True, exist_ok=True)
 
     cur_sprite: PlayerSprite = sprites[sprite_pos]
     cur_sprite_back: Optional[PlayerSprite] = None
@@ -208,13 +242,15 @@ for s in range(len(sprite_names)):
     palette_to_raster: Dict[int, List[Any]] = {}
 
     for i, image in enumerate(cur_sprite.images):
-        # image.write(path / (name + ".png"), cur_sprite.palettes[image.palette_index])
+        name_offset = raster_sections[sprite_pos].raster_offsets[i]
+        raster_name = f"Player_{name_offset:05X}.png"
+        pal = cur_sprite.palettes[image.default_palette]
+        image.write(path / cur_sprite_name / raster_name, pal)
 
         if image.default_palette not in palette_to_raster:
             palette_to_raster[image.default_palette] = []
         palette_to_raster[image.default_palette].append(image)
 
-        name_offset = raster_sections[sprite_pos].raster_offsets[i]
         raster_attributes = {
             "id": f"{i:X}",
             "palette": f"{image.default_palette:X}",
@@ -231,6 +267,9 @@ for s in range(len(sprite_names)):
                 back_name_offset = raster_sections[sprite_pos + 1].raster_offsets[i]
                 raster_attributes["back"] = f"Player_{back_name_offset:05X}.png"
 
+                back_pal = cur_sprite_back.palettes[back_image.default_palette]
+                back_image.write(path / cur_sprite_name / f"Player_{back_name_offset:05X}.png", back_pal)
+
         ET.SubElement(RasterList, "Raster", raster_attributes)
 
     palette_names = sprite_cfg[cur_sprite_name].get("palettes")
@@ -242,7 +281,7 @@ for s in range(len(sprite_names)):
         else:
             img = cur_sprite.images[0]
 
-        # img.write(path / (name + ".png"), palette)
+        img.write(path / cur_sprite_name / (name + ".png"), palette)
 
         ET.SubElement(PaletteList, "Palette", {
             "id": f"{i:X}",
