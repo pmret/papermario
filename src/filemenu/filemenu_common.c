@@ -53,44 +53,44 @@ s16 D_80249D48[10] = { 0, 5, 17, 37, 60, 85, 110, 135, 160, 185};
 
 #if VERSION_PAL
 s16 D_filemenu_8024EB5C[] = {
-        0x00D2,
-        0x00B6,
-        0x00A2,
-        0x0091,
-        0x0082,
-        0x0075,
-        0x0069,
-        0x005C,
-        0x0050,
-        0x0043,
-        0x0037,
-        0x002A,
-        0x001E,
-        0x0012,
-        0x0008,
-        0x0002,
-        0x0000,
+    210,
+    182,
+    162,
+    145,
+    130,
+    117,
+    105,
+    92,
+    80,
+    67,
+    55,
+    42,
+    30,
+    18,
+    8,
+    2,
+    0,
 };
 
 s16 D_filemenu_8024EB80[] = {
-        0xFFFE,
-        0xFFF8,
-        0xFFEE,
-        0xFFE2,
-        0xFFD6,
-        0xFFC9,
-        0xFFBD,
-        0xFFB0,
-        0xFFA4,
-        0xFF97,
-        0xFF8B,
-        0xFF7E,
-        0xFF72,
-        0xFF65,
-        0xFF59,
-        0xFF4C,
-        0xFF40,
-        0xFF33,
+    -2,
+    -8,
+    -18,
+    -30,
+    -42,
+    -55,
+    -67,
+    -80,
+    -92,
+    -105,
+    -117,
+    -130,
+    -142,
+    -155,
+    -167,
+    -180,
+    -192,
+    -205,
 };
 #endif
 
@@ -790,16 +790,16 @@ void filemenu_update_pal_80247f40(s32 windowIndex, s32* flags, s32* posX, s32* p
 
     var_a3 = 0;
     switch (windowIndex) {
-        case 0x38:
+        case WINDOW_ID_FILEMENU_FILE0_INFO:
             var_a3 = 0;
             break;
-        case 0x39:
+        case WINDOW_ID_FILEMENU_FILE1_INFO:
             var_a3 = 1;
             break;
-        case 0x3A:
+        case WINDOW_ID_FILEMENU_FILE2_INFO:
             var_a3 = 2;
             break;
-        case 0x3B:
+        case WINDOW_ID_FILEMENU_FILE3_INFO:
             var_a3 = 3;
             break;
     }
@@ -834,16 +834,16 @@ void filemenu_pal_80248018(s32 windowIdx, s32* flags, s32* posX, s32* posY, s32*
 
     var_a3 = 0;
     switch (windowIdx) {
-        case 0x38:
+        case WINDOW_ID_FILEMENU_FILE0_INFO:
             var_a3 = 0;
             break;
-        case 0x39:
+        case WINDOW_ID_FILEMENU_FILE1_INFO:
             var_a3 = 1;
             break;
-        case 0x3A:
+        case WINDOW_ID_FILEMENU_FILE2_INFO:
             var_a3 = 2;
             break;
-        case 0x3B:
+        case WINDOW_ID_FILEMENU_FILE3_INFO:
             var_a3 = 3;
             break;
     }
@@ -884,9 +884,9 @@ void filemenu_draw_cursor(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 
 }
 
 #if VERSION_PAL
-#define PAGE_ID (3)
+#define PAGE_4 (3)
 #else
-#define PAGE_ID (4)
+#define PAGE_4 (4)
 #endif
 
 void filemenu_draw_contents_copy_arrow(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity,
@@ -898,7 +898,7 @@ void filemenu_draw_contents_copy_arrow(MenuPanel* menu, s32 baseX, s32 baseY, s3
     f32 endX, endZ;
     f32 temp_f28;
 
-    if (menu0->page == PAGE_ID && menu0->selected < 4) {
+    if (menu0->page == PAGE_4 && menu0->selected < 4) {
         if (menu0->selected != filemenu_loadedFileIdx && filemenu_currentMenu != 2) {
             switch (filemenu_loadedFileIdx) {
                 case 0:
