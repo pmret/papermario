@@ -59,6 +59,24 @@ if cat /etc/os-release | grep -E 'ID=debian|ID_LIKE=(.*)debian' &> /dev/null; th
     fi
 fi
 
+# Fedora (dnf)
+if cat /etc/os-release | grep -E ID=fedora &> /dev/null; then
+    supported=true
+
+    echo "Installing packages for Fedora (dnf)"
+
+    ${SUDO} dnf install -y curl git python3 python3-pip python3-setuptools || exit 1
+    ${SUDO} dnf group info "C Development Tools and Libraries" "Development Tools" || exit 1
+    python3 -m pip install -U -r requirements.txt
+    cp tools/precommit_check_no_assets.sh "$(git rev-parse --git-path hooks)/pre-commit" || exit 1
+
+    if [[ $1 == "--extra" ]]; then
+        echo "Installing extra"
+        ${SUDO} dnf install -y clang-tidy astyle doxygen || exit 1
+        python3 -m pip install -U -r requirements_extra.txt || exit 1
+    fi
+fi
+
 # Arch Linux and derivatives (pacman)
 if cat /etc/os-release | grep -E 'ID=arch|ID_LIKE=arch' &> /dev/null; then
     supported=true
@@ -198,6 +216,7 @@ if [ "$supported" != true ]; then
     echo "- Arch Linux (pacman)"
     echo "- openSUSE (zypper)"
     echo "- Alpine Linux (apk)"
+    echo "- Fedora (dnf)"
     echo "Please consider contributing and adding an installation script for your distro."
     exit 1
 fi
