@@ -40,7 +40,7 @@ class SetRaster(Animation):
 
     def get_attributes(self):
         return {
-            "raster": str(self.raster),
+            "raster": f"{self.raster:X}",
         }
 
 @dataclass
@@ -49,7 +49,7 @@ class SetPalette(Animation):
 
     def get_attributes(self):
         return {
-            "palette": str(self.palette),
+            "palette": f"{self.palette:X}",
         }
 
 @dataclass
@@ -82,9 +82,7 @@ class SetPos(Animation):
     def get_attributes(self):
         return {
             "flag": str(self.flag),
-            "x": str(self.x),
-            "y": str(self.y),
-            "z": str(self.z),
+            "xyz": f"{self.x},{self.y},{self.z}",
         }
 
 @dataclass
@@ -105,9 +103,21 @@ class SetScale(Animation):
     mode: int
     percent: int
 
+    def get_mode_str(self):
+        if self.mode == 0:
+            return "uniform"
+        elif self.mode == 1:
+            return "x"
+        elif self.mode == 2:
+            return "y"
+        elif self.mode == 3:
+            return "z"
+        else:
+            raise ValueError(f"invalid scale mode {self.mode}")
+
     def get_attributes(self):
         return {
-            "mode": str(self.mode),
+            "mode": self.get_mode_str(),
             "percent": str(self.percent),
         }
 
@@ -155,7 +165,7 @@ class AnimComponent:
         ret: List[Animation] = []
 
         def to_signed(value):
-            return -(value & 0x8000) | (value & 0x7fff)
+            return -(value & 0x8000) | (value & 0x7FFF)
 
         i = 0
         while i < len(command_list):
@@ -164,14 +174,14 @@ class AnimComponent:
             if cmd_start <= 0xFFF:
                 ret.append(Wait(cmd_start))
             elif cmd_start <= 0x1FFF:
-                raster = cmd_start % 1000
+                raster = cmd_start % 0x1000
                 if raster == 0xFFF:
                     raster = -1
                 ret.append(SetRaster(raster))
             elif cmd_start <= 0x2FFF:
-                ret.append(Goto(cmd_start % 2000))
+                ret.append(Goto(cmd_start % 0x2000))
             elif cmd_start <= 0x3FFF:
-                flag = cmd_start % 3000
+                flag = cmd_start % 0x3000
                 x, y, z = command_list[i+1:i+4]
                 x = to_signed(x)
                 y = to_signed(y)
@@ -179,33 +189,33 @@ class AnimComponent:
                 i += 3
                 ret.append(SetPos(flag, x, y, z))
             elif cmd_start <= 0x4FFF:
-                x, y, z = command_list[i+1:i+4]
-                x = to_signed(x)
+                x, y, z = command_list[i:i+3]
+                x = ((x % 0x4000) << 20) >> 20
                 y = to_signed(y)
                 z = to_signed(z)
                 i += 2
                 ret.append(SetRot(x, y, z))
             elif cmd_start <= 0x5FFF:
-                mode = cmd_start % 5000
+                mode = cmd_start % 0x5000
                 percent = command_list[i+1]
                 i += 1
                 ret.append(SetScale(mode, percent))
             elif cmd_start <= 0x6FFF:
-                palette = cmd_start % 6000
+                palette = cmd_start % 0x6000
                 if palette == 0xFFF:
                     palette = -1
                 ret.append(SetPalette(palette))
             elif cmd_start <= 0x7FFF:
-                count = cmd_start % 7000
+                count = cmd_start % 0x7000
                 pos = command_list[i+1]
                 i += 1
                 ret.append(Loop(count, pos))
             elif cmd_start <= 0x80FF:
-                ret.append(Unknown(cmd_start % 8000))
+                ret.append(Unknown(cmd_start % 0x8000))
             elif cmd_start <= 0x81FF:
-                ret.append(SetParent(cmd_start % 8100))
+                ret.append(SetParent(cmd_start % 0x8100))
             elif cmd_start <= 0x82FF:
-                ret.append(SetNotify(cmd_start % 8200))
+                ret.append(SetNotify(cmd_start % 0x8200))
             else:
                 raise Exception("Unknown command")
             i += 1

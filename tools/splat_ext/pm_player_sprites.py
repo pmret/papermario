@@ -35,7 +35,7 @@ from splat.util.n64.Yay0decompress import Yay0Decompressor
 
 
 @dataclass
-class RasterInfo:
+class RasterTableEntry:
     offset: int
     size: int
 
@@ -47,10 +47,10 @@ class SpriteListEntry:
     loaded_position: int = 0
     raster_offsets: List[int] = field(default_factory=list)
     raster_positions: List[int] = field(default_factory=list)
-    rasters: List[RasterInfo] = field(default_factory=list)
+    raster_table_entries: List[RasterTableEntry] = field(default_factory=list)
 
-    def add_raster(self, raster: RasterInfo):
-        self.rasters.append(raster)
+    def add_raster(self, raster: RasterTableEntry):
+        self.raster_table_entries.append(raster)
         self.raster_offsets.append(raster.offset)
         self.raster_positions.append(self.loaded_position)
         self.loaded_position += raster.size
@@ -128,7 +128,7 @@ class PlayerSprite:
 
         return PlayerSprite(max_components, num_variations, animations, palettes, images)
 
-def get_raster_infos(data: bytes) -> List[RasterInfo]:
+def get_raster_infos(data: bytes) -> List[RasterTableEntry]:
     raster_infos = []
     current_section_pos = 0
     current_section = 0
@@ -138,7 +138,7 @@ def get_raster_infos(data: bytes) -> List[RasterInfo]:
 
         size = (packed >> 20) << 4
         offset = packed & 0xFFFFF
-        ri = RasterInfo(offset, size)
+        ri = RasterTableEntry(offset, size)
         raster_infos.append(ri)
 
         if current_section > len(raster_sections) - 1:
@@ -254,7 +254,7 @@ for s in range(len(sprite_names)):
         raster_attributes = {
             "id": f"{i:X}",
             "palette": f"{image.default_palette:X}",
-            "src":  f"Player_{name_offset:05X}.png",
+            "src": f"Player_{name_offset:05X}.png",
         }
 
         if has_back:
@@ -268,7 +268,7 @@ for s in range(len(sprite_names)):
                 raster_attributes["back"] = f"Player_{back_name_offset:05X}.png"
 
                 back_pal = cur_sprite_back.palettes[back_image.default_palette]
-                back_image.write(path / cur_sprite_name / f"Player_{back_name_offset:05X}.png", back_pal)
+                # back_image.write(path / cur_sprite_name / f"Player_{back_name_offset:05X}.png", back_pal)
 
         ET.SubElement(RasterList, "Raster", raster_attributes)
 
@@ -281,7 +281,7 @@ for s in range(len(sprite_names)):
         else:
             img = cur_sprite.images[0]
 
-        img.write(path / cur_sprite_name / (name + ".png"), palette)
+        # img.write(path / cur_sprite_name / (name + ".png"), palette)
 
         ET.SubElement(PaletteList, "Palette", {
             "id": f"{i:X}",
