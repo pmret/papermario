@@ -6,13 +6,13 @@
 
 extern HudScript HES_Spirit1;
 
-HudScript* D_filemenu_8024F120[] = {&HES_Spirit1};
+HudScript* D_filemenu_8024F120[] = { &HES_Spirit1 };
 
 u32 D_filemenu_8024F124 = 0x00000000;
 
 s32 D_filemenu_8024F128 = 0x00000000;
 
-u8 D_filemenu_8024F12C[] = {0x00, 0x01, 0x02, 0x03};
+u8 D_filemenu_8024F12C[] = { 0x00, 0x01, 0x02, 0x03 };
 
 u32 D_filemenu_8024F130[] = {
     MSG_PAL_Menu_0056,
@@ -56,10 +56,10 @@ void filemenu_draw_pal_8024DA50(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
 
 void filemenu_draw_pal_8024DA00(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
 void filemenu_draw_pal_8024D9B0(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
-void filemenu_pal_handle_input(MenuPanel *);
-void filemenu_pal_init(MenuPanel *);
-void filemenu_pal_cleanup(MenuPanel *);
-void filemenu_pal_update(MenuPanel *);
+void filemenu_pal_handle_input(MenuPanel*);
+void filemenu_pal_init(MenuPanel*);
+void filemenu_pal_cleanup(MenuPanel*);
+void filemenu_pal_update(MenuPanel*);
 
 MenuWindowBP D_filemenu_8024F1D8[] = {
     {
@@ -75,9 +75,7 @@ MenuWindowBP D_filemenu_8024F1D8[] = {
         .fpUpdate = { .func=&filemenu_update_show_title },
         .extraFlags = 0,
         .style = { .customStyle = &filemenu_windowStyles[3] }
-    },
-
-    {
+    }, {
         .windowID = WINDOW_ID_FILEMENU_FILE2_INFO,
         .unk_01 = 0,
         .pos = { .x = 89, .y = 98 },
@@ -90,9 +88,7 @@ MenuWindowBP D_filemenu_8024F1D8[] = {
         .fpUpdate = { .func=&filemenu_update_pal_80247f40 },
         .extraFlags = 0,
         .style = { .customStyle = &filemenu_windowStyles[9] }
-    },
-
-    {
+    }, {
         .windowID = WINDOW_ID_FILEMENU_FILE3_INFO,
         .unk_01 = 0,
         .pos = { .x = 89, .y = 124 },
@@ -105,9 +101,7 @@ MenuWindowBP D_filemenu_8024F1D8[] = {
         .fpUpdate = { .func=&filemenu_update_pal_80247f40 },
         .extraFlags = 0,
         .style = { .customStyle = &filemenu_windowStyles[10] }
-    },
-
-    {
+    }, {
         .windowID = WINDOW_ID_FILEMENU_FILE0_INFO,
         .unk_01 = 0,
         .pos = { .x = 89, .y = 46 },
@@ -120,8 +114,7 @@ MenuWindowBP D_filemenu_8024F1D8[] = {
         .fpUpdate = { .func=&filemenu_update_pal_80247f40 },
         .extraFlags = 0,
         .style = { .customStyle = &filemenu_windowStyles[7] }
-    },
-    {
+    }, {
         .windowID = WINDOW_ID_FILEMENU_FILE1_INFO,
         .unk_01 = 0,
         .pos = { .x = 89, .y = 72 },
@@ -161,11 +154,11 @@ void func_filemenu_8024D710(s32 arg0, MenuPanel* menu, s32 baseX, s32 baseY, s32
     s32 var_a1;
 
     if (filemenu_currentMenu == 4 && menu->selected == arg0) {
-        filemenu_set_cursor_goal_pos(arg0 + 0x3C, baseX + 4, baseY + 0xA);
+        filemenu_set_cursor_goal_pos(arg0 + 60, baseX + 4, baseY + 10);
     }
 
     var_a1 = D_filemenu_8024F130[arg0];
-    draw_msg(var_a1, baseX + 0x24, baseY + 2, 0xFF, 0xA, 0);
+    draw_msg(var_a1, baseX + 36, baseY + 2, 255, 10, 0);
 
     gSPDisplayList(gMainGfxPos++, D_filemenu_8024F140);
 
@@ -184,10 +177,9 @@ void func_filemenu_8024D710(s32 arg0, MenuPanel* menu, s32 baseX, s32 baseY, s32
     gDPLoadBlock(gMainGfxPos++, G_TX_LOADTILE, 0, 0, 255, 512);
     gDPPipeSync(gMainGfxPos++);
     gDPSetTile(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0x0000, G_TX_RENDERTILE, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
-    gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, 0, 0, 0x003C, 0x003C);
-    gSPTextureRectangle(gMainGfxPos++, ((baseX + 0xF) * 4), ((baseY + 2) * 4), ((baseX + 0x1F) * 4), ((baseY + 0x12) * 4), 0, 0, 0, 0x400, 0x400);
+    gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, 0, 0, (16 - 1) << 2, (16 - 1) << 2);
+    gSPTextureRectangle(gMainGfxPos++, (baseX + 15) << 2, (baseY + 2) << 2, (baseX + 31) << 2, (baseY + 18) << 2, 0, 0, 0, 0x400, 0x400);
 }
-
 
 void filemenu_draw_pal_8024D9B0(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     func_filemenu_8024D710(0, menu, baseX, baseY, width, height, opacity, darkening);
@@ -367,9 +359,8 @@ void filemenu_pal_update(MenuPanel* menu) {
     dma_copy(titlemenu_flags_ROM_START + (D_filemenu_8024F128 * 0x800), titlemenu_flags_ROM_END, D_802517E0[D_filemenu_8024F124]);
 }
 
-
 void filemenu_pal_cleanup(MenuPanel* arg0) {
-    int i;
+    s32 i;
 
     for (i = 0; i < ARRAY_COUNT(D_802517D0); i++) {
         hud_element_free(D_802517D0[i]);

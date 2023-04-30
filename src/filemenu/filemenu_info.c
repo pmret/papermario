@@ -10,12 +10,6 @@
 #define CREATE_SUCCESS_NUMBER_X 48
 #endif
 
-#if VERSION_PAL
-#define PAGE_ID (3)
-#else
-#define PAGE_ID (4)
-#endif
-
 u8 filemenu_info_gridData[] = {
     0, 0, 0, 0
 };
@@ -118,16 +112,16 @@ void filemenu_info_handle_input(MenuPanel* menu) {
         filemenu_currentMenu = 0;
 
         switch (menu->page) {
-            case 1:
-                menu->page = 0;
+            case PAGE_1:
+                menu->page = PAGE_0;
                 set_window_update(WINDOW_ID_FILEMENU_STEREO, (s32)filemenu_update_show_options_left);
                 set_window_update(WINDOW_ID_FILEMENU_MONO, (s32)filemenu_update_show_options_right);
                 set_window_update(WINDOW_ID_FILEMENU_OPTION_LEFT, (s32)filemenu_update_show_options_bottom);
                 set_window_update(WINDOW_ID_FILEMENU_OPTION_RIGHT, (s32)filemenu_update_show_options_bottom);
                 filemenu_set_selected(menu, 0, 2);
                 break;
-            case PAGE_ID:
-                menu->page = 0;
+            case PAGE_4:
+                menu->page = PAGE_0;
                 set_window_update(WINDOW_ID_FILEMENU_STEREO, (s32)filemenu_update_show_options_left);
                 set_window_update(WINDOW_ID_FILEMENU_MONO, (s32)filemenu_update_show_options_right);
                 set_window_update(WINDOW_ID_FILEMENU_OPTION_LEFT, (s32)filemenu_update_show_options_bottom);
@@ -135,7 +129,7 @@ void filemenu_info_handle_input(MenuPanel* menu) {
                 filemenu_set_selected(menu, 1, 2);
                 break;
 #if !VERSION_PAL
-            case 2:
+            case PAGE_2:
                 menu->page = 2;
                 filemenu_set_selected(menu, 1, 2);
                 break;

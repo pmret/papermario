@@ -6304,6 +6304,7 @@ enum FileMenuMessages {
     /* 30 */ FILE_MESSAGE_TO,                          // to[End]
     /* 31 */ FILE_MESSAGE_HAS_BEEN_CREATED,            // has been created.[End]
 #if VERSION_PAL
+    // TODO: determine where these new entries should be placed
     UNK1,
     UNK2,
 #endif

@@ -88,12 +88,6 @@ void filemenu_update_change_layout(
     }
 }
 
-#if VERSION_PAL
-extern u8 D_filemenu_8025095C[4];
-// TODO: move filemenu_filename
-#define filemenu_filename filemenu_filename
-#endif
-
 void filemenu_draw_contents_file_create_header(
     MenuPanel* menu,
     s32 baseX, s32 baseY,

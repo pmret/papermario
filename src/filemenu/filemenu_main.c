@@ -25,16 +25,6 @@ extern HudScript HES_OptionMonoOff;
 extern HudScript HES_OptionStereoOn;
 extern HudScript HES_OptionStereoOff;
 
-enum {
-    PAGE_0,
-    PAGE_1,
-#if !VERSION_PAL
-    PAGE_2,
-#endif
-    PAGE_3,
-    PAGE_4,
-};
-
 #if VERSION_PAL
 extern u8 D_filemenu_802508E8[4];
 extern u8 D_filemenu_80250938[4];
@@ -237,7 +227,7 @@ MenuWindowBP filemenu_main_windowBPs[] = {
         .width = 124 + OFFSET_WIDTH,
         .height = 15,
         .priority = WINDOW_PRIORITY_0,
-        .fpDrawContents = &filemenu_draw_contents_file_2_title ,
+        .fpDrawContents = &filemenu_draw_contents_file_2_title,
         .tab = NULL,
         .parentID = WINDOW_ID_FILEMENU_FILE2_INFO,
         .fpUpdate = { WINDOW_UPDATE_SHOW },
@@ -442,7 +432,6 @@ void filemenu_draw_contents_option_left(
     }
 #endif
 }
-//#endif
 
 #if VERSION_PAL
 INCLUDE_ASM(void, "filemenu/filemenu_main", filemenu_draw_contents_option_center);
@@ -502,11 +491,12 @@ void filemenu_draw_contents_option_right(
 #endif
 
 #if VERSION_PAL
-void filemenu_draw_contents_file_info(s32 fileIdx,
-                                      MenuPanel* menu,
-                                      s32 baseX, s32 baseY,
-                                      s32 width, s32 height,
-                                      s32 opacity, s32 darkening
+void filemenu_draw_contents_file_info(
+    s32 fileIdx,
+    MenuPanel* menu,
+    s32 baseX, s32 baseY,
+    s32 width, s32 height,
+    s32 opacity, s32 darkening
 );
 INCLUDE_ASM(void, "filemenu/filemenu_main", filemenu_draw_contents_file_info);
 #else
@@ -575,11 +565,11 @@ void filemenu_draw_contents_file_info(s32 fileIdx,
 
 #if VERSION_PAL
 void filemenu_draw_contents_file_title(
-        s32 fileIdx,
-        MenuPanel* menu,
-        s32 baseX, s32 baseY,
-        s32 width, s32 height,
-        s32 opacity, s32 darkening);
+    s32 fileIdx,
+    MenuPanel* menu,
+    s32 baseX, s32 baseY,
+    s32 width, s32 height,
+    s32 opacity, s32 darkening);
 INCLUDE_ASM(void, "filemenu/filemenu_main", filemenu_draw_contents_file_title);
 #else
 void filemenu_draw_contents_file_title(

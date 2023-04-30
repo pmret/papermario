@@ -3,6 +3,16 @@
 
 #include "common.h"
 
+enum {
+  PAGE_0,
+  PAGE_1,
+#if !VERSION_PAL
+  PAGE_2,
+#endif
+  PAGE_3,
+  PAGE_4,
+};
+
 extern MenuPanel* filemenu_menus[];
 
 extern s32 filemenu_iterFileIdx;
@@ -23,6 +33,7 @@ extern u8 filemenu_filename[8];
 extern s32 D_802517D0[1];
 extern s32 D_802517D4[1];
 extern u16 D_802517E0[2][0x400];
+extern u8 D_filemenu_8025095C[4];
 #endif
 
 #define WINDOW_UPDATE_FUNC(name) void (name)( \

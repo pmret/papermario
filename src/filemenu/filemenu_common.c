@@ -870,6 +870,8 @@ void filemenu_pal_80248018(
         window->flags &= ~WINDOW_FLAG_INITIAL_ANIMATION;
         window->flags |= WINDOW_FLAG_HIDDEN;
     }
+
+    // TODO: ARRAY_COUNT?
     if (var_a1 >= 0x10) {
         filemenu_cursor_alpha = 0;
     }
