@@ -75,7 +75,8 @@ MenuWindowBP D_filemenu_8024F1D8[] = {
         .fpUpdate = { .func=&filemenu_update_show_title },
         .extraFlags = 0,
         .style = { .customStyle = &filemenu_windowStyles[3] }
-    }, {
+    },
+    {
         .windowID = WINDOW_ID_FILEMENU_FILE2_INFO,
         .unk_01 = 0,
         .pos = { .x = 89, .y = 98 },
@@ -88,7 +89,8 @@ MenuWindowBP D_filemenu_8024F1D8[] = {
         .fpUpdate = { .func=&filemenu_update_pal_80247f40 },
         .extraFlags = 0,
         .style = { .customStyle = &filemenu_windowStyles[9] }
-    }, {
+    },
+    {
         .windowID = WINDOW_ID_FILEMENU_FILE3_INFO,
         .unk_01 = 0,
         .pos = { .x = 89, .y = 124 },
@@ -101,7 +103,8 @@ MenuWindowBP D_filemenu_8024F1D8[] = {
         .fpUpdate = { .func=&filemenu_update_pal_80247f40 },
         .extraFlags = 0,
         .style = { .customStyle = &filemenu_windowStyles[10] }
-    }, {
+    },
+    {
         .windowID = WINDOW_ID_FILEMENU_FILE0_INFO,
         .unk_01 = 0,
         .pos = { .x = 89, .y = 46 },
@@ -114,7 +117,8 @@ MenuWindowBP D_filemenu_8024F1D8[] = {
         .fpUpdate = { .func=&filemenu_update_pal_80247f40 },
         .extraFlags = 0,
         .style = { .customStyle = &filemenu_windowStyles[7] }
-    }, {
+    },
+    {
         .windowID = WINDOW_ID_FILEMENU_FILE1_INFO,
         .unk_01 = 0,
         .pos = { .x = 89, .y = 72 },
