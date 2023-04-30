@@ -65,7 +65,7 @@
 #ifdef _ANSI_STDARG_H_
 #define _VA_LIST_
 #endif
-#define _ANSI_STDARG_H_ 
+#define _ANSI_STDARG_H_
 
 #undef va_alist
 #undef va_dcl

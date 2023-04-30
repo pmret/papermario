@@ -81,12 +81,12 @@ typedef struct MovingBlock {
 } MovingBlock; // size = 0x10
 
 MovingBlock N(MovingBlockPlatforms)[] = {
-    { COLLIDER_u1, MODEL_u1, 40,  41 }, 
-    { COLLIDER_u2, MODEL_u2, 60,  51 }, 
-    { COLLIDER_u3, MODEL_u3, 70,   1 }, 
-    { COLLIDER_u4, MODEL_u4, 30,  61 }, 
-    { COLLIDER_u5, MODEL_u5, 50,  71 }, 
-    { COLLIDER_u6, MODEL_u6, 70, 101 }, 
+    { COLLIDER_u1, MODEL_u1, 40,  41 },
+    { COLLIDER_u2, MODEL_u2, 60,  51 },
+    { COLLIDER_u3, MODEL_u3, 70,   1 },
+    { COLLIDER_u4, MODEL_u4, 30,  61 },
+    { COLLIDER_u5, MODEL_u5, 50,  71 },
+    { COLLIDER_u6, MODEL_u6, 70, 101 },
 };
 
 API_CALLABLE(N(AwaitPlayerNearPlatforms)) {

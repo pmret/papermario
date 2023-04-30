@@ -46,7 +46,7 @@ EnemyTerritoryWander* N(WanderTerritories)[] = {
     &N(WanderTerritory0),
     &N(WanderTerritory1),
     &N(WanderTerritory2),
-    &N(WanderTerritory3), 
+    &N(WanderTerritory3),
 };
 
 API_CALLABLE(N(SetWanderTerritory)) {

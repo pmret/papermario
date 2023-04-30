@@ -1,6 +1,6 @@
 s32 N(ItemList_StoreroomKey)[] = {
     ITEM_STOREROOM_KEY,
-    ITEM_NONE 
+    ITEM_NONE
 };
 
 EvtScript N(EVS_NpcInteract_HarryT) = {

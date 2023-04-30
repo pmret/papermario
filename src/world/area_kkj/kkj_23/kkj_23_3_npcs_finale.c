@@ -73,7 +73,7 @@ EvtScript N(EVS_BowserTauntMario) = {
 
 s32 N(HoverYOffsets)[] = {
      1,  2,  3,  2,  1,
-    -1, -2, -3, -2, -1, 
+    -1, -2, -3, -2, -1,
 };
 
 EvtScript N(EVS_NpcIdle_Bowser_Body) = {

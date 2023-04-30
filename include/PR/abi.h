@@ -24,10 +24,10 @@
 /*
  * Header file for the Audio Binary Interface.
  * This is included in the Media Binary Interface file
- * mbi.h. 
+ * mbi.h.
  *
  * This file follows the framework used for graphics.
- * 
+ *
  */
 
 /* Audio commands: */
@@ -205,7 +205,7 @@ typedef struct {
     unsigned int        pad2:16;
     unsigned int        addr;
 } Asetloop;
-        
+
 /*
  * Generic Acmd Packet
  */
@@ -385,7 +385,7 @@ typedef short ENVMIX_STATE[40];
         _a->words.w0 = _SHIFTL(A_SETLOOP, 24, 8);                       \
         _a->words.w1 = (unsigned int)(a);                               \
 }
-    
+
 #define	aDMEMMove(pkt, i, o, c)						\
 {									\
 	Acmd *_a = (Acmd *)pkt;						\

@@ -32,7 +32,7 @@ s32 N(ChestItems)[] = {
     ITEM_SHOOTING_STAR,
     ITEM_DEEP_FOCUS1,
     ITEM_LAST_STAND,
-    ITEM_JAMMIN_JELLY, 
+    ITEM_JAMMIN_JELLY,
 };
 
 // end modified Chest.inc.c

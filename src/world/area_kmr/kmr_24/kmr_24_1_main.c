@@ -4,15 +4,15 @@
 API_CALLABLE(N(ExitGame)) {
     s16 progress;
     s16 result;
-    
+
     if (isInitialCall) {
         set_map_transition_effect(TRANSITION_BEGIN_OR_END_GAME);
         script->functionTemp[1] = 0;
     }
-    
+
     progress = script->functionTemp[1];
     result = update_exit_map_screen_overlay(&progress);
-    
+
     if (result == 0) {
         script->functionTemp[1] = progress;
         return ApiStatus_BLOCK;

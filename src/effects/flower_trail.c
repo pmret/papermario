@@ -72,7 +72,7 @@ void flower_trail_main(s32 triggeredByNpc, f32 posX, f32 posY, f32 posZ, f32 ang
         part->alive = TRUE;
         part->triggeredByNpc = triggeredByNpc;
         part->unk_7C = 0.0f;
-        
+
         part->pos.x = posX;
         part->pos.y = posY;
         part->pos.z = posZ;

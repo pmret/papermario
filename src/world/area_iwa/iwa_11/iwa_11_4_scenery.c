@@ -8,7 +8,7 @@ s32 N(TrackSections)[NUM_SECTIONS] = {
     MODEL_field_c,
     MODEL_field_d,
     MODEL_field_e,
-    MODEL_field_f, 
+    MODEL_field_f,
 };
 
 s32 N(SectionOffsets)[][NUM_SECTIONS + 1] = {
@@ -31,18 +31,18 @@ s32 N(SectionOffsets)[][NUM_SECTIONS + 1] = {
 API_CALLABLE(N(GetSectionPosOffsets)) {
     s32 value = script->varTable[0];
     s32 index, i;
-    
+
     for (i = 0; i < ARRAY_COUNT(N(SectionOffsets)); i++) {
         if (value < N(SectionOffsets)[i][0]) {
             break;
         }
     }
     index = i - 1;
-    
+
     for (i = 0; i < NUM_SECTIONS; i++) {
         script->varTable[i + 5] = N(SectionOffsets)[index][i + 1];
     }
-    
+
     return ApiStatus_DONE2;
 }
 

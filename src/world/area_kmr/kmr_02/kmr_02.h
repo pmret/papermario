@@ -48,7 +48,7 @@ enum {
 #endif
 };
 
-enum {  
+enum {
     MF_SpawnFlag_BushCoin   = MapFlag(10),
     MF_SpawnFlag_Goomnut    = MapFlag(11),
 };

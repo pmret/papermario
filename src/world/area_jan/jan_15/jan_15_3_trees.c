@@ -30,7 +30,7 @@ FoliageModelList N(Tree2_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o65, MODEL_o66,
 FoliageModelList N(Tree2_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o64);
 
 FoliageDropList N(Tree2_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_COIN,

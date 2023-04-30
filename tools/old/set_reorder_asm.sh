@@ -5,6 +5,6 @@ shopt -s globstar
 LIST=$(ls asm/**/*.s)
 
 for i in $LIST
-do	
+do
 	printf "\n.set reorder\n" >> $i
 done

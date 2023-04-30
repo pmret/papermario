@@ -45,7 +45,7 @@ API_CALLABLE(N(BulletBillAI_Main)) {
     Npc* blasterNpc;
     f32 nextX, nextZ;
     f32 deltaY;
-    
+
     if (isInitialCall || enemy->VAR_PROJECTILE_HITBOX_STATE == PROJECTILE_HITBOX_STATE_DONE) {
         script->AI_TEMP_STATE = AI_STATE_BULLET_INIT;
         npc->duration = 0;
@@ -55,7 +55,7 @@ API_CALLABLE(N(BulletBillAI_Main)) {
         enemy->VAR_PROJECTILE_HITBOX_STATE = PROJECTILE_HITBOX_STATE_NONE;
         enemy->AI_VAR_BULLET_BLASTER = -1;
     }
-    
+
     if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
         if (enemy->aiSuspendTime != 0) {
             return 0;
@@ -158,7 +158,7 @@ API_CALLABLE(N(BillBlasterAI_Main)) {
     s32 bulletNpcID;
     Enemy* bulletEnemy;
     f32 deltaY;
-    
+
     if (isInitialCall) {
         script->AI_TEMP_STATE = AI_STATE_BLASTER_INIT;
         npc->duration = 30;
@@ -166,20 +166,20 @@ API_CALLABLE(N(BillBlasterAI_Main)) {
         enemy->flags |= ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN;
         disable_npc_shadow(npc);
     }
-    
+
     deltaY = npc->pos.y - gPlayerStatusPtr->position.y;
     if ((deltaY > 190.0) || (deltaY < -80.0)) {
         return ApiStatus_BLOCK;
     }
-    
+
     if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
         npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         if (enemy->aiSuspendTime != 0) {
             return ApiStatus_BLOCK;
-        } 
+        }
         enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
     }
-    
+
     switch (script->AI_TEMP_STATE) {
         case AI_STATE_BLASTER_INIT:
             npc->duration--;
@@ -210,7 +210,7 @@ API_CALLABLE(N(BillBlasterAI_Main)) {
             }
             npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
             bulletEnemy = get_enemy(enemy->AI_VAR_BLASTER_BULLET);
-            bulletEnemy->VAR_PROJECTILE_HITBOX_STATE = PROJECTILE_HITBOX_STATE_PRE;            
+            bulletEnemy->VAR_PROJECTILE_HITBOX_STATE = PROJECTILE_HITBOX_STATE_PRE;
             ai_enemy_play_sound(npc, SOUND_328, SOUND_PARAM_MORE_QUIET);
             npc->duration = 5;
             script->AI_TEMP_STATE = AI_STATE_BLASTER_COOLDOWN;

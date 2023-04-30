@@ -19,7 +19,7 @@ SearchBushConfig N(SearchBush_Bush1) = {
 FoliageModelList N(Bush2_BushModels) = FOLIAGE_MODEL_LIST(MODEL_kusa2);
 
 FoliageDropList N(Bush2_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_COIN,
@@ -62,7 +62,7 @@ FoliageModelList N(Tree1_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_midori);
 FoliageModelList N(Tree1_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_kiki);
 
 FoliageDropList N(Tree1_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_GOOMNUT,

@@ -220,7 +220,7 @@ Vec3i N(GeyserSoundPositions)[] = {
     { -400 + POS_2_I * BLOCK_GRID_SIZE + (BLOCK_GRID_SIZE / 2), 0, -150 + POS_2_J * BLOCK_GRID_SIZE + (BLOCK_GRID_SIZE / 2) },
     { -400 + POS_3_I * BLOCK_GRID_SIZE + (BLOCK_GRID_SIZE / 2), 0, -150 + POS_3_J * BLOCK_GRID_SIZE + (BLOCK_GRID_SIZE / 2) },
     { -400 + POS_4_I * BLOCK_GRID_SIZE + (BLOCK_GRID_SIZE / 2), 0, -150 + POS_4_J * BLOCK_GRID_SIZE + (BLOCK_GRID_SIZE / 2) },
-    {   37, 0, -138 }, 
+    {   37, 0, -138 },
 };
 
 EvtScript N(EVS_ManageGeyserSounds) = {

@@ -8,7 +8,7 @@ BSS f32 D_802B6770_E27C80;
 void action_update_ride(void) {
     PartnerStatus* partnerStatus = &gPartnerStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
-    
+
     if (playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~(PS_FLAG_ACTION_STATE_CHANGED | PS_FLAG_ARMS_RAISED | PS_FLAG_AIRBORNE);
         playerStatus->actionSubstate = 0;

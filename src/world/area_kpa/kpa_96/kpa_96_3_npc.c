@@ -8,7 +8,7 @@ s32 N(ShopMessages)[] = {
     [SHOP_MSG_GREETING         ] MSG_Shop_04_KPA96,
     [SHOP_MSG_INSTRUCTIONS     ] MSG_Shop_05_KPA96,
     [SHOP_MSG_NOTHING_TO_SELL  ] MSG_Shop_06_KPA96,
-    [SHOP_MSG_SELL_WHICH       ] MSG_Shop_07_KPA96, 
+    [SHOP_MSG_SELL_WHICH       ] MSG_Shop_07_KPA96,
     [SHOP_MSG_SELL_CONFIRM     ] MSG_Shop_08_KPA96,
     [SHOP_MSG_SELL_CANCEL      ] MSG_Shop_09_KPA96,
     [SHOP_MSG_SELL_MORE        ] MSG_Shop_0A_KPA96,
@@ -16,14 +16,14 @@ s32 N(ShopMessages)[] = {
     [SHOP_MSG_NOTHING_TO_CHECK ] MSG_Shop_0C_KPA96,
     [SHOP_MSG_NO_CHECK_ROOM    ] MSG_Shop_0D_KPA96,
     [SHOP_MSG_CHECK_WHICH      ] MSG_Shop_0E_KPA96,
-    [SHOP_MSG_CHECK_ACCEPTED   ] MSG_Shop_0F_KPA96, 
+    [SHOP_MSG_CHECK_ACCEPTED   ] MSG_Shop_0F_KPA96,
     [SHOP_MSG_CHECK_MORE       ] MSG_Shop_10_KPA96,
     [SHOP_MSG_NOTHING_TO_CLAIM ] MSG_Shop_11_KPA96,
     [SHOP_MSG_NO_CLAIM_ROOM    ] MSG_Shop_12_KPA96,
     [SHOP_MSG_CLAIM_WHICH      ] MSG_Shop_13_KPA96,
     [SHOP_MSG_CLAIM_ACCEPTED   ] MSG_Shop_14_KPA96,
     [SHOP_MSG_CLAIM_MORE       ] MSG_Shop_15_KPA96,
-    [SHOP_MSG_FAREWELL         ] MSG_Shop_16_KPA96, 
+    [SHOP_MSG_FAREWELL         ] MSG_Shop_16_KPA96,
 };
 
 ShopItemData N(Inventory)[] = {
@@ -37,14 +37,14 @@ ShopItemData N(Inventory)[] = {
 };
 
 ShopSellPriceData N(PriceList)[] = {
-    { .itemID = ITEM_FRIGHT_JAR,    .sellPrice = 15 }, 
-    { .itemID = ITEM_EGG_MISSILE,   .sellPrice = 30 }, 
-    { .itemID = ITEM_PEBBLE,        .sellPrice = 20 }, 
-    { .itemID = ITEM_MISTAKE,       .sellPrice = 20 }, 
-    { .itemID = ITEM_LIFE_SHROOM,   .sellPrice = 25 }, 
-    { .itemID = ITEM_SHOOTING_STAR, .sellPrice = 20 }, 
-    { .itemID = ITEM_SUPER_SODA,    .sellPrice = 10 }, 
-    { .itemID = ITEM_STOP_WATCH,    .sellPrice = 20 }, 
+    { .itemID = ITEM_FRIGHT_JAR,    .sellPrice = 15 },
+    { .itemID = ITEM_EGG_MISSILE,   .sellPrice = 30 },
+    { .itemID = ITEM_PEBBLE,        .sellPrice = 20 },
+    { .itemID = ITEM_MISTAKE,       .sellPrice = 20 },
+    { .itemID = ITEM_LIFE_SHROOM,   .sellPrice = 25 },
+    { .itemID = ITEM_SHOOTING_STAR, .sellPrice = 20 },
+    { .itemID = ITEM_SUPER_SODA,    .sellPrice = 10 },
+    { .itemID = ITEM_STOP_WATCH,    .sellPrice = 20 },
     {}
 };
 
@@ -60,12 +60,12 @@ EvtScript N(EVS_OnBuy) = {
 };
 
 ShopItemLocation N(ItemPositions)[] = {
-    { .posModelID = MODEL_o831, .triggerColliderID = COLLIDER_o865 }, 
-    { .posModelID = MODEL_o832, .triggerColliderID = COLLIDER_o864 }, 
-    { .posModelID = MODEL_o833, .triggerColliderID = COLLIDER_o863 }, 
-    { .posModelID = MODEL_o834, .triggerColliderID = COLLIDER_o862 }, 
-    { .posModelID = MODEL_o835, .triggerColliderID = COLLIDER_o861 }, 
-    { .posModelID = MODEL_o836, .triggerColliderID = COLLIDER_o860 }, 
+    { .posModelID = MODEL_o831, .triggerColliderID = COLLIDER_o865 },
+    { .posModelID = MODEL_o832, .triggerColliderID = COLLIDER_o864 },
+    { .posModelID = MODEL_o833, .triggerColliderID = COLLIDER_o863 },
+    { .posModelID = MODEL_o834, .triggerColliderID = COLLIDER_o862 },
+    { .posModelID = MODEL_o835, .triggerColliderID = COLLIDER_o861 },
+    { .posModelID = MODEL_o836, .triggerColliderID = COLLIDER_o860 },
 };
 
 ShopOwner N(Owner) = {

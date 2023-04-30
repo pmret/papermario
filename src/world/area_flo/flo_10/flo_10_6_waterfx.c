@@ -3,7 +3,7 @@
 #include "model.h"
 
 s32 N(WavePhase) = {
-    0 
+    0
 };
 
 // unused wavy distortion effect for edge water -- unclear how it would have been used

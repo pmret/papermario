@@ -441,7 +441,7 @@ void pause_stats_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
             break;
         }
     }
-    
+
     // get number of total power increments
     powFullBars = playerData->maxStarPower;
     powIncrements = 8 * powFullBars;
@@ -530,7 +530,7 @@ void pause_stats_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
                 hud_element_draw_next(powHudElemID);
             }
             powIncIdx++;
-            
+
             if (curIncrement >= powIncrements) {
                 break;
             }
