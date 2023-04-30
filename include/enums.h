@@ -4128,6 +4128,14 @@ enum HazardType {
     HAZARD_TYPE_FIRE_BAR    = 3,
 };
 
+enum DamageIntensityRange {
+    DAMAGE_INTENSITY_LIGHT      = 0,    // 0-3
+    DAMAGE_INTENSITY_MEDIUM     = 1,    // 4-6
+    DAMAGE_INTENSITY_HEAVY      = 2,    // 7-9
+    DAMAGE_INTENSITY_EXTREME    = 3,    // 10+
+    DAMAGE_INTENSITY_UNUSED     = 4,    // unused
+};
+
 enum EffectGfxDataFlags {
     FX_GRAPHICS_DISABLED                = 0x00000000,
     FX_GRAPHICS_ENABLED                 = 0x00000001,

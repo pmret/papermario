@@ -4,17 +4,17 @@
 #include "script_api/battle.h"
 
 extern EvtScript EVS_Help_NormalDamageReaction;
-extern EvtScript D_8029B818;
+extern EvtScript EVS_Help_SpinSelfActor;
 
 ApiStatus GetDamageIntensity(Evt* script, s32 isInitialCall) {
     if (gBattleStatus.lastAttackDamage < 4) {
-        script->varTable[0] = 0;
+        script->varTable[0] = DAMAGE_INTENSITY_LIGHT;
     } else if (gBattleStatus.lastAttackDamage < 7) {
-        script->varTable[0] = 1;
+        script->varTable[0] = DAMAGE_INTENSITY_MEDIUM;
     } else if (gBattleStatus.lastAttackDamage < 10) {
-        script->varTable[0] = 2;
+        script->varTable[0] = DAMAGE_INTENSITY_HEAVY;
     } else {
-        script->varTable[0] = 3;
+        script->varTable[0] = DAMAGE_INTENSITY_EXTREME;
     }
     return ApiStatus_DONE2;
 }
@@ -413,7 +413,7 @@ EvtScript DoPartnerBurn = {
     EVT_END_CHILD_THREAD
     EVT_CALL(GetDamageIntensity)
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(DAMAGE_INTENSITY_LIGHT)
             EVT_CALL(StartRumble, 3)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 1, 0)
             EVT_WAIT(1)
@@ -443,7 +443,7 @@ EvtScript DoPartnerBurn = {
             EVT_END_LOOP
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
             EVT_WAIT(10)
-        EVT_CASE_EQ(1)
+        EVT_CASE_EQ(DAMAGE_INTENSITY_MEDIUM)
             EVT_CALL(StartRumble, 3)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 1, 0)
             EVT_WAIT(1)
@@ -473,7 +473,7 @@ EvtScript DoPartnerBurn = {
             EVT_END_LOOP
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
             EVT_WAIT(10)
-        EVT_CASE_EQ(2)
+        EVT_CASE_EQ(DAMAGE_INTENSITY_HEAVY)
             EVT_CALL(StartRumble, 4)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 1, 0)
             EVT_WAIT(1)
@@ -503,7 +503,7 @@ EvtScript DoPartnerBurn = {
             EVT_END_LOOP
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
             EVT_WAIT(10)
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(DAMAGE_INTENSITY_EXTREME)
             EVT_CALL(StartRumble, 5)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 3, 0)
             EVT_WAIT(1)
@@ -550,7 +550,7 @@ EvtScript D_80296C8C = {
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, LVar1)
     EVT_CALL(GetDamageIntensity)
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(DAMAGE_INTENSITY_LIGHT)
             EVT_CALL(StartRumble, 3)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 1, 0)
             EVT_WAIT(1)
@@ -580,7 +580,7 @@ EvtScript D_80296C8C = {
             EVT_END_LOOP
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
             EVT_WAIT(10)
-        EVT_CASE_EQ(1)
+        EVT_CASE_EQ(DAMAGE_INTENSITY_MEDIUM)
             EVT_CALL(StartRumble, 3)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 1, 0)
             EVT_WAIT(1)
@@ -610,7 +610,7 @@ EvtScript D_80296C8C = {
             EVT_END_LOOP
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
             EVT_WAIT(10)
-        EVT_CASE_EQ(2)
+        EVT_CASE_EQ(DAMAGE_INTENSITY_HEAVY)
             EVT_CALL(StartRumble, 4)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 1, 0)
             EVT_WAIT(1)
@@ -640,7 +640,7 @@ EvtScript D_80296C8C = {
             EVT_END_LOOP
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
             EVT_WAIT(10)
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(DAMAGE_INTENSITY_EXTREME)
             EVT_CALL(StartRumble, 5)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 3, 0)
             EVT_WAIT(1)
@@ -769,7 +769,7 @@ EvtScript EVS_Help_OnPlayerDefaultHit = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, LVar1)
     EVT_CALL(GetDamageIntensity)
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(DAMAGE_INTENSITY_LIGHT)
             EVT_CALL(StartRumble, 3)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 1, 0)
             EVT_WAIT(1)
@@ -799,7 +799,7 @@ EvtScript EVS_Help_OnPlayerDefaultHit = {
             EVT_END_LOOP
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
             EVT_WAIT(10)
-        EVT_CASE_EQ(1)
+        EVT_CASE_EQ(DAMAGE_INTENSITY_MEDIUM)
             EVT_CALL(StartRumble, 3)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 1, 0)
             EVT_WAIT(1)
@@ -829,7 +829,7 @@ EvtScript EVS_Help_OnPlayerDefaultHit = {
             EVT_END_LOOP
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
             EVT_WAIT(10)
-        EVT_CASE_EQ(2)
+        EVT_CASE_EQ(DAMAGE_INTENSITY_HEAVY)
             EVT_CALL(StartRumble, 4)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 1, 0)
             EVT_WAIT(1)
@@ -859,7 +859,7 @@ EvtScript EVS_Help_OnPlayerDefaultHit = {
             EVT_END_LOOP
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
             EVT_WAIT(10)
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(DAMAGE_INTENSITY_EXTREME)
             EVT_CALL(StartRumble, 5)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 3, 0)
             EVT_WAIT(1)
@@ -1276,10 +1276,10 @@ EvtScript EVS_DoNormalHit = {
             EVT_WAIT(60)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(DMG_SRC_SPOOK)
-            EVT_SET(LVar0, 3)
+            EVT_SET(LVar0, DAMAGE_INTENSITY_EXTREME)
             EVT_EXEC_WAIT(EVS_Help_NormalDamageReaction)
         EVT_CASE_EQ(DMG_SRC_SPIN_SMASH)
-            EVT_EXEC_GET_TID(D_8029B818, LVarE)
+            EVT_EXEC_GET_TID(EVS_Help_SpinSelfActor, LVarE)
             EVT_CALL(GetDamageIntensity)
             EVT_EXEC_WAIT(EVS_Help_NormalDamageReaction)
             EVT_LABEL(2)
@@ -1791,16 +1791,16 @@ EvtScript D_8029B494 = {
     EVT_END
 };
 
-EvtScript D_8029B818 = {
+EvtScript EVS_Help_SpinSelfActor = {
     EVT_SET(LVar0, 0)
     EVT_LABEL(0)
-    EVT_SUB(LVar0, 30)
-    EVT_IF_LT(LVar0, 0)
-        EVT_ADD(LVar0, 360)
-    EVT_END_IF
-    EVT_CALL(SetActorYaw, ACTOR_SELF, LVar0)
-    EVT_WAIT(1)
-    EVT_GOTO(0)
+        EVT_SUB(LVar0, 30)
+        EVT_IF_LT(LVar0, 0)
+            EVT_ADD(LVar0, 360)
+        EVT_END_IF
+        EVT_CALL(SetActorYaw, ACTOR_SELF, LVar0)
+        EVT_WAIT(1)
+        EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
@@ -1827,7 +1827,7 @@ EvtScript D_8029B8A8 = {
 };
 
 EvtScript DoSpinSmashHit = {
-    EVT_EXEC_GET_TID(D_8029B818, LVarE)
+    EVT_EXEC_GET_TID(EVS_Help_SpinSelfActor, LVarE)
     EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
     EVT_CALL(GetPartEventFlags, ACTOR_SELF, LVar0, LVarA)
     EVT_EXEC_WAIT(D_8029B494)
