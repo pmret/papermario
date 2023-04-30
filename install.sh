@@ -72,7 +72,7 @@ if cat /etc/os-release | grep -E ID=fedora &> /dev/null; then
 
     if [[ $1 == "--extra" ]]; then
         echo "Installing extra"
-        ${SUDO} dnf install -y clang-tidy astyle doxygen || exit 1
+        ${SUDO} dnf install -y clang-tools-extra astyle doxygen || exit 1
         python3 -m pip install -U -r requirements_extra.txt || exit 1
     fi
 fi
