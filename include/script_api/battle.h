@@ -372,7 +372,6 @@ extern EvtScript EVS_Partner_Celebrate;
 extern EvtScript EVS_Enemy_NoDamageHit;
 extern EvtScript EVS_Enemy_Death;
 extern EvtScript EVS_Enemy_DeathWithoutRemove;
-extern EvtScript Collapse;
 extern EvtScript EVS_Enemy_ScareAway;
 extern EvtScript EVS_Enemy_SpinSmashHit;
 extern EvtScript EVS_Enemy_FlipBackUp;

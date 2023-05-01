@@ -11,7 +11,7 @@
 extern HudScript HES_Happy;
 extern HudScript HES_HPDrain;
 
-extern EvtScript EVS_PlayerCelebrate;
+extern EvtScript EVS_Player_Celebrate;
 extern EvtScript EVS_Player_SimpleHit;
 extern EvtScript EVS_Player_ComplexHit;
 extern EvtScript EVS_Player_NoDamageHit;
@@ -52,7 +52,7 @@ API_CALLABLE(IsPartnerImmobile) {
                      || playerActor->debuff == STATUS_FROZEN
                      || playerActor->debuff == STATUS_STOP;
 
-    if (playerActor->stoneStatus == 12) {
+    if (playerActor->stoneStatus == STATUS_STONE) {
         isImmobile = TRUE;
     }
 
@@ -736,7 +736,7 @@ EvtScript EVS_Mario_HandlePhase = {
         EVT_CASE_EQ(PHASE_FIRST_STRIKE)
             EVT_EXEC_WAIT(EVS_PlayerFirstStrike)
         EVT_CASE_EQ(PHASE_CELEBRATE)
-            EVT_EXEC_WAIT(EVS_PlayerCelebrate)
+            EVT_EXEC_WAIT(EVS_Player_Celebrate)
         EVT_CASE_EQ(PHASE_RUN_AWAY_START)
             EVT_EXEC_WAIT(EVS_RunAwayStart)
         EVT_CASE_EQ(PHASE_RUN_AWAY_FAIL)
@@ -1038,7 +1038,7 @@ EvtScript EVS_Player_HandleEvent = {
     EVT_END
 };
 
-EvtScript EVS_PlayerCelebrate = {
+EvtScript EVS_Player_Celebrate = {
     EVT_SET(LVar0, 0)
     EVT_LOOP(5)
         EVT_ADD(LVar0, 72)
@@ -1067,21 +1067,21 @@ EvtScript EVS_RunAwayNoCommand = {
     EVT_WAIT(1)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 180)
     EVT_WAIT(5)
-    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_CALL(AddActorPos, ACTOR_PLAYER, 2, 0, 0)
     EVT_WAIT(2)
-    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_CALL(AddActorPos, ACTOR_PLAYER, 2, 0, 0)
     EVT_WAIT(5)
-    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_CALL(AddActorPos, ACTOR_PLAYER, 2, 0, 0)
     EVT_WAIT(2)
-    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_CALL(AddActorPos, ACTOR_PLAYER, 2, 0, 0)
     EVT_WAIT(2)
-    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_CALL(AddActorPos, ACTOR_PLAYER, 2, 0, 0)
     EVT_WAIT(5)
-    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_CALL(AddActorPos, ACTOR_PLAYER, 2, 0, 0)
     EVT_WAIT(2)
-    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_CALL(AddActorPos, ACTOR_PLAYER, 2, 0, 0)
     EVT_WAIT(5)
-    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_CALL(AddActorPos, ACTOR_PLAYER, 2, 0, 0)
     EVT_WAIT(15)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(1.8))
@@ -1179,21 +1179,21 @@ EvtScript EVS_RunAwayStart = {
     EVT_CALL(action_command_flee_start, 0, 60, 3)
     EVT_CALL(func_80260E5C)
     EVT_WAIT(5)
-    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_CALL(AddActorPos, ACTOR_PLAYER, 2, 0, 0)
     EVT_WAIT(2)
-    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_CALL(AddActorPos, ACTOR_PLAYER, 2, 0, 0)
     EVT_WAIT(5)
-    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_CALL(AddActorPos, ACTOR_PLAYER, 2, 0, 0)
     EVT_WAIT(2)
-    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_CALL(AddActorPos, ACTOR_PLAYER, 2, 0, 0)
     EVT_WAIT(2)
-    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_CALL(AddActorPos, ACTOR_PLAYER, 2, 0, 0)
     EVT_WAIT(5)
-    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_CALL(AddActorPos, ACTOR_PLAYER, 2, 0, 0)
     EVT_WAIT(2)
-    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_CALL(AddActorPos, ACTOR_PLAYER, 2, 0, 0)
     EVT_WAIT(5)
-    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_CALL(AddActorPos, ACTOR_PLAYER, 2, 0, 0)
     EVT_WAIT(15)
     EVT_WAIT(30)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -1794,7 +1794,6 @@ EvtScript EVS_ApplyDizzyAttack = {
     EVT_RETURN
     EVT_END
 };
-
 
 EvtScript EVS_PlayerRegainAbility = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
