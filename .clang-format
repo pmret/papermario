@@ -20,6 +20,8 @@ BraceWrapping:
   #  {
   AfterControlStatement: MultiLine
 
+IndentCaseLabels: true
+
 BreakBeforeBinaryOperators: NonAssignment
 
 ExperimentalAutoDetectBinPacking: true
