@@ -21,13 +21,12 @@ SaveData D_80096A90;
 SaveData D_80097E10;
 
 int func_8002ADC0(void) {
-    u32 i;
-    s32* it = (s32*)&gCurrentSaveFile;
+    u32  i;
+    s32* it  = (s32*)&gCurrentSaveFile;
     s32* it2 = (s32*)&D_80096A90;
 
-
     for (i = 0; i < (sizeof(SaveData) / 4); i++, it++, it2++) {
-        if(*it!=*it2) {
+        if (*it != *it2) {
             return 1;
         }
     }
@@ -36,13 +35,12 @@ int func_8002ADC0(void) {
 }
 
 int func_8002AE04(void) {
-    u32 i;
-    s32* it = (s32*)&D_80096A90;
+    u32  i;
+    s32* it  = (s32*)&D_80096A90;
     s32* it2 = (s32*)&D_80097E10;
 
-
     for (i = 0; i < (sizeof(SaveData) / 4); i++, it++, it2++) {
-        if(*it!=*it2) {
+        if (*it != *it2) {
             return 1;
         }
     }

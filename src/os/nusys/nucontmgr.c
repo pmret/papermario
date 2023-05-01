@@ -13,11 +13,11 @@ NOP_FIX
 #define DO_STATIC static
 #endif
 
-DO_STATIC s32 contRetrace(NUSiCommonMesg* mesg);
-DO_STATIC s32 contRead(NUSiCommonMesg* mesg);
-DO_STATIC s32 contReadNW(NUSiCommonMesg* mesg);
+DO_STATIC s32           contRetrace(NUSiCommonMesg* mesg);
+DO_STATIC s32           contRead(NUSiCommonMesg* mesg);
+DO_STATIC s32           contReadNW(NUSiCommonMesg* mesg);
 DO_STATIC DO_INLINE s32 contReadData(OSContPad* pad, u32 lockflag);
-DO_STATIC s32 contQuery(NUSiCommonMesg* mesg);
+DO_STATIC s32           contQuery(NUSiCommonMesg* mesg);
 
 NUContReadFunc nuContReadFunc = NULL;
 

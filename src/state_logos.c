@@ -15,7 +15,6 @@ void appendGfx_intro_logos(void);
 #define LOGO_2_Y 59
 #endif
 
-
 #if !VERSION_PAL
 s32 D_800778C0[] = { 0, 0 };
 

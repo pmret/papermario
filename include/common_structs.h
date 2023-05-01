@@ -2039,8 +2039,8 @@ typedef struct SaveDataHeader {
     /* 0x0034 */ s32 crc2;
     /* 0x0038 */ s32 saveSlot;
     /* 0x003C */ u32 saveCount;
-    /* 0x0040 */ u32 language;
-    /* 0x0044 */ s8 ignored[0x3C];
+    /* 0x0040 */ u32  language;
+    /* 0x0044 */ s8   ignored[0x3C];
 } SaveDataHeader;
 
 typedef struct SaveMetadata {
@@ -2214,7 +2214,7 @@ typedef struct {
     /* 0x00020 */ Hilite hilite;
     /* 0x00030 */ Mtx camPerspMatrix[8]; // could only be length 4, unsure
     /* 0x00230 */ Gfx mainGfx[DISPLAYCONTEXT_GFX_COUNT];
-    /* 0x10630 */ Gfx backgroundGfx[0x200]; // used by gfx_task_background
+    /* 0x10630 */ Gfx    backgroundGfx[0x200]; // used by gfx_task_background
     /* 0x11630 */ Mtx matrixStack[0x200];
 } DisplayContext; // size = 0x19630
 

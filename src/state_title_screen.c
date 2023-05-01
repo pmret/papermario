@@ -95,10 +95,10 @@ extern s16 D_800A0988;
 #if VERSION_PAL
 extern void* D_PAL_8009F0E8;
 extern void* D_PAL_8009F0EC;
-extern int D_PAL_8009F0F4;
-extern int D_PAL_8009F0F8;
-extern s32 gCurrentLanguage;
-extern u32* press_start_buffer;
+extern int   D_PAL_8009F0F4;
+extern int   D_PAL_8009F0F8;
+extern s32   gCurrentLanguage;
+extern u32*  press_start_buffer;
 #endif
 
 #if VERSION_PAL
@@ -167,10 +167,10 @@ void state_init_title_screen(void) {
 #endif
 
 #if VERSION_PAL
-    press_start_buffer = (u32*) heap_malloc((s32) press_start_DATA_SIZE);
+    press_start_buffer = (u32*)heap_malloc((s32)press_start_DATA_SIZE);
     dma_copy(press_start_ROM_START, press_start_ROM_END, press_start_buffer);
-    D_PAL_8009F0E8 = (void*) (press_start_buffer[gCurrentLanguage * 2] + (s32) press_start_buffer);
-    D_PAL_8009F0EC = (void*) (press_start_buffer[gCurrentLanguage * 2 + 1] + (s32) press_start_buffer);
+    D_PAL_8009F0E8 = (void*)(press_start_buffer[gCurrentLanguage * 2] + (s32)press_start_buffer);
+    D_PAL_8009F0EC = (void*)(press_start_buffer[gCurrentLanguage * 2 + 1] + (s32)press_start_buffer);
 #endif
 
     create_cameras_a();
@@ -220,7 +220,7 @@ void state_init_title_screen(void) {
 }
 
 void state_step_title_screen(void) {
-    int mask;
+    int  mask;
     s16* temp;
     u32 pressedButtons = gGameStatusPtr->pressedButtons[0];
 
@@ -524,7 +524,7 @@ void title_screen_draw_press_start(void) {
         case 0:
             TitleScreen_PressStart_Alpha += 80;
             if (TitleScreen_PressStart_Alpha > 255) {
-                TitleScreen_PressStart_Alpha = 255;
+                TitleScreen_PressStart_Alpha     = 255;
                 TitleScreen_PressStart_IsVisible = 1;
             }
             // fallthrough
@@ -568,21 +568,17 @@ void title_screen_draw_press_start(void) {
 
     gSPDisplayList(gMainGfxPos++, D_80077A50);
     gDPSetCombineMode(gMainGfxPos++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
-    gDPSetPrimColor(gMainGfxPos++, 0, 0, 248, 240, 152, D_PAL_8009F0F4)
-    gDPPipeSync(gMainGfxPos++);
+    gDPSetPrimColor(gMainGfxPos++, 0, 0, 248, 240, 152, D_PAL_8009F0F4) gDPPipeSync(gMainGfxPos++);
 
     gDPLoadTextureBlock(
         gMainGfxPos++, D_PAL_8009F0E8, G_IM_FMT_IA, G_IM_SIZ_8b, D_PAL_80073E38[gCurrentLanguage], 16, 0,
-        G_TX_NOMIRROR | G_TX_WRAP,G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD
+        G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD
     );
 
     gSPTextureRectangle(
-        gMainGfxPos++,
-        (D_PAL_80073E58[gCurrentLanguage] * 4),
-        0x0254,
-        ((D_PAL_80073E58[gCurrentLanguage] + D_PAL_80073E38[gCurrentLanguage]) * 4),
-        0x0294,
-        G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400
+        gMainGfxPos++, (D_PAL_80073E58[gCurrentLanguage] * 4), 0x0254,
+        ((D_PAL_80073E58[gCurrentLanguage] + D_PAL_80073E38[gCurrentLanguage]) * 4), 0x0294, G_TX_RENDERTILE, 0, 0,
+        0x0400, 0x0400
     );
 
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 248, 240, 152, D_PAL_8009F0F8);
@@ -590,16 +586,13 @@ void title_screen_draw_press_start(void) {
 
     gDPLoadTextureBlock(
         gMainGfxPos++, D_PAL_8009F0EC, G_IM_FMT_IA, G_IM_SIZ_8b, D_PAL_80073E48[gCurrentLanguage], 16, 0,
-        G_TX_NOMIRROR | G_TX_WRAP,G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD
+        G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD
     );
 
     gSPTextureRectangle(
-        gMainGfxPos++,
-        D_PAL_80073E68[gCurrentLanguage] * 4,
-        0x02A4,
-        ((D_PAL_80073E68[gCurrentLanguage] + D_PAL_80073E48[gCurrentLanguage]) * 4),
-        0x02E4,
-        G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400
+        gMainGfxPos++, D_PAL_80073E68[gCurrentLanguage] * 4, 0x02A4,
+        ((D_PAL_80073E68[gCurrentLanguage] + D_PAL_80073E48[gCurrentLanguage]) * 4), 0x02E4, G_TX_RENDERTILE, 0, 0,
+        0x0400, 0x0400
     );
 
     gDPPipeSync(gMainGfxPos++);

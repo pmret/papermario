@@ -1317,7 +1317,6 @@ void enable_status_icon_peril(s32 iconID) {
     statusIcon->flags |= STATUS_ICON_FLAG_PERIL;
 }
 
-
 #if VERSION_PAL
 INCLUDE_ASM(void, "status_icons", create_status_icon_danger)
 #else

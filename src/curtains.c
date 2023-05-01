@@ -11,7 +11,7 @@
 #include "theater/walls.png.inc.c"
 
 #if VERSION_PAL
-#define ui_no_controller_png_width 128
+#define ui_no_controller_png_width  128
 #define ui_no_controller_png_height 32
 #endif
 

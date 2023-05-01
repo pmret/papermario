@@ -43,13 +43,13 @@ typedef u8* WaveData;
 #define AUDIO_SAMPLES   184
 
 #ifdef VERSION_PAL
-#define AUDIO_SAMPLES_2 (AUDIO_SAMPLES * 2)
+#define AUDIO_SAMPLES_2                (AUDIO_SAMPLES * 2)
 #define AUDIO_COMMAND_LIST_BUFFER_SIZE 0x5558
-#define AUDIO_HEAP_SIZE 0x5B000
+#define AUDIO_HEAP_SIZE                0x5B000
 #else
-#define AUDIO_SAMPLES_2 (AUDIO_SAMPLES)
+#define AUDIO_SAMPLES_2                (AUDIO_SAMPLES)
 #define AUDIO_COMMAND_LIST_BUFFER_SIZE 0x4000
-#define AUDIO_HEAP_SIZE 0x56000
+#define AUDIO_HEAP_SIZE                0x56000
 #endif
 
 #define ADPCMFBYTES     9

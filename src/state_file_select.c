@@ -51,31 +51,31 @@ void state_init_language_select(void) {
     hud_element_set_aux_cache(0, 0);
     hud_element_clear_cache();
     load_model_textures(0, 0, 0);
-    gCameras[CAM_DEFAULT].updateMode = 6;
-    gCameras[CAM_DEFAULT].needsInit = 1;
-    gCameras[CAM_DEFAULT].nearClip = 16;
-    gCameras[CAM_DEFAULT].farClip = 4096;
-    gCameras[CAM_DEFAULT].flags |= CAMERA_FLAG_DISABLED;
-    gCurrentCameraID = CAM_DEFAULT;
-    gCameras[CAM_BATTLE].flags |= CAMERA_FLAG_DISABLED;
-    gCameras[CAM_TATTLE].flags |= CAMERA_FLAG_DISABLED;
-    gCameras[CAM_3].flags |= CAMERA_FLAG_DISABLED;
-    gCameras[CAM_DEFAULT].vfov = 25.0f;
+    gCameras[CAM_DEFAULT].updateMode  = 6;
+    gCameras[CAM_DEFAULT].needsInit   = 1;
+    gCameras[CAM_DEFAULT].nearClip    = 16;
+    gCameras[CAM_DEFAULT].farClip     = 4096;
+    gCameras[CAM_DEFAULT].flags      |= CAMERA_FLAG_DISABLED;
+    gCurrentCameraID                  = CAM_DEFAULT;
+    gCameras[CAM_BATTLE].flags       |= CAMERA_FLAG_DISABLED;
+    gCameras[CAM_TATTLE].flags       |= CAMERA_FLAG_DISABLED;
+    gCameras[CAM_3].flags            |= CAMERA_FLAG_DISABLED;
+    gCameras[CAM_DEFAULT].vfov        = 25.0f;
     set_cam_viewport(0, 12, 28, 296, 184);
-    gCameras[CAM_DEFAULT].auxBoomLength = 40;
-    gCameras[CAM_DEFAULT].lookAt_eye.x = 500.0f;
-    gCameras[CAM_DEFAULT].lookAt_eye.y = 1000.0f;
-    gCameras[CAM_DEFAULT].lookAt_eye.z = 1500.0f;
-    gCameras[CAM_DEFAULT].lookAt_obj_target.z = 150.0f;
-    gCameras[CAM_DEFAULT].bgColor[0] = 0;
-    gCameras[CAM_DEFAULT].bgColor[1] = 0;
-    gCameras[CAM_DEFAULT].bgColor[2] = 0;
-    gCameras[CAM_DEFAULT].lookAt_obj_target.x = 25.0f;
-    gCameras[CAM_DEFAULT].lookAt_obj_target.y = 25.0f;
-    gCameras[CAM_DEFAULT].auxPitch = 0;
-    gCameras[CAM_DEFAULT].lookAt_dist = 100;
-    gCameras[CAM_DEFAULT].auxBoomPitch = 0;
-    gOverrideFlags |= GLOBAL_OVERRIDES_WINDOWS_IN_FRONT_OF_CURTAINS;
+    gCameras[CAM_DEFAULT].auxBoomLength        = 40;
+    gCameras[CAM_DEFAULT].lookAt_eye.x         = 500.0f;
+    gCameras[CAM_DEFAULT].lookAt_eye.y         = 1000.0f;
+    gCameras[CAM_DEFAULT].lookAt_eye.z         = 1500.0f;
+    gCameras[CAM_DEFAULT].lookAt_obj_target.z  = 150.0f;
+    gCameras[CAM_DEFAULT].bgColor[0]           = 0;
+    gCameras[CAM_DEFAULT].bgColor[1]           = 0;
+    gCameras[CAM_DEFAULT].bgColor[2]           = 0;
+    gCameras[CAM_DEFAULT].lookAt_obj_target.x  = 25.0f;
+    gCameras[CAM_DEFAULT].lookAt_obj_target.y  = 25.0f;
+    gCameras[CAM_DEFAULT].auxPitch             = 0;
+    gCameras[CAM_DEFAULT].lookAt_dist          = 100;
+    gCameras[CAM_DEFAULT].auxBoomPitch         = 0;
+    gOverrideFlags                            |= GLOBAL_OVERRIDES_WINDOWS_IN_FRONT_OF_CURTAINS;
 #else
     set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, D_800A0932[0]);
 #endif
@@ -145,8 +145,6 @@ void state_step_language_select(void) {
             filemenu_update();
             break;
     }
-
-
 
 #else
     switch (D_800A0931) {
@@ -276,9 +274,9 @@ void state_drawUI_file_select(void) {
 
 void state_init_exit_language_select(void) {
 #if VERSION_PAL
-    D_800A0931 = 0;
+    D_800A0931    = 0;
     D_800A0932[0] = 0;
-    D_800A0930 = 0;
+    D_800A0930    = 0;
     set_map_transition_effect(7);
 #else
     if (D_800A0932[0] > 0) {

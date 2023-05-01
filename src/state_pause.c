@@ -41,48 +41,20 @@ NUPiOverlaySegment D_8007795C = {
 #if VERSION_PAL
 
 NUPiOverlaySegment D_8007795C_0 = {
-        (void *) 0x001672D0,
-        (void *) 0x00169350,
-        (void *) 0x8027AA10,
-        (void *) 0x8027AA10,
-        (void *) 0x8027AA10,
-        (void *) 0x8027AA10,
-        (void *) 0x8027CA90,
-        (void *) 0x8027CA90,
-        (void *) 0x8027CA90,
+    (void*)0x001672D0, (void*)0x00169350, (void*)0x8027AA10, (void*)0x8027AA10, (void*)0x8027AA10,
+    (void*)0x8027AA10, (void*)0x8027CA90, (void*)0x8027CA90, (void*)0x8027CA90,
 };
 NUPiOverlaySegment D_8007795C_1 = {
-        (void *)  0x00169350,
-        (void *)  0x0016B3D0,
-        (void *)  0x8027AA10,
-        (void *)  0x8027AA10,
-        (void *)  0x8027AA10,
-        (void *)  0x8027AA10,
-        (void *)  0x8027CA90,
-        (void *)  0x8027CA90,
-        (void *)  0x8027CA90,
+    (void*)0x00169350, (void*)0x0016B3D0, (void*)0x8027AA10, (void*)0x8027AA10, (void*)0x8027AA10,
+    (void*)0x8027AA10, (void*)0x8027CA90, (void*)0x8027CA90, (void*)0x8027CA90,
 };
 NUPiOverlaySegment D_8007795C_2 = {
-        (void *)   0x0016B3D0,
-        (void *)   0x0016D450,
-        (void *)   0x8027AA10,
-        (void *)   0x8027AA10,
-        (void *)   0x8027AA10,
-        (void *)   0x8027AA10,
-        (void *)   0x8027CA90,
-        (void *)   0x8027CA90,
-        (void *)   0x8027CA90,
+    (void*)0x0016B3D0, (void*)0x0016D450, (void*)0x8027AA10, (void*)0x8027AA10, (void*)0x8027AA10,
+    (void*)0x8027AA10, (void*)0x8027CA90, (void*)0x8027CA90, (void*)0x8027CA90,
 };
 NUPiOverlaySegment D_8007795C_3 = {
-        (void *)   0x0016D450,
-        (void *)   0x0016F4D0,
-        (void *)   0x8027AA10,
-        (void *)   0x8027AA10,
-        (void *)   0x8027AA10,
-        (void *)   0x8027AA10,
-        (void *)   0x8027CA90,
-        (void *)   0x8027CA90,
-        (void *)   0x8027CA90,
+    (void*)0x0016D450, (void*)0x0016F4D0, (void*)0x8027AA10, (void*)0x8027AA10, (void*)0x8027AA10,
+    (void*)0x8027AA10, (void*)0x8027CA90, (void*)0x8027CA90, (void*)0x8027CA90,
 };
 
 #endif
@@ -152,7 +124,7 @@ void state_step_pause(void) {
                     bgm_quiet_max_volume();
                     nuPiReadRomOverlay(&D_8007795C);
 #if VERSION_PAL
-                    switch(gCurrentLanguage) {
+                    switch (gCurrentLanguage) {
                         case 0:
                             nuPiReadRomOverlay(&D_8007795C_0);
                             break;

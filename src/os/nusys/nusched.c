@@ -83,22 +83,22 @@ OSMesgQueue* nuScGetGfxMQ(void) {
 }
 
 void nuScEventHandler(void) {
-    OSMesg	msg;
-    s32		beforeResetFrame;
+    OSMesg msg;
+    s32    beforeResetFrame;
 
     nuScRetraceCounter = 0;
 
     while (TRUE) {
         osRecvMesg(&nusched.retraceMQ, &msg, OS_MESG_BLOCK);
 
-        switch ((s32) msg) {
+        switch ((s32)msg) {
             case 666:
                 nuScRetraceCounter++;
 
                 nuScEventBroadcast(&nusched.retraceMsg);
 
-                if (nuScPreNMIFlag){
-                    if (beforeResetFrame){
+                if (nuScPreNMIFlag) {
+                    if (beforeResetFrame) {
                         beforeResetFrame--;
                     } else {
                         nuScPreNMIFlag |= NU_SC_BEFORE_RESET;
@@ -112,7 +112,7 @@ void nuScEventHandler(void) {
                 nuScPreNMIFlag = NU_SC_PRENMI_GET;
                 nuScEventBroadcast(&nusched.prenmiMsg);
 
-                if (nuScPreNMIFunc != NULL){
+                if (nuScPreNMIFunc != NULL) {
                     (*nuScPreNMIFunc)();
                 }
 
@@ -129,8 +129,8 @@ void nuScAddClient(NUScClient* c, OSMesgQueue* mq, NUScMsg msgType) {
 
     mask = osSetIntMask(OS_IM_NONE);
 
-    c->msgQ = mq;
-    c->next = nusched.clientList;
+    c->msgQ    = mq;
+    c->next    = nusched.clientList;
     c->msgType = msgType;
 
     nusched.clientList = c;
@@ -145,15 +145,15 @@ void nuScAddClient(NUScClient* c, OSMesgQueue* mq, NUScMsg msgType) {
 void nuScResetClientMesgType(NUScClient* client, NUScMsg msgType) {
     s32 mask;
 
-    mask = osSetIntMask(OS_IM_NONE);
+    mask            = osSetIntMask(OS_IM_NONE);
     client->msgType = msgType;
     osSetIntMask(mask);
 }
 
 void nuScRemoveClient(NUScClient* client) {
-    s32 mask = osSetIntMask(OS_IM_NONE);
+    s32         mask       = osSetIntMask(OS_IM_NONE);
     NUScClient* clientList = nusched.clientList;
-    NUScClient* prev = NULL;
+    NUScClient* prev       = NULL;
 
     while (clientList != NULL) {
         if (clientList == client) {
@@ -164,7 +164,7 @@ void nuScRemoveClient(NUScClient* client) {
             }
             break;
         }
-        prev = clientList;
+        prev       = clientList;
         clientList = clientList->next;
     }
 
@@ -277,7 +277,7 @@ void nuScExecuteGraphics(void) {
 #if VERSION_PAL
 void nuScWaitTaskReady(NUScTask* task) {
     NUScClient client;
-    void* fb = task->framebuffer;
+    void*      fb = task->framebuffer;
 
     if (nusched.frameBufferNum == 1) {
         return;

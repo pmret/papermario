@@ -22,8 +22,8 @@ void nuContRmbMgrInit(void) {
     u32 i;
 
     for (i = 0; i < NU_CONT_MAXCONTROLLERS; i++) {
-        nuContRmbCtl[i].state = NU_CONT_RMB_STATE_STOPPED;
-        nuContRmbCtl[i].mode = NU_CONT_RMB_MODE_DISABLE;
+        nuContRmbCtl[i].state   = NU_CONT_RMB_STATE_STOPPED;
+        nuContRmbCtl[i].mode    = NU_CONT_RMB_MODE_DISABLE;
         nuContRmbCtl[i].counter = i;
     }
 
@@ -189,18 +189,18 @@ s32 contRmbForceStopEndMesg(NUSiCommonMesg* mesg) {
 
 #if VERSION_PAL
 s32 contRmbStartMesg(NUSiCommonMesg* mesg) {
-    NUContRmbMesg* rmbMesg = (NUContRmbMesg*) mesg->dataPtr;
-    NUContRmbCtl* rmbCtl = (NUContRmbCtl*) rmbMesg->data;
+    NUContRmbMesg* rmbMesg = (NUContRmbMesg*)mesg->dataPtr;
+    NUContRmbCtl*  rmbCtl  = (NUContRmbCtl*)rmbMesg->data;
 
-    nuContRmbCtl[rmbMesg->contNo].state = rmbCtl->state;
-    nuContRmbCtl[rmbMesg->contNo].frame = rmbCtl->frame;
-    nuContRmbCtl[rmbMesg->contNo].freq = rmbCtl->freq;
+    nuContRmbCtl[rmbMesg->contNo].state   = rmbCtl->state;
+    nuContRmbCtl[rmbMesg->contNo].frame   = rmbCtl->frame;
+    nuContRmbCtl[rmbMesg->contNo].freq    = rmbCtl->freq;
     nuContRmbCtl[rmbMesg->contNo].counter = 0;
     return 0;
 }
 
 s32 contRmbStopMesg(NUSiCommonMesg* mesg) {
-    NUContRmbMesg* rmbMesg = (NUContRmbMesg*) mesg->dataPtr;
+    NUContRmbMesg* rmbMesg = (NUContRmbMesg*)mesg->dataPtr;
 
     nuContRmbCtl[rmbMesg->contNo].frame = 0;
 

@@ -13,7 +13,7 @@ extern EffectInstance* gEffectInstances[96];
 
 extern TlbMappablePage D_80197000;
 extern Addr D_801A6000;
-extern s32 gCurrentLanguage;
+extern s32             gCurrentLanguage;
 
 #define FX_ENTRY(name, gfx_name) { \
     name##_main, effect_##name##_ROM_START, effect_##name##_ROM_END, effect_##name##_VRAM, gfx_name##_ROM_START, \
@@ -470,43 +470,58 @@ s32 load_effect(s32 effectIndex) {
         ASSERT(effectDataBuf != NULL);
 
 #if VERSION_PAL
-        if(effectEntry->graphicsDmaStart == effect_gfx_attack_result_text_ROM_START) {
-            switch(gCurrentLanguage) {
+        if (effectEntry->graphicsDmaStart == effect_gfx_attack_result_text_ROM_START) {
+            switch (gCurrentLanguage) {
                 case 0:
-                    dma_copy( effectEntry->graphicsDmaStart, effectEntry->graphicsDmaEnd, curEffect->data);
+                    dma_copy(effectEntry->graphicsDmaStart, effectEntry->graphicsDmaEnd, curEffect->data);
                     break;
                 case 1:
-                    dma_copy(effect_gfx_attack_result_text_de_ROM_START, effect_gfx_attack_result_text_de_ROM_END, curEffect->data);
+                    dma_copy(
+                        effect_gfx_attack_result_text_de_ROM_START, effect_gfx_attack_result_text_de_ROM_END,
+                        curEffect->data
+                    );
                     break;
                 case 2:
-                    dma_copy(effect_gfx_attack_result_text_fr_ROM_START, effect_gfx_attack_result_text_fr_ROM_END, curEffect->data);
+                    dma_copy(
+                        effect_gfx_attack_result_text_fr_ROM_START, effect_gfx_attack_result_text_fr_ROM_END,
+                        curEffect->data
+                    );
                     break;
                 case 3:
                 default:
-                    dma_copy(effect_gfx_attack_result_text_es_ROM_START, effect_gfx_attack_result_text_es_ROM_END, curEffect->data);
+                    dma_copy(
+                        effect_gfx_attack_result_text_es_ROM_START, effect_gfx_attack_result_text_es_ROM_END,
+                        curEffect->data
+                    );
                     break;
             }
-        } else if(effectEntry->graphicsDmaStart == effect_gfx_chapter_change_ROM_START) {
-            switch(gCurrentLanguage) {
+        } else if (effectEntry->graphicsDmaStart == effect_gfx_chapter_change_ROM_START) {
+            switch (gCurrentLanguage) {
                 case 0:
-                    dma_copy( effectEntry->graphicsDmaStart, effectEntry->graphicsDmaEnd, curEffect->data);
+                    dma_copy(effectEntry->graphicsDmaStart, effectEntry->graphicsDmaEnd, curEffect->data);
                     break;
                 case 1:
-                    dma_copy(effect_chapter_change_gfx_de_ROM_START, effect_chapter_change_gfx_de_ROM_END, curEffect->data);
+                    dma_copy(
+                        effect_chapter_change_gfx_de_ROM_START, effect_chapter_change_gfx_de_ROM_END, curEffect->data
+                    );
                     break;
                 case 2:
-                    dma_copy(effect_chapter_change_gfx_fr_ROM_START, effect_chapter_change_gfx_fr_ROM_END, curEffect->data);
+                    dma_copy(
+                        effect_chapter_change_gfx_fr_ROM_START, effect_chapter_change_gfx_fr_ROM_END, curEffect->data
+                    );
                     break;
                 case 3:
                 default:
-                    dma_copy(effect_chapter_change_gfx_es_ROM_START, effect_chapter_change_gfx_es_ROM_END, curEffect->data);
+                    dma_copy(
+                        effect_chapter_change_gfx_es_ROM_START, effect_chapter_change_gfx_es_ROM_END, curEffect->data
+                    );
                     break;
             }
         } else {
-            dma_copy( effectEntry->graphicsDmaStart, effectEntry->graphicsDmaEnd, curEffect->data);
+            dma_copy(effectEntry->graphicsDmaStart, effectEntry->graphicsDmaEnd, curEffect->data);
         }
 #else
-        dma_copy( effectEntry->graphicsDmaStart, effectEntry->graphicsDmaEnd, curEffect->data);
+        dma_copy(effectEntry->graphicsDmaStart, effectEntry->graphicsDmaEnd, curEffect->data);
 #endif
     }
 

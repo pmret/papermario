@@ -80,7 +80,7 @@ void state_step_startup(void) {
     }
 
 #if VERSION_PAL
-    if ( D_800D95E8.language >= 4U) {
+    if (D_800D95E8.language >= 4U) {
         D_800D95E8.language = 0U;
     }
     gCurrentLanguage = D_800D95E8.language;

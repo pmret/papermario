@@ -3,14 +3,14 @@
 
 u32 nuGfxCfbNum = 1;
 #if VERSION_PAL
-u32 D_PAL_80073714 = -1;
+u32   D_PAL_80073714 = -1;
 void* D_PAL_80073718 = 0;
 #endif
 NUGfxSwapCfbFunc nuGfxSwapCfbFunc = NULL;
 NUGfxTaskEndFunc nuGfxTaskEndFunc = NULL;
 u16 beforeFlag = 0;
 #if VERSION_PAL
-u32 padding_gfxtaskmg[2]= {0, 0};
+u32 padding_gfxtaskmg[2] = { 0, 0 };
 #endif
 
 extern OSMesg D_8009E6D0[NU_GFX_TASKMGR_MESGS];
@@ -109,8 +109,8 @@ void nuGfxTaskStart(Gfx* gfxList_ptr, u32 gfxListSize, u32 ucode, u32 flag) {
     nuGfxTask_ptr->list.t.ucode = nuGfxUcode[ucode].ucode;
     nuGfxTask_ptr->list.t.ucode_data = nuGfxUcode[ucode].ucode_data;
 #if VERSION_PAL
-    nuGfxTask_ptr->list.t.output_buff = D_PAL_80073718; //38
-    nuGfxTask_ptr->list.t.output_buff_size = D_PAL_80073718 + (D_PAL_80073714) /8*8 ; //3c
+    nuGfxTask_ptr->list.t.output_buff      = D_PAL_80073718;                            // 38
+    nuGfxTask_ptr->list.t.output_buff_size = D_PAL_80073718 + (D_PAL_80073714) / 8 * 8; // 3c
 #endif
     nuGfxTask_ptr->flags = flag & 0xFFFF;
     nuGfxTask_ptr->framebuffer = nuGfxCfb_ptr;
