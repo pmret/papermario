@@ -65,7 +65,7 @@ if cat /etc/os-release | grep -E ID=fedora &> /dev/null; then
 
     echo "Installing packages for Fedora (dnf)"
 
-    ${SUDO} dnf install -y curl git python3 python3-pip python3-setuptools ninja-build gcc-mips-linux-gnu libyaml-devel zlib-devel || exit 1
+    ${SUDO} dnf install -y curl git python3 python3-pip python3-setuptools ninja-build gcc-mips64-linux-gnu libyaml-devel zlib-devel || exit 1
     ${SUDO} dnf group info "C Development Tools and Libraries" "Development Tools" || exit 1
     python3 -m pip install -U -r requirements.txt
     cp tools/precommit_check_no_assets.sh "$(git rev-parse --git-path hooks)/pre-commit" || exit 1
