@@ -4969,13 +4969,13 @@ AlbinoDino:
     - Walk
     - Run
     - Charge
-    - Pain
-    - Dead
-    - BurntPain
-    - BurntDead
     - Talk
-    - FwdTalk
-    - BackTalk
+    - Hurt
+    - HurtStill
+    - BurntHurt
+    - BurntStill
+    - TalkFwd
+    - TalkBack
 Blooper:
   variations:
     - Variant00
