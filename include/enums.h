@@ -6277,41 +6277,48 @@ enum RushFlags {
 };
 
 enum FileMenuMessages {
-    FILE_MESSAGE_NONE                       = 0,
-    FILE_MESSAGE_SELECT_FILE_TO_START       = 1, // Select file to start:[End]
-    FILE_MESSAGE_SELECT_FILE_TO_DELETE      = 2, // Select file to delete:[End]
-    FILE_MESSAGE_SELECT_FILE_TO_SAVE        = 3, // Select file to save[End]
-    FILE_MESSAGE_COPY_WHICH_FILE            = 4, // Copy which file?[End]
-    FILE_MESSAGE_COPY_TO_WHICH_FILE         = 5, // Copy to which file?[End]
-    FILE_MESSAGE_NEW                        = 6, // NEW[End]
-    FILE_MESSAGE_LEVEL                      = 7, // Level[End]
-    FILE_MESSAGE_PLAY_TIME                  = 8, // Play Time[End]
-    FILE_MESSAGE_DELETE_FILE                = 9, // Delete File[End]
-    FILE_MESSAGE_CANCEL                     = 10, // Cancel[End]
-    FILE_MESSAGE_COPY_FILE                  = 11, // Copy File[End]
-    FILE_MESSAGE_FIRST_PLAY                 = 12, // First Play[End]
-    FILE_MESSAGE_PERIOD_13                  = 13, // .[End]
-    FILE_MESSAGE_YES                        = 14, // Yes[End]
-    FILE_MESSAGE_NO                         = 15, // No[End]
-    FILE_MESSAGE_DELETE                     = 16, // Delete[End]
-    FILE_MESSAGE_OVERRIDE_TO_NEW_DATA       = 17, // Override to New Data[End]
-    FILE_MESSAGE_SAVE_OK                    = 18, // Save OK?[End]
-    FILE_MESSAGE_FILE_NAME_IS               = 19, // File name is :[End]
-    FILE_MESSAGE_PERIOD_20                  = 20, // .[End]
-    FILE_MESSAGE_OK                         = 21, // OK?[End]
-    FILE_MESSAGE_FILE_22                    = 22, // File[End]
-    FILE_MESSAGE_WILL_BE_DELETED            = 23, // will be deleted.[End]
-    FILE_MESSAGE_OK_TO_COPY_TO_THIS_FILE    = 24, // OK to copy to this file?[End]
-    FILE_MESSAGE_START_GAME_WITH            = 25, // Start game with[End]
-    FILE_MESSAGE_FILE_26                    = 26, // File[End]
-    FILE_MESSAGE_HAS_BEEN_DELETED           = 27, // has been deleted.[End]
-    FILE_MESSAGE_28                         = 28, // [End]
-    FILE_MESSAGE_COPY_FROM                  = 29, // Copy from[End]
-    FILE_MESSAGE_TO                         = 30, // to[End]
-    FILE_MESSAGE_HAS_BEEN_CREATED           = 31, // has been created.[End]
-    FILE_MESSAGE_ENTER_A_FILE_NAME          = 32, // Enter a file name![End]
-    FILE_MESSAGE_QUESTION                   = 33, // ?[End]
-    FILE_MESSAGE_PERIOD_34                  = 34, // .[End]
+    /*  0 */ FILE_MESSAGE_NONE,
+    /*  1 */ FILE_MESSAGE_SELECT_FILE_TO_START,        // Select file to start:[End]
+    /*  2 */ FILE_MESSAGE_SELECT_FILE_TO_DELETE,       // Select file to delete:[End]
+#if !VERSION_PAL
+    /*  3 */ FILE_MESSAGE_SELECT_FILE_TO_SAVE,         // Select file to save[End]
+#endif
+    /*  4 */ FILE_MESSAGE_COPY_WHICH_FILE,             // Copy which file?[End]
+    /*  5 */ FILE_MESSAGE_COPY_TO_WHICH_FILE,          // Copy to which file?[End]
+    /*  6 */ FILE_MESSAGE_NEW,                         // NEW[End]
+    /*  7 */ FILE_MESSAGE_LEVEL,                       // Level[End]
+    /*  8 */ FILE_MESSAGE_PLAY_TIME,                   // Play Time[End]
+    /*  9 */ FILE_MESSAGE_DELETE_FILE,                 // Delete File[End]
+    /* 10 */ FILE_MESSAGE_CANCEL,                      // Cancel[End]
+    /* 11 */ FILE_MESSAGE_COPY_FILE,                   // Copy File[End]
+    /* 12 */ FILE_MESSAGE_FIRST_PLAY,                  // First Play[End]
+    /* 13 */ FILE_MESSAGE_PERIOD_13,                   // .[End]
+    /* 14 */ FILE_MESSAGE_YES,                         // Yes[End]
+    /* 15 */ FILE_MESSAGE_NO,                          // No[End]
+    /* 16 */ FILE_MESSAGE_DELETE,                      // Delete[End]
+    /* 17 */ FILE_MESSAGE_OVERRIDE_TO_NEW_DATA,        // Override to New Data[End]
+    /* 18 */ FILE_MESSAGE_SAVE_OK,                     // Save OK?[End]
+    /* 19 */ FILE_MESSAGE_FILE_NAME_IS,                // File name is :[End]
+    /* 20 */ FILE_MESSAGE_PERIOD_20,                   // .[End]
+    /* 21 */ FILE_MESSAGE_OK,                          // OK?[End]
+    /* 22 */ FILE_MESSAGE_FILE_22,                     // File[End]
+    /* 23 */ FILE_MESSAGE_WILL_BE_DELETED,             // will be deleted.[End]
+    /* 24 */ FILE_MESSAGE_OK_TO_COPY_TO_THIS_FILE,     // OK to copy to this file?[End]
+    /* 25 */ FILE_MESSAGE_START_GAME_WITH,             // Start game with[End]
+    /* 26 */ FILE_MESSAGE_FILE_26,                     // File[End]
+    /* 27 */ FILE_MESSAGE_HAS_BEEN_DELETED,            // has been deleted.[End]
+    /* 28 */ FILE_MESSAGE_28,                          // [End]
+    /* 29 */ FILE_MESSAGE_COPY_FROM,                   // Copy from[End]
+    /* 30 */ FILE_MESSAGE_TO,                          // to[End]
+    /* 31 */ FILE_MESSAGE_HAS_BEEN_CREATED,            // has been created.[End]
+#if VERSION_PAL
+    // TODO: determine where these new entries should be placed
+    UNK1,
+    UNK2,
+#endif
+    /* 32 */ FILE_MESSAGE_ENTER_A_FILE_NAME,           // Enter a file name![End]
+    /* 33 */ FILE_MESSAGE_QUESTION,                    // ?[End]
+    /* 34 */ FILE_MESSAGE_PERIOD_34,                   // .[End]
 };
 
 // specifically used with draw_msg, not to be confused with MsgStyles
