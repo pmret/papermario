@@ -4933,28 +4933,28 @@ Duplighost:
     - Anim0E
 AlbinoDino:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
+    - Idle1
+    - Idle2
+    - Walk1
+    - Walk2
+    - Walk3
+    - Walk4
+    - Talk
+    - Fwd1
+    - Back1
+    - Run1
+    - Run2
+    - Run3
+    - Charge1
+    - Charge2
+    - Pain1
+    - Pain2
+    - Dead
+    - BurntPain1
+    - BurntPain2
+    - BurntDead
+    - Fwd2
+    - Back2
   palettes:
     - Default
     - Poisoned
@@ -4962,20 +4962,20 @@ AlbinoDino:
     - Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
+    - Still
+    - StillFwd
+    - StillBack
+    - Idle
+    - Walk
+    - Run
+    - Charge
+    - Talk
+    - Hurt
+    - HurtStill
+    - BurntHurt
+    - BurntStill
+    - TalkFwd
+    - TalkBack
 Blooper:
   variations:
     - Variant00
