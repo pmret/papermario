@@ -2672,7 +2672,7 @@ enum ActionRatings {
 
 enum DamageSources {
     DMG_SRC_DEFAULT                 = 0,
-    DMG_SRC_BABY_BLOOPER_SELF       = 1,
+    DMG_SRC_LEECH                   = 1,    // used by Baby Blooper, but not Fuzzy
     DMG_SRC_SPIN_SMASH              = 2,
     DMG_SRC_D_DOWN_POUND            = 3,
     DMG_SRC_D_DOWN_JUMP             = 4,

@@ -12,9 +12,9 @@ extern HudScript HES_Happy;
 extern HudScript HES_HPDrain;
 
 extern EvtScript EVS_PlayerCelebrate;
-extern EvtScript D_802988F0;
-extern EvtScript EVS_OnPlayerHit;
-extern EvtScript D_80298948;
+extern EvtScript EVS_Player_SimpleHit;
+extern EvtScript EVS_Player_ComplexHit;
+extern EvtScript EVS_Player_NoDamageHit;
 
 extern PlayerCelebrationAnimOptions D_80280FC0;
 
@@ -855,7 +855,7 @@ EvtScript EVS_Player_HandleEvent = {
             EVT_CALL(func_80273444, 5, 0, 1)
             EVT_SET_CONST(LVar1, ANIM_Mario1_HurtFoot)
             EVT_SET(LVar2, 0)
-            EVT_EXEC_WAIT(D_802988F0)
+            EVT_EXEC_WAIT(EVS_Player_SimpleHit)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
             EVT_CALL(GetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -900,7 +900,7 @@ EvtScript EVS_Player_HandleEvent = {
             EVT_END_CHILD_THREAD
             EVT_SET_CONST(LVar1, ANIM_MarioB3_BurnHurt)
             EVT_SET(LVar2, 0)
-            EVT_EXEC_WAIT(D_802988F0)
+            EVT_EXEC_WAIT(EVS_Player_SimpleHit)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
             EVT_CALL(GetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -933,7 +933,7 @@ EvtScript EVS_Player_HandleEvent = {
             EVT_CALL(ShowShockEffect, ACTOR_SELF)
             EVT_SET_CONST(LVar1, ANIM_Mario1_HurtFoot)
             EVT_SET(LVar2, 0)
-            EVT_EXEC_WAIT(D_802988F0)
+            EVT_EXEC_WAIT(EVS_Player_SimpleHit)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
             EVT_CALL(GetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -991,38 +991,38 @@ EvtScript EVS_Player_HandleEvent = {
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar1, ANIM_Mario1_Hurt)
             EVT_SET(LVar2, 0)
-            EVT_EXEC_WAIT(EVS_OnPlayerHit)
+            EVT_EXEC_WAIT(EVS_Player_ComplexHit)
             EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_208C)
             EVT_SET_CONST(LVar1, ANIM_Mario1_Idle)
-            EVT_EXEC_WAIT(D_80298948)
+            EVT_EXEC_WAIT(EVS_Player_NoDamageHit)
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_18)
         EVT_CASE_OR_EQ(EVENT_BLOCK)
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_208C)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Mario1_Crouch)
-            EVT_EXEC_WAIT(D_80298948)
+            EVT_EXEC_WAIT(EVS_Player_NoDamageHit)
             EVT_WAIT(10)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar1, ANIM_MarioB3_BurnHurt)
             EVT_SET(LVar2, 0)
-            EVT_EXEC_WAIT(D_802988F0)
+            EVT_EXEC_WAIT(EVS_Player_SimpleHit)
             EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
         EVT_CASE_EQ(EVENT_FIRE_DEATH)
             EVT_SET_CONST(LVar1, ANIM_MarioB3_BurnHurt)
             EVT_SET(LVar2, 0)
-            EVT_EXEC_WAIT(D_802988F0)
+            EVT_EXEC_WAIT(EVS_Player_SimpleHit)
             EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar1, ANIM_Mario1_Hurt)
             EVT_SET(LVar2, 0)
-            EVT_EXEC_WAIT(D_802988F0)
+            EVT_EXEC_WAIT(EVS_Player_SimpleHit)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_FROM_KO)
             EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(1.8))

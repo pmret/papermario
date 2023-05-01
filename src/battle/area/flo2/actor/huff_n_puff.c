@@ -727,17 +727,17 @@ EvtScript N(OnHit) = {
     EVT_THREAD
         EVT_SET(LVar0, 1)
         EVT_SET(LVar1, LVar2)
-        EVT_EXEC_WAIT(EVS_DoNormalHit)
+        EVT_EXEC_WAIT(EVS_Enemy_Hit)
     EVT_END_THREAD
     EVT_THREAD
         EVT_SET(LVar0, 2)
         EVT_SET(LVar1, LVar3)
-        EVT_EXEC_WAIT(EVS_DoNormalHit)
+        EVT_EXEC_WAIT(EVS_Enemy_Hit)
     EVT_END_THREAD
     EVT_THREAD
         EVT_SET(LVar0, 3)
         EVT_SET(LVar1, LVar4)
-        EVT_EXEC_WAIT(EVS_DoNormalHit)
+        EVT_EXEC_WAIT(EVS_Enemy_Hit)
     EVT_END_THREAD
     EVT_WAIT(30)
     EVT_RETURN
@@ -809,7 +809,7 @@ EvtScript N(OnDeath) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, 3, ANIM_HuffNPuff_Anim09)
     EVT_SET(LVar0, 1)
     EVT_SET(LVar1, ANIM_HuffNPuff_Anim07)
-    EVT_EXEC_WAIT(EVS_DoDeath)
+    EVT_EXEC_WAIT(EVS_Enemy_Death)
     EVT_RETURN
     EVT_END
 };
@@ -911,7 +911,7 @@ EvtScript N(OnBurnDeath) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, 3, ANIM_HuffNPuff_Anim28)
     EVT_SET(LVar0, 1)
     EVT_SET(LVar1, ANIM_HuffNPuff_Anim26)
-    EVT_EXEC_WAIT(EVS_DoDeath)
+    EVT_EXEC_WAIT(EVS_Enemy_Death)
     EVT_RETURN
     EVT_END
 };
@@ -934,17 +934,17 @@ EvtScript N(OnImmune) = {
     EVT_THREAD
         EVT_SET(LVar0, 1)
         EVT_SET(LVar1, LVar2)
-        EVT_EXEC_WAIT(DoImmune)
+        EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
     EVT_END_THREAD
     EVT_THREAD
         EVT_SET(LVar0, 2)
         EVT_SET(LVar1, LVar3)
-        EVT_EXEC_WAIT(DoImmune)
+        EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
     EVT_END_THREAD
     EVT_THREAD
         EVT_SET(LVar0, 3)
         EVT_SET(LVar1, LVar4)
-        EVT_EXEC_WAIT(DoImmune)
+        EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
     EVT_END_THREAD
     EVT_WAIT(30)
     EVT_RETURN
