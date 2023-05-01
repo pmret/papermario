@@ -46,6 +46,6 @@ void reset_max_rumble_duration(void) {
 #if VERSION_JP
     rumbleMaxDuration = 600;
 #else
-    rumbleMaxDuration = 300;
+    rumbleMaxDuration = 300 / DT;
 #endif
 }

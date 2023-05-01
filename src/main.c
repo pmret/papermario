@@ -35,6 +35,16 @@ void boot_main(void* data) {
     } else {
         PANIC();
     }
+#elif VERSION_PAL
+    if (osTvType == OS_TV_PAL) {
+        osViSetMode(&osViModeFpalLpn1);
+        osViSetYScale(0.833);
+        osViSetSpecialFeatures(OS_VI_GAMMA_OFF | OS_VI_GAMMA_DITHER_OFF | OS_VI_DIVOT_ON | OS_VI_DITHER_FILTER_ON);
+    } else {
+        PANIC();
+    }
+
+    nuGfxDisplayOff();
 #else // not VERSION_JP
     if (osTvType == OS_TV_NTSC) {
         osViSetMode(&osViModeNtscLan1);
@@ -50,7 +60,7 @@ void boot_main(void* data) {
     crash_screen_init();
 #endif
 
-#if !VERSION_IQUE
+#if VERSION_US || VERSION_JP
     is_debug_init();
 #endif
     nuGfxInit();

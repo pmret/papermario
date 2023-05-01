@@ -2,9 +2,16 @@
 #include "nu/nusys.h"
 
 u32 nuGfxCfbNum = 1;
+#if VERSION_PAL
+u32 D_PAL_80073714 = -1;
+void* D_PAL_80073718 = 0;
+#endif
 NUGfxSwapCfbFunc nuGfxSwapCfbFunc = NULL;
 NUGfxTaskEndFunc nuGfxTaskEndFunc = NULL;
 u16 beforeFlag = 0;
+#if VERSION_PAL
+u32 padding_gfxtaskmg[2]= {0, 0};
+#endif
 
 extern OSMesg D_8009E6D0[NU_GFX_TASKMGR_MESGS];
 extern OSMesgQueue D_800DAC90;
@@ -81,8 +88,10 @@ void nuGfxTaskMgrInit(void) {
         nuGfxTask[i].list.t.ucode_data_size = SP_UCODE_DATA_SIZE;
         nuGfxTask[i].list.t.dram_stack = (u64*) &D_800DA040;
         nuGfxTask[i].list.t.dram_stack_size = SP_DRAM_STACK_SIZE8;
+#if !VERSION_PAL
         nuGfxTask[i].list.t.output_buff = (u64*) &D_800B91D0;
         nuGfxTask[i].list.t.output_buff_size = (u64*) &D_800B91D0[NU_GFX_RDP_OUTPUTBUFF_SIZE / sizeof(u32)];
+#endif
         nuGfxTask[i].list.t.yield_data_ptr = (u64*) &nuYieldBuf;
         nuGfxTask[i].list.t.yield_data_size = NU_GFX_YIELD_BUF_SIZE;
     }
@@ -99,6 +108,10 @@ void nuGfxTaskStart(Gfx* gfxList_ptr, u32 gfxListSize, u32 ucode, u32 flag) {
     nuGfxTask_ptr->list.t.flags = flag >> 16;
     nuGfxTask_ptr->list.t.ucode = nuGfxUcode[ucode].ucode;
     nuGfxTask_ptr->list.t.ucode_data = nuGfxUcode[ucode].ucode_data;
+#if VERSION_PAL
+    nuGfxTask_ptr->list.t.output_buff = D_PAL_80073718; //38
+    nuGfxTask_ptr->list.t.output_buff_size = D_PAL_80073718 + (D_PAL_80073714) /8*8 ; //3c
+#endif
     nuGfxTask_ptr->flags = flag & 0xFFFF;
     nuGfxTask_ptr->framebuffer = nuGfxCfb_ptr;
 

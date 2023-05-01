@@ -1260,6 +1260,9 @@ void update_encounters_pre_battle(void) {
 
     switch (gEncounterSubState) {
         case ENCOUNTER_SUBSTATE_PRE_BATTLE_INIT:
+#if VERSION_PAL
+            gPlayerStatusPtr->pitch = 0;
+#endif
             currentEncounter->fadeOutAmount = 0;
             currentEncounter->unk_94 = 1;
             currentEncounter->fadeOutAccel = 1;

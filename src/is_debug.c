@@ -15,11 +15,13 @@ typedef struct {
 
 char* is_debug_print(char* arg0, const char* str, size_t count);
 
+#if VERSION_US || VERSION_JP
 void is_debug_init(void) {
     osEPiWriteIo(nuPiCartHandle, (u32) &gISVDbgPrnAdrs->put, 0);
     osEPiWriteIo(nuPiCartHandle, (u32) &gISVDbgPrnAdrs->get, 0);
     osEPiWriteIo(nuPiCartHandle, (u32) &gISVDbgPrnAdrs->magic, ASCII_TO_U32('I', 'S', '6', '4'));
 }
+#endif
 
 void printf(const char* fmt, ...) {
     va_list args;

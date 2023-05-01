@@ -46,7 +46,39 @@ void state_init_language_select(void) {
     D_800A0932[0] = 0;
     disable_player_input();
     set_time_freeze_mode(TIME_FREEZE_FULL);
+#if VERSION_PAL
+    general_heap_create();
+    hud_element_set_aux_cache(0, 0);
+    hud_element_clear_cache();
+    load_model_textures(0, 0, 0);
+    gCameras[CAM_DEFAULT].updateMode = 6;
+    gCameras[CAM_DEFAULT].needsInit = 1;
+    gCameras[CAM_DEFAULT].nearClip = 16;
+    gCameras[CAM_DEFAULT].farClip = 4096;
+    gCameras[CAM_DEFAULT].flags |= CAMERA_FLAG_DISABLED;
+    gCurrentCameraID = CAM_DEFAULT;
+    gCameras[CAM_BATTLE].flags |= CAMERA_FLAG_DISABLED;
+    gCameras[CAM_TATTLE].flags |= CAMERA_FLAG_DISABLED;
+    gCameras[CAM_3].flags |= CAMERA_FLAG_DISABLED;
+    gCameras[CAM_DEFAULT].vfov = 25.0f;
+    set_cam_viewport(0, 12, 28, 296, 184);
+    gCameras[CAM_DEFAULT].auxBoomLength = 40;
+    gCameras[CAM_DEFAULT].lookAt_eye.x = 500.0f;
+    gCameras[CAM_DEFAULT].lookAt_eye.y = 1000.0f;
+    gCameras[CAM_DEFAULT].lookAt_eye.z = 1500.0f;
+    gCameras[CAM_DEFAULT].lookAt_obj_target.z = 150.0f;
+    gCameras[CAM_DEFAULT].bgColor[0] = 0;
+    gCameras[CAM_DEFAULT].bgColor[1] = 0;
+    gCameras[CAM_DEFAULT].bgColor[2] = 0;
+    gCameras[CAM_DEFAULT].lookAt_obj_target.x = 25.0f;
+    gCameras[CAM_DEFAULT].lookAt_obj_target.y = 25.0f;
+    gCameras[CAM_DEFAULT].auxPitch = 0;
+    gCameras[CAM_DEFAULT].lookAt_dist = 100;
+    gCameras[CAM_DEFAULT].auxBoomPitch = 0;
+    gOverrideFlags |= GLOBAL_OVERRIDES_WINDOWS_IN_FRONT_OF_CURTAINS;
+#else
     set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, D_800A0932[0]);
+#endif
 }
 
 void state_init_file_select(void) {
@@ -86,6 +118,37 @@ void state_init_file_select(void) {
 }
 
 void state_step_language_select(void) {
+#if VERSION_PAL
+    switch (D_800A0931) {
+        case 0:
+            D_800A0931 = 1;
+            break;
+        case 1:
+            set_windows_visible(3);
+            D_800A0930 = 1;
+            D_800A0931 = 2;
+            break;
+        case 2:
+            if (D_800A0930 >= 0) {
+                D_800A0930--;
+                if (D_800A0930 == 0) {
+                    D_800A0930 = -1;
+                    battle_heap_create();
+                    nuPiReadRomOverlay(&D_8007798C);
+                    filemenu_init(2);
+                }
+                if (D_800A0930 >= 0) {
+                    break;
+                }
+            }
+
+            filemenu_update();
+            break;
+    }
+
+
+
+#else
     switch (D_800A0931) {
         case 0:
             update_player();
@@ -171,6 +234,7 @@ void state_step_language_select(void) {
             set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, D_800A0932[0]);
             break;
     }
+#endif
 }
 
 void state_step_file_select(void) {
@@ -211,6 +275,12 @@ void state_drawUI_file_select(void) {
 }
 
 void state_init_exit_language_select(void) {
+#if VERSION_PAL
+    D_800A0931 = 0;
+    D_800A0932[0] = 0;
+    D_800A0930 = 0;
+    set_map_transition_effect(7);
+#else
     if (D_800A0932[0] > 0) {
         D_800A0931 = 0;
         set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, D_800A0932[0]);
@@ -219,6 +289,7 @@ void state_init_exit_language_select(void) {
         set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, D_800A0932[0]);
     }
     D_800A0930 = 1;
+#endif
     gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
 }
 
@@ -238,6 +309,36 @@ void state_init_exit_file_select(void) {
 }
 
 void state_step_exit_language_select(void) {
+#if VERSION_PAL
+    s32 var_a1;
+    int i;
+
+    func_80244BC4();
+    switch (D_800A0931) {
+        case 0:
+            var_a1 = 0;
+            for (i = WINDOW_ID_FILEMENU_MAIN; i <= WINDOW_ID_FILEMENU_FILE3_TITLE; i++) {
+                if (gWindows[i].parent == WINDOW_ID_FILEMENU_MAIN || gWindows[i].parent == -1) {
+                    var_a1 += gWindows[i].flags & WINDOW_FLAG_INITIAL_ANIMATION;
+                }
+            }
+
+            if (var_a1 == 0) {
+                D_800A0931 = 2;
+            }
+            break;
+        case 2:
+            filemenu_cleanup();
+            set_windows_visible(0);
+            D_800A0931 = 3;
+            /* fallthrough */
+        case 3:
+            set_time_freeze_mode(0);
+            set_game_mode(GAME_MODE_TITLE_SCREEN);
+            gOverrideFlags &= ~GLOBAL_OVERRIDES_WINDOWS_IN_FRONT_OF_CURTAINS;
+            break;
+    }
+#else
     switch (D_800A0931) {
         case 0:
             if (D_800A0932[0] != 0) {
@@ -369,6 +470,7 @@ void state_step_exit_language_select(void) {
             set_screen_overlay_params_front(OVERLAY_NONE, -1.0f);
             break;
         }
+#endif
 }
 
 void state_step_exit_file_select(void) {

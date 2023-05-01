@@ -79,6 +79,13 @@ void state_step_startup(void) {
         audio_set_mono();
     }
 
+#if VERSION_PAL
+    if ( D_800D95E8.language >= 4U) {
+        D_800D95E8.language = 0U;
+    }
+    gCurrentLanguage = D_800D95E8.language;
+#endif
+
     gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
     set_game_mode(GAME_MODE_LOGOS);
 }

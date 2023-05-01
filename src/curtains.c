@@ -2,11 +2,18 @@
 #include "theater/walls.png.h"
 #include "theater/curtains.png.h"
 #include "theater/floor.png.h"
+#if !VERSION_PAL
 #include "ui/no_controller.png.h"
+#endif
 #include "ld_addrs.h"
 #include "nu/nusys.h"
 
 #include "theater/walls.png.inc.c"
+
+#if VERSION_PAL
+#define ui_no_controller_png_width 128
+#define ui_no_controller_png_height 32
+#endif
 
 Gfx D_800746E0[] = {
     gsDPSetTextureLUT(G_TT_NONE),
@@ -171,7 +178,11 @@ Gfx TheaterInitGfx[] = {
     gsSPEndDisplayList(),
 };
 
+#if VERSION_PAL
+extern u8 ui_no_controller_png[];
+#else
 #include "ui/no_controller.png.inc.c"
+#endif
 
 Gfx NoControllerSetupTexGfx[] = {
     gsDPPipeSync(),
@@ -203,12 +214,21 @@ Gfx NoControllerGfx[] = {
 // BSS
 extern Mtx D_8009BAA8[];
 
+#if VERSION_PAL
+extern s32 D_8009A208;
+extern s32 D_8009A204;
+#endif
+
 void initialize_curtains(void) {
     gCurtainDrawCallback = NULL;
     gCurtainScale = 2.0f;
     gCurtainScaleGoal = 2.0f;
     gCurtainFade = 0.0f;
     gCurtainFadeGoal = 0.0f;
+#if VERSION_PAL
+    D_8009A204 = 6;
+    D_8009A208 = 0;
+#endif
 }
 
 void update_curtains(void) {
@@ -268,10 +288,37 @@ void render_curtains(void) {
                 alpha = 255;
             }
 
+#if VERSION_PAL
+            if (alpha == 0) {
+                D_8009A204 = 6;
+            }
+
+            if (D_8009A204 == 0) {
+                gSPDisplayList(gMainGfxPos++, &TheaterInitGfx);
+                gSPDisplayList(gMainGfxPos++, &NoControllerSetupTexGfx);
+                gDPSetPrimColor(gMainGfxPos++, 0, 0, 0xFF, 0x20, 0x10, alpha);
+                gSPDisplayList(gMainGfxPos++, &NoControllerGfx);
+            }
+
+            if (D_8009A204 == 3) {
+                void* temp_a1_3 = no_controller_ROM_START + (D_8009A208 / 2) * 0x1000;
+                void* temp_a1_4 = no_controller_ROM_START + (D_8009A208 / 2) * 0x1000 + 0x1000;
+                dma_copy(temp_a1_3, temp_a1_4, ui_no_controller_png);
+                D_8009A208++;
+                if (D_8009A208 >= 8) {
+                    D_8009A208 = 0;
+                }
+            }
+
+            if (D_8009A204 != 0) {
+                D_8009A204 -= 1;
+            }
+#else
             gSPDisplayList(gMainGfxPos++, &TheaterInitGfx);
             gSPDisplayList(gMainGfxPos++, &NoControllerSetupTexGfx);
             gDPSetPrimColor(gMainGfxPos++, 0, 0, 0xFF, 0x20, 0x10, alpha);
             gSPDisplayList(gMainGfxPos++, &NoControllerGfx);
+#endif
         }
     }
 }

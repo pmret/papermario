@@ -39,10 +39,18 @@ typedef u8* WaveData;
 #define ALIGN16_(val) (((val) + 0xF) & 0xFFF0)
 #define AU_FILE_RELATIVE(base,offset) ((void*)((s32)(offset) + (s32)(base)))
 
-#define AUDIO_HEAP_SIZE 0x56000
  // NU_AU_AUDIO_SAMPLES ?
 #define AUDIO_SAMPLES   184
+
+#ifdef VERSION_PAL
+#define AUDIO_SAMPLES_2 (AUDIO_SAMPLES * 2)
+#define AUDIO_COMMAND_LIST_BUFFER_SIZE 0x5558
+#define AUDIO_HEAP_SIZE 0x5B000
+#else
+#define AUDIO_SAMPLES_2 (AUDIO_SAMPLES)
 #define AUDIO_COMMAND_LIST_BUFFER_SIZE 0x4000
+#define AUDIO_HEAP_SIZE 0x56000
+#endif
 
 #define ADPCMFBYTES     9
 

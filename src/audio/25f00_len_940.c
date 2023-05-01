@@ -41,13 +41,13 @@ void create_audio_system(void) {
     config.num_pvoice = 24;
     config.num_bus = 4;
     outputRate = osAiSetFrequency(32000);
-    frameSize = (nusched.retraceCount * outputRate + 59) / 60;
+    frameSize = (nusched.retraceCount * outputRate + (s32) (60 * DT) - 1) / (s32) (60 * DT);
     config.outputRate = outputRate;
     config.unk_0C = 0;
     config.heap = &nuAuHeap;
     config.dmaNew = nuAuDmaNew;
     AlFrameSize = ((frameSize / AUDIO_SAMPLES) + 1) * AUDIO_SAMPLES;
-    AlMinFrameSize = AlFrameSize - AUDIO_SAMPLES;
+    AlMinFrameSize = AlFrameSize - AUDIO_SAMPLES_2;
 
     for (i = 0; i < ARRAY_COUNT(AlCmdListBuffers); i++) {
         AlCmdListBuffers[i] = alHeapAlloc(config.heap, 1, AUDIO_COMMAND_LIST_BUFFER_SIZE);
@@ -156,7 +156,7 @@ void nuAuMgr(void* arg) {
                     cmdListBuf = AlCmdListBuffers[cmdListIndex];
                     bufferPtr = D_800A3628[bufferIndex];
                 }
-                if (sampleSize < AUDIO_SAMPLES || cond) {
+                if (sampleSize < AUDIO_SAMPLES_2 || cond) {
                     samples = AlFrameSize;
                     cond = FALSE;
                 } else {

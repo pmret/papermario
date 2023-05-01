@@ -7,10 +7,12 @@ extern s32 GfxStack[NU_GFX_STACK_SIZE / 4];
 extern OSThread D_800B1B90;
 extern OSMesg nuGfxMesgBuf[NU_GFX_MESGS];
 
+#if !VERSION_PAL
 void nuGfxThreadStart(void) {
     osCreateThread(&D_800B1B90, 4, gfxThread, NULL, &GfxStack[NU_GFX_STACK_SIZE / 4], NU_GFX_THREAD_PRI);
     osStartThread(&D_800B1B90);
 }
+#endif
 
 void gfxThread(void* data) {
     NUScClient gfxClient;
@@ -36,3 +38,10 @@ void gfxThread(void* data) {
         }
     }
 }
+
+#if VERSION_PAL
+void nuGfxThreadStart(void) {
+    osCreateThread(&D_800B1B90, 4, gfxThread, NULL, &GfxStack[NU_GFX_STACK_SIZE / 4], NU_GFX_THREAD_PRI);
+    osStartThread(&D_800B1B90);
+}
+#endif

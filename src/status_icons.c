@@ -1284,6 +1284,9 @@ void enable_status_icon_surprise(s32 iconID) {
     statusIcon->flags |= STATUS_ICON_FLAG_SURPRISE;
 }
 
+#if VERSION_PAL
+INCLUDE_ASM(void, "status_icons", create_status_icon_peril)
+#else
 void create_status_icon_peril(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
     s32 hudElement;
@@ -1297,6 +1300,7 @@ void create_status_icon_peril(s32 iconID) {
         statusIcon->peril.activeElementID = hudElement;
     }
 }
+#endif
 
 void remove_status_icon_peril(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
@@ -1313,6 +1317,10 @@ void enable_status_icon_peril(s32 iconID) {
     statusIcon->flags |= STATUS_ICON_FLAG_PERIL;
 }
 
+
+#if VERSION_PAL
+INCLUDE_ASM(void, "status_icons", create_status_icon_danger)
+#else
 void create_status_icon_danger(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];
     s32 hudElement;
@@ -1326,6 +1334,7 @@ void create_status_icon_danger(s32 iconID) {
         statusIcon->danger.activeElementID = hudElement;
     }
 }
+#endif
 
 void remove_status_icon_danger(s32 iconID) {
     HudStatusIcon* statusIcon = &D_800A0F44[iconID];

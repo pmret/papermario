@@ -1090,7 +1090,11 @@ s32* gItemEntityScripts[] = {
     IES_DamageDodge,
     IES_EarthquakeJump,
     IES_DeepFocus,
+#if VERSION_PAL
+    IES_DeepFocus,
+#else
     IES_SuperFocus,
+#endif
     IES_HPPlus,
     IES_FPPlus,
     IES_HappyHeart,

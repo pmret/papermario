@@ -15,6 +15,42 @@ s32 fio_read_flash(s32 pageNum, void* readBuffer, u32 numBytes);
 s32 fio_write_flash(s32 pageNum, s8* readBuffer, u32 numBytes);
 void fio_erase_flash(s32 pageNum);
 
+#if VERSION_PAL
+
+SaveData D_80096A90;
+SaveData D_80097E10;
+
+int func_8002ADC0(void) {
+    u32 i;
+    s32* it = (s32*)&gCurrentSaveFile;
+    s32* it2 = (s32*)&D_80096A90;
+
+
+    for (i = 0; i < (sizeof(SaveData) / 4); i++, it++, it2++) {
+        if(*it!=*it2) {
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
+int func_8002AE04(void) {
+    u32 i;
+    s32* it = (s32*)&D_80096A90;
+    s32* it2 = (s32*)&D_80097E10;
+
+
+    for (i = 0; i < (sizeof(SaveData) / 4); i++, it++, it2++) {
+        if(*it!=*it2) {
+            return 1;
+        }
+    }
+
+    return 0;
+}
+#endif
+
 s32 get_spirits_rescued(void) {
     s32 storyProgress = evt_get_variable(NULL, GB_StoryProgress);
     s32 ret = 7;
@@ -109,6 +145,10 @@ s32 fio_validate_file_checksum(SaveData* saveData) {
     return FALSE;
 }
 
+#if VERSION_PAL
+s32 fio_fetch_saved_file_info(void);
+INCLUDE_ASM(s32, "fio", fio_fetch_saved_file_info)
+#else
 s32 fio_fetch_saved_file_info(void) {
     SaveData* buffer = &D_8009A6B0; // temps required to match
     SaveData* buffer2 = buffer;
@@ -148,7 +188,11 @@ s32 fio_fetch_saved_file_info(void) {
     }
     return TRUE;
 }
+#endif
 
+#if VERSION_PAL
+INCLUDE_ASM(s32, "fio", fio_load_game)
+#else
 s32 fio_load_game(s32 saveSlot) {
     gGameStatusPtr->saveSlot = saveSlot;
 
@@ -164,7 +208,11 @@ s32 fio_load_game(s32 saveSlot) {
     }
     return FALSE;
 }
+#endif
 
+#if VERSION_PAL
+INCLUDE_ASM(void, "fio", fio_save_game)
+#else
 void fio_save_game(s32 saveSlot) {
     fio_fetch_saved_file_info();
 
@@ -186,6 +234,7 @@ void fio_save_game(s32 saveSlot) {
     fio_erase_flash(nextAvailableSavePage);
     fio_write_flash(nextAvailableSavePage, (s8*)&gCurrentSaveFile, sizeof(SaveData));
 }
+#endif
 
 void fio_erase_game(s32 saveSlot) {
     s32 i;
@@ -198,6 +247,10 @@ void fio_erase_game(s32 saveSlot) {
         }
     }
 }
+
+#if VERSION_PAL
+INCLUDE_ASM(void, "fio", func_8002B574)
+#endif
 
 void fio_deserialize_state(void) {
     SaveData* saveData = &gCurrentSaveFile;
@@ -323,6 +376,10 @@ s32 fio_write_flash(s32 pageNum, s8* readBuffer, u32 numBytes) {
     return TRUE;
 }
 
+#if VERSION_PAL
+INCLUDE_ASM(void, "fio", fio_erase_flash)
+#else
 void fio_erase_flash(s32 pageNum) {
     osFlashSectorErase(pageNum * sizeof(SaveDataHeader));
 }
+#endif

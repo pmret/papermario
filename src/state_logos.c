@@ -16,6 +16,7 @@ void appendGfx_intro_logos(void);
 #endif
 
 
+#if !VERSION_PAL
 s32 D_800778C0[] = { 0, 0 };
 
 Gfx D_800778C8[] = {
@@ -28,6 +29,7 @@ Gfx D_800778C8[] = {
     gsDPSetTextureFilter(G_TF_POINT),
     gsSPEndDisplayList(),
 };
+#endif
 
 Gfx D_80077908[] = {
     gsDPPipeSync(),

@@ -17,6 +17,24 @@ s32 (*D_80093CE4[])(NUSiCommonMesg*) = {
 
 NUCallBackList nuContRmbCallBack = {.next = NULL, .func = D_80093CE4, .majorNo = 0x300, .funcNum = 0};
 
+#if VERSION_PAL
+void nuContRmbMgrInit(void) {
+    u32 i;
+
+    for (i = 0; i < NU_CONT_MAXCONTROLLERS; i++) {
+        nuContRmbCtl[i].state = NU_CONT_RMB_STATE_STOPPED;
+        nuContRmbCtl[i].mode = NU_CONT_RMB_MODE_DISABLE;
+        nuContRmbCtl[i].counter = i;
+    }
+
+    nuSiCallBackAdd(&nuContRmbCallBack);
+}
+
+void nuContRmbMgrRemove(void) {
+    nuSiCallBackRemove(&nuContRmbCallBack);
+}
+#endif
+
 s32 contRmbControl(NUContRmbCtl* rmbCtl, u32 contNo) {
     s32 ret = 0;
     u32 cnt;
@@ -103,6 +121,7 @@ s32 contRmbRetrace(NUSiCommonMesg* mesg) {
     return 0;
 }
 
+#if !VERSION_PAL
 void nuContRmbMgrInit(void) {
     u32 i;
 
@@ -118,6 +137,7 @@ void nuContRmbMgrInit(void) {
 void nuContRmbMgrRemove(void) {
     nuSiCallBackRemove(&nuContRmbCallBack);
 }
+#endif
 
 s32 contRmbCheckMesg(NUSiCommonMesg* mesg) {
     NUContRmbMesg* rmbMesg = (NUContRmbMesg*) mesg->dataPtr;
@@ -125,6 +145,7 @@ s32 contRmbCheckMesg(NUSiCommonMesg* mesg) {
     return osMotorInit(&nuSiMesgQ, &nuContPfs[rmbMesg->contNo], rmbMesg->contNo);
 }
 
+#if !VERSION_PAL
 s32 contRmbStartMesg(NUSiCommonMesg* mesg) {
     NUContRmbMesg* rmbMesg = (NUContRmbMesg*) mesg->dataPtr;
     NUContRmbCtl* rmbCtl = (NUContRmbCtl*) rmbMesg->data;
@@ -143,6 +164,7 @@ s32 contRmbStopMesg(NUSiCommonMesg* mesg) {
 
     return 0;
 }
+#endif
 
 s32 contRmbForceStopMesg(NUSiCommonMesg* mesg) {
     u32 i;
@@ -164,3 +186,24 @@ s32 contRmbForceStopEndMesg(NUSiCommonMesg* mesg) {
 
     return 0;
 }
+
+#if VERSION_PAL
+s32 contRmbStartMesg(NUSiCommonMesg* mesg) {
+    NUContRmbMesg* rmbMesg = (NUContRmbMesg*) mesg->dataPtr;
+    NUContRmbCtl* rmbCtl = (NUContRmbCtl*) rmbMesg->data;
+
+    nuContRmbCtl[rmbMesg->contNo].state = rmbCtl->state;
+    nuContRmbCtl[rmbMesg->contNo].frame = rmbCtl->frame;
+    nuContRmbCtl[rmbMesg->contNo].freq = rmbCtl->freq;
+    nuContRmbCtl[rmbMesg->contNo].counter = 0;
+    return 0;
+}
+
+s32 contRmbStopMesg(NUSiCommonMesg* mesg) {
+    NUContRmbMesg* rmbMesg = (NUContRmbMesg*) mesg->dataPtr;
+
+    nuContRmbCtl[rmbMesg->contNo].frame = 0;
+
+    return 0;
+}
+#endif

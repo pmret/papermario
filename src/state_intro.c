@@ -35,7 +35,7 @@ void state_init_intro(void) {
             intro_logos_set_fade_alpha(0);
 
             D_800A0954 = 0;
-            D_800A0956 = 0xC;
+            D_800A0956 = 0xC / DT;
             D_800A0958 = 4;
             D_800A0960 = unk_A8;
             D_800A095A = 0;

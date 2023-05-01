@@ -55,6 +55,9 @@ Gfx rdpstateinit_dl[] = {
     gsSPEndDisplayList(),
 };
 
+#if VERSION_PAL
+INCLUDE_ASM(void, "os/nusys/nugfxinit", nuGfxInitEX2);
+#else
 void nuGfxInitEX2(void) {
     Gfx gfx[0x100];
     Gfx* ptr;
@@ -74,3 +77,4 @@ void nuGfxInitEX2(void) {
     nuGfxTaskStart(gfx, (s32)(ptr - gfx) * sizeof(Gfx), NU_GFX_UCODE_F3DEX, NU_SC_NOSWAPBUFFER);
     nuGfxTaskAllEndWait();
 }
+#endif

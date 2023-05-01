@@ -1,6 +1,9 @@
 #include "common.h"
 #include "nu/nusys.h"
 
+#if VERSION_PAL
+INCLUDE_ASM(void, "os/nusys/nupireadrom", nuPiReadRom);
+#else
 void nuPiReadRom(u32 rom_addr, void* buf_ptr, u32 size) {
     OSIoMesg ioMesg;
     OSMesg mesg;
@@ -33,3 +36,4 @@ void nuPiReadRom(u32 rom_addr, void* buf_ptr, u32 size) {
         size -= mesgSize;
     }
 }
+#endif

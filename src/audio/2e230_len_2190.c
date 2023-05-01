@@ -12,6 +12,8 @@ extern f32 AlTuneScaling[];
 #define SBN_ROM_OFFSET (s32) SBN_ROM_START
 #elif VERSION_JP
 #define SBN_ROM_OFFSET 0xFC0000
+#elif VERSION_PAL
+#define SBN_ROM_OFFSET 0x13A0000
 #else
 #define SBN_ROM_OFFSET 0xF00000
 #endif
