@@ -419,7 +419,36 @@ segments:
   - [0x16B3D0, bin, pause_gfx_fr] # TODO: French
   - [0x16D450, bin, pause_gfx_es] # TODO: Spanish
 
-  - [0x16F4D0, bin]
+  - type: code
+    dir: filemenu
+    start: 0x16F4D0
+    vram: 0x80246AB0
+    subsegments:
+    - [0x16F4D0, c, filemenu_common]
+    - [0x1716E0, c, filemenu_main]
+    - [0x1737E0, c, filemenu_yesno]
+    - [0x174820, c, filemenu_info]
+    - [0x174D50, c, filemenu_createfile]
+    - [0x1760C0, c, filemenu_selectlanguage]
+    - [0x176B40, c, filemenu_msg]
+    - [0x1773A0, .data, filemenu_common]
+    - [0x177680, .data, filemenu_main]
+    - [0x177A00, .data, filemenu_yesno]
+    - [0x177A70, .data, filemenu_info]
+    - [0x177AC0, .data, filemenu_createfile]
+    - [0x177B40, .data, filemenu_selectlanguage]
+    - start: 0x177CD0
+      type: .data
+      name: filemenu_gfx
+      subsegments:
+      - [0x177CD0, ia4, copyarrow, 64, 16]
+      - [0x177ED0, rgba32, corners_yellow, 16, 64]
+      - [0x178ED0, ia8, corners_gray, 16, 32]
+      - [0x1790D0, .data, filemenu_gfx]
+    - [0x179200, .data, filemenu_msg]
+    - [0x179C30, .data, filemenu_styles]
+
+  - [0x17A160, bin]
 
   - [0x1DA1E0, ci4,     icon/present, 32, 32]
   - [0x1DA3E0, palette, icon/present]
@@ -430,6 +459,13 @@ segments:
   - [0x231790, palette, title/bg_1]
 
   - [0x231990, bin]
+
+  - type: bin
+    name: titlemenu_flags
+    start: 0x25C5A0
+    # TODO: split into images
+
+  - [0x2705A0, bin]
 
   - type: code
     dir: world/partner

@@ -560,7 +560,7 @@ EvtScript N(handleEvent) = {
                     EVT_CALL(SetOwnerID, LVar0)
                     EVT_SET_CONST(LVar0, 1)
                     EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim19)
-                    EVT_EXEC_WAIT(EVS_DoNormalHit)
+                    EVT_EXEC_WAIT(EVS_Enemy_Hit)
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim09)
                 EVT_END_THREAD
             EVT_END_IF
@@ -571,13 +571,13 @@ EvtScript N(handleEvent) = {
                     EVT_CALL(SetOwnerID, LVar0)
                     EVT_SET_CONST(LVar0, 1)
                     EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim19)
-                    EVT_EXEC_WAIT(EVS_DoNormalHit)
+                    EVT_EXEC_WAIT(EVS_Enemy_Hit)
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim09)
                 EVT_END_THREAD
             EVT_END_IF
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim19)
-            EVT_EXEC_WAIT(EVS_DoNormalHit)
+            EVT_EXEC_WAIT(EVS_Enemy_Hit)
         EVT_CASE_EQ(EVENT_HIT)
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_CLONE1_ID), LVar0)
             EVT_CALL(ActorExists, LVar0, LVar1)
@@ -586,7 +586,7 @@ EvtScript N(handleEvent) = {
                     EVT_CALL(SetOwnerID, LVar0)
                     EVT_SET_CONST(LVar0, 1)
                     EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim19)
-                    EVT_EXEC_WAIT(EVS_DoNormalHit)
+                    EVT_EXEC_WAIT(EVS_Enemy_Hit)
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim09)
                 EVT_END_THREAD
             EVT_END_IF
@@ -597,13 +597,13 @@ EvtScript N(handleEvent) = {
                     EVT_CALL(SetOwnerID, LVar0)
                     EVT_SET_CONST(LVar0, 1)
                     EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim19)
-                    EVT_EXEC_WAIT(EVS_DoNormalHit)
+                    EVT_EXEC_WAIT(EVS_Enemy_Hit)
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim09)
                 EVT_END_THREAD
             EVT_END_IF
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim19)
-            EVT_EXEC_WAIT(EVS_DoNormalHit)
+            EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_EXEC_WAIT(N(OnHit))
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_CLONE1_ID), LVar0)
@@ -614,7 +614,7 @@ EvtScript N(handleEvent) = {
                     EVT_SET_CONST(LVar0, 1)
                     EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim20)
                     EVT_SET_CONST(LVar2, ANIM_CrystalKing_Anim21)
-                    EVT_EXEC_WAIT(DoBurnHit)
+                    EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
                 EVT_END_THREAD
             EVT_END_IF
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_CLONE2_ID), LVar0)
@@ -625,24 +625,24 @@ EvtScript N(handleEvent) = {
                     EVT_SET_CONST(LVar0, 1)
                     EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim20)
                     EVT_SET_CONST(LVar2, ANIM_CrystalKing_Anim21)
-                    EVT_EXEC_WAIT(DoBurnHit)
+                    EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
                 EVT_END_THREAD
             EVT_END_IF
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim20)
             EVT_SET_CONST(LVar2, ANIM_CrystalKing_Anim21)
-            EVT_EXEC_WAIT(DoBurnHit)
+            EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim19)
             EVT_EXEC_WAIT(N(OnHit))
         EVT_CASE_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim09)
-            EVT_EXEC_WAIT(DoImmune)
+            EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_CASE_EQ(EVENT_IMMUNE)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim09)
-            EVT_EXEC_WAIT(DoImmune)
+            EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
             EVT_CALL(GetActorVar, ACTOR_ENEMY0, N(VAR_FLAGS), LVar0)
             EVT_IF_FLAG(LVar0, N(FLAG_IGNORE_IMMUNE))
                 EVT_EXEC_WAIT(N(OnHit))
@@ -661,7 +661,7 @@ EvtScript N(handleEvent) = {
                     EVT_CALL(SetOwnerID, LVar0)
                     EVT_SET_CONST(LVar0, 1)
                     EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim19)
-                    EVT_EXEC_WAIT(EVS_DoNormalHit)
+                    EVT_EXEC_WAIT(EVS_Enemy_Hit)
                 EVT_END_THREAD
             EVT_END_IF
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_CLONE2_ID), LVar0)
@@ -671,16 +671,16 @@ EvtScript N(handleEvent) = {
                     EVT_CALL(SetOwnerID, LVar0)
                     EVT_SET_CONST(LVar0, 1)
                     EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim19)
-                    EVT_EXEC_WAIT(EVS_DoNormalHit)
+                    EVT_EXEC_WAIT(EVS_Enemy_Hit)
                 EVT_END_THREAD
             EVT_END_IF
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim19)
-            EVT_EXEC_WAIT(EVS_DoNormalHit)
+            EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_EXEC_WAIT(N(OnDeath))
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim19)
-            EVT_EXEC_WAIT(EVS_DoDeath)
+            EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_CLONE1_ID), LVar0)
@@ -691,7 +691,7 @@ EvtScript N(handleEvent) = {
                     EVT_SET_CONST(LVar0, 1)
                     EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim20)
                     EVT_SET_CONST(LVar2, ANIM_CrystalKing_Anim21)
-                    EVT_EXEC_WAIT(DoBurnHit)
+                    EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
                 EVT_END_THREAD
             EVT_END_IF
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_CLONE2_ID), LVar0)
@@ -702,17 +702,17 @@ EvtScript N(handleEvent) = {
                     EVT_SET_CONST(LVar0, 1)
                     EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim20)
                     EVT_SET_CONST(LVar2, ANIM_CrystalKing_Anim21)
-                    EVT_EXEC_WAIT(DoBurnHit)
+                    EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
                 EVT_END_THREAD
             EVT_END_IF
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim20)
             EVT_SET_CONST(LVar2, ANIM_CrystalKing_Anim21)
-            EVT_EXEC_WAIT(DoBurnHit)
+            EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
             EVT_EXEC_WAIT(N(OnDeath))
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim21)
-            EVT_EXEC_WAIT(EVS_DoDeath)
+            EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_THREAD
@@ -769,7 +769,7 @@ EvtScript N(handleEvent) = {
             EVT_END_THREAD
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim09)
-            EVT_EXEC_WAIT(DoRecover)
+            EVT_EXEC_WAIT(EVS_Enemy_Recover)
             EVT_CALL(CountPlayerTargets, ACTOR_SELF, TARGET_FLAG_2 | TARGET_FLAG_8000, LVar0)
             EVT_IF_LE(LVar0, 1)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim0E)
@@ -784,7 +784,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_CrystalKing_Anim19)
-            EVT_EXEC_WAIT(DoAirLift)
+            EVT_EXEC_WAIT(EVS_Enemy_AirLift)
         EVT_CASE_EQ(EVENT_SWAP_PARTNER)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar1, 20)

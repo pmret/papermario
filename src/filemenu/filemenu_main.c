@@ -25,6 +25,17 @@ extern HudScript HES_OptionMonoOff;
 extern HudScript HES_OptionStereoOn;
 extern HudScript HES_OptionStereoOff;
 
+#if VERSION_PAL
+extern u8 D_filemenu_802508E8[4];
+extern u8 D_filemenu_80250938[4];
+extern u8 D_filemenu_8025093C[4];
+#define COPY_OFFSET_X (D_filemenu_8025093C[gCurrentLanguage])
+#define SAVE_OFFSET_X (D_filemenu_80250938[gCurrentLanguage])
+#else
+#define SAVE_OFFSET_X 25
+#define COPY_OFFSET_X 16
+#endif
+
 BSS u8 filemenu_filename[8];
 
 #if VERSION_IQUE
@@ -47,19 +58,67 @@ BSS u8 filemenu_filename[8];
 #define NUMBER_OFFSET_Y     0
 #endif
 
+extern HudScript HES_OptionMonoOn_de;
+extern HudScript HES_OptionMonoOff_de;
+extern HudScript HES_OptionStereoOn_de;
+extern HudScript HES_OptionStereoOff_de;
+extern HudScript HES_OptionMonoOn_fr;
+extern HudScript HES_OptionMonoOff_fr;
+extern HudScript HES_OptionStereoOn_fr;
+extern HudScript HES_OptionStereoOff_fr;
+extern HudScript HES_OptionMonoOn_es;
+extern HudScript HES_OptionMonoOff_es;
+extern HudScript HES_OptionStereoOn_es;
+extern HudScript HES_OptionStereoOff_es;
+
+#if VERSION_PAL
+HudScript* filemenu_main_hudElemScripts[][20] = {
+    [LANGUAGE_EN] = {
+        &HES_Spirit1, &HES_Spirit2, &HES_Spirit3, &HES_Spirit4, &HES_Spirit5, &HES_Spirit6, &HES_Spirit7,
+        &HES_Spirit1Missing, &HES_Spirit2Missing, &HES_Spirit3Missing, &HES_Spirit4Missing, &HES_Spirit5Missing,
+        &HES_Spirit6Missing, &HES_Spirit7Missing, &HES_JpFile, &HES_JpFileDisabled, &HES_OptionMonoOn,
+        &HES_OptionMonoOff,
+        &HES_OptionStereoOn, &HES_OptionStereoOff,
+    },
+    [LANGUAGE_DE] = {
+        &HES_Spirit1, &HES_Spirit2, &HES_Spirit3, &HES_Spirit4, &HES_Spirit5, &HES_Spirit6, &HES_Spirit7,
+        &HES_Spirit1Missing, &HES_Spirit2Missing, &HES_Spirit3Missing, &HES_Spirit4Missing, &HES_Spirit5Missing,
+        &HES_Spirit6Missing, &HES_Spirit7Missing, &HES_JpFile, &HES_JpFileDisabled, &HES_OptionMonoOn_de,
+        &HES_OptionMonoOff_de,
+        &HES_OptionStereoOn_de, &HES_OptionStereoOff_de,
+    },
+    [LANGUAGE_FR] = {
+        &HES_Spirit1, &HES_Spirit2, &HES_Spirit3, &HES_Spirit4, &HES_Spirit5, &HES_Spirit6, &HES_Spirit7,
+        &HES_Spirit1Missing, &HES_Spirit2Missing, &HES_Spirit3Missing, &HES_Spirit4Missing, &HES_Spirit5Missing,
+        &HES_Spirit6Missing, &HES_Spirit7Missing, &HES_JpFile, &HES_JpFileDisabled, &HES_OptionMonoOn_fr,
+        &HES_OptionMonoOff_fr,
+        &HES_OptionStereoOn_fr, &HES_OptionStereoOff_fr,
+    },
+    [LANGUAGE_ES] = {
+        &HES_Spirit1, &HES_Spirit2, &HES_Spirit3, &HES_Spirit4, &HES_Spirit5, &HES_Spirit6, &HES_Spirit7,
+        &HES_Spirit1Missing, &HES_Spirit2Missing, &HES_Spirit3Missing, &HES_Spirit4Missing, &HES_Spirit5Missing,
+        &HES_Spirit6Missing, &HES_Spirit7Missing, &HES_JpFile, &HES_JpFileDisabled, &HES_OptionMonoOn_es,
+        &HES_OptionMonoOff_es,
+        &HES_OptionStereoOn_es, &HES_OptionStereoOff_es,
+    }
+};
+#else
 HudScript* filemenu_main_hudElemScripts[] = {
     &HES_Spirit1, &HES_Spirit2, &HES_Spirit3, &HES_Spirit4, &HES_Spirit5, &HES_Spirit6, &HES_Spirit7,
     &HES_Spirit1Missing, &HES_Spirit2Missing, &HES_Spirit3Missing, &HES_Spirit4Missing, &HES_Spirit5Missing,
     &HES_Spirit6Missing, &HES_Spirit7Missing, &HES_JpFile, &HES_JpFileDisabled, &HES_OptionMonoOn, &HES_OptionMonoOff,
     &HES_OptionStereoOn, &HES_OptionStereoOff,
 };
+#endif
 
 u8 filemenu_main_gridData[] = {
     0, 0, 1, 2, 2, 3, 4, 5, 6,
     0, 0, 1, 2, 2, 3, 6, 6, 6,
     0, 0, 1, 2, 2, 3, 6, 6, 6,
     0, 0, 1, 2, 2, 3, 6, 6, 6,
+#if !VERSION_PAL
     0, 0, 1, 2, 2, 3, 6, 6, 6,
+#endif
 };
 
 MenuWindowBP filemenu_main_windowBPs[] = {
@@ -168,7 +227,7 @@ MenuWindowBP filemenu_main_windowBPs[] = {
         .width = 124 + OFFSET_WIDTH,
         .height = 15,
         .priority = WINDOW_PRIORITY_0,
-        .fpDrawContents = &filemenu_draw_contents_file_2_title ,
+        .fpDrawContents = &filemenu_draw_contents_file_2_title,
         .tab = NULL,
         .parentID = WINDOW_ID_FILEMENU_FILE2_INFO,
         .fpUpdate = { WINDOW_UPDATE_SHOW },
@@ -288,32 +347,34 @@ void filemenu_draw_contents_title(
     s32 yOffset;
 
     switch (menu->page) {
-        case 0:
+        case PAGE_0:
             msgIdx = FILE_MESSAGE_SELECT_FILE_TO_START;
             xOffset = 9;
             yOffset = 4;
             break;
-        case 1:
+        case PAGE_1:
             msgIdx = FILE_MESSAGE_SELECT_FILE_TO_DELETE;
             xOffset = DELETE_OFFSET_X;
             yOffset = 4;
             break;
-        case 3:
+        case PAGE_3:
             msgIdx = FILE_MESSAGE_COPY_WHICH_FILE;
-            xOffset = 25;
+            xOffset = SAVE_OFFSET_X;
             yOffset = 4;
             break;
-        case 4:
+        case PAGE_4:
             msgIdx = FILE_MESSAGE_COPY_TO_WHICH_FILE;
-            xOffset = 16;
+            xOffset = COPY_OFFSET_X;
             yOffset = 4;
             break;
-        case 2:
+#if !VERSION_PAL
+        case PAGE_2:
         default:
             msgIdx = FILE_MESSAGE_SELECT_FILE_TO_SAVE;
             xOffset = 10;
             yOffset = 4;
             break;
+#endif
     }
 
     filemenu_draw_message(filemenu_get_menu_message(msgIdx), baseX + xOffset, baseY + yOffset, 255, 0, 0);
@@ -355,14 +416,26 @@ void filemenu_draw_contents_option_left(
     s32 width, s32 height,
     s32 opacity, s32 darkening
 ) {
+#if VERSION_PAL
+    s32 offset = D_filemenu_802508E8[gCurrentLanguage];
+
+    if (menu->col == 0 && menu->row == 2) {
+        filemenu_set_cursor_goal_pos(WINDOW_ID_FILEMENU_OPTION_LEFT, (baseX + offset) - 10, baseY + 8);
+    }
+    filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_DELETE_FILE), baseX + offset + OFFSET_WIDTH, baseY + 2, 255, 0, 1);
+#else
     if (menu->page != 2) {
         if (menu->col == 0 && menu->row == 2) {
             filemenu_set_cursor_goal_pos(WINDOW_ID_FILEMENU_OPTION_LEFT, baseX, baseY + 8);
         }
         filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_DELETE_FILE), baseX + 8 + OFFSET_WIDTH, baseY + 2, 255, 0, 1);
     }
+#endif
 }
 
+#if VERSION_PAL
+INCLUDE_ASM(void, "filemenu/filemenu_main", filemenu_draw_contents_option_center);
+#else
 void filemenu_draw_contents_option_center(
     MenuPanel* menu,
     s32 baseX, s32 baseY,
@@ -397,7 +470,11 @@ void filemenu_draw_contents_option_center(
 
     filemenu_draw_message(filemenu_get_menu_message(msgIdx), baseX + xOffset, baseY + yOffset + 2, 255, 0, 1);
 }
+#endif
 
+#if VERSION_PAL
+INCLUDE_ASM(void, "filemenu/filemenu_main", filemenu_draw_contents_option_right);
+#else
 void filemenu_draw_contents_option_right(
     MenuPanel* menu,
     s32 baseX, s32 baseY,
@@ -411,7 +488,18 @@ void filemenu_draw_contents_option_right(
         filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_CANCEL), baseX + RIGHT_CANCEL_X, baseY + 2, 255, 0, 1);
     }
 }
+#endif
 
+#if VERSION_PAL
+void filemenu_draw_contents_file_info(
+    s32 fileIdx,
+    MenuPanel* menu,
+    s32 baseX, s32 baseY,
+    s32 width, s32 height,
+    s32 opacity, s32 darkening
+);
+INCLUDE_ASM(void, "filemenu/filemenu_main", filemenu_draw_contents_file_info);
+#else
 void filemenu_draw_contents_file_info(s32 fileIdx,
     MenuPanel* menu,
     s32 baseX, s32 baseY,
@@ -473,7 +561,17 @@ void filemenu_draw_contents_file_info(s32 fileIdx,
         }
     }
 }
+#endif
 
+#if VERSION_PAL
+void filemenu_draw_contents_file_title(
+    s32 fileIdx,
+    MenuPanel* menu,
+    s32 baseX, s32 baseY,
+    s32 width, s32 height,
+    s32 opacity, s32 darkening);
+INCLUDE_ASM(void, "filemenu/filemenu_main", filemenu_draw_contents_file_title);
+#else
 void filemenu_draw_contents_file_title(
     s32 fileIdx,
     MenuPanel* menu,
@@ -497,6 +595,7 @@ void filemenu_draw_contents_file_title(
             baseX + FILE_NAME_X, baseY + 1, 255, 0, 1, 9);
     }
 }
+#endif
 
 void filemenu_draw_contents_file_0_info(
     MenuPanel* menu,
@@ -570,6 +669,9 @@ void filemenu_draw_contents_file_3_title(
     filemenu_draw_contents_file_title(3, menu, baseX, baseY, width, height, opacity, darkening);
 }
 
+#if VERSION_PAL
+INCLUDE_ASM(void, "filemenu/filemenu_main", filemenu_main_init);
+#else
 void filemenu_main_init(MenuPanel* menu) {
     s32 halfWidth;
     s32 halfWidth2;
@@ -625,7 +727,11 @@ void filemenu_main_init(MenuPanel* menu) {
     }
     menu->initialized = 1;
 }
+#endif
 
+#if VERSION_PAL
+INCLUDE_ASM(void, "filemenu/filemenu_main", filemenu_main_handle_input);
+#else
 void filemenu_main_handle_input(MenuPanel* menu) {
     s32 originalSelected = menu->selected;
     s32 i;
@@ -1065,6 +1171,7 @@ void filemenu_main_handle_input(MenuPanel* menu) {
         }
     }
 }
+#endif
 
 void filemenu_main_update(MenuPanel* menu) {
     gWindowStyles[WINDOW_ID_FILEMENU_FILE0_INFO].customStyle = &filemenu_windowStyles[15];
@@ -1095,7 +1202,7 @@ void filemenu_main_update(MenuPanel* menu) {
             break;
     }
 
-    if (filemenu_menus[0]->page == 4) {
+    if (filemenu_menus[0]->page == PAGE_4) {
         switch (filemenu_loadedFileIdx) {
             case 0:
                 gWindowStyles[WINDOW_ID_FILEMENU_FILE0_INFO].customStyle = &filemenu_windowStyles[16];
