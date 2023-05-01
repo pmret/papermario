@@ -56,10 +56,10 @@ void filemenu_draw_pal_8024DA50(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
 
 void filemenu_draw_pal_8024DA00(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
 void filemenu_draw_pal_8024D9B0(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
-void filemenu_pal_handle_input(MenuPanel*);
-void filemenu_pal_init(MenuPanel*);
-void filemenu_pal_cleanup(MenuPanel*);
-void filemenu_pal_update(MenuPanel*);
+void filemenu_selectlanguage_handle_input(MenuPanel*);
+void filemenu_selectlanguage_init(MenuPanel*);
+void filemenu_selectlanguage_cleanup(MenuPanel*);
+void filemenu_selectlanguage_update(MenuPanel*);
 
 MenuWindowBP D_filemenu_8024F1D8[] = {
     {
@@ -134,7 +134,7 @@ MenuWindowBP D_filemenu_8024F1D8[] = {
     },
 };
 
-MenuPanel filemenu_pal_menuBP = {
+MenuPanel filemenu_selectlanguage_menuBP = {
     .initialized = FALSE,
     .col = 0,
     .row = 0,
@@ -144,10 +144,10 @@ MenuPanel filemenu_pal_menuBP = {
     .numRows = 4,
     .numPages = 0,
     .gridData = D_filemenu_8024F12C,
-    .fpInit = filemenu_pal_init,
-    .fpHandleInput = filemenu_pal_handle_input,
-    .fpUpdate = filemenu_pal_update,
-    .fpCleanup = filemenu_pal_cleanup
+    .fpInit = filemenu_selectlanguage_init,
+    .fpHandleInput = filemenu_selectlanguage_handle_input,
+    .fpUpdate = filemenu_selectlanguage_update,
+    .fpCleanup = filemenu_selectlanguage_cleanup
 };
 
 void filemenu_draw_pal_8024d6a0(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
@@ -201,7 +201,7 @@ void filemenu_draw_pal_8024DAA0(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
     func_filemenu_8024D710(3, menu, baseX, baseY, width, height, opacity, darkening);
 }
 
-void filemenu_pal_init(MenuPanel* menu) {
+void filemenu_selectlanguage_init(MenuPanel* menu) {
     s16 x;
     s16* posXPtr;
     s32 i;
@@ -239,7 +239,7 @@ void filemenu_pal_init(MenuPanel* menu) {
     D_filemenu_8024F128 = 2;
 }
 
-void filemenu_pal_handle_input(MenuPanel* menu) {
+void filemenu_selectlanguage_handle_input(MenuPanel* menu) {
     s32 originalSelected = menu->selected;
     s32 var_s1 = 0;
     s32 var_a1;
@@ -318,10 +318,10 @@ void filemenu_pal_handle_input(MenuPanel* menu) {
     }
 
     if ((filemenu_pressedButtons & (BUTTON_A | BUTTON_START)) || (var_s1 != 0)) {
-        set_window_update(WINDOW_ID_FILEMENU_FILE0_INFO, (s32) &filemenu_pal_80248018);
-        set_window_update(WINDOW_ID_FILEMENU_FILE1_INFO, (s32) &filemenu_pal_80248018);
-        set_window_update(WINDOW_ID_FILEMENU_FILE2_INFO, (s32) &filemenu_pal_80248018);
-        set_window_update(WINDOW_ID_FILEMENU_FILE3_INFO, (s32) &filemenu_pal_80248018);
+        set_window_update(WINDOW_ID_FILEMENU_FILE0_INFO, (s32) &filemenu_selectlanguage_80248018);
+        set_window_update(WINDOW_ID_FILEMENU_FILE1_INFO, (s32) &filemenu_selectlanguage_80248018);
+        set_window_update(WINDOW_ID_FILEMENU_FILE2_INFO, (s32) &filemenu_selectlanguage_80248018);
+        set_window_update(WINDOW_ID_FILEMENU_FILE3_INFO, (s32) &filemenu_selectlanguage_80248018);
         set_window_update(WINDOW_ID_FILEMENU_TITLE, (s32) filemenu_update_hidden_title);
         if (var_s1 == 0) {
             sfx_play_sound(SOUND_F1);
@@ -332,7 +332,7 @@ void filemenu_pal_handle_input(MenuPanel* menu) {
     }
 }
 
-void filemenu_pal_update(MenuPanel* menu) {
+void filemenu_selectlanguage_update(MenuPanel* menu) {
     gWindowStyles[WINDOW_ID_FILEMENU_FILE0_INFO].customStyle = &filemenu_windowStyles[15];
     gWindowStyles[WINDOW_ID_FILEMENU_FILE1_INFO].customStyle = &filemenu_windowStyles[15];
     gWindowStyles[WINDOW_ID_FILEMENU_FILE2_INFO].customStyle = &filemenu_windowStyles[15];
@@ -363,7 +363,7 @@ void filemenu_pal_update(MenuPanel* menu) {
     dma_copy(titlemenu_flags_ROM_START + (D_filemenu_8024F128 * 0x800), titlemenu_flags_ROM_END, D_802517E0[D_filemenu_8024F124]);
 }
 
-void filemenu_pal_cleanup(MenuPanel* arg0) {
+void filemenu_selectlanguage_cleanup(MenuPanel* arg0) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(D_802517D0); i++) {

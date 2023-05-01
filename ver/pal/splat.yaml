@@ -429,14 +429,14 @@ segments:
     - [0x1737E0, c, filemenu_yesno]
     - [0x174820, c, filemenu_info]
     - [0x174D50, c, filemenu_createfile]
-    - [0x1760C0, c, filemenu_pal]
+    - [0x1760C0, c, filemenu_selectlanguage]
     - [0x176B40, c, filemenu_msg]
     - [0x1773A0, .data, filemenu_common]
     - [0x177680, .data, filemenu_main]
     - [0x177A00, .data, filemenu_yesno]
     - [0x177A70, .data, filemenu_info]
     - [0x177AC0, .data, filemenu_createfile]
-    - [0x177B40, .data, filemenu_pal]
+    - [0x177B40, .data, filemenu_selectlanguage]
     - start: 0x177CD0
       type: .data
       name: filemenu_gfx

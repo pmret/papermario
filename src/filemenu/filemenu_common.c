@@ -10,7 +10,7 @@ extern MenuPanel filemenu_main_menuBP;
 extern MenuPanel filemenu_yesno_menuBP;
 extern MenuPanel filemenu_info_menuBP;
 extern MenuPanel filemenu_createfile_menuBP;
-extern MenuPanel filemenu_pal_menuBP;
+extern MenuPanel filemenu_selectlanguage_menuBP;
 
 HudScript* filemenu_cursor_hudElemScripts[] = { &HES_AnimatedCursorHand };
 MenuPanel* filemenu_menus[] = {
@@ -19,7 +19,7 @@ MenuPanel* filemenu_menus[] = {
     &filemenu_info_menuBP,
     &filemenu_createfile_menuBP,
 #if VERSION_PAL
-    &filemenu_pal_menuBP,
+    &filemenu_selectlanguage_menuBP,
 #endif
 };
 s32 filemenu_cursor_posX = SCREEN_WIDTH / 2;
@@ -826,7 +826,7 @@ void filemenu_update_pal_80247f40(
     }
 }
 
-void filemenu_pal_80248018(
+void filemenu_selectlanguage_80248018(
     s32 windowIndex,
     s32* flags,
     s32* posX, s32* posY, s32* posZ,

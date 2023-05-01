@@ -69,7 +69,7 @@ WINDOW_UPDATE_FUNC(main_menu_window_update);
 WINDOW_UPDATE_FUNC(filemenu_update_show_title);
 
 #if VERSION_PAL
-WINDOW_UPDATE_FUNC(filemenu_pal_80248018);
+WINDOW_UPDATE_FUNC(filemenu_selectlanguage_80248018);
 #endif
 
 void filemenu_draw_file_name(u8*, s32, s32, s32, s32, s32, s32, s32);
