@@ -147,10 +147,10 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(DoSpinSmashHit)
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_HurtStill)
+            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Hurt)
             EVT_EXEC_WAIT(DoSpinSmashHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_BurntHurt)
+            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_HurtStill)
             EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
@@ -163,10 +163,10 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(N(returnHome))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_HurtStill)
+            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Hurt)
             EVT_EXEC_WAIT(DoShockHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_BurntStill)
+            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_HurtStill)
             EVT_EXEC_WAIT(EVS_DoDeath)
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
@@ -200,7 +200,7 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(DoAirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_HurtStill)
+            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Hurt)
             EVT_EXEC_WAIT(DoBlowAway)
             EVT_RETURN
         EVT_CASE_DEFAULT
