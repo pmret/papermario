@@ -47,6 +47,9 @@ MenuPanel filemenu_info_menuBP = {
     .fpCleanup = &filemenu_info_cleanup
 };
 
+#if VERSION_PAL
+INCLUDE_ASM(void, "filemenu/filemenu_info", filemenu_info_draw_message_contents);
+#else
 void filemenu_info_draw_message_contents(
     MenuPanel* menu,
     s32 baseX, s32 baseY,
@@ -89,6 +92,7 @@ void filemenu_info_draw_message_contents(
     }
     filemenu_set_cursor_alpha(0);
 }
+#endif
 
 void filemenu_info_init(MenuPanel* tab) {
     s32 i;
@@ -108,26 +112,28 @@ void filemenu_info_handle_input(MenuPanel* menu) {
         filemenu_currentMenu = 0;
 
         switch (menu->page) {
-            case 1:
-                menu->page = 0;
+            case PAGE_1:
+                menu->page = PAGE_0;
                 set_window_update(WINDOW_ID_FILEMENU_STEREO, (s32)filemenu_update_show_options_left);
                 set_window_update(WINDOW_ID_FILEMENU_MONO, (s32)filemenu_update_show_options_right);
                 set_window_update(WINDOW_ID_FILEMENU_OPTION_LEFT, (s32)filemenu_update_show_options_bottom);
                 set_window_update(WINDOW_ID_FILEMENU_OPTION_RIGHT, (s32)filemenu_update_show_options_bottom);
                 filemenu_set_selected(menu, 0, 2);
                 break;
-            case 4:
-                menu->page = 0;
+            case PAGE_4:
+                menu->page = PAGE_0;
                 set_window_update(WINDOW_ID_FILEMENU_STEREO, (s32)filemenu_update_show_options_left);
                 set_window_update(WINDOW_ID_FILEMENU_MONO, (s32)filemenu_update_show_options_right);
                 set_window_update(WINDOW_ID_FILEMENU_OPTION_LEFT, (s32)filemenu_update_show_options_bottom);
                 set_window_update(WINDOW_ID_FILEMENU_OPTION_RIGHT, (s32)filemenu_update_show_options_bottom);
                 filemenu_set_selected(menu, 1, 2);
                 break;
-            case 2:
+#if !VERSION_PAL
+            case PAGE_2:
                 menu->page = 2;
                 filemenu_set_selected(menu, 1, 2);
                 break;
+#endif
         }
         set_window_update(WINDOW_ID_FILEMENU_INFO, WINDOW_UPDATE_HIDE);
     }

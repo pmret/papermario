@@ -574,7 +574,7 @@ EvtScript N(displace_guy) = {
     EVT_SET(LVar2, LVar0)
     EVT_CALL(GetDamageIntensity)
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(0)
+        EVT_CASE_EQ(DAMAGE_INTENSITY_LIGHT)
             EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 1, 0)
             EVT_WAIT(1)
             EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 3, 0)
@@ -603,7 +603,7 @@ EvtScript N(displace_guy) = {
             EVT_END_LOOP
             EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
             EVT_WAIT(10)
-        EVT_CASE_EQ(1)
+        EVT_CASE_EQ(DAMAGE_INTENSITY_MEDIUM)
             EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 1, 0)
             EVT_WAIT(1)
             EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 4, 0)
@@ -632,7 +632,7 @@ EvtScript N(displace_guy) = {
             EVT_END_LOOP
             EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
             EVT_WAIT(10)
-        EVT_CASE_EQ(2)
+        EVT_CASE_EQ(DAMAGE_INTENSITY_HEAVY)
             EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 1, 0)
             EVT_WAIT(1)
             EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 6, 0)
@@ -661,7 +661,7 @@ EvtScript N(displace_guy) = {
             EVT_END_LOOP
             EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
             EVT_WAIT(10)
-        EVT_CASE_EQ(3)
+        EVT_CASE_EQ(DAMAGE_INTENSITY_EXTREME)
             EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 3, 0)
             EVT_WAIT(1)
             EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 8, 0)
@@ -696,7 +696,7 @@ EvtScript N(displace_guy) = {
             EVT_END_LOOP
             EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 0, 0)
             EVT_WAIT(10)
-        EVT_CASE_EQ(4)
+        EVT_CASE_EQ(DAMAGE_INTENSITY_UNUSED)
             EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 5, 0)
             EVT_WAIT(1)
             EVT_CALL(SetPartDispOffset, ACTOR_SELF, LVar2, 0, 10, 0)
@@ -911,11 +911,11 @@ EvtScript N(handleEvent) = {
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_ShySquadGuy_Anim01)
-            EVT_EXEC_WAIT(DoRecover)
+            EVT_EXEC_WAIT(EVS_Enemy_Recover)
         EVT_CASE_EQ(EVENT_30)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_ShySquadGuy_Anim0D)
-            EVT_EXEC_WAIT(EVS_DoNormalHit)
+            EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_WAIT(1000)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
         EVT_CASE_DEFAULT

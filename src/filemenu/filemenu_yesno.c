@@ -31,7 +31,9 @@ u8 filemenu_yesno_gridData[] = {
     0, 1,
     0, 1,
     0, 1,
+#if !VERSION_PAL
     0, 1
+#endif
 };
 
 MenuWindowBP filemenu_yesno_windowBPs[] = {
@@ -81,6 +83,9 @@ MenuPanel filemenu_yesno_menuBP = {
     .fpCleanup = &filemenu_yesno_cleanup
 };
 
+#if VERSION_PAL
+INCLUDE_ASM(void, "filemenu/filemenu_yesno", filemenu_yesno_draw_options_contents);
+#else
 void filemenu_yesno_draw_options_contents(
     MenuPanel* menu,
     s32 baseX, s32 baseY,
@@ -141,7 +146,11 @@ void filemenu_yesno_draw_options_contents(
         filemenu_set_cursor_goal_pos(WINDOW_ID_FILEMENU_YESNO_OPTIONS, baseX + cursorGoalXOffset, baseY + cursorGoalYOffset);
     }
 }
+#endif
 
+#if VERSION_PAL
+INCLUDE_ASM(void, "filemenu/filemenu_yesno", filemenu_yesno_draw_prompt_contents);
+#else
 void filemenu_yesno_draw_prompt_contents(
     MenuPanel* menu,
     s32 baseX, s32 baseY,
@@ -190,6 +199,7 @@ void filemenu_yesno_draw_prompt_contents(
             break;
     }
 }
+#endif
 
 void filemenu_yesno_init(MenuPanel* tab) {
     s32 i;
@@ -202,6 +212,9 @@ void filemenu_yesno_init(MenuPanel* tab) {
     tab->initialized = TRUE;
 }
 
+#if VERSION_PAL
+INCLUDE_ASM(void, "filemenu/filemenu_yesno", filemenu_yesno_handle_input);
+#else
 void filemenu_yesno_handle_input(MenuPanel* menu) {
     s32 oldSelected = menu->selected;
 
@@ -427,6 +440,7 @@ void filemenu_yesno_handle_input(MenuPanel* menu) {
         }
     }
 }
+#endif
 
 void filemenu_yesno_update(MenuPanel* menu) {
 }

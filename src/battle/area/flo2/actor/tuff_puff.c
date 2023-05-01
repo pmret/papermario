@@ -253,7 +253,7 @@ EvtScript N(handleEvent) = {
             EVT_ELSE
                 EVT_SET_CONST(LVar1, ANIM_RuffPuff_Anim0D)
             EVT_END_IF
-            EVT_EXEC_WAIT(EVS_DoNormalHit)
+            EVT_EXEC_WAIT(EVS_Enemy_Hit)
         EVT_CASE_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_IS_BIG), LVar1)
@@ -262,7 +262,7 @@ EvtScript N(handleEvent) = {
             EVT_ELSE
                 EVT_SET_CONST(LVar1, ANIM_RuffPuff_Anim0D)
             EVT_END_IF
-            EVT_EXEC_WAIT(EVS_DoNormalHit)
+            EVT_EXEC_WAIT(EVS_Enemy_Hit)
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET(LVar0, 1)
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_IS_BIG), LVar1)
@@ -277,7 +277,7 @@ EvtScript N(handleEvent) = {
             EVT_ELSE
                 EVT_SET_CONST(LVar2, ANIM_RuffPuff_Anim11)
             EVT_END_IF
-            EVT_EXEC_WAIT(DoBurnHit)
+            EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_SET(LVar0, 1)
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_IS_BIG), LVar1)
@@ -292,7 +292,7 @@ EvtScript N(handleEvent) = {
             EVT_ELSE
                 EVT_SET_CONST(LVar2, ANIM_RuffPuff_Anim11)
             EVT_END_IF
-            EVT_EXEC_WAIT(DoBurnHit)
+            EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
             EVT_EXEC_WAIT(N(onDeath))
             EVT_SET_CONST(LVar0, 1)
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_IS_BIG), LVar1)
@@ -301,7 +301,7 @@ EvtScript N(handleEvent) = {
             EVT_ELSE
                 EVT_SET_CONST(LVar1, ANIM_RuffPuff_Anim11)
             EVT_END_IF
-            EVT_EXEC_WAIT(EVS_DoDeath)
+            EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_ZERO_DAMAGE)
             EVT_SET_CONST(LVar0, 1)
@@ -311,7 +311,7 @@ EvtScript N(handleEvent) = {
             EVT_ELSE
                 EVT_SET_CONST(LVar1, ANIM_RuffPuff_Anim03)
             EVT_END_IF
-            EVT_EXEC_WAIT(DoImmune)
+            EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_CASE_EQ(EVENT_IMMUNE)
             EVT_SET_CONST(LVar0, 1)
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_IS_BIG), LVar1)
@@ -320,7 +320,7 @@ EvtScript N(handleEvent) = {
             EVT_ELSE
                 EVT_SET_CONST(LVar1, ANIM_RuffPuff_Anim03)
             EVT_END_IF
-            EVT_EXEC_WAIT(DoImmune)
+            EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 1)
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_IS_BIG), LVar1)
@@ -329,7 +329,7 @@ EvtScript N(handleEvent) = {
             EVT_ELSE
                 EVT_SET_CONST(LVar1, ANIM_RuffPuff_Anim0D)
             EVT_END_IF
-            EVT_EXEC_WAIT(EVS_DoNormalHit)
+            EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_EXEC_WAIT(N(onDeath))
             EVT_SET_CONST(LVar0, 1)
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_IS_BIG), LVar1)
@@ -338,7 +338,7 @@ EvtScript N(handleEvent) = {
             EVT_ELSE
                 EVT_SET_CONST(LVar1, ANIM_RuffPuff_Anim0D)
             EVT_END_IF
-            EVT_EXEC_WAIT(EVS_DoDeath)
+            EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 1)
@@ -348,7 +348,7 @@ EvtScript N(handleEvent) = {
             EVT_ELSE
                 EVT_SET_CONST(LVar1, ANIM_RuffPuff_Anim03)
             EVT_END_IF
-            EVT_EXEC_WAIT(DoRecover)
+            EVT_EXEC_WAIT(EVS_Enemy_Recover)
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_SET_CONST(LVar0, 1)
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_IS_BIG), LVar1)
@@ -357,7 +357,7 @@ EvtScript N(handleEvent) = {
             EVT_ELSE
                 EVT_SET_CONST(LVar1, ANIM_RuffPuff_Anim07)
             EVT_END_IF
-            EVT_EXEC_WAIT(DoAirLift)
+            EVT_EXEC_WAIT(EVS_Enemy_AirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_EXEC_WAIT(N(onDeath))
             EVT_SET_CONST(LVar0, 1)
@@ -367,7 +367,7 @@ EvtScript N(handleEvent) = {
             EVT_ELSE
                 EVT_SET_CONST(LVar1, ANIM_RuffPuff_Anim0D)
             EVT_END_IF
-            EVT_EXEC_WAIT(DoBlowAway)
+            EVT_EXEC_WAIT(EVS_Enemy_BlowAway)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)
@@ -377,7 +377,7 @@ EvtScript N(handleEvent) = {
             EVT_ELSE
                 EVT_SET_CONST(LVar1, ANIM_RuffPuff_Anim03)
             EVT_END_IF
-            EVT_EXEC_WAIT(DoImmune)
+            EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)

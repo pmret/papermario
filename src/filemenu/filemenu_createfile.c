@@ -12,11 +12,23 @@ HudScript* filemenu_createfile_hudElemScripts[] = {
 
 s32 D_8024A18C = -4;
 
+#if VERSION_PAL
+#define WINDOW_1_Y (0)
+#define WINDOW_2_Y (55)
+#define WINDOW_2_HEIGHT (133)
+#define ROWS (8)
+#else
+#define WINDOW_1_Y (10)
+#define WINDOW_2_Y (67)
+#define WINDOW_2_HEIGHT (113)
+#define ROWS (6)
+#endif
+
 MenuWindowBP filemenu_createfile_windowBPs[] = {
     {
         .windowID = WINDOW_ID_FILEMENU_CREATEFILE_HEADER,
         .unk_01 = 0,
-        .pos = { .x = 68, .y = 10 },
+        .pos = { .x = 68, .y = WINDOW_1_Y },
         .width = 164,
         .height = 46,
         .priority = WINDOW_PRIORITY_64,
@@ -30,9 +42,9 @@ MenuWindowBP filemenu_createfile_windowBPs[] = {
     {
         .windowID = WINDOW_ID_FILEMENU_KEYBOARD,
         .unk_01 = 0,
-        .pos = { .x = 12, .y = 67 },
+        .pos = { .x = 12, .y = WINDOW_2_Y },
         .width = 262,
-        .height = 113,
+        .height = WINDOW_2_HEIGHT,
         .priority = WINDOW_PRIORITY_64,
         .fpDrawContents = &filemenu_draw_contents_choose_name,
         .tab = NULL,
@@ -50,7 +62,7 @@ MenuPanel filemenu_createfile_menuBP = {
     .selected = 0,
     .page = 0,
     .numCols = 13,
-    .numRows = 6,
+    .numRows = ROWS,
     .numPages = 0,
     .gridData = filemenu_createfile_gridData,
     .fpInit = &filemenu_choose_name_init,
@@ -82,6 +94,37 @@ void filemenu_draw_contents_file_create_header(
     s32 width, s32 height,
     s32 opacity, s32 darkening
 ) {
+#if VERSION_PAL
+    s32 temp_s2 = D_filemenu_8025095C[gCurrentLanguage]; // 36
+    s32 yOffset;
+    s32 xOffset;
+    s32 i;
+
+    filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_ENTER_A_FILE_NAME), baseX + 10, baseY + 6, 255, 0, 0);
+    filemenu_draw_file_name(filemenu_filename, 8, baseX + temp_s2 + 2, baseY + 22, 255, 0, 0, 11);
+    yOffset = 41;
+
+    for (i = 0; i < ARRAY_COUNT(filemenu_filename); i++) {
+        xOffset = temp_s2 + 6 + i * 11;
+        hud_element_set_render_pos(filemenu_createfile_hudElems[1], baseX + xOffset, baseY + yOffset);
+        if (i == 0) {
+            hud_element_draw_without_clipping(filemenu_createfile_hudElems[1]);
+        } else {
+            hud_element_draw_next(filemenu_createfile_hudElems[1]);
+        }
+    }
+
+    if (filemenu_currentMenu == 3) {
+        if (filemenu_filename_pos == 8) {
+            xOffset = temp_s2 + 86;
+        } else {
+            xOffset = temp_s2 + 9 + filemenu_filename_pos * 11;
+        }
+        yOffset = 45;
+        hud_element_set_render_pos(filemenu_createfile_hudElems[0], baseX + xOffset, baseY + yOffset);
+        hud_element_draw_next(filemenu_createfile_hudElems[0]);
+    }
+#else
     s32 xOffset;
     s32 yOffset;
     s32 i;
@@ -110,8 +153,12 @@ void filemenu_draw_contents_file_create_header(
         hud_element_set_render_pos(filemenu_createfile_hudElems[0], baseX + phi_v0, baseY + 45);
         hud_element_draw_next(filemenu_createfile_hudElems[0]);
     }
+#endif
 }
 
+#if VERSION_PAL
+INCLUDE_ASM(void, "filemenu/filemenu_createfile", filemenu_draw_contents_choose_name);
+#else
 void filemenu_draw_contents_choose_name(
     MenuPanel* menu,
     s32 baseX, s32 baseY,
@@ -243,6 +290,7 @@ void filemenu_draw_contents_choose_name(
         filemenu_set_cursor_goal_pos(WINDOW_ID_FILEMENU_KEYBOARD, baseX + 2 + menu->col * 19, baseY + 13 + menu->row * 17);
     }
 }
+#endif
 
 void filemenu_choose_name_init(MenuPanel* menu) {
     s32 i;
@@ -268,6 +316,9 @@ void filemenu_choose_name_init(MenuPanel* menu) {
 
     menu->initialized = TRUE;
 }
+#if VERSION_PAL
+INCLUDE_ASM(void, "filemenu/filemenu_createfile", filemenu_choose_name_handle_input);
+#else
 
 void filemenu_choose_name_handle_input(MenuPanel* menu) {
     s32 oldSelected = menu->selected;
@@ -470,6 +521,7 @@ void filemenu_choose_name_handle_input(MenuPanel* menu) {
         filemenu_set_selected(newMenu2, 0, 0);
     }
 }
+#endif
 
 static const f32 padding[2] = { 0.0f, 0.0f }; // not sure why this is needed
 
