@@ -16,8 +16,7 @@ API_CALLABLE(GetDamageIntensity) {
     } else {
         script->varTable[0] = DAMAGE_INTENSITY_EXTREME;
     }
-// i hate indenting my code!
-              return ApiStatus_DONE2;
+    return ApiStatus_DONE2;
 }
 
 API_CALLABLE(AddEffectOffset) {
