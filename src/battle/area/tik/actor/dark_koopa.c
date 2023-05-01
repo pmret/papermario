@@ -358,33 +358,33 @@ EvtScript N(handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Hurt)
-            EVT_EXEC_WAIT(EVS_DoNormalHit)
+            EVT_EXEC_WAIT(EVS_Enemy_Hit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_BurnHurt)
             EVT_SET_CONST(LVar2, ANIM_KoopaTroopa_Dark_BurnStill)
-            EVT_EXEC_WAIT(DoBurnHit)
+            EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_BurnHurt)
             EVT_SET_CONST(LVar2, ANIM_KoopaTroopa_Dark_BurnStill)
-            EVT_EXEC_WAIT(DoBurnHit)
+            EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_BurnStill)
-            EVT_EXEC_WAIT(EVS_DoDeath)
+            EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Hurt)
-            EVT_EXEC_WAIT(DoSpinSmashHit)
+            EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Hurt)
-            EVT_EXEC_WAIT(DoSpinSmashHit)
+            EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Hurt)
-            EVT_EXEC_WAIT(EVS_DoDeath)
+            EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_FLIP_TRIGGER)
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
@@ -429,23 +429,23 @@ EvtScript N(handleEvent) = {
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Hurt)
-            EVT_EXEC_WAIT(DoShockHit)
+            EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Hurt)
-            EVT_EXEC_WAIT(DoJumpBack)
+            EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Run)
-            EVT_EXEC_WAIT(DoReturnHome)
+            EVT_EXEC_WAIT(EVS_Enemy_ReturnHome)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Hurt)
-            EVT_EXEC_WAIT(DoShockHit)
+            EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Hurt)
-            EVT_EXEC_WAIT(EVS_DoDeath)
+            EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
@@ -455,7 +455,7 @@ EvtScript N(handleEvent) = {
                 EVT_CASE_OR_EQ(1)
                     EVT_SET_CONST(LVar0, 1)
                     EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_ShellEnter)
-                    EVT_EXEC_WAIT(DoImmune)
+                    EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
                     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
                     EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
                         EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_ShellExit)
@@ -466,25 +466,25 @@ EvtScript N(handleEvent) = {
                 EVT_CASE_OR_EQ(3)
                     EVT_SET_CONST(LVar0, 1)
                     EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_ToppleStruggle)
-                    EVT_EXEC_WAIT(DoImmune)
+                    EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
                 EVT_END_CASE_GROUP
             EVT_END_SWITCH
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Hurt)
-            EVT_EXEC_WAIT(EVS_DoNormalHit)
+            EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Hurt)
-            EVT_EXEC_WAIT(EVS_DoDeath)
+            EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_END_FIRST_STRIKE)
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
             EVT_IF_EQ(LVar0, 0)
                 EVT_SET_CONST(LVar0, 1)
                 EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Run)
-                EVT_EXEC_WAIT(DoReturnHome)
+                EVT_EXEC_WAIT(EVS_Enemy_ReturnHome)
             EVT_END_IF
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetHomePos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -494,7 +494,7 @@ EvtScript N(handleEvent) = {
             EVT_IF_EQ(LVar0, 0)
                 EVT_SET_CONST(LVar0, 1)
                 EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Scramble)
-                EVT_EXEC_WAIT(DoRecover)
+                EVT_EXEC_WAIT(EVS_Enemy_Recover)
             EVT_END_IF
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
@@ -504,14 +504,14 @@ EvtScript N(handleEvent) = {
                     EVT_SET_CONST(LVar0, 1)
                     EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Run)
                     EVT_SET_CONST(LVar2, ANIM_KoopaTroopa_Dark_Hurt)
-                    EVT_EXEC_WAIT(DoScareAway)
+                    EVT_EXEC_WAIT(EVS_Enemy_ScareAway)
                     EVT_RETURN
                 EVT_END_CASE_GROUP
                 EVT_CASE_OR_EQ(2)
                 EVT_CASE_OR_EQ(3)
                     EVT_SET_CONST(LVar0, 1)
                     EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_ToppleStruggle)
-                    EVT_EXEC_WAIT(DoImmune)
+                    EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
                 EVT_END_CASE_GROUP
             EVT_END_SWITCH
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
@@ -528,7 +528,7 @@ EvtScript N(handleEvent) = {
                     EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_ToppleStruggle)
                 EVT_END_CASE_GROUP
             EVT_END_SWITCH
-            EVT_EXEC_WAIT(DoAirLift)
+            EVT_EXEC_WAIT(EVS_Enemy_AirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
             EVT_SWITCH(LVar0)
@@ -543,7 +543,7 @@ EvtScript N(handleEvent) = {
                     EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_ToppleStruggle)
                 EVT_END_CASE_GROUP
             EVT_END_SWITCH
-            EVT_EXEC_WAIT(DoBlowAway)
+            EVT_EXEC_WAIT(EVS_Enemy_BlowAway)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
@@ -552,13 +552,13 @@ EvtScript N(handleEvent) = {
                 EVT_CASE_OR_EQ(1)
                     EVT_SET_CONST(LVar0, 1)
                     EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Idle)
-                    EVT_EXEC_WAIT(DoImmune)
+                    EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
                 EVT_END_CASE_GROUP
                 EVT_CASE_OR_EQ(2)
                 EVT_CASE_OR_EQ(3)
                     EVT_SET_CONST(LVar0, 1)
                     EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_ToppleStruggle)
-                    EVT_EXEC_WAIT(DoImmune)
+                    EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
                 EVT_END_CASE_GROUP
             EVT_END_SWITCH
     EVT_END_SWITCH
@@ -671,7 +671,7 @@ EvtScript N(attackShellToss) = {
             EVT_CALL(YieldTurn)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Run)
-            EVT_EXEC_WAIT(DoReturnHome)
+            EVT_EXEC_WAIT(EVS_Enemy_ReturnHome)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Idle)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
@@ -777,7 +777,7 @@ EvtScript N(attackDizzyTornado) = {
             EVT_CALL(YieldTurn)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_Dark_Run)
-            EVT_EXEC_WAIT(DoReturnHome)
+            EVT_EXEC_WAIT(EVS_Enemy_ReturnHome)
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_Dark_Scramble)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH

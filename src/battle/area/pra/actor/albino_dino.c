@@ -12,15 +12,15 @@ extern EvtScript N(takeTurn);
 extern EvtScript N(handleEvent);
 
 s32 N(IdleAnimations)[] = {
-    STATUS_NORMAL, ANIM_AlbinoDino_Anim03,
-    STATUS_STONE, ANIM_AlbinoDino_Anim00,
-    STATUS_SLEEP, ANIM_AlbinoDino_Anim03,
-    STATUS_POISON, ANIM_AlbinoDino_Anim03,
-    STATUS_STOP, ANIM_AlbinoDino_Anim00,
-    STATUS_STATIC, ANIM_AlbinoDino_Anim03,
-    STATUS_PARALYZE, ANIM_AlbinoDino_Anim00,
-    STATUS_DIZZY, ANIM_AlbinoDino_Anim00,
-    STATUS_FEAR, ANIM_AlbinoDino_Anim00,
+    STATUS_NORMAL, ANIM_AlbinoDino_Idle,
+    STATUS_STONE, ANIM_AlbinoDino_Still,
+    STATUS_SLEEP, ANIM_AlbinoDino_Idle,
+    STATUS_POISON, ANIM_AlbinoDino_Idle,
+    STATUS_STOP, ANIM_AlbinoDino_Still,
+    STATUS_STATIC, ANIM_AlbinoDino_Idle,
+    STATUS_PARALYZE, ANIM_AlbinoDino_Still,
+    STATUS_DIZZY, ANIM_AlbinoDino_Still,
+    STATUS_FEAR, ANIM_AlbinoDino_Still,
     STATUS_END,
 };
 
@@ -107,11 +107,11 @@ EvtScript N(idle) = {
 };
 
 EvtScript N(returnHome) = {
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_AlbinoDino_Anim05)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_AlbinoDino_Run)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_AlbinoDino_Anim03)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_AlbinoDino_Idle)
     EVT_RETURN
     EVT_END
 };
@@ -124,84 +124,84 @@ EvtScript N(handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Anim08)
-            EVT_EXEC_WAIT(EVS_DoNormalHit)
+            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Hurt)
+            EVT_EXEC_WAIT(EVS_Enemy_Hit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Anim0A)
-            EVT_SET_CONST(LVar2, ANIM_AlbinoDino_Anim0B)
-            EVT_EXEC_WAIT(DoBurnHit)
+            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_BurntHurt)
+            EVT_SET_CONST(LVar2, ANIM_AlbinoDino_BurntStill)
+            EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Anim0A)
-            EVT_SET_CONST(LVar2, ANIM_AlbinoDino_Anim0B)
-            EVT_EXEC_WAIT(DoBurnHit)
+            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_BurntHurt)
+            EVT_SET_CONST(LVar2, ANIM_AlbinoDino_BurntStill)
+            EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Anim0B)
-            EVT_EXEC_WAIT(EVS_DoDeath)
+            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_BurntStill)
+            EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Anim08)
-            EVT_EXEC_WAIT(DoSpinSmashHit)
+            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Hurt)
+            EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Anim08)
-            EVT_EXEC_WAIT(DoSpinSmashHit)
+            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Hurt)
+            EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Anim09)
-            EVT_EXEC_WAIT(EVS_DoDeath)
+            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_HurtStill)
+            EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Anim08)
-            EVT_EXEC_WAIT(DoShockHit)
+            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Hurt)
+            EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Anim08)
-            EVT_EXEC_WAIT(DoJumpBack)
+            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Hurt)
+            EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
             EVT_EXEC_WAIT(N(returnHome))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Anim08)
-            EVT_EXEC_WAIT(DoShockHit)
+            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Hurt)
+            EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Anim09)
-            EVT_EXEC_WAIT(EVS_DoDeath)
+            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_HurtStill)
+            EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Anim03)
-            EVT_EXEC_WAIT(DoImmune)
+            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Idle)
+            EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Anim08)
-            EVT_EXEC_WAIT(EVS_DoNormalHit)
+            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Hurt)
+            EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Anim09)
-            EVT_EXEC_WAIT(EVS_DoDeath)
+            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_HurtStill)
+            EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Anim03)
-            EVT_EXEC_WAIT(DoRecover)
+            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Idle)
+            EVT_EXEC_WAIT(EVS_Enemy_Recover)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Anim05)
-            EVT_SET_CONST(LVar2, ANIM_AlbinoDino_Anim08)
-            EVT_EXEC_WAIT(DoScareAway)
+            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Run)
+            EVT_SET_CONST(LVar2, ANIM_AlbinoDino_Hurt)
+            EVT_EXEC_WAIT(EVS_Enemy_ScareAway)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Anim05)
-            EVT_EXEC_WAIT(DoAirLift)
+            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Run)
+            EVT_EXEC_WAIT(EVS_Enemy_AirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Anim08)
-            EVT_EXEC_WAIT(DoBlowAway)
+            EVT_SET_CONST(LVar1, ANIM_AlbinoDino_Hurt)
+            EVT_EXEC_WAIT(EVS_Enemy_BlowAway)
             EVT_RETURN
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
@@ -249,7 +249,7 @@ EvtScript N(takeTurn) = {
             EVT_WAIT(4)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_AlbinoDino_Anim05)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_AlbinoDino_Run)
     EVT_WAIT(20)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarF, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVarF)
@@ -306,7 +306,7 @@ EvtScript N(takeTurn) = {
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2FD)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_AlbinoDino_Anim03)
+            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_AlbinoDino_Idle)
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 3, EVT_FLOAT(1.0))
             EVT_WAIT(10)
             EVT_CALL(YieldTurn)

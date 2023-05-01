@@ -143,7 +143,7 @@ EvtScript N(80219390) = {
     EVT_SET_CONST(LVar0, 1)
     EVT_SET_CONST(LVar1, ANIM_BulletBill_Anim07)
     EVT_SET(LVar2, -12345)
-    EVT_EXEC_WAIT(EVS_DoDeath)
+    EVT_EXEC_WAIT(EVS_Enemy_Death)
     EVT_RETURN
     EVT_END
 };
@@ -156,11 +156,11 @@ EvtScript N(handleEvent_802193E8) = {
         EVT_CASE_EQ(EVENT_HIT_COMBO)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BulletBill_Anim05)
-            EVT_EXEC_WAIT(EVS_DoNormalHit)
+            EVT_EXEC_WAIT(EVS_Enemy_Hit)
         EVT_CASE_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BulletBill_Anim05)
-            EVT_EXEC_WAIT(EVS_DoNormalHit)
+            EVT_EXEC_WAIT(EVS_Enemy_Hit)
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_EXEC_WAIT(N(80219390))
             EVT_RETURN
@@ -176,13 +176,13 @@ EvtScript N(handleEvent_802193E8) = {
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BulletBill_Anim05)
-            EVT_EXEC_WAIT(DoShockHit)
+            EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_EXEC_WAIT(N(80219390))
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BulletBill_Anim05)
-            EVT_EXEC_WAIT(DoShockHit)
+            EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_EXEC_WAIT(N(80219390))
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
@@ -190,12 +190,12 @@ EvtScript N(handleEvent_802193E8) = {
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BulletBill_Anim01)
-            EVT_EXEC_WAIT(DoImmune)
+            EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BulletBill_Anim05)
-            EVT_EXEC_WAIT(EVS_DoNormalHit)
+            EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_EXEC_WAIT(N(80219390))
             EVT_RETURN
         EVT_CASE_EQ(EVENT_EXPLODE_TRIGGER)
@@ -204,21 +204,21 @@ EvtScript N(handleEvent_802193E8) = {
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BulletBill_Anim01)
-            EVT_EXEC_WAIT(DoRecover)
+            EVT_EXEC_WAIT(EVS_Enemy_Recover)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BulletBill_Anim05)
-            EVT_EXEC_WAIT(EVS_DoNormalHit)
+            EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_EXEC_WAIT(N(80219390))
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BulletBill_Anim03)
-            EVT_EXEC_WAIT(DoAirLift)
+            EVT_EXEC_WAIT(EVS_Enemy_AirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BulletBill_Anim03)
-            EVT_EXEC_WAIT(DoBlowAway)
+            EVT_EXEC_WAIT(EVS_Enemy_BlowAway)
             EVT_RETURN
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
@@ -283,7 +283,7 @@ EvtScript N(takeTurn_802197C0) = {
     EVT_SET_CONST(LVar0, 1)
     EVT_SET_CONST(LVar1, ANIM_BulletBill_Anim07)
     EVT_SET(LVar2, -12345)
-    EVT_EXEC_WAIT(EVS_DoDeath)
+    EVT_EXEC_WAIT(EVS_Enemy_Death)
     EVT_RETURN
     EVT_END
 };

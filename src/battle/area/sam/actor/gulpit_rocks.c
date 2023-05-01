@@ -138,7 +138,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_Gulpit_Anim10)
             EVT_SET_CONST(LVar2, ANIM_Gulpit_Anim12)
             EVT_EXEC_WAIT(N(setAnim))
-            EVT_EXEC_WAIT(EVS_DoNormalHit)
+            EVT_EXEC_WAIT(EVS_Enemy_Hit)
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
@@ -148,7 +148,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_Gulpit_Anim10)
             EVT_SET_CONST(LVar2, ANIM_Gulpit_Anim12)
             EVT_EXEC_WAIT(N(setAnim))
-            EVT_EXEC_WAIT(DoImmune)
+            EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_BURN_DEATH)
         EVT_CASE_OR_EQ(EVENT_DEATH)
@@ -156,7 +156,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_Gulpit_Anim10)
             EVT_SET_CONST(LVar2, ANIM_Gulpit_Anim12)
             EVT_EXEC_WAIT(N(setAnim))
-            EVT_EXEC_WAIT(EVS_DoNormalHit)
+            EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
             EVT_SWITCH(LVar0)
