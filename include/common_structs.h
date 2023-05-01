@@ -2040,7 +2040,7 @@ typedef struct SaveDataHeader {
     /* 0x0038 */ s32 saveSlot;
     /* 0x003C */ u32 saveCount;
     /* 0x0040 */ u32 language;
-    /* 0x0041 */ s8 ignored[0x3C];
+    /* 0x0044 */ s8 ignored[0x3C];
 } SaveDataHeader;
 
 typedef struct SaveMetadata {
