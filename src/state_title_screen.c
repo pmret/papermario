@@ -70,10 +70,16 @@ typedef struct TitleDataStruct {
     /* 0xC */ s32 copyrightPalette;
 } TitleDataStruct; // size = 0x10
 
+#if VERSION_JP
+#define COPYRIGHT_WIDTH 128
+#else
+#define COPYRIGHT_WIDTH 144
+#endif
+
 extern s16 D_800A0970;
 extern TitleDataStruct* TitleScreen_ImgList;
 extern s32* TitleScreen_ImgList_Logo;
-extern u8 (*TitleScreen_ImgList_Copyright)[144]; // 144 being the width of the image
+extern u8 (*TitleScreen_ImgList_Copyright)[COPYRIGHT_WIDTH];
 extern s32* TitleScreen_ImgList_PressStart;
 #if VERSION_JP
 extern s32* TitleScreen_ImgList_CopyrightPalette;
@@ -109,7 +115,7 @@ void state_init_title_screen(void) {
     general_heap_free(titleData);
 
     TitleScreen_ImgList_Logo = (s32*)(TitleScreen_ImgList->logo + (s32) TitleScreen_ImgList);
-    TitleScreen_ImgList_Copyright = (u8 (*)[144]) ((s32*)(TitleScreen_ImgList->copyright + (s32) TitleScreen_ImgList));
+    TitleScreen_ImgList_Copyright = (u8 (*)[COPYRIGHT_WIDTH]) ((s32*)(TitleScreen_ImgList->copyright + (s32) TitleScreen_ImgList));
     TitleScreen_ImgList_PressStart = (s32*)(TitleScreen_ImgList->pressStart + (s32) TitleScreen_ImgList);
 #if VERSION_JP
     TitleScreen_ImgList_CopyrightPalette = (s32*)(TitleScreen_ImgList->copyrightPalette + (s32) TitleScreen_ImgList);
@@ -462,14 +468,14 @@ void title_screen_draw_press_start(void) {
 #define YL_BASE 724
 #define YH_BASE 764
 #define COPYRIGHT_TEX_CHUNKS 4
-#define COPYRIGHT_IMG &TitleScreen_ImgList_Copyright[k]
+#define COPYRIGHT_IMG(k, i) &TitleScreen_ImgList_Copyright[k]
 #define LTT_LRT 9
 #else
 #define RECT_SIZE 0x40
 #define YL_BASE 764
 #define YH_BASE 828
 #define COPYRIGHT_TEX_CHUNKS 2
-#define COPYRIGHT_IMG &TitleScreen_ImgList_Copyright[16 * i]
+#define COPYRIGHT_IMG(k, i) &TitleScreen_ImgList_Copyright[16 * i]
 #define LTT_LRT 15
 #endif
 
@@ -494,7 +500,8 @@ void title_screen_draw_copyright(f32 arg0) {
 
 #if VERSION_JP
     gDPLoadTLUT_pal16(gMainGfxPos++, 0, TitleScreen_ImgList_CopyrightPalette);
-    gDPLoadTextureTile_4b(gMainGfxPos++, TitleScreen_ImgList_Copyright, G_IM_FMT_CI, 128, 0, 0, 0, 127, 31, 0,
+    gDPLoadTextureTile_4b(gMainGfxPos++, TitleScreen_ImgList_Copyright, G_IM_FMT_CI,
+                          COPYRIGHT_WIDTH, 0, 0, 0, 127, 31, 0,
                           G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                           G_TX_NOLOD);
     gSPTextureRectangle(gMainGfxPos++, 388, YL_BASE, 900, 892, G_TX_RENDERTILE,
@@ -504,8 +511,8 @@ void title_screen_draw_copyright(f32 arg0) {
         s32 k = 10 * i;
         alpha = 0; // TODO figure out why this is needed
 
-        gDPLoadTextureTile(gMainGfxPos++, COPYRIGHT_IMG, G_IM_FMT_IA, G_IM_SIZ_8b,
-                           144, 32, 0, 0, 143, LTT_LRT, 0,
+        gDPLoadTextureTile(gMainGfxPos++, COPYRIGHT_IMG(k, i), G_IM_FMT_IA, G_IM_SIZ_8b,
+                           COPYRIGHT_WIDTH, 32, 0, 0, 143, LTT_LRT, 0,
                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                            G_TX_NOLOD);
         gSPTextureRectangle(gMainGfxPos++, 356, YL_BASE + (RECT_SIZE * i), 932, YH_BASE + (RECT_SIZE * i),
