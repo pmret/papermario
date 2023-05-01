@@ -35,7 +35,7 @@
     ],
     "[c]": {
         "editor.wordSeparators": "`~!@#%^&*()-=+[{]}\\|;:'\",.<>/?", // no $, for scripts
-        "editor.formatOnSave": true,
+        "editor.formatOnSave": false, // TODO: enable this once we solve EVTs, see #1004
         "editor.formatOnSaveMode": "modifications",
         "editor.defaultFormatter": "xaver.clang-format",
     },
