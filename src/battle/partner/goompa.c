@@ -97,37 +97,37 @@ EvtScript N(handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Goompa_Injured)
-            EVT_EXEC_WAIT(EVS_DoNormalHit)
+            EVT_EXEC_WAIT(EVS_Enemy_Hit)
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_CALL(PlaySound, SOUND_208C)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Goompa_Injured)
-            EVT_EXEC_WAIT(DoImmune)
+            EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SPIKE_CONTACT)
             EVT_SET_CONST(LVar1, ANIM_Goompa_Injured)
             EVT_SET_CONST(LVar2, ANIM_Goompa_Run)
             EVT_SET_CONST(LVar3, ANIM_Goompa_Idle)
-            EVT_EXEC_WAIT(DoPartnerSpikeContact)
+            EVT_EXEC_WAIT(EVS_Partner_SpikeContact)
         EVT_CASE_EQ(EVENT_BURN_CONTACT)
             EVT_SET_CONST(LVar0, ANIM_Goompa_Injured)
             EVT_SET_CONST(LVar1, ANIM_Goompa_Injured)
             EVT_SET_CONST(LVar2, ANIM_Goompa_Injured)
             EVT_SET_CONST(LVar3, ANIM_Goompa_Run)
             EVT_SET_CONST(LVar4, ANIM_Goompa_Idle)
-            EVT_EXEC_WAIT(DoPartnerBurnContact)
+            EVT_EXEC_WAIT(EVS_Partner_BurnContact)
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar0, 0)
             EVT_SET_CONST(LVar1, ANIM_Goompa_Injured)
-            EVT_EXEC_WAIT(EVS_DoNormalHit)
+            EVT_EXEC_WAIT(EVS_Enemy_Hit)
         EVT_CASE_EQ(EVENT_33)
         EVT_CASE_EQ(EVENT_RECOVER_FROM_KO)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Goompa_Idle)
             EVT_SET_CONST(LVar2, ANIM_Goompa_Run)
-            EVT_EXEC_WAIT(DoPartnerRecover)
+            EVT_EXEC_WAIT(EVS_Partner_Recover)
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
@@ -155,7 +155,7 @@ EvtScript N(celebrate) = {
     EVT_SET_CONST(LVar0, 1)
     EVT_SET_CONST(LVar1, ANIM_Goompa_Celebrate)
     EVT_SET_CONST(LVar2, ANIM_Goompa_Walk)
-    EVT_EXEC_WAIT(D_80294720)
+    EVT_EXEC_WAIT(EVS_Partner_Celebrate)
     EVT_RETURN
     EVT_END
 };
@@ -163,7 +163,7 @@ EvtScript N(celebrate) = {
 EvtScript N(runAway) = {
     EVT_SET_CONST(LVar0, 1)
     EVT_SET_CONST(LVar1, ANIM_Goompa_Run)
-    EVT_EXEC_WAIT(DoPartnerRunAway)
+    EVT_EXEC_WAIT(EVS_Partner_RunAway)
     EVT_RETURN
     EVT_END
 };

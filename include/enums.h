@@ -2672,7 +2672,7 @@ enum ActionRatings {
 
 enum DamageSources {
     DMG_SRC_DEFAULT                 = 0,
-    DMG_SRC_BABY_BLOOPER_SELF       = 1,
+    DMG_SRC_LEECH                   = 1,    // used by Baby Blooper, but not Fuzzy
     DMG_SRC_SPIN_SMASH              = 2,
     DMG_SRC_D_DOWN_POUND            = 3,
     DMG_SRC_D_DOWN_JUMP             = 4,
@@ -4126,6 +4126,14 @@ enum HazardType {
     HAZARD_TYPE_LAVA        = 1,
     HAZARD_TYPE_SPIKES      = 2,
     HAZARD_TYPE_FIRE_BAR    = 3,
+};
+
+enum DamageIntensityRange {
+    DAMAGE_INTENSITY_LIGHT      = 0,    // 0-3
+    DAMAGE_INTENSITY_MEDIUM     = 1,    // 4-6
+    DAMAGE_INTENSITY_HEAVY      = 2,    // 7-9
+    DAMAGE_INTENSITY_EXTREME    = 3,    // 10+
+    DAMAGE_INTENSITY_UNUSED     = 4,    // unused
 };
 
 enum EffectGfxDataFlags {
