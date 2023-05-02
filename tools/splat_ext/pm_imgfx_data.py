@@ -100,7 +100,7 @@ class N64SegPm_imgfx_data(N64Segment):
         return [
             LinkerEntry(
                 self,
-                [self.OUT_DIR / f"{anim.name}.json" for anim in self.anims],
+                [self.OUT_DIR / f"{name}.json" for name, _ in self.yaml.get("animations")],
                 options.opts.asset_path / "imgfx" / f"{self.name}.c",
                 self.get_linker_section(),
             )
