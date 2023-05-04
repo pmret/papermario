@@ -67,6 +67,38 @@ if cat /etc/os-release | grep -E ID=fedora &> /dev/null; then
 
     ${SUDO} dnf install -y curl git python3 python3-pip python3-setuptools ninja-build gcc-mips64-linux-gnu libyaml-devel zlib-devel || exit 1
     ${SUDO} dnf group info "C Development Tools and Libraries" "Development Tools" || exit 1
+    # Install binutils if required
+    if ! command -v mips-linux-gnu-ar &> /dev/null; then
+        PKG="mips-linux-gnu-binutils"
+
+        RETURNDIR="$(pwd)"
+        cd "$(mktemp -d)"
+
+        wget ftp://ftp.gnu.org/gnu/binutils/binutils-2.35.tar.bz2
+        tar -xf binutils-2.35.tar.bz2
+
+        cd binutils-2.35
+        sed -i "/ac_cpp=/s/\$CPPFLAGS/\$CPPFLAGS -O2/" libiberty/configure
+        ./configure --target=mips-linux-gnu \
+                    --with-sysroot=/usr/mips-linux-gnu \
+                    --prefix=/usr \
+                    --disable-multilib \
+                    --with-gnu-as \
+                    --with-gnu-ld \
+                    --disable-nls \
+                    --enable-ld=default \
+                    --enable-plugins \
+                    --enable-deterministic-archives \
+                    --disable-werror
+        ${SUDO} make
+        ${SUDO} make install
+
+        cd ..
+        # delete temp directory we made
+        rm -rf "$(pwd)"
+        # go back to old dir
+        cd "${RETURNDIR}"
+    fi
     python3 -m pip install -U -r requirements.txt
     cp tools/precommit_check_no_assets.sh "$(git rev-parse --git-path hooks)/pre-commit" || exit 1
 
