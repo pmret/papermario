@@ -7,11 +7,10 @@ import xml.etree.ElementTree as ET
 from dataclasses import dataclass, field
 from math import ceil
 from pathlib import Path
-from typing import Dict, List, Optional, Set
-
-from n64img.image import CI4
+from typing import Any, Dict, List, Optional, Set
 
 import yaml as yaml_loader
+from n64img.image import CI4
 from sprite_common import AnimComponent, read_offset_list
 
 TOOLS_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -85,6 +84,7 @@ PAL_TO_RASTER: Dict[str, int] = {
 }
 
 
+PLAYER_OUT_PATH = Path(f"assets/us/sprite/player/")
 SPECIAL_RASTER = 0x1F880
 
 
@@ -145,25 +145,17 @@ class PlayerRaster:
     height: int
     palette_idx: int
     is_special: bool
-    raster: bytearray = field(default_factory=bytearray)
 
     @staticmethod
     def from_bytes(
         metadata: bytes,
         raster_set: PlayerSpriteRasterSet,
-        ci4_raster_bytes: bytes,
         palettes: List[bytes],
         img_idx: int,
     ) -> "PlayerRaster":
         offset, width, height, default_palette = struct.unpack(">iBBB", metadata)
 
         assert offset == raster_set.raster_positions[img_idx]
-
-        # Get raster bytes into ci4 format
-        raster = bytearray()
-        for i in range(width * height // 2):
-            raster.append(ci4_raster_bytes[offset + i] >> 4)
-            raster.append(ci4_raster_bytes[offset + i] & 0xF)
 
         is_special = raster_set.raster_offsets[img_idx] == SPECIAL_RASTER
 
@@ -173,12 +165,7 @@ class PlayerRaster:
             rte.height = height
             rte.palette = palettes[default_palette]
 
-        return PlayerRaster(offset, width, height, default_palette, is_special, raster)
-
-    def write(self, path: Path, palette: bytes) -> None:
-        img = CI4(self.raster, self.width, self.height)
-        img.set_palette(palette)
-        img.write(path)
+        return PlayerRaster(offset, width, height, default_palette, is_special)
 
 
 @dataclass
@@ -192,9 +179,7 @@ class PlayerSprite:
     rasters: List[PlayerRaster]
 
     @staticmethod
-    def from_bytes(
-        data: bytes, raster_set: PlayerSpriteRasterSet, ci4_raster_data: bytes
-    ) -> "PlayerSprite":
+    def from_bytes(data: bytes, raster_set: PlayerSpriteRasterSet) -> "PlayerSprite":
         raster_offsets = read_offset_list(
             data[int.from_bytes(data[0:4], byteorder="big") :]
         )
@@ -221,7 +206,6 @@ class PlayerSprite:
             raster = PlayerRaster.from_bytes(
                 data[metadata_offset : metadata_offset + 7],
                 raster_set,
-                ci4_raster_data,
                 palettes,
                 i,
             )
@@ -245,7 +229,9 @@ class PlayerSprite:
         )
 
 
-def parse_raster_table_entries(data: bytes) -> Dict[int, RasterTableEntry]:
+def extract_raster_table_entries(
+    data: bytes, raster_sets: List[PlayerSpriteRasterSet]
+) -> Dict[int, RasterTableEntry]:
     ret: Dict[int, RasterTableEntry] = {}
     current_section_pos = 0
     current_section = 0
@@ -275,19 +261,41 @@ def parse_raster_table_entries(data: bytes) -> Dict[int, RasterTableEntry]:
     return ret
 
 
-def write_player_xmls() -> None:
-    sprite_idx = 0
-    path = Path(f"assets/us/sprite/player/")
-    path.mkdir(parents=True, exist_ok=True)
+def extract_sprites(
+    yay0_data: bytes, raster_sets: List[PlayerSpriteRasterSet]
+) -> List[PlayerSprite]:
+    yay0_splits = []
+    for i in range(14):
+        yay0_splits.append(int.from_bytes(yay0_data[i * 4 : i * 4 + 4], "big"))
 
-    num_sprite_cfgs = len(list(sprite_cfg.keys()))
+    yay0_sprite_data = []
+    for i in range(0, len(yay0_splits) - 1):
+        yay0_sprite_data.append(yay0_data[yay0_splits[i] : yay0_splits[i + 1]])
+
+    ret: List[PlayerSprite] = []
+    for i, yay0_piece in enumerate(yay0_sprite_data):
+        sprite_data = Yay0Decompressor.decompress(yay0_piece, "big")
+        sprite = PlayerSprite.from_bytes(sprite_data, raster_sets[i])
+        ret.append(sprite)
+    return ret
+
+
+def write_player_xmls(
+    cfg: Any,
+    sprites: List[PlayerSprite],
+    sprite_names: List[str],
+    raster_sets: List[PlayerSpriteRasterSet],
+) -> None:
+    sprite_idx = 0
+
+    num_sprite_cfgs = len(list(cfg.keys()))
 
     for cfg_idx in range(num_sprite_cfgs):
         cur_sprite_name = sprite_names[sprite_idx]
 
         cur_sprite: PlayerSprite = sprites[sprite_idx]
         cur_sprite_back: Optional[PlayerSprite] = None
-        has_back = sprite_cfg[cur_sprite_name].get("has_back", False)
+        has_back = cfg[cur_sprite_name].get("has_back", False)
 
         if has_back:
             if cfg_idx == num_sprite_cfgs - 1:
@@ -318,19 +326,19 @@ def write_player_xmls() -> None:
 
             if has_back:
                 assert cur_sprite_back is not None
-                back_sprite = cur_sprite_back.rasters[i]
+                back_raster = cur_sprite_back.rasters[i]
 
-                if back_sprite.is_special:
+                if back_raster.is_special:
                     raster_attributes[
                         "special"
-                    ] = f"{back_sprite.width & 0xFF:X},{back_sprite.height & 0xFF:X}"
+                    ] = f"{back_raster.width & 0xFF:X},{back_raster.height & 0xFF:X}"
                 else:
                     back_name_offset = raster_sets[sprite_idx + 1].raster_offsets[i]
                     raster_attributes["back"] = f"{back_name_offset:05X}.png"
 
             ET.SubElement(RasterList, "Raster", raster_attributes)
 
-        palette_names = sprite_cfg[cur_sprite_name].get("palettes")
+        palette_names = cfg[cur_sprite_name].get("palettes")
         for i, name in enumerate(palette_names):
             ET.SubElement(
                 PaletteList,
@@ -341,7 +349,7 @@ def write_player_xmls() -> None:
                 },
             )
 
-        animation_names = sprite_cfg[cur_sprite_name].get("animations")
+        animation_names = cfg[cur_sprite_name].get("animations")
         for i, components in enumerate(cur_sprite.animations):
             Animation = ET.SubElement(
                 AnimationList,
@@ -372,7 +380,7 @@ def write_player_xmls() -> None:
         if hasattr(ET, "indent"):
             ET.indent(xml, "    ")
 
-        xml.write(str(path / f"{cur_sprite_name}.xml"), encoding="unicode")
+        xml.write(str(PLAYER_OUT_PATH / f"{cur_sprite_name}.xml"), encoding="unicode")
 
         if has_back:
             sprite_idx += 2
@@ -380,20 +388,28 @@ def write_player_xmls() -> None:
             sprite_idx += 1
 
 
-def write_player_rasters() -> None:
+def write_player_rasters(
+    raster_table_entry_dict: Dict[int, RasterTableEntry], raster_data: bytes
+) -> None:
     base_path = Path(f"assets/us/sprite/player/rasters")
     base_path.mkdir(parents=True, exist_ok=True)
 
-    for offset, rte in raster_table_entries.items():
+    for offset, rte in raster_table_entry_dict.items():
         if offset == SPECIAL_RASTER:
             continue
 
         if offset == 0x9CD50:
             continue  # TODO handle this one
-        rte.write_png(player_sprite_raster_data, base_path / f"{offset:05X}.png")
+        rte.write_png(raster_data, base_path / f"{offset:05X}.png")
 
 
-def write_player_palettes() -> None:
+def write_player_palettes(
+    cfg: Any,
+    sprites: List[PlayerSprite],
+    sprite_names: List[str],
+    raster_table_entry_dict: Dict[int, RasterTableEntry],
+    raster_data: bytes,
+) -> None:
     dumped_palettes: Set[str] = set()
 
     for i, sprite in enumerate(sprites):
@@ -402,99 +418,99 @@ def write_player_palettes() -> None:
         path.mkdir(parents=True, exist_ok=True)
 
         for i, palette in enumerate(sprite.palettes):
-            pal_name = sprite_cfg[sprite_name]["palettes"][sprite.palette_indexes[i]]
+            pal_name = cfg[sprite_name]["palettes"][sprite.palette_indexes[i]]
             if pal_name not in dumped_palettes:
                 offset = PAL_TO_RASTER[pal_name]
                 if pal_name not in PAL_TO_RASTER:
                     print(
                         f"WARNING: Palette {pal_name} has no specified raster, not dumping!"
                     )
-                raster_table_entries[offset].write_png(
-                    player_sprite_raster_data, path / (pal_name + ".png"), palette
+                raster_table_entry_dict[offset].write_png(
+                    raster_data, path / (pal_name + ".png"), palette
                 )
 
 
-def write_build_info() -> None:
+def split() -> None:
+    with (Path(__file__).parent / f"player.yaml").open("r") as f:
+        player_cfg = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
+
+    sprite_names = []
+    for sprite_name in player_cfg.keys():
+        sprite_names.append(sprite_name)
+        if player_cfg[sprite_name].get("has_back", False):
+            sprite_names.append(sprite_name)
+
+    with open("assets/us/1943000.bin", "rb") as f:
+        sprites_bin: bytes = f.read()
+
+    build_date = sprites_bin[0:0x10].decode("ascii").rstrip("\0")
+    player_raster_offset = int.from_bytes(sprites_bin[0x10:0x14], "big") + 0x10
+    player_yay0_offset = int.from_bytes(sprites_bin[0x14:0x18], "big") + 0x10
+    npc_yay0_offset = int.from_bytes(sprites_bin[0x18:0x1C], "big") + 0x10
+    # sprite_end_offset = int.from_bytes(sprites_bin[0x1C:0x20], "big") + 0x10
+
+    player_sprite_raster_data: bytes = sprites_bin[
+        player_raster_offset:player_yay0_offset
+    ]
+
+    # Header parsing
+    index_ranges_offset = int.from_bytes(player_sprite_raster_data[0:0x4], "big")
+    packed_raster_info_offset = int.from_bytes(
+        player_sprite_raster_data[0x4:0x8], "big"
+    )
+    ci4_raster_data_offset = int.from_bytes(player_sprite_raster_data[0x8:0xC], "big")
+
+    index_ranges = player_sprite_raster_data[
+        index_ranges_offset:packed_raster_info_offset
+    ]
+    packed_raster_info_data = player_sprite_raster_data[
+        packed_raster_info_offset:ci4_raster_data_offset
+    ]
+    # ci4_raster_data = player_sprite_raster_data[ci4_raster_data_offset:]
+
+    # Parse raster sets (readSpriteSections)
+    raster_sets: List[PlayerSpriteRasterSet] = []
+    for i in range(0, len(index_ranges) - 4, 4):
+        start = int.from_bytes(index_ranges[i : i + 4], "big")
+        end = int.from_bytes(index_ranges[i + 4 : i + 8], "big")
+        raster_sets.append(PlayerSpriteRasterSet(start, end - start))
+
+    raster_table_entry_dict = extract_raster_table_entries(
+        packed_raster_info_data, raster_sets
+    )
+    sprites = extract_sprites(
+        sprites_bin[player_yay0_offset:npc_yay0_offset], raster_sets
+    )
+
+    #########
+    # Writing
+    #########
+
+    PLAYER_OUT_PATH.mkdir(parents=True, exist_ok=True)
+    # Write build info (date)
     with open("assets/us/sprite/player/build_info.txt", "w") as f:
         f.write(build_date)
-
-
-with (Path(__file__).parent / f"player.yaml").open("r") as f:
-    sprite_cfg = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
-
-sprite_names = []
-for sprite_name in sprite_cfg.keys():
-    sprite_names.append(sprite_name)
-    if sprite_cfg[sprite_name].get("has_back", False):
-        sprite_names.append(sprite_name)
-
-with open("assets/us/1943000.bin", "rb") as f:
-    sprites_bin: bytes = f.read()
-
-build_date = sprites_bin[0:0x10].decode("ascii").rstrip("\0")
-player_raster_offset = int.from_bytes(sprites_bin[0x10:0x14], "big") + 0x10
-player_yay0_offset = int.from_bytes(sprites_bin[0x14:0x18], "big") + 0x10
-npc_yay0_offset = int.from_bytes(sprites_bin[0x18:0x1C], "big") + 0x10
-sprite_end_offset = int.from_bytes(sprites_bin[0x1C:0x20], "big") + 0x10
-
-player_sprite_raster_data: bytes = sprites_bin[player_raster_offset:player_yay0_offset]
-
-# Header parsing
-index_ranges_offset = int.from_bytes(player_sprite_raster_data[0:0x4], "big")
-packed_raster_info_offset = int.from_bytes(player_sprite_raster_data[0x4:0x8], "big")
-ci4_raster_data_offset = int.from_bytes(player_sprite_raster_data[0x8:0xC], "big")
-
-index_ranges = player_sprite_raster_data[index_ranges_offset:packed_raster_info_offset]
-packed_raster_info_data = player_sprite_raster_data[
-    packed_raster_info_offset:ci4_raster_data_offset
-]
-ci4_raster_data = player_sprite_raster_data[ci4_raster_data_offset:]
-
-# Parse raster sets (readSpriteSections)
-raster_sets: List[PlayerSpriteRasterSet] = []
-for i in range(0, len(index_ranges) - 4, 4):
-    start = int.from_bytes(index_ranges[i : i + 4], "big")
-    end = int.from_bytes(index_ranges[i + 4 : i + 8], "big")
-    raster_sets.append(PlayerSpriteRasterSet(start, end - start))
-
-raster_table_entries = parse_raster_table_entries(packed_raster_info_data)
-
-player_yay0_sprite_data_chunked: bytes = sprites_bin[player_yay0_offset:npc_yay0_offset]
-
-yay0_splits = []
-for i in range(14):
-    yay0_splits.append(
-        int.from_bytes(player_yay0_sprite_data_chunked[i * 4 : i * 4 + 4], "big")
+    write_player_xmls(player_cfg, sprites, sprite_names, raster_sets)
+    write_player_rasters(raster_table_entry_dict, player_sprite_raster_data)
+    write_player_palettes(
+        player_cfg,
+        sprites,
+        sprite_names,
+        raster_table_entry_dict,
+        player_sprite_raster_data,
     )
 
-yay0_sprite_data = []
-for i in range(0, len(yay0_splits) - 1):
-    yay0_sprite_data.append(
-        player_yay0_sprite_data_chunked[yay0_splits[i] : yay0_splits[i + 1]]
-    )
 
-sprites: List[PlayerSprite] = []
-for i, yay0_piece in enumerate(yay0_sprite_data):
-    sprite_data = Yay0Decompressor.decompress(yay0_piece, "big")
-    sprite = PlayerSprite.from_bytes(sprite_data, raster_sets[i], ci4_raster_data)
-    sprites.append(sprite)
+def build() -> None:
+    # Build info
+    with open("assets/us/sprite/player/build_info.txt", "r") as f:
+        build_info = f.read()
 
-
-write_build_info()
-write_player_xmls()
-write_player_rasters()
-write_player_palettes()
+    # Encode build_info to bytes and pad to 0x10
+    build_info_bytes = build_info.encode("ascii")
+    build_info_bytes += b"\0" * (0x10 - len(build_info_bytes))
+    dog = 5
 
 
-##########
-# Building
-##########
-
-# Build info
-with open("assets/us/sprite/player/build_info.txt", "r") as f:
-    build_info = f.read()
-
-# Encode build_info to bytes and pad to 0x10
-build_info_bytes = build_info.encode("ascii")
-build_info_bytes += b"\0" * (0x10 - len(build_info_bytes))
-dog = 5
+split()
+build()
