@@ -766,9 +766,9 @@ HitResult calc_partner_damage_enemy(void) {
                                           state->goalPos.z),                    //TODO remove sfx_play from conditional
                battleStatus->lastAttackDamage > 0))) || (battleStatus->currentAttackElement & DAMAGE_TYPE_STATUS_ALWAYS_HITS && tempBinary)) {
             if (gBattleStatus.flags1 & BS_FLAGS1_40) {
-                func_802667F0(0, target, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+                DisplayActionRating(ACTION_RATING_NICE, target, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             } else {
-                func_802667F0(3, target, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+                DisplayActionRating(ACTION_RATING_SUPER, target, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             }
         }
     }
