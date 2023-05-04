@@ -73,7 +73,7 @@ API_CALLABLE(ActivateDefend) {
 API_CALLABLE(DoesMarioStatusPreventHappyAnimation) {
     Actor* player = gBattleStatus.playerActor;
 
-    DisplayActionRating(ACTION_RATING_LUCKY, player, player->currentPos.x, player->currentPos.y + 20.0f, player->currentPos.z);
+    show_action_rating(ACTION_RATING_LUCKY, player, player->currentPos.x, player->currentPos.y + 20.0f, player->currentPos.z);
     sfx_play_sound(SOUND_3FC);
     script->varTable[0] = FALSE;
     if (player->debuff == STATUS_FEAR || player->debuff == STATUS_DIZZY || player->debuff == STATUS_PARALYZE ||

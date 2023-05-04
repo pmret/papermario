@@ -138,7 +138,7 @@ void func_800E4AD8(s32 arg0);
 f32 player_check_collision_below(f32, s32* colliderID);
 s32 can_trigger_loading_zone(void);
 void func_80266684(void);
-void DisplayActionRating(s32, Actor*, f32, f32, f32);
+void show_action_rating(s32, Actor*, f32, f32, f32);
 s32 func_802591EC(s32, ActorPart*, s32, Matrix4f, s32);
 
 HeapNode* general_heap_create(void);

@@ -897,16 +897,16 @@ HitResult calc_player_damage_enemy(void) {
             if (battleStatus->lastAttackDamage > 0 && (sfx_play_sound(SOUND_231), battleStatus->lastAttackDamage > 0) ||    // TODO remove sfx_play_sound from conditional
                 battleStatus->currentAttackElement & DAMAGE_TYPE_STATUS_ALWAYS_HITS && tempBinary) {
                 if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_MULTI_BOUNCE)) {
-                    DisplayActionRating(ACTION_RATING_NICE, target, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+                    show_action_rating(ACTION_RATING_NICE, target, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                 } else {
-                    DisplayActionRating(ACTION_RATING_NICE_SUPER_COMBO, target, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+                    show_action_rating(ACTION_RATING_NICE_SUPER_COMBO, target, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                 }
             }
         }
     }
 
     if (sp24) {
-        DisplayActionRating(ACTION_RATING_MISS, target, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        show_action_rating(ACTION_RATING_MISS, target, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
 
     if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {

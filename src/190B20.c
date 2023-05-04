@@ -2342,7 +2342,7 @@ void func_802666E4(Actor* actor, f32 x, f32 y, f32 z, s32 damage) {
 }
 
 // grossness
-void DisplayActionRating(s32 arg0, Actor* actor, f32 x, f32 y, f32 z) {
+void show_action_rating(s32 arg0, Actor* actor, f32 x, f32 y, f32 z) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player;
     s32 new_var; // TODO required to match
