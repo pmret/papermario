@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # This script is copied into the pre-commit git hooks folder.
 # It ensures that a commit is aborted if you try to accidentally commit game assets.
 # install.sh will install this for you.
