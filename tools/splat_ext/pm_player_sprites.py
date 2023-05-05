@@ -7,10 +7,11 @@ import xml.etree.ElementTree as ET
 from dataclasses import dataclass, field
 from math import ceil
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Set
+from typing import Any, Dict, List, Optional, Set, Tuple
 
 import yaml as yaml_loader
 from n64img.image import CI4
+import yaml
 from sprite_common import AnimComponent, read_offset_list
 
 TOOLS_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -86,6 +87,9 @@ PAL_TO_RASTER: Dict[str, int] = {
 
 PLAYER_OUT_PATH = Path(f"assets/us/sprite/player/")
 SPECIAL_RASTER = 0x1F880
+
+MAX_COMPONENTS_XML = "maxComponents"
+PALETTE_GROUPS_XML = "paletteGroups"
 
 
 @dataclass
@@ -228,6 +232,38 @@ class PlayerSprite:
             rasters,
         )
 
+    @staticmethod
+    def from_xml(xml: ET.Element) -> List["PlayerSprite"]:
+        has_back = False
+
+        # Parse the xml back into a PlayerSprite
+        max_components = int(xml.attrib[MAX_COMPONENTS_XML])
+        num_variations = int(xml.attrib[PALETTE_GROUPS_XML])
+
+        # Animations
+        animations: List[List[AnimComponent]] = []
+        for anim_xml in xml[2]:
+            comps: List[AnimComponent] = []
+            for comp_xml in anim_xml:
+                comp: AnimComponent = AnimComponent.from_xml(comp_xml)
+                comps.append(comp)
+            animations.append(comps)
+
+        # Rasters
+        rasters: List[PlayerRaster] = []
+        for raster_xml in xml[1]:
+            if "back" in raster_xml.attrib:
+                has_back = True
+
+        ret = [PlayerSprite(max_components, num_variations, animations, [], [], [])]
+
+        if has_back:
+            # TODO implement back
+            back = PlayerSprite(0, num_variations, [], [], [], [])
+            ret.append(back)
+
+        return ret
+
 
 def extract_raster_table_entries(
     data: bytes, raster_sets: List[PlayerSpriteRasterSet]
@@ -280,15 +316,55 @@ def extract_sprites(
     return ret
 
 
+def write_player_orderings(
+    cfg: Any,
+    raster_names: List[str],
+) -> None:
+    Names = ET.Element("Names")
+
+    Sprites = ET.SubElement(Names, "Sprites")
+    for sprite_name in cfg:
+        ET.SubElement(
+            Sprites,
+            "Sprite",
+            name=sprite_name,
+        )
+
+    Rasters = ET.SubElement(Names, "Rasters")
+    for raster_name in raster_names:
+        ET.SubElement(
+            Rasters,
+            "Raster",
+            name=raster_name,
+        )
+
+    xml = ET.ElementTree(Names)
+
+    # pretty print (Python 3.9+)
+    if hasattr(ET, "indent"):
+        ET.indent(xml, "    ")
+
+    xml.write(str(PLAYER_OUT_PATH / f"player_sprite_names.xml"), encoding="unicode")
+
+
 def write_player_xmls(
     cfg: Any,
     sprites: List[PlayerSprite],
     sprite_names: List[str],
     raster_sets: List[PlayerSpriteRasterSet],
+    raster_table_entry_dict: Dict[int, RasterTableEntry],
+    raster_names: List[str],
 ) -> None:
+    def get_sprite_name_from_offset(
+        offset: int, offsets: List[int], names: List[str]
+    ) -> str:
+        return names[offsets.index(offset)]
+
     sprite_idx = 0
 
     num_sprite_cfgs = len(list(cfg.keys()))
+
+    sprite_offsets: list[int] = list(raster_table_entry_dict.keys())
 
     for cfg_idx in range(num_sprite_cfgs):
         cur_sprite_name = sprite_names[sprite_idx]
@@ -306,8 +382,8 @@ def write_player_xmls(
         SpriteSheet = ET.Element(
             "SpriteSheet",
             {
-                "maxComponents": str(cur_sprite.max_components),
-                "paletteGroups": str(cur_sprite.num_variations),
+                MAX_COMPONENTS_XML: str(cur_sprite.max_components),
+                PALETTE_GROUPS_XML: str(cur_sprite.num_variations),
             },
         )
 
@@ -321,7 +397,7 @@ def write_player_xmls(
             raster_attributes = {
                 "id": f"{i:X}",
                 "palette": f"{raster.palette_idx:X}",
-                "src": f"{name_offset:05X}.png",
+                "src": f"{get_sprite_name_from_offset(name_offset, sprite_offsets, raster_names)}.png",
             }
 
             if has_back:
@@ -334,7 +410,9 @@ def write_player_xmls(
                     ] = f"{back_raster.width & 0xFF:X},{back_raster.height & 0xFF:X}"
                 else:
                     back_name_offset = raster_sets[sprite_idx + 1].raster_offsets[i]
-                    raster_attributes["back"] = f"{back_name_offset:05X}.png"
+                    raster_attributes[
+                        "back"
+                    ] = f"{get_sprite_name_from_offset(back_name_offset, sprite_offsets, raster_names)}.png"
 
             ET.SubElement(RasterList, "Raster", raster_attributes)
 
@@ -389,18 +467,20 @@ def write_player_xmls(
 
 
 def write_player_rasters(
-    raster_table_entry_dict: Dict[int, RasterTableEntry], raster_data: bytes
+    raster_table_entry_dict: Dict[int, RasterTableEntry],
+    raster_data: bytes,
+    raster_names: List[str],
 ) -> None:
     base_path = Path(f"assets/us/sprite/player/rasters")
     base_path.mkdir(parents=True, exist_ok=True)
 
-    for offset, rte in raster_table_entry_dict.items():
+    for i, (offset, rte) in enumerate(raster_table_entry_dict.items()):
         if offset == SPECIAL_RASTER:
             continue
 
         if offset == 0x9CD50:
             continue  # TODO handle this one
-        rte.write_png(raster_data, base_path / f"{offset:05X}.png")
+        rte.write_png(raster_data, base_path / f"{raster_names[i]}.png")
 
 
 def write_player_palettes(
@@ -430,15 +510,18 @@ def write_player_palettes(
                 )
 
 
-def split() -> None:
-    with (Path(__file__).parent / f"player.yaml").open("r") as f:
+def split() -> List[PlayerSprite]:
+    with (Path(__file__).parent / f"player_sprite_names.yaml").open("r") as f:
         player_cfg = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
 
-    sprite_names = []
-    for sprite_name in player_cfg.keys():
-        sprite_names.append(sprite_name)
-        if player_cfg[sprite_name].get("has_back", False):
-            sprite_names.append(sprite_name)
+    player_sprite_cfg = player_cfg["player_sprites"]
+    player_raster_names: List[str] = player_cfg["player_rasters"]
+
+    player_sprite_names = []
+    for sprite_name in player_sprite_cfg.keys():
+        player_sprite_names.append(sprite_name)
+        if player_sprite_cfg[sprite_name].get("has_back", False):
+            player_sprite_names.append(sprite_name)
 
     with open("assets/us/1943000.bin", "rb") as f:
         sprites_bin: bytes = f.read()
@@ -478,7 +561,7 @@ def split() -> None:
     raster_table_entry_dict = extract_raster_table_entries(
         packed_raster_info_data, raster_sets
     )
-    sprites = extract_sprites(
+    player_sprites = extract_sprites(
         sprites_bin[player_yay0_offset:npc_yay0_offset], raster_sets
     )
 
@@ -490,18 +573,46 @@ def split() -> None:
     # Write build info (date)
     with open("assets/us/sprite/player/build_info.txt", "w") as f:
         f.write(build_date)
-    write_player_xmls(player_cfg, sprites, sprite_names, raster_sets)
-    write_player_rasters(raster_table_entry_dict, player_sprite_raster_data)
+    write_player_orderings(player_sprite_cfg, player_raster_names)
+    write_player_xmls(
+        player_sprite_cfg,
+        player_sprites,
+        player_sprite_names,
+        raster_sets,
+        raster_table_entry_dict,
+        player_raster_names,
+    )
+    write_player_rasters(
+        raster_table_entry_dict, player_sprite_raster_data, player_raster_names
+    )
     write_player_palettes(
-        player_cfg,
-        sprites,
-        sprite_names,
+        player_sprite_cfg,
+        player_sprites,
+        player_sprite_names,
         raster_table_entry_dict,
         player_sprite_raster_data,
     )
 
+    return player_sprites
 
-def build() -> None:
+
+def get_orderings_from_xml() -> Tuple[List[str], List[str]]:
+    orderings_tree = ET.parse(PLAYER_OUT_PATH / "player_sprite_names.xml")
+
+    sprite_order: List[str] = []
+    for sprite_tag in orderings_tree.getroot()[0]:
+        sprite_order.append(sprite_tag.attrib["name"])
+
+    raster_order: List[str] = []
+    for raster_tag in orderings_tree.getroot()[1]:
+        raster_order.append(raster_tag.attrib["name"])
+
+    return sprite_order, raster_order
+
+
+def build() -> List[PlayerSprite]:
+    sprite_order, raster_order = get_orderings_from_xml()
+
     # Build info
     with open("assets/us/sprite/player/build_info.txt", "r") as f:
         build_info = f.read()
@@ -509,8 +620,32 @@ def build() -> None:
     # Encode build_info to bytes and pad to 0x10
     build_info_bytes = build_info.encode("ascii")
     build_info_bytes += b"\0" * (0x10 - len(build_info_bytes))
-    dog = 5
+
+    # Read in the player sprite xmls
+    player_sprites: List[PlayerSprite] = []
+
+    for sprite_name in sprite_order:
+        sprite_xml = ET.parse(PLAYER_OUT_PATH / f"{sprite_name}.xml").getroot()
+        player_sprites.extend(PlayerSprite.from_xml(sprite_xml))
+    return player_sprites
 
 
-split()
-build()
+orig_sprites = split()
+new_sprites = build()
+
+for i in range(len(orig_sprites)):
+    orig_sprite = orig_sprites[i]
+    new_sprite = new_sprites[i]
+
+    for j in range(len(orig_sprite.animations)):
+        orig_animation = orig_sprite.animations[j]
+        new_animation = new_sprite.animations[j]
+
+        for k in range(len(orig_animation)):
+            orig_component = orig_animation[k]
+            new_component = new_animation[k]
+
+            if orig_component != new_component:
+                print(
+                    f"Sprite {i} Animation {j} Component {k} differs: {orig_component} vs {new_component}"
+                )

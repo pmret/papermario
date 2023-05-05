@@ -18,6 +18,7 @@ import struct
 import pylibyaml
 import yaml as yaml_loader
 
+
 class Sprite:
     def __init__(self):
         self.max_components = 0
@@ -36,8 +37,12 @@ class Sprite:
     def from_bytes(data):
         self = Sprite()
 
-        image_offsets = Sprite.read_offset_list(data[int.from_bytes(data[0:4], byteorder="big"):])
-        palette_offsets = Sprite.read_offset_list(data[int.from_bytes(data[4:8], byteorder="big"):])
+        image_offsets = Sprite.read_offset_list(
+            data[int.from_bytes(data[0:4], byteorder="big") :]
+        )
+        palette_offsets = Sprite.read_offset_list(
+            data[int.from_bytes(data[4:8], byteorder="big") :]
+        )
         self.max_components = int.from_bytes(data[8:0xC], byteorder="big")
         self.num_variations = int.from_bytes(data[0xC:0x10], byteorder="big")
         animation_offsets = Sprite.read_offset_list(data[0x10:])
@@ -45,7 +50,9 @@ class Sprite:
         for offset in palette_offsets:
             # 16 colors
             color_data = data[offset : offset + 16 * 2]
-            self.palettes.append([unpack_color(c) for c in iter_in_groups(color_data, 2)])
+            self.palettes.append(
+                [unpack_color(c) for c in iter_in_groups(color_data, 2)]
+            )
 
         for offset in image_offsets:
             img = NpcRaster.from_bytes(data[offset:], data)
@@ -75,16 +82,22 @@ class Sprite:
 
     def write_to_dir(self, path):
         if len(self.variation_names) > 1:
-            SpriteSheet = ET.Element("SpriteSheet", {
-                "maxComponents": str(self.max_components),
-                "paletteGroups": str(self.num_variations),
-                "variations": ",".join(self.variation_names),
-            })
+            SpriteSheet = ET.Element(
+                "SpriteSheet",
+                {
+                    "maxComponents": str(self.max_components),
+                    "paletteGroups": str(self.num_variations),
+                    "variations": ",".join(self.variation_names),
+                },
+            )
         else:
-            SpriteSheet = ET.Element("SpriteSheet", {
-                "maxComponents": str(self.max_components),
-                "paletteGroups": str(self.num_variations),
-            })
+            SpriteSheet = ET.Element(
+                "SpriteSheet",
+                {
+                    "maxComponents": str(self.max_components),
+                    "paletteGroups": str(self.num_variations),
+                },
+            )
 
         PaletteList = ET.SubElement(SpriteSheet, "PaletteList")
         RasterList = ET.SubElement(SpriteSheet, "RasterList")
@@ -100,14 +113,22 @@ class Sprite:
                 palette_to_raster[image.palette_index] = []
             palette_to_raster[image.palette_index].append(image)
 
-            ET.SubElement(RasterList, "Raster", {
-                "id": f"{i:X}",
-                "palette": f"{image.palette_index:X}",
-                "src": name + ".png",
-            })
+            ET.SubElement(
+                RasterList,
+                "Raster",
+                {
+                    "id": f"{i:X}",
+                    "palette": f"{image.palette_index:X}",
+                    "src": name + ".png",
+                },
+            )
 
         for i, palette in enumerate(self.palettes):
-            name = self.palette_names[i] if (self.palette_names and i < len(self.palette_names)) else f"Pal{i:02X}"
+            name = (
+                self.palette_names[i]
+                if (self.palette_names and i < len(self.palette_names))
+                else f"Pal{i:02X}"
+            )
 
             if i in palette_to_raster:
                 img = palette_to_raster[i][0]
@@ -116,21 +137,35 @@ class Sprite:
 
             img.write(path / (name + ".png"), palette)
 
-            ET.SubElement(PaletteList, "Palette", {
-                "id": f"{i:X}",
-                "src": name + ".png",
-            })
+            ET.SubElement(
+                PaletteList,
+                "Palette",
+                {
+                    "id": f"{i:X}",
+                    "src": name + ".png",
+                },
+            )
 
         for i, components in enumerate(self.animations):
-            Animation = ET.SubElement(AnimationList, "Animation", {
-                "name": self.animation_names[i] if self.animation_names else f"Anim{i:02X}",
-            })
+            Animation = ET.SubElement(
+                AnimationList,
+                "Animation",
+                {
+                    "name": self.animation_names[i]
+                    if self.animation_names
+                    else f"Anim{i:02X}",
+                },
+            )
 
             for j, comp in enumerate(components):
-                Component = ET.SubElement(Animation, "Component", {
-                    "name": f"Comp_{j:X}",
-                    "xyz": ",".join(map(str, [comp.x, comp.y, comp.z])),
-                })
+                Component = ET.SubElement(
+                    Animation,
+                    "Component",
+                    {
+                        "name": f"Comp_{j:X}",
+                        "xyz": ",".join(map(str, [comp.x, comp.y, comp.z])),
+                    },
+                )
 
                 for cmd in comp.commands:
                     ET.SubElement(Component, "Command", {"val": f"{cmd:X}"})
@@ -151,8 +186,12 @@ class Sprite:
         SpriteSheet = xml.getroot()
 
         true_max_components = 0
-        self.max_components = int(SpriteSheet.get("a") or SpriteSheet.get("maxComponents")) # ignored
-        self.num_variations = int(SpriteSheet.get("b") or SpriteSheet.get("paletteGroups"))
+        self.max_components = int(
+            SpriteSheet.get("a") or SpriteSheet.get("maxComponents")
+        )  # ignored
+        self.num_variations = int(
+            SpriteSheet.get("b") or SpriteSheet.get("paletteGroups")
+        )
         self.variation_names = SpriteSheet.get("variations", default="").split(",")
 
         for Palette in SpriteSheet.findall("./PaletteList/Palette"):
@@ -166,7 +205,9 @@ class Sprite:
 
                 self.palettes.append(palette)
 
-            self.palette_names.append(Palette.get("name", Palette.get("src").split(".png")[0]))
+            self.palette_names.append(
+                Palette.get("name", Palette.get("src").split(".png")[0])
+            )
 
         for Raster in SpriteSheet.findall("./RasterList/Raster"):
             if read_images:
@@ -179,8 +220,12 @@ class Sprite:
                 image.raster = raster
                 image.palette_index = int(Raster.get("palette"), base=16)
 
-                assert (image.width % 8) == 0, f"{img_path} width is not a multiple of 8"
-                assert (image.height % 8) == 0, f"{img_path} height is not a multiple of 8"
+                assert (
+                    image.width % 8
+                ) == 0, f"{img_path} width is not a multiple of 8"
+                assert (
+                    image.height % 8
+                ) == 0, f"{img_path} height is not a multiple of 8"
 
                 self.images.append(image)
 
@@ -190,7 +235,6 @@ class Sprite:
             components = []
 
             for ComponentEl in Animation.findall("Component"):
-
                 x, y, z = ComponentEl.get("xyz", "0,0,0").split(",")
                 x = int(x)
                 y = int(y)
@@ -211,9 +255,10 @@ class Sprite:
                 true_max_components = len(components)
 
         self.max_components = true_max_components
-        #assert self.max_components == true_max_components, f"{true_max_components} component(s) used, but SpriteSheet.a = {self.max_components}"
+        # assert self.max_components == true_max_components, f"{true_max_components} component(s) used, but SpriteSheet.a = {self.max_components}"
 
         return self
+
 
 class NpcRaster:
     @staticmethod
@@ -270,16 +315,16 @@ class N64SegPm_npc_sprites(N64Segment):
 
         self.files = yaml["files"]
 
-        with (Path(__file__).parent / f"{self.name}.yaml").open("r") as f:
+        with (Path(__file__).parent / f"npc_sprite_names.yaml").open("r") as f:
             self.sprite_cfg = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
 
     def split(self, rom_bytes):
-        out_dir = options.opts.asset_path / self.dir / self.name
+        out_dir = options.opts.asset_path / "sprite/npc"
 
-        data = rom_bytes[self.rom_start:self.rom_end]
+        data = rom_bytes[self.rom_start : self.rom_end]
 
         for i, sprite_name in enumerate(self.files):
-            #self.log(f"Splitting sprite {sprite_name}...")
+            # self.log(f"Splitting sprite {sprite_name}...")
 
             sprite_dir = out_dir / sprite_name
             sprite_dir.mkdir(parents=True, exist_ok=True)
@@ -293,8 +338,12 @@ class N64SegPm_npc_sprites(N64Segment):
             if sprite_name in self.sprite_cfg:
                 sprite.image_names = self.sprite_cfg[sprite_name].get("frames", [])
                 sprite.palette_names = self.sprite_cfg[sprite_name].get("palettes", [])
-                sprite.animation_names = self.sprite_cfg[sprite_name].get("animations", [])
-                sprite.variation_names = self.sprite_cfg[sprite_name].get("variations", [])
+                sprite.animation_names = self.sprite_cfg[sprite_name].get(
+                    "animations", []
+                )
+                sprite.variation_names = self.sprite_cfg[sprite_name].get(
+                    "variations", []
+                )
 
             sprite.write_to_dir(sprite_dir)
 
@@ -302,8 +351,13 @@ class N64SegPm_npc_sprites(N64Segment):
         from segtypes.linker_entry import LinkerEntry
 
         basepath = options.opts.asset_path / "sprite" / f"{self.name}"
-        out_paths = [options.opts.asset_path / "sprite" / self.name / (f["name"] if type(f) is dict else f)
-                     for f in self.files]
+        out_paths = [
+            options.opts.asset_path
+            / "sprite"
+            / self.name
+            / (f["name"] if type(f) is dict else f)
+            for f in self.files
+        ]
 
         return [LinkerEntry(self, out_paths, basepath, ".data")]
 
