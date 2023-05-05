@@ -17475,7 +17475,7 @@ segments:
 ### Sprites ###
 ###############
   - [0x1942C40, bin]
-  - { start: 0x1943000, type: pm_player_sprites, align: 8} # sprite data build metadata (build date, major file divisions)
+  - { start: 0x1943000, type: bin, align: 8} # sprite data build metadata (build date, major file divisions)
 
   # player sprite raster table:
   # - [0x1943020, bin] # Player sprite table

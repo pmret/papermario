@@ -5,13 +5,11 @@ import struct
 import sys
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass, field
-from math import ceil
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
 
 import yaml as yaml_loader
 from n64img.image import CI4
-import yaml
 from sprite_common import AnimComponent, read_offset_list
 
 TOOLS_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
