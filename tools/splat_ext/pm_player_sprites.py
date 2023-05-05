@@ -271,7 +271,7 @@ def extract_raster_table_entries(
     current_section = 0
 
     for i in range(0, len(data) - 4, 4):
-        packed = int.from_bytes(data[i : i + 4])
+        packed = int.from_bytes(data[i : i + 4], "big")
 
         size = (packed >> 20) << 4
         offset = packed & 0xFFFFF
