@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
 
 import yaml as yaml_loader
+import png
 from n64img.image import CI4
 from sprite_common import AnimComponent, read_offset_list
 
@@ -169,6 +170,12 @@ class PlayerRaster:
 
         return PlayerRaster(offset, width, height, default_palette, is_special)
 
+def pack_color(r, g, b, a) -> int:
+    r = r >> 3
+    g = g >> 3
+    b = b >> 3
+    a = a >> 7
+    return (r << 11) | (g << 6) | (b << 1) | a
 
 @dataclass
 class PlayerSprite:
@@ -246,6 +253,27 @@ class PlayerSprite:
                 comp: AnimComponent = AnimComponent.from_xml(comp_xml)
                 comps.append(comp)
             animations.append(comps)
+
+        # Palettes
+        palettes: List[List[int]] = []
+        for pallete_xml in xml[0]:
+            source = pallete_xml.attrib["src"]
+            if source not in PALETTE_CACHE:
+                with open(PLAYER_OUT_PATH / "palettes" / source, "rb") as f:
+                    img = png.Reader(f)
+                    img.preamble(True)
+                    palette = img.palette(alpha="force")
+
+                palette_list: List[int] = []
+                for rgba in palette:
+                    if rgba[3] not in (0, 0xFF):
+                        print("alpha mask mode but translucent pixels used")
+                    
+                    palette_list.append(pack_color(*rgba))
+                
+                PALETTE_CACHE[source] = palette_list
+
+            palettes.append(PALETTE_CACHE[source])
 
         # Rasters
         rasters: List[PlayerRaster] = []
@@ -607,6 +635,7 @@ def get_orderings_from_xml() -> Tuple[List[str], List[str]]:
 
     return sprite_order, raster_order
 
+PALETTE_CACHE: Dict[str, List[int]] = {}
 
 def build() -> List[PlayerSprite]:
     sprite_order, raster_order = get_orderings_from_xml()
