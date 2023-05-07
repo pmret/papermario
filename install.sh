@@ -60,7 +60,7 @@ if cat /etc/os-release | grep -E 'ID=debian|ID_LIKE=(.*)debian' &> /dev/null; th
 fi
 
 # Arch Linux and derivatives (pacman)
-if cat /etc/os-release | grep -E 'ID=arch|ID_LIKE=arch' &> /dev/null; then
+if cat /etc/os-release | grep -E 'ID=arch|ID_LIKE=(arch|manjaro-arch)' &> /dev/null; then
     supported=true
 
     echo "Installing packages for Arch Linux or derivative (pacman)"
