@@ -1085,7 +1085,7 @@ EvtScript N(EVS_UpdateWorldFogParams) = {
 };
 
 EvtScript N(EVS_CaptureSpirits) = {
-    EVT_CALL(func_802D7B10, ArrayVar(6))
+    EVT_CALL(DismissEffect, ArrayVar(6))
     EVT_CALL(GetNpcPos, NPC_Klevar, LVar0, LVar1, LVar2)
     EVT_PLAY_EFFECT(EFFECT_RING_BLAST, 1, LVar0, LVar1, LVar2, 4, 20)
     EVT_THREAD
@@ -1110,10 +1110,10 @@ EvtScript N(EVS_CaptureSpirits) = {
         EVT_CALL(SetNpcAnimation, NPC_Klevar, ANIM_WorldKlevar_Panic)
         EVT_CALL(SetNpcImgFXParams, NPC_Klevar, IMGFX_CLEAR, 0, 0, 0, 0)
         EVT_CALL(SetNpcFlagBits, NPC_Klevar, NPC_FLAG_INVISIBLE, TRUE)
-        EVT_CALL(func_802D7B10, ArrayVar(13))
+        EVT_CALL(DismissEffect, ArrayVar(13))
     EVT_END_THREAD
     EVT_WAIT(20 * DT)
-    EVT_CALL(func_802D7B10, ArrayVar(3))
+    EVT_CALL(DismissEffect, ArrayVar(3))
     EVT_CALL(GetNpcPos, NPC_Skolar, LVar0, LVar1, LVar2)
     EVT_PLAY_EFFECT(EFFECT_RING_BLAST, 1, LVar0, LVar1, LVar2, 4, 20)
     EVT_THREAD
@@ -1138,10 +1138,10 @@ EvtScript N(EVS_CaptureSpirits) = {
         EVT_CALL(SetNpcAnimation, NPC_Skolar, ANIM_WorldSkolar_IdleSad)
         EVT_CALL(SetNpcImgFXParams, NPC_Skolar, IMGFX_CLEAR, 0, 0, 0, 0)
         EVT_CALL(SetNpcFlagBits, NPC_Skolar, NPC_FLAG_INVISIBLE, TRUE)
-        EVT_CALL(func_802D7B10, ArrayVar(10))
+        EVT_CALL(DismissEffect, ArrayVar(10))
     EVT_END_THREAD
     EVT_WAIT(20 * DT)
-    EVT_CALL(func_802D7B10, ArrayVar(4))
+    EVT_CALL(DismissEffect, ArrayVar(4))
     EVT_CALL(GetNpcPos, NPC_Muskular, LVar0, LVar1, LVar2)
     EVT_PLAY_EFFECT(EFFECT_RING_BLAST, 1, LVar0, LVar1, LVar2, 4, 20)
     EVT_THREAD
@@ -1166,10 +1166,10 @@ EvtScript N(EVS_CaptureSpirits) = {
         EVT_CALL(SetNpcAnimation, NPC_Muskular, ANIM_WorldMuskular_Panic)
         EVT_CALL(SetNpcImgFXParams, NPC_Muskular, IMGFX_CLEAR, 0, 0, 0, 0)
         EVT_CALL(SetNpcFlagBits, NPC_Muskular, NPC_FLAG_INVISIBLE, TRUE)
-        EVT_CALL(func_802D7B10, ArrayVar(11))
+        EVT_CALL(DismissEffect, ArrayVar(11))
     EVT_END_THREAD
     EVT_WAIT(20 * DT)
-    EVT_CALL(func_802D7B10, ArrayVar(7))
+    EVT_CALL(DismissEffect, ArrayVar(7))
     EVT_CALL(GetNpcPos, NPC_Kalmar, LVar0, LVar1, LVar2)
     EVT_PLAY_EFFECT(EFFECT_RING_BLAST, 1, LVar0, LVar1, LVar2, 4, 20)
     EVT_THREAD
@@ -1194,10 +1194,10 @@ EvtScript N(EVS_CaptureSpirits) = {
         EVT_CALL(SetNpcAnimation, NPC_Kalmar, ANIM_WorldKalmar_Panic)
         EVT_CALL(SetNpcImgFXParams, NPC_Kalmar, IMGFX_CLEAR, 0, 0, 0, 0)
         EVT_CALL(SetNpcFlagBits, NPC_Kalmar, NPC_FLAG_INVISIBLE, TRUE)
-        EVT_CALL(func_802D7B10, ArrayVar(14))
+        EVT_CALL(DismissEffect, ArrayVar(14))
     EVT_END_THREAD
     EVT_WAIT(20 * DT)
-    EVT_CALL(func_802D7B10, ArrayVar(5))
+    EVT_CALL(DismissEffect, ArrayVar(5))
     EVT_CALL(GetNpcPos, NPC_Misstar, LVar0, LVar1, LVar2)
     EVT_PLAY_EFFECT(EFFECT_RING_BLAST, 1, LVar0, LVar1, LVar2, 4, 20)
     EVT_THREAD
@@ -1222,10 +1222,10 @@ EvtScript N(EVS_CaptureSpirits) = {
         EVT_CALL(SetNpcAnimation, NPC_Misstar, ANIM_WorldMisstar_Panic)
         EVT_CALL(SetNpcImgFXParams, NPC_Misstar, IMGFX_CLEAR, 0, 0, 0, 0)
         EVT_CALL(SetNpcFlagBits, NPC_Misstar, NPC_FLAG_INVISIBLE, TRUE)
-        EVT_CALL(func_802D7B10, ArrayVar(12))
+        EVT_CALL(DismissEffect, ArrayVar(12))
     EVT_END_THREAD
     EVT_WAIT(20 * DT)
-    EVT_CALL(func_802D7B10, ArrayVar(2))
+    EVT_CALL(DismissEffect, ArrayVar(2))
     EVT_CALL(GetNpcPos, NPC_Mamar, LVar0, LVar1, LVar2)
     EVT_PLAY_EFFECT(EFFECT_RING_BLAST, 1, LVar0, LVar1, LVar2, 4, 20)
     EVT_THREAD
@@ -1250,7 +1250,7 @@ EvtScript N(EVS_CaptureSpirits) = {
         EVT_CALL(SetNpcAnimation, NPC_Mamar, ANIM_WorldMamar_Panic)
         EVT_CALL(SetNpcImgFXParams, NPC_Mamar, IMGFX_CLEAR, 0, 0, 0, 0)
         EVT_CALL(SetNpcFlagBits, NPC_Mamar, NPC_FLAG_INVISIBLE, TRUE)
-        EVT_CALL(func_802D7B10, ArrayVar(9))
+        EVT_CALL(DismissEffect, ArrayVar(9))
     EVT_END_THREAD
     EVT_WAIT(20 * DT)
     EVT_RETURN
@@ -2099,7 +2099,7 @@ EvtScript N(EVS_Scene_IntroStory) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_WAIT(3)
-    EVT_CALL(func_802D7B10, ArrayVar(17))
+    EVT_CALL(DismissEffect, ArrayVar(17))
     EVT_THREAD
         EVT_CALL(EnableTexPanning, MODEL_o33, TRUE)
         EVT_CALL(EnableTexPanning, MODEL_o34, TRUE)
@@ -2209,7 +2209,7 @@ EvtScript N(EVS_Scene_IntroStory) = {
         EVT_WAIT(5)
     EVT_END_LOOP
     EVT_WAIT(27 * DT)
-    EVT_CALL(func_802D7B10, ArrayVar(17))
+    EVT_CALL(DismissEffect, ArrayVar(17))
     EVT_CALL(N(SetWorldFogParams), 0, 0, 0, 0, 0, 0, 0, 995, 1000)
     EVT_CALL(N(AdjustCamVfov), 0, 25)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, -38, 210, 85)
@@ -2375,8 +2375,8 @@ EvtScript N(EVS_Scene_IntroStory) = {
     EVT_CALL(SetNpcAnimation, NPC_Kalmar, ANIM_WorldKalmar_Panic)
     EVT_THREAD
         EVT_WAIT(5)
-        EVT_CALL(func_802D7B10, ArrayVar(18))
-        EVT_CALL(func_802D7B10, ArrayVar(19))
+        EVT_CALL(DismissEffect, ArrayVar(18))
+        EVT_CALL(DismissEffect, ArrayVar(19))
     EVT_END_THREAD
     EVT_PLAY_EFFECT(EFFECT_ENERGY_SHOCKWAVE, 0, 18, 256, -21, EVT_FLOAT(0.40625), 60)
     EVT_SET(LVar0, 120)
@@ -2439,7 +2439,7 @@ EvtScript N(EVS_Scene_IntroStory) = {
     EVT_ADDF(LVar1, EVT_FLOAT(-30.0))
     EVT_CALL(SetNpcPos, NPC_Kammy, LVar0, LVar1, LVar2)
     EVT_EXEC(N(EVS_UpdateWorldFogParams))
-    EVT_CALL(func_802D7B10, ArrayVar(1))
+    EVT_CALL(DismissEffect, ArrayVar(1))
     EVT_CALL(GetNpcPos, NPC_Eldstar, LVar0, LVar1, LVar2)
     EVT_PLAY_EFFECT(EFFECT_RING_BLAST, 1, LVar0, LVar1, LVar2, 4, 20)
     EVT_THREAD
@@ -2464,7 +2464,7 @@ EvtScript N(EVS_Scene_IntroStory) = {
         EVT_CALL(SetNpcAnimation, NPC_Eldstar, ANIM_WorldEldstar_Panic)
         EVT_CALL(SetNpcImgFXParams, NPC_Eldstar, IMGFX_CLEAR, 0, 0, 0, 0)
         EVT_CALL(SetNpcFlagBits, NPC_Eldstar, NPC_FLAG_INVISIBLE, TRUE)
-        EVT_CALL(func_802D7B10, ArrayVar(8))
+        EVT_CALL(DismissEffect, ArrayVar(8))
     EVT_END_THREAD
     EVT_WAIT(15 * DT)
     EVT_CALL(N(AdjustCamVfov), 0, 50)

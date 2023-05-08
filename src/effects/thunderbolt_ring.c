@@ -19,7 +19,7 @@ EffectInstance* thunderbolt_ring_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f3
     effectBp.update = thunderbolt_ring_update;
     effectBp.renderWorld = thunderbolt_ring_render;
     effectBp.unk_00 = 0;
-    effectBp.unk_14 = 0;
+    effectBp.renderUI = 0;
     effectBp.effectID = EFFECT_THUNDERBOLT_RING;
 
     effect = shim_create_effect_instance(&effectBp);
@@ -57,8 +57,8 @@ void thunderbolt_ring_update(EffectInstance *effect) {
     s32 lifeTime;
     s32 timeLeft;
 
-    if (effect->flags & 16) {
-        effect->flags &= ~16;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         data->timeLeft = 16;
     }
     if (data->timeLeft < 1000) {

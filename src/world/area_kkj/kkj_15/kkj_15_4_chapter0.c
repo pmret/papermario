@@ -314,7 +314,7 @@ EvtScript N(EVS_Scene_Chapter0_BowserAndKammy) = {
     EVT_CALL(SpeakToNpc, NPC_Bowser, ANIM_WorldBowser_Talk, ANIM_WorldBowser_Idle, 0, NPC_KoopaBros_01, MSG_Peach_CH1_KoopaBros_000F)
     EVT_WAIT(20 * DT)
     EVT_KILL_THREAD(LVarB)
-    EVT_CALL(func_802D7B10, LVarA)
+    EVT_CALL(DismissEffect, LVarA)
     EVT_CALL(EnableSpriteShading, FALSE)
     EVT_WAIT(30 * DT)
     EVT_EXEC_WAIT(N(EVS_FocusCam_KoopaBros))

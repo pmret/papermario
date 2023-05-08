@@ -32,7 +32,7 @@ void rising_bubble_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 arg4) {
     effectBp.init = rising_bubble_init;
     effectBp.update = rising_bubble_update;
     effectBp.renderWorld = rising_bubble_render;
-    effectBp.unk_14 = 0;
+    effectBp.renderUI = 0;
     effectBp.effectID = EFFECT_RISING_BUBBLE;
 
     effect = shim_create_effect_instance(&effectBp);

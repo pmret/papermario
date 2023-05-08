@@ -55,7 +55,7 @@ void flower_splash_main(f32 posX, f32 posY, f32 posZ, f32 angle) {
     bp.update = flower_splash_update;
     bp.renderWorld = flower_splash_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_FLOWER_SPLASH;
 
     effect = shim_create_effect_instance(&bp);

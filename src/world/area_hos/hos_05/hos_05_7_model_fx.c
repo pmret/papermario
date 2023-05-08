@@ -233,7 +233,7 @@ EvtScript N(EVS_Starship_Summon) = {
     EVT_END_LOOP
     EVT_WAIT(40)
     EVT_CALL(PlaySoundAt, SOUND_A3 | SOUND_ID_TRIGGER_CHANGE_SOUND, 0, 0, 250, 0)
-    EVT_CALL(func_802D7B10, LVar9)
+    EVT_CALL(DismissEffect, LVar9)
     EVT_CALL(EnableGroup, MODEL_g277, TRUE)
     EVT_CALL(MakeLerp, 200, 0, 45, EASING_QUADRATIC_OUT)
     EVT_LOOP(0)

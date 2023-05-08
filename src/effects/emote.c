@@ -102,7 +102,7 @@ void emote_main(s32 arg0, Npc* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32
     bp.init = emote_init;
     bp.update = emote_update;
     bp.renderWorld = emote_render;
-    bp.unk_14 = 0;
+    bp.renderUI = 0;
     bp.effectID = EFFECT_EMOTE;
 
     effect = shim_create_effect_instance(bpPtr);

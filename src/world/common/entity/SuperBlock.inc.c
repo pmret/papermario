@@ -214,7 +214,7 @@ API_CALLABLE(N(SuperBlock_StartGlowEffect)) {
 API_CALLABLE(N(SuperBlock_EndGlowEffect)) {
     EffectInstance* effect = (EffectInstance*)evt_get_variable(script, *script->ptrReadPos);
 
-    effect->flags |= EFFECT_INSTANCE_FLAG_10;
+    effect->flags |= FX_INSTANCE_FLAG_DISMISS;
     return ApiStatus_DONE2;
 }
 
@@ -329,7 +329,7 @@ API_CALLABLE(N(SuperBlock_AnimateEnergyOrbs)) {
             userData->scatterStateTime++;
             if (userData->scatterStateTime > (s32)(30 * DT)) {
                 for (i = 0; i < SUPER_BLOCK_NUM_ORBS; i++) {
-                    userData->orbEffects[i]->flags |= EFFECT_INSTANCE_FLAG_10;
+                    userData->orbEffects[i]->flags |= FX_INSTANCE_FLAG_DISMISS;
                 }
                 return ApiStatus_DONE2;
             }

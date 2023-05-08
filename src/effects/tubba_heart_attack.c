@@ -57,7 +57,7 @@ EffectInstance* tubba_heart_attack_main(
     bp.update = tubba_heart_attack_update;
     bp.renderWorld = tubba_heart_attack_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_TUBBA_HEART_ATTACK;
 
     effect = shim_create_effect_instance(&bp);
@@ -119,8 +119,8 @@ void tubba_heart_attack_update(EffectInstance* effect) {
     s32 i;
     s32 j;
 
-    if (effect->flags & 0x10) {
-        effect->flags &= ~0x10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         data->unk_10 = 64;
     }
 

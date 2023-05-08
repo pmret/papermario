@@ -384,7 +384,7 @@ enum SparkesFXTypes {
 };
 
 typedef struct ShapeSpellFXData {
-    /* 0x00 */ s32 isChild;
+    /* 0x00 */ b32 isChild;
     /* 0x04 */ Vec3f pos;
     /* 0x10 */ f32 unk_10;
     /* 0x14 */ f32 unk_14;
@@ -526,30 +526,26 @@ typedef struct ExplosionFXData {
 } ExplosionFXData; // size = 0x3C
 
 typedef struct LensFlareFXData {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ f32 unk_04;
-    /* 0x08 */ f32 unk_08;
-    /* 0x0C */ f32 unk_0C;
-    /* 0x10 */ f32 unk_10;
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ f32 unk_18;
-    /* 0x1C */ f32 unk_1C;
-    /* 0x20 */ f32 unk_20;
-    /* 0x24 */ s32 unk_24;
-    /* 0x28 */ s32 unk_28;
-    /* 0x2C */ s32 unk_2C;
-    /* 0x30 */ s32 unk_30;
+    /* 0x00 */ s32 type;
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ f32 largeFlareRot;
+    /* 0x14 */ f32 largeFlareRotVel;
+    /* 0x18 */ f32 largeFlareScale;
+    /* 0x1C */ f32 largeFlareScaleVel;
+    /* 0x20 */ f32 smallFlareScale;
+    /* 0x24 */ s32 largeFlareAlpha;
+    /* 0x28 */ s32 smallFlareAlpha;
+    /* 0x2C */ s32 timeLeft;
+    /* 0x30 */ s32 lifetime;
 } LensFlareFXData; // size = 0x34
 
 typedef struct GotItemOutlineFXData {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ f32 unk_04;
-    /* 0x08 */ f32 unk_08;
-    /* 0x0C */ f32 unk_0C;
-    /* 0x10 */ s32 unk_10;
-    /* 0x14 */ s32 unk_14;
-    /* 0x18 */ f32 unk_18;
-    /* 0x1C */ s32 unk_1C;
+    /* 0x00 */ s32 type;
+    /* 0x04 */ Vec3f pos;
+    /* 0x10 */ s32 lifetime;
+    /* 0x14 */ s32 timeLeft;
+    /* 0x18 */ f32 scale;
+    /* 0x1C */ s32 alpha;
 } GotItemOutlineFXData; // size = 0x20
 
 typedef struct SpikyWhiteAuraFXData {
@@ -2380,7 +2376,7 @@ typedef struct SpiritCardFXData {
     /* 0x10 */ s32 unk_10;
     /* 0x14 */ s32 unk_14;
     /* 0x18 */ f32 unk_18;
-    /* 0x1C */ struct EffectInstance* unk_1C;
+    /* 0x1C */ struct EffectInstance* child;
     /* 0x20 */ f32 unk_20;
     /* 0x24 */ f32 yaw;
     /* 0x28 */ char unk_28[0xC];
@@ -2805,7 +2801,7 @@ typedef struct EffectBlueprint {
     /* 0x08 */ void (*init)(EffectInstance* effectInst);
     /* 0x0C */ void (*update)(EffectInstance* effectInst);
     /* 0x10 */ void (*renderWorld)(EffectInstance* effectInst);
-    /* 0x14 */ void (*unk_14)(EffectInstance* effectInst);
+    /* 0x14 */ void (*renderUI)(EffectInstance* effectInst);
 } EffectBlueprint; // size = 0x18
 
 typedef struct EffectGraphics {

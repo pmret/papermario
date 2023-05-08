@@ -419,8 +419,8 @@ API_CALLABLE(BattleMerleeUpdateFX) {
     if (D_8029FBA4 == 2) {
         BattleMerleeOrbEffect->data.energyOrbWave->scale = 0.00001f;
         BattleMerleeWaveEffect->data.energyOrbWave->scale = 0.00001f;
-        BattleMerleeOrbEffect->flags |= 0x10;
-        BattleMerleeWaveEffect->flags |= 0x10;
+        BattleMerleeOrbEffect->flags |= FX_INSTANCE_FLAG_DISMISS;
+        BattleMerleeWaveEffect->flags |= FX_INSTANCE_FLAG_DISMISS;
         return ApiStatus_DONE1;
     }
 

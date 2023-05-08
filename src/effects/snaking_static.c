@@ -20,7 +20,7 @@ EffectInstance* snaking_static_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 
     effectBp.update = snaking_static_update;
     effectBp.renderWorld = snaking_static_render;
     effectBp.unk_00 = 0;
-    effectBp.unk_14 = 0;
+    effectBp.renderUI = 0;
     effectBp.effectID = EFFECT_SNAKING_STATIC;
 
     effect = shim_create_effect_instance(&effectBp);
@@ -80,8 +80,8 @@ void snaking_static_update(EffectInstance* effect) {
     s32 timeLeft;
     s32 i;
 
-    if (effect->flags & 16) {
-        effect->flags &= ~16;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         data->timeLeft = 16;
     }
 

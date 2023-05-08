@@ -21,7 +21,7 @@ void cloud_puff_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     bp.init = cloud_puff_init;
     bp.update = cloud_puff_update;
     bp.renderWorld = cloud_puff_render;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_CLOUD_PUFF;
 
     effect = shim_create_effect_instance(&bp);

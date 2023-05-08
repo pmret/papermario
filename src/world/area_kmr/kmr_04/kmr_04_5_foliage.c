@@ -63,7 +63,7 @@ EvtScript N(EVS_GotHammer) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(func_802D7B44, LVar8)
+    EVT_CALL(DismissItemOutline, LVar8)
     EVT_CALL(RemoveItemEntity, LVarC)
     EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Idle)
     EVT_RETURN

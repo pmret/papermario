@@ -22,7 +22,7 @@ void ring_blast_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 arg4, s32 arg5)
     effectBp.update = ring_blast_update;
     effectBp.renderWorld = ring_blast_render;
     effectBp.unk_00 = 0;
-    effectBp.unk_14 = 0;
+    effectBp.renderUI = 0;
     effectBp.effectID = EFFECT_RING_BLAST;
 
     effect = shim_create_effect_instance(&effectBp);

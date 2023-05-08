@@ -66,7 +66,7 @@ void stars_shimmer_main(s32 type, f32 x, f32 y, f32 z, f32 arg4, f32 arg5, s32 n
     bpPtr->update = stars_shimmer_update;
     bpPtr->renderWorld = stars_shimmer_render;
     bpPtr->unk_00 = 0;
-    bpPtr->unk_14 = NULL;
+    bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_STARS_SHIMMER;
 
     effect = shim_create_effect_instance(bpPtr);

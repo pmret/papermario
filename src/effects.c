@@ -6,8 +6,6 @@
 typedef s32 TlbEntry[0x1000 / 4];
 typedef TlbEntry TlbMappablePage[15];
 
-#define EFFECT_LOADED 1
-
 extern EffectGraphics gEffectGraphicsData[15];
 extern EffectInstance* gEffectInstances[96];
 
@@ -202,38 +200,41 @@ void update_effects(void) {
         EffectGraphics* effectGraphics;
         s32 i;
 
+        // reset free delay for each EffectGraphics touched in previous update
         for (i = 0, effectGraphics = gEffectGraphicsData; i < ARRAY_COUNT(gEffectGraphicsData); i++, effectGraphics++) {
             if (effectGraphics->flags & FX_GRAPHICS_ENABLED) {
-                if (!(effectGraphics->flags & FX_GRAPHICS_FLAG_2)) {
-                    effectGraphics->flags |= FX_GRAPHICS_FLAG_2;
+                if (!(effectGraphics->flags & FX_GRAPHICS_CAN_FREE)) {
+                    effectGraphics->flags |= FX_GRAPHICS_CAN_FREE;
                     effectGraphics->freeDelay = 3;
                 }
             }
         }
 
+        // update each EffectInstances
         for (i = 0; i < ARRAY_COUNT(gEffectInstances); i++) {
             EffectInstance* effectInstance = gEffectInstances[i];
 
-            if (effectInstance != NULL && (effectInstance->flags & EFFECT_INSTANCE_FLAG_1)) {
-                effectInstance->graphics->flags &= ~FX_GRAPHICS_FLAG_2;
+            if (effectInstance != NULL && (effectInstance->flags & FX_INSTANCE_FLAG_ENABLED)) {
+                effectInstance->graphics->flags &= ~FX_GRAPHICS_CAN_FREE;
 
                 if (gGameStatusPtr->isBattle) {
-                    if (effectInstance->flags & EFFECT_INSTANCE_FLAG_4) {
+                    if (effectInstance->flags & FX_INSTANCE_FLAG_BATTLE) {
                         effectInstance->graphics->update(effectInstance);
-                        effectInstance->flags |= EFFECT_INSTANCE_FLAG_8;
+                        effectInstance->flags |= FX_INSTANCE_FLAG_HAS_UPDATED;
                     }
                 } else {
-                    if (!(effectInstance->flags & EFFECT_INSTANCE_FLAG_4)) {
+                    if (!(effectInstance->flags & FX_INSTANCE_FLAG_BATTLE)) {
                         effectInstance->graphics->update(effectInstance);
-                        effectInstance->flags |= EFFECT_INSTANCE_FLAG_8;
+                        effectInstance->flags |= FX_INSTANCE_FLAG_HAS_UPDATED;
                     }
                 }
             }
         }
 
+        // free any EffectGraphics which haven't been used recently
         for (i = 0, effectGraphics = gEffectGraphicsData; i < ARRAY_COUNT(gEffectGraphicsData); i++, effectGraphics++) {
             if (effectGraphics->flags & FX_GRAPHICS_ENABLED) {
-                if (effectGraphics->flags & FX_GRAPHICS_FLAG_2) {
+                if (effectGraphics->flags & FX_GRAPHICS_CAN_FREE) {
                     if (effectGraphics->freeDelay != 0) {
                         effectGraphics->freeDelay--;
                     } else {
@@ -254,14 +255,20 @@ void render_effects_world(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(gEffectInstances); i++) {
-        if (gEffectInstances[i] != NULL && gEffectInstances[i]->flags & 1 && gEffectInstances[i]->flags & 8) {
-            if (gGameStatusPtr->isBattle) {
-                if (gEffectInstances[i]->flags & 4) {
-                    gEffectInstances[i]->graphics->renderWorld(gEffectInstances[i]);
-                }
-            } else {
-                if (!(gEffectInstances[i]->flags & 4)) {
-                    gEffectInstances[i]->graphics->renderWorld(gEffectInstances[i]);
+        EffectInstance* effectInstance = gEffectInstances[i];
+
+        if (effectInstance != NULL) {
+            if (effectInstance->flags & FX_INSTANCE_FLAG_ENABLED) {
+                if (effectInstance->flags & FX_INSTANCE_FLAG_HAS_UPDATED) {
+                    if (gGameStatusPtr->isBattle) {
+                        if (effectInstance->flags & FX_INSTANCE_FLAG_BATTLE) {
+                            effectInstance->graphics->renderWorld(effectInstance);
+                        }
+                    } else {
+                        if (!(effectInstance->flags & FX_INSTANCE_FLAG_BATTLE)) {
+                            effectInstance->graphics->renderWorld(effectInstance);
+                        }
+                    }
                 }
             }
         }
@@ -276,15 +283,15 @@ void render_effects_UI(void) {
         EffectInstance* effectInstance = gEffectInstances[i];
 
         if (effectInstance != NULL) {
-            if (effectInstance->flags & EFFECT_INSTANCE_FLAG_1) {
-                if (effectInstance->flags & EFFECT_INSTANCE_FLAG_8) {
+            if (effectInstance->flags & FX_INSTANCE_FLAG_ENABLED) {
+                if (effectInstance->flags & FX_INSTANCE_FLAG_HAS_UPDATED) {
                     void (*renderUI)(EffectInstance* effect);
 
-                    if (gGameStatusPtr->isBattle && !(effectInstance->flags & EFFECT_INSTANCE_FLAG_4)) {
+                    if (gGameStatusPtr->isBattle && !(effectInstance->flags & FX_INSTANCE_FLAG_BATTLE)) {
                         continue;
                     }
 
-                    if (!gGameStatusPtr->isBattle && effectInstance->flags & EFFECT_INSTANCE_FLAG_4) {
+                    if (!gGameStatusPtr->isBattle && effectInstance->flags & FX_INSTANCE_FLAG_BATTLE) {
                         continue;
                     }
 
@@ -324,7 +331,7 @@ void render_effects_UI(void) {
 
 EffectInstance* create_effect_instance(EffectBlueprint* effectBp) {
     EffectInstance* newEffectInst;
-    EffectGraphics* curEffect;
+    EffectGraphics* effectGraphics;
     s32 i;
 
     // Search for an unused instance
@@ -340,47 +347,48 @@ EffectInstance* create_effect_instance(EffectBlueprint* effectBp) {
     gEffectInstances[i] = newEffectInst = general_heap_malloc(sizeof(*newEffectInst));
     ASSERT(newEffectInst != NULL);
 
-    curEffect = &gEffectGraphicsData[0];
+    effectGraphics = &gEffectGraphicsData[0];
     newEffectInst->effectIndex = effectBp->effectID;
-    newEffectInst->flags = 1;
+    newEffectInst->flags = FX_INSTANCE_FLAG_ENABLED;
 
     // Look for a loaded effect of the proper index
     for (i = 0; i < ARRAY_COUNT(gEffectGraphicsData); i++) {
-        if ((curEffect->flags & EFFECT_LOADED) && (curEffect->effectIndex == effectBp->effectID)) {
+        if ((effectGraphics->flags & FX_GRAPHICS_ENABLED) && (effectGraphics->effectIndex == effectBp->effectID)) {
             break;
         }
-        curEffect++;
+        effectGraphics++;
     }
 
     ASSERT(i < ARRAY_COUNT(gEffectGraphicsData));
 
     // If this is the first new instance of the effect, initialize the function pointers
-    if (curEffect->instanceCounter == 0) {
-        curEffect->update = effectBp->update;
-        if (curEffect->update == NULL) {
-            curEffect->renderWorld = stub_effect_delegate;
+    if (effectGraphics->instanceCounter == 0) {
+        effectGraphics->update = effectBp->update;
+        if (effectGraphics->update == NULL) {
+            effectGraphics->renderWorld = stub_effect_delegate;
         }
 
-        curEffect->renderWorld = effectBp->renderWorld;
-        if (curEffect->renderUI == NULL) {
-            curEffect->renderUI = stub_effect_delegate;
+        effectGraphics->renderWorld = effectBp->renderWorld;
+        // @bug? null check for renderUI instead of renderWorld
+        if (effectGraphics->renderUI == NULL) {
+            effectGraphics->renderUI = stub_effect_delegate;
         }
 
-        curEffect->renderUI = effectBp->unk_14;
-        if (curEffect->renderUI == NULL) {
-            curEffect->renderUI = stub_effect_delegate;
+        effectGraphics->renderUI = effectBp->renderUI;
+        if (effectGraphics->renderUI == NULL) {
+            effectGraphics->renderUI = stub_effect_delegate;
         }
     }
 
-    curEffect->instanceCounter++;
-    newEffectInst->graphics = curEffect;
+    effectGraphics->instanceCounter++;
+    newEffectInst->graphics = effectGraphics;
 
     if (effectBp->init != NULL) {
         effectBp->init(newEffectInst);
     }
 
     if (gGameStatusPtr->isBattle) {
-        newEffectInst->flags |= 4;
+        newEffectInst->flags |= FX_INSTANCE_FLAG_BATTLE;
     }
     return newEffectInst;
 }
@@ -412,7 +420,7 @@ void remove_all_effects(void) {
     for (i = 0; i < ARRAY_COUNT(gEffectInstances); i++) {
         EffectInstance* effect = gEffectInstances[i];
 
-        if (effect != NULL && effect->flags & 4) {
+        if (effect != NULL && effect->flags & FX_INSTANCE_FLAG_BATTLE) {
             if (effect->data.any != NULL) {
                 general_heap_free(effect->data.any);
             }
@@ -424,32 +432,32 @@ void remove_all_effects(void) {
 
 s32 load_effect(s32 effectIndex) {
     EffectTableEntry* effectEntry = &gEffectTable[effectIndex];
-    EffectGraphics* curEffect;
+    EffectGraphics* effectGraphics;
     TlbMappablePage* tlbMappablePages;
     s32 i;
 
     // Look for a loaded effect matching the desired index
-    for (i = 0, curEffect = &gEffectGraphicsData[0]; i < ARRAY_COUNT(gEffectGraphicsData); i++) {
-        if (curEffect->flags & EFFECT_LOADED && curEffect->effectIndex == effectIndex) {
+    for (i = 0, effectGraphics = &gEffectGraphicsData[0]; i < ARRAY_COUNT(gEffectGraphicsData); i++) {
+        if (effectGraphics->flags & FX_GRAPHICS_ENABLED && effectGraphics->effectIndex == effectIndex) {
             break;
         }
-        curEffect++;
+        effectGraphics++;
     }
 
     // If an effect was found within the table, initialize it and return
     if (i < ARRAY_COUNT(gEffectGraphicsData)) {
-        curEffect->effectIndex = effectIndex;
-        curEffect->instanceCounter = 0;
-        curEffect->flags = EFFECT_LOADED;
+        effectGraphics->effectIndex = effectIndex;
+        effectGraphics->instanceCounter = 0;
+        effectGraphics->flags = FX_GRAPHICS_ENABLED;
         return 1;
     }
 
     // If a loaded effect wasn't found, look for the first empty space
-    for (i = 0, curEffect = &gEffectGraphicsData[0]; i < ARRAY_COUNT(gEffectGraphicsData); i++) {
-        if (!(curEffect->flags & EFFECT_LOADED)) {
+    for (i = 0, effectGraphics = &gEffectGraphicsData[0]; i < ARRAY_COUNT(gEffectGraphicsData); i++) {
+        if (!(effectGraphics->flags & FX_GRAPHICS_ENABLED)) {
             break;
         }
-        curEffect++;
+        effectGraphics++;
     }
 
     // If no empty space was found, panic
@@ -465,14 +473,14 @@ s32 load_effect(s32 effectIndex) {
     // If there's extra data the effect normally loads, allocate space and copy into the new space
     if (effectEntry->graphicsDmaStart != NULL) {
         void* effectDataBuf = general_heap_malloc(effectEntry->graphicsDmaEnd - effectEntry->graphicsDmaStart);
-        curEffect->data = effectDataBuf;
+        effectGraphics->data = effectDataBuf;
         ASSERT(effectDataBuf != NULL);
-        dma_copy(effectEntry->graphicsDmaStart, effectEntry->graphicsDmaEnd, curEffect->data);
+        dma_copy(effectEntry->graphicsDmaStart, effectEntry->graphicsDmaEnd, effectGraphics->data);
     }
 
     // Initialize the newly loaded effect data
-    curEffect->effectIndex = effectIndex;
-    curEffect->instanceCounter = 0;
-    curEffect->flags = EFFECT_LOADED;
+    effectGraphics->effectIndex = effectIndex;
+    effectGraphics->instanceCounter = 0;
+    effectGraphics->flags = FX_GRAPHICS_ENABLED;
     return 1;
 }

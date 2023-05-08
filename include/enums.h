@@ -4136,40 +4136,17 @@ enum DamageIntensityRange {
     DAMAGE_INTENSITY_UNUSED     = 4,    // unused
 };
 
+enum EffectInstanceFlags {
+    FX_INSTANCE_FLAG_ENABLED            = 0x00000001,
+    FX_INSTANCE_FLAG_BATTLE             = 0x00000004, // effect was created during battle
+    FX_INSTANCE_FLAG_HAS_UPDATED        = 0x00000008, // has run update at least once
+    FX_INSTANCE_FLAG_DISMISS            = 0x00000010, // effect should perform cleanup and self-delete
+};
+
 enum EffectGfxDataFlags {
     FX_GRAPHICS_DISABLED                = 0x00000000,
     FX_GRAPHICS_ENABLED                 = 0x00000001,
-    FX_GRAPHICS_FLAG_2                  = 0x00000002,
-    FX_GRAPHICS_FLAG_4                  = 0x00000004,
-    FX_GRAPHICS_FLAG_8                  = 0x00000008,
-    FX_GRAPHICS_FLAG_10                 = 0x00000010,
-    FX_GRAPHICS_FLAG_20                 = 0x00000020,
-    FX_GRAPHICS_FLAG_40                 = 0x00000040,
-    FX_GRAPHICS_FLAG_80                 = 0x00000080,
-    FX_GRAPHICS_FLAG_100                = 0x00000100,
-    FX_GRAPHICS_FLAG_200                = 0x00000200,
-    FX_GRAPHICS_FLAG_400                = 0x00000400,
-    FX_GRAPHICS_FLAG_800                = 0x00000800,
-    FX_GRAPHICS_FLAG_1000               = 0x00001000,
-    FX_GRAPHICS_FLAG_2000               = 0x00002000,
-    FX_GRAPHICS_FLAG_4000               = 0x00004000,
-    FX_GRAPHICS_FLAG_8000               = 0x00008000,
-    FX_GRAPHICS_FLAG_10000              = 0x00010000,
-    FX_GRAPHICS_FLAG_20000              = 0x00020000,
-    FX_GRAPHICS_FLAG_40000              = 0x00040000,
-    FX_GRAPHICS_FLAG_80000              = 0x00080000,
-    FX_GRAPHICS_FLAG_100000             = 0x00100000,
-    FX_GRAPHICS_FLAG_200000             = 0x00200000,
-    FX_GRAPHICS_FLAG_400000             = 0x00400000,
-    FX_GRAPHICS_FLAG_800000             = 0x00800000,
-    FX_GRAPHICS_FLAG_1000000            = 0x01000000,
-    FX_GRAPHICS_FLAG_2000000            = 0x02000000,
-    FX_GRAPHICS_FLAG_4000000            = 0x04000000,
-    FX_GRAPHICS_FLAG_8000000            = 0x08000000,
-    FX_GRAPHICS_FLAG_10000000           = 0x10000000,
-    FX_GRAPHICS_FLAG_20000000           = 0x20000000,
-    FX_GRAPHICS_FLAG_40000000           = 0x40000000,
-    FX_GRAPHICS_FLAG_80000000           = 0x80000000,
+    FX_GRAPHICS_CAN_FREE                = 0x00000002,
 };
 
 enum MoveIDs {
@@ -5955,41 +5932,6 @@ enum TempSetZoneEnabledFlags {
     TEMP_SET_ZONE_ENABLED_FLAG_20000000          = 0x20000000,
     TEMP_SET_ZONE_ENABLED_FLAG_40000000          = 0x40000000,
     TEMP_SET_ZONE_ENABLED_FLAG_80000000          = 0x80000000,
-};
-
-enum EffectInstanceFlags {
-    EFFECT_INSTANCE_FLAG_1                 = 0x00000001,
-    EFFECT_INSTANCE_FLAG_2                 = 0x00000002,
-    EFFECT_INSTANCE_FLAG_4                 = 0x00000004,
-    EFFECT_INSTANCE_FLAG_8                 = 0x00000008,
-    EFFECT_INSTANCE_FLAG_10                = 0x00000010, // mark ready for cleanup
-    EFFECT_INSTANCE_FLAG_20                = 0x00000020,
-    EFFECT_INSTANCE_FLAG_40                = 0x00000040,
-    EFFECT_INSTANCE_FLAG_80                = 0x00000080,
-    EFFECT_INSTANCE_FLAG_100               = 0x00000100,
-    EFFECT_INSTANCE_FLAG_200               = 0x00000200,
-    EFFECT_INSTANCE_FLAG_400               = 0x00000400,
-    EFFECT_INSTANCE_FLAG_800               = 0x00000800,
-    EFFECT_INSTANCE_FLAG_1000              = 0x00001000,
-    EFFECT_INSTANCE_FLAG_2000              = 0x00002000,
-    EFFECT_INSTANCE_FLAG_4000              = 0x00004000,
-    EFFECT_INSTANCE_FLAG_8000              = 0x00008000,
-    EFFECT_INSTANCE_FLAG_10000             = 0x00010000,
-    EFFECT_INSTANCE_FLAG_20000             = 0x00020000,
-    EFFECT_INSTANCE_FLAG_40000             = 0x00040000,
-    EFFECT_INSTANCE_FLAG_80000             = 0x00080000,
-    EFFECT_INSTANCE_FLAG_100000            = 0x00100000,
-    EFFECT_INSTANCE_FLAG_200000            = 0x00200000,
-    EFFECT_INSTANCE_FLAG_400000            = 0x00400000,
-    EFFECT_INSTANCE_FLAG_800000            = 0x00800000,
-    EFFECT_INSTANCE_FLAG_1000000           = 0x01000000,
-    EFFECT_INSTANCE_FLAG_2000000           = 0x02000000,
-    EFFECT_INSTANCE_FLAG_4000000           = 0x04000000,
-    EFFECT_INSTANCE_FLAG_8000000           = 0x08000000,
-    EFFECT_INSTANCE_FLAG_10000000          = 0x10000000,
-    EFFECT_INSTANCE_FLAG_20000000          = 0x20000000,
-    EFFECT_INSTANCE_FLAG_40000000          = 0x40000000,
-    EFFECT_INSTANCE_FLAG_80000000          = 0x80000000,
 };
 
 enum ModelTransformGroupFlags {

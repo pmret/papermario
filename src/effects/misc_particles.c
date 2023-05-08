@@ -66,7 +66,7 @@ EffectInstance* misc_particles_main(
     bp.update = misc_particles_update;
     bp.renderWorld = misc_particles_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_MISC_PARTICLES;
 
     effect = shim_create_effect_instance(&bp);
@@ -160,8 +160,8 @@ void misc_particles_update(EffectInstance* effect) {
     f32 temp_cos;
     s32 i;
 
-    if (effect->flags & EFFECT_INSTANCE_FLAG_10) {
-        effect->flags &= ~EFFECT_INSTANCE_FLAG_10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         particle->timeLeft = 16;
     }
 

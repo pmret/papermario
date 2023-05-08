@@ -64,7 +64,7 @@ EffectInstance* lightning_bolt_main(
     bp.update = lightning_bolt_update;
     bp.renderWorld = lightning_bolt_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_LIGHTNING_BOLT;
 
     effect = shim_create_effect_instance(&bp);
@@ -120,8 +120,8 @@ void lightning_bolt_update(EffectInstance* effect) {
     LightningBoltFXData* data = effect->data.lightningBolt;
     s32 type = data->type;
 
-    if (effect->flags & EFFECT_INSTANCE_FLAG_10) {
-        effect->flags &= ~EFFECT_INSTANCE_FLAG_10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         data->timeLeft = 16;
     }
 

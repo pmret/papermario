@@ -23,7 +23,7 @@ EffectInstance* gather_magic_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 ar
     bp.init = gather_magic_init;
     bp.update = gather_magic_update;
     bp.renderWorld = gather_magic_render;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_GATHER_MAGIC;
 
     effect = shim_create_effect_instance(&bp);

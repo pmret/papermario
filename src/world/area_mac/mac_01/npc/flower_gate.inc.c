@@ -299,7 +299,7 @@ EvtScript N(EVS_Scene_FlowerGateAppears) = {
     EVT_END_LOOP
     EVT_CALL(EnableModel, MODEL_r_door, FALSE)
     EVT_CALL(EnableGroup, MODEL_to_flo, TRUE)
-    EVT_CALL(func_802D7B10, LVar9)
+    EVT_CALL(DismissEffect, LVar9)
     EVT_CALL(PlaySoundAt, SOUND_2A4, SOUND_SPACE_MODE_0, 266, 50, 338)
     EVT_LOOP(3)
         EVT_PLAY_EFFECT(EFFECT_ENERGY_ORB_WAVE, 5, 266, 50, 338, 1, 20)

@@ -23,7 +23,7 @@ EffectInstance* huff_puff_breath_main(s32 type, f32 posX, f32 posY, f32 posZ, f3
     effectBp.update = huff_puff_breath_update;
     effectBp.renderWorld = huff_puff_breath_render;
     effectBp.unk_00 = 0;
-    effectBp.unk_14 = 0;
+    effectBp.renderUI = 0;
     effectBp.effectID = EFFECT_HUFF_PUFF_BREATH;
 
     effect = shim_create_effect_instance(&effectBp);
@@ -74,8 +74,8 @@ void huff_puff_breath_update(EffectInstance* effect) {
     HuffPuffBreathFXData* data = effect->data.huffPuffBreath;
     s32 temp_a2;
 
-    if (effect->flags & 16) {
-        effect->flags &= ~16;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         data->timeLeft = 16;
     }
     if (data->timeLeft < 1000) {

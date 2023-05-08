@@ -589,7 +589,7 @@ API_CALLABLE(N(FlyAround)) {
         case 2:
             state->moveTime = 5;
             script->functionTemp[0] = 3;
-            airRaidEffect->flags |= 0x10;
+            airRaidEffect->flags |= FX_INSTANCE_FLAG_DISMISS;
             // fallthrough
         case 3:
             add_vec2D_polar(&state->currentPos.x, &state->currentPos.y, state->speed, state->angle);

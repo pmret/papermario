@@ -148,7 +148,7 @@ EffectInstance* stat_change_main(s32 arg0, f32 x, f32 y, f32 z, f32 scale, s32 t
     bp.init = stat_change_init;
     bp.update = stat_change_update;
     bp.renderWorld = stat_change_render;
-    bp.unk_14 = func_E00AC288;
+    bp.renderUI = func_E00AC288;
     bp.unk_00 = 0;
     bp.effectID = EFFECT_STAT_CHANGE;
 

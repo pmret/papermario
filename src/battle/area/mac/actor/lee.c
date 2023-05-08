@@ -986,7 +986,7 @@ API_CALLABLE(func_80218E2C_4652BC) {
     EffectInstance* tattleEffect = (EffectInstance*) evt_get_variable(script, *script->ptrReadPos);
 
     tattleEffect->data.tattleWindow->pos.y = 144.0f;
-    tattleEffect->flags |= EFFECT_INSTANCE_FLAG_10;
+    tattleEffect->flags |= FX_INSTANCE_FLAG_DISMISS;
     return ApiStatus_DONE2;
 }
 
@@ -2911,7 +2911,7 @@ API_CALLABLE(func_80219188_465618) {
                     }
 
                     if (wattEffectData->effect2 != NULL) {
-                        wattEffectData->effect2->flags |= EFFECT_INSTANCE_FLAG_10;
+                        wattEffectData->effect2->flags |= FX_INSTANCE_FLAG_DISMISS;
                         wattEffectData->effect2 = NULL;
                     }
                     wattEffectData->effect1->data.staticStatus->pos.x = x;
@@ -2920,7 +2920,7 @@ API_CALLABLE(func_80219188_465618) {
                     break;
                 case 1:
                     if (wattEffectData->effect1 != NULL) {
-                        wattEffectData->effect1->flags |= EFFECT_INSTANCE_FLAG_10;
+                        wattEffectData->effect1->flags |= FX_INSTANCE_FLAG_DISMISS;
                         wattEffectData->effect1 = NULL;
                     }
                     if (wattEffectData->effect2 == NULL) {
@@ -2934,21 +2934,21 @@ API_CALLABLE(func_80219188_465618) {
             }
         } else {
             if (wattEffectData->effect1 != NULL) {
-                wattEffectData->effect1->flags |= EFFECT_INSTANCE_FLAG_10;
+                wattEffectData->effect1->flags |= FX_INSTANCE_FLAG_DISMISS;
                 wattEffectData->effect1 = NULL;
             }
             if (wattEffectData->effect2 != NULL) {
-                wattEffectData->effect2->flags |= EFFECT_INSTANCE_FLAG_10;
+                wattEffectData->effect2->flags |= FX_INSTANCE_FLAG_DISMISS;
                 wattEffectData->effect2 = NULL;
             }
         }
         if (wattEffectData->debuff != actor->debuff && wattEffectData->unk_0C) {
             if (wattEffectData->effect1 != NULL) {
-                wattEffectData->effect1->flags |= EFFECT_INSTANCE_FLAG_10;
+                wattEffectData->effect1->flags |= FX_INSTANCE_FLAG_DISMISS;
                 wattEffectData->effect1 = NULL;
             }
             if (wattEffectData->effect2 != NULL) {
-                wattEffectData->effect2->flags |= EFFECT_INSTANCE_FLAG_10;
+                wattEffectData->effect2->flags |= FX_INSTANCE_FLAG_DISMISS;
                 wattEffectData->effect2 = NULL;
             }
         }
@@ -2964,11 +2964,11 @@ API_CALLABLE(func_80219604_465A94) {
     wattEffectData->flags = 0;
 
     if (wattEffectData->effect1 != NULL) {
-        wattEffectData->effect1->flags |= EFFECT_INSTANCE_FLAG_10;
+        wattEffectData->effect1->flags |= FX_INSTANCE_FLAG_DISMISS;
     }
 
     if (wattEffectData->effect2 != NULL) {
-        wattEffectData->effect2->flags |= EFFECT_INSTANCE_FLAG_10;
+        wattEffectData->effect2->flags |= FX_INSTANCE_FLAG_DISMISS;
     }
 
     return ApiStatus_DONE2;

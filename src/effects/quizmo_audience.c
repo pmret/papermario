@@ -86,7 +86,7 @@ EffectInstance* quizmo_audience_main(s32 arg0, f32 posX, f32 posY, f32 posZ) {
     effectBp.update = quizmo_audience_update;
     effectBp.renderWorld = quizmo_audience_render;
     effectBp.unk_00 = 0;
-    effectBp.unk_14 = 0;
+    effectBp.renderUI = 0;
     effectBp.effectID = EFFECT_QUIZMO_AUDIENCE;
 
     effect = shim_create_effect_instance(&effectBp);
@@ -120,8 +120,8 @@ void quizmo_audience_update(EffectInstance* effect) {
     s32 posIdx;
     s32 i;
 
-    if (effect->flags & 0x10) {
-        effect->flags &= ~0x10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         data->timeLeft = 30;
     }
 

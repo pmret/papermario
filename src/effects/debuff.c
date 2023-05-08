@@ -23,7 +23,7 @@ EffectInstance* debuff_main(s32 type, f32 x, f32 y, f32 z) {
     bp.init = debuff_init;
     bp.update = debuff_update;
     bp.renderWorld = debuff_render;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_DEBUFF;
 
     effect = shim_create_effect_instance(&bp);

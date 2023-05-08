@@ -58,7 +58,7 @@ EffectInstance* firework_main(
     bp.init = firework_init;
     bp.update = firework_update;
     bp.renderWorld = firework_render;
-    bp.unk_14 = func_E0086398;
+    bp.renderUI = func_E0086398;
     bp.effectID = EFFECT_FIREWORK;
 
     effect = shim_create_effect_instance(&bp);

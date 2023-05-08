@@ -2722,15 +2722,15 @@ block_47: // TODO required to match
                 (BUTTON_STICK_RIGHT | BUTTON_STICK_LEFT | BUTTON_STICK_DOWN | BUTTON_STICK_UP | BUTTON_A | BUTTON_B))
             {
                 hide_item_entity(itemEntity);
-                if (func_800DFCF4() &&
-                    playerStatus->actionState != ACTION_STATE_USE_SPINNING_FLOWER &&
-                    !(playerStatus->animFlags & PA_FLAG_NO_OOB_RESPAWN))
-                {
+                if (is_player_dismounted()
+                    && playerStatus->actionState != ACTION_STATE_USE_SPINNING_FLOWER
+                    && !(playerStatus->animFlags & PA_FLAG_NO_OOB_RESPAWN)
+                ) {
                     set_action_state(ACTION_STATE_IDLE);
                 }
 
                 if (gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_GEAR) {
-                    D_801568F0->data.gotItemOutline->unk_14 = 0xA;
+                    D_801568F0->data.gotItemOutline->timeLeft = 10;
                 }
                 set_window_update(WINDOW_ID_12, (s32) basic_hidden_window_update);
                 set_window_update(WINDOW_ID_19, (s32) basic_hidden_window_update);

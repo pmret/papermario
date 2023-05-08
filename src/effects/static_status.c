@@ -56,7 +56,7 @@ EffectInstance* static_status_main(
     bp.update = static_status_update;
     bp.renderWorld = static_status_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_STATIC_STATUS;
 
     effect = shim_create_effect_instance(&bp);
@@ -100,8 +100,8 @@ void static_status_update(EffectInstance* effect) {
     f32 angle;
     s32 i;
 
-    if (effect->flags & EFFECT_INSTANCE_FLAG_10) {
-        effect->flags &= ~EFFECT_INSTANCE_FLAG_10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         part->timeLeft = 16;
     }
 

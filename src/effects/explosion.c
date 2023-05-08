@@ -36,7 +36,7 @@ void explosion_main(s32 type, f32 x, f32 y, f32 z) {
     bpPtr->init = explosion_init;
     bpPtr->update = explosion_update;
     bpPtr->renderWorld = explosion_render;
-    bpPtr->unk_14 = NULL;
+    bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_EXPLOSION;
 
 

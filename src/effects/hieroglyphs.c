@@ -36,7 +36,7 @@ EffectInstance* hieroglyphs_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 arg
     effectBp.update = hieroglyphs_update;
     effectBp.renderWorld = hieroglyphs_render;
     effectBp.unk_00 = 0;
-    effectBp.unk_14 = 0;
+    effectBp.renderUI = 0;
     effectBp.effectID = EFFECT_HIEROGLYPHS;
 
     effect = shim_create_effect_instance(&effectBp);
@@ -75,8 +75,8 @@ void hieroglyphs_update(EffectInstance* effect) {
     HieroglyphsFXData* data = effect->data.hieroglyphs;
     s32 temp_a2;
 
-    if (effect->flags & 16) {
-        effect->flags &= ~16;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         data->timeLeft = 16;
     }
 
