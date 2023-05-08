@@ -24,7 +24,7 @@ void big_snowflakes_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     bp.init = big_snowflakes_init;
     bp.update = big_snowflakes_update;
     bp.renderWorld = big_snowflakes_render;
-    bp.renderUI = 0;
+    bp. renderUI = NULL;
     bp.effectID = EFFECT_BIG_SNOWFLAKES;
 
     effect = shim_create_effect_instance(&bp);

@@ -23,7 +23,7 @@ void sweat_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, s32 
     effectBp.update = sweat_update;
     effectBp.renderWorld = sweat_render;
     effectBp.unk_00 = 0;
-    effectBp.renderUI = 0;
+    effectBp. renderUI = NULL;
     effectBp.effectID = EFFECT_SWEAT;
 
     effect = shim_create_effect_instance(&effectBp);

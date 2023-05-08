@@ -36,7 +36,7 @@ EffectInstance* hieroglyphs_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 arg
     effectBp.update = hieroglyphs_update;
     effectBp.renderWorld = hieroglyphs_render;
     effectBp.unk_00 = 0;
-    effectBp.renderUI = 0;
+    effectBp. renderUI = NULL;
     effectBp.effectID = EFFECT_HIEROGLYPHS;
 
     effect = shim_create_effect_instance(&effectBp);

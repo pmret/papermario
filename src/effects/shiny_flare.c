@@ -30,7 +30,7 @@ EffectInstance* shiny_flare_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg
     effectBp.update = shiny_flare_update;
     effectBp.renderWorld = shiny_flare_render;
     effectBp.unk_00 = 0;
-    effectBp.renderUI = 0;
+    effectBp. renderUI = NULL;
     effectBp.effectID = EFFECT_SHINY_FLARE;
     effect = shim_create_effect_instance(&effectBp);
     effect->numParts = numParts;
