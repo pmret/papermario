@@ -30,7 +30,7 @@ EffectInstance* quizmo_stage_main(s32 arg0, f32 posX, f32 posY, f32 posZ) {
     effectBp.update = quizmo_stage_update;
     effectBp.renderWorld = quizmo_stage_render;
     effectBp.unk_00 = 0;
-    effectBp. renderUI = NULL;
+    effectBp.renderUI = NULL;
     effectBp.effectID = EFFECT_QUIZMO_STAGE;
 
     effect = shim_create_effect_instance(&effectBp);

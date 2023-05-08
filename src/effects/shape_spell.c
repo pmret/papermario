@@ -40,7 +40,7 @@ EffectInstance* shape_spell_main(s32 isChild, f32 x, f32 y, f32 z, f32 arg4, f32
     bp.update = shape_spell_update;
     bp.renderWorld = shape_spell_render;
     bp.unk_00 = 0;
-    bp. renderUI = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_SHAPE_SPELL;
 
     effect = shim_create_effect_instance(bpPtr);

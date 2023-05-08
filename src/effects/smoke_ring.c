@@ -45,7 +45,7 @@ void smoke_ring_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     bpPtr->update = smoke_ring_update;
     bpPtr->renderWorld = smoke_ring_render;
     bpPtr->unk_00 = 0;
-    bpPtr-> renderUI = NULL;
+    bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_SMOKE_RING;
 
     effect = shim_create_effect_instance(bpPtr);

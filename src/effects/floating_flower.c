@@ -21,7 +21,7 @@ void floating_flower_main(s32 type, f32 posX, f32 posY, f32 posZ, s32 duration) 
     bp.init = floating_flower_init;
     bp.update = floating_flower_update;
     bp.renderWorld = floating_flower_render;
-    bp. renderUI = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_FLOATING_FLOWER;
 
     effect = shim_create_effect_instance(&bp);

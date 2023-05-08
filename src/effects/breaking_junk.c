@@ -29,7 +29,7 @@ EffectInstance* breaking_junk_main(s32 arg0, f32 x, f32 y, f32 z, f32 scale, s32
     bp.init = breaking_junk_init;
     bp.update = breaking_junk_update;
     bp.renderWorld = breaking_junk_render;
-    bp. renderUI = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_BREAKING_JUNK;
 
     effect = shim_create_effect_instance(bpPtr);

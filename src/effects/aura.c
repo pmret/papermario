@@ -36,7 +36,7 @@ void aura_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, EffectInstance*
     bp.update = aura_update;
     bp.renderWorld = aura_render;
     bp.unk_00 = 0;
-    bp. renderUI = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_AURA;
 
     effect = shim_create_effect_instance(bpPtr);

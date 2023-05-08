@@ -28,7 +28,7 @@ void stars_spread_main(
     bp.update = stars_spread_update;
     bp.renderWorld = stars_spread_render;
     bp.unk_00 = 0;
-    bp. renderUI = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_STARS_SPREAD;
 
     effect = shim_create_effect_instance(&bp);

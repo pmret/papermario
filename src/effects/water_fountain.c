@@ -131,7 +131,7 @@ EffectInstance* water_fountain_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 
     effectBp.update = water_fountain_update;
     effectBp.renderWorld = water_fountain_render;
     effectBp.unk_00 = 0;
-    effectBp. renderUI = NULL;
+    effectBp.renderUI = NULL;
     effectBp.effectID = EFFECT_WATER_FOUNTAIN;
 
     effect = shim_create_effect_instance(&effectBp);

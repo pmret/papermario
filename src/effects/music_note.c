@@ -45,7 +45,7 @@ void music_note_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     bp.init = music_note_init;
     bp.update = music_note_update;
     bp.renderWorld = music_note_render;
-    bp. renderUI = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_MUSIC_NOTE;
 
     effect = shim_create_effect_instance(bpPtr);
