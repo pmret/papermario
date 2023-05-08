@@ -1,0 +1,63 @@
+DisableFormat: true # clang-format supports many filetypes
+---
+Language: Cpp
+DisableFormat: false
+BasedOnStyle: WebKit
+IndentWidth: 4
+UseTab: Never
+ColumnLimit: 120
+
+AllowShortIfStatementsOnASingleLine: false
+AllowShortBlocksOnASingleLine: false
+
+BreakBeforeBraces: Custom
+BraceWrapping:
+  # Place opening brace on next line if the statement is multi-line
+  # e.g.
+  #  if (very
+  #      long
+  #      condition)
+  #  {
+  AfterControlStatement: MultiLine
+
+IndentCaseLabels: true
+
+BreakBeforeBinaryOperators: NonAssignment
+
+ExperimentalAutoDetectBinPacking: true
+BinPackParameters: false
+AlignAfterOpenBracket: BlockIndent
+
+AlignConsecutiveAssignments:
+  Enabled: true
+  AcrossEmptyLines: false
+  AcrossComments: false
+  AlignCompound: true
+  PadOperators: true
+AlignConsecutiveDeclarations: # structs etc
+  Enabled: true
+  AcrossEmptyLines: false
+  AcrossComments: false
+AlignConsecutiveMacros:
+  Enabled: true
+  AcrossEmptyLines: false
+  AcrossComments: false
+AlignTrailingComments: true
+
+WhitespaceSensitiveMacros: ['STRINGIFY']
+
+# Our include order is WIP so disable it
+SortIncludes: false
+IncludeCategories:
+  # common.h always comes first
+  - Regex:           '^"common\.h"$'
+    Priority:        10
+  # everything else
+  - Regex:           '.*'
+    Priority:        1
+    SortPriority:    0
+
+AllowShortFunctionsOnASingleLine: None
+---
+
+...

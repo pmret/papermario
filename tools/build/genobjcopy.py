@@ -1,4 +1,4 @@
-#! /usr/bin/python3
+#!/usr/bin/env python3
 import sys, os
 
 #Under normal compilation we rely on splat to use a discard option in the ldscript
