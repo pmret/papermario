@@ -202,7 +202,7 @@ void update_effects(void) {
 
         // reset free delay for each EffectGraphics touched in previous update
         for (i = 0, effectGraphics = gEffectGraphicsData; i < ARRAY_COUNT(gEffectGraphicsData); i++, effectGraphics++) {
-            if (effectGraphics->flags & FX_GRAPHICS_ENABLED) {
+            if (effectGraphics->flags & FX_GRAPHICS_LOADED) {
                 if (!(effectGraphics->flags & FX_GRAPHICS_CAN_FREE)) {
                     effectGraphics->flags |= FX_GRAPHICS_CAN_FREE;
                     effectGraphics->freeDelay = 3;
@@ -233,7 +233,7 @@ void update_effects(void) {
 
         // free any EffectGraphics which haven't been used recently
         for (i = 0, effectGraphics = gEffectGraphicsData; i < ARRAY_COUNT(gEffectGraphicsData); i++, effectGraphics++) {
-            if (effectGraphics->flags & FX_GRAPHICS_ENABLED) {
+            if (effectGraphics->flags & FX_GRAPHICS_LOADED) {
                 if (effectGraphics->flags & FX_GRAPHICS_CAN_FREE) {
                     if (effectGraphics->freeDelay != 0) {
                         effectGraphics->freeDelay--;
@@ -353,7 +353,7 @@ EffectInstance* create_effect_instance(EffectBlueprint* effectBp) {
 
     // Look for a loaded effect of the proper index
     for (i = 0; i < ARRAY_COUNT(gEffectGraphicsData); i++) {
-        if ((effectGraphics->flags & FX_GRAPHICS_ENABLED) && (effectGraphics->effectIndex == effectBp->effectID)) {
+        if ((effectGraphics->flags & FX_GRAPHICS_LOADED) && (effectGraphics->effectIndex == effectBp->effectID)) {
             break;
         }
         effectGraphics++;
@@ -438,7 +438,7 @@ s32 load_effect(s32 effectIndex) {
 
     // Look for a loaded effect matching the desired index
     for (i = 0, effectGraphics = &gEffectGraphicsData[0]; i < ARRAY_COUNT(gEffectGraphicsData); i++) {
-        if (effectGraphics->flags & FX_GRAPHICS_ENABLED && effectGraphics->effectIndex == effectIndex) {
+        if (effectGraphics->flags & FX_GRAPHICS_LOADED && effectGraphics->effectIndex == effectIndex) {
             break;
         }
         effectGraphics++;
@@ -448,13 +448,13 @@ s32 load_effect(s32 effectIndex) {
     if (i < ARRAY_COUNT(gEffectGraphicsData)) {
         effectGraphics->effectIndex = effectIndex;
         effectGraphics->instanceCounter = 0;
-        effectGraphics->flags = FX_GRAPHICS_ENABLED;
+        effectGraphics->flags = FX_GRAPHICS_LOADED;
         return 1;
     }
 
     // If a loaded effect wasn't found, look for the first empty space
     for (i = 0, effectGraphics = &gEffectGraphicsData[0]; i < ARRAY_COUNT(gEffectGraphicsData); i++) {
-        if (!(effectGraphics->flags & FX_GRAPHICS_ENABLED)) {
+        if (!(effectGraphics->flags & FX_GRAPHICS_LOADED)) {
             break;
         }
         effectGraphics++;
@@ -481,6 +481,6 @@ s32 load_effect(s32 effectIndex) {
     // Initialize the newly loaded effect data
     effectGraphics->effectIndex = effectIndex;
     effectGraphics->instanceCounter = 0;
-    effectGraphics->flags = FX_GRAPHICS_ENABLED;
+    effectGraphics->flags = FX_GRAPHICS_LOADED;
     return 1;
 }

@@ -4145,7 +4145,7 @@ enum EffectInstanceFlags {
 
 enum EffectGfxDataFlags {
     FX_GRAPHICS_DISABLED                = 0x00000000,
-    FX_GRAPHICS_ENABLED                 = 0x00000001,
+    FX_GRAPHICS_LOADED                  = 0x00000001,
     FX_GRAPHICS_CAN_FREE                = 0x00000002,
 };
 
