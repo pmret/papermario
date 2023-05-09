@@ -22,7 +22,7 @@ void windy_leaves_main(s32 type, f32 arg1, f32 arg2, f32 arg3) {
     bp.update = windy_leaves_update;
     bp.renderWorld = windy_leaves_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_WINDY_LEAVES;
 
     numParts = 5;

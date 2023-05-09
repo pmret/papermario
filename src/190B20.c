@@ -2098,7 +2098,7 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                             if (target->actorID != ACTOR_PARTNER) {
                                 effect = target->icePillarEffect;
                                 if (effect != NULL) {
-                                    effect->flags |= EFFECT_INSTANCE_FLAG_10;
+                                    effect->flags |= FX_INSTANCE_FLAG_DISMISS;
                                 }
                                 target->icePillarEffect = fx_ice_pillar(0, target->currentPos.x, target->currentPos.y,
                                                             target->currentPos.z, 1.0f, 0);
@@ -2849,13 +2849,13 @@ void remove_player_buffs(s32 buffs) {
     if (buffs & PLAYER_BUFF_TRANSPARENT && (player->transparentStatus != 0)) {
         player->transparentDuration = 0;
         player->transparentStatus = 0;
-        playerPartsTable->flags &= ~0x100;
+        playerPartsTable->flags &= ~ACTOR_PART_FLAG_100;
         remove_status_transparent(player->hudElementDataIndex);
     }
     if (buffs & PLAYER_BUFF_WATER_BLOCK && (battleStatus->waterBlockTurnsLeft != 0)) {
         battleStatus->waterBlockTurnsLeft = 0;
         battleStatus->buffEffect->data.partnerBuff->unk_0C[FX_BUFF_DATA_WATER_BLOCK].turnsLeft = 0;
-        battleStatus->waterBlockEffect->flags |= 0x10;
+        battleStatus->waterBlockEffect->flags |= FX_INSTANCE_FLAG_DISMISS;
 
         fx_water_block(1, player->currentPos.x, player->currentPos.y + 18.0f, player->currentPos.z + 5.0f, 1.5f, 0xA);
         fx_water_splash(0, player->currentPos.x - 10.0f, player->currentPos.y + 5.0f, player->currentPos.z + 5.0f, 1.0f, 0x18);

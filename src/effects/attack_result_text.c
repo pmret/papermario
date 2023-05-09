@@ -44,7 +44,7 @@ EffectInstance* attack_result_text_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, 
     bp.init = attack_result_text_init;
     bp.update = attack_result_text_update;
     bp.renderWorld = attack_result_text_render;
-    bp.unk_14 = func_E0090428;
+    bp.renderUI = func_E0090428;
     bp.effectID = EFFECT_ATTACK_RESULT_TEXT;
 
     effect = shim_create_effect_instance(&bp);

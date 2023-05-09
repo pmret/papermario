@@ -53,7 +53,7 @@ EffectInstance* shimmer_wave_main(
     bp.update = shimmer_wave_update;
     bp.renderWorld = shimmer_wave_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_SHIMMER_WAVE;
 
     effect = shim_create_effect_instance(&bp);
@@ -107,8 +107,8 @@ void shimmer_wave_update(EffectInstance* effect) {
     f32 unk_14;
     s32 i;
 
-    if (effect->flags & EFFECT_INSTANCE_FLAG_10) {
-        effect->flags &= ~EFFECT_INSTANCE_FLAG_10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         part->unk_38 = 16;
     }
 

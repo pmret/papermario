@@ -51,7 +51,7 @@ EffectInstance* recover_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4) {
     bp.init = recover_init;
     bp.update = recover_update;
     bp.renderWorld = recover_render;
-    bp.unk_14 = func_E008042C;
+    bp.renderUI = func_E008042C;
     bp.unk_00 = 0;
     bp.effectID = EFFECT_RECOVER;
 

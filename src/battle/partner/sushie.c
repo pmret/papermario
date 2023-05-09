@@ -354,7 +354,7 @@ API_CALLABLE(N(ProcessTidalWave)) {
             sEffect->data.waterFountain->unk_40 = partner->scale.x;
             if (state->moveTime == 0) {
                 partner->rotation.z = 0.0f;
-                sEffect->flags |= EFFECT_INSTANCE_FLAG_10;
+                sEffect->flags |= FX_INSTANCE_FLAG_DISMISS;
                 return ApiStatus_DONE2;
             }
             state->moveTime--;

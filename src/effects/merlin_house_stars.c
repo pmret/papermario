@@ -19,7 +19,7 @@ EffectInstance* merlin_house_stars_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) 
     bp.update = merlin_house_stars_update;
     bp.renderWorld = merlin_house_stars_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_MERLIN_HOUSE_STARS;
 
     effect = shim_create_effect_instance(&bp);
@@ -51,8 +51,8 @@ void merlin_house_stars_update(EffectInstance* effect) {
     MerlinHouseStarsFXData* data = effect->data.merlinHouseStars;
     s32 unk_04;
 
-    if (effect->flags & 0x10) {
-        effect->flags &= ~0x10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         data->unk_04 = 30;
     }
 

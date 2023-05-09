@@ -30,7 +30,7 @@ EffectInstance* throw_spiny_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg
     bp.update = throw_spiny_update;
     bp.renderWorld = throw_spiny_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_THROW_SPINY;
 
     effect = (EffectInstance*)shim_create_effect_instance(bpPtr);
@@ -91,8 +91,8 @@ void throw_spiny_update(EffectInstance* effectInstance) {
     f32 gravity;
     s32 lifeDuration;
 
-    if (effectInstance->flags & EFFECT_INSTANCE_FLAG_10) {
-        effectInstance->flags &= ~EFFECT_INSTANCE_FLAG_10;
+    if (effectInstance->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effectInstance->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         spinyObject->life = 16;
     }
 

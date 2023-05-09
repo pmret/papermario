@@ -29,7 +29,7 @@ void gather_energy_pink_main(s32 type, f32 posX, f32 posY, f32 posZ, f32 scale, 
     bp.init = gather_energy_pink_init;
     bp.update = gather_energy_pink_update;
     bp.renderWorld = gather_energy_pink_render;
-    bp.unk_14 = 0;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_GATHER_ENERGY_PINK;
 
     effect = shim_create_effect_instance(&bp);

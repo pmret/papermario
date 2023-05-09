@@ -89,7 +89,7 @@ EffectInstance* purple_ring_main(
     bpPtr->update = purple_ring_update;
     bpPtr->renderWorld = purple_ring_render;
     bpPtr->unk_00 = 0;
-    bpPtr->unk_14 = NULL;
+    bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_PURPLE_RING;
 
     effect = shim_create_effect_instance(bpPtr);

@@ -179,7 +179,7 @@ EffectInstance* chapter_change_main(s32 arg0, f32 posX, f32 posY, f32 arg3, f32 
     bp.update = chapter_change_update;
     bp.renderWorld = chapter_change_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_CHAPTER_CHANGE;
 
     effect = shim_create_effect_instance(&bp);
@@ -227,8 +227,8 @@ void chapter_change_init(EffectInstance* effect) {
 void chapter_change_update(EffectInstance* effect) {
     ChapterChangeFXData* data = effect->data.chapterChange;
 
-    if (effect->flags & EFFECT_INSTANCE_FLAG_10) {
-        effect->flags &= ~EFFECT_INSTANCE_FLAG_10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         data->timeLeft = 16;
     }
 

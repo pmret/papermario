@@ -33,7 +33,7 @@ EffectInstance* quizmo_assistant_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f3
     bp.update = quizmo_assistant_update;
     bp.renderWorld = quizmo_assistant_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_QUIZMO_ASSISTANT;
 
     effect = shim_create_effect_instance(&bp);
@@ -63,8 +63,8 @@ void quizmo_assistant_init(EffectInstance* effect) {
 void quizmo_assistant_update(EffectInstance* effect) {
     QuizmoAssistantFXData* data = effect->data.quizmoAssistant;
 
-    if (effect->flags & EFFECT_INSTANCE_FLAG_10) {
-        effect->flags &= ~EFFECT_INSTANCE_FLAG_10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         data->vanishTimer = 16;
     }
 

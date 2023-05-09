@@ -59,7 +59,7 @@ void shockwave_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     bpPtr->update = shockwave_update;
     bpPtr->renderWorld = shockwave_render;
     bpPtr->unk_00 = 0;
-    bpPtr->unk_14 = NULL;
+    bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_SHOCKWAVE;
 
     effect = shim_create_effect_instance(bpPtr);

@@ -60,7 +60,7 @@ EffectInstance* lil_oink_main(void) {
     bp.init = lil_oink_init;
     bp.update = lil_oink_update;
     bp.renderWorld = lil_oink_render;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_LIL_OINK;
 
     effect = shim_create_effect_instance(&bp);

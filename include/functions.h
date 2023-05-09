@@ -844,7 +844,7 @@ void partner_init_after_battle(s32 arg0);
 void load_map_script_lib(void);
 void remove_item_entity_by_index(s32 index);
 void set_entity_commandlist(Entity* entity, s32* entityScript);
-s32 func_800DFCF4(void);
+s32 is_player_dismounted(void);
 void func_800EF300(void);
 void func_800EF314(void);
 void func_800EF43C(void);

@@ -592,7 +592,7 @@ Npc* npc_find_closest_simple(f32 x, f32 y, f32 z, f32 radius);
 
 s32 npc_get_collider_below(Npc* npc);
 
-void func_8003D3BC(Npc* npc);
+void npc_imgfx_update(Npc* npc);
 
 void npc_set_imgfx_params(Npc* npc, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6);
 

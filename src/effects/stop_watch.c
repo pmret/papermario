@@ -62,7 +62,7 @@ EffectInstance* stop_watch_main(
     bp.update = stop_watch_update;
     bp.renderWorld = stop_watch_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_STOP_WATCH;
 
     effect = shim_create_effect_instance(&bp);
@@ -111,8 +111,8 @@ void stop_watch_update(EffectInstance* effect) {
     s32 unk_14;
     s32 i;
 
-    if (effect->flags & 0x10) {
-        effect->flags &= ~0x10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         data->unk_10 = 64;
     }
 

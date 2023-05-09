@@ -1211,7 +1211,7 @@ EvtScript EVS_Enemy_FanSmack_Impl = {
         EVT_CASE_OR_EQ(DMG_SRC_LAST_FAN_SMACK_LEFT)
         EVT_CASE_OR_EQ(DMG_SRC_LAST_FAN_SMACK_RIGHT)
             EVT_WAIT(40)
-            EVT_CALL(func_802D7B10, LVarF)
+            EVT_CALL(DismissEffect, LVarF)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2023)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH

@@ -47,7 +47,7 @@ EffectInstance* effect_63_main(
     bpPtr->update = effect_63_update;
     bpPtr->renderWorld = effect_63_render;
     bpPtr->unk_00 = 0;
-    bpPtr->unk_14 = NULL;
+    bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_63;
 
     effect = shim_create_effect_instance(bpPtr);
@@ -134,8 +134,8 @@ void effect_63_update(EffectInstance* effect) {
     s32 unk_24;
     s32 i;
 
-    if (effect->flags & 0x10) {
-        effect->flags &= ~0x10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         part->unk_20 = 0x10;
     }
 

@@ -79,7 +79,7 @@ EffectInstance* water_block_main(s32 arg0, f32 x, f32 y, f32 z, f32 arg4, s32 ar
     bpPtr->update = &water_block_update;
     bpPtr->renderWorld = water_block_render;
     bpPtr->unk_00 = 0;
-    bpPtr->unk_14 = NULL;
+    bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_WATER_BLOCK;
 
     effect = shim_create_effect_instance(bpPtr);
@@ -125,12 +125,12 @@ void water_block_update(EffectInstance* effect) {
 
     data = effect->data.waterBlock;
     temp_a0 = data->unk_00;
-    if (effect->flags & 0x10) {
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
         if (temp_a0 == 1) {
-            effect->flags = effect->flags & ~0x10;
+            effect->flags = effect->flags & ~FX_INSTANCE_FLAG_DISMISS;
             data->unk_10 = 4;
         } else {
-            effect->flags = effect->flags & ~0x10;
+            effect->flags = effect->flags & ~FX_INSTANCE_FLAG_DISMISS;
             data->unk_10 = 16;
         }
     }

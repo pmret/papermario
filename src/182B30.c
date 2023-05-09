@@ -788,7 +788,7 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
     } else {
         effect = actor->icePillarEffect;
         if (effect != NULL) {
-            effect->flags |= EFFECT_INSTANCE_FLAG_10;
+            effect->flags |= FX_INSTANCE_FLAG_DISMISS;
             actor->icePillarEffect = NULL;
         }
     }
@@ -3696,7 +3696,7 @@ void func_8025D830(ActorPart* part, s32 decorationIndex) {
 }
 
 void func_8025D8EC(ActorPart* part, s32 decorationIndex) {
-    part->decorationTable->effect[decorationIndex]->flags |= EFFECT_INSTANCE_FLAG_10;
+    part->decorationTable->effect[decorationIndex]->flags |= FX_INSTANCE_FLAG_DISMISS;
 }
 
 void func_8025D90C(ActorPart* part, s32 decorationIndex) {

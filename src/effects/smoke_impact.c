@@ -39,7 +39,7 @@ void smoke_impact_main(
     bp.update = smoke_impact_update;
     bp.renderWorld = smoke_impact_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_SMOKE_IMPACT;
 
     effect = shim_create_effect_instance(&bp);

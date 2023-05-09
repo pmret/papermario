@@ -31,7 +31,7 @@ EffectInstance* sun_main(s32 shineFromRight, f32 offsetX, f32 offsetY, f32 offse
     bp.update = sun_update;
     bp.renderWorld = sun_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_SUN;
 
     effect = shim_create_effect_instance(&bp);
@@ -76,8 +76,8 @@ void sun_update(EffectInstance* effect) {
     s32 time;
     s32 i;
 
-    if (effect->flags & EFFECT_INSTANCE_FLAG_10) {
-        effect->flags &= ~EFFECT_INSTANCE_FLAG_10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         data->timeLeft = 16;
     }
     if (data->timeLeft < 1000) {

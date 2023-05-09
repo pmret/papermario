@@ -37,7 +37,7 @@ EffectInstance* radiating_energy_orb_main(
     bp.init = radiating_energy_orb_init;
     bp.update = radiating_energy_orb_update;
     bp.renderWorld = radiating_energy_orb_render;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_RADIATING_ENERGY_ORB;
 
     effect = shim_create_effect_instance(&bp);
@@ -77,8 +77,8 @@ void radiating_energy_orb_update(EffectInstance* effect) {
     s32 unk_1C;
     s32 i;
 
-    if (effect->flags & 0x10) {
-        effect->flags &= ~0x10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         part->unk_18 = 30;
     }
 

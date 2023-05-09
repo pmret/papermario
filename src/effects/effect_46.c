@@ -30,7 +30,7 @@ EffectInstance* effect_46_main(s32 arg0, PlayerStatus* arg1, f32 arg2, s32 arg3)
     bp.update = effect_46_update;
     bp.renderWorld = effect_46_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_46;
 
     effect = shim_create_effect_instance(&bp);

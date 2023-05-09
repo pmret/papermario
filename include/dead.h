@@ -307,7 +307,7 @@
 #define GetNpcYaw dead_GetNpcYaw
 #define PlayAmbientSounds dead_PlayAmbientSounds
 #define SetTexPanner dead_SetTexPanner
-#define func_802D7B10 dead_func_802D7B10
+#define DismissEffect dead_DismissEffect
 #define Entity_Chest dead_Entity_Chest
 #define snd_ambient_mute dead_snd_ambient_mute
 #define GetPlayerAnimation dead_GetPlayerAnimation

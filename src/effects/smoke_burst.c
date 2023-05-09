@@ -28,7 +28,7 @@ void smoke_burst_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 arg4, s32 time
     effectBp.update = smoke_burst_update;
     effectBp.renderWorld = smoke_burst_render;
     effectBp.unk_00 = 0;
-    effectBp.unk_14 = 0;
+    effectBp.renderUI = NULL;
     effectBp.effectID = EFFECT_SMOKE_BURST;
 
     effect = shim_create_effect_instance(&effectBp);

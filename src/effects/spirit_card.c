@@ -43,7 +43,7 @@ EffectInstance* spirit_card_main(
     bp.update = spirit_card_update;
     bp.renderWorld = spirit_card_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_SPIRIT_CARD;
 
     effect = shim_create_effect_instance(&bp);
@@ -73,9 +73,9 @@ EffectInstance* spirit_card_main(
 
     if (arg0 < 2) {
         shim_load_effect(EFFECT_MISC_PARTICLES);
-        data->unk_1C = misc_particles_main(3, arg1, arg2 - arg4 * 30.0f, arg3, arg4 * 30.0f, arg4 * 50.0f, 1.0f, 16, 0);
+        data->child = misc_particles_main(3, arg1, arg2 - arg4 * 30.0f, arg3, arg4 * 30.0f, arg4 * 50.0f, 1.0f, 16, 0);
     } else {
-        data->unk_1C = NULL;
+        data->child = NULL;
     }
 
     return effect;
@@ -87,8 +87,8 @@ void spirit_card_init(EffectInstance* effect) {
 void spirit_card_update(EffectInstance* effect) {
     SpiritCardFXData* data = effect->data.spiritCard;
 
-    if (effect->flags & 0x10) {
-        effect->flags &= ~0x10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         data->unk_10 = 16;
     }
 
@@ -100,15 +100,15 @@ void spirit_card_update(EffectInstance* effect) {
 
     if (data->unk_10 < 0) {
         shim_remove_effect(effect);
-        if (data->unk_1C != NULL) {
-            data->unk_1C->flags |= 0x10;
+        if (data->child != NULL) {
+            data->child->flags |= FX_INSTANCE_FLAG_DISMISS;
         }
-    } else if (data->unk_10 >= 16 && data->unk_1C != NULL) {
-        data->unk_1C->data.miscParticles->scaleX = data->unk_18 * 30.0f;
-        data->unk_1C->data.miscParticles->scaleY = data->unk_18 * 50.0f;
-        data->unk_1C->data.miscParticles->pos.x = data->pos.x;
-        data->unk_1C->data.miscParticles->pos.y = data->pos.y - data->unk_18 * 30.0f;
-        data->unk_1C->data.miscParticles->pos.z = data->pos.z;
+    } else if (data->unk_10 >= 16 && data->child != NULL) {
+        data->child->data.miscParticles->scaleX = data->unk_18 * 30.0f;
+        data->child->data.miscParticles->scaleY = data->unk_18 * 50.0f;
+        data->child->data.miscParticles->pos.x = data->pos.x;
+        data->child->data.miscParticles->pos.y = data->pos.y - data->unk_18 * 30.0f;
+        data->child->data.miscParticles->pos.z = data->pos.z;
     }
 }
 

@@ -374,8 +374,8 @@ API_CALLABLE(N(Quizmo_DestroyEffects)) {
     QuizmoStageFXData* stageData;
 
     if (isInitialCall) {
-        N(Quizmo_AudienceEffect)->flags |= EFFECT_INSTANCE_FLAG_10;
-        N(Quizmo_VannaTEffect)->flags |= EFFECT_INSTANCE_FLAG_10;
+        N(Quizmo_AudienceEffect)->flags |= FX_INSTANCE_FLAG_DISMISS;
+        N(Quizmo_VannaTEffect)->flags |= FX_INSTANCE_FLAG_DISMISS;
     }
 
     stageData = N(Quizmo_StageEffect)->data.quizmoStage;
