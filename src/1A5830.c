@@ -440,7 +440,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
                     damage--;
                     damage -= player_team_is_ability_active(target, ABILITY_DAMAGE_DODGE);
                     sfx_play_sound_at_position(SOUND_231, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
-                    func_802667F0(0, target, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+                    show_action_rating(ACTION_RATING_NICE, target, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                     gBattleStatus.flags1 |= BS_FLAGS1_ATK_BLOCKED;
                     break;
                 }
@@ -453,7 +453,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
                     if (check_block_input(BUTTON_A)) {
                         damage = 0;
                         sfx_play_sound_at_position(SOUND_231, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
-                        func_802667F0(0, target, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+                        show_action_rating(ACTION_RATING_NICE, target, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                         gBattleStatus.flags1 |= BS_FLAGS1_ATK_BLOCKED;
                         break;
                     }

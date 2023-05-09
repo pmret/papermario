@@ -2342,7 +2342,7 @@ void func_802666E4(Actor* actor, f32 x, f32 y, f32 z, s32 damage) {
 }
 
 // grossness
-void func_802667F0(s32 arg0, Actor* actor, f32 x, f32 y, f32 z) {
+void show_action_rating(s32 arg0, Actor* actor, f32 x, f32 y, f32 z) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player;
     s32 new_var; // TODO required to match
@@ -2390,25 +2390,25 @@ void func_802667F0(s32 arg0, Actor* actor, f32 x, f32 y, f32 z) {
         type = actor->unk_204;
         new_var = arg0; // TODO required to match
         switch (new_var) { // TODO required to match
-            case 0:
+            case ACTION_RATING_NICE:
                 actor->unk_204++;
                 if (actor->unk_204 > 2) {
                     actor->unk_204 = 2;
                 }
                 break;
-            case 1:
+            case ACTION_RATING_MISS:
                 type = 4;
                 break;
-            case 2:
+            case ACTION_RATING_LUCKY:
                 type = 3;
                 break;
-            case 3:
+            case ACTION_RATING_SUPER:
                 type = 2;
                 break;
-            case 4:
+            case ACTION_RATING_NICE_NO_COMBO:
                 type = 0;
                 break;
-            case 5:
+            case ACTION_RATING_NICE_SUPER_COMBO:
                 type = player->unk_204;
                 player->unk_204++;
                 if (player->unk_204 > 2) {

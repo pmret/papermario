@@ -843,7 +843,7 @@ if __name__ == "__main__":
     extra_cflags += " -Wmissing-braces -Wimplicit -Wredundant-decls -Wstrict-prototypes"
 
     # add splat to python import path
-    sys.path.append(str((ROOT / args.splat).resolve()))
+    sys.path.insert(0, str((ROOT / args.splat).resolve()))
 
     ninja = ninja_syntax.Writer(open(str(ROOT / "build.ninja"), "w"), width=9999)
 
