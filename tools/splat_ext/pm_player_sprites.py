@@ -2,7 +2,9 @@
 
 import os
 import struct
+import subprocess
 import sys
+import tempfile
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -13,8 +15,8 @@ import png
 from n64img.image import CI4
 from sprite_common import AnimComponent, read_offset_list
 
-TOOLS_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.append(str(Path(TOOLS_DIR)))
+TOOLS_DIR = Path(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(str(TOOLS_DIR))
 from splat.util.n64.Yay0decompress import Yay0Decompressor
 
 PAL_TO_RASTER: Dict[str, int] = {
@@ -141,6 +143,9 @@ class PlayerSpriteRasterSet:
         self.loaded_position += raster.size
 
 
+PALETTE_CACHE: Dict[str, bytes] = {}
+
+
 @dataclass
 class PlayerRaster:
     offset: int
@@ -170,12 +175,29 @@ class PlayerRaster:
 
         return PlayerRaster(offset, width, height, default_palette, is_special)
 
-def pack_color(r, g, b, a) -> int:
-    r = r >> 3
-    g = g >> 3
-    b = b >> 3
-    a = a >> 7
-    return (r << 11) | (g << 6) | (b << 1) | a
+    @staticmethod
+    def from_xml(xml: ET.Element, back: bool = False) -> "PlayerRaster":
+        palette = int(xml.attrib["palette"], 16)
+        is_special = "special" in xml.attrib
+
+        if back in xml.attrib:
+            img_name = xml.attrib["back"]
+        else:
+            img_name = xml.attrib["src"]
+
+        # TODO cache images
+        with open(PLAYER_OUT_PATH / "rasters" / img_name, "rb") as f:
+            img = png.Reader(f)
+            img.read()
+
+        return PlayerRaster(
+            0,
+            img.width,
+            img.height,
+            palette,
+            is_special,
+        )
+
 
 @dataclass
 class PlayerSprite:
@@ -189,14 +211,13 @@ class PlayerSprite:
 
     @staticmethod
     def from_bytes(data: bytes, raster_set: PlayerSpriteRasterSet) -> "PlayerSprite":
-        raster_offsets = read_offset_list(
-            data[int.from_bytes(data[0:4], byteorder="big") :]
-        )
-        palette_offsets = read_offset_list(
-            data[int.from_bytes(data[4:8], byteorder="big") :]
-        )
-        max_components = int.from_bytes(data[8:0xC], "big")
+        raster_list_offset = int.from_bytes(data[0x0:0x4], byteorder="big")
+        palette_list_offset = int.from_bytes(data[0x4:0x8], byteorder="big")
+        max_components = int.from_bytes(data[0x8:0xC], "big")
         num_variations = int.from_bytes(data[0xC:0x10], "big")
+
+        raster_offsets = read_offset_list(data[raster_list_offset:])
+        palette_offsets = read_offset_list(data[palette_list_offset:])
         animation_offsets = read_offset_list(data[0x10:])
 
         palettes: List[bytes] = []
@@ -238,8 +259,11 @@ class PlayerSprite:
         )
 
     @staticmethod
-    def from_xml(xml: ET.Element) -> List["PlayerSprite"]:
+    def xml_to_bytes(xml: ET.Element) -> List[bytes]:
         has_back = False
+
+        out_bytes = b""
+        back_out_bytes = b""
 
         # Parse the xml back into a PlayerSprite
         max_components = int(xml.attrib[MAX_COMPONENTS_XML])
@@ -254,39 +278,202 @@ class PlayerSprite:
                 comps.append(comp)
             animations.append(comps)
 
+        cur_offset = 0x10  # header
+        cur_offset += (len(animations) + 1) * 4  # animation offsets and list terminator
+
+        animation_offsets: List[int] = []
+        total_anim_bytes = b""
+
+        for anim in animations:
+            animation_offsets.append(cur_offset)
+            animation_bytes: bytes = b""
+            cur_offset += (len(anim) + 1) * 4
+
+            comp_offsets = []
+            for comp in anim:
+                cmd_start_offset = cur_offset
+
+                for cmd in comp.commands:
+                    animation_bytes += int.to_bytes(cmd, 2, "big")
+                    cur_offset += 2
+                if comp.size % 2 != 0:
+                    animation_bytes += b"\x00\x00"
+                    cur_offset += 2
+
+                comp_offsets.append(cur_offset)
+
+                animation_bytes += int.to_bytes(cmd_start_offset, 4, "big")
+                animation_bytes += int.to_bytes(comp.size * 2, 2, "big")
+                animation_bytes += struct.pack(">hhh", comp.x, comp.y, comp.z)
+                cur_offset += 12
+
+            offset_bytes = b""
+            for offset in comp_offsets:
+                offset_bytes += int.to_bytes(offset, 4, "big")
+            offset_bytes += b"\xFF\xFF\xFF\xFF"
+            blah_bytes = offset_bytes + animation_bytes
+            total_anim_bytes += blah_bytes
+
+        animation_offset_bytes: bytes = b""
+        for offset in animation_offsets:
+            animation_offset_bytes += int.to_bytes(offset, 4, "big")
+        animation_offset_bytes += b"\xFF\xFF\xFF\xFF"
+
+        total_anim_bytes = animation_offset_bytes + total_anim_bytes
+
+        out_bytes += total_anim_bytes
+
+        # Pad out_bytes to 0x8
+        while len(out_bytes) % 8 != 0:
+            out_bytes += b"\x00"
+
+        # Back sprite sheets don't have animations, so just -1 and 0 padding
+        back_out_bytes += b"\xFF\xFF\xFF\xFF\x00\x00\x00\x00"
+
         # Palettes
-        palettes: List[List[int]] = []
-        for pallete_xml in xml[0]:
-            source = pallete_xml.attrib["src"]
+        palette_list_start = len(out_bytes) + 0x10
+        palette_list_start_back = len(back_out_bytes) + 0x10
+        palette_bytes: bytes = b""
+        palette_bytes_back: bytes = b""
+        for palette_xml in xml[0]:
+            source = palette_xml.attrib["src"]
+            front_only = bool(palette_xml.get("front_only", False))
             if source not in PALETTE_CACHE:
                 with open(PLAYER_OUT_PATH / "palettes" / source, "rb") as f:
                     img = png.Reader(f)
                     img.preamble(True)
                     palette = img.palette(alpha="force")
 
-                palette_list: List[int] = []
+                pal: bytes = b""
                 for rgba in palette:
                     if rgba[3] not in (0, 0xFF):
                         print("alpha mask mode but translucent pixels used")
-                    
-                    palette_list.append(pack_color(*rgba))
-                
-                PALETTE_CACHE[source] = palette_list
 
-            palettes.append(PALETTE_CACHE[source])
+                    def pack_color(r, g, b, a) -> int:
+                        r = r >> 3
+                        g = g >> 3
+                        b = b >> 3
+                        a = a >> 7
+                        return (r << 11) | (g << 6) | (b << 1) | a
+
+                    color = pack_color(*rgba)
+                    pal += int.to_bytes(color, 2, "big")
+
+                PALETTE_CACHE[source] = pal
+            palette_bytes += PALETTE_CACHE[source]
+            if not front_only:
+                palette_bytes_back += PALETTE_CACHE[source]
+
+        # Pad out_bytes to 0x8
+        while len(out_bytes) % 8 != 0:
+            out_bytes += b"\x00"
+
+        out_bytes += palette_bytes
+        back_out_bytes += palette_bytes_back
 
         # Rasters
-        rasters: List[PlayerRaster] = []
+        raster_list_start = len(out_bytes) + 0x10
+        raster_list_start_back = len(back_out_bytes) + 0x10
+        raster_bytes: bytes = b""
+        raster_bytes_back: bytes = b""
+        raster_offset = 0
         for raster_xml in xml[1]:
             if "back" in raster_xml.attrib:
                 has_back = True
+            r = PlayerRaster.from_xml(raster_xml, back=False)
+            raster_bytes += struct.pack(
+                ">IBBBB", raster_offset, r.width, r.height, r.palette_idx, 0xFF
+            )
 
-        ret = [PlayerSprite(max_components, num_variations, animations, [], [], [])]
+            raster_offset += r.width * r.height // 2
 
         if has_back:
-            # TODO implement back
-            back = PlayerSprite(0, num_variations, [], [], [], [])
-            ret.append(back)
+            raster_offset = 0
+            for raster_xml in xml[1]:
+                is_back = False
+
+                r = PlayerRaster.from_xml(raster_xml, back=is_back)
+                if "back" in raster_xml.attrib:
+                    is_back = True
+                    width = r.width
+                    height = r.height
+                    palette = r.palette_idx
+                else:
+                    special = raster_xml.attrib["special"].split(",")
+                    width = int(special[0], 16)
+                    height = int(special[1], 16)
+                    palette = 0
+
+                raster_bytes_back += struct.pack(
+                    ">IBBBB", raster_offset, width, height, palette, 0xFF
+                )
+
+                if is_back:
+                    raster_offset += width * height // 2
+                else:
+                    raster_offset += 0x10
+
+        out_bytes += raster_bytes
+        back_out_bytes += raster_bytes_back
+
+        raster_list_offset = len(out_bytes) + 0x10
+        raster_list_offset_back = len(back_out_bytes) + 0x10
+        # Raster file offsets
+        raster_offsets_bytes = b""
+        raster_offsets_bytes_back = b""
+        for i in range(len(xml[1])):
+            raster_offsets_bytes += int.to_bytes(raster_list_start + i * 8, 4, "big")
+            raster_offsets_bytes_back += int.to_bytes(
+                raster_list_start_back + i * 8, 4, "big"
+            )
+        raster_offsets_bytes += b"\xFF\xFF\xFF\xFF"
+        raster_offsets_bytes_back += b"\xFF\xFF\xFF\xFF"
+
+        out_bytes += raster_offsets_bytes
+        back_out_bytes += raster_offsets_bytes_back
+
+        # Palette file offsets
+        palette_list_offset = len(out_bytes) + 0x10
+        palette_list_offset_back = len(back_out_bytes) + 0x10
+        palette_offsets_bytes = b""
+        palette_offsets_bytes_back = b""
+        for i, palette_xml in enumerate(xml[0]):
+            palette_offsets_bytes += int.to_bytes(
+                palette_list_start + i * 0x20, 4, "big"
+            )
+            front_only = bool(palette_xml.attrib.get("front_only", False))
+            if not front_only:
+                palette_offsets_bytes_back += int.to_bytes(
+                    palette_list_start_back + i * 0x20, 4, "big"
+                )
+        palette_offsets_bytes += b"\xFF\xFF\xFF\xFF"
+        palette_offsets_bytes_back += b"\xFF\xFF\xFF\xFF"
+
+        out_bytes += palette_offsets_bytes
+        back_out_bytes += palette_offsets_bytes_back
+
+        header = struct.pack(
+            ">IIII",
+            raster_list_offset,
+            palette_list_offset,
+            max_components,
+            num_variations,
+        )
+        out_bytes = header + out_bytes
+
+        ret = [out_bytes]
+
+        if has_back:
+            back_header = struct.pack(
+                ">IIII",
+                raster_list_offset_back,
+                palette_list_offset_back,
+                0,
+                num_variations,
+            )
+            back_out_bytes = back_header + back_out_bytes
+
+            ret.append(back_out_bytes)
 
         return ret
 
@@ -337,6 +524,10 @@ def extract_sprites(
     ret: List[PlayerSprite] = []
     for i, yay0_piece in enumerate(yay0_sprite_data):
         sprite_data = Yay0Decompressor.decompress(yay0_piece, "big")
+
+        with open(f"extracted/sprite{i}.bin", "wb") as f:
+            f.write(sprite_data)
+
         sprite = PlayerSprite.from_bytes(sprite_data, raster_sets[i])
         ret.append(sprite)
     return ret
@@ -443,15 +634,26 @@ def write_player_xmls(
             ET.SubElement(RasterList, "Raster", raster_attributes)
 
         palette_names = cfg[cur_sprite_name].get("palettes")
-        for i, name in enumerate(palette_names):
-            ET.SubElement(
-                PaletteList,
-                "Palette",
-                {
-                    "id": f"{i:X}",
-                    "src": name + ".png",
-                },
-            )
+        for i, pal in enumerate(palette_names):
+            front_only = False
+
+            if isinstance(pal, str):
+                name = pal
+            elif isinstance(pal, dict):
+                name = str(pal["name"])
+                front_only = pal.get("front_only", False)
+            else:
+                raise Exception("Invalid palette format for palette: " + pal)
+
+            pal_attributes = {
+                "id": f"{i:X}",
+                "src": name + ".png",
+            }
+
+            if front_only:
+                pal_attributes["front_only"] = "True"
+
+            ET.SubElement(PaletteList, "Palette", pal_attributes)
 
         animation_names = cfg[cur_sprite_name].get("animations")
         for i, components in enumerate(cur_sprite.animations):
@@ -524,7 +726,14 @@ def write_player_palettes(
         path.mkdir(parents=True, exist_ok=True)
 
         for i, palette in enumerate(sprite.palettes):
-            pal_name = cfg[sprite_name]["palettes"][sprite.palette_indexes[i]]
+            pal = cfg[sprite_name]["palettes"][sprite.palette_indexes[i]]
+            if isinstance(pal, str):
+                pal_name = pal
+            elif isinstance(pal, dict):
+                pal_name = str(pal["name"])
+            else:
+                raise Exception("Invalid palette format for palette: " + pal)
+
             if pal_name not in dumped_palettes:
                 offset = PAL_TO_RASTER[pal_name]
                 if pal_name not in PAL_TO_RASTER:
@@ -536,7 +745,7 @@ def write_player_palettes(
                 )
 
 
-def split() -> List[PlayerSprite]:
+def split() -> None:
     with (Path(__file__).parent / f"player_sprite_names.yaml").open("r") as f:
         player_cfg = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
 
@@ -587,6 +796,7 @@ def split() -> List[PlayerSprite]:
     raster_table_entry_dict = extract_raster_table_entries(
         packed_raster_info_data, raster_sets
     )
+
     player_sprites = extract_sprites(
         sprites_bin[player_yay0_offset:npc_yay0_offset], raster_sets
     )
@@ -619,8 +829,6 @@ def split() -> List[PlayerSprite]:
         player_sprite_raster_data,
     )
 
-    return player_sprites
-
 
 def get_orderings_from_xml() -> Tuple[List[str], List[str]]:
     orderings_tree = ET.parse(PLAYER_OUT_PATH / "player_sprite_names.xml")
@@ -635,9 +843,8 @@ def get_orderings_from_xml() -> Tuple[List[str], List[str]]:
 
     return sprite_order, raster_order
 
-PALETTE_CACHE: Dict[str, List[int]] = {}
 
-def build() -> List[PlayerSprite]:
+def build() -> None:
     sprite_order, raster_order = get_orderings_from_xml()
 
     # Build info
@@ -649,30 +856,39 @@ def build() -> List[PlayerSprite]:
     build_info_bytes += b"\0" * (0x10 - len(build_info_bytes))
 
     # Read in the player sprite xmls
-    player_sprites: List[PlayerSprite] = []
+    sprite_bytes: List[bytes] = []
 
     for sprite_name in sprite_order:
         sprite_xml = ET.parse(PLAYER_OUT_PATH / f"{sprite_name}.xml").getroot()
-        player_sprites.extend(PlayerSprite.from_xml(sprite_xml))
-    return player_sprites
+        sprite_bytes.extend(PlayerSprite.xml_to_bytes(sprite_xml))
+
+    for i, sb in enumerate(sprite_bytes):
+        with open(f"built/sprite{i}.bin", "wb") as f:
+            f.write(sb)
+
+    compressed_sprite_bytes: bytes = b""
+    for sprite_byte in sprite_bytes:
+        yay0_in_path = "yay0_bytes.bin"
+        yay0_out_path = "yay0_bytes.Yay0"
+        with open(yay0_in_path, "wb") as f:
+            f.write(sprite_byte)
+
+        subprocess.run(
+            [
+                str(TOOLS_DIR / "build/yay0/Yay0compress"),
+                yay0_in_path,
+                yay0_out_path,
+            ]
+        )
+        with open(yay0_out_path, "rb") as f:
+            compressed_sprite_bytes += f.read()
+        break
+
+    compressed_sprite_bytes = b"\0" * 0x38 + compressed_sprite_bytes
+
+    with open("final_out.bin", "wb") as f:
+        f.write(compressed_sprite_bytes)
 
 
-orig_sprites = split()
-new_sprites = build()
-
-for i in range(len(orig_sprites)):
-    orig_sprite = orig_sprites[i]
-    new_sprite = new_sprites[i]
-
-    for j in range(len(orig_sprite.animations)):
-        orig_animation = orig_sprite.animations[j]
-        new_animation = new_sprite.animations[j]
-
-        for k in range(len(orig_animation)):
-            orig_component = orig_animation[k]
-            new_component = new_animation[k]
-
-            if orig_component != new_component:
-                print(
-                    f"Sprite {i} Animation {j} Component {k} differs: {orig_component} vs {new_component}"
-                )
+split()
+build()

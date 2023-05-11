@@ -177,6 +177,10 @@ class AnimComponent:
     z: int
     commands: List[int]
 
+    @property
+    def size(self):
+        return len(self.commands)
+
     @staticmethod
     def parse_commands(command_list: List[int]) -> List[Animation]:
         ret: List[Animation] = []

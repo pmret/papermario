@@ -107,8 +107,6 @@ player_sprites:
     - Hammer2_Shocked
     - Hammer3_Shocked
     - Red_Shocked
-    - Burnt_Crouch
-    - Golden_19
     animations:
     - Stomp
     - Trip
@@ -336,8 +334,6 @@ player_sprites:
     - Hammer2_Shocked
     - Hammer3_Shocked
     - Red_Shocked
-    - Burnt_Crouch
-    - Golden_19
     animations:
     - Carried
     - FallenPivotable
@@ -420,25 +416,24 @@ player_sprites:
     - Peach_Poisoned
     - Peach_Dark
     - Peach_Shocked
-    # following palettes are NOT included with Peach1_Back!
-    - Cream
-    - Strawberry
-    - Butter
-    - Cleanser
-    - Water
-    - Milk
-    - Flour
-    - Egg
-    - CompleteCake
-    - CakeBowl
-    - CakeMixed
-    - CakePan
-    - CakeBatter
-    - BareCake
-    - Salt
-    - Sugar
-    - BerryCake
-    - IcingCake
+    - {name: Cream, front_only: True }
+    - {name: Strawberry, front_only: True }
+    - {name: Butter, front_only: True }
+    - {name: Cleanser, front_only: True }
+    - {name: Water, front_only: True }
+    - {name: Milk, front_only: True }
+    - {name: Flour, front_only: True }
+    - {name: Egg, front_only: True }
+    - {name: CompleteCake, front_only: True }
+    - {name: CakeBowl, front_only: True }
+    - {name: CakeMixed, front_only: True }
+    - {name: CakePan, front_only: True }
+    - {name: CakeBatter, front_only: True }
+    - {name: BareCake, front_only: True }
+    - {name: Salt, front_only: True }
+    - {name: Sugar, front_only: True }
+    - {name: BerryCake, front_only: True }
+    - {name: IcingCake, front_only: True }
     animations:
     - Still
     - Idle
