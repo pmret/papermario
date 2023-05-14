@@ -1,7 +1,7 @@
 import argparse
-from ctypes import CDLL, Structure, byref, c_bool, c_uint32, c_uint8, cdll
 import os
 import sys
+from ctypes import CDLL, Structure, byref, c_bool, c_uint32, c_uint8, cdll
 from struct import pack, unpack_from
 from typing import Literal, Optional
 
@@ -23,7 +23,6 @@ def setup_lib():
         return True
     if tried_loading:
         return False
-
     tried_loading = True
     try:
         lib = cdll.LoadLibrary(
@@ -35,12 +34,13 @@ def setup_lib():
             "Failed to load Yay0 C library; falling back to Python method",
             status="warn",
         )
+        tried_loading = True
         return False
 
 
 class Yay0Decompressor(Decompressor):
     @staticmethod
-    def decompress(in_bytes, byte_order: Literal["little", "big"]="big") -> bytearray:
+    def decompress(in_bytes, byte_order: Literal["little", "big"] = "big") -> bytearray:
         # attempt to load the library only once per execution
         global lib
         if not setup_lib():
@@ -82,7 +82,7 @@ class Yay0Decompressor(Decompressor):
         return bytearray(dst)
 
     @staticmethod
-    def decompress_python(in_bytes, byte_order: Literal["little", "big"]="big"):
+    def decompress_python(in_bytes, byte_order: Literal["little", "big"] = "big"):
         if in_bytes[:4] != b"Yay0":
             log.error("Input file is not Yay0")
 

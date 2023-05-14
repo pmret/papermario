@@ -1,16 +1,53 @@
 # splat Release Notes
 
+### 0.14.0
+
+* Add support for PSX's GTE instruction set
+
+### 0.13.10
+
+* New option `disasm_unknown` (False by default)
+  * If enabled it tells the disassembler to try disassembling functions with unknown instructions instead of falling back to disassembling as raw data
+
+### 0.13.9
+
+* New segment option `linker_entry` (true by default).
+  * If disabled, this segment will not produce entries in the linker script.
+
+### 0.13.8
+
+* New option `segment_end_before_align`.
+  * If enabled, the end symbol for each segment will be placed before the alignment directive for the segment
+
+### 0.13.7
+
+* Severely sped-up linker entry writing by using a dict instead of a list. Symbol headers will no longer be in any specific order (which shouldn't matter, because they're headers).
+
+### 0.13.6
+
+* Changed CI image processing so that their data is fetched during the scan phase, supporting palettes that come before CI images.
+
+### 0.13.5
+
+* An error will be produced if a symbol is declared with an unknown type in the symbol_addrs file.
+  * The current list of known symbols is `'func', 'label', 'jtbl', 'jtbl_label', 's8', 'u8', 's16', 'u16', 's32', 'u32', 's64', 'u64', 'f32', 'f64', 'Vec3f', 'asciz', 'char*', 'char'`.
+  * Custom types are allowed if they start with a capital letter.
+
 ### 0.13.4
+
 * Renamed `follows_vram_symbol` segment option to `vram_of_symbol` to more accurately reflect what it's used for - to set the segment's vram based on a symbol.
 * Refactored the `appears_after_overlays_addr` feature so that expressions are written at the latest possible moment in the linker script. This fixes errors and warnings regarding forward references to later symbols.
 
 ### 0.13.3
+
 * Added a new symbol_addrs attribute `appears_after_overlays_addr:0x1234` which will modify the linker script such that the symbol's address is equal to the value of the end of the longest overlay starting with address 0x1234. It achieve this by writing a series of sym = MAX(sym, seg_vram_END) statements into the linker script. For some games, it's feasible to manually create such statements, but for games with hundreds of overlays at the same address, this is very tedious and prone to error. The new attribute allows you to have peace of mind that the symbol will end up after all of these overlays.
 
 ### 0.13.2
+
 * Actually implemented `ld_use_follows`. Oopz
 
 ### 0.13.1
+
 * Added `ld_wildcard_sections` option (disabled by default), which adds a wildcard to the linker script for section linking. This can be helpful for modern GCC, which creates additional rodata sections such as ".rodata.xyz".
 * Added `ld_use_follows` option (enabled by default), which, if disabled, makes splat ignore follows_vram and follows_symbols. This helps for fixing matching builds while being able to add infrastructure to the yaml for non-matching builds by just re-enabling the option.
 
@@ -341,10 +378,10 @@ Internally, there's a new Symbol class which stores information about a symbol a
 
 ## 0.5 The Rename Update
 * n64splat name changed to splat
-  * Some refactoring was done to support other platforms besides n64 in the future
+  * Some refactoring was done to support other platforms besides n64 in the future 
     * New `platform` option, which defaults to `n64`
   * This will cause breaking changes in custom segments, so please refer to one of the changes in one of the n64 base segments for details
-* Support for custom artifact paths
+* Support for custom artifact paths 
   * New `undefined_syms_auto_path` option
   * New `undefined_funcs_auto_path` option
   * New `cache_path` option

@@ -77,7 +77,8 @@ class N64SegImg(N64Segment):
         assert isinstance(self.rom_start, int)
         assert isinstance(self.rom_end, int)
 
-        self.n64img.data = rom_bytes[self.rom_start : self.rom_end]
+        if self.n64img.data is None:
+            self.n64img.data = rom_bytes[self.rom_start : self.rom_end]
         self.n64img.write(path)
 
         self.log(f"Wrote {self.name} to {path}")

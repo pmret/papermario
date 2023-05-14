@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#! /usr/bin/env python3
 
 import argparse
 import sys
@@ -73,17 +73,53 @@ segments:
   - name: header
     type: header
     start: 0x0
+
   - name: boot
     type: bin
     start: 0x40
-  - name: main
+
+  - name: entry
     type: code
     start: 0x1000
     vram: 0x{rom.entry_point:X}
     subsegments:
-      - [0x1000, asm]
+      - [0x1000, hasm]
+
+  - name: main
+    type: code
+    start: 0x{0x1000 + rom.entrypoint_info.entry_size:X}
+    vram: 0x{rom.entry_point + rom.entrypoint_info.entry_size:X}
+    follows_vram: entry
+"""
+
+    if rom.entrypoint_info.bss_size is not None:
+        segments += f"""\
+    bss_size: 0x{rom.entrypoint_info.bss_size:X}
+"""
+
+    segments += f"""\
+    subsegments:
+      - [0x{0x1000 + rom.entrypoint_info.entry_size:X}, asm]
+"""
+
+    if (
+        rom.entrypoint_info.bss_size is not None
+        and rom.entrypoint_info.bss_start_address is not None
+    ):
+        bss_start = rom.entrypoint_info.bss_start_address - rom.entry_point + 0x1000
+        # first_section_end points to the start of data
+        segments += f"""\
+      - [0x{first_section_end:X}, data]
+      - {{ start: 0x{bss_start:X}, type: bss, vram: 0x{rom.entrypoint_info.bss_start_address:08X} }}
+"""
+        # Point next segment to the detected end of the main one
+        first_section_end = bss_start
+
+    segments += f"""\
+
   - type: bin
     start: 0x{first_section_end:X}
+    follows_vram: main
   - [0x{rom.size:X}]
 """
 
