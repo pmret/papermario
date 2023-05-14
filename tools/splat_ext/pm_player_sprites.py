@@ -11,9 +11,11 @@ import png
 import yaml as yaml_loader
 from n64img.image import CI4
 from segtypes.n64.segment import N64Segment
-from sprite_common import AnimComponent, read_offset_list
 from util import options
 from util.n64.Yay0decompress import Yay0Decompressor
+
+sys.path.insert(0, str(Path(__file__).parent))
+from sprite_common import AnimComponent, read_offset_list
 
 PAL_TO_RASTER: Dict[str, int] = {
     "8bit": 0x57C90,
@@ -617,7 +619,9 @@ class N64SegPm_player_sprites(N64Segment):
 
         out_paths = [options.opts.asset_path / "sprite" / "player" / "gloob2"]
 
-        return [LinkerEntry(self, out_paths, PLAYER_OUT_PATH / "player_sprites", ".data")]
+        return [
+            LinkerEntry(self, out_paths, PLAYER_OUT_PATH / "player_sprites", ".data")
+        ]
 
     def cache(self):
         return (self.yaml, self.rom_end, self.player_cfg)

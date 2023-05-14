@@ -1,4 +1,4 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from itertools import zip_longest
 import struct
 from typing import Dict, List
