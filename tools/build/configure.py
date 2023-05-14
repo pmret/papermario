@@ -220,6 +220,12 @@ def write_ninja_rules(
     )
 
     ninja.rule(
+        "player_sprites",
+        description="player_sprites $out $in",
+        command=f"$python {BUILD_TOOLS}/sprite/player_sprites.py $out $in",
+    )
+
+    ninja.rule(
         "sprite_header",
         description="sprite_header $sprite_name",
         command=f"$python {BUILD_TOOLS}/sprite/header.py $out $sprite_dir $sprite_id",
@@ -327,6 +333,7 @@ class Configure:
                     "pm_map_data",
                     "pm_msg",
                     "pm_npc_sprites",
+                    "pm_player_sprites",
                     "pm_charset",
                     "pm_charset_palettes",
                     "pm_effect_loads",
@@ -715,6 +722,8 @@ class Configure:
                     "sprite_combine",
                 )
                 build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
+            elif seg.type == "pm_player_sprites":
+                build(entry.object_path.with_suffix(".bin"), [], "player_sprites")
             elif seg.type == "pm_msg":
                 msg_bins = []
 

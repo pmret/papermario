@@ -17475,29 +17475,7 @@ segments:
 ### Sprites ###
 ###############
   - [0x1942C40, bin]
-  - { start: 0x1943000, type: bin, align: 8} # sprite data build metadata (build date, major file divisions)
-
-  # player sprite raster table:
-  # - [0x1943020, bin] # Player sprite table
-  # - [0x1943BA0, bin] # Mario world sprites
-  # - [0x199A8C0, bin] # Retro sprites
-  # - [0x199BB00, bin] # Princess Peach sprites
-
-  # - [0x19E0970, bin] # Player sprite Yay0 table (offsets to the following 13 entries)
-  # - { start: 0x19E09A8, type: yay0, align: 8 }
-  # - { start: 0x19E1390, type: yay0, align: 8 }
-  # - { start: 0x19E1888, type: yay0, align: 8 }
-  # - { start: 0x19E2330, type: yay0, align: 8 }
-  # - { start: 0x19E2DE0, type: yay0, align: 8 }
-  # - { start: 0x19E3208, type: yay0, align: 8 }
-  # - { start: 0x19E3BA8, type: yay0, align: 8 }
-  # - { start: 0x19E3FD8, type: yay0, align: 8 }
-  # - { start: 0x19E4828, type: yay0, align: 8 }
-  # - { start: 0x19E4BE0, type: yay0, align: 8 }
-  # - { start: 0x19E5758, type: yay0, align: 8 }
-  # - { start: 0x19E5950, type: yay0, align: 8 }
-  # - { start: 0x19E62A0, type: yay0, align: 8 }
-
+  - { start: 0x1943000, type: pm_player_sprites, align: 8}
   - start: 0x19E67B8
     align: 8
     type: pm_npc_sprites
