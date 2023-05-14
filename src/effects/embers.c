@@ -45,7 +45,7 @@ EffectInstance* embers_main(
     bp.update = embers_update;
     bp.renderWorld = embers_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_EMBERS;
 
     effect = shim_create_effect_instance(&bp);
@@ -101,8 +101,8 @@ void embers_update(EffectInstance* effect) {
     f32 unk_6C;
     s32 i;
 
-    if (effect->flags & 0x10) {
-        effect->flags &= ~0x10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         part->unk_18 = 0x10;
     }
 

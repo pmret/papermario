@@ -86,7 +86,7 @@ EffectInstance* cold_breath_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg
     bp.update = cold_breath_update;
     bp.renderWorld = cold_breath_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_COLD_BREATH;
 
     effect = shim_create_effect_instance(&bp);
@@ -126,8 +126,8 @@ void cold_breath_update(EffectInstance* effect) {
     ColdBreathFXData* data = effect->data.coldBreath;
     s32 unk00 = data->unk_00;
 
-    if (effect->flags & 0x10) {
-        effect->flags &= ~0x10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         data->unk_10 = 0x10;
     }
 

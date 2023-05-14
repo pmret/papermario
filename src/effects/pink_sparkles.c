@@ -110,7 +110,7 @@ EffectInstance* pink_sparkles_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 a
     bp.update = pink_sparkles_update;
     bp.renderWorld = pink_sparkles_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_PINK_SPARKLES;
 
     effect = shim_create_effect_instance(&bp);

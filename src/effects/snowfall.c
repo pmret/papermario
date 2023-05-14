@@ -34,7 +34,7 @@ EffectInstance* snowfall_main(s32 arg0, s32 arg1) {
     effectBp.update = snowfall_update;
     effectBp.renderWorld = snowfall_render;
     effectBp.unk_00 = 0;
-    effectBp.unk_14 = 0;
+    effectBp.renderUI = NULL;
     effectBp.effectID = EFFECT_SNOWFALL;
 
     effect = shim_create_effect_instance(&effectBp);

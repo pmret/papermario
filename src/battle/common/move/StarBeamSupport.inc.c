@@ -668,7 +668,7 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
 
             if (!cond) {
                 N(starBeamStage) = 2;
-                N(effect)->flags |= EFFECT_INSTANCE_FLAG_10;
+                N(effect)->flags |= FX_INSTANCE_FLAG_DISMISS;
                 return ApiStatus_DONE2;
             }
             break;
@@ -738,7 +738,7 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
 
             if (!cond) {
                 N(starBeamStage) = 2;
-                N(effect)->flags |= EFFECT_INSTANCE_FLAG_10;
+                N(effect)->flags |= FX_INSTANCE_FLAG_DISMISS;
                 return ApiStatus_DONE2;
             }
             break;

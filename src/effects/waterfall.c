@@ -26,7 +26,7 @@ EffectInstance* waterfall_main(
     bp.update = waterfall_update;
     bp.renderWorld = waterfall_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_WATERFALL;
 
     effect = shim_create_effect_instance(&bp);
@@ -66,8 +66,8 @@ void waterfall_update(EffectInstance* effect) {
     s32 unk_14;
     s32 i;
 
-    if (effect->flags & EFFECT_INSTANCE_FLAG_10) {
-        effect->flags &= ~EFFECT_INSTANCE_FLAG_10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         data->unk_10 = 16;
     }
 

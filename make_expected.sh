@@ -1,3 +1,5 @@
+#!/usr/bin/env sh
+
 rm -rf ver/*/expected
 
 mkdir -p ver/us/expected/ver/us

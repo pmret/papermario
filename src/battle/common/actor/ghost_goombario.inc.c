@@ -23,7 +23,7 @@ API_CALLABLE(N(UnkTattleEffectFunc2)) {
     EffectInstance* effect = (EffectInstance*)evt_get_variable(script, *args++);
 
     effect->data.tattleWindow->pos.y = 144.0f;
-    effect->flags |= EFFECT_INSTANCE_FLAG_10;
+    effect->flags |= FX_INSTANCE_FLAG_DISMISS;
     return ApiStatus_DONE2;
 }
 

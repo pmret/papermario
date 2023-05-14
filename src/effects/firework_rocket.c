@@ -93,7 +93,7 @@ EffectInstance* firework_rocket_main(s32 variation, f32 centerX, f32 centerY, f3
     bp.update = firework_rocket_update;
     bp.renderWorld = firework_rocket_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_FIREWORK_ROCKET;
 
     effect = shim_create_effect_instance(&bp);
@@ -147,8 +147,8 @@ void firework_rocket_update(EffectInstance* effect) {
     s32 lifeTime;
     s32 i;
 
-    if (effect->flags & EFFECT_INSTANCE_FLAG_10) {
-        effect->flags &= ~EFFECT_INSTANCE_FLAG_10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         data->timeLeft = 16;
     }
 

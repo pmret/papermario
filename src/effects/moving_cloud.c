@@ -37,7 +37,7 @@ EffectInstance* moving_cloud_main(
     bp.update = moving_cloud_update;
     bp.renderWorld = moving_cloud_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_MOVING_CLOUD;
 
     effect = shim_create_effect_instance(&bp);
@@ -120,8 +120,8 @@ void moving_cloud_update(EffectInstance* effect) {
     s32 unk_00 = data->unk_00;
     s32 unk_1C;
 
-    if (effect->flags & 0x10) {
-        effect->flags &= ~0x10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         data->unk_1C = 16;
     }
 

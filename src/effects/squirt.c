@@ -22,7 +22,7 @@ EffectInstance* squirt_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f3
     bp.update = squirt_update;
     bp.renderWorld = squirt_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_SQUIRT;
 
     effect = shim_create_effect_instance(&bp);
@@ -92,8 +92,8 @@ void squirt_update(EffectInstance* effect) {
     f32 factor;
     s32 i;
 
-    if (effect->flags & 0x10) {
-        effect->flags &= ~0x10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         data->unk_2C = 16;
     }
 

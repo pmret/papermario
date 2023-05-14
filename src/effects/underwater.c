@@ -23,7 +23,7 @@ EffectInstance* underwater_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4
     bp.update = underwater_update;
     bp.renderWorld = underwater_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_UNDERWATER;
 
     effect = shim_create_effect_instance(&bp);
@@ -72,8 +72,8 @@ void underwater_update(EffectInstance* effect) {
     s32 i;
     s32 j;
 
-    if (effect->flags & EFFECT_INSTANCE_FLAG_10) {
-        effect->flags &= ~EFFECT_INSTANCE_FLAG_10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         data->timeLeft = 32;
     }
 

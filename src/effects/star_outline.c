@@ -24,7 +24,7 @@ EffectInstance* star_outline_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 ar
     effectBp.update = star_outline_update;
     effectBp.renderWorld = star_outline_render;
     effectBp.unk_00 = 0;
-    effectBp.unk_14 = 0;
+    effectBp.renderUI = NULL;
     effectBp.effectID = EFFECT_STAR_OUTLINE;
 
     effect = shim_create_effect_instance(&effectBp);
@@ -70,8 +70,8 @@ void star_outline_update(EffectInstance* effect) {
     s32 temp;
     s32 temp2;
 
-    if (effect->flags & 16) {
-        effect->flags &= ~16;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         data->timeLeft = 16;
     }
     if (data->timeLeft < 1000) {

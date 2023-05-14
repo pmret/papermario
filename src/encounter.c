@@ -339,8 +339,8 @@ ApiStatus MerleeUpdateFX(Evt* script, s32 isInitialCall) {
     if (D_800A0BB8 == 2) {
         WorldMerleeOrbEffect->data.energyOrbWave->scale = 0.00001f;
         WorldMerleeWaveEffect->data.energyOrbWave->scale = 0.00001f;
-        WorldMerleeOrbEffect->flags |= EFFECT_INSTANCE_FLAG_10;
-        WorldMerleeWaveEffect->flags |= EFFECT_INSTANCE_FLAG_10;
+        WorldMerleeOrbEffect->flags |= FX_INSTANCE_FLAG_DISMISS;
+        WorldMerleeWaveEffect->flags |= FX_INSTANCE_FLAG_DISMISS;
         return ApiStatus_DONE1;
     }
 

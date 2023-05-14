@@ -25,7 +25,7 @@ EffectInstance* ice_pillar_main(s32 arg0, f32 x, f32 y, f32 z, f32 scale, s32 ar
     effectBp.update = ice_pillar_update;
     effectBp.renderWorld = ice_pillar_render;
     effectBp.unk_00 = 0;
-    effectBp.unk_14 = 0;
+    effectBp.renderUI = NULL;
     effectBp.effectID = EFFECT_ICE_PILLAR;
 
     effect = shim_create_effect_instance(&effectBp);
@@ -72,8 +72,8 @@ void ice_pillar_update(EffectInstance* effect) {
     s32 lifeTime;
     s32 i;
 
-    if (effect->flags & 0x10) {
-        effect->flags &= ~0x10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         data->timeLeft = 16;
     }
 

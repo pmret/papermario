@@ -230,7 +230,7 @@ API_CALLABLE(N(FlashScreenWhite)) {
             set_screen_overlay_color(SCREEN_LAYER_FRONT, 208, 208, 208);
             set_screen_overlay_params_front(OVERLAY_VIEWPORT_COLOR, data->screenWhiteness);
             if (data->screenWhiteness == 255) {
-                data->spiritCardEffect->flags |= EFFECT_INSTANCE_FLAG_10;
+                data->spiritCardEffect->flags |= FX_INSTANCE_FLAG_DISMISS;
                 data->spiritCardEffect = NULL;
                 gCameras->bgColor[0] = 208;
                 gCameras->bgColor[1] = 208;

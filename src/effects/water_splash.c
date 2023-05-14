@@ -41,7 +41,7 @@ EffectInstance* water_splash_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 ar
     bpPtr->update = water_splash_update;
     bpPtr->renderWorld = water_splash_render;
     bpPtr->unk_00 = 0;
-    bpPtr->unk_14 = NULL;
+    bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_WATER_SPLASH;
     effect = shim_create_effect_instance(bpPtr);
     effect->numParts = numParts;
@@ -110,8 +110,8 @@ void water_splash_update(EffectInstance *effect) {
 
     part = effect->data.waterSplash;
     temp_a2 = part->unk_00;
-    if ((effect->flags & 0x10) != 0) {
-        effect->flags &= ~0x10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         part->unk_1C = 0x10;
     }
 

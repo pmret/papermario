@@ -28,7 +28,7 @@ EffectInstance* flashing_box_shockwave_main(
     bp.update = flashing_box_shockwave_update;
     bp.renderWorld = flashing_box_shockwave_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_FLASHING_BOX_SHOCKWAVE;
 
     effect = shim_create_effect_instance(&bp);

@@ -28,7 +28,7 @@ EffectInstance* fire_flower_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg
     bp.init = fire_flower_init;
     bp.update = fire_flower_update;
     bp.renderWorld = fire_flower_render;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_FIRE_FLOWER;
 
     effect = shim_create_effect_instance(&bp);
@@ -96,7 +96,7 @@ void fire_flower_update(EffectInstance* effect) {
 
     switch (unk_04) {
         case 0:
-            shim_load_effect(45);
+            shim_load_effect(EFFECT_STARS_SPREAD);
             stars_spread_main(0, part->pos.x - 10.0f, part->pos.y, part->pos.z, 7, 20);
             part->unk_34 = 0;
             part->unk_38 = 0;

@@ -30,7 +30,7 @@ void steam_burst_main(
     bp.update = steam_burst_update;
     bp.renderWorld = steam_burst_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_STEAM_BURST;
 
     effect = shim_create_effect_instance(&bp);

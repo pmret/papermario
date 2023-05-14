@@ -40,7 +40,7 @@ EffectInstance* butterflies_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     bp.init = butterflies_init;
     bp.update = butterflies_update;
     bp.renderWorld = butterflies_render;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_BUTTERFLIES;
 
     effect = shim_create_effect_instance(&bp);
@@ -83,8 +83,8 @@ void butterflies_update(EffectInstance* effect) {
     f32 var_f24;
 
     temp_s0 = effect->data.butterflies;
-    if (effect->flags & 0x10) {
-        effect->flags &= ~0x10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         temp_s0->unk_04 = 900;
     }
 

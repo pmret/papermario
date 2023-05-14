@@ -65,7 +65,7 @@ void effect_3D_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, 
                 bpPtr->init = effect_3D_init;
                 bpPtr->update = effect_3D_update;
                 bpPtr->renderWorld = effect_3D_render;
-                bpPtr->unk_14 = NULL;
+                bpPtr->renderUI = NULL;
                 bpPtr->effectID = EFFECT_3D;
 
                 effect = shim_create_effect_instance(bpPtr);

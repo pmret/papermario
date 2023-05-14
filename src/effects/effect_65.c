@@ -30,7 +30,7 @@ EffectInstance* effect_65_main(
     bp.update = effect_65_update;
     bp.renderWorld = effect_65_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_65;
 
     effect = shim_create_effect_instance(&bp);
@@ -128,8 +128,8 @@ void effect_65_update(EffectInstance* effect) {
     f32 dist;
     s32 idx;
 
-    if (effect->flags & EFFECT_INSTANCE_FLAG_10) {
-        effect->flags &= ~EFFECT_INSTANCE_FLAG_10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         data->timeLeft = 16;
     }
 

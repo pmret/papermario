@@ -22,7 +22,7 @@ void snowflake_main(f32 x, f32 y, f32 z, s32 arg3, s32 arg4) {
     bp.init = snowflake_init;
     bp.update = snowflake_update;
     bp.renderWorld = snowflake_render;
-    bp.unk_14 = 0;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_SNOWFLAKE;
 
     effect = shim_create_effect_instance(&bp);

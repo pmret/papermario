@@ -57,7 +57,7 @@ void bulb_glow_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, EffectInst
     bp.update = bulb_glow_update;
     bp.renderWorld = bulb_glow_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_BULB_GLOW;
 
     effect = shim_create_effect_instance(&bp);
@@ -94,8 +94,8 @@ void bulb_glow_update(EffectInstance* effect) {
     BulbGlowFXData* data = effect->data.bulbGlow;
     s32 unk18;
 
-    if (effect->flags & 0x10) {
-        effect->flags &= ~0x10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         data->unk_14 = 10;
     }
 

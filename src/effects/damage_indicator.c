@@ -89,7 +89,7 @@ void damage_indicator_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32
     bp.init = damage_indicator_init;
     bp.update = damage_indicator_update;
     bp.renderWorld = damage_indicator_render;
-    bp.unk_14 = func_E003C47C;
+    bp.renderUI = func_E003C47C;
     bp.unk_00 = 0;
     bp.effectID = EFFECT_DAMAGE_INDICATOR;
 

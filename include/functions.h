@@ -138,7 +138,7 @@ void func_800E4AD8(s32 arg0);
 f32 player_check_collision_below(f32, s32* colliderID);
 s32 can_trigger_loading_zone(void);
 void func_80266684(void);
-void func_802667F0(s32, Actor*, f32, f32, f32);
+void show_action_rating(s32, Actor*, f32, f32, f32);
 s32 func_802591EC(s32, ActorPart*, s32, Matrix4f, s32);
 
 HeapNode* general_heap_create(void);
@@ -844,7 +844,7 @@ void partner_init_after_battle(s32 arg0);
 void load_map_script_lib(void);
 void remove_item_entity_by_index(s32 index);
 void set_entity_commandlist(Entity* entity, s32* entityScript);
-s32 func_800DFCF4(void);
+s32 is_player_dismounted(void);
 void func_800EF300(void);
 void func_800EF314(void);
 void func_800EF43C(void);

@@ -44,7 +44,7 @@ EffectInstance* disable_x_main(s32 type, f32 x, f32 y, f32 z, s32 arg4) {
     bp.init = disable_x_init;
     bp.update = disable_x_update;
     bp.renderWorld = disable_x_render;
-    bp.unk_14 = func_E0082528;
+    bp.renderUI = func_E0082528;
     bp.effectID = EFFECT_DISABLE_X;
 
     effect = shim_create_effect_instance(&bp);
@@ -111,8 +111,8 @@ void disable_x_update(EffectInstance* effect) {
     u32 type;
     s32 i;
 
-    if (effect->flags & 0x10) {
-        effect->flags &= ~0x10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         data->unk_28 = 21;
     }
 
