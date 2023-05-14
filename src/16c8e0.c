@@ -1122,7 +1122,7 @@ void btl_delete_actor(Actor* actor) {
     if (actor->takeTurnScript != NULL) {
         kill_script_by_ID(actor->takeTurnScriptID);
     }
-    func_80266EE8(actor, 0);
+    func_80266EE8(actor, UNK_PAL_EFFECT_0);
 
     part = actor->partsTable;
 

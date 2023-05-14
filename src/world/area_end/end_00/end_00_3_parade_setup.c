@@ -208,11 +208,11 @@ EvtScript N(EVS_TexPan_Water) = {
 };
 
 AnimID N(ExtraAnims_Tutankoopa)[] = {
-    ANIM_Tutankoopa_Anim02,
-    ANIM_Tutankoopa_Anim06,
-    ANIM_Tutankoopa_Anim09,
-    ANIM_Tutankoopa_Anim01,
-    ANIM_Tutankoopa_Anim04,
+    ANIM_Tutankoopa_Run,
+    ANIM_Tutankoopa_Hurt,
+    ANIM_Tutankoopa_LevitateStill,
+    ANIM_Tutankoopa_Idle,
+    ANIM_Tutankoopa_Lift,
     ANIM_LIST_END
 };
 
@@ -512,7 +512,7 @@ ParadeNpcInfo N(ParadeNpcsTable)[] = {
         .yaw = 270.0f
     },
     [NPC_Tutankoopa1] {
-        .initialAnim = ANIM_Tutankoopa_Anim02,
+        .initialAnim = ANIM_Tutankoopa_Run,
         .animList = N(ExtraAnims_Tutankoopa),
         .pos = { -1040.0f, 0.0f, 30.0f },
         .yaw = 270.0f
@@ -549,7 +549,7 @@ ParadeNpcInfo N(ParadeNpcsTable)[] = {
         .yaw = 270.0f
     },
     [NPC_Tutankoopa2] {
-        .initialAnim = ANIM_Tutankoopa_Anim02,
+        .initialAnim = ANIM_Tutankoopa_Run,
         .animList = N(ExtraAnims_Tutankoopa),
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 90.0f

@@ -436,4 +436,10 @@ void func_80072BCC(s32 arg0);
 void load_demo_battle(u32 index);
 Actor* create_actor(Formation formation);
 
+#define EXEC_DEATH_NO_SPINNING -12345
+#define ACTOR_API_SKIP_ARG -12345678
+
+#define DANGER_THRESHOLD  5
+#define PERIL_THRESHOLD   1
+
 #endif

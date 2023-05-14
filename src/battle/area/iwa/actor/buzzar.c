@@ -12,7 +12,7 @@ extern EvtScript N(EVS_Init);
 extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_Idle);
 extern EvtScript N(EVS_HandleEvent);
-extern EvtScript N(EVS_NextTurn);
+extern EvtScript N(EVS_HandlePhase);
 extern EvtScript N(EVS_Attack_WindBlast);
 extern EvtScript N(EVS_Attack_FeatherFling);
 extern EvtScript N(EVS_Attack_GrappleDrop);
@@ -165,7 +165,7 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(EVS_TakeTurn)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
-    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(EVS_NextTurn)))
+    EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(EVS_HandlePhase)))
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SET(LVar1, 40)
     EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -175,7 +175,7 @@ EvtScript N(EVS_Init) = {
     EVT_END
 };
 
-EvtScript N(EVS_NextTurn) = {
+EvtScript N(EVS_HandlePhase) = {
     EVT_RETURN
     EVT_RETURN
     EVT_END

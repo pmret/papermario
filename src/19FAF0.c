@@ -692,7 +692,7 @@ HitResult calc_player_damage_enemy(void) {
     }
 
     if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE ||
-        (func_80266E14(targetPart), gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE)) {    // TODO remove func_80266E14 from conditional
+        (clear_part_pal_adjustment(targetPart), gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE)) {    // TODO remove clear_part_pal_adjustment from conditional
         if (battleStatus->currentAttackElement & DAMAGE_TYPE_SPIN_SMASH) {
             PlayerData* playerData = &gPlayerData;
 

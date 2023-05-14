@@ -55,7 +55,7 @@ extern ActorPartBlueprint bMarioParts[];
 
 extern PartnerDMAData bPartnerDmaTable[];
 
-s32 func_80265CE8(AnimID*, s32);
+s32 get_npc_anim_for_status(AnimID*, s32);
 
 void create_target_list(Actor* actor, s32 arg1) {
     s32 numTargets = 0;
@@ -453,7 +453,7 @@ END:
     }
 }
 
-void func_80266DAC(Actor* actor, s32 arg1);
+void set_actor_pal_adjustment(Actor* actor, s32 arg1);
 
 void player_create_target_list(Actor* actor) {
     create_target_list(actor, 0);
@@ -1348,7 +1348,7 @@ void load_player_actor(void) {
     part->unkOffset[0] = 0;
     part->unkOffset[1] = 0;
     part->animationRate = 1.0f;
-    part->currentAnimation = func_80265CE8(part->idleAnimations, 1U);
+    part->currentAnimation = get_npc_anim_for_status(part->idleAnimations, 1U);
     part->nextPart = NULL;
     part->partTypeData[0] = bActorSoundTable[player->actorType].walk[0];
     part->partTypeData[1] = bActorSoundTable[player->actorType].walk[1];
@@ -1367,7 +1367,7 @@ void load_player_actor(void) {
 
         ASSERT(decorationTable != NULL);
 
-        decorationTable->unk_6C0 = 0;
+        decorationTable->paletteAdjustment = PAL_ADJUST_0;
         decorationTable->unk_750 = 0;
         decorationTable->unk_764 = 0;
         decorationTable->unk_768 = 0;
@@ -1596,7 +1596,7 @@ void load_partner_actor(void) {
 
                 ASSERT(decorationTable != NULL);
 
-                decorationTable->unk_6C0 = 0;
+                decorationTable->paletteAdjustment = PAL_ADJUST_0;
                 decorationTable->unk_750 = 0;
                 decorationTable->unk_764 = 0;
                 decorationTable->unk_768 = 0;
@@ -1629,7 +1629,7 @@ void load_partner_actor(void) {
             part->spriteInstanceID = -1;
 
             if (part->idleAnimations != NULL) {
-                part->currentAnimation = func_80265CE8(part->idleAnimations, 1);
+                part->currentAnimation = get_npc_anim_for_status(part->idleAnimations, 1);
                 part->spriteInstanceID = spr_load_npc_sprite(part->currentAnimation | SPRITE_ID_TAIL_ALLOCATE, NULL);
             }
 
@@ -1858,7 +1858,7 @@ Actor* create_actor(Formation formation) {
             decorationTable = part->decorationTable;
             ASSERT(decorationTable != NULL);
 
-            decorationTable->unk_6C0 = 0;
+            decorationTable->paletteAdjustment = PAL_ADJUST_0;
             decorationTable->unk_750 = 0;
             decorationTable->unk_764 = 0;
             decorationTable->unk_768 = 0;
@@ -1896,7 +1896,7 @@ Actor* create_actor(Formation formation) {
         part->spriteInstanceID = -1;
 
         if (part->idleAnimations != NULL) {
-            part->currentAnimation = func_80265CE8(part->idleAnimations, 1) & ~SPRITE_ID_TAIL_ALLOCATE;
+            part->currentAnimation = get_npc_anim_for_status(part->idleAnimations, 1) & ~SPRITE_ID_TAIL_ALLOCATE;
             part->spriteInstanceID = spr_load_npc_sprite(part->currentAnimation, NULL);
         }
 
@@ -1915,10 +1915,10 @@ Actor* create_actor(Formation formation) {
     }
 
     actor->hpFraction = 25;
-    actor->actorID = actor->enemyIndex | 0x200;
+    actor->actorID = actor->enemyIndex | ACTOR_CLASS_ENEMY;
     takeTurnScript = start_script(actor->takeTurnSource, EVT_PRIORITY_A, 0);
     actor->takeTurnScriptID = takeTurnScript->id;
-    takeTurnScript->owner1.enemyID = actor->enemyIndex | 0x200;
+    takeTurnScript->owner1.enemyID = actor->enemyIndex | ACTOR_CLASS_ENEMY;
     actor->shadow.id = create_shadow_type(0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
     actor->shadowScale = actor->size.x / 24.0;
     actor->disableEffect = fx_disable_x(0, -142.0f, 34.0f, 1.0f, 0);
@@ -1927,7 +1927,7 @@ Actor* create_actor(Formation formation) {
     return actor;
 }
 
-s32 func_80265CE8(AnimID* animations, s32 statusKey) {
+s32 get_npc_anim_for_status(AnimID* animations, s32 statusKey) {
     AnimID foundAnim;
 
     if (animations == NULL) {
@@ -1948,7 +1948,7 @@ s32 func_80265CE8(AnimID* animations, s32 statusKey) {
     return foundAnim;
 }
 
-s32 func_80265D44(s32 animID) {
+s32 get_player_anim_for_status(s32 statusKey) {
     BattleStatus* battleStatus = &gBattleStatus;
     PlayerData* playerData = &gPlayerData;
     Actor* player = battleStatus->playerActor;
@@ -1960,46 +1960,47 @@ s32 func_80265D44(s32 animID) {
     }
     ret = 0;
 
-    // TODO use animation id enum once it exists
     if (!(battleStatus->flags2 & BS_FLAGS2_PEACH_BATTLE)) {
-        if (playerData->curHP < 6) {
-            if (animID == 1) {
-                animID = 26;
+        // switch to danger override animations
+        if (playerData->curHP <= DANGER_THRESHOLD) {
+            if (statusKey == STATUS_NORMAL) {
+                statusKey = STATUS_DANGER;
             }
-
-            if (animID == 18) {
-                animID = 22;
+            if (statusKey == STATUS_TURN_DONE) {
+                statusKey = STATUS_TURN_DONE_WEARY;
             }
-
-            if (animID == 28) {
-                animID = 29;
+            if (statusKey == STATUS_THINKING) {
+                statusKey = STATUS_WEARY;
             }
         }
 
+        // switch to poisoned override animations
         if (player->debuff == STATUS_POISON) {
-            if (animID == 1) {
-                animID = 26;
+            if (statusKey == STATUS_NORMAL) {
+                statusKey = STATUS_DANGER;
             }
-
-            if (animID == 18) {
-                animID = 22;
+            if (statusKey == STATUS_TURN_DONE) {
+                statusKey = STATUS_TURN_DONE_WEARY;
             }
-
-            if (animID == 28) {
-                animID = 29;
+            if (statusKey == STATUS_THINKING) {
+                statusKey = STATUS_WEARY;
             }
         }
 
-        if (player->debuff == STATUS_DIZZY && animID == 18) {
-            animID = 24;
+        // switch to dizzy override animations
+        if (player->debuff == STATUS_DIZZY) {
+            if (statusKey == STATUS_TURN_DONE) {
+                statusKey = STATUS_TURN_DONE_DIZZY;
+            }
         }
     }
 
+    // search IdleAnimations to get animID for key
     while (*anim != NULL) {
         if (*anim == 1) {
             ret = anim[1];
         }
-        if (*anim == animID) {
+        if (*anim == statusKey) {
             ret = anim[1];
             break;
         }
@@ -2106,22 +2107,22 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                             }
                             return TRUE;
                         case STATUS_SLEEP:
-                            func_80266DAC(target, 3);
+                            set_actor_pal_adjustment(target, PAL_ADJUST_SLEEP);
                             create_status_debuff(target->hudElementDataIndex, STATUS_SLEEP);
                             return TRUE;
                         case STATUS_PARALYZE:
-                            func_80266DAC(target, 7);
+                            set_actor_pal_adjustment(target, PAL_ADJUST_PARALYZE);
                             create_status_debuff(target->hudElementDataIndex, STATUS_PARALYZE);
                             return TRUE;
                         case STATUS_DIZZY:
                             create_status_debuff(target->hudElementDataIndex, STATUS_DIZZY);
                             return TRUE;
                         case STATUS_FEAR:
-                            func_80266DAC(target, 5);
+                            set_actor_pal_adjustment(target, PAL_ADJUST_FEAR);
                             create_status_debuff(target->hudElementDataIndex, STATUS_FEAR);
                             return TRUE;
                         case STATUS_POISON:
-                            func_80266DAC(target, 6);
+                            set_actor_pal_adjustment(target, PAL_ADJUST_POISON);
                             create_status_debuff(target->hudElementDataIndex, STATUS_POISON);
                             return TRUE;
                         case STATUS_SHRINK:
@@ -2142,7 +2143,7 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                     target->staticDuration = 9;
                 }
                 target->statusAfflicted = STATUS_STATIC;
-                func_80266DAC(target, 4);
+                set_actor_pal_adjustment(target, PAL_ADJUST_STATIC);
                 create_status_static(target->hudElementDataIndex, STATUS_STATIC);
             }
             return TRUE;
@@ -2583,43 +2584,43 @@ s32 inflict_status_set_duration(Actor* actor, s32 statusTypeKey, s32 statusDurat
     return 0;
 }
 
-void func_80266D6C(ActorPart* part, s32 arg1) {
+void set_part_pal_adjustment(ActorPart* part, s32 palAdjust) {
     if (part->idleAnimations != NULL && !(part->flags & ACTOR_PART_FLAG_2)) {
         DecorationTable* decorationTable = part->decorationTable;
 
-        if (decorationTable->unk_6C0 != arg1) {
-            decorationTable->unk_6C0 = arg1;
+        if (decorationTable->paletteAdjustment != palAdjust) {
+            decorationTable->paletteAdjustment = palAdjust;
             decorationTable->unk_6C2 = 0;
-            decorationTable->unk_6C1 = 1;
+            decorationTable->resetPalAdjust = TRUE;
         }
     }
 }
 
-void func_80266DAC(Actor* actor, s32 arg1) {
+void set_actor_pal_adjustment(Actor* actor, s32 palAdjust) {
     ActorPart* partIt = &actor->partsTable[0];
 
     while (partIt != NULL) {
-        if (!(partIt->flags & ACTOR_PART_FLAG_INVISIBLE) &&
-           (partIt->idleAnimations != NULL) &&
-           !(partIt->flags & ACTOR_PART_FLAG_2))
-        {
-            func_80266D6C(partIt, arg1);
+        if (!(partIt->flags & ACTOR_PART_FLAG_INVISIBLE)
+            && (partIt->idleAnimations != NULL)
+            && !(partIt->flags & ACTOR_PART_FLAG_2)
+        ) {
+            set_part_pal_adjustment(partIt, palAdjust);
         }
         partIt = partIt->nextPart;
     }
 }
 
-void func_80266E14(ActorPart* part) {
+void clear_part_pal_adjustment(ActorPart* part) {
     if (part->idleAnimations != NULL && !(part->flags & ACTOR_PART_FLAG_2)) {
-        part->decorationTable->unk_6C0 = 0;
+        part->decorationTable->paletteAdjustment = PAL_ADJUST_0;
     }
 }
 
 // TODO: improve match
 void func_80266E40(Actor* actor) {
     ActorPart* partIt = actor->partsTable;
-    s8 e = 0xE;
-    s8 f = 0xF;
+    s8 e = PAL_ADJUST_14;
+    s8 f = PAL_ADJUST_15;
 
     while (partIt != NULL) {
         DecorationTable* decorationTable = partIt->decorationTable;
@@ -2629,8 +2630,8 @@ void func_80266E40(Actor* actor) {
                 (partIt->idleAnimations != NULL) &&
                 !(partIt->flags & ACTOR_PART_FLAG_2))
             {
-                if (decorationTable->unk_6C0 != e && decorationTable->unk_6C0 != f) {
-                    decorationTable->unk_6C0 = 0;
+                if (decorationTable->paletteAdjustment != e && decorationTable->paletteAdjustment != f) {
+                    decorationTable->paletteAdjustment = PAL_ADJUST_0;
                 }
             }
         } while (0); // required to match

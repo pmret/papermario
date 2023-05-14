@@ -410,21 +410,21 @@ ApiStatus SetGoalPos(Evt* script, s32 isInitialCall) {
     actor = get_actor(actorID);
     walk = &actor->state;
 
-    if (*args == -12345678) {
+    if (*args == ACTOR_API_SKIP_ARG) {
         x = walk->goalPos.x;
     } else {
         x = evt_get_variable(script, *args);
     }
 
     *args++;
-    if (*args == -12345678) {
+    if (*args == ACTOR_API_SKIP_ARG) {
         y = walk->goalPos.y;
     } else {
         y = evt_get_variable(script, *args);
     }
 
     *args++;
-    if (*args == -12345678) {
+    if (*args == ACTOR_API_SKIP_ARG) {
         z = walk->goalPos.z;
     } else {
         z = evt_get_variable(script, *args);
@@ -450,21 +450,21 @@ ApiStatus SetIdleGoal(Evt* script, s32 isInitialCall) {
     actor = get_actor(actorID);
     fly = &actor->fly;
 
-    if (*args == -12345678) {
+    if (*args == ACTOR_API_SKIP_ARG) {
         x = actor->fly.goalPos.x;
     } else {
         x = evt_get_variable(script, *args);
     }
 
     *args++;
-    if (*args == -12345678) {
+    if (*args == ACTOR_API_SKIP_ARG) {
         y = fly->goalPos.y;
     } else {
         y = evt_get_variable(script, *args);
     }
 
     *args++;
-    if (*args == -12345678) {
+    if (*args == ACTOR_API_SKIP_ARG) {
         z = fly->goalPos.z;
     } else {
         z = evt_get_variable(script, *args);
@@ -2562,7 +2562,7 @@ ApiStatus func_8026EA7C(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     s32 partID = evt_get_variable(script, *args++);
-    s32 temp_s3 = evt_get_variable(script, *args++);
+    s32 palAdjustment = evt_get_variable(script, *args++);
     Actor* actor;
     ActorPart* actorPart;
 
@@ -2572,7 +2572,7 @@ ApiStatus func_8026EA7C(Evt* script, s32 isInitialCall) {
 
     actor = get_actor(actorID);
     actorPart = get_actor_part(actor, partID);
-    func_80266D6C(actorPart, temp_s3);
+    set_part_pal_adjustment(actorPart, palAdjustment);
     return ApiStatus_DONE2;
 }
 

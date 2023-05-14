@@ -2208,8 +2208,6 @@ enum ActorPartTargetFlags {
     ACTOR_PART_TARGET_FLAG_4    = 0x04,
 };
 
-
-
 enum PlayerSprites {
     SPR_Mario1                          = 0x1,
     SPR_Mario1_Back                     = 0x2,
@@ -2889,12 +2887,12 @@ enum StatusKeys {
     STATUS_BERSERK                 = 0x00000010,
     STATUS_11                      = 0x00000011,
     STATUS_TURN_DONE               = 0x00000012,
-    STATUS_13                      = 0x00000013,
-    STATUS_14                      = 0x00000014,
-    STATUS_15                      = 0x00000015,
-    STATUS_16                      = 0x00000016,
+    STATUS_TURN_DONE_BERSERK       = 0x00000013,
+    STATUS_14                      = 0x00000014, // probably STATUS_TURN_DONE_FROZEN
+    STATUS_TURN_DONE_SLEEP         = 0x00000015,
+    STATUS_TURN_DONE_WEARY         = 0x00000016,
     STATUS_17                      = 0x00000017,
-    STATUS_18                      = 0x00000018,
+    STATUS_TURN_DONE_DIZZY         = 0x00000018,
     STATUS_HUSTLE                  = 0x00000019,
     STATUS_DANGER                  = 0x0000001A,
     STATUS_1B                      = 0x0000001B,
@@ -2912,6 +2910,29 @@ enum StatusKeys {
     STATUS_SHRINK_TURN_MOD         = 0x00000027,
     STATUS_STONE_TURN_MOD          = 0x00000028,
     STATUS_STOP_TURN_MOD           = 0x00000029,
+};
+
+enum PaletteShifts {
+    PAL_ADJUST_0     = 0,
+    PAL_ADJUST_SLEEP         = 3,
+    PAL_ADJUST_STATIC        = 4,
+    PAL_ADJUST_FEAR          = 5,    // darker
+    PAL_ADJUST_POISON        = 6,
+    PAL_ADJUST_PARALYZE      = 7,
+    PAL_ADJUST_BERSERK       = 8,
+    PAL_ADJUST_9     = 9,
+    PAL_ADJUST_10    = 10,
+    PAL_ADJUST_12    = 12, // generic player debuff
+    PAL_ADJUST_13    = 13, // player posion
+    PAL_ADJUST_14    = 14,
+    PAL_ADJUST_15    = 15,
+    PAL_ADJUST_16    = 16,
+};
+
+// func_80266EE8
+enum {
+    UNK_PAL_EFFECT_0    = 0,
+    UNK_PAL_EFFECT_11   = 11,
 };
 
 enum DoorSwing {

@@ -242,7 +242,7 @@ EvtScript N(handleEvent_8021ACE8) = {
                 EVT_EXEC_WAIT(N(8021AB54))
                 EVT_SET_CONST(LVar0, 1)
                 EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim11)
-                EVT_SET(LVar2, -12345)
+                EVT_SET(LVar2, EXEC_DEATH_NO_SPINNING)
                 EVT_EXEC_WAIT(EVS_Enemy_Death)
                 EVT_RETURN
             EVT_ELSE
@@ -263,7 +263,7 @@ EvtScript N(handleEvent_8021ACE8) = {
             EVT_EXEC_WAIT(N(8021AB54))
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim11)
-            EVT_SET(LVar2, -12345)
+            EVT_SET(LVar2, EXEC_DEATH_NO_SPINNING)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -288,7 +288,7 @@ EvtScript N(handleEvent_8021ACE8) = {
         EVT_CASE_OR_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim10)
-            EVT_SET(LVar2, -12345)
+            EVT_SET(LVar2, EXEC_DEATH_NO_SPINNING)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_ZERO_DAMAGE)
@@ -315,7 +315,7 @@ EvtScript N(handleEvent_8021ACE8) = {
                 EVT_EXEC_WAIT(N(8021AB54))
                 EVT_SET_CONST(LVar0, 1)
                 EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim11)
-                EVT_SET(LVar2, -12345)
+                EVT_SET(LVar2, EXEC_DEATH_NO_SPINNING)
                 EVT_EXEC_WAIT(EVS_Enemy_Death)
                 EVT_RETURN
             EVT_ELSE
@@ -337,7 +337,7 @@ EvtScript N(handleEvent_8021ACE8) = {
             EVT_EXEC_WAIT(N(8021AB54))
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim11)
-            EVT_SET(LVar2, -12345)
+            EVT_SET(LVar2, EXEC_DEATH_NO_SPINNING)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
@@ -399,7 +399,7 @@ EvtScript N(handleEvent_8021B4A8) = {
                     EVT_EXEC_WAIT(N(8021AB54))
                     EVT_SET_CONST(LVar0, 1)
                     EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim11)
-                    EVT_SET(LVar2, -12345)
+                    EVT_SET(LVar2, EXEC_DEATH_NO_SPINNING)
                     EVT_EXEC_WAIT(EVS_Enemy_Death)
                     EVT_RETURN
                 EVT_CASE_DEFAULT
@@ -411,7 +411,7 @@ EvtScript N(handleEvent_8021B4A8) = {
                         EVT_EXEC_WAIT(N(8021AB54))
                         EVT_SET_CONST(LVar0, 1)
                         EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim11)
-                        EVT_SET(LVar2, -12345)
+                        EVT_SET(LVar2, EXEC_DEATH_NO_SPINNING)
                         EVT_EXEC_WAIT(EVS_Enemy_Death)
                         EVT_RETURN
                     EVT_END_IF
@@ -424,7 +424,7 @@ EvtScript N(handleEvent_8021B4A8) = {
             EVT_EXEC_WAIT(N(8021AB54))
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim11)
-            EVT_SET(LVar2, -12345)
+            EVT_SET(LVar2, EXEC_DEATH_NO_SPINNING)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -445,7 +445,7 @@ EvtScript N(handleEvent_8021B4A8) = {
                 EVT_EXEC_WAIT(N(8021AB54))
                 EVT_SET_CONST(LVar0, 1)
                 EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim11)
-                EVT_SET(LVar2, -12345)
+                EVT_SET(LVar2, EXEC_DEATH_NO_SPINNING)
             EVT_END_IF
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
@@ -454,7 +454,7 @@ EvtScript N(handleEvent_8021B4A8) = {
             EVT_EXEC_WAIT(N(8021AB54))
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim11)
-            EVT_SET(LVar2, -12345)
+            EVT_SET(LVar2, EXEC_DEATH_NO_SPINNING)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -647,7 +647,7 @@ EvtScript N(blastAttack) = {
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, -1)
-            EVT_SET(LVar2, -12345)
+            EVT_SET(LVar2, EXEC_DEATH_NO_SPINNING)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -669,7 +669,7 @@ EvtScript N(blastAttack) = {
     EVT_WAIT(15)
     EVT_SET_CONST(LVar0, 1)
     EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim11)
-    EVT_SET(LVar2, -12345)
+    EVT_SET(LVar2, EXEC_DEATH_NO_SPINNING)
     EVT_EXEC_WAIT(EVS_Enemy_Death)
     EVT_RETURN
     EVT_END

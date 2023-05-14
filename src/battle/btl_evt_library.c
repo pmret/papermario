@@ -1662,7 +1662,7 @@ EvtScript EVS_Enemy_ShockHit_Impl = {
 EvtScript EVS_Enemy_NoDamageHit = {
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar2)
-    EVT_IF_NOT_FLAG(LVar2, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+    EVT_IF_NOT_FLAG(LVar2, STATUS_FLAGS_IMMOBILIZED)
         EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
     EVT_END_IF
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, -2, 0, 0)
@@ -1702,7 +1702,7 @@ EvtScript EVS_Enemy_Death = {
     EVT_END
 };
 
-// in LVar2: if set to -12345, the actor will not spin around
+// in LVar2: if set to EXEC_DEATH_NO_SPINNING, the actor will not spin around
 EvtScript EVS_Enemy_DeathWithoutRemove = {
     EVT_CALL(func_8027D32C, ACTOR_SELF)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
@@ -1733,7 +1733,7 @@ EvtScript EVS_Enemy_DeathWithoutRemove = {
                 EVT_END_CASE_GROUP
                 EVT_CASE_DEFAULT
             EVT_END_SWITCH
-            EVT_IF_NE(LVar2, -12345) // special signal value
+            EVT_IF_NE(LVar2, EXEC_DEATH_NO_SPINNING) // special signal value
                 EVT_SET(LVar2, 0)
                 EVT_LOOP(24)
                     EVT_CALL(SetActorYaw, ACTOR_SELF, LVar2)

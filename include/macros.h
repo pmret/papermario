@@ -135,7 +135,7 @@
 #define SPRITE_WORLD_SCALE_F (5.0f/7.0f)
 #define SPRITE_WORLD_SCALE_D (5.0/7.0)
 
-#define SPRITE_ID(name, pal_anim) ((name) << 16 | (pal_anim))
+#define SPR_PAL_SIZE 16
 
 #define BATTLE_NPC_ID_BIT 0x800
 #define BATTLE_ENTITY_ID_BIT 0x800

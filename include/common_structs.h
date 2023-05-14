@@ -1661,17 +1661,17 @@ typedef struct DecorationUnk {
 #define MAX_ACTOR_DECORATIONS 2
 
 typedef struct DecorationTable {
-    /* 0x000 */ PAL_BIN copiedPalettes[2][27][16];
-    /* 0x6C0 */ s8 unk_6C0;
-    /* 0x6C1 */ s8 unk_6C1;
+    /* 0x000 */ PAL_BIN copiedPalettes[2][27][SPR_PAL_SIZE];
+    /* 0x6C0 */ s8 paletteAdjustment;
+    /* 0x6C1 */ b8 resetPalAdjust;
     /* 0x6C2 */ s8 unk_6C2;
     /* 0x6C3 */ char unk_6C3[5];
     /* 0x6C8 */ s16 unk_6C8;
     /* 0x6CA */ s16 unk_6CA;
     /* 0x6CC */ s8 spriteColorVariations;
-    /* 0x6CD */ s8 numSpritePalettes;
+    /* 0x6CD */ s8 originalPalettesCount;
     /* 0x6CE */ char unk_6CE[2];
-    /* 0x6D0 */ PAL_PTR* spritePalettes;
+    /* 0x6D0 */ PAL_PTR* originalPalettesList;
     /* 0x6D4 */ PAL_PTR unk_6D4[27];
     /* 0x740 */ s16 unk_740;
     /* 0x742 */ s16 unk_742;

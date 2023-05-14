@@ -529,7 +529,7 @@ EvtScript N(OnDeath) = {
                 EVT_END_CASE_GROUP
                 EVT_CASE_DEFAULT
             EVT_END_SWITCH
-            EVT_IF_NE(LVar2, -12345)
+            EVT_IF_NE(LVar2, EXEC_DEATH_NO_SPINNING)
                 EVT_SET(LVar2, 0)
                 EVT_LOOP(24)
                     EVT_CALL(SetActorYaw, ACTOR_SELF, LVar2)

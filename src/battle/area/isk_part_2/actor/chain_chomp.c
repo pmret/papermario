@@ -254,7 +254,7 @@ ActorBlueprint NAMESPACE = {
 
 #include "common/ChompChainUpdateHelperFunc2.inc.c"
 
-API_CALLABLE(b_area_isk_part_2_chain_chomp_ChompChainUpdate) {
+API_CALLABLE(N(ChompChainUpdate)) {
     Bytecode* args = script->ptrReadPos;
     f32 sp18;
     Actor* actor;
@@ -320,7 +320,7 @@ API_CALLABLE(b_area_isk_part_2_chain_chomp_ChompChainUpdate) {
         angle = atan2(ax, ay, animState->currentPos.x, animState->currentPos.y);
 
         if (animState->scale.z <= dist) {
-            b_area_isk_part_2_chain_chomp_ChompChainUpdateHelperFunc2(&sp18, dist - animState->scale.z, angle);
+            N(ChompChainUpdateHelperFunc2)(&sp18, dist - animState->scale.z, angle);
             animState->unk_18 += sp18 * 0.5;
         }
 
@@ -334,13 +334,13 @@ API_CALLABLE(b_area_isk_part_2_chain_chomp_ChompChainUpdate) {
                 animState->unk_1C += animState->unk_20;
                 t = animState->unk_1C;
             }
-            b_area_isk_part_2_chain_chomp_ChompChainUpdateHelperFunc(animState, t, angle);
+            N(ChompChainUpdateHelperFunc)(animState, t, angle);
         } else {
             animState->unk_1C -= animState->unk_20 * 0.2;
             if (animState->unk_1C < 0.0) {
                 animState->unk_1C = 0.0f;
             }
-            b_area_isk_part_2_chain_chomp_ChompChainUpdateHelperFunc(animState, animState->unk_1C, angle);
+            N(ChompChainUpdateHelperFunc)(animState, animState->unk_1C, angle);
         }
 
         if (animState->unk_1C > 4.0) {
@@ -765,7 +765,7 @@ EvtScript N(8021A200) = {
     EVT_SET_CONST(LVar0, 1)
     EVT_SET_CONST(LVar1, ANIM_ChainChomp_Anim01)
     EVT_EXEC_WAIT(N(8021B41C))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Anim01)
+    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Idle)
     EVT_RETURN
     EVT_END
 };

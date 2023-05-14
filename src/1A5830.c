@@ -525,7 +525,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
     }
 
     if (!(gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE)) {
-        func_80266E14(targetPart);
+        clear_part_pal_adjustment(targetPart);
     }
 
     if ((gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE)
@@ -3340,7 +3340,7 @@ ApiStatus EnableActorGlow(Evt* script, s32 isInitialCall) {
             }
             it = it->nextPart;
         }
-        func_80266EE8(actor, 0);
+        func_80266EE8(actor, UNK_PAL_EFFECT_0);
     }
 
     return ApiStatus_DONE2;

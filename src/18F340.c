@@ -138,7 +138,7 @@ API_CALLABLE(SetFledBattleFlag) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_80260DD8) {
+API_CALLABLE(DetermineAutoRunAwaySuccess) {
     Actor* player = gBattleStatus.playerActor;
     s32 var;
 
@@ -218,7 +218,7 @@ API_CALLABLE(GiveRefundCleanup) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_802610CC) {
+API_CALLABLE(LifeShroomShroudWorld) {
     if (isInitialCall) {
         mdl_set_all_fog_mode(FOG_MODE_1);
         *gBackgroundFogModePtr = FOG_MODE_1;
@@ -233,7 +233,7 @@ API_CALLABLE(func_802610CC) {
     return (script->functionTemp[0] == 0) * ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_80261164) {
+API_CALLABLE(LifeShroomRevealWorld) {
     if (isInitialCall) {
         script->functionTemp[0] = 20;
         btl_cam_unfreeze();
@@ -269,22 +269,26 @@ API_CALLABLE(RestorePreDefeatState) {
     PlayerData* playerData = &gPlayerData;
     BattleStatus* battleStatus = &gBattleStatus;
 
-    battleStatus->rushFlags = RUSH_FLAG_NONE;
     gBattleState = gDefeatedBattleState;
     gBattleSubState = gDefeatedBattleSubstate;
     battleStatus->flags1 |= BS_FLAGS1_8;
+
+    // clear rush flags to initialize
+    battleStatus->rushFlags = RUSH_FLAG_NONE;
     battleStatus->flags2 &= ~BS_FLAGS2_HAS_RUSH;
 
+    // set rush flags based on danger/peril status
     if (!(battleStatus->flags2 & BS_FLAGS2_PEACH_BATTLE)) {
-        if (playerData->curHP <= 1 && is_ability_active(ABILITY_MEGA_RUSH)) {
+        if (playerData->curHP <= PERIL_THRESHOLD && is_ability_active(ABILITY_MEGA_RUSH)) {
             gBattleStatus.flags2 |= BS_FLAGS2_HAS_RUSH;
             battleStatus->rushFlags |= RUSH_FLAG_MEGA;
         }
 
-        if (playerData->curHP <= 5 && is_ability_active(ABILITY_POWER_RUSH) &&
-            !(battleStatus->rushFlags & RUSH_FLAG_MEGA)) {
-            gBattleStatus.flags2 |= BS_FLAGS2_HAS_RUSH;
-            battleStatus->rushFlags |= RUSH_FLAG_POWER;
+        if (playerData->curHP <= DANGER_THRESHOLD && is_ability_active(ABILITY_POWER_RUSH)) {
+            if (!(battleStatus->rushFlags & RUSH_FLAG_MEGA)) {
+                gBattleStatus.flags2 |= BS_FLAGS2_HAS_RUSH;
+                battleStatus->rushFlags |= RUSH_FLAG_POWER;
+            }
         }
     }
     return ApiStatus_DONE2;
@@ -1088,7 +1092,7 @@ EvtScript EVS_RunAwayNoCommand = {
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_Mario1_Land)
     EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_CALL(func_80273444, 8, 0, 0)
-    EVT_CALL(func_80260DD8)
+    EVT_CALL(DetermineAutoRunAwaySuccess)
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(SetFledBattleFlag)
         EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_15E)
@@ -1202,7 +1206,7 @@ EvtScript EVS_RunAwayStart = {
     EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_CALL(func_80273444, 8, 0, 0)
     EVT_CALL(GetActionSuccess, LVar0)
-    EVT_CALL(func_80260DD8)
+    EVT_CALL(DetermineAutoRunAwaySuccess)
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(SetFledBattleFlag)
         EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_15E)
@@ -1442,7 +1446,7 @@ EvtScript EVS_UseLifeShroom = {
             EVT_CALL(SetPartAlpha, ACTOR_PARTNER, -1, 0)
         EVT_END_IF
     EVT_END_CHILD_THREAD
-    EVT_CALL(func_802610CC)
+    EVT_CALL(LifeShroomShroudWorld)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_CALL(MakeItemEntity, ITEM_LIFE_SHROOM, LVar0, LVar1, LVar2, 1, 0)
     EVT_SET(LVarA, LVar0)
@@ -1510,7 +1514,7 @@ EvtScript EVS_UseLifeShroom = {
     EVT_END_CHILD_THREAD
     EVT_WAIT(50)
     EVT_CHILD_THREAD
-        EVT_CALL(func_80261164)
+        EVT_CALL(LifeShroomRevealWorld)
     EVT_END_CHILD_THREAD
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_374)
     EVT_CALL(SetActorRotation, ACTOR_PLAYER, 0, 0, 0)

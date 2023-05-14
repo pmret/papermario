@@ -141,7 +141,7 @@ EvtScript N(explode) = {
     EVT_EXEC_WAIT(N(playExplosionEffects))
     EVT_SET_CONST(LVar0, 1)
     EVT_SET_CONST(LVar1, ANIM_BulletBill_Gold_Anim07)
-    EVT_SET(LVar2, -12345)
+    EVT_SET(LVar2, EXEC_DEATH_NO_SPINNING)
     EVT_EXEC_WAIT(EVS_Enemy_Death)
     EVT_RETURN
     EVT_END
@@ -281,7 +281,7 @@ EvtScript N(takeTurn) = {
     EVT_CALL(YieldTurn)
     EVT_SET_CONST(LVar0, 1)
     EVT_SET_CONST(LVar1, ANIM_BulletBill_Gold_Anim07)
-    EVT_SET(LVar2, -12345)
+    EVT_SET(LVar2, EXEC_DEATH_NO_SPINNING)
     EVT_EXEC_WAIT(EVS_Enemy_Death)
     EVT_RETURN
     EVT_END

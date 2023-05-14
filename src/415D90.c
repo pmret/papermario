@@ -418,7 +418,7 @@ BSS s32 D_802AD6D4;
 
 void create_battle_popup_menu(PopupMenu* popup);
 
-s32 func_80265D44(s32 animID);
+s32 get_player_anim_for_status(s32 animID);
 void func_802A3C98(void* data, s32 x, s32 y);
 void func_802A43DC(void* data, s32 x, s32 y);
 void func_802A4448(void* data, s32 x, s32 y);
@@ -2445,7 +2445,7 @@ void btl_state_update_player_menu(void) {
             if (battleStatus->hustleTurns != 0) {
                 set_animation(ACTOR_PLAYER, 0, ANIM_Mario1_ThinkingRun);
             } else {
-                set_animation(ACTOR_PLAYER, 0, func_80265D44(STATUS_THINKING));
+                set_animation(ACTOR_PLAYER, 0, get_player_anim_for_status(STATUS_THINKING));
             }
             submenuResult = btl_main_menu_update();
             if (D_802ACC6C != 0) {

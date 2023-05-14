@@ -139,7 +139,7 @@ EvtScript N(bombette_handleEvent) = {
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                 EVT_SET_CONST(LVar0, 1)
                 EVT_SET_CONST(LVar1, ANIM_BattleBombette_BurnStill)
-                EVT_SET(LVar2, -12345)
+                EVT_SET(LVar2, EXEC_DEATH_NO_SPINNING)
                 EVT_EXEC_WAIT(EVS_Enemy_Death)
                 EVT_RETURN
             EVT_END_IF
@@ -152,7 +152,7 @@ EvtScript N(bombette_handleEvent) = {
             EVT_EXEC_WAIT(N(OnDeath))
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleBombette_BurnStill)
-            EVT_SET(LVar2, -12345)
+            EVT_SET(LVar2, EXEC_DEATH_NO_SPINNING)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BURN_DEATH)
@@ -164,7 +164,7 @@ EvtScript N(bombette_handleEvent) = {
             EVT_EXEC_WAIT(N(OnDeath))
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleBombette_BurnStill)
-            EVT_SET(LVar2, -12345)
+            EVT_SET(LVar2, EXEC_DEATH_NO_SPINNING)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
@@ -190,7 +190,7 @@ EvtScript N(bombette_handleEvent) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleBombette_BurnStill)
-            EVT_SET(LVar2, -12345)
+            EVT_SET(LVar2, EXEC_DEATH_NO_SPINNING)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_END_CASE_GROUP

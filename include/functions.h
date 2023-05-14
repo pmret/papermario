@@ -562,7 +562,7 @@ void create_part_shadow_by_ref(s32 arg0, ActorPart* part);
 
 void spawn_drops(Enemy* enemy);
 
-void func_80266D6C(ActorPart*, s32);
+void set_part_pal_adjustment(ActorPart*, s32);
 char* int_to_string(s32, char*, s32);
 
 Evt* get_script_by_index(s32 index);
@@ -1040,7 +1040,7 @@ void func_80138188(void);
 void func_80266970(Actor*);
 void func_80266ADC(Actor*);
 void func_80266AF8(Actor*);
-void func_80266E14(ActorPart*);
+void clear_part_pal_adjustment(ActorPart*);
 void func_800E24F8(void);
 void load_tattle_flags(s32);
 s32 use_consumable(s32 invSlot);

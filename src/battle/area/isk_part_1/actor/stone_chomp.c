@@ -305,7 +305,7 @@ API_CALLABLE(b_area_isk_part_1_ChompChainUpdate) {
         angle = atan2(ax, ay, animState->currentPos.x, animState->currentPos.y);
 
         if (animState->scale.z <= dist) {
-            b_area_isk_part_1_stone_chomp_ChompChainUpdateHelperFunc2(&sp18, dist - animState->scale.z, angle);
+            N(ChompChainUpdateHelperFunc2)(&sp18, dist - animState->scale.z, angle);
             animState->unk_18 += sp18 * 0.5;
         }
 
@@ -318,13 +318,13 @@ API_CALLABLE(b_area_isk_part_1_ChompChainUpdate) {
                 animState->unk_1C += animState->unk_20;
                 t = animState->unk_1C;
             }
-            b_area_isk_part_1_stone_chomp_ChompChainUpdateHelperFunc(animState, t, angle);
+            N(ChompChainUpdateHelperFunc)(animState, t, angle);
         } else {
             animState->unk_1C -= animState->unk_20 * 0.2;
             if (animState->unk_1C < 0.0) {
                 animState->unk_1C = 0.0f;
             }
-            b_area_isk_part_1_stone_chomp_ChompChainUpdateHelperFunc(animState, animState->unk_1C, angle);
+            N(ChompChainUpdateHelperFunc)(animState, animState->unk_1C, angle);
         }
 
         if (animState->unk_1C > 4.0) {

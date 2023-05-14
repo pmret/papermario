@@ -142,7 +142,7 @@ EvtScript N(80219390) = {
     EVT_EXEC_WAIT(N(80219BE0))
     EVT_SET_CONST(LVar0, 1)
     EVT_SET_CONST(LVar1, ANIM_BulletBill_Anim07)
-    EVT_SET(LVar2, -12345)
+    EVT_SET(LVar2, EXEC_DEATH_NO_SPINNING)
     EVT_EXEC_WAIT(EVS_Enemy_Death)
     EVT_RETURN
     EVT_END
@@ -282,7 +282,7 @@ EvtScript N(takeTurn_802197C0) = {
     EVT_CALL(YieldTurn)
     EVT_SET_CONST(LVar0, 1)
     EVT_SET_CONST(LVar1, ANIM_BulletBill_Anim07)
-    EVT_SET(LVar2, -12345)
+    EVT_SET(LVar2, EXEC_DEATH_NO_SPINNING)
     EVT_EXEC_WAIT(EVS_Enemy_Death)
     EVT_RETURN
     EVT_END

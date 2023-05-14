@@ -50,7 +50,7 @@ EvtScript N(EVS_Scene_TutankoopaAppears) = {
     EVT_END_THREAD
     EVT_CALL(SetNpcImgFXParams, NPC_Tutankoopa_02, IMGFX_SET_ALPHA, 0, 0, 0, 0)
     EVT_CALL(SetNpcPos, NPC_Tutankoopa_02, 410, -905, 410)
-    EVT_CALL(SetNpcAnimation, NPC_Tutankoopa_02, ANIM_Tutankoopa_Anim10)
+    EVT_CALL(SetNpcAnimation, NPC_Tutankoopa_02, ANIM_Tutankoopa_HeaddressWithEyes)
     EVT_CALL(MakeLerp, 0, 255, 100 * DT, EASING_QUADRATIC_IN)
     EVT_LABEL(2)
     EVT_CALL(UpdateLerp)
@@ -105,7 +105,7 @@ EvtScript N(EVS_Scene_TutankoopaAppears) = {
         EVT_GOTO(1)
     EVT_END_IF
     EVT_CALL(SetNpcPos, NPC_Tutankoopa_01, 457, -800, 316)
-    EVT_CALL(SetNpcAnimation, NPC_Tutankoopa_01, ANIM_Tutankoopa_Anim01)
+    EVT_CALL(SetNpcAnimation, NPC_Tutankoopa_01, ANIM_Tutankoopa_Idle)
     EVT_THREAD
         EVT_WAIT(59)
         EVT_CALL(PlaySoundAtNpc, NPC_Tutankoopa_01, SOUND_3EF, SOUND_SPACE_MODE_0)
@@ -129,7 +129,7 @@ EvtScript N(EVS_Scene_TutankoopaAppears) = {
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(5.0 / DT))
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_CALL(SpeakToPlayer, NPC_Tutankoopa_01, ANIM_Tutankoopa_Anim0B, ANIM_Tutankoopa_Anim01, 0, MSG_CH2_00E3)
+    EVT_CALL(SpeakToPlayer, NPC_Tutankoopa_01, ANIM_Tutankoopa_Talk, ANIM_Tutankoopa_Idle, 0, MSG_CH2_00E3)
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
     EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0 / DT))
     EVT_CALL(DisablePlayerInput, FALSE)
@@ -155,7 +155,7 @@ EvtScript N(EVS_Scene_TutankoopaDefeated) = {
     EVT_THREAD
         EVT_CALL(ShowMessageAtScreenPos, MSG_CH2_00E8, 160, 40)
     EVT_END_THREAD
-    EVT_CALL(SetNpcAnimation, NPC_Tutankoopa_01, ANIM_Tutankoopa_Anim06)
+    EVT_CALL(SetNpcAnimation, NPC_Tutankoopa_01, ANIM_Tutankoopa_Hurt)
     EVT_CALL(SetNpcJumpscale, NPC_Tutankoopa_01, EVT_FLOAT(1.0))
     EVT_CALL(PlaySoundAtNpc, NPC_Tutankoopa_01, SOUND_20E3, SOUND_SPACE_MODE_0)
     EVT_CALL(NpcJump0, NPC_Tutankoopa_01, 442, -910, 393, 30 * DT)
@@ -164,7 +164,7 @@ EvtScript N(EVS_Scene_TutankoopaDefeated) = {
     EVT_CALL(PlaySoundAtNpc, NPC_Tutankoopa_01, SOUND_JUMP_3E2, SOUND_SPACE_MODE_0)
     EVT_CALL(NpcJump0, NPC_Tutankoopa_01, 395, -910, 440, 10 * DT)
     EVT_WAIT(20 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_Tutankoopa_01, ANIM_Tutankoopa_Anim01)
+    EVT_CALL(SetNpcAnimation, NPC_Tutankoopa_01, ANIM_Tutankoopa_Idle)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 410, -910, 410)
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 490, -910, 327)
     EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(200.0))
@@ -185,12 +185,12 @@ EvtScript N(EVS_Scene_TutankoopaDefeated) = {
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(EnableModel, MODEL_o2359, TRUE)
     EVT_CALL(NpcFaceNpc, NPC_Tutankoopa_01, NPC_ChainChomp, 0)
-    EVT_CALL(SetNpcAnimation, NPC_Tutankoopa_01, ANIM_Tutankoopa_Anim06)
+    EVT_CALL(SetNpcAnimation, NPC_Tutankoopa_01, ANIM_Tutankoopa_Hurt)
     EVT_CALL(GetNpcPos, NPC_Tutankoopa_01, LVar0, LVar1, LVar2)
     EVT_CALL(PlaySoundAtNpc, NPC_Tutankoopa_01, SOUND_JUMP_3E2, SOUND_SPACE_MODE_0)
     EVT_CALL(NpcJump0, NPC_Tutankoopa_01, LVar0, LVar1, LVar2, 20 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_Tutankoopa_01, ANIM_Tutankoopa_Anim01)
-    EVT_CALL(SpeakToPlayer, NPC_Tutankoopa_01, ANIM_Tutankoopa_Anim0B, ANIM_Tutankoopa_Anim01, 5, MSG_CH2_00E9)
+    EVT_CALL(SetNpcAnimation, NPC_Tutankoopa_01, ANIM_Tutankoopa_Idle)
+    EVT_CALL(SpeakToPlayer, NPC_Tutankoopa_01, ANIM_Tutankoopa_Talk, ANIM_Tutankoopa_Idle, 5, MSG_CH2_00E9)
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
     EVT_THREAD
         EVT_CALL(SetNpcAnimation, NPC_ChainChomp, ANIM_ChainChomp_Anim03)
@@ -219,7 +219,7 @@ EvtScript N(EVS_Scene_TutankoopaDefeated) = {
     EVT_END_LOOP
     EVT_CALL(SetSelfVar, 1, 1)
     EVT_THREAD
-        EVT_CALL(SetNpcAnimation, NPC_Tutankoopa_01, ANIM_Tutankoopa_Anim02)
+        EVT_CALL(SetNpcAnimation, NPC_Tutankoopa_01, ANIM_Tutankoopa_Run)
         EVT_CALL(SetNpcSpeed, NPC_Tutankoopa_01, EVT_FLOAT(8.0 / DT))
         EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_LookAround)
         EVT_LOOP(2)
