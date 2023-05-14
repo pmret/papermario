@@ -383,13 +383,13 @@ class Configure:
     def map_path(self) -> Path:
         return self.elf_path().with_suffix(".map")
 
-    def resolve_src_paths(self, src_paths: List[Path]) -> List[str]:
+    def resolve_src_paths(self, src_paths: List[Path], glob_deps: bool = True) -> List[str]:
         out = []
 
         for path in src_paths:
             path = self.resolve_asset_path(path)
 
-            if path.is_dir():
+            if glob_deps and path.is_dir():
                 out.extend(glob(str(path) + "/**/*", recursive=True))
             else:
                 out.append(str(path))
@@ -432,6 +432,7 @@ class Configure:
             task: str,
             variables: Dict[str, str] = {},
             implicit_outputs: List[str] = [],
+            glob_deps: bool = True
         ):
             if not isinstance(object_paths, list):
                 object_paths = [object_paths]
@@ -467,7 +468,7 @@ class Configure:
                 ninja.build(
                     outputs=object_strs,  # $out
                     rule=task,
-                    inputs=self.resolve_src_paths(src_paths),  # $in
+                    inputs=self.resolve_src_paths(src_paths, glob_deps),  # $in
                     implicit=implicit,
                     order_only=order_only,
                     variables={"version": self.version, **variables},
@@ -706,11 +707,7 @@ class Configure:
                     build(bin_path, [sprite_dir], "sprite", variables=variables)
                     build(yay0_path, [bin_path], "yay0")
                     build(
-                        self.build_path()
-                        / "include"
-                        / seg.dir
-                        / seg.name
-                        / (sprite_name + ".h"),
+                        self.build_path() / "include/sprite/npc" / (sprite_name + ".h"),
                         [sprite_dir],
                         "sprite_header",
                         variables=variables,
@@ -723,7 +720,13 @@ class Configure:
                 )
                 build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
             elif seg.type == "pm_player_sprites":
-                build(entry.object_path.with_suffix(".bin"), [], "player_sprites")
+                build(
+                    entry.object_path.with_suffix(".bin"),
+                    entry.src_paths,
+                    "player_sprites",
+                    glob_deps=False,
+                )
+                build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
             elif seg.type == "pm_msg":
                 msg_bins = []
 

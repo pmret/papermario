@@ -3,6 +3,8 @@ from pathlib import Path
 import sys
 from typing import List
 
+sys.path.append(str(Path(__file__).parent.parent.parent))
+sys.path.append(str(Path(__file__).parent.parent.parent / "splat"))
 from splat_ext.pm_player_sprites import (
     BACK_PALETTE_XML,
     LIST_END_BYTES,
@@ -12,6 +14,7 @@ from splat_ext.pm_player_sprites import (
     PlayerRaster,
     RasterTableEntry,
 )
+from splat_ext.sprite_common import AnimComponent
 
 import os
 import png
@@ -20,11 +23,12 @@ import subprocess
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass
 from typing import Dict, List, Tuple
-from splat_ext.sprite_common import AnimComponent
 
 from sprite import iter_in_groups
 
-TOOLS_DIR = Path(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+TOOLS_DIR = Path(
+    os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+)
 sys.path.append(str(TOOLS_DIR))
 
 
@@ -174,7 +178,7 @@ def xml_to_bytes(xml: ET.Element, xml_dir: Path) -> List[bytes]:
     for raster_xml in xml[1]:
         if "back" in raster_xml.attrib:
             has_back = True
-        r = PlayerRaster.from_xml(raster_xml, back=False)
+        r = PlayerRaster.from_xml(xml_dir, raster_xml, back=False)
         raster_bytes += struct.pack(
             ">IBBBB", raster_offset, r.width, r.height, r.palette_idx, 0xFF
         )
@@ -186,7 +190,7 @@ def xml_to_bytes(xml: ET.Element, xml_dir: Path) -> List[bytes]:
         for raster_xml in xml[1]:
             is_back = False
 
-            r = PlayerRaster.from_xml(raster_xml, back=is_back)
+            r = PlayerRaster.from_xml(xml_dir, raster_xml, back=is_back)
             if "back" in raster_xml.attrib:
                 is_back = True
                 width = r.width
@@ -449,7 +453,7 @@ def build(player_sprite_dir: Path, out_binary: Path) -> None:
         + compressed_sprite_bytes
     )
 
-    with open("built/player.bin", "wb") as f:
+    with open(out_binary, "wb") as f:
         f.write(final_data)
 
 
@@ -459,3 +463,4 @@ if __name__ == "__main__":
         exit(1)
 
     _, outfile, sprite_dir = sys.argv
+    build(Path(sprite_dir), Path(outfile))

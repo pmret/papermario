@@ -84,7 +84,6 @@ PAL_TO_RASTER: Dict[str, int] = {
 }
 
 
-PLAYER_OUT_PATH = options.opts.asset_path / "sprite/player"
 SPECIAL_RASTER = 0x1F880
 
 MAX_COMPONENTS_XML = "maxComponents"
@@ -174,7 +173,7 @@ class PlayerRaster:
         return PlayerRaster(offset, width, height, default_palette, is_special)
 
     @staticmethod
-    def from_xml(xml: ET.Element, back: bool = False) -> "PlayerRaster":
+    def from_xml(out_path: Path, xml: ET.Element, back: bool = False) -> "PlayerRaster":
         palette = int(xml.attrib[PALETTE_XML], 16)
         is_special = "special" in xml.attrib
 
@@ -184,7 +183,7 @@ class PlayerRaster:
             img_name = xml.attrib["src"]
 
         # TODO cache images
-        with open(PLAYER_OUT_PATH / "rasters" / img_name, "rb") as f:
+        with open(out_path / "rasters" / img_name, "rb") as f:
             img = png.Reader(f)
             img.read()
 
@@ -311,6 +310,7 @@ def extract_sprites(
 
 
 def write_player_orderings(
+    out_path: Path,
     cfg: Any,
     raster_names: List[str],
 ) -> None:
@@ -338,10 +338,11 @@ def write_player_orderings(
     if hasattr(ET, "indent"):
         ET.indent(xml, "    ")
 
-    xml.write(str(PLAYER_OUT_PATH / f"player_sprite_names.xml"), encoding="unicode")
+    xml.write(str(out_path / f"player_sprite_names.xml"), encoding="unicode")
 
 
 def write_player_xmls(
+    out_path: Path,
     cfg: Any,
     sprites: List[PlayerSprite],
     sprite_names: List[str],
@@ -465,7 +466,7 @@ def write_player_xmls(
         if hasattr(ET, "indent"):
             ET.indent(xml, "    ")
 
-        xml.write(str(PLAYER_OUT_PATH / f"{cur_sprite_name}.xml"), encoding="unicode")
+        xml.write(str(out_path / f"{cur_sprite_name}.xml"), encoding="unicode")
 
         if has_back:
             sprite_idx += 2
@@ -474,11 +475,12 @@ def write_player_xmls(
 
 
 def write_player_rasters(
+    out_path: Path,
     raster_table_entry_dict: Dict[int, RasterTableEntry],
     raster_data: bytes,
     raster_names: List[str],
 ) -> None:
-    base_path = PLAYER_OUT_PATH / "rasters"
+    base_path = out_path / "rasters"
     base_path.mkdir(parents=True, exist_ok=True)
 
     for i, (offset, rte) in enumerate(raster_table_entry_dict.items()):
@@ -497,6 +499,7 @@ def write_player_rasters(
 
 
 def write_player_palettes(
+    out_path: Path,
     cfg: Any,
     sprites: List[PlayerSprite],
     sprite_names: List[str],
@@ -507,7 +510,7 @@ def write_player_palettes(
 
     for i, sprite in enumerate(sprites):
         sprite_name = sprite_names[i]
-        path = PLAYER_OUT_PATH / "palettes"
+        path = out_path / "palettes"
         path.mkdir(parents=True, exist_ok=True)
 
         for i, palette in enumerate(sprite.palettes):
@@ -538,6 +541,9 @@ class N64SegPm_player_sprites(N64Segment):
 
         with (Path(__file__).parent / f"player_sprite_names.yaml").open("r") as f:
             self.player_cfg = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
+
+    def out_path(self):
+        return options.opts.asset_path / "sprite/player"
 
     def split(self, rom_bytes) -> None:
         player_sprite_cfg = self.player_cfg["player_sprites"]
@@ -590,12 +596,17 @@ class N64SegPm_player_sprites(N64Segment):
         # Writing
         #########
 
-        PLAYER_OUT_PATH.mkdir(parents=True, exist_ok=True)
+        self.out_path().mkdir(parents=True, exist_ok=True)
         # Write build info (date)
-        with open(PLAYER_OUT_PATH / "build_info.txt", "w") as f:
+        with open(self.out_path() / "build_info.txt", "w") as f:
             f.write(build_date)
-        write_player_orderings(player_sprite_cfg, player_raster_names)
+        write_player_orderings(
+            self.out_path(),
+            player_sprite_cfg,
+            player_raster_names,
+        )
         write_player_xmls(
+            self.out_path(),
             player_sprite_cfg,
             player_sprites,
             player_sprite_names,
@@ -604,9 +615,13 @@ class N64SegPm_player_sprites(N64Segment):
             player_raster_names,
         )
         write_player_rasters(
-            raster_table_entry_dict, player_sprite_raster_data, player_raster_names
+            self.out_path(),
+            raster_table_entry_dict,
+            player_sprite_raster_data,
+            player_raster_names,
         )
         write_player_palettes(
+            self.out_path(),
             player_sprite_cfg,
             player_sprites,
             player_sprite_names,
@@ -617,10 +632,11 @@ class N64SegPm_player_sprites(N64Segment):
     def get_linker_entries(self):
         from segtypes.linker_entry import LinkerEntry
 
-        out_paths = [options.opts.asset_path / "sprite" / "player" / "gloob2"]
+        # TODO collect
+        src_paths = [options.opts.asset_path / "sprite" / "player"]
 
         return [
-            LinkerEntry(self, out_paths, PLAYER_OUT_PATH / "player_sprites", ".data")
+            LinkerEntry(self, src_paths, self.out_path() / "player_sprites", ".data")
         ]
 
     def cache(self):

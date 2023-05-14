@@ -350,11 +350,11 @@ class N64SegPm_npc_sprites(N64Segment):
     def get_linker_entries(self):
         from segtypes.linker_entry import LinkerEntry
 
-        basepath = options.opts.asset_path / "sprite" / f"{self.name}"
+        basepath = options.opts.asset_path / "sprite" / "npc"
         out_paths = [
             options.opts.asset_path
             / "sprite"
-            / self.name
+            / "npc"
             / (f["name"] if type(f) is dict else f)
             for f in self.files
         ]
