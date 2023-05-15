@@ -67,7 +67,7 @@ ActorPartBlueprint N(parts)[] = {
 };
 
 ActorBlueprint NAMESPACE = {
-    .flags = ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_TARGET_ONLY | ACTOR_FLAG_HIDE_HP_BAR | ACTOR_FLAG_NO_ATTACK,
+    .flags = ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_TARGET_ONLY | ACTOR_FLAG_NO_HEALTH_BAR | ACTOR_FLAG_NO_ATTACK,
     .type = ACTOR_TYPE_GULPIT_ROCKS,
     .level = 0,
     .maxHP = 1,
@@ -84,9 +84,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 100,
     .coinReward = 0,
     .size = { 32, 18 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 EvtScript N(init) = {

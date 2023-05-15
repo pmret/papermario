@@ -2,14 +2,14 @@
 #include "npc.h"
 #include "../../partners.h"
 
-API_CALLABLE(N(ToadHouse_DisableStatusMenu)) {
-    status_menu_ignore_changes();
+API_CALLABLE(N(ToadHouse_DisableStatusBar)) {
+    status_bar_ignore_changes();
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(ToadHouse_ShowStatusMenu)) {
-    status_menu_respond_to_changes();
-    sync_status_menu();
+API_CALLABLE(N(ToadHouse_ShowWorldStatusBar)) {
+    status_bar_respond_to_changes();
+    sync_status_bar();
     return ApiStatus_DONE2;
 }
 

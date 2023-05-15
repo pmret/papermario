@@ -103,9 +103,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 65,
     .coinReward = 0,
     .size = { 80, 82 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -40, 67 },
-    .statusMessageOffset = { 10, 60 },
+    .statusTextOffset = { 10, 60 },
 };
 
 EvtScript N(init) = {
@@ -524,14 +524,14 @@ EvtScript N(attackShockwaveDrain) = {
             EVT_WAIT(30)
             EVT_RETURN
         EVT_CASE_EQ(HIT_RESULT_LUCKY)
-            EVT_CALL(func_8026BF48, 1)
+            EVT_CALL(FreezeBattleState, TRUE)
             EVT_THREAD
                 EVT_WAIT(2)
                 EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
                 EVT_CALL(SetGoalToTarget, ACTOR_SELF)
                 EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
                 EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_COSMIC, 0, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
-                EVT_CALL(func_8026BF48, 0)
+                EVT_CALL(FreezeBattleState, FALSE)
             EVT_END_THREAD
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBowser_Idle)
             EVT_WAIT(15)
@@ -543,14 +543,14 @@ EvtScript N(attackShockwaveDrain) = {
             EVT_RETURN
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
-    EVT_CALL(func_8026BF48, 1)
+    EVT_CALL(FreezeBattleState, TRUE)
     EVT_THREAD
         EVT_WAIT(2)
         EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
         EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
         EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_COSMIC, 0, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
-        EVT_CALL(func_8026BF48, 0)
+        EVT_CALL(FreezeBattleState, FALSE)
     EVT_END_THREAD
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_COSMIC, 0, STATUS_FLAG_POISON, 4, BS_FLAGS1_SP_EVT_ACTIVE)

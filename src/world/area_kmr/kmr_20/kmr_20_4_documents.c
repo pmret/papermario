@@ -192,8 +192,8 @@ API_CALLABLE(N(ReadLetters)){
             menu->numEntries = numEntries;
             menu->initialPos = script->functionTemp[3];
             create_standard_popup_menu(menu);
-            status_menu_respond_to_changes();
-            close_status_menu();
+            status_bar_respond_to_changes();
+            close_status_bar();
             script->functionTemp[1] = 0;
             script->functionTemp[0] = 1;
             break;
@@ -373,8 +373,8 @@ API_CALLABLE(N(ReadDiary)){
             menu->numEntries = numEntries;
             menu->initialPos = script->functionTemp[3];
             create_standard_popup_menu(menu);
-            status_menu_respond_to_changes();
-            close_status_menu();
+            status_bar_respond_to_changes();
+            close_status_bar();
             script->functionTemp[1] = 0;
             script->functionTemp[0] = 1;
             break;

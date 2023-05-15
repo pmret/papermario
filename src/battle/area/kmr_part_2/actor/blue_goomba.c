@@ -76,9 +76,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 80,
     .coinReward = 0,
     .size = { 32, 32 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 8, 25 },
+    .statusTextOffset = { 8, 25 },
 };
 
 s32 N(IdleAnimations_802199B4)[] = {
@@ -122,7 +122,7 @@ EvtScript N(idle_80219A98) = {
     EVT_LOOP(LVar0)
         EVT_LABEL(0)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar1)
-        EVT_IF_FLAG(LVar1, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+        EVT_IF_FLAG(LVar1, STATUS_FLAGS_IMMOBILIZED)
             EVT_WAIT(1)
             EVT_GOTO(0)
         EVT_END_IF
@@ -138,7 +138,7 @@ EvtScript N(idle_80219A98) = {
     EVT_LOOP(20)
         EVT_LABEL(1)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar1)
-        EVT_IF_FLAG(LVar1, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+        EVT_IF_FLAG(LVar1, STATUS_FLAGS_IMMOBILIZED)
             EVT_WAIT(1)
             EVT_GOTO(1)
         EVT_END_IF
@@ -154,7 +154,7 @@ EvtScript N(idle_80219A98) = {
     EVT_LOOP(80)
         EVT_LABEL(2)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar1)
-        EVT_IF_FLAG(LVar1, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+        EVT_IF_FLAG(LVar1, STATUS_FLAGS_IMMOBILIZED)
             EVT_WAIT(1)
             EVT_GOTO(2)
         EVT_END_IF
@@ -481,7 +481,7 @@ EvtScript N(takeTurn_8021B2C8) = {
 };
 
 EvtScript N(doDeath_8021B388) = {
-    EVT_CALL(func_8027D32C, ACTOR_SELF)
+    EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_SET(LVar2, 0)
     EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)

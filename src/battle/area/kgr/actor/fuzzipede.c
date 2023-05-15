@@ -115,12 +115,12 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 75,
     .coinReward = 0,
     .size = { 26, 38 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
-#include "common/UnkBattleFunc1.inc.c"
+#include "common/battle/SetAbsoluteStatusOffsets.inc.c"
 
 EvtScript N(init_80218B70) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021C1A4)))
@@ -182,7 +182,7 @@ EvtScript N(80218D68) = {
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING | ACTOR_FLAG_UPSIDE_DOWN, FALSE)
     EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 2, 24)
     EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -2, -10)
-    EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
+    EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 20)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, ACTOR_PART_FLAG_MULTI_TARGET, FALSE)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, ACTOR_PART_FLAG_NO_TARGET, TRUE)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_MULTI_TARGET, TRUE)
@@ -207,7 +207,7 @@ EvtScript N(80218FC8) = {
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING | ACTOR_FLAG_UPSIDE_DOWN, FALSE)
     EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 2, 24)
     EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -2, -10)
-    EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
+    EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 20)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, ACTOR_PART_FLAG_MULTI_TARGET, TRUE)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, ACTOR_PART_FLAG_NO_TARGET, FALSE)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_MULTI_TARGET, FALSE)
@@ -265,7 +265,7 @@ EvtScript N(802191AC) = {
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, TRUE)
     EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 2, 24)
     EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 2, 8)
-    EVT_CALL(N(UnkBattleFunc1), -10, -25, 10, -30)
+    EVT_CALL(N(SetAbsoluteStatusOffsets), -10, -25, 10, -30)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, ACTOR_PART_FLAG_MULTI_TARGET, TRUE)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, ACTOR_PART_FLAG_NO_TARGET, FALSE)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_MULTI_TARGET, FALSE)
@@ -276,7 +276,7 @@ EvtScript N(802191AC) = {
 };
 
 EvtScript N(80219668) = {
-    EVT_CALL(func_8027D32C, ACTOR_SELF)
+    EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
@@ -405,16 +405,16 @@ EvtScript N(80219D68) = {
     EVT_IF_LE(LVar0, 0)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(func_8027D32C, ACTOR_SELF)
+    EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_EXEC_WAIT(N(8021A2E8))
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_802189B0)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_802197FC)))
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING | ACTOR_FLAG_UPSIDE_DOWN, FALSE)
     EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 2, 24)
     EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -2, -10)
-    EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
+    EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 20)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
-    EVT_IF_FLAG(LVarA, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+    EVT_IF_FLAG(LVarA, STATUS_FLAGS_IMMOBILIZED)
         EVT_CALL(SetActorVar, ACTOR_SELF, 0, 3)
         EVT_CALL(HPBarToCurrent, ACTOR_SELF)
     EVT_ELSE
@@ -928,9 +928,9 @@ EvtScript N(8021C004) = {
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_25C)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(func_8026BF48, 1)
+        EVT_CALL(FreezeBattleState, TRUE)
         EVT_CALL(HealActor, ACTOR_SELF, 4, FALSE)
-        EVT_CALL(func_8026BF48, 0)
+        EVT_CALL(FreezeBattleState, FALSE)
     EVT_END_THREAD
     EVT_CALL(WaitForBuffDone)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)

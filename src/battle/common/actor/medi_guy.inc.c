@@ -9,7 +9,7 @@ extern EvtScript N(takeTurn);
 extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
 
-#include "common/UnkBattleFunc1.inc.c"
+#include "common/battle/SetAbsoluteStatusOffsets.inc.c"
 
 #include "common/MediGuySpriteRotationFunc.inc.c"
 
@@ -90,9 +90,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 90,
     .coinReward = 2,
     .size = { 24, 40 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 12, 31 },
+    .statusTextOffset = { 12, 31 },
 };
 
 EvtScript N(init) = {
@@ -113,11 +113,11 @@ EvtScript N(idle) = {
     EVT_IF_FLAG(LVar0, STATUS_FLAG_SLEEP)
         EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -2, 24)
         EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -5)
-        EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
+        EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 20)
     EVT_ELSE
         EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -2, 38)
         EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -5)
-        EVT_CALL(N(UnkBattleFunc1), -10, 20, 12, 31)
+        EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 12, 31)
     EVT_END_IF
     EVT_WAIT(1)
     EVT_GOTO(0)
@@ -385,9 +385,9 @@ EvtScript N(healOneAlly) = {
         EVT_CALL(PlaySoundAtActor, LVarA, SOUND_25C)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(func_8026BF48, 1)
+        EVT_CALL(FreezeBattleState, TRUE)
         EVT_CALL(HealActor, LVarA, LVar4, FALSE)
-        EVT_CALL(func_8026BF48, 0)
+        EVT_CALL(FreezeBattleState, FALSE)
     EVT_END_THREAD
     EVT_CALL(WaitForBuffDone)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)

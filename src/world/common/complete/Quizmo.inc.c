@@ -248,7 +248,7 @@ API_CALLABLE(N(Quizmo_HideWorld)) {
             ItemEntity* itemEntity = get_item_entity(i);
 
             if (itemEntity != NULL && itemEntity->flags & ITEM_ENTITY_FLAG_10) {
-                itemEntity->flags |= ITEM_ENTITY_FLAG_8000000;
+                itemEntity->flags |= ITEM_ENTITY_FLAG_HIDING;
             }
         }
 
@@ -302,7 +302,7 @@ API_CALLABLE(N(Quizmo_FadeInWorld)) {
         for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
             ItemEntity* entity = get_item_entity(i);
             if (entity != NULL && entity->flags & ITEM_ENTITY_FLAG_10) {
-                entity->flags &= ~ITEM_ENTITY_FLAG_8000000;
+                entity->flags &= ~ITEM_ENTITY_FLAG_HIDING;
             }
         }
 

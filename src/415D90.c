@@ -1309,17 +1309,17 @@ s32 btl_submenu_moves_update(void) {
             }
             set_window_update(WINDOW_ID_8, WINDOW_UPDATE_HIDE);
             if (!BattleMenu_UsingSpiritsSubmenu) {
-                status_menu_stop_blinking_fp();
+                status_bar_stop_blinking_fp();
             } else {
-                status_menu_stop_blinking_sp();
+                status_bar_stop_blinking_sp();
             }
             battle_menu_moveOptionActive = battle_menu_moveCursorPos;
             return BattleMenu_Moves_OptionIndexMap[battle_menu_moveCursorPos] + 1;
         case BTL_SUBMENU_MOVES_STATE_UNK_NEGATIVE_TWO:
             if (!BattleMenu_UsingSpiritsSubmenu) {
-                status_menu_stop_blinking_fp();
+                status_bar_stop_blinking_fp();
             } else {
-                status_menu_stop_blinking_sp();
+                status_bar_stop_blinking_sp();
             }
             return 255;
         case BTL_SUBMENU_MOVES_STATE_UNK_A:
@@ -1333,9 +1333,9 @@ s32 btl_submenu_moves_update(void) {
             }
             set_window_update(WINDOW_ID_8, WINDOW_UPDATE_HIDE);
             if (!BattleMenu_UsingSpiritsSubmenu) {
-                status_menu_stop_blinking_fp();
+                status_bar_stop_blinking_fp();
             } else {
-                status_menu_stop_blinking_sp();
+                status_bar_stop_blinking_sp();
             }
             battle_menu_moveState = BTL_SUBMENU_MOVES_STATE_UNK_B;
             battle_menu_moveOptionActive = battle_menu_moveCursorPos;
@@ -1504,18 +1504,18 @@ void func_802A3C98(void* data, s32 x, s32 y) {
                     if (!BattleMenu_UsingSpiritsSubmenu ) {
                         if (i == battle_menu_moveCursorPos) {
                             if (num == 0 || BattleMenu_Moves_OptionEnabled[BattleMenu_Moves_OptionIndexMap[idx]] <= 0) {
-                                status_menu_stop_blinking_fp();
+                                status_bar_stop_blinking_fp();
                             } else {
-                                status_menu_start_blinking_fp();
+                                status_bar_start_blinking_fp();
                             }
                         }
                     } else {
                         if (i == battle_menu_moveCursorPos) {
                             if (num == 0 || BattleMenu_Moves_OptionEnabled[BattleMenu_Moves_OptionIndexMap[idx]] <= 0) {
-                                status_menu_stop_blinking_sp();
+                                status_bar_stop_blinking_sp();
                             } else {
                                 a0 = battle_menu_moveOptionDisplayCosts[BattleMenu_Moves_OptionIndexMap[idx]];
-                                status_menu_start_blinking_sp_bars(
+                                status_bar_start_blinking_sp_bars(
                                     battle_menu_moveOptionDisplayCosts[BattleMenu_Moves_OptionIndexMap[idx]]
                                 );
                             }
@@ -1620,9 +1620,9 @@ void func_802A3C98(void* data, s32 x, s32 y) {
 
             if (battle_menu_moveState == -1) {
                 if (!BattleMenu_UsingSpiritsSubmenu) {
-                    status_menu_stop_blinking_fp();
+                    status_bar_stop_blinking_fp();
                 } else {
-                    status_menu_stop_blinking_sp();
+                    status_bar_stop_blinking_sp();
                 }
             }
             break;

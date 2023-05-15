@@ -253,9 +253,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 80,
     .coinReward = 0,
     .size = { 30, 75 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -15, 75 },
-    .statusMessageOffset = { 10, 65 },
+    .statusTextOffset = { 10, 65 },
 };
 
 s32 N(IdleAnimations)[] = {
@@ -975,7 +975,7 @@ EvtScript N(fall_apart) = {
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 3, ACTOR_PART_FLAG_NO_TARGET, FALSE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 3, ACTOR_PART_FLAG_MULTI_TARGET, TRUE)
             EVT_CALL(SetActorSize, ACTOR_SELF, 62, EVT_IGNORE_ARG)
-            EVT_CALL(func_8026DA94, ACTOR_SELF, 0, -20, 0, -20)
+            EVT_CALL(SetActorStatusOffsets, ACTOR_SELF, 0, -20, 0, -20)
             EVT_CALL(SetPartSize, ACTOR_SELF, 1, 57, 30)
         EVT_CASE_EQ(1)
             EVT_CALL(SetActorVar, ACTOR_SELF, 8, 2)
@@ -991,7 +991,7 @@ EvtScript N(fall_apart) = {
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 4, ACTOR_PART_FLAG_NO_TARGET, FALSE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 4, ACTOR_PART_FLAG_MULTI_TARGET, TRUE)
             EVT_CALL(SetActorSize, ACTOR_SELF, 44, EVT_IGNORE_ARG)
-            EVT_CALL(func_8026DA94, ACTOR_SELF, 0, -40, 0, -40)
+            EVT_CALL(SetActorStatusOffsets, ACTOR_SELF, 0, -40, 0, -40)
             EVT_CALL(SetPartSize, ACTOR_SELF, 1, 39, 30)
         EVT_CASE_EQ(2)
             EVT_CALL(SetActorVar, ACTOR_SELF, 8, 3)
@@ -1007,7 +1007,7 @@ EvtScript N(fall_apart) = {
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 5, ACTOR_PART_FLAG_NO_TARGET, FALSE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, 5, ACTOR_PART_FLAG_MULTI_TARGET, TRUE)
             EVT_CALL(SetActorSize, ACTOR_SELF, 26, EVT_IGNORE_ARG)
-            EVT_CALL(func_8026DA94, ACTOR_SELF, 0, -60, 0, -60)
+            EVT_CALL(SetActorStatusOffsets, ACTOR_SELF, 0, -60, 0, -60)
             EVT_CALL(SetPartSize, ACTOR_SELF, 1, 21, 30)
     EVT_END_SWITCH
     EVT_RETURN
@@ -1439,7 +1439,7 @@ EvtScript N(onDeath) = {
     EVT_ADD(LVar0, 1)
     EVT_CALL(SetActorVar, ACTOR_ENEMY1, 3, LVar0)
     EVT_IF_GE(LVar0, 2)
-        EVT_CALL(func_8026BF48, 1)
+        EVT_CALL(FreezeBattleState, TRUE)
     EVT_END_IF
     EVT_CALL(RemoveActor, ACTOR_SELF)
     EVT_RETURN
@@ -1447,7 +1447,7 @@ EvtScript N(onDeath) = {
 };
 
 EvtScript N(onSpinSmashLaunchDeath) = {
-    EVT_CALL(func_8027D32C, ACTOR_SELF)
+    EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
     EVT_SET(LVar2, 0)
@@ -1475,7 +1475,7 @@ EvtScript N(onSpinSmashLaunchDeath) = {
     EVT_ADD(LVar0, 1)
     EVT_CALL(SetActorVar, ACTOR_ENEMY1, 3, LVar0)
     EVT_IF_GE(LVar0, 2)
-        EVT_CALL(func_8026BF48, 1)
+        EVT_CALL(FreezeBattleState, TRUE)
     EVT_END_IF
     EVT_CALL(RemoveActor, ACTOR_SELF)
     EVT_RETURN

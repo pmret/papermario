@@ -87,9 +87,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 95,
     .coinReward = 1,
     .size = { 40, 35 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -18, 23 },
-    .statusMessageOffset = { 1, 20 },
+    .statusTextOffset = { 1, 20 },
 };
 
 EvtScript N(init_8021DA98) = {
@@ -100,7 +100,7 @@ EvtScript N(init_8021DA98) = {
     EVT_END
 };
 
-#include "common/UnkBattleFunc1.inc.c"
+#include "common/battle/SetAbsoluteStatusOffsets.inc.c"
 
 EvtScript N(idle_8021DAE4) = {
     EVT_LABEL(0)
@@ -109,11 +109,11 @@ EvtScript N(idle_8021DAE4) = {
         EVT_CASE_FLAG(STATUS_FLAG_SLEEP)
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -6, 14)
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -2, -5)
-            EVT_CALL(N(UnkBattleFunc1), -20, 8, 0, 14)
+            EVT_CALL(N(SetAbsoluteStatusOffsets), -20, 8, 0, 14)
         EVT_CASE_DEFAULT
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -10, 24)
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -8, -5)
-            EVT_CALL(N(UnkBattleFunc1), -18, 23, 1, 20)
+            EVT_CALL(N(SetAbsoluteStatusOffsets), -18, 23, 1, 20)
     EVT_END_SWITCH
     EVT_WAIT(1)
     EVT_GOTO(0)
@@ -230,7 +230,7 @@ EvtScript N(handleEvent_8021DCF4) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_HurtPlant_Anim04)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
             EVT_WAIT(20)
-            EVT_CALL(func_8027D32C, ACTOR_SELF)
+            EVT_CALL(HideHealthBar, ACTOR_SELF)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
             EVT_CALL(RemoveActor, ACTOR_SELF)
             EVT_RETURN

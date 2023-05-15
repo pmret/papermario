@@ -98,9 +98,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 80,
     .coinReward = 0,
     .size = { 32, 32 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -15, 30 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 EvtScript N(80224510) = {
@@ -116,7 +116,7 @@ EvtScript N(80224510) = {
 };
 
 EvtScript N(802245A8) = {
-    EVT_CALL(func_802535B4, 1)
+    EVT_CALL(EnableBattleStatusBar, TRUE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 12)
     EVT_RETURN
@@ -140,7 +140,7 @@ s32 N(IdleAnimations_8022464C)[] = {
 
 EvtScript N(80224658) = {
     EVT_SET(LVarA, LVar0)
-    EVT_CALL(func_8027D32C, ACTOR_SELF)
+    EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, LVarA, LVar1)
     EVT_WAIT(10)

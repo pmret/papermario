@@ -150,9 +150,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 60,
     .coinReward = 0,
     .size = { 123, 119 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -53, 103 },
-    .statusMessageOffset = { 33, 92 },
+    .statusTextOffset = { 33, 92 },
 };
 
 #define BOWSER_LARGE
@@ -271,7 +271,7 @@ EvtScript N(nextTurn) = {
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_TURN_COUNTER), LVar0)
             EVT_IF_EQ(LVar0, 0)
                 EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-                EVT_CALL(func_802535B4, 0)
+                EVT_CALL(EnableBattleStatusBar, FALSE)
                 EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
                 EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SHRINK)
                     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
@@ -293,7 +293,7 @@ EvtScript N(nextTurn) = {
                     EVT_CALL(MoveBattleCamOver, 30)
                 EVT_END_IF
                 EVT_CALL(ActorSpeak, MSG_CH8_00A6, ACTOR_SELF, 1, ANIM_BattleBowser_Talk, ANIM_BattleBowser_Idle)
-                EVT_CALL(func_802535B4, 1)
+                EVT_CALL(EnableBattleStatusBar, TRUE)
                 EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_END_IF
         EVT_CASE_EQ(PHASE_ENEMY_BEGIN)
@@ -307,7 +307,7 @@ EvtScript N(nextTurn) = {
                     EVT_BITWISE_OR_CONST(LVar0, 0x10)
                     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_FLAGS), LVar0)
                     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-                    EVT_CALL(func_802535B4, 0)
+                    EVT_CALL(EnableBattleStatusBar, FALSE)
                     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
                     EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SHRINK)
                         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
@@ -329,7 +329,7 @@ EvtScript N(nextTurn) = {
                         EVT_CALL(MoveBattleCamOver, 30)
                     EVT_END_IF
                     EVT_CALL(ActorSpeak, MSG_CH8_00A8, ACTOR_SELF, 1, ANIM_BattleBowser_Talk, ANIM_BattleBowser_Idle)
-                    EVT_CALL(func_802535B4, 1)
+                    EVT_CALL(EnableBattleStatusBar, TRUE)
                     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
                 EVT_END_IF
             EVT_END_IF
@@ -441,7 +441,7 @@ EvtScript N(handleEvent) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBowser_Idle)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, TRUE)
             EVT_CALL(SetBattleFlagBits, BS_FLAGS1_DISABLE_CELEBRATION | BS_FLAGS1_BATTLE_FLED, TRUE)
-            EVT_CALL(func_8026F60C, 10)
+            EVT_CALL(SetEndBattleFadeOutRate, 10)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_PEACH_BEAM)
             EVT_CALL(FreezeBattleCam, TRUE)
@@ -639,7 +639,7 @@ EvtScript N(onDeath) = {
     EVT_CALL(ActorSpeak, MSG_CH8_00A9, ACTOR_SELF, 1, ANIM_BattleBowser_DefeatedTalk, ANIM_BattleBowser_DefeatedIdle)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, TRUE)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_DISABLE_CELEBRATION | BS_FLAGS1_BATTLE_FLED, TRUE)
-    EVT_CALL(func_8026F60C, 20)
+    EVT_CALL(SetEndBattleFadeOutRate, 20)
     EVT_RETURN
     EVT_END
 };
@@ -899,9 +899,9 @@ EvtScript N(recover) = {
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_25C)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(func_8026BF48, 1)
+        EVT_CALL(FreezeBattleState, TRUE)
         EVT_CALL(HealActor, ACTOR_SELF, LVar0, FALSE)
-        EVT_CALL(func_8026BF48, 0)
+        EVT_CALL(FreezeBattleState, FALSE)
     EVT_END_THREAD
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
@@ -1477,7 +1477,7 @@ EvtScript N(attackShockwaveDrain) = {
                     EVT_ELSE
                         EVT_SET(LVar1, 3)
                     EVT_END_IF
-                    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_COSMIC | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, SUPPRESS_EVENT_ALL, 0, LVar1, BS_FLAGS1_SP_EVT_ACTIVE)
+                    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_COSMIC | DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENT_ALL, 0, LVar1, BS_FLAGS1_SP_EVT_ACTIVE)
                     EVT_CALL(RemovePlayerBuffs, PLAYER_BUFF_PARTNER_GLOWING)
                     EVT_IF_NE(LVarA, 5)
                         EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBowser_Idle)
@@ -1488,7 +1488,7 @@ EvtScript N(attackShockwaveDrain) = {
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
-    EVT_CALL(func_8026BF48, 1)
+    EVT_CALL(FreezeBattleState, TRUE)
     EVT_THREAD
         EVT_WAIT(4)
         EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
@@ -1498,8 +1498,8 @@ EvtScript N(attackShockwaveDrain) = {
         EVT_ELSE
             EVT_SET(LVar1, 3)
         EVT_END_IF
-        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_COSMIC | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, SUPPRESS_EVENT_ALL, 0, LVar1, BS_FLAGS1_SP_EVT_ACTIVE)
-        EVT_CALL(func_8026BF48, 0)
+        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_COSMIC | DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENT_ALL, 0, LVar1, BS_FLAGS1_SP_EVT_ACTIVE)
+        EVT_CALL(FreezeBattleState, FALSE)
     EVT_END_THREAD
     EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
@@ -1508,7 +1508,7 @@ EvtScript N(attackShockwaveDrain) = {
     EVT_ELSE
         EVT_SET(LVar1, 6)
     EVT_END_IF
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_COSMIC | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, SUPPRESS_EVENT_ALL, 0, LVar1, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_COSMIC | DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENT_ALL, 0, LVar1, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(RemovePlayerBuffs, PLAYER_BUFF_JUMP_CHARGE | PLAYER_BUFF_HAMMER_CHARGE | PLAYER_BUFF_STONE | PLAYER_BUFF_HUSTLE | PLAYER_BUFF_STATIC | PLAYER_BUFF_TRANSPARENT | PLAYER_BUFF_CLOUD_NINE | PLAYER_BUFF_TURBO_CHARGE | PLAYER_BUFF_WATER_BLOCK | PLAYER_BUFF_PARTNER_GLOWING | 0xFFEFC04)
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(0)

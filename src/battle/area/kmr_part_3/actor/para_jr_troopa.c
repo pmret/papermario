@@ -112,14 +112,14 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 80,
     .coinReward = 0,
     .size = { 60, 35 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -25, 35 },
-    .statusMessageOffset = { 10, 25 },
+    .statusTextOffset = { 10, 25 },
 };
 
 EvtScript N(80225F7C) = {
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar2)
-    EVT_IF_FLAG(LVar2, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+    EVT_IF_FLAG(LVar2, STATUS_FLAGS_IMMOBILIZED)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetBattleFlags, LVar2)
@@ -183,7 +183,7 @@ EvtScript N(802263D4) = {
 };
 
 EvtScript N(8022646C) = {
-    EVT_CALL(func_802535B4, 1)
+    EVT_CALL(EnableBattleStatusBar, TRUE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 12)
     EVT_RETURN
@@ -216,7 +216,7 @@ EvtScript N(init_80226510) = {
     EVT_END
 };
 
-#include "common/UnkBattleFunc1.inc.c"
+#include "common/battle/SetAbsoluteStatusOffsets.inc.c"
 
 EvtScript N(idle_802265A0) = {
     EVT_LABEL(0)
@@ -224,11 +224,11 @@ EvtScript N(idle_802265A0) = {
     EVT_IF_FLAG(LVarA, 0x41000)
         EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -12, 28)
         EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 4, -6)
-        EVT_CALL(N(UnkBattleFunc1), -25, 27, -1, 27)
+        EVT_CALL(N(SetAbsoluteStatusOffsets), -25, 27, -1, 27)
     EVT_ELSE
         EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -5, 33)
         EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, -6)
-        EVT_CALL(N(UnkBattleFunc1), -22, 30, 2, 28)
+        EVT_CALL(N(SetAbsoluteStatusOffsets), -22, 30, 2, 28)
     EVT_END_IF
     EVT_WAIT(1)
     EVT_GOTO(0)
@@ -329,13 +329,13 @@ EvtScript N(handleEvent_802266B0) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ParaJrTroopa_Idle)
         EVT_CASE_EQ(58)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ParaJrTroopa_Flail)
                 EVT_WAIT(1000)
             EVT_END_IF
         EVT_CASE_EQ(31)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                 EVT_SET_CONST(LVar0, 0x00000001)
                 EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_Flail)
                 EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
@@ -539,14 +539,14 @@ EvtScript N(802279B0) = {
     EVT_END_IF
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_301)
     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_0, 0)
-    EVT_CALL(func_8027D32C, ACTOR_SELF)
+    EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, 0, LVar2)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.2))
     EVT_CALL(FallToGoal, ACTOR_SELF, 10)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
     EVT_CALL(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
     EVT_CALL(HPBarToCurrent, ACTOR_SELF)
-    EVT_CALL(func_8027D2D8, ACTOR_SELF)
+    EVT_CALL(ShowHealthBar, ACTOR_SELF)
     EVT_LABEL(0)
     EVT_THREAD
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -598,7 +598,7 @@ EvtScript N(80227D38) = {
 
 EvtScript N(80227E1C) = {
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-    EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+    EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
         EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar0)
         EVT_IF_EQ(LVar0, 1)
             EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)

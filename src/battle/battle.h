@@ -324,9 +324,9 @@ typedef struct ActorBlueprint {
     /* 0x1E */ u8 powerBounceChance;
     /* 0x1F */ u8 coinReward;
     /* 0x20 */ Vec2b size;
-    /* 0x22 */ Vec2b hpBarOffset;
+    /* 0x22 */ Vec2b healthBarOffset;
     /* 0x24 */ Vec2b statusIconOffset;
-    /* 0x26 */ Vec2b statusMessageOffset;
+    /* 0x26 */ Vec2b statusTextOffset;
 } ActorBlueprint; // size = 0x28
 
 typedef struct FormationRow {

@@ -97,9 +97,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 100,
     .coinReward = 1,
     .size = { 34, 18 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 s32 N(IdleAnimations)[] = {
@@ -156,7 +156,7 @@ EvtScript N(init_hole) = {
 };
 
 ActorBlueprint N(hole) = {
-    .flags = ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_HIDE_HP_BAR | ACTOR_FLAG_NO_ATTACK | ACTOR_FLAG_NO_DMG_APPLY,
+    .flags = ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_NO_HEALTH_BAR | ACTOR_FLAG_NO_ATTACK | ACTOR_FLAG_NO_DMG_APPLY,
     .type = ACTOR_TYPE_MONTY_HOLE,
     .level = 9,
     .maxHP = 5,
@@ -173,9 +173,9 @@ ActorBlueprint N(hole) = {
     .powerBounceChance = 90,
     .coinReward = 2,
     .size = { 32, 18 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 Vec3i N(hole_pos) = { NPC_DISPOSE_LOCATION, };
@@ -310,7 +310,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_EXEC_WAIT(N(makeHole))
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-            EVT_IF_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+            EVT_IF_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                 EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -5, 0)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MontyMole_Anim19)
             EVT_ELSE

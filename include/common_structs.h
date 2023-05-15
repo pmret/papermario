@@ -894,8 +894,8 @@ typedef struct BattleStatus {
     /* 0x089 */ s8 hpDrainCount;
     /* 0x08A */ s8 nextMerleeSpellType;
     /* 0x08B */ s8 hustleTurns; /* numTurns from hustle drink, normally 0 */
-    /* 0x08C */ s8 unk_8C;
-    /* 0x08D */ s8 unk_8D;
+    /* 0x08C */ s8 stateFreezeCount;
+    /* 0x08D */ s8 endBattleFadeOutRate;
     /* 0x08E */ s8 initialEnemyCount; /* used for SP award bonus */
     /* 0x08F */ char unk_8F[1];
     /* 0x090 */ s16 unk_90;
@@ -1175,7 +1175,7 @@ typedef struct ItemEntity {
     /* 0x2E */ u8 nextUpdate;
     /* 0x2F */ u8 alpha;
     /* 0x30 */ f32 scale;
-    /* 0x34 */ Vec3s unk_34;
+    /* 0x34 */ Vec3s lastPos;
     /* 0x3A */ char unk_3A[2];
     /* 0x3C */ s32 sparkleNextUpdate;
     /* 0x40 */ s32* sparkleReadPos;
@@ -1844,7 +1844,7 @@ typedef struct Actor {
     /* 0x138 */ Vec3f homePos;
     /* 0x144 */ Vec3f currentPos;
     /* 0x150 */ Vec3s headOffset;
-    /* 0x156 */ Vec3s healthBarPosition;
+    /* 0x156 */ Vec3s healthBarPos;
     /* 0x15C */ Vec3f rotation;
     /* 0x168 */ Vec3s rotationPivotOffset;
     /* 0x16E */ char unk_16E[2];
@@ -1854,11 +1854,9 @@ typedef struct Actor {
     /* 0x18C */ f32 yaw;
     /* 0x190 */ Vec2bu size;
     /* 0x192 */ s16 actorID;
-    /* 0x194 */ s8 unk_194;
-    /* 0x195 */ s8 unk_195;
-    /* 0x196 */ s8 unk_196;
-    /* 0x197 */ s8 unk_197;
-    /* 0x198 */ Vec2b unk_198;
+    /* 0x194 */ Vec2b statusIconOffset;
+    /* 0x196 */ Vec2b statusTextOffset;
+    /* 0x198 */ Vec2b healthBarOffset;
     /* 0x19A */ s8 verticalRenderOffset; // visual only, does not affect target position
     /* 0x19B */ char unk_19B[1];
     /* 0x19C */ s32 actorTypeData1[6]; /* 4 = jump sound, 5 = attack sound */ // TODO: struct
@@ -1866,7 +1864,7 @@ typedef struct Actor {
     /* 0x1B8 */ s8 currentHP;
     /* 0x1B9 */ s8 maxHP;
     /* 0x1BA */ char unk_1BA[2];
-    /* 0x1BC */ s8 hpFraction; /* used to render HP bar */
+    /* 0x1BC */ s8 healthFraction; /* used to render HP bar */
     /* 0x1BD */ char unk_1BD[3];
     /* 0x1C0 */ EvtScript* idleSource;
     /* 0x1C4 */ EvtScript* takeTurnSource;
@@ -1890,9 +1888,9 @@ typedef struct Actor {
     /* 0x1FC */ s16 damageCounter;
     /* 0x1FE */ char unk_1FE[2];
     /* 0x200 */ struct EffectInstance* attackResultEffect;
-    /* 0x204 */ s8 unk_204;
-    /* 0x205 */ s8 unk_205;
-    /* 0x206 */ s8 unk_206;
+    /* 0x204 */ s8 actionRatingCombo;
+    /* 0x205 */ s8 actionRatingTime;
+    /* 0x206 */ s8 healthBarHideTime;
     /* 0x207 */ s8 extraCoinBonus;
     /* 0x208 */ s8 instigatorValue; // from the enemy which initiated the encounter if this actor is first in the formation. allows that enemy to pass information to its actor.
     /* 0x209 */ char unk_209[3];
@@ -2303,7 +2301,7 @@ typedef VirtualEntity* VirtualEntityList[0x40];
 
 typedef struct Message {
     /* 0x00 */ b32 unk_00;
-    /* 0x04 */ s32 unk_04;
+    /* 0x04 */ s32 entityModelIndex;
     /* 0x08 */ Vec3f accel;
     /* 0x14 */ Vec3f vel;
     /* 0x20 */ s32 appearTime;

@@ -82,9 +82,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 80,
     .coinReward = 0,
     .size = { 24, 32 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -15, 30 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 EvtScript N(80222B30) = {
@@ -100,7 +100,7 @@ EvtScript N(80222B30) = {
 };
 
 EvtScript N(80222BC8) = {
-    EVT_CALL(func_802535B4, 1)
+    EVT_CALL(EnableBattleStatusBar, TRUE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 12)
     EVT_RETURN
@@ -124,7 +124,7 @@ s32 N(IdleAnimations_80222C6C)[] = {
 
 EvtScript N(80222C78) = {
     EVT_SET(LVarA, LVar0)
-    EVT_CALL(func_8027D32C, ACTOR_SELF)
+    EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, LVarA, LVar1)
     EVT_WAIT(10)
@@ -392,7 +392,7 @@ EvtScript N(nextTurn_80223D2C) = {
             EVT_IF_EQ(LVar0, 0)
                 EVT_CALL(SetActorVar, ACTOR_SELF, 1, 1)
                 EVT_WAIT(15)
-                EVT_CALL(func_802535B4, 0)
+                EVT_CALL(EnableBattleStatusBar, FALSE)
                 EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
                 EVT_THREAD
                     EVT_SET(LVar1, 0)
@@ -418,7 +418,7 @@ EvtScript N(nextTurn_80223D2C) = {
                     EVT_END_LOOP
                 EVT_END_THREAD
                 EVT_WAIT(10)
-                EVT_CALL(func_802535B4, 1)
+                EVT_CALL(EnableBattleStatusBar, TRUE)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                 EVT_CALL(MoveBattleCamOver, 4)
             EVT_END_IF

@@ -197,9 +197,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 95,
     .coinReward = 0,
     .size = { 28, 25 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -12, 20 },
-    .statusMessageOffset = { 10, 25 },
+    .statusTextOffset = { 10, 25 },
 };
 
 #include "common/StartRumbleWithParams.inc.c"

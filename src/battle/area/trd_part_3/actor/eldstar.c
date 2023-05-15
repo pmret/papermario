@@ -65,7 +65,7 @@ ActorPartBlueprint N(ActorParts)[] = {
 };
 
 ActorBlueprint NAMESPACE = {
-    .flags = ACTOR_FLAG_HIDE_HP_BAR | ACTOR_FLAG_NO_ATTACK,
+    .flags = ACTOR_FLAG_NO_HEALTH_BAR | ACTOR_FLAG_NO_ATTACK,
     .type = ACTOR_TYPE_ELDSTAR,
     .level = 99,
     .maxHP = 99,
@@ -82,9 +82,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 100,
     .coinReward = 0,
     .size = { 24, 32 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 EvtScript N(EVS_Init) = {
@@ -113,24 +113,24 @@ API_CALLABLE(func_80218000_4CF1B0) {
 }
 
 API_CALLABLE(func_802180C8_4CF278) {
-    status_menu_start_blinking_sp();
+    status_bar_start_blinking_sp();
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(func_802180E8_4CF298) {
-    status_menu_stop_blinking_sp();
+    status_bar_stop_blinking_sp();
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(func_80218108_4CF2B8) {
-    status_menu_start_blinking_hp();
-    status_menu_start_blinking_fp();
+    status_bar_start_blinking_hp();
+    status_bar_start_blinking_fp();
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(func_80218130_4CF2E0) {
-    status_menu_stop_blinking_hp();
-    status_menu_stop_blinking_fp();
+    status_bar_stop_blinking_hp();
+    status_bar_stop_blinking_fp();
     return ApiStatus_DONE2;
 }
 

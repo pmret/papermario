@@ -81,9 +81,9 @@ ActorBlueprint N(sushie) = {
     .powerBounceChance = 90,
     .coinReward = 2,
     .size = { 37, 26 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 EvtScript N(sushie_init) = {

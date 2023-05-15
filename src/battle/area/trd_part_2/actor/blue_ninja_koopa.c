@@ -64,7 +64,7 @@ ActorPartBlueprint N(PartsTable_8022B564)[] = {
 };
 
 ActorBlueprint NAMESPACE = {
-    .flags = ACTOR_FLAG_HIDE_HP_BAR | ACTOR_FLAG_NO_ATTACK,
+    .flags = ACTOR_FLAG_NO_HEALTH_BAR | ACTOR_FLAG_NO_ATTACK,
     .type = ACTOR_TYPE_BLUE_NINJAKOOPA,
     .level = 17,
     .maxHP = 5,
@@ -81,9 +81,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 85,
     .coinReward = 0,
     .size = { 38, 42 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 s32 N(IdleAnimations_8022B5B0)[] = {
@@ -278,7 +278,7 @@ EvtScript N(8022B6E8) = {
                     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_8022B6DC)))
                     EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
                     EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
-                    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_HIDE_HP_BAR, FALSE)
+                    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_HEALTH_BAR, FALSE)
                     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, ACTOR_PART_FLAG_NO_TARGET, FALSE)
                     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     EVT_CALL(ForceHomePos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -324,7 +324,7 @@ EvtScript N(8022B6E8) = {
                     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_8022B6DC)))
                     EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
                     EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
-                    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_HIDE_HP_BAR, FALSE)
+                    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_HEALTH_BAR, FALSE)
                     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, ACTOR_PART_FLAG_NO_TARGET, FALSE)
                     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     EVT_CALL(ForceHomePos, ACTOR_SELF, LVar0, LVar1, LVar2)

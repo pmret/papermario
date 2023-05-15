@@ -135,9 +135,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 80,
     .coinReward = 0,
     .size = { 80, 82 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 #include "common/StartRumbleWithParams.inc.c"
@@ -188,7 +188,7 @@ EvtScript N(nextTurn) = {
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_PEACH_SPOKE), LVar0)
             EVT_IF_EQ(LVar0, 0)
                 EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_PEACH_SPOKE), 1)
-                EVT_CALL(func_802535B4, 0)
+                EVT_CALL(EnableBattleStatusBar, FALSE)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
                 EVT_CALL(SetBattleCamTarget, -115, 0, 0)
                 EVT_CALL(SetBattleCamZoom, 320)
@@ -210,7 +210,7 @@ EvtScript N(nextTurn) = {
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                 EVT_WAIT(20)
-                EVT_CALL(func_802535B4, 1)
+                EVT_CALL(EnableBattleStatusBar, TRUE)
             EVT_END_IF
     EVT_END_SWITCH
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)

@@ -2329,9 +2329,9 @@ ActorBlueprint bPlayerActorBlueprint = {
     .powerBounceChance = 80,
 
     .size = { 33, 43 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 30 },
-    .statusMessageOffset = { 10, 30 },
+    .statusTextOffset = { 10, 30 },
 };
 
 ActorPartBlueprint bMarioParts[] = {
@@ -2703,7 +2703,7 @@ extern HudScript HES_TimingBlink;
 
 void btl_bonk_update(void* data);
 void btl_bonk_render(void* data);
-void func_8024F768(void* data);
+void btl_bonk_setup_gfx(void* data);
 void btl_update_message_popup(void* popup);
 void btl_show_message_popup(void* popup);
 
@@ -2785,7 +2785,7 @@ void free_popup(PopupMessage* popup) {
     popup->active = FALSE;
 }
 
-void show_immune_bonk(f32 x, f32 y, f32 z, s32 numMessages, s32 arg4, s32 arg5) {
+void show_immune_bonk(f32 x, f32 y, f32 z, s32 numStars, s32 arg4, s32 arg5) {
     BattleStatus* battleStatus = &gBattleStatus;
     PopupMessage* popup;
     Message* message;
@@ -2806,8 +2806,8 @@ void show_immune_bonk(f32 x, f32 y, f32 z, s32 numMessages, s32 arg4, s32 arg5) 
     baseScale = 1.0f;
     cond = FALSE;
     var_f20 = 1.0f;
-    if (numMessages < 1) {
-        numMessages = 1;
+    if (numStars < 1) {
+        numStars = 1;
         cond = TRUE;
         baseScale = 0.4f;
         var_f20 = 0.7f;
@@ -2840,15 +2840,15 @@ void show_immune_bonk(f32 x, f32 y, f32 z, s32 numMessages, s32 arg4, s32 arg5) 
         popup->renderUIFunc = NULL;
         popup->messageIndex = 1;
         popup->active |= 0x10;
-        message = popup->message = heap_malloc(numMessages * sizeof(*popup->message));
+        message = popup->message = heap_malloc(numStars * sizeof(*popup->message));
         ASSERT (popup->message != NULL);
 
-        for (i = 0; i < numMessages; i++, message++) {
-            modelScript = &bBonkModelScripts[numMessages];
+        for (i = 0; i < numStars; i++, message++) {
+            modelScript = &bBonkModelScripts[numStars];
             message->unk_00 = TRUE;
-            message->unk_04 = load_entity_model(*modelScript);
-            set_entity_model_flags(message->unk_04, ENTITY_MODEL_FLAG_HIDDEN);
-            bind_entity_model_setupGfx(message->unk_04, message, func_8024F768);
+            message->entityModelIndex = load_entity_model(*modelScript);
+            set_entity_model_flags(message->entityModelIndex, ENTITY_MODEL_FLAG_HIDDEN);
+            bind_entity_model_setupGfx(message->entityModelIndex, message, btl_bonk_setup_gfx);
             message->pos.x = x;
             message->pos.y = y;
             message->pos.z = z;
@@ -2892,7 +2892,7 @@ void btl_bonk_update(void* data) {
 
     for (i = 0; i < popup->messageIndex; i++, message++) {
         if (message->unk_00) {
-            s32 modelIdx = message->unk_04;
+            s32 modelIdx = message->entityModelIndex;
 
             found = TRUE;
             if (message->unk_24 != 0) {
@@ -2960,7 +2960,7 @@ void btl_bonk_render(void* data) {
             if (message->unk_24 != 0) {
                 break;
             } else {
-                s32 modelIdx = message->unk_04;
+                s32 modelIdx = message->entityModelIndex;
 
                 guTranslateF(sp18, message->pos.x, message->pos.y, message->pos.z);
                 guRotateF(mtxRotX, 0.0f, 1.0f, 0.0f, 0.0f);
@@ -2978,7 +2978,7 @@ void btl_bonk_render(void* data) {
     }
 }
 
-void func_8024F768(void* data) {
+void btl_bonk_setup_gfx(void* data) {
     Message* message = data;
     s32 alphaAmt = message->deleteTime;
 
@@ -2988,7 +2988,7 @@ void func_8024F768(void* data) {
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, (alphaAmt * 255) / 10);
 }
 
-void func_8024F7C8(void) {
+void btl_bonk_cleanup(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(popupMessages); i++) {
@@ -3009,7 +3009,7 @@ void func_8024F7C8(void) {
     }
 }
 
-ApiStatus func_8024F84C(Evt* script, s32 isInitialCall) {
+ApiStatus ShowImmuneBonk(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 x = evt_get_variable(script, *args++);
     s32 y = evt_get_variable(script, *args++);
@@ -3022,8 +3022,8 @@ ApiStatus func_8024F84C(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8024F940(Evt* script, s32 isInitialCall) {
-    func_8024F7C8();
+ApiStatus ForceImmuneBonkCleanup(Evt* script, s32 isInitialCall) {
+    btl_bonk_cleanup();
     return ApiStatus_DONE2;
 }
 
@@ -3455,7 +3455,7 @@ void btl_update_message_popup(void* data) {
                             }
                         }
 
-                        gWindows[9].pos.y = D_8029F64E + D_8029F650;
+                        gWindows[WINDOW_ID_BATTLE_POPUP].pos.y = D_8029F64E + D_8029F650;
 
                         duration = &popup->duration; // TODO required to match
                         if (*duration != -1) {

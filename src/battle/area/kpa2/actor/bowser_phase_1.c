@@ -149,9 +149,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 65,
     .coinReward = 0,
     .size = { 80, 82 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -40, 67 },
-    .statusMessageOffset = { 10, 60 },
+    .statusTextOffset = { 10, 60 },
 };
 
 #include "common/StartRumbleWithParams.inc.c"
@@ -217,7 +217,7 @@ EvtScript N(nextTurn) = {
             EVT_IF_NOT_FLAG(LVar0, 1)
                 EVT_BITWISE_OR_CONST(LVar0, 1)
                 EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_FLAGS), LVar0)
-                EVT_CALL(func_802535B4, 0)
+                EVT_CALL(EnableBattleStatusBar, FALSE)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_13)
                 EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
                 EVT_CALL(MoveBattleCamOver, 20)
@@ -228,7 +228,7 @@ EvtScript N(nextTurn) = {
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                 EVT_CALL(MoveBattleCamOver, 20)
                 EVT_WAIT(20)
-                EVT_CALL(func_802535B4, 1)
+                EVT_CALL(EnableBattleStatusBar, TRUE)
             EVT_END_IF
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -460,7 +460,7 @@ EvtScript N(onHit) = {
 };
 
 EvtScript N(onDeath) = {
-    EVT_CALL(func_8027D32C, ACTOR_SELF)
+    EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_IF_NE(LVar1, -1)
         EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
@@ -789,9 +789,9 @@ EvtScript N(recover) = {
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_25C)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(func_8026BF48, 1)
+        EVT_CALL(FreezeBattleState, TRUE)
         EVT_CALL(HealActor, ACTOR_SELF, LVar0, FALSE)
-        EVT_CALL(func_8026BF48, 0)
+        EVT_CALL(FreezeBattleState, FALSE)
     EVT_END_THREAD
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
@@ -1393,7 +1393,7 @@ EvtScript N(attackShockwaveDrain) = {
                     EVT_ELSE
                         EVT_SET(LVar1, 3)
                     EVT_END_IF
-                    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_COSMIC | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, SUPPRESS_EVENT_ALL, 0, LVar1, BS_FLAGS1_SP_EVT_ACTIVE)
+                    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_COSMIC | DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENT_ALL, 0, LVar1, BS_FLAGS1_SP_EVT_ACTIVE)
                     EVT_CALL(RemovePlayerBuffs, PLAYER_BUFF_PARTNER_GLOWING)
                     EVT_IF_NE(LVarA, HIT_RESULT_LUCKY)
                         EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBowser_Idle)
@@ -1404,7 +1404,7 @@ EvtScript N(attackShockwaveDrain) = {
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
-    EVT_CALL(func_8026BF48, 1)
+    EVT_CALL(FreezeBattleState, TRUE)
     EVT_THREAD
         EVT_WAIT(4)
         EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
@@ -1414,8 +1414,8 @@ EvtScript N(attackShockwaveDrain) = {
         EVT_ELSE
             EVT_SET(LVar1, 3)
         EVT_END_IF
-        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_COSMIC | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, SUPPRESS_EVENT_ALL, 0, LVar1, BS_FLAGS1_SP_EVT_ACTIVE)
-        EVT_CALL(func_8026BF48, 0)
+        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_COSMIC | DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENT_ALL, 0, LVar1, BS_FLAGS1_SP_EVT_ACTIVE)
+        EVT_CALL(FreezeBattleState, FALSE)
     EVT_END_THREAD
     EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
@@ -1424,7 +1424,7 @@ EvtScript N(attackShockwaveDrain) = {
     EVT_ELSE
         EVT_SET(LVar1, 4)
     EVT_END_IF
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_COSMIC | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, SUPPRESS_EVENT_ALL, 0, LVar1, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_COSMIC | DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENT_ALL, 0, LVar1, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(RemovePlayerBuffs, PLAYER_BUFF_JUMP_CHARGE | PLAYER_BUFF_HAMMER_CHARGE | PLAYER_BUFF_STONE | PLAYER_BUFF_HUSTLE | PLAYER_BUFF_STATIC | PLAYER_BUFF_TRANSPARENT | PLAYER_BUFF_CLOUD_NINE | PLAYER_BUFF_TURBO_CHARGE | PLAYER_BUFF_WATER_BLOCK | PLAYER_BUFF_PARTNER_GLOWING | 0xFFEFC04)
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)

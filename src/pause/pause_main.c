@@ -650,7 +650,7 @@ void pause_init(void) {
             posX -= 45;
         }
     }
-    pauseWindows = &gWindows[25];
+    pauseWindows = &gWindows[WINDOW_ID_PAUSE_TAB_STATS];
     x = pauseWindows[gPausePanels[0]->col].pos.x;
     gWindows[WINDOW_ID_PAUSE_TAB_INVIS].pos.x = x + 6;
 

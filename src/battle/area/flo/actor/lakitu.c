@@ -125,9 +125,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 85,
     .coinReward = 2,
     .size = { 32, 38 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -11, 20 },
-    .statusMessageOffset = { 10, 34 },
+    .statusTextOffset = { 10, 34 },
 };
 
 EvtScript N(init) = {
@@ -551,7 +551,7 @@ EvtScript N(calcSummonChance) = {
     EVT_SWITCH(LVar2)
         EVT_CASE_EQ(ACTOR_TYPE_LAKITU)
             EVT_CALL(GetStatusFlags, LVar0, LVar3)
-            EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+            EVT_IF_NOT_FLAG(LVar3, STATUS_FLAGS_IMMOBILIZED)
                 EVT_CALL(GetActorVar, LVar0, 0, LVar3)
                 EVT_IF_LT(LVar3, 3)
                     EVT_ADD(LVar9, 1)

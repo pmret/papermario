@@ -27,7 +27,7 @@ API_CALLABLE(N(UpgradeStarPowerCh5)) {
     set_max_SP(5);
     playerData->curHP = playerData->curMaxHP;
     playerData->curFP = playerData->curMaxFP;
-    sync_status_menu();
+    sync_status_bar();
     return ApiStatus_DONE2;
 }
 

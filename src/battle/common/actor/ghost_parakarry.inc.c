@@ -93,9 +93,9 @@ ActorBlueprint N(parakarry) = {
     .powerBounceChance = 90,
     .coinReward = 2,
     .size = { 38, 38 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 EvtScript N(parakarry_init) = {
@@ -207,7 +207,7 @@ EvtScript N(parakarry_handleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_AirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                 EVT_IF_FLAG(LVar0, STATUS_FLAG_SHRINK)
                     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 1, 0)
                 EVT_ELSE

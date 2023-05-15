@@ -129,9 +129,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 0,
     .coinReward = 0,
     .size = { 0, 0 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { 0, 0 },
-    .statusMessageOffset = { 0, 0 },
+    .statusTextOffset = { 0, 0 },
 };
 
 // Perhaps a status table

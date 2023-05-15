@@ -158,9 +158,9 @@ ActorBlueprint N(1) = {
     .powerBounceChance = 90,
     .coinReward = 0,
     .size = { 18, 15 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 ActorBlueprint N(2) = {
@@ -181,9 +181,9 @@ ActorBlueprint N(2) = {
     .powerBounceChance = 90,
     .coinReward = 0,
     .size = { 18, 15 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 ActorBlueprint N(3) = {
@@ -204,9 +204,9 @@ ActorBlueprint N(3) = {
     .powerBounceChance = 90,
     .coinReward = 0,
     .size = { 18, 15 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 EvtScript N(init) = {
@@ -294,7 +294,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar0, 1)
             EVT_CALL(GetAnimation, ACTOR_SELF, 1, LVar1)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
-            EVT_CALL(func_8027D32C, ACTOR_SELF)
+            EVT_CALL(HideHealthBar, ACTOR_SELF)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_301)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
@@ -356,7 +356,7 @@ EvtScript N(handleEvent) = {
                 EVT_SET_CONST(LVar2, -1)
             EVT_END_IF
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
-            EVT_CALL(func_8027D32C, ACTOR_SELF)
+            EVT_CALL(HideHealthBar, ACTOR_SELF)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_301)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)

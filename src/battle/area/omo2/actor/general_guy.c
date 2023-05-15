@@ -84,7 +84,7 @@ ActorPartBlueprint N(parts)[] = {
 };
 
 ActorBlueprint NAMESPACE = {
-    .flags = ACTOR_FLAG_HIDE_HP_BAR,
+    .flags = ACTOR_FLAG_NO_HEALTH_BAR,
     .type = ACTOR_TYPE_GENERAL_GUY,
     .level = 73,
     .maxHP = 10,
@@ -101,9 +101,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 75,
     .coinReward = 0,
     .size = { 30, 30 },
-    .hpBarOffset = { 20, -3 },
+    .healthBarOffset = { 20, -3 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 s32 N(IdleAnimations)[] = {

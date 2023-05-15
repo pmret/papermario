@@ -173,12 +173,12 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 85,
     .coinReward = 2,
     .size = { 32, 42 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -15, 32 },
-    .statusMessageOffset = { 5, 32 },
+    .statusTextOffset = { 5, 32 },
 };
 
-#include "common/UnkBattleFunc1.inc.c"
+#include "common/battle/SetAbsoluteStatusOffsets.inc.c"
 #include "common/StartRumbleWithParams.inc.c"
 
 EvtScript N(init) = {
@@ -222,20 +222,20 @@ EvtScript N(update_unknown) = {
             EVT_IF_FLAG(LVar1, STATUS_FLAG_SLEEP | STATUS_FLAG_DIZZY)
                 EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -5, 15)
                 EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, 0)
-                EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
+                EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 20)
             EVT_ELSE
                 EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -4, 32)
                 EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -4)
-                EVT_CALL(N(UnkBattleFunc1), -15, 32, 5, 32)
+                EVT_CALL(N(SetAbsoluteStatusOffsets), -15, 32, 5, 32)
             EVT_END_IF
         EVT_CASE_EQ(N(STATE_FLIPPED))
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -5, 15)
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, 0)
-            EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
+            EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 20)
         EVT_CASE_EQ(N(STATE_CHARGED))
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -4, 20)
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, -6)
-            EVT_CALL(N(UnkBattleFunc1), -15, 22, 5, 22)
+            EVT_CALL(N(SetAbsoluteStatusOffsets), -15, 22, 5, 22)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -254,7 +254,7 @@ EvtScript N(idle) = {
             EVT_WAIT(1)
             EVT_GOTO(1)
         EVT_END_IF
-        EVT_IF_FLAG(LVar1, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP | STATUS_FLAG_GLOWING)
+        EVT_IF_FLAG(LVar1, STATUS_FLAGS_IMMOBILIZED | STATUS_FLAG_GLOWING)
             EVT_WAIT(1)
             EVT_GOTO(1)
         EVT_END_IF
@@ -282,7 +282,7 @@ EvtScript N(idle) = {
             EVT_WAIT(1)
             EVT_GOTO(2)
         EVT_END_IF
-        EVT_IF_FLAG(LVar1, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP | STATUS_FLAG_GLOWING)
+        EVT_IF_FLAG(LVar1, STATUS_FLAGS_IMMOBILIZED | STATUS_FLAG_GLOWING)
             EVT_WAIT(1)
             EVT_GOTO(2)
         EVT_END_IF
@@ -310,7 +310,7 @@ EvtScript N(idle) = {
             EVT_WAIT(1)
             EVT_GOTO(3)
         EVT_END_IF
-        EVT_IF_FLAG(LVar1, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP | STATUS_FLAG_GLOWING)
+        EVT_IF_FLAG(LVar1, STATUS_FLAGS_IMMOBILIZED | STATUS_FLAG_GLOWING)
             EVT_WAIT(1)
             EVT_GOTO(3)
         EVT_END_IF
@@ -477,7 +477,7 @@ EvtScript N(handleEvent) = {
                     EVT_SET_CONST(LVar1, ANIM_Koopatrol_Anim07)
                     EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
                     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-                    EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+                    EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                         EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Koopatrol_Anim08)
                         EVT_WAIT(10)
                     EVT_END_IF
@@ -1143,7 +1143,7 @@ EvtScript N(findPlacesToSummon) = {
     EVT_SWITCH(LVar2)
         EVT_CASE_EQ(ACTOR_TYPE_KOOPATROL)
             EVT_CALL(GetStatusFlags, LVar0, LVar3)
-            EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+            EVT_IF_NOT_FLAG(LVar3, STATUS_FLAGS_IMMOBILIZED)
                 EVT_CALL(GetActorVar, LVar0, N(VAR_STATE), LVar3)
                 EVT_IF_EQ(LVar3, N(STATE_NORMAL))
                     EVT_CALL(GetActorVar, LVar0, N(VAR_SUMMON_COUNT), LVar3)

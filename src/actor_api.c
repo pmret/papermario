@@ -1186,15 +1186,16 @@ ApiStatus AddPartDispOffset(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8026BF48(Evt* script, s32 isInitialCall) {
+ApiStatus FreezeBattleState(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     BattleStatus* battleStatus2 = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
+    b32 increaseFreeze = evt_get_variable(script, *args++);
 
-    if (evt_get_variable(script, *args++) != 0) {
-        battleStatus->unk_8C++;
-    } else if (battleStatus->unk_8C > 0) {
-        battleStatus2->unk_8C--;
+    if (increaseFreeze) {
+        battleStatus->stateFreezeCount++;
+    } else if (battleStatus->stateFreezeCount > 0) {
+        battleStatus2->stateFreezeCount--;
     }
 
     return ApiStatus_DONE2;
@@ -1932,15 +1933,15 @@ ApiStatus HPBarToHome(Evt* script, s32 isInitialCall) {
     }
 
     actor = get_actor(actorID);
-    actor->healthBarPosition.x = actor->homePos.x + actor->actorBlueprint->hpBarOffset.x;
-    actor->healthBarPosition.y = actor->homePos.y + actor->actorBlueprint->hpBarOffset.y;
-    actor->healthBarPosition.z = actor->homePos.z;
+    actor->healthBarPos.x = actor->homePos.x + actor->actorBlueprint->healthBarOffset.x;
+    actor->healthBarPos.y = actor->homePos.y + actor->actorBlueprint->healthBarOffset.y;
+    actor->healthBarPos.z = actor->homePos.z;
 
     if (actor->flags & ACTOR_FLAG_UPSIDE_DOWN) {
-        actor->healthBarPosition.y = actor->homePos.y - actor->size.y - actor->actorBlueprint->hpBarOffset.y;
+        actor->healthBarPos.y = actor->homePos.y - actor->size.y - actor->actorBlueprint->healthBarOffset.y;
     }
 
-    actor->hpFraction = (actor->currentHP * 25) / actor->maxHP;
+    actor->healthFraction = (actor->currentHP * 25) / actor->maxHP;
 
     return ApiStatus_DONE2;
 }
@@ -1955,15 +1956,15 @@ ApiStatus HPBarToCurrent(Evt* script, s32 isInitialCall) {
     }
 
     actor = get_actor(actorID);
-    actor->healthBarPosition.x = actor->currentPos.x + actor->actorBlueprint->hpBarOffset.x;
-    actor->healthBarPosition.y = actor->currentPos.y + actor->actorBlueprint->hpBarOffset.y;
-    actor->healthBarPosition.z = actor->currentPos.z;
+    actor->healthBarPos.x = actor->currentPos.x + actor->actorBlueprint->healthBarOffset.x;
+    actor->healthBarPos.y = actor->currentPos.y + actor->actorBlueprint->healthBarOffset.y;
+    actor->healthBarPos.z = actor->currentPos.z;
 
     if (actor->flags & ACTOR_FLAG_UPSIDE_DOWN) {
-        actor->healthBarPosition.y = actor->currentPos.y - actor->size.y - actor->actorBlueprint->hpBarOffset.y;
+        actor->healthBarPos.y = actor->currentPos.y - actor->size.y - actor->actorBlueprint->healthBarOffset.y;
     }
 
-    actor->hpFraction = (actor->currentHP * 25) / actor->maxHP;
+    actor->healthFraction = (actor->currentHP * 25) / actor->maxHP;
 
     return ApiStatus_DONE2;
 }
@@ -1976,7 +1977,7 @@ ApiStatus func_8026D8EC(Evt* script, s32 isInitialCall) {
         actorID = script->owner1.actorID;
     }
 
-    func_80266AF8(get_actor(actorID));
+    hide_actor_health_bar(get_actor(actorID));
 
     return ApiStatus_DONE2;
 }
@@ -1996,39 +1997,39 @@ ApiStatus func_8026D940(Evt* script, s32 isInitialCall) {
 
     actor = get_actor(actorID);
 
-    actor->unk_198.x = x;
-    actor->unk_198.y = y;
-    actor->healthBarPosition.x = actor->homePos.x + actor->actorBlueprint->hpBarOffset.x + actor->unk_198.x;
-    actor->healthBarPosition.y = actor->homePos.y + actor->actorBlueprint->hpBarOffset.y + actor->unk_198.y;
-    actor->healthBarPosition.z = actor->homePos.z;
+    actor->healthBarOffset.x = x;
+    actor->healthBarOffset.y = y;
+    actor->healthBarPos.x = actor->homePos.x + actor->actorBlueprint->healthBarOffset.x + actor->healthBarOffset.x;
+    actor->healthBarPos.y = actor->homePos.y + actor->actorBlueprint->healthBarOffset.y + actor->healthBarOffset.y;
+    actor->healthBarPos.z = actor->homePos.z;
 
     if (actor->flags & ACTOR_FLAG_UPSIDE_DOWN) {
-        actor->healthBarPosition.y = actor->homePos.y - actor->size.y;
+        actor->healthBarPos.y = actor->homePos.y - actor->size.y;
     }
 
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8026DA94(Evt* script, s32 isInitialCall) {
+ApiStatus SetActorStatusOffsets(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
-    s32 a, b, c, d;
+    s32 iconX, iconY, textX, textY;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    a = evt_get_variable(script, *args++);
-    b = evt_get_variable(script, *args++);
-    c = evt_get_variable(script, *args++);
-    d = evt_get_variable(script, *args++);
+    iconX = evt_get_variable(script, *args++);
+    iconY = evt_get_variable(script, *args++);
+    textX = evt_get_variable(script, *args++);
+    textY = evt_get_variable(script, *args++);
 
     actor = get_actor(actorID);
-    actor->unk_194 = a;
-    actor->unk_195 = b;
-    actor->unk_196 = c;
-    actor->unk_197 = d;
+    actor->statusIconOffset.x = iconX;
+    actor->statusIconOffset.y = iconY;
+    actor->statusTextOffset.x = textX;
+    actor->statusTextOffset.y = textY;
 
     return ApiStatus_DONE2;
 }
@@ -2932,8 +2933,8 @@ ApiStatus RemovePartShadow(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8026F60C(Evt* script, s32 isInitialCall) {
-    gBattleStatus.unk_8D = evt_get_variable(script, *script->ptrReadPos);
+ApiStatus SetEndBattleFadeOutRate(Evt* script, s32 isInitialCall) {
+    gBattleStatus.endBattleFadeOutRate = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
@@ -3108,7 +3109,7 @@ ApiStatus SetActorType(Evt* script, s32 isInitialCall) {
     actorType = evt_get_variable(script, *args++);
     enemy = get_actor(actorID);
 
-    if (is_actor_hp_bar_visible(enemy)) {
+    if (is_actor_health_bar_visible(enemy)) {
         load_tattle_flags(actorType);
     }
 

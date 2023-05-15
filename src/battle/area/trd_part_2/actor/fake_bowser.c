@@ -225,9 +225,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 90,
     .coinReward = 0,
     .size = { -71, 125 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 s32 N(D_8021A8FC_48BAEC)[] = {
@@ -1349,7 +1349,7 @@ EvtScript N(handleEvent_8021E6F0) = {
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_DEATH)
         EVT_CASE_OR_EQ(EVENT_BURN_DEATH)
-            EVT_CALL(func_8027D32C, ACTOR_SELF)
+            EVT_CALL(HideHealthBar, ACTOR_SELF)
             EVT_IF_EQ(LVar0, EVENT_BURN_DEATH)
                 EVT_CALL(N(UnkFunc27), 0, EVT_PTR(N(D_8021A8FC_48BAEC)), FOG_MODE_3)
                 EVT_CALL(N(UnkFunc26), 3, 35, 35, 35, 0, 0, 0, 0, 0, 0)
@@ -1483,7 +1483,7 @@ EvtScript N(takeTurn_8021EC98) = {
     EVT_IF_LE(LVar0, 0)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(func_802535B4, 0)
+    EVT_CALL(EnableBattleStatusBar, FALSE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
     EVT_CALL(SetBattleCamTarget, 28, 75, -101)
     EVT_CALL(SetBattleCamOffsetZ, 0)
@@ -1523,7 +1523,7 @@ EvtScript N(takeTurn_8021EC98) = {
             EVT_CALL(ActorSpeak, MSG_CH1_0105, ACTOR_SELF, 1, -1, -1)
             EVT_CALL(SetActorVar, ACTOR_SELF, 2, 1)
     EVT_END_SWITCH
-    EVT_CALL(func_802535B4, 1)
+    EVT_CALL(EnableBattleStatusBar, TRUE)
     EVT_RETURN
     EVT_END
 };
@@ -1726,7 +1726,7 @@ EvtScript N(8021F630) = {
     EVT_WAIT(30)
     EVT_CALL(func_80218350_4B1540)
     EVT_CALL(ActorSpeak, MSG_CH1_0107, ACTOR_ENEMY1, 1, -1, -1)
-    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_HIDE_HP_BAR | ACTOR_FLAG_NO_DMG_APPLY, TRUE)
+    EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_HEALTH_BAR | ACTOR_FLAG_NO_DMG_APPLY, TRUE)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, ACTOR_PART_FLAG_NO_TARGET, TRUE)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_NO_TARGET, TRUE)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, ACTOR_PART_FLAG_MULTI_TARGET, FALSE)
@@ -1735,19 +1735,19 @@ EvtScript N(8021F630) = {
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_802239BC)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_802242FC)))
     EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn_80225438)))
-    EVT_CALL(SetActorFlagBits, ACTOR_ENEMY0, ACTOR_FLAG_HIDE_HP_BAR, FALSE)
+    EVT_CALL(SetActorFlagBits, ACTOR_ENEMY0, ACTOR_FLAG_NO_HEALTH_BAR, FALSE)
     EVT_CALL(SetPartFlagBits, ACTOR_ENEMY0, 1, ACTOR_PART_FLAG_NO_TARGET, FALSE)
     EVT_CALL(HPBarToHome, ACTOR_ENEMY0)
     EVT_CALL(SetAnimation, ACTOR_ENEMY0, 1, ANIM_KoopaBros_Green_Anim04)
-    EVT_CALL(SetActorFlagBits, ACTOR_ENEMY1, ACTOR_FLAG_HIDE_HP_BAR, FALSE)
+    EVT_CALL(SetActorFlagBits, ACTOR_ENEMY1, ACTOR_FLAG_NO_HEALTH_BAR, FALSE)
     EVT_CALL(SetPartFlagBits, ACTOR_ENEMY1, 1, ACTOR_PART_FLAG_NO_TARGET, FALSE)
     EVT_CALL(HPBarToHome, ACTOR_ENEMY1)
     EVT_CALL(SetAnimation, ACTOR_ENEMY1, 1, ANIM_KoopaBros_Yellow_Anim04)
-    EVT_CALL(SetActorFlagBits, ACTOR_ENEMY2, ACTOR_FLAG_HIDE_HP_BAR, FALSE)
+    EVT_CALL(SetActorFlagBits, ACTOR_ENEMY2, ACTOR_FLAG_NO_HEALTH_BAR, FALSE)
     EVT_CALL(SetPartFlagBits, ACTOR_ENEMY2, 1, ACTOR_PART_FLAG_NO_TARGET, FALSE)
     EVT_CALL(HPBarToHome, ACTOR_ENEMY2)
     EVT_CALL(SetAnimation, ACTOR_ENEMY2, 1, ANIM_KoopaBros_Black_Anim04)
-    EVT_CALL(SetActorFlagBits, ACTOR_ENEMY3, ACTOR_FLAG_HIDE_HP_BAR, FALSE)
+    EVT_CALL(SetActorFlagBits, ACTOR_ENEMY3, ACTOR_FLAG_NO_HEALTH_BAR, FALSE)
     EVT_CALL(SetPartFlagBits, ACTOR_ENEMY3, 1, ACTOR_PART_FLAG_NO_TARGET, FALSE)
     EVT_CALL(HPBarToHome, ACTOR_ENEMY3)
     EVT_CALL(SetAnimation, ACTOR_ENEMY3, 1, ANIM_KoopaBros_Red_Anim04)
@@ -1929,7 +1929,7 @@ EvtScript N(80220588) = {
                 EVT_CASE_EQ(ACTOR_ENEMY3)
                     EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Anim04)
             EVT_END_SWITCH
-            EVT_CALL(SetActorFlagBits, LVarA, ACTOR_FLAG_HIDE_HP_BAR, TRUE)
+            EVT_CALL(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_HEALTH_BAR, TRUE)
             EVT_CALL(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_NO_TARGET, TRUE)
             EVT_CALL(HPBarToHome, LVarA)
             EVT_CALL(SetActorVar, LVarA, 1, 3)
@@ -1977,7 +1977,7 @@ EvtScript N(80220588) = {
                     EVT_CASE_EQ(ACTOR_ENEMY3)
                         EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Anim05)
                 EVT_END_SWITCH
-                EVT_CALL(SetActorFlagBits, LVarA, ACTOR_FLAG_HIDE_HP_BAR, TRUE)
+                EVT_CALL(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_HEALTH_BAR, TRUE)
                 EVT_CALL(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_NO_TARGET, TRUE)
                 EVT_CALL(HPBarToHome, LVarA)
                 EVT_CALL(SetActorVar, LVarA, 1, 6)
@@ -2043,7 +2043,7 @@ EvtScript N(80220588) = {
                     EVT_CASE_EQ(ACTOR_ENEMY3)
                         EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Anim05)
                 EVT_END_SWITCH
-                EVT_CALL(SetActorFlagBits, LVarA, ACTOR_FLAG_HIDE_HP_BAR, TRUE)
+                EVT_CALL(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_HEALTH_BAR, TRUE)
                 EVT_CALL(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_NO_TARGET, TRUE)
                 EVT_CALL(HPBarToHome, LVarA)
                 EVT_CALL(SetActorVar, LVarA, 1, 5)
@@ -2109,7 +2109,7 @@ EvtScript N(80220588) = {
                     EVT_CASE_EQ(ACTOR_ENEMY3)
                         EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Anim05)
                 EVT_END_SWITCH
-                EVT_CALL(SetActorFlagBits, LVarA, ACTOR_FLAG_HIDE_HP_BAR, TRUE)
+                EVT_CALL(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_HEALTH_BAR, TRUE)
                 EVT_CALL(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_NO_TARGET, TRUE)
                 EVT_CALL(HPBarToHome, LVarA)
                 EVT_CALL(SetActorVar, LVarA, 1, 4)
@@ -2253,7 +2253,7 @@ EvtScript N(80221DB4) = {
             EVT_ADD(LVar1, 19)
             EVT_PLAY_EFFECT(EFFECT_LENS_FLARE, 0, LVar0, LVar1, LVar2, 30, 0)
             EVT_WAIT(30)
-            EVT_CALL(SetActorFlagBits, LVarA, ACTOR_FLAG_HIDE_HP_BAR, TRUE)
+            EVT_CALL(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_HEALTH_BAR, TRUE)
             EVT_CALL(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_NO_TARGET, TRUE)
             EVT_CALL(HPBarToHome, LVarA)
             EVT_CALL(SetActorVar, LVarA, 1, 3)
@@ -2329,7 +2329,7 @@ EvtScript N(80221DB4) = {
                 EVT_CASE_EQ(ACTOR_ENEMY3)
                     EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Anim05)
             EVT_END_SWITCH
-            EVT_CALL(SetActorFlagBits, LVarA, ACTOR_FLAG_HIDE_HP_BAR, TRUE)
+            EVT_CALL(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_HEALTH_BAR, TRUE)
             EVT_CALL(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_NO_TARGET, TRUE)
             EVT_CALL(HPBarToHome, LVarA)
             EVT_CALL(SetActorVar, LVarA, 1, 4)
@@ -2389,14 +2389,14 @@ EvtScript N(80222C44) = {
     EVT_IF_NE(LVar0, -1)
         EVT_GOTO(1)
     EVT_END_IF
-    EVT_CALL(func_802535B4, 0)
+    EVT_CALL(EnableBattleStatusBar, FALSE)
     EVT_LABEL(2)
     EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar0)
     EVT_WAIT(1)
     EVT_IF_EQ(LVar0, 3)
         EVT_GOTO(2)
     EVT_END_IF
-    EVT_CALL(func_802535B4, 1)
+    EVT_CALL(EnableBattleStatusBar, TRUE)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_POPUP, TRUE)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_NO_TARGET, FALSE)
     EVT_SET(LVar0, LVarA)
@@ -2471,14 +2471,14 @@ EvtScript N(802230E8) = {
     EVT_IF_NE(LVar0, -1)
         EVT_GOTO(1)
     EVT_END_IF
-    EVT_CALL(func_802535B4, 0)
+    EVT_CALL(EnableBattleStatusBar, FALSE)
     EVT_LABEL(2)
     EVT_CALL(GetActorVar, ACTOR_ENEMY4, 0, LVar0)
     EVT_IF_NOT_FLAG(LVar0, 0x00000100)
         EVT_WAIT(1)
         EVT_GOTO(2)
     EVT_END_IF
-    EVT_CALL(func_802535B4, 1)
+    EVT_CALL(EnableBattleStatusBar, TRUE)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_POPUP, TRUE)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_NO_TARGET, FALSE)
     EVT_SET(LVar0, LVarA)

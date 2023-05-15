@@ -155,9 +155,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 100,
     .coinReward = 1,
     .size = { 24, 80 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -15, 75 },
-    .statusMessageOffset = { 10, 65 },
+    .statusTextOffset = { 10, 65 },
 };
 
 s32 N(IdleAnimations)[] = {
@@ -637,7 +637,7 @@ EvtScript N(calcSummonChance) = {
     EVT_SWITCH(LVar2)
         EVT_CASE_EQ(ACTOR_TYPE_POKEY)
             EVT_CALL(GetStatusFlags, LVar0, LVar3)
-            EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_SHRINK | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+            EVT_IF_NOT_FLAG(LVar3, STATUS_FLAGS_IMMOBILIZED | STATUS_FLAG_SHRINK)
                 EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_PARTS_THROWN), LVar3)
                 EVT_IF_EQ(LVar3, 0)
                     EVT_CALL(GetActorVar, LVar0, N(VAR_SUMMON_COUNT), LVar3)
@@ -1154,7 +1154,7 @@ EvtScript N(onSpinSmash) = {
     EVT_END
 };
 
-#include "common/UnkBattleFunc1.inc.c"
+#include "common/battle/SetAbsoluteStatusOffsets.inc.c"
 
 EvtScript N(afterPartThrown) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_PARTS_THROWN), LVarA)
@@ -1175,7 +1175,7 @@ EvtScript N(afterPartThrown) = {
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_PARTS_THROWN), 1)
             EVT_CALL(SetActorSize, ACTOR_SELF, 62, EVT_IGNORE_ARG)
             EVT_CALL(SetPartSize, ACTOR_SELF, 1, 62, EVT_IGNORE_ARG)
-            EVT_CALL(N(UnkBattleFunc1), -15, 55, 10, 45)
+            EVT_CALL(N(SetAbsoluteStatusOffsets), -15, 55, 10, 45)
         EVT_CASE_EQ(1)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_ANIM_IMMUNE), ANIM_Pokey_Anim06)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_ANIM_UNK), ANIM_Pokey_Anim0A)
@@ -1192,7 +1192,7 @@ EvtScript N(afterPartThrown) = {
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_PARTS_THROWN), 2)
             EVT_CALL(SetActorSize, ACTOR_SELF, 44, EVT_IGNORE_ARG)
             EVT_CALL(SetPartSize, ACTOR_SELF, 1, 44, EVT_IGNORE_ARG)
-            EVT_CALL(N(UnkBattleFunc1), -15, 35, 10, 25)
+            EVT_CALL(N(SetAbsoluteStatusOffsets), -15, 35, 10, 25)
         EVT_CASE_EQ(2)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_ANIM_IMMUNE), ANIM_Pokey_Anim07)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_ANIM_UNK), ANIM_Pokey_Anim0B)
@@ -1207,7 +1207,7 @@ EvtScript N(afterPartThrown) = {
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_PARTS_THROWN), 3)
             EVT_CALL(SetActorSize, ACTOR_SELF, 26, EVT_IGNORE_ARG)
             EVT_CALL(SetPartSize, ACTOR_SELF, 1, 26, EVT_IGNORE_ARG)
-            EVT_CALL(N(UnkBattleFunc1), -15, 15, 10, 5)
+            EVT_CALL(N(SetAbsoluteStatusOffsets), -15, 15, 10, 5)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -1435,7 +1435,7 @@ EvtScript N(flee) = {
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar3, LVar4, LVar5)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, 0, EASING_LINEAR)
     EVT_WAIT(8)
-    EVT_CALL(func_8027D32C, ACTOR_SELF)
+    EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(RemoveActor, ACTOR_SELF)
     EVT_RETURN

@@ -266,9 +266,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 80,
     .coinReward = 0,
     .size = { 30, 30 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 s32 N(IdleAnimations)[] = {
@@ -1006,7 +1006,7 @@ EvtScript N(takeTurn) = {
 };
 
 EvtScript N(next_phase) = {
-    EVT_CALL(func_8026BF48, 1)
+    EVT_CALL(FreezeBattleState, TRUE)
     EVT_CALL(SetActorVar, ACTOR_ENEMY1, 4, 1)
     EVT_RETURN
     EVT_END

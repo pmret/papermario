@@ -3468,11 +3468,30 @@ enum ItemEntityFlags {
     ITEM_ENTITY_FLAG_1000000       = 0x01000000,
     ITEM_ENTITY_FLAG_2000000       = 0x02000000,
     ITEM_ENTITY_FLAG_4000000       = 0x04000000,
-    ITEM_ENTITY_FLAG_8000000       = 0x08000000,
+    ITEM_ENTITY_FLAG_HIDING        = 0x08000000,
     ITEM_ENTITY_FLAG_10000000      = 0x10000000,
     ITEM_ENTITY_FLAG_20000000      = 0x20000000,
     ITEM_ENTITY_FLAG_40000000      = 0x40000000,
     ITEM_ENTITY_FLAG_80000000      = 0x80000000,
+};
+
+enum ItemEntityStates {
+    ITEM_ENTITY_STATE_IDLE        = 0x0,
+    ITEM_ENTITY_STATE_01        = 0x1,
+    ITEM_ENTITY_STATE_02        = 0x2,
+    ITEM_ENTITY_STATE_03        = 0x3,
+    ITEM_ENTITY_STATE_04        = 0x4,
+    ITEM_ENTITY_STATE_05        = 0x5,
+    ITEM_ENTITY_STATE_06        = 0x6,
+    ITEM_ENTITY_STATE_07        = 0x7,
+    ITEM_ENTITY_STATE_08        = 0x8,
+    ITEM_ENTITY_STATE_09        = 0x9,
+    ITEM_ENTITY_STATE_0A        = 0xA,
+    ITEM_ENTITY_STATE_0B        = 0xB,
+    ITEM_ENTITY_STATE_0C        = 0xC,
+    ITEM_ENTITY_STATE_0D        = 0xD,
+    ITEM_ENTITY_STATE_0E        = 0xE,
+    ITEM_ENTITY_STATE_0F        = 0xF,
 };
 
 // Worker
@@ -3584,7 +3603,7 @@ enum DamageTypes {
     DAMAGE_TYPE_SPIN_SMASH                 = 0x04000000,
     DAMAGE_TYPE_IGNORE_DEFENSE             = 0x08000000,
     DAMAGE_TYPE_NO_CONTACT                 = 0x10000000,
-    DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS     = 0x20000000,
+    DAMAGE_TYPE_MULTIPLE_POPUPS            = 0x20000000,
     DAMAGE_TYPE_STATUS_ALWAYS_HITS         = 0x40000000,
     DAMAGE_TYPE_TRIGGER_LUCKY              = 0x80000000,
 };
@@ -3958,8 +3977,8 @@ enum ActorFlags {
     ACTOR_FLAG_8000              = 0x00008000,
     ACTOR_FLAG_10000             = 0x00010000,
     ACTOR_FLAG_20000             = 0x00020000,
-    ACTOR_FLAG_HIDE_HP_BAR       = 0x00040000, ///< Hide HP bar.
-    ACTOR_FLAG_80000             = 0x00080000,
+    ACTOR_FLAG_NO_HEALTH_BAR     = 0x00040000, // Health bar is not shown for this actor type
+    ACTOR_FLAG_HEALTH_BAR_HIDDEN = 0x00080000, // Health bar is temporarily hidden
     ACTOR_FLAG_100000            = 0x00100000,
     ACTOR_FLAG_NO_ATTACK         = 0x00200000, ///< Skip attack turn.
     ACTOR_FLAG_NO_DMG_APPLY      = 0x00400000, ///< Damage is not applied to actor HP.

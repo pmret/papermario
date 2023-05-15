@@ -706,7 +706,7 @@ EvtScript EVS_MarioEnterStage = {
 };
 
 EvtScript EVS_PeachEnterStage = {
-    EVT_CALL(func_8026BF48, 1)
+    EVT_CALL(FreezeBattleState, TRUE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_ENTRY)
     EVT_CALL(SetBattleCamTarget, -80, 35, 8)
     EVT_CALL(BattleCamTargetActor, ACTOR_PLAYER)
@@ -727,7 +727,7 @@ EvtScript EVS_PeachEnterStage = {
     EVT_CALL(PlayerRunToGoal, 40)
     EVT_CALL(SetAnimation, ACTOR_SELF, 0, ANIM_Peach1_Walk)
     EVT_WAIT(15)
-    EVT_CALL(func_8026BF48, 0)
+    EVT_CALL(FreezeBattleState, FALSE)
     EVT_RETURN
     EVT_END
 };
@@ -1844,7 +1844,7 @@ EvtScript EVS_PlayerRegainAbility = {
     EVT_ADD(LVar1, 20)
     EVT_PLAY_EFFECT(EFFECT_STARS_SHIMMER, 0, LVar0, LVar1, LVar2, 30, 30, 10, 30)
     EVT_CALL(RemoveItemEntity, LVarA)
-    EVT_CALL(func_8026BF48, 0)
+    EVT_CALL(FreezeBattleState, FALSE)
     EVT_RETURN
     EVT_END
 };

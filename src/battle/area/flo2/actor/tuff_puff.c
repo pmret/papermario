@@ -129,9 +129,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 90,
     .coinReward = 0,
     .size = { 24, 32 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -15, 0 },
-    .statusMessageOffset = { 10, 10 },
+    .statusTextOffset = { 10, 10 },
 };
 
 EvtScript N(init) = {

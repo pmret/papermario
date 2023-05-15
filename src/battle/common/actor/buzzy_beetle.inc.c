@@ -82,9 +82,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 90,
     .coinReward = 1,
     .size = { 22, 18 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -8, 16 },
-    .statusMessageOffset = { 8, 13 },
+    .statusTextOffset = { 8, 13 },
 };
 
 s32 N(IdleAnimations_normal)[] = {
@@ -125,14 +125,14 @@ s32 N(IdleAnimations_flipped)[] = {
     STATUS_END,
 };
 
-#include "common/UnkBattleFunc1.inc.c"
+#include "common/battle/SetAbsoluteStatusOffsets.inc.c"
 
 EvtScript N(init) = {
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
-        EVT_CALL(N(UnkBattleFunc1), -10, 0, 10, 0)
+        EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 0, 10, 0)
         EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_ceiling)))
         EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_ceiling)))
         EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_FLIPABLE, FALSE)
@@ -159,11 +159,11 @@ EvtScript N(idle) = {
 };
 
 EvtScript N(fallOff) = {
-    EVT_CALL(func_8027D32C, ACTOR_SELF)
+    EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 2)
     EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 0, 16)
     EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -9)
-    EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
+    EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 20)
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 9, 1)
@@ -549,7 +549,7 @@ EvtScript N(takeTurn_ceiling) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
     EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 0, 16)
     EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -9)
-    EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
+    EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 20)
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_normal)))

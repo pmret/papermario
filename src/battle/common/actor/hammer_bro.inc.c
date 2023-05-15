@@ -149,9 +149,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 80,
     .coinReward = 2,
     .size = { 28, 38 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 35 },
+    .statusTextOffset = { 10, 35 },
 };
 
 EvtScript N(init) = {
@@ -230,7 +230,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_HammerBros_Anim15)
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_HammerBros_Anim17)
                 EVT_WAIT(10)
             EVT_END_IF
@@ -260,7 +260,7 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_AirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                 EVT_IF_FLAG(LVar0, STATUS_FLAG_SHRINK)
                     EVT_CALL(SetActorDispOffset, ACTOR_SELF, -2, 1, 0)
                 EVT_ELSE

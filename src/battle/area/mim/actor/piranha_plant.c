@@ -97,9 +97,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 90,
     .coinReward = 1,
     .size = { 38, 38 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -7, 33 },
-    .statusMessageOffset = { 10, 33 },
+    .statusTextOffset = { 10, 33 },
 };
 
 EvtScript N(init_8021D498) = {
@@ -234,7 +234,7 @@ EvtScript N(handleEvent_8021D60C) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SmallPiranha_Anim04)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
             EVT_WAIT(8)
-            EVT_CALL(func_8027D32C, ACTOR_SELF)
+            EVT_CALL(HideHealthBar, ACTOR_SELF)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
             EVT_CALL(RemoveActor, ACTOR_SELF)
             EVT_RETURN

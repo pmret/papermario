@@ -15,7 +15,7 @@ API_CALLABLE(N(SetActorLevelToZero)) {
     return ApiStatus_DONE2;
 }
 
-#include "common/UnkBattleFunc1.inc.c"
+#include "common/battle/SetAbsoluteStatusOffsets.inc.c"
 
 extern s32 N(IdleAnimations)[];
 extern EvtScript N(init);
@@ -230,9 +230,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 80,
     .coinReward = 0,
     .size = { 30, 75 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -15, 70 },
-    .statusMessageOffset = { 10, 65 },
+    .statusTextOffset = { 10, 65 },
 };
 
 EvtScript N(init) = {
@@ -803,7 +803,7 @@ EvtScript N(onDeath) = {
     EVT_ADD(LVar0, 1)
     EVT_CALL(SetActorVar, ACTOR_ENEMY1, 2, LVar0)
     EVT_IF_GE(LVar0, 2)
-        EVT_CALL(func_8026BF48, 1)
+        EVT_CALL(FreezeBattleState, TRUE)
     EVT_END_IF
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 100)
@@ -861,7 +861,7 @@ EvtScript N(shy_guy_on_spin_smash) = {
     EVT_END_THREAD
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, SUPPRESS_EVENT_ALL, 0, 1, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENT_ALL, 0, 1, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_GOTO(1)
     EVT_LABEL(10)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
@@ -933,11 +933,11 @@ EvtScript N(shy_guy_idle) = {
     EVT_IF_FLAG(LVar0, STATUS_FLAG_SLEEP)
         EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -4, 14)
         EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, 0)
-        EVT_CALL(N(UnkBattleFunc1), -10, 13, 10, 13)
+        EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 13, 10, 13)
     EVT_ELSE
         EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 0, 24)
         EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -10)
-        EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
+        EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 20)
     EVT_END_IF
     EVT_WAIT(1)
     EVT_GOTO(0)

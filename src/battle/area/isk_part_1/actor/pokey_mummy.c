@@ -142,9 +142,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 95,
     .coinReward = 1,
     .size = { 24, 80 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -15, 75 },
-    .statusMessageOffset = { 10, 65 },
+    .statusTextOffset = { 10, 65 },
 };
 
 s32 N(IdleAnimations_80218DC8)[] = {
@@ -196,7 +196,7 @@ s32 N(IdleAnimations_80218EB8)[] = {
     STATUS_END,
 };
 
-#include "common/UnkBattleFunc1.inc.c"
+#include "common/battle/SetAbsoluteStatusOffsets.inc.c"
 
 EvtScript N(init_80218EC4) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80219D88)))
@@ -761,7 +761,7 @@ EvtScript N(8021B1B4) = {
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
             EVT_CALL(SetActorSize, ACTOR_SELF, 62, EVT_IGNORE_ARG)
             EVT_CALL(SetPartSize, ACTOR_SELF, 1, 62, EVT_IGNORE_ARG)
-            EVT_CALL(N(UnkBattleFunc1), -15, 55, 10, 45)
+            EVT_CALL(N(SetAbsoluteStatusOffsets), -15, 55, 10, 45)
         EVT_CASE_EQ(1)
             EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0x00310106)
             EVT_CALL(SetActorVar, ACTOR_SELF, 2, 0x0031010A)
@@ -778,7 +778,7 @@ EvtScript N(8021B1B4) = {
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 2)
             EVT_CALL(SetActorSize, ACTOR_SELF, 44, EVT_IGNORE_ARG)
             EVT_CALL(SetPartSize, ACTOR_SELF, 1, 44, EVT_IGNORE_ARG)
-            EVT_CALL(N(UnkBattleFunc1), -15, 35, 10, 25)
+            EVT_CALL(N(SetAbsoluteStatusOffsets), -15, 35, 10, 25)
         EVT_CASE_EQ(2)
             EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0x00310107)
             EVT_CALL(SetActorVar, ACTOR_SELF, 2, 0x0031010B)
@@ -793,7 +793,7 @@ EvtScript N(8021B1B4) = {
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 3)
             EVT_CALL(SetActorSize, ACTOR_SELF, 26, EVT_IGNORE_ARG)
             EVT_CALL(SetPartSize, ACTOR_SELF, 1, 26, EVT_IGNORE_ARG)
-            EVT_CALL(N(UnkBattleFunc1), -15, 15, 10, 5)
+            EVT_CALL(N(SetAbsoluteStatusOffsets), -15, 15, 10, 5)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -997,7 +997,7 @@ EvtScript N(8021C2BC) = {
     EVT_CALL(SetGoalPos, ACTOR_SELF, 200, 0, 0)
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
     EVT_WAIT(8)
-    EVT_CALL(func_8027D32C, ACTOR_SELF)
+    EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(RemoveActor, ACTOR_SELF)
     EVT_RETURN

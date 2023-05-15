@@ -324,9 +324,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 80,
     .coinReward = 0,
     .size = { 30, 28 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 EvtScript N(init) = {
@@ -1255,10 +1255,10 @@ EvtScript N(bomb) = {
             EVT_CALL(N(GetPowerBombDamage), LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_GT(0)
-                    EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_BLAST | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, 0, 0, LVarF, BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
+                    EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_BLAST | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, LVarF, BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
                     EVT_SET(LF_MashEnded, 1)
                 EVT_CASE_DEFAULT
-                    EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_BLAST | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, 0, 0, LVarF, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
+                    EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_BLAST | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, LVarF, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
             EVT_END_SWITCH
             EVT_LABEL(6)
             EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
@@ -1277,10 +1277,10 @@ EvtScript N(bomb) = {
             EVT_CALL(N(GetMegaBombDamage), LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_GT(0)
-                    EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_BLAST | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, 0, 0, LVarF, BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
+                    EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_BLAST | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, LVarF, BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
                     EVT_SET(LF_MashEnded, 1)
                 EVT_CASE_DEFAULT
-                    EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_BLAST | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, 0, 0, LVarF, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
+                    EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_BLAST | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, LVarF, BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
             EVT_END_SWITCH
             EVT_LABEL(11)
             EVT_WAIT(5)

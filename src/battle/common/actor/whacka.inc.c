@@ -69,7 +69,7 @@ ActorPartBlueprint N(parts)[] = {
 };
 
 ActorBlueprint NAMESPACE = {
-    .flags = ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_HIDE_HP_BAR,
+    .flags = ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_NO_HEALTH_BAR,
     .type = ACTOR_TYPE_WHACKA,
     .level = 0,
     .maxHP = 99,
@@ -86,9 +86,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 50,
     .coinReward = 0,
     .size = { 47, 32 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -20, 40 },
-    .statusMessageOffset = { 10, 30 },
+    .statusTextOffset = { 10, 30 },
 };
 
 API_CALLABLE(N(IsHitEightTimes)) {

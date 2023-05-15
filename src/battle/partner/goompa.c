@@ -70,7 +70,7 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 80,
     .size = { 29, 26 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 EvtScript N(init) = {

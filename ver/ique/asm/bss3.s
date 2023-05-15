@@ -490,7 +490,10 @@ dlabel D_80155D8E
 .space 2
 
 dlabel D_80155D90
-.space 0x00000010
+.space 2
+
+dlabel pad_ItemEntity
+.space 0x000000E
 
 dlabel WorldItemEntities
 .space 0x00000400

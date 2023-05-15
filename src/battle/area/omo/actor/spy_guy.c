@@ -123,9 +123,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 85,
     .coinReward = 1,
     .size = { 32, 32 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 EvtScript N(init_802275D4) = {
@@ -160,7 +160,7 @@ EvtScript N(802276D4) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-    EVT_IF_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+    EVT_IF_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
         EVT_CALL(SetActorVar, ACTOR_SELF, 3, 0)
         EVT_RETURN
     EVT_END_IF

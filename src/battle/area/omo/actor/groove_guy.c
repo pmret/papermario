@@ -104,9 +104,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 80,
     .coinReward = 2,
     .size = { 28, 28 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 EvtScript N(init_80224B38) = {
@@ -118,7 +118,7 @@ EvtScript N(init_80224B38) = {
     EVT_END
 };
 
-#include "common/UnkBattleFunc1.inc.c"
+#include "common/battle/SetAbsoluteStatusOffsets.inc.c"
 
 EvtScript N(idle_80224B9C) = {
     EVT_LABEL(0)
@@ -126,11 +126,11 @@ EvtScript N(idle_80224B9C) = {
     EVT_IF_FLAG(LVar0, STATUS_FLAG_SLEEP)
         EVT_CALL(SetTargetOffset, ACTOR_SELF, PT_MAIN, -4, 14)
         EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PT_MAIN, 0, 0)
-        EVT_CALL(N(UnkBattleFunc1), -13, 15, 4, 13)
+        EVT_CALL(N(SetAbsoluteStatusOffsets), -13, 15, 4, 13)
     EVT_ELSE
         EVT_CALL(SetTargetOffset, ACTOR_SELF, PT_MAIN, 0, 24)
         EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PT_MAIN, 0, -10)
-        EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
+        EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 20)
     EVT_END_IF
     EVT_WAIT(1)
     EVT_GOTO(0)
@@ -501,7 +501,7 @@ EvtScript N(countActiveSummoners) = {
     EVT_SWITCH(LVar2)
         EVT_CASE_EQ(ACTOR_TYPE_GROOVE_GUY)
             EVT_CALL(GetStatusFlags, LVar0, LVar3)
-            EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+            EVT_IF_NOT_FLAG(LVar3, STATUS_FLAGS_IMMOBILIZED)
                 EVT_CALL(GetActorVar, LVar0, 0, LVar3)
                 EVT_IF_NE(LVar3, 2)
                     EVT_ADD(LVar9, 1)

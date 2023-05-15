@@ -72,9 +72,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 85,
     .coinReward = 0,
     .size = { 28, 22 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 s32 N(IdleAnimations_80219064)[] = {
@@ -260,7 +260,7 @@ EvtScript N(takeTurn_802197C0) = {
             EVT_END_IF
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(YieldTurn)
-            EVT_CALL(func_8027D32C, ACTOR_SELF)
+            EVT_CALL(HideHealthBar, ACTOR_SELF)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
             EVT_CALL(RemoveActor, ACTOR_SELF)
             EVT_RETURN

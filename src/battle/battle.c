@@ -229,7 +229,7 @@ void load_demo_battle(u32 index) {
     clear_printers();
     clear_item_entity_data();
     clear_player_data();
-    initialize_status_menu();
+    initialize_status_bar();
     clear_item_entity_data();
     set_screen_overlay_params_front(OVERLAY_TYPE_9, 255.0f);
 

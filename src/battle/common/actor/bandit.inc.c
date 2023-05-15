@@ -134,9 +134,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 80,
     .coinReward = 1,
     .size = { 26, 32 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 25 },
-    .statusMessageOffset = { 10, 25 },
+    .statusTextOffset = { 10, 25 },
 };
 
 ActorBlueprint N(coin) = {
@@ -157,9 +157,9 @@ ActorBlueprint N(coin) = {
     .powerBounceChance = 80,
     .coinReward = 1,
     .size = { 26, 32 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 25 },
-    .statusMessageOffset = { 10, 25 },
+    .statusTextOffset = { 10, 25 },
 };
 
 Vec3i N(coin_pos) = { NPC_DISPOSE_LOCATION };
@@ -495,7 +495,7 @@ EvtScript N(takeTurn) = {
         EVT_CALL(SetGoalPos, ACTOR_SELF, 300, 0, 0)
         EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
         EVT_CALL(SetBattleFlagBits, BS_FLAGS1_BATTLE_FLED, TRUE)
-        EVT_CALL(func_8027D32C, ACTOR_SELF)
+        EVT_CALL(HideHealthBar, ACTOR_SELF)
         EVT_CALL(RemoveActor, ACTOR_SELF)
         EVT_RETURN
     EVT_END_IF

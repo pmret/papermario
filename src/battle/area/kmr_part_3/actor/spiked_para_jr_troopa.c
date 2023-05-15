@@ -106,14 +106,14 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 75,
     .coinReward = 0,
     .size = { 60, 38 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -25, 35 },
-    .statusMessageOffset = { 10, 25 },
+    .statusTextOffset = { 10, 25 },
 };
 
 EvtScript N(80228084) = {
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar2)
-    EVT_IF_FLAG(LVar2, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+    EVT_IF_FLAG(LVar2, STATUS_FLAGS_IMMOBILIZED)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetBattleFlags, LVar2)
@@ -177,7 +177,7 @@ EvtScript N(802284DC) = {
 };
 
 EvtScript N(80228574) = {
-    EVT_CALL(func_802535B4, 1)
+    EVT_CALL(EnableBattleStatusBar, TRUE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 12)
     EVT_RETURN
@@ -211,7 +211,7 @@ EvtScript N(init_80228618) = {
     EVT_END
 };
 
-#include "common/UnkBattleFunc1.inc.c"
+#include "common/battle/SetAbsoluteStatusOffsets.inc.c"
 
 EvtScript N(idle_802286C0) = {
     EVT_LABEL(0)
@@ -219,11 +219,11 @@ EvtScript N(idle_802286C0) = {
     EVT_IF_FLAG(LVarA, 0x41000)
         EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -15, 28)
         EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 4, -6)
-        EVT_CALL(N(UnkBattleFunc1), -25, 27, -1, 27)
+        EVT_CALL(N(SetAbsoluteStatusOffsets), -25, 27, -1, 27)
     EVT_ELSE
         EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -8, 33)
         EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, -6)
-        EVT_CALL(N(UnkBattleFunc1), -22, 30, 2, 28)
+        EVT_CALL(N(SetAbsoluteStatusOffsets), -22, 30, 2, 28)
     EVT_END_IF
     EVT_WAIT(1)
     EVT_GOTO(0)
@@ -343,13 +343,13 @@ EvtScript N(handleEvent_802287D0) = {
             EVT_WAIT(20)
         EVT_CASE_EQ(58)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikedParaJrTroopa_Flail)
                 EVT_WAIT(1000)
             EVT_END_IF
         EVT_CASE_EQ(31)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikedParaJrTroopa_Flail)
                 EVT_WAIT(20)
                 EVT_EXEC_WAIT(N(802284DC))
@@ -576,7 +576,7 @@ EvtScript N(nextTurn_80229B38) = {
                 EVT_WAIT(10)
                 EVT_CALL(SetActorFlagBits, ACTOR_SELF, 0x00001000, TRUE)
                 EVT_CALL(func_8026D940, ACTOR_SELF, -20, 40)
-                EVT_CALL(func_8027D2D8, ACTOR_SELF)
+                EVT_CALL(ShowHealthBar, ACTOR_SELF)
                 EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                 EVT_SET(LVar0, 115)
                 EVT_SET(LVar1, 150)
@@ -601,7 +601,7 @@ EvtScript N(nextTurn_80229B38) = {
                 EVT_CALL(ActorSpeak, MSG_MAC_Port_00B9, ACTOR_SELF, 2, 0x00210013, 0x00210013)
                 EVT_CALL(SetActorFlagBits, ACTOR_SELF, 0x00001000, FALSE)
                 EVT_CALL(N(FreeIcon), LVarA)
-                EVT_CALL(func_8027D32C, ACTOR_SELF)
+                EVT_CALL(HideHealthBar, ACTOR_SELF)
                 EVT_CALL(func_8026D940, ACTOR_SELF, 0, 0)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_JrTroopa_OutOfBreath)
                 EVT_WAIT(25)
@@ -638,14 +638,14 @@ EvtScript N(8022A018) = {
     EVT_END_IF
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_301)
     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_0, 0)
-    EVT_CALL(func_8027D32C, ACTOR_SELF)
+    EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, 0, LVar2)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.2))
     EVT_CALL(FallToGoal, ACTOR_SELF, 10)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
     EVT_CALL(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
     EVT_CALL(HPBarToCurrent, ACTOR_SELF)
-    EVT_CALL(func_8027D2D8, ACTOR_SELF)
+    EVT_CALL(ShowHealthBar, ACTOR_SELF)
     EVT_LABEL(0)
     EVT_THREAD
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -697,7 +697,7 @@ EvtScript N(8022A39C) = {
 
 EvtScript N(8022A480) = {
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-    EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+    EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
         EVT_CALL(GetActorVar, ACTOR_SELF, 2, LVar0)
         EVT_IF_EQ(LVar0, 1)
             EVT_CALL(SetActorVar, ACTOR_SELF, 2, 0)

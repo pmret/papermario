@@ -163,9 +163,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 80,
     .coinReward = 0,
     .size = { 30, 30 },
-    .hpBarOffset = { 10, -42 },
+    .healthBarOffset = { 10, -42 },
     .statusIconOffset = { -18, 10 },
-    .statusMessageOffset = { 0, 0 },
+    .statusTextOffset = { 0, 0 },
 };
 
 EvtScript N(init) = {
@@ -689,7 +689,7 @@ EvtScript N(onDeath) = {
         EVT_CALL(SetActorVar, ACTOR_SELF, 5, 2)
         EVT_EXEC_WAIT(N(8022630C))
         EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_2000 | ACTOR_PART_FLAG_NO_TARGET, TRUE)
-        EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_HIDE_HP_BAR, TRUE)
+        EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_HEALTH_BAR, TRUE)
     EVT_ELSE
         EVT_EXEC_WAIT(N(onHit))
         EVT_RETURN

@@ -80,9 +80,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 100,
     .coinReward = 2,
     .size = { 55, 32 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -24, 20 },
-    .statusMessageOffset = { 5, 25 },
+    .statusTextOffset = { 5, 25 },
 };
 
 s32 N(IdleAnimations)[] = {

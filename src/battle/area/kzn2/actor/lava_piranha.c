@@ -261,9 +261,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 70,
     .coinReward = 0,
     .size = { 50, 50 },
-    .hpBarOffset = { 20, -10 },
+    .healthBarOffset = { 20, -10 },
     .statusIconOffset = { 5, 45 },
-    .statusMessageOffset = { 30, 47 },
+    .statusTextOffset = { 30, 47 },
 };
 
 #include "common/StartRumbleWithParams.inc.c"
@@ -657,7 +657,7 @@ EvtScript N(nextTurn) = {
 EvtScript N(spawnColorado) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
-    EVT_CALL(func_802535B4, 0)
+    EVT_CALL(EnableBattleStatusBar, FALSE)
     EVT_CALL(SpeakToPlayer, 0x00000000, 0xFFFFFFFF, 0xFFFFFFFF, 0, MSG_CH5_0104)
     EVT_THREAD
         EVT_LOOP(9)
@@ -716,7 +716,7 @@ EvtScript N(spawnColorado) = {
     EVT_CALL(SetNpcAnimation, 0x00000000, ANIM_BattleKolorado_Run)
     EVT_CALL(SetNpcSpeed, 0x00000000, EVT_FLOAT(6.0))
     EVT_CALL(NpcMoveTo, 0x00000000, -300, 0, 0)
-    EVT_CALL(func_802535B4, 1)
+    EVT_CALL(EnableBattleStatusBar, TRUE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
@@ -1385,9 +1385,9 @@ EvtScript N(onDeath) = {
             EVT_CALL(PlaySound, SOUND_3BC | SOUND_ID_TRIGGER_CHANGE_SOUND)
         EVT_END_THREAD
         EVT_CALL(N(StartRumbleWithParams), 80, 234)
-        EVT_CALL(func_8027D32C, ACTOR_SELF)
-        EVT_CALL(func_8027D32C, ACTOR_ENEMY1)
-        EVT_CALL(func_8027D32C, ACTOR_ENEMY2)
+        EVT_CALL(HideHealthBar, ACTOR_SELF)
+        EVT_CALL(HideHealthBar, ACTOR_ENEMY1)
+        EVT_CALL(HideHealthBar, ACTOR_ENEMY2)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_LavaPiranha_Anim0D)
         EVT_CALL(OverrideBattleDmaDest, VINE_0_BASE)
         EVT_CALL(LoadBattleDmaData, 10)
@@ -1640,8 +1640,8 @@ EvtScript N(onDeath) = {
         EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
         EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_ELSE
-        EVT_CALL(func_8027D32C, ACTOR_ENEMY1)
-        EVT_CALL(func_8027D32C, ACTOR_ENEMY2)
+        EVT_CALL(HideHealthBar, ACTOR_ENEMY1)
+        EVT_CALL(HideHealthBar, ACTOR_ENEMY2)
         EVT_SET(LVar0, ACTOR_ENEMY3)
         EVT_EXEC_WAIT(N(handleBudDeath))
         EVT_SET(LVar0, ACTOR_ENEMY4)
@@ -1669,7 +1669,7 @@ EvtScript N(onDeath) = {
                 EVT_CALL(PlayModelAnimation, VINE_0, VINE_0_BASE)
             EVT_END_IF
             EVT_WAIT(19)
-            EVT_CALL(func_8027D32C, ACTOR_SELF)
+            EVT_CALL(HideHealthBar, ACTOR_SELF)
             EVT_CALL(OverrideBattleDmaDest, VINE_0_BASE)
             EVT_CALL(LoadBattleDmaData, 10)
             EVT_CALL(PlayModelAnimation, VINE_0, VINE_0_BASE)
@@ -1897,7 +1897,7 @@ EvtScript N(ignite) = {
             EVT_CALL(SetActorVar, ACTOR_ENEMY1, 8, ANIM_LavaBud_Anim0B)
             EVT_CALL(SetActorVar, ACTOR_ENEMY1, 5, 1)
             EVT_CALL(SetPartFlagBits, ACTOR_ENEMY1, 2, ACTOR_PART_FLAG_NO_TARGET, FALSE)
-            EVT_CALL(SetActorFlagBits, ACTOR_ENEMY1, ACTOR_FLAG_HIDE_HP_BAR, FALSE)
+            EVT_CALL(SetActorFlagBits, ACTOR_ENEMY1, ACTOR_FLAG_NO_HEALTH_BAR, FALSE)
         EVT_CASE_EQ(ACTOR_ENEMY2)
             EVT_CALL(SetActorVar, ACTOR_ENEMY2, 10, 35)
             EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_2, 8, LVar1, LVar2, LVar3)
@@ -1918,7 +1918,7 @@ EvtScript N(ignite) = {
             EVT_CALL(SetActorVar, ACTOR_ENEMY2, 8, ANIM_LavaBud_Anim0B)
             EVT_CALL(SetActorVar, ACTOR_ENEMY2, 5, 1)
             EVT_CALL(SetPartFlagBits, ACTOR_ENEMY2, 2, ACTOR_PART_FLAG_NO_TARGET, FALSE)
-            EVT_CALL(SetActorFlagBits, ACTOR_ENEMY2, ACTOR_FLAG_HIDE_HP_BAR, FALSE)
+            EVT_CALL(SetActorFlagBits, ACTOR_ENEMY2, ACTOR_FLAG_NO_HEALTH_BAR, FALSE)
         EVT_CASE_DEFAULT
             EVT_CALL(SetActorVar, ACTOR_ENEMY0, 10, 70)
             EVT_CALL(GetAnimatedPositionByTreeIndex, VINE_0, 10, LVar1, LVar2, LVar3)
@@ -1939,7 +1939,7 @@ EvtScript N(ignite) = {
             EVT_CALL(SetActorVar, ACTOR_ENEMY0, 8, ANIM_LavaPiranha_Anim0A)
             EVT_CALL(SetActorVar, ACTOR_ENEMY0, 5, 1)
             EVT_CALL(ForceHomePos, ACTOR_SELF, 61, 61, 0)
-            EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_HIDE_HP_BAR, FALSE)
+            EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_HEALTH_BAR, FALSE)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END

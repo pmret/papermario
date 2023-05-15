@@ -96,9 +96,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 90,
     .coinReward = 2,
     .size = { 36, 36 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 EvtScript N(init) = {
@@ -324,12 +324,12 @@ EvtScript N(OnDeath) = {
 
 EvtScript N(OnHitElectric) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(func_8027D32C, ACTOR_SELF)
+    EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
     EVT_WAIT(30)
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVarA)
     EVT_CALL(UseIdleAnimation, LVarA, FALSE)
-    EVT_CALL(func_8027D32C, LVarA)
+    EVT_CALL(HideHealthBar, LVarA)
     EVT_CALL(CopyStatusEffects, ACTOR_SELF, LVarA)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SMOKE_BURST)
     EVT_THREAD
@@ -385,7 +385,7 @@ EvtScript N(OnHitElectric) = {
 EvtScript N(OnShockHit) = {
     EVT_SET(LVar9, LVar0)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(func_8027D32C, ACTOR_SELF)
+    EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
@@ -398,7 +398,7 @@ EvtScript N(OnShockHit) = {
     EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVarA)
     EVT_CALL(UseIdleAnimation, LVarA, FALSE)
-    EVT_CALL(func_8027D32C, LVarA)
+    EVT_CALL(HideHealthBar, LVarA)
     EVT_CALL(CopyStatusEffects, ACTOR_SELF, LVarA)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SMOKE_BURST)
     EVT_THREAD
@@ -463,7 +463,7 @@ EvtScript N(OnShockHit) = {
 };
 
 EvtScript N(OnShockDeath) = {
-    EVT_CALL(func_8027D32C, ACTOR_SELF)
+    EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_SET(LVarA, LVar0)
     EVT_SET(LVarB, LVar1)
     EVT_SET(LVarC, LVar2)

@@ -75,9 +75,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 80,
     .coinReward = 1,
     .size = { 31, 24 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, -20 },
-    .statusMessageOffset = { 10, -20 },
+    .statusTextOffset = { 10, -20 },
 };
 
 s32 N(IdleAnimations)[] = {
@@ -234,10 +234,10 @@ EvtScript N(hadleEvent_flying) = {
     EVT_END
 };
 
-#include "common/UnkBattleFunc1.inc.c"
+#include "common/battle/SetAbsoluteStatusOffsets.inc.c"
 
 EvtScript N(knockDown) = {
-    EVT_CALL(func_8027D32C, ACTOR_SELF)
+    EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(GetLastDamage, ACTOR_SELF, LVar0)
     EVT_IF_LE(LVar0, 0)
         EVT_RETURN
@@ -271,7 +271,7 @@ EvtScript N(knockDown) = {
     EVT_END_IF
     EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, -10)
     EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 0, 22)
-    EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
+    EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 20)
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_flying)))
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, TRUE)
     EVT_CALL(HPBarToHome, ACTOR_SELF)

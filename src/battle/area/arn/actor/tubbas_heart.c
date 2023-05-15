@@ -122,9 +122,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 75,
     .coinReward = 0,
     .size = { 30, 30 },
-    .hpBarOffset = { 5, 0 },
+    .healthBarOffset = { 5, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 EvtScript N(init_80223DA0) = {
@@ -280,7 +280,7 @@ EvtScript N(80224414) = {
     EVT_CALL(MoveBattleCamOver, 25)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, TRUE)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_DISABLE_CELEBRATION | BS_FLAGS1_BATTLE_FLED, TRUE)
-    EVT_CALL(func_8026F60C, 20)
+    EVT_CALL(SetEndBattleFadeOutRate, 20)
     EVT_RETURN
     EVT_END
 };
@@ -310,7 +310,7 @@ EvtScript N(takeTurn_802245C8) = {
         EVT_IF_NOT_FLAG(LVar0, 0x00000001)
             EVT_CALL(GetCurrentPartnerID, LVar0)
             EVT_IF_EQ(LVar0, 9)
-                EVT_CALL(func_802535B4, 0)
+                EVT_CALL(EnableBattleStatusBar, FALSE)
                 EVT_BITWISE_OR_CONST(LVar0, 0x3)
                 EVT_CALL(SetActorVar, ACTOR_SELF, 2, LVar0)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
@@ -334,10 +334,10 @@ EvtScript N(takeTurn_802245C8) = {
                 EVT_IF_EQ(LVar0, 0)
                     EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar0)
                     EVT_IF_NE(LVar0, 0)
-                        EVT_CALL(func_802535B4, 1)
+                        EVT_CALL(EnableBattleStatusBar, TRUE)
                     EVT_END_IF
                 EVT_ELSE
-                    EVT_CALL(func_802535B4, 1)
+                    EVT_CALL(EnableBattleStatusBar, TRUE)
                 EVT_END_IF
             EVT_END_IF
         EVT_END_IF
@@ -358,7 +358,7 @@ EvtScript N(takeTurn_802245C8) = {
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
             EVT_CALL(GetActorVar, ACTOR_SELF, 2, LVar0)
             EVT_IF_FLAG(LVar0, 0x00000002)
-                EVT_CALL(func_802535B4, 1)
+                EVT_CALL(EnableBattleStatusBar, TRUE)
             EVT_END_IF
         EVT_CASE_EQ(1)
             EVT_EXEC_WAIT(N(802255D8))

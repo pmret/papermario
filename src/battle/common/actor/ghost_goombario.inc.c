@@ -103,9 +103,9 @@ ActorBlueprint N(goombario) = {
     .powerBounceChance = 90,
     .coinReward = 2,
     .size = { 29, 26 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 EvtScript N(goombario_init) = {
@@ -496,7 +496,7 @@ EvtScript N(goombario_tattle) = {
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4, TRUE)
     EVT_CALL(N(UnkEffect6CFunc), LVar5)
     EVT_WAIT(12)
-    EVT_CALL(func_802535B4, 0)
+    EVT_CALL(EnableBattleStatusBar, FALSE)
     EVT_CALL(SetCamEnabled, CAM_TATTLE, TRUE)
     EVT_CALL(SetCamFlag80, CAM_TATTLE, FALSE)
     EVT_CALL(SetCamPerspective, CAM_TATTLE, CAM_UPDATE_MODE_6, 25, 16, 1024)
@@ -518,7 +518,7 @@ EvtScript N(goombario_tattle) = {
     EVT_WAIT(12)
     EVT_CALL(SetCamEnabled, CAM_TATTLE, FALSE)
     EVT_WAIT(32)
-    EVT_CALL(func_802535B4, 1)
+    EVT_CALL(EnableBattleStatusBar, TRUE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)

@@ -125,14 +125,14 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 75,
     .coinReward = 0,
     .size = { 24, 32 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -20, 35 },
-    .statusMessageOffset = { 10, 25 },
+    .statusTextOffset = { 10, 25 },
 };
 
 EvtScript N(8022A750) = {
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar2)
-    EVT_IF_FLAG(LVar2, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+    EVT_IF_FLAG(LVar2, STATUS_FLAGS_IMMOBILIZED)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetBattleFlags, LVar2)
@@ -196,7 +196,7 @@ EvtScript N(8022ABA8) = {
 };
 
 EvtScript N(8022AC40) = {
-    EVT_CALL(func_802535B4, 1)
+    EVT_CALL(EnableBattleStatusBar, TRUE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 12)
     EVT_RETURN
@@ -328,13 +328,13 @@ EvtScript N(handleEvent_8022ADD8) = {
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(58)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MageJrTroopa_Flail)
                 EVT_WAIT(1000)
             EVT_END_IF
         EVT_CASE_EQ(31)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MageJrTroopa_Flail)
                 EVT_WAIT(20)
                 EVT_EXEC_WAIT(N(8022ABA8))
@@ -467,7 +467,7 @@ EvtScript N(nextTurn_8022BB44) = {
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
             EVT_IF_EQ(LVar0, 1)
                 EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar1)
-                EVT_IF_NOT_FLAG(LVar1, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+                EVT_IF_NOT_FLAG(LVar1, STATUS_FLAGS_IMMOBILIZED)
                     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 2)
                     EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar0)
                     EVT_IF_EQ(LVar0, 0)
@@ -522,7 +522,7 @@ EvtScript N(nextTurn_8022BB44) = {
 };
 
 EvtScript N(8022BF1C) = {
-    EVT_CALL(func_8027D32C, ACTOR_SELF)
+    EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(GetDamageSource, LVar5)
     EVT_SWITCH(LVar5)

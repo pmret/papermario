@@ -187,9 +187,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 85,
     .coinReward = 2,
     .size = { 24, 24 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 EvtScript N(setSpearStance) = {
@@ -976,7 +976,7 @@ EvtScript N(8021B96C) = {
     EVT_SWITCH(LVar2)
         EVT_CASE_EQ(ACTOR_TYPE_JUNGLE_FUZZY)
             EVT_CALL(GetStatusFlags, LVar0, LVar3)
-            EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+            EVT_IF_NOT_FLAG(LVar3, STATUS_FLAGS_IMMOBILIZED)
                 EVT_CALL(GetActorVar, LVar0, 0, LVar3)
                 EVT_IF_NE(LVar3, 2)
                     EVT_ADD(LVar9, 1)
@@ -984,7 +984,7 @@ EvtScript N(8021B96C) = {
             EVT_END_IF
         EVT_CASE_EQ(ACTOR_TYPE_SPEAR_GUY)
             EVT_CALL(GetStatusFlags, LVar0, LVar3)
-            EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+            EVT_IF_NOT_FLAG(LVar3, STATUS_FLAGS_IMMOBILIZED)
                 EVT_CALL(GetActorVar, LVar0, 1, LVar3)
                 EVT_IF_LT(LVar3, 2)
                     EVT_ADD(LVar9, 1)
@@ -1109,7 +1109,7 @@ EvtScript N(8021BF8C) = {
     EVT_END
 };
 
-#include "common/UnkBattleFunc1.inc.c"
+#include "common/battle/SetAbsoluteStatusOffsets.inc.c"
 
 EvtScript N(idle_8021BFD8) = {
     EVT_LABEL(0)
@@ -1117,11 +1117,11 @@ EvtScript N(idle_8021BFD8) = {
     EVT_IF_FLAG(LVar0, STATUS_FLAG_SLEEP)
         EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -4, 14)
         EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, 0)
-        EVT_CALL(N(UnkBattleFunc1), -10, 13, 10, 13)
+        EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 13, 10, 13)
     EVT_ELSE
         EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 0, 24)
         EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -10)
-        EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
+        EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 20)
     EVT_END_IF
     EVT_WAIT(1)
     EVT_GOTO(0)

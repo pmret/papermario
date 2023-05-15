@@ -69,7 +69,7 @@ ActorPartBlueprint N(PartsTable_80219114)[] = {
 extern EvtScript N(init_80219160);
 
 ActorBlueprint NAMESPACE = {
-    .flags = ACTOR_FLAG_HIDE_HP_BAR,
+    .flags = ACTOR_FLAG_NO_HEALTH_BAR,
     .type = ACTOR_TYPE_GOOMBARIO_TUTOR1,
     .level = 99,
     .maxHP = 99,
@@ -86,9 +86,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 100,
     .coinReward = 0,
     .size = { 24, 32 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 extern EvtScript N(takeTurn_80219444);
@@ -114,7 +114,7 @@ EvtScript N(idle_802191D0) = {
 EvtScript N(handleEvent_802191E0) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_THREAD
-        EVT_CALL(func_8026BF48, 1)
+        EVT_CALL(FreezeBattleState, TRUE)
         EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
         EVT_SWITCH(LVar0)
             EVT_CASE_EQ(10)
@@ -123,31 +123,31 @@ EvtScript N(handleEvent_802191E0) = {
                     EVT_CALL(RandInt, 2, LVar0)
                     EVT_SWITCH(LVar0)
                         EVT_CASE_EQ(0)
-                            EVT_CALL(ActorSpeak, MSG_HOS_002D, ACTOR_SELF, 1, 0x0009000A, 0x00090002)
+                            EVT_CALL(ActorSpeak, MSG_HOS_002D, ACTOR_SELF, 1, ANIM_BattleGoombario_HurtStill, ANIM_BattleGoombario_Walk)
                         EVT_CASE_EQ(1)
-                            EVT_CALL(ActorSpeak, MSG_HOS_002E, ACTOR_SELF, 1, 0x0009000A, 0x00090002)
+                            EVT_CALL(ActorSpeak, MSG_HOS_002E, ACTOR_SELF, 1, ANIM_BattleGoombario_HurtStill, ANIM_BattleGoombario_Walk)
                         EVT_CASE_EQ(2)
                     EVT_END_SWITCH
                 EVT_END_IF
         EVT_END_SWITCH
-        EVT_CALL(func_8026BF48, 0)
+        EVT_CALL(FreezeBattleState, FALSE)
     EVT_END_THREAD
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(9)
         EVT_CASE_OR_EQ(10)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleGoombario_HurtStill)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(23)
         EVT_CASE_OR_EQ(25)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleGoombario_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(48)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleGoombario_HurtStill)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_WAIT(1000)
@@ -285,7 +285,7 @@ API_CALLABLE(func_80218000_47F0B0) {
 
 EvtScript N(80219C74) = {
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_TUTORIAL_BATTLE, TRUE)
-    EVT_CALL(func_802535B4, 0)
+    EVT_CALL(EnableBattleStatusBar, FALSE)
     EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MENU)
     EVT_WAIT(15)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)

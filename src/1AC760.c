@@ -214,7 +214,7 @@ HitResult calc_partner_damage_enemy(void) {
         if (target->stoneStatus == STATUS_STONE) {
             sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             show_immune_bonk(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, 1);
-            show_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 0);
+            show_next_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 0);
             if (gBattleStatus.flags1 & (BS_FLAGS1_40 | BS_FLAGS1_200)) {
                 return HIT_RESULT_1;
             }
@@ -744,14 +744,14 @@ HitResult calc_partner_damage_enemy(void) {
                 show_immune_bonk(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, 3);
             }
         } else if (!partImmuneToElement) {
-            if (battleStatus->currentAttackElement & (DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS | DAMAGE_TYPE_SMASH)) {
-                show_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 0);
+            if (battleStatus->currentAttackElement & (DAMAGE_TYPE_MULTIPLE_POPUPS | DAMAGE_TYPE_SMASH)) {
+                show_next_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 0);
             } else {
-                func_802664DC(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 0);
+                show_primary_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 0);
             }
 
             if (!(targetPart->targetFlags & ACTOR_PART_TARGET_FLAG_4)) {
-                func_802666E4(target, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
+                show_damage_fx(target, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
             }
         }
     }
@@ -761,9 +761,9 @@ HitResult calc_partner_damage_enemy(void) {
         || gBattleStatus.flags1 & (BS_FLAGS1_200 | BS_FLAGS1_40)
         && !(gBattleStatus.flags1 & BS_FLAGS1_80)
     ) {
+        //TODO remove sfx_play_sound_at_position from conditional
         if ((battleStatus->lastAttackDamage > 0 &&
-             ((sfx_play_sound_at_position(SOUND_231, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y,
-                                          state->goalPos.z),                    //TODO remove sfx_play from conditional
+             ((sfx_play_sound_at_position(SOUND_231, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z),
                battleStatus->lastAttackDamage > 0))) || (battleStatus->currentAttackElement & DAMAGE_TYPE_STATUS_ALWAYS_HITS && tempBinary)) {
             if (gBattleStatus.flags1 & BS_FLAGS1_40) {
                 show_action_rating(ACTION_RATING_NICE, target, state->goalPos.x, state->goalPos.y, state->goalPos.z);
@@ -866,7 +866,7 @@ HitResult calc_partner_damage_enemy(void) {
         sfx_play_sound_at_position(SOUND_SMASH_GOOMNUT_TREE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
 
-    func_80266ADC(target);
+    show_actor_health_bar(target);
 
     if (gBattleStatus.flags1 & (BS_FLAGS1_200 | BS_FLAGS1_40)) {
         if (retVal == 0) {
@@ -937,16 +937,16 @@ s32 dispatch_damage_event_partner(s32 damageAmount, s32 event, s32 stopMotion) {
         set_goal_pos_to_part(state, ACTOR_PARTNER, 0);
     }
 
-    show_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z,
+    show_next_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z,
                       battleStatus->lastAttackDamage, 1);
-    func_802666E4(partner, state->goalPos.x, state->goalPos.y, state->goalPos.z,
+    show_damage_fx(partner, state->goalPos.x, state->goalPos.y, state->goalPos.z,
                   battleStatus->lastAttackDamage);
 
     if (battleStatus->lastAttackDamage > 0) {
         func_80267018(partner, 1);
     }
 
-    partner->flags |= ACTOR_FLAG_80000;
+    partner->flags |= ACTOR_FLAG_HEALTH_BAR_HIDDEN;
 
     flagCheck = (gBattleStatus.flags1 & (BS_FLAGS1_200 | BS_FLAGS1_40)) != 0;
     dispatch_event_partner(event);
@@ -1008,7 +1008,7 @@ ApiStatus func_8027FC90(Evt* script, s32 isInitialCall) {
     battleStatus->flags1 |= BS_FLAGS1_SP_EVT_ACTIVE;
 
     hitResult = calc_partner_damage_enemy();
-    show_damage_popup(actor->state.goalPos.x, actor->state.goalPos.y, actor->state.goalPos.z, battleStatus->lastAttackDamage,
+    show_next_damage_popup(actor->state.goalPos.x, actor->state.goalPos.y, actor->state.goalPos.z, battleStatus->lastAttackDamage,
                       0);
     evt_set_variable(script, outVar, hitResult);
 

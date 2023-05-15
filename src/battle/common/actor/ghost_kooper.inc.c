@@ -99,9 +99,9 @@ ActorBlueprint N(kooper) = {
     .powerBounceChance = 90,
     .coinReward = 2,
     .size = { 32, 38 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 EvtScript N(kooper_init) = {
@@ -114,7 +114,7 @@ EvtScript N(kooper_init) = {
     EVT_END
 };
 
-#include "common/UnkBattleFunc1.inc.c"
+#include "common/battle/SetAbsoluteStatusOffsets.inc.c"
 
 //TODO find the way to include it
 API_CALLABLE(N(kooper_UnkActorPosFunc)) {
@@ -152,11 +152,11 @@ EvtScript N(kooper_idle) = {
         EVT_CASE_EQ(0)
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -2, 38)
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -3, -9)
-            EVT_CALL(N(UnkBattleFunc1), -10, 25, 10, 25)
+            EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 25, 10, 25)
         EVT_CASE_EQ(1)
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 5, 15)
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, -6)
-            EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
+            EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 20)
     EVT_END_SWITCH
     EVT_WAIT(1)
     EVT_GOTO(0)
@@ -306,7 +306,7 @@ EvtScript N(kooper_handleEvent) = {
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
                     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-                    EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+                    EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                         EVT_IF_FLAG(LVar0, STATUS_FLAG_SHRINK)
                             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 1, 0)
                         EVT_ELSE

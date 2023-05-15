@@ -129,9 +129,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 70,
     .coinReward = 0,
     .size = { 56, 56 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -15, 40 },
-    .statusMessageOffset = { 15, 40 },
+    .statusTextOffset = { 15, 40 },
 };
 
 EvtScript N(init) = {
@@ -385,7 +385,7 @@ EvtScript N(OnHit) = {
         EVT_CASE_OR_EQ(N(PHASE_BEGIN))
         EVT_CASE_OR_EQ(N(PHASE_SUMMONED_BITS))
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-            EVT_IF_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_SHRINK | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+            EVT_IF_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED | STATUS_FLAG_SHRINK)
                 EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_BIT1_ID), LVar0)
                 EVT_CALL(ActorExists, LVar0, LVar1)
                 EVT_IF_EQ(LVar1, TRUE)
@@ -411,7 +411,7 @@ EvtScript N(OnHit) = {
             EVT_RETURN
     EVT_END_SWITCH
     EVT_CALL(GetLastElement, LVar0)
-    EVT_IF_FLAG(LVar0, DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS)
+    EVT_IF_FLAG(LVar0, DAMAGE_TYPE_MULTIPLE_POPUPS)
         EVT_LABEL(0)
         EVT_CALL(GetBattleFlags, LVar0)
         EVT_IF_FLAG(LVar0, BS_FLAGS1_100)
@@ -433,7 +433,7 @@ EvtScript N(OnHit) = {
             EVT_GOTO(1)
         EVT_END_IF
     EVT_END_IF
-    EVT_CALL(func_8027D32C, ACTOR_SELF)
+    EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim19)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_IF_NE(LVar1, 0)
@@ -457,7 +457,7 @@ EvtScript N(OnHit) = {
         EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, FALSE)
     EVT_END_IF
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-    EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+    EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
         EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim0E)
         EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
         EVT_CALL(SetGoalPos, ACTOR_SELF, 70, 0, 5)
@@ -509,7 +509,7 @@ EvtScript N(OnDeath) = {
             EVT_RETURN
     EVT_END_SWITCH
     EVT_CALL(GetLastElement, LVar0)
-    EVT_IF_FLAG(LVar0, DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS)
+    EVT_IF_FLAG(LVar0, DAMAGE_TYPE_MULTIPLE_POPUPS)
         EVT_LABEL(0)
         EVT_CALL(GetBattleFlags, LVar0)
         EVT_IF_FLAG(LVar0, BS_FLAGS1_100)
@@ -649,7 +649,7 @@ EvtScript N(handleEvent) = {
                 EVT_RETURN
             EVT_END_IF
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-            EVT_IF_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+            EVT_IF_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                 EVT_EXEC_WAIT(N(OnHit))
                 EVT_RETURN
             EVT_END_IF
@@ -1208,9 +1208,9 @@ ActorBlueprint N(clone) = {
     .powerBounceChance = 0,
     .coinReward = 0,
     .size = { 56, 56 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -15, 40 },
-    .statusMessageOffset = { 15, 40 },
+    .statusTextOffset = { 15, 40 },
 };
 
 Vec3i N(pos_crystal_clone) = { NPC_DISPOSE_LOCATION };
@@ -2033,25 +2033,25 @@ EvtScript N(Heal) = {
     EVT_END_IF
     EVT_IF_EQ(LocalFlag(0), 0)
         EVT_THREAD
-            EVT_CALL(func_8026BF48, 1)
+            EVT_CALL(FreezeBattleState, TRUE)
             EVT_CALL(HealActor, ACTOR_SELF, 20, FALSE)
-            EVT_CALL(func_8026BF48, 0)
+            EVT_CALL(FreezeBattleState, FALSE)
         EVT_END_THREAD
     EVT_ELSE
         EVT_THREAD
-            EVT_CALL(func_8026BF48, 1)
+            EVT_CALL(FreezeBattleState, TRUE)
             EVT_CALL(HealActor, ACTOR_SELF, 20, TRUE)
-            EVT_CALL(func_8026BF48, 0)
+            EVT_CALL(FreezeBattleState, FALSE)
         EVT_END_THREAD
         EVT_THREAD
-            EVT_CALL(func_8026BF48, 1)
+            EVT_CALL(FreezeBattleState, TRUE)
             EVT_CALL(HealActor, LVarA, 20, TRUE)
-            EVT_CALL(func_8026BF48, 0)
+            EVT_CALL(FreezeBattleState, FALSE)
         EVT_END_THREAD
         EVT_THREAD
-            EVT_CALL(func_8026BF48, 1)
+            EVT_CALL(FreezeBattleState, TRUE)
             EVT_CALL(HealActor, LVarB, 20, TRUE)
-            EVT_CALL(func_8026BF48, 0)
+            EVT_CALL(FreezeBattleState, FALSE)
         EVT_END_THREAD
         EVT_CALL(SetAnimation, LVarA, 1, ANIM_CrystalKing_Anim09)
         EVT_CALL(SetAnimation, LVarB, 1, ANIM_CrystalKing_Anim09)

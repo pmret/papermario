@@ -364,8 +364,8 @@ API_CALLABLE(N(OpenPauseMenu)) {
     return ApiStatus_DONE1;
 }
 
-API_CALLABLE(N(CloseStatusMenu)) {
-    close_status_menu();
+API_CALLABLE(N(CloseStatusBar)) {
+    close_status_bar();
     return ApiStatus_DONE2;
 }
 
@@ -387,7 +387,7 @@ EvtScript N(EVS_PromptForBadgeTutorial) = {
     EVT_WAIT(10)
     EVT_SET(GF_Tutorial_Badges, TRUE)
     EVT_CALL(N(OpenPauseMenu))
-    EVT_CALL(N(CloseStatusMenu))
+    EVT_CALL(N(CloseStatusBar))
     EVT_SET(GF_Tutorial_Badges, FALSE)
     EVT_RETURN
     EVT_END
@@ -1325,7 +1325,7 @@ EvtScript N(EVS_NpcInteract_Toad) = {
     EVT_END
 };
 
-#include "world/common/todo/SyncStatusMenu.inc.c"
+#include "world/common/todo/SyncStatusBar.inc.c"
 
 NOP_FIX // TODO figure out BSS nop issue
 API_CALLABLE(N(func_8024295C_8B29CC)) {
@@ -1442,7 +1442,7 @@ EvtScript N(EVS_Scene_EldstarsPlea) = {
     EVT_CALL(EnableModel, MODEL_o561, FALSE)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(FullyRestoreHPandFP)
-    EVT_CALL(N(SyncStatusMenu))
+    EVT_CALL(N(SyncStatusBar))
     EVT_CALL(InterpPlayerYaw, 143, 0)
     EVT_CALL(SetPlayerAnimation, ANIM_MarioW2_LayingDown)
     EVT_CALL(GetPlayerPos, -220, 33, -342)

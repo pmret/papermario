@@ -756,8 +756,10 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
     }
     actorPosZ = actor->currentPos.z + actor->headOffset.z;
 
-    actor->disableEffect->data.disableX->pos.x = actorPosX + ((actor->actorBlueprint->statusIconOffset.x + actor->unk_194) * actor->scalingFactor);
-    actor->disableEffect->data.disableX->pos.y = actorPosY + ((actor->actorBlueprint->statusIconOffset.y + actor->unk_195) * actor->scalingFactor);
+    actor->disableEffect->data.disableX->pos.x = actorPosX +
+        (actor->actorBlueprint->statusIconOffset.x + actor->statusIconOffset.x) * actor->scalingFactor;
+    actor->disableEffect->data.disableX->pos.y = actorPosY +
+        (actor->actorBlueprint->statusIconOffset.y + actor->statusIconOffset.y) * actor->scalingFactor;
     actor->disableEffect->data.disableX->pos.z = actorPosZ;
 
     if (!(gBattleStatus.flags1 & ACTOR_PART_FLAG_4) && (actor->flags & ACTOR_FLAG_8000000)) {
@@ -793,10 +795,10 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
         }
     }
     set_status_icons_properties(actor->hudElementDataIndex, actorPosX, actorPosY, actorPosZ,
-        (actor->actorBlueprint->statusIconOffset.x + actor->unk_194) * actor->scalingFactor,
-        (actor->actorBlueprint->statusIconOffset.y + actor->unk_195) * actor->scalingFactor,
-        (actor->actorBlueprint->statusMessageOffset.x + actor->unk_196) * actor->scalingFactor,
-        (actor->actorBlueprint->statusMessageOffset.y + actor->unk_197) * actor->scalingFactor);
+        (actor->actorBlueprint->statusIconOffset.x + actor->statusIconOffset.x) * actor->scalingFactor,
+        (actor->actorBlueprint->statusIconOffset.y + actor->statusIconOffset.y) * actor->scalingFactor,
+        (actor->actorBlueprint->statusTextOffset.x + actor->statusTextOffset.x) * actor->scalingFactor,
+        (actor->actorBlueprint->statusTextOffset.y + actor->statusTextOffset.y) * actor->scalingFactor);
 
     if (!(actor->flags & ACTOR_FLAG_UPSIDE_DOWN)) {
         set_status_icons_offset(actor->hudElementDataIndex,
@@ -1366,9 +1368,9 @@ void appendGfx_player_actor(void* arg0) {
     playerYaw = playerParts->yaw = player->yaw;
 
     player->disableEffect->data.disableX->pos.x = playerPosX +
-        ((player->actorBlueprint->statusIconOffset.x + player->unk_194) * player->scalingFactor);
+        (player->actorBlueprint->statusIconOffset.x + player->statusIconOffset.x) * player->scalingFactor;
     player->disableEffect->data.disableX->pos.y = playerPosY +
-        ((player->actorBlueprint->statusIconOffset.y + player->unk_195) * player->scalingFactor);
+        (player->actorBlueprint->statusIconOffset.y + player->statusIconOffset.y) * player->scalingFactor;
     player->disableEffect->data.disableX->pos.z = playerPosZ;
 
     if (!(gBattleStatus.flags1 & BS_FLAGS1_4) && (player->flags & ACTOR_FLAG_8000000)) {
@@ -1743,8 +1745,8 @@ end:
         playerPosX, playerPosY, playerPosZ,
         player->actorBlueprint->statusIconOffset.x * player->scalingFactor,
         player->actorBlueprint->statusIconOffset.y * player->scalingFactor,
-        player->actorBlueprint->statusMessageOffset.x * player->scalingFactor,
-        player->actorBlueprint->statusMessageOffset.y * player->scalingFactor);
+        player->actorBlueprint->statusTextOffset.x * player->scalingFactor,
+        player->actorBlueprint->statusTextOffset.y * player->scalingFactor);
     set_status_icons_offset(player->hudElementDataIndex,
         player->size.y * player->scalingFactor,
         player->size.x * player->scalingFactor);
@@ -2164,7 +2166,7 @@ void render_with_static_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matr
             while ((s32)decorationTable->originalPalettesList[decorationTable->originalPalettesCount] != -1) {
                 decorationTable->originalPalettesCount++;
             }
-            decorationTable->spriteColorVariations = 6;
+            decorationTable->spriteColorVariations = SPR_PLAYER_COLOR_VARIATIONS;
         } else {
             decorationTable->originalPalettesList = spr_get_npc_palettes(part->currentAnimation >> 16);
             decorationTable->originalPalettesCount = 0;
@@ -2559,7 +2561,7 @@ void func_8025AD90(b32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, s32 
             while ((s32)decorationTable->originalPalettesList[decorationTable->originalPalettesCount] != -1) {
                 decorationTable->originalPalettesCount++;
             }
-            decorationTable->spriteColorVariations = 6;
+            decorationTable->spriteColorVariations = SPR_PLAYER_COLOR_VARIATIONS;
         } else {
             decorationTable->originalPalettesList = spr_get_npc_palettes(part->currentAnimation >> 16);
             decorationTable->originalPalettesCount = 0;
@@ -2664,7 +2666,7 @@ void func_8025B1A8(b32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, s32 
             while ((s32)decorationTable->originalPalettesList[decorationTable->originalPalettesCount] != -1) {
                 decorationTable->originalPalettesCount++;
             }
-            decorationTable->spriteColorVariations = 6;
+            decorationTable->spriteColorVariations = SPR_PLAYER_COLOR_VARIATIONS;
         } else {
             decorationTable->originalPalettesList = spr_get_npc_palettes(part->currentAnimation >> 16);
             decorationTable->originalPalettesCount = 0;
@@ -2770,9 +2772,9 @@ void func_8025B5C0(b32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, s32 
             }
 
             if (gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE) {
-                decorationTable->spriteColorVariations = 4;
+                decorationTable->spriteColorVariations = SPR_PEACH_BTL_PAL_STRIDE;
             } else {
-                decorationTable->spriteColorVariations = 6;
+                decorationTable->spriteColorVariations = SPR_PLAYER_COLOR_VARIATIONS;
             }
         } else {
             decorationTable->originalPalettesList = spr_get_npc_palettes(part->currentAnimation >> 16);

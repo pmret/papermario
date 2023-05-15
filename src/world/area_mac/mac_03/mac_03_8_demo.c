@@ -61,7 +61,7 @@ EvtScript N(EVS_DemoUpdatePassengerPos) = {
 };
 
 EvtScript N(EVS_DemoDepartForMtRugged) = {
-    EVT_CALL(EnableStatusMenu, FALSE)
+    EVT_CALL(EnableWorldStatusBar, FALSE)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(DisablePartnerAI, 0)

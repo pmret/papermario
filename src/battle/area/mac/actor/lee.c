@@ -100,9 +100,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 90,
     .coinReward = 0,
     .size = { 36, 36 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 extern EvtScript N(takeTurn_80229F9C);
@@ -132,9 +132,9 @@ EvtScript N(init_8021D4C8) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
     EVT_THREAD
-        EVT_CALL(func_8026BF48, 1)
+        EVT_CALL(FreezeBattleState, TRUE)
         EVT_EXEC_WAIT(N(copyPartner))
-        EVT_CALL(func_8026BF48, 0)
+        EVT_CALL(FreezeBattleState, FALSE)
     EVT_END_THREAD
     EVT_CALL(func_802180D0_464560)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_NO_GAME_OVER, TRUE)
@@ -343,12 +343,12 @@ EvtScript N(8021E0E0) = {
 
 EvtScript N(8021E118) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(func_8027D32C, ACTOR_SELF)
+    EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
     EVT_WAIT(30)
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVarA)
     EVT_CALL(UseIdleAnimation, LVarA, FALSE)
-    EVT_CALL(func_8027D32C, LVarA)
+    EVT_CALL(HideHealthBar, LVarA)
     EVT_CALL(CopyStatusEffects, ACTOR_SELF, LVarA)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SMOKE_BURST)
     EVT_THREAD
@@ -402,7 +402,7 @@ EvtScript N(8021E118) = {
 };
 
 EvtScript N(8021E5DC) = {
-    EVT_CALL(func_8027D32C, ACTOR_SELF)
+    EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_SET(LVarA, LVar0)
     EVT_SET(LVarB, LVar1)
     EVT_SET(LVarC, LVar2)
@@ -527,9 +527,9 @@ ActorBlueprint N(goombario) = {
     .powerBounceChance = 90,
     .coinReward = 0,
     .size = { 29, 26 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 extern EvtScript N(takeTurn_802203F4);
@@ -1162,9 +1162,9 @@ ActorBlueprint N(kooper) = {
     .powerBounceChance = 90,
     .coinReward = 0,
     .size = { 32, 38 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 extern EvtScript N(takeTurn_80221200);
@@ -1185,7 +1185,7 @@ EvtScript N(init_Kooper) = {
 };
 
 #define NAMESPACE b_area_mac_lee_kooper
-#include "common/UnkBattleFunc1.inc.c"
+#include "common/battle/SetAbsoluteStatusOffsets.inc.c"
 #define NAMESPACE b_area_mac_lee
 
 EvtScript N(idle_80220790) = {
@@ -1195,11 +1195,11 @@ EvtScript N(idle_80220790) = {
         EVT_CASE_EQ(0)
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -2, 38)
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -3, -9)
-            EVT_CALL(N(kooper_UnkBattleFunc1), -10, 25, 10, 25)
+            EVT_CALL(N(kooper_SetAbsoluteStatusOffsets), -10, 25, 10, 25)
         EVT_CASE_EQ(1)
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 5, 15)
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, -6)
-            EVT_CALL(N(kooper_UnkBattleFunc1), -10, 20, 10, 20)
+            EVT_CALL(N(kooper_SetAbsoluteStatusOffsets), -10, 20, 10, 20)
     EVT_END_SWITCH
     EVT_WAIT(1)
     EVT_GOTO(0)
@@ -1343,7 +1343,7 @@ EvtScript N(handleEvent_80220908) = {
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
                     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-                    EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+                    EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                         EVT_IF_FLAG(LVar0, 0x80000)
                             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 1, 0)
                         EVT_ELSE
@@ -1673,9 +1673,9 @@ ActorBlueprint N(bombette) = {
     .powerBounceChance = 90,
     .coinReward = 0,
     .size = { 30, 28 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 extern EvtScript N(takeTurn_802229C4);
@@ -2039,9 +2039,9 @@ ActorBlueprint N(parakarry) = {
     .powerBounceChance = 90,
     .coinReward = 0,
     .size = { 38, 38 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 extern EvtScript N(takeTurn_80224304);
@@ -2156,7 +2156,7 @@ EvtScript N(handleEvent_80223584) = {
             EVT_EXEC_WAIT(EVS_Enemy_AirLift)
         EVT_CASE_EQ(22)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                 EVT_IF_FLAG(LVar0, 0x80000)
                     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 1, 0)
                 EVT_ELSE
@@ -2401,9 +2401,9 @@ ActorBlueprint N(bow) = {
     .powerBounceChance = 90,
     .coinReward = 0,
     .size = { 36, 29 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 extern EvtScript N(takeTurn_80224CA0);
@@ -2853,9 +2853,9 @@ ActorBlueprint N(watt) = {
     .powerBounceChance = 90,
     .coinReward = 0,
     .size = { 34, 28 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 extern EvtScript N(takeTurn_80226004);
@@ -3319,9 +3319,9 @@ ActorBlueprint N(sushie) = {
     .powerBounceChance = 90,
     .coinReward = 0,
     .size = { 37, 26 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 extern EvtScript N(takeTurn_802270BC);
@@ -3810,9 +3810,9 @@ ActorBlueprint N(lakilester) = {
     .powerBounceChance = 90,
     .coinReward = 0,
     .size = { 44, 40 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 extern EvtScript N(takeTurn_80228B78);

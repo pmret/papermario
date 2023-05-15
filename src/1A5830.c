@@ -298,7 +298,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
 
     if (target->stoneStatus == STATUS_STONE) {
         show_immune_bonk(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, -1);
-        show_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 0);
+        show_next_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 0);
         play_hit_sound(attacker, state->goalPos.x, state->goalPos.y, state->goalPos.z, 0);
         dispatch_event_general(target, EVENT_IMMUNE);
         return HIT_RESULT_HIT;
@@ -688,12 +688,12 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
                         // immune star fx?
                         show_immune_bonk(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, -3);
                     }
-                } else if (battleStatus->currentAttackElement & (DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS | DAMAGE_TYPE_SMASH)) {
-                    show_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 1);
-                    func_802666E4(target, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
+                } else if (battleStatus->currentAttackElement & (DAMAGE_TYPE_MULTIPLE_POPUPS | DAMAGE_TYPE_SMASH)) {
+                    show_next_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 1);
+                    show_damage_fx(target, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
                 } else {
-                    func_802664DC(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 1);
-                    func_802666E4(target, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
+                    show_primary_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 1);
+                    show_damage_fx(target, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
                     break;
                 }
                 break;
@@ -702,12 +702,12 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
                     if (!statusInflicted2 && !statusInflicted) {
                         show_immune_bonk(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, 3);
                     }
-                } else if (battleStatus->currentAttackElement & (DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS | DAMAGE_TYPE_SMASH)) {
-                    show_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 0);
-                    func_802666E4(target, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
+                } else if (battleStatus->currentAttackElement & (DAMAGE_TYPE_MULTIPLE_POPUPS | DAMAGE_TYPE_SMASH)) {
+                    show_next_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 0);
+                    show_damage_fx(target, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
                 } else {
-                    func_802664DC(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 0);
-                    func_802666E4(target, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
+                    show_primary_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 0);
+                    show_damage_fx(target, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
                 }
                 break;
         }
@@ -793,7 +793,8 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
         sfx_play_sound_at_position(SOUND_SMASH_GOOMNUT_TREE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
 
-    func_80266ADC(target);
+    show_actor_health_bar(target);
+
     if (attacker->staticStatus != STATUS_STATIC
         && (target->staticStatus == STATUS_STATIC || targetPart->eventFlags & ACTOR_EVENT_FLAG_ELECTRIFIED)
         && !(battleStatus->currentAttackElement & DAMAGE_TYPE_NO_CONTACT)
@@ -860,21 +861,21 @@ s32 dispatch_damage_event_actor(Actor* actor, s32 damageAmount, s32 originalEven
         s32 oldTargetActorID = actor->targetActorID;
 
         if (func_80263230(actor, actor) != 0) {
-            show_damage_popup(actor->targetData[0].pos.x, actor->targetData[0].pos.y, actor->targetData[0].pos.z, battleStatus->lastAttackDamage, 0);
-            func_802666E4(actor, actor->targetData[0].pos.x, actor->targetData[0].pos.y, actor->targetData[0].pos.z, battleStatus->lastAttackDamage);
+            show_next_damage_popup(actor->targetData[0].pos.x, actor->targetData[0].pos.y, actor->targetData[0].pos.z, battleStatus->lastAttackDamage, 0);
+            show_damage_fx(actor, actor->targetData[0].pos.x, actor->targetData[0].pos.y, actor->targetData[0].pos.z, battleStatus->lastAttackDamage);
             actor->targetActorID = oldTargetActorID;
         } else {
             actor->targetActorID = oldTargetActorID;
         }
     } else {
-        show_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 0);
-        func_802666E4(actor, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
+        show_next_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 0);
+        show_damage_fx(actor, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
     }
 
     if (battleStatus->lastAttackDamage > 0) {
         func_80267018(actor, 1);
     }
-    actor->flags |= ACTOR_FLAG_80000;
+    actor->flags |= ACTOR_FLAG_HEALTH_BAR_HIDDEN;
     dispatch_event_actor(actor, dispatchEvent);
     return 0;
 }
@@ -2609,7 +2610,7 @@ ApiStatus SetEnemyHP(Evt* script, s32 isInitialCall) {
         actor->currentHP = actor->maxHP;
     }
 
-    actor->hpFraction = (actor->currentHP * 25) / actor->maxHP;
+    actor->healthFraction = (actor->currentHP * 25) / actor->maxHP;
 
     return ApiStatus_DONE2;
 }
@@ -3028,25 +3029,25 @@ ApiStatus DispatchEvent(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8027D2D8(Evt* script, s32 isInitialCall) {
+ApiStatus ShowHealthBar(Evt* script, s32 isInitialCall) {
     s32 actorID = evt_get_variable(script, *script->ptrReadPos);
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    func_80266ADC(get_actor(actorID));
+    show_actor_health_bar(get_actor(actorID));
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8027D32C(Evt* script, s32 isInitialCall) {
+ApiStatus HideHealthBar(Evt* script, s32 isInitialCall) {
     s32 actorID = evt_get_variable(script, *script->ptrReadPos);
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    func_80266AF8(get_actor(actorID));
+    hide_actor_health_bar(get_actor(actorID));
     return ApiStatus_DONE2;
 }
 

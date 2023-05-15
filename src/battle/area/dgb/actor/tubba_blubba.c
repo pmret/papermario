@@ -93,9 +93,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 90,
     .coinReward = 0,
     .size = { 100, 100 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -33, 78 },
-    .statusMessageOffset = { 10, 75 },
+    .statusTextOffset = { 10, 75 },
 };
 
 EvtScript N(EVS_Init) = {
@@ -151,7 +151,7 @@ EvtScript N(nextTurn_80218FB0) = {
         EVT_CASE_EQ(PHASE_PLAYER_BEGIN)
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
             EVT_IF_EQ(LVar0, 0)
-                EVT_CALL(func_802535B4, 0)
+                EVT_CALL(EnableBattleStatusBar, FALSE)
                 EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
                 EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -172,7 +172,7 @@ EvtScript N(nextTurn_80218FB0) = {
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                 EVT_CALL(MoveBattleCamOver, 20)
                 EVT_WAIT(20)
-                EVT_CALL(func_802535B4, 1)
+                EVT_CALL(EnableBattleStatusBar, TRUE)
             EVT_END_IF
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -342,12 +342,12 @@ EvtScript N(takeTurn_80219750) = {
         EVT_KILL_THREAD(LVar0)
         EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, TRUE)
         EVT_CALL(SetBattleFlagBits, BS_FLAGS1_DISABLE_CELEBRATION | BS_FLAGS1_BATTLE_FLED, TRUE)
-        EVT_CALL(func_8026F60C, 10)
+        EVT_CALL(SetEndBattleFadeOutRate, 10)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar0)
     EVT_IF_EQ(LVar0, 1)
-        EVT_CALL(func_802535B4, 0)
+        EVT_CALL(EnableBattleStatusBar, FALSE)
         EVT_CALL(SetActorVar, ACTOR_SELF, 1, 2)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -370,7 +370,7 @@ EvtScript N(takeTurn_80219750) = {
         EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(MoveBattleCamOver, 15)
         EVT_WAIT(15)
-        EVT_CALL(func_802535B4, 1)
+        EVT_CALL(EnableBattleStatusBar, TRUE)
     EVT_END_IF
     EVT_CALL(RandInt, 100, LVar0)
     EVT_IF_LT(LVar0, 60)

@@ -78,9 +78,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 75,
     .coinReward = 0,
     .size = { 30, 30 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 s32 N(IdleAnimations_80221A14)[] = {
@@ -104,7 +104,7 @@ EvtScript N(init_80221A60) = {
     EVT_END
 };
 
-#include "common/UnkBattleFunc1.inc.c"
+#include "common/battle/SetAbsoluteStatusOffsets.inc.c"
 
 EvtScript N(idle_80221AAC) = {
     EVT_LABEL(0)
@@ -112,11 +112,11 @@ EvtScript N(idle_80221AAC) = {
     EVT_IF_FLAG(LVar0, STATUS_FLAG_SLEEP)
         EVT_CALL(SetTargetOffset, ACTOR_SELF, PT_MAIN, -4, 14)
         EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PT_MAIN, 0, 0)
-        EVT_CALL(N(UnkBattleFunc1), -10, 13, 10, 13)
+        EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 13, 10, 13)
     EVT_ELSE
         EVT_CALL(SetTargetOffset, ACTOR_SELF, PT_MAIN, 0, 24)
         EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PT_MAIN, -1, -10)
-        EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
+        EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 20)
     EVT_END_IF
     EVT_WAIT(1)
     EVT_GOTO(0)

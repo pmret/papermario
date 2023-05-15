@@ -86,9 +86,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 95,
     .coinReward = 2,
     .size = { 44, 36 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 s32 N(IdleAnimations_80220C60)[] = {
@@ -576,7 +576,7 @@ EvtScript N(handleEvent_80222140) = {
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_CASE_EQ(EVENT_SPIKE_TAUNT)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Cleft_Hyper_Anim18)
             EVT_END_IF
             EVT_WAIT(10)

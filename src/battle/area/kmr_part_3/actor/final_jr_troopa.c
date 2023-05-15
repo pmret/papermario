@@ -7,7 +7,7 @@
 
 #define NAMESPACE b_area_kmr_part_3_final_jr_troopa
 
-#include "common/UnkBattleFunc1.inc.c"
+#include "common/battle/SetAbsoluteStatusOffsets.inc.c"
 
 s32 N(IdleAnimations_8022C370)[] = {
     STATUS_NORMAL,    ANIM_JrTroopa_Idle,
@@ -193,14 +193,14 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 70,
     .coinReward = 0,
     .size = { 24, 32 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -20, 35 },
-    .statusMessageOffset = { 10, 25 },
+    .statusTextOffset = { 10, 25 },
 };
 
 EvtScript N(8022C6D4) = {
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar2)
-    EVT_IF_FLAG(LVar2, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+    EVT_IF_FLAG(LVar2, STATUS_FLAGS_IMMOBILIZED)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetBattleFlags, LVar2)
@@ -264,7 +264,7 @@ EvtScript N(8022CB2C) = {
 };
 
 EvtScript N(8022CBC4) = {
-    EVT_CALL(func_802535B4, 1)
+    EVT_CALL(EnableBattleStatusBar, TRUE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 12)
     EVT_RETURN
@@ -288,7 +288,7 @@ s32 N(IdleAnimations_8022CC68)[] = {
 
 EvtScript N(8022CC74) = {
     EVT_SET(LVarA, LVar0)
-    EVT_CALL(func_8027D32C, ACTOR_SELF)
+    EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(SetAnimation, ACTOR_SELF, LVarA, LVar1)
     EVT_WAIT(10)
@@ -365,14 +365,14 @@ EvtScript N(idle_8022D058) = {
             EVT_IF_FLAG(LVarA, 0x41000)
                 EVT_CALL(SetTargetOffset, ACTOR_SELF, 2, -15, 28)
                 EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 2, 4, -6)
-                EVT_CALL(N(UnkBattleFunc1), -25, 27, -1, 27)
+                EVT_CALL(N(SetAbsoluteStatusOffsets), -25, 27, -1, 27)
             EVT_ELSE
                 EVT_CALL(SetTargetOffset, ACTOR_SELF, 2, -8, 33)
                 EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 2, 0, -6)
-                EVT_CALL(N(UnkBattleFunc1), -22, 30, 2, 28)
+                EVT_CALL(N(SetAbsoluteStatusOffsets), -22, 30, 2, 28)
             EVT_END_IF
         EVT_CASE_DEFAULT
-            EVT_CALL(N(UnkBattleFunc1), -20, 35, 10, 25)
+            EVT_CALL(N(SetAbsoluteStatusOffsets), -20, 35, 10, 25)
     EVT_END_SWITCH
     EVT_WAIT(1)
     EVT_GOTO(0)
@@ -478,7 +478,7 @@ EvtScript N(handleEvent_8022D1C4) = {
             EVT_WAIT(20)
         EVT_CASE_EQ(58)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                 EVT_SET(LVar1, 2)
                 EVT_EXEC_WAIT(N(802315F0))
                 EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
@@ -486,7 +486,7 @@ EvtScript N(handleEvent_8022D1C4) = {
             EVT_END_IF
         EVT_CASE_EQ(31)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                 EVT_SET(LVar1, 5)
                 EVT_EXEC_WAIT(N(802315F0))
                 EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
@@ -1320,9 +1320,9 @@ EvtScript N(8023106C) = {
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_25C)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(func_8026BF48, 1)
+        EVT_CALL(FreezeBattleState, TRUE)
         EVT_CALL(HealActor, ACTOR_SELF, LVar0, FALSE)
-        EVT_CALL(func_8026BF48, 0)
+        EVT_CALL(FreezeBattleState, FALSE)
     EVT_END_THREAD
     EVT_WAIT(30)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -1432,14 +1432,14 @@ EvtScript N(802318F8) = {
                 EVT_GOTO(0)
             EVT_END_IF
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_301)
-            EVT_CALL(func_8027D32C, ACTOR_SELF)
+            EVT_CALL(HideHealthBar, ACTOR_SELF)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, 0, LVar2)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.2))
             EVT_CALL(FallToGoal, ACTOR_SELF, 10)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
             EVT_CALL(HPBarToCurrent, ACTOR_SELF)
-            EVT_CALL(func_8027D2D8, ACTOR_SELF)
+            EVT_CALL(ShowHealthBar, ACTOR_SELF)
             EVT_LABEL(0)
             EVT_THREAD
                 EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -1471,7 +1471,7 @@ EvtScript N(802318F8) = {
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, TRUE)
             EVT_RETURN
         EVT_CASE_EQ(3)
-            EVT_CALL(func_8027D32C, ACTOR_SELF)
+            EVT_CALL(HideHealthBar, ACTOR_SELF)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
             EVT_CALL(GetDamageSource, LVar5)
             EVT_SWITCH(LVar5)

@@ -59,7 +59,7 @@ ActorPartBlueprint N(parts)[] = {
 };
 
 ActorBlueprint N(slot_machine_stop) = {
-    .flags = ACTOR_FLAG_DISABLED | ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_TARGET_ONLY | ACTOR_FLAG_HIDE_HP_BAR | ACTOR_FLAG_NO_ATTACK,
+    .flags = ACTOR_FLAG_DISABLED | ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_TARGET_ONLY | ACTOR_FLAG_NO_HEALTH_BAR | ACTOR_FLAG_NO_ATTACK,
     .type = ACTOR_TYPE_SLOT_MACHINE_STOP,
     .level = 99,
     .maxHP = 99,
@@ -76,13 +76,13 @@ ActorBlueprint N(slot_machine_stop) = {
     .powerBounceChance = 0,
     .coinReward = 0,
     .size = { 44, 40 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 ActorBlueprint N(slot_machine_start) = {
-    .flags = ACTOR_FLAG_DISABLED | ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_TARGET_ONLY | ACTOR_FLAG_HIDE_HP_BAR | ACTOR_FLAG_NO_ATTACK,
+    .flags = ACTOR_FLAG_DISABLED | ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_TARGET_ONLY | ACTOR_FLAG_NO_HEALTH_BAR | ACTOR_FLAG_NO_ATTACK,
     .type = ACTOR_TYPE_SLOT_MACHINE_START,
     .level = 99,
     .maxHP = 99,
@@ -99,9 +99,9 @@ ActorBlueprint N(slot_machine_start) = {
     .powerBounceChance = 0,
     .coinReward = 0,
     .size = { 44, 40 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 API_CALLABLE(N(IsDemoBattle)) {
@@ -289,7 +289,7 @@ EvtScript N(idle) = {
             EVT_END_IF
             EVT_THREAD
 #if !VERSION_PAL
-                EVT_CALL(func_8026BF48, 1)
+                EVT_CALL(FreezeBattleState, TRUE)
 #endif
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
                 EVT_CALL(SetBattleCamTarget, 0, 100, 0)
@@ -339,7 +339,7 @@ EvtScript N(idle) = {
                 EVT_SET(ArrayVar(3), 0)
                 EVT_SET(ArrayVar(4), 0)
 #if !VERSION_PAL
-                EVT_CALL(func_8026BF48, 0)
+                EVT_CALL(FreezeBattleState, FALSE)
 #endif
             EVT_END_THREAD
 #if VERSION_PAL
@@ -352,7 +352,7 @@ EvtScript N(idle) = {
             EVT_BREAK_LOOP
         EVT_END_LOOP
 #if VERSION_PAL
-        EVT_CALL(func_8026BF48, 0)
+        EVT_CALL(FreezeBattleState, FALSE)
 #endif
     EVT_END_IF
     EVT_LABEL(1)
@@ -407,7 +407,7 @@ EvtScript N(handleEvent) = {
                     EVT_CALL(TranslateModel, 29, 0, 0, 0)
                     EVT_IF_EQ(ArrayVar(2), 1)
 #if VERSION_PAL
-                        EVT_CALL(func_8026BF48, 1)
+                        EVT_CALL(FreezeBattleState, TRUE)
 #endif
                         EVT_SET(ArrayVar(8), 100)
                         EVT_SET(ArrayVar(9), 150)
@@ -432,7 +432,7 @@ EvtScript N(handleEvent) = {
                     EVT_CALL(TranslateModel, 29, 0, 0, 0)
                     EVT_IF_EQ(ArrayVar(3), 1)
 #if VERSION_PAL
-                        EVT_CALL(func_8026BF48, 1)
+                        EVT_CALL(FreezeBattleState, TRUE)
 #endif
                         EVT_SET(ArrayVar(8), 150)
                         EVT_SET(ArrayVar(9), 100)
@@ -457,7 +457,7 @@ EvtScript N(handleEvent) = {
                     EVT_CALL(TranslateModel, 29, 0, 0, 0)
                     EVT_IF_EQ(ArrayVar(4), 1)
 #if VERSION_PAL
-                        EVT_CALL(func_8026BF48, 1)
+                        EVT_CALL(FreezeBattleState, TRUE)
 #endif
                         EVT_SET(ArrayVar(8), 200)
                         EVT_SET(ArrayVar(9), 150)

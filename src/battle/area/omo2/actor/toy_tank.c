@@ -136,7 +136,7 @@ ActorPartBlueprint N(parts)[] = {
 };
 
 ActorBlueprint NAMESPACE = {
-    .flags = ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_HIDE_HP_BAR,
+    .flags = ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_NO_HEALTH_BAR,
     .type = ACTOR_TYPE_TOY_TANK,
     .level = 0,
     .maxHP = 30,
@@ -153,9 +153,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 75,
     .coinReward = 0,
     .size = { 48, 78 },
-    .hpBarOffset = { 20, -3 },
+    .healthBarOffset = { 20, -3 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 EvtScript N(init) = {
@@ -461,7 +461,7 @@ EvtScript N(update_phase) = {
 };
 
 EvtScript N(start_stilt_guys_phase) = {
-    EVT_CALL(func_802535B4, 0)
+    EVT_CALL(EnableBattleStatusBar, FALSE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_WAIT(30)
@@ -500,14 +500,14 @@ EvtScript N(start_stilt_guys_phase) = {
     EVT_CALL(HPBarToHome, ACTOR_ENEMY0)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
-    EVT_CALL(func_802535B4, 1)
-    EVT_CALL(func_8026BF48, 0)
+    EVT_CALL(EnableBattleStatusBar, TRUE)
+    EVT_CALL(FreezeBattleState, FALSE)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(start_shy_stack_phase) = {
-    EVT_CALL(func_802535B4, 0)
+    EVT_CALL(EnableBattleStatusBar, FALSE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
     EVT_CALL(BattleCamTargetActor, ACTOR_ENEMY0)
     EVT_CALL(MoveBattleCamOver, 40)
@@ -574,8 +574,8 @@ EvtScript N(start_shy_stack_phase) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_WAIT(30)
-    EVT_CALL(func_802535B4, 1)
-    EVT_CALL(func_8026BF48, 0)
+    EVT_CALL(EnableBattleStatusBar, TRUE)
+    EVT_CALL(FreezeBattleState, FALSE)
     EVT_RETURN
     EVT_END
 };
@@ -627,7 +627,7 @@ EvtScript N(summon_stilt_guys) = {
     EVT_CALL(ActorSpeak, MSG_CH4_006D, ACTOR_ENEMY4, 1, -1, -1)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
-    EVT_CALL(func_8026BF48, 0)
+    EVT_CALL(FreezeBattleState, FALSE)
     EVT_RETURN
     EVT_END
 };
@@ -698,13 +698,13 @@ EvtScript N(summon_tank_squad) = {
         EVT_CALL(SetAnimation, ACTOR_ENEMY3, LVar0, ANIM_TankGuy_Anim01)
         EVT_ADD(LVar0, 1)
     EVT_END_LOOP
-    EVT_CALL(func_8026BF48, 0)
+    EVT_CALL(FreezeBattleState, FALSE)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(start_battle_with_tank) = {
-    EVT_CALL(func_802535B4, 0)
+    EVT_CALL(EnableBattleStatusBar, FALSE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
     EVT_CALL(BattleCamTargetActor, ACTOR_ENEMY0)
     EVT_CALL(MoveBattleCamOver, 60)
@@ -715,7 +715,7 @@ EvtScript N(start_battle_with_tank) = {
     EVT_CALL(SetPartFlagBits, ACTOR_ENEMY0, 1, ACTOR_PART_FLAG_20000000, FALSE)
     EVT_CALL(SetPartFlagBits, ACTOR_ENEMY2, 1, ACTOR_PART_FLAG_NO_TARGET, FALSE)
     EVT_CALL(SetPartFlagBits, ACTOR_ENEMY1, 2, ACTOR_PART_FLAG_NO_TARGET, FALSE)
-    EVT_CALL(SetActorFlagBits, ACTOR_ENEMY1, ACTOR_FLAG_HIDE_HP_BAR, FALSE)
+    EVT_CALL(SetActorFlagBits, ACTOR_ENEMY1, ACTOR_FLAG_NO_HEALTH_BAR, FALSE)
     EVT_CALL(HPBarToHome, ACTOR_ENEMY1)
     EVT_CALL(SetActorVar, ACTOR_ENEMY0, 0, 1)
     EVT_CALL(SetAnimation, ACTOR_ENEMY0, 1, ANIM_GeneralGuy_Anim02)
@@ -725,8 +725,8 @@ EvtScript N(start_battle_with_tank) = {
     EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, 1, SOUND_206B)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
-    EVT_CALL(func_802535B4, 1)
-    EVT_CALL(func_8026BF48, 0)
+    EVT_CALL(EnableBattleStatusBar, TRUE)
+    EVT_CALL(FreezeBattleState, FALSE)
     EVT_RETURN
     EVT_END
 };

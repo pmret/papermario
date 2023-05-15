@@ -65,9 +65,9 @@ API_CALLABLE(SetHealthBarPos) {
     Bytecode* args = script->ptrReadPos;
     Actor* actor = get_actor(ACTOR_ENEMY0);
 
-    actor->healthBarPosition.x = actor->homePos.x + evt_get_variable(script, *args++);
-    actor->healthBarPosition.y = actor->homePos.y + evt_get_variable(script, *args++);
-    actor->healthBarPosition.z = actor->homePos.z;
+    actor->healthBarPos.x = actor->homePos.x + evt_get_variable(script, *args++);
+    actor->healthBarPos.y = actor->homePos.y + evt_get_variable(script, *args++);
+    actor->healthBarPos.z = actor->homePos.z;
     return ApiStatus_DONE2;
 }
 
@@ -411,9 +411,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 70,
     .coinReward = 0,
     .size = { 125, 95 },
-    .hpBarOffset = { -17, -31 },
+    .healthBarOffset = { -17, -31 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 EvtScript N(EVS_Init) = {

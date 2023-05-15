@@ -175,9 +175,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 80,
     .coinReward = 2,
     .size = { 36, 40 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 32 },
+    .statusTextOffset = { 10, 32 },
 };
 
 ActorBlueprint N(flying) = {
@@ -198,9 +198,9 @@ ActorBlueprint N(flying) = {
     .powerBounceChance = 80,
     .coinReward = 2,
     .size = { 48, 40 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -25, 20 },
-    .statusMessageOffset = { 1, 34 },
+    .statusTextOffset = { 1, 34 },
 };
 
 s32 N(IdleAnimations)[] = {
@@ -294,7 +294,7 @@ EvtScript N(canBeKnockedOff) = {
     EVT_END
 };
 
-#include "common/UnkBattleFunc1.inc.c"
+#include "common/battle/SetAbsoluteStatusOffsets.inc.c"
 #include "common/StartRumbleWithParams.inc.c"
 
 EvtScript N(knockOff) = {
@@ -310,7 +310,7 @@ EvtScript N(knockOff) = {
     EVT_END_IF
     EVT_RETURN
     EVT_LABEL(0)
-    EVT_CALL(func_8027D32C, ACTOR_SELF)
+    EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
     EVT_IF_FLAG(LVar0, STATUS_FLAG_SHRINK)
         EVT_CALL(SetPartScale, ACTOR_SELF, 3, EVT_FLOAT(0.4), EVT_FLOAT(0.4), EVT_FLOAT(0.4))
@@ -358,7 +358,7 @@ EvtScript N(knockOff) = {
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
     EVT_CALL(SetActorType, ACTOR_SELF, ACTOR_TYPE_MAGIKOOPA)
     EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(StatusTable)))
-    EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 32)
+    EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 32)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_TYPE_CHANGED, TRUE)
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
     EVT_CALL(GetIndexFromPos, ACTOR_SELF, LVar0)
@@ -376,7 +376,7 @@ EvtScript N(knockOff) = {
 EvtScript N(flee) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
-    EVT_CALL(func_8027D32C, ACTOR_SELF)
+    EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_IF_NE(LVar0, EVENT_SCARE_AWAY)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
@@ -401,7 +401,7 @@ EvtScript N(flee) = {
     EVT_CALL(YieldTurn)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_EXEC_WAIT(EVS_ForceNextTarget)
-    EVT_CALL(func_8027D32C, ACTOR_SELF)
+    EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(RemoveActor, ACTOR_SELF)
     EVT_RETURN
     EVT_END
@@ -476,7 +476,7 @@ EvtScript N(removeClone) = {
     EVT_END_IF
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_LAST_ACTION_IS_MAKE_CLONE), 0)
     EVT_CALL(GetLastElement, LVarA)
-    EVT_IF_FLAG(LVarA, DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS)
+    EVT_IF_FLAG(LVarA, DAMAGE_TYPE_MULTIPLE_POPUPS)
         EVT_LABEL(0)
         EVT_CALL(GetBattleFlags, LVarA)
         EVT_IF_FLAG(LVarA, BS_FLAGS1_100)
@@ -604,7 +604,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_EXEC_WAIT(N(removeClone))
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                 EVT_IF_FLAG(LVar0, STATUS_FLAG_SHRINK)
                     EVT_CALL(SetPartDispOffset, ACTOR_SELF, 1, 0, 2, 0)
                 EVT_ELSE
@@ -753,7 +753,7 @@ EvtScript N(handleEvent_flying) = {
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_EXEC_WAIT(N(removeClone))
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                 EVT_IF_FLAG(LVar0, STATUS_FLAG_SHRINK)
                     EVT_CALL(SetPartDispOffset, ACTOR_SELF, 2, -3, 0, 0)
                 EVT_ELSE
@@ -846,9 +846,9 @@ EvtScript N(healOne) = {
         EVT_CALL(PlaySoundAtActor, LVarB, SOUND_25C)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(func_8026BF48, 1)
+        EVT_CALL(FreezeBattleState, TRUE)
         EVT_CALL(HealActor, LVarB, 5, FALSE)
-        EVT_CALL(func_8026BF48, 0)
+        EVT_CALL(FreezeBattleState, FALSE)
     EVT_END_THREAD
     EVT_CALL(WaitForBuffDone)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
@@ -939,9 +939,9 @@ EvtScript N(healAll) = {
             EVT_CALL(PlaySoundAtActor, LVar0, SOUND_25C)
         EVT_END_THREAD
         EVT_THREAD
-            EVT_CALL(func_8026BF48, 1)
+            EVT_CALL(FreezeBattleState, TRUE)
             EVT_CALL(HealActor, LVar0, 3, TRUE)
-            EVT_CALL(func_8026BF48, 0)
+            EVT_CALL(FreezeBattleState, FALSE)
         EVT_END_THREAD
     EVT_END_IF
     EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
@@ -1360,9 +1360,9 @@ ActorBlueprint N(clone) = {
     .powerBounceChance = 75,
     .coinReward = 0,
     .size = { 36, 40 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 32 },
+    .statusTextOffset = { 10, 32 },
 };
 
 ActorBlueprint N(clone_flying) = {
@@ -1383,9 +1383,9 @@ ActorBlueprint N(clone_flying) = {
     .powerBounceChance = 75,
     .coinReward = 2,
     .size = { 48, 40 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -25, 20 },
-    .statusMessageOffset = { 1, 34 },
+    .statusTextOffset = { 1, 34 },
 };
 
 Vec3i N(clone_pos) = { NPC_DISPOSE_LOCATION };
@@ -1593,9 +1593,9 @@ EvtScript N(boostAttack) = {
         EVT_CALL(PlaySoundAtActor, LVar8, SOUND_2DD)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(func_8026BF48, 1)
+        EVT_CALL(FreezeBattleState, TRUE)
         EVT_CALL(BoostAttack, LVar8, 1)
-        EVT_CALL(func_8026BF48, 0)
+        EVT_CALL(FreezeBattleState, FALSE)
     EVT_END_THREAD
     EVT_CALL(WaitForBuffDone)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
@@ -1705,9 +1705,9 @@ EvtScript N(boostDefense) = {
         EVT_CALL(PlaySoundAtActor, LVar8, SOUND_2DD)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(func_8026BF48, 1)
+        EVT_CALL(FreezeBattleState, TRUE)
         EVT_CALL(BoostDefense, LVar8, 1)
-        EVT_CALL(func_8026BF48, 0)
+        EVT_CALL(FreezeBattleState, FALSE)
     EVT_END_THREAD
     EVT_CALL(WaitForBuffDone)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
@@ -1822,9 +1822,9 @@ EvtScript N(electrify) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(func_8026BF48, 1)
+        EVT_CALL(FreezeBattleState, TRUE)
         EVT_CALL(ElectrifyActor, LVar8, 3)
-        EVT_CALL(func_8026BF48, 0)
+        EVT_CALL(FreezeBattleState, FALSE)
     EVT_END_THREAD
     EVT_CALL(WaitForBuffDone)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
@@ -1934,9 +1934,9 @@ EvtScript N(makeTransparent) = {
         EVT_CALL(PlaySoundAtActor, LVar8, SOUND_2DB)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(func_8026BF48, 1)
+        EVT_CALL(FreezeBattleState, TRUE)
         EVT_CALL(VanishActor, LVar8, 2)
-        EVT_CALL(func_8026BF48, 0)
+        EVT_CALL(FreezeBattleState, FALSE)
     EVT_END_THREAD
     EVT_CALL(WaitForBuffDone)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)

@@ -153,9 +153,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 90,
     .coinReward = 1,
     .size = { 27, 27 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 EvtScript N(init) = {
@@ -239,7 +239,7 @@ EvtScript N(changeSpikesState) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-    EVT_IF_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+    EVT_IF_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
         EVT_RETURN
     EVT_END_IF
     EVT_LABEL(0)
@@ -362,7 +362,7 @@ EvtScript N(handleEvent_normal) = {
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
             EVT_WAIT(20)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim12)
                 EVT_WAIT(10)
             EVT_END_IF
@@ -585,7 +585,7 @@ EvtScript N(handleEvent_spiky) = {
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
             EVT_WAIT(20)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                 EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim13)
             EVT_END_IF
             EVT_WAIT(10)
@@ -856,10 +856,10 @@ EvtScript N(attackSpikeBounce) = {
     EVT_END
 };
 
-#include "common/UnkBattleFunc1.inc.c"
+#include "common/battle/SetAbsoluteStatusOffsets.inc.c"
 
 EvtScript N(8021B7C8) = {
-    EVT_CALL(func_8027D32C, ACTOR_SELF)
+    EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_STATE), N(STATE_FLIPPED))
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_FLIP_TRIGGERED), 1)
     EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable_flipped)))
@@ -867,7 +867,7 @@ EvtScript N(8021B7C8) = {
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, FALSE)
     EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, -8)
     EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -3, 21)
-    EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
+    EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 20)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim06)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -929,7 +929,7 @@ EvtScript N(handleEvent_flipped) = {
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_STATE), N(STATE_FLIPPED))
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, -8)
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -3, 21)
-            EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
+            EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 20)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_FLIP_TRIGGERED), 1)
             EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable_flipped)))
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_flipped)))
@@ -1061,7 +1061,7 @@ EvtScript N(handleEvent_spiky_flipped) = {
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_STATE), N(STATE_SPIKY_FLIPPED))
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, -8)
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -3, 21)
-            EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
+            EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 20)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_FLIP_TRIGGERED), 1)
             EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable_flipped)))
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_spiky_flipped)))

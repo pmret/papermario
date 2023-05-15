@@ -79,9 +79,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 100,
     .coinReward = 1,
     .size = { 28, 36 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -15, 32 },
-    .statusMessageOffset = { 5, 32 },
+    .statusTextOffset = { 5, 32 },
 };
 
 s32 N(IdleAnimations)[] = {
@@ -136,7 +136,7 @@ EvtScript N(init) = {
     EVT_END
 };
 
-#include "common/UnkBattleFunc1.inc.c"
+#include "common/battle/SetAbsoluteStatusOffsets.inc.c"
 
 EvtScript N(8021CBD8) = {
     EVT_SWITCH(LVar0)
@@ -144,16 +144,16 @@ EvtScript N(8021CBD8) = {
             EVT_IF_FLAG(LVar1, STATUS_FLAG_SLEEP | STATUS_FLAG_DIZZY)
                 EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -5, 15)
                 EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, 0)
-                EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
+                EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 20)
             EVT_ELSE
                 EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -4, 32)
                 EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -4)
-                EVT_CALL(N(UnkBattleFunc1), -15, 32, 5, 32)
+                EVT_CALL(N(SetAbsoluteStatusOffsets), -15, 32, 5, 32)
             EVT_END_IF
         EVT_CASE_EQ(1)
             EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -5, 15)
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, 0)
-            EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
+            EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 20)
     EVT_END_SWITCH
     EVT_RETURN
     EVT_END
@@ -172,7 +172,7 @@ EvtScript N(idle) = {
             EVT_WAIT(1)
             EVT_GOTO(1)
         EVT_END_IF
-        EVT_IF_FLAG(LVar1, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+        EVT_IF_FLAG(LVar1, STATUS_FLAGS_IMMOBILIZED)
             EVT_WAIT(1)
             EVT_GOTO(1)
         EVT_END_IF
@@ -200,7 +200,7 @@ EvtScript N(idle) = {
             EVT_WAIT(1)
             EVT_GOTO(2)
         EVT_END_IF
-        EVT_IF_FLAG(LVar1, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+        EVT_IF_FLAG(LVar1, STATUS_FLAGS_IMMOBILIZED)
             EVT_WAIT(1)
             EVT_GOTO(2)
         EVT_END_IF
@@ -228,7 +228,7 @@ EvtScript N(idle) = {
             EVT_WAIT(1)
             EVT_GOTO(3)
         EVT_END_IF
-        EVT_IF_FLAG(LVar1, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+        EVT_IF_FLAG(LVar1, STATUS_FLAGS_IMMOBILIZED)
             EVT_WAIT(1)
             EVT_GOTO(3)
         EVT_END_IF
@@ -342,7 +342,7 @@ EvtScript N(handleEvent) = {
                 EVT_SET_CONST(LVar1, ANIM_KoopaTroopa_ShellEnter)
                 EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
                 EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-                EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+                EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KoopaTroopa_ShellExit)
                     EVT_WAIT(10)
                 EVT_END_IF

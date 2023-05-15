@@ -144,9 +144,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 100,
     .coinReward = 1,
     .size = { 36, 26 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 s32 N(IdleAnimations_8021C3D8)[] = {
@@ -200,7 +200,7 @@ EvtScript N(idle_8021C4D4) = {
     EVT_LOOP(LVar0)
         EVT_LABEL(0)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar1)
-        EVT_IF_FLAG(LVar1, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+        EVT_IF_FLAG(LVar1, STATUS_FLAGS_IMMOBILIZED)
             EVT_WAIT(1)
             EVT_GOTO(0)
         EVT_END_IF
@@ -215,7 +215,7 @@ EvtScript N(idle_8021C4D4) = {
     EVT_LOOP(20)
         EVT_LABEL(1)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar1)
-        EVT_IF_FLAG(LVar1, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+        EVT_IF_FLAG(LVar1, STATUS_FLAGS_IMMOBILIZED)
             EVT_WAIT(1)
             EVT_GOTO(1)
         EVT_END_IF
@@ -230,7 +230,7 @@ EvtScript N(idle_8021C4D4) = {
     EVT_LOOP(40)
         EVT_LABEL(2)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar1)
-        EVT_IF_FLAG(LVar1, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+        EVT_IF_FLAG(LVar1, STATUS_FLAGS_IMMOBILIZED)
             EVT_WAIT(1)
             EVT_GOTO(2)
         EVT_END_IF
@@ -482,7 +482,7 @@ EvtScript N(takeTurn_8021CDFC) = {
 extern EvtScript N(8021DC34);
 
 EvtScript N(8021D614) = {
-    EVT_CALL(func_8027D32C, ACTOR_SELF)
+    EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(SetPartFlags, ACTOR_SELF, 2, 0x00020005)
     EVT_CALL(SetPartFlags, ACTOR_SELF, 3, 0x00120004)
     EVT_CALL(SetPartFlags, ACTOR_SELF, 4, 0x00120004)
@@ -593,7 +593,7 @@ EvtScript N(idle) = {
     EVT_LOOP(LVar0)
         EVT_LABEL(0)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar1)
-        EVT_IF_FLAG(LVar1, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+        EVT_IF_FLAG(LVar1, STATUS_FLAGS_IMMOBILIZED)
             EVT_WAIT(1)
             EVT_GOTO(0)
         EVT_END_IF
@@ -609,7 +609,7 @@ EvtScript N(idle) = {
     EVT_LOOP(20)
         EVT_LABEL(1)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar1)
-        EVT_IF_FLAG(LVar1, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+        EVT_IF_FLAG(LVar1, STATUS_FLAGS_IMMOBILIZED)
             EVT_WAIT(1)
             EVT_GOTO(1)
         EVT_END_IF
@@ -625,7 +625,7 @@ EvtScript N(idle) = {
     EVT_LOOP(80)
         EVT_LABEL(2)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar1)
-        EVT_IF_FLAG(LVar1, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+        EVT_IF_FLAG(LVar1, STATUS_FLAGS_IMMOBILIZED)
             EVT_WAIT(1)
             EVT_GOTO(2)
         EVT_END_IF

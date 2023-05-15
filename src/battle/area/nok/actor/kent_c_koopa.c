@@ -209,9 +209,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 70,
     .coinReward = 0,
     .size = { 90, 70 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -26, 38 },
-    .statusMessageOffset = { 2, 63 },
+    .statusTextOffset = { 2, 63 },
 };
 
 extern EvtScript N(takeTurn_80228A7C);
@@ -481,7 +481,7 @@ EvtScript N(handleEvent_80227E08) = {
 
 #include "common/StartRumbleWithParams.inc.c"
 
-#include "common/UnkBattleFunc1.inc.c"
+#include "common/battle/SetAbsoluteStatusOffsets.inc.c"
 
 EvtScript N(takeTurn_80228A7C) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, 4, 2)
@@ -564,7 +564,7 @@ EvtScript N(takeTurn_80228A7C) = {
             EVT_CALL(SetPartFlags, ACTOR_SELF, 2, 0x00020004)
             EVT_CALL(SetPartFlags, ACTOR_SELF, 1, 0x00800004)
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_80227968)))
-            EVT_CALL(N(UnkBattleFunc1), -26, 38, 2, 63)
+            EVT_CALL(N(SetAbsoluteStatusOffsets), -26, 38, 2, 63)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
             EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0x0047001C)
         EVT_END_IF
@@ -1000,7 +1000,7 @@ EvtScript N(flipOver_KentC) = {
     EVT_CALL(SetEnemyTargetOffset, ACTOR_SELF, 1, 0, 40)
     EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable_802279F0)))
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_802279B4)))
-    EVT_CALL(N(UnkBattleFunc1), -24, 47, 23, 37)
+    EVT_CALL(N(SetAbsoluteStatusOffsets), -24, 47, 23, 37)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_KentCKoopa_Anim1C)
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0x00470012)

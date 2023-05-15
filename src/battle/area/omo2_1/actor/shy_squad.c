@@ -290,9 +290,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 80,
     .coinReward = 0,
     .size = { 28, 24 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 s32 N(IdleAnimations)[] = {
@@ -462,7 +462,7 @@ EvtScript N(nextTurn) = {
                 EVT_CALL(SetBattleCamTarget, 72, 45, 0)
                 EVT_CALL(MoveBattleCamOver, 30)
                 EVT_WAIT(30)
-                EVT_CALL(func_802535B4, 0)
+                EVT_CALL(EnableBattleStatusBar, FALSE)
                 EVT_CALL(ActorSpeak, MSG_CH4_0065, ACTOR_SELF, 9, ANIM_ShySquadGuy_Anim11, ANIM_ShySquadGuy_Anim11)
                 EVT_SET(LVar0, 2)
                 EVT_LOOP(15)
@@ -470,7 +470,7 @@ EvtScript N(nextTurn) = {
                     EVT_ADD(LVar0, 1)
                 EVT_END_LOOP
                 EVT_CALL(EndActorSpeech, ACTOR_SELF, 1, -1, -1)
-                EVT_CALL(func_802535B4, 1)
+                EVT_CALL(EnableBattleStatusBar, TRUE)
                 EVT_SET(LVar0, 2)
                 EVT_LOOP(15)
                     EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, ANIM_ShySquadGuy_Anim01)
@@ -1266,7 +1266,7 @@ EvtScript N(takeTurn) = {
 };
 
 EvtScript N(flee) = {
-    EVT_CALL(func_802535B4, 0)
+    EVT_CALL(EnableBattleStatusBar, FALSE)
     EVT_SET(LVar0, 2)
     EVT_LOOP(15)
         EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, ANIM_ShySquadGuy_Anim08)
@@ -1277,7 +1277,7 @@ EvtScript N(flee) = {
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_WAIT(30)
     EVT_CALL(ActorSpeak, MSG_CH4_0066, ACTOR_SELF, 1, -1, -1)
-    EVT_CALL(func_8027D32C, ACTOR_SELF)
+    EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_SET(LVar0, 2)
@@ -1402,14 +1402,14 @@ EvtScript N(flee) = {
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, TRUE)
     EVT_EXEC_WAIT(N(next_phase))
     EVT_WAIT(10)
-    EVT_CALL(func_802535B4, 1)
+    EVT_CALL(EnableBattleStatusBar, TRUE)
     EVT_CALL(RemoveActor, ACTOR_SELF)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(next_phase) = {
-    EVT_CALL(func_8026BF48, 1)
+    EVT_CALL(FreezeBattleState, TRUE)
     EVT_CALL(SetActorVar, ACTOR_ENEMY1, 1, 1)
     EVT_RETURN
     EVT_END

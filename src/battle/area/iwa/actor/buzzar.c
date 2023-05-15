@@ -152,9 +152,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 75,
     .coinReward = 0,
     .size = { 78, 74 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -35, 65 },
-    .statusMessageOffset = { 1, 58 },
+    .statusTextOffset = { 1, 58 },
 };
 
 EvtScript N(EVS_Init) = {
@@ -413,7 +413,7 @@ EvtScript N(EVS_Attack_WindBlast) = {
                         EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
                         EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
                         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-                        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_UNBLOCKABLE | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, SUPPRESS_EVENT_ALL, 0, LVar1, BS_FLAGS1_SP_EVT_ACTIVE)
+                        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_UNBLOCKABLE | DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENT_ALL, 0, LVar1, BS_FLAGS1_SP_EVT_ACTIVE)
                     EVT_END_IF
                     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Buzzar_Anim01)
                     EVT_WAIT(25)
@@ -486,26 +486,26 @@ EvtScript N(EVS_Attack_WindBlast) = {
             EVT_CALL(SetActorYaw, ACTOR_PARTNER, 0)
         EVT_END_THREAD
     EVT_END_IF
-    EVT_CALL(func_8026BF48, 1)
+    EVT_CALL(FreezeBattleState, TRUE)
     EVT_WAIT(90)
     EVT_CALL(GetActionResult, LVar1)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_UNBLOCKABLE | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, SUPPRESS_EVENT_ALL, 0, LVar1, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_UNBLOCKABLE | DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENT_ALL, 0, LVar1, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(ActorExists, ACTOR_PARTNER, LVar0)
     EVT_IF_EQ(LVar0, TRUE)
         EVT_WAIT(3)
         EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
         EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PARTNER)
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_UNBLOCKABLE | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, SUPPRESS_EVENT_ALL, 0, LVar1, BS_FLAGS1_SP_EVT_ACTIVE)
+        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_UNBLOCKABLE | DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENT_ALL, 0, LVar1, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_END_IF
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Buzzar_Anim01)
     EVT_WAIT(25)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_EXEC_WAIT(N(EVS_FlyToHome))
-    EVT_CALL(func_8026BF48, 0)
+    EVT_CALL(FreezeBattleState, FALSE)
     EVT_RETURN
     EVT_END
 };

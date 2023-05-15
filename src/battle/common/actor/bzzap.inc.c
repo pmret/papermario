@@ -144,12 +144,12 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 90,
     .coinReward = 1,
     .size = { 38, 38 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
-#include "common/UnkBattleFunc1.inc.c"
+#include "common/battle/SetAbsoluteStatusOffsets.inc.c"
 
 API_CALLABLE(N(AddVecXZ)) {
     Bytecode* args = script->ptrReadPos;
@@ -185,11 +185,11 @@ EvtScript N(idle) = {
     EVT_IF_FLAG(LVarA, STATUS_FLAG_SLEEP | STATUS_FLAG_DIZZY)
         EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -7, 19)
         EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 2, -6)
-        EVT_CALL(N(UnkBattleFunc1), -20, 20, 10, 27)
+        EVT_CALL(N(SetAbsoluteStatusOffsets), -20, 20, 10, 27)
     EVT_ELSE
         EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -7, 33)
         EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 2, -10)
-        EVT_CALL(N(UnkBattleFunc1), -16, 22, 4, 22)
+        EVT_CALL(N(SetAbsoluteStatusOffsets), -16, 22, 4, 22)
     EVT_END_IF
     EVT_WAIT(1)
     EVT_GOTO(0)
@@ -299,7 +299,7 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_AirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                 EVT_IF_FLAG(LVar0, STATUS_FLAG_SHRINK)
                     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 3, 0)
                 EVT_ELSE

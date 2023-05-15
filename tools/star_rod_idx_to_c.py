@@ -885,9 +885,9 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
             out += INDENT + f".powerBounceChance = {d[14]},\n"
             out += INDENT + f".coinReward = {d[15]},\n"
             out += INDENT + f".size = {{ {d[16]}, {d[17]} }},\n"
-            out += INDENT + f".hpBarOffset = {{ {d[18]}, {d[19]} }},\n"
+            out += INDENT + f".healthBarOffset = {{ {d[18]}, {d[19]} }},\n"
             out += INDENT + f".statusIconOffset = {{ {d[20]}, {d[21]} }},\n"
-            out += INDENT + f".statusMessageOffset = {{ {d[22]}, {d[23]} }},\n"
+            out += INDENT + f".statusTextOffset = {{ {d[22]}, {d[23]} }},\n"
 
             out += f"}};\n"
 
