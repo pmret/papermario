@@ -486,8 +486,7 @@ void set_map_transition_effect(ScreenTransition);
 void set_tex_panner(struct Model* model, s32 texPannerID);
 void set_custom_gfx(s32 customGfxIndex, Gfx* pre, Gfx* post);
 
-s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 facingAngleSign,
-                     s32 pickupVar);
+s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 angle, s32 pickupVar);
 s32 make_item_entity_delayed(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 pickupVar);
 void set_item_entity_position(s32 itemEntityIndex, f32 x, f32 y, f32 z);
 ItemEntity* get_item_entity(s32 itemEntityIndex);

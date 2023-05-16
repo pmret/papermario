@@ -170,12 +170,12 @@ API_CALLABLE(func_80218280_6609D0) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args);
 
-    effect->data.huffPuffBreath->primR = 0xF8;
-    effect->data.huffPuffBreath->primG = 0xF8;
-    effect->data.huffPuffBreath->primB = 0xFF;
-    effect->data.huffPuffBreath->envR = 0x80;
-    effect->data.huffPuffBreath->envG = 0xE0;
-    ((HuffPuffBreathFXData*)effect->data.huffPuffBreath)->envB = 0xFF;
+    effect->data.huffPuffBreath->primR = 248;
+    effect->data.huffPuffBreath->primG = 248;
+    effect->data.huffPuffBreath->primB = 255;
+    effect->data.huffPuffBreath->envR = 128;
+    effect->data.huffPuffBreath->envG = 224;
+    effect->data.huffPuffBreath->envB = 255;
     return ApiStatus_DONE2;
 }
 
@@ -196,12 +196,12 @@ API_CALLABLE(func_80218344_660A94) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*) evt_get_variable(script, *args++);
 
-    effect->data.coldBreath->unk_18 = 0xFF;
-    effect->data.coldBreath->unk_1C = 0xFF;
-    effect->data.coldBreath->unk_20 = 0xFF;
-    effect->data.coldBreath->unk_28 = 0xC8;
-    effect->data.coldBreath->unk_2C = 0xF0;
-    effect->data.coldBreath->unk_30 = 0xFF;
+    effect->data.coldBreath->unk_18 = 255;
+    effect->data.coldBreath->unk_1C = 255;
+    effect->data.coldBreath->unk_20 = 255;
+    effect->data.coldBreath->unk_28 = 200;
+    effect->data.coldBreath->unk_2C = 240;
+    effect->data.coldBreath->unk_30 = 255;
     return ApiStatus_DONE2;
 }
 
@@ -1134,7 +1134,7 @@ EvtScript N(AttackIceBolt) = {
     EVT_END_THREAD
     EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_ICE | DAMAGE_TYPE_NO_CONTACT, 0, 0x00000002 | STATUS_FLAG_4 | STATUS_FLAG_8 | 0x00000010 | STATUS_FLAG_20 | STATUS_FLAG_40 | 0x00000080 | STATUS_FLAG_200 | STATUS_FLAG_FROZEN, 6, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_ICE | DAMAGE_TYPE_NO_CONTACT, 0, DMG_STATUS_IGNORE_RES(STATUS_FLAG_FROZEN, 2), 6, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)

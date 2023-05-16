@@ -396,7 +396,7 @@ EvtScript N(EVS_NpcInteract_KoopaKoot) = {
                 EVT_CALL(N(GetFavorMessages), GB_KootFavor_Current)
                 EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, LVar2)
                 EVT_CALL(ContinueSpeech, NPC_SELF, ANIM_KoopaKoot_Talk, ANIM_KoopaKoot_Idle, 0, MSG_CH1_00B1)
-                EVT_CALL(ShowGotItem, ITEM_STAR_PIECE, TRUE, 32)
+                EVT_CALL(ShowGotItem, ITEM_STAR_PIECE, TRUE, ITEM_PICKUP_FLAG_3_STAR_PIECES)
                 EVT_CALL(AddStarPieces, 3)
             EVT_END_IF
             EVT_SWITCH(GB_KootFavor_Completed)

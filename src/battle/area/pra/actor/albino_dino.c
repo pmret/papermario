@@ -295,7 +295,8 @@ EvtScript N(takeTurn) = {
     EVT_KILL_THREAD(LVar9)
     EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, STATUS_FLAG_8 | 0x00000010, 4, BS_FLAGS1_SP_EVT_ACTIVE)
+    // invalid status field has 24% chance, but no status and doesn't have STATUS_FLAG_80000000 set
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 24, 4, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)

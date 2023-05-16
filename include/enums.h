@@ -2155,14 +2155,6 @@ enum GotItemType {
     ITEM_TYPE_STAR_PIECE    = 3,
 };
 
-enum ItemPickupFlags {
-    ITEM_PICKUP_FLAG_NO_SOUND           = 0x0001,
-    ITEM_PICKUP_FLAG_NO_ANIMS           = 0x0002,
-    ITEM_PICKUP_FLAG_1_COIN             = 0x0010,
-    ITEM_PICKUP_FLAG_3_STAR_PIECES      = 0x0020,
-    ITEM_PICKUP_FLAG_UNIQUE             = 0x0040,
-};
-
 enum ItemTypeFlags {
     ITEM_TYPE_FLAG_WORLD_USABLE         = 0x0001,
     ITEM_TYPE_FLAG_BATTLE_USABLE        = 0x0002,
@@ -3442,56 +3434,77 @@ enum TriggerFlags {
 };
 
 enum ItemEntityFlags {
-    ITEM_ENTITY_FLAG_CAM0          = 0x00000001,
-    ITEM_ENTITY_FLAG_CAM1          = 0x00000002,
-    ITEM_ENTITY_FLAG_CAM2          = 0x00000004,
-    ITEM_ENTITY_FLAG_CAM3          = 0x00000008,
-    ITEM_ENTITY_FLAG_10            = 0x00000010,
-    ITEM_ENTITY_FLAG_HIDDEN        = 0x00000040, // do not render; player cant pickup
-    ITEM_ENTITY_FLAG_80            = 0x00000080,
-    ITEM_ENTITY_FLAG_AUTO_COLLECT  = 0x00000100,
-    ITEM_ENTITY_FLAG_NEVER_VANISH  = 0x00000200,
-    ITEM_ENTITY_FLAG_400           = 0x00000400,
-    ITEM_ENTITY_FLAG_800           = 0x00000800,
-    ITEM_ENTITY_FLAG_1000          = 0x00001000,
-    ITEM_ENTITY_FLAG_FIXED         = 0x00002000,
-    ITEM_ENTITY_RESIZABLE          = 0x00004000,
-    ITEM_ENTITY_FLAG_8000          = 0x00008000,
-    ITEM_ENTITY_FLAG_10000         = 0x00010000,
-    ITEM_ENTITY_FLAG_20000         = 0x00020000,
-    ITEM_ENTITY_FLAG_40000         = 0x00040000,
-    ITEM_ENTITY_FLAG_TRANSPARENT   = 0x00080000,
-    ITEM_ENTITY_FLAG_100000        = 0x00100000,
-    ITEM_ENTITY_FLAG_CANT_COLLECT  = 0x00200000,
-    ITEM_ENTITY_FLAG_400000        = 0x00400000,
-    ITEM_ENTITY_FLAG_800000        = 0x00800000,
-    ITEM_ENTITY_FLAG_1000000       = 0x01000000,
-    ITEM_ENTITY_FLAG_2000000       = 0x02000000,
-    ITEM_ENTITY_FLAG_4000000       = 0x04000000,
-    ITEM_ENTITY_FLAG_HIDING        = 0x08000000,
-    ITEM_ENTITY_FLAG_10000000      = 0x10000000,
-    ITEM_ENTITY_FLAG_20000000      = 0x20000000,
-    ITEM_ENTITY_FLAG_40000000      = 0x40000000,
-    ITEM_ENTITY_FLAG_80000000      = 0x80000000,
+    ITEM_ENTITY_FLAG_CAM0                       = 0x00000001,
+    ITEM_ENTITY_FLAG_CAM1                       = 0x00000002,
+    ITEM_ENTITY_FLAG_CAM2                       = 0x00000004,
+    ITEM_ENTITY_FLAG_CAM3                       = 0x00000008,
+    ITEM_ENTITY_FLAG_10                         = 0x00000010,
+    ITEM_ENTITY_FLAG_HIDDEN                     = 0x00000040, // do not render; player cant pickup
+    ITEM_ENTITY_FLAG_80                         = 0x00000080,
+    ITEM_ENTITY_FLAG_AUTO_COLLECT               = 0x00000100,
+    ITEM_ENTITY_FLAG_NEVER_VANISH               = 0x00000200,
+    ITEM_ENTITY_FLAG_SAVE_ON_TOUCH              = 0x00000400, // sets bound game flag when the item is touched
+    ITEM_ENTITY_FLAG_800                        = 0x00000800,
+    ITEM_ENTITY_FLAG_1000                       = 0x00001000,
+    ITEM_ENTITY_FLAG_NO_GRAVITY                 = 0x00002000,
+    ITEM_ENTITY_RESIZABLE                       = 0x00004000,
+    ITEM_ENTITY_FLAG_8000                       = 0x00008000,
+    ITEM_ENTITY_FLAG_TOSS_LOWER                 = 0x00010000,
+    ITEM_ENTITY_FLAG_20000                      = 0x00020000,
+    ITEM_ENTITY_FLAG_40000                      = 0x00040000,
+    ITEM_ENTITY_FLAG_TRANSPARENT                = 0x00080000,
+    ITEM_ENTITY_FLAG_100000                     = 0x00100000,
+    ITEM_ENTITY_FLAG_CANT_COLLECT               = 0x00200000,
+    ITEM_ENTITY_FLAG_400000                     = 0x00400000,
+    ITEM_ENTITY_FLAG_800000                     = 0x00800000,
+    ITEM_ENTITY_FLAG_TOSS_HIGHER                = 0x01000000,
+    ITEM_ENTITY_FLAG_2000000                    = 0x02000000,
+    ITEM_ENTITY_FLAG_4000000                    = 0x04000000,
+    ITEM_ENTITY_FLAG_HIDING                     = 0x08000000,
+    ITEM_ENTITY_FLAG_NO_MOTION                  = 0x10000000,
+    ITEM_ENTITY_FLAG_DONE_FALLING               = 0x20000000,
+    ITEM_ENTITY_FLAG_ANGLE_RELATIVE_VELOCITY    = 0x40000000,
+    ITEM_ENTITY_FLAG_SAVE_ON_RECEIPT            = 0x80000000, // sets bound game flag only when the item is placed in player inventory
 };
 
-enum ItemEntityStates {
-    ITEM_ENTITY_STATE_IDLE        = 0x0,
-    ITEM_ENTITY_STATE_01        = 0x1,
-    ITEM_ENTITY_STATE_02        = 0x2,
-    ITEM_ENTITY_STATE_03        = 0x3,
-    ITEM_ENTITY_STATE_04        = 0x4,
-    ITEM_ENTITY_STATE_05        = 0x5,
-    ITEM_ENTITY_STATE_06        = 0x6,
-    ITEM_ENTITY_STATE_07        = 0x7,
-    ITEM_ENTITY_STATE_08        = 0x8,
-    ITEM_ENTITY_STATE_09        = 0x9,
-    ITEM_ENTITY_STATE_0A        = 0xA,
-    ITEM_ENTITY_STATE_0B        = 0xB,
-    ITEM_ENTITY_STATE_0C        = 0xC,
-    ITEM_ENTITY_STATE_0D        = 0xD,
-    ITEM_ENTITY_STATE_0E        = 0xE,
-    ITEM_ENTITY_STATE_0F        = 0xF,
+// governs item behavior after spawning until being picked up
+enum ItemPhysicsStates {
+    ITEM_PHYSICS_STATE_INIT      = 0x0,
+    ITEM_PHYSICS_STATE_ALIVE     = 0x1, // 
+    ITEM_PHYSICS_STATE_DEAD      = 0x2, // item is vanished or fallen out of the world
+    ITEM_PHYSICS_STATE_TOUCH     = 0x3, // player has touched the item
+    ITEM_PHYSICS_STATE_04        = 0x4,
+    ITEM_PHYSICS_STATE_PICKUP    = 0xA, // item will begin pickup, physics state is invalid after this
+};
+
+// governs the process of picking up an item
+enum ItemPickupStates {
+    // these states comprise the typical progression for item pickup
+    ITEM_PICKUP_STATE_INIT                  = 0x0,
+    ITEM_PICKUP_STATE_AWAIT_VALID_STATE     = 0x1,
+    ITEM_PICKUP_STATE_SHOW_GOT_ITEM         = 0x2,
+    ITEM_PICKUP_STATE_HIDE_GOT_ITEM         = 0x3, // wait for window closing animations to finish
+    ITEM_PICKUP_STATE_DONE                  = 0x9,
+    // next three states are used for tutorials which trigger on item pickup
+    ITEM_PICKUP_STATE_CHECK_TUTORIALS       = 0x4,
+    ITEM_PICKUP_STATE_SHOW_TUTORIAL         = 0x5,
+    ITEM_PICKUP_STATE_AWAIT_TUTORIAL        = 0x6,
+    // remaining states occur when inventory is full and an item needs to be throw away
+    ITEM_PICKUP_STATE_SHOW_TOO_MANY         = 0xA, // show 'cant carry more items'; open throw away popup on state exit
+    ITEM_PICKUP_STATE_HIDE_TOO_MANY         = 0xB, // wait for window closing animations to finish
+    ITEM_PICKUP_STATE_AWAIT_THROW_AWAY      = 0xC, // choosing
+    ITEM_PICKUP_STATE_SHOW_THREW_AWAY       = 0xD, // you threw away X window
+    ITEM_PICKUP_STATE_HIDE_THREW_AWAY       = 0xE, // wait for window closing animations to finish
+    ITEM_PICKUP_STATE_THROW_AWAY_DONE       = 0xF,
+};
+
+enum ItemPickupFlags {
+    ITEM_PICKUP_FLAG_NO_SOUND           = 0x01,
+    ITEM_PICKUP_FLAG_NO_ANIMS           = 0x02,
+    ITEM_PICKUP_FLAG_UNKNOWN            = 0x04,
+    ITEM_PICKUP_FLAG_1_COIN             = 0x10,
+    ITEM_PICKUP_FLAG_3_STAR_PIECES      = 0x20,
+    ITEM_PICKUP_FLAG_UNIQUE             = 0x40,
 };
 
 // Worker
@@ -3538,13 +3551,6 @@ enum PlayerBuffs {
 };
 
 enum StatusFlags {
-    STATUS_FLAG_1               = 0x00000001,
-    STATUS_FLAG_4               = 0x00000004,
-    STATUS_FLAG_8               = 0x00000008,
-    STATUS_FLAG_20              = 0x00000020,
-    STATUS_FLAG_40              = 0x00000040,
-    STATUS_FLAG_100             = 0x00000100,
-    STATUS_FLAG_200             = 0x00000200,
     STATUS_FLAG_SLEEP           = 0x00001000,
     STATUS_FLAG_STATIC          = 0x00002000,
     STATUS_FLAG_FROZEN          = 0x00004000,
@@ -6181,7 +6187,7 @@ enum WindowId {
     WINDOW_ID_14                                = 14,
     WINDOW_ID_15                                = 15,
     WINDOW_ID_16                                = 16,
-    WINDOW_ID_17                                = 17,
+    WINDOW_ID_17                                = 17, // brown box used for "Throw away an item" and certain popup titles
     WINDOW_ID_18                                = 18,
     WINDOW_ID_19                                = 19,
     WINDOW_ID_CURRENCY_COUNTER                  = 20,

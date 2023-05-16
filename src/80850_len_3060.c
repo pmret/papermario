@@ -45,7 +45,7 @@ void clear_player_data(void) {
     playerData->maxBP = 3;
     playerData->level = 1;
     playerData->bootsLevel = 0;
-    playerData->hasActionCommands = 0;
+    playerData->hasActionCommands = FALSE;
     playerData->coins = 0;
     playerData->fortressKeyCount = 0;
     playerData->starPieces = 0;

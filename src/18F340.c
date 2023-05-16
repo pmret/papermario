@@ -172,7 +172,7 @@ API_CALLABLE(GiveRefund) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     s32 sellValue = gItemTable[battleStatus->moveArgument].sellValue;
-    f32 facingAngleSign = 0.0f;
+    f32 angle = 0.0f;
     s32 delayTime = 0;
     f32 posX, posY, posZ;
     posY = player->currentPos.y + player->size.y;
@@ -188,9 +188,9 @@ API_CALLABLE(GiveRefund) {
             posX = player->currentPos.x;
             posZ = player->currentPos.z;
 
-            make_item_entity(ITEM_COIN, posX, posY, posZ, ITEM_SPAWN_MODE_TOSS_FADE1, (i * 3) + 1, facingAngleSign, 0);
+            make_item_entity(ITEM_COIN, posX, posY, posZ, ITEM_SPAWN_MODE_TOSS_FADE1, (i * 3) + 1, angle, 0);
             add_coins(1);
-            facingAngleSign += 30.0f;
+            angle += 30.0f;
         }
 
         delayTime = (i * 3) + 30;

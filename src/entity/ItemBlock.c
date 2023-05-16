@@ -56,23 +56,23 @@ void entity_HitItemBlock_appear(Entity* entity) {
 
 void entity_ItemBlock_spawn_item(Entity* entity) {
     BlockData* data = entity->dataBuf.block;
-    s32 facingAngle;
+    s32 angle;
 
     if (data->item == 0 || (entity->flags & ENTITY_FLAG_100000)) {
         return;
     }
 
-    facingAngle = player_get_camera_facing_angle();
+    angle = player_get_camera_facing_angle();
     entity->flags |= ENTITY_FLAG_100000;
 
     if (data->item == ITEM_COIN) {
         make_item_entity(ITEM_COIN, entity->position.x, entity->position.y + 28.0, entity->position.z,
-            ITEM_SPAWN_MODE_ITEM_BLOCK_COIN, 0, facingAngle, data->gameFlagIndex);
+            ITEM_SPAWN_MODE_ITEM_BLOCK_COIN, 0, angle, data->gameFlagIndex);
     } else {
-        facingAngle += 360;
+        angle += 360;
         make_item_entity(data->item, entity->position.x, entity->position.y + 20.0, entity->position.z,
             (gItemTable[data->item].typeFlags & ITEM_TYPE_FLAG_BADGE) ? ITEM_SPAWN_MODE_ITEM_BLOCK_BADGE : ITEM_SPAWN_MODE_ITEM_BLOCK_ITEM,
-            0, facingAngle, data->gameFlagIndex);
+            0, angle, data->gameFlagIndex);
     }
 
 }

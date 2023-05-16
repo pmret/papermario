@@ -675,7 +675,7 @@ EvtScript N(EVS_DeclareWinner) = {
             EVT_WAIT(1)
             EVT_CALL(ContinueSpeech, NPC_HammerBros, ANIM_HammerBros_Anim0B, ANIM_HammerBros_Anim03, 0, MSG_Peach_0122)
             EVT_WAIT(10)
-            EVT_CALL(ShowGotItem, ITEM_JAMMIN_JELLY, TRUE, 2)
+            EVT_CALL(ShowGotItem, ITEM_JAMMIN_JELLY, TRUE, ITEM_PICKUP_FLAG_NO_ANIMS)
             EVT_SET(GF_KKJ29_PeachWonJamminJelly, TRUE)
             EVT_WAIT(10)
         EVT_CASE_EQ(OUTCOME_RIGHT_WON)

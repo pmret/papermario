@@ -163,7 +163,7 @@ void setup_demo_player(void) {
     playerData->curMaxFP = 10;
     playerData->hardMaxFP = 10;
     playerData->level = 3;
-    playerData->hasActionCommands = 1;
+    playerData->hasActionCommands = TRUE;
     playerData->starPoints = 55;
     playerData->bootsLevel = 0;
     playerData->hammerLevel = 0;

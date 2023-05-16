@@ -519,10 +519,10 @@ dlabel D_801565AC
 dlabel D_801565B0
 .space 0x00000330
 
-dlabel D_801568E0
+dlabel ItemPickupIconID
 .space 4
 
-dlabel D_801568E4
+dlabel ItemPickupStateDelay
 .space 4
 
 dlabel D_801568E8
@@ -531,13 +531,13 @@ dlabel D_801568E8
 dlabel D_801568EC
 .space 4
 
-dlabel D_801568F0
+dlabel ItemPickupGotOutline
 .space 4
 
-dlabel D_801568F4
+dlabel GotItemTutorialPrinter
 .space 4
 
-dlabel D_801568F8
+dlabel GotItemTutorialClosed
 .space 4
 
 dlabel D_801568FC

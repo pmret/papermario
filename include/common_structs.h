@@ -311,7 +311,7 @@ typedef struct PlayerData {
     /* 0x007 */ s8 hardMaxFP;
     /* 0x008 */ s8 maxBP;
     /* 0x009 */ s8 level;
-    /* 0x00A */ s8 hasActionCommands;
+    /* 0x00A */ b8 hasActionCommands;
     /* 0x00B */ char unk_0B;
     /* 0x00C */ s16 coins;
     /* 0x00E */ s8 fortressKeyCount;
@@ -1165,7 +1165,7 @@ typedef struct ItemEntity {
     /* 0x1B */ s8 spawnType;
     /* 0x1C */ u8 pickupDelay; /* num frames before item can be picked up */
     /* 0x1D */ s8 renderGroup;
-    /* 0x1E */ s16 wsFaceAngle; /* < 0 means none */
+    /* 0x1E */ s16 spawnAngle; /* if < 0, a random screen-relative angle is chosen: left or right */
     /* 0x20 */ s16 shadowIndex;
     /* 0x22 */ char unk_22[2];
     /* 0x24 */ u32* readPos;
@@ -1506,13 +1506,13 @@ typedef struct PushBlockGrid {
 typedef struct ItemEntityPhysicsData {
     /* 0x00 */ f32 verticalVelocity;
     /* 0x04 */ f32 gravity; /* 2 = normal, 1 = low gravity, higher values never 'settle' */
-    /* 0x08 */ f32 unk_08;
+    /* 0x08 */ f32 collisionRadius;
     /* 0x0C */ f32 constVelocity;
     /* 0x10 */ f32 velx;
     /* 0x14 */ f32 velz;
     /* 0x18 */ f32 moveAngle;
     /* 0x1C */ s32 timeLeft;
-    /* 0x20 */ s32 unk_20;
+    /* 0x20 */ s32 useSimplePhysics;
 } ItemEntityPhysicsData; // size = 0x24
 
 typedef struct RenderTask {
