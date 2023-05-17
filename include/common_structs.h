@@ -1587,7 +1587,7 @@ typedef struct ActorPart {
     /* 0x4C */ Vec3f scale;
     /* 0x58 */ Vec3f currentPos;
     /* 0x64 */ f32 yaw;
-    /* 0x68 */ s16 unkOffset[2];
+    /* 0x68 */ s16 palAnimPosOffset[2]; // used by some palette animations to slightly adjust the screen position
     /* 0x6C */ Vec2s targetOffset;
     /* 0x70 */ s16 unk_70;
     /* 0x72 */ Vec2bu size;
@@ -1647,6 +1647,7 @@ typedef struct CollisionStatus {
     /* 0x1C */ Vec3f bombetteExplosionPos;
 } CollisionStatus; // size = 0x28
 
+// seems to be a union differing for each decoration
 typedef struct DecorationUnk {
     /* 0x00 */ s16 unk00;
     /* 0x02 */ s16 unk02;
@@ -1664,23 +1665,23 @@ typedef struct DecorationTable {
     /* 0x000 */ PAL_BIN copiedPalettes[2][27][SPR_PAL_SIZE];
     /* 0x6C0 */ s8 paletteAdjustment;
     /* 0x6C1 */ b8 resetPalAdjust;
-    /* 0x6C2 */ s8 unk_6C2;
+    /* 0x6C2 */ s8 palAnimState;
     /* 0x6C3 */ char unk_6C3[5];
-    /* 0x6C8 */ s16 unk_6C8;
-    /* 0x6CA */ s16 unk_6CA;
+    /* 0x6C8 */ s16 nextPalTime;
+    /* 0x6CA */ s16 palBlendAlpha;
     /* 0x6CC */ s8 spriteColorVariations;
     /* 0x6CD */ s8 originalPalettesCount;
     /* 0x6CE */ char unk_6CE[2];
     /* 0x6D0 */ PAL_PTR* originalPalettesList;
-    /* 0x6D4 */ PAL_PTR unk_6D4[27];
-    /* 0x740 */ s16 unk_740;
-    /* 0x742 */ s16 unk_742;
-    /* 0x744 */ s16 unk_744;
-    /* 0x746 */ s16 unk_746;
-    /* 0x748 */ s16 unk_748;
-    /* 0x74A */ s16 unk_74A;
-    /* 0x74C */ s16 unk_74C;
-    /* 0x74E */ s16 unk_74E;
+    /* 0x6D4 */ PAL_PTR adjustedPalettes[27];
+    /* 0x740 */ s16 blendPalA; // can be either palette or palset index
+    /* 0x742 */ s16 blendPalB; // can be either palette or palset index
+    /* 0x744 */ s16 palswapTimeHoldA;
+    /* 0x746 */ s16 palswapTimeAtoB;
+    /* 0x748 */ s16 palswapTimeHoldB;
+    /* 0x74A */ s16 palswapTimeBtoA;
+    /* 0x74C */ s16 palswapUnused1; // presumably palswapTimeHoldC for unimplemented triple cycling (A->B->C->A)
+    /* 0x74E */ s16 palswapUnused2; // presumably palswapTimeCtoA  for unimplemented triple cycling (A->B->C->A)
     /* 0x750 */ s8 unk_750;
     /* 0x751 */ s8 unk_751;
     /* 0x752 */ s8 unk_752;

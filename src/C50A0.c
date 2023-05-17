@@ -53,14 +53,14 @@ extern b32 GotItemTutorialClosed;
 void item_entity_update(ItemEntity*);
 void appendGfx_item_entity(void*);
 void draw_item_entities(void);
-void draw_item_entities_UI(void);
+void draw_ui_item_entities(void);
 s32 test_item_player_collision(ItemEntity*);
 void update_item_entity_collectable(ItemEntity*);
-void func_8013559C(ItemEntity*);
+void draw_ui_item_entity_collectable(ItemEntity*);
 void update_item_entity_stationary(ItemEntity*);
-void func_801356C4(ItemEntity*);
+void draw_ui_item_entity_stationary(ItemEntity*);
 void update_item_entity_no_pickup(ItemEntity*);
-void func_801356D4(ItemEntity*);
+void draw_ui_item_entity_no_pickup(ItemEntity*);
 void func_801363A0(ItemEntity*);
 void update_item_entity_pickup(ItemEntity*);
 s32 draw_image_with_clipping(IMG_PTR raster, u32 width, u32 height, s32 fmt, s32 bitDepth, s16 posX, s16 posY,
@@ -748,7 +748,7 @@ void clear_item_entity_data(void) {
     }
 
     create_worker_world(NULL, draw_item_entities);
-    create_worker_frontUI(NULL, draw_item_entities_UI);
+    create_worker_frontUI(NULL, draw_ui_item_entities);
     isPickingUpItem = FALSE;
     D_801565A8 = FALSE;
 }
@@ -1470,9 +1470,9 @@ void appendGfx_item_entity(void* data) {
             gDPSetTileSize(gMainGfxPos++, 2, 0, 0, 0x00FC, 0);
 
             if (item->flags & (ITEM_ENTITY_FLAG_HIDING | ITEM_ENTITY_FLAG_TRANSPARENT)) {
-                func_801491E4(mtxTranslate, 0, 0, 0x18, 0x18, alpha);
+                func_801491E4(mtxTranslate, 0, 0, 24, 24, alpha);
             } else {
-                func_801491E4(mtxTranslate, 0, 0, 0x18, 0x18, 255);
+                func_801491E4(mtxTranslate, 0, 0, 24, 24, 255);
             }
         } else {
             gDPSetTextureImage(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 12, gHudElementCacheTableRaster[item->lookupRasterIndex].data);
@@ -1504,9 +1504,9 @@ void appendGfx_item_entity(void* data) {
                        G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
             gDPSetTileSize(gMainGfxPos++, 2, 0, 0, 0x00FC, 0);
             if (item->flags & (ITEM_ENTITY_FLAG_HIDING | ITEM_ENTITY_FLAG_TRANSPARENT)) {
-                func_801491E4(mtxTranslate, 0, 0, 0x20, 0x20, alpha);
+                func_801491E4(mtxTranslate, 0, 0, 32, 32, alpha);
             } else {
-                func_801491E4(mtxTranslate, 0, 0, 0x20, 0x20, 255);
+                func_801491E4(mtxTranslate, 0, 0, 32, 32, 255);
             }
         } else {
             gDPSetTextureImage(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 16, gHudElementCacheTableRaster[item->lookupRasterIndex].data);
@@ -1563,7 +1563,7 @@ void draw_item_entities(void) {
     }
 }
 
-void draw_item_entities_UI(void) {
+void draw_ui_item_entities(void) {
     if (!(gOverrideFlags & (GLOBAL_OVERRIDES_4000 | GLOBAL_OVERRIDES_8000))) {
         s32 i;
 
@@ -1573,18 +1573,18 @@ void draw_item_entities_UI(void) {
             if (item != NULL && item->flags != 0) {
                 switch (item->spawnType) {
                     case ITEM_SPAWN_MODE_KEY:
-                        func_801356C4(item);
+                        draw_ui_item_entity_stationary(item);
                         break;
                     case ITEM_SPAWN_MODE_DECORATION:
                     case ITEM_SPAWN_MODE_INVISIBLE:
-                        func_801356D4(item);
+                        draw_ui_item_entity_no_pickup(item);
                         break;
                     case ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS:
                     case ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS:
                     case ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS:
                     case ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS:
                     case ITEM_SPAWN_MODE_TOSS_FADE1:
-                        func_8013559C(item);
+                        draw_ui_item_entity_collectable(item);
                         break;
                 }
             }
@@ -2512,7 +2512,7 @@ void update_item_entity_collectable(ItemEntity* item) {
     }
 }
 
-void func_8013559C(ItemEntity* item) {
+void draw_ui_item_entity_collectable(ItemEntity* item) {
     if (item->state == ITEM_PHYSICS_STATE_ALIVE) {
         ItemEntityPhysicsData* physicsData = item->physicsData;
         s32 flag = (item->flags & ITEM_ENTITY_FLAG_20000) > 0;
@@ -2549,13 +2549,13 @@ void update_item_entity_stationary(ItemEntity* item) {
     }
 }
 
-void func_801356C4(ItemEntity* item) {
+void draw_ui_item_entity_stationary(ItemEntity* item) {
 }
 
 void update_item_entity_no_pickup(ItemEntity* item) {
 }
 
-void func_801356D4(ItemEntity* item) {
+void draw_ui_item_entity_no_pickup(ItemEntity* item) {
 }
 
 void update_item_entity_pickup(ItemEntity* item) {

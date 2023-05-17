@@ -2552,14 +2552,14 @@ ApiStatus GetDistanceToGoal(Evt* script, s32 isInitialCall) {
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
-
     actor = get_actor(actorID);
+
     dist = dist2D(actor->currentPos.x, actor->currentPos.z, actor->state.goalPos.x, actor->state.goalPos.z);
     evt_set_variable(script, outVar, dist);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8026EA7C(Evt* script, s32 isInitialCall) {
+ApiStatus SetActorPaletteEffect(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     s32 partID = evt_get_variable(script, *args++);
@@ -2570,52 +2570,59 @@ ApiStatus func_8026EA7C(Evt* script, s32 isInitialCall) {
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
-
     actor = get_actor(actorID);
     actorPart = get_actor_part(actor, partID);
+
     set_part_pal_adjustment(actorPart, palAdjustment);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8026EB20(Evt* script, s32 isInitialCall) {
+ApiStatus SetActorPaletteSwapTimes(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    s32 temp_s3 = evt_get_variable(script, *args++);
+    s32 partID = evt_get_variable(script, *args++);
+    Actor* actor;
+    ActorPart* actorPart;
     DecorationTable* decorationTable;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
+    actor = get_actor(actorID);
+    actorPart = get_actor_part(actor, partID);
+    decorationTable = actorPart->decorationTable;
 
-    decorationTable = get_actor_part(get_actor(actorID), temp_s3)->decorationTable;
-    decorationTable->unk_740 = evt_get_variable(script, *args++);
-    decorationTable->unk_742 = evt_get_variable(script, *args++);
-    decorationTable->unk_744 = evt_get_variable(script, *args++);
-    decorationTable->unk_746 = evt_get_variable(script, *args++);
+    decorationTable->blendPalA = evt_get_variable(script, *args++);
+    decorationTable->blendPalB = evt_get_variable(script, *args++);
+    decorationTable->palswapTimeHoldA = evt_get_variable(script, *args++);
+    decorationTable->palswapTimeAtoB = evt_get_variable(script, *args++);
 
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8026EBF8(Evt* script, s32 isInitialCall) {
+ApiStatus SetActorPaletteSwapParams(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     s32 partID = evt_get_variable(script, *args++);
+    Actor* actor;
+    ActorPart* actorPart;
     DecorationTable* table;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
+    actor = get_actor(actorID);
+    actorPart = get_actor_part(actor, partID);
+    table = actorPart->decorationTable;
 
-    table = get_actor_part(get_actor(actorID), partID)->decorationTable;
-
-    table->unk_740 = evt_get_variable(script, *args++);
-    table->unk_742 = evt_get_variable(script, *args++);
-    table->unk_744 = evt_get_variable(script, *args++);
-    table->unk_746 = evt_get_variable(script, *args++);
-    table->unk_748 = evt_get_variable(script, *args++);
-    table->unk_74A = evt_get_variable(script, *args++);
-    table->unk_74C = evt_get_variable(script, *args++);
-    table->unk_74E = evt_get_variable(script, *args++);
+    table->blendPalA = evt_get_variable(script, *args++);
+    table->blendPalB = evt_get_variable(script, *args++);
+    table->palswapTimeHoldA = evt_get_variable(script, *args++);
+    table->palswapTimeAtoB = evt_get_variable(script, *args++);
+    table->palswapTimeHoldB = evt_get_variable(script, *args++);
+    table->palswapTimeBtoA = evt_get_variable(script, *args++);
+    table->palswapUnused1 = evt_get_variable(script, *args++);
+    table->palswapUnused2 = evt_get_variable(script, *args++);
 
     return ApiStatus_DONE2;
 }
@@ -2623,16 +2630,18 @@ ApiStatus func_8026EBF8(Evt* script, s32 isInitialCall) {
 ApiStatus func_8026ED20(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    s32 temp_s0_3 = evt_get_variable(script, *args++);
-    s32 temp_s3 = evt_get_variable(script, *args++);
+    s32 partID = evt_get_variable(script, *args++);
+    s32 enable = evt_get_variable(script, *args++);
+    Actor* actor;
     ActorPart* actorPart;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
+    actor = get_actor(actorID);
+    actorPart = get_actor_part(actor, partID);
 
-    actorPart = get_actor_part(get_actor(actorID), temp_s0_3);
-    if (temp_s3) {
+    if (enable) {
         actorPart->flags |= ACTOR_FLAG_1000000;
     } else {
         actorPart->flags &= ~ACTOR_FLAG_1000000;
@@ -2646,12 +2655,16 @@ ApiStatus func_8026EDE4(Evt* script, s32 isInitialCall) {
     s32 actorID = evt_get_variable(script, *args++);
     s32 partID = evt_get_variable(script, *args++);
     s32 temp_s3 = evt_get_variable(script, *args++);
+    Actor* actor;
+    ActorPart* actorPart;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
+    actor = get_actor(actorID);
+    actorPart = get_actor_part(actor, partID);
 
-    func_80266EA8(get_actor_part(get_actor(actorID), partID), temp_s3);
+    func_80266EA8(actorPart, temp_s3);
 
     return ApiStatus_DONE2;
 }
@@ -2668,9 +2681,9 @@ ApiStatus AddActorDecoration(Evt* script, s32 isInitialCall) {
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
-
     actor = get_actor(actorID);
     actorPart = get_actor_part(actor, partID);
+
     add_part_decoration(actorPart, decorationIndex, decorationType);
     return ApiStatus_DONE2;
 }
@@ -2686,9 +2699,9 @@ ApiStatus RemoveActorDecoration(Evt* script, s32 isInitialCall) {
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.enemyID;
     }
-
     actor = get_actor(actorID);
     actorPart = get_actor_part(actor, partID);
+
     remove_part_decoration(actorPart, decorationIndex);
     return ApiStatus_DONE2;
 }
@@ -2705,10 +2718,10 @@ ApiStatus ModifyActorDecoration(Evt* script, s32 isInitialCall) {
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
-
     actor = get_actor(actorID);
     actorPart = get_actor_part(actor, partID);
     decorationtable = actorPart->decorationTable;
+
     decorationtable->unk_8C6[temp_s4].unk00 = evt_get_variable(script, *args++);
     decorationtable->unk_8C6[temp_s4].unk02 = evt_get_variable(script, *args++);
     decorationtable->unk_8C6[temp_s4].unk04 = evt_get_variable(script, *args++);

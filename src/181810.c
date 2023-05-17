@@ -551,9 +551,9 @@ void save_tattle_flags(s32 actorType) {
                 for (k = 0; types[k] != 0xFF; k++) {
                     actorType = types[k];
 
-                    gb = get_global_byte((actorType / 8) + EVT_INDEX_OF_GAME_BYTE(GB_Tattles_00));
+                    gb = get_global_byte(EVT_INDEX_OF_GAME_BYTE(GB_Tattles_00) + actorType / 8);
                     gb |= 1 << (actorType % 8);
-                    set_global_byte((actorType / 8) + EVT_INDEX_OF_GAME_BYTE(GB_Tattles_00), gb);
+                    set_global_byte(EVT_INDEX_OF_GAME_BYTE(GB_Tattles_00) + actorType / 8, gb);
                     battleStatus->tattleFlags[actorType / 8] |= gb;
                 }
                 return;
@@ -562,9 +562,9 @@ void save_tattle_flags(s32 actorType) {
         i++;
     }
 
-    gb = get_global_byte((actorType / 8) + EVT_INDEX_OF_GAME_BYTE(GB_Tattles_00));
+    gb = get_global_byte(EVT_INDEX_OF_GAME_BYTE(GB_Tattles_00) + actorType / 8);
     gb |= 1 << (actorType % 8);
-    set_global_byte((actorType / 8) + EVT_INDEX_OF_GAME_BYTE(GB_Tattles_00), gb);
+    set_global_byte(EVT_INDEX_OF_GAME_BYTE(GB_Tattles_00) + actorType / 8, gb);
     battleStatus->tattleFlags[actorType / 8] |= gb;
 }
 

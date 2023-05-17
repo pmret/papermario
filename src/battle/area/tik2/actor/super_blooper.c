@@ -872,8 +872,8 @@ EvtScript N(attackEnragedDrops) = {
 EvtScript N(enrage) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
     EVT_CALL(func_8026ED20, ACTOR_SELF, 1, 1)
-    EVT_CALL(func_8026EBF8, ACTOR_SELF, 1, 0, 2, 0, 6, 12, 6, 0, 0)
-    EVT_CALL(func_8026EA7C, ACTOR_SELF, 1, 15)
+    EVT_CALL(SetActorPaletteSwapParams, ACTOR_SELF, 1, SPR_PAL_Blooper, SPR_PAL_Blooper_Supercharged, 0, 6, 12, 6, 0, 0)
+    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, 1, PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS)
     EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(StatusTable_enraged)))
     EVT_CALL(SetPartEventBits, ACTOR_SELF, 2, ACTOR_EVENT_FLAG_ATTACK_CHARGED, TRUE)
     EVT_RETURN

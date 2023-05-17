@@ -2905,31 +2905,31 @@ enum StatusKeys {
 };
 
 enum PaletteShifts {
-    PAL_ADJUST_0     = 0,
-    PAL_ADJUST_SLEEP         = 3,
-    PAL_ADJUST_STATIC        = 4,
-    PAL_ADJUST_FEAR          = 5,    // darker
-    PAL_ADJUST_POISON        = 6,
-    PAL_ADJUST_PARALYZE      = 7,
-    PAL_ADJUST_BERSERK       = 8,
-    PAL_ADJUST_9     = 9,
-    PAL_ADJUST_10    = 10,
-    PAL_ADJUST_12    = 12, // generic player debuff
-    PAL_ADJUST_13    = 13, // player posion
-    PAL_ADJUST_14    = 14,
-    PAL_ADJUST_15    = 15,
-    PAL_ADJUST_16    = 16,
+    PAL_ADJUST_NONE             = 0,
+    PAL_ADJUST_SLEEP            = 3,
+    PAL_ADJUST_STATIC           = 4,
+    PAL_ADJUST_FEAR             = 5,  // darker
+    PAL_ADJUST_POISON           = 6,
+    PAL_ADJUST_PARALYZE         = 7,
+    PAL_ADJUST_BERSERK          = 8,
+    PAL_ADJUST_WATT_IDLE        = 9,
+    PAL_ADJUST_WATT_ATTACK      = 10,
+    PAL_ADJUST_PLAYER_DEBUFF    = 12,
+    PAL_ADJUST_PLAYER_POISON    = 13,
+    PAL_ADJUST_BLEND_PALETTES_UNIFORM_INTERVALS = 14,
+    PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS = 15,
+    PAL_ADJUST_BLEND_PALSETS    = 16,
 };
 
 // func_80266EE8
 enum {
-    UNK_PAL_EFFECT_0    = 0,
-    UNK_PAL_EFFECT_11   = 11,
+    UNK_PAL_EFFECT_0        = 0,
+    UNK_PAL_EFFECT_11       = 11,
 };
 
 enum DoorSwing {
-    DOOR_SWING_IN             = -1,
-    DOOR_SWING_OUT            = 1,
+    DOOR_SWING_IN           = -1,
+    DOOR_SWING_OUT          = 1,
 };
 
 enum VisibilityGroup {

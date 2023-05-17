@@ -453,7 +453,7 @@ END:
     }
 }
 
-void set_actor_pal_adjustment(Actor* actor, s32 arg1);
+void set_actor_pal_adjustment(Actor* actor, s32 palAdjust);
 
 void player_create_target_list(Actor* actor) {
     create_target_list(actor, 0);
@@ -1345,8 +1345,8 @@ void load_player_actor(void) {
     part->scale.y = 1.0f;
     part->scale.z = 1.0f;
     part->verticalStretch = 1;
-    part->unkOffset[0] = 0;
-    part->unkOffset[1] = 0;
+    part->palAnimPosOffset[0] = 0;
+    part->palAnimPosOffset[1] = 0;
     part->animationRate = 1.0f;
     part->currentAnimation = get_npc_anim_for_status(part->idleAnimations, 1U);
     part->nextPart = NULL;
@@ -1367,7 +1367,7 @@ void load_player_actor(void) {
 
         ASSERT(decorationTable != NULL);
 
-        decorationTable->paletteAdjustment = PAL_ADJUST_0;
+        decorationTable->paletteAdjustment = PAL_ADJUST_NONE;
         decorationTable->unk_750 = 0;
         decorationTable->unk_764 = 0;
         decorationTable->unk_768 = 0;
@@ -1576,8 +1576,8 @@ void load_partner_actor(void) {
             part->scale.y = 1.0f;
             part->scale.z = 1.0f;
             part->verticalStretch = 1;
-            part->unkOffset[0] = 0;
-            part->unkOffset[1] = 0;
+            part->palAnimPosOffset[0] = 0;
+            part->palAnimPosOffset[1] = 0;
             part->partTypeData[0] = bActorSoundTable[partnerActor->actorType].walk[0];
             part->partTypeData[1] = bActorSoundTable[partnerActor->actorType].walk[1];
             part->partTypeData[2] = bActorSoundTable[partnerActor->actorType].fly[0];
@@ -1596,7 +1596,7 @@ void load_partner_actor(void) {
 
                 ASSERT(decorationTable != NULL);
 
-                decorationTable->paletteAdjustment = PAL_ADJUST_0;
+                decorationTable->paletteAdjustment = PAL_ADJUST_NONE;
                 decorationTable->unk_750 = 0;
                 decorationTable->unk_764 = 0;
                 decorationTable->unk_768 = 0;
@@ -1842,8 +1842,8 @@ Actor* create_actor(Formation formation) {
         part->scale.y = 1.0f;
         part->scale.z = 1.0f;
         part->verticalStretch = 1;
-        part->unkOffset[0] = 0;
-        part->unkOffset[1] = 0;
+        part->palAnimPosOffset[0] = 0;
+        part->palAnimPosOffset[1] = 0;
         part->partTypeData[0] = bActorSoundTable[actor->actorType].walk[0];
         part->partTypeData[1] = bActorSoundTable[actor->actorType].walk[1];
         part->partTypeData[2] = bActorSoundTable[actor->actorType].fly[0];
@@ -1858,7 +1858,7 @@ Actor* create_actor(Formation formation) {
             decorationTable = part->decorationTable;
             ASSERT(decorationTable != NULL);
 
-            decorationTable->paletteAdjustment = PAL_ADJUST_0;
+            decorationTable->paletteAdjustment = PAL_ADJUST_NONE;
             decorationTable->unk_750 = 0;
             decorationTable->unk_764 = 0;
             decorationTable->unk_768 = 0;
@@ -2592,7 +2592,7 @@ void set_part_pal_adjustment(ActorPart* part, s32 palAdjust) {
 
         if (decorationTable->paletteAdjustment != palAdjust) {
             decorationTable->paletteAdjustment = palAdjust;
-            decorationTable->unk_6C2 = 0;
+            decorationTable->palAnimState = 0;
             decorationTable->resetPalAdjust = TRUE;
         }
     }
@@ -2614,15 +2614,15 @@ void set_actor_pal_adjustment(Actor* actor, s32 palAdjust) {
 
 void clear_part_pal_adjustment(ActorPart* part) {
     if (part->idleAnimations != NULL && !(part->flags & ACTOR_PART_FLAG_2)) {
-        part->decorationTable->paletteAdjustment = PAL_ADJUST_0;
+        part->decorationTable->paletteAdjustment = PAL_ADJUST_NONE;
     }
 }
 
 // TODO: improve match
 void func_80266E40(Actor* actor) {
     ActorPart* partIt = actor->partsTable;
-    s8 e = PAL_ADJUST_14;
-    s8 f = PAL_ADJUST_15;
+    s8 e = PAL_ADJUST_BLEND_PALETTES_UNIFORM_INTERVALS;
+    s8 f = PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS;
 
     while (partIt != NULL) {
         DecorationTable* decorationTable = partIt->decorationTable;
@@ -2633,7 +2633,7 @@ void func_80266E40(Actor* actor) {
                 !(partIt->flags & ACTOR_PART_FLAG_2))
             {
                 if (decorationTable->paletteAdjustment != e && decorationTable->paletteAdjustment != f) {
-                    decorationTable->paletteAdjustment = PAL_ADJUST_0;
+                    decorationTable->paletteAdjustment = PAL_ADJUST_NONE;
                 }
             }
         } while (0); // required to match
