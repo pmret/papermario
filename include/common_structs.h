@@ -1512,7 +1512,7 @@ typedef struct ItemEntityPhysicsData {
     /* 0x14 */ f32 velz;
     /* 0x18 */ f32 moveAngle;
     /* 0x1C */ s32 timeLeft;
-    /* 0x20 */ s32 useSimplePhysics;
+    /* 0x20 */ b32 useSimplePhysics;
 } ItemEntityPhysicsData; // size = 0x24
 
 typedef struct RenderTask {
