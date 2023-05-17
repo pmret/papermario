@@ -483,9 +483,9 @@ ApiStatus MakeIgnoreResStatusField(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     Bytecode outVar = *args++;
     Bytecode typeFlag = *args++; // STATUS_FLAG_*
-    s32 var1 = evt_get_variable(script, *args++);
+    s32 duration = evt_get_variable(script, *args++);
 
-    evt_set_variable(script, outVar, typeFlag | STATUS_CHANCE_IGNORE_RES | (var1 << 8));
+    evt_set_variable(script, outVar, DMG_STATUS_IGNORE_RES(typeFlag, duration));
     return ApiStatus_DONE2;
 }
 
@@ -496,7 +496,7 @@ ApiStatus MakeStatusField(Evt* script, s32 isInitialCall) {
     s32 chance = evt_get_variable(script, *args++);
     s32 duration = evt_get_variable(script, *args++);
 
-    evt_set_variable(script, outVar, typeFlag | STATUS_FLAG_80000000 | (duration << 8) | chance);
+    evt_set_variable(script, outVar, DMG_STATUS_CHANCE(typeFlag, duration, chance));
     return ApiStatus_DONE2;
 }
 
