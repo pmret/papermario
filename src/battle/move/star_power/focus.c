@@ -305,7 +305,7 @@ EvtScript N(EVS_UsePower) = {
                 EVT_CALL(ShowMessageBox, BTL_MSG_STAR_POWER_FILLED, 60)
         EVT_END_SWITCH
         EVT_CALL(WaitForMessageBoxDone)
-        EVT_CALL(func_80276EFC)
+        EVT_CALL(PlayerYieldTurn)
         EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
         EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(8.0))
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Run)

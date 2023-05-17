@@ -88,13 +88,13 @@ void create_target_list(Actor* actor, s32 arg1) {
         targetDataList->actorID = ACTOR_PLAYER;
         targetDataList->partID = 1;
         if (!arg1) {
-            targetDataList->pos.x = playerActor->currentPos.x + playerActor->size.x * 0.3 * playerActor->scalingFactor;
-            targetDataList->pos.y = playerActor->currentPos.y + playerActor->size.y * 0.9 * playerActor->scalingFactor;
-            targetDataList->pos.z = playerActor->currentPos.z;
+            targetDataList->posA.x = playerActor->currentPos.x + playerActor->size.x * 0.3 * playerActor->scalingFactor;
+            targetDataList->posA.y = playerActor->currentPos.y + playerActor->size.y * 0.9 * playerActor->scalingFactor;
+            targetDataList->posA.z = playerActor->currentPos.z;
         } else {
-            targetDataList->pos.x = playerActor->homePos.x + playerActor->size.x * 0.3 * playerActor->scalingFactor;
-            targetDataList->pos.y = playerActor->homePos.y + playerActor->size.y * 0.9 * playerActor->scalingFactor;
-            targetDataList->pos.z = playerActor->homePos.z;
+            targetDataList->posA.x = playerActor->homePos.x + playerActor->size.x * 0.3 * playerActor->scalingFactor;
+            targetDataList->posA.y = playerActor->homePos.y + playerActor->size.y * 0.9 * playerActor->scalingFactor;
+            targetDataList->posA.z = playerActor->homePos.z;
         }
         targetDataList->unk_10 = -100;
         numTargets++;
@@ -105,13 +105,13 @@ void create_target_list(Actor* actor, s32 arg1) {
         targetDataList->actorID = ACTOR_PARTNER;
         targetDataList->partID = 1;
         if (!arg1) {
-            targetDataList->pos.x = partnerActor->currentPos.x + partnerActor->size.x * 0.1 * partnerActor->scalingFactor;
-            targetDataList->pos.y = partnerActor->currentPos.y + partnerActor->size.y * 0.8 * partnerActor->scalingFactor;
-            targetDataList->pos.z = partnerActor->currentPos.z;
+            targetDataList->posA.x = partnerActor->currentPos.x + partnerActor->size.x * 0.1 * partnerActor->scalingFactor;
+            targetDataList->posA.y = partnerActor->currentPos.y + partnerActor->size.y * 0.8 * partnerActor->scalingFactor;
+            targetDataList->posA.z = partnerActor->currentPos.z;
         } else {
-            targetDataList->pos.x = partnerActor->homePos.x + partnerActor->size.x * 0.1 * partnerActor->scalingFactor;
-            targetDataList->pos.y = partnerActor->homePos.y + partnerActor->size.y * 0.8 * partnerActor->scalingFactor;
-            targetDataList->pos.z = partnerActor->homePos.z;
+            targetDataList->posA.x = partnerActor->homePos.x + partnerActor->size.x * 0.1 * partnerActor->scalingFactor;
+            targetDataList->posA.y = partnerActor->homePos.y + partnerActor->size.y * 0.8 * partnerActor->scalingFactor;
+            targetDataList->posA.z = partnerActor->homePos.z;
         }
         targetDataList->unk_10 = -50;
         numTargets++;
@@ -170,9 +170,9 @@ void create_target_list(Actor* actor, s32 arg1) {
 
                 targetDataList->actorID = ACTOR_CLASS_ENEMY | i;
                 partIndex = partBlueprint->index;
-                targetDataList->pos.x = targetX;
-                targetDataList->pos.y = targetY;
-                targetDataList->pos.z = targetZ;
+                targetDataList->posA.x = targetX;
+                targetDataList->posA.y = targetY;
+                targetDataList->posA.z = targetZ;
                 targetDataList->unk_10 = 0;
                 targetDataList->partID = partIndex;
 
@@ -180,15 +180,15 @@ void create_target_list(Actor* actor, s32 arg1) {
                     targetDataList->unk_10 = 100;
                 }
                 targetDataList->unk_10 += targetPart->unk_70;
-                targetDataList->unk_0A = f12 + targetDataList->unk_10 * 100;
-                targetDataList->unk_0C = f2;
-                targetDataList->unk_0E = f14;
+                targetDataList->posB.x = f12 + targetDataList->unk_10 * 100;
+                targetDataList->posB.y = f2;
+                targetDataList->posB.z = f14;
 
-                if (targetDataList->unk_0C < 40) {
+                if (targetDataList->posB.y < 40) {
                     targetDataList->homeRow = 0;
-                } else if (targetDataList->unk_0C < 85) {
+                } else if (targetDataList->posB.y < 85) {
                     targetDataList->homeRow = 1;
-                } else if (targetDataList->unk_0C < 100) {
+                } else if (targetDataList->posB.y < 100) {
                     targetDataList->homeRow = 2;
                 } else {
                     do {
@@ -198,11 +198,11 @@ void create_target_list(Actor* actor, s32 arg1) {
                     } while (0);
                 }
 
-                if (targetDataList->unk_0A < 25) {
+                if (targetDataList->posB.x < 25) {
                     targetDataList->homeCol = 0;
-                } else if (targetDataList->unk_0A < 65) {
+                } else if (targetDataList->posB.x < 65) {
                     targetDataList->homeCol = 1;
-                } else if (targetDataList->unk_0A < 105) {
+                } else if (targetDataList->posB.x < 105) {
                     targetDataList->homeCol = 2;
                 } else {
                     do {
@@ -210,7 +210,7 @@ void create_target_list(Actor* actor, s32 arg1) {
                     } while (0);
                 }
 
-                if (targetDataList->unk_0E < -30) {
+                if (targetDataList->posB.z < -30) {
                     targetDataList->layer = 0;
                 } else {
                     targetDataList->layer = 1;
@@ -445,7 +445,7 @@ END:
             s32 index2 = targetIndexList[j];
             targetData = &targetDataList[index1];
             otherTarget = &targetDataList[index2];
-            if (targetData->pos.x + targetData->unk_10 * 10 > otherTarget->pos.x + otherTarget->unk_10 * 10) {
+            if (targetData->posA.x + targetData->unk_10 * 10 > otherTarget->posA.x + otherTarget->unk_10 * 10) {
                 targetIndexList[i] = targetIndexList[j];
                 targetIndexList[j] = index1;
             }
@@ -519,9 +519,9 @@ s32 func_80263064(Actor* actor0, Actor* actor1, s32 unused) {
 
                 actor0->targetActorID = target->actorID = actor1->actorID;
                 actor0->targetPartIndex = target->partID = bp->index;
-                target->pos.x = x;
-                target->pos.y = y;
-                target->pos.z = z;
+                target->posA.x = x;
+                target->posA.y = y;
+                target->posA.z = z;
                 target->unk_10 = 0;
                 target++;
                 ret++;
@@ -2881,7 +2881,7 @@ void remove_player_buffs(s32 buffs) {
 
     if (partner != NULL && (buffs & PLAYER_BUFF_PARTNER_GLOWING)) {
         partner->isGlowing = FALSE;
-        gBattleStatus.flags1 &= ~BS_FLAGS1_40000000;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_GOOMBARIO_CHARGED;
     }
 }
 

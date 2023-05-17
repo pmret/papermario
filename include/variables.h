@@ -183,7 +183,7 @@ extern s32 Entity_WoodenCrate_RenderShatteredScript[];
 
 
 // Scripts
-extern EvtScript SCRIPT_NpcDefeat;
+extern EvtScript EVS_NpcDefeat;
 extern EvtScript ShakeCam1;
 extern EvtScript ShakeCamX;
 

@@ -8,7 +8,7 @@
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_CALL(func_80253734, BTL_DARKNESS_MODE_1)
+    EVT_CALL(SetDarknessMode, BTL_DARKNESS_MODE_1)
     EVT_RETURN
     EVT_END
 };

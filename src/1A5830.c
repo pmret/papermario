@@ -861,8 +861,8 @@ s32 dispatch_damage_event_actor(Actor* actor, s32 damageAmount, s32 originalEven
         s32 oldTargetActorID = actor->targetActorID;
 
         if (func_80263230(actor, actor) != 0) {
-            show_next_damage_popup(actor->targetData[0].pos.x, actor->targetData[0].pos.y, actor->targetData[0].pos.z, battleStatus->lastAttackDamage, 0);
-            show_damage_fx(actor, actor->targetData[0].pos.x, actor->targetData[0].pos.y, actor->targetData[0].pos.z, battleStatus->lastAttackDamage);
+            show_next_damage_popup(actor->targetData[0].posA.x, actor->targetData[0].posA.y, actor->targetData[0].posA.z, battleStatus->lastAttackDamage, 0);
+            show_damage_fx(actor, actor->targetData[0].posA.x, actor->targetData[0].posA.y, actor->targetData[0].posA.z, battleStatus->lastAttackDamage);
             actor->targetActorID = oldTargetActorID;
         } else {
             actor->targetActorID = oldTargetActorID;
@@ -3206,7 +3206,7 @@ ApiStatus GetEncounterState(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus YieldTurn(Evt* script, s32 isInitialCall) {
-    gBattleStatus.flags1 |= BS_FLAGS1_200000;
+    gBattleStatus.flags1 |= BS_FLAGS1_YIELD_TURN;
     return ApiStatus_DONE2;
 }
 

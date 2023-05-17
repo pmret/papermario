@@ -4463,12 +4463,11 @@ enum IntroStates {
 };
 
 enum BattleStatusFlags1 {
-    BS_FLAGS1_0                             = 0x00000000,
     BS_FLAGS1_ACTORS_VISIBLE                = 0x00000001,
     BS_FLAGS1_MENU_OPEN                     = 0x00000002,
-    BS_FLAGS1_4                             = 0x00000004,
-    BS_FLAGS1_8                             = 0x00000008,
-    BS_FLAGS1_10                            = 0x00000010, // enable attack bonuses (power plus, etc)?
+    BS_FLAGS1_TATTLE_OPEN                   = 0x00000004,
+    BS_FLAGS1_SHOW_PLAYER_DECORATIONS       = 0x00000008, // enables effects for Frozen, Water Block, and Cloud Nine to appear and follow the player
+    BS_FLAGS1_10                            = 0x00000010, // enable attack bonuses (power plus, etc)
     BS_FLAGS1_SP_EVT_ACTIVE                 = 0x00000020, // enable special events (other than hit/death/immune?)
     BS_FLAGS1_40                            = 0x00000040,
     BS_FLAGS1_80                            = 0x00000080,
@@ -4485,7 +4484,7 @@ enum BattleStatusFlags1 {
     BS_FLAGS1_BATTLE_FLED                   = 0x00040000, // used both when the player flees sucessfully or an enemy flees
     BS_FLAGS1_PARTNER_ACTING                = 0x00080000,
     BS_FLAGS1_PLAYER_IN_BACK                = 0x00100000,
-    BS_FLAGS1_200000                        = 0x00200000, // enemy turn pending (?)
+    BS_FLAGS1_YIELD_TURN                    = 0x00200000, // moves end either when their script is finished or this flag is set by calling YieldTurn
     BS_FLAGS1_PLAYER_DEFENDING              = 0x00400000,
     BS_FLAGS1_NO_GAME_OVER                  = 0x00800000, // don’t game over on loss
     BS_FLAGS1_STAR_POINTS_DROPPED           = 0x01000000,
@@ -4494,7 +4493,7 @@ enum BattleStatusFlags1 {
     BS_FLAGS1_SORT_ENEMIES_BY_POSX          = 0x08000000, // enemy turn order ignores priority; sorts bases on x position instead
     BS_FLAGS1_HAMMER_CHARGED                = 0x10000000,
     BS_FLAGS1_JUMP_CHARGED                  = 0x20000000,
-    BS_FLAGS1_40000000                      = 0x40000000,
+    BS_FLAGS1_GOOMBARIO_CHARGED             = 0x40000000,
     BS_FLAGS1_ATK_BLOCKED                   = 0x80000000,
 };
 

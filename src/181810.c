@@ -11,6 +11,8 @@ BSS s32 gSpeakingActorIdleAnim;
 BSS Actor* gSpeakingActor;
 BSS ActorPart* gSpeakingActorPart;
 
+#define ACTOR_TYPE_LIST_END 0xFF
+
 u8* gBattleDmaDest = NULL;
 
 u8 ActorTypesGhost[] = {
@@ -23,7 +25,7 @@ u8 ActorTypesGhost[] = {
     ACTOR_TYPE_GHOST_WATT,
     ACTOR_TYPE_GHOST_SUSHIE,
     ACTOR_TYPE_GHOST_LAKILESTER,
-    0xFF
+    ACTOR_TYPE_LIST_END
 };
 
 u8 ActorTypesLee[] = {
@@ -36,25 +38,25 @@ u8 ActorTypesLee[] = {
     ACTOR_TYPE_LEE_WATT,
     ACTOR_TYPE_LEE_SUSHIE,
     ACTOR_TYPE_LEE_LAKILESTER,
-    0xFF
+    ACTOR_TYPE_LIST_END
 };
 
 u8 ActorTypesCrystalKing[] = {
     ACTOR_TYPE_CRYSTAL_KING,
     ACTOR_TYPE_CRYSTAL_CLONE,
-    0xFF
+    ACTOR_TYPE_LIST_END
 };
 
 u8 ActorTypesShyGuyBoss[] = {
     ACTOR_TYPE_TOY_TANK,
     ACTOR_TYPE_LIGHT_BULB,
-    0xFF
+    ACTOR_TYPE_LIST_END
 };
 
 u8 ActorTypesBowser[] = {
     ACTOR_TYPE_BOWSER_PHASE_2,
     ACTOR_TYPE_BOWSER_PHASE_3,
-    0xFF
+    ACTOR_TYPE_LIST_END
 };
 
 u8 ActorTypesMagikoopa[] = {
@@ -62,37 +64,37 @@ u8 ActorTypesMagikoopa[] = {
     ACTOR_TYPE_MAGICLONE,
     ACTOR_TYPE_FLYING_MAGIKOOPA,
     ACTOR_TYPE_FLYING_MAGICLONE,
-    0xFF
+    ACTOR_TYPE_LIST_END
 };
 
 u8 ActorTypesRedMagikoopa[] = {
     ACTOR_TYPE_RED_MAGIKOOPA,
     ACTOR_TYPE_FLYING_RED_MAGIKOOPA,
-    0xFF
+    ACTOR_TYPE_LIST_END
 };
 
 u8 ActorTypesGreenMagikoopa[] = {
     ACTOR_TYPE_GREEN_MAGIKOOPA,
     ACTOR_TYPE_FLYING_GREEN_MAGIKOOPA,
-    0xFF
+    ACTOR_TYPE_LIST_END
 };
 
 u8 ActorTypesGrayMagikoopa[] = {
     ACTOR_TYPE_GRAY_MAGIKOOPA,
     ACTOR_TYPE_FLYING_GRAY_MAGIKOOPA,
-    0xFF
+    ACTOR_TYPE_LIST_END
 };
 
 u8 ActorTypesYellowMagikoopa[] = {
     ACTOR_TYPE_YELLOW_MAGIKOOPA,
     ACTOR_TYPE_FLYING_YELLOW_MAGIKOOPA,
-    0xFF
+    ACTOR_TYPE_LIST_END
 };
 
 u8 ActorTypesWhiteMagikoopa[] = {
     ACTOR_TYPE_WHITE_MAGIKOOPA,
     ACTOR_TYPE_FLYING_WHITE_MAGIKOOPA,
-    0xFF
+    ACTOR_TYPE_LIST_END
 };
 
 u8* ActorTypesLists[] = {
@@ -343,12 +345,12 @@ ApiStatus EnableBattleFloorReflections(Evt* script, s32 isInitialCall) {
 }
 
 
-ApiStatus func_80253734(Evt* script, s32 isInitialCall) {
+ApiStatus SetDarknessMode(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
-    s32 val = evt_get_variable(script, *args++);
+    s32 darknessMode = evt_get_variable(script, *args++);
 
-    switch (val) {
+    switch (darknessMode) {
         case BTL_DARKNESS_MODE_0:
             battleStatus->darknessMode = BTL_DARKNESS_STATE_DARK;
             break;
@@ -546,9 +548,9 @@ void save_tattle_flags(s32 actorType) {
             break;
         }
 
-        for (j = 0; types[j] != 0xFF; j++) {
+        for (j = 0; types[j] != ACTOR_TYPE_LIST_END; j++) {
             if (actorType == types[j]) {
-                for (k = 0; types[k] != 0xFF; k++) {
+                for (k = 0; types[k] != ACTOR_TYPE_LIST_END; k++) {
                     actorType = types[k];
 
                     gb = get_global_byte(EVT_INDEX_OF_GAME_BYTE(GB_Tattles_00) + actorType / 8);
@@ -582,12 +584,12 @@ void load_tattle_flags(s32 actorType) {
             break;
         }
 
-        for (j = 0; types[j] != 0xFF; j++) {
+        for (j = 0; types[j] != ACTOR_TYPE_LIST_END; j++) {
             if (actorType == types[j]) {
-                for (k = 0; types[k] != 0xFF; k++) {
+                for (k = 0; types[k] != ACTOR_TYPE_LIST_END; k++) {
                     actorType = types[k];
 
-                    gb = get_global_byte((actorType / 8) + EVT_INDEX_OF_GAME_BYTE(GB_Tattles_00));
+                    gb = get_global_byte(EVT_INDEX_OF_GAME_BYTE(GB_Tattles_00) + actorType / 8);
                     gb |= 1 << (actorType % 8);
                     battleStatus->tattleFlags[actorType / 8] |= gb;
                 }
@@ -597,12 +599,12 @@ void load_tattle_flags(s32 actorType) {
         i++;
     }
 
-    gb = get_global_byte((actorType / 8) + EVT_INDEX_OF_GAME_BYTE(GB_Tattles_00));
+    gb = get_global_byte(EVT_INDEX_OF_GAME_BYTE(GB_Tattles_00) + actorType / 8);
     gb |= 1 << (actorType % 8);
     battleStatus->tattleFlags[actorType / 8] |= gb;
 }
 
-ApiStatus func_80253FB0(Evt* script, s32 isInitialCall) {
+ApiStatus SetEnemiesFled(Evt* script, s32 isInitialCall) {
     gCurrentEncounter.battleOutcome = OUTCOME_ENEMY_FLED;
     btl_set_state(BATTLE_STATE_END_BATTLE);
 

@@ -244,7 +244,6 @@ API_CALLABLE(N(JumpOnTarget)) {
     return ApiStatus_BLOCK;
 }
 
-
 API_CALLABLE(N(OnMissHeadbonk)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partner = gBattleStatus.partnerActor;
@@ -335,7 +334,6 @@ API_CALLABLE(N(GetTattleCamPos)) {
     return ApiStatus_DONE2;
 }
 
-
 API_CALLABLE(N(OpenTattleWindow)) {
     N(tattleEffect) = fx_tattle_window(0, 206, 144, 0, 1.0f, 0);
 
@@ -420,7 +418,7 @@ API_CALLABLE(N(ChargeAtPos)) {
     z = evt_get_variable(script, *args++);
     fx_stat_change(boostAmount, x, y, z, 1.0f, 60);
 
-    gBattleStatus.flags1 |= BS_FLAGS1_40000000;
+    gBattleStatus.flags1 |= BS_FLAGS1_GOOMBARIO_CHARGED;
     return ApiStatus_DONE2;
 }
 
@@ -428,7 +426,7 @@ API_CALLABLE(N(StopCharge)) {
     BattleStatus* battleStatus = &gBattleStatus;
 
     battleStatus->partnerActor->isGlowing = 0;
-    battleStatus->flags1 &= ~BS_FLAGS1_40000000;
+    battleStatus->flags1 &= ~BS_FLAGS1_GOOMBARIO_CHARGED;
 
     return ApiStatus_DONE2;
 }
@@ -436,13 +434,13 @@ API_CALLABLE(N(StopCharge)) {
 API_CALLABLE(N(StopChargeAndGet)) {
     Actor* partner = gBattleStatus.partnerActor;
 
-    if (!(gBattleStatus.flags1 & BS_FLAGS1_40000000)) {
+    if (!(gBattleStatus.flags1 & BS_FLAGS1_GOOMBARIO_CHARGED)) {
         partner->isGlowing = 0;
     }
 
     script->varTable[0] = partner->isGlowing;
     partner->isGlowing = 0;
-    gBattleStatus.flags1 &= ~BS_FLAGS1_40000000;
+    gBattleStatus.flags1 &= ~BS_FLAGS1_GOOMBARIO_CHARGED;
 
     return ApiStatus_DONE2;
 }
@@ -1436,7 +1434,7 @@ EvtScript N(tattle) = {
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleGoombario_Idle)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4, TRUE)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_TATTLE_OPEN, TRUE)
     EVT_CALL(N(OpenTattleWindow))
     EVT_WAIT(12)
     EVT_CALL(SetCamEnabled, CAM_TATTLE, TRUE)
@@ -1461,7 +1459,7 @@ EvtScript N(tattle) = {
     EVT_CALL(SetCamEnabled, CAM_TATTLE, FALSE)
     EVT_WAIT(32)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4, FALSE)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_TATTLE_OPEN, FALSE)
     EVT_CALL(PartnerYieldTurn)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
     EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(4.0))

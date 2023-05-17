@@ -52,6 +52,7 @@ enum {
     DMG_DROP_DEBRIS_SELF        = 2,
     DMG_DROP_DEBRIS_PLAYER      = 2,
     DMG_DROP_DEBRIS_PARTNER     = 2,
+    DMG_THROW_SHELL             = 3,
 };
 
 s32 N(TutankoopaAnims)[] = {
@@ -658,7 +659,7 @@ EvtScript N(EVS_Attack_ThrowShell) = {
     EVT_CALL(SetPartJumpGravity, ACTOR_SELF, LVar9, EVT_FLOAT(0.2))
     EVT_CALL(FlyPartTo, ACTOR_SELF, LVar9, LVar0, LVar1, LVar2, 0, 30, EASING_LINEAR)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar8, DAMAGE_TYPE_NO_CONTACT, 0, 0, 3, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar8, DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_THROW_SHELL, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 55)

@@ -2456,7 +2456,7 @@ void btl_state_update_player_menu(void) {
                     battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_MAIN] = battle_menu_submenuIDs[BattleMenu_CurPos + BattleMenu_HomePos];
                     btl_main_menu_destroy();
                     btl_set_state(BATTLE_STATE_SWITCH_TO_PARTNER);
-                } else if (partnerActor != NULL && !(partnerActor->flags & BS_FLAGS1_200000) && battleStatus->hustleTurns != 1) {
+                } else if (partnerActor != NULL && !(partnerActor->flags & BS_FLAGS1_YIELD_TURN) && battleStatus->hustleTurns != 1) {
                     sfx_play_sound(SOUND_MENU_ERROR);
                     gBattleSubState = BTL_SUBSTATE_PLAYER_MENU_MAIN_SHOW_CANT_SWAP;
                 }
@@ -5119,9 +5119,9 @@ void btl_state_draw_select_target(void) {
             target = &actor->targetData[targetIndexList[selectedTargetIndex]];
             anotherActor = get_actor(target->actorID);
             id = D_802ACC70[0];
-            targetX = target->pos.x;
-            targetY = target->pos.y;
-            targetZ = target->pos.z;
+            targetX = target->posA.x;
+            targetY = target->posA.y;
+            targetZ = target->posA.z;
 
             if (anotherActor->flags & ACTOR_FLAG_UPSIDE_DOWN) {
                 xOffset = 16;
@@ -5147,9 +5147,9 @@ void btl_state_draw_select_target(void) {
                 target = &actor->targetData[targetIndexList[i]];
                 anotherActor = get_actor(target->actorID);
                 id = D_802ACC70[i];
-                targetX = target->pos.x;
-                targetY = target->pos.y;
-                targetZ = target->pos.z;
+                targetX = target->posA.x;
+                targetY = target->posA.y;
+                targetZ = target->posA.z;
                 if (anotherActor->flags & ACTOR_FLAG_UPSIDE_DOWN) {
                     xOffset = 16;
                     yOffset = 2;

@@ -2211,71 +2211,71 @@ ActorOffsets bActorOffsets[ACTOR_TYPE_COUNT] = {
 };
 
 u32 bMarioIdleAnims[] = {
-    STATUS_NORMAL,          ANIM_Mario1_Walk,
-    STATUS_DANGER,          ANIM_Mario1_TiredIdle,
-    STATUS_STONE,           ANIM_MarioB3_Petrified,
-    STATUS_SLEEP,           ANIM_MarioB1_Sleep,
-    STATUS_DIZZY,           ANIM_MarioB1_Sick,
-    STATUS_STOP,            ANIM_Mario1_Still,
-    STATUS_HUSTLE,          ANIM_Mario1_Run,
-    STATUS_BERSERK,         ANIM_MarioB2_BerserkIdle,
-    STATUS_PARALYZE,        ANIM_MarioB1_Sleep,
-    STATUS_FROZEN,          ANIM_Mario1_Frozen,
-    STATUS_TRANSPARENT,     ANIM_Mario1_Idle,
-    STATUS_TURN_DONE,       ANIM_Mario1_Still,
+    STATUS_NORMAL,              ANIM_Mario1_Walk,
+    STATUS_DANGER,              ANIM_Mario1_TiredIdle,
+    STATUS_STONE,               ANIM_MarioB3_Petrified,
+    STATUS_SLEEP,               ANIM_MarioB1_Sleep,
+    STATUS_DIZZY,               ANIM_MarioB1_Sick,
+    STATUS_STOP,                ANIM_Mario1_Still,
+    STATUS_HUSTLE,              ANIM_Mario1_Run,
+    STATUS_BERSERK,             ANIM_MarioB2_BerserkIdle,
+    STATUS_PARALYZE,            ANIM_MarioB1_Sleep,
+    STATUS_FROZEN,              ANIM_Mario1_Frozen,
+    STATUS_TRANSPARENT,         ANIM_Mario1_Idle,
+    STATUS_TURN_DONE,           ANIM_Mario1_Still,
     STATUS_TURN_DONE_BERSERK,   ANIM_MarioB2_BerserkStill,
-    STATUS_14,              ANIM_MarioB2_Inert,
-    STATUS_TURN_DONE_SLEEP, ANIM_MarioB1_SleepStill,
-    STATUS_TURN_DONE_DIZZY, ANIM_MarioB1_SickStill,
-    STATUS_TURN_DONE_WEARY, ANIM_Mario1_TiredStill,
-    STATUS_THINKING,        ANIM_Mario1_Thinking,
-    STATUS_WEARY,           ANIM_Mario1_SpinLand,
+    STATUS_14,                  ANIM_MarioB2_Inert,
+    STATUS_TURN_DONE_SLEEP,     ANIM_MarioB1_SleepStill,
+    STATUS_TURN_DONE_DIZZY,     ANIM_MarioB1_SickStill,
+    STATUS_TURN_DONE_WEARY,     ANIM_Mario1_TiredStill,
+    STATUS_THINKING,            ANIM_Mario1_Thinking,
+    STATUS_WEARY,               ANIM_Mario1_SpinLand,
     STATUS_END
 };
 
 s32 bMarioDefendAnims[] = {
-    STATUS_NORMAL,          ANIM_Mario1_Crouch,
-    STATUS_DANGER,          ANIM_Mario1_TiredIdle,
-    STATUS_STONE,           ANIM_MarioB3_Petrified,
-    STATUS_SLEEP,           ANIM_MarioB1_Sleep,
-    STATUS_DIZZY,           ANIM_MarioB1_Sick,
-    STATUS_STOP,            ANIM_Mario1_Still,
-    STATUS_HUSTLE,          ANIM_Mario1_Crouch,
-    STATUS_BERSERK,         ANIM_Mario1_Crouch,
-    STATUS_PARALYZE,        ANIM_MarioB1_Sleep,
-    STATUS_FROZEN,          ANIM_Mario1_Frozen,
-    STATUS_TRANSPARENT,     ANIM_Mario1_Idle,
-    STATUS_TURN_DONE,       ANIM_Mario1_Still,
+    STATUS_NORMAL,              ANIM_Mario1_Crouch,
+    STATUS_DANGER,              ANIM_Mario1_TiredIdle,
+    STATUS_STONE,               ANIM_MarioB3_Petrified,
+    STATUS_SLEEP,               ANIM_MarioB1_Sleep,
+    STATUS_DIZZY,               ANIM_MarioB1_Sick,
+    STATUS_STOP,                ANIM_Mario1_Still,
+    STATUS_HUSTLE,              ANIM_Mario1_Crouch,
+    STATUS_BERSERK,             ANIM_Mario1_Crouch,
+    STATUS_PARALYZE,            ANIM_MarioB1_Sleep,
+    STATUS_FROZEN,              ANIM_Mario1_Frozen,
+    STATUS_TRANSPARENT,         ANIM_Mario1_Idle,
+    STATUS_TURN_DONE,           ANIM_Mario1_Still,
     STATUS_TURN_DONE_BERSERK,   ANIM_MarioB2_BerserkStill,
-    STATUS_14,              ANIM_MarioB2_Inert,
-    STATUS_TURN_DONE_SLEEP, ANIM_MarioB1_SleepStill,
-    STATUS_TURN_DONE_DIZZY, ANIM_MarioB1_SickStill,
-    STATUS_TURN_DONE_WEARY, ANIM_Mario1_TiredStill,
-    STATUS_THINKING,        ANIM_Mario1_Thinking,
-    STATUS_WEARY,           ANIM_Mario1_SpinLand,
+    STATUS_14,                  ANIM_MarioB2_Inert,
+    STATUS_TURN_DONE_SLEEP,     ANIM_MarioB1_SleepStill,
+    STATUS_TURN_DONE_DIZZY,     ANIM_MarioB1_SickStill,
+    STATUS_TURN_DONE_WEARY,     ANIM_Mario1_TiredStill,
+    STATUS_THINKING,            ANIM_Mario1_Thinking,
+    STATUS_WEARY,               ANIM_Mario1_SpinLand,
     STATUS_END
 };
 
 s32 bMarioHideAnims[] = {
-    STATUS_NORMAL,          ANIM_Mario1_Crouch,
-    STATUS_DANGER,          ANIM_Mario1_TiredIdle,
-    STATUS_STONE,           ANIM_MarioB3_Petrified,
-    STATUS_SLEEP,           ANIM_MarioB1_Sleep,
-    STATUS_DIZZY,           ANIM_MarioB1_Sick,
-    STATUS_STOP,            ANIM_Mario1_Still,
-    STATUS_HUSTLE,          ANIM_MarioW2_RideLaki,
-    STATUS_BERSERK,         ANIM_MarioW2_RideLaki,
-    STATUS_PARALYZE,        ANIM_MarioB1_Sleep,
-    STATUS_FROZEN,          ANIM_Mario1_Frozen,
-    STATUS_TRANSPARENT,     ANIM_Mario1_Idle,
-    STATUS_TURN_DONE,       ANIM_Mario1_Crouch,
+    STATUS_NORMAL,              ANIM_Mario1_Crouch,
+    STATUS_DANGER,              ANIM_Mario1_TiredIdle,
+    STATUS_STONE,               ANIM_MarioB3_Petrified,
+    STATUS_SLEEP,               ANIM_MarioB1_Sleep,
+    STATUS_DIZZY,               ANIM_MarioB1_Sick,
+    STATUS_STOP,                ANIM_Mario1_Still,
+    STATUS_HUSTLE,              ANIM_MarioW2_RideLaki,
+    STATUS_BERSERK,             ANIM_MarioW2_RideLaki,
+    STATUS_PARALYZE,            ANIM_MarioB1_Sleep,
+    STATUS_FROZEN,              ANIM_Mario1_Frozen,
+    STATUS_TRANSPARENT,         ANIM_Mario1_Idle,
+    STATUS_TURN_DONE,           ANIM_Mario1_Crouch,
     STATUS_TURN_DONE_BERSERK,   ANIM_MarioB2_BerserkStill,
-    STATUS_14,              ANIM_MarioB2_Inert,
-    STATUS_TURN_DONE_SLEEP, ANIM_MarioB1_SleepStill,
-    STATUS_TURN_DONE_DIZZY, ANIM_MarioB1_SickStill,
-    STATUS_TURN_DONE_WEARY, ANIM_Mario1_TiredStill,
-    STATUS_THINKING,        ANIM_Mario1_Thinking,
-    STATUS_WEARY,           ANIM_Mario1_SpinLand,
+    STATUS_14,                  ANIM_MarioB2_Inert,
+    STATUS_TURN_DONE_SLEEP,     ANIM_MarioB1_SleepStill,
+    STATUS_TURN_DONE_DIZZY,     ANIM_MarioB1_SickStill,
+    STATUS_TURN_DONE_WEARY,     ANIM_Mario1_TiredStill,
+    STATUS_THINKING,            ANIM_Mario1_Thinking,
+    STATUS_WEARY,               ANIM_Mario1_SpinLand,
     STATUS_END
 };
 
@@ -3106,7 +3106,7 @@ void btl_update_message_popup(void* data) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 shouldDisposeWindow = FALSE;
 
-    s32 temp_a0;
+    s32 actionCommandMode;
 
     switch (popup->messageIndex) {
         case BTL_MSG_MERLEE_ATK_UP:
@@ -3210,9 +3210,9 @@ void btl_update_message_popup(void* data) {
         case BTL_MSG_ACTION_TIP_12:
         case BTL_MSG_ACTION_TIP_13:
         case BTL_MSG_ACTION_TIP_14:
-            temp_a0 = battleStatus->actionCommandMode;
+            actionCommandMode = battleStatus->actionCommandMode;
             D_8029F64A = TRUE;
-            if (temp_a0 == ACTION_COMMAND_MODE_NOT_LEARNED) {
+            if (actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
                 D_8029F64A = FALSE;
                 shouldDisposeWindow = TRUE;
                 break;
@@ -3363,7 +3363,7 @@ void btl_update_message_popup(void* data) {
                         set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_SHOW_TRANSPARENT);
                         popup->duration = 0;
                         popup->showMsgState = 2;
-                    } else if (!(gBattleStatus.flags1 & BS_FLAGS1_4000) && (temp_a0 != 2)) {
+                    } else if (!(gBattleStatus.flags1 & BS_FLAGS1_4000) && (actionCommandMode != ACTION_COMMAND_MODE_TUTORIAL)) {
                         set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_SHOW_TRANSPARENT);
                         switch (popup->messageIndex) {
                             case BTL_MSG_ACTION_TIP_03:
@@ -3441,7 +3441,7 @@ void btl_update_message_popup(void* data) {
                     }
                     break;
                 case 2:
-                    if ((temp_a0 != popup->showMsgState) || (gBattleStatus.flags1 & BS_FLAGS1_10000)) {
+                    if ((actionCommandMode != popup->showMsgState) || (gBattleStatus.flags1 & BS_FLAGS1_10000)) {
                         s16* duration;
 
                         if (D_8029F64E < 192) {

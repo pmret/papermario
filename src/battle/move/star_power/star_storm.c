@@ -330,7 +330,7 @@ EvtScript N(EVS_UsePower) = {
     EVT_END_IF
     EVT_WAIT(20)
     EVT_EXEC_WAIT(N(802A202C))
-    EVT_CALL(func_80276EFC)
+    EVT_CALL(PlayerYieldTurn)
     EVT_EXEC_WAIT(N(802A247C))
     EVT_RETURN
     EVT_END

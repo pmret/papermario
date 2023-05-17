@@ -27,7 +27,7 @@ ApiStatus PlayMerleeOrbFX(Evt* script, s32 isInitialCall);
 
 s32 D_80077C40 = 0;
 
-EvtScript D_80077C44 = {
+EvtScript EVS_MerleeDropCoins = {
     EVT_WAIT(10)
     EVT_CALL(FadeBackgroundToBlack)
     EVT_WAIT(10)
@@ -66,7 +66,7 @@ EvtScript D_80077C44 = {
     EVT_END
 };
 
-EvtScript SCRIPT_NpcDefeat = {
+EvtScript EVS_NpcDefeat = {
     EVT_CALL(GetBattleOutcome, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(OUTCOME_PLAYER_WON)
@@ -78,13 +78,13 @@ EvtScript SCRIPT_NpcDefeat = {
     EVT_END
 };
 
-EvtScript D_80077E9C = {
+EvtScript EVS_FleeBattleDrops = {
     EVT_CALL(OnFleeBattleDrops)
     EVT_RETURN
     EVT_END
 };
 
-EnemyDrops D_80077EB8 = {
+EnemyDrops DefaultEnemyDrops = {
     .dropFlags = NPC_DROP_FLAG_80,
     .itemDropChance = 10,
     .itemDrops = {
@@ -1640,7 +1640,7 @@ void update_encounters_post_battle(void) {
         case ENCOUNTER_SUBSTATE_POST_BATTLE_WON_CHECK_MERLEE_BONUS:
             if (currentEncounter->hasMerleeCoinBonus) {
                 if (get_coin_drop_amount(currentEncounter->currentEnemy) != 0) {
-                    D_800A0BB0 = start_script(&D_80077C44, EVT_PRIORITY_A, 0);
+                    D_800A0BB0 = start_script(&EVS_MerleeDropCoins, EVT_PRIORITY_A, 0);
                     D_800A0BB0->groupFlags = 0;
                     D_800A0BB4 = D_800A0BB0->id;
                 } else {
@@ -1682,7 +1682,7 @@ void update_encounters_post_battle(void) {
                     script->groupFlags = 0;
                     currentEncounter->battleStartCountdown = 1;
                 } else {
-                    script = start_script_in_group(&SCRIPT_NpcDefeat, EVT_PRIORITY_A, 0, 0);
+                    script = start_script_in_group(&EVS_NpcDefeat, EVT_PRIORITY_A, 0, 0);
                     enemy->defeatScript = script;
                     enemy->defeatScriptID = script->id;
                     script->owner1.enemy = enemy;
@@ -1895,7 +1895,7 @@ void update_encounters_post_battle(void) {
 
                 enemy = currentEncounter->currentEnemy;
                 if (!(currentEncounter->flags & ENCOUNTER_STATUS_FLAG_4)) {
-                    script = start_script(&D_80077E9C, EVT_PRIORITY_A, 0);
+                    script = start_script(&EVS_FleeBattleDrops, EVT_PRIORITY_A, 0);
                     enemy->defeatScript = script;
                     enemy->defeatScriptID = script->id;
                     script->owner1.enemy = enemy;
@@ -2471,7 +2471,7 @@ void create_encounters(void) {
                     npcSettings = enemy->npcSettings = npcData->settings;
                     enemy->drops = &npcData->drops;
                     if ((*(s16*)(&npcData->drops) & 0xFF00) != 0x8000) { //TODO s16?
-                        enemy->drops = &D_80077EB8;
+                        enemy->drops = &DefaultEnemyDrops;
                     }
                     enemy->encountered = 0;
                     if ((s32) npcData->init < EVT_LIMIT) {

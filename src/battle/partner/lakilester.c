@@ -1094,7 +1094,7 @@ EvtScript N(spinySurge) = {
 
 EvtScript N(cloudNine_normal) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_8, FALSE)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_SHOW_PLAYER_DECORATIONS, FALSE)
     EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_20000000, TRUE)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_WATER_BLOCK)
     EVT_CALL(action_command_water_block_init, 2)
@@ -1208,7 +1208,7 @@ EvtScript N(cloudNine_normal) = {
         EVT_CALL(ShowMessageBox, BTL_MSG_CLOUD_NINE_BEGIN, 60)
         EVT_CALL(WaitForMessageBoxDone)
     EVT_END_IF
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_8, TRUE)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_SHOW_PLAYER_DECORATIONS, TRUE)
     EVT_RETURN
     EVT_END
 };

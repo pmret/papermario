@@ -271,7 +271,7 @@ API_CALLABLE(RestorePreDefeatState) {
 
     gBattleState = gDefeatedBattleState;
     gBattleSubState = gDefeatedBattleSubstate;
-    battleStatus->flags1 |= BS_FLAGS1_8;
+    battleStatus->flags1 |= BS_FLAGS1_SHOW_PLAYER_DECORATIONS;
 
     // clear rush flags to initialize
     battleStatus->rushFlags = RUSH_FLAG_NONE;
@@ -841,7 +841,7 @@ EvtScript EVS_Player_HandleEvent = {
             EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_END_SWITCH
     EVT_CALL(CloseActionCommandInfo)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, 0)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, FALSE)
     EVT_CALL(func_802693F0)
     EVT_CALL(func_802749F8)
     EVT_CALL(GetLastEvent, ACTOR_PLAYER, LVarF)

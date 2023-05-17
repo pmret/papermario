@@ -20,6 +20,8 @@ enum StandardPalettes {
 // lerp from A to B as alpha does from 0 to 255
 #define LERP_COMPONENT(a, b, alpha) ((a) * (255 - (alpha)) + (b) * (alpha)) / 255;
 
+#define PAL_ANIM_END 0xFF
+
 enum PalSwapState {
     PAL_SWAP_HOLD_A     = 0,
     PAL_SWAP_A_TO_B     = 1,
@@ -27,73 +29,86 @@ enum PalSwapState {
     PAL_SWAP_B_TO_A     = 3,
 };
 
+// palette types for static palette animation
+enum {
+    STATIC_DEFAULT   = 0,
+    STATIC_BRIGHT    = 1,
+    STATIC_DARK      = 2,
+};
+
 // animated palettes for electrified sprites
 // each pair gives { mode, duration }
 u8 StaticPalettesAnim[] = {
-    0, 32,
-    1, 4,
-    2, 2,
-    0, 16,
-    1, 2,
-    0, 64,
-    1, 2,
-    2, 2,
-    0, 28,
-    1, 2,
-    0, 18,
-    1, 4,
-    0, 16,
-    1, 2,
-    0, 80,
-    1, 2,
-    0, 16,
-    2, 2,
-    1, 2,
-    0, 32,
-    1, 2,
-    0, 14,
-    1, 2,
-    2, 2,
-    255
+    STATIC_DEFAULT,  32,
+    STATIC_BRIGHT,    4,
+    STATIC_DARK,      2,
+    STATIC_DEFAULT,  16,
+    STATIC_BRIGHT,    2,
+    STATIC_DEFAULT,  64,
+    STATIC_BRIGHT,    2,
+    STATIC_DARK,      2,
+    STATIC_DEFAULT,  28,
+    STATIC_BRIGHT,    2,
+    STATIC_DEFAULT,  18,
+    STATIC_BRIGHT,    4,
+    STATIC_DEFAULT,  16,
+    STATIC_BRIGHT,    2,
+    STATIC_DEFAULT,  80,
+    STATIC_BRIGHT,    2,
+    STATIC_DEFAULT,  16,
+    STATIC_DARK,      2,
+    STATIC_BRIGHT,    2,
+    STATIC_DEFAULT,  32,
+    STATIC_BRIGHT,    2,
+    STATIC_DEFAULT,  14,
+    STATIC_BRIGHT,    2,
+    STATIC_DARK,      2,
+    PAL_ANIM_END
 };
 
-s16 FearPaletteAnimXOffsets[] = { -2, 2, 0, 0, -2, 2, 0, 0, 0, 0, -2, 2, 0, 0, 0, 0, 0, 0, 255 };
+s16 FearPaletteAnimXOffsets[] = { -2, 2, 0, 0, -2, 2, 0, 0, 0, 0, -2, 2, 0, 0, 0, 0, 0, 0, PAL_ANIM_END };
 
-s16 ParalyzePaletteAnimXOffsets[] = { -2, 2, 0, 0, -2, 2, 0, 0, 0, 0, -2, 2, 0, 0, 0, 0, 0, 0, 255 };
+s16 ParalyzePaletteAnimXOffsets[] = { -2, 2, 0, 0, -2, 2, 0, 0, 0, 0, -2, 2, 0, 0, 0, 0, 0, 0, PAL_ANIM_END };
+
+// palette types for watt palette animations
+enum {
+    WATT_DEFAULT   = 0,
+    WATT_BRIGHTEST = 1,
+    WATT_BRIGHTER  = 2,
+};
 
 // animated palettes for Watt
 // each pair gives { mode, duration }
-u8 WattPalettesAnim[] = {
-    1,  2,
-    0, 52,
-    1,  4,
-    0, 54,
-    0, 54,
-    1,  2,
-    0, 28,
-    1,  2,
-    0,  6,
-    1,  2,
-    0, 44,
-    1,  2,
-    0, 44,
-    255
+u8 WattIdlePalettesAnim[] = {
+    WATT_BRIGHTEST,   2,
+    WATT_DEFAULT,    52,
+    WATT_BRIGHTEST,   4,
+    WATT_DEFAULT,    54,
+    WATT_DEFAULT,    54,
+    WATT_BRIGHTEST,   2,
+    WATT_DEFAULT,    28,
+    WATT_BRIGHTEST,   2,
+    WATT_DEFAULT,     6,
+    WATT_BRIGHTEST,   2,
+    WATT_DEFAULT,    44,
+    WATT_BRIGHTEST,   2,
+    WATT_DEFAULT,    44,
+    PAL_ANIM_END
 };
 
-u8 D_80284120[] = {
-    1, 2,
-    0, 10,
-    2, 4,
-    0, 14,
-    1, 2,
-    0, 10,
-    2, 4,
-    0, 4,
-    255
+u8 WattAttackPalettesAnim[] = {
+    WATT_BRIGHTEST,   2,
+    WATT_DEFAULT,    10,
+    WATT_BRIGHTER,    4,
+    WATT_DEFAULT,    14,
+    WATT_BRIGHTEST,   2,
+    WATT_DEFAULT,    10,
+    WATT_BRIGHTER,    4,
+    WATT_DEFAULT,     4,
+    PAL_ANIM_END
 };
 
 s16 D_80284134[] = { -1, 15, 10, 7, 5, 3, 2, 1, 0, 0, 0, 0, 0, 0 };
-
 
 void update_player_actor_shadow(void);
 void appendGfx_npc_actor(s32 isPartner, s32 actorIndex);
@@ -136,18 +151,18 @@ void func_8025DA68(ActorPart*, s32);
 void func_8025DBD0(ActorPart*, s32);
 void func_8025DD60(ActorPart*, s32);
 
-void render_without_adjusted_palettes(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 arg4);
-void render_with_sleep_palettes(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 arg4);
-void render_with_static_palettes(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 arg4);
-void render_with_fear_palettes(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 arg4);
-void render_with_poison_palettes(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 arg4);
-void render_with_paralyze_palettes(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 arg4);
-void render_with_berserk_palettes(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 arg4);
-void render_with_watt_idle_palettes(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 arg4);
-void render_with_watt_attack_palettes(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 arg4);
-void render_with_player_debuff_palettes(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 arg4, s32 arg5);
-void render_with_pal_blending(s32 arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s32 arg5);
-void render_with_palset_blending(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 arg4);
+void render_without_adjusted_palettes(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation);
+void render_with_sleep_palettes(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation);
+void render_with_static_palettes(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation);
+void render_with_fear_palettes(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation);
+void render_with_poison_palettes(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation);
+void render_with_paralyze_palettes(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation);
+void render_with_berserk_palettes(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation);
+void render_with_watt_idle_palettes(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation);
+void render_with_watt_attack_palettes(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation);
+void render_with_player_debuff_palettes(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation, s32 isPoison);
+void render_with_pal_blending(s32 arg0, ActorPart* part, s32 yaw, s32 arg3, Matrix4f mtx, s32 skipAnimation);
+void render_with_palset_blending(s32 arg0, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation);
 s32 func_8025C840(s32 arg0, ActorPart* part, s32 yaw, s32);
 s32 func_8025CCC8(s32 arg0, ActorPart* part, s32 yaw, s32);
 s32 get_player_anim_for_status(s32 animID);
@@ -859,7 +874,9 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
     if (actor->debuff == STATUS_FROZEN) {
         effect = actor->icePillarEffect;
         if (actor->icePillarEffect != NULL) {
-            if ((gBattleStatus.flags1 & BS_FLAGS1_8) || (!(gBattleStatus.flags1 & BS_FLAGS1_4) && (actor->flags & ACTOR_FLAG_8000000))) {
+            if ((gBattleStatus.flags1 & BS_FLAGS1_SHOW_PLAYER_DECORATIONS) ||
+                (!(gBattleStatus.flags1 & BS_FLAGS1_TATTLE_OPEN) && (actor->flags & ACTOR_FLAG_8000000)))
+            {
                 effect->data.icePillar->pos.x = actorPosX;
                 effect->data.icePillar->pos.y = actorPosY;
                 effect->data.icePillar->pos.z = actorPosZ;
@@ -1115,7 +1132,7 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
             }
         }
 
-        if (!(gBattleStatus.flags1 & BS_FLAGS1_4) && (actor->flags & ACTOR_FLAG_8000000)) {
+        if (!(gBattleStatus.flags1 & BS_FLAGS1_TATTLE_OPEN) && (actor->flags & ACTOR_FLAG_8000000)) {
             do {
                 if (actor->debuff == STATUS_POISON) {
                     create_status_debuff(actor->hudElementDataIndex, STATUS_POISON);
@@ -1456,7 +1473,7 @@ void appendGfx_player_actor(void* arg0) {
         (player->actorBlueprint->statusIconOffset.y + player->statusIconOffset.y) * player->scalingFactor;
     player->disableEffect->data.disableX->pos.z = playerPosZ;
 
-    if (!(gBattleStatus.flags1 & BS_FLAGS1_4) && (player->flags & ACTOR_FLAG_8000000)) {
+    if (!(gBattleStatus.flags1 & BS_FLAGS1_TATTLE_OPEN) && (player->flags & ACTOR_FLAG_8000000)) {
         if (player->disableDismissTimer != 0) {
             player->disableDismissTimer--;
             player->disableEffect->data.disableX->pos.y = NPC_DISPOSE_POS_Y;
@@ -1469,8 +1486,8 @@ void appendGfx_player_actor(void* arg0) {
     }
 
     if (battleStatus->waterBlockTurnsLeft != 0) {
-        if ((gBattleStatus.flags1 & BS_FLAGS1_8) ||
-            (!(gBattleStatus.flags1 & BS_FLAGS1_4) && (player->flags & ACTOR_FLAG_8000000)))
+        if ((gBattleStatus.flags1 & BS_FLAGS1_SHOW_PLAYER_DECORATIONS) ||
+            (!(gBattleStatus.flags1 & BS_FLAGS1_TATTLE_OPEN) && (player->flags & ACTOR_FLAG_8000000)))
         {
             effect = battleStatus->waterBlockEffect;
             effect->data.waterBlock->pos.x = playerPosX;
@@ -1484,8 +1501,8 @@ void appendGfx_player_actor(void* arg0) {
         }
     }
     if (battleStatus->cloudNineTurnsLeft != 0) {
-        if ((gBattleStatus.flags1 & BS_FLAGS1_8) ||
-            (!(gBattleStatus.flags1 & BS_FLAGS1_4) && (player->flags & ACTOR_FLAG_8000000)))
+        if ((gBattleStatus.flags1 & BS_FLAGS1_SHOW_PLAYER_DECORATIONS) ||
+            (!(gBattleStatus.flags1 & BS_FLAGS1_TATTLE_OPEN) && (player->flags & ACTOR_FLAG_8000000)))
         {
             effect = battleStatus->cloudNineEffect;
             effect->data.endingDecals->pos.x = playerPosX;
@@ -1502,8 +1519,8 @@ void appendGfx_player_actor(void* arg0) {
     if (player->debuff == STATUS_FROZEN) {
         effect = player->icePillarEffect;
         if (player->icePillarEffect != NULL) {
-            if ((gBattleStatus.flags1 & BS_FLAGS1_8) ||
-                (!(gBattleStatus.flags1 & BS_FLAGS1_4) && (player->flags & ACTOR_FLAG_8000000)))
+            if ((gBattleStatus.flags1 & BS_FLAGS1_SHOW_PLAYER_DECORATIONS) ||
+                (!(gBattleStatus.flags1 & BS_FLAGS1_TATTLE_OPEN) && (player->flags & ACTOR_FLAG_8000000)))
             {
                 effect->data.icePillar->pos.x = playerPosX - 8.0f;
                 effect->data.icePillar->pos.y = playerPosY;
@@ -1527,7 +1544,7 @@ void appendGfx_player_actor(void* arg0) {
         }
     }
 
-    if (!(gBattleStatus.flags2 & BS_FLAGS2_10000) && !(gBattleStatus.flags1 & BS_FLAGS1_4) && (player->flags & ACTOR_FLAG_8000000)) {
+    if (!(gBattleStatus.flags2 & BS_FLAGS2_10000) && !(gBattleStatus.flags1 & BS_FLAGS1_TATTLE_OPEN) && (player->flags & ACTOR_FLAG_8000000)) {
         battleStatus->buffEffect->data.partnerBuff->unk_02 = 1;
     } else {
         battleStatus->buffEffect->data.partnerBuff->unk_02 = 0;
@@ -1781,7 +1798,7 @@ void appendGfx_player_actor(void* arg0) {
         } while (0); // needed to match
     }
 
-    if (!(gBattleStatus.flags1 & BS_FLAGS1_4) && (player->flags & ACTOR_FLAG_8000000)) {
+    if (!(gBattleStatus.flags1 & BS_FLAGS1_TATTLE_OPEN) && (player->flags & ACTOR_FLAG_8000000)) {
         if (!cond4) {
             do {
                 if (player->debuff == STATUS_POISON) {
@@ -1925,7 +1942,7 @@ void appendGfx_player_actor_reflection(void* arg0) {
     render_with_adjusted_palettes(SPRITE_MODE_PLAYER, part, clamp_angle(playerYaw + 180.0f), mtxTransform, TRUE);
 }
 
-s32 render_with_adjusted_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, b32 arg4) {
+s32 render_with_adjusted_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation) {
     s32 opacity;
     s32 sprDrawOpts;
 
@@ -1958,46 +1975,46 @@ s32 render_with_adjusted_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Mat
 
     switch (part->decorationTable->paletteAdjustment) {
         case PAL_ADJUST_NONE:
-            render_without_adjusted_palettes(isNpcSprite, part, yaw, mtx, arg4);
+            render_without_adjusted_palettes(isNpcSprite, part, yaw, mtx, skipAnimation);
             break;
         case PAL_ADJUST_SLEEP:
-            render_with_sleep_palettes(isNpcSprite, part, yaw, mtx, arg4);
+            render_with_sleep_palettes(isNpcSprite, part, yaw, mtx, skipAnimation);
             break;
         case PAL_ADJUST_STATIC:
-            render_with_static_palettes(isNpcSprite, part, yaw, mtx, arg4);
+            render_with_static_palettes(isNpcSprite, part, yaw, mtx, skipAnimation);
             break;
         case PAL_ADJUST_FEAR:
-            render_with_fear_palettes(isNpcSprite, part, yaw, mtx, arg4);
+            render_with_fear_palettes(isNpcSprite, part, yaw, mtx, skipAnimation);
             break;
         case PAL_ADJUST_POISON:
-            render_with_poison_palettes(isNpcSprite, part, yaw, mtx, arg4);
+            render_with_poison_palettes(isNpcSprite, part, yaw, mtx, skipAnimation);
             break;
         case PAL_ADJUST_PARALYZE:
-            render_with_paralyze_palettes(isNpcSprite, part, yaw, mtx, arg4);
+            render_with_paralyze_palettes(isNpcSprite, part, yaw, mtx, skipAnimation);
             break;
         case PAL_ADJUST_BERSERK:
-            render_with_berserk_palettes(isNpcSprite, part, yaw, mtx, arg4);
+            render_with_berserk_palettes(isNpcSprite, part, yaw, mtx, skipAnimation);
             break;
         case PAL_ADJUST_WATT_IDLE:
-            render_with_watt_idle_palettes(isNpcSprite, part, yaw, mtx, arg4);
+            render_with_watt_idle_palettes(isNpcSprite, part, yaw, mtx, skipAnimation);
             break;
         case PAL_ADJUST_WATT_ATTACK:
-            render_with_watt_attack_palettes(isNpcSprite, part, yaw, mtx, arg4);
+            render_with_watt_attack_palettes(isNpcSprite, part, yaw, mtx, skipAnimation);
             break;
         case PAL_ADJUST_PLAYER_DEBUFF:
-            render_with_player_debuff_palettes(isNpcSprite, part, yaw, mtx, arg4, 0);
+            render_with_player_debuff_palettes(isNpcSprite, part, yaw, mtx, skipAnimation, FALSE);
             break;
         case PAL_ADJUST_PLAYER_POISON:
-            render_with_player_debuff_palettes(isNpcSprite, part, yaw, mtx, arg4, 1);
+            render_with_player_debuff_palettes(isNpcSprite, part, yaw, mtx, skipAnimation, TRUE);
             break;
         case PAL_ADJUST_BLEND_PALETTES_UNIFORM_INTERVALS:
-            render_with_pal_blending(isNpcSprite, part, yaw, FALSE, mtx, arg4);
+            render_with_pal_blending(isNpcSprite, part, yaw, FALSE, mtx, skipAnimation);
             break;
         case PAL_ADJUST_BLEND_PALETTES_VARYING_INTERVALS:
-            render_with_pal_blending(isNpcSprite, part, yaw, TRUE, mtx, arg4);
+            render_with_pal_blending(isNpcSprite, part, yaw, TRUE, mtx, skipAnimation);
             break;
         case PAL_ADJUST_BLEND_PALSETS:
-            render_with_palset_blending(isNpcSprite, part, yaw, mtx, arg4);
+            render_with_palset_blending(isNpcSprite, part, yaw, mtx, skipAnimation);
             break;
         default:
             break;
@@ -2165,7 +2182,7 @@ void func_8025995C(ActorPart* part, s32 yaw, Matrix4f mtx) {
     }
 }
 
-void render_without_adjusted_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, b32 arg4) {
+void render_without_adjusted_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation) {
     DecorationTable* decorationTable = part->decorationTable;
 
     if (decorationTable->resetPalAdjust) {
@@ -2181,7 +2198,7 @@ void render_without_adjusted_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw,
     }
 }
 
-void render_with_sleep_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, b32 arg4) {
+void render_with_sleep_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation) {
     DecorationTable* decorationTable = part->decorationTable;
     s32 i, j;
 
@@ -2236,7 +2253,7 @@ void render_with_sleep_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matri
     }
 }
 
-void render_with_static_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, b32 arg4) {
+void render_with_static_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation) {
     DecorationTable* decorationTable = part->decorationTable;
     PAL_PTR palIn;
     PAL_PTR palOut;
@@ -2277,10 +2294,10 @@ void render_with_static_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matr
         decorationTable->nextPalTime = 0;
     }
     
-    if (!arg4) {
+    if (!skipAnimation) {
         if (decorationTable->nextPalTime == 0) {
             decorationTable->palAnimState += 2;
-            if (StaticPalettesAnim[decorationTable->palAnimState] == 255) {
+            if (StaticPalettesAnim[decorationTable->palAnimState] == PAL_ANIM_END) {
                 decorationTable->palAnimState = 0;
             }
             decorationTable->nextPalTime = StaticPalettesAnim[decorationTable->palAnimState + 1] / 2;
@@ -2292,7 +2309,7 @@ void render_with_static_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matr
     }
 
     switch (paletteType) {
-        case 0: // no change
+        case STATIC_DEFAULT: // no change
             for (i = 0; i < decorationTable->spriteColorVariations; i++) {
                 palIn = decorationTable->originalPalettesList[i];
                 palOut = decorationTable->copiedPalettes[0][i];
@@ -2303,7 +2320,7 @@ void render_with_static_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matr
                 }
             }
             break;
-        case 1: // bright yellow
+        case STATIC_BRIGHT: // bright yellow
             for (i = 0; i < decorationTable->spriteColorVariations; i++) {
                 staticPalIdx = decorationTable->spriteColorVariations * STANDARD_PAL_STATIC + i;
                 palIn = decorationTable->originalPalettesList[staticPalIdx];
@@ -2315,7 +2332,7 @@ void render_with_static_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matr
                 }
             }
             break;
-        case 2: // darkened
+        case STATIC_DARK: // darkened via code
             for (i = 0; i < decorationTable->spriteColorVariations; i++) {
                 palIn = decorationTable->originalPalettesList[i];
                 palOut = decorationTable->copiedPalettes[0][i];
@@ -2348,12 +2365,12 @@ void render_with_static_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matr
         func_802596C0(part, yaw, mtx);
     }
 
-    if (!arg4) {
+    if (!skipAnimation) {
         decorationTable->palBlendAlpha--;
     }
 }
 
-void render_with_fear_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, b32 arg4) {
+void render_with_fear_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation) {
     DecorationTable* decorationTable = part->decorationTable;
     PAL_PTR palIn;
     PAL_PTR palOut;
@@ -2405,13 +2422,13 @@ void render_with_fear_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matrix
 
     if (decorationTable->nextPalTime <= 0) {
         part->palAnimPosOffset[0] = FearPaletteAnimXOffsets[abs(decorationTable->nextPalTime)];
-        if (part->palAnimPosOffset[0] == 255) {
+        if (part->palAnimPosOffset[0] == PAL_ANIM_END) {
             part->palAnimPosOffset[0] = 0;
             decorationTable->nextPalTime = rand_int(60) + 30;
         }
     }
 
-    if (arg4 == 0) {
+    if (!skipAnimation) {
         decorationTable->nextPalTime--;
     }
 
@@ -2422,7 +2439,7 @@ void render_with_fear_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matrix
     }
 }
 
-void render_with_poison_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, b32 arg4) {
+void render_with_poison_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation) {
     DecorationTable* decorationTable = part->decorationTable;
     PAL_PTR palIn;
     PAL_PTR palOut;
@@ -2480,7 +2497,7 @@ void render_with_poison_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matr
     }
 }
 
-void render_with_paralyze_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, b32 arg4) {
+void render_with_paralyze_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation) {
     DecorationTable* decorationTable = part->decorationTable;
     PAL_PTR palIn;
     PAL_PTR palOut;
@@ -2544,13 +2561,13 @@ void render_with_paralyze_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Ma
         case 1:
             if (decorationTable->nextPalTime <= 0) {
                 part->palAnimPosOffset[1] = ParalyzePaletteAnimXOffsets[abs(decorationTable->nextPalTime)];
-                if (part->palAnimPosOffset[1] == 255) {
+                if (part->palAnimPosOffset[1] == PAL_ANIM_END) {
                     part->palAnimPosOffset[1] = 0;
                     decorationTable->nextPalTime = rand_int(60) + 30;
                 }
             }
 
-            if (arg4 == 0) {
+            if (!skipAnimation) {
                 decorationTable->nextPalTime--;
             }
 
@@ -2575,14 +2592,14 @@ void render_with_paralyze_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Ma
                     break;
             }
 
-            if (arg4 == 0) {
+            if (!skipAnimation) {
                 decorationTable->palBlendAlpha++;
             }
             break;
     }
 }
 
-void render_with_berserk_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, b32 arg4) {
+void render_with_berserk_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matrix4f mtx, b32 skipAnimation) {
     DecorationTable* decorationTable = part->decorationTable;
     s32 i, j;
 
@@ -2684,20 +2701,20 @@ void render_with_watt_idle_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, M
     if (!skipAnimation) {
         if (decorationTable->nextPalTime == 0) {
             decorationTable->palAnimState += 2;
-            if (WattPalettesAnim[decorationTable->palAnimState] == 255) {
+            if (WattIdlePalettesAnim[decorationTable->palAnimState] == PAL_ANIM_END) {
                 decorationTable->palAnimState = 0;
             }
-            decorationTable->nextPalTime = WattPalettesAnim[decorationTable->palAnimState + 1] / 2;
+            decorationTable->nextPalTime = WattIdlePalettesAnim[decorationTable->palAnimState + 1] / 2;
         }
-        brightnessLevel = WattPalettesAnim[decorationTable->palAnimState];
+        brightnessLevel = WattIdlePalettesAnim[decorationTable->palAnimState];
         decorationTable->nextPalTime--;
     } else {
         //@bug if only called with skipAnimation set, palAnimPos will always be -2 and the array access is OOB
-        brightnessLevel = WattPalettesAnim[decorationTable->palAnimState];
+        brightnessLevel = WattIdlePalettesAnim[decorationTable->palAnimState];
     }
 
     switch (brightnessLevel) {
-        case 0:
+        case WATT_DEFAULT:
             for (i = 0; i < decorationTable->spriteColorVariations; i++) {
                 // use watt's base palettes
                 palIn = decorationTable->originalPalettesList[i];
@@ -2709,7 +2726,7 @@ void render_with_watt_idle_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, M
                 }
             }
             break;
-        case 1:
+        case WATT_BRIGHTEST:
             for (i = 0; i < decorationTable->spriteColorVariations; i++) {
                 // use watt's Brightest palettes
                 palIdx = decorationTable->spriteColorVariations * SPR_PAL_BattleWatt_Brightest + i;
@@ -2722,7 +2739,7 @@ void render_with_watt_idle_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, M
                 }
             }
             break;
-        case 2:
+        case WATT_BRIGHTER:
             for (i = 0; i < decorationTable->spriteColorVariations; i++) {
                 // use watt's Brighter palettes
                 palIdx = decorationTable->spriteColorVariations * SPR_PAL_BattleWatt_Brighter + i;
@@ -2796,20 +2813,20 @@ void render_with_watt_attack_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw,
     if (!skipAnimation) {
         if (decorationTable->nextPalTime == 0) {
             decorationTable->palAnimState += 2;
-            if (D_80284120[decorationTable->palAnimState] == 255) {
+            if (WattAttackPalettesAnim[decorationTable->palAnimState] == PAL_ANIM_END) {
                 decorationTable->palAnimState = 0;
             }
-            decorationTable->nextPalTime = D_80284120[decorationTable->palAnimState + 1] / 2;
+            decorationTable->nextPalTime = WattAttackPalettesAnim[decorationTable->palAnimState + 1] / 2;
         }
-        brightness = D_80284120[decorationTable->palAnimState];
+        brightness = WattAttackPalettesAnim[decorationTable->palAnimState];
         decorationTable->nextPalTime--;
     } else {
         //@bug if only called with skipAnimation set, palAnimPos will always be -2 and the array access is OOB
-        brightness = D_80284120[decorationTable->palAnimState];
+        brightness = WattAttackPalettesAnim[decorationTable->palAnimState];
     }
 
     switch (brightness) {
-        case 0:
+        case WATT_DEFAULT:
             for (i = 0; i < decorationTable->spriteColorVariations; i++) {
                 palIn = decorationTable->originalPalettesList[i];
                 palOut = decorationTable->copiedPalettes[0][i];
@@ -2820,7 +2837,7 @@ void render_with_watt_attack_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw,
                 }
             }
             break;
-        case 1:
+        case WATT_BRIGHTEST:
             for (i = 0; i < decorationTable->spriteColorVariations; i++) {
                 // use watt's Brightest palettes
                 palIdx = decorationTable->spriteColorVariations * SPR_PAL_BattleWatt_Brightest + i;
@@ -2833,7 +2850,7 @@ void render_with_watt_attack_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw,
                 }
             }
             break;
-        case 2:
+        case WATT_BRIGHTER:
             for (i = 0; i < decorationTable->spriteColorVariations; i++) {
                 // use watt's Brighter palettes
                 palIdx = decorationTable->spriteColorVariations * SPR_PAL_BattleWatt_Brighter + i;

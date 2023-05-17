@@ -1525,10 +1525,8 @@ typedef struct RenderTask {
 typedef struct SelectableTarget {
     /* 0x00 */ s16 actorID;
     /* 0x02 */ s16 partID; /* sometimes loaded as byte from 0x3 */
-    /* 0x04 */ Vec3s pos;
-    /* 0x0A */ s16 unk_0A;
-    /* 0x0C */ s16 unk_0C;
-    /* 0x0E */ s16 unk_0E;
+    /* 0x04 */ Vec3s posA;
+    /* 0x0A */ Vec3s posB;
     /* 0x10 */ s8 unk_10;
     /* 0x11 */ s8 homeCol; /* from xpos --> 0-3 */
     /* 0x12 */ s8 homeRow; /* from ypos --> 0-3 */
@@ -1910,7 +1908,7 @@ typedef struct Actor {
     /* 0x21C */ s8 statusAfflicted;
     /* 0x21D */ s8 disableDismissTimer;
     /* 0x21E */ s16 unk_21E;
-    /* 0x220 */ s8 isGlowing; // charge amount for goombario
+    /* 0x220 */ s8 isGlowing; // also used for goombario charge amount
     /* 0x221 */ s8 attackBoost;
     /* 0x222 */ s8 defenseBoost;
     /* 0x223 */ s8 chillOutAmount; /* attack reduction */

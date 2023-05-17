@@ -721,7 +721,7 @@ void btl_state_update_begin_player_turn(void) {
                 battleStatus->unk_86 = 127;
                 battleStatus->blockResult = 127;
                 battleStatus->selectedMoveID = 0;
-                gBattleStatus.flags1 |= BS_FLAGS1_8;
+                gBattleStatus.flags1 |= BS_FLAGS1_SHOW_PLAYER_DECORATIONS;
                 gBattleStatus.flags2 &= ~BS_FLAGS2_1000000;
                 player->disableDismissTimer = 0;
                 player->flags |= ACTOR_FLAG_8000000 | ACTOR_FLAG_4000000;
@@ -1066,7 +1066,7 @@ void btl_state_update_switch_to_player(void) {
         gBattleStatus.selectedMoveID = MOVE_NONE;
         gBattleStatus.unk_86 = 127;
         gBattleStatus.blockResult = 127;
-        gBattleStatus.flags1 |= BS_FLAGS1_8;
+        gBattleStatus.flags1 |= BS_FLAGS1_SHOW_PLAYER_DECORATIONS;
         player->flags |= ACTOR_FLAG_8000000;
         if (partner != NULL) {
             partner->flags |= (ACTOR_FLAG_8000000 | ACTOR_FLAG_4000000);
@@ -1213,7 +1213,7 @@ void btl_state_update_switch_to_partner(void) {
         gBattleStatus.selectedMoveID = MOVE_NONE;
         gBattleStatus.unk_86 = 127;
         gBattleStatus.blockResult = 127;
-        gBattleStatus.flags1 |= BS_FLAGS1_8;
+        gBattleStatus.flags1 |= BS_FLAGS1_SHOW_PLAYER_DECORATIONS;
         player->flags |= (ACTOR_FLAG_8000000 | ACTOR_FLAG_4000000);
         partner->flags |= ACTOR_FLAG_8000000;
 
@@ -1776,7 +1776,7 @@ void btl_state_update_victory(void) {
             gBattleStatus.flags2 &= ~BS_FLAGS2_8;
             gBattleStatus.flags2 &= ~BS_FLAGS2_10;
 
-            gBattleStatus.flags1 &= ~BS_FLAGS1_8;
+            gBattleStatus.flags1 &= ~BS_FLAGS1_SHOW_PLAYER_DECORATIONS;
             if (player->koStatus == STATUS_DAZE) {
                 dispatch_event_player(EVENT_RECOVER_FROM_KO);
                 gBattleSubState = BTL_SUBSTATE_VICTORY_AWAIT_RECOVER_KO;
@@ -2364,7 +2364,7 @@ void btl_state_update_defeat(void) {
 
     switch (gBattleSubState) {
         case BTL_SUBSTATE_DEFEAT_INIT:
-            battleStatus->flags1 &= ~BS_FLAGS1_8;
+            battleStatus->flags1 &= ~BS_FLAGS1_SHOW_PLAYER_DECORATIONS;
             gBattleStatus.flags2 &= ~BS_FLAGS2_2;
             gBattleStatus.flags2 &= ~BS_FLAGS2_4;
             gBattleStatus.flags2 &= ~BS_FLAGS2_8;
@@ -2607,10 +2607,10 @@ void btl_state_update_player_move(void) {
             partner->flags &= ~ACTOR_FLAG_8000000;
         }
         btl_cam_target_actor(ACTOR_PLAYER);
-        gBattleStatus.flags1 &= ~BS_FLAGS1_8;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_SHOW_PLAYER_DECORATIONS;
         player->statusAfflicted = 0;
         gBattleStatus.flags2 |= BS_FLAGS2_8;
-        gBattleStatus.flags1 &= ~BS_FLAGS1_200000;
+        gBattleStatus.flags1 &= ~BS_FLAGS1_YIELD_TURN;
 
         for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
             actor = battleStatus->enemyActors[i];
@@ -2695,7 +2695,7 @@ void btl_state_update_player_move(void) {
             break;
         case BTL_SUBSTATE_PLAYER_MOVE_HANDLE_RESULTS:
             // wait for player battle phase script to finish
-            if (!(gBattleStatus.flags1 & BS_FLAGS1_200000)) {
+            if (!(gBattleStatus.flags1 & BS_FLAGS1_YIELD_TURN)) {
                 if (player->takeTurnScript != NULL && does_script_exist(player->takeTurnScriptID)) {
                     break;
                 }
@@ -2767,7 +2767,7 @@ void btl_state_update_player_move(void) {
             }
 
             decrement_status_bar_disabled();
-            gBattleStatus.flags1 |= BS_FLAGS1_8;
+            gBattleStatus.flags1 |= BS_FLAGS1_SHOW_PLAYER_DECORATIONS;
             gBattleStatus.flags2 &= ~BS_FLAGS2_8;
             if (btl_check_player_defeated()) {
                 return;
@@ -3165,7 +3165,7 @@ void btl_state_update_partner_move(void) {
             deduct_current_move_fp();
             btl_cam_target_actor(ACTOR_PARTNER);
             gBattleStatus.flags2 |= BS_FLAGS2_10;
-            gBattleStatus.flags1 &= ~BS_FLAGS1_200000;
+            gBattleStatus.flags1 &= ~BS_FLAGS1_YIELD_TURN;
 
             for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
                 enemyActor = battleStatus->enemyActors[i];
@@ -3197,7 +3197,7 @@ void btl_state_update_partner_move(void) {
             gBattleSubState = BTL_SUBSTATE_PARTNER_MOVE_HANDLE_RESULTS;
             break;
         case BTL_SUBSTATE_PARTNER_MOVE_HANDLE_RESULTS:
-            if (!(gBattleStatus.flags1 & BS_FLAGS1_200000)) {
+            if (!(gBattleStatus.flags1 & BS_FLAGS1_YIELD_TURN)) {
                 if (partner->takeTurnScript != NULL && does_script_exist(partner->takeTurnScriptID)) {
                     break;
                 }
@@ -3265,7 +3265,7 @@ void btl_state_update_partner_move(void) {
                     && battleStatus->moveCategory == BTL_MENU_TYPE_CHANGE_PARTNER
                     && battleStatus->selectedMoveID != MOVE_CHARGE) {
                 partner->isGlowing = 0;
-                gBattleStatus.flags1 &= ~BS_FLAGS1_40000000;
+                gBattleStatus.flags1 &= ~BS_FLAGS1_GOOMBARIO_CHARGED;
             }
             if (btl_check_player_defeated()) {
                 return;
@@ -3572,7 +3572,7 @@ void btl_state_update_enemy_move(void) {
         case BTL_SUBSTATE_ENEMY_MOVE_EXECUTE:
         case BTL_SUBSTATE_ENEMY_MOVE_UNUSED_1:
             gBattleStatus.flags1 &= ~BS_FLAGS1_MENU_OPEN;
-            gBattleStatus.flags1 &= ~BS_FLAGS1_200000;
+            gBattleStatus.flags1 &= ~BS_FLAGS1_YIELD_TURN;
             player->flags &= ~ACTOR_FLAG_8000000;
             if (partner != NULL) {
                 partner->flags &= ~ACTOR_FLAG_8000000;
@@ -3667,7 +3667,7 @@ void btl_state_update_enemy_move(void) {
                 }
             }
 
-            if (!waitingForEnemyScript || (gBattleStatus.flags1 & BS_FLAGS1_200000)) {
+            if (!waitingForEnemyScript || (gBattleStatus.flags1 & BS_FLAGS1_YIELD_TURN)) {
                 gBattleStatus.flags1 &= ~BS_FLAGS1_100;
                 gBattleStatus.flags2 &= ~BS_FLAGS2_4000;
                 if (btl_check_enemies_defeated()) {
@@ -3886,7 +3886,7 @@ void btl_state_update_first_strike(void) {
             }
 
             // wait for player move script
-            if (!(gBattleStatus.flags1 & BS_FLAGS1_200000)) {
+            if (!(gBattleStatus.flags1 & BS_FLAGS1_YIELD_TURN)) {
                 if (player->takeTurnScript != NULL && does_script_exist(player->takeTurnScriptID)) {
                     break;
                 }

@@ -31,8 +31,9 @@ s32 N(IdleAnimations_8021D3AC)[] = {
     STATUS_END,
 };
 
-s32 N(unk_missing_8021D3B8)[] = {
-    0x00000001, 0x00A40004, 0x00000000,
+s32 N(UnusedAnims)[] = {
+    STATUS_NORMAL,    ANIM_Lee_Run,
+    STATUS_END,
 };
 
 s32 N(DefenseTable_8021D3C4)[] = {
@@ -366,8 +367,8 @@ EvtScript N(8021E118) = {
     EVT_CALL(CopyBuffs, ACTOR_SELF, LVarA)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVarB, LVarC, LVarD)
     EVT_CALL(SetActorPos, LVarA, LVarB, LVarC, LVarD)
-    EVT_CALL(SetPartFlagBits, LVarA, 1, 0x00800000, TRUE)
-    EVT_CALL(SetPartFlagBits, LVarA, 1, 0x00020001, FALSE)
+    EVT_CALL(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_MULTI_TARGET, TRUE)
+    EVT_CALL(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_INVISIBLE, FALSE)
     EVT_CALL(SetActorFlagBits, LVarA, (ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_NO_DMG_APPLY), FALSE)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
     EVT_CALL(SetActorVar, LVarA, 8, 2)
@@ -813,13 +814,13 @@ API_CALLABLE(func_80218100_464590) {
 
 #include "common/ActorJumpToPos.inc.c"
 
-EvtScript N(8021F6E0) = {
+EvtScript N(EVS_Move_Headbonk) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_EXEC_WAIT(N(8021F514))
     EVT_EXEC_WAIT(N(8021F5F8))
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
-    EVT_IF_FLAG(LVarA, 0x80000)
+    EVT_IF_FLAG(LVarA, STATUS_FLAG_SHRINK)
         EVT_SETF(LVar0, EVT_FLOAT(7.2))
         EVT_SETF(LVar1, EVT_FLOAT(7.6))
         EVT_SETF(LVar1, EVT_FLOAT(3.6))
@@ -972,9 +973,14 @@ EvtScript N(8021F6E0) = {
 
 #include "common/UnkActorSizeFunc.inc.c"
 
-#include "common/UnkEffect6CFunc.inc.c"
+API_CALLABLE(N(OpenTattleWindow)) {
+    Bytecode* args = script->ptrReadPos;
 
-API_CALLABLE(func_80218DF4_465284) {
+    evt_set_variable(script, *args++, (s32) fx_tattle_window(0, 106.0f, 144.0f, 0, 1.0f, 0));
+    return ApiStatus_DONE2;
+}
+
+API_CALLABLE(N(HideTattleWindow)) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* tattleEffect = (EffectInstance*) evt_get_variable(script, *args++);
 
@@ -982,7 +988,7 @@ API_CALLABLE(func_80218DF4_465284) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_80218E2C_4652BC) {
+API_CALLABLE(N(CloseTattleWindow)) {
     EffectInstance* tattleEffect = (EffectInstance*) evt_get_variable(script, *script->ptrReadPos);
 
     tattleEffect->data.tattleWindow->pos.y = 144.0f;
@@ -990,7 +996,7 @@ API_CALLABLE(func_80218E2C_4652BC) {
     return ApiStatus_DONE2;
 }
 
-EvtScript N(80220100) = {
+EvtScript N(EVS_Move_Tattle) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
@@ -1000,8 +1006,8 @@ EvtScript N(80220100) = {
     EVT_WAIT(10)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4, TRUE)
-    EVT_CALL(N(UnkEffect6CFunc), LVar5)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_TATTLE_OPEN, TRUE)
+    EVT_CALL(N(OpenTattleWindow), LVar5)
     EVT_WAIT(12)
     EVT_CALL(SetCamEnabled, CAM_TATTLE, TRUE)
     EVT_CALL(SetCamFlag80, CAM_TATTLE, FALSE)
@@ -1020,12 +1026,12 @@ EvtScript N(80220100) = {
     EVT_CALL(SetCamFlag80, CAM_TATTLE, TRUE)
     EVT_WAIT(10)
     EVT_CALL(ActorSpeak, MSG_EnemyTattle_Mario, ACTOR_SELF, 1, ANIM_BattleGoombario_Talk, ANIM_BattleGoombario_Idle)
-    EVT_CALL(func_80218E2C_4652BC, LVar5)
+    EVT_CALL(N(CloseTattleWindow), LVar5)
     EVT_WAIT(12)
     EVT_CALL(SetCamEnabled, CAM_TATTLE, FALSE)
     EVT_WAIT(32)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4, FALSE)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_TATTLE_OPEN, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
@@ -1035,9 +1041,9 @@ EvtScript N(80220100) = {
 EvtScript N(takeTurn_802203F4) = {
     EVT_CALL(RandInt, 100, LVar0)
     EVT_IF_LT(LVar0, 40)
-        EVT_EXEC_WAIT(N(80220100))
+        EVT_EXEC_WAIT(N(EVS_Move_Tattle))
     EVT_ELSE
-        EVT_EXEC_WAIT(N(8021F6E0))
+        EVT_EXEC_WAIT(N(EVS_Move_Headbonk))
     EVT_END_IF
     EVT_RETURN
     EVT_END

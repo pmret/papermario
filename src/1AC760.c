@@ -513,8 +513,11 @@ HitResult calc_partner_damage_enemy(void) {
         dispatchEvent = EVENT_HIT_COMBO;
     }
 
-    if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE ||
-        (clear_part_pal_adjustment(targetPart), gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE)) {  // TODO remove clear_part_pal_adjustment from conditional
+    if (!(gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE)) {
+        clear_part_pal_adjustment(targetPart);
+    }
+
+    if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
         if (battleStatus->currentAttackElement & DAMAGE_TYPE_SPIN_SMASH) {
             if (dispatchEvent == EVENT_HIT) {
                 dispatchEvent = EVENT_SPIN_SMASH_HIT;
@@ -681,7 +684,7 @@ HitResult calc_partner_damage_enemy(void) {
                             wasStatusInflicted = TRUE;
                             retVal = 0;
                             tempBinary = TRUE;
-                            gBattleStatus.flags1 |= (BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10 | BS_FLAGS1_8 | BS_FLAGS1_ACTORS_VISIBLE);
+                            gBattleStatus.flags1 |= (BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10 | BS_FLAGS1_SHOW_PLAYER_DECORATIONS | BS_FLAGS1_ACTORS_VISIBLE);
                             sfx_play_sound_at_position(SOUND_231, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                         } else {
                             dispatchEvent = EVENT_IMMUNE;
@@ -722,7 +725,7 @@ HitResult calc_partner_damage_enemy(void) {
                     wasStatusInflicted = TRUE;
                     retVal = 0;
                     tempBinary = TRUE;
-                    gBattleStatus.flags1 |= (BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10 | BS_FLAGS1_8 | BS_FLAGS1_ACTORS_VISIBLE);
+                    gBattleStatus.flags1 |= (BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10 | BS_FLAGS1_SHOW_PLAYER_DECORATIONS | BS_FLAGS1_ACTORS_VISIBLE);
                     sfx_play_sound_at_position(SOUND_231, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                 } else {
                     dispatchEvent = EVENT_IMMUNE;
@@ -761,10 +764,11 @@ HitResult calc_partner_damage_enemy(void) {
         || gBattleStatus.flags1 & (BS_FLAGS1_200 | BS_FLAGS1_40)
         && !(gBattleStatus.flags1 & BS_FLAGS1_80)
     ) {
-        //TODO remove sfx_play_sound_at_position from conditional
-        if ((battleStatus->lastAttackDamage > 0 &&
-             ((sfx_play_sound_at_position(SOUND_231, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z),
-               battleStatus->lastAttackDamage > 0))) || (battleStatus->currentAttackElement & DAMAGE_TYPE_STATUS_ALWAYS_HITS && tempBinary)) {
+        if (battleStatus->lastAttackDamage > 0) {
+            sfx_play_sound_at_position(SOUND_231, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+        }
+        
+        if (battleStatus->lastAttackDamage > 0 || (battleStatus->currentAttackElement & DAMAGE_TYPE_STATUS_ALWAYS_HITS && tempBinary)) {
             if (gBattleStatus.flags1 & BS_FLAGS1_40) {
                 show_action_rating(ACTION_RATING_NICE, target, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             } else {
@@ -1384,6 +1388,6 @@ ApiStatus GetActionCommandResult(Evt* script, s32 isInitialCall) {
 
 /// Seems to be the same functionality as YieldTurn in 1A5830.c
 ApiStatus PartnerYieldTurn(Evt* script, s32 isInitialCall) {
-    gBattleStatus.flags1 |= BS_FLAGS1_200000;
+    gBattleStatus.flags1 |= BS_FLAGS1_YIELD_TURN;
     return ApiStatus_DONE2;
 }

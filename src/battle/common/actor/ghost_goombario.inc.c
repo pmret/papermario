@@ -1,3 +1,6 @@
+#include "common.h"
+#include "battle/battle.h"
+#include "script_api/battle.h"
 #include "sprite/npc/BattleGoombario.h"
 
 extern EvtScript N(goombario_init);
@@ -8,9 +11,15 @@ extern EvtScript N(goombario_handleEvent);
 #include "world/common/todo/UnkFunc62.inc.c"
 #include "common/ActorJumpToPos.inc.c"
 #include "common/UnkActorSizeFunc.inc.c"
-#include "common/UnkEffect6CFunc.inc.c"
 
-API_CALLABLE(N(UnkTattleEffectFunc1)) {
+API_CALLABLE(N(OpenTattleWindow)) {
+    Bytecode* args = script->ptrReadPos;
+
+    evt_set_variable(script, *args++, (s32) fx_tattle_window(0, 106.0f, 144.0f, 0, 1.0f, 0));
+    return ApiStatus_DONE2;
+}
+
+API_CALLABLE(N(HideTattleWindow)) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*)evt_get_variable(script, *args++);
 
@@ -18,7 +27,7 @@ API_CALLABLE(N(UnkTattleEffectFunc1)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(UnkTattleEffectFunc2)) {
+API_CALLABLE(N(CloseTattleWindow)) {
     Bytecode* args = script->ptrReadPos;
     EffectInstance* effect = (EffectInstance*)evt_get_variable(script, *args++);
 
@@ -321,7 +330,7 @@ EvtScript N(goombario_8021C7FC) = {
     EVT_END
 };
 
-EvtScript N(goombario_attack) = {
+EvtScript N(EVS_Move_Headbonk) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_EXEC_WAIT(N(goombario_runToPlayer))
@@ -483,7 +492,7 @@ EvtScript N(goombario_attack) = {
     EVT_END
 };
 
-EvtScript N(goombario_tattle) = {
+EvtScript N(EVS_Move_Tattle) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
@@ -493,8 +502,8 @@ EvtScript N(goombario_tattle) = {
     EVT_WAIT(10)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4, TRUE)
-    EVT_CALL(N(UnkEffect6CFunc), LVar5)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_TATTLE_OPEN, TRUE)
+    EVT_CALL(N(OpenTattleWindow), LVar5)
     EVT_WAIT(12)
     EVT_CALL(EnableBattleStatusBar, FALSE)
     EVT_CALL(SetCamEnabled, CAM_TATTLE, TRUE)
@@ -514,13 +523,13 @@ EvtScript N(goombario_tattle) = {
     EVT_CALL(SetCamFlag80, CAM_TATTLE, TRUE)
     EVT_WAIT(10)
     EVT_CALL(ActorSpeak, MSG_EnemyTattle_Mario, ACTOR_SELF, 1, ANIM_BattleGoombario_Talk, ANIM_BattleGoombario_Idle)
-    EVT_CALL(N(UnkTattleEffectFunc2), LVar5)
+    EVT_CALL(N(CloseTattleWindow), LVar5)
     EVT_WAIT(12)
     EVT_CALL(SetCamEnabled, CAM_TATTLE, FALSE)
     EVT_WAIT(32)
     EVT_CALL(EnableBattleStatusBar, TRUE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4, FALSE)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_TATTLE_OPEN, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
@@ -530,9 +539,9 @@ EvtScript N(goombario_tattle) = {
 EvtScript N(goombario_takeTurn) = {
     EVT_CALL(RandInt, 100, LVar0)
     EVT_IF_LT(LVar0, 10)
-        EVT_EXEC_WAIT(N(goombario_tattle))
+        EVT_EXEC_WAIT(N(EVS_Move_Tattle))
     EVT_ELSE
-        EVT_EXEC_WAIT(N(goombario_attack))
+        EVT_EXEC_WAIT(N(EVS_Move_Headbonk))
     EVT_END_IF
     EVT_RETURN
     EVT_END

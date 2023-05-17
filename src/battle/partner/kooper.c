@@ -77,7 +77,7 @@ API_CALLABLE(N(SetTargetsYaw)) {
         for (i = 0; i < actor->targetListLength; i++) {
             x = actor->currentPos.x;
             target = &actor->targetData[actor->targetIndexList[i]];
-            targetX = target->pos.x;
+            targetX = target->posA.x;
             targetActor = get_actor(target->actorID);
 
             if (targetActor != NULL) {
