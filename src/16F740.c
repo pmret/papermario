@@ -358,7 +358,7 @@ void btl_state_update_normal_start(void) {
                 if (i == 0) {
                     actor->instigatorValue = currentEncounter->instigatorValue;
                     if (currentEncounter->dizzyAttackStatus == STATUS_DIZZY) {
-                        inflict_status_set_duration(actor, STATUS_DIZZY, STATUS_DIZZY_TURN_MOD, currentEncounter->dizzyAttackDuration);
+                        inflict_status_set_duration(actor, STATUS_DIZZY, STATUX_TURN_MOD_DIZZY, currentEncounter->dizzyAttackDuration);
                     }
                 }
             }
@@ -373,7 +373,7 @@ void btl_state_update_normal_start(void) {
                         if (i == 0) {
                             actor->instigatorValue = 0;
                             if (currentEncounter->dizzyAttackStatus == STATUS_DIZZY) {
-                                inflict_status_set_duration(actor, STATUS_DIZZY, STATUS_DIZZY_TURN_MOD, currentEncounter->dizzyAttackDuration);
+                                inflict_status_set_duration(actor, STATUS_DIZZY, STATUX_TURN_MOD_DIZZY, currentEncounter->dizzyAttackDuration);
                             }
                         }
 

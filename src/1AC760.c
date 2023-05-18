@@ -645,7 +645,7 @@ HitResult calc_partner_damage_enemy(void) {
             ) {
                 #define INFLICT_STATUS(STATUS_TYPE) \
                     if ((battleStatus->currentAttackStatus & STATUS_FLAG_##STATUS_TYPE) && \
-                        try_inflict_status(target, STATUS_##STATUS_TYPE, STATUS_##STATUS_TYPE##_TURN_MOD)) { \
+                        try_inflict_status(target, STATUS_##STATUS_TYPE, STATUX_TURN_MOD_##STATUS_TYPE)) { \
                         tempBinary = TRUE; \
                         wasStatusInflicted = TRUE; \
                     } \

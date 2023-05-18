@@ -2052,7 +2052,7 @@ s32 lookup_status_duration_mod(s32* statusTable, s32 statusKey) {
     s32 defaultTurnMod = 0;
 
     while (statusTable[DICTIONARY_KEY] != ELEMENT_END) {
-        if (statusTable[DICTIONARY_KEY] == STATUS_DEFAULT_TURN_MOD) {
+        if (statusTable[DICTIONARY_KEY] == STATUX_TURN_MOD_DEFAULT) {
             defaultTurnMod = statusTable[DICTIONARY_VALUE];
         }
 
