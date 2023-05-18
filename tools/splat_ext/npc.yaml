@@ -6354,27 +6354,27 @@ Tutankoopa:
     - RockShatter
 ChainChomp:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
+    - Neutral
+    - Chain
+    - Bite
+    - Hurt1
+    - Hurt2
+    - Sleep
   palettes:
     - Default
     - Poisoned
     - Dizzy
     - Shocked
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
+    - Still
+    - Idle
+    - Chain
+    - QuickBite
+    - Bite
+    - SlowBite
+    - Hurt
+    - Sleep
+    - Dizzy
 WorldTubba:
   variations:
     - Variant00

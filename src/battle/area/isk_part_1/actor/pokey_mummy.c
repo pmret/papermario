@@ -8,7 +8,7 @@
 
 extern s32 N(IdleAnimations_80218DC8)[];
 extern s32 N(IdleAnimations_80218EB8)[];
-extern EvtScript N(init_80218EC4);
+extern EvtScript N(EVS_Init);
 extern EvtScript N(takeTurn_80219D88);
 extern EvtScript N(idle_80219040);
 extern EvtScript N(handleEvent_80219050);
@@ -131,7 +131,7 @@ ActorBlueprint NAMESPACE = {
     .maxHP = 4,
     .partCount = ARRAY_COUNT( N(PartsTable_80218CC8)),
     .partsData = N(PartsTable_80218CC8),
-    .initScript = &N(init_80218EC4),
+    .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable_80218C1C),
     .escapeChance = 60,
     .airLiftChance = 90,
@@ -198,7 +198,7 @@ s32 N(IdleAnimations_80218EB8)[] = {
 
 #include "common/battle/SetAbsoluteStatusOffsets.inc.c"
 
-EvtScript N(init_80218EC4) = {
+EvtScript N(EVS_Init) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_80219D88)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80219040)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80219050)))

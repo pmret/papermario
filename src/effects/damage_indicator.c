@@ -81,9 +81,6 @@ void damage_indicator_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 starsRadi
     s32 trueDamageAmt = damageAmt;
     s32 i;
 
-    
-//    fx_damage_indicator(0, posX, posY, posZ, 10.0f, a, damageAmt, &gDamageCountEffects[i]);
-
     // limit number of stars that can appear
     if (damageAmt > 20) {
         damageAmt = 20;

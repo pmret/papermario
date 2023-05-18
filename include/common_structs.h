@@ -1784,16 +1784,19 @@ typedef struct ActorMovement {
     /* 0x5A */ s16 flyArcAmplitude;
 } ActorMovement; // size = 0x5C;
 
-typedef struct ChompChainAnimationState {
+// a single link of a chain chomp's chain
+typedef struct ChompChain {
     /* 0x00 */ Vec3f currentPos;
     /* 0x0C */ f32 unk_0C;
     /* 0x10 */ f32 unk_10;
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ f32 unk_18;
-    /* 0x1C */ f32 unk_1C;
-    /* 0x20 */ f32 unk_20;
-    /* 0x24 */ Vec3f scale;
-} ChompChainAnimationState; // size = 0x30
+    /* 0x14 */ f32 gravAccel;
+    /* 0x18 */ f32 velY;
+    /* 0x1C */ f32 settleAmt;
+    /* 0x20 */ f32 settleRate;
+    /* 0x24 */ f32 outerLinkLen;
+    /* 0x28 */ f32 innerLinkLen;
+    /* 0x2C */ f32 linkLengthZ;
+} ChompChain; // size = 0x30
 
 typedef struct ActorState { // TODO: Make the first field of this an ActorMovement
     /* 0x00 */ Vec3f currentPos;

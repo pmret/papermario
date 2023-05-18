@@ -518,7 +518,7 @@ ParadeNpcInfo N(ParadeNpcsTable)[] = {
         .yaw = 270.0f
     },
     [NPC_ChainChomp1] {
-        .initialAnim = ANIM_ChainChomp_Anim03,
+        .initialAnim = ANIM_ChainChomp_QuickBite,
         .pos = { -1000.0f, 0.0f, 30.0f },
         .yaw = 270.0f
     },
@@ -555,17 +555,17 @@ ParadeNpcInfo N(ParadeNpcsTable)[] = {
         .yaw = 90.0f
     },
     [NPC_ChainChomp2] {
-        .initialAnim = ANIM_ChainChomp_Anim03,
+        .initialAnim = ANIM_ChainChomp_QuickBite,
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 90.0f
     },
     [NPC_ChainChomp3] {
-        .initialAnim = ANIM_ChainChomp_Anim03,
+        .initialAnim = ANIM_ChainChomp_QuickBite,
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 90.0f
     },
     [NPC_ChainChomp4] {
-        .initialAnim = ANIM_ChainChomp_Anim03,
+        .initialAnim = ANIM_ChainChomp_QuickBite,
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 90.0f
     },

@@ -193,7 +193,7 @@ EvtScript N(EVS_Scene_TutankoopaDefeated) = {
     EVT_CALL(SpeakToPlayer, NPC_Tutankoopa_01, ANIM_Tutankoopa_Talk, ANIM_Tutankoopa_Idle, 5, MSG_CH2_00E9)
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 0)
     EVT_THREAD
-        EVT_CALL(SetNpcAnimation, NPC_ChainChomp, ANIM_ChainChomp_Anim03)
+        EVT_CALL(SetNpcAnimation, NPC_ChainChomp, ANIM_ChainChomp_QuickBite)
         EVT_CALL(SetNpcSpeed, NPC_ChainChomp, EVT_FLOAT(8.0 / DT))
         EVT_CALL(SetNpcPos, NPC_ChainChomp, 486, -910, 340)
         EVT_CALL(GetNpcPos, NPC_Tutankoopa_01, LVar0, LVar1, LVar2)

@@ -52,7 +52,7 @@ NpcSettings N(NpcSettings_Tutankoopa_01) = {
 };
 
 NpcSettings N(NpcSettings_ChainChomp) = {
-    .defaultAnim = ANIM_ChainChomp_Anim03,
+    .defaultAnim = ANIM_ChainChomp_QuickBite,
     .height = 32,
     .radius = 32,
 };
@@ -130,22 +130,22 @@ NpcData N(NpcData_ChainChomp) = {
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_4 | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_40000 | ENEMY_FLAG_400000,
     .drops = NO_DROPS,
     .animations = {
-        .idle   = ANIM_ChainChomp_Anim00,
-        .walk   = ANIM_ChainChomp_Anim00,
-        .run    = ANIM_ChainChomp_Anim00,
-        .chase  = ANIM_ChainChomp_Anim00,
-        .anim_4 = ANIM_ChainChomp_Anim00,
-        .anim_5 = ANIM_ChainChomp_Anim00,
-        .death  = ANIM_ChainChomp_Anim00,
-        .hit    = ANIM_ChainChomp_Anim00,
-        .anim_8 = ANIM_ChainChomp_Anim00,
-        .anim_9 = ANIM_ChainChomp_Anim00,
-        .anim_A = ANIM_ChainChomp_Anim00,
-        .anim_B = ANIM_ChainChomp_Anim00,
-        .anim_C = ANIM_ChainChomp_Anim00,
-        .anim_D = ANIM_ChainChomp_Anim00,
-        .anim_E = ANIM_ChainChomp_Anim00,
-        .anim_F = ANIM_ChainChomp_Anim00,
+        .idle   = ANIM_ChainChomp_Still,
+        .walk   = ANIM_ChainChomp_Still,
+        .run    = ANIM_ChainChomp_Still,
+        .chase  = ANIM_ChainChomp_Still,
+        .anim_4 = ANIM_ChainChomp_Still,
+        .anim_5 = ANIM_ChainChomp_Still,
+        .death  = ANIM_ChainChomp_Still,
+        .hit    = ANIM_ChainChomp_Still,
+        .anim_8 = ANIM_ChainChomp_Still,
+        .anim_9 = ANIM_ChainChomp_Still,
+        .anim_A = ANIM_ChainChomp_Still,
+        .anim_B = ANIM_ChainChomp_Still,
+        .anim_C = ANIM_ChainChomp_Still,
+        .anim_D = ANIM_ChainChomp_Still,
+        .anim_E = ANIM_ChainChomp_Still,
+        .anim_F = ANIM_ChainChomp_Still,
     },
 };
 

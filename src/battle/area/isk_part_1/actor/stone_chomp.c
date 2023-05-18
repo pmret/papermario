@@ -12,6 +12,8 @@ extern EvtScript N(handleEvent_80222364);
 extern EvtScript N(8022181C);
 extern EvtScript N(80222324);
 
+#define NUM_CHAIN_LINKS     8
+
 s32 N(IdleAnimations_80221450)[] = {
     STATUS_NORMAL,    ANIM_StoneChomp_Anim01,
     STATUS_STONE,     ANIM_StoneChomp_Anim00,
@@ -237,118 +239,10 @@ ActorBlueprint NAMESPACE = {
     .statusTextOffset = { 10, 20 },
 };
 
-#include "common/ChompChainInit.inc.c"
-
-#include "common/ChompChainUpdateHelperFunc.inc.c"
-
-#include "common/ChompChainUpdateHelperFunc2.inc.c"
-
-API_CALLABLE(b_area_isk_part_1_ChompChainUpdate) {
-    f32 sp18;
-    Actor* actor;
-    ActorPart* part;
-    ChompChainAnimationState* animState;
-    f32 dist;
-    f32 angle;
-    f32 ax, ay;
-    s32 three;
-    s32 i;
-
-    actor = get_actor(script->owner1.actorID);
-    if (actor == NULL) {
-        return ApiStatus_BLOCK;
-    }
-
-    three = 3;
-
-    animState = actor->state.functionTempPtr[0];
-    if (actor->debuff == STATUS_SHRINK) {
-        ax = actor->currentPos.x + 6.0;
-        ay = actor->currentPos.y + 2.5;
-    } else {
-        ax = actor->currentPos.x + 12.0;
-        ay = actor->currentPos.y + 5.0;
-    }
-
-    for (i = 0; i < 8; i++, animState++) {
-        if (actor->debuff == STATUS_SHRINK) {
-            animState->scale.x = 3.5f;
-            animState->scale.z = 3.5f;
-            animState->scale.y = 3.5f;
-        } else {
-            animState->scale.x = 7.0f;
-            animState->scale.z = 7.0f;
-            animState->scale.y = 7.0f;
-        }
-
-        animState->unk_18 -= animState->unk_14;
-        if (animState->unk_18 < 2.0f * -animState->unk_14) {
-            animState->unk_18 = 2.0f * -animState->unk_14;
-            if (actor->state.varTable[8] != 0 && i == 0) {
-                sfx_play_sound_at_position(SOUND_2063, SOUND_SPACE_MODE_0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
-            }
-        }
-        animState->currentPos.y += animState->unk_18;
-        if (actor->debuff == STATUS_SHRINK) {
-            if (animState->currentPos.y < 2.5) {
-                animState->unk_18 = 0.0f;
-                animState->currentPos.y = 2.5f;
-            }
-        } else {
-            if (animState->currentPos.y < 5.0) {
-                animState->unk_18 = 0.0f;
-                animState->currentPos.y = 5.0f;
-            }
-        }
-
-        dist = dist2D(ax, ay, animState->currentPos.x, animState->currentPos.y);
-        angle = atan2(ax, ay, animState->currentPos.x, animState->currentPos.y);
-
-        if (animState->scale.z <= dist) {
-            N(ChompChainUpdateHelperFunc2)(&sp18, dist - animState->scale.z, angle);
-            animState->unk_18 += sp18 * 0.5;
-        }
-
-        if (animState->scale.y <= dist) {
-            f32 t;
-
-            if (animState->scale.x <= dist) {
-                t = dist - animState->scale.x;
-            } else {
-                animState->unk_1C += animState->unk_20;
-                t = animState->unk_1C;
-            }
-            N(ChompChainUpdateHelperFunc)(animState, t, angle);
-        } else {
-            animState->unk_1C -= animState->unk_20 * 0.2;
-            if (animState->unk_1C < 0.0) {
-                animState->unk_1C = 0.0f;
-            }
-            N(ChompChainUpdateHelperFunc)(animState, animState->unk_1C, angle);
-        }
-
-        if (animState->unk_1C > 4.0) {
-            animState->unk_1C = 4.0f;
-        }
-        part = get_actor_part(actor, three + i);
-        part->absolutePosition.x = animState->currentPos.x;
-        part->absolutePosition.y = animState->currentPos.y;
-        part->absolutePosition.z = animState->currentPos.z;
-
-        if (actor->debuff == STATUS_SHRINK) {
-            part->scale.x = 0.5f;
-            part->scale.y = 0.5f;
-            part->scale.z = 1.0f;
-        } else {
-            part->scale.x = 1.0f;
-            part->scale.y = 1.0f;
-            part->scale.z = 1.0f;
-        }
-        ay = animState->currentPos.y;
-        ax = animState->currentPos.x;
-    }
-    return ApiStatus_DONE2;
-}
+#define CHOMP_CHAIN_FIRST_PART_IDX  3
+#define CHOMP_CHAIN_LAST_PART_IDX   10
+#define CHOMP_CHAIN_AVAR_SOUNDS     8
+#include "common/battle/ChompChainSupport.inc.c"
 
 EvtScript N(80221794) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
@@ -539,10 +433,10 @@ EvtScript N(idle_80221D00) = {
 
 EvtScript N(80222324) = {
     EVT_LABEL(0)
-    EVT_WAIT(1)
-    EVT_CALL(b_area_isk_part_1_ChompChainUpdate)
-    EVT_GOTO(0)
-    EVT_RETURN
+        EVT_WAIT(1)
+        EVT_CALL(N(ChompChainUpdate))
+        EVT_GOTO(0)
+        EVT_RETURN
     EVT_END
 };
 
