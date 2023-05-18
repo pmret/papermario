@@ -25,8 +25,6 @@ enum {
     DMG_CHOMP_BITE              = 3,
 };
 
-#define NUM_CHAIN_LINKS     8
-
 s32 N(BasicAnims)[] = {
     STATUS_NORMAL,    ANIM_ChainChomp_Idle,
     STATUS_STONE,     ANIM_ChainChomp_Still,

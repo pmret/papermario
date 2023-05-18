@@ -12,8 +12,6 @@ extern EvtScript N(handleEvent_80222364);
 extern EvtScript N(8022181C);
 extern EvtScript N(80222324);
 
-#define NUM_CHAIN_LINKS     8
-
 s32 N(IdleAnimations_80221450)[] = {
     STATUS_NORMAL,    ANIM_StoneChomp_Anim01,
     STATUS_STONE,     ANIM_StoneChomp_Anim00,
