@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#! /usr/bin/env python3
 
 import struct
 import sys
@@ -84,12 +84,14 @@ PAL_TO_RASTER: Dict[str, int] = {
 }
 
 
-SPECIAL_RASTER = 0x1F880
+PLAYER_SPRITE_MEDADATA_XML_FILENAME = "player.xml"
 
 MAX_COMPONENTS_XML = "maxComponents"
 PALETTE_GROUPS_XML = "paletteGroups"
 PALETTE_XML = "palette"
 BACK_PALETTE_XML = "backPalette"
+
+SPECIAL_RASTER = 0x1F880
 
 LIST_END_BYTES = b"\xFF\xFF\xFF\xFF"
 
@@ -309,12 +311,16 @@ def extract_sprites(
     return ret
 
 
-def write_player_orderings(
+def write_player_metadata(
     out_path: Path,
     cfg: Any,
     raster_names: List[str],
+    build_date: str,
 ) -> None:
     Names = ET.Element("Names")
+
+    BuildDate = ET.SubElement(Names, "BuildDate")
+    BuildDate.text = build_date
 
     Sprites = ET.SubElement(Names, "Sprites")
     for sprite_name in cfg:
@@ -338,7 +344,7 @@ def write_player_orderings(
     if hasattr(ET, "indent"):
         ET.indent(xml, "    ")
 
-    xml.write(str(out_path / f"player_sprite_names.xml"), encoding="unicode")
+    xml.write(str(out_path / PLAYER_SPRITE_MEDADATA_XML_FILENAME), encoding="unicode")
 
 
 def write_player_xmls(
@@ -391,6 +397,7 @@ def write_player_xmls(
 
             raster_attributes = {
                 "id": f"{i:X}",
+                "name": f"{i:02X}",
                 PALETTE_XML: f"{raster.palette_idx:X}",
                 "src": f"{get_sprite_name_from_offset(name_offset, sprite_offsets, raster_names)}.png",
             }
@@ -427,6 +434,7 @@ def write_player_xmls(
 
             pal_attributes = {
                 "id": f"{i:X}",
+                "name": name,
                 "src": name + ".png",
             }
 
@@ -597,13 +605,11 @@ class N64SegPm_player_sprites(N64Segment):
         #########
 
         self.out_path().mkdir(parents=True, exist_ok=True)
-        # Write build info (date)
-        with open(self.out_path() / "build_info.txt", "w") as f:
-            f.write(build_date)
-        write_player_orderings(
+        write_player_metadata(
             self.out_path(),
             player_sprite_cfg,
             player_raster_names,
+            build_date,
         )
         write_player_xmls(
             self.out_path(),
