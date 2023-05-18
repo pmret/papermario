@@ -18,10 +18,10 @@ extern Stage N(isk_06);
 extern Stage N(isk_06b);
 extern Stage N(isk_07);
 
-Vec3i N(vector3D_80220420) = { 97, 70, 17 };
+Vec3i N(BossPos) = { 97, 70, 17 };
 
 Formation N(Formation_00) = {
-    { .actor = &N(tutankoopa), .home = { .vec = &N(vector3D_80220420) }, .priority = 10 },
+    { .actor = &N(tutankoopa), .home = { .vec = &N(BossPos) }, .priority = 10 },
 };
 
 BattleList N(Formations) = {

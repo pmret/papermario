@@ -23,19 +23,13 @@ extern Stage N(isk_07);
 extern Stage N(isk_08);
 
 Vec3i N(vector3D_80224070) = { 15, 133, -25 };
-
 Vec3i N(vector3D_8022407C) = { 55, 133, -25 };
-
 Vec3i N(vector3D_80224088) = { 95, 133, -25 };
-
 Vec3i N(vector3D_80224094) = { 135, 133, -25 };
 
 Vec3i N(vector3D_802240A0) = { 15, 112, -25 };
-
 Vec3i N(vector3D_802240AC) = { 55, 112, -25 };
-
 Vec3i N(vector3D_802240B8) = { 95, 112, -25 };
-
 Vec3i N(vector3D_802240C4) = { 135, 112, -25 };
 
 Formation N(Formation_00) = {
