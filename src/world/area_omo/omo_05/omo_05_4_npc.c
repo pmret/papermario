@@ -7,6 +7,7 @@
 #include "world/common/npc/GourmetGuy.inc.c"
 
 #include "world/common/complete/NormalItemChoice.inc.c"
+#include "sprite/player.h"
 
 API_CALLABLE(N(JudgeFoodQuality)) {
     Bytecode* args = script->ptrReadPos;

@@ -192,6 +192,7 @@ API_CALLABLE(HuffPuffBreath) {
 #include "common/UnkBackgroundFunc3.inc.c"
 
 #include "common/SetBackgroundAlpha.inc.c"
+#include "sprite/player.h"
 
 API_CALLABLE(SnakingStatic) {
     Bytecode* args = script->ptrReadPos;

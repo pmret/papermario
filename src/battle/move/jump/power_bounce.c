@@ -6,6 +6,7 @@
 #define NAMESPACE battle_move_power_bounce
 
 #include "battle/common/move/JumpSupport.inc.c"
+#include "sprite/player.h"
 
 s32 N(DifficultyTable)[] = {
     7, 6, 5, 4, 3, 2, 1, 0

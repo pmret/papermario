@@ -21,6 +21,7 @@ NpcSettings N(NpcSettings_HuffNPuff) = {
 };
 
 #include "world/common/npc/StarSpirit.inc.c"
+#include "sprite/player.h"
 
 Vec3f N(Path_JumpOut)[] = {
     {  600.0,   104.0,    0.0 },

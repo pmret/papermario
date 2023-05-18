@@ -3,6 +3,7 @@
 
 #include "world/common/npc/Toad_Stationary.inc.c"
 #include "world/common/npc/KoopaBros.h"
+#include "sprite/player.h"
 
 NpcSettings N(NpcSettings_KoopaBros) = {
     .height = 35,

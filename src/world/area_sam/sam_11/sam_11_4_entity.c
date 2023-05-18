@@ -65,6 +65,7 @@ API_CALLABLE(N(SetEntityHideMode0)) {
 
 #include "world/common/todo/UnsetCamera0MoveFlag1.inc.c"
 #include "world/common/todo/SetCamera0MoveFlag1.inc.c"
+#include "sprite/player.h"
 
 API_CALLABLE(N(MovePlayerAlongRoofSlide)) {
     PlayerStatus* playerStatus = &gPlayerStatus;

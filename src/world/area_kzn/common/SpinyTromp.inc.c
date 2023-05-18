@@ -26,6 +26,7 @@ API_CALLABLE(N(SpinyTromp_GetActingPartner)) {
 #include "world/common/todo/UnkFunc50.inc.c"
 
 #include "world/common/todo/UnkFunc51.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(D_80240D10_C7EE90) = {
     EVT_CALL(DisablePlayerInput, TRUE)

@@ -6,6 +6,7 @@ extern EvtScript N(EVS_PopSong);
 API_CALLABLE(N(LoadPartyImage));
 
 #include "world/common/util/ChangeNpcToPartner.inc.c"
+#include "sprite/player.h"
 
 NpcSettings N(NpcSettings_Bobomb) = {
     .height = 23,

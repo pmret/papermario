@@ -13,6 +13,7 @@ NpcSettings N(NpcSettings_Kolorado_01) = {
 #include "world/common/enemy/HeartPlant.inc.c"
 
 #include "world/common/complete/LetterDelivery.inc.c"
+#include "sprite/player.h"
 
 s32 N(LetterList)[] = {
     ITEM_LETTER_TO_KOLORADO,

@@ -2,6 +2,7 @@
 #include "effects.h"
 
 #include "common/SetAngleClamped.inc.c"
+#include "sprite/player.h"
 
 s32 N(CloneSet1)[] = {
     CLONED_MODEL(0), CLONED_MODEL(1), CLONED_MODEL(2), CLONED_MODEL(3)

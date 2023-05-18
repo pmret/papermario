@@ -11644,26 +11644,7 @@ segments:
 ### Sprites ###
 ###############
   - [0x1DE2C40, bin, 1942C40]
-  - [0x1DF0000, bin, 1943000] # sprite data build metadata (build date, major file divisions)
-
-  # player sprite raster table:
-  - [0x1DF0020, bin, 1943020] # Player sprite table
-
-  - [0x1E8D970, bin] # Player sprite Yay0 table (offsets to the following 13 entries)
-  - { start: 0x1E8D9A8, type: yay0, align: 8, name: 19E09A8 }
-  - { start: 0x1E8E390, type: yay0, align: 8, name: 19E1390 }
-  - { start: 0x1E8E888, type: yay0, align: 8, name: 19E1888 }
-  - { start: 0x1E8F330, type: yay0, align: 8, name: 19E2330 }
-  - { start: 0x1E8FDE0, type: yay0, align: 8, name: 19E2DE0 }
-  - { start: 0x1E90208, type: yay0, align: 8, name: 19E3208 }
-  - { start: 0x1E90BA8, type: yay0, align: 8, name: 19E3BA8 }
-  - { start: 0x1E90FD8, type: yay0, align: 8, name: 19E3FD8 }
-  - { start: 0x1E91828, type: yay0, align: 8, name: 19E4828 }
-  - { start: 0x1E91BE0, type: yay0, align: 8, name: 19E4BE0 }
-  - { start: 0x1E92758, type: yay0, align: 8, name: 19E5758 }
-  - { start: 0x1E92950, type: yay0, align: 8, name: 19E5950 }
-  - { start: 0x1E932A0, type: yay0, align: 8, name: 19E62A0 }
-
+  - { start: 0x1DF0000, type: pm_player_sprites, align: 8}
   - start: 0x1e937b8
     align: 8
     type: pm_npc_sprites

@@ -16,6 +16,7 @@ API_CALLABLE(N(UnlockStarBeam)) {
 #include "world/common/enemy/Kammy_Flying.inc.c"
 
 #include "world/common/npc/StarRod.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_StarSpirit_HoverBobbing) = {
     EVT_CALL(SetNpcVar, NPC_Eldstar, 0, 0)

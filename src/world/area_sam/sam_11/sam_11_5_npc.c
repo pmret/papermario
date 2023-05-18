@@ -15,6 +15,7 @@ NpcSettings N(NpcSettings_Kooper) = {
 
 #define CHUCK_QUIZMO_NPC_ID NPC_ChuckQuizmo
 #include "world/common/complete/Quizmo.inc.c"
+#include "sprite/player.h"
 
 API_CALLABLE(N(SetInitialSentryPosition)) {
     Npc* npc = get_npc_safe(NPC_PenguinSentry);

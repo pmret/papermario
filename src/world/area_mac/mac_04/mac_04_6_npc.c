@@ -168,6 +168,7 @@ API_CALLABLE(N(EnforceNewStatLimits)) {
 #include "npc_toad_03.inc.c"
 #include "npc_gossip_trio.inc.c"
 #include "npc_goomba_family.inc.c"
+#include "sprite/player.h"
 
 NpcData N(NpcData_Townsfolk)[] = {
     {

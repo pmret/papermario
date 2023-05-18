@@ -7,6 +7,7 @@
 #include "common/StarPower.inc.c"
 
 #include "common/AddHP.inc.c"
+#include "sprite/player.h"
 
 API_CALLABLE(func_802A156C_7922FC) {
     Bytecode* args = script->ptrReadPos;

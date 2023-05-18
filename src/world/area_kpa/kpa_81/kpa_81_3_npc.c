@@ -5,6 +5,7 @@
 #include "world/common/complete/KeyItemChoice.inc.c"
 MAP_STATIC_PAD(1,choice);
 #include "world/common/complete/NormalItemChoice.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_EnsurePartnerNeutral) = {
     EVT_CALL(GetPartnerInUse, LVar0)

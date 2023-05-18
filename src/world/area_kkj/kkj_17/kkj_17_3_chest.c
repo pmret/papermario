@@ -145,6 +145,7 @@ API_CALLABLE(N(SetItemRetrieved)) {
 }
 
 #include "world/common/todo/GetItemEmptyCount.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_OpenChest) = {
     EVT_CALL(PlaySoundAtCollider, COLLIDER_o89, SOUND_204A, 0)

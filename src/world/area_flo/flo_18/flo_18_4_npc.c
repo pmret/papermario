@@ -4,6 +4,7 @@
 
 #include "world/common/enemy/Lakitu.h"
 #include "world/common/enemy/YMagikoopa.h"
+#include "sprite/player.h"
 
 NpcSettings N(NpcSettings_Lakitu) = {
     .height = 32,

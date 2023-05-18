@@ -1,6 +1,7 @@
 #include "jan_13.h"
 #include "entity.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 // geyser positions in grid coordinates
 #define POS_0_I 28

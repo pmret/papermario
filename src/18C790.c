@@ -15,6 +15,7 @@
 #include "sprite/npc/BattleSushie.h"
 #include "sprite/npc/BattleLakilester.h"
 #include "sprite/npc/BattleBow.h"
+#include "sprite/player.h"
 
 extern HudScript HES_ProjectorBeam;
 extern IconHudScriptPair gItemHudScripts[];

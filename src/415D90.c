@@ -13,6 +13,7 @@
 #include "sprite/npc/BattleSushie.h"
 #include "sprite/npc/BattleLakilester.h"
 #include "sprite/npc/Twink.h"
+#include "sprite/player.h"
 
 extern HudScript HES_YellowArrow;
 

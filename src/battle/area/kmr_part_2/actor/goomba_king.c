@@ -3,6 +3,7 @@
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "sprite/npc/GoombaKing.h"
+#include "sprite/player.h"
 
 #define NAMESPACE b_area_kmr_part_2_goomba_king
 

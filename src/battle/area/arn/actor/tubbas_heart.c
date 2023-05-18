@@ -4,6 +4,7 @@
 #include "script_api/battle.h"
 #include "sprite/npc/BattleBow.h"
 #include "sprite/npc/TubbasHeart.h"
+#include "sprite/player.h"
 
 #define NAMESPACE b_area_arn_tubbas_heart
 

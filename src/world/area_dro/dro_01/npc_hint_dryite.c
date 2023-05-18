@@ -1,5 +1,6 @@
 #include "dro_01.h"
 #include "world/common/util/MonitorPlayerOrbiting.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(SaveSpinningRoofHintTime)) {
     PlayerData* playerData = &gPlayerData;

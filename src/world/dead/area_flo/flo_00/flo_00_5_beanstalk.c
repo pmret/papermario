@@ -48,6 +48,7 @@ API_CALLABLE(N(PartnerRideBeanstalk)) {
 #include "common/CosInterpMinMax.inc.c"
 
 #include "world/common/todo/SyncStatusMenu.inc.c"
+#include "sprite/player.h"
 
 API_CALLABLE(N(DisableStatusMenu)) {
     increment_status_menu_disabled();

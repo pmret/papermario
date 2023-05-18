@@ -17,6 +17,7 @@
 
 #define CHUCK_QUIZMO_NPC_ID NPC_ChuckQuizmo
 #include "world/common/complete/Quizmo.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_NpcInteract_Penguin_ShopOwner) = {
     EVT_SWITCH(GB_StoryProgress)

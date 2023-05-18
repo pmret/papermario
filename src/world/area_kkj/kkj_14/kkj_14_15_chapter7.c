@@ -1,5 +1,6 @@
 #include "kkj_14.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 Vec3f N(TwinkHidePath)[] = {
     {  440.0,    65.0,    0.0 },

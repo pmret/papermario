@@ -7,6 +7,7 @@
 #include "world/common/complete/KeyItemChoice.inc.c"
 
 #include "world/common/atomic/MarioSalute.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_NpcInteract_Boo_01) = {
     EVT_SWITCH(GB_StoryProgress)

@@ -16,6 +16,7 @@ EvtScript N(EVS_YoshiKid_CryForHelp) = {
 };
 
 #include "world/common/todo/GetFloorCollider.inc.c"
+#include "sprite/player.h"
 
 API_CALLABLE(N(IsPartnerWatt)) {
     if (gPartnerStatus.actingPartner == PARTNER_WATT) {

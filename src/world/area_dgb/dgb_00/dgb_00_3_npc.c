@@ -11,6 +11,7 @@ API_CALLABLE(N(PlaySentinelSounds)) {
 #include "world/common/npc/Boo.inc.c"
 #include "world/common/npc/Dummy.inc.c"
 #include "world/common/enemy/Sentinel.h"
+#include "sprite/player.h"
 
 EvtScript N(EVS_SetDoorRots) = {
     EVT_SET(LVar3, 0)

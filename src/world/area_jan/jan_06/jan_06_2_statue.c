@@ -1,5 +1,6 @@
 #include "jan_06.h"
 #include "sprite.h"
+#include "sprite/player.h"
 
 s32 N(JadeRavenList)[] = {
     ITEM_JADE_RAVEN,

@@ -10,6 +10,7 @@
 #include "world/common/complete/Quizmo.inc.c"
 
 #include "world/common/todo/SwitchToPartner.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_GetRescuedYoshiCount) = {
     EVT_SET(LVar0, 0)

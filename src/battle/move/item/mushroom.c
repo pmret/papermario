@@ -88,6 +88,7 @@ API_CALLABLE(N(func_802A15A0_715DF0)) {
 }
 
 #include "battle/common/move/UseItem.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_UseOnPartner) = {
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 30)

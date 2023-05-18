@@ -6,6 +6,7 @@
 #include "world/common/enemy/TubbaBlubba.inc.c"
 #include "world/common/npc/Boo.inc.c"
 #include "world/common/npc/StarSpirit.inc.c"
+#include "sprite/player.h"
 
 API_CALLABLE(N(UpgradeStarPowerCh3)) {
     set_max_SP(3);

@@ -5,6 +5,7 @@
 
 #include "battle/common/move/ItemRefund.inc.c"
 #include "battle/common/move/UseItem.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_DIZZY_DIAL) //@bug should be ITEM_PLEASE_COME_BACK

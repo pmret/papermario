@@ -4,6 +4,7 @@
 #define NAMESPACE battle_move_twink_dash
 
 #include "common/StarPower.inc.c"
+#include "sprite/player.h"
 
 API_CALLABLE(func_802A1518_79DDB8) {
     PlayerData* playerData = &gPlayerData;

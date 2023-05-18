@@ -54,6 +54,7 @@ API_CALLABLE(N(func_802A1420_722F60)) {
 }
 
 #include "battle/common/move/UseItem.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_THUNDER_BOLT)

@@ -23,6 +23,7 @@ AnimID N(ExtraAnims_Koopatrol)[] = {
 #include "world/common/todo/GetPeachDisguise.inc.c"
 #include "../common/SetPeachFlag8.inc.c"
 #include "../common/ApproachPlayer100Units.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_CapturePeach) = {
     EVT_CALL(DisablePlayerInput, TRUE)

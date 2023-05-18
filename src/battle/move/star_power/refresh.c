@@ -96,6 +96,7 @@ API_CALLABLE(func_802A17D4_78BDD4) {
 #include "common/AddHP.inc.c"
 
 #include "common/AddFP.inc.c"
+#include "sprite/player.h"
 
 API_CALLABLE(func_802A18E8_78BEE8) {
     Bytecode* args = script->ptrReadPos;

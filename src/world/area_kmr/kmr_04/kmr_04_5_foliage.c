@@ -11,6 +11,7 @@
 #define NAMESPACE kmr_04
 
 #include "world/common/complete/GiveReward.inc.c"
+#include "sprite/player.h"
 
 static MessageImageData MessageImage;
 

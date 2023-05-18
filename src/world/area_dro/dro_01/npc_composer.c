@@ -1,4 +1,5 @@
 #include "dro_01.h"
+#include "sprite/player.h"
 
 s32 N(LyricsList)[] = {
     ITEM_LYRICS,

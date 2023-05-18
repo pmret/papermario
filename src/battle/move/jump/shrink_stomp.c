@@ -5,6 +5,7 @@
 #define NAMESPACE battle_move_shrink_stomp
 
 #include "battle/common/move/JumpSupport.inc.c"
+#include "sprite/player.h"
 
 extern EvtScript N(EVS_UseMove_ImplA);
 extern EvtScript N(EVS_UseMove_ImplB);

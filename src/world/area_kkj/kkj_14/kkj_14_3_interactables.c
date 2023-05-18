@@ -2,6 +2,7 @@
 #include "effects.h"
 
 #include "world/common/todo/GetPeachDisguise.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_Inspect_Fireplace) = {
     EVT_CALL(DisablePlayerInput, TRUE)

@@ -1,4 +1,5 @@
 #include "kkj_29.h"
+#include "sprite/player.h"
 
 enum {
     CONTESTANT_LEFT     = 0,

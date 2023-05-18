@@ -2,6 +2,7 @@
 #include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
+#include "sprite/player.h"
 
 extern EvtScript EVS_Enemy_Hit_Impl;
 extern EvtScript EVS_Enemy_SpinAround_Impl;

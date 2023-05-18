@@ -1,6 +1,7 @@
 #include "common.h"
 #include "../partners.h"
 #include "npc.h"
+#include "sprite/player.h"
 
 BSS TweesterPhysics PlayerTweesterPhysicsData;
 TweesterPhysics* PlayerTweesterPhysicsPtr = &PlayerTweesterPhysicsData;

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "sprite/player.h"
 
 BSS s32 SpinningFlower_EntityIndex;
 BSS f32 D_802B6ED4;

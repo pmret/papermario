@@ -5,6 +5,7 @@
 #define NAMESPACE battle_move_star_storm
 
 #include "common/StarPower.inc.c"
+#include "sprite/player.h"
 
 API_CALLABLE(func_802A1518_78ECE8) {
     s32 var1 = -50 - rand_int(200);

@@ -333,3 +333,4 @@ EvtScript N(EVS_NpcInit_TheMaster) = {
     EVT_RETURN
     EVT_END
 };
+#include "sprite/player.h"

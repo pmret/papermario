@@ -8,6 +8,7 @@
 #include "message_ids.h"
 #include "nu/nusys.h"
 #include "ld_addrs.h"
+#include "sprite/player.h"
 
 #if VERSION_IQUE
 // TODO: remove if section is split in iQue release

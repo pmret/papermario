@@ -1,5 +1,6 @@
 #include "common.h"
 #include "world/partners.h"
+#include "sprite/player.h"
 
 extern f32 GravityParamsStartJump[];
 extern f32 D_8010C928;

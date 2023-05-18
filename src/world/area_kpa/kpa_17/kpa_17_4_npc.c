@@ -2,6 +2,7 @@
 #include "effects.h"
 
 #include "world/common/npc/Toad_Stationary.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_Scene_FallIntoCell) = {
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 1042, 30, -496)

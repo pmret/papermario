@@ -2,6 +2,7 @@
 #include "effects.h"
 #include "ld_addrs.h"
 #include "entity.h"
+#include "sprite/player.h"
 
 extern EntityScript Entity_Chest_ScriptOpened;
 

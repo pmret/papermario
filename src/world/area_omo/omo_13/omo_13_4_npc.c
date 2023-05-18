@@ -13,6 +13,7 @@ NpcSettings N(NpcSettings_AntiGuy) = {
 };
 
 #include "world/common/complete/NormalItemChoice.inc.c"
+#include "sprite/player.h"
 
 s32 N(BribeItemList)[] = {
     ITEM_LEMON_CANDY,

@@ -238,6 +238,7 @@ EvtScript N(EVS_NpcInit_Mouser_02) = {
 };
 
 #include "npc_moustafa.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_NpcIdle_Mouser_03) = {
     EVT_CALL(InterpNpcYaw, NPC_DisguisedMoustafa, 270, 0)

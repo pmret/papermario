@@ -13,6 +13,7 @@ NpcSettings N(NpcSettings_Petunia) = {
 };
 
 #include "world/common/complete/GiveReward.inc.c"
+#include "sprite/player.h"
 
 Vec3i N(BurrowLocations_Mole_01)[] = {
     { -100, 0, 210 },

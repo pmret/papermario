@@ -7,6 +7,7 @@
 
 #include "world/common/complete/GiveReward.inc.c"
 #include "world/common/complete/KeyItemChoice.inc.c"
+#include "sprite/player.h"
 
 s32 N(KeyList)[] = {
     ITEM_CRYSTAL_BERRY,

@@ -63,6 +63,7 @@ enum {
 };
 
 #include "world/common/complete/GiveReward.inc.c"
+#include "sprite/player.h"
 
 // values for Quizmo npc init vars
 enum {

@@ -11,6 +11,7 @@ NpcSettings N(NpcSettings_PutridPiranha) = {
 };
 
 #include "world/common/enemy/SpearGuy_Wander.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_YoshiKid_CryForHelp) = {
     EVT_SET(AF_JAN_02, FALSE)

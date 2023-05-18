@@ -151,6 +151,7 @@ API_CALLABLE(N(WattFXSetEffect)) {
 #include "common/UnkBackgroundFunc3.inc.c"
 
 #include "common/SetBackgroundAlpha.inc.c"
+#include "sprite/player.h"
 
 API_CALLABLE(N(ElectroDashFX)) {
     Bytecode* args = script->ptrReadPos;

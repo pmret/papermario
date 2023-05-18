@@ -148,6 +148,7 @@ ActorBlueprint NAMESPACE = {
 #include "common/RemoveChillOut.inc.c"
 #include "common/StarRodAppearEffect.inc.c"
 #include "common/StarRodPowerUpEffect.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(init) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_TURN_COUNTER), 0)

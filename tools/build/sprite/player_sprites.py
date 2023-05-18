@@ -323,9 +323,7 @@ def xml_has_back(xml: ET.Element) -> bool:
 
 
 def write_player_sprite_header(
-    player_sprite_dir: Path,
     sprite_order: List[str],
-    raster_order: List[str],
     out_file: Path,
 ) -> None:
     ifdef_name = "_PLAYER_SPRITE_H_"
@@ -357,7 +355,7 @@ def write_player_sprite_header(
                 anim_name = anim_xml.attrib["name"]
                 if palette_id > 0:
                     anim_name = f"{palette_name}_{anim_name}"
-                player_anims[sprite_name][f"SPR_ANIM_{sprite_name}_{anim_name}"] = (
+                player_anims[sprite_name][f"ANIM_{sprite_name}_{anim_name}"] = (
                     (sprite_id << 16) | (palette_id << 8) | anim_id
                 )
 
@@ -389,6 +387,7 @@ def write_player_sprite_header(
 
             sprite_id += 1
 
+    out_file.parent.mkdir(exist_ok=True, parents=True)
     with open(out_file, "w") as f:
         f.write(f"#ifndef {ifdef_name}\n")
         f.write(f"#define {ifdef_name}\n\n")
@@ -543,7 +542,7 @@ def build_rasters(sprite_order: List[str], raster_order: List[str]) -> bytes:
     return ret
 
 
-def build(out_dir: Path, sprite_dir: Path) -> None:
+def build(bin_out: Path, header_out: Path, sprite_dir: Path) -> None:
     build_info, sprite_order, raster_order = get_player_sprite_metadata(sprite_dir)
 
     cache_rasters(raster_order, sprite_dir)
@@ -553,9 +552,7 @@ def build(out_dir: Path, sprite_dir: Path) -> None:
         sprite_xml = ET.parse(sprite_dir / f"{sprite_name}.xml").getroot()
         XML_CACHE[sprite_name] = sprite_xml
 
-    write_player_sprite_header(
-        sprite_dir, sprite_order, raster_order, out_dir / "player.h"
-    )
+    write_player_sprite_header(sprite_order, header_out)
 
     # Encode build_info to bytes and pad to 0x10
     build_info_bytes = build_info.encode("ascii")
@@ -579,14 +576,14 @@ def build(out_dir: Path, sprite_dir: Path) -> None:
 
     final_data = build_info_bytes + major_file_divisons + raster_bytes + sprite_bytes
 
-    with open(out_dir / "player.bin", "wb") as f:
+    with open(bin_out, "wb") as f:
         f.write(final_data)
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        print("usage: player_sprites.py [OUTDIR] [IN]")
+    if len(sys.argv) != 4:
+        print("usage: player_sprites.py [BIN_OUT] [HEADER_OUT] [IN]")
         exit(1)
 
-    _, outdir, indir = sys.argv
-    build(Path(outdir), Path(indir))
+    _, bin_out, header_out, indir = sys.argv
+    build(Path(bin_out), Path(header_out), Path(indir))

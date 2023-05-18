@@ -15,6 +15,7 @@
 #include "common/CosInterpMinMax.inc.c"
 
 #include "common/IsAOrBPressed.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_Scene_RideTrain) = {
     EVT_MALLOC_ARRAY(20, LVar0)

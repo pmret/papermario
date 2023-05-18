@@ -8,6 +8,7 @@ s32 N(D_802A10F0)[] = {
 };
 
 #include "world/common/todo/UnkMoveFunc1.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_CheckForAPress) = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_BeforeJump)

@@ -6,6 +6,7 @@
 #define NAMESPACE battle_move_hammer_attack
 
 #include "battle/common/move/HammerSupport.inc.c"
+#include "sprite/player.h"
 
 extern EvtScript N(EVS_UseMove0_Impl);
 

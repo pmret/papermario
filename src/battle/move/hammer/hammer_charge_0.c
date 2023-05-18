@@ -6,6 +6,7 @@
 #include "battle/common/move/HammerSupport.inc.c"
 
 #include "world/common/todo/IsHammerMaxCharged.inc.c"
+#include "sprite/player.h"
 
 API_CALLABLE(func_802A10C8_74F1F8) {
     Bytecode* args = script->ptrReadPos;

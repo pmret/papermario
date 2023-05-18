@@ -1,4 +1,5 @@
 #include "dgb_14.h"
+#include "sprite/player.h"
 
 EvtScript N(EVS_ExitDoors_dgb_03_3) = {
     EVT_SET_GROUP(EVT_GROUP_1B)

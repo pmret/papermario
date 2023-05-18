@@ -6,6 +6,7 @@
 #include "world/common/complete/KeyItemChoice.inc.c"
 MAP_STATIC_PAD(1,key_item);
 #include "world/common/complete/NormalItemChoice.inc.c"
+#include "sprite/player.h"
 
 API_CALLABLE(N(UpgradeStarPowerCh7)) {
     set_max_SP(7);

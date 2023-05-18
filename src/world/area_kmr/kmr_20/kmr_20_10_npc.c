@@ -21,6 +21,7 @@ API_CALLABLE(N(PlaySpringLaunchAnimation)) {
 }
 
 #include "world/common/atomic/MarioSalute.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_KootFavorCheck_Luigi) = {
     EVT_IF_NE(GB_KootFavor_Current, KOOT_FAVOR_CH3_1)

@@ -4,6 +4,7 @@
 #include "world/common/complete/GiveReward.inc.c"
 
 #include "world/common/atomic/TexturePan.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_RaiseFountain) = {
     EVT_CALL(MakeLerp, -50, 170, 385, EASING_LINEAR)

@@ -13,6 +13,7 @@ s32 N(ItemChoice_SelectedItemID) = 0;
 
 #include "world/common/todo/GetNpcCollisionHeight.inc.c"
 #include "world/common/todo/AddPlayerHandsOffset.inc.c"
+#include "sprite/player.h"
 
 API_CALLABLE(N(ItemChoice_WaitForSelection)) {
     Bytecode* args = script->ptrReadPos;

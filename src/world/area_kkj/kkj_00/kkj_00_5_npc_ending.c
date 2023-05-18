@@ -3,6 +3,7 @@
 #include "world/common/npc/Toad_Stationary.inc.c"
 #include "world/common/npc/Peach.inc.c"
 #include "world/common/npc/Dummy.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_NpcInit_RussT) = {
     EVT_CALL(SetNpcPos, NPC_SELF, -300, 0, 295)

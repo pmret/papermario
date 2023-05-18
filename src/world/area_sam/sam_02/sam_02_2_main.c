@@ -109,6 +109,7 @@ EvtScript N(EVS_EnterMap) = {
 };
 
 #include "../common/ManageSnowfall.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_TexPan_Fire) = {
     EVT_CALL(EnableTexPanning, MODEL_hi1, TRUE)

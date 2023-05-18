@@ -3,6 +3,7 @@
 #include "world/common/npc/Bowser.inc.c"
 #include "world/common/npc/Dummy.inc.c"
 #include "world/common/npc/Peach.h"
+#include "sprite/player.h"
 
 Vec3f N(FlyAwayPath)[] = {
     {  250.0,    10.0, -240.0 },

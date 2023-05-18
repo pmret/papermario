@@ -1,4 +1,5 @@
 #include "kkj_16.h"
+#include "sprite/player.h"
 
 Vec3f N(TwinkHide1)[] = {
     { -752.0,    60.0,  -55.0 },

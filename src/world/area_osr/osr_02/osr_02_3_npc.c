@@ -5,6 +5,7 @@
 #include "world/common/npc/Twink.inc.c"
 #include "world/common/npc/StarSpirit.inc.c"
 #include "world/common/npc/StarRod.inc.c"
+#include "sprite/player.h"
 
 Vec3f N(FlightPath_TwinkStepForward)[] = {
     {  -10.0,    40.0,   10.0 },

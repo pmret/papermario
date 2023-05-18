@@ -39,6 +39,7 @@ API_CALLABLE(N(func_802A12C4_726224)) {
 }
 
 #include "battle/common/move/UseItem.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_HUSTLE_DRINK)

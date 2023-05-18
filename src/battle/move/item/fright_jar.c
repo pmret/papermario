@@ -26,6 +26,7 @@ API_CALLABLE(N(func_802A12D4_72BBE4)) {
 }
 
 #include "battle/common/move/UseItem.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_FRIGHT_JAR)

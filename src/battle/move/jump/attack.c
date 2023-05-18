@@ -5,6 +5,7 @@
 #define NAMESPACE battle_move_jump_attack
 
 #include "battle/common/move/JumpSupport.inc.c"
+#include "sprite/player.h"
 
 API_CALLABLE(N(GetJumpDamage)) {
     script->varTable[15] = 1;

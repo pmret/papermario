@@ -176,6 +176,7 @@ EvtScript N(EVS_Misstar_Escape) = {
 };
 
 #include "world/common/lava_piranha/LoadAnimationFromTable.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_PlayVinesAnim_Emerge) = {
     EVT_THREAD

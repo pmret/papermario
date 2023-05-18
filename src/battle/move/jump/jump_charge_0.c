@@ -8,6 +8,7 @@
 #include "battle/common/move/JumpSupport.inc.c"
 
 #include "world/common/todo/IsJumpMaxCharged.inc.c"
+#include "sprite/player.h"
 
 API_CALLABLE(N(func_802A1108_74D678)) {
     Bytecode* args = script->ptrReadPos;

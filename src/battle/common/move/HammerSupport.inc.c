@@ -4,6 +4,7 @@
 
 #include "world/common/todo/IsBerserkerEquipped.inc.c"
 #include "world/common/todo/ShouldMovesAutoSucceed.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_HammerSupport_A) = {
     EVT_CALL(InitTargetIterator)

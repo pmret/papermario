@@ -1,4 +1,5 @@
 #include "HurtPlant.h"
+#include "sprite/player.h"
 
 EvtScript N(EVS_NpcAI_HurtPlant) = {
     EVT_CALL(EnableNpcShadow, NPC_SELF, FALSE)

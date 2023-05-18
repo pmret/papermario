@@ -1326,6 +1326,7 @@ EvtScript N(EVS_NpcInteract_Toad) = {
 };
 
 #include "world/common/todo/SyncStatusMenu.inc.c"
+#include "sprite/player.h"
 
 NOP_FIX // TODO figure out BSS nop issue
 API_CALLABLE(N(func_8024295C_8B29CC)) {

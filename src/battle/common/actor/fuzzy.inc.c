@@ -226,6 +226,7 @@ EvtScript N(handleEvent) = {
 };
 
 #include "common/SpawnEnemyDrainFX.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(takeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)

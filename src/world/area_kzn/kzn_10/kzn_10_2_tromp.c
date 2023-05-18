@@ -5,6 +5,7 @@
 #define UNK_FUNC_50_LVar2 46.0
 
 #include "../common/SpinyTromp.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_SpinyTromp_ManageCamera) = {
     EVT_CALL(GetPlayerPos, LVar3, LVar4, LVar5)

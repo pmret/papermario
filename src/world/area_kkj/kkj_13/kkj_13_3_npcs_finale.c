@@ -4,6 +4,7 @@
 
 #include "world/common/npc/Bowser.inc.c"
 #include "world/common/npc/Dummy.inc.c"
+#include "sprite/player.h"
 
 API_CALLABLE(N(UpdatePropellerSoundPos)) {
     Npc* npc = get_npc_safe(NPC_Bowser_Prop);

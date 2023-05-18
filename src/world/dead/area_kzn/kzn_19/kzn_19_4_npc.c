@@ -356,6 +356,7 @@ API_CALLABLE(N(CreateVineRenderer)) {
 }
 
 #include "world/common/complete/LetterDelivery.inc.c"
+#include "sprite/player.h"
 
 s32 N(LetterList)[] = {
     ITEM_LETTER_TO_KOLORADO,

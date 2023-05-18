@@ -291,6 +291,7 @@ EvtScript N(EVS_TakeTurn) = {
 };
 
 #include "common/StartRumbleWithParams.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_Attack_WindBlast) = {
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)

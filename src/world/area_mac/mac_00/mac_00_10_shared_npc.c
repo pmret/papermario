@@ -5,6 +5,7 @@
 #include "world/common/npc/Toad_Patrol.inc.c"
 #include "world/common/npc/Toad_Stationary.inc.c"
 #include "world/common/complete/LetterDelivery.inc.c"
+#include "sprite/player.h"
 #define NAME_SUFFIX
 
 s32 N(LetterList_MissT)[] = {

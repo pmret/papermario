@@ -3,6 +3,7 @@
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "sprite/npc/WorldEldstar.h"
+#include "sprite/player.h"
 
 #define NAMESPACE b_area_trd_part_3_eldstar
 

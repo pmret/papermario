@@ -2,6 +2,7 @@
 #include "sprite.h"
 
 #include "world/common/util/ChangeNpcToPartner.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_Scene_MeetBow) = {
     EVT_IF_GE(GB_StoryProgress, STORY_CH3_BOW_JOINED_PARTY)

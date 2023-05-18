@@ -49,6 +49,7 @@ API_CALLABLE(N(SetScreenFadeAmount)) {
 }
 
 #include "common/CosInterpMinMax.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_FadeOutToBlack) = {
     EVT_SET(LVar0, 0)

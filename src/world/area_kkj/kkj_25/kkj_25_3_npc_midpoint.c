@@ -37,6 +37,7 @@ EvtScript N(EVS_NpcIdle_Bowser) = {
 };
 
 #include "world/common/todo/UnkFunc1.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_NpcDefeat_Bowser) = {
     EVT_CALL(SetEncounterStatusFlags, ENCOUNTER_STATUS_FLAG_2, TRUE)

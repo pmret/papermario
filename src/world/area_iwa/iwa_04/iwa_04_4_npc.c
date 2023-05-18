@@ -1,6 +1,7 @@
 #include "iwa_04.h"
 
 #include "world/common/enemy/Cleft.inc.c"
+#include "sprite/player.h"
 
 API_CALLABLE(N(func_80241060_91C940)) {
     gCameras[CAM_DEFAULT].unk_498 = 1.0f;

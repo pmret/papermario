@@ -12,6 +12,7 @@
 
 #define KNOCK_DOWN_MAP_VAR MV_Knockdown
 #include "world/common/complete/KnockDownPlayer.inc.c"
+#include "sprite/player.h"
 
 API_CALLABLE(N(DamagePlayer1HP)) {
     if (gPlayerData.curHP <= 1) {

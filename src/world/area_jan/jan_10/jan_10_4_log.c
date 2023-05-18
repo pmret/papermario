@@ -42,6 +42,7 @@ EvtScript N(EVS_LogAnim_RiseUp) = {
 };
 
 #include "world/common/todo/UpdateLogShadow.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_LogAnim_FallDown) = {
     EVT_THREAD

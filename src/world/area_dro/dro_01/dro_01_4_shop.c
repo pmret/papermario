@@ -49,6 +49,7 @@ ShopSellPriceData N(PriceList)[] = {
 };
 
 #include "world/common/complete/GiveReward.inc.c"
+#include "sprite/player.h"
 
 API_CALLABLE(N(HideCoinCounter)) {
     hide_coin_counter_immediately();

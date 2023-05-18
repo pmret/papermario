@@ -7,6 +7,7 @@
 BSS s32 D_802A2CC0;
 
 #include "common/StarPower.inc.c"
+#include "sprite/player.h"
 
 API_CALLABLE(func_802A1518_7905E8) {
     D_802A2CC0 = 0;

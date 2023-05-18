@@ -14,6 +14,7 @@ API_CALLABLE(N(DisableLightSource1)) {
 #include "world/common/enemy/Clubba.h"
 #include "world/common/enemy/Koopatrol_Stationary.inc.c"
 #include "world/common/npc/Dummy.inc.c"
+#include "sprite/player.h"
 
 AnimID N(ExtraAnims_Koopatrol)[] = {
     ANIM_WorldKoopatrol_Anim00,

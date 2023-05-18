@@ -28,6 +28,7 @@ API_CALLABLE(func_802A1074_737904) {
 }
 
 #include "battle/common/move/HammerSupport.inc.c"
+#include "sprite/player.h"
 
 extern EvtScript N(EVS_UseMove1_Impl);
 extern EvtScript N(EVS_UseMove2_Impl);

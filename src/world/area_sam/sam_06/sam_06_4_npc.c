@@ -79,6 +79,7 @@ MAP_STATIC_PAD(1,key_item);
 #include "world/common/atomic/ToadHouse.data.inc.c"
 
 #include "world/common/complete/LetterDelivery.inc.c"
+#include "sprite/player.h"
 
 s32 N(LetterList_FrostT)[] = {
     ITEM_LETTER_CHAIN_FROST_T,

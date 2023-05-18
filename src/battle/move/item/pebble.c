@@ -13,6 +13,7 @@ static s32 _pad = 0;
 #include "battle/move/item/pebble.png.h"
 #include "battle/move/item/pebble.png.inc.c"
 #include "battle/move/item/pebble.pal.inc.c"
+#include "sprite/player.h"
 
 Vtx N(model)[] = {
     { .v = { { -16, -16, 0 }, FALSE, { 0,    0 },    { 0, 0, 0, 255 }, } },

@@ -482,6 +482,7 @@ EvtScript N(handleEvent_80227E08) = {
 #include "common/StartRumbleWithParams.inc.c"
 
 #include "common/UnkBattleFunc1.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(takeTurn_80228A7C) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, 4, 2)

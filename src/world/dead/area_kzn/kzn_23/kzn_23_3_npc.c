@@ -70,6 +70,7 @@ API_CALLABLE(N(AnimateChestSize)) {
 
 #include "world/common/npc/Kolorado.inc.c"
 #include "world/common/npc/StarSpirit.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_NpcIdle_Kolorado) = {
     EVT_WAIT(30)

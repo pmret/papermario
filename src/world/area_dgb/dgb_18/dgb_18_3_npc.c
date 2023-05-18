@@ -8,6 +8,7 @@ extern EvtScript N(EVS_NpcAI_Tubba_WakeUp);
 #include "world/common/enemy/TubbaBlubba.inc.c"
 
 #include "world/common/todo/UnkFunc1.inc.c"
+#include "sprite/player.h"
 
 API_CALLABLE(N(UnusedChasePlayer)) {
     PlayerStatus* playerStatus = &gPlayerStatus;

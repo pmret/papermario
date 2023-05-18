@@ -3,6 +3,7 @@
 
 #define KNOCK_DOWN_MAP_VAR MV_Unk_0A
 #include "world/common/complete/KnockDownPlayer.inc.c"
+#include "sprite/player.h"
 
 API_CALLABLE(N(SpawnStarsOrbitingKammy1)) {
     EffectInstance* effect;

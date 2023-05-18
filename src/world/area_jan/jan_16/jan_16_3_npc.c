@@ -1,5 +1,6 @@
 #include "jan_16.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 EvtScript N(EVS_NpcAuxAI_RaphaelRaven) = {
     EVT_CALL(SetNpcScale, NPC_SELF, EVT_FLOAT(1.5), EVT_FLOAT(1.5), EVT_FLOAT(1.5))

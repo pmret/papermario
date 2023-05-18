@@ -2,6 +2,7 @@
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "sprite/npc/TheMaster.h"
+#include "sprite/player.h"
 
 #define NAMESPACE b_area_mac_master3
 

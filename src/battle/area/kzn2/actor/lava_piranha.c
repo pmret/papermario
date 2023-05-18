@@ -267,6 +267,7 @@ ActorBlueprint NAMESPACE = {
 };
 
 #include "common/StartRumbleWithParams.inc.c"
+#include "sprite/player.h"
 
 enum {
     VINE_0      = 0,

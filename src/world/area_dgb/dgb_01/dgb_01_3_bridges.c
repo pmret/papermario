@@ -1,5 +1,6 @@
 #include "dgb_01.h"
 #include "ld_addrs.h"
+#include "sprite/player.h"
 
 ApiStatus N(LoadSmashBridgesGraphics)(void) {
     dma_copy(dgb_01_smash_bridges_ROM_START, dgb_01_smash_bridges_ROM_END, dgb_01_smash_bridges_VRAM);

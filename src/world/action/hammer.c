@@ -1,6 +1,7 @@
 #include "common.h"
 #include "effects.h"
 #include "sprite.h"
+#include "sprite/player.h"
 
 enum {
     SUBSTATE_HAMMER_0   = 0,

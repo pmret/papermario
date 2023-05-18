@@ -8,6 +8,7 @@
 #define NAME_SUFFIX
 
 #include "world/common/todo/UnkFunc42.inc.c"
+#include "sprite/player.h"
 
 Vec3f N(FlightPath_KammyAppear)[] = {
     {  473.0,   150.0,  301.0 },

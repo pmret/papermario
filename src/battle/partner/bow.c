@@ -5,6 +5,7 @@
 #include "battle/action_cmd/smack.h"
 #include "battle/action_cmd/spook.h"
 #include "sprite/npc/BattleBow.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_partner_bow
 

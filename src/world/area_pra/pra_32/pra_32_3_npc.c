@@ -3,6 +3,7 @@
 
 #include "world/common/enemy/CrystalKing.inc.c"
 #include "world/common/npc/StarSpirit.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_AnimateCam_CrystalKing) = {
     EVT_SET(MV_CamDistance, 400)

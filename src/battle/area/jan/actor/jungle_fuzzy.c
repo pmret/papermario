@@ -295,6 +295,7 @@ EvtScript N(divide) = {
 };
 
 #include "common/SpawnEnemyDrainFX.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(leechAttack) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)

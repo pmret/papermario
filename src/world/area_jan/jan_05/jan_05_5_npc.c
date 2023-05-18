@@ -6,6 +6,7 @@
 #include "world/common/enemy/HurtPlant.inc.c"
 #include "world/common/enemy/JungleFuzzy_Wander.inc.c"
 #include "world/common/enemy/SpearGuy_Wander.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_NpcIdle_JungleFuzzy) = {
     EVT_CALL(SetNpcPos, NPC_SELF, NPC_DISPOSE_LOCATION)

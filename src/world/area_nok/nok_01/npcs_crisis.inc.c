@@ -582,3 +582,4 @@ EvtScript N(EVS_NpcInit_KoopaShell_03) = {
     EVT_RETURN
     EVT_END
 };
+#include "sprite/player.h"

@@ -220,3 +220,4 @@ EvtScript N(EVS_NpcInit_Muskular) = {
     EVT_RETURN
     EVT_END
 };
+#include "sprite/player.h"

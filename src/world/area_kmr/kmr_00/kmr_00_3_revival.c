@@ -1,6 +1,7 @@
 #include "kmr_00.h"
 #include "effects.h"
 #include "model.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(func_80240000_8ABF90)) {
     Bytecode* args;

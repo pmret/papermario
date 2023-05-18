@@ -94,3 +94,4 @@ EvtScript N(EVS_NpcInit_TwinkStartCh4) = {
     EVT_RETURN
     EVT_END
 };
+#include "sprite/player.h"

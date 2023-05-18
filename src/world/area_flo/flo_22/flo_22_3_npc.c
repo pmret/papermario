@@ -3,6 +3,7 @@
 #include "world/common/npc/Dummy.inc.c"
 #include "world/common/enemy/Bzzap.h"
 #include "world/common/enemy/CrazyDayzee.h"
+#include "sprite/player.h"
 
 EvtScript N(EVS_NpcIdle_Bzzap) = {
     EVT_SET(MV_Bzzap_State, 0)

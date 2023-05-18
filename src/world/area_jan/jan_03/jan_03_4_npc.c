@@ -743,6 +743,7 @@ EvtScript N(EVS_NpcInit_Sushie) = {
 };
 
 #include "world/common/npc/Raven.inc.c"
+#include "sprite/player.h"
 
 AnimID N(ExtraAnims_VillageLeader)[] = {
     ANIM_VillageLeader_Idle,

@@ -1285,6 +1285,7 @@ BSS s32 D_80262F6C[13];
 #include "npc/rowf_and_rhuff.inc.c"
 #include "npc/post_office.inc.c"
 #include "npc/flower_gate.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_NpcIdle_Toad_04) = {
     EVT_CALL(WaitForPlayerInputEnabled)

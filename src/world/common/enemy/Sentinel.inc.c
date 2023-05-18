@@ -2,6 +2,7 @@
 #include "world/partners.h"
 
 #include "world/common/enemy/ai/SentinelAI.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_NpcAuxAI_Sentinel) = {
     EVT_CALL(SetSelfEnemyFlagBits, ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER | ENEMY_FLAG_IGNORE_SPIN, 1)

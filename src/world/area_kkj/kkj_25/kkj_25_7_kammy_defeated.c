@@ -1,5 +1,6 @@
 #include "kkj_25.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(SpawnStarsOrbitingKammy2)) {
     EffectInstance* effect;

@@ -78,6 +78,7 @@ API_CALLABLE(N(IsPartnerWatt)) {
 }
 
 #include "world/common/enemy/ShyGuy_Stationary.inc.c"
+#include "sprite/player.h"
 
 Vec2i N(CrowdChaseGoalPositions)[] = {
     { 200,   0 },

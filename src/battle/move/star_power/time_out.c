@@ -5,6 +5,7 @@
 #define NAMESPACE battle_move_time_out
 
 #include "common/StarPower.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(802A1520) = {
     EVT_CALL(GetOwnerID, LVarA)

@@ -10,6 +10,7 @@ extern EntityModelScript EMS_StarIcon;
 #define NAMESPACE battle_move_up_and_away
 
 #include "common/StarPower.inc.c"
+#include "sprite/player.h"
 
 API_CALLABLE(func_802A1518_7957F8) {
     if (isInitialCall) {

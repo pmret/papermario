@@ -41,6 +41,7 @@ API_CALLABLE(N(ItemChoice_SaveSelected)) {
 #endif
 
 #include "world/common/atomic/MakeKeyChoice.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_KeyItemChoicePopup) = {
     EVT_SET(LVar9, LVar1)

@@ -6,6 +6,7 @@
 #include "entity.h"
 #include "ld_addrs.h"
 #include "battle/action_cmd.h"
+#include "sprite/player.h"
 
 extern IMG_BIN ui_battle_menu_spirits_png[];
 extern PAL_BIN ui_battle_menu_spirits_pal[];

@@ -293,6 +293,7 @@ EvtScript N(80218C48) = {
 };
 
 #include "common/SpawnEnemyDrainFX.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(80219054) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)

@@ -58,6 +58,7 @@ static s32 _pad = 0; // XXX
 #include "battle/move/item/insecticide_herb.png.h"
 #include "battle/move/item/insecticide_herb.png.inc.c"
 #include "battle/move/item/insecticide_herb.pal.inc.c"
+#include "sprite/player.h"
 
 Vtx N(model)[] = {
     { .v = { .ob = {-16, -16, 0}, FALSE, .tc = {0,    0},    .cn = {0, 0, 0, 255} } },

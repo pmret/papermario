@@ -1,4 +1,5 @@
 #include "kmr_23.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(func_80240010_907A40)) {
     set_curtain_scale_goal(2.0f);

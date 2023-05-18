@@ -38,6 +38,7 @@ API_CALLABLE(N(func_802A13B8_71C1E8)) {
 }
 
 #include "battle/common/move/UseItem.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_SNOWMAN_DOLL)

@@ -1,6 +1,7 @@
 #include "common.h"
 #include "npc.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 s32 peach_disguise_check_overlaps(void);
 void peach_force_disguise_action(s32);

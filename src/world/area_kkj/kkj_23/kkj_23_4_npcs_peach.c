@@ -8,6 +8,7 @@
 
 #include "world/common/enemy/Kammy.inc.c"
 #include "world/common/enemy/Koopatrol_Stationary.inc.c"
+#include "sprite/player.h"
 
 AnimID N(ExtraAnims_Koopatrol)[] = {
     ANIM_WorldKoopatrol_Anim00,

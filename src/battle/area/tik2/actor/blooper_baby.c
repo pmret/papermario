@@ -204,6 +204,7 @@ ActorBlueprint NAMESPACE = {
 
 #include "common/StartRumbleWithParams.inc.c"
 #include "common/SpawnEnemyDrainFX.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(init) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))

@@ -3,6 +3,7 @@
 #include "script_api/battle.h"
 #include "effects.h"
 #include "sprite/npc/ShySquadGuy.h"
+#include "sprite/player.h"
 
 #define NAMESPACE b_area_omo2_1_shy_squad
 

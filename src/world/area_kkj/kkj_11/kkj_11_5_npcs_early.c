@@ -6,6 +6,7 @@
 #include "../common/ApproachPlayer100Units.inc.c"
 
 #include "world/common/enemy/Koopatrol_Stationary.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_NpcAI_Koopatrol_01) = {
     EVT_CALL(DisablePlayerInput, TRUE)

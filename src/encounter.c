@@ -8,6 +8,17 @@
 #include "sprite.h"
 #include "model.h"
 
+#if !VERSION_JP
+#include "sprite/player.h"
+#else
+// TODO the Japanese player sprites bin differs from that of other versions, so this can be removed once that's fixed
+// and we properly support player sprites in JP
+#define ANIM_Mario1_Idle 0x10002
+#define ANIM_Mario1_ThumbsUp 0x10032
+#define ANIM_MarioB3_Hustled 0x50000
+#define ANIM_MarioW2_LayingDown 0x80009
+#endif
+
 #if !VERSION_JP && !VERSION_IQUE
 // TODO: remove this conditional when more of the JP rom has been processed
 #include "sprite/npc/BattleMerlee.h"

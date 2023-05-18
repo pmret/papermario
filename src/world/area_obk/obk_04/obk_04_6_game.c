@@ -14,6 +14,7 @@ enum {
 };
 
 #include "world/common/complete/GiveReward.inc.c"
+#include "sprite/player.h"
 
 API_CALLABLE(N(GetKeepAwayCarrierYaw)) {
     Npc* npc1 = get_npc_unsafe(NPC_KeepAwayBoo1);

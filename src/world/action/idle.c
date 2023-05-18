@@ -1,5 +1,6 @@
 #include "common.h"
 #include "../actions.h"
+#include "sprite/player.h"
 
 AnimID IdlePeachAnims[] = {
     ANIM_Peach1_Idle, // none

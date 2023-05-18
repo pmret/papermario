@@ -2,6 +2,7 @@
 #include "sprite.h"
 
 #include "world/common/enemy/StoneChomp.inc.c"
+#include "sprite/player.h"
 
 typedef struct StoneChompAmbushIsk13 {
     /* 0x00 */ s32 useBitingAnim;

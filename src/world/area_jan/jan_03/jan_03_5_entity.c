@@ -1,5 +1,6 @@
 #include "jan_03.h"
 #include "entity.h"
+#include "sprite/player.h"
 
 EvtScript N(EVS_GotoMap_tik_08_4) = {
     EVT_CALL(GotoMap, EVT_PTR("tik_08"), tik_08_ENTRY_4)

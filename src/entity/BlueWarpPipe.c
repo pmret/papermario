@@ -3,6 +3,7 @@
 #include "sprite.h"
 #include "ld_addrs.h"
 #include "entity.h"
+#include "sprite/player.h"
 
 extern Gfx Entity_BlueWarpPipe_RenderPipe[];
 extern Gfx Entity_BlueWarpPipe_RenderBase[];

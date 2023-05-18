@@ -1,6 +1,7 @@
 #include "pra_22.h"
 
 #include "world/common/todo/UnkFunc11.inc.c"
+#include "sprite/player.h"
 
 API_CALLABLE(N(PreventFalling)) {
     PlayerStatus* playerStatus = &gPlayerStatus;

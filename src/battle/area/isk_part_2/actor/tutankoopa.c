@@ -220,6 +220,7 @@ ActorBlueprint NAMESPACE = {
 };
 
 #include "common/UnkBattleFunc1.inc.c"
+#include "sprite/player.h"
 
 API_CALLABLE(func_8021875C_4EFBFC) {
     Bytecode* args = script->ptrReadPos;

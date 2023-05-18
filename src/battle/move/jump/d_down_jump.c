@@ -6,6 +6,7 @@
 #define NAMESPACE battle_move_d_down_jump
 
 #include "battle/common/move/JumpSupport.inc.c"
+#include "sprite/player.h"
 
 API_CALLABLE(N(func_802A10E4_781A04)) {
     Bytecode* args = script->ptrReadPos;

@@ -201,6 +201,7 @@ API_CALLABLE(N(ShowFlowerRecoveryFX)) {
 #if !VERSION_PAL
 #include "common/AddHP.inc.c"
 #include "common/AddFP.inc.c"
+#include "sprite/player.h"
 
 API_CALLABLE(N(func_802A1A40_731D40)) {
     ItemData* item = &gItemTable[ITEM_KOOKY_COOKIE];

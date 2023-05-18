@@ -6,6 +6,7 @@ extern EvtScript N(EVS_HitSwitch_Third);
 
 #include "world/common/todo/SetEntityPosition.inc.c"
 #include "world/common/todo/GetEntityPosition.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_SecondSwitch_Drop) = {
     EVT_CALL(DisablePlayerInput, TRUE)

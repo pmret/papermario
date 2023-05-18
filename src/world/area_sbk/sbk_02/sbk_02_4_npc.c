@@ -7,6 +7,7 @@
 #include "world/common/complete/NormalItemChoice.inc.c"
 
 #include "world/common/complete/GiveReward.inc.c"
+#include "sprite/player.h"
 
 EvtScript N(EVS_NpcIdle_Mamar) = {
     EVT_LOOP(0)

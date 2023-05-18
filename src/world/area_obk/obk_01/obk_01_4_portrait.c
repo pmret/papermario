@@ -1,5 +1,6 @@
 #include "obk_01.h"
 #include "sprite.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(SetPortraitItemAlpha)) {
     ItemEntity* item = get_item_entity(script->varTable[0]);

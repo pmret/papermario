@@ -222,7 +222,7 @@ def write_ninja_rules(
     ninja.rule(
         "player_sprites",
         description="player_sprites $out $in",
-        command=f"$python {BUILD_TOOLS}/sprite/player_sprites.py $out $in",
+        command=f"$python {BUILD_TOOLS}/sprite/player_sprites.py $out $header_out $in",
     )
 
     ninja.rule(
@@ -383,7 +383,9 @@ class Configure:
     def map_path(self) -> Path:
         return self.elf_path().with_suffix(".map")
 
-    def resolve_src_paths(self, src_paths: List[Path], glob_deps: bool = True) -> List[str]:
+    def resolve_src_paths(
+        self, src_paths: List[Path], glob_deps: bool = True
+    ) -> List[str]:
         out = []
 
         for path in src_paths:
@@ -432,7 +434,7 @@ class Configure:
             task: str,
             variables: Dict[str, str] = {},
             implicit_outputs: List[str] = [],
-            glob_deps: bool = True
+            glob_deps: bool = True,
         ):
             if not isinstance(object_paths, list):
                 object_paths = [object_paths]
@@ -725,6 +727,11 @@ class Configure:
                     entry.src_paths,
                     "player_sprites",
                     glob_deps=False,
+                    variables={
+                        "header_out": str(
+                            self.build_path() / "include/sprite/player.h"
+                        ),
+                    },
                 )
                 build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
             elif seg.type == "pm_msg":

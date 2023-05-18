@@ -209,6 +209,7 @@ API_CALLABLE(N(GetItemNameRaw)) {
 #endif
 
 #include "world/common/todo/GetFloorCollider.inc.c"
+#include "sprite/player.h"
 
 API_CALLABLE(N(SetHeldBakingItem)) {
     Bytecode* args = script->ptrReadPos;

@@ -38,6 +38,7 @@ API_CALLABLE(func_802A10C8_759678) {
 }
 
 #include "world/common/todo/UnkMoveFunc2.inc.c"
+#include "sprite/player.h"
 
 API_CALLABLE(func_802A12FC_7598AC) {
     if (D_802A43D0 == 0) {
