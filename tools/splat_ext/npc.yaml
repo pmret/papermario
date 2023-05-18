@@ -3075,15 +3075,15 @@ Swooper:
     - Anim1B
 StoneChomp:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
+    - Neutral
+    - Chain
+    - Bite
+    - Hurt1
+    - Hurt2
+    - BurnHurt1
+    - BurnHurt2
+    - BurnChain
+    - Sleep
   palettes:
     - Default
     - Poisoned
@@ -3091,18 +3091,18 @@ StoneChomp:
     - Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
+    - Still
+    - Idle
+    - Chain
+    - QuickBite
+    - Bite
+    - SlowBite
+    - Hurt
+    - BurnHurt
+    - BurnStill
+    - BurnChain
+    - Sleep
+    - Dizzy
 LargePiranha:
   variations:
     - Variant00

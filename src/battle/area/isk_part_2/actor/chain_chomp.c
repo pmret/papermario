@@ -12,8 +12,8 @@ extern EvtScript N(EVS_Idle);
 extern EvtScript N(EVS_HandleEvent);
 extern EvtScript N(EVS_UpdateChain);
 extern EvtScript N(EVS_Chomp_SpinSmashHit);
-extern EvtScript N(8021B41C);
-extern EvtScript N(8021B50C);
+extern EvtScript N(EVS_Chomp_HopHome);
+extern EvtScript N(EVS_Chomp_HopToPos);
 
 enum N(ActorVars) {
     AVAR_EnableChainSounds      = 8,
@@ -261,7 +261,7 @@ ActorBlueprint NAMESPACE = {
 #define CHOMP_CHAIN_FIRST_PART_IDX  3
 #define CHOMP_CHAIN_LAST_PART_IDX   10
 #define CHOMP_CHAIN_AVAR_SOUNDS     AVAR_EnableChainSounds
-#define CHOMP_CHAIN_UPDATE_Z         TRUE
+#define CHOMP_CHAIN_UPDATE_Z        TRUE
 #include "common/battle/ChompChainSupport.inc.c"
 
 API_CALLABLE(func_8021866C_4EFB0C) {
@@ -290,7 +290,7 @@ EvtScript N(EVS_Init) = {
     EVT_END
 };
 
-EvtScript N(80218FCC) = {
+EvtScript N(EVS_UpdateChainAttachPart) = {
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
     EVT_IF_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -311,7 +311,7 @@ EvtScript N(80218FCC) = {
 EvtScript N(EVS_Idle) = {
     EVT_LABEL(0)
         EVT_LOOP(0)
-            EVT_EXEC_WAIT(N(80218FCC))
+            EVT_EXEC_WAIT(N(EVS_UpdateChainAttachPart))
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                 EVT_BREAK_LOOP
@@ -327,7 +327,7 @@ EvtScript N(EVS_Idle) = {
         EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_CALL(IdleJumpToGoal, ACTOR_SELF, 11, 1)
         EVT_LOOP(0)
-            EVT_EXEC_WAIT(N(80218FCC))
+            EVT_EXEC_WAIT(N(EVS_UpdateChainAttachPart))
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                 EVT_BREAK_LOOP
@@ -343,7 +343,7 @@ EvtScript N(EVS_Idle) = {
         EVT_ADD(LVar0, 1)
         EVT_WAIT(LVar0)
         EVT_LOOP(0)
-            EVT_EXEC_WAIT(N(80218FCC))
+            EVT_EXEC_WAIT(N(EVS_UpdateChainAttachPart))
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                 EVT_BREAK_LOOP
@@ -357,7 +357,7 @@ EvtScript N(EVS_Idle) = {
         EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_CALL(IdleJumpToGoal, ACTOR_SELF, 15, 1)
         EVT_LOOP(0)
-            EVT_EXEC_WAIT(N(80218FCC))
+            EVT_EXEC_WAIT(N(EVS_UpdateChainAttachPart))
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                 EVT_BREAK_LOOP
@@ -372,7 +372,7 @@ EvtScript N(EVS_Idle) = {
         EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_CALL(IdleJumpToGoal, ACTOR_SELF, 12, 1)
         EVT_LOOP(0)
-            EVT_EXEC_WAIT(N(80218FCC))
+            EVT_EXEC_WAIT(N(EVS_UpdateChainAttachPart))
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                 EVT_BREAK_LOOP
@@ -386,7 +386,7 @@ EvtScript N(EVS_Idle) = {
         EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_CALL(IdleJumpToGoal, ACTOR_SELF, 9, 1)
         EVT_LOOP(0)
-            EVT_EXEC_WAIT(N(80218FCC))
+            EVT_EXEC_WAIT(N(EVS_UpdateChainAttachPart))
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                 EVT_BREAK_LOOP
@@ -485,7 +485,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2062)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_ChainChomp_SlowBite)
-            EVT_EXEC_WAIT(N(8021B41C))
+            EVT_EXEC_WAIT(N(EVS_Chomp_HopHome))
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2062)
@@ -660,7 +660,7 @@ EvtScript N(EVS_Chomp_SpinSmashHit) = {
     EVT_LABEL(10)
     EVT_SET_CONST(LVar0, 1)
     EVT_SET_CONST(LVar1, ANIM_ChainChomp_Idle)
-    EVT_EXEC_WAIT(N(8021B41C))
+    EVT_EXEC_WAIT(N(EVS_Chomp_HopHome))
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Tutankoopa_Idle)
     EVT_RETURN
     EVT_END
@@ -744,7 +744,7 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_ChainChomp_Idle)
-            EVT_EXEC_WAIT(N(8021B41C))
+            EVT_EXEC_WAIT(N(EVS_Chomp_HopHome))
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ChainChomp_Idle)
             EVT_CALL(HPBarToHome, ACTOR_SELF)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
@@ -829,7 +829,7 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_CALL(YieldTurn)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_ChainChomp_Idle)
-            EVT_EXEC_WAIT(N(8021B41C))
+            EVT_EXEC_WAIT(N(EVS_Chomp_HopHome))
             EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ChainChomp_Idle)
     EVT_END_SWITCH
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_EnableChainSounds, FALSE)
@@ -840,14 +840,17 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_END
 };
 
-EvtScript N(8021B41C) = {
+// Custom version of EVS_Enemy_HopHome
+// (in) LVar0: part idx
+// (in) LVar1: hopping animID
+EvtScript N(EVS_Chomp_HopHome) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_ChainChomp_Bite)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_EXEC_WAIT(N(8021B50C))
+    EVT_EXEC_WAIT(N(EVS_Chomp_HopToPos))
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetPartPos, ACTOR_SELF, 2, LVar0, LVar1, LVar2)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
@@ -855,7 +858,11 @@ EvtScript N(8021B41C) = {
     EVT_END
 };
 
-EvtScript N(8021B50C) = {
+// Custom version of EVS_Enemy_HopToPos
+// (in) LVar0: target posX
+// (in) LVar1: target posY
+// (in) LVar2: target posZ
+EvtScript N(EVS_Chomp_HopToPos) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar3, LVar4, LVar5)
     EVT_IF_LT(LVar3, LVar0)
         EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
