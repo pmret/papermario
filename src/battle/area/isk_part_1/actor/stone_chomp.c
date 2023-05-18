@@ -327,7 +327,7 @@ EvtScript N(EVS_Init) = {
     EVT_END
 };
 
-EvtScript N(EVS_UpdateChainAttachPart) = {
+EvtScript N(EVS_UpdateTargetPartPos) = {
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
     EVT_IF_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -348,7 +348,7 @@ EvtScript N(EVS_UpdateChainAttachPart) = {
 EvtScript N(EVS_Idle) = {
     EVT_LABEL(0)
         EVT_LOOP(0)
-            EVT_EXEC_WAIT(N(EVS_UpdateChainAttachPart))
+            EVT_EXEC_WAIT(N(EVS_UpdateTargetPartPos))
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                 EVT_BREAK_LOOP
@@ -364,7 +364,7 @@ EvtScript N(EVS_Idle) = {
         EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_CALL(IdleJumpToGoal, ACTOR_SELF, 11, 1)
         EVT_LOOP(0)
-            EVT_EXEC_WAIT(N(EVS_UpdateChainAttachPart))
+            EVT_EXEC_WAIT(N(EVS_UpdateTargetPartPos))
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                 EVT_BREAK_LOOP
@@ -380,7 +380,7 @@ EvtScript N(EVS_Idle) = {
         EVT_ADD(LVar0, 1)
         EVT_WAIT(LVar0)
         EVT_LOOP(0)
-            EVT_EXEC_WAIT(N(EVS_UpdateChainAttachPart))
+            EVT_EXEC_WAIT(N(EVS_UpdateTargetPartPos))
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                 EVT_BREAK_LOOP
@@ -394,7 +394,7 @@ EvtScript N(EVS_Idle) = {
         EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_CALL(IdleJumpToGoal, ACTOR_SELF, 15, 1)
         EVT_LOOP(0)
-            EVT_EXEC_WAIT(N(EVS_UpdateChainAttachPart))
+            EVT_EXEC_WAIT(N(EVS_UpdateTargetPartPos))
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                 EVT_BREAK_LOOP
@@ -409,7 +409,7 @@ EvtScript N(EVS_Idle) = {
         EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_CALL(IdleJumpToGoal, ACTOR_SELF, 12, 1)
         EVT_LOOP(0)
-            EVT_EXEC_WAIT(N(EVS_UpdateChainAttachPart))
+            EVT_EXEC_WAIT(N(EVS_UpdateTargetPartPos))
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                 EVT_BREAK_LOOP
@@ -423,7 +423,7 @@ EvtScript N(EVS_Idle) = {
         EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_CALL(IdleJumpToGoal, ACTOR_SELF, 9, 1)
         EVT_LOOP(0)
-            EVT_EXEC_WAIT(N(EVS_UpdateChainAttachPart))
+            EVT_EXEC_WAIT(N(EVS_UpdateTargetPartPos))
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                 EVT_BREAK_LOOP
