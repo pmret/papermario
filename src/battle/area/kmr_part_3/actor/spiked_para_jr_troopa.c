@@ -16,17 +16,17 @@ s32 N(IdleAnimations_80227F00)[] = {
     STATUS_KEY_STATIC,    ANIM_SpikedParaJrTroopa_Still,
     STATUS_KEY_PARALYZE,  ANIM_SpikedParaJrTroopa_Still,
     STATUS_KEY_DIZZY,     ANIM_SpikedParaJrTroopa_Dizzy,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_80227F44)[] = {
     STATUS_KEY_NORMAL,    ANIM_JrTroopa_OutOfBreath,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_80227F50)[] = {
     STATUS_KEY_NORMAL,    ANIM_JrTroopa_Defeated,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable_80227F5C)[] = {
@@ -56,7 +56,7 @@ s32 N(StatusTable_80227F68)[] = {
     STATUS_TURN_MOD_PARALYZE,      -1,
     STATUS_TURN_MOD_SHRINK,        -1,
     STATUS_TURN_MOD_STOP,          -2,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(PartsTable_80228014)[] = {

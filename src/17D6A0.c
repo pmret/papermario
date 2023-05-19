@@ -2230,7 +2230,7 @@ u32 bMarioIdleAnims[] = {
     STATUS_KEY_INACTIVE_WEARY,    ANIM_Mario1_TiredStill,
     STATUS_KEY_THINKING,          ANIM_Mario1_Thinking,
     STATUS_KEY_WEARY,             ANIM_Mario1_SpinLand,
-    STATUS_TABLE_END
+    STATUS_END
 };
 
 s32 bMarioDefendAnims[] = {
@@ -2253,7 +2253,7 @@ s32 bMarioDefendAnims[] = {
     STATUS_KEY_INACTIVE_WEARY,    ANIM_Mario1_TiredStill,
     STATUS_KEY_THINKING,          ANIM_Mario1_Thinking,
     STATUS_KEY_WEARY,             ANIM_Mario1_SpinLand,
-    STATUS_TABLE_END
+    STATUS_END
 };
 
 s32 bMarioHideAnims[] = {
@@ -2276,13 +2276,13 @@ s32 bMarioHideAnims[] = {
     STATUS_KEY_INACTIVE_WEARY,    ANIM_Mario1_TiredStill,
     STATUS_KEY_THINKING,          ANIM_Mario1_Thinking,
     STATUS_KEY_WEARY,             ANIM_Mario1_SpinLand,
-    STATUS_TABLE_END
+    STATUS_END
 };
 
 s32 bPeachIdleAnims[] = {
     STATUS_KEY_NORMAL,    ANIM_Peach1_Walk,
     STATUS_KEY_INACTIVE,  ANIM_Peach2_Inert,
-    STATUS_TABLE_END
+    STATUS_END
 };
 
 s32 bMarioDefenseTable[] = {
@@ -2312,7 +2312,7 @@ s32 bPlayerStatusTable[] = {
     STATUS_TURN_MOD_PARALYZE, 0,
     STATUS_TURN_MOD_SHRINK,   0,
     STATUS_TURN_MOD_STOP,     0,
-    STATUS_TABLE_END
+    STATUS_END
 };
 
 ActorBlueprint bPlayerActorBlueprint = {

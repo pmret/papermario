@@ -150,7 +150,7 @@ s32 N(watt_idleAnimations)[] = {
     STATUS_KEY_PARALYZE,  ANIM_BattleWatt_Still,
     STATUS_KEY_DIZZY,     ANIM_BattleWatt_Injured,
     STATUS_KEY_FEAR,      ANIM_BattleWatt_Injured,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(watt_defenseTable)[] = {
@@ -181,7 +181,7 @@ s32 N(watt_statusTable)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,          -1,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(watt_parts)[] = {

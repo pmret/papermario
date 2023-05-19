@@ -33,7 +33,7 @@ s32 N(StatusTable_8021ACD4)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 extern s32 N(IdleAnimations_8021AE5C)[];
@@ -137,12 +137,12 @@ s32 N(IdleAnimations_8021AE5C)[] = {
     STATUS_KEY_PARALYZE,  ANIM_LavaBubble_Blue_Anim00,
     STATUS_KEY_DIZZY,     ANIM_LavaBubble_Blue_Anim0A,
     STATUS_KEY_FEAR,      ANIM_LavaBubble_Blue_Anim0A,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_8021AEA8)[] = {
     STATUS_KEY_NORMAL,    ANIM_LavaBubble_Blue_Anim01,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 extern EvtScript N(takeTurn_8021D284);

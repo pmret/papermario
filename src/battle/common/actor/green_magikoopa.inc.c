@@ -49,7 +49,7 @@ s32 N(StatusTable)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,          -1,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(StatusTable_flying)[] = {
@@ -74,7 +74,7 @@ s32 N(StatusTable_flying)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,          -1,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(parts)[] = {
@@ -187,7 +187,7 @@ s32 N(IdleAnimations)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Magikoopa_Green_Anim00,
     STATUS_KEY_DIZZY,     ANIM_Magikoopa_Green_Anim07,
     STATUS_KEY_FEAR,      ANIM_Magikoopa_Green_Anim07,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations2)[] = {
@@ -200,12 +200,12 @@ s32 N(IdleAnimations2)[] = {
     STATUS_KEY_PARALYZE,  ANIM_FlyingMagikoopa_Green_Anim00,
     STATUS_KEY_DIZZY,     ANIM_FlyingMagikoopa_Green_Anim07,
     STATUS_KEY_FEAR,      ANIM_FlyingMagikoopa_Green_Anim07,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations3)[] = {
     STATUS_KEY_NORMAL,    ANIM_FlyingMagikoopa_Green_Anim0A,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 EvtScript N(idle) = {

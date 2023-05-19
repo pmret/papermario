@@ -16,7 +16,7 @@ BSS s32 D_80219040;
 
 s32 N(IdleAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_WorldEldstar_Idle,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable)[] = {
@@ -46,7 +46,7 @@ s32 N(StatusTable)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(ActorParts)[] = {

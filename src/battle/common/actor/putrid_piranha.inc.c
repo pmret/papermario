@@ -20,7 +20,7 @@ s32 N(IdleAnimations_8021B0A0)[] = {
     STATUS_KEY_PARALYZE,  ANIM_LargePiranha_Putrid_Anim00,
     STATUS_KEY_PARALYZE,  ANIM_LargePiranha_Putrid_Anim00,
     STATUS_KEY_DIZZY,     ANIM_LargePiranha_Putrid_Anim0F,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable_8021B0EC)[] = {
@@ -51,7 +51,7 @@ s32 N(StatusTable_8021B100)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(PartsTable_8021B1AC)[] = {

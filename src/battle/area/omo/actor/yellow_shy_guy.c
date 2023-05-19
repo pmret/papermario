@@ -39,7 +39,7 @@ s32 N(StatusTable_8021C824)[] = {
     STATUS_TURN_MOD_PARALYZE,       1,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 enum PartIDs {
@@ -94,7 +94,7 @@ s32 N(IdleAnimations_8021C91C)[] = {
     STATUS_KEY_PARALYZE,  ANIM_ShyGuy_Yellow_Anim00,
     STATUS_KEY_DIZZY,     ANIM_ShyGuy_Yellow_Anim13,
     STATUS_KEY_FEAR,      ANIM_ShyGuy_Yellow_Anim13,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 EvtScript N(init_8021C968) = {

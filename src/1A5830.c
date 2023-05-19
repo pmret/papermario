@@ -427,7 +427,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
     switch (actorClass) {
         case ACTOR_CLASS_PLAYER:
             // TODO figure out how to better write target->debuff >= STATUS_KEY_POISON
-            if ((target->debuff == 0 || target->debuff >= STATUS_KEY_POISON) && (target->stoneStatus == STATUS_TABLE_END) && !(battleStatus->currentAttackElement & DAMAGE_TYPE_UNBLOCKABLE)) {
+            if ((target->debuff == 0 || target->debuff >= STATUS_KEY_POISON) && (target->stoneStatus == 0) && !(battleStatus->currentAttackElement & DAMAGE_TYPE_UNBLOCKABLE)) {
                 s32 blocked;
 
                 if (player_team_is_ability_active(target, ABILITY_BERSERKER)) {
@@ -448,8 +448,8 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
             }
             break;
         case ACTOR_CLASS_PARTNER:
-            if (target->stoneStatus == STATUS_TABLE_END) {
-                if (target->koStatus == STATUS_TABLE_END && !(battleStatus->currentAttackElement & DAMAGE_TYPE_UNBLOCKABLE)) {
+            if (target->stoneStatus == 0) {
+                if (target->koStatus == 0 && !(battleStatus->currentAttackElement & DAMAGE_TYPE_UNBLOCKABLE)) {
                     if (check_block_input(BUTTON_A)) {
                         damage = 0;
                         sfx_play_sound_at_position(SOUND_231, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
@@ -3407,9 +3407,9 @@ ApiStatus ClearStatusEffects(Evt* script, s32 isInitialCall) {
 
     actor = get_actor(actorID);
 
-    if (actor->debuff != STATUS_TABLE_END) {
+    if (actor->debuff != 0) {
         actor->debuffDuration = 0;
-        actor->debuff = STATUS_TABLE_END;
+        actor->debuff = 0;
         remove_status_debuff(actor->hudElementDataIndex);
     }
 

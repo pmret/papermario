@@ -30,7 +30,7 @@ s32 N(IdleAnimations_802185C0)[] = {
     STATUS_KEY_PARALYZE,  ANIM_SpearGuy_Anim02,
     STATUS_KEY_DIZZY,     ANIM_SpearGuy_Anim0F,
     STATUS_KEY_FEAR,      ANIM_SpearGuy_Anim0F,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_8021860C)[] = {
@@ -43,17 +43,17 @@ s32 N(IdleAnimations_8021860C)[] = {
     STATUS_KEY_PARALYZE,  ANIM_SpearGuy_Anim01,
     STATUS_KEY_DIZZY,     ANIM_SpearGuy_Anim0F,
     STATUS_KEY_FEAR,      ANIM_SpearGuy_Anim0F,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_80218658)[] = {
     STATUS_KEY_NORMAL,    ANIM_SpearGuy_Anim14,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_80218664)[] = {
     STATUS_KEY_NORMAL,    ANIM_SpearGuy_Anim19,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable_80218670)[] = {
@@ -90,7 +90,7 @@ s32 N(StatusTable_80218698)[] = {
     STATUS_TURN_MOD_PARALYZE,       1,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(StatusTable_80218744)[] = {
@@ -115,7 +115,7 @@ s32 N(StatusTable_80218744)[] = {
     STATUS_TURN_MOD_PARALYZE,       1,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(PartsTable_802187F0)[] = {
@@ -1098,7 +1098,7 @@ s32 N(IdleAnimations_8021BF40)[] = {
     STATUS_KEY_PARALYZE,  ANIM_ShyGuy_Red_Anim00,
     STATUS_KEY_DIZZY,     ANIM_ShyGuy_Red_Anim13,
     STATUS_KEY_FEAR,      ANIM_ShyGuy_Red_Anim13,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 EvtScript N(8021BF8C) = {

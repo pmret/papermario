@@ -43,7 +43,7 @@ s32 N(StatusTable_80218E3C)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(PartsTable_80218EE8)[] = {
@@ -142,12 +142,12 @@ s32 N(IdleAnimations_80218FC4)[] = {
     STATUS_KEY_PARALYZE,  ANIM_LavaBubble_Anim00,
     STATUS_KEY_DIZZY,     ANIM_LavaBubble_Anim0A,
     STATUS_KEY_FEAR,      ANIM_LavaBubble_Anim0A,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_80219010)[] = {
     STATUS_KEY_NORMAL,    ANIM_LavaBubble_Anim01,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 EvtScript N(init_8021901C) = {

@@ -21,7 +21,7 @@ s32 N(IdleAnimations_8022CB00)[] = {
     STATUS_KEY_PARALYZE,  ANIM_PyroGuy_Anim00,
     STATUS_KEY_DIZZY,     ANIM_PyroGuy_Anim08,
     STATUS_KEY_FEAR,      ANIM_PyroGuy_Anim08,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable_8022CB4C)[] = {
@@ -57,7 +57,7 @@ s32 N(StatusTable_8022CB88)[] = {
     STATUS_TURN_MOD_PARALYZE,       1,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 enum PartIDs {

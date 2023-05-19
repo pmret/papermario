@@ -31,7 +31,7 @@ s32 N(IdleAnimations_802249E0)[] = {
     STATUS_KEY_PARALYZE,  ANIM_GrooveGuy_Anim00,
     STATUS_KEY_DIZZY,     ANIM_GrooveGuy_Anim07,
     STATUS_KEY_FEAR,      ANIM_GrooveGuy_Anim07,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable_80224A2C)[] = {
@@ -62,7 +62,7 @@ s32 N(StatusTable_80224A40)[] = {
     STATUS_TURN_MOD_PARALYZE,       1,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 BSS PlayerStatus D_802310D0;

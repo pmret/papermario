@@ -75,7 +75,7 @@ s32 N(StatusTable)[] = {
     STATUS_TURN_MOD_PARALYZE,      -1,
     STATUS_TURN_MOD_SHRINK,        -1,
     STATUS_TURN_MOD_STOP,          -2,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(StatusTable_flying)[] = {
@@ -100,7 +100,7 @@ s32 N(StatusTable_flying)[] = {
     STATUS_TURN_MOD_PARALYZE,      -1,
     STATUS_TURN_MOD_SHRINK,        -1,
     STATUS_TURN_MOD_STOP,          -2,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(parts)[] = {
@@ -213,7 +213,7 @@ s32 N(IdleAnimations)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Magikoopa_Anim00,
     STATUS_KEY_DIZZY,     ANIM_Magikoopa_Anim07,
     STATUS_KEY_FEAR,      ANIM_Magikoopa_Anim07,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_flying)[] = {
@@ -226,12 +226,12 @@ s32 N(IdleAnimations_flying)[] = {
     STATUS_KEY_PARALYZE,  ANIM_FlyingMagikoopa_Anim00,
     STATUS_KEY_DIZZY,     ANIM_FlyingMagikoopa_Anim07,
     STATUS_KEY_FEAR,      ANIM_FlyingMagikoopa_Anim07,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(idleAnimtions_broomstick)[] = {
     STATUS_KEY_NORMAL,    ANIM_FlyingMagikoopa_Anim0A,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 #include "common/ShrinkActor.inc.c"
@@ -1284,7 +1284,7 @@ s32 N(StatusTable_clone)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(StatusTable_clone_flying)[] = {
@@ -1309,7 +1309,7 @@ s32 N(StatusTable_clone_flying)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(parts_clone)[] = {

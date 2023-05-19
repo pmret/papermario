@@ -33,7 +33,7 @@ s32 N(IdleAnimations)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Koopatrol_Anim00,
     STATUS_KEY_DIZZY,     ANIM_Koopatrol_Anim13,
     STATUS_KEY_FEAR,      ANIM_Koopatrol_Anim13,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_stepBack)[] = {
@@ -46,7 +46,7 @@ s32 N(IdleAnimations_stepBack)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Koopatrol_Anim00,
     STATUS_KEY_DIZZY,     ANIM_Koopatrol_Anim13,
     STATUS_KEY_FEAR,      ANIM_Koopatrol_Anim13,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_flipped)[] = {
@@ -59,7 +59,7 @@ s32 N(IdleAnimations_flipped)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Koopatrol_Anim10,
     STATUS_KEY_DIZZY,     ANIM_Koopatrol_Anim14,
     STATUS_KEY_FEAR,      ANIM_Koopatrol_Anim14,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_charged)[] = {
@@ -72,7 +72,7 @@ s32 N(IdleAnimations_charged)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Koopatrol_Anim06,
     STATUS_KEY_DIZZY,     ANIM_Koopatrol_Anim06,
     STATUS_KEY_FEAR,      ANIM_Koopatrol_Anim06,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable)[] = {
@@ -114,7 +114,7 @@ s32 N(StatusTable)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,          -1,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(StatusTable_charged)[] = {
@@ -137,7 +137,7 @@ s32 N(StatusTable_charged)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(parts)[] = {

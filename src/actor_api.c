@@ -2794,7 +2794,7 @@ ApiStatus GetStatusFlags(Evt* script, s32 isInitialCall) {
     actorClass = actor->actorID & ACTOR_CLASS_MASK;
     flags = 0;
 
-    if (debuff != STATUS_TABLE_END) {
+    if (debuff != 0) {
         if (debuff == STATUS_KEY_STOP) {
             flags |= STATUS_FLAG_STOP;
         }
@@ -2822,7 +2822,7 @@ ApiStatus GetStatusFlags(Evt* script, s32 isInitialCall) {
     }
 
     switch (actor->staticStatus) {
-        case STATUS_TABLE_END:
+        case 0:
             break;
         case STATUS_KEY_STATIC:
             flags |= STATUS_FLAG_STATIC;
@@ -2830,7 +2830,7 @@ ApiStatus GetStatusFlags(Evt* script, s32 isInitialCall) {
     }
 
     switch (actor->stoneStatus) {
-        case STATUS_TABLE_END:
+        case 0:
             break;
         case STATUS_KEY_STONE:
             flags |= STATUS_FLAG_STONE;
@@ -2838,7 +2838,7 @@ ApiStatus GetStatusFlags(Evt* script, s32 isInitialCall) {
     }
 
     switch (actor->koStatus) {
-        case STATUS_TABLE_END:
+        case 0:
             break;
         case STATUS_KEY_DAZE:
             flags |= STATUS_FLAG_KO;
@@ -2846,7 +2846,7 @@ ApiStatus GetStatusFlags(Evt* script, s32 isInitialCall) {
     }
 
     switch (actor->transparentStatus) {
-        case STATUS_TABLE_END:
+        case 0:
             break;
         case STATUS_KEY_TRANSPARENT:
             flags |= STATUS_FLAG_TRANSPARENT;

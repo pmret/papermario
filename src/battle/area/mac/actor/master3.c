@@ -15,7 +15,7 @@ s32 N(IdleAnimations_8022D9A0)[] = {
     STATUS_KEY_PARALYZE,  ANIM_TheMaster_Still,
     STATUS_KEY_DIZZY,     ANIM_TheMaster_Dizzy,
     STATUS_KEY_DIZZY,     ANIM_TheMaster_Dizzy,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_8022D9EC)[] = {
@@ -28,7 +28,7 @@ s32 N(IdleAnimations_8022D9EC)[] = {
     STATUS_KEY_PARALYZE,  ANIM_TheMaster_AscendedStill,
     STATUS_KEY_DIZZY,     ANIM_TheMaster_AscendedDizzy,
     STATUS_KEY_DIZZY,     ANIM_TheMaster_AscendedDizzy,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable_8022DA38)[] = {
@@ -58,7 +58,7 @@ s32 N(StatusTable_8022DA44)[] = {
     STATUS_TURN_MOD_PARALYZE,      -1,
     STATUS_TURN_MOD_SHRINK,        -1,
     STATUS_TURN_MOD_STOP,          -1,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(PartsTable_8022DAF0)[] = {

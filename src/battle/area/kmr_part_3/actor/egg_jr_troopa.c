@@ -13,7 +13,7 @@ s32 N(IdleAnimations_80224380)[] = {
     STATUS_KEY_STOP,      ANIM_JrTroopa_Still,
     STATUS_KEY_STATIC,    ANIM_JrTroopa_Still,
     STATUS_KEY_PARALYZE,  ANIM_JrTroopa_Still,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_802243BC)[] = {
@@ -24,13 +24,13 @@ s32 N(IdleAnimations_802243BC)[] = {
     STATUS_KEY_STOP,      ANIM_JrTroopa_Still,
     STATUS_KEY_STATIC,    ANIM_JrTroopa_Still,
     STATUS_KEY_PARALYZE,  ANIM_JrTroopa_Still,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_802243F8)[] = {
     STATUS_KEY_NORMAL,    ANIM_JrTroopa_EggIdle,
     STATUS_KEY_STOP,      ANIM_JrTroopa_EggStill,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable_8022440C)[] = {
@@ -60,7 +60,7 @@ s32 N(StatusTable_80224418)[] = {
     STATUS_TURN_MOD_PARALYZE,      -1,
     STATUS_TURN_MOD_SHRINK,        -1,
     STATUS_TURN_MOD_STOP,          -2,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(PartsTable_802244C4)[] = {
@@ -135,7 +135,7 @@ EvtScript N(802245E8) = {
 
 s32 N(IdleAnimations_8022464C)[] = {
     STATUS_KEY_NORMAL,    ANIM_JrTroopa_Defeated,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 EvtScript N(80224658) = {

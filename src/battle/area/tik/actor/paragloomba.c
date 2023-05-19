@@ -54,7 +54,7 @@ s32 N(StatusTable_gloomba)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(StatusTable)[] = {
@@ -79,7 +79,7 @@ s32 N(StatusTable)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(parts)[] = {
@@ -166,7 +166,7 @@ s32 N(IdleAnimations)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Paragoomba_Dark_Still,
     STATUS_KEY_DIZZY,     ANIM_Paragoomba_Dark_Dizzy,
     STATUS_KEY_FEAR,      ANIM_Paragoomba_Dark_Dizzy,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_step)[] = {
@@ -179,17 +179,17 @@ s32 N(IdleAnimations_step)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Paragoomba_Dark_Still,
     STATUS_KEY_DIZZY,     ANIM_Paragoomba_Dark_Dizzy,
     STATUS_KEY_FEAR,      ANIM_Paragoomba_Dark_Dizzy,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_left_wing)[] = {
     STATUS_KEY_NORMAL,    ANIM_Paragoomba_Dark_LWingStill,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_right_wing)[] = {
     STATUS_KEY_NORMAL,    ANIM_Paragoomba_Dark_RWingStill,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 EvtScript N(init) = {
@@ -561,7 +561,7 @@ s32 N(IdleAnimations_gloomba)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Goomba_Dark_Still,
     STATUS_KEY_DIZZY,     ANIM_Goomba_Dark_Dizzy,
     STATUS_KEY_FEAR,      ANIM_Goomba_Dark_Dizzy,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_gloomba_step)[] = {
@@ -574,7 +574,7 @@ s32 N(IdleAnimations_gloomba_step)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Goomba_Dark_Still,
     STATUS_KEY_DIZZY,     ANIM_Goomba_Dark_Dizzy,
     STATUS_KEY_FEAR,      ANIM_Goomba_Dark_Dizzy,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 EvtScript N(init_gloomba) = {

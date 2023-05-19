@@ -2860,7 +2860,7 @@ enum HitSounds {
 // Player.debuff
 // Partner.debuff
 enum StatusKeys {
-    STATUS_TABLE_END                = 0x00000000,
+    STATUS_END                      = 0x00000000,
     STATUS_KEY_NORMAL               = 0x00000001,
     STATUS_KEY_DEFAULT              = 0x00000002,
     STATUS_KEY_FEAR                 = 0x00000003,

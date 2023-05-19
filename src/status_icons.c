@@ -1060,7 +1060,7 @@ void remove_status_debuff(s32 iconID) {
     if (statusIcon->status1.active && !statusIcon->status1.removing) {
         statusIcon->status1.removing = statusIcon->status1.active;
         statusIcon->status1.removingTask = STATUS_ICON_TASK_LOAD;
-        statusIcon->status1.active = STATUS_TABLE_END;
+        statusIcon->status1.active = 0;
         statusIcon->status1.activeTask = STATUS_ICON_TASK_NONE;
         statusIcon->status1.frameCounter = 10;
         statusIcon->status1.removingElementID = statusIcon->status1.activeElementID;

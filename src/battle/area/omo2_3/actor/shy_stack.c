@@ -61,7 +61,7 @@ s32 N(StatusTable)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(parts)[] = {
@@ -270,7 +270,7 @@ s32 N(IdleAnimations)[] = {
     STATUS_KEY_DIZZY,     ANIM_ShyStackGuy_Anim0C,
     STATUS_KEY_DIZZY,     ANIM_ShyStackGuy_Anim0C,
     STATUS_KEY_FEAR,      ANIM_ShyStackGuy_Anim00,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations2)[] = {
@@ -285,7 +285,7 @@ s32 N(IdleAnimations2)[] = {
     STATUS_KEY_DIZZY,     ANIM_ShyStackGuy_Anim0D,
     STATUS_KEY_DIZZY,     ANIM_ShyStackGuy_Anim0D,
     STATUS_KEY_FEAR,      ANIM_ShyStackGuy_Anim01,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations3)[] = {
@@ -300,7 +300,7 @@ s32 N(IdleAnimations3)[] = {
     STATUS_KEY_DIZZY,     ANIM_ShyStackGuy_Anim0E,
     STATUS_KEY_DIZZY,     ANIM_ShyStackGuy_Anim0E,
     STATUS_KEY_FEAR,      ANIM_ShyStackGuy_Anim02,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations4)[] = {
@@ -315,22 +315,22 @@ s32 N(IdleAnimations4)[] = {
     STATUS_KEY_DIZZY,     ANIM_ShyStackGuy_Anim0F,
     STATUS_KEY_DIZZY,     ANIM_ShyStackGuy_Anim0F,
     STATUS_KEY_FEAR,      ANIM_ShyStackGuy_Anim03,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_rock)[] = {
     STATUS_KEY_NORMAL,    ANIM_ShyStackRock_Anim00,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_damage)[] = {
     STATUS_KEY_NORMAL,    ANIM_ShyStackDamage_Anim00,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_shy_guy)[] = {
     STATUS_KEY_NORMAL,    ANIM_ShyGuy_Red_Anim01,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 EvtScript N(init) = {

@@ -7,7 +7,7 @@
 
 s32 N(IdleAnimations_802232D0)[] = {
     STATUS_KEY_NORMAL,    ANIM_SpikyGoomnut_Still,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable_802232DC)[] = {
@@ -38,7 +38,7 @@ s32 N(StatusTable_802232F0)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 extern EvtScript N(init_80223488);

@@ -42,7 +42,7 @@ s32 N(StatusTable)[] = {
     STATUS_TURN_MOD_PARALYZE,       1,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(parts)[] = {
@@ -117,22 +117,22 @@ s32 N(IdleAnimations)[] = {
     STATUS_KEY_PARALYZE,  ANIM_MontyMole_Dark_Anim00,
     STATUS_KEY_DIZZY,     ANIM_MontyMole_Dark_Anim14,
     STATUS_KEY_FEAR,      ANIM_MontyMole_Dark_Anim14,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations2)[] = {
     STATUS_KEY_NORMAL,    ANIM_MontyMole_Dark_Anim0F,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_hole)[] = {
     STATUS_KEY_NORMAL,    ANIM_MontyMole_Dark_Anim12,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_unused)[] = {
     STATUS_KEY_NORMAL,    ANIM_MontyMole_Dark_Anim06,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(parts_hole)[] = {

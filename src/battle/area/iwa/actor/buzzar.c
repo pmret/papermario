@@ -33,12 +33,12 @@ s32 N(IdleAnimations_8021B600)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Buzzar_Anim0C,
     STATUS_KEY_DIZZY,     ANIM_Buzzar_Anim0C,
     STATUS_KEY_SHRINK,    ANIM_Buzzar_Anim01,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_8021B644)[] = {
     STATUS_KEY_NORMAL,    ANIM_Buzzar_Anim14,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable)[] = {
@@ -68,7 +68,7 @@ s32 N(StatusTable)[] = {
     STATUS_TURN_MOD_PARALYZE,      -1,
     STATUS_TURN_MOD_SHRINK,        -1,
     STATUS_TURN_MOD_STOP,          -1,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(PartsTable)[] = {

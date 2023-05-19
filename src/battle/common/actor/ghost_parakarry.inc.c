@@ -15,7 +15,7 @@ s32 N(parakarry_idleAnimations)[] = {
     STATUS_KEY_PARALYZE,  ANIM_BattleParakarry_Still,
     STATUS_KEY_DIZZY,     ANIM_BattleParakarry_Idle,
     STATUS_KEY_FEAR,      ANIM_BattleParakarry_Idle,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(parakarry_defenseTable)[] = {
@@ -45,7 +45,7 @@ s32 N(parakarry_statusTable)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,          -1,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(parakarry_parts)[] = {

@@ -43,7 +43,7 @@ s32 N(IdleAnimations_normal)[] = {
     STATUS_KEY_PARALYZE,  ANIM_BonyBeetle_Anim00,
     STATUS_KEY_DIZZY,     ANIM_BonyBeetle_Anim26,
     STATUS_KEY_FEAR,      ANIM_BonyBeetle_Anim26,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_spiky)[] = {
@@ -56,7 +56,7 @@ s32 N(IdleAnimations_spiky)[] = {
     STATUS_KEY_PARALYZE,  ANIM_BonyBeetle_Anim01,
     STATUS_KEY_DIZZY,     ANIM_BonyBeetle_Anim27,
     STATUS_KEY_FEAR,      ANIM_BonyBeetle_Anim27,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_flipped)[] = {
@@ -69,7 +69,7 @@ s32 N(IdleAnimations_flipped)[] = {
     STATUS_KEY_PARALYZE,  ANIM_BonyBeetle_Anim02,
     STATUS_KEY_DIZZY,     ANIM_BonyBeetle_Anim28,
     STATUS_KEY_FEAR,      ANIM_BonyBeetle_Anim28,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_spiky_flipped)[] = {
@@ -82,7 +82,7 @@ s32 N(IdleAnimations_spiky_flipped)[] = {
     STATUS_KEY_PARALYZE,  ANIM_BonyBeetle_Anim03,
     STATUS_KEY_DIZZY,     ANIM_BonyBeetle_Anim29,
     STATUS_KEY_FEAR,      ANIM_BonyBeetle_Anim29,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable)[] = {
@@ -117,7 +117,7 @@ s32 N(StatusTable)[] = {
     STATUS_TURN_MOD_PARALYZE,      -1,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,          -1,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(parts)[] = {

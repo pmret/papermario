@@ -14,7 +14,7 @@ s32 N(IdleAnimations_802229F0)[] = {
     STATUS_KEY_STOP,      ANIM_JrTroopa_Still,
     STATUS_KEY_STATIC,    ANIM_JrTroopa_Still,
     STATUS_KEY_PARALYZE,  ANIM_JrTroopa_Still,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable_80222A2C)[] = {
@@ -44,7 +44,7 @@ s32 N(StatusTable_80222A38)[] = {
     STATUS_TURN_MOD_PARALYZE,      -1,
     STATUS_TURN_MOD_SHRINK,        -1,
     STATUS_TURN_MOD_STOP,          -2,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(PartsTable_80222AE4)[] = {
@@ -119,7 +119,7 @@ EvtScript N(80222C08) = {
 
 s32 N(IdleAnimations_80222C6C)[] = {
     STATUS_KEY_NORMAL,    ANIM_JrTroopa_Defeated,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 EvtScript N(80222C78) = {

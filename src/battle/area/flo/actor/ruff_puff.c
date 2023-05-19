@@ -19,7 +19,7 @@ s32 N(IdleAnimations)[] = {
     STATUS_KEY_STATIC,    ANIM_TuffPuff_Idle,
     STATUS_KEY_PARALYZE,  ANIM_TuffPuff_Still,
     STATUS_KEY_DIZZY,     ANIM_TuffPuff_Dizzy,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable)[] = {
@@ -50,7 +50,7 @@ s32 N(StatusTable)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,          -1,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(parts)[] = {

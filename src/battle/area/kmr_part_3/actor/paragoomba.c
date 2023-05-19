@@ -38,7 +38,7 @@ s32 N(StatusTable_8021C1C8)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(StatusTable_8021C274)[] = {
@@ -63,7 +63,7 @@ s32 N(StatusTable_8021C274)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 extern s32 N(IdleAnimations_8021DB9C)[];
@@ -159,7 +159,7 @@ s32 N(IdleAnimations_8021C3D8)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Paragoomba_Still,
     STATUS_KEY_DIZZY,     ANIM_Paragoomba_Dizzy,
     STATUS_KEY_FEAR,      ANIM_Paragoomba_Dizzy,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_8021C424)[] = {
@@ -172,17 +172,17 @@ s32 N(IdleAnimations_8021C424)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Paragoomba_Still,
     STATUS_KEY_DIZZY,     ANIM_Paragoomba_Dizzy,
     STATUS_KEY_FEAR,      ANIM_Paragoomba_Dizzy,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_8021C470)[] = {
     STATUS_KEY_NORMAL,    ANIM_Paragoomba_LWingStill,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_8021C47C)[] = {
     STATUS_KEY_NORMAL,    ANIM_Paragoomba_RWingStill,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 EvtScript N(8021C488) = {
@@ -558,7 +558,7 @@ s32 N(IdleAnimations_8021DB9C)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Goomba_Still,
     STATUS_KEY_DIZZY,     ANIM_Goomba_Dizzy,
     STATUS_KEY_FEAR,      ANIM_Goomba_Dizzy,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_8021DBE8)[] = {
@@ -571,7 +571,7 @@ s32 N(IdleAnimations_8021DBE8)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Goomba_Still,
     STATUS_KEY_DIZZY,     ANIM_Goomba_Dizzy,
     STATUS_KEY_FEAR,      ANIM_Goomba_Dizzy,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 extern EvtScript N(takeTurn_8021E788);

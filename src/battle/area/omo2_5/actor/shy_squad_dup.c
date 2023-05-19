@@ -50,7 +50,7 @@ s32 N(StatusTable)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(parts)[] = {
@@ -274,13 +274,13 @@ ActorBlueprint NAMESPACE = {
 s32 N(IdleAnimations)[] = {
     STATUS_KEY_NORMAL,    ANIM_TankGuy_Anim01,
     STATUS_KEY_STOP,      ANIM_TankGuy_Anim00,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_watt)[] = {
     STATUS_KEY_NORMAL,    ANIM_TankGuy_Anim07,
     STATUS_KEY_STOP,      ANIM_TankGuy_Anim00,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 EvtScript N(init) = {

@@ -59,7 +59,7 @@ s32 N(StatusTable)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(parts)[] = {
@@ -168,7 +168,7 @@ s32 N(IdleAnimations)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Pokey_Anim00,
     STATUS_KEY_DIZZY,     ANIM_Pokey_Anim21,
     STATUS_KEY_FEAR,      ANIM_Pokey_Anim21,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_3bodyParts)[] = {
@@ -179,7 +179,7 @@ s32 N(IdleAnimations_3bodyParts)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Pokey_Anim01,
     STATUS_KEY_DIZZY,     ANIM_Pokey_Anim22,
     STATUS_KEY_FEAR,      ANIM_Pokey_Anim22,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_2bodyParts)[] = {
@@ -190,7 +190,7 @@ s32 N(IdleAnimations_2bodyParts)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Pokey_Anim02,
     STATUS_KEY_DIZZY,     ANIM_Pokey_Anim23,
     STATUS_KEY_FEAR,      ANIM_Pokey_Anim23,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_1bodyPart)[] = {
@@ -201,12 +201,12 @@ s32 N(IdleAnimations_1bodyPart)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Pokey_Anim03,
     STATUS_KEY_DIZZY,     ANIM_Pokey_Anim24,
     STATUS_KEY_FEAR,      ANIM_Pokey_Anim24,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_thrownBodyPart)[] = {
     STATUS_KEY_NORMAL,    ANIM_Pokey_Anim16,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 EvtScript N(init) = {

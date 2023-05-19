@@ -21,17 +21,17 @@ s32 N(IdleAnimations)[] = {
     STATUS_KEY_PARALYZE,  ANIM_DryBones_Anim00,
     STATUS_KEY_DIZZY,     ANIM_DryBones_Anim0D,
     STATUS_KEY_FEAR,      ANIM_DryBones_Anim0D,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_dead)[] = {
     STATUS_KEY_NORMAL,    ANIM_DryBones_Anim01,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_bone)[] = {
     STATUS_KEY_NORMAL,    ANIM_DryBones_Anim0F,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable)[] = {
@@ -70,7 +70,7 @@ s32 N(StatusTable)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,          -1,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(StatusTable_dead)[] = {
@@ -95,7 +95,7 @@ s32 N(StatusTable_dead)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(parts)[] = {

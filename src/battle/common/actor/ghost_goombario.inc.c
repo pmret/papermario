@@ -46,7 +46,7 @@ s32 N(goombario_idleAnimations)[] = {
     STATUS_KEY_PARALYZE,  ANIM_BattleGoombario_Still,
     STATUS_KEY_DIZZY,     ANIM_BattleGoombario_Injured,
     STATUS_KEY_FEAR,      ANIM_BattleGoombario_Injured,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(goombario_defenseTable)[] = {
@@ -76,7 +76,7 @@ s32 N(goombario_statusTable)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,          -1,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(goombario_parts)[] = {

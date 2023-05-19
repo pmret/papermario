@@ -58,7 +58,7 @@ s32 N(StatusTable_8021B308)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(StatusTable_8021B3B4)[] = {
@@ -83,7 +83,7 @@ s32 N(StatusTable_8021B3B4)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(PartsTable_8021B460)[] = {
@@ -170,7 +170,7 @@ s32 N(IdleAnimations_8021B518)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Paragoomba_Hyper_Still,
     STATUS_KEY_DIZZY,     ANIM_Paragoomba_Hyper_Dizzy,
     STATUS_KEY_FEAR,      ANIM_Paragoomba_Hyper_Dizzy,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 EvtScript N(init_8021B564) = {
@@ -421,7 +421,7 @@ s32 N(IdleAnimations_8021C594)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Paragoomba_Hyper_Still,
     STATUS_KEY_DIZZY,     ANIM_Paragoomba_Hyper_Dizzy,
     STATUS_KEY_FEAR,      ANIM_Paragoomba_Hyper_Dizzy,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_8021C5E0)[] = {
@@ -434,17 +434,17 @@ s32 N(IdleAnimations_8021C5E0)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Paragoomba_Hyper_Still,
     STATUS_KEY_DIZZY,     ANIM_Paragoomba_Hyper_Dizzy,
     STATUS_KEY_FEAR,      ANIM_Paragoomba_Hyper_Dizzy,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_8021C62C)[] = {
     STATUS_KEY_NORMAL,    ANIM_Paragoomba_Hyper_LWingStill,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_8021C638)[] = {
     STATUS_KEY_NORMAL,    ANIM_Paragoomba_Hyper_RWingStill,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 EvtScript N(8021C644) = {
@@ -840,7 +840,7 @@ s32 N(IdleAnimations_8021DF7C)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Goomba_Hyper_Still,
     STATUS_KEY_DIZZY,     ANIM_Goomba_Hyper_Dizzy,
     STATUS_KEY_FEAR,      ANIM_Goomba_Hyper_Dizzy,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 EvtScript N(8021DFC8) = {
@@ -1101,7 +1101,7 @@ s32 N(IdleAnimations_8021F05C)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Goomba_Hyper_Still,
     STATUS_KEY_DIZZY,     ANIM_Goomba_Hyper_Dizzy,
     STATUS_KEY_FEAR,      ANIM_Goomba_Hyper_Dizzy,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_8021F0A8)[] = {
@@ -1114,7 +1114,7 @@ s32 N(IdleAnimations_8021F0A8)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Goomba_Hyper_Still,
     STATUS_KEY_DIZZY,     ANIM_Goomba_Hyper_Dizzy,
     STATUS_KEY_FEAR,      ANIM_Goomba_Hyper_Dizzy,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 EvtScript N(8021F0F4) = {

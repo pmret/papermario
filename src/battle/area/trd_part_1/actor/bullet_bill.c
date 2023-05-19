@@ -33,7 +33,7 @@ s32 N(StatusTable_80218F6C)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 extern s32 N(IdleAnimations_80219064)[];
@@ -82,7 +82,7 @@ s32 N(IdleAnimations_80219064)[] = {
     STATUS_KEY_STONE,     ANIM_BulletBill_Anim00,
     STATUS_KEY_STOP,      ANIM_BulletBill_Anim00,
     STATUS_KEY_PARALYZE,  ANIM_BulletBill_Anim00,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 extern EvtScript N(takeTurn_802197C0);

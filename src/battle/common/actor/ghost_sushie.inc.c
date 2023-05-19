@@ -15,7 +15,7 @@ s32 N(sushie_idleAnimations)[] = {
     STATUS_KEY_PARALYZE,  ANIM_BattleSushie_Still,
     STATUS_KEY_DIZZY,     ANIM_BattleSushie_Injured,
     STATUS_KEY_FEAR,      ANIM_BattleSushie_Injured,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(sushie_defenseTable)[] = {
@@ -45,7 +45,7 @@ s32 N(sushie_statusTable)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,          -1,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(sushie_parts)[] = {

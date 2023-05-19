@@ -142,7 +142,7 @@ s32 N(IdleAnimations)[] = {
     STATUS_KEY_PARALYZE,  ANIM_LavaPiranha_Anim00,
     STATUS_KEY_PARALYZE,  ANIM_LavaPiranha_Anim00,
     STATUS_KEY_DIZZY,     ANIM_LavaPiranha_Anim0A,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_fiery)[] = {
@@ -155,13 +155,13 @@ s32 N(IdleAnimations_fiery)[] = {
     STATUS_KEY_PARALYZE,  ANIM_LavaPiranha_Anim00,
     STATUS_KEY_PARALYZE,  ANIM_LavaPiranha_Anim00,
     STATUS_KEY_DIZZY,     ANIM_LavaPiranha_Anim0C,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_wet)[] = {
     STATUS_KEY_NORMAL,    ANIM_LavaPiranha_Anim10,
     STATUS_KEY_STOP,      ANIM_LavaPiranha_Anim00,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable)[] = {
@@ -213,7 +213,7 @@ s32 N(StatusTable)[] = {
     STATUS_TURN_MOD_PARALYZE,      -1,
     STATUS_TURN_MOD_SHRINK,        -1,
     STATUS_TURN_MOD_STOP,          -2,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(parts)[] = {

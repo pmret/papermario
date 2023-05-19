@@ -46,7 +46,7 @@ s32 N(StatusTable)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(parts)[] = {
@@ -97,7 +97,7 @@ s32 N(IdleAnimations_8021C9D0)[] = {
     STATUS_KEY_PARALYZE,  ANIM_SpikeTop_Anim00,
     STATUS_KEY_DIZZY,     ANIM_SpikeTop_Anim1E,
     STATUS_KEY_FEAR,      ANIM_SpikeTop_Anim1E,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations)[] = {
@@ -110,7 +110,7 @@ s32 N(IdleAnimations)[] = {
     STATUS_KEY_PARALYZE,  ANIM_SpikeTop_Anim01,
     STATUS_KEY_DIZZY,     ANIM_SpikeTop_Anim1F,
     STATUS_KEY_FEAR,      ANIM_SpikeTop_Anim1F,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_8021CA68)[] = {
@@ -122,7 +122,7 @@ s32 N(IdleAnimations_8021CA68)[] = {
     STATUS_KEY_STATIC,    ANIM_SpikeTop_Anim05,
     STATUS_KEY_DIZZY,     ANIM_SpikeTop_Anim20,
     STATUS_KEY_FEAR,      ANIM_SpikeTop_Anim20,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 #include "common/battle/SetAbsoluteStatusOffsets.inc.c"

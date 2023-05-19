@@ -1294,7 +1294,7 @@ void btl_state_update_9(void) {
                     actor->flags |= ACTOR_FLAG_4000000 | ACTOR_FLAG_8000000;
                     actor->flags &= ~ACTOR_FLAG_10000;
 
-                    if (actor->debuff != STATUS_TABLE_END) {
+                    if (actor->debuff != 0) {
                         if (actor->debuff == STATUS_KEY_FEAR ||
                             actor->debuff == STATUS_KEY_DIZZY ||
                             actor->debuff == STATUS_KEY_PARALYZE ||

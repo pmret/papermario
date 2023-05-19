@@ -50,7 +50,7 @@ s32 N(StatusTable)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(ActorParts)[] = {
@@ -101,7 +101,7 @@ s32 N(IdleAnimations_80220C60)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Cleft_Hyper_Anim00,
     STATUS_KEY_DIZZY,     ANIM_Cleft_Hyper_Anim0E,
     STATUS_KEY_FEAR,      ANIM_Cleft_Hyper_Anim0E,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 EvtScript N(EVS_Init) = {
@@ -359,7 +359,7 @@ s32 N(IdleAnimations_80221CD4)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Cleft_Hyper_Anim00,
     STATUS_KEY_DIZZY,     ANIM_Cleft_Hyper_Anim0E,
     STATUS_KEY_FEAR,      ANIM_Cleft_Hyper_Anim0E,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_80221D20)[] = {
@@ -372,7 +372,7 @@ s32 N(IdleAnimations_80221D20)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Cleft_Hyper_Anim01,
     STATUS_KEY_DIZZY,     ANIM_Cleft_Hyper_Anim0F,
     STATUS_KEY_FEAR,      ANIM_Cleft_Hyper_Anim0F,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 EvtScript N(80221D6C) = {

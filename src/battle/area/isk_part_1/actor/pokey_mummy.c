@@ -46,7 +46,7 @@ s32 N(StatusTable_80218C1C)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(PartsTable_80218CC8)[] = {
@@ -155,7 +155,7 @@ s32 N(IdleAnimations_80218DC8)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Pokey_Mummy_Anim00,
     STATUS_KEY_DIZZY,     ANIM_Pokey_Mummy_Anim21,
     STATUS_KEY_FEAR,      ANIM_Pokey_Mummy_Anim21,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_80218E04)[] = {
@@ -166,7 +166,7 @@ s32 N(IdleAnimations_80218E04)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Pokey_Mummy_Anim01,
     STATUS_KEY_DIZZY,     ANIM_Pokey_Mummy_Anim22,
     STATUS_KEY_FEAR,      ANIM_Pokey_Mummy_Anim22,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_80218E40)[] = {
@@ -177,7 +177,7 @@ s32 N(IdleAnimations_80218E40)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Pokey_Mummy_Anim02,
     STATUS_KEY_DIZZY,     ANIM_Pokey_Mummy_Anim23,
     STATUS_KEY_FEAR,      ANIM_Pokey_Mummy_Anim23,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_80218E7C)[] = {
@@ -188,12 +188,12 @@ s32 N(IdleAnimations_80218E7C)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Pokey_Mummy_Anim03,
     STATUS_KEY_DIZZY,     ANIM_Pokey_Mummy_Anim24,
     STATUS_KEY_FEAR,      ANIM_Pokey_Mummy_Anim24,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_80218EB8)[] = {
     STATUS_KEY_NORMAL,    ANIM_Pokey_Mummy_Anim16,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 #include "common/battle/SetAbsoluteStatusOffsets.inc.c"

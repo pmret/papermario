@@ -28,7 +28,7 @@ s32 N(BasicAnims)[] = {
     STATUS_KEY_STOP,      ANIM_StoneChomp_Still,
     STATUS_KEY_STATIC,    ANIM_StoneChomp_Idle,
     STATUS_KEY_DIZZY,     ANIM_StoneChomp_Dizzy,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(QuickBiteAnims)[] = {
@@ -39,7 +39,7 @@ s32 N(QuickBiteAnims)[] = {
     STATUS_KEY_SLEEP,     ANIM_StoneChomp_Sleep,
     STATUS_KEY_STATIC,    ANIM_StoneChomp_QuickBite,
     STATUS_KEY_DIZZY,     ANIM_StoneChomp_Dizzy,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(BiteAnims)[] = {
@@ -50,7 +50,7 @@ s32 N(BiteAnims)[] = {
     STATUS_KEY_SLEEP,     ANIM_StoneChomp_Sleep,
     STATUS_KEY_STATIC,    ANIM_StoneChomp_Bite,
     STATUS_KEY_DIZZY,     ANIM_StoneChomp_Dizzy,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(SlowBiteAnims)[] = {
@@ -61,12 +61,12 @@ s32 N(SlowBiteAnims)[] = {
     STATUS_KEY_SLEEP,     ANIM_StoneChomp_Sleep,
     STATUS_KEY_STATIC,    ANIM_StoneChomp_SlowBite,
     STATUS_KEY_DIZZY,     ANIM_StoneChomp_Dizzy,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(ChainAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_StoneChomp_Chain,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable)[] = {
@@ -96,7 +96,7 @@ s32 N(StatusTable)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,          -1,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(PartsTable)[] = {

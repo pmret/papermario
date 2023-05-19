@@ -52,7 +52,7 @@ API_CALLABLE(N(func_802A1378_725058)) {
     Actor* actor = get_actor(actorId);
     s32 actorClass = actor->actorID & ACTOR_CLASS_MASK;
 
-    if (actor->debuff != STATUS_TABLE_END) {
+    if (actor->debuff != 0) {
         actor->debuffDuration = 0;
         actor->debuff = 0;
         remove_status_debuff(actor->hudElementDataIndex);

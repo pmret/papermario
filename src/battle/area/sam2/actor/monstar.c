@@ -46,7 +46,7 @@ s32 N(StatusTable)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 extern s32 N(IdleAnimations)[];
@@ -112,12 +112,12 @@ s32 N(IdleAnimations)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Monstar_Still,
     STATUS_KEY_DIZZY,     ANIM_Monstar_Idle1,
     STATUS_KEY_DIZZY,     ANIM_Monstar_Idle1,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations2)[] = {
     STATUS_KEY_NORMAL,    ANIM_Monstar_GatherStrength1,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 EvtScript N(init) = {

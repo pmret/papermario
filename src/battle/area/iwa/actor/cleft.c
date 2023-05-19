@@ -47,7 +47,7 @@ s32 N(StatusTable_80218740)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(PartsTable_802187EC)[] = {
@@ -98,7 +98,7 @@ s32 N(IdleAnimations_80218838)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Cleft_Anim00,
     STATUS_KEY_DIZZY,     ANIM_Cleft_Anim0E,
     STATUS_KEY_FEAR,      ANIM_Cleft_Anim0E,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_80218884)[] = {
@@ -111,7 +111,7 @@ s32 N(IdleAnimations_80218884)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Cleft_Anim01,
     STATUS_KEY_DIZZY,     ANIM_Cleft_Anim0F,
     STATUS_KEY_FEAR,      ANIM_Cleft_Anim0F,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 #include "common/SetSpinSmashable.inc.c"

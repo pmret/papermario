@@ -26,7 +26,7 @@ s32 N(IdleAnimations_802294C0)[] = {
     STATUS_KEY_PARALYZE,  ANIM_SkyGuy_Anim00,
     STATUS_KEY_DIZZY,     ANIM_SkyGuy_Anim05,
     STATUS_KEY_FEAR,      ANIM_SkyGuy_Anim05,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_8022950C)[] = {
@@ -39,7 +39,7 @@ s32 N(IdleAnimations_8022950C)[] = {
     STATUS_KEY_PARALYZE,  ANIM_SkyGuy_Anim0D,
     STATUS_KEY_DIZZY,     ANIM_SkyGuy_Anim10,
     STATUS_KEY_FEAR,      ANIM_SkyGuy_Anim10,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_80229558)[] = {
@@ -52,7 +52,7 @@ s32 N(IdleAnimations_80229558)[] = {
     STATUS_KEY_PARALYZE,  ANIM_SkyGuy_Anim0C,
     STATUS_KEY_DIZZY,     ANIM_SkyGuy_Anim0F,
     STATUS_KEY_FEAR,      ANIM_SkyGuy_Anim0F,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_802295A4)[] = {
@@ -65,12 +65,12 @@ s32 N(IdleAnimations_802295A4)[] = {
     STATUS_KEY_PARALYZE,  ANIM_SkyGuy_Anim0E,
     STATUS_KEY_DIZZY,     ANIM_SkyGuy_Anim11,
     STATUS_KEY_FEAR,      ANIM_SkyGuy_Anim11,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_802295F0)[] = {
     STATUS_KEY_NORMAL,    ANIM_SkyGuy_Anim0B,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable_802295FC)[] = {
@@ -107,7 +107,7 @@ s32 N(StatusTable_80229624)[] = {
     STATUS_TURN_MOD_PARALYZE,       1,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(StatusTable_802296D0)[] = {
@@ -132,7 +132,7 @@ s32 N(StatusTable_802296D0)[] = {
     STATUS_TURN_MOD_PARALYZE,       1,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 enum PartIDs {
@@ -609,7 +609,7 @@ s32 N(IdleAnimations_8022B104)[] = {
     STATUS_KEY_PARALYZE,  ANIM_ShyGuy_Red_Anim00,
     STATUS_KEY_DIZZY,     ANIM_ShyGuy_Red_Anim13,
     STATUS_KEY_FEAR,      ANIM_ShyGuy_Red_Anim13,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 EvtScript N(8022B150) = {

@@ -21,7 +21,7 @@ s32 N(IdleAnimations_80227400)[] = {
     STATUS_KEY_PARALYZE,  ANIM_SpyGuy_Anim01,
     STATUS_KEY_DIZZY,     ANIM_SpyGuy_Anim12,
     STATUS_KEY_FEAR,      ANIM_SpyGuy_Anim12,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_8022744C)[] = {
@@ -34,12 +34,12 @@ s32 N(IdleAnimations_8022744C)[] = {
     STATUS_KEY_PARALYZE,  ANIM_SpyGuy_Anim00,
     STATUS_KEY_DIZZY,     ANIM_SpyGuy_Anim12,
     STATUS_KEY_FEAR,      ANIM_SpyGuy_Anim12,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_80227498)[] = {
     STATUS_KEY_NORMAL,    ANIM_SpyGuy_Anim10,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable_802274A4)[] = {
@@ -70,7 +70,7 @@ s32 N(StatusTable_802274B8)[] = {
     STATUS_TURN_MOD_PARALYZE,       1,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 enum PartIDs {

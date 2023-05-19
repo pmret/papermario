@@ -41,7 +41,7 @@ s32 N(StatusTable)[] = {
     STATUS_TURN_MOD_PARALYZE,      -1,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,          -2,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(parts)[] = {
@@ -87,7 +87,7 @@ s32 N(IdleAnimations)[] = {
     STATUS_KEY_STONE,     ANIM_BulletBill_Gold_Anim00,
     STATUS_KEY_STOP,      ANIM_BulletBill_Gold_Anim00,
     STATUS_KEY_PARALYZE,  ANIM_BulletBill_Gold_Anim00,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 EvtScript N(init) = {

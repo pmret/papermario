@@ -51,19 +51,19 @@ enum {
 s32 N(IdleAnimations)[] = {
     STATUS_KEY_NORMAL,    ANIM_LavaBud_Anim03,
     STATUS_KEY_STOP,      ANIM_LavaBud_Anim02,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_fiery)[] = {
     STATUS_KEY_NORMAL,    ANIM_LavaBud_Anim04,
     STATUS_KEY_STOP,      ANIM_LavaBud_Anim02,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_wet)[] = {
     STATUS_KEY_NORMAL,    ANIM_LavaBud_Anim0F,
     STATUS_KEY_STOP,      ANIM_LavaBud_Anim0F,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable)[] = {
@@ -115,7 +115,7 @@ s32 N(StatusTable)[] = {
     STATUS_TURN_MOD_PARALYZE,      -1,
     STATUS_TURN_MOD_SHRINK,        -1,
     STATUS_TURN_MOD_STOP,          -2,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(parts)[] = {

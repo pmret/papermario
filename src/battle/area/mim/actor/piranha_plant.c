@@ -21,17 +21,17 @@ s32 N(IdleAnimations_8021D330)[] = {
     STATUS_KEY_PARALYZE,  ANIM_SmallPiranha_Anim00,
     STATUS_KEY_DIZZY,     ANIM_SmallPiranha_Anim01,
     STATUS_KEY_FEAR,      ANIM_SmallPiranha_Anim01,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(unk_missing_8021D37C)[] = {
     STATUS_KEY_NORMAL,    ANIM_SmallPiranha_Anim01,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(unk_missing_8021D388)[] = {
     STATUS_KEY_NORMAL,    ANIM_SmallPiranha_Anim06,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable_8021D394)[] = {
@@ -61,7 +61,7 @@ s32 N(StatusTable_8021D3A0)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(PartsTable_8021D44C)[] = {

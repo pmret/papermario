@@ -802,7 +802,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
             while num_bytes_remaining > 0:
                 if num_bytes_remaining == 4:
                     bytes.read(0x4)
-                    out += "    STATUS_TABLE_END,\n"
+                    out += "    STATUS_END,\n"
                     break
 
                 element, value = unpack(">Ii", bytes.read(0x8))
@@ -821,7 +821,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
             while num_bytes_remaining > 0:
                 if num_bytes_remaining == 4:
                     bytes.read(0x4)
-                    out += "    STATUS_TABLE_END,\n"
+                    out += "    STATUS_END,\n"
                     break
 
                 element, anim = unpack(">II", bytes.read(0x8))

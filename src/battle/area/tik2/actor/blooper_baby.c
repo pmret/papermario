@@ -97,7 +97,7 @@ s32 N(IdleAnimations)[] = {
     STATUS_KEY_PARALYZE,  ANIM_BabyBlooper_Anim00,
     STATUS_KEY_DIZZY,     ANIM_BabyBlooper_Anim07,
     STATUS_KEY_SHRINK,    ANIM_BabyBlooper_Anim00,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations2)[] = {
@@ -108,7 +108,7 @@ s32 N(IdleAnimations2)[] = {
     STATUS_KEY_PARALYZE,  ANIM_BabyBlooper_Anim00,
     STATUS_KEY_DIZZY,     ANIM_BabyBlooper_Anim07,
     STATUS_KEY_SHRINK,    ANIM_BabyBlooper_Anim01,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations3)[] = {
@@ -119,7 +119,7 @@ s32 N(IdleAnimations3)[] = {
     STATUS_KEY_PARALYZE,  ANIM_BabyBlooper_Anim00,
     STATUS_KEY_DIZZY,     ANIM_BabyBlooper_Anim07,
     STATUS_KEY_SHRINK,    ANIM_BabyBlooper_Anim00,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable)[] = {
@@ -149,7 +149,7 @@ s32 N(StatusTable)[] = {
     STATUS_TURN_MOD_PARALYZE,      -1,
     STATUS_TURN_MOD_SHRINK,        -1,
     STATUS_TURN_MOD_STOP,          -2,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(parts)[] = {

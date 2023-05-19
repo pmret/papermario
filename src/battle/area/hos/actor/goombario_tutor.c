@@ -18,7 +18,7 @@ s32 N(IdleAnimations_80219010)[] = {
     STATUS_KEY_PARALYZE,  ANIM_BattleGoombario_Still,
     STATUS_KEY_DIZZY,     ANIM_BattleGoombario_Still,
     STATUS_KEY_DIZZY,     ANIM_BattleGoombario_Still,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable_8021905C)[] = {
@@ -48,7 +48,7 @@ s32 N(StatusTable_80219068)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(PartsTable_80219114)[] = {

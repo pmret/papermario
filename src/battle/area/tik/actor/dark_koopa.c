@@ -49,7 +49,7 @@ s32 N(StatusTable)[] = {
     STATUS_TURN_MOD_PARALYZE,       1,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(parts)[] = {
@@ -100,7 +100,7 @@ s32 N(IdleAnimations)[] = {
     STATUS_KEY_PARALYZE,  ANIM_KoopaTroopa_Dark_Still,
     STATUS_KEY_DIZZY,     ANIM_KoopaTroopa_Dark_Stunned,
     STATUS_KEY_FEAR,      ANIM_KoopaTroopa_Dark_Stunned,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_step)[] = {
@@ -113,7 +113,7 @@ s32 N(IdleAnimations_step)[] = {
     STATUS_KEY_PARALYZE,  ANIM_KoopaTroopa_Dark_Still,
     STATUS_KEY_DIZZY,     ANIM_KoopaTroopa_Dark_Stunned,
     STATUS_KEY_FEAR,      ANIM_KoopaTroopa_Dark_Stunned,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_active)[] = {
@@ -126,7 +126,7 @@ s32 N(IdleAnimations_active)[] = {
     STATUS_KEY_PARALYZE,  ANIM_KoopaTroopa_Dark_Still,
     STATUS_KEY_DIZZY,     ANIM_KoopaTroopa_Dark_Stunned,
     STATUS_KEY_FEAR,      ANIM_KoopaTroopa_Dark_Stunned,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_step_active)[] = {
@@ -139,7 +139,7 @@ s32 N(IdleAnimations_step_active)[] = {
     STATUS_KEY_PARALYZE,  ANIM_KoopaTroopa_Dark_Still,
     STATUS_KEY_DIZZY,     ANIM_KoopaTroopa_Dark_Stunned,
     STATUS_KEY_FEAR,      ANIM_KoopaTroopa_Dark_Stunned,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_flipped)[] = {
@@ -152,7 +152,7 @@ s32 N(IdleAnimations_flipped)[] = {
     STATUS_KEY_PARALYZE,  ANIM_KoopaTroopa_Dark_ToppleStill,
     STATUS_KEY_DIZZY,     ANIM_KoopaTroopa_Dark_ToppleStunned,
     STATUS_KEY_FEAR,      ANIM_KoopaTroopa_Dark_ToppleStunned,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 EvtScript N(init) = {

@@ -46,7 +46,7 @@ s32 N(StatusTable_8021EB14)[] = {
     STATUS_TURN_MOD_PARALYZE,       1,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(StatusTable_8021EBC0)[] = {
@@ -71,7 +71,7 @@ s32 N(StatusTable_8021EBC0)[] = {
     STATUS_TURN_MOD_PARALYZE,       1,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 extern s32 N(IdleAnimations_80220AA0)[];
@@ -151,7 +151,7 @@ s32 N(IdleAnimations_8021ED00)[] = {
     STATUS_KEY_PARALYZE,  ANIM_ParaTroopa_Still,
     STATUS_KEY_DIZZY,     ANIM_ParaTroopa_Stunned,
     STATUS_KEY_FEAR,      ANIM_ParaTroopa_Stunned,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_8021ED4C)[] = {
@@ -164,7 +164,7 @@ s32 N(IdleAnimations_8021ED4C)[] = {
     STATUS_KEY_PARALYZE,  ANIM_ParaTroopa_Still,
     STATUS_KEY_DIZZY,     ANIM_ParaTroopa_Stunned,
     STATUS_KEY_FEAR,      ANIM_ParaTroopa_Stunned,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_8021ED98)[] = {
@@ -177,7 +177,7 @@ s32 N(IdleAnimations_8021ED98)[] = {
     STATUS_KEY_PARALYZE,  ANIM_ParaTroopa_Still,
     STATUS_KEY_DIZZY,     ANIM_ParaTroopa_Stunned,
     STATUS_KEY_FEAR,      ANIM_ParaTroopa_Stunned,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 EvtScript N(nextTurn_8021EDE4) = {
@@ -649,7 +649,7 @@ s32 N(IdleAnimations_80220AA0)[] = {
     STATUS_KEY_PARALYZE,  ANIM_KoopaTroopa_Still,
     STATUS_KEY_DIZZY,     ANIM_KoopaTroopa_Stunned,
     STATUS_KEY_FEAR,      ANIM_KoopaTroopa_Stunned,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_80220AEC)[] = {
@@ -662,7 +662,7 @@ s32 N(IdleAnimations_80220AEC)[] = {
     STATUS_KEY_PARALYZE,  ANIM_KoopaTroopa_Still,
     STATUS_KEY_DIZZY,     ANIM_KoopaTroopa_Stunned,
     STATUS_KEY_FEAR,      ANIM_KoopaTroopa_Stunned,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_80220B38)[] = {
@@ -675,7 +675,7 @@ s32 N(IdleAnimations_80220B38)[] = {
     STATUS_KEY_PARALYZE,  ANIM_KoopaTroopa_ToppleStill,
     STATUS_KEY_DIZZY,     ANIM_KoopaTroopa_ToppleStunned,
     STATUS_KEY_FEAR,      ANIM_KoopaTroopa_ToppleStunned,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 extern EvtScript N(takeTurn_80221DAC);

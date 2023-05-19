@@ -45,7 +45,7 @@ s32 N(StatusTable_80228518)[] = {
     STATUS_TURN_MOD_PARALYZE,      -1,
     STATUS_TURN_MOD_SHRINK,        -1,
     STATUS_TURN_MOD_STOP,          -2,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(PartsTable_802285C4)[] = {
@@ -97,7 +97,7 @@ s32 N(IdleAnimations_80228610)[] = {
     STATUS_KEY_PARALYZE,  ANIM_KoopaBros_Red_Anim00,
     STATUS_KEY_DIZZY,     ANIM_KoopaBros_Red_Anim18,
     STATUS_KEY_DIZZY,     ANIM_KoopaBros_Red_Anim18,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_80228664)[] = {
@@ -108,7 +108,7 @@ s32 N(IdleAnimations_80228664)[] = {
     STATUS_KEY_STATIC,    ANIM_KoopaBros_Red_Anim01,
     STATUS_KEY_PARALYZE,  ANIM_KoopaBros_Red_Anim01,
     STATUS_KEY_PARALYZE,  ANIM_KoopaBros_Red_Anim01,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_802286A0)[] = {
@@ -119,7 +119,7 @@ s32 N(IdleAnimations_802286A0)[] = {
     STATUS_KEY_STATIC,    ANIM_KoopaBros_Red_Anim01,
     STATUS_KEY_PARALYZE,  ANIM_KoopaBros_Red_Anim01,
     STATUS_KEY_PARALYZE,  ANIM_KoopaBros_Red_Anim01,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_802286DC)[] = {
@@ -133,17 +133,17 @@ s32 N(IdleAnimations_802286DC)[] = {
     STATUS_KEY_PARALYZE,  ANIM_KoopaBros_Red_Anim17,
     STATUS_KEY_DIZZY,     ANIM_KoopaBros_Red_Anim22,
     STATUS_KEY_DIZZY,     ANIM_KoopaBros_Red_Anim22,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_80228730)[] = {
     STATUS_KEY_NORMAL,    ANIM_KoopaBros_Red_Anim0A,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_8022873C)[] = {
     STATUS_KEY_NORMAL,    ANIM_KoopaBros_Red_Anim0C,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 #include "common/StartRumbleWithParams.inc.c"

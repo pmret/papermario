@@ -13,12 +13,12 @@ extern EvtScript N(handleEvent);
 
 s32 N(IdleAnimations)[] = {
     STATUS_KEY_NORMAL,    ANIM_Gulpit_Anim10,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations2)[] = {
     STATUS_KEY_NORMAL,    ANIM_Gulpit_Anim12,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable)[] = {
@@ -48,7 +48,7 @@ s32 N(StatusTable)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(parts)[] = {

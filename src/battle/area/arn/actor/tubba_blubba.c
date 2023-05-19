@@ -26,7 +26,7 @@ s32 N(IdleAnimations_80225C40)[] = {
     STATUS_KEY_PARALYZE,  ANIM_BattleTubba_Anim00,
     STATUS_KEY_DIZZY,     ANIM_BattleTubba_Anim18,
     STATUS_KEY_FEAR,      ANIM_BattleTubba_Anim00,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable_80225C94)[] = {
@@ -56,7 +56,7 @@ s32 N(StatusTable_80225CA0)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(PartsTable_80225D4C)[] = {

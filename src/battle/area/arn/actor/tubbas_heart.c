@@ -29,7 +29,7 @@ s32 N(IdleAnimations_80223BC0)[] = {
     STATUS_KEY_DIZZY,     ANIM_TubbasHeart_Anim0D,
     STATUS_KEY_DIZZY,     ANIM_TubbasHeart_Anim0D,
     STATUS_KEY_FEAR,      ANIM_TubbasHeart_Anim0A,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_80223C1C)[] = {
@@ -44,7 +44,7 @@ s32 N(IdleAnimations_80223C1C)[] = {
     STATUS_KEY_DIZZY,     ANIM_TubbasHeart_Anim0D,
     STATUS_KEY_DIZZY,     ANIM_TubbasHeart_Anim0D,
     STATUS_KEY_FEAR,      ANIM_TubbasHeart_Anim0A,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable_80223C78)[] = {
@@ -74,7 +74,7 @@ s32 N(StatusTable_80223C84)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(PartsTable_80223D30)[] = {

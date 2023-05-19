@@ -15,12 +15,12 @@ s32 N(lakilester_idleAnimations)[] = {
     STATUS_KEY_PARALYZE,  ANIM_BattleLakilester_Still,
     STATUS_KEY_DIZZY,     ANIM_BattleLakilester_Injured,
     STATUS_KEY_FEAR,      ANIM_BattleLakilester_Idle,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(lakilester_idleAnimations2)[] = {
     STATUS_KEY_NORMAL,    ANIM_BattleLakilester_Spiny,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(lakilester_defenseTable)[] = {
@@ -50,7 +50,7 @@ s32 N(lakilester_statusTable)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,          -1,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(lakilester_parts)[] = {

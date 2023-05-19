@@ -39,7 +39,7 @@ s32 N(StatusTable_80219D78)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 extern s32 N(IdleAnimations_80219EBC)[];
@@ -93,7 +93,7 @@ s32 N(IdleAnimations_80219E70)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Chan_Still,
     STATUS_KEY_DIZZY,     ANIM_Chan_Dizzy,
     STATUS_KEY_FEAR,      ANIM_Chan_Dizzy,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_80219EBC)[] = {
@@ -106,7 +106,7 @@ s32 N(IdleAnimations_80219EBC)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Chan_Still,
     STATUS_KEY_DIZZY,     ANIM_Chan_Dizzy,
     STATUS_KEY_FEAR,      ANIM_Chan_Dizzy,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_80219F08)[] = {
@@ -118,7 +118,7 @@ s32 N(IdleAnimations_80219F08)[] = {
     STATUS_KEY_STATIC,    ANIM_Chan_Toppled,
     STATUS_KEY_DIZZY,     ANIM_Chan_ToppledDizzy,
     STATUS_KEY_FEAR,      ANIM_Chan_ToppledDizzy,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 #include "common/battle/SetAbsoluteStatusOffsets.inc.c"

@@ -41,7 +41,7 @@ s32 N(StatusTable_8021877C)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(PartsTable_80218828)[] = {
@@ -92,7 +92,7 @@ s32 N(IdleAnimations_80218874)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Goomba_Hyper_Still,
     STATUS_KEY_DIZZY,     ANIM_Goomba_Hyper_Dizzy,
     STATUS_KEY_FEAR,      ANIM_Goomba_Hyper_Dizzy,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 EvtScript N(init_802188C0) = {
@@ -335,7 +335,7 @@ s32 N(IdleAnimations_80219818)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Goomba_Hyper_Still,
     STATUS_KEY_DIZZY,     ANIM_Goomba_Hyper_Dizzy,
     STATUS_KEY_FEAR,      ANIM_Goomba_Hyper_Dizzy,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_80219864)[] = {
@@ -348,7 +348,7 @@ s32 N(IdleAnimations_80219864)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Goomba_Hyper_Still,
     STATUS_KEY_DIZZY,     ANIM_Goomba_Hyper_Dizzy,
     STATUS_KEY_FEAR,      ANIM_Goomba_Hyper_Dizzy,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 EvtScript N(802198B0) = {

@@ -23,17 +23,17 @@ s32 N(IdleAnimations_8021D360)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Lee_Still,
     STATUS_KEY_DIZZY,     ANIM_Lee_Dizzy,
     STATUS_KEY_DIZZY,     ANIM_Lee_Dizzy,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_8021D3AC)[] = {
     STATUS_KEY_NORMAL,    ANIM_Lee_Hurt,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(UnusedAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_Lee_Run,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable_8021D3C4)[] = {
@@ -63,7 +63,7 @@ s32 N(StatusTable_8021D3D0)[] = {
     STATUS_TURN_MOD_PARALYZE,      -1,
     STATUS_TURN_MOD_SHRINK,        -1,
     STATUS_TURN_MOD_STOP,          -1,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(PartsTable_8021D47C)[] = {
@@ -460,7 +460,7 @@ s32 N(IdleAnimations_8021E94C)[] = {
     STATUS_KEY_PARALYZE,  ANIM_BattleGoombario_Still,
     STATUS_KEY_DIZZY,     ANIM_BattleGoombario_Injured,
     STATUS_KEY_FEAR,      ANIM_BattleGoombario_Injured,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable_8021E998)[] = {
@@ -490,7 +490,7 @@ s32 N(StatusTable_8021E9A4)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,          -1,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(PartsTable_8021EA50)[] = {
@@ -1082,7 +1082,7 @@ s32 N(IdleAnimations_80220540)[] = {
     STATUS_KEY_PARALYZE,  ANIM_BattleKooper_Still,
     STATUS_KEY_DIZZY,     ANIM_BattleKooper_Injured,
     STATUS_KEY_FEAR,      ANIM_BattleKooper_Injured,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_8022058C)[] = {
@@ -1095,7 +1095,7 @@ s32 N(IdleAnimations_8022058C)[] = {
     STATUS_KEY_PARALYZE,  ANIM_BattleKooper_StillToppled,
     STATUS_KEY_DIZZY,     ANIM_BattleKooper_Toppled,
     STATUS_KEY_FEAR,      ANIM_BattleKooper_Toppled,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable_802205D8)[] = {
@@ -1130,7 +1130,7 @@ s32 N(StatusTable_802205F0)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,          -1,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(PartsTable_8022069C)[] = {
@@ -1611,7 +1611,7 @@ s32 N(IdleAnimations_80222290)[] = {
     STATUS_KEY_PARALYZE,  ANIM_BattleBombette_Still,
     STATUS_KEY_DIZZY,     ANIM_BattleBombette_Injured,
     STATUS_KEY_FEAR,      ANIM_BattleBombette_Injured,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable_802222DC)[] = {
@@ -1641,7 +1641,7 @@ s32 N(StatusTable_802222E8)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,          -1,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(PartsTable_80222394)[] = {
@@ -1965,7 +1965,7 @@ s32 N(IdleAnimations_80223388)[] = {
     STATUS_KEY_PARALYZE,  ANIM_BattleParakarry_Still,
     STATUS_KEY_DIZZY,     ANIM_BattleParakarry_Idle,
     STATUS_KEY_FEAR,      ANIM_BattleParakarry_Idle,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable_802233D4)[] = {
@@ -1995,7 +1995,7 @@ s32 N(StatusTable_802233E0)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,          -1,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(PartsTable_8022348C)[] = {
@@ -2327,7 +2327,7 @@ s32 N(IdleAnimations_80224410)[] = {
     STATUS_KEY_PARALYZE,  ANIM_BattleBow_Still,
     STATUS_KEY_DIZZY,     ANIM_BattleBow_Injured,
     STATUS_KEY_FEAR,      ANIM_BattleBow_Injured,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable_8022445C)[] = {
@@ -2357,7 +2357,7 @@ s32 N(StatusTable_80224468)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,          -1,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(PartsTable_80224514)[] = {
@@ -2778,7 +2778,7 @@ s32 N(IdleAnimations_80225974)[] = {
     STATUS_KEY_PARALYZE,  ANIM_BattleWatt_Still,
     STATUS_KEY_DIZZY,     ANIM_BattleWatt_Injured,
     STATUS_KEY_FEAR,      ANIM_BattleWatt_Injured,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable_802259C0)[] = {
@@ -2809,7 +2809,7 @@ s32 N(StatusTable_802259D4)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,          -1,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(PartsTable_80225A80)[] = {
@@ -3257,7 +3257,7 @@ s32 N(IdleAnimations_8022697C)[] = {
     STATUS_KEY_PARALYZE,  ANIM_BattleSushie_Still,
     STATUS_KEY_DIZZY,     ANIM_BattleSushie_Injured,
     STATUS_KEY_FEAR,      ANIM_BattleSushie_Injured,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable_802269C8)[] = {
@@ -3287,7 +3287,7 @@ s32 N(StatusTable_802269D4)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,          -1,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(PartsTable_80226A80)[] = {
@@ -3731,12 +3731,12 @@ s32 N(IdleAnimations_8022840C)[] = {
     STATUS_KEY_PARALYZE,  ANIM_BattleLakilester_Still,
     STATUS_KEY_DIZZY,     ANIM_BattleLakilester_Injured,
     STATUS_KEY_FEAR,      ANIM_BattleLakilester_Idle,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_80228458)[] = {
     STATUS_KEY_NORMAL,    ANIM_BattleLakilester_Spiny,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable_80228464)[] = {
@@ -3766,7 +3766,7 @@ s32 N(StatusTable_80228470)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,          -1,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(PartsTable_8022851C)[] = {

@@ -22,19 +22,19 @@ s32 N(IdleAnimations_80227968)[] = {
     STATUS_KEY_PARALYZE,  ANIM_KentCKoopa_Anim00,
     STATUS_KEY_DIZZY,     ANIM_KentCKoopa_Anim14,
     STATUS_KEY_FEAR,      ANIM_KentCKoopa_Anim00,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_802279B4)[] = {
     STATUS_KEY_NORMAL,    ANIM_KentCKoopa_Anim1A,
     STATUS_KEY_STOP,      ANIM_KentCKoopa_Anim19,
     STATUS_KEY_PARALYZE,  ANIM_KentCKoopa_Anim19,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_802279D0)[] = {
     STATUS_KEY_NORMAL,    ANIM_Coin_Rotate,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable_802279DC)[] = {
@@ -75,7 +75,7 @@ s32 N(StatusTable_80227A08)[] = {
     STATUS_TURN_MOD_PARALYZE,      -1,
     STATUS_TURN_MOD_SHRINK,        -1,
     STATUS_TURN_MOD_STOP,          -2,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(PartsTable_80227AB4)[] = {

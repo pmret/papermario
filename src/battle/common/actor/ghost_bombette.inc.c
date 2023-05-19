@@ -15,7 +15,7 @@ s32 N(bombette_idleAnimations)[] = {
     STATUS_KEY_PARALYZE,  ANIM_BattleBombette_Still,
     STATUS_KEY_DIZZY,     ANIM_BattleBombette_Injured,
     STATUS_KEY_FEAR,      ANIM_BattleBombette_Injured,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(bombette_defenseTable)[] = {
@@ -45,7 +45,7 @@ s32 N(bombette_statusTable)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,          -1,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(bombette_parts)[] = {

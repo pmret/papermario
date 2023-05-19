@@ -76,7 +76,7 @@ s32 N(TutankoopaAnims)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Tutankoopa_Still,
     STATUS_KEY_PARALYZE,  ANIM_Tutankoopa_Still,
     STATUS_KEY_DIZZY,     ANIM_Tutankoopa_Dizzy,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(TutankoopaFallenAnims)[] = {
@@ -89,22 +89,22 @@ s32 N(TutankoopaFallenAnims)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Tutankoopa_Dizzy,
     STATUS_KEY_PARALYZE,  ANIM_Tutankoopa_Dizzy,
     STATUS_KEY_DIZZY,     ANIM_Tutankoopa_Dizzy,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(BeetleShellAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_BuzzyBeetle_Anim06,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(RockAnimsA)[] = {
     STATUS_KEY_NORMAL,    ANIM_Tutankoopa_RockStill,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(RockAnimsB)[] = {
     STATUS_KEY_NORMAL,    ANIM_Tutankoopa_RockStill,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(DefenseTable)[] = {
@@ -134,7 +134,7 @@ s32 N(StatusTable)[] = {
     STATUS_TURN_MOD_PARALYZE,      -1,
     STATUS_TURN_MOD_SHRINK,        -1,
     STATUS_TURN_MOD_STOP,          -2,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(PartsTable)[] = {

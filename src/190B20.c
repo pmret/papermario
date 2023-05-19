@@ -2032,7 +2032,7 @@ s32 lookup_defense(s32* defenseTable, s32 elementKey) {
 s32 lookup_status_chance(s32* statusTable, s32 statusKey) {
     s32 defaultChance = 0;
 
-    while (statusTable[DICTIONARY_KEY] != STATUS_TABLE_END) {
+    while (statusTable[DICTIONARY_KEY] != STATUS_END) {
         if (statusTable[DICTIONARY_KEY] == STATUS_KEY_DEFAULT) {
             defaultChance = statusTable[DICTIONARY_VALUE];
         }
@@ -2178,7 +2178,7 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                 create_status_transparent(target->hudElementDataIndex, STATUS_KEY_TRANSPARENT);
             }
             return TRUE;
-        case STATUS_TABLE_END:
+        case 0:
         case STATUS_KEY_NORMAL:
         case STATUS_KEY_DEFAULT:
         default:

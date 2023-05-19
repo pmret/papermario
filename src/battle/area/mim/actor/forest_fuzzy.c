@@ -40,7 +40,7 @@ s32 N(StatusTable_802183CC)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 ActorPartBlueprint N(PartsTable_80218478)[] = {
@@ -91,7 +91,7 @@ s32 N(IdleAnimations_802184C4)[] = {
     STATUS_KEY_PARALYZE,  ANIM_Fuzzy_Forest_Still,
     STATUS_KEY_DIZZY,     ANIM_Fuzzy_Forest_Stunned,
     STATUS_KEY_FEAR,      ANIM_Fuzzy_Forest_Stunned,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 EvtScript N(init_80218510) = {

@@ -32,7 +32,7 @@ s32 N(StatusTable_8021EE0C)[] = {
     STATUS_TURN_MOD_PARALYZE,       0,
     STATUS_TURN_MOD_SHRINK,         0,
     STATUS_TURN_MOD_STOP,           0,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 extern s32 N(IdleAnimations_8021EF04)[];
@@ -89,7 +89,7 @@ s32 N(IdleAnimations_8021EF04)[] = {
     STATUS_KEY_PARALYZE,  ANIM_GoombaBros_Red_Still,
     STATUS_KEY_DIZZY,     ANIM_GoombaBros_Red_Dizzy,
     STATUS_KEY_FEAR,      ANIM_GoombaBros_Red_Dizzy,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 s32 N(IdleAnimations_8021EF50)[] = {
@@ -102,7 +102,7 @@ s32 N(IdleAnimations_8021EF50)[] = {
     STATUS_KEY_PARALYZE,  ANIM_GoombaBros_Red_Still,
     STATUS_KEY_DIZZY,     ANIM_GoombaBros_Red_Dizzy,
     STATUS_KEY_FEAR,      ANIM_GoombaBros_Red_Dizzy,
-    STATUS_TABLE_END,
+    STATUS_END,
 };
 
 EvtScript N(init_8021EF9C) = {
