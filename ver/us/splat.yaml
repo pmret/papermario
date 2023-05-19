@@ -7229,10 +7229,10 @@ segments:
     subalign: 4
     subsegments:
     - [0x439A90, c, area]
-    - [0x439A90, c, actor/blue_goomba]
-    - [0x439D10, c, actor/red_goomba]
-    - [0x439F90, c, actor/blue_goomba2]
-    - [0x43A210, c, actor/red_goomba2]
+    - [0x439A90, c, actor/blue_goomba_1]
+    - [0x439D10, c, actor/red_goomba_1]
+    - [0x439F90, c, actor/blue_goomba_2]
+    - [0x43A210, c, actor/red_goomba_2]
     - [0x43A4C0, c, actor/goomba_king]
     - [0x43A5A0, c, actor/goomnut_tree]
     - [0x43A7E0, c, stage/kmr_02]

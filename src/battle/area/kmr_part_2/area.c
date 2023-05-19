@@ -4,8 +4,8 @@
 
 #define NAMESPACE b_area_kmr_part_2
 
-extern ActorBlueprint N(blue_goomba);
-extern ActorBlueprint N(red_goomba);
+extern ActorBlueprint N(blue_goomba_1);
+extern ActorBlueprint N(red_goomba_1);
 extern ActorBlueprint N(goomba_king);
 extern ActorBlueprint N(red_goomba_2);
 extern ActorBlueprint N(blue_goomba_2);
@@ -21,8 +21,8 @@ Vec3i N(pos00) = { 14, 0, -10 };
 Vec3i N(pos01) = { 54, 0,  32 };
 
 Formation N(Formation_00) = {
-    ACTOR_BY_POS(N(blue_goomba), N(pos00), 10),
-    ACTOR_BY_POS(N(red_goomba),  N(pos01), 10),
+    ACTOR_BY_POS(N(blue_goomba_1), N(pos00), 10),
+    ACTOR_BY_POS(N(red_goomba_1),  N(pos01), 10),
 };
 
 Vec3i N(pos02) = {  10, 0,  10 };

@@ -3,20 +3,20 @@
 #include "script_api/battle.h"
 #include "sprite/npc/GoombaBros.h"
 
-#define NAMESPACE b_area_kmr_part_2_red_goomba
+#define NAMESPACE b_area_kmr_part_2_blue_goomba_1
 
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
-    PRT_ZERO            = 0,
-    PRT_BLUE_MAIN       = 1, // main part for blue goomba
+    PRT_ZER0            = 0,
+    PRT_RED_MAIN        = 1, // main part for red goomba
 };
 
-s32 N(DefenseTable_8021B6C0)[] = {
+s32 N(DefenseTable_802198B0)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
-s32 N(StatusTable_8021B6CC)[] = {
+s32 N(StatusTable_802198BC)[] = {
     STATUS_KEY_NORMAL,              0,
     STATUS_KEY_DEFAULT,             0,
     STATUS_KEY_SLEEP,             100,
@@ -41,13 +41,13 @@ s32 N(StatusTable_8021B6CC)[] = {
     STATUS_END,
 };
 
-extern s32 N(IdleAnimations_8021B7C4)[];
-extern EvtScript N(idle_8021B8A8);
-extern EvtScript N(handleEvent_8021BB84);
-extern EvtScript N(takeTurn_8021C3B0);
-extern EvtScript N(init_8021D078);
-extern EvtScript N(doDeath_8021D0C4);
-
+extern s32 N(IdleAnimations_802199B4)[];
+extern EvtScript N(init_8021B268);
+extern EvtScript N(doDeath_8021B388);
+extern EvtScript N(takeTurn_8021A5A0);
+extern EvtScript N(idle_80219A98);
+extern EvtScript N(handleEvent_80219D74);
+extern EvtScript N(takeTurn_8021B2C8);
 
 ActorPartBlueprint N(ActorParts)[] = {
     {
@@ -56,9 +56,9 @@ ActorPartBlueprint N(ActorParts)[] = {
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations_8021B7C4),
-        .defenseTable = N(DefenseTable_8021B6C0),
-        .eventFlags = 0,
+        .idleAnimations = N(IdleAnimations_802199B4),
+        .defenseTable = N(DefenseTable_802198B0),
+        .eventFlags = ACTOR_EVENT_FLAG_0,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -3 },
     },
@@ -66,13 +66,13 @@ ActorPartBlueprint N(ActorParts)[] = {
 
 ActorBlueprint NAMESPACE = {
     .flags = 0,
-    .type = ACTOR_TYPE_RED_GOOMBA_BOSS,
+    .type = ACTOR_TYPE_BLUE_GOOMBA_BOSS,
     .level = 20,
-    .maxHP = 7,
+    .maxHP = 6,
     .partCount = ARRAY_COUNT( N(ActorParts)),
     .partsData = N(ActorParts),
-    .initScript = &N(init_8021D078),
-    .statusTable = N(StatusTable_8021B6CC),
+    .initScript = &N(init_8021B268),
+    .statusTable = N(StatusTable_802198BC),
     .escapeChance = 0,
     .airLiftChance = 0,
     .hurricaneChance = 0,
@@ -87,41 +87,41 @@ ActorBlueprint NAMESPACE = {
     .statusTextOffset = { 8, 25 },
 };
 
-s32 N(IdleAnimations_8021B7C4)[] = {
-    STATUS_KEY_NORMAL,    ANIM_GoombaBros_Red_Idle,
-    STATUS_KEY_STONE,     ANIM_GoombaBros_Red_Still,
-    STATUS_KEY_SLEEP,     ANIM_GoombaBros_Red_Sleep,
-    STATUS_KEY_POISON,    ANIM_GoombaBros_Red_Idle,
-    STATUS_KEY_STOP,      ANIM_GoombaBros_Red_Still,
-    STATUS_KEY_STATIC,    ANIM_GoombaBros_Red_Idle,
-    STATUS_KEY_PARALYZE,  ANIM_GoombaBros_Red_Still,
-    STATUS_KEY_DIZZY,     ANIM_GoombaBros_Red_Dizzy,
-    STATUS_KEY_FEAR,      ANIM_GoombaBros_Red_Dizzy,
+s32 N(IdleAnimations_802199B4)[] = {
+    STATUS_KEY_NORMAL,    ANIM_GoombaBros_Blue_Idle,
+    STATUS_KEY_STONE,     ANIM_GoombaBros_Blue_Still,
+    STATUS_KEY_SLEEP,     ANIM_GoombaBros_Blue_Sleep,
+    STATUS_KEY_POISON,    ANIM_GoombaBros_Blue_Idle,
+    STATUS_KEY_STOP,      ANIM_GoombaBros_Blue_Still,
+    STATUS_KEY_STATIC,    ANIM_GoombaBros_Blue_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_GoombaBros_Blue_Still,
+    STATUS_KEY_DIZZY,     ANIM_GoombaBros_Blue_Dizzy,
+    STATUS_KEY_FEAR,      ANIM_GoombaBros_Blue_Dizzy,
     STATUS_END,
 };
 
-s32 N(IdleAnimations_8021B810)[] = {
-    STATUS_KEY_NORMAL,    ANIM_GoombaBros_Red_Run,
-    STATUS_KEY_STONE,     ANIM_GoombaBros_Red_Still,
-    STATUS_KEY_SLEEP,     ANIM_GoombaBros_Red_Sleep,
-    STATUS_KEY_POISON,    ANIM_GoombaBros_Red_Idle,
-    STATUS_KEY_STOP,      ANIM_GoombaBros_Red_Still,
-    STATUS_KEY_STATIC,    ANIM_GoombaBros_Red_Run,
-    STATUS_KEY_PARALYZE,  ANIM_GoombaBros_Red_Still,
-    STATUS_KEY_DIZZY,     ANIM_GoombaBros_Red_Dizzy,
-    STATUS_KEY_FEAR,      ANIM_GoombaBros_Red_Dizzy,
+s32 N(IdleAnimations_80219A00)[] = {
+    STATUS_KEY_NORMAL,    ANIM_GoombaBros_Blue_Run,
+    STATUS_KEY_STONE,     ANIM_GoombaBros_Blue_Still,
+    STATUS_KEY_SLEEP,     ANIM_GoombaBros_Blue_Sleep,
+    STATUS_KEY_POISON,    ANIM_GoombaBros_Blue_Idle,
+    STATUS_KEY_STOP,      ANIM_GoombaBros_Blue_Still,
+    STATUS_KEY_STATIC,    ANIM_GoombaBros_Blue_Run,
+    STATUS_KEY_PARALYZE,  ANIM_GoombaBros_Blue_Still,
+    STATUS_KEY_DIZZY,     ANIM_GoombaBros_Blue_Dizzy,
+    STATUS_KEY_FEAR,      ANIM_GoombaBros_Blue_Dizzy,
     STATUS_END,
 };
 
-EvtScript N(init_8021B85C) = {
-    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021C3B0)))
-    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_8021B8A8)))
-    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_8021BB84)))
+EvtScript N(init_80219A4C) = {
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021A5A0)))
+    EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80219A98)))
+    EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80219D74)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(idle_8021B8A8) = {
+EvtScript N(idle_80219A98) = {
     EVT_LABEL(10)
     EVT_CALL(RandInt, 80, LVar0)
     EVT_ADD(LVar0, 80)
@@ -137,10 +137,10 @@ EvtScript N(idle_8021B8A8) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 5)
     EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FLOAT(1.0))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_8021B810)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_80219A00)))
     EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(IdleRunToGoal, ACTOR_SELF, 0)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_8021B7C4)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_802199B4)))
     EVT_LOOP(20)
         EVT_LABEL(1)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar1)
@@ -153,10 +153,10 @@ EvtScript N(idle_8021B8A8) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 5)
     EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FLOAT(1.0))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_8021B810)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_80219A00)))
     EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(IdleRunToGoal, ACTOR_SELF, 0)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_8021B7C4)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_802199B4)))
     EVT_LOOP(80)
         EVT_LABEL(2)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar1)
@@ -171,7 +171,7 @@ EvtScript N(idle_8021B8A8) = {
     EVT_END
 };
 
-EvtScript N(handleEvent_8021BB84) = {
+EvtScript N(handleEvent_80219D74) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
@@ -180,81 +180,81 @@ EvtScript N(handleEvent_8021BB84) = {
         EVT_CASE_OR_EQ(9)
         EVT_CASE_OR_EQ(10)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_GoombaBros_Red_Hurt)
+            EVT_SET_CONST(LVar1, ANIM_GoombaBros_Blue_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(14)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_GoombaBros_Red_BurnHurt)
-            EVT_SET_CONST(LVar2, ANIM_GoombaBros_Red_BurnStill)
+            EVT_SET_CONST(LVar1, ANIM_GoombaBros_Blue_BurnHurt)
+            EVT_SET_CONST(LVar2, ANIM_GoombaBros_Blue_BurnStill)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
         EVT_CASE_EQ(36)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_GoombaBros_Red_BurnHurt)
-            EVT_SET_CONST(LVar2, ANIM_GoombaBros_Red_BurnStill)
+            EVT_SET_CONST(LVar1, ANIM_GoombaBros_Blue_BurnHurt)
+            EVT_SET_CONST(LVar2, ANIM_GoombaBros_Blue_BurnStill)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_GoombaBros_Red_BurnStill)
-            EVT_EXEC_WAIT(N(doDeath_8021D0C4))
+            EVT_SET_CONST(LVar1, ANIM_GoombaBros_Blue_BurnStill)
+            EVT_EXEC_WAIT(N(doDeath_8021B388))
             EVT_RETURN
         EVT_CASE_EQ(11)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_GoombaBros_Red_Hurt)
+            EVT_SET_CONST(LVar1, ANIM_GoombaBros_Blue_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
         EVT_CASE_EQ(33)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_GoombaBros_Red_Hurt)
+            EVT_SET_CONST(LVar1, ANIM_GoombaBros_Blue_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_GoombaBros_Red_Hurt)
-            EVT_EXEC_WAIT(N(doDeath_8021D0C4))
+            EVT_SET_CONST(LVar1, ANIM_GoombaBros_Blue_Hurt)
+            EVT_EXEC_WAIT(N(doDeath_8021B388))
             EVT_RETURN
         EVT_CASE_EQ(47)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_GoombaBros_Red_Hurt)
+            EVT_SET_CONST(LVar1, ANIM_GoombaBros_Blue_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_GoombaBros_Red_Hurt)
+            EVT_SET_CONST(LVar1, ANIM_GoombaBros_Blue_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
             EVT_CALL(SetAnimationRate, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(2.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Red_Dizzy)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Blue_Dizzy)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
             EVT_CALL(SetAnimationRate, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(1.0))
             EVT_WAIT(5)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Red_Idle)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Blue_Idle)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
         EVT_CASE_EQ(38)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_GoombaBros_Red_Hurt)
+            EVT_SET_CONST(LVar1, ANIM_GoombaBros_Blue_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_GoombaBros_Red_Hurt)
-            EVT_EXEC_WAIT(N(doDeath_8021D0C4))
+            EVT_SET_CONST(LVar1, ANIM_GoombaBros_Blue_Hurt)
+            EVT_EXEC_WAIT(N(doDeath_8021B388))
             EVT_RETURN
         EVT_CASE_EQ(19)
         EVT_CASE_OR_EQ(23)
         EVT_CASE_OR_EQ(25)
         EVT_CASE_OR_EQ(31)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_GoombaBros_Red_Idle)
+            EVT_SET_CONST(LVar1, ANIM_GoombaBros_Blue_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(32)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_GoombaBros_Red_Hurt)
+            EVT_SET_CONST(LVar1, ANIM_GoombaBros_Blue_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_GoombaBros_Red_Hurt)
-            EVT_EXEC_WAIT(N(doDeath_8021D0C4))
+            EVT_SET_CONST(LVar1, ANIM_GoombaBros_Blue_Hurt)
+            EVT_EXEC_WAIT(N(doDeath_8021B388))
             EVT_RETURN
         EVT_CASE_EQ(53)
             EVT_CALL(SetAnimationRate, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(2.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Red_Run)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Blue_Run)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
@@ -262,26 +262,26 @@ EvtScript N(handleEvent_8021BB84) = {
             EVT_CALL(HPBarToHome, ACTOR_SELF)
         EVT_CASE_EQ(49)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_GoombaBros_Red_Idle)
+            EVT_SET_CONST(LVar1, ANIM_GoombaBros_Blue_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_Recover)
         EVT_CASE_EQ(57)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_GoombaBros_Red_Run)
-            EVT_SET_CONST(LVar2, ANIM_GoombaBros_Red_Hurt)
+            EVT_SET_CONST(LVar1, ANIM_GoombaBros_Blue_Run)
+            EVT_SET_CONST(LVar2, ANIM_GoombaBros_Blue_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_ScareAway)
             EVT_RETURN
         EVT_CASE_EQ(58)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_GoombaBros_Red_Run)
+            EVT_SET_CONST(LVar1, ANIM_GoombaBros_Blue_Run)
             EVT_EXEC_WAIT(EVS_Enemy_AirLift)
         EVT_CASE_EQ(22)
             EVT_SET_CONST(LVar0, 0x00000001)
-            EVT_SET_CONST(LVar1, ANIM_GoombaBros_Red_Hurt)
+            EVT_SET_CONST(LVar1, ANIM_GoombaBros_Blue_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_BlowAway)
             EVT_RETURN
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Red_Idle)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Blue_Idle)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
@@ -290,25 +290,25 @@ EvtScript N(handleEvent_8021BB84) = {
 
 #include "common/CalculateArcsinDeg.inc.c"
 
-EvtScript N(takeTurn_8021C3B0) = {
+EvtScript N(takeTurn_8021A5A0) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Red_Run)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Blue_Run)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 50, 0, 0)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Red_Idle)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Blue_Idle)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -1, 0)
     EVT_WAIT(1)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -2, 0)
     EVT_WAIT(5)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Red_Midair)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Blue_Midair)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(6)
@@ -336,10 +336,10 @@ EvtScript N(takeTurn_8021C3B0) = {
             EVT_END_THREAD
             EVT_THREAD
                 EVT_WAIT(6)
-                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Red_Midair)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Blue_Midair)
             EVT_END_THREAD
             EVT_CALL(JumpToGoal, ACTOR_SELF, 16, FALSE, TRUE, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Red_Sleep)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Blue_Sleep)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.1), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 5, 0)
             EVT_WAIT(1)
@@ -348,14 +348,14 @@ EvtScript N(takeTurn_8021C3B0) = {
             EVT_WAIT(1)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 7, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Red_Hurt)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Blue_Hurt)
             EVT_WAIT(5)
             EVT_IF_EQ(LVarA, 5)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0x80000000, 0, 0, 0)
             EVT_END_IF
             EVT_WAIT(5)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Red_Midair)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Blue_Midair)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar0, 20)
@@ -370,10 +370,10 @@ EvtScript N(takeTurn_8021C3B0) = {
                     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, LVar0)
                     EVT_WAIT(1)
                 EVT_END_LOOP
-                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Red_Midair)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Blue_Midair)
             EVT_END_THREAD
             EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Red_Dizzy)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Blue_Dizzy)
             EVT_WAIT(5)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(YieldTurn)
@@ -386,7 +386,7 @@ EvtScript N(takeTurn_8021C3B0) = {
             EVT_CALL(SetAnimationRate, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(1.0))
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_WAIT(5)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Red_Idle)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Blue_Idle)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
@@ -412,10 +412,10 @@ EvtScript N(takeTurn_8021C3B0) = {
             EVT_END_THREAD
             EVT_THREAD
                 EVT_WAIT(6)
-                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Red_Midair)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Blue_Midair)
             EVT_END_THREAD
             EVT_CALL(JumpToGoal, ACTOR_SELF, 16, FALSE, TRUE, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Red_Midair)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Blue_Midair)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.1), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
             EVT_WAIT(1)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.3), EVT_FLOAT(0.5), EVT_FLOAT(1.0))
@@ -432,7 +432,7 @@ EvtScript N(takeTurn_8021C3B0) = {
             EVT_WAIT(1)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Red_Idle)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Blue_Idle)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar0, 40)
             EVT_SET(LVar1, 0)
@@ -445,11 +445,11 @@ EvtScript N(takeTurn_8021C3B0) = {
             EVT_ADD(LVar0, 20)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Red_Idle)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Blue_Idle)
             EVT_WAIT(3)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetAnimationRate, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(2.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Red_Run)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_GoombaBros_Blue_Run)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
@@ -462,15 +462,31 @@ EvtScript N(takeTurn_8021C3B0) = {
     EVT_END
 };
 
-EvtScript N(init_8021D078) = {
-    EVT_EXEC_WAIT(N(init_8021B85C))
+EvtScript N(init_8021B268) = {
+    EVT_EXEC_WAIT(N(init_80219A4C))
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
+    EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021B2C8)))
     EVT_RETURN
     EVT_END
 };
 
-EvtScript N(doDeath_8021D0C4) = {
+EvtScript N(takeTurn_8021B2C8) = {
+    EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
+    EVT_IF_EQ(LVar0, 0)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
+        EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
+        EVT_CALL(MoveBattleCamOver, 30)
+        EVT_WAIT(30)
+        EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
+        EVT_CALL(ActorSpeak, MSG_CH0_00BF, ACTOR_SELF, PRT_MAIN, -1, -1)
+    EVT_END_IF
+    EVT_EXEC_WAIT(N(takeTurn_8021A5A0))
+    EVT_RETURN
+    EVT_END
+};
+
+EvtScript N(doDeath_8021B388) = {
     EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_SET(LVar2, 0)
@@ -492,24 +508,24 @@ EvtScript N(doDeath_8021D0C4) = {
         EVT_ADD(LVar3, 8)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_ZERO, 1, TRUE)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_ZER0, 1, TRUE)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, 4, TRUE)
     EVT_WAIT(30)
-    EVT_CALL(ActorExists, ACTOR_ENEMY0, LVar0)
+    EVT_CALL(ActorExists, ACTOR_ENEMY1, LVar0)
     EVT_IF_EQ(LVar0, 1)
-        EVT_CALL(GetActorHP, ACTOR_ENEMY0, LVar0)
+        EVT_CALL(GetActorHP, ACTOR_ENEMY1, LVar0)
     EVT_END_IF
     EVT_IF_NE(LVar0, 0)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
-        EVT_CALL(BattleCamTargetActor, ACTOR_ENEMY0)
+        EVT_CALL(BattleCamTargetActor, ACTOR_ENEMY1)
         EVT_CALL(MoveBattleCamOver, 20)
         EVT_WAIT(20)
-        EVT_CALL(UseIdleAnimation, ACTOR_ENEMY0, FALSE)
-        EVT_CALL(EnableIdleScript, ACTOR_ENEMY0, 0)
-        EVT_CALL(SetAnimation, ACTOR_ENEMY0, PRT_BLUE_MAIN, ANIM_GoombaBros_Blue_CryTalk)
-        EVT_CALL(ActorSpeak, MSG_CH0_00C0, ACTOR_ENEMY0, PRT_BLUE_MAIN, -1, -1)
-        EVT_CALL(EnableIdleScript, ACTOR_ENEMY0, 1)
-        EVT_CALL(UseIdleAnimation, ACTOR_ENEMY0, TRUE)
+        EVT_CALL(UseIdleAnimation, ACTOR_ENEMY1, FALSE)
+        EVT_CALL(EnableIdleScript, ACTOR_ENEMY1, 0)
+        EVT_CALL(SetAnimation, ACTOR_ENEMY1, PRT_RED_MAIN, ANIM_GoombaBros_Red_CryTalk)
+        EVT_CALL(ActorSpeak, MSG_CH0_00C1, ACTOR_ENEMY1, PRT_RED_MAIN, -1, -1)
+        EVT_CALL(EnableIdleScript, ACTOR_ENEMY1, 1)
+        EVT_CALL(UseIdleAnimation, ACTOR_ENEMY1, TRUE)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(MoveBattleCamOver, 30)
         EVT_WAIT(30)
