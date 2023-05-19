@@ -21,8 +21,8 @@ Formation N(Formation_01) = {
 };
 
 Formation N(Formation_02) = {
-    { .actor = &N(paragoomba), .home = { .index = 5 }, .priority = 10 },
-    { .actor = &N(gray_magikoopa), .home = { .index = 2 }, .priority = 9 },
+    { .actor = &N(paragoomba), .home = { .index = BTL_POS_AIR_B }, .priority = 10 },
+    { .actor = &N(gray_magikoopa), .home = { .index = BTL_POS_GROUND_C }, .priority = 9 },
 };
 
 BattleList N(Formations) = {

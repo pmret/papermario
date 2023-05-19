@@ -24,11 +24,11 @@ extern Stage N(trd_05e);
 extern Stage N(trd_05f);
 
 Formation N(Formation_00) = {
-    { .actor = &N(green_ninja_koopa), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(yellow_ninja_koopa), .home = { .index = 0 }, .priority = 9 },
-    { .actor = &N(blue_ninja_koopa), .home = { .index = 0 }, .priority = 8 },
-    { .actor = &N(red_ninja_koopa), .home = { .index = 0 }, .priority = 7 },
-    { .actor = &N(fake_bowser), .home = { .index = 3 }, .priority = 6 },
+    { .actor = &N(green_ninja_koopa), .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
+    { .actor = &N(yellow_ninja_koopa), .home = { .index = BTL_POS_GROUND_A }, .priority = 9 },
+    { .actor = &N(blue_ninja_koopa), .home = { .index = BTL_POS_GROUND_A }, .priority = 8 },
+    { .actor = &N(red_ninja_koopa), .home = { .index = BTL_POS_GROUND_A }, .priority = 7 },
+    { .actor = &N(fake_bowser), .home = { .index = BTL_POS_GROUND_D }, .priority = 6 },
 };
 
 BattleList N(Formations) = {

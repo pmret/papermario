@@ -26,71 +26,71 @@ Vec3i N(pos_swoopula)[] = {
 Formation N(Formation_01) = {
     { .actor = &N(swoopula), .home = { .vec = &N(pos_swoopula)[0] }, .priority = 10 },
     { .actor = &N(swoopula), .home = { .vec = &N(pos_swoopula)[1] }, .priority = 9 },
-    { .actor = &N(duplighost), .home = { .index = 2 }, .priority = 8 },
+    { .actor = &N(duplighost), .home = { .index = BTL_POS_GROUND_C }, .priority = 8 },
 };
 
 Formation N(Formation_02) = {
-    { .actor = &N(duplighost), .home = { .index = 1 }, .priority = 10 },
+    { .actor = &N(duplighost), .home = { .index = BTL_POS_GROUND_B }, .priority = 10 },
 };
 
 Formation N(Formation_03) = {
-    { .actor = &N(duplighost), .home = { .index = 1 }, .priority = 10 },
-    { .actor = &N(duplighost), .home = { .index = 2 }, .priority = 9 },
+    { .actor = &N(duplighost), .home = { .index = BTL_POS_GROUND_B }, .priority = 10 },
+    { .actor = &N(duplighost), .home = { .index = BTL_POS_GROUND_C }, .priority = 9 },
 };
 
 Formation N(Formation_04) = {
-    { .actor = &N(duplighost), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(duplighost), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(duplighost), .home = { .index = 2 }, .priority = 8 },
+    { .actor = &N(duplighost), .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
+    { .actor = &N(duplighost), .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
+    { .actor = &N(duplighost), .home = { .index = BTL_POS_GROUND_C }, .priority = 8 },
 };
 
 Formation N(Formation_05) = {
-    { .actor = &N(duplighost), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(duplighost), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(duplighost), .home = { .index = 2 }, .priority = 8 },
-    { .actor = &N(duplighost), .home = { .index = 3 }, .priority = 7 },
+    { .actor = &N(duplighost), .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
+    { .actor = &N(duplighost), .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
+    { .actor = &N(duplighost), .home = { .index = BTL_POS_GROUND_C }, .priority = 8 },
+    { .actor = &N(duplighost), .home = { .index = BTL_POS_GROUND_D }, .priority = 7 },
 };
 
 Formation N(Formation_06) = {
-    { .actor = &N(duplighost), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(duplighost), .home = { .index = 1 }, .priority = 9 },
+    { .actor = &N(duplighost), .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
+    { .actor = &N(duplighost), .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
     { .actor = &N(swoopula), .home = { .vec = &N(pos_swoopula)[2] }, .priority = 8 },
 };
 
 Formation N(Formation_07) = {
-    { .actor = &N(duplighost), .home = { .index = 0 }, .priority = 10 },
+    { .actor = &N(duplighost), .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
     { .actor = &N(swoopula), .home = { .vec = &N(pos_swoopula)[1] }, .priority = 9 },
-    { .actor = &N(duplighost), .home = { .index = 2 }, .priority = 8 },
+    { .actor = &N(duplighost), .home = { .index = BTL_POS_GROUND_C }, .priority = 8 },
 };
 
 Formation N(Formation_08) = {
-    { .actor = &N(duplighost), .home = { .index = 1 }, .priority = 10 },
-    { .actor = &N(red_magikoopa), .home = { .index = 2 }, .priority = 9 },
+    { .actor = &N(duplighost), .home = { .index = BTL_POS_GROUND_B }, .priority = 10 },
+    { .actor = &N(red_magikoopa), .home = { .index = BTL_POS_GROUND_C }, .priority = 9 },
 };
 
 Formation N(Formation_09) = {
-    { .actor = &N(duplighost), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(duplighost), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(red_magikoopa), .home = { .index = 2 }, .priority = 8 },
+    { .actor = &N(duplighost), .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
+    { .actor = &N(duplighost), .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
+    { .actor = &N(red_magikoopa), .home = { .index = BTL_POS_GROUND_C }, .priority = 8 },
 };
 
 Formation N(Formation_0A) = {
-    { .actor = &N(duplighost), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(white_clubba), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(duplighost), .home = { .index = 2 }, .priority = 8 },
+    { .actor = &N(duplighost), .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
+    { .actor = &N(white_clubba), .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
+    { .actor = &N(duplighost), .home = { .index = BTL_POS_GROUND_C }, .priority = 8 },
 };
 
 Formation N(Formation_0B) = {
-    { .actor = &N(duplighost), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(duplighost), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(gray_magikoopa), .home = { .index = 2 }, .priority = 8 },
-    { .actor = &N(red_magikoopa), .home = { .index = 3 }, .priority = 7 },
+    { .actor = &N(duplighost), .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
+    { .actor = &N(duplighost), .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
+    { .actor = &N(gray_magikoopa), .home = { .index = BTL_POS_GROUND_C }, .priority = 8 },
+    { .actor = &N(red_magikoopa), .home = { .index = BTL_POS_GROUND_D }, .priority = 7 },
 };
 
 Formation N(Formation_0C) = {
-    { .actor = &N(white_clubba), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(white_clubba), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(duplighost), .home = { .index = 2 }, .priority = 8 },
+    { .actor = &N(white_clubba), .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
+    { .actor = &N(white_clubba), .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
+    { .actor = &N(duplighost), .home = { .index = BTL_POS_GROUND_C }, .priority = 8 },
 };
 
 BattleList N(Formations) = {

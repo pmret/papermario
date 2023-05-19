@@ -57,6 +57,26 @@ enum BattleAreaIDs {
     BTL_AREA_OMO2_6        = 0x2E,
 };
 
+enum BattlePositions {
+    BTL_POS_GROUND_A  = 0,
+    BTL_POS_GROUND_B  = 1,
+    BTL_POS_GROUND_C  = 2,
+    BTL_POS_GROUND_D  = 3,
+    BTL_POS_AIR_A     = 4,
+    BTL_POS_AIR_B     = 5,
+    BTL_POS_AIR_C     = 6,
+    BTL_POS_AIR_D     = 7,
+    BTL_POS_HIGH_A    = 8,
+    BTL_POS_HIGH_B    = 9,
+    BTL_POS_HIGH_C    = 10,
+    BTL_POS_HIGH_D    = 11,
+    BTL_POS_TOP_A     = 12,
+    BTL_POS_TOP_B     = 13,
+    BTL_POS_TOP_C     = 14,
+    BTL_POS_TOP_D     = 15,
+    BTL_POS_CENTER    = 16,
+};
+
 typedef enum ActorType {
     ACTOR_TYPE_RED_GOOMBA                  = 0x00,
     ACTOR_TYPE_RED_PARAGOOMBA              = 0x01,
@@ -403,6 +423,9 @@ extern BattleArea gBattleAreas[0x30];
 
 #define BATTLE(formation, stage, name) { name, ARRAY_COUNT(formation), (Formation*) formation, stage }
 #define BATTLE_WITH_SCRIPT(formation, stage, script, name) { name, ARRAY_COUNT(formation), (Formation*) formation, stage, script }
+
+#define ACTOR_BY_IDX(name, idx, pp) { .actor = &name, .home = { .index = idx }, .priority = pp, }
+#define ACTOR_BY_POS(name, vec, prior)
 
 // TODO: enum for home position (0..3 are floor, 4..7 are air, etc.)
 

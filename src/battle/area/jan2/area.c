@@ -16,25 +16,25 @@ extern Stage N(jan_04);
 extern Stage N(jan_04b);
 
 Formation N(Formation_00) = {
-    { .actor = &N(putrid_piranha), .home = { .index = 1 }, .priority = 10 },
+    { .actor = &N(putrid_piranha), .home = { .index = BTL_POS_GROUND_B }, .priority = 10 },
 };
 
 Formation N(Formation_01) = {
-    { .actor = &N(putrid_piranha), .home = { .index = 1 }, .priority = 10 },
-    { .actor = &N(putrid_piranha), .home = { .index = 2 }, .priority = 9 },
+    { .actor = &N(putrid_piranha), .home = { .index = BTL_POS_GROUND_B }, .priority = 10 },
+    { .actor = &N(putrid_piranha), .home = { .index = BTL_POS_GROUND_C }, .priority = 9 },
 };
 
 Formation N(Formation_02) = {
-    { .actor = &N(putrid_piranha), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(putrid_piranha), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(putrid_piranha), .home = { .index = 2 }, .priority = 8 },
+    { .actor = &N(putrid_piranha), .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
+    { .actor = &N(putrid_piranha), .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
+    { .actor = &N(putrid_piranha), .home = { .index = BTL_POS_GROUND_C }, .priority = 8 },
 };
 
 Formation N(Formation_03) = {
-    { .actor = &N(putrid_piranha), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(putrid_piranha), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(putrid_piranha), .home = { .index = 2 }, .priority = 8 },
-    { .actor = &N(white_magikoopa), .home = { .index = 3 }, .priority = 7 },
+    { .actor = &N(putrid_piranha), .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
+    { .actor = &N(putrid_piranha), .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
+    { .actor = &N(putrid_piranha), .home = { .index = BTL_POS_GROUND_C }, .priority = 8 },
+    { .actor = &N(white_magikoopa), .home = { .index = BTL_POS_GROUND_D }, .priority = 7 },
 };
 
 BattleList N(Formations) = {

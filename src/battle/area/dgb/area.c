@@ -13,25 +13,25 @@ extern Stage N(dgb_04);
 extern Stage N(dgb_05);
 
 Formation N(Formation_00) = {
-    { .actor = &N(clubba), .home = { .index = 1 }, .priority = 10 },
+    { .actor = &N(clubba), .home = { .index = BTL_POS_GROUND_B }, .priority = 10 },
 };
 
 Formation N(Formation_01) = {
-    { .actor = &N(clubba), .home = { .index = 1 }, .priority = 10 },
-    { .actor = &N(clubba), .home = { .index = 2 }, .priority = 9 },
+    { .actor = &N(clubba), .home = { .index = BTL_POS_GROUND_B }, .priority = 10 },
+    { .actor = &N(clubba), .home = { .index = BTL_POS_GROUND_C }, .priority = 9 },
 };
 
 Formation N(Formation_02) = {
-    { .actor = &N(clubba), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(clubba), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(clubba), .home = { .index = 2 }, .priority = 8 },
+    { .actor = &N(clubba), .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
+    { .actor = &N(clubba), .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
+    { .actor = &N(clubba), .home = { .index = BTL_POS_GROUND_C }, .priority = 8 },
 };
 
 Formation N(Formation_03) = {
-    { .actor = &N(clubba), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(clubba), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(clubba), .home = { .index = 2 }, .priority = 8 },
-    { .actor = &N(clubba), .home = { .index = 3 }, .priority = 7 },
+    { .actor = &N(clubba), .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
+    { .actor = &N(clubba), .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
+    { .actor = &N(clubba), .home = { .index = BTL_POS_GROUND_C }, .priority = 8 },
+    { .actor = &N(clubba), .home = { .index = BTL_POS_GROUND_D }, .priority = 7 },
 };
 
 Vec3i N(vector3D_8021B348) = { 75, 0, 10 };

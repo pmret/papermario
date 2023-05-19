@@ -24,14 +24,14 @@ extern Stage N(kpa_13);
 extern Stage N(kpa_14);
 
 Formation N(Formation_00) = {
-    { .actor = &N(bombshell_bill), .home = { .index = 1 }, .priority = 10, },
-    { .actor = &N(bombshell_bill), .home = { .index = 2 }, .priority = 9, },
+    { .actor = &N(bombshell_bill), .home = { .index = BTL_POS_GROUND_B }, .priority = 10, },
+    { .actor = &N(bombshell_bill), .home = { .index = BTL_POS_GROUND_C }, .priority = 9, },
 };
 
 Formation N(Formation_01) = {
-    { .actor = &N(bombshell_bill), .home = { .index = 0 }, .priority = 10, },
-    { .actor = &N(bombshell_bill), .home = { .index = 1 }, .priority = 9, },
-    { .actor = &N(bombshell_bill), .home = { .index = 2 }, .priority = 8, },
+    { .actor = &N(bombshell_bill), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
+    { .actor = &N(bombshell_bill), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
+    { .actor = &N(bombshell_bill), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
 };
 
 Vec3i N(blaster_pos_1) = { 70, 0, -20 };

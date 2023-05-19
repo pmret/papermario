@@ -8,7 +8,7 @@ extern ActorBlueprint N(fuzzipede);
 extern Stage N(kgr_01);
 
 Formation N(Formation_00) = {
-    { .actor = &N(fuzzipede), .home = { .index = 2 }, .priority = 10 },
+    { .actor = &N(fuzzipede), .home = { .index = BTL_POS_GROUND_C }, .priority = 10 },
 };
 
 BattleList N(Formations) = {

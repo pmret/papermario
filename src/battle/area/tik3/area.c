@@ -13,25 +13,25 @@ extern Stage N(tik_04);
 extern Stage N(tik_05);
 
 Formation N(Formation_00) = {
-    { .actor = &N(swooper), .home = { .index = 13 }, .priority = 10, },
-    { .actor = &N(swooper), .home = { .index = 14 }, .priority = 9, },
+    { .actor = &N(swooper), .home = { .index = BTL_POS_TOP_B }, .priority = 10, },
+    { .actor = &N(swooper), .home = { .index = BTL_POS_TOP_C }, .priority = 9, },
 };
 
 Formation N(Formation_01) = {
-    { .actor = &N(swooper), .home = { .index = 12 }, .priority = 10, },
-    { .actor = &N(swooper), .home = { .index = 13 }, .priority = 9, },
-    { .actor = &N(swooper), .home = { .index = 14 }, .priority = 8, },
+    { .actor = &N(swooper), .home = { .index = BTL_POS_TOP_A }, .priority = 10, },
+    { .actor = &N(swooper), .home = { .index = BTL_POS_TOP_B }, .priority = 9, },
+    { .actor = &N(swooper), .home = { .index = BTL_POS_TOP_C }, .priority = 8, },
 };
 
 Formation N(Formation_02) = {
-    { .actor = &N(swoopula), .home = { .index = 13 }, .priority = 10, },
-    { .actor = &N(swoopula), .home = { .index = 14 }, .priority = 9, },
+    { .actor = &N(swoopula), .home = { .index = BTL_POS_TOP_B }, .priority = 10, },
+    { .actor = &N(swoopula), .home = { .index = BTL_POS_TOP_C }, .priority = 9, },
 };
 
 Formation N(Formation_03) = {
-    { .actor = &N(swoopula), .home = { .index = 12 }, .priority = 10, },
-    { .actor = &N(swoopula), .home = { .index = 13 }, .priority = 9, },
-    { .actor = &N(swoopula), .home = { .index = 14 }, .priority = 8, },
+    { .actor = &N(swoopula), .home = { .index = BTL_POS_TOP_A }, .priority = 10, },
+    { .actor = &N(swoopula), .home = { .index = BTL_POS_TOP_B }, .priority = 9, },
+    { .actor = &N(swoopula), .home = { .index = BTL_POS_TOP_C }, .priority = 8, },
 };
 
 BattleList N(Formations) = {

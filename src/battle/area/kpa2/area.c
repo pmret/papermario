@@ -16,15 +16,15 @@ extern Stage N(kpa_03);
 Vec3i N(bowser_pos) = { 80, 0, -10 };
 
 Formation N(Formation_00) = {
-    { .actor = &N(bowser), .home = { .index = 2 }, .priority = 10, },
+    { .actor = &N(bowser), .home = { .index = BTL_POS_GROUND_C }, .priority = 10, },
 };
 
 Formation N(Formation_01) = {
-    { .actor = &N(bowser_intro), .home = { .index = 2 }, .priority = 10, },
+    { .actor = &N(bowser_intro), .home = { .index = BTL_POS_GROUND_C }, .priority = 10, },
 };
 
 Formation N(Formation_02) = {
-    { .actor = &N(bowser_phase_1), .home = { .index = 2 }, .priority = 10, },
+    { .actor = &N(bowser_phase_1), .home = { .index = BTL_POS_GROUND_C }, .priority = 10, },
 };
 
 Formation N(Formation_03) = {

@@ -14,66 +14,66 @@ extern Stage N(kmr_05);
 extern Stage N(kmr_06);
 
 Formation N(Formation_00) = {
-    { &N(goomba), .home = { .index = 1 }, .priority = 10 },
+    { &N(goomba), .home = { .index = BTL_POS_GROUND_B }, .priority = 10 },
 };
 
 Formation N(Formation_01) = {
-    { &N(goomba), .home = { .index = 1 }, .priority = 10 },
-    { &N(goomba), .home = { .index = 2 }, .priority = 9 },
+    { &N(goomba), .home = { .index = BTL_POS_GROUND_B }, .priority = 10 },
+    { &N(goomba), .home = { .index = BTL_POS_GROUND_C }, .priority = 9 },
 };
 
 Formation N(Formation_02) = {
-    { &N(goomba), .home = { .index = 0 }, .priority = 10 },
-    { &N(goomba), .home = { .index = 1 }, .priority = 9 },
-    { &N(goomba), .home = { .index = 2 }, .priority = 8 },
+    { &N(goomba), .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
+    { &N(goomba), .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
+    { &N(goomba), .home = { .index = BTL_POS_GROUND_C }, .priority = 8 },
 };
 
 Formation N(Formation_03) = {
-    { &N(goomba), .home = { .index = 1 }, .priority = 10 },
-    { &N(paragoomba), .home = { .index = 6 }, .priority = 9 },
+    { &N(goomba), .home = { .index = BTL_POS_GROUND_B }, .priority = 10 },
+    { &N(paragoomba), .home = { .index = BTL_POS_AIR_C }, .priority = 9 },
 };
 
 Formation N(Formation_04) = {
-    { &N(goomba), .home = { .index = 0 }, .priority = 10 },
-    { &N(goomba), .home = { .index = 1 }, .priority = 9 },
-    { &N(goomba), .home = { .index = 2 }, .priority = 8 },
-    { &N(goomba), .home = { .index = 3 }, .priority = 7 },
+    { &N(goomba), .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
+    { &N(goomba), .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
+    { &N(goomba), .home = { .index = BTL_POS_GROUND_C }, .priority = 8 },
+    { &N(goomba), .home = { .index = BTL_POS_GROUND_D }, .priority = 7 },
 };
 
 Formation N(Formation_05) = {
-    { &N(goomba), .home = { .index = 1 }, .priority = 10 },
-    { &N(spiked_goomba), .home = { .index = 2 }, .priority = 9 },
+    { &N(goomba), .home = { .index = BTL_POS_GROUND_B }, .priority = 10 },
+    { &N(spiked_goomba), .home = { .index = BTL_POS_GROUND_C }, .priority = 9 },
 };
 
 Formation N(Formation_06) = {
-    { &N(goomba), .home = { .index = 0 }, .priority = 10 },
-    { &N(paragoomba), .home = { .index = 5 }, .priority = 9 },
-    { &N(goomba), .home = { .index = 2 }, .priority = 8 },
-    { &N(paragoomba), .home = { .index = 7 }, .priority = 7 },
+    { &N(goomba), .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
+    { &N(paragoomba), .home = { .index = BTL_POS_AIR_B }, .priority = 9 },
+    { &N(goomba), .home = { .index = BTL_POS_GROUND_C }, .priority = 8 },
+    { &N(paragoomba), .home = { .index = BTL_POS_AIR_D }, .priority = 7 },
 };
 
 Formation N(Formation_07) = {
-    { &N(paragoomba), .home = { .index = 5 }, .priority = 10 },
+    { &N(paragoomba), .home = { .index = BTL_POS_AIR_B }, .priority = 10 },
 };
 
 Formation N(Formation_08) = {
-    { &N(paragoomba), .home = { .index = 5 }, .priority = 10 },
-    { &N(paragoomba), .home = { .index = 6 }, .priority = 9 },
+    { &N(paragoomba), .home = { .index = BTL_POS_AIR_B }, .priority = 10 },
+    { &N(paragoomba), .home = { .index = BTL_POS_AIR_C }, .priority = 9 },
 };
 
 Formation N(Formation_09) = {
-    { &N(paragoomba), .home = { .index = 4 }, .priority = 10 },
-    { &N(paragoomba), .home = { .index = 5 }, .priority = 9 },
-    { &N(paragoomba), .home = { .index = 6 }, .priority = 8 },
+    { &N(paragoomba), .home = { .index = BTL_POS_AIR_A }, .priority = 10 },
+    { &N(paragoomba), .home = { .index = BTL_POS_AIR_B }, .priority = 9 },
+    { &N(paragoomba), .home = { .index = BTL_POS_AIR_C }, .priority = 8 },
 };
 
 Formation N(Formation_0A) = {
-    { &N(spiked_goomba), .home = { .index = 1 }, .priority = 10 },
+    { &N(spiked_goomba), .home = { .index = BTL_POS_GROUND_B }, .priority = 10 },
 };
 
 Formation N(Formation_0B) = {
-    { &N(spiked_goomba), .home = { .index = 1 }, .priority = 10 },
-    { &N(goomba), .home = { .index = 2 }, .priority = 9 },
+    { &N(spiked_goomba), .home = { .index = BTL_POS_GROUND_B }, .priority = 10 },
+    { &N(goomba), .home = { .index = BTL_POS_GROUND_C }, .priority = 9 },
 };
 
 BattleList N(Formations) = {

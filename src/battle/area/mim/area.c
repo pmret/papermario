@@ -11,109 +11,109 @@ extern ActorBlueprint N(bzzap);
 extern Stage N(mim_01);
 
 Formation N(Formation_00) = {
-    { .actor = &N(forest_fuzzy), .home = { .index = 1 }, .priority = 10 },
-    { .actor = &N(forest_fuzzy), .home = { .index = 2 }, .priority = 9 },
+    { .actor = &N(forest_fuzzy), .home = { .index = BTL_POS_GROUND_B }, .priority = 10 },
+    { .actor = &N(forest_fuzzy), .home = { .index = BTL_POS_GROUND_C }, .priority = 9 },
 };
 
 Formation N(Formation_01) = {
-    { .actor = &N(forest_fuzzy), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(forest_fuzzy), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(forest_fuzzy), .home = { .index = 2 }, .priority = 8 },
+    { .actor = &N(forest_fuzzy), .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
+    { .actor = &N(forest_fuzzy), .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
+    { .actor = &N(forest_fuzzy), .home = { .index = BTL_POS_GROUND_C }, .priority = 8 },
 };
 
 Formation N(Formation_02) = {
-    { .actor = &N(forest_fuzzy), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(forest_fuzzy), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(forest_fuzzy), .home = { .index = 2 }, .priority = 8 },
-    { .actor = &N(forest_fuzzy), .home = { .index = 3 }, .priority = 7 },
+    { .actor = &N(forest_fuzzy), .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
+    { .actor = &N(forest_fuzzy), .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
+    { .actor = &N(forest_fuzzy), .home = { .index = BTL_POS_GROUND_C }, .priority = 8 },
+    { .actor = &N(forest_fuzzy), .home = { .index = BTL_POS_GROUND_D }, .priority = 7 },
 };
 
 Formation N(Formation_03) = {
-    { .actor = &N(forest_fuzzy), .home = { .index = 1 }, .priority = 10 },
-    { .actor = &N(piranha_plant), .home = { .index = 2 }, .priority = 9 },
+    { .actor = &N(forest_fuzzy), .home = { .index = BTL_POS_GROUND_B }, .priority = 10 },
+    { .actor = &N(piranha_plant), .home = { .index = BTL_POS_GROUND_C }, .priority = 9 },
 };
 
 Formation N(Formation_04) = {
-    { .actor = &N(forest_fuzzy), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(forest_fuzzy), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(piranha_plant), .home = { .index = 2 }, .priority = 8 },
+    { .actor = &N(forest_fuzzy), .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
+    { .actor = &N(forest_fuzzy), .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
+    { .actor = &N(piranha_plant), .home = { .index = BTL_POS_GROUND_C }, .priority = 8 },
 };
 
 Formation N(Formation_05) = {
-    { .actor = &N(forest_fuzzy), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(forest_fuzzy), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(piranha_plant), .home = { .index = 2 }, .priority = 8 },
-    { .actor = &N(piranha_plant), .home = { .index = 3 }, .priority = 7 },
+    { .actor = &N(forest_fuzzy), .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
+    { .actor = &N(forest_fuzzy), .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
+    { .actor = &N(piranha_plant), .home = { .index = BTL_POS_GROUND_C }, .priority = 8 },
+    { .actor = &N(piranha_plant), .home = { .index = BTL_POS_GROUND_D }, .priority = 7 },
 };
 
 Formation N(Formation_06) = {
-    { .actor = &N(forest_fuzzy), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(forest_fuzzy), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(forest_fuzzy), .home = { .index = 2 }, .priority = 8 },
-    { .actor = &N(piranha_plant), .home = { .index = 3 }, .priority = 7 },
+    { .actor = &N(forest_fuzzy), .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
+    { .actor = &N(forest_fuzzy), .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
+    { .actor = &N(forest_fuzzy), .home = { .index = BTL_POS_GROUND_C }, .priority = 8 },
+    { .actor = &N(piranha_plant), .home = { .index = BTL_POS_GROUND_D }, .priority = 7 },
 };
 
 Formation N(Formation_07) = {
-    { .actor = &N(forest_fuzzy), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(piranha_plant), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(forest_fuzzy), .home = { .index = 2 }, .priority = 8 },
-    { .actor = &N(piranha_plant), .home = { .index = 3 }, .priority = 7 },
+    { .actor = &N(forest_fuzzy), .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
+    { .actor = &N(piranha_plant), .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
+    { .actor = &N(forest_fuzzy), .home = { .index = BTL_POS_GROUND_C }, .priority = 8 },
+    { .actor = &N(piranha_plant), .home = { .index = BTL_POS_GROUND_D }, .priority = 7 },
 };
 
 Formation N(Formation_08) = {
-    { .actor = &N(piranha_plant), .home = { .index = 1 }, .priority = 10 },
+    { .actor = &N(piranha_plant), .home = { .index = BTL_POS_GROUND_B }, .priority = 10 },
 };
 
 Formation N(Formation_09) = {
-    { .actor = &N(piranha_plant), .home = { .index = 1 }, .priority = 10 },
-    { .actor = &N(piranha_plant), .home = { .index = 2 }, .priority = 9 },
+    { .actor = &N(piranha_plant), .home = { .index = BTL_POS_GROUND_B }, .priority = 10 },
+    { .actor = &N(piranha_plant), .home = { .index = BTL_POS_GROUND_C }, .priority = 9 },
 };
 
 Formation N(Formation_0A) = {
-    { .actor = &N(piranha_plant), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(piranha_plant), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(piranha_plant), .home = { .index = 2 }, .priority = 8 },
+    { .actor = &N(piranha_plant), .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
+    { .actor = &N(piranha_plant), .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
+    { .actor = &N(piranha_plant), .home = { .index = BTL_POS_GROUND_C }, .priority = 8 },
 };
 
 Formation N(Formation_0B) = {
-    { .actor = &N(piranha_plant), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(piranha_plant), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(piranha_plant), .home = { .index = 2 }, .priority = 8 },
-    { .actor = &N(piranha_plant), .home = { .index = 3 }, .priority = 7 },
+    { .actor = &N(piranha_plant), .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
+    { .actor = &N(piranha_plant), .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
+    { .actor = &N(piranha_plant), .home = { .index = BTL_POS_GROUND_C }, .priority = 8 },
+    { .actor = &N(piranha_plant), .home = { .index = BTL_POS_GROUND_D }, .priority = 7 },
 };
 
 Formation N(Formation_0C) = {
-    { .actor = &N(piranha_plant), .home = { .index = 1 }, .priority = 10 },
-    { .actor = &N(forest_fuzzy), .home = { .index = 2 }, .priority = 9 },
+    { .actor = &N(piranha_plant), .home = { .index = BTL_POS_GROUND_B }, .priority = 10 },
+    { .actor = &N(forest_fuzzy), .home = { .index = BTL_POS_GROUND_C }, .priority = 9 },
 };
 
 Formation N(Formation_0D) = {
-    { .actor = &N(piranha_plant), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(piranha_plant), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(forest_fuzzy), .home = { .index = 2 }, .priority = 8 },
+    { .actor = &N(piranha_plant), .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
+    { .actor = &N(piranha_plant), .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
+    { .actor = &N(forest_fuzzy), .home = { .index = BTL_POS_GROUND_C }, .priority = 8 },
 };
 
 Formation N(Formation_0E) = {
-    { .actor = &N(piranha_plant), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(forest_fuzzy), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(forest_fuzzy), .home = { .index = 2 }, .priority = 8 },
+    { .actor = &N(piranha_plant), .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
+    { .actor = &N(forest_fuzzy), .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
+    { .actor = &N(forest_fuzzy), .home = { .index = BTL_POS_GROUND_C }, .priority = 8 },
 };
 
 Formation N(Formation_0F) = {
-    { .actor = &N(piranha_plant), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(forest_fuzzy), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(piranha_plant), .home = { .index = 2 }, .priority = 8 },
+    { .actor = &N(piranha_plant), .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
+    { .actor = &N(forest_fuzzy), .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
+    { .actor = &N(piranha_plant), .home = { .index = BTL_POS_GROUND_C }, .priority = 8 },
 };
 
 Formation N(Formation_10) = {
-    { .actor = &N(bzzap), .home = { .index = 5 }, .priority = 10 },
-    { .actor = &N(bzzap), .home = { .index = 6 }, .priority = 9 },
+    { .actor = &N(bzzap), .home = { .index = BTL_POS_AIR_B }, .priority = 10 },
+    { .actor = &N(bzzap), .home = { .index = BTL_POS_AIR_C }, .priority = 9 },
 };
 
 Formation N(Formation_11) = {
-    { .actor = &N(bzzap), .home = { .index = 4 }, .priority = 10 },
-    { .actor = &N(bzzap), .home = { .index = 5 }, .priority = 9 },
-    { .actor = &N(bzzap), .home = { .index = 6 }, .priority = 8 },
+    { .actor = &N(bzzap), .home = { .index = BTL_POS_AIR_A }, .priority = 10 },
+    { .actor = &N(bzzap), .home = { .index = BTL_POS_AIR_B }, .priority = 9 },
+    { .actor = &N(bzzap), .home = { .index = BTL_POS_AIR_C }, .priority = 8 },
 };
 
 BattleList N(Formations) = {

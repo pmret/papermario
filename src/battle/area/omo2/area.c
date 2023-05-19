@@ -10,9 +10,9 @@ extern ActorBlueprint N(light_bulb);
 extern Stage N(omo_07);
 
 Formation N(Formation_01) = {
-    { .actor = &N(general_guy), .home = { .index = 2 }, .priority = 70, },
-    { .actor = &N(toy_tank), .home = { .index = 1 }, .priority = 80, },
-    { .actor = &N(light_bulb), .home = { .index = 7 }, .priority = 90, },
+    { .actor = &N(general_guy), .home = { .index = BTL_POS_GROUND_C }, .priority = 70, },
+    { .actor = &N(toy_tank), .home = { .index = BTL_POS_GROUND_B }, .priority = 80, },
+    { .actor = &N(light_bulb), .home = { .index = BTL_POS_AIR_D }, .priority = 90, },
 };
 
 BattleList N(Formations) = {
