@@ -6,28 +6,28 @@ extern EvtScript N(kooper_idle);
 extern EvtScript N(kooper_handleEvent);
 
 s32 N(kooper_idleAnimations)[] = {
-    STATUS_KEY_NORMAL, ANIM_BattleKooper_Idle,
-    STATUS_KEY_STONE, ANIM_BattleKooper_Still,
-    STATUS_KEY_SLEEP, ANIM_BattleKooper_Still,
-    STATUS_KEY_POISON, ANIM_BattleKooper_Idle,
-    STATUS_KEY_STOP, ANIM_BattleKooper_Still,
-    STATUS_KEY_STATIC, ANIM_BattleKooper_Idle,
-    STATUS_KEY_PARALYZE, ANIM_BattleKooper_Still,
-    STATUS_KEY_DIZZY, ANIM_BattleKooper_Injured,
-    STATUS_KEY_FEAR, ANIM_BattleKooper_Injured,
+    STATUS_KEY_NORMAL,    ANIM_BattleKooper_Idle,
+    STATUS_KEY_STONE,     ANIM_BattleKooper_Still,
+    STATUS_KEY_SLEEP,     ANIM_BattleKooper_Still,
+    STATUS_KEY_POISON,    ANIM_BattleKooper_Idle,
+    STATUS_KEY_STOP,      ANIM_BattleKooper_Still,
+    STATUS_KEY_STATIC,    ANIM_BattleKooper_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_BattleKooper_Still,
+    STATUS_KEY_DIZZY,     ANIM_BattleKooper_Injured,
+    STATUS_KEY_FEAR,      ANIM_BattleKooper_Injured,
     STATUS_TABLE_END,
 };
 
 s32 N(kooper_idleAnimations2)[] = {
-    STATUS_KEY_NORMAL, ANIM_BattleKooper_Toppled,
-    STATUS_KEY_STONE, ANIM_BattleKooper_StillToppled,
-    STATUS_KEY_SLEEP, ANIM_BattleKooper_StillToppled,
-    STATUS_KEY_POISON, ANIM_BattleKooper_Toppled,
-    STATUS_KEY_STOP, ANIM_BattleKooper_StillToppled,
-    STATUS_KEY_STATIC, ANIM_BattleKooper_Toppled,
-    STATUS_KEY_PARALYZE, ANIM_BattleKooper_StillToppled,
-    STATUS_KEY_DIZZY, ANIM_BattleKooper_Toppled,
-    STATUS_KEY_FEAR, ANIM_BattleKooper_Toppled,
+    STATUS_KEY_NORMAL,    ANIM_BattleKooper_Toppled,
+    STATUS_KEY_STONE,     ANIM_BattleKooper_StillToppled,
+    STATUS_KEY_SLEEP,     ANIM_BattleKooper_StillToppled,
+    STATUS_KEY_POISON,    ANIM_BattleKooper_Toppled,
+    STATUS_KEY_STOP,      ANIM_BattleKooper_StillToppled,
+    STATUS_KEY_STATIC,    ANIM_BattleKooper_Toppled,
+    STATUS_KEY_PARALYZE,  ANIM_BattleKooper_StillToppled,
+    STATUS_KEY_DIZZY,     ANIM_BattleKooper_Toppled,
+    STATUS_KEY_FEAR,      ANIM_BattleKooper_Toppled,
     STATUS_TABLE_END,
 };
 

@@ -100,35 +100,35 @@ extern Formation N(formation_baby_1);
 extern Formation N(formation_baby_2);
 
 s32 N(IdleAnimations)[] = {
-    STATUS_KEY_NORMAL, ANIM_Blooper_Anim00,
-    STATUS_KEY_STOP, ANIM_Blooper_Anim00,
-    STATUS_KEY_SLEEP, ANIM_Blooper_Anim07,
-    STATUS_KEY_PARALYZE, ANIM_Blooper_Anim08,
-    STATUS_KEY_PARALYZE, ANIM_Blooper_Anim00,
-    STATUS_KEY_DIZZY, ANIM_Blooper_Anim08,
-    STATUS_KEY_SHRINK, ANIM_Blooper_Anim00,
+    STATUS_KEY_NORMAL,    ANIM_Blooper_Anim00,
+    STATUS_KEY_STOP,      ANIM_Blooper_Anim00,
+    STATUS_KEY_SLEEP,     ANIM_Blooper_Anim07,
+    STATUS_KEY_PARALYZE,  ANIM_Blooper_Anim08,
+    STATUS_KEY_PARALYZE,  ANIM_Blooper_Anim00,
+    STATUS_KEY_DIZZY,     ANIM_Blooper_Anim08,
+    STATUS_KEY_SHRINK,    ANIM_Blooper_Anim00,
     STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations2)[] = {
-    STATUS_KEY_NORMAL, ANIM_Blooper_Anim0C,
-    STATUS_KEY_STOP, ANIM_Blooper_Anim00,
-    STATUS_KEY_SLEEP, ANIM_Blooper_Anim07,
-    STATUS_KEY_PARALYZE, ANIM_Blooper_Anim08,
-    STATUS_KEY_PARALYZE, ANIM_Blooper_Anim00,
-    STATUS_KEY_DIZZY, ANIM_Blooper_Anim08,
-    STATUS_KEY_SHRINK, ANIM_Blooper_Anim0C,
+    STATUS_KEY_NORMAL,    ANIM_Blooper_Anim0C,
+    STATUS_KEY_STOP,      ANIM_Blooper_Anim00,
+    STATUS_KEY_SLEEP,     ANIM_Blooper_Anim07,
+    STATUS_KEY_PARALYZE,  ANIM_Blooper_Anim08,
+    STATUS_KEY_PARALYZE,  ANIM_Blooper_Anim00,
+    STATUS_KEY_DIZZY,     ANIM_Blooper_Anim08,
+    STATUS_KEY_SHRINK,    ANIM_Blooper_Anim0C,
     STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations3)[] = {
-    STATUS_KEY_NORMAL, ANIM_Blooper_Anim00,
-    STATUS_KEY_STOP, ANIM_Blooper_Anim00,
-    STATUS_KEY_SLEEP, ANIM_Blooper_Anim07,
-    STATUS_KEY_PARALYZE, ANIM_Blooper_Anim08,
-    STATUS_KEY_PARALYZE, ANIM_Blooper_Anim00,
-    STATUS_KEY_DIZZY, ANIM_Blooper_Anim08,
-    STATUS_KEY_SHRINK, ANIM_Blooper_Anim00,
+    STATUS_KEY_NORMAL,    ANIM_Blooper_Anim00,
+    STATUS_KEY_STOP,      ANIM_Blooper_Anim00,
+    STATUS_KEY_SLEEP,     ANIM_Blooper_Anim07,
+    STATUS_KEY_PARALYZE,  ANIM_Blooper_Anim08,
+    STATUS_KEY_PARALYZE,  ANIM_Blooper_Anim00,
+    STATUS_KEY_DIZZY,     ANIM_Blooper_Anim08,
+    STATUS_KEY_SHRINK,    ANIM_Blooper_Anim00,
     STATUS_TABLE_END,
 };
 

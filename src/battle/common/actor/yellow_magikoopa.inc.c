@@ -175,33 +175,33 @@ ActorBlueprint N(flying) = {
 };
 
 s32 N(IdleAnimations)[] = {
-    STATUS_KEY_NORMAL, ANIM_Magikoopa_Yellow_Anim01,
-    STATUS_KEY_STONE, ANIM_Magikoopa_Yellow_Anim00,
-    STATUS_KEY_SLEEP, ANIM_Magikoopa_Yellow_Anim08,
-    STATUS_KEY_POISON, ANIM_Magikoopa_Yellow_Anim01,
-    STATUS_KEY_STOP, ANIM_Magikoopa_Yellow_Anim00,
-    STATUS_KEY_STATIC, ANIM_Magikoopa_Yellow_Anim01,
-    STATUS_KEY_PARALYZE, ANIM_Magikoopa_Yellow_Anim00,
-    STATUS_KEY_DIZZY, ANIM_Magikoopa_Yellow_Anim07,
-    STATUS_KEY_FEAR, ANIM_Magikoopa_Yellow_Anim07,
+    STATUS_KEY_NORMAL,    ANIM_Magikoopa_Yellow_Anim01,
+    STATUS_KEY_STONE,     ANIM_Magikoopa_Yellow_Anim00,
+    STATUS_KEY_SLEEP,     ANIM_Magikoopa_Yellow_Anim08,
+    STATUS_KEY_POISON,    ANIM_Magikoopa_Yellow_Anim01,
+    STATUS_KEY_STOP,      ANIM_Magikoopa_Yellow_Anim00,
+    STATUS_KEY_STATIC,    ANIM_Magikoopa_Yellow_Anim01,
+    STATUS_KEY_PARALYZE,  ANIM_Magikoopa_Yellow_Anim00,
+    STATUS_KEY_DIZZY,     ANIM_Magikoopa_Yellow_Anim07,
+    STATUS_KEY_FEAR,      ANIM_Magikoopa_Yellow_Anim07,
     STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations_flying)[] = {
-    STATUS_KEY_NORMAL, ANIM_FlyingMagikoopa_Yellow_Anim01,
-    STATUS_KEY_STONE, ANIM_FlyingMagikoopa_Yellow_Anim00,
-    STATUS_KEY_SLEEP, ANIM_FlyingMagikoopa_Yellow_Anim08,
-    STATUS_KEY_POISON, ANIM_FlyingMagikoopa_Yellow_Anim01,
-    STATUS_KEY_STOP, ANIM_FlyingMagikoopa_Yellow_Anim00,
-    STATUS_KEY_STATIC, ANIM_FlyingMagikoopa_Yellow_Anim01,
-    STATUS_KEY_PARALYZE, ANIM_FlyingMagikoopa_Yellow_Anim00,
-    STATUS_KEY_DIZZY, ANIM_FlyingMagikoopa_Yellow_Anim07,
-    STATUS_KEY_FEAR, ANIM_FlyingMagikoopa_Yellow_Anim07,
+    STATUS_KEY_NORMAL,    ANIM_FlyingMagikoopa_Yellow_Anim01,
+    STATUS_KEY_STONE,     ANIM_FlyingMagikoopa_Yellow_Anim00,
+    STATUS_KEY_SLEEP,     ANIM_FlyingMagikoopa_Yellow_Anim08,
+    STATUS_KEY_POISON,    ANIM_FlyingMagikoopa_Yellow_Anim01,
+    STATUS_KEY_STOP,      ANIM_FlyingMagikoopa_Yellow_Anim00,
+    STATUS_KEY_STATIC,    ANIM_FlyingMagikoopa_Yellow_Anim01,
+    STATUS_KEY_PARALYZE,  ANIM_FlyingMagikoopa_Yellow_Anim00,
+    STATUS_KEY_DIZZY,     ANIM_FlyingMagikoopa_Yellow_Anim07,
+    STATUS_KEY_FEAR,      ANIM_FlyingMagikoopa_Yellow_Anim07,
     STATUS_TABLE_END,
 };
 
 s32 N(80225248)[] = {
-    STATUS_KEY_NORMAL, ANIM_FlyingMagikoopa_Yellow_Anim0A,
+    STATUS_KEY_NORMAL,    ANIM_FlyingMagikoopa_Yellow_Anim0A,
     STATUS_TABLE_END,
 };
 

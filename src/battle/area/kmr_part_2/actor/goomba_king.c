@@ -31,26 +31,26 @@ s32 N(IdleAnimations_80220844)[] = {
 };
 
 s32 N(IdleAnimations_80220888)[] = {
-    STATUS_KEY_NORMAL,   ANIM_GoombaKing_Dizzy,
-    STATUS_KEY_STONE,    ANIM_GoombaKing_Still,
-    STATUS_KEY_SLEEP,    ANIM_GoombaKing_Sleep,
-    STATUS_KEY_POISON,   ANIM_GoombaKing_Still,
-    STATUS_KEY_STOP,     ANIM_GoombaKing_Still,
-    STATUS_KEY_STATIC,   ANIM_GoombaKing_Still,
-    STATUS_KEY_PARALYZE, ANIM_GoombaKing_Still,
-    STATUS_KEY_DIZZY,    ANIM_GoombaKing_Dizzy,
+    STATUS_KEY_NORMAL,    ANIM_GoombaKing_Dizzy,
+    STATUS_KEY_STONE,     ANIM_GoombaKing_Still,
+    STATUS_KEY_SLEEP,     ANIM_GoombaKing_Sleep,
+    STATUS_KEY_POISON,    ANIM_GoombaKing_Still,
+    STATUS_KEY_STOP,      ANIM_GoombaKing_Still,
+    STATUS_KEY_STATIC,    ANIM_GoombaKing_Still,
+    STATUS_KEY_PARALYZE,  ANIM_GoombaKing_Still,
+    STATUS_KEY_DIZZY,     ANIM_GoombaKing_Dizzy,
     STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations_802208CC)[] = {
-    STATUS_KEY_NORMAL,   ANIM_GoombaKing_Angry,
-    STATUS_KEY_STONE,    ANIM_GoombaKing_Still,
-    STATUS_KEY_SLEEP,    ANIM_GoombaKing_Sleep,
-    STATUS_KEY_POISON,   ANIM_GoombaKing_Still,
-    STATUS_KEY_STOP,     ANIM_GoombaKing_Still,
-    STATUS_KEY_STATIC,   ANIM_GoombaKing_Still,
-    STATUS_KEY_PARALYZE, ANIM_GoombaKing_Still,
-    STATUS_KEY_DIZZY,    ANIM_GoombaKing_Dizzy,
+    STATUS_KEY_NORMAL,    ANIM_GoombaKing_Angry,
+    STATUS_KEY_STONE,     ANIM_GoombaKing_Still,
+    STATUS_KEY_SLEEP,     ANIM_GoombaKing_Sleep,
+    STATUS_KEY_POISON,    ANIM_GoombaKing_Still,
+    STATUS_KEY_STOP,      ANIM_GoombaKing_Still,
+    STATUS_KEY_STATIC,    ANIM_GoombaKing_Still,
+    STATUS_KEY_PARALYZE,  ANIM_GoombaKing_Still,
+    STATUS_KEY_DIZZY,     ANIM_GoombaKing_Dizzy,
     STATUS_TABLE_END,
 };
 

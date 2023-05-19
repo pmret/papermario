@@ -296,17 +296,17 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(IdleAnimations)[] = {
-    STATUS_KEY_NORMAL, ANIM_ShySquadGuy_Anim01,
-    STATUS_KEY_STONE, ANIM_ShySquadGuy_Anim00,
-    STATUS_KEY_SLEEP, ANIM_ShySquadGuy_Anim12,
-    STATUS_KEY_POISON, ANIM_ShySquadGuy_Anim01,
-    STATUS_KEY_STOP, ANIM_ShySquadGuy_Anim00,
-    STATUS_KEY_STATIC, ANIM_ShySquadGuy_Anim00,
-    STATUS_KEY_PARALYZE, ANIM_ShySquadGuy_Anim00,
-    STATUS_KEY_PARALYZE, ANIM_ShySquadGuy_Anim00,
-    STATUS_KEY_DIZZY, ANIM_ShySquadGuy_Anim13,
-    STATUS_KEY_DIZZY, ANIM_ShySquadGuy_Anim13,
-    STATUS_KEY_FEAR, ANIM_ShySquadGuy_Anim00,
+    STATUS_KEY_NORMAL,    ANIM_ShySquadGuy_Anim01,
+    STATUS_KEY_STONE,     ANIM_ShySquadGuy_Anim00,
+    STATUS_KEY_SLEEP,     ANIM_ShySquadGuy_Anim12,
+    STATUS_KEY_POISON,    ANIM_ShySquadGuy_Anim01,
+    STATUS_KEY_STOP,      ANIM_ShySquadGuy_Anim00,
+    STATUS_KEY_STATIC,    ANIM_ShySquadGuy_Anim00,
+    STATUS_KEY_PARALYZE,  ANIM_ShySquadGuy_Anim00,
+    STATUS_KEY_PARALYZE,  ANIM_ShySquadGuy_Anim00,
+    STATUS_KEY_DIZZY,     ANIM_ShySquadGuy_Anim13,
+    STATUS_KEY_DIZZY,     ANIM_ShySquadGuy_Anim13,
+    STATUS_KEY_FEAR,      ANIM_ShySquadGuy_Anim00,
     STATUS_TABLE_END,
 };
 

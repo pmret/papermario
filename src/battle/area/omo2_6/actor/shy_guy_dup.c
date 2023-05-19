@@ -177,17 +177,17 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(IdleAnimations)[] = {
-    STATUS_KEY_NORMAL, ANIM_TankGuy_Anim01,
-    STATUS_KEY_STONE, ANIM_TankGuy_Anim00,
-    STATUS_KEY_SLEEP, ANIM_TankGuy_Anim00,
-    STATUS_KEY_POISON, ANIM_TankGuy_Anim01,
-    STATUS_KEY_STOP, ANIM_TankGuy_Anim00,
-    STATUS_KEY_STATIC, ANIM_TankGuy_Anim00,
-    STATUS_KEY_PARALYZE, ANIM_TankGuy_Anim00,
-    STATUS_KEY_PARALYZE, ANIM_TankGuy_Anim00,
-    STATUS_KEY_DIZZY, ANIM_TankGuy_Anim01,
-    STATUS_KEY_DIZZY, ANIM_TankGuy_Anim01,
-    STATUS_KEY_FEAR, ANIM_TankGuy_Anim00,
+    STATUS_KEY_NORMAL,    ANIM_TankGuy_Anim01,
+    STATUS_KEY_STONE,     ANIM_TankGuy_Anim00,
+    STATUS_KEY_SLEEP,     ANIM_TankGuy_Anim00,
+    STATUS_KEY_POISON,    ANIM_TankGuy_Anim01,
+    STATUS_KEY_STOP,      ANIM_TankGuy_Anim00,
+    STATUS_KEY_STATIC,    ANIM_TankGuy_Anim00,
+    STATUS_KEY_PARALYZE,  ANIM_TankGuy_Anim00,
+    STATUS_KEY_PARALYZE,  ANIM_TankGuy_Anim00,
+    STATUS_KEY_DIZZY,     ANIM_TankGuy_Anim01,
+    STATUS_KEY_DIZZY,     ANIM_TankGuy_Anim01,
+    STATUS_KEY_FEAR,      ANIM_TankGuy_Anim00,
     STATUS_TABLE_END,
 };
 

@@ -90,35 +90,35 @@ extern EvtScript N(handleEvent);
 extern EvtScript N(onDeath);
 
 s32 N(IdleAnimations)[] = {
-    STATUS_KEY_NORMAL, ANIM_BabyBlooper_Anim00,
-    STATUS_KEY_STOP, ANIM_BabyBlooper_Anim00,
-    STATUS_KEY_SLEEP, ANIM_BabyBlooper_Anim06,
-    STATUS_KEY_PARALYZE, ANIM_BabyBlooper_Anim07,
-    STATUS_KEY_PARALYZE, ANIM_BabyBlooper_Anim00,
-    STATUS_KEY_DIZZY, ANIM_BabyBlooper_Anim07,
-    STATUS_KEY_SHRINK, ANIM_BabyBlooper_Anim00,
+    STATUS_KEY_NORMAL,    ANIM_BabyBlooper_Anim00,
+    STATUS_KEY_STOP,      ANIM_BabyBlooper_Anim00,
+    STATUS_KEY_SLEEP,     ANIM_BabyBlooper_Anim06,
+    STATUS_KEY_PARALYZE,  ANIM_BabyBlooper_Anim07,
+    STATUS_KEY_PARALYZE,  ANIM_BabyBlooper_Anim00,
+    STATUS_KEY_DIZZY,     ANIM_BabyBlooper_Anim07,
+    STATUS_KEY_SHRINK,    ANIM_BabyBlooper_Anim00,
     STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations2)[] = {
-    STATUS_KEY_NORMAL, ANIM_BabyBlooper_Anim01,
-    STATUS_KEY_STOP, ANIM_BabyBlooper_Anim00,
-    STATUS_KEY_SLEEP, ANIM_BabyBlooper_Anim06,
-    STATUS_KEY_PARALYZE, ANIM_BabyBlooper_Anim07,
-    STATUS_KEY_PARALYZE, ANIM_BabyBlooper_Anim00,
-    STATUS_KEY_DIZZY, ANIM_BabyBlooper_Anim07,
-    STATUS_KEY_SHRINK, ANIM_BabyBlooper_Anim01,
+    STATUS_KEY_NORMAL,    ANIM_BabyBlooper_Anim01,
+    STATUS_KEY_STOP,      ANIM_BabyBlooper_Anim00,
+    STATUS_KEY_SLEEP,     ANIM_BabyBlooper_Anim06,
+    STATUS_KEY_PARALYZE,  ANIM_BabyBlooper_Anim07,
+    STATUS_KEY_PARALYZE,  ANIM_BabyBlooper_Anim00,
+    STATUS_KEY_DIZZY,     ANIM_BabyBlooper_Anim07,
+    STATUS_KEY_SHRINK,    ANIM_BabyBlooper_Anim01,
     STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations3)[] = {
-    STATUS_KEY_NORMAL, ANIM_BabyBlooper_Anim00,
-    STATUS_KEY_STOP, ANIM_BabyBlooper_Anim00,
-    STATUS_KEY_SLEEP, ANIM_BabyBlooper_Anim06,
-    STATUS_KEY_PARALYZE, ANIM_BabyBlooper_Anim07,
-    STATUS_KEY_PARALYZE, ANIM_BabyBlooper_Anim00,
-    STATUS_KEY_DIZZY, ANIM_BabyBlooper_Anim07,
-    STATUS_KEY_SHRINK, ANIM_BabyBlooper_Anim00,
+    STATUS_KEY_NORMAL,    ANIM_BabyBlooper_Anim00,
+    STATUS_KEY_STOP,      ANIM_BabyBlooper_Anim00,
+    STATUS_KEY_SLEEP,     ANIM_BabyBlooper_Anim06,
+    STATUS_KEY_PARALYZE,  ANIM_BabyBlooper_Anim07,
+    STATUS_KEY_PARALYZE,  ANIM_BabyBlooper_Anim00,
+    STATUS_KEY_DIZZY,     ANIM_BabyBlooper_Anim07,
+    STATUS_KEY_SHRINK,    ANIM_BabyBlooper_Anim00,
     STATUS_TABLE_END,
 };
 

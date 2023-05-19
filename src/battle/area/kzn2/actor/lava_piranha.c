@@ -133,34 +133,34 @@ extern Formation N(formation_lava_bud_1);
 extern Formation N(formation_lava_bud_2);
 
 s32 N(IdleAnimations)[] = {
-    STATUS_KEY_NORMAL, ANIM_LavaPiranha_Anim03,
-    STATUS_KEY_STONE, ANIM_LavaPiranha_Anim00,
-    STATUS_KEY_SLEEP, ANIM_LavaPiranha_Anim0A,
-    STATUS_KEY_POISON, ANIM_LavaPiranha_Anim03,
-    STATUS_KEY_STOP, ANIM_LavaPiranha_Anim00,
-    STATUS_KEY_STATIC, ANIM_LavaPiranha_Anim00,
-    STATUS_KEY_PARALYZE, ANIM_LavaPiranha_Anim00,
-    STATUS_KEY_PARALYZE, ANIM_LavaPiranha_Anim00,
-    STATUS_KEY_DIZZY, ANIM_LavaPiranha_Anim0A,
+    STATUS_KEY_NORMAL,    ANIM_LavaPiranha_Anim03,
+    STATUS_KEY_STONE,     ANIM_LavaPiranha_Anim00,
+    STATUS_KEY_SLEEP,     ANIM_LavaPiranha_Anim0A,
+    STATUS_KEY_POISON,    ANIM_LavaPiranha_Anim03,
+    STATUS_KEY_STOP,      ANIM_LavaPiranha_Anim00,
+    STATUS_KEY_STATIC,    ANIM_LavaPiranha_Anim00,
+    STATUS_KEY_PARALYZE,  ANIM_LavaPiranha_Anim00,
+    STATUS_KEY_PARALYZE,  ANIM_LavaPiranha_Anim00,
+    STATUS_KEY_DIZZY,     ANIM_LavaPiranha_Anim0A,
     STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations_fiery)[] = {
-    STATUS_KEY_NORMAL, ANIM_LavaPiranha_Anim04,
-    STATUS_KEY_STONE, ANIM_LavaPiranha_Anim00,
-    STATUS_KEY_SLEEP, ANIM_LavaPiranha_Anim04,
-    STATUS_KEY_POISON, ANIM_LavaPiranha_Anim04,
-    STATUS_KEY_STOP, ANIM_LavaPiranha_Anim00,
-    STATUS_KEY_STATIC, ANIM_LavaPiranha_Anim00,
-    STATUS_KEY_PARALYZE, ANIM_LavaPiranha_Anim00,
-    STATUS_KEY_PARALYZE, ANIM_LavaPiranha_Anim00,
-    STATUS_KEY_DIZZY, ANIM_LavaPiranha_Anim0C,
+    STATUS_KEY_NORMAL,    ANIM_LavaPiranha_Anim04,
+    STATUS_KEY_STONE,     ANIM_LavaPiranha_Anim00,
+    STATUS_KEY_SLEEP,     ANIM_LavaPiranha_Anim04,
+    STATUS_KEY_POISON,    ANIM_LavaPiranha_Anim04,
+    STATUS_KEY_STOP,      ANIM_LavaPiranha_Anim00,
+    STATUS_KEY_STATIC,    ANIM_LavaPiranha_Anim00,
+    STATUS_KEY_PARALYZE,  ANIM_LavaPiranha_Anim00,
+    STATUS_KEY_PARALYZE,  ANIM_LavaPiranha_Anim00,
+    STATUS_KEY_DIZZY,     ANIM_LavaPiranha_Anim0C,
     STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations_wet)[] = {
-    STATUS_KEY_NORMAL, ANIM_LavaPiranha_Anim10,
-    STATUS_KEY_STOP, ANIM_LavaPiranha_Anim00,
+    STATUS_KEY_NORMAL,    ANIM_LavaPiranha_Anim10,
+    STATUS_KEY_STOP,      ANIM_LavaPiranha_Anim00,
     STATUS_TABLE_END,
 };
 

@@ -14,15 +14,15 @@ extern EvtScript N(attack_bite);
 extern EvtScript N(attack_icy_breath);
 
 s32 N(IdleAnimations)[] = {
-    STATUS_KEY_NORMAL, ANIM_LargePiranha_Frost_Anim01,
-    STATUS_KEY_STONE, ANIM_LargePiranha_Frost_Anim00,
-    STATUS_KEY_SLEEP, ANIM_LargePiranha_Frost_Anim00,
-    STATUS_KEY_POISON, ANIM_LargePiranha_Frost_Anim01,
-    STATUS_KEY_STOP, ANIM_LargePiranha_Frost_Anim00,
-    STATUS_KEY_STATIC, ANIM_LargePiranha_Frost_Anim00,
-    STATUS_KEY_PARALYZE, ANIM_LargePiranha_Frost_Anim00,
-    STATUS_KEY_PARALYZE, ANIM_LargePiranha_Frost_Anim00,
-    STATUS_KEY_DIZZY, ANIM_LargePiranha_Frost_Anim0F,
+    STATUS_KEY_NORMAL,    ANIM_LargePiranha_Frost_Anim01,
+    STATUS_KEY_STONE,     ANIM_LargePiranha_Frost_Anim00,
+    STATUS_KEY_SLEEP,     ANIM_LargePiranha_Frost_Anim00,
+    STATUS_KEY_POISON,    ANIM_LargePiranha_Frost_Anim01,
+    STATUS_KEY_STOP,      ANIM_LargePiranha_Frost_Anim00,
+    STATUS_KEY_STATIC,    ANIM_LargePiranha_Frost_Anim00,
+    STATUS_KEY_PARALYZE,  ANIM_LargePiranha_Frost_Anim00,
+    STATUS_KEY_PARALYZE,  ANIM_LargePiranha_Frost_Anim00,
+    STATUS_KEY_DIZZY,     ANIM_LargePiranha_Frost_Anim0F,
     STATUS_TABLE_END,
 };
 

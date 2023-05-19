@@ -108,30 +108,30 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(IdleAnimations)[] = {
-    STATUS_KEY_NORMAL, ANIM_MontyMole_Dark_Anim01,
-    STATUS_KEY_STONE, ANIM_MontyMole_Dark_Anim00,
-    STATUS_KEY_SLEEP, ANIM_MontyMole_Dark_Anim14,
-    STATUS_KEY_POISON, ANIM_MontyMole_Dark_Anim01,
-    STATUS_KEY_STOP, ANIM_MontyMole_Dark_Anim00,
-    STATUS_KEY_STATIC, ANIM_MontyMole_Dark_Anim01,
-    STATUS_KEY_PARALYZE, ANIM_MontyMole_Dark_Anim00,
-    STATUS_KEY_DIZZY, ANIM_MontyMole_Dark_Anim14,
-    STATUS_KEY_FEAR, ANIM_MontyMole_Dark_Anim14,
+    STATUS_KEY_NORMAL,    ANIM_MontyMole_Dark_Anim01,
+    STATUS_KEY_STONE,     ANIM_MontyMole_Dark_Anim00,
+    STATUS_KEY_SLEEP,     ANIM_MontyMole_Dark_Anim14,
+    STATUS_KEY_POISON,    ANIM_MontyMole_Dark_Anim01,
+    STATUS_KEY_STOP,      ANIM_MontyMole_Dark_Anim00,
+    STATUS_KEY_STATIC,    ANIM_MontyMole_Dark_Anim01,
+    STATUS_KEY_PARALYZE,  ANIM_MontyMole_Dark_Anim00,
+    STATUS_KEY_DIZZY,     ANIM_MontyMole_Dark_Anim14,
+    STATUS_KEY_FEAR,      ANIM_MontyMole_Dark_Anim14,
     STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations2)[] = {
-    STATUS_KEY_NORMAL, ANIM_MontyMole_Dark_Anim0F,
+    STATUS_KEY_NORMAL,    ANIM_MontyMole_Dark_Anim0F,
     STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations_hole)[] = {
-    STATUS_KEY_NORMAL, ANIM_MontyMole_Dark_Anim12,
+    STATUS_KEY_NORMAL,    ANIM_MontyMole_Dark_Anim12,
     STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations_unused)[] = {
-    STATUS_KEY_NORMAL, ANIM_MontyMole_Dark_Anim06,
+    STATUS_KEY_NORMAL,    ANIM_MontyMole_Dark_Anim06,
     STATUS_TABLE_END,
 };
 

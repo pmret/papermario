@@ -81,28 +81,28 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(IdleAnimations)[] = {
-    STATUS_KEY_NORMAL, ANIM_Swooper_Gray_Anim0C,
-    STATUS_KEY_STONE, ANIM_Swooper_Gray_Anim0B,
-    STATUS_KEY_SLEEP, ANIM_Swooper_Gray_Anim0F,
-    STATUS_KEY_POISON, ANIM_Swooper_Gray_Anim0C,
-    STATUS_KEY_STOP, ANIM_Swooper_Gray_Anim0B,
-    STATUS_KEY_STATIC, ANIM_Swooper_Gray_Anim0C,
-    STATUS_KEY_PARALYZE, ANIM_Swooper_Gray_Anim0B,
-    STATUS_KEY_DIZZY, ANIM_Swooper_Gray_Anim10,
-    STATUS_KEY_FEAR, ANIM_Swooper_Gray_Anim10,
+    STATUS_KEY_NORMAL,    ANIM_Swooper_Gray_Anim0C,
+    STATUS_KEY_STONE,     ANIM_Swooper_Gray_Anim0B,
+    STATUS_KEY_SLEEP,     ANIM_Swooper_Gray_Anim0F,
+    STATUS_KEY_POISON,    ANIM_Swooper_Gray_Anim0C,
+    STATUS_KEY_STOP,      ANIM_Swooper_Gray_Anim0B,
+    STATUS_KEY_STATIC,    ANIM_Swooper_Gray_Anim0C,
+    STATUS_KEY_PARALYZE,  ANIM_Swooper_Gray_Anim0B,
+    STATUS_KEY_DIZZY,     ANIM_Swooper_Gray_Anim10,
+    STATUS_KEY_FEAR,      ANIM_Swooper_Gray_Anim10,
     STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations_flying)[] = {
-    STATUS_KEY_NORMAL, ANIM_Swooper_Gray_Anim02,
-    STATUS_KEY_STONE, ANIM_Swooper_Gray_Anim01,
-    STATUS_KEY_SLEEP, ANIM_Swooper_Gray_Anim13,
-    STATUS_KEY_POISON, ANIM_Swooper_Gray_Anim02,
-    STATUS_KEY_STOP, ANIM_Swooper_Gray_Anim01,
-    STATUS_KEY_STATIC, ANIM_Swooper_Gray_Anim02,
-    STATUS_KEY_PARALYZE, ANIM_Swooper_Gray_Anim01,
-    STATUS_KEY_DIZZY, ANIM_Swooper_Gray_Anim14,
-    STATUS_KEY_FEAR, ANIM_Swooper_Gray_Anim14,
+    STATUS_KEY_NORMAL,    ANIM_Swooper_Gray_Anim02,
+    STATUS_KEY_STONE,     ANIM_Swooper_Gray_Anim01,
+    STATUS_KEY_SLEEP,     ANIM_Swooper_Gray_Anim13,
+    STATUS_KEY_POISON,    ANIM_Swooper_Gray_Anim02,
+    STATUS_KEY_STOP,      ANIM_Swooper_Gray_Anim01,
+    STATUS_KEY_STATIC,    ANIM_Swooper_Gray_Anim02,
+    STATUS_KEY_PARALYZE,  ANIM_Swooper_Gray_Anim01,
+    STATUS_KEY_DIZZY,     ANIM_Swooper_Gray_Anim14,
+    STATUS_KEY_FEAR,      ANIM_Swooper_Gray_Anim14,
     STATUS_TABLE_END,
 };
 

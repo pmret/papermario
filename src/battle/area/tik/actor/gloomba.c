@@ -81,28 +81,28 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(IdleAnimations)[] = {
-    STATUS_KEY_NORMAL, ANIM_Goomba_Dark_Idle,
-    STATUS_KEY_STONE, ANIM_Goomba_Dark_Still,
-    STATUS_KEY_SLEEP, ANIM_Goomba_Dark_Sleep,
-    STATUS_KEY_POISON, ANIM_Goomba_Dark_Idle,
-    STATUS_KEY_STOP, ANIM_Goomba_Dark_Still,
-    STATUS_KEY_STATIC, ANIM_Goomba_Dark_Idle,
-    STATUS_KEY_PARALYZE, ANIM_Goomba_Dark_Still,
-    STATUS_KEY_DIZZY, ANIM_Goomba_Dark_Dizzy,
-    STATUS_KEY_FEAR, ANIM_Goomba_Dark_Dizzy,
+    STATUS_KEY_NORMAL,    ANIM_Goomba_Dark_Idle,
+    STATUS_KEY_STONE,     ANIM_Goomba_Dark_Still,
+    STATUS_KEY_SLEEP,     ANIM_Goomba_Dark_Sleep,
+    STATUS_KEY_POISON,    ANIM_Goomba_Dark_Idle,
+    STATUS_KEY_STOP,      ANIM_Goomba_Dark_Still,
+    STATUS_KEY_STATIC,    ANIM_Goomba_Dark_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_Goomba_Dark_Still,
+    STATUS_KEY_DIZZY,     ANIM_Goomba_Dark_Dizzy,
+    STATUS_KEY_FEAR,      ANIM_Goomba_Dark_Dizzy,
     STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations_step)[] = {
-    STATUS_KEY_NORMAL, ANIM_Goomba_Dark_Run,
-    STATUS_KEY_STONE, ANIM_Goomba_Dark_Still,
-    STATUS_KEY_SLEEP, ANIM_Goomba_Dark_Sleep,
-    STATUS_KEY_POISON, ANIM_Goomba_Dark_Idle,
-    STATUS_KEY_STOP, ANIM_Goomba_Dark_Still,
-    STATUS_KEY_STATIC, ANIM_Goomba_Dark_Run,
-    STATUS_KEY_PARALYZE, ANIM_Goomba_Dark_Still,
-    STATUS_KEY_DIZZY, ANIM_Goomba_Dark_Dizzy,
-    STATUS_KEY_FEAR, ANIM_Goomba_Dark_Dizzy,
+    STATUS_KEY_NORMAL,    ANIM_Goomba_Dark_Run,
+    STATUS_KEY_STONE,     ANIM_Goomba_Dark_Still,
+    STATUS_KEY_SLEEP,     ANIM_Goomba_Dark_Sleep,
+    STATUS_KEY_POISON,    ANIM_Goomba_Dark_Idle,
+    STATUS_KEY_STOP,      ANIM_Goomba_Dark_Still,
+    STATUS_KEY_STATIC,    ANIM_Goomba_Dark_Run,
+    STATUS_KEY_PARALYZE,  ANIM_Goomba_Dark_Still,
+    STATUS_KEY_DIZZY,     ANIM_Goomba_Dark_Dizzy,
+    STATUS_KEY_FEAR,      ANIM_Goomba_Dark_Dizzy,
     STATUS_TABLE_END,
 };
 

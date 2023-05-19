@@ -17,13 +17,13 @@ s32 N(IdleAnimations_80224380)[] = {
 };
 
 s32 N(IdleAnimations_802243BC)[] = {
-    STATUS_KEY_NORMAL,   ANIM_JrTroopa_Idle,
-    STATUS_KEY_SLEEP,    ANIM_JrTroopa_Still,
-    STATUS_KEY_STONE,    ANIM_JrTroopa_Still,
-    STATUS_KEY_POISON,   ANIM_JrTroopa_Still,
-    STATUS_KEY_STOP,     ANIM_JrTroopa_Still,
-    STATUS_KEY_STATIC,   ANIM_JrTroopa_Still,
-    STATUS_KEY_PARALYZE, ANIM_JrTroopa_Still,
+    STATUS_KEY_NORMAL,    ANIM_JrTroopa_Idle,
+    STATUS_KEY_SLEEP,     ANIM_JrTroopa_Still,
+    STATUS_KEY_STONE,     ANIM_JrTroopa_Still,
+    STATUS_KEY_POISON,    ANIM_JrTroopa_Still,
+    STATUS_KEY_STOP,      ANIM_JrTroopa_Still,
+    STATUS_KEY_STATIC,    ANIM_JrTroopa_Still,
+    STATUS_KEY_PARALYZE,  ANIM_JrTroopa_Still,
     STATUS_TABLE_END,
 };
 

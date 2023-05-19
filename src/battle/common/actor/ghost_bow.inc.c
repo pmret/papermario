@@ -6,15 +6,15 @@ extern EvtScript N(bow_handleEvent);
 extern EvtScript N(bow_init);
 
 s32 N(bow_idleAnimations)[] = {
-    STATUS_KEY_NORMAL, ANIM_BattleBow_Idle,
-    STATUS_KEY_STONE, ANIM_BattleBow_Still,
-    STATUS_KEY_SLEEP, ANIM_BattleBow_Still,
-    STATUS_KEY_POISON, ANIM_BattleBow_Idle,
-    STATUS_KEY_STOP, ANIM_BattleBow_Still,
-    STATUS_KEY_STATIC, ANIM_BattleBow_Idle,
-    STATUS_KEY_PARALYZE, ANIM_BattleBow_Still,
-    STATUS_KEY_DIZZY, ANIM_BattleBow_Injured,
-    STATUS_KEY_FEAR, ANIM_BattleBow_Injured,
+    STATUS_KEY_NORMAL,    ANIM_BattleBow_Idle,
+    STATUS_KEY_STONE,     ANIM_BattleBow_Still,
+    STATUS_KEY_SLEEP,     ANIM_BattleBow_Still,
+    STATUS_KEY_POISON,    ANIM_BattleBow_Idle,
+    STATUS_KEY_STOP,      ANIM_BattleBow_Still,
+    STATUS_KEY_STATIC,    ANIM_BattleBow_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_BattleBow_Still,
+    STATUS_KEY_DIZZY,     ANIM_BattleBow_Injured,
+    STATUS_KEY_FEAR,      ANIM_BattleBow_Injured,
     STATUS_TABLE_END,
 };
 

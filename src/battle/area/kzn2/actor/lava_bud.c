@@ -49,20 +49,20 @@ enum {
 #define VINE_2_BASE (s32) Vine2Base
 
 s32 N(IdleAnimations)[] = {
-    STATUS_KEY_NORMAL, ANIM_LavaBud_Anim03,
-    STATUS_KEY_STOP, ANIM_LavaBud_Anim02,
+    STATUS_KEY_NORMAL,    ANIM_LavaBud_Anim03,
+    STATUS_KEY_STOP,      ANIM_LavaBud_Anim02,
     STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations_fiery)[] = {
-    STATUS_KEY_NORMAL, ANIM_LavaBud_Anim04,
-    STATUS_KEY_STOP, ANIM_LavaBud_Anim02,
+    STATUS_KEY_NORMAL,    ANIM_LavaBud_Anim04,
+    STATUS_KEY_STOP,      ANIM_LavaBud_Anim02,
     STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations_wet)[] = {
-    STATUS_KEY_NORMAL, ANIM_LavaBud_Anim0F,
-    STATUS_KEY_STOP, ANIM_LavaBud_Anim0F,
+    STATUS_KEY_NORMAL,    ANIM_LavaBud_Anim0F,
+    STATUS_KEY_STOP,      ANIM_LavaBud_Anim0F,
     STATUS_TABLE_END,
 };
 

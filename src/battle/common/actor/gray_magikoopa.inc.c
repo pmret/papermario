@@ -176,33 +176,33 @@ ActorBlueprint N(flying) = {
 };
 
 s32 N(IdleAnimations1)[] = {
-    STATUS_KEY_NORMAL, ANIM_Magikoopa_Gray_Anim01,
-    STATUS_KEY_STONE, ANIM_Magikoopa_Gray_Anim00,
-    STATUS_KEY_SLEEP, ANIM_Magikoopa_Gray_Anim08,
-    STATUS_KEY_POISON, ANIM_Magikoopa_Gray_Anim01,
-    STATUS_KEY_STOP, ANIM_Magikoopa_Gray_Anim00,
-    STATUS_KEY_STATIC, ANIM_Magikoopa_Gray_Anim01,
-    STATUS_KEY_PARALYZE, ANIM_Magikoopa_Gray_Anim00,
-    STATUS_KEY_DIZZY, ANIM_Magikoopa_Gray_Anim07,
-    STATUS_KEY_FEAR, ANIM_Magikoopa_Gray_Anim07,
+    STATUS_KEY_NORMAL,    ANIM_Magikoopa_Gray_Anim01,
+    STATUS_KEY_STONE,     ANIM_Magikoopa_Gray_Anim00,
+    STATUS_KEY_SLEEP,     ANIM_Magikoopa_Gray_Anim08,
+    STATUS_KEY_POISON,    ANIM_Magikoopa_Gray_Anim01,
+    STATUS_KEY_STOP,      ANIM_Magikoopa_Gray_Anim00,
+    STATUS_KEY_STATIC,    ANIM_Magikoopa_Gray_Anim01,
+    STATUS_KEY_PARALYZE,  ANIM_Magikoopa_Gray_Anim00,
+    STATUS_KEY_DIZZY,     ANIM_Magikoopa_Gray_Anim07,
+    STATUS_KEY_FEAR,      ANIM_Magikoopa_Gray_Anim07,
     STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations2)[] = {
-    STATUS_KEY_NORMAL, ANIM_FlyingMagikoopa_Gray_Anim01,
-    STATUS_KEY_STONE, ANIM_FlyingMagikoopa_Gray_Anim00,
-    STATUS_KEY_SLEEP, ANIM_FlyingMagikoopa_Gray_Anim08,
-    STATUS_KEY_POISON, ANIM_FlyingMagikoopa_Gray_Anim01,
-    STATUS_KEY_STOP, ANIM_FlyingMagikoopa_Gray_Anim00,
-    STATUS_KEY_STATIC, ANIM_FlyingMagikoopa_Gray_Anim01,
-    STATUS_KEY_PARALYZE, ANIM_FlyingMagikoopa_Gray_Anim00,
-    STATUS_KEY_DIZZY, ANIM_FlyingMagikoopa_Gray_Anim07,
-    STATUS_KEY_FEAR, ANIM_FlyingMagikoopa_Gray_Anim07,
+    STATUS_KEY_NORMAL,    ANIM_FlyingMagikoopa_Gray_Anim01,
+    STATUS_KEY_STONE,     ANIM_FlyingMagikoopa_Gray_Anim00,
+    STATUS_KEY_SLEEP,     ANIM_FlyingMagikoopa_Gray_Anim08,
+    STATUS_KEY_POISON,    ANIM_FlyingMagikoopa_Gray_Anim01,
+    STATUS_KEY_STOP,      ANIM_FlyingMagikoopa_Gray_Anim00,
+    STATUS_KEY_STATIC,    ANIM_FlyingMagikoopa_Gray_Anim01,
+    STATUS_KEY_PARALYZE,  ANIM_FlyingMagikoopa_Gray_Anim00,
+    STATUS_KEY_DIZZY,     ANIM_FlyingMagikoopa_Gray_Anim07,
+    STATUS_KEY_FEAR,      ANIM_FlyingMagikoopa_Gray_Anim07,
     STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations3)[] = {
-    STATUS_KEY_NORMAL, ANIM_FlyingMagikoopa_Gray_Anim0A,
+    STATUS_KEY_NORMAL,    ANIM_FlyingMagikoopa_Gray_Anim0A,
     STATUS_TABLE_END,
 };
 

@@ -272,14 +272,14 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(IdleAnimations)[] = {
-    STATUS_KEY_NORMAL, ANIM_TankGuy_Anim01,
-    STATUS_KEY_STOP, ANIM_TankGuy_Anim00,
+    STATUS_KEY_NORMAL,    ANIM_TankGuy_Anim01,
+    STATUS_KEY_STOP,      ANIM_TankGuy_Anim00,
     STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations_watt)[] = {
-    STATUS_KEY_NORMAL, ANIM_TankGuy_Anim07,
-    STATUS_KEY_STOP, ANIM_TankGuy_Anim00,
+    STATUS_KEY_NORMAL,    ANIM_TankGuy_Anim07,
+    STATUS_KEY_STOP,      ANIM_TankGuy_Anim00,
     STATUS_TABLE_END,
 };
 

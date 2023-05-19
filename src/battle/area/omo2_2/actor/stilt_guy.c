@@ -34,21 +34,21 @@ extern EvtScript N(shy_guy_handleEvent);
 
 
 s32 N(IdleAnimations2)[] = {
-    STATUS_KEY_NORMAL, ANIM_StiltGuy_Anim01,
-    STATUS_KEY_STONE, ANIM_StiltGuy_Anim00,
-    STATUS_KEY_SLEEP, ANIM_StiltGuy_Anim04,
-    STATUS_KEY_POISON, ANIM_StiltGuy_Anim01,
-    STATUS_KEY_STOP, ANIM_StiltGuy_Anim00,
-    STATUS_KEY_STATIC, ANIM_StiltGuy_Anim00,
-    STATUS_KEY_PARALYZE, ANIM_StiltGuy_Anim00,
-    STATUS_KEY_PARALYZE, ANIM_StiltGuy_Anim00,
-    STATUS_KEY_DIZZY, ANIM_StiltGuy_Anim00,
-    STATUS_KEY_FEAR, ANIM_StiltGuy_Anim00,
+    STATUS_KEY_NORMAL,    ANIM_StiltGuy_Anim01,
+    STATUS_KEY_STONE,     ANIM_StiltGuy_Anim00,
+    STATUS_KEY_SLEEP,     ANIM_StiltGuy_Anim04,
+    STATUS_KEY_POISON,    ANIM_StiltGuy_Anim01,
+    STATUS_KEY_STOP,      ANIM_StiltGuy_Anim00,
+    STATUS_KEY_STATIC,    ANIM_StiltGuy_Anim00,
+    STATUS_KEY_PARALYZE,  ANIM_StiltGuy_Anim00,
+    STATUS_KEY_PARALYZE,  ANIM_StiltGuy_Anim00,
+    STATUS_KEY_DIZZY,     ANIM_StiltGuy_Anim00,
+    STATUS_KEY_FEAR,      ANIM_StiltGuy_Anim00,
     STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations3)[] = {
-    STATUS_KEY_NORMAL, ANIM_StiltGuyUnfold_Anim00,
+    STATUS_KEY_NORMAL,    ANIM_StiltGuyUnfold_Anim00,
     STATUS_TABLE_END,
 };
 
@@ -907,15 +907,15 @@ EvtScript N(shy_guy_on_spin_smash) = {
 };
 
 s32 N(IdleAnimations)[] = {
-    STATUS_KEY_NORMAL, ANIM_ShyGuy_Red_Anim01,
-    STATUS_KEY_STONE, ANIM_ShyGuy_Red_Anim00,
-    STATUS_KEY_SLEEP, ANIM_ShyGuy_Red_Anim12,
-    STATUS_KEY_POISON, ANIM_ShyGuy_Red_Anim01,
-    STATUS_KEY_STOP, ANIM_ShyGuy_Red_Anim00,
-    STATUS_KEY_STATIC, ANIM_ShyGuy_Red_Anim01,
-    STATUS_KEY_PARALYZE, ANIM_ShyGuy_Red_Anim00,
-    STATUS_KEY_DIZZY, ANIM_ShyGuy_Red_Anim13,
-    STATUS_KEY_FEAR, ANIM_ShyGuy_Red_Anim13,
+    STATUS_KEY_NORMAL,    ANIM_ShyGuy_Red_Anim01,
+    STATUS_KEY_STONE,     ANIM_ShyGuy_Red_Anim00,
+    STATUS_KEY_SLEEP,     ANIM_ShyGuy_Red_Anim12,
+    STATUS_KEY_POISON,    ANIM_ShyGuy_Red_Anim01,
+    STATUS_KEY_STOP,      ANIM_ShyGuy_Red_Anim00,
+    STATUS_KEY_STATIC,    ANIM_ShyGuy_Red_Anim01,
+    STATUS_KEY_PARALYZE,  ANIM_ShyGuy_Red_Anim00,
+    STATUS_KEY_DIZZY,     ANIM_ShyGuy_Red_Anim13,
+    STATUS_KEY_FEAR,      ANIM_ShyGuy_Red_Anim13,
     STATUS_TABLE_END,
 };
 

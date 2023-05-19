@@ -82,28 +82,28 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(IdleAnimations)[] = {
-    STATUS_KEY_NORMAL, ANIM_SpikedGoomba_Dark_Idle,
-    STATUS_KEY_STONE, ANIM_SpikedGoomba_Dark_Still,
-    STATUS_KEY_SLEEP, ANIM_SpikedGoomba_Dark_Sleep,
-    STATUS_KEY_POISON, ANIM_SpikedGoomba_Dark_Idle,
-    STATUS_KEY_STOP, ANIM_SpikedGoomba_Dark_Still,
-    STATUS_KEY_STATIC, ANIM_SpikedGoomba_Dark_Idle,
-    STATUS_KEY_PARALYZE, ANIM_SpikedGoomba_Dark_Still,
-    STATUS_KEY_DIZZY, ANIM_SpikedGoomba_Dark_Dizzy,
-    STATUS_KEY_FEAR, ANIM_SpikedGoomba_Dark_Dizzy,
+    STATUS_KEY_NORMAL,    ANIM_SpikedGoomba_Dark_Idle,
+    STATUS_KEY_STONE,     ANIM_SpikedGoomba_Dark_Still,
+    STATUS_KEY_SLEEP,     ANIM_SpikedGoomba_Dark_Sleep,
+    STATUS_KEY_POISON,    ANIM_SpikedGoomba_Dark_Idle,
+    STATUS_KEY_STOP,      ANIM_SpikedGoomba_Dark_Still,
+    STATUS_KEY_STATIC,    ANIM_SpikedGoomba_Dark_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_SpikedGoomba_Dark_Still,
+    STATUS_KEY_DIZZY,     ANIM_SpikedGoomba_Dark_Dizzy,
+    STATUS_KEY_FEAR,      ANIM_SpikedGoomba_Dark_Dizzy,
     STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations_step)[] = {
-    STATUS_KEY_NORMAL, ANIM_SpikedGoomba_Dark_Run,
-    STATUS_KEY_STONE, ANIM_SpikedGoomba_Dark_Still,
-    STATUS_KEY_SLEEP, ANIM_SpikedGoomba_Dark_Sleep,
-    STATUS_KEY_POISON, ANIM_SpikedGoomba_Dark_Idle,
-    STATUS_KEY_STOP, ANIM_SpikedGoomba_Dark_Still,
-    STATUS_KEY_STATIC, ANIM_SpikedGoomba_Dark_Run,
-    STATUS_KEY_PARALYZE, ANIM_SpikedGoomba_Dark_Still,
-    STATUS_KEY_DIZZY, ANIM_SpikedGoomba_Dark_Dizzy,
-    STATUS_KEY_FEAR, ANIM_SpikedGoomba_Dark_Dizzy,
+    STATUS_KEY_NORMAL,    ANIM_SpikedGoomba_Dark_Run,
+    STATUS_KEY_STONE,     ANIM_SpikedGoomba_Dark_Still,
+    STATUS_KEY_SLEEP,     ANIM_SpikedGoomba_Dark_Sleep,
+    STATUS_KEY_POISON,    ANIM_SpikedGoomba_Dark_Idle,
+    STATUS_KEY_STOP,      ANIM_SpikedGoomba_Dark_Still,
+    STATUS_KEY_STATIC,    ANIM_SpikedGoomba_Dark_Run,
+    STATUS_KEY_PARALYZE,  ANIM_SpikedGoomba_Dark_Still,
+    STATUS_KEY_DIZZY,     ANIM_SpikedGoomba_Dark_Dizzy,
+    STATUS_KEY_FEAR,      ANIM_SpikedGoomba_Dark_Dizzy,
     STATUS_TABLE_END,
 };
 

@@ -11,16 +11,16 @@ extern EvtScript N(takeTurn);
 extern EvtScript N(handleEvent);
 
 s32 N(IdleAnimations)[] = {
-    STATUS_KEY_NORMAL, ANIM_PetitPiranha_Anim01,
-    STATUS_KEY_STONE, ANIM_PetitPiranha_Anim00,
-    STATUS_KEY_SLEEP, ANIM_PetitPiranha_Anim00,
-    STATUS_KEY_POISON, ANIM_PetitPiranha_Anim01,
-    STATUS_KEY_STOP, ANIM_PetitPiranha_Anim00,
-    STATUS_KEY_STATIC, ANIM_PetitPiranha_Anim00,
-    STATUS_KEY_PARALYZE, ANIM_PetitPiranha_Anim00,
-    STATUS_KEY_PARALYZE, ANIM_PetitPiranha_Anim00,
-    STATUS_KEY_DIZZY, ANIM_PetitPiranha_Anim01,
-    STATUS_KEY_DIZZY, ANIM_PetitPiranha_Anim01,
+    STATUS_KEY_NORMAL,    ANIM_PetitPiranha_Anim01,
+    STATUS_KEY_STONE,     ANIM_PetitPiranha_Anim00,
+    STATUS_KEY_SLEEP,     ANIM_PetitPiranha_Anim00,
+    STATUS_KEY_POISON,    ANIM_PetitPiranha_Anim01,
+    STATUS_KEY_STOP,      ANIM_PetitPiranha_Anim00,
+    STATUS_KEY_STATIC,    ANIM_PetitPiranha_Anim00,
+    STATUS_KEY_PARALYZE,  ANIM_PetitPiranha_Anim00,
+    STATUS_KEY_PARALYZE,  ANIM_PetitPiranha_Anim00,
+    STATUS_KEY_DIZZY,     ANIM_PetitPiranha_Anim01,
+    STATUS_KEY_DIZZY,     ANIM_PetitPiranha_Anim01,
     STATUS_TABLE_END,
 };
 

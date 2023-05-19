@@ -37,15 +37,15 @@ API_CALLABLE(N(CloseTattleWindow)) {
 }
 
 s32 N(goombario_idleAnimations)[] = {
-    STATUS_KEY_NORMAL, ANIM_BattleGoombario_Idle,
-    STATUS_KEY_STONE, ANIM_BattleGoombario_Still,
-    STATUS_KEY_SLEEP, ANIM_BattleGoombario_Still,
-    STATUS_KEY_POISON, ANIM_BattleGoombario_Idle,
-    STATUS_KEY_STOP, ANIM_BattleGoombario_Still,
-    STATUS_KEY_STATIC, ANIM_BattleGoombario_Idle,
-    STATUS_KEY_PARALYZE, ANIM_BattleGoombario_Still,
-    STATUS_KEY_DIZZY, ANIM_BattleGoombario_Injured,
-    STATUS_KEY_FEAR, ANIM_BattleGoombario_Injured,
+    STATUS_KEY_NORMAL,    ANIM_BattleGoombario_Idle,
+    STATUS_KEY_STONE,     ANIM_BattleGoombario_Still,
+    STATUS_KEY_SLEEP,     ANIM_BattleGoombario_Still,
+    STATUS_KEY_POISON,    ANIM_BattleGoombario_Idle,
+    STATUS_KEY_STOP,      ANIM_BattleGoombario_Still,
+    STATUS_KEY_STATIC,    ANIM_BattleGoombario_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_BattleGoombario_Still,
+    STATUS_KEY_DIZZY,     ANIM_BattleGoombario_Injured,
+    STATUS_KEY_FEAR,      ANIM_BattleGoombario_Injured,
     STATUS_TABLE_END,
 };
 

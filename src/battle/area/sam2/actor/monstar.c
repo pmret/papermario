@@ -102,21 +102,21 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(IdleAnimations)[] = {
-    STATUS_KEY_NORMAL, ANIM_Monstar_Idle1,
-    STATUS_KEY_STONE, ANIM_Monstar_Still,
-    STATUS_KEY_SLEEP, ANIM_Monstar_Idle1,
-    STATUS_KEY_POISON, ANIM_Monstar_Idle1,
-    STATUS_KEY_STOP, ANIM_Monstar_Still,
-    STATUS_KEY_STATIC, ANIM_Monstar_Idle1,
-    STATUS_KEY_PARALYZE, ANIM_Monstar_Still,
-    STATUS_KEY_PARALYZE, ANIM_Monstar_Still,
-    STATUS_KEY_DIZZY, ANIM_Monstar_Idle1,
-    STATUS_KEY_DIZZY, ANIM_Monstar_Idle1,
+    STATUS_KEY_NORMAL,    ANIM_Monstar_Idle1,
+    STATUS_KEY_STONE,     ANIM_Monstar_Still,
+    STATUS_KEY_SLEEP,     ANIM_Monstar_Idle1,
+    STATUS_KEY_POISON,    ANIM_Monstar_Idle1,
+    STATUS_KEY_STOP,      ANIM_Monstar_Still,
+    STATUS_KEY_STATIC,    ANIM_Monstar_Idle1,
+    STATUS_KEY_PARALYZE,  ANIM_Monstar_Still,
+    STATUS_KEY_PARALYZE,  ANIM_Monstar_Still,
+    STATUS_KEY_DIZZY,     ANIM_Monstar_Idle1,
+    STATUS_KEY_DIZZY,     ANIM_Monstar_Idle1,
     STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations2)[] = {
-    STATUS_KEY_NORMAL, ANIM_Monstar_GatherStrength1,
+    STATUS_KEY_NORMAL,    ANIM_Monstar_GatherStrength1,
     STATUS_TABLE_END,
 };
 

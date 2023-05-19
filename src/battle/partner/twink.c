@@ -28,8 +28,8 @@ API_CALLABLE(func_80238000_714CF0) {
 }
 
 s32 N(IdleAnimations)[] = {
-    STATUS_KEY_NORMAL, ANIM_Twink_Angry,
-    STATUS_KEY_INACTIVE, ANIM_Twink_Still,
+    STATUS_KEY_NORMAL,    ANIM_Twink_Angry,
+    STATUS_KEY_INACTIVE,  ANIM_Twink_Still,
     STATUS_TABLE_END,
 };
 

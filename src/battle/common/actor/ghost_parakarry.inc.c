@@ -6,15 +6,15 @@ extern EvtScript N(parakarry_idle);
 extern EvtScript N(parakarry_handleEvent);
 
 s32 N(parakarry_idleAnimations)[] = {
-    STATUS_KEY_NORMAL, ANIM_BattleParakarry_Idle,
-    STATUS_KEY_STONE, ANIM_BattleParakarry_Still,
-    STATUS_KEY_SLEEP, ANIM_BattleParakarry_Still,
-    STATUS_KEY_POISON, ANIM_BattleParakarry_Idle,
-    STATUS_KEY_STOP, ANIM_BattleParakarry_Still,
-    STATUS_KEY_STATIC, ANIM_BattleParakarry_Idle,
-    STATUS_KEY_PARALYZE, ANIM_BattleParakarry_Still,
-    STATUS_KEY_DIZZY, ANIM_BattleParakarry_Idle,
-    STATUS_KEY_FEAR, ANIM_BattleParakarry_Idle,
+    STATUS_KEY_NORMAL,    ANIM_BattleParakarry_Idle,
+    STATUS_KEY_STONE,     ANIM_BattleParakarry_Still,
+    STATUS_KEY_SLEEP,     ANIM_BattleParakarry_Still,
+    STATUS_KEY_POISON,    ANIM_BattleParakarry_Idle,
+    STATUS_KEY_STOP,      ANIM_BattleParakarry_Still,
+    STATUS_KEY_STATIC,    ANIM_BattleParakarry_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_BattleParakarry_Still,
+    STATUS_KEY_DIZZY,     ANIM_BattleParakarry_Idle,
+    STATUS_KEY_FEAR,      ANIM_BattleParakarry_Idle,
     STATUS_TABLE_END,
 };
 

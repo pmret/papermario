@@ -12,25 +12,25 @@ extern EvtScript N(handleEvent);
 extern EvtScript N(nextTurn);
 
 s32 N(IdleAnimations)[] = {
-    STATUS_KEY_NORMAL, ANIM_DryBones_Anim02,
-    STATUS_KEY_STONE, ANIM_DryBones_Anim00,
-    STATUS_KEY_SLEEP, ANIM_DryBones_Anim0E,
-    STATUS_KEY_POISON, ANIM_DryBones_Anim02,
-    STATUS_KEY_STOP, ANIM_DryBones_Anim00,
-    STATUS_KEY_STATIC, ANIM_DryBones_Anim02,
-    STATUS_KEY_PARALYZE, ANIM_DryBones_Anim00,
-    STATUS_KEY_DIZZY, ANIM_DryBones_Anim0D,
-    STATUS_KEY_FEAR, ANIM_DryBones_Anim0D,
+    STATUS_KEY_NORMAL,    ANIM_DryBones_Anim02,
+    STATUS_KEY_STONE,     ANIM_DryBones_Anim00,
+    STATUS_KEY_SLEEP,     ANIM_DryBones_Anim0E,
+    STATUS_KEY_POISON,    ANIM_DryBones_Anim02,
+    STATUS_KEY_STOP,      ANIM_DryBones_Anim00,
+    STATUS_KEY_STATIC,    ANIM_DryBones_Anim02,
+    STATUS_KEY_PARALYZE,  ANIM_DryBones_Anim00,
+    STATUS_KEY_DIZZY,     ANIM_DryBones_Anim0D,
+    STATUS_KEY_FEAR,      ANIM_DryBones_Anim0D,
     STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations_dead)[] = {
-    STATUS_KEY_NORMAL, ANIM_DryBones_Anim01,
+    STATUS_KEY_NORMAL,    ANIM_DryBones_Anim01,
     STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations_bone)[] = {
-    STATUS_KEY_NORMAL, ANIM_DryBones_Anim0F,
+    STATUS_KEY_NORMAL,    ANIM_DryBones_Anim0F,
     STATUS_TABLE_END,
 };
 

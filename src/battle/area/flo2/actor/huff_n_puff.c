@@ -244,67 +244,67 @@ API_CALLABLE(N(UpdateLerp)) {
 s32 N(TuffPuffActorIds)[32] = { };
 
 s32 N(IdleAnimations)[] = {
-    STATUS_KEY_NORMAL, ANIM_HuffNPuff_Anim01,
-    STATUS_KEY_STONE, ANIM_HuffNPuff_Anim01,
-    STATUS_KEY_SLEEP, ANIM_HuffNPuff_Anim01,
-    STATUS_KEY_POISON, ANIM_HuffNPuff_Anim01,
-    STATUS_KEY_STOP, ANIM_HuffNPuff_Anim01,
-    STATUS_KEY_STATIC, ANIM_HuffNPuff_Anim01,
-    STATUS_KEY_PARALYZE, ANIM_HuffNPuff_Anim01,
-    STATUS_KEY_PARALYZE, ANIM_HuffNPuff_Anim01,
-    STATUS_KEY_DIZZY, ANIM_HuffNPuff_Anim01,
-    STATUS_KEY_DIZZY, ANIM_HuffNPuff_Anim01,
-    STATUS_KEY_FEAR, ANIM_HuffNPuff_Anim01,
+    STATUS_KEY_NORMAL,    ANIM_HuffNPuff_Anim01,
+    STATUS_KEY_STONE,     ANIM_HuffNPuff_Anim01,
+    STATUS_KEY_SLEEP,     ANIM_HuffNPuff_Anim01,
+    STATUS_KEY_POISON,    ANIM_HuffNPuff_Anim01,
+    STATUS_KEY_STOP,      ANIM_HuffNPuff_Anim01,
+    STATUS_KEY_STATIC,    ANIM_HuffNPuff_Anim01,
+    STATUS_KEY_PARALYZE,  ANIM_HuffNPuff_Anim01,
+    STATUS_KEY_PARALYZE,  ANIM_HuffNPuff_Anim01,
+    STATUS_KEY_DIZZY,     ANIM_HuffNPuff_Anim01,
+    STATUS_KEY_DIZZY,     ANIM_HuffNPuff_Anim01,
+    STATUS_KEY_FEAR,      ANIM_HuffNPuff_Anim01,
     STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations2)[] = {
-    STATUS_KEY_NORMAL, ANIM_HuffNPuff_Anim02,
-    STATUS_KEY_STONE, ANIM_HuffNPuff_Anim02,
-    STATUS_KEY_SLEEP, ANIM_HuffNPuff_Anim02,
-    STATUS_KEY_POISON, ANIM_HuffNPuff_Anim02,
-    STATUS_KEY_STOP, ANIM_HuffNPuff_Anim02,
-    STATUS_KEY_STATIC, ANIM_HuffNPuff_Anim02,
-    STATUS_KEY_PARALYZE, ANIM_HuffNPuff_Anim02,
-    STATUS_KEY_PARALYZE, ANIM_HuffNPuff_Anim02,
-    STATUS_KEY_DIZZY, ANIM_HuffNPuff_Anim02,
-    STATUS_KEY_DIZZY, ANIM_HuffNPuff_Anim02,
-    STATUS_KEY_FEAR, ANIM_HuffNPuff_Anim02,
+    STATUS_KEY_NORMAL,    ANIM_HuffNPuff_Anim02,
+    STATUS_KEY_STONE,     ANIM_HuffNPuff_Anim02,
+    STATUS_KEY_SLEEP,     ANIM_HuffNPuff_Anim02,
+    STATUS_KEY_POISON,    ANIM_HuffNPuff_Anim02,
+    STATUS_KEY_STOP,      ANIM_HuffNPuff_Anim02,
+    STATUS_KEY_STATIC,    ANIM_HuffNPuff_Anim02,
+    STATUS_KEY_PARALYZE,  ANIM_HuffNPuff_Anim02,
+    STATUS_KEY_PARALYZE,  ANIM_HuffNPuff_Anim02,
+    STATUS_KEY_DIZZY,     ANIM_HuffNPuff_Anim02,
+    STATUS_KEY_DIZZY,     ANIM_HuffNPuff_Anim02,
+    STATUS_KEY_FEAR,      ANIM_HuffNPuff_Anim02,
     STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations3)[] = {
-    STATUS_KEY_NORMAL, ANIM_HuffNPuff_Anim03,
-    STATUS_KEY_STONE, ANIM_HuffNPuff_Anim03,
-    STATUS_KEY_SLEEP, ANIM_HuffNPuff_Anim03,
-    STATUS_KEY_POISON, ANIM_HuffNPuff_Anim03,
-    STATUS_KEY_STOP, ANIM_HuffNPuff_Anim03,
-    STATUS_KEY_STATIC, ANIM_HuffNPuff_Anim03,
-    STATUS_KEY_PARALYZE, ANIM_HuffNPuff_Anim03,
-    STATUS_KEY_PARALYZE, ANIM_HuffNPuff_Anim03,
-    STATUS_KEY_DIZZY, ANIM_HuffNPuff_Anim03,
-    STATUS_KEY_DIZZY, ANIM_HuffNPuff_Anim03,
-    STATUS_KEY_FEAR, ANIM_HuffNPuff_Anim03,
+    STATUS_KEY_NORMAL,    ANIM_HuffNPuff_Anim03,
+    STATUS_KEY_STONE,     ANIM_HuffNPuff_Anim03,
+    STATUS_KEY_SLEEP,     ANIM_HuffNPuff_Anim03,
+    STATUS_KEY_POISON,    ANIM_HuffNPuff_Anim03,
+    STATUS_KEY_STOP,      ANIM_HuffNPuff_Anim03,
+    STATUS_KEY_STATIC,    ANIM_HuffNPuff_Anim03,
+    STATUS_KEY_PARALYZE,  ANIM_HuffNPuff_Anim03,
+    STATUS_KEY_PARALYZE,  ANIM_HuffNPuff_Anim03,
+    STATUS_KEY_DIZZY,     ANIM_HuffNPuff_Anim03,
+    STATUS_KEY_DIZZY,     ANIM_HuffNPuff_Anim03,
+    STATUS_KEY_FEAR,      ANIM_HuffNPuff_Anim03,
     STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations_charged1)[] = {
-    STATUS_KEY_NORMAL, ANIM_HuffNPuff_Anim11,
+    STATUS_KEY_NORMAL,    ANIM_HuffNPuff_Anim11,
     STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations_charged2)[] = {
-    STATUS_KEY_NORMAL, ANIM_HuffNPuff_Anim12,
+    STATUS_KEY_NORMAL,    ANIM_HuffNPuff_Anim12,
     STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations_charged3)[] = {
-    STATUS_KEY_NORMAL, ANIM_HuffNPuff_Anim13,
+    STATUS_KEY_NORMAL,    ANIM_HuffNPuff_Anim13,
     STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations4)[] = {
-    STATUS_KEY_NORMAL, ANIM_RuffPuff_Anim02,
+    STATUS_KEY_NORMAL,    ANIM_RuffPuff_Anim02,
     STATUS_TABLE_END,
 };
 

@@ -82,7 +82,7 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(IdleAnimations)[] = {
-    STATUS_KEY_NORMAL, ANIM_MarshalGuy_Anim01,
+    STATUS_KEY_NORMAL,    ANIM_MarshalGuy_Anim01,
     STATUS_TABLE_END,
 };
 

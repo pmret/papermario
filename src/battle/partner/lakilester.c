@@ -86,14 +86,14 @@ API_CALLABLE(N(SpinyFlipUpdatePopup)) {
 
 
 s32 N(IdleAnimations)[] = {
-    STATUS_KEY_NORMAL,  ANIM_BattleLakilester_Walk,
-    STATUS_KEY_DAZE, ANIM_BattleLakilester_Injured,
-    STATUS_KEY_INACTIVE, ANIM_BattleLakilester_Still,
+    STATUS_KEY_NORMAL,    ANIM_BattleLakilester_Walk,
+    STATUS_KEY_DAZE,      ANIM_BattleLakilester_Injured,
+    STATUS_KEY_INACTIVE,  ANIM_BattleLakilester_Still,
     STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations_spiny)[] = {
-    STATUS_KEY_NORMAL, ANIM_BattleLakilester_Spiny,
+    STATUS_KEY_NORMAL,    ANIM_BattleLakilester_Spiny,
     STATUS_TABLE_END,
 };
 

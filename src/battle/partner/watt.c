@@ -440,13 +440,13 @@ API_CALLABLE(N(AverageTargetParalyzeChance)) {
 }
 
 s32 N(IdleAnimations)[] = {
-    STATUS_KEY_NORMAL,      ANIM_BattleWatt_Walk,
-    STATUS_KEY_STONE,       ANIM_BattleWatt_Still,
-    STATUS_KEY_SLEEP,       ANIM_BattleWatt_Sleep,
-    STATUS_KEY_POISON,      ANIM_BattleWatt_Still,
-    STATUS_KEY_STOP,        ANIM_BattleWatt_Still,
-    STATUS_KEY_DAZE,        ANIM_BattleWatt_Injured,
-    STATUS_KEY_INACTIVE,   ANIM_BattleWatt_Still,
+    STATUS_KEY_NORMAL,    ANIM_BattleWatt_Walk,
+    STATUS_KEY_STONE,     ANIM_BattleWatt_Still,
+    STATUS_KEY_SLEEP,     ANIM_BattleWatt_Sleep,
+    STATUS_KEY_POISON,    ANIM_BattleWatt_Still,
+    STATUS_KEY_STOP,      ANIM_BattleWatt_Still,
+    STATUS_KEY_DAZE,      ANIM_BattleWatt_Injured,
+    STATUS_KEY_INACTIVE,  ANIM_BattleWatt_Still,
     STATUS_TABLE_END,
 };
 

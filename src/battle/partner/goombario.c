@@ -482,7 +482,7 @@ s32 N(IdleAnimations)[] = {
     STATUS_KEY_POISON,    ANIM_BattleGoombario_Still,
     STATUS_KEY_STOP,      ANIM_BattleGoombario_Still,
     STATUS_KEY_DAZE,      ANIM_BattleGoombario_Injured,
-    STATUS_KEY_INACTIVE, ANIM_BattleGoombario_Still,
+    STATUS_KEY_INACTIVE,  ANIM_BattleGoombario_Still,
     STATUS_TABLE_END,
 };
 

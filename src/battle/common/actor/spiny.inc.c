@@ -11,33 +11,33 @@ extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
 
 s32 N(IdleAnimations)[] = {
-    STATUS_KEY_NORMAL, ANIM_Spiny_Anim01,
-    STATUS_KEY_STONE, ANIM_Spiny_Anim00,
-    STATUS_KEY_SLEEP, ANIM_Spiny_Anim10,
-    STATUS_KEY_POISON, ANIM_Spiny_Anim01,
-    STATUS_KEY_STOP, ANIM_Spiny_Anim00,
-    STATUS_KEY_STATIC, ANIM_Spiny_Anim01,
-    STATUS_KEY_PARALYZE, ANIM_Spiny_Anim00,
-    STATUS_KEY_DIZZY, ANIM_Spiny_Anim12,
-    STATUS_KEY_FEAR, ANIM_Spiny_Anim12,
+    STATUS_KEY_NORMAL,    ANIM_Spiny_Anim01,
+    STATUS_KEY_STONE,     ANIM_Spiny_Anim00,
+    STATUS_KEY_SLEEP,     ANIM_Spiny_Anim10,
+    STATUS_KEY_POISON,    ANIM_Spiny_Anim01,
+    STATUS_KEY_STOP,      ANIM_Spiny_Anim00,
+    STATUS_KEY_STATIC,    ANIM_Spiny_Anim01,
+    STATUS_KEY_PARALYZE,  ANIM_Spiny_Anim00,
+    STATUS_KEY_DIZZY,     ANIM_Spiny_Anim12,
+    STATUS_KEY_FEAR,      ANIM_Spiny_Anim12,
     STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations_flipped)[] = {
-    STATUS_KEY_NORMAL, ANIM_Spiny_Anim02,
-    STATUS_KEY_STONE, ANIM_Spiny_Anim15,
-    STATUS_KEY_SLEEP, ANIM_Spiny_Anim11,
-    STATUS_KEY_POISON, ANIM_Spiny_Anim02,
-    STATUS_KEY_STOP, ANIM_Spiny_Anim15,
-    STATUS_KEY_STATIC, ANIM_Spiny_Anim02,
-    STATUS_KEY_PARALYZE, ANIM_Spiny_Anim15,
-    STATUS_KEY_DIZZY, ANIM_Spiny_Anim13,
-    STATUS_KEY_FEAR, ANIM_Spiny_Anim13,
+    STATUS_KEY_NORMAL,    ANIM_Spiny_Anim02,
+    STATUS_KEY_STONE,     ANIM_Spiny_Anim15,
+    STATUS_KEY_SLEEP,     ANIM_Spiny_Anim11,
+    STATUS_KEY_POISON,    ANIM_Spiny_Anim02,
+    STATUS_KEY_STOP,      ANIM_Spiny_Anim15,
+    STATUS_KEY_STATIC,    ANIM_Spiny_Anim02,
+    STATUS_KEY_PARALYZE,  ANIM_Spiny_Anim15,
+    STATUS_KEY_DIZZY,     ANIM_Spiny_Anim13,
+    STATUS_KEY_FEAR,      ANIM_Spiny_Anim13,
     STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations_2)[] = {
-    STATUS_KEY_NORMAL, ANIM_Lakitu_Anim0B,
+    STATUS_KEY_NORMAL,    ANIM_Lakitu_Anim0B,
     STATUS_TABLE_END,
 };
 

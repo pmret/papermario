@@ -81,15 +81,15 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(IdleAnimations)[] = {
-    STATUS_KEY_NORMAL, ANIM_Dayzee_Amazy_Anim01,
-    STATUS_KEY_STONE, ANIM_Dayzee_Amazy_Anim00,
-    STATUS_KEY_SLEEP, ANIM_Dayzee_Amazy_Anim0C,
-    STATUS_KEY_POISON, ANIM_Dayzee_Amazy_Anim01,
-    STATUS_KEY_STOP, ANIM_Dayzee_Amazy_Anim00,
-    STATUS_KEY_STATIC, ANIM_Dayzee_Amazy_Anim01,
-    STATUS_KEY_PARALYZE, ANIM_Dayzee_Amazy_Anim00,
-    STATUS_KEY_DIZZY, ANIM_Dayzee_Amazy_Anim0B,
-    STATUS_KEY_FEAR, ANIM_Dayzee_Amazy_Anim0B,
+    STATUS_KEY_NORMAL,    ANIM_Dayzee_Amazy_Anim01,
+    STATUS_KEY_STONE,     ANIM_Dayzee_Amazy_Anim00,
+    STATUS_KEY_SLEEP,     ANIM_Dayzee_Amazy_Anim0C,
+    STATUS_KEY_POISON,    ANIM_Dayzee_Amazy_Anim01,
+    STATUS_KEY_STOP,      ANIM_Dayzee_Amazy_Anim00,
+    STATUS_KEY_STATIC,    ANIM_Dayzee_Amazy_Anim01,
+    STATUS_KEY_PARALYZE,  ANIM_Dayzee_Amazy_Anim00,
+    STATUS_KEY_DIZZY,     ANIM_Dayzee_Amazy_Anim0B,
+    STATUS_KEY_FEAR,      ANIM_Dayzee_Amazy_Anim0B,
     STATUS_TABLE_END,
 };
 

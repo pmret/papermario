@@ -145,13 +145,13 @@ API_CALLABLE(N(AverageSpookChance)) {
 }
 
 s32 N(IdleAnimations)[] = {
-    STATUS_KEY_NORMAL, ANIM_BattleBow_Walk,
-    STATUS_KEY_STONE, ANIM_BattleBow_Still,
-    STATUS_KEY_SLEEP, ANIM_BattleBow_Pray,
-    STATUS_KEY_POISON, ANIM_BattleBow_Still,
-    STATUS_KEY_STOP, ANIM_BattleBow_Still,
-    STATUS_KEY_DAZE, ANIM_BattleBow_Injured,
-    STATUS_KEY_INACTIVE, ANIM_BattleBow_Still,
+    STATUS_KEY_NORMAL,    ANIM_BattleBow_Walk,
+    STATUS_KEY_STONE,     ANIM_BattleBow_Still,
+    STATUS_KEY_SLEEP,     ANIM_BattleBow_Pray,
+    STATUS_KEY_POISON,    ANIM_BattleBow_Still,
+    STATUS_KEY_STOP,      ANIM_BattleBow_Still,
+    STATUS_KEY_DAZE,      ANIM_BattleBow_Injured,
+    STATUS_KEY_INACTIVE,  ANIM_BattleBow_Still,
     STATUS_TABLE_END,
 };
 

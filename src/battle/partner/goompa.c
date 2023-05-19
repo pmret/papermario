@@ -15,7 +15,7 @@ extern EvtScript N(runAwayFail);
 extern EvtScript N(executeAction);
 
 s32 N(IdleAnimations)[] = {
-    STATUS_KEY_NORMAL, ANIM_Goompa_Walk,
+    STATUS_KEY_NORMAL,    ANIM_Goompa_Walk,
     STATUS_TABLE_END,
 };
 

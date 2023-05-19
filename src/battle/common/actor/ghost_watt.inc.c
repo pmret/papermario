@@ -141,15 +141,15 @@ extern EvtScript N(watt_idle);
 extern EvtScript N(watt_handleEvent);
 
 s32 N(watt_idleAnimations)[] = {
-    STATUS_KEY_NORMAL, ANIM_BattleWatt_Idle,
-    STATUS_KEY_STONE, ANIM_BattleWatt_Still,
-    STATUS_KEY_SLEEP, ANIM_BattleWatt_Still,
-    STATUS_KEY_POISON, ANIM_BattleWatt_Idle,
-    STATUS_KEY_STOP, ANIM_BattleWatt_Still,
-    STATUS_KEY_STATIC, ANIM_BattleWatt_Idle,
-    STATUS_KEY_PARALYZE, ANIM_BattleWatt_Still,
-    STATUS_KEY_DIZZY, ANIM_BattleWatt_Injured,
-    STATUS_KEY_FEAR, ANIM_BattleWatt_Injured,
+    STATUS_KEY_NORMAL,    ANIM_BattleWatt_Idle,
+    STATUS_KEY_STONE,     ANIM_BattleWatt_Still,
+    STATUS_KEY_SLEEP,     ANIM_BattleWatt_Still,
+    STATUS_KEY_POISON,    ANIM_BattleWatt_Idle,
+    STATUS_KEY_STOP,      ANIM_BattleWatt_Still,
+    STATUS_KEY_STATIC,    ANIM_BattleWatt_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_BattleWatt_Still,
+    STATUS_KEY_DIZZY,     ANIM_BattleWatt_Injured,
+    STATUS_KEY_FEAR,      ANIM_BattleWatt_Injured,
     STATUS_TABLE_END,
 };
 

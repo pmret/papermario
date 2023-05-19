@@ -56,11 +56,11 @@ extern EvtScript N(NormalAttack);
 extern EvtScript N(Heal);
 
 s32 N(IdleAnimations)[] = {
-    STATUS_KEY_NORMAL, ANIM_CrystalKing_Anim09,
-    STATUS_KEY_SLEEP, ANIM_CrystalKing_Anim1B,
-    STATUS_KEY_DIZZY, ANIM_CrystalKing_Anim1A,
-    STATUS_KEY_PARALYZE, ANIM_CrystalKing_Anim00,
-    STATUS_KEY_STOP, ANIM_CrystalKing_Anim00,
+    STATUS_KEY_NORMAL,    ANIM_CrystalKing_Anim09,
+    STATUS_KEY_SLEEP,     ANIM_CrystalKing_Anim1B,
+    STATUS_KEY_DIZZY,     ANIM_CrystalKing_Anim1A,
+    STATUS_KEY_PARALYZE,  ANIM_CrystalKing_Anim00,
+    STATUS_KEY_STOP,      ANIM_CrystalKing_Anim00,
     STATUS_TABLE_END,
 };
 

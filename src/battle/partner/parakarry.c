@@ -614,13 +614,13 @@ API_CALLABLE(N(GetAirRaidDamage)) {
 }
 
 s32 N(IdleAnimations)[] = {
-    STATUS_KEY_NORMAL,      ANIM_BattleParakarry_Walk,
-    STATUS_KEY_STONE,       ANIM_BattleParakarry_Still,
-    STATUS_KEY_SLEEP,       ANIM_BattleParakarry_Pray,
-    STATUS_KEY_POISON,      ANIM_BattleParakarry_Still,
-    STATUS_KEY_STOP,        ANIM_BattleParakarry_Still,
-    STATUS_KEY_DAZE,        ANIM_BattleParakarry_Injured,
-    STATUS_KEY_INACTIVE,   ANIM_BattleParakarry_Still,
+    STATUS_KEY_NORMAL,    ANIM_BattleParakarry_Walk,
+    STATUS_KEY_STONE,     ANIM_BattleParakarry_Still,
+    STATUS_KEY_SLEEP,     ANIM_BattleParakarry_Pray,
+    STATUS_KEY_POISON,    ANIM_BattleParakarry_Still,
+    STATUS_KEY_STOP,      ANIM_BattleParakarry_Still,
+    STATUS_KEY_DAZE,      ANIM_BattleParakarry_Injured,
+    STATUS_KEY_INACTIVE,  ANIM_BattleParakarry_Still,
     STATUS_TABLE_END,
 };
 

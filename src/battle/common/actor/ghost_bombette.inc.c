@@ -6,15 +6,15 @@ extern EvtScript N(bombette_idle);
 extern EvtScript N(bombette_handleEvent);
 
 s32 N(bombette_idleAnimations)[] = {
-    STATUS_KEY_NORMAL, ANIM_BattleBombette_Idle,
-    STATUS_KEY_STONE, ANIM_BattleBombette_Still,
-    STATUS_KEY_SLEEP, ANIM_BattleBombette_Still,
-    STATUS_KEY_POISON, ANIM_BattleBombette_Idle,
-    STATUS_KEY_STOP, ANIM_BattleBombette_Still,
-    STATUS_KEY_STATIC, ANIM_BattleBombette_Idle,
-    STATUS_KEY_PARALYZE, ANIM_BattleBombette_Still,
-    STATUS_KEY_DIZZY, ANIM_BattleBombette_Injured,
-    STATUS_KEY_FEAR, ANIM_BattleBombette_Injured,
+    STATUS_KEY_NORMAL,    ANIM_BattleBombette_Idle,
+    STATUS_KEY_STONE,     ANIM_BattleBombette_Still,
+    STATUS_KEY_SLEEP,     ANIM_BattleBombette_Still,
+    STATUS_KEY_POISON,    ANIM_BattleBombette_Idle,
+    STATUS_KEY_STOP,      ANIM_BattleBombette_Still,
+    STATUS_KEY_STATIC,    ANIM_BattleBombette_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_BattleBombette_Still,
+    STATUS_KEY_DIZZY,     ANIM_BattleBombette_Injured,
+    STATUS_KEY_FEAR,      ANIM_BattleBombette_Injured,
     STATUS_TABLE_END,
 };
 

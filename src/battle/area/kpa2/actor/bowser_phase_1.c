@@ -43,16 +43,16 @@ extern EvtScript N(onBurnHit);
 extern EvtScript N(makeWalkingSounds);
 
 s32 N(IdleAnimations)[] = {
-    STATUS_KEY_NORMAL, ANIM_BattleBowser_Idle,
-    STATUS_KEY_STONE, ANIM_BattleBowser_Still,
-    STATUS_KEY_SLEEP, ANIM_BattleBowser_Idle,
-    STATUS_KEY_POISON, ANIM_BattleBowser_Idle,
-    STATUS_KEY_STOP, ANIM_BattleBowser_Still,
-    STATUS_KEY_STATIC, ANIM_BattleBowser_Still,
-    STATUS_KEY_PARALYZE, ANIM_BattleBowser_Still,
-    STATUS_KEY_PARALYZE, ANIM_BattleBowser_Still,
-    STATUS_KEY_DIZZY, ANIM_BattleBowser_Idle,
-    STATUS_KEY_DIZZY, ANIM_BattleBowser_Idle,
+    STATUS_KEY_NORMAL,    ANIM_BattleBowser_Idle,
+    STATUS_KEY_STONE,     ANIM_BattleBowser_Still,
+    STATUS_KEY_SLEEP,     ANIM_BattleBowser_Idle,
+    STATUS_KEY_POISON,    ANIM_BattleBowser_Idle,
+    STATUS_KEY_STOP,      ANIM_BattleBowser_Still,
+    STATUS_KEY_STATIC,    ANIM_BattleBowser_Still,
+    STATUS_KEY_PARALYZE,  ANIM_BattleBowser_Still,
+    STATUS_KEY_PARALYZE,  ANIM_BattleBowser_Still,
+    STATUS_KEY_DIZZY,     ANIM_BattleBowser_Idle,
+    STATUS_KEY_DIZZY,     ANIM_BattleBowser_Idle,
     STATUS_TABLE_END,
 };
 

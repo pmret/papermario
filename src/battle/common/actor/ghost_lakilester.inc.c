@@ -6,20 +6,20 @@ extern EvtScript N(lakilester_idle);
 extern EvtScript N(lakilester_takeTurn);
 
 s32 N(lakilester_idleAnimations)[] = {
-    STATUS_KEY_NORMAL, ANIM_BattleLakilester_Idle,
-    STATUS_KEY_STONE, ANIM_BattleLakilester_Still,
-    STATUS_KEY_SLEEP, ANIM_BattleLakilester_Still,
-    STATUS_KEY_POISON, ANIM_BattleLakilester_Idle,
-    STATUS_KEY_STOP, ANIM_BattleLakilester_Still,
-    STATUS_KEY_STATIC, ANIM_BattleLakilester_Idle,
-    STATUS_KEY_PARALYZE, ANIM_BattleLakilester_Still,
-    STATUS_KEY_DIZZY, ANIM_BattleLakilester_Injured,
-    STATUS_KEY_FEAR, ANIM_BattleLakilester_Idle,
+    STATUS_KEY_NORMAL,    ANIM_BattleLakilester_Idle,
+    STATUS_KEY_STONE,     ANIM_BattleLakilester_Still,
+    STATUS_KEY_SLEEP,     ANIM_BattleLakilester_Still,
+    STATUS_KEY_POISON,    ANIM_BattleLakilester_Idle,
+    STATUS_KEY_STOP,      ANIM_BattleLakilester_Still,
+    STATUS_KEY_STATIC,    ANIM_BattleLakilester_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_BattleLakilester_Still,
+    STATUS_KEY_DIZZY,     ANIM_BattleLakilester_Injured,
+    STATUS_KEY_FEAR,      ANIM_BattleLakilester_Idle,
     STATUS_TABLE_END,
 };
 
 s32 N(lakilester_idleAnimations2)[] = {
-    STATUS_KEY_NORMAL, ANIM_BattleLakilester_Spiny,
+    STATUS_KEY_NORMAL,    ANIM_BattleLakilester_Spiny,
     STATUS_TABLE_END,
 };
 

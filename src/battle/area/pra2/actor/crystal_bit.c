@@ -13,17 +13,17 @@ extern EvtScript N(handleEvent);
 extern EvtScript N(nextTurn);
 
 s32 N(IdleAnimations_1)[] = {
-    STATUS_KEY_NORMAL, ANIM_CrystalKing_Anim0A,
+    STATUS_KEY_NORMAL,    ANIM_CrystalKing_Anim0A,
     STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations_2)[] = {
-    STATUS_KEY_NORMAL, ANIM_CrystalKing_Anim0B,
+    STATUS_KEY_NORMAL,    ANIM_CrystalKing_Anim0B,
     STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations_3)[] = {
-    STATUS_KEY_NORMAL, ANIM_CrystalKing_Anim0C,
+    STATUS_KEY_NORMAL,    ANIM_CrystalKing_Anim0C,
     STATUS_TABLE_END,
 };
 

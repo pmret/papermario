@@ -25,12 +25,12 @@ s32 N(IdleAnimations_8021D330)[] = {
 };
 
 s32 N(unk_missing_8021D37C)[] = {
-    STATUS_KEY_NORMAL, ANIM_SmallPiranha_Anim01,
+    STATUS_KEY_NORMAL,    ANIM_SmallPiranha_Anim01,
     STATUS_TABLE_END,
 };
 
 s32 N(unk_missing_8021D388)[] = {
-    STATUS_KEY_NORMAL, ANIM_SmallPiranha_Anim06,
+    STATUS_KEY_NORMAL,    ANIM_SmallPiranha_Anim06,
     STATUS_TABLE_END,
 };
 

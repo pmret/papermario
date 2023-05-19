@@ -9,15 +9,15 @@ extern EvtScript N(takeTurn);
 extern EvtScript N(handleEvent);
 
 s32 N(IdleAnimations)[] = {
-    STATUS_KEY_NORMAL, ANIM_BattleClubba_Frost_Anim01,
-    STATUS_KEY_STONE, ANIM_BattleClubba_Frost_Anim00,
-    STATUS_KEY_SLEEP, ANIM_BattleClubba_Frost_Anim03,
-    STATUS_KEY_POISON, ANIM_BattleClubba_Frost_Anim01,
-    STATUS_KEY_STOP, ANIM_BattleClubba_Frost_Anim00,
-    STATUS_KEY_STATIC, ANIM_BattleClubba_Frost_Anim01,
-    STATUS_KEY_PARALYZE, ANIM_BattleClubba_Frost_Anim00,
-    STATUS_KEY_DIZZY, ANIM_BattleClubba_Frost_Anim05,
-    STATUS_KEY_FEAR, ANIM_BattleClubba_Frost_Anim05,
+    STATUS_KEY_NORMAL,    ANIM_BattleClubba_Frost_Anim01,
+    STATUS_KEY_STONE,     ANIM_BattleClubba_Frost_Anim00,
+    STATUS_KEY_SLEEP,     ANIM_BattleClubba_Frost_Anim03,
+    STATUS_KEY_POISON,    ANIM_BattleClubba_Frost_Anim01,
+    STATUS_KEY_STOP,      ANIM_BattleClubba_Frost_Anim00,
+    STATUS_KEY_STATIC,    ANIM_BattleClubba_Frost_Anim01,
+    STATUS_KEY_PARALYZE,  ANIM_BattleClubba_Frost_Anim00,
+    STATUS_KEY_DIZZY,     ANIM_BattleClubba_Frost_Anim05,
+    STATUS_KEY_FEAR,      ANIM_BattleClubba_Frost_Anim05,
     STATUS_TABLE_END,
 };
 

@@ -11,25 +11,25 @@ extern EvtScript N(handleEvent);
 extern EvtScript N(nextTurn);
 
 s32 N(IdleAnimations)[] = {
-    STATUS_KEY_NORMAL, ANIM_Duplighost_Anim02,
-    STATUS_KEY_STONE, ANIM_Duplighost_Anim00,
-    STATUS_KEY_SLEEP, ANIM_Duplighost_Anim0D,
-    STATUS_KEY_POISON, ANIM_Duplighost_Anim02,
-    STATUS_KEY_STOP, ANIM_Duplighost_Anim00,
-    STATUS_KEY_STATIC, ANIM_Duplighost_Anim02,
-    STATUS_KEY_PARALYZE, ANIM_Duplighost_Anim00,
-    STATUS_KEY_DIZZY, ANIM_Duplighost_Anim0E,
-    STATUS_KEY_FEAR, ANIM_Duplighost_Anim0E,
+    STATUS_KEY_NORMAL,    ANIM_Duplighost_Anim02,
+    STATUS_KEY_STONE,     ANIM_Duplighost_Anim00,
+    STATUS_KEY_SLEEP,     ANIM_Duplighost_Anim0D,
+    STATUS_KEY_POISON,    ANIM_Duplighost_Anim02,
+    STATUS_KEY_STOP,      ANIM_Duplighost_Anim00,
+    STATUS_KEY_STATIC,    ANIM_Duplighost_Anim02,
+    STATUS_KEY_PARALYZE,  ANIM_Duplighost_Anim00,
+    STATUS_KEY_DIZZY,     ANIM_Duplighost_Anim0E,
+    STATUS_KEY_FEAR,      ANIM_Duplighost_Anim0E,
     STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations2)[] = {
-    STATUS_KEY_NORMAL, ANIM_Duplighost_Anim0A,
+    STATUS_KEY_NORMAL,    ANIM_Duplighost_Anim0A,
     STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations3)[] = {
-    STATUS_KEY_NORMAL, ANIM_Duplighost_Anim04,
+    STATUS_KEY_NORMAL,    ANIM_Duplighost_Anim04,
     STATUS_TABLE_END,
 };
 

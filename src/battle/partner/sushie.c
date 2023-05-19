@@ -384,13 +384,13 @@ API_CALLABLE(N(SetScaleTidalWaveCharge)) {
 }
 
 s32 N(IdleAnimations)[] = {
-    STATUS_KEY_NORMAL, ANIM_BattleSushie_Walk,
-    STATUS_KEY_STONE, ANIM_BattleSushie_Still,
-    STATUS_KEY_SLEEP, ANIM_BattleSushie_Pray,
-    STATUS_KEY_POISON, ANIM_BattleSushie_Still,
-    STATUS_KEY_STOP, ANIM_BattleSushie_Still,
-    STATUS_KEY_DAZE, ANIM_BattleSushie_Injured,
-    STATUS_KEY_INACTIVE, ANIM_BattleSushie_Still,
+    STATUS_KEY_NORMAL,    ANIM_BattleSushie_Walk,
+    STATUS_KEY_STONE,     ANIM_BattleSushie_Still,
+    STATUS_KEY_SLEEP,     ANIM_BattleSushie_Pray,
+    STATUS_KEY_POISON,    ANIM_BattleSushie_Still,
+    STATUS_KEY_STOP,      ANIM_BattleSushie_Still,
+    STATUS_KEY_DAZE,      ANIM_BattleSushie_Injured,
+    STATUS_KEY_INACTIVE,  ANIM_BattleSushie_Still,
     STATUS_TABLE_END,
 };
 

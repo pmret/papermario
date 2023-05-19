@@ -257,7 +257,7 @@ s32 N(IdleAnimations)[] = {
     STATUS_KEY_POISON,    ANIM_BattleBombette_Still,
     STATUS_KEY_STOP,      ANIM_BattleBombette_Still,
     STATUS_KEY_DAZE,      ANIM_BattleBombette_Injured,
-    STATUS_KEY_INACTIVE, ANIM_BattleBombette_Still,
+    STATUS_KEY_INACTIVE,  ANIM_BattleBombette_Still,
     STATUS_TABLE_END,
 };
 
