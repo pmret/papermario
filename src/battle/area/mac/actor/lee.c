@@ -80,7 +80,7 @@ s32 N(StatusTable_8021D3D0)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(PartsTable_8021D47C)[] = {
+ActorPartBlueprint N(PartsTable)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
@@ -100,8 +100,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_LEE,
     .level = 0,
     .maxHP = 20,
-    .partCount = ARRAY_COUNT( N(PartsTable_8021D47C)),
-    .partsData = N(PartsTable_8021D47C),
+    .partCount = ARRAY_COUNT( N(PartsTable)),
+    .partsData = N(PartsTable),
     .initScript = &N(init_8021D4C8),
     .statusTable = N(StatusTable_8021D3D0),
     .escapeChance = 100,
@@ -1139,7 +1139,7 @@ s32 N(StatusTable_802205F0)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(PartsTable_8022069C)[] = {
+ActorPartBlueprint N(KooperParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
@@ -1161,8 +1161,8 @@ ActorBlueprint N(kooper) = {
     .type = ACTOR_TYPE_LEE_KOOPER,
     .level = 0,
     .maxHP = 20,
-    .partCount = ARRAY_COUNT( N(PartsTable_8022069C)),
-    .partsData = N(PartsTable_8022069C),
+    .partCount = ARRAY_COUNT( N(KooperParts)),
+    .partsData = N(KooperParts),
     .initScript = &N(init_Kooper),
     .statusTable = N(StatusTable_802205F0),
     .escapeChance = 100,
@@ -1650,7 +1650,7 @@ s32 N(StatusTable_802222E8)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(PartsTable_80222394)[] = {
+ActorPartBlueprint N(BombetteParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
@@ -1672,8 +1672,8 @@ ActorBlueprint N(bombette) = {
     .type = ACTOR_TYPE_LEE_BOMBETTE,
     .level = 0,
     .maxHP = 20,
-    .partCount = ARRAY_COUNT( N(PartsTable_80222394)),
-    .partsData = N(PartsTable_80222394),
+    .partCount = ARRAY_COUNT( N(BombetteParts)),
+    .partsData = N(BombetteParts),
     .initScript = &N(init_LeeBombette),
     .statusTable = N(StatusTable_802222E8),
     .escapeChance = 100,
@@ -2004,7 +2004,7 @@ s32 N(StatusTable_802233E0)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(PartsTable_8022348C)[] = {
+ActorPartBlueprint N(ParakarryParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = PRT_MAIN,
@@ -2038,8 +2038,8 @@ ActorBlueprint N(parakarry) = {
     .type = ACTOR_TYPE_LEE_PARAKARRY,
     .level = 0,
     .maxHP = 20,
-    .partCount = ARRAY_COUNT( N(PartsTable_8022348C)),
-    .partsData = N(PartsTable_8022348C),
+    .partCount = ARRAY_COUNT( N(ParakarryParts)),
+    .partsData = N(ParakarryParts),
     .initScript = &N(init_Parakarry),
     .statusTable = N(StatusTable_802233E0),
     .escapeChance = 100,
@@ -2366,7 +2366,7 @@ s32 N(StatusTable_80224468)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(PartsTable_80224514)[] = {
+ActorPartBlueprint N(BowParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = PRT_MAIN,
@@ -2400,8 +2400,8 @@ ActorBlueprint N(bow) = {
     .type = ACTOR_TYPE_LEE_BOW,
     .level = 0,
     .maxHP = 20,
-    .partCount = ARRAY_COUNT( N(PartsTable_80224514)),
-    .partsData = N(PartsTable_80224514),
+    .partCount = ARRAY_COUNT( N(BowParts)),
+    .partsData = N(BowParts),
     .initScript = &N(init_Bow),
     .statusTable = N(StatusTable_80224468),
     .escapeChance = 100,
@@ -2818,7 +2818,7 @@ s32 N(StatusTable_802259D4)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(PartsTable_80225A80)[] = {
+ActorPartBlueprint N(WattParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = PRT_MAIN,
@@ -2852,8 +2852,8 @@ ActorBlueprint N(watt) = {
     .type = ACTOR_TYPE_LEE_WATT,
     .level = 0,
     .maxHP = 20,
-    .partCount = ARRAY_COUNT( N(PartsTable_80225A80)),
-    .partsData = N(PartsTable_80225A80),
+    .partCount = ARRAY_COUNT( N(WattParts)),
+    .partsData = N(WattParts),
     .initScript = &N(init_Watt),
     .statusTable = N(StatusTable_802259D4),
     .escapeChance = 100,
@@ -3296,7 +3296,7 @@ s32 N(StatusTable_802269D4)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(PartsTable_80226A80)[] = {
+ActorPartBlueprint N(SushieParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
@@ -3318,8 +3318,8 @@ ActorBlueprint N(sushie) = {
     .type = ACTOR_TYPE_LEE_SUSHIE,
     .level = 0,
     .maxHP = 20,
-    .partCount = ARRAY_COUNT( N(PartsTable_80226A80)),
-    .partsData = N(PartsTable_80226A80),
+    .partCount = ARRAY_COUNT( N(SushieParts)),
+    .partsData = N(SushieParts),
     .initScript = &N(init_Sushie),
     .statusTable = N(StatusTable_802269D4),
     .escapeChance = 100,
@@ -3775,7 +3775,7 @@ s32 N(StatusTable_80228470)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(PartsTable_8022851C)[] = {
+ActorPartBlueprint N(LakilesterParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
@@ -3809,8 +3809,8 @@ ActorBlueprint N(lakilester) = {
     .type = ACTOR_TYPE_LEE_LAKILESTER,
     .level = 0,
     .maxHP = 20,
-    .partCount = ARRAY_COUNT( N(PartsTable_8022851C)),
-    .partsData = N(PartsTable_8022851C),
+    .partCount = ARRAY_COUNT( N(LakilesterParts)),
+    .partsData = N(LakilesterParts),
     .initScript = &N(init_Lakilester),
     .statusTable = N(StatusTable_80228470),
     .escapeChance = 100,
