@@ -1966,8 +1966,8 @@ s32 get_player_anim_for_status(s32 statusKey) {
             if (statusKey == STATUS_KEY_NORMAL) {
                 statusKey = STATUS_KEY_DANGER;
             }
-            if (statusKey == STATUS_KEY_TURN_DONE) {
-                statusKey = STATUS_KEY_TURN_DONE_WEARY;
+            if (statusKey == STATUS_KEY_INACTIVE) {
+                statusKey = STATUS_KEY_INACTIVE_WEARY;
             }
             if (statusKey == STATUS_KEY_THINKING) {
                 statusKey = STATUS_KEY_WEARY;
@@ -1979,8 +1979,8 @@ s32 get_player_anim_for_status(s32 statusKey) {
             if (statusKey == STATUS_KEY_NORMAL) {
                 statusKey = STATUS_KEY_DANGER;
             }
-            if (statusKey == STATUS_KEY_TURN_DONE) {
-                statusKey = STATUS_KEY_TURN_DONE_WEARY;
+            if (statusKey == STATUS_KEY_INACTIVE) {
+                statusKey = STATUS_KEY_INACTIVE_WEARY;
             }
             if (statusKey == STATUS_KEY_THINKING) {
                 statusKey = STATUS_KEY_WEARY;
@@ -1989,8 +1989,8 @@ s32 get_player_anim_for_status(s32 statusKey) {
 
         // switch to dizzy override animations
         if (player->debuff == STATUS_KEY_DIZZY) {
-            if (statusKey == STATUS_KEY_TURN_DONE) {
-                statusKey = STATUS_KEY_TURN_DONE_DIZZY;
+            if (statusKey == STATUS_KEY_INACTIVE) {
+                statusKey = STATUS_KEY_INACTIVE_DIZZY;
             }
         }
     }

@@ -620,7 +620,7 @@ s32 N(IdleAnimations)[] = {
     STATUS_KEY_POISON,      ANIM_BattleParakarry_Still,
     STATUS_KEY_STOP,        ANIM_BattleParakarry_Still,
     STATUS_KEY_DAZE,        ANIM_BattleParakarry_Injured,
-    STATUS_KEY_TURN_DONE,   ANIM_BattleParakarry_Still,
+    STATUS_KEY_INACTIVE,   ANIM_BattleParakarry_Still,
     STATUS_TABLE_END,
 };
 

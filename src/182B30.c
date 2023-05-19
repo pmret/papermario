@@ -1004,7 +1004,7 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
             if ((gBattleStatus.flags2 & (BS_FLAGS2_10 | BS_FLAGS2_4)) == BS_FLAGS2_4) {
                 do {
                     if (actor->koStatus == 0) {
-                        part->currentAnimation = get_npc_anim_for_status(part->idleAnimations, STATUS_KEY_TURN_DONE);
+                        part->currentAnimation = get_npc_anim_for_status(part->idleAnimations, STATUS_KEY_INACTIVE);
                         spr_update_sprite(part->spriteInstanceID, part->currentAnimation, part->animationRate);
                         animChanged = TRUE;
                     }
@@ -1632,13 +1632,13 @@ void appendGfx_player_actor(void* arg0) {
                     ((battleStatus->outtaSightActive > 0) || (gBattleStatus.flags2 & BS_FLAGS2_2)))
                 {
                     if (is_ability_active(ABILITY_BERSERKER)) {
-                        playerParts->currentAnimation = get_player_anim_for_status(STATUS_KEY_TURN_DONE_BERSERK);
+                        playerParts->currentAnimation = get_player_anim_for_status(STATUS_KEY_INACTIVE_BERSERK);
                     } else  if (player->debuff == STATUS_KEY_SLEEP) {
-                        playerParts->currentAnimation = get_player_anim_for_status(STATUS_KEY_TURN_DONE_SLEEP);
+                        playerParts->currentAnimation = get_player_anim_for_status(STATUS_KEY_INACTIVE_SLEEP);
                     } else if (player->debuff == STATUS_KEY_DIZZY) {
-                        playerParts->currentAnimation = get_player_anim_for_status(STATUS_KEY_TURN_DONE_DIZZY);
+                        playerParts->currentAnimation = get_player_anim_for_status(STATUS_KEY_INACTIVE_DIZZY);
                     } else {
-                        playerParts->currentAnimation = get_player_anim_for_status(STATUS_KEY_TURN_DONE);
+                        playerParts->currentAnimation = get_player_anim_for_status(STATUS_KEY_INACTIVE);
                     }
                     spr_update_player_sprite(PLAYER_SPRITE_MAIN, playerParts->currentAnimation, playerParts->animationRate);
                     animChanged = TRUE;
