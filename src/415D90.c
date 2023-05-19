@@ -2129,34 +2129,34 @@ s32 can_btl_state_update_switch_to_player(void) {
         s8 debuff = player->debuff;
         s32 playerCantMove = FALSE;
 
-        if (player->koStatus == STATUS_DAZE) {
+        if (player->koStatus == STATUS_KEY_DAZE) {
             playerCantMove = TRUE;
         }
-        if (debuff == STATUS_POISON) {
+        if (debuff == STATUS_KEY_POISON) {
             playerCantMove = FALSE;
         }
-        if (debuff == STATUS_SHRINK) {
+        if (debuff == STATUS_KEY_SHRINK) {
             playerCantMove = FALSE;
         }
-        if (debuff == STATUS_SLEEP) {
+        if (debuff == STATUS_KEY_SLEEP) {
             playerCantMove = TRUE;
         }
-        if (debuff == STATUS_FEAR) {
+        if (debuff == STATUS_KEY_FEAR) {
             playerCantMove = TRUE;
         }
-        if (debuff == STATUS_DIZZY) {
+        if (debuff == STATUS_KEY_DIZZY) {
             playerCantMove = TRUE;
         }
-        if (debuff == STATUS_PARALYZE) {
+        if (debuff == STATUS_KEY_PARALYZE) {
             playerCantMove = TRUE;
         }
-        if (debuff == STATUS_FROZEN) {
+        if (debuff == STATUS_KEY_FROZEN) {
             playerCantMove = TRUE;
         }
-        if (debuff == STATUS_STOP) {
+        if (debuff == STATUS_KEY_STOP) {
             playerCantMove = TRUE;
         }
-        if (player->stoneStatus == STATUS_STONE) {
+        if (player->stoneStatus == STATUS_KEY_STONE) {
             playerCantMove = TRUE;
         }
         if (battleStatus->outtaSightActive) {
@@ -2181,31 +2181,31 @@ s32 func_802A58D0(void) {
     partnerDebuff = partner->debuff;
     partnerCantMove = FALSE;
 
-    if (partner->koStatus == STATUS_DAZE) {
+    if (partner->koStatus == STATUS_KEY_DAZE) {
         partnerCantMove = TRUE;
     }
-    if (partnerDebuff == STATUS_POISON) {
+    if (partnerDebuff == STATUS_KEY_POISON) {
         partnerCantMove = FALSE;
     }
-    if (partnerDebuff == STATUS_SHRINK) {
+    if (partnerDebuff == STATUS_KEY_SHRINK) {
         partnerCantMove = FALSE;
     }
-    if (partnerDebuff == STATUS_SLEEP) {
+    if (partnerDebuff == STATUS_KEY_SLEEP) {
         partnerCantMove = TRUE;
     }
-    if (partnerDebuff == STATUS_FEAR) {
+    if (partnerDebuff == STATUS_KEY_FEAR) {
         partnerCantMove = TRUE;
     }
-    if (partnerDebuff == STATUS_PARALYZE) {
+    if (partnerDebuff == STATUS_KEY_PARALYZE) {
         partnerCantMove = TRUE;
     }
-    if (partnerDebuff == STATUS_FROZEN) {
+    if (partnerDebuff == STATUS_KEY_FROZEN) {
         partnerCantMove = TRUE;
     }
-    if (partnerDebuff == STATUS_STOP) {
+    if (partnerDebuff == STATUS_KEY_STOP) {
         partnerCantMove = TRUE;
     }
-    if (partner->stoneStatus == STATUS_STONE) {
+    if (partner->stoneStatus == STATUS_KEY_STONE) {
         partnerCantMove = TRUE;
     }
     return !partnerCantMove;
@@ -2445,7 +2445,7 @@ void btl_state_update_player_menu(void) {
             if (battleStatus->hustleTurns != 0) {
                 set_animation(ACTOR_PLAYER, 0, ANIM_Mario1_ThinkingRun);
             } else {
-                set_animation(ACTOR_PLAYER, 0, get_player_anim_for_status(STATUS_THINKING));
+                set_animation(ACTOR_PLAYER, 0, get_player_anim_for_status(STATUS_KEY_THINKING));
             }
             submenuResult = btl_main_menu_update();
             if (D_802ACC6C != 0) {
@@ -4676,28 +4676,28 @@ void btl_state_update_twink_menu(void) {
     switch (gBattleSubState) {
         case BTL_SUBSTATE_TWINK_MENU_INIT:
             shouldSkipTurn = FALSE;
-            if (player->debuff == STATUS_SLEEP) {
+            if (player->debuff == STATUS_KEY_SLEEP) {
                 shouldSkipTurn = TRUE;
             }
-            if (player->debuff == STATUS_FEAR) {
+            if (player->debuff == STATUS_KEY_FEAR) {
                 shouldSkipTurn = TRUE;
             }
-            if (player->debuff == STATUS_DIZZY) {
+            if (player->debuff == STATUS_KEY_DIZZY) {
                 shouldSkipTurn = TRUE;
             }
-            if (player->debuff == STATUS_PARALYZE) {
+            if (player->debuff == STATUS_KEY_PARALYZE) {
                 shouldSkipTurn = TRUE;
             }
-            if (player->debuff == STATUS_FROZEN) {
+            if (player->debuff == STATUS_KEY_FROZEN) {
                 shouldSkipTurn = TRUE;
             }
-            if (player->debuff == STATUS_STOP) {
+            if (player->debuff == STATUS_KEY_STOP) {
                 shouldSkipTurn = TRUE;
             }
-            if (player->stoneStatus == STATUS_STONE) {
+            if (player->stoneStatus == STATUS_KEY_STONE) {
                 shouldSkipTurn = TRUE;
             }
-            if (player->koStatus == STATUS_DAZE) {
+            if (player->koStatus == STATUS_KEY_DAZE) {
                 shouldSkipTurn = TRUE;
             }
 

@@ -871,7 +871,7 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
         actor->disableEffect->data.disableX->pos.y = NPC_DISPOSE_POS_Y;
         actor->disableDismissTimer = 10;
     }
-    if (actor->debuff == STATUS_FROZEN) {
+    if (actor->debuff == STATUS_KEY_FROZEN) {
         effect = actor->icePillarEffect;
         if (actor->icePillarEffect != NULL) {
             if ((gBattleStatus.flags1 & BS_FLAGS1_SHOW_PLAYER_DECORATIONS) ||
@@ -911,7 +911,7 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
     }
 
     do {
-        if (actor->debuff == STATUS_SHRINK) {
+        if (actor->debuff == STATUS_KEY_SHRINK) {
             actor->scalingFactor += ((0.4 - actor->scalingFactor) / 6.0);
         } else {
             actor->scalingFactor += ((1.0 - actor->scalingFactor) / 6.0);
@@ -987,7 +987,7 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
             continue;
         }
 
-        if (actor->transparentStatus == STATUS_TRANSPARENT) {
+        if (actor->transparentStatus == STATUS_KEY_TRANSPARENT) {
             part->flags |= ACTOR_PART_FLAG_100;
         } else {
             part->flags &= ~ACTOR_PART_FLAG_100;
@@ -1004,7 +1004,7 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
             if ((gBattleStatus.flags2 & (BS_FLAGS2_10 | BS_FLAGS2_4)) == BS_FLAGS2_4) {
                 do {
                     if (actor->koStatus == 0) {
-                        part->currentAnimation = get_npc_anim_for_status(part->idleAnimations, STATUS_TURN_DONE);
+                        part->currentAnimation = get_npc_anim_for_status(part->idleAnimations, STATUS_KEY_TURN_DONE);
                         spr_update_sprite(part->spriteInstanceID, part->currentAnimation, part->animationRate);
                         animChanged = TRUE;
                     }
@@ -1027,25 +1027,25 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
             }
             decorChanged = TRUE;
         }
-        if (actor->debuff == STATUS_POISON) {
+        if (actor->debuff == STATUS_KEY_POISON) {
             if (!palChanged) {
                 set_actor_pal_adjustment(actor, PAL_ADJUST_POISON);
             }
             palChanged = TRUE;
         }
-        if (actor->debuff == STATUS_PARALYZE) {
+        if (actor->debuff == STATUS_KEY_PARALYZE) {
             if (!palChanged) {
                 set_actor_pal_adjustment(actor, PAL_ADJUST_PARALYZE);
             }
             palChanged = TRUE;
         }
-        if (actor->debuff == STATUS_FEAR) {
+        if (actor->debuff == STATUS_KEY_FEAR) {
             if (!palChanged) {
                 set_actor_pal_adjustment(actor, PAL_ADJUST_FEAR);
             }
             palChanged = TRUE;
         }
-        if (actor->staticStatus == STATUS_STATIC) {
+        if (actor->staticStatus == STATUS_KEY_STATIC) {
             if (!palChanged) {
                 set_actor_pal_adjustment(actor, PAL_ADJUST_STATIC);
             }
@@ -1059,43 +1059,43 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
         }
         if (actor->flags & ACTOR_FLAG_4000000) {
             if (!(part->flags & ACTOR_PART_FLAG_20000000)) {
-                if (actor->debuff == STATUS_FROZEN) {
+                if (actor->debuff == STATUS_KEY_FROZEN) {
                     if (!animChanged) {
-                        part->currentAnimation = get_npc_anim_for_status(part->idleAnimations, STATUS_FROZEN);
+                        part->currentAnimation = get_npc_anim_for_status(part->idleAnimations, STATUS_KEY_FROZEN);
                         animChanged = TRUE;
                     }
-                } else if (actor->debuff != STATUS_SHRINK) {
-                    if (actor->debuff == STATUS_POISON) {
+                } else if (actor->debuff != STATUS_KEY_SHRINK) {
+                    if (actor->debuff == STATUS_KEY_POISON) {
                         if (!animChanged) {
-                            part->currentAnimation = get_npc_anim_for_status(part->idleAnimations, STATUS_POISON);
+                            part->currentAnimation = get_npc_anim_for_status(part->idleAnimations, STATUS_KEY_POISON);
                             animChanged = TRUE;
                         }
-                    } else if (actor->debuff == STATUS_DIZZY) {
+                    } else if (actor->debuff == STATUS_KEY_DIZZY) {
                         if (!animChanged) {
-                            part->currentAnimation = get_npc_anim_for_status(part->idleAnimations, STATUS_DIZZY);
+                            part->currentAnimation = get_npc_anim_for_status(part->idleAnimations, STATUS_KEY_DIZZY);
                             animChanged = TRUE;
                         }
-                    } else if (actor->debuff == STATUS_FEAR) {
+                    } else if (actor->debuff == STATUS_KEY_FEAR) {
                         if (!animChanged) {
-                            part->currentAnimation = get_npc_anim_for_status(part->idleAnimations, STATUS_FEAR);
+                            part->currentAnimation = get_npc_anim_for_status(part->idleAnimations, STATUS_KEY_FEAR);
                             animChanged = TRUE;
                         }
-                    } else if (actor->debuff == STATUS_SLEEP) {
+                    } else if (actor->debuff == STATUS_KEY_SLEEP) {
                         if (!animChanged) {
-                            part->currentAnimation = get_npc_anim_for_status(part->idleAnimations, STATUS_SLEEP);
+                            part->currentAnimation = get_npc_anim_for_status(part->idleAnimations, STATUS_KEY_SLEEP);
                             animChanged = TRUE;
                         }
-                    } else if (actor->debuff == STATUS_PARALYZE) {
+                    } else if (actor->debuff == STATUS_KEY_PARALYZE) {
                         if (!animChanged) {
-                            part->currentAnimation = get_npc_anim_for_status(part->idleAnimations, STATUS_PARALYZE);
+                            part->currentAnimation = get_npc_anim_for_status(part->idleAnimations, STATUS_KEY_PARALYZE);
                             animChanged = TRUE;
                         }
                     }
                 }
 
-                if (actor->staticStatus == STATUS_STATIC) {
+                if (actor->staticStatus == STATUS_KEY_STATIC) {
                     if (!animChanged) {
-                        part->currentAnimation = get_npc_anim_for_status(part->idleAnimations, STATUS_STATIC);
+                        part->currentAnimation = get_npc_anim_for_status(part->idleAnimations, STATUS_KEY_STATIC);
                         animChanged = TRUE;
                     }
 
@@ -1106,26 +1106,26 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
                 }
 
                 if (isPartner) {
-                    if (actor->koStatus == STATUS_DAZE) {
-                        part->currentAnimation = get_npc_anim_for_status(part->idleAnimations, STATUS_DAZE);
+                    if (actor->koStatus == STATUS_KEY_DAZE) {
+                        part->currentAnimation = get_npc_anim_for_status(part->idleAnimations, STATUS_KEY_DAZE);
                         animChanged = TRUE;
                     } else {
-                        s32 temp = get_npc_anim_for_status(part->idleAnimations, STATUS_NORMAL);
+                        s32 temp = get_npc_anim_for_status(part->idleAnimations, STATUS_KEY_NORMAL);
                         do {
-                            if (temp == get_npc_anim_for_status(part->idleAnimations, STATUS_DAZE)) {
-                                part->currentAnimation = get_npc_anim_for_status(part->idleAnimations, STATUS_NORMAL);
+                            if (temp == get_npc_anim_for_status(part->idleAnimations, STATUS_KEY_DAZE)) {
+                                part->currentAnimation = get_npc_anim_for_status(part->idleAnimations, STATUS_KEY_NORMAL);
                             }
                         } while (0); // required to match
                     }
                 }
-                if (actor->debuff == STATUS_STOP) {
-                    part->currentAnimation = get_npc_anim_for_status(part->idleAnimations, STATUS_STOP);
-                    create_status_debuff(actor->hudElementDataIndex, STATUS_STOP);
+                if (actor->debuff == STATUS_KEY_STOP) {
+                    part->currentAnimation = get_npc_anim_for_status(part->idleAnimations, STATUS_KEY_STOP);
+                    create_status_debuff(actor->hudElementDataIndex, STATUS_KEY_STOP);
                 } else if (!animChanged) {
-                    s32 temp = get_npc_anim_for_status(part->idleAnimations, STATUS_NORMAL);
+                    s32 temp = get_npc_anim_for_status(part->idleAnimations, STATUS_KEY_NORMAL);
                     do {
-                        if (temp == get_npc_anim_for_status(part->idleAnimations, STATUS_STOP)) {
-                            part->currentAnimation = get_npc_anim_for_status(part->idleAnimations, STATUS_NORMAL);
+                        if (temp == get_npc_anim_for_status(part->idleAnimations, STATUS_KEY_STOP)) {
+                            part->currentAnimation = get_npc_anim_for_status(part->idleAnimations, STATUS_KEY_NORMAL);
                         }
                     } while (0); // required to match
                 }
@@ -1134,26 +1134,26 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
 
         if (!(gBattleStatus.flags1 & BS_FLAGS1_TATTLE_OPEN) && (actor->flags & ACTOR_FLAG_8000000)) {
             do {
-                if (actor->debuff == STATUS_POISON) {
-                    create_status_debuff(actor->hudElementDataIndex, STATUS_POISON);
-                } else if (actor->debuff == STATUS_DIZZY) {
-                    create_status_debuff(actor->hudElementDataIndex, STATUS_DIZZY);
-                } else if (actor->debuff == STATUS_SLEEP) {
-                    create_status_debuff(actor->hudElementDataIndex, STATUS_SLEEP);
-                } else if (actor->debuff == STATUS_PARALYZE) {
-                    create_status_debuff(actor->hudElementDataIndex, STATUS_PARALYZE);
-                } else if (actor->debuff == STATUS_SHRINK) {
-                    create_status_debuff(actor->hudElementDataIndex, STATUS_SHRINK);
-                } else if (actor->debuff == STATUS_FROZEN) {
-                    create_status_debuff(actor->hudElementDataIndex, STATUS_FROZEN);
+                if (actor->debuff == STATUS_KEY_POISON) {
+                    create_status_debuff(actor->hudElementDataIndex, STATUS_KEY_POISON);
+                } else if (actor->debuff == STATUS_KEY_DIZZY) {
+                    create_status_debuff(actor->hudElementDataIndex, STATUS_KEY_DIZZY);
+                } else if (actor->debuff == STATUS_KEY_SLEEP) {
+                    create_status_debuff(actor->hudElementDataIndex, STATUS_KEY_SLEEP);
+                } else if (actor->debuff == STATUS_KEY_PARALYZE) {
+                    create_status_debuff(actor->hudElementDataIndex, STATUS_KEY_PARALYZE);
+                } else if (actor->debuff == STATUS_KEY_SHRINK) {
+                    create_status_debuff(actor->hudElementDataIndex, STATUS_KEY_SHRINK);
+                } else if (actor->debuff == STATUS_KEY_FROZEN) {
+                    create_status_debuff(actor->hudElementDataIndex, STATUS_KEY_FROZEN);
                 }
             } while (0); // required to match
 
-            if (actor->staticStatus == STATUS_STATIC) {
-                create_status_static(actor->hudElementDataIndex, STATUS_STATIC);
+            if (actor->staticStatus == STATUS_KEY_STATIC) {
+                create_status_static(actor->hudElementDataIndex, STATUS_KEY_STATIC);
             }
-            if ((actor->transparentStatus == STATUS_TRANSPARENT) || (part->flags & ACTOR_PART_FLAG_100)) {
-                create_status_transparent(actor->hudElementDataIndex, STATUS_TRANSPARENT);
+            if ((actor->transparentStatus == STATUS_KEY_TRANSPARENT) || (part->flags & ACTOR_PART_FLAG_100)) {
+                create_status_transparent(actor->hudElementDataIndex, STATUS_KEY_TRANSPARENT);
             }
             if (actor->chillOutAmount != 0) {
                 create_status_chill_out(actor->hudElementDataIndex);
@@ -1516,7 +1516,7 @@ void appendGfx_player_actor(void* arg0) {
             effect->data.endingDecals->pos.z = playerPosZ;
         }
     }
-    if (player->debuff == STATUS_FROZEN) {
+    if (player->debuff == STATUS_KEY_FROZEN) {
         effect = player->icePillarEffect;
         if (player->icePillarEffect != NULL) {
             if ((gBattleStatus.flags1 & BS_FLAGS1_SHOW_PLAYER_DECORATIONS) ||
@@ -1551,7 +1551,7 @@ void appendGfx_player_actor(void* arg0) {
     }
 
     do {
-        if (player->debuff == STATUS_SHRINK) {
+        if (player->debuff == STATUS_KEY_SHRINK) {
             player->scalingFactor += (0.4 - player->scalingFactor) / 6.0;
         } else {
             player->scalingFactor += (1.0 - player->scalingFactor) / 6.0;
@@ -1596,13 +1596,13 @@ void appendGfx_player_actor(void* arg0) {
         remove_status_icon_danger(player->hudElementDataIndex);
     }
 
-    if (player->transparentStatus == STATUS_TRANSPARENT) {
+    if (player->transparentStatus == STATUS_KEY_TRANSPARENT) {
         playerParts->flags |= ACTOR_PART_FLAG_100;
 
         if (FALSE) { // TODO required to match - also whyyyyyy compiler, whyyyyy
     back:
-            playerParts->currentAnimation = get_player_anim_for_status(STATUS_STOP);
-            create_status_debuff(player->hudElementDataIndex, STATUS_STOP);
+            playerParts->currentAnimation = get_player_anim_for_status(STATUS_KEY_STOP);
+            create_status_debuff(player->hudElementDataIndex, STATUS_KEY_STOP);
             goto end;
         }
     } else {
@@ -1622,30 +1622,30 @@ void appendGfx_player_actor(void* arg0) {
         && ((partner == NULL) || !(partner->flags & ACTOR_FLAG_NO_ATTACK)))
     {
         if (!(gBattleStatus.flags2 & BS_FLAGS2_100000)) {
-            if ((player->debuff != STATUS_FEAR)
-                && (player->debuff != STATUS_PARALYZE)
-                && (player->debuff != STATUS_FROZEN)
-                && (player->debuff != STATUS_STOP)
+            if ((player->debuff != STATUS_KEY_FEAR)
+                && (player->debuff != STATUS_KEY_PARALYZE)
+                && (player->debuff != STATUS_KEY_FROZEN)
+                && (player->debuff != STATUS_KEY_STOP)
             ) {
-                if ((player->transparentStatus != STATUS_TRANSPARENT) &&
-                    (player->stoneStatus != STATUS_STONE) &&
+                if ((player->transparentStatus != STATUS_KEY_TRANSPARENT) &&
+                    (player->stoneStatus != STATUS_KEY_STONE) &&
                     ((battleStatus->outtaSightActive > 0) || (gBattleStatus.flags2 & BS_FLAGS2_2)))
                 {
                     if (is_ability_active(ABILITY_BERSERKER)) {
-                        playerParts->currentAnimation = get_player_anim_for_status(STATUS_TURN_DONE_BERSERK);
-                    } else  if (player->debuff == STATUS_SLEEP) {
-                        playerParts->currentAnimation = get_player_anim_for_status(STATUS_TURN_DONE_SLEEP);
-                    } else if (player->debuff == STATUS_DIZZY) {
-                        playerParts->currentAnimation = get_player_anim_for_status(STATUS_TURN_DONE_DIZZY);
+                        playerParts->currentAnimation = get_player_anim_for_status(STATUS_KEY_TURN_DONE_BERSERK);
+                    } else  if (player->debuff == STATUS_KEY_SLEEP) {
+                        playerParts->currentAnimation = get_player_anim_for_status(STATUS_KEY_TURN_DONE_SLEEP);
+                    } else if (player->debuff == STATUS_KEY_DIZZY) {
+                        playerParts->currentAnimation = get_player_anim_for_status(STATUS_KEY_TURN_DONE_DIZZY);
                     } else {
-                        playerParts->currentAnimation = get_player_anim_for_status(STATUS_TURN_DONE);
+                        playerParts->currentAnimation = get_player_anim_for_status(STATUS_KEY_TURN_DONE);
                     }
                     spr_update_player_sprite(PLAYER_SPRITE_MAIN, playerParts->currentAnimation, playerParts->animationRate);
                     animChanged = TRUE;
                 }
             }
 
-            if (player->debuff != STATUS_POISON) {
+            if (player->debuff != STATUS_KEY_POISON) {
                 set_actor_pal_adjustment(player, PAL_ADJUST_PLAYER_DEBUFF);
             } else {
                 set_actor_pal_adjustment(player, PAL_ADJUST_PLAYER_POISON);
@@ -1657,8 +1657,8 @@ void appendGfx_player_actor(void* arg0) {
         }
     }
 
-    if (player->stoneStatus == STATUS_STONE) {
-        playerParts->currentAnimation = get_player_anim_for_status(STATUS_STONE);
+    if (player->stoneStatus == STATUS_KEY_STONE) {
+        playerParts->currentAnimation = get_player_anim_for_status(STATUS_KEY_STONE);
         spr_update_player_sprite(PLAYER_SPRITE_MAIN, playerParts->currentAnimation, playerParts->animationRate);
         animChanged = TRUE;
 
@@ -1678,8 +1678,8 @@ void appendGfx_player_actor(void* arg0) {
 
     if ((player->flags & ACTOR_FLAG_4000000) && !animChanged) {
         s32 temp = playerParts->currentAnimation;
-        if (temp == get_player_anim_for_status(STATUS_STONE)) {
-            playerParts->currentAnimation = get_player_anim_for_status(STATUS_NORMAL);
+        if (temp == get_player_anim_for_status(STATUS_KEY_STONE)) {
+            playerParts->currentAnimation = get_player_anim_for_status(STATUS_KEY_NORMAL);
         }
     }
 
@@ -1689,19 +1689,19 @@ void appendGfx_player_actor(void* arg0) {
         }
         palChanged = TRUE;
     }
-    if (player->debuff == STATUS_POISON) {
+    if (player->debuff == STATUS_KEY_POISON) {
         if (!palChanged) {
             set_actor_pal_adjustment(player, PAL_ADJUST_POISON);
         }
         palChanged = TRUE;
     }
-    if (player->debuff == STATUS_PARALYZE) {
+    if (player->debuff == STATUS_KEY_PARALYZE) {
         if (!palChanged) {
             set_actor_pal_adjustment(player, PAL_ADJUST_PARALYZE);
         }
         palChanged = TRUE;
     }
-    if (player->staticStatus == STATUS_STATIC) {
+    if (player->staticStatus == STATUS_KEY_STATIC) {
         if (!palChanged) {
             set_actor_pal_adjustment(player, PAL_ADJUST_STATIC);
         }
@@ -1727,48 +1727,48 @@ void appendGfx_player_actor(void* arg0) {
     }
     if (player->flags & ACTOR_FLAG_4000000) {
         if (battleStatus->hustleTurns != 0) {
-            playerParts->currentAnimation = get_player_anim_for_status(STATUS_HUSTLE);
+            playerParts->currentAnimation = get_player_anim_for_status(STATUS_KEY_HUSTLE);
             animChanged = TRUE;
         } else if (!animChanged) {
-            s32 temp = get_player_anim_for_status(STATUS_NORMAL);
+            s32 temp = get_player_anim_for_status(STATUS_KEY_NORMAL);
             do {
-                if (temp == get_player_anim_for_status(STATUS_HUSTLE)) {
-                    playerParts->currentAnimation = get_player_anim_for_status(STATUS_NORMAL);
+                if (temp == get_player_anim_for_status(STATUS_KEY_HUSTLE)) {
+                    playerParts->currentAnimation = get_player_anim_for_status(STATUS_KEY_NORMAL);
                 }
             } while (0); // required to match
         }
 
         do {
-            if (player->debuff == STATUS_FROZEN) {
+            if (player->debuff == STATUS_KEY_FROZEN) {
                 if (!animChanged) {
-                    playerParts->currentAnimation = get_player_anim_for_status(STATUS_FROZEN);
+                    playerParts->currentAnimation = get_player_anim_for_status(STATUS_KEY_FROZEN);
                     animChanged = TRUE;
                 }
-            } else if (player->debuff != STATUS_SHRINK) {
-                if (player->debuff == STATUS_POISON) {
+            } else if (player->debuff != STATUS_KEY_SHRINK) {
+                if (player->debuff == STATUS_KEY_POISON) {
                     if (!animChanged) {
-                        playerParts->currentAnimation = get_player_anim_for_status(STATUS_POISON);
+                        playerParts->currentAnimation = get_player_anim_for_status(STATUS_KEY_POISON);
                         animChanged = TRUE;
                     }
-                } else if (player->debuff == STATUS_DIZZY) {
+                } else if (player->debuff == STATUS_KEY_DIZZY) {
                     if (!animChanged) {
-                        playerParts->currentAnimation = get_player_anim_for_status(STATUS_DIZZY);
+                        playerParts->currentAnimation = get_player_anim_for_status(STATUS_KEY_DIZZY);
                         animChanged = TRUE;
                     }
-                } else if (player->debuff == STATUS_SLEEP) {
+                } else if (player->debuff == STATUS_KEY_SLEEP) {
                     if (!animChanged) {
-                        playerParts->currentAnimation = get_player_anim_for_status(STATUS_SLEEP);
+                        playerParts->currentAnimation = get_player_anim_for_status(STATUS_KEY_SLEEP);
                         animChanged = TRUE;
                     }
-                } else if (player->debuff == STATUS_PARALYZE) {
+                } else if (player->debuff == STATUS_KEY_PARALYZE) {
                     if (!animChanged) {
-                        playerParts->currentAnimation = get_player_anim_for_status(STATUS_PARALYZE);
+                        playerParts->currentAnimation = get_player_anim_for_status(STATUS_KEY_PARALYZE);
                         animChanged = TRUE;
                     }
                  } else {
                     if (player_team_is_ability_active(player, ABILITY_BERSERKER)) {
                         if (!animChanged) {
-                            playerParts->currentAnimation = get_player_anim_for_status(STATUS_BERSERK);
+                            playerParts->currentAnimation = get_player_anim_for_status(STATUS_KEY_BERSERK);
                             animChanged = TRUE;
                         }
                     }
@@ -1776,24 +1776,24 @@ void appendGfx_player_actor(void* arg0) {
             }
             if (is_ability_active(ABILITY_ZAP_TAP)) {
                 if (!animChanged) {
-                    playerParts->currentAnimation = get_player_anim_for_status(STATUS_STATIC);
+                    playerParts->currentAnimation = get_player_anim_for_status(STATUS_KEY_STATIC);
                     animChanged = TRUE;
                 }
-                player->staticStatus = STATUS_STATIC;
+                player->staticStatus = STATUS_KEY_STATIC;
                 player->staticDuration = 127;
-            } else if ((player->staticStatus == STATUS_STATIC) && !animChanged) {
-                playerParts->currentAnimation = get_player_anim_for_status(STATUS_STATIC);
+            } else if ((player->staticStatus == STATUS_KEY_STATIC) && !animChanged) {
+                playerParts->currentAnimation = get_player_anim_for_status(STATUS_KEY_STATIC);
                 animChanged = TRUE;
             }
-            if ((player->transparentStatus == STATUS_TRANSPARENT) || (playerParts->flags & ACTOR_PART_FLAG_100)) {
+            if ((player->transparentStatus == STATUS_KEY_TRANSPARENT) || (playerParts->flags & ACTOR_PART_FLAG_100)) {
                 if (!animChanged) {
-                    playerParts->currentAnimation = get_player_anim_for_status(STATUS_TRANSPARENT);
+                    playerParts->currentAnimation = get_player_anim_for_status(STATUS_KEY_TRANSPARENT);
                     animChanged = TRUE;
                 }
-                create_status_transparent(player->hudElementDataIndex, STATUS_TRANSPARENT);
+                create_status_transparent(player->hudElementDataIndex, STATUS_KEY_TRANSPARENT);
             }
             if (!animChanged) {
-                playerParts->currentAnimation = get_player_anim_for_status(STATUS_NORMAL);
+                playerParts->currentAnimation = get_player_anim_for_status(STATUS_KEY_NORMAL);
             }
         } while (0); // needed to match
     }
@@ -1801,26 +1801,26 @@ void appendGfx_player_actor(void* arg0) {
     if (!(gBattleStatus.flags1 & BS_FLAGS1_TATTLE_OPEN) && (player->flags & ACTOR_FLAG_8000000)) {
         if (!cond4) {
             do {
-                if (player->debuff == STATUS_POISON) {
-                    create_status_debuff(player->hudElementDataIndex, STATUS_POISON);
-                } else if (player->debuff == STATUS_SLEEP) {
-                    create_status_debuff(player->hudElementDataIndex, STATUS_SLEEP);
-                } else if (player->debuff == STATUS_PARALYZE) {
-                    create_status_debuff(player->hudElementDataIndex, STATUS_PARALYZE);
-                } else if (player->debuff == STATUS_DIZZY) {
-                    create_status_debuff(player->hudElementDataIndex, STATUS_DIZZY);
-                } else if (player->debuff == STATUS_SHRINK) {
-                    create_status_debuff(player->hudElementDataIndex, STATUS_SHRINK);
-                } else if (player->debuff == STATUS_FROZEN) {
-                    create_status_debuff(player->hudElementDataIndex, STATUS_FROZEN);
+                if (player->debuff == STATUS_KEY_POISON) {
+                    create_status_debuff(player->hudElementDataIndex, STATUS_KEY_POISON);
+                } else if (player->debuff == STATUS_KEY_SLEEP) {
+                    create_status_debuff(player->hudElementDataIndex, STATUS_KEY_SLEEP);
+                } else if (player->debuff == STATUS_KEY_PARALYZE) {
+                    create_status_debuff(player->hudElementDataIndex, STATUS_KEY_PARALYZE);
+                } else if (player->debuff == STATUS_KEY_DIZZY) {
+                    create_status_debuff(player->hudElementDataIndex, STATUS_KEY_DIZZY);
+                } else if (player->debuff == STATUS_KEY_SHRINK) {
+                    create_status_debuff(player->hudElementDataIndex, STATUS_KEY_SHRINK);
+                } else if (player->debuff == STATUS_KEY_FROZEN) {
+                    create_status_debuff(player->hudElementDataIndex, STATUS_KEY_FROZEN);
                 }
             } while (0); // required to match
-            if (!cond4 && (is_ability_active(ABILITY_ZAP_TAP) || (player->staticStatus == STATUS_STATIC))) {
-                create_status_static(player->hudElementDataIndex, STATUS_STATIC);
+            if (!cond4 && (is_ability_active(ABILITY_ZAP_TAP) || (player->staticStatus == STATUS_KEY_STATIC))) {
+                create_status_static(player->hudElementDataIndex, STATUS_KEY_STATIC);
             }
         }
-        if ((player->transparentStatus == STATUS_TRANSPARENT) || (playerParts->flags & ACTOR_PART_FLAG_100)) {
-            create_status_transparent(player->hudElementDataIndex, STATUS_TRANSPARENT);
+        if ((player->transparentStatus == STATUS_KEY_TRANSPARENT) || (playerParts->flags & ACTOR_PART_FLAG_100)) {
+            create_status_transparent(player->hudElementDataIndex, STATUS_KEY_TRANSPARENT);
         }
     } else {
         enable_status_debuff(player->hudElementDataIndex);
@@ -1829,11 +1829,11 @@ void appendGfx_player_actor(void* arg0) {
         enable_status_chill_out(player->hudElementDataIndex);
     }
 
-    if (player->debuff != STATUS_STOP) {
+    if (player->debuff != STATUS_KEY_STOP) {
         if (!animChanged) {
             s32 temp = playerParts->currentAnimation;
-            if (temp == get_player_anim_for_status(STATUS_STOP)) {
-                playerParts->currentAnimation = get_player_anim_for_status(STATUS_NORMAL);
+            if (temp == get_player_anim_for_status(STATUS_KEY_STOP)) {
+                playerParts->currentAnimation = get_player_anim_for_status(STATUS_KEY_NORMAL);
             }
         }
     } else {

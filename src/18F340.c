@@ -45,14 +45,14 @@ void btl_set_player_idle_anims(void) {
 API_CALLABLE(IsPartnerImmobile) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* playerActor = battleStatus->playerActor;
-    s32 isImmobile = playerActor->debuff == STATUS_FEAR
-                     || playerActor->debuff == STATUS_DIZZY
-                     || playerActor->debuff == STATUS_PARALYZE
-                     || playerActor->debuff == STATUS_SLEEP
-                     || playerActor->debuff == STATUS_FROZEN
-                     || playerActor->debuff == STATUS_STOP;
+    s32 isImmobile = playerActor->debuff == STATUS_KEY_FEAR
+                     || playerActor->debuff == STATUS_KEY_DIZZY
+                     || playerActor->debuff == STATUS_KEY_PARALYZE
+                     || playerActor->debuff == STATUS_KEY_SLEEP
+                     || playerActor->debuff == STATUS_KEY_FROZEN
+                     || playerActor->debuff == STATUS_KEY_STOP;
 
-    if (playerActor->stoneStatus == STATUS_STONE) {
+    if (playerActor->stoneStatus == STATUS_KEY_STONE) {
         isImmobile = TRUE;
     }
 
@@ -76,8 +76,8 @@ API_CALLABLE(DoesMarioStatusPreventHappyAnimation) {
     show_action_rating(ACTION_RATING_LUCKY, player, player->currentPos.x, player->currentPos.y + 20.0f, player->currentPos.z);
     sfx_play_sound(SOUND_3FC);
     script->varTable[0] = FALSE;
-    if (player->debuff == STATUS_FEAR || player->debuff == STATUS_DIZZY || player->debuff == STATUS_PARALYZE ||
-        player->debuff == STATUS_SLEEP ||player->debuff == STATUS_FROZEN || player->debuff == STATUS_STOP) {
+    if (player->debuff == STATUS_KEY_FEAR || player->debuff == STATUS_KEY_DIZZY || player->debuff == STATUS_KEY_PARALYZE ||
+        player->debuff == STATUS_KEY_SLEEP ||player->debuff == STATUS_KEY_FROZEN || player->debuff == STATUS_KEY_STOP) {
         script->varTable[0] = TRUE;
     }
     return ApiStatus_DONE2;

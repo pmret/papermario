@@ -80,14 +80,14 @@ API_CALLABLE(N(ModifyBowPos)) {
 API_CALLABLE(N(IsPartnerImmobile)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* playerActor = battleStatus->playerActor;
-    s32 isImmobile = playerActor->debuff == STATUS_FEAR
-                     || playerActor->debuff == STATUS_DIZZY
-                     || playerActor->debuff == STATUS_PARALYZE
-                     || playerActor->debuff == STATUS_SLEEP
-                     || playerActor->debuff == STATUS_FROZEN
-                     || playerActor->debuff == STATUS_STOP;
+    s32 isImmobile = playerActor->debuff == STATUS_KEY_FEAR
+                     || playerActor->debuff == STATUS_KEY_DIZZY
+                     || playerActor->debuff == STATUS_KEY_PARALYZE
+                     || playerActor->debuff == STATUS_KEY_SLEEP
+                     || playerActor->debuff == STATUS_KEY_FROZEN
+                     || playerActor->debuff == STATUS_KEY_STOP;
 
-    if (playerActor->stoneStatus == STATUS_STONE) {
+    if (playerActor->stoneStatus == STATUS_KEY_STONE) {
         isImmobile = TRUE;
     }
 
@@ -121,7 +121,7 @@ API_CALLABLE(N(AverageSpookChance)) {
         targetActorBlueprint = targetActor->actorBlueprint;
         spookChance = targetActorBlueprint->spookChance;
 
-        if (targetActor->transparentStatus == STATUS_TRANSPARENT) {
+        if (targetActor->transparentStatus == STATUS_KEY_TRANSPARENT) {
             spookChance = 0;
         }
 
@@ -145,14 +145,14 @@ API_CALLABLE(N(AverageSpookChance)) {
 }
 
 s32 N(IdleAnimations)[] = {
-    STATUS_NORMAL, ANIM_BattleBow_Walk,
-    STATUS_STONE, ANIM_BattleBow_Still,
-    STATUS_SLEEP, ANIM_BattleBow_Pray,
-    STATUS_POISON, ANIM_BattleBow_Still,
-    STATUS_STOP, ANIM_BattleBow_Still,
-    STATUS_DAZE, ANIM_BattleBow_Injured,
-    STATUS_TURN_DONE, ANIM_BattleBow_Still,
-    STATUS_END,
+    STATUS_KEY_NORMAL, ANIM_BattleBow_Walk,
+    STATUS_KEY_STONE, ANIM_BattleBow_Still,
+    STATUS_KEY_SLEEP, ANIM_BattleBow_Pray,
+    STATUS_KEY_POISON, ANIM_BattleBow_Still,
+    STATUS_KEY_STOP, ANIM_BattleBow_Still,
+    STATUS_KEY_DAZE, ANIM_BattleBow_Injured,
+    STATUS_KEY_TURN_DONE, ANIM_BattleBow_Still,
+    STATUS_TABLE_END,
 };
 
 s32 N(DefenseTable)[] = {
@@ -161,28 +161,28 @@ s32 N(DefenseTable)[] = {
 };
 
 s32 N(StatusTable)[] = {
-    STATUS_NORMAL, 100,
-    STATUS_DEFAULT, 100,
-    STATUS_SLEEP, 100,
-    STATUS_POISON, 100,
-    STATUS_FROZEN, 100,
-    STATUS_DIZZY, 100,
-    STATUS_FEAR, 100,
-    STATUS_STATIC, 100,
-    STATUS_PARALYZE, 100,
-    STATUS_SHRINK, 100,
-    STATUS_STOP, 100,
-    STATUX_TURN_MOD_DEFAULT, 0,
-    STATUX_TURN_MOD_SLEEP, 0,
-    STATUX_TURN_MOD_POISON, 0,
-    STATUX_TURN_MOD_FROZEN, 0,
-    STATUX_TURN_MOD_DIZZY, 0,
-    STATUX_TURN_MOD_FEAR, 0,
-    STATUX_TURN_MOD_STATIC, 0,
-    STATUX_TURN_MOD_PARALYZE, 0,
-    STATUX_TURN_MOD_SHRINK, 0,
-    STATUX_TURN_MOD_STOP, 0,
-    STATUS_END,
+    STATUS_KEY_NORMAL, 100,
+    STATUS_KEY_DEFAULT, 100,
+    STATUS_KEY_SLEEP, 100,
+    STATUS_KEY_POISON, 100,
+    STATUS_KEY_FROZEN, 100,
+    STATUS_KEY_DIZZY, 100,
+    STATUS_KEY_FEAR, 100,
+    STATUS_KEY_STATIC, 100,
+    STATUS_KEY_PARALYZE, 100,
+    STATUS_KEY_SHRINK, 100,
+    STATUS_KEY_STOP, 100,
+    STATUS_TURN_MOD_DEFAULT, 0,
+    STATUS_TURN_MOD_SLEEP, 0,
+    STATUS_TURN_MOD_POISON, 0,
+    STATUS_TURN_MOD_FROZEN, 0,
+    STATUS_TURN_MOD_DIZZY, 0,
+    STATUS_TURN_MOD_FEAR, 0,
+    STATUS_TURN_MOD_STATIC, 0,
+    STATUS_TURN_MOD_PARALYZE, 0,
+    STATUS_TURN_MOD_SHRINK, 0,
+    STATUS_TURN_MOD_STOP, 0,
+    STATUS_TABLE_END,
 };
 
 ActorPartBlueprint N(parts)[] = {

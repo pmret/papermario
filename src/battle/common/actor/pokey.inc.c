@@ -38,28 +38,28 @@ s32 N(DefenseTable)[] = {
 };
 
 s32 N(StatusTable)[] = {
-    STATUS_NORMAL, 0,
-    STATUS_DEFAULT, 0,
-    STATUS_SLEEP, 90,
-    STATUS_POISON, 0,
-    STATUS_FROZEN, 0,
-    STATUS_DIZZY, 90,
-    STATUS_FEAR, 0,
-    STATUS_STATIC, 0,
-    STATUS_PARALYZE, 100,
-    STATUS_SHRINK, 90,
-    STATUS_STOP, 100,
-    STATUX_TURN_MOD_DEFAULT, 0,
-    STATUX_TURN_MOD_SLEEP, 0,
-    STATUX_TURN_MOD_POISON, 0,
-    STATUX_TURN_MOD_FROZEN, 0,
-    STATUX_TURN_MOD_DIZZY, 0,
-    STATUX_TURN_MOD_FEAR, 0,
-    STATUX_TURN_MOD_STATIC, 0,
-    STATUX_TURN_MOD_PARALYZE, 0,
-    STATUX_TURN_MOD_SHRINK, 0,
-    STATUX_TURN_MOD_STOP, 0,
-    STATUS_END,
+    STATUS_KEY_NORMAL, 0,
+    STATUS_KEY_DEFAULT, 0,
+    STATUS_KEY_SLEEP, 90,
+    STATUS_KEY_POISON, 0,
+    STATUS_KEY_FROZEN, 0,
+    STATUS_KEY_DIZZY, 90,
+    STATUS_KEY_FEAR, 0,
+    STATUS_KEY_STATIC, 0,
+    STATUS_KEY_PARALYZE, 100,
+    STATUS_KEY_SHRINK, 90,
+    STATUS_KEY_STOP, 100,
+    STATUS_TURN_MOD_DEFAULT, 0,
+    STATUS_TURN_MOD_SLEEP, 0,
+    STATUS_TURN_MOD_POISON, 0,
+    STATUS_TURN_MOD_FROZEN, 0,
+    STATUS_TURN_MOD_DIZZY, 0,
+    STATUS_TURN_MOD_FEAR, 0,
+    STATUS_TURN_MOD_STATIC, 0,
+    STATUS_TURN_MOD_PARALYZE, 0,
+    STATUS_TURN_MOD_SHRINK, 0,
+    STATUS_TURN_MOD_STOP, 0,
+    STATUS_TABLE_END,
 };
 
 ActorPartBlueprint N(parts)[] = {
@@ -161,52 +161,52 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(IdleAnimations)[] = {
-    STATUS_NORMAL,    ANIM_Pokey_Anim04,
-    STATUS_STONE,     ANIM_Pokey_Anim00,
-    STATUS_SLEEP,     ANIM_Pokey_Anim25,
-    STATUS_STOP,      ANIM_Pokey_Anim00,
-    STATUS_PARALYZE,  ANIM_Pokey_Anim00,
-    STATUS_DIZZY,     ANIM_Pokey_Anim21,
-    STATUS_FEAR,      ANIM_Pokey_Anim21,
-    STATUS_END,
+    STATUS_KEY_NORMAL,    ANIM_Pokey_Anim04,
+    STATUS_KEY_STONE,     ANIM_Pokey_Anim00,
+    STATUS_KEY_SLEEP,     ANIM_Pokey_Anim25,
+    STATUS_KEY_STOP,      ANIM_Pokey_Anim00,
+    STATUS_KEY_PARALYZE,  ANIM_Pokey_Anim00,
+    STATUS_KEY_DIZZY,     ANIM_Pokey_Anim21,
+    STATUS_KEY_FEAR,      ANIM_Pokey_Anim21,
+    STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations_3bodyParts)[] = {
-    STATUS_NORMAL,    ANIM_Pokey_Anim05,
-    STATUS_STONE,     ANIM_Pokey_Anim01,
-    STATUS_SLEEP,     ANIM_Pokey_Anim26,
-    STATUS_STOP,      ANIM_Pokey_Anim01,
-    STATUS_PARALYZE,  ANIM_Pokey_Anim01,
-    STATUS_DIZZY,     ANIM_Pokey_Anim22,
-    STATUS_FEAR,      ANIM_Pokey_Anim22,
-    STATUS_END,
+    STATUS_KEY_NORMAL,    ANIM_Pokey_Anim05,
+    STATUS_KEY_STONE,     ANIM_Pokey_Anim01,
+    STATUS_KEY_SLEEP,     ANIM_Pokey_Anim26,
+    STATUS_KEY_STOP,      ANIM_Pokey_Anim01,
+    STATUS_KEY_PARALYZE,  ANIM_Pokey_Anim01,
+    STATUS_KEY_DIZZY,     ANIM_Pokey_Anim22,
+    STATUS_KEY_FEAR,      ANIM_Pokey_Anim22,
+    STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations_2bodyParts)[] = {
-    STATUS_NORMAL,    ANIM_Pokey_Anim06,
-    STATUS_STONE,     ANIM_Pokey_Anim02,
-    STATUS_SLEEP,     ANIM_Pokey_Anim27,
-    STATUS_STOP,      ANIM_Pokey_Anim02,
-    STATUS_PARALYZE,  ANIM_Pokey_Anim02,
-    STATUS_DIZZY,     ANIM_Pokey_Anim23,
-    STATUS_FEAR,      ANIM_Pokey_Anim23,
-    STATUS_END,
+    STATUS_KEY_NORMAL,    ANIM_Pokey_Anim06,
+    STATUS_KEY_STONE,     ANIM_Pokey_Anim02,
+    STATUS_KEY_SLEEP,     ANIM_Pokey_Anim27,
+    STATUS_KEY_STOP,      ANIM_Pokey_Anim02,
+    STATUS_KEY_PARALYZE,  ANIM_Pokey_Anim02,
+    STATUS_KEY_DIZZY,     ANIM_Pokey_Anim23,
+    STATUS_KEY_FEAR,      ANIM_Pokey_Anim23,
+    STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations_1bodyPart)[] = {
-    STATUS_NORMAL,    ANIM_Pokey_Anim07,
-    STATUS_STONE,     ANIM_Pokey_Anim03,
-    STATUS_SLEEP,     ANIM_Pokey_Anim28,
-    STATUS_STOP,      ANIM_Pokey_Anim03,
-    STATUS_PARALYZE,  ANIM_Pokey_Anim03,
-    STATUS_DIZZY,     ANIM_Pokey_Anim24,
-    STATUS_FEAR,      ANIM_Pokey_Anim24,
-    STATUS_END,
+    STATUS_KEY_NORMAL,    ANIM_Pokey_Anim07,
+    STATUS_KEY_STONE,     ANIM_Pokey_Anim03,
+    STATUS_KEY_SLEEP,     ANIM_Pokey_Anim28,
+    STATUS_KEY_STOP,      ANIM_Pokey_Anim03,
+    STATUS_KEY_PARALYZE,  ANIM_Pokey_Anim03,
+    STATUS_KEY_DIZZY,     ANIM_Pokey_Anim24,
+    STATUS_KEY_FEAR,      ANIM_Pokey_Anim24,
+    STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations_thrownBodyPart)[] = {
-    STATUS_NORMAL,    ANIM_Pokey_Anim16,
-    STATUS_END,
+    STATUS_KEY_NORMAL,    ANIM_Pokey_Anim16,
+    STATUS_TABLE_END,
 };
 
 EvtScript N(init) = {
@@ -584,7 +584,7 @@ EvtScript N(timberAttack) = {
     EVT_END_SWITCH
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, DMG_STATUS_CHANCE(STATUS_FLAG_POISON, 3, 0), LVar1, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, DMG_STATUS_KEY(STATUS_FLAG_POISON, 3, 0), LVar1, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
@@ -792,7 +792,7 @@ EvtScript N(takeTurn) = {
     EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 6, EVT_FLOAT(0.1))
     EVT_CALL(SetAnimation, ACTOR_SELF, 6, ANIM_Pokey_Anim16)
     EVT_CALL(JumpPartTo, ACTOR_SELF, 6, LVar0, LVar1, LVar2, 0, TRUE)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, DMG_STATUS_CHANCE(STATUS_FLAG_POISON, 3, 0), 2, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, DMG_STATUS_KEY(STATUS_FLAG_POISON, 3, 0), 2, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_ANIM_UNK), LVar1)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, LVar1)
     EVT_SWITCH(LVar0)
@@ -1092,7 +1092,7 @@ EvtScript N(attackHeadDive) = {
     EVT_END_CHILD_THREAD
     EVT_CALL(JumpToGoal, ACTOR_SELF, 18, FALSE, TRUE, FALSE)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, DMG_STATUS_CHANCE(STATUS_FLAG_POISON, 3, 0), 2, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, DMG_STATUS_KEY(STATUS_FLAG_POISON, 3, 0), 2, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Pokey_Anim07)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)

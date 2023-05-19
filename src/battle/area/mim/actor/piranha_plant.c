@@ -12,26 +12,26 @@ extern EvtScript N(idle_8021D4E4);
 extern EvtScript N(handleEvent_8021D60C);
 
 s32 N(IdleAnimations_8021D330)[] = {
-    STATUS_NORMAL,    ANIM_SmallPiranha_Anim01,
-    STATUS_STONE,     ANIM_SmallPiranha_Anim00,
-    STATUS_SLEEP,     ANIM_SmallPiranha_Anim00,
-    STATUS_POISON,    ANIM_SmallPiranha_Anim01,
-    STATUS_STOP,      ANIM_SmallPiranha_Anim00,
-    STATUS_STATIC,    ANIM_SmallPiranha_Anim01,
-    STATUS_PARALYZE,  ANIM_SmallPiranha_Anim00,
-    STATUS_DIZZY,     ANIM_SmallPiranha_Anim01,
-    STATUS_FEAR,      ANIM_SmallPiranha_Anim01,
-    STATUS_END,
+    STATUS_KEY_NORMAL,    ANIM_SmallPiranha_Anim01,
+    STATUS_KEY_STONE,     ANIM_SmallPiranha_Anim00,
+    STATUS_KEY_SLEEP,     ANIM_SmallPiranha_Anim00,
+    STATUS_KEY_POISON,    ANIM_SmallPiranha_Anim01,
+    STATUS_KEY_STOP,      ANIM_SmallPiranha_Anim00,
+    STATUS_KEY_STATIC,    ANIM_SmallPiranha_Anim01,
+    STATUS_KEY_PARALYZE,  ANIM_SmallPiranha_Anim00,
+    STATUS_KEY_DIZZY,     ANIM_SmallPiranha_Anim01,
+    STATUS_KEY_FEAR,      ANIM_SmallPiranha_Anim01,
+    STATUS_TABLE_END,
 };
 
 s32 N(unk_missing_8021D37C)[] = {
-    STATUS_NORMAL, ANIM_SmallPiranha_Anim01,
-    STATUS_END,
+    STATUS_KEY_NORMAL, ANIM_SmallPiranha_Anim01,
+    STATUS_TABLE_END,
 };
 
 s32 N(unk_missing_8021D388)[] = {
-    STATUS_NORMAL, ANIM_SmallPiranha_Anim06,
-    STATUS_END,
+    STATUS_KEY_NORMAL, ANIM_SmallPiranha_Anim06,
+    STATUS_TABLE_END,
 };
 
 s32 N(DefenseTable_8021D394)[] = {
@@ -40,28 +40,28 @@ s32 N(DefenseTable_8021D394)[] = {
 };
 
 s32 N(StatusTable_8021D3A0)[] = {
-    STATUS_NORMAL, 0,
-    STATUS_DEFAULT, 0,
-    STATUS_SLEEP, 95,
-    STATUS_POISON, 0,
-    STATUS_FROZEN, 0,
-    STATUS_DIZZY, 50,
-    STATUS_FEAR, 0,
-    STATUS_STATIC, 0,
-    STATUS_PARALYZE, 100,
-    STATUS_SHRINK, 80,
-    STATUS_STOP, 90,
-    STATUX_TURN_MOD_DEFAULT, 0,
-    STATUX_TURN_MOD_SLEEP, 1,
-    STATUX_TURN_MOD_POISON, 0,
-    STATUX_TURN_MOD_FROZEN, 0,
-    STATUX_TURN_MOD_DIZZY, 0,
-    STATUX_TURN_MOD_FEAR, 0,
-    STATUX_TURN_MOD_STATIC, 0,
-    STATUX_TURN_MOD_PARALYZE, 0,
-    STATUX_TURN_MOD_SHRINK, 0,
-    STATUX_TURN_MOD_STOP, 0,
-    STATUS_END,
+    STATUS_KEY_NORMAL, 0,
+    STATUS_KEY_DEFAULT, 0,
+    STATUS_KEY_SLEEP, 95,
+    STATUS_KEY_POISON, 0,
+    STATUS_KEY_FROZEN, 0,
+    STATUS_KEY_DIZZY, 50,
+    STATUS_KEY_FEAR, 0,
+    STATUS_KEY_STATIC, 0,
+    STATUS_KEY_PARALYZE, 100,
+    STATUS_KEY_SHRINK, 80,
+    STATUS_KEY_STOP, 90,
+    STATUS_TURN_MOD_DEFAULT, 0,
+    STATUS_TURN_MOD_SLEEP, 1,
+    STATUS_TURN_MOD_POISON, 0,
+    STATUS_TURN_MOD_FROZEN, 0,
+    STATUS_TURN_MOD_DIZZY, 0,
+    STATUS_TURN_MOD_FEAR, 0,
+    STATUS_TURN_MOD_STATIC, 0,
+    STATUS_TURN_MOD_PARALYZE, 0,
+    STATUS_TURN_MOD_SHRINK, 0,
+    STATUS_TURN_MOD_STOP, 0,
+    STATUS_TABLE_END,
 };
 
 ActorPartBlueprint N(PartsTable_8021D44C)[] = {

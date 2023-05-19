@@ -476,14 +476,14 @@ API_CALLABLE(N(GetChargeMessage)) {
 }
 
 s32 N(IdleAnimations)[] = {
-    STATUS_NORMAL,    ANIM_BattleGoombario_Walk,
-    STATUS_STONE,     ANIM_BattleGoombario_Still,
-    STATUS_SLEEP,     ANIM_BattleGoombario_CloseEyes,
-    STATUS_POISON,    ANIM_BattleGoombario_Still,
-    STATUS_STOP,      ANIM_BattleGoombario_Still,
-    STATUS_DAZE,      ANIM_BattleGoombario_Injured,
-    STATUS_TURN_DONE, ANIM_BattleGoombario_Still,
-    STATUS_END,
+    STATUS_KEY_NORMAL,    ANIM_BattleGoombario_Walk,
+    STATUS_KEY_STONE,     ANIM_BattleGoombario_Still,
+    STATUS_KEY_SLEEP,     ANIM_BattleGoombario_CloseEyes,
+    STATUS_KEY_POISON,    ANIM_BattleGoombario_Still,
+    STATUS_KEY_STOP,      ANIM_BattleGoombario_Still,
+    STATUS_KEY_DAZE,      ANIM_BattleGoombario_Injured,
+    STATUS_KEY_TURN_DONE, ANIM_BattleGoombario_Still,
+    STATUS_TABLE_END,
 };
 
 s32 N(DefenseTable)[] = {
@@ -492,28 +492,28 @@ s32 N(DefenseTable)[] = {
 };
 
 s32 N(StatusTable)[] = {
-    STATUS_NORMAL, 100,
-    STATUS_DEFAULT, 100,
-    STATUS_SLEEP, 100,
-    STATUS_POISON, 100,
-    STATUS_FROZEN, 100,
-    STATUS_DIZZY, 100,
-    STATUS_FEAR, 100,
-    STATUS_STATIC, 100,
-    STATUS_PARALYZE, 100,
-    STATUS_SHRINK, 100,
-    STATUS_STOP, 100,
-    STATUX_TURN_MOD_DEFAULT, 0,
-    STATUX_TURN_MOD_SLEEP, 0,
-    STATUX_TURN_MOD_POISON, 0,
-    STATUX_TURN_MOD_FROZEN, 0,
-    STATUX_TURN_MOD_DIZZY, 0,
-    STATUX_TURN_MOD_FEAR, 0,
-    STATUX_TURN_MOD_STATIC, 0,
-    STATUX_TURN_MOD_PARALYZE, 0,
-    STATUX_TURN_MOD_SHRINK, 0,
-    STATUX_TURN_MOD_STOP, 0,
-    STATUS_END,
+    STATUS_KEY_NORMAL, 100,
+    STATUS_KEY_DEFAULT, 100,
+    STATUS_KEY_SLEEP, 100,
+    STATUS_KEY_POISON, 100,
+    STATUS_KEY_FROZEN, 100,
+    STATUS_KEY_DIZZY, 100,
+    STATUS_KEY_FEAR, 100,
+    STATUS_KEY_STATIC, 100,
+    STATUS_KEY_PARALYZE, 100,
+    STATUS_KEY_SHRINK, 100,
+    STATUS_KEY_STOP, 100,
+    STATUS_TURN_MOD_DEFAULT, 0,
+    STATUS_TURN_MOD_SLEEP, 0,
+    STATUS_TURN_MOD_POISON, 0,
+    STATUS_TURN_MOD_FROZEN, 0,
+    STATUS_TURN_MOD_DIZZY, 0,
+    STATUS_TURN_MOD_FEAR, 0,
+    STATUS_TURN_MOD_STATIC, 0,
+    STATUS_TURN_MOD_PARALYZE, 0,
+    STATUS_TURN_MOD_SHRINK, 0,
+    STATUS_TURN_MOD_STOP, 0,
+    STATUS_TABLE_END,
 };
 
 ActorPartBlueprint N(parts)[] = {

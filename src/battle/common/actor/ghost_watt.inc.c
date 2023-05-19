@@ -17,28 +17,28 @@ API_CALLABLE(N(UnkWattEffectFunc1)) {
         wattEffectData->angle = 0;
         wattEffectData->unk_0C = TRUE;
         wattEffectData->unk_10 = 0;
-        wattEffectData->effect1 = fx_static_status(0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z, (actor->debuff != STATUS_SHRINK) ? 1.0f : 0.4f, 5, 0);
-        wattEffectData->effect2 = fx_static_status(1, actor->currentPos.x, -1000.0f, actor->currentPos.z, (actor->debuff != STATUS_SHRINK) ? 1.0f : 0.4f, 5, 0);
+        wattEffectData->effect1 = fx_static_status(0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z, (actor->debuff != STATUS_KEY_SHRINK) ? 1.0f : 0.4f, 5, 0);
+        wattEffectData->effect2 = fx_static_status(1, actor->currentPos.x, -1000.0f, actor->currentPos.z, (actor->debuff != STATUS_KEY_SHRINK) ? 1.0f : 0.4f, 5, 0);
         wattEffectData->flags = TRUE;
         wattEffectData->debuff = actor->debuff;
     }
 
     wattEffectData = state->varTablePtr[2];
     if (wattEffectData->flags) {
-        if (wattEffectData->unk_04 && actor->debuff != STATUS_STOP) {
+        if (wattEffectData->unk_04 && actor->debuff != STATUS_KEY_STOP) {
             wattEffectData->angle += 15;
             wattEffectData->angle = clamp_angle(wattEffectData->angle);
         }
         actor->verticalRenderOffset = sin_rad(DEG_TO_RAD(wattEffectData->angle)) * 3.0f;
 
         x = actor->currentPos.x + actor->headOffset.x;
-        y = actor->currentPos.y + actor->headOffset.y + actor->verticalRenderOffset + (actor->debuff != STATUS_SHRINK ? 12.0 : 4.800000000000001); // 4.8 doesn't match
+        y = actor->currentPos.y + actor->headOffset.y + actor->verticalRenderOffset + (actor->debuff != STATUS_KEY_SHRINK ? 12.0 : 4.800000000000001); // 4.8 doesn't match
         z = actor->currentPos.z + actor->headOffset.z;
         if (wattEffectData->unk_0C) {
             switch (wattEffectData->unk_10) {
                 case 0:
                     if (wattEffectData->effect1 == NULL) {
-                        wattEffectData->effect1 = fx_static_status(0, x, y, z, (actor->debuff != STATUS_SHRINK) ? 1.0f : 0.4f, 5, 0);
+                        wattEffectData->effect1 = fx_static_status(0, x, y, z, (actor->debuff != STATUS_KEY_SHRINK) ? 1.0f : 0.4f, 5, 0);
                     }
 
                     if (wattEffectData->effect2 != NULL) {
@@ -55,7 +55,7 @@ API_CALLABLE(N(UnkWattEffectFunc1)) {
                         wattEffectData->effect1 = NULL;
                     }
                     if (wattEffectData->effect2 == NULL) {
-                        wattEffectData->effect2 = fx_static_status(1, x, y, z, (actor->debuff != STATUS_SHRINK) ? 1.0f : 0.4f, 5, 0);
+                        wattEffectData->effect2 = fx_static_status(1, x, y, z, (actor->debuff != STATUS_KEY_SHRINK) ? 1.0f : 0.4f, 5, 0);
 
                     }
                     wattEffectData->effect2->data.staticStatus->pos.x = x;
@@ -141,16 +141,16 @@ extern EvtScript N(watt_idle);
 extern EvtScript N(watt_handleEvent);
 
 s32 N(watt_idleAnimations)[] = {
-    STATUS_NORMAL, ANIM_BattleWatt_Idle,
-    STATUS_STONE, ANIM_BattleWatt_Still,
-    STATUS_SLEEP, ANIM_BattleWatt_Still,
-    STATUS_POISON, ANIM_BattleWatt_Idle,
-    STATUS_STOP, ANIM_BattleWatt_Still,
-    STATUS_STATIC, ANIM_BattleWatt_Idle,
-    STATUS_PARALYZE, ANIM_BattleWatt_Still,
-    STATUS_DIZZY, ANIM_BattleWatt_Injured,
-    STATUS_FEAR, ANIM_BattleWatt_Injured,
-    STATUS_END,
+    STATUS_KEY_NORMAL, ANIM_BattleWatt_Idle,
+    STATUS_KEY_STONE, ANIM_BattleWatt_Still,
+    STATUS_KEY_SLEEP, ANIM_BattleWatt_Still,
+    STATUS_KEY_POISON, ANIM_BattleWatt_Idle,
+    STATUS_KEY_STOP, ANIM_BattleWatt_Still,
+    STATUS_KEY_STATIC, ANIM_BattleWatt_Idle,
+    STATUS_KEY_PARALYZE, ANIM_BattleWatt_Still,
+    STATUS_KEY_DIZZY, ANIM_BattleWatt_Injured,
+    STATUS_KEY_FEAR, ANIM_BattleWatt_Injured,
+    STATUS_TABLE_END,
 };
 
 s32 N(watt_defenseTable)[] = {
@@ -160,28 +160,28 @@ s32 N(watt_defenseTable)[] = {
 };
 
 s32 N(watt_statusTable)[] = {
-    STATUS_NORMAL, 0,
-    STATUS_DEFAULT, 0,
-    STATUS_SLEEP, 60,
-    STATUS_POISON, 0,
-    STATUS_FROZEN, 0,
-    STATUS_DIZZY, 75,
-    STATUS_FEAR, 0,
-    STATUS_STATIC, 0,
-    STATUS_PARALYZE, 75,
-    STATUS_SHRINK, 75,
-    STATUS_STOP, 80,
-    STATUX_TURN_MOD_DEFAULT, 0,
-    STATUX_TURN_MOD_SLEEP, -1,
-    STATUX_TURN_MOD_POISON, 0,
-    STATUX_TURN_MOD_FROZEN, 0,
-    STATUX_TURN_MOD_DIZZY, -1,
-    STATUX_TURN_MOD_FEAR, 0,
-    STATUX_TURN_MOD_STATIC, 0,
-    STATUX_TURN_MOD_PARALYZE, 0,
-    STATUX_TURN_MOD_SHRINK, 0,
-    STATUX_TURN_MOD_STOP, -1,
-    STATUS_END,
+    STATUS_KEY_NORMAL, 0,
+    STATUS_KEY_DEFAULT, 0,
+    STATUS_KEY_SLEEP, 60,
+    STATUS_KEY_POISON, 0,
+    STATUS_KEY_FROZEN, 0,
+    STATUS_KEY_DIZZY, 75,
+    STATUS_KEY_FEAR, 0,
+    STATUS_KEY_STATIC, 0,
+    STATUS_KEY_PARALYZE, 75,
+    STATUS_KEY_SHRINK, 75,
+    STATUS_KEY_STOP, 80,
+    STATUS_TURN_MOD_DEFAULT, 0,
+    STATUS_TURN_MOD_SLEEP, -1,
+    STATUS_TURN_MOD_POISON, 0,
+    STATUS_TURN_MOD_FROZEN, 0,
+    STATUS_TURN_MOD_DIZZY, -1,
+    STATUS_TURN_MOD_FEAR, 0,
+    STATUS_TURN_MOD_STATIC, 0,
+    STATUS_TURN_MOD_PARALYZE, 0,
+    STATUS_TURN_MOD_SHRINK, 0,
+    STATUS_TURN_MOD_STOP, -1,
+    STATUS_TABLE_END,
 };
 
 ActorPartBlueprint N(watt_parts)[] = {

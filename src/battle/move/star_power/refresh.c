@@ -77,7 +77,7 @@ API_CALLABLE(func_802A1518_78BB18) {
 API_CALLABLE(func_802A17D4_78BDD4) {
     Actor* actor = gBattleStatus.playerActor;
 
-    if (actor->debuff != STATUS_END) {
+    if (actor->debuff != STATUS_TABLE_END) {
         actor->debuffDuration = 0;
         actor->debuff = 0;
         remove_status_debuff(actor->hudElementDataIndex);

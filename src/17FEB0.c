@@ -28,11 +28,11 @@ HitResult calc_item_check_hit(void) {
         return HIT_RESULT_MISS;
     }
 
-    if (actor->transparentStatus == STATUS_TRANSPARENT) {
+    if (actor->transparentStatus == STATUS_KEY_TRANSPARENT) {
         return HIT_RESULT_MISS;
     }
 
-    if (actor->stoneStatus == STATUS_STONE) {
+    if (actor->stoneStatus == STATUS_KEY_STONE) {
         sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
         return HIT_RESULT_IMMUNE;
     }
@@ -115,7 +115,7 @@ HitResult calc_item_damage_enemy(void) {
 
     if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_REMOVE_BUFFS)) {
         if ((targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY)
-            || (target->transparentStatus == STATUS_TRANSPARENT)
+            || (target->transparentStatus == STATUS_KEY_TRANSPARENT)
             || (targetPart->eventFlags & ACTOR_EVENT_FLAG_800)
             && !(battleStatus->currentAttackElement & DAMAGE_TYPE_QUAKE)
         ) {
@@ -123,7 +123,7 @@ HitResult calc_item_damage_enemy(void) {
         }
     }
 
-    if (target->stoneStatus == STATUS_STONE) {
+    if (target->stoneStatus == STATUS_KEY_STONE) {
         sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
         show_immune_bonk(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, 1);
         show_next_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 0);
@@ -347,7 +347,7 @@ HitResult calc_item_damage_enemy(void) {
         #define INFLICT_STATUS(STATUS_TYPE) \
             do { \
                 if ((battleStatus->currentAttackStatus & STATUS_FLAG_##STATUS_TYPE) && \
-                    try_inflict_status(target, STATUS_##STATUS_TYPE, STATUX_TURN_MOD_##STATUS_TYPE)) { \
+                    try_inflict_status(target, STATUS_KEY_##STATUS_TYPE, STATUS_TURN_MOD_##STATUS_TYPE)) { \
                     wasStatusInflicted = TRUE; \
                 } \
             } while (0);
@@ -380,12 +380,12 @@ HitResult calc_item_damage_enemy(void) {
 
     if ((gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) && (battleStatus->currentAttackElement & DAMAGE_TYPE_FEAR)) {
         if (rand_int(99) < temp
-            && (target->debuff != STATUS_FEAR
-                && target->debuff != STATUS_DIZZY
-                && target->debuff != STATUS_PARALYZE
-                && target->debuff != STATUS_SLEEP
-                && target->debuff != STATUS_FROZEN
-                && target->debuff != STATUS_STOP)
+            && (target->debuff != STATUS_KEY_FEAR
+                && target->debuff != STATUS_KEY_DIZZY
+                && target->debuff != STATUS_KEY_PARALYZE
+                && target->debuff != STATUS_KEY_SLEEP
+                && target->debuff != STATUS_KEY_FROZEN
+                && target->debuff != STATUS_KEY_STOP)
             && !(target->flags & ACTOR_FLAG_FLIPPED))
         {
             dispatchEvent = EVENT_SCARE_AWAY;
@@ -428,7 +428,7 @@ HitResult calc_item_damage_enemy(void) {
 
     if (actorClass == ACTOR_PARTNER) {
         if ((battleStatus->lastAttackDamage > 0) && (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE)) {
-            inflict_status(target, STATUS_DAZE, battleStatus->lastAttackDamage);
+            inflict_status(target, STATUS_KEY_DAZE, battleStatus->lastAttackDamage);
         }
     }
 
@@ -586,7 +586,7 @@ ApiStatus ItemDamageEnemy(Evt* script, s32 isInitialCall) {
     battleStatus->currentTargetPart = actor->targetPartIndex;
     battleStatus->statusChance = battleStatus->currentAttackStatus;
 
-    if (battleStatus->statusChance == STATUS_CHANCE_NEVER) {
+    if (battleStatus->statusChance == STATUS_KEY_NEVER) {
         battleStatus->statusChance = 0;
     }
 
@@ -656,7 +656,7 @@ ApiStatus ItemSpookEnemy(Evt* script, s32 isInitialCall) {
     battleStatus->currentTargetPart = actor->targetPartIndex;
     battleStatus->statusChance = battleStatus->currentAttackStatus;
 
-    if (battleStatus->statusChance == STATUS_CHANCE_NEVER) {
+    if (battleStatus->statusChance == STATUS_KEY_NEVER) {
         battleStatus->statusChance = 0;
     }
 
@@ -725,7 +725,7 @@ ApiStatus ItemAfflictEnemy(Evt* script, s32 isInitialCall) {
     battleStatus->currentTargetPart = actor->targetPartIndex;
     battleStatus->statusChance = battleStatus->currentAttackStatus;
 
-    if (battleStatus->statusChance == STATUS_CHANCE_NEVER) {
+    if (battleStatus->statusChance == STATUS_KEY_NEVER) {
         battleStatus->statusChance = 0;
     }
 
@@ -794,7 +794,7 @@ ApiStatus ItemCheckHit(Evt* script, s32 isInitialCall) {
     battleStatus->currentTargetPart = actor->targetPartIndex;
     battleStatus->statusChance = battleStatus->currentAttackStatus;
 
-    if (battleStatus->statusChance == STATUS_CHANCE_NEVER) {
+    if (battleStatus->statusChance == STATUS_KEY_NEVER) {
         battleStatus->statusChance = 0;
     }
 

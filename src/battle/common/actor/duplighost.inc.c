@@ -11,26 +11,26 @@ extern EvtScript N(handleEvent);
 extern EvtScript N(nextTurn);
 
 s32 N(IdleAnimations)[] = {
-    STATUS_NORMAL, ANIM_Duplighost_Anim02,
-    STATUS_STONE, ANIM_Duplighost_Anim00,
-    STATUS_SLEEP, ANIM_Duplighost_Anim0D,
-    STATUS_POISON, ANIM_Duplighost_Anim02,
-    STATUS_STOP, ANIM_Duplighost_Anim00,
-    STATUS_STATIC, ANIM_Duplighost_Anim02,
-    STATUS_PARALYZE, ANIM_Duplighost_Anim00,
-    STATUS_DIZZY, ANIM_Duplighost_Anim0E,
-    STATUS_FEAR, ANIM_Duplighost_Anim0E,
-    STATUS_END,
+    STATUS_KEY_NORMAL, ANIM_Duplighost_Anim02,
+    STATUS_KEY_STONE, ANIM_Duplighost_Anim00,
+    STATUS_KEY_SLEEP, ANIM_Duplighost_Anim0D,
+    STATUS_KEY_POISON, ANIM_Duplighost_Anim02,
+    STATUS_KEY_STOP, ANIM_Duplighost_Anim00,
+    STATUS_KEY_STATIC, ANIM_Duplighost_Anim02,
+    STATUS_KEY_PARALYZE, ANIM_Duplighost_Anim00,
+    STATUS_KEY_DIZZY, ANIM_Duplighost_Anim0E,
+    STATUS_KEY_FEAR, ANIM_Duplighost_Anim0E,
+    STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations2)[] = {
-    STATUS_NORMAL, ANIM_Duplighost_Anim0A,
-    STATUS_END,
+    STATUS_KEY_NORMAL, ANIM_Duplighost_Anim0A,
+    STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations3)[] = {
-    STATUS_NORMAL, ANIM_Duplighost_Anim04,
-    STATUS_END,
+    STATUS_KEY_NORMAL, ANIM_Duplighost_Anim04,
+    STATUS_TABLE_END,
 };
 
 s32 N(DefenseTable)[] = {
@@ -39,28 +39,28 @@ s32 N(DefenseTable)[] = {
 };
 
 s32 N(StatusTable)[] = {
-    STATUS_NORMAL, 0,
-    STATUS_DEFAULT, 0,
-    STATUS_SLEEP, 60,
-    STATUS_POISON, 0,
-    STATUS_FROZEN, 0,
-    STATUS_DIZZY, 75,
-    STATUS_FEAR, 0,
-    STATUS_STATIC, 75,
-    STATUS_PARALYZE, 75,
-    STATUS_SHRINK, 75,
-    STATUS_STOP, 80,
-    STATUX_TURN_MOD_DEFAULT, 0,
-    STATUX_TURN_MOD_SLEEP, -1,
-    STATUX_TURN_MOD_POISON, 0,
-    STATUX_TURN_MOD_FROZEN, 0,
-    STATUX_TURN_MOD_DIZZY, -1,
-    STATUX_TURN_MOD_FEAR, 0,
-    STATUX_TURN_MOD_STATIC, 0,
-    STATUX_TURN_MOD_PARALYZE, 1,
-    STATUX_TURN_MOD_SHRINK, 0,
-    STATUX_TURN_MOD_STOP, -1,
-    STATUS_END,
+    STATUS_KEY_NORMAL, 0,
+    STATUS_KEY_DEFAULT, 0,
+    STATUS_KEY_SLEEP, 60,
+    STATUS_KEY_POISON, 0,
+    STATUS_KEY_FROZEN, 0,
+    STATUS_KEY_DIZZY, 75,
+    STATUS_KEY_FEAR, 0,
+    STATUS_KEY_STATIC, 75,
+    STATUS_KEY_PARALYZE, 75,
+    STATUS_KEY_SHRINK, 75,
+    STATUS_KEY_STOP, 80,
+    STATUS_TURN_MOD_DEFAULT, 0,
+    STATUS_TURN_MOD_SLEEP, -1,
+    STATUS_TURN_MOD_POISON, 0,
+    STATUS_TURN_MOD_FROZEN, 0,
+    STATUS_TURN_MOD_DIZZY, -1,
+    STATUS_TURN_MOD_FEAR, 0,
+    STATUS_TURN_MOD_STATIC, 0,
+    STATUS_TURN_MOD_PARALYZE, 1,
+    STATUS_TURN_MOD_SHRINK, 0,
+    STATUS_TURN_MOD_STOP, -1,
+    STATUS_TABLE_END,
 };
 
 ActorPartBlueprint N(parts)[] = {

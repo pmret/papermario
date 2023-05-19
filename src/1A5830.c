@@ -168,7 +168,7 @@ HitResult calc_enemy_test_target(Actor* actor) {
 
     hitResult = HIT_RESULT_HIT;
     target2 = target;
-    if (targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY || battleStatus->outtaSightActive || target2->transparentStatus == STATUS_TRANSPARENT) {
+    if (targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY || battleStatus->outtaSightActive || target2->transparentStatus == STATUS_KEY_TRANSPARENT) {
         if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_MAGIC)) {
             hitResult = HIT_RESULT_MISS;
         }
@@ -220,11 +220,11 @@ HitResult calc_enemy_test_target(Actor* actor) {
         return HIT_RESULT_LUCKY;
     }
 
-    if (target2->stoneStatus == STATUS_STONE) {
+    if (target2->stoneStatus == STATUS_KEY_STONE) {
         return HIT_RESULT_IMMUNE;
     }
 
-    if (target2->staticStatus == STATUS_STATIC) {
+    if (target2->staticStatus == STATUS_KEY_STATIC) {
         return HIT_RESULT_HIT_STATIC;
     }
 
@@ -289,14 +289,14 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
         return HIT_RESULT_MISS;
     }
 
-    if (target->transparentStatus == STATUS_TRANSPARENT
+    if (target->transparentStatus == STATUS_KEY_TRANSPARENT
         || targetPart->eventFlags & ACTOR_EVENT_FLAG_800
         && !(battleStatus->currentAttackElement & DAMAGE_TYPE_QUAKE)
     ) {
         return HIT_RESULT_MISS;
     }
 
-    if (target->stoneStatus == STATUS_STONE) {
+    if (target->stoneStatus == STATUS_KEY_STONE) {
         show_immune_bonk(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, -1);
         show_next_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 0);
         play_hit_sound(attacker, state->goalPos.x, state->goalPos.y, state->goalPos.z, 0);
@@ -338,8 +338,8 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
         isIce = TRUE;
     }
 
-    if (!(attacker->staticStatus == STATUS_STATIC)
-        && ((target->staticStatus == STATUS_STATIC) || (targetPart->eventFlags & ACTOR_EVENT_FLAG_ELECTRIFIED))
+    if (!(attacker->staticStatus == STATUS_KEY_STATIC)
+        && ((target->staticStatus == STATUS_KEY_STATIC) || (targetPart->eventFlags & ACTOR_EVENT_FLAG_ELECTRIFIED))
         && !(battleStatus->currentAttackElement & (DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_NO_CONTACT))
         && !(battleStatus->currentAttackEventSuppression & SUPPRESS_EVENT_SHOCK_CONTACT)
         && !has_enchanted_part(attacker)) // enchanted attacks ignore electrified defenders
@@ -389,7 +389,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
         damage -= attacker->chillOutAmount;
     }
 
-    if (attacker->debuff == STATUS_SHRINK) {
+    if (attacker->debuff == STATUS_KEY_SHRINK) {
         if (damage > 0) {
             damage /= 2;
         }
@@ -426,8 +426,8 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
 
     switch (actorClass) {
         case ACTOR_CLASS_PLAYER:
-            // TODO figure out how to better write target->debuff >= STATUS_POISON
-            if ((target->debuff == 0 || target->debuff >= STATUS_POISON) && (target->stoneStatus == STATUS_END) && !(battleStatus->currentAttackElement & DAMAGE_TYPE_UNBLOCKABLE)) {
+            // TODO figure out how to better write target->debuff >= STATUS_KEY_POISON
+            if ((target->debuff == 0 || target->debuff >= STATUS_KEY_POISON) && (target->stoneStatus == STATUS_TABLE_END) && !(battleStatus->currentAttackElement & DAMAGE_TYPE_UNBLOCKABLE)) {
                 s32 blocked;
 
                 if (player_team_is_ability_active(target, ABILITY_BERSERKER)) {
@@ -448,8 +448,8 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
             }
             break;
         case ACTOR_CLASS_PARTNER:
-            if (target->stoneStatus == STATUS_END) {
-                if (target->koStatus == STATUS_END && !(battleStatus->currentAttackElement & DAMAGE_TYPE_UNBLOCKABLE)) {
+            if (target->stoneStatus == STATUS_TABLE_END) {
+                if (target->koStatus == STATUS_TABLE_END && !(battleStatus->currentAttackElement & DAMAGE_TYPE_UNBLOCKABLE)) {
                     if (check_block_input(BUTTON_A)) {
                         damage = 0;
                         sfx_play_sound_at_position(SOUND_231, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
@@ -593,54 +593,54 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
         && !(gBattleStatus.flags2 & BS_FLAGS2_1000000)
         && !(actorClass == ACTOR_PLAYER && is_ability_active(ABILITY_HEALTHY_HEALTHY) && (rand_int(100) < 50)))
     {
-        if (battleStatus->currentAttackStatus & STATUS_FLAG_SHRINK && try_inflict_status(target, STATUS_SHRINK, STATUX_TURN_MOD_SHRINK)) {
+        if (battleStatus->currentAttackStatus & STATUS_FLAG_SHRINK && try_inflict_status(target, STATUS_KEY_SHRINK, STATUS_TURN_MOD_SHRINK)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
-        if (battleStatus->currentAttackStatus & STATUS_FLAG_POISON && try_inflict_status(target, STATUS_POISON, STATUX_TURN_MOD_POISON)) {
+        if (battleStatus->currentAttackStatus & STATUS_FLAG_POISON && try_inflict_status(target, STATUS_KEY_POISON, STATUS_TURN_MOD_POISON)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
-        if (battleStatus->currentAttackStatus & STATUS_FLAG_STONE && try_inflict_status(target, STATUS_STONE, STATUX_TURN_MOD_STONE)) {
+        if (battleStatus->currentAttackStatus & STATUS_FLAG_STONE && try_inflict_status(target, STATUS_KEY_STONE, STATUS_TURN_MOD_STONE)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
-        if (battleStatus->currentAttackStatus & STATUS_FLAG_SLEEP && try_inflict_status(target, STATUS_SLEEP, STATUX_TURN_MOD_SLEEP)) {
+        if (battleStatus->currentAttackStatus & STATUS_FLAG_SLEEP && try_inflict_status(target, STATUS_KEY_SLEEP, STATUS_TURN_MOD_SLEEP)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
-        if (battleStatus->currentAttackStatus & STATUS_FLAG_DIZZY && try_inflict_status(target, STATUS_DIZZY, STATUX_TURN_MOD_DIZZY)) {
+        if (battleStatus->currentAttackStatus & STATUS_FLAG_DIZZY && try_inflict_status(target, STATUS_KEY_DIZZY, STATUS_TURN_MOD_DIZZY)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
-        if (battleStatus->currentAttackStatus & STATUS_FLAG_STOP && try_inflict_status(target, STATUS_STOP, STATUX_TURN_MOD_STOP)) {
+        if (battleStatus->currentAttackStatus & STATUS_FLAG_STOP && try_inflict_status(target, STATUS_KEY_STOP, STATUS_TURN_MOD_STOP)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
-        if (battleStatus->currentAttackStatus & STATUS_FLAG_STATIC && try_inflict_status(target, STATUS_STATIC, STATUX_TURN_MOD_STATIC)) {
+        if (battleStatus->currentAttackStatus & STATUS_FLAG_STATIC && try_inflict_status(target, STATUS_KEY_STATIC, STATUS_TURN_MOD_STATIC)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
-        if (battleStatus->currentAttackStatus & STATUS_FLAG_PARALYZE && try_inflict_status(target, STATUS_PARALYZE, STATUX_TURN_MOD_PARALYZE)) {
+        if (battleStatus->currentAttackStatus & STATUS_FLAG_PARALYZE && try_inflict_status(target, STATUS_KEY_PARALYZE, STATUS_TURN_MOD_PARALYZE)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
-        if (battleStatus->currentAttackStatus & STATUS_FLAG_FEAR && try_inflict_status(target, STATUS_FEAR, STATUX_TURN_MOD_FEAR)) {
+        if (battleStatus->currentAttackStatus & STATUS_FLAG_FEAR && try_inflict_status(target, STATUS_KEY_FEAR, STATUS_TURN_MOD_FEAR)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
 
         // @bug? repeated paralyze and dizzy infliction
-        if (battleStatus->currentAttackStatus & STATUS_FLAG_PARALYZE && try_inflict_status(target, STATUS_PARALYZE, STATUX_TURN_MOD_PARALYZE)) {
+        if (battleStatus->currentAttackStatus & STATUS_FLAG_PARALYZE && try_inflict_status(target, STATUS_KEY_PARALYZE, STATUS_TURN_MOD_PARALYZE)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
-        if (battleStatus->currentAttackStatus & STATUS_FLAG_DIZZY && try_inflict_status(target, STATUS_DIZZY, STATUX_TURN_MOD_DIZZY)) {
+        if (battleStatus->currentAttackStatus & STATUS_FLAG_DIZZY && try_inflict_status(target, STATUS_KEY_DIZZY, STATUS_TURN_MOD_DIZZY)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
 
-        if (battleStatus->currentAttackStatus & STATUS_FLAG_FROZEN && target->debuff != STATUS_FROZEN && try_inflict_status(target, STATUS_FROZEN, STATUX_TURN_MOD_FROZEN)) {
+        if (battleStatus->currentAttackStatus & STATUS_FLAG_FROZEN && target->debuff != STATUS_KEY_FROZEN && try_inflict_status(target, STATUS_KEY_FROZEN, STATUS_TURN_MOD_FROZEN)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
@@ -676,7 +676,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
         && gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE
         && !(target->flags & ACTOR_FLAG_NO_DMG_APPLY))
     {
-        inflict_partner_ko(target, STATUS_DAZE, battleStatus->lastAttackDamage);
+        inflict_partner_ko(target, STATUS_KEY_DAZE, battleStatus->lastAttackDamage);
     }
 
     if (!(target->flags & ACTOR_FLAG_NO_DMG_POPUP)) {
@@ -795,11 +795,11 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
 
     show_actor_health_bar(target);
 
-    if (attacker->staticStatus != STATUS_STATIC
-        && (target->staticStatus == STATUS_STATIC || targetPart->eventFlags & ACTOR_EVENT_FLAG_ELECTRIFIED)
+    if (attacker->staticStatus != STATUS_KEY_STATIC
+        && (target->staticStatus == STATUS_KEY_STATIC || targetPart->eventFlags & ACTOR_EVENT_FLAG_ELECTRIFIED)
         && !(battleStatus->currentAttackElement & DAMAGE_TYPE_NO_CONTACT)
         && !(battleStatus->currentAttackEventSuppression & SUPPRESS_EVENT_SHOCK_CONTACT)
-        && (attacker->transparentStatus != STATUS_TRANSPARENT)
+        && (attacker->transparentStatus != STATUS_KEY_TRANSPARENT)
         && !has_enchanted_part(attacker))
     {
         sfx_play_sound_at_position(SOUND_HIT_SHOCK, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
@@ -2867,7 +2867,7 @@ ApiStatus EnemyDamageTarget(Evt* script, s32 isInitialCall) {
     battleStatus->currentTargetPart = actor->targetPartIndex;
 
     battleStatus->statusChance = battleStatus->currentAttackStatus & 0xFF;
-    if (battleStatus->statusChance == STATUS_CHANCE_NEVER) {
+    if (battleStatus->statusChance == STATUS_KEY_NEVER) {
         battleStatus->statusChance = 0;
     }
     battleStatus->statusDuration = (battleStatus->currentAttackStatus & 0xF00) >> 8;
@@ -2905,7 +2905,7 @@ ApiStatus EnemyFollowupAfflictTarget(Evt* script, s32 isInitialCall) {
     battleStatus->currentTargetPart = actor->targetPartIndex;
     battleStatus->statusChance = battleStatus->currentAttackStatus;
 
-    if (battleStatus->statusChance == STATUS_CHANCE_NEVER) {
+    if (battleStatus->statusChance == STATUS_KEY_NEVER) {
         battleStatus->statusChance = 0;
     }
 
@@ -3407,9 +3407,9 @@ ApiStatus ClearStatusEffects(Evt* script, s32 isInitialCall) {
 
     actor = get_actor(actorID);
 
-    if (actor->debuff != STATUS_END) {
+    if (actor->debuff != STATUS_TABLE_END) {
         actor->debuffDuration = 0;
-        actor->debuff = STATUS_END;
+        actor->debuff = STATUS_TABLE_END;
         remove_status_debuff(actor->hudElementDataIndex);
     }
 

@@ -67,44 +67,44 @@ enum N(ActorParams) {
 };
 
 s32 N(TutankoopaAnims)[] = {
-    STATUS_NORMAL,    ANIM_Tutankoopa_Idle,
-    STATUS_STONE,     ANIM_Tutankoopa_Still,
-    STATUS_SLEEP,     ANIM_Tutankoopa_Sleep,
-    STATUS_POISON,    ANIM_Tutankoopa_Idle,
-    STATUS_STOP,      ANIM_Tutankoopa_Still,
-    STATUS_STATIC,    ANIM_Tutankoopa_Still,
-    STATUS_PARALYZE,  ANIM_Tutankoopa_Still,
-    STATUS_PARALYZE,  ANIM_Tutankoopa_Still,
-    STATUS_DIZZY,     ANIM_Tutankoopa_Dizzy,
-    STATUS_END,
+    STATUS_KEY_NORMAL,    ANIM_Tutankoopa_Idle,
+    STATUS_KEY_STONE,     ANIM_Tutankoopa_Still,
+    STATUS_KEY_SLEEP,     ANIM_Tutankoopa_Sleep,
+    STATUS_KEY_POISON,    ANIM_Tutankoopa_Idle,
+    STATUS_KEY_STOP,      ANIM_Tutankoopa_Still,
+    STATUS_KEY_STATIC,    ANIM_Tutankoopa_Still,
+    STATUS_KEY_PARALYZE,  ANIM_Tutankoopa_Still,
+    STATUS_KEY_PARALYZE,  ANIM_Tutankoopa_Still,
+    STATUS_KEY_DIZZY,     ANIM_Tutankoopa_Dizzy,
+    STATUS_TABLE_END,
 };
 
 s32 N(TutankoopaFallenAnims)[] = {
-    STATUS_NORMAL,    ANIM_Tutankoopa_Dizzy,
-    STATUS_STONE,     ANIM_Tutankoopa_Fall,
-    STATUS_SLEEP,     ANIM_Tutankoopa_SleepGround,
-    STATUS_POISON,    ANIM_Tutankoopa_Dizzy,
-    STATUS_STOP,      ANIM_Tutankoopa_Fall,
-    STATUS_STATIC,    ANIM_Tutankoopa_Dizzy,
-    STATUS_PARALYZE,  ANIM_Tutankoopa_Dizzy,
-    STATUS_PARALYZE,  ANIM_Tutankoopa_Dizzy,
-    STATUS_DIZZY,     ANIM_Tutankoopa_Dizzy,
-    STATUS_END,
+    STATUS_KEY_NORMAL,    ANIM_Tutankoopa_Dizzy,
+    STATUS_KEY_STONE,     ANIM_Tutankoopa_Fall,
+    STATUS_KEY_SLEEP,     ANIM_Tutankoopa_SleepGround,
+    STATUS_KEY_POISON,    ANIM_Tutankoopa_Dizzy,
+    STATUS_KEY_STOP,      ANIM_Tutankoopa_Fall,
+    STATUS_KEY_STATIC,    ANIM_Tutankoopa_Dizzy,
+    STATUS_KEY_PARALYZE,  ANIM_Tutankoopa_Dizzy,
+    STATUS_KEY_PARALYZE,  ANIM_Tutankoopa_Dizzy,
+    STATUS_KEY_DIZZY,     ANIM_Tutankoopa_Dizzy,
+    STATUS_TABLE_END,
 };
 
 s32 N(BeetleShellAnims)[] = {
-    STATUS_NORMAL,    ANIM_BuzzyBeetle_Anim06,
-    STATUS_END,
+    STATUS_KEY_NORMAL,    ANIM_BuzzyBeetle_Anim06,
+    STATUS_TABLE_END,
 };
 
 s32 N(RockAnimsA)[] = {
-    STATUS_NORMAL,    ANIM_Tutankoopa_RockStill,
-    STATUS_END,
+    STATUS_KEY_NORMAL,    ANIM_Tutankoopa_RockStill,
+    STATUS_TABLE_END,
 };
 
 s32 N(RockAnimsB)[] = {
-    STATUS_NORMAL,    ANIM_Tutankoopa_RockStill,
-    STATUS_END,
+    STATUS_KEY_NORMAL,    ANIM_Tutankoopa_RockStill,
+    STATUS_TABLE_END,
 };
 
 s32 N(DefenseTable)[] = {
@@ -113,28 +113,28 @@ s32 N(DefenseTable)[] = {
 };
 
 s32 N(StatusTable)[] = {
-    STATUS_NORMAL,   0,
-    STATUS_DEFAULT,  0,
-    STATUS_SLEEP,    20,
-    STATUS_POISON,   0,
-    STATUS_FROZEN,   0,
-    STATUS_DIZZY,    30,
-    STATUS_FEAR,     0,
-    STATUS_STATIC,   0,
-    STATUS_PARALYZE, 30,
-    STATUS_SHRINK,   60,
-    STATUS_STOP,     40,
-    STATUX_TURN_MOD_DEFAULT,     0,
-    STATUX_TURN_MOD_SLEEP,      -1,
-    STATUX_TURN_MOD_POISON,      0,
-    STATUX_TURN_MOD_FROZEN,      0,
-    STATUX_TURN_MOD_DIZZY,      -1,
-    STATUX_TURN_MOD_FEAR,        0,
-    STATUX_TURN_MOD_STATIC,      0,
-    STATUX_TURN_MOD_PARALYZE,   -1,
-    STATUX_TURN_MOD_SHRINK,     -1,
-    STATUX_TURN_MOD_STOP,       -2,
-    STATUS_END,
+    STATUS_KEY_NORMAL,           0,
+    STATUS_KEY_DEFAULT,          0,
+    STATUS_KEY_SLEEP,           20,
+    STATUS_KEY_POISON,           0,
+    STATUS_KEY_FROZEN,           0,
+    STATUS_KEY_DIZZY,           30,
+    STATUS_KEY_FEAR,             0,
+    STATUS_KEY_STATIC,           0,
+    STATUS_KEY_PARALYZE,        30,
+    STATUS_KEY_SHRINK,          60,
+    STATUS_KEY_STOP,            40,
+    STATUS_TURN_MOD_DEFAULT,     0,
+    STATUS_TURN_MOD_SLEEP,      -1,
+    STATUS_TURN_MOD_POISON,      0,
+    STATUS_TURN_MOD_FROZEN,      0,
+    STATUS_TURN_MOD_DIZZY,      -1,
+    STATUS_TURN_MOD_FEAR,        0,
+    STATUS_TURN_MOD_STATIC,      0,
+    STATUS_TURN_MOD_PARALYZE,   -1,
+    STATUS_TURN_MOD_SHRINK,     -1,
+    STATUS_TURN_MOD_STOP,       -2,
+    STATUS_TABLE_END,
 };
 
 ActorPartBlueprint N(PartsTable)[] = {

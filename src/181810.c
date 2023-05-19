@@ -498,7 +498,7 @@ ApiStatus MakeStatusField(Evt* script, s32 isInitialCall) {
     s32 chance = evt_get_variable(script, *args++);
     s32 duration = evt_get_variable(script, *args++);
 
-    evt_set_variable(script, outVar, DMG_STATUS_CHANCE(typeFlag, duration, chance));
+    evt_set_variable(script, outVar, DMG_STATUS_KEY(typeFlag, duration, chance));
     return ApiStatus_DONE2;
 }
 
@@ -645,7 +645,7 @@ ApiStatus ApplyShrinkFromOwner(Evt* script, s32 isInitialCall) {
     Actor* actor = get_actor(script->owner1.actorID);
     s32 amt = evt_get_variable(script, *args);
 
-    if (actor->debuff == STATUS_SHRINK && amt > 0) {
+    if (actor->debuff == STATUS_KEY_SHRINK && amt > 0) {
         amt /= 2;
     }
 

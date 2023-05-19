@@ -6,31 +6,31 @@
 #define NAMESPACE b_area_kmr_part_3_egg_jr_troopa
 
 s32 N(IdleAnimations_80224380)[] = {
-    STATUS_NORMAL,    ANIM_JrTroopa_Idle,
-    STATUS_SLEEP,     ANIM_JrTroopa_Sleep,
-    STATUS_STONE,     ANIM_JrTroopa_Still,
-    STATUS_POISON,    ANIM_JrTroopa_Still,
-    STATUS_STOP,      ANIM_JrTroopa_Still,
-    STATUS_STATIC,    ANIM_JrTroopa_Still,
-    STATUS_PARALYZE,  ANIM_JrTroopa_Still,
-    STATUS_END,
+    STATUS_KEY_NORMAL,    ANIM_JrTroopa_Idle,
+    STATUS_KEY_SLEEP,     ANIM_JrTroopa_Sleep,
+    STATUS_KEY_STONE,     ANIM_JrTroopa_Still,
+    STATUS_KEY_POISON,    ANIM_JrTroopa_Still,
+    STATUS_KEY_STOP,      ANIM_JrTroopa_Still,
+    STATUS_KEY_STATIC,    ANIM_JrTroopa_Still,
+    STATUS_KEY_PARALYZE,  ANIM_JrTroopa_Still,
+    STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations_802243BC)[] = {
-    STATUS_NORMAL,   ANIM_JrTroopa_Idle,
-    STATUS_SLEEP,    ANIM_JrTroopa_Still,
-    STATUS_STONE,    ANIM_JrTroopa_Still,
-    STATUS_POISON,   ANIM_JrTroopa_Still,
-    STATUS_STOP,     ANIM_JrTroopa_Still,
-    STATUS_STATIC,   ANIM_JrTroopa_Still,
-    STATUS_PARALYZE, ANIM_JrTroopa_Still,
-    STATUS_END,
+    STATUS_KEY_NORMAL,   ANIM_JrTroopa_Idle,
+    STATUS_KEY_SLEEP,    ANIM_JrTroopa_Still,
+    STATUS_KEY_STONE,    ANIM_JrTroopa_Still,
+    STATUS_KEY_POISON,   ANIM_JrTroopa_Still,
+    STATUS_KEY_STOP,     ANIM_JrTroopa_Still,
+    STATUS_KEY_STATIC,   ANIM_JrTroopa_Still,
+    STATUS_KEY_PARALYZE, ANIM_JrTroopa_Still,
+    STATUS_TABLE_END,
 };
 
 s32 N(IdleAnimations_802243F8)[] = {
-    STATUS_NORMAL,    ANIM_JrTroopa_EggIdle,
-    STATUS_STOP,      ANIM_JrTroopa_EggStill,
-    STATUS_END,
+    STATUS_KEY_NORMAL,    ANIM_JrTroopa_EggIdle,
+    STATUS_KEY_STOP,      ANIM_JrTroopa_EggStill,
+    STATUS_TABLE_END,
 };
 
 s32 N(DefenseTable_8022440C)[] = {
@@ -39,28 +39,28 @@ s32 N(DefenseTable_8022440C)[] = {
 };
 
 s32 N(StatusTable_80224418)[] = {
-    STATUS_NORMAL, 100,
-    STATUS_DEFAULT, 100,
-    STATUS_SLEEP, 80,
-    STATUS_POISON, 0,
-    STATUS_FROZEN, 0,
-    STATUS_DIZZY, 50,
-    STATUS_FEAR, 0,
-    STATUS_STATIC, 0,
-    STATUS_PARALYZE, 100,
-    STATUS_SHRINK, 100,
-    STATUS_STOP, 100,
-    STATUX_TURN_MOD_DEFAULT, 0,
-    STATUX_TURN_MOD_SLEEP, -1,
-    STATUX_TURN_MOD_POISON, 0,
-    STATUX_TURN_MOD_FROZEN, 0,
-    STATUX_TURN_MOD_DIZZY, -1,
-    STATUX_TURN_MOD_FEAR, 0,
-    STATUX_TURN_MOD_STATIC, 0,
-    STATUX_TURN_MOD_PARALYZE, -1,
-    STATUX_TURN_MOD_SHRINK, -1,
-    STATUX_TURN_MOD_STOP, -2,
-    STATUS_END,
+    STATUS_KEY_NORMAL, 100,
+    STATUS_KEY_DEFAULT, 100,
+    STATUS_KEY_SLEEP, 80,
+    STATUS_KEY_POISON, 0,
+    STATUS_KEY_FROZEN, 0,
+    STATUS_KEY_DIZZY, 50,
+    STATUS_KEY_FEAR, 0,
+    STATUS_KEY_STATIC, 0,
+    STATUS_KEY_PARALYZE, 100,
+    STATUS_KEY_SHRINK, 100,
+    STATUS_KEY_STOP, 100,
+    STATUS_TURN_MOD_DEFAULT, 0,
+    STATUS_TURN_MOD_SLEEP, -1,
+    STATUS_TURN_MOD_POISON, 0,
+    STATUS_TURN_MOD_FROZEN, 0,
+    STATUS_TURN_MOD_DIZZY, -1,
+    STATUS_TURN_MOD_FEAR, 0,
+    STATUS_TURN_MOD_STATIC, 0,
+    STATUS_TURN_MOD_PARALYZE, -1,
+    STATUS_TURN_MOD_SHRINK, -1,
+    STATUS_TURN_MOD_STOP, -2,
+    STATUS_TABLE_END,
 };
 
 ActorPartBlueprint N(PartsTable_802244C4)[] = {
@@ -134,8 +134,8 @@ EvtScript N(802245E8) = {
 };
 
 s32 N(IdleAnimations_8022464C)[] = {
-    STATUS_NORMAL,    ANIM_JrTroopa_Defeated,
-    STATUS_END,
+    STATUS_KEY_NORMAL,    ANIM_JrTroopa_Defeated,
+    STATUS_TABLE_END,
 };
 
 EvtScript N(80224658) = {

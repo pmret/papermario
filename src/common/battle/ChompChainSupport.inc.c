@@ -105,7 +105,7 @@ API_CALLABLE(N(ChompChainUpdate)) {
 
     // initialize prev positions to the rear of the actor's body
     chain = actor->state.functionTempPtr[0];
-    if (actor->debuff == STATUS_SHRINK) {
+    if (actor->debuff == STATUS_KEY_SHRINK) {
         prevX = actor->currentPos.x + 6.0;
         prevY = actor->currentPos.y + 2.5;
     } else {
@@ -115,7 +115,7 @@ API_CALLABLE(N(ChompChainUpdate)) {
 
     // update each link in the chain
     for (i = 0; i < NUM_CHAIN_LINKS; i++, chain++) {
-        if (actor->debuff == STATUS_SHRINK) {
+        if (actor->debuff == STATUS_KEY_SHRINK) {
             chain->outerLinkLen = 3.5f;
             chain->linkLengthZ = 3.5f;
             chain->innerLinkLen = 3.5f;
@@ -136,7 +136,7 @@ API_CALLABLE(N(ChompChainUpdate)) {
 
         // add velocity and clamp position to roughly the radius of the chain (assuming ground at y = 0)
         chain->currentPos.y += chain->velY;
-        if (actor->debuff == STATUS_SHRINK) {
+        if (actor->debuff == STATUS_KEY_SHRINK) {
             if (chain->currentPos.y < 2.5) {
                 chain->currentPos.y = 2.5f;
                 chain->velY = 0.0f;
@@ -189,7 +189,7 @@ API_CALLABLE(N(ChompChainUpdate)) {
         part->absolutePosition.y = chain->currentPos.y;
         part->absolutePosition.z = chain->currentPos.z;
 
-        if (actor->debuff == STATUS_SHRINK) {
+        if (actor->debuff == STATUS_KEY_SHRINK) {
             part->scale.x = 0.5f;
             part->scale.y = 0.5f;
             part->scale.z = 1.0f;

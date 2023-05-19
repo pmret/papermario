@@ -52,7 +52,7 @@ void set_goal_pos_to_part(ActorState* state, s32 actorID, s32 partID) {
             state->goalPos.x = actor->currentPos.x + part->partOffset.x * actor->scalingFactor;
             state->goalPos.y = actor->currentPos.y + part->partOffset.y * actor->scalingFactor;
             state->goalPos.z = actor->currentPos.z + 10.0f;
-            if (actor->stoneStatus == STATUS_STONE) {
+            if (actor->stoneStatus == STATUS_KEY_STONE) {
                 state->goalPos.y -= actor->scalingFactor * 5.0f;
             }
             break;
@@ -2794,61 +2794,61 @@ ApiStatus GetStatusFlags(Evt* script, s32 isInitialCall) {
     actorClass = actor->actorID & ACTOR_CLASS_MASK;
     flags = 0;
 
-    if (debuff != STATUS_END) {
-        if (debuff == STATUS_STOP) {
+    if (debuff != STATUS_TABLE_END) {
+        if (debuff == STATUS_KEY_STOP) {
             flags |= STATUS_FLAG_STOP;
         }
-        if (debuff == STATUS_FROZEN) {
+        if (debuff == STATUS_KEY_FROZEN) {
             flags |= STATUS_FLAG_FROZEN;
         }
-        if (debuff == STATUS_SLEEP) {
+        if (debuff == STATUS_KEY_SLEEP) {
             flags |= STATUS_FLAG_SLEEP;
         }
-        if (debuff == STATUS_PARALYZE) {
+        if (debuff == STATUS_KEY_PARALYZE) {
             flags |= STATUS_FLAG_PARALYZE;
         }
-        if (debuff == STATUS_DIZZY) {
+        if (debuff == STATUS_KEY_DIZZY) {
             flags |= STATUS_FLAG_DIZZY;
         }
-        if (debuff == STATUS_FEAR) {
+        if (debuff == STATUS_KEY_FEAR) {
             flags |= STATUS_FLAG_FEAR;
         }
-        if (debuff == STATUS_POISON) {
+        if (debuff == STATUS_KEY_POISON) {
             flags |= STATUS_FLAG_POISON;
         }
-        if (debuff == STATUS_SHRINK) {
+        if (debuff == STATUS_KEY_SHRINK) {
             flags |= STATUS_FLAG_SHRINK;
         }
     }
 
     switch (actor->staticStatus) {
-        case STATUS_END:
+        case STATUS_TABLE_END:
             break;
-        case STATUS_STATIC:
+        case STATUS_KEY_STATIC:
             flags |= STATUS_FLAG_STATIC;
             break;
     }
 
     switch (actor->stoneStatus) {
-        case STATUS_END:
+        case STATUS_TABLE_END:
             break;
-        case STATUS_STONE:
+        case STATUS_KEY_STONE:
             flags |= STATUS_FLAG_STONE;
             break;
     }
 
     switch (actor->koStatus) {
-        case STATUS_END:
+        case STATUS_TABLE_END:
             break;
-        case STATUS_DAZE:
+        case STATUS_KEY_DAZE:
             flags |= STATUS_FLAG_KO;
             break;
     }
 
     switch (actor->transparentStatus) {
-        case STATUS_END:
+        case STATUS_TABLE_END:
             break;
-        case STATUS_TRANSPARENT:
+        case STATUS_KEY_TRANSPARENT:
             flags |= STATUS_FLAG_TRANSPARENT;
             break;
     }

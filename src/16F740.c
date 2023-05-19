@@ -357,8 +357,8 @@ void btl_state_update_normal_start(void) {
                 actor->instigatorValue = 0;
                 if (i == 0) {
                     actor->instigatorValue = currentEncounter->instigatorValue;
-                    if (currentEncounter->dizzyAttackStatus == STATUS_DIZZY) {
-                        inflict_status_set_duration(actor, STATUS_DIZZY, STATUX_TURN_MOD_DIZZY, currentEncounter->dizzyAttackDuration);
+                    if (currentEncounter->dizzyAttackStatus == STATUS_KEY_DIZZY) {
+                        inflict_status_set_duration(actor, STATUS_KEY_DIZZY, STATUS_TURN_MOD_DIZZY, currentEncounter->dizzyAttackDuration);
                     }
                 }
             }
@@ -372,8 +372,8 @@ void btl_state_update_normal_start(void) {
                         actor->instigatorValue = 0;
                         if (i == 0) {
                             actor->instigatorValue = 0;
-                            if (currentEncounter->dizzyAttackStatus == STATUS_DIZZY) {
-                                inflict_status_set_duration(actor, STATUS_DIZZY, STATUX_TURN_MOD_DIZZY, currentEncounter->dizzyAttackDuration);
+                            if (currentEncounter->dizzyAttackStatus == STATUS_KEY_DIZZY) {
+                                inflict_status_set_duration(actor, STATUS_KEY_DIZZY, STATUS_TURN_MOD_DIZZY, currentEncounter->dizzyAttackDuration);
                             }
                         }
 
@@ -835,7 +835,7 @@ void btl_state_update_begin_player_turn(void) {
         case BTL_SUBSTATE_BEGIN_PLAYER_TURN_AWAIT_TURBO_CHARGE:
             if (0) { // TODO relocated block - required to match
 back:
-                player->koStatus = STATUS_DAZE;
+                player->koStatus = STATUS_KEY_DAZE;
                 player->disableEffect->data.disableX->koDuration = player->koDuration;
                 goto later;
             }
@@ -846,7 +846,7 @@ back:
     }
 
     if (gBattleSubState == BTL_SUBSTATE_BEGIN_PLAYER_TURN_TRY_STATUS_DAMAGE) {
-        if (player->debuff == STATUS_POISON && player->stoneStatus == 0) {
+        if (player->debuff == STATUS_KEY_POISON && player->stoneStatus == 0) {
             gBattleStatus.flags1 |= BS_FLAGS1_SP_EVT_ACTIVE;
             dispatch_damage_event_player_0(1, EVENT_HIT);
         }
@@ -933,7 +933,7 @@ back:
                     D_8029F258 = 20;
                     player->debuffDuration--;
                     if (player->debuffDuration <= 0) {
-                        if (player->debuff == STATUS_FROZEN) {
+                        if (player->debuff == STATUS_KEY_FROZEN) {
                             sfx_play_sound(SOUND_FROZEN_SHATTER);
                             player->icePillarEffect->flags |= FX_INSTANCE_FLAG_DISMISS;
                             player->icePillarEffect = NULL;
@@ -1294,13 +1294,13 @@ void btl_state_update_9(void) {
                     actor->flags |= ACTOR_FLAG_4000000 | ACTOR_FLAG_8000000;
                     actor->flags &= ~ACTOR_FLAG_10000;
 
-                    if (actor->debuff != STATUS_END) {
-                        if (actor->debuff == STATUS_FEAR ||
-                            actor->debuff == STATUS_DIZZY ||
-                            actor->debuff == STATUS_PARALYZE ||
-                            actor->debuff == STATUS_SLEEP ||
-                            actor->debuff == STATUS_FROZEN ||
-                            actor->debuff == STATUS_STOP)
+                    if (actor->debuff != STATUS_TABLE_END) {
+                        if (actor->debuff == STATUS_KEY_FEAR ||
+                            actor->debuff == STATUS_KEY_DIZZY ||
+                            actor->debuff == STATUS_KEY_PARALYZE ||
+                            actor->debuff == STATUS_KEY_SLEEP ||
+                            actor->debuff == STATUS_KEY_FROZEN ||
+                            actor->debuff == STATUS_KEY_STOP)
                         {
                             actor->flags |= ACTOR_FLAG_10000;
                         }
@@ -1342,13 +1342,13 @@ void btl_state_update_9(void) {
                     oldKoDuration = actor->koDuration;
                     actor->koDuration = actor->debuffDuration;
                     if (actor->koDuration > 0) {
-                        actor->koStatus = STATUS_DAZE;
+                        actor->koStatus = STATUS_KEY_DAZE;
                         actor->disableEffect->data.disableX->koDuration = actor->koDuration;
                     } else if (oldKoDuration != actor->koDuration) {
                         actor->koStatus = 0;
                         actor->disableEffect->data.disableX->koDuration = 0;
                     }
-                    if (actor->debuff == STATUS_POISON) {
+                    if (actor->debuff == STATUS_KEY_POISON) {
                         gBattleStatus.flags1 |= BS_FLAGS1_SP_EVT_ACTIVE;
                         dispatch_damage_event_actor_0(actor, 1, EVENT_HIT);
                         D_8029F258 = 20;
@@ -1777,7 +1777,7 @@ void btl_state_update_victory(void) {
             gBattleStatus.flags2 &= ~BS_FLAGS2_10;
 
             gBattleStatus.flags1 &= ~BS_FLAGS1_SHOW_PLAYER_DECORATIONS;
-            if (player->koStatus == STATUS_DAZE) {
+            if (player->koStatus == STATUS_KEY_DAZE) {
                 dispatch_event_player(EVENT_RECOVER_FROM_KO);
                 gBattleSubState = BTL_SUBSTATE_VICTORY_AWAIT_RECOVER_KO;
             }
@@ -1790,7 +1790,7 @@ void btl_state_update_victory(void) {
             player->disableEffect->data.disableX->koDuration = 0;
 
             if (partner != NULL) {
-                if (partner->koStatus == STATUS_DAZE) {
+                if (partner->koStatus == STATUS_KEY_DAZE) {
                     dispatch_event_partner(EVENT_RECOVER_FROM_KO);
                     gBattleSubState = BTL_SUBSTATE_VICTORY_AWAIT_RECOVER_KO;
                 }
@@ -1949,7 +1949,7 @@ void btl_state_update_end_training_battle(void) {
             gBattleStatus.flags2 &= ~BS_FLAGS2_8;
             gBattleStatus.flags2 &= ~BS_FLAGS2_10;
 
-            if (player->koStatus == STATUS_DAZE) {
+            if (player->koStatus == STATUS_KEY_DAZE) {
                 dispatch_event_player(EVENT_RECOVER_FROM_KO);
                 gBattleSubState = BTL_SUBSTATE_END_TRAINING_AWAIT_RECOVERING;
             }
@@ -1961,7 +1961,7 @@ void btl_state_update_end_training_battle(void) {
             player->koDuration = 0;
             player->disableEffect->data.disableX->koDuration = 0;
             if (partner != NULL) {
-                if (partner->koStatus == STATUS_DAZE) {
+                if (partner->koStatus == STATUS_KEY_DAZE) {
                     dispatch_event_partner(EVENT_RECOVER_FROM_KO);
                     gBattleSubState = BTL_SUBSTATE_END_TRAINING_AWAIT_RECOVERING;
                 }
@@ -2221,12 +2221,12 @@ void btl_state_update_run_away(void) {
                             f32 escapeChance = enemy->actorBlueprint->escapeChance;
 
 
-                            if (enemy->debuff == STATUS_FEAR ||
-                                enemy->debuff == STATUS_DIZZY ||
-                                enemy->debuff == STATUS_PARALYZE ||
-                                enemy->debuff == STATUS_SLEEP ||
-                                enemy->debuff == STATUS_FROZEN ||
-                                enemy->debuff == STATUS_STOP)
+                            if (enemy->debuff == STATUS_KEY_FEAR ||
+                                enemy->debuff == STATUS_KEY_DIZZY ||
+                                enemy->debuff == STATUS_KEY_PARALYZE ||
+                                enemy->debuff == STATUS_KEY_SLEEP ||
+                                enemy->debuff == STATUS_KEY_FROZEN ||
+                                enemy->debuff == STATUS_KEY_STOP)
                             {
                                 escapeChance = 100.0f;
                             }
@@ -2372,7 +2372,7 @@ void btl_state_update_defeat(void) {
             battleStatus->stateFreezeCount = 0;
 
             if (player->debuff != 0) {
-                if (player->debuff == STATUS_FROZEN) {
+                if (player->debuff == STATUS_KEY_FROZEN) {
                     sfx_play_sound(SOUND_FROZEN_SHATTER);
                     player->icePillarEffect->flags |= FX_INSTANCE_FLAG_DISMISS;
                     player->icePillarEffect = NULL;
@@ -2963,7 +2963,7 @@ void btl_state_update_end_player_turn(void) {
             && !is_ability_active(ABILITY_HAPPY_FLOWER)
         ) {
             gBattleSubState = BTL_SUBSTATE_END_PLAYER_TURN_AWAIT_HAPPY;
-        } else if (player->stoneStatus == STATUS_STONE || battleStatus->outtaSightActive) {
+        } else if (player->stoneStatus == STATUS_KEY_STONE || battleStatus->outtaSightActive) {
             gBattleSubState = BTL_SUBSTATE_END_PLAYER_TURN_AWAIT_HAPPY;
         } else {
             s32 prevHPDrainCount = 0;
@@ -3282,7 +3282,7 @@ void btl_state_update_partner_move(void) {
 
             btl_update_ko_status();
 
-            if (partner->statusAfflicted == STATUS_DAZE && !btl_are_all_enemies_defeated()) {
+            if (partner->statusAfflicted == STATUS_KEY_DAZE && !btl_are_all_enemies_defeated()) {
                 btl_cam_use_preset(BTL_CAM_PARTNER_INJURED);
                 btl_show_battle_message(BTL_MSG_PARTNER_INJURED, 60);
                 partner->statusAfflicted = 0;
@@ -3472,25 +3472,25 @@ void btl_state_update_next_enemy(void) {
 
             skipEnemy = FALSE;
 
-            if (enemy->debuff == STATUS_SLEEP) {
+            if (enemy->debuff == STATUS_KEY_SLEEP) {
                 skipEnemy = TRUE;
             }
-            if (enemy->debuff == STATUS_FEAR) {
+            if (enemy->debuff == STATUS_KEY_FEAR) {
                 skipEnemy = TRUE;
             }
-            if (enemy->debuff == STATUS_DIZZY) {
+            if (enemy->debuff == STATUS_KEY_DIZZY) {
                 skipEnemy = TRUE;
             }
-            if (enemy->debuff == STATUS_PARALYZE) {
+            if (enemy->debuff == STATUS_KEY_PARALYZE) {
                 skipEnemy = TRUE;
             }
-            if (enemy->debuff == STATUS_FROZEN) {
+            if (enemy->debuff == STATUS_KEY_FROZEN) {
                 skipEnemy = TRUE;
             }
-            if (enemy->debuff == STATUS_STOP) {
+            if (enemy->debuff == STATUS_KEY_STOP) {
                 skipEnemy = TRUE;
             }
-            if (enemy->stoneStatus == STATUS_STONE) {
+            if (enemy->stoneStatus == STATUS_KEY_STONE) {
                 skipEnemy = TRUE;
             }
             if (enemy->flags & ACTOR_FLAG_10000) {
@@ -3687,22 +3687,22 @@ void btl_state_update_enemy_move(void) {
                             btl_cam_use_preset(BTL_CAM_PLAYER_STATUS_AFFLICTED);
 
                             switch (player->statusAfflicted) {
-                                case STATUS_DIZZY:
+                                case STATUS_KEY_DIZZY:
                                     messageIndex = BTL_MSG_PLAYER_DAZED;
                                     break;
-                                case STATUS_SLEEP:
+                                case STATUS_KEY_SLEEP:
                                     messageIndex = BTL_MSG_PLAYER_ASLEEP;
                                     break;
-                                case STATUS_FROZEN:
+                                case STATUS_KEY_FROZEN:
                                     messageIndex = BTL_MSG_PLAYER_FROZEN;
                                     break;
-                                case STATUS_POISON:
+                                case STATUS_KEY_POISON:
                                     messageIndex = BTL_MSG_PLAYER_POISONED;
                                     break;
-                                case STATUS_SHRINK:
+                                case STATUS_KEY_SHRINK:
                                     messageIndex = BTL_MSG_PLAYER_SHRUNK;
                                     break;
-                                case STATUS_PARALYZE:
+                                case STATUS_KEY_PARALYZE:
                                     messageIndex = BTL_MSG_PLAYER_PARALYZED;
                                     break;
                                 default:
@@ -3743,7 +3743,7 @@ void btl_state_update_enemy_move(void) {
     switch (gBattleSubState) {
         case BTL_SUBSTATE_ENEMY_MOVE_CHECK_PARTNER:
             if (partner != NULL) {
-                if (partner->statusAfflicted == STATUS_DAZE) {
+                if (partner->statusAfflicted == STATUS_KEY_DAZE) {
                     player->flags |= ACTOR_FLAG_8000000 | ACTOR_FLAG_4000000;
                     partner->flags |= ACTOR_FLAG_8000000 | ACTOR_FLAG_4000000;
                     btl_cam_use_preset(BTL_CAM_PARTNER_INJURED);

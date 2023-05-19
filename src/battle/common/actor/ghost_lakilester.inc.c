@@ -6,21 +6,21 @@ extern EvtScript N(lakilester_idle);
 extern EvtScript N(lakilester_takeTurn);
 
 s32 N(lakilester_idleAnimations)[] = {
-    STATUS_NORMAL, ANIM_BattleLakilester_Idle,
-    STATUS_STONE, ANIM_BattleLakilester_Still,
-    STATUS_SLEEP, ANIM_BattleLakilester_Still,
-    STATUS_POISON, ANIM_BattleLakilester_Idle,
-    STATUS_STOP, ANIM_BattleLakilester_Still,
-    STATUS_STATIC, ANIM_BattleLakilester_Idle,
-    STATUS_PARALYZE, ANIM_BattleLakilester_Still,
-    STATUS_DIZZY, ANIM_BattleLakilester_Injured,
-    STATUS_FEAR, ANIM_BattleLakilester_Idle,
-    STATUS_END,
+    STATUS_KEY_NORMAL, ANIM_BattleLakilester_Idle,
+    STATUS_KEY_STONE, ANIM_BattleLakilester_Still,
+    STATUS_KEY_SLEEP, ANIM_BattleLakilester_Still,
+    STATUS_KEY_POISON, ANIM_BattleLakilester_Idle,
+    STATUS_KEY_STOP, ANIM_BattleLakilester_Still,
+    STATUS_KEY_STATIC, ANIM_BattleLakilester_Idle,
+    STATUS_KEY_PARALYZE, ANIM_BattleLakilester_Still,
+    STATUS_KEY_DIZZY, ANIM_BattleLakilester_Injured,
+    STATUS_KEY_FEAR, ANIM_BattleLakilester_Idle,
+    STATUS_TABLE_END,
 };
 
 s32 N(lakilester_idleAnimations2)[] = {
-    STATUS_NORMAL, ANIM_BattleLakilester_Spiny,
-    STATUS_END,
+    STATUS_KEY_NORMAL, ANIM_BattleLakilester_Spiny,
+    STATUS_TABLE_END,
 };
 
 s32 N(lakilester_defenseTable)[] = {
@@ -29,28 +29,28 @@ s32 N(lakilester_defenseTable)[] = {
 };
 
 s32 N(lakilester_statusTable)[] = {
-    STATUS_NORMAL, 0,
-    STATUS_DEFAULT, 0,
-    STATUS_SLEEP, 60,
-    STATUS_POISON, 0,
-    STATUS_FROZEN, 0,
-    STATUS_DIZZY, 75,
-    STATUS_FEAR, 0,
-    STATUS_STATIC, 0,
-    STATUS_PARALYZE, 75,
-    STATUS_SHRINK, 75,
-    STATUS_STOP, 80,
-    STATUX_TURN_MOD_DEFAULT, 0,
-    STATUX_TURN_MOD_SLEEP, -1,
-    STATUX_TURN_MOD_POISON, 0,
-    STATUX_TURN_MOD_FROZEN, 0,
-    STATUX_TURN_MOD_DIZZY, -1,
-    STATUX_TURN_MOD_FEAR, 0,
-    STATUX_TURN_MOD_STATIC, 0,
-    STATUX_TURN_MOD_PARALYZE, 0,
-    STATUX_TURN_MOD_SHRINK, 0,
-    STATUX_TURN_MOD_STOP, -1,
-    STATUS_END,
+    STATUS_KEY_NORMAL, 0,
+    STATUS_KEY_DEFAULT, 0,
+    STATUS_KEY_SLEEP, 60,
+    STATUS_KEY_POISON, 0,
+    STATUS_KEY_FROZEN, 0,
+    STATUS_KEY_DIZZY, 75,
+    STATUS_KEY_FEAR, 0,
+    STATUS_KEY_STATIC, 0,
+    STATUS_KEY_PARALYZE, 75,
+    STATUS_KEY_SHRINK, 75,
+    STATUS_KEY_STOP, 80,
+    STATUS_TURN_MOD_DEFAULT, 0,
+    STATUS_TURN_MOD_SLEEP, -1,
+    STATUS_TURN_MOD_POISON, 0,
+    STATUS_TURN_MOD_FROZEN, 0,
+    STATUS_TURN_MOD_DIZZY, -1,
+    STATUS_TURN_MOD_FEAR, 0,
+    STATUS_TURN_MOD_STATIC, 0,
+    STATUS_TURN_MOD_PARALYZE, 0,
+    STATUS_TURN_MOD_SHRINK, 0,
+    STATUS_TURN_MOD_STOP, -1,
+    STATUS_TABLE_END,
 };
 
 ActorPartBlueprint N(lakilester_parts)[] = {

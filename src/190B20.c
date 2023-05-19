@@ -561,9 +561,9 @@ void func_80263268(void) {
         }
 
         if (partnersEnabled >= 2) {
-            if (partner->koStatus == STATUS_DAZE) {
+            if (partner->koStatus == STATUS_KEY_DAZE) {
                 battleStatus->changePartnerAllowed = 0;
-            } else if (partner->debuff == STATUS_FROZEN) {
+            } else if (partner->debuff == STATUS_KEY_FROZEN) {
                 battleStatus->changePartnerAllowed = 0;
             } else if (playerData->currentPartner == PARTNER_GOOMPA) {
                 battleStatus->changePartnerAllowed = -1;
@@ -1400,7 +1400,7 @@ void load_player_actor(void) {
     player->icePillarEffect = NULL;
 
     if (is_ability_active(ABILITY_ZAP_TAP)) {
-        player->staticStatus = STATUS_STATIC;
+        player->staticStatus = STATUS_KEY_STATIC;
         player->staticDuration = 127;
     }
 }
@@ -1936,7 +1936,7 @@ s32 get_npc_anim_for_status(AnimID* animations, s32 statusKey) {
 
     foundAnim = 0;
     while (animations[DICTIONARY_KEY] != NULL) {
-        if (animations[DICTIONARY_KEY] == STATUS_NORMAL) {
+        if (animations[DICTIONARY_KEY] == STATUS_KEY_NORMAL) {
             foundAnim = animations[DICTIONARY_VALUE];
         }
         if (animations[DICTIONARY_KEY] == statusKey) {
@@ -1963,34 +1963,34 @@ s32 get_player_anim_for_status(s32 statusKey) {
     if (!(battleStatus->flags2 & BS_FLAGS2_PEACH_BATTLE)) {
         // switch to danger override animations
         if (playerData->curHP <= DANGER_THRESHOLD) {
-            if (statusKey == STATUS_NORMAL) {
-                statusKey = STATUS_DANGER;
+            if (statusKey == STATUS_KEY_NORMAL) {
+                statusKey = STATUS_KEY_DANGER;
             }
-            if (statusKey == STATUS_TURN_DONE) {
-                statusKey = STATUS_TURN_DONE_WEARY;
+            if (statusKey == STATUS_KEY_TURN_DONE) {
+                statusKey = STATUS_KEY_TURN_DONE_WEARY;
             }
-            if (statusKey == STATUS_THINKING) {
-                statusKey = STATUS_WEARY;
+            if (statusKey == STATUS_KEY_THINKING) {
+                statusKey = STATUS_KEY_WEARY;
             }
         }
 
         // switch to poisoned override animations
-        if (player->debuff == STATUS_POISON) {
-            if (statusKey == STATUS_NORMAL) {
-                statusKey = STATUS_DANGER;
+        if (player->debuff == STATUS_KEY_POISON) {
+            if (statusKey == STATUS_KEY_NORMAL) {
+                statusKey = STATUS_KEY_DANGER;
             }
-            if (statusKey == STATUS_TURN_DONE) {
-                statusKey = STATUS_TURN_DONE_WEARY;
+            if (statusKey == STATUS_KEY_TURN_DONE) {
+                statusKey = STATUS_KEY_TURN_DONE_WEARY;
             }
-            if (statusKey == STATUS_THINKING) {
-                statusKey = STATUS_WEARY;
+            if (statusKey == STATUS_KEY_THINKING) {
+                statusKey = STATUS_KEY_WEARY;
             }
         }
 
         // switch to dizzy override animations
-        if (player->debuff == STATUS_DIZZY) {
-            if (statusKey == STATUS_TURN_DONE) {
-                statusKey = STATUS_TURN_DONE_DIZZY;
+        if (player->debuff == STATUS_KEY_DIZZY) {
+            if (statusKey == STATUS_KEY_TURN_DONE) {
+                statusKey = STATUS_KEY_TURN_DONE_DIZZY;
             }
         }
     }
@@ -2032,8 +2032,8 @@ s32 lookup_defense(s32* defenseTable, s32 elementKey) {
 s32 lookup_status_chance(s32* statusTable, s32 statusKey) {
     s32 defaultChance = 0;
 
-    while (statusTable[DICTIONARY_KEY] != STATUS_END) {
-        if (statusTable[DICTIONARY_KEY] == STATUS_DEFAULT) {
+    while (statusTable[DICTIONARY_KEY] != STATUS_TABLE_END) {
+        if (statusTable[DICTIONARY_KEY] == STATUS_KEY_DEFAULT) {
             defaultChance = statusTable[DICTIONARY_VALUE];
         }
 
@@ -2052,7 +2052,7 @@ s32 lookup_status_duration_mod(s32* statusTable, s32 statusKey) {
     s32 defaultTurnMod = 0;
 
     while (statusTable[DICTIONARY_KEY] != ELEMENT_END) {
-        if (statusTable[DICTIONARY_KEY] == STATUX_TURN_MOD_DEFAULT) {
+        if (statusTable[DICTIONARY_KEY] == STATUS_TURN_MOD_DEFAULT) {
             defaultTurnMod = statusTable[DICTIONARY_VALUE];
         }
 
@@ -2072,14 +2072,14 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
     EffectInstance* effect;
 
     switch (statusTypeKey) {
-        case STATUS_FEAR:
-        case STATUS_DIZZY:
-        case STATUS_PARALYZE:
-        case STATUS_SLEEP:
-        case STATUS_FROZEN:
-        case STATUS_STOP:
-        case STATUS_POISON:
-        case STATUS_SHRINK:
+        case STATUS_KEY_FEAR:
+        case STATUS_KEY_DIZZY:
+        case STATUS_KEY_PARALYZE:
+        case STATUS_KEY_SLEEP:
+        case STATUS_KEY_FROZEN:
+        case STATUS_KEY_STOP:
+        case STATUS_KEY_POISON:
+        case STATUS_KEY_SHRINK:
             if (target->actorID != ACTOR_PLAYER || (!is_ability_active(ABILITY_FEELING_FINE) &&
                 !is_ability_active(ABILITY_BERSERKER) && battleStatus->hustleTurns == 0)) {
 
@@ -2095,7 +2095,7 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                     }
 
                     switch (statusTypeKey) {
-                        case STATUS_FROZEN:
+                        case STATUS_KEY_FROZEN:
                             if (target->actorID != ACTOR_PARTNER) {
                                 effect = target->icePillarEffect;
                                 if (effect != NULL) {
@@ -2103,30 +2103,30 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                                 }
                                 target->icePillarEffect = fx_ice_pillar(0, target->currentPos.x, target->currentPos.y,
                                                             target->currentPos.z, 1.0f, 0);
-                                create_status_debuff(target->hudElementDataIndex, STATUS_FROZEN);
+                                create_status_debuff(target->hudElementDataIndex, STATUS_KEY_FROZEN);
                             }
                             return TRUE;
-                        case STATUS_SLEEP:
+                        case STATUS_KEY_SLEEP:
                             set_actor_pal_adjustment(target, PAL_ADJUST_SLEEP);
-                            create_status_debuff(target->hudElementDataIndex, STATUS_SLEEP);
+                            create_status_debuff(target->hudElementDataIndex, STATUS_KEY_SLEEP);
                             return TRUE;
-                        case STATUS_PARALYZE:
+                        case STATUS_KEY_PARALYZE:
                             set_actor_pal_adjustment(target, PAL_ADJUST_PARALYZE);
-                            create_status_debuff(target->hudElementDataIndex, STATUS_PARALYZE);
+                            create_status_debuff(target->hudElementDataIndex, STATUS_KEY_PARALYZE);
                             return TRUE;
-                        case STATUS_DIZZY:
-                            create_status_debuff(target->hudElementDataIndex, STATUS_DIZZY);
+                        case STATUS_KEY_DIZZY:
+                            create_status_debuff(target->hudElementDataIndex, STATUS_KEY_DIZZY);
                             return TRUE;
-                        case STATUS_FEAR:
+                        case STATUS_KEY_FEAR:
                             set_actor_pal_adjustment(target, PAL_ADJUST_FEAR);
-                            create_status_debuff(target->hudElementDataIndex, STATUS_FEAR);
+                            create_status_debuff(target->hudElementDataIndex, STATUS_KEY_FEAR);
                             return TRUE;
-                        case STATUS_POISON:
+                        case STATUS_KEY_POISON:
                             set_actor_pal_adjustment(target, PAL_ADJUST_POISON);
-                            create_status_debuff(target->hudElementDataIndex, STATUS_POISON);
+                            create_status_debuff(target->hudElementDataIndex, STATUS_KEY_POISON);
                             return TRUE;
-                        case STATUS_SHRINK:
-                            create_status_debuff(target->hudElementDataIndex, STATUS_SHRINK);
+                        case STATUS_KEY_SHRINK:
+                            create_status_debuff(target->hudElementDataIndex, STATUS_KEY_SHRINK);
                             return TRUE;
                     }
                 }
@@ -2135,61 +2135,61 @@ s32 inflict_status(Actor* target, s32 statusTypeKey, s32 duration) {
                 return FALSE;
             }
             break;
-        case STATUS_STATIC:
+        case STATUS_KEY_STATIC:
             if (target->actorID != ACTOR_PARTNER) {
                 target->staticStatus = statusTypeKey;
                 target->staticDuration = duration;
                 if ((s8)duration > 9) {
                     target->staticDuration = 9;
                 }
-                target->statusAfflicted = STATUS_STATIC;
+                target->statusAfflicted = STATUS_KEY_STATIC;
                 set_actor_pal_adjustment(target, PAL_ADJUST_STATIC);
-                create_status_static(target->hudElementDataIndex, STATUS_STATIC);
+                create_status_static(target->hudElementDataIndex, STATUS_KEY_STATIC);
             }
             return TRUE;
-        case STATUS_STONE:
+        case STATUS_KEY_STONE:
             if (target->actorID != ACTOR_PARTNER) {
-                target->stoneStatus = STATUS_STONE;
+                target->stoneStatus = STATUS_KEY_STONE;
                 target->stoneDuration = duration;
                 if ((s8)duration > 9) {
                     target->stoneDuration = 9;
                 }
-                target->statusAfflicted = STATUS_STONE;
+                target->statusAfflicted = STATUS_KEY_STONE;
             }
             return TRUE;
-        case STATUS_DAZE:
+        case STATUS_KEY_DAZE:
             if (target->koStatus < statusTypeKey) {
-                target->koStatus = STATUS_DAZE;
+                target->koStatus = STATUS_KEY_DAZE;
                 target->koDuration = duration;
                 if ((s8)duration > 9) {
                     target->koDuration = 9;
                 }
-                target->statusAfflicted = STATUS_DAZE;
+                target->statusAfflicted = STATUS_KEY_DAZE;
             }
             return TRUE;
-        case STATUS_TRANSPARENT:
+        case STATUS_KEY_TRANSPARENT:
             if (target->actorID != ACTOR_PARTNER) {
-                target->transparentStatus = STATUS_TRANSPARENT;
+                target->transparentStatus = STATUS_KEY_TRANSPARENT;
                 target->transparentDuration = duration;
                 if ((s8)duration > 9) {
                     target->transparentDuration = 9;
                 }
-                target->statusAfflicted = STATUS_TRANSPARENT;
-                create_status_transparent(target->hudElementDataIndex, STATUS_TRANSPARENT);
+                target->statusAfflicted = STATUS_KEY_TRANSPARENT;
+                create_status_transparent(target->hudElementDataIndex, STATUS_KEY_TRANSPARENT);
             }
             return TRUE;
-        case STATUS_END:
-        case STATUS_NORMAL:
-        case STATUS_DEFAULT:
+        case STATUS_TABLE_END:
+        case STATUS_KEY_NORMAL:
+        case STATUS_KEY_DEFAULT:
         default:
             return TRUE;
     }
 }
 
 s32 inflict_partner_ko(Actor* target, s32 statusTypeKey, s32 duration) {
-    if (statusTypeKey == STATUS_DAZE) {
+    if (statusTypeKey == STATUS_KEY_DAZE) {
         if (statusTypeKey != target->koStatus) {
-            inflict_status(target, STATUS_DAZE, duration);
+            inflict_status(target, STATUS_KEY_DAZE, duration);
             sfx_play_sound(SOUND_2107);
         } else {
             target->koDuration += duration;
@@ -2523,7 +2523,7 @@ s32 try_inflict_status(Actor* actor, s32 statusTypeKey, s32 statusKey) {
     s32 chance;
     s32 duration;
 
-    if (battleStatus->statusChance == STATUS_CHANCE_IGNORE_RES) {
+    if (battleStatus->statusChance == STATUS_KEY_IGNORE_RES) {
         duration = battleStatus->statusDuration;
         duration += lookup_status_duration_mod(actor->statusTable, statusKey);
         return inflict_status_set_duration(actor, statusTypeKey, statusKey, duration);
@@ -2894,7 +2894,7 @@ void btl_update_ko_status(void) {
 
     player->koDuration = player->debuffDuration;
     if (player->koDuration > 0) {
-        player->koStatus = STATUS_DAZE;
+        player->koStatus = STATUS_KEY_DAZE;
         player->disableEffect->data.disableX->koDuration = player->koDuration;
 
         if (koDuration == 0) {
@@ -2904,12 +2904,12 @@ void btl_update_ko_status(void) {
 
     if (partner != NULL) {
         if (partner->koDuration < partner->debuffDuration) {
-            partner->koStatus = STATUS_DAZE;
+            partner->koStatus = STATUS_KEY_DAZE;
             partner->koDuration = partner->debuffDuration;
         }
 
         if (partner->koDuration > 0) {
-            partner->koStatus = STATUS_DAZE;
+            partner->koStatus = STATUS_KEY_DAZE;
             partner->disableEffect->data.disableX->koDuration = partner->koDuration;
         }
     }
@@ -2920,7 +2920,7 @@ void btl_update_ko_status(void) {
         if (enemy != NULL) {
             enemy->koDuration = enemy->debuffDuration;
             if (enemy->koDuration > 0) {
-                enemy->koStatus = STATUS_DAZE;
+                enemy->koStatus = STATUS_KEY_DAZE;
                 enemy->disableEffect->data.disableX->koDuration = enemy->koDuration;
             }
         }
