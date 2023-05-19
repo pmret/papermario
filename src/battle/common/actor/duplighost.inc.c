@@ -517,49 +517,49 @@ Vec3i N(pos_summon) = { NPC_DISPOSE_LOCATION };
 #include "ghost_goombario.inc.c"
 
 Formation N(formation_goombario) = {
-    { .actor = &N(goombario), .home = { .vec = &N(pos_summon) }, .priority = 0 },
+    ACTOR_BY_POS(N(goombario), N(pos_summon), 0),
 };
 
 #include "ghost_kooper.inc.c"
 
 Formation N(formation_kooper) = {
-    { .actor = &N(kooper), .home = { .vec = &N(pos_summon) }, .priority = 0 },
+    ACTOR_BY_POS(N(kooper), N(pos_summon), 0),
 };
 
 #include "ghost_bombette.inc.c"
 
 Formation N(formation_bombette) = {
-    { .actor = &N(bombette), .home = { .vec = &N(pos_summon) }, .priority = 0 },
+    ACTOR_BY_POS(N(bombette), N(pos_summon), 0),
 };
 
 #include "ghost_parakarry.inc.c"
 
 Formation N(formation_parakarry) = {
-    { .actor = &N(parakarry), .home = { .vec = &N(pos_summon) }, .priority = 0 },
+    ACTOR_BY_POS(N(parakarry), N(pos_summon), 0),
 };
 
 #include "ghost_bow.inc.c"
 
 Formation N(formation_bow) = {
-    { .actor = &N(bow), .home = { .vec = &N(pos_summon) }, .priority = 0 },
+    ACTOR_BY_POS(N(bow), N(pos_summon), 0),
 };
 
 #include "ghost_watt.inc.c"
 
 Formation N(formation_watt) = {
-    { .actor = &N(watt), .home = { .vec = &N(pos_summon) }, .priority = 0 },
+    ACTOR_BY_POS(N(watt), N(pos_summon), 0),
 };
 
 #include "ghost_sushie.inc.c"
 
 Formation N(formation_sushie) = {
-    { .actor = &N(sushie), .home = { .vec = &N(pos_summon) }, .priority = 0 },
+    ACTOR_BY_POS(N(sushie), N(pos_summon), 0),
 };
 
 #include "ghost_lakilester.inc.c"
 
 Formation N(formation_lakilester) = {
-    { .actor = &N(lakilester), .home = { .vec = &N(pos_summon) }, .priority = 0 },
+    ACTOR_BY_POS(N(lakilester), N(pos_summon), 0),
 };
 
 API_CALLABLE(N(GetPartnerAndLevel)) {

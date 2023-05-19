@@ -955,7 +955,7 @@ EvtScript N(EVS_DropDebris_Players) = {
 Vec3i N(SummonedChompPos) = { 190, 0, 0 };
 
 Formation N(SummonedChomp) = {
-    { .actor = &b_area_isk_part_2_chain_chomp, .home = { .vec = &N(SummonedChompPos) }, .priority = 100 },
+    ACTOR_BY_POS(b_area_isk_part_2_chain_chomp, N(SummonedChompPos), 100),
 };
 
 EvtScript N(EVS_Move_SummonChomp) = {

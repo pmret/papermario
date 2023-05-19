@@ -17,12 +17,12 @@ extern Stage N(sam_03);
 Vec3i N(80223490) = { 75, 16, 5 };
 
 Formation N(Formation_01) = {
-    { .actor = &N(monstar), .home = { .vec = &N(80223490) }, .priority = 10 },
+    ACTOR_BY_POS(N(monstar), N(80223490), 10),
 };
 
 Formation N(Formation_02) = {
-    { .actor = &N(paragoomba), .home = { .index = BTL_POS_AIR_B }, .priority = 10 },
-    { .actor = &N(gray_magikoopa), .home = { .index = BTL_POS_GROUND_C }, .priority = 9 },
+    ACTOR_BY_IDX(N(paragoomba), BTL_POS_AIR_B, 10),
+    ACTOR_BY_IDX(N(gray_magikoopa), BTL_POS_GROUND_C, 9),
 };
 
 BattleList N(Formations) = {

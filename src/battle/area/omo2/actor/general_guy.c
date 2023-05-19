@@ -575,7 +575,7 @@ EvtScript N(attack_lightning_shot) = {
 Vec3i N(summon_pos) = { 240, 0, 0 };
 
 Formation N(formation_shy_squad) = {
-    { .actor = &b_area_omo2_1_shy_squad, .home = { .vec = &N(summon_pos) }, .priority = 100, }
+    ACTOR_BY_POS(b_area_omo2_1_shy_squad, N(summon_pos), 100)
 };
 
 

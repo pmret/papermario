@@ -864,11 +864,11 @@ EvtScript N(8022F4D0) = {
 Vec3i N(summon_pos) = { 240, 0, 0 };
 
 Formation N(formation_signal_guy) = {
-    { .actor = &b_area_omo2_4_signal_guy, .home = { .vec = &N(summon_pos) }, .priority = 95, }
+    ACTOR_BY_POS(b_area_omo2_4_signal_guy, N(summon_pos), 95)
 };
 
 Formation N(formation_stilt_guy_1) = {
-    { .actor = &b_area_omo2_2_stilt_guy, .home = { .vec = &N(summon_pos) }, .priority = 95, }
+    ACTOR_BY_POS(b_area_omo2_2_stilt_guy, N(summon_pos), 95)
 };
 
 Formation N(formation_stilt_guy_2) = {
@@ -876,7 +876,7 @@ Formation N(formation_stilt_guy_2) = {
 };
 
 Formation N(formation_shy_stack_1) = {
-    { .actor = &b_area_omo2_3_shy_stack, .home = { .vec = &N(summon_pos) }, .priority = 95, }
+    ACTOR_BY_POS(b_area_omo2_3_shy_stack, N(summon_pos), 95)
 };
 
 Formation N(formation_shy_stack_2) = {
@@ -884,6 +884,6 @@ Formation N(formation_shy_stack_2) = {
 };
 
 Formation N(formation_shy_squad_dup) = {
-    { .actor = &b_area_omo2_5_shy_squad_dup, .home = { .vec = &N(summon_pos) }, .priority = 95, }
+    ACTOR_BY_POS(b_area_omo2_5_shy_squad_dup, N(summon_pos), 95)
 };
 

@@ -614,7 +614,7 @@ Formation N(formation_petit_piranha_2) = {
 };
 
 Formation N(formation_petit_piranha_bomb) = {
-    { .actor = &b_area_kzn2_petit_piranha_bomb, .home = { .vec = &N(petit_piranha_pos) }, .priority = 95, },
+    ACTOR_BY_POS(b_area_kzn2_petit_piranha_bomb, N(petit_piranha_pos), 95),
 };
 
 EvtScript N(onDeath) = {

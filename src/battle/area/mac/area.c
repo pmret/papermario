@@ -14,23 +14,23 @@ extern Stage N(mac_01);
 extern Stage N(mac_02);
 
 Formation N(Formation_00) = {
-    { .actor = &N(chan), .home = { .index = BTL_POS_GROUND_C }, .priority = 10 },
+    ACTOR_BY_IDX(N(chan), BTL_POS_GROUND_C, 10),
 };
 
 Formation N(Formation_01) = {
-    { .actor = &N(lee), .home = { .index = BTL_POS_GROUND_C }, .priority = 10 },
+    ACTOR_BY_IDX(N(lee), BTL_POS_GROUND_C, 10),
 };
 
 Formation N(Formation_02) = {
-    { .actor = &N(master1), .home = { .index = BTL_POS_GROUND_C }, .priority = 10 },
+    ACTOR_BY_IDX(N(master1), BTL_POS_GROUND_C, 10),
 };
 
 Formation N(Formation_03) = {
-    { .actor = &N(master2), .home = { .index = BTL_POS_GROUND_C }, .priority = 10 },
+    ACTOR_BY_IDX(N(master2), BTL_POS_GROUND_C, 10),
 };
 
 Formation N(Formation_04) = {
-    { .actor = &N(master3), .home = { .index = BTL_POS_GROUND_C }, .priority = 10 },
+    ACTOR_BY_IDX(N(master3), BTL_POS_GROUND_C, 10),
 };
 
 BattleList N(Formations) = {

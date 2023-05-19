@@ -8,7 +8,7 @@ extern ActorBlueprint N(kammy_koopa);
 extern Stage N(kpa_05);
 
 Formation N(Formation_00) = {
-    { .actor = &N(kammy_koopa), .home = { .index = BTL_POS_AIR_C }, .priority = 10, },
+    ACTOR_BY_IDX(N(kammy_koopa), BTL_POS_AIR_C, 10),
 };
 
 BattleList N(Formations) = {

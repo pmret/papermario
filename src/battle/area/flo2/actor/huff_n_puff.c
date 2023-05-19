@@ -548,7 +548,7 @@ EvtScript N(idle) = {
 Vec3i N(tuff_puff_pos) = { NPC_DISPOSE_LOCATION };
 
 Formation N(formation_tuff_puff_small) = {
-    { .actor = &b_area_flo2_tuff_puff, .home = { .vec = &N(tuff_puff_pos) }, .priority = 0, },
+    ACTOR_BY_POS(b_area_flo2_tuff_puff, N(tuff_puff_pos), 0),
 };
 
 Formation N(formation_tuff_puff_large) = {

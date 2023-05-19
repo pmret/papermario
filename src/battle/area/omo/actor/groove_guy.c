@@ -822,13 +822,13 @@ extern ActorBlueprint A(medi_guy);
 Vec3i N(vector3D_8022739C) = { 0, 0xFFFFFC18, 0 };
 
 Formation N(specialFormation_802273A8) = {
-    { .actor = &A(red_shy_guy), .home = { .vec = &N(vector3D_8022739C) }, .priority = 100 },
+    ACTOR_BY_POS(A(red_shy_guy), N(vector3D_8022739C), 100),
 };
 
 Formation N(specialFormation_802273C4) = {
-    { .actor = &NAMESPACE, .home = { .vec = &N(vector3D_8022739C) }, .priority = 100 },
+    ACTOR_BY_POS(NAMESPACE, N(vector3D_8022739C), 100),
 };
 
 Formation N(specialFormation_802273E0) = {
-    { .actor = &A(medi_guy), .home = { .vec = &N(vector3D_8022739C) }, .priority = 100 },
+    ACTOR_BY_POS(A(medi_guy), N(vector3D_8022739C), 100),
 };

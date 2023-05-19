@@ -21,7 +21,7 @@ extern Stage N(isk_07);
 Vec3i N(BossPos) = { 97, 70, 17 };
 
 Formation N(Formation_00) = {
-    { .actor = &N(tutankoopa), .home = { .vec = &N(BossPos) }, .priority = 10 },
+    ACTOR_BY_POS(N(tutankoopa), N(BossPos), 10),
 };
 
 BattleList N(Formations) = {

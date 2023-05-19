@@ -1397,11 +1397,11 @@ ActorBlueprint N(clone_flying) = {
 Vec3i N(clone_pos) = { NPC_DISPOSE_LOCATION };
 
 Formation N(formation_clone) = {
-    { .actor = &N(clone), .home = { .vec = &N(clone_pos) }, .priority = 0, },
+    ACTOR_BY_POS(N(clone), N(clone_pos), 0),
 };
 
 Formation N(formation_clone_flying) = {
-    { .actor = &N(clone_flying), .home = { .vec = &N(clone_pos) }, .priority = 0, },
+    ACTOR_BY_POS(N(clone_flying), N(clone_pos), 0),
 };
 
 EvtScript N(makeClone) = {

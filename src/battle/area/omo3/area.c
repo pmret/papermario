@@ -26,42 +26,42 @@ extern ActorBlueprint N(red_shy_guy);
 Vec3i N(big_lantern_ghost_pos) = { 30, 0, 10 };
 
 Formation N(Formation_00) = {
-    { .actor = &N(big_lantern_ghost), .home = { .vec = &N(big_lantern_ghost_pos) }, .priority = 10, },
+    ACTOR_BY_POS(N(big_lantern_ghost), N(big_lantern_ghost_pos), 10),
 };
 
 Formation N(Formation_01) = {
-    { .actor = &N(goomba), .home = { .index = BTL_POS_GROUND_B }, .priority = 10 },
+    ACTOR_BY_IDX(N(goomba), BTL_POS_GROUND_B, 10),
 };
 
 Formation N(Formation_02) = {
-    { .actor = &N(goomba), .home = { .index = BTL_POS_GROUND_B }, .priority = 10 },
-    { .actor = &N(goomba), .home = { .index = BTL_POS_GROUND_C }, .priority = 9 },
+    ACTOR_BY_IDX(N(goomba), BTL_POS_GROUND_B, 10),
+    ACTOR_BY_IDX(N(goomba), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_03) = {
-    { .actor = &N(clubba), .home = { .index = BTL_POS_GROUND_B }, .priority = 10 },
-    { .actor = &N(clubba), .home = { .index = BTL_POS_GROUND_C }, .priority = 9 },
+    ACTOR_BY_IDX(N(clubba), BTL_POS_GROUND_B, 10),
+    ACTOR_BY_IDX(N(clubba), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_04) = {
-    { .actor = &N(fuzzy), .home = { .index = BTL_POS_GROUND_B }, .priority = 10 },
-    { .actor = &N(fuzzy), .home = { .index = BTL_POS_GROUND_C }, .priority = 9 },
+    ACTOR_BY_IDX(N(fuzzy), BTL_POS_GROUND_B, 10),
+    ACTOR_BY_IDX(N(fuzzy), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_05) = {
-    { .actor = &N(fuzzy), .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
-    { .actor = &N(fuzzy), .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
-    { .actor = &N(fuzzy), .home = { .index = BTL_POS_GROUND_C }, .priority = 8 },
-    { .actor = &N(fuzzy), .home = { .index = BTL_POS_GROUND_D }, .priority = 7 },
+    ACTOR_BY_IDX(N(fuzzy), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(fuzzy), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(fuzzy), BTL_POS_GROUND_C, 8),
+    ACTOR_BY_IDX(N(fuzzy), BTL_POS_GROUND_D, 7),
 };
 
 Formation N(Formation_06) = {
-    { .actor = &N(hammer_bro), .home = { .index = BTL_POS_GROUND_B }, .priority = 10 },
-    { .actor = &N(hammer_bro), .home = { .index = BTL_POS_GROUND_C }, .priority = 9 },
+    ACTOR_BY_IDX(N(hammer_bro), BTL_POS_GROUND_B, 10),
+    ACTOR_BY_IDX(N(hammer_bro), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_07) = {
-    { .actor = &N(hammer_bro), .home = { .index = BTL_POS_GROUND_B }, .priority = 10 },
+    ACTOR_BY_IDX(N(hammer_bro), BTL_POS_GROUND_B, 10),
 };
 
 Formation N(Formation_08) = {
@@ -70,12 +70,12 @@ Formation N(Formation_08) = {
 };
 
 Formation N(Formation_09) = {
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_B }, .priority = 10 },
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_C }, .priority = 9 },
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_B, 10),
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_0A) = {
-    { .actor = &N(red_shy_guy), .home = { .index = BTL_POS_GROUND_B }, .priority = 10 },
+    ACTOR_BY_IDX(N(red_shy_guy), BTL_POS_GROUND_B, 10),
 };
 
 BattleList N(Formations) = {

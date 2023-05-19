@@ -12,22 +12,22 @@ extern Stage N(hos_01);
 extern Stage N(hos_02);
 
 Formation N(Formation_00) = {
-    { .actor = &N(goombario_tutor), .home = { .index = BTL_POS_GROUND_B }, .priority = 10 },
+    ACTOR_BY_IDX(N(goombario_tutor), BTL_POS_GROUND_B, 10),
 };
 
 Formation N(Formation_01) = {
-    { .actor = &N(ember), .home = { .index = BTL_POS_GROUND_B }, .priority = 10 },
-    { .actor = &N(ember), .home = { .index = BTL_POS_GROUND_C }, .priority = 9 },
+    ACTOR_BY_IDX(N(ember), BTL_POS_GROUND_B, 10),
+    ACTOR_BY_IDX(N(ember), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_02) = {
-    { .actor = &N(ember), .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
-    { .actor = &N(ember), .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
-    { .actor = &N(ember), .home = { .index = BTL_POS_GROUND_C }, .priority = 8 },
+    ACTOR_BY_IDX(N(ember), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(ember), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(ember), BTL_POS_GROUND_C, 8),
 };
 
 Formation N(Formation_03) = {
-    { .actor = &N(magikoopa_flying), .home = { .index = BTL_POS_AIR_B }, .priority = 10 },
+    ACTOR_BY_IDX(N(magikoopa_flying), BTL_POS_AIR_B, 10),
 };
 
 BattleList N(Formations) = {

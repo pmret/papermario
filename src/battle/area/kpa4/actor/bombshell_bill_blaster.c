@@ -236,5 +236,5 @@ extern ActorBlueprint A(bombshell_bill);
 Vec3i N(bill_pos) = { NPC_DISPOSE_LOCATION };
 
 Formation N(formation_bill) = {
-    { .actor = &A(bombshell_bill), .home = { .vec = &N(bill_pos) }, .priority = 100, },
+    ACTOR_BY_POS(A(bombshell_bill), N(bill_pos), 100),
 };

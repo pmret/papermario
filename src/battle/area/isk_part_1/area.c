@@ -33,24 +33,24 @@ Vec3i N(vector3D_802240B8) = { 95, 112, -25 };
 Vec3i N(vector3D_802240C4) = { 135, 112, -25 };
 
 Formation N(Formation_00) = {
-    { .actor = &N(pokey_mummy), .home = { .index = BTL_POS_GROUND_B }, .priority = 10 },
-    { .actor = &N(pokey_mummy), .home = { .index = BTL_POS_GROUND_C }, .priority = 9 },
+    ACTOR_BY_IDX(N(pokey_mummy), BTL_POS_GROUND_B, 10),
+    ACTOR_BY_IDX(N(pokey_mummy), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_01) = {
-    { .actor = &N(pokey_mummy), .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
-    { .actor = &N(pokey_mummy), .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
-    { .actor = &N(pokey_mummy), .home = { .index = BTL_POS_GROUND_C }, .priority = 8 },
+    ACTOR_BY_IDX(N(pokey_mummy), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(pokey_mummy), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(pokey_mummy), BTL_POS_GROUND_C, 8),
 };
 
 Formation N(Formation_02) = {
-    { .actor = &N(pokey_mummy), .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
+    ACTOR_BY_IDX(N(pokey_mummy), BTL_POS_GROUND_B, 9),
     { .actor = &N(swooper),     .home = { .vec = &N(vector3D_80224088) }, .priority = 8 },
 };
 
 Formation N(Formation_03) = {
-    { .actor = &N(pokey_mummy), .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
-    { .actor = &N(pokey_mummy), .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
+    ACTOR_BY_IDX(N(pokey_mummy), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(pokey_mummy), BTL_POS_GROUND_B, 9),
     { .actor = &N(swooper),     .home = { .vec = &N(vector3D_80224088) }, .priority = 8 },
 };
 
@@ -59,64 +59,64 @@ Vec3i N(vector3D_802241E8) = { 80, 133, -25 };
 Vec3i N(vector3D_802241F4) = { 115, 133, -25 };
 
 Formation N(Formation_04) = {
-    { .actor = &N(pokey_mummy), .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
-    { .actor = &N(pokey_mummy), .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
+    ACTOR_BY_IDX(N(pokey_mummy), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(pokey_mummy), BTL_POS_GROUND_B, 9),
     { .actor = &N(swooper),     .home = { .vec = &N(vector3D_802241E8) }, .priority = 8 },
     { .actor = &N(swooper),     .home = { .vec = &N(vector3D_802241F4) }, .priority = 7 },
 };
 
 Formation N(Formation_05) = {
-    { .actor = &N(swooper), .home = { .vec = &N(vector3D_8022407C) }, .priority = 10 },
-    { .actor = &N(swooper), .home = { .vec = &N(vector3D_80224088) }, .priority = 9 },
+    ACTOR_BY_POS(N(swooper), N(vector3D_8022407C), 10),
+    ACTOR_BY_POS(N(swooper), N(vector3D_80224088), 9),
 };
 
 Formation N(Formation_06) = {
-    { .actor = &N(swooper), .home = { .vec = &N(vector3D_80224070) }, .priority = 10 },
-    { .actor = &N(swooper), .home = { .vec = &N(vector3D_8022407C) }, .priority = 9 },
-    { .actor = &N(swooper), .home = { .vec = &N(vector3D_80224088) }, .priority = 8 },
+    ACTOR_BY_POS(N(swooper), N(vector3D_80224070), 10),
+    ACTOR_BY_POS(N(swooper), N(vector3D_8022407C), 9),
+    ACTOR_BY_POS(N(swooper), N(vector3D_80224088), 8),
 };
 
 Formation N(Formation_07) = {
-    { .actor = &N(stone_chomp), .home = { .index = BTL_POS_GROUND_B }, .priority = 10 },
-    { .actor = &N(stone_chomp), .home = { .index = BTL_POS_GROUND_C }, .priority = 9 },
+    ACTOR_BY_IDX(N(stone_chomp), BTL_POS_GROUND_B, 10),
+    ACTOR_BY_IDX(N(stone_chomp), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_08) = {
-    { .actor = &N(stone_chomp), .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
-    { .actor = &N(stone_chomp), .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
-    { .actor = &N(stone_chomp), .home = { .index = BTL_POS_GROUND_C }, .priority = 8 },
+    ACTOR_BY_IDX(N(stone_chomp), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(stone_chomp), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(stone_chomp), BTL_POS_GROUND_C, 8),
 };
 
 Formation N(Formation_09) = {
-    { .actor = &N(buzzy_beetle), .home = { .index = BTL_POS_GROUND_B }, .priority = 10 },
-    { .actor = &N(buzzy_beetle), .home = { .index = BTL_POS_GROUND_C }, .priority = 9 },
+    ACTOR_BY_IDX(N(buzzy_beetle), BTL_POS_GROUND_B, 10),
+    ACTOR_BY_IDX(N(buzzy_beetle), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_0A) = {
-    { .actor = &N(buzzy_beetle), .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
-    { .actor = &N(buzzy_beetle), .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
-    { .actor = &N(buzzy_beetle), .home = { .index = BTL_POS_GROUND_C }, .priority = 8 },
-    { .actor = &N(buzzy_beetle), .home = { .index = BTL_POS_GROUND_D }, .priority = 7 },
+    ACTOR_BY_IDX(N(buzzy_beetle), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(buzzy_beetle), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(buzzy_beetle), BTL_POS_GROUND_C, 8),
+    ACTOR_BY_IDX(N(buzzy_beetle), BTL_POS_GROUND_D, 7),
 };
 
 Formation N(Formation_0B) = {
-    { .actor = &N(buzzy_beetle), .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
+    ACTOR_BY_IDX(N(buzzy_beetle), BTL_POS_GROUND_A, 10),
     { .actor = &N(buzzy_beetle), .home = { .vec = &N(vector3D_802240AC) }, .priority = 9, .var0 = 1 },
     { .actor = &N(swooper),      .home = { .vec = &N(vector3D_802240B8) }, .priority = 8 },
 };
 
 Formation N(Formation_0C) = {
-    { .actor = &N(buzzy_beetle), .home = { .index = BTL_POS_GROUND_B }, .priority = 10 },
+    ACTOR_BY_IDX(N(buzzy_beetle), BTL_POS_GROUND_B, 10),
     { .actor = &N(swooper),      .home = { .vec = &N(vector3D_802240B8) }, .priority = 9 },
 };
 
 Formation N(Formation_0D) = {
     { .actor = &N(buzzy_beetle), .home = { .vec = &N(vector3D_802240AC) }, .priority = 10, .var0 = 1 },
-    { .actor = &N(buzzy_beetle), .home = { .index = BTL_POS_GROUND_C }, .priority = 9 },
+    ACTOR_BY_IDX(N(buzzy_beetle), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_0E) = {
-    { .actor = &N(buzzy_beetle), .home = { .index = BTL_POS_GROUND_B }, .priority = 10 },
+    ACTOR_BY_IDX(N(buzzy_beetle), BTL_POS_GROUND_B, 10),
     { .actor = &N(buzzy_beetle), .home = { .vec = &N(vector3D_802240B8) }, .priority = 9, .var0 = 1 },
 };
 
@@ -126,7 +126,7 @@ Formation N(Formation_0F) = {
 };
 
 Formation N(Formation_10) = {
-    { .actor = &N(buzzy_beetle), .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
+    ACTOR_BY_IDX(N(buzzy_beetle), BTL_POS_GROUND_A, 10),
     { .actor = &N(buzzy_beetle), .home = { .vec = &N(vector3D_802240AC) }, .priority = 9, .var0 = 1 },
     { .actor = &N(buzzy_beetle), .home = { .vec = &N(vector3D_802240B8) }, .priority = 8, .var0 = 1 },
 };
@@ -155,7 +155,7 @@ Formation N(Formation_12) = {
 Formation N(Formation_13) = {
     { .actor = &N(buzzy_beetle), .home = { .vec = &N(vector3D_802240A0) }, .priority = 10, .var0 = 1 },
     { .actor = &N(buzzy_beetle), .home = { .vec = &N(vector3D_802240AC) }, .priority = 9, .var0 = 1 },
-    { .actor = &N(swooper), .home = { .vec = &N(vector3D_802240B8) }, .priority = 8 },
+    ACTOR_BY_POS(N(swooper), N(vector3D_802240B8), 8),
 };
 
 BattleList N(Formations) = {

@@ -16,23 +16,23 @@ extern Stage N(kpa_03);
 Vec3i N(bowser_pos) = { 80, 0, -10 };
 
 Formation N(Formation_00) = {
-    { .actor = &N(bowser), .home = { .index = BTL_POS_GROUND_C }, .priority = 10, },
+    ACTOR_BY_IDX(N(bowser), BTL_POS_GROUND_C, 10),
 };
 
 Formation N(Formation_01) = {
-    { .actor = &N(bowser_intro), .home = { .index = BTL_POS_GROUND_C }, .priority = 10, },
+    ACTOR_BY_IDX(N(bowser_intro), BTL_POS_GROUND_C, 10),
 };
 
 Formation N(Formation_02) = {
-    { .actor = &N(bowser_phase_1), .home = { .index = BTL_POS_GROUND_C }, .priority = 10, },
+    ACTOR_BY_IDX(N(bowser_phase_1), BTL_POS_GROUND_C, 10),
 };
 
 Formation N(Formation_03) = {
-    { .actor = &N(bowser_phase_2), .home = { .vec = &N(bowser_pos) }, .priority = 10, },
+    ACTOR_BY_POS(N(bowser_phase_2), N(bowser_pos), 10),
 };
 
 Formation N(Formation_04) = {
-    { .actor = &N(bowser_phase_3), .home = { .vec = &N(bowser_pos) }, .priority = 10, },
+    ACTOR_BY_POS(N(bowser_phase_3), N(bowser_pos), 10),
 };
 
 BattleList N(Formations) = {

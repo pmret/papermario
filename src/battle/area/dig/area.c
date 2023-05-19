@@ -24,33 +24,33 @@ extern EvtScript N(dig_04_script);
 extern EvtScript N(dig_05_script);
 
 Formation N(Formation_00) = {
-    { .actor = &N(fuzzy), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(fuzzy), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(fuzzy), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
-    { .actor = &N(fuzzy), .home = { .index = BTL_POS_GROUND_D }, .priority = 7, },
+    ACTOR_BY_IDX(N(fuzzy), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(fuzzy), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(fuzzy), BTL_POS_GROUND_C, 8),
+    ACTOR_BY_IDX(N(fuzzy), BTL_POS_GROUND_D, 7),
 };
 
 Formation N(Formation_01) = {
-    { .actor = &N(monty_mole), .home = { .index = BTL_POS_GROUND_B }, .priority = 10, },
-    { .actor = &N(monty_mole), .home = { .index = BTL_POS_GROUND_C }, .priority = 9, },
-    { .actor = &N(monty_mole), .home = { .index = BTL_POS_GROUND_D }, .priority = 8, },
+    ACTOR_BY_IDX(N(monty_mole), BTL_POS_GROUND_B, 10),
+    ACTOR_BY_IDX(N(monty_mole), BTL_POS_GROUND_C, 9),
+    ACTOR_BY_IDX(N(monty_mole), BTL_POS_GROUND_D, 8),
 };
 
 Formation N(Formation_02) = {
-    { .actor = &N(pokey), .home = { .index = BTL_POS_GROUND_B }, .priority = 10, },
-    { .actor = &N(bandit), .home = { .index = BTL_POS_GROUND_C }, .priority = 9, },
-    { .actor = &N(pokey), .home = { .index = BTL_POS_GROUND_D }, .priority = 8, },
+    ACTOR_BY_IDX(N(pokey), BTL_POS_GROUND_B, 10),
+    ACTOR_BY_IDX(N(bandit), BTL_POS_GROUND_C, 9),
+    ACTOR_BY_IDX(N(pokey), BTL_POS_GROUND_D, 8),
 };
 
 Formation N(Formation_03) = {
-    { .actor = &N(red_shy_guy), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(red_shy_guy), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(red_shy_guy), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
-    { .actor = &N(red_shy_guy), .home = { .index = BTL_POS_GROUND_D }, .priority = 7, },
+    ACTOR_BY_IDX(N(red_shy_guy), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(red_shy_guy), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(red_shy_guy), BTL_POS_GROUND_C, 8),
+    ACTOR_BY_IDX(N(red_shy_guy), BTL_POS_GROUND_D, 7),
 };
 
 Formation N(Formation_04) = {
-    { .actor = &N(tubba_blubba), .home = { .index = BTL_POS_GROUND_C }, .priority = 10, },
+    ACTOR_BY_IDX(N(tubba_blubba), BTL_POS_GROUND_C, 10),
 };
 
 BattleList N(Formations) = {

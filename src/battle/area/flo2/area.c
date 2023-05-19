@@ -21,33 +21,33 @@ extern Stage N(flo_06);
 Vec3i N(huff_n_puff_pos) = { 80, 80, 0 };
 
 Formation N(Formation_01) = {
-    { .actor = &N(huff_n_puff), .home = { .vec = &N(huff_n_puff_pos) }, .priority = 10, },
+    ACTOR_BY_POS(N(huff_n_puff), N(huff_n_puff_pos), 10),
 };
 
 Formation N(Formation_02) = {
-    { .actor = &N(monty_mole_boss), .home = { .index = BTL_POS_GROUND_B }, .priority = 10, },
+    ACTOR_BY_IDX(N(monty_mole_boss), BTL_POS_GROUND_B, 10),
 };
 
 Formation N(Formation_03) = {
-    { .actor = &N(monty_mole_boss), .home = { .index = BTL_POS_GROUND_B }, .priority = 10, },
-    { .actor = &N(monty_mole_boss), .home = { .index = BTL_POS_GROUND_C }, .priority = 9, },
+    ACTOR_BY_IDX(N(monty_mole_boss), BTL_POS_GROUND_B, 10),
+    ACTOR_BY_IDX(N(monty_mole_boss), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_04) = {
-    { .actor = &N(monty_mole_boss), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(monty_mole_boss), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(monty_mole_boss), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
+    ACTOR_BY_IDX(N(monty_mole_boss), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(monty_mole_boss), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(monty_mole_boss), BTL_POS_GROUND_C, 8),
 };
 
 Formation N(Formation_05) = {
-    { .actor = &N(monty_mole_boss), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(monty_mole_boss), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(monty_mole_boss), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
-    { .actor = &N(monty_mole_boss), .home = { .index = BTL_POS_GROUND_D }, .priority = 7, },
+    ACTOR_BY_IDX(N(monty_mole_boss), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(monty_mole_boss), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(monty_mole_boss), BTL_POS_GROUND_C, 8),
+    ACTOR_BY_IDX(N(monty_mole_boss), BTL_POS_GROUND_D, 7),
 };
 
 Formation N(Formation_06) = {
-    { .actor = &N(spike), .home = { .index = BTL_POS_AIR_B }, .priority = 10, },
+    ACTOR_BY_IDX(N(spike), BTL_POS_AIR_B, 10),
 };
 
 BattleList N(Formations) = {

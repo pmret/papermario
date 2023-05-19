@@ -13,25 +13,25 @@ extern Stage N(tik_04);
 extern Stage N(tik_05);
 
 Formation N(Formation_00) = {
-    { .actor = &N(swooper), .home = { .index = BTL_POS_TOP_B }, .priority = 10, },
-    { .actor = &N(swooper), .home = { .index = BTL_POS_TOP_C }, .priority = 9, },
+    ACTOR_BY_IDX(N(swooper), BTL_POS_TOP_B, 10),
+    ACTOR_BY_IDX(N(swooper), BTL_POS_TOP_C, 9),
 };
 
 Formation N(Formation_01) = {
-    { .actor = &N(swooper), .home = { .index = BTL_POS_TOP_A }, .priority = 10, },
-    { .actor = &N(swooper), .home = { .index = BTL_POS_TOP_B }, .priority = 9, },
-    { .actor = &N(swooper), .home = { .index = BTL_POS_TOP_C }, .priority = 8, },
+    ACTOR_BY_IDX(N(swooper), BTL_POS_TOP_A, 10),
+    ACTOR_BY_IDX(N(swooper), BTL_POS_TOP_B, 9),
+    ACTOR_BY_IDX(N(swooper), BTL_POS_TOP_C, 8),
 };
 
 Formation N(Formation_02) = {
-    { .actor = &N(swoopula), .home = { .index = BTL_POS_TOP_B }, .priority = 10, },
-    { .actor = &N(swoopula), .home = { .index = BTL_POS_TOP_C }, .priority = 9, },
+    ACTOR_BY_IDX(N(swoopula), BTL_POS_TOP_B, 10),
+    ACTOR_BY_IDX(N(swoopula), BTL_POS_TOP_C, 9),
 };
 
 Formation N(Formation_03) = {
-    { .actor = &N(swoopula), .home = { .index = BTL_POS_TOP_A }, .priority = 10, },
-    { .actor = &N(swoopula), .home = { .index = BTL_POS_TOP_B }, .priority = 9, },
-    { .actor = &N(swoopula), .home = { .index = BTL_POS_TOP_C }, .priority = 8, },
+    ACTOR_BY_IDX(N(swoopula), BTL_POS_TOP_A, 10),
+    ACTOR_BY_IDX(N(swoopula), BTL_POS_TOP_B, 9),
+    ACTOR_BY_IDX(N(swoopula), BTL_POS_TOP_C, 8),
 };
 
 BattleList N(Formations) = {

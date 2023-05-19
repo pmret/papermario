@@ -1049,7 +1049,7 @@ EvtScript N(findTarget) = {
 Vec3i N(summon_pos) = { NPC_DISPOSE_LOCATION };
 
 Formation N(summon_formation) = {
-    { .actor = &NAMESPACE, .home = { .vec = &N(summon_pos) }, .priority = 100, }
+    ACTOR_BY_POS(NAMESPACE, N(summon_pos), 100)
 };
 
 EvtScript N(summonFriend) = {

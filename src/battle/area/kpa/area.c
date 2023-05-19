@@ -28,177 +28,177 @@ extern Stage N(kpa_14);
 
 Formation N(Formation_00) = {
     { .actor = &N(bony_beetle), .home = { .index = BTL_POS_GROUND_B }, .priority = 10, .var0 = 1, },
-    { .actor = &N(bony_beetle), .home = { .index = BTL_POS_GROUND_C }, .priority = 9, },
+    ACTOR_BY_IDX(N(bony_beetle), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_01) = {
     { .actor = &N(bony_beetle), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, .var0 = 1, },
-    { .actor = &N(bony_beetle), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(bony_beetle), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
+    ACTOR_BY_IDX(N(bony_beetle), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(bony_beetle), BTL_POS_GROUND_C, 8),
 };
 
 Formation N(Formation_02) = {
     { .actor = &N(bony_beetle), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, .var0 = 1, },
-    { .actor = &N(dry_bones), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(dry_bones), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
+    ACTOR_BY_IDX(N(dry_bones), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(dry_bones), BTL_POS_GROUND_C, 8),
 };
 
 Formation N(Formation_03) = {
     { .actor = &N(bony_beetle), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, .var0 = 1, },
-    { .actor = &N(bony_beetle), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(dry_bones), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
+    ACTOR_BY_IDX(N(bony_beetle), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(dry_bones), BTL_POS_GROUND_C, 8),
 };
 
 Formation N(Formation_04) = {
     { .actor = &N(bony_beetle), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, .var0 = 1, },
-    { .actor = &N(bony_beetle), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(magikoopa), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
+    ACTOR_BY_IDX(N(bony_beetle), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(magikoopa), BTL_POS_GROUND_C, 8),
 };
 
 Formation N(Formation_05) = {
     { .actor = &N(bony_beetle), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, .var0 = 1, },
-    { .actor = &N(bony_beetle), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(bony_beetle), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
-    { .actor = &N(magikoopa), .home = { .index = BTL_POS_GROUND_D }, .priority = 7, },
+    ACTOR_BY_IDX(N(bony_beetle), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(bony_beetle), BTL_POS_GROUND_C, 8),
+    ACTOR_BY_IDX(N(magikoopa), BTL_POS_GROUND_D, 7),
 };
 
 Formation N(Formation_06) = {
     { .actor = &N(bony_beetle), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, .var0 = 1, },
-    { .actor = &N(dry_bones), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(bony_beetle), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
-    { .actor = &N(magikoopa), .home = { .index = BTL_POS_GROUND_D }, .priority = 7, },
+    ACTOR_BY_IDX(N(dry_bones), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(bony_beetle), BTL_POS_GROUND_C, 8),
+    ACTOR_BY_IDX(N(magikoopa), BTL_POS_GROUND_D, 7),
 };
 
 Formation N(Formation_07) = {
-    { .actor = &N(dry_bones), .home = { .index = BTL_POS_GROUND_B }, .priority = 10, },
-    { .actor = &N(dry_bones), .home = { .index = BTL_POS_GROUND_C }, .priority = 9, },
+    ACTOR_BY_IDX(N(dry_bones), BTL_POS_GROUND_B, 10),
+    ACTOR_BY_IDX(N(dry_bones), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_08) = {
-    { .actor = &N(dry_bones), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(dry_bones), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(dry_bones), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
+    ACTOR_BY_IDX(N(dry_bones), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(dry_bones), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(dry_bones), BTL_POS_GROUND_C, 8),
 };
 
 Formation N(Formation_09) = {
-    { .actor = &N(dry_bones), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(dry_bones), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(dry_bones), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
-    { .actor = &N(dry_bones), .home = { .index = BTL_POS_GROUND_D }, .priority = 7, },
+    ACTOR_BY_IDX(N(dry_bones), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(dry_bones), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(dry_bones), BTL_POS_GROUND_C, 8),
+    ACTOR_BY_IDX(N(dry_bones), BTL_POS_GROUND_D, 7),
 };
 
 Formation N(Formation_0A) = {
-    { .actor = &N(dry_bones), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(ember), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(ember), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
-    { .actor = &N(ember), .home = { .index = BTL_POS_GROUND_D }, .priority = 7, },
+    ACTOR_BY_IDX(N(dry_bones), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(ember), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(ember), BTL_POS_GROUND_C, 8),
+    ACTOR_BY_IDX(N(ember), BTL_POS_GROUND_D, 7),
 };
 
 Formation N(Formation_0B) = {
-    { .actor = &N(dry_bones), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(dry_bones), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(magikoopa), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
+    ACTOR_BY_IDX(N(dry_bones), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(dry_bones), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(magikoopa), BTL_POS_GROUND_C, 8),
 };
 
 Formation N(Formation_0C) = {
-    { .actor = &N(dry_bones), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
+    ACTOR_BY_IDX(N(dry_bones), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_C, 8),
 };
 
 Formation N(Formation_0D) = {
-    { .actor = &N(dry_bones), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(dry_bones), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(bony_beetle), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
+    ACTOR_BY_IDX(N(dry_bones), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(dry_bones), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(bony_beetle), BTL_POS_GROUND_C, 8),
 };
 
 Formation N(Formation_0E) = {
-    { .actor = &N(dry_bones), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(dry_bones), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(bony_beetle), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
-    { .actor = &N(bony_beetle), .home = { .index = BTL_POS_GROUND_D }, .priority = 7, },
+    ACTOR_BY_IDX(N(dry_bones), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(dry_bones), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(bony_beetle), BTL_POS_GROUND_C, 8),
+    ACTOR_BY_IDX(N(bony_beetle), BTL_POS_GROUND_D, 7),
 };
 
 Formation N(Formation_0F) = {
-    { .actor = &N(hammer_bro), .home = { .index = BTL_POS_GROUND_B }, .priority = 10, },
-    { .actor = &N(hammer_bro), .home = { .index = BTL_POS_GROUND_C }, .priority = 9, },
+    ACTOR_BY_IDX(N(hammer_bro), BTL_POS_GROUND_B, 10),
+    ACTOR_BY_IDX(N(hammer_bro), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_10) = {
-    { .actor = &N(hammer_bro), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(hammer_bro), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(hammer_bro), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
+    ACTOR_BY_IDX(N(hammer_bro), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(hammer_bro), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(hammer_bro), BTL_POS_GROUND_C, 8),
 };
 
 Formation N(Formation_11) = {
-    { .actor = &N(hammer_bro), .home = { .index = BTL_POS_GROUND_B }, .priority = 10, },
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_C }, .priority = 9, },
+    ACTOR_BY_IDX(N(hammer_bro), BTL_POS_GROUND_B, 10),
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_12) = {
-    { .actor = &N(hammer_bro), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(hammer_bro), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
+    ACTOR_BY_IDX(N(hammer_bro), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(hammer_bro), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_C, 8),
 };
 
 Formation N(Formation_13) = {
-    { .actor = &N(hammer_bro), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
+    ACTOR_BY_IDX(N(hammer_bro), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_C, 8),
 };
 
 Formation N(Formation_14) = {
-    { .actor = &N(hammer_bro), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(dry_bones), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(hammer_bro), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
-    { .actor = &N(magikoopa), .home = { .index = BTL_POS_GROUND_D }, .priority = 9, },
+    ACTOR_BY_IDX(N(hammer_bro), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(dry_bones), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(hammer_bro), BTL_POS_GROUND_C, 8),
+    ACTOR_BY_IDX(N(magikoopa), BTL_POS_GROUND_D, 9),
 };
 
 Formation N(Formation_15) = {
-    { .actor = &N(hammer_bro), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(hammer_bro), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(magikoopa_flying), .home = { .index = BTL_POS_AIR_C }, .priority = 8, },
+    ACTOR_BY_IDX(N(hammer_bro), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(hammer_bro), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(magikoopa_flying), BTL_POS_AIR_C, 8),
 };
 
 Formation N(Formation_16) = {
-    { .actor = &N(hammer_bro), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(hammer_bro), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(hammer_bro), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
-    { .actor = &N(magikoopa_flying), .home = { .index = BTL_POS_AIR_D }, .priority = 9, },
+    ACTOR_BY_IDX(N(hammer_bro), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(hammer_bro), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(hammer_bro), BTL_POS_GROUND_C, 8),
+    ACTOR_BY_IDX(N(magikoopa_flying), BTL_POS_AIR_D, 9),
 };
 
 Formation N(Formation_17) = {
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_B }, .priority = 10, },
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_B, 10),
 };
 
 Formation N(Formation_18) = {
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_B }, .priority = 10, },
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_C }, .priority = 9, },
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_B, 10),
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_19) = {
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_C, 8),
 };
 
 Formation N(Formation_1A) = {
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_D }, .priority = 7, },
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_C, 8),
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_D, 7),
 };
 
 Formation N(Formation_1B) = {
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_B }, .priority = 10, },
-    { .actor = &N(hammer_bro), .home = { .index = BTL_POS_GROUND_C }, .priority = 9, },
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_B, 10),
+    ACTOR_BY_IDX(N(hammer_bro), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_1C) = {
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(hammer_bro), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
-    { .actor = &N(hammer_bro), .home = { .index = BTL_POS_GROUND_D }, .priority = 7, },
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(hammer_bro), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_C, 8),
+    ACTOR_BY_IDX(N(hammer_bro), BTL_POS_GROUND_D, 7),
 };
 
 Vec3i N(Formation_1D_pos1) = { 5, 0, -20 };
@@ -210,178 +210,178 @@ Vec3i N(Formation_1D_pos3) = { 85, 0, 0 };
 Vec3i N(Formation_1D_pos4) = { 125, 0, 5 };
 
 Formation N(Formation_1D) = {
-    { .actor = &N(koopatrol), .home = { .vec = &N(Formation_1D_pos1) }, .priority = 10, },
-    { .actor = &N(koopatrol), .home = { .vec = &N(Formation_1D_pos2) }, .priority = 9, },
-    { .actor = &N(koopatrol), .home = { .vec = &N(Formation_1D_pos3) }, .priority = 8, },
-    { .actor = &N(magikoopa), .home = { .vec = &N(Formation_1D_pos4) }, .priority = 7, },
+    ACTOR_BY_POS(N(koopatrol), N(Formation_1D_pos1), 10),
+    ACTOR_BY_POS(N(koopatrol), N(Formation_1D_pos2), 9),
+    ACTOR_BY_POS(N(koopatrol), N(Formation_1D_pos3), 8),
+    ACTOR_BY_POS(N(magikoopa), N(Formation_1D_pos4), 7),
 };
 
 Formation N(Formation_1E) = {
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(magikoopa), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
-    { .actor = &N(magikoopa), .home = { .index = BTL_POS_GROUND_D }, .priority = 7, },
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(magikoopa), BTL_POS_GROUND_C, 8),
+    ACTOR_BY_IDX(N(magikoopa), BTL_POS_GROUND_D, 7),
 };
 
 Formation N(Formation_1F) = {
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(hammer_bro), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(magikoopa), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
-    { .actor = &N(magikoopa), .home = { .index = BTL_POS_GROUND_D }, .priority = 7, },
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(hammer_bro), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(magikoopa), BTL_POS_GROUND_C, 8),
+    ACTOR_BY_IDX(N(magikoopa), BTL_POS_GROUND_D, 7),
 };
 
 Formation N(Formation_20) = {
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_B }, .priority = 10, },
-    { .actor = &N(bony_beetle), .home = { .index = BTL_POS_GROUND_C }, .priority = 9, },
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_B, 10),
+    ACTOR_BY_IDX(N(bony_beetle), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_21) = {
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(bony_beetle), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(bony_beetle), BTL_POS_GROUND_C, 8),
 };
 
 Formation N(Formation_22) = {
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(bony_beetle), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(bony_beetle), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(bony_beetle), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(bony_beetle), BTL_POS_GROUND_C, 8),
 };
 
 Formation N(Formation_23) = {
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(bony_beetle), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(bony_beetle), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_C, 8),
 };
 
 Formation N(Formation_24) = {
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(dry_bones), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(dry_bones), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(dry_bones), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(dry_bones), BTL_POS_GROUND_C, 8),
 };
 
 Formation N(Formation_25) = {
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(magikoopa), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
-    { .actor = &N(magikoopa_flying), .home = { .index = BTL_POS_AIR_D }, .priority = 7, },
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(magikoopa), BTL_POS_GROUND_C, 8),
+    ACTOR_BY_IDX(N(magikoopa_flying), BTL_POS_AIR_D, 7),
 };
 
 Formation N(Formation_26) = {
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(magikoopa), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
-    { .actor = &N(magikoopa), .home = { .index = BTL_POS_GROUND_D }, .priority = 7, },
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(magikoopa), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_C, 8),
+    ACTOR_BY_IDX(N(magikoopa), BTL_POS_GROUND_D, 7),
 };
 
 Formation N(Formation_27) = {
-    { .actor = &N(magikoopa), .home = { .index = BTL_POS_GROUND_B }, .priority = 10, },
-    { .actor = &N(magikoopa), .home = { .index = BTL_POS_GROUND_C }, .priority = 9, },
+    ACTOR_BY_IDX(N(magikoopa), BTL_POS_GROUND_B, 10),
+    ACTOR_BY_IDX(N(magikoopa), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_28) = {
-    { .actor = &N(magikoopa), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(magikoopa), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(magikoopa), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
+    ACTOR_BY_IDX(N(magikoopa), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(magikoopa), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(magikoopa), BTL_POS_GROUND_C, 8),
 };
 
 Formation N(Formation_29) = {
-    { .actor = &N(magikoopa), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(magikoopa_flying), .home = { .index = BTL_POS_AIR_B }, .priority = 9, },
-    { .actor = &N(magikoopa_flying), .home = { .index = BTL_POS_AIR_C }, .priority = 8, },
+    ACTOR_BY_IDX(N(magikoopa), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(magikoopa_flying), BTL_POS_AIR_B, 9),
+    ACTOR_BY_IDX(N(magikoopa_flying), BTL_POS_AIR_C, 8),
 };
 
 Formation N(Formation_2A) = {
-    { .actor = &N(magikoopa), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(magikoopa), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(magikoopa_flying), .home = { .index = BTL_POS_AIR_C }, .priority = 8, },
-    { .actor = &N(magikoopa_flying), .home = { .index = BTL_POS_AIR_D }, .priority = 7, },
+    ACTOR_BY_IDX(N(magikoopa), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(magikoopa), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(magikoopa_flying), BTL_POS_AIR_C, 8),
+    ACTOR_BY_IDX(N(magikoopa_flying), BTL_POS_AIR_D, 7),
 };
 
 Formation N(Formation_2B) = {
-    { .actor = &N(magikoopa), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_D }, .priority = 7, },
+    ACTOR_BY_IDX(N(magikoopa), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_C, 8),
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_D, 7),
 };
 
 Formation N(Formation_2C) = {
-    { .actor = &N(magikoopa), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(magikoopa), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(dry_bones), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
+    ACTOR_BY_IDX(N(magikoopa), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(magikoopa), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(dry_bones), BTL_POS_GROUND_C, 8),
 };
 
 Formation N(Formation_2D) = {
-    { .actor = &N(magikoopa), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(bony_beetle), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(magikoopa), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
+    ACTOR_BY_IDX(N(magikoopa), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(bony_beetle), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(magikoopa), BTL_POS_GROUND_C, 8),
 };
 
 Formation N(Formation_2E) = {
-    { .actor = &N(magikoopa), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(bony_beetle), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(bony_beetle), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
-    { .actor = &N(magikoopa), .home = { .index = BTL_POS_GROUND_D }, .priority = 7, },
+    ACTOR_BY_IDX(N(magikoopa), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(bony_beetle), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(bony_beetle), BTL_POS_GROUND_C, 8),
+    ACTOR_BY_IDX(N(magikoopa), BTL_POS_GROUND_D, 7),
 };
 
 Formation N(Formation_2F) = {
-    { .actor = &N(magikoopa), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(magikoopa), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(magikoopa_flying), .home = { .index = BTL_POS_AIR_C }, .priority = 8, },
+    ACTOR_BY_IDX(N(magikoopa), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(magikoopa), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(magikoopa_flying), BTL_POS_AIR_C, 8),
 };
 
 Formation N(Formation_30) = {
-    { .actor = &N(magikoopa), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(magikoopa), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_D }, .priority = 7, },
+    ACTOR_BY_IDX(N(magikoopa), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(magikoopa), BTL_POS_GROUND_C, 8),
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_D, 7),
 };
 
 Formation N(Formation_31) = {
-    { .actor = &N(magikoopa_flying), .home = { .index = BTL_POS_AIR_B }, .priority = 10, },
-    { .actor = &N(magikoopa_flying), .home = { .index = BTL_POS_AIR_C }, .priority = 9, },
+    ACTOR_BY_IDX(N(magikoopa_flying), BTL_POS_AIR_B, 10),
+    ACTOR_BY_IDX(N(magikoopa_flying), BTL_POS_AIR_C, 9),
 };
 
 Formation N(Formation_32) = {
-    { .actor = &N(magikoopa_flying), .home = { .index = BTL_POS_AIR_A }, .priority = 10, },
-    { .actor = &N(magikoopa_flying), .home = { .index = BTL_POS_AIR_B }, .priority = 9, },
-    { .actor = &N(magikoopa_flying), .home = { .index = BTL_POS_AIR_C }, .priority = 8, },
+    ACTOR_BY_IDX(N(magikoopa_flying), BTL_POS_AIR_A, 10),
+    ACTOR_BY_IDX(N(magikoopa_flying), BTL_POS_AIR_B, 9),
+    ACTOR_BY_IDX(N(magikoopa_flying), BTL_POS_AIR_C, 8),
 };
 
 Formation N(Formation_33) = {
-    { .actor = &N(magikoopa_flying), .home = { .index = BTL_POS_AIR_A }, .priority = 10, },
-    { .actor = &N(magikoopa), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(magikoopa_flying), .home = { .index = BTL_POS_AIR_C }, .priority = 8, },
-    { .actor = &N(magikoopa), .home = { .index = BTL_POS_GROUND_D }, .priority = 7, },
+    ACTOR_BY_IDX(N(magikoopa_flying), BTL_POS_AIR_A, 10),
+    ACTOR_BY_IDX(N(magikoopa), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(magikoopa_flying), BTL_POS_AIR_C, 8),
+    ACTOR_BY_IDX(N(magikoopa), BTL_POS_GROUND_D, 7),
 };
 
 Formation N(Formation_34) = {
-    { .actor = &N(magikoopa_flying), .home = { .index = BTL_POS_AIR_A }, .priority = 10, },
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
+    ACTOR_BY_IDX(N(magikoopa_flying), BTL_POS_AIR_A, 10),
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_C, 8),
 };
 
 Formation N(Formation_35) = {
-    { .actor = &N(magikoopa_flying), .home = { .index = BTL_POS_AIR_B }, .priority = 10, },
-    { .actor = &N(hammer_bro), .home = { .index = BTL_POS_GROUND_C }, .priority = 9, },
+    ACTOR_BY_IDX(N(magikoopa_flying), BTL_POS_AIR_B, 10),
+    ACTOR_BY_IDX(N(hammer_bro), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_36) = {
-    { .actor = &N(magikoopa_flying), .home = { .index = BTL_POS_AIR_A }, .priority = 10, },
-    { .actor = &N(dry_bones), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(dry_bones), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
+    ACTOR_BY_IDX(N(magikoopa_flying), BTL_POS_AIR_A, 10),
+    ACTOR_BY_IDX(N(dry_bones), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(dry_bones), BTL_POS_GROUND_C, 8),
 };
 
 Formation N(Formation_37) = {
-    { .actor = &N(magikoopa_flying), .home = { .index = BTL_POS_AIR_A }, .priority = 10, },
-    { .actor = &N(koopatrol), .home = { .index = BTL_POS_GROUND_B }, .priority = 10, },
-    { .actor = &N(magikoopa_flying), .home = { .index = BTL_POS_AIR_C }, .priority = 9, },
+    ACTOR_BY_IDX(N(magikoopa_flying), BTL_POS_AIR_A, 10),
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_B, 10),
+    ACTOR_BY_IDX(N(magikoopa_flying), BTL_POS_AIR_C, 9),
 };
 
 Formation N(Formation_38) = {
-    { .actor = &N(magikoopa_flying), .home = { .index = BTL_POS_AIR_A }, .priority = 10, },
-    { .actor = &N(hammer_bro), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(hammer_bro), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
-    { .actor = &N(magikoopa_flying), .home = { .index = BTL_POS_AIR_D }, .priority = 7, },
+    ACTOR_BY_IDX(N(magikoopa_flying), BTL_POS_AIR_A, 10),
+    ACTOR_BY_IDX(N(hammer_bro), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(hammer_bro), BTL_POS_GROUND_C, 8),
+    ACTOR_BY_IDX(N(magikoopa_flying), BTL_POS_AIR_D, 7),
 };
 
 BattleList N(Formations) = {

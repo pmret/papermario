@@ -18,7 +18,7 @@ extern Stage N(kzn_05);
 Vec3i N(lava_piranha_pos) = { 60, 60, 0 };
 
 Formation N(Formation_00) = {
-    { .actor = &N(lava_piranha), .home = { .vec = &N(lava_piranha_pos) }, .priority = 60, },
+    ACTOR_BY_POS(N(lava_piranha), N(lava_piranha_pos), 60),
 };
 
 Vec3i N(petit_piranha_pos1) = { 40, 60, 0 };
@@ -26,8 +26,8 @@ Vec3i N(petit_piranha_pos1) = { 40, 60, 0 };
 Vec3i N(petit_piranha_pos2) = { 80, 60, 0 };
 
 Formation N(Formation_01) = {
-    { .actor = &N(petit_piranha), .home = { .vec = &N(petit_piranha_pos1) }, .priority = 10, },
-    { .actor = &N(petit_piranha), .home = { .vec = &N(petit_piranha_pos2) }, .priority = 10, },
+    ACTOR_BY_POS(N(petit_piranha), N(petit_piranha_pos1), 10),
+    ACTOR_BY_POS(N(petit_piranha), N(petit_piranha_pos2), 10),
 };
 
 BattleList N(Formations) = {

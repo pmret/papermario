@@ -1220,7 +1220,7 @@ ActorBlueprint N(clone) = {
 Vec3i N(pos_crystal_clone) = { NPC_DISPOSE_LOCATION };
 
 Formation N(clone_formation) = {
-    { .actor = &N(clone), .home = { .vec = &N(pos_crystal_clone) }, .priority = 0 },
+    ACTOR_BY_POS(N(clone), N(pos_crystal_clone), 0),
 };
 
 EvtScript N(MakeIllusions) = {
@@ -1416,15 +1416,15 @@ EvtScript N(MakeIllusions) = {
 };
 
 Formation N(formation_bit_1) = {
-    { .actor = &b_area_pra2_crystal_bit_1, .home = { .vec = &N(pos_crystal_clone) }, .priority = 0 },
+    ACTOR_BY_POS(b_area_pra2_crystal_bit_1, N(pos_crystal_clone), 0),
 };
 
 Formation N(formation_bit_2) = {
-    { .actor = &b_area_pra2_crystal_bit_2, .home = { .vec = &N(pos_crystal_clone) }, .priority = 0 },
+    ACTOR_BY_POS(b_area_pra2_crystal_bit_2, N(pos_crystal_clone), 0),
 };
 
 Formation N(formation_bit_3) = {
-    { .actor = &b_area_pra2_crystal_bit_3, .home = { .vec = &N(pos_crystal_clone) }, .priority = 0 },
+    ACTOR_BY_POS(b_area_pra2_crystal_bit_3, N(pos_crystal_clone), 0),
 };
 
 s32 N(array_1)[16] = { };

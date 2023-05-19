@@ -24,14 +24,14 @@ extern Stage N(kpa_13);
 extern Stage N(kpa_14);
 
 Formation N(Formation_00) = {
-    { .actor = &N(bombshell_bill), .home = { .index = BTL_POS_GROUND_B }, .priority = 10, },
-    { .actor = &N(bombshell_bill), .home = { .index = BTL_POS_GROUND_C }, .priority = 9, },
+    ACTOR_BY_IDX(N(bombshell_bill), BTL_POS_GROUND_B, 10),
+    ACTOR_BY_IDX(N(bombshell_bill), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_01) = {
-    { .actor = &N(bombshell_bill), .home = { .index = BTL_POS_GROUND_A }, .priority = 10, },
-    { .actor = &N(bombshell_bill), .home = { .index = BTL_POS_GROUND_B }, .priority = 9, },
-    { .actor = &N(bombshell_bill), .home = { .index = BTL_POS_GROUND_C }, .priority = 8, },
+    ACTOR_BY_IDX(N(bombshell_bill), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(bombshell_bill), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(bombshell_bill), BTL_POS_GROUND_C, 8),
 };
 
 Vec3i N(blaster_pos_1) = { 70, 0, -20 };
@@ -39,22 +39,22 @@ Vec3i N(blaster_pos_1) = { 70, 0, -20 };
 Vec3i N(blaster_pos_2) = { 100, 0, 0 };
 
 Formation N(Formation_02) = {
-    { .actor = &N(bombshell_bill_blaster), .home = { .vec = &N(blaster_pos_1) }, .priority = 10, },
-    { .actor = &N(bombshell_bill_blaster), .home = { .vec = &N(blaster_pos_2) }, .priority = 9, },
+    ACTOR_BY_POS(N(bombshell_bill_blaster), N(blaster_pos_1), 10),
+    ACTOR_BY_POS(N(bombshell_bill_blaster), N(blaster_pos_2), 9),
 };
 
 Vec3i N(pos_3) = { 130, 0, 25 };
 
 Formation N(Formation_03) = {
-    { .actor = &N(bombshell_bill_blaster), .home = { .vec = &N(blaster_pos_1) }, .priority = 10, },
-    { .actor = &N(bombshell_bill_blaster), .home = { .vec = &N(blaster_pos_2) }, .priority = 9, },
-    { .actor = &N(koopatrol), .home = { .vec = &N(pos_3) }, .priority = 8, },
+    ACTOR_BY_POS(N(bombshell_bill_blaster), N(blaster_pos_1), 10),
+    ACTOR_BY_POS(N(bombshell_bill_blaster), N(blaster_pos_2), 9),
+    ACTOR_BY_POS(N(koopatrol), N(pos_3), 8),
 };
 
 Formation N(Formation_04) = {
-    { .actor = &N(bombshell_bill_blaster), .home = { .vec = &N(blaster_pos_1) }, .priority = 10, },
-    { .actor = &N(bombshell_bill_blaster), .home = { .vec = &N(blaster_pos_2) }, .priority = 9, },
-    { .actor = &N(magikoopa), .home = { .vec = &N(pos_3) }, .priority = 8, },
+    ACTOR_BY_POS(N(bombshell_bill_blaster), N(blaster_pos_1), 10),
+    ACTOR_BY_POS(N(bombshell_bill_blaster), N(blaster_pos_2), 9),
+    ACTOR_BY_POS(N(magikoopa), N(pos_3), 8),
 };
 
 BattleList N(Formations) = {

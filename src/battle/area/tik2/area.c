@@ -16,15 +16,15 @@ extern Stage N(tik_05);
 Vec3i N(blooper_pos) = { 80, 45, -10 };
 
 Formation N(Formation_00) = {
-    { .actor = &N(blooper), .home = { .vec = &N(blooper_pos) }, .priority = 10, },
+    ACTOR_BY_POS(N(blooper), N(blooper_pos), 10),
 };
 
 Formation N(Formation_01) = {
-    { .actor = &N(electro_blooper), .home = { .vec = &N(blooper_pos) }, .priority = 10, },
+    ACTOR_BY_POS(N(electro_blooper), N(blooper_pos), 10),
 };
 
 Formation N(Formation_02) = {
-    { .actor = &N(super_blooper), .home = { .vec = &N(blooper_pos) }, .priority = 10, },
+    ACTOR_BY_POS(N(super_blooper), N(blooper_pos), 10),
 };
 
 // ソ is encoded as 0x83 0x5C, so it needs another backslash to be interpreted as valid escape sequence
