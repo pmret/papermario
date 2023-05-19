@@ -41,7 +41,7 @@ Formation N(Formation_04) = {
 };
 
 Formation N(Formation_05) = {
-    { .actor = &N(tubba_blubba), .home = { .vec = &N(vector3D_8021B348) }, .priority = 10, .var0 = 1 },
+    ACTOR_BY_POS_INIT_1(N(tubba_blubba), N(vector3D_8021B348), 10, 1),
 };
 
 BattleList N(Formations) = {

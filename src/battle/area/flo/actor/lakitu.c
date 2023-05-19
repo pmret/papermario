@@ -383,7 +383,7 @@ EvtScript N(attackSpinyFlip) = {
 Vec3i N(spiny_pos) = { NPC_DISPOSE_LOCATION };
 
 Formation N(formation_spiny) = {
-    { .actor = &b_area_flo_spiny, .home = { .vec = &N(spiny_pos) }, .priority = 100, .var0 = 0x00000001, },
+    ACTOR_BY_POS_INIT_1(b_area_flo_spiny, N(spiny_pos), 100, 0x00000001),
 };
 
 EvtScript N(summonSpiny) = {

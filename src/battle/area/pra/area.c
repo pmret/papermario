@@ -63,9 +63,9 @@ Vec3i N(pos_swoopula_3)[] = {
 Vec3i N(pos_magikoopa) = { 120, 55, 25 };
 
 Formation N(Formation_04) = {
-    { .actor = &N(swoopula), .home = { .vec = &N(pos_swoopula_3)[0] }, .priority = 10, .var0 = 0xFFFFFFFF },
-    { .actor = &N(swoopula), .home = { .vec = &N(pos_swoopula_3)[1] }, .priority = 9, .var0 = 0xFFFFFFFF },
-    { .actor = &N(swoopula), .home = { .vec = &N(pos_swoopula_3)[2] }, .priority = 8, .var0 = 0xFFFFFFFF },
+    ACTOR_BY_POS_INIT_1(N(swoopula), N(pos_swoopula_3)[0], 10, 0xFFFFFFFF),
+    ACTOR_BY_POS_INIT_1(N(swoopula), N(pos_swoopula_3)[1], 9, 0xFFFFFFFF),
+    ACTOR_BY_POS_INIT_1(N(swoopula), N(pos_swoopula_3)[2], 8, 0xFFFFFFFF),
     ACTOR_BY_POS(N(yellow_magikoopa_flying), N(pos_magikoopa), 7),
 };
 

@@ -1125,7 +1125,7 @@ EvtScript N(takeTurn) = {
 Vec3i N(lava_bud_pos) = { 260, 0, 0 };
 
 Formation N(formation_lava_bud_1) = {
-    { .actor = &b_area_kzn2_lava_bud, .home = { .vec = &N(lava_bud_pos) }, .priority = 80, .var0 = 1, },
+    ACTOR_BY_POS_INIT_1(b_area_kzn2_lava_bud, N(lava_bud_pos), 80, 1),
 };
 
 Formation N(formation_lava_bud_2) = {

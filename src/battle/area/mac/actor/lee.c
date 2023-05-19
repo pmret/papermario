@@ -1075,7 +1075,7 @@ EvtScript N(nextTurn_80220450) = {
 };
 
 Formation N(formation_goombario) = {
-    { .actor = &N(goombario), .home = { .vec = &N(vector3D_8021E940) }},
+    ACTOR_BY_POS(N(goombario), N(vector3D_8021E940), 0),
 };
 
 s32 N(IdleAnimations_80220540)[] = {
@@ -1604,7 +1604,7 @@ EvtScript N(nextTurn_802221A0) = {
 };
 
 Formation N(formation_kooper) = {
-    { .actor = &N(kooper), .home = { .vec = &N(vector3D_8021E940) }}
+    ACTOR_BY_POS(N(kooper), N(vector3D_8021E940), 0)
 };
 
 s32 N(IdleAnimations_80222290)[] = {
@@ -1958,7 +1958,7 @@ EvtScript N(nextTurn_80223298) = {
 };
 
 Formation N(formation_bombette) = {
-    { .actor = &N(bombette), .home = { .vec = &N(vector3D_8021E940) }}
+    ACTOR_BY_POS(N(bombette), N(vector3D_8021E940), 0)
 };
 
 s32 N(IdleAnimations_80223388)[] = {
@@ -2320,7 +2320,7 @@ EvtScript N(nextTurn_80224320) = {
 };
 
 Formation N(formation_parakarry) = {
-    { .actor = &N(parakarry), .home = { .vec = &N(vector3D_8021E940) }}
+    ACTOR_BY_POS(N(parakarry), N(vector3D_8021E940), 0)
 };
 
 s32 N(IdleAnimations_80224410)[] = {
@@ -2771,7 +2771,7 @@ EvtScript N(nextTurn_80225884) = {
 };
 
 Formation N(formation_bow) = {
-    { .actor = &N(bow), .home = { .vec = &N(vector3D_8021E940) }}
+    ACTOR_BY_POS(N(bow), N(vector3D_8021E940), 0)
 };
 
 s32 N(IdleAnimations_80225974)[] = {
@@ -3250,7 +3250,7 @@ EvtScript N(nextTurn_80226880) = {
 };
 
 Formation N(formation_watt) = {
-    { .actor = &N(watt), .home = { .vec = &N(vector3D_8021E940) }}
+    ACTOR_BY_POS(N(watt), N(vector3D_8021E940), 0)
 };
 
 s32 N(IdleAnimations_8022697C)[] = {
@@ -3724,7 +3724,7 @@ EvtScript N(nextTurn_8022831C) = {
 };
 
 Formation N(formation_sushie) = {
-    { .actor = &N(sushie), .home = { .vec = &N(vector3D_8021E940) }}
+    ACTOR_BY_POS(N(sushie), N(vector3D_8021E940), 0)
 };
 
 s32 N(IdleAnimations_8022840C)[] = {
@@ -4119,7 +4119,7 @@ EvtScript N(nextTurn_80229658) = {
 };
 
 Formation N(formation_lakilester) = {
-    { .actor = &N(lakilester), .home = { .vec = &N(vector3D_8021E940) }}
+    ACTOR_BY_POS(N(lakilester), N(vector3D_8021E940), 0)
 };
 
 API_CALLABLE(func_802197B8_465C48) {

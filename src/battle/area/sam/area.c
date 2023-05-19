@@ -92,9 +92,9 @@ Formation N(Formation_02) = {
     ACTOR_BY_IDX(N(gulpit), BTL_POS_GROUND_C, 19),
     ACTOR_BY_POS(N(gulpit_rocks), N(pos_rocks_1)[0], 9),
     ACTOR_BY_POS(N(gulpit_rocks), N(pos_rocks_1)[1], 8),
-    { .actor = &N(gulpit_rocks), .home = { .vec = &N(pos_rocks_1)[2] }, .priority = 7, .var0 = 1 },
+    ACTOR_BY_POS_INIT_1(N(gulpit_rocks), N(pos_rocks_1)[2], 7, 1),
     ACTOR_BY_POS(N(gulpit_rocks), N(pos_rocks_1)[3], 6),
-    { .actor = &N(gulpit_rocks), .home = { .vec = &N(pos_rocks_1)[4] }, .priority = 5, .var0 = 1 },
+    ACTOR_BY_POS_INIT_1(N(gulpit_rocks), N(pos_rocks_1)[4], 5, 1),
 };
 
 Formation N(Formation_03) = {
@@ -103,9 +103,9 @@ Formation N(Formation_03) = {
     ACTOR_BY_IDX(N(gulpit), BTL_POS_GROUND_C, 18),
     ACTOR_BY_POS(N(gulpit_rocks), N(pos_rocks_2)[0], 9),
     ACTOR_BY_POS(N(gulpit_rocks), N(pos_rocks_2)[1], 8),
-    { .actor = &N(gulpit_rocks), .home = { .vec = &N(pos_rocks_2)[2] }, .priority = 7, .var0 = 1 },
+    ACTOR_BY_POS_INIT_1(N(gulpit_rocks), N(pos_rocks_2)[2], 7, 1),
     ACTOR_BY_POS(N(gulpit_rocks), N(pos_rocks_2)[3], 6),
-    { .actor = &N(gulpit_rocks), .home = { .vec = &N(pos_rocks_2)[4] }, .priority = 5, .var0 = 1 },
+    ACTOR_BY_POS_INIT_1(N(gulpit_rocks), N(pos_rocks_2)[4], 5, 1),
 };
 
 Formation N(Formation_04) = {
@@ -114,9 +114,9 @@ Formation N(Formation_04) = {
     ACTOR_BY_IDX(N(frost_piranha), BTL_POS_GROUND_C, 18),
     ACTOR_BY_POS(N(gulpit_rocks), N(pos_rocks_3)[0], 9),
     ACTOR_BY_POS(N(gulpit_rocks), N(pos_rocks_3)[1], 8),
-    { .actor = &N(gulpit_rocks), .home = { .vec = &N(pos_rocks_3)[2] }, .priority = 7, .var0 = 1 },
+    ACTOR_BY_POS_INIT_1(N(gulpit_rocks), N(pos_rocks_3)[2], 7, 1),
     ACTOR_BY_POS(N(gulpit_rocks), N(pos_rocks_3)[3], 6),
-    { .actor = &N(gulpit_rocks), .home = { .vec = &N(pos_rocks_3)[4] }, .priority = 5, .var0 = 1 },
+    ACTOR_BY_POS_INIT_1(N(gulpit_rocks), N(pos_rocks_3)[4], 5, 1),
 };
 
 Formation N(Formation_05) = {
@@ -125,9 +125,9 @@ Formation N(Formation_05) = {
     ACTOR_BY_IDX(N(gulpit), BTL_POS_GROUND_C, 18),
     ACTOR_BY_POS(N(gulpit_rocks), N(pos_rocks_4)[0], 9),
     ACTOR_BY_POS(N(gulpit_rocks), N(pos_rocks_4)[1], 8),
-    { .actor = &N(gulpit_rocks), .home = { .vec = &N(pos_rocks_4)[2] }, .priority = 7, .var0 = 1 },
+    ACTOR_BY_POS_INIT_1(N(gulpit_rocks), N(pos_rocks_4)[2], 7, 1),
     ACTOR_BY_POS(N(gulpit_rocks), N(pos_rocks_4)[3], 6),
-    { .actor = &N(gulpit_rocks), .home = { .vec = &N(pos_rocks_4)[4] }, .priority = 5, .var0 = 1 },
+    ACTOR_BY_POS_INIT_1(N(gulpit_rocks), N(pos_rocks_4)[4], 5, 1),
 };
 
 Formation N(Formation_06) = {
@@ -137,9 +137,9 @@ Formation N(Formation_06) = {
     ACTOR_BY_IDX(N(frost_piranha), BTL_POS_GROUND_D, 17),
     ACTOR_BY_POS(N(gulpit_rocks), N(pos_rocks_5)[0], 9),
     ACTOR_BY_POS(N(gulpit_rocks), N(pos_rocks_5)[1], 8),
-    { .actor = &N(gulpit_rocks), .home = { .vec = &N(pos_rocks_5)[2] }, .priority = 7, .var0 = 1 },
+    ACTOR_BY_POS_INIT_1(N(gulpit_rocks), N(pos_rocks_5)[2], 7, 1),
     ACTOR_BY_POS(N(gulpit_rocks), N(pos_rocks_5)[3], 6),
-    { .actor = &N(gulpit_rocks), .home = { .vec = &N(pos_rocks_5)[4] }, .priority = 5, .var0 = 1 },
+    ACTOR_BY_POS_INIT_1(N(gulpit_rocks), N(pos_rocks_5)[4], 5, 1),
 };
 
 Formation N(Formation_07) = {
@@ -160,9 +160,9 @@ Formation N(Formation_09) = {
     ACTOR_BY_IDX(N(gulpit), BTL_POS_GROUND_C, 9),
     ACTOR_BY_POS(N(gulpit_rocks), N(pos_rocks_6)[0], 9),
     ACTOR_BY_POS(N(gulpit_rocks), N(pos_rocks_6)[1], 8),
-    { .actor = &N(gulpit_rocks), .home = { .vec = &N(pos_rocks_6)[2] }, .priority = 7, .var0 = 1 },
+    ACTOR_BY_POS_INIT_1(N(gulpit_rocks), N(pos_rocks_6)[2], 7, 1),
     ACTOR_BY_POS(N(gulpit_rocks), N(pos_rocks_6)[3], 6),
-    { .actor = &N(gulpit_rocks), .home = { .vec = &N(pos_rocks_6)[4] }, .priority = 5, .var0 = 1 },
+    ACTOR_BY_POS_INIT_1(N(gulpit_rocks), N(pos_rocks_6)[4], 5, 1),
 };
 
 Formation N(Formation_0A) = {
@@ -171,9 +171,9 @@ Formation N(Formation_0A) = {
     ACTOR_BY_IDX(N(frost_piranha), BTL_POS_GROUND_C, 8),
     ACTOR_BY_POS(N(gulpit_rocks), N(pos_rocks_7)[0], 9),
     ACTOR_BY_POS(N(gulpit_rocks), N(pos_rocks_7)[1], 8),
-    { .actor = &N(gulpit_rocks), .home = { .vec = &N(pos_rocks_7)[2] }, .priority = 7, .var0 = 1 },
+    ACTOR_BY_POS_INIT_1(N(gulpit_rocks), N(pos_rocks_7)[2], 7, 1),
     ACTOR_BY_POS(N(gulpit_rocks), N(pos_rocks_7)[3], 6),
-    { .actor = &N(gulpit_rocks), .home = { .vec = &N(pos_rocks_7)[4] }, .priority = 5, .var0 = 1 },
+    ACTOR_BY_POS_INIT_1(N(gulpit_rocks), N(pos_rocks_7)[4], 5, 1),
 };
 
 Formation N(Formation_0B) = {
@@ -183,9 +183,9 @@ Formation N(Formation_0B) = {
     ACTOR_BY_IDX(N(gulpit), BTL_POS_GROUND_D, 7),
     ACTOR_BY_POS(N(gulpit_rocks), N(pos_rocks_8)[0], 9),
     ACTOR_BY_POS(N(gulpit_rocks), N(pos_rocks_8)[1], 8),
-    { .actor = &N(gulpit_rocks), .home = { .vec = &N(pos_rocks_8)[2] }, .priority = 7, .var0 = 1 },
+    ACTOR_BY_POS_INIT_1(N(gulpit_rocks), N(pos_rocks_8)[2], 7, 1),
     ACTOR_BY_POS(N(gulpit_rocks), N(pos_rocks_8)[3], 6),
-    { .actor = &N(gulpit_rocks), .home = { .vec = &N(pos_rocks_8)[4] }, .priority = 5, .var0 = 1 },
+    ACTOR_BY_POS_INIT_1(N(gulpit_rocks), N(pos_rocks_8)[4], 5, 1),
 };
 
 Formation N(Formation_0C) = {

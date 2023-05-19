@@ -22,7 +22,7 @@ Vec3i N(pos01) = { 54, 0,  32 };
 
 Formation N(Formation_00) = {
     ACTOR_BY_POS(N(blue_goomba), N(pos00), 10),
-    { .actor = &N(red_goomba),  .home = { .vec = &N(pos01) }, .priority = 10 },
+    ACTOR_BY_POS(N(red_goomba),  N(pos01), 10),
 };
 
 Vec3i N(pos02) = {  10, 0,  10 };
@@ -31,10 +31,10 @@ Vec3i N(pos04) = { 125, 0,  20 };
 Vec3i N(pos05) = { -40, 0, -45 };
 
 Formation N(Formation_01) = {
-    { .actor = &N(goomba_king),   .home = { .vec = &N(pos02) }, .priority = 10 },
-    { .actor = &N(red_goomba_2),  .home = { .vec = &N(pos03) }, .priority = 10 },
+    ACTOR_BY_POS(N(goomba_king),   N(pos02), 10),
+    ACTOR_BY_POS(N(red_goomba_2),  N(pos03), 10),
     ACTOR_BY_POS(N(blue_goomba_2), N(pos04), 10),
-    { .actor = &N(goomnut_tree),  .home = { .vec = &N(pos05) }, .priority = 10 },
+    ACTOR_BY_POS(N(goomnut_tree),  N(pos05), 10),
 };
 
 BattleList N(Formations) = {

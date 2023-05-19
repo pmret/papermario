@@ -424,8 +424,21 @@ extern BattleArea gBattleAreas[0x30];
 #define BATTLE(formation, stage, name) { name, ARRAY_COUNT(formation), (Formation*) formation, &stage }
 #define BATTLE_WITH_SCRIPT(formation, stage, script, name) { name, ARRAY_COUNT(formation), (Formation*) formation, &stage, &script }
 
-#define ACTOR_BY_IDX(_name, _idx, _priority) { .actor = &_name, .home = { .index = _idx }, .priority = _priority, }
-#define ACTOR_BY_POS(_name, _pos, _priority) { .actor = &_name, .home = { .vec = &_pos }, .priority = _priority, }
+#define ACTOR_BY_IDX(_name, _idx, _priority) \
+    { .actor = &_name, .home = { .index = _idx }, .priority = _priority }
+#define ACTOR_BY_POS(_name, _pos, _priority) \
+    { .actor = &_name, .home = { .vec = &_pos }, .priority = _priority }
+
+#define ACTOR_BY_IDX_INIT_1(_name, _idx, _priority, _var0) \
+    { .actor = &_name, .home = { .index = _idx }, .priority = _priority, .var0 = _var0 }
+#define ACTOR_BY_POS_INIT_1(_name, _pos, _priority, _var0) \
+    { .actor = &_name, .home = { .vec = &_pos }, .priority = _priority, .var0 = _var0 }
+
+#define ACTOR_BY_IDX_INIT_2(_name, _idx, _priority, args...) \
+    { .actor = &_name, .home = { .index = _idx }, .priority = _priority, args }
+#define ACTOR_BY_POS_INIT_2(_name, _pos, _priority, _var0, _var1) \
+    { .actor = &_name, .home = { .vec = &_pos }, .priority = _priority, .var0 = _var0, .var1 = _var1 }
+
 
 #define STAGE(_name, _stage) { .name = _name, .stage = &_stage }
 

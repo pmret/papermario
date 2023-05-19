@@ -733,11 +733,11 @@ EvtScript N(summonBackup) = {
 Vec3i N(vector3D_8021A8B4) = { NPC_DISPOSE_LOCATION };
 
 Formation N(specialFormation_8021A8C0) = {
-    { .actor = &NAMESPACE, .home = { .vec = &N(vector3D_8021A8B4) }, .priority = 100, .var0 = 0 },
+    ACTOR_BY_POS_INIT_1(NAMESPACE, N(vector3D_8021A8B4), 100, 0),
 };
 
 Formation N(specialFormation_8021A8DC) = {
-    { .actor = &NAMESPACE, .home = { .vec = &N(vector3D_8021A8B4) }, .priority = 100, .var0 = 1 },
+    ACTOR_BY_POS_INIT_1(NAMESPACE, N(vector3D_8021A8B4), 100, 1),
 };
 
 EvtScript N(becomeShyGuy) = {

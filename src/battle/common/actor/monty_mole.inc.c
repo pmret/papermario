@@ -187,11 +187,11 @@ ActorBlueprint N(hole) = {
 Vec3i N(hole_pos) = { NPC_DISPOSE_LOCATION, };
 
 Formation N(formation_hole_1) = {
-    { .actor = &N(hole), .home = { .vec = &N(hole_pos) },},
+    ACTOR_BY_POS(N(hole), N(hole_pos), 0),
 };
 
 Formation N(formation_hole_2) = {
-    { .actor = &N(hole), .home = { .vec = &N(hole_pos) }, .var0 = 1 },
+    ACTOR_BY_POS_INIT_1(N(hole), N(hole_pos), 0, 1),
 };
 
 EvtScript N(makeHole) = {

@@ -552,7 +552,7 @@ Formation N(formation_tuff_puff_small) = {
 };
 
 Formation N(formation_tuff_puff_large) = {
-    { .actor = &b_area_flo2_tuff_puff, .home = { .vec = &N(tuff_puff_pos) }, .priority = 0, .var0 = 1, },
+    ACTOR_BY_POS_INIT_1(b_area_flo2_tuff_puff, N(tuff_puff_pos), 0, 1),
 };
 
 EvtScript N(spawnTuffPuff) = {

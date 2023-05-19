@@ -44,7 +44,7 @@ Stage NAMESPACE = {
 Vec3i N(WhackaPos) = { 116, 0, -30 };
 
 Formation N(WhackaFormation) = {
-    { .actor = &N(whacka), .home = { .vec = &N(WhackaPos) }},
+    ACTOR_BY_POS(N(whacka), N(WhackaPos), 0),
 };
 
 #define NAMESPACE b_area_iwa_iwa_01_whacka

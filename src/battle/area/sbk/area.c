@@ -31,34 +31,34 @@ Formation N(Formation_03) = {
 };
 
 Formation N(Formation_04) = {
-    { .actor = &N(pokey),  .home = { .index = BTL_POS_GROUND_B }, .priority = 10 },
+    ACTOR_BY_IDX(N(pokey), BTL_POS_GROUND_B, 10),
     ACTOR_BY_IDX(N(bandit), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_05) = {
-    { .actor = &N(pokey),  .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
-    { .actor = &N(pokey),  .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
+    ACTOR_BY_IDX(N(pokey), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(pokey), BTL_POS_GROUND_B, 9),
     ACTOR_BY_IDX(N(bandit), BTL_POS_GROUND_C, 8),
 };
 
 Formation N(Formation_06) = {
-    { .actor = &N(pokey),  .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
-    { .actor = &N(pokey),  .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
+    ACTOR_BY_IDX(N(pokey), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(pokey), BTL_POS_GROUND_B, 9),
     ACTOR_BY_IDX(N(bandit), BTL_POS_GROUND_C, 8),
     ACTOR_BY_IDX(N(bandit), BTL_POS_GROUND_D, 7),
 };
 
 Formation N(Formation_07) = {
-    { .actor = &N(pokey),  .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
+    ACTOR_BY_IDX(N(pokey), BTL_POS_GROUND_A, 10),
     ACTOR_BY_IDX(N(bandit), BTL_POS_GROUND_B, 9),
-    { .actor = &N(pokey),  .home = { .index = BTL_POS_GROUND_C }, .priority = 8 },
+    ACTOR_BY_IDX(N(pokey), BTL_POS_GROUND_C, 8),
 };
 
 Formation N(Formation_08) = {
-    { .actor = &N(pokey),  .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
-    { .actor = &N(pokey),  .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
+    ACTOR_BY_IDX(N(pokey), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(pokey), BTL_POS_GROUND_B, 9),
     ACTOR_BY_IDX(N(bandit), BTL_POS_GROUND_C, 8),
-    { .actor = &N(pokey),  .home = { .index = BTL_POS_GROUND_D }, .priority = 7 },
+    ACTOR_BY_IDX(N(pokey), BTL_POS_GROUND_D, 7),
 };
 
 Formation N(Formation_09) = {
@@ -85,25 +85,25 @@ Formation N(Formation_0C) = {
 
 Formation N(Formation_0D) = {
     ACTOR_BY_IDX(N(bandit), BTL_POS_GROUND_B, 10),
-    { .actor = &N(pokey),  .home = { .index = BTL_POS_GROUND_C }, .priority = 9 },
+    ACTOR_BY_IDX(N(pokey), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_0E) = {
     ACTOR_BY_IDX(N(bandit), BTL_POS_GROUND_A, 10),
     ACTOR_BY_IDX(N(bandit), BTL_POS_GROUND_B, 9),
-    { .actor = &N(pokey),  .home = { .index = BTL_POS_GROUND_C }, .priority = 8 },
+    ACTOR_BY_IDX(N(pokey), BTL_POS_GROUND_C, 8),
 };
 
 Formation N(Formation_0F) = {
     ACTOR_BY_IDX(N(bandit), BTL_POS_GROUND_A, 10),
     ACTOR_BY_IDX(N(bandit), BTL_POS_GROUND_B, 9),
-    { .actor = &N(pokey),  .home = { .index = BTL_POS_GROUND_C }, .priority = 8 },
-    { .actor = &N(pokey),  .home = { .index = BTL_POS_GROUND_D }, .priority = 7 },
+    ACTOR_BY_IDX(N(pokey), BTL_POS_GROUND_C, 8),
+    ACTOR_BY_IDX(N(pokey), BTL_POS_GROUND_D, 7),
 };
 
 Formation N(Formation_10) = {
     ACTOR_BY_IDX(N(bandit), BTL_POS_GROUND_A, 10),
-    { .actor = &N(pokey),  .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
+    ACTOR_BY_IDX(N(pokey), BTL_POS_GROUND_B, 9),
     ACTOR_BY_IDX(N(bandit), BTL_POS_GROUND_C, 8),
 };
 

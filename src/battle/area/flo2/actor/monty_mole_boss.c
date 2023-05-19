@@ -195,7 +195,7 @@ Formation N(formation_hole_1) = {
 };
 
 Formation N(formation_hole_2) = {
-    { .actor = &N(hole), .home = { .vec = &N(hole_pos) }, .priority = 0, .var0 = 1, },
+    ACTOR_BY_POS_INIT_1(N(hole), N(hole_pos), 0, 1),
 };
 
 EvtScript N(onDeath) = {

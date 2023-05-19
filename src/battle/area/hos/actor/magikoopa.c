@@ -1349,11 +1349,11 @@ ActorBlueprint N(flying_clone) = {
 Vec3i N(vector3D_802216BC) = { 0, -1000, 0 };
 
 Formation N(specialFormation_802216C8) = {
-    { .actor = &N(clone), .home = { .vec = &N(vector3D_802216BC) }},
+    ACTOR_BY_POS(N(clone), N(vector3D_802216BC), 0),
 };
 
 Formation N(specialFormation_802216E4) = {
-    { .actor = &N(flying_clone), .home = { .vec = &N(vector3D_802216BC) }},
+    ACTOR_BY_POS(N(flying_clone), N(vector3D_802216BC), 0),
 };
 
 EvtScript N(makeCopy) = {

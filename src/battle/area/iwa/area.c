@@ -28,12 +28,12 @@ Formation N(Formation_02) = {
 };
 
 Formation N(Formation_03) = {
-    { .actor = &N(cleft),        .home = { .index = BTL_POS_GROUND_B }, .priority = 10 },
+    ACTOR_BY_IDX(N(cleft), BTL_POS_GROUND_B, 10),
     ACTOR_BY_IDX(N(monty_mole), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_04) = {
-    { .actor = &N(cleft),        .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
+    ACTOR_BY_IDX(N(cleft), BTL_POS_GROUND_A, 10),
     ACTOR_BY_IDX(N(monty_mole), BTL_POS_GROUND_B, 9),
     ACTOR_BY_IDX(N(monty_mole), BTL_POS_GROUND_C, 8),
 };
@@ -62,18 +62,18 @@ Formation N(Formation_08) = {
 
 Formation N(Formation_09) = {
     ACTOR_BY_IDX(N(monty_mole), BTL_POS_GROUND_B, 10),
-    { .actor = &N(cleft),        .home = { .index = BTL_POS_GROUND_C }, .priority = 9 },
+    ACTOR_BY_IDX(N(cleft), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_0A) = {
     ACTOR_BY_IDX(N(monty_mole), BTL_POS_GROUND_A, 10),
     ACTOR_BY_IDX(N(monty_mole), BTL_POS_GROUND_B, 9),
-    { .actor = &N(cleft),        .home = { .index = BTL_POS_GROUND_C }, .priority = 8 },
+    ACTOR_BY_IDX(N(cleft), BTL_POS_GROUND_C, 8),
 };
 
 Formation N(Formation_0B) = {
     ACTOR_BY_IDX(N(monty_mole), BTL_POS_GROUND_A, 10),
-    { .actor = &N(cleft),        .home = { .index = BTL_POS_GROUND_B }, .priority = 9 },
+    ACTOR_BY_IDX(N(cleft), BTL_POS_GROUND_B, 9),
     ACTOR_BY_IDX(N(monty_mole), BTL_POS_GROUND_C, 8),
 };
 
@@ -84,9 +84,9 @@ Formation N(Formation_0C) = {
 };
 
 Formation N(Formation_0D) = {
-    { .actor = &N(cleft),        .home = { .index = BTL_POS_GROUND_A }, .priority = 10 },
+    ACTOR_BY_IDX(N(cleft), BTL_POS_GROUND_A, 10),
     ACTOR_BY_IDX(N(monty_mole), BTL_POS_GROUND_B, 9),
-    { .actor = &N(whacka),       .home = { .index = BTL_POS_GROUND_C }, .priority = 8 },
+    ACTOR_BY_IDX(N(whacka), BTL_POS_GROUND_C, 8),
 };
 
 BattleList N(Formations) = {

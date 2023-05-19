@@ -287,7 +287,7 @@ EvtScript N(8021B398) = {
 Vec3i N(vector3D_8021B594) = { NPC_DISPOSE_LOCATION, };
 
 Formation N(specialFormation_8021B5A0) = {
-    { .actor = &NAMESPACE, .home = { .vec = &N(vector3D_8021B594) }},
+    ACTOR_BY_POS(NAMESPACE, N(vector3D_8021B594), 0),
 };
 
 EvtScript N(split) = {

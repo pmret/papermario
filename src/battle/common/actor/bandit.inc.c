@@ -170,7 +170,7 @@ ActorBlueprint N(coin) = {
 Vec3i N(coin_pos) = { NPC_DISPOSE_LOCATION };
 
 Formation N(formation_coin) = {
-    { .actor = &N(coin), .home = { .vec = &N(coin_pos) }},
+    ACTOR_BY_POS(N(coin), N(coin_pos), 0),
 };
 
 EvtScript N(init) = {
