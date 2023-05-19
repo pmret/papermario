@@ -499,7 +499,7 @@ s32 N(StatusTable_8021E9A4)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(PartsTable_8021EA50)[] = {
+ActorPartBlueprint N(GoombarioParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
@@ -521,8 +521,8 @@ ActorBlueprint N(goombario) = {
     .type = ACTOR_TYPE_LEE_GOOMBARIO,
     .level = 0,
     .maxHP = 20,
-    .partCount = ARRAY_COUNT( N(PartsTable_8021EA50)),
-    .partsData = N(PartsTable_8021EA50),
+    .partCount = ARRAY_COUNT( N(GoombarioParts)),
+    .partsData = N(GoombarioParts),
     .initScript = &N(init_Goombario),
     .statusTable = N(StatusTable_8021E9A4),
     .escapeChance = 100,
