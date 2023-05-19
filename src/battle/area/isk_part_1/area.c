@@ -100,7 +100,7 @@ Formation N(Formation_0A) = {
 
 Formation N(Formation_0B) = {
     ACTOR_BY_IDX(N(buzzy_beetle), BTL_POS_GROUND_A, 10),
-    ACTOR_BY_POS_INIT_1(N(buzzy_beetle), N(vector3D_802240AC), 9, 1),
+    ACTOR_BY_POS(N(buzzy_beetle), N(vector3D_802240AC), 9, 1),
     ACTOR_BY_POS(N(swooper), N(vector3D_802240B8), 8),
 };
 
@@ -110,30 +110,30 @@ Formation N(Formation_0C) = {
 };
 
 Formation N(Formation_0D) = {
-    ACTOR_BY_POS_INIT_1(N(buzzy_beetle), N(vector3D_802240AC), 10, 1),
+    ACTOR_BY_POS(N(buzzy_beetle), N(vector3D_802240AC), 10, 1),
     ACTOR_BY_IDX(N(buzzy_beetle), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_0E) = {
     ACTOR_BY_IDX(N(buzzy_beetle), BTL_POS_GROUND_B, 10),
-    ACTOR_BY_POS_INIT_1(N(buzzy_beetle), N(vector3D_802240B8), 9, 1),
+    ACTOR_BY_POS(N(buzzy_beetle), N(vector3D_802240B8), 9, 1),
 };
 
 Formation N(Formation_0F) = {
-    ACTOR_BY_POS_INIT_1(N(buzzy_beetle), N(vector3D_802240AC), 10, 1),
-    ACTOR_BY_POS_INIT_1(N(buzzy_beetle), N(vector3D_802240B8), 9, 1),
+    ACTOR_BY_POS(N(buzzy_beetle), N(vector3D_802240AC), 10, 1),
+    ACTOR_BY_POS(N(buzzy_beetle), N(vector3D_802240B8), 9, 1),
 };
 
 Formation N(Formation_10) = {
     ACTOR_BY_IDX(N(buzzy_beetle), BTL_POS_GROUND_A, 10),
-    ACTOR_BY_POS_INIT_1(N(buzzy_beetle), N(vector3D_802240AC), 9, 1),
-    ACTOR_BY_POS_INIT_1(N(buzzy_beetle), N(vector3D_802240B8), 8, 1),
+    ACTOR_BY_POS(N(buzzy_beetle), N(vector3D_802240AC), 9, 1),
+    ACTOR_BY_POS(N(buzzy_beetle), N(vector3D_802240B8), 8, 1),
 };
 
 Formation N(Formation_11) = {
-    ACTOR_BY_POS_INIT_1(N(buzzy_beetle), N(vector3D_802240A0), 10, 1),
-    ACTOR_BY_POS_INIT_1(N(buzzy_beetle), N(vector3D_802240AC), 9, 1),
-    ACTOR_BY_POS_INIT_1(N(buzzy_beetle), N(vector3D_802240B8), 8, 1),
+    ACTOR_BY_POS(N(buzzy_beetle), N(vector3D_802240A0), 10, 1),
+    ACTOR_BY_POS(N(buzzy_beetle), N(vector3D_802240AC), 9, 1),
+    ACTOR_BY_POS(N(buzzy_beetle), N(vector3D_802240B8), 8, 1),
 };
 
 Vec3i N(vector3D_8022460C) = { 0, 112, -25 };
@@ -145,15 +145,15 @@ Vec3i N(vector3D_80224624) = { 80, 112, -25 };
 Vec3i N(vector3D_80224630) = { 120, 112, -25 };
 
 Formation N(Formation_12) = {
-    ACTOR_BY_POS_INIT_1(N(buzzy_beetle), N(vector3D_8022460C), 10, 1),
-    ACTOR_BY_POS_INIT_1(N(buzzy_beetle), N(vector3D_80224618), 9, 1),
-    ACTOR_BY_POS_INIT_1(N(buzzy_beetle), N(vector3D_80224624), 8, 1),
-    ACTOR_BY_POS_INIT_1(N(buzzy_beetle), N(vector3D_80224630), 7, 1),
+    ACTOR_BY_POS(N(buzzy_beetle), N(vector3D_8022460C), 10, 1),
+    ACTOR_BY_POS(N(buzzy_beetle), N(vector3D_80224618), 9, 1),
+    ACTOR_BY_POS(N(buzzy_beetle), N(vector3D_80224624), 8, 1),
+    ACTOR_BY_POS(N(buzzy_beetle), N(vector3D_80224630), 7, 1),
 };
 
 Formation N(Formation_13) = {
-    ACTOR_BY_POS_INIT_1(N(buzzy_beetle), N(vector3D_802240A0), 10, 1),
-    ACTOR_BY_POS_INIT_1(N(buzzy_beetle), N(vector3D_802240AC), 9, 1),
+    ACTOR_BY_POS(N(buzzy_beetle), N(vector3D_802240A0), 10, 1),
+    ACTOR_BY_POS(N(buzzy_beetle), N(vector3D_802240AC), 9, 1),
     ACTOR_BY_POS(N(swooper), N(vector3D_802240B8), 8),
 };
 

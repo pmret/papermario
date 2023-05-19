@@ -55,10 +55,10 @@ Vec3i N(slot_machine_pos3) = { 20, 56, -68 };
 Vec3i N(slot_machine_pos4) = { 53, 56, -68 };
 
 Formation N(fromation_slot_machine) = {
-    ACTOR_BY_POS_INIT_1(N(slot_machine_start), N(slot_machine_pos1), 0, 0),
-    ACTOR_BY_POS_INIT_1(N(slot_machine_stop), N(slot_machine_pos2), 0, 1),
-    ACTOR_BY_POS_INIT_1(N(slot_machine_stop), N(slot_machine_pos3), 0, 2),
-    ACTOR_BY_POS_INIT_1(N(slot_machine_stop), N(slot_machine_pos4), 0, 3),
+    ACTOR_BY_POS(N(slot_machine_start), N(slot_machine_pos1), 0, 0),
+    ACTOR_BY_POS(N(slot_machine_stop), N(slot_machine_pos2), 0, 1),
+    ACTOR_BY_POS(N(slot_machine_stop), N(slot_machine_pos3), 0, 2),
+    ACTOR_BY_POS(N(slot_machine_stop), N(slot_machine_pos4), 0, 3),
 };
 
 #include "battle/common/actor/slot_machine.inc.c"

@@ -897,9 +897,9 @@ EvtScript N(unEnrage) = {
 Vec3i N(baby_pos) = { 400, 0, 0 };
 
 Formation N(formation_baby_1) = {
-    { .actor = &b_area_tik2_blooper_baby, .home = { .vec = &N(baby_pos) }, .priority = 95, .var0 = 30, .var1 = 68, },
+    ACTOR_BY_POS(b_area_tik2_blooper_baby, N(baby_pos), 95, 30, 68),
 };
 
 Formation N(formation_baby_2) = {
-    { .actor = &b_area_tik2_blooper_baby, .home = { .vec = &N(baby_pos) }, .priority = 94, .var0 = 134, .var1 = 45, },
+    ACTOR_BY_POS(b_area_tik2_blooper_baby, N(baby_pos), 94, 134, 45),
 };

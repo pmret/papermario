@@ -20,49 +20,49 @@ extern Stage N(jan_04);
 extern Stage N(jan_04b);
 
 Formation N(Formation_00) = {
-    ACTOR_BY_IDX_INIT_1(N(spear_guy), BTL_POS_GROUND_B, 10, 0),
-    ACTOR_BY_IDX_INIT_1(N(spear_guy), BTL_POS_GROUND_C, 9, 1),
+    ACTOR_BY_IDX(N(spear_guy), BTL_POS_GROUND_B, 10, 0),
+    ACTOR_BY_IDX(N(spear_guy), BTL_POS_GROUND_C, 9, 1),
 };
 
 Formation N(Formation_01) = {
-    ACTOR_BY_IDX_INIT_1(N(spear_guy), BTL_POS_GROUND_A, 10, 0),
-    ACTOR_BY_IDX_INIT_1(N(spear_guy), BTL_POS_GROUND_B, 9, 1),
-    ACTOR_BY_IDX_INIT_1(N(spear_guy), BTL_POS_GROUND_C, 8, 1),
+    ACTOR_BY_IDX(N(spear_guy), BTL_POS_GROUND_A, 10, 0),
+    ACTOR_BY_IDX(N(spear_guy), BTL_POS_GROUND_B, 9, 1),
+    ACTOR_BY_IDX(N(spear_guy), BTL_POS_GROUND_C, 8, 1),
 };
 
 Formation N(Formation_02) = {
-    ACTOR_BY_IDX_INIT_1(N(spear_guy), BTL_POS_GROUND_B, 10, 0),
+    ACTOR_BY_IDX(N(spear_guy), BTL_POS_GROUND_B, 10, 0),
     ACTOR_BY_IDX(N(jungle_fuzzy), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_03) = {
-    ACTOR_BY_IDX_INIT_1(N(spear_guy), BTL_POS_GROUND_A, 10, 0),
+    ACTOR_BY_IDX(N(spear_guy), BTL_POS_GROUND_A, 10, 0),
     ACTOR_BY_IDX(N(jungle_fuzzy), BTL_POS_GROUND_B, 9),
     ACTOR_BY_IDX(N(jungle_fuzzy), BTL_POS_GROUND_C, 8),
     ACTOR_BY_IDX(N(jungle_fuzzy), BTL_POS_GROUND_D, 7),
 };
 
 Formation N(Formation_04) = {
-    ACTOR_BY_IDX_INIT_1(N(spear_guy), BTL_POS_GROUND_A, 10, 0),
+    ACTOR_BY_IDX(N(spear_guy), BTL_POS_GROUND_A, 10, 0),
     ACTOR_BY_IDX(N(jungle_fuzzy), BTL_POS_GROUND_B, 9),
     ACTOR_BY_IDX(N(jungle_fuzzy), BTL_POS_GROUND_C, 8),
 };
 
 Formation N(Formation_05) = {
-    ACTOR_BY_IDX_INIT_1(N(spear_guy), BTL_POS_GROUND_A, 10, 0),
+    ACTOR_BY_IDX(N(spear_guy), BTL_POS_GROUND_A, 10, 0),
     ACTOR_BY_IDX(N(jungle_fuzzy), BTL_POS_GROUND_B, 9),
-    ACTOR_BY_IDX_INIT_1(N(spear_guy), BTL_POS_GROUND_C, 8, 1),
+    ACTOR_BY_IDX(N(spear_guy), BTL_POS_GROUND_C, 8, 1),
 };
 
 Formation N(Formation_06) = {
-    ACTOR_BY_IDX_INIT_1(N(spear_guy), BTL_POS_GROUND_A, 10, 0),
+    ACTOR_BY_IDX(N(spear_guy), BTL_POS_GROUND_A, 10, 0),
     ACTOR_BY_IDX(N(jungle_fuzzy), BTL_POS_GROUND_B, 9),
-    ACTOR_BY_IDX_INIT_1(N(spear_guy), BTL_POS_GROUND_C, 8, 1),
+    ACTOR_BY_IDX(N(spear_guy), BTL_POS_GROUND_C, 8, 1),
     ACTOR_BY_IDX(N(jungle_fuzzy), BTL_POS_GROUND_D, 7),
 };
 
 Formation N(Formation_07) = {
-    ACTOR_BY_IDX_INIT_1(N(spear_guy), BTL_POS_GROUND_A, 10, 0),
+    ACTOR_BY_IDX(N(spear_guy), BTL_POS_GROUND_A, 10, 0),
     ACTOR_BY_IDX(N(medi_guy), BTL_POS_AIR_B, 9),
     ACTOR_BY_IDX(N(spike_top), BTL_POS_GROUND_C, 8),
 };
@@ -98,7 +98,7 @@ Formation N(Formation_0C) = {
 
 Formation N(Formation_0D) = {
     ACTOR_BY_IDX(N(jungle_fuzzy), BTL_POS_GROUND_A, 10),
-    ACTOR_BY_IDX_INIT_1(N(spear_guy), BTL_POS_GROUND_B, 9, 1),
+    ACTOR_BY_IDX(N(spear_guy), BTL_POS_GROUND_B, 9, 1),
     ACTOR_BY_IDX(N(jungle_fuzzy), BTL_POS_GROUND_C, 8),
 };
 

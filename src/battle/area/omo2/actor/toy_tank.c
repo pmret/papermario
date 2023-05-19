@@ -872,7 +872,7 @@ Formation N(formation_stilt_guy_1) = {
 };
 
 Formation N(formation_stilt_guy_2) = {
-    ACTOR_BY_POS_INIT_1(b_area_omo2_2_stilt_guy, N(summon_pos), 90, 1)
+    ACTOR_BY_POS(b_area_omo2_2_stilt_guy, N(summon_pos), 90, 1)
 };
 
 Formation N(formation_shy_stack_1) = {
@@ -880,7 +880,7 @@ Formation N(formation_shy_stack_1) = {
 };
 
 Formation N(formation_shy_stack_2) = {
-    ACTOR_BY_POS_INIT_1(b_area_omo2_3_shy_stack, N(summon_pos), 90, 1)
+    ACTOR_BY_POS(b_area_omo2_3_shy_stack, N(summon_pos), 90, 1)
 };
 
 Formation N(formation_shy_squad_dup) = {

@@ -65,8 +65,8 @@ Formation N(Formation_07) = {
 };
 
 Formation N(Formation_08) = {
-    ACTOR_BY_IDX_INIT_2(N(pokey), BTL_POS_GROUND_B, 10, 0, 1),
-    ACTOR_BY_IDX_INIT_2(N(pokey), BTL_POS_GROUND_C,  9, 0, 1),
+    ACTOR_BY_IDX(N(pokey), BTL_POS_GROUND_B, 10, 0, 1),
+    ACTOR_BY_IDX(N(pokey), BTL_POS_GROUND_C,  9, 0, 1),
 };
 
 Formation N(Formation_09) = {

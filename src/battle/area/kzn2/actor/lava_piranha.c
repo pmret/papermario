@@ -1125,11 +1125,11 @@ EvtScript N(takeTurn) = {
 Vec3i N(lava_bud_pos) = { 260, 0, 0 };
 
 Formation N(formation_lava_bud_1) = {
-    ACTOR_BY_POS_INIT_1(b_area_kzn2_lava_bud, N(lava_bud_pos), 80, 1),
+    ACTOR_BY_POS(b_area_kzn2_lava_bud, N(lava_bud_pos), 80, 1),
 };
 
 Formation N(formation_lava_bud_2) = {
-    { .actor = &b_area_kzn2_lava_bud, .home = { .vec = &N(lava_bud_pos) }, .priority = 70, .var0 = 2, .var1 = 50, .var2 = 14, .var3 = 20, },
+    ACTOR_BY_POS(b_area_kzn2_lava_bud, N(lava_bud_pos), 70, 2, 50, 14, 20),
 };
 
 EvtScript N(attackFlameSpew) = {

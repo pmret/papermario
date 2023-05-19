@@ -606,11 +606,11 @@ EvtScript N(summonPetitPiranha) = {
 Vec3i N(petit_piranha_pos) = { 260, 0, 0 };
 
 Formation N(formation_petit_piranha_1) = {
-    { .actor = &b_area_kzn2_petit_piranha, .home = { .vec = &N(petit_piranha_pos) }, .priority = 95, .var0 = -12, .var1 = 85, },
+    ACTOR_BY_POS(b_area_kzn2_petit_piranha, N(petit_piranha_pos), 95, -12, 85),
 };
 
 Formation N(formation_petit_piranha_2) = {
-    { .actor = &b_area_kzn2_petit_piranha, .home = { .vec = &N(petit_piranha_pos) }, .priority = 94, .var0 = 18, .var1 = 38, },
+    ACTOR_BY_POS(b_area_kzn2_petit_piranha, N(petit_piranha_pos), 94, 18, 38),
 };
 
 Formation N(formation_petit_piranha_bomb) = {
