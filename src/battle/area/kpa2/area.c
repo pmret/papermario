@@ -36,17 +36,17 @@ Formation N(Formation_04) = {
 };
 
 BattleList N(Formations) = {
-    BATTLE(N(Formation_00), &N(kpa_01), "クッパ"),
-    BATTLE(N(Formation_01), &N(kpa_02), "クッパ(オープニング)"),
-    BATTLE(N(Formation_02), &N(kpa_02), "クッパ(ラストバトル１)"),
-    BATTLE(N(Formation_03), &N(kpa_03), "クッパ(ラストバトル２)"),
-    BATTLE(N(Formation_04), &N(kpa_03), "クッパ(ラストバトル３)"),
+    BATTLE(N(Formation_00), N(kpa_01), "クッパ"),
+    BATTLE(N(Formation_01), N(kpa_02), "クッパ(オープニング)"),
+    BATTLE(N(Formation_02), N(kpa_02), "クッパ(ラストバトル１)"),
+    BATTLE(N(Formation_03), N(kpa_03), "クッパ(ラストバトル２)"),
+    BATTLE(N(Formation_04), N(kpa_03), "クッパ(ラストバトル３)"),
     {},
 };
 
 StageList N(Stages) = {
-    { "kpa_01", &N(kpa_01) },
-    { "kpa_02", &N(kpa_02) },
-    { "kpa_03", &N(kpa_03) },
+    STAGE("kpa_01", N(kpa_01)),
+    STAGE("kpa_02", N(kpa_02)),
+    STAGE("kpa_03", N(kpa_03)),
     {},
 };

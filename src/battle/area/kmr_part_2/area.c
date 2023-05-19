@@ -38,16 +38,16 @@ Formation N(Formation_01) = {
 };
 
 BattleList N(Formations) = {
-    BATTLE(N(Formation_00), &N(kmr_03), "クリレッド,クリブルー"),
-    BATTLE(N(Formation_01), &N(kmr_06), "クリキング,クリレッド,クリブルー"),
+    BATTLE(N(Formation_00), N(kmr_03), "クリレッド,クリブルー"),
+    BATTLE(N(Formation_01), N(kmr_06), "クリキング,クリレッド,クリブルー"),
     {},
 };
 
 StageList N(Stages) = {
-    { "kmr_02", &N(kmr_02), },
-    { "kmr_03", &N(kmr_03), },
-    { "kmr_04", &N(kmr_04), },
-    { "kmr_05", &N(kmr_05), },
-    { "kmr_06", &N(kmr_06), },
+    STAGE("kmr_02", N(kmr_02)),
+    STAGE("kmr_03", N(kmr_03)),
+    STAGE("kmr_04", N(kmr_04)),
+    STAGE("kmr_05", N(kmr_05)),
+    STAGE("kmr_06", N(kmr_06)),
     {},
 };

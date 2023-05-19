@@ -58,22 +58,22 @@ Formation N(Formation_07) = {
 };
 
 BattleList N(Formations) = {
-    BATTLE(N(Formation_00), &N(kmr_03), "トゲクリボー（レクチャー）"),
-    BATTLE(N(Formation_01), &N(kmr_03), "パタクリボー（レクチャー）"),
-    BATTLE(N(Formation_02), &N(kmr_05), "コワッパ１"),
-    BATTLE(N(Formation_03), &N(nok_01), "コワッパ２"),
-    BATTLE(N(Formation_04), &N(mim_01), "コワッパ４"),
-    BATTLE(N(Formation_05), &N(mac_01), "コワッパ５"),
-    BATTLE(N(Formation_06), &N(sam_01), "コワッパ６"),
-    BATTLE(N(Formation_07), &N(kpa_01), "コワッパ７"),
+    BATTLE(N(Formation_00), N(kmr_03), "トゲクリボー（レクチャー）"),
+    BATTLE(N(Formation_01), N(kmr_03), "パタクリボー（レクチャー）"),
+    BATTLE(N(Formation_02), N(kmr_05), "コワッパ１"),
+    BATTLE(N(Formation_03), N(nok_01), "コワッパ２"),
+    BATTLE(N(Formation_04), N(mim_01), "コワッパ４"),
+    BATTLE(N(Formation_05), N(mac_01), "コワッパ５"),
+    BATTLE(N(Formation_06), N(sam_01), "コワッパ６"),
+    BATTLE(N(Formation_07), N(kpa_01), "コワッパ７"),
     {},
 };
 
 StageList N(Stages) = {
-    { "kmr_02", &N(kmr_02) },
-    { "kmr_03", &N(kmr_03) },
-    { "kmr_04", &N(kmr_04) },
-    { "kmr_05", &N(kmr_05) },
-    { "kmr_06", &N(kmr_06) },
+    STAGE("kmr_02", N(kmr_02)),
+    STAGE("kmr_03", N(kmr_03)),
+    STAGE("kmr_04", N(kmr_04)),
+    STAGE("kmr_05", N(kmr_05)),
+    STAGE("kmr_06", N(kmr_06)),
     {},
 };

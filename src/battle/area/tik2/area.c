@@ -30,17 +30,17 @@ Formation N(Formation_02) = {
 // ソ is encoded as 0x83 0x5C, so it needs another backslash to be interpreted as valid escape sequence
 // TODO modify iconv instead of strings in this file
 BattleList N(Formations) = {
-    BATTLE(N(Formation_00), &N(tik_01), "ゲッソ\ー"),
-    BATTLE(N(Formation_01), &N(tik_01), "ビリビリゲッソ\ー"),
-    BATTLE(N(Formation_02), &N(tik_01), "ビッグゲッソ\ー　チビゲッソ\ー"),
+    BATTLE(N(Formation_00), N(tik_01), "ゲッソ\ー"),
+    BATTLE(N(Formation_01), N(tik_01), "ビリビリゲッソ\ー"),
+    BATTLE(N(Formation_02), N(tik_01), "ビッグゲッソ\ー　チビゲッソ\ー"),
     {},
 };
 
 StageList N(Stages) = {
-    { "tik_01", &N(tik_01) },
-    { "tik_02", &N(tik_02) },
-    { "tik_03", &N(tik_03) },
-    { "tik_04", &N(tik_04) },
-    { "tik_05", &N(tik_05) },
+    STAGE("tik_01", N(tik_01)),
+    STAGE("tik_02", N(tik_02)),
+    STAGE("tik_03", N(tik_03)),
+    STAGE("tik_04", N(tik_04)),
+    STAGE("tik_05", N(tik_05)),
     {},
 };

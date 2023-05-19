@@ -402,7 +402,7 @@ typedef Battle BattleList[];
 
 /// Zero-terminated.
 typedef struct StageListRow {
-    /* 0x00 */ const char* id; ///< Map ID.
+    /* 0x00 */ const char* name; ///< Map ID.
     /* 0x04 */ Stage* stage;
 } StageListRow; // size = 0x08
 
@@ -421,13 +421,13 @@ typedef struct BattleArea {
 
 extern BattleArea gBattleAreas[0x30];
 
-#define BATTLE(formation, stage, name) { name, ARRAY_COUNT(formation), (Formation*) formation, stage }
-#define BATTLE_WITH_SCRIPT(formation, stage, script, name) { name, ARRAY_COUNT(formation), (Formation*) formation, stage, script }
+#define BATTLE(formation, stage, name) { name, ARRAY_COUNT(formation), (Formation*) formation, &stage }
+#define BATTLE_WITH_SCRIPT(formation, stage, script, name) { name, ARRAY_COUNT(formation), (Formation*) formation, &stage, &script }
 
 #define ACTOR_BY_IDX(_name, _idx, _priority) { .actor = &_name, .home = { .index = _idx }, .priority = _priority, }
 #define ACTOR_BY_POS(_name, _pos, _priority) { .actor = &_name, .home = { .vec = &_pos }, .priority = _priority, }
 
-// TODO: enum for home position (0..3 are floor, 4..7 are air, etc.)
+#define STAGE(_name, _stage) { .name = _name, .stage = &_stage }
 
 typedef struct ActorSounds {
     /* 0x00 */ s32 walk[2];

@@ -54,19 +54,19 @@ Formation N(Formation_04) = {
 };
 
 BattleList N(Formations) = {
-    BATTLE_WITH_SCRIPT(N(Formation_00), &N(dig_01), &N(dig_01_script), "ダイジェスト０１"),
-    BATTLE_WITH_SCRIPT(N(Formation_01), &N(dig_02), &N(dig_02_script), "ダイジェスト０２"),
-    BATTLE_WITH_SCRIPT(N(Formation_02), &N(dig_03), &N(dig_03_script), "ダイジェスト０３"),
-    BATTLE_WITH_SCRIPT(N(Formation_03), &N(dig_04), &N(dig_04_script), "ダイジェスト０４"),
-    BATTLE_WITH_SCRIPT(N(Formation_04), &N(dig_05), &N(dig_05_script), "ダイジェスト０５"),
+    BATTLE_WITH_SCRIPT(N(Formation_00), N(dig_01), N(dig_01_script), "ダイジェスト０１"),
+    BATTLE_WITH_SCRIPT(N(Formation_01), N(dig_02), N(dig_02_script), "ダイジェスト０２"),
+    BATTLE_WITH_SCRIPT(N(Formation_02), N(dig_03), N(dig_03_script), "ダイジェスト０３"),
+    BATTLE_WITH_SCRIPT(N(Formation_03), N(dig_04), N(dig_04_script), "ダイジェスト０４"),
+    BATTLE_WITH_SCRIPT(N(Formation_04), N(dig_05), N(dig_05_script), "ダイジェスト０５"),
     {},
 };
 
 StageList N(Stages) = {
-    { "dig_01", &N(dig_01) },
-    { "dig_02", &N(dig_02) },
-    { "dig_03", &N(dig_03) },
-    { "dig_04", &N(dig_04) },
-    { "dig_05", &N(dig_05) },
+    STAGE("dig_01", N(dig_01)),
+    STAGE("dig_02", N(dig_02)),
+    STAGE("dig_03", N(dig_03)),
+    STAGE("dig_04", N(dig_04)),
+    STAGE("dig_05", N(dig_05)),
     {},
 };

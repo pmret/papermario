@@ -58,28 +58,28 @@ Formation N(Formation_04) = {
 };
 
 BattleList N(Formations) = {
-    BATTLE(N(Formation_00), &N(kpa_01), "スーパーキラーx２"),
-    BATTLE(N(Formation_01), &N(kpa_01), "スーパーキラーx３"),
-    BATTLE(N(Formation_02), &N(kpa_01), "スーパーキラーたいほうx２"),
-    BATTLE(N(Formation_03), &N(kpa_01), "スーパーキラーたいほうx２,トゲノコ"),
-    BATTLE(N(Formation_04), &N(kpa_01), "スーパーキラーたいほうx２,カメック"),
+    BATTLE(N(Formation_00), N(kpa_01), "スーパーキラーx２"),
+    BATTLE(N(Formation_01), N(kpa_01), "スーパーキラーx３"),
+    BATTLE(N(Formation_02), N(kpa_01), "スーパーキラーたいほうx２"),
+    BATTLE(N(Formation_03), N(kpa_01), "スーパーキラーたいほうx２,トゲノコ"),
+    BATTLE(N(Formation_04), N(kpa_01), "スーパーキラーたいほうx２,カメック"),
     {},
 };
 
 StageList N(Stages) = {
-    { "kpa_01", &N(kpa_01) },
-    { "kpa_01b", &N(kpa_01b) },
-    { "kpa_02", &N(kpa_02) },
-    { "kpa_03", &N(kpa_04) }, // @bug should be &N(kpa_03)
-    { "kpa_04", &N(kpa_04) },
-    { "kpa_04b", &N(kpa_04b) },
-    { "kpa_04c", &N(kpa_04c) },
-    { "kpa_05", &N(kpa_05) },
-    { "kpa_07", &N(kpa_07) },
-    { "kpa_08", &N(kpa_08) },
-    { "kpa_09", &N(kpa_09) },
-    { "kpa_11", &N(kpa_11) },
-    { "kpa_13", &N(kpa_13) },
-    { "kpa_14", &N(kpa_14) },
+    STAGE("kpa_01", N(kpa_01)),
+    STAGE("kpa_01b", N(kpa_01b)),
+    STAGE("kpa_02", N(kpa_02)),
+    STAGE("kpa_03", N(kpa_04)), // @bug should be &N(kpa_03)
+    STAGE("kpa_04", N(kpa_04)),
+    STAGE("kpa_04b", N(kpa_04b)),
+    STAGE("kpa_04c", N(kpa_04c)),
+    STAGE("kpa_05", N(kpa_05)),
+    STAGE("kpa_07", N(kpa_07)),
+    STAGE("kpa_08", N(kpa_08)),
+    STAGE("kpa_09", N(kpa_09)),
+    STAGE("kpa_11", N(kpa_11)),
+    STAGE("kpa_13", N(kpa_13)),
+    STAGE("kpa_14", N(kpa_14)),
     {},
 };

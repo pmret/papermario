@@ -26,17 +26,17 @@ Formation N(Formation_02) = {
 };
 
 BattleList N(Formations) = {
-    BATTLE(N(Formation_01), &N(sam_03), "かいぶつ"),
-    BATTLE(N(Formation_02), &N(sam_01), "パタクリ,グレイカメック（チェックよう）"),
+    BATTLE(N(Formation_01), N(sam_03), "かいぶつ"),
+    BATTLE(N(Formation_02), N(sam_01), "パタクリ,グレイカメック（チェックよう）"),
     {},
 };
 
 StageList N(Stages) = {
-    { "sam_01", &N(sam_01) },
-    { "sam_02", &N(sam_02) },
-    { "sam_02b", &N(sam_02b) },
-    { "sam_02c", &N(sam_02c) },
-    { "sam_02d", &N(sam_02d) },
-    { "sam_03", &N(sam_03) },
+    STAGE("sam_01", N(sam_01)),
+    STAGE("sam_02", N(sam_02)),
+    STAGE("sam_02b", N(sam_02b)),
+    STAGE("sam_02c", N(sam_02c)),
+    STAGE("sam_02d", N(sam_02d)),
+    STAGE("sam_03", N(sam_03)),
     {},
 };

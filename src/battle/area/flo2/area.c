@@ -51,25 +51,25 @@ Formation N(Formation_06) = {
 };
 
 BattleList N(Formations) = {
-    BATTLE(N(Formation_01), &N(flo_04), "オズモーン"),
-    BATTLE(N(Formation_02), &N(flo_01), "フラワーチョロプー"),
-    BATTLE(N(Formation_03), &N(flo_01), "フラワーチョロプーx２"),
-    BATTLE(N(Formation_04), &N(flo_01), "フラワーチョロプーx３"),
-    BATTLE(N(Formation_05), &N(flo_01), "フラワーチョロプーx４"),
-    BATTLE(N(Formation_06), &N(flo_01), "ジョナサン？"),
+    BATTLE(N(Formation_01), N(flo_04), "オズモーン"),
+    BATTLE(N(Formation_02), N(flo_01), "フラワーチョロプー"),
+    BATTLE(N(Formation_03), N(flo_01), "フラワーチョロプーx２"),
+    BATTLE(N(Formation_04), N(flo_01), "フラワーチョロプーx３"),
+    BATTLE(N(Formation_05), N(flo_01), "フラワーチョロプーx４"),
+    BATTLE(N(Formation_06), N(flo_01), "ジョナサン？"),
     {},
 };
 
 StageList N(Stages) = {
-    { "flo_01", &N(flo_01) },
-    { "flo_01b", &N(flo_01b) },
-    { "flo_01c", &N(flo_01c) },
-    { "flo_02", &N(flo_02) },
-    { "flo_02b", &N(flo_02b) },
-    { "flo_02c", &N(flo_02c) },
-    { "flo_03", &N(flo_03) },
-    { "flo_04", &N(flo_04) },
-    { "flo_05", &N(flo_05) },
-    { "flo_06", &N(flo_06) },
+    STAGE("flo_01", N(flo_01)),
+    STAGE("flo_01b", N(flo_01b)),
+    STAGE("flo_01c", N(flo_01c)),
+    STAGE("flo_02", N(flo_02)),
+    STAGE("flo_02b", N(flo_02b)),
+    STAGE("flo_02c", N(flo_02c)),
+    STAGE("flo_03", N(flo_03)),
+    STAGE("flo_04", N(flo_04)),
+    STAGE("flo_05", N(flo_05)),
+    STAGE("flo_06", N(flo_06)),
     {},
 };

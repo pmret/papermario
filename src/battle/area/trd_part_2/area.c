@@ -32,7 +32,7 @@ Formation N(Formation_00) = {
 };
 
 BattleList N(Formations) = {
-    BATTLE(N(Formation_00), &N(trd_00), "ノコブロス"),
+    BATTLE(N(Formation_00), N(trd_00), "ノコブロス"),
     {},
 };
 
@@ -40,14 +40,14 @@ StageList N(Stages) = {
     { "trd_00",  &N(trd_00) },
     { "trd_01",  &N(trd_01) },
     { "trd_02",  &N(trd_02) },
-    { "trd_02b", &N(trd_02b) },
+    STAGE("trd_02b", N(trd_02b)),
     { "trd_03",  &N(trd_03) },
     { "trd_04",  &N(trd_04) },
     { "trd_05",  &N(trd_05) },
-    { "trd_05b", &N(trd_05b) },
-    { "trd_05c", &N(trd_05c) },
-    { "trd_05d", &N(trd_05d) },
-    { "trd_05e", &N(trd_05e) },
-    { "trd_05f", &N(trd_05f) },
+    STAGE("trd_05b", N(trd_05b)),
+    STAGE("trd_05c", N(trd_05c)),
+    STAGE("trd_05d", N(trd_05d)),
+    STAGE("trd_05e", N(trd_05e)),
+    STAGE("trd_05f", N(trd_05f)),
     {},
 };

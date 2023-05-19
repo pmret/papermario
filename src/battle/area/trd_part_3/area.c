@@ -13,11 +13,11 @@ Formation N(Formation_00) = {
 };
 
 BattleList N(Formations) = {
-    BATTLE(N(Formation_00), &N(nok_01), "ほしのせい レクチャー"),
+    BATTLE(N(Formation_00), N(nok_01), "ほしのせい レクチャー"),
     {},
 };
 
 StageList N(Stages) = {
-    { "nok_01", &N(nok_01) },
+    STAGE("nok_01", N(nok_01)),
     {},
 };

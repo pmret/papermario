@@ -31,16 +31,16 @@ Formation N(Formation_03) = {
 };
 
 BattleList N(Formations) = {
-    BATTLE(N(Formation_00), &N(hos_02), "クリオ（ＡＣヘルプ）"),
-    BATTLE(N(Formation_01), &N(hos_01), "エルモスx２"),
-    BATTLE(N(Formation_02), &N(hos_01), "エルモスx３"),
-    BATTLE(N(Formation_03), &N(hos_02), "カメック（ＡＣヘルプご）"),
+    BATTLE(N(Formation_00), N(hos_02), "クリオ（ＡＣヘルプ）"),
+    BATTLE(N(Formation_01), N(hos_01), "エルモスx２"),
+    BATTLE(N(Formation_02), N(hos_01), "エルモスx３"),
+    BATTLE(N(Formation_03), N(hos_02), "カメック（ＡＣヘルプご）"),
     {},
 };
 
 StageList N(Stages) = {
-    { "hos_00", &N(hos_00) },
-    { "hos_01", &N(hos_01) },
-    { "hos_02", &N(hos_02) },
+    STAGE("hos_00", N(hos_00)),
+    STAGE("hos_01", N(hos_01)),
+    STAGE("hos_02", N(hos_02)),
     {},
 };

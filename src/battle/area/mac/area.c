@@ -34,16 +34,16 @@ Formation N(Formation_04) = {
 };
 
 BattleList N(Formations) = {
-    BATTLE(N(Formation_00), &N(mac_02), "チェン"),
-    BATTLE(N(Formation_01), &N(mac_02), "リー"),
-    BATTLE(N(Formation_02), &N(mac_02), "シショー その１"),
-    BATTLE(N(Formation_03), &N(mac_02), "シショー その２"),
-    BATTLE(N(Formation_04), &N(mac_02), "シショー その３"),
+    BATTLE(N(Formation_00), N(mac_02), "チェン"),
+    BATTLE(N(Formation_01), N(mac_02), "リー"),
+    BATTLE(N(Formation_02), N(mac_02), "シショー その１"),
+    BATTLE(N(Formation_03), N(mac_02), "シショー その２"),
+    BATTLE(N(Formation_04), N(mac_02), "シショー その３"),
     {},
 };
 
 StageList N(Stages) = {
-    { "mac_01", &N(mac_01) },
-    { "mac_02", &N(mac_02) },
+    STAGE("mac_01", N(mac_01)),
+    STAGE("mac_02", N(mac_02)),
     {},
 };

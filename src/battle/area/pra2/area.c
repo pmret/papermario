@@ -26,11 +26,11 @@ Formation N(Formation_01) = {
 };
 
 BattleList N(Formations) = {
-    BATTLE(N(Formation_01), &N(sam_04), "パラレラー"),
+    BATTLE(N(Formation_01), N(sam_04), "パラレラー"),
     {},
 };
 
 StageList N(Stages) = {
-    { "sam_04", &N(sam_04) },
+    STAGE("sam_04", N(sam_04)),
     {},
 };

@@ -35,18 +35,18 @@ Formation N(Formation_03) = {
 };
 
 BattleList N(Formations) = {
-    BATTLE(N(Formation_00), &N(tik_01), "バサバサx２"),
-    BATTLE(N(Formation_01), &N(tik_01), "バサバサx３"),
-    BATTLE(N(Formation_02), &N(tik_01), "バサバサチュルルx２"),
-    BATTLE(N(Formation_03), &N(tik_01), "バサバサチュルルx３"),
+    BATTLE(N(Formation_00), N(tik_01), "バサバサx２"),
+    BATTLE(N(Formation_01), N(tik_01), "バサバサx３"),
+    BATTLE(N(Formation_02), N(tik_01), "バサバサチュルルx２"),
+    BATTLE(N(Formation_03), N(tik_01), "バサバサチュルルx３"),
     {},
 };
 
 StageList N(Stages) = {
-    { "tik_01", &N(tik_01) },
-    { "tik_02", &N(tik_02) },
-    { "tik_03", &N(tik_03) },
-    { "tik_04", &N(tik_04) },
-    { "tik_05", &N(tik_05) },
+    STAGE("tik_01", N(tik_01)),
+    STAGE("tik_02", N(tik_02)),
+    STAGE("tik_03", N(tik_03)),
+    STAGE("tik_04", N(tik_04)),
+    STAGE("tik_05", N(tik_05)),
     {},
 };

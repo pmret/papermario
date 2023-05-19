@@ -90,26 +90,26 @@ Formation N(Formation_0D) = {
 };
 
 BattleList N(Formations) = {
-    BATTLE(N(Formation_00), &N(iwa_01), "シンエモン"),
-    BATTLE(N(Formation_01), &N(iwa_01), "シンエモンx２"),
-    BATTLE(N(Formation_02), &N(iwa_01), "シンエモンx３"),
-    BATTLE(N(Formation_03), &N(iwa_01), "シンエモン,チョロプー"),
-    BATTLE(N(Formation_04), &N(iwa_01), "シンエモン,チョロプーx２"),
-    BATTLE(N(Formation_05), &N(iwa_01), "チョロプー"),
-    BATTLE(N(Formation_06), &N(iwa_01), "チョロプーx２"),
-    BATTLE(N(Formation_07), &N(iwa_01), "チョロプーx３"),
-    BATTLE(N(Formation_08), &N(iwa_01), "チョロプーx４"),
-    BATTLE(N(Formation_09), &N(iwa_01), "チョロプー,シンエモン"),
-    BATTLE(N(Formation_0A), &N(iwa_01), "チョロプーx２,シンエモン"),
-    BATTLE(N(Formation_0B), &N(iwa_01), "チョロプー,シンエモン,チョロプー"),
-    BATTLE(N(Formation_0C), &N(iwa_02), "ゲーハー"),
-    BATTLE(N(Formation_0D), &N(iwa_02), "コブロン"),
+    BATTLE(N(Formation_00), N(iwa_01), "シンエモン"),
+    BATTLE(N(Formation_01), N(iwa_01), "シンエモンx２"),
+    BATTLE(N(Formation_02), N(iwa_01), "シンエモンx３"),
+    BATTLE(N(Formation_03), N(iwa_01), "シンエモン,チョロプー"),
+    BATTLE(N(Formation_04), N(iwa_01), "シンエモン,チョロプーx２"),
+    BATTLE(N(Formation_05), N(iwa_01), "チョロプー"),
+    BATTLE(N(Formation_06), N(iwa_01), "チョロプーx２"),
+    BATTLE(N(Formation_07), N(iwa_01), "チョロプーx３"),
+    BATTLE(N(Formation_08), N(iwa_01), "チョロプーx４"),
+    BATTLE(N(Formation_09), N(iwa_01), "チョロプー,シンエモン"),
+    BATTLE(N(Formation_0A), N(iwa_01), "チョロプーx２,シンエモン"),
+    BATTLE(N(Formation_0B), N(iwa_01), "チョロプー,シンエモン,チョロプー"),
+    BATTLE(N(Formation_0C), N(iwa_02), "ゲーハー"),
+    BATTLE(N(Formation_0D), N(iwa_02), "コブロン"),
     {},
 };
 
 StageList N(Stages) = {
     { "iwa_01",  &N(iwa_01) },
-    { "iwa_01b", &N(iwa_01b) },
+    STAGE("iwa_01b", N(iwa_01b)),
     { "iwa_02",  &N(iwa_02) },
     {},
 };

@@ -16,11 +16,11 @@ Formation N(Formation_01) = {
 };
 
 BattleList N(Formations) = {
-    BATTLE(N(Formation_01), &N(omo_07), "しょうぐんヘイホー"),
+    BATTLE(N(Formation_01), N(omo_07), "しょうぐんヘイホー"),
     {},
 };
 
 StageList N(Stages) = {
-    { "omo_07", &N(omo_07) },
+    STAGE("omo_07", N(omo_07)),
     {},
 };
