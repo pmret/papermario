@@ -19,7 +19,7 @@ s32 N(bow_idleAnimations)[] = {
 };
 
 s32 N(bow_defenseTable)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 

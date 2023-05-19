@@ -5,16 +5,16 @@
 #include "sprite/npc/KoopaTroopa.h"
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 1,
-    ELEMENT_SMASH, 1,
-    ELEMENT_JUMP, 1,
-    ELEMENT_WATER, 1,
-    ELEMENT_BLAST, 1,
+    ELEMENT_NORMAL,   1,
+    ELEMENT_SMASH,    1,
+    ELEMENT_JUMP,     1,
+    ELEMENT_WATER,    1,
+    ELEMENT_BLAST,    1,
     ELEMENT_END,
 };
 
 s32 N(DefenseTable_flipped)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 

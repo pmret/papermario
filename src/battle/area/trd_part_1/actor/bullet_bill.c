@@ -7,7 +7,7 @@
 #define NAMESPACE b_area_trd_part_1_bullet_bill
 
 s32 N(DefenseTable_80218F60)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 

@@ -14,16 +14,16 @@ extern EvtScript N(handleEvent);
 extern s32 N(IdleAnimations)[];
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 2,
-    ELEMENT_SMASH, 2,
-    ELEMENT_JUMP, 2,
-    ELEMENT_WATER, 2,
-    ELEMENT_BLAST, 2,
+    ELEMENT_NORMAL,   2,
+    ELEMENT_SMASH,    2,
+    ELEMENT_JUMP,     2,
+    ELEMENT_WATER,    2,
+    ELEMENT_BLAST,    2,
     ELEMENT_END,
 };
 
 s32 N(DefenseTable_flipped)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 

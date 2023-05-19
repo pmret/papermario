@@ -19,7 +19,7 @@ s32 N(sushie_idleAnimations)[] = {
 };
 
 s32 N(sushie_defenseTable)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 

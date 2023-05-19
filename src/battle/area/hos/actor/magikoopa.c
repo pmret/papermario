@@ -7,12 +7,12 @@
 #define NAMESPACE b_area_hos_magikoopa
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
 s32 N(DefenseTable_flying)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
@@ -1205,12 +1205,12 @@ EvtScript N(init_80221478) = {
 };
 
 s32 N(DefenseTable_802214B4)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
 s32 N(DefenseTable_802214C0)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 

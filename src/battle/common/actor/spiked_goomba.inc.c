@@ -5,7 +5,7 @@
 #include "sprite/npc/SpikedGoomba.h"
 
 s32 N(DefenseTable_8021E3B0)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 

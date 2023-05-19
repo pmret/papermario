@@ -58,12 +58,12 @@ s32 N(IdleAnimations)[] = {
 };
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 2,
+    ELEMENT_NORMAL,   2,
     ELEMENT_END,
 };
 
 s32 N(DefenseTable_boosted)[] = {
-    ELEMENT_NORMAL, 99,
+    ELEMENT_NORMAL,  99,
     ELEMENT_END,
 };
 

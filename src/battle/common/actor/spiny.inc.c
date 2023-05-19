@@ -42,12 +42,12 @@ s32 N(IdleAnimations_2)[] = {
 };
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 3,
+    ELEMENT_NORMAL,   3,
     ELEMENT_END,
 };
 
 s32 N(DefenseTable_flipped)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 

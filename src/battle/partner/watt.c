@@ -451,8 +451,8 @@ s32 N(IdleAnimations)[] = {
 };
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 0,
-    ELEMENT_SHOCK, 99,
+    ELEMENT_NORMAL,   0,
+    ELEMENT_SHOCK,   99,
     ELEMENT_END,
 };
 

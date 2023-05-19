@@ -38,8 +38,8 @@ s32 N(IdleAnimations3)[] = {
 };
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 0,
-    ELEMENT_MYSTERY, 0,
+    ELEMENT_NORMAL,   0,
+    ELEMENT_MYSTERY,   0,
     ELEMENT_END,
 };
 

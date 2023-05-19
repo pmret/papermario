@@ -24,7 +24,7 @@ extern EvtScript N(attack);
 extern EvtScript N(run_squad_to_pos);
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 

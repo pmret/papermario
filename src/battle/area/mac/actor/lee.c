@@ -37,7 +37,7 @@ s32 N(UnusedAnims)[] = {
 };
 
 s32 N(DefenseTable_8021D3C4)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
@@ -464,7 +464,7 @@ s32 N(IdleAnimations_8021E94C)[] = {
 };
 
 s32 N(DefenseTable_8021E998)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
@@ -1099,12 +1099,12 @@ s32 N(IdleAnimations_8022058C)[] = {
 };
 
 s32 N(DefenseTable_802205D8)[] = {
-    ELEMENT_NORMAL, 1,
+    ELEMENT_NORMAL,   1,
     ELEMENT_END,
 };
 
 s32 N(DefenseTable_802205E4)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
@@ -1615,7 +1615,7 @@ s32 N(IdleAnimations_80222290)[] = {
 };
 
 s32 N(DefenseTable_802222DC)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
@@ -1969,7 +1969,7 @@ s32 N(IdleAnimations_80223388)[] = {
 };
 
 s32 N(DefenseTable_802233D4)[] = {
-    ELEMENT_NORMAL, 1,
+    ELEMENT_NORMAL,   1,
     ELEMENT_END,
 };
 
@@ -2331,7 +2331,7 @@ s32 N(IdleAnimations_80224410)[] = {
 };
 
 s32 N(DefenseTable_8022445C)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
@@ -2782,8 +2782,8 @@ s32 N(IdleAnimations_80225974)[] = {
 };
 
 s32 N(DefenseTable_802259C0)[] = {
-    ELEMENT_NORMAL, 0,
-    ELEMENT_SHOCK, 99,
+    ELEMENT_NORMAL,   0,
+    ELEMENT_SHOCK,   99,
     ELEMENT_END,
 };
 
@@ -3261,7 +3261,7 @@ s32 N(IdleAnimations_8022697C)[] = {
 };
 
 s32 N(DefenseTable_802269C8)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
@@ -3740,7 +3740,7 @@ s32 N(IdleAnimations_80228458)[] = {
 };
 
 s32 N(DefenseTable_80228464)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 

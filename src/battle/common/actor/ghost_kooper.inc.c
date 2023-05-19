@@ -32,12 +32,12 @@ s32 N(kooper_idleAnimations2)[] = {
 };
 
 s32 N(kooper_defenseTable)[] = {
-    ELEMENT_NORMAL, 1,
+    ELEMENT_NORMAL,   1,
     ELEMENT_END,
 };
 
 s32 N(kooper_defenseTable2)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 

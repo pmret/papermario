@@ -16,12 +16,12 @@ extern s32 N(IdleAnimations2)[];
 extern s32 N(IdleAnimations3)[];
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
 s32 N(DefenseTable_flying)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 

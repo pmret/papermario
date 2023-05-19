@@ -6,12 +6,12 @@
 #include "sprite/npc/Paragoomba.h"
 
 s32 N(DefenseTable_8021B110)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
 s32 N(DefenseTable_8021B11C)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 

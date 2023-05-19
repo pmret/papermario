@@ -13,15 +13,15 @@ extern EvtScript N(takeTurn_8021A3EC);
 extern EvtScript N(handleEvent_80218C3C);
 
 s32 N(DefenseTable_80218710)[] = {
-    ELEMENT_NORMAL, 2,
-    ELEMENT_FIRE, 99,
-    ELEMENT_MAGIC, 0,
+    ELEMENT_NORMAL,   2,
+    ELEMENT_FIRE,    99,
+    ELEMENT_MAGIC,    0,
     ELEMENT_END,
 };
 
 s32 N(DefenseTable_8021872C)[] = {
-    ELEMENT_NORMAL, 0,
-    ELEMENT_FIRE, 99,
+    ELEMENT_NORMAL,   0,
+    ELEMENT_FIRE,    99,
     ELEMENT_END,
 };
 

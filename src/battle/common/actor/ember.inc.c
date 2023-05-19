@@ -4,10 +4,10 @@
 #include "sprite/npc/LavaBubble.h"
 
 s32 N(DefenseTable_8021ACB0)[] = {
-    ELEMENT_NORMAL, 0,
-    ELEMENT_WATER, -2,
-    ELEMENT_ICE, -2,
-    ELEMENT_FIRE, 99,
+    ELEMENT_NORMAL,   0,
+    ELEMENT_WATER,   -2,
+    ELEMENT_ICE,     -2,
+    ELEMENT_FIRE,    99,
     ELEMENT_END,
 };
 

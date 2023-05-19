@@ -33,7 +33,7 @@ s32 N(IdleAnimations_8021A55C)[] = {
 };
 
 s32 N(DefenseTable_8021A5A8)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 

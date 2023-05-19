@@ -32,13 +32,13 @@ BSS s32 D_80235FC0[31];
 #include "world/common/atomic/UnkFunc27.inc.c"
 
 s32 N(DefenseTable_8021A670)[] = {
-    ELEMENT_NORMAL, 1,
-    ELEMENT_BLAST, 1,
+    ELEMENT_NORMAL,   1,
+    ELEMENT_BLAST,    1,
     ELEMENT_END,
 };
 
 s32 N(DefenseTable_8021A684)[] = {
-    ELEMENT_NORMAL, 1,
+    ELEMENT_NORMAL,   1,
     ELEMENT_END,
 };
 

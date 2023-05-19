@@ -12,8 +12,8 @@ extern EvtScript N(idle_8021AEB4);
 extern EvtScript N(handleEvent_8021B028);
 
 s32 N(DefenseTable_8021AD10)[] = {
-    ELEMENT_NORMAL, 0,
-    ELEMENT_SHOCK, 0,
+    ELEMENT_NORMAL,   0,
+    ELEMENT_SHOCK,    0,
     ELEMENT_END,
 };
 

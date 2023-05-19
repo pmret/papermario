@@ -6,21 +6,21 @@
 #include "sprite/npc/ParaTroopa.h"
 
 s32 N(DefenseTable_8021EAD0)[] = {
-    ELEMENT_NORMAL, 1,
-    ELEMENT_SMASH, 1,
-    ELEMENT_JUMP, 1,
-    ELEMENT_WATER, 1,
-    ELEMENT_BLAST, 1,
+    ELEMENT_NORMAL,   1,
+    ELEMENT_SMASH,    1,
+    ELEMENT_JUMP,     1,
+    ELEMENT_WATER,    1,
+    ELEMENT_BLAST,    1,
     ELEMENT_END,
 };
 
 s32 N(DefenseTable_8021EAFC)[] = {
-    ELEMENT_NORMAL, 1,
+    ELEMENT_NORMAL,   1,
     ELEMENT_END,
 };
 
 s32 N(DefenseTable_8021EB08)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 

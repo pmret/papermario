@@ -13,7 +13,7 @@ extern EvtScript N(handleEvent);
 extern EvtScript N(run_to_pos);
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 

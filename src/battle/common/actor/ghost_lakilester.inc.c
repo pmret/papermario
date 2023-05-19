@@ -24,7 +24,7 @@ s32 N(lakilester_idleAnimations2)[] = {
 };
 
 s32 N(lakilester_defenseTable)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 

@@ -44,12 +44,12 @@ extern s32 N(IdleAnimations_flying)[];
 extern s32 N(idleAnimtions_broomstick)[];
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
 s32 N(DefenseTable_flying)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
@@ -1253,12 +1253,12 @@ EvtScript N(init_clone_flying) = {
 };
 
 s32 N(DefenseTable_clone)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
 s32 N(DefenseTable_clone_flying)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 

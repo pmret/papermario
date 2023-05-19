@@ -86,12 +86,12 @@ s32 N(IdleAnimations_spiky_flipped)[] = {
 };
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 4,
+    ELEMENT_NORMAL,   4,
     ELEMENT_END,
 };
 
 s32 N(DefenseTable_flipped)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 

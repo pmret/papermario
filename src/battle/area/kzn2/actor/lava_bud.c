@@ -67,29 +67,29 @@ s32 N(IdleAnimations_wet)[] = {
 };
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 0,
-    ELEMENT_WATER, 0,
-    ELEMENT_ICE, 0,
-    ELEMENT_FIRE, 99,
-    ELEMENT_BLAST, 0,
+    ELEMENT_NORMAL,   0,
+    ELEMENT_WATER,    0,
+    ELEMENT_ICE,      0,
+    ELEMENT_FIRE,    99,
+    ELEMENT_BLAST,    0,
     ELEMENT_END,
 };
 
 s32 N(DefenseTable_fiery)[] = {
-    ELEMENT_NORMAL, 0,
-    ELEMENT_WATER, -2,
-    ELEMENT_ICE, -2,
-    ELEMENT_FIRE, 99,
-    ELEMENT_BLAST, 0,
+    ELEMENT_NORMAL,   0,
+    ELEMENT_WATER,   -2,
+    ELEMENT_ICE,     -2,
+    ELEMENT_FIRE,    99,
+    ELEMENT_BLAST,    0,
     ELEMENT_END,
 };
 
 s32 N(DefenseTable_wet)[] = {
-    ELEMENT_NORMAL, 0,
-    ELEMENT_WATER, 0,
-    ELEMENT_ICE, 0,
-    ELEMENT_FIRE, 99,
-    ELEMENT_BLAST, 0,
+    ELEMENT_NORMAL,   0,
+    ELEMENT_WATER,    0,
+    ELEMENT_ICE,      0,
+    ELEMENT_FIRE,    99,
+    ELEMENT_BLAST,    0,
     ELEMENT_END,
 };
 

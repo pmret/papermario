@@ -19,7 +19,7 @@ s32 N(parakarry_idleAnimations)[] = {
 };
 
 s32 N(parakarry_defenseTable)[] = {
-    ELEMENT_NORMAL, 1,
+    ELEMENT_NORMAL,   1,
     ELEMENT_END,
 };
 

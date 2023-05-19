@@ -27,7 +27,7 @@ extern Formation N(formation_shy_squad);
 #include "common/UnfadeBackgroundToBlack.inc.c"
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 

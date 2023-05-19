@@ -13,14 +13,14 @@ extern EvtScript N(spikeTop_TakeTurn_Floor);
 extern EvtScript N(spikeTop_HandleEvent_Floor);
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 4,
-    ELEMENT_FIRE, 99,
-    ELEMENT_BLAST, 99,
+    ELEMENT_NORMAL,   4,
+    ELEMENT_FIRE,    99,
+    ELEMENT_BLAST,   99,
     ELEMENT_END,
 };
 
 s32 N(DefenseTable_8021C8CC)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 

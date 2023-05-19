@@ -35,16 +35,16 @@ s32 N(IdleAnimations_bone)[] = {
 };
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 2,
-    ELEMENT_FIRE, -10,
-    ELEMENT_BLAST, -10,
+    ELEMENT_NORMAL,   2,
+    ELEMENT_FIRE,   -10,
+    ELEMENT_BLAST,  -10,
     ELEMENT_END,
 };
 
 s32 N(DefenseTable_dead)[] = {
-    ELEMENT_NORMAL, 99,
-    ELEMENT_FIRE, -10,
-    ELEMENT_BLAST, -10,
+    ELEMENT_NORMAL,  99,
+    ELEMENT_FIRE,   -10,
+    ELEMENT_BLAST,  -10,
     ELEMENT_END,
 };
 

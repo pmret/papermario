@@ -23,21 +23,21 @@ extern s32 N(IdleAnimations2)[];
 extern s32 N(IdleAnimations3)[];
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 2,
-    ELEMENT_SMASH, 2,
-    ELEMENT_JUMP, 2,
-    ELEMENT_WATER, 2,
-    ELEMENT_BLAST, 2,
+    ELEMENT_NORMAL,   2,
+    ELEMENT_SMASH,    2,
+    ELEMENT_JUMP,     2,
+    ELEMENT_WATER,    2,
+    ELEMENT_BLAST,    2,
     ELEMENT_END,
 };
 
 s32 N(defenseTable2)[] = {
-    ELEMENT_NORMAL, 2,
+    ELEMENT_NORMAL,   2,
     ELEMENT_END,
 };
 
 s32 N(DefenseTable_koopa_flipped)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 

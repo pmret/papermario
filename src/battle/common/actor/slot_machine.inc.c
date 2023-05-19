@@ -14,7 +14,7 @@ s32 N(intTable2)[] = { 0, 1, 0, 2, 1, 2, 0, 2, };
 s32 N(intTable3)[] = { 0, 1, 0, 2, 0, 2, 0, 2, };
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 

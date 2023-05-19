@@ -12,7 +12,7 @@ extern EvtScript N(idle_80221AAC);
 extern EvtScript N(handleEvent_80221C20);
 
 s32 N(DefenseTable_80221910)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 

@@ -154,8 +154,8 @@ s32 N(watt_idleAnimations)[] = {
 };
 
 s32 N(watt_defenseTable)[] = {
-    ELEMENT_NORMAL, 0,
-    ELEMENT_SHOCK, 99,
+    ELEMENT_NORMAL,   0,
+    ELEMENT_SHOCK,   99,
     ELEMENT_END,
 };
 

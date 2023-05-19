@@ -48,7 +48,7 @@ extern EvtScript N(next_phase);
 extern EvtScript N(updateActorSize);
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 

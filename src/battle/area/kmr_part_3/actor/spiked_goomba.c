@@ -6,7 +6,7 @@
 #define NAMESPACE b_area_kmr_part_3_spiked_goomba
 
 s32 N(DefenseTable_8021A390)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 

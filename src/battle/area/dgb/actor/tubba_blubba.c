@@ -31,7 +31,7 @@ s32 N(IdleAnims)[] = {
 };
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL,   99,
+    ELEMENT_NORMAL,  99,
     ELEMENT_END,
 };
 

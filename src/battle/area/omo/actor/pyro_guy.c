@@ -25,13 +25,13 @@ s32 N(IdleAnimations_8022CB00)[] = {
 };
 
 s32 N(DefenseTable_8022CB4C)[] = {
-    ELEMENT_NORMAL, 0,
-    ELEMENT_WATER, -2,
-    ELEMENT_ICE, -2,
-    ELEMENT_FIRE, 99,
-    ELEMENT_SHOCK, 0,
-    ELEMENT_SMASH, 0,
-    ELEMENT_BLAST, -1,
+    ELEMENT_NORMAL,   0,
+    ELEMENT_WATER,   -2,
+    ELEMENT_ICE,     -2,
+    ELEMENT_FIRE,    99,
+    ELEMENT_SHOCK,    0,
+    ELEMENT_SMASH,    0,
+    ELEMENT_BLAST,   -1,
     ELEMENT_END,
 };
 

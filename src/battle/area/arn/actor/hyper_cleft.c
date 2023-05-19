@@ -17,14 +17,14 @@ extern EvtScript N(80222F1C);
 extern EvtScript N(80223310);
 
 s32 N(DefenseTable_80220B40)[] = {
-    ELEMENT_NORMAL, 3,
-    ELEMENT_FIRE, 99,
+    ELEMENT_NORMAL,   3,
+    ELEMENT_FIRE,    99,
     ELEMENT_END,
 };
 
 s32 N(DefenseTable_80220B54)[] = {
-    ELEMENT_NORMAL, 1,
-    ELEMENT_FIRE, 99,
+    ELEMENT_NORMAL,   1,
+    ELEMENT_FIRE,    99,
     ELEMENT_END,
 };
 

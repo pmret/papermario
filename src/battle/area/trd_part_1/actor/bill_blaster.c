@@ -9,7 +9,7 @@
 #define NAMESPACE A(bill_blaster)
 
 s32 N(DefenseTable_80219D20)[] = {
-    ELEMENT_NORMAL, 1,
+    ELEMENT_NORMAL,   1,
     ELEMENT_END,
 };
 

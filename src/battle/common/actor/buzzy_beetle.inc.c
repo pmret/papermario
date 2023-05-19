@@ -13,14 +13,14 @@ extern EvtScript N(takeTurn);
 extern EvtScript N(handleEvent);
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 2,
-    ELEMENT_FIRE, 99,
-    ELEMENT_BLAST, 99,
+    ELEMENT_NORMAL,   2,
+    ELEMENT_FIRE,    99,
+    ELEMENT_BLAST,   99,
     ELEMENT_END,
 };
 
 s32 N(DefenseTable_flipped)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 

@@ -27,12 +27,12 @@ extern EvtScript N(takeTurn_8021FE6C);
 extern EvtScript N(nextTurn_8021E194);
 
 s32 N(DefenseTable_8021B2F0)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
 s32 N(DefenseTable_8021B2FC)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 

@@ -10,7 +10,7 @@ extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 

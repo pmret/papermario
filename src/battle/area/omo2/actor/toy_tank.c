@@ -65,7 +65,7 @@ API_CALLABLE(func_802181F4_52B894) {
 #include "animation.inc.c"
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 2,
+    ELEMENT_NORMAL,   2,
     ELEMENT_END,
 };
 

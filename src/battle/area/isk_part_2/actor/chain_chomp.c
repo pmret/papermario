@@ -92,11 +92,11 @@ s32 N(ChainAnims)[] = {
 };
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 3,
-    ELEMENT_SHOCK,  3,
-    ELEMENT_FIRE,   99,
-    ELEMENT_ICE,    99,
-    ELEMENT_MAGIC,  99,
+    ELEMENT_NORMAL,   3,
+    ELEMENT_SHOCK,    3,
+    ELEMENT_FIRE,    99,
+    ELEMENT_ICE,     99,
+    ELEMENT_MAGIC,   99,
     ELEMENT_END,
 };
 

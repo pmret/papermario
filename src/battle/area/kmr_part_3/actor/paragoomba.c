@@ -7,12 +7,12 @@
 #define NAMESPACE b_area_kmr_part_3_paragoomba1
 
 s32 N(DefenseTable_8021C1B0)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
 s32 N(DefenseTable_8021C1BC)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 

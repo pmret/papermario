@@ -18,7 +18,7 @@ extern EvtScript N(wait);
 extern s32 N(IdleAnimations)[];
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 4,
+    ELEMENT_NORMAL,   4,
     ELEMENT_END,
 };
 

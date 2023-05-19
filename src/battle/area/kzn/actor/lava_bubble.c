@@ -13,11 +13,11 @@ extern EvtScript N(idle_802191E4);
 extern EvtScript N(handleEvent_80219500);
 
 s32 N(DefenseTable_80218E10)[] = {
-    ELEMENT_NORMAL, 0,
-    ELEMENT_WATER, -2,
-    ELEMENT_ICE, -2,
-    ELEMENT_FIRE, 99,
-    ELEMENT_BLAST, -1,
+    ELEMENT_NORMAL,   0,
+    ELEMENT_WATER,   -2,
+    ELEMENT_ICE,     -2,
+    ELEMENT_FIRE,    99,
+    ELEMENT_BLAST,   -1,
     ELEMENT_END,
 };
 

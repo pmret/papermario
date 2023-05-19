@@ -15,8 +15,8 @@ extern EvtScript N(handleEvent_8021EB9C);
 extern Formation N(specialFormation_8022180C);
 
 s32 N(DefenseTable_8021E9D0)[] = {
-    ELEMENT_NORMAL, 0,
-    ELEMENT_FIRE, 0,
+    ELEMENT_NORMAL,   0,
+    ELEMENT_FIRE,     0,
     ELEMENT_END,
 };
 

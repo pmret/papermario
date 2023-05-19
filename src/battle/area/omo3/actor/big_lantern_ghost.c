@@ -43,12 +43,12 @@ enum N(MoveIds) {
 };
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
 s32 N(defenseTable2)[] = {
-    ELEMENT_NORMAL, 99,
+    ELEMENT_NORMAL,  99,
     ELEMENT_END,
 };
 

@@ -19,7 +19,7 @@ s32 N(bombette_idleAnimations)[] = {
 };
 
 s32 N(bombette_defenseTable)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 

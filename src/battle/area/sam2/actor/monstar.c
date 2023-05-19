@@ -19,8 +19,8 @@ extern EvtScript N(OnBurn);
 extern EvtScript N(OnDeath);
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 0,
-    ELEMENT_COSMIC, 99,
+    ELEMENT_NORMAL,   0,
+    ELEMENT_COSMIC,  99,
     ELEMENT_END,
 };
 

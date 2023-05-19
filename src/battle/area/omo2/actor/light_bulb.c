@@ -30,8 +30,8 @@ extern EvtScript N(shake_tank);
 extern EvtScript N(onDeath);
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 1,
-    ELEMENT_SHOCK, 0,
+    ELEMENT_NORMAL,   1,
+    ELEMENT_SHOCK,    0,
     ELEMENT_END,
 };
 

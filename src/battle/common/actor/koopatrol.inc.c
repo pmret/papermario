@@ -76,19 +76,19 @@ s32 N(IdleAnimations_charged)[] = {
 };
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 3,
-    ELEMENT_SHOCK, 3,
+    ELEMENT_NORMAL,   3,
+    ELEMENT_SHOCK,    3,
     ELEMENT_END,
 };
 
 s32 N(DefenseTable_flipped)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
 s32 N(DefenseTable_charged)[] = {
-    ELEMENT_NORMAL, 3,
-    ELEMENT_FIRE, 3,
+    ELEMENT_NORMAL,   3,
+    ELEMENT_FIRE,     3,
     ELEMENT_END,
 };
 

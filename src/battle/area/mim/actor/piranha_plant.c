@@ -35,7 +35,7 @@ s32 N(unk_missing_8021D388)[] = {
 };
 
 s32 N(DefenseTable_8021D394)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 

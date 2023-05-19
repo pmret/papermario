@@ -6,14 +6,14 @@
 #define NAMESPACE b_area_mac_chan
 
 s32 N(DefenseTable_80219D50)[] = {
-    ELEMENT_NORMAL, 2,
-    ELEMENT_FIRE, 99,
-    ELEMENT_BLAST, 99,
+    ELEMENT_NORMAL,   2,
+    ELEMENT_FIRE,    99,
+    ELEMENT_BLAST,   99,
     ELEMENT_END,
 };
 
 s32 N(DefenseTable_80219D6C)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
