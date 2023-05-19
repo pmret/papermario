@@ -24,21 +24,10 @@ extern EvtScript N(spinySurge);
 extern EvtScript N(cloudNine);
 extern EvtScript N(hurricane);
 
-typedef struct HurricaneState {
-    /* 0x00 */ char unk_00[0x44];
-    /* 0x44 */ s16 breathSizeIncrease;
-    /* 0x46 */ s16 unk_46;
-    /* 0x48 */ char unk_48[0xC];
-    /* 0x54 */ s16 unk_54;
-    /* 0x56 */ char unk_56[0x4];
-    /* 0x5A */ s16 startingTotalPower;
-    /* 0x5C */ s8 state;
-    /* 0x5D */ s8 unk_5D;
-    /* 0x5E */ char unk_5E[0x12];
-    /* 0x70 */ s16 intensity;
-    /* 0x72 */ s16 totalPower;
-    /* 0x74 */ char unk_74[0x10];
-} HurricaneState;
+extern HudScript HES_AimBlinkA;
+extern HudScript HES_AimReticle;
+extern HudScript HES_AimTarget;
+extern HudScript HES_StickTapRight;
 
 static s32 sSavedHurricaneIntensity;
 static s32 sBreathSizeIncrease;
@@ -66,10 +55,26 @@ static s32 sNumEnemiesBeingBlown;
 static s32 sIsHurricaneActive;
 static s32 D_8023D338;
 
-extern HudScript HES_AimBlinkA;
-extern HudScript HES_AimReticle;
-extern HudScript HES_AimTarget;
-extern HudScript HES_StickTapRight;
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+    PRT_2               = 2,
+};
+
+typedef struct HurricaneState {
+    /* 0x00 */ char unk_00[0x44];
+    /* 0x44 */ s16 breathSizeIncrease;
+    /* 0x46 */ s16 unk_46;
+    /* 0x48 */ char unk_48[0xC];
+    /* 0x54 */ s16 unk_54;
+    /* 0x56 */ char unk_56[0x4];
+    /* 0x5A */ s16 startingTotalPower;
+    /* 0x5C */ s8 state;
+    /* 0x5D */ s8 unk_5D;
+    /* 0x5E */ char unk_5E[0x12];
+    /* 0x70 */ s16 intensity;
+    /* 0x72 */ s16 totalPower;
+    /* 0x74 */ char unk_74[0x10];
+} HurricaneState;
 
 API_CALLABLE(N(SpinyFlipUpdatePopup)) {
     if (isInitialCall) {
@@ -130,7 +135,7 @@ s32 N(StatusTable)[] = {
 ActorPartBlueprint N(parts)[] = {
     {
         .flags = 0,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 12, 30 },
         .opacity = 255,
@@ -142,7 +147,7 @@ ActorPartBlueprint N(parts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
-        .index = 2,
+        .index = PRT_2,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
@@ -835,7 +840,7 @@ EvtScript N(spinyFlip) = {
     EVT_CALL(SetPartPos, ACTOR_PARTNER, 2, LVar0, LVar1, LVar2)
     EVT_WAIT(1)
     EVT_CALL(SetPartFlagBits, ACTOR_PARTNER, 2, ACTOR_PART_FLAG_INVISIBLE, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_BattleLakilester_Spiny)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_2, ANIM_BattleLakilester_Spiny)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_LiftSpiny)
     EVT_LOOP(4)
         EVT_ADD(LVar1, 6)
@@ -876,7 +881,7 @@ EvtScript N(spinyFlip) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_201B)
     EVT_SWITCH(LVarF)
         EVT_CASE_EQ(-1)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_BattleLakilester_SpinySpin)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_2, ANIM_BattleLakilester_SpinySpin)
             EVT_CALL(SetPartJumpGravity, ACTOR_PARTNER, 2, EVT_FLOAT(1.5))
             EVT_SET(LVar0, LVar7)
             EVT_SET(LVar1, LVar8)
@@ -884,7 +889,7 @@ EvtScript N(spinyFlip) = {
             EVT_CALL(JumpPartTo, ACTOR_PARTNER, 2, LVar7, LVar8, LVar9, 20)
             EVT_CALL(LandJumpPart, ACTOR_PARTNER, 2)
         EVT_CASE_EQ(0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_BattleLakilester_SpinySpin)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_2, ANIM_BattleLakilester_SpinySpin)
             EVT_CALL(SetPartJumpGravity, ACTOR_PARTNER, 2, EVT_FLOAT(1.5))
             EVT_SET(LVar0, LVar7)
             EVT_SET(LVar1, LVar8)
@@ -892,7 +897,7 @@ EvtScript N(spinyFlip) = {
             EVT_CALL(JumpPartTo, ACTOR_PARTNER, 2, LVar7, LVar8, LVar9, 20)
             EVT_CALL(LandJumpPart, ACTOR_PARTNER, 2)
         EVT_CASE_DEFAULT
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_BattleLakilester_SpinySpin)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_2, ANIM_BattleLakilester_SpinySpin)
             EVT_CALL(GetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
             EVT_CALL(SetPartJumpGravity, ACTOR_PARTNER, 2, EVT_FLOAT(1.5))
             EVT_CALL(JumpPartTo, ACTOR_PARTNER, 2, LVar0, LVar1, LVar2, 20)

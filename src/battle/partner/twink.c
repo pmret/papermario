@@ -15,6 +15,10 @@ extern EvtScript N(celebrate);
 extern EvtScript N(runAway);
 extern EvtScript N(runAwayFail);
 
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+};
+
 API_CALLABLE(func_80238000_714CF0) {
     BattleStatus* battleStatus = &gBattleStatus;
 
@@ -66,7 +70,7 @@ s32 N(StatusTable)[] = {
 ActorPartBlueprint N(parts)[] = {
     {
         .flags = 0,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
@@ -112,8 +116,8 @@ EvtScript N(init) = {
     EVT_END_IF
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable)))
-    EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_9)
-    EVT_CALL(ModifyActorDecoration, ACTOR_SELF, 1, 0, 0, 0, 0, 0)
+    EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_9)
+    EVT_CALL(ModifyActorDecoration, ACTOR_SELF, PRT_MAIN, 0, 0, 0, 0, 0)
     EVT_RETURN
     EVT_END
 };

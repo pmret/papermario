@@ -22,6 +22,10 @@ extern EvtScript N(runAwayFail);
 extern EvtScript N(bodySlam);
 extern EvtScript N(bomb);
 
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+};
+
 enum {
     LF_MashEnded    = LocalFlag(0),
     LF_MashStarted  = LocalFlag(2),
@@ -294,7 +298,7 @@ s32 N(StatusTable)[] = {
 ActorPartBlueprint N(parts)[] = {
     {
         .flags = 0,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 9, 20 },
         .opacity = 255,

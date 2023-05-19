@@ -18,6 +18,11 @@ extern EvtScript N(nextTurn);
 extern EvtScript N(OnBurn);
 extern EvtScript N(OnDeath);
 
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+    PRT_2               = 2,
+};
+
 s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_COSMIC,  99,
@@ -54,7 +59,7 @@ extern s32 N(IdleAnimations)[];
 ActorPartBlueprint N(parts)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
@@ -66,7 +71,7 @@ ActorPartBlueprint N(parts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_MULTI_TARGET | ACTOR_PART_FLAG_80000000,
-        .index = 2,
+        .index = PRT_2,
         .posOffset = { 0, 50, 0 },
         .targetOffset = { -6, 20 },
         .opacity = 255,
@@ -325,8 +330,8 @@ EvtScript N(unused) = {
     EVT_CALL(SetBattleCamOffsetZ, 5)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 30)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Monstar_GatherStrength1)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations2)))
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Monstar_GatherStrength1)
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations2)))
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 40)
     EVT_SUB(LVar2, 5)
@@ -353,11 +358,11 @@ EvtScript N(attack) = {
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_WAIT(30)
     EVT_THREAD
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Monstar_GatherStrength1)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Monstar_GatherStrength1)
         EVT_WAIT(20)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Monstar_GatherStrength2)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Monstar_GatherStrength2)
         EVT_WAIT(20)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Monstar_GatherStrength3)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Monstar_GatherStrength3)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(N(UnkBackgroundFunc3))
@@ -415,15 +420,15 @@ EvtScript N(attack) = {
     EVT_ADD(LVar1, 50)
     EVT_ADD(LVar2, 5)
     EVT_PLAY_EFFECT(EFFECT_RADIAL_SHIMMER, 11, LVar0, LVar1, LVar2, EVT_FLOAT(0.8), 160, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Monstar_Release)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Monstar_Release)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 0, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LVarA, LVar0)
             EVT_WAIT(170)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Monstar_Idle1)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations)))
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Monstar_Idle1)
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations)))
             EVT_CALL(MakeLerp, 200, 0, 60, EASING_LINEAR)
             EVT_LABEL(1)
             EVT_CALL(UpdateLerp)
@@ -448,8 +453,8 @@ EvtScript N(attack) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Monstar_Idle1)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations)))
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Monstar_Idle1)
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations)))
             EVT_CALL(MakeLerp, 200, 0, 60, EASING_LINEAR)
             EVT_LABEL(2)
             EVT_CALL(UpdateLerp)
@@ -484,13 +489,13 @@ EvtScript N(takeTurn) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_CALL(ActorSpeak, MSG_CH7_00E5, ACTOR_SELF, 1, ANIM_Monstar_Talk, ANIM_Monstar_Talk)
+            EVT_CALL(ActorSpeak, MSG_CH7_00E5, ACTOR_SELF, PRT_MAIN, ANIM_Monstar_Talk, ANIM_Monstar_Talk)
         EVT_CASE_EQ(1)
-            EVT_CALL(ActorSpeak, MSG_CH7_00E6, ACTOR_SELF, 1, ANIM_Monstar_Talk, ANIM_Monstar_Talk)
+            EVT_CALL(ActorSpeak, MSG_CH7_00E6, ACTOR_SELF, PRT_MAIN, ANIM_Monstar_Talk, ANIM_Monstar_Talk)
         EVT_CASE_EQ(2)
-            EVT_CALL(ActorSpeak, MSG_CH7_00E7, ACTOR_SELF, 1, ANIM_Monstar_Talk, ANIM_Monstar_Talk)
+            EVT_CALL(ActorSpeak, MSG_CH7_00E7, ACTOR_SELF, PRT_MAIN, ANIM_Monstar_Talk, ANIM_Monstar_Talk)
         EVT_CASE_DEFAULT
-            EVT_CALL(ActorSpeak, MSG_CH7_00E6, ACTOR_SELF, 1, ANIM_Monstar_Talk, ANIM_Monstar_Talk)
+            EVT_CALL(ActorSpeak, MSG_CH7_00E6, ACTOR_SELF, PRT_MAIN, ANIM_Monstar_Talk, ANIM_Monstar_Talk)
     EVT_END_SWITCH
     EVT_CALL(AddActorVar, ACTOR_SELF, 3, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)

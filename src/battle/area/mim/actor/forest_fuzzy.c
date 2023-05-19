@@ -13,6 +13,10 @@ extern EvtScript N(idle_80218574);
 extern EvtScript N(handleEvent_80218584);
 extern Formation N(specialFormation_8021A800);
 
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+};
+
 s32 N(DefenseTable_802183C0)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_END,
@@ -46,7 +50,7 @@ s32 N(StatusTable_802183CC)[] = {
 ActorPartBlueprint N(PartsTable_80218478)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 20 },
         .opacity = 255,
@@ -255,9 +259,9 @@ EvtScript N(80218C48) = {
         EVT_END_LOOP
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2070)
     EVT_END_THREAD
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Anim0D)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Anim0D)
     EVT_WAIT(130)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Walk)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Walk)
     EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_8021A800)), 0)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
     EVT_CALL(SetActorPos, LVar0, LVar1, LVar2, LVar3)
@@ -265,7 +269,7 @@ EvtScript N(80218C48) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_THREAD
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Walk)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Walk)
         EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.4))
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
         EVT_CALL(SetGoalPos, ACTOR_SELF, LVar1, LVar2, LVar3)
@@ -310,7 +314,7 @@ EvtScript N(80219054) = {
         EVT_GOTO(100)
     EVT_END_IF
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Run)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Run)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 50)
@@ -318,10 +322,10 @@ EvtScript N(80219054) = {
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
     EVT_EXEC_WAIT(EVS_Enemy_HopToPos)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Idle)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Idle)
     EVT_LABEL(100)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 10, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Anim04)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Anim04)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 9, 0)
     EVT_WAIT(1)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 8, 0)
@@ -337,11 +341,11 @@ EvtScript N(80219054) = {
             EVT_SET(LVar1, 0)
             EVT_SUB(LVar2, 5)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(3.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Jump)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Jump)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 11, FALSE, TRUE, FALSE)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Anim09)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Anim09)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_SUB(LVar0, 20)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(3.0))
@@ -362,14 +366,14 @@ EvtScript N(80219054) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Run)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Run)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
             EVT_EXEC_WAIT(EVS_Enemy_HopToPos)
-            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
+            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
@@ -386,7 +390,7 @@ EvtScript N(80219054) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, -3, -12, -15)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(3.0))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Jump)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Jump)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
     EVT_IF_EQ(LocalFlag(0), 1)
         EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 0, BS_FLAGS1_SP_EVT_ACTIVE)
@@ -396,9 +400,9 @@ EvtScript N(80219054) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Leeching)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3E0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Bite)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Bite)
     EVT_WAIT(21)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Still)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Still)
     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 330)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3E0)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, -3, -2, 0)
@@ -418,7 +422,7 @@ EvtScript N(80219054) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarA, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 1, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Idle)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Idle)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(GetLastDamage, ACTOR_PLAYER, LVar3)
     EVT_IF_NE(LVar3, 0)
@@ -494,13 +498,13 @@ EvtScript N(80219054) = {
     EVT_WAIT(5)
     EVT_CALL(YieldTurn)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Run)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Run)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
     EVT_EXEC_WAIT(EVS_Enemy_HopToPos)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Idle)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Idle)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN

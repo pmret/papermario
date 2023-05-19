@@ -12,6 +12,10 @@ extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
 extern s32 N(IdleAnimations)[];
 
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+};
+
 s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   1,
     ELEMENT_END,
@@ -45,7 +49,7 @@ s32 N(StatusTable)[] = {
 ActorPartBlueprint N(parts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -2, 30 },
         .opacity = 255,
@@ -238,10 +242,10 @@ EvtScript N(attackPainfulSong) = {
         EVT_SET(LocalFlag(0), 0)
         EVT_LABEL(0)
         EVT_IF_EQ(LocalFlag(0), 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Dayzee_Amazy_Anim0E)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Amazy_Anim0E)
             EVT_SET(LocalFlag(0), 1)
         EVT_ELSE
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Dayzee_Amazy_Anim0F)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Amazy_Anim0F)
             EVT_SET(LocalFlag(0), 0)
         EVT_END_IF
         EVT_WAIT(1)
@@ -254,10 +258,10 @@ EvtScript N(attackPainfulSong) = {
             EVT_GOTO(0)
         EVT_END_IF
         EVT_IF_EQ(LocalFlag(0), 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Dayzee_Amazy_Anim0E)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Amazy_Anim0E)
             EVT_SET(LocalFlag(0), 1)
         EVT_ELSE
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Dayzee_Amazy_Anim0F)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Amazy_Anim0F)
             EVT_SET(LocalFlag(0), 0)
         EVT_END_IF
         EVT_WAIT(1)
@@ -265,12 +269,12 @@ EvtScript N(attackPainfulSong) = {
         EVT_CALL(SetGoalPos, ACTOR_SELF, -35, 0, 10)
         EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
     EVT_END_IF
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Dayzee_Amazy_Anim01)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Amazy_Anim01)
     EVT_WAIT(10)
     EVT_THREAD
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Dayzee_Amazy_Anim06)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Amazy_Anim06)
         EVT_WAIT(40)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Dayzee_Amazy_Anim07)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Amazy_Anim07)
     EVT_END_THREAD
     EVT_WAIT(20)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_DAYZEE_SONG)
@@ -284,7 +288,7 @@ EvtScript N(attackPainfulSong) = {
         EVT_PLAY_EFFECT(EFFECT_MUSIC_NOTE, 1, LVar3, LVar1, LVar2, 0)
         EVT_WAIT(10)
     EVT_END_LOOP
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Dayzee_Amazy_Anim01)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Amazy_Anim01)
     EVT_WAIT(10)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
@@ -298,9 +302,9 @@ EvtScript N(attackPainfulSong) = {
             EVT_WAIT(15)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
             EVT_EXEC_WAIT(N(returnHome))
-            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
+            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
@@ -335,7 +339,7 @@ EvtScript N(flee) = {
     EVT_CALL(SetBattleCamTarget, LVar0, LVar1, LVar2)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Dayzee_Amazy_Anim03)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Amazy_Anim03)
     EVT_WAIT(10)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(1.0))
@@ -345,7 +349,7 @@ EvtScript N(flee) = {
     EVT_WAIT(20)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(EnableActorBlur, ACTOR_SELF, 1)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Dayzee_Amazy_Anim04)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Amazy_Anim04)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(12.0))
     EVT_ADD(LVar0, 200)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)

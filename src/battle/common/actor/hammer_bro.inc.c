@@ -8,6 +8,15 @@ extern EvtScript N(takeTurn);
 extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
 
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+    PRT_HAMMER_1        = 2,
+    PRT_HAMMER_2        = 3,
+    PRT_HAMMER_3        = 4,
+    PRT_HAMMER_4        = 5,
+    PRT_HAMMER_5        = 6,
+};
+
 s32 N(IdleAnimations)[] = {
     STATUS_KEY_NORMAL,    ANIM_HammerBros_Anim02,
     STATUS_KEY_STONE,     ANIM_HammerBros_Anim00,
@@ -21,7 +30,7 @@ s32 N(IdleAnimations)[] = {
     STATUS_END,
 };
 
-s32 N(IdleAnimations2)[] = {
+s32 N(HammerAnims)[] = {
     STATUS_KEY_NORMAL,    ANIM_HammerBros_Anim0D,
     STATUS_END,
 };
@@ -59,7 +68,7 @@ s32 N(StatusTable)[] = {
 ActorPartBlueprint N(parts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -3, 35 },
         .opacity = 255,
@@ -71,11 +80,11 @@ ActorPartBlueprint N(parts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
-        .index = 2,
+        .index = PRT_HAMMER_1,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations2),
+        .idleAnimations = N(HammerAnims),
         .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
@@ -83,11 +92,11 @@ ActorPartBlueprint N(parts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
-        .index = 3,
+        .index = PRT_HAMMER_2,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations2),
+        .idleAnimations = N(HammerAnims),
         .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
@@ -95,11 +104,11 @@ ActorPartBlueprint N(parts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
-        .index = 4,
+        .index = PRT_HAMMER_3,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations2),
+        .idleAnimations = N(HammerAnims),
         .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
@@ -107,11 +116,11 @@ ActorPartBlueprint N(parts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
-        .index = 5,
+        .index = PRT_HAMMER_4,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations2),
+        .idleAnimations = N(HammerAnims),
         .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
@@ -119,11 +128,11 @@ ActorPartBlueprint N(parts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
-        .index = 6,
+        .index = PRT_HAMMER_5,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
-        .idleAnimations = N(IdleAnimations2),
+        .idleAnimations = N(HammerAnims),
         .defenseTable = N(DefenseTable),
         .eventFlags = 0,
         .elementImmunityFlags = 0,
@@ -168,17 +177,17 @@ EvtScript N(idle) = {
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_FLAG(STATUS_FLAG_SLEEP)
-            EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -5, 15)
-            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, 0)
+            EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -5, 15)
+            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, 0, 0)
         EVT_CASE_DEFAULT
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
-                    EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -3, 35)
-                    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -3, -10)
+                    EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -3, 35)
+                    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, -3, -10)
                 EVT_CASE_EQ(1)
-                    EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -5, 15)
-                    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, 0)
+                    EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -5, 15)
+                    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, 0, 0)
             EVT_END_SWITCH
     EVT_END_SWITCH
     EVT_WAIT(1)
@@ -231,7 +240,7 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_HammerBros_Anim17)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HammerBros_Anim17)
                 EVT_WAIT(10)
             EVT_END_IF
         EVT_END_CASE_GROUP
@@ -299,13 +308,13 @@ EvtScript N(attackHammerThrow) = {
             EVT_LABEL(0)
             EVT_ADD(LVar0, 20)
             EVT_MOD(LVar0, 360)
-            EVT_CALL(SetPartRotation, ACTOR_SELF, 2, 0, 0, LVar0)
+            EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_HAMMER_1, 0, 0, LVar0)
             EVT_WAIT(1)
             EVT_GOTO(0)
         EVT_END_CHILD_THREAD
-        EVT_CALL(SetPartPos, ACTOR_SELF, 2, 0, 50, 0)
-        EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_INVISIBLE, FALSE)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_HammerBros_Anim0C)
+        EVT_CALL(SetPartPos, ACTOR_SELF, PRT_HAMMER_1, 0, 50, 0)
+        EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_HAMMER_1, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HammerBros_Anim0C)
         EVT_GOTO(100)
     EVT_END_IF
     EVT_CHILD_THREAD
@@ -313,7 +322,7 @@ EvtScript N(attackHammerThrow) = {
         EVT_LABEL(0)
         EVT_ADD(LVar0, 20)
         EVT_MOD(LVar0, 360)
-        EVT_CALL(SetPartRotation, ACTOR_SELF, 2, 0, 0, LVar0)
+        EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_HAMMER_1, 0, 0, LVar0)
         EVT_WAIT(1)
         EVT_GOTO(0)
     EVT_END_CHILD_THREAD
@@ -321,74 +330,74 @@ EvtScript N(attackHammerThrow) = {
     EVT_SUB(LVar0, 23)
     EVT_ADD(LVar1, 23)
     EVT_SUB(LVar2, 2)
-    EVT_CALL(SetPartPos, ACTOR_SELF, 2, LVar0, LVar1, LVar2)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_HammerBros_Anim0C)
+    EVT_CALL(SetPartPos, ACTOR_SELF, PRT_HAMMER_1, LVar0, LVar1, LVar2)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HammerBros_Anim0C)
     EVT_WAIT(8)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_HAMMER_1, ACTOR_PART_FLAG_INVISIBLE, FALSE)
     EVT_LABEL(100)
     EVT_THREAD
         EVT_WAIT(15)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_HammerBros_Anim02)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HammerBros_Anim02)
     EVT_END_THREAD
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
     EVT_IF_FLAG(LVar0, STATUS_FLAG_SHRINK)
-        EVT_CALL(SetPartScale, ACTOR_SELF, 2, EVT_FLOAT(0.4), EVT_FLOAT(0.4), EVT_FLOAT(0.4))
+        EVT_CALL(SetPartScale, ACTOR_SELF, PRT_HAMMER_1, EVT_FLOAT(0.4), EVT_FLOAT(0.4), EVT_FLOAT(0.4))
     EVT_ELSE
-        EVT_CALL(SetPartScale, ACTOR_SELF, 2, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
+        EVT_CALL(SetPartScale, ACTOR_SELF, PRT_HAMMER_1, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
     EVT_END_IF
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LVarA, LVar0)
-            EVT_CALL(SetPartSounds, ACTOR_SELF, 2, ACTOR_SOUND_JUMP, 0, 0)
-            EVT_CALL(PlaySoundAtPart, ACTOR_SELF, 2, SOUND_2E9)
+            EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_HAMMER_1, ACTOR_SOUND_JUMP, 0, 0)
+            EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_HAMMER_1, SOUND_2E9)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_SUB(LVar0, 20)
             EVT_SET(LVar1, 10)
-            EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 2, EVT_FLOAT(1.3))
-            EVT_CALL(JumpPartTo, ACTOR_SELF, 2, LVar0, LVar1, LVar2, 15, TRUE)
+            EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_HAMMER_1, EVT_FLOAT(1.3))
+            EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_HAMMER_1, LVar0, LVar1, LVar2, 15, TRUE)
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_SUB(LVar0, 40)
-            EVT_CALL(JumpPartTo, ACTOR_SELF, 2, LVar0, LVar1, LVar2, 15, TRUE)
+            EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_HAMMER_1, LVar0, LVar1, LVar2, 15, TRUE)
             EVT_SUB(LVar0, 30)
-            EVT_CALL(JumpPartTo, ACTOR_SELF, 2, LVar0, LVar1, LVar2, 10, TRUE)
+            EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_HAMMER_1, LVar0, LVar1, LVar2, 10, TRUE)
             EVT_SUB(LVar0, 20)
-            EVT_CALL(JumpPartTo, ACTOR_SELF, 2, LVar0, LVar1, LVar2, 5, TRUE)
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+            EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_HAMMER_1, LVar0, LVar1, LVar2, 5, TRUE)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_HAMMER_1, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_WAIT(15)
             EVT_CALL(YieldTurn)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
             EVT_WAIT(20)
-            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
+            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(SetPartSounds, ACTOR_SELF, 2, ACTOR_SOUND_JUMP, 0, 0)
-    EVT_CALL(PlaySoundAtPart, ACTOR_SELF, 2, SOUND_2E9)
+    EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_HAMMER_1, ACTOR_SOUND_JUMP, 0, 0)
+    EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_HAMMER_1, SOUND_2E9)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 2, EVT_FLOAT(1.3))
-    EVT_CALL(JumpPartTo, ACTOR_SELF, 2, LVar0, LVar1, LVar2, 15, TRUE)
+    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_HAMMER_1, EVT_FLOAT(1.3))
+    EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_HAMMER_1, LVar0, LVar1, LVar2, 15, TRUE)
     EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, DMG_STATUS_KEY(STATUS_FLAG_SHRINK, 3, 50), 5, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_CALL(GetPartOffset, ACTOR_SELF, 2, LVar0, LVar1, LVar2)
+            EVT_CALL(GetPartOffset, ACTOR_SELF, PRT_HAMMER_1, LVar0, LVar1, LVar2)
             EVT_SUB(LVar0, 50)
             EVT_SET(LVar1, 10)
-            EVT_CALL(JumpPartTo, ACTOR_SELF, 2, LVar0, LVar1, LVar2, 20, TRUE)
+            EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_HAMMER_1, LVar0, LVar1, LVar2, 20, TRUE)
             EVT_SUB(LVar0, 30)
-            EVT_CALL(JumpPartTo, ACTOR_SELF, 2, LVar0, LVar1, LVar2, 10, TRUE)
+            EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_HAMMER_1, LVar0, LVar1, LVar2, 10, TRUE)
             EVT_SUB(LVar0, 20)
-            EVT_CALL(JumpPartTo, ACTOR_SELF, 2, LVar0, LVar1, LVar2, 5, TRUE)
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+            EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_HAMMER_1, LVar0, LVar1, LVar2, 5, TRUE)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_HAMMER_1, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_WAIT(20)
             EVT_CALL(YieldTurn)
         EVT_END_CASE_GROUP
@@ -400,9 +409,9 @@ EvtScript N(attackHammerThrow) = {
 };
 
 EvtScript N(hammerMiss) = {
-    EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FLOAT(2.0))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_HammerBros_Anim02)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_HammerBros_Anim0C)
+    EVT_CALL(SetAnimationRate, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(2.0))
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HammerBros_Anim02)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HammerBros_Anim0C)
     EVT_WAIT(4)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVar0, ACTOR_PART_FLAG_INVISIBLE, FALSE)
     EVT_CALL(SetPartSounds, ACTOR_SELF, LVar0, ACTOR_SOUND_JUMP, 0, 0)
@@ -429,9 +438,9 @@ EvtScript N(hammerMiss) = {
 };
 
 EvtScript N(hammerHit) = {
-    EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FLOAT(2.0))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_HammerBros_Anim02)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_HammerBros_Anim0C)
+    EVT_CALL(SetAnimationRate, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(2.0))
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HammerBros_Anim02)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HammerBros_Anim0C)
     EVT_WAIT(4)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, LVar0, ACTOR_PART_FLAG_INVISIBLE, FALSE)
     EVT_CALL(SetPartSounds, ACTOR_SELF, LVar0, ACTOR_SOUND_JUMP, 0, 0)
@@ -461,11 +470,11 @@ EvtScript N(attackHammerSurge) = {
         EVT_LOOP(100)
             EVT_ADD(LVar0, 20)
             EVT_MOD(LVar0, 360)
-            EVT_CALL(SetPartRotation, ACTOR_SELF, 2, 0, 0, LVar0)
-            EVT_CALL(SetPartRotation, ACTOR_SELF, 3, 0, 0, LVar0)
-            EVT_CALL(SetPartRotation, ACTOR_SELF, 4, 0, 0, LVar0)
-            EVT_CALL(SetPartRotation, ACTOR_SELF, 5, 0, 0, LVar0)
-            EVT_CALL(SetPartRotation, ACTOR_SELF, 6, 0, 0, LVar0)
+            EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_HAMMER_1, 0, 0, LVar0)
+            EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_HAMMER_2, 0, 0, LVar0)
+            EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_HAMMER_3, 0, 0, LVar0)
+            EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_HAMMER_4, 0, 0, LVar0)
+            EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_HAMMER_5, 0, 0, LVar0)
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
@@ -473,24 +482,24 @@ EvtScript N(attackHammerSurge) = {
     EVT_SUB(LVar0, 23)
     EVT_ADD(LVar1, 23)
     EVT_SUB(LVar2, 2)
-    EVT_CALL(SetPartPos, ACTOR_SELF, 2, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPartPos, ACTOR_SELF, 3, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPartPos, ACTOR_SELF, 4, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPartPos, ACTOR_SELF, 5, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPartPos, ACTOR_SELF, 6, LVar0, LVar1, LVar2)
+    EVT_CALL(SetPartPos, ACTOR_SELF, PRT_HAMMER_1, LVar0, LVar1, LVar2)
+    EVT_CALL(SetPartPos, ACTOR_SELF, PRT_HAMMER_2, LVar0, LVar1, LVar2)
+    EVT_CALL(SetPartPos, ACTOR_SELF, PRT_HAMMER_3, LVar0, LVar1, LVar2)
+    EVT_CALL(SetPartPos, ACTOR_SELF, PRT_HAMMER_4, LVar0, LVar1, LVar2)
+    EVT_CALL(SetPartPos, ACTOR_SELF, PRT_HAMMER_5, LVar0, LVar1, LVar2)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
     EVT_IF_FLAG(LVar0, STATUS_FLAG_SHRINK)
-        EVT_CALL(SetPartScale, ACTOR_SELF, 2, EVT_FLOAT(0.4), EVT_FLOAT(0.4), EVT_FLOAT(0.4))
-        EVT_CALL(SetPartScale, ACTOR_SELF, 3, EVT_FLOAT(0.4), EVT_FLOAT(0.4), EVT_FLOAT(0.4))
-        EVT_CALL(SetPartScale, ACTOR_SELF, 4, EVT_FLOAT(0.4), EVT_FLOAT(0.4), EVT_FLOAT(0.4))
-        EVT_CALL(SetPartScale, ACTOR_SELF, 5, EVT_FLOAT(0.4), EVT_FLOAT(0.4), EVT_FLOAT(0.4))
-        EVT_CALL(SetPartScale, ACTOR_SELF, 6, EVT_FLOAT(0.4), EVT_FLOAT(0.4), EVT_FLOAT(0.4))
+        EVT_CALL(SetPartScale, ACTOR_SELF, PRT_HAMMER_1, EVT_FLOAT(0.4), EVT_FLOAT(0.4), EVT_FLOAT(0.4))
+        EVT_CALL(SetPartScale, ACTOR_SELF, PRT_HAMMER_2, EVT_FLOAT(0.4), EVT_FLOAT(0.4), EVT_FLOAT(0.4))
+        EVT_CALL(SetPartScale, ACTOR_SELF, PRT_HAMMER_3, EVT_FLOAT(0.4), EVT_FLOAT(0.4), EVT_FLOAT(0.4))
+        EVT_CALL(SetPartScale, ACTOR_SELF, PRT_HAMMER_4, EVT_FLOAT(0.4), EVT_FLOAT(0.4), EVT_FLOAT(0.4))
+        EVT_CALL(SetPartScale, ACTOR_SELF, PRT_HAMMER_5, EVT_FLOAT(0.4), EVT_FLOAT(0.4), EVT_FLOAT(0.4))
     EVT_ELSE
-        EVT_CALL(SetPartScale, ACTOR_SELF, 2, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-        EVT_CALL(SetPartScale, ACTOR_SELF, 3, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-        EVT_CALL(SetPartScale, ACTOR_SELF, 4, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-        EVT_CALL(SetPartScale, ACTOR_SELF, 5, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-        EVT_CALL(SetPartScale, ACTOR_SELF, 6, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
+        EVT_CALL(SetPartScale, ACTOR_SELF, PRT_HAMMER_1, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
+        EVT_CALL(SetPartScale, ACTOR_SELF, PRT_HAMMER_2, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
+        EVT_CALL(SetPartScale, ACTOR_SELF, PRT_HAMMER_3, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
+        EVT_CALL(SetPartScale, ACTOR_SELF, PRT_HAMMER_4, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
+        EVT_CALL(SetPartScale, ACTOR_SELF, PRT_HAMMER_5, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
     EVT_END_IF
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
@@ -513,15 +522,15 @@ EvtScript N(attackHammerSurge) = {
             EVT_EXEC(N(hammerMiss))
             EVT_WAIT(5)
             EVT_WAIT(20)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_HammerBros_Anim02)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HammerBros_Anim02)
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_WAIT(15)
             EVT_CALL(YieldTurn)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
             EVT_WAIT(20)
-            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
+            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
@@ -553,7 +562,7 @@ EvtScript N(attackHammerSurge) = {
     EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, 2, BS_FLAGS1_40)
     EVT_WAIT(5)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_HammerBros_Anim02)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HammerBros_Anim02)
     EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, 2, BS_FLAGS1_40)
     EVT_WAIT(5)

@@ -17,6 +17,10 @@ extern EvtScript N(wait);
 
 extern s32 N(IdleAnimations)[];
 
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+};
+
 s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   4,
     ELEMENT_END,
@@ -50,7 +54,7 @@ s32 N(StatusTable)[] = {
 ActorPartBlueprint N(parts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -6, 29 },
         .opacity = 255,
@@ -195,7 +199,7 @@ API_CALLABLE(ApplyBillSettings) {
 }
 
 EvtScript N(bulletShot) = {
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BillBlaster_Gold_Anim02)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BillBlaster_Gold_Anim02)
     EVT_WAIT(13)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(1.0))

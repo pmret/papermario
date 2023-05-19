@@ -10,19 +10,6 @@
 
 #define NAMESPACE battle_partner_parakarry
 
-static EffectInstance* airRaidEffect;
-static s32 D_8023BD74_unused;
-static s32 hudMarkers[7];
-static s32 D_8023BD94_unused;
-static s32 hudShimmers[6];
-static s32 D_8023BDB0_unused;
-static s32 hudTarget;
-static s32 hudTargetRotation;
-static s32 shellShotTimer;
-static s32 hudStick;
-static s32 hudStickPosX;
-static s32 hudStickPosY;
-
 extern HudScript HES_AimMarkerA;
 extern HudScript HES_AimMarkerB;
 extern HudScript HES_AimMarkerC;
@@ -52,6 +39,24 @@ extern EvtScript N(skyDive);
 extern EvtScript N(shellShot);
 extern EvtScript N(airLift);
 extern EvtScript N(airRaid);
+
+static EffectInstance* airRaidEffect;
+static s32 D_8023BD74_unused;
+static s32 hudMarkers[7];
+static s32 D_8023BD94_unused;
+static s32 hudShimmers[6];
+static s32 D_8023BDB0_unused;
+static s32 hudTarget;
+static s32 hudTargetRotation;
+static s32 shellShotTimer;
+static s32 hudStick;
+static s32 hudStickPosX;
+static s32 hudStickPosY;
+
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+    PRT_2               = 2,
+};
 
 API_CALLABLE(N(ShellShotActionCommand)) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -657,7 +662,7 @@ s32 N(StatusTable)[] = {
 ActorPartBlueprint N(parts)[] = {
     {
         .flags = 0,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 11, 28 },
         .opacity = 255,

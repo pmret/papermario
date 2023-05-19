@@ -12,6 +12,10 @@ extern EvtScript N(spikeTop_HandleEvent_Ceiling);
 extern EvtScript N(spikeTop_TakeTurn_Floor);
 extern EvtScript N(spikeTop_HandleEvent_Floor);
 
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+};
+
 s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   4,
     ELEMENT_FIRE,    99,
@@ -52,7 +56,7 @@ s32 N(StatusTable)[] = {
 ActorPartBlueprint N(parts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
@@ -135,16 +139,16 @@ EvtScript N(init) = {
         EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 0, 10, 0)
         EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(spikeTop_TakeTurn_Ceiling)))
         EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(spikeTop_HandleEvent_Ceiling)))
-        EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_FLIPABLE, FALSE)
+        EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_FLIPABLE, FALSE)
     EVT_ELSE
         EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
-        EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 0, 24)
-        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -9)
+        EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, 0, 24)
+        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, -1, -9)
         EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(spikeTop_TakeTurn_Floor)))
         EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(spikeTop_HandleEvent_Floor)))
-        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_8021C9D0)))
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_8021C9D0)))
         EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, FALSE)
-        EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_FLIPABLE, TRUE)
+        EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_FLIPABLE, TRUE)
     EVT_END_IF
     EVT_CALL(HPBarToHome, ACTOR_SELF)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -161,19 +165,19 @@ EvtScript N(idle) = {
 EvtScript N(spikeTop_FallDown) = {
     EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 2)
-    EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 1, 20)
-    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -3, -8)
+    EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, 1, 20)
+    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, -3, -8)
     EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 20)
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(spikeTop_TakeTurn_Floor)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(spikeTop_HandleEvent_Floor)))
     EVT_CALL(SetActorVar, ACTOR_SELF, 9, 1)
-    EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable_8021C8CC)))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_8021CA68)))
+    EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefenseTable_8021C8CC)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_8021CA68)))
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, FALSE)
-    EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_SPIKY_TOP, FALSE)
-    EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_FLIPABLE, TRUE)
+    EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_SPIKY_TOP, FALSE)
+    EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_FLIPABLE, TRUE)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, TRUE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim15)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpikeTop_Anim15)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar1, 24)
@@ -201,7 +205,7 @@ EvtScript N(spikeTop_FallDown) = {
     EVT_ADD(LVar1, LVarE)
     EVT_ADD(LVar2, LVarF)
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim05)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpikeTop_Anim05)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVarA, LVarB, LVarC)
@@ -370,14 +374,14 @@ EvtScript N(spikeTop_HandleEvent_Floor) = {
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
         EVT_CASE_EQ(EVENT_FLIP_TRIGGER)
             EVT_CALL(SetActorVar, ACTOR_SELF, 8, 2)
-            EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 1, 20)
-            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -3, -8)
+            EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, 1, 20)
+            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, -3, -8)
             EVT_CALL(SetActorVar, ACTOR_SELF, 9, 1)
-            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable_8021C8CC)))
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_8021CA68)))
-            EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_SPIKY_TOP, FALSE)
+            EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefenseTable_8021C8CC)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_8021CA68)))
+            EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_SPIKY_TOP, FALSE)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, TRUE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim13)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpikeTop_Anim13)
             EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 12, 0)
             EVT_THREAD
                 EVT_WAIT(1)
@@ -401,7 +405,7 @@ EvtScript N(spikeTop_HandleEvent_Floor) = {
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim15)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpikeTop_Anim15)
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim13)
@@ -426,7 +430,7 @@ EvtScript N(spikeTop_HandleEvent_Floor) = {
                 EVT_SET_CONST(LVar0, 1)
                 EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim0B)
                 EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim0E)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpikeTop_Anim0E)
                 EVT_WAIT(8)
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
@@ -439,7 +443,7 @@ EvtScript N(spikeTop_HandleEvent_Floor) = {
                 EVT_SET_CONST(LVar0, 1)
                 EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim0B)
                 EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim0C)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpikeTop_Anim0C)
                 EVT_WAIT(8)
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
@@ -530,7 +534,7 @@ EvtScript N(spikeTop_HandleEvent_Floor) = {
                 EVT_SET_CONST(LVar0, 1)
                 EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim0B)
                 EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim0C)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpikeTop_Anim0C)
                 EVT_WAIT(8)
             EVT_ELSE
                 EVT_SET_CONST(LVar0, 1)
@@ -550,14 +554,14 @@ EvtScript N(spikeTop_TakeTurn_Ceiling) = {
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
-    EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 0, 24)
-    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -9)
+    EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, 0, 24)
+    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, -1, -9)
     EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 20)
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(spikeTop_TakeTurn_Floor)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(spikeTop_HandleEvent_Floor)))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_8021C9D0)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_8021C9D0)))
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, FALSE)
-    EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_FLIPABLE, TRUE)
+    EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_FLIPABLE, TRUE)
     EVT_CALL(GetIndexFromPos, ACTOR_SELF, LVar0)
     EVT_MOD(LVar0, 4)
     EVT_CALL(SetGoalToIndex, ACTOR_SELF, LVar0)
@@ -573,16 +577,16 @@ EvtScript N(spikeTop_TakeTurn_Ceiling) = {
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar3, LVar4, LVar5)
         EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, LVar4, LVar2)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim01)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpikeTop_Anim01)
     EVT_ELSE
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim09)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpikeTop_Anim09)
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar3, LVar4, LVar5)
         EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar4, LVar2)
         EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
         EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim01)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpikeTop_Anim01)
         EVT_WAIT(8)
     EVT_END_IF
     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_301, 0)
@@ -600,8 +604,8 @@ EvtScript N(spikeTop_TakeTurn_Ceiling) = {
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LVarA, LVar0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_CALL(SetPartYaw, ACTOR_SELF, 1, 180)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim15)
+            EVT_CALL(SetPartYaw, ACTOR_SELF, PRT_MAIN, 180)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpikeTop_Anim15)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_SUB(LVar1, 24)
             EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -619,7 +623,7 @@ EvtScript N(spikeTop_TakeTurn_Ceiling) = {
             EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
             EVT_THREAD
                 EVT_WAIT(5)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim00)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpikeTop_Anim00)
             EVT_END_THREAD
             EVT_ADD(LVar0, 20)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -629,11 +633,11 @@ EvtScript N(spikeTop_TakeTurn_Ceiling) = {
             EVT_CALL(YieldTurn)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim08)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpikeTop_Anim08)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim03)
-            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpikeTop_Anim03)
+            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
@@ -641,7 +645,7 @@ EvtScript N(spikeTop_TakeTurn_Ceiling) = {
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim15)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpikeTop_Anim15)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar1, 24)
     EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -666,7 +670,7 @@ EvtScript N(spikeTop_TakeTurn_Ceiling) = {
             EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
             EVT_THREAD
                 EVT_WAIT(5)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim00)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpikeTop_Anim00)
             EVT_END_THREAD
             EVT_ADD(LVar0, 20)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -676,7 +680,7 @@ EvtScript N(spikeTop_TakeTurn_Ceiling) = {
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim08)
             EVT_EXEC_WAIT(EVS_Enemy_ReturnHome)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim03)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpikeTop_Anim03)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_LABEL(10)
@@ -695,27 +699,27 @@ EvtScript N(spikeTop_TakeTurn_Floor) = {
         EVT_SUB(LVar0, 1)
         EVT_IF_GT(LVar0, 0)
             EVT_CALL(SetActorVar, ACTOR_SELF, 9, LVar0)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
             EVT_WAIT(30)
-            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
+            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_ELSE
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
             EVT_WAIT(20)
-            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
+            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim05)
             EVT_SET_CONST(LVar2, ANIM_SpikeTop_Anim03)
             EVT_EXEC_WAIT(EVS_Enemy_FlipBackUp)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
-            EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 0, 24)
-            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -9)
-            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable)))
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_8021C9D0)))
+            EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, 0, 24)
+            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, -1, -9)
+            EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefenseTable)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_8021C9D0)))
             EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, FALSE)
-            EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_SPIKY_TOP, TRUE)
+            EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_SPIKY_TOP, TRUE)
         EVT_END_IF
         EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
         EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
@@ -725,9 +729,9 @@ EvtScript N(spikeTop_TakeTurn_Floor) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim0B)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpikeTop_Anim0B)
     EVT_WAIT(10)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim0F)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpikeTop_Anim0F)
     EVT_THREAD
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 1, LVar0, LVar1, LVar2, 32, 4, 0, 10, 0)
@@ -737,7 +741,7 @@ EvtScript N(spikeTop_TakeTurn_Floor) = {
         EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 1, LVar0, LVar1, LVar2, 32, 4, 0, 10, 0)
     EVT_END_THREAD
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2021)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim0A)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpikeTop_Anim0A)
     EVT_WAIT(20)
     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_0, SOUND_0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20D3)
@@ -770,7 +774,7 @@ EvtScript N(spikeTop_TakeTurn_Floor) = {
             EVT_WAIT(15)
             EVT_CALL(YieldTurn)
             EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar0, 200)
@@ -778,9 +782,9 @@ EvtScript N(spikeTop_TakeTurn_Floor) = {
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(10.0))
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
             EVT_WAIT(10)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim0C)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpikeTop_Anim0C)
             EVT_WAIT(10)
-            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
+            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
@@ -807,14 +811,14 @@ EvtScript N(spikeTop_TakeTurn_Floor) = {
             EVT_ADD(LVar0, 20)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim03)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpikeTop_Anim03)
             EVT_WAIT(8)
             EVT_CALL(YieldTurn)
             EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_SpikeTop_Anim08)
             EVT_EXEC_WAIT(EVS_Enemy_ReturnHome)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SpikeTop_Anim03)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpikeTop_Anim03)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)

@@ -10,6 +10,10 @@ extern EvtScript N(idle);
 extern EvtScript N(takeTurn);
 extern EvtScript N(handleEvent);
 
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+};
+
 s32 N(IdleAnimations)[] = {
     STATUS_KEY_NORMAL,    ANIM_PetitPiranha_Anim01,
     STATUS_KEY_STONE,     ANIM_PetitPiranha_Anim00,
@@ -61,7 +65,7 @@ s32 N(StatusTable)[] = {
 ActorPartBlueprint N(parts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,

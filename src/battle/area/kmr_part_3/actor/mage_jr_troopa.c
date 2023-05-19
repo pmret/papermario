@@ -7,6 +7,11 @@
 
 #define NAMESPACE b_area_kmr_part_3_mage_jr_troopa
 
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+    PRT_2               = 2,
+};
+
 s32 N(IdleAnimations_8022A550)[] = {
     STATUS_KEY_NORMAL,    ANIM_MageJrTroopa_Idle,
     STATUS_KEY_SLEEP,     ANIM_MageJrTroopa_Sleep,
@@ -81,7 +86,7 @@ s32 N(StatusTable_8022A634)[] = {
 ActorPartBlueprint N(PartsTable_8022A6E0)[] = {
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 28 },
         .opacity = 255,
@@ -93,7 +98,7 @@ ActorPartBlueprint N(PartsTable_8022A6E0)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
-        .index = 2,
+        .index = PRT_2,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 30 },
         .opacity = 255,
@@ -329,27 +334,27 @@ EvtScript N(handleEvent_8022ADD8) = {
         EVT_CASE_EQ(58)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MageJrTroopa_Flail)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MageJrTroopa_Flail)
                 EVT_WAIT(1000)
             EVT_END_IF
         EVT_CASE_EQ(31)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MageJrTroopa_Flail)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MageJrTroopa_Flail)
                 EVT_WAIT(20)
                 EVT_EXEC_WAIT(N(8022ABA8))
-                EVT_CALL(ActorSpeak, MSG_Menus_019B, ACTOR_SELF, 1, 0x0024000E, 0x00240003)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MageJrTroopa_Idle)
+                EVT_CALL(ActorSpeak, MSG_Menus_019B, ACTOR_SELF, PRT_MAIN, 0x0024000E, 0x00240003)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MageJrTroopa_Idle)
                 EVT_EXEC_WAIT(N(8022AC40))
             EVT_END_IF
         EVT_CASE_EQ(42)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MageJrTroopa_Hurt)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MageJrTroopa_Hurt)
             EVT_WAIT(20)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MageJrTroopa_Run)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MageJrTroopa_Run)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MageJrTroopa_Idle)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MageJrTroopa_Idle)
         EVT_CASE_EQ(53)
             EVT_SET_CONST(LVar0, 0x00000001)
             EVT_SET_CONST(LVar1, ANIM_MageJrTroopa_Idle)
@@ -372,7 +377,7 @@ EvtScript N(takeTurn_8022B4F0) = {
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MageJrTroopa_RaiseStaff)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MageJrTroopa_RaiseStaff)
     EVT_WAIT(8)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_SPELL_CAST1)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
@@ -390,7 +395,7 @@ EvtScript N(takeTurn_8022B4F0) = {
     EVT_ADD(LVar1, LVar4)
     EVT_PLAY_EFFECT(EFFECT_GATHER_ENERGY_PINK, 0, LVar0, LVar1, LVar2, LVar5, 30, 0)
     EVT_WAIT(30)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MageJrTroopa_SwingStaff)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MageJrTroopa_SwingStaff)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarA, DAMAGE_TYPE_NO_CONTACT, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVarA)
@@ -474,8 +479,8 @@ EvtScript N(nextTurn_8022BB44) = {
                         EVT_EXEC_WAIT(N(8022ABA8))
                         EVT_WAIT(20)
                     EVT_END_IF
-                    EVT_CALL(ActorSpeak, MSG_CH7_00DD, ACTOR_SELF, 1, 0x0024000E, 0x00240003)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MageJrTroopa_Idle)
+                    EVT_CALL(ActorSpeak, MSG_CH7_00DD, ACTOR_SELF, PRT_MAIN, 0x0024000E, 0x00240003)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MageJrTroopa_Idle)
                     EVT_EXEC_WAIT(N(8022AC40))
                     EVT_WAIT(20)
                 EVT_END_IF
@@ -490,8 +495,8 @@ EvtScript N(nextTurn_8022BB44) = {
                 EVT_CALL(SetActorVar, ACTOR_SELF, 1, 2)
                 EVT_EXEC_WAIT(N(8022ABA8))
                 EVT_WAIT(20)
-                EVT_CALL(ActorSpeak, MSG_CH7_00DE, ACTOR_SELF, 1, 0x0024000E, 0x00240003)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MageJrTroopa_Idle)
+                EVT_CALL(ActorSpeak, MSG_CH7_00DE, ACTOR_SELF, PRT_MAIN, 0x0024000E, 0x00240003)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MageJrTroopa_Idle)
                 EVT_EXEC_WAIT(N(8022AC40))
                 EVT_WAIT(10)
             EVT_END_IF
@@ -503,14 +508,14 @@ EvtScript N(nextTurn_8022BB44) = {
                 EVT_WAIT(15)
                 EVT_EXEC_WAIT(N(8022ABA8))
                 EVT_WAIT(10)
-                EVT_CALL(ActorSpeak, MSG_CH7_00DB, ACTOR_SELF, 2, 0x0021001A, 0x0021001B)
+                EVT_CALL(ActorSpeak, MSG_CH7_00DB, ACTOR_SELF, PRT_2, 0x0021001A, 0x0021001B)
                 EVT_WAIT(8)
                 EVT_EXEC_WAIT(N(8022A880))
-                EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, 1, TRUE)
-                EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, 1, FALSE)
+                EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, 1, TRUE)
+                EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, 1, FALSE)
                 EVT_WAIT(15)
-                EVT_CALL(ActorSpeak, MSG_CH7_00DC, ACTOR_SELF, 1, 0x0024000E, 0x00240003)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MageJrTroopa_Idle)
+                EVT_CALL(ActorSpeak, MSG_CH7_00DC, ACTOR_SELF, PRT_MAIN, 0x0024000E, 0x00240003)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MageJrTroopa_Idle)
                 EVT_WAIT(10)
                 EVT_EXEC_WAIT(N(8022AC40))
             EVT_END_IF
@@ -555,9 +560,9 @@ EvtScript N(8022BF1C) = {
             EVT_WAIT(3)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, 1, TRUE)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, 1, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_JrTroopa_DefeatedBegin)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, 1, TRUE)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, 1, FALSE)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_2, ANIM_JrTroopa_DefeatedBegin)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 5)
     EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -571,8 +576,8 @@ EvtScript N(8022BF1C) = {
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20E5)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_JrTroopa_Defeated)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 2, EVT_PTR(N(IdleAnimations_8022A61C)))
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_2, ANIM_JrTroopa_Defeated)
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_2, EVT_PTR(N(IdleAnimations_8022A61C)))
     EVT_WAIT(60)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, TRUE)
     EVT_RETURN
@@ -584,8 +589,8 @@ EvtScript N(8022C2A4) = {
     EVT_IF_EQ(LVar0, 1)
         EVT_WAIT(10)
         EVT_EXEC_WAIT(N(8022ABA8))
-        EVT_CALL(ActorSpeak, MSG_Menus_019A, ACTOR_SELF, 1, 0x0024000E, 0x00240003)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MageJrTroopa_Idle)
+        EVT_CALL(ActorSpeak, MSG_Menus_019A, ACTOR_SELF, PRT_MAIN, 0x0024000E, 0x00240003)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MageJrTroopa_Idle)
         EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
         EVT_IF_NE(LVar0, 1)
             EVT_EXEC_WAIT(N(8022AC40))

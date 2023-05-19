@@ -26,6 +26,17 @@ extern EvtScript N(EVS_LevitateToHomePos);
 extern EvtScript N(EVS_GetBackUp);
 extern EvtScript N(EVS_Tutankoopa_Death);
 
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+    PRT_TARGET          = 2,
+    PRT_SHELL_1         = 3,
+    PRT_SHELL_2         = 4,
+    PRT_SHELL_3         = 5,
+    PRT_DEBRIS_1        = 6,
+    PRT_DEBRIS_2        = 7,
+    PRT_DEBRIS_3        = 8,
+};
+
 enum N(ActorVars) {
     AVAR_NextAttack             = 0,
     AVAL_TRY_TOSS_NEXT          = 0,
@@ -46,17 +57,6 @@ enum N(ActorVars) {
     AVAR_UsedSpikeTaunt         = 11, // unused dialogue toggle for spiky-taunting
     AVAR_NextSummonTime         = 12, // set by chomp actor when it dies
     AVAR_HittingSelf            = 13, // signal to HandleEvent to treat hit as self-inflicted
-};
-
-enum N(ActorParts) {
-    PRT_MAIN            = 1,
-    PART_TARGET         = 2,
-    PRT_SHELL_1         = 3,
-    PRT_SHELL_2         = 4,
-    PRT_SHELL_3         = 5,
-    PRT_DEBRIS_1        = 6,
-    PRT_DEBRIS_2        = 7,
-    PRT_DEBRIS_3        = 8,
 };
 
 enum N(ActorParams) {
@@ -152,7 +152,7 @@ ActorPartBlueprint N(PartsTable)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = PART_TARGET,
+        .index = PRT_TARGET,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 39 },
         .opacity = 255,
@@ -307,17 +307,17 @@ EvtScript N(EVS_Idle) = {
             EVT_CASE_EQ(0)
                 EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
                 EVT_IF_FLAG(LVar0, STATUS_FLAG_DIZZY)
-                    EVT_CALL(SetTargetOffset, ACTOR_SELF, PART_TARGET, -10, 22)
-                    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PART_TARGET, 2, -8)
+                    EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_TARGET, -10, 22)
+                    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_TARGET, 2, -8)
                     EVT_CALL(N(SetAbsoluteStatusOffsets), -25, 15, 0, 20)
                 EVT_ELSE
-                    EVT_CALL(SetTargetOffset, ACTOR_SELF, PART_TARGET, 0, 39)
-                    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PART_TARGET, -5, -15)
+                    EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_TARGET, 0, 39)
+                    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_TARGET, -5, -15)
                     EVT_CALL(N(SetAbsoluteStatusOffsets), -17, 23, 11, 32)
                 EVT_END_IF
             EVT_CASE_EQ(1)
-                EVT_CALL(SetTargetOffset, ACTOR_SELF, PART_TARGET, -10, 22)
-                EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PART_TARGET, 2, -8)
+                EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_TARGET, -10, 22)
+                EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_TARGET, 2, -8)
                 EVT_CALL(N(SetAbsoluteStatusOffsets), -25, 15, 0, 20)
         EVT_END_SWITCH
         EVT_WAIT(1)
@@ -334,11 +334,11 @@ EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(EVENT_HIT_COMBO)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Tutankoopa_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
         EVT_CASE_EQ(EVENT_HIT)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Tutankoopa_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             // if damage is from "debris drop" backfiring, fall down and become stunned
@@ -349,31 +349,31 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_END_IF
         EVT_CASE_EQ(EVENT_BEGIN_FIRST_STRIKE)
         EVT_CASE_EQ(EVENT_BURN_HIT)
-            EVT_SET(LVar0, 1)
+            EVT_SET(LVar0, PRT_MAIN)
             EVT_SET(LVar1, ANIM_Tutankoopa_BurnHurt)
             EVT_SET(LVar2, ANIM_Tutankoopa_BurnStill)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
-            EVT_SET(LVar0, 1)
+            EVT_SET(LVar0, PRT_MAIN)
             EVT_SET(LVar1, ANIM_Tutankoopa_BurnHurt)
             EVT_SET(LVar2, ANIM_Tutankoopa_BurnStill)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
             EVT_WAIT(10)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Tutankoopa_BurnStill)
             EVT_EXEC_WAIT(N(EVS_Tutankoopa_Death))
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_EXEC_WAIT(N(EVS_Tutankoopa_SpinSmashHit))
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Tutankoopa_Glare)
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Tutankoopa_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Tutankoopa_Run)
             EVT_EXEC_WAIT(EVS_Enemy_ReturnHome)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6))
@@ -381,7 +381,7 @@ EvtScript N(EVS_HandleEvent) = {
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Stunned, LVar1)
             EVT_IF_EQ(LVar1, TRUE)
                 EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_StunState, LVar1)
@@ -408,18 +408,18 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_END_IF
         EVT_CASE_OR_EQ(EVENT_SHOCK_DEATH)
         EVT_CASE_OR_EQ(EVENT_DEATH)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Tutankoopa_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_WAIT(10)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Tutankoopa_Hurt)
             EVT_EXEC_WAIT(N(EVS_Tutankoopa_Death))
             EVT_RETURN
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
             EVT_EXEC_WAIT(N(EVS_Tutankoopa_SpinSmashHit))
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Tutankoopa_Hurt)
             EVT_EXEC_WAIT(N(EVS_Tutankoopa_Death))
             EVT_RETURN
@@ -440,12 +440,12 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Tutankoopa_Idle)
         EVT_CASE_EQ(EVENT_END_FIRST_STRIKE)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Tutankoopa_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_ReturnHome)
             EVT_CALL(HPBarToHome, ACTOR_SELF)
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Tutankoopa_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_Recover)
         EVT_CASE_DEFAULT

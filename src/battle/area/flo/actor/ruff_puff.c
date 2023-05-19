@@ -10,6 +10,10 @@ extern EvtScript N(takeTurn);
 extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
 
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+};
+
 s32 N(IdleAnimations)[] = {
     STATUS_KEY_NORMAL,    ANIM_TuffPuff_Idle,
     STATUS_KEY_STONE,     ANIM_TuffPuff_Still,
@@ -56,7 +60,7 @@ s32 N(StatusTable)[] = {
 ActorPartBlueprint N(parts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -2, 26 },
         .opacity = 255,
@@ -119,7 +123,7 @@ EvtScript N(idle) = {
 
 EvtScript N(returnHome) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TuffPuff_Run)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TuffPuff_Run)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, EASING_SIN_OUT)
@@ -236,14 +240,14 @@ EvtScript N(takeTurn) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TuffPuff_Run)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TuffPuff_Run)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 50, 0, 0)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, EASING_SIN_OUT)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TuffPuff_Idle)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TuffPuff_Idle)
     EVT_WAIT(5)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_TuffPuff_Grin)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_TuffPuff_Grin)
     EVT_WAIT(5)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
@@ -289,9 +293,9 @@ EvtScript N(takeTurn) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
             EVT_EXEC_WAIT(N(returnHome))
-            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
+            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)

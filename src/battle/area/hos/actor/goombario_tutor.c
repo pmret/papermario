@@ -8,6 +8,10 @@
 
 #define NAMESPACE b_area_hos_goombario_tutor
 
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+};
+
 s32 N(IdleAnimations_80219010)[] = {
     STATUS_KEY_NORMAL,    ANIM_BattleGoombario_Idle,
     STATUS_KEY_STONE,     ANIM_BattleGoombario_Still,
@@ -54,7 +58,7 @@ s32 N(StatusTable_80219068)[] = {
 ActorPartBlueprint N(PartsTable_80219114)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -4, 24 },
         .opacity = 255,
@@ -123,9 +127,9 @@ EvtScript N(handleEvent_802191E0) = {
                     EVT_CALL(RandInt, 2, LVar0)
                     EVT_SWITCH(LVar0)
                         EVT_CASE_EQ(0)
-                            EVT_CALL(ActorSpeak, MSG_HOS_002D, ACTOR_SELF, 1, ANIM_BattleGoombario_HurtStill, ANIM_BattleGoombario_Walk)
+                            EVT_CALL(ActorSpeak, MSG_HOS_002D, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_HurtStill, ANIM_BattleGoombario_Walk)
                         EVT_CASE_EQ(1)
-                            EVT_CALL(ActorSpeak, MSG_HOS_002E, ACTOR_SELF, 1, ANIM_BattleGoombario_HurtStill, ANIM_BattleGoombario_Walk)
+                            EVT_CALL(ActorSpeak, MSG_HOS_002E, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_HurtStill, ANIM_BattleGoombario_Walk)
                         EVT_CASE_EQ(2)
                     EVT_END_SWITCH
                 EVT_END_IF
@@ -166,18 +170,18 @@ EvtScript N(takeTurn_80219444) = {
     EVT_CALL(SetBattleCamZoom, 400)
     EVT_CALL(SetBattleCamOffsetZ, 40)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Run)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Run)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 50, 0, 0)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Idle)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Idle)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -1, 0)
     EVT_WAIT(1)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -2, 0)
     EVT_WAIT(5)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 10, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Headbonk)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_66)
     EVT_CALL(SetBattleCamZoom, 400)
     EVT_CALL(SetBattleCamOffsetZ, 40)
@@ -198,7 +202,7 @@ EvtScript N(takeTurn_80219444) = {
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, LVar0)
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Headbonk)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
@@ -209,7 +213,7 @@ EvtScript N(takeTurn_80219444) = {
     EVT_END_THREAD
     EVT_CALL(PlaySound, SOUND_JUMP_3E2)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 22, FALSE, TRUE, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Headbonk)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk)
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.1), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
     EVT_WAIT(1)
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.3), EVT_FLOAT(0.5), EVT_FLOAT(1.0))
@@ -243,7 +247,7 @@ EvtScript N(takeTurn_80219444) = {
             EVT_WAIT(1)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Idle)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Idle)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar0, 40)
             EVT_SET(LVar1, 0)
@@ -258,16 +262,16 @@ EvtScript N(takeTurn_80219444) = {
             EVT_CALL(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
             EVT_SUB(LVar0, 10)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 4, FALSE, TRUE, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Idle)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Idle)
             EVT_WAIT(8)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(YieldTurn)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Idle)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Idle)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Run)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Run)
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Idle)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Idle)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)

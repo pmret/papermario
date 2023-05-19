@@ -14,6 +14,10 @@ extern EvtScript N(runAway);
 extern EvtScript N(runAwayFail);
 extern EvtScript N(executeAction);
 
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+};
+
 s32 N(IdleAnimations)[] = {
     STATUS_KEY_NORMAL,    ANIM_Goompa_Walk,
     STATUS_END,
@@ -51,7 +55,7 @@ s32 N(StatusTable)[] = {
 
 ActorPartBlueprint N(parts)[] = {
     {
-        .index = 1,
+        .index = PRT_MAIN,
         .opacity = 255,
         .idleAnimations = N(IdleAnimations),
         .defenseTable = N(DefenseTable),

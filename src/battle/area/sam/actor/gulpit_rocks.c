@@ -11,6 +11,10 @@ extern EvtScript N(takeTurn);
 extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
 
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+};
+
 s32 N(IdleAnimations)[] = {
     STATUS_KEY_NORMAL,    ANIM_Gulpit_Anim10,
     STATUS_END,
@@ -54,7 +58,7 @@ s32 N(StatusTable)[] = {
 ActorPartBlueprint N(parts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 14 },
         .opacity = 255,
@@ -96,13 +100,13 @@ EvtScript N(init) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations)))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Gulpit_Anim10)
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations)))
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim10)
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, 0)
             EVT_CALL(SetActorSize, ACTOR_SELF, 24, 15)
         EVT_CASE_EQ(1)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations2)))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Gulpit_Anim12)
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations2)))
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim12)
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, 1)
             EVT_CALL(SetActorSize, ACTOR_SELF, 10, 8)
     EVT_END_SWITCH
@@ -161,9 +165,9 @@ EvtScript N(handleEvent) = {
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Gulpit_Anim11)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim11)
                 EVT_CASE_EQ(1)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Gulpit_Anim13)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim13)
             EVT_END_SWITCH
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, LVar0, LVar1, LVar2, 0, 0)

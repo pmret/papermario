@@ -10,6 +10,10 @@ extern EvtScript N(handleEvent);
 extern EvtScript N(spawnWhackasBump);
 extern EvtScript N(die);
 
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+};
+
 s32 N(IdleAnimations)[] = {
     STATUS_KEY_NORMAL,    ANIM_Whacka_Idle,
     STATUS_KEY_STONE,     ANIM_Whacka_Still,
@@ -56,7 +60,7 @@ s32 N(StatusTable)[] = {
 ActorPartBlueprint N(parts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 30 },
         .opacity = 255,
@@ -108,7 +112,7 @@ EvtScript N(init) = {
     EVT_CALL(N(IsHitEightTimes))
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_DISABLED | ACTOR_FLAG_NO_ATTACK | ACTOR_FLAG_NO_DMG_APPLY, TRUE)
-        EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, ACTOR_PART_FLAG_NO_TARGET, TRUE)
+        EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_NO_TARGET, TRUE)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -287,7 +291,7 @@ EvtScript N(spawnWhackasBump) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2073)
     EVT_THREAD
         EVT_WAIT(15)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Whacka_Idle)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Whacka_Idle)
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 5)
         EVT_ADD(LVar1, 20)
@@ -302,13 +306,13 @@ EvtScript N(die) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_DIG)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Whacka_Burrow)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Whacka_Burrow)
     EVT_WAIT(40)
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
     EVT_IF_NE(LVar0, 0)
         EVT_CALL(SetBattleFlagBits2, BS_FLAGS2_DROP_WHACKA_BUMP, TRUE)
     EVT_END_IF
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, ACTOR_PART_FLAG_NO_TARGET, TRUE)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_NO_TARGET, TRUE)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_DISABLED | ACTOR_FLAG_NO_ATTACK | ACTOR_FLAG_NO_DMG_APPLY, TRUE)
     EVT_CALL(RemoveActor, ACTOR_SELF)
     EVT_RETURN

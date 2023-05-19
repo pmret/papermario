@@ -29,6 +29,10 @@ extern EvtScript N(onHit);
 extern EvtScript N(shake_tank);
 extern EvtScript N(onDeath);
 
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+};
+
 s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   1,
     ELEMENT_SHOCK,    0,
@@ -63,7 +67,7 @@ s32 N(StatusTable)[] = {
 ActorPartBlueprint N(parts)[] = {
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 35 },
         .opacity = 255,

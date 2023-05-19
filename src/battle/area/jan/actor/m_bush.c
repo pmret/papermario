@@ -10,6 +10,10 @@ extern EvtScript N(takeTurn_80221F78);
 extern EvtScript N(idle_802219D4);
 extern EvtScript N(handleEvent_80221A74);
 
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+};
+
 s32 N(IdleAnimations_80221830)[] = {
     STATUS_KEY_NORMAL,    ANIM_MBush_Anim02,
     STATUS_KEY_STONE,     ANIM_MBush_Anim01,
@@ -57,7 +61,7 @@ s32 N(StatusTable_80221890)[] = {
 ActorPartBlueprint N(PartsTable_8022193C)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -2, 22 },
         .opacity = 255,
@@ -107,10 +111,10 @@ EvtScript N(idle_802219D4) = {
 
 EvtScript N(802219E4) = {
     EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MBush_Anim05)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MBush_Anim05)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MBush_Anim02)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MBush_Anim02)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
     EVT_RETURN
     EVT_END
@@ -220,7 +224,7 @@ EvtScript N(takeTurn_80221F78) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MBush_Anim04)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MBush_Anim04)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 50)
@@ -234,7 +238,7 @@ EvtScript N(takeTurn_80221F78) = {
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LVarA, LVar0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MBush_Anim06)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MBush_Anim06)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -250,20 +254,20 @@ EvtScript N(takeTurn_80221F78) = {
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
             EVT_WAIT(15)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MBush_Anim02)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MBush_Anim02)
             EVT_WAIT(15)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(YieldTurn)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
             EVT_EXEC_WAIT(N(802219E4))
-            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
+            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MBush_Anim06)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MBush_Anim06)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
@@ -281,7 +285,7 @@ EvtScript N(takeTurn_80221F78) = {
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MBush_Anim02)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MBush_Anim02)
             EVT_WAIT(8)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))

@@ -6,9 +6,27 @@
 
 #define NAMESPACE b_area_tik2_electro_blooper
 
+extern EvtScript N(init);
+extern EvtScript N(takeTurn);
+extern EvtScript N(idle);
+extern EvtScript N(handleEvent);
+extern EvtScript N(updateEffect);
+extern EvtScript N(discharge);
+extern EvtScript N(onDeath);
+extern EvtScript N(electricCharge);
+extern EvtScript N(attackElectricDrop);
+extern EvtScript N(attackSpinDrop);
+extern EvtScript N(attackInkBlast);
+extern EvtScript N(charge);
+
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+    PRT_2               = 2,
+};
+
 EvtScript N(FloatToPos) = {
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim00)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim0C)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Blooper_Anim00)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Blooper_Anim0C)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVarA, LVarB, LVarC)
     EVT_IF_GT(LVarB, 20)
         EVT_SUB(LVarB, 20)
@@ -35,8 +53,8 @@ EvtScript N(FloatToPos) = {
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(3.0))
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar7, LVar8, LVar9)
     EVT_CALL(FlyToGoal, ACTOR_SELF, LVar3, -2, EASING_CUBIC_OUT)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim00)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim0C)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Blooper_Anim00)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Blooper_Anim0C)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVarA, LVarB, LVarC)
     EVT_SUB(LVarB, 20)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVarA, LVarB, LVarC)
@@ -58,8 +76,8 @@ EvtScript N(FloatToPos) = {
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(3.0))
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar7, LVar8, LVar9)
     EVT_CALL(FlyToGoal, ACTOR_SELF, LVar3, -2, EASING_CUBIC_OUT)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim00)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim0C)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Blooper_Anim00)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Blooper_Anim0C)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVarA, LVarB, LVarC)
     EVT_SUB(LVarB, 20)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVarA, LVarB, LVarC)
@@ -81,19 +99,6 @@ EvtScript N(FloatToHome) = {
     EVT_RETURN
     EVT_END
 };
-
-extern EvtScript N(init);
-extern EvtScript N(takeTurn);
-extern EvtScript N(idle);
-extern EvtScript N(handleEvent);
-extern EvtScript N(updateEffect);
-extern EvtScript N(discharge);
-extern EvtScript N(onDeath);
-extern EvtScript N(electricCharge);
-extern EvtScript N(attackElectricDrop);
-extern EvtScript N(attackSpinDrop);
-extern EvtScript N(attackInkBlast);
-extern EvtScript N(charge);
 
 s32 N(IdleAnimations)[] = {
     STATUS_KEY_NORMAL,    ANIM_Blooper_Anim00,
@@ -186,7 +191,7 @@ s32 N(StatusTable_charged)[] = {
 ActorPartBlueprint N(parts)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 80 },
         .opacity = 255,
@@ -198,7 +203,7 @@ ActorPartBlueprint N(parts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 2,
+        .index = PRT_2,
         .posOffset = { 0, 20, 0 },
         .targetOffset = { 0, 60 },
         .opacity = 255,
@@ -329,10 +334,10 @@ EvtScript N(idle) = {
     EVT_IF_GE(LVar4, LVar1)
         EVT_GOTO(11)
     EVT_END_IF
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations2)))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim00)
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations2)))
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Blooper_Anim00)
     EVT_WAIT(9)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim0C)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Blooper_Anim0C)
     EVT_CALL(SetActorIdleJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
     EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FLOAT(1.0))
     EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -350,10 +355,10 @@ EvtScript N(idle) = {
     EVT_IF_GE(LVar4, LVar1)
         EVT_GOTO(12)
     EVT_END_IF
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations2)))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim00)
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations2)))
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Blooper_Anim00)
     EVT_WAIT(9)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim0C)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Blooper_Anim0C)
     EVT_CALL(SetActorIdleJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
     EVT_CALL(SetActorIdleSpeed, ACTOR_SELF, EVT_FLOAT(1.0))
     EVT_CALL(SetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -365,7 +370,7 @@ EvtScript N(idle) = {
         EVT_WAIT(1)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations3)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations3)))
     EVT_CALL(SetIdleGoalToHome, ACTOR_SELF)
     EVT_CALL(GetIdleGoal, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, -10)
@@ -528,11 +533,11 @@ EvtScript N(electricCharge) = {
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 40, EVT_FLOAT(0.3))
     EVT_END_THREAD
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim09)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Blooper_Anim09)
     EVT_WAIT(10)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim0A)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Blooper_Anim0A)
     EVT_WAIT(10)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim0B)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Blooper_Anim0B)
     EVT_WAIT(10)
     EVT_EXEC_WAIT(N(charge))
     EVT_WAIT(20)
@@ -584,7 +589,7 @@ EvtScript N(attackSpinDrop) = {
                 EVT_END_LOOP
                 EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_END_THREAD
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim0D)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Blooper_Anim0D)
             EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.5))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -615,7 +620,7 @@ EvtScript N(attackSpinDrop) = {
         EVT_END_LOOP
         EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
     EVT_END_THREAD
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim0D)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Blooper_Anim0D)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.5))
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 30)
@@ -627,9 +632,9 @@ EvtScript N(attackSpinDrop) = {
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(GetStatusFlags, ACTOR_PLAYER, LVar0)
     EVT_IF_FLAG(LVar0, STATUS_FLAG_STONE)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim04)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Blooper_Anim04)
     EVT_ELSE
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim00)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Blooper_Anim00)
     EVT_END_IF
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 30)
@@ -681,7 +686,7 @@ EvtScript N(attackElectricDrop) = {
                 EVT_END_LOOP
                 EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_END_THREAD
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim0D)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Blooper_Anim0D)
             EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.5))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -712,7 +717,7 @@ EvtScript N(attackElectricDrop) = {
         EVT_END_LOOP
         EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
     EVT_END_THREAD
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim0D)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Blooper_Anim0D)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.5))
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 30)
@@ -727,9 +732,9 @@ EvtScript N(attackElectricDrop) = {
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(GetStatusFlags, ACTOR_PLAYER, LVar0)
     EVT_IF_FLAG(LVar0, STATUS_FLAG_STONE)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim04)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Blooper_Anim04)
     EVT_ELSE
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim00)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Blooper_Anim00)
     EVT_END_IF
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 30)
@@ -752,8 +757,8 @@ EvtScript N(attackInkBlast) = {
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 85)
     EVT_ADD(LVar1, 45)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim00)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim0C)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Blooper_Anim00)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Blooper_Anim0C)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVarA, LVarB, LVarC)
     EVT_IF_GT(LVarB, 30)
         EVT_SUB(LVarB, 30)
@@ -784,8 +789,8 @@ EvtScript N(attackInkBlast) = {
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(3.0))
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar7, LVar8, LVar9)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 15, -2, EASING_CUBIC_OUT)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim00)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim0C)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Blooper_Anim00)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Blooper_Anim0C)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVarA, LVarB, LVarC)
     EVT_SUB(LVarB, 20)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVarA, LVarB, LVarC)
@@ -795,7 +800,7 @@ EvtScript N(attackInkBlast) = {
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(3.0))
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 15, -2, EASING_CUBIC_OUT)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim03)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Blooper_Anim03)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVarA, LVarB, LVarC)
     EVT_SUB(LVarB, 30)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.2))
@@ -822,7 +827,7 @@ EvtScript N(attackInkBlast) = {
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_WAIT(30)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim00)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Blooper_Anim00)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
             EVT_EXEC_WAIT(N(FloatToHome))
@@ -836,7 +841,7 @@ EvtScript N(attackInkBlast) = {
     EVT_CALL(SetDamageSource, DMG_SRC_INK_BLAST)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_NO_CONTACT, 0, 0, 4, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_WAIT(30)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Blooper_Anim00)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Blooper_Anim00)
     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
     EVT_EXEC_WAIT(N(FloatToHome))
@@ -864,7 +869,7 @@ EvtScript N(charge) = {
     EVT_PLAY_EFFECT(EFFECT_SNAKING_STATIC, 0, LVar0, LVar1, LVar2, LVar3, -1, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, LVarF)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_35C)
-    EVT_CALL(SetPartEventFlags, ACTOR_SELF, 2, ACTOR_EVENT_FLAG_ATTACK_CHARGED | ACTOR_EVENT_FLAG_ELECTRIFIED)
+    EVT_CALL(SetPartEventFlags, ACTOR_SELF, PRT_2, ACTOR_EVENT_FLAG_ATTACK_CHARGED | ACTOR_EVENT_FLAG_ELECTRIFIED)
     EVT_CALL(func_8026ED20, ACTOR_SELF, 1, 1)
     EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, 1, PAL_ADJUST_STATIC)
     EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(StatusTable_charged)))
@@ -884,7 +889,7 @@ EvtScript N(discharge) = {
         EVT_CALL(RemoveEffect, LVar0)
         EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
     EVT_END_IF
-    EVT_CALL(SetPartEventFlags, ACTOR_SELF, 2, 0)
+    EVT_CALL(SetPartEventFlags, ACTOR_SELF, PRT_2, 0)
     EVT_CALL(func_8026ED20, ACTOR_SELF, 1, 0)
     EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(StatusTable)))
     EVT_RETURN

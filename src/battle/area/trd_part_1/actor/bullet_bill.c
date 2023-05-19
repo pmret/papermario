@@ -6,6 +6,16 @@
 
 #define NAMESPACE b_area_trd_part_1_bullet_bill
 
+extern s32 N(IdleAnimations_80219064)[];
+extern EvtScript N(init_80219088);
+extern EvtScript N(takeTurn_802197C0);
+extern EvtScript N(idle_80219380);
+extern EvtScript N(handleEvent_802193E8);
+
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+};
+
 s32 N(DefenseTable_80218F60)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_END,
@@ -36,13 +46,10 @@ s32 N(StatusTable_80218F6C)[] = {
     STATUS_END,
 };
 
-extern s32 N(IdleAnimations_80219064)[];
-extern EvtScript N(init_80219088);
-
 ActorPartBlueprint N(PartsTable_80219018)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 16 },
         .opacity = 255,
@@ -85,10 +92,6 @@ s32 N(IdleAnimations_80219064)[] = {
     STATUS_END,
 };
 
-extern EvtScript N(takeTurn_802197C0);
-extern EvtScript N(idle_80219380);
-extern EvtScript N(handleEvent_802193E8);
-
 EvtScript N(init_80219088) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_802197C0)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80219380)))
@@ -120,10 +123,10 @@ EvtScript N(init_80219088) = {
         EVT_CALL(GetActorPos, LVar0, LVar1, LVarB, LVarC)
         EVT_SUB(LVar1, 90)
         EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.01))
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BulletBill_Anim03)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BulletBill_Anim03)
         EVT_CALL(SetGoalPos, ACTOR_SELF, LVar1, LVar2, LVar3)
         EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BulletBill_Anim01)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BulletBill_Anim01)
         EVT_CALL(ForceHomePos, ACTOR_SELF, LVar1, LVar2, LVar3)
         EVT_CALL(HPBarToHome, ACTOR_SELF)
     EVT_END_IF
@@ -236,7 +239,7 @@ EvtScript N(takeTurn_802197C0) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BulletBill_Anim04)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BulletBill_Anim04)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -1, 0)
     EVT_WAIT(1)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -2, 0)

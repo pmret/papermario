@@ -6,19 +6,6 @@
 
 #define NAMESPACE b_area_kpa_bony_beetle
 
-enum N(ActorVars) {
-    N(VAR_WAS_HIT) = 1,
-    N(VAR_STATE) = 8,
-    N(VAR_FLIP_TRIGGERED) = 9,
-};
-
-enum N(States) {
-    N(STATE_NORMAL) = 0,
-    N(STATE_SPIKY) = 1,
-    N(STATE_FLIPPED) = 2,
-    N(STATE_SPIKY_FLIPPED) = 3,
-};
-
 extern EvtScript N(init);
 extern EvtScript N(idle);
 extern EvtScript N(takeTurn);
@@ -32,6 +19,23 @@ extern EvtScript N(attackShellToss);
 extern EvtScript N(attackSpikeBounce);
 extern EvtScript N(standUp);
 extern EvtScript N(standUp_spiky);
+
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+};
+
+enum N(ActorVars) {
+    N(VAR_WAS_HIT) = 1,
+    N(VAR_STATE) = 8,
+    N(VAR_FLIP_TRIGGERED) = 9,
+};
+
+enum N(States) {
+    N(STATE_NORMAL) = 0,
+    N(STATE_SPIKY) = 1,
+    N(STATE_FLIPPED) = 2,
+    N(STATE_SPIKY_FLIPPED) = 3,
+};
 
 s32 N(IdleAnimations_normal)[] = {
     STATUS_KEY_NORMAL,    ANIM_BonyBeetle_Anim04,
@@ -123,7 +127,7 @@ s32 N(StatusTable)[] = {
 ActorPartBlueprint N(parts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -3, 21 },
         .opacity = 255,
@@ -164,32 +168,32 @@ EvtScript N(init) = {
     EVT_IF_EQ(LVar0, 1)
         EVT_IF_EQ(LVar1, 1)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_STATE), N(STATE_SPIKY))
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_spiky)))
-            EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_SPIKY_TOP, TRUE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim05)
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_spiky)))
+            EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_SPIKY_TOP, TRUE)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim05)
         EVT_ELSE
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_STATE), N(STATE_NORMAL))
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_normal)))
-            EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_SPIKY_TOP, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim04)
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_normal)))
+            EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_SPIKY_TOP, FALSE)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim04)
         EVT_END_IF
     EVT_ELSE
         EVT_CALL(RandInt, 1000, LVar0)
         EVT_IF_LT(LVar0, 500)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_STATE), N(STATE_NORMAL))
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_normal)))
-            EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_SPIKY_TOP, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim04)
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_normal)))
+            EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_SPIKY_TOP, FALSE)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim04)
         EVT_ELSE
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_STATE), N(STATE_SPIKY))
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_spiky)))
-            EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_SPIKY_TOP, TRUE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim05)
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_spiky)))
+            EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_SPIKY_TOP, TRUE)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim05)
         EVT_END_IF
     EVT_END_IF
 EVT_END_IF
-EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, -8)
-EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -3, 21)
+EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, 0, -8)
+EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -3, 21)
 EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, FALSE)
 EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
 EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
@@ -253,17 +257,17 @@ EvtScript N(changeSpikesState) = {
         EVT_CASE_EQ(N(STATE_NORMAL))
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20CE)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_STATE), N(STATE_SPIKY))
-            EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_SPIKY_TOP, TRUE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim2E)
+            EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_SPIKY_TOP, TRUE)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim2E)
             EVT_WAIT(25)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_spiky)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_spiky)))
         EVT_CASE_EQ(N(STATE_SPIKY))
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20CF)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_STATE), N(STATE_NORMAL))
-            EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_SPIKY_TOP, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim2F)
+            EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_SPIKY_TOP, FALSE)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim2F)
             EVT_WAIT(25)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_normal)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_normal)))
         EVT_CASE_EQ(N(STATE_FLIPPED))
         EVT_CASE_EQ(N(STATE_SPIKY_FLIPPED))
     EVT_END_SWITCH
@@ -329,14 +333,14 @@ EvtScript N(handleEvent_normal) = {
             EVT_RETURN
         EVT_CASE_EQ(EVENT_FLIP_TRIGGER)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_STATE), N(STATE_FLIPPED))
-            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, -8)
-            EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -3, 21)
+            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, 0, -8)
+            EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -3, 21)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_FLIP_TRIGGERED), 1)
-            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable_flipped)))
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_flipped)))
-            EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_SPIKY_TOP, FALSE)
+            EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefenseTable_flipped)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_flipped)))
+            EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_SPIKY_TOP, FALSE)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, TRUE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim08)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim08)
             EVT_USE_BUF(N(bounceTable))
             EVT_LOOP(20)
                 EVT_BUF_READ1(LVar0)
@@ -363,7 +367,7 @@ EvtScript N(handleEvent_normal) = {
             EVT_WAIT(20)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim12)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim12)
                 EVT_WAIT(10)
             EVT_END_IF
         EVT_END_CASE_GROUP
@@ -418,13 +422,13 @@ EvtScript N(attackShellToss) = {
         EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
         EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
         EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim16)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim16)
         EVT_GOTO(100)
     EVT_END_IF
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim10)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim10)
     EVT_WAIT(10)
     EVT_THREAD
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -435,7 +439,7 @@ EvtScript N(attackShellToss) = {
         EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 1, LVar0, LVar1, LVar2, 32, 4, 0, 10, 0)
     EVT_END_THREAD
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2021)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim16)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim16)
     EVT_WAIT(15)
     EVT_LABEL(100)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20D3)
@@ -455,18 +459,18 @@ EvtScript N(attackShellToss) = {
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_WAIT(20)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim12)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim12)
             EVT_WAIT(15)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim0E)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim0E)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim04)
-            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim04)
+            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
@@ -496,13 +500,13 @@ EvtScript N(attackShellToss) = {
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
             EVT_WAIT(15)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim12)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim12)
             EVT_WAIT(5)
             EVT_CALL(YieldTurn)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BonyBeetle_Anim0E)
             EVT_EXEC_WAIT(EVS_Enemy_ReturnHome)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim04)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim04)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -551,14 +555,14 @@ EvtScript N(handleEvent_spiky) = {
             EVT_RETURN
         EVT_CASE_EQ(EVENT_FLIP_TRIGGER)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_STATE), N(STATE_SPIKY_FLIPPED))
-            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, -8)
-            EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -3, 21)
+            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, 0, -8)
+            EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -3, 21)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_FLIP_TRIGGERED), 1)
-            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable_flipped)))
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_spiky_flipped)))
-            EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_SPIKY_TOP, FALSE)
+            EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefenseTable_flipped)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_spiky_flipped)))
+            EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_SPIKY_TOP, FALSE)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, TRUE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim09)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim09)
             EVT_USE_BUF(N(bounceTable))
             EVT_LOOP(20)
                 EVT_BUF_READ1(LVar0)
@@ -586,7 +590,7 @@ EvtScript N(handleEvent_spiky) = {
             EVT_WAIT(20)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim13)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim13)
             EVT_END_IF
             EVT_WAIT(10)
         EVT_END_CASE_GROUP
@@ -655,14 +659,14 @@ EvtScript N(attackSpikeBounce) = {
         EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
         EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
         EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim17)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim17)
         EVT_WAIT(10)
         EVT_GOTO(100)
     EVT_END_IF
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim11)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim11)
     EVT_WAIT(10)
     EVT_THREAD
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -677,7 +681,7 @@ EvtScript N(attackSpikeBounce) = {
         EVT_PLAY_EFFECT(EFFECT_SMOKE_IMPACT, 0, LVar0, LVar1, LVar2, 32, 12, 0, 10, 0)
     EVT_END_THREAD
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2021)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim17)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim17)
     EVT_WAIT(15)
     EVT_LABEL(100)
     EVT_THREAD
@@ -764,11 +768,11 @@ EvtScript N(attackSpikeBounce) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BonyBeetle_Anim0F)
             EVT_EXEC_WAIT(EVS_Enemy_ReturnHome)
-            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
+            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
@@ -840,7 +844,7 @@ EvtScript N(attackSpikeBounce) = {
             EVT_WAIT(5)
             EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim13)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim13)
             EVT_WAIT(5)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
@@ -862,13 +866,13 @@ EvtScript N(8021B7C8) = {
     EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_STATE), N(STATE_FLIPPED))
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_FLIP_TRIGGERED), 1)
-    EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable_flipped)))
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_flipped)))
+    EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefenseTable_flipped)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_flipped)))
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, FALSE)
-    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, -8)
-    EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -3, 21)
+    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, 0, -8)
+    EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -3, 21)
     EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 20)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim06)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim06)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar1, 24)
@@ -927,13 +931,13 @@ EvtScript N(handleEvent_flipped) = {
             EVT_RETURN
         EVT_CASE_EQ(EVENT_FLIP_TRIGGER)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_STATE), N(STATE_FLIPPED))
-            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, -8)
-            EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -3, 21)
+            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, 0, -8)
+            EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -3, 21)
             EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 20)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_FLIP_TRIGGERED), 1)
-            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable_flipped)))
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_flipped)))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim1A)
+            EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefenseTable_flipped)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_flipped)))
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim1A)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, TRUE)
             EVT_USE_BUF(N(bounceTable))
             EVT_LOOP(20)
@@ -992,27 +996,27 @@ EvtScript N(standUp) = {
     EVT_SUB(LVar0, 1)
     EVT_IF_GT(LVar0, 0)
         EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_FLIP_TRIGGERED), LVar0)
-        EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim1C)
+        EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim1C)
         EVT_WAIT(20)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim06)
-        EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim06)
+        EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
     EVT_ELSE
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_15)
         EVT_CALL(SetBattleCamZoom, 350)
         EVT_CALL(SetBattleCamOffsetZ, 20)
         EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-        EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim1C)
+        EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim1C)
         EVT_WAIT(20)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim06)
-        EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim0A)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim06)
+        EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim0A)
         EVT_WAIT(20)
         EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
         EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_STATE), N(STATE_NORMAL))
-        EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable)))
-        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_normal)))
+        EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefenseTable)))
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_normal)))
         EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, FALSE)
     EVT_END_IF
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
@@ -1059,13 +1063,13 @@ EvtScript N(handleEvent_spiky_flipped) = {
             EVT_RETURN
         EVT_CASE_EQ(EVENT_FLIP_TRIGGER)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_STATE), N(STATE_SPIKY_FLIPPED))
-            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, -8)
-            EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -3, 21)
+            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, 0, -8)
+            EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -3, 21)
             EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 20)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_FLIP_TRIGGERED), 1)
-            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable_flipped)))
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_spiky_flipped)))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim1B)
+            EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefenseTable_flipped)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_spiky_flipped)))
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim1B)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, TRUE)
             EVT_USE_BUF(N(bounceTable))
             EVT_LOOP(20)
@@ -1125,28 +1129,28 @@ EvtScript N(standUp_spiky) = {
     EVT_SUB(LVar0, 1)
     EVT_IF_GT(LVar0, 0)
         EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_FLIP_TRIGGERED), LVar0)
-        EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim1D)
+        EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim1D)
         EVT_WAIT(20)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim07)
-        EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim07)
+        EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
     EVT_ELSE
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_15)
         EVT_CALL(SetBattleCamZoom, 350)
         EVT_CALL(SetBattleCamOffsetZ, 20)
         EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-        EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim1D)
+        EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim1D)
         EVT_WAIT(20)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim07)
-        EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BonyBeetle_Anim0B)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim07)
+        EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim0B)
         EVT_WAIT(20)
         EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
         EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_STATE), N(STATE_SPIKY))
-        EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable)))
-        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_spiky)))
-        EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_SPIKY_TOP, TRUE)
+        EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefenseTable)))
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_spiky)))
+        EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_SPIKY_TOP, TRUE)
         EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, FALSE)
     EVT_END_IF
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)

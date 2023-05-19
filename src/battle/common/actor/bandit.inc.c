@@ -11,6 +11,11 @@ extern EvtScript N(takeTurn);
 extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
 
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+    PRT_COIN            = 2,
+};
+
 BSS s32 N(thread_dropCoin)[1];
 
 s32 N(IdleAnimations)[] = {
@@ -77,7 +82,7 @@ s32 N(StatusTable)[] = {
 ActorPartBlueprint N(parts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -2, 28 },
         .opacity = 255,
@@ -89,7 +94,7 @@ ActorPartBlueprint N(parts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET,
-        .index = 2,
+        .index = PRT_COIN,
         .posOffset = { 0, 30, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
@@ -104,7 +109,7 @@ ActorPartBlueprint N(parts)[] = {
 ActorPartBlueprint N(parts_coin)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
-        .index = 2,
+        .index = PRT_COIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
@@ -201,13 +206,13 @@ EvtScript N(dropCoin) = {
         EVT_CASE_EQ(0)
         EVT_CASE_EQ(1)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations)))
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, FALSE)
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations)))
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_COIN, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, FALSE)
             EVT_CALL(SummonEnemy, EVT_PTR(N(formation_coin)), 0)
             EVT_SET(LVarA, LVar0)
-            EVT_CALL(GetPartOffset, ACTOR_SELF, 2, LVar1, LVar2, LVar3)
+            EVT_CALL(GetPartOffset, ACTOR_SELF, PRT_COIN, LVar1, LVar2, LVar3)
             EVT_CALL(SetActorPos, LVarA, LVar1, LVar2, LVar3)
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_COIN, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar0)
             EVT_CALL(SetActorVar, LVarA, 1, LVar0)
             EVT_CALL(SetActorJumpGravity, LVarA, EVT_FLOAT(1.0))
@@ -475,7 +480,7 @@ EvtScript N(handleEvent) = {
             EVT_RETURN
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bandit_Anim01)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Anim01)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
@@ -489,7 +494,7 @@ EvtScript N(takeTurn) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bandit_Anim08)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Anim08)
         EVT_WAIT(30)
         EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(10.0))
         EVT_CALL(SetGoalPos, ACTOR_SELF, 300, 0, 0)
@@ -510,16 +515,16 @@ EvtScript N(takeTurn) = {
         EVT_SET(LVar1, 0)
         EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ELSE
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bandit_Anim07)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Anim07)
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
         EVT_CALL(AddGoalPos, ACTOR_SELF, 50, 0, 0)
         EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
         EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bandit_Anim01)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Anim01)
         EVT_WAIT(6)
     EVT_END_IF
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(2.0))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bandit_Anim05)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Anim05)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 35, 0, 0)
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
@@ -530,7 +535,7 @@ EvtScript N(takeTurn) = {
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LVarA, LVar0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bandit_Anim0D)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Anim0D)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
@@ -552,20 +557,20 @@ EvtScript N(takeTurn) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bandit_Anim07)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Anim07)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bandit_Anim01)
-            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Anim01)
+            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bandit_Anim0D)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Anim0D)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
@@ -615,9 +620,9 @@ EvtScript N(takeTurn) = {
                     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
                     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bandit_Anim01)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Anim01)
                     EVT_WAIT(20)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bandit_Anim07)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Anim07)
                 EVT_CASE_EQ(1)
                     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     EVT_ADD(LVar0, 30)
@@ -625,12 +630,12 @@ EvtScript N(takeTurn) = {
                     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
                     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bandit_Anim0E)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Anim0E)
                     EVT_WAIT(20)
                     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20C3)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bandit_Anim10)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Anim10)
                     EVT_WAIT(20)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bandit_Anim07)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Anim07)
                 EVT_CASE_DEFAULT
                     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
                     EVT_CALL(GetGoalPos, ACTOR_SELF, LVarA, LVarB, LVarC)
@@ -640,14 +645,14 @@ EvtScript N(takeTurn) = {
                     EVT_MUL(LVar0, -1)
                     EVT_CALL(AddCoin, LVar0)
                     EVT_THREAD
-                        EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, TRUE)
-                        EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+                        EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_COIN, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, TRUE)
+                        EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_COIN, ACTOR_PART_FLAG_INVISIBLE, FALSE)
                         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-                        EVT_CALL(SetPartPos, ACTOR_SELF, 2, LVar0, LVar1, LVar2)
-                        EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 2, EVT_FLOAT(1.0))
+                        EVT_CALL(SetPartPos, ACTOR_SELF, PRT_COIN, LVar0, LVar1, LVar2)
+                        EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_COIN, EVT_FLOAT(1.0))
                         EVT_ADD(LVarB, 30)
-                        EVT_CALL(JumpPartTo, ACTOR_SELF, 2, LVarA, LVarB, LVarC, 22, TRUE)
-                        EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, FALSE)
+                        EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_COIN, LVarA, LVarB, LVarC, 22, TRUE)
+                        EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_COIN, ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION, FALSE)
                     EVT_END_THREAD
                     EVT_THREAD
                         EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar0)
@@ -659,13 +664,13 @@ EvtScript N(takeTurn) = {
                     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
                     EVT_CALL(SetGoalPos, ACTOR_SELF, LVarA, LVarB, LVarC)
                     EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
-                    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_holdCoin)))
-                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bandit_Anim0E)
+                    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_holdCoin)))
+                    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Anim0E)
                     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
                     EVT_WAIT(7)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bandit_Anim0F)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Anim0F)
                     EVT_WAIT(20)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Bandit_Anim08)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Anim08)
             EVT_END_SWITCH
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(YieldTurn)

@@ -11,6 +11,11 @@ extern EvtScript N(takeTurn_802293DC);
 extern EvtScript N(idle_802276C4);
 extern EvtScript N(handleEvent_80227ABC);
 
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+    PRT_2               = 2,
+};
+
 s32 N(IdleAnimations_80227400)[] = {
     STATUS_KEY_NORMAL,    ANIM_SpyGuy_Anim03,
     STATUS_KEY_STONE,     ANIM_SpyGuy_Anim01,
@@ -73,15 +78,10 @@ s32 N(StatusTable_802274B8)[] = {
     STATUS_END,
 };
 
-enum PartIDs {
-    PT_MAIN     = 1,
-    PT_2        = 2,
-};
-
 ActorPartBlueprint N(PartsTable_80227564)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = PT_MAIN,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 30 },
         .opacity = 255,
@@ -93,7 +93,7 @@ ActorPartBlueprint N(PartsTable_80227564)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
-        .index = PT_2,
+        .index = PRT_2,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
@@ -137,8 +137,8 @@ EvtScript N(init_802275D4) = {
     EVT_CALL(GetInstigatorValue, ACTOR_SELF, LVar0)
     EVT_IF_NE(LVar0, 0)
         EVT_CALL(SetActorVar, ACTOR_SELF, 2, 0)
-        EVT_CALL(SetIdleAnimations, ACTOR_SELF, PT_MAIN, EVT_PTR(N(IdleAnimations_8022744C)))
-        EVT_CALL(SetAnimation, ACTOR_SELF, PT_MAIN, ANIM_SpyGuy_Anim02)
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_8022744C)))
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpyGuy_Anim02)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -167,9 +167,9 @@ EvtScript N(802276D4) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, 2, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PT_MAIN, ANIM_SpyGuy_Anim02)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpyGuy_Anim02)
         EVT_CASE_EQ(1)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PT_MAIN, ANIM_SpyGuy_Anim03)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpyGuy_Anim03)
     EVT_END_SWITCH
     EVT_LABEL(0)
     EVT_CALL(GetBattleFlags, LVar0)
@@ -181,26 +181,26 @@ EvtScript N(802276D4) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
             EVT_CALL(SetActorVar, ACTOR_SELF, 2, 1)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PT_MAIN, EVT_PTR(N(IdleAnimations_80227400)))
-            EVT_CALL(SetAnimation, ACTOR_SELF, PT_MAIN, ANIM_SpyGuy_Anim17)
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_80227400)))
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpyGuy_Anim17)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.4))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PT_MAIN, ANIM_SpyGuy_Anim19)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpyGuy_Anim19)
             EVT_WAIT(5)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PT_MAIN, ANIM_SpyGuy_Anim03)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpyGuy_Anim03)
         EVT_CASE_EQ(1)
             EVT_CALL(SetActorVar, ACTOR_SELF, 2, 0)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PT_MAIN, EVT_PTR(N(IdleAnimations_8022744C)))
-            EVT_CALL(SetAnimation, ACTOR_SELF, PT_MAIN, ANIM_SpyGuy_Anim18)
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_8022744C)))
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpyGuy_Anim18)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.4))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PT_MAIN, ANIM_SpyGuy_Anim1A)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpyGuy_Anim1A)
             EVT_WAIT(5)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PT_MAIN, ANIM_SpyGuy_Anim02)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpyGuy_Anim02)
     EVT_END_SWITCH
     EVT_WAIT(10)
     EVT_CALL(SetActorVar, ACTOR_SELF, 3, 0)
@@ -339,21 +339,21 @@ EvtScript N(slingshotAttack) = {
         EVT_CALL(MoveBattleCamOver, 1)
     EVT_END_IF
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2E7)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PT_MAIN, ANIM_SpyGuy_Anim15)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpyGuy_Anim15)
     EVT_WAIT(12)
     EVT_WAIT(12)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PT_MAIN, ANIM_SpyGuy_Anim16)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpyGuy_Anim16)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 10)
     EVT_ADD(LVar1, 10)
-    EVT_CALL(SetPartPos, ACTOR_SELF, PT_2, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PT_2, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+    EVT_CALL(SetPartPos, ACTOR_SELF, PRT_2, LVar0, LVar1, LVar2)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, ACTOR_PART_FLAG_INVISIBLE, FALSE)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
     EVT_IF_FLAG(LVar0, STATUS_FLAG_SHRINK)
-        EVT_CALL(SetPartScale, ACTOR_SELF, PT_2, EVT_FLOAT(0.4), EVT_FLOAT(0.4), EVT_FLOAT(0.4))
+        EVT_CALL(SetPartScale, ACTOR_SELF, PRT_2, EVT_FLOAT(0.4), EVT_FLOAT(0.4), EVT_FLOAT(0.4))
     EVT_END_IF
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2E8)
-    EVT_CALL(SetPartSounds, ACTOR_SELF, PT_2, ACTOR_SOUND_JUMP, 0, 0)
+    EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_2, ACTOR_SOUND_JUMP, 0, 0)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
@@ -362,7 +362,7 @@ EvtScript N(slingshotAttack) = {
             EVT_THREAD
                 EVT_LOOP(0)
                     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-                    EVT_CALL(GetPartOffset, ACTOR_SELF, PT_2, LVar3, LVar4, LVar5)
+                    EVT_CALL(GetPartOffset, ACTOR_SELF, PRT_2, LVar3, LVar4, LVar5)
                     EVT_IF_GT(LVar0, LVar3)
                         EVT_BREAK_LOOP
                     EVT_END_IF
@@ -375,14 +375,14 @@ EvtScript N(slingshotAttack) = {
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(AddGoalPos, ACTOR_SELF, -100, 0, 0)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-            EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, PT_2, EVT_FLOAT(14.0))
-            EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PT_2, EVT_FLOAT(0.002))
-            EVT_CALL(JumpPartTo, ACTOR_SELF, PT_2, LVar0, LVar1, LVar2, 0, TRUE)
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PT_2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+            EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, PRT_2, EVT_FLOAT(14.0))
+            EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_2, EVT_FLOAT(0.002))
+            EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_2, LVar0, LVar1, LVar2, 0, TRUE)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_CALL(YieldTurn)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, PT_MAIN, 0, ACTOR_DECORATION_SWEAT)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
             EVT_WAIT(15)
-            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PT_MAIN, 0)
+            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
@@ -391,19 +391,19 @@ EvtScript N(slingshotAttack) = {
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, PT_2, EVT_FLOAT(14.0))
-    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PT_2, EVT_FLOAT(0.002))
-    EVT_CALL(JumpPartTo, ACTOR_SELF, PT_2, LVar0, LVar1, LVar2, 0, TRUE)
+    EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, PRT_2, EVT_FLOAT(14.0))
+    EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_2, EVT_FLOAT(0.002))
+    EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_2, LVar0, LVar1, LVar2, 0, TRUE)
     EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, 2, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_CALL(GetPartOffset, ACTOR_SELF, PT_2, LVar0, LVar1, LVar2)
+            EVT_CALL(GetPartOffset, ACTOR_SELF, PRT_2, LVar0, LVar1, LVar2)
             EVT_SUB(LVar0, 100)
-            EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PT_2, EVT_FLOAT(0.7))
-            EVT_CALL(JumpPartTo, ACTOR_SELF, PT_2, LVar0, 0, LVar2, 30, TRUE)
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PT_2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+            EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_2, EVT_FLOAT(0.7))
+            EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_2, LVar0, 0, LVar2, 30, TRUE)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_CALL(YieldTurn)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
@@ -463,14 +463,14 @@ EvtScript N(hammerAttack) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PT_MAIN, ANIM_SpyGuy_Anim07)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpyGuy_Anim07)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 70, 0, 0)
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_20BA, SOUND_3B4)
     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK_INCREMENT, 10, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PT_MAIN, ANIM_SpyGuy_Anim07)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpyGuy_Anim07)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar1)
@@ -478,7 +478,7 @@ EvtScript N(hammerAttack) = {
         EVT_CALL(AddGoalPos, ACTOR_SELF, 20, 0, 0)
     EVT_END_IF
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PT_MAIN, ANIM_SpyGuy_Anim03)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpyGuy_Anim03)
     EVT_WAIT(10)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
     EVT_THREAD
@@ -490,7 +490,7 @@ EvtScript N(hammerAttack) = {
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LVarA, LVar0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PT_MAIN, ANIM_SpyGuy_Anim0A)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpyGuy_Anim0A)
             EVT_WAIT(6)
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -498,18 +498,18 @@ EvtScript N(hammerAttack) = {
             EVT_WAIT(15)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, PT_MAIN, 0, ACTOR_DECORATION_SWEAT)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_SpyGuy_Anim07)
             EVT_EXEC_WAIT(EVS_Enemy_ReturnHome)
-            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PT_MAIN, 0)
+            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(SetAnimation, ACTOR_SELF, PT_MAIN, ANIM_SpyGuy_Anim0A)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpyGuy_Anim0A)
     EVT_WAIT(5)
     EVT_WAIT(2)
     EVT_WAIT(2)
@@ -544,20 +544,20 @@ EvtScript N(hammerAttack) = {
                 EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
                 EVT_EXEC(N(80228778))
                 EVT_WAIT(8)
-                EVT_CALL(SetAnimation, ACTOR_SELF, PT_MAIN, ANIM_SpyGuy_Anim07)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpyGuy_Anim07)
                 EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                 EVT_ADD(LVar0, 70)
                 EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
                 EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                 EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-                EVT_CALL(SetAnimation, ACTOR_SELF, PT_MAIN, ANIM_SpyGuy_Anim03)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpyGuy_Anim03)
                 EVT_LABEL(0)
                 EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
                 EVT_IF_NE(LVar0, 0)
                     EVT_WAIT(1)
                     EVT_GOTO(0)
                 EVT_END_IF
-                EVT_CALL(SetAnimation, ACTOR_SELF, PT_MAIN, ANIM_SpyGuy_Anim07)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpyGuy_Anim07)
                 EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar0)
                 EVT_CALL(N(GetItemEntityPosition), LVar0, LVar1, LVar2, LVar3)
                 EVT_ADD(LVar1, 20)
@@ -570,7 +570,7 @@ EvtScript N(hammerAttack) = {
                     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20DC)
                     EVT_CALL(N(StartRumbleWithParams), 200, 10)
                 EVT_END_THREAD
-                EVT_CALL(SetAnimation, ACTOR_SELF, PT_MAIN, ANIM_SpyGuy_Anim09)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpyGuy_Anim09)
                 EVT_WAIT(5)
                 EVT_CALL(SetActorVar, ACTOR_SELF, 0, 2)
                 EVT_SUB(LVar1, 7)
@@ -578,13 +578,13 @@ EvtScript N(hammerAttack) = {
                 EVT_WAIT(40)
             EVT_ELSE
                 EVT_WAIT(8)
-                EVT_CALL(SetAnimation, ACTOR_SELF, PT_MAIN, ANIM_SpyGuy_Anim07)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpyGuy_Anim07)
                 EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                 EVT_ADD(LVar0, 70)
                 EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
                 EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                 EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-                EVT_CALL(SetAnimation, ACTOR_SELF, PT_MAIN, ANIM_SpyGuy_Anim03)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpyGuy_Anim03)
                 EVT_WAIT(10)
                 EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                 EVT_ADD(LVar1, 10)
@@ -608,8 +608,8 @@ EvtScript N(takeTurn_802293DC) = {
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_IF_EQ(LVar0, PHASE_FIRST_STRIKE)
         EVT_CALL(SetActorVar, ACTOR_SELF, 2, 0)
-        EVT_CALL(SetIdleAnimations, ACTOR_SELF, PT_MAIN, EVT_PTR(N(IdleAnimations_8022744C)))
-        EVT_CALL(SetAnimation, ACTOR_SELF, PT_MAIN, ANIM_SpyGuy_Anim02)
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_8022744C)))
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SpyGuy_Anim02)
     EVT_END_IF
     EVT_CALL(GetActorVar, ACTOR_SELF, 2, LVar0)
     EVT_SWITCH(LVar0)

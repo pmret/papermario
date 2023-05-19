@@ -4,6 +4,10 @@
 #include "sprite/npc/Fuzzy.h"
 #include "effects.h"
 
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+};
+
 s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_END,
@@ -39,7 +43,7 @@ extern s32 N(IdleAnimations)[];
 ActorPartBlueprint N(parts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 20 },
         .opacity = 255,
@@ -243,7 +247,7 @@ EvtScript N(takeTurn) = {
         EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_GOTO(100)
     EVT_END_IF
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Run)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Run)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 50)
@@ -251,10 +255,10 @@ EvtScript N(takeTurn) = {
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
     EVT_EXEC_WAIT(EVS_Enemy_HopToPos)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Idle)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Idle)
     EVT_LABEL(100)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 10, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Anim04)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Anim04)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 9, 0)
     EVT_WAIT(1)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 8, 0)
@@ -270,11 +274,11 @@ EvtScript N(takeTurn) = {
             EVT_SET(LVar1, 0)
             EVT_SUB(LVar2, 5)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(3.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Jump)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Jump)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 11, FALSE, TRUE, FALSE)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Anim09)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Anim09)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_SUB(LVar0, 20)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(3.0))
@@ -295,14 +299,14 @@ EvtScript N(takeTurn) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Run)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Run)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
             EVT_EXEC_WAIT(EVS_Enemy_HopToPos)
-            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
+            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
@@ -319,7 +323,7 @@ EvtScript N(takeTurn) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, -3, -12, -15)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(3.0))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Jump)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Jump)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
     EVT_IF_EQ(LocalFlag(0), 1)
         EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 0, BS_FLAGS1_SP_EVT_ACTIVE)
@@ -329,9 +333,9 @@ EvtScript N(takeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Leeching)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3E0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Bite)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Bite)
     EVT_WAIT(21)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Still)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Still)
     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 330)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3E0)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, -3, -2, 0)
@@ -350,7 +354,7 @@ EvtScript N(takeTurn) = {
     EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 1, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Idle)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Idle)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
@@ -429,13 +433,13 @@ EvtScript N(takeTurn) = {
             EVT_WAIT(5)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Run)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Run)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
             EVT_EXEC_WAIT(EVS_Enemy_HopToPos)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Idle)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Idle)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)

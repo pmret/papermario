@@ -1007,7 +1007,7 @@ EvtScript EVS_Player_NextSlapLeft_Impl = {
 
 EvtScript EVS_Player_LastSlapRight_Impl = {
     EVT_CHILD_THREAD
-        EVT_CALL(MakeLerp, 0, 2160, 60, 10)
+        EVT_CALL(MakeLerp, 0, 0x00000870, 60, EASING_COS_IN_OUT)
         EVT_LABEL(1)
         EVT_CALL(UpdateLerp)
         EVT_CALL(SetActorYaw, ACTOR_SELF, LVar0)
@@ -1025,7 +1025,7 @@ EvtScript EVS_Player_LastSlapRight_Impl = {
 
 EvtScript EVS_Player_LastSlapLeft_Impl = {
     EVT_CHILD_THREAD
-        EVT_CALL(MakeLerp, 2160, 0, 60, 10)
+        EVT_CALL(MakeLerp, 0x00000870, 0, 60, EASING_COS_IN_OUT)
         EVT_LABEL(1)
         EVT_CALL(UpdateLerp)
         EVT_CALL(SetActorYaw, ACTOR_SELF, LVar0)
@@ -1151,7 +1151,7 @@ EvtScript EVS_ForceNextTarget = {
                 EVT_RETURN
             EVT_END_IF
         EVT_END_IF
-        EVT_CALL(ChooseNextTarget, 0, LVar0)
+        EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
         EVT_IF_NE(LVar0, -1)
             EVT_GOTO(0)
         EVT_END_IF
@@ -1165,7 +1165,7 @@ EvtScript EVS_ForceNextTarget = {
                 EVT_RETURN
             EVT_END_IF
         EVT_END_IF
-        EVT_CALL(ChooseNextTarget, 0, LVar0)
+        EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
         EVT_IF_NE(LVar0, -1)
             EVT_GOTO(1)
         EVT_END_IF
@@ -1173,8 +1173,8 @@ EvtScript EVS_ForceNextTarget = {
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(2)
         EVT_CALL(GetOwnerTarget, LVar0, LVar1)
-        EVT_CALL(SetActorFlagBits, LVar0, ACTOR_FLAG_NO_ATTACK | ACTOR_FLAG_NO_DMG_APPLY, 1)
-        EVT_CALL(ChooseNextTarget, 0, LVar0)
+        EVT_CALL(SetActorFlagBits, LVar0, ACTOR_FLAG_NO_ATTACK | ACTOR_FLAG_NO_DMG_APPLY, TRUE)
+        EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
         EVT_IF_NE(LVar0, -1)
             EVT_GOTO(2)
         EVT_END_IF
@@ -1289,7 +1289,7 @@ EvtScript EVS_Enemy_Hit = {
                 EVT_EXEC(EVS_Enemy_FanSmack_Impl)
             EVT_END_IF
             EVT_CHILD_THREAD
-                EVT_CALL(MakeLerp, 0, 2160, 60, 10)
+                EVT_CALL(MakeLerp, 0, 0x00000870, 60, EASING_COS_IN_OUT)
                 EVT_LABEL(0)
                 EVT_CALL(UpdateLerp)
                 EVT_CALL(SetActorYaw, ACTOR_SELF, LVar0)
@@ -1324,7 +1324,7 @@ EvtScript EVS_Enemy_Hit = {
                 EVT_EXEC(EVS_Enemy_FanSmack_Impl)
             EVT_END_IF
             EVT_CHILD_THREAD
-                EVT_CALL(MakeLerp, 2160, 0, 60, 10)
+                EVT_CALL(MakeLerp, 0x00000870, 0, 60, EASING_COS_IN_OUT)
                 EVT_LABEL(1)
                 EVT_CALL(UpdateLerp)
                 EVT_CALL(SetActorYaw, ACTOR_SELF, LVar0)
@@ -1491,7 +1491,7 @@ EvtScript EVS_Enemy_Hit_Impl = {
 EvtScript EVS_Enemy_BurnHit = {
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar3)
     EVT_IF_EQ(LVar3, EVENT_BURN_DEATH)
-        EVT_CALL(EnableActorGlow, ACTOR_SELF, 0)
+        EVT_CALL(EnableActorGlow, ACTOR_SELF, FALSE)
     EVT_END_IF
     EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
     EVT_CALL(GetDamageSource, LVar3)
@@ -1706,7 +1706,7 @@ EvtScript EVS_Enemy_Death = {
 EvtScript EVS_Enemy_DeathWithoutRemove = {
     EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableActorGlow, ACTOR_SELF, 0)
+    EVT_CALL(EnableActorGlow, ACTOR_SELF, FALSE)
     EVT_IF_NE(LVar1, -1)
         EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
         EVT_WAIT(10)
@@ -1774,11 +1774,11 @@ EvtScript EVS_Enemy_ScareAway = {
         EVT_CALL(JumpToGoal, ACTOR_SELF, 3, FALSE, FALSE, FALSE)
         EVT_WAIT(20)
         EVT_CALL(SetGoalPos, ACTOR_SELF, LVarA, LVarB, LVarC)
-        EVT_CALL(EnableActorGlow, ACTOR_SELF, 0)
+        EVT_CALL(EnableActorGlow, ACTOR_SELF, FALSE)
         EVT_CALL(FallToGoal, ACTOR_SELF, 7)
     EVT_ELSE
         EVT_WAIT(15)
-        EVT_CALL(EnableActorGlow, ACTOR_SELF, 0)
+        EVT_CALL(EnableActorGlow, ACTOR_SELF, FALSE)
     EVT_END_IF
     EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
     EVT_WAIT(17)
@@ -1804,11 +1804,11 @@ EvtScript EVS_Enemy_SpinSmash_HitNext = {
         EVT_CALL(GetOwnerID, LVar1)
         EVT_CALL(GetOwnerTarget, LVar0, LVar9)
         EVT_IF_NE(LVar1, LVar0)
-            EVT_CALL(ChooseNextTarget, 0, LVar0)
+            EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
             EVT_GOTO(0)
         EVT_END_IF
     EVT_LABEL(1)
-        EVT_CALL(ChooseNextTarget, 0, LVar0)
+        EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
         EVT_IF_EQ(LVar0, -1)
             EVT_GOTO(10)
         EVT_END_IF
@@ -1828,7 +1828,7 @@ EvtScript EVS_Enemy_SpinSmash_HitNext = {
         EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(7.0))
         EVT_CALL(JumpToGoal, ACTOR_SELF, 0, FALSE, TRUE, FALSE)
         EVT_CHILD_THREAD
-            EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(1.0))
+            EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(1.0))
         EVT_END_CHILD_THREAD
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
         EVT_CALL(GetOwnerTarget, LVar0, LVar1)
@@ -1877,15 +1877,15 @@ EvtScript EVS_Enemy_SpinSmash_ShakeCam = {
     EVT_SWITCH(LVar0)
         EVT_CASE_LT(1000)
             EVT_CHILD_THREAD
-                EVT_CALL(ShakeCam, 1, 0, 3, EVT_FLOAT(0.3))
+                EVT_CALL(ShakeCam, CAM_BATTLE, 0, 3, EVT_FLOAT(0.3))
             EVT_END_CHILD_THREAD
         EVT_CASE_LT(2000)
             EVT_CHILD_THREAD
-                EVT_CALL(ShakeCam, 1, 0, 3, EVT_FLOAT(0.6))
+                EVT_CALL(ShakeCam, CAM_BATTLE, 0, 3, EVT_FLOAT(0.6))
             EVT_END_CHILD_THREAD
         EVT_CASE_DEFAULT
             EVT_CHILD_THREAD
-                EVT_CALL(ShakeCam, 1, 0, 3, EVT_FLOAT(0.9))
+                EVT_CALL(ShakeCam, CAM_BATTLE, 0, 3, EVT_FLOAT(0.9))
             EVT_END_CHILD_THREAD
     EVT_END_SWITCH
     EVT_RETURN

@@ -25,6 +25,11 @@ extern EvtScript N(dizzyShell);
 extern EvtScript N(fireShell);
 extern EvtScript N(shellTossOnFirstStrike);
 
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+    PRT_ZERO            = 0,
+};
+
 API_CALLABLE(N(SlowDown)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partnerActor = battleStatus->partnerActor;
@@ -221,7 +226,7 @@ s32 N(StatusTable)[] = {
 ActorPartBlueprint N(parts)[] = {
     {
         .flags = 0,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 8, 27 },
         .opacity = 255,
@@ -622,7 +627,7 @@ EvtScript N(shellToss) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(MoveBattleCamOver, 15)
     EVT_EXEC_WAIT(N(getShellTossMoveTime))
-    EVT_CALL(AddActorDecoration, ACTOR_SELF, 0, 0, ACTOR_DECORATION_GREY_SMOKE_TRAIL)
+    EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_ZERO, 0, ACTOR_DECORATION_GREY_SMOKE_TRAIL)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
     EVT_CALL(SetActorSpeed, ACTOR_PARTNER, LVarA)
     EVT_CALL(SetActorSounds, ACTOR_PARTNER, ACTOR_SOUND_WALK, SOUND_0, SOUND_0)
@@ -631,7 +636,7 @@ EvtScript N(shellToss) = {
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
         EVT_THREAD
             EVT_CALL(N(SlowDown))
-            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 0, 0)
+            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_ZERO, 0)
         EVT_END_THREAD
         EVT_WAIT(4)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_ShellStill)
@@ -665,7 +670,7 @@ EvtScript N(shellToss) = {
         EVT_CALL(RunToGoal, ACTOR_PARTNER, 0)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 0, 0)
+    EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_ZERO, 0)
     EVT_CALL(GetActionCommandResult, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(0)
@@ -795,7 +800,7 @@ EvtScript N(powerShell) = {
     EVT_SET(LVarB, 260)
     EVT_DIVF(LVarB, LVarA)
     EVT_THREAD
-        EVT_CALL(AddActorDecoration, ACTOR_SELF, 0, 1, ACTOR_DECORATION_GREY_SMOKE_TRAIL)
+        EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_ZERO, 1, ACTOR_DECORATION_GREY_SMOKE_TRAIL)
         EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 260)
         EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
@@ -803,7 +808,7 @@ EvtScript N(powerShell) = {
         EVT_CALL(SetActorSounds, ACTOR_PARTNER, ACTOR_SOUND_WALK, SOUND_0, SOUND_0)
         EVT_CALL(RunToGoal, ACTOR_PARTNER, 0)
         EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
-        EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 0, 1)
+        EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_ZERO, 1)
     EVT_END_THREAD
     EVT_SET(LocalFlag(0), 0)
     EVT_LABEL(10)
@@ -896,7 +901,7 @@ EvtScript N(dizzyShell) = {
     EVT_SET(LVar9, 0)
     EVT_SET(LVarA, EVT_FLOAT(8.0))
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_2026)
-    EVT_CALL(AddActorDecoration, ACTOR_SELF, 0, 1, ACTOR_DECORATION_WHIRLWIND)
+    EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_ZERO, 1, ACTOR_DECORATION_WHIRLWIND)
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 1)
     EVT_SET(LVar9, 1)
     EVT_LOOP(LVarD)
@@ -937,7 +942,7 @@ EvtScript N(dizzyShell) = {
     EVT_SET(LVarB, 300)
     EVT_DIVF(LVarB, LVarA)
     EVT_THREAD
-        EVT_CALL(AddActorDecoration, ACTOR_SELF, 0, 0, ACTOR_DECORATION_GREY_SMOKE_TRAIL)
+        EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_ZERO, 0, ACTOR_DECORATION_GREY_SMOKE_TRAIL)
         EVT_CALL(EnableActorBlur, ACTOR_PARTNER, 1)
         EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 350)
@@ -945,8 +950,8 @@ EvtScript N(dizzyShell) = {
         EVT_CALL(SetActorSpeed, ACTOR_PARTNER, LVarA)
         EVT_CALL(SetActorSounds, ACTOR_PARTNER, ACTOR_SOUND_WALK, SOUND_0, SOUND_0)
         EVT_CALL(RunToGoal, ACTOR_PARTNER, 0)
-        EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 0, 0)
-        EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 0, 1)
+        EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_ZERO, 0)
+        EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_ZERO, 1)
         EVT_WAIT(20)
         EVT_CALL(SetActorPos, ACTOR_PARTNER, -200, 0, 0)
         EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
@@ -1066,7 +1071,7 @@ EvtScript N(fireShell) = {
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_ShellSpinSlowest)
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_200C)
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_28E)
-    EVT_CALL(AddActorDecoration, ACTOR_SELF, 0, 0, ACTOR_DECORATION_RED_FLAMES)
+    EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_ZERO, 0, ACTOR_DECORATION_RED_FLAMES)
     EVT_WAIT(1)
     EVT_CALL(ModifyActorDecoration, ACTOR_PARTNER, -1, 0, 10, 10, 255, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 1)
@@ -1193,9 +1198,9 @@ EvtScript N(fireShell) = {
         EVT_CALL(SetActorSpeed, ACTOR_PARTNER, LVarA)
         EVT_CALL(SetActorSounds, ACTOR_PARTNER, ACTOR_SOUND_WALK, SOUND_0, SOUND_0)
         EVT_CALL(RunToGoal, ACTOR_PARTNER, 0)
-        EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 0, 1)
+        EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_ZERO, 1)
         EVT_WAIT(20)
-        EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 0, 0)
+        EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_ZERO, 0)
         EVT_CALL(func_8026ED20, ACTOR_PARTNER, 0, 0)
         EVT_CALL(SetActorPos, ACTOR_PARTNER, -200, 0, 0)
         EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
@@ -1288,7 +1293,7 @@ EvtScript N(shellTossOnFirstStrike) = {
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
         EVT_THREAD
             EVT_CALL(N(SlowDown))
-            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 0, 0)
+            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_ZERO, 0)
         EVT_END_THREAD
         EVT_WAIT(4)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_ShellStill)

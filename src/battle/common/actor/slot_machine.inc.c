@@ -9,6 +9,10 @@ extern EvtScript N(handleEvent);
 
 BSS s32 N(slot_machine_buffer)[10];
 
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+};
+
 s32 N(intTable1)[] = { 0, 1, 0, 2, 0, 2, 0, 2, };
 s32 N(intTable2)[] = { 0, 1, 0, 2, 1, 2, 0, 2, };
 s32 N(intTable3)[] = { 0, 1, 0, 2, 0, 2, 0, 2, };
@@ -46,7 +50,7 @@ s32 N(StatusTable)[] = {
 ActorPartBlueprint N(parts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
@@ -344,7 +348,7 @@ EvtScript N(idle) = {
             EVT_END_THREAD
 #if VERSION_PAL
             EVT_WAIT(75)
-            EVT_CALL(UseBattleCamPreset, 2)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(MoveBattleCamOver, 25)
             EVT_WAIT(30)
 #endif

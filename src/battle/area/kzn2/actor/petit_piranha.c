@@ -12,6 +12,10 @@ extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
 extern EvtScript N(onDeath);
 
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+};
+
 s32 N(IdleAnimations)[] = {
     STATUS_KEY_NORMAL,    ANIM_PetitPiranha_Anim01,
     STATUS_KEY_STONE,     ANIM_PetitPiranha_Anim01,
@@ -63,7 +67,7 @@ s32 N(StatusTable)[] = {
 ActorPartBlueprint N(parts)[] = {
     {
         .flags = ACTOR_PART_FLAG_20 | ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
@@ -178,7 +182,7 @@ EvtScript N(handleEvent) = {
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_SPIKE_TAUNT)
         EVT_CASE_OR_EQ(EVENT_BURN_TAUNT)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_PetitPiranha_Anim03)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_PetitPiranha_Anim03)
             EVT_WAIT(60)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
@@ -251,14 +255,14 @@ EvtScript N(takeTurn) = {
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_IF_GE(LVar1, 41)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_PetitPiranha_Anim04)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_PetitPiranha_Anim04)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
         EVT_CALL(SetBattleCamZoom, 380)
         EVT_CALL(SetBattleCamOffsetZ, -20)
         EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
         EVT_CALL(MoveBattleCamOver, 20)
         EVT_WAIT(20)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_PetitPiranha_Anim06)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_PetitPiranha_Anim06)
         EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(2.0))
         EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -273,7 +277,7 @@ EvtScript N(takeTurn) = {
         EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
         EVT_CALL(MoveBattleCamOver, 20)
         EVT_WAIT(20)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_PetitPiranha_Anim03)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_PetitPiranha_Anim03)
         EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(2.0))
         EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.0))
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3CA)
@@ -291,11 +295,11 @@ EvtScript N(takeTurn) = {
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 10)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, 5, LVar2)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_PetitPiranha_Anim05)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_PetitPiranha_Anim05)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(8.0))
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -16, EASING_QUARTIC_IN)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, TRUE)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)

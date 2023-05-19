@@ -39,6 +39,11 @@ static s32 sWattEffectData_currentEffectIndex;
 static EffectInstance* sWattEffectData_effect1;
 static EffectInstance* sWattEffectData_effect2;
 
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+    PRT_2               = 2,
+};
+
 API_CALLABLE(N(WattFXUpdate)) {
     Actor* partner = gBattleStatus.partnerActor;
     f32 x, y, z;
@@ -484,7 +489,7 @@ s32 N(StatusTable)[] = {
 ActorPartBlueprint N(parts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 10, 22 },
         .opacity = 255,

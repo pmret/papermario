@@ -10,6 +10,10 @@ extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
 extern EvtScript N(nextTurn);
 
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+};
+
 s32 N(IdleAnimations)[] = {
     STATUS_KEY_NORMAL,    ANIM_Duplighost_Anim02,
     STATUS_KEY_STONE,     ANIM_Duplighost_Anim00,
@@ -66,7 +70,7 @@ s32 N(StatusTable)[] = {
 ActorPartBlueprint N(parts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -5, 25 },
         .opacity = 255,
@@ -243,7 +247,7 @@ EvtScript N(attack) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Duplighost_Anim07)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Duplighost_Anim07)
     EVT_WAIT(20)
     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_2CB, 0)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
@@ -252,7 +256,7 @@ EvtScript N(attack) = {
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LVarA, LVar0)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Duplighost_Anim08)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Duplighost_Anim08)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(AddGoalPos, ACTOR_SELF, -100, 0, 0)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.3))
@@ -263,21 +267,21 @@ EvtScript N(attack) = {
             EVT_WAIT(10)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, 0, LVar2)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Duplighost_Anim02)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Duplighost_Anim02)
             EVT_CALL(ResetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP)
             EVT_WAIT(15)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
             EVT_EXEC_WAIT(N(returnHome))
-            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
+            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Duplighost_Anim08)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Duplighost_Anim08)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
     EVT_IF_FLAG(LVarA, STATUS_FLAG_SHRINK)
@@ -295,7 +299,7 @@ EvtScript N(attack) = {
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(ResetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Duplighost_Anim09)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Duplighost_Anim09)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.5))
             EVT_ADD(LVar0, 30)
@@ -610,7 +614,7 @@ EvtScript N(copyPartner) = {
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_WAIT(15)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20B8)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Duplighost_Anim06)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Duplighost_Anim06)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
     EVT_IF_FLAG(LVarA, STATUS_FLAG_SHRINK)
@@ -667,8 +671,8 @@ EvtScript N(copyPartner) = {
     EVT_WAIT(5)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetActorPos, LVarA, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET, TRUE)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, ACTOR_PART_FLAG_MULTI_TARGET, FALSE)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET, TRUE)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_MULTI_TARGET, FALSE)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_NO_DMG_APPLY, TRUE)
     EVT_CALL(GetActorHP, ACTOR_SELF, LVar0)
     EVT_CALL(SetEnemyHP, LVarA, LVar0)

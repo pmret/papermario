@@ -5,8 +5,18 @@
 #include "sprite/npc/BillBlaster.h"
 
 #define AREA b_area_trd_part_1
-
 #define NAMESPACE A(bill_blaster)
+
+extern s32 N(IdleAnimations_80219E48)[];
+extern EvtScript N(init_80219E6C);
+extern EvtScript N(takeTurn_8021A200);
+extern EvtScript N(idle_80219ED0);
+extern EvtScript N(handleEvent_80219EE0);
+
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+    PRT_2               = 2,
+};
 
 s32 N(DefenseTable_80219D20)[] = {
     ELEMENT_NORMAL,   1,
@@ -38,13 +48,10 @@ s32 N(StatusTable_80219D2C)[] = {
     STATUS_END,
 };
 
-extern s32 N(IdleAnimations_80219E48)[];
-extern EvtScript N(init_80219E6C);
-
 ActorPartBlueprint N(PartsTable_80219DD8)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -6, 29 },
         .opacity = 255,
@@ -56,7 +63,7 @@ ActorPartBlueprint N(PartsTable_80219DD8)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_MULTI_TARGET | ACTOR_PART_FLAG_80000000,
-        .index = 2,
+        .index = PRT_2,
         .posOffset = { 100, 0, 0 },
         .targetOffset = { -106, 29 },
         .opacity = 255,
@@ -98,10 +105,6 @@ s32 N(IdleAnimations_80219E48)[] = {
     STATUS_KEY_PARALYZE,  ANIM_BillBlaster_Anim00,
     STATUS_END,
 };
-
-extern EvtScript N(takeTurn_8021A200);
-extern EvtScript N(idle_80219ED0);
-extern EvtScript N(handleEvent_80219EE0);
 
 EvtScript N(init_80219E6C) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_8021A200)))
@@ -209,7 +212,7 @@ API_CALLABLE(func_80218000_4A10A0) {
 
 
 EvtScript N(8021A2BC) = {
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BillBlaster_Anim02)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BillBlaster_Anim02)
     EVT_WAIT(13)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(1.0))

@@ -10,6 +10,10 @@ extern EvtScript N(takeTurn_8021E33C);
 extern EvtScript N(idle_8021DAE4);
 extern EvtScript N(handleEvent_8021DCF4);
 
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+};
+
 s32 N(IdleAnimations_8021D940)[] = {
     STATUS_KEY_NORMAL,    ANIM_HurtPlant_Anim02,
     STATUS_KEY_STONE,     ANIM_HurtPlant_Anim00,
@@ -57,7 +61,7 @@ s32 N(StatusTable_8021D9A0)[] = {
 ActorPartBlueprint N(PartsTable_8021DA4C)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -10, 24 },
         .opacity = 255,
@@ -107,12 +111,12 @@ EvtScript N(idle_8021DAE4) = {
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_FLAG(STATUS_FLAG_SLEEP)
-            EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -6, 14)
-            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -2, -5)
+            EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -6, 14)
+            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, -2, -5)
             EVT_CALL(N(SetAbsoluteStatusOffsets), -20, 8, 0, 14)
         EVT_CASE_DEFAULT
-            EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -10, 24)
-            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -8, -5)
+            EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -10, 24)
+            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, -8, -5)
             EVT_CALL(N(SetAbsoluteStatusOffsets), -18, 23, 1, 20)
     EVT_END_SWITCH
     EVT_WAIT(1)
@@ -124,13 +128,13 @@ EvtScript N(idle_8021DAE4) = {
 EvtScript N(8021DBFC) = {
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_DIG)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_HurtPlant_Anim04)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim04)
     EVT_WAIT(10)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_SURFACE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_HurtPlant_Anim03)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim03)
     EVT_WAIT(10)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, FALSE)
     EVT_RETURN
@@ -144,7 +148,7 @@ EvtScript N(handleEvent_8021DCF4) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_HurtPlant_Anim0D)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim0D)
             EVT_WAIT(3)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_HurtPlant_Anim0E)
@@ -165,13 +169,13 @@ EvtScript N(handleEvent_8021DCF4) = {
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_HurtPlant_Anim0D)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim0D)
             EVT_WAIT(3)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_HurtPlant_Anim0E)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_HurtPlant_Anim0D)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim0D)
             EVT_WAIT(3)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_HurtPlant_Anim0E)
@@ -181,7 +185,7 @@ EvtScript N(handleEvent_8021DCF4) = {
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_HurtPlant_Anim0D)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim0D)
             EVT_WAIT(3)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_HurtPlant_Anim0E)
@@ -189,7 +193,7 @@ EvtScript N(handleEvent_8021DCF4) = {
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
             EVT_EXEC_WAIT(N(8021DBFC))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_HurtPlant_Anim0D)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim0D)
             EVT_WAIT(3)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_HurtPlant_Anim0E)
@@ -206,7 +210,7 @@ EvtScript N(handleEvent_8021DCF4) = {
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_HurtPlant_Anim0D)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim0D)
             EVT_WAIT(3)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_HurtPlant_Anim0E)
@@ -221,13 +225,13 @@ EvtScript N(handleEvent_8021DCF4) = {
             EVT_SET_CONST(LVar1, ANIM_HurtPlant_Anim02)
             EVT_EXEC_WAIT(EVS_Enemy_Recover)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_HurtPlant_Anim0D)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim0D)
             EVT_WAIT(3)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_HurtPlant_Anim0E)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_DIG)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_HurtPlant_Anim04)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim04)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
             EVT_WAIT(20)
             EVT_CALL(HideHealthBar, ACTOR_SELF)
@@ -257,7 +261,7 @@ EvtScript N(takeTurn_8021E33C) = {
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_IF_EQ(LVar0, PHASE_FIRST_STRIKE)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_HurtPlant_Anim04)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim04)
         EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
         EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
@@ -272,7 +276,7 @@ EvtScript N(takeTurn_8021E33C) = {
         EVT_GOTO(123)
     EVT_END_IF
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_DIG)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_HurtPlant_Anim04)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim04)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
     EVT_WAIT(8)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
@@ -297,19 +301,19 @@ EvtScript N(takeTurn_8021E33C) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_SURFACE)
     EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_HurtPlant_Anim03)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim03)
     EVT_WAIT(10)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_HurtPlant_Anim05)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim05)
     EVT_WAIT(10)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2C4)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_HurtPlant_Anim06)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim06)
     EVT_WAIT(6)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LVarA, LVar0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_HurtPlant_Anim07)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim07)
             EVT_WAIT(5)
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -335,7 +339,7 @@ EvtScript N(takeTurn_8021E33C) = {
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_HurtPlant_Anim07)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_HurtPlant_Anim07)
             EVT_WAIT(5)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
             EVT_EXEC_WAIT(N(8021DBFC))

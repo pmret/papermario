@@ -14,6 +14,10 @@ extern EvtScript N(playExplosionEffects);
 
 extern s32 N(IdleAnimations)[];
 
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+};
+
 s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_END,
@@ -47,7 +51,7 @@ s32 N(StatusTable)[] = {
 ActorPartBlueprint N(parts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 16 },
         .opacity = 255,
@@ -121,10 +125,10 @@ EvtScript N(init) = {
         EVT_CALL(GetActorPos, LVar0, LVar1, LVarB, LVarC)
         EVT_SUB(LVar1, 90)
         EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.01))
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BulletBill_Gold_Anim03)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BulletBill_Gold_Anim03)
         EVT_CALL(SetGoalPos, ACTOR_SELF, LVar1, LVar2, LVar3)
         EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BulletBill_Gold_Anim01)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BulletBill_Gold_Anim01)
         EVT_CALL(ForceHomePos, ACTOR_SELF, LVar1, LVar2, LVar3)
         EVT_CALL(HPBarToHome, ACTOR_SELF)
     EVT_END_IF
@@ -235,7 +239,7 @@ EvtScript N(takeTurn) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BulletBill_Gold_Anim04)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BulletBill_Gold_Anim04)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -1, 0)
     EVT_WAIT(1)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -2, 0)

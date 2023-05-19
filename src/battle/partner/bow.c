@@ -25,6 +25,11 @@ extern EvtScript N(hidePlayer);
 
 extern s32 bMarioHideAnims[];
 
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+    PRT_ZERO            = 0,
+};
+
 API_CALLABLE(N(IsOuttaSightActive)) {
     BattleStatus* battleStatus = &gBattleStatus;
     script->varTable[0] = battleStatus->outtaSightActive;
@@ -188,7 +193,7 @@ s32 N(StatusTable)[] = {
 ActorPartBlueprint N(parts)[] = {
     {
         .flags = 0,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 9, 19 },
         .opacity = 255,
@@ -542,9 +547,9 @@ EvtScript N(smack) = {
         EVT_END_LOOP
         EVT_CALL(SetActorYaw, ACTOR_PARTNER, 0)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Injured)
-        EVT_CALL(AddActorDecoration, ACTOR_SELF, 0, 0, ACTOR_DECORATION_SEEING_STARS)
+        EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_ZERO, 0, ACTOR_DECORATION_SEEING_STARS)
         EVT_WAIT(30)
-        EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 0, 0)
+        EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_ZERO, 0)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Idle)
         EVT_WAIT(10)
         EVT_EXEC_WAIT(N(returnHome))
@@ -1059,9 +1064,9 @@ EvtScript N(fanSmack) = {
         EVT_END_LOOP
         EVT_CALL(SetActorYaw, ACTOR_PARTNER, 0)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Injured)
-        EVT_CALL(AddActorDecoration, ACTOR_SELF, 0, 0, ACTOR_DECORATION_SEEING_STARS)
+        EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_ZERO, 0, ACTOR_DECORATION_SEEING_STARS)
         EVT_WAIT(40)
-        EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 0, 0)
+        EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_ZERO, 0)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Idle)
         EVT_WAIT(10)
         EVT_EXEC_WAIT(N(returnHome))

@@ -12,6 +12,11 @@ extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
 extern EvtScript N(nextTurn);
 
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+    PRT_2               = 2,
+};
+
 s32 N(IdleAnimations_1)[] = {
     STATUS_KEY_NORMAL,    ANIM_CrystalKing_Anim0A,
     STATUS_END,
@@ -62,7 +67,7 @@ s32 N(StatusTable)[] = {
 ActorPartBlueprint N(parts_1)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 16 },
         .opacity = 255,
@@ -74,7 +79,7 @@ ActorPartBlueprint N(parts_1)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_20 | ACTOR_PART_FLAG_MULTI_TARGET | ACTOR_PART_FLAG_80000000,
-        .index = 2,
+        .index = PRT_2,
         .posOffset = { 0, 50, 0 },
         .targetOffset = { 0, -34 },
         .opacity = 255,
@@ -89,7 +94,7 @@ ActorPartBlueprint N(parts_1)[] = {
 ActorPartBlueprint N(parts_2)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 16 },
         .opacity = 255,
@@ -101,7 +106,7 @@ ActorPartBlueprint N(parts_2)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_20 | ACTOR_PART_FLAG_MULTI_TARGET | ACTOR_PART_FLAG_80000000,
-        .index = 2,
+        .index = PRT_2,
         .posOffset = { 0, 50, 0 },
         .targetOffset = { 0, -34 },
         .opacity = 255,
@@ -116,7 +121,7 @@ ActorPartBlueprint N(parts_2)[] = {
 ActorPartBlueprint N(parts_3)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 16 },
         .opacity = 255,
@@ -128,7 +133,7 @@ ActorPartBlueprint N(parts_3)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_20 | ACTOR_PART_FLAG_MULTI_TARGET | ACTOR_PART_FLAG_80000000,
-        .index = 2,
+        .index = PRT_2,
         .posOffset = { 0, 50, 0 },
         .targetOffset = { 0, -34 },
         .opacity = 255,
@@ -259,7 +264,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_CALL(GetAnimation, ACTOR_SELF, 1, LVar1)
+            EVT_CALL(GetAnimation, ACTOR_SELF, PRT_MAIN, LVar1)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
@@ -287,12 +292,12 @@ EvtScript N(handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)
-            EVT_CALL(GetAnimation, ACTOR_SELF, 1, LVar1)
+            EVT_CALL(GetAnimation, ACTOR_SELF, PRT_MAIN, LVar1)
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_CALL(GetAnimation, ACTOR_SELF, 1, LVar1)
+            EVT_CALL(GetAnimation, ACTOR_SELF, PRT_MAIN, LVar1)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_CALL(HideHealthBar, ACTOR_SELF)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_301)
@@ -303,15 +308,15 @@ EvtScript N(handleEvent) = {
             EVT_CALL(GetOwnerID, LVar0)
             EVT_CALL(GetActorVar, ACTOR_ENEMY0, 4, LVar1)
             EVT_IF_EQ(LVar0, LVar1)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim05)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim05)
             EVT_END_IF
             EVT_CALL(GetActorVar, ACTOR_ENEMY0, 5, LVar1)
             EVT_IF_EQ(LVar0, LVar1)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim06)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim06)
             EVT_END_IF
             EVT_CALL(GetActorVar, ACTOR_ENEMY0, 6, LVar1)
             EVT_IF_EQ(LVar0, LVar1)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim07)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim07)
             EVT_END_IF
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.2))
             EVT_CALL(RandInt, 360, LVar0)
@@ -328,7 +333,7 @@ EvtScript N(handleEvent) = {
             EVT_SET(LVar0, 255)
             EVT_LOOP(20)
                 EVT_SUB(LVar0, 12)
-                EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, LVar0)
+                EVT_CALL(SetPartAlpha, ACTOR_SELF, PRT_MAIN, LVar0)
                 EVT_WAIT(1)
             EVT_END_LOOP
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
@@ -377,7 +382,7 @@ EvtScript N(handleEvent) = {
             EVT_SET(LVar0, 255)
             EVT_LOOP(20)
                 EVT_SUB(LVar0, 12)
-                EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, LVar0)
+                EVT_CALL(SetPartAlpha, ACTOR_SELF, PRT_MAIN, LVar0)
                 EVT_WAIT(1)
             EVT_END_LOOP
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)

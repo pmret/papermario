@@ -9,6 +9,10 @@ extern EvtScript N(takeTurn);
 extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
 
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+};
+
 #include "common/battle/SetAbsoluteStatusOffsets.inc.c"
 
 #include "common/MediGuySpriteRotationFunc.inc.c"
@@ -60,7 +64,7 @@ s32 N(StatusTable)[] = {
 ActorPartBlueprint N(parts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -2, 38 },
         .opacity = 255,
@@ -111,12 +115,12 @@ EvtScript N(idle) = {
     EVT_LABEL(0)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
     EVT_IF_FLAG(LVar0, STATUS_FLAG_SLEEP)
-        EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -2, 24)
-        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -5)
+        EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -2, 24)
+        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, -1, -5)
         EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 20)
     EVT_ELSE
-        EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -2, 38)
-        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -5)
+        EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -2, 38)
+        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, -1, -5)
         EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 12, 31)
     EVT_END_IF
     EVT_WAIT(1)
@@ -127,12 +131,12 @@ EvtScript N(idle) = {
 
 EvtScript N(returnHome) = {
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
-    EVT_CALL(SetPartRotation, ACTOR_SELF, 1, 0, 0, 0)
+    EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_MAIN, 0, 0, 0)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MediGuy_Anim03)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MediGuy_Anim03)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, 1, EASING_LINEAR)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MediGuy_Anim01)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MediGuy_Anim01)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
     EVT_RETURN
     EVT_END
@@ -188,7 +192,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim06)
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
-            EVT_CALL(SetPartRotation, ACTOR_SELF, 1, 0, 0, 0)
+            EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_MAIN, 0, 0, 0)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_MediGuy_Anim07)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
@@ -255,11 +259,11 @@ EvtScript N(flyingAttack) = {
         EVT_SETF(LVar0, EVT_FLOAT(0.0))
         EVT_LOOP(15)
             EVT_ADDF(LVar0, EVT_FLOAT(2.0))
-            EVT_CALL(SetPartRotation, ACTOR_SELF, 1, 0, 0, LVar0)
+            EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_MAIN, 0, 0, LVar0)
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MediGuy_Anim03)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MediGuy_Anim03)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 50, 0, 0)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
@@ -272,7 +276,7 @@ EvtScript N(flyingAttack) = {
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2F8)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MediGuy_Anim05)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MediGuy_Anim05)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
@@ -283,7 +287,7 @@ EvtScript N(flyingAttack) = {
                 EVT_SET(LVar0, 0)
                 EVT_LOOP(60)
                     EVT_CALL(N(MediGuySpriteRotationFunc), LVar0, LVar1, 15, 60, EVT_FLOAT(30.0))
-                    EVT_CALL(SetPartRotation, ACTOR_SELF, 1, 0, 0, LVar1)
+                    EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_MAIN, 0, 0, LVar1)
                     EVT_ADD(LVar0, 1)
                     EVT_WAIT(1)
                 EVT_END_LOOP
@@ -294,7 +298,7 @@ EvtScript N(flyingAttack) = {
             EVT_ADD(LVar2, 1)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MediGuy_Anim05)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MediGuy_Anim05)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, EASING_QUADRATIC_OUT)
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -302,10 +306,10 @@ EvtScript N(flyingAttack) = {
             EVT_WAIT(30)
             EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(10.0))
             EVT_EXEC_WAIT(N(returnHome))
-            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
+            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
@@ -315,7 +319,7 @@ EvtScript N(flyingAttack) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2F8)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MediGuy_Anim05)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MediGuy_Anim05)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
@@ -329,7 +333,7 @@ EvtScript N(flyingAttack) = {
     EVT_ADD(LVar2, 1)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MediGuy_Anim05)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MediGuy_Anim05)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, EASING_QUADRATIC_OUT)
     EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, 1, BS_FLAGS1_SP_EVT_ACTIVE)
@@ -365,12 +369,12 @@ EvtScript N(healOneAlly) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2F8)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_214)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MediGuy_Anim05)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MediGuy_Anim05)
     EVT_ADD(LVar2, 50)
     EVT_PLAY_EFFECT(EFFECT_SPARKLES, 1, LVar1, LVar2, LVar3, 10, 0)
     EVT_PLAY_EFFECT(EFFECT_RECOVER, 2, LVar1, LVar2, LVar3, 0, 0)
     EVT_WAIT(30)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_MediGuy_Anim01)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MediGuy_Anim01)
     EVT_WAIT(10)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(BattleCamTargetActor, LVarA)

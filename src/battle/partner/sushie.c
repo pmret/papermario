@@ -26,6 +26,10 @@ extern EvtScript N(tidalWave);
 
 static EffectInstance* sEffect;
 
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+};
+
 API_CALLABLE(N(SetSquirtAngle)) {
     ActorPart* targetPart;
     Actor* partner = gBattleStatus.partnerActor;
@@ -427,7 +431,7 @@ s32 N(StatusTable)[] = {
 ActorPartBlueprint N(parts)[] = {
     {
         .flags = 0,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 12, 17 },
         .opacity = 255,

@@ -11,6 +11,10 @@ extern EvtScript N(idle);
 extern EvtScript N(takeTurn);
 extern EvtScript N(handleEvent);
 
+enum N(ActorParts) {
+    PRT_MAIN            = 1,
+};
+
 s32 N(IdleAnimations)[] = {
     STATUS_KEY_NORMAL,    ANIM_AlbinoDino_Idle,
     STATUS_KEY_STONE,     ANIM_AlbinoDino_Still,
@@ -58,7 +62,7 @@ s32 N(StatusTable)[] = {
 ActorPartBlueprint N(parts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -9, 46 },
         .opacity = 255,
@@ -107,11 +111,11 @@ EvtScript N(idle) = {
 };
 
 EvtScript N(returnHome) = {
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_AlbinoDino_Run)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_AlbinoDino_Run)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_AlbinoDino_Idle)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_AlbinoDino_Idle)
     EVT_RETURN
     EVT_END
 };
@@ -249,7 +253,7 @@ EvtScript N(takeTurn) = {
             EVT_WAIT(4)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_AlbinoDino_Run)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_AlbinoDino_Run)
     EVT_WAIT(20)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarF, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVarF)
@@ -270,11 +274,11 @@ EvtScript N(takeTurn) = {
             EVT_END_IF
             EVT_WAIT(40)
             EVT_CALL(YieldTurn)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
             EVT_EXEC_WAIT(N(returnHome))
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
-            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
+            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
@@ -307,7 +311,7 @@ EvtScript N(takeTurn) = {
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2FD)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_AlbinoDino_Idle)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_AlbinoDino_Idle)
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 3, EVT_FLOAT(1.0))
             EVT_WAIT(10)
             EVT_CALL(YieldTurn)

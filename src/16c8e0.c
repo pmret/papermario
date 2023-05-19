@@ -1140,7 +1140,7 @@ void btl_delete_actor(Actor* actor) {
                 heap_free(part->movement);
             }
 
-            if (!(part->flags & 0x2)) {
+            if (!(part->flags & ACTOR_PART_FLAG_2)) {
                 heap_free(part->decorationTable);
             }
         }
