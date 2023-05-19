@@ -31,7 +31,7 @@ extern ActorBlueprint b_area_kzn2_petit_piranha_bomb;
 extern Formation N(formation_petit_piranha_1);
 extern Formation N(formation_petit_piranha_2);
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
     PRT_2               = 2,
 };
@@ -123,7 +123,7 @@ s32 N(StatusTable)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
         .index = PRT_MAIN,
@@ -155,8 +155,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_LAVA_BUD_PHASE_1,
     .level = 0,
     .maxHP = 8,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,

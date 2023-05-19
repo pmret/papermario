@@ -9,7 +9,7 @@ extern EvtScript N(watt_takeTurn);
 extern EvtScript N(watt_idle);
 extern EvtScript N(watt_handleEvent);
 
-enum N(WattActorParts) {
+enum N(WattActorPartIDs) {
     PRT_WATT_TARGET     = 2,
 };
 

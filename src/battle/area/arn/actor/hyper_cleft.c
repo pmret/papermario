@@ -16,7 +16,7 @@ extern EvtScript N(nextTurn_80220D3C);
 extern EvtScript N(80222F1C);
 extern EvtScript N(80223310);
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN    = 1,
 };
 

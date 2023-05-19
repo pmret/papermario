@@ -2826,7 +2826,7 @@ void remove_player_buffs(s32 buffs) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     Actor* partner = battleStatus->partnerActor;
-    ActorPart* playerPartsTable = player->partsTable;
+    ActorPart* playerActorParts = player->partsTable;
 
     if (buffs & PLAYER_BUFF_JUMP_CHARGE) {
         battleStatus->jumpCharge = 0;
@@ -2852,7 +2852,7 @@ void remove_player_buffs(s32 buffs) {
     if (buffs & PLAYER_BUFF_TRANSPARENT && (player->transparentStatus != 0)) {
         player->transparentDuration = 0;
         player->transparentStatus = 0;
-        playerPartsTable->flags &= ~ACTOR_PART_FLAG_100;
+        playerActorParts->flags &= ~ACTOR_PART_FLAG_100;
         remove_status_transparent(player->hudElementDataIndex);
     }
     if (buffs & PLAYER_BUFF_WATER_BLOCK && (battleStatus->waterBlockTurnsLeft != 0)) {

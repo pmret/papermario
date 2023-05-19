@@ -5,7 +5,7 @@
 
 #define NAMESPACE b_area_kmr_part_2_goomnut_tree
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
     PRT_2               = 2,
     PRT_3               = 3,
@@ -56,7 +56,7 @@ extern EvtScript N(handleEvent_80223688);
 extern EvtScript N(shake_goomnut_tree);
 extern EvtScript N(80223DBC);
 
-ActorPartBlueprint N(PartsTable_8022339C)[] = {
+ActorPartBlueprint N(ActorParts_8022339C)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
@@ -124,8 +124,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_GOOMNUT_TREE,
     .level = 1,
     .maxHP = 255,
-    .partCount = ARRAY_COUNT( N(PartsTable_8022339C)),
-    .partsData = N(PartsTable_8022339C),
+    .partCount = ARRAY_COUNT( N(ActorParts_8022339C)),
+    .partsData = N(ActorParts_8022339C),
     .initScript = &N(init_80223488),
     .statusTable = N(StatusTable_802232F0),
     .escapeChance = 0,

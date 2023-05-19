@@ -12,7 +12,7 @@ extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
 extern EvtScript N(nextTurn);
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
     PRT_2               = 2,
 };
@@ -64,7 +64,7 @@ s32 N(StatusTable)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts_1)[] = {
+ActorPartBlueprint N(ActorParts_1)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = PRT_MAIN,
@@ -91,7 +91,7 @@ ActorPartBlueprint N(parts_1)[] = {
     },
 };
 
-ActorPartBlueprint N(parts_2)[] = {
+ActorPartBlueprint N(ActorParts_2)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = PRT_MAIN,
@@ -118,7 +118,7 @@ ActorPartBlueprint N(parts_2)[] = {
     },
 };
 
-ActorPartBlueprint N(parts_3)[] = {
+ActorPartBlueprint N(ActorParts_3)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = PRT_MAIN,
@@ -150,8 +150,8 @@ ActorBlueprint N(1) = {
     .type = ACTOR_TYPE_CRYSTAL_BIT,
     .level = 0,
     .maxHP = 1,
-    .partCount = ARRAY_COUNT(N(parts_1)),
-    .partsData = N(parts_1),
+    .partCount = ARRAY_COUNT(N(ActorParts_1)),
+    .partsData = N(ActorParts_1),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
@@ -173,8 +173,8 @@ ActorBlueprint N(2) = {
     .type = ACTOR_TYPE_CRYSTAL_BIT,
     .level = 0,
     .maxHP = 1,
-    .partCount = ARRAY_COUNT(N(parts_2)),
-    .partsData = N(parts_2),
+    .partCount = ARRAY_COUNT(N(ActorParts_2)),
+    .partsData = N(ActorParts_2),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
@@ -196,8 +196,8 @@ ActorBlueprint N(3) = {
     .type = ACTOR_TYPE_CRYSTAL_BIT,
     .level = 0,
     .maxHP = 1,
-    .partCount = ARRAY_COUNT(N(parts_3)),
-    .partsData = N(parts_3),
+    .partCount = ARRAY_COUNT(N(ActorParts_3)),
+    .partsData = N(ActorParts_3),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,

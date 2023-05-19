@@ -12,7 +12,7 @@ extern EvtScript N(init_80225FBC);
 extern EvtScript N(takeTurn_802274E4);
 extern EvtScript N(run_away);
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
     PRT_2               = 2,
     PRT_3               = 3,
@@ -78,7 +78,7 @@ s32 N(StatusTable_80223BE4)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(PartsTable_80223C90)[] = {
+ActorPartBlueprint N(ActorParts_80223C90)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
@@ -93,7 +93,7 @@ ActorPartBlueprint N(PartsTable_80223C90)[] = {
     },
 };
 
-ActorPartBlueprint N(PartsTable_80223CB4)[] = {
+ActorPartBlueprint N(ActorParts_80223CB4)[] = {
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET,
         .index = PRT_MAIN,
@@ -137,8 +137,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_WHITE_MAGIKOOPA,
     .level = 21,
     .maxHP = 11,
-    .partCount = ARRAY_COUNT( N(PartsTable_80223C90)),
-    .partsData = N(PartsTable_80223C90),
+    .partCount = ARRAY_COUNT( N(ActorParts_80223C90)),
+    .partsData = N(ActorParts_80223C90),
     .initScript = &N(init_80225F58),
     .statusTable = N(StatusTable_80223B38),
     .escapeChance = 40,
@@ -160,8 +160,8 @@ ActorBlueprint N(flying) = {
     .type = ACTOR_TYPE_FLYING_WHITE_MAGIKOOPA,
     .level = 21,
     .maxHP = 11,
-    .partCount = ARRAY_COUNT( N(PartsTable_80223CB4)),
-    .partsData = N(PartsTable_80223CB4),
+    .partCount = ARRAY_COUNT( N(ActorParts_80223CB4)),
+    .partsData = N(ActorParts_80223CB4),
     .initScript = &N(init_80225FBC),
     .statusTable = N(StatusTable_80223BE4),
     .escapeChance = 40,

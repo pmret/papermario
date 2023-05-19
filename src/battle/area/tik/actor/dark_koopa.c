@@ -13,7 +13,7 @@ extern EvtScript N(handleEvent);
 
 extern s32 N(IdleAnimations)[];
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
@@ -56,7 +56,7 @@ s32 N(StatusTable)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
@@ -76,8 +76,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_DARK_KOOPA,
     .level = 18,
     .maxHP = 8,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 60,

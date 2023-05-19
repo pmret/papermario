@@ -12,7 +12,7 @@ extern EvtScript N(takeTurn_8021AEA4);
 extern EvtScript N(idle_802191E4);
 extern EvtScript N(handleEvent_80219500);
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
     PRT_2               = 2,
     PRT_3               = 3,
@@ -54,7 +54,7 @@ s32 N(StatusTable_80218E3C)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(PartsTable_80218EE8)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
@@ -122,8 +122,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_LAVA_BUBBLE,
     .level = 17,
     .maxHP = 9,
-    .partCount = ARRAY_COUNT( N(PartsTable_80218EE8)),
-    .partsData = N(PartsTable_80218EE8),
+    .partCount = ARRAY_COUNT( N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init_8021901C),
     .statusTable = N(StatusTable_80218E3C),
     .escapeChance = 50,

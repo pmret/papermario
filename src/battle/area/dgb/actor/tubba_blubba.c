@@ -15,7 +15,7 @@ extern EvtScript N(80218E60);
 extern EvtScript N(80219D88);
 extern EvtScript N(8021A36C);
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 

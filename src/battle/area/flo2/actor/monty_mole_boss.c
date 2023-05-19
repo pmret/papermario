@@ -13,7 +13,7 @@ extern EvtScript N(takeTurn);
 extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
     PRT_2               = 2,
     PRT_3               = 3,
@@ -51,7 +51,7 @@ s32 N(StatusTable)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = PRT_MAIN,
@@ -95,8 +95,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_MONTY_MOLE_BOSS,
     .level = 19,
     .maxHP = 12,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 50,
@@ -141,7 +141,7 @@ s32 N(IdleAnimations_unused)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts_hole)[] = {
+ActorPartBlueprint N(ActorParts_hole)[] = {
     {
         .flags = ACTOR_PART_FLAG_2000 | ACTOR_PART_FLAG_NO_TARGET,
         .index = PRT_MAIN,
@@ -170,8 +170,8 @@ ActorBlueprint N(hole) = {
     .type = ACTOR_TYPE_MONTY_HOLE,
     .level = 9,
     .maxHP = 5,
-    .partCount = ARRAY_COUNT(N(parts_hole)),
-    .partsData = N(parts_hole),
+    .partCount = ARRAY_COUNT(N(ActorParts_hole)),
+    .partsData = N(ActorParts_hole),
     .initScript = &N(init_hole),
     .statusTable = NULL,
     .escapeChance = 80,

@@ -3,7 +3,7 @@
 #include "script_api/battle.h"
 #include "sprite/npc/BattleLakilester.h"
 
-enum N(LakilesterActorParts) {
+enum N(LakilesterActorPartIDs) {
     PRT_SPINY           = 3,
 };
 

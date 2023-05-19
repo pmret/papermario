@@ -842,7 +842,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                 out += f"{anim},\n"
 
             out += f"}};\n"
-        elif struct["type"] == "PartsTable":
+        elif struct["type"] == "ActorParts":
             out += f"ActorPartBlueprint {struct['name']}[] = {{\n"
 
             for _ in range(0, struct["length"] // 36):

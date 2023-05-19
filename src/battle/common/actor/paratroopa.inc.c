@@ -10,7 +10,7 @@ extern s32 N(IdleAnimations_8021ED00)[];
 extern s32 N(IdleAnimations_8021ED98)[];
 extern EvtScript N(init_8021EE0C);
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
     PRT_2               = 2,
     PRT_3               = 3,
@@ -85,7 +85,7 @@ s32 N(StatusTable_8021EBC0)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(PartsTable_8021EC6C)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET,
         .index = PRT_MAIN,
@@ -129,8 +129,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_PARATROOPA,
     .level = 6,
     .maxHP = 4,
-    .partCount = ARRAY_COUNT( N(PartsTable_8021EC6C)),
-    .partsData = N(PartsTable_8021EC6C),
+    .partCount = ARRAY_COUNT( N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init_8021EE0C),
     .statusTable = N(StatusTable_8021EBC0),
     .escapeChance = 60,

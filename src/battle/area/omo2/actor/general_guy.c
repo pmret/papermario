@@ -22,7 +22,7 @@ extern s32 N(IdleAnimations)[];
 extern s32 N(IdleAnimations_bomb)[];
 extern Formation N(formation_shy_squad);
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
     PRT_2               = 2,
 };
@@ -61,7 +61,7 @@ s32 N(StatusTable)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_MULTI_TARGET | ACTOR_PART_FLAG_20000000,
         .index = PRT_MAIN,
@@ -93,8 +93,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_GENERAL_GUY,
     .level = 73,
     .maxHP = 10,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,

@@ -11,7 +11,7 @@ extern EvtScript N(takeTurn);
 extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
     PRT_COIN            = 2,
 };
@@ -79,7 +79,7 @@ s32 N(StatusTable)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
@@ -106,7 +106,7 @@ ActorPartBlueprint N(parts)[] = {
     },
 };
 
-ActorPartBlueprint N(parts_coin)[] = {
+ActorPartBlueprint N(ActorParts_coin)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = PRT_COIN,
@@ -126,8 +126,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_BANDIT,
     .level = 9,
     .maxHP = 5,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 40,
@@ -149,8 +149,8 @@ ActorBlueprint N(coin) = {
     .type = ACTOR_TYPE_BANDIT,
     .level = 9,
     .maxHP = 5,
-    .partCount = ARRAY_COUNT(N(parts_coin)),
-    .partsData = N(parts_coin),
+    .partCount = ARRAY_COUNT(N(ActorParts_coin)),
+    .partsData = N(ActorParts_coin),
     .initScript = &N(init_coin),
     .statusTable = N(StatusTable),
     .escapeChance = 40,

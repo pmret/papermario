@@ -6,7 +6,7 @@
 
 #define NAMESPACE b_area_kmr_part_2_goomba_king
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
     PRT_2               = 2,
     // note: these reference the goomnut tree actor
@@ -93,7 +93,7 @@ s32 N(StatusTable_8022091C)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(PartsTable_802209C8)[] = {
+ActorPartBlueprint N(ActorParts_802209C8)[] = {
     {
         .flags = ACTOR_PART_FLAG_20 | ACTOR_PART_FLAG_NO_TARGET,
         .index = PRT_MAIN,
@@ -135,8 +135,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_GOOMBA_KING,
     .level = 49,
     .maxHP = 10,
-    .partCount = ARRAY_COUNT( N(PartsTable_802209C8)),
-    .partsData = N(PartsTable_802209C8),
+    .partCount = ARRAY_COUNT( N(ActorParts_802209C8)),
+    .partsData = N(ActorParts_802209C8),
     .initScript = &N(init_80220A38),
     .statusTable = N(StatusTable_8022091C),
     .escapeChance = 0,

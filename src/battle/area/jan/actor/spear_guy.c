@@ -20,7 +20,7 @@ extern EvtScript N(8021BF8C);
 extern Formation N(specialFormation_8021A8C0);
 extern Formation N(specialFormation_8021A8DC);
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
     PRT_2               = 2,
     PRT_3               = 3,
@@ -125,7 +125,7 @@ s32 N(StatusTable_80218744)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(PartsTable_802187F0)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_2,
@@ -181,8 +181,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_SPEAR_GUY,
     .level = 16,
     .maxHP = 7,
-    .partCount = ARRAY_COUNT( N(PartsTable_802187F0)),
-    .partsData = N(PartsTable_802187F0),
+    .partCount = ARRAY_COUNT( N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init_80218980),
     .statusTable = N(StatusTable_80218698),
     .escapeChance = 50,

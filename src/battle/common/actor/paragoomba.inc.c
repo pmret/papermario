@@ -5,7 +5,7 @@
 #include "sprite/npc/Goomba.h"
 #include "sprite/npc/Paragoomba.h"
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
     PRT_2               = 2,
     PRT_3               = 3,
@@ -78,7 +78,7 @@ extern s32 N(IdleAnimations_8021B3D0)[];
 extern s32 N(IdleAnimations_8021B3DC)[];
 extern EvtScript N(init_8021B3E8);
 
-ActorPartBlueprint N(PartsTable_8021B280)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET,
         .index = PRT_MAIN,
@@ -134,8 +134,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_PARAGOOMBA,
     .level = 6,
     .maxHP = 2,
-    .partCount = ARRAY_COUNT( N(PartsTable_8021B280)),
-    .partsData = N(PartsTable_8021B280),
+    .partCount = ARRAY_COUNT( N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init_8021B3E8),
     .statusTable = N(StatusTable_8021B1D4),
     .escapeChance = 90,

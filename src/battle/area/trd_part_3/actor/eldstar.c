@@ -14,7 +14,7 @@ extern EvtScript N(EVS_ManageTutorial);
 
 BSS s32 D_80219040;
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 

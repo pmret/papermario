@@ -6,7 +6,7 @@
 extern s32 N(IdleAnimations_8021AE5C)[];
 extern s32 N(IdleAnimations_8021AEA8)[];
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
     PRT_2               = 2,
     PRT_3               = 3,
@@ -47,7 +47,7 @@ s32 N(StatusTable_8021ACD4)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(PartsTable_8021AD80)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
@@ -117,8 +117,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_EMBER,
     .level = 24,
     .maxHP = 10,
-    .partCount = ARRAY_COUNT( N(PartsTable_8021AD80)),
-    .partsData = N(PartsTable_8021AD80),
+    .partCount = ARRAY_COUNT( N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init_8021AEB4),
     .statusTable = N(StatusTable_8021ACD4),
     .escapeChance = 60,

@@ -23,7 +23,7 @@ extern EvtScript N(unEnrage);
 extern Formation N(formation_baby_1);
 extern Formation N(formation_baby_2);
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
     PRT_2               = 2,
 };
@@ -192,7 +192,7 @@ s32 N(StatusTable_enraged)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = PRT_MAIN,
@@ -224,8 +224,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_SUPER_BLOOPER1,
     .level = 65,
     .maxHP = 70,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,

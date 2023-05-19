@@ -8,7 +8,7 @@ extern EvtScript N(parakarry_takeTurn);
 extern EvtScript N(parakarry_idle);
 extern EvtScript N(parakarry_handleEvent);
 
-enum N(ParakarryActorParts) {
+enum N(ParakarryActorPartIDs) {
     PRT_PARAKARRY_TARGET    = 2,
 };
 

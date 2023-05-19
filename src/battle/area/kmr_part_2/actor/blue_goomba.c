@@ -5,7 +5,7 @@
 
 #define NAMESPACE b_area_kmr_part_2_blue_goomba
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
     PRT_ZER0            = 0,
     PRT_RED_MAIN        = 1, // main part for red goomba
@@ -49,7 +49,7 @@ extern EvtScript N(idle_80219A98);
 extern EvtScript N(handleEvent_80219D74);
 extern EvtScript N(takeTurn_8021B2C8);
 
-ActorPartBlueprint N(PartsTable_80219968)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
@@ -69,8 +69,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_BLUE_GOOMBA_BOSS,
     .level = 20,
     .maxHP = 6,
-    .partCount = ARRAY_COUNT( N(PartsTable_80219968)),
-    .partsData = N(PartsTable_80219968),
+    .partCount = ARRAY_COUNT( N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init_8021B268),
     .statusTable = N(StatusTable_802198BC),
     .escapeChance = 0,

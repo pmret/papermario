@@ -19,7 +19,7 @@ extern EvtScript N(8021B1B4);
 extern EvtScript N(8021BDE4);
 extern EvtScript N(8021C2BC);
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
     PRT_2               = 2,
     PRT_3               = 3,
@@ -58,7 +58,7 @@ s32 N(StatusTable_80218C1C)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(PartsTable_80218CC8)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = PRT_MAIN,
@@ -138,8 +138,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_POKEY_MUMMY,
     .level = 10,
     .maxHP = 4,
-    .partCount = ARRAY_COUNT( N(PartsTable_80218CC8)),
-    .partsData = N(PartsTable_80218CC8),
+    .partCount = ARRAY_COUNT( N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable_80218C1C),
     .escapeChance = 60,

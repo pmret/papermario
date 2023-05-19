@@ -23,7 +23,7 @@ extern EvtScript N(flee);
 extern EvtScript N(next_phase);
 extern EvtScript N(updateActorSize);
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
     PRT_2               = 2,
     PRT_3               = 3,
@@ -96,7 +96,7 @@ s32 N(StatusTable)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_4 | ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
@@ -296,8 +296,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_SHY_SQUAD,
     .level = 0,
     .maxHP = 15,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,

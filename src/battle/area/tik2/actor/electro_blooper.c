@@ -19,7 +19,7 @@ extern EvtScript N(attackSpinDrop);
 extern EvtScript N(attackInkBlast);
 extern EvtScript N(charge);
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
     PRT_2               = 2,
 };
@@ -188,7 +188,7 @@ s32 N(StatusTable_charged)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = PRT_MAIN,
@@ -220,8 +220,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_ELECTRO_BLOOPER1,
     .level = 50,
     .maxHP = 50,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,

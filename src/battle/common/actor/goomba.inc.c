@@ -3,7 +3,7 @@
 #include "script_api/battle.h"
 #include "sprite/npc/Goomba.h"
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
@@ -40,7 +40,7 @@ s32 N(StatusTable)[] = {
 extern s32 N(IdleAnimations)[];
 extern EvtScript N(init);
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
@@ -60,8 +60,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_GOOMBA,
     .level = 5,
     .maxHP = 2,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 90,

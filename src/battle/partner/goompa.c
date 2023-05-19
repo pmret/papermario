@@ -14,7 +14,7 @@ extern EvtScript N(runAway);
 extern EvtScript N(runAwayFail);
 extern EvtScript N(executeAction);
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
@@ -53,7 +53,7 @@ s32 N(StatusTable)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .index = PRT_MAIN,
         .opacity = 255,
@@ -66,8 +66,8 @@ ActorBlueprint NAMESPACE = {
     .flags = ACTOR_PART_FLAG_200000,
     .type = ACTOR_TYPE_GOOMBARIO,
     .maxHP = 99,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .spinSmashReq = 4,

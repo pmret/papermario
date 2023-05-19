@@ -6,7 +6,7 @@
 
 #define NAMESPACE b_area_nok_kent_c_koopa
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
     PRT_2               = 2,
     PRT_3               = 3,
@@ -90,7 +90,7 @@ s32 N(StatusTable_80227A08)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(PartsTable_80227AB4)[] = {
+ActorPartBlueprint N(ActorParts_80227AB4)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
@@ -208,8 +208,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_KENT_C_KOOPA,
     .level = 55,
     .maxHP = 70,
-    .partCount = ARRAY_COUNT( N(PartsTable_80227AB4)),
-    .partsData = N(PartsTable_80227AB4),
+    .partCount = ARRAY_COUNT( N(ActorParts_80227AB4)),
+    .partsData = N(ActorParts_80227AB4),
     .initScript = &N(init_80227C20),
     .statusTable = N(StatusTable_80227A08),
     .escapeChance = 0,

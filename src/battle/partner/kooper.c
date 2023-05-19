@@ -25,7 +25,7 @@ extern EvtScript N(dizzyShell);
 extern EvtScript N(fireShell);
 extern EvtScript N(shellTossOnFirstStrike);
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
     PRT_ZERO            = 0,
 };
@@ -223,7 +223,7 @@ s32 N(StatusTable)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = 0,
         .index = PRT_MAIN,
@@ -243,8 +243,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_KOOPER,
     .level = 0,
     .maxHP = 99,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,

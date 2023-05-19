@@ -21,7 +21,7 @@ extern Formation N(specialFormation_802273A8);
 extern Formation N(specialFormation_802273C4);
 extern Formation N(specialFormation_802273E0);
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
@@ -71,7 +71,7 @@ s32 N(StatusTable_80224A40)[] = {
 
 BSS PlayerStatus D_802310D0;
 
-ActorPartBlueprint N(PartsTable_80224AEC)[] = {
+ActorPartBlueprint N(ActorParts_80224AEC)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
@@ -91,8 +91,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_GROOVE_GUY,
     .level = 15,
     .maxHP = 7,
-    .partCount = ARRAY_COUNT( N(PartsTable_80224AEC)),
-    .partsData = N(PartsTable_80224AEC),
+    .partCount = ARRAY_COUNT( N(ActorParts_80224AEC)),
+    .partsData = N(ActorParts_80224AEC),
     .initScript = &N(init_80224B38),
     .statusTable = N(StatusTable_80224A40),
     .escapeChance = 50,

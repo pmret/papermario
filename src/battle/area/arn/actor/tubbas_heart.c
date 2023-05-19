@@ -17,7 +17,7 @@ extern EvtScript N(80224B3C);
 extern EvtScript N(80225258);
 extern EvtScript N(802255D8);
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
     PRT_2               = 2,
 };
@@ -82,7 +82,7 @@ s32 N(StatusTable_80223C84)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(PartsTable_80223D30)[] = {
+ActorPartBlueprint N(ActorParts_80223D30)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = PRT_MAIN,
@@ -114,8 +114,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_TUBBA_HEART,
     .level = 0,
     .maxHP = 50,
-    .partCount = ARRAY_COUNT( N(PartsTable_80223D30)),
-    .partsData = N(PartsTable_80223D30),
+    .partCount = ARRAY_COUNT( N(ActorParts_80223D30)),
+    .partsData = N(ActorParts_80223D30),
     .initScript = &N(init_80223DA0),
     .statusTable = N(StatusTable_80223C84),
     .escapeChance = 0,

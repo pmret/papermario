@@ -5,7 +5,7 @@
 
 #define NAMESPACE b_area_kmr_part_3_egg_jr_troopa
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
@@ -67,7 +67,7 @@ s32 N(StatusTable_80224418)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(PartsTable_802244C4)[] = {
+ActorPartBlueprint N(ActorParts_802244C4)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
@@ -89,8 +89,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_JR_TROOPA2,
     .level = 44,
     .maxHP = 15,
-    .partCount = ARRAY_COUNT( N(PartsTable_802244C4)),
-    .partsData = N(PartsTable_802244C4),
+    .partCount = ARRAY_COUNT( N(ActorParts_802244C4)),
+    .partsData = N(ActorParts_802244C4),
     .initScript = &N(init_80224A94),
     .statusTable = N(StatusTable_80224418),
     .escapeChance = 0,

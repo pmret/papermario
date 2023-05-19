@@ -16,7 +16,7 @@ extern s32 N(IdleAnimations)[];
 extern s32 N(IdleAnimations_flying)[];
 extern s32 N(idleAnimtions_broomstick)[];
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
     PRT_2               = 2,
     PRT_3               = 3,
@@ -109,7 +109,7 @@ s32 N(StatusTable_flying)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
@@ -124,7 +124,7 @@ ActorPartBlueprint N(parts)[] = {
     },
 };
 
-ActorPartBlueprint N(parts_flying)[] = {
+ActorPartBlueprint N(ActorParts_flying)[] = {
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET,
         .index = PRT_MAIN,
@@ -168,8 +168,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_MAGIKOOPA,
     .level = 26,
     .maxHP = 11,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 40,
@@ -191,8 +191,8 @@ ActorBlueprint N(flying) = {
     .type = ACTOR_TYPE_FLYING_MAGIKOOPA,
     .level = 26,
     .maxHP = 11,
-    .partCount = ARRAY_COUNT(N(parts_flying)),
-    .partsData = N(parts_flying),
+    .partCount = ARRAY_COUNT(N(ActorParts_flying)),
+    .partsData = N(ActorParts_flying),
     .initScript = &N(init_flying),
     .statusTable = N(StatusTable_flying),
     .escapeChance = 40,
@@ -1318,7 +1318,7 @@ s32 N(StatusTable_clone_flying)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts_clone)[] = {
+ActorPartBlueprint N(ActorParts_clone)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
@@ -1333,7 +1333,7 @@ ActorPartBlueprint N(parts_clone)[] = {
     },
 };
 
-ActorPartBlueprint N(parts_clone_flying)[] = {
+ActorPartBlueprint N(ActorParts_clone_flying)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
@@ -1353,8 +1353,8 @@ ActorBlueprint N(clone) = {
     .type = ACTOR_TYPE_MAGICLONE,
     .level = 26,
     .maxHP = 11,
-    .partCount = ARRAY_COUNT(N(parts_clone)),
-    .partsData = N(parts_clone),
+    .partCount = ARRAY_COUNT(N(ActorParts_clone)),
+    .partsData = N(ActorParts_clone),
     .initScript = &N(init_clone),
     .statusTable = N(StatusTable_clone),
     .escapeChance = 40,
@@ -1376,8 +1376,8 @@ ActorBlueprint N(clone_flying) = {
     .type = ACTOR_TYPE_FLYING_MAGICLONE,
     .level = 26,
     .maxHP = 11,
-    .partCount = ARRAY_COUNT(N(parts_clone_flying)),
-    .partsData = N(parts_clone_flying),
+    .partCount = ARRAY_COUNT(N(ActorParts_clone_flying)),
+    .partsData = N(ActorParts_clone_flying),
     .initScript = &N(init_clone_flying),
     .statusTable = N(StatusTable_clone_flying),
     .escapeChance = 40,

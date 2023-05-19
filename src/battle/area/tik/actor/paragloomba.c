@@ -22,7 +22,7 @@ extern s32 N(IdleAnimations)[];
 extern s32 N(IdleAnimations_left_wing)[];
 extern s32 N(IdleAnimations_right_wing)[];
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
     PRT_2               = 2,
     PRT_3               = 3,
@@ -89,7 +89,7 @@ s32 N(StatusTable)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET,
         .index = PRT_MAIN,
@@ -145,8 +145,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_PARAGLOOMBA,
     .level = 11,
     .maxHP = 7,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 65,

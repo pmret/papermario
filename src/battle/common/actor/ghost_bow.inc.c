@@ -8,7 +8,7 @@ extern EvtScript N(bow_idle);
 extern EvtScript N(bow_handleEvent);
 extern EvtScript N(bow_init);
 
-enum N(BowActorParts) {
+enum N(BowActorPartIDs) {
     PRT_BOW_TARGET      = 2,
 };
 

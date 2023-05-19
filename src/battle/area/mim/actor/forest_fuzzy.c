@@ -13,7 +13,7 @@ extern EvtScript N(idle_80218574);
 extern EvtScript N(handleEvent_80218584);
 extern Formation N(specialFormation_8021A800);
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
@@ -47,7 +47,7 @@ s32 N(StatusTable_802183CC)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(PartsTable_80218478)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
@@ -67,8 +67,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_FOREST_FUZZY,
     .level = 11,
     .maxHP = 6,
-    .partCount = ARRAY_COUNT( N(PartsTable_80218478)),
-    .partsData = N(PartsTable_80218478),
+    .partCount = ARRAY_COUNT( N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init_80218510),
     .statusTable = N(StatusTable_802183CC),
     .escapeChance = 40,

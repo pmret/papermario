@@ -8,7 +8,7 @@
 extern s32 N(IdleAnimations_80219EBC)[];
 extern EvtScript N(init_8021CCDC);
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
@@ -49,7 +49,7 @@ s32 N(StatusTable_80219D78)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(PartsTable_80219E24)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
@@ -69,8 +69,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_CHAN,
     .level = 0,
     .maxHP = 15,
-    .partCount = ARRAY_COUNT( N(PartsTable_80219E24)),
-    .partsData = N(PartsTable_80219E24),
+    .partCount = ARRAY_COUNT( N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init_8021CCDC),
     .statusTable = N(StatusTable_80219D78),
     .escapeChance = 100,

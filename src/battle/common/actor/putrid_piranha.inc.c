@@ -10,7 +10,7 @@ extern EvtScript N(handleEvent_8021B3D0);
 extern EvtScript N(bite);
 extern EvtScript N(breath);
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
@@ -58,7 +58,7 @@ s32 N(StatusTable_8021B100)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(PartsTable_8021B1AC)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
@@ -78,8 +78,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_PUTRID_PIRANHA,
     .level = 17,
     .maxHP = 12,
-    .partCount = ARRAY_COUNT( N(PartsTable_8021B1AC)),
-    .partsData = N(PartsTable_8021B1AC),
+    .partCount = ARRAY_COUNT( N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init_8021B1F8),
     .statusTable = N(StatusTable_8021B100),
     .escapeChance = 60,

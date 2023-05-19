@@ -9,7 +9,7 @@ extern EvtScript N(handleEvent);
 
 BSS s32 N(slot_machine_buffer)[10];
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
@@ -47,7 +47,7 @@ s32 N(StatusTable)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
@@ -67,8 +67,8 @@ ActorBlueprint N(slot_machine_stop) = {
     .type = ACTOR_TYPE_SLOT_MACHINE_STOP,
     .level = 99,
     .maxHP = 99,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
@@ -90,8 +90,8 @@ ActorBlueprint N(slot_machine_start) = {
     .type = ACTOR_TYPE_SLOT_MACHINE_START,
     .level = 99,
     .maxHP = 99,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,

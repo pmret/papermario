@@ -14,7 +14,7 @@ extern EvtScript N(takeTurn_802195F0);
 extern EvtScript N(nextTurn_80218950);
 extern EvtScript N(takeTurn_8021A628);
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
@@ -48,7 +48,7 @@ s32 N(StatusTable_8021877C)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(PartsTable_80218828)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
@@ -68,8 +68,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_HYPER_GOOMBA,
     .level = 12,
     .maxHP = 7,
-    .partCount = ARRAY_COUNT( N(PartsTable_80218828)),
-    .partsData = N(PartsTable_80218828),
+    .partCount = ARRAY_COUNT( N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init_802188C0),
     .statusTable = N(StatusTable_8021877C),
     .escapeChance = 60,

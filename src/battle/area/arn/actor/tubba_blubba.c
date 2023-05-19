@@ -15,7 +15,7 @@ extern EvtScript N(80226558);
 extern EvtScript N(80226B88);
 extern EvtScript N(80227878);
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
@@ -63,7 +63,7 @@ s32 N(StatusTable_80225CA0)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(PartsTable_80225D4C)[] = {
+ActorPartBlueprint N(ActorParts_80225D4C)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
@@ -83,8 +83,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_TUBBA_BLUBBA_INVINCIBLE,
     .level = 70,
     .maxHP = 10,
-    .partCount = ARRAY_COUNT( N(PartsTable_80225D4C)),
-    .partsData = N(PartsTable_80225D4C),
+    .partCount = ARRAY_COUNT( N(ActorParts_80225D4C)),
+    .partsData = N(ActorParts_80225D4C),
     .initScript = &N(init_80225D98),
     .statusTable = N(StatusTable_80225CA0),
     .escapeChance = 0,

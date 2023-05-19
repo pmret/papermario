@@ -21,7 +21,7 @@ extern EvtScript N(checkExtinguish);
 extern EvtScript N(onDeath);
 extern EvtScript N(returnHome);
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
     PRT_2               = 2,
 };
@@ -82,7 +82,7 @@ s32 N(StatusTable)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
@@ -115,8 +115,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_BIG_LANTERN_GHOST,
     .level = 42,
     .maxHP = 40,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,

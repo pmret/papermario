@@ -16,7 +16,7 @@ extern EvtScript N(idle_8022B19C);
 extern EvtScript N(handleEvent_8022A398);
 extern EvtScript N(handleEvent_8022B310);
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
     PRT_2               = 2,
     PRT_3               = 3,
@@ -144,7 +144,7 @@ s32 N(StatusTable_802296D0)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(PartsTable_8022977C)[] = {
+ActorPartBlueprint N(ActorParts_8022977C)[] = {
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET,
         .index = PRT_MAIN,
@@ -225,8 +225,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_SKY_GUY,
     .level = 14,
     .maxHP = 7,
-    .partCount = ARRAY_COUNT( N(PartsTable_8022977C)),
-    .partsData = N(PartsTable_8022977C),
+    .partCount = ARRAY_COUNT( N(ActorParts_8022977C)),
+    .partsData = N(ActorParts_8022977C),
     .initScript = &N(init_8022987C),
     .statusTable = N(StatusTable_80229624),
     .escapeChance = 50,

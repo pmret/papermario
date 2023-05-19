@@ -23,7 +23,7 @@ extern EvtScript N(EVS_FlyToHome_Impl);
 extern EvtScript N(EVS_FlyToHome_GrappleFail_Impl);
 extern EvtScript N(8021FC34);
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
     PRT_2               = 2,
     PRT_3               = 3,
@@ -78,7 +78,7 @@ s32 N(StatusTable)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(PartsTable)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = PRT_MAIN,
@@ -146,8 +146,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_BUZZAR,
     .level = 35,
     .maxHP = 40,
-    .partCount = ARRAY_COUNT( N(PartsTable)),
-    .partsData = N(PartsTable),
+    .partCount = ARRAY_COUNT( N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,

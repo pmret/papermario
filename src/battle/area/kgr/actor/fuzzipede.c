@@ -14,7 +14,7 @@ extern EvtScript N(handleEvent_80219ED4);
 extern EvtScript N(nextTurn_80218C58);
 extern EvtScript N(8021A2E8);
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
     PRT_2               = 2,
 };
@@ -75,7 +75,7 @@ s32 N(StatusTable_80218A54)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(PartsTable_80218B00)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = PRT_MAIN,
@@ -107,8 +107,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_FUZZIPEDE,
     .level = 43,
     .maxHP = 20,
-    .partCount = ARRAY_COUNT( N(PartsTable_80218B00)),
-    .partsData = N(PartsTable_80218B00),
+    .partCount = ARRAY_COUNT( N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init_80218B70),
     .statusTable = N(StatusTable_80218A54),
     .escapeChance = 0,

@@ -5,7 +5,7 @@
 
 #define NAMESPACE b_area_mac_master2
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
@@ -65,7 +65,7 @@ s32 N(StatusTable_8022B6E4)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(PartsTable_8022B790)[] = {
+ActorPartBlueprint N(ActorParts_8022B790)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
@@ -91,8 +91,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_THE_MASTER_2,
     .level = 0,
     .maxHP = 75,
-    .partCount = ARRAY_COUNT( N(PartsTable_8022B790)),
-    .partsData = N(PartsTable_8022B790),
+    .partCount = ARRAY_COUNT( N(ActorParts_8022B790)),
+    .partsData = N(ActorParts_8022B790),
     .initScript = &N(init_8022B7DC),
     .statusTable = N(StatusTable_8022B6E4),
     .escapeChance = 100,

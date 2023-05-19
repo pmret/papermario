@@ -11,7 +11,7 @@ extern EvtScript N(takeTurn_8021C89C);
 extern EvtScript N(idle_8021A7D4);
 extern EvtScript N(handleEvent_8021ACE8);
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
@@ -96,7 +96,7 @@ s32 N(StatusTable_8021A660)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(PartsTable_8021A70C)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
@@ -116,8 +116,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_BOB_OMB,
     .level = 6,
     .maxHP = 3,
-    .partCount = ARRAY_COUNT( N(PartsTable_8021A70C)),
-    .partsData = N(PartsTable_8021A70C),
+    .partCount = ARRAY_COUNT( N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init_8021A758),
     .statusTable = N(StatusTable_8021A5B4),
     .escapeChance = 70,

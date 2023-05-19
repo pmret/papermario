@@ -26,7 +26,7 @@ extern EvtScript N(EVS_LevitateToHomePos);
 extern EvtScript N(EVS_GetBackUp);
 extern EvtScript N(EVS_Tutankoopa_Death);
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
     PRT_TARGET          = 2,
     PRT_SHELL_1         = 3,
@@ -137,7 +137,7 @@ s32 N(StatusTable)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(PartsTable)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = PRT_MAIN,
@@ -241,8 +241,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_TUTANKOOPA,
     .level = 55,
     .maxHP = 30,
-    .partCount = ARRAY_COUNT( N(PartsTable)),
-    .partsData = N(PartsTable),
+    .partCount = ARRAY_COUNT( N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,

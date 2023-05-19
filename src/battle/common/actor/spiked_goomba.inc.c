@@ -4,7 +4,7 @@
 #include "script_api/battle.h"
 #include "sprite/npc/SpikedGoomba.h"
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
@@ -41,7 +41,7 @@ s32 N(StatusTable_8021E3BC)[] = {
 extern s32 N(IdleAnimations_8021E4B4)[];
 extern EvtScript N(init_8021E54C);
 
-ActorPartBlueprint N(PartsTable_8021E468)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
@@ -61,8 +61,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_SPIKED_GOOMBA,
     .level = 6,
     .maxHP = 2,
-    .partCount = ARRAY_COUNT( N(PartsTable_8021E468)),
-    .partsData = N(PartsTable_8021E468),
+    .partCount = ARRAY_COUNT( N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init_8021E54C),
     .statusTable = N(StatusTable_8021E3BC),
     .escapeChance = 90,

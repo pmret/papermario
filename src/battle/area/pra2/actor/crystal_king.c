@@ -6,7 +6,7 @@
 
 #define NAMESPACE b_area_pra2_crystal_king
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
@@ -100,7 +100,7 @@ s32 N(StatusTable)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_8 | ACTOR_PART_FLAG_20 | ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
@@ -120,8 +120,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_CRYSTAL_KING,
     .level = 85,
     .maxHP = 70,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
@@ -1199,8 +1199,8 @@ ActorBlueprint N(clone) = {
     .type = ACTOR_TYPE_CRYSTAL_CLONE,
     .level = 0,
     .maxHP = 70,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(clone_init),
     .statusTable = N(clone_statusTable),
     .escapeChance = 0,

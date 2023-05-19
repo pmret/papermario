@@ -27,7 +27,7 @@ extern EvtScript N(80223870);
 
 BSS s32 D_80235FC0[31];
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
     PRT_2               = 2,
     PRT_3               = 3,
@@ -86,7 +86,7 @@ s32 N(IdleAnimations_8021A73C)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(PartsTable_8021A748)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
@@ -226,8 +226,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_FAKE_BOWSER,
     .level = 0,
     .maxHP = 10,
-    .partCount = ARRAY_COUNT( N(PartsTable_8021A748)),
-    .partsData = N(PartsTable_8021A748),
+    .partCount = ARRAY_COUNT( N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init_8021A968),
     .statusTable = N(StatusTable_8021A690),
     .escapeChance = 0,

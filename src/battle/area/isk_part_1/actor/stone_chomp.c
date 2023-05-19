@@ -12,7 +12,7 @@ extern EvtScript N(EVS_HandleEvent);
 extern EvtScript N(EVS_Chomp_HopToPos);
 extern EvtScript N(EVS_UpdateChain);
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
     PRT_TARGET          = 2,
     PRT_CHAIN_1         = 3,
@@ -112,7 +112,7 @@ s32 N(StatusTable)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(PartsTable)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
         .index = PRT_MAIN,
@@ -240,8 +240,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_STONE_CHOMP,
     .level = 14,
     .maxHP = 4,
-    .partCount = ARRAY_COUNT( N(PartsTable)),
-    .partsData = N(PartsTable),
+    .partCount = ARRAY_COUNT( N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(EVS_Init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,

@@ -11,7 +11,7 @@ extern EvtScript N(takeTurn_8021DCD4);
 extern EvtScript N(idle_8021D4E4);
 extern EvtScript N(handleEvent_8021D60C);
 
-enum N(ActorParts) {
+enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
 
@@ -68,7 +68,7 @@ s32 N(StatusTable_8021D3A0)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(PartsTable_8021D44C)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
@@ -88,8 +88,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_PIRANHA_PLANT,
     .level = 11,
     .maxHP = 5,
-    .partCount = ARRAY_COUNT( N(PartsTable_8021D44C)),
-    .partsData = N(PartsTable_8021D44C),
+    .partCount = ARRAY_COUNT( N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init_8021D498),
     .statusTable = N(StatusTable_8021D3A0),
     .escapeChance = 70,
