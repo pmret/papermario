@@ -318,7 +318,7 @@ s32 N(IdleAnimations4)[] = {
 s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_SHOCK,   99,
-    ELEMENT_MYSTERY,   0,
+    ELEMENT_MYSTERY,  0,
     ELEMENT_JUMP,     0,
     ELEMENT_SMASH,    0,
     ELEMENT_END,

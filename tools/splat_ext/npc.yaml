@@ -226,8 +226,8 @@ WorldBombette:
     - Burnt
   animations:
     - Still
-    - HappyStill
-    - LitStill
+    - StillHappy
+    - StillLit
     - Idle
     - HappyIdle
     - Walk
@@ -2406,56 +2406,56 @@ Bobomb:
     - Variant02
     - Variant03
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
-    - Raster1E
-    - Raster1F
-    - Raster20
-    - Raster21
-    - Raster22
-    - Raster23
-    - Raster24
-    - Raster25
-    - Raster26
-    - Raster27
-    - Raster28
-    - Raster29
-    - Raster2A
-    - Raster2B
-    - Raster2C
-    - Raster2D
-    - Raster2E
-    - Raster2F
-    - Raster30
-    - Raster31
+    - Step1
+    - Step2
+    - Step3
+    - Idle
+    - FaceFwd
+    - WaveFwd
+    - Blink
+    - Hurt1
+    - Hurt2
+    - BurnHurt1
+    - BurnHurt2
+    - Neutral
+    - BurnStill
+    - Sleep1
+    - Sleep2
+    - Wake1
+    - Wake2
+    - Boom
+    - Gear1
+    - Gear2
+    - Gear3
+    - Gear4
+    - Gear5
+    - Gear6
+    - Fuse1
+    - Fuse2
+    - Fuse3
+    - BubbleSleep1
+    - BubbleSleep2
+    - BubblePop1
+    - BubblePop2
+    - KO
+    - Dizzy1
+    - Dizzy2
+    - Dizzy3
+    - Dizzy4
+    - Dizzy5
+    - Dizzy6
+    - Cower
+    - BurnedGear1
+    - BurnedGear2
+    - BurnedGear3
+    - BurnedGear4
+    - BurnedGear5
+    - BurnedGear6
+    - StepLit1
+    - StepLit2
+    - StepLit3
+    - Buildup
+    - CowerLit
   palettes:
     - Default
     - Red
@@ -2475,53 +2475,53 @@ Bobomb:
     - Fuse_Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
-    - Anim10
-    - Anim11
-    - Anim12
-    - Anim13
-    - Anim14
-    - Anim15
-    - Anim16
-    - Anim17
-    - Anim18
-    - Anim19
-    - Anim1A
-    - Anim1B
-    - Anim1C
-    - Anim1D
+    - Still
+    - StillLit
+    - Idle
+    - IdleLit
+    - Walk
+    - WalkLit
+    - Run
+    - RunLit
+    - Cower
+    - Panic
+    - KO
+    - AngryIdle
+    - AngryChase
+    - AngryKO
+    - Hurt
+    - HurtLit
+    - BurnHurt
+    - BurnStill
+    - BurnHurtLit
+    - BurnStillLit
+    - Buildup
+    - Boom
+    - FaceFwd
+    - WaveFwd
+    - Sleep
+    - Wake
+    - SleepLit
+    - WakeLit
+    - Dizzy
+    - DizzyLit
 BulletBill:
   variations:
-    - Variant00
-    - Variant01
+    - Black
+    - Gold
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
+    - Neutral
+    - Tense
+    - Windup1
+    - Windup2
+    - Windup3
+    - Launch1
+    - Launch2
+    - Launch3
+    - Launch4
+    - Hurt
+    - Burned
+    - BurnedPuffy
   palettes:
     - Default
     - Gold
@@ -2533,29 +2533,29 @@ BulletBill:
     - Gold_Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
+    - Still
+    - Idle
+    - TenseCopy
+    - Tense
+    - Fire
+    - Hurt
+    - Recover
+    - BurnHurt
 BillBlaster:
   variations:
-    - Variant00
-    - Variant01
+    - Black
+    - Gold
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
+    - Barrel
+    - BaseFront
+    - BaseBack
+    - BarrelFire1
+    - BarrelFire2
+    - BarrelFire3
+    - BarrelFire4
+    - BurnedBarrel
+    - BurnedBaseFront
+    - BurnedBaseBack
   palettes:
     - Default
     - Gold
@@ -2568,14 +2568,14 @@ BillBlaster:
     - Burnt
     - Gold_Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
+    - Still
+    - Idle
+    - Fire
+    - Hurt
+    - Collapse
+    - Burned
+    - Buildup
+    - Release
 MontyMole:
   variations:
     - Variant00

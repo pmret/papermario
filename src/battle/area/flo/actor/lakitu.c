@@ -45,7 +45,7 @@ s32 N(IdleAnimations3)[] = {
 
 s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   0,
-    ELEMENT_MYSTERY,   0,
+    ELEMENT_MYSTERY,  0,
     ELEMENT_END,
 };
 
@@ -383,7 +383,7 @@ EvtScript N(attackSpinyFlip) = {
 Vec3i N(spiny_pos) = { NPC_DISPOSE_LOCATION };
 
 Formation N(formation_spiny) = {
-    ACTOR_BY_POS(b_area_flo_spiny, N(spiny_pos), 100, 0x00000001),
+    ACTOR_BY_POS(b_area_flo_spiny, N(spiny_pos), 100, 1),
 };
 
 EvtScript N(summonSpiny) = {
