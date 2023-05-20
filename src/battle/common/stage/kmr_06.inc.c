@@ -2,7 +2,7 @@
 #include "battle/battle.h"
 #include "mapfs/kmr_bt06_shape.h"
 
-#include "world/common/todo/clouds.inc.c"
+#include "battle/common/stage/MovingClouds.inc.c"
 #include "common/UnkFogFunc.inc.c"
 
 EvtScript N(EVS_PreBattle) = {
@@ -10,10 +10,10 @@ EvtScript N(EVS_PreBattle) = {
     EVT_CALL(N(UnkFogFunc))
     EVT_SET(LVar0, 1)
     EVT_SET(LVar2, 0)
-    EVT_EXEC(N(clouds1))
+    EVT_EXEC(N(EVS_AnimateCloud))
     EVT_SET(LVar0, 4)
     EVT_SET(LVar2, 70)
-    EVT_EXEC(N(clouds1))
+    EVT_EXEC(N(EVS_AnimateCloud))
     EVT_RETURN
     EVT_END
 };

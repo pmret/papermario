@@ -1,7 +1,7 @@
-#include "common.h"
-#include "battle/battle.h"
+#include "../area.h"
+#include "mapfs/trd_bt01_shape.h"
 
-#define NAMESPACE b_area_trd_part_1_trd_01
+#define NAMESPACE A(trd_01)
 
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)

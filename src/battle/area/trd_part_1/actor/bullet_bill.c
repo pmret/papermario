@@ -1,10 +1,7 @@
-#include "common.h"
-#include "effects.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/BulletBill.h"
 
-#define NAMESPACE b_area_trd_part_1_bullet_bill
+#define NAMESPACE A(bullet_bill)
 
 extern s32 N(IdleAnimations_80219064)[];
 extern EvtScript N(init_80219088);

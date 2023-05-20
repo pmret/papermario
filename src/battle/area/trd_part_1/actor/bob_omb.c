@@ -1,10 +1,7 @@
-#include "common.h"
-#include "effects.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/Bobomb.h"
 
-#define NAMESPACE b_area_trd_part_1_bob_omb
+#define NAMESPACE A(bob_omb)
 
 extern EvtScript N(init_8021A758);
 extern EvtScript N(takeTurn_8021C89C);

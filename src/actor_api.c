@@ -2058,65 +2058,66 @@ ApiStatus SummonEnemy(Evt* script, s32 isInitialCall) {
             break;
         case 1:
             actor2 = script->functionTempPtr[1];
-            if (does_script_exist(actor2->takeTurnScriptID) == FALSE) {
-                enemyIDs = battleStatus->enemyIDs;
-                if (battleStatus->nextEnemyIndex == 0) {
-                    numEnemies = 0;
-                    for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
-                        if (battleStatus->enemyActors[i]) {
-                            battleStatus->enemyIDs[numEnemies++] = i | 0x200;
-                        }
-                    }
-                    battleStatus->numEnemyActors = numEnemies;
-                    if (script->functionTemp[2] != 0) {
-                        tempPriority = -1000;
-                    } else {
-                        tempPriority = 1000;
-                    }
-                    enemyIDs = battleStatus->enemyIDs;
-                    for (i = 0; i < numEnemies - 1; i++) {
-                        for (j = i + 1; j < numEnemies; j++) {
-                            enemyID1 = enemyIDs[i];
-                            actor1 = battleStatus->enemyActors[(u8) enemyID1];
-                            priority1 = actor1->turnPriority;
-                            if (actor1 == actor2) {
-                                priority1 += tempPriority;
-                            }
-                            enemyID2 = enemyIDs[j];
-                            actor1 = battleStatus->enemyActors[(u8) enemyID2];
-                            priority2 = actor1->turnPriority;
-                            if (actor1 == actor2) {
-                                priority2 += tempPriority;
-                            }
-                            if (priority1 < priority2) {
-                                enemyIDs[i] = enemyID2;
-                                enemyIDs[j] = enemyID1;
-                            }
-                        }
-                    }
-                } else {
-                    numEnemies = battleStatus->numEnemyActors;
-                    for (i = 0; i < numEnemies; i++){
-                        if (battleStatus->enemyActors[(u8) enemyIDs[i]] == actor2) {
-                            enemyIDs[i] = -1;
-                        }
-                    }
-                    if (script->functionTemp[2] == 0) {
-                        for (i = numEnemies; i >= battleStatus->nextEnemyIndex; i--) {
-                            battleStatus->enemyIDs[i] = battleStatus->enemyIDs[i - 1];
-                        }
-                        battleStatus->enemyIDs[battleStatus->nextEnemyIndex - 1] = actor2->actorID;
-                        battleStatus->numEnemyActors++;
-                        battleStatus->nextEnemyIndex++;
-                    } else {
-                        battleStatus->enemyIDs[battleStatus->numEnemyActors] = actor2->actorID;
-                        battleStatus->numEnemyActors++;
+            if (does_script_exist(actor2->takeTurnScriptID)) {
+                break;
+            }
+            
+            enemyIDs = battleStatus->enemyIDs;
+            if (battleStatus->nextEnemyIndex == 0) {
+                numEnemies = 0;
+                for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
+                    if (battleStatus->enemyActors[i]) {
+                        battleStatus->enemyIDs[numEnemies++] = i | ACTOR_CLASS_ENEMY;
                     }
                 }
-                script->varTable[0] = actor2->actorID;
-                return ApiStatus_DONE2;
+                battleStatus->numEnemyActors = numEnemies;
+                if (script->functionTemp[2] != 0) {
+                    tempPriority = -1000;
+                } else {
+                    tempPriority = 1000;
+                }
+                enemyIDs = battleStatus->enemyIDs;
+                for (i = 0; i < numEnemies - 1; i++) {
+                    for (j = i + 1; j < numEnemies; j++) {
+                        enemyID1 = enemyIDs[i];
+                        actor1 = battleStatus->enemyActors[(u8) enemyID1];
+                        priority1 = actor1->turnPriority;
+                        if (actor1 == actor2) {
+                            priority1 += tempPriority;
+                        }
+                        enemyID2 = enemyIDs[j];
+                        actor1 = battleStatus->enemyActors[(u8) enemyID2];
+                        priority2 = actor1->turnPriority;
+                        if (actor1 == actor2) {
+                            priority2 += tempPriority;
+                        }
+                        if (priority1 < priority2) {
+                            enemyIDs[i] = enemyID2;
+                            enemyIDs[j] = enemyID1;
+                        }
+                    }
+                }
+            } else {
+                numEnemies = battleStatus->numEnemyActors;
+                for (i = 0; i < numEnemies; i++){
+                    if (battleStatus->enemyActors[(u8) enemyIDs[i]] == actor2) {
+                        enemyIDs[i] = -1;
+                    }
+                }
+                if (script->functionTemp[2] == 0) {
+                    for (i = numEnemies; i >= battleStatus->nextEnemyIndex; i--) {
+                        battleStatus->enemyIDs[i] = battleStatus->enemyIDs[i - 1];
+                    }
+                    battleStatus->enemyIDs[battleStatus->nextEnemyIndex - 1] = actor2->actorID;
+                    battleStatus->numEnemyActors++;
+                    battleStatus->nextEnemyIndex++;
+                } else {
+                    battleStatus->enemyIDs[battleStatus->numEnemyActors] = actor2->actorID;
+                    battleStatus->numEnemyActors++;
+                }
             }
-            break;
+            script->varTable[0] = actor2->actorID;
+            return ApiStatus_DONE2;
     }
     return ApiStatus_BLOCK;
 }

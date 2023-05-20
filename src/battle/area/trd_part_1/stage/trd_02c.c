@@ -1,13 +1,13 @@
-#include "common.h"
-#include "battle/battle.h"
+#include "../area.h"
+#include "mapfs/trd_bt02_shape.h"
 
-#define NAMESPACE b_area_trd_part_1_trd_02c
+#define NAMESPACE A(trd_02c)
 
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_CALL(EnableModel, 26, FALSE)
-    EVT_CALL(EnableModel, 2, FALSE)
+    EVT_CALL(EnableModel, MODEL_dai, FALSE)
+    EVT_CALL(EnableModel, MODEL_kusari1, FALSE)
     EVT_RETURN
     EVT_END
 };
@@ -18,7 +18,7 @@ EvtScript N(EVS_PostBattle) = {
 };
 
 s32 N(ForegroundModels)[] = {
-    0x00000016,
+    MODEL_saku,
     STAGE_MODEL_LIST_END
 };
 
