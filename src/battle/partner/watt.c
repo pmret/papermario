@@ -39,6 +39,11 @@ static s32 sWattEffectData_currentEffectIndex;
 static EffectInstance* sWattEffectData_effect1;
 static EffectInstance* sWattEffectData_effect2;
 
+enum N(ActorPartIDs) {
+    PRT_MAIN            = 1,
+    PRT_2               = 2,
+};
+
 API_CALLABLE(N(WattFXUpdate)) {
     Actor* partner = gBattleStatus.partnerActor;
     f32 x, y, z;
@@ -214,9 +219,9 @@ API_CALLABLE(N(TargetParalyzeChance)) {
     Actor* partnerActor = battleStatus->partnerActor;
     Actor* targetActor = get_actor(partnerActor->targetActorID);
     ActorPart* targetActorPart = get_actor_part(targetActor, partnerActor->targetPartIndex);
-    s32 statusChance = lookup_status_chance(targetActor->statusTable, STATUS_PARALYZE);
+    s32 statusChance = lookup_status_chance(targetActor->statusTable, STATUS_KEY_PARALYZE);
 
-    if (targetActor->transparentStatus == STATUS_TRANSPARENT) {
+    if (targetActor->transparentStatus == STATUS_KEY_TRANSPARENT) {
         statusChance = 0;
     }
     if (targetActorPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY) {
@@ -414,9 +419,9 @@ API_CALLABLE(N(AverageTargetParalyzeChance)) {
     for (i = 0; i < partnerActor->targetListLength; i++) {
         targetActor = get_actor(partnerActor->targetData[i].actorID);
         targetActorPart = get_actor_part(targetActor, partnerActor->targetData[i].partID);
-        targetActorBlueprintBaseStatusChance = lookup_status_chance(targetActor->statusTable, STATUS_PARALYZE);
+        targetActorBlueprintBaseStatusChance = lookup_status_chance(targetActor->statusTable, STATUS_KEY_PARALYZE);
 
-        if (targetActor->transparentStatus == STATUS_TRANSPARENT) {
+        if (targetActor->transparentStatus == STATUS_KEY_TRANSPARENT) {
             targetActorBlueprintBaseStatusChance = 0;
         }
 
@@ -440,51 +445,51 @@ API_CALLABLE(N(AverageTargetParalyzeChance)) {
 }
 
 s32 N(IdleAnimations)[] = {
-    STATUS_NORMAL,      ANIM_BattleWatt_Walk,
-    STATUS_STONE,       ANIM_BattleWatt_Still,
-    STATUS_SLEEP,       ANIM_BattleWatt_Sleep,
-    STATUS_POISON,      ANIM_BattleWatt_Still,
-    STATUS_STOP,        ANIM_BattleWatt_Still,
-    STATUS_DAZE,        ANIM_BattleWatt_Injured,
-    STATUS_TURN_DONE,   ANIM_BattleWatt_Still,
+    STATUS_KEY_NORMAL,    ANIM_BattleWatt_Walk,
+    STATUS_KEY_STONE,     ANIM_BattleWatt_Still,
+    STATUS_KEY_SLEEP,     ANIM_BattleWatt_Sleep,
+    STATUS_KEY_POISON,    ANIM_BattleWatt_Still,
+    STATUS_KEY_STOP,      ANIM_BattleWatt_Still,
+    STATUS_KEY_DAZE,      ANIM_BattleWatt_Injured,
+    STATUS_KEY_INACTIVE,  ANIM_BattleWatt_Still,
     STATUS_END,
 };
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 0,
-    ELEMENT_SHOCK, 99,
+    ELEMENT_NORMAL,   0,
+    ELEMENT_SHOCK,   99,
     ELEMENT_END,
 };
 
 s32 N(StatusTable)[] = {
-    STATUS_NORMAL, 100,
-    STATUS_DEFAULT, 100,
-    STATUS_SLEEP, 100,
-    STATUS_POISON, 100,
-    STATUS_FROZEN, 100,
-    STATUS_DIZZY, 100,
-    STATUS_FEAR, 100,
-    STATUS_STATIC, 100,
-    STATUS_PARALYZE, 100,
-    STATUS_SHRINK, 100,
-    STATUS_STOP, 100,
-    STATUS_DEFAULT_TURN_MOD, 0,
-    STATUS_SLEEP_TURN_MOD, 0,
-    STATUS_POISON_TURN_MOD, 0,
-    STATUS_FROZEN_TURN_MOD, 0,
-    STATUS_DIZZY_TURN_MOD, 0,
-    STATUS_FEAR_TURN_MOD, 0,
-    STATUS_STATIC_TURN_MOD, 0,
-    STATUS_PARALYZE_TURN_MOD, 0,
-    STATUS_SHRINK_TURN_MOD, 0,
-    STATUS_STOP_TURN_MOD, 0,
+    STATUS_KEY_NORMAL,            100,
+    STATUS_KEY_DEFAULT,           100,
+    STATUS_KEY_SLEEP,             100,
+    STATUS_KEY_POISON,            100,
+    STATUS_KEY_FROZEN,            100,
+    STATUS_KEY_DIZZY,             100,
+    STATUS_KEY_FEAR,              100,
+    STATUS_KEY_STATIC,            100,
+    STATUS_KEY_PARALYZE,          100,
+    STATUS_KEY_SHRINK,            100,
+    STATUS_KEY_STOP,              100,
+    STATUS_TURN_MOD_DEFAULT,        0,
+    STATUS_TURN_MOD_SLEEP,          0,
+    STATUS_TURN_MOD_POISON,         0,
+    STATUS_TURN_MOD_FROZEN,         0,
+    STATUS_TURN_MOD_DIZZY,          0,
+    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_STATIC,         0,
+    STATUS_TURN_MOD_PARALYZE,       0,
+    STATUS_TURN_MOD_SHRINK,         0,
+    STATUS_TURN_MOD_STOP,           0,
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 10, 22 },
         .opacity = 255,
@@ -501,8 +506,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_WATT,
     .level = 0,
     .maxHP = 99,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
@@ -514,9 +519,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 80,
     .coinReward = 0,
     .size = { 34, 28 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 EvtScript N(init) = {
@@ -751,7 +756,7 @@ EvtScript N(charge) = {
         EVT_CALL(N(SetBackgroundAlpha), LVar9)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(func_8026EA7C, ACTOR_SELF, 1, 9)
+    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, PAL_ADJUST_WATT_IDLE)
     EVT_RETURN
     EVT_END
 };
@@ -898,7 +903,7 @@ EvtScript N(electroDash) = {
     EVT_CALL(StopLoopingSoundAtActor, ACTOR_PARTNER, 0)
     EVT_CALL(SetDamageSource, DMG_SRC_ELECTRO_DASH)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Strain)
-    EVT_CALL(func_8026EA7C, ACTOR_SELF, 1, 10)
+    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, PAL_ADJUST_WATT_ATTACK)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
     EVT_CALL(AddGoalPos, ACTOR_PARTNER, -5, 0, 0)
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 5, 0, EASING_LINEAR)
@@ -991,7 +996,7 @@ EvtScript N(powerShock) = {
     EVT_CALL(N(UnkBackgroundFunc3))
     EVT_SET(LVar9, 0)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_StrainBigger)
-    EVT_CALL(func_8026EA7C, ACTOR_SELF, 1, 10)
+    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, PAL_ADJUST_WATT_ATTACK)
     EVT_THREAD
         EVT_LOOP(75 * DT)
             EVT_ADD(LVar9, 3)
@@ -1000,7 +1005,7 @@ EvtScript N(powerShock) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_WAIT(75 * DT)
-    EVT_CALL(func_8026EA7C, ACTOR_SELF, 1, 9)
+    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, PAL_ADJUST_WATT_IDLE)
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_28A)
     EVT_THREAD
         EVT_SETF(LVar0, EVT_FLOAT(1.0))
@@ -1239,7 +1244,7 @@ EvtScript N(8023B450) = {
 
 EvtScript N(turboCharge) = {
     EVT_CALL(GetStatusFlags, ACTOR_PLAYER, LVar0)
-    EVT_IF_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+    EVT_IF_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
         EVT_EXEC_WAIT(N(8023B450))
     EVT_ELSE
         EVT_EXEC_WAIT(N(8023AE8C))
@@ -1289,7 +1294,7 @@ EvtScript N(megaShock) = {
     EVT_CALL(MoveBattleCamOver, 90 * DT)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_StrainBigger)
-    EVT_CALL(func_8026EA7C, ACTOR_SELF, 1, 10)
+    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, PAL_ADJUST_WATT_ATTACK)
     EVT_CALL(N(WattFXDisable))
     EVT_CALL(GetActionResult, LVar1)
     EVT_WAIT(90 * DT)
@@ -1302,7 +1307,7 @@ EvtScript N(megaShock) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(func_8026EA7C, ACTOR_SELF, 1, 9)
+    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, PAL_ADJUST_WATT_IDLE)
     EVT_CALL(InitTargetIterator)
     EVT_THREAD
         EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
@@ -1347,9 +1352,9 @@ EvtScript N(megaShock) = {
             EVT_GOTO(11)
         EVT_END_IF
         EVT_IF_EQ(LVarF, 100)
-            EVT_CALL(PartnerAfflictEnemy, LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS | DAMAGE_TYPE_STATUS_ALWAYS_HITS, 0, DMG_STATUS_ALWAYS(STATUS_FLAG_PARALYZE, 3), 254, 0, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40)
+            EVT_CALL(PartnerAfflictEnemy, LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS | DAMAGE_TYPE_STATUS_ALWAYS_HITS, 0, DMG_STATUS_ALWAYS(STATUS_FLAG_PARALYZE, 3), 254, 0, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40)
         EVT_ELSE
-            EVT_CALL(PartnerAfflictEnemy, LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS | DAMAGE_TYPE_STATUS_ALWAYS_HITS, 0, DMG_STATUS_ALWAYS(STATUS_FLAG_PARALYZE, 3), LVarF, 0, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40)
+            EVT_CALL(PartnerAfflictEnemy, LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS | DAMAGE_TYPE_STATUS_ALWAYS_HITS, 0, DMG_STATUS_ALWAYS(STATUS_FLAG_PARALYZE, 3), LVarF, 0, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40)
         EVT_END_IF
         EVT_LABEL(11)
         EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)

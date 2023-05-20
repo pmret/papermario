@@ -11,63 +11,67 @@ extern EvtScript N(takeTurn_8021DCD4);
 extern EvtScript N(idle_8021D4E4);
 extern EvtScript N(handleEvent_8021D60C);
 
+enum N(ActorPartIDs) {
+    PRT_MAIN            = 1,
+};
+
 s32 N(IdleAnimations_8021D330)[] = {
-    STATUS_NORMAL,    ANIM_SmallPiranha_Anim01,
-    STATUS_STONE,     ANIM_SmallPiranha_Anim00,
-    STATUS_SLEEP,     ANIM_SmallPiranha_Anim00,
-    STATUS_POISON,    ANIM_SmallPiranha_Anim01,
-    STATUS_STOP,      ANIM_SmallPiranha_Anim00,
-    STATUS_STATIC,    ANIM_SmallPiranha_Anim01,
-    STATUS_PARALYZE,  ANIM_SmallPiranha_Anim00,
-    STATUS_DIZZY,     ANIM_SmallPiranha_Anim01,
-    STATUS_FEAR,      ANIM_SmallPiranha_Anim01,
+    STATUS_KEY_NORMAL,    ANIM_SmallPiranha_Anim01,
+    STATUS_KEY_STONE,     ANIM_SmallPiranha_Anim00,
+    STATUS_KEY_SLEEP,     ANIM_SmallPiranha_Anim00,
+    STATUS_KEY_POISON,    ANIM_SmallPiranha_Anim01,
+    STATUS_KEY_STOP,      ANIM_SmallPiranha_Anim00,
+    STATUS_KEY_STATIC,    ANIM_SmallPiranha_Anim01,
+    STATUS_KEY_PARALYZE,  ANIM_SmallPiranha_Anim00,
+    STATUS_KEY_DIZZY,     ANIM_SmallPiranha_Anim01,
+    STATUS_KEY_FEAR,      ANIM_SmallPiranha_Anim01,
     STATUS_END,
 };
 
 s32 N(unk_missing_8021D37C)[] = {
-    STATUS_NORMAL, ANIM_SmallPiranha_Anim01,
+    STATUS_KEY_NORMAL,    ANIM_SmallPiranha_Anim01,
     STATUS_END,
 };
 
 s32 N(unk_missing_8021D388)[] = {
-    STATUS_NORMAL, ANIM_SmallPiranha_Anim06,
+    STATUS_KEY_NORMAL,    ANIM_SmallPiranha_Anim06,
     STATUS_END,
 };
 
 s32 N(DefenseTable_8021D394)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
 s32 N(StatusTable_8021D3A0)[] = {
-    STATUS_NORMAL, 0,
-    STATUS_DEFAULT, 0,
-    STATUS_SLEEP, 95,
-    STATUS_POISON, 0,
-    STATUS_FROZEN, 0,
-    STATUS_DIZZY, 50,
-    STATUS_FEAR, 0,
-    STATUS_STATIC, 0,
-    STATUS_PARALYZE, 100,
-    STATUS_SHRINK, 80,
-    STATUS_STOP, 90,
-    STATUS_DEFAULT_TURN_MOD, 0,
-    STATUS_SLEEP_TURN_MOD, 1,
-    STATUS_POISON_TURN_MOD, 0,
-    STATUS_FROZEN_TURN_MOD, 0,
-    STATUS_DIZZY_TURN_MOD, 0,
-    STATUS_FEAR_TURN_MOD, 0,
-    STATUS_STATIC_TURN_MOD, 0,
-    STATUS_PARALYZE_TURN_MOD, 0,
-    STATUS_SHRINK_TURN_MOD, 0,
-    STATUS_STOP_TURN_MOD, 0,
+    STATUS_KEY_NORMAL,              0,
+    STATUS_KEY_DEFAULT,             0,
+    STATUS_KEY_SLEEP,              95,
+    STATUS_KEY_POISON,              0,
+    STATUS_KEY_FROZEN,              0,
+    STATUS_KEY_DIZZY,              50,
+    STATUS_KEY_FEAR,                0,
+    STATUS_KEY_STATIC,              0,
+    STATUS_KEY_PARALYZE,          100,
+    STATUS_KEY_SHRINK,             80,
+    STATUS_KEY_STOP,               90,
+    STATUS_TURN_MOD_DEFAULT,        0,
+    STATUS_TURN_MOD_SLEEP,          1,
+    STATUS_TURN_MOD_POISON,         0,
+    STATUS_TURN_MOD_FROZEN,         0,
+    STATUS_TURN_MOD_DIZZY,          0,
+    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_STATIC,         0,
+    STATUS_TURN_MOD_PARALYZE,       0,
+    STATUS_TURN_MOD_SHRINK,         0,
+    STATUS_TURN_MOD_STOP,           0,
     STATUS_END,
 };
 
-ActorPartBlueprint N(PartsTable_8021D44C)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 35 },
         .opacity = 255,
@@ -84,8 +88,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_PIRANHA_PLANT,
     .level = 11,
     .maxHP = 5,
-    .partCount = ARRAY_COUNT( N(PartsTable_8021D44C)),
-    .partsData = N(PartsTable_8021D44C),
+    .partCount = ARRAY_COUNT( N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init_8021D498),
     .statusTable = N(StatusTable_8021D3A0),
     .escapeChance = 70,
@@ -97,9 +101,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 90,
     .coinReward = 1,
     .size = { 38, 38 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -7, 33 },
-    .statusMessageOffset = { 10, 33 },
+    .statusTextOffset = { 10, 33 },
 };
 
 EvtScript N(init_8021D498) = {
@@ -120,13 +124,13 @@ EvtScript N(8021D4F4) = {
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_DIG)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SmallPiranha_Anim04)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Anim04)
     EVT_WAIT(10)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_SURFACE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SmallPiranha_Anim03)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Anim03)
     EVT_WAIT(10)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, FALSE)
     EVT_RETURN
@@ -207,12 +211,12 @@ EvtScript N(handleEvent_8021D60C) = {
                 EVT_WAIT(20)
             EVT_END_THREAD
             EVT_LOOP(40)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SmallPiranha_Anim01)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Anim01)
                 EVT_WAIT(1)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SmallPiranha_Anim06)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Anim06)
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SmallPiranha_Anim01)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Anim01)
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_SmallPiranha_Anim09)
@@ -231,10 +235,10 @@ EvtScript N(handleEvent_8021D60C) = {
             EVT_SET_CONST(LVar1, ANIM_SmallPiranha_Anim09)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_DIG)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SmallPiranha_Anim04)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Anim04)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
             EVT_WAIT(8)
-            EVT_CALL(func_8027D32C, ACTOR_SELF)
+            EVT_CALL(HideHealthBar, ACTOR_SELF)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
             EVT_CALL(RemoveActor, ACTOR_SELF)
             EVT_RETURN
@@ -261,7 +265,7 @@ EvtScript N(takeTurn_8021DCD4) = {
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_IF_EQ(LVar0, PHASE_FIRST_STRIKE)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SmallPiranha_Anim04)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Anim04)
         EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
         EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
         EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
@@ -276,7 +280,7 @@ EvtScript N(takeTurn_8021DCD4) = {
         EVT_GOTO(123)
     EVT_END_IF
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_DIG)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SmallPiranha_Anim04)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Anim04)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
     EVT_WAIT(8)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
@@ -307,9 +311,9 @@ EvtScript N(takeTurn_8021DCD4) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_SURFACE)
     EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SmallPiranha_Anim03)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Anim03)
     EVT_WAIT(8)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SmallPiranha_Anim05)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Anim05)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
@@ -317,16 +321,16 @@ EvtScript N(takeTurn_8021DCD4) = {
             EVT_SET(LVarA, LVar0)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar5)
             EVT_IF_NOT_FLAG(LVar5, STATUS_FLAG_SHRINK)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SmallPiranha_Anim06)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Anim06)
                 EVT_WAIT(2)
             EVT_END_IF
             EVT_THREAD
                 EVT_WAIT(6)
                 EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20DE)
             EVT_END_THREAD
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SmallPiranha_Anim07)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Anim07)
             EVT_WAIT(10)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SmallPiranha_Anim08)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Anim08)
             EVT_WAIT(2)
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -341,13 +345,13 @@ EvtScript N(takeTurn_8021DCD4) = {
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SmallPiranha_Anim06)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Anim06)
     EVT_WAIT(2)
     EVT_THREAD
         EVT_WAIT(6)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20DE)
     EVT_END_THREAD
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SmallPiranha_Anim07)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Anim07)
     EVT_WAIT(10)
     EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
@@ -357,7 +361,7 @@ EvtScript N(takeTurn_8021DCD4) = {
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_WAIT(2)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_SmallPiranha_Anim08)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Anim08)
             EVT_WAIT(15)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))

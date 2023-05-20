@@ -11,6 +11,8 @@ BSS s32 gSpeakingActorIdleAnim;
 BSS Actor* gSpeakingActor;
 BSS ActorPart* gSpeakingActorPart;
 
+#define ACTOR_TYPE_LIST_END 0xFF
+
 u8* gBattleDmaDest = NULL;
 
 u8 ActorTypesGhost[] = {
@@ -23,7 +25,7 @@ u8 ActorTypesGhost[] = {
     ACTOR_TYPE_GHOST_WATT,
     ACTOR_TYPE_GHOST_SUSHIE,
     ACTOR_TYPE_GHOST_LAKILESTER,
-    0xFF
+    ACTOR_TYPE_LIST_END
 };
 
 u8 ActorTypesLee[] = {
@@ -36,25 +38,25 @@ u8 ActorTypesLee[] = {
     ACTOR_TYPE_LEE_WATT,
     ACTOR_TYPE_LEE_SUSHIE,
     ACTOR_TYPE_LEE_LAKILESTER,
-    0xFF
+    ACTOR_TYPE_LIST_END
 };
 
 u8 ActorTypesCrystalKing[] = {
     ACTOR_TYPE_CRYSTAL_KING,
     ACTOR_TYPE_CRYSTAL_CLONE,
-    0xFF
+    ACTOR_TYPE_LIST_END
 };
 
 u8 ActorTypesShyGuyBoss[] = {
     ACTOR_TYPE_TOY_TANK,
     ACTOR_TYPE_LIGHT_BULB,
-    0xFF
+    ACTOR_TYPE_LIST_END
 };
 
 u8 ActorTypesBowser[] = {
     ACTOR_TYPE_BOWSER_PHASE_2,
     ACTOR_TYPE_BOWSER_PHASE_3,
-    0xFF
+    ACTOR_TYPE_LIST_END
 };
 
 u8 ActorTypesMagikoopa[] = {
@@ -62,37 +64,37 @@ u8 ActorTypesMagikoopa[] = {
     ACTOR_TYPE_MAGICLONE,
     ACTOR_TYPE_FLYING_MAGIKOOPA,
     ACTOR_TYPE_FLYING_MAGICLONE,
-    0xFF
+    ACTOR_TYPE_LIST_END
 };
 
 u8 ActorTypesRedMagikoopa[] = {
     ACTOR_TYPE_RED_MAGIKOOPA,
     ACTOR_TYPE_FLYING_RED_MAGIKOOPA,
-    0xFF
+    ACTOR_TYPE_LIST_END
 };
 
 u8 ActorTypesGreenMagikoopa[] = {
     ACTOR_TYPE_GREEN_MAGIKOOPA,
     ACTOR_TYPE_FLYING_GREEN_MAGIKOOPA,
-    0xFF
+    ACTOR_TYPE_LIST_END
 };
 
 u8 ActorTypesGrayMagikoopa[] = {
     ACTOR_TYPE_GRAY_MAGIKOOPA,
     ACTOR_TYPE_FLYING_GRAY_MAGIKOOPA,
-    0xFF
+    ACTOR_TYPE_LIST_END
 };
 
 u8 ActorTypesYellowMagikoopa[] = {
     ACTOR_TYPE_YELLOW_MAGIKOOPA,
     ACTOR_TYPE_FLYING_YELLOW_MAGIKOOPA,
-    0xFF
+    ACTOR_TYPE_LIST_END
 };
 
 u8 ActorTypesWhiteMagikoopa[] = {
     ACTOR_TYPE_WHITE_MAGIKOOPA,
     ACTOR_TYPE_FLYING_WHITE_MAGIKOOPA,
-    0xFF
+    ACTOR_TYPE_LIST_END
 };
 
 u8* ActorTypesLists[] = {
@@ -159,7 +161,7 @@ ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
         if (gSpeakingActorTalkAnim >= 0) {
             func_80263E08(actor, part, gSpeakingActorTalkAnim);
         }
-        increment_status_menu_disabled();
+        increment_status_bar_disabled();
     }
 
     if (script->functionTemp[0] == 0) {
@@ -180,7 +182,7 @@ ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
         msg_printer_set_origin_pos(gSpeakingActorPrintCtx, screenX, screenY);
 
         if (gSpeakingActorPrintCtx->stateFlags & MSG_STATE_FLAG_40) {
-            decrement_status_menu_disabled();
+            decrement_status_bar_disabled();
             return ApiStatus_DONE1;
         }
 
@@ -195,7 +197,7 @@ ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
         }
 
         if (gSpeakingActorPrintIsDone == TRUE) {
-            decrement_status_menu_disabled();
+            decrement_status_bar_disabled();
             gOverrideFlags &= ~GLOBAL_OVERRIDES_10;
             return ApiStatus_DONE1;
         }
@@ -227,7 +229,7 @@ ApiStatus EndActorSpeech(Evt* script, s32 isInitialCall) {
         gSpeakingActorPart = actorPart;
         close_message(gSpeakingActorPrintCtx);
         script->functionTemp[0] = 0;
-        increment_status_menu_disabled();
+        increment_status_bar_disabled();
     }
 
     if (script->functionTemp[0] == 0) {
@@ -246,7 +248,7 @@ ApiStatus EndActorSpeech(Evt* script, s32 isInitialCall) {
 
         flags = gSpeakingActorPrintCtx->stateFlags;
         if (flags & 0x40) {
-            decrement_status_menu_disabled();
+            decrement_status_bar_disabled();
             return ApiStatus_DONE1;
         }
 
@@ -261,7 +263,7 @@ ApiStatus EndActorSpeech(Evt* script, s32 isInitialCall) {
         }
 
         if (gSpeakingActorPrintIsDone == TRUE) {
-            decrement_status_menu_disabled();
+            decrement_status_bar_disabled();
             gOverrideFlags &= ~GLOBAL_OVERRIDES_10;
             return ApiStatus_DONE1;
         }
@@ -292,11 +294,14 @@ ApiStatus ShowBattleChoice(Evt* script, s32 isInitialCall) {
     return ApiStatus_BLOCK;
 }
 
-ApiStatus func_802535B4(Evt* script, s32 isInitialCall) {
-    if (evt_get_variable(script, *script->ptrReadPos)) {
-        decrement_status_menu_disabled();
+ApiStatus EnableBattleStatusBar(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+    b32 shouldEnable = evt_get_variable(script, *args++);
+
+    if (shouldEnable) {
+        decrement_status_bar_disabled();
     } else {
-        increment_status_menu_disabled();
+        increment_status_bar_disabled();
     }
     return ApiStatus_DONE2;
 }
@@ -340,12 +345,12 @@ ApiStatus EnableBattleFloorReflections(Evt* script, s32 isInitialCall) {
 }
 
 
-ApiStatus func_80253734(Evt* script, s32 isInitialCall) {
+ApiStatus SetDarknessMode(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
-    s32 val = evt_get_variable(script, *args++);
+    s32 darknessMode = evt_get_variable(script, *args++);
 
-    switch (val) {
+    switch (darknessMode) {
         case BTL_DARKNESS_MODE_0:
             battleStatus->darknessMode = BTL_DARKNESS_STATE_DARK;
             break;
@@ -476,28 +481,28 @@ ApiStatus SetForegroundModelsVisible(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80253B30(Evt* script, s32 isInitialCall) {
+ApiStatus MakeIgnoreResStatusField(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    Bytecode a0 = *args++;
-    Bytecode a1 = *args++;
-    s32 var1 = evt_get_variable(script, *args++);
+    Bytecode outVar = *args++;
+    Bytecode typeFlag = *args++; // STATUS_FLAG_*
+    s32 duration = evt_get_variable(script, *args++);
 
-    evt_set_variable(script, a0, (a1 | 0xFE) | (var1 * 256));
+    evt_set_variable(script, outVar, DMG_STATUS_IGNORE_RES(typeFlag, duration));
     return ApiStatus_DONE2;
 }
 
 ApiStatus MakeStatusField(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 outVar = *args++;
-    s32 a = *args++;
-    s32 b = evt_get_variable(script, *args++);
-    s32 c = evt_get_variable(script, *args++);
+    s32 typeFlag = *args++; // STATUS_FLAG_*
+    s32 chance = evt_get_variable(script, *args++);
+    s32 duration = evt_get_variable(script, *args++);
 
-    evt_set_variable(script, outVar, a | 0x80000000 | (c << 8) | b);
+    evt_set_variable(script, outVar, DMG_STATUS_KEY(typeFlag, duration, chance));
     return ApiStatus_DONE2;
 }
 
-s32 is_actor_hp_bar_visible(Actor* actor) {
+s32 is_actor_health_bar_visible(Actor* actor) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 flags;
 
@@ -505,47 +510,52 @@ s32 is_actor_hp_bar_visible(Actor* actor) {
         return TRUE;
     }
 
-    flags = get_global_byte((actor->actorType >> 3) + 365);
+    flags = get_global_byte(EVT_INDEX_OF_GAME_BYTE(GB_Tattles_00) + actor->actorType / 8);
     if (actor->flags & ACTOR_FLAG_TYPE_CHANGED) {
-        flags |= battleStatus->tattleFlags[actor->actorType >> 3];
+        flags |= battleStatus->tattleFlags[actor->actorType / 8];
     }
-    return (flags >> (actor->actorType & 7)) & 1;
+
+    return (flags >> (actor->actorType % 8)) & 1;
 }
 
-s32 is_actortype_hpbar_visible(s32 actorType) {
+s32 is_actortype_health_bar_visible(s32 actorType) {
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 idx;
+    s32 flags;
+    s32 byteIdx;
+    s32 flagIdx;
 
     if (is_ability_active(ABILITY_PEEKABOO)) {
         return TRUE;
     }
 
-    idx = actorType / 8;
-    return ((get_global_byte(idx + 365) | battleStatus->tattleFlags[idx]) >> (actorType - (idx * 8))) & 1;
+    flags = get_global_byte(EVT_INDEX_OF_GAME_BYTE(GB_Tattles_00) + actorType / 8);
+    flags |= battleStatus->tattleFlags[actorType / 8];
+
+    return (flags >> (actorType % 8)) & 1;
 }
 
 void save_tattle_flags(s32 actorType) {
     BattleStatus* battleStatus = &gBattleStatus;
-    u8* list;
+    u8* types;
     s32 gb;
     s32 i = 0;
     s32 j;
     s32 k;
 
     while (TRUE) {
-        list = ActorTypesLists[i];
-        if (list == NULL) {
+        types = ActorTypesLists[i];
+        if (types == NULL) {
             break;
         }
 
-        for (j = 0; list[j] != 0xFF; j++) {
-            if (actorType == list[j]) {
-                for (k = 0; list[k] != 0xFF; k++) {
-                    actorType = list[k];
+        for (j = 0; types[j] != ACTOR_TYPE_LIST_END; j++) {
+            if (actorType == types[j]) {
+                for (k = 0; types[k] != ACTOR_TYPE_LIST_END; k++) {
+                    actorType = types[k];
 
-                    gb = get_global_byte((actorType / 8) + 0x16D); // GameByte(0x16D) is GB_Tattles_00 (first tattle)
+                    gb = get_global_byte(EVT_INDEX_OF_GAME_BYTE(GB_Tattles_00) + actorType / 8);
                     gb |= 1 << (actorType % 8);
-                    set_global_byte((actorType / 8) + 0x16D, gb);
+                    set_global_byte(EVT_INDEX_OF_GAME_BYTE(GB_Tattles_00) + actorType / 8, gb);
                     battleStatus->tattleFlags[actorType / 8] |= gb;
                 }
                 return;
@@ -554,32 +564,32 @@ void save_tattle_flags(s32 actorType) {
         i++;
     }
 
-    gb = get_global_byte((actorType / 8) + 0x16D);
+    gb = get_global_byte(EVT_INDEX_OF_GAME_BYTE(GB_Tattles_00) + actorType / 8);
     gb |= 1 << (actorType % 8);
-    set_global_byte((actorType / 8) + 0x16D, gb);
+    set_global_byte(EVT_INDEX_OF_GAME_BYTE(GB_Tattles_00) + actorType / 8, gb);
     battleStatus->tattleFlags[actorType / 8] |= gb;
 }
 
 void load_tattle_flags(s32 actorType) {
     BattleStatus* battleStatus = &gBattleStatus;
-    u8* list;
+    u8* types;
     s32 gb;
     s32 i = 0;
     s32 j;
     s32 k;
 
     while (TRUE) {
-        list = ActorTypesLists[i];
-        if (list == NULL) {
+        types = ActorTypesLists[i];
+        if (types == NULL) {
             break;
         }
 
-        for (j = 0; list[j] != 0xFF; j++) {
-            if (actorType == list[j]) {
-                for (k = 0; list[k] != 0xFF; k++) {
-                    actorType = list[k];
+        for (j = 0; types[j] != ACTOR_TYPE_LIST_END; j++) {
+            if (actorType == types[j]) {
+                for (k = 0; types[k] != ACTOR_TYPE_LIST_END; k++) {
+                    actorType = types[k];
 
-                    gb = get_global_byte((actorType / 8) + 0x16D); // GameByte(0x16D) is GB_Tattles_00 (first tattle)
+                    gb = get_global_byte(EVT_INDEX_OF_GAME_BYTE(GB_Tattles_00) + actorType / 8);
                     gb |= 1 << (actorType % 8);
                     battleStatus->tattleFlags[actorType / 8] |= gb;
                 }
@@ -589,12 +599,12 @@ void load_tattle_flags(s32 actorType) {
         i++;
     }
 
-    gb = get_global_byte((actorType / 8) + 0x16D);
+    gb = get_global_byte(EVT_INDEX_OF_GAME_BYTE(GB_Tattles_00) + actorType / 8);
     gb |= 1 << (actorType % 8);
     battleStatus->tattleFlags[actorType / 8] |= gb;
 }
 
-ApiStatus func_80253FB0(Evt* script, s32 isInitialCall) {
+ApiStatus SetEnemiesFled(Evt* script, s32 isInitialCall) {
     gCurrentEncounter.battleOutcome = OUTCOME_ENEMY_FLED;
     btl_set_state(BATTLE_STATE_END_BATTLE);
 
@@ -635,7 +645,7 @@ ApiStatus ApplyShrinkFromOwner(Evt* script, s32 isInitialCall) {
     Actor* actor = get_actor(script->owner1.actorID);
     s32 amt = evt_get_variable(script, *args);
 
-    if (actor->debuff == STATUS_SHRINK && amt > 0) {
+    if (actor->debuff == STATUS_KEY_SHRINK && amt > 0) {
         amt /= 2;
     }
 

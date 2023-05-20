@@ -26,6 +26,10 @@ extern EvtScript N(tidalWave);
 
 static EffectInstance* sEffect;
 
+enum N(ActorPartIDs) {
+    PRT_MAIN            = 1,
+};
+
 API_CALLABLE(N(SetSquirtAngle)) {
     ActorPart* targetPart;
     Actor* partner = gBattleStatus.partnerActor;
@@ -384,50 +388,50 @@ API_CALLABLE(N(SetScaleTidalWaveCharge)) {
 }
 
 s32 N(IdleAnimations)[] = {
-    STATUS_NORMAL, ANIM_BattleSushie_Walk,
-    STATUS_STONE, ANIM_BattleSushie_Still,
-    STATUS_SLEEP, ANIM_BattleSushie_Pray,
-    STATUS_POISON, ANIM_BattleSushie_Still,
-    STATUS_STOP, ANIM_BattleSushie_Still,
-    STATUS_DAZE, ANIM_BattleSushie_Injured,
-    STATUS_TURN_DONE, ANIM_BattleSushie_Still,
+    STATUS_KEY_NORMAL,    ANIM_BattleSushie_Walk,
+    STATUS_KEY_STONE,     ANIM_BattleSushie_Still,
+    STATUS_KEY_SLEEP,     ANIM_BattleSushie_Pray,
+    STATUS_KEY_POISON,    ANIM_BattleSushie_Still,
+    STATUS_KEY_STOP,      ANIM_BattleSushie_Still,
+    STATUS_KEY_DAZE,      ANIM_BattleSushie_Injured,
+    STATUS_KEY_INACTIVE,  ANIM_BattleSushie_Still,
     STATUS_END,
 };
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
 s32 N(StatusTable)[] = {
-    STATUS_NORMAL, 100,
-    STATUS_DEFAULT, 100,
-    STATUS_SLEEP, 100,
-    STATUS_POISON, 100,
-    STATUS_FROZEN, 100,
-    STATUS_DIZZY, 100,
-    STATUS_FEAR, 100,
-    STATUS_STATIC, 100,
-    STATUS_PARALYZE, 100,
-    STATUS_SHRINK, 100,
-    STATUS_STOP, 100,
-    STATUS_DEFAULT_TURN_MOD, 0,
-    STATUS_SLEEP_TURN_MOD, 0,
-    STATUS_POISON_TURN_MOD, 0,
-    STATUS_FROZEN_TURN_MOD, 0,
-    STATUS_DIZZY_TURN_MOD, 0,
-    STATUS_FEAR_TURN_MOD, 0,
-    STATUS_STATIC_TURN_MOD, 0,
-    STATUS_PARALYZE_TURN_MOD, 0,
-    STATUS_SHRINK_TURN_MOD, 0,
-    STATUS_STOP_TURN_MOD, 0,
+    STATUS_KEY_NORMAL,            100,
+    STATUS_KEY_DEFAULT,           100,
+    STATUS_KEY_SLEEP,             100,
+    STATUS_KEY_POISON,            100,
+    STATUS_KEY_FROZEN,            100,
+    STATUS_KEY_DIZZY,             100,
+    STATUS_KEY_FEAR,              100,
+    STATUS_KEY_STATIC,            100,
+    STATUS_KEY_PARALYZE,          100,
+    STATUS_KEY_SHRINK,            100,
+    STATUS_KEY_STOP,              100,
+    STATUS_TURN_MOD_DEFAULT,        0,
+    STATUS_TURN_MOD_SLEEP,          0,
+    STATUS_TURN_MOD_POISON,         0,
+    STATUS_TURN_MOD_FROZEN,         0,
+    STATUS_TURN_MOD_DIZZY,          0,
+    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_STATIC,         0,
+    STATUS_TURN_MOD_PARALYZE,       0,
+    STATUS_TURN_MOD_SHRINK,         0,
+    STATUS_TURN_MOD_STOP,           0,
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = 0,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 12, 17 },
         .opacity = 255,
@@ -444,8 +448,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_SUSHIE,
     .level = 0,
     .maxHP = 99,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
@@ -457,9 +461,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 80,
     .coinReward = 0,
     .size = { 37, 26 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 EvtScript N(init) = {
@@ -1205,9 +1209,9 @@ EvtScript N(tidalWave) = {
         EVT_END_IF
         EVT_SWITCH(LVarE)
             EVT_CASE_GE(6)
-                EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_WATER | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, 0, 0, LVarF, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40)
+                EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_WATER | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, LVarF, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40)
             EVT_CASE_DEFAULT
-                EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_WATER | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, 0, 0, LVarF, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)
+                EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_WATER | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, LVarF, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)
         EVT_END_SWITCH
         EVT_WAIT(5)
         EVT_LABEL(10)

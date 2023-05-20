@@ -285,7 +285,7 @@ ApiStatus ShowKeyChoicePopup(Evt* script, s32 isInitialCall) {
             disable_player_input();
             disable_player_static_collisions();
             partner_disable_input();
-            close_status_menu();
+            close_status_bar();
             numEntries = 0;
 
             gOverrideFlags |= GLOBAL_OVERRIDES_40;
@@ -376,7 +376,7 @@ ApiStatus ShowConsumableChoicePopup(Evt* script, s32 isInitialCall) {
             disable_player_input();
             disable_player_static_collisions();
             partner_disable_input();
-            close_status_menu();
+            close_status_bar();
             numEntries = 0;
 
             gOverrideFlags |= GLOBAL_OVERRIDES_40;

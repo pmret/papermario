@@ -3,18 +3,18 @@
 
 #define NAMESPACE b_area_trd_part_2_trd_03
 
-#include "world/common/todo/clouds.inc.c"
+#include "battle/common/stage/MovingClouds.inc.c"
 
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_SET(LVar0, 4)
     EVT_SET(LVar2, 0)
-    EVT_EXEC(N(clouds1))
+    EVT_EXEC(N(EVS_AnimateCloud))
     EVT_SET(LVar0, 2)
     EVT_SET(LVar2, 70)
     EVT_SET(LVar3, 175)
     EVT_SET(LVar4, -170)
-    EVT_EXEC(N(clouds2))
+    EVT_EXEC(N(EVS_AnimateCloud_WithOffset2D))
     EVT_RETURN
     EVT_END
 };

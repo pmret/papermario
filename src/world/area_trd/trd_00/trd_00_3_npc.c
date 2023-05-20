@@ -7,11 +7,11 @@ API_CALLABLE(N(UpgradeStarPowerCh1)) {
     set_max_SP(1);
     gPlayerData.curHP = gPlayerData.curMaxHP;
     gPlayerData.curFP = gPlayerData.curMaxFP;
-    sync_status_menu();
+    sync_status_bar();
     return ApiStatus_DONE2;
 }
 
-#include "world/common/todo/SyncStatusMenu.inc.c"
+#include "world/common/todo/SyncStatusBar.inc.c"
 
 NpcSettings N(NpcSettings_KoopaBros) = {
     .height = 34,
@@ -214,7 +214,7 @@ EvtScript N(D_80241DA4_99BA14) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(FullyRestoreSP)
-    EVT_CALL(N(SyncStatusMenu))
+    EVT_CALL(N(SyncStatusBar))
     EVT_LABEL(10)
     EVT_WAIT(30 * DT)
     EVT_CALL(GetNpcPos, NPC_Eldstar, LVar0, LVar1, LVar2)

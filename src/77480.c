@@ -665,7 +665,7 @@ void update_player(void) {
 
     check_input_open_menus();
     if (!(playerStatus->animFlags & PA_FLAG_USING_PEACH_PHYSICS)) {
-        check_input_status_menu();
+        check_input_status_bar();
     }
 
     update_player_shadow();

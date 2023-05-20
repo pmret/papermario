@@ -18,43 +18,48 @@ extern EvtScript N(nextTurn);
 extern EvtScript N(OnBurn);
 extern EvtScript N(OnDeath);
 
+enum N(ActorPartIDs) {
+    PRT_MAIN            = 1,
+    PRT_2               = 2,
+};
+
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 0,
-    ELEMENT_COSMIC, 99,
+    ELEMENT_NORMAL,   0,
+    ELEMENT_COSMIC,  99,
     ELEMENT_END,
 };
 
 s32 N(StatusTable)[] = {
-    STATUS_NORMAL, 0,
-    STATUS_DEFAULT, 0,
-    STATUS_SLEEP, 0,
-    STATUS_POISON, 0,
-    STATUS_FROZEN, 0,
-    STATUS_DIZZY, 0,
-    STATUS_FEAR, 0,
-    STATUS_STATIC, 0,
-    STATUS_PARALYZE, 0,
-    STATUS_SHRINK, 0,
-    STATUS_STOP, 0,
-    STATUS_DEFAULT_TURN_MOD, 0,
-    STATUS_SLEEP_TURN_MOD, 0,
-    STATUS_POISON_TURN_MOD, 0,
-    STATUS_FROZEN_TURN_MOD, 0,
-    STATUS_DIZZY_TURN_MOD, 0,
-    STATUS_FEAR_TURN_MOD, 0,
-    STATUS_STATIC_TURN_MOD, 0,
-    STATUS_PARALYZE_TURN_MOD, 0,
-    STATUS_SHRINK_TURN_MOD, 0,
-    STATUS_STOP_TURN_MOD, 0,
+    STATUS_KEY_NORMAL,              0,
+    STATUS_KEY_DEFAULT,             0,
+    STATUS_KEY_SLEEP,               0,
+    STATUS_KEY_POISON,              0,
+    STATUS_KEY_FROZEN,              0,
+    STATUS_KEY_DIZZY,               0,
+    STATUS_KEY_FEAR,                0,
+    STATUS_KEY_STATIC,              0,
+    STATUS_KEY_PARALYZE,            0,
+    STATUS_KEY_SHRINK,              0,
+    STATUS_KEY_STOP,                0,
+    STATUS_TURN_MOD_DEFAULT,        0,
+    STATUS_TURN_MOD_SLEEP,          0,
+    STATUS_TURN_MOD_POISON,         0,
+    STATUS_TURN_MOD_FROZEN,         0,
+    STATUS_TURN_MOD_DIZZY,          0,
+    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_STATIC,         0,
+    STATUS_TURN_MOD_PARALYZE,       0,
+    STATUS_TURN_MOD_SHRINK,         0,
+    STATUS_TURN_MOD_STOP,           0,
     STATUS_END,
 };
 
 extern s32 N(IdleAnimations)[];
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
@@ -66,7 +71,7 @@ ActorPartBlueprint N(parts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_MULTI_TARGET | ACTOR_PART_FLAG_80000000,
-        .index = 2,
+        .index = PRT_2,
         .posOffset = { 0, 50, 0 },
         .targetOffset = { -6, 20 },
         .opacity = 255,
@@ -83,8 +88,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_MONSTAR,
     .level = 45,
     .maxHP = 20,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
@@ -96,27 +101,27 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 90,
     .coinReward = 0,
     .size = { 100, 98 },
-    .hpBarOffset = { 0, 16 },
+    .healthBarOffset = { 0, 16 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 s32 N(IdleAnimations)[] = {
-    STATUS_NORMAL, ANIM_Monstar_Idle1,
-    STATUS_STONE, ANIM_Monstar_Still,
-    STATUS_SLEEP, ANIM_Monstar_Idle1,
-    STATUS_POISON, ANIM_Monstar_Idle1,
-    STATUS_STOP, ANIM_Monstar_Still,
-    STATUS_STATIC, ANIM_Monstar_Idle1,
-    STATUS_PARALYZE, ANIM_Monstar_Still,
-    STATUS_PARALYZE, ANIM_Monstar_Still,
-    STATUS_DIZZY, ANIM_Monstar_Idle1,
-    STATUS_DIZZY, ANIM_Monstar_Idle1,
+    STATUS_KEY_NORMAL,    ANIM_Monstar_Idle1,
+    STATUS_KEY_STONE,     ANIM_Monstar_Still,
+    STATUS_KEY_SLEEP,     ANIM_Monstar_Idle1,
+    STATUS_KEY_POISON,    ANIM_Monstar_Idle1,
+    STATUS_KEY_STOP,      ANIM_Monstar_Still,
+    STATUS_KEY_STATIC,    ANIM_Monstar_Idle1,
+    STATUS_KEY_PARALYZE,  ANIM_Monstar_Still,
+    STATUS_KEY_PARALYZE,  ANIM_Monstar_Still,
+    STATUS_KEY_DIZZY,     ANIM_Monstar_Idle1,
+    STATUS_KEY_DIZZY,     ANIM_Monstar_Idle1,
     STATUS_END,
 };
 
 s32 N(IdleAnimations2)[] = {
-    STATUS_NORMAL, ANIM_Monstar_GatherStrength1,
+    STATUS_KEY_NORMAL,    ANIM_Monstar_GatherStrength1,
     STATUS_END,
 };
 
@@ -325,8 +330,8 @@ EvtScript N(unused) = {
     EVT_CALL(SetBattleCamOffsetZ, 5)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 30)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Monstar_GatherStrength1)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations2)))
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Monstar_GatherStrength1)
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations2)))
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 40)
     EVT_SUB(LVar2, 5)
@@ -353,11 +358,11 @@ EvtScript N(attack) = {
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_WAIT(30)
     EVT_THREAD
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Monstar_GatherStrength1)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Monstar_GatherStrength1)
         EVT_WAIT(20)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Monstar_GatherStrength2)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Monstar_GatherStrength2)
         EVT_WAIT(20)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Monstar_GatherStrength3)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Monstar_GatherStrength3)
     EVT_END_THREAD
     EVT_THREAD
         EVT_CALL(N(UnkBackgroundFunc3))
@@ -415,15 +420,15 @@ EvtScript N(attack) = {
     EVT_ADD(LVar1, 50)
     EVT_ADD(LVar2, 5)
     EVT_PLAY_EFFECT(EFFECT_RADIAL_SHIMMER, 11, LVar0, LVar1, LVar2, EVT_FLOAT(0.8), 160, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Monstar_Release)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Monstar_Release)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 0, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LVarA, LVar0)
             EVT_WAIT(170)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Monstar_Idle1)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations)))
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Monstar_Idle1)
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations)))
             EVT_CALL(MakeLerp, 200, 0, 60, EASING_LINEAR)
             EVT_LABEL(1)
             EVT_CALL(UpdateLerp)
@@ -448,8 +453,8 @@ EvtScript N(attack) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Monstar_Idle1)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations)))
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Monstar_Idle1)
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations)))
             EVT_CALL(MakeLerp, 200, 0, 60, EASING_LINEAR)
             EVT_LABEL(2)
             EVT_CALL(UpdateLerp)
@@ -484,13 +489,13 @@ EvtScript N(takeTurn) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_CALL(ActorSpeak, MSG_CH7_00E5, ACTOR_SELF, 1, ANIM_Monstar_Talk, ANIM_Monstar_Talk)
+            EVT_CALL(ActorSpeak, MSG_CH7_00E5, ACTOR_SELF, PRT_MAIN, ANIM_Monstar_Talk, ANIM_Monstar_Talk)
         EVT_CASE_EQ(1)
-            EVT_CALL(ActorSpeak, MSG_CH7_00E6, ACTOR_SELF, 1, ANIM_Monstar_Talk, ANIM_Monstar_Talk)
+            EVT_CALL(ActorSpeak, MSG_CH7_00E6, ACTOR_SELF, PRT_MAIN, ANIM_Monstar_Talk, ANIM_Monstar_Talk)
         EVT_CASE_EQ(2)
-            EVT_CALL(ActorSpeak, MSG_CH7_00E7, ACTOR_SELF, 1, ANIM_Monstar_Talk, ANIM_Monstar_Talk)
+            EVT_CALL(ActorSpeak, MSG_CH7_00E7, ACTOR_SELF, PRT_MAIN, ANIM_Monstar_Talk, ANIM_Monstar_Talk)
         EVT_CASE_DEFAULT
-            EVT_CALL(ActorSpeak, MSG_CH7_00E6, ACTOR_SELF, 1, ANIM_Monstar_Talk, ANIM_Monstar_Talk)
+            EVT_CALL(ActorSpeak, MSG_CH7_00E6, ACTOR_SELF, PRT_MAIN, ANIM_Monstar_Talk, ANIM_Monstar_Talk)
     EVT_END_SWITCH
     EVT_CALL(AddActorVar, ACTOR_SELF, 3, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
@@ -501,7 +506,7 @@ EvtScript N(takeTurn) = {
 };
 
 EvtScript N(OnDeath) = {
-    EVT_CALL(func_8027D32C, ACTOR_SELF)
+    EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_IF_NE(LVar1, -1)
         EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
@@ -529,7 +534,7 @@ EvtScript N(OnDeath) = {
                 EVT_END_CASE_GROUP
                 EVT_CASE_DEFAULT
             EVT_END_SWITCH
-            EVT_IF_NE(LVar2, -12345)
+            EVT_IF_NE(LVar2, EXEC_DEATH_NO_SPINNING)
                 EVT_SET(LVar2, 0)
                 EVT_LOOP(24)
                     EVT_CALL(SetActorYaw, ACTOR_SELF, LVar2)

@@ -503,25 +503,28 @@ ApiStatus GetValueByRef(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus EnableStatusMenu(Evt* script, s32 isInitialCall) {
+ApiStatus EnableWorldStatusBar(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
-    if (evt_get_variable(script, *args++) != 0) {
-        decrement_status_menu_disabled();
+    b32 shouldEnable = evt_get_variable(script, *args++);
+
+    if (shouldEnable) {
+        decrement_status_bar_disabled();
     } else {
-        increment_status_menu_disabled();
+        increment_status_bar_disabled();
     }
 
     return ApiStatus_DONE2;
 }
 
-ApiStatus ShowStatusMenu(Evt* script, s32 isInitialCall) {
+ApiStatus ShowWorldStatusBar(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
+    b32 shouldShow = evt_get_variable(script, *args++);
 
-    if (evt_get_variable(script, *args++) != 0) {
-        status_menu_ignore_changes();
-        close_status_menu();
+    if (shouldShow) {
+        status_bar_ignore_changes();
+        close_status_bar();
     } else {
-        status_menu_respond_to_changes();
+        status_bar_respond_to_changes();
     }
 
     return ApiStatus_DONE2;

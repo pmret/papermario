@@ -226,8 +226,8 @@ API_CALLABLE(N(CreateScoreDisplay)) {
 
 API_CALLABLE(N(DisableMenus)) {
     gOverrideFlags |= GLOBAL_OVERRIDES_DISABLE_MENUS;
-    status_menu_ignore_changes();
-    close_status_menu();
+    status_bar_ignore_changes();
+    close_status_bar();
     return ApiStatus_DONE2;
 }
 
@@ -978,8 +978,8 @@ API_CALLABLE(N(CreateMinigame)) {
     data->windowB_posX = SCREEN_WIDTH;
     data->timeLeft = PLAY_TIME;
 
-    status_menu_ignore_changes();
-    close_status_menu();
+    status_bar_ignore_changes();
+    close_status_bar();
 
     return ApiStatus_DONE2;
 }

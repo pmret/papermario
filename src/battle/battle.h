@@ -57,6 +57,26 @@ enum BattleAreaIDs {
     BTL_AREA_OMO2_6        = 0x2E,
 };
 
+enum BattlePositions {
+    BTL_POS_GROUND_A  = 0,
+    BTL_POS_GROUND_B  = 1,
+    BTL_POS_GROUND_C  = 2,
+    BTL_POS_GROUND_D  = 3,
+    BTL_POS_AIR_A     = 4,
+    BTL_POS_AIR_B     = 5,
+    BTL_POS_AIR_C     = 6,
+    BTL_POS_AIR_D     = 7,
+    BTL_POS_HIGH_A    = 8,
+    BTL_POS_HIGH_B    = 9,
+    BTL_POS_HIGH_C    = 10,
+    BTL_POS_HIGH_D    = 11,
+    BTL_POS_TOP_A     = 12,
+    BTL_POS_TOP_B     = 13,
+    BTL_POS_TOP_C     = 14,
+    BTL_POS_TOP_D     = 15,
+    BTL_POS_CENTER    = 16,
+};
+
 typedef enum ActorType {
     ACTOR_TYPE_RED_GOOMBA                  = 0x00,
     ACTOR_TYPE_RED_PARAGOOMBA              = 0x01,
@@ -324,9 +344,9 @@ typedef struct ActorBlueprint {
     /* 0x1E */ u8 powerBounceChance;
     /* 0x1F */ u8 coinReward;
     /* 0x20 */ Vec2b size;
-    /* 0x22 */ Vec2b hpBarOffset;
+    /* 0x22 */ Vec2b healthBarOffset;
     /* 0x24 */ Vec2b statusIconOffset;
-    /* 0x26 */ Vec2b statusMessageOffset;
+    /* 0x26 */ Vec2b statusTextOffset;
 } ActorBlueprint; // size = 0x28
 
 typedef struct FormationRow {
@@ -382,7 +402,7 @@ typedef Battle BattleList[];
 
 /// Zero-terminated.
 typedef struct StageListRow {
-    /* 0x00 */ const char* id; ///< Map ID.
+    /* 0x00 */ const char* name; ///< Map ID.
     /* 0x04 */ Stage* stage;
 } StageListRow; // size = 0x08
 
@@ -401,10 +421,13 @@ typedef struct BattleArea {
 
 extern BattleArea gBattleAreas[0x30];
 
-#define BATTLE(formation, stage, name) { name, ARRAY_COUNT(formation), (Formation*) formation, stage }
-#define BATTLE_WITH_SCRIPT(formation, stage, script, name) { name, ARRAY_COUNT(formation), (Formation*) formation, stage, script }
+#define BATTLE(formation, stage, name) { name, ARRAY_COUNT(formation), (Formation*) formation, &stage }
+#define BATTLE_WITH_SCRIPT(formation, stage, script, name) { name, ARRAY_COUNT(formation), (Formation*) formation, &stage, &script }
 
-// TODO: enum for home position (0..3 are floor, 4..7 are air, etc.)
+#define ACTOR_BY_IDX(_name, _idx, _priority, args...) { .actor = &_name, .home = { .index = _idx }, .priority = _priority, args }
+#define ACTOR_BY_POS(_name, _pos, _priority, args...) { .actor = &_name, .home = { .vec = &_pos }, .priority = _priority, args }
+
+#define STAGE(_name, _stage) { .name = _name, .stage = &_stage }
 
 typedef struct ActorSounds {
     /* 0x00 */ s32 walk[2];
@@ -435,5 +458,11 @@ extern ActorOffsets bActorOffsets[ACTOR_TYPE_COUNT];
 void func_80072BCC(s32 arg0);
 void load_demo_battle(u32 index);
 Actor* create_actor(Formation formation);
+
+#define EXEC_DEATH_NO_SPINNING -12345
+#define ACTOR_API_SKIP_ARG -12345678
+
+#define DANGER_THRESHOLD  5
+#define PERIL_THRESHOLD   1
 
 #endif

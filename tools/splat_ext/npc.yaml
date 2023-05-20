@@ -3075,15 +3075,15 @@ Swooper:
     - Anim1B
 StoneChomp:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
+    - Neutral
+    - Chain
+    - Bite
+    - Hurt1
+    - Hurt2
+    - BurnHurt1
+    - BurnHurt2
+    - BurnChain
+    - Sleep
   palettes:
     - Default
     - Poisoned
@@ -3091,18 +3091,18 @@ StoneChomp:
     - Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
+    - Still
+    - Idle
+    - Chain
+    - QuickBite
+    - Bite
+    - SlowBite
+    - Hurt
+    - BurnHurt
+    - BurnStill
+    - BurnChain
+    - Sleep
+    - Dizzy
 LargePiranha:
   variations:
     - Variant00
@@ -6272,54 +6272,54 @@ Buzzar:
     - Anim19
 Tutankoopa:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
-    - Raster0C
-    - Raster0D
-    - Raster0E
-    - Raster0F
-    - Raster10
-    - Raster11
-    - Raster12
-    - Raster13
-    - Raster14
-    - Raster15
-    - Raster16
-    - Raster17
-    - Raster18
-    - Raster19
-    - Raster1A
-    - Raster1B
-    - Raster1C
-    - Raster1D
-    - Raster1E
-    - Raster1F
-    - Raster20
-    - Raster21
-    - Raster22
-    - Raster23
-    - Raster24
-    - Raster25
-    - Raster26
-    - Raster27
-    - Raster28
-    - Raster29
-    - Raster2A
-    - Raster2B
-    - Raster2C
-    - Raster2D
-    - Raster2E
-    - Raster2F
+    - Headdress
+    - HeaddressWithEyes
+    - NoHeaddress
+    - Neutral
+    - Talk
+    - Run1
+    - Run2
+    - Run3
+    - Shout1
+    - Shout2
+    - Levitate1
+    - Levitate2
+    - Toss1
+    - Toss2
+    - Fall1
+    - Fall2
+    - Hurt1
+    - Hurt2
+    - Dizzy1
+    - Dizzy2
+    - Dizzy3
+    - Dizzy4
+    - Lift
+    - Idle
+    - BurnHurt1
+    - BurnHurt2
+    - BurnHurt3
+    - BurnFall1
+    - BurnFall2
+    - Rock
+    - RockShard1
+    - RockShard2
+    - RockShard3
+    - RockShard4
+    - IdleChompBite1
+    - IdleChompBite2
+    - Sleep1
+    - Sleep2
+    - SleepGround1
+    - SleepGround2
+    - SleepGround3
+    - Glare1
+    - Glare2
+    - Glare3
+    - Glare4
+    - Glare5
+    - Glare6
+    - Glare7
   palettes:
     - Default
     - Poisoned
@@ -6328,53 +6328,53 @@ Tutankoopa:
     - Burnt
     - Rock
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
-    - Anim10
-    - Anim11
-    - Anim12
-    - Anim13
-    - Anim14
-    - Anim15
-    - Anim16
-    - Anim17
+    - Still
+    - Idle
+    - Run
+    - Shout
+    - Lift
+    - Toss
+    - Hurt
+    - Fall
+    - Levitate
+    - LevitateStill
+    - Dizzy
+    - Talk
+    - Sleep
+    - SleepGround
+    - Glare
+    - HeaddressOnly
+    - HeaddressWithEyes
+    - NoHeaddress
+    - BurnHurt
+    - BurnStill
+    - BurnStillAlt
+    - BurnFall
+    - RockStill
+    - RockShatter
 ChainChomp:
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
+    - Neutral
+    - Chain
+    - Bite
+    - Hurt1
+    - Hurt2
+    - Sleep
   palettes:
     - Default
     - Poisoned
     - Dizzy
     - Shocked
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
+    - Still
+    - Idle
+    - Chain
+    - QuickBite
+    - Bite
+    - SlowBite
+    - Hurt
+    - Sleep
+    - Dizzy
 WorldTubba:
   variations:
     - Variant00

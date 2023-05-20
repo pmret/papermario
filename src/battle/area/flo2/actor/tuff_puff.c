@@ -6,6 +6,17 @@
 
 #define NAMESPACE b_area_flo2_tuff_puff
 
+extern EvtScript N(init);
+extern EvtScript N(takeTurn);
+extern EvtScript N(idle);
+extern EvtScript N(handleEvent);
+extern EvtScript N(nextTurn);
+
+enum N(ActorPartIDs) {
+    PRT_MAIN            = 1,
+    PRT_2               = 2,
+};
+
 enum N(actorVars) {
     N(VAR_IS_BIG) = 0,
     N(VAR_INDEX) = 1,
@@ -14,80 +25,74 @@ enum N(actorVars) {
     N(VAR_SCALE_Y) = 4,
 };
 
-extern EvtScript N(init);
-extern EvtScript N(takeTurn);
-extern EvtScript N(idle);
-extern EvtScript N(handleEvent);
-extern EvtScript N(nextTurn);
-
 s32 N(IdleAnimations)[] = {
-    STATUS_NORMAL, ANIM_RuffPuff_Anim02,
-    STATUS_STONE, ANIM_RuffPuff_Anim00,
-    STATUS_SLEEP, ANIM_RuffPuff_Anim02,
-    STATUS_POISON, ANIM_RuffPuff_Anim02,
-    STATUS_STOP, ANIM_RuffPuff_Anim00,
-    STATUS_STATIC, ANIM_RuffPuff_Anim02,
-    STATUS_PARALYZE, ANIM_RuffPuff_Anim02,
-    STATUS_PARALYZE, ANIM_RuffPuff_Anim00,
-    STATUS_DIZZY, ANIM_RuffPuff_Anim02,
-    STATUS_DIZZY, ANIM_RuffPuff_Anim02,
-    STATUS_FEAR, ANIM_RuffPuff_Anim02,
+    STATUS_KEY_NORMAL,    ANIM_RuffPuff_Anim02,
+    STATUS_KEY_STONE,     ANIM_RuffPuff_Anim00,
+    STATUS_KEY_SLEEP,     ANIM_RuffPuff_Anim02,
+    STATUS_KEY_POISON,    ANIM_RuffPuff_Anim02,
+    STATUS_KEY_STOP,      ANIM_RuffPuff_Anim00,
+    STATUS_KEY_STATIC,    ANIM_RuffPuff_Anim02,
+    STATUS_KEY_PARALYZE,  ANIM_RuffPuff_Anim02,
+    STATUS_KEY_PARALYZE,  ANIM_RuffPuff_Anim00,
+    STATUS_KEY_DIZZY,     ANIM_RuffPuff_Anim02,
+    STATUS_KEY_DIZZY,     ANIM_RuffPuff_Anim02,
+    STATUS_KEY_FEAR,      ANIM_RuffPuff_Anim02,
     STATUS_END,
 };
 
 s32 N(IdleAnimations2)[] = {
-    STATUS_NORMAL, ANIM_RuffPuff_Anim03,
-    STATUS_STONE, ANIM_RuffPuff_Anim01,
-    STATUS_SLEEP, ANIM_RuffPuff_Anim03,
-    STATUS_POISON, ANIM_RuffPuff_Anim03,
-    STATUS_STOP, ANIM_RuffPuff_Anim01,
-    STATUS_STATIC, ANIM_RuffPuff_Anim03,
-    STATUS_PARALYZE, ANIM_RuffPuff_Anim03,
-    STATUS_PARALYZE, ANIM_RuffPuff_Anim01,
-    STATUS_DIZZY, ANIM_RuffPuff_Anim03,
-    STATUS_DIZZY, ANIM_RuffPuff_Anim03,
-    STATUS_FEAR, ANIM_RuffPuff_Anim03,
+    STATUS_KEY_NORMAL,    ANIM_RuffPuff_Anim03,
+    STATUS_KEY_STONE,     ANIM_RuffPuff_Anim01,
+    STATUS_KEY_SLEEP,     ANIM_RuffPuff_Anim03,
+    STATUS_KEY_POISON,    ANIM_RuffPuff_Anim03,
+    STATUS_KEY_STOP,      ANIM_RuffPuff_Anim01,
+    STATUS_KEY_STATIC,    ANIM_RuffPuff_Anim03,
+    STATUS_KEY_PARALYZE,  ANIM_RuffPuff_Anim03,
+    STATUS_KEY_PARALYZE,  ANIM_RuffPuff_Anim01,
+    STATUS_KEY_DIZZY,     ANIM_RuffPuff_Anim03,
+    STATUS_KEY_DIZZY,     ANIM_RuffPuff_Anim03,
+    STATUS_KEY_FEAR,      ANIM_RuffPuff_Anim03,
     STATUS_END,
 };
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 0,
-    ELEMENT_SHOCK, 99,
-    ELEMENT_MYSTERY, 0,
-    ELEMENT_JUMP, 0,
-    ELEMENT_SMASH, 0,
+    ELEMENT_NORMAL,   0,
+    ELEMENT_SHOCK,   99,
+    ELEMENT_MYSTERY,   0,
+    ELEMENT_JUMP,     0,
+    ELEMENT_SMASH,    0,
     ELEMENT_END,
 };
 
 s32 N(StatusTable)[] = {
-    STATUS_NORMAL, 0,
-    STATUS_DEFAULT, 0,
-    STATUS_SLEEP, 0,
-    STATUS_POISON, 0,
-    STATUS_FROZEN, 0,
-    STATUS_DIZZY, 0,
-    STATUS_FEAR, 0,
-    STATUS_STATIC, 0,
-    STATUS_PARALYZE, 0,
-    STATUS_SHRINK, 0,
-    STATUS_STOP, 0,
-    STATUS_DEFAULT_TURN_MOD, 0,
-    STATUS_SLEEP_TURN_MOD, 0,
-    STATUS_POISON_TURN_MOD, 0,
-    STATUS_FROZEN_TURN_MOD, 0,
-    STATUS_DIZZY_TURN_MOD, 0,
-    STATUS_FEAR_TURN_MOD, 0,
-    STATUS_STATIC_TURN_MOD, 0,
-    STATUS_PARALYZE_TURN_MOD, 0,
-    STATUS_SHRINK_TURN_MOD, 0,
-    STATUS_STOP_TURN_MOD, 0,
+    STATUS_KEY_NORMAL,              0,
+    STATUS_KEY_DEFAULT,             0,
+    STATUS_KEY_SLEEP,               0,
+    STATUS_KEY_POISON,              0,
+    STATUS_KEY_FROZEN,              0,
+    STATUS_KEY_DIZZY,               0,
+    STATUS_KEY_FEAR,                0,
+    STATUS_KEY_STATIC,              0,
+    STATUS_KEY_PARALYZE,            0,
+    STATUS_KEY_SHRINK,              0,
+    STATUS_KEY_STOP,                0,
+    STATUS_TURN_MOD_DEFAULT,        0,
+    STATUS_TURN_MOD_SLEEP,          0,
+    STATUS_TURN_MOD_POISON,         0,
+    STATUS_TURN_MOD_FROZEN,         0,
+    STATUS_TURN_MOD_DIZZY,          0,
+    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_STATIC,         0,
+    STATUS_TURN_MOD_PARALYZE,       0,
+    STATUS_TURN_MOD_SHRINK,         0,
+    STATUS_TURN_MOD_STOP,           0,
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_20 | ACTOR_PART_FLAG_NO_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
@@ -99,7 +104,7 @@ ActorPartBlueprint N(parts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_20 | ACTOR_PART_FLAG_MULTI_TARGET | ACTOR_PART_FLAG_80000000,
-        .index = 2,
+        .index = PRT_2,
         .posOffset = { 0, 50, 0 },
         .targetOffset = { 0, -50 },
         .opacity = 255,
@@ -116,8 +121,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_TUFF_PUFF,
     .level = 0,
     .maxHP = 1,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
@@ -129,9 +134,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 90,
     .coinReward = 0,
     .size = { 24, 32 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -15, 0 },
-    .statusMessageOffset = { 10, 10 },
+    .statusTextOffset = { 10, 10 },
 };
 
 EvtScript N(init) = {
@@ -141,22 +146,22 @@ EvtScript N(init) = {
     EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(nextTurn)))
     EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_IS_BIG), LVar0)
     EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -9)
-        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 2, -1, -9)
-        EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -1, 9)
-        EVT_CALL(SetTargetOffset, ACTOR_SELF, 2, -1, -41)
+        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, -1, -9)
+        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_2, -1, -9)
+        EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -1, 9)
+        EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_2, -1, -41)
         EVT_CALL(SetActorSize, ACTOR_SELF, 20, 25)
-        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations)))
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_RuffPuff_Anim02)
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations)))
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_RuffPuff_Anim02)
         EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_IS_BIG), 0)
     EVT_ELSE
-        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -8, -13)
-        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 2, -8, -13)
-        EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 1, 14)
-        EVT_CALL(SetTargetOffset, ACTOR_SELF, 2, 1, -36)
+        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, -8, -13)
+        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_2, -8, -13)
+        EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, 1, 14)
+        EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_2, 1, -36)
         EVT_CALL(SetActorSize, ACTOR_SELF, 28, 35)
-        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations2)))
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_RuffPuff_Anim03)
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations2)))
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_RuffPuff_Anim03)
         EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_IS_BIG), 1)
     EVT_END_IF
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_2), 0)

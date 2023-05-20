@@ -16,37 +16,37 @@ extern Stage N(kpa_03);
 Vec3i N(bowser_pos) = { 80, 0, -10 };
 
 Formation N(Formation_00) = {
-    { .actor = &N(bowser), .home = { .index = 2 }, .priority = 10, },
+    ACTOR_BY_IDX(N(bowser), BTL_POS_GROUND_C, 10),
 };
 
 Formation N(Formation_01) = {
-    { .actor = &N(bowser_intro), .home = { .index = 2 }, .priority = 10, },
+    ACTOR_BY_IDX(N(bowser_intro), BTL_POS_GROUND_C, 10),
 };
 
 Formation N(Formation_02) = {
-    { .actor = &N(bowser_phase_1), .home = { .index = 2 }, .priority = 10, },
+    ACTOR_BY_IDX(N(bowser_phase_1), BTL_POS_GROUND_C, 10),
 };
 
 Formation N(Formation_03) = {
-    { .actor = &N(bowser_phase_2), .home = { .vec = &N(bowser_pos) }, .priority = 10, },
+    ACTOR_BY_POS(N(bowser_phase_2), N(bowser_pos), 10),
 };
 
 Formation N(Formation_04) = {
-    { .actor = &N(bowser_phase_3), .home = { .vec = &N(bowser_pos) }, .priority = 10, },
+    ACTOR_BY_POS(N(bowser_phase_3), N(bowser_pos), 10),
 };
 
 BattleList N(Formations) = {
-    BATTLE(N(Formation_00), &N(kpa_01), "クッパ"),
-    BATTLE(N(Formation_01), &N(kpa_02), "クッパ(オープニング)"),
-    BATTLE(N(Formation_02), &N(kpa_02), "クッパ(ラストバトル１)"),
-    BATTLE(N(Formation_03), &N(kpa_03), "クッパ(ラストバトル２)"),
-    BATTLE(N(Formation_04), &N(kpa_03), "クッパ(ラストバトル３)"),
+    BATTLE(N(Formation_00), N(kpa_01), "クッパ"),
+    BATTLE(N(Formation_01), N(kpa_02), "クッパ(オープニング)"),
+    BATTLE(N(Formation_02), N(kpa_02), "クッパ(ラストバトル１)"),
+    BATTLE(N(Formation_03), N(kpa_03), "クッパ(ラストバトル２)"),
+    BATTLE(N(Formation_04), N(kpa_03), "クッパ(ラストバトル３)"),
     {},
 };
 
 StageList N(Stages) = {
-    { "kpa_01", &N(kpa_01) },
-    { "kpa_02", &N(kpa_02) },
-    { "kpa_03", &N(kpa_03) },
+    STAGE("kpa_01", N(kpa_01)),
+    STAGE("kpa_02", N(kpa_02)),
+    STAGE("kpa_03", N(kpa_03)),
     {},
 };

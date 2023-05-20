@@ -13,7 +13,7 @@ NAMESPACES = {
 for filename in glob("src/battle/item/*.c"):
     parts = filename.split("/")[1:]
     parts[-1] = parts[-1].split(".")[0]
-    NAMESPACES[filename] = "_".join(parts)
+    NAMESPACES[filename] = "_".join(ActorParts)
 
 NAMESPACES["src/battle/item/UseItem.inc.c"] = "battle_item_food"
 

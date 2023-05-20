@@ -159,7 +159,7 @@ EvtScript N(EVS_NpcInit_Lee) = {
 
 API_CALLABLE(N(SetPlayer1HP)) {
     gPlayerData.curHP = 1;
-    sync_status_menu();
+    sync_status_bar();
     return ApiStatus_DONE2;
 }
 

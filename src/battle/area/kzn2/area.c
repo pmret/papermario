@@ -18,32 +18,31 @@ extern Stage N(kzn_05);
 Vec3i N(lava_piranha_pos) = { 60, 60, 0 };
 
 Formation N(Formation_00) = {
-    { .actor = &N(lava_piranha), .home = { .vec = &N(lava_piranha_pos) }, .priority = 60, },
+    ACTOR_BY_POS(N(lava_piranha), N(lava_piranha_pos), 60),
 };
 
 Vec3i N(petit_piranha_pos1) = { 40, 60, 0 };
-
 Vec3i N(petit_piranha_pos2) = { 80, 60, 0 };
 
 Formation N(Formation_01) = {
-    { .actor = &N(petit_piranha), .home = { .vec = &N(petit_piranha_pos1) }, .priority = 10, },
-    { .actor = &N(petit_piranha), .home = { .vec = &N(petit_piranha_pos2) }, .priority = 10, },
+    ACTOR_BY_POS(N(petit_piranha), N(petit_piranha_pos1), 10),
+    ACTOR_BY_POS(N(petit_piranha), N(petit_piranha_pos2), 10),
 };
 
 BattleList N(Formations) = {
-    BATTLE(N(Formation_00), &N(kzn_05), "ファイアパックン"),
-    BATTLE(N(Formation_01), &N(kzn_05), "プチパックン"),
+    BATTLE(N(Formation_00), N(kzn_05), "ファイアパックン"),
+    BATTLE(N(Formation_01), N(kzn_05), "プチパックン"),
     {},
 };
 
 StageList N(Stages) = {
-    { "kzn_01", &N(kzn_01) },
-    { "kzn_01b", &N(kzn_01b) },
-    { "kzn_02", &N(kzn_02) },
-    { "kzn_04", &N(kzn_04) },
-    { "kzn_04b", &N(kzn_04b) },
-    { "kzn_04c", &N(kzn_04c) },
-    { "kzn_05", &N(kzn_05) },
+    STAGE("kzn_01",  N(kzn_01)),
+    STAGE("kzn_01b", N(kzn_01b)),
+    STAGE("kzn_02",  N(kzn_02)),
+    STAGE("kzn_04",  N(kzn_04)),
+    STAGE("kzn_04b", N(kzn_04b)),
+    STAGE("kzn_04c", N(kzn_04c)),
+    STAGE("kzn_05",  N(kzn_05)),
     {},
 };
 

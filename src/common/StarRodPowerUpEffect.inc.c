@@ -32,7 +32,7 @@ API_CALLABLE(N(StarRodPowerUpEffect)) {
         f32 z = evt_get_variable(script, *args++);
         f32 arg4 = evt_get_float_variable(script, *args++);
 
-        if (actor->debuff == STATUS_SHRINK) {
+        if (actor->debuff == STATUS_KEY_SHRINK) {
             arg4 *= 0.4;
         }
 
@@ -73,7 +73,7 @@ API_CALLABLE(N(StarRodPowerUpEffect)) {
             endedCount++;
         } else {
 #ifdef BOWSER_LARGE
-            if (actor->debuff != STATUS_SHRINK) {
+            if (actor->debuff != STATUS_KEY_SHRINK) {
                 if (effectState->pos.y < 60.0) {
                     effectState->pos.y += 4.5;
                 } else if (effectState->pos.y < 90.0) {
@@ -95,7 +95,7 @@ API_CALLABLE(N(StarRodPowerUpEffect)) {
                 }
             }
 #else
-            if (actor->debuff != STATUS_SHRINK) {
+            if (actor->debuff != STATUS_KEY_SHRINK) {
                 if (effectState->pos.y < 40.0) {
                     effectState->pos.y += 3.0;
                 } else if (effectState->pos.y < 60.0) {

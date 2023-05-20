@@ -25,7 +25,7 @@ void spawn_drops(Enemy* enemy) {
     s32 spawnCounter;
     s32 dropCount;
     s32 totalWeight;
-    s32 facingAngleSign;
+    s32 angle;
     s32 angleMult;
     s32 i, j;
     s32 flags;
@@ -39,7 +39,7 @@ void spawn_drops(Enemy* enemy) {
 
     spawnCounter = 0;
     availableRenderTasks = 256 - 10 - gLastRenderTaskCount;
-    facingAngleSign = clamp_angle(camera->currentYaw + 90.0f);
+    angle = clamp_angle(camera->currentYaw + 90.0f);
     x = npc->pos.x;
     y = npc->pos.y + (npc->collisionHeight / 2);
     z = npc->pos.z;
@@ -70,7 +70,7 @@ void spawn_drops(Enemy* enemy) {
 
             totalWeight += drops->itemDrops[3 * i + 1];
             if (drops->itemDrops[3 * i + 2] > 0) {
-                if (get_global_flag(drops->itemDrops[3 * i + 2] + 0x714) != 0) {
+                if (get_global_flag(EVT_INDEX_OF_GAME_FLAG(GF_Unused_NPC_6C) + drops->itemDrops[3 * i + 2])) {
                     continue;
                 }
             }
@@ -89,33 +89,31 @@ void spawn_drops(Enemy* enemy) {
         }
 
         if (itemToDrop != ITEM_NONE) {
-            make_item_entity(itemToDrop, x, y, z, ITEM_SPAWN_MODE_BATTLE_REWARD,
-                pickupDelay, facingAngleSign + angleMult * 360, 0);
+            make_item_entity(itemToDrop, x, y, z, ITEM_SPAWN_MODE_BATTLE_REWARD, pickupDelay, angle + angleMult * 360, 0);
             spawnCounter++;
             pickupDelay += 2;
-            facingAngleSign += 30.0;
+            angle += 30.0;
             if (spawnCounter >= 12) {
                 angleMult++;
-                facingAngleSign = angleMult * 8;
+                angle = angleMult * 8;
                 spawnCounter = 0;
             }
 
             if (drops->itemDrops[3 * i + 2] >= 0) {
-                set_global_flag(drops->itemDrops[3 * i + 2] + 0x715);
+                set_global_flag(EVT_INDEX_OF_GAME_FLAG(GF_SpawnedItemDrop_00) + drops->itemDrops[3 * i + 2]);
             }
         }
     }
 
     if (encounter->dropWhackaBump) {
         encounter->dropWhackaBump = FALSE;
-        make_item_entity(ITEM_WHACKAS_BUMP, x, y, z, ITEM_SPAWN_MODE_BATTLE_REWARD,
-            pickupDelay, facingAngleSign + angleMult * 360, 0);
+        make_item_entity(ITEM_WHACKAS_BUMP, x, y, z, ITEM_SPAWN_MODE_BATTLE_REWARD, pickupDelay, angle + angleMult * 360, 0);
         spawnCounter++;
         pickupDelay += 2;
-        facingAngleSign += 30.0;
+        angle += 30.0;
         if (spawnCounter >= 12) {
             angleMult++;
-            facingAngleSign = angleMult * 8;
+            angle = angleMult * 8;
             spawnCounter = 0;
         }
     }
@@ -163,15 +161,14 @@ void spawn_drops(Enemy* enemy) {
     availableShadows -= dropCount;
 
     for (i = 0; i < dropCount; i++) {
-        make_item_entity(itemToDrop, x, y, z, ITEM_SPAWN_MODE_BATTLE_REWARD,
-            pickupDelay, facingAngleSign + (angleMult * 360), 0);
+        make_item_entity(itemToDrop, x, y, z, ITEM_SPAWN_MODE_BATTLE_REWARD, pickupDelay, angle + (angleMult * 360), 0);
         spawnCounter++;
         pickupDelay += 2;
-        facingAngleSign += 30.0;
+        angle += 30.0;
         if (spawnCounter >= 12) {
             spawnCounter = 0;
             angleMult++;
-            facingAngleSign = angleMult * 8;
+            angle = angleMult * 8;
         }
     }
 
@@ -218,15 +215,14 @@ void spawn_drops(Enemy* enemy) {
     availableShadows -= dropCount;
 
     for (i = 0; i < dropCount; i++) {
-        make_item_entity(itemToDrop, x, y, z, ITEM_SPAWN_MODE_BATTLE_REWARD,
-            pickupDelay, facingAngleSign + (angleMult * 360), 0);
+        make_item_entity(itemToDrop, x, y, z, ITEM_SPAWN_MODE_BATTLE_REWARD, pickupDelay, angle + (angleMult * 360), 0);
         spawnCounter++;
         pickupDelay += 2;
-        facingAngleSign += 30.0;
+        angle += 30.0;
         if (spawnCounter >= 12) {
             spawnCounter = 0;
             angleMult++;
-            facingAngleSign = angleMult * 8;
+            angle = angleMult * 8;
         }
     }
 
@@ -284,15 +280,14 @@ void spawn_drops(Enemy* enemy) {
     }
 
     for (i = 0; i < dropCount; i++) {
-        make_item_entity(itemToDrop, x, y, z, ITEM_SPAWN_MODE_BATTLE_REWARD,
-            pickupDelay, facingAngleSign + (angleMult * 360), 0);
+        make_item_entity(itemToDrop, x, y, z, ITEM_SPAWN_MODE_BATTLE_REWARD, pickupDelay, angle + (angleMult * 360), 0);
         spawnCounter++;
         pickupDelay += 2;
-        facingAngleSign = facingAngleSign + 30.0;
+        angle = angle + 30.0;
         if (spawnCounter >= 12) {
             spawnCounter = 0;
             angleMult++;
-            facingAngleSign = angleMult * 8;
+            angle = angleMult * 8;
         }
     }
 }

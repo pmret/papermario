@@ -8,7 +8,7 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
     EVT_CALL(FadeOutMusic, 0, 500)
     EVT_CALL(ClearAmbientSounds, 250)
-    EVT_CALL(EnableStatusMenu, FALSE)
+    EVT_CALL(EnableWorldStatusBar, FALSE)
     EVT_WAIT(30)
     EVT_EXEC(N(EVS_ManageParade))
     EVT_RETURN

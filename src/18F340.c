@@ -45,14 +45,14 @@ void btl_set_player_idle_anims(void) {
 API_CALLABLE(IsPartnerImmobile) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* playerActor = battleStatus->playerActor;
-    s32 isImmobile = playerActor->debuff == STATUS_FEAR
-                     || playerActor->debuff == STATUS_DIZZY
-                     || playerActor->debuff == STATUS_PARALYZE
-                     || playerActor->debuff == STATUS_SLEEP
-                     || playerActor->debuff == STATUS_FROZEN
-                     || playerActor->debuff == STATUS_STOP;
+    s32 isImmobile = playerActor->debuff == STATUS_KEY_FEAR
+                     || playerActor->debuff == STATUS_KEY_DIZZY
+                     || playerActor->debuff == STATUS_KEY_PARALYZE
+                     || playerActor->debuff == STATUS_KEY_SLEEP
+                     || playerActor->debuff == STATUS_KEY_FROZEN
+                     || playerActor->debuff == STATUS_KEY_STOP;
 
-    if (playerActor->stoneStatus == STATUS_STONE) {
+    if (playerActor->stoneStatus == STATUS_KEY_STONE) {
         isImmobile = TRUE;
     }
 
@@ -76,8 +76,8 @@ API_CALLABLE(DoesMarioStatusPreventHappyAnimation) {
     show_action_rating(ACTION_RATING_LUCKY, player, player->currentPos.x, player->currentPos.y + 20.0f, player->currentPos.z);
     sfx_play_sound(SOUND_3FC);
     script->varTable[0] = FALSE;
-    if (player->debuff == STATUS_FEAR || player->debuff == STATUS_DIZZY || player->debuff == STATUS_PARALYZE ||
-        player->debuff == STATUS_SLEEP ||player->debuff == STATUS_FROZEN || player->debuff == STATUS_STOP) {
+    if (player->debuff == STATUS_KEY_FEAR || player->debuff == STATUS_KEY_DIZZY || player->debuff == STATUS_KEY_PARALYZE ||
+        player->debuff == STATUS_KEY_SLEEP ||player->debuff == STATUS_KEY_FROZEN || player->debuff == STATUS_KEY_STOP) {
         script->varTable[0] = TRUE;
     }
     return ApiStatus_DONE2;
@@ -138,7 +138,7 @@ API_CALLABLE(SetFledBattleFlag) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_80260DD8) {
+API_CALLABLE(DetermineAutoRunAwaySuccess) {
     Actor* player = gBattleStatus.playerActor;
     s32 var;
 
@@ -172,7 +172,7 @@ API_CALLABLE(GiveRefund) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     s32 sellValue = gItemTable[battleStatus->moveArgument].sellValue;
-    f32 facingAngleSign = 0.0f;
+    f32 angle = 0.0f;
     s32 delayTime = 0;
     f32 posX, posY, posZ;
     posY = player->currentPos.y + player->size.y;
@@ -188,9 +188,9 @@ API_CALLABLE(GiveRefund) {
             posX = player->currentPos.x;
             posZ = player->currentPos.z;
 
-            make_item_entity(ITEM_COIN, posX, posY, posZ, ITEM_SPAWN_MODE_TOSS_FADE1, (i * 3) + 1, facingAngleSign, 0);
+            make_item_entity(ITEM_COIN, posX, posY, posZ, ITEM_SPAWN_MODE_TOSS_FADE1, (i * 3) + 1, angle, 0);
             add_coins(1);
-            facingAngleSign += 30.0f;
+            angle += 30.0f;
         }
 
         delayTime = (i * 3) + 30;
@@ -218,7 +218,7 @@ API_CALLABLE(GiveRefundCleanup) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_802610CC) {
+API_CALLABLE(LifeShroomShroudWorld) {
     if (isInitialCall) {
         mdl_set_all_fog_mode(FOG_MODE_1);
         *gBackgroundFogModePtr = FOG_MODE_1;
@@ -233,7 +233,7 @@ API_CALLABLE(func_802610CC) {
     return (script->functionTemp[0] == 0) * ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_80261164) {
+API_CALLABLE(LifeShroomRevealWorld) {
     if (isInitialCall) {
         script->functionTemp[0] = 20;
         btl_cam_unfreeze();
@@ -269,22 +269,26 @@ API_CALLABLE(RestorePreDefeatState) {
     PlayerData* playerData = &gPlayerData;
     BattleStatus* battleStatus = &gBattleStatus;
 
-    battleStatus->rushFlags = RUSH_FLAG_NONE;
     gBattleState = gDefeatedBattleState;
     gBattleSubState = gDefeatedBattleSubstate;
-    battleStatus->flags1 |= BS_FLAGS1_8;
+    battleStatus->flags1 |= BS_FLAGS1_SHOW_PLAYER_DECORATIONS;
+
+    // clear rush flags to initialize
+    battleStatus->rushFlags = RUSH_FLAG_NONE;
     battleStatus->flags2 &= ~BS_FLAGS2_HAS_RUSH;
 
+    // set rush flags based on danger/peril status
     if (!(battleStatus->flags2 & BS_FLAGS2_PEACH_BATTLE)) {
-        if (playerData->curHP <= 1 && is_ability_active(ABILITY_MEGA_RUSH)) {
+        if (playerData->curHP <= PERIL_THRESHOLD && is_ability_active(ABILITY_MEGA_RUSH)) {
             gBattleStatus.flags2 |= BS_FLAGS2_HAS_RUSH;
             battleStatus->rushFlags |= RUSH_FLAG_MEGA;
         }
 
-        if (playerData->curHP <= 5 && is_ability_active(ABILITY_POWER_RUSH) &&
-            !(battleStatus->rushFlags & RUSH_FLAG_MEGA)) {
-            gBattleStatus.flags2 |= BS_FLAGS2_HAS_RUSH;
-            battleStatus->rushFlags |= RUSH_FLAG_POWER;
+        if (playerData->curHP <= DANGER_THRESHOLD && is_ability_active(ABILITY_POWER_RUSH)) {
+            if (!(battleStatus->rushFlags & RUSH_FLAG_MEGA)) {
+                gBattleStatus.flags2 |= BS_FLAGS2_HAS_RUSH;
+                battleStatus->rushFlags |= RUSH_FLAG_POWER;
+            }
         }
     }
     return ApiStatus_DONE2;
@@ -702,7 +706,7 @@ EvtScript EVS_MarioEnterStage = {
 };
 
 EvtScript EVS_PeachEnterStage = {
-    EVT_CALL(func_8026BF48, 1)
+    EVT_CALL(FreezeBattleState, TRUE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_ENTRY)
     EVT_CALL(SetBattleCamTarget, -80, 35, 8)
     EVT_CALL(BattleCamTargetActor, ACTOR_PLAYER)
@@ -723,7 +727,7 @@ EvtScript EVS_PeachEnterStage = {
     EVT_CALL(PlayerRunToGoal, 40)
     EVT_CALL(SetAnimation, ACTOR_SELF, 0, ANIM_Peach1_Walk)
     EVT_WAIT(15)
-    EVT_CALL(func_8026BF48, 0)
+    EVT_CALL(FreezeBattleState, FALSE)
     EVT_RETURN
     EVT_END
 };
@@ -837,7 +841,7 @@ EvtScript EVS_Player_HandleEvent = {
             EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_END_SWITCH
     EVT_CALL(CloseActionCommandInfo)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, 0)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, FALSE)
     EVT_CALL(func_802693F0)
     EVT_CALL(func_802749F8)
     EVT_CALL(GetLastEvent, ACTOR_PLAYER, LVarF)
@@ -1088,7 +1092,7 @@ EvtScript EVS_RunAwayNoCommand = {
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_Mario1_Land)
     EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_CALL(func_80273444, 8, 0, 0)
-    EVT_CALL(func_80260DD8)
+    EVT_CALL(DetermineAutoRunAwaySuccess)
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(SetFledBattleFlag)
         EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_15E)
@@ -1202,7 +1206,7 @@ EvtScript EVS_RunAwayStart = {
     EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_CALL(func_80273444, 8, 0, 0)
     EVT_CALL(GetActionSuccess, LVar0)
-    EVT_CALL(func_80260DD8)
+    EVT_CALL(DetermineAutoRunAwaySuccess)
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(SetFledBattleFlag)
         EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_15E)
@@ -1442,7 +1446,7 @@ EvtScript EVS_UseLifeShroom = {
             EVT_CALL(SetPartAlpha, ACTOR_PARTNER, -1, 0)
         EVT_END_IF
     EVT_END_CHILD_THREAD
-    EVT_CALL(func_802610CC)
+    EVT_CALL(LifeShroomShroudWorld)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_CALL(MakeItemEntity, ITEM_LIFE_SHROOM, LVar0, LVar1, LVar2, 1, 0)
     EVT_SET(LVarA, LVar0)
@@ -1510,7 +1514,7 @@ EvtScript EVS_UseLifeShroom = {
     EVT_END_CHILD_THREAD
     EVT_WAIT(50)
     EVT_CHILD_THREAD
-        EVT_CALL(func_80261164)
+        EVT_CALL(LifeShroomRevealWorld)
     EVT_END_CHILD_THREAD
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_374)
     EVT_CALL(SetActorRotation, ACTOR_PLAYER, 0, 0, 0)
@@ -1840,7 +1844,7 @@ EvtScript EVS_PlayerRegainAbility = {
     EVT_ADD(LVar1, 20)
     EVT_PLAY_EFFECT(EFFECT_STARS_SHIMMER, 0, LVar0, LVar1, LVar2, 30, 30, 10, 30)
     EVT_CALL(RemoveItemEntity, LVarA)
-    EVT_CALL(func_8026BF48, 0)
+    EVT_CALL(FreezeBattleState, FALSE)
     EVT_RETURN
     EVT_END
 };

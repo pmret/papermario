@@ -29,7 +29,7 @@ void action_update_hit_fire(void) {
         ReturnAngle = atan2(playerStatus->position.x, playerStatus->position.z, playerStatus->lastGoodPosition.x, playerStatus->lastGoodPosition.z);
         playerStatus->currentSpeed = get_xz_dist_to_player(playerStatus->lastGoodPosition.x, playerStatus->lastGoodPosition.z) / 18.0f;
         subtract_hp(1);
-        open_status_menu_long();
+        open_status_bar_long();
         gOverrideFlags |= GLOBAL_OVERRIDES_40;
     }
 
