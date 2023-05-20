@@ -502,7 +502,7 @@ f32 rand_float(void) {
 }
 
 // return a random integer [0,max]
-s32 func_80029994(u32 max) {
+s32 rand_int_internal(u32 max) {
     u32 partition_size = 0xFFFFFFFF;
     u32 max_plus_one = max + 1;
     u32 result;
@@ -535,14 +535,14 @@ s32 rand_int(s32 max) {
             case 1:
                 // due to the off-by-one input of 1000 and the > operator being used,
                 // there is a 501/1001 chance of returning 0 and a 500/1001 chance of returning 1
-                // (assuming statistical randomness of func_80029994).
-                ret = func_80029994(1000) > 500;
+                // (assuming statistical randomness of rand_int_internal).
+                ret = rand_int_internal(1000) > 500;
                 break;
             default:
-                ret = func_80029994(max);
+                ret = rand_int_internal(max);
                 break;
             case 100:
-                ret = func_80029994(1009) / 10;
+                ret = rand_int_internal(1009) / 10;
                 break;
         }
     }
