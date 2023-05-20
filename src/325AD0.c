@@ -2,7 +2,7 @@
 #include "effects.h"
 #include "nu/nusys.h"
 
-u32 gfx_prng_seed = 0x1E6D3457;
+u32 effect_prng_seed = 0x1E6D3457;
 
 void* effectFuncs[] = {
     guRotateF, guTranslateF, guTranslate, guScaleF, guMtxCatF, guMtxF2L, guMtxL2F, queue_render_task,
@@ -35,14 +35,14 @@ s32 D_E0200734[128] = {
 // very simple 'random' number generator that mutates a single value in memory
 // prng implementation is identical to that of guRandom
 u32 effect_rand_int(s32 max) {
-    u32 seed = (gfx_prng_seed << 2) + 2;
+    u32 seed = (effect_prng_seed << 2) + 2;
 
     seed *= (seed + 1);
     seed = seed >> 2;
 
-    gfx_prng_seed = seed;
+    effect_prng_seed = seed;
 
-    return gfx_prng_seed % (max + 1);
+    return effect_prng_seed % (max + 1);
 }
 
 // very simple 'random' number generator using a LUT
