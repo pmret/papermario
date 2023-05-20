@@ -14,12 +14,12 @@ Gfx* D_E008AA50[] = { D_09000D50_38DDC0, D_09000D50_38DDC0 };
 void func_E008A000(SnowfallFXData* data) {
     Camera* camera = &gCameras[gCurrentCameraID];
 
-    data->unk_08 = (camera->lookAt_eye.x + func_E0200000(2000)) - 1000.0f;
-    data->unk_0C = (camera->lookAt_eye.y + func_E0200000(2000)) - 1000.0f;
-    data->unk_10 = (camera->lookAt_eye.z + func_E0200000(2000)) - 1000.0f;
-    data->unk_14 = (func_E0200000(20) - 10.0f) * 0.05;
-    data->unk_18 = -1.2 - (func_E0200000(80) * 0.01);
-    data->unk_1C = (func_E0200000(20) - 10.0f) * 0.05;
+    data->unk_08 = (camera->lookAt_eye.x + gfx_rand(2000)) - 1000.0f;
+    data->unk_0C = (camera->lookAt_eye.y + gfx_rand(2000)) - 1000.0f;
+    data->unk_10 = (camera->lookAt_eye.z + gfx_rand(2000)) - 1000.0f;
+    data->unk_14 = (gfx_rand(20) - 10.0f) * 0.05;
+    data->unk_18 = -1.2 - (gfx_rand(80) * 0.01);
+    data->unk_1C = (gfx_rand(20) - 10.0f) * 0.05;
     data->unk_28 = 255;
 }
 

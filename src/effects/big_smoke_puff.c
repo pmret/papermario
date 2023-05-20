@@ -52,7 +52,7 @@ void big_smoke_puff_main(f32 x, f32 y, f32 z) {
 
     for (i = 0; i < effect->numParts; i++, data++) {
         data->unk_00 = 0;
-        data->unk_02 = data->unk_04 = func_E0200000(6) + 0x10;
+        data->unk_02 = data->unk_04 = gfx_rand(6) + 0x10;
         data->unk_06 = 4;
         data->unk_08 = 0;
         data->x = x;

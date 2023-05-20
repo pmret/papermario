@@ -126,7 +126,7 @@ EffectInstance* confetti_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, 
     temp_fp = shim_rand_int(360);
 
     for (i = 0; i < np; i++, data++) {
-        temp_f30 = sp28 * (func_E0200000(100) * 0.01f);
+        temp_f30 = sp28 * (gfx_rand(100) * 0.01f);
         switch (arg0) {
             case 0:
             case 4:
