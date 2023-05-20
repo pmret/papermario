@@ -34,7 +34,7 @@ s32 D_E0200734[128] = {
 
 // very simple 'random' number generator that mutates a single value in memory
 // prng implementation is identical to that of guRandom
-u32 gfx_rand(s32 max) {
+u32 gfx_rand_int(s32 max) {
     u32 seed = (gfx_prng_seed << 2) + 2;
 
     seed *= (seed + 1);

@@ -46,12 +46,12 @@ void big_snowflakes_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
 
     data++;
     for (i = 1; i < numParts; i++, data++) {
-        data->unk_04 = gfx_rand(10) - 5;
-        data->unk_08 = gfx_rand(10) + 5;
+        data->unk_04 = gfx_rand_int(10) - 5;
+        data->unk_08 = gfx_rand_int(10) + 5;
         data->unk_0C = 10.0f;
-        data->unk_18 = gfx_rand(360);
-        data->unk_20 = gfx_rand(360);
-        data->unk_1C = gfx_rand(100) / 10;
+        data->unk_18 = gfx_rand_int(360);
+        data->unk_20 = gfx_rand_int(360);
+        data->unk_1C = gfx_rand_int(100) / 10;
         data->unk_10 = 0;
         data->unk_14 = 2.0f;
     }

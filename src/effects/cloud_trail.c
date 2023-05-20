@@ -46,12 +46,12 @@ void cloud_trail_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
         part->alpha = -1;
         part->unk_28 = (shim_rand_int(10) * 0.03) + 1.4;
         part->unk_2C = (shim_rand_int(10) * 0.03) + 1.5;
-        part->unk_30 = gfx_rand(60);
+        part->unk_30 = gfx_rand_int(60);
         part->unk_04 = arg0;
         part->lifetime = 15;
         part->unk_38 = 2.0f;
         part->unk_3C = -0.5f;
-        part->unk_18 = gfx_rand(360);
+        part->unk_18 = gfx_rand_int(360);
         part->alpha = -1;
     }
 }
