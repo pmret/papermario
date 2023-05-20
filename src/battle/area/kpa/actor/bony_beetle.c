@@ -94,7 +94,7 @@ s32 N(DefenseTable)[] = {
     ELEMENT_END,
 };
 
-s32 N(DefenseTable_flipped)[] = {
+s32 N(DefenseTable_Flipped)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
@@ -336,7 +336,7 @@ EvtScript N(handleEvent_normal) = {
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, 0, -8)
             EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -3, 21)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_FLIP_TRIGGERED), 1)
-            EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefenseTable_flipped)))
+            EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefenseTable_Flipped)))
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_flipped)))
             EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_SPIKY_TOP, FALSE)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, TRUE)
@@ -558,7 +558,7 @@ EvtScript N(handleEvent_spiky) = {
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, 0, -8)
             EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -3, 21)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_FLIP_TRIGGERED), 1)
-            EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefenseTable_flipped)))
+            EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefenseTable_Flipped)))
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_spiky_flipped)))
             EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_SPIKY_TOP, FALSE)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, TRUE)
@@ -866,7 +866,7 @@ EvtScript N(8021B7C8) = {
     EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_STATE), N(STATE_FLIPPED))
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_FLIP_TRIGGERED), 1)
-    EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefenseTable_flipped)))
+    EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefenseTable_Flipped)))
     EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_flipped)))
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, FALSE)
     EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, 0, -8)
@@ -935,7 +935,7 @@ EvtScript N(handleEvent_flipped) = {
             EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -3, 21)
             EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 20)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_FLIP_TRIGGERED), 1)
-            EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefenseTable_flipped)))
+            EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefenseTable_Flipped)))
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_flipped)))
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim1A)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, TRUE)
@@ -1067,7 +1067,7 @@ EvtScript N(handleEvent_spiky_flipped) = {
             EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -3, 21)
             EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 20)
             EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_FLIP_TRIGGERED), 1)
-            EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefenseTable_flipped)))
+            EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefenseTable_Flipped)))
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_spiky_flipped)))
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim1B)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, TRUE)

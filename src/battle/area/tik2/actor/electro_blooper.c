@@ -870,8 +870,8 @@ EvtScript N(charge) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, LVarF)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_35C)
     EVT_CALL(SetPartEventFlags, ACTOR_SELF, PRT_2, ACTOR_EVENT_FLAG_ATTACK_CHARGED | ACTOR_EVENT_FLAG_ELECTRIFIED)
-    EVT_CALL(func_8026ED20, ACTOR_SELF, 1, 1)
-    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, 1, PAL_ADJUST_STATIC)
+    EVT_CALL(func_8026ED20, ACTOR_SELF, PRT_MAIN, 1)
+    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, PAL_ADJUST_STATIC)
     EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(StatusTable_charged)))
     EVT_RETURN
     EVT_END
@@ -890,7 +890,7 @@ EvtScript N(discharge) = {
         EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
     EVT_END_IF
     EVT_CALL(SetPartEventFlags, ACTOR_SELF, PRT_2, 0)
-    EVT_CALL(func_8026ED20, ACTOR_SELF, 1, 0)
+    EVT_CALL(func_8026ED20, ACTOR_SELF, PRT_MAIN, 0)
     EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(StatusTable)))
     EVT_RETURN
     EVT_END

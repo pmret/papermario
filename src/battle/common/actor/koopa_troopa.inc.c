@@ -4,6 +4,12 @@
 #include "script_api/battle.h"
 #include "sprite/npc/KoopaTroopa.h"
 
+extern EvtScript N(init);
+extern EvtScript N(idle);
+extern EvtScript N(takeTurn);
+extern EvtScript N(handleEvent);
+extern s32 N(IdleAnimations)[];
+
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };
@@ -17,7 +23,7 @@ s32 N(DefenseTable)[] = {
     ELEMENT_END,
 };
 
-s32 N(DefenseTable_flipped)[] = {
+s32 N(DefenseTable_Flipped)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
@@ -46,9 +52,6 @@ s32 N(StatusTable)[] = {
     STATUS_TURN_MOD_STOP,           0,
     STATUS_END,
 };
-
-extern s32 N(IdleAnimations)[];
-extern EvtScript N(init);
 
 ActorPartBlueprint N(ActorParts)[] = {
     {
@@ -126,10 +129,6 @@ s32 N(IdleAnimations_flipped)[] = {
     STATUS_KEY_FEAR,      ANIM_KoopaTroopa_ToppleStunned,
     STATUS_END,
 };
-
-extern EvtScript N(takeTurn);
-extern EvtScript N(idle);
-extern EvtScript N(handleEvent);
 
 EvtScript N(init) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
@@ -286,7 +285,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_EQ(EVENT_FLIP_TRIGGER)
             EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
             EVT_CALL(SetActorVar, ACTOR_SELF, 9, 2)
-            EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefenseTable_flipped)))
+            EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefenseTable_Flipped)))
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_flipped)))
             EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -5, 15)
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, 0, 0)

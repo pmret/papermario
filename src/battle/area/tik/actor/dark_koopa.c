@@ -26,7 +26,7 @@ s32 N(DefenseTable)[] = {
     ELEMENT_END,
 };
 
-s32 N(DefenseTable_flipped)[] = {
+s32 N(DefenseTable_Flipped)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
@@ -399,7 +399,7 @@ EvtScript N(handleEvent) = {
                     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 3)
             EVT_END_SWITCH
             EVT_CALL(SetActorVar, ACTOR_SELF, 9, 1)
-            EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefenseTable_flipped)))
+            EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefenseTable_Flipped)))
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_flipped)))
             EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -5, 15)
             EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, 0, 0)

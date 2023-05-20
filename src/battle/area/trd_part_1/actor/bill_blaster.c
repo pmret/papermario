@@ -204,7 +204,7 @@ EvtScript N(EVS_TakeTurn) = {
 };
 
 API_CALLABLE(N(SetBulletInitVars)) {
-    N(BulletBillSummon)[0].var0 = 1;
+    N(BulletBillSummon)[0].var0 = TRUE;
     N(BulletBillSummon)[0].var1 = script->owner1.actorID;
 
     return ApiStatus_DONE2;

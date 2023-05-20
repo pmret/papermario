@@ -421,7 +421,7 @@ EvtScript N(watt_takeTurn) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleWatt_Idle)
-    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, 1, PAL_ADJUST_WATT_IDLE)
+    EVT_CALL(SetActorPaletteEffect, ACTOR_SELF, PRT_MAIN, PAL_ADJUST_WATT_IDLE)
     EVT_CALL(AddBattleCamZoom, 75)
     EVT_CALL(MoveBattleCamOver, 5)
     EVT_THREAD

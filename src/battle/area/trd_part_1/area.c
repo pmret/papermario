@@ -154,9 +154,9 @@ Formation A(Formation_16) = {
     ACTOR_BY_IDX(A(bob_omb), BTL_POS_GROUND_C, 8),
 };
 
-Vec3i A(BlasterPos1) = { 50, 0, -20, };
-Vec3i A(BlasterPos2) = { 80, 0, 0, };
-Vec3i A(BlasterPos3) = { 110, 0, 20, };
+Vec3i A(BlasterPos1) = { 50, 0, -20 };
+Vec3i A(BlasterPos2) = { 80, 0, 0 };
+Vec3i A(BlasterPos3) = { 110, 0, 20 };
 
 Formation A(Formation_17) = {
     ACTOR_BY_POS(A(bill_blaster), A(BlasterPos1), 10),

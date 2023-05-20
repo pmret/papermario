@@ -7,8 +7,8 @@
 extern s32 N(IdleAnimations_80223D70)[];
 extern s32 N(IdleAnimations_80223DBC)[];
 extern s32 N(IdleAnimations_80223E08)[];
-extern EvtScript N(init_80225F58);
-extern EvtScript N(init_80225FBC);
+extern EvtScript N(EVS_Init_Ground);
+extern EvtScript N(EVS_Init_Flying);
 extern EvtScript N(takeTurn_802274E4);
 extern EvtScript N(run_away);
 
@@ -28,7 +28,7 @@ s32 N(DefenseTable_80223B2C)[] = {
     ELEMENT_END,
 };
 
-s32 N(StatusTable_80223B38)[] = {
+s32 N(StatusTable_Ground)[] = {
     STATUS_KEY_NORMAL,              0,
     STATUS_KEY_DEFAULT,             0,
     STATUS_KEY_SLEEP,              50,
@@ -53,7 +53,7 @@ s32 N(StatusTable_80223B38)[] = {
     STATUS_END,
 };
 
-s32 N(StatusTable_80223BE4)[] = {
+s32 N(StatusTable_Flying)[] = {
     STATUS_KEY_NORMAL,              0,
     STATUS_KEY_DEFAULT,             0,
     STATUS_KEY_SLEEP,              50,
@@ -78,7 +78,7 @@ s32 N(StatusTable_80223BE4)[] = {
     STATUS_END,
 };
 
-ActorPartBlueprint N(ActorParts_80223C90)[] = {
+ActorPartBlueprint N(GroundParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
         .index = PRT_MAIN,
@@ -93,7 +93,7 @@ ActorPartBlueprint N(ActorParts_80223C90)[] = {
     },
 };
 
-ActorPartBlueprint N(ActorParts_80223CB4)[] = {
+ActorPartBlueprint N(FlyingParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET,
         .index = PRT_MAIN,
@@ -137,10 +137,10 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_WHITE_MAGIKOOPA,
     .level = 21,
     .maxHP = 11,
-    .partCount = ARRAY_COUNT( N(ActorParts_80223C90)),
-    .partsData = N(ActorParts_80223C90),
-    .initScript = &N(init_80225F58),
-    .statusTable = N(StatusTable_80223B38),
+    .partCount = ARRAY_COUNT( N(GroundParts)),
+    .partsData = N(GroundParts),
+    .initScript = &N(EVS_Init_Ground),
+    .statusTable = N(StatusTable_Ground),
     .escapeChance = 40,
     .airLiftChance = 80,
     .hurricaneChance = 70,
@@ -160,10 +160,10 @@ ActorBlueprint N(flying) = {
     .type = ACTOR_TYPE_FLYING_WHITE_MAGIKOOPA,
     .level = 21,
     .maxHP = 11,
-    .partCount = ARRAY_COUNT( N(ActorParts_80223CB4)),
-    .partsData = N(ActorParts_80223CB4),
-    .initScript = &N(init_80225FBC),
-    .statusTable = N(StatusTable_80223BE4),
+    .partCount = ARRAY_COUNT( N(FlyingParts)),
+    .partsData = N(FlyingParts),
+    .initScript = &N(EVS_Init_Flying),
+    .statusTable = N(StatusTable_Flying),
     .escapeChance = 40,
     .airLiftChance = 95,
     .hurricaneChance = 75,
@@ -404,7 +404,7 @@ EvtScript N(knockOff) = {
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, FALSE)
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80223E24)))
     EVT_CALL(SetActorType, ACTOR_SELF, ACTOR_TYPE_WHITE_MAGIKOOPA)
-    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(StatusTable_80223B38)))
+    EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(StatusTable_Ground)))
     EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 32)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_TYPE_CHANGED, TRUE)
     EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
@@ -764,7 +764,7 @@ EvtScript N(run_away) = {
     EVT_END
 };
 
-EvtScript N(init_80225F58) = {
+EvtScript N(EVS_Init_Ground) = {
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80223E14)))
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_802274E4)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80223E24)))
@@ -773,7 +773,7 @@ EvtScript N(init_80225F58) = {
     EVT_END
 };
 
-EvtScript N(init_80225FBC) = {
+EvtScript N(EVS_Init_Flying) = {
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle_80223E14)))
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn_802274E4)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent_80224A44)))
