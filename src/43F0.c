@@ -489,7 +489,7 @@ void dma_write_block(Addr dramAddr, u32 devAddr, s32 size) {
 
 // advance the global RNG via LCG algorithm and return a random integer [0,2^32)
 u32 advance_rng(void) {
-    gRandSeed = (gRandSeed * 0x5D588B65) + 1;
+    gRandSeed = gRandSeed * 0x5D588B65 + 1;
 
     gGameStatusPtr->nextRNG = gRandSeed;
 
