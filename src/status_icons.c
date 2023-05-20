@@ -365,28 +365,28 @@ void update_all_status_icons(void* data) {
 
         if (icon->status1.activeTask == STATUS_ICON_TASK_LOAD) {
             switch (icon->status1.active) {
-                case STATUS_SLEEP:
+                case STATUS_KEY_SLEEP:
                     elementID = icon->status1.activeElementID = hud_element_create(&HES_AsleepBegin);
                     break;
-                case STATUS_PARALYZE:
+                case STATUS_KEY_PARALYZE:
                     elementID = icon->status1.activeElementID = hud_element_create(&HES_ParalyzedBegin);
                     break;
-                case STATUS_DIZZY:
+                case STATUS_KEY_DIZZY:
                     elementID = icon->status1.activeElementID = hud_element_create(&HES_DizzyBegin);
                     break;
-                case STATUS_FEAR:
+                case STATUS_KEY_FEAR:
                     elementID = icon->status1.activeElementID = hud_element_create(&HES_WeakenedLoop);
                     break;
-                case STATUS_STOP:
+                case STATUS_KEY_STOP:
                     elementID = icon->status1.activeElementID = hud_element_create(&HES_StoppedBegin);
                     break;
-                case STATUS_POISON:
+                case STATUS_KEY_POISON:
                     elementID = icon->status1.activeElementID = hud_element_create(&HES_PoisonedBegin);
                     break;
-                case STATUS_SHRINK:
+                case STATUS_KEY_SHRINK:
                     elementID = icon->status1.activeElementID = hud_element_create(&HES_ShrunkBegin);
                     break;
-                case STATUS_FROZEN:
+                case STATUS_KEY_FROZEN:
                     elementID = icon->status1.activeElementID = hud_element_create(&HES_FrozenBegin);
                     break;
                 default:
@@ -403,28 +403,28 @@ void update_all_status_icons(void* data) {
                 break;
             case STATUS_ICON_TASK_LOAD:
                 switch (icon->status1.removing) {
-                    case STATUS_SLEEP:
+                    case STATUS_KEY_SLEEP:
                         hud_element_set_script(icon->status1.removingElementID, &HES_AsleepEnd);
                         break;
-                    case STATUS_PARALYZE:
+                    case STATUS_KEY_PARALYZE:
                         hud_element_set_script(icon->status1.removingElementID, &HES_ParalyzedEnd);
                         break;
-                    case STATUS_DIZZY:
+                    case STATUS_KEY_DIZZY:
                         hud_element_set_script(icon->status1.removingElementID, &HES_DizzyEnd);
                         break;
-                    case STATUS_FEAR:
+                    case STATUS_KEY_FEAR:
                         hud_element_set_script(icon->status1.removingElementID, &HES_WeakenedLoop);
                         break;
-                    case STATUS_STOP:
+                    case STATUS_KEY_STOP:
                         hud_element_set_script(icon->status1.removingElementID, &HES_StoppedEnd);
                         break;
-                    case STATUS_POISON:
+                    case STATUS_KEY_POISON:
                         hud_element_set_script(icon->status1.removingElementID, &HES_PoisonedEnd);
                         break;
-                    case STATUS_SHRINK:
+                    case STATUS_KEY_SHRINK:
                         hud_element_set_script(icon->status1.removingElementID, &HES_ShrunkEnd);
                         break;
-                    case STATUS_FROZEN:
+                    case STATUS_KEY_FROZEN:
                         hud_element_set_script(icon->status1.removingElementID, &HES_FrozenEnd);
                         break;
                     default:
@@ -449,7 +449,7 @@ void update_all_status_icons(void* data) {
 
         if (icon->status2.activeTask == STATUS_ICON_TASK_LOAD) {
             switch (icon->status2.active) {
-                case STATUS_STATIC:
+                case STATUS_KEY_STATIC:
                     elementID = icon->status2.activeElementID = hud_element_create(&HES_ElectrifiedBegin);
                     break;
                 default:
@@ -467,7 +467,7 @@ void update_all_status_icons(void* data) {
                 break;
             case STATUS_ICON_TASK_LOAD:
                 switch (icon->status2.removing) {
-                    case STATUS_STATIC:
+                    case STATUS_KEY_STATIC:
                         hud_element_set_script(icon->status2.removingElementID, &HES_ElectrifiedEnd);
                         break;
                     default:
@@ -491,7 +491,7 @@ void update_all_status_icons(void* data) {
 
         if (icon->status3.activeTask == STATUS_ICON_TASK_LOAD) {
             switch (icon->status3.active) {
-                case STATUS_TRANSPARENT:
+                case STATUS_KEY_TRANSPARENT:
                     elementID = icon->status3.activeElementID = hud_element_create(&HES_TransparentBegin);
                     break;
                 default:
@@ -509,7 +509,7 @@ void update_all_status_icons(void* data) {
                 break;
             case STATUS_ICON_TASK_LOAD:
                 switch (icon->status3.removing) {
-                    case STATUS_TRANSPARENT:
+                    case STATUS_KEY_TRANSPARENT:
                         hud_element_set_script(icon->status3.removingElementID, &HES_TransparentEnd);
                         break;
                     default:
@@ -1060,7 +1060,7 @@ void remove_status_debuff(s32 iconID) {
     if (statusIcon->status1.active && !statusIcon->status1.removing) {
         statusIcon->status1.removing = statusIcon->status1.active;
         statusIcon->status1.removingTask = STATUS_ICON_TASK_LOAD;
-        statusIcon->status1.active = STATUS_END;
+        statusIcon->status1.active = 0;
         statusIcon->status1.activeTask = STATUS_ICON_TASK_NONE;
         statusIcon->status1.frameCounter = 10;
         statusIcon->status1.removingElementID = statusIcon->status1.activeElementID;

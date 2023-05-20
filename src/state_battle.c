@@ -86,7 +86,7 @@ void state_step_battle(void) {
             clear_worker_list();
             hud_element_set_aux_cache(NULL, 0);
             hud_element_clear_cache();
-            reset_status_menu();
+            reset_status_bar();
             clear_item_entity_data();
             clear_script_list();
             clear_npcs();

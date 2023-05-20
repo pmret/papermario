@@ -23,40 +23,59 @@ extern EvtScript N(run_away);
 extern EvtScript N(attack);
 extern EvtScript N(run_squad_to_pos);
 
+enum N(ActorPartIDs) {
+    PRT_MAIN            = 1,
+    PRT_2               = 2,
+    PRT_3               = 3,
+    PRT_4               = 4,
+    PRT_5               = 5,
+    PRT_6               = 6,
+    PRT_7               = 7,
+    PRT_8               = 8,
+    PRT_9               = 9,
+    PRT_10              = 10,
+    PRT_11              = 11,
+    PRT_12              = 12,
+    PRT_13              = 13,
+    PRT_14              = 14,
+    PRT_15              = 15,
+    PRT_16              = 16,
+};
+
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
 s32 N(StatusTable)[] = {
-    STATUS_NORMAL, 0,
-    STATUS_DEFAULT, 0,
-    STATUS_SLEEP, 0,
-    STATUS_POISON, 0,
-    STATUS_FROZEN, 0,
-    STATUS_DIZZY, 0,
-    STATUS_FEAR, 0,
-    STATUS_STATIC, 0,
-    STATUS_PARALYZE, 0,
-    STATUS_SHRINK, 0,
-    STATUS_STOP, 0,
-    STATUS_DEFAULT_TURN_MOD, 0,
-    STATUS_SLEEP_TURN_MOD, 0,
-    STATUS_POISON_TURN_MOD, 0,
-    STATUS_FROZEN_TURN_MOD, 0,
-    STATUS_DIZZY_TURN_MOD, 0,
-    STATUS_FEAR_TURN_MOD, 0,
-    STATUS_STATIC_TURN_MOD, 0,
-    STATUS_PARALYZE_TURN_MOD, 0,
-    STATUS_SHRINK_TURN_MOD, 0,
-    STATUS_STOP_TURN_MOD, 0,
+    STATUS_KEY_NORMAL,              0,
+    STATUS_KEY_DEFAULT,             0,
+    STATUS_KEY_SLEEP,               0,
+    STATUS_KEY_POISON,              0,
+    STATUS_KEY_FROZEN,              0,
+    STATUS_KEY_DIZZY,               0,
+    STATUS_KEY_FEAR,                0,
+    STATUS_KEY_STATIC,              0,
+    STATUS_KEY_PARALYZE,            0,
+    STATUS_KEY_SHRINK,              0,
+    STATUS_KEY_STOP,                0,
+    STATUS_TURN_MOD_DEFAULT,        0,
+    STATUS_TURN_MOD_SLEEP,          0,
+    STATUS_TURN_MOD_POISON,         0,
+    STATUS_TURN_MOD_FROZEN,         0,
+    STATUS_TURN_MOD_DIZZY,          0,
+    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_STATIC,         0,
+    STATUS_TURN_MOD_PARALYZE,       0,
+    STATUS_TURN_MOD_SHRINK,         0,
+    STATUS_TURN_MOD_STOP,           0,
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_4 | ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
@@ -68,7 +87,7 @@ ActorPartBlueprint N(parts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
-        .index = 2,
+        .index = PRT_2,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
@@ -80,7 +99,7 @@ ActorPartBlueprint N(parts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
-        .index = 3,
+        .index = PRT_3,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
@@ -92,7 +111,7 @@ ActorPartBlueprint N(parts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
-        .index = 4,
+        .index = PRT_4,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
@@ -104,7 +123,7 @@ ActorPartBlueprint N(parts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
-        .index = 5,
+        .index = PRT_5,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
@@ -116,7 +135,7 @@ ActorPartBlueprint N(parts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
-        .index = 6,
+        .index = PRT_6,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
@@ -128,7 +147,7 @@ ActorPartBlueprint N(parts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
-        .index = 7,
+        .index = PRT_7,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
@@ -140,7 +159,7 @@ ActorPartBlueprint N(parts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
-        .index = 8,
+        .index = PRT_8,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
@@ -152,7 +171,7 @@ ActorPartBlueprint N(parts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
-        .index = 9,
+        .index = PRT_9,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
@@ -164,7 +183,7 @@ ActorPartBlueprint N(parts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
-        .index = 10,
+        .index = PRT_10,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
@@ -176,7 +195,7 @@ ActorPartBlueprint N(parts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
-        .index = 11,
+        .index = PRT_11,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
@@ -188,7 +207,7 @@ ActorPartBlueprint N(parts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
-        .index = 12,
+        .index = PRT_12,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
@@ -200,7 +219,7 @@ ActorPartBlueprint N(parts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
-        .index = 13,
+        .index = PRT_13,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
@@ -212,7 +231,7 @@ ActorPartBlueprint N(parts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
-        .index = 14,
+        .index = PRT_14,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
@@ -224,7 +243,7 @@ ActorPartBlueprint N(parts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
-        .index = 15,
+        .index = PRT_15,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
@@ -236,7 +255,7 @@ ActorPartBlueprint N(parts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_2 | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
-        .index = 16,
+        .index = PRT_16,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
@@ -253,8 +272,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_SHY_SQUAD_DUP,
     .level = 0,
     .maxHP = 15,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
@@ -266,20 +285,20 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 80,
     .coinReward = 0,
     .size = { 30, 30 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 s32 N(IdleAnimations)[] = {
-    STATUS_NORMAL, ANIM_TankGuy_Anim01,
-    STATUS_STOP, ANIM_TankGuy_Anim00,
+    STATUS_KEY_NORMAL,    ANIM_TankGuy_Anim01,
+    STATUS_KEY_STOP,      ANIM_TankGuy_Anim00,
     STATUS_END,
 };
 
 s32 N(IdleAnimations_watt)[] = {
-    STATUS_NORMAL, ANIM_TankGuy_Anim07,
-    STATUS_STOP, ANIM_TankGuy_Anim00,
+    STATUS_KEY_NORMAL,    ANIM_TankGuy_Anim07,
+    STATUS_KEY_STOP,      ANIM_TankGuy_Anim00,
     STATUS_END,
 };
 
@@ -291,96 +310,96 @@ EvtScript N(init) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, 3, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 4, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 15, 0)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 2, 0, -20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 2, 1, -10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 3, 0, -10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 3, 1, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 4, 0, -10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 4, 1, -40)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 5, 0, 0)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 5, 1, 40)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 6, 0, 0)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 6, 1, -10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 7, 0, 10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 7, 1, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 8, 0, 10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 8, 1, -40)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 9, 0, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 9, 1, 40)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 10, 0, 40)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 10, 1, 40)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 11, 0, 50)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 11, 1, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 12, 0, 50)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 12, 1, -40)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 13, 0, 30)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 13, 1, -40)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 14, 0, 40)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 14, 1, -10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 15, 0, 30)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 15, 1, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 16, 0, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 16, 1, -10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 2, 2, -30)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 2, 3, 0)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 3, 2, -20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 3, 3, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 4, 2, -20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 4, 3, -10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 5, 2, -20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 5, 3, 10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 6, 2, -30)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 6, 3, 0)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 7, 2, -20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 7, 3, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 8, 2, -20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 8, 3, -10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 9, 2, 0)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 9, 3, 10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 10, 2, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 10, 3, 10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 11, 2, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 11, 3, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 12, 2, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 12, 3, -10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 13, 2, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 13, 3, -10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 14, 2, 30)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 14, 3, 0)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 15, 2, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 15, 3, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 16, 2, 0)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 16, 3, 0)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 2, 4, -30)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 2, 5, 10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 3, 4, -30)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 3, 5, -10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 4, 4, 30)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 4, 5, 10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 5, 4, 30)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 5, 5, -10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 6, 4, -20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 6, 5, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 7, 4, -20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 7, 5, -20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 8, 4, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 8, 5, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 9, 4, 0)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 9, 5, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 10, 4, 0)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 10, 5, -20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 11, 4, -20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 11, 5, 0)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 12, 4, 10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 12, 5, -10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 13, 4, 10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 13, 5, 10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 14, 4, -10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 14, 5, -10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 15, 4, -10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 15, 5, 10)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 16, 4, 20)
-    EVT_CALL(SetPartMovementVar, ACTOR_SELF, 16, 5, 0)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_2, 0, -20)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_2, 1, -10)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_3, 0, -10)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_3, 1, 20)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_4, 0, -10)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_4, 1, -40)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_5, 0, 0)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_5, 1, 40)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_6, 0, 0)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_6, 1, -10)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_7, 0, 10)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_7, 1, 20)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_8, 0, 10)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_8, 1, -40)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_9, 0, 20)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_9, 1, 40)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_10, 0, 40)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_10, 1, 40)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_11, 0, 50)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_11, 1, 20)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_12, 0, 50)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_12, 1, -40)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_13, 0, 30)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_13, 1, -40)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_14, 0, 40)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_14, 1, -10)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_15, 0, 30)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_15, 1, 20)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_16, 0, 20)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_16, 1, -10)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_2, 2, -30)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_2, 3, 0)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_3, 2, -20)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_3, 3, 20)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_4, 2, -20)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_4, 3, -10)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_5, 2, -20)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_5, 3, 10)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_6, 2, -30)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_6, 3, 0)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_7, 2, -20)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_7, 3, 20)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_8, 2, -20)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_8, 3, -10)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_9, 2, 0)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_9, 3, 10)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_10, 2, 20)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_10, 3, 10)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_11, 2, 20)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_11, 3, 20)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_12, 2, 20)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_12, 3, -10)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_13, 2, 20)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_13, 3, -10)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_14, 2, 30)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_14, 3, 0)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_15, 2, 20)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_15, 3, 20)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_16, 2, 0)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_16, 3, 0)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_2, 4, -30)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_2, 5, 10)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_3, 4, -30)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_3, 5, -10)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_4, 4, 30)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_4, 5, 10)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_5, 4, 30)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_5, 5, -10)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_6, 4, -20)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_6, 5, 20)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_7, 4, -20)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_7, 5, -20)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_8, 4, 20)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_8, 5, 20)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_9, 4, 0)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_9, 5, 20)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_10, 4, 0)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_10, 5, -20)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_11, 4, -20)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_11, 5, 0)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_12, 4, 10)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_12, 5, -10)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_13, 4, 10)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_13, 5, 10)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_14, 4, -10)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_14, 5, -10)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_15, 4, -10)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_15, 5, 10)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_16, 4, 20)
+    EVT_CALL(SetPartMovementVar, ACTOR_SELF, PRT_16, 5, 0)
     EVT_SET(LVar0, 2)
     EVT_LOOP(15)
         EVT_CALL(SetPartPos, ACTOR_SELF, LVar0, 185, 0, 47)
@@ -426,14 +445,14 @@ EvtScript N(idle) = {
     EVT_LABEL(0)
     EVT_CALL(GetCurrentPartnerID, LVar0)
     EVT_IF_EQ(LVar0, PARTNER_WATT)
-        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_watt)))
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_watt)))
         EVT_SET(LVar0, 2)
         EVT_LOOP(15)
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, LVar0, EVT_PTR(N(IdleAnimations_watt)))
             EVT_ADD(LVar0, 1)
         EVT_END_LOOP
     EVT_ELSE
-        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations)))
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations)))
         EVT_SET(LVar0, 2)
         EVT_LOOP(15)
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, LVar0, EVT_PTR(N(IdleAnimations)))
@@ -1006,7 +1025,7 @@ EvtScript N(takeTurn) = {
 };
 
 EvtScript N(next_phase) = {
-    EVT_CALL(func_8026BF48, 1)
+    EVT_CALL(FreezeBattleState, TRUE)
     EVT_CALL(SetActorVar, ACTOR_ENEMY1, 4, 1)
     EVT_RETURN
     EVT_END
@@ -1080,9 +1099,9 @@ EvtScript N(attack) = {
     EVT_END_LOOP
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
     EVT_CALL(GetGoalPos, ACTOR_PLAYER, LVar2, LVar5, LVar3)
-    EVT_CALL(GetPartMovementVar, ACTOR_SELF, 2, 4, LVar5)
+    EVT_CALL(GetPartMovementVar, ACTOR_SELF, PRT_2, 4, LVar5)
     EVT_ADD(LVar2, LVar5)
-    EVT_CALL(GetPartMovementVar, ACTOR_SELF, 2, 5, LVar5)
+    EVT_CALL(GetPartMovementVar, ACTOR_SELF, PRT_2, 5, LVar5)
     EVT_ADD(LVar3, LVar5)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar2, 0, LVar3)
     EVT_CALL(RunToGoal, ACTOR_SELF, 30, FALSE)
@@ -1200,9 +1219,9 @@ EvtScript N(run_squad_to_pos) = {
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar2, LVar5, LVar3)
-    EVT_CALL(GetPartMovementVar, ACTOR_SELF, 2, 4, LVar5)
+    EVT_CALL(GetPartMovementVar, ACTOR_SELF, PRT_2, 4, LVar5)
     EVT_ADD(LVar2, LVar5)
-    EVT_CALL(GetPartMovementVar, ACTOR_SELF, 2, 5, LVar5)
+    EVT_CALL(GetPartMovementVar, ACTOR_SELF, PRT_2, 5, LVar5)
     EVT_ADD(LVar3, LVar5)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar2, 0, LVar3)
     EVT_CALL(RunToGoal, ACTOR_SELF, 30, FALSE)

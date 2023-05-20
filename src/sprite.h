@@ -4,6 +4,7 @@
 #include "common.h"
 
 #define SPR_PLAYER_COLOR_VARIATIONS 6
+#define SPR_PEACH_BTL_PAL_STRIDE 4
 
 enum SpriteIDFields {
     SPRITE_ID_ANIM_MASK         = 0x000000FF,

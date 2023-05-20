@@ -101,7 +101,7 @@ EvtScript N(EVS_JumpSupport_D) = {
 };
 
 EvtScript N(EVS_JumpSupport_E) = {
-    EVT_CALL(func_80276EFC)
+    EVT_CALL(PlayerYieldTurn)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, FALSE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(func_802693F0)
@@ -130,7 +130,7 @@ EvtScript N(EVS_JumpSupport_E) = {
 };
 
 EvtScript N(EVS_JumpSupport_F) = {
-    EVT_CALL(func_80276EFC)
+    EVT_CALL(PlayerYieldTurn)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, FALSE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(func_802693F0)
@@ -159,7 +159,7 @@ EvtScript N(EVS_JumpSupport_F) = {
 };
 
 EvtScript N(EVS_JumpSupport_G) = {
-    EVT_CALL(func_80276EFC)
+    EVT_CALL(PlayerYieldTurn)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, FALSE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_29)
     EVT_CALL(func_802693F0)
@@ -188,7 +188,7 @@ EvtScript N(EVS_JumpSupport_G) = {
 };
 
 EvtScript N(EVS_JumpSupport_H) = {
-    EVT_CALL(func_80276EFC)
+    EVT_CALL(PlayerYieldTurn)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, FALSE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(func_802693F0)
@@ -217,7 +217,7 @@ EvtScript N(EVS_JumpSupport_H) = {
 };
 
 EvtScript N(EVS_JumpSupport_I) = {
-    EVT_CALL(func_80276EFC)
+    EVT_CALL(PlayerYieldTurn)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, FALSE)
     EVT_CALL(EnablePlayerBlur, -1)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
@@ -269,7 +269,7 @@ EvtScript N(EVS_JumpSupport_Miss) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(func_802693F0)
     EVT_CALL(EnablePlayerBlur, -1)
-    EVT_CALL(func_80276EFC)
+    EVT_CALL(PlayerYieldTurn)
     EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(8.0))
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Run)

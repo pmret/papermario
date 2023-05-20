@@ -4,7 +4,7 @@
 
 #define NAMESPACE b_area_kmr_part_3_kmr_05
 
-#include "world/common/todo/clouds.inc.c"
+#include "battle/common/stage/MovingClouds.inc.c"
 
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)

@@ -17,26 +17,26 @@ extern Stage N(sam_03);
 Vec3i N(80223490) = { 75, 16, 5 };
 
 Formation N(Formation_01) = {
-    { .actor = &N(monstar), .home = { .vec = &N(80223490) }, .priority = 10 },
+    ACTOR_BY_POS(N(monstar), N(80223490), 10),
 };
 
 Formation N(Formation_02) = {
-    { .actor = &N(paragoomba), .home = { .index = 5 }, .priority = 10 },
-    { .actor = &N(gray_magikoopa), .home = { .index = 2 }, .priority = 9 },
+    ACTOR_BY_IDX(N(paragoomba), BTL_POS_AIR_B, 10),
+    ACTOR_BY_IDX(N(gray_magikoopa), BTL_POS_GROUND_C, 9),
 };
 
 BattleList N(Formations) = {
-    BATTLE(N(Formation_01), &N(sam_03), "かいぶつ"),
-    BATTLE(N(Formation_02), &N(sam_01), "パタクリ,グレイカメック（チェックよう）"),
+    BATTLE(N(Formation_01), N(sam_03), "かいぶつ"),
+    BATTLE(N(Formation_02), N(sam_01), "パタクリ,グレイカメック（チェックよう）"),
     {},
 };
 
 StageList N(Stages) = {
-    { "sam_01", &N(sam_01) },
-    { "sam_02", &N(sam_02) },
-    { "sam_02b", &N(sam_02b) },
-    { "sam_02c", &N(sam_02c) },
-    { "sam_02d", &N(sam_02d) },
-    { "sam_03", &N(sam_03) },
+    STAGE("sam_01", N(sam_01)),
+    STAGE("sam_02", N(sam_02)),
+    STAGE("sam_02b", N(sam_02b)),
+    STAGE("sam_02c", N(sam_02c)),
+    STAGE("sam_02d", N(sam_02d)),
+    STAGE("sam_03", N(sam_03)),
     {},
 };

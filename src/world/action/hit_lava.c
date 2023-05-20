@@ -46,7 +46,7 @@ void action_update_hit_lava(void) {
         gCameras[CAM_DEFAULT].moveFlags |= (CAMERA_MOVE_IGNORE_PLAYER_Y | CAMERA_MOVE_FLAG_2);
         LaunchInterpPhase = 90.0f;
         subtract_hp(1);
-        open_status_menu_long();
+        open_status_bar_long();
         gOverrideFlags |= GLOBAL_OVERRIDES_40;
         sfx_play_sound_at_player(SOUND_E8, SOUND_SPACE_MODE_0);
     }

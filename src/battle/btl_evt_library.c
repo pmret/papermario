@@ -1007,7 +1007,7 @@ EvtScript EVS_Player_NextSlapLeft_Impl = {
 
 EvtScript EVS_Player_LastSlapRight_Impl = {
     EVT_CHILD_THREAD
-        EVT_CALL(MakeLerp, 0, 2160, 60, 10)
+        EVT_CALL(MakeLerp, 0, 0x00000870, 60, EASING_COS_IN_OUT)
         EVT_LABEL(1)
         EVT_CALL(UpdateLerp)
         EVT_CALL(SetActorYaw, ACTOR_SELF, LVar0)
@@ -1025,7 +1025,7 @@ EvtScript EVS_Player_LastSlapRight_Impl = {
 
 EvtScript EVS_Player_LastSlapLeft_Impl = {
     EVT_CHILD_THREAD
-        EVT_CALL(MakeLerp, 2160, 0, 60, 10)
+        EVT_CALL(MakeLerp, 0x00000870, 0, 60, EASING_COS_IN_OUT)
         EVT_LABEL(1)
         EVT_CALL(UpdateLerp)
         EVT_CALL(SetActorYaw, ACTOR_SELF, LVar0)
@@ -1103,7 +1103,7 @@ EvtScript EVS_Player_NoDamageHit = {
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(GetStatusFlags, ACTOR_PLAYER, LVar0)
-    EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+    EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, LVar1)
     EVT_END_IF
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, -2, 0, 0)
@@ -1151,7 +1151,7 @@ EvtScript EVS_ForceNextTarget = {
                 EVT_RETURN
             EVT_END_IF
         EVT_END_IF
-        EVT_CALL(ChooseNextTarget, 0, LVar0)
+        EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
         EVT_IF_NE(LVar0, -1)
             EVT_GOTO(0)
         EVT_END_IF
@@ -1165,7 +1165,7 @@ EvtScript EVS_ForceNextTarget = {
                 EVT_RETURN
             EVT_END_IF
         EVT_END_IF
-        EVT_CALL(ChooseNextTarget, 0, LVar0)
+        EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
         EVT_IF_NE(LVar0, -1)
             EVT_GOTO(1)
         EVT_END_IF
@@ -1173,8 +1173,8 @@ EvtScript EVS_ForceNextTarget = {
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(2)
         EVT_CALL(GetOwnerTarget, LVar0, LVar1)
-        EVT_CALL(SetActorFlagBits, LVar0, ACTOR_FLAG_NO_ATTACK | ACTOR_FLAG_NO_DMG_APPLY, 1)
-        EVT_CALL(ChooseNextTarget, 0, LVar0)
+        EVT_CALL(SetActorFlagBits, LVar0, ACTOR_FLAG_NO_ATTACK | ACTOR_FLAG_NO_DMG_APPLY, TRUE)
+        EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
         EVT_IF_NE(LVar0, -1)
             EVT_GOTO(2)
         EVT_END_IF
@@ -1289,7 +1289,7 @@ EvtScript EVS_Enemy_Hit = {
                 EVT_EXEC(EVS_Enemy_FanSmack_Impl)
             EVT_END_IF
             EVT_CHILD_THREAD
-                EVT_CALL(MakeLerp, 0, 2160, 60, 10)
+                EVT_CALL(MakeLerp, 0, 0x00000870, 60, EASING_COS_IN_OUT)
                 EVT_LABEL(0)
                 EVT_CALL(UpdateLerp)
                 EVT_CALL(SetActorYaw, ACTOR_SELF, LVar0)
@@ -1324,7 +1324,7 @@ EvtScript EVS_Enemy_Hit = {
                 EVT_EXEC(EVS_Enemy_FanSmack_Impl)
             EVT_END_IF
             EVT_CHILD_THREAD
-                EVT_CALL(MakeLerp, 2160, 0, 60, 10)
+                EVT_CALL(MakeLerp, 0x00000870, 0, 60, EASING_COS_IN_OUT)
                 EVT_LABEL(1)
                 EVT_CALL(UpdateLerp)
                 EVT_CALL(SetActorYaw, ACTOR_SELF, LVar0)
@@ -1491,7 +1491,7 @@ EvtScript EVS_Enemy_Hit_Impl = {
 EvtScript EVS_Enemy_BurnHit = {
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar3)
     EVT_IF_EQ(LVar3, EVENT_BURN_DEATH)
-        EVT_CALL(EnableActorGlow, ACTOR_SELF, 0)
+        EVT_CALL(EnableActorGlow, ACTOR_SELF, FALSE)
     EVT_END_IF
     EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
     EVT_CALL(GetDamageSource, LVar3)
@@ -1601,9 +1601,9 @@ EvtScript EVS_Enemy_ShockHit_Impl = {
     EVT_ADDF(LVar1, LVar5)
     EVT_PLAY_EFFECT(EFFECT_FLASHING_BOX_SHOCKWAVE, 0, LVar0, LVar1, LVar2, LVar4, LVar3)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_HIT_SHOCK)
-    EVT_CALL(func_8027D32C, ACTOR_SELF)
+    EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(HPBarToCurrent, ACTOR_SELF)
-    EVT_CALL(func_8027D2D8, ACTOR_SELF)
+    EVT_CALL(ShowHealthBar, ACTOR_SELF)
     EVT_CALL(AddActorPos, ACTOR_SELF, 0, 1, 0)
     EVT_CALL(AddEffectOffset, LVarF, 0, 1, 0)
     EVT_WAIT(1)
@@ -1646,7 +1646,7 @@ EvtScript EVS_Enemy_ShockHit_Impl = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_WAIT(5)
-    EVT_CALL(func_8027D32C, ACTOR_SELF)
+    EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(HPBarToHome, ACTOR_SELF)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_IF_NE(LVar0, EVENT_SHOCK_DEATH)
@@ -1662,7 +1662,7 @@ EvtScript EVS_Enemy_ShockHit_Impl = {
 EvtScript EVS_Enemy_NoDamageHit = {
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar2)
-    EVT_IF_NOT_FLAG(LVar2, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+    EVT_IF_NOT_FLAG(LVar2, STATUS_FLAGS_IMMOBILIZED)
         EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
     EVT_END_IF
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, -2, 0, 0)
@@ -1702,11 +1702,11 @@ EvtScript EVS_Enemy_Death = {
     EVT_END
 };
 
-// in LVar2: if set to -12345, the actor will not spin around
+// in LVar2: if set to EXEC_DEATH_NO_SPINNING, the actor will not spin around
 EvtScript EVS_Enemy_DeathWithoutRemove = {
-    EVT_CALL(func_8027D32C, ACTOR_SELF)
+    EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableActorGlow, ACTOR_SELF, 0)
+    EVT_CALL(EnableActorGlow, ACTOR_SELF, FALSE)
     EVT_IF_NE(LVar1, -1)
         EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
         EVT_WAIT(10)
@@ -1733,7 +1733,7 @@ EvtScript EVS_Enemy_DeathWithoutRemove = {
                 EVT_END_CASE_GROUP
                 EVT_CASE_DEFAULT
             EVT_END_SWITCH
-            EVT_IF_NE(LVar2, -12345) // special signal value
+            EVT_IF_NE(LVar2, EXEC_DEATH_NO_SPINNING) // special signal value
                 EVT_SET(LVar2, 0)
                 EVT_LOOP(24)
                     EVT_CALL(SetActorYaw, ACTOR_SELF, LVar2)
@@ -1761,7 +1761,7 @@ EvtScript EVS_Enemy_DeathWithoutRemove = {
 };
 
 EvtScript EVS_Enemy_ScareAway = {
-    EVT_CALL(func_8027D32C, ACTOR_SELF)
+    EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar2)
     EVT_CALL(GetActorFlags, ACTOR_SELF, LVar9)
@@ -1774,11 +1774,11 @@ EvtScript EVS_Enemy_ScareAway = {
         EVT_CALL(JumpToGoal, ACTOR_SELF, 3, FALSE, FALSE, FALSE)
         EVT_WAIT(20)
         EVT_CALL(SetGoalPos, ACTOR_SELF, LVarA, LVarB, LVarC)
-        EVT_CALL(EnableActorGlow, ACTOR_SELF, 0)
+        EVT_CALL(EnableActorGlow, ACTOR_SELF, FALSE)
         EVT_CALL(FallToGoal, ACTOR_SELF, 7)
     EVT_ELSE
         EVT_WAIT(15)
-        EVT_CALL(EnableActorGlow, ACTOR_SELF, 0)
+        EVT_CALL(EnableActorGlow, ACTOR_SELF, FALSE)
     EVT_END_IF
     EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
     EVT_WAIT(17)
@@ -1790,7 +1790,7 @@ EvtScript EVS_Enemy_ScareAway = {
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVarA, LVarB, LVarC)
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
     EVT_EXEC_WAIT(EVS_ForceNextTarget)
-    EVT_CALL(func_8027D32C, ACTOR_SELF)
+    EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(RemoveActor, ACTOR_SELF)
     EVT_RETURN
@@ -1804,11 +1804,11 @@ EvtScript EVS_Enemy_SpinSmash_HitNext = {
         EVT_CALL(GetOwnerID, LVar1)
         EVT_CALL(GetOwnerTarget, LVar0, LVar9)
         EVT_IF_NE(LVar1, LVar0)
-            EVT_CALL(ChooseNextTarget, 0, LVar0)
+            EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
             EVT_GOTO(0)
         EVT_END_IF
     EVT_LABEL(1)
-        EVT_CALL(ChooseNextTarget, 0, LVar0)
+        EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
         EVT_IF_EQ(LVar0, -1)
             EVT_GOTO(10)
         EVT_END_IF
@@ -1828,7 +1828,7 @@ EvtScript EVS_Enemy_SpinSmash_HitNext = {
         EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(7.0))
         EVT_CALL(JumpToGoal, ACTOR_SELF, 0, FALSE, TRUE, FALSE)
         EVT_CHILD_THREAD
-            EVT_CALL(ShakeCam, 1, 0, 2, EVT_FLOAT(1.0))
+            EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(1.0))
         EVT_END_CHILD_THREAD
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
         EVT_CALL(GetOwnerTarget, LVar0, LVar1)
@@ -1841,7 +1841,7 @@ EvtScript EVS_Enemy_SpinSmash_HitNext = {
                 EVT_GOTO(1)
             EVT_END_CASE_GROUP
         EVT_END_SWITCH
-        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, SUPPRESS_EVENT_ALL, 0, 1, BS_FLAGS1_SP_EVT_ACTIVE)
+        EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENT_ALL, 0, 1, BS_FLAGS1_SP_EVT_ACTIVE)
         EVT_GOTO(1)
     // done
     EVT_LABEL(10)
@@ -1877,15 +1877,15 @@ EvtScript EVS_Enemy_SpinSmash_ShakeCam = {
     EVT_SWITCH(LVar0)
         EVT_CASE_LT(1000)
             EVT_CHILD_THREAD
-                EVT_CALL(ShakeCam, 1, 0, 3, EVT_FLOAT(0.3))
+                EVT_CALL(ShakeCam, CAM_BATTLE, 0, 3, EVT_FLOAT(0.3))
             EVT_END_CHILD_THREAD
         EVT_CASE_LT(2000)
             EVT_CHILD_THREAD
-                EVT_CALL(ShakeCam, 1, 0, 3, EVT_FLOAT(0.6))
+                EVT_CALL(ShakeCam, CAM_BATTLE, 0, 3, EVT_FLOAT(0.6))
             EVT_END_CHILD_THREAD
         EVT_CASE_DEFAULT
             EVT_CHILD_THREAD
-                EVT_CALL(ShakeCam, 1, 0, 3, EVT_FLOAT(0.9))
+                EVT_CALL(ShakeCam, CAM_BATTLE, 0, 3, EVT_FLOAT(0.9))
             EVT_END_CHILD_THREAD
     EVT_END_SWITCH
     EVT_RETURN
@@ -2056,7 +2056,7 @@ EvtScript EVS_Enemy_HopToPos = {
 
 EvtScript EVS_Enemy_AirLift = {
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar2)
-    EVT_IF_NOT_FLAG(LVar2, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+    EVT_IF_NOT_FLAG(LVar2, STATUS_FLAGS_IMMOBILIZED)
         EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
         EVT_CALL(SetAnimationRate, ACTOR_SELF, LVar0, EVT_FLOAT(2.0))
         EVT_LOOP(10)
@@ -2074,7 +2074,7 @@ EvtScript EVS_Enemy_AirLift = {
 
 EvtScript EVS_Enemy_BlowAway = {
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar5)
-    EVT_IF_NOT_FLAG(LVar5, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+    EVT_IF_NOT_FLAG(LVar5, STATUS_FLAGS_IMMOBILIZED)
         EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
     EVT_ELSE
         EVT_SET(LocalFlag(0), 0)

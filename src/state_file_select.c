@@ -147,7 +147,7 @@ void state_step_language_select(void) {
                     clear_worker_list();
                     hud_element_set_aux_cache(&D_80200000, 0x20000);
                     hud_element_clear_cache();
-                    reset_status_menu();
+                    reset_status_bar();
                     clear_item_entity_data();
                     clear_script_list();
                     clear_npcs();
@@ -325,7 +325,7 @@ void state_step_exit_language_select(void) {
 
                     calculate_model_sizes();
                     npc_reload_all();
-                    status_menu_respond_to_changes();
+                    status_bar_respond_to_changes();
                     set_time_freeze_mode(TIME_FREEZE_PARTIAL);
                 }
                 set_windows_visible(WINDOW_GROUP_ALL);

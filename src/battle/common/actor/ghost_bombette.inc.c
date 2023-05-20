@@ -1,3 +1,6 @@
+#include "common.h"
+#include "battle/battle.h"
+#include "script_api/battle.h"
 #include "sprite/npc/BattleBombette.h"
 
 extern EvtScript N(bombette_init);
@@ -6,52 +9,52 @@ extern EvtScript N(bombette_idle);
 extern EvtScript N(bombette_handleEvent);
 
 s32 N(bombette_idleAnimations)[] = {
-    STATUS_NORMAL, ANIM_BattleBombette_Idle,
-    STATUS_STONE, ANIM_BattleBombette_Still,
-    STATUS_SLEEP, ANIM_BattleBombette_Still,
-    STATUS_POISON, ANIM_BattleBombette_Idle,
-    STATUS_STOP, ANIM_BattleBombette_Still,
-    STATUS_STATIC, ANIM_BattleBombette_Idle,
-    STATUS_PARALYZE, ANIM_BattleBombette_Still,
-    STATUS_DIZZY, ANIM_BattleBombette_Injured,
-    STATUS_FEAR, ANIM_BattleBombette_Injured,
+    STATUS_KEY_NORMAL,    ANIM_BattleBombette_Idle,
+    STATUS_KEY_STONE,     ANIM_BattleBombette_Still,
+    STATUS_KEY_SLEEP,     ANIM_BattleBombette_Still,
+    STATUS_KEY_POISON,    ANIM_BattleBombette_Idle,
+    STATUS_KEY_STOP,      ANIM_BattleBombette_Still,
+    STATUS_KEY_STATIC,    ANIM_BattleBombette_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_BattleBombette_Still,
+    STATUS_KEY_DIZZY,     ANIM_BattleBombette_Injured,
+    STATUS_KEY_FEAR,      ANIM_BattleBombette_Injured,
     STATUS_END,
 };
 
 s32 N(bombette_defenseTable)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
 s32 N(bombette_statusTable)[] = {
-    STATUS_NORMAL, 0,
-    STATUS_DEFAULT, 0,
-    STATUS_SLEEP, 60,
-    STATUS_POISON, 0,
-    STATUS_FROZEN, 0,
-    STATUS_DIZZY, 75,
-    STATUS_FEAR, 0,
-    STATUS_STATIC, 0,
-    STATUS_PARALYZE, 75,
-    STATUS_SHRINK, 75,
-    STATUS_STOP, 80,
-    STATUS_DEFAULT_TURN_MOD, 0,
-    STATUS_SLEEP_TURN_MOD, -1,
-    STATUS_POISON_TURN_MOD, 0,
-    STATUS_FROZEN_TURN_MOD, 0,
-    STATUS_DIZZY_TURN_MOD, -1,
-    STATUS_FEAR_TURN_MOD, 0,
-    STATUS_STATIC_TURN_MOD, 0,
-    STATUS_PARALYZE_TURN_MOD, 0,
-    STATUS_SHRINK_TURN_MOD, 0,
-    STATUS_STOP_TURN_MOD, -1,
+    STATUS_KEY_NORMAL,              0,
+    STATUS_KEY_DEFAULT,             0,
+    STATUS_KEY_SLEEP,              60,
+    STATUS_KEY_POISON,              0,
+    STATUS_KEY_FROZEN,              0,
+    STATUS_KEY_DIZZY,              75,
+    STATUS_KEY_FEAR,                0,
+    STATUS_KEY_STATIC,              0,
+    STATUS_KEY_PARALYZE,           75,
+    STATUS_KEY_SHRINK,             75,
+    STATUS_KEY_STOP,               80,
+    STATUS_TURN_MOD_DEFAULT,        0,
+    STATUS_TURN_MOD_SLEEP,         -1,
+    STATUS_TURN_MOD_POISON,         0,
+    STATUS_TURN_MOD_FROZEN,         0,
+    STATUS_TURN_MOD_DIZZY,         -1,
+    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_STATIC,         0,
+    STATUS_TURN_MOD_PARALYZE,       0,
+    STATUS_TURN_MOD_SHRINK,         0,
+    STATUS_TURN_MOD_STOP,          -1,
     STATUS_END,
 };
 
 ActorPartBlueprint N(bombette_parts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 22 },
         .opacity = 255,
@@ -81,9 +84,9 @@ ActorBlueprint N(bombette) = {
     .powerBounceChance = 90,
     .coinReward = 2,
     .size = { 30, 28 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 EvtScript N(bombette_init) = {
@@ -132,14 +135,14 @@ EvtScript N(bombette_handleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_CALL(GetLastElement, LVar1)
             EVT_IF_FLAG(LVar1, DAMAGE_TYPE_SHOCK)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBombette_BurnHurt)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_BurnHurt)
                 EVT_WAIT(20)
                 EVT_EXEC_WAIT(N(bombette_playEffects))
                 EVT_EXEC_WAIT(N(OnDeath))
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                 EVT_SET_CONST(LVar0, 1)
                 EVT_SET_CONST(LVar1, ANIM_BattleBombette_BurnStill)
-                EVT_SET(LVar2, -12345)
+                EVT_SET(LVar2, EXEC_DEATH_NO_SPINNING)
                 EVT_EXEC_WAIT(EVS_Enemy_Death)
                 EVT_RETURN
             EVT_END_IF
@@ -152,7 +155,7 @@ EvtScript N(bombette_handleEvent) = {
             EVT_EXEC_WAIT(N(OnDeath))
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleBombette_BurnStill)
-            EVT_SET(LVar2, -12345)
+            EVT_SET(LVar2, EXEC_DEATH_NO_SPINNING)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BURN_DEATH)
@@ -164,7 +167,7 @@ EvtScript N(bombette_handleEvent) = {
             EVT_EXEC_WAIT(N(OnDeath))
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleBombette_BurnStill)
-            EVT_SET(LVar2, -12345)
+            EVT_SET(LVar2, EXEC_DEATH_NO_SPINNING)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
@@ -183,14 +186,14 @@ EvtScript N(bombette_handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_SHOCK_HIT)
         EVT_CASE_OR_EQ(EVENT_SHOCK_DEATH)
             EVT_CALL(HPBarToCurrent, ACTOR_SELF)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBombette_BurnHurt)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_BurnHurt)
             EVT_WAIT(20)
             EVT_EXEC_WAIT(N(bombette_playEffects))
             EVT_EXEC_WAIT(N(OnDeath))
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleBombette_BurnStill)
-            EVT_SET(LVar2, -12345)
+            EVT_SET(LVar2, EXEC_DEATH_NO_SPINNING)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_END_CASE_GROUP
@@ -250,10 +253,10 @@ EvtScript N(bombette_takeTurn) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 40, 0, 0)
     EVT_CALL(MoveBattleCamOver, 30)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBombette_Run)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_Run)
     EVT_CALL(RunToGoal, ACTOR_SELF, 30, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBombette_Idle)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBombette_Brace)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_Idle)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_Brace)
     EVT_WAIT(15)
     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_0, SOUND_0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2020)
@@ -264,9 +267,9 @@ EvtScript N(bombette_takeTurn) = {
             EVT_SET(LVarA, LVar0)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(AddGoalPos, ACTOR_SELF, -10, 0, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBombette_BodySlam)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_BodySlam)
             EVT_CALL(RunToGoal, ACTOR_SELF, 5, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBombette_Idle)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_Idle)
             EVT_THREAD
                 EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 15, 0)
                 EVT_SET(LVar0, 0)
@@ -279,7 +282,7 @@ EvtScript N(bombette_takeTurn) = {
             EVT_END_THREAD
             EVT_CALL(AddGoalPos, ACTOR_SELF, -60, 0, 0)
             EVT_CALL(RunToGoal, ACTOR_SELF, 10, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBombette_Idle)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_Idle)
             EVT_THREAD
                 EVT_CALL(N(UnkActorPosFunc))
             EVT_END_THREAD
@@ -289,7 +292,7 @@ EvtScript N(bombette_takeTurn) = {
             EVT_WAIT(20)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(YieldTurn)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBombette_Run)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_Run)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
@@ -300,7 +303,7 @@ EvtScript N(bombette_takeTurn) = {
     EVT_END_SWITCH
     EVT_SET(LVarA, LVar0)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBombette_BodySlam)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_BodySlam)
     EVT_CALL(RunToGoal, ACTOR_SELF, 4, FALSE)
     EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar9)
     EVT_SWITCH(LVar9)
@@ -317,40 +320,40 @@ EvtScript N(bombette_takeTurn) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBombette_Idle)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_Idle)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(MoveBattleCamOver, 8)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBombette_Backfire2)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_Backfire2)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar0, 40)
             EVT_SET(LVar1, 0)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.4))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBombette_Backfire1)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_Backfire1)
             EVT_WAIT(1)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBombette_Backfire2)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_Backfire2)
             EVT_ADD(LVar0, 40)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBombette_Backfire1)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_Backfire1)
             EVT_WAIT(1)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBombette_Backfire2)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_Backfire2)
             EVT_ADD(LVar0, 20)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBombette_Backfire1)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_Backfire1)
             EVT_WAIT(1)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBombette_Backfire2)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_Backfire2)
             EVT_ADD(LVar0, 10)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 4, FALSE, TRUE, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBombette_Backfire1)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_Backfire1)
             EVT_WAIT(1)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBombette_Idle)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_Idle)
             EVT_WAIT(8)
             EVT_CALL(YieldTurn)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleBombette_Run)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBombette_Run)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)

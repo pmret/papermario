@@ -215,9 +215,9 @@ void destroy_popup_menu(void) {
          gPopupMenu->popupType == POPUP_TYPE_USE_KEY
         ) && !gGameStatusPtr->isBattle) {
         if (D_8010D69A == 0) {
-            status_menu_respond_to_changes();
+            status_bar_respond_to_changes();
         }
-        close_status_menu();
+        close_status_bar();
     }
 
     gPopupState = POPUP_STATE_MINUS_4;
@@ -1622,8 +1622,8 @@ void create_standard_popup_menu(PopupMenu* popup) {
     s32 numEntries;
 
     D_8010D69A = func_800E98D4();
-    status_menu_ignore_changes();
-    open_status_menu_short();
+    status_bar_ignore_changes();
+    open_status_bar_short();
     gPopupMenu = popup;
     popup->result = POPUP_RESULT_CHOOSING;
     popup->dipMode = 0;

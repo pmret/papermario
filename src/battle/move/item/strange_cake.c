@@ -235,7 +235,7 @@ API_CALLABLE(N(func_802A1AD8_731DD8)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
 
-    inflict_status(player, STATUS_STATIC, 3);
+    inflict_status(player, STATUS_KEY_STATIC, 3);
     player->statusAfflicted = 0;
 
     return ApiStatus_DONE2;
@@ -246,7 +246,7 @@ API_CALLABLE(N(func_802A1B14_731E14)) {
     Actor* player = battleStatus->playerActor;
     ActorPart* part = player->partsTable;
 
-    inflict_status(player, STATUS_TRANSPARENT, 3);
+    inflict_status(player, STATUS_KEY_TRANSPARENT, 3);
     player->statusAfflicted = 0;
     part->flags |= ACTOR_PART_FLAG_100;
 
@@ -257,7 +257,7 @@ API_CALLABLE(N(func_802A1B68_731E68)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
 
-    inflict_status(player, STATUS_SLEEP, 3);
+    inflict_status(player, STATUS_KEY_SLEEP, 3);
     player->statusAfflicted = 0;
 
     return ApiStatus_DONE2;

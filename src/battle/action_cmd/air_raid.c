@@ -130,12 +130,15 @@ void N(update)(void) {
                 }
 
                 if (!actionCommandStatus->isBarFilled) {
-                    if ( // todo remove assignment from conditional
-                        (!(battleStatus->currentButtonsDown & BUTTON_STICK_LEFT) || (actionCommandStatus->unk_5C = 1, !(battleStatus->currentButtonsDown & BUTTON_STICK_LEFT))) &&
-                        (actionCommandStatus->unk_5C != 0))
-                    {
-                        actionCommandStatus->barFillLevel += (battleStatus->actionCmdDifficultyTable[actionCommandStatus->difficulty] * 850) / 100;
-                        actionCommandStatus->unk_5C = 0;
+                    if (battleStatus->currentButtonsDown & BUTTON_STICK_LEFT) {
+                        actionCommandStatus->unk_5C = 1;
+                    }
+
+                    if (!(battleStatus->currentButtonsDown & BUTTON_STICK_LEFT)) {
+                        if (actionCommandStatus->unk_5C != 0) {
+                            actionCommandStatus->barFillLevel += (battleStatus->actionCmdDifficultyTable[actionCommandStatus->difficulty] * 850) / 100;
+                            actionCommandStatus->unk_5C = 0;
+                        }
                     }
 
                     if (battleStatus->currentButtonsPressed & BUTTON_STICK_RIGHT) {

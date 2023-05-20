@@ -183,7 +183,7 @@ ApiStatus DoNpcDefeat(Evt* script, s32 isInitialCall) {
 
     kill_script(script);
     npc->currentAnim = owner->animList[6];
-    newScript = start_script(&SCRIPT_NpcDefeat, EVT_PRIORITY_A, 0);
+    newScript = start_script(&EVS_NpcDefeat, EVT_PRIORITY_A, 0);
     owner->defeatScript = newScript;
     owner->defeatScriptID = newScript->id;
     newScript->owner1.enemy = owner;

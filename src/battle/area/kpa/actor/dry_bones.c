@@ -11,97 +11,102 @@ extern EvtScript N(takeTurn);
 extern EvtScript N(handleEvent);
 extern EvtScript N(nextTurn);
 
+enum N(ActorPartIDs) {
+    PRT_MAIN            = 1,
+    PRT_2               = 2,
+};
+
 s32 N(IdleAnimations)[] = {
-    STATUS_NORMAL, ANIM_DryBones_Anim02,
-    STATUS_STONE, ANIM_DryBones_Anim00,
-    STATUS_SLEEP, ANIM_DryBones_Anim0E,
-    STATUS_POISON, ANIM_DryBones_Anim02,
-    STATUS_STOP, ANIM_DryBones_Anim00,
-    STATUS_STATIC, ANIM_DryBones_Anim02,
-    STATUS_PARALYZE, ANIM_DryBones_Anim00,
-    STATUS_DIZZY, ANIM_DryBones_Anim0D,
-    STATUS_FEAR, ANIM_DryBones_Anim0D,
+    STATUS_KEY_NORMAL,    ANIM_DryBones_Anim02,
+    STATUS_KEY_STONE,     ANIM_DryBones_Anim00,
+    STATUS_KEY_SLEEP,     ANIM_DryBones_Anim0E,
+    STATUS_KEY_POISON,    ANIM_DryBones_Anim02,
+    STATUS_KEY_STOP,      ANIM_DryBones_Anim00,
+    STATUS_KEY_STATIC,    ANIM_DryBones_Anim02,
+    STATUS_KEY_PARALYZE,  ANIM_DryBones_Anim00,
+    STATUS_KEY_DIZZY,     ANIM_DryBones_Anim0D,
+    STATUS_KEY_FEAR,      ANIM_DryBones_Anim0D,
     STATUS_END,
 };
 
 s32 N(IdleAnimations_dead)[] = {
-    STATUS_NORMAL, ANIM_DryBones_Anim01,
+    STATUS_KEY_NORMAL,    ANIM_DryBones_Anim01,
     STATUS_END,
 };
 
 s32 N(IdleAnimations_bone)[] = {
-    STATUS_NORMAL, ANIM_DryBones_Anim0F,
+    STATUS_KEY_NORMAL,    ANIM_DryBones_Anim0F,
     STATUS_END,
 };
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 2,
-    ELEMENT_FIRE, -10,
-    ELEMENT_BLAST, -10,
+    ELEMENT_NORMAL,   2,
+    ELEMENT_FIRE,   -10,
+    ELEMENT_BLAST,  -10,
     ELEMENT_END,
 };
 
 s32 N(DefenseTable_dead)[] = {
-    ELEMENT_NORMAL, 99,
-    ELEMENT_FIRE, -10,
-    ELEMENT_BLAST, -10,
+    ELEMENT_NORMAL,  99,
+    ELEMENT_FIRE,   -10,
+    ELEMENT_BLAST,  -10,
     ELEMENT_END,
 };
 
 s32 N(StatusTable)[] = {
-    STATUS_NORMAL, 0,
-    STATUS_DEFAULT, 0,
-    STATUS_SLEEP, 0,
-    STATUS_POISON, 0,
-    STATUS_FROZEN, 0,
-    STATUS_DIZZY, 0,
-    STATUS_FEAR, 0,
-    STATUS_STATIC, 0,
-    STATUS_PARALYZE, 50,
-    STATUS_SHRINK, 60,
-    STATUS_STOP, 85,
-    STATUS_DEFAULT_TURN_MOD, 0,
-    STATUS_SLEEP_TURN_MOD, 0,
-    STATUS_POISON_TURN_MOD, 0,
-    STATUS_FROZEN_TURN_MOD, 0,
-    STATUS_DIZZY_TURN_MOD, 0,
-    STATUS_FEAR_TURN_MOD, 0,
-    STATUS_STATIC_TURN_MOD, 0,
-    STATUS_PARALYZE_TURN_MOD, 0,
-    STATUS_SHRINK_TURN_MOD, 0,
-    STATUS_STOP_TURN_MOD, -1,
+    STATUS_KEY_NORMAL,              0,
+    STATUS_KEY_DEFAULT,             0,
+    STATUS_KEY_SLEEP,               0,
+    STATUS_KEY_POISON,              0,
+    STATUS_KEY_FROZEN,              0,
+    STATUS_KEY_DIZZY,               0,
+    STATUS_KEY_FEAR,                0,
+    STATUS_KEY_STATIC,              0,
+    STATUS_KEY_PARALYZE,           50,
+    STATUS_KEY_SHRINK,             60,
+    STATUS_KEY_STOP,               85,
+    STATUS_TURN_MOD_DEFAULT,        0,
+    STATUS_TURN_MOD_SLEEP,          0,
+    STATUS_TURN_MOD_POISON,         0,
+    STATUS_TURN_MOD_FROZEN,         0,
+    STATUS_TURN_MOD_DIZZY,          0,
+    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_STATIC,         0,
+    STATUS_TURN_MOD_PARALYZE,       0,
+    STATUS_TURN_MOD_SHRINK,         0,
+    STATUS_TURN_MOD_STOP,          -1,
     STATUS_END,
 };
 
 s32 N(StatusTable_dead)[] = {
-    STATUS_NORMAL, 0,
-    STATUS_DEFAULT, 0,
-    STATUS_SLEEP, 0,
-    STATUS_POISON, 0,
-    STATUS_FROZEN, 0,
-    STATUS_DIZZY, 0,
-    STATUS_FEAR, 0,
-    STATUS_STATIC, 0,
-    STATUS_PARALYZE, 0,
-    STATUS_SHRINK, 0,
-    STATUS_STOP, 0,
-    STATUS_DEFAULT_TURN_MOD, 0,
-    STATUS_SLEEP_TURN_MOD, 0,
-    STATUS_POISON_TURN_MOD, 0,
-    STATUS_FROZEN_TURN_MOD, 0,
-    STATUS_DIZZY_TURN_MOD, 0,
-    STATUS_FEAR_TURN_MOD, 0,
-    STATUS_STATIC_TURN_MOD, 0,
-    STATUS_PARALYZE_TURN_MOD, 0,
-    STATUS_SHRINK_TURN_MOD, 0,
-    STATUS_STOP_TURN_MOD, 0,
+    STATUS_KEY_NORMAL,              0,
+    STATUS_KEY_DEFAULT,             0,
+    STATUS_KEY_SLEEP,               0,
+    STATUS_KEY_POISON,              0,
+    STATUS_KEY_FROZEN,              0,
+    STATUS_KEY_DIZZY,               0,
+    STATUS_KEY_FEAR,                0,
+    STATUS_KEY_STATIC,              0,
+    STATUS_KEY_PARALYZE,            0,
+    STATUS_KEY_SHRINK,              0,
+    STATUS_KEY_STOP,                0,
+    STATUS_TURN_MOD_DEFAULT,        0,
+    STATUS_TURN_MOD_SLEEP,          0,
+    STATUS_TURN_MOD_POISON,         0,
+    STATUS_TURN_MOD_FROZEN,         0,
+    STATUS_TURN_MOD_DIZZY,          0,
+    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_STATIC,         0,
+    STATUS_TURN_MOD_PARALYZE,       0,
+    STATUS_TURN_MOD_SHRINK,         0,
+    STATUS_TURN_MOD_STOP,           0,
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -8, 30 },
         .opacity = 255,
@@ -113,7 +118,7 @@ ActorPartBlueprint N(parts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
-        .index = 2,
+        .index = PRT_2,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
@@ -130,8 +135,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_DRY_BONES,
     .level = 30,
     .maxHP = 8,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 50,
@@ -143,9 +148,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 95,
     .coinReward = 1,
     .size = { 28, 32 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -15, 15 },
-    .statusMessageOffset = { 3, 27 },
+    .statusTextOffset = { 3, 27 },
 };
 
 EvtScript N(init) = {
@@ -208,20 +213,20 @@ EvtScript N(idle) = {
         EVT_CASE_EQ(0)
             EVT_SWITCH(LVar1)
                 EVT_CASE_FLAG(STATUS_FLAG_SLEEP)
-                    EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -6, 24)
-                    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 1, -5)
+                    EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -6, 24)
+                    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, 1, -5)
                 EVT_CASE_DEFAULT
-                    EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -8, 30)
-                    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -10)
+                    EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -8, 30)
+                    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, -1, -10)
             EVT_END_SWITCH
         EVT_CASE_EQ(1)
             EVT_SWITCH(LVar1)
                 EVT_CASE_FLAG(STATUS_FLAG_SLEEP)
-                    EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -1, 10)
-                    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, 0)
+                    EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -1, 10)
+                    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, 0, 0)
                 EVT_CASE_DEFAULT
-                    EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -1, 10)
-                    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, 0)
+                    EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -1, 10)
+                    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, 0, 0)
             EVT_END_SWITCH
     EVT_END_SWITCH
     EVT_WAIT(1)
@@ -232,15 +237,15 @@ EvtScript N(idle) = {
 
 EvtScript N(reassemble) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2D2)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_DryBones_Anim08)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_DryBones_Anim08)
     EVT_WAIT(20)
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_dead)))
-    EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable_dead)))
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_dead)))
+    EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefenseTable_dead)))
     EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(StatusTable_dead)))
     EVT_CALL(ClearStatusEffects, ACTOR_SELF)
-    EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -1, 10)
-    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, 0)
+    EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -1, 10)
+    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, 0, 0)
     EVT_CALL(RandInt, 0, LVar0)
     EVT_ADD(LVar0, 2)
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, LVar0)
@@ -296,12 +301,12 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_DryBones_Anim07)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
         EVT_CASE_EQ(EVENT_BURN_HIT)
-            EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_EXPLODE_ON_IGNITION, TRUE)
+            EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_EXPLODE_ON_IGNITION, TRUE)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_DryBones_Anim0B)
             EVT_SET_CONST(LVar2, ANIM_DryBones_Anim0C)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
-            EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_EXPLODE_ON_IGNITION, FALSE)
+            EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_EXPLODE_ON_IGNITION, FALSE)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_DryBones_Anim0B)
@@ -370,7 +375,7 @@ EvtScript N(handleEvent) = {
             EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
             EVT_IF_EQ(LVar0, 0)
                 EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-                EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+                EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                     EVT_IF_FLAG(LVar0, STATUS_FLAG_SHRINK)
                         EVT_CALL(SetActorDispOffset, ACTOR_SELF, -1, -2, 0)
                     EVT_ELSE
@@ -408,7 +413,7 @@ EvtScript N(handleEvent) = {
 EvtScript N(rotateBone) = {
     EVT_SET(LVar0, 0)
     EVT_LABEL(0)
-    EVT_CALL(SetPartRotation, ACTOR_SELF, 2, 0, 0, LVar0)
+    EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_2, 0, 0, LVar0)
     EVT_ADD(LVar0, 60)
     EVT_MOD(LVar0, 360)
     EVT_WAIT(1)
@@ -428,7 +433,7 @@ EvtScript N(takeTurn) = {
     EVT_END_IF
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_IF_EQ(LVar0, PHASE_FIRST_STRIKE)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_DryBones_Anim06)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_DryBones_Anim06)
         EVT_GOTO(100)
     EVT_END_IF
     EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
@@ -437,24 +442,24 @@ EvtScript N(takeTurn) = {
         EVT_SUB(LVar0, 1)
         EVT_IF_EQ(LVar0, 0)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2D4)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_DryBones_Anim09)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_DryBones_Anim09)
             EVT_WAIT(10)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2D3)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_DryBones_Anim0A)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_DryBones_Anim0A)
             EVT_WAIT(20)
             EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations)))
-            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations)))
+            EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefenseTable)))
             EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(StatusTable)))
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, ACTOR_PART_FLAG_2000, FALSE)
-            EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, -8, 30)
-            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, -1, -10)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_2000, FALSE)
+            EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -8, 30)
+            EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, -1, -10)
             EVT_CALL(GetEnemyMaxHP, ACTOR_SELF, LVar0)
             EVT_CALL(SetEnemyHP, ACTOR_SELF, LVar0)
         EVT_ELSE
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2D4)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_DryBones_Anim09)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_DryBones_Anim09)
             EVT_WAIT(10)
             EVT_CALL(SetActorVar, ACTOR_SELF, 0, LVar0)
         EVT_END_IF
@@ -462,19 +467,19 @@ EvtScript N(takeTurn) = {
         EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_DryBones_Anim05)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_DryBones_Anim05)
     EVT_WAIT(15)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_DryBones_Anim06)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_DryBones_Anim06)
     EVT_THREAD
         EVT_WAIT(8)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_DryBones_Anim02)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_DryBones_Anim02)
     EVT_END_THREAD
     EVT_LABEL(100)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
     EVT_IF_FLAG(LVar0, STATUS_FLAG_SHRINK)
-        EVT_CALL(SetPartScale, ACTOR_SELF, 2, EVT_FLOAT(0.4), EVT_FLOAT(0.4), EVT_FLOAT(0.4))
+        EVT_CALL(SetPartScale, ACTOR_SELF, PRT_2, EVT_FLOAT(0.4), EVT_FLOAT(0.4), EVT_FLOAT(0.4))
     EVT_ELSE
-        EVT_CALL(SetPartScale, ACTOR_SELF, 2, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
+        EVT_CALL(SetPartScale, ACTOR_SELF, PRT_2, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
     EVT_END_IF
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
@@ -483,28 +488,28 @@ EvtScript N(takeTurn) = {
             EVT_SET(LVarF, LVar0)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar1, 20)
-            EVT_CALL(SetPartPos, ACTOR_SELF, 2, LVar0, LVar1, LVar2)
+            EVT_CALL(SetPartPos, ACTOR_SELF, PRT_2, LVar0, LVar1, LVar2)
             EVT_WAIT(1)
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_INVISIBLE, FALSE)
-            EVT_CALL(PlaySoundAtPart, ACTOR_SELF, 2, SOUND_2D1)
-            EVT_CALL(SetPartSounds, ACTOR_SELF, 2, ACTOR_SOUND_WALK, 0, 0)
-            EVT_CALL(SetPartSounds, ACTOR_SELF, 2, ACTOR_SOUND_JUMP, 0, 0)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+            EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_2, SOUND_2D1)
+            EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_2, ACTOR_SOUND_WALK, 0, 0)
+            EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_2, ACTOR_SOUND_JUMP, 0, 0)
             EVT_EXEC_GET_TID(N(rotateBone), LVarA)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_SUB(LVar0, 100)
-            EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, 2, EVT_FLOAT(12.0))
-            EVT_CALL(RunPartTo, ACTOR_SELF, 2, LVar0, LVar1, LVar2, FALSE)
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+            EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, PRT_2, EVT_FLOAT(12.0))
+            EVT_CALL(RunPartTo, ACTOR_SELF, PRT_2, LVar0, LVar1, LVar2, FALSE)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_KILL_THREAD(LVarA)
             EVT_IF_EQ(LVarF, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_WAIT(15)
             EVT_CALL(YieldTurn)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
             EVT_WAIT(20)
-            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
+            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
@@ -512,27 +517,27 @@ EvtScript N(takeTurn) = {
     EVT_END_SWITCH
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 20)
-    EVT_CALL(SetPartPos, ACTOR_SELF, 2, LVar0, LVar1, LVar2)
+    EVT_CALL(SetPartPos, ACTOR_SELF, PRT_2, LVar0, LVar1, LVar2)
     EVT_WAIT(1)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_INVISIBLE, FALSE)
-    EVT_CALL(PlaySoundAtPart, ACTOR_SELF, 2, SOUND_2D1)
-    EVT_CALL(SetPartSounds, ACTOR_SELF, 2, ACTOR_SOUND_WALK, 0, 0)
-    EVT_CALL(SetPartSounds, ACTOR_SELF, 2, ACTOR_SOUND_JUMP, 0, 0)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+    EVT_CALL(PlaySoundAtPart, ACTOR_SELF, PRT_2, SOUND_2D1)
+    EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_2, ACTOR_SOUND_WALK, 0, 0)
+    EVT_CALL(SetPartSounds, ACTOR_SELF, PRT_2, ACTOR_SOUND_JUMP, 0, 0)
     EVT_EXEC_GET_TID(N(rotateBone), LVarA)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, 2, EVT_FLOAT(12.0))
-    EVT_CALL(RunPartTo, ACTOR_SELF, 2, LVar0, LVar1, LVar2, FALSE)
+    EVT_CALL(SetPartMoveSpeed, ACTOR_SELF, PRT_2, EVT_FLOAT(12.0))
+    EVT_CALL(RunPartTo, ACTOR_SELF, PRT_2, LVar0, LVar1, LVar2, FALSE)
     EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_NO_CONTACT, 0, 0, 4, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_CALL(GetPartOffset, ACTOR_SELF, 2, LVar0, LVar1, LVar2)
+            EVT_CALL(GetPartOffset, ACTOR_SELF, PRT_2, LVar0, LVar1, LVar2)
             EVT_SUB(LVar0, 100)
-            EVT_CALL(SetPartJumpGravity, ACTOR_SELF, 2, EVT_FLOAT(0.7))
-            EVT_CALL(JumpPartTo, ACTOR_SELF, 2, LVar0, 0, LVar2, 30, TRUE)
-            EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
+            EVT_CALL(SetPartJumpGravity, ACTOR_SELF, PRT_2, EVT_FLOAT(0.7))
+            EVT_CALL(JumpPartTo, ACTOR_SELF, PRT_2, LVar0, 0, LVar2, 30, TRUE)
+            EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_KILL_THREAD(LVarA)
             EVT_CALL(YieldTurn)
         EVT_END_CASE_GROUP

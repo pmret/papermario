@@ -36,10 +36,10 @@ Stage NAMESPACE = {
     .foregroundModelList = N(ForegroundModels),
 };
 
-Vec3i N(WHACKAPOS) = { 0, 0, 0 };
+Vec3i N(OriginPos) = { 0, 0, 0 };
 
 Formation N(WhackaFormation) = {
-    { .actor = &N(whacka), .home = { .vec = &N(WHACKAPOS) }},
+    ACTOR_BY_POS(N(whacka), N(OriginPos), 0),
 };
 
 #define NAMESPACE b_area_iwa_iwa_02_whacka

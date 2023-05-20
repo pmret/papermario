@@ -69,58 +69,59 @@ f32 D_E003CD1C[] = {
 void damage_indicator_init(EffectInstance* effect);
 void damage_indicator_update(EffectInstance* effect);
 void damage_indicator_render(EffectInstance* effect);
-void func_E003C47C(EffectInstance* effect);
-void func_E003C498(EffectInstance* effect);
+void damage_indicator_render_ui(EffectInstance* effect);
+void damage_indicator_render_impl(EffectInstance* effect);
 
-void damage_indicator_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, s32 numParts, EffectInstance** effectOut) {
+void damage_indicator_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 starsRadius, f32 starsAngle, s32 damageAmt, EffectInstance** effectOut) {
     EffectBlueprint bp;
     EffectBlueprint* bpPtr = &bp;
     EffectInstance* effect;
-    f32 temp_f20;
+    f32 angle;
     DamageIndicatorFXData* part;
-    s32 origNumParts = numParts;
+    s32 trueDamageAmt = damageAmt;
     s32 i;
 
-    if (numParts > 20) {
-        numParts = 20;
+    // limit number of stars that can appear
+    if (damageAmt > 20) {
+        damageAmt = 20;
     }
-    numParts++;
+    damageAmt++;
 
     bp.init = damage_indicator_init;
     bp.update = damage_indicator_update;
     bp.renderWorld = damage_indicator_render;
-    bp.renderUI = func_E003C47C;
+    bp.renderUI = damage_indicator_render_ui;
     bp.unk_00 = 0;
     bp.effectID = EFFECT_DAMAGE_INDICATOR;
 
     effect = shim_create_effect_instance(bpPtr);
-    effect->numParts = numParts;
+    effect->numParts = damageAmt;
 
-    effect->data.damageIndicator = part = shim_general_heap_malloc(numParts * sizeof(*part));
+    effect->data.damageIndicator = part = shim_general_heap_malloc(damageAmt * sizeof(*part));
     ASSERT(effect->data.damageIndicator != NULL);
 
     part->unk_00 = arg0;
-    part->unk_04.x = arg1;
-    part->unk_04.y = arg2;
-    part->unk_04.z = arg3;
-    part->unk_28 = arg4;
-    part->effectDurationTimer = 100;
-    part->unk_34 = 0;
-    part->numParts = origNumParts;
+    part->basePos.x = posX;
+    part->basePos.y = posY;
+    part->basePos.z = posZ;
+    part->radius = starsRadius;
+    part->timeLeft = 100;
+    part->lifetime = 0;
+    part->damageAmt = trueDamageAmt;
 
     part++;
-    for (i = 1; i < numParts; i++, part++) {
-        part->unk_04.x = 0.0f;
-        part->unk_04.y = 0.0f;
-        part->unk_04.z = 0.0f;
-        part->unk_10.x = part->unk_04.x;
-        part->unk_10.y = part->unk_04.y;
-        part->unk_10.z = part->unk_04.z;
-        temp_f20 = arg5 + (((s32) ((((i % 2) * 2) - 1) * i) / 2) * (30.0f - numParts));
-        part->unk_38 = 0.2f;
-        part->unk_1C.x = -shim_sin_deg(temp_f20) * arg4 * 1.5;
-        part->unk_1C.y = shim_cos_deg(temp_f20) * arg4 * 1.5;
-        part->unk_1C.z = 0;
+    for (i = 1; i < damageAmt; i++, part++) {
+        part->basePos.x = 0.0f;
+        part->basePos.y = 0.0f;
+        part->basePos.z = 0.0f;
+        part->curPos.x = part->basePos.x;
+        part->curPos.y = part->basePos.y;
+        part->curPos.z = part->basePos.z;
+        angle = starsAngle + (((s32) ((((i % 2) * 2) - 1) * i) / 2) * (30.0f - damageAmt));
+        part->scale = 0.2f;
+        part->relPos.x = -shim_sin_deg(angle) * starsRadius * 1.5;
+        part->relPos.y = shim_cos_deg(angle) * starsRadius * 1.5;
+        part->relPos.z = 0;
         part->alpha = 255;
     }
     *effectOut = effect;
@@ -130,24 +131,22 @@ void damage_indicator_init(EffectInstance* effect) {
 }
 
 void damage_indicator_update(EffectInstance* effect) {
+    DamageIndicatorFXData* part = effect->data.damageIndicator;
     s32 temp_a2;
     s32 temp_t0;
-    s32 duration;
-    DamageIndicatorFXData* part = effect->data.damageIndicator;
+    s32 timeLeft;
     f32 phi_f12;
     s32 i;
 
-    /* decrement duration timer */
-    if (part->effectDurationTimer < 100) {
-        part->effectDurationTimer--;
+    if (part->timeLeft < 100) {
+        part->timeLeft--;
     }
 
-    temp_a2 = part->unk_34++;
-    temp_t0 = part->unk_34;
-    duration = part->effectDurationTimer;
+    temp_a2 = part->lifetime++;
+    temp_t0 = part->lifetime;
+    timeLeft = part->timeLeft;
 
-    /* if duration is less than 0, remove effect */
-    if (duration < 0) {
+    if (timeLeft < 0) {
         shim_remove_effect(effect);
         return;
     }
@@ -156,59 +155,63 @@ void damage_indicator_update(EffectInstance* effect) {
     for (i = 1; i < effect->numParts; i++, part++) {
         f32 x, y, z;
 
-        if (duration > 5) {
-            part->unk_1C.x = part->unk_1C.x * 0.75;
-            part->unk_1C.y = part->unk_1C.y * 0.75;
-            part->unk_1C.z = part->unk_1C.z * 0.75;
+        if (timeLeft > 5) {
+            part->relPos.x = part->relPos.x * 0.75;
+            part->relPos.y = part->relPos.y * 0.75;
+            part->relPos.z = part->relPos.z * 0.75;
         }
-        if (duration < 5) {
+        if (timeLeft < 5) {
             part->alpha = part->alpha * 0.6;
-            part->unk_1C.x = part->unk_1C.x * 0.7;
-            part->unk_1C.y = part->unk_1C.y * 0.7;
-            part->unk_1C.z = part->unk_1C.z * 0.7;
+            part->relPos.x = part->relPos.x * 0.7;
+            part->relPos.y = part->relPos.y * 0.7;
+            part->relPos.z = part->relPos.z * 0.7;
         }
         phi_f12 = 1.0f;
         if (temp_a2 < 9) {
             phi_f12 = D_E003CD1C[temp_a2];
         }
-        part->unk_10.x = part->unk_04.x * phi_f12;
-        part->unk_10.y = part->unk_04.y * phi_f12;
-        part->unk_10.z = part->unk_04.z * phi_f12;
-        part->unk_04.x += part->unk_1C.x;
-        part->unk_04.y += part->unk_1C.y;
-        part->unk_04.z += part->unk_1C.z;
+        part->curPos.x = part->basePos.x * phi_f12;
+        part->curPos.y = part->basePos.y * phi_f12;
+        part->curPos.z = part->basePos.z * phi_f12;
+        part->basePos.x += part->relPos.x;
+        part->basePos.y += part->relPos.y;
+        part->basePos.z += part->relPos.z;
 
-        part->unk_38 = (temp_t0 <= 40) ? (f32)D_E003CCD0[temp_a2] * 0.01 : 0.0f;
+        if (temp_t0 <= 40) {
+            part->scale = (f32)D_E003CCD0[temp_a2] * 0.01;
+        } else {
+            part->scale = 0.0f;
+        }
     }
 }
 
 void damage_indicator_render(EffectInstance* effect) {
 }
 
-void func_E003C47C(EffectInstance* effect) {
-    func_E003C498(effect);
+void damage_indicator_render_ui(EffectInstance* effect) {
+    damage_indicator_render_impl(effect);
 }
 
-void func_E003C498(EffectInstance* effect) {
+void damage_indicator_render_impl(EffectInstance* effect) {
     DamageIndicatorFXData* part = effect->data.damageIndicator;
-    Matrix4f sp20;
-    Matrix4f sp60;
+    Matrix4f mtxTransform;
+    Matrix4f mtxTemp;
     s32 spA0;
     s32 lastPartIdx;
-    s32 numParts = part->numParts;
+    s32 numParts = part->damageAmt;
     s32 i;
 
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->graphics->data));
 
-    shim_guTranslateF(sp20, part->unk_04.x, part->unk_04.y, part->unk_04.z);
-    shim_guRotateF(sp60, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-    shim_guMtxCatF(sp60, sp20, sp20);
-    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+    shim_guTranslateF(mtxTransform, part->basePos.x, part->basePos.y, part->basePos.z);
+    shim_guRotateF(mtxTemp, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    shim_guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
+    shim_guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
-    spA0 = part->unk_34 - 1;
+    spA0 = part->lifetime - 1;
     lastPartIdx = effect->numParts - 1;
     part = &(effect->data.damageIndicator)[effect->numParts - 1];
 
@@ -227,15 +230,18 @@ void func_E003C498(EffectInstance* effect) {
         gSPDisplayList(gMainGfxPos++, D_09001D40_351F60);
 
         if (i == lastPartIdx) {
-            shim_guPositionF(sp20, 0.0f, 0.0f, 0.0f, part->unk_38, part->unk_10.x, part->unk_10.y, part->unk_10.z);
-            shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+            shim_guPositionF(mtxTransform, 0.0f, 0.0f, 0.0f, part->scale, part->curPos.x, part->curPos.y, part->curPos.z);
+            shim_guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
             gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
             gSPDisplayList(gMainGfxPos++, D_09002150_352370);
             gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 
-            shim_guPositionF(sp20, 0.0f, 0.0f, 0.0f, part->unk_38, (part->unk_10.x + part->unk_04.x) * 0.5, (part->unk_10.y + part->unk_04.y) * 0.5, (part->unk_10.z + part->unk_04.z) * 0.5);
-            shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+            shim_guPositionF(mtxTransform, 0.0f, 0.0f, 0.0f, part->scale,
+                (part->curPos.x + part->basePos.x) * 0.5,
+                (part->curPos.y + part->basePos.y) * 0.5,
+                (part->curPos.z + part->basePos.z) * 0.5);
+            shim_guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
             gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
             gSPDisplayList(gMainGfxPos++, D_09002160_352380);
@@ -244,13 +250,13 @@ void func_E003C498(EffectInstance* effect) {
 
         gSPDisplayList(gMainGfxPos++, D_09001D40_351F60);
 
-        shim_guTranslateF(sp20, part->unk_04.x, part->unk_04.y, part->unk_04.z);
-        shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+        shim_guTranslateF(mtxTransform, part->basePos.x, part->basePos.y, part->basePos.z);
+        shim_guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
-        shim_guScaleF(sp20, part->unk_38, part->unk_38, 1.0f);
-        shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+        shim_guScaleF(mtxTransform, part->scale, part->scale, 1.0f);
+        shim_guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
@@ -268,12 +274,12 @@ void func_E003C498(EffectInstance* effect) {
                 gSPDisplayList(gMainGfxPos++, D_E003CCA0[i]);
                 gSPDisplayList(gMainGfxPos++, D_090021C0_3523E0);
             } else {
-                s32 temp = numParts % 10;
-                s32 temp2 = numParts / 10;
-                gSPDisplayList(gMainGfxPos++, D_E003CCA0[temp]);
-                gSPDisplayList(gMainGfxPos++, D_09002200_352420);
-                gSPDisplayList(gMainGfxPos++, D_E003CCA0[temp2]);
-                gSPDisplayList(gMainGfxPos++, D_090021E0_352400);
+                s32 onesDigit = numParts % 10;
+                s32 tensDigit = numParts / 10;
+                gSPDisplayList(gMainGfxPos++, D_E003CCA0[onesDigit]); // GfxLoadDigitTex
+                gSPDisplayList(gMainGfxPos++, D_09002200_352420); // GfxDrawOnesQuad
+                gSPDisplayList(gMainGfxPos++, D_E003CCA0[tensDigit]);
+                gSPDisplayList(gMainGfxPos++, D_090021E0_352400); // GfxDrawTensQuad
             }
         } else {
             gSPDisplayList(gMainGfxPos++, D_09002190_3523B0);

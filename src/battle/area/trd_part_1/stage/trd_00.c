@@ -1,7 +1,7 @@
-#include "common.h"
-#include "battle/battle.h"
+#include "../area.h"
+#include "mapfs/trd_bt00_shape.h"
 
-#define NAMESPACE b_area_trd_part_1_trd_00
+#define NAMESPACE A(trd_00)
 
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
@@ -16,7 +16,7 @@ EvtScript N(EVS_PostBattle) = {
 };
 
 s32 N(ForegroundModels)[] = {
-    0x00000009,
+    MODEL_p1,
     STAGE_MODEL_LIST_END
 };
 

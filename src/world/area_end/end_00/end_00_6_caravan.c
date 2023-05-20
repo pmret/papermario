@@ -125,7 +125,7 @@ EvtScript N(EVS_ParadePhase_Caravan) = {
         EVT_CALL(SetNpcPos, NPC_Tutankoopa1, -1350, 0, 30 * DT)
         EVT_CALL(SetNpcYaw, NPC_Tutankoopa1, 90)
         EVT_CALL(NpcMoveTo, NPC_Tutankoopa1, -1110, 30, 30 * DT)
-        EVT_CALL(SetNpcAnimation, NPC_Tutankoopa1, ANIM_Tutankoopa_Anim09)
+        EVT_CALL(SetNpcAnimation, NPC_Tutankoopa1, ANIM_Tutankoopa_LevitateStill)
         EVT_CALL(MakeLerp, 0, 90, 5, EASING_LINEAR)
         EVT_LOOP(5)
             EVT_CALL(UpdateLerp)
@@ -147,14 +147,14 @@ EvtScript N(EVS_ParadePhase_Caravan) = {
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
-        EVT_CALL(SetNpcAnimation, NPC_Tutankoopa1, ANIM_Tutankoopa_Anim01)
+        EVT_CALL(SetNpcAnimation, NPC_Tutankoopa1, ANIM_Tutankoopa_Idle)
         EVT_CALL(InterpNpcYaw, NPC_Tutankoopa1, 270, 7)
         EVT_WAIT(15 * DT)
         EVT_CALL(InterpNpcYaw, NPC_Tutankoopa1, 90, 7)
         EVT_WAIT(15 * DT)
         EVT_CALL(InterpNpcYaw, NPC_Tutankoopa1, 270, 7)
         EVT_WAIT(15 * DT)
-        EVT_CALL(SetNpcAnimation, NPC_Tutankoopa1, ANIM_Tutankoopa_Anim04)
+        EVT_CALL(SetNpcAnimation, NPC_Tutankoopa1, ANIM_Tutankoopa_Lift)
         EVT_CALL(SetNpcJumpscale, NPC_Tutankoopa1, EVT_FLOAT(1.0))
         EVT_CALL(NpcJump0, NPC_Tutankoopa1, -1140, 0, 30, 15 * DT)
         EVT_CALL(NpcJump0, NPC_Tutankoopa1, -1170, 0, 30, 15 * DT)

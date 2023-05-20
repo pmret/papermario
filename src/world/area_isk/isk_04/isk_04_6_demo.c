@@ -4,7 +4,7 @@
 #include "world/common/todo/SwitchToPartner.inc.c"
 
 EvtScript N(EVS_ProvideDemoInputs) = {
-    EVT_CALL(EnableStatusMenu, FALSE)
+    EVT_CALL(EnableWorldStatusBar, FALSE)
     EVT_CALL(DemoSetButtons, BUTTON_C_DOWN)
     EVT_WAIT(5)
     EVT_CALL(DemoSetButtons, 0)

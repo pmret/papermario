@@ -315,7 +315,7 @@ EvtScript N(EVS_UsePower) = {
     EVT_WAIT(1)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
     EVT_WAIT(1)
-    EVT_CALL(func_80276EFC)
+    EVT_CALL(PlayerYieldTurn)
     EVT_CALL(N(UnkBackgroundFunc))
     EVT_WAIT(15)
     EVT_CALL(SetGoalToHome, ACTOR_PLAYER)

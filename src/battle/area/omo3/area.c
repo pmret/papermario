@@ -26,82 +26,82 @@ extern ActorBlueprint N(red_shy_guy);
 Vec3i N(big_lantern_ghost_pos) = { 30, 0, 10 };
 
 Formation N(Formation_00) = {
-    { .actor = &N(big_lantern_ghost), .home = { .vec = &N(big_lantern_ghost_pos) }, .priority = 10, },
+    ACTOR_BY_POS(N(big_lantern_ghost), N(big_lantern_ghost_pos), 10),
 };
 
 Formation N(Formation_01) = {
-    { .actor = &N(goomba), .home = { .index = 1 }, .priority = 10 },
+    ACTOR_BY_IDX(N(goomba), BTL_POS_GROUND_B, 10),
 };
 
 Formation N(Formation_02) = {
-    { .actor = &N(goomba), .home = { .index = 1 }, .priority = 10 },
-    { .actor = &N(goomba), .home = { .index = 2 }, .priority = 9 },
+    ACTOR_BY_IDX(N(goomba), BTL_POS_GROUND_B, 10),
+    ACTOR_BY_IDX(N(goomba), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_03) = {
-    { .actor = &N(clubba), .home = { .index = 1 }, .priority = 10 },
-    { .actor = &N(clubba), .home = { .index = 2 }, .priority = 9 },
+    ACTOR_BY_IDX(N(clubba), BTL_POS_GROUND_B, 10),
+    ACTOR_BY_IDX(N(clubba), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_04) = {
-    { .actor = &N(fuzzy), .home = { .index = 1 }, .priority = 10 },
-    { .actor = &N(fuzzy), .home = { .index = 2 }, .priority = 9 },
+    ACTOR_BY_IDX(N(fuzzy), BTL_POS_GROUND_B, 10),
+    ACTOR_BY_IDX(N(fuzzy), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_05) = {
-    { .actor = &N(fuzzy), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(fuzzy), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(fuzzy), .home = { .index = 2 }, .priority = 8 },
-    { .actor = &N(fuzzy), .home = { .index = 3 }, .priority = 7 },
+    ACTOR_BY_IDX(N(fuzzy), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(fuzzy), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(fuzzy), BTL_POS_GROUND_C, 8),
+    ACTOR_BY_IDX(N(fuzzy), BTL_POS_GROUND_D, 7),
 };
 
 Formation N(Formation_06) = {
-    { .actor = &N(hammer_bro), .home = { .index = 1 }, .priority = 10 },
-    { .actor = &N(hammer_bro), .home = { .index = 2 }, .priority = 9 },
+    ACTOR_BY_IDX(N(hammer_bro), BTL_POS_GROUND_B, 10),
+    ACTOR_BY_IDX(N(hammer_bro), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_07) = {
-    { .actor = &N(hammer_bro), .home = { .index = 1 }, .priority = 10 },
+    ACTOR_BY_IDX(N(hammer_bro), BTL_POS_GROUND_B, 10),
 };
 
 Formation N(Formation_08) = {
-    { .actor = &N(pokey), .home = { .index = 1 }, .priority = 10, .var1 = 1 },
-    { .actor = &N(pokey), .home = { .index = 2 }, .priority = 9, .var1 = 1 },
+    ACTOR_BY_IDX(N(pokey), BTL_POS_GROUND_B, 10, 0, 1),
+    ACTOR_BY_IDX(N(pokey), BTL_POS_GROUND_C,  9, 0, 1),
 };
 
 Formation N(Formation_09) = {
-    { .actor = &N(koopatrol), .home = { .index = 1 }, .priority = 10 },
-    { .actor = &N(koopatrol), .home = { .index = 2 }, .priority = 9 },
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_B, 10),
+    ACTOR_BY_IDX(N(koopatrol), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_0A) = {
-    { .actor = &N(red_shy_guy), .home = { .index = 1 }, .priority = 10 },
+    ACTOR_BY_IDX(N(red_shy_guy), BTL_POS_GROUND_B, 10),
 };
 
 BattleList N(Formations) = {
-    BATTLE(N(Formation_00), &N(omo_03), "ビッグカンテラくん"),
-    BATTLE(N(Formation_01), &N(omo_04), "クリボー（ピーチへん）"),
-    BATTLE(N(Formation_02), &N(omo_04), "クリボーx２（ピーチへん）"),
-    BATTLE(N(Formation_03), &N(omo_04), "ガボンへいx２（ピーチへん）"),
-    BATTLE(N(Formation_04), &N(omo_04), "チョロボンx２（ピーチへん）"),
-    BATTLE(N(Formation_05), &N(omo_04), "チョロボンx４（ピーチへん）"),
-    BATTLE(N(Formation_06), &N(omo_04), "ハンマーブロスx２（ピーチへん）"),
-    BATTLE(N(Formation_07), &N(omo_04), "ハンマーブロス（ピーチへん）"),
-    BATTLE(N(Formation_08), &N(omo_04), "サンボx２（ピーチへん）"),
-    BATTLE(N(Formation_09), &N(omo_04), "トゲノコx２（ピーチへん）"),
-    BATTLE(N(Formation_0A), &N(omo_01), "ヘイホー"),
+    BATTLE(N(Formation_00), N(omo_03), "ビッグカンテラくん"),
+    BATTLE(N(Formation_01), N(omo_04), "クリボー（ピーチへん）"),
+    BATTLE(N(Formation_02), N(omo_04), "クリボーx２（ピーチへん）"),
+    BATTLE(N(Formation_03), N(omo_04), "ガボンへいx２（ピーチへん）"),
+    BATTLE(N(Formation_04), N(omo_04), "チョロボンx２（ピーチへん）"),
+    BATTLE(N(Formation_05), N(omo_04), "チョロボンx４（ピーチへん）"),
+    BATTLE(N(Formation_06), N(omo_04), "ハンマーブロスx２（ピーチへん）"),
+    BATTLE(N(Formation_07), N(omo_04), "ハンマーブロス（ピーチへん）"),
+    BATTLE(N(Formation_08), N(omo_04), "サンボx２（ピーチへん）"),
+    BATTLE(N(Formation_09), N(omo_04), "トゲノコx２（ピーチへん）"),
+    BATTLE(N(Formation_0A), N(omo_01), "ヘイホー"),
     {},
 };
 
 StageList N(Stages) = {
-    { "omo_01", &N(omo_01) },
-    { "omo_02", &N(omo_02) },
-    { "omo_03", &N(omo_03) },
-    { "omo_03b", &N(omo_03b) },
-    { "omo_04", &N(omo_04) },
-    { "omo_05", &N(omo_05) },
-    { "omo_05b", &N(omo_05b) },
-    { "omo_06", &N(omo_06) },
-    { "omo_07", &N(omo_07) },
+    STAGE("omo_01", N(omo_01)),
+    STAGE("omo_02", N(omo_02)),
+    STAGE("omo_03", N(omo_03)),
+    STAGE("omo_03b", N(omo_03b)),
+    STAGE("omo_04", N(omo_04)),
+    STAGE("omo_05", N(omo_05)),
+    STAGE("omo_05b", N(omo_05b)),
+    STAGE("omo_06", N(omo_06)),
+    STAGE("omo_07", N(omo_07)),
     {},
 };

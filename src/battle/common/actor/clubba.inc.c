@@ -8,53 +8,57 @@ extern EvtScript N(takeTurn);
 extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
 
+enum N(ActorPartIDs) {
+    PRT_MAIN            = 1,
+};
+
 s32 N(IdleAnimations)[] = {
-    STATUS_NORMAL,    ANIM_BattleClubba_Anim01,
-    STATUS_STONE,     ANIM_BattleClubba_Anim00,
-    STATUS_SLEEP,     ANIM_BattleClubba_Anim03,
-    STATUS_POISON,    ANIM_BattleClubba_Anim01,
-    STATUS_STOP,      ANIM_BattleClubba_Anim00,
-    STATUS_STATIC,    ANIM_BattleClubba_Anim01,
-    STATUS_PARALYZE,  ANIM_BattleClubba_Anim00,
-    STATUS_DIZZY,     ANIM_BattleClubba_Anim05,
-    STATUS_FEAR,      ANIM_BattleClubba_Anim05,
+    STATUS_KEY_NORMAL,    ANIM_BattleClubba_Anim01,
+    STATUS_KEY_STONE,     ANIM_BattleClubba_Anim00,
+    STATUS_KEY_SLEEP,     ANIM_BattleClubba_Anim03,
+    STATUS_KEY_POISON,    ANIM_BattleClubba_Anim01,
+    STATUS_KEY_STOP,      ANIM_BattleClubba_Anim00,
+    STATUS_KEY_STATIC,    ANIM_BattleClubba_Anim01,
+    STATUS_KEY_PARALYZE,  ANIM_BattleClubba_Anim00,
+    STATUS_KEY_DIZZY,     ANIM_BattleClubba_Anim05,
+    STATUS_KEY_FEAR,      ANIM_BattleClubba_Anim05,
     STATUS_END,
 };
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
 s32 N(StatusTable)[] = {
-    STATUS_NORMAL, 0,
-    STATUS_DEFAULT, 0,
-    STATUS_SLEEP, 90,
-    STATUS_POISON, 50,
-    STATUS_FROZEN, 0,
-    STATUS_DIZZY, 75,
-    STATUS_FEAR, 100,
-    STATUS_STATIC, 50,
-    STATUS_PARALYZE, 90,
-    STATUS_SHRINK, 75,
-    STATUS_STOP, 90,
-    STATUS_DEFAULT_TURN_MOD, 0,
-    STATUS_SLEEP_TURN_MOD, 1,
-    STATUS_POISON_TURN_MOD, 0,
-    STATUS_FROZEN_TURN_MOD, 0,
-    STATUS_DIZZY_TURN_MOD, 0,
-    STATUS_FEAR_TURN_MOD, 0,
-    STATUS_STATIC_TURN_MOD, 0,
-    STATUS_PARALYZE_TURN_MOD, 1,
-    STATUS_SHRINK_TURN_MOD, 0,
-    STATUS_STOP_TURN_MOD, -1,
+    STATUS_KEY_NORMAL,              0,
+    STATUS_KEY_DEFAULT,             0,
+    STATUS_KEY_SLEEP,              90,
+    STATUS_KEY_POISON,             50,
+    STATUS_KEY_FROZEN,              0,
+    STATUS_KEY_DIZZY,              75,
+    STATUS_KEY_FEAR,              100,
+    STATUS_KEY_STATIC,             50,
+    STATUS_KEY_PARALYZE,           90,
+    STATUS_KEY_SHRINK,             75,
+    STATUS_KEY_STOP,               90,
+    STATUS_TURN_MOD_DEFAULT,        0,
+    STATUS_TURN_MOD_SLEEP,          1,
+    STATUS_TURN_MOD_POISON,         0,
+    STATUS_TURN_MOD_FROZEN,         0,
+    STATUS_TURN_MOD_DIZZY,          0,
+    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_STATIC,         0,
+    STATUS_TURN_MOD_PARALYZE,       1,
+    STATUS_TURN_MOD_SHRINK,         0,
+    STATUS_TURN_MOD_STOP,          -1,
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -12, 32 },
         .opacity = 255,
@@ -71,8 +75,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_CLUBBA,
     .level = 13,
     .maxHP = 8,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 60,
@@ -84,9 +88,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 80,
     .coinReward = 1,
     .size = { 42, 42 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 35 },
+    .statusTextOffset = { 10, 35 },
 };
 
 EvtScript N(init) = {
@@ -217,7 +221,7 @@ EvtScript N(takeTurn) = {
         EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_WAIT(15)
     EVT_ELSE
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleClubba_Anim02)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_Anim02)
         EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
         EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
@@ -227,7 +231,7 @@ EvtScript N(takeTurn) = {
             EVT_CALL(AddGoalPos, ACTOR_SELF, 10, 0, -6)
         EVT_END_IF
         EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleClubba_Anim01)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_Anim01)
         EVT_WAIT(10)
     EVT_END_IF
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
@@ -236,7 +240,7 @@ EvtScript N(takeTurn) = {
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LVarA, LVar0)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20C5)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleClubba_Anim08)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_Anim08)
             EVT_WAIT(10)
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -245,21 +249,21 @@ EvtScript N(takeTurn) = {
             EVT_CALL(YieldTurn)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_BattleClubba_Anim02)
             EVT_EXEC_WAIT(EVS_Enemy_ReturnHome)
-            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
+            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleClubba_Anim09)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_Anim09)
     EVT_WAIT(15)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20C5)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleClubba_Anim0A)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleClubba_Anim0A)
     EVT_WAIT(2)
     EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)

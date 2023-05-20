@@ -21,55 +21,55 @@ extern Stage N(flo_06);
 Vec3i N(huff_n_puff_pos) = { 80, 80, 0 };
 
 Formation N(Formation_01) = {
-    { .actor = &N(huff_n_puff), .home = { .vec = &N(huff_n_puff_pos) }, .priority = 10, },
+    ACTOR_BY_POS(N(huff_n_puff), N(huff_n_puff_pos), 10),
 };
 
 Formation N(Formation_02) = {
-    { .actor = &N(monty_mole_boss), .home = { .index = 1 }, .priority = 10, },
+    ACTOR_BY_IDX(N(monty_mole_boss), BTL_POS_GROUND_B, 10),
 };
 
 Formation N(Formation_03) = {
-    { .actor = &N(monty_mole_boss), .home = { .index = 1 }, .priority = 10, },
-    { .actor = &N(monty_mole_boss), .home = { .index = 2 }, .priority = 9, },
+    ACTOR_BY_IDX(N(monty_mole_boss), BTL_POS_GROUND_B, 10),
+    ACTOR_BY_IDX(N(monty_mole_boss), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_04) = {
-    { .actor = &N(monty_mole_boss), .home = { .index = 0 }, .priority = 10, },
-    { .actor = &N(monty_mole_boss), .home = { .index = 1 }, .priority = 9, },
-    { .actor = &N(monty_mole_boss), .home = { .index = 2 }, .priority = 8, },
+    ACTOR_BY_IDX(N(monty_mole_boss), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(monty_mole_boss), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(monty_mole_boss), BTL_POS_GROUND_C, 8),
 };
 
 Formation N(Formation_05) = {
-    { .actor = &N(monty_mole_boss), .home = { .index = 0 }, .priority = 10, },
-    { .actor = &N(monty_mole_boss), .home = { .index = 1 }, .priority = 9, },
-    { .actor = &N(monty_mole_boss), .home = { .index = 2 }, .priority = 8, },
-    { .actor = &N(monty_mole_boss), .home = { .index = 3 }, .priority = 7, },
+    ACTOR_BY_IDX(N(monty_mole_boss), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(monty_mole_boss), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(monty_mole_boss), BTL_POS_GROUND_C, 8),
+    ACTOR_BY_IDX(N(monty_mole_boss), BTL_POS_GROUND_D, 7),
 };
 
 Formation N(Formation_06) = {
-    { .actor = &N(spike), .home = { .index = 5 }, .priority = 10, },
+    ACTOR_BY_IDX(N(spike), BTL_POS_AIR_B, 10),
 };
 
 BattleList N(Formations) = {
-    BATTLE(N(Formation_01), &N(flo_04), "オズモーン"),
-    BATTLE(N(Formation_02), &N(flo_01), "フラワーチョロプー"),
-    BATTLE(N(Formation_03), &N(flo_01), "フラワーチョロプーx２"),
-    BATTLE(N(Formation_04), &N(flo_01), "フラワーチョロプーx３"),
-    BATTLE(N(Formation_05), &N(flo_01), "フラワーチョロプーx４"),
-    BATTLE(N(Formation_06), &N(flo_01), "ジョナサン？"),
+    BATTLE(N(Formation_01), N(flo_04), "オズモーン"),
+    BATTLE(N(Formation_02), N(flo_01), "フラワーチョロプー"),
+    BATTLE(N(Formation_03), N(flo_01), "フラワーチョロプーx２"),
+    BATTLE(N(Formation_04), N(flo_01), "フラワーチョロプーx３"),
+    BATTLE(N(Formation_05), N(flo_01), "フラワーチョロプーx４"),
+    BATTLE(N(Formation_06), N(flo_01), "ジョナサン？"),
     {},
 };
 
 StageList N(Stages) = {
-    { "flo_01", &N(flo_01) },
-    { "flo_01b", &N(flo_01b) },
-    { "flo_01c", &N(flo_01c) },
-    { "flo_02", &N(flo_02) },
-    { "flo_02b", &N(flo_02b) },
-    { "flo_02c", &N(flo_02c) },
-    { "flo_03", &N(flo_03) },
-    { "flo_04", &N(flo_04) },
-    { "flo_05", &N(flo_05) },
-    { "flo_06", &N(flo_06) },
+    STAGE("flo_01", N(flo_01)),
+    STAGE("flo_01b", N(flo_01b)),
+    STAGE("flo_01c", N(flo_01c)),
+    STAGE("flo_02", N(flo_02)),
+    STAGE("flo_02b", N(flo_02b)),
+    STAGE("flo_02c", N(flo_02c)),
+    STAGE("flo_03", N(flo_03)),
+    STAGE("flo_04", N(flo_04)),
+    STAGE("flo_05", N(flo_05)),
+    STAGE("flo_06", N(flo_06)),
     {},
 };

@@ -11,63 +11,69 @@ extern EvtScript N(takeTurn);
 extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
 
+enum N(ActorPartIDs) {
+    PRT_MAIN            = 1,
+    PRT_2               = 2,
+    PRT_3               = 3,
+};
+
 s32 N(IdleAnimations1)[] = {
-    STATUS_NORMAL, ANIM_Gulpit_Anim01,
-    STATUS_STONE, ANIM_Gulpit_Anim00,
-    STATUS_SLEEP, ANIM_Gulpit_Anim0F,
-    STATUS_POISON, ANIM_Gulpit_Anim01,
-    STATUS_STOP, ANIM_Gulpit_Anim00,
-    STATUS_STATIC, ANIM_Gulpit_Anim01,
-    STATUS_PARALYZE, ANIM_Gulpit_Anim00,
-    STATUS_DIZZY, ANIM_Gulpit_Anim0E,
-    STATUS_FEAR, ANIM_Gulpit_Anim0E,
+    STATUS_KEY_NORMAL,    ANIM_Gulpit_Anim01,
+    STATUS_KEY_STONE,     ANIM_Gulpit_Anim00,
+    STATUS_KEY_SLEEP,     ANIM_Gulpit_Anim0F,
+    STATUS_KEY_POISON,    ANIM_Gulpit_Anim01,
+    STATUS_KEY_STOP,      ANIM_Gulpit_Anim00,
+    STATUS_KEY_STATIC,    ANIM_Gulpit_Anim01,
+    STATUS_KEY_PARALYZE,  ANIM_Gulpit_Anim00,
+    STATUS_KEY_DIZZY,     ANIM_Gulpit_Anim0E,
+    STATUS_KEY_FEAR,      ANIM_Gulpit_Anim0E,
     STATUS_END,
 };
 
 s32 N(IdleAnimations2)[] = {
-    STATUS_NORMAL, ANIM_Gulpit_Anim10,
+    STATUS_KEY_NORMAL,    ANIM_Gulpit_Anim10,
     STATUS_END,
 };
 
 s32 N(IdleAnimations3)[] = {
-    STATUS_NORMAL, ANIM_Gulpit_Anim12,
+    STATUS_KEY_NORMAL,    ANIM_Gulpit_Anim12,
     STATUS_END,
 };
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
 s32 N(StatusTable)[] = {
-    STATUS_NORMAL, 0,
-    STATUS_DEFAULT, 0,
-    STATUS_SLEEP, 60,
-    STATUS_POISON, 80,
-    STATUS_FROZEN, 0,
-    STATUS_DIZZY, 90,
-    STATUS_FEAR, 0,
-    STATUS_STATIC, 10,
-    STATUS_PARALYZE, 80,
-    STATUS_SHRINK, 75,
-    STATUS_STOP, 85,
-    STATUS_DEFAULT_TURN_MOD, 0,
-    STATUS_SLEEP_TURN_MOD, 0,
-    STATUS_POISON_TURN_MOD, 0,
-    STATUS_FROZEN_TURN_MOD, 0,
-    STATUS_DIZZY_TURN_MOD, 0,
-    STATUS_FEAR_TURN_MOD, 0,
-    STATUS_STATIC_TURN_MOD, 0,
-    STATUS_PARALYZE_TURN_MOD, 1,
-    STATUS_SHRINK_TURN_MOD, 0,
-    STATUS_STOP_TURN_MOD, 0,
+    STATUS_KEY_NORMAL,              0,
+    STATUS_KEY_DEFAULT,             0,
+    STATUS_KEY_SLEEP,              60,
+    STATUS_KEY_POISON,             80,
+    STATUS_KEY_FROZEN,              0,
+    STATUS_KEY_DIZZY,              90,
+    STATUS_KEY_FEAR,                0,
+    STATUS_KEY_STATIC,             10,
+    STATUS_KEY_PARALYZE,           80,
+    STATUS_KEY_SHRINK,             75,
+    STATUS_KEY_STOP,               85,
+    STATUS_TURN_MOD_DEFAULT,        0,
+    STATUS_TURN_MOD_SLEEP,          0,
+    STATUS_TURN_MOD_POISON,         0,
+    STATUS_TURN_MOD_FROZEN,         0,
+    STATUS_TURN_MOD_DIZZY,          0,
+    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_STATIC,         0,
+    STATUS_TURN_MOD_PARALYZE,       1,
+    STATUS_TURN_MOD_SHRINK,         0,
+    STATUS_TURN_MOD_STOP,           0,
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -7, 48 },
         .opacity = 255,
@@ -79,7 +85,7 @@ ActorPartBlueprint N(parts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
-        .index = 2,
+        .index = PRT_2,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
@@ -91,7 +97,7 @@ ActorPartBlueprint N(parts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
-        .index = 3,
+        .index = PRT_3,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
@@ -108,8 +114,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_GULPIT,
     .level = 22,
     .maxHP = 12,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 60,
@@ -121,9 +127,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 100,
     .coinReward = 1,
     .size = { 53, 50 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -3, 37 },
-    .statusMessageOffset = { 10, 45 },
+    .statusTextOffset = { 10, 45 },
 };
 
 EvtScript N(init) = {
@@ -143,7 +149,7 @@ EvtScript N(returnHome) = {
     EVT_SET_CONST(LVar0, 1)
     EVT_SET_CONST(LVar1, ANIM_Gulpit_Anim03)
     EVT_EXEC_WAIT(EVS_Enemy_ReturnHome)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Gulpit_Anim01)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim01)
     EVT_RETURN
     EVT_END
 };
@@ -258,7 +264,7 @@ EvtScript N(attack_lick) = {
         EVT_SET(LVar1, 0)
         EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_END_IF
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Gulpit_Anim03)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim03)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
     EVT_IF_FLAG(LVar0, STATUS_FLAG_SHRINK)
@@ -268,13 +274,13 @@ EvtScript N(attack_lick) = {
     EVT_END_IF
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Gulpit_Anim01)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim01)
     EVT_WAIT(10)
     EVT_THREAD
         EVT_WAIT(3)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20EE)
     EVT_END_THREAD
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Gulpit_Anim04)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim04)
     EVT_WAIT(9)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
@@ -288,9 +294,9 @@ EvtScript N(attack_lick) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
             EVT_EXEC_WAIT(N(returnHome))
-            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
+            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
@@ -325,33 +331,33 @@ EvtScript N(attack_rock) = {
     EVT_CALL(GetActorPos, LVarA, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 20)
     EVT_SUB(LVar2, 1)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Gulpit_Anim02)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim02)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(3.0))
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Gulpit_Anim01)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim01)
     EVT_WAIT(10)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20EE)
     EVT_CALL(GetActorVar, LVarA, 0, LVar0)
     EVT_SET(LVarB, LVar0)
     EVT_SWITCH(LVarB)
         EVT_CASE_EQ(0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Gulpit_Anim05)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim05)
             EVT_WAIT(3)
             EVT_CALL(RemoveActor, LVarA)
             EVT_WAIT(20)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Gulpit_Anim06)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim06)
             EVT_WAIT(15)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Gulpit_Anim07)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim07)
             EVT_SET(LVarA, 2)
         EVT_CASE_EQ(1)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Gulpit_Anim08)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim08)
             EVT_WAIT(3)
             EVT_CALL(RemoveActor, LVarA)
             EVT_WAIT(20)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Gulpit_Anim09)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim09)
             EVT_WAIT(15)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Gulpit_Anim0A)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim0A)
             EVT_SET(LVarA, 3)
     EVT_END_SWITCH
     EVT_CALL(SetPartSounds, ACTOR_SELF, LVarA, ACTOR_SOUND_JUMP, 985, 0)
@@ -378,9 +384,9 @@ EvtScript N(attack_rock) = {
             EVT_END_IF
             EVT_WAIT(15)
             EVT_CALL(YieldTurn)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
             EVT_EXEC_WAIT(N(returnHome))
-            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
+            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
@@ -408,7 +414,7 @@ EvtScript N(attack_rock) = {
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Gulpit_Anim01)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Gulpit_Anim01)
             EVT_CALL(GetPartOffset, ACTOR_SELF, LVarA, LVar0, LVar1, LVar2)
             EVT_ADD(LVar0, -100)
             EVT_CALL(SetPartJumpGravity, ACTOR_SELF, LVarA, EVT_FLOAT(1.0))

@@ -13,7 +13,7 @@ API_CALLABLE(N(ShrinkActor)) {
     Actor* actor = get_actor(script->owner1.actorID);
     EffectInstance* effect = fx_shape_spell(0, var1, (f32) var2 + 5.0, var3, var4, var5, var6, var7);
 
-    if (actor->debuff == STATUS_SHRINK) {
+    if (actor->debuff == STATUS_KEY_SHRINK) {
         effect->data.footprint->unk_28 = 0.4f;
     }
 

@@ -31,6 +31,11 @@ extern ActorBlueprint b_area_kzn2_petit_piranha_bomb;
 extern Formation N(formation_petit_piranha_1);
 extern Formation N(formation_petit_piranha_2);
 
+enum N(ActorPartIDs) {
+    PRT_MAIN            = 1,
+    PRT_2               = 2,
+};
+
 static s32 N(unusedArray)[64];
 
 MATCHING_BSS(0x8A0);
@@ -49,79 +54,79 @@ enum {
 #define VINE_2_BASE (s32) Vine2Base
 
 s32 N(IdleAnimations)[] = {
-    STATUS_NORMAL, ANIM_LavaBud_Anim03,
-    STATUS_STOP, ANIM_LavaBud_Anim02,
+    STATUS_KEY_NORMAL,    ANIM_LavaBud_Anim03,
+    STATUS_KEY_STOP,      ANIM_LavaBud_Anim02,
     STATUS_END,
 };
 
 s32 N(IdleAnimations_fiery)[] = {
-    STATUS_NORMAL, ANIM_LavaBud_Anim04,
-    STATUS_STOP, ANIM_LavaBud_Anim02,
+    STATUS_KEY_NORMAL,    ANIM_LavaBud_Anim04,
+    STATUS_KEY_STOP,      ANIM_LavaBud_Anim02,
     STATUS_END,
 };
 
 s32 N(IdleAnimations_wet)[] = {
-    STATUS_NORMAL, ANIM_LavaBud_Anim0F,
-    STATUS_STOP, ANIM_LavaBud_Anim0F,
+    STATUS_KEY_NORMAL,    ANIM_LavaBud_Anim0F,
+    STATUS_KEY_STOP,      ANIM_LavaBud_Anim0F,
     STATUS_END,
 };
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 0,
-    ELEMENT_WATER, 0,
-    ELEMENT_ICE, 0,
-    ELEMENT_FIRE, 99,
-    ELEMENT_BLAST, 0,
+    ELEMENT_NORMAL,   0,
+    ELEMENT_WATER,    0,
+    ELEMENT_ICE,      0,
+    ELEMENT_FIRE,    99,
+    ELEMENT_BLAST,    0,
     ELEMENT_END,
 };
 
 s32 N(DefenseTable_fiery)[] = {
-    ELEMENT_NORMAL, 0,
-    ELEMENT_WATER, -2,
-    ELEMENT_ICE, -2,
-    ELEMENT_FIRE, 99,
-    ELEMENT_BLAST, 0,
+    ELEMENT_NORMAL,   0,
+    ELEMENT_WATER,   -2,
+    ELEMENT_ICE,     -2,
+    ELEMENT_FIRE,    99,
+    ELEMENT_BLAST,    0,
     ELEMENT_END,
 };
 
 s32 N(DefenseTable_wet)[] = {
-    ELEMENT_NORMAL, 0,
-    ELEMENT_WATER, 0,
-    ELEMENT_ICE, 0,
-    ELEMENT_FIRE, 99,
-    ELEMENT_BLAST, 0,
+    ELEMENT_NORMAL,   0,
+    ELEMENT_WATER,    0,
+    ELEMENT_ICE,      0,
+    ELEMENT_FIRE,    99,
+    ELEMENT_BLAST,    0,
     ELEMENT_END,
 };
 
 s32 N(StatusTable)[] = {
-    STATUS_NORMAL, 0,
-    STATUS_DEFAULT, 0,
-    STATUS_SLEEP, 75,
-    STATUS_POISON, 0,
-    STATUS_FROZEN, 0,
-    STATUS_DIZZY, 30,
-    STATUS_FEAR, 0,
-    STATUS_STATIC, 0,
-    STATUS_PARALYZE, 75,
-    STATUS_SHRINK, 0,
-    STATUS_STOP, 60,
-    STATUS_DEFAULT_TURN_MOD, 0,
-    STATUS_SLEEP_TURN_MOD, -1,
-    STATUS_POISON_TURN_MOD, 0,
-    STATUS_FROZEN_TURN_MOD, 0,
-    STATUS_DIZZY_TURN_MOD, -1,
-    STATUS_FEAR_TURN_MOD, 0,
-    STATUS_STATIC_TURN_MOD, 0,
-    STATUS_PARALYZE_TURN_MOD, -1,
-    STATUS_SHRINK_TURN_MOD, -1,
-    STATUS_STOP_TURN_MOD, -2,
+    STATUS_KEY_NORMAL,              0,
+    STATUS_KEY_DEFAULT,             0,
+    STATUS_KEY_SLEEP,              75,
+    STATUS_KEY_POISON,              0,
+    STATUS_KEY_FROZEN,              0,
+    STATUS_KEY_DIZZY,              30,
+    STATUS_KEY_FEAR,                0,
+    STATUS_KEY_STATIC,              0,
+    STATUS_KEY_PARALYZE,           75,
+    STATUS_KEY_SHRINK,              0,
+    STATUS_KEY_STOP,               60,
+    STATUS_TURN_MOD_DEFAULT,        0,
+    STATUS_TURN_MOD_SLEEP,         -1,
+    STATUS_TURN_MOD_POISON,         0,
+    STATUS_TURN_MOD_FROZEN,         0,
+    STATUS_TURN_MOD_DIZZY,         -1,
+    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_STATIC,         0,
+    STATUS_TURN_MOD_PARALYZE,      -1,
+    STATUS_TURN_MOD_SHRINK,        -1,
+    STATUS_TURN_MOD_STOP,          -2,
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
@@ -133,7 +138,7 @@ ActorPartBlueprint N(parts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_20 | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION | ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 2,
+        .index = PRT_2,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
@@ -150,8 +155,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_LAVA_BUD_PHASE_1,
     .level = 0,
     .maxHP = 8,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
@@ -163,9 +168,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 80,
     .coinReward = 0,
     .size = { 30, 30 },
-    .hpBarOffset = { 10, -42 },
+    .healthBarOffset = { 10, -42 },
     .statusIconOffset = { -18, 10 },
-    .statusMessageOffset = { 0, 0 },
+    .statusTextOffset = { 0, 0 },
 };
 
 EvtScript N(init) = {
@@ -351,9 +356,9 @@ EvtScript N(onBurnHit) = {
             EVT_EXEC_WAIT(N(playModelAnimation))
             EVT_CALL(SetActorVar, ACTOR_SELF, 7, ANIM_LavaBud_Anim03)
             EVT_CALL(SetActorVar, ACTOR_SELF, 8, ANIM_LavaBud_Anim09)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_fiery)))
-            EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable_fiery)))
-            EVT_CALL(SetDefenseTable, ACTOR_SELF, 2, EVT_PTR(N(DefenseTable_fiery)))
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_fiery)))
+            EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefenseTable_fiery)))
+            EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_2, EVT_PTR(N(DefenseTable_fiery)))
             EVT_THREAD
                 EVT_WAIT(14)
                 EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
@@ -432,7 +437,7 @@ EvtScript N(takeTurn) = {
                 EVT_CALL(MoveBattleCamOver, 15)
                 EVT_CALL(GetEnemyMaxHP, ACTOR_SELF, LVar0)
                 EVT_CALL(SetEnemyHP, ACTOR_SELF, LVar0)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_LavaBud_Anim04)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBud_Anim04)
                 EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
                 EVT_IF_EQ(LVar0, 1)
                     EVT_SET(LVar0, ACTOR_ENEMY1)
@@ -470,7 +475,7 @@ EvtScript N(takeTurn) = {
 
 EvtScript N(8022630C) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, 7, LVar0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, LVar0)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, LVar0)
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
     EVT_CALL(GetActorVar, ACTOR_ENEMY0, 0, LVar3)
     EVT_CALL(GetActorVar, ACTOR_SELF, 5, LVar3)
@@ -527,11 +532,11 @@ EvtScript N(summonPetitPiranha) = {
     EVT_EXEC_WAIT(N(playModelAnimation))
     EVT_THREAD
         EVT_WAIT(20)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_LavaBud_Anim07)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBud_Anim07)
         EVT_WAIT(34)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_LavaBud_Anim08)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBud_Anim08)
         EVT_WAIT(10)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_LavaBud_Anim04)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBud_Anim04)
         EVT_IF_EQ(LVar0, 1)
             EVT_CALL(OverrideBattleDmaDest, VINE_1_BASE)
         EVT_ELSE
@@ -556,7 +561,7 @@ EvtScript N(summonPetitPiranha) = {
     EVT_ELSE
         EVT_CALL(SetActorVar, LVar5, 0, ACTOR_ENEMY2)
     EVT_END_IF
-    EVT_CALL(GetPartOffset, ACTOR_SELF, 1, LVar0, LVar1, LVar2)
+    EVT_CALL(GetPartOffset, ACTOR_SELF, PRT_MAIN, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 15)
     EVT_SUB(LVar1, 15)
     EVT_CALL(SetActorPos, LVar5, LVar0, LVar1, LVar2)
@@ -601,15 +606,15 @@ EvtScript N(summonPetitPiranha) = {
 Vec3i N(petit_piranha_pos) = { 260, 0, 0 };
 
 Formation N(formation_petit_piranha_1) = {
-    { .actor = &b_area_kzn2_petit_piranha, .home = { .vec = &N(petit_piranha_pos) }, .priority = 95, .var0 = -12, .var1 = 85, },
+    ACTOR_BY_POS(b_area_kzn2_petit_piranha, N(petit_piranha_pos), 95, -12, 85),
 };
 
 Formation N(formation_petit_piranha_2) = {
-    { .actor = &b_area_kzn2_petit_piranha, .home = { .vec = &N(petit_piranha_pos) }, .priority = 94, .var0 = 18, .var1 = 38, },
+    ACTOR_BY_POS(b_area_kzn2_petit_piranha, N(petit_piranha_pos), 94, 18, 38),
 };
 
 Formation N(formation_petit_piranha_bomb) = {
-    { .actor = &b_area_kzn2_petit_piranha_bomb, .home = { .vec = &N(petit_piranha_pos) }, .priority = 95, },
+    ACTOR_BY_POS(b_area_kzn2_petit_piranha_bomb, N(petit_piranha_pos), 95),
 };
 
 EvtScript N(onDeath) = {
@@ -621,7 +626,7 @@ EvtScript N(onDeath) = {
             EVT_RETURN
         EVT_END_IF
         EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, LVar0)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, LVar0)
         EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
         EVT_IF_EQ(LVar0, 1)
             EVT_CALL(OverrideBattleDmaDest, VINE_1_BASE)
@@ -636,14 +641,14 @@ EvtScript N(onDeath) = {
             EVT_CALL(RemoveEffect, LVar0)
             EVT_CALL(SetActorVar, ACTOR_SELF, 6, 0)
         EVT_END_IF
-        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_wet)))
-        EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable_wet)))
-        EVT_CALL(SetDefenseTable, ACTOR_SELF, 2, EVT_PTR(N(DefenseTable_wet)))
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_wet)))
+        EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefenseTable_wet)))
+        EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_2, EVT_PTR(N(DefenseTable_wet)))
         EVT_CALL(SetActorVar, ACTOR_SELF, 7, ANIM_LavaBud_Anim0F)
         EVT_CALL(SetActorVar, ACTOR_SELF, 8, ANIM_LavaBud_Anim09)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_LavaBud_Anim0F)
-        EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_FIREY, FALSE)
-        EVT_CALL(SetPartEventBits, ACTOR_SELF, 2, ACTOR_EVENT_FLAG_FIREY, FALSE)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBud_Anim0F)
+        EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_FIREY, FALSE)
+        EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_2, ACTOR_EVENT_FLAG_FIREY, FALSE)
         EVT_WAIT(29)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3C7)
         EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
@@ -672,7 +677,7 @@ EvtScript N(onDeath) = {
         EVT_END_IF
         EVT_CALL(LoadBattleDmaData, 21)
         EVT_EXEC_WAIT(N(playModelAnimation))
-        EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_wet)))
+        EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_wet)))
         EVT_CALL(SetActorVar, ACTOR_SELF, 7, ANIM_LavaBud_Anim0F)
         EVT_CALL(SetActorVar, ACTOR_SELF, 8, ANIM_LavaBud_Anim09)
         EVT_WAIT(29)
@@ -688,8 +693,8 @@ EvtScript N(onDeath) = {
         EVT_WAIT(14)
         EVT_CALL(SetActorVar, ACTOR_SELF, 5, 2)
         EVT_EXEC_WAIT(N(8022630C))
-        EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_2000 | ACTOR_PART_FLAG_NO_TARGET, TRUE)
-        EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_HIDE_HP_BAR, TRUE)
+        EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, ACTOR_PART_FLAG_2000 | ACTOR_PART_FLAG_NO_TARGET, TRUE)
+        EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_HEALTH_BAR, TRUE)
     EVT_ELSE
         EVT_EXEC_WAIT(N(onHit))
         EVT_RETURN
@@ -700,7 +705,7 @@ EvtScript N(onDeath) = {
 
 EvtScript N(onHitCombo) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, LVar0)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, LVar0)
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
     EVT_CALL(GetActorVar, ACTOR_ENEMY0, 0, LVar1)
     EVT_IF_EQ(LVar1, 0)
@@ -796,7 +801,7 @@ EvtScript N(onHitCombo) = {
 
 EvtScript N(onHit) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, LVar0)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, LVar0)
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
     EVT_CALL(GetActorVar, ACTOR_ENEMY0, 0, LVar5)
     EVT_IF_EQ(LVar5, 0)
@@ -878,14 +883,14 @@ EvtScript N(onHit) = {
                     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     EVT_PLAY_EFFECT(EFFECT_COLD_BREATH, 0, LVar0, LVar1, LVar2, EVT_FLOAT(2.0), 45, 0)
                 EVT_END_IF
-                EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_wet)))
-                EVT_CALL(SetDefenseTable, ACTOR_SELF, 1, EVT_PTR(N(DefenseTable_wet)))
-                EVT_CALL(SetDefenseTable, ACTOR_SELF, 2, EVT_PTR(N(DefenseTable_wet)))
+                EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_wet)))
+                EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(DefenseTable_wet)))
+                EVT_CALL(SetDefenseTable, ACTOR_SELF, PRT_2, EVT_PTR(N(DefenseTable_wet)))
                 EVT_CALL(SetActorVar, ACTOR_SELF, 7, ANIM_LavaBud_Anim0F)
                 EVT_CALL(SetActorVar, ACTOR_SELF, 8, ANIM_LavaBud_Anim09)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_LavaBud_Anim0F)
-                EVT_CALL(SetPartEventBits, ACTOR_SELF, 1, ACTOR_EVENT_FLAG_FIREY, FALSE)
-                EVT_CALL(SetPartEventBits, ACTOR_SELF, 2, ACTOR_EVENT_FLAG_FIREY, FALSE)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBud_Anim0F)
+                EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_FIREY, FALSE)
+                EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_2, ACTOR_EVENT_FLAG_FIREY, FALSE)
                 EVT_WAIT(29)
                 EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3C7)
                 EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
@@ -993,11 +998,11 @@ EvtScript N(attackPetitSpit) = {
     EVT_EXEC_WAIT(N(playModelAnimation))
     EVT_THREAD
         EVT_WAIT(20)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_LavaBud_Anim05)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBud_Anim05)
         EVT_WAIT(39)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_LavaBud_Anim06)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBud_Anim06)
         EVT_WAIT(5)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_LavaBud_Anim03)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_LavaBud_Anim03)
         EVT_IF_EQ(LVar0, 1)
             EVT_CALL(OverrideBattleDmaDest, VINE_1_BASE)
         EVT_ELSE
@@ -1009,7 +1014,7 @@ EvtScript N(attackPetitSpit) = {
     EVT_WAIT(56)
     EVT_CALL(SummonEnemy, EVT_PTR(N(formation_petit_piranha_bomb)), 0)
     EVT_SET(LVar5, LVar0)
-    EVT_CALL(GetPartOffset, ACTOR_SELF, 1, LVar0, LVar1, LVar2)
+    EVT_CALL(GetPartOffset, ACTOR_SELF, PRT_MAIN, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 15)
     EVT_SUB(LVar1, 15)
     EVT_CALL(SetActorPos, LVar5, LVar0, LVar1, LVar2)

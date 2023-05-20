@@ -30,14 +30,14 @@ Vec3i N(pos_swoopula)[] = {
 };
 
 Formation N(Formation_01) = {
-    { .actor = &N(swoopula), .home = { .vec = &N(pos_swoopula)[1] }, .priority = 10 },
-    { .actor = &N(swoopula), .home = { .vec = &N(pos_swoopula)[2] }, .priority = 9 },
+    ACTOR_BY_POS(N(swoopula), N(pos_swoopula)[1], 10),
+    ACTOR_BY_POS(N(swoopula), N(pos_swoopula)[2], 9),
 };
 
 Formation N(Formation_02) = {
-    { .actor = &N(swoopula), .home = { .vec = &N(pos_swoopula)[0] }, .priority = 10 },
-    { .actor = &N(swoopula), .home = { .vec = &N(pos_swoopula)[1] }, .priority = 9 },
-    { .actor = &N(swoopula), .home = { .vec = &N(pos_swoopula)[2] }, .priority = 8 },
+    ACTOR_BY_POS(N(swoopula), N(pos_swoopula)[0], 10),
+    ACTOR_BY_POS(N(swoopula), N(pos_swoopula)[1], 9),
+    ACTOR_BY_POS(N(swoopula), N(pos_swoopula)[2], 8),
 };
 
 Vec3i N(pos_swoopula_2)[] = {
@@ -48,10 +48,10 @@ Vec3i N(pos_swoopula_2)[] = {
 };
 
 Formation N(Formation_03) = {
-    { .actor = &N(swoopula), .home = { .vec = &N(pos_swoopula_2)[0] }, .priority = 10 },
-    { .actor = &N(swoopula), .home = { .vec = &N(pos_swoopula_2)[1] }, .priority = 9 },
-    { .actor = &N(swoopula), .home = { .vec = &N(pos_swoopula_2)[2] }, .priority = 8 },
-    { .actor = &N(swoopula), .home = { .vec = &N(pos_swoopula_2)[3] }, .priority = 7 },
+    ACTOR_BY_POS(N(swoopula), N(pos_swoopula_2)[0], 10),
+    ACTOR_BY_POS(N(swoopula), N(pos_swoopula_2)[1], 9),
+    ACTOR_BY_POS(N(swoopula), N(pos_swoopula_2)[2], 8),
+    ACTOR_BY_POS(N(swoopula), N(pos_swoopula_2)[3], 7),
 };
 
 Vec3i N(pos_swoopula_3)[] = {
@@ -63,100 +63,100 @@ Vec3i N(pos_swoopula_3)[] = {
 Vec3i N(pos_magikoopa) = { 120, 55, 25 };
 
 Formation N(Formation_04) = {
-    { .actor = &N(swoopula), .home = { .vec = &N(pos_swoopula_3)[0] }, .priority = 10, .var0 = 0xFFFFFFFF },
-    { .actor = &N(swoopula), .home = { .vec = &N(pos_swoopula_3)[1] }, .priority = 9, .var0 = 0xFFFFFFFF },
-    { .actor = &N(swoopula), .home = { .vec = &N(pos_swoopula_3)[2] }, .priority = 8, .var0 = 0xFFFFFFFF },
-    { .actor = &N(yellow_magikoopa_flying), .home = { .vec = &N(pos_magikoopa) }, .priority = 7 },
+    ACTOR_BY_POS(N(swoopula), N(pos_swoopula_3)[0], 10, 0xFFFFFFFF),
+    ACTOR_BY_POS(N(swoopula), N(pos_swoopula_3)[1], 9, 0xFFFFFFFF),
+    ACTOR_BY_POS(N(swoopula), N(pos_swoopula_3)[2], 8, 0xFFFFFFFF),
+    ACTOR_BY_POS(N(yellow_magikoopa_flying), N(pos_magikoopa), 7),
 };
 
 Formation N(Formation_05) = {
-    { .actor = &N(white_clubba), .home = { .index = 1 }, .priority = 10 },
+    ACTOR_BY_IDX(N(white_clubba), BTL_POS_GROUND_B, 10),
 };
 
 Formation N(Formation_06) = {
-    { .actor = &N(white_clubba), .home = { .index = 1 }, .priority = 10 },
-    { .actor = &N(white_clubba), .home = { .index = 2 }, .priority = 9 },
+    ACTOR_BY_IDX(N(white_clubba), BTL_POS_GROUND_B, 10),
+    ACTOR_BY_IDX(N(white_clubba), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_07) = {
-    { .actor = &N(white_clubba), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(white_clubba), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(white_clubba), .home = { .index = 2 }, .priority = 8 },
+    ACTOR_BY_IDX(N(white_clubba), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(white_clubba), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(white_clubba), BTL_POS_GROUND_C, 8),
 };
 
 Formation N(Formation_08) = {
-    { .actor = &N(white_clubba), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(white_clubba), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(swoopula), .home = { .vec = &N(pos_swoopula)[2] }, .priority = 8 },
+    ACTOR_BY_IDX(N(white_clubba), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(white_clubba), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_POS(N(swoopula), N(pos_swoopula)[2], 8),
 };
 
 Formation N(Formation_09) = {
-    { .actor = &N(white_clubba), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(white_clubba), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(yellow_magikoopa), .home = { .index = 2 }, .priority = 9 },
+    ACTOR_BY_IDX(N(white_clubba), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(white_clubba), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(yellow_magikoopa), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_0A) = {
-    { .actor = &N(white_clubba), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(white_clubba), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(white_magikoopa), .home = { .index = 2 }, .priority = 9 },
+    ACTOR_BY_IDX(N(white_clubba), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(white_clubba), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(white_magikoopa), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_0B) = {
-    { .actor = &N(white_clubba), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(white_clubba), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(white_magikoopa), .home = { .index = 2 }, .priority = 8 },
-    { .actor = &N(red_magikoopa), .home = { .index = 3 }, .priority = 7 },
+    ACTOR_BY_IDX(N(white_clubba), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(white_clubba), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(white_magikoopa), BTL_POS_GROUND_C, 8),
+    ACTOR_BY_IDX(N(red_magikoopa), BTL_POS_GROUND_D, 7),
 };
 
 Formation N(Formation_0C) = {
-    { .actor = &N(white_clubba), .home = { .index = 1 }, .priority = 10 },
-    { .actor = &N(gray_magikoopa), .home = { .index = 2 }, .priority = 9 },
+    ACTOR_BY_IDX(N(white_clubba), BTL_POS_GROUND_B, 10),
+    ACTOR_BY_IDX(N(gray_magikoopa), BTL_POS_GROUND_C, 9),
 };
 
 Formation N(Formation_0D) = {
-    { .actor = &N(white_clubba), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(white_clubba), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(white_clubba), .home = { .index = 2 }, .priority = 8 },
-    { .actor = &N(green_magikoopa), .home = { .index = 3 }, .priority = 7 },
+    ACTOR_BY_IDX(N(white_clubba), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(white_clubba), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(white_clubba), BTL_POS_GROUND_C, 8),
+    ACTOR_BY_IDX(N(green_magikoopa), BTL_POS_GROUND_D, 7),
 };
 
 Formation N(Formation_0E) = {
-    { .actor = &N(white_clubba), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(white_clubba), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(green_magikoopa), .home = { .index = 2 }, .priority = 8 },
-    { .actor = &N(white_magikoopa_flying), .home = { .index = 7 }, .priority = 7 },
+    ACTOR_BY_IDX(N(white_clubba), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(N(white_clubba), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(N(green_magikoopa), BTL_POS_GROUND_C, 8),
+    ACTOR_BY_IDX(N(white_magikoopa_flying), BTL_POS_AIR_D, 7),
 };
 
 Formation N(Formation_0F) = {
-    { .actor = &N(albino_dino), .home = { .index = 1 }, .priority = 10, }
+    ACTOR_BY_IDX(N(albino_dino), BTL_POS_GROUND_B, 10)
 };
 
 BattleList N(Formations) = {
-    BATTLE(N(Formation_01), &N(pra_01), "バサバサチュルルx2"),
-    BATTLE(N(Formation_02), &N(pra_01), "バサバサチュルルx3"),
-    BATTLE(N(Formation_03), &N(pra_01), "バサバサチュルルx4"),
-    BATTLE(N(Formation_04), &N(pra_01), "バサバサチュルルx3,イエローカメック（そら）"),
-    BATTLE(N(Formation_05), &N(pra_01), "ホワイトガボン"),
-    BATTLE(N(Formation_06), &N(pra_01), "ホワイトガボンx２"),
-    BATTLE(N(Formation_07), &N(pra_01), "ホワイトガボンx３"),
-    BATTLE(N(Formation_08), &N(pra_01), "ホワイトガボンx２,バサバサチュルル"),
-    BATTLE(N(Formation_09), &N(pra_01), "ホワイトガボンx２,イエローカメック"),
-    BATTLE(N(Formation_0A), &N(pra_01), "ホワイトガボンx２,ホワイトカメック"),
-    BATTLE(N(Formation_0B), &N(pra_01), "ホワイトガボンx２,ホワイトカメック,レッドカメック"),
-    BATTLE(N(Formation_0C), &N(pra_01), "ホワイトガボン,グレイカメック"),
-    BATTLE(N(Formation_0D), &N(pra_01), "ホワイトガボンx３,グリーンカメック"),
-    BATTLE(N(Formation_0E), &N(pra_01), "ホワイトガボンx２,グリーンカメック,ホワイトカメック（そら）"),
-    BATTLE(N(Formation_0F), &N(pra_01), "セキゾー"),
+    BATTLE(N(Formation_01), N(pra_01), "バサバサチュルルx2"),
+    BATTLE(N(Formation_02), N(pra_01), "バサバサチュルルx3"),
+    BATTLE(N(Formation_03), N(pra_01), "バサバサチュルルx4"),
+    BATTLE(N(Formation_04), N(pra_01), "バサバサチュルルx3,イエローカメック（そら）"),
+    BATTLE(N(Formation_05), N(pra_01), "ホワイトガボン"),
+    BATTLE(N(Formation_06), N(pra_01), "ホワイトガボンx２"),
+    BATTLE(N(Formation_07), N(pra_01), "ホワイトガボンx３"),
+    BATTLE(N(Formation_08), N(pra_01), "ホワイトガボンx２,バサバサチュルル"),
+    BATTLE(N(Formation_09), N(pra_01), "ホワイトガボンx２,イエローカメック"),
+    BATTLE(N(Formation_0A), N(pra_01), "ホワイトガボンx２,ホワイトカメック"),
+    BATTLE(N(Formation_0B), N(pra_01), "ホワイトガボンx２,ホワイトカメック,レッドカメック"),
+    BATTLE(N(Formation_0C), N(pra_01), "ホワイトガボン,グレイカメック"),
+    BATTLE(N(Formation_0D), N(pra_01), "ホワイトガボンx３,グリーンカメック"),
+    BATTLE(N(Formation_0E), N(pra_01), "ホワイトガボンx２,グリーンカメック,ホワイトカメック（そら）"),
+    BATTLE(N(Formation_0F), N(pra_01), "セキゾー"),
     {},
 };
 
 StageList N(Stages) = {
-    { "pra_01", &N(pra_01) },
-    { "pra_02", &N(pra_02) },
-    { "pra_03", &N(pra_03) },
-    { "pra_03b", &N(pra_03b) },
-    { "pra_03c", &N(pra_03c) },
-    { "pra_04", &N(pra_04) },
+    STAGE("pra_01", N(pra_01)),
+    STAGE("pra_02", N(pra_02)),
+    STAGE("pra_03", N(pra_03)),
+    STAGE("pra_03b", N(pra_03b)),
+    STAGE("pra_03c", N(pra_03c)),
+    STAGE("pra_04", N(pra_04)),
     {},
 };

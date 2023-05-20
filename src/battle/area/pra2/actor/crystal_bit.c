@@ -12,57 +12,62 @@ extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
 extern EvtScript N(nextTurn);
 
+enum N(ActorPartIDs) {
+    PRT_MAIN            = 1,
+    PRT_2               = 2,
+};
+
 s32 N(IdleAnimations_1)[] = {
-    STATUS_NORMAL, ANIM_CrystalKing_Anim0A,
+    STATUS_KEY_NORMAL,    ANIM_CrystalKing_Anim0A,
     STATUS_END,
 };
 
 s32 N(IdleAnimations_2)[] = {
-    STATUS_NORMAL, ANIM_CrystalKing_Anim0B,
+    STATUS_KEY_NORMAL,    ANIM_CrystalKing_Anim0B,
     STATUS_END,
 };
 
 s32 N(IdleAnimations_3)[] = {
-    STATUS_NORMAL, ANIM_CrystalKing_Anim0C,
+    STATUS_KEY_NORMAL,    ANIM_CrystalKing_Anim0C,
     STATUS_END,
 };
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 0,
-    ELEMENT_FIRE, 0,
-    ELEMENT_ICE, 99,
+    ELEMENT_NORMAL,   0,
+    ELEMENT_FIRE,     0,
+    ELEMENT_ICE,     99,
     ELEMENT_END,
 };
 
 s32 N(StatusTable)[] = {
-    STATUS_NORMAL, 0,
-    STATUS_DEFAULT, 0,
-    STATUS_SLEEP, 0,
-    STATUS_POISON, 0,
-    STATUS_FROZEN, 0,
-    STATUS_DIZZY, 0,
-    STATUS_FEAR, 0,
-    STATUS_STATIC, 0,
-    STATUS_PARALYZE, 0,
-    STATUS_SHRINK, 0,
-    STATUS_STOP, 0,
-    STATUS_DEFAULT_TURN_MOD, 0,
-    STATUS_SLEEP_TURN_MOD, 0,
-    STATUS_POISON_TURN_MOD, 0,
-    STATUS_FROZEN_TURN_MOD, 0,
-    STATUS_DIZZY_TURN_MOD, 0,
-    STATUS_FEAR_TURN_MOD, 0,
-    STATUS_STATIC_TURN_MOD, 0,
-    STATUS_PARALYZE_TURN_MOD, 0,
-    STATUS_SHRINK_TURN_MOD, 0,
-    STATUS_STOP_TURN_MOD, 0,
+    STATUS_KEY_NORMAL,              0,
+    STATUS_KEY_DEFAULT,             0,
+    STATUS_KEY_SLEEP,               0,
+    STATUS_KEY_POISON,              0,
+    STATUS_KEY_FROZEN,              0,
+    STATUS_KEY_DIZZY,               0,
+    STATUS_KEY_FEAR,                0,
+    STATUS_KEY_STATIC,              0,
+    STATUS_KEY_PARALYZE,            0,
+    STATUS_KEY_SHRINK,              0,
+    STATUS_KEY_STOP,                0,
+    STATUS_TURN_MOD_DEFAULT,        0,
+    STATUS_TURN_MOD_SLEEP,          0,
+    STATUS_TURN_MOD_POISON,         0,
+    STATUS_TURN_MOD_FROZEN,         0,
+    STATUS_TURN_MOD_DIZZY,          0,
+    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_STATIC,         0,
+    STATUS_TURN_MOD_PARALYZE,       0,
+    STATUS_TURN_MOD_SHRINK,         0,
+    STATUS_TURN_MOD_STOP,           0,
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts_1)[] = {
+ActorPartBlueprint N(ActorParts_1)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 16 },
         .opacity = 255,
@@ -74,7 +79,7 @@ ActorPartBlueprint N(parts_1)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_20 | ACTOR_PART_FLAG_MULTI_TARGET | ACTOR_PART_FLAG_80000000,
-        .index = 2,
+        .index = PRT_2,
         .posOffset = { 0, 50, 0 },
         .targetOffset = { 0, -34 },
         .opacity = 255,
@@ -86,10 +91,10 @@ ActorPartBlueprint N(parts_1)[] = {
     },
 };
 
-ActorPartBlueprint N(parts_2)[] = {
+ActorPartBlueprint N(ActorParts_2)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 16 },
         .opacity = 255,
@@ -101,7 +106,7 @@ ActorPartBlueprint N(parts_2)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_20 | ACTOR_PART_FLAG_MULTI_TARGET | ACTOR_PART_FLAG_80000000,
-        .index = 2,
+        .index = PRT_2,
         .posOffset = { 0, 50, 0 },
         .targetOffset = { 0, -34 },
         .opacity = 255,
@@ -113,10 +118,10 @@ ActorPartBlueprint N(parts_2)[] = {
     },
 };
 
-ActorPartBlueprint N(parts_3)[] = {
+ActorPartBlueprint N(ActorParts_3)[] = {
     {
         .flags = ACTOR_PART_FLAG_NO_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 16 },
         .opacity = 255,
@@ -128,7 +133,7 @@ ActorPartBlueprint N(parts_3)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_20 | ACTOR_PART_FLAG_MULTI_TARGET | ACTOR_PART_FLAG_80000000,
-        .index = 2,
+        .index = PRT_2,
         .posOffset = { 0, 50, 0 },
         .targetOffset = { 0, -34 },
         .opacity = 255,
@@ -145,8 +150,8 @@ ActorBlueprint N(1) = {
     .type = ACTOR_TYPE_CRYSTAL_BIT,
     .level = 0,
     .maxHP = 1,
-    .partCount = ARRAY_COUNT(N(parts_1)),
-    .partsData = N(parts_1),
+    .partCount = ARRAY_COUNT(N(ActorParts_1)),
+    .partsData = N(ActorParts_1),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
@@ -158,9 +163,9 @@ ActorBlueprint N(1) = {
     .powerBounceChance = 90,
     .coinReward = 0,
     .size = { 18, 15 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 ActorBlueprint N(2) = {
@@ -168,8 +173,8 @@ ActorBlueprint N(2) = {
     .type = ACTOR_TYPE_CRYSTAL_BIT,
     .level = 0,
     .maxHP = 1,
-    .partCount = ARRAY_COUNT(N(parts_2)),
-    .partsData = N(parts_2),
+    .partCount = ARRAY_COUNT(N(ActorParts_2)),
+    .partsData = N(ActorParts_2),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
@@ -181,9 +186,9 @@ ActorBlueprint N(2) = {
     .powerBounceChance = 90,
     .coinReward = 0,
     .size = { 18, 15 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 ActorBlueprint N(3) = {
@@ -191,8 +196,8 @@ ActorBlueprint N(3) = {
     .type = ACTOR_TYPE_CRYSTAL_BIT,
     .level = 0,
     .maxHP = 1,
-    .partCount = ARRAY_COUNT(N(parts_3)),
-    .partsData = N(parts_3),
+    .partCount = ARRAY_COUNT(N(ActorParts_3)),
+    .partsData = N(ActorParts_3),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
@@ -204,9 +209,9 @@ ActorBlueprint N(3) = {
     .powerBounceChance = 90,
     .coinReward = 0,
     .size = { 18, 15 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 EvtScript N(init) = {
@@ -259,7 +264,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, 1)
-            EVT_CALL(GetAnimation, ACTOR_SELF, 1, LVar1)
+            EVT_CALL(GetAnimation, ACTOR_SELF, PRT_MAIN, LVar1)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
@@ -287,14 +292,14 @@ EvtScript N(handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, 1)
-            EVT_CALL(GetAnimation, ACTOR_SELF, 1, LVar1)
+            EVT_CALL(GetAnimation, ACTOR_SELF, PRT_MAIN, LVar1)
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, 1)
-            EVT_CALL(GetAnimation, ACTOR_SELF, 1, LVar1)
+            EVT_CALL(GetAnimation, ACTOR_SELF, PRT_MAIN, LVar1)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
-            EVT_CALL(func_8027D32C, ACTOR_SELF)
+            EVT_CALL(HideHealthBar, ACTOR_SELF)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_301)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
@@ -303,15 +308,15 @@ EvtScript N(handleEvent) = {
             EVT_CALL(GetOwnerID, LVar0)
             EVT_CALL(GetActorVar, ACTOR_ENEMY0, 4, LVar1)
             EVT_IF_EQ(LVar0, LVar1)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim05)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim05)
             EVT_END_IF
             EVT_CALL(GetActorVar, ACTOR_ENEMY0, 5, LVar1)
             EVT_IF_EQ(LVar0, LVar1)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim06)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim06)
             EVT_END_IF
             EVT_CALL(GetActorVar, ACTOR_ENEMY0, 6, LVar1)
             EVT_IF_EQ(LVar0, LVar1)
-                EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_CrystalKing_Anim07)
+                EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim07)
             EVT_END_IF
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.2))
             EVT_CALL(RandInt, 360, LVar0)
@@ -328,7 +333,7 @@ EvtScript N(handleEvent) = {
             EVT_SET(LVar0, 255)
             EVT_LOOP(20)
                 EVT_SUB(LVar0, 12)
-                EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, LVar0)
+                EVT_CALL(SetPartAlpha, ACTOR_SELF, PRT_MAIN, LVar0)
                 EVT_WAIT(1)
             EVT_END_LOOP
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
@@ -356,7 +361,7 @@ EvtScript N(handleEvent) = {
                 EVT_SET_CONST(LVar2, -1)
             EVT_END_IF
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
-            EVT_CALL(func_8027D32C, ACTOR_SELF)
+            EVT_CALL(HideHealthBar, ACTOR_SELF)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_301)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.8))
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
@@ -377,7 +382,7 @@ EvtScript N(handleEvent) = {
             EVT_SET(LVar0, 255)
             EVT_LOOP(20)
                 EVT_SUB(LVar0, 12)
-                EVT_CALL(SetPartAlpha, ACTOR_SELF, 1, LVar0)
+                EVT_CALL(SetPartAlpha, ACTOR_SELF, PRT_MAIN, LVar0)
                 EVT_WAIT(1)
             EVT_END_LOOP
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
