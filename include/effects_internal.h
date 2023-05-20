@@ -3,7 +3,7 @@
 
 #include "effects.h"
 
-s32 gfx_rand_int(s32);
+s32 effect_rand_int(s32);
 s32 func_E0200044(s32, s32);
 
 EffectInstance* shim_create_effect_instance(EffectBlueprint* effectBp);

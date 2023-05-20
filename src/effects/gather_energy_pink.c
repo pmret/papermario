@@ -58,7 +58,7 @@ void gather_energy_pink_main(s32 type, f32 posX, f32 posY, f32 posZ, f32 scale, 
 
     data->unk_1C = 10.0f;
 
-    data->unk_58 = gfx_rand_int(360);
+    data->unk_58 = effect_rand_int(360);
     data->unk_5C = 4.0f;
 
     data->unk_50 = 0;

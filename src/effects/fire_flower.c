@@ -63,9 +63,9 @@ EffectInstance* fire_flower_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg
         part->pos.z = 0;
         part->unk_14 = 8.0f;
         part->unk_18 = 0;
-        part->unk_1C = gfx_rand_int(20) - 8;
-        part->unk_20 = (gfx_rand_int(10) - 5) * 0.05;
-        part->unk_24 = gfx_rand_int(80) + 5;
+        part->unk_1C = effect_rand_int(20) - 8;
+        part->unk_20 = (effect_rand_int(10) - 5) * 0.05;
+        part->unk_24 = effect_rand_int(80) + 5;
         part->unk_3C = 255;
         partData->z = i - 1;
         partData->x = 10;
