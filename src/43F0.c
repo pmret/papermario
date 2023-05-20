@@ -514,8 +514,8 @@ s32 rand_int_internal(u32 max) {
         partition_size = 1;
     }
 
-    // max_plus_one*partition_size, 2^32) is rejected as it would return max_plus_one
-    // this ensures the result is [0,max] whilst ensuring each partition is equally possible
+    // numbers in the leftover [max_plus_one*partition_size, 2^32) are rejected as they would return max_plus_one
+    // this ensures the result is [0,max] whilst also ensuring each partition is the same size and equally probable
     do {
         // determine which partition the random number is in by dividing it by partition_size
         result = advance_rng() / partition_size;
