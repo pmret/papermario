@@ -17,6 +17,7 @@ void boot_idle(void* data);
 void boot_main(void* data);
 
 void is_debug_init(void);
+void is_debug_panic(const char* message, char* file, s32 line);
 
 f32 signF(f32 val);
 
