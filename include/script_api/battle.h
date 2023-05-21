@@ -304,7 +304,7 @@ ApiStatus ShowStartRecoveryShimmer(Evt* script, s32 isInitialCall);
 ApiStatus ShowRecoveryShimmer(Evt* script, s32 isInitialCall);
 ApiStatus func_80273444(Evt* script, s32 isInitialCall);
 ApiStatus WaitForState(Evt* script, s32 isInitialCall);
-ApiStatus SetBattleMenuDisableFlags(Evt* script, s32 isInitialCall);
+ApiStatus SetBattleMenuEnabledFlags(Evt* script, s32 isInitialCall);
 ApiStatus SetBattleState(Evt* script, s32 isInitialCall);
 ApiStatus func_8027D434(Evt* script, s32 isInitialCall);
 ApiStatus func_8026F1A0(Evt* script, s32 isInitialCall);

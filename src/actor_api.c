@@ -2181,15 +2181,15 @@ ApiStatus func_8026DF88(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetBattleMenuDisableFlags(Evt* script, s32 isInitialCall) {
+ApiStatus SetBattleMenuEnabledFlags(Evt* script, s32 isInitialCall) {
     s32 flagsValue = *script->ptrReadPos;
 
-    gBattleStatus.menuDisableFlags = flagsValue;
+    gBattleStatus.enabledMenusFlags = flagsValue;
     return ApiStatus_DONE2;
 }
 
 ApiStatus SetEnabledStarPowers(Evt* script, s32 isInitialCall) {
-    gBattleStatus.enabledStarPowersMask = *script->ptrReadPos;
+    gBattleStatus.enabledStarPowersFlags = *script->ptrReadPos;
     return ApiStatus_DONE2;
 }
 

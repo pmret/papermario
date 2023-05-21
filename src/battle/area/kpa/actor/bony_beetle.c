@@ -291,7 +291,7 @@ EvtScript N(takeTurn) = {
     EVT_END
 };
 
-s32 N(bounceTable)[] = { 7, 13, 17, 21, 23, 24, 23, 21, 17, 13, 7, 0, 4, 6, 7, 6, 4, 0, 2, 0, };
+s32 N(FlipPosOffsets)[] = { 7, 13, 17, 21, 23, 24, 23, 21, 17, 13, 7, 0, 4, 6, 7, 6, 4, 0, 2, 0, };
 
 EvtScript N(handleEvent_normal) = {
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
@@ -341,7 +341,7 @@ EvtScript N(handleEvent_normal) = {
             EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_SPIKY_TOP, FALSE)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, TRUE)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim08)
-            EVT_USE_BUF(N(bounceTable))
+            EVT_USE_BUF(N(FlipPosOffsets))
             EVT_LOOP(20)
                 EVT_BUF_READ1(LVar0)
                 EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, LVar0, 0)
@@ -563,7 +563,7 @@ EvtScript N(handleEvent_spiky) = {
             EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_SPIKY_TOP, FALSE)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, TRUE)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim09)
-            EVT_USE_BUF(N(bounceTable))
+            EVT_USE_BUF(N(FlipPosOffsets))
             EVT_LOOP(20)
                 EVT_BUF_READ1(LVar0)
                 EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, LVar0, 0)
@@ -939,7 +939,7 @@ EvtScript N(handleEvent_flipped) = {
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_flipped)))
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim1A)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, TRUE)
-            EVT_USE_BUF(N(bounceTable))
+            EVT_USE_BUF(N(FlipPosOffsets))
             EVT_LOOP(20)
                 EVT_BUF_READ1(LVar0)
                 EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, LVar0, 0)
@@ -1071,7 +1071,7 @@ EvtScript N(handleEvent_spiky_flipped) = {
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_spiky_flipped)))
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BonyBeetle_Anim1B)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLIPPED, TRUE)
-            EVT_USE_BUF(N(bounceTable))
+            EVT_USE_BUF(N(FlipPosOffsets))
             EVT_LOOP(20)
                 EVT_BUF_READ1(LVar0)
                 EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, LVar0, 0)

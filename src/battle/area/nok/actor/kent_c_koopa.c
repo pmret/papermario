@@ -18,7 +18,7 @@ enum N(ActorPartIDs) {
     PRT_9               = 9,
 };
 
-s32 N(intTable_80227910)[] = {
+s32 N(FlipPosOffsets)[] = {
     9, 16, 22, 26, 30, 32, 33, 32, 30, 26, 22, 16, 9, 0,
     4, 6, 7, 6, 4, 0,
     2, 0,
@@ -1031,8 +1031,8 @@ EvtScript N(flipOver_KentC) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_USE_BUF(EVT_PTR(N(intTable_80227910)))
-    EVT_LOOP(ARRAY_COUNT(N(intTable_80227910)))
+    EVT_USE_BUF(EVT_PTR(N(FlipPosOffsets)))
+    EVT_LOOP(ARRAY_COUNT(N(FlipPosOffsets)))
         EVT_BUF_READ1(LVar0)
         EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, LVar0, 0)
         EVT_IF_EQ(LVar0, 0)

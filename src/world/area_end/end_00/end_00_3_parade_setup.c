@@ -452,22 +452,22 @@ ParadeNpcInfo N(ParadeNpcsTable)[] = {
         .yaw = 90.0f
     },
     [NPC_Bobomb1] {
-        .initialAnim = ANIM_Bobomb_Anim05,
+        .initialAnim = ANIM_Bobomb_WalkLit,
         .pos = { -1750.0f, 0.0f, 43.0f },
         .yaw = 270.0f
     },
     [NPC_Bobomb2] {
-        .initialAnim = ANIM_Bobomb_Anim05,
+        .initialAnim = ANIM_Bobomb_WalkLit,
         .pos = { -1720.0f, 0.0f, 43.0f },
         .yaw = 270.0f
     },
     [NPC_Bobomb3] {
-        .initialAnim = ANIM_Bobomb_Anim05,
+        .initialAnim = ANIM_Bobomb_WalkLit,
         .pos = { -1690.0f, 0.0f, 43.0f },
         .yaw = 270.0f
     },
     [NPC_Bobomb4] {
-        .initialAnim = ANIM_Bobomb_Anim05,
+        .initialAnim = ANIM_Bobomb_WalkLit,
         .pos = { -1660.0f, 0.0f, 43.0f },
         .yaw = 270.0f
     },

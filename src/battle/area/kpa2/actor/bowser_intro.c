@@ -157,7 +157,7 @@ EvtScript N(init) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_TURN_COUNTER), 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_PEACH_SPOKE), 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 14, 0)
-    EVT_CALL(SetBattleMenuDisableFlags, BTL_MENU_DISABLED_JUMP)
+    EVT_CALL(SetBattleMenuEnabledFlags, BTL_MENU_ENABLED_JUMP)
     EVT_CALL(CreateNpc, 0x00000000, ANIM_ParadePeach_IdleRaisedArms)
     EVT_CALL(SetNpcYaw, 0x00000000, 90)
     EVT_CALL(SetNpcPos, 0x00000000, -130, 0, -12)

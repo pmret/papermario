@@ -1,18 +1,13 @@
-#include "common.h"
-#include "effects.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/WorldEldstar.h"
 
-#define NAMESPACE b_area_trd_part_3_eldstar
+#define NAMESPACE A(eldstar)
 
 extern EvtScript N(EVS_Init);
-extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_Idle);
+extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_HandleEvent);
 extern EvtScript N(EVS_ManageTutorial);
-
-BSS s32 D_80219040;
 
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
@@ -100,45 +95,44 @@ EvtScript N(EVS_Init) = {
     EVT_END
 };
 
-API_CALLABLE(func_80218000_4CF1B0) {
+API_CALLABLE(N(UpdateHoverOffset)) {
     Actor* actor = get_actor(script->owner1.actorID);
-    s32* sym;
+    static s32 HoverOffset;
 
     if (isInitialCall) {
-        D_80219040 = 0;
+        HoverOffset = 0;
     }
 
-    sym = &D_80219040;
-    *sym += 15;
-    *sym = clamp_angle(*sym);
-    actor->verticalRenderOffset = sin_rad(DEG_TO_RAD(*sym)) * 3.0f;
+    HoverOffset += 15;
+    HoverOffset = clamp_angle(HoverOffset);
+    actor->verticalRenderOffset = sin_rad(DEG_TO_RAD(HoverOffset)) * 3.0f;
 
     return ApiStatus_BLOCK;
 }
 
-API_CALLABLE(func_802180C8_4CF278) {
+API_CALLABLE(N(StartBlinkingSP)) {
     status_bar_start_blinking_sp();
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_802180E8_4CF298) {
+API_CALLABLE(N(StopBlinkingSP)) {
     status_bar_stop_blinking_sp();
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_80218108_4CF2B8) {
+API_CALLABLE(N(StartBlinkingHPandFP)) {
     status_bar_start_blinking_hp();
     status_bar_start_blinking_fp();
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_80218130_4CF2E0) {
+API_CALLABLE(N(StopBlinkingHPandFP)) {
     status_bar_stop_blinking_hp();
     status_bar_stop_blinking_fp();
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_80218158_4CF308) {
+API_CALLABLE(N(ClearPlayerMenuSelections)) {
     BattleStatus* battleStatus = &gBattleStatus;
 
     battleStatus->lastPlayerMenuSelection[BTL_MENU_IDX_MAIN] = 0;
@@ -164,7 +158,7 @@ API_CALLABLE(N(func_80218170_4CF320)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_802181B4_4CF364) {
+API_CALLABLE(N(func_802181B4_4CF364)) {
     BattleStatus* battleStatus = &gBattleStatus;
 
     if (isInitialCall) {
@@ -181,7 +175,7 @@ API_CALLABLE(func_802181B4_4CF364) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_802181F8_4CF3A8) {
+API_CALLABLE(N(AddStarPower)) {
     PlayerData* playerData = &gPlayerData;
 
     playerData->specialBarsFilled += 32;
@@ -190,7 +184,7 @@ API_CALLABLE(func_802181F8_4CF3A8) {
 }
 
 EvtScript N(EVS_Idle) = {
-    EVT_CALL(func_80218000_4CF1B0)
+    EVT_CALL(N(UpdateHoverOffset))
     EVT_RETURN
     EVT_END
 };
@@ -207,7 +201,7 @@ EvtScript N(EVS_TakeTurn) = {
 
 EvtScript N(EVS_ManageTutorial) = {
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_TUTORIAL_BATTLE, TRUE)
-    EVT_CALL(func_80218158_4CF308)
+    EVT_CALL(N(ClearPlayerMenuSelections))
     EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MENU)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EVT_WAIT(15)
@@ -221,9 +215,9 @@ EvtScript N(EVS_ManageTutorial) = {
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_LookUp)
     EVT_END_THREAD
     EVT_WAIT(10)
-    EVT_CALL(func_802180C8_4CF278)
+    EVT_CALL(N(StartBlinkingSP))
     EVT_WAIT(120)
-    EVT_CALL(func_802180E8_4CF298)
+    EVT_CALL(N(StopBlinkingSP))
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(EnableActorBlur, ACTOR_SELF, 1)
@@ -232,13 +226,13 @@ EvtScript N(EVS_ManageTutorial) = {
     EVT_CALL(ActorSpeak, MSG_CH1_0115, ACTOR_SELF, PRT_MAIN, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
     EVT_WAIT(10)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_LookUp)
-    EVT_CALL(func_802180C8_4CF278)
+    EVT_CALL(N(StartBlinkingSP))
     EVT_WAIT(120)
-    EVT_CALL(func_802180E8_4CF298)
+    EVT_CALL(N(StopBlinkingSP))
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EVT_CALL(ActorSpeak, MSG_CH1_0116, ACTOR_SELF, PRT_MAIN, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
     EVT_WAIT(10)
-    EVT_CALL(SetBattleMenuDisableFlags, BTL_MENU_DISABLED_STAR_POWERS)
+    EVT_CALL(SetBattleMenuEnabledFlags, BTL_MENU_ENABLED_STAR_POWERS)
     EVT_CALL(SetEnabledStarPowers, 1 << STAR_POWER_INDEX(MOVE_REFRESH))
     EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MOVE)
     EVT_SET(LVar0, 255)
@@ -271,9 +265,9 @@ EvtScript N(EVS_ManageTutorial) = {
     EVT_WAIT(10)
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_LookUp)
-    EVT_CALL(func_802180C8_4CF278)
+    EVT_CALL(N(StartBlinkingSP))
     EVT_WAIT(120)
-    EVT_CALL(func_802180E8_4CF298)
+    EVT_CALL(N(StopBlinkingSP))
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EVT_CALL(ActorSpeak, MSG_CH1_0118, ACTOR_SELF, PRT_MAIN, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
     EVT_WAIT(10)
@@ -292,9 +286,9 @@ EvtScript N(EVS_ManageTutorial) = {
     EVT_END_THREAD
     EVT_WAIT(10)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_LookUp)
-    EVT_CALL(func_802180C8_4CF278)
+    EVT_CALL(N(StartBlinkingSP))
     EVT_WAIT(120)
-    EVT_CALL(func_802180E8_4CF298)
+    EVT_CALL(N(StopBlinkingSP))
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
@@ -305,9 +299,9 @@ EvtScript N(EVS_ManageTutorial) = {
     EVT_WAIT(10)
     EVT_CALL(ActorSpeak, MSG_CH1_011B, ACTOR_SELF, PRT_MAIN, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
     EVT_WAIT(10)
-    EVT_CALL(SetBattleMenuDisableFlags, BTL_MENU_DISABLED_STAR_POWERS)
+    EVT_CALL(SetBattleMenuEnabledFlags, BTL_MENU_ENABLED_STAR_POWERS)
     EVT_CALL(SetEnabledStarPowers, 1 << STAR_POWER_INDEX(MOVE_FOCUS))
-    EVT_CALL(func_80218158_4CF308)
+    EVT_CALL(N(ClearPlayerMenuSelections))
     EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MOVE)
     EVT_SET(LVar0, 255)
     EVT_LOOP(10)
@@ -339,9 +333,9 @@ EvtScript N(EVS_ManageTutorial) = {
     EVT_WAIT(10)
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_LookUp)
-    EVT_CALL(func_802180C8_4CF278)
+    EVT_CALL(N(StartBlinkingSP))
     EVT_WAIT(120)
-    EVT_CALL(func_802180E8_4CF298)
+    EVT_CALL(N(StopBlinkingSP))
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EVT_CALL(ActorSpeak, MSG_CH1_011D, ACTOR_SELF, PRT_MAIN, ANIM_WorldEldstar_Wave, ANIM_WorldEldstar_Idle)
     EVT_CALL(WaitForState, BATTLE_STATE_0)

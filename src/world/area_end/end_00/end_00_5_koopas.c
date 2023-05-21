@@ -108,11 +108,11 @@ EvtScript N(EVS_Bobomb1) = {
     EVT_CALL(SetNpcFlagBits, NPC_Bobomb1, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, TRUE)
     EVT_WAIT(180)
     EVT_CALL(NpcMoveTo, NPC_Bobomb1, -1900, 43, 70)
-    EVT_CALL(SetNpcAnimation, NPC_Bobomb1, ANIM_Bobomb_Anim0B)
+    EVT_CALL(SetNpcAnimation, NPC_Bobomb1, ANIM_Bobomb_AngryIdle)
     EVT_WAIT(40)
-    EVT_CALL(SetNpcAnimation, NPC_Bobomb1, ANIM_Bobomb_Anim14)
+    EVT_CALL(SetNpcAnimation, NPC_Bobomb1, ANIM_Bobomb_Buildup)
     EVT_WAIT(20)
-    EVT_CALL(SetNpcAnimation, NPC_Bobomb1, ANIM_Bobomb_Anim16)
+    EVT_CALL(SetNpcAnimation, NPC_Bobomb1, ANIM_Bobomb_FaceFwd)
     EVT_CALL(GetNpcPos, NPC_Bobomb1, LVar0, LVar1, LVar2)
     EVT_PLAY_EFFECT(EFFECT_00, LVar0, LVar1, LVar2, 1, 20, 3, 2)
     EVT_CALL(EnableNpcShadow, NPC_Bobomb1, FALSE)
@@ -121,7 +121,7 @@ EvtScript N(EVS_Bobomb1) = {
     EVT_CALL(NpcFlyTo, NPC_Bobomb1, -1870, 12, 40, 20, 0, EASING_LINEAR)
     EVT_CALL(SetNpcYaw, NPC_Bobomb1, 270)
     EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_Bobomb1, ANIM_Bobomb_Anim17)
+    EVT_CALL(SetNpcAnimation, NPC_Bobomb1, ANIM_Bobomb_WaveFwd)
     EVT_RETURN
     EVT_END
 };
@@ -130,11 +130,11 @@ EvtScript N(EVS_Bobomb2) = {
     EVT_CALL(SetNpcFlagBits, NPC_Bobomb2, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, TRUE)
     EVT_WAIT(180)
     EVT_CALL(NpcMoveTo, NPC_Bobomb2, -1870, 43, 70)
-    EVT_CALL(SetNpcAnimation, NPC_Bobomb2, ANIM_Bobomb_Anim0B)
+    EVT_CALL(SetNpcAnimation, NPC_Bobomb2, ANIM_Bobomb_AngryIdle)
     EVT_WAIT(40)
-    EVT_CALL(SetNpcAnimation, NPC_Bobomb2, ANIM_Bobomb_Anim14)
+    EVT_CALL(SetNpcAnimation, NPC_Bobomb2, ANIM_Bobomb_Buildup)
     EVT_WAIT(20)
-    EVT_CALL(SetNpcAnimation, NPC_Bobomb2, ANIM_Bobomb_Anim16)
+    EVT_CALL(SetNpcAnimation, NPC_Bobomb2, ANIM_Bobomb_FaceFwd)
     EVT_CALL(GetNpcPos, NPC_Bobomb2, LVar0, LVar1, LVar2)
     EVT_PLAY_EFFECT(EFFECT_00, LVar0, LVar1, LVar2, 1, 20, 3, 2)
     EVT_CALL(EnableNpcShadow, NPC_Bobomb2, FALSE)
@@ -143,7 +143,7 @@ EvtScript N(EVS_Bobomb2) = {
     EVT_CALL(NpcFlyTo, NPC_Bobomb2, -1860, 65, 13, 20, 0, EASING_LINEAR)
     EVT_CALL(SetNpcYaw, NPC_Bobomb2, 270)
     EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_Bobomb2, ANIM_Bobomb_Anim17)
+    EVT_CALL(SetNpcAnimation, NPC_Bobomb2, ANIM_Bobomb_WaveFwd)
     EVT_RETURN
     EVT_END
 };
@@ -152,11 +152,11 @@ EvtScript N(EVS_Bobomb3) = {
     EVT_CALL(SetNpcFlagBits, NPC_Bobomb3, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, TRUE)
     EVT_WAIT(180)
     EVT_CALL(NpcMoveTo, NPC_Bobomb3, -1840, 43, 70)
-    EVT_CALL(SetNpcAnimation, NPC_Bobomb3, ANIM_Bobomb_Anim0B)
+    EVT_CALL(SetNpcAnimation, NPC_Bobomb3, ANIM_Bobomb_AngryIdle)
     EVT_WAIT(40)
-    EVT_CALL(SetNpcAnimation, NPC_Bobomb3, ANIM_Bobomb_Anim14)
+    EVT_CALL(SetNpcAnimation, NPC_Bobomb3, ANIM_Bobomb_Buildup)
     EVT_WAIT(20)
-    EVT_CALL(SetNpcAnimation, NPC_Bobomb3, ANIM_Bobomb_Anim16)
+    EVT_CALL(SetNpcAnimation, NPC_Bobomb3, ANIM_Bobomb_FaceFwd)
     EVT_CALL(GetNpcPos, NPC_Bobomb3, LVar0, LVar1, LVar2)
     EVT_PLAY_EFFECT(EFFECT_00, LVar0, LVar1, LVar2, 1, 20, 3, 2)
     EVT_CALL(EnableNpcShadow, NPC_Bobomb3, FALSE)
@@ -165,7 +165,7 @@ EvtScript N(EVS_Bobomb3) = {
     EVT_CALL(NpcFlyTo, NPC_Bobomb3, -1840, 65, 13, 20, 0, EASING_LINEAR)
     EVT_CALL(SetNpcYaw, NPC_Bobomb3, 90)
     EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_Bobomb3, ANIM_Bobomb_Anim17)
+    EVT_CALL(SetNpcAnimation, NPC_Bobomb3, ANIM_Bobomb_WaveFwd)
     EVT_RETURN
     EVT_END
 };
@@ -174,11 +174,11 @@ EvtScript N(EVS_Bobomb4) = {
     EVT_CALL(SetNpcFlagBits, NPC_Bobomb4, NPC_FLAG_8 | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_IGNORE_ENTITY_COLLISION, TRUE)
     EVT_WAIT(180)
     EVT_CALL(NpcMoveTo, NPC_Bobomb4, -1810, 43, 70)
-    EVT_CALL(SetNpcAnimation, NPC_Bobomb4, ANIM_Bobomb_Anim0B)
+    EVT_CALL(SetNpcAnimation, NPC_Bobomb4, ANIM_Bobomb_AngryIdle)
     EVT_WAIT(40)
-    EVT_CALL(SetNpcAnimation, NPC_Bobomb4, ANIM_Bobomb_Anim14)
+    EVT_CALL(SetNpcAnimation, NPC_Bobomb4, ANIM_Bobomb_Buildup)
     EVT_WAIT(20)
-    EVT_CALL(SetNpcAnimation, NPC_Bobomb4, ANIM_Bobomb_Anim16)
+    EVT_CALL(SetNpcAnimation, NPC_Bobomb4, ANIM_Bobomb_FaceFwd)
     EVT_CALL(GetNpcPos, NPC_Bobomb4, LVar0, LVar1, LVar2)
     EVT_PLAY_EFFECT(EFFECT_00, LVar0, LVar1, LVar2, 1, 20, 3, 2)
     EVT_CALL(EnableNpcShadow, NPC_Bobomb4, FALSE)
@@ -187,7 +187,7 @@ EvtScript N(EVS_Bobomb4) = {
     EVT_CALL(NpcFlyTo, NPC_Bobomb4, -1830, 12, 40, 20, 0, EASING_LINEAR)
     EVT_CALL(SetNpcYaw, NPC_Bobomb4, 90)
     EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_Bobomb4, ANIM_Bobomb_Anim17)
+    EVT_CALL(SetNpcAnimation, NPC_Bobomb4, ANIM_Bobomb_WaveFwd)
     EVT_RETURN
     EVT_END
 };

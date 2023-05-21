@@ -694,11 +694,7 @@ EvtScript N(idle_80227DE0) = {
     EVT_END
 };
 
-s32 N(intTable_80227DF0)[] = {
-    0x00000009, 0x00000010, 0x00000016, 0x0000001A, 0x0000001E, 0x00000020, 0x00000021, 0x00000020,
-    0x0000001E, 0x0000001A, 0x00000016, 0x00000010, 0x00000009, 0x00000000, 0x00000004, 0x00000006,
-    0x00000007, 0x00000006, 0x00000004, 0x00000000, 0x00000002, 0x00000000,
-};
+s32 N(FlipPosOffsets)[] = { 9, 16, 22, 26, 30, 32, 33, 32, 30, 26, 22, 16, 9, 0, 4, 6, 7, 6, 4, 0, 2, 0, };
 
 EvtScript N(handleEvent_80227E48) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
@@ -763,7 +759,7 @@ EvtScript N(handleEvent_80227E48) = {
             EVT_ELSE
                 EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KoopaBros_Green_Anim0C)
             EVT_END_IF
-            EVT_USE_BUF(EVT_PTR(N(intTable_80227DF0)))
+            EVT_USE_BUF(EVT_PTR(N(FlipPosOffsets)))
             EVT_LOOP(22)
                 EVT_BUF_READ1(LVar0)
                 EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, LVar0, 0)

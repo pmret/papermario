@@ -169,7 +169,7 @@ EvtScript N(kooper_idle) = {
     EVT_END
 };
 
-s32 N(kooper_dispOffsets)[] = {
+s32 N(FlipPosOffsets)[] = {
     9, 16, 22, 26, 30, 32, 33, 32, 30, 26, 22, 16, 9, 0, 4, 6, 7, 6, 4, 0, 2, 0,
 };
 
@@ -242,7 +242,7 @@ EvtScript N(kooper_handleEvent) = {
                 EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, -75)
                 EVT_WAIT(1)
             EVT_END_THREAD
-            EVT_USE_BUF(N(kooper_dispOffsets))
+            EVT_USE_BUF(N(FlipPosOffsets))
             EVT_LOOP(22)
                 EVT_BUF_READ1(LVar0)
                 EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, LVar0, 0)

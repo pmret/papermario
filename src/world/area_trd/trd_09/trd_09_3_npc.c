@@ -36,16 +36,16 @@ EvtScript N(D_80240844_9BDEA4) = {
     EVT_SET(LVar1, 1)
     EVT_CALL(GetNpcYaw, NPC_SELF, LVar2)
     EVT_SET(LVar3, 10)
-    EVT_SET(LVarA, ANIM_BillBlaster_Anim01)
-    EVT_SET(LVarB, ANIM_BillBlaster_Anim01)
+    EVT_SET(LVarA, ANIM_BillBlaster_Idle)
+    EVT_SET(LVarB, ANIM_BillBlaster_Idle)
     EVT_EXEC_WAIT(EVS_800936C0)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BillBlaster_Anim02)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BillBlaster_Fire)
     EVT_WAIT(15)
     EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(GetNpcYaw, NPC_SELF, LVar3)
     EVT_CALL(AddVectorPolar, LVar0, LVar2, EVT_FLOAT(20.0), LVar3)
     EVT_ADD(LVar1, 12)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BillBlaster_Anim01)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BillBlaster_Idle)
     EVT_CALL(GetSelfNpcID, LVar0)
     EVT_ADD(LVar0, 1)
     EVT_CALL(SetNpcVar, LVar0, 0, 1)
@@ -73,7 +73,7 @@ EvtScript N(EVS_NpcHit_BillBlaster) = {
         EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_JUMP)
         EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_HAMMER)
         EVT_CASE_OR_EQ(ENCOUNTER_TRIGGER_PARTNER)
-            EVT_SET(LVar0, ANIM_BillBlaster_Anim03)
+            EVT_SET(LVar0, ANIM_BillBlaster_Hurt)
             EVT_EXEC_WAIT(EVS_NpcHitRecoil)
         EVT_CASE_EQ(ENCOUNTER_TRIGGER_SPIN)
             EVT_THREAD
@@ -133,7 +133,7 @@ EvtScript N(D_80240C2C_9BE28C) = {
 };
 
 NpcSettings N(missing_80240CE4) = {
-    .defaultAnim = ANIM_BillBlaster_Anim01,
+    .defaultAnim = ANIM_BillBlaster_Idle,
     .height = 26,
     .radius = 32,
     .level = 10,
@@ -144,7 +144,7 @@ NpcSettings N(missing_80240CE4) = {
 };
 
 NpcSettings N(missing_80240D10) = {
-    .defaultAnim = ANIM_BulletBill_Anim01,
+    .defaultAnim = ANIM_BulletBill_Idle,
     .height = 14,
     .radius = 31,
     .level = 5,
@@ -373,9 +373,9 @@ EvtScript N(EVS_NpcAI_BillBlaster) = {
             EVT_IF_EQ(LVar0, 0)
                 EVT_CALL(GetSelfNpcID, LVar0)
                 EVT_CALL(SetNpcVar, LVarA, 0, LVar0)
-                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BillBlaster_Anim02)
+                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BillBlaster_Fire)
                 EVT_WAIT(15)
-                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BillBlaster_Anim01)
+                EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BillBlaster_Idle)
                 EVT_CALL(RandInt, 100, LVar0)
                 EVT_ADD(LVar0, 60)
                 EVT_WAIT(LVar0)
@@ -403,7 +403,7 @@ EvtScript N(EVS_NpcAI_BulletBill) = {
                 EVT_GOTO(2)
             EVT_END_IF
         EVT_WAIT(15)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BulletBill_Anim04)
+        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BulletBill_Fire)
         EVT_CALL(EnableNpcShadow, NPC_SELF, TRUE)
         EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
         EVT_CALL(SelfEnemyOverrideSyncPos, 1)
@@ -431,7 +431,7 @@ EvtScript N(EVS_NpcAI_BulletBill) = {
                 EVT_CALL(NpcMoveTo, NPC_SELF, -450, LVar3, 0)
         EVT_END_SWITCH
         EVT_CALL(func_80045838, -1, SOUND_B0000018, 0)
-        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BulletBill_Anim05)
+        EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_BulletBill_Hurt)
         EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
         EVT_ADD(LVar1, 5)
         EVT_ADD(LVar2, 1)
@@ -504,7 +504,7 @@ NpcSettings N(NpcSettings_KoopaBros_Green) = {
 };
 
 NpcSettings N(NpcSettings_BillBlaster) = {
-    .defaultAnim = ANIM_BillBlaster_Anim01,
+    .defaultAnim = ANIM_BillBlaster_Idle,
     .height = 26,
     .radius = 32,
     .level = 10,
@@ -514,7 +514,7 @@ NpcSettings N(NpcSettings_BillBlaster) = {
 };
 
 NpcSettings N(NpcSettings_BulletBill) = {
-    .defaultAnim = ANIM_BulletBill_Anim01,
+    .defaultAnim = ANIM_BulletBill_Idle,
     .height = 14,
     .radius = 31,
     .level = 5,
@@ -721,22 +721,22 @@ NpcData N(NpcData_BulletBill_Demo1) = {
         .flowerDrops = STANDARD_FLOWER_DROPS(2),
     },
     .animations = {
-        .idle   = ANIM_BulletBill_Anim01,
-        .walk   = ANIM_BulletBill_Anim02,
-        .run    = ANIM_BulletBill_Anim03,
-        .chase  = ANIM_BulletBill_Anim03,
-        .anim_4 = ANIM_BulletBill_Anim01,
-        .anim_5 = ANIM_BulletBill_Anim04,
-        .death  = ANIM_BulletBill_Anim05,
-        .hit    = ANIM_BulletBill_Anim05,
-        .anim_8 = ANIM_BulletBill_Anim01,
-        .anim_9 = ANIM_BulletBill_Anim01,
-        .anim_A = ANIM_BulletBill_Anim01,
-        .anim_B = ANIM_BulletBill_Anim01,
-        .anim_C = ANIM_BulletBill_Anim01,
-        .anim_D = ANIM_BulletBill_Anim01,
-        .anim_E = ANIM_BulletBill_Anim01,
-        .anim_F = ANIM_BulletBill_Anim01,
+        .idle   = ANIM_BulletBill_Idle,
+        .walk   = ANIM_BulletBill_TenseCopy,
+        .run    = ANIM_BulletBill_Tense,
+        .chase  = ANIM_BulletBill_Tense,
+        .anim_4 = ANIM_BulletBill_Idle,
+        .anim_5 = ANIM_BulletBill_Fire,
+        .death  = ANIM_BulletBill_Hurt,
+        .hit    = ANIM_BulletBill_Hurt,
+        .anim_8 = ANIM_BulletBill_Idle,
+        .anim_9 = ANIM_BulletBill_Idle,
+        .anim_A = ANIM_BulletBill_Idle,
+        .anim_B = ANIM_BulletBill_Idle,
+        .anim_C = ANIM_BulletBill_Idle,
+        .anim_D = ANIM_BulletBill_Idle,
+        .anim_E = ANIM_BulletBill_Idle,
+        .anim_F = ANIM_BulletBill_Idle,
     },
 };
 
@@ -771,22 +771,22 @@ NpcData N(NpcData_BulletBill_Demo2) = {
         .flowerDrops = STANDARD_FLOWER_DROPS(2),
     },
     .animations = {
-        .idle   = ANIM_BulletBill_Anim01,
-        .walk   = ANIM_BulletBill_Anim02,
-        .run    = ANIM_BulletBill_Anim03,
-        .chase  = ANIM_BulletBill_Anim03,
-        .anim_4 = ANIM_BulletBill_Anim01,
-        .anim_5 = ANIM_BulletBill_Anim04,
-        .death  = ANIM_BulletBill_Anim05,
-        .hit    = ANIM_BulletBill_Anim05,
-        .anim_8 = ANIM_BulletBill_Anim01,
-        .anim_9 = ANIM_BulletBill_Anim01,
-        .anim_A = ANIM_BulletBill_Anim01,
-        .anim_B = ANIM_BulletBill_Anim01,
-        .anim_C = ANIM_BulletBill_Anim01,
-        .anim_D = ANIM_BulletBill_Anim01,
-        .anim_E = ANIM_BulletBill_Anim01,
-        .anim_F = ANIM_BulletBill_Anim01,
+        .idle   = ANIM_BulletBill_Idle,
+        .walk   = ANIM_BulletBill_TenseCopy,
+        .run    = ANIM_BulletBill_Tense,
+        .chase  = ANIM_BulletBill_Tense,
+        .anim_4 = ANIM_BulletBill_Idle,
+        .anim_5 = ANIM_BulletBill_Fire,
+        .death  = ANIM_BulletBill_Hurt,
+        .hit    = ANIM_BulletBill_Hurt,
+        .anim_8 = ANIM_BulletBill_Idle,
+        .anim_9 = ANIM_BulletBill_Idle,
+        .anim_A = ANIM_BulletBill_Idle,
+        .anim_B = ANIM_BulletBill_Idle,
+        .anim_C = ANIM_BulletBill_Idle,
+        .anim_D = ANIM_BulletBill_Idle,
+        .anim_E = ANIM_BulletBill_Idle,
+        .anim_F = ANIM_BulletBill_Idle,
     },
 };
 
@@ -821,22 +821,22 @@ NpcData N(NpcData_BulletBill_Demo3) = {
         .flowerDrops = STANDARD_FLOWER_DROPS(2),
     },
     .animations = {
-        .idle   = ANIM_BulletBill_Anim01,
-        .walk   = ANIM_BulletBill_Anim02,
-        .run    = ANIM_BulletBill_Anim03,
-        .chase  = ANIM_BulletBill_Anim03,
-        .anim_4 = ANIM_BulletBill_Anim01,
-        .anim_5 = ANIM_BulletBill_Anim04,
-        .death  = ANIM_BulletBill_Anim05,
-        .hit    = ANIM_BulletBill_Anim05,
-        .anim_8 = ANIM_BulletBill_Anim01,
-        .anim_9 = ANIM_BulletBill_Anim01,
-        .anim_A = ANIM_BulletBill_Anim01,
-        .anim_B = ANIM_BulletBill_Anim01,
-        .anim_C = ANIM_BulletBill_Anim01,
-        .anim_D = ANIM_BulletBill_Anim01,
-        .anim_E = ANIM_BulletBill_Anim01,
-        .anim_F = ANIM_BulletBill_Anim01,
+        .idle   = ANIM_BulletBill_Idle,
+        .walk   = ANIM_BulletBill_TenseCopy,
+        .run    = ANIM_BulletBill_Tense,
+        .chase  = ANIM_BulletBill_Tense,
+        .anim_4 = ANIM_BulletBill_Idle,
+        .anim_5 = ANIM_BulletBill_Fire,
+        .death  = ANIM_BulletBill_Hurt,
+        .hit    = ANIM_BulletBill_Hurt,
+        .anim_8 = ANIM_BulletBill_Idle,
+        .anim_9 = ANIM_BulletBill_Idle,
+        .anim_A = ANIM_BulletBill_Idle,
+        .anim_B = ANIM_BulletBill_Idle,
+        .anim_C = ANIM_BulletBill_Idle,
+        .anim_D = ANIM_BulletBill_Idle,
+        .anim_E = ANIM_BulletBill_Idle,
+        .anim_F = ANIM_BulletBill_Idle,
     },
 };
 
@@ -871,22 +871,22 @@ NpcData N(NpcData_BulletBill_Demo4) = {
         .flowerDrops = STANDARD_FLOWER_DROPS(2),
     },
     .animations = {
-        .idle   = ANIM_BulletBill_Anim01,
-        .walk   = ANIM_BulletBill_Anim02,
-        .run    = ANIM_BulletBill_Anim03,
-        .chase  = ANIM_BulletBill_Anim03,
-        .anim_4 = ANIM_BulletBill_Anim01,
-        .anim_5 = ANIM_BulletBill_Anim04,
-        .death  = ANIM_BulletBill_Anim05,
-        .hit    = ANIM_BulletBill_Anim05,
-        .anim_8 = ANIM_BulletBill_Anim01,
-        .anim_9 = ANIM_BulletBill_Anim01,
-        .anim_A = ANIM_BulletBill_Anim01,
-        .anim_B = ANIM_BulletBill_Anim01,
-        .anim_C = ANIM_BulletBill_Anim01,
-        .anim_D = ANIM_BulletBill_Anim01,
-        .anim_E = ANIM_BulletBill_Anim01,
-        .anim_F = ANIM_BulletBill_Anim01,
+        .idle   = ANIM_BulletBill_Idle,
+        .walk   = ANIM_BulletBill_TenseCopy,
+        .run    = ANIM_BulletBill_Tense,
+        .chase  = ANIM_BulletBill_Tense,
+        .anim_4 = ANIM_BulletBill_Idle,
+        .anim_5 = ANIM_BulletBill_Fire,
+        .death  = ANIM_BulletBill_Hurt,
+        .hit    = ANIM_BulletBill_Hurt,
+        .anim_8 = ANIM_BulletBill_Idle,
+        .anim_9 = ANIM_BulletBill_Idle,
+        .anim_A = ANIM_BulletBill_Idle,
+        .anim_B = ANIM_BulletBill_Idle,
+        .anim_C = ANIM_BulletBill_Idle,
+        .anim_D = ANIM_BulletBill_Idle,
+        .anim_E = ANIM_BulletBill_Idle,
+        .anim_F = ANIM_BulletBill_Idle,
     },
 };
 
@@ -921,22 +921,22 @@ NpcData N(NpcData_BulletBill_Demo5) = {
         .flowerDrops = STANDARD_FLOWER_DROPS(2),
     },
     .animations = {
-        .idle   = ANIM_BulletBill_Anim01,
-        .walk   = ANIM_BulletBill_Anim02,
-        .run    = ANIM_BulletBill_Anim03,
-        .chase  = ANIM_BulletBill_Anim03,
-        .anim_4 = ANIM_BulletBill_Anim01,
-        .anim_5 = ANIM_BulletBill_Anim04,
-        .death  = ANIM_BulletBill_Anim05,
-        .hit    = ANIM_BulletBill_Anim05,
-        .anim_8 = ANIM_BulletBill_Anim01,
-        .anim_9 = ANIM_BulletBill_Anim01,
-        .anim_A = ANIM_BulletBill_Anim01,
-        .anim_B = ANIM_BulletBill_Anim01,
-        .anim_C = ANIM_BulletBill_Anim01,
-        .anim_D = ANIM_BulletBill_Anim01,
-        .anim_E = ANIM_BulletBill_Anim01,
-        .anim_F = ANIM_BulletBill_Anim01,
+        .idle   = ANIM_BulletBill_Idle,
+        .walk   = ANIM_BulletBill_TenseCopy,
+        .run    = ANIM_BulletBill_Tense,
+        .chase  = ANIM_BulletBill_Tense,
+        .anim_4 = ANIM_BulletBill_Idle,
+        .anim_5 = ANIM_BulletBill_Fire,
+        .death  = ANIM_BulletBill_Hurt,
+        .hit    = ANIM_BulletBill_Hurt,
+        .anim_8 = ANIM_BulletBill_Idle,
+        .anim_9 = ANIM_BulletBill_Idle,
+        .anim_A = ANIM_BulletBill_Idle,
+        .anim_B = ANIM_BulletBill_Idle,
+        .anim_C = ANIM_BulletBill_Idle,
+        .anim_D = ANIM_BulletBill_Idle,
+        .anim_E = ANIM_BulletBill_Idle,
+        .anim_F = ANIM_BulletBill_Idle,
     },
 };
 
