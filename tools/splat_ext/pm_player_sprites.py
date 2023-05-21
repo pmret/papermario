@@ -7,7 +7,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set
 
-import png
+import png  # type: ignore
 import yaml as yaml_loader
 from n64img.image import CI4
 from segtypes.n64.segment import N64Segment

@@ -1,7 +1,9 @@
 {
     "files.eol": "\n",
     "files.insertFinalNewline": true,
-    "editor.rulers": [120],
+    "editor.rulers": [
+        120
+    ],
     "clang-tidy.compilerArgs": [
         "-std=gnu89",
         "-Iinclude",
@@ -31,7 +33,8 @@
     "python.analysis.extraPaths": [
         "./tools",
         "./tools/build/sprite",
-        "./tools/splat"
+        "./tools/splat",
+        "./tools/build/imgfx"
     ],
     "[c]": {
         "editor.wordSeparators": "`~!@#%^&*()-=+[{]}\\|;:'\",.<>/?", // no $, for scripts

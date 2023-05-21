@@ -1,9 +1,10 @@
+from dataclasses import dataclass
 import os
 import sys
 from pathlib import Path
 
 SPLAT_EXT = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(str(Path(SPLAT_EXT)))
+sys.path.append(SPLAT_EXT)
 
 from segtypes.n64.segment import N64Segment
 import struct
@@ -11,7 +12,7 @@ from sprite_common import AnimComponent, iter_in_groups
 from util.n64.Yay0decompress import Yay0Decompressor
 from util.color import unpack_color
 from util import options
-import png
+import png  # type: ignore
 import xml.etree.ElementTree as ET
 import struct
 
@@ -214,11 +215,8 @@ class Sprite:
                 img_path = str(path / Raster.get("src"))
                 width, height, raster, info = png.Reader(img_path).read_flat()
 
-                image = NpcRaster()
-                image.width = width
-                image.height = height
-                image.raster = raster
-                image.palette_index = int(Raster.get("palette"), base=16)
+                palette_index = int(Raster.get("palette"), base=16)
+                image = NpcRaster(width, height, palette_index, raster)
 
                 assert (
                     image.width % 8
@@ -260,28 +258,28 @@ class Sprite:
         return self
 
 
+@dataclass
 class NpcRaster:
+    width: int
+    height: int
+    palette_index: int
+    raster: bytearray
+
     @staticmethod
     def from_bytes(data, sprite_data):
-        self = NpcRaster()
-
         raster_offset = int.from_bytes(data[0:4], byteorder="big")
-        self.width = data[4] & 0xFF
-        self.height = data[5] & 0xFF
-        self.palette_index = data[6]
+        width = data[4] & 0xFF
+        height = data[5] & 0xFF
+        palette_index = data[6]
         assert data[7] == 0xFF
 
-        self.set_raster_from_bytes(sprite_data[raster_offset:])
+        # CI4
+        raster = bytearray()
+        for i in range(width * height // 2):
+            raster.append(sprite_data[raster_offset + i] >> 4)
+            raster.append(sprite_data[raster_offset + i] & 0xF)
 
-        return self
-
-    # CI-4
-    def set_raster_from_bytes(self, data):
-        self.raster = bytearray()
-
-        for i in range(self.width * self.height // 2):
-            self.raster.append(data[i] >> 4)
-            self.raster.append(data[i] & 0xF)
+        return NpcRaster(width, height, palette_index, raster)
 
     def write(self, path, palette):
         w = png.Writer(self.width, self.height, palette=palette)

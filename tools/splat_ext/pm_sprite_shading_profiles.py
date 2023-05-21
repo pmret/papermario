@@ -195,11 +195,12 @@ def extract(input_data: bytes, endian: Literal["big", "little"] = "big") -> str:
         indent=2,
     )
 
+
 class N64SegPm_sprite_shading_profiles(N64Segment):
     OUT_DIR: Path = options.opts.asset_path / "sprite"
 
     def scan(self, rom_bytes):
-        data = rom_bytes[self.rom_start:self.rom_end]
+        data = rom_bytes[self.rom_start : self.rom_end]
 
         self.json_out = extract(data)
 

@@ -20,7 +20,7 @@ from splat_ext.pm_player_sprites import (
 from splat_ext.sprite_common import AnimComponent
 
 import os
-import png
+import png  # type: ignore
 import struct
 import subprocess
 import xml.etree.ElementTree as ET

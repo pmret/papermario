@@ -2,7 +2,8 @@ from segtypes.n64.segment import N64Segment
 from segtypes.n64.palette import iter_in_groups
 from util.color import unpack_color
 from util import options
-import png
+import png  # type: ignore
+
 
 def parse_palette(data):
     palette = []
@@ -12,14 +13,20 @@ def parse_palette(data):
 
     return palette
 
+
 class N64SegPm_charset_palettes(N64Segment):
     require_unique_name = False
 
     def scan(self, rom_bytes):
-        data = rom_bytes[self.rom_start:self.rom_end]
+        data = rom_bytes[self.rom_start : self.rom_end]
 
         # pm_charset sibling
-        self.sibling = next(filter(lambda s: s.type == "pm_charset" and s.name == self.name, self.parent.subsegments))
+        self.sibling = next(
+            filter(
+                lambda s: s.type == "pm_charset" and s.name == self.name,
+                self.parent.subsegments,
+            )
+        )
 
         self.palettes = []
 
@@ -43,8 +50,11 @@ class N64SegPm_charset_palettes(N64Segment):
 
         fs_dir = options.opts.asset_path / self.dir / self.name / "palette"
 
-        return [LinkerEntry(
-            self,
-            [fs_dir / f"{i:02X}.png" for i in range(self.yaml[3])],
-            fs_dir.with_suffix(".dat"), ".data"),
+        return [
+            LinkerEntry(
+                self,
+                [fs_dir / f"{i:02X}.png" for i in range(self.yaml[3])],
+                fs_dir.with_suffix(".dat"),
+                ".data",
+            ),
         ]

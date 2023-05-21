@@ -3,19 +3,21 @@
 from sys import argv, stderr
 from math import floor, ceil
 from glob import glob
-import png
+import png  # type: ignore
+
 
 def unpack_color(s):
     r = (s >> 11) & 0x1F
-    g = (s >>  6) & 0x1F
-    b = (s >>  1) & 0x1F
-    a = (s &   1) * 0xFF
+    g = (s >> 6) & 0x1F
+    b = (s >> 1) & 0x1F
+    a = (s & 1) * 0xFF
 
     r = ceil(0xFF * (r / 31))
     g = ceil(0xFF * (g / 31))
     b = ceil(0xFF * (b / 31))
 
     return r, g, b, a
+
 
 def pack_color(r, g, b, a):
     r = r >> 3
@@ -25,14 +27,16 @@ def pack_color(r, g, b, a):
 
     return (r << 11) | (g << 6) | (b << 1) | a
 
+
 def rgb_to_intensity(r, g, b):
     return round(r * 0.2126 + g * 0.7152 + 0.0722 * b)
 
+
 def iter_in_groups(iterable, n, fillvalue=None):
     from itertools import zip_longest
+
     args = [iter(iterable)] * n
     return zip_longest(*args, fillvalue=fillvalue)
-
 
 
 def reversed_if(iterator, cond):
@@ -41,7 +45,8 @@ def reversed_if(iterator, cond):
     else:
         return iterator
 
-class Converter():
+
+class Converter:
     def __init__(self, mode, infile, outfile, *argv):
         self.mode = mode
         self.infile = infile
@@ -201,7 +206,7 @@ class Converter():
                 for row in reversed_if(data, self.flip_y):
                     f.write(row)
 
-                f.write(b"\0\0\0\0\0\0\0\0\0\0") # padding
+                f.write(b"\0\0\0\0\0\0\0\0\0\0")  # padding
         elif self.mode == "bg":
             width, height, data, info = img.read()
             img.preamble(True)
@@ -213,18 +218,26 @@ class Converter():
                 palettes.append(pal.palette(alpha="force"))
 
             with open(self.outfile, "wb") as f:
-                baseaddr = 0x80200000 # gBackgroundImage
+                baseaddr = 0x80200000  # gBackgroundImage
                 headers_len = 0x10 * len(palettes)
                 palettes_len = 0x200 * len(palettes)
 
                 # header (struct BackgroundHeader)
                 for i, palette in enumerate(palettes):
-                    f.write((baseaddr + palettes_len + headers_len).to_bytes(4, byteorder="big")) # raster offset
-                    f.write((baseaddr + headers_len + 0x200 * i).to_bytes(4, byteorder="big")) # palette offset
-                    f.write((12).to_bytes(2, byteorder="big")) # startX
-                    f.write((20).to_bytes(2, byteorder="big")) # startY
-                    f.write((width).to_bytes(2, byteorder="big")) # width
-                    f.write((height).to_bytes(2, byteorder="big")) # height
+                    f.write(
+                        (baseaddr + palettes_len + headers_len).to_bytes(
+                            4, byteorder="big"
+                        )
+                    )  # raster offset
+                    f.write(
+                        (baseaddr + headers_len + 0x200 * i).to_bytes(
+                            4, byteorder="big"
+                        )
+                    )  # palette offset
+                    f.write((12).to_bytes(2, byteorder="big"))  # startX
+                    f.write((20).to_bytes(2, byteorder="big"))  # startY
+                    f.write((width).to_bytes(2, byteorder="big"))  # width
+                    f.write((height).to_bytes(2, byteorder="big"))  # height
 
                 assert f.tell() == headers_len
 
