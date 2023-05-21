@@ -18,11 +18,7 @@ enum N(ActorPartIDs) {
     PRT_9               = 9,
 };
 
-s32 N(FlipPosOffsets)[] = {
-    9, 16, 22, 26, 30, 32, 33, 32, 30, 26, 22, 16, 9, 0,
-    4, 6, 7, 6, 4, 0,
-    2, 0,
-};
+s32 N(FlipPosOffsets)[] = { 9, 16, 22, 26, 30, 32, 33, 32, 30, 26, 22, 16, 9, 0, 4, 6, 7, 6, 4, 0, 2, 0 };
 
 s32 N(IdleAnimations_80227968)[] = {
     STATUS_KEY_NORMAL,    ANIM_KentCKoopa_Anim01,

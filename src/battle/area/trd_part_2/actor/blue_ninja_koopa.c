@@ -148,13 +148,9 @@ s32 N(IdleAnimations_8022B6DC)[] = {
 };
 
 #include "common/StartRumbleWithParams.inc.c"
-
 #include "common/UnkWhirlwindEffectFunc.inc.c"
-
 #include "common/UnkEnemyFunc.inc.c"
-
 #include "common/UnkEnemyPosFunc.inc.c"
-
 #include "common/GetLastActorEventType.inc.c"
 
 EvtScript N(8022B6E8) = {
@@ -757,7 +753,7 @@ EvtScript N(EVS_HandleEvent) = {
                 EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KoopaBros_Black_Anim0C)
             EVT_END_IF
             EVT_USE_BUF(EVT_PTR(N(FlipPosOffsets)))
-            EVT_LOOP(22)
+            EVT_LOOP(ARRAY_COUNT(N(FlipPosOffsets)))
                 EVT_BUF_READ1(LVar0)
                 EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, LVar0, 0)
                 EVT_WAIT(1)

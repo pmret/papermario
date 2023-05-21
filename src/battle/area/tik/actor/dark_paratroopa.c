@@ -972,7 +972,7 @@ EvtScript N(handleEvent_koopa) = {
                 EVT_WAIT(1)
             EVT_END_THREAD
             EVT_USE_BUF(N(FlipPosOffsets))
-            EVT_LOOP(22)
+            EVT_LOOP(ARRAY_COUNT(N(FlipPosOffsets)))
                 EVT_BUF_READ1(LVar0)
                 EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, LVar0, 0)
                 EVT_WAIT(1)
