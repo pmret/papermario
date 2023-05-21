@@ -1195,7 +1195,7 @@ enum SoundIDs {
     SOUND_3B2                       = 0x000003B2,
     SOUND_3B3                       = 0x000003B3,
     SOUND_3B4                       = 0x000003B4,
-    SOUND_3B5                       = 0x000003B5,
+    SOUND_FAKE_BOWSER_BLAST         = 0x000003B5, // large blasting sound when the fake bowser robot is destroyed
     SOUND_3B6                       = 0x000003B6,
     SOUND_3B7                       = 0x000003B7,
     SOUND_3B9                       = 0x000003B9,
