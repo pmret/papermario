@@ -432,22 +432,22 @@ ParadeNpcInfo N(ParadeNpcsTable)[] = {
         .yaw = 270.0f
     },
     [NPC_KoopaBrosRed] {
-        .initialAnim = ANIM_KoopaBros_Red_Anim1A,
+        .initialAnim = ANIM_KoopaBros_Red_ThumbsUp,
         .pos = { -1860.0f, 65.0f, 10.0f },
         .yaw = 270.0f
     },
     [NPC_KoopaBrosBlack] {
-        .initialAnim = ANIM_KoopaBros_Black_Anim1A,
+        .initialAnim = ANIM_KoopaBros_Black_ThumbsUp,
         .pos = { -1840.0f, 65.0f, 10.0f },
         .yaw = 90.0f
     },
     [NPC_KoopaBrosYellow] {
-        .initialAnim = ANIM_KoopaBros_Yellow_Anim1A,
+        .initialAnim = ANIM_KoopaBros_Yellow_ThumbsUp,
         .pos = { -1870.0f, 12.0f, 37.0f },
         .yaw = 270.0f
     },
     [NPC_KoopaBrosGreen] {
-        .initialAnim = ANIM_KoopaBros_Green_Anim1A,
+        .initialAnim = ANIM_KoopaBros_Green_ThumbsUp,
         .pos = { -1830.0f, 12.0f, 37.0f },
         .yaw = 90.0f
     },

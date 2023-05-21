@@ -36,13 +36,13 @@ EvtScript N(EVS_KoopaBros_Red) = {
     EVT_ADD(LVar1, 30)
     EVT_PLAY_EFFECT(EFFECT_LENS_FLARE, 0, LVar0, LVar1, LVar2, 40)
     EVT_WAIT(100)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosRed, ANIM_KoopaBros_Red_Anim20)
+    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosRed, ANIM_KoopaBros_Red_AltExitShell)
     EVT_WAIT(60)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosRed, ANIM_KoopaBros_Red_Anim0E)
+    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosRed, ANIM_KoopaBros_Red_BurnHurt)
     EVT_CALL(SetNpcJumpscale, NPC_KoopaBrosRed, EVT_FLOAT(1.0))
     EVT_CALL(GetNpcPos, NPC_KoopaBrosRed, LVar0, LVar1, LVar2)
     EVT_CALL(NpcJump0, NPC_KoopaBrosRed, LVar0, LVar1, LVar2, 20)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosRed, ANIM_KoopaBros_Red_Anim0F)
+    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosRed, ANIM_KoopaBros_Red_BurnStill)
     EVT_RETURN
     EVT_END
 };
@@ -55,13 +55,13 @@ EvtScript N(EVS_KoopaBros_Black) = {
     EVT_ADD(LVar1, 30)
     EVT_PLAY_EFFECT(EFFECT_LENS_FLARE, 0, LVar0, LVar1, LVar2, 40)
     EVT_WAIT(95)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosBlack, ANIM_KoopaBros_Black_Anim20)
+    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosBlack, ANIM_KoopaBros_Black_AltExitShell)
     EVT_WAIT(60)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosBlack, ANIM_KoopaBros_Black_Anim0E)
+    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosBlack, ANIM_KoopaBros_Black_BurnHurt)
     EVT_CALL(SetNpcJumpscale, NPC_KoopaBrosBlack, EVT_FLOAT(1.0))
     EVT_CALL(GetNpcPos, NPC_KoopaBrosBlack, LVar0, LVar1, LVar2)
     EVT_CALL(NpcJump0, NPC_KoopaBrosBlack, LVar0, LVar1, LVar2, 20)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosBlack, ANIM_KoopaBros_Black_Anim0F)
+    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosBlack, ANIM_KoopaBros_Black_BurnStill)
     EVT_RETURN
     EVT_END
 };
@@ -74,13 +74,13 @@ EvtScript N(EVS_KoopaBros_Yellow) = {
     EVT_ADD(LVar1, 30)
     EVT_PLAY_EFFECT(EFFECT_LENS_FLARE, 0, LVar0, LVar1, LVar2, 40)
     EVT_WAIT(90)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosYellow, ANIM_KoopaBros_Yellow_Anim20)
+    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosYellow, ANIM_KoopaBros_Yellow_AltExitShell)
     EVT_WAIT(60)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosYellow, ANIM_KoopaBros_Yellow_Anim0E)
+    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosYellow, ANIM_KoopaBros_Yellow_BurnHurt)
     EVT_CALL(SetNpcJumpscale, NPC_KoopaBrosYellow, EVT_FLOAT(1.0))
     EVT_CALL(GetNpcPos, NPC_KoopaBrosYellow, LVar0, LVar1, LVar2)
     EVT_CALL(NpcJump0, NPC_KoopaBrosYellow, LVar0, LVar1, LVar2, 20)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosYellow, ANIM_KoopaBros_Yellow_Anim0F)
+    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosYellow, ANIM_KoopaBros_Yellow_BurnStill)
     EVT_RETURN
     EVT_END
 };
@@ -93,13 +93,13 @@ EvtScript N(EVS_KoopaBros_Green) = {
     EVT_ADD(LVar1, 30)
     EVT_PLAY_EFFECT(EFFECT_LENS_FLARE, 0, LVar0, LVar1, LVar2, 40)
     EVT_WAIT(85)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosGreen, ANIM_KoopaBros_Green_Anim20)
+    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosGreen, ANIM_KoopaBros_Green_AltExitShell)
     EVT_WAIT(60)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosGreen, ANIM_KoopaBros_Green_Anim0E)
+    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosGreen, ANIM_KoopaBros_Green_BurnHurt)
     EVT_CALL(SetNpcJumpscale, NPC_KoopaBrosGreen, EVT_FLOAT(1.0))
     EVT_CALL(GetNpcPos, NPC_KoopaBrosGreen, LVar0, LVar1, LVar2)
     EVT_CALL(NpcJump0, NPC_KoopaBrosGreen, LVar0, LVar1, LVar2, 20)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosGreen, ANIM_KoopaBros_Green_Anim0F)
+    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosGreen, ANIM_KoopaBros_Green_BurnStill)
     EVT_RETURN
     EVT_END
 };

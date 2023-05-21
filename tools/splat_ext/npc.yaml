@@ -6119,41 +6119,41 @@ KoopaBros:
     - Green_Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
+    - Still
+    - StillTower
+    - Walk
+    - Run
+    - Idle
+    - IdleTower
+    - ShellStill
+    - ShellSpin
+    - EnterShell
+    - ExitShell
+    - HurtStill
+    - Hurt
+    - IdleTopple
+    - IdleTipping
+    - BurnHurt
+    - BurnStill
     - Anim10
     - Anim11
     - Anim12
     - Anim13
     - Anim14
-    - Anim15
+    - Sleep
     - Anim16
-    - Anim17
-    - Anim18
-    - Anim19
-    - Anim1A
-    - Anim1B
+    - StillTopple
+    - Dizzy
+    - AltIdleTower
+    - ThumbsUp
+    - PointForward
     - Anim1C
-    - Anim1D
+    - Hammering
     - Anim1E
-    - Anim1F
-    - Anim20
-    - Anim21
-    - Anim22
+    - AltEnterShell
+    - AltExitShell
+    - AltToppleFromTower
+    - DizzyTopple
 Buzzar:
   frames:
     - Raster00

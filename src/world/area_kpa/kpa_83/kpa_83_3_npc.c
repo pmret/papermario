@@ -203,7 +203,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
         EVT_CALL(PlaySoundAtNpc, NPC_KoopaBrosRed, SOUND_3E9, SOUND_SPACE_MODE_0)
         EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, 20, 0, 160, 0)
         EVT_CALL(EnableNpcBlur, NPC_KoopaBrosRed, FALSE)
-        EVT_CALL(SetNpcAnimation, NPC_KoopaBrosRed, ANIM_KoopaBros_Red_Anim05)
+        EVT_CALL(SetNpcAnimation, NPC_KoopaBrosRed, ANIM_KoopaBros_Red_IdleTower)
         EVT_CALL(SetNpcYaw, NPC_KoopaBrosRed, 270)
     EVT_END_THREAD
     EVT_THREAD
@@ -218,7 +218,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
         EVT_CALL(PlaySoundAtNpc, NPC_KoopaBrosBlk, SOUND_3E9, SOUND_SPACE_MODE_0)
         EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, 48, 0, 185, 0)
         EVT_CALL(EnableNpcBlur, NPC_KoopaBrosBlk, FALSE)
-        EVT_CALL(SetNpcAnimation, NPC_KoopaBrosBlk, ANIM_KoopaBros_Black_Anim05)
+        EVT_CALL(SetNpcAnimation, NPC_KoopaBrosBlk, ANIM_KoopaBros_Black_IdleTower)
         EVT_CALL(SetNpcYaw, NPC_KoopaBrosBlk, 270)
     EVT_END_THREAD
     EVT_THREAD
@@ -233,7 +233,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
         EVT_CALL(PlaySoundAtNpc, NPC_KoopaBrosYlw, SOUND_3E9, SOUND_SPACE_MODE_0)
         EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, 60, 0, 110, 0)
         EVT_CALL(EnableNpcBlur, NPC_KoopaBrosYlw, FALSE)
-        EVT_CALL(SetNpcAnimation, NPC_KoopaBrosYlw, ANIM_KoopaBros_Yellow_Anim05)
+        EVT_CALL(SetNpcAnimation, NPC_KoopaBrosYlw, ANIM_KoopaBros_Yellow_IdleTower)
         EVT_CALL(SetNpcYaw, NPC_KoopaBrosYlw, 270)
     EVT_END_THREAD
     EVT_THREAD
@@ -248,7 +248,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
         EVT_CALL(PlaySoundAtNpc, NPC_KoopaBrosGrn, SOUND_3E9, SOUND_SPACE_MODE_0)
         EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, 88, 0, 155, 0)
         EVT_CALL(EnableNpcBlur, NPC_KoopaBrosGrn, FALSE)
-        EVT_CALL(SetNpcAnimation, NPC_KoopaBrosGrn, ANIM_KoopaBros_Green_Anim05)
+        EVT_CALL(SetNpcAnimation, NPC_KoopaBrosGrn, ANIM_KoopaBros_Green_IdleTower)
         EVT_CALL(SetNpcYaw, NPC_KoopaBrosGrn, 270)
     EVT_END_THREAD
     EVT_WAIT(65)
@@ -259,7 +259,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
         EVT_ADD(LVar1, 30)
         EVT_PLAY_EFFECT(EFFECT_LENS_FLARE, 0, LVar0, LVar1, LVar2, 40)
         EVT_CALL(PlaySoundAtNpc, NPC_KoopaBrosRed, SOUND_20F3, SOUND_SPACE_MODE_0)
-        EVT_CALL(SetNpcAnimation, NPC_KoopaBrosRed, ANIM_KoopaBros_Red_Anim1A)
+        EVT_CALL(SetNpcAnimation, NPC_KoopaBrosRed, ANIM_KoopaBros_Red_ThumbsUp)
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(5)
@@ -268,7 +268,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
         EVT_ADD(LVar1, 30)
         EVT_PLAY_EFFECT(EFFECT_LENS_FLARE, 0, LVar0, LVar1, LVar2, 40)
         EVT_CALL(PlaySoundAtNpc, NPC_KoopaBrosBlk, SOUND_20F3, SOUND_SPACE_MODE_0)
-        EVT_CALL(SetNpcAnimation, NPC_KoopaBrosBlk, ANIM_KoopaBros_Black_Anim1A)
+        EVT_CALL(SetNpcAnimation, NPC_KoopaBrosBlk, ANIM_KoopaBros_Black_ThumbsUp)
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(10)
@@ -277,7 +277,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
         EVT_ADD(LVar1, 30)
         EVT_PLAY_EFFECT(EFFECT_LENS_FLARE, 0, LVar0, LVar1, LVar2, 40)
         EVT_CALL(PlaySoundAtNpc, NPC_KoopaBrosYlw, SOUND_20F3, SOUND_SPACE_MODE_0)
-        EVT_CALL(SetNpcAnimation, NPC_KoopaBrosYlw, ANIM_KoopaBros_Yellow_Anim1A)
+        EVT_CALL(SetNpcAnimation, NPC_KoopaBrosYlw, ANIM_KoopaBros_Yellow_ThumbsUp)
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(15)
@@ -286,33 +286,33 @@ EvtScript N(EVS_NpcIdle_Door) = {
         EVT_ADD(LVar1, 30)
         EVT_PLAY_EFFECT(EFFECT_LENS_FLARE, 0, LVar0, LVar1, LVar2, 40)
         EVT_CALL(PlaySoundAtNpc, NPC_KoopaBrosGrn, SOUND_20F3, SOUND_SPACE_MODE_0)
-        EVT_CALL(SetNpcAnimation, NPC_KoopaBrosGrn, ANIM_KoopaBros_Green_Anim1A)
+        EVT_CALL(SetNpcAnimation, NPC_KoopaBrosGrn, ANIM_KoopaBros_Green_ThumbsUp)
     EVT_END_THREAD
     EVT_WAIT(45)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosRed, ANIM_KoopaBros_Red_Anim1A)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosBlk, ANIM_KoopaBros_Black_Anim1A)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosYlw, ANIM_KoopaBros_Yellow_Anim1A)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosGrn, ANIM_KoopaBros_Green_Anim1A)
+    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosRed, ANIM_KoopaBros_Red_ThumbsUp)
+    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosBlk, ANIM_KoopaBros_Black_ThumbsUp)
+    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosYlw, ANIM_KoopaBros_Yellow_ThumbsUp)
+    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosGrn, ANIM_KoopaBros_Green_ThumbsUp)
     EVT_THREAD
         EVT_CALL(SetPlayerSpeed, EVT_FLOAT(3.0 / DT))
         EVT_CALL(PlayerMoveTo, -50, 150, 0)
     EVT_END_THREAD
-    EVT_CALL(SpeakToPlayer, NPC_KoopaBrosRed, ANIM_KoopaBros_Red_Anim1A, ANIM_KoopaBros_Red_Anim1A, 0, MSG_CH8_0054)
+    EVT_CALL(SpeakToPlayer, NPC_KoopaBrosRed, ANIM_KoopaBros_Red_ThumbsUp, ANIM_KoopaBros_Red_ThumbsUp, 0, MSG_CH8_0054)
     EVT_SET(LVar3, 0)
     EVT_SET(LVar4, 0)
     EVT_SET(LVar5, 150)
     EVT_SET(LVar6, EVT_FLOAT(3.0 / DT))
     EVT_EXEC_WAIT(N(EVS_FocusCam_MidRoom))
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosRed, ANIM_KoopaBros_Red_Anim04)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosBlk, ANIM_KoopaBros_Black_Anim04)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosYlw, ANIM_KoopaBros_Yellow_Anim04)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosGrn, ANIM_KoopaBros_Green_Anim04)
-    EVT_CALL(SpeakToPlayer, NPC_KoopaBrosRed, ANIM_KoopaBros_Red_Anim14, ANIM_KoopaBros_Red_Anim04, 0, MSG_CH8_0055)
+    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosRed, ANIM_KoopaBros_Red_Idle)
+    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosBlk, ANIM_KoopaBros_Black_Idle)
+    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosYlw, ANIM_KoopaBros_Yellow_Idle)
+    EVT_CALL(SetNpcAnimation, NPC_KoopaBrosGrn, ANIM_KoopaBros_Green_Idle)
+    EVT_CALL(SpeakToPlayer, NPC_KoopaBrosRed, ANIM_KoopaBros_Red_Anim14, ANIM_KoopaBros_Red_Idle, 0, MSG_CH8_0055)
     EVT_CALL(ShowChoice, MSG_Choice_0013)
     EVT_IF_EQ(LVar0, 0)
-        EVT_CALL(ContinueSpeech, NPC_KoopaBrosRed, ANIM_KoopaBros_Red_Anim14, ANIM_KoopaBros_Red_Anim04, 0, MSG_CH8_0056)
+        EVT_CALL(ContinueSpeech, NPC_KoopaBrosRed, ANIM_KoopaBros_Red_Anim14, ANIM_KoopaBros_Red_Idle, 0, MSG_CH8_0056)
     EVT_ELSE
-        EVT_CALL(ContinueSpeech, NPC_KoopaBrosRed, ANIM_KoopaBros_Red_Anim14, ANIM_KoopaBros_Red_Anim04, 0, MSG_CH8_0057)
+        EVT_CALL(ContinueSpeech, NPC_KoopaBrosRed, ANIM_KoopaBros_Red_Anim14, ANIM_KoopaBros_Red_Idle, 0, MSG_CH8_0057)
     EVT_END_IF
     EVT_SET(LVar6, EVT_FLOAT(3.0 / DT))
     EVT_EXEC_WAIT(N(EVS_FocusCam_LookAtDoor))
@@ -322,7 +322,7 @@ EvtScript N(EVS_NpcIdle_Door) = {
     EVT_SET(LVar5, 150)
     EVT_SET(LVar6, EVT_FLOAT(90.0))
     EVT_EXEC_WAIT(N(EVS_FocusCam_MidRoom))
-    EVT_CALL(SpeakToPlayer, NPC_KoopaBrosRed, ANIM_KoopaBros_Red_Anim14, ANIM_KoopaBros_Red_Anim04, 0, MSG_CH8_0059)
+    EVT_CALL(SpeakToPlayer, NPC_KoopaBrosRed, ANIM_KoopaBros_Red_Anim14, ANIM_KoopaBros_Red_Idle, 0, MSG_CH8_0059)
     EVT_CALL(SetMusicTrack, 0, SONG_JR_TROOPA_THEME, 1, 8)
     EVT_CALL(ShowMessageAtScreenPos, MSG_CH8_005A, 0, 150)
     EVT_CALL(InterpPlayerYaw, 270, 0)
@@ -500,13 +500,13 @@ EvtScript N(EVS_NpcInit_JrTroopa) = {
 
 AnimID N(ExtraAnims_KoopaBros)[] = {
     ANIM_KoopaBros_Black_Anim1E,
-    ANIM_KoopaBros_Black_Anim04,
-    ANIM_KoopaBros_Black_Anim05,
+    ANIM_KoopaBros_Black_Idle,
+    ANIM_KoopaBros_Black_IdleTower,
     ANIM_KoopaBros_Black_Anim11,
-    ANIM_KoopaBros_Black_Anim1A,
+    ANIM_KoopaBros_Black_ThumbsUp,
     ANIM_KoopaBros_Black_Anim14,
     ANIM_KoopaBros_Black_Anim10,
-    ANIM_KoopaBros_Black_Anim15,
+    ANIM_KoopaBros_Black_Sleep,
     ANIM_LIST_END
 };
 

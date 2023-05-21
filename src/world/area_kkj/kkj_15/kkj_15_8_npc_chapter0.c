@@ -33,15 +33,15 @@ AnimID N(ExtraAnims_Kammy)[] = {
 };
 
 AnimID N(ExtraAnims_KoopaBros)[] = {
-    ANIM_KoopaBros_Black_Anim02,
-    ANIM_KoopaBros_Black_Anim03,
-    ANIM_KoopaBros_Black_Anim04,
-    ANIM_KoopaBros_Black_Anim05,
-    ANIM_KoopaBros_Black_Anim0A,
+    ANIM_KoopaBros_Black_Walk,
+    ANIM_KoopaBros_Black_Run,
+    ANIM_KoopaBros_Black_Idle,
+    ANIM_KoopaBros_Black_IdleTower,
+    ANIM_KoopaBros_Black_HurtStill,
     ANIM_KoopaBros_Black_Anim11,
     ANIM_KoopaBros_Black_Anim12,
     ANIM_KoopaBros_Black_Anim14,
-    ANIM_KoopaBros_Black_Anim1A,
+    ANIM_KoopaBros_Black_ThumbsUp,
     ANIM_LIST_END
 };
 

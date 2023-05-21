@@ -516,7 +516,7 @@ EvtScript N(handleEvent) = {
             EVT_WAIT(1000)
         EVT_CASE_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET(LVar0, 2)
-            EVT_SET(LVar1, 7340033)
+            EVT_SET(LVar1, ANIM_StiltGuy_Anim01)
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_CALL(GetDamageSource, LVar0)

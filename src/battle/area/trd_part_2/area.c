@@ -6,7 +6,7 @@
 
 extern ActorBlueprint N(green_ninja_koopa);
 extern ActorBlueprint N(yellow_ninja_koopa);
-extern ActorBlueprint N(blue_ninja_koopa);
+extern ActorBlueprint N(black_ninja_koopa);
 extern ActorBlueprint N(red_ninja_koopa);
 extern ActorBlueprint N(fake_bowser);
 
@@ -26,7 +26,7 @@ extern Stage N(trd_05f);
 Formation N(Formation_00) = {
     ACTOR_BY_IDX(N(green_ninja_koopa), BTL_POS_GROUND_A, 10),
     ACTOR_BY_IDX(N(yellow_ninja_koopa), BTL_POS_GROUND_A, 9),
-    ACTOR_BY_IDX(N(blue_ninja_koopa), BTL_POS_GROUND_A, 8),
+    ACTOR_BY_IDX(N(black_ninja_koopa), BTL_POS_GROUND_A, 8),
     ACTOR_BY_IDX(N(red_ninja_koopa), BTL_POS_GROUND_A, 7),
     ACTOR_BY_IDX(N(fake_bowser), BTL_POS_GROUND_D, 6),
 };

@@ -201,12 +201,12 @@ EvtScript N(EVS_NpcAI_KoopaBros_Red) = {
     EVT_CALL(SetNpcVar, NPC_KoopaBros_Yellow, 0, 1)
     EVT_CALL(SetNpcVar, NPC_KoopaBros_Black, 0, 1)
     EVT_WAIT(60 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Red_Anim03)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Red_Run)
     EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(3.0 / DT))
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.8))
     EVT_CALL(NpcMoveTo, NPC_SELF, 1490, 0, 0)
     EVT_WAIT(10 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_KoopaBros_Red_Anim1B, ANIM_KoopaBros_Red_Anim1B, 0, MSG_CH1_00F2)
+    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_KoopaBros_Red_PointForward, ANIM_KoopaBros_Red_PointForward, 0, MSG_CH1_00F2)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 1300, 0, 0)
     EVT_CALL(SetCamPosB, CAM_DEFAULT, 1466, EVT_FLOAT(41.6))
     EVT_CALL(SetPanTarget, CAM_DEFAULT, 1250, 0, 0)
@@ -215,11 +215,11 @@ EvtScript N(EVS_NpcAI_KoopaBros_Red) = {
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Red_Anim12)
     EVT_CALL(NpcJump0, NPC_SELF, 1440, 30, 0, 20 * DT)
     EVT_CALL(NpcJump0, NPC_SELF, 1380, 0, 0, 20 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Red_Anim03)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Red_Run)
     EVT_CALL(NpcMoveTo, NPC_SELF, 1360, 0, 0)
     EVT_WAIT(20 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Red_Anim04)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_KoopaBros_Red_Anim1B, ANIM_KoopaBros_Red_Anim1B, 0, MSG_CH1_00F3)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Red_Idle)
+    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_KoopaBros_Red_PointForward, ANIM_KoopaBros_Red_PointForward, 0, MSG_CH1_00F3)
     EVT_CALL(SetNpcVar, NPC_KoopaBros_Green, 0, 2)
     EVT_CALL(SetNpcVar, NPC_KoopaBros_Yellow, 0, 2)
     EVT_CALL(SetNpcVar, NPC_KoopaBros_Black, 0, 2)
@@ -272,23 +272,23 @@ EvtScript N(EVS_NpcAI_KoopaBros_Black) = {
             EVT_WAIT(1)
             EVT_GOTO(10)
         EVT_END_IF
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_Anim03)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_Run)
     EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(3.0 / DT))
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.8))
     EVT_CALL(NpcMoveTo, NPC_SELF, 1520, 20, 0)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_Anim12)
     EVT_CALL(NpcJump0, NPC_SELF, 1470, 30, 30, 20 * DT)
     EVT_CALL(NpcJump0, NPC_SELF, 1410, 0, 40, 20 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_Anim03)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_Run)
     EVT_CALL(NpcMoveTo, NPC_SELF, 1330, 50, 0)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_Anim01)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_StillTower)
     EVT_LABEL(20)
         EVT_CALL(GetSelfVar, 0, LVar0)
         EVT_IF_EQ(LVar0, 1)
             EVT_WAIT(1)
             EVT_GOTO(20)
         EVT_END_IF
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_Anim1B)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_PointForward)
     EVT_WAIT(100 * DT)
     EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_RETURN
@@ -303,23 +303,23 @@ EvtScript N(EVS_NpcAI_KoopaBros_Yellow) = {
             EVT_WAIT(1)
             EVT_GOTO(10)
         EVT_END_IF
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Yellow_Anim03)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Yellow_Run)
     EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(3.0 / DT))
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.8))
     EVT_CALL(NpcMoveTo, NPC_SELF, 1505, 5, 0)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Yellow_Anim12)
     EVT_CALL(NpcJump0, NPC_SELF, 1455, 30, 5, 20 * DT)
     EVT_CALL(NpcJump0, NPC_SELF, 1395, 0, 5, 20 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Yellow_Anim03)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Yellow_Run)
     EVT_CALL(NpcMoveTo, NPC_SELF, 1315, 5, 0)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Yellow_Anim01)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Yellow_StillTower)
     EVT_LABEL(20)
         EVT_CALL(GetSelfVar, 0, LVar0)
         EVT_IF_EQ(LVar0, 1)
             EVT_WAIT(1)
             EVT_GOTO(20)
         EVT_END_IF
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Yellow_Anim1B)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Yellow_PointForward)
     EVT_WAIT(100 * DT)
     EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_RETURN
@@ -334,23 +334,23 @@ EvtScript N(EVS_NpcAI_KoopaBros_Green) = {
             EVT_WAIT(1)
             EVT_GOTO(10)
         EVT_END_IF
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Green_Anim03)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Green_Run)
     EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(3.0 / DT))
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.8))
     EVT_CALL(NpcMoveTo, NPC_SELF, 1490, -10, 0)
     EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Green_Anim12)
     EVT_CALL(NpcJump0, NPC_SELF, 1440, 30, -20, 20 * DT)
     EVT_CALL(NpcJump0, NPC_SELF, 1380, 0, -30, 20 * DT)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Green_Anim03)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Green_Run)
     EVT_CALL(NpcMoveTo, NPC_SELF, 1300, -40, 0)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Green_Anim01)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Green_StillTower)
     EVT_LABEL(20)
         EVT_CALL(GetSelfVar, 0, LVar0)
         EVT_IF_EQ(LVar0, 1)
             EVT_WAIT(1)
             EVT_GOTO(20)
         EVT_END_IF
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Green_Anim1B)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Green_PointForward)
     EVT_WAIT(100 * DT)
     EVT_CALL(RemoveNpc, NPC_SELF)
     EVT_RETURN
@@ -464,7 +464,7 @@ EvtScript N(EVS_NpcDefeat_BulletBill) = {
 };
 
 NpcSettings N(NpcSettings_KoopaBros_Red) = {
-    .defaultAnim = ANIM_KoopaBros_Red_Anim02,
+    .defaultAnim = ANIM_KoopaBros_Red_Walk,
     .height = 34,
     .radius = 24,
     .level = 99,
@@ -474,7 +474,7 @@ NpcSettings N(NpcSettings_KoopaBros_Red) = {
 };
 
 NpcSettings N(NpcSettings_KoopaBros_Black) = {
-    .defaultAnim = ANIM_KoopaBros_Black_Anim02,
+    .defaultAnim = ANIM_KoopaBros_Black_Walk,
     .height = 34,
     .radius = 24,
     .level = 99,
@@ -484,7 +484,7 @@ NpcSettings N(NpcSettings_KoopaBros_Black) = {
 };
 
 NpcSettings N(NpcSettings_KoopaBros_Yellow) = {
-    .defaultAnim = ANIM_KoopaBros_Yellow_Anim02,
+    .defaultAnim = ANIM_KoopaBros_Yellow_Walk,
     .height = 34,
     .radius = 24,
     .level = 99,
@@ -494,7 +494,7 @@ NpcSettings N(NpcSettings_KoopaBros_Yellow) = {
 };
 
 NpcSettings N(NpcSettings_KoopaBros_Green) = {
-    .defaultAnim = ANIM_KoopaBros_Green_Anim02,
+    .defaultAnim = ANIM_KoopaBros_Green_Walk,
     .height = 34,
     .radius = 24,
     .level = 99,
