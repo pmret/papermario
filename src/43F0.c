@@ -503,23 +503,23 @@ f32 rand_float(void) {
 
 // return a random integer [0,max]
 s32 rand_int_internal(u32 max) {
-    u32 partition_size = 0xFFFFFFFF;
-    u32 max_plus_one = max + 1;
+    u32 partitionSize = 0xFFFFFFFF;
+    u32 maxPlusOne = max + 1;
     u32 result;
 
-    // split [0,2^32) into ``max_plus_one`` equally sized partitions
-    // [0, partition_size), [partition_size, 2*partition_size), ... [max_plus_one*partition_size, 2^32)
-    partition_size /= max_plus_one;
-    if (partition_size == 0) {
-        partition_size = 1;
+    // split [0,2^32) into ``maxPlusOne`` equally sized partitions
+    // [0, partitionSize), [partitionSize, 2*partitionSize), ... [maxPlusOne*partitionSize, 2^32)
+    partitionSize /= maxPlusOne;
+    if (partitionSize == 0) {
+        partitionSize = 1;
     }
 
-    // numbers in the leftover [max_plus_one*partition_size, 2^32) are rejected as they would return max_plus_one
+    // numbers in the leftover [maxPlusOne*partitionSize, 2^32) are rejected as they would return maxPlusOne
     // this ensures the result is [0,max] whilst also ensuring each partition is the same size and equally probable
     do {
-        // determine which partition the random number is in by dividing it by partition_size
-        result = advance_rng() / partition_size;
-    } while (result >= max_plus_one);
+        // determine which partition the random number is in by dividing it by partitionSize
+        result = advance_rng() / partitionSize;
+    } while (result >= maxPlusOne);
 
     return result;
 }
