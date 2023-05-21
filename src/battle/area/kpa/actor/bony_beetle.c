@@ -291,7 +291,7 @@ EvtScript N(takeTurn) = {
     EVT_END
 };
 
-s32 N(FlipPosOffsets)[] = { 7, 13, 17, 21, 23, 24, 23, 21, 17, 13, 7, 0, 4, 6, 7, 6, 4, 0, 2, 0, };
+s32 N(FlipPosOffsets)[] = { 7, 13, 17, 21, 23, 24, 23, 21, 17, 13, 7, 0, 4, 6, 7, 6, 4, 0, 2, 0 };
 
 EvtScript N(handleEvent_normal) = {
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)

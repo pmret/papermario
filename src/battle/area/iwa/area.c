@@ -77,7 +77,7 @@ Formation N(Formation_0B) = {
     ACTOR_BY_IDX(N(monty_mole), BTL_POS_GROUND_C, 8),
 };
 
-Vec3i N(vector3D_8021853C) = { 90, 70, 0, };
+Vec3i N(vector3D_8021853C) = { 90, 70, 0 };
 
 Formation N(Formation_0C) = {
     ACTOR_BY_POS(N(buzzar), N(vector3D_8021853C), 10),

@@ -929,7 +929,7 @@ EvtScript N(returnHome) = {
     EVT_END
 };
 
-s32 N(actionCommandTable)[] = { 7, 6, 5, 4, 3, 2, 1, 0, };
+s32 N(actionCommandTable)[] = { 7, 6, 5, 4, 3, 2, 1, 0 };
 
 EvtScript N(skyDive) = {
     EVT_CALL(EnableIdleScript, ACTOR_PARTNER, 0)

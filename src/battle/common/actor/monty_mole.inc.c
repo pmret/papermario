@@ -184,7 +184,7 @@ ActorBlueprint N(hole) = {
     .statusTextOffset = { 10, 20 },
 };
 
-Vec3i N(hole_pos) = { NPC_DISPOSE_LOCATION, };
+Vec3i N(hole_pos) = { NPC_DISPOSE_LOCATION };
 
 Formation N(formation_hole_1) = {
     ACTOR_BY_POS(N(hole), N(hole_pos), 0),

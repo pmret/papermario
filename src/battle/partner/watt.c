@@ -1253,7 +1253,7 @@ EvtScript N(turboCharge) = {
     EVT_END
 };
 
-s32 D_8023B948_707438[] = { 3, 3, 4, 7, 10, 13, 16, 16, 16, 16, };
+s32 D_8023B948_707438[] = { 3, 3, 4, 7, 10, 13, 16, 16, 16, 16 };
 
 EvtScript N(megaShock) = {
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_MEGA_SHOCK)

@@ -1219,7 +1219,7 @@ EvtScript N(idle_80220790) = {
     EVT_END
 };
 
-s32 N(FlipPosOffsets)[] = { 9, 16, 22, 26, 30, 32, 33, 32, 30, 26, 22, 16, 9, 0, 4, 6, 7, 6, 4, 0, 2, 0, };
+s32 N(FlipPosOffsets)[] = { 9, 16, 22, 26, 30, 32, 33, 32, 30, 26, 22, 16, 9, 0, 4, 6, 7, 6, 4, 0, 2, 0 };
 
 EvtScript N(handleEvent_80220908) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)

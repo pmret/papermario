@@ -35,7 +35,7 @@ enum RewindArrowStates {
 
 typedef MessageImageData* MessageImageDataList[1];
 
-s32 D_8014C280[] = { 0x028001E0, 0x01FF0000, 0x028001E0, 0x01FF0000, };
+s32 D_8014C280[] = { 0x028001E0, 0x01FF0000, 0x028001E0, 0x01FF0000 };
 
 u8 MessagePlural[] = { MSG_CHAR_LOWER_S, MSG_CHAR_READ_END };
 

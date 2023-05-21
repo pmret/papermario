@@ -1252,7 +1252,7 @@ EvtScript N(headbonk3) = {
     EVT_END
 };
 
-s32 N(actionCommandTable)[] = { 7, 6, 5, 4, 3, 2, 1, 0, };
+s32 N(actionCommandTable)[] = { 7, 6, 5, 4, 3, 2, 1, 0 };
 
 s32 N(powerBounceChance) = 200;
 

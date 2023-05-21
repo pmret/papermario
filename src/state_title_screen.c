@@ -26,10 +26,10 @@
 s16 D_800779C0[2] = {0, 0};
 
 SaveMetadata gSaveSlotMetadata[4] = {
-    { .filename = {FILENAME_ERROR}, },
-    { .filename = {FILENAME_ERROR}, },
-    { .filename = {FILENAME_ERROR}, },
-    { .filename = {FILENAME_ERROR}, },
+    { .filename = {FILENAME_ERROR} },
+    { .filename = {FILENAME_ERROR} },
+    { .filename = {FILENAME_ERROR} },
+    { .filename = {FILENAME_ERROR} },
 };
 
 u8 gSaveSlotHasData[4] = {TRUE, TRUE, TRUE, TRUE};

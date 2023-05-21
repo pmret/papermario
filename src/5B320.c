@@ -432,18 +432,18 @@ extern HudScript HES_PartnerADisabled;
 extern HudScript HES_PartnerBDisabled;
 
 IconHudScriptPair gPartnerIconHudScripts[] = {
-    { .enabled = &HES_Partner0, .disabled = &HES_Partner0Disabled, },
-    { .enabled = &HES_Goombario, .disabled = &HES_GoombarioDisabled, },
-    { .enabled = &HES_Kooper, .disabled = &HES_KooperDisabled, },
-    { .enabled = &HES_Bombette, .disabled = &HES_BombetteDisabled, },
-    { .enabled = &HES_Parakarry, .disabled = &HES_ParakarryDisabled, },
-    { .enabled = &HES_Bow, .disabled = &HES_BowDisabled, },
-    { .enabled = &HES_Watt, .disabled = &HES_WattDisabled, },
-    { .enabled = &HES_Sushie, .disabled = &HES_SushieDisabled, },
-    { .enabled = &HES_Lakilester, .disabled = &HES_LakilesterDisabled, },
-    { .enabled = &HES_Partner9, .disabled = &HES_Partner9Disabled, },
-    { .enabled = &HES_PartnerA, .disabled = &HES_PartnerADisabled, },
-    { .enabled = &HES_PartnerB, .disabled = &HES_PartnerBDisabled, },
+    { .enabled = &HES_Partner0, .disabled = &HES_Partner0Disabled },
+    { .enabled = &HES_Goombario, .disabled = &HES_GoombarioDisabled },
+    { .enabled = &HES_Kooper, .disabled = &HES_KooperDisabled },
+    { .enabled = &HES_Bombette, .disabled = &HES_BombetteDisabled },
+    { .enabled = &HES_Parakarry, .disabled = &HES_ParakarryDisabled },
+    { .enabled = &HES_Bow, .disabled = &HES_BowDisabled },
+    { .enabled = &HES_Watt, .disabled = &HES_WattDisabled },
+    { .enabled = &HES_Sushie, .disabled = &HES_SushieDisabled },
+    { .enabled = &HES_Lakilester, .disabled = &HES_LakilesterDisabled },
+    { .enabled = &HES_Partner9, .disabled = &HES_Partner9Disabled },
+    { .enabled = &HES_PartnerA, .disabled = &HES_PartnerADisabled },
+    { .enabled = &HES_PartnerB, .disabled = &HES_PartnerBDisabled },
     { .enabled = &HES_PartnerB, .disabled = &HES_PartnerBDisabled },
 };
 
