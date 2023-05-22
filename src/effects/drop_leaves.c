@@ -39,21 +39,21 @@ void drop_leaves_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4) {
     part++;
     for (i = 1; i < numParts; i++, part++) {
         if (arg0 == 0) {
-            part->unk_04 = func_E0200000(50) - 25;
-            part->unk_08 = func_E0200000(50) - 25;
+            part->unk_04 = effect_rand_int(50) - 25;
+            part->unk_08 = effect_rand_int(50) - 25;
             part->unk_0C = 0.0f;
-            part->unk_18 = func_E0200000(360);
-            part->unk_20 = func_E0200000(360);
-            part->unk_1C = func_E0200000(100) / 10.0f;
+            part->unk_18 = effect_rand_int(360);
+            part->unk_20 = effect_rand_int(360);
+            part->unk_1C = effect_rand_int(100) / 10.0f;
             part->unk_10 = 0;
             part->unk_14 = 0;
         } else {
-            part->unk_04 = func_E0200000(10) - 5;
-            part->unk_08 = func_E0200000(10) + 5;
+            part->unk_04 = effect_rand_int(10) - 5;
+            part->unk_08 = effect_rand_int(10) + 5;
             part->unk_0C = 10.0f;
-            part->unk_18 = func_E0200000(360);
-            part->unk_20 = func_E0200000(360);
-            part->unk_1C = func_E0200000(100) / 10.0f;
+            part->unk_18 = effect_rand_int(360);
+            part->unk_20 = effect_rand_int(360);
+            part->unk_1C = effect_rand_int(100) / 10.0f;
             part->unk_10 = 0;
             part->unk_14 = 2.0f;
         }

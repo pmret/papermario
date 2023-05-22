@@ -44,7 +44,7 @@ void cloud_puff_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3) {
         part->alpha = 255;
         part->unk_24 = (shim_rand_int(10) * 0.03) + 1.0;
         part->unk_28 = (shim_rand_int(10) * 0.03) + 1.7;
-        part->unk_2C = func_E0200000(60);
+        part->unk_2C = effect_rand_int(60);
         part->timeLeft = 30;
         part->unk_34 = 0.5f;
         part->unk_38 = -0.02f;

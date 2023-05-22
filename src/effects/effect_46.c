@@ -87,9 +87,9 @@ EffectInstance* effect_46_main(s32 arg0, PlayerStatus* arg1, f32 arg2, s32 arg3)
                 part->unk_08 = 0;
                 part->unk_0C = arg1->colliderHeight * 0.5;
                 part->unk_10 = 0;
-                part->unk_38 = func_E0200000(1) * 8 - 4;
+                part->unk_38 = effect_rand_int(1) * 8 - 4;
                 part->unk_3C = 0;
-                part->unk_40 = func_E0200000(1) * 8 - 4;
+                part->unk_40 = effect_rand_int(1) * 8 - 4;
                 part->unk_2C = i * 25;
                 part->unk_30 = (i - 1) * 360 / (numParts - 1);
                 part->unk_34 = 360 - i * 38;
