@@ -135,12 +135,12 @@ s32 N(ToppledAnims)[] = {
     STATUS_END,
 };
 
-s32 N(IdleAnimations_80228730)[] = {
+s32 N(BasicHurtAnims)[] = {
     STATUS_KEY_NORMAL,    THIS_ANIM_HURT_STILL,
     STATUS_END,
 };
 
-s32 N(IdleAnimations_8022873C)[] = {
+s32 N(BasicToppledAnims)[] = {
     STATUS_KEY_NORMAL,    THIS_ANIM_TOPPLE_IDLE,
     STATUS_END,
 };
@@ -379,7 +379,7 @@ EvtScript N(HandleCommand) = {
                         EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(TippingAnims)))
                         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, THIS_ANIM_TIPPING_IDLE)
                     EVT_ELSE
-                        EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_80228730)))
+                        EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(BasicHurtAnims)))
                         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, THIS_ANIM_HURT_STILL)
                     EVT_END_IF
                 EVT_END_CASE_GROUP
@@ -402,7 +402,7 @@ EvtScript N(HandleCommand) = {
                         EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(TippingAnims)))
                         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, THIS_ANIM_TIPPING_IDLE)
                     EVT_ELSE
-                        EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_80228730)))
+                        EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(BasicHurtAnims)))
                         EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, THIS_ANIM_HURT_STILL)
                     EVT_END_IF
                 EVT_END_CASE_GROUP
@@ -440,7 +440,7 @@ EvtScript N(HandleCommand) = {
                     EVT_CALL(N(GetTowerFallPosition), LVar0, LVar1, LVar2)
                     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, THIS_ANIM_HURT_STILL)
-                    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_80228730)))
+                    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(BasicHurtAnims)))
                     EVT_CALL(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
                     EVT_IF_EQ(LFlag0, TRUE)
                         EVT_CALL(N(StartRumbleWithParams), 256, 5)
@@ -449,7 +449,7 @@ EvtScript N(HandleCommand) = {
                         EVT_END_THREAD
                     EVT_END_IF
                     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, THIS_ANIM_TOPPLE_IDLE)
-                    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_8022873C)))
+                    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(BasicToppledAnims)))
                     EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
                     EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
                     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_HEALTH_BAR, FALSE)
@@ -479,7 +479,7 @@ EvtScript N(HandleCommand) = {
                     EVT_CALL(N(GetTowerFallPosition), LVar0, LVar1, LVar2)
                     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, THIS_ANIM_BURN)
-                    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_80228730)))
+                    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(BasicHurtAnims)))
                     EVT_CALL(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
                     EVT_IF_EQ(LFlag0, TRUE)
                         EVT_CALL(N(StartRumbleWithParams), 256, 5)
@@ -495,7 +495,7 @@ EvtScript N(HandleCommand) = {
                     EVT_DIVF(LVar3, EVT_FLOAT(10.0))
                     EVT_PLAY_EFFECT(EFFECT_SMOKE_BURST, 0, LVar0, LVar1, LVar2, LVar3, 10, 0)
                     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, THIS_ANIM_TOPPLE_IDLE)
-                    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_8022873C)))
+                    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(BasicToppledAnims)))
                     EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
                     EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
                     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_HEALTH_BAR, FALSE)
