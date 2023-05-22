@@ -483,77 +483,77 @@ EvtScript N(takeTurn) = {
     EVT_LOOP(5)
         EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Leeching)
-        EVT_SET(LocalFlag(0), 0)
+        EVT_SET(LFlag0, FALSE)
         EVT_LOOP(10)
             EVT_CALL(GetActionSuccessCopy, LVar1)
             EVT_IF_EQ(LVar1, 1)
-                EVT_SET(LocalFlag(0), 1)
+                EVT_SET(LFlag0, TRUE)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_IF_EQ(LocalFlag(0), 1)
+        EVT_IF_EQ(LFlag0, TRUE)
             EVT_CALL(DispatchEventPlayer, EVENT_66)
             EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3E0)
         EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-        EVT_SET(LocalFlag(0), 0)
+        EVT_SET(LFlag0, FALSE)
         EVT_LOOP(2)
             EVT_CALL(GetActionSuccessCopy, LVar1)
             EVT_IF_EQ(LVar1, 1)
-                EVT_SET(LocalFlag(0), 1)
+                EVT_SET(LFlag0, TRUE)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_IF_EQ(LocalFlag(0), 1)
+        EVT_IF_EQ(LFlag0, TRUE)
             EVT_CALL(DispatchEventPlayer, EVENT_66)
             EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.9), EVT_FLOAT(1.1), EVT_FLOAT(1.0))
-        EVT_SET(LocalFlag(0), 0)
+        EVT_SET(LFlag0, FALSE)
         EVT_LOOP(2)
             EVT_CALL(GetActionSuccessCopy, LVar1)
             EVT_IF_EQ(LVar1, 1)
-                EVT_SET(LocalFlag(0), 1)
+                EVT_SET(LFlag0, TRUE)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_IF_EQ(LocalFlag(0), 1)
+        EVT_IF_EQ(LFlag0, TRUE)
             EVT_CALL(DispatchEventPlayer, EVENT_66)
             EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.8), EVT_FLOAT(1.2), EVT_FLOAT(1.0))
-        EVT_SET(LocalFlag(0), 0)
+        EVT_SET(LFlag0, FALSE)
         EVT_LOOP(3)
             EVT_CALL(GetActionSuccessCopy, LVar1)
             EVT_IF_EQ(LVar1, 1)
-                EVT_SET(LocalFlag(0), 1)
+                EVT_SET(LFlag0, TRUE)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_IF_EQ(LocalFlag(0), 1)
+        EVT_IF_EQ(LFlag0, TRUE)
             EVT_CALL(DispatchEventPlayer, EVENT_66)
             EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.7), EVT_FLOAT(1.4), EVT_FLOAT(1.0))
-        EVT_SET(LocalFlag(0), 0)
+        EVT_SET(LFlag0, FALSE)
         EVT_LOOP(2)
             EVT_CALL(GetActionSuccessCopy, LVar1)
             EVT_IF_EQ(LVar1, 1)
-                EVT_SET(LocalFlag(0), 1)
+                EVT_SET(LFlag0, TRUE)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_IF_EQ(LocalFlag(0), 1)
+        EVT_IF_EQ(LFlag0, TRUE)
             EVT_CALL(DispatchEventPlayer, EVENT_66)
             EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
             EVT_BREAK_LOOP
@@ -591,46 +591,46 @@ EvtScript N(takeTurn) = {
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.7), EVT_FLOAT(1.4), EVT_FLOAT(1.0))
-        EVT_SET(LocalFlag(0), 0)
+        EVT_SET(LFlag0, FALSE)
         EVT_LOOP(3)
             EVT_CALL(GetActionSuccessCopy, LVar1)
             EVT_IF_EQ(LVar1, 1)
-                EVT_SET(LocalFlag(0), 1)
+                EVT_SET(LFlag0, TRUE)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_IF_EQ(LocalFlag(0), 1)
+        EVT_IF_EQ(LFlag0, TRUE)
             EVT_CALL(DispatchEventPlayer, EVENT_66)
             EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.8), EVT_FLOAT(1.2), EVT_FLOAT(1.0))
-        EVT_SET(LocalFlag(0), 0)
+        EVT_SET(LFlag0, FALSE)
         EVT_LOOP(2)
             EVT_CALL(GetActionSuccessCopy, LVar1)
             EVT_IF_EQ(LVar1, 1)
-                EVT_SET(LocalFlag(0), 1)
+                EVT_SET(LFlag0, TRUE)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_IF_EQ(LocalFlag(0), 1)
+        EVT_IF_EQ(LFlag0, TRUE)
             EVT_CALL(DispatchEventPlayer, EVENT_66)
             EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.9), EVT_FLOAT(1.1), EVT_FLOAT(1.0))
-        EVT_SET(LocalFlag(0), 0)
+        EVT_SET(LFlag0, FALSE)
         EVT_LOOP(2)
             EVT_CALL(GetActionSuccessCopy, LVar1)
             EVT_IF_EQ(LVar1, 1)
-                EVT_SET(LocalFlag(0), 1)
+                EVT_SET(LFlag0, TRUE)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_IF_EQ(LocalFlag(0), 1)
+        EVT_IF_EQ(LFlag0, TRUE)
             EVT_CALL(DispatchEventPlayer, EVENT_66)
             EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
             EVT_BREAK_LOOP
@@ -642,16 +642,16 @@ EvtScript N(takeTurn) = {
             EVT_CALL(func_80269470)
             EVT_BREAK_LOOP
         EVT_END_IF
-        EVT_SET(LocalFlag(0), 0)
+        EVT_SET(LFlag0, FALSE)
         EVT_LOOP(12)
             EVT_CALL(GetActionSuccessCopy, LVar1)
             EVT_IF_EQ(LVar1, 1)
-                EVT_SET(LocalFlag(0), 1)
+                EVT_SET(LFlag0, TRUE)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_IF_EQ(LocalFlag(0), 1)
+        EVT_IF_EQ(LFlag0, TRUE)
             EVT_CALL(DispatchEventPlayer, EVENT_66)
             EVT_BREAK_LOOP
         EVT_END_IF

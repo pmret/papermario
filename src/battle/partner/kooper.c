@@ -232,7 +232,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .opacity = 255,
         .idleAnimations = N(IdleAnimations),
         .defenseTable = N(DefenseTable),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
     },
@@ -810,7 +810,7 @@ EvtScript N(powerShell) = {
         EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
         EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_ZERO, 1)
     EVT_END_THREAD
-    EVT_SET(LocalFlag(0), 0)
+    EVT_SET(LFlag0, FALSE)
     EVT_LABEL(10)
     EVT_WAIT(1)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
@@ -823,7 +823,7 @@ EvtScript N(powerShell) = {
     EVT_IF_EQ(LVar0, 6)
         EVT_GOTO(12)
     EVT_END_IF
-    EVT_IF_EQ(LocalFlag(0), 0)
+    EVT_IF_EQ(LFlag0, FALSE)
         EVT_CALL(GetActionCommandResult, LVar0)
         EVT_SWITCH(LVar0)
             EVT_CASE_GT(0)
@@ -832,7 +832,7 @@ EvtScript N(powerShell) = {
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
         EVT_END_SWITCH
     EVT_END_IF
-    EVT_SET(LocalFlag(0), 1)
+    EVT_SET(LFlag0, TRUE)
     EVT_CALL(GetActionCommandResult, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(0)
@@ -846,7 +846,7 @@ EvtScript N(powerShell) = {
     EVT_IF_NE(LVar2, -1)
         EVT_GOTO(10)
     EVT_END_IF
-    EVT_IF_EQ(LocalFlag(0), 0)
+    EVT_IF_EQ(LFlag0, FALSE)
         EVT_CALL(GetActionCommandResult, LVar0)
         EVT_SWITCH(LVar0)
             EVT_CASE_GT(0)
@@ -965,7 +965,7 @@ EvtScript N(dizzyShell) = {
         EVT_CALL(N(SetTargetsYaw))
     EVT_END_THREAD
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-    EVT_SET(LocalFlag(0), 0)
+    EVT_SET(LFlag0, FALSE)
     EVT_LABEL(10)
     EVT_WAIT(1)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
@@ -978,7 +978,7 @@ EvtScript N(dizzyShell) = {
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
         EVT_GOTO(12)
     EVT_END_IF
-    EVT_IF_EQ(LocalFlag(0), 0)
+    EVT_IF_EQ(LFlag0, FALSE)
         EVT_CALL(GetActionCommandResult, LVar0)
         EVT_SWITCH(LVar0)
             EVT_CASE_GT(99)
@@ -987,7 +987,7 @@ EvtScript N(dizzyShell) = {
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
         EVT_END_SWITCH
     EVT_END_IF
-    EVT_SET(LocalFlag(0), 1)
+    EVT_SET(LFlag0, TRUE)
     EVT_CALL(GetActionResult, LVarF)
     EVT_CALL(GetActionCommandResult, LVar0)
     EVT_SWITCH(LVar0)
@@ -1015,7 +1015,7 @@ EvtScript N(dizzyShell) = {
     EVT_IF_NE(LVar2, -1)
         EVT_GOTO(10)
     EVT_END_IF
-    EVT_IF_EQ(LocalFlag(0), 0)
+    EVT_IF_EQ(LFlag0, FALSE)
         EVT_CALL(GetActionCommandResult, LVar0)
         EVT_SWITCH(LVar0)
             EVT_CASE_GT(99)
@@ -1211,7 +1211,7 @@ EvtScript N(fireShell) = {
         EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
     EVT_END_THREAD
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
-    EVT_SET(LocalFlag(0), 0)
+    EVT_SET(LFlag0, FALSE)
     EVT_LABEL(10)
     EVT_WAIT(1)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
@@ -1224,7 +1224,7 @@ EvtScript N(fireShell) = {
     EVT_IF_EQ(LVar0, 6)
         EVT_GOTO(12)
     EVT_END_IF
-    EVT_IF_EQ(LocalFlag(0), 0)
+    EVT_IF_EQ(LFlag0, FALSE)
         EVT_CALL(GetActionCommandResult, LVar0)
         EVT_SWITCH(LVar0)
             EVT_CASE_GT(99)
@@ -1233,7 +1233,7 @@ EvtScript N(fireShell) = {
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
         EVT_END_SWITCH
     EVT_END_IF
-    EVT_SET(LocalFlag(0), 1)
+    EVT_SET(LFlag0, TRUE)
     EVT_CALL(GetActionResult, LVar0)
     EVT_CALL(GetActionCommandResult, LVar0)
     EVT_SWITCH(LVar0)
@@ -1248,7 +1248,7 @@ EvtScript N(fireShell) = {
     EVT_IF_NE(LVar0, -1)
         EVT_GOTO(10)
     EVT_END_IF
-    EVT_IF_EQ(LocalFlag(0), 0)
+    EVT_IF_EQ(LFlag0, FALSE)
         EVT_CALL(GetActionCommandResult, LVar0)
         EVT_SWITCH(LVar0)
             EVT_CASE_GT(99)

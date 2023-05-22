@@ -342,9 +342,9 @@ EvtScript N(bow_takeTurn) = {
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2019)
         EVT_ADD(LVarA, 1)
         EVT_CALL(SetPartScale, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(1.4), EVT_FLOAT(1.4), EVT_FLOAT(1.0))
-        EVT_IF_EQ(LocalFlag(0), 0)
+        EVT_IF_EQ(LFlag0, FALSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBow_SlapOnce)
-            EVT_SET(LocalFlag(0), 1)
+            EVT_SET(LFlag0, TRUE)
             EVT_IF_EQ(LVarA, LVar8)
                 EVT_CALL(SetDamageSource, DMG_SRC_LAST_SLAP_LEFT)
             EVT_ELSE
@@ -352,7 +352,7 @@ EvtScript N(bow_takeTurn) = {
             EVT_END_IF
         EVT_ELSE
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBow_SlapBack)
-            EVT_SET(LocalFlag(0), 0)
+            EVT_SET(LFlag0, FALSE)
             EVT_IF_EQ(LVarA, LVar8)
                 EVT_CALL(SetDamageSource, DMG_SRC_LAST_SLAP_RIGHT)
             EVT_ELSE

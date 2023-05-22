@@ -483,7 +483,7 @@ EvtScript N(onDeath) = {
         EVT_CASE_OR_EQ(DMG_SRC_SPIN_SMASH)
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
-            EVT_SET(LocalFlag(0), 0)
+            EVT_SET(LFlag0, FALSE)
             EVT_CALL(GetOriginalActorType, ACTOR_SELF, LVar1)
             EVT_SWITCH(LVar1)
                 EVT_CASE_OR_EQ(ACTOR_TYPE_BOB_OMB)

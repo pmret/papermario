@@ -4035,7 +4035,7 @@ enum ActorPartFlags {
 };
 
 enum ActorEventFlags {
-    ACTOR_EVENT_FLAG_0                      = 0x00000000,
+    ACTOR_EVENT_FLAGS_NONE                  = 0x00000000,
     ACTOR_EVENT_FLAG_1                      = 0x00000001,
     ACTOR_EVENT_FLAG_FIREY                  = 0x00000002, ///< Player takes burn damage upon contact.
     ACTOR_EVENT_FLAG_4                      = 0x00000004,

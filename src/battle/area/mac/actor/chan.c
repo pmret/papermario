@@ -910,15 +910,15 @@ EvtScript N(handleEvent_8021D0CC) = {
             EVT_IF_FLAG(LVar0, 0x3F1000)
                 EVT_BREAK_SWITCH
             EVT_END_IF
-            EVT_SET(LocalFlag(0), 0)
+            EVT_SET(LFlag0, FALSE)
             EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
             EVT_SWITCH(LVar0)
                 EVT_CASE_OR_EQ(1)
                 EVT_CASE_OR_EQ(0)
-                    EVT_SET(LocalFlag(0), 1)
+                    EVT_SET(LFlag0, TRUE)
                 EVT_END_CASE_GROUP
             EVT_END_SWITCH
-            EVT_IF_EQ(LocalFlag(0), 0)
+            EVT_IF_EQ(LFlag0, FALSE)
                 EVT_BREAK_SWITCH
             EVT_END_IF
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)

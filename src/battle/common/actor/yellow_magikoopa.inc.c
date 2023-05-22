@@ -785,7 +785,7 @@ EvtScript N(init_flying) = {
 };
 
 EvtScript N(takeTurn) = {
-    EVT_SET(LocalFlag(0), 0)
+    EVT_SET(LFlag0, FALSE)
     EVT_LABEL(10)
     EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
@@ -808,8 +808,8 @@ EvtScript N(takeTurn) = {
     EVT_IF_NE(LVar0, -1)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_IF_EQ(LocalFlag(0), 0)
-        EVT_SET(LocalFlag(0), 1)
+    EVT_IF_EQ(LFlag0, FALSE)
+        EVT_SET(LFlag0, TRUE)
         EVT_CALL(SetBattleVar, 2, -1)
         EVT_GOTO(10)
     EVT_END_IF

@@ -89,7 +89,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .opacity = 255,
         .idleAnimations = N(IdleAnimations_8021D360),
         .defenseTable = N(DefenseTable_8021D3C4),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -2, -10 },
     },
@@ -508,7 +508,7 @@ ActorPartBlueprint N(GoombarioParts)[] = {
         .opacity = 255,
         .idleAnimations = N(IdleAnimations_8021E94C),
         .defenseTable = N(DefenseTable_8021E998),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -1, -9 },
     },
@@ -1655,7 +1655,7 @@ ActorPartBlueprint N(BombetteParts)[] = {
         .opacity = 255,
         .idleAnimations = N(IdleAnimations_80222290),
         .defenseTable = N(DefenseTable_802222DC),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -2, -7 },
     },
@@ -2009,7 +2009,7 @@ ActorPartBlueprint N(ParakarryParts)[] = {
         .opacity = 255,
         .idleAnimations = N(IdleAnimations_80223388),
         .defenseTable = N(DefenseTable_802233D4),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -16 },
     },
@@ -2021,7 +2021,7 @@ ActorPartBlueprint N(ParakarryParts)[] = {
         .opacity = 255,
         .idleAnimations = NULL,
         .defenseTable = N(DefenseTable_802233D4),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -16 },
     },
@@ -2371,7 +2371,7 @@ ActorPartBlueprint N(BowParts)[] = {
         .opacity = 255,
         .idleAnimations = N(IdleAnimations_80224410),
         .defenseTable = N(DefenseTable_8022445C),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -10 },
     },
@@ -2383,7 +2383,7 @@ ActorPartBlueprint N(BowParts)[] = {
         .opacity = 255,
         .idleAnimations = NULL,
         .defenseTable = N(DefenseTable_8022445C),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -10 },
     },
@@ -2668,9 +2668,9 @@ EvtScript N(takeTurn_80224CA0) = {
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2019)
         EVT_ADD(LVarA, 1)
         EVT_CALL(SetPartScale, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(1.4), EVT_FLOAT(1.4), EVT_FLOAT(1.0))
-        EVT_IF_EQ(LocalFlag(0), 0)
+        EVT_IF_EQ(LFlag0, FALSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBow_SlapOnce)
-            EVT_SET(LocalFlag(0), 1)
+            EVT_SET(LFlag0, TRUE)
             EVT_IF_EQ(LVarA, LVar8)
                 EVT_CALL(SetDamageSource, DMG_SRC_LAST_SLAP_LEFT)
             EVT_ELSE
@@ -2678,7 +2678,7 @@ EvtScript N(takeTurn_80224CA0) = {
             EVT_END_IF
         EVT_ELSE
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBow_SlapBack)
-            EVT_SET(LocalFlag(0), 0)
+            EVT_SET(LFlag0, FALSE)
             EVT_IF_EQ(LVarA, LVar8)
                 EVT_CALL(SetDamageSource, DMG_SRC_LAST_SLAP_RIGHT)
             EVT_ELSE
@@ -3301,7 +3301,7 @@ ActorPartBlueprint N(SushieParts)[] = {
         .opacity = 255,
         .idleAnimations = N(IdleAnimations_8022697C),
         .defenseTable = N(DefenseTable_802269C8),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -12 },
     },
@@ -3780,7 +3780,7 @@ ActorPartBlueprint N(LakilesterParts)[] = {
         .opacity = 255,
         .idleAnimations = N(IdleAnimations_8022840C),
         .defenseTable = N(DefenseTable_80228464),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -2, -10 },
     },
@@ -3792,7 +3792,7 @@ ActorPartBlueprint N(LakilesterParts)[] = {
         .opacity = 255,
         .idleAnimations = N(IdleAnimations_80228458),
         .defenseTable = N(DefenseTable_80228464),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
     },

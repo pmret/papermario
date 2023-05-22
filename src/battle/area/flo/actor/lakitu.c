@@ -446,20 +446,20 @@ EvtScript N(summonSpiny) = {
         EVT_CALL(SetPartRotationOffset, ACTOR_SELF, PRT_3, 0, 16, 0)
         EVT_SET(LVar0, 0)
         EVT_SET(LVar1, 0)
-        EVT_SET(LocalFlag(0), 0)
+        EVT_SET(LFlag0, FALSE)
         EVT_LOOP(12)
             EVT_ADD(LVar0, 30)
             EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_3, 0, 0, LVar0)
             EVT_ADD(LVar1, 1)
             EVT_IF_GE(LVar1, 6)
-                EVT_IF_EQ(LocalFlag(0), 1)
+                EVT_IF_EQ(LFlag0, TRUE)
                     EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, ACTOR_PART_FLAG_INVISIBLE, FALSE)
                     EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_3, ACTOR_PART_FLAG_INVISIBLE, TRUE)
-                    EVT_SET(LocalFlag(0), 0)
+                    EVT_SET(LFlag0, FALSE)
                 EVT_ELSE
                     EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, ACTOR_PART_FLAG_INVISIBLE, TRUE)
                     EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_3, ACTOR_PART_FLAG_INVISIBLE, FALSE)
-                    EVT_SET(LocalFlag(0), 1)
+                    EVT_SET(LFlag0, TRUE)
                 EVT_END_IF
             EVT_END_IF
             EVT_WAIT(1)
@@ -514,31 +514,31 @@ EvtScript N(findPlacesForSummon) = {
     EVT_MOD(LVar5, 4)
     EVT_SWITCH(LVar5)
         EVT_CASE_EQ(0)
-            EVT_SET(LocalFlag(1), 1)
+            EVT_SET(LFlag1, TRUE)
         EVT_CASE_EQ(1)
-            EVT_SET(LocalFlag(2), 1)
+            EVT_SET(LFlag2, TRUE)
         EVT_CASE_EQ(2)
-            EVT_SET(LocalFlag(3), 1)
+            EVT_SET(LFlag3, TRUE)
         EVT_CASE_EQ(3)
-            EVT_SET(LocalFlag(4), 1)
+            EVT_SET(LFlag4, TRUE)
     EVT_END_SWITCH
     EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
     EVT_IF_NE(LVar0, -1)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_IF_EQ(LocalFlag(1), 0)
+    EVT_IF_EQ(LFlag1, FALSE)
         EVT_SET(LVarA, 0)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_EQ(LocalFlag(2), 0)
+    EVT_IF_EQ(LFlag2, FALSE)
         EVT_SET(LVarA, 1)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_EQ(LocalFlag(3), 0)
+    EVT_IF_EQ(LFlag3, FALSE)
         EVT_SET(LVarA, 2)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_EQ(LocalFlag(4), 0)
+    EVT_IF_EQ(LFlag4, FALSE)
         EVT_SET(LVarA, 3)
         EVT_RETURN
     EVT_END_IF

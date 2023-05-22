@@ -87,7 +87,7 @@ ActorPartBlueprint N(GroundParts)[] = {
         .opacity = 255,
         .idleAnimations = N(IdleAnimations_80223D70),
         .defenseTable = N(DefenseTable_80223B20),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -5, -12 },
     },
@@ -102,7 +102,7 @@ ActorPartBlueprint N(FlyingParts)[] = {
         .opacity = 255,
         .idleAnimations = N(IdleAnimations_80223D70),
         .defenseTable = N(DefenseTable_80223B2C),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -5, -12 },
     },
@@ -126,7 +126,7 @@ ActorPartBlueprint N(FlyingParts)[] = {
         .opacity = 255,
         .idleAnimations = N(IdleAnimations_80223E08),
         .defenseTable = N(DefenseTable_80223B2C),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
     },
@@ -840,17 +840,17 @@ EvtScript N(healOne) = {
     EVT_ADD(LVar5, LVar6)
     EVT_SUB(LVar3, LVar5)
     EVT_SUB(LVar2, LVar4)
-    EVT_SET(LocalFlag(0), 0)
+    EVT_SET(LFlag0, FALSE)
     EVT_CALL(GetOriginalActorType, LVar0, LVarA)
     EVT_IF_EQ(LVarA, ACTOR_TYPE_DRY_BONES)
         EVT_CALL(GetActorVar, LVar0, 8, LVarA)
         EVT_IF_EQ(LVarA, 1)
-            EVT_SET(LocalFlag(0), 1)
+            EVT_SET(LFlag0, TRUE)
         EVT_END_IF
     EVT_END_IF
     EVT_CALL(GetOwnerID, LVarA)
     EVT_IF_NE(LVarA, LVar0)
-        EVT_IF_EQ(LocalFlag(0), 0)
+        EVT_IF_EQ(LFlag0, FALSE)
             EVT_CALL(GetEnemyMaxHP, LVar0, LVarA)
             EVT_CALL(GetActorHP, LVar0, LVarB)
             EVT_IF_NE(LVarA, LVarB)
@@ -879,17 +879,17 @@ EvtScript N(healOne) = {
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(2)
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
-    EVT_SET(LocalFlag(0), 0)
+    EVT_SET(LFlag0, FALSE)
     EVT_CALL(GetOriginalActorType, LVar0, LVarA)
     EVT_IF_EQ(LVarA, ACTOR_TYPE_DRY_BONES)
         EVT_CALL(GetActorVar, LVar0, 8, LVarA)
         EVT_IF_EQ(LVarA, 1)
-            EVT_SET(LocalFlag(0), 1)
+            EVT_SET(LFlag0, TRUE)
         EVT_END_IF
     EVT_END_IF
     EVT_CALL(GetOwnerID, LVarA)
     EVT_IF_NE(LVarA, LVar0)
-        EVT_IF_EQ(LocalFlag(0), 0)
+        EVT_IF_EQ(LFlag0, FALSE)
             EVT_CALL(GetEnemyMaxHP, LVar0, LVarA)
             EVT_CALL(GetActorHP, LVar0, LVarB)
             EVT_IF_NE(LVarA, LVarB)
@@ -1081,16 +1081,16 @@ EvtScript N(healAll) = {
     EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
-    EVT_SET(LocalFlag(0), 0)
+    EVT_SET(LFlag0, FALSE)
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
     EVT_CALL(GetOriginalActorType, LVar0, LVar1)
     EVT_IF_EQ(LVar1, ACTOR_TYPE_DRY_BONES)
         EVT_CALL(GetActorVar, LVar0, 8, LVar1)
         EVT_IF_EQ(LVar1, 1)
-            EVT_SET(LocalFlag(0), 1)
+            EVT_SET(LFlag0, TRUE)
         EVT_END_IF
     EVT_END_IF
-    EVT_IF_EQ(LocalFlag(0), 0)
+    EVT_IF_EQ(LFlag0, FALSE)
         EVT_THREAD
             EVT_WAIT(5)
             EVT_CALL(PlaySoundAtActor, LVar0, SOUND_206D)
@@ -1130,16 +1130,16 @@ EvtScript N(takeTurn_802274E4) = {
     EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
-    EVT_SET(LocalFlag(0), 0)
+    EVT_SET(LFlag0, FALSE)
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
     EVT_CALL(GetOriginalActorType, LVar0, LVar1)
     EVT_IF_EQ(LVar1, ACTOR_TYPE_DRY_BONES)
         EVT_CALL(GetActorVar, LVar0, 8, LVar1)
         EVT_IF_EQ(LVar1, 1)
-            EVT_SET(LocalFlag(0), 1)
+            EVT_SET(LFlag0, TRUE)
         EVT_END_IF
     EVT_END_IF
-    EVT_IF_EQ(LocalFlag(0), 0)
+    EVT_IF_EQ(LFlag0, FALSE)
         EVT_CALL(GetActorHP, LVar0, LVar2)
         EVT_CALL(GetEnemyMaxHP, LVar0, LVar3)
         EVT_IF_NE(LVar2, LVar3)

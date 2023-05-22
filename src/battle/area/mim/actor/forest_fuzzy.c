@@ -56,7 +56,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .opacity = 255,
         .idleAnimations = N(IdleAnimations_802184C4),
         .defenseTable = N(DefenseTable_802183C0),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -10 },
     },
@@ -382,9 +382,9 @@ EvtScript N(80219054) = {
         EVT_CASE_EQ(HIT_RESULT_HIT_STATIC)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_FLAG(LVar0, STATUS_FLAG_STATIC)
-                EVT_SET(LocalFlag(0), 0)
+                EVT_SET(LFlag0, FALSE)
             EVT_ELSE
-                EVT_SET(LocalFlag(0), 1)
+                EVT_SET(LFlag0, TRUE)
             EVT_END_IF
     EVT_END_SWITCH
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
@@ -392,7 +392,7 @@ EvtScript N(80219054) = {
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(3.0))
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Jump)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
-    EVT_IF_EQ(LocalFlag(0), 1)
+    EVT_IF_EQ(LFlag0, TRUE)
         EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 0, BS_FLAGS1_SP_EVT_ACTIVE)
         EVT_RETURN
     EVT_END_IF
@@ -512,10 +512,10 @@ EvtScript N(80219054) = {
 };
 
 EvtScript N(8021A0D4) = {
-    EVT_SET(LocalFlag(1), 0)
-    EVT_SET(LocalFlag(2), 0)
-    EVT_SET(LocalFlag(3), 0)
-    EVT_SET(LocalFlag(4), 0)
+    EVT_SET(LFlag1, FALSE)
+    EVT_SET(LFlag2, FALSE)
+    EVT_SET(LFlag3, FALSE)
+    EVT_SET(LFlag4, FALSE)
     EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
@@ -524,13 +524,13 @@ EvtScript N(8021A0D4) = {
     EVT_MOD(LVar5, 4)
     EVT_SWITCH(LVar5)
         EVT_CASE_EQ(0)
-            EVT_SET(LocalFlag(1), 1)
+            EVT_SET(LFlag1, TRUE)
         EVT_CASE_EQ(1)
-            EVT_SET(LocalFlag(2), 1)
+            EVT_SET(LFlag2, TRUE)
         EVT_CASE_EQ(2)
-            EVT_SET(LocalFlag(3), 1)
+            EVT_SET(LFlag3, TRUE)
         EVT_CASE_EQ(3)
-            EVT_SET(LocalFlag(4), 1)
+            EVT_SET(LFlag4, TRUE)
     EVT_END_SWITCH
     EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
     EVT_IF_NE(LVar0, -1)
@@ -541,14 +541,14 @@ EvtScript N(8021A0D4) = {
     EVT_CALL(GetIndexFromHome, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_IF_EQ(LocalFlag(2), 0)
+            EVT_IF_EQ(LFlag2, FALSE)
                 EVT_SET(LVarA, 1)
             EVT_END_IF
         EVT_CASE_EQ(1)
-            EVT_IF_EQ(LocalFlag(1), 0)
+            EVT_IF_EQ(LFlag1, FALSE)
                 EVT_SET(LVarA, 0)
             EVT_END_IF
-            EVT_IF_EQ(LocalFlag(3), 0)
+            EVT_IF_EQ(LFlag3, FALSE)
                 EVT_IF_EQ(LVarA, -1)
                     EVT_SET(LVarA, 2)
                 EVT_ELSE
@@ -556,10 +556,10 @@ EvtScript N(8021A0D4) = {
                 EVT_END_IF
             EVT_END_IF
         EVT_CASE_EQ(2)
-            EVT_IF_EQ(LocalFlag(2), 0)
+            EVT_IF_EQ(LFlag2, FALSE)
                 EVT_SET(LVarA, 1)
             EVT_END_IF
-            EVT_IF_EQ(LocalFlag(4), 0)
+            EVT_IF_EQ(LFlag4, FALSE)
                 EVT_IF_EQ(LVarA, -1)
                     EVT_SET(LVarA, 3)
                 EVT_ELSE
@@ -567,7 +567,7 @@ EvtScript N(8021A0D4) = {
                 EVT_END_IF
             EVT_END_IF
         EVT_CASE_EQ(3)
-            EVT_IF_EQ(LocalFlag(3), 0)
+            EVT_IF_EQ(LFlag3, FALSE)
                 EVT_SET(LVarA, 2)
             EVT_END_IF
     EVT_END_SWITCH

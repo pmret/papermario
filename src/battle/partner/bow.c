@@ -523,7 +523,7 @@ EvtScript N(smack) = {
     EVT_SET(LVarF, 0)
     EVT_SET(LVarE, 0)
     EVT_SET(LVarD, 0)
-    EVT_SET(LocalFlag(0), 0)
+    EVT_SET(LFlag0, FALSE)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_LOOP(15)
@@ -560,13 +560,13 @@ EvtScript N(smack) = {
         EVT_GOTO(2)
     EVT_END_IF
     EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.4), EVT_FLOAT(1.4), EVT_FLOAT(1.0))
-    EVT_IF_EQ(LocalFlag(0), 0)
+    EVT_IF_EQ(LFlag0, FALSE)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_SlapOnce)
-        EVT_SET(LocalFlag(0), 1)
+        EVT_SET(LFlag0, TRUE)
         EVT_CALL(SetDamageSource, DMG_SRC_NEXT_SLAP_LEFT)
     EVT_ELSE
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_SlapBack)
-        EVT_SET(LocalFlag(0), 0)
+        EVT_SET(LFlag0, FALSE)
         EVT_CALL(SetDamageSource, DMG_SRC_NEXT_SLAP_RIGHT)
     EVT_END_IF
     EVT_WAIT(2)
@@ -616,13 +616,13 @@ EvtScript N(smack) = {
         EVT_CALL(MoveBattleCamOver, 5)
     EVT_END_IF
     EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.4), EVT_FLOAT(1.4), EVT_FLOAT(1.0))
-    EVT_IF_EQ(LocalFlag(0), 0)
+    EVT_IF_EQ(LFlag0, FALSE)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_SlapOnce)
-        EVT_SET(LocalFlag(0), 1)
+        EVT_SET(LFlag0, TRUE)
         EVT_CALL(SetDamageSource, DMG_SRC_LAST_SLAP_LEFT)
     EVT_ELSE
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_SlapBack)
-        EVT_SET(LocalFlag(0), 0)
+        EVT_SET(LFlag0, FALSE)
         EVT_CALL(SetDamageSource, DMG_SRC_LAST_SLAP_RIGHT)
     EVT_END_IF
     EVT_WAIT(2)
@@ -1034,7 +1034,7 @@ EvtScript N(fanSmack) = {
     EVT_SET(LVarF, 0)
     EVT_SET(LVarE, 0)
     EVT_SET(LVarD, 0)
-    EVT_SET(LocalFlag(0), 0)
+    EVT_SET(LFlag0, FALSE)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_CelebrateFast)
@@ -1077,13 +1077,13 @@ EvtScript N(fanSmack) = {
         EVT_GOTO(2)
     EVT_END_IF
     EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.4), EVT_FLOAT(1.4), EVT_FLOAT(1.0))
-    EVT_IF_EQ(LocalFlag(0), 0)
+    EVT_IF_EQ(LFlag0, FALSE)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_FanSmackOnce)
-        EVT_SET(LocalFlag(0), 1)
+        EVT_SET(LFlag0, TRUE)
         EVT_CALL(SetDamageSource, DMG_SRC_NEXT_FAN_SMACK_LEFT)
     EVT_ELSE
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_FanSmackBack)
-        EVT_SET(LocalFlag(0), 0)
+        EVT_SET(LFlag0, FALSE)
         EVT_CALL(SetDamageSource, DMG_SRC_NEXT_FAN_SMACK_RIGHT)
     EVT_END_IF
     EVT_WAIT(2)
@@ -1156,13 +1156,13 @@ EvtScript N(fanSmack) = {
         EVT_CALL(MoveBattleCamOver, 5)
     EVT_END_IF
     EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.4), EVT_FLOAT(1.4), EVT_FLOAT(1.0))
-    EVT_IF_EQ(LocalFlag(0), 0)
+    EVT_IF_EQ(LFlag0, FALSE)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_FanSmackOnce)
-        EVT_SET(LocalFlag(0), 1)
+        EVT_SET(LFlag0, TRUE)
         EVT_CALL(SetDamageSource, DMG_SRC_LAST_FAN_SMACK_LEFT)
     EVT_ELSE
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_FanSmackBack)
-        EVT_SET(LocalFlag(0), 0)
+        EVT_SET(LFlag0, FALSE)
         EVT_CALL(SetDamageSource, DMG_SRC_LAST_FAN_SMACK_RIGHT)
     EVT_END_IF
     EVT_WAIT(2)

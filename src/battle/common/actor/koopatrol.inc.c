@@ -495,29 +495,29 @@ EvtScript N(handleEvent) = {
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SPIKE_TAUNT)
             EVT_WAIT(10)
-            EVT_SET(LocalFlag(0), 0)
+            EVT_SET(LFlag0, FALSE)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
             EVT_IF_FLAG(LVar3, STATUS_FLAG_SHRINK)
                 EVT_ADD(LVar1, 16)
-                EVT_SET(LocalFlag(0), 1)
+                EVT_SET(LFlag0, TRUE)
             EVT_END_IF
             EVT_IF_FLAG(LVar3, STATUS_FLAG_DIZZY)
                 EVT_ADD(LVar0, -14)
                 EVT_ADD(LVar1, 20)
-                EVT_SET(LocalFlag(0), 1)
+                EVT_SET(LFlag0, TRUE)
             EVT_END_IF
             EVT_IF_FLAG(LVar3, STATUS_FLAG_SLEEP)
                 EVT_ADD(LVar0, -14)
                 EVT_ADD(LVar1, 20)
-                EVT_SET(LocalFlag(0), 1)
+                EVT_SET(LFlag0, TRUE)
             EVT_END_IF
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_STATE), LVarA)
             EVT_IF_EQ(LVarA, N(STATE_CHARGED))
                 EVT_ADD(LVar1, 23)
-                EVT_SET(LocalFlag(0), 1)
+                EVT_SET(LFlag0, TRUE)
             EVT_END_IF
-            EVT_IF_EQ(LocalFlag(0), 0)
+            EVT_IF_EQ(LFlag0, FALSE)
                 EVT_ADD(LVar1, 42)
             EVT_END_IF
             EVT_PLAY_EFFECT(EFFECT_LENS_FLARE, 0, LVar0, LVar1, LVar2, 20, 0)
@@ -999,10 +999,10 @@ EvtScript N(findTarget) = {
     EVT_IF_NE(LVar0, -1)
         EVT_GOTO(1)
     EVT_END_IF
-    EVT_SET(LocalFlag(1), 0)
-    EVT_SET(LocalFlag(2), 0)
-    EVT_SET(LocalFlag(3), 0)
-    EVT_SET(LocalFlag(4), 0)
+    EVT_SET(LFlag1, FALSE)
+    EVT_SET(LFlag2, FALSE)
+    EVT_SET(LFlag3, FALSE)
+    EVT_SET(LFlag4, FALSE)
     EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
@@ -1011,31 +1011,31 @@ EvtScript N(findTarget) = {
     EVT_MOD(LVar1, 4)
     EVT_SWITCH(LVar1)
         EVT_CASE_EQ(0)
-            EVT_SET(LocalFlag(1), 1)
+            EVT_SET(LFlag1, TRUE)
         EVT_CASE_EQ(1)
-            EVT_SET(LocalFlag(2), 1)
+            EVT_SET(LFlag2, TRUE)
         EVT_CASE_EQ(2)
-            EVT_SET(LocalFlag(3), 1)
+            EVT_SET(LFlag3, TRUE)
         EVT_CASE_EQ(3)
-            EVT_SET(LocalFlag(4), 1)
+            EVT_SET(LFlag4, TRUE)
     EVT_END_SWITCH
     EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
     EVT_IF_NE(LVar0, -1)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_IF_EQ(LocalFlag(1), 0)
+    EVT_IF_EQ(LFlag1, FALSE)
         EVT_SET(LVarA, 0)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_EQ(LocalFlag(2), 0)
+    EVT_IF_EQ(LFlag2, FALSE)
         EVT_SET(LVarA, 1)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_EQ(LocalFlag(3), 0)
+    EVT_IF_EQ(LFlag3, FALSE)
         EVT_SET(LVarA, 2)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_EQ(LocalFlag(4), 0)
+    EVT_IF_EQ(LFlag4, FALSE)
         EVT_SET(LVarA, 3)
         EVT_RETURN
     EVT_END_IF

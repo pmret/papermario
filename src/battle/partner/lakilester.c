@@ -986,8 +986,8 @@ EvtScript N(spinySurge) = {
     EVT_CALL(InitTargetIterator)
     EVT_CALL(SetActorVar, ACTOR_PARTNER, 0, 0)
     EVT_SET(LVar9, 0)
-    EVT_SET(LocalFlag(2), 0)
-    EVT_SET(LocalFlag(3), 0)
+    EVT_SET(LFlag2, FALSE)
+    EVT_SET(LFlag3, FALSE)
     EVT_LOOP(LVarA)
         EVT_CALL(GetActionResult, LVar0)
         EVT_IF_EQ(LVar9, 2)
@@ -1014,12 +1014,12 @@ EvtScript N(spinySurge) = {
                 EVT_IF_EQ(LVar9, 0)
                     EVT_BREAK_SWITCH
                 EVT_END_IF
-                EVT_IF_EQ(LocalFlag(2), 0)
+                EVT_IF_EQ(LFlag2, FALSE)
                     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_201B)
-                    EVT_SET(LocalFlag(2), 1)
+                    EVT_SET(LFlag2, TRUE)
                 EVT_ELSE
                     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_201C)
-                    EVT_SET(LocalFlag(2), 0)
+                    EVT_SET(LFlag2, FALSE)
                 EVT_END_IF
                 EVT_CALL(N(ThrowSpinyFX))
                 EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_ThrowSpinyAlt)
@@ -1033,7 +1033,7 @@ EvtScript N(spinySurge) = {
                     EVT_SUB(LVar0, 1)
                     EVT_CALL(SetActorVar, ACTOR_PARTNER, 0, LVar0)
                 EVT_END_CHILD_THREAD
-                EVT_SET(LocalFlag(3), 1)
+                EVT_SET(LFlag3, TRUE)
                 EVT_SET(LVar9, 0)
         EVT_END_SWITCH
         EVT_WAIT(1)
@@ -1048,7 +1048,7 @@ EvtScript N(spinySurge) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_WAIT(10)
-    EVT_IF_EQ(LocalFlag(3), 0)
+    EVT_IF_EQ(LFlag3, FALSE)
         EVT_SET(LVar0, 0)
         EVT_SET(LVarF, 0)
         EVT_WAIT(15)

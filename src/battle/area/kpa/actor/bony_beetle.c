@@ -596,20 +596,20 @@ EvtScript N(handleEvent_spiky) = {
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SPIKE_TAUNT)
             EVT_WAIT(10)
-            EVT_SET(LocalFlag(0), 0)
+            EVT_SET(LFlag0, FALSE)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
             EVT_IF_FLAG(LVar3, STATUS_FLAG_SHRINK)
                 EVT_ADD(LVar0, -3)
                 EVT_ADD(LVar1, 10)
-                EVT_SET(LocalFlag(0), 1)
+                EVT_SET(LFlag0, TRUE)
             EVT_END_IF
             EVT_IF_FLAG(LVar3, STATUS_FLAG_DIZZY)
                 EVT_ADD(LVar0, 0)
                 EVT_ADD(LVar1, 26)
-                EVT_SET(LocalFlag(0), 1)
+                EVT_SET(LFlag0, TRUE)
             EVT_END_IF
-            EVT_IF_EQ(LocalFlag(0), 0)
+            EVT_IF_EQ(LFlag0, FALSE)
                 EVT_ADD(LVar0, -8)
                 EVT_ADD(LVar1, 26)
             EVT_END_IF

@@ -778,119 +778,119 @@ EvtScript N(electroDash) = {
     EVT_CALL(InitTargetIterator)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
     EVT_CALL(AddGoalPos, ACTOR_PARTNER, -20, 0, 0)
-    EVT_SET(LocalFlag(2), 0)
+    EVT_SET(LFlag2, FALSE)
     EVT_LOOP(60)
         EVT_CALL(CheckButtonDown, BUTTON_A, LVar0)
         EVT_IF_NE(LVar0, 0)
-            EVT_SET(LocalFlag(2), 1)
+            EVT_SET(LFlag2, TRUE)
             EVT_BREAK_LOOP
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(MoveBattleCamOver, 75)
-    EVT_IF_EQ(LocalFlag(2), 1)
+    EVT_IF_EQ(LFlag2, TRUE)
         EVT_CALL(action_command_body_slam_start, 0, 102, 3, 1)
-        EVT_SET(LocalFlag(0), 0)
+        EVT_SET(LFlag0, FALSE)
         EVT_EXEC_GET_TID(N(dashToTarget), LVarA)
         EVT_LOOP(20)
             EVT_CALL(CheckButtonDown, BUTTON_A, LVar0)
             EVT_IF_EQ(LVar0, 0)
-                EVT_SET(LocalFlag(0), 1)
+                EVT_SET(LFlag0, TRUE)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_IF_EQ(LocalFlag(0), 1)
+        EVT_IF_EQ(LFlag0, TRUE)
             EVT_KILL_THREAD(LVarA)
             EVT_GOTO(10)
         EVT_END_IF
         EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT, 0, 1, BS_FLAGS1_10)
-        EVT_SET(LocalFlag(0), 0)
+        EVT_SET(LFlag0, FALSE)
         EVT_EXEC_GET_TID(N(charge), LVarA)
         EVT_LOOP(55)
             EVT_CALL(CheckButtonDown, BUTTON_A, LVar0)
             EVT_IF_EQ(LVar0, 0)
-                EVT_SET(LocalFlag(0), 1)
+                EVT_SET(LFlag0, TRUE)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_IF_EQ(LocalFlag(0), 1)
+        EVT_IF_EQ(LFlag0, TRUE)
             EVT_KILL_THREAD(LVarA)
             EVT_GOTO(10)
         EVT_END_IF
-        EVT_IF_EQ(LocalFlag(0), 0)
+        EVT_IF_EQ(LFlag0, FALSE)
             EVT_EXEC_GET_TID(N(electroDash_wait), LVarA)
             EVT_LOOP(30)
                 EVT_CALL(CheckButtonDown, BUTTON_A, LVar0)
                 EVT_IF_EQ(LVar0, 0)
-                    EVT_SET(LocalFlag(0), 1)
+                    EVT_SET(LFlag0, TRUE)
                     EVT_BREAK_LOOP
                 EVT_END_IF
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_IF_EQ(LocalFlag(0), 1)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_KILL_THREAD(LVarA)
                 EVT_GOTO(10)
             EVT_END_IF
         EVT_END_IF
     EVT_ELSE
-        EVT_SET(LocalFlag(0), 0)
+        EVT_SET(LFlag0, FALSE)
         EVT_EXEC_GET_TID(N(dashToTarget), LVarA)
         EVT_LOOP(20)
             EVT_CALL(CheckButtonDown, BUTTON_A, LVar0)
             EVT_IF_NE(LVar0, 0)
-                EVT_IF_EQ(LocalFlag(2), 0)
+                EVT_IF_EQ(LFlag2, FALSE)
                     EVT_CALL(action_command_body_slam_start, 0, 92, 3, 1)
-                    EVT_SET(LocalFlag(2), 1)
+                    EVT_SET(LFlag2, TRUE)
                 EVT_END_IF
             EVT_END_IF
-            EVT_IF_EQ(LocalFlag(2), 1)
+            EVT_IF_EQ(LFlag2, TRUE)
                 EVT_IF_EQ(LVar0, 0)
-                    EVT_SET(LocalFlag(0), 1)
+                    EVT_SET(LFlag0, TRUE)
                     EVT_BREAK_LOOP
                 EVT_END_IF
             EVT_END_IF
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_IF_EQ(LocalFlag(0), 1)
+        EVT_IF_EQ(LFlag0, TRUE)
             EVT_KILL_THREAD(LVarA)
             EVT_GOTO(10)
         EVT_END_IF
         EVT_CALL(PartnerTestEnemy, LVar0, 0, SUPPRESS_EVENT_SPIKY_FRONT, 0, 1, BS_FLAGS1_10)
-        EVT_SET(LocalFlag(0), 0)
+        EVT_SET(LFlag0, FALSE)
         EVT_EXEC_GET_TID(N(charge), LVarA)
         EVT_LOOP(55)
             EVT_CALL(CheckButtonDown, BUTTON_A, LVar0)
             EVT_IF_NE(LVar0, 0)
-                EVT_IF_EQ(LocalFlag(2), 0)
+                EVT_IF_EQ(LFlag2, FALSE)
                     EVT_CALL(action_command_body_slam_start, 0, 92, 3, 1)
-                    EVT_SET(LocalFlag(2), 1)
+                    EVT_SET(LFlag2, TRUE)
                 EVT_END_IF
             EVT_END_IF
-            EVT_IF_EQ(LocalFlag(2), 1)
+            EVT_IF_EQ(LFlag2, TRUE)
                 EVT_IF_EQ(LVar0, 0)
-                    EVT_SET(LocalFlag(0), 1)
+                    EVT_SET(LFlag0, TRUE)
                     EVT_BREAK_LOOP
                 EVT_END_IF
             EVT_END_IF
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_IF_EQ(LocalFlag(0), 1)
+        EVT_IF_EQ(LFlag0, TRUE)
             EVT_KILL_THREAD(LVarA)
             EVT_GOTO(10)
         EVT_END_IF
-        EVT_IF_EQ(LocalFlag(0), 0)
+        EVT_IF_EQ(LFlag0, FALSE)
             EVT_EXEC_GET_TID(N(electroDash_wait), LVarA)
             EVT_LOOP(30)
                 EVT_CALL(CheckButtonDown, BUTTON_A, LVar0)
                 EVT_IF_EQ(LVar0, 0)
-                    EVT_SET(LocalFlag(0), 1)
+                    EVT_SET(LFlag0, TRUE)
                     EVT_BREAK_LOOP
                 EVT_END_IF
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_IF_EQ(LocalFlag(0), 1)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_KILL_THREAD(LVarA)
                 EVT_GOTO(10)
             EVT_END_IF
@@ -968,11 +968,11 @@ EvtScript N(powerShock) = {
     EVT_CALL(action_command_power_shock_init)
     EVT_CALL(SetupMashMeter, 1, 100, 0, 0, 0, 0)
     EVT_CALL(SetActionHudPrepareTime, 0)
-    EVT_SET(LocalFlag(15), 0)
+    EVT_SET(LFlagF, FALSE)
     EVT_CALL(GetOwnerTarget, LVarA, LVarB)
     EVT_CALL(GetActorFlags, LVarA, LVar0)
     EVT_IF_FLAG(LVar0, ACTOR_FLAG_UPSIDE_DOWN)
-        EVT_SET(LocalFlag(15), 1)
+        EVT_SET(LFlagF, TRUE)
     EVT_END_IF
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PARTNER_APPROACH)
     EVT_CALL(MoveBattleCamOver, 40)
@@ -1064,7 +1064,7 @@ EvtScript N(powerShock) = {
             EVT_CALL(PartnerAfflictEnemy, LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_STATUS_ALWAYS_HITS, 0, DMG_STATUS_ALWAYS(STATUS_FLAG_PARALYZE, 3), 255, 0, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_END_SWITCH
     EVT_CALL(PartnerYieldTurn)
-    EVT_IF_NE(LocalFlag(15), 1)
+    EVT_IF_NE(LFlagF, TRUE)
         EVT_CALL(AddGoalPos, ACTOR_PARTNER, -25, 10, 0)
         EVT_CALL(FlyToGoal, ACTOR_PARTNER, 15, -10, EASING_COS_IN_OUT)
     EVT_ELSE

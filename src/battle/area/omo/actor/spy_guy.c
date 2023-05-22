@@ -87,7 +87,7 @@ ActorPartBlueprint N(ActorParts_80227564)[] = {
         .opacity = 255,
         .idleAnimations = N(IdleAnimations_80227400),
         .defenseTable = N(DefenseTable_802274A4),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -1, -13 },
     },
@@ -99,7 +99,7 @@ ActorPartBlueprint N(ActorParts_80227564)[] = {
         .opacity = 255,
         .idleAnimations = N(IdleAnimations_80227498),
         .defenseTable = N(DefenseTable_802274A4),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -1, -10 },
     },
@@ -517,12 +517,12 @@ EvtScript N(hammerAttack) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_SET(LocalFlag(0), 0)
+            EVT_SET(LFlag0, FALSE)
             EVT_CALL(GetBattleFlags, LVar0)
             EVT_IF_NOT_FLAG(LVar0, BS_FLAGS1_ATK_BLOCKED)
                 EVT_CALL(N(SpyGuyActionFunc), LVar0)
                 EVT_IF_NE(LVar0, -1)
-                    EVT_SET(LocalFlag(0), 1)
+                    EVT_SET(LFlag0, TRUE)
                 EVT_END_IF
             EVT_END_IF
             EVT_CALL(GetLastDamage, ACTOR_PLAYER, LVar0)
@@ -540,7 +540,7 @@ EvtScript N(hammerAttack) = {
                 EVT_WAIT(20)
                 EVT_GOTO(100)
             EVT_END_IF
-            EVT_IF_EQ(LocalFlag(0), 1)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
                 EVT_EXEC(N(80228778))
                 EVT_WAIT(8)

@@ -80,7 +80,7 @@ ActorPartBlueprint N(ActorParts_80224AEC)[] = {
         .opacity = 255,
         .idleAnimations = N(IdleAnimations_802249E0),
         .defenseTable = N(DefenseTable_80224A2C),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -10 },
     },
@@ -446,10 +446,10 @@ EvtScript N(sleepySpin) = {
 };
 
 EvtScript N(getFirstOpenColumn) = {
-    EVT_SET(LocalFlag(1), 0)
-    EVT_SET(LocalFlag(2), 0)
-    EVT_SET(LocalFlag(3), 0)
-    EVT_SET(LocalFlag(4), 0)
+    EVT_SET(LFlag1, FALSE)
+    EVT_SET(LFlag2, FALSE)
+    EVT_SET(LFlag3, FALSE)
+    EVT_SET(LFlag4, FALSE)
     EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
@@ -458,31 +458,31 @@ EvtScript N(getFirstOpenColumn) = {
     EVT_MOD(LVar5, 4)
     EVT_SWITCH(LVar5)
         EVT_CASE_EQ(0)
-            EVT_SET(LocalFlag(1), 1)
+            EVT_SET(LFlag1, TRUE)
         EVT_CASE_EQ(1)
-            EVT_SET(LocalFlag(2), 1)
+            EVT_SET(LFlag2, TRUE)
         EVT_CASE_EQ(2)
-            EVT_SET(LocalFlag(3), 1)
+            EVT_SET(LFlag3, TRUE)
         EVT_CASE_EQ(3)
-            EVT_SET(LocalFlag(4), 1)
+            EVT_SET(LFlag4, TRUE)
     EVT_END_SWITCH
     EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
     EVT_IF_NE(LVar0, -1)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_IF_EQ(LocalFlag(1), 0)
+    EVT_IF_EQ(LFlag1, FALSE)
         EVT_SET(LVarA, 0)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_EQ(LocalFlag(2), 0)
+    EVT_IF_EQ(LFlag2, FALSE)
         EVT_SET(LVarA, 1)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_EQ(LocalFlag(3), 0)
+    EVT_IF_EQ(LFlag3, FALSE)
         EVT_SET(LVarA, 2)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_EQ(LocalFlag(4), 0)
+    EVT_IF_EQ(LFlag4, FALSE)
         EVT_SET(LVarA, 3)
         EVT_RETURN
     EVT_END_IF

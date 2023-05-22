@@ -1078,7 +1078,7 @@ EvtScript N(shellShot) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_IF_EQ(LocalFlag(0), 1)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_SET_CONST(LVarA, ANIM_BattleParakarry_HurtStill)
             EVT_ELSE
                 EVT_SET_CONST(LVarA, ANIM_BattleParakarry_Think)

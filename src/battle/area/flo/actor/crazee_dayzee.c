@@ -232,14 +232,14 @@ EvtScript N(attackPainfulSong) = {
         EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
         EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
         EVT_CALL(MoveBattleCamOver, 70)
-        EVT_SET(LocalFlag(0), 0)
+        EVT_SET(LFlag0, FALSE)
         EVT_LABEL(0)
-        EVT_IF_EQ(LocalFlag(0), 0)
+        EVT_IF_EQ(LFlag0, FALSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Anim0E)
-            EVT_SET(LocalFlag(0), 1)
+            EVT_SET(LFlag0, TRUE)
         EVT_ELSE
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Anim0F)
-            EVT_SET(LocalFlag(0), 0)
+            EVT_SET(LFlag0, FALSE)
         EVT_END_IF
         EVT_WAIT(1)
         EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.5))
@@ -250,12 +250,12 @@ EvtScript N(attackPainfulSong) = {
         EVT_IF_GT(LVar0, 0)
             EVT_GOTO(0)
         EVT_END_IF
-        EVT_IF_EQ(LocalFlag(0), 0)
+        EVT_IF_EQ(LFlag0, FALSE)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Anim0E)
-            EVT_SET(LocalFlag(0), 1)
+            EVT_SET(LFlag0, TRUE)
         EVT_ELSE
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Anim0F)
-            EVT_SET(LocalFlag(0), 0)
+            EVT_SET(LFlag0, FALSE)
         EVT_END_IF
         EVT_WAIT(1)
         EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.5))
