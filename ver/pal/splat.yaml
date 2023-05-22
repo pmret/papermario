@@ -11644,13 +11644,11 @@ segments:
 ### Sprites ###
 ###############
   - [0x1DE2C40, bin, 1942C40]
-  - { start: 0x1DF0000, type: pm_player_sprites, align: 8}
-  - start: 0x1e937b8
+  - start: 0x1DF0000
     align: 8
-    type: pm_npc_sprites
-    dir: sprite
-    name: npc
-    files:
+    type: pm_sprites
+    name: sprites
+    npc_files:
       - WorldGoombario
       - WorldKooper
       - WorldBombette

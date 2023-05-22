@@ -7,7 +7,7 @@ from typing import List
 
 sys.path.append(str(Path(__file__).parent.parent.parent))
 sys.path.append(str(Path(__file__).parent.parent.parent / "splat"))
-from splat_ext.pm_player_sprites import (
+from splat_ext.pm_sprites import (
     BACK_PALETTE_XML,
     LIST_END_BYTES,
     MAX_COMPONENTS_XML,

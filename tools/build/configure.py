@@ -332,8 +332,7 @@ class Configure:
                     "gfx_common",
                     "pm_map_data",
                     "pm_msg",
-                    "pm_npc_sprites",
-                    "pm_player_sprites",
+                    "pm_sprites",
                     "pm_charset",
                     "pm_charset_palettes",
                     "pm_effect_loads",
@@ -688,15 +687,18 @@ class Configure:
                     },
                 )
                 build(entry.object_path, [bin_path], "bin")
-            elif seg.type == "pm_npc_sprites":
+            elif seg.type == "pm_sprites":
+                # NPC SPRITES
                 sprite_yay0s = []
 
-                for sprite_id, sprite_dir in enumerate(entry.src_paths, 1):
+                assert entry.object_path is not None
+                npc_obj_path = entry.object_path.parent / "npc"
+                player_obj_path = entry.object_path.parent / "player"
+
+                for sprite_id, sprite_dir in enumerate(entry.src_paths[1:], 1):
                     sprite_name = sprite_dir.name
 
-                    bin_path = entry.object_path.with_suffix("") / (
-                        sprite_name + ".bin"
-                    )
+                    bin_path = npc_obj_path / (sprite_name + ".bin")
                     yay0_path = bin_path.with_suffix(".Yay0")
                     sprite_yay0s.append(yay0_path)
 
@@ -716,15 +718,20 @@ class Configure:
                     )
 
                 build(
-                    entry.object_path.with_suffix(".bin"),
+                    npc_obj_path.with_suffix(".bin"),
                     sprite_yay0s,
                     "sprite_combine",
                 )
-                build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
-            elif seg.type == "pm_player_sprites":
                 build(
-                    entry.object_path.with_suffix(".bin"),
-                    entry.src_paths,
+                    npc_obj_path.with_suffix(".o"),
+                    [npc_obj_path.with_suffix(".bin")],
+                    "bin",
+                )
+
+                # PLAYER SPRITES
+                build(
+                    player_obj_path.with_suffix(".bin"),
+                    [entry.src_paths[0]],
                     "player_sprites",
                     glob_deps=False,
                     variables={
@@ -733,7 +740,11 @@ class Configure:
                         ),
                     },
                 )
-                build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
+                build(
+                    player_obj_path.with_suffix(".o"),
+                    [player_obj_path.with_suffix(".bin")],
+                    "bin",
+                )
             elif seg.type == "pm_msg":
                 msg_bins = []
 

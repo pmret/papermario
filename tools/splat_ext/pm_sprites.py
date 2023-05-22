@@ -12,12 +12,13 @@ import yaml as yaml_loader
 from n64img.image import CI4
 from segtypes.n64.segment import N64Segment
 from util import options
+from util.color import unpack_color
 from util.n64.Yay0decompress import Yay0Decompressor
 
 sys.path.insert(0, str(Path(__file__).parent))
-from sprite_common import AnimComponent, read_offset_list
+from sprite_common import AnimComponent, iter_in_groups, read_offset_list
 
-PAL_TO_RASTER: Dict[str, int] = {
+PLAYER_PAL_TO_RASTER: Dict[str, int] = {
     "8bit": 0x57C90,
     "BareCake": 0x63F10,
     "BerryCake": 0x65D10,
@@ -531,8 +532,8 @@ def write_player_palettes(
                 raise Exception("Invalid palette format for palette: " + pal)
 
             if pal_name not in dumped_palettes:
-                offset = PAL_TO_RASTER[pal_name]
-                if pal_name not in PAL_TO_RASTER:
+                offset = PLAYER_PAL_TO_RASTER[pal_name]
+                if pal_name not in PLAYER_PAL_TO_RASTER:
                     print(
                         f"WARNING: Palette {pal_name} has no specified raster, not dumping!"
                     )
@@ -541,19 +542,303 @@ def write_player_palettes(
                 )
 
 
-class N64SegPm_player_sprites(N64Segment):
-    def __init__(self, rom_start, rom_end, type, name, vram_start, args, yaml):
+###########
+### NPC ###
+###########
+
+
+@dataclass
+class NpcRaster:
+    width: int
+    height: int
+    palette_index: int
+    raster: bytearray
+
+    @staticmethod
+    def from_bytes(data, sprite_data) -> "NpcRaster":
+        raster_offset = int.from_bytes(data[0:4], byteorder="big")
+        width = data[4] & 0xFF
+        height = data[5] & 0xFF
+        palette_index = data[6]
+        assert data[7] == 0xFF
+
+        # CI4
+        raster = bytearray()
+        for i in range(width * height // 2):
+            raster.append(sprite_data[raster_offset + i] >> 4)
+            raster.append(sprite_data[raster_offset + i] & 0xF)
+
+        return NpcRaster(width, height, palette_index, raster)
+
+    def write(self, path, palette):
+        w = png.Writer(self.width, self.height, palette=palette)
+
+        with open(path, "wb") as f:
+            w.write_array(f, self.raster)
+
+
+@dataclass
+class NpcSprite:
+    max_components: int
+    num_variations: int
+
+    animations: List[List[AnimComponent]]
+    palettes: List[List[tuple[int, int, int, int]]]
+    images: List[NpcRaster]
+
+    image_names: List[str] = field(default_factory=list)
+    palette_names: List[str] = field(default_factory=list)
+    animation_names: List[str] = field(default_factory=list)
+    variation_names: List[str] = field(default_factory=list)
+
+    @staticmethod
+    def from_bytes(data: bytearray):
+        image_offsets = read_offset_list(
+            data[int.from_bytes(data[0:4], byteorder="big") :]
+        )
+        palette_offsets = read_offset_list(
+            data[int.from_bytes(data[4:8], byteorder="big") :]
+        )
+        max_components = int.from_bytes(data[8:0xC], byteorder="big")
+        num_variations = int.from_bytes(data[0xC:0x10], byteorder="big")
+        animation_offsets = read_offset_list(data[0x10:])
+
+        palettes = []
+        for offset in palette_offsets:
+            # 16 colors
+            color_data = data[offset : offset + 16 * 2]
+            palettes.append([unpack_color(c) for c in iter_in_groups(color_data, 2)])
+
+        images = []
+        for offset in image_offsets:
+            img = NpcRaster.from_bytes(data[offset:], data)
+            images.append(img)
+
+        animations = []
+        for offset in animation_offsets:
+            anim = []
+
+            for comp_offset in read_offset_list(data[offset:]):
+                comp = AnimComponent.from_bytes(data[comp_offset:], data)
+                anim.append(comp)
+
+            animations.append(anim)
+
+        return NpcSprite(max_components, num_variations, animations, palettes, images)
+
+    def write_to_dir(self, path):
+        if len(self.variation_names) > 1:
+            SpriteSheet = ET.Element(
+                "SpriteSheet",
+                {
+                    MAX_COMPONENTS_XML: str(self.max_components),
+                    PALETTE_GROUPS_XML: str(self.num_variations),
+                    "variations": ",".join(self.variation_names),
+                },
+            )
+        else:
+            SpriteSheet = ET.Element(
+                "SpriteSheet",
+                {
+                    MAX_COMPONENTS_XML: str(self.max_components),
+                    PALETTE_GROUPS_XML: str(self.num_variations),
+                },
+            )
+
+        PaletteList = ET.SubElement(SpriteSheet, "PaletteList")
+        RasterList = ET.SubElement(SpriteSheet, "RasterList")
+        AnimationList = ET.SubElement(SpriteSheet, "AnimationList")
+
+        palette_to_raster = {}
+
+        for i, image in enumerate(self.images):
+            name = self.image_names[i] if self.image_names else f"Raster{i:02X}"
+            image.write(path / (name + ".png"), self.palettes[image.palette_index])
+
+            if image.palette_index not in palette_to_raster:
+                palette_to_raster[image.palette_index] = []
+            palette_to_raster[image.palette_index].append(image)
+
+            ET.SubElement(
+                RasterList,
+                "Raster",
+                {
+                    "id": f"{i:X}",
+                    "palette": f"{image.palette_index:X}",
+                    "src": name + ".png",
+                },
+            )
+
+        for i, palette in enumerate(self.palettes):
+            name = (
+                self.palette_names[i]
+                if (self.palette_names and i < len(self.palette_names))
+                else f"Pal{i:02X}"
+            )
+
+            if i in palette_to_raster:
+                img = palette_to_raster[i][0]
+            else:
+                img = self.images[0]
+
+            img.write(path / (name + ".png"), palette)
+
+            ET.SubElement(
+                PaletteList,
+                "Palette",
+                {
+                    "id": f"{i:X}",
+                    "src": name + ".png",
+                },
+            )
+
+        for i, components in enumerate(self.animations):
+            Animation = ET.SubElement(
+                AnimationList,
+                "Animation",
+                {
+                    "name": self.animation_names[i]
+                    if self.animation_names
+                    else f"Anim{i:02X}",
+                },
+            )
+
+            for j, comp in enumerate(components):
+                Component = ET.SubElement(
+                    Animation,
+                    "Component",
+                    {
+                        "name": f"Comp_{j:X}",
+                        "xyz": ",".join(map(str, [comp.x, comp.y, comp.z])),
+                    },
+                )
+
+                for cmd in comp.commands:
+                    ET.SubElement(Component, "Command", {"val": f"{cmd:X}"})
+
+        xml = ET.ElementTree(SpriteSheet)
+
+        # pretty print (Python 3.9+)
+        if hasattr(ET, "indent"):
+            ET.indent(xml, "    ")
+
+        xml.write(str(path / "SpriteSheet.xml"), encoding="unicode")
+
+    @staticmethod
+    def from_dir(path, read_images=True) -> "NpcSprite":
+        xml = ET.parse(str(path / "SpriteSheet.xml"))
+        SpriteSheet = xml.getroot()
+
+        true_max_components = 0
+        max_components = int(
+            SpriteSheet.get("a") or SpriteSheet.get(MAX_COMPONENTS_XML)
+        )  # ignored
+        num_variations = int(
+            SpriteSheet.get("b") or SpriteSheet.get(PALETTE_GROUPS_XML)
+        )
+        variation_names = SpriteSheet.get("variations", default="").split(",")
+
+        palettes = []
+        palette_names: List[str] = []
+        for Palette in SpriteSheet.findall("./PaletteList/Palette"):
+            if read_images:
+                img = png.Reader(str(path / Palette.get("src")))
+                img.preamble(True)
+                palette = img.palette(alpha="force")
+
+                palette = palette[0:16]
+                assert len(palette) == 16
+
+                palettes.append(palette)
+
+            palette_names.append(
+                Palette.get("name", Palette.get("src").split(".png")[0])
+            )
+
+        images = []
+        image_names: List[str] = []
+        for Raster in SpriteSheet.findall("./RasterList/Raster"):
+            if read_images:
+                img_path = str(path / Raster.get("src"))
+                width, height, raster, info = png.Reader(img_path).read_flat()
+
+                palette_index = int(Raster.get("palette"), base=16)
+                image = NpcRaster(width, height, palette_index, raster)
+
+                assert (
+                    image.width % 8
+                ) == 0, f"{img_path} width is not a multiple of 8"
+                assert (
+                    image.height % 8
+                ) == 0, f"{img_path} height is not a multiple of 8"
+
+                images.append(image)
+
+            image_names.append(Raster.get("src").split(".png")[0])
+
+        animations = []
+        animation_names: List[str] = []
+        for i, Animation in enumerate(SpriteSheet.findall("./AnimationList/Animation")):
+            components = []
+
+            for ComponentEl in Animation.findall("Component"):
+                x, y, z = ComponentEl.get("xyz", "0,0,0").split(",")
+                x = int(x)
+                y = int(y)
+                z = int(z)
+
+                commands = []
+                for Command in ComponentEl:
+                    commands.append(int(Command.get("val"), base=16))
+
+                comp = AnimComponent(x, y, z, commands)
+
+                components.append(comp)
+
+            animation_names.append(Animation.get("name"))
+            animations.append(components)
+
+            if len(components) > true_max_components:
+                true_max_components = len(components)
+
+        max_components = true_max_components
+        # assert self.max_components == true_max_components, f"{true_max_components} component(s) used, but SpriteSheet.a = {self.max_components}"
+
+        return NpcSprite(
+            max_components,
+            num_variations,
+            animations,
+            palettes,
+            images,
+            image_names,
+            palette_names,
+            animation_names,
+            variation_names,
+        )
+
+
+class N64SegPm_sprites(N64Segment):
+    DEFAULT_NPC_SPRITE_NAMES = [f"{i:02X}" for i in range(0xEA)]
+
+    def __init__(self, rom_start, rom_end, type, name, vram_start, args, yaml) -> None:
         super().__init__(
             rom_start, rom_end, type, name, vram_start, args=args, yaml=yaml
         )
+
+        self.npc_files: List[str] = yaml["npc_files"]
+
+        with (Path(__file__).parent / f"npc_sprite_names.yaml").open("r") as f:
+            self.npc_cfg = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
 
         with (Path(__file__).parent / f"player_sprite_names.yaml").open("r") as f:
             self.player_cfg = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
 
     def out_path(self):
-        return options.opts.asset_path / "sprite/player"
+        return options.opts.asset_path / "sprite" / "sprites"
 
-    def split(self, rom_bytes) -> None:
+    def split_player(
+        self, build_date: str, player_raster_data: bytes, player_yay0_data: bytes
+    ) -> None:
         player_sprite_cfg = self.player_cfg["player_sprites"]
         player_raster_names: List[str] = self.player_cfg["player_rasters"]
 
@@ -563,29 +848,14 @@ class N64SegPm_player_sprites(N64Segment):
             if player_sprite_cfg[sprite_name].get("has_back", False):
                 player_sprite_names.append(sprite_name)
 
-        sprite_in_bytes = rom_bytes[self.rom_start : self.rom_end]
-        build_date = sprite_in_bytes[0:0x10].decode("ascii").rstrip("\0")
-        player_raster_offset = int.from_bytes(sprite_in_bytes[0x10:0x14], "big") + 0x10
-        player_yay0_offset = int.from_bytes(sprite_in_bytes[0x14:0x18], "big") + 0x10
-        npc_yay0_offset = int.from_bytes(sprite_in_bytes[0x18:0x1C], "big") + 0x10
-        # sprite_end_offset = int.from_bytes(sprite_in_bytes[0x1C:0x20], "big") + 0x10
-
-        player_sprite_raster_data: bytes = sprite_in_bytes[
-            player_raster_offset:player_yay0_offset
-        ]
-
         # Header parsing
-        index_ranges_offset = int.from_bytes(player_sprite_raster_data[0:0x4], "big")
-        raster_info_offset = int.from_bytes(player_sprite_raster_data[0x4:0x8], "big")
-        ci4_raster_data_offset = int.from_bytes(
-            player_sprite_raster_data[0x8:0xC], "big"
-        )
+        index_ranges_offset = int.from_bytes(player_raster_data[0:0x4], "big")
+        raster_info_offset = int.from_bytes(player_raster_data[0x4:0x8], "big")
+        ci4_raster_data_offset = int.from_bytes(player_raster_data[0x8:0xC], "big")
 
-        index_ranges = player_sprite_raster_data[index_ranges_offset:raster_info_offset]
-        raster_info = player_sprite_raster_data[
-            raster_info_offset:ci4_raster_data_offset
-        ]
-        # ci4_raster_data = player_sprite_raster_data[ci4_raster_data_offset:]
+        index_ranges = player_raster_data[index_ranges_offset:raster_info_offset]
+        raster_info = player_raster_data[raster_info_offset:ci4_raster_data_offset]
+        # ci4_raster_data = player_raster_data[ci4_raster_data_offset:]
 
         # Parse raster sets (readSpriteSections)
         raster_sets: List[PlayerSpriteRasterSet] = []
@@ -596,23 +866,23 @@ class N64SegPm_player_sprites(N64Segment):
 
         raster_table_entry_dict = extract_raster_table_entries(raster_info, raster_sets)
 
-        player_sprites = extract_sprites(
-            sprite_in_bytes[player_yay0_offset:npc_yay0_offset], raster_sets
-        )
+        player_sprites = extract_sprites(player_yay0_data, raster_sets)
 
         #########
         # Writing
         #########
 
-        self.out_path().mkdir(parents=True, exist_ok=True)
+        player_out_path = self.out_path().parent / "player"
+
+        player_out_path.mkdir(parents=True, exist_ok=True)
         write_player_metadata(
-            self.out_path(),
+            player_out_path,
             player_sprite_cfg,
             player_raster_names,
             build_date,
         )
         write_player_xmls(
-            self.out_path(),
+            player_out_path,
             player_sprite_cfg,
             player_sprites,
             player_sprite_names,
@@ -621,19 +891,59 @@ class N64SegPm_player_sprites(N64Segment):
             player_raster_names,
         )
         write_player_rasters(
-            self.out_path(),
+            player_out_path,
             raster_table_entry_dict,
-            player_sprite_raster_data,
+            player_raster_data,
             player_raster_names,
         )
         write_player_palettes(
-            self.out_path(),
+            player_out_path,
             player_sprite_cfg,
             player_sprites,
             player_sprite_names,
             raster_table_entry_dict,
-            player_sprite_raster_data,
+            player_raster_data,
         )
+
+    def split_npc(self, data: bytes) -> None:
+        out_dir = self.out_path().parent / "npc"
+
+        for i, sprite_name in enumerate(self.npc_files):  # used to be "files"
+            # self.log(f"Splitting sprite {sprite_name}...")
+
+            sprite_dir = out_dir / sprite_name
+            sprite_dir.mkdir(parents=True, exist_ok=True)
+
+            start = int.from_bytes(data[i * 4 : (i + 1) * 4], byteorder="big")
+            end = int.from_bytes(data[(i + 1) * 4 : (i + 2) * 4], byteorder="big")
+
+            sprite_data = Yay0Decompressor.decompress(data[start:end], "big")
+            sprite = NpcSprite.from_bytes(sprite_data)
+
+            if sprite_name in self.npc_cfg:
+                sprite.image_names = self.npc_cfg[sprite_name].get("frames", [])
+                sprite.palette_names = self.npc_cfg[sprite_name].get("palettes", [])
+                sprite.animation_names = self.npc_cfg[sprite_name].get("animations", [])
+                sprite.variation_names = self.npc_cfg[sprite_name].get("variations", [])
+
+            sprite.write_to_dir(sprite_dir)
+
+    def split(self, rom_bytes) -> None:
+        sprite_in_bytes = rom_bytes[self.rom_start : self.rom_end]
+        build_date = sprite_in_bytes[0:0x10].decode("ascii").rstrip("\0")
+        player_raster_offset = int.from_bytes(sprite_in_bytes[0x10:0x14], "big") + 0x10
+        player_yay0_offset = int.from_bytes(sprite_in_bytes[0x14:0x18], "big") + 0x10
+        npc_yay0_offset = int.from_bytes(sprite_in_bytes[0x18:0x1C], "big") + 0x10
+        sprite_end_offset = int.from_bytes(sprite_in_bytes[0x1C:0x20], "big") + 0x10
+
+        player_raster_data: bytes = sprite_in_bytes[
+            player_raster_offset:player_yay0_offset
+        ]
+        player_yay0_data: bytes = sprite_in_bytes[player_yay0_offset:npc_yay0_offset]
+        npc_yay0_data: bytes = sprite_in_bytes[npc_yay0_offset:sprite_end_offset]
+
+        self.split_player(build_date, player_raster_data, player_yay0_data)
+        self.split_npc(npc_yay0_data)
 
     def get_linker_entries(self):
         from segtypes.linker_entry import LinkerEntry
@@ -641,9 +951,18 @@ class N64SegPm_player_sprites(N64Segment):
         # TODO collect
         src_paths = [options.opts.asset_path / "sprite" / "player"]
 
+        # for NPC
+        src_paths += [
+            options.opts.asset_path
+            / "sprite"
+            / "npc"
+            / (f["name"] if type(f) is dict else f)
+            for f in self.npc_files
+        ]
+
         return [
-            LinkerEntry(self, src_paths, self.out_path() / "player_sprites", ".data")
+            LinkerEntry(self, src_paths, self.out_path(), self.get_linker_section())
         ]
 
     def cache(self):
-        return (self.yaml, self.rom_end, self.player_cfg)
+        return (self.yaml, self.rom_end, self.player_cfg, self.npc_cfg)

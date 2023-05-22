@@ -7,7 +7,7 @@ from typing import List
 
 path.append(str(Path(__file__).parent.parent.parent / "splat"))
 path.append(str(Path(__file__).parent.parent.parent / "splat_ext"))
-from pm_npc_sprites import Sprite
+from pm_sprites import NpcSprite
 
 
 def pack_color(r, g, b, a):
@@ -38,7 +38,7 @@ if __name__ == "__main__":
     _, outfile, sprite_dir = argv
 
     try:
-        sprite = Sprite.from_dir(Path(sprite_dir))
+        sprite = NpcSprite.from_dir(Path(sprite_dir))
     except AssertionError as e:
         print("error:", e)
         exit(1)
