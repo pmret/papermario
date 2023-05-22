@@ -1610,7 +1610,7 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_MoveTimeLeft = 20;
                 BattleCam_BoomZOffset = 0;
                 break;
-            case BTL_CAM_PRESET_19:
+            case BTL_CAM_FOCUS_ON_ENEMIES:
                 BattleCam_MoveTimeLeft = 20;
                 preset = &CamPreset_J;
                 break;

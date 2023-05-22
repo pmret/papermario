@@ -489,7 +489,7 @@ EvtScript N(80224B3C) = {
 };
 
 EvtScript N(80225258) = {
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_FOCUS_ON_ENEMIES)
     EVT_CALL(SetBattleCamTarget, 85, 50, 0)
     EVT_CALL(SetBattleCamZoom, 280)
     EVT_CALL(SetBattleCamOffsetZ, 0)
@@ -535,7 +535,7 @@ EvtScript N(80225258) = {
 
 EvtScript N(802255D8) = {
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_FOCUS_ON_ENEMIES)
     EVT_CALL(SetBattleCamTarget, 85, 50, 0)
     EVT_CALL(SetBattleCamZoom, 280)
     EVT_CALL(SetBattleCamOffsetZ, 0)
@@ -598,7 +598,7 @@ EvtScript N(802255D8) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Flail)
     EVT_WAIT(30)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_FOCUS_ON_ENEMIES)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_CALL(SetBattleCamTarget, LVar0, LVar1, LVar2)
     EVT_CALL(SetBattleCamZoom, 300)

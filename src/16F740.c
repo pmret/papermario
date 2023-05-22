@@ -2464,7 +2464,7 @@ void btl_state_update_change_partner(void) {
             partner->flags &= ~ACTOR_FLAG_8000000;
             battleStatus->stateFreezeCount = 0;
             gBattleStatus.flags2 |= BS_FLAGS2_10;
-            btl_cam_use_preset(BTL_CAM_PRESET_19);
+            btl_cam_use_preset(BTL_CAM_FOCUS_ON_ENEMIES);
             btl_cam_set_target_pos(-89.0, 40.0, -99.0);
             btl_cam_set_zoom(372);
             btl_cam_set_zoffset(0);

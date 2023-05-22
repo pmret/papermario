@@ -458,7 +458,7 @@ EvtScript N(takeTurn) = {
     EVT_END_SWITCH
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 50)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_FOCUS_ON_ENEMIES)
     EVT_CALL(SetBattleCamTarget, LVar0, LVar1, LVar2)
     EVT_CALL(SetBattleCamZoom, 325)
     EVT_CALL(MoveBattleCamOver, 30)

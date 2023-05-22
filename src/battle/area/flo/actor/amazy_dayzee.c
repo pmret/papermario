@@ -331,7 +331,7 @@ EvtScript N(attackPainfulSong) = {
 
 EvtScript N(flee) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_FOCUS_ON_ENEMIES)
     EVT_CALL(SetBattleCamZoom, 300)
     EVT_CALL(SetBattleCamOffsetZ, 30)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)

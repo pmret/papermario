@@ -1036,7 +1036,7 @@ EvtScript N(squirt) = {
 EvtScript N(waterBlock) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(InitTargetIterator)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_FOCUS_ON_ENEMIES)
     EVT_CALL(SetBattleCamTarget, -95, 26, 10)
     EVT_CALL(SetBattleCamOffsetZ, 11)
     EVT_CALL(SetBattleCamZoom, 238)
@@ -1067,7 +1067,7 @@ EvtScript N(waterBlock) = {
         EVT_GOTO(10)
     EVT_END_IF
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_SpitArc)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_FOCUS_ON_ENEMIES)
     EVT_CALL(SetBattleCamTarget, -95, 27, 10)
     EVT_CALL(SetBattleCamOffsetZ, 11)
     EVT_CALL(SetBattleCamZoom, 277)
@@ -1143,7 +1143,7 @@ EvtScript N(tidalWave) = {
     EVT_CALL(action_command_tidal_wave_init)
     EVT_CALL(SetupMashMeter, 5, 20, 30, 60, 80, 100)
     EVT_CALL(InitTargetIterator)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_FOCUS_ON_ENEMIES)
     EVT_CALL(SetBattleCamTarget, -65, 53, 10)
     EVT_CALL(SetBattleCamOffsetZ, 16)
     EVT_CALL(SetBattleCamZoom, 214)

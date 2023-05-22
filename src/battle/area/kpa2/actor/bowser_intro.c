@@ -158,10 +158,10 @@ EvtScript N(init) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_PEACH_SPOKE), 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 14, 0)
     EVT_CALL(SetBattleMenuEnabledFlags, BTL_MENU_ENABLED_JUMP)
-    EVT_CALL(CreateNpc, 0x00000000, ANIM_ParadePeach_IdleRaisedArms)
-    EVT_CALL(SetNpcYaw, 0x00000000, 90)
-    EVT_CALL(SetNpcPos, 0x00000000, -130, 0, -12)
-    EVT_CALL(EnableNpcShadow, 0x00000000, TRUE)
+    EVT_CALL(CreateNpc, NPC_BTL_COMPANION, ANIM_ParadePeach_IdleRaisedArms)
+    EVT_CALL(SetNpcYaw, NPC_BTL_COMPANION, 90)
+    EVT_CALL(SetNpcPos, NPC_BTL_COMPANION, -130, 0, -12)
+    EVT_CALL(EnableNpcShadow, NPC_BTL_COMPANION, TRUE)
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
@@ -193,7 +193,7 @@ EvtScript N(nextTurn) = {
             EVT_IF_EQ(LVar0, 0)
                 EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_PEACH_SPOKE), 1)
                 EVT_CALL(EnableBattleStatusBar, FALSE)
-                EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
+                EVT_CALL(UseBattleCamPreset, BTL_CAM_FOCUS_ON_ENEMIES)
                 EVT_CALL(SetBattleCamTarget, -115, 0, 0)
                 EVT_CALL(SetBattleCamZoom, 320)
                 EVT_CALL(SetBattleCamOffsetZ, 50)
@@ -367,12 +367,12 @@ EvtScript N(attackClawSwipe) = {
     EVT_THREAD
         EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_TURN_COUNTER), LVar0)
         EVT_IF_GE(LVar0, 3)
-            EVT_CALL(SetNpcAnimation, 0x00000000, ANIM_ParadePeach_Weep)
+            EVT_CALL(SetNpcAnimation, NPC_BTL_COMPANION, ANIM_ParadePeach_Weep)
         EVT_ELSE
-            EVT_CALL(SetNpcAnimation, 0x00000000, ANIM_ParadePeach_HorrorLoop)
+            EVT_CALL(SetNpcAnimation, NPC_BTL_COMPANION, ANIM_ParadePeach_HorrorLoop)
         EVT_END_IF
         EVT_WAIT(45)
-        EVT_CALL(SetNpcAnimation, 0x00000000, ANIM_ParadePeach_IdleRaisedArms)
+        EVT_CALL(SetNpcAnimation, NPC_BTL_COMPANION, ANIM_ParadePeach_IdleRaisedArms)
     EVT_END_THREAD
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
@@ -395,7 +395,7 @@ EvtScript N(attackClawSwipe) = {
 EvtScript N(attackFireBreath) = {
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_FOCUS_ON_ENEMIES)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 30)
     EVT_ADD(LVar1, 65)
@@ -423,7 +423,7 @@ EvtScript N(attackFireBreath) = {
         EVT_WAIT(70)
         EVT_CALL(PlaySound, SOUND_3BD | SOUND_ID_TRIGGER_CHANGE_SOUND)
     EVT_END_THREAD
-    EVT_CALL(SetNpcAnimation, 0x00000000, ANIM_ParadePeach_Weep)
+    EVT_CALL(SetNpcAnimation, NPC_BTL_COMPANION, ANIM_ParadePeach_Weep)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 55)
     EVT_WAIT(20)
@@ -442,7 +442,7 @@ EvtScript N(attackFireBreath) = {
                 EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Idle)
             EVT_END_THREAD
             EVT_WAIT(60)
-            EVT_CALL(SetNpcAnimation, 0x00000000, ANIM_ParadePeach_HorrorLoop)
+            EVT_CALL(SetNpcAnimation, NPC_BTL_COMPANION, ANIM_ParadePeach_HorrorLoop)
             EVT_LOOP(68)
                 EVT_CALL(GetAnimation, ACTOR_PLAYER, 0, LVar0)
                 EVT_IF_EQ(LVar0, ANIM_Mario1_FallDown)
@@ -450,7 +450,7 @@ EvtScript N(attackFireBreath) = {
                 EVT_END_IF
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_CALL(SetNpcAnimation, 0x00000000, ANIM_ParadePeach_Bow)
+            EVT_CALL(SetNpcAnimation, NPC_BTL_COMPANION, ANIM_ParadePeach_Bow)
             EVT_WAIT(30)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
@@ -465,7 +465,7 @@ EvtScript N(powerUp) = {
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_WAIT(30)
     EVT_CALL(ActorSpeak, MSG_Intro_0058, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Talk, ANIM_BattleBowser_Idle)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_FOCUS_ON_ENEMIES)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 15)
     EVT_ADD(LVar1, 65)
@@ -488,7 +488,7 @@ EvtScript N(powerUp) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Brandish)
     EVT_EXEC_WAIT(N(useStarRod))
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_FOCUS_ON_ENEMIES)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 15)
     EVT_ADD(LVar1, 65)
@@ -612,7 +612,7 @@ EvtScript N(useStarRod) = {
     EVT_END_IF
     EVT_PLAY_EFFECT(EFFECT_ENERGY_ORB_WAVE, 4, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 15, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2124)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_FOCUS_ON_ENEMIES)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 15)
     EVT_ADD(LVar1, 65)

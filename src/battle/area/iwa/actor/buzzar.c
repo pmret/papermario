@@ -379,7 +379,7 @@ EvtScript N(EVS_Attack_WindBlast) = {
                     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20F0)
                     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
                     EVT_CALL(action_command_whirlwind_start, 0, 88 * DT, 3)
-                    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
+                    EVT_CALL(UseBattleCamPreset, BTL_CAM_FOCUS_ON_ENEMIES)
                     EVT_CALL(SetBattleCamTarget, -25, 60, 0)
                     EVT_CALL(SetBattleCamZoom, 460)
                     EVT_CALL(SetBattleCamOffsetZ, 0)
@@ -444,7 +444,7 @@ EvtScript N(EVS_Attack_WindBlast) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20F0)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4000, FALSE)
     EVT_CALL(action_command_whirlwind_start, 0, 88 * DT, 3)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_FOCUS_ON_ENEMIES)
     EVT_CALL(SetBattleCamTarget, -25, 60, 0)
     EVT_CALL(SetBattleCamZoom, 460)
     EVT_CALL(SetBattleCamOffsetZ, 0)
@@ -881,12 +881,12 @@ EvtScript N(EVS_Attack_GrappleDrop) = {
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
     EVT_WAIT(10)
-    EVT_CALL(UseBattleCamPresetImmediately, BTL_CAM_PRESET_19)
+    EVT_CALL(UseBattleCamPresetImmediately, BTL_CAM_FOCUS_ON_ENEMIES)
     EVT_CALL(SetBattleCamZoom, 360)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_THREAD
         EVT_WAIT(5)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_FOCUS_ON_ENEMIES)
         EVT_CALL(SetBattleCamZoom, 360)
         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
         EVT_SET(LVar1, 27)
@@ -960,7 +960,7 @@ EvtScript N(EVS_Attack_GrappleDrop) = {
         EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
         EVT_RETURN
     EVT_END_IF
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_FOCUS_ON_ENEMIES)
     EVT_CALL(SetBattleCamZoom, 360)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_SET(LVar1, 50)

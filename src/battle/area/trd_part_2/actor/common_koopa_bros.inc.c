@@ -146,11 +146,189 @@ s32 N(IdleAnimations_8022873C)[] = {
 };
 
 #include "common/StartRumbleWithParams.inc.c"
-#include "common/UnkWhirlwindEffectFunc.inc.c"
-#include "common/UnkEnemyFunc.inc.c"
-#include "common/UnkEnemyPosFunc.inc.c"
-#include "common/GetLastActorEventType.inc.c"
 
+BSS PlayerStatus N(DummyPlayerStatus);
+
+API_CALLABLE(N(SpawnSpinEffect)) {
+    Bytecode* args = script->ptrReadPos;
+    s32 posX = evt_get_variable(script, *args++);
+    s32 posY = evt_get_variable(script, *args++);
+    s32 posZ = evt_get_variable(script, *args++);
+    s32 duration = evt_get_variable(script, *args++);
+
+    N(DummyPlayerStatus).position.x = posX;
+    N(DummyPlayerStatus).position.y = posY - 10.0f;
+    N(DummyPlayerStatus).position.z = posZ;
+
+    fx_46(6, &N(DummyPlayerStatus), 1.0f, duration);
+    return ApiStatus_DONE2;
+}
+
+Actor* N(GetKoopaBrosWithState)(s32 state) {
+    Actor* actor = get_actor(GREEN_ACTOR);
+    if (actor != NULL && actor->state.varTable[AVAR_Koopa_State] == state) {
+        return actor;
+    }
+
+    actor = get_actor(YELLOW_ACTOR);
+    if (actor != NULL && actor->state.varTable[AVAR_Koopa_State] == state) {
+        return actor;
+    }
+
+    actor = get_actor(BLACK_ACTOR);
+    if (actor != NULL && actor->state.varTable[AVAR_Koopa_State] == state) {
+        return actor;
+    }
+
+    actor = get_actor(RED_ACTOR);
+    if (actor != NULL && actor->state.varTable[AVAR_Koopa_State] == state) {
+        return actor;
+    }
+
+    return NULL;
+}
+
+API_CALLABLE(N(GetTowerFallPosition)) {
+    Bytecode* args = script->ptrReadPos;
+    Vec3f temp;
+    Vec3f fallPositions[4];
+    s32 height;
+    s32 ownerState;
+    Actor* enemy;
+    Vec3f* iVec;
+    Vec3f* jVec;
+    s32 i, j;
+
+    height = get_actor(BOSS_ACTOR)->state.varTable[AVAR_Boss_TowerHeight];
+    switch (height) {
+        case 2:
+            enemy = N(GetKoopaBrosWithState(AVAL_Koopa_State_PosA));
+            fallPositions[0].x = enemy->homePos.x;
+            fallPositions[0].y = enemy->homePos.y;
+            fallPositions[0].z = enemy->homePos.z;
+            enemy = N(GetKoopaBrosWithState(AVAL_Koopa_State_PosB));
+            fallPositions[1].x = enemy->homePos.x;
+            fallPositions[1].y = enemy->homePos.y;
+            fallPositions[1].z = enemy->homePos.z;
+            break;
+        case 3:
+            enemy = N(GetKoopaBrosWithState(AVAL_Koopa_State_PosA));
+            fallPositions[0].x = enemy->homePos.x;
+            fallPositions[0].y = enemy->homePos.y;
+            fallPositions[0].z = enemy->homePos.z;
+            enemy = N(GetKoopaBrosWithState(AVAL_Koopa_State_PosC));
+            fallPositions[1].x = enemy->homePos.x;
+            fallPositions[1].y = enemy->homePos.y;
+            fallPositions[1].z = enemy->homePos.z;
+            enemy = N(GetKoopaBrosWithState(AVAL_Koopa_State_PosB));
+            fallPositions[2].x = enemy->homePos.x;
+            fallPositions[2].y = enemy->homePos.y;
+            fallPositions[2].z = enemy->homePos.z;
+            break;
+        case 4:
+            enemy = N(GetKoopaBrosWithState(AVAL_Koopa_State_PosA));
+            fallPositions[0].x = enemy->homePos.x;
+            fallPositions[0].y = enemy->homePos.y;
+            fallPositions[0].z = enemy->homePos.z;
+            enemy = N(GetKoopaBrosWithState(AVAL_Koopa_State_PosD));
+            fallPositions[1].x = enemy->homePos.x;
+            fallPositions[1].y = enemy->homePos.y;
+            fallPositions[1].z = enemy->homePos.z;
+            enemy = N(GetKoopaBrosWithState(AVAL_Koopa_State_PosC));
+            fallPositions[2].x = enemy->homePos.x;
+            fallPositions[2].y = enemy->homePos.y;
+            fallPositions[2].z = enemy->homePos.z;
+            enemy = N(GetKoopaBrosWithState(AVAL_Koopa_State_PosB));
+            fallPositions[3].x = enemy->homePos.x;
+            fallPositions[3].y = enemy->homePos.y;
+            fallPositions[3].z = enemy->homePos.z;
+            break;
+    }
+
+    for (i = 0; i < height - 1; i++) {
+        for (j = i; j < height; j++) {
+            iVec = &fallPositions[i];
+            jVec = &fallPositions[j];
+            if (iVec->x < jVec->x) {
+                temp = *iVec;
+                *iVec = *jVec;
+                *jVec = temp;
+            }
+        }
+    }
+
+    ownerState = get_actor(script->owner1.enemyID)->state.varTable[AVAR_Koopa_State];
+    switch (height) {
+        case 2:
+            switch (ownerState) {
+                case AVAL_Koopa_State_PosA:
+                    evt_set_variable(script, *args++, fallPositions[0].x);
+                    evt_set_variable(script, *args++, fallPositions[0].y);
+                    evt_set_variable(script, *args++, fallPositions[0].z);
+                    break;
+                case AVAL_Koopa_State_PosB:
+                    evt_set_variable(script, *args++, fallPositions[1].x);
+                    evt_set_variable(script, *args++, fallPositions[1].y);
+                    evt_set_variable(script, *args++, fallPositions[1].z);
+                    break;
+            }
+            break;
+        case 3:
+            switch (ownerState) {
+                case AVAL_Koopa_State_PosA:
+                    evt_set_variable(script, *args++, fallPositions[0].x);
+                    evt_set_variable(script, *args++, fallPositions[0].y);
+                    evt_set_variable(script, *args++, fallPositions[0].z);
+                    break;
+                case AVAL_Koopa_State_PosC:
+                    evt_set_variable(script, *args++, fallPositions[1].x);
+                    evt_set_variable(script, *args++, fallPositions[1].y);
+                    evt_set_variable(script, *args++, fallPositions[1].z);
+                    break;
+                case AVAL_Koopa_State_PosB:
+                    evt_set_variable(script, *args++, fallPositions[2].x);
+                    evt_set_variable(script, *args++, fallPositions[2].y);
+                    evt_set_variable(script, *args++, fallPositions[2].z);
+                    break;
+            }
+            break;
+        case 4:
+            switch (ownerState) {
+                case AVAL_Koopa_State_PosA:
+                    evt_set_variable(script, *args++, fallPositions[0].x);
+                    evt_set_variable(script, *args++, fallPositions[0].y);
+                    evt_set_variable(script, *args++, fallPositions[0].z);
+                    break;
+                case AVAL_Koopa_State_PosD:
+                    evt_set_variable(script, *args++, fallPositions[1].x);
+                    evt_set_variable(script, *args++, fallPositions[1].y);
+                    evt_set_variable(script, *args++, fallPositions[1].z);
+                    break;
+                case AVAL_Koopa_State_PosC:
+                    evt_set_variable(script, *args++, fallPositions[2].x);
+                    evt_set_variable(script, *args++, fallPositions[2].y);
+                    evt_set_variable(script, *args++, fallPositions[2].z);
+                    break;
+                case AVAL_Koopa_State_PosB:
+                    evt_set_variable(script, *args++, fallPositions[3].x);
+                    evt_set_variable(script, *args++, fallPositions[3].y);
+                    evt_set_variable(script, *args++, fallPositions[3].z);
+                    break;
+            }
+            break;
+    }
+    return ApiStatus_DONE2;
+}
+
+API_CALLABLE(N(GetLastActorEventType)) {
+    Bytecode* args = script->ptrReadPos;
+    Actor* actor = get_actor(script->owner1.actorID);
+
+    actor->lastEventType = evt_get_variable(script, *args++);
+    return ApiStatus_DONE2;
+}
+
+// respond to commands issued from BOSS_ACTOR
 // (in) LVarA : event
 EvtScript N(HandleCommand) = {
     EVT_CALL(SetOwnerID, THIS_ACTOR_ID)
@@ -160,7 +338,7 @@ EvtScript N(HandleCommand) = {
     EVT_END_IF
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_SWITCH(LVarA)
-        EVT_CASE_EQ(KCMD_0)
+        EVT_CASE_EQ(BOSS_CMD_0)
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Koopa_State, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(AVAL_Koopa_State_PosA)
@@ -173,7 +351,7 @@ EvtScript N(HandleCommand) = {
                     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, THIS_ANIM_TOWER_IDLE)
                 EVT_END_CASE_GROUP
             EVT_END_SWITCH
-        EVT_CASE_EQ(KCMD_1)
+        EVT_CASE_EQ(BOSS_CMD_UNSTABLE)
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Koopa_State, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_OR_EQ(AVAL_Koopa_State_PosA)
@@ -185,7 +363,7 @@ EvtScript N(HandleCommand) = {
                     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, THIS_ANIM_TIPPING_IDLE)
                 EVT_END_CASE_GROUP
             EVT_END_SWITCH
-        EVT_CASE_EQ(KCMD_HIT)
+        EVT_CASE_EQ(BOSS_CMD_HIT)
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Koopa_State, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_OR_EQ(AVAL_Koopa_State_PosA)
@@ -206,7 +384,7 @@ EvtScript N(HandleCommand) = {
                     EVT_END_IF
                 EVT_END_CASE_GROUP
             EVT_END_SWITCH
-        EVT_CASE_EQ(KCMD_BURN_HIT)
+        EVT_CASE_EQ(BOSS_CMD_BURN_HIT)
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Koopa_State, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_OR_EQ(AVAL_Koopa_State_PosA)
@@ -229,7 +407,7 @@ EvtScript N(HandleCommand) = {
                     EVT_END_IF
                 EVT_END_CASE_GROUP
             EVT_END_SWITCH
-        EVT_CASE_EQ(KCMD_NO_DAMAGE_HIT)
+        EVT_CASE_EQ(BOSS_CMD_NO_DAMAGE_HIT)
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Koopa_State, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(AVAL_Koopa_State_PosA)
@@ -247,7 +425,7 @@ EvtScript N(HandleCommand) = {
                 EVT_END_CASE_GROUP
             EVT_END_SWITCH
             EVT_WAIT(15)
-        EVT_CASE_EQ(KCMD_TOPPLE_HIT)
+        EVT_CASE_EQ(BOSS_CMD_TOPPLE_HIT)
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Koopa_State, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_OR_EQ(AVAL_Koopa_State_PosA)
@@ -259,7 +437,7 @@ EvtScript N(HandleCommand) = {
                         EVT_SET(LFlag0, TRUE)
                     EVT_END_IF
                     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6))
-                    EVT_CALL(N(UnkEnemyPosFunc), LVar0, LVar1, LVar2)
+                    EVT_CALL(N(GetTowerFallPosition), LVar0, LVar1, LVar2)
                     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, THIS_ANIM_HURT_STILL)
                     EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_80228730)))
@@ -286,7 +464,7 @@ EvtScript N(HandleCommand) = {
                     EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, 0, 18)
                 EVT_END_CASE_GROUP
             EVT_END_SWITCH
-        EVT_CASE_EQ(KCMD_TOPPLE_BURN_HIT)
+        EVT_CASE_EQ(BOSS_CMD_TOPPLE_BURN_HIT)
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Koopa_State, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_OR_EQ(AVAL_Koopa_State_PosA)
@@ -298,7 +476,7 @@ EvtScript N(HandleCommand) = {
                         EVT_SET(LFlag0, TRUE)
                     EVT_END_IF
                     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6))
-                    EVT_CALL(N(UnkEnemyPosFunc), LVar0, LVar1, LVar2)
+                    EVT_CALL(N(GetTowerFallPosition), LVar0, LVar1, LVar2)
                     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, THIS_ANIM_BURN)
                     EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_80228730)))
@@ -332,7 +510,7 @@ EvtScript N(HandleCommand) = {
                     EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, 0, 18)
                 EVT_END_CASE_GROUP
             EVT_END_SWITCH
-        EVT_CASE_EQ(KCMD_TRY_GET_UP)
+        EVT_CASE_EQ(BOSS_CMD_TRY_GET_UP)
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Koopa_State, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(AVAL_Koopa_State_Toppled)
@@ -377,20 +555,20 @@ EvtScript N(HandleCommand) = {
                 EVT_CASE_DEFAULT
                     EVT_WAIT(20)
             EVT_END_SWITCH
-        EVT_CASE_EQ(KCMD_GET_READY)
+        EVT_CASE_EQ(BOSS_CMD_GET_READY)
             // if koopa just got up, change its state to ready
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Koopa_State, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(AVAL_Koopa_State_GotUp)
                     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Koopa_State, AVAL_Koopa_State_Ready)
             EVT_END_SWITCH
-        EVT_CASE_EQ(KCMD_SPIN_ATTACK)
+        EVT_CASE_EQ(BOSS_CMD_SPIN_ATTACK)
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Koopa_State, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(AVAL_Koopa_State_PosA)
                     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, THIS_ANIM_ENTER_SHELL)
                     EVT_WAIT(10)
-                    EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_TowerDamage, LVar0)
+                    EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_TowerHeight, LVar0)
                     EVT_SWITCH(LVar0)
                         EVT_CASE_EQ(4)
                             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_356)
@@ -401,7 +579,7 @@ EvtScript N(HandleCommand) = {
                     EVT_END_SWITCH
                     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, THIS_ANIM_SHELL_SPIN)
                     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-                    EVT_CALL(N(UnkWhirlwindEffectFunc), LVar0, LVar1, LVar2, 60)
+                    EVT_CALL(N(SpawnSpinEffect), LVar0, LVar1, LVar2, 60)
                     EVT_WAIT(60)
                     EVT_THREAD
                         EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, BS_FLAGS1_10)
@@ -413,7 +591,7 @@ EvtScript N(HandleCommand) = {
                             EVT_CASE_EQ(HIT_RESULT_MISS)
                                 EVT_RETURN
                         EVT_END_SWITCH
-                        EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_4, LVarA)
+                        EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_TopKoopaID, LVarA)
                         EVT_LABEL(0)
                         EVT_CALL(GetActorPos, LVarA, LVar0, LVar1, LVar2)
                         EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar3, LVar4, LVar5)
@@ -423,14 +601,14 @@ EvtScript N(HandleCommand) = {
                         EVT_END_IF
                         EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
                         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-                        EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_TowerDamage, LVar1)
+                        EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_TowerHeight, LVar1)
                         EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, SUPPRESS_EVENT_ALL, 0, LVar1, BS_FLAGS1_SP_EVT_ACTIVE)
                     EVT_END_THREAD
                     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_37C)
                     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_0, SOUND_0)
                     EVT_CALL(EnableActorBlur, ACTOR_SELF, 1)
-                    EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_TowerDamage, LVar0)
+                    EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_TowerHeight, LVar0)
                     EVT_SWITCH(LVar0)
                         EVT_CASE_EQ(4)
                             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(13.0))
@@ -455,11 +633,11 @@ EvtScript N(HandleCommand) = {
                         EVT_CALL(SetPartRotationOffset, ACTOR_SELF, PRT_MAIN, 0, 0, 0)
                         EVT_CALL(SetPartRotation, ACTOR_SELF, PRT_MAIN, 0, 0, 0)
                     EVT_END_THREAD
-                    EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_4, LVar1)
+                    EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_TopKoopaID, LVar1)
                     EVT_CALL(GetHomePos, LVar1, LVar2, LVar3, LVar4)
                     EVT_SET(LVar4, 15)
                     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar2, LVar3, LVar4)
-                    EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_TowerDamage, LVarB)
+                    EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_TowerHeight, LVarB)
                     EVT_SET(LVar0, LVarB)
                     EVT_SUB(LVar0, 1)
                     EVT_MUL(LVar0, 18)
@@ -473,19 +651,19 @@ EvtScript N(HandleCommand) = {
                     EVT_END_SWITCH
                     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.5))
                     EVT_CALL(JumpToGoal, ACTOR_SELF, 40, FALSE, TRUE, FALSE)
-                    EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_TowerDamage, LVar0)
+                    EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_TowerHeight, LVar0)
                     EVT_SWITCH(LVar0)
                         EVT_CASE_EQ(4)
                             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-                            EVT_CALL(N(UnkWhirlwindEffectFunc), LVar0, LVar1, LVar2, 60)
+                            EVT_CALL(N(SpawnSpinEffect), LVar0, LVar1, LVar2, 60)
                             EVT_WAIT(60)
                         EVT_CASE_EQ(3)
                             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-                            EVT_CALL(N(UnkWhirlwindEffectFunc), LVar0, LVar1, LVar2, 50)
+                            EVT_CALL(N(SpawnSpinEffect), LVar0, LVar1, LVar2, 50)
                             EVT_WAIT(50)
                         EVT_CASE_EQ(2)
                             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-                            EVT_CALL(N(UnkWhirlwindEffectFunc), LVar0, LVar1, LVar2, 40)
+                            EVT_CALL(N(SpawnSpinEffect), LVar0, LVar1, LVar2, 40)
                             EVT_WAIT(40)
                     EVT_END_SWITCH
                     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, THIS_ANIM_EXIT_SHELL)
@@ -500,7 +678,7 @@ EvtScript N(HandleCommand) = {
                     EVT_WAIT(30)
                     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, THIS_ANIM_IDLE)
                     EVT_WAIT(20)
-                    EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_1, 0)
+                    EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_TowerState, 0)
                 EVT_CASE_OR_EQ(AVAL_Koopa_State_PosD)
                 EVT_CASE_OR_EQ(AVAL_Koopa_State_PosC)
                 EVT_CASE_OR_EQ(AVAL_Koopa_State_PosB)
@@ -508,7 +686,7 @@ EvtScript N(HandleCommand) = {
                     EVT_WAIT(10)
                     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, THIS_ANIM_SHELL_SPIN)
                     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-                    EVT_CALL(N(UnkWhirlwindEffectFunc), LVar0, LVar1, LVar2, 60)
+                    EVT_CALL(N(SpawnSpinEffect), LVar0, LVar1, LVar2, 60)
                     EVT_WAIT(60)
                     EVT_CALL(EnableActorBlur, ACTOR_SELF, 1)
                     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Koopa_State, LVar0)
@@ -540,19 +718,19 @@ EvtScript N(HandleCommand) = {
                     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Koopa_State, LVar0)
                     EVT_SWITCH(LVar0)
                         EVT_CASE_EQ(AVAL_Koopa_State_PosD)
-                            EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_4, LVar1)
+                            EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_TopKoopaID, LVar1)
                             EVT_CALL(GetHomePos, LVar1, LVar2, LVar3, LVar4)
                             EVT_SET(LVar4, 15)
                             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar2, LVar3, LVar4)
                             EVT_CALL(AddGoalPos, ACTOR_SELF, 0, 36, -7)
                         EVT_CASE_EQ(AVAL_Koopa_State_PosC)
-                            EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_4, LVar1)
+                            EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_TopKoopaID, LVar1)
                             EVT_CALL(GetHomePos, LVar1, LVar2, LVar3, LVar4)
                             EVT_SET(LVar4, 15)
                             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar2, LVar3, LVar4)
                             EVT_CALL(AddGoalPos, ACTOR_SELF, 0, 18, -4)
                         EVT_CASE_EQ(AVAL_Koopa_State_PosB)
-                            EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_4, LVar1)
+                            EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_TopKoopaID, LVar1)
                             EVT_CALL(GetHomePos, LVar1, LVar2, LVar3, LVar4)
                             EVT_SET(LVar4, 15)
                             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar2, LVar3, LVar4)
@@ -564,15 +742,15 @@ EvtScript N(HandleCommand) = {
                     EVT_SWITCH(LVar0)
                         EVT_CASE_EQ(AVAL_Koopa_State_PosD)
                             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-                            EVT_CALL(N(UnkWhirlwindEffectFunc), LVar0, LVar1, LVar2, 50)
+                            EVT_CALL(N(SpawnSpinEffect), LVar0, LVar1, LVar2, 50)
                             EVT_WAIT(50)
                         EVT_CASE_EQ(AVAL_Koopa_State_PosC)
                             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-                            EVT_CALL(N(UnkWhirlwindEffectFunc), LVar0, LVar1, LVar2, 40)
+                            EVT_CALL(N(SpawnSpinEffect), LVar0, LVar1, LVar2, 40)
                             EVT_WAIT(40)
                         EVT_CASE_EQ(AVAL_Koopa_State_PosB)
                             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-                            EVT_CALL(N(UnkWhirlwindEffectFunc), LVar0, LVar1, LVar2, 30)
+                            EVT_CALL(N(SpawnSpinEffect), LVar0, LVar1, LVar2, 30)
                             EVT_WAIT(30)
                     EVT_END_SWITCH
                     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, THIS_ANIM_ALT_EXIT_SHELL)
@@ -581,7 +759,7 @@ EvtScript N(HandleCommand) = {
                     EVT_WAIT(30)
                 EVT_END_CASE_GROUP
             EVT_END_SWITCH
-        EVT_CASE_EQ(KCMD_SOLO_ATTACK)
+        EVT_CASE_EQ(BOSS_CMD_SOLO_ATTACK)
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Koopa_State, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(AVAL_Koopa_State_Ready)
@@ -595,7 +773,7 @@ EvtScript N(HandleCommand) = {
                     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_353)
                     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, THIS_ANIM_SHELL_SPIN)
                     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-                    EVT_CALL(N(UnkWhirlwindEffectFunc), LVar0, LVar1, LVar2, 30)
+                    EVT_CALL(N(SpawnSpinEffect), LVar0, LVar1, LVar2, 30)
                     EVT_WAIT(30)
                     EVT_THREAD
                         EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, BS_FLAGS1_10)
@@ -645,7 +823,7 @@ EvtScript N(HandleCommand) = {
                     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.5))
                     EVT_CALL(JumpToGoal, ACTOR_SELF, 40, FALSE, TRUE, FALSE)
                     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
-                    EVT_CALL(N(UnkWhirlwindEffectFunc), LVar0, LVar1, LVar2, 30)
+                    EVT_CALL(N(SpawnSpinEffect), LVar0, LVar1, LVar2, 30)
                     EVT_WAIT(30)
                     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, THIS_ANIM_EXIT_SHELL)
                     EVT_WAIT(10)

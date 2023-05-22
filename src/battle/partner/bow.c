@@ -655,7 +655,7 @@ EvtScript N(smack) = {
 EvtScript N(outtaSight) = {
     EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_20000000, TRUE)
     EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_4000000, FALSE)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_FOCUS_ON_ENEMIES)
     EVT_CALL(SetBattleCamTarget, -129, 28, 0)
     EVT_CALL(SetBattleCamOffsetZ, 15)
     EVT_CALL(SetBattleCamZoom, 260)

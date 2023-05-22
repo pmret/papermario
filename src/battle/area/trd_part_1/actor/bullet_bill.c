@@ -249,7 +249,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_WAIT(1)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -2, 0)
     EVT_WAIT(15)
-    EVT_CALL(UseBattleCamPresetImmediately, BTL_CAM_PRESET_19)
+    EVT_CALL(UseBattleCamPresetImmediately, BTL_CAM_FOCUS_ON_ENEMIES)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 2, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)

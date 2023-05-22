@@ -1369,7 +1369,7 @@ EvtScript D_80287404 = {
 };
 
 EvtScript D_80287708 = {
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_FOCUS_ON_ENEMIES)
     EVT_CALL(SetBattleCamTarget, -85, 1, 0)
     EVT_CALL(SetBattleCamOffsetZ, 41)
     EVT_CALL(SetBattleCamZoom, 248)
@@ -1584,7 +1584,7 @@ EvtScript EVS_MerleeAttackBonus = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(BattleMerleeFadeStageToBlack)
     EVT_WAIT(10)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_FOCUS_ON_ENEMIES)
     EVT_CALL(SetBattleCamTarget, 0, 80, 0)
     EVT_CALL(SetBattleCamOffsetZ, 0)
     EVT_CALL(SetBattleCamZoom, 246)
@@ -1633,7 +1633,7 @@ EvtScript EVS_MerleeDefenseBonus = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(BattleMerleeFadeStageToBlack)
     EVT_WAIT(10)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_FOCUS_ON_ENEMIES)
     EVT_CALL(SetBattleCamTarget, 0, 80, 0)
     EVT_CALL(SetBattleCamOffsetZ, 0)
     EVT_CALL(SetBattleCamZoom, 246)
@@ -1687,7 +1687,7 @@ EvtScript EVS_MerleeExpBonus = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(BattleMerleeFadeStageToBlack)
     EVT_WAIT(10)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_FOCUS_ON_ENEMIES)
     EVT_CALL(SetBattleCamTarget, 0, 80, 0)
     EVT_CALL(SetBattleCamOffsetZ, 0)
     EVT_CALL(SetBattleCamZoom, 246)

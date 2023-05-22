@@ -3275,11 +3275,12 @@ enum PeachDisguises {
 
 // Requires decimals
 enum NpcIDs {
-    NPC_SELF         = -1,
-    NPC_PLAYER       = -2,
-    NPC_PARTNER      = -4,
-    NPC_BTL_MERLEE   = -10,
-    NPC_BTL_SPIRIT   = 100,
+    NPC_SELF            = -1,
+    NPC_PLAYER          = -2,
+    NPC_PARTNER         = -4,
+    NPC_BTL_MERLEE      = -10,
+    NPC_BTL_COMPANION   = 0, // used for Peach in intro Bowser fight and Kolorado in Lave Piranha fight
+    NPC_BTL_SPIRIT      = 100,
 };
 
 enum EntityTypes {
@@ -5657,7 +5658,7 @@ enum BtlCameraPreset {
     BTL_CAM_PRESET_16               = 16,   // unused?
     BTL_CAM_PRESET_17               = 17,   // unused?
     BTL_CAM_PRESET_18               = 18,   // unused?
-    BTL_CAM_PRESET_19               = 19,
+    BTL_CAM_FOCUS_ON_ENEMIES        = 19,   // push in and show only enemy side of the field more closely
     BTL_CAM_PRESET_20               = 20,   // unused?
     BTL_CAM_PRESET_21               = 21,   // unused?
     BTL_CAM_PLAYER_ENTRY            = 22,

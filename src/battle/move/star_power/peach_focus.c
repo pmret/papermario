@@ -272,7 +272,7 @@ EvtScript N(EVS_UsePower) = {
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 150)
     EVT_WAIT(1)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 180)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_FOCUS_ON_ENEMIES)
     EVT_CALL(SetBattleCamTarget, -105, -7, 0)
     EVT_CALL(SetBattleCamZoom, 213)
     EVT_CALL(MoveBattleCamOver, 60)

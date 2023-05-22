@@ -402,7 +402,7 @@ void set_action_state(s32 actionState) {
     }
 
     if (playerStatus->specialDecorationEffect != NULL) {
-        playerStatus->specialDecorationEffect->data.unk_46->unk_24 = 10;
+        playerStatus->specialDecorationEffect->data.spin->timeLeft = 10;
         playerStatus->specialDecorationEffect = NULL;
     }
 }
