@@ -57,18 +57,16 @@
 #define VIRTUAL_TO_PHYSICAL(addr) (u32)((u8*)(addr) - 0x80000000)
 
 #ifdef DEBUG
+#define IS_DEBUG_PANIC(statement, file, line) is_debug_panic(statement, file, line)
+#else
+#define IS_DEBUG_PANIC(statement, file, line) do {} while(TRUE)
+#endif
+
+#define PANIC() IS_DEBUG_PANIC("Panic", __FILE__, __LINE__)
 #define ASSERT(condition) \
     if (!(condition)) { \
-        func_80025F44("Assertion failed: " #condition, __FILE__, __LINE__); \
-        while (TRUE) {} \
+        IS_DEBUG_PANIC("Assertion failed: " #condition, __FILE__, __LINE__); \
     }
-#define PANIC() \
-    func_80025F44("Panic!", __FILE__, __LINE__); \
-    while (TRUE) {}
-#else
-#define ASSERT(condition) if (!(condition)) { while (TRUE) {} }
-#define PANIC() while (TRUE) {}
-#endif
 
 #define BADGE_MENU_PAGE(index) (&gPauseBadgesPages[index])
 #define ITEM_MENU_PAGE(index) (&gPauseItemsPages[index])
