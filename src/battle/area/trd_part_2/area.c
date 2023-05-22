@@ -37,13 +37,13 @@ BattleList N(Formations) = {
 };
 
 StageList N(Stages) = {
-    { "trd_00",  &N(trd_00) },
-    { "trd_01",  &N(trd_01) },
-    { "trd_02",  &N(trd_02) },
+    STAGE("trd_00",  N(trd_00)),
+    STAGE("trd_01",  N(trd_01)),
+    STAGE("trd_02",  N(trd_02)),
     STAGE("trd_02b", N(trd_02b)),
-    { "trd_03",  &N(trd_03) },
-    { "trd_04",  &N(trd_04) },
-    { "trd_05",  &N(trd_05) },
+    STAGE("trd_03",  N(trd_03)),
+    STAGE("trd_04",  N(trd_04)),
+    STAGE("trd_05",  N(trd_05)),
     STAGE("trd_05b", N(trd_05b)),
     STAGE("trd_05c", N(trd_05c)),
     STAGE("trd_05d", N(trd_05d)),

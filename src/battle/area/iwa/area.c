@@ -108,8 +108,8 @@ BattleList N(Formations) = {
 };
 
 StageList N(Stages) = {
-    { "iwa_01",  &N(iwa_01) },
+    STAGE("iwa_01", N(iwa_01)),
     STAGE("iwa_01b", N(iwa_01b)),
-    { "iwa_02",  &N(iwa_02) },
+    STAGE("iwa_02", N(iwa_02)),
     {},
 };
