@@ -682,10 +682,10 @@ EvtScript N(EVS_Scene_KoopaBrosUnmasked) = {
     EVT_CALL(SetNpcAnimation, NPC_KoopaBros_04, ANIM_KoopaBros_Green_Idle)
     EVT_CALL(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_0030)
     EVT_WAIT(10 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_KoopaBros_01, ANIM_KoopaBros_Red_Anim14, ANIM_KoopaBros_Red_Idle, 0, MSG_MAC_Plaza_0031)
+    EVT_CALL(SpeakToPlayer, NPC_KoopaBros_01, ANIM_KoopaBros_Red_Talk, ANIM_KoopaBros_Red_Idle, 0, MSG_MAC_Plaza_0031)
     EVT_CALL(InterpNpcYaw, NPC_KoopaBros_01, 90, 0)
     EVT_WAIT(10 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_KoopaBros_01, ANIM_KoopaBros_Red_Anim14, ANIM_KoopaBros_Red_Idle, 5, MSG_MAC_Plaza_0032)
+    EVT_CALL(SpeakToPlayer, NPC_KoopaBros_01, ANIM_KoopaBros_Red_Talk, ANIM_KoopaBros_Red_Idle, 5, MSG_MAC_Plaza_0032)
     EVT_CALL(InterpNpcYaw, NPC_KoopaBros_01, 90, 0)
     EVT_CALL(InterpNpcYaw, NPC_KoopaBros_02, 90, 0)
     EVT_CALL(InterpNpcYaw, NPC_KoopaBros_03, 90, 0)
@@ -1135,7 +1135,7 @@ AnimID N(ExtraAnims_KoopaBros)[] = {
     ANIM_KoopaBros_Black_Run,
     ANIM_KoopaBros_Black_Idle,
     ANIM_KoopaBros_Black_Hurt,
-    ANIM_KoopaBros_Black_Anim14,
+    ANIM_KoopaBros_Black_Talk,
     ANIM_LIST_END
 };
 

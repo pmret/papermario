@@ -25,7 +25,7 @@ extern EvtScript A(yellow_ninja_koopa_HandleCommand);
 
 extern EvtScript N(EVS_SpawnDamageFX);
 extern EvtScript N(EVS_KoopaBrosEnter);
-extern EvtScript N(EVS_Move_TryFormTower);
+extern EvtScript N(EVS_TryFormingTower);
 extern EvtScript N(EVS_BroadcastToKoopaBros);
 
 // only the first element is actually used
@@ -290,7 +290,7 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(BindNextTurn, ACTOR_SELF, EVT_PTR(N(EVS_FakeBowser_HandlePhase)))
     EVT_USE_ARRAY(FakeBowserAnimState)
     EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, 0)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, AVAL_Boss_TowerState_0)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, AVAL_Boss_TowerState_None)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_BowserTaunts, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerHeight, 0)
     EVT_SET(ArrayVar(0), ANIM_BEGIN_IDLE)
@@ -1436,7 +1436,7 @@ EvtScript N(EVS_FakeBowser_HandleEvent) = {
                     EVT_GOTO(20)
                 EVT_END_IF
             EVT_WAIT(20)
-            EVT_EXEC_WAIT(N(EVS_Move_TryFormTower))
+            EVT_EXEC_WAIT(N(EVS_TryFormingTower))
             EVT_CALL(GetEnemyMaxHP, ACTOR_SELF, LVar0)
             EVT_CALL(SetEnemyHP, ACTOR_SELF, LVar0)
             EVT_RETURN
@@ -1636,7 +1636,7 @@ EvtScript N(EVS_KoopaBrosEnter) = {
     EVT_CALL(UseIdleAnimation, GREEN_ACTOR, FALSE)
     EVT_CALL(EnableIdleScript, GREEN_ACTOR, 0)
     EVT_CALL(SetActorPos, GREEN_ACTOR, 100, 0, 10)
-    EVT_CALL(SetAnimation, GREEN_ACTOR, 1, ANIM_KoopaBros_Green_Anim1C)
+    EVT_CALL(SetAnimation, GREEN_ACTOR, 1, ANIM_KoopaBros_Green_Launched)
     EVT_THREAD
         EVT_CALL(SetActorJumpGravity, GREEN_ACTOR, EVT_FLOAT(0.4))
         EVT_CALL(SetActorSounds, GREEN_ACTOR, ACTOR_SOUND_JUMP, SOUND_0, 0)
@@ -1646,7 +1646,7 @@ EvtScript N(EVS_KoopaBrosEnter) = {
     EVT_CALL(UseIdleAnimation, YELLOW_ACTOR, FALSE)
     EVT_CALL(EnableIdleScript, YELLOW_ACTOR, 0)
     EVT_CALL(SetActorPos, YELLOW_ACTOR, 100, 0, 10)
-    EVT_CALL(SetAnimation, YELLOW_ACTOR, 1, ANIM_KoopaBros_Yellow_Anim1C)
+    EVT_CALL(SetAnimation, YELLOW_ACTOR, 1, ANIM_KoopaBros_Yellow_Launched)
     EVT_THREAD
         EVT_CALL(SetActorJumpGravity, YELLOW_ACTOR, EVT_FLOAT(0.4))
         EVT_CALL(SetActorSounds, YELLOW_ACTOR, ACTOR_SOUND_JUMP, SOUND_0, 0)
@@ -1656,7 +1656,7 @@ EvtScript N(EVS_KoopaBrosEnter) = {
     EVT_CALL(UseIdleAnimation, BLACK_ACTOR, FALSE)
     EVT_CALL(EnableIdleScript, BLACK_ACTOR, 0)
     EVT_CALL(SetActorPos, BLACK_ACTOR, 100, 0, 10)
-    EVT_CALL(SetAnimation, BLACK_ACTOR, 1, ANIM_KoopaBros_Black_Anim1C)
+    EVT_CALL(SetAnimation, BLACK_ACTOR, 1, ANIM_KoopaBros_Black_Launched)
     EVT_THREAD
         EVT_CALL(SetActorJumpGravity, BLACK_ACTOR, EVT_FLOAT(0.4))
         EVT_CALL(SetActorSounds, BLACK_ACTOR, ACTOR_SOUND_JUMP, SOUND_0, 0)
@@ -1666,7 +1666,7 @@ EvtScript N(EVS_KoopaBrosEnter) = {
     EVT_CALL(UseIdleAnimation, RED_ACTOR, FALSE)
     EVT_CALL(EnableIdleScript, RED_ACTOR, 0)
     EVT_CALL(SetActorPos, RED_ACTOR, 100, 0, 10)
-    EVT_CALL(SetAnimation, RED_ACTOR, 1, ANIM_KoopaBros_Red_Anim1C)
+    EVT_CALL(SetAnimation, RED_ACTOR, 1, ANIM_KoopaBros_Red_Launched)
     EVT_THREAD
         EVT_CALL(SetActorJumpGravity, RED_ACTOR, EVT_FLOAT(0.4))
         EVT_CALL(SetActorSounds, RED_ACTOR, ACTOR_SOUND_JUMP, SOUND_0, 0)
@@ -1695,7 +1695,7 @@ EvtScript N(EVS_KoopaBrosEnter) = {
         EVT_CALL(PlaySoundAtActor, RED_ACTOR, SOUND_301)
     EVT_END_THREAD
     EVT_THREAD
-        EVT_CALL(SetAnimation, GREEN_ACTOR, 1, ANIM_KoopaBros_Green_Anim12)
+        EVT_CALL(SetAnimation, GREEN_ACTOR, 1, ANIM_KoopaBros_Green_Land)
         EVT_CALL(SetActorPos, GREEN_ACTOR, 20, 250, 0)
         EVT_CALL(SetGoalPos, GREEN_ACTOR, 20, 0, 0)
         EVT_CALL(SetActorJumpGravity, GREEN_ACTOR, EVT_FLOAT(1.5))
@@ -1704,11 +1704,11 @@ EvtScript N(EVS_KoopaBrosEnter) = {
         EVT_CALL(PlaySoundAtActor, GREEN_ACTOR, SOUND_3E9)
         EVT_CALL(ResetActorSounds, GREEN_ACTOR, ACTOR_SOUND_JUMP)
         EVT_CALL(ForceHomePos, GREEN_ACTOR, 20, 0, 0)
-        EVT_CALL(SetAnimation, GREEN_ACTOR, 1, ANIM_KoopaBros_Green_IdleTower)
+        EVT_CALL(SetAnimation, GREEN_ACTOR, 1, ANIM_KoopaBros_Green_IdleCrouch)
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(5)
-        EVT_CALL(SetAnimation, YELLOW_ACTOR, 1, ANIM_KoopaBros_Yellow_Anim12)
+        EVT_CALL(SetAnimation, YELLOW_ACTOR, 1, ANIM_KoopaBros_Yellow_Land)
         EVT_CALL(SetActorPos, YELLOW_ACTOR, 60, 250, -5)
         EVT_CALL(SetGoalPos, YELLOW_ACTOR, 60, 0, -5)
         EVT_CALL(SetActorJumpGravity, YELLOW_ACTOR, EVT_FLOAT(1.5))
@@ -1717,11 +1717,11 @@ EvtScript N(EVS_KoopaBrosEnter) = {
         EVT_CALL(PlaySoundAtActor, YELLOW_ACTOR, SOUND_3E9)
         EVT_CALL(ResetActorSounds, YELLOW_ACTOR, ACTOR_SOUND_JUMP)
         EVT_CALL(ForceHomePos, YELLOW_ACTOR, 60, 0, -5)
-        EVT_CALL(SetAnimation, YELLOW_ACTOR, 1, ANIM_KoopaBros_Yellow_IdleTower)
+        EVT_CALL(SetAnimation, YELLOW_ACTOR, 1, ANIM_KoopaBros_Yellow_IdleCrouch)
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(10)
-        EVT_CALL(SetAnimation, BLACK_ACTOR, 1, ANIM_KoopaBros_Black_Anim12)
+        EVT_CALL(SetAnimation, BLACK_ACTOR, 1, ANIM_KoopaBros_Black_Land)
         EVT_CALL(SetActorPos, BLACK_ACTOR, 100, 250, -10)
         EVT_CALL(SetGoalPos, BLACK_ACTOR, 100, 0, -10)
         EVT_CALL(SetActorJumpGravity, BLACK_ACTOR, EVT_FLOAT(1.5))
@@ -1730,11 +1730,11 @@ EvtScript N(EVS_KoopaBrosEnter) = {
         EVT_CALL(PlaySoundAtActor, BLACK_ACTOR, SOUND_3E9)
         EVT_CALL(ResetActorSounds, BLACK_ACTOR, ACTOR_SOUND_JUMP)
         EVT_CALL(ForceHomePos, BLACK_ACTOR, 100, 0, -10)
-        EVT_CALL(SetAnimation, BLACK_ACTOR, 1, ANIM_KoopaBros_Black_IdleTower)
+        EVT_CALL(SetAnimation, BLACK_ACTOR, 1, ANIM_KoopaBros_Black_IdleCrouch)
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(15)
-        EVT_CALL(SetAnimation, RED_ACTOR, 1, ANIM_KoopaBros_Red_Anim12)
+        EVT_CALL(SetAnimation, RED_ACTOR, 1, ANIM_KoopaBros_Red_Land)
         EVT_CALL(SetActorPos, RED_ACTOR, 140, 250, -15)
         EVT_CALL(SetGoalPos, RED_ACTOR, 140, 0, -15)
         EVT_CALL(SetActorJumpGravity, RED_ACTOR, EVT_FLOAT(1.5))
@@ -1743,7 +1743,7 @@ EvtScript N(EVS_KoopaBrosEnter) = {
         EVT_CALL(PlaySoundAtActor, RED_ACTOR, SOUND_3E9)
         EVT_CALL(ResetActorSounds, RED_ACTOR, ACTOR_SOUND_JUMP)
         EVT_CALL(ForceHomePos, RED_ACTOR, 140, 0, -15)
-        EVT_CALL(SetAnimation, RED_ACTOR, 1, ANIM_KoopaBros_Red_IdleTower)
+        EVT_CALL(SetAnimation, RED_ACTOR, 1, ANIM_KoopaBros_Red_IdleCrouch)
     EVT_END_THREAD
     EVT_WAIT(30)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_FOCUS_ON_ENEMIES)
@@ -1812,7 +1812,7 @@ EvtScript N(EVS_KoopaBrosEnter) = {
     EVT_CALL(SetPartFlagBits, RED_ACTOR, 1, ACTOR_PART_FLAG_NO_TARGET, FALSE)
     EVT_CALL(HPBarToHome, RED_ACTOR)
     EVT_CALL(SetAnimation, RED_ACTOR, 1, ANIM_KoopaBros_Red_Idle)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, AVAL_Boss_TowerState_3) // prevents first-turn tower attack
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, AVAL_Boss_TowerState_Toppled) // prevents first-turn tower attack
     EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
     EVT_BITWISE_OR_CONST(LVar0, AFLAG_Boss_KoopaBrosRevealed)
     EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
@@ -1820,9 +1820,10 @@ EvtScript N(EVS_KoopaBrosEnter) = {
     EVT_END
 };
 
-API_CALLABLE(N(func_8021837C_4B156C)) {
+API_CALLABLE(N(PlayLandOnTowerFX)) {
     Bytecode* args = script->ptrReadPos;
-    Actor* actor = get_actor(evt_get_variable(script, *args++));
+    s32 actorID = evt_get_variable(script, *args++);
+    Actor* actor = get_actor(actorID);
 
     play_movement_dust_effects(2, actor->state.goalPos.x - 15.0f, actor->state.goalPos.y, actor->state.goalPos.z, actor->state.angle);
     return ApiStatus_DONE2;
@@ -1831,7 +1832,7 @@ API_CALLABLE(N(func_8021837C_4B156C)) {
 // (in) Var0 : koopa bros actorID
 // (in) Var1 : expected tower height
 // (in) Var2 : tower index (height - 1, height - 2, ..., 0)
-EvtScript N(EVS_AddKoopaToTower) = {
+EvtScript N(EVS_BuildTowerWithKoopa) = {
     #define VAR_TOWER_HEIGHT LVarB
     #define VAR_CUR_TOWER_IDX LVarC
     EVT_IF_EQ(LVar2, TOWER_TOP)
@@ -1894,13 +1895,13 @@ EvtScript N(EVS_AddKoopaToTower) = {
             EVT_END_IF
             EVT_SWITCH(LVarA)
                 EVT_CASE_EQ(GREEN_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Anim10)
+                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Leap)
                 EVT_CASE_EQ(YELLOW_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Anim10)
+                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Leap)
                 EVT_CASE_EQ(BLACK_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Anim10)
+                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Leap)
                 EVT_CASE_EQ(RED_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Anim10)
+                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Leap)
             EVT_END_SWITCH
             EVT_WAIT(5)
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TopKoopaID, LVar1)
@@ -1923,28 +1924,28 @@ EvtScript N(EVS_AddKoopaToTower) = {
                 EVT_WAIT(10)
                 EVT_SWITCH(LVarA)
                     EVT_CASE_EQ(GREEN_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Anim12)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Land)
                     EVT_CASE_EQ(YELLOW_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Anim12)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Land)
                     EVT_CASE_EQ(BLACK_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Anim12)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Land)
                     EVT_CASE_EQ(RED_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Anim12)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Land)
                 EVT_END_SWITCH
             EVT_END_THREAD
             EVT_SWITCH(LVarA)
                 EVT_CASE_EQ(GREEN_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Anim11)
+                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Midair)
                 EVT_CASE_EQ(YELLOW_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Anim11)
+                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Midair)
                 EVT_CASE_EQ(BLACK_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Anim11)
+                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Midair)
                 EVT_CASE_EQ(RED_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Anim11)
+                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Midair)
             EVT_END_SWITCH
             EVT_CALL(SetActorJumpGravity, LVarA, EVT_FLOAT(1.6))
             EVT_CALL(JumpToGoal, LVarA, 20, FALSE, FALSE, FALSE)
-            EVT_CALL(N(func_8021837C_4B156C), LVarA)
+            EVT_CALL(N(PlayLandOnTowerFX), LVarA)
             EVT_CALL(PlaySoundAtActor, LVarA, SOUND_3E9)
             EVT_CALL(GetActorPos, LVarA, LVar3, LVar4, LVar5)
             EVT_SUB(LVar3, 15)
@@ -1999,19 +2000,19 @@ EvtScript N(EVS_AddKoopaToTower) = {
             EVT_CALL(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_NO_TARGET, TRUE)
             EVT_CALL(HPBarToHome, LVarA)
             EVT_CALL(SetActorVar, LVarA, AVAR_Koopa_State, AVAL_Koopa_State_PosA)
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, AVAL_Boss_TowerState_1)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, AVAL_Boss_TowerState_Stable)
         EVT_CASE_OR_EQ(TOWER_DOWN_1)
         EVT_CASE_OR_EQ(TOWER_DOWN_2)
         EVT_CASE_OR_EQ(TOWER_DOWN_3)
             EVT_SWITCH(LVarA)
                 EVT_CASE_EQ(GREEN_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_IdleTower)
+                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_IdleCrouch)
                 EVT_CASE_EQ(YELLOW_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_IdleTower)
+                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_IdleCrouch)
                 EVT_CASE_EQ(BLACK_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_IdleTower)
+                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_IdleCrouch)
                 EVT_CASE_EQ(RED_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_IdleTower)
+                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_IdleCrouch)
             EVT_END_SWITCH
             EVT_WAIT(50)
             // handle (height - 1) position
@@ -2036,13 +2037,13 @@ EvtScript N(EVS_AddKoopaToTower) = {
                 EVT_CALL(RunToGoal, LVarA, 10, FALSE)
                 EVT_SWITCH(LVarA)
                     EVT_CASE_EQ(GREEN_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_IdleTower)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_IdleCrouch)
                     EVT_CASE_EQ(YELLOW_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_IdleTower)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_IdleCrouch)
                     EVT_CASE_EQ(BLACK_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_IdleTower)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_IdleCrouch)
                     EVT_CASE_EQ(RED_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_IdleTower)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_IdleCrouch)
                 EVT_END_SWITCH
                 EVT_CALL(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_HEALTH_BAR, TRUE)
                 EVT_CALL(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_NO_TARGET, TRUE)
@@ -2061,13 +2062,13 @@ EvtScript N(EVS_AddKoopaToTower) = {
                 EVT_CALL(AddGoalPos, LVarA, 0, 18, -4)
                 EVT_SWITCH(LVarA)
                     EVT_CASE_EQ(GREEN_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Anim10)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Leap)
                     EVT_CASE_EQ(YELLOW_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Anim10)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Leap)
                     EVT_CASE_EQ(BLACK_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Anim10)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Leap)
                     EVT_CASE_EQ(RED_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Anim10)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Leap)
                 EVT_END_SWITCH
                 EVT_WAIT(5)
                 EVT_CALL(AddGoalPos, LVarA, 15, 0, 0)
@@ -2075,41 +2076,41 @@ EvtScript N(EVS_AddKoopaToTower) = {
                     EVT_WAIT(10)
                     EVT_SWITCH(LVarA)
                         EVT_CASE_EQ(GREEN_ACTOR)
-                            EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Anim12)
+                            EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Land)
                         EVT_CASE_EQ(YELLOW_ACTOR)
-                            EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Anim12)
+                            EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Land)
                         EVT_CASE_EQ(BLACK_ACTOR)
-                            EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Anim12)
+                            EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Land)
                         EVT_CASE_EQ(RED_ACTOR)
-                            EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Anim12)
+                            EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Land)
                     EVT_END_SWITCH
                 EVT_END_THREAD
                 EVT_SWITCH(LVarA)
                     EVT_CASE_EQ(GREEN_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Anim11)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Midair)
                     EVT_CASE_EQ(YELLOW_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Anim11)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Midair)
                     EVT_CASE_EQ(BLACK_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Anim11)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Midair)
                     EVT_CASE_EQ(RED_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Anim11)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Midair)
                 EVT_END_SWITCH
                 EVT_CALL(SetActorJumpGravity, LVarA, EVT_FLOAT(1.6))
                 EVT_CALL(JumpToGoal, LVarA, 20, FALSE, FALSE, FALSE)
-                EVT_CALL(N(func_8021837C_4B156C), LVarA)
+                EVT_CALL(N(PlayLandOnTowerFX), LVarA)
                 EVT_CALL(PlaySoundAtActor, LVarA, SOUND_3E9)
                 EVT_CALL(GetActorPos, LVarA, LVar3, LVar4, LVar5)
                 EVT_SUB(LVar3, 15)
                 EVT_CALL(SetActorPos, LVarA, LVar3, LVar4, LVar5)
                 EVT_SWITCH(LVarA)
                     EVT_CASE_EQ(GREEN_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_IdleTower)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_IdleCrouch)
                     EVT_CASE_EQ(YELLOW_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_IdleTower)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_IdleCrouch)
                     EVT_CASE_EQ(BLACK_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_IdleTower)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_IdleCrouch)
                     EVT_CASE_EQ(RED_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_IdleTower)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_IdleCrouch)
                 EVT_END_SWITCH
                 EVT_CALL(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_HEALTH_BAR, TRUE)
                 EVT_CALL(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_NO_TARGET, TRUE)
@@ -2128,13 +2129,13 @@ EvtScript N(EVS_AddKoopaToTower) = {
                 EVT_CALL(AddGoalPos, LVarA, 0, 36, -7)
                 EVT_SWITCH(LVarA)
                     EVT_CASE_EQ(GREEN_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Anim10)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Leap)
                     EVT_CASE_EQ(YELLOW_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Anim10)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Leap)
                     EVT_CASE_EQ(BLACK_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Anim10)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Leap)
                     EVT_CASE_EQ(RED_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Anim10)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Leap)
                 EVT_END_SWITCH
                 EVT_WAIT(5)
                 EVT_CALL(AddGoalPos, LVarA, 15, 0, 0)
@@ -2142,41 +2143,41 @@ EvtScript N(EVS_AddKoopaToTower) = {
                     EVT_WAIT(10)
                     EVT_SWITCH(LVarA)
                         EVT_CASE_EQ(GREEN_ACTOR)
-                            EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Anim12)
+                            EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Land)
                         EVT_CASE_EQ(YELLOW_ACTOR)
-                            EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Anim12)
+                            EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Land)
                         EVT_CASE_EQ(BLACK_ACTOR)
-                            EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Anim12)
+                            EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Land)
                         EVT_CASE_EQ(RED_ACTOR)
-                            EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Anim12)
+                            EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Land)
                     EVT_END_SWITCH
                 EVT_END_THREAD
                 EVT_SWITCH(LVarA)
                     EVT_CASE_EQ(GREEN_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Anim11)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Midair)
                     EVT_CASE_EQ(YELLOW_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Anim11)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Midair)
                     EVT_CASE_EQ(BLACK_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Anim11)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Midair)
                     EVT_CASE_EQ(RED_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Anim11)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Midair)
                 EVT_END_SWITCH
                 EVT_CALL(SetActorJumpGravity, LVarA, EVT_FLOAT(1.6))
                 EVT_CALL(JumpToGoal, LVarA, 20, FALSE, FALSE, FALSE)
-                EVT_CALL(N(func_8021837C_4B156C), LVarA)
+                EVT_CALL(N(PlayLandOnTowerFX), LVarA)
                 EVT_CALL(PlaySoundAtActor, LVarA, SOUND_3E9)
                 EVT_CALL(GetActorPos, LVarA, LVar3, LVar4, LVar5)
                 EVT_SUB(LVar3, 15)
                 EVT_CALL(SetActorPos, LVarA, LVar3, LVar4, LVar5)
                 EVT_SWITCH(LVarA)
                     EVT_CASE_EQ(GREEN_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_IdleTower)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_IdleCrouch)
                     EVT_CASE_EQ(YELLOW_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_IdleTower)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_IdleCrouch)
                     EVT_CASE_EQ(BLACK_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_IdleTower)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_IdleCrouch)
                     EVT_CASE_EQ(RED_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_IdleTower)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_IdleCrouch)
                 EVT_END_SWITCH
                 EVT_CALL(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_HEALTH_BAR, TRUE)
                 EVT_CALL(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_NO_TARGET, TRUE)
@@ -2191,7 +2192,11 @@ EvtScript N(EVS_AddKoopaToTower) = {
     #undef VAR_CUR_TOWER_IDX
 };
 
-EvtScript N(EVS_80221DB4) = {
+// (in) Var0 : koopa bros actorID
+// (in) Var1 : expected tower height
+// (in) Var2 : add index (0, 1, ...), or (-1) to mean "demoting"
+// (in) Var3 : orphan count
+EvtScript N(EVS_UpdateTowerWithKoopa) = {
     EVT_IF_EQ(LVar2, 0)
         EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_LeadKoopaID, LVar0)
     EVT_END_IF
@@ -2215,13 +2220,13 @@ EvtScript N(EVS_80221DB4) = {
         EVT_CASE_EQ(-1)
             EVT_SWITCH(LVarA)
                 EVT_CASE_EQ(GREEN_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_IdleTower)
+                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_IdleCrouch)
                 EVT_CASE_EQ(YELLOW_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_IdleTower)
+                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_IdleCrouch)
                 EVT_CASE_EQ(BLACK_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_IdleTower)
+                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_IdleCrouch)
                 EVT_CASE_EQ(RED_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_IdleTower)
+                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_IdleCrouch)
             EVT_END_SWITCH
             EVT_SWITCH(LVarB)
                 EVT_CASE_EQ(4)
@@ -2247,13 +2252,13 @@ EvtScript N(EVS_80221DB4) = {
             EVT_END_IF
             EVT_SWITCH(LVarA)
                 EVT_CASE_EQ(GREEN_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Anim10)
+                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Leap)
                 EVT_CASE_EQ(YELLOW_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Anim10)
+                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Leap)
                 EVT_CASE_EQ(BLACK_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Anim10)
+                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Leap)
                 EVT_CASE_EQ(RED_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Anim10)
+                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Leap)
             EVT_END_SWITCH
             EVT_WAIT(5)
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TopKoopaID, LVar0)
@@ -2271,28 +2276,28 @@ EvtScript N(EVS_80221DB4) = {
                 EVT_WAIT(10)
                 EVT_SWITCH(LVarA)
                     EVT_CASE_EQ(GREEN_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Anim12)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Land)
                     EVT_CASE_EQ(YELLOW_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Anim12)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Land)
                     EVT_CASE_EQ(BLACK_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Anim12)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Land)
                     EVT_CASE_EQ(RED_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Anim12)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Land)
                 EVT_END_SWITCH
             EVT_END_THREAD
             EVT_SWITCH(LVarA)
                 EVT_CASE_EQ(GREEN_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Anim11)
+                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Midair)
                 EVT_CASE_EQ(YELLOW_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Anim11)
+                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Midair)
                 EVT_CASE_EQ(BLACK_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Anim11)
+                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Midair)
                 EVT_CASE_EQ(RED_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Anim11)
+                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Midair)
             EVT_END_SWITCH
             EVT_CALL(SetActorJumpGravity, LVarA, EVT_FLOAT(1.6))
             EVT_CALL(JumpToGoal, LVarA, 20, FALSE, FALSE, FALSE)
-            EVT_CALL(N(func_8021837C_4B156C), LVarA)
+            EVT_CALL(N(PlayLandOnTowerFX), LVarA)
             EVT_CALL(PlaySoundAtActor, LVarA, SOUND_3E9)
             EVT_CALL(GetActorPos, LVarA, LVar3, LVar4, LVar5)
             EVT_SUB(LVar3, 15)
@@ -2329,18 +2334,18 @@ EvtScript N(EVS_80221DB4) = {
             EVT_CALL(HPBarToHome, LVarA)
             EVT_CALL(SetActorVar, LVarA, AVAR_Koopa_State, AVAL_Koopa_State_PosA)
             EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-            EVT_BITWISE_OR_CONST(LVar0, AFLAG_Boss_100)
+            EVT_BITWISE_OR_CONST(LVar0, AFLAG_Boss_DoneTowerUpdate)
             EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
         EVT_CASE_EQ(1)
             EVT_SWITCH(LVarA)
                 EVT_CASE_EQ(GREEN_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Anim10)
+                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Leap)
                 EVT_CASE_EQ(YELLOW_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Anim10)
+                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Leap)
                 EVT_CASE_EQ(BLACK_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Anim10)
+                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Leap)
                 EVT_CASE_EQ(RED_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Anim10)
+                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Leap)
             EVT_END_SWITCH
             EVT_WAIT(5)
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TopKoopaID, LVar0)
@@ -2353,28 +2358,28 @@ EvtScript N(EVS_80221DB4) = {
                 EVT_WAIT(10)
                 EVT_SWITCH(LVarA)
                     EVT_CASE_EQ(GREEN_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Anim12)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Land)
                     EVT_CASE_EQ(YELLOW_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Anim12)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Land)
                     EVT_CASE_EQ(BLACK_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Anim12)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Land)
                     EVT_CASE_EQ(RED_ACTOR)
-                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Anim12)
+                        EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Land)
                 EVT_END_SWITCH
             EVT_END_THREAD
             EVT_SWITCH(LVarA)
                 EVT_CASE_EQ(GREEN_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Anim11)
+                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_Midair)
                 EVT_CASE_EQ(YELLOW_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Anim11)
+                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_Midair)
                 EVT_CASE_EQ(BLACK_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Anim11)
+                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_Midair)
                 EVT_CASE_EQ(RED_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Anim11)
+                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_Midair)
             EVT_END_SWITCH
             EVT_CALL(SetActorJumpGravity, LVarA, EVT_FLOAT(1.6))
             EVT_CALL(JumpToGoal, LVarA, 20, FALSE, FALSE, FALSE)
-            EVT_CALL(N(func_8021837C_4B156C), LVarA)
+            EVT_CALL(N(PlayLandOnTowerFX), LVarA)
             EVT_CALL(PlaySoundAtActor, LVarA, SOUND_3E9)
             EVT_CALL(GetActorPos, LVarA, LVar3, LVar4, LVar5)
             EVT_SUB(LVar3, 15)
@@ -2392,13 +2397,13 @@ EvtScript N(EVS_80221DB4) = {
             EVT_WAIT(10)
             EVT_SWITCH(LVarA)
                 EVT_CASE_EQ(GREEN_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_IdleTower)
+                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Green_IdleCrouch)
                 EVT_CASE_EQ(YELLOW_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_IdleTower)
+                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Yellow_IdleCrouch)
                 EVT_CASE_EQ(BLACK_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_IdleTower)
+                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Black_IdleCrouch)
                 EVT_CASE_EQ(RED_ACTOR)
-                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_IdleTower)
+                    EVT_CALL(SetAnimation, LVarA, 1, ANIM_KoopaBros_Red_IdleCrouch)
             EVT_END_SWITCH
             EVT_CALL(SetActorFlagBits, LVarA, ACTOR_FLAG_NO_HEALTH_BAR, TRUE)
             EVT_CALL(SetPartFlagBits, LVarA, 1, ACTOR_PART_FLAG_NO_TARGET, TRUE)
@@ -2409,7 +2414,7 @@ EvtScript N(EVS_80221DB4) = {
     EVT_END
 };
 
-EvtScript N(EVS_Move_TryFormTower) = {
+EvtScript N(EVS_TryFormingTower) = {
     // count the number of standing koopa bros
     #define VAR_STANDING_COUNT LVarA
     EVT_SET(VAR_STANDING_COUNT, 0)
@@ -2441,7 +2446,6 @@ EvtScript N(EVS_Move_TryFormTower) = {
             EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
             EVT_RETURN
     EVT_END_SWITCH
-
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerHeight, VAR_STANDING_COUNT)
     EVT_SET(LFlag0, FALSE)
     // have each koopa join the tower from front to back
@@ -2459,7 +2463,7 @@ EvtScript N(EVS_Move_TryFormTower) = {
             EVT_IF_EQ(LVar1, 0)
                 EVT_SET(LVar1, VAR_STANDING_COUNT)
                 EVT_SET(LVar2, VAR_CUR_KOOPA_IDX)
-                EVT_EXEC(N(EVS_AddKoopaToTower))
+                EVT_EXEC(N(EVS_BuildTowerWithKoopa))
                 EVT_SUB(VAR_CUR_KOOPA_IDX, 1)
             EVT_END_IF
         EVT_END_IF
@@ -2467,14 +2471,16 @@ EvtScript N(EVS_Move_TryFormTower) = {
         EVT_IF_NE(LVar0, -1)
             EVT_GOTO(1)
         EVT_END_IF
+    // hide the status bar until the tower is formed
     EVT_CALL(EnableBattleStatusBar, FALSE)
     EVT_LABEL(2)
         EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, LVar0)
         EVT_WAIT(1)
-        EVT_IF_EQ(LVar0, AVAL_Boss_TowerState_3)
+        EVT_IF_EQ(LVar0, AVAL_Boss_TowerState_Toppled)
             EVT_GOTO(2)
         EVT_END_IF
     EVT_CALL(EnableBattleStatusBar, TRUE)
+    // housekeeping for various actor states in the new tower configuration
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_POPUP, TRUE)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_TOWER, ACTOR_PART_FLAG_NO_TARGET, FALSE)
     EVT_SET(LVar0, VAR_STANDING_COUNT)
@@ -2486,17 +2492,19 @@ EvtScript N(EVS_Move_TryFormTower) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TopKoopaID, LVar1)
     EVT_CALL(GetActorPos, LVar1, LVar2, LVar3, LVar4)
     EVT_CALL(SetActorPos, ACTOR_SELF, LVar2, LVar3, LVar4)
-    EVT_SET(LVarA, BOSS_CMD_0)
+    EVT_SET(LVarA, BOSS_CMD_STABLE)
     EVT_EXEC_WAIT(N(EVS_BroadcastToKoopaBros))
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, AVAL_Boss_TowerState_1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, AVAL_Boss_TowerState_Stable)
     EVT_RETURN
     EVT_END
     #undef VAR_STANDING_COUNT
     #undef VAR_CUR_KOOPA_IDX 
 };
 
-EvtScript N(EVS_802230E8) = {
-    EVT_SET(LVarA, 0)
+// count the number of standing koopa bros
+EvtScript N(EVS_TryJoiningTower) = {
+    #define VAR_STANDING_COUNT LVarA
+    EVT_SET(VAR_STANDING_COUNT, 0)
     EVT_CALL(PlayerCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
@@ -2505,60 +2513,67 @@ EvtScript N(EVS_802230E8) = {
         EVT_IF_EQ(LVar1, 0)
             EVT_CALL(GetStatusFlags, LVar0, LVar1)
             EVT_IF_EQ(LVar1, 0)
-                EVT_ADD(LVarA, 1)
+                EVT_ADD(VAR_STANDING_COUNT, 1)
             EVT_END_IF
         EVT_END_IF
         EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
         EVT_IF_NE(LVar0, -1)
             EVT_GOTO(0)
         EVT_END_IF
-    EVT_IF_EQ(LVarA, 0)
+    EVT_IF_EQ(VAR_STANDING_COUNT, 0)
+        // no orphaned koopa bros found
         EVT_RETURN
     EVT_END_IF
+    // add orphan count to tower size
     EVT_SET(LVar3, LVarA)
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerHeight, LVar0)
     EVT_ADD(LVarA, LVar0)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerHeight, LVarA)
+    // reset 'joined' flag
     EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-    EVT_BITWISE_AND_CONST(LVar0, ~AFLAG_Boss_100)
+    EVT_BITWISE_AND_CONST(LVar0, ~AFLAG_Boss_DoneTowerUpdate)
     EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-    EVT_SET(LVar0, GREEN_ACTOR)
+    // demote the top koopa bros
+    EVT_SET(LVar0, FIRST_KOOPA_ACTOR)
     EVT_LOOP(4)
         EVT_CALL(ActorExists, LVar0, LVar1)
         EVT_IF_EQ(LVar1, TRUE)
             EVT_CALL(GetActorVar, LVar0, AVAR_Koopa_State, LVar2)
-            EVT_IF_EQ(LVar2, 3)
+            EVT_IF_EQ(LVar2, AVAL_Koopa_State_PosA)
                 EVT_SET(LVar1, LVarA)
                 EVT_SET(LVar2, -1)
-                EVT_EXEC(N(EVS_80221DB4))
+                EVT_EXEC(N(EVS_UpdateTowerWithKoopa))
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_IF
         EVT_ADD(LVar0, 1)
     EVT_END_LOOP
+    // have each orphaned koopa join the tower from front to back
     EVT_SET(LVar2, 0)
     EVT_CALL(PlayerCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(1)
-    EVT_CALL(GetOwnerTarget, LVar0, LVar1)
-    EVT_CALL(GetActorVar, LVar0, AVAR_Koopa_State, LVar8)
-    EVT_IF_EQ(LVar8, 0)
-        EVT_SET(LVar1, LVarA)
-        EVT_EXEC(N(EVS_80221DB4))
-        EVT_ADD(LVar2, 1)
-    EVT_END_IF
-    EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
-    EVT_IF_NE(LVar0, -1)
-        EVT_GOTO(1)
-    EVT_END_IF
+        EVT_CALL(GetOwnerTarget, LVar0, LVar1)
+        EVT_CALL(GetActorVar, LVar0, AVAR_Koopa_State, LVar8)
+        EVT_IF_EQ(LVar8, AVAL_Koopa_State_Ready)
+            EVT_SET(LVar1, LVarA)
+            EVT_EXEC(N(EVS_UpdateTowerWithKoopa))
+            EVT_ADD(LVar2, 1)
+        EVT_END_IF
+        EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
+        EVT_IF_NE(LVar0, -1)
+            EVT_GOTO(1)
+        EVT_END_IF
+    // hide the status bar until the tower is formed
     EVT_CALL(EnableBattleStatusBar, FALSE)
     EVT_LABEL(2)
         EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
-        EVT_IF_NOT_FLAG(LVar0, AFLAG_Boss_100)
+        EVT_IF_NOT_FLAG(LVar0, AFLAG_Boss_DoneTowerUpdate)
             EVT_WAIT(1)
             EVT_GOTO(2)
         EVT_END_IF
     EVT_CALL(EnableBattleStatusBar, TRUE)
+    // housekeeping for various actor states in the new tower configuration
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_POPUP, TRUE)
     EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_TOWER, ACTOR_PART_FLAG_NO_TARGET, FALSE)
     EVT_SET(LVar0, LVarA)
@@ -2570,14 +2585,15 @@ EvtScript N(EVS_802230E8) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TopKoopaID, LVar1)
     EVT_CALL(GetActorPos, LVar1, LVar2, LVar3, LVar4)
     EVT_CALL(SetActorPos, ACTOR_SELF, LVar2, LVar3, LVar4)
-    EVT_SET(LVarA, BOSS_CMD_0)
+    EVT_SET(LVarA, BOSS_CMD_STABLE)
     EVT_EXEC_WAIT(N(EVS_BroadcastToKoopaBros))
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, AVAL_Boss_TowerState_1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, AVAL_Boss_TowerState_Stable)
     EVT_RETURN
     EVT_END
+    #undef VAR_STANDING_COUNT
 };
 
-EvtScript N(EVS_BroadcastTowerUnstable) = {
+EvtScript N(EVS_Broadcast_TowerUnstable) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, LVar0)
     EVT_IF_EQ(LVar0, AVAL_Boss_TowerState_Unstable)
         EVT_RETURN
@@ -2598,8 +2614,8 @@ EvtScript N(EVS_BroadcastTowerUnstable) = {
     EVT_END
 };
 
-EvtScript N(EVS_BroadcastToppleHit) = {
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, AVAL_Boss_TowerState_3)
+EvtScript N(EVS_Broadcast_ToppleHit) = {
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, AVAL_Boss_TowerState_Toppled)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_IF_NE(LVar0, EVENT_BURN_HIT)
         EVT_SET(LVarA, BOSS_CMD_TOPPLE_HIT)
@@ -2837,7 +2853,7 @@ EvtScript N(EVS_KoopaBros_HandleEvent) = {
                 EVT_BITWISE_OR_CONST(LVar0, AFLAG_Boss_PartnerHitTower)
                 EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
             EVT_END_IF
-            EVT_EXEC_WAIT(N(EVS_BroadcastTowerUnstable))
+            EVT_EXEC_WAIT(N(EVS_Broadcast_TowerUnstable))
         EVT_CASE_EQ(EVENT_HIT)
             // set flags for player or partner hitting the koopa bros tower
             EVT_CALL(GetBattleFlags, LVar0)
@@ -2860,11 +2876,11 @@ EvtScript N(EVS_KoopaBros_HandleEvent) = {
                 EVT_BITWISE_OR_CONST(LVar0, AFLAG_Boss_PartnerHitTower)
                 EVT_CALL(SetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
             EVT_END_IF
-            EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
             // if this was the second hit, topple the tower
+            EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
             EVT_IF_FLAG(LVar0, AFLAG_Boss_PlayerHitTower)
                 EVT_IF_FLAG(LVar0, AFLAG_Boss_PartnerHitTower)
-                    EVT_EXEC_WAIT(N(EVS_BroadcastToppleHit))
+                    EVT_EXEC_WAIT(N(EVS_Broadcast_ToppleHit))
                     EVT_WAIT(20)
                     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
                     EVT_RETURN
@@ -2876,7 +2892,7 @@ EvtScript N(EVS_KoopaBros_HandleEvent) = {
             EVT_WAIT(30)
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, LVar0)
             EVT_IF_NE(LVar0, AVAL_Boss_TowerState_Unstable)
-                EVT_EXEC_WAIT(N(EVS_BroadcastTowerUnstable))
+                EVT_EXEC_WAIT(N(EVS_Broadcast_TowerUnstable))
             EVT_END_IF
             EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
             EVT_IF_FLAG(LVar0, AFLAG_Boss_TowerUnstable)
@@ -2915,7 +2931,7 @@ EvtScript N(EVS_KoopaBros_HandleEvent) = {
             EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
             EVT_IF_FLAG(LVar0, AFLAG_Boss_PlayerHitTower)
                 EVT_IF_FLAG(LVar0, AFLAG_Boss_PartnerHitTower)
-                    EVT_EXEC_WAIT(N(EVS_BroadcastToppleHit))
+                    EVT_EXEC_WAIT(N(EVS_Broadcast_ToppleHit))
                     EVT_WAIT(20)
                     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
                     EVT_RETURN
@@ -2927,7 +2943,7 @@ EvtScript N(EVS_KoopaBros_HandleEvent) = {
             EVT_WAIT(30)
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, LVar0)
             EVT_IF_NE(LVar0, AVAL_Boss_TowerState_Unstable)
-                EVT_EXEC_WAIT(N(EVS_BroadcastTowerUnstable))
+                EVT_EXEC_WAIT(N(EVS_Broadcast_TowerUnstable))
             EVT_END_IF
             EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
             EVT_IF_FLAG(LVar0, AFLAG_Boss_TowerUnstable)
@@ -2958,7 +2974,7 @@ EvtScript N(EVS_KoopaBros_HandleEvent) = {
             EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
             EVT_IF_FLAG(LVar0, AFLAG_Boss_PlayerHitTower)
                 EVT_IF_FLAG(LVar0, AFLAG_Boss_PartnerHitTower)
-                    EVT_EXEC_WAIT(N(EVS_BroadcastToppleHit))
+                    EVT_EXEC_WAIT(N(EVS_Broadcast_ToppleHit))
                     EVT_WAIT(20)
                     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
                     EVT_RETURN
@@ -2993,12 +3009,12 @@ EvtScript N(EVS_KoopaBros_TakeTurn) = {
     // reform stable tower if tipping
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, LVar0)
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(AVAL_Boss_TowerState_0)
-        EVT_CASE_EQ(AVAL_Boss_TowerState_1)
+        EVT_CASE_EQ(AVAL_Boss_TowerState_None)
+        EVT_CASE_EQ(AVAL_Boss_TowerState_Stable)
         EVT_CASE_EQ(AVAL_Boss_TowerState_Unstable)
             EVT_WAIT(30)
-            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, AVAL_Boss_TowerState_1)
-            EVT_SET(LVarA, BOSS_CMD_0)
+            EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, AVAL_Boss_TowerState_Stable)
+            EVT_SET(LVarA, BOSS_CMD_STABLE)
             EVT_EXEC_WAIT(N(EVS_BroadcastToKoopaBros))
             EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
             EVT_BITWISE_AND_CONST(LVar0, ~AFLAG_Boss_TowerUnstable)
@@ -3012,10 +3028,10 @@ EvtScript N(EVS_KoopaBros_TakeTurn) = {
             EVT_ADD(LVar0, 20)
             EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_TOWER, -4, LVar0)
             EVT_CALL(SetActorSize, ACTOR_SELF, LVar0, 45)
-        EVT_CASE_EQ(AVAL_Boss_TowerState_3)
+        EVT_CASE_EQ(AVAL_Boss_TowerState_Toppled)
     EVT_END_SWITCH
     // find if any koopa bros are toppled
-    EVT_SET(LVar0, GREEN_ACTOR)
+    EVT_SET(LVar0, FIRST_KOOPA_ACTOR)
     EVT_LOOP(4)
         EVT_CALL(ActorExists, LVar0, LVar1)
         EVT_IF_EQ(LVar1, TRUE)
@@ -3041,13 +3057,15 @@ EvtScript N(EVS_KoopaBros_TakeTurn) = {
     EVT_END_IF
     EVT_SET(LVarA, BOSS_CMD_TRY_GET_UP)
     EVT_EXEC_WAIT(N(EVS_BroadcastToKoopaBros))
-    // try to form the tower
+    // try tower operations
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, LVar0)
     EVT_SWITCH(LVar0)
-        EVT_CASE_EQ(AVAL_Boss_TowerState_1)
-            EVT_EXEC_WAIT(N(EVS_802230E8))
+        EVT_CASE_EQ(AVAL_Boss_TowerState_Stable)
+            // try adding any orphaned koopa bros to the tower
+            EVT_EXEC_WAIT(N(EVS_TryJoiningTower))
         EVT_CASE_DEFAULT
-            EVT_EXEC_WAIT(N(EVS_Move_TryFormTower))
+            // try forming a new tower
+            EVT_EXEC_WAIT(N(EVS_TryFormingTower))
     EVT_END_SWITCH
     // if only one koopa bro is alive, perform a solo attack
     EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
@@ -3071,7 +3089,7 @@ EvtScript N(EVS_KoopaBros_TakeTurn) = {
     EVT_EXEC_WAIT(N(EVS_BroadcastToKoopaBros))
     EVT_WAIT(5)
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, LVar0)
-    EVT_IF_EQ(LVar0, AVAL_Boss_TowerState_3)
+    EVT_IF_EQ(LVar0, AVAL_Boss_TowerState_Toppled)
         EVT_RETURN
     EVT_END_IF
     // execute spin attack
@@ -3081,13 +3099,13 @@ EvtScript N(EVS_KoopaBros_TakeTurn) = {
         EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_LeadKoopaID, LVar0)
         EVT_SWITCH(LVar0)
             EVT_CASE_EQ(GREEN_ACTOR)
-                EVT_CALL(ActorSpeak, MSG_CH1_0108, LVar0, 1, ANIM_KoopaBros_Green_Anim14, ANIM_KoopaBros_Green_Idle)
+                EVT_CALL(ActorSpeak, MSG_CH1_0108, LVar0, 1, ANIM_KoopaBros_Green_Talk, ANIM_KoopaBros_Green_Idle)
             EVT_CASE_EQ(YELLOW_ACTOR)
-                EVT_CALL(ActorSpeak, MSG_CH1_0108, LVar0, 1, ANIM_KoopaBros_Yellow_Anim14, ANIM_KoopaBros_Yellow_Idle)
+                EVT_CALL(ActorSpeak, MSG_CH1_0108, LVar0, 1, ANIM_KoopaBros_Yellow_Talk, ANIM_KoopaBros_Yellow_Idle)
             EVT_CASE_EQ(BLACK_ACTOR)
-                EVT_CALL(ActorSpeak, MSG_CH1_0108, LVar0, 1, ANIM_KoopaBros_Black_Anim14, ANIM_KoopaBros_Black_Idle)
+                EVT_CALL(ActorSpeak, MSG_CH1_0108, LVar0, 1, ANIM_KoopaBros_Black_Talk, ANIM_KoopaBros_Black_Idle)
             EVT_CASE_EQ(RED_ACTOR)
-                EVT_CALL(ActorSpeak, MSG_CH1_0108, LVar0, 1, ANIM_KoopaBros_Red_Anim14, ANIM_KoopaBros_Red_Idle)
+                EVT_CALL(ActorSpeak, MSG_CH1_0108, LVar0, 1, ANIM_KoopaBros_Red_Talk, ANIM_KoopaBros_Red_Idle)
         EVT_END_SWITCH
         EVT_CALL(GetActorVar, BOSS_ACTOR, AVAR_Boss_Flags, LVar0)
         EVT_BITWISE_OR_CONST(LVar0, AFLAG_Boss_Dialogue_SpinAttack)
@@ -3098,10 +3116,10 @@ EvtScript N(EVS_KoopaBros_TakeTurn) = {
     EVT_LABEL(10)
         EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, LVar0)
         EVT_WAIT(1)
-        EVT_IF_NE(LVar0, AVAL_Boss_TowerState_0)
+        EVT_IF_NE(LVar0, AVAL_Boss_TowerState_None)
             EVT_GOTO(10)
         EVT_END_IF
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, AVAL_Boss_TowerState_1)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Boss_TowerState, AVAL_Boss_TowerState_Stable)
     EVT_RETURN
     EVT_END
 };

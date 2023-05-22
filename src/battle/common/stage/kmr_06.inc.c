@@ -2,7 +2,7 @@
 #include "battle/battle.h"
 #include "mapfs/kmr_bt06_shape.h"
 
-#include "battle/common/stage/MovingClouds.inc.c"
+#include "battle/common/stage/lib/MovingClouds.inc.c"
 #include "common/UnkFogFunc.inc.c"
 
 EvtScript N(EVS_PreBattle) = {

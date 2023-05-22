@@ -2,7 +2,7 @@
 #include "battle/battle.h"
 #include "mapfs/kmr_bt05_shape.h"
 
-#include "battle/common/stage/MovingClouds.inc.c"
+#include "battle/common/stage/lib/MovingClouds.inc.c"
 
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)

@@ -350,7 +350,7 @@ EvtScript N(EVS_OnHitTrapTrigger) = {
         EVT_WAIT(20)
         EVT_CALL(SetNpcAnimation, NPC_KoopaBros_01, ANIM_KoopaBros_Yellow_Idle)
         EVT_WAIT(5)
-        EVT_CALL(SpeakToPlayer, NPC_KoopaBros_01, ANIM_KoopaBros_Yellow_Anim14, ANIM_KoopaBros_Yellow_Idle, 5, MSG_CH1_00D7)
+        EVT_CALL(SpeakToPlayer, NPC_KoopaBros_01, ANIM_KoopaBros_Yellow_Talk, ANIM_KoopaBros_Yellow_Idle, 5, MSG_CH1_00D7)
         EVT_THREAD
             EVT_WAIT(10)
             EVT_CALL(SetNpcSpeed, NPC_KoopaBros_01, EVT_FLOAT(2.5))

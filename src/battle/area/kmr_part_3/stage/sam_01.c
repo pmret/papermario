@@ -4,7 +4,7 @@
 
 #define NAMESPACE b_area_kmr_part_3_sam_01
 
-#include "battle/common/stage/sam_Snowflakes.inc.c"
+#include "battle/common/stage/lib/Snowflakes.inc.c"
 
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)

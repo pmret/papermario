@@ -6094,12 +6094,12 @@ KoopaBros:
     - Raster28
     - Raster29
     - Raster2A
-    - Raster2B
-    - Raster2C
-    - Raster2D
-    - Raster2E
-    - Raster2F
-    - Raster30
+    - ThumbsUp1
+    - ThumbsUp2
+    - ThumbsUp3
+    - Hammer1
+    - Hammer2
+    - Blink
   palettes:
     - Black
     - Red
@@ -6120,39 +6120,39 @@ KoopaBros:
     - Burnt
   animations:
     - Still
-    - StillTower
+    - StillCrouch
     - Walk
     - Run
     - Idle
-    - IdleTower
+    - IdleCrouch
     - ShellStill
     - ShellSpin
-    - EnterShell
-    - ExitShell
+    - TopEnterShell
+    - TopExitShell
     - HurtStill
     - Hurt
     - IdleTopple
     - IdleTipping
     - BurnHurt
     - BurnStill
-    - Anim10
-    - Anim11
-    - Anim12
-    - Anim13
-    - Anim14
+    - Leap
+    - Midair
+    - Land
+    - UnusedShell
+    - Talk
     - Sleep
-    - Anim16
+    - UnusedIdleCrouch1
     - StillTopple
     - Dizzy
-    - AltIdleTower
+    - UnusedIdleCrouch2
     - ThumbsUp
     - PointForward
-    - Anim1C
+    - Launched
     - Hammering
-    - Anim1E
-    - AltEnterShell
-    - AltExitShell
-    - AltToppleFromTower
+    - Shock
+    - EnterShell
+    - ExitShell
+    - UnusedTopple
     - DizzyTopple
 Buzzar:
   frames:
