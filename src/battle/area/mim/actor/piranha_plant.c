@@ -283,7 +283,7 @@ EvtScript N(takeTurn_8021DCD4) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_SmallPiranha_Anim04)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_SHADOW, TRUE)
     EVT_WAIT(8)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_FOCUS_ON_ENEMIES)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 20)

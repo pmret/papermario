@@ -3238,7 +3238,7 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
         case 1:
             if (script->functionTemp[3] == 0) {
                 fx_radial_shimmer(2, x1, y1, z1, 1.0f, 30);
-                btl_cam_use_preset_immediately(BTL_CAM_FOCUS_ON_ENEMIES);
+                btl_cam_use_preset_immediately(BTL_CAM_PRESET_19);
                 script->functionTemp[3] = 30;
                 script->functionTemp[0] = 2;
             } else {
@@ -3362,7 +3362,7 @@ ApiStatus BoostDefense(Evt* script, s32 isInitialCall) {
         case 1:
             if (script->functionTemp[3] == 0) {
                 fx_radial_shimmer(2, x1, y1, z1, 1.0f, 30);
-                btl_cam_use_preset_immediately(BTL_CAM_FOCUS_ON_ENEMIES);
+                btl_cam_use_preset_immediately(BTL_CAM_PRESET_19);
                 script->functionTemp[3] = 30;
                 script->functionTemp[0] = 2;
             } else {
@@ -3473,7 +3473,7 @@ ApiStatus VanishActor(Evt* script, s32 isInitialCall) {
         case 1:
             if (script->functionTemp[3] == 0) {
                 fx_radial_shimmer(3, x, y, z, 1.0f, 30);
-                btl_cam_use_preset_immediately(BTL_CAM_FOCUS_ON_ENEMIES);
+                btl_cam_use_preset_immediately(BTL_CAM_PRESET_19);
                 script->functionTemp[3] = 0x1E;
                 script->functionTemp[0] = 2;
             } else {
@@ -3579,7 +3579,7 @@ ApiStatus ElectrifyActor(Evt* script, s32 isInitialCall) {
         case 1:
             if (script->functionTemp[3] == 0) {
                 fx_snaking_static(8, x, y, z, 1.0f, 30);
-                btl_cam_use_preset_immediately(BTL_CAM_FOCUS_ON_ENEMIES);
+                btl_cam_use_preset_immediately(BTL_CAM_PRESET_19);
                 script->functionTemp[3] = 0x1E;
                 script->functionTemp[0] = 2;
             } else {

@@ -652,7 +652,7 @@ EvtScript N(shellToss_KentC) = {
                         EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
                         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Flail)
                     EVT_END_IF
-                    EVT_CALL(UseBattleCamPreset, BTL_CAM_FOCUS_ON_ENEMIES)
+                    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
                     EVT_CALL(SetBattleCamTarget, -25, 60, 0)
                     EVT_CALL(SetBattleCamZoom, 460)
                     EVT_CALL(SetBattleCamOffsetZ, 0)
@@ -677,7 +677,7 @@ EvtScript N(shellToss_KentC) = {
             EVT_END_SWITCH
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_FOCUS_ON_ENEMIES)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
             EVT_CALL(SetBattleCamTarget, -25, 60, 0)
             EVT_CALL(SetBattleCamZoom, 460)
             EVT_CALL(SetBattleCamOffsetZ, 0)
@@ -748,7 +748,7 @@ EvtScript N(shellToss_KentC) = {
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_ELSE
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_FOCUS_ON_ENEMIES)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
             EVT_CALL(SetBattleCamTarget, -45, 60, 0)
             EVT_CALL(SetBattleCamZoom, 460)
             EVT_CALL(SetBattleCamOffsetZ, 0)

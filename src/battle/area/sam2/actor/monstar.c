@@ -349,7 +349,7 @@ EvtScript N(attack) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 1)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_FOCUS_ON_ENEMIES)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetBattleCamTarget, LVar0, LVar1, LVar2)
     EVT_CALL(SetBattleCamZoom, 250)
@@ -377,7 +377,7 @@ EvtScript N(attack) = {
     EVT_END_THREAD
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BIG_POWER_UP)
     EVT_CALL(N(StartRumbleWithParams), 80, 120)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_FOCUS_ON_ENEMIES)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetBattleCamTarget, LVar0, LVar1, LVar2)
     EVT_CALL(SetBattleCamZoom, 100)
@@ -479,7 +479,7 @@ EvtScript N(nextTurn) = {
 
 EvtScript N(takeTurn) = {
     EVT_EXEC_WAIT(N(attack))
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_FOCUS_ON_ENEMIES)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 72)
     EVT_CALL(SetBattleCamTarget, LVar0, LVar1, LVar2)

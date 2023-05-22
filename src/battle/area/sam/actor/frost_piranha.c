@@ -277,7 +277,7 @@ EvtScript N(attack_bite) = {
         EVT_DIV(LVar3, 2)
         EVT_DIV(LVar4, 2)
         EVT_DIV(LVar5, 2)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_FOCUS_ON_ENEMIES)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
         EVT_CALL(SetBattleCamTarget, LVar3, LVar4, LVar5)
         EVT_CALL(SetBattleCamZoom, 300)
         EVT_CALL(SetBattleCamOffsetZ, 40)

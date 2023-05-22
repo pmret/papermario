@@ -1501,9 +1501,9 @@ void btl_cam_use_preset_impl(s32 id) {
             case BTL_CAM_PRESET_06:
                 BattleCam_BoomLength = 300;
                 BattleCam_MoveTimeLeft = 20;
-                preset = &CamPreset_G;
                 BattleCam_ModeY = BTL_CAM_MODEY_1;
                 BattleCam_ModeX = BTL_CAM_MODEX_1;
+                preset = &CamPreset_G;
                 break;
             case BTL_CAM_PRESET_07:
                 BattleCam_BoomLength = 300;
@@ -1513,9 +1513,9 @@ void btl_cam_use_preset_impl(s32 id) {
             case BTL_CAM_PRESET_08:
                 BattleCam_BoomLength = 300;
                 BattleCam_MoveTimeLeft = 20;
-                preset = &CamPreset_I;
                 BattleCam_ModeY = BTL_CAM_MODEY_1;
                 BattleCam_ModeX = BTL_CAM_MODEX_1;
+                preset = &CamPreset_I;
                 break;
             case BTL_CAM_PRESET_09:
                 if (BattleCam_ControlScript != &EVS_BattleCam_Default) {
@@ -1529,62 +1529,61 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_BoomLength = 200;
                 BattleCam_BoomPitch = 8;
                 BattleCam_MoveTimeLeft = 20;
-
                 BattleCam_BoomZOffset = 15;
                 BattleCam_BoomYaw = 0;
-                preset = &CamPreset_F;
                 BattleCam_ModeY = BTL_CAM_MODEY_1;
                 BattleCam_ModeX = BTL_CAM_MODEX_1;
+                preset = &CamPreset_F;
                 break;
             case BTL_CAM_PRESET_11:
                 BattleCam_BoomLength = 300;
                 BattleCam_BoomPitch = 8;
-                preset = &CamPreset_F;
                 BattleCam_MoveTimeLeft = 20;
                 BattleCam_BoomZOffset = 16;
                 BattleCam_BoomYaw = 0;
                 BattleCam_ModeY = BTL_CAM_MODEY_1;
                 BattleCam_ModeX = BTL_CAM_MODEX_1;
+                preset = &CamPreset_F;
                 break;
             case BTL_CAM_PRESET_12:
                 BattleCam_BoomLength = 400;
                 BattleCam_BoomPitch = 8;
                 BattleCam_MoveTimeLeft = 20;
-                preset = &CamPreset_F;
                 BattleCam_BoomZOffset = 30;
                 BattleCam_BoomYaw = 0;
                 BattleCam_ModeY = BTL_CAM_MODEY_1;
                 BattleCam_ModeX = BTL_CAM_MODEX_1;
+                preset = &CamPreset_F;
                 break;
             case BTL_CAM_PRESET_13:
                 BattleCam_BoomLength = 200;
                 BattleCam_BoomPitch = 8;
                 BattleCam_MoveTimeLeft = 20;
-                preset = &CamPreset_I;
                 BattleCam_BoomZOffset = 15;
                 BattleCam_BoomYaw = 0;
                 BattleCam_ModeY = BTL_CAM_MODEY_1;
                 BattleCam_ModeX = BTL_CAM_MODEX_1;
+                preset = &CamPreset_I;
                 break;
             case BTL_CAM_PRESET_14:
                 BattleCam_BoomLength = 300;
                 BattleCam_BoomPitch = 8;
-                preset = &CamPreset_I;
                 BattleCam_MoveTimeLeft = 20;
                 BattleCam_BoomZOffset = 16;
                 BattleCam_BoomYaw = 0;
                 BattleCam_ModeY = BTL_CAM_MODEY_1;
                 BattleCam_ModeX = BTL_CAM_MODEX_1;
+                preset = &CamPreset_I;
                 break;
             case BTL_CAM_PRESET_15:
                 BattleCam_BoomLength = 400;
                 BattleCam_BoomPitch = 8;
                 BattleCam_MoveTimeLeft = 20;
-                preset = &CamPreset_I;
                 BattleCam_BoomZOffset = 30;
                 BattleCam_BoomYaw = 0;
                 BattleCam_ModeY = BTL_CAM_MODEY_1;
                 BattleCam_ModeX = BTL_CAM_MODEX_1;
+                preset = &CamPreset_I;
                 break;
             case BTL_CAM_PRESET_16:
                 BattleCam_BoomLength = 267;
@@ -1606,23 +1605,23 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_BoomLength = 400;
                 BattleCam_BoomPitch = 8;
                 BattleCam_BoomYaw = 0;
-                preset = &CamPreset_H;
                 BattleCam_MoveTimeLeft = 20;
                 BattleCam_BoomZOffset = 0;
+                preset = &CamPreset_H;
                 break;
-            case BTL_CAM_FOCUS_ON_ENEMIES:
+            case BTL_CAM_PRESET_19:
                 BattleCam_MoveTimeLeft = 20;
                 preset = &CamPreset_J;
                 break;
             case BTL_CAM_PRESET_20:
-                preset = &CamPreset_K;
                 BattleCam_MoveTimeLeft = 20;
                 BattleCam_BoomZOffset = 0;
+                preset = &CamPreset_K;
                 break;
             case BTL_CAM_PRESET_21:
-                preset = &CamPreset_L;
                 BattleCam_MoveTimeLeft = 20;
                 BattleCam_BoomZOffset = 0;
+                preset = &CamPreset_L;
                 break;
             case BTL_CAM_PRESET_25:
                 BattleCam_BoomLength = 266;
@@ -1688,9 +1687,9 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_BoomZOffset = 0;
                 BattleCam_ModeY = BTL_CAM_MODEY_1;
                 BattleCam_ModeX = BTL_CAM_MODEX_0;
-                preset = &CamPreset_M;
                 D_8029F2A6 = FALSE;
                 BattleCam_TargetActor = ACTOR_PLAYER;
+                preset = &CamPreset_M;
                 break;
             case BTL_CAM_PRESET_28:
                 BattleCam_BoomLength = 340;
@@ -1722,25 +1721,25 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_BoomPitch = 8;
                 BattleCam_BoomYaw = 0;
                 BattleCam_MoveTimeLeft = 10;
-                preset = &CamPreset_N;
                 BattleCam_BoomZOffset = 10;
                 BattleCam_ModeY = BTL_CAM_MODEY_0;
                 BattleCam_ModeX = BTL_CAM_MODEX_0;
                 BattleCam_PosZ = 0.0f;
                 BattleCam_PosX = -65.0f;
                 BattleCam_PosY = 30.0f;
+                preset = &CamPreset_N;
                 break;
             case BTL_CAM_PLAYER_STATUS_AFFLICTED:
                 BattleCam_BoomLength = 220;
                 BattleCam_BoomPitch = 8;
                 BattleCam_MoveTimeLeft = 30;
-                preset = &CamPreset_I;
                 BattleCam_BoomZOffset = 24;
                 BattleCam_BoomYaw = 0;
                 BattleCam_ModeY = BTL_CAM_MODEY_1;
                 BattleCam_ModeX = BTL_CAM_MODEX_1;
                 D_8029F2A6 = FALSE;
                 BattleCam_TargetActor = ACTOR_PLAYER;
+                preset = &CamPreset_I;
                 break;
             case BTL_CAM_PRESET_34:
                 BattleCam_BoomLength = 280;
@@ -1763,9 +1762,9 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_ModeY = BTL_CAM_MODEY_1;
                 BattleCam_ModeX = BTL_CAM_MODEX_0;
                 BattleCam_UseLinearInterp = TRUE;
-                preset = &CamPreset_M;
                 D_8029F2A6 = FALSE;
                 BattleCam_TargetActor = ACTOR_PLAYER;
+                preset = &CamPreset_M;
                 break;
             case BTL_CAM_PRESET_37:
                 BattleCam_BoomLength = 320;
@@ -1775,9 +1774,9 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_BoomYaw = 0;
                 BattleCam_ModeY = BTL_CAM_MODEY_1;
                 BattleCam_ModeX = BTL_CAM_MODEX_0;
-                preset = &CamPreset_M;
                 D_8029F2A6 = FALSE;
                 BattleCam_TargetActor = ACTOR_PLAYER;
+                preset = &CamPreset_M;
                 break;
             case BTL_CAM_PRESET_36:
                 BattleCam_BoomLength = 300;
@@ -1788,9 +1787,9 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_ModeY = BTL_CAM_MODEY_1;
                 BattleCam_ModeX = BTL_CAM_MODEX_0;
                 BattleCam_UseLinearInterp = TRUE;
-                preset = &CamPreset_M;
                 D_8029F2A6 = FALSE;
                 BattleCam_TargetActor = ACTOR_PLAYER;
+                preset = &CamPreset_M;
                 break;
             case BTL_CAM_PRESET_38:
                 BattleCam_BoomLength = 320;
@@ -1800,9 +1799,9 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_BoomYaw = 0;
                 BattleCam_ModeY = BTL_CAM_MODEY_1;
                 BattleCam_ModeX = BTL_CAM_MODEX_0;
-                preset = &CamPreset_M;
                 D_8029F2A6 = FALSE;
                 BattleCam_TargetActor = ACTOR_PLAYER;
+                preset = &CamPreset_M;
                 break;
             case BTL_CAM_PRESET_39:
                 BattleCam_BoomLength = 320;
@@ -1812,21 +1811,21 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_BoomZOffset = 0;
                 BattleCam_ModeY = BTL_CAM_MODEY_1;
                 BattleCam_ModeX = BTL_CAM_MODEX_0;
-                preset = &CamPreset_M;
                 D_8029F2A6 = FALSE;
                 BattleCam_TargetActor = ACTOR_PLAYER;
+                preset = &CamPreset_M;
                 break;
             case BTL_CAM_PRESET_40:
                 BattleCam_BoomLength = 360;
                 BattleCam_BoomPitch = 8;
                 BattleCam_MoveTimeLeft = 20;
-                preset = &CamPreset_M;
                 BattleCam_BoomZOffset = -4;
                 BattleCam_BoomYaw = 0;
                 BattleCam_ModeY = BTL_CAM_MODEY_1;
                 BattleCam_ModeX = BTL_CAM_MODEX_1;
                 D_8029F2A6 = FALSE;
                 BattleCam_TargetActor = ACTOR_PLAYER;
+                preset = &CamPreset_M;
                 break;
             case BTL_CAM_PRESET_41:
             case BTL_CAM_PRESET_42:
@@ -1868,12 +1867,12 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_BoomYaw = 0;
                 BattleCam_BoomZOffset = 16;
                 BattleCam_TargetActor = ACTOR_PLAYER;
-                preset = &CamPreset_N;
                 BattleCam_ModeY = BTL_CAM_MODEY_0;
                 BattleCam_ModeX = BTL_CAM_MODEX_0;
                 BattleCam_PosZ = 0.0f;
                 BattleCam_PosX = 60.0f;
                 BattleCam_PosY = 40.0f;
+                preset = &CamPreset_N;
                 break;
             case BTL_CAM_PRESET_46:
                 BattleCam_BoomLength = 460;
@@ -1883,10 +1882,10 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_BoomZOffset = 27;
                 BattleCam_TargetActor = ACTOR_PLAYER;
                 BattleCam_ModeY = BTL_CAM_MODEY_0;
-                preset = &CamPreset_N;
                 BattleCam_PosZ = 0.0f;
                 BattleCam_PosX = 60.0f;
                 BattleCam_PosY = 40.0f;
+                preset = &CamPreset_N;
                 break;
             case BTL_CAM_PRESET_70:
                 BattleCam_BoomLength = 390;
@@ -1925,12 +1924,12 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_MoveTimeLeft = 1;
                 BattleCam_BoomYaw = 0;
                 BattleCam_BoomZOffset = 17;
-                preset = &CamPreset_N;
                 BattleCam_ModeY = BTL_CAM_MODEY_0;
                 BattleCam_ModeX = BTL_CAM_MODEX_0;
                 BattleCam_PosX = -75.0f;
                 BattleCam_PosY = 150.0f;
                 BattleCam_PosZ = 0.0f;
+                preset = &CamPreset_N;
                 break;
             case BTL_CAM_PARTNER_APPROACH:
                 BattleCam_BoomLength = 310;
@@ -1938,11 +1937,11 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_MoveTimeLeft = 30;
                 BattleCam_BoomZOffset = 16;
                 BattleCam_BoomYaw = 0;
-                preset = &CamPreset_M;
                 BattleCam_ModeY = BTL_CAM_MODEY_1;
                 BattleCam_ModeX = BTL_CAM_MODEX_1;
                 BattleCam_TargetActor = ACTOR_PARTNER;
                 D_8029F2A6 = FALSE;
+                preset = &CamPreset_M;
                 break;
             case BTL_CAM_PRESET_48:
                 BattleCam_BoomLength = 250;
@@ -1952,10 +1951,10 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_ModeY = BTL_CAM_MODEY_1;
                 BattleCam_ModeX = BTL_CAM_MODEX_1;
                 BattleCam_UseLinearInterp = TRUE;
-                preset = &CamPreset_M;
                 BattleCam_BoomYaw = 0;
                 D_8029F2A6 = FALSE;
                 BattleCam_TargetActor = ACTOR_PARTNER;
+                preset = &CamPreset_M;
                 break;
             case BTL_CAM_PRESET_49:
                 BattleCam_BoomLength = 300;
@@ -1965,10 +1964,10 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_ModeY = BTL_CAM_MODEY_1;
                 BattleCam_ModeX = BTL_CAM_MODEX_1;
                 BattleCam_UseLinearInterp = TRUE;
-                preset = &CamPreset_I;
                 BattleCam_BoomYaw = 0;
                 D_8029F2A6 = FALSE;
                 BattleCam_TargetActor = ACTOR_PARTNER;
+                preset = &CamPreset_I;
                 break;
             case BTL_CAM_PRESET_50:
                 BattleCam_BoomLength = 320;
@@ -1978,9 +1977,9 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_BoomYaw = 0;
                 BattleCam_BoomZOffset = 0;
                 BattleCam_ModeX = BTL_CAM_MODEX_0;
-                preset = &CamPreset_M;
                 BattleCam_TargetActor = ACTOR_PARTNER;
                 D_8029F2A6 = FALSE;
+                preset = &CamPreset_M;
                 break;
             case BTL_CAM_PRESET_29:
             case BTL_CAM_PRESET_51:
@@ -1997,9 +1996,9 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_ModeY = BTL_CAM_MODEY_1;
                 BattleCam_BoomYaw = 0;
                 BattleCam_ModeX = BTL_CAM_MODEX_0;
-                preset = &CamPreset_M;
                 D_8029F2A6 = FALSE;
                 BattleCam_TargetActor = ACTOR_PARTNER;
+                preset = &CamPreset_M;
                 break;
             case BTL_CAM_PRESET_53:
                 BattleCam_BoomLength = 380;
@@ -2010,9 +2009,9 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_BoomYaw = 0;
                 BattleCam_BoomZOffset = 0;
                 BattleCam_ModeX = BTL_CAM_MODEX_0;
-                preset = &CamPreset_M;
                 D_8029F2A6 = FALSE;
                 BattleCam_TargetActor = ACTOR_PARTNER;
+                preset = &CamPreset_M;
                 break;
             case BTL_CAM_PARTNER_INJURED:
                 BattleCam_BoomLength = 220;
@@ -2021,16 +2020,15 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_BoomZOffset = 24;
                 BattleCam_ModeY = BTL_CAM_MODEY_1;
                 BattleCam_ModeX = BTL_CAM_MODEX_1;
-                preset = &CamPreset_I;
                 BattleCam_BoomYaw = 0;
                 D_8029F2A6 = FALSE;
                 BattleCam_TargetActor = ACTOR_PARTNER;
+                preset = &CamPreset_I;
                 break;
             case BTL_CAM_PRESET_55:
                 BattleCam_BoomLength = 210;
                 BattleCam_BoomPitch = 8;
                 BattleCam_MoveTimeLeft = 20;
-                preset = &CamPreset_N;
                 BattleCam_BoomYaw = 0;
                 BattleCam_BoomZOffset = 10;
                 BattleCam_ModeY = BTL_CAM_MODEY_0;
@@ -2038,6 +2036,7 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_PosZ = 0.0f;
                 BattleCam_PosX = -95.0f;
                 BattleCam_PosY = 22.0f;
+                preset = &CamPreset_N;
                 break;
             case BTL_CAM_PRESET_56:
                 BattleCam_BoomLength = 320;
@@ -2065,7 +2064,6 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_BoomLength = 400;
                 BattleCam_BoomPitch = 8;
                 BattleCam_MoveTimeLeft = 30;
-                preset = &CamPreset_N;
                 BattleCam_BoomYaw = 0;
                 BattleCam_BoomZOffset = 10;
                 BattleCam_ModeY = BTL_CAM_MODEY_0;
@@ -2073,6 +2071,7 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_PosZ = 0.0f;
                 BattleCam_PosX = 25.0f;
                 BattleCam_PosY = 60.0f;
+                preset = &CamPreset_N;
                 break;
             case BTL_CAM_PRESET_59:
                 BattleCam_BoomLength = 200;
@@ -2082,10 +2081,10 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_ModeY = BTL_CAM_MODEY_1;
                 BattleCam_ModeX = BTL_CAM_MODEX_1;
                 BattleCam_UseLinearInterp = TRUE;
-                preset = &CamPreset_I;
                 BattleCam_BoomYaw = 0;
                 BattleCam_TargetActor = ACTOR_PARTNER;
                 D_8029F2A6 = FALSE;
+                preset = &CamPreset_I;
                 break;
             case BTL_CAM_PRESET_60:
                 BattleCam_BoomLength = 300;
@@ -2115,11 +2114,11 @@ void btl_cam_use_preset_impl(s32 id) {
                 BattleCam_BoomLength = 400;
                 BattleCam_BoomPitch = 8;
                 BattleCam_MoveTimeLeft = 20;
-                preset = &CamPreset_F;
                 BattleCam_BoomZOffset = 27;
                 BattleCam_BoomYaw = 0;
                 BattleCam_ModeY = BTL_CAM_MODEY_1;
                 BattleCam_ModeX = BTL_CAM_MODEX_1;
+                preset = &CamPreset_F;
                 break;
             case BTL_CAM_PRESET_64:
                 BattleCam_BoomLength = 358;
@@ -2149,22 +2148,22 @@ void btl_cam_use_preset_impl(s32 id) {
             case BTL_CAM_PRESET_67:
                 BattleCam_BoomLength = 214;
                 BattleCam_BoomPitch = 8;
-                preset = &CamPreset_F;
                 BattleCam_MoveTimeLeft = 20;
                 BattleCam_BoomZOffset = 16;
                 BattleCam_BoomYaw = 0;
                 BattleCam_ModeY = BTL_CAM_MODEY_1;
                 BattleCam_ModeX = BTL_CAM_MODEX_1;
+                preset = &CamPreset_F;
                 break;
             case BTL_CAM_PRESET_68:
                 BattleCam_BoomLength = 300;
                 BattleCam_BoomPitch = 8;
-                preset = &CamPreset_F;
                 BattleCam_MoveTimeLeft = 4;
                 BattleCam_BoomZOffset = 16;
                 BattleCam_BoomYaw = 0;
                 BattleCam_ModeY = BTL_CAM_MODEY_1;
                 BattleCam_ModeX = BTL_CAM_MODEX_1;
+                preset = &CamPreset_F;
                 break;
         }
 

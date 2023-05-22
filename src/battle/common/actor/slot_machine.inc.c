@@ -295,7 +295,7 @@ EvtScript N(idle) = {
 #if !VERSION_PAL
                 EVT_CALL(FreezeBattleState, TRUE)
 #endif
-                EVT_CALL(UseBattleCamPreset, BTL_CAM_FOCUS_ON_ENEMIES)
+                EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
                 EVT_CALL(SetBattleCamTarget, 0, 100, 0)
                 EVT_CALL(SetBattleCamOffsetZ, 0)
                 EVT_CALL(SetBattleCamZoom, 340)

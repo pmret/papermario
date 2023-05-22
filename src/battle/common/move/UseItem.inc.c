@@ -44,7 +44,7 @@ EvtScript N(UseItemWithEffect) = {
 };
 
 EvtScript N(UseItem) = {
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_FOCUS_ON_ENEMIES)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
     EVT_CALL(SetBattleCamTarget, -85, 1, 0)
     EVT_CALL(SetBattleCamOffsetZ, 41)
     EVT_CALL(SetBattleCamZoom, 248)

@@ -1556,7 +1556,7 @@ EvtScript N(AttackIcyBreathWithClones) = {
     EVT_BITWISE_OR_CONST(LVar0, N(FLAG_NOT_IDLE))
     EVT_CALL(SetActorVar, ACTOR_ENEMY0, N(VAR_FLAGS), LVar0)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_FOCUS_ON_ENEMIES)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
     EVT_CALL(SetBattleCamZoom, 350)
     EVT_CALL(SetBattleCamOffsetZ, 35)
     EVT_CALL(GetActorFlags, ACTOR_SELF, LVar0)
@@ -1995,7 +1995,7 @@ EvtScript N(Heal) = {
         EVT_CALL(UseIdleAnimation, LVarB, FALSE)
         EVT_CALL(EnableIdleScript, LVarB, 0)
     EVT_END_IF
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_FOCUS_ON_ENEMIES)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
     EVT_CALL(SetBattleCamZoom, 350)
     EVT_CALL(SetBattleCamOffsetZ, 50)
     EVT_CALL(GetActorFlags, ACTOR_SELF, LVar0)
