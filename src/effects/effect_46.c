@@ -89,9 +89,9 @@ EffectInstance* effect_46_main(s32 type, PlayerStatus* player, f32 scale, s32 du
                 part->pos.x = 0;
                 part->pos.y = player->colliderHeight * 0.5;
                 part->pos.z = 0;
-                part->rotVel.x = func_E0200000(1) * 8 - 4;
+                part->rotVel.x = effect_rand_int(1) * 8 - 4;
                 part->rotVel.y = 0;
-                part->rotVel.z = func_E0200000(1) * 8 - 4;
+                part->rotVel.z = effect_rand_int(1) * 8 - 4;
                 part->rot.x = i * 25;
                 part->rot.y = (i - 1) * 360 / (numParts - 1);
                 part->rot.z = 360 - i * 38;

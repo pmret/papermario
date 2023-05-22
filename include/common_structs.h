@@ -1455,7 +1455,7 @@ typedef struct GameStatus {
     /* 0x128 */ Vec3f playerGroundTraceNormal;
     /* 0x134 */ u16 frameCounter;
     /* 0x136 */ char unk_136[2];
-    /* 0x138 */ s32 nextRNG;
+    /* 0x138 */ u32 nextRNG;
     /* 0x13C */ s16 unk_13C;
     /* 0x13E */ char unk_13E[2];
     /* 0x140 */ ShopItemEntity* shopItemEntities;
