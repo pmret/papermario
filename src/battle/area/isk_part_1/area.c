@@ -182,18 +182,18 @@ BattleList N(Formations) = {
 };
 
 StageList N(Stages) = {
-    { "isk_00",  &N(isk_00) },
-    { "isk_01",  &N(isk_01) },
-    { "isk_02",  &N(isk_02) },
+    STAGE("isk_00", N(isk_00)),
+    STAGE("isk_01", N(isk_01)),
+    STAGE("isk_02", N(isk_02)),
     STAGE("isk_02b", N(isk_02b)),
     STAGE("isk_02c", N(isk_02c)),
-    { "isk_03",  &N(isk_03) },
+    STAGE("isk_03", N(isk_03)),
     STAGE("isk_03b", N(isk_03b)),
-    { "isk_04",  &N(isk_04) },
-    { "isk_05",  &N(isk_05) },
-    { "isk_06",  &N(isk_06) },
+    STAGE("isk_04", N(isk_04)),
+    STAGE("isk_05", N(isk_05)),
+    STAGE("isk_06", N(isk_06)),
     STAGE("isk_06b", N(isk_06b)),
-    { "isk_07",  &N(isk_07) },
-    { "isk_08",  &N(isk_08) },
+    STAGE("isk_07", N(isk_07)),
+    STAGE("isk_08", N(isk_08)),
     {},
 };

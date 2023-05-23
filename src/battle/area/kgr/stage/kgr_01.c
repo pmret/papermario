@@ -4,7 +4,7 @@
 
 #define NAMESPACE b_area_kgr_kgr_01
 
-#include "battle/common/stage/WaterEffects.inc.c"
+#include "battle/common/stage/lib/WaterEffects.inc.c"
 
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)

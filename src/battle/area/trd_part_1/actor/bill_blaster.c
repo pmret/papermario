@@ -7,9 +7,10 @@ extern EvtScript N(EVS_Init);
 extern EvtScript N(EVS_Idle);
 extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_HandleEvent);
-extern s32 N(DefaultAnims)[];
 extern EvtScript N(EVS_Move_FireBullet);
 extern EvtScript N(EVS_Move_CheckForBullet);
+extern s32 N(DefaultAnims)[];
+
 extern ActorBlueprint A(bullet_bill);
 extern Formation N(BulletBillSummon);
 
@@ -62,7 +63,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .opacity = 255,
         .idleAnimations = N(DefaultAnims),
         .defenseTable = N(DefenseTable),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -9 },
     },
@@ -74,7 +75,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .opacity = 255,
         .idleAnimations = N(DefaultAnims),
         .defenseTable = N(DefenseTable),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -9 },
     },
@@ -104,10 +105,10 @@ ActorBlueprint NAMESPACE = {
 };
 
 s32 N(DefaultAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_BillBlaster_Anim01,
-    STATUS_KEY_STONE,     ANIM_BillBlaster_Anim00,
-    STATUS_KEY_STOP,      ANIM_BillBlaster_Anim00,
-    STATUS_KEY_PARALYZE,  ANIM_BillBlaster_Anim00,
+    STATUS_KEY_NORMAL,    ANIM_BillBlaster_Idle,
+    STATUS_KEY_STONE,     ANIM_BillBlaster_Still,
+    STATUS_KEY_STOP,      ANIM_BillBlaster_Still,
+    STATUS_KEY_PARALYZE,  ANIM_BillBlaster_Still,
     STATUS_END,
 };
 
@@ -133,50 +134,50 @@ EvtScript N(EVS_HandleEvent) = {
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Anim03)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Anim03)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Hurt)
             EVT_SET_CONST(LVar2, -1)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Anim03)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Hurt)
             EVT_SET_CONST(LVar2, -1)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Anim03)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Anim01)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Anim03)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Anim03)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Anim01)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_Recover)
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Anim03)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_AirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Anim03)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_BlowAway)
             EVT_RETURN
         EVT_CASE_DEFAULT
@@ -211,7 +212,7 @@ API_CALLABLE(N(SetBulletInitVars)) {
 }
 
 EvtScript N(EVS_Move_FireBullet) = {
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BillBlaster_Anim02)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BillBlaster_Fire)
     EVT_WAIT(13)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(1.0))

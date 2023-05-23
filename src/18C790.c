@@ -364,7 +364,7 @@ EvtScript EVS_ShowStarpoints = {
         EVT_CALL(CreateVirtualEntity, LVar6, EVT_PTR(EMS_starpoint_starpoints))
         EVT_CALL(SetVirtualEntityPosition, LVar6, -278, 68, 70)
         EVT_CALL(SetVirtualEntityScale, LVar6, EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(0.5))
-        EVT_SET(LocalFlag(0), 1)
+        EVT_SET(LFlag0, TRUE)
     EVT_END_IF
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(99)

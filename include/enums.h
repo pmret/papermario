@@ -1195,7 +1195,7 @@ enum SoundIDs {
     SOUND_3B2                       = 0x000003B2,
     SOUND_3B3                       = 0x000003B3,
     SOUND_3B4                       = 0x000003B4,
-    SOUND_3B5                       = 0x000003B5,
+    SOUND_FAKE_BOWSER_BLAST         = 0x000003B5, // large blasting sound when the fake bowser robot is destroyed
     SOUND_3B6                       = 0x000003B6,
     SOUND_3B7                       = 0x000003B7,
     SOUND_3B9                       = 0x000003B9,
@@ -3275,11 +3275,12 @@ enum PeachDisguises {
 
 // Requires decimals
 enum NpcIDs {
-    NPC_SELF         = -1,
-    NPC_PLAYER       = -2,
-    NPC_PARTNER      = -4,
-    NPC_BTL_MERLEE   = -10,
-    NPC_BTL_SPIRIT   = 100,
+    NPC_SELF            = -1,
+    NPC_PLAYER          = -2,
+    NPC_PARTNER         = -4,
+    NPC_BTL_MERLEE      = -10,
+    NPC_BTL_COMPANION   = 0, // used for Peach in intro Bowser fight and Kolorado in Lava Piranha fight
+    NPC_BTL_SPIRIT      = 100,
 };
 
 enum EntityTypes {
@@ -4035,7 +4036,7 @@ enum ActorPartFlags {
 };
 
 enum ActorEventFlags {
-    ACTOR_EVENT_FLAG_0                      = 0x00000000,
+    ACTOR_EVENT_FLAGS_NONE                  = 0x00000000,
     ACTOR_EVENT_FLAG_1                      = 0x00000001,
     ACTOR_EVENT_FLAG_FIREY                  = 0x00000002, ///< Player takes burn damage upon contact.
     ACTOR_EVENT_FLAG_4                      = 0x00000004,
@@ -5100,12 +5101,13 @@ enum BattleMenuTypes {
 };
 
 enum BattleMenuDisableFlags {
-    BTL_MENU_DISABLED_JUMP          = 1 << BTL_MENU_TYPE_JUMP,
-    BTL_MENU_DISABLED_SMASH         = 1 << BTL_MENU_TYPE_SMASH,
-    BTL_MENU_DISABLED_ITEMS         = 1 << BTL_MENU_TYPE_ITEMS,
-    BTL_MENU_DISABLED_STRATEGIES    = 1 << BTL_MENU_TYPE_STRATEGIES,
-    BTL_MENU_DISABLED_STAR_POWERS   = 1 << BTL_MENU_TYPE_STAR_POWERS,
-    BTL_MENU_DISABLED_PARTNER_FOCUS = 1 << BTL_MENU_TYPE_PARTNER_FOCUS,
+    BTL_MENU_ENABLED_JUMP           = 1 << BTL_MENU_TYPE_JUMP,
+    BTL_MENU_ENABLED_SMASH          = 1 << BTL_MENU_TYPE_SMASH,
+    BTL_MENU_ENABLED_ITEMS          = 1 << BTL_MENU_TYPE_ITEMS,
+    BTL_MENU_ENABLED_ABILITIES      = 1 << BTL_MENU_TYPE_ABILITY,
+    BTL_MENU_ENABLED_STRATEGIES     = 1 << BTL_MENU_TYPE_STRATEGIES,
+    BTL_MENU_ENABLED_STAR_POWERS    = 1 << BTL_MENU_TYPE_STAR_POWERS,
+    BTL_MENU_ENABLED_PARTNER_FOCUS  = 1 << BTL_MENU_TYPE_PARTNER_FOCUS,
 };
 
 enum DebugEnemyContactModes {

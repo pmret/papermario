@@ -59,18 +59,18 @@ EvtScript N(EVS_OnReadBillboard) = {
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_Sign_BewareOfGoombas, 160, 40)
     EVT_RESUME_GROUP(EVT_GROUP_01)
-    EVT_SET(LocalFlag(0), FALSE)
+    EVT_SET(LFlag0, FALSE)
     EVT_CALL(N(GetAmbushEnemy))
     EVT_IF_NE(LVar0, NULL)
         EVT_CALL(GetNpcVar, NPC_Goomba_Ambush, 0, LVar0)
         EVT_IF_EQ(LVar0, 0)
             EVT_CALL(SetNpcVar, NPC_Goomba_Ambush, 0, 1)
-            EVT_SET(LocalFlag(0), TRUE)
+            EVT_SET(LFlag0, TRUE)
             EVT_WAIT(10)
         EVT_END_IF
     EVT_END_IF
     EVT_CALL(DisablePlayerInput, FALSE)
-    EVT_IF_EQ(LocalFlag(0), TRUE)
+    EVT_IF_EQ(LFlag0, TRUE)
         EVT_UNBIND
     EVT_END_IF
     EVT_END

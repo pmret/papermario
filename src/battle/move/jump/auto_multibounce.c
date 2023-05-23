@@ -33,16 +33,16 @@ EvtScript N(EVS_UseMove_ImplA) = {
         EVT_EXEC_WAIT(N(EVS_JumpSupport_Miss))
         EVT_RETURN
     EVT_END_IF
-    EVT_SET(LocalFlag(0), FALSE)
+    EVT_SET(LFlag0, FALSE)
     EVT_CALL(GetTargetListLength, LVar0)
     EVT_IF_EQ(LVar0, 1)
-        EVT_SET(LocalFlag(0), TRUE)
+        EVT_SET(LFlag0, TRUE)
     EVT_END_IF
     EVT_WAIT(1)
     EVT_CALL(DidActionSucceed, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
-            EVT_IF_EQ(LocalFlag(0), FALSE)
+            EVT_IF_EQ(LFlag0, FALSE)
                 EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_15A, SOUND_0)
                 EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_MULTI_BOUNCE | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, 1, 112)
             EVT_ELSE
@@ -57,7 +57,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_IF_EQ(LocalFlag(0), TRUE)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
                 EVT_RETURN
             EVT_END_IF
@@ -66,7 +66,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(HIT_RESULT_1)
         EVT_CASE_OR_EQ(HIT_RESULT_3)
-            EVT_IF_EQ(LocalFlag(0), TRUE)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
                 EVT_RETURN
             EVT_END_IF
@@ -74,18 +74,18 @@ EvtScript N(EVS_UseMove_ImplA) = {
     EVT_END_SWITCH
     EVT_CALL(func_80269524, LVarE)
     EVT_ADD(LVarF, 1)
-    EVT_SET(LocalFlag(0), FALSE)
+    EVT_SET(LFlag0, FALSE)
     EVT_LABEL(10)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_40)
     EVT_CALL(GetTargetListLength, LVar0)
     EVT_SUB(LVar0, 1)
     EVT_IF_EQ(LVarF, LVar0)
-        EVT_SET(LocalFlag(0), TRUE)
+        EVT_SET(LFlag0, TRUE)
     EVT_END_IF
     EVT_CALL(CloseActionCommandInfo)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
     EVT_CALL(action_command_jump_init)
-    EVT_IF_EQ(LocalFlag(0), TRUE)
+    EVT_IF_EQ(LFlag0, TRUE)
         EVT_CALL(ShowActionHud, FALSE)
     EVT_END_IF
     EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
@@ -109,7 +109,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
     EVT_CALL(DidActionSucceed, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
-            EVT_IF_EQ(LocalFlag(0), FALSE)
+            EVT_IF_EQ(LFlag0, FALSE)
                 EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_15A, SOUND_0)
                 EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_MULTI_BOUNCE | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, 1, 112)
             EVT_ELSE
@@ -117,7 +117,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
                 EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_MULTI_BOUNCE | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, 1, 240)
             EVT_END_IF
         EVT_CASE_DEFAULT
-            EVT_IF_EQ(LocalFlag(0), FALSE)
+            EVT_IF_EQ(LFlag0, FALSE)
                 EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_15A, SOUND_0)
                 EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_MULTI_BOUNCE | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, 1, 48)
             EVT_ELSE
@@ -142,7 +142,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(FALSE)
         EVT_CASE_OR_EQ(2)
-            EVT_IF_EQ(LocalFlag(0), TRUE)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
                 EVT_RETURN
             EVT_END_IF
@@ -151,7 +151,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(TRUE)
         EVT_CASE_OR_EQ(3)
-            EVT_IF_EQ(LocalFlag(0), TRUE)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
                 EVT_RETURN
             EVT_END_IF
@@ -175,16 +175,16 @@ EvtScript N(EVS_UseMove_ImplB) = {
         EVT_EXEC_WAIT(N(EVS_JumpSupport_Miss))
         EVT_RETURN
     EVT_END_IF
-    EVT_SET(LocalFlag(0), FALSE)
+    EVT_SET(LFlag0, FALSE)
     EVT_CALL(GetTargetListLength, LVar0)
     EVT_IF_EQ(LVar0, 1)
-        EVT_SET(LocalFlag(0), TRUE)
+        EVT_SET(LFlag0, TRUE)
     EVT_END_IF
     EVT_WAIT(1)
     EVT_CALL(DidActionSucceed, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
-            EVT_IF_EQ(LocalFlag(0), FALSE)
+            EVT_IF_EQ(LFlag0, FALSE)
                 EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_15B, SOUND_0)
                 EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_MULTI_BOUNCE | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, 2, 112)
             EVT_ELSE
@@ -199,7 +199,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_IF_EQ(LocalFlag(0), TRUE)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
                 EVT_RETURN
             EVT_END_IF
@@ -208,26 +208,26 @@ EvtScript N(EVS_UseMove_ImplB) = {
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(HIT_RESULT_1)
         EVT_CASE_OR_EQ(HIT_RESULT_3)
-            EVT_IF_EQ(LocalFlag(0), TRUE)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
                 EVT_RETURN
             EVT_END_IF
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(func_80269524, LVarE)
-    EVT_SET(LocalFlag(0), FALSE)
+    EVT_SET(LFlag0, FALSE)
     EVT_SET(LVarF, 0)
     EVT_ADD(LVarF, 1)
     EVT_LABEL(10)
     EVT_CALL(GetTargetListLength, LVar0)
     EVT_SUB(LVar0, 1)
     EVT_IF_EQ(LVarF, LVar0)
-        EVT_SET(LocalFlag(0), TRUE)
+        EVT_SET(LFlag0, TRUE)
     EVT_END_IF
     EVT_CALL(CloseActionCommandInfo)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
     EVT_CALL(action_command_jump_init)
-    EVT_IF_EQ(LocalFlag(0), TRUE)
+    EVT_IF_EQ(LFlag0, TRUE)
         EVT_CALL(ShowActionHud, FALSE)
     EVT_END_IF
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_40)
@@ -256,7 +256,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
     EVT_CALL(DidActionSucceed, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
-            EVT_IF_EQ(LocalFlag(0), FALSE)
+            EVT_IF_EQ(LFlag0, FALSE)
                 EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_15B, SOUND_0)
                 EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_MULTI_BOUNCE | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, 2, 112)
             EVT_ELSE
@@ -264,7 +264,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
                 EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_MULTI_BOUNCE | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, 2, 240)
             EVT_END_IF
         EVT_CASE_DEFAULT
-            EVT_IF_EQ(LocalFlag(0), FALSE)
+            EVT_IF_EQ(LFlag0, FALSE)
                 EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_15B, SOUND_0)
                 EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_MULTI_BOUNCE | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, 2, 48)
             EVT_ELSE
@@ -289,7 +289,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(FALSE)
         EVT_CASE_OR_EQ(2)
-            EVT_IF_EQ(LocalFlag(0), TRUE)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
                 EVT_RETURN
             EVT_END_IF
@@ -298,7 +298,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(TRUE)
         EVT_CASE_OR_EQ(3)
-            EVT_IF_EQ(LocalFlag(0), TRUE)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
                 EVT_RETURN
             EVT_END_IF
@@ -322,16 +322,16 @@ EvtScript N(EVS_UseMove_ImplC) = {
         EVT_EXEC_WAIT(N(EVS_JumpSupport_Miss))
         EVT_RETURN
     EVT_END_IF
-    EVT_SET(LocalFlag(0), FALSE)
+    EVT_SET(LFlag0, FALSE)
     EVT_CALL(GetTargetListLength, LVar0)
     EVT_IF_EQ(LVar0, 1)
-        EVT_SET(LocalFlag(0), TRUE)
+        EVT_SET(LFlag0, TRUE)
     EVT_END_IF
     EVT_WAIT(1)
     EVT_CALL(DidActionSucceed, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
-            EVT_IF_EQ(LocalFlag(0), FALSE)
+            EVT_IF_EQ(LFlag0, FALSE)
                 EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_15C, SOUND_0)
                 EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_MULTI_BOUNCE | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, 3, 112)
             EVT_ELSE
@@ -346,7 +346,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_IF_EQ(LocalFlag(0), TRUE)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
                 EVT_RETURN
             EVT_END_IF
@@ -355,26 +355,26 @@ EvtScript N(EVS_UseMove_ImplC) = {
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(HIT_RESULT_1)
         EVT_CASE_OR_EQ(HIT_RESULT_3)
-            EVT_IF_EQ(LocalFlag(0), TRUE)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
                 EVT_RETURN
             EVT_END_IF
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(func_80269524, LVarE)
-    EVT_SET(LocalFlag(0), FALSE)
+    EVT_SET(LFlag0, FALSE)
     EVT_SET(LVarF, 0)
     EVT_ADD(LVarF, 1)
     EVT_LABEL(20)
     EVT_CALL(GetTargetListLength, LVar0)
     EVT_SUB(LVar0, 1)
     EVT_IF_EQ(LVarF, LVar0)
-        EVT_SET(LocalFlag(0), TRUE)
+        EVT_SET(LFlag0, TRUE)
     EVT_END_IF
     EVT_CALL(CloseActionCommandInfo)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_JUMP)
     EVT_CALL(action_command_jump_init)
-    EVT_IF_EQ(LocalFlag(0), TRUE)
+    EVT_IF_EQ(LFlag0, TRUE)
         EVT_CALL(ShowActionHud, FALSE)
     EVT_END_IF
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_40)
@@ -396,7 +396,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
     EVT_CALL(DidActionSucceed, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
-            EVT_IF_EQ(LocalFlag(0), FALSE)
+            EVT_IF_EQ(LFlag0, FALSE)
                 EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_15C, SOUND_0)
                 EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_MULTI_BOUNCE | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, 3, 112)
             EVT_ELSE
@@ -404,7 +404,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
                 EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_MULTI_BOUNCE | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, 3, 240)
             EVT_END_IF
         EVT_CASE_DEFAULT
-            EVT_IF_EQ(LocalFlag(0), FALSE)
+            EVT_IF_EQ(LFlag0, FALSE)
                 EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_15C, SOUND_0)
                 EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_MULTI_BOUNCE | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, 3, 48)
             EVT_ELSE
@@ -429,7 +429,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(FALSE)
         EVT_CASE_OR_EQ(2)
-            EVT_IF_EQ(LocalFlag(0), TRUE)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
                 EVT_RETURN
             EVT_END_IF
@@ -438,7 +438,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(TRUE)
         EVT_CASE_OR_EQ(3)
-            EVT_IF_EQ(LocalFlag(0), TRUE)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
                 EVT_RETURN
             EVT_END_IF

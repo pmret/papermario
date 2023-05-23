@@ -158,6 +158,25 @@
 #define LVarE LocalVar(14)
 #define LVarF LocalVar(15)
 
+// shorthand names for common LocalFlags
+// these actually run all the way up to LocalFlag(96), but nothing past 15 is ever used
+#define LFlag0 LocalFlag(0)
+#define LFlag1 LocalFlag(1)
+#define LFlag2 LocalFlag(2)
+#define LFlag3 LocalFlag(3)
+#define LFlag4 LocalFlag(4)
+#define LFlag5 LocalFlag(5)
+#define LFlag6 LocalFlag(6)
+#define LFlag7 LocalFlag(7)
+#define LFlag8 LocalFlag(8)
+#define LFlag9 LocalFlag(9)
+#define LFlagA LocalFlag(10)
+#define LFlagB LocalFlag(11)
+#define LFlagC LocalFlag(12)
+#define LFlagD LocalFlag(13)
+#define LFlagE LocalFlag(14)
+#define LFlagF LocalFlag(15)
+
 /****** INSTRUCTIONS **************************************************************************************************/
 
 /// On each frame, the EVT manager will continue executing commands in all threads until a blocking command is

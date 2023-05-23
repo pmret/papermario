@@ -838,10 +838,10 @@ EvtScript N(findPlaceForSummon) = {
     EVT_IF_NE(LVar0, 0)
         EVT_RETURN
     EVT_END_IF
-    EVT_SET(LocalFlag(1), 0)
-    EVT_SET(LocalFlag(2), 0)
-    EVT_SET(LocalFlag(3), 0)
-    EVT_SET(LocalFlag(4), 0)
+    EVT_SET(LFlag1, FALSE)
+    EVT_SET(LFlag2, FALSE)
+    EVT_SET(LFlag3, FALSE)
+    EVT_SET(LFlag4, FALSE)
     EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
@@ -850,13 +850,13 @@ EvtScript N(findPlaceForSummon) = {
     EVT_MOD(LVar5, 4)
     EVT_SWITCH(LVar5)
         EVT_CASE_EQ(0)
-            EVT_SET(LocalFlag(1), 1)
+            EVT_SET(LFlag1, TRUE)
         EVT_CASE_EQ(1)
-            EVT_SET(LocalFlag(2), 1)
+            EVT_SET(LFlag2, TRUE)
         EVT_CASE_EQ(2)
-            EVT_SET(LocalFlag(3), 1)
+            EVT_SET(LFlag3, TRUE)
         EVT_CASE_EQ(3)
-            EVT_SET(LocalFlag(4), 1)
+            EVT_SET(LFlag4, TRUE)
     EVT_END_SWITCH
     EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
     EVT_IF_NE(LVar0, -1)
@@ -867,15 +867,15 @@ EvtScript N(findPlaceForSummon) = {
         EVT_CASE_EQ(0)
             EVT_RETURN
         EVT_CASE_EQ(1)
-            EVT_IF_EQ(LocalFlag(1), 0)
+            EVT_IF_EQ(LFlag1, FALSE)
                 EVT_SET(LVarE, 0)
             EVT_END_IF
         EVT_CASE_EQ(2)
-            EVT_IF_EQ(LocalFlag(2), 0)
+            EVT_IF_EQ(LFlag2, FALSE)
                 EVT_SET(LVarE, 1)
             EVT_END_IF
         EVT_CASE_EQ(3)
-            EVT_IF_EQ(LocalFlag(3), 0)
+            EVT_IF_EQ(LFlag3, FALSE)
                 EVT_SET(LVarE, 2)
             EVT_END_IF
     EVT_END_SWITCH

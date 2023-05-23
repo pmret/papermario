@@ -18,8 +18,8 @@
 
 #define NO_DROPS { \
     .dropFlags = NPC_DROP_FLAG_80, \
-    .heartDrops  = { { F16(100), F16(0), 0, F16(0) }, }, \
-    .flowerDrops = { { F16(100), F16(0), 0, F16(0) }, }, \
+    .heartDrops  = { { F16(100), F16(0), 0, F16(0) } }, \
+    .flowerDrops = { { F16(100), F16(0), 0, F16(0) } }, \
 }
 
 #define STANDARD_HEART_DROPS(attempts) { \

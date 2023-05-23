@@ -67,7 +67,7 @@ ActorPartBlueprint N(ActorParts_8022193C)[] = {
         .opacity = 255,
         .idleAnimations = N(IdleAnimations_80221830),
         .defenseTable = N(DefenseTable_8022187C),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -10 },
     },

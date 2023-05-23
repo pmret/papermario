@@ -1724,7 +1724,7 @@ EvtScript EVS_Enemy_DeathWithoutRemove = {
         EVT_CASE_OR_EQ(DMG_SRC_SPIN_SMASH)
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
-            EVT_SET(LocalFlag(0), 0)
+            EVT_SET(LFlag0, FALSE)
             EVT_CALL(GetOriginalActorType, ACTOR_SELF, LVar1)
             EVT_SWITCH(LVar1)
                 EVT_CASE_OR_EQ(ACTOR_TYPE_BOB_OMB)
@@ -2077,56 +2077,56 @@ EvtScript EVS_Enemy_BlowAway = {
     EVT_IF_NOT_FLAG(LVar5, STATUS_FLAGS_IMMOBILIZED)
         EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
     EVT_ELSE
-        EVT_SET(LocalFlag(0), 0)
+        EVT_SET(LFlag0, FALSE)
         EVT_IF_FLAG(LVar2, STATUS_FLAG_SLEEP)
             EVT_IF_FLAG(LVar5, STATUS_FLAG_SLEEP)
-                EVT_SET(LocalFlag(0), 1)
+                EVT_SET(LFlag0, TRUE)
             EVT_END_IF
         EVT_END_IF
         EVT_IF_FLAG(LVar2, STATUS_FLAG_STATIC)
             EVT_IF_FLAG(LVar5, STATUS_FLAG_STATIC)
-                EVT_SET(LocalFlag(0), 1)
+                EVT_SET(LFlag0, TRUE)
             EVT_END_IF
         EVT_END_IF
         EVT_IF_FLAG(LVar2, STATUS_FLAG_FROZEN)
             EVT_IF_FLAG(LVar5, STATUS_FLAG_FROZEN)
-                EVT_SET(LocalFlag(0), 1)
+                EVT_SET(LFlag0, TRUE)
             EVT_END_IF
         EVT_END_IF
         EVT_IF_FLAG(LVar2, STATUS_FLAG_FEAR)
             EVT_IF_FLAG(LVar5, STATUS_FLAG_FEAR)
-                EVT_SET(LocalFlag(0), 1)
+                EVT_SET(LFlag0, TRUE)
             EVT_END_IF
         EVT_END_IF
         EVT_IF_FLAG(LVar2, STATUS_FLAG_PARALYZE)
             EVT_IF_FLAG(LVar5, STATUS_FLAG_PARALYZE)
-                EVT_SET(LocalFlag(0), 1)
+                EVT_SET(LFlag0, TRUE)
             EVT_END_IF
         EVT_END_IF
         EVT_IF_FLAG(LVar2, STATUS_FLAG_POISON)
             EVT_IF_FLAG(LVar5, STATUS_FLAG_POISON)
-                EVT_SET(LocalFlag(0), 1)
+                EVT_SET(LFlag0, TRUE)
             EVT_END_IF
         EVT_END_IF
         EVT_IF_FLAG(LVar2, STATUS_FLAG_DIZZY)
             EVT_IF_FLAG(LVar5, STATUS_FLAG_DIZZY)
-                EVT_SET(LocalFlag(0), 1)
+                EVT_SET(LFlag0, TRUE)
             EVT_END_IF
         EVT_END_IF
         EVT_IF_FLAG(LVar5, STATUS_FLAG_SHRINK)
-            EVT_SET(LocalFlag(0), 1)
+            EVT_SET(LFlag0, TRUE)
         EVT_END_IF
         EVT_IF_FLAG(LVar2, STATUS_FLAG_STONE)
             EVT_IF_FLAG(LVar5, STATUS_FLAG_STONE)
-                EVT_SET(LocalFlag(0), 1)
+                EVT_SET(LFlag0, TRUE)
             EVT_END_IF
         EVT_END_IF
         EVT_IF_FLAG(LVar2, STATUS_FLAG_KO)
             EVT_IF_FLAG(LVar5, STATUS_FLAG_KO)
-                EVT_SET(LocalFlag(0), 1)
+                EVT_SET(LFlag0, TRUE)
             EVT_END_IF
         EVT_END_IF
-        EVT_IF_EQ(LocalFlag(0), 1)
+        EVT_IF_EQ(LFlag0, TRUE)
             EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
         EVT_END_IF
     EVT_END_IF

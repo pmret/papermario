@@ -157,11 +157,11 @@ EvtScript N(init) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_TURN_COUNTER), 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_PEACH_SPOKE), 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 14, 0)
-    EVT_CALL(SetBattleMenuDisableFlags, BTL_MENU_DISABLED_JUMP)
-    EVT_CALL(CreateNpc, 0x00000000, ANIM_ParadePeach_IdleRaisedArms)
-    EVT_CALL(SetNpcYaw, 0x00000000, 90)
-    EVT_CALL(SetNpcPos, 0x00000000, -130, 0, -12)
-    EVT_CALL(EnableNpcShadow, 0x00000000, TRUE)
+    EVT_CALL(SetBattleMenuEnabledFlags, BTL_MENU_ENABLED_JUMP)
+    EVT_CALL(CreateNpc, NPC_BTL_COMPANION, ANIM_ParadePeach_IdleRaisedArms)
+    EVT_CALL(SetNpcYaw, NPC_BTL_COMPANION, 90)
+    EVT_CALL(SetNpcPos, NPC_BTL_COMPANION, -130, 0, -12)
+    EVT_CALL(EnableNpcShadow, NPC_BTL_COMPANION, TRUE)
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(handleEvent)))
@@ -367,12 +367,12 @@ EvtScript N(attackClawSwipe) = {
     EVT_THREAD
         EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_TURN_COUNTER), LVar0)
         EVT_IF_GE(LVar0, 3)
-            EVT_CALL(SetNpcAnimation, 0x00000000, ANIM_ParadePeach_Weep)
+            EVT_CALL(SetNpcAnimation, NPC_BTL_COMPANION, ANIM_ParadePeach_Weep)
         EVT_ELSE
-            EVT_CALL(SetNpcAnimation, 0x00000000, ANIM_ParadePeach_HorrorLoop)
+            EVT_CALL(SetNpcAnimation, NPC_BTL_COMPANION, ANIM_ParadePeach_HorrorLoop)
         EVT_END_IF
         EVT_WAIT(45)
-        EVT_CALL(SetNpcAnimation, 0x00000000, ANIM_ParadePeach_IdleRaisedArms)
+        EVT_CALL(SetNpcAnimation, NPC_BTL_COMPANION, ANIM_ParadePeach_IdleRaisedArms)
     EVT_END_THREAD
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
@@ -423,7 +423,7 @@ EvtScript N(attackFireBreath) = {
         EVT_WAIT(70)
         EVT_CALL(PlaySound, SOUND_3BD | SOUND_ID_TRIGGER_CHANGE_SOUND)
     EVT_END_THREAD
-    EVT_CALL(SetNpcAnimation, 0x00000000, ANIM_ParadePeach_Weep)
+    EVT_CALL(SetNpcAnimation, NPC_BTL_COMPANION, ANIM_ParadePeach_Weep)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 55)
     EVT_WAIT(20)
@@ -442,7 +442,7 @@ EvtScript N(attackFireBreath) = {
                 EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_Idle)
             EVT_END_THREAD
             EVT_WAIT(60)
-            EVT_CALL(SetNpcAnimation, 0x00000000, ANIM_ParadePeach_HorrorLoop)
+            EVT_CALL(SetNpcAnimation, NPC_BTL_COMPANION, ANIM_ParadePeach_HorrorLoop)
             EVT_LOOP(68)
                 EVT_CALL(GetAnimation, ACTOR_PLAYER, 0, LVar0)
                 EVT_IF_EQ(LVar0, ANIM_Mario1_FallDown)
@@ -450,7 +450,7 @@ EvtScript N(attackFireBreath) = {
                 EVT_END_IF
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_CALL(SetNpcAnimation, 0x00000000, ANIM_ParadePeach_Bow)
+            EVT_CALL(SetNpcAnimation, NPC_BTL_COMPANION, ANIM_ParadePeach_Bow)
             EVT_WAIT(30)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH

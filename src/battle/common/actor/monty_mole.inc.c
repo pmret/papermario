@@ -55,7 +55,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .opacity = 255,
         .idleAnimations = N(IdleAnimations),
         .defenseTable = N(DefenseTable),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -7 },
     },
@@ -67,7 +67,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .opacity = 255,
         .idleAnimations = N(IdleAnimations),
         .defenseTable = N(DefenseTable),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -7 },
     },
@@ -79,7 +79,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .opacity = 255,
         .idleAnimations = N(IdleAnimations2),
         .defenseTable = N(DefenseTable),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
     },
@@ -146,7 +146,7 @@ ActorPartBlueprint N(ActorParts_hole)[] = {
         .opacity = 255,
         .idleAnimations = N(IdleAnimations_hole),
         .defenseTable = NULL,
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
     },
@@ -184,7 +184,7 @@ ActorBlueprint N(hole) = {
     .statusTextOffset = { 10, 20 },
 };
 
-Vec3i N(hole_pos) = { NPC_DISPOSE_LOCATION, };
+Vec3i N(hole_pos) = { NPC_DISPOSE_LOCATION };
 
 Formation N(formation_hole_1) = {
     ACTOR_BY_POS(N(hole), N(hole_pos), 0),

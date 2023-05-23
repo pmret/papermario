@@ -1,6 +1,5 @@
-#include "common.h"
-#include "battle/battle.h"
+#include "../area.h"
 
-#define NAMESPACE b_area_trd_part_3_nok_01
-
+//TODO migrate into include
+#define NAMESPACE A(nok_01)
 #include "battle/common/stage/nok_01.inc.c"

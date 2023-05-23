@@ -241,7 +241,7 @@ typedef enum ActorType {
     ACTOR_TYPE_KOOPA_BROS                  = 0x9A,
     ACTOR_TYPE_GREEN_NINJAKOOPA            = 0x9B,
     ACTOR_TYPE_RED_NINJAKOOPA              = 0x9C,
-    ACTOR_TYPE_BLUE_NINJAKOOPA             = 0x9D,
+    ACTOR_TYPE_BLACK_NINJAKOOPA             = 0x9D,
     ACTOR_TYPE_YELLOW_NINJAKOOPA           = 0x9E,
     ACTOR_TYPE_ELDSTAR                     = 0x9F,
     ACTOR_TYPE_BUZZAR                      = 0xA0,

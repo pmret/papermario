@@ -811,7 +811,7 @@ EvtScript N(takeTurn) = {
         EVT_BITWISE_OR_CONST(LVar0, N(FLAG_LOW_HP))
         EVT_CALL(SetActorVar, ACTOR_ENEMY0, N(VAR_FLAGS), LVar0)
     EVT_END_IF
-    EVT_SET(LocalFlag(0), 0)
+    EVT_SET(LFlag0, FALSE)
     EVT_CALL(GetActorHP, ACTOR_SELF, LVar0)
     EVT_CALL(GetEnemyMaxHP, ACTOR_SELF, LVar1)
     EVT_MUL(LVar0, 100)
@@ -823,7 +823,7 @@ EvtScript N(takeTurn) = {
             EVT_IF_LE(LVar0, 100)
                 EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_HEAL_COUNTER), LVar0)
                 EVT_IF_LT(LVar0, 2)
-                    EVT_SET(LocalFlag(0), 1)
+                    EVT_SET(LFlag0, TRUE)
                 EVT_END_IF
             EVT_END_IF
         EVT_CASE_LT(40)
@@ -832,7 +832,7 @@ EvtScript N(takeTurn) = {
             EVT_IF_LE(LVar0, 30)
                 EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_HEAL_COUNTER), LVar0)
                 EVT_IF_LT(LVar0, 2)
-                    EVT_SET(LocalFlag(0), 1)
+                    EVT_SET(LFlag0, TRUE)
                 EVT_END_IF
             EVT_END_IF
         EVT_CASE_LT(55)
@@ -841,11 +841,11 @@ EvtScript N(takeTurn) = {
             EVT_IF_LE(LVar0, 10)
                 EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_HEAL_COUNTER), LVar0)
                 EVT_IF_LT(LVar0, 2)
-                    EVT_SET(LocalFlag(0), 1)
+                    EVT_SET(LFlag0, TRUE)
                 EVT_END_IF
             EVT_END_IF
     EVT_END_SWITCH
-    EVT_IF_EQ(LocalFlag(0), 1)
+    EVT_IF_EQ(LFlag0, TRUE)
         EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_HEAL_COUNTER), LVar0)
         EVT_ADD(LVar0, 1)
         EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_HEAL_COUNTER), LVar0)
@@ -1974,7 +1974,7 @@ EvtScript N(NormalAttack) = {
 };
 
 EvtScript N(Heal) = {
-    EVT_SET(LocalFlag(0), 0)
+    EVT_SET(LFlag0, FALSE)
     EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_PHASE), LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(N(PHASE_SUMMONED_CLONES))
@@ -1983,13 +1983,13 @@ EvtScript N(Heal) = {
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_CLONE2_ID), LVarB)
             EVT_CALL(ActorExists, LVarA, LVar0)
             EVT_IF_EQ(LVar0, TRUE)
-                EVT_SET(LocalFlag(0), 1)
+                EVT_SET(LFlag0, TRUE)
             EVT_END_IF
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
-    EVT_IF_EQ(LocalFlag(0), 1)
+    EVT_IF_EQ(LFlag0, TRUE)
         EVT_CALL(UseIdleAnimation, LVarA, FALSE)
         EVT_CALL(EnableIdleScript, LVarA, 0)
         EVT_CALL(UseIdleAnimation, LVarB, FALSE)
@@ -2007,7 +2007,7 @@ EvtScript N(Heal) = {
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_WAIT(20)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_CrystalKing_Anim1D)
-    EVT_IF_EQ(LocalFlag(0), 1)
+    EVT_IF_EQ(LFlag0, TRUE)
         EVT_CALL(SetAnimation, LVarA, 1, ANIM_CrystalKing_Anim1D)
         EVT_CALL(SetAnimation, LVarB, 1, ANIM_CrystalKing_Anim1D)
     EVT_END_IF
@@ -2019,7 +2019,7 @@ EvtScript N(Heal) = {
         EVT_WAIT(30)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_25C)
     EVT_END_THREAD
-    EVT_IF_EQ(LocalFlag(0), 1)
+    EVT_IF_EQ(LFlag0, TRUE)
         EVT_THREAD
             EVT_WAIT(5)
             EVT_CALL(PlaySoundAtActor, LVarA, SOUND_206D)
@@ -2035,7 +2035,7 @@ EvtScript N(Heal) = {
             EVT_CALL(PlaySoundAtActor, LVarB, SOUND_25C)
         EVT_END_THREAD
     EVT_END_IF
-    EVT_IF_EQ(LocalFlag(0), 0)
+    EVT_IF_EQ(LFlag0, FALSE)
         EVT_THREAD
             EVT_CALL(FreezeBattleState, TRUE)
             EVT_CALL(HealActor, ACTOR_SELF, 20, FALSE)
@@ -2064,7 +2064,7 @@ EvtScript N(Heal) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_IF_EQ(LocalFlag(0), 1)
+    EVT_IF_EQ(LFlag0, TRUE)
         EVT_CALL(EnableIdleScript, LVarA, 1)
         EVT_CALL(UseIdleAnimation, LVarA, TRUE)
         EVT_CALL(EnableIdleScript, LVarA, 1)

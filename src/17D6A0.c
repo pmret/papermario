@@ -227,7 +227,7 @@ s32 bActorNames[ACTOR_TYPE_COUNT] = {
     [ACTOR_TYPE_KOOPA_BROS]                  MSG_EnemyName_KoopaBros,
     [ACTOR_TYPE_GREEN_NINJAKOOPA]            MSG_EnemyName_GreenNinjakoopa,
     [ACTOR_TYPE_RED_NINJAKOOPA]              MSG_EnemyName_RedNinjakoopa,
-    [ACTOR_TYPE_BLUE_NINJAKOOPA]             MSG_EnemyName_BlueNinjakoopa,
+    [ACTOR_TYPE_BLACK_NINJAKOOPA]             MSG_EnemyName_BlueNinjakoopa,
     [ACTOR_TYPE_YELLOW_NINJAKOOPA]           MSG_EnemyName_YellowNinjakoopa,
     [ACTOR_TYPE_ELDSTAR]                     MSG_Menus_Party_Goombario,
     [ACTOR_TYPE_BUZZAR]                      MSG_EnemyName_Buzzar,
@@ -1393,7 +1393,7 @@ ActorSounds bActorSoundTable[ACTOR_TYPE_COUNT] = {
         .hurt = NULL,
         .delay = { 30, 30 }
     },
-    [ACTOR_TYPE_BLUE_NINJAKOOPA] = {
+    [ACTOR_TYPE_BLACK_NINJAKOOPA] = {
         .walk = { SOUND_20BA, SOUND_3B4 },
         .fly = { NULL, NULL },
         .jump = SOUND_JUMP_3E2,
@@ -1938,7 +1938,7 @@ s32 bActorTattles[ACTOR_TYPE_COUNT] = {
     [ACTOR_TYPE_KOOPA_BROS] = MSG_EnemyTattle_KoopaBros,
     [ACTOR_TYPE_GREEN_NINJAKOOPA] = MSG_EnemyTattle_GreenNinjakoopa,
     [ACTOR_TYPE_RED_NINJAKOOPA] = MSG_EnemyTattle_RedNinjakoopa,
-    [ACTOR_TYPE_BLUE_NINJAKOOPA] = MSG_EnemyTattle_BlueNinjakoopa,
+    [ACTOR_TYPE_BLACK_NINJAKOOPA] = MSG_EnemyTattle_BlueNinjakoopa,
     [ACTOR_TYPE_YELLOW_NINJAKOOPA] = MSG_EnemyTattle_YellowNinjakoopa,
     [ACTOR_TYPE_ELDSTAR] = NULL,
     [ACTOR_TYPE_BUZZAR] = MSG_EnemyTattle_Buzzar,
@@ -2153,7 +2153,7 @@ ActorOffsets bActorOffsets[ACTOR_TYPE_COUNT] = {
     [ACTOR_TYPE_KOOPA_BROS] = { .tattleCam = { 0, 0, 26 }, .shadow = 26 },
     [ACTOR_TYPE_GREEN_NINJAKOOPA] = { .tattleCam = { 0, 4, 0 }, .shadow = 0 },
     [ACTOR_TYPE_RED_NINJAKOOPA] = { .tattleCam = { 0, 4, 0 }, .shadow = 0 },
-    [ACTOR_TYPE_BLUE_NINJAKOOPA] = { .tattleCam = { 0, 4, 0 }, .shadow = 0 },
+    [ACTOR_TYPE_BLACK_NINJAKOOPA] = { .tattleCam = { 0, 4, 0 }, .shadow = 0 },
     [ACTOR_TYPE_YELLOW_NINJAKOOPA] = { .tattleCam = { 0, 4, 0 }, .shadow = 0 },
     [ACTOR_TYPE_ELDSTAR] = { .tattleCam = { 0, 0, 0 }, .shadow = 0 },
     [ACTOR_TYPE_BUZZAR] = { .tattleCam = { 0, 0, 0 }, .shadow = 0 },

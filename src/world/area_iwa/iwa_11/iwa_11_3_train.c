@@ -169,44 +169,44 @@ EvtScript N(EVS_AnimateTrain) = {
         EVT_END_IF
         EVT_IF_EQ(MF_TrainArriveDoorOpen, TRUE)
             EVT_SET(LVar8, 10)
-            EVT_SET(LocalFlag(1), TRUE)
+            EVT_SET(LFlag1, TRUE)
             EVT_SET(MF_TrainArriveDoorOpen, FALSE)
         EVT_END_IF
         EVT_IF_EQ(MF_TrainArrivePlayerDisembark, TRUE)
             EVT_SET(LVar8, -10)
-            EVT_SET(LocalFlag(1), TRUE)
+            EVT_SET(LFlag1, TRUE)
             EVT_SET(MF_TrainArrivePlayerDisembark, FALSE)
         EVT_END_IF
         EVT_IF_EQ(MF_TrainDepartDoorOpen, TRUE)
             EVT_SET(LVar8, 10)
-            EVT_SET(LocalFlag(2), TRUE)
+            EVT_SET(LFlag2, TRUE)
             EVT_SET(MF_TrainDepartDoorOpen, FALSE)
         EVT_END_IF
         EVT_IF_EQ(MF_TrainDepartPlayerBoard, TRUE)
             EVT_SET(LVar8, -10)
-            EVT_SET(LocalFlag(2), TRUE)
+            EVT_SET(LFlag2, TRUE)
             EVT_SET(MF_TrainDepartPlayerBoard, FALSE)
         EVT_END_IF
-        EVT_IF_EQ(LocalFlag(1), TRUE)
+        EVT_IF_EQ(LFlag1, TRUE)
             EVT_ADD(LVar9, LVar8)
             EVT_IF_GE(LVar9, 90)
                 EVT_SET(LVar9, 90)
-                EVT_SET(LocalFlag(1), FALSE)
+                EVT_SET(LFlag1, FALSE)
             EVT_END_IF
             EVT_IF_LE(LVar9, 0)
                 EVT_SET(LVar9, 0)
-                EVT_SET(LocalFlag(1), FALSE)
+                EVT_SET(LFlag1, FALSE)
             EVT_END_IF
         EVT_END_IF
-        EVT_IF_EQ(LocalFlag(2), TRUE)
+        EVT_IF_EQ(LFlag2, TRUE)
             EVT_ADD(LVarA, LVar8)
             EVT_IF_GE(LVarA, 90)
                 EVT_SET(LVarA, 90)
-                EVT_SET(LocalFlag(2), FALSE)
+                EVT_SET(LFlag2, FALSE)
             EVT_END_IF
             EVT_IF_LE(LVarA, 0)
                 EVT_SET(LVarA, 0)
-                EVT_SET(LocalFlag(2), FALSE)
+                EVT_SET(LFlag2, FALSE)
             EVT_END_IF
         EVT_END_IF
         EVT_CALL(RotateModel, MODEL_omote, LVar9, 0, -1, 0)

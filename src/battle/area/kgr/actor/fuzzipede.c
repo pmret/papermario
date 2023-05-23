@@ -84,7 +84,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .opacity = 255,
         .idleAnimations = N(IdleAnimations_802189B0),
         .defenseTable = N(DefenseTable_80218A48),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -2, -10 },
     },
@@ -96,7 +96,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .opacity = 255,
         .idleAnimations = NULL,
         .defenseTable = N(DefenseTable_80218A48),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -2, -10 },
     },
@@ -826,24 +826,24 @@ EvtScript N(8021B22C) = {
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_SET(LocalFlag(0), 0)
+            EVT_SET(LFlag0, FALSE)
             EVT_CALL(GetBattleFlags, LVar0)
             EVT_IF_NOT_FLAG(LVar0, BS_FLAGS1_ATK_BLOCKED)
-                EVT_SET(LocalFlag(0), 1)
+                EVT_SET(LFlag0, TRUE)
             EVT_END_IF
             EVT_CALL(GetLastDamage, ACTOR_PLAYER, LVar0)
             EVT_IF_LE(LVar0, 0)
-                EVT_SET(LocalFlag(0), 0)
+                EVT_SET(LFlag0, FALSE)
             EVT_END_IF
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_FLAG(LVar0, STATUS_FLAG_SHRINK)
-                EVT_SET(LocalFlag(0), 0)
+                EVT_SET(LFlag0, FALSE)
             EVT_END_IF
             EVT_CALL(GetStatusFlags, ACTOR_PLAYER, LVar0)
             EVT_IF_FLAG(LVar0, STATUS_FLAG_STONE | STATUS_FLAG_RIGHT_ON)
-                EVT_SET(LocalFlag(0), 0)
+                EVT_SET(LFlag0, FALSE)
             EVT_END_IF
-            EVT_IF_EQ(LocalFlag(0), 1)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_CALL(SetActorVar, ACTOR_SELF, 1, 1)
                 EVT_EXEC(N(8021B008))
                 EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzipede_Anim04)

@@ -344,7 +344,7 @@ EvtScript N(idle) = {
     EVT_END
 };
 
-s32 N(bounceTable)[] = { 9, 16, 22, 26, 30, 32, 33, 32, 30, 26, 22, 16, 9, 0, 4, 6, 7, 6, 4, 0, 2, 0, };
+s32 N(FlipPosOffsets)[] = { 9, 16, 22, 26, 30, 32, 33, 32, 30, 26, 22, 16, 9, 0, 4, 6, 7, 6, 4, 0, 2, 0 };
 
 EvtScript N(handleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
@@ -419,8 +419,8 @@ EvtScript N(handleEvent) = {
                 EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, -75)
                 EVT_WAIT(1)
             EVT_END_THREAD
-            EVT_USE_BUF(N(bounceTable))
-            EVT_LOOP(22)
+            EVT_USE_BUF(N(FlipPosOffsets))
+            EVT_LOOP(ARRAY_COUNT(N(FlipPosOffsets)))
                 EVT_BUF_READ1(LVar0)
                 EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, LVar0, 0)
                 EVT_WAIT(1)

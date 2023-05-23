@@ -529,7 +529,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .opacity = 255,
         .idleAnimations = N(IdleAnimations),
         .defenseTable = N(DefenseTable),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
     },
 };
@@ -1252,7 +1252,7 @@ EvtScript N(headbonk3) = {
     EVT_END
 };
 
-s32 N(actionCommandTable)[] = { 7, 6, 5, 4, 3, 2, 1, 0, };
+s32 N(actionCommandTable)[] = { 7, 6, 5, 4, 3, 2, 1, 0 };
 
 s32 N(powerBounceChance) = 200;
 
@@ -1326,7 +1326,7 @@ EvtScript N(multibonk) = {
     EVT_CALL(func_80269524, LVarF)
     EVT_SET(LVarD, 0)
     EVT_SET(LVarF, 0)
-    EVT_SET(LocalFlag(0), 0)
+    EVT_SET(LFlag0, FALSE)
     EVT_LABEL(10)
     EVT_THREAD
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_50)
@@ -1378,7 +1378,7 @@ EvtScript N(multibonk) = {
     EVT_SUB(LVarD, 1)
     EVT_CALL(N(AdjustPowerBounceChance))
     EVT_IF_GE(LVarF, LVar0)
-        EVT_SET(LocalFlag(0), 1)
+        EVT_SET(LFlag0, TRUE)
     EVT_END_IF
     EVT_CHILD_THREAD
         EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.1), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
@@ -1391,7 +1391,7 @@ EvtScript N(multibonk) = {
     EVT_CALL(GetActionCommandResult, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(0)
-            EVT_IF_EQ(LocalFlag(0), 0)
+            EVT_IF_EQ(LFlag0, FALSE)
                 EVT_CALL(N(GetChargeAmount))
                 EVT_ADD(LVar0, 3)
                 EVT_CALL(PartnerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVar0, LVarD, BS_FLAGS1_40)
@@ -1404,7 +1404,7 @@ EvtScript N(multibonk) = {
             EVT_CALL(N(StopChargeAndGet))
             EVT_ADD(LVar0, 3)
             EVT_CALL(PartnerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVar0, LVarD, BS_FLAGS1_SP_EVT_ACTIVE)
-            EVT_SET(LocalFlag(0), 0)
+            EVT_SET(LFlag0, FALSE)
     EVT_END_SWITCH
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_0)
     EVT_CALL(func_80269550, LVarE)
@@ -1416,7 +1416,7 @@ EvtScript N(multibonk) = {
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(HIT_RESULT_1)
         EVT_CASE_OR_EQ(HIT_RESULT_3)
-            EVT_IF_EQ(LocalFlag(0), 1)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_EXEC_WAIT(N(returnHome2))
                 EVT_RETURN
             EVT_END_IF

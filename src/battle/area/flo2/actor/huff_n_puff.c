@@ -318,7 +318,7 @@ s32 N(IdleAnimations4)[] = {
 s32 N(DefenseTable)[] = {
     ELEMENT_NORMAL,   0,
     ELEMENT_SHOCK,   99,
-    ELEMENT_MYSTERY,   0,
+    ELEMENT_MYSTERY,  0,
     ELEMENT_JUMP,     0,
     ELEMENT_SMASH,    0,
     ELEMENT_END,
@@ -473,7 +473,7 @@ EvtScript N(UpdateSize) = {
 };
 
 EvtScript N(updateCharged) = {
-    EVT_SET(LocalFlag(0), 0)
+    EVT_SET(LFlag0, FALSE)
     EVT_SET(LVarA, 0)
     EVT_SET(LVarB, 0)
     EVT_LABEL(0)
@@ -483,24 +483,24 @@ EvtScript N(updateCharged) = {
         EVT_CASE_OR_EQ(4)
         EVT_CASE_OR_EQ(10)
         EVT_CASE_OR_EQ(11)
-            EVT_IF_EQ(LocalFlag(0), 0)
+            EVT_IF_EQ(LFlag0, FALSE)
                 EVT_CALL(RandInt, 2, LVarA)
                 EVT_CALL(RandInt, 2, LVarB)
-                EVT_SET(LocalFlag(0), 1)
+                EVT_SET(LFlag0, TRUE)
             EVT_ELSE
                 EVT_MUL(LVarA, -1)
                 EVT_MUL(LVarB, -1)
-                EVT_SET(LocalFlag(0), 0)
+                EVT_SET(LFlag0, FALSE)
             EVT_END_IF
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(7)
         EVT_CASE_OR_EQ(8)
-            EVT_IF_EQ(LocalFlag(0), 0)
+            EVT_IF_EQ(LFlag0, FALSE)
                 EVT_CALL(RandInt, 1, LVarA)
-                EVT_SET(LocalFlag(0), 1)
+                EVT_SET(LFlag0, TRUE)
             EVT_ELSE
                 EVT_MUL(LVarA, -1)
-                EVT_SET(LocalFlag(0), 0)
+                EVT_SET(LFlag0, FALSE)
             EVT_END_IF
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
@@ -3952,7 +3952,7 @@ EvtScript N(attackGroundSlam) = {
 
 EvtScript N(tuffPuffMoveToPlayer) = {
     EVT_IF_EQ(LVar3, 0)
-        EVT_SET(LocalFlag(0), 1)
+        EVT_SET(LFlag0, TRUE)
     EVT_END_IF
     EVT_SET(LVarA, LVar1)
     EVT_SET(LVarB, LVar2)
@@ -3988,7 +3988,7 @@ EvtScript N(tuffPuffMoveToPlayer) = {
             EVT_WAIT(1)
         EVT_END_LOOP
         EVT_WAIT(5)
-        EVT_IF_EQ(LocalFlag(0), 1)
+        EVT_IF_EQ(LFlag0, TRUE)
             EVT_CALL(GetActorVar, ACTOR_ENEMY0, N(VAR_FLAGS), LVar0)
             EVT_BITWISE_OR_CONST(LVar0, N(FLAG_4))
             EVT_CALL(SetActorVar, ACTOR_ENEMY0, N(VAR_FLAGS), LVar0)

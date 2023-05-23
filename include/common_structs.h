@@ -874,9 +874,9 @@ typedef struct BattleStatus {
     /* 0x05C */ s8 lastPartnerMenuSelection[16];
     /* 0x06C */ s16 cancelTargetMenuSubstate; // might be more generally for returning from nested 'inner' state
     /* 0x06E */ s16 acceptTargetMenuSubstate; // might be more generally for returning from nested 'inner' state
-    /* 0x070 */ s16 menuDisableFlags; /* 1 = jump, 2 = hammer, 4 = items */
+    /* 0x070 */ s16 enabledMenusFlags; // zero'd bits will be unavailable, used only for tutorial battles
     /* 0x072 */ char unk_72[2];
-    /* 0x074 */ s32 enabledStarPowersMask; // zero'd bits will be unavailable, used only for tutorial battles
+    /* 0x074 */ s32 enabledStarPowersFlags; // zero'd bits will be unavailable, used only for tutorial battles
     /* 0x078 */ s8 totalStarPoints;
     /* 0x079 */ s8 pendingStarPoints; /* how many to add */
     /* 0x07A */ s8 incrementStarPointDelay; /* related to star points, set to 0x28 when they are dropped */

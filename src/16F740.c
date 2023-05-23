@@ -263,8 +263,8 @@ void btl_state_update_normal_start(void) {
             }
             battleStatus->actionSuccess = 0;
             battleStatus->unk_82 = 0;
-            battleStatus->menuDisableFlags = -1;
-            battleStatus->enabledStarPowersMask = -1;
+            battleStatus->enabledMenusFlags = -1;
+            battleStatus->enabledStarPowersFlags = -1;
             battleStatus->itemUsesLeft = 0;
             battleStatus->hammerCharge = 0;
             battleStatus->jumpCharge = 0;

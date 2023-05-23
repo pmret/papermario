@@ -81,7 +81,7 @@ ActorPartBlueprint N(ActorParts_8022DAF0)[] = {
         .opacity = 255,
         .idleAnimations = N(IdleAnimations_8022D9A0),
         .defenseTable = N(DefenseTable_8022DA38),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 2, -7 },
     },
@@ -93,7 +93,7 @@ ActorPartBlueprint N(ActorParts_8022DAF0)[] = {
         .opacity = 255,
         .idleAnimations = N(IdleAnimations_8022D9A0),
         .defenseTable = N(DefenseTable_8022DA38),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
     },
@@ -984,15 +984,15 @@ EvtScript N(handleEvent_80231408) = {
             EVT_IF_FLAG(LVar0, 0x3F1000)
                 EVT_BREAK_SWITCH
             EVT_END_IF
-            EVT_SET(LocalFlag(0), 0)
+            EVT_SET(LFlag0, FALSE)
             EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
             EVT_SWITCH(LVar0)
                 EVT_CASE_OR_EQ(1)
                 EVT_CASE_OR_EQ(0)
-                    EVT_SET(LocalFlag(0), 1)
+                    EVT_SET(LFlag0, TRUE)
                 EVT_END_CASE_GROUP
             EVT_END_SWITCH
-            EVT_IF_EQ(LocalFlag(0), 0)
+            EVT_IF_EQ(LFlag0, FALSE)
                 EVT_BREAK_SWITCH
             EVT_END_IF
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)

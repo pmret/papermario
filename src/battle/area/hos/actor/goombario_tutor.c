@@ -64,7 +64,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .opacity = 255,
         .idleAnimations = N(IdleAnimations_80219010),
         .defenseTable = N(DefenseTable_8021905C),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
     },
@@ -301,7 +301,7 @@ EvtScript N(80219C74) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
     EVT_CALL(ActorSpeak, MSG_HOS_0019, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
-    EVT_CALL(SetBattleMenuDisableFlags, BTL_MENU_DISABLED_JUMP)
+    EVT_CALL(SetBattleMenuEnabledFlags, BTL_MENU_ENABLED_JUMP)
     EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL)
     EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MOVE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
@@ -402,7 +402,7 @@ EvtScript N(80219C74) = {
     EVT_CALL(ActorSpeak, MSG_HOS_0020, ACTOR_PARTNER, 1, ANIM_Twink_Talk, ANIM_Twink_Fly)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
     EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MENU)
-    EVT_CALL(SetBattleMenuDisableFlags, BTL_MENU_DISABLED_SMASH)
+    EVT_CALL(SetBattleMenuEnabledFlags, BTL_MENU_ENABLED_SMASH)
     EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL)
     EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MOVE)
     EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
@@ -493,7 +493,7 @@ EvtScript N(80219C74) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
     EVT_CALL(SetBattleFlagBits2, BS_FLAGS2_200, FALSE)
     EVT_LABEL(10)
-    EVT_CALL(SetBattleMenuDisableFlags, BTL_MENU_DISABLED_JUMP | BTL_MENU_DISABLED_SMASH | BTL_MENU_DISABLED_STRATEGIES)
+    EVT_CALL(SetBattleMenuEnabledFlags, BTL_MENU_ENABLED_JUMP | BTL_MENU_ENABLED_SMASH | BTL_MENU_ENABLED_STRATEGIES)
     EVT_CALL(SetActionCommandMode, ACTION_COMMAND_MODE_TUTORIAL)
     EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MOVE)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)

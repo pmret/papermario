@@ -34,7 +34,7 @@ NpcSettings N(NpcSettings_Unused) = {
 EvtScript N(EVS_Scene_ImprisonedKoopaBros) = {
     EVT_WAIT(60)
     EVT_CALL(EnableNpcAI, NPC_KoopaBros_Red, FALSE)
-    EVT_CALL(SpeakToPlayer, NPC_KoopaBros_Red, ANIM_KoopaBros_Red_Anim18, ANIM_KoopaBros_Red_Anim18, 0, MSG_CH1_010C)
+    EVT_CALL(SpeakToPlayer, NPC_KoopaBros_Red, ANIM_KoopaBros_Red_Dizzy, ANIM_KoopaBros_Red_Dizzy, 0, MSG_CH1_010C)
     EVT_CALL(EnableNpcAI, NPC_KoopaBros_Red, TRUE)
     EVT_WAIT(30)
     EVT_CALL(FadeOutMusic, 0, 2000)

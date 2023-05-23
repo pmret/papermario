@@ -146,7 +146,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .opacity = 255,
         .idleAnimations = N(IdleAnimations_8021BF40),
         .defenseTable = N(DefenseTable_80218684),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { -1, -10 },
     },
@@ -158,7 +158,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .opacity = 255,
         .idleAnimations = N(IdleAnimations_80218658),
         .defenseTable = N(DefenseTable_80218684),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
     },
@@ -170,7 +170,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .opacity = 255,
         .idleAnimations = N(IdleAnimations_80218664),
         .defenseTable = N(DefenseTable_80218684),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
     },
@@ -458,7 +458,7 @@ EvtScript N(handleEvent_80218E3C) = {
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIKE_TAUNT)
             EVT_WAIT(10)
-            EVT_SET(LocalFlag(0), 0)
+            EVT_SET(LFlag0, FALSE)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVarA)
@@ -467,19 +467,19 @@ EvtScript N(handleEvent_80218E3C) = {
                     EVT_IF_FLAG(LVar3, STATUS_FLAG_SHRINK)
                         EVT_ADD(LVar0, -11)
                         EVT_ADD(LVar1, 3)
-                        EVT_SET(LocalFlag(0), 1)
+                        EVT_SET(LFlag0, TRUE)
                     EVT_END_IF
                     EVT_IF_FLAG(LVar3, STATUS_FLAG_DIZZY)
                         EVT_ADD(LVar0, -4)
                         EVT_ADD(LVar1, 36)
-                        EVT_SET(LocalFlag(0), 1)
+                        EVT_SET(LFlag0, TRUE)
                     EVT_END_IF
                     EVT_IF_FLAG(LVar3, STATUS_FLAG_SLEEP)
                         EVT_ADD(LVar0, -8)
                         EVT_ADD(LVar1, 36)
-                        EVT_SET(LocalFlag(0), 1)
+                        EVT_SET(LFlag0, TRUE)
                     EVT_END_IF
-                    EVT_IF_EQ(LocalFlag(0), 0)
+                    EVT_IF_EQ(LFlag0, FALSE)
                         EVT_ADD(LVar0, -28)
                         EVT_ADD(LVar1, 8)
                     EVT_END_IF
@@ -487,19 +487,19 @@ EvtScript N(handleEvent_80218E3C) = {
                     EVT_IF_FLAG(LVar3, STATUS_FLAG_SHRINK)
                         EVT_ADD(LVar0, -4)
                         EVT_ADD(LVar1, 15)
-                        EVT_SET(LocalFlag(0), 1)
+                        EVT_SET(LFlag0, TRUE)
                     EVT_END_IF
                     EVT_IF_FLAG(LVar3, STATUS_FLAG_DIZZY)
                         EVT_ADD(LVar0, -4)
                         EVT_ADD(LVar1, 36)
-                        EVT_SET(LocalFlag(0), 1)
+                        EVT_SET(LFlag0, TRUE)
                     EVT_END_IF
                     EVT_IF_FLAG(LVar3, STATUS_FLAG_SLEEP)
                         EVT_ADD(LVar0, -8)
                         EVT_ADD(LVar1, 36)
-                        EVT_SET(LocalFlag(0), 1)
+                        EVT_SET(LFlag0, TRUE)
                     EVT_END_IF
-                    EVT_IF_EQ(LocalFlag(0), 0)
+                    EVT_IF_EQ(LFlag0, FALSE)
                         EVT_ADD(LVar0, -10)
                         EVT_ADD(LVar1, 38)
                     EVT_END_IF
@@ -663,20 +663,20 @@ EvtScript N(summonBackup) = {
     EVT_IF_NE(LVar1, -1)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_SET(LocalFlag(0), 0)
+    EVT_SET(LFlag0, FALSE)
     EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_4 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(1)
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
     EVT_CALL(GetIndexFromHome, LVar0, LVar1)
     EVT_IF_LT(LVar1, LVarA)
-        EVT_SET(LocalFlag(0), 1)
+        EVT_SET(LFlag0, TRUE)
     EVT_END_IF
     EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
     EVT_IF_NE(LVar0, -1)
         EVT_GOTO(1)
     EVT_END_IF
-    EVT_IF_EQ(LocalFlag(0), 0)
+    EVT_IF_EQ(LFlag0, FALSE)
         EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_8021A8C0)), 0)
     EVT_ELSE
         EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_8021A8DC)), 0)
@@ -708,7 +708,7 @@ EvtScript N(summonBackup) = {
     EVT_PLAY_EFFECT(EFFECT_SPARKLES, 0, LVar0, LVar1, LVar2, 30, 0)
     EVT_CALL(SetAnimation, LVarB, 2, ANIM_SpearGuy_Anim0E)
     EVT_WAIT(20)
-    EVT_IF_EQ(LocalFlag(0), 0)
+    EVT_IF_EQ(LFlag0, FALSE)
         EVT_CALL(SetAnimation, LVarB, 2, ANIM_SpearGuy_Anim04)
     EVT_ELSE
         EVT_CALL(SetAnimation, LVarB, 2, ANIM_SpearGuy_Anim03)
@@ -940,31 +940,31 @@ EvtScript N(8021B770) = {
     EVT_MOD(LVar5, 4)
     EVT_SWITCH(LVar5)
         EVT_CASE_EQ(0)
-            EVT_SET(LocalFlag(1), 1)
+            EVT_SET(LFlag1, TRUE)
         EVT_CASE_EQ(1)
-            EVT_SET(LocalFlag(2), 1)
+            EVT_SET(LFlag2, TRUE)
         EVT_CASE_EQ(2)
-            EVT_SET(LocalFlag(3), 1)
+            EVT_SET(LFlag3, TRUE)
         EVT_CASE_EQ(3)
-            EVT_SET(LocalFlag(4), 1)
+            EVT_SET(LFlag4, TRUE)
     EVT_END_SWITCH
     EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
     EVT_IF_NE(LVar0, -1)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_IF_EQ(LocalFlag(1), 0)
+    EVT_IF_EQ(LFlag1, FALSE)
         EVT_SET(LVarA, 0)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_EQ(LocalFlag(2), 0)
+    EVT_IF_EQ(LFlag2, FALSE)
         EVT_SET(LVarA, 1)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_EQ(LocalFlag(3), 0)
+    EVT_IF_EQ(LFlag3, FALSE)
         EVT_SET(LVarA, 2)
         EVT_RETURN
     EVT_END_IF
-    EVT_IF_EQ(LocalFlag(4), 0)
+    EVT_IF_EQ(LFlag4, FALSE)
         EVT_SET(LVarA, 3)
         EVT_RETURN
     EVT_END_IF
@@ -1008,20 +1008,20 @@ EvtScript N(8021B96C) = {
 
 EvtScript N(8021BB18) = {
     EVT_CALL(GetIndexFromHome, ACTOR_SELF, LVarA)
-    EVT_SET(LocalFlag(0), 0)
+    EVT_SET(LFlag0, FALSE)
     EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_4 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
     EVT_CALL(GetOwnerTarget, LVar0, LVar1)
     EVT_CALL(GetIndexFromHome, LVar0, LVar1)
     EVT_IF_LT(LVar1, LVarA)
-        EVT_SET(LocalFlag(0), 1)
+        EVT_SET(LFlag0, TRUE)
     EVT_END_IF
     EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
     EVT_IF_NE(LVar0, -1)
         EVT_GOTO(0)
     EVT_END_IF
-    EVT_IF_EQ(LocalFlag(0), 1)
+    EVT_IF_EQ(LFlag0, TRUE)
         EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
         EVT_IF_EQ(LVar0, 0)
             EVT_SET(LVar0, 1)

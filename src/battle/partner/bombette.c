@@ -27,8 +27,8 @@ enum N(ActorPartIDs) {
 };
 
 enum {
-    LF_MashEnded    = LocalFlag(0),
-    LF_MashStarted  = LocalFlag(2),
+    LF_MashEnded    = LFlag0,
+    LF_MashStarted  = LFlag2,
 };
 
 API_CALLABLE(N(PlayExplosionFX)) {
@@ -304,7 +304,7 @@ ActorPartBlueprint N(ActorParts)[] = {
         .opacity = 255,
         .idleAnimations = N(IdleAnimations),
         .defenseTable = N(DefenseTable),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
     },

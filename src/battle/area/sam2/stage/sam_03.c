@@ -5,7 +5,7 @@
 
 #define NAMESPACE b_area_sam2_sam_03
 
-#include "battle/common/stage/sam_Snowflakes.inc.c"
+#include "battle/common/stage/lib/Snowflakes.inc.c"
 
 void func_80219E40_63F020(void) {
     enable_background_wave();

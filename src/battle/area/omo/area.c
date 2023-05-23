@@ -339,14 +339,14 @@ BattleList N(Formations) = {
 };
 
 StageList N(Stages) = {
-    { "omo_01",  &N(omo_01) },
-    { "omo_02",  &N(omo_02) },
-    { "omo_03",  &N(omo_03) },
+    STAGE("omo_01", N(omo_01)),
+    STAGE("omo_02", N(omo_02)),
+    STAGE("omo_03", N(omo_03)),
     STAGE("omo_03b", N(omo_03b)),
-    { "omo_04",  &N(omo_04) },
-    { "omo_05",  &N(omo_05) },
+    STAGE("omo_04", N(omo_04)),
+    STAGE("omo_05", N(omo_05)),
     STAGE("omo_05b", N(omo_05b)),
-    { "omo_06",  &N(omo_06) },
-    { "omo_07",  &N(omo_07) },
+    STAGE("omo_06", N(omo_06)),
+    STAGE("omo_07", N(omo_07)),
     {},
 };

@@ -12,7 +12,7 @@ extern ScreenOverlay ScreenOverlays[2];
 ScreenTransition CurrentScreenTransition = TRANSITION_END_DEMO_SCENE_BLACK;
 
 // padding?
-s32 D_8014C6F4[] = { 0x00000000, 0x00000000, 0x00000000, };
+s32 D_8014C6F4[] = { 0x00000000, 0x00000000, 0x00000000 };
 
 #include "ui/stencil/star.png.inc.c"
 

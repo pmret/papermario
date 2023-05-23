@@ -24,28 +24,28 @@ enum N(ActorParams) {
 };
 
 s32 N(DefaultAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_Bobomb_Anim02,
-    STATUS_KEY_STONE,     ANIM_Bobomb_Anim00,
-    STATUS_KEY_SLEEP,     ANIM_Bobomb_Anim18,
-    STATUS_KEY_POISON,    ANIM_Bobomb_Anim04,
-    STATUS_KEY_STOP,      ANIM_Bobomb_Anim00,
-    STATUS_KEY_STATIC,    ANIM_Bobomb_Anim02,
-    STATUS_KEY_PARALYZE,  ANIM_Bobomb_Anim00,
-    STATUS_KEY_DIZZY,     ANIM_Bobomb_Anim1C,
-    STATUS_KEY_FEAR,      ANIM_Bobomb_Anim1C,
+    STATUS_KEY_NORMAL,    ANIM_Bobomb_Idle,
+    STATUS_KEY_STONE,     ANIM_Bobomb_Still,
+    STATUS_KEY_SLEEP,     ANIM_Bobomb_Sleep,
+    STATUS_KEY_POISON,    ANIM_Bobomb_Walk,
+    STATUS_KEY_STOP,      ANIM_Bobomb_Still,
+    STATUS_KEY_STATIC,    ANIM_Bobomb_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_Bobomb_Still,
+    STATUS_KEY_DIZZY,     ANIM_Bobomb_Dizzy,
+    STATUS_KEY_FEAR,      ANIM_Bobomb_Dizzy,
     STATUS_END,
 };
 
 s32 N(IgnitedAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_Bobomb_Anim05,
-    STATUS_KEY_STONE,     ANIM_Bobomb_Anim01,
-    STATUS_KEY_SLEEP,     ANIM_Bobomb_Anim18,
-    STATUS_KEY_POISON,    ANIM_Bobomb_Anim05,
-    STATUS_KEY_STOP,      ANIM_Bobomb_Anim01,
-    STATUS_KEY_STATIC,    ANIM_Bobomb_Anim03,
-    STATUS_KEY_PARALYZE,  ANIM_Bobomb_Anim01,
-    STATUS_KEY_DIZZY,     ANIM_Bobomb_Anim1D,
-    STATUS_KEY_FEAR,      ANIM_Bobomb_Anim1D,
+    STATUS_KEY_NORMAL,    ANIM_Bobomb_WalkLit,
+    STATUS_KEY_STONE,     ANIM_Bobomb_StillLit,
+    STATUS_KEY_SLEEP,     ANIM_Bobomb_Sleep,
+    STATUS_KEY_POISON,    ANIM_Bobomb_WalkLit,
+    STATUS_KEY_STOP,      ANIM_Bobomb_StillLit,
+    STATUS_KEY_STATIC,    ANIM_Bobomb_IdleLit,
+    STATUS_KEY_PARALYZE,  ANIM_Bobomb_StillLit,
+    STATUS_KEY_DIZZY,     ANIM_Bobomb_DizzyLit,
+    STATUS_KEY_FEAR,      ANIM_Bobomb_DizzyLit,
     STATUS_END,
 };
 
@@ -169,7 +169,7 @@ EvtScript N(EVS_Ignite) = {
     EVT_CALL(SetPartEventBits, ACTOR_SELF, PRT_MAIN, ACTOR_EVENT_FLAG_EXPLODE_ON_CONTACT, TRUE)
     EVT_CALL(SetStatusTable, ACTOR_SELF, EVT_PTR(N(StatusTable_Ignited)))
     EVT_CALL(PlayLoopingSoundAtActor, ACTOR_SELF, 0, SOUND_80000001)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bobomb_Anim05)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bobomb_WalkLit)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(2.0))
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, 0, LVar2)
@@ -239,24 +239,24 @@ EvtScript N(EVS_HandleEvent) = {
                 EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_0, TRUE)
             EVT_END_IF
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim0E)
+            EVT_SET_CONST(LVar1, ANIM_Bobomb_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
         EVT_CASE_EQ(EVENT_HIT)
             EVT_CALL(GetLastElement, LVarE)
             EVT_IF_FLAG(LVarE, DAMAGE_TYPE_SHOCK)
                 EVT_SET_CONST(LVar0, PRT_MAIN)
-                EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim10)
-                EVT_SET_CONST(LVar2, ANIM_Bobomb_Anim11)
+                EVT_SET_CONST(LVar1, ANIM_Bobomb_BurnHurt)
+                EVT_SET_CONST(LVar2, ANIM_Bobomb_BurnStill)
                 EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
                 EVT_EXEC_WAIT(N(EVS_Explode))
                 EVT_SET_CONST(LVar0, PRT_MAIN)
-                EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim11)
+                EVT_SET_CONST(LVar1, ANIM_Bobomb_BurnStill)
                 EVT_SET(LVar2, EXEC_DEATH_NO_SPINNING)
                 EVT_EXEC_WAIT(EVS_Enemy_Death)
                 EVT_RETURN
             EVT_ELSE
                 EVT_SET_CONST(LVar0, PRT_MAIN)
-                EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim0E)
+                EVT_SET_CONST(LVar1, ANIM_Bobomb_Hurt)
                 EVT_EXEC_WAIT(EVS_Enemy_Hit)
                 EVT_CALL(GetLastDamage, ACTOR_SELF, LVar0)
                 EVT_IF_NE(LVar0, 0)
@@ -266,19 +266,19 @@ EvtScript N(EVS_HandleEvent) = {
         EVT_CASE_OR_EQ(EVENT_BURN_HIT)
         EVT_CASE_OR_EQ(EVENT_BURN_DEATH)
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim10)
-            EVT_SET_CONST(LVar2, ANIM_Bobomb_Anim11)
+            EVT_SET_CONST(LVar1, ANIM_Bobomb_BurnHurt)
+            EVT_SET_CONST(LVar2, ANIM_Bobomb_BurnStill)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
             EVT_EXEC_WAIT(N(EVS_Explode))
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim11)
+            EVT_SET_CONST(LVar1, ANIM_Bobomb_BurnStill)
             EVT_SET(LVar2, EXEC_DEATH_NO_SPINNING)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim0E)
+            EVT_SET_CONST(LVar1, ANIM_Bobomb_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
             EVT_CALL(GetLastDamage, ACTOR_SELF, LVar0)
             EVT_IF_NE(LVar0, 0)
@@ -286,28 +286,28 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_END_IF
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim0E)
+            EVT_SET_CONST(LVar1, ANIM_Bobomb_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
             EVT_EXEC_WAIT(N(EVS_Cleanup))
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim0E)
+            EVT_SET_CONST(LVar1, ANIM_Bobomb_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_SHOCK_HIT)
         EVT_CASE_OR_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim10)
+            EVT_SET_CONST(LVar1, ANIM_Bobomb_BurnHurt)
             EVT_SET(LVar2, EXEC_DEATH_NO_SPINNING)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_ZERO_DAMAGE)
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim02)
+            EVT_SET_CONST(LVar1, ANIM_Bobomb_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim02)
+            EVT_SET_CONST(LVar1, ANIM_Bobomb_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_0, LVar0)
             EVT_IF_EQ(LVar0, TRUE)
@@ -318,54 +318,54 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_CALL(GetLastElement, LVarE)
             EVT_IF_FLAG(LVarE, DAMAGE_TYPE_SHOCK)
                 EVT_SET_CONST(LVar0, PRT_MAIN)
-                EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim10)
-                EVT_SET_CONST(LVar2, ANIM_Bobomb_Anim11)
+                EVT_SET_CONST(LVar1, ANIM_Bobomb_BurnHurt)
+                EVT_SET_CONST(LVar2, ANIM_Bobomb_BurnStill)
                 EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
                 EVT_EXEC_WAIT(N(EVS_Explode))
                 EVT_SET_CONST(LVar0, PRT_MAIN)
-                EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim11)
+                EVT_SET_CONST(LVar1, ANIM_Bobomb_BurnStill)
                 EVT_SET(LVar2, EXEC_DEATH_NO_SPINNING)
                 EVT_EXEC_WAIT(EVS_Enemy_Death)
                 EVT_RETURN
             EVT_ELSE
                 EVT_SET_CONST(LVar0, PRT_MAIN)
-                EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim0E)
+                EVT_SET_CONST(LVar1, ANIM_Bobomb_Hurt)
                 EVT_EXEC_WAIT(EVS_Enemy_Hit)
                 EVT_WAIT(10)
                 EVT_EXEC_WAIT(N(EVS_Cleanup))
                 EVT_SET_CONST(LVar0, PRT_MAIN)
-                EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim0E)
+                EVT_SET_CONST(LVar1, ANIM_Bobomb_Hurt)
                 EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_END_IF
             EVT_RETURN
         EVT_CASE_EQ(EVENT_EXPLODE_TRIGGER)
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim10)
-            EVT_SET_CONST(LVar2, ANIM_Bobomb_Anim11)
+            EVT_SET_CONST(LVar1, ANIM_Bobomb_BurnHurt)
+            EVT_SET_CONST(LVar2, ANIM_Bobomb_BurnStill)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
             EVT_EXEC_WAIT(N(EVS_Explode))
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim11)
+            EVT_SET_CONST(LVar1, ANIM_Bobomb_BurnStill)
             EVT_SET(LVar2, EXEC_DEATH_NO_SPINNING)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim02)
+            EVT_SET_CONST(LVar1, ANIM_Bobomb_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_Recover)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim06)
-            EVT_SET_CONST(LVar2, ANIM_Bobomb_Anim0E)
+            EVT_SET_CONST(LVar1, ANIM_Bobomb_Run)
+            EVT_SET_CONST(LVar2, ANIM_Bobomb_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_ScareAway)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim1C)
+            EVT_SET_CONST(LVar1, ANIM_Bobomb_Dizzy)
             EVT_EXEC_WAIT(EVS_Enemy_AirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim1C)
+            EVT_SET_CONST(LVar1, ANIM_Bobomb_Dizzy)
             EVT_EXEC_WAIT(EVS_Enemy_BlowAway)
             EVT_RETURN
         EVT_CASE_DEFAULT
@@ -386,11 +386,11 @@ EvtScript N(EVS_HandleEvent_Ignited) = {
             EVT_IF_FLAG(LVarE, DAMAGE_TYPE_WATER)
                 EVT_EXEC_WAIT(N(EVS_Defuse))
                 EVT_SET_CONST(LVar0, PRT_MAIN)
-                EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim0E)
+                EVT_SET_CONST(LVar1, ANIM_Bobomb_Hurt)
                 EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_ELSE
                 EVT_SET_CONST(LVar0, PRT_MAIN)
-                EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim0F)
+                EVT_SET_CONST(LVar1, ANIM_Bobomb_HurtLit)
                 EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_END_IF
         EVT_CASE_EQ(EVENT_HIT)
@@ -399,27 +399,27 @@ EvtScript N(EVS_HandleEvent_Ignited) = {
                 EVT_CASE_FLAG(DAMAGE_TYPE_WATER)
                     EVT_EXEC_WAIT(N(EVS_Defuse))
                     EVT_SET_CONST(LVar0, PRT_MAIN)
-                    EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim0E)
+                    EVT_SET_CONST(LVar1, ANIM_Bobomb_Hurt)
                     EVT_EXEC_WAIT(EVS_Enemy_Hit)
                 EVT_CASE_FLAG(DAMAGE_TYPE_SHOCK)
                     EVT_SET_CONST(LVar0, PRT_MAIN)
-                    EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim10)
+                    EVT_SET_CONST(LVar1, ANIM_Bobomb_BurnHurt)
                     EVT_EXEC_WAIT(EVS_Enemy_Hit)
                     EVT_EXEC_WAIT(N(EVS_Explode))
                     EVT_SET_CONST(LVar0, PRT_MAIN)
-                    EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim11)
+                    EVT_SET_CONST(LVar1, ANIM_Bobomb_BurnStill)
                     EVT_SET(LVar2, EXEC_DEATH_NO_SPINNING)
                     EVT_EXEC_WAIT(EVS_Enemy_Death)
                     EVT_RETURN
                 EVT_CASE_DEFAULT
                     EVT_SET_CONST(LVar0, PRT_MAIN)
-                    EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim0F)
+                    EVT_SET_CONST(LVar1, ANIM_Bobomb_HurtLit)
                     EVT_EXEC_WAIT(EVS_Enemy_Hit)
                     EVT_CALL(GetLastDamage, ACTOR_SELF, LVar0)
                     EVT_IF_GT(LVar0, 0)
                         EVT_EXEC_WAIT(N(EVS_Explode))
                         EVT_SET_CONST(LVar0, PRT_MAIN)
-                        EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim11)
+                        EVT_SET_CONST(LVar1, ANIM_Bobomb_BurnStill)
                         EVT_SET(LVar2, EXEC_DEATH_NO_SPINNING)
                         EVT_EXEC_WAIT(EVS_Enemy_Death)
                         EVT_RETURN
@@ -432,7 +432,7 @@ EvtScript N(EVS_HandleEvent_Ignited) = {
         EVT_CASE_OR_EQ(EVENT_EXPLODE_TRIGGER)
             EVT_EXEC_WAIT(N(EVS_Explode))
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim11)
+            EVT_SET_CONST(LVar1, ANIM_Bobomb_BurnStill)
             EVT_SET(LVar2, EXEC_DEATH_NO_SPINNING)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
@@ -441,7 +441,7 @@ EvtScript N(EVS_HandleEvent_Ignited) = {
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim03)
+            EVT_SET_CONST(LVar1, ANIM_Bobomb_IdleLit)
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
@@ -449,11 +449,11 @@ EvtScript N(EVS_HandleEvent_Ignited) = {
             EVT_IF_FLAG(LVarE, DAMAGE_TYPE_WATER)
                 EVT_EXEC_WAIT(N(EVS_Defuse))
                 EVT_SET_CONST(LVar0, PRT_MAIN)
-                EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim0E)
+                EVT_SET_CONST(LVar1, ANIM_Bobomb_Hurt)
             EVT_ELSE
                 EVT_EXEC_WAIT(N(EVS_Explode))
                 EVT_SET_CONST(LVar0, PRT_MAIN)
-                EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim11)
+                EVT_SET_CONST(LVar1, ANIM_Bobomb_BurnStill)
                 EVT_SET(LVar2, EXEC_DEATH_NO_SPINNING)
             EVT_END_IF
             EVT_EXEC_WAIT(EVS_Enemy_Death)
@@ -462,39 +462,39 @@ EvtScript N(EVS_HandleEvent_Ignited) = {
         EVT_CASE_OR_EQ(EVENT_SHOCK_DEATH)
             EVT_EXEC_WAIT(N(EVS_Explode))
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim11)
+            EVT_SET_CONST(LVar1, ANIM_Bobomb_BurnStill)
             EVT_SET(LVar2, EXEC_DEATH_NO_SPINNING)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim03)
+            EVT_SET_CONST(LVar1, ANIM_Bobomb_IdleLit)
             EVT_EXEC_WAIT(EVS_Enemy_Recover)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
             EVT_EXEC_WAIT(N(EVS_Cleanup))
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim06)
-            EVT_SET_CONST(LVar2, ANIM_Bobomb_Anim0E)
+            EVT_SET_CONST(LVar1, ANIM_Bobomb_Run)
+            EVT_SET_CONST(LVar2, ANIM_Bobomb_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_ScareAway)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim1D)
+            EVT_SET_CONST(LVar1, ANIM_Bobomb_DizzyLit)
             EVT_EXEC_WAIT(EVS_Enemy_AirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_CALL(GetDamageSource, LVar0)
             EVT_IF_EQ(LVar0, DMG_SRC_HURRICANE)
                 EVT_EXEC_WAIT(N(EVS_Defuse))
                 EVT_SET_CONST(LVar0, PRT_MAIN)
-                EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim1C)
+                EVT_SET_CONST(LVar1, ANIM_Bobomb_Dizzy)
             EVT_ELSE
                 EVT_CHILD_THREAD
                     EVT_WAIT(100)
                     EVT_EXEC_WAIT(N(EVS_Explode))
                 EVT_END_CHILD_THREAD
                 EVT_SET_CONST(LVar0, PRT_MAIN)
-                EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim1D)
+                EVT_SET_CONST(LVar1, ANIM_Bobomb_DizzyLit)
             EVT_END_IF
             EVT_EXEC_WAIT(EVS_Enemy_BlowAway)
             EVT_RETURN
@@ -515,18 +515,18 @@ EvtScript N(EVS_Attack_Tackle) = {
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bobomb_Anim06)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bobomb_Run)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 50, 0, 0)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bobomb_Anim02)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bobomb_Idle)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -1, 0)
     EVT_WAIT(1)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, -2, 0)
     EVT_WAIT(5)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bobomb_Anim06)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bobomb_Run)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
@@ -539,7 +539,7 @@ EvtScript N(EVS_Attack_Tackle) = {
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.1))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bobomb_Anim1C)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bobomb_Dizzy)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_SUB(LVar0, 20)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(3.0))
@@ -560,11 +560,11 @@ EvtScript N(EVS_Attack_Tackle) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
             EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bobomb_Anim06)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bobomb_Run)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bobomb_Anim02)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bobomb_Idle)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_RETURN
@@ -573,7 +573,7 @@ EvtScript N(EVS_Attack_Tackle) = {
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.1))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bobomb_Anim14)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bobomb_Buildup)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(GetActorSize, ACTOR_SELF, LVar3, LVar4)
             EVT_PLAY_EFFECT(EFFECT_FLASHING_BOX_SHOCKWAVE, 0, LVar0, LVar1, LVar2, LVar4, LVar3, 0)
@@ -588,7 +588,7 @@ EvtScript N(EVS_Attack_Tackle) = {
     EVT_CALL(JumpToGoal, ACTOR_SELF, 20, FALSE, TRUE, FALSE)
     EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, 0, 0, 0, DMG_TACKLE, BS_FLAGS1_SP_EVT_ACTIVE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bobomb_Anim02)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bobomb_Idle)
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
@@ -607,11 +607,11 @@ EvtScript N(EVS_Attack_Tackle) = {
             EVT_CALL(JumpToGoal, ACTOR_SELF, 6, FALSE, TRUE, FALSE)
             EVT_WAIT(4)
             EVT_CALL(YieldTurn)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bobomb_Anim06)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bobomb_Run)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bobomb_Anim02)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bobomb_Idle)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_RETURN
@@ -631,14 +631,14 @@ EvtScript N(EVS_Attack_Blast) = {
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LVarA, LVar0)
             EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bobomb_Anim07)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bobomb_RunLit)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(AddGoalPos, ACTOR_SELF, 80, 0, 0)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
             EVT_CALL(SetActorRotationOffset, ACTOR_SELF, -1, 14, 0)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 90)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bobomb_Anim07)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bobomb_RunLit)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(3.0))
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_SUB(LVar0, 30)
@@ -646,7 +646,7 @@ EvtScript N(EVS_Attack_Blast) = {
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_EXEC_WAIT(N(EVS_Explode))
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bobomb_Anim11)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bobomb_BurnStill)
             EVT_WAIT(10)
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
@@ -662,22 +662,22 @@ EvtScript N(EVS_Attack_Blast) = {
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bobomb_Anim07)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bobomb_RunLit)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 10, 0, 0)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bobomb_Anim14)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bobomb_Buildup)
     EVT_WAIT(15)
     EVT_SET(LVarA, 1)
     EVT_EXEC_WAIT(N(EVS_Explode))
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bobomb_Anim11)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bobomb_BurnStill)
     EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_BLAST | DAMAGE_TYPE_NO_CONTACT, 0, 0, DMG_EXPLOSION, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_WAIT(15)
     EVT_SET_CONST(LVar0, PRT_MAIN)
-    EVT_SET_CONST(LVar1, ANIM_Bobomb_Anim11)
+    EVT_SET_CONST(LVar1, ANIM_Bobomb_BurnStill)
     EVT_SET(LVar2, EXEC_DEATH_NO_SPINNING)
     EVT_EXEC_WAIT(EVS_Enemy_Death)
     EVT_RETURN
