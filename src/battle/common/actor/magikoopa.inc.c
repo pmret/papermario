@@ -1418,9 +1418,9 @@ EvtScript N(makeClone) = {
         EVT_SET(LFlag0, TRUE)
     EVT_END_IF
     EVT_IF_EQ(LFlag0, FALSE)
-        EVT_CALL(SummonEnemy, EVT_PTR(N(formation_clone)), 0)
+        EVT_CALL(SummonEnemy, EVT_PTR(N(formation_clone)), FALSE)
     EVT_ELSE
-        EVT_CALL(SummonEnemy, EVT_PTR(N(formation_clone_flying)), 0)
+        EVT_CALL(SummonEnemy, EVT_PTR(N(formation_clone_flying)), FALSE)
     EVT_END_IF
     EVT_CALL(SetActorVar, ACTOR_SELF, N(VAR_CLONE_ID), LVar0)
     EVT_SET(LVarA, LVar0)

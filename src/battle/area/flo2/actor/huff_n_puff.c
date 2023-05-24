@@ -611,10 +611,10 @@ EvtScript N(spawnTuffPuff) = {
         EVT_CALL(SetTuffPuffPriority)
         EVT_IF_GT(LVarA, 0)
             EVT_SUB(LVarA, 1)
-            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_tuff_puff_large)), 0)
+            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_tuff_puff_large)), FALSE)
             EVT_CALL(SetActorVar, LVar0, 5, 2)
         EVT_ELSE
-            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_tuff_puff_small)), 0)
+            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_tuff_puff_small)), FALSE)
             EVT_CALL(SetActorVar, LVar0, 5, 1)
         EVT_END_IF
         EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_TUFF_PUFF_BIT_ARRAY), LVar1)

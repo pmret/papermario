@@ -201,9 +201,9 @@ Formation N(formation_hole_2) = {
 EvtScript N(onDeath) = {
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
     EVT_IF_FLAG(LVar0, STATUS_FLAG_SHRINK)
-        EVT_CALL(SummonEnemy, EVT_PTR(N(formation_hole_2)), 0)
+        EVT_CALL(SummonEnemy, EVT_PTR(N(formation_hole_2)), FALSE)
     EVT_ELSE
-        EVT_CALL(SummonEnemy, EVT_PTR(N(formation_hole_1)), 0)
+        EVT_CALL(SummonEnemy, EVT_PTR(N(formation_hole_1)), FALSE)
     EVT_END_IF
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
     EVT_SUB(LVar3, 1)

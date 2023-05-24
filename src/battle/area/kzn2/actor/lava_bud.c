@@ -547,9 +547,9 @@ EvtScript N(summonPetitPiranha) = {
     EVT_END_THREAD
     EVT_WAIT(56)
     EVT_IF_EQ(LVar0, 1)
-        EVT_CALL(SummonEnemy, EVT_PTR(N(formation_petit_piranha_1)), 0)
+        EVT_CALL(SummonEnemy, EVT_PTR(N(formation_petit_piranha_1)), FALSE)
     EVT_ELSE
-        EVT_CALL(SummonEnemy, EVT_PTR(N(formation_petit_piranha_2)), 0)
+        EVT_CALL(SummonEnemy, EVT_PTR(N(formation_petit_piranha_2)), FALSE)
     EVT_END_IF
     EVT_SET(LVar5, LVar0)
     EVT_CALL(GetActorVar, ACTOR_SELF, 9, LVar0)
@@ -1012,7 +1012,7 @@ EvtScript N(attackPetitSpit) = {
         EVT_EXEC_WAIT(N(playModelAnimation))
     EVT_END_THREAD
     EVT_WAIT(56)
-    EVT_CALL(SummonEnemy, EVT_PTR(N(formation_petit_piranha_bomb)), 0)
+    EVT_CALL(SummonEnemy, EVT_PTR(N(formation_petit_piranha_bomb)), FALSE)
     EVT_SET(LVar5, LVar0)
     EVT_CALL(GetPartOffset, ACTOR_SELF, PRT_MAIN, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 15)

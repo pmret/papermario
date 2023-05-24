@@ -168,7 +168,7 @@ EvtScript N(init) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 2, 0)
     EVT_CALL(LoadBattleSection, 41)
-    EVT_CALL(SummonEnemy, EVT_PTR(N(formation_shy_squad)), 1)
+    EVT_CALL(SummonEnemy, EVT_PTR(N(formation_shy_squad)), TRUE)
     EVT_RETURN
     EVT_END
 };

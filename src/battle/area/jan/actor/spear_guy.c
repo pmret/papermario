@@ -677,9 +677,9 @@ EvtScript N(summonBackup) = {
         EVT_GOTO(1)
     EVT_END_IF
     EVT_IF_EQ(LFlag0, FALSE)
-        EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_8021A8C0)), 0)
+        EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_8021A8C0)), FALSE)
     EVT_ELSE
-        EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_8021A8DC)), 0)
+        EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_8021A8DC)), FALSE)
     EVT_END_IF
     EVT_SET(LVarB, LVar0)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)

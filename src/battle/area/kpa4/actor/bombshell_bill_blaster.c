@@ -214,7 +214,7 @@ EvtScript N(bulletShot) = {
     EVT_PLAY_EFFECT(EFFECT_00, LVar0, LVar1, LVar2, 2, 5, 2, 2, 0)
     EVT_WAIT(2)
     EVT_CALL(ApplyBillSettings)
-    EVT_CALL(SummonEnemy, EVT_PTR(N(formation_bill)), 0)
+    EVT_CALL(SummonEnemy, EVT_PTR(N(formation_bill)), FALSE)
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, LVar0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
     EVT_RETURN

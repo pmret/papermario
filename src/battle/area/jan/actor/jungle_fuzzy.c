@@ -264,7 +264,7 @@ EvtScript N(divide) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Jungle_Anim0D)
     EVT_WAIT(130)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Jungle_Walk)
-    EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_8022180C)), 0)
+    EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_8022180C)), FALSE)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
     EVT_CALL(SetActorPos, LVar0, LVar1, LVar2, LVar3)
     EVT_CALL(SetGoalToIndex, LVar0, LVarA)

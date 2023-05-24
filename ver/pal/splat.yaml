@@ -5512,7 +5512,7 @@ segments:
     - [0x731030, c, actor/whacka]
     - [0x731080, c, stage/dig_01]
     - [0x731080, c, stage/dig_02]
-    - [0x731080, c, stage/dig_03]
+    - [0x731080, c, stage/sbk_02]
     - [0x731230, c, stage/dig_04]
     - [0x731280, c, stage/dig_05]
     - [0x731280, c, area]

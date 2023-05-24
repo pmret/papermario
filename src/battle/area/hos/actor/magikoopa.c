@@ -1370,9 +1370,9 @@ EvtScript N(makeCopy) = {
         EVT_SET(LFlag0, TRUE)
     EVT_END_IF
     EVT_IF_EQ(LFlag0, FALSE)
-        EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_802216C8)), 0)
+        EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_802216C8)), FALSE)
     EVT_ELSE
-        EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_802216E4)), 0)
+        EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_802216E4)), FALSE)
     EVT_END_IF
     EVT_CALL(SetActorVar, ACTOR_SELF, 9, LVar0)
     EVT_SET(LVarA, LVar0)

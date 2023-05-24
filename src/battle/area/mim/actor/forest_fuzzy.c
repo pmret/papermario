@@ -262,7 +262,7 @@ EvtScript N(80218C48) = {
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Anim0D)
     EVT_WAIT(130)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Walk)
-    EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_8021A800)), 0)
+    EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_8021A800)), FALSE)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
     EVT_CALL(SetActorPos, LVar0, LVar1, LVar2, LVar3)
     EVT_CALL(SetGoalToIndex, LVar0, LVarA)

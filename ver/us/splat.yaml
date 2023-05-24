@@ -8077,7 +8077,7 @@ segments:
     - [0x6DE1A0, c, actor/whacka]
     - [0x6DE1F0, c, stage/dig_01]
     - [0x6DE1F0, c, stage/dig_02]
-    - [0x6DE1F0, c, stage/dig_03]
+    - [0x6DE1F0, c, stage/sbk_02]
     - [0x6DE3A0, c, stage/dig_04]
     - [0x6DE3F0, c, stage/dig_05]
     - [0x6DE3F0, c, area]

@@ -719,12 +719,12 @@ EvtScript N(makeBabies) = {
     EVT_CALL(ActorExists, ACTOR_ENEMY1, LVar1)
     EVT_IF_EQ(LVar1, 0)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3D9)
-        EVT_CALL(SummonEnemy, EVT_PTR(N(formation_baby_1)), 0)
+        EVT_CALL(SummonEnemy, EVT_PTR(N(formation_baby_1)), FALSE)
     EVT_END_IF
     EVT_CALL(ActorExists, ACTOR_ENEMY2, LVar1)
     EVT_IF_EQ(LVar1, 0)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3D9)
-        EVT_CALL(SummonEnemy, EVT_PTR(N(formation_baby_2)), 0)
+        EVT_CALL(SummonEnemy, EVT_PTR(N(formation_baby_2)), FALSE)
     EVT_END_IF
     EVT_WAIT(2)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Blooper_Anim0C)

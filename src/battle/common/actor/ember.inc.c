@@ -313,7 +313,7 @@ EvtScript N(split) = {
         EVT_CASE_OR_EQ(1)
         EVT_CASE_OR_EQ(2)
         EVT_CASE_OR_EQ(3)
-            EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_8021B5A0)), 0)
+            EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_8021B5A0)), FALSE)
             EVT_CALL(SetActorVar, LVar0, 2, 1)
             EVT_CALL(GetActorHP, ACTOR_SELF, LVarB)
             EVT_CALL(SetEnemyHP, LVar0, LVarB)

@@ -1017,7 +1017,7 @@ EvtScript N(EVS_Move_SummonChomp) = {
     EVT_CALL(StopSound, SOUND_26B)
     EVT_WAIT(10)
     // create the chomp and have him exit the gate
-    EVT_CALL(SummonEnemy, EVT_PTR(N(SummonedChomp)), 0)
+    EVT_CALL(SummonEnemy, EVT_PTR(N(SummonedChomp)), FALSE)
     EVT_SET(LVarB, LVar0)
     EVT_SET(LVar0, 165)
     EVT_SET(LVar1, 0)

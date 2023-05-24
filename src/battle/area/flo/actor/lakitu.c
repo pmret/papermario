@@ -392,7 +392,7 @@ EvtScript N(summonSpiny) = {
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
-    EVT_CALL(SummonEnemy, EVT_PTR(N(formation_spiny)), 0)
+    EVT_CALL(SummonEnemy, EVT_PTR(N(formation_spiny)), FALSE)
     EVT_CALL(CopyStatusEffects, ACTOR_SELF, LVar0)
     EVT_SET(LVarB, LVar0)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_2, ANIM_Lakitu_Anim0B)

@@ -1086,7 +1086,7 @@ EvtScript N(summonFriend) = {
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 16, FALSE, TRUE, FALSE)
-    EVT_CALL(SummonEnemy, EVT_PTR(N(summon_formation)), 0)
+    EVT_CALL(SummonEnemy, EVT_PTR(N(summon_formation)), FALSE)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
     EVT_ADD(LVar1, 200)
     EVT_CALL(SetActorPos, LVar0, LVar1, LVar2, LVar3)

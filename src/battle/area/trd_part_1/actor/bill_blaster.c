@@ -227,7 +227,7 @@ EvtScript N(EVS_Move_FireBullet) = {
     EVT_PLAY_EFFECT(EFFECT_00, LVar0, LVar1, LVar2, 2, 5, 2, 2, 0)
     EVT_WAIT(2)
     EVT_CALL(N(SetBulletInitVars))
-    EVT_CALL(SummonEnemy, EVT_PTR(N(BulletBillSummon)), 0)
+    EVT_CALL(SummonEnemy, EVT_PTR(N(BulletBillSummon)), FALSE)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_BulletID, LVar0)
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_HasBullet, TRUE)
     EVT_RETURN
