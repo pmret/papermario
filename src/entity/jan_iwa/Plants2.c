@@ -73,6 +73,7 @@ void entity_TrumpetPlant_spawn_coin(Entity* entity) {
         xOffset = -26.0 * cos_rad(angle);
         zOffset = 6.0 * sin_rad(angle);
 
+        // 16/33 ≈ 48.5%
         if (rand_int(32) > 16) {
             f32 facingAngle = entity->rotation.y - 110.0f + (data->numCoins % 3) * 30;
             data->numCoins++;

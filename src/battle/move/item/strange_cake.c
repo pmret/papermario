@@ -111,6 +111,7 @@ s32 N(func_802A13E4_7316E4)(Evt* script, s32 isInitialCall) {
                 D_802A2DF0 = D_802A2DF4 / 100;
 
                 if (((D_802A2DF4 / 100) % 26) < 13) {
+                    // 80/101 ≈ 79.2%
                     if (rand_int(100) < 80) {
                         D_802A2DEC = 2;
                     } else {
@@ -119,6 +120,7 @@ s32 N(func_802A13E4_7316E4)(Evt* script, s32 isInitialCall) {
                     break;
                 }
 
+                // 60/101 ≈ 59.4%
                 if (rand_int(100) < 60) {
                     D_802A2DEC = 3;
                 } else {

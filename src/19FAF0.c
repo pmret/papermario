@@ -655,6 +655,7 @@ HitResult calc_player_damage_enemy(void) {
 
         if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
             if (battleStatus->currentAttackElement & DAMAGE_TYPE_FEAR
+            // (escapeChance * statusChance)/10000
                 && rand_int(99) < (target->actorBlueprint->escapeChance * battleStatus->statusChance) / 100
                 && (target->debuff != STATUS_KEY_FEAR
                     && target->debuff != STATUS_KEY_DIZZY

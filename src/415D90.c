@@ -3309,6 +3309,7 @@ void btl_state_update_player_menu(void) {
                 if (hammerTargetCount <= 0) {
                     jumpChance = 101;
                 }
+                // jumpChance/101
                 if (rand_int(100) < jumpChance) {
                     battleStatus->selectedMoveID = MOVE_UNUSED_JUMP5;
                     battleStatus->moveCategory = BTL_MENU_TYPE_JUMP;

@@ -113,6 +113,7 @@ void snaking_static_update(EffectInstance* effect) {
             data->pos.x = 0.0f;
             data->pos.y = 0.0f;
         }
+        // 51/101 ≈ 50.5%
         if (shim_rand_int(100) < 51) {
             tempPosX = data->pos.x;
             tempPosY = data->pos.y;

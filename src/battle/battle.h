@@ -386,7 +386,7 @@ typedef struct Stage {
     /* 0x18 */ s32* foregroundModelList;
     /* 0x1C */ s32 stageEnemyCount;         // number of enemies in the stageFormation
     /* 0x20 */ Formation* stageFormation;   // extra enemies native to this stage
-    /* 0x24 */ s32 stageEnemyChance;        // chance for stageFormation enemies to spawn: N = 0 means always, N > 0 is 1/N chance
+    /* 0x24 */ s32 stageEnemyChance;        // 1/(N+1) chance for stageFormation enemies to spawn
 } Stage; // size = 0x28
 
 /// Zero-terminated.

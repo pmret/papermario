@@ -2544,6 +2544,7 @@ s32 try_inflict_status(Actor* actor, s32 statusTypeKey, s32 statusKey) {
 
         if (chance > 0) {
             chance = (chance * battleStatus->statusChance) / 100;
+            // (chance + 1)/101 if chance > 0
             if (chance > 0 && chance >= rand_int(100)) {
                 duration = 3;
                 duration += lookup_status_duration_mod(actor->statusTable, statusKey);

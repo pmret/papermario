@@ -48,6 +48,7 @@ void spawn_drops(Enemy* enemy) {
     pickupDelay = 0;
 
     dropCount = drops->itemDropChance;
+    // itemDropChance/101
     if (drops->itemDropChance > rand_int(100)) {
         tempMax = 0;
 
@@ -469,6 +470,7 @@ s32 basic_ai_check_player_dist(EnemyDetectVolume* territory, Enemy* enemy, f32 r
     if (territory->skipPlayerDetectChance == 0) {
         skipCheckForPlayer = 0;
     } else {
+        // 1/(skipPlayerDetectChance + 2)
         skipCheckForPlayer = rand_int(territory->skipPlayerDetectChance + 1);
     }
 
@@ -504,6 +506,7 @@ s32 ai_check_player_dist(Enemy* enemy, s32 chance, f32 radius, f32 moveSpeed) {
         s32 skipCheckForPlayer;
 
         if (chance != 0) {
+        // 1/(chance + 2)
             skipCheckForPlayer = rand_int(chance + 1);
         } else {
             skipCheckForPlayer = 0;

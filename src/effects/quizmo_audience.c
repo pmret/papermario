@@ -142,6 +142,7 @@ void quizmo_audience_update(EffectInstance* effect) {
     for (i = 0; i < MAX_QUIZMO_AUDIENCE; i++) {
         switch (data->compState[i]) {
             case 0:
+                // 1/11 ≈ 9.1%
                 if (shim_rand_int(10) == 10) {
                     data->compState[i] = 1;
                     data->compType[i] = shim_rand_int(1);

@@ -993,6 +993,7 @@ s32 hud_element_update(HudElement* hudElement) {
         case HUD_ELEMENT_OP_RandomRestart:
             s1 = *nextPos++;
             s2 = *nextPos++;
+            // s2/(s1 + 1)
             if (rand_int(s1) < s2) {
                 hudElement->readPos = hudElement->loopStartPos;
             } else {

@@ -47,28 +47,39 @@ void btl_merlee_on_start_turn(void) {
 
                 if (currentEncounter->currentEnemy != NULL) {
                     if (currentEncounter->currentEnemy->flags & ACTOR_FLAG_NO_HEALTH_BAR) {
+                        // 46/101 ≈ 45.5%
                         if (temp <= 45) {
                             playerData->merleeSpellType = MERLEE_SPELL_1;
+                        // 45/101 ≈ 44.6%
                         } else if (temp <= 90) {
                             playerData->merleeSpellType = MERLEE_SPELL_2;
+                        // 10/101 ≈ 9.9%
                         } else {
                             playerData->merleeSpellType = MERLEE_SPELL_EXP_BOOST;
                         }
+                    // 31/101 ≈ 30.7%
                     } else if (temp <= 30) {
                         playerData->merleeSpellType = MERLEE_SPELL_1;
+                    // 30/101 ≈ 29.7%
                     } else if (temp <= 60) {
                         playerData->merleeSpellType = MERLEE_SPELL_2;
+                    // 20/101 ≈ 19.8%
                     } else if (temp <= 80) {
                         playerData->merleeSpellType = MERLEE_SPELL_EXP_BOOST;
+                    // 20/101 ≈ 19.8%
                     } else {
                         playerData->merleeSpellType = MERLEE_SPELL_COIN_BOOST;
                     }
+                // 31/101 ≈ 30.7%
                 } else if (temp <= 30) {
                     playerData->merleeSpellType = MERLEE_SPELL_1;
+                // 30/101 ≈ 29.7%
                 } else if (temp <= 60) {
                     playerData->merleeSpellType = MERLEE_SPELL_2;
+                // 20/101 ≈ 19.8%
                 } else if (temp <= 80) {
                     playerData->merleeSpellType = MERLEE_SPELL_EXP_BOOST;
+                // 20/101 ≈ 19.8%
                 } else {
                     playerData->merleeSpellType = MERLEE_SPELL_COIN_BOOST;
                 }
@@ -104,28 +115,39 @@ void btl_merlee_on_first_strike(void) {
 
                 if (currentEncounter->currentEnemy != NULL) {
                     if (currentEncounter->currentEnemy->flags & ACTOR_FLAG_NO_HEALTH_BAR) {
+                        // 46/101 ≈ 45.5%
                         if (temp <= 45) {
                             playerData->merleeSpellType = MERLEE_SPELL_1;
+                        // 45/101 ≈ 44.6%
                         } else if (temp <= 90) {
                             playerData->merleeSpellType = MERLEE_SPELL_2;
+                        // 10/101 ≈ 9.9%
                         } else {
                             playerData->merleeSpellType = MERLEE_SPELL_EXP_BOOST;
                         }
+                    // 31/101 ≈ 30.7%
                     } else if (temp <= 30) {
                         playerData->merleeSpellType = MERLEE_SPELL_1;
+                    // 30/101 ≈ 29.7%
                     } else if (temp <= 60) {
                         playerData->merleeSpellType = MERLEE_SPELL_2;
+                    // 20/101 ≈ 19.8%
                     } else if (temp <= 80) {
                         playerData->merleeSpellType = MERLEE_SPELL_EXP_BOOST;
+                    // 20/101 ≈ 19.8%
                     } else {
                         playerData->merleeSpellType = MERLEE_SPELL_COIN_BOOST;
                     }
+                // 31/101 ≈ 30.7%
                 } else if (temp <= 30) {
                     playerData->merleeSpellType = MERLEE_SPELL_1;
+                // 30/101 ≈ 29.7%
                 } else if (temp <= 60) {
                     playerData->merleeSpellType = MERLEE_SPELL_2;
+                // 20/101 ≈ 19.8%
                 } else if (temp <= 80) {
                     playerData->merleeSpellType = MERLEE_SPELL_EXP_BOOST;
+                // 20/101 ≈ 19.8%
                 } else {
                     playerData->merleeSpellType = MERLEE_SPELL_COIN_BOOST;
                 }
@@ -364,6 +386,7 @@ void btl_state_update_normal_start(void) {
             }
 
             if (stage->stageEnemyCount != 0) {
+                // 1/(stageEnemyChance + 1)
                 if (stage->stageEnemyChance == 0 || (stage->stageEnemyChance > 0 && (rand_int(stage->stageEnemyChance) == 0))) {
                     BattleEnemiesCreated += stage->stageEnemyCount;
                     for (j = 0; i < BattleEnemiesCreated; i++, j++) {
@@ -2975,12 +2998,15 @@ void btl_state_update_end_player_turn(void) {
                 battleStatus->hpDrainCount = 0;
             }
 
+            // 50/101 ≈ 49.5%
             if (rand_int(100) < 50) {
                 hpRecovery = is_ability_active(ABILITY_CRAZY_HEART) * 3;
             }
+            // 50/101 ≈ 49.5%
             if (rand_int(100) < 50) {
                 hpRecovery += is_ability_active(ABILITY_HAPPY_HEART);
             }
+            // 50/101 ≈ 49.5%
             if (rand_int(100) < 50) {
                 fpRecovery = is_ability_active(ABILITY_HAPPY_FLOWER);
             }

@@ -480,6 +480,7 @@ API_CALLABLE(N(RunMinigame)) {
                         data->box[i].state = BOX_STATE_FUZZY_IDLE;
                         data->box[i].stateTimer = rand_int(330) + 90;
                         npc->pos.y = NPC_DISPOSE_POS_Y;
+                        // 50/101 ≈ 49.5%
                         if (rand_int(100) < 50) {
                             npc->yaw = 270.0f;
                         } else {
@@ -607,6 +608,7 @@ API_CALLABLE(N(RunMinigame)) {
                         data->box[i].state = BOX_STATE_BOMB_IDLE;
                         data->box[i].stateTimer = rand_int(330) + 90;
                         npc->pos.y = NPC_DISPOSE_POS_Y;
+                        // 50/101 ≈ 49.5%
                         if (rand_int(100) < 50) {
                             npc->yaw = 270.0f;
                         } else {
