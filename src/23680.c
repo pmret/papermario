@@ -506,7 +506,7 @@ s32 ai_check_player_dist(Enemy* enemy, s32 chance, f32 radius, f32 moveSpeed) {
         s32 skipCheckForPlayer;
 
         if (chance != 0) {
-        // 1/(chance + 2)
+            // 1/(chance + 2)
             skipCheckForPlayer = rand_int(chance + 1);
         } else {
             skipCheckForPlayer = 0;

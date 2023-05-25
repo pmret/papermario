@@ -50,37 +50,27 @@ void btl_merlee_on_start_turn(void) {
                         // 46/101 ≈ 45.5%
                         if (temp <= 45) {
                             playerData->merleeSpellType = MERLEE_SPELL_1;
-                        // 45/101 ≈ 44.6%
-                        } else if (temp <= 90) {
+                        } else if (temp <= 90) { // 45/101 ≈ 44.6%
                             playerData->merleeSpellType = MERLEE_SPELL_2;
-                        // 10/101 ≈ 9.9%
-                        } else {
+                        } else { // 10/101 ≈ 9.9%
                             playerData->merleeSpellType = MERLEE_SPELL_EXP_BOOST;
                         }
-                    // 31/101 ≈ 30.7%
-                    } else if (temp <= 30) {
+                    } else if (temp <= 30) { // 31/101 ≈ 30.7%
                         playerData->merleeSpellType = MERLEE_SPELL_1;
-                    // 30/101 ≈ 29.7%
-                    } else if (temp <= 60) {
+                    } else if (temp <= 60) { // 30/101 ≈ 29.7%
                         playerData->merleeSpellType = MERLEE_SPELL_2;
-                    // 20/101 ≈ 19.8%
-                    } else if (temp <= 80) {
+                    } else if (temp <= 80) { // 20/101 ≈ 19.8%
                         playerData->merleeSpellType = MERLEE_SPELL_EXP_BOOST;
-                    // 20/101 ≈ 19.8%
-                    } else {
+                    } else { // 20/101 ≈ 19.8%
                         playerData->merleeSpellType = MERLEE_SPELL_COIN_BOOST;
                     }
-                // 31/101 ≈ 30.7%
-                } else if (temp <= 30) {
+                } else if (temp <= 30) { // 31/101 ≈ 30.7%
                     playerData->merleeSpellType = MERLEE_SPELL_1;
-                // 30/101 ≈ 29.7%
-                } else if (temp <= 60) {
+                } else if (temp <= 60) { // 30/101 ≈ 29.7%
                     playerData->merleeSpellType = MERLEE_SPELL_2;
-                // 20/101 ≈ 19.8%
-                } else if (temp <= 80) {
+                } else if (temp <= 80) { // 20/101 ≈ 19.8%
                     playerData->merleeSpellType = MERLEE_SPELL_EXP_BOOST;
-                // 20/101 ≈ 19.8%
-                } else {
+                } else { // 20/101 ≈ 19.8%
                     playerData->merleeSpellType = MERLEE_SPELL_COIN_BOOST;
                 }
 
@@ -118,37 +108,27 @@ void btl_merlee_on_first_strike(void) {
                         // 46/101 ≈ 45.5%
                         if (temp <= 45) {
                             playerData->merleeSpellType = MERLEE_SPELL_1;
-                        // 45/101 ≈ 44.6%
-                        } else if (temp <= 90) {
+                        } else if (temp <= 90) { // 45/101 ≈ 44.6%
                             playerData->merleeSpellType = MERLEE_SPELL_2;
-                        // 10/101 ≈ 9.9%
-                        } else {
+                        } else { // 10/101 ≈ 9.9%
                             playerData->merleeSpellType = MERLEE_SPELL_EXP_BOOST;
                         }
-                    // 31/101 ≈ 30.7%
-                    } else if (temp <= 30) {
+                    } else if (temp <= 30) { // 31/101 ≈ 30.7%
                         playerData->merleeSpellType = MERLEE_SPELL_1;
-                    // 30/101 ≈ 29.7%
-                    } else if (temp <= 60) {
+                    } else if (temp <= 60) { // 30/101 ≈ 29.7%
                         playerData->merleeSpellType = MERLEE_SPELL_2;
-                    // 20/101 ≈ 19.8%
-                    } else if (temp <= 80) {
+                    } else if (temp <= 80) { // 20/101 ≈ 19.8%
                         playerData->merleeSpellType = MERLEE_SPELL_EXP_BOOST;
-                    // 20/101 ≈ 19.8%
-                    } else {
+                    } else { // 20/101 ≈ 19.8%
                         playerData->merleeSpellType = MERLEE_SPELL_COIN_BOOST;
                     }
-                // 31/101 ≈ 30.7%
-                } else if (temp <= 30) {
+                } else if (temp <= 30) { // 31/101 ≈ 30.7%
                     playerData->merleeSpellType = MERLEE_SPELL_1;
-                // 30/101 ≈ 29.7%
-                } else if (temp <= 60) {
+                } else if (temp <= 60) { // 30/101 ≈ 29.7%
                     playerData->merleeSpellType = MERLEE_SPELL_2;
-                // 20/101 ≈ 19.8%
-                } else if (temp <= 80) {
+                } else if (temp <= 80) { // 20/101 ≈ 19.8%
                     playerData->merleeSpellType = MERLEE_SPELL_EXP_BOOST;
-                // 20/101 ≈ 19.8%
-                } else {
+                } else { // 20/101 ≈ 19.8%
                     playerData->merleeSpellType = MERLEE_SPELL_COIN_BOOST;
                 }
 
