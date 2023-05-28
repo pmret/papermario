@@ -825,8 +825,6 @@ class N64SegPm_sprites(N64Segment):
             rom_start, rom_end, type, name, vram_start, args=args, yaml=yaml
         )
 
-        self.npc_files: List[str] = yaml["npc_files"]
-
         with (Path(__file__).parent / f"npc_sprite_names.yaml").open("r") as f:
             self.npc_cfg = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
 
@@ -908,9 +906,7 @@ class N64SegPm_sprites(N64Segment):
     def split_npc(self, data: bytes) -> None:
         out_dir = self.out_path().parent / "npc"
 
-        for i, sprite_name in enumerate(self.npc_files):  # used to be "files"
-            # self.log(f"Splitting sprite {sprite_name}...")
-
+        for i, sprite_name in enumerate(self.npc_cfg):
             sprite_dir = out_dir / sprite_name
             sprite_dir.mkdir(parents=True, exist_ok=True)
 
@@ -920,11 +916,10 @@ class N64SegPm_sprites(N64Segment):
             sprite_data = Yay0Decompressor.decompress(data[start:end], "big")
             sprite = NpcSprite.from_bytes(sprite_data)
 
-            if sprite_name in self.npc_cfg:
-                sprite.image_names = self.npc_cfg[sprite_name].get("frames", [])
-                sprite.palette_names = self.npc_cfg[sprite_name].get("palettes", [])
-                sprite.animation_names = self.npc_cfg[sprite_name].get("animations", [])
-                sprite.variation_names = self.npc_cfg[sprite_name].get("variations", [])
+            sprite.image_names = self.npc_cfg[sprite_name].get("frames", [])
+            sprite.palette_names = self.npc_cfg[sprite_name].get("palettes", [])
+            sprite.animation_names = self.npc_cfg[sprite_name].get("animations", [])
+            sprite.variation_names = self.npc_cfg[sprite_name].get("variations", [])
 
             sprite.write_to_dir(sprite_dir)
 
@@ -953,11 +948,8 @@ class N64SegPm_sprites(N64Segment):
 
         # for NPC
         src_paths += [
-            options.opts.asset_path
-            / "sprite"
-            / "npc"
-            / (f["name"] if type(f) is dict else f)
-            for f in self.npc_files
+            options.opts.asset_path / "sprite" / "npc" / sprite_name
+            for sprite_name in self.npc_cfg
         ]
 
         return [
