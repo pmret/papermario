@@ -108,7 +108,7 @@ EvtScript N(EVS_NpcIdle_Pokey) = {
     EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetCamProperties, CAM_DEFAULT, EVT_FLOAT(5.0), LVar0, LVar1, LVar2, 300, EVT_FLOAT(13.0), EVT_FLOAT(-9.5))
     EVT_IF_EQ(GB_OMO_PeachChoice3, 0)
-        EVT_CALL(SpeakToPlayer, NPC_Pokey, ANIM_Pokey_Anim04, ANIM_Pokey_Anim04, 0, MSG_CH4_003E)
+        EVT_CALL(SpeakToPlayer, NPC_Pokey, ANIM_Pokey_Idle4, ANIM_Pokey_Idle4, 0, MSG_CH4_003E)
     EVT_ELSE
         EVT_CALL(SpeakToPlayer, NPC_Koopatrol, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, MSG_CH4_003F)
     EVT_END_IF

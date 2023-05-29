@@ -2752,18 +2752,18 @@ Pokey:
     - Variant01
     - Variant02
   frames:
-    - Raster00
-    - Raster01
-    - Raster02
-    - Raster03
-    - Raster04
-    - Raster05
-    - Raster06
-    - Raster07
-    - Raster08
-    - Raster09
-    - Raster0A
-    - Raster0B
+    - Head
+    - Body
+    - Angry
+    - Idle1
+    - Idle2
+    - Hurt1
+    - Hurt2
+    - BurnedHurt1
+    - BurnedHurt2
+    - BurnedBody
+    - BurnedHead
+    - Sleep
   palettes:
     - Default
     - Mummy
@@ -2779,47 +2779,47 @@ Pokey:
     - Frost_Shocked
     - Burnt
   animations:
-    - Anim00
-    - Anim01
-    - Anim02
-    - Anim03
-    - Anim04
-    - Anim05
-    - Anim06
-    - Anim07
-    - Anim08
-    - Anim09
-    - Anim0A
-    - Anim0B
-    - Anim0C
-    - Anim0D
-    - Anim0E
-    - Anim0F
-    - Anim10
-    - Anim11
-    - Anim12
-    - Anim13
-    - Anim14
-    - Anim15
-    - Anim16
-    - Anim17
-    - Anim18
-    - Anim19
-    - Anim1A
-    - Anim1B
-    - Anim1C
-    - Anim1D
-    - Anim1E
-    - Anim1F
-    - Anim20
-    - Anim21
-    - Anim22
-    - Anim23
-    - Anim24
-    - Anim25
-    - Anim26
-    - Anim27
-    - Anim28
+    - Still4
+    - Still3
+    - Still2
+    - Still1
+    - Idle4
+    - Idle3
+    - Idle2
+    - Idle1
+    - Run4
+    - Run3
+    - Run2
+    - Run1
+    - Hurt4
+    - Hurt3
+    - Hurt2
+    - Hurt1
+    - Windup3
+    - Throw3
+    - Windup2
+    - Throw2
+    - Windup1
+    - Throw1
+    - Projectile
+    - Emerge
+    - BurnHurt4
+    - BurnStill4
+    - BurnHurt3
+    - BurnStill3
+    - BurnHurt2
+    - BurnStill2
+    - BurnHurt1
+    - BurnStill1
+    - BurnedProjectile
+    - Dizzy4
+    - Dizzy3
+    - Dizzy2
+    - Dizzy1
+    - Sleep4
+    - Sleep3
+    - Sleep2
+    - Sleep1
 Bandit:
   frames:
     - Raster00
