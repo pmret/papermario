@@ -41,10 +41,10 @@ void windy_leaves_main(s32 type, f32 arg1, f32 arg2, f32 arg3) {
 
     part++;
     for (i = 1; i < numParts; i++, part++) {
-        s32 temp_s0_2 = func_E0200000(50);
-        s32 temp_s1 = func_E0200000(20);
-        s32 temp_s2 = func_E0200000(360);
-        s32 temp_v0_2 = func_E0200000(100);
+        s32 temp_s0_2 = effect_rand_int(50);
+        s32 temp_s1 = effect_rand_int(20);
+        s32 temp_s2 = effect_rand_int(360);
+        s32 temp_v0_2 = effect_rand_int(100);
         part->unk_04.x = temp_s0_2 + 75;
         part->unk_04.y = temp_s1 + 70;
         part->unk_04.z = 0;

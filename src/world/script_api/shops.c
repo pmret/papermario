@@ -275,7 +275,7 @@ API_CALLABLE(ShowShopPurchaseDialog) {
         }
         script->functionTemp[1] = shop_owner_buy_dialog(SHOP_MSG_BUY_CONFIRM, shopItem->nameMsg, shopInventory->price, bpCost);
         script->functionTemp[0] = PURCHASE_DIALOG_STATE_INIT;
-        increment_status_menu_disabled();
+        increment_status_bar_disabled();
         func_800E9900();
         show_coin_counter();
     }
@@ -358,7 +358,7 @@ API_CALLABLE(ShowShopPurchaseDialog) {
             if (wShopBuyCallbackScript != NULL && does_script_exist(wShopBuyCallbackScript->id)) {
                 break;
             }
-            decrement_status_menu_disabled();
+            decrement_status_bar_disabled();
             hide_coin_counter_immediately();
             return ApiStatus_DONE1;
     }
@@ -426,9 +426,9 @@ void shop_open_item_select_popup(s32 mode) {
     menu->numEntries = numEntries;
     menu->initialPos = 0;
     create_shop_popup_menu(menu);
-    status_menu_ignore_changes();
+    status_bar_ignore_changes();
     func_800E98EC();
-    open_status_menu_short();
+    open_status_bar_short();
 }
 
 s32 shop_update_item_select_popup(s32* selectedIndex) {
@@ -454,8 +454,8 @@ s32 shop_update_item_select_popup(s32* selectedIndex) {
 void shop_close_item_select_popup(void) {
     destroy_popup_menu();
     func_800E9900();
-    status_menu_respond_to_changes();
-    close_status_menu();
+    status_bar_respond_to_changes();
+    close_status_bar();
 }
 
 s32 shop_get_sell_price(s32 itemID) {
@@ -772,7 +772,7 @@ API_CALLABLE(ShowShopOwnerDialog) {
                     start_script(shop->owner->onTalkEvt, EVT_PRIORITY_1, 0);
                 }
             }
-            open_status_menu_short();
+            open_status_bar_short();
             return ApiStatus_DONE1;
     }
     return ApiStatus_BLOCK;

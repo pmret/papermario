@@ -115,7 +115,7 @@ EvtScript N(EVS_Scene_RideTrain) = {
                     EVT_IF_EQ(ArrayVar(2), -1)
                         EVT_SET(MV_TrainUnk_00, 100)
                         EVT_SET(MF_TrainUnk_00, FALSE)
-                        EVT_SET(LocalFlag(1), TRUE)
+                        EVT_SET(LFlag1, TRUE)
                     EVT_ELSE
                         EVT_CALL(N(SetAngleClamped), LVar0, ArrayVar(0), ArrayVar(1), ArrayVar(2), ArrayVar(3))
                         EVT_CALL(AddVectorPolar, ArrayVar(0), ArrayVar(1), LVar1, LVar0)
@@ -138,14 +138,14 @@ EvtScript N(EVS_Scene_RideTrain) = {
                     EVT_IF_EQ(ArrayVar(7), -1)
                         EVT_SET(MV_TrainUnk_00, 100)
                         EVT_SET(MF_TrainUnk_00, FALSE)
-                        EVT_SET(LocalFlag(1), FALSE)
+                        EVT_SET(LFlag1, FALSE)
                     EVT_ELSE
                         EVT_CALL(N(SetAngleClamped), LVar0, ArrayVar(5), ArrayVar(6), ArrayVar(7), ArrayVar(8))
                         EVT_CALL(AddVectorPolar, ArrayVar(5), ArrayVar(6), LVar1, LVar0)
                     EVT_END_IF
                 EVT_END_IF
                 EVT_IF_EQ(MV_TrainUnk_00, 100)
-                    EVT_IF_EQ(LocalFlag(1), TRUE)
+                    EVT_IF_EQ(LFlag1, TRUE)
                         EVT_CALL(N(SetAngleClamped), LVar0, ArrayVar(0), ArrayVar(1), ArrayVar(5), ArrayVar(6))
                         EVT_SETF(ArrayVar(5), ArrayVar(0))
                         EVT_SETF(ArrayVar(6), ArrayVar(1))
@@ -171,7 +171,7 @@ EvtScript N(EVS_Scene_RideTrain) = {
                 EVT_ADDF(ArrayVar(13), LVar3)
                 EVT_SETF(ArrayVar(14), ArrayVar(13))
                 EVT_MULF(ArrayVar(14), EVT_FLOAT(1.432))
-                EVT_IF_EQ(LocalFlag(0), FALSE)
+                EVT_IF_EQ(LFlag0, FALSE)
                     EVT_SETF(LVar0, ArrayVar(10))
                     EVT_IF_LT(LVar0, 1)
                         EVT_SETF(LVar0, EVT_FLOAT(1.0))
@@ -180,7 +180,7 @@ EvtScript N(EVS_Scene_RideTrain) = {
                     EVT_SUBF(ArrayVar(15), LVar0)
                     EVT_IF_LT(ArrayVar(15), -10)
                         EVT_SETF(ArrayVar(15), EVT_FLOAT(-10.0))
-                        EVT_SET(LocalFlag(0), TRUE)
+                        EVT_SET(LFlag0, TRUE)
                         EVT_IF_EQ(AF_OMO_03, FALSE)
                             EVT_CALL(PlaySound, SOUND_1FF)
                         EVT_ELSE
@@ -196,7 +196,7 @@ EvtScript N(EVS_Scene_RideTrain) = {
                     EVT_ADDF(ArrayVar(15), LVar0)
                     EVT_IF_GT(ArrayVar(15), 10)
                         EVT_SETF(ArrayVar(15), EVT_FLOAT(10.0))
-                        EVT_SET(LocalFlag(0), FALSE)
+                        EVT_SET(LFlag0, FALSE)
                         EVT_IF_EQ(AF_OMO_03, FALSE)
                             EVT_CALL(PlaySound, SOUND_1FE)
                             EVT_SET(AF_OMO_03, TRUE)

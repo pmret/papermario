@@ -13,46 +13,50 @@ extern EvtScript N(idle_80218574);
 extern EvtScript N(handleEvent_80218584);
 extern Formation N(specialFormation_8021A800);
 
+enum N(ActorPartIDs) {
+    PRT_MAIN            = 1,
+};
+
 s32 N(DefenseTable_802183C0)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
 s32 N(StatusTable_802183CC)[] = {
-    STATUS_NORMAL, 0,
-    STATUS_DEFAULT, 0,
-    STATUS_SLEEP, 95,
-    STATUS_POISON, 90,
-    STATUS_FROZEN, 0,
-    STATUS_DIZZY, 90,
-    STATUS_FEAR, 0,
-    STATUS_STATIC, 70,
-    STATUS_PARALYZE, 75,
-    STATUS_SHRINK, 75,
-    STATUS_STOP, 90,
-    STATUS_DEFAULT_TURN_MOD, 0,
-    STATUS_SLEEP_TURN_MOD, -1,
-    STATUS_POISON_TURN_MOD, 0,
-    STATUS_FROZEN_TURN_MOD, 0,
-    STATUS_DIZZY_TURN_MOD, 0,
-    STATUS_FEAR_TURN_MOD, 0,
-    STATUS_STATIC_TURN_MOD, 0,
-    STATUS_PARALYZE_TURN_MOD, 0,
-    STATUS_SHRINK_TURN_MOD, 0,
-    STATUS_STOP_TURN_MOD, 0,
+    STATUS_KEY_NORMAL,              0,
+    STATUS_KEY_DEFAULT,             0,
+    STATUS_KEY_SLEEP,              95,
+    STATUS_KEY_POISON,             90,
+    STATUS_KEY_FROZEN,              0,
+    STATUS_KEY_DIZZY,              90,
+    STATUS_KEY_FEAR,                0,
+    STATUS_KEY_STATIC,             70,
+    STATUS_KEY_PARALYZE,           75,
+    STATUS_KEY_SHRINK,             75,
+    STATUS_KEY_STOP,               90,
+    STATUS_TURN_MOD_DEFAULT,        0,
+    STATUS_TURN_MOD_SLEEP,         -1,
+    STATUS_TURN_MOD_POISON,         0,
+    STATUS_TURN_MOD_FROZEN,         0,
+    STATUS_TURN_MOD_DIZZY,          0,
+    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_STATIC,         0,
+    STATUS_TURN_MOD_PARALYZE,       0,
+    STATUS_TURN_MOD_SHRINK,         0,
+    STATUS_TURN_MOD_STOP,           0,
     STATUS_END,
 };
 
-ActorPartBlueprint N(PartsTable_80218478)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 20 },
         .opacity = 255,
         .idleAnimations = N(IdleAnimations_802184C4),
         .defenseTable = N(DefenseTable_802183C0),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -10 },
     },
@@ -63,8 +67,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_FOREST_FUZZY,
     .level = 11,
     .maxHP = 6,
-    .partCount = ARRAY_COUNT( N(PartsTable_80218478)),
-    .partsData = N(PartsTable_80218478),
+    .partCount = ARRAY_COUNT( N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init_80218510),
     .statusTable = N(StatusTable_802183CC),
     .escapeChance = 40,
@@ -76,21 +80,21 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 100,
     .coinReward = 1,
     .size = { 33, 28 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 s32 N(IdleAnimations_802184C4)[] = {
-    STATUS_NORMAL,    ANIM_Fuzzy_Forest_Idle,
-    STATUS_STONE,     ANIM_Fuzzy_Forest_Still,
-    STATUS_SLEEP,     ANIM_Fuzzy_Forest_Sleep,
-    STATUS_POISON,    ANIM_Fuzzy_Forest_Idle,
-    STATUS_STOP,      ANIM_Fuzzy_Forest_Still,
-    STATUS_STATIC,    ANIM_Fuzzy_Forest_Idle,
-    STATUS_PARALYZE,  ANIM_Fuzzy_Forest_Still,
-    STATUS_DIZZY,     ANIM_Fuzzy_Forest_Stunned,
-    STATUS_FEAR,      ANIM_Fuzzy_Forest_Stunned,
+    STATUS_KEY_NORMAL,    ANIM_Fuzzy_Forest_Idle,
+    STATUS_KEY_STONE,     ANIM_Fuzzy_Forest_Still,
+    STATUS_KEY_SLEEP,     ANIM_Fuzzy_Forest_Sleep,
+    STATUS_KEY_POISON,    ANIM_Fuzzy_Forest_Idle,
+    STATUS_KEY_STOP,      ANIM_Fuzzy_Forest_Still,
+    STATUS_KEY_STATIC,    ANIM_Fuzzy_Forest_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_Fuzzy_Forest_Still,
+    STATUS_KEY_DIZZY,     ANIM_Fuzzy_Forest_Stunned,
+    STATUS_KEY_FEAR,      ANIM_Fuzzy_Forest_Stunned,
     STATUS_END,
 };
 
@@ -255,9 +259,9 @@ EvtScript N(80218C48) = {
         EVT_END_LOOP
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2070)
     EVT_END_THREAD
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Anim0D)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Anim0D)
     EVT_WAIT(130)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Walk)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Walk)
     EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_8021A800)), 0)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
     EVT_CALL(SetActorPos, LVar0, LVar1, LVar2, LVar3)
@@ -265,7 +269,7 @@ EvtScript N(80218C48) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_THREAD
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Walk)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Walk)
         EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.4))
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar1, LVar2, LVar3)
         EVT_CALL(SetGoalPos, ACTOR_SELF, LVar1, LVar2, LVar3)
@@ -311,7 +315,7 @@ EvtScript N(80219054) = {
         EVT_GOTO(100)
     EVT_END_IF
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Run)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Run)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 50)
@@ -319,10 +323,10 @@ EvtScript N(80219054) = {
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
     EVT_EXEC_WAIT(EVS_Enemy_HopToPos)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Idle)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Idle)
     EVT_LABEL(100)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 10, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Anim04)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Anim04)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 9, 0)
     EVT_WAIT(1)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 8, 0)
@@ -338,11 +342,11 @@ EvtScript N(80219054) = {
             EVT_SET(LVar1, 0)
             EVT_SUB(LVar2, 5)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(3.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Jump)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Jump)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 11, FALSE, TRUE, FALSE)
             EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Anim09)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Anim09)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_SUB(LVar0, 20)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(3.0))
@@ -363,14 +367,14 @@ EvtScript N(80219054) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Run)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Run)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
             EVT_EXEC_WAIT(EVS_Enemy_HopToPos)
-            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
+            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
@@ -379,17 +383,17 @@ EvtScript N(80219054) = {
         EVT_CASE_EQ(HIT_RESULT_HIT_STATIC)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_FLAG(LVar0, STATUS_FLAG_STATIC)
-                EVT_SET(LocalFlag(0), 0)
+                EVT_SET(LFlag0, FALSE)
             EVT_ELSE
-                EVT_SET(LocalFlag(0), 1)
+                EVT_SET(LFlag0, TRUE)
             EVT_END_IF
     EVT_END_SWITCH
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, -3, -12, -15)
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(3.0))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Jump)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Jump)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 8, FALSE, TRUE, FALSE)
-    EVT_IF_EQ(LocalFlag(0), 1)
+    EVT_IF_EQ(LFlag0, TRUE)
         EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 0, BS_FLAGS1_SP_EVT_ACTIVE)
         EVT_RETURN
     EVT_END_IF
@@ -397,9 +401,9 @@ EvtScript N(80219054) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB1_Leeching)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3E0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Bite)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Bite)
     EVT_WAIT(21)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Still)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Still)
     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 330)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3E0)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, -3, -2, 0)
@@ -419,7 +423,7 @@ EvtScript N(80219054) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarA, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 1, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Idle)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Idle)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(GetLastDamage, ACTOR_PLAYER, LVar3)
     EVT_IF_NE(LVar3, 0)
@@ -495,13 +499,13 @@ EvtScript N(80219054) = {
     EVT_WAIT(5)
     EVT_CALL(YieldTurn)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Run)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Run)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
     EVT_EXEC_WAIT(EVS_Enemy_HopToPos)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Fuzzy_Forest_Idle)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Fuzzy_Forest_Idle)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
@@ -509,10 +513,10 @@ EvtScript N(80219054) = {
 };
 
 EvtScript N(8021A0D4) = {
-    EVT_SET(LocalFlag(1), 0)
-    EVT_SET(LocalFlag(2), 0)
-    EVT_SET(LocalFlag(3), 0)
-    EVT_SET(LocalFlag(4), 0)
+    EVT_SET(LFlag1, FALSE)
+    EVT_SET(LFlag2, FALSE)
+    EVT_SET(LFlag3, FALSE)
+    EVT_SET(LFlag4, FALSE)
     EVT_CALL(EnemyCreateTargetList, TARGET_FLAG_2 | TARGET_FLAG_8000)
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)
@@ -521,13 +525,13 @@ EvtScript N(8021A0D4) = {
     EVT_MOD(LVar5, 4)
     EVT_SWITCH(LVar5)
         EVT_CASE_EQ(0)
-            EVT_SET(LocalFlag(1), 1)
+            EVT_SET(LFlag1, TRUE)
         EVT_CASE_EQ(1)
-            EVT_SET(LocalFlag(2), 1)
+            EVT_SET(LFlag2, TRUE)
         EVT_CASE_EQ(2)
-            EVT_SET(LocalFlag(3), 1)
+            EVT_SET(LFlag3, TRUE)
         EVT_CASE_EQ(3)
-            EVT_SET(LocalFlag(4), 1)
+            EVT_SET(LFlag4, TRUE)
     EVT_END_SWITCH
     EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
     EVT_IF_NE(LVar0, -1)
@@ -538,14 +542,14 @@ EvtScript N(8021A0D4) = {
     EVT_CALL(GetIndexFromHome, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_IF_EQ(LocalFlag(2), 0)
+            EVT_IF_EQ(LFlag2, FALSE)
                 EVT_SET(LVarA, 1)
             EVT_END_IF
         EVT_CASE_EQ(1)
-            EVT_IF_EQ(LocalFlag(1), 0)
+            EVT_IF_EQ(LFlag1, FALSE)
                 EVT_SET(LVarA, 0)
             EVT_END_IF
-            EVT_IF_EQ(LocalFlag(3), 0)
+            EVT_IF_EQ(LFlag3, FALSE)
                 EVT_IF_EQ(LVarA, -1)
                     EVT_SET(LVarA, 2)
                 EVT_ELSE
@@ -553,10 +557,10 @@ EvtScript N(8021A0D4) = {
                 EVT_END_IF
             EVT_END_IF
         EVT_CASE_EQ(2)
-            EVT_IF_EQ(LocalFlag(2), 0)
+            EVT_IF_EQ(LFlag2, FALSE)
                 EVT_SET(LVarA, 1)
             EVT_END_IF
-            EVT_IF_EQ(LocalFlag(4), 0)
+            EVT_IF_EQ(LFlag4, FALSE)
                 EVT_IF_EQ(LVarA, -1)
                     EVT_SET(LVarA, 3)
                 EVT_ELSE
@@ -564,7 +568,7 @@ EvtScript N(8021A0D4) = {
                 EVT_END_IF
             EVT_END_IF
         EVT_CASE_EQ(3)
-            EVT_IF_EQ(LocalFlag(3), 0)
+            EVT_IF_EQ(LFlag3, FALSE)
                 EVT_SET(LVarA, 2)
             EVT_END_IF
     EVT_END_SWITCH
@@ -589,7 +593,7 @@ EvtScript N(8021A45C) = {
         EVT_CASE_OR_EQ(ACTOR_TYPE_FOREST_FUZZY)
         EVT_CASE_OR_EQ(ACTOR_TYPE_JUNGLE_FUZZY)
             EVT_CALL(GetStatusFlags, LVar0, LVar3)
-            EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+            EVT_IF_NOT_FLAG(LVar3, STATUS_FLAGS_IMMOBILIZED)
                 EVT_CALL(GetActorVar, LVar0, 0, LVar3)
                 EVT_IF_NE(LVar3, 2)
                     EVT_ADD(LVar9, 1)
@@ -598,7 +602,7 @@ EvtScript N(8021A45C) = {
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(ACTOR_TYPE_SPEAR_GUY)
             EVT_CALL(GetStatusFlags, LVar0, LVar3)
-            EVT_IF_NOT_FLAG(LVar3, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+            EVT_IF_NOT_FLAG(LVar3, STATUS_FLAGS_IMMOBILIZED)
                 EVT_CALL(GetActorVar, LVar0, 1, LVar3)
                 EVT_IF_LT(LVar3, 2)
                     EVT_ADD(LVar9, 1)
@@ -658,5 +662,5 @@ EvtScript N(takeTurn_8021A61C) = {
 Vec3i N(vector3D_8021A7F4) = { NPC_DISPOSE_LOCATION };
 
 Formation N(specialFormation_8021A800) = {
-    { .actor = &NAMESPACE, .home = { .vec = &N(vector3D_8021A7F4) }},
+    ACTOR_BY_POS(NAMESPACE, N(vector3D_8021A7F4), 0),
 };

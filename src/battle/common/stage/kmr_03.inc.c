@@ -2,16 +2,16 @@
 #include "battle/battle.h"
 #include "mapfs/kmr_bt03_shape.h"
 
-#include "world/common/todo/clouds.inc.c"
+#include "battle/common/stage/lib/MovingClouds.inc.c"
 
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_SET(LVar0, 1)
     EVT_SET(LVar2, 0)
-    EVT_EXEC(N(clouds1))
+    EVT_EXEC(N(EVS_AnimateCloud))
     EVT_SET(LVar0, 4)
     EVT_SET(LVar2, 70)
-    EVT_EXEC(N(clouds1))
+    EVT_EXEC(N(EVS_AnimateCloud))
     EVT_RETURN
     EVT_END
 };

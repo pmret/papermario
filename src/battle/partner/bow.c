@@ -26,6 +26,11 @@ extern EvtScript N(hidePlayer);
 
 extern s32 bMarioHideAnims[];
 
+enum N(ActorPartIDs) {
+    PRT_MAIN            = 1,
+    PRT_ZERO            = 0,
+};
+
 API_CALLABLE(N(IsOuttaSightActive)) {
     BattleStatus* battleStatus = &gBattleStatus;
     script->varTable[0] = battleStatus->outtaSightActive;
@@ -81,14 +86,14 @@ API_CALLABLE(N(ModifyBowPos)) {
 API_CALLABLE(N(IsPartnerImmobile)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* playerActor = battleStatus->playerActor;
-    s32 isImmobile = playerActor->debuff == STATUS_FEAR
-                     || playerActor->debuff == STATUS_DIZZY
-                     || playerActor->debuff == STATUS_PARALYZE
-                     || playerActor->debuff == STATUS_SLEEP
-                     || playerActor->debuff == STATUS_FROZEN
-                     || playerActor->debuff == STATUS_STOP;
+    s32 isImmobile = playerActor->debuff == STATUS_KEY_FEAR
+                     || playerActor->debuff == STATUS_KEY_DIZZY
+                     || playerActor->debuff == STATUS_KEY_PARALYZE
+                     || playerActor->debuff == STATUS_KEY_SLEEP
+                     || playerActor->debuff == STATUS_KEY_FROZEN
+                     || playerActor->debuff == STATUS_KEY_STOP;
 
-    if (playerActor->stoneStatus == STATUS_STONE) {
+    if (playerActor->stoneStatus == STATUS_KEY_STONE) {
         isImmobile = TRUE;
     }
 
@@ -122,7 +127,7 @@ API_CALLABLE(N(AverageSpookChance)) {
         targetActorBlueprint = targetActor->actorBlueprint;
         spookChance = targetActorBlueprint->spookChance;
 
-        if (targetActor->transparentStatus == STATUS_TRANSPARENT) {
+        if (targetActor->transparentStatus == STATUS_KEY_TRANSPARENT) {
             spookChance = 0;
         }
 
@@ -146,50 +151,50 @@ API_CALLABLE(N(AverageSpookChance)) {
 }
 
 s32 N(IdleAnimations)[] = {
-    STATUS_NORMAL, ANIM_BattleBow_Walk,
-    STATUS_STONE, ANIM_BattleBow_Still,
-    STATUS_SLEEP, ANIM_BattleBow_Pray,
-    STATUS_POISON, ANIM_BattleBow_Still,
-    STATUS_STOP, ANIM_BattleBow_Still,
-    STATUS_DAZE, ANIM_BattleBow_Injured,
-    STATUS_TURN_DONE, ANIM_BattleBow_Still,
+    STATUS_KEY_NORMAL,    ANIM_BattleBow_Walk,
+    STATUS_KEY_STONE,     ANIM_BattleBow_Still,
+    STATUS_KEY_SLEEP,     ANIM_BattleBow_Pray,
+    STATUS_KEY_POISON,    ANIM_BattleBow_Still,
+    STATUS_KEY_STOP,      ANIM_BattleBow_Still,
+    STATUS_KEY_DAZE,      ANIM_BattleBow_Injured,
+    STATUS_KEY_INACTIVE,  ANIM_BattleBow_Still,
     STATUS_END,
 };
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
 s32 N(StatusTable)[] = {
-    STATUS_NORMAL, 100,
-    STATUS_DEFAULT, 100,
-    STATUS_SLEEP, 100,
-    STATUS_POISON, 100,
-    STATUS_FROZEN, 100,
-    STATUS_DIZZY, 100,
-    STATUS_FEAR, 100,
-    STATUS_STATIC, 100,
-    STATUS_PARALYZE, 100,
-    STATUS_SHRINK, 100,
-    STATUS_STOP, 100,
-    STATUS_DEFAULT_TURN_MOD, 0,
-    STATUS_SLEEP_TURN_MOD, 0,
-    STATUS_POISON_TURN_MOD, 0,
-    STATUS_FROZEN_TURN_MOD, 0,
-    STATUS_DIZZY_TURN_MOD, 0,
-    STATUS_FEAR_TURN_MOD, 0,
-    STATUS_STATIC_TURN_MOD, 0,
-    STATUS_PARALYZE_TURN_MOD, 0,
-    STATUS_SHRINK_TURN_MOD, 0,
-    STATUS_STOP_TURN_MOD, 0,
+    STATUS_KEY_NORMAL,            100,
+    STATUS_KEY_DEFAULT,           100,
+    STATUS_KEY_SLEEP,             100,
+    STATUS_KEY_POISON,            100,
+    STATUS_KEY_FROZEN,            100,
+    STATUS_KEY_DIZZY,             100,
+    STATUS_KEY_FEAR,              100,
+    STATUS_KEY_STATIC,            100,
+    STATUS_KEY_PARALYZE,          100,
+    STATUS_KEY_SHRINK,            100,
+    STATUS_KEY_STOP,              100,
+    STATUS_TURN_MOD_DEFAULT,        0,
+    STATUS_TURN_MOD_SLEEP,          0,
+    STATUS_TURN_MOD_POISON,         0,
+    STATUS_TURN_MOD_FROZEN,         0,
+    STATUS_TURN_MOD_DIZZY,          0,
+    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_STATIC,         0,
+    STATUS_TURN_MOD_PARALYZE,       0,
+    STATUS_TURN_MOD_SHRINK,         0,
+    STATUS_TURN_MOD_STOP,           0,
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = 0,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 9, 19 },
         .opacity = 255,
@@ -206,8 +211,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_BOW,
     .level = 0,
     .maxHP = 99,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
@@ -219,9 +224,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 80,
     .coinReward = 0,
     .size = { 36, 29 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 22 },
-    .statusMessageOffset = { 10, 22 },
+    .statusTextOffset = { 10, 22 },
 };
 
 EvtScript N(init) = {
@@ -519,7 +524,7 @@ EvtScript N(smack) = {
     EVT_SET(LVarF, 0)
     EVT_SET(LVarE, 0)
     EVT_SET(LVarD, 0)
-    EVT_SET(LocalFlag(0), 0)
+    EVT_SET(LFlag0, FALSE)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_LOOP(15)
@@ -543,9 +548,9 @@ EvtScript N(smack) = {
         EVT_END_LOOP
         EVT_CALL(SetActorYaw, ACTOR_PARTNER, 0)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Injured)
-        EVT_CALL(AddActorDecoration, ACTOR_SELF, 0, 0, ACTOR_DECORATION_SEEING_STARS)
+        EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_ZERO, 0, ACTOR_DECORATION_SEEING_STARS)
         EVT_WAIT(30)
-        EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 0, 0)
+        EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_ZERO, 0)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Idle)
         EVT_WAIT(10)
         EVT_EXEC_WAIT(N(returnHome))
@@ -556,13 +561,13 @@ EvtScript N(smack) = {
         EVT_GOTO(2)
     EVT_END_IF
     EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.4), EVT_FLOAT(1.4), EVT_FLOAT(1.0))
-    EVT_IF_EQ(LocalFlag(0), 0)
+    EVT_IF_EQ(LFlag0, FALSE)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_SlapOnce)
-        EVT_SET(LocalFlag(0), 1)
+        EVT_SET(LFlag0, TRUE)
         EVT_CALL(SetDamageSource, DMG_SRC_NEXT_SLAP_LEFT)
     EVT_ELSE
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_SlapBack)
-        EVT_SET(LocalFlag(0), 0)
+        EVT_SET(LFlag0, FALSE)
         EVT_CALL(SetDamageSource, DMG_SRC_NEXT_SLAP_RIGHT)
     EVT_END_IF
     EVT_WAIT(2)
@@ -612,13 +617,13 @@ EvtScript N(smack) = {
         EVT_CALL(MoveBattleCamOver, 5)
     EVT_END_IF
     EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.4), EVT_FLOAT(1.4), EVT_FLOAT(1.0))
-    EVT_IF_EQ(LocalFlag(0), 0)
+    EVT_IF_EQ(LFlag0, FALSE)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_SlapOnce)
-        EVT_SET(LocalFlag(0), 1)
+        EVT_SET(LFlag0, TRUE)
         EVT_CALL(SetDamageSource, DMG_SRC_LAST_SLAP_LEFT)
     EVT_ELSE
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_SlapBack)
-        EVT_SET(LocalFlag(0), 0)
+        EVT_SET(LFlag0, FALSE)
         EVT_CALL(SetDamageSource, DMG_SRC_LAST_SLAP_RIGHT)
     EVT_END_IF
     EVT_WAIT(2)
@@ -932,9 +937,9 @@ EvtScript N(spook) = {
         EVT_CALL(SetDamageSource, DMG_SRC_SPOOK)
         EVT_SWITCH(LVarF)
             EVT_CASE_GT(99)
-                EVT_CALL(PartnerAfflictEnemy, LVar0, DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS | DAMAGE_TYPE_STATUS_ALWAYS_HITS, 0, STATUS_FLAG_400000, LVarF, 0, BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
+                EVT_CALL(PartnerAfflictEnemy, LVar0, DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS | DAMAGE_TYPE_STATUS_ALWAYS_HITS, 0, STATUS_FLAG_400000, LVarF, 0, BS_FLAGS1_40 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
             EVT_CASE_DEFAULT
-                EVT_CALL(PartnerAfflictEnemy, LVar0, DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS | DAMAGE_TYPE_STATUS_ALWAYS_HITS, 0, STATUS_FLAG_400000, LVarF, 0, BS_FLAGS1_80 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
+                EVT_CALL(PartnerAfflictEnemy, LVar0, DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS | DAMAGE_TYPE_STATUS_ALWAYS_HITS, 0, STATUS_FLAG_400000, LVarF, 0, BS_FLAGS1_80 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_10)
         EVT_END_SWITCH
         EVT_LABEL(10)
         EVT_WAIT(5)
@@ -1030,7 +1035,7 @@ EvtScript N(fanSmack) = {
     EVT_SET(LVarF, 0)
     EVT_SET(LVarE, 0)
     EVT_SET(LVarD, 0)
-    EVT_SET(LocalFlag(0), 0)
+    EVT_SET(LFlag0, FALSE)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_CelebrateFast)
@@ -1060,9 +1065,9 @@ EvtScript N(fanSmack) = {
         EVT_END_LOOP
         EVT_CALL(SetActorYaw, ACTOR_PARTNER, 0)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Injured)
-        EVT_CALL(AddActorDecoration, ACTOR_SELF, 0, 0, ACTOR_DECORATION_SEEING_STARS)
+        EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_ZERO, 0, ACTOR_DECORATION_SEEING_STARS)
         EVT_WAIT(40)
-        EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 0, 0)
+        EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_ZERO, 0)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_Idle)
         EVT_WAIT(10)
         EVT_EXEC_WAIT(N(returnHome))
@@ -1073,13 +1078,13 @@ EvtScript N(fanSmack) = {
         EVT_GOTO(2)
     EVT_END_IF
     EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.4), EVT_FLOAT(1.4), EVT_FLOAT(1.0))
-    EVT_IF_EQ(LocalFlag(0), 0)
+    EVT_IF_EQ(LFlag0, FALSE)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_FanSmackOnce)
-        EVT_SET(LocalFlag(0), 1)
+        EVT_SET(LFlag0, TRUE)
         EVT_CALL(SetDamageSource, DMG_SRC_NEXT_FAN_SMACK_LEFT)
     EVT_ELSE
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_FanSmackBack)
-        EVT_SET(LocalFlag(0), 0)
+        EVT_SET(LFlag0, FALSE)
         EVT_CALL(SetDamageSource, DMG_SRC_NEXT_FAN_SMACK_RIGHT)
     EVT_END_IF
     EVT_WAIT(2)
@@ -1152,13 +1157,13 @@ EvtScript N(fanSmack) = {
         EVT_CALL(MoveBattleCamOver, 5)
     EVT_END_IF
     EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.4), EVT_FLOAT(1.4), EVT_FLOAT(1.0))
-    EVT_IF_EQ(LocalFlag(0), 0)
+    EVT_IF_EQ(LFlag0, FALSE)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_FanSmackOnce)
-        EVT_SET(LocalFlag(0), 1)
+        EVT_SET(LFlag0, TRUE)
         EVT_CALL(SetDamageSource, DMG_SRC_LAST_FAN_SMACK_LEFT)
     EVT_ELSE
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleBow_FanSmackBack)
-        EVT_SET(LocalFlag(0), 0)
+        EVT_SET(LFlag0, FALSE)
         EVT_CALL(SetDamageSource, DMG_SRC_LAST_FAN_SMACK_RIGHT)
     EVT_END_IF
     EVT_WAIT(2)

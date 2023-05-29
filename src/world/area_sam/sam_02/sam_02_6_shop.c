@@ -99,7 +99,7 @@ EvtScript N(EVS_SetupShop) = {
         EVT_CASE_GE(STORY_CH7_MAYOR_MURDER_SOLVED)
             EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o512, COLLIDER_FLAGS_UPPER_MASK)
     EVT_END_SWITCH
-    EVT_CALL(MakeShop, EVT_PTR(N(ItemPositions)), EVT_PTR(N(Inventory)), EVT_PTR(N(PriceList)), ITEM_ENTITY_FLAG_10000)
+    EVT_CALL(MakeShop, EVT_PTR(N(ItemPositions)), EVT_PTR(N(Inventory)), EVT_PTR(N(PriceList)), ITEM_ENTITY_FLAG_TOSS_LOWER)
     EVT_CALL(MakeShopOwner, EVT_PTR(N(Owner)))
     EVT_RETURN
     EVT_END

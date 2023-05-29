@@ -19,18 +19,18 @@ Vec3i N(pos_crystal_bit_2) = { 112, 52, -5 };
 Vec3i N(pos_crystal_bit_3) = { 42, 85, -10 };
 
 Formation N(Formation_01) = {
-    { .actor = &N(crystal_king), .home = { .vec = &N(pos_crystal_king) }, .priority = 10 },
-    { .actor = &N(crystal_bit_1), .home = { .vec = &N(pos_crystal_bit_1) }, .priority = 9 },
-    { .actor = &N(crystal_bit_2), .home = { .vec = &N(pos_crystal_bit_2) }, .priority = 8 },
-    { .actor = &N(crystal_bit_3), .home = { .vec = &N(pos_crystal_bit_3) }, .priority = 7 },
+    ACTOR_BY_POS(N(crystal_king), N(pos_crystal_king), 10),
+    ACTOR_BY_POS(N(crystal_bit_1), N(pos_crystal_bit_1), 9),
+    ACTOR_BY_POS(N(crystal_bit_2), N(pos_crystal_bit_2), 8),
+    ACTOR_BY_POS(N(crystal_bit_3), N(pos_crystal_bit_3), 7),
 };
 
 BattleList N(Formations) = {
-    BATTLE(N(Formation_01), &N(sam_04), "パラレラー"),
+    BATTLE(N(Formation_01), N(sam_04), "パラレラー"),
     {},
 };
 
 StageList N(Stages) = {
-    { "sam_04", &N(sam_04) },
+    STAGE("sam_04", N(sam_04)),
     {},
 };

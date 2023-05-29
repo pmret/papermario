@@ -4,10 +4,10 @@
 
 #define NAMESPACE action_command_air_raid
 
-s32 D_802A9970_429C90[] = { 0, 25, 50, 75, 75, };
-s32 D_802A9984_429CA4[] = { 40, 70, 99, 200, };
-s32 D_802A9994_429CB4[] = { 35, 60, 80, 99, 200, };
-s32 D_802A99A8_429CC8[] = { 35, 35, 60, 80, 99, 200, };
+s32 D_802A9970_429C90[] = { 0, 25, 50, 75, 75 };
+s32 D_802A9984_429CA4[] = { 40, 70, 99, 200 };
+s32 D_802A9994_429CB4[] = { 35, 60, 80, 99, 200 };
+s32 D_802A99A8_429CC8[] = { 35, 35, 60, 80, 99, 200 };
 
 extern s32 actionCmdTableAirRaid[];
 
@@ -130,12 +130,15 @@ void N(update)(void) {
                 }
 
                 if (!actionCommandStatus->isBarFilled) {
-                    if ( // todo remove assignment from conditional
-                        (!(battleStatus->currentButtonsDown & BUTTON_STICK_LEFT) || (actionCommandStatus->unk_5C = 1, !(battleStatus->currentButtonsDown & BUTTON_STICK_LEFT))) &&
-                        (actionCommandStatus->unk_5C != 0))
-                    {
-                        actionCommandStatus->barFillLevel += (battleStatus->actionCmdDifficultyTable[actionCommandStatus->difficulty] * 850) / 100;
-                        actionCommandStatus->unk_5C = 0;
+                    if (battleStatus->currentButtonsDown & BUTTON_STICK_LEFT) {
+                        actionCommandStatus->unk_5C = 1;
+                    }
+
+                    if (!(battleStatus->currentButtonsDown & BUTTON_STICK_LEFT)) {
+                        if (actionCommandStatus->unk_5C != 0) {
+                            actionCommandStatus->barFillLevel += (battleStatus->actionCmdDifficultyTable[actionCommandStatus->difficulty] * 850) / 100;
+                            actionCommandStatus->unk_5C = 0;
+                        }
                     }
 
                     if (battleStatus->currentButtonsPressed & BUTTON_STICK_RIGHT) {

@@ -41,35 +41,35 @@ extern ItemEntity* BattleItemEntities[MAX_ITEM_ENTITIES];
 extern ItemEntity** gCurrentItemEntities;
 extern s16 isPickingUpItem;
 extern s16 D_801565A6;
-extern s16 D_801565A8;
+extern s16 D_801565A8; // some hack relating to kooper item pickups
 extern PopupMenu D_801565B0;
-extern s32 D_801568E0;
-extern s32 D_801568E4;
+extern s32 ItemPickupIconID;
+extern s32 ItemPickupStateDelay;
 extern s32 D_801568E8;
 extern s32 D_801568EC;
-extern EffectInstance* D_801568F0;
-extern MessagePrintState* D_801568F4;
-extern s32 D_801568F8;
+extern EffectInstance* ItemPickupGotOutline;
+extern MessagePrintState* GotItemTutorialPrinter;
+extern b32 GotItemTutorialClosed;
 
 void item_entity_update(ItemEntity*);
 void appendGfx_item_entity(void*);
 void draw_item_entities(void);
-void draw_item_entities_UI(void);
+void draw_ui_item_entities(void);
 s32 test_item_player_collision(ItemEntity*);
 void update_item_entity_collectable(ItemEntity*);
-void func_8013559C(ItemEntity*);
-void update_item_entity_static(ItemEntity*);
-void func_801356C4(ItemEntity*);
-void func_801356CC(ItemEntity*);
-void func_801356D4(ItemEntity*);
+void draw_ui_item_entity_collectable(ItemEntity*);
+void update_item_entity_stationary(ItemEntity*);
+void draw_ui_item_entity_stationary(ItemEntity*);
+void update_item_entity_no_pickup(ItemEntity*);
+void draw_ui_item_entity_no_pickup(ItemEntity*);
 void func_801363A0(ItemEntity*);
-void update_item_entity_temp(ItemEntity*);
+void update_item_entity_pickup(ItemEntity*);
 s32 draw_image_with_clipping(IMG_PTR raster, u32 width, u32 height, s32 fmt, s32 bitDepth, s16 posX, s16 posY,
                              u16 clipX, u16 clipY, u16 clipWidth, u16 clipHeight);
 
-void func_8013673C(ItemEntity* itemEntity, s32 posX, s32 posY);
-void func_801369D0(ItemEntity* itemEntity, s32 posX, s32 posY);
-void func_80136A08(ItemEntity* itemEntity, s32 posX, s32 posY);
+void draw_content_pickup_item_header(ItemEntity* item, s32 posX, s32 posY);
+void draw_content_cant_carry_more(ItemEntity* item, s32 posX, s32 posY);
+void draw_content_pickup_item_desc(ItemEntity* item, s32 posX, s32 posY);
 
 Vtx D_8014C5A0[4] = {
     {{{ -12,  0, 0 }, 0, { 0x2300, 0x2300 }, { 0, 0, 0, 255 }}},
@@ -117,8 +117,8 @@ Gfx D_8014C6A0[] = {
 
 Lights1 D_8014C6C8 = gdSPDefLights1(255, 255, 255, 0, 0, 0, 0, 0, 0);
 
-s16 D_8014C6E0[] = { 32, 40 };
-s16 D_8014C6E4[] = { 8, 4 };
+s16 PickupHeaderWindowHeight[] = { 32, 40 };
+s16 PickupMessageWindowYOffsets[] = { 8, 4 };
 
 s32 draw_ci_image_with_clipping(IMG_PTR raster, s32 width, s32 height, s32 fmt, s32 bitDepth, PAL_PTR palette, s16 posX,
                                 s16 posY, u16 clipULx, u16 clipULy, u16 clipLRx, u16 clipRLy, u8 opacity) {
@@ -606,53 +606,53 @@ s32 draw_adjustable_tiled_image(IMG_PTR raster, u32 width, u32 height, u8 fmt, u
 
 static const f32 rodata_padding[] = { 0.0f };
 
-void sparkle_script_init(ItemEntity* itemEntity, SparkleScript* script) {
-    itemEntity->sparkleReadPos = (s32*)script;
-    itemEntity->sparkleNextUpdate = 1;
-    itemEntity->sparkleSavedPos = (s32*)script;
+void sparkle_script_init(ItemEntity* item, SparkleScript* script) {
+    item->sparkleReadPos = (s32*)script;
+    item->sparkleNextUpdate = 1;
+    item->sparkleSavedPos = (s32*)script;
 }
 
-s32 sparkle_script_step(ItemEntity* itemEntity) {
-    s32* readPos = itemEntity->sparkleReadPos;
+s32 sparkle_script_step(ItemEntity* item) {
+    s32* readPos = item->sparkleReadPos;
 
     switch (*readPos++) {
         case SPARKLE_OP_SetGfx:
-            itemEntity->sparkleNextUpdate = *readPos++;
-            itemEntity->sparkleUnk44 = *readPos++;
-            itemEntity->sparkleReadPos = readPos;
+            item->sparkleNextUpdate = *readPos++;
+            item->sparkleUnk44 = *readPos++;
+            item->sparkleReadPos = readPos;
             break;
         case SPARKLE_OP_Restart:
-            itemEntity->sparkleReadPos = itemEntity->sparkleSavedPos;
+            item->sparkleReadPos = item->sparkleSavedPos;
             return TRUE;
         case SPARKLE_OP_Jump:
-            itemEntity->sparkleSavedPos = readPos;
-            itemEntity->sparkleReadPos = readPos;
+            item->sparkleSavedPos = readPos;
+            item->sparkleReadPos = readPos;
             return TRUE;
         case SPARKLE_OP_SetCI:
-            itemEntity->sparkleNextUpdate = *readPos++;
-            itemEntity->sparkleRaster  = (IMG_PTR)*readPos++;
-            itemEntity->sparklePalette = (PAL_PTR)*readPos++;
-            itemEntity->sparkleWidth = *readPos++;
-            itemEntity->sparkleHeight = *readPos++;
-            itemEntity->sparkleReadPos = readPos;
+            item->sparkleNextUpdate = *readPos++;
+            item->sparkleRaster  = (IMG_PTR)*readPos++;
+            item->sparklePalette = (PAL_PTR)*readPos++;
+            item->sparkleWidth = *readPos++;
+            item->sparkleHeight = *readPos++;
+            item->sparkleReadPos = readPos;
             break;
         case SPARKLE_OP_Break:
             readPos++; // ignore arg
-            itemEntity->sparkleReadPos = readPos;
+            item->sparkleReadPos = readPos;
         case SPARKLE_OP_End:
             return TRUE;
     }
     return FALSE;
 }
 
-void sparkle_script_update(ItemEntity* itemEntity) {
-    itemEntity->sparkleNextUpdate--;
-    if (itemEntity->sparkleNextUpdate <= 0) {
-        while (sparkle_script_step(itemEntity)) {}
+void sparkle_script_update(ItemEntity* item) {
+    item->sparkleNextUpdate--;
+    if (item->sparkleNextUpdate <= 0) {
+        while (sparkle_script_step(item)) {}
     }
 }
 
-void draw_coin_sparkles(ItemEntity* itemEntity) {
+void draw_coin_sparkles(ItemEntity* item) {
     f32 x, y, z;
     f32 angle;
     Matrix4f sp18;
@@ -667,7 +667,7 @@ void draw_coin_sparkles(ItemEntity* itemEntity) {
     angle = clamp_angle(180.0f - gCameras[gCurrentCamID].currentYaw);
 
     guTranslateF(sp18, x, y, z);
-    guTranslateF(sp58, itemEntity->position.x, itemEntity->position.y + 12.0f, itemEntity->position.z);
+    guTranslateF(sp58, item->position.x, item->position.y + 12.0f, item->position.z);
     guRotateF(sp98, angle, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp18, sp98, sp98);
     guMtxCatF(sp98, sp58, spD8);
@@ -688,12 +688,12 @@ void draw_coin_sparkles(ItemEntity* itemEntity) {
     gDPSetCombineKey(gMainGfxPos++, G_CK_NONE);
     gDPSetAlphaCompare(gMainGfxPos++, G_AC_NONE);
 
-    ifxImg.raster = itemEntity->sparkleRaster;
-    ifxImg.palette = itemEntity->sparklePalette;
-    ifxImg.width = itemEntity->sparkleWidth;
-    ifxImg.height = itemEntity->sparkleHeight;
-    ifxImg.xOffset = -itemEntity->sparkleWidth / 2;
-    ifxImg.yOffset = itemEntity->sparkleHeight / 2;
+    ifxImg.raster = item->sparkleRaster;
+    ifxImg.palette = item->sparklePalette;
+    ifxImg.width = item->sparkleWidth;
+    ifxImg.height = item->sparkleHeight;
+    ifxImg.xOffset = -item->sparkleWidth / 2;
+    ifxImg.yOffset = item->sparkleHeight / 2;
     ifxImg.alpha = 255;
     imgfx_appendGfx_component(0, &ifxImg, 0, spD8);
 
@@ -705,22 +705,22 @@ ItemEntity* get_item_entity(s32 itemEntityIndex) {
     return gCurrentItemEntities[itemEntityIndex];
 }
 
-void hide_item_entity(ItemEntity* itemEntity) {
+void hide_item_entity(ItemEntity* item) {
     Shadow* shadow;
 
-    itemEntity->flags |= ITEM_ENTITY_FLAG_HIDDEN;
-    if (itemEntity->shadowIndex >= 0) {
-        shadow = get_shadow_by_index(itemEntity->shadowIndex);
+    item->flags |= ITEM_ENTITY_FLAG_HIDDEN;
+    if (item->shadowIndex >= 0) {
+        shadow = get_shadow_by_index(item->shadowIndex);
         shadow->flags |= ENTITY_FLAG_HIDDEN;
     }
 }
 
-void reveal_item_entity(ItemEntity* itemEntity) {
+void reveal_item_entity(ItemEntity* item) {
     Shadow* shadow;
 
-    itemEntity->flags &= ~ITEM_ENTITY_FLAG_HIDDEN;
-    if (itemEntity->shadowIndex >= 0) {
-        shadow = get_shadow_by_index(itemEntity->shadowIndex);
+    item->flags &= ~ITEM_ENTITY_FLAG_HIDDEN;
+    if (item->shadowIndex >= 0) {
+        shadow = get_shadow_by_index(item->shadowIndex);
         shadow->flags &= ~ENTITY_FLAG_HIDDEN;
     }
 }
@@ -749,9 +749,9 @@ void clear_item_entity_data(void) {
     }
 
     create_worker_world(NULL, draw_item_entities);
-    create_worker_frontUI(NULL, draw_item_entities_UI);
+    create_worker_frontUI(NULL, draw_ui_item_entities);
     isPickingUpItem = FALSE;
-    D_801565A8 = 0;
+    D_801565A8 = FALSE;
 }
 
 void init_item_entity_list(void) {
@@ -762,7 +762,7 @@ void init_item_entity_list(void) {
     }
 
     isPickingUpItem = FALSE;
-    D_801565A8 = 0;
+    D_801565A8 = FALSE;
     ItemEntitiesCreated = 0;
     ItemEntityAlternatingSpawn = 0;
 }
@@ -868,10 +868,10 @@ void item_entity_load(ItemEntity* item) {
     item_entity_update(item);
 }
 
-s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 facingAngleSign, s32 pickupFlagIndex) {
+s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 angle, s32 pickupFlagIndex) {
     s32 i;
     s32 id;
-    ItemEntity* itemEntity;
+    ItemEntity* item;
     f32 hitDepth;
     Shadow* shadow;
 
@@ -911,191 +911,224 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
     ASSERT(i < MAX_ITEM_ENTITIES);
 
     id = i;
-    gCurrentItemEntities[id] = itemEntity = heap_malloc(sizeof(*itemEntity));
+    gCurrentItemEntities[id] = item = heap_malloc(sizeof(*item));
     ItemEntitiesCreated++;
-    ASSERT(itemEntity != NULL);
+    ASSERT(item != NULL);
 
-    itemEntity->renderGroup = (itemID & 0xF0000) >> 16;
-    if (itemEntity->renderGroup == VIS_GROUP_5) {
-        itemEntity->renderGroup = -1;
+    item->renderGroup = (itemID & 0xF0000) >> 16;
+    if (item->renderGroup == VIS_GROUP_5) {
+        item->renderGroup = -1;
     }
 
-    itemEntity->spawnType = itemSpawnMode;
-    itemEntity->state = 0;
-    itemEntity->position.x = x;
-    itemEntity->position.y = y;
-    itemEntity->position.z = z;
+    item->spawnType = itemSpawnMode;
+    item->state = ITEM_PHYSICS_STATE_INIT;
+    item->position.x = x;
+    item->position.y = y;
+    item->position.z = z;
 
     itemID &= 0xFFFF;
 
-    itemEntity->flags = ITEM_ENTITY_FLAG_80 | ITEM_ENTITY_FLAG_10 | ITEM_ENTITY_FLAG_CAM2 | ITEM_ENTITY_FLAG_CAM1 | ITEM_ENTITY_FLAG_CAM0;
-    itemEntity->pickupMsgFlags = 0;
-    itemEntity->boundVar = pickupFlagIndex;
-    itemEntity->itemID = itemID;
-    itemEntity->physicsData = NULL;
-    itemEntity->pickupDelay = pickupDelay;
-    itemEntity->scale = 1.0f;
-    itemEntity->wsFaceAngle = facingAngleSign;
-    itemEntity->shadowIndex = -1;
-    itemEntity->nextUpdate = 1;
-    itemEntity->unk_34.x = -9999;
-    itemEntity->unk_34.y = -9999;
-    itemEntity->unk_34.z = -9999;
+    item->flags = ITEM_ENTITY_FLAG_80 | ITEM_ENTITY_FLAG_10 | ITEM_ENTITY_FLAG_CAM2 | ITEM_ENTITY_FLAG_CAM1 | ITEM_ENTITY_FLAG_CAM0;
+    item->pickupMsgFlags = 0;
+    item->boundVar = pickupFlagIndex;
+    item->itemID = itemID;
+    item->physicsData = NULL;
+    item->pickupDelay = pickupDelay;
+    item->scale = 1.0f;
+    item->spawnAngle = angle;
+    item->shadowIndex = -1;
+    item->nextUpdate = 1;
+    item->lastPos.x = -9999;
+    item->lastPos.y = -9999;
+    item->lastPos.z = -9999;
     D_801565A6 = 30;
 
-    itemEntity->flags |= ITEM_ENTITY_RESIZABLE;
+    item->flags |= ITEM_ENTITY_RESIZABLE;
     if (gItemTable[itemID].typeFlags & ITEM_TYPE_FLAG_ENTITY_FULLSIZE) {
-        itemEntity->flags |= ITEM_ENTITY_FLAG_40000;
-        itemEntity->flags &= ~ITEM_ENTITY_RESIZABLE;
+        item->flags |= ITEM_ENTITY_FLAG_40000;
+        item->flags &= ~ITEM_ENTITY_RESIZABLE;
     }
 
     if (ItemEntityAlternatingSpawn != 0) {
-        itemEntity->flags |= ITEM_ENTITY_FLAG_20000;
+        item->flags |= ITEM_ENTITY_FLAG_20000;
     }
 
     ItemEntityAlternatingSpawn = 1 - ItemEntityAlternatingSpawn;
 
-    switch (itemEntity->spawnType) {
+    switch (item->spawnType) {
         case ITEM_SPAWN_MODE_KEY:
-            itemEntity->flags |= ITEM_ENTITY_FLAG_80000000;
+            item->flags |= ITEM_ENTITY_FLAG_SAVE_ON_RECEIPT;
             break;
         case ITEM_SPAWN_MODE_DECORATION:
         case ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS:
-            itemEntity->flags |= ITEM_ENTITY_FLAG_800000;
+            item->flags |= ITEM_ENTITY_FLAG_800000;
             break;
         case ITEM_SPAWN_MODE_INVISIBLE:
-            itemEntity->flags |= ITEM_ENTITY_FLAG_100000;
+            item->flags |= ITEM_ENTITY_FLAG_100000;
             break;
         case ITEM_SPAWN_MODE_BATTLE_REWARD:
-            itemEntity->flags |= ITEM_ENTITY_FLAG_800000;
-            itemEntity->flags |= ITEM_ENTITY_FLAG_10000;
-            itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
+            item->flags |= ITEM_ENTITY_FLAG_800000;
+            item->flags |= ITEM_ENTITY_FLAG_TOSS_LOWER;
+            item->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
             break;
         case ITEM_SPAWN_MODE_TOSS_NEVER_VANISH:
-            itemEntity->flags |= ITEM_ENTITY_FLAG_800000 | ITEM_ENTITY_FLAG_400 | ITEM_ENTITY_FLAG_NEVER_VANISH;
-            itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
+            item->flags |= ITEM_ENTITY_FLAG_800000;
+            item->flags |= ITEM_ENTITY_FLAG_SAVE_ON_TOUCH;
+            item->flags |= ITEM_ENTITY_FLAG_NEVER_VANISH;
+            item->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
             break;
         case ITEM_SPAWN_MODE_TOSS:
-            itemEntity->flags |= ITEM_ENTITY_FLAG_800000 | ITEM_ENTITY_FLAG_400;
-            itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
+            item->flags |= ITEM_ENTITY_FLAG_800000;
+            item->flags |= ITEM_ENTITY_FLAG_SAVE_ON_TOUCH;
+            item->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
             break;
         case ITEM_SPAWN_MODE_TOSS_SPAWN_ONCE:
-            itemEntity->flags |= ITEM_ENTITY_FLAG_800000 | ITEM_ENTITY_FLAG_800;
-            itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
+            item->flags |= ITEM_ENTITY_FLAG_800000;
+            item->flags |= ITEM_ENTITY_FLAG_800;
+            item->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
             break;
         case ITEM_SPAWN_MODE_TOSS_SPAWN_ONCE_NEVER_VANISH:
-            itemEntity->flags |= ITEM_ENTITY_FLAG_800000 | ITEM_ENTITY_FLAG_800 | ITEM_ENTITY_FLAG_NEVER_VANISH;
-            itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
+            item->flags |= ITEM_ENTITY_FLAG_800000;
+            item->flags |= ITEM_ENTITY_FLAG_800;
+            item->flags |= ITEM_ENTITY_FLAG_NEVER_VANISH;
+            item->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
             break;
         case ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS_NEVER_VANISH:
-            itemEntity->flags |= ITEM_ENTITY_FLAG_800000 | ITEM_ENTITY_FLAG_NEVER_VANISH;
-            itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
+            item->flags |= ITEM_ENTITY_FLAG_800000;
+            item->flags |= ITEM_ENTITY_FLAG_NEVER_VANISH;
+            item->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
             break;
         case ITEM_SPAWN_MODE_ITEM_BLOCK_ITEM:
-            itemEntity->flags |= ITEM_ENTITY_FLAG_800000 | ITEM_ENTITY_FLAG_400;
-            itemEntity->flags |= ITEM_ENTITY_FLAG_40000000;
-            itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
+            item->flags |= ITEM_ENTITY_FLAG_800000;
+            item->flags |= ITEM_ENTITY_FLAG_SAVE_ON_TOUCH;
+            item->flags |= ITEM_ENTITY_FLAG_ANGLE_RELATIVE_VELOCITY;
+            item->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
             break;
         case ITEM_SPAWN_MODE_ITEM_BLOCK_BADGE:
-            itemEntity->flags |= ITEM_ENTITY_FLAG_800000 | ITEM_ENTITY_FLAG_400;
-            itemEntity->flags |= ITEM_ENTITY_FLAG_40000000 | ITEM_ENTITY_FLAG_NEVER_VANISH;
-            itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
+            item->flags |= ITEM_ENTITY_FLAG_800000;
+            item->flags |= ITEM_ENTITY_FLAG_SAVE_ON_TOUCH;
+            item->flags |= ITEM_ENTITY_FLAG_ANGLE_RELATIVE_VELOCITY;
+            item->flags |= ITEM_ENTITY_FLAG_NEVER_VANISH;
+            item->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
             break;
         case ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS:
-            itemEntity->flags |= ITEM_ENTITY_FLAG_800000;
+            item->flags |= ITEM_ENTITY_FLAG_800000;
             break;
         case ITEM_SPAWN_MODE_FALL_NEVER_VANISH:
-            itemEntity->flags |= ITEM_ENTITY_FLAG_800000 | ITEM_ENTITY_FLAG_400 | ITEM_ENTITY_FLAG_NEVER_VANISH;
-            itemEntity->spawnType = ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS;
+            item->flags |= ITEM_ENTITY_FLAG_800000;
+            item->flags |= ITEM_ENTITY_FLAG_SAVE_ON_TOUCH;
+            item->flags |= ITEM_ENTITY_FLAG_NEVER_VANISH;
+            item->spawnType = ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS;
             break;
         case ITEM_SPAWN_MODE_FALL:
-            itemEntity->flags |= ITEM_ENTITY_FLAG_800000 | ITEM_ENTITY_FLAG_400;
-            itemEntity->spawnType = ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS;
+            item->flags |= ITEM_ENTITY_FLAG_800000;
+            item->flags |= ITEM_ENTITY_FLAG_SAVE_ON_TOUCH;
+            item->spawnType = ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS;
             break;
         case ITEM_SPAWN_MODE_FALL_SPAWN_ONCE:
-            itemEntity->flags |= ITEM_ENTITY_FLAG_800000 | ITEM_ENTITY_FLAG_800;
-            itemEntity->spawnType = ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS;
+            item->flags |= ITEM_ENTITY_FLAG_800000;
+            item->flags |= ITEM_ENTITY_FLAG_800;
+            item->spawnType = ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS;
             break;
         case ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS:
-            itemEntity->flags |= ITEM_ENTITY_FLAG_800000 | ITEM_ENTITY_FLAG_FIXED;
-            itemEntity->flags |= ITEM_ENTITY_FLAG_10000000;
+            item->flags |= ITEM_ENTITY_FLAG_800000;
+            item->flags |= ITEM_ENTITY_FLAG_NO_GRAVITY;
+            item->flags |= ITEM_ENTITY_FLAG_NO_MOTION;
             break;
         case ITEM_SPAWN_MODE_FIXED_NEVER_VANISH:
-            itemEntity->flags |= ITEM_ENTITY_FLAG_800000 | ITEM_ENTITY_FLAG_FIXED | ITEM_ENTITY_FLAG_400 | ITEM_ENTITY_FLAG_NEVER_VANISH;
-            itemEntity->flags |= ITEM_ENTITY_FLAG_10000000;
-            itemEntity->spawnType = ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS;
+            item->flags |= ITEM_ENTITY_FLAG_800000;
+            item->flags |= ITEM_ENTITY_FLAG_NO_GRAVITY;
+            item->flags |= ITEM_ENTITY_FLAG_SAVE_ON_TOUCH;
+            item->flags |= ITEM_ENTITY_FLAG_NEVER_VANISH;
+            item->flags |= ITEM_ENTITY_FLAG_NO_MOTION;
+            item->spawnType = ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS;
             break;
         case ITEM_SPAWN_MODE_FIXED:
-            itemEntity->flags |= ITEM_ENTITY_FLAG_800000 | ITEM_ENTITY_FLAG_FIXED | ITEM_ENTITY_FLAG_400;
-            itemEntity->flags |= ITEM_ENTITY_FLAG_10000000;
-            itemEntity->spawnType = ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS;
+            item->flags |= ITEM_ENTITY_FLAG_800000;
+            item->flags |= ITEM_ENTITY_FLAG_NO_GRAVITY;
+            item->flags |= ITEM_ENTITY_FLAG_SAVE_ON_TOUCH;
+            item->flags |= ITEM_ENTITY_FLAG_NO_MOTION;
+            item->spawnType = ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS;
             break;
         case ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS_NEVER_VANISH:
-            itemEntity->flags |= ITEM_ENTITY_FLAG_800000 | ITEM_ENTITY_FLAG_FIXED | ITEM_ENTITY_FLAG_NEVER_VANISH;
-            itemEntity->flags |= ITEM_ENTITY_FLAG_10000000;
-            itemEntity->spawnType = ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS;
+            item->flags |= ITEM_ENTITY_FLAG_800000;
+            item->flags |= ITEM_ENTITY_FLAG_NO_GRAVITY;
+            item->flags |= ITEM_ENTITY_FLAG_NEVER_VANISH;
+            item->flags |= ITEM_ENTITY_FLAG_NO_MOTION;
+            item->spawnType = ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS;
             break;
         case ITEM_SPAWN_MODE_TOSS_FADE1:
-            itemEntity->flags |= ITEM_ENTITY_FLAG_800000 | ITEM_ENTITY_FLAG_1000;
-            itemEntity->scale = 0.8f;
-            itemEntity->flags |= ITEM_ENTITY_RESIZABLE;
+            item->flags |= ITEM_ENTITY_FLAG_800000;
+            item->flags |= ITEM_ENTITY_FLAG_1000;
+            item->scale = 0.8f;
+            item->flags |= ITEM_ENTITY_RESIZABLE;
             break;
         case ITEM_SPAWN_MODE_TOSS_FADE2:
-            itemEntity->flags |= ITEM_ENTITY_FLAG_800000 | ITEM_ENTITY_FLAG_1000;
-            itemEntity->flags |= ITEM_ENTITY_FLAG_10000;
-            itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_FADE1;
-            itemEntity->scale = 0.8f;
-            itemEntity->flags |= ITEM_ENTITY_RESIZABLE;
+            item->flags |= ITEM_ENTITY_FLAG_800000;
+            item->flags |= ITEM_ENTITY_FLAG_1000;
+            item->flags |= ITEM_ENTITY_FLAG_TOSS_LOWER;
+            item->spawnType = ITEM_SPAWN_MODE_TOSS_FADE1;
+            item->scale = 0.8f;
+            item->flags |= ITEM_ENTITY_RESIZABLE;
             break;
         case ITEM_SPAWN_MODE_TOSS_FADE3:
-            itemEntity->flags |= ITEM_ENTITY_FLAG_800000 | ITEM_ENTITY_FLAG_1000;
-            itemEntity->flags |= ITEM_ENTITY_FLAG_400000;
-            itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_FADE1;
-            itemEntity->scale = 0.8f;
-            itemEntity->flags |= ITEM_ENTITY_RESIZABLE;
+            item->flags |= ITEM_ENTITY_FLAG_800000;
+            item->flags |= ITEM_ENTITY_FLAG_1000;
+            item->flags |= ITEM_ENTITY_FLAG_400000;
+            item->spawnType = ITEM_SPAWN_MODE_TOSS_FADE1;
+            item->scale = 0.8f;
+            item->flags |= ITEM_ENTITY_RESIZABLE;
             break;
         case ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS_SMALL:
-            itemEntity->flags |= ITEM_ENTITY_FLAG_800000;
-            itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
-            itemEntity->scale = 0.8f;
-            itemEntity->flags |= ITEM_ENTITY_RESIZABLE;
+            item->flags |= ITEM_ENTITY_FLAG_800000;
+            item->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
+            item->scale = 0.8f;
+            item->flags |= ITEM_ENTITY_RESIZABLE;
             break;
         case ITEM_SPAWN_MODE_UNKNOWN_1B:
-            itemEntity->flags |= ITEM_ENTITY_FLAG_800000 | ITEM_ENTITY_FLAG_8000;
-            itemEntity->spawnType = ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS;
-            itemEntity->scale = 0.8f;
-            itemEntity->flags |= ITEM_ENTITY_RESIZABLE;
+            item->flags |= ITEM_ENTITY_FLAG_800000;
+            item->flags |= ITEM_ENTITY_FLAG_8000;
+            item->spawnType = ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS;
+            item->scale = 0.8f;
+            item->flags |= ITEM_ENTITY_RESIZABLE;
             break;
         case ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS:
-            itemEntity->flags |= ITEM_ENTITY_FLAG_800000 | ITEM_ENTITY_FLAG_8000 | ITEM_ENTITY_FLAG_NEVER_VANISH;
+            item->flags |= ITEM_ENTITY_FLAG_800000;
+            item->flags |= ITEM_ENTITY_FLAG_8000;
+            item->flags |= ITEM_ENTITY_FLAG_NEVER_VANISH;
             break;
         case ITEM_SPAWN_MODE_ITEM_BLOCK_COIN:
-            itemEntity->spawnType = ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS;
-            itemEntity->flags |= ITEM_ENTITY_FLAG_800000 | ITEM_ENTITY_FLAG_8000 | ITEM_ENTITY_FLAG_400 | ITEM_ENTITY_FLAG_NEVER_VANISH;
+            item->spawnType = ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS;
+            item->flags |= ITEM_ENTITY_FLAG_800000;
+            item->flags |= ITEM_ENTITY_FLAG_8000;
+            item->flags |= ITEM_ENTITY_FLAG_SAVE_ON_TOUCH;
+            item->flags |= ITEM_ENTITY_FLAG_NEVER_VANISH;
             break;
         case ITEM_SPAWN_MODE_TOSS_HIGHER_NEVER_VANISH:
-            itemEntity->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
-            itemEntity->flags |= ITEM_ENTITY_FLAG_800000 | ITEM_ENTITY_FLAG_400 | ITEM_ENTITY_FLAG_NEVER_VANISH;
-            itemEntity->flags |= ITEM_ENTITY_FLAG_1000000;
+            item->spawnType = ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS;
+            item->flags |= ITEM_ENTITY_FLAG_800000;
+            item->flags |= ITEM_ENTITY_FLAG_SAVE_ON_TOUCH;
+            item->flags |= ITEM_ENTITY_FLAG_NEVER_VANISH;
+            item->flags |= ITEM_ENTITY_FLAG_TOSS_HIGHER;
             break;
     }
 
-    switch (itemEntity->spawnType) {
+    switch (item->spawnType) {
         case ITEM_SPAWN_MODE_KEY:
         case ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS:
         case ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS:
         case ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS:
         case ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS:
-            itemEntity->shadowIndex = create_shadow_type(0, itemEntity->position.x, itemEntity->position.y, itemEntity->position.z);
-            shadow = get_shadow_by_index(itemEntity->shadowIndex);
+            item->shadowIndex = create_shadow_type(0, item->position.x, item->position.y, item->position.z);
+            shadow = get_shadow_by_index(item->shadowIndex);
 
-            if (itemEntity->spawnType == ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS) {
+            if (item->spawnType == ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS) {
                 shadow->flags |= ENTITY_FLAG_HIDDEN;
             }
 
-            x = itemEntity->position.x;
-            y = itemEntity->position.y + 12.0f;
-            z = itemEntity->position.z;
+            x = item->position.x;
+            y = item->position.y + 12.0f;
+            z = item->position.z;
             hitDepth = 1000.0f;
             npc_raycast_down_sides(COLLISION_CHANNEL_20000, &x, &y, &z, &hitDepth);
             shadow->position.x = x;
@@ -1108,19 +1141,19 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
             break;
     }
 
-    if (itemEntity->pickupDelay != 0) {
-        hide_item_entity(itemEntity);
+    if (item->pickupDelay != 0) {
+        hide_item_entity(item);
     }
 
-    item_entity_load(itemEntity);
+    item_entity_load(item);
 
-    if (itemEntity->itemID == ITEM_COIN) {
-        sparkle_script_init(itemEntity, &SparkleScript_Coin);
-        sparkle_script_update(itemEntity);
+    if (item->itemID == ITEM_COIN) {
+        sparkle_script_init(item, &SparkleScript_Coin);
+        sparkle_script_update(item);
     }
 
-    if (itemEntity->itemID == ITEM_STAR_PIECE) {
-        itemEntity->flags &= ~ITEM_ENTITY_FLAG_80;
+    if (item->itemID == ITEM_STAR_PIECE) {
+        item->flags &= ~ITEM_ENTITY_FLAG_80;
     }
 
     return id;
@@ -1165,7 +1198,7 @@ s32 make_item_entity_at_player(s32 itemID, s32 category, s32 pickupMsgFlags) {
     }
     item->pickupMsgFlags = pickupMsgFlags;
     item->spawnType = ITEM_SPAWN_AT_PLAYER;
-    item->state = 0;
+    item->state = ITEM_PICKUP_STATE_INIT;
     item->boundVar = 0;
     item->position.x = playerStatus->position.x;
     item->position.y = playerStatus->position.y;
@@ -1173,14 +1206,14 @@ s32 make_item_entity_at_player(s32 itemID, s32 category, s32 pickupMsgFlags) {
 
     item->shadowIndex = -1;
     item->nextUpdate = 1;
-    item->unk_34.x = -9999;
-    item->unk_34.y = -9999;
-    item->unk_34.z = -9999;
+    item->lastPos.x = -9999;
+    item->lastPos.y = -9999;
+    item->lastPos.z = -9999;
     item->scale = 1.0f;
     item->itemID = itemID;
     item->physicsData = NULL;
     item->pickupDelay = 0;
-    item->wsFaceAngle = 0;
+    item->spawnAngle = 0;
     item->flags |= ITEM_ENTITY_RESIZABLE;
 
     if (gItemTable[itemID].typeFlags & ITEM_TYPE_FLAG_ENTITY_FULLSIZE) {
@@ -1266,70 +1299,67 @@ void item_entity_update(ItemEntity* entity) {
 }
 
 void update_item_entities(void) {
-    ItemEntity* entity;
-    ItemEntity* entity2;
+    ItemEntity* item;
     f32 x, y, z, hitDepth;
-    s32 coin;
     s32 i;
 
     if (!(gOverrideFlags & (GLOBAL_OVERRIDES_400 | GLOBAL_OVERRIDES_800))) {
-        for (i = 0; i < 0x100; i++) {
-            entity = gCurrentItemEntities[i];
+        for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
+            item = gCurrentItemEntities[i];
 
-            if (entity != NULL && entity->flags != 0) {
-                if (entity->itemID == ITEM_COIN) {
+            if (item != NULL && item->flags != 0) {
+                if (item->itemID == ITEM_COIN) {
                     if (rand_int(100) > 90) {
-                        sparkle_script_init(entity, &SparkleScript_Coin);
+                        sparkle_script_init(item, &SparkleScript_Coin);
                         D_80155D8C = rand_int(16) - 8;
                         D_80155D8E = rand_int(16) - 8;
                         D_80155D90 = 5;
                     }
-                    sparkle_script_update(entity);
+                    sparkle_script_update(item);
                 }
 
-                item_entity_update(entity);
+                item_entity_update(item);
 
-                switch (entity->spawnType) {
+                switch (item->spawnType) {
                     case ITEM_SPAWN_MODE_KEY:
-                        update_item_entity_static(entity);
+                        update_item_entity_stationary(item);
                         break;
                     case ITEM_SPAWN_MODE_DECORATION:
                     case ITEM_SPAWN_MODE_INVISIBLE:
-                        func_801356CC(entity);
+                        update_item_entity_no_pickup(item);
                         break;
                     case ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS:
                     case ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS:
                     case ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS:
                     case ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS:
                     case ITEM_SPAWN_MODE_TOSS_FADE1:
-                        update_item_entity_collectable(entity);
+                        update_item_entity_collectable(item);
                         break;
                     case ITEM_SPAWN_AT_PLAYER:
-                        update_item_entity_temp(entity);
+                        update_item_entity_pickup(item);
                         break;
                 }
 
-
-                entity = gCurrentItemEntities[i];
-                if (entity != NULL) {
+                item = gCurrentItemEntities[i];
+                if (item != NULL) {
                     s32 xs, ys, zs;
 
-                    switch (entity->spawnType) {
+                    switch (item->spawnType) {
                         case ITEM_SPAWN_MODE_KEY:
                         case ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS:
                         case ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS:
                         case ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS:
                         case ITEM_SPAWN_AT_PLAYER:
-                            xs = entity->position.x;
-                            ys = entity->position.y;
-                            zs = entity->position.z;
+                            xs = item->position.x;
+                            ys = item->position.y;
+                            zs = item->position.z;
 
-                            if (xs != entity->unk_34.x || ys != entity->unk_34.y || zs != entity->unk_34.z) {
-                                Shadow* shadow = get_shadow_by_index(entity->shadowIndex);
+                            if (xs != item->lastPos.x || ys != item->lastPos.y || zs != item->lastPos.z) {
+                                Shadow* shadow = get_shadow_by_index(item->shadowIndex);
 
-                                x = entity->position.x;
-                                y = entity->position.y + 12.0f;
-                                z = entity->position.z;
+                                x = item->position.x;
+                                y = item->position.y + 12.0f;
+                                z = item->position.z;
                                 hitDepth = 1000.0f;
                                 npc_raycast_down_sides(COLLISION_CHANNEL_20000, &x, &y, &z, &hitDepth);
 
@@ -1343,9 +1373,9 @@ void update_item_entities(void) {
                             }
                             break;
                     }
-                    entity->unk_34.x = entity->position.x;
-                    entity->unk_34.y = entity->position.y;
-                    entity->unk_34.z = entity->position.z;
+                    item->lastPos.x = item->position.x;
+                    item->lastPos.y = item->position.y;
+                    item->lastPos.z = item->position.z;
                 }
             }
             do {} while (0); // required to match
@@ -1354,19 +1384,19 @@ void update_item_entities(void) {
 }
 
 void appendGfx_item_entity(void* data) {
-    ItemEntity* itemEntity = (ItemEntity*)data;
+    ItemEntity* item = (ItemEntity*)data;
     Mtx mtxTransform;
     Matrix4f mtxTranslate, mtxRotY, mtxScale;
     s32 alpha = 255;
     s32 yOffset;
     f32 rot;
 
-    if (itemEntity->flags & (ITEM_ENTITY_FLAG_8000000 | ITEM_ENTITY_FLAG_TRANSPARENT)) {
-        if (itemEntity->flags & ITEM_ENTITY_FLAG_TRANSPARENT) {
+    if (item->flags & (ITEM_ENTITY_FLAG_HIDING | ITEM_ENTITY_FLAG_TRANSPARENT)) {
+        if (item->flags & ITEM_ENTITY_FLAG_TRANSPARENT) {
             alpha = 255;
-            alpha = (itemEntity->alpha * alpha) / 255;
+            alpha = (item->alpha * alpha) / 255;
         }
-        if (itemEntity->flags & ITEM_ENTITY_FLAG_8000000) {
+        if (item->flags & ITEM_ENTITY_FLAG_HIDING) {
             u8 r, g, b, a;
 
             get_background_color_blend(&r, &g, &b, &a);
@@ -1374,21 +1404,21 @@ void appendGfx_item_entity(void* data) {
         }
     }
 
-    if (!(itemEntity->flags & ITEM_ENTITY_FLAG_40000)) {
+    if (!(item->flags & ITEM_ENTITY_FLAG_40000)) {
         yOffset = -2;
     } else {
         yOffset = -3;
     }
 
-    if (itemEntity->itemID == ITEM_COIN || itemEntity->itemID == ITEM_STAR_POINT || itemEntity->itemID == ITEM_HEART) {
-        itemEntity->scale = 1.0f;
+    if (item->itemID == ITEM_COIN || item->itemID == ITEM_STAR_POINT || item->itemID == ITEM_HEART) {
+        item->scale = 1.0f;
     }
 
     rot = clamp_angle(180.0f - gCameras[gCurrentCamID].currentYaw);
-    guTranslateF(mtxTranslate, itemEntity->position.x, itemEntity->position.y + yOffset, itemEntity->position.z);
+    guTranslateF(mtxTranslate, item->position.x, item->position.y + yOffset, item->position.z);
     guRotateF(mtxRotY, rot, 0.0f, 1.0f, 0.0f);
-    if (itemEntity->flags & ITEM_ENTITY_RESIZABLE) {
-        guScaleF(mtxScale, itemEntity->scale, itemEntity->scale, itemEntity->scale);
+    if (item->flags & ITEM_ENTITY_RESIZABLE) {
+        guScaleF(mtxScale, item->scale, item->scale, item->scale);
         guMtxCatF(mtxRotY, mtxScale, mtxRotY);
     }
     guMtxCatF(mtxRotY, mtxTranslate, mtxTranslate);
@@ -1407,7 +1437,7 @@ void appendGfx_item_entity(void* data) {
     gSPClearGeometryMode(gMainGfxPos++, G_CULL_BOTH | G_LIGHTING);
     gSPDisplayList(gMainGfxPos++, D_8014C620);
 
-    if (itemEntity->flags & (ITEM_ENTITY_FLAG_8000000 | ITEM_ENTITY_FLAG_TRANSPARENT)) {
+    if (item->flags & (ITEM_ENTITY_FLAG_HIDING | ITEM_ENTITY_FLAG_TRANSPARENT)) {
         if (gSpriteShadingProfile->flags != 0) {
             gDPSetRenderMode(gMainGfxPos++, AA_EN | IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL | G_RM_PASS,
                              AA_EN | IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL |
@@ -1422,10 +1452,10 @@ void appendGfx_item_entity(void* data) {
         }
     }
 
-    if (!(itemEntity->flags & ITEM_ENTITY_FLAG_40000)) {
-        gDPLoadTLUT_pal16(gMainGfxPos++, 0, gHudElementCacheTablePalette[itemEntity->lookupPaletteIndex].data);
+    if (!(item->flags & ITEM_ENTITY_FLAG_40000)) {
+        gDPLoadTLUT_pal16(gMainGfxPos++, 0, gHudElementCacheTablePalette[item->lookupPaletteIndex].data);
         if (gSpriteShadingProfile->flags != 0) {
-            gDPSetTextureImage(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 12, gHudElementCacheTableRaster[itemEntity->lookupRasterIndex].data);
+            gDPSetTextureImage(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 12, gHudElementCacheTableRaster[item->lookupRasterIndex].data);
             gDPSetTile(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0x0000, G_TX_LOADTILE, 0, G_TX_NOMIRROR |
                        G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
             gDPLoadSync(gMainGfxPos++);
@@ -1440,13 +1470,13 @@ void appendGfx_item_entity(void* data) {
                        G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
             gDPSetTileSize(gMainGfxPos++, 2, 0, 0, 0x00FC, 0);
 
-            if (itemEntity->flags & (ITEM_ENTITY_FLAG_8000000 | ITEM_ENTITY_FLAG_TRANSPARENT)) {
-                func_801491E4(mtxTranslate, 0, 0, 0x18, 0x18, alpha);
+            if (item->flags & (ITEM_ENTITY_FLAG_HIDING | ITEM_ENTITY_FLAG_TRANSPARENT)) {
+                func_801491E4(mtxTranslate, 0, 0, 24, 24, alpha);
             } else {
-                func_801491E4(mtxTranslate, 0, 0, 0x18, 0x18, 255);
+                func_801491E4(mtxTranslate, 0, 0, 24, 24, 255);
             }
         } else {
-            gDPSetTextureImage(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 12, gHudElementCacheTableRaster[itemEntity->lookupRasterIndex].data);
+            gDPSetTextureImage(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 12, gHudElementCacheTableRaster[item->lookupRasterIndex].data);
             gDPSetTile(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0x0000, G_TX_LOADTILE, 0,
                        G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
             gDPLoadSync(gMainGfxPos++);
@@ -1458,9 +1488,9 @@ void appendGfx_item_entity(void* data) {
         }
         gSPDisplayList(gMainGfxPos++, D_8014C678);
     } else {
-        gDPLoadTLUT_pal16(gMainGfxPos++, 0, gHudElementCacheTablePalette[itemEntity->lookupPaletteIndex].data);
+        gDPLoadTLUT_pal16(gMainGfxPos++, 0, gHudElementCacheTablePalette[item->lookupPaletteIndex].data);
         if (gSpriteShadingProfile->flags != 0) {
-            gDPSetTextureImage(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 16, gHudElementCacheTableRaster[itemEntity->lookupRasterIndex].data);
+            gDPSetTextureImage(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 16, gHudElementCacheTableRaster[item->lookupRasterIndex].data);
             gDPSetTile(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0x0000, G_TX_LOADTILE, 0,
                        G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
             gDPLoadSync(gMainGfxPos++);
@@ -1474,13 +1504,13 @@ void appendGfx_item_entity(void* data) {
             gDPSetTile(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0x0100, 2, 0, G_TX_NOMIRROR | G_TX_WRAP,
                        G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
             gDPSetTileSize(gMainGfxPos++, 2, 0, 0, 0x00FC, 0);
-            if (itemEntity->flags & (ITEM_ENTITY_FLAG_8000000 | ITEM_ENTITY_FLAG_TRANSPARENT)) {
-                func_801491E4(mtxTranslate, 0, 0, 0x20, 0x20, alpha);
+            if (item->flags & (ITEM_ENTITY_FLAG_HIDING | ITEM_ENTITY_FLAG_TRANSPARENT)) {
+                func_801491E4(mtxTranslate, 0, 0, 32, 32, alpha);
             } else {
-                func_801491E4(mtxTranslate, 0, 0, 0x20, 0x20, 255);
+                func_801491E4(mtxTranslate, 0, 0, 32, 32, 255);
             }
         } else {
-            gDPSetTextureImage(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 16, gHudElementCacheTableRaster[itemEntity->lookupRasterIndex].data);
+            gDPSetTextureImage(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 16, gHudElementCacheTableRaster[item->lookupRasterIndex].data);
             gDPSetTile(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_8b, 2, 0x0000, G_TX_LOADTILE, 0,
                        G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
             gDPLoadSync(gMainGfxPos++);
@@ -1495,8 +1525,8 @@ void appendGfx_item_entity(void* data) {
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     gDPPipeSync(gMainGfxPos++);
 
-    if (itemEntity->itemID == ITEM_COIN) {
-        draw_coin_sparkles(itemEntity);
+    if (item->itemID == ITEM_COIN) {
+        draw_coin_sparkles(item);
     }
 }
 
@@ -1507,22 +1537,22 @@ void draw_item_entities(void) {
     s32 i;
 
     for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
-        ItemEntity* itemEntity = gCurrentItemEntities[i];
+        ItemEntity* item = gCurrentItemEntities[i];
 
-        if (itemEntity != NULL
-            && itemEntity->flags != 0
-            && !(itemEntity->flags & ITEM_ENTITY_FLAG_HIDDEN)
-            && (itemEntity->flags & (1 << gCurrentCamID))
-            && !(itemEntity->flags & ITEM_ENTITY_FLAG_100000)
-            && (itemEntity->renderGroup == -1 || ItemEntityRenderGroup == itemEntity->renderGroup))
+        if (item != NULL
+            && item->flags != 0
+            && !(item->flags & ITEM_ENTITY_FLAG_HIDDEN)
+            && (item->flags & (1 << gCurrentCamID))
+            && !(item->flags & ITEM_ENTITY_FLAG_100000)
+            && (item->renderGroup == -1 || ItemEntityRenderGroup == item->renderGroup))
         {
-            if (!(itemEntity->flags & ITEM_ENTITY_FLAG_TRANSPARENT)) {
+            if (!(item->flags & ITEM_ENTITY_FLAG_TRANSPARENT)) {
                 rtPtr->renderMode = RENDER_MODE_ALPHATEST;
             } else {
                 rtPtr->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
             }
 
-            rtPtr->appendGfxArg = itemEntity;
+            rtPtr->appendGfxArg = item;
             rtPtr->appendGfx = appendGfx_item_entity;
             rtPtr->distance = 0;
 
@@ -1534,28 +1564,28 @@ void draw_item_entities(void) {
     }
 }
 
-void draw_item_entities_UI(void) {
+void draw_ui_item_entities(void) {
     if (!(gOverrideFlags & (GLOBAL_OVERRIDES_4000 | GLOBAL_OVERRIDES_8000))) {
         s32 i;
 
         for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
-            ItemEntity* itemEntity = gCurrentItemEntities[i];
+            ItemEntity* item = gCurrentItemEntities[i];
 
-            if (itemEntity != NULL && itemEntity->flags != 0) {
-                switch (itemEntity->spawnType) {
+            if (item != NULL && item->flags != 0) {
+                switch (item->spawnType) {
                     case ITEM_SPAWN_MODE_KEY:
-                        func_801356C4(itemEntity);
+                        draw_ui_item_entity_stationary(item);
                         break;
                     case ITEM_SPAWN_MODE_DECORATION:
                     case ITEM_SPAWN_MODE_INVISIBLE:
-                        func_801356D4(itemEntity);
+                        draw_ui_item_entity_no_pickup(item);
                         break;
                     case ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS:
                     case ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS:
                     case ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS:
                     case ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS:
                     case ITEM_SPAWN_MODE_TOSS_FADE1:
-                        func_8013559C(itemEntity);
+                        draw_ui_item_entity_collectable(item);
                         break;
                 }
             }
@@ -1615,15 +1645,15 @@ void render_item_entities(void) {
                         gSPDisplayList(gMainGfxPos++, D_8014C620);
 
                         alpha = 255;
-                        if (item->flags & (ITEM_ENTITY_FLAG_TRANSPARENT | ITEM_ENTITY_FLAG_8000000)) {
+                        if (item->flags & (ITEM_ENTITY_FLAG_TRANSPARENT | ITEM_ENTITY_FLAG_HIDING)) {
                             if (item->flags & ITEM_ENTITY_FLAG_TRANSPARENT) {
                                 alpha = item->alpha * alpha / 255;
                             }
-                            if (item->flags & ITEM_ENTITY_FLAG_8000000) {
+                            if (item->flags & ITEM_ENTITY_FLAG_HIDING) {
                                 get_background_color_blend(&r1, &g1, &b1, &a1);
                                 alpha = alpha * (255 - a1) / 255;
                             }
-                            if (item->flags & (ITEM_ENTITY_FLAG_TRANSPARENT | ITEM_ENTITY_FLAG_8000000)) {
+                            if (item->flags & (ITEM_ENTITY_FLAG_TRANSPARENT | ITEM_ENTITY_FLAG_HIDING)) {
                                 if (gSpriteShadingProfile->flags) {
                                     gDPSetRenderMode(gMainGfxPos++, AA_EN | IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL | G_RM_PASS,
                                         AA_EN | IM_RD | CVG_DST_SAVE | ZMODE_OPA | FORCE_BL | GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_1MA));
@@ -1649,7 +1679,7 @@ void render_item_entities(void) {
                                 gDPSetTile(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0x0000, G_TX_RENDERTILE, 1, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
                                 gDPSetTile(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0x0100, 2, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
                                 gDPSetTileSize(gMainGfxPos++, 2, 0, 0, 0x00FC, 0);
-                                if (item->flags & (ITEM_ENTITY_FLAG_TRANSPARENT | ITEM_ENTITY_FLAG_8000000)) {
+                                if (item->flags & (ITEM_ENTITY_FLAG_TRANSPARENT | ITEM_ENTITY_FLAG_HIDING)) {
                                     func_801491E4(sp58, 0, 0, 24, 24, alpha);
                                 } else {
                                     func_801491E4(sp58, 0, 0, 24, 24, 255);
@@ -1677,7 +1707,7 @@ void render_item_entities(void) {
                                 gDPSetTile(gMainGfxPos++, G_IM_FMT_CI, G_IM_SIZ_4b, 2, 0x0000, G_TX_RENDERTILE, 1, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_CLAMP, 8, G_TX_NOLOD);
                                 gDPSetTile(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0x0100, 2, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOLOD);
                                 gDPSetTileSize(gMainGfxPos++, 2, 0, 0, 0x00FC, 0);
-                                if (item->flags & (ITEM_ENTITY_FLAG_TRANSPARENT | ITEM_ENTITY_FLAG_8000000)) {
+                                if (item->flags & (ITEM_ENTITY_FLAG_TRANSPARENT | ITEM_ENTITY_FLAG_HIDING)) {
                                     func_801491E4(sp58, 0, 0, 32, 32, alpha);
                                 } else {
                                     func_801491E4(sp58, 0, 0, 32, 32, 255);
@@ -1735,16 +1765,16 @@ void remove_item_entity_by_reference(ItemEntity* entity) {
 }
 
 void remove_item_entity_by_index(s32 index) {
-    ItemEntity* itemEntity = gCurrentItemEntities[index];
+    ItemEntity* item = gCurrentItemEntities[index];
 
-    switch (itemEntity->spawnType) {
+    switch (item->spawnType) {
         case ITEM_SPAWN_MODE_KEY:
         case ITEM_SPAWN_MODE_TOSS_SPAWN_ALWAYS:
         case ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS:
         case ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS:
         case ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS:
         case ITEM_SPAWN_AT_PLAYER:
-            delete_shadow(itemEntity->shadowIndex);
+            delete_shadow(item->shadowIndex);
             break;
     }
 
@@ -1978,29 +2008,29 @@ s32 test_item_entity_position(f32 x, f32 y, f32 z, f32 dist) {
 }
 
 void set_item_entity_flags(s32 index, s32 flags) {
-    ItemEntity* itemEntity = gCurrentItemEntities[index];
+    ItemEntity* item = gCurrentItemEntities[index];
 
-    itemEntity->flags |= flags;
-    if (itemEntity->flags & ITEM_ENTITY_FLAG_CANT_COLLECT) {
-        D_801565A8 = 1;
+    item->flags |= flags;
+    if (item->flags & ITEM_ENTITY_FLAG_CANT_COLLECT) {
+        D_801565A8 = TRUE;
     }
 }
 
 void clear_item_entity_flags(s32 index, s32 flags) {
-    ItemEntity* itemEntity = gCurrentItemEntities[index];
+    ItemEntity* item = gCurrentItemEntities[index];
 
-    itemEntity->flags &= ~flags;
+    item->flags &= ~flags;
 }
 
 void auto_collect_item_entity(s32 index) {
-    ItemEntity* itemEntity = gCurrentItemEntities[index];
+    ItemEntity* item = gCurrentItemEntities[index];
     gOverrideFlags |= GLOBAL_OVERRIDES_40;
-    itemEntity->flags |= ITEM_ENTITY_FLAG_AUTO_COLLECT;
+    item->flags |= ITEM_ENTITY_FLAG_AUTO_COLLECT;
 }
 
 /// @returns TRUE when "you got X" popup is on-screen
-s32 is_picking_up_item(void) {
-    s32 ret = D_801565A8 != 0;
+b32 is_picking_up_item(void) {
+    b32 ret = D_801565A8 != FALSE;
 
     if (isPickingUpItem) {
         ret = TRUE;
@@ -2009,11 +2039,11 @@ s32 is_picking_up_item(void) {
 }
 
 void set_item_entity_position(s32 itemEntityIndex, f32 x, f32 y, f32 z) {
-    ItemEntity* itemEntity = gCurrentItemEntities[itemEntityIndex];
+    ItemEntity* item = gCurrentItemEntities[itemEntityIndex];
 
-    itemEntity->position.x = x;
-    itemEntity->position.y = y;
-    itemEntity->position.z = z;
+    item->position.x = x;
+    item->position.y = y;
+    item->position.z = z;
 }
 
 void set_current_item_entity_render_group(s32 group) {
@@ -2034,484 +2064,502 @@ void update_item_entity_collectable(ItemEntity* item) {
     f32 theta, sinAngle, cosAngle;
     f32 temp;
 
-    if (!isPickingUpItem) {
-        if (item->pickupDelay != 0) {
-            item->pickupDelay--;
-            return;
-        }
+    if (isPickingUpItem) {
+        return;
+    }
 
-        if (item->spawnType == ITEM_SPAWN_MODE_TOSS_FADE1) {
-            camID = CAM_BATTLE;
-        } else {
-            camID = CAM_DEFAULT;
-        }
+    if (item->pickupDelay != 0) {
+        item->pickupDelay--;
+        return;
+    }
 
-        switch (item->state) {
-            case 0:
-                reveal_item_entity(item);
-                physData = heap_malloc(sizeof(*physData));
-                item->physicsData = physData;
-                ASSERT(physData != NULL);
+    if (item->spawnType == ITEM_SPAWN_MODE_TOSS_FADE1) {
+        camID = CAM_BATTLE;
+    } else {
+        camID = CAM_DEFAULT;
+    }
 
-                if (item->flags & ITEM_ENTITY_FLAG_1000000) {
-                    physData->verticalVelocity = 16.0f;
-                    physData->gravity = 2.0f;
-                } else if (!(item->flags & ITEM_ENTITY_FLAG_10000)) {
-                    physData->verticalVelocity = 12.0f;
-                    physData->gravity = 2.0f;
+    switch (item->state) {
+        case ITEM_PHYSICS_STATE_INIT:
+            reveal_item_entity(item);
+            physData = heap_malloc(sizeof(*physData));
+            item->physicsData = physData;
+            ASSERT(physData != NULL);
+
+            if (item->flags & ITEM_ENTITY_FLAG_TOSS_HIGHER) {
+                physData->verticalVelocity = 16.0f;
+                physData->gravity = 2.0f;
+            } else if (!(item->flags & ITEM_ENTITY_FLAG_TOSS_LOWER)) {
+                physData->verticalVelocity = 12.0f;
+                physData->gravity = 2.0f;
+            } else {
+                physData->verticalVelocity = 14.0f;
+                physData->gravity = 2.0f;
+            }
+
+            physData->collisionRadius = 24.0f;
+            physData->constVelocity = 24.0f;
+            if (item->spawnAngle < 0) {
+                if (IS_ITEM(item->itemID)) {
+                    if (rand_int(10000) < 5000) {
+                        physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 105.0f + rand_int(30) - 15.0f);
+                    } else {
+                        physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 105.0f + rand_int(30) - 15.0f);
+                    }
+                    physData->verticalVelocity += 4.0f;
                 } else {
-                    physData->verticalVelocity = 14.0f;
-                    physData->gravity = 2.0f;
+                    switch (item->itemID) {
+                        case ITEM_HEART:
+                            physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(120) - 60.0f);
+                            break;
+                        case ITEM_FLOWER_POINT:
+                            physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 90.0f + rand_int(120) + 60.0f);
+                            break;
+                        case ITEM_COIN:
+                            if (rand_int(10000) < 5000) {
+                                physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(120) - 60.0f);
+                            } else {
+                                physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 90.0f + rand_int(120) - 60.0f);
+                            }
+                            break;
+                        case ITEM_KOOPA_FORTRESS_KEY:
+                            if (rand_int(10000) >= 5000) {
+                                physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 90.0f + rand_int(120) - 60.0f);
+                            } else {
+                                physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(120) - 60.0f);
+                            }
+                            break;
+                        case ITEM_STAR_POINT:
+                            if (item->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1) {
+                                physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 90.0f + rand_int(120) - 60.0f);
+                                break;
+                            }
+                            if (rand_int(10000) < 5000) {
+                                physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(60) - 30.0f);
+                            } else {
+                                physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 90.0f + rand_int(60) - 30.0f);
+                            }
+                            break;
+                        case ITEM_HEART_POINT:
+                            physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(120) - 60.0f);
+                            break;
+                        case ITEM_STAR_PIECE:
+                            if (rand_int(10000) < 5000) {
+                                physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(60) - 30.0f);
+                            } else {
+                                physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 90.0f + rand_int(60) - 30.0f);
+                            }
+                            break;
+                        case ITEM_HEART_PIECE:
+                            physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(120) - 60.0f);
+                            break;
+                        default:
+                            physData->moveAngle = 0.0f;
+                            break;
+                    }
                 }
 
-                physData->unk_08 = 24.0f;
-                physData->constVelocity = 24.0f;
-                if (item->wsFaceAngle < 0) {
-                    if (IS_ITEM(item->itemID)) {
-                        if (rand_int(10000) < 5000) {
-                            physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 105.0f + rand_int(30) - 15.0f);
-                        } else {
-                            physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 105.0f + rand_int(30) - 15.0f);
-                        }
-                        physData->verticalVelocity += 4.0f;
-                    } else {
-                        switch (item->itemID) {
-                            case ITEM_HEART:
-                                physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(120) - 60.0f);
-                                break;
-                            case ITEM_FLOWER_POINT:
-                                physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 90.0f + rand_int(120) + 60.0f);
-                                break;
-                            case ITEM_COIN:
-                                if (rand_int(10000) < 5000) {
-                                    physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(120) - 60.0f);
-                                } else {
-                                    physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 90.0f + rand_int(120) - 60.0f);
-                                }
-                                break;
-                            case ITEM_KOOPA_FORTRESS_KEY:
-                                if (rand_int(10000) >= 5000) {
-                                    physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 90.0f + rand_int(120) - 60.0f);
-                                } else {
-                                    physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(120) - 60.0f);
-                                }
-                                break;
-                            case ITEM_STAR_POINT:
-                                if (item->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1) {
-                                    physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 90.0f + rand_int(120) - 60.0f);
-                                    break;
-                                }
-                                if (rand_int(10000) < 5000) {
-                                    physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(60) - 30.0f);
-                                } else {
-                                    physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 90.0f + rand_int(60) - 30.0f);
-                                }
-                                break;
-                            case ITEM_HEART_POINT:
-                                physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(120) - 60.0f);
-                                break;
-                            case ITEM_STAR_PIECE:
-                                if (rand_int(10000) < 5000) {
-                                    physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(60) - 30.0f);
-                                } else {
-                                    physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 90.0f + rand_int(60) - 30.0f);
-                                }
-                                break;
-                            case ITEM_HEART_PIECE:
-                                physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(120) - 60.0f);
-                                break;
-                            default:
-                                physData->moveAngle = 0.0f;
-                                break;
-                        }
-                    }
-
-                    if (!(item->flags & ITEM_ENTITY_FLAG_1000000)) {
-                        temp = rand_int(2000);
-                        temp = (temp / 1000.0f) + 1.5;
-                        theta = DEG_TO_RAD(physData->moveAngle);
-                        sinAngle = sin_rad(theta);
-                        cosAngle = cos_rad(theta);
-                        physData->velx = temp * sinAngle;
-                        physData->velz = -temp * cosAngle;
-                    } else {
-                        temp = rand_int(2000);
-                        temp = (temp / 1000.0f) + 2.0;
-                        theta = DEG_TO_RAD(physData->moveAngle);
-                        sinAngle = sin_rad(theta);
-                        cosAngle = cos_rad(theta);
-                        physData->velx = temp * sinAngle;
-                        physData->velz = -temp * cosAngle;
-                    }
+                if (!(item->flags & ITEM_ENTITY_FLAG_TOSS_HIGHER)) {
+                    temp = rand_int(2000);
+                    temp = (temp / 1000.0f) + 1.5;
+                    theta = DEG_TO_RAD(physData->moveAngle);
+                    sinAngle = sin_rad(theta);
+                    cosAngle = cos_rad(theta);
+                    physData->velx = temp * sinAngle;
+                    physData->velz = -temp * cosAngle;
                 } else {
-                    physData->moveAngle = clamp_angle(item->wsFaceAngle);
-                    if (!(item->flags & ITEM_ENTITY_FLAG_40000000)) {
-                        temp = ((item->wsFaceAngle / 360) * 0.6) + 1.5;
-                    } else {
-                        temp = 2.1f;
-                    }
+                    temp = rand_int(2000);
+                    temp = (temp / 1000.0f) + 2.0;
                     theta = DEG_TO_RAD(physData->moveAngle);
                     sinAngle = sin_rad(theta);
                     cosAngle = cos_rad(theta);
                     physData->velx = temp * sinAngle;
                     physData->velz = -temp * cosAngle;
                 }
-
-                if (item->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1) {
-                    physData->timeLeft = 180;
-                    physData->unk_20 = FALSE;
+            } else {
+                physData->moveAngle = clamp_angle(item->spawnAngle);
+                if (!(item->flags & ITEM_ENTITY_FLAG_ANGLE_RELATIVE_VELOCITY)) {
+                    temp = 1.5f + (0.6 * (item->spawnAngle / 360));
                 } else {
-                    if (!(item->flags & ITEM_ENTITY_FLAG_400000)) {
-                        physData->timeLeft = 17;
-                    } else {
-                        physData->timeLeft = 20;
-                    }
-                    physData->unk_20 = FALSE;
-                    physData->verticalVelocity = 15.0f;
-                    physData->gravity = 1.6f;
+                    temp = 2.1f;
                 }
+                theta = DEG_TO_RAD(physData->moveAngle);
+                sinAngle = sin_rad(theta);
+                cosAngle = cos_rad(theta);
+                physData->velx = temp * sinAngle;
+                physData->velz = -temp * cosAngle;
+            }
 
-                if (item->spawnType == ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS) {
-                    physData->timeLeft = 60;
-                    physData->unk_20 = FALSE;
-                    physData->velx = 0.0f;
-                    physData->velz = 0.0f;
+            if (item->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1) {
+                physData->timeLeft = 180;
+                physData->useSimplePhysics = FALSE;
+            } else {
+                if (!(item->flags & ITEM_ENTITY_FLAG_400000)) {
+                    physData->timeLeft = 17;
+                } else {
+                    physData->timeLeft = 20;
                 }
+                physData->useSimplePhysics = FALSE;
+                physData->verticalVelocity = 15.0f;
+                physData->gravity = 1.6f;
+            }
 
-                if (item->spawnType == ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS) {
-                    physData->verticalVelocity = 0.0f;
-                    physData->velx = 0.0f;
-                    physData->velz = 0.0f;
-                    physData->unk_20 = TRUE;
-                }
+            if (item->spawnType == ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS) {
+                physData->timeLeft = 60;
+                physData->useSimplePhysics = FALSE;
+                physData->velx = 0.0f;
+                physData->velz = 0.0f;
+            }
 
-                if (item->spawnType == ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS) {
-                    physData->verticalVelocity = 0.0f;
-                    physData->velx = 0.0f;
-                    physData->velz = 0.0f;
-                    physData->unk_20 = TRUE;
-                }
+            if (item->spawnType == ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS) {
+                physData->verticalVelocity = 0.0f;
+                physData->velx = 0.0f;
+                physData->velz = 0.0f;
+                physData->useSimplePhysics = TRUE;
+            }
 
-                if (item->flags & ITEM_ENTITY_FLAG_800) {
-                    set_global_flag(item->boundVar);
-                }
-                item->state = 1;
+            if (item->spawnType == ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS) {
+                physData->verticalVelocity = 0.0f;
+                physData->velx = 0.0f;
+                physData->velz = 0.0f;
+                physData->useSimplePhysics = TRUE;
+            }
+
+            if (item->flags & ITEM_ENTITY_FLAG_800) {
+                set_global_flag(item->boundVar);
+            }
+            item->state = ITEM_PHYSICS_STATE_ALIVE;
+            break;
+
+        case ITEM_PHYSICS_STATE_ALIVE:
+            physData = item->physicsData;
+
+            // test for pickup
+            if (item->spawnType != ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS
+                && item->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1
+                && physData->useSimplePhysics
+                && test_item_player_collision(item)
+            ) {
+                item->state = ITEM_PHYSICS_STATE_TOUCH;
                 break;
-            case 1:
-                physData = item->physicsData;
-                if (item->spawnType != ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS
-                    && item->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1
-                    && physData->unk_20
-                    && test_item_player_collision(item)
-                ) {
-                    item->state = 3;
+            }
+
+            // check for expiration
+            if (!(item->flags & ITEM_ENTITY_FLAG_NEVER_VANISH)
+                && !(gOverrideFlags & (GLOBAL_OVERRIDES_200 | GLOBAL_OVERRIDES_DISABLE_BATTLES))
+                && !(item->flags & ITEM_ENTITY_FLAG_CANT_COLLECT)
+            ) {
+                physData->timeLeft--;
+                if (physData->timeLeft < 0) {
+                    item->state = ITEM_PHYSICS_STATE_DEAD;
                     break;
                 }
+            }
 
-                if (!(item->flags & ITEM_ENTITY_FLAG_NEVER_VANISH)
-                   && !(gOverrideFlags & (GLOBAL_OVERRIDES_200 | GLOBAL_OVERRIDES_DISABLE_BATTLES))
-                   && !(item->flags & ITEM_ENTITY_FLAG_CANT_COLLECT)
-                ) {
-                    physData->timeLeft--;
-                    if (physData->timeLeft < 0) {
-                        item->state = 2;
-                        break;
+            // apply gravity
+            if (!(item->flags & ITEM_ENTITY_FLAG_NO_GRAVITY)) {
+                if (!(item->flags & ITEM_ENTITY_FLAG_CANT_COLLECT)) {
+                    physData->verticalVelocity -= physData->gravity;
+                    if (physData->verticalVelocity < -16.0) {
+                        physData->verticalVelocity = -16.0f;
                     }
+                    item->position.y += physData->verticalVelocity;
+                    item->position.x += physData->velx;
+                    item->position.z += physData->velz;
+                }
+            }
+
+            // handle auto-collection from multi-coin bricks
+            if (item->spawnType == ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS
+                && physData->verticalVelocity <= 0.0f
+            ) {
+                item->state = ITEM_PHYSICS_STATE_TOUCH;
+                break;
+            }
+
+            // if the item has upward velocity, try moving it up
+            if (!(item->flags & (ITEM_ENTITY_FLAG_DONE_FALLING | ITEM_ENTITY_FLAG_NO_MOTION))
+                && item->spawnType != ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS
+                && item->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1
+                && physData->verticalVelocity > 0.0f
+            ) {
+                temp = physData->constVelocity;
+                outX = item->position.x;
+                outY = item->position.y;
+                outZ = item->position.z;
+                outDepth = temp + physData->verticalVelocity;
+
+                if (!physData->useSimplePhysics) {
+                    hit = npc_raycast_up(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, &outDepth);
+                } else {
+                    hit = npc_raycast_up(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, &outDepth);
                 }
 
-                if (!(item->flags & ITEM_ENTITY_FLAG_FIXED)) {
-                    if (!(item->flags & ITEM_ENTITY_FLAG_CANT_COLLECT)) {
-                        physData->verticalVelocity -= physData->gravity;
-                        if (physData->verticalVelocity < -16.0) {
-                            physData->verticalVelocity = -16.0f;
-                        }
-                        item->position.y += physData->verticalVelocity;
-                        item->position.x += physData->velx;
-                        item->position.z += physData->velz;
-                    }
+                if (hit && outDepth < temp) {
+                    item->position.y = outY - temp;
+                    physData->verticalVelocity = 0.0f;
+                }
+            }
+
+            // if the item has non-zero lateral velocity, try moving it laterally 
+            if (!(item->flags & (ITEM_ENTITY_FLAG_DONE_FALLING | ITEM_ENTITY_FLAG_NO_MOTION))
+                && item->spawnType != ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS
+                && item->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1
+                && (physData->velx != 0.0f || physData->velz != 0.0f)
+            ) {
+                outX = item->position.x;
+                outY = item->position.y;
+                outZ = item->position.z;
+
+                if (!physData->useSimplePhysics) {
+                    hit = npc_test_move_complex_with_slipping(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, 0.0f, physData->moveAngle, physData->constVelocity, physData->collisionRadius);
+                } else {
+                    hit = npc_test_move_simple_with_slipping(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, 0.0f, physData->moveAngle, physData->constVelocity, physData->collisionRadius);
                 }
 
-                if (item->spawnType == ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS &&
-                    physData->verticalVelocity <= 0.0f)
-                {
-                    item->state = 3;
-                    break;
+                if (hit) {
+                    // if a wall is hit, bounce back
+                    item->position.x = outX;
+                    item->position.y = outY;
+                    item->position.z = outZ;
+                    physData->moveAngle = clamp_angle(physData->moveAngle + 180.0f);
+                    theta = DEG_TO_RAD(physData->moveAngle);
+                    sinAngle = sin_rad(theta);
+                    cosAngle = cos_rad(theta);
+                    physData->velx = sinAngle * 2.0;
+                    physData->velz = cosAngle * -2.0;
                 }
+            }
 
-                if (!(item->flags & (ITEM_ENTITY_FLAG_20000000 | ITEM_ENTITY_FLAG_10000000)) &&
-                    item->spawnType != ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS &&
-                    item->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1 &&
-                    physData->verticalVelocity > 0.0f)
-                {
-                    temp = physData->constVelocity;
+            // if the item has downward velocity, try moving it down
+            if (!(item->flags & ITEM_ENTITY_FLAG_NO_MOTION)
+                && item->spawnType != ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS
+                && physData->verticalVelocity <= 0.0
+            ) {
+                physData->useSimplePhysics = TRUE;
+                if (item->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1) {
                     outX = item->position.x;
-                    outY = item->position.y;
+                    outY = (item->position.y - physData->verticalVelocity) + 12.0f;
                     outZ = item->position.z;
-                    outDepth = temp + physData->verticalVelocity;
-
-                    if (!physData->unk_20) {
-                        hit = npc_raycast_up(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, &outDepth);
+                    outDepth = -physData->verticalVelocity + 12.0f;
+                    if (!physData->useSimplePhysics) {
+                        hit = npc_raycast_down_sides(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, &outDepth);
                     } else {
-                        hit = npc_raycast_up(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, &outDepth);
+                        hit = npc_raycast_down_around(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, &outDepth, 180.0f, 20.0f);
                     }
+                } else {
+                    outX = item->position.x;
+                    outY = (item->position.y - physData->verticalVelocity) + 12.0f;
+                    outZ = item->position.z;
+                    outDepth = -physData->verticalVelocity + 12.0f;
+                    if (outY < outDepth + 0.0f) {
+                        outY = 0.0f;
+                        hit = TRUE;
+                    } else {
+                        hit = FALSE;
+                    }
+                }
 
-                    if (hit && outDepth < temp) {
-                        item->position.y = outY - temp;
+                // handle bounce
+                if (hit) {
+                    item->position.y = outY;
+                    physData->verticalVelocity = -physData->verticalVelocity / 1.25;
+                    if (physData->verticalVelocity < 3.0) {
                         physData->verticalVelocity = 0.0f;
-                    }
-                }
-
-                if (!(item->flags & (ITEM_ENTITY_FLAG_20000000 | ITEM_ENTITY_FLAG_10000000)) &&
-                    item->spawnType != ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS &&
-                    item->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1 &&
-                    (physData->velx != 0.0f || physData->velz != 0.0f))
-                {
-                    outX = item->position.x;
-                    outY = item->position.y;
-                    outZ = item->position.z;
-
-                    if (!physData->unk_20) {
-                        hit = npc_test_move_complex_with_slipping(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, 0.0f, physData->moveAngle, physData->constVelocity, physData->unk_08);
+                        physData->velx = 0.0f;
+                        physData->velz = 0.0f;
+                        item->flags |= ITEM_ENTITY_FLAG_DONE_FALLING;
                     } else {
-                        hit = npc_test_move_simple_with_slipping(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, 0.0f, physData->moveAngle, physData->constVelocity, physData->unk_08);
-                    }
-
-                    if (hit) {
-                        item->position.x = outX;
-                        item->position.y = outY;
-                        item->position.z = outZ;
-                        physData->moveAngle = clamp_angle(physData->moveAngle + 180.0f);
-                        theta = DEG_TO_RAD(physData->moveAngle);
-                        sinAngle = sin_rad(theta);
-                        cosAngle = cos_rad(theta);
-                        physData->velx = sinAngle * 2.0;
-                        physData->velz = cosAngle * -2.0;
-                    }
-                }
-
-                if (!(item->flags & ITEM_ENTITY_FLAG_10000000) &&
-                    item->spawnType != ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS &&
-                    physData->verticalVelocity <= 0.0)
-                {
-                    physData->unk_20 = TRUE;
-                    if (item->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1) {
-                        outX = item->position.x;
-                        outY = (item->position.y - physData->verticalVelocity) + 12.0f;
-                        outZ = item->position.z;
-                        outDepth = -physData->verticalVelocity + 12.0f;
-                        if (!physData->unk_20) {
-                            hit = npc_raycast_down_sides(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, &outDepth);
+                        if (IS_BADGE(item->itemID)) {
+                            sfx_play_sound_at_position(SOUND_21B, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
+                        } else if (IS_ITEM(item->itemID)) {
+                            sfx_play_sound_at_position(SOUND_21A, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
                         } else {
-                            hit = npc_raycast_down_around(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, &outDepth, 180.0f, 20.0f);
-                        }
-                    } else {
-                        outX = item->position.x;
-                        outY = (item->position.y - physData->verticalVelocity) + 12.0f;
-                        outZ = item->position.z;
-                        outDepth = -physData->verticalVelocity + 12.0f;
-                        if (outY < outDepth + 0.0f) {
-                            outY = 0.0f;
-                            hit = TRUE;
-                        } else {
-                            hit = FALSE;
-                        }
-                    }
-
-                    if (hit) {
-                        item->position.y = outY;
-                        physData->verticalVelocity = (-physData->verticalVelocity / 1.25);
-                        if (physData->verticalVelocity < 3.0) {
-                            physData->verticalVelocity = 0.0f;
-                            physData->velx = 0.0f;
-                            physData->velz = 0.0f;
-                            item->flags |= ITEM_ENTITY_FLAG_20000000;
-                        } else {
-                            if (IS_BADGE(item->itemID)) {
-                                sfx_play_sound_at_position(SOUND_21B, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
-                            } else if (IS_ITEM(item->itemID)) {
-                                sfx_play_sound_at_position(SOUND_21A, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
-                            } else {
-                                switch (item->itemID) {
-                                    case ITEM_HEART:
-                                        sfx_play_sound_at_position(SOUND_214, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
-                                        break;
-                                    case ITEM_COIN:
-                                        sfx_play_sound_at_position(SOUND_212, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
-                                        break;
-                                    case ITEM_KOOPA_FORTRESS_KEY:
-                                        sfx_play_sound_at_position(SOUND_212, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
-                                        break;
-                                    case ITEM_HEART_PIECE:
-                                        sfx_play_sound_at_position(SOUND_214, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
-                                        break;
-                                    case ITEM_STAR_POINT:
-                                        sfx_play_sound_at_position(SOUND_212, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
-                                        break;
-                                    case ITEM_HEART_POINT:
-                                        sfx_play_sound_at_position(SOUND_214, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
-                                        break;
-                                    case ITEM_STAR_PIECE:
-                                        sfx_play_sound_at_position(SOUND_219, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
-                                        break;
-                                    case ITEM_FLOWER_POINT:
-                                        sfx_play_sound_at_position(SOUND_218, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
-                                        break;
-                                }
+                            switch (item->itemID) {
+                                case ITEM_HEART:
+                                    sfx_play_sound_at_position(SOUND_214, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
+                                    break;
+                                case ITEM_COIN:
+                                    sfx_play_sound_at_position(SOUND_212, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
+                                    break;
+                                case ITEM_KOOPA_FORTRESS_KEY:
+                                    sfx_play_sound_at_position(SOUND_212, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
+                                    break;
+                                case ITEM_HEART_PIECE:
+                                    sfx_play_sound_at_position(SOUND_214, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
+                                    break;
+                                case ITEM_STAR_POINT:
+                                    sfx_play_sound_at_position(SOUND_212, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
+                                    break;
+                                case ITEM_HEART_POINT:
+                                    sfx_play_sound_at_position(SOUND_214, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
+                                    break;
+                                case ITEM_STAR_PIECE:
+                                    sfx_play_sound_at_position(SOUND_219, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
+                                    break;
+                                case ITEM_FLOWER_POINT:
+                                    sfx_play_sound_at_position(SOUND_218, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
+                                    break;
                             }
                         }
                     }
                 }
+            }
 
-                if (item->position.y < -2000.0f) {
-                    item->state = 2;
-                }
-                break;
+            if (item->position.y < -2000.0f) {
+                item->state = ITEM_PHYSICS_STATE_DEAD;
+            }
+            break;
+    }
+
+    if (item->state == ITEM_PHYSICS_STATE_DEAD) {
+        remove_item_entity_by_reference(item);
+    }
+
+    if (item->state == ITEM_PHYSICS_STATE_TOUCH) {
+        if (item->flags & ITEM_ENTITY_FLAG_SAVE_ON_TOUCH) {
+            set_global_flag(item->boundVar);
         }
 
-        if (item->state == 2) {
+        fx_small_gold_sparkle(0, item->position.x, item->position.y + 16.0f, item->position.z, 1.0f, 0);
+
+        if (IS_ITEM(item->itemID)) {
+            item->state = ITEM_PHYSICS_STATE_PICKUP;
+        } else if (IS_BADGE(item->itemID)) {
+            item->state = ITEM_PHYSICS_STATE_PICKUP;
+        } else if (item->itemID == ITEM_STAR_PIECE) {
+            playerData->starPiecesCollected++;
+            item->state = ITEM_PHYSICS_STATE_PICKUP;
+        } else {
+            if (item->spawnType == ITEM_SPAWN_MODE_TOSS_FADE1) {
+                item->itemID = -1;
+            }
+
+            switch (item->itemID) {
+                case ITEM_HEART:
+                    if (playerData->curHP < playerData->curMaxHP) {
+                        fx_recover(0, playerStatus->position.x, playerStatus->position.y + playerStatus->colliderHeight, playerStatus->position.z, 1);
+                        sfx_play_sound_at_position(SOUND_2056, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
+                    }
+                    playerData->curHP++;
+                    if (playerData->curHP > playerData->curMaxHP) {
+                        playerData->curHP = playerData->curMaxHP;
+                    }
+                    sfx_play_sound_at_position(SOUND_213, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
+                    fx_sparkles(4, playerStatus->position.x, playerStatus->position.y + playerStatus->colliderHeight, playerStatus->position.z, 30.0f);
+                    break;
+                case ITEM_FLOWER_POINT:
+                    if (playerData->curFP < playerData->curMaxFP) {
+                        fx_recover(1, playerStatus->position.x, playerStatus->position.y + playerStatus->colliderHeight, playerStatus->position.z, 1);
+                        sfx_play_sound_at_position(SOUND_2056, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
+                    }
+                    playerData->curFP++;
+                    if (playerData->curFP > playerData->curMaxFP) {
+                        playerData->curFP = playerData->curMaxFP;
+                    }
+                    sfx_play_sound_at_position(SOUND_217, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
+                    fx_sparkles(4, playerStatus->position.x, playerStatus->position.y + playerStatus->colliderHeight, playerStatus->position.z, 30.0f);
+                    break;
+                case ITEM_COIN:
+                    playerData->coins++;
+                    if (playerData->coins > 999) {
+                        playerData->coins = 999;
+                    }
+                    sfx_play_sound_at_position(SOUND_211, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
+                    playerData->totalCoinsEarned++;
+                    if (playerData->totalCoinsEarned > 99999) {
+                        playerData->totalCoinsEarned = 99999;
+                    }
+                    break;
+                case ITEM_KOOPA_FORTRESS_KEY:
+                    playerData->fortressKeyCount = playerData->fortressKeyCount + 1;
+                    sfx_play_sound_at_position(SOUND_211, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
+                    break;
+                case ITEM_STAR_POINT:
+                    playerData->starPoints++;
+                    if (playerData->starPoints > 100) {
+                        playerData->starPoints = 100;
+                    }
+                    sfx_play_sound_at_position(SOUND_211, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
+                    break;
+                case ITEM_HEART_POINT:
+                    playerData->curHP = playerData->curMaxHP;
+                    playerData->curFP = playerData->curMaxFP;
+                    sfx_play_sound_at_position(SOUND_213, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
+                    break;
+            }
+            D_801565A8 = FALSE;
+            gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
             remove_item_entity_by_reference(item);
         }
+    }
 
-        if (item->state == 3) {
-            if (item->flags & ITEM_ENTITY_FLAG_400) {
-                set_global_flag(item->boundVar);
-            }
+    // items in this unused state are managed by a script
+    // when the script is done executing, destroy these items
+    if (item->state == ITEM_PHYSICS_STATE_04) {
+        if (!does_script_exist(D_80155D80)) {
+            D_801565A8 = FALSE;
+            remove_item_entity_by_reference(item);
+            resume_all_group(EVT_GROUP_02);
+        }
+    }
 
-            fx_small_gold_sparkle(0, item->position.x, item->position.y + 16.0f, item->position.z, 1.0f, 0);
+    if (item->state == ITEM_PHYSICS_STATE_PICKUP) {
+        isPickingUpItem = TRUE;
+        item->spawnType = ITEM_SPAWN_AT_PLAYER;
+        item->state = ITEM_PICKUP_STATE_INIT;
+        D_801565A8 = FALSE;
+        gOverrideFlags |= GLOBAL_OVERRIDES_40;
+    }
+}
 
-            if (IS_ITEM(item->itemID)) {
-                item->state = 0xA;
-            } else if (IS_BADGE(item->itemID)) {
-                item->state = 0xA;
-            } else if (item->itemID == ITEM_STAR_PIECE) {
-                playerData->starPiecesCollected++;
-                item->state = 0xA;
+void draw_ui_item_entity_collectable(ItemEntity* item) {
+    if (item->state == ITEM_PHYSICS_STATE_ALIVE) {
+        ItemEntityPhysicsData* physicsData = item->physicsData;
+        s32 flag = (item->flags & ITEM_ENTITY_FLAG_20000) > 0;
+
+        if (item->spawnType != ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS) {
+            if (item->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1) {
+                if (physicsData->timeLeft < 60) {
+                    if ((item->flags & ITEM_ENTITY_FLAG_CANT_COLLECT) || ((gGameStatusPtr->frameCounter + flag) & 1)) {
+                        item->flags &= ~ITEM_ENTITY_FLAG_HIDDEN;
+                    } else {
+                        item->flags |= ITEM_ENTITY_FLAG_HIDDEN;
+                    }
+                }
             } else {
-                if (item->spawnType == ITEM_SPAWN_MODE_TOSS_FADE1) {
-                    item->itemID = -1;
+                if (physicsData->timeLeft < 10) {
+                    item->alpha = physicsData->timeLeft * 28;
+                    item->flags |= ITEM_ENTITY_FLAG_TRANSPARENT;
                 }
-
-                switch (item->itemID) {
-                    case ITEM_HEART:
-                        if (playerData->curHP < playerData->curMaxHP) {
-                            fx_recover(0, playerStatus->position.x, playerStatus->position.y + playerStatus->colliderHeight, playerStatus->position.z, 1);
-                            sfx_play_sound_at_position(SOUND_2056, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
-                        }
-                        playerData->curHP++;
-                        if (playerData->curHP > playerData->curMaxHP) {
-                            playerData->curHP = playerData->curMaxHP;
-                        }
-                        sfx_play_sound_at_position(SOUND_213, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
-                        fx_sparkles(4, playerStatus->position.x, playerStatus->position.y + playerStatus->colliderHeight, playerStatus->position.z, 30.0f);
-                        break;
-                    case ITEM_FLOWER_POINT:
-                        if (playerData->curFP < playerData->curMaxFP) {
-                            fx_recover(1, playerStatus->position.x, playerStatus->position.y + playerStatus->colliderHeight, playerStatus->position.z, 1);
-                            sfx_play_sound_at_position(SOUND_2056, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
-                        }
-                        playerData->curFP++;
-                        if (playerData->curFP > playerData->curMaxFP) {
-                            playerData->curFP = playerData->curMaxFP;
-                        }
-                        sfx_play_sound_at_position(SOUND_217, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
-                        fx_sparkles(4, playerStatus->position.x, playerStatus->position.y + playerStatus->colliderHeight, playerStatus->position.z, 30.0f);
-                        break;
-                    case ITEM_COIN:
-                        playerData->coins++;
-                        if (playerData->coins > 999) {
-                            playerData->coins = 999;
-                        }
-                        sfx_play_sound_at_position(SOUND_211, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
-                        playerData->totalCoinsEarned++;
-                        if (playerData->totalCoinsEarned > 99999) {
-                            playerData->totalCoinsEarned = 99999;
-                        }
-                        break;
-                    case ITEM_KOOPA_FORTRESS_KEY:
-                        playerData->fortressKeyCount = playerData->fortressKeyCount + 1;
-                        sfx_play_sound_at_position(SOUND_211, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
-                        break;
-                    case ITEM_STAR_POINT:
-                        playerData->starPoints++;
-                        if (playerData->starPoints > 100) {
-                            playerData->starPoints = 100;
-                        }
-                        sfx_play_sound_at_position(SOUND_211, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
-                        break;
-                    case ITEM_HEART_POINT:
-                        playerData->curHP = playerData->curMaxHP;
-                        playerData->curFP = playerData->curMaxFP;
-                        sfx_play_sound_at_position(SOUND_213, SOUND_SPACE_MODE_0, item->position.x, item->position.y, item->position.z);
-                        break;
-                }
-                D_801565A8 = 0;
-                gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
-                remove_item_entity_by_reference(item);
             }
         }
+    }
+}
 
-        if (item->state == 4) {
-            if (!does_script_exist(D_80155D80)) {
-                D_801565A8 = 0;
-                remove_item_entity_by_reference(item);
-                resume_all_group(EVT_GROUP_02);
-            }
-        }
-
-        if (item->state == 0xA) {
+void update_item_entity_stationary(ItemEntity* item) {
+    if (item->state == ITEM_PHYSICS_STATE_INIT) {
+        if (test_item_player_collision(item)) {
+            // change spawn type to initiate pickup
             isPickingUpItem = TRUE;
             item->spawnType = ITEM_SPAWN_AT_PLAYER;
-            item->state = 0;
-            D_801565A8 = 0;
+            item->state = ITEM_PICKUP_STATE_INIT;
+            D_801565A8 = FALSE;
             gOverrideFlags |= GLOBAL_OVERRIDES_40;
         }
     }
 }
 
-void func_8013559C(ItemEntity* itemEntity) {
-    if (itemEntity->state == 1) {
-        ItemEntityPhysicsData* physicsData = itemEntity->physicsData;
-        s32 flag = (itemEntity->flags & ITEM_ENTITY_FLAG_20000) > 0;
-
-        if (itemEntity->spawnType != ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS) {
-            if (itemEntity->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1) {
-                if (physicsData->timeLeft < 60) {
-                    if ((itemEntity->flags & ITEM_ENTITY_FLAG_CANT_COLLECT) || ((gGameStatusPtr->frameCounter + flag) & 1)) {
-                        itemEntity->flags &= ~ITEM_ENTITY_FLAG_HIDDEN;
-                    } else {
-                        itemEntity->flags |= ITEM_ENTITY_FLAG_HIDDEN;
-                    }
-                }
-            } else {
-                if (physicsData->timeLeft < 10) {
-                    itemEntity->alpha = physicsData->timeLeft * 28;
-                    itemEntity->flags |= ITEM_ENTITY_FLAG_TRANSPARENT;
-                }
-            }
-        }
-    }
+void draw_ui_item_entity_stationary(ItemEntity* item) {
 }
 
-void update_item_entity_static(ItemEntity* itemEntity) {
-    if (itemEntity->state == 0 && test_item_player_collision(itemEntity)) {
-        isPickingUpItem = TRUE;
-        itemEntity->spawnType = ITEM_SPAWN_AT_PLAYER;
-        itemEntity->state = 0;
-        D_801565A8 = 0;
-        gOverrideFlags |= GLOBAL_OVERRIDES_40;
-    }
+void update_item_entity_no_pickup(ItemEntity* item) {
 }
 
-void func_801356C4(ItemEntity* itemEntity) {
+void draw_ui_item_entity_no_pickup(ItemEntity* item) {
 }
 
-void func_801356CC(ItemEntity* itemEntity) {
-}
-
-void func_801356D4(ItemEntity* itemEntity) {
-}
-
-void update_item_entity_temp(ItemEntity* itemEntity) {
+void update_item_entity_pickup(ItemEntity* item) {
     PlayerData* playerData = &gPlayerData;
     PlayerStatus* playerStatus = &gPlayerStatus;
     PopupMenu* menu = &D_801565B0;
@@ -2520,58 +2568,57 @@ void update_item_entity_temp(ItemEntity* itemEntity) {
     s32 msgID;
     s32 i;
 
-    if (itemEntity->state == 0) {
+    if (item->state == ITEM_PICKUP_STATE_INIT) {
         isPickingUpItem = TRUE;
-        if (!(itemEntity->flags & ITEM_ENTITY_FLAG_2000000)) {
+        if (!(item->flags & ITEM_ENTITY_FLAG_2000000)) {
             disable_player_input();
             partner_disable_input();
             gOverrideFlags |= GLOBAL_OVERRIDES_40;
             set_time_freeze_mode(TIME_FREEZE_FULL);
         }
-        hide_item_entity(itemEntity);
-        itemEntity->state = 1;
+        hide_item_entity(item);
+        item->state = ITEM_PICKUP_STATE_AWAIT_VALID_STATE;
     }
 
-    switch (itemEntity->state) {
-        case 1:
-            if (!(itemEntity->flags & ITEM_ENTITY_FLAG_2000000)) {
+    switch (item->state) {
+        case ITEM_PICKUP_STATE_AWAIT_VALID_STATE:
+            if (!(item->flags & ITEM_ENTITY_FLAG_2000000)) {
+                // list of action state conditions which allow item pickup
+                // remain in this state (via break) until one of these is TRUE
                 s32 actionState = playerStatus->actionState;
-
-                if (!(playerStatus->animFlags & PA_FLAG_NO_OOB_RESPAWN) &&
-                        ((playerStatus->timeInAir == 0 &&
-                        actionState != ACTION_STATE_JUMP &&
-                        actionState != ACTION_STATE_FALLING) ||
-                        !playerStatus->enableCollisionOverlapsCheck ||
-                        playerStatus->inputDisabledCount == 0) &&
-                    actionState != ACTION_STATE_LAUNCH &&
-                    actionState != ACTION_STATE_RIDE &&
-                    actionState != ACTION_STATE_IDLE &&
-                    !(actionState == ACTION_STATE_USE_SPINNING_FLOWER && playerStatus->actionSubstate == 1)
-                ) {
+                if (!(
+                    playerStatus->animFlags & PA_FLAG_NO_OOB_RESPAWN
+                    || ((playerStatus->timeInAir != 0 || actionState == ACTION_STATE_JUMP || actionState == ACTION_STATE_FALLING)
+                        && playerStatus->enableCollisionOverlapsCheck
+                        && playerStatus->inputDisabledCount != 0)
+                    || actionState == ACTION_STATE_LAUNCH
+                    || actionState == ACTION_STATE_RIDE
+                    || actionState == ACTION_STATE_IDLE
+                    || (actionState == ACTION_STATE_USE_SPINNING_FLOWER && playerStatus->actionSubstate == 1)
+                )) {
                     break;
                 }
             }
 
-            if (!(itemEntity->pickupMsgFlags & 1)) {
-                if (gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_BADGE) {
+            if (!(item->pickupMsgFlags & ITEM_PICKUP_FLAG_NO_SOUND)) {
+                if (gItemTable[item->itemID].typeFlags & ITEM_TYPE_FLAG_BADGE) {
                     sfx_play_sound(SOUND_D3);
-                } else if (gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_KEY) {
+                } else if (gItemTable[item->itemID].typeFlags & ITEM_TYPE_FLAG_KEY) {
                     sfx_play_sound(SOUND_D2);
-                } else if (itemEntity->itemID == ITEM_COIN) {
-                    sfx_play_sound_at_position(
-                        SOUND_211, 0, itemEntity->position.x, itemEntity->position.y, itemEntity->position.z
-                    );
+                } else if (item->itemID == ITEM_COIN) {
+                    sfx_play_sound_at_position(SOUND_211, 0, item->position.x, item->position.y, item->position.z);
                 } else {
                     sfx_play_sound(SOUND_D1);
                 }
             }
-            D_801568E0 = hud_element_create(gItemHudScripts[gItemTable[itemEntity->itemID].hudElemID].enabled);
-            hud_element_set_flags(D_801568E0, HUD_ELEMENT_FLAG_80);
-            hud_element_set_render_pos(D_801568E0, -100, -100);
-            itemEntity->state = 2;
 
-            if (!(itemEntity->flags & ITEM_ENTITY_FLAG_2000000)) {
-                if (gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_CONSUMABLE) {
+            ItemPickupIconID = hud_element_create(gItemHudScripts[gItemTable[item->itemID].hudElemID].enabled);
+            hud_element_set_flags(ItemPickupIconID, HUD_ELEMENT_FLAG_80);
+            hud_element_set_render_pos(ItemPickupIconID, -100, -100);
+            item->state = ITEM_PICKUP_STATE_SHOW_GOT_ITEM;
+
+            if (!(item->flags & ITEM_ENTITY_FLAG_2000000)) {
+                if (gItemTable[item->itemID].typeFlags & ITEM_TYPE_FLAG_CONSUMABLE) {
                     for (i = 0; i < ARRAY_COUNT(playerData->invItems); i++) {
                         if (playerData->invItems[i] == ITEM_NONE) {
                             break;
@@ -2579,14 +2626,14 @@ void update_item_entity_temp(ItemEntity* itemEntity) {
                     }
 
                     if (i < ARRAY_COUNT(playerData->invItems)) {
-                        playerData->invItems[i] = itemEntity->itemID;
+                        playerData->invItems[i] = item->itemID;
                     } else {
-                        itemEntity->state = 0xA;
+                        item->state = ITEM_PICKUP_STATE_SHOW_TOO_MANY;
                         goto block_47; // TODO required to match
                     }
                 }
 
-                if (gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_KEY) {
+                if (gItemTable[item->itemID].typeFlags & ITEM_TYPE_FLAG_KEY) {
                     for (i = 0; i < ARRAY_COUNT(playerData->keyItems); i++) {
                         if (playerData->keyItems[i] == ITEM_NONE) {
                             break;
@@ -2594,14 +2641,14 @@ void update_item_entity_temp(ItemEntity* itemEntity) {
                     }
 
                     if (i < ARRAY_COUNT(playerData->keyItems)) {
-                        playerData->keyItems[i] = itemEntity->itemID;
+                        playerData->keyItems[i] = item->itemID;
                     } else {
-                        itemEntity->state = 0xA;
+                        item->state = ITEM_PICKUP_STATE_SHOW_TOO_MANY;
                         goto block_47; // TODO required to match
                     }
                 }
 
-                if (gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_BADGE) {
+                if (gItemTable[item->itemID].typeFlags & ITEM_TYPE_FLAG_BADGE) {
                     for (i = 0; i < ARRAY_COUNT(playerData->badges); i++) {
                         if (playerData->badges[i] == ITEM_NONE) {
                             break;
@@ -2609,120 +2656,116 @@ void update_item_entity_temp(ItemEntity* itemEntity) {
                     }
 
                     if (i < ARRAY_COUNT(playerData->badges)) {
-                        playerData->badges[i] = itemEntity->itemID;
+                        playerData->badges[i] = item->itemID;
                     } else {
-                        itemEntity->state = 0xA;
+                        item->state = ITEM_PICKUP_STATE_SHOW_TOO_MANY;
                         goto block_47; // TODO required to match
                     }
                 }
 
-                if (itemEntity->itemID == ITEM_STAR_PIECE) {
+                if (item->itemID == ITEM_STAR_PIECE) {
                     playerData->starPieces++;
-                    if (playerData->starPieces > 222) {
-                        playerData->starPieces = 222;
+                    if (playerData->starPieces > MAX_STAR_PIECES) {
+                        playerData->starPieces = MAX_STAR_PIECES;
                     }
                 }
 
-                if (itemEntity->itemID == ITEM_LUCKY_STAR) {
-                    playerData->hasActionCommands = 1;
+                if (item->itemID == ITEM_LUCKY_STAR) {
+                    playerData->hasActionCommands = TRUE;
                 }
 
-                if (itemEntity->itemID == ITEM_HAMMER ||
-                    itemEntity->itemID == ITEM_SUPER_HAMMER ||
-                    itemEntity->itemID == ITEM_ULTRA_HAMMER)
-                {
-                    playerData->hammerLevel = itemEntity->itemID - 4;
+                if (item->itemID >= ITEM_HAMMER && item->itemID <= ITEM_ULTRA_HAMMER) {
+                    playerData->hammerLevel = item->itemID - ITEM_HAMMER;
                 }
 
-                if (itemEntity->itemID == ITEM_BOOTS ||
-                    itemEntity->itemID == ITEM_SUPER_BOOTS ||
-                    itemEntity->itemID == ITEM_ULTRA_BOOTS)
-                {
-                    playerData->bootsLevel = itemEntity->itemID - 1;
+                if (item->itemID >= ITEM_BOOTS && item->itemID <= ITEM_ULTRA_BOOTS) {
+                    playerData->bootsLevel = item->itemID - ITEM_BOOTS;
                 }
             }
 
 block_47: // TODO required to match
-            if (itemEntity->flags & ITEM_ENTITY_FLAG_80000000) {
-                set_global_flag(itemEntity->boundVar);
+            if (item->flags & ITEM_ENTITY_FLAG_SAVE_ON_RECEIPT) {
+                set_global_flag(item->boundVar);
             }
-            if (itemEntity->state == 0xA) {
-                func_801363A0(itemEntity);
+            if (item->state == ITEM_PICKUP_STATE_SHOW_TOO_MANY) {
+                func_801363A0(item);
                 set_window_update(WINDOW_ID_12, (s32) basic_window_update);
                 set_window_update(WINDOW_ID_17, (s32) basic_window_update);
                 set_window_update(WINDOW_ID_19, (s32) basic_window_update);
             }
-            increment_status_menu_disabled();
-            D_801568E4 = 10;
+            increment_status_bar_disabled();
+            ItemPickupStateDelay = 10;
             break;
-        case 2:
-            if (D_801568E4 == 9) {
-                if ((gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_BADGE) ||
-                    (gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_KEY) ||
-                    (itemEntity->itemID == ITEM_STAR_PIECE) ||
-                    (gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_GEAR) ||
-                    (itemEntity->flags & ITEM_ENTITY_FLAG_4000000) ||
-                    (itemEntity->pickupMsgFlags & 2))
-                {
-                    itemEntity->position.x = playerStatus->position.x;
-                    itemEntity->position.y = playerStatus->position.y + playerStatus->colliderHeight;
-                    itemEntity->position.z = playerStatus->position.z;
+
+        case ITEM_PICKUP_STATE_SHOW_GOT_ITEM:
+            if (ItemPickupStateDelay == 9) {
+                if (   (gItemTable[item->itemID].typeFlags & ITEM_TYPE_FLAG_BADGE)
+                    || (gItemTable[item->itemID].typeFlags & ITEM_TYPE_FLAG_KEY)
+                    || (item->itemID == ITEM_STAR_PIECE)
+                    || (gItemTable[item->itemID].typeFlags & ITEM_TYPE_FLAG_GEAR)
+                    || (item->flags & ITEM_ENTITY_FLAG_4000000)
+                    || (item->pickupMsgFlags & ITEM_PICKUP_FLAG_NO_ANIMS)
+                ) {
+                    item->position.x = playerStatus->position.x;
+                    item->position.y = playerStatus->position.y + playerStatus->colliderHeight;
+                    item->position.z = playerStatus->position.z;
                     suggest_player_anim_always_forward(ANIM_MarioW1_Lift);
                 }
 
-                if (gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_GEAR) {
+                if (gItemTable[item->itemID].typeFlags & ITEM_TYPE_FLAG_GEAR) {
                     fx_got_item_outline(
                         1,
-                        itemEntity->position.x,
-                        itemEntity->position.y + 8.0f,
-                        itemEntity->position.z,
+                        item->position.x,
+                        item->position.y + 8.0f,
+                        item->position.z,
                         1.0f,
-                        &D_801568F0
+                        &ItemPickupGotOutline
                     );
                 }
             }
 
-            if (D_801568E4 < 9) {
-               if ((gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_BADGE) ||
-                    (gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_KEY) ||
-                    (itemEntity->itemID == ITEM_STAR_PIECE) ||
-                    (gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_GEAR) ||
-                    (itemEntity->flags & ITEM_ENTITY_FLAG_4000000) ||
-                    (itemEntity->pickupMsgFlags & 2))
-                {
+            if (ItemPickupStateDelay < 9) {
+                if (   (gItemTable[item->itemID].typeFlags & ITEM_TYPE_FLAG_BADGE)
+                    || (gItemTable[item->itemID].typeFlags & ITEM_TYPE_FLAG_KEY)
+                    || (item->itemID == ITEM_STAR_PIECE)
+                    || (gItemTable[item->itemID].typeFlags & ITEM_TYPE_FLAG_GEAR)
+                    || (item->flags & ITEM_ENTITY_FLAG_4000000)
+                    || (item->pickupMsgFlags & ITEM_PICKUP_FLAG_NO_ANIMS)
+                ) {
                     suggest_player_anim_always_forward(ANIM_MarioW1_Lift);
                 }
             }
 
-            if (D_801568E4 == 7) {
-                if ((gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_BADGE) ||
-                    (gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_KEY) ||
-                    itemEntity->itemID == ITEM_STAR_PIECE ||
-                    (gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_GEAR) ||
-                    (itemEntity->flags & ITEM_ENTITY_FLAG_4000000) ||
-                    (itemEntity->pickupMsgFlags & 2))
-                {
-                    itemEntity->flags &= ~ITEM_ENTITY_FLAG_HIDDEN;
+            if (ItemPickupStateDelay == 7) {
+                if (   (gItemTable[item->itemID].typeFlags & ITEM_TYPE_FLAG_BADGE)
+                    || (gItemTable[item->itemID].typeFlags & ITEM_TYPE_FLAG_KEY)
+                    || (item->itemID == ITEM_STAR_PIECE)
+                    || (gItemTable[item->itemID].typeFlags & ITEM_TYPE_FLAG_GEAR)
+                    || (item->flags & ITEM_ENTITY_FLAG_4000000)
+                    || (item->pickupMsgFlags & ITEM_PICKUP_FLAG_NO_ANIMS)
+                ) {
+                    item->flags &= ~ITEM_ENTITY_FLAG_HIDDEN;
                 }
             }
 
-            if (D_801568E4 == 6) {
-                func_801363A0(itemEntity);
+            if (ItemPickupStateDelay == 6) {
+                func_801363A0(item);
                 set_window_update(WINDOW_ID_12, (s32) basic_window_update);
-                if (itemEntity->itemID != ITEM_STAR_PIECE && itemEntity->itemID != ITEM_COIN) {
+                if (item->itemID != ITEM_STAR_PIECE && item->itemID != ITEM_COIN) {
                     set_window_update(WINDOW_ID_19, (s32) basic_window_update);
                 }
             }
 
-            if (D_801568E4 != 0) {
-                D_801568E4--;
-                return;
+            if (ItemPickupStateDelay != 0) {
+                ItemPickupStateDelay--;
+                break;
             }
 
+            // wait for input
             if (gGameStatusPtr->pressedButtons[0] &
                 (BUTTON_STICK_RIGHT | BUTTON_STICK_LEFT | BUTTON_STICK_DOWN | BUTTON_STICK_UP | BUTTON_A | BUTTON_B))
             {
-                hide_item_entity(itemEntity);
+                hide_item_entity(item);
                 if (is_player_dismounted()
                     && playerStatus->actionState != ACTION_STATE_USE_SPINNING_FLOWER
                     && !(playerStatus->animFlags & PA_FLAG_NO_OOB_RESPAWN)
@@ -2730,78 +2773,80 @@ block_47: // TODO required to match
                     set_action_state(ACTION_STATE_IDLE);
                 }
 
-                if (gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_GEAR) {
-                    D_801568F0->data.gotItemOutline->timeLeft = 10;
+                if (gItemTable[item->itemID].typeFlags & ITEM_TYPE_FLAG_GEAR) {
+                    ItemPickupGotOutline->data.gotItemOutline->timeLeft = 10;
                 }
                 set_window_update(WINDOW_ID_12, (s32) basic_hidden_window_update);
                 set_window_update(WINDOW_ID_19, (s32) basic_hidden_window_update);
-                itemEntity->state = 3;
+                item->state = ITEM_PICKUP_STATE_HIDE_GOT_ITEM;
             }
             break;
-        case 3:
-            if (!(gWindows[12].flags & WINDOW_FLAG_INITIAL_ANIMATION) &&
-                !(gWindows[19].flags & WINDOW_FLAG_INITIAL_ANIMATION))
+        case ITEM_PICKUP_STATE_HIDE_GOT_ITEM:
+            if (!(gWindows[WINDOW_ID_12].flags & WINDOW_FLAG_INITIAL_ANIMATION) &&
+                !(gWindows[WINDOW_ID_19].flags & WINDOW_FLAG_INITIAL_ANIMATION))
             {
-                itemEntity->state = 4;
+                item->state = ITEM_PICKUP_STATE_CHECK_TUTORIALS;
             }
             break;
-        case 4:
-            if ((gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_CONSUMABLE) &&
+        case ITEM_PICKUP_STATE_CHECK_TUTORIALS:
+            if ((gItemTable[item->itemID].typeFlags & ITEM_TYPE_FLAG_CONSUMABLE) &&
                 !evt_get_variable(NULL, GF_Tutorial_GotItem))
             {
                 evt_set_variable(NULL, GF_Tutorial_GotItem, TRUE);
-                itemEntity->state = 5;
+                item->state = ITEM_PICKUP_STATE_SHOW_TUTORIAL;
                 break;
             }
 
-            if (itemEntity->itemID == ITEM_STAR_PIECE && !evt_get_variable(NULL, GF_Tutorial_GotStarPiece)) {
+            if (item->itemID == ITEM_STAR_PIECE && !evt_get_variable(NULL, GF_Tutorial_GotStarPiece)) {
                 evt_set_variable(NULL, GF_Tutorial_GotStarPiece, TRUE);
-                itemEntity->state = 5;
+                item->state = ITEM_PICKUP_STATE_SHOW_TUTORIAL;
                 break;
             }
-            itemEntity->state = 9;
+            item->state = ITEM_PICKUP_STATE_DONE;
             break;
-        case 5:
-            msgID = 0;
-            if (gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_CONSUMABLE) {
+        case ITEM_PICKUP_STATE_SHOW_TUTORIAL:
+            msgID = MSG_NONE;
+            if (gItemTable[item->itemID].typeFlags & ITEM_TYPE_FLAG_CONSUMABLE) {
                 msgID = MSG_Menus_Tutorial_GotItem;
             }
-            if (itemEntity->itemID == ITEM_STAR_PIECE) {
+            if (item->itemID == ITEM_STAR_PIECE) {
                 msgID = MSG_Menus_Tutorial_GotStarPiece;
             }
-            D_801568F4 = msg_get_printer_for_msg(msgID, &D_801568F8);
-            msg_printer_set_origin_pos(D_801568F4, 0, 0);
-            itemEntity->state = 6;
+            GotItemTutorialPrinter = msg_get_printer_for_msg(msgID, &GotItemTutorialClosed);
+            msg_printer_set_origin_pos(GotItemTutorialPrinter, 0, 0);
+            item->state = ITEM_PICKUP_STATE_AWAIT_TUTORIAL;
             break;
-        case 6:
-            if (D_801568F8 == TRUE) {
+        case ITEM_PICKUP_STATE_AWAIT_TUTORIAL:
+            if (GotItemTutorialClosed == TRUE) {
                 isPickingUpItem = FALSE;
             } else {
                 break;
             }
-        case 9:
-            if (!(itemEntity->flags & ITEM_ENTITY_FLAG_2000000)) {
+        case ITEM_PICKUP_STATE_DONE:
+            if (!(item->flags & ITEM_ENTITY_FLAG_2000000)) {
                 set_time_freeze_mode(TIME_FREEZE_NORMAL);
                 enable_player_input();
                 partner_enable_input();
                 gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
             }
-            hud_element_free(D_801568E0);
-            remove_item_entity_by_reference(itemEntity);
+            hud_element_free(ItemPickupIconID);
+            remove_item_entity_by_reference(item);
             sort_items();
-            decrement_status_menu_disabled();
+            decrement_status_bar_disabled();
             isPickingUpItem = FALSE;
             break;
-        case 10:
+        case ITEM_PICKUP_STATE_SHOW_TOO_MANY:
             numEntries = 0;
             if (gGameStatusPtr->pressedButtons[0] & BUTTON_A) {
-                itemData = &gItemTable[itemEntity->itemID];
+                // add new item to menu
+                itemData = &gItemTable[item->itemID];
                 menu->ptrIcon[numEntries] = gItemHudScripts[itemData->hudElemID].enabled;
-                menu->userIndex[numEntries] = itemEntity->itemID;
+                menu->userIndex[numEntries] = item->itemID;
                 menu->enabled[numEntries] = TRUE;
                 menu->nameMsg[numEntries] = itemData->nameMsg;
                 menu->descMsg[numEntries] = itemData->shortDescMsg;
                 numEntries++;
+                // add player inventory to menu
                 for (i = 0; i < ARRAY_COUNT(playerData->invItems); i++) {
                     if (playerData->invItems[i] != 0) {
                         itemData = &gItemTable[playerData->invItems[i]];
@@ -2819,34 +2864,34 @@ block_47: // TODO required to match
                 create_standard_popup_menu(menu);
                 set_window_update(WINDOW_ID_12, (s32) basic_hidden_window_update);
                 set_window_update(WINDOW_ID_17, (s32) basic_hidden_window_update);
-                D_801568E4 = 0;
-                itemEntity->state = 0xB;
+                ItemPickupStateDelay = 0;
+                item->state = ITEM_PICKUP_STATE_HIDE_TOO_MANY;
             }
             break;
-        case 11:
-            if (!(gWindows[12].flags & WINDOW_FLAG_INITIAL_ANIMATION) &&
-                !(gWindows[17].flags & WINDOW_FLAG_INITIAL_ANIMATION) &&
-                !(gWindows[19].flags & WINDOW_FLAG_INITIAL_ANIMATION))
+        case ITEM_PICKUP_STATE_HIDE_TOO_MANY:
+            if (!(gWindows[WINDOW_ID_12].flags & WINDOW_FLAG_INITIAL_ANIMATION) &&
+                !(gWindows[WINDOW_ID_17].flags & WINDOW_FLAG_INITIAL_ANIMATION) &&
+                !(gWindows[WINDOW_ID_19].flags & WINDOW_FLAG_INITIAL_ANIMATION))
             {
-                itemEntity->state = 0xC;
+                item->state = ITEM_PICKUP_STATE_AWAIT_THROW_AWAY;
             }
             break;
-        case 12:
-            if (D_801568E4 == 0) {
+        case ITEM_PICKUP_STATE_AWAIT_THROW_AWAY:
+            if (ItemPickupStateDelay == 0) {
                 D_801568E8 = menu->result;
                 if (D_801568E8 == 0) {
                     break;
                 }
                 hide_popup_menu();
             }
-            D_801568E4++;
-            if (D_801568E4 >= 15) {
+            ItemPickupStateDelay++;
+            if (ItemPickupStateDelay >= 15) {
                 destroy_popup_menu();
                 if (D_801568E8 == 255) {
                     D_801568E8 = 1;
                 }
                 D_801568EC = menu->userIndex[D_801568E8 - 1];
-                hud_element_set_script(D_801568E0, menu->ptrIcon[D_801568E8 - 1]);
+                hud_element_set_script(ItemPickupIconID, menu->ptrIcon[D_801568E8 - 1]);
 
                 get_item_entity(
                     make_item_entity_delayed(
@@ -2860,232 +2905,233 @@ block_47: // TODO required to match
                 if (D_801568E8 >= 2) {
                     playerData->invItems[D_801568E8 - 2] = 0;
                     sort_items();
-                    add_item(itemEntity->itemID);
+                    add_item(item->itemID);
                 }
                 suggest_player_anim_always_forward(ANIM_MarioW1_Lift);
-                func_801363A0(itemEntity);
+                func_801363A0(item);
                 set_window_update(WINDOW_ID_12, (s32) basic_window_update);
-                D_801568E4 = 50;
-                itemEntity->state = 0xD;
+                ItemPickupStateDelay = 50;
+                item->state = ITEM_PICKUP_STATE_SHOW_THREW_AWAY;
             }
             break;
-        case 13:
+        case ITEM_PICKUP_STATE_SHOW_THREW_AWAY:
             if (gGameStatusPtr->pressedButtons[0] & BUTTON_A) {
                 set_window_update(WINDOW_ID_12, (s32) basic_hidden_window_update);
-                itemEntity->state = 0xE;
+                item->state = ITEM_PICKUP_STATE_HIDE_THREW_AWAY;
             }
             break;
-        case 14:
-            if (!(gWindows[12].flags & WINDOW_FLAG_INITIAL_ANIMATION) &&
-                !(gWindows[17].flags & WINDOW_FLAG_INITIAL_ANIMATION) &&
-                !(gWindows[19].flags & WINDOW_FLAG_INITIAL_ANIMATION))
+        case ITEM_PICKUP_STATE_HIDE_THREW_AWAY:
+            if (!(gWindows[WINDOW_ID_12].flags & WINDOW_FLAG_INITIAL_ANIMATION) &&
+                !(gWindows[WINDOW_ID_17].flags & WINDOW_FLAG_INITIAL_ANIMATION) &&
+                !(gWindows[WINDOW_ID_19].flags & WINDOW_FLAG_INITIAL_ANIMATION))
             {
-                itemEntity->state = 15;
+                item->state = ITEM_PICKUP_STATE_THROW_AWAY_DONE;
             }
             break;
-        case 15:
+        case ITEM_PICKUP_STATE_THROW_AWAY_DONE:
             suggest_player_anim_always_forward(ANIM_Mario1_Idle);
             set_time_freeze_mode(TIME_FREEZE_NORMAL);
             enable_player_input();
             partner_enable_input();
             gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
-            hud_element_free(D_801568E0);
-            remove_item_entity_by_reference(itemEntity);
+            hud_element_free(ItemPickupIconID);
+            remove_item_entity_by_reference(item);
             sort_items();
-            decrement_status_menu_disabled();
+            decrement_status_bar_disabled();
             isPickingUpItem = FALSE;
             break;
     }
 }
 
-void func_801363A0(ItemEntity* itemEntity) {
-    ItemData* itemData = &gItemTable[itemEntity->itemID];
+void func_801363A0(ItemEntity* item) {
+    ItemData* itemData = &gItemTable[item->itemID];
     s32 itemMsg;
+    s32 width;
+    s32 posX;
     s32 offsetY;
-    s32 s1;
-    s32 temp;
-    s32 s3;
-    s32 temp2;
+    s32 posY;
+    s32 height;
     s32 v1;
 
-    switch (itemEntity->state) {
-        case 2:
-        case 10:
+    switch (item->state) {
+        case ITEM_PICKUP_STATE_SHOW_GOT_ITEM:
+        case ITEM_PICKUP_STATE_SHOW_TOO_MANY:
             if (!(itemData->typeFlags & ITEM_TYPE_FLAG_BADGE)) {
-                if (!(itemEntity->flags & ITEM_ENTITY_FLAG_4000000) || (itemEntity->pickupMsgFlags & 0x4)) {
+                if (!(item->flags & ITEM_ENTITY_FLAG_4000000) || (item->pickupMsgFlags & ITEM_PICKUP_FLAG_UNKNOWN)) {
                     itemMsg = MSG_Menus_0058;
                 } else {
                     itemMsg = MSG_Menus_005A;
                 }
 
-                if (itemEntity->pickupMsgFlags & 0x10) {
+                if (item->pickupMsgFlags & ITEM_PICKUP_FLAG_1_COIN) {
                     itemMsg = MSG_Menus_005D;
                 }
-                if (itemEntity->pickupMsgFlags & 0x20) {
+                if (item->pickupMsgFlags & ITEM_PICKUP_FLAG_3_STAR_PIECES) {
                     itemMsg = MSG_Menus_005E;
                 }
-                if (itemEntity->pickupMsgFlags & 0x40) {
+                if (item->pickupMsgFlags & ITEM_PICKUP_FLAG_UNIQUE) {
                     itemMsg = MSG_Menus_005C;
                 }
 
                 set_message_msg(itemData->nameMsg, 0);
 
-                if (!(gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_KEY) &&
-                    itemEntity->itemID != ITEM_STAR_PIECE &&
-                    !(gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_GEAR) &&
-                    !(itemEntity->pickupMsgFlags & 0x30)) {
-                    offsetY = get_msg_width(itemMsg, 0) + 54;
+                if (!(gItemTable[item->itemID].typeFlags & ITEM_TYPE_FLAG_KEY) &&
+                    item->itemID != ITEM_STAR_PIECE &&
+                    !(gItemTable[item->itemID].typeFlags & ITEM_TYPE_FLAG_GEAR) &&
+                    !(item->pickupMsgFlags & (ITEM_PICKUP_FLAG_1_COIN | ITEM_PICKUP_FLAG_3_STAR_PIECES))) {
+                    width = get_msg_width(itemMsg, 0) + 54;
                 } else {
-                    offsetY = get_msg_width(itemMsg, 0) + 30;
+                    width = get_msg_width(itemMsg, 0) + 30;
                 }
-                s1 = 160 - offsetY / 2;
-                s3 = 76;
+                posX = 160 - width / 2;
+                posY = 76;
             } else {
-                if (!(itemEntity->flags & ITEM_ENTITY_FLAG_4000000) || (itemEntity->pickupMsgFlags & 0x4)) {
+                if (!(item->flags & ITEM_ENTITY_FLAG_4000000) || (item->pickupMsgFlags & ITEM_PICKUP_FLAG_UNKNOWN)) {
                     itemMsg = MSG_Menus_0059;
                 } else {
                     itemMsg = MSG_Menus_005B;
                 }
 
-                if (itemEntity->pickupMsgFlags & 0x10) {
+                if (item->pickupMsgFlags & ITEM_PICKUP_FLAG_1_COIN) {
                     itemMsg = MSG_Menus_005D;
                 }
-                if (itemEntity->pickupMsgFlags & 0x20) {
+                if (item->pickupMsgFlags & ITEM_PICKUP_FLAG_3_STAR_PIECES) {
                     itemMsg = MSG_Menus_005E;
                 }
-                if (itemEntity->pickupMsgFlags & 0x40) {
+                if (item->pickupMsgFlags & ITEM_PICKUP_FLAG_UNIQUE) {
                     itemMsg = MSG_Menus_005C;
                 }
 
                 set_message_msg(itemData->nameMsg, 0);
-                offsetY = get_msg_width(itemMsg, 0) + 30;
-                s1 = 160 - offsetY / 2;
-                s3 = 76;
+                width = get_msg_width(itemMsg, 0) + 30;
+                posX = 160 - width / 2;
+                posY = 76;
             }
-            temp2 = D_8014C6E0[get_msg_lines(itemMsg) - 1];
-            if (itemEntity->state != 2) {
-                temp = 28;
+            height = PickupHeaderWindowHeight[get_msg_lines(itemMsg) - 1];
+            if (item->state != ITEM_PICKUP_STATE_SHOW_GOT_ITEM) {
+                offsetY = 28;
             } else {
-                temp = 0;
+                offsetY = 0;
             }
-            if (!(gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_KEY) &&
-                    itemEntity->itemID != ITEM_STAR_PIECE &&
-                    !(gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_GEAR) &&
-                    !(itemEntity->pickupMsgFlags & 0x30)) {
-                set_window_properties(WINDOW_ID_12, s1, s3 - 24 + temp, offsetY,
-                                    temp2, WINDOW_PRIORITY_0, func_8013673C, itemEntity, -1);
-            } else if (gItemTable[itemEntity->itemID].typeFlags & 1){
-                set_window_properties(WINDOW_ID_12, s1, s3 - 24 + temp, offsetY,
-                                    temp2, WINDOW_PRIORITY_0, func_8013673C, itemEntity, -1);
+            if (   !(gItemTable[item->itemID].typeFlags & ITEM_TYPE_FLAG_KEY)
+                && !(gItemTable[item->itemID].typeFlags & ITEM_TYPE_FLAG_GEAR)
+                && !(item->pickupMsgFlags & (ITEM_PICKUP_FLAG_1_COIN | ITEM_PICKUP_FLAG_3_STAR_PIECES)
+                && item->itemID != ITEM_STAR_PIECE)
+            ) {
+                set_window_properties(WINDOW_ID_12, posX, posY - 24 + offsetY, width,
+                                    height, WINDOW_PRIORITY_0, draw_content_pickup_item_header, item, -1);
+            } else if (gItemTable[item->itemID].typeFlags & ITEM_TYPE_FLAG_WORLD_USABLE){
+                set_window_properties(WINDOW_ID_12, posX, posY - 24 + offsetY, width,
+                                    height, WINDOW_PRIORITY_0, draw_content_pickup_item_header, item, -1);
             } else {
-                set_window_properties(WINDOW_ID_12, s1, s3 - 24 + temp, offsetY,
-                                    temp2, WINDOW_PRIORITY_0, func_8013673C, itemEntity, -1);
+                set_window_properties(WINDOW_ID_12, posX, posY - 24 + offsetY, width,
+                                    height, WINDOW_PRIORITY_0, draw_content_pickup_item_header, item, -1);
             }
-            if (itemEntity->itemID != ITEM_STAR_PIECE && itemEntity->itemID != ITEM_COIN) {
-                set_window_properties(WINDOW_ID_19, 20, 186, 280, 32, WINDOW_PRIORITY_0, func_80136A08, itemEntity, -1);
+            if (item->itemID != ITEM_STAR_PIECE && item->itemID != ITEM_COIN) {
+                set_window_properties(WINDOW_ID_19, 20, 186, 280, 32, WINDOW_PRIORITY_0, draw_content_pickup_item_desc, item, -1);
             }
-            if (itemEntity->state != 2) {
-                offsetY = get_msg_width(MSG_Menus_0060, 0) + 0x18;
-                s1 = 160 - offsetY / 2;
-                set_window_properties(WINDOW_ID_17, 160 - offsetY / 2, 36, offsetY, 40, WINDOW_PRIORITY_0, func_801369D0, itemEntity, -1);
+            if (item->state != ITEM_PICKUP_STATE_SHOW_GOT_ITEM) {
+                width = get_msg_width(MSG_Menus_0060, 0) + 24;
+                posX = 160 - width / 2;
+                set_window_properties(WINDOW_ID_17, 160 - width / 2, 36, width, 40, WINDOW_PRIORITY_0, draw_content_cant_carry_more, item, -1);
             }
             break;
-        case 12:
+        case ITEM_PICKUP_STATE_AWAIT_THROW_AWAY:
             set_message_msg(itemData->nameMsg, 0);
-            offsetY = get_msg_width(MSG_Menus_005F, 0) + 0x36;
-            s1 = 160 - offsetY / 2;
-            set_window_properties(WINDOW_ID_12, 160 - offsetY / 2, 76, offsetY, 40, WINDOW_PRIORITY_0, func_8013673C, itemEntity, -1);
+            width = get_msg_width(MSG_Menus_005F, 0) + 54;
+            posX = 160 - width / 2;
+            set_window_properties(WINDOW_ID_12, 160 - width / 2, 76, width, 40, WINDOW_PRIORITY_0, draw_content_pickup_item_header, item, -1);
             break;
     }
 }
 
-void func_8013673C(ItemEntity* itemEntity, s32 posX, s32 posY) {
-    ItemData* itemData = &gItemTable[itemEntity->itemID];
+void draw_content_pickup_item_header(ItemEntity* item, s32 posX, s32 posY) {
+    ItemData* itemData = &gItemTable[item->itemID];
     s32 itemMsg;
     s32 offsetY;
 
-    switch (itemEntity->state) {
-        case 2:
-        case 3:
-        case 10:
-        case 11:
+    switch (item->state) {
+        case ITEM_PICKUP_STATE_SHOW_GOT_ITEM:
+        case ITEM_PICKUP_STATE_HIDE_GOT_ITEM:
+        case ITEM_PICKUP_STATE_SHOW_TOO_MANY:
+        case ITEM_PICKUP_STATE_HIDE_TOO_MANY:
             if (!(itemData->typeFlags & ITEM_TYPE_FLAG_BADGE)) {
-                if (!(itemEntity->flags & ITEM_ENTITY_FLAG_4000000) || (itemEntity->pickupMsgFlags & 0x4)) {
+                if (!(item->flags & ITEM_ENTITY_FLAG_4000000) || (item->pickupMsgFlags & ITEM_PICKUP_FLAG_UNKNOWN)) {
                     itemMsg = MSG_Menus_0058;
                 } else {
                     itemMsg = MSG_Menus_005A;
                 }
                 set_message_msg(itemData->nameMsg, 0);
 
-                if (itemEntity->pickupMsgFlags & 0x10) {
+                if (item->pickupMsgFlags & ITEM_PICKUP_FLAG_1_COIN) {
                     itemMsg = MSG_Menus_005D;
                 }
-                if (itemEntity->pickupMsgFlags & 0x20) {
+                if (item->pickupMsgFlags & ITEM_PICKUP_FLAG_3_STAR_PIECES) {
                     itemMsg = MSG_Menus_005E;
                 }
-                if (itemEntity->pickupMsgFlags & 0x40) {
+                if (item->pickupMsgFlags & ITEM_PICKUP_FLAG_UNIQUE) {
                     itemMsg = MSG_Menus_005C;
                 }
             } else {
-                if (!(itemEntity->flags & ITEM_ENTITY_FLAG_4000000) || (itemEntity->pickupMsgFlags & 0x4)) {
+                if (!(item->flags & ITEM_ENTITY_FLAG_4000000) || (item->pickupMsgFlags & ITEM_PICKUP_FLAG_UNKNOWN)) {
                     itemMsg = MSG_Menus_0059;
                 } else {
                     itemMsg = MSG_Menus_005B;
                 }
 
-                if (itemEntity->pickupMsgFlags & 0x10) {
+                if (item->pickupMsgFlags & ITEM_PICKUP_FLAG_1_COIN) {
                     itemMsg = MSG_Menus_005D;
                 }
-                if (itemEntity->pickupMsgFlags & 0x20) {
+                if (item->pickupMsgFlags & ITEM_PICKUP_FLAG_3_STAR_PIECES) {
                     itemMsg = MSG_Menus_005E;
                 }
-                if (itemEntity->pickupMsgFlags & 0x40) {
+                if (item->pickupMsgFlags & ITEM_PICKUP_FLAG_UNIQUE) {
                     itemMsg = MSG_Menus_005C;
                 }
 
                 set_message_msg(itemData->nameMsg, 0);
             }
 
-            offsetY = D_8014C6E4[get_msg_lines(itemMsg) - 1];
+            offsetY = PickupMessageWindowYOffsets[get_msg_lines(itemMsg) - 1];
 
-            if ((gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_BADGE) ||
-                (gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_KEY) ||
-                itemEntity->itemID == ITEM_STAR_PIECE ||
-                (gItemTable[itemEntity->itemID].typeFlags & ITEM_TYPE_FLAG_GEAR) ||
-                (itemEntity->pickupMsgFlags & 0x30)) {
-
+            if ((gItemTable[item->itemID].typeFlags & ITEM_TYPE_FLAG_BADGE)
+                || (gItemTable[item->itemID].typeFlags & ITEM_TYPE_FLAG_KEY)
+                || item->itemID == ITEM_STAR_PIECE
+                || (gItemTable[item->itemID].typeFlags & ITEM_TYPE_FLAG_GEAR)
+                || (item->pickupMsgFlags & (ITEM_PICKUP_FLAG_1_COIN | ITEM_PICKUP_FLAG_3_STAR_PIECES))
+            ) {
                 draw_msg(itemMsg, posX + 15, posY + offsetY, 255, MSG_PAL_2F, 0);
             } else {
                 draw_msg(itemMsg, posX + 40, posY + offsetY, 255, MSG_PAL_2F, 0);
-                if (!(itemEntity->pickupMsgFlags & 0x30)) {
-                    hud_element_set_render_pos(D_801568E0, posX + 20, posY + 20);
-                    hud_element_draw_next(D_801568E0);
+                if (!(item->pickupMsgFlags & (ITEM_PICKUP_FLAG_1_COIN | ITEM_PICKUP_FLAG_3_STAR_PIECES))) {
+                    hud_element_set_render_pos(ItemPickupIconID, posX + 20, posY + 20);
+                    hud_element_draw_next(ItemPickupIconID);
                 }
             }
             break;
-        case 13:
-        case 14:
+        case ITEM_PICKUP_STATE_SHOW_THREW_AWAY:
+        case ITEM_PICKUP_STATE_HIDE_THREW_AWAY:
             set_message_msg(gItemTable[D_801568EC].nameMsg, 0);
             draw_msg(MSG_Menus_005F, posX + 40, posY + 4, 255, MSG_PAL_2F, 0);
-            hud_element_set_render_pos(D_801568E0, posX + 20, posY + 20);
-            hud_element_draw_next(D_801568E0);
+            hud_element_set_render_pos(ItemPickupIconID, posX + 20, posY + 20);
+            hud_element_draw_next(ItemPickupIconID);
             break;
     }
 }
 
-void func_801369D0(ItemEntity* itemEntity, s32 x, s32 y) {
+void draw_content_cant_carry_more(ItemEntity* item, s32 x, s32 y) {
     draw_msg(MSG_Menus_0060, x + 12, y + 4, 255, MSG_PAL_34, 0);
 }
 
-void func_80136A08(ItemEntity* itemEntity, s32 posX, s32 posY) {
-    ItemData* itemData = &gItemTable[itemEntity->itemID];
+void draw_content_pickup_item_desc(ItemEntity* item, s32 posX, s32 posY) {
+    ItemData* itemData = &gItemTable[item->itemID];
     s32 itemMsg;
 
-    switch (itemEntity->state) {
-        case 2:
-        case 3:
-        case 10:
-        case 11:
+    switch (item->state) {
+        case ITEM_PICKUP_STATE_SHOW_GOT_ITEM:
+        case ITEM_PICKUP_STATE_HIDE_GOT_ITEM:
+        case ITEM_PICKUP_STATE_SHOW_TOO_MANY:
+        case ITEM_PICKUP_STATE_HIDE_TOO_MANY:
             itemMsg = itemData->shortDescMsg;
             draw_msg(itemMsg, posX + 8, posY, 255, MSG_PAL_STANDARD, 0);
             break;

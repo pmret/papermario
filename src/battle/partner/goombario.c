@@ -30,6 +30,10 @@ extern EvtScript N(idle);
 extern EvtScript N(nextTurn);
 extern EvtScript N(takeTurn);
 
+enum N(ActorPartIDs) {
+    PRT_MAIN            = 1,
+};
+
 API_CALLABLE(N(GetReturnMoveTime)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partner = battleStatus->partnerActor;
@@ -244,7 +248,6 @@ API_CALLABLE(N(JumpOnTarget)) {
     return ApiStatus_BLOCK;
 }
 
-
 API_CALLABLE(N(OnMissHeadbonk)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partner = gBattleStatus.partnerActor;
@@ -335,7 +338,6 @@ API_CALLABLE(N(GetTattleCamPos)) {
     return ApiStatus_DONE2;
 }
 
-
 API_CALLABLE(N(OpenTattleWindow)) {
     N(tattleEffect) = fx_tattle_window(0, 206, 144, 0, 1.0f, 0);
 
@@ -420,7 +422,7 @@ API_CALLABLE(N(ChargeAtPos)) {
     z = evt_get_variable(script, *args++);
     fx_stat_change(boostAmount, x, y, z, 1.0f, 60);
 
-    gBattleStatus.flags1 |= BS_FLAGS1_40000000;
+    gBattleStatus.flags1 |= BS_FLAGS1_GOOMBARIO_CHARGED;
     return ApiStatus_DONE2;
 }
 
@@ -428,7 +430,7 @@ API_CALLABLE(N(StopCharge)) {
     BattleStatus* battleStatus = &gBattleStatus;
 
     battleStatus->partnerActor->isGlowing = 0;
-    battleStatus->flags1 &= ~BS_FLAGS1_40000000;
+    battleStatus->flags1 &= ~BS_FLAGS1_GOOMBARIO_CHARGED;
 
     return ApiStatus_DONE2;
 }
@@ -436,13 +438,13 @@ API_CALLABLE(N(StopCharge)) {
 API_CALLABLE(N(StopChargeAndGet)) {
     Actor* partner = gBattleStatus.partnerActor;
 
-    if (!(gBattleStatus.flags1 & BS_FLAGS1_40000000)) {
+    if (!(gBattleStatus.flags1 & BS_FLAGS1_GOOMBARIO_CHARGED)) {
         partner->isGlowing = 0;
     }
 
     script->varTable[0] = partner->isGlowing;
     partner->isGlowing = 0;
-    gBattleStatus.flags1 &= ~BS_FLAGS1_40000000;
+    gBattleStatus.flags1 &= ~BS_FLAGS1_GOOMBARIO_CHARGED;
 
     return ApiStatus_DONE2;
 }
@@ -478,56 +480,56 @@ API_CALLABLE(N(GetChargeMessage)) {
 }
 
 s32 N(IdleAnimations)[] = {
-    STATUS_NORMAL,    ANIM_BattleGoombario_Walk,
-    STATUS_STONE,     ANIM_BattleGoombario_Still,
-    STATUS_SLEEP,     ANIM_BattleGoombario_CloseEyes,
-    STATUS_POISON,    ANIM_BattleGoombario_Still,
-    STATUS_STOP,      ANIM_BattleGoombario_Still,
-    STATUS_DAZE,      ANIM_BattleGoombario_Injured,
-    STATUS_TURN_DONE, ANIM_BattleGoombario_Still,
+    STATUS_KEY_NORMAL,    ANIM_BattleGoombario_Walk,
+    STATUS_KEY_STONE,     ANIM_BattleGoombario_Still,
+    STATUS_KEY_SLEEP,     ANIM_BattleGoombario_CloseEyes,
+    STATUS_KEY_POISON,    ANIM_BattleGoombario_Still,
+    STATUS_KEY_STOP,      ANIM_BattleGoombario_Still,
+    STATUS_KEY_DAZE,      ANIM_BattleGoombario_Injured,
+    STATUS_KEY_INACTIVE,  ANIM_BattleGoombario_Still,
     STATUS_END,
 };
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
 s32 N(StatusTable)[] = {
-    STATUS_NORMAL, 100,
-    STATUS_DEFAULT, 100,
-    STATUS_SLEEP, 100,
-    STATUS_POISON, 100,
-    STATUS_FROZEN, 100,
-    STATUS_DIZZY, 100,
-    STATUS_FEAR, 100,
-    STATUS_STATIC, 100,
-    STATUS_PARALYZE, 100,
-    STATUS_SHRINK, 100,
-    STATUS_STOP, 100,
-    STATUS_DEFAULT_TURN_MOD, 0,
-    STATUS_SLEEP_TURN_MOD, 0,
-    STATUS_POISON_TURN_MOD, 0,
-    STATUS_FROZEN_TURN_MOD, 0,
-    STATUS_DIZZY_TURN_MOD, 0,
-    STATUS_FEAR_TURN_MOD, 0,
-    STATUS_STATIC_TURN_MOD, 0,
-    STATUS_PARALYZE_TURN_MOD, 0,
-    STATUS_SHRINK_TURN_MOD, 0,
-    STATUS_STOP_TURN_MOD, 0,
+    STATUS_KEY_NORMAL,            100,
+    STATUS_KEY_DEFAULT,           100,
+    STATUS_KEY_SLEEP,             100,
+    STATUS_KEY_POISON,            100,
+    STATUS_KEY_FROZEN,            100,
+    STATUS_KEY_DIZZY,             100,
+    STATUS_KEY_FEAR,              100,
+    STATUS_KEY_STATIC,            100,
+    STATUS_KEY_PARALYZE,          100,
+    STATUS_KEY_SHRINK,            100,
+    STATUS_KEY_STOP,              100,
+    STATUS_TURN_MOD_DEFAULT,        0,
+    STATUS_TURN_MOD_SLEEP,          0,
+    STATUS_TURN_MOD_POISON,         0,
+    STATUS_TURN_MOD_FROZEN,         0,
+    STATUS_TURN_MOD_DIZZY,          0,
+    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_STATIC,         0,
+    STATUS_TURN_MOD_PARALYZE,       0,
+    STATUS_TURN_MOD_SHRINK,         0,
+    STATUS_TURN_MOD_STOP,           0,
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = 0,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 8, 22 },
         .opacity = 255,
         .idleAnimations = N(IdleAnimations),
         .defenseTable = N(DefenseTable),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
     },
 };
@@ -537,8 +539,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_GOOMBARIO,
     .level = 0,
     .maxHP = 99,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
@@ -550,9 +552,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 80,
     .coinReward = 0,
     .size = { 29, 26 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 EvtScript N(init) = {
@@ -789,7 +791,7 @@ EvtScript N(returnHome) = {
     EVT_CALL(SetActorJumpGravity, ACTOR_PARTNER, EVT_FLOAT(1.2))
     EVT_CALL(N(GetReturnMoveTime))
     EVT_CALL(JumpToGoal, ACTOR_PARTNER, LVar0, FALSE, TRUE, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_PreHeadbonk)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_PreHeadbonk)
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 18, 0)
     EVT_WAIT(1)
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 19, 0)
@@ -800,12 +802,12 @@ EvtScript N(returnHome) = {
     EVT_CALL(AddGoalPos, ACTOR_PARTNER, -10, 0, 0)
     EVT_CALL(JumpToGoal, ACTOR_PARTNER, 6, FALSE, FALSE, TRUE)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleGoombario_Idle)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_PreHeadbonk)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_PreHeadbonk)
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 18, 0)
     EVT_WAIT(1)
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 19, 0)
     EVT_WAIT(1)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Idle)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Idle)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
     EVT_WAIT(2)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
@@ -853,7 +855,7 @@ EvtScript N(returnHome2) = {
         EVT_CALL(SetActorRotationOffset, ACTOR_SELF, 0, 0, 0)
     EVT_END_THREAD
     EVT_CALL(JumpToGoal, ACTOR_PARTNER, LVar0, FALSE, TRUE, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_PreHeadbonk)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_PreHeadbonk)
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 18, 0)
     EVT_WAIT(1)
     EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
@@ -861,14 +863,14 @@ EvtScript N(returnHome2) = {
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleGoombario_Idle)
     EVT_CALL(AddGoalPos, ACTOR_PARTNER, -20, 0, 0)
     EVT_CALL(JumpToGoal, ACTOR_PARTNER, 6, FALSE, FALSE, TRUE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_PreHeadbonk)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_PreHeadbonk)
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 18, 0)
     EVT_WAIT(1)
     EVT_CALL(AddGoalPos, ACTOR_PARTNER, -10, 0, 0)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleGoombario_Idle)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(JumpToGoal, ACTOR_PARTNER, 4, FALSE, FALSE, TRUE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_PreHeadbonk)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_PreHeadbonk)
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 18, 0)
     EVT_WAIT(1)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
@@ -927,7 +929,7 @@ EvtScript N(headbonk1) = {
     EVT_CALL(action_command_jump_init)
     EVT_EXEC_WAIT(N(runToTarget))
     EVT_EXEC_WAIT(N(calcJumpTime))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_PreHeadbonk)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_PreHeadbonk)
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 18, 0)
     EVT_WAIT(5)
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 19, 0)
@@ -935,7 +937,7 @@ EvtScript N(headbonk1) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
     EVT_CALL(action_command_jump_start, LVarA, 3)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Headbonk)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk)
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 9, 0)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
     EVT_CALL(SetJumpAnimations, ACTOR_PARTNER, 0, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
@@ -1032,7 +1034,7 @@ EvtScript N(headbonk2) = {
     EVT_CALL(action_command_jump_init)
     EVT_EXEC_WAIT(N(runToTarget))
     EVT_EXEC_WAIT(N(calcJumpTime))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_PreHeadbonk)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_PreHeadbonk)
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 18, 0)
     EVT_WAIT(5)
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 19, 0)
@@ -1040,7 +1042,7 @@ EvtScript N(headbonk2) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
     EVT_CALL(action_command_jump_start, LVarA, 3)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Headbonk)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk)
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 9, 0)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
     EVT_CALL(SetJumpAnimations, ACTOR_PARTNER, 0, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
@@ -1139,7 +1141,7 @@ EvtScript N(headbonk3) = {
     EVT_CALL(action_command_jump_init)
     EVT_EXEC_WAIT(N(runToTarget))
     EVT_EXEC_WAIT(N(calcJumpTime))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_PreHeadbonk)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_PreHeadbonk)
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 18, 0)
     EVT_WAIT(5)
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 19, 0)
@@ -1147,7 +1149,7 @@ EvtScript N(headbonk3) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
     EVT_CALL(action_command_jump_start, LVarA, 3)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Headbonk)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk)
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 9, 0)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
     EVT_CALL(SetJumpAnimations, ACTOR_PARTNER, 0, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
@@ -1216,7 +1218,7 @@ EvtScript N(headbonk3) = {
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, EVT_IGNORE_ARG, LVar0)
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Headbonk)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk)
     EVT_END_THREAD
     EVT_THREAD
         EVT_SET(LVar0, 0)
@@ -1250,7 +1252,7 @@ EvtScript N(headbonk3) = {
     EVT_END
 };
 
-s32 N(actionCommandTable)[] = { 7, 6, 5, 4, 3, 2, 1, 0, };
+s32 N(actionCommandTable)[] = { 7, 6, 5, 4, 3, 2, 1, 0 };
 
 s32 N(powerBounceChance) = 200;
 
@@ -1259,7 +1261,7 @@ EvtScript N(multibonk) = {
     EVT_CALL(action_command_jump_init)
     EVT_EXEC_WAIT(N(runToTarget))
     EVT_EXEC_WAIT(N(calcJumpTime))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_PreHeadbonk)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_PreHeadbonk)
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 18, 0)
     EVT_WAIT(5)
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 19, 0)
@@ -1267,7 +1269,7 @@ EvtScript N(multibonk) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
     EVT_CALL(action_command_jump_start, LVarA, 1)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_52)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Headbonk)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk)
     EVT_CALL(SetActorDispOffset, ACTOR_PARTNER, 0, 9, 0)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
     EVT_CALL(SetJumpAnimations, ACTOR_PARTNER, 0, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk, ANIM_BattleGoombario_Headbonk)
@@ -1324,7 +1326,7 @@ EvtScript N(multibonk) = {
     EVT_CALL(func_80269524, LVarF)
     EVT_SET(LVarD, 0)
     EVT_SET(LVarF, 0)
-    EVT_SET(LocalFlag(0), 0)
+    EVT_SET(LFlag0, FALSE)
     EVT_LABEL(10)
     EVT_THREAD
         EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_50)
@@ -1357,7 +1359,7 @@ EvtScript N(multibonk) = {
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, EVT_IGNORE_ARG, LVar0)
             EVT_WAIT(1)
         EVT_END_LOOP
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleGoombario_Headbonk)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Headbonk)
     EVT_END_THREAD
     EVT_THREAD
         EVT_SET(LVar0, 0)
@@ -1376,7 +1378,7 @@ EvtScript N(multibonk) = {
     EVT_SUB(LVarD, 1)
     EVT_CALL(N(AdjustPowerBounceChance))
     EVT_IF_GE(LVarF, LVar0)
-        EVT_SET(LocalFlag(0), 1)
+        EVT_SET(LFlag0, TRUE)
     EVT_END_IF
     EVT_CHILD_THREAD
         EVT_CALL(SetActorScale, ACTOR_PARTNER, EVT_FLOAT(1.1), EVT_FLOAT(0.8), EVT_FLOAT(1.0))
@@ -1389,7 +1391,7 @@ EvtScript N(multibonk) = {
     EVT_CALL(GetActionCommandResult, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(0)
-            EVT_IF_EQ(LocalFlag(0), 0)
+            EVT_IF_EQ(LFlag0, FALSE)
                 EVT_CALL(N(GetChargeAmount))
                 EVT_ADD(LVar0, 3)
                 EVT_CALL(PartnerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVar0, LVarD, BS_FLAGS1_40)
@@ -1402,7 +1404,7 @@ EvtScript N(multibonk) = {
             EVT_CALL(N(StopChargeAndGet))
             EVT_ADD(LVar0, 3)
             EVT_CALL(PartnerPowerBounceEnemy, LVar0, DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POWER_BOUNCE, 0, 0, LVar0, LVarD, BS_FLAGS1_SP_EVT_ACTIVE)
-            EVT_SET(LocalFlag(0), 0)
+            EVT_SET(LFlag0, FALSE)
     EVT_END_SWITCH
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_0)
     EVT_CALL(func_80269550, LVarE)
@@ -1414,7 +1416,7 @@ EvtScript N(multibonk) = {
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(HIT_RESULT_1)
         EVT_CASE_OR_EQ(HIT_RESULT_3)
-            EVT_IF_EQ(LocalFlag(0), 1)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_EXEC_WAIT(N(returnHome2))
                 EVT_RETURN
             EVT_END_IF
@@ -1436,7 +1438,7 @@ EvtScript N(tattle) = {
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleGoombario_Idle)
     EVT_CALL(InitTargetIterator)
     EVT_CALL(SetGoalToTarget, ACTOR_PARTNER)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4, TRUE)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_TATTLE_OPEN, TRUE)
     EVT_CALL(N(OpenTattleWindow))
     EVT_WAIT(12)
     EVT_CALL(SetCamEnabled, CAM_TATTLE, TRUE)
@@ -1455,13 +1457,13 @@ EvtScript N(tattle) = {
     EVT_CALL(SetCamFlag80, CAM_TATTLE, TRUE)
     EVT_WAIT(10)
     EVT_CALL(N(GetTattleMessage))
-    EVT_CALL(ActorSpeak, LVar0, ACTOR_SELF, 1, ANIM_BattleGoombario_Talk, ANIM_BattleGoombario_Idle)
+    EVT_CALL(ActorSpeak, LVar0, ACTOR_SELF, PRT_MAIN, ANIM_BattleGoombario_Talk, ANIM_BattleGoombario_Idle)
     EVT_CALL(N(CloseTattleWindow))
     EVT_WAIT(12)
     EVT_CALL(SetCamEnabled, CAM_TATTLE, FALSE)
     EVT_WAIT(32)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_4, FALSE)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_TATTLE_OPEN, FALSE)
     EVT_CALL(PartnerYieldTurn)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
     EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(4.0))

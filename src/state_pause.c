@@ -92,7 +92,7 @@ void state_step_pause(void) {
                     clear_worker_list();
                     hud_element_set_aux_cache(D_80200000, 0x38000); // TODO shiftability (what should this symbol be?)
                     hud_element_clear_cache();
-                    reset_status_menu();
+                    reset_status_bar();
                     clear_item_entity_data();
                     clear_script_list();
                     clear_npcs();
@@ -203,7 +203,7 @@ void state_step_unpause(void) {
                         calculate_model_sizes();
                         npc_reload_all();
                         set_windows_visible(WINDOW_GROUP_ALL);
-                        status_menu_respond_to_changes();
+                        status_bar_respond_to_changes();
                         set_time_freeze_mode(TIME_FREEZE_PARTIAL);
                         D_800A0921 = 3;
                         gPlayerStatus.alpha2 = gPlayerStatus.alpha1 - 1;

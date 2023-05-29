@@ -164,7 +164,7 @@ EvtScript N(EVS_HammerSupport_F) = {
 };
 
 EvtScript N(EVS_Hammer_ReturnHome_A) = {
-    EVT_CALL(func_80276EFC)
+    EVT_CALL(PlayerYieldTurn)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_04)
     EVT_CALL(MoveBattleCamOver, 5)
     EVT_CALL(func_802693F0)
@@ -182,7 +182,7 @@ EvtScript N(EVS_Hammer_ReturnHome_A) = {
 };
 
 EvtScript N(EVS_Hammer_ReturnHome_B) = {
-    EVT_CALL(func_80276EFC)
+    EVT_CALL(PlayerYieldTurn)
     EVT_CALL(func_802693F0)
     EVT_WAIT(20)
     EVT_CALL(EnablePlayerBlur, -1)
@@ -198,7 +198,7 @@ EvtScript N(EVS_Hammer_ReturnHome_B) = {
 };
 
 EvtScript N(EVS_Hammer_ReturnHome_C) = {
-    EVT_CALL(func_80276EFC)
+    EVT_CALL(PlayerYieldTurn)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_29)
     EVT_CALL(func_802693F0)
     EVT_WAIT(20)

@@ -142,7 +142,7 @@ EvtScript N(EVS_UseBed) = {
     EVT_CALL(CloseMessage)
     EVT_CALL(SetPlayerJumpscale, 1)
     EVT_CALL(DisablePlayerPhysics, TRUE)
-    EVT_CALL(N(ToadHouse_DisableStatusMenu))
+    EVT_CALL(N(ToadHouse_DisableStatusBar))
     EVT_IF_NE(LVar4, 0)
         EVT_EXEC(N(EVS_ToadHouse_Unk2))
     EVT_END_IF
@@ -179,7 +179,7 @@ EvtScript N(EVS_UseBed) = {
     EVT_EXEC_GET_TID(N(EVS_ToadHouse_ReturnFromRest), LVar9)
     EVT_CALL(N(ToadHouse_AwaitScriptComplete), LVar9)
     EVT_CALL(DisablePlayerPhysics, FALSE)
-    EVT_CALL(N(ToadHouse_ShowStatusMenu))
+    EVT_CALL(N(ToadHouse_ShowWorldStatusBar))
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN
     EVT_END

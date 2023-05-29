@@ -331,11 +331,11 @@ EvtScript N(EVS_UsePower) = {
     EVT_LABEL(0)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(func_802A1628_795908)
-    EVT_SET(LocalFlag(0), 0)
+    EVT_SET(LFlag0, FALSE)
     EVT_CALL(ItemCheckHit, LVar1, 0, 0, 0, 0)
     EVT_IF_EQ(LVar1, 6)
         EVT_SET(LVar0, 0)
-        EVT_SET(LocalFlag(0), 1)
+        EVT_SET(LFlag0, TRUE)
     EVT_END_IF
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(0)
@@ -398,7 +398,7 @@ EvtScript N(EVS_UsePower) = {
                 EVT_CALL(RemoveActor, LVarA)
             EVT_END_THREAD
         EVT_CASE_DEFAULT
-            EVT_IF_EQ(LocalFlag(0), 0)
+            EVT_IF_EQ(LFlag0, FALSE)
                 EVT_CALL(PlayerDamageEnemy, LVar0, 0, SUPPRESS_EVENT_ALL, 0, 0, BS_FLAGS1_FORCE_HIT_IMMUNE | BS_FLAGS1_SP_EVT_ACTIVE)
             EVT_END_IF
     EVT_END_SWITCH
@@ -410,7 +410,7 @@ EvtScript N(EVS_UsePower) = {
     EVT_WAIT(70)
     EVT_CALL(func_802A15B4_795894)
     EVT_EXEC_WAIT(N(802A200C))
-    EVT_CALL(func_80276EFC)
+    EVT_CALL(PlayerYieldTurn)
     EVT_EXEC_WAIT(N(802A245C))
     EVT_RETURN
     EVT_END

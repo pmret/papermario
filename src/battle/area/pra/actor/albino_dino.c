@@ -11,54 +11,58 @@ extern EvtScript N(idle);
 extern EvtScript N(takeTurn);
 extern EvtScript N(handleEvent);
 
+enum N(ActorPartIDs) {
+    PRT_MAIN            = 1,
+};
+
 s32 N(IdleAnimations)[] = {
-    STATUS_NORMAL, ANIM_AlbinoDino_Idle,
-    STATUS_STONE, ANIM_AlbinoDino_Still,
-    STATUS_SLEEP, ANIM_AlbinoDino_Idle,
-    STATUS_POISON, ANIM_AlbinoDino_Idle,
-    STATUS_STOP, ANIM_AlbinoDino_Still,
-    STATUS_STATIC, ANIM_AlbinoDino_Idle,
-    STATUS_PARALYZE, ANIM_AlbinoDino_Still,
-    STATUS_DIZZY, ANIM_AlbinoDino_Still,
-    STATUS_FEAR, ANIM_AlbinoDino_Still,
+    STATUS_KEY_NORMAL,    ANIM_AlbinoDino_Idle,
+    STATUS_KEY_STONE,     ANIM_AlbinoDino_Still,
+    STATUS_KEY_SLEEP,     ANIM_AlbinoDino_Idle,
+    STATUS_KEY_POISON,    ANIM_AlbinoDino_Idle,
+    STATUS_KEY_STOP,      ANIM_AlbinoDino_Still,
+    STATUS_KEY_STATIC,    ANIM_AlbinoDino_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_AlbinoDino_Still,
+    STATUS_KEY_DIZZY,     ANIM_AlbinoDino_Still,
+    STATUS_KEY_FEAR,      ANIM_AlbinoDino_Still,
     STATUS_END,
 };
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 4,
-    ELEMENT_FIRE, 99,
+    ELEMENT_NORMAL,   4,
+    ELEMENT_FIRE,    99,
     ELEMENT_END,
 };
 
 s32 N(StatusTable)[] = {
-    STATUS_NORMAL, 0,
-    STATUS_DEFAULT, 0,
-    STATUS_SLEEP, 0,
-    STATUS_POISON, 0,
-    STATUS_FROZEN, 0,
-    STATUS_DIZZY, 0,
-    STATUS_FEAR, 0,
-    STATUS_STATIC, 0,
-    STATUS_PARALYZE, 0,
-    STATUS_SHRINK, 75,
-    STATUS_STOP, 0,
-    STATUS_DEFAULT_TURN_MOD, 0,
-    STATUS_SLEEP_TURN_MOD, -1,
-    STATUS_POISON_TURN_MOD, 0,
-    STATUS_FROZEN_TURN_MOD, 0,
-    STATUS_DIZZY_TURN_MOD, -1,
-    STATUS_FEAR_TURN_MOD, 0,
-    STATUS_STATIC_TURN_MOD, 0,
-    STATUS_PARALYZE_TURN_MOD, 0,
-    STATUS_SHRINK_TURN_MOD, 0,
-    STATUS_STOP_TURN_MOD, 0,
+    STATUS_KEY_NORMAL,              0,
+    STATUS_KEY_DEFAULT,             0,
+    STATUS_KEY_SLEEP,               0,
+    STATUS_KEY_POISON,              0,
+    STATUS_KEY_FROZEN,              0,
+    STATUS_KEY_DIZZY,               0,
+    STATUS_KEY_FEAR,                0,
+    STATUS_KEY_STATIC,              0,
+    STATUS_KEY_PARALYZE,            0,
+    STATUS_KEY_SHRINK,             75,
+    STATUS_KEY_STOP,                0,
+    STATUS_TURN_MOD_DEFAULT,        0,
+    STATUS_TURN_MOD_SLEEP,         -1,
+    STATUS_TURN_MOD_POISON,         0,
+    STATUS_TURN_MOD_FROZEN,         0,
+    STATUS_TURN_MOD_DIZZY,         -1,
+    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_STATIC,         0,
+    STATUS_TURN_MOD_PARALYZE,       0,
+    STATUS_TURN_MOD_SHRINK,         0,
+    STATUS_TURN_MOD_STOP,           0,
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -9, 46 },
         .opacity = 255,
@@ -75,8 +79,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_ALBINO_DINO,
     .level = 23,
     .maxHP = 8,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 40,
@@ -88,9 +92,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 100,
     .coinReward = 1,
     .size = { 64, 56 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -22, 24 },
-    .statusMessageOffset = { 11, 40 },
+    .statusTextOffset = { 11, 40 },
 };
 
 EvtScript N(init) = {
@@ -107,11 +111,11 @@ EvtScript N(idle) = {
 };
 
 EvtScript N(returnHome) = {
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_AlbinoDino_Run)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_AlbinoDino_Run)
     EVT_CALL(SetGoalToHome, ACTOR_SELF)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_AlbinoDino_Idle)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_AlbinoDino_Idle)
     EVT_RETURN
     EVT_END
 };
@@ -249,7 +253,7 @@ EvtScript N(takeTurn) = {
             EVT_WAIT(4)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_AlbinoDino_Run)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_AlbinoDino_Run)
     EVT_WAIT(20)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVarF, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVarF)
@@ -270,11 +274,11 @@ EvtScript N(takeTurn) = {
             EVT_END_IF
             EVT_WAIT(40)
             EVT_CALL(YieldTurn)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
             EVT_EXEC_WAIT(N(returnHome))
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
-            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
+            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
@@ -295,7 +299,8 @@ EvtScript N(takeTurn) = {
     EVT_KILL_THREAD(LVar9)
     EVT_WAIT(2)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, STATUS_FLAG_8 | 0x00000010, 4, BS_FLAGS1_SP_EVT_ACTIVE)
+    // invalid status field has 24% chance, but no status and doesn't have STATUS_FLAG_80000000 set
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, 0, 0, 24, 4, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
@@ -306,7 +311,7 @@ EvtScript N(takeTurn) = {
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2FD)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_AlbinoDino_Idle)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_AlbinoDino_Idle)
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 3, EVT_FLOAT(1.0))
             EVT_WAIT(10)
             EVT_CALL(YieldTurn)

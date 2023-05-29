@@ -229,11 +229,11 @@ API_CALLABLE(N(SeagullYawInterp)) {
     f32 lastYaw = evt_get_float_variable(script, LVar7);
     f32 newYaw, deltaYaw;
 
-    if (evt_get_variable(script, LocalFlag(0))) {
+    if (evt_get_variable(script, LFlag0)) {
         evt_set_float_variable(script, LVar6, 0.0f);
         evt_set_float_variable(script, LVar7, 0.0f);
-        evt_set_variable(script, LocalFlag(0), 0);
-        evt_set_variable(script, LocalFlag(1), 1);
+        evt_set_variable(script, LFlag0, FALSE);
+        evt_set_variable(script, LFlag1, TRUE);
         return ApiStatus_DONE2;
     }
 
@@ -241,11 +241,11 @@ API_CALLABLE(N(SeagullYawInterp)) {
         return ApiStatus_DONE2;
     }
 
-    if (evt_get_variable(script, LocalFlag(1))) {
+    if (evt_get_variable(script, LFlag1)) {
         newYaw = atan2(-x1, y1, -x2, y2);
         evt_set_float_variable(script, LVar6, newYaw);
         evt_set_float_variable(script, LVar7, newYaw);
-        evt_set_variable(script, LocalFlag(1), 0);
+        evt_set_variable(script, LFlag1, FALSE);
         return ApiStatus_DONE2;
     }
 
@@ -362,8 +362,8 @@ Vec3f N(FlightPath)[] = {
 EvtScript N(EVS_FlyingGull) = {
     EVT_SET_GROUP(EVT_GROUP_00)
     EVT_CALL(CloneModel, MODEL_hontai, CLONED_MODEL_GULL)
-    EVT_SET(LocalFlag(0), TRUE)
-    EVT_SET(LocalFlag(1), FALSE)
+    EVT_SET(LFlag0, TRUE)
+    EVT_SET(LFlag1, FALSE)
     EVT_SETF(LVar7, 0)
     EVT_LABEL(10)
         EVT_CALL(LoadPath, 500, EVT_PTR(N(FlightPath)), ARRAY_COUNT(N(FlightPath)), EASING_LINEAR)
@@ -391,8 +391,8 @@ EvtScript N(EVS_FlyingGull) = {
 EvtScript N(EVS_UnusedGull) = {
     EVT_CALL(CloneModel, MODEL_hontai, LVar0)
     EVT_SET(LVarF, LVar0)
-    EVT_SET(LocalFlag(0), TRUE)
-    EVT_SET(LocalFlag(1), FALSE)
+    EVT_SET(LFlag0, TRUE)
+    EVT_SET(LFlag1, FALSE)
     EVT_SETF(LVar7, 0)
     EVT_SET(LVar8, 0)
     EVT_SET(LVar9, 0)

@@ -160,7 +160,7 @@ EvtScript N(EVS_NpcIdle_StoneChomp) = {
     EVT_CALL(N(DestroyAmbushWorker))
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
     EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_StoneChomp_Anim04)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_StoneChomp_Bite)
     EVT_WAIT(18)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
     EVT_CALL(EnableNpcShadow, NPC_SELF, TRUE)

@@ -27,7 +27,7 @@ AnimID N(ExtraAnims_HammerBros)[] = {
 EvtScript N(EVS_NpcInteract_HammerBros_01) = {
     EVT_IF_EQ(GF_KKJ16_Gift_ShootingStar, FALSE)
         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 16, MSG_Peach_013A)
-        EVT_CALL(ShowGotItem, ITEM_SHOOTING_STAR, TRUE, 2)
+        EVT_CALL(ShowGotItem, ITEM_SHOOTING_STAR, TRUE, ITEM_PICKUP_FLAG_NO_ANIMS)
         EVT_SET(GF_KKJ16_Gift_ShootingStar, TRUE)
     EVT_ELSE
         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 16, MSG_Peach_013B)

@@ -2,7 +2,7 @@
 #include "battle/battle.h"
 #include "mapfs/jan_bt01_shape.h"
 
-#include "jan_BeachEffects.inc.c"
+#include "lib/BeachEffects.inc.c"
 
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)

@@ -1,4 +1,5 @@
 #include "flo_00.h"
+#include "sprite/player.h"
 
 #define BEANSTALK_BASE_X -83
 #define BEANSTALK_BASE_Z  87
@@ -47,16 +48,15 @@ API_CALLABLE(N(PartnerRideBeanstalk)) {
 
 #include "common/CosInterpMinMax.inc.c"
 
-#include "world/common/todo/SyncStatusMenu.inc.c"
-#include "sprite/player.h"
+#include "world/common/todo/SyncStatusBar.inc.c"
 
-API_CALLABLE(N(DisableStatusMenu)) {
-    increment_status_menu_disabled();
+API_CALLABLE(N(DisableStatusBar)) {
+    increment_status_bar_disabled();
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(EnableStatusMenu)) {
-    decrement_status_menu_disabled();
+API_CALLABLE(N(EnableWorldStatusBar)) {
+    decrement_status_bar_disabled();
     return ApiStatus_DONE2;
 }
 
@@ -556,7 +556,7 @@ EvtScript N(EVS_BeanPatch_ItemPrompt) = {
                 EVT_CALL(SetPlayerAnimation, ANIM_MarioW1_PlaceItem)
                 EVT_WAIT(5)
                 EVT_CALL(RemoveKeyItemAt, LVar1)
-                EVT_CALL(N(SyncStatusMenu))
+                EVT_CALL(N(SyncStatusBar))
                 EVT_CALL(MakeItemEntity, ITEM_MIRACLE_WATER, BEANSTALK_BASE_X, 0, BEANSTALK_BASE_Z, ITEM_SPAWN_MODE_DECORATION, 0)
                 EVT_SET(MV_BeanstalkItemEntity, LVar0)
                 EVT_CALL(SetPlayerAnimation, ANIM_Mario1_Still)
@@ -604,9 +604,9 @@ EvtScript N(EVS_BeanPatch_TryInteract) = {
             EVT_RETURN
         EVT_END_IF
     EVT_END_IF
-    EVT_CALL(N(DisableStatusMenu))
+    EVT_CALL(N(DisableStatusBar))
     EVT_EXEC_WAIT(N(EVS_BeanPatch_ItemPrompt))
-    EVT_CALL(N(EnableStatusMenu))
+    EVT_CALL(N(EnableWorldStatusBar))
     EVT_RETURN
     EVT_END
 };

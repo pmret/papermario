@@ -12,40 +12,44 @@ extern EvtScript N(handleEvent);
 
 extern s32 N(IdleAnimations)[];
 
+enum N(ActorPartIDs) {
+    PRT_MAIN            = 1,
+};
+
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
 s32 N(StatusTable)[] = {
-    STATUS_NORMAL, 0,
-    STATUS_DEFAULT, 0,
-    STATUS_SLEEP, 60,
-    STATUS_POISON, 60,
-    STATUS_FROZEN, 0,
-    STATUS_DIZZY, 100,
-    STATUS_FEAR, 0,
-    STATUS_STATIC, 80,
-    STATUS_PARALYZE, 80,
-    STATUS_SHRINK, 75,
-    STATUS_STOP, 85,
-    STATUS_DEFAULT_TURN_MOD, 0,
-    STATUS_SLEEP_TURN_MOD, 0,
-    STATUS_POISON_TURN_MOD, 0,
-    STATUS_FROZEN_TURN_MOD, 0,
-    STATUS_DIZZY_TURN_MOD, 1,
-    STATUS_FEAR_TURN_MOD, 0,
-    STATUS_STATIC_TURN_MOD, 0,
-    STATUS_PARALYZE_TURN_MOD, 0,
-    STATUS_SHRINK_TURN_MOD, 0,
-    STATUS_STOP_TURN_MOD, 0,
+    STATUS_KEY_NORMAL,              0,
+    STATUS_KEY_DEFAULT,             0,
+    STATUS_KEY_SLEEP,              60,
+    STATUS_KEY_POISON,             60,
+    STATUS_KEY_FROZEN,              0,
+    STATUS_KEY_DIZZY,             100,
+    STATUS_KEY_FEAR,                0,
+    STATUS_KEY_STATIC,             80,
+    STATUS_KEY_PARALYZE,           80,
+    STATUS_KEY_SHRINK,             75,
+    STATUS_KEY_STOP,               85,
+    STATUS_TURN_MOD_DEFAULT,        0,
+    STATUS_TURN_MOD_SLEEP,          0,
+    STATUS_TURN_MOD_POISON,         0,
+    STATUS_TURN_MOD_FROZEN,         0,
+    STATUS_TURN_MOD_DIZZY,          1,
+    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_STATIC,         0,
+    STATUS_TURN_MOD_PARALYZE,       0,
+    STATUS_TURN_MOD_SHRINK,         0,
+    STATUS_TURN_MOD_STOP,           0,
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 29 },
         .opacity = 255,
@@ -62,8 +66,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_SWOOPULA,
     .level = 22,
     .maxHP = 8,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 30,
@@ -75,34 +79,34 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 80,
     .coinReward = 1,
     .size = { 31, 24 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, -20 },
-    .statusMessageOffset = { 10, -20 },
+    .statusTextOffset = { 10, -20 },
 };
 
 s32 N(IdleAnimations)[] = {
-    STATUS_NORMAL, ANIM_Swooper_Gray_Anim0C,
-    STATUS_STONE, ANIM_Swooper_Gray_Anim0B,
-    STATUS_SLEEP, ANIM_Swooper_Gray_Anim0F,
-    STATUS_POISON, ANIM_Swooper_Gray_Anim0C,
-    STATUS_STOP, ANIM_Swooper_Gray_Anim0B,
-    STATUS_STATIC, ANIM_Swooper_Gray_Anim0C,
-    STATUS_PARALYZE, ANIM_Swooper_Gray_Anim0B,
-    STATUS_DIZZY, ANIM_Swooper_Gray_Anim10,
-    STATUS_FEAR, ANIM_Swooper_Gray_Anim10,
+    STATUS_KEY_NORMAL,    ANIM_Swooper_Gray_Anim0C,
+    STATUS_KEY_STONE,     ANIM_Swooper_Gray_Anim0B,
+    STATUS_KEY_SLEEP,     ANIM_Swooper_Gray_Anim0F,
+    STATUS_KEY_POISON,    ANIM_Swooper_Gray_Anim0C,
+    STATUS_KEY_STOP,      ANIM_Swooper_Gray_Anim0B,
+    STATUS_KEY_STATIC,    ANIM_Swooper_Gray_Anim0C,
+    STATUS_KEY_PARALYZE,  ANIM_Swooper_Gray_Anim0B,
+    STATUS_KEY_DIZZY,     ANIM_Swooper_Gray_Anim10,
+    STATUS_KEY_FEAR,      ANIM_Swooper_Gray_Anim10,
     STATUS_END,
 };
 
 s32 N(IdleAnimations_flying)[] = {
-    STATUS_NORMAL, ANIM_Swooper_Gray_Anim02,
-    STATUS_STONE, ANIM_Swooper_Gray_Anim01,
-    STATUS_SLEEP, ANIM_Swooper_Gray_Anim13,
-    STATUS_POISON, ANIM_Swooper_Gray_Anim02,
-    STATUS_STOP, ANIM_Swooper_Gray_Anim01,
-    STATUS_STATIC, ANIM_Swooper_Gray_Anim02,
-    STATUS_PARALYZE, ANIM_Swooper_Gray_Anim01,
-    STATUS_DIZZY, ANIM_Swooper_Gray_Anim14,
-    STATUS_FEAR, ANIM_Swooper_Gray_Anim14,
+    STATUS_KEY_NORMAL,    ANIM_Swooper_Gray_Anim02,
+    STATUS_KEY_STONE,     ANIM_Swooper_Gray_Anim01,
+    STATUS_KEY_SLEEP,     ANIM_Swooper_Gray_Anim13,
+    STATUS_KEY_POISON,    ANIM_Swooper_Gray_Anim02,
+    STATUS_KEY_STOP,      ANIM_Swooper_Gray_Anim01,
+    STATUS_KEY_STATIC,    ANIM_Swooper_Gray_Anim02,
+    STATUS_KEY_PARALYZE,  ANIM_Swooper_Gray_Anim01,
+    STATUS_KEY_DIZZY,     ANIM_Swooper_Gray_Anim14,
+    STATUS_KEY_FEAR,      ANIM_Swooper_Gray_Anim14,
     STATUS_END,
 };
 
@@ -124,20 +128,20 @@ EvtScript N(returnHome) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, 8, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Gray_Anim02)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Gray_Anim02)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(AddGoalPos, ACTOR_SELF, 0, -24, 0)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, 1, EASING_SIN_OUT)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, TRUE)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations)))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Gray_Anim0C)
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations)))
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Gray_Anim0C)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_ADD(LVar1, 24)
             EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(HPBarToHome, ACTOR_SELF)
         EVT_CASE_EQ(1)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Gray_Anim02)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Gray_Anim02)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, 1, EASING_SIN_OUT)
@@ -234,16 +238,16 @@ EvtScript N(hadleEvent_flying) = {
     EVT_END
 };
 
-#include "common/UnkBattleFunc1.inc.c"
+#include "common/battle/SetAbsoluteStatusOffsets.inc.c"
 
 EvtScript N(knockDown) = {
-    EVT_CALL(func_8027D32C, ACTOR_SELF)
+    EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(GetLastDamage, ACTOR_SELF, LVar0)
     EVT_IF_LE(LVar0, 0)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Gray_Anim02)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Gray_Anim02)
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar1, 24)
@@ -269,10 +273,10 @@ EvtScript N(knockDown) = {
         EVT_CALL(SetGoalToHome, ACTOR_SELF)
         EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, FALSE, FALSE)
     EVT_END_IF
-    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, 1, 0, -10)
-    EVT_CALL(SetTargetOffset, ACTOR_SELF, 1, 0, 22)
-    EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
-    EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_flying)))
+    EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, 0, -10)
+    EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, 0, 22)
+    EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 20)
+    EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_flying)))
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_FLYING, TRUE)
     EVT_CALL(HPBarToHome, ACTOR_SELF)
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
@@ -395,8 +399,8 @@ EvtScript N(handleEvent) = {
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_FIRST_STRIKE)
             EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, FALSE)
-            EVT_CALL(SetIdleAnimations, ACTOR_SELF, 1, EVT_PTR(N(IdleAnimations_flying)))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Gray_Anim02)
+            EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_flying)))
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Gray_Anim02)
             EVT_CALL(SetActorPos, ACTOR_SELF, 20, 0, 0)
             EVT_CALL(HPBarToCurrent, ACTOR_SELF)
         EVT_CASE_EQ(EVENT_END_FIRST_STRIKE)
@@ -428,7 +432,7 @@ EvtScript N(takeTurn_flying) = {
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(GetBattlePhase, LVar0)
     EVT_IF_EQ(LVar0, PHASE_FIRST_STRIKE)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Gray_Anim02)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Gray_Anim02)
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
         EVT_CALL(AddGoalPos, ACTOR_SELF, 50, 10, 0)
         EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
@@ -438,7 +442,7 @@ EvtScript N(takeTurn_flying) = {
         EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
         EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
         EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Gray_Anim02)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Gray_Anim02)
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
         EVT_CALL(AddGoalPos, ACTOR_SELF, 50, 10, 0)
         EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
@@ -452,7 +456,7 @@ EvtScript N(takeTurn_flying) = {
             EVT_WAIT(10)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Gray_Anim06)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Gray_Anim06)
             EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, FALSE, FALSE)
@@ -461,20 +465,20 @@ EvtScript N(takeTurn_flying) = {
             EVT_SUB(LVar0, 50)
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Gray_Anim06)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Gray_Anim06)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, EASING_LINEAR)
-            EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FLOAT(10.0))
+            EVT_CALL(SetAnimationRate, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(10.0))
             EVT_WAIT(15)
-            EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FLOAT(1.0))
+            EVT_CALL(SetAnimationRate, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(1.0))
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_CALL(YieldTurn)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
             EVT_EXEC_WAIT(N(returnHome))
-            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
+            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
@@ -483,24 +487,24 @@ EvtScript N(takeTurn_flying) = {
         EVT_CASE_EQ(HIT_RESULT_HIT_STATIC)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_FLAG(LVar0, STATUS_FLAG_STATIC)
-                EVT_SET(LocalFlag(0), 0)
+                EVT_SET(LFlag0, FALSE)
             EVT_ELSE
-                EVT_SET(LocalFlag(0), 1)
+                EVT_SET(LFlag0, TRUE)
             EVT_END_IF
     EVT_END_SWITCH
     EVT_WAIT(10)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Gray_Anim06)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Gray_Anim06)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, FALSE, FALSE)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, -4, -8, -15)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Gray_Anim06)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Gray_Anim06)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, EASING_LINEAR)
-    EVT_IF_EQ(LocalFlag(0), 1)
+    EVT_IF_EQ(LFlag0, TRUE)
         EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 0, BS_FLAGS1_SP_EVT_ACTIVE)
         EVT_RETURN
     EVT_END_IF
@@ -508,7 +512,7 @@ EvtScript N(takeTurn_flying) = {
     EVT_IF_FLAG(LVar0, STATUS_FLAG_STONE)
         EVT_WAIT(10)
         EVT_LOOP(2)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Gray_Anim02)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Gray_Anim02)
             EVT_WAIT(21)
             EVT_LOOP(2)
                 EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3E0)
@@ -550,7 +554,7 @@ EvtScript N(takeTurn_flying) = {
             EVT_WAIT(30)
         EVT_END_LOOP
     EVT_ELSE
-        EVT_CALL(ShowMessageBox, BTL_MSG_ACTION_TIP_03, 0x7FFF)
+        EVT_CALL(ShowMessageBox, BTL_MSG_ACTION_TIP_03, 0x00007FFF)
         EVT_CALL(ShowActionHud, TRUE)
         EVT_CALL(LoadActionCommand, ACTION_COMMAND_STOP_LEECH)
         EVT_CALL(action_command_stop_leech_init)
@@ -560,17 +564,17 @@ EvtScript N(takeTurn_flying) = {
         EVT_CALL(action_command_stop_leech_start, 0, 0x7FFF, 3)
         EVT_SET(LVarD, 0)
         EVT_LOOP(5)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Gray_Anim02)
-            EVT_SET(LocalFlag(0), 0)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Gray_Anim02)
+            EVT_SET(LFlag0, FALSE)
             EVT_LOOP(21)
                 EVT_CALL(GetActionSuccessCopy, LVar1)
                 EVT_IF_EQ(LVar1, 1)
-                    EVT_SET(LocalFlag(0), 1)
+                    EVT_SET(LFlag0, TRUE)
                     EVT_BREAK_LOOP
                 EVT_END_IF
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_IF_EQ(LocalFlag(0), 1)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
                 EVT_BREAK_LOOP
             EVT_END_IF
@@ -579,244 +583,244 @@ EvtScript N(takeTurn_flying) = {
             EVT_LOOP(2)
                 EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3E0)
                 EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-                EVT_SET(LocalFlag(0), 0)
+                EVT_SET(LFlag0, FALSE)
                 EVT_LOOP(1)
                     EVT_CALL(GetActionSuccessCopy, LVar1)
                     EVT_IF_EQ(LVar1, 1)
-                        EVT_SET(LocalFlag(0), 1)
+                        EVT_SET(LFlag0, TRUE)
                         EVT_BREAK_LOOP
                     EVT_END_IF
                     EVT_WAIT(1)
                 EVT_END_LOOP
-                EVT_IF_EQ(LocalFlag(0), 1)
+                EVT_IF_EQ(LFlag0, TRUE)
                     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
                     EVT_BREAK_LOOP
                 EVT_END_IF
                 EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.9), EVT_FLOAT(1.2), EVT_FLOAT(1.0))
-                EVT_SET(LocalFlag(0), 0)
+                EVT_SET(LFlag0, FALSE)
                 EVT_LOOP(1)
                     EVT_CALL(GetActionSuccessCopy, LVar1)
                     EVT_IF_EQ(LVar1, 1)
-                        EVT_SET(LocalFlag(0), 1)
+                        EVT_SET(LFlag0, TRUE)
                         EVT_BREAK_LOOP
                     EVT_END_IF
                     EVT_WAIT(1)
                 EVT_END_LOOP
-                EVT_IF_EQ(LocalFlag(0), 1)
+                EVT_IF_EQ(LFlag0, TRUE)
                     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
                     EVT_BREAK_LOOP
                 EVT_END_IF
                 EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.8), EVT_FLOAT(1.3), EVT_FLOAT(1.0))
-                EVT_SET(LocalFlag(0), 0)
+                EVT_SET(LFlag0, FALSE)
                 EVT_LOOP(1)
                     EVT_CALL(GetActionSuccessCopy, LVar1)
                     EVT_IF_EQ(LVar1, 1)
-                        EVT_SET(LocalFlag(0), 1)
+                        EVT_SET(LFlag0, TRUE)
                         EVT_BREAK_LOOP
                     EVT_END_IF
                     EVT_WAIT(1)
                 EVT_END_LOOP
-                EVT_IF_EQ(LocalFlag(0), 1)
+                EVT_IF_EQ(LFlag0, TRUE)
                     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
                     EVT_BREAK_LOOP
                 EVT_END_IF
                 EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.7), EVT_FLOAT(1.4), EVT_FLOAT(1.0))
-                EVT_SET(LocalFlag(0), 0)
+                EVT_SET(LFlag0, FALSE)
                 EVT_LOOP(1)
                     EVT_CALL(GetActionSuccessCopy, LVar1)
                     EVT_IF_EQ(LVar1, 1)
-                        EVT_SET(LocalFlag(0), 1)
+                        EVT_SET(LFlag0, TRUE)
                         EVT_BREAK_LOOP
                     EVT_END_IF
                     EVT_WAIT(1)
                 EVT_END_LOOP
-                EVT_IF_EQ(LocalFlag(0), 1)
+                EVT_IF_EQ(LFlag0, TRUE)
                     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
                     EVT_BREAK_LOOP
                 EVT_END_IF
                 EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.7), EVT_FLOAT(1.5), EVT_FLOAT(1.0))
-                EVT_SET(LocalFlag(0), 0)
+                EVT_SET(LFlag0, FALSE)
                 EVT_LOOP(1)
                     EVT_CALL(GetActionSuccessCopy, LVar1)
                     EVT_IF_EQ(LVar1, 1)
-                        EVT_SET(LocalFlag(0), 1)
+                        EVT_SET(LFlag0, TRUE)
                         EVT_BREAK_LOOP
                     EVT_END_IF
                     EVT_WAIT(1)
                 EVT_END_LOOP
-                EVT_IF_EQ(LocalFlag(0), 1)
+                EVT_IF_EQ(LFlag0, TRUE)
                     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
                     EVT_BREAK_LOOP
                 EVT_END_IF
                 EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.7), EVT_FLOAT(1.4), EVT_FLOAT(1.0))
-                EVT_SET(LocalFlag(0), 0)
+                EVT_SET(LFlag0, FALSE)
                 EVT_LOOP(1)
                     EVT_CALL(GetActionSuccessCopy, LVar1)
                     EVT_IF_EQ(LVar1, 1)
-                        EVT_SET(LocalFlag(0), 1)
+                        EVT_SET(LFlag0, TRUE)
                         EVT_BREAK_LOOP
                     EVT_END_IF
                     EVT_WAIT(1)
                 EVT_END_LOOP
-                EVT_IF_EQ(LocalFlag(0), 1)
+                EVT_IF_EQ(LFlag0, TRUE)
                     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
                     EVT_BREAK_LOOP
                 EVT_END_IF
                 EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.8), EVT_FLOAT(1.3), EVT_FLOAT(1.0))
-                EVT_SET(LocalFlag(0), 0)
+                EVT_SET(LFlag0, FALSE)
                 EVT_LOOP(1)
                     EVT_CALL(GetActionSuccessCopy, LVar1)
                     EVT_IF_EQ(LVar1, 1)
-                        EVT_SET(LocalFlag(0), 1)
+                        EVT_SET(LFlag0, TRUE)
                         EVT_BREAK_LOOP
                     EVT_END_IF
                     EVT_WAIT(1)
                 EVT_END_LOOP
-                EVT_IF_EQ(LocalFlag(0), 1)
+                EVT_IF_EQ(LFlag0, TRUE)
                     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
                     EVT_BREAK_LOOP
                 EVT_END_IF
                 EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.9), EVT_FLOAT(1.2), EVT_FLOAT(1.0))
-                EVT_SET(LocalFlag(0), 0)
+                EVT_SET(LFlag0, FALSE)
                 EVT_LOOP(1)
                     EVT_CALL(GetActionSuccessCopy, LVar1)
                     EVT_IF_EQ(LVar1, 1)
-                        EVT_SET(LocalFlag(0), 1)
+                        EVT_SET(LFlag0, TRUE)
                         EVT_BREAK_LOOP
                     EVT_END_IF
                     EVT_WAIT(1)
                 EVT_END_LOOP
-                EVT_IF_EQ(LocalFlag(0), 1)
+                EVT_IF_EQ(LFlag0, TRUE)
                     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
                     EVT_BREAK_LOOP
                 EVT_END_IF
                 EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-                EVT_SET(LocalFlag(0), 0)
+                EVT_SET(LFlag0, FALSE)
                 EVT_LOOP(1)
                     EVT_CALL(GetActionSuccessCopy, LVar1)
                     EVT_IF_EQ(LVar1, 1)
-                        EVT_SET(LocalFlag(0), 1)
+                        EVT_SET(LFlag0, TRUE)
                         EVT_BREAK_LOOP
                     EVT_END_IF
                     EVT_WAIT(1)
                 EVT_END_LOOP
-                EVT_IF_EQ(LocalFlag(0), 1)
+                EVT_IF_EQ(LFlag0, TRUE)
                     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
                     EVT_BREAK_LOOP
                 EVT_END_IF
             EVT_END_LOOP
-            EVT_IF_EQ(LocalFlag(0), 1)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_BREAK_LOOP
             EVT_END_IF
-            EVT_SET(LocalFlag(0), 0)
+            EVT_SET(LFlag0, FALSE)
             EVT_LOOP(5)
                 EVT_CALL(GetActionSuccessCopy, LVar1)
                 EVT_IF_EQ(LVar1, 1)
-                    EVT_SET(LocalFlag(0), 1)
+                    EVT_SET(LFlag0, TRUE)
                     EVT_BREAK_LOOP
                 EVT_END_IF
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_IF_EQ(LocalFlag(0), 1)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3E0)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-            EVT_SET(LocalFlag(0), 0)
+            EVT_SET(LFlag0, FALSE)
             EVT_LOOP(1)
                 EVT_CALL(GetActionSuccessCopy, LVar1)
                 EVT_IF_EQ(LVar1, 1)
-                    EVT_SET(LocalFlag(0), 1)
+                    EVT_SET(LFlag0, TRUE)
                     EVT_BREAK_LOOP
                 EVT_END_IF
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_IF_EQ(LocalFlag(0), 1)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.9), EVT_FLOAT(1.2), EVT_FLOAT(1.0))
-            EVT_SET(LocalFlag(0), 0)
+            EVT_SET(LFlag0, FALSE)
             EVT_LOOP(1)
                 EVT_CALL(GetActionSuccessCopy, LVar1)
                 EVT_IF_EQ(LVar1, 1)
-                    EVT_SET(LocalFlag(0), 1)
+                    EVT_SET(LFlag0, TRUE)
                     EVT_BREAK_LOOP
                 EVT_END_IF
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_IF_EQ(LocalFlag(0), 1)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.8), EVT_FLOAT(1.3), EVT_FLOAT(1.0))
-            EVT_SET(LocalFlag(0), 0)
+            EVT_SET(LFlag0, FALSE)
             EVT_LOOP(1)
                 EVT_CALL(GetActionSuccessCopy, LVar1)
                 EVT_IF_EQ(LVar1, 1)
-                    EVT_SET(LocalFlag(0), 1)
+                    EVT_SET(LFlag0, TRUE)
                     EVT_BREAK_LOOP
                 EVT_END_IF
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_IF_EQ(LocalFlag(0), 1)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.7), EVT_FLOAT(1.4), EVT_FLOAT(1.0))
-            EVT_SET(LocalFlag(0), 0)
+            EVT_SET(LFlag0, FALSE)
             EVT_LOOP(1)
                 EVT_CALL(GetActionSuccessCopy, LVar1)
                 EVT_IF_EQ(LVar1, 1)
-                    EVT_SET(LocalFlag(0), 1)
+                    EVT_SET(LFlag0, TRUE)
                     EVT_BREAK_LOOP
                 EVT_END_IF
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_IF_EQ(LocalFlag(0), 1)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.7), EVT_FLOAT(1.5), EVT_FLOAT(1.0))
-            EVT_SET(LocalFlag(0), 0)
+            EVT_SET(LFlag0, FALSE)
             EVT_LOOP(2)
                 EVT_CALL(GetActionSuccessCopy, LVar1)
                 EVT_IF_EQ(LVar1, 1)
-                    EVT_SET(LocalFlag(0), 1)
+                    EVT_SET(LFlag0, TRUE)
                     EVT_BREAK_LOOP
                 EVT_END_IF
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_IF_EQ(LocalFlag(0), 1)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.6), EVT_FLOAT(1.6), EVT_FLOAT(1.0))
-            EVT_SET(LocalFlag(0), 0)
+            EVT_SET(LFlag0, FALSE)
             EVT_LOOP(10)
                 EVT_CALL(GetActionSuccessCopy, LVar1)
                 EVT_IF_EQ(LVar1, 1)
-                    EVT_SET(LocalFlag(0), 1)
+                    EVT_SET(LFlag0, TRUE)
                     EVT_BREAK_LOOP
                 EVT_END_IF
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_IF_EQ(LocalFlag(0), 1)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-            EVT_SET(LocalFlag(0), 0)
+            EVT_SET(LFlag0, FALSE)
             EVT_LOOP(2)
                 EVT_CALL(GetActionSuccessCopy, LVar1)
                 EVT_IF_EQ(LVar1, 1)
-                    EVT_SET(LocalFlag(0), 1)
+                    EVT_SET(LFlag0, TRUE)
                     EVT_BREAK_LOOP
                 EVT_END_IF
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_IF_EQ(LocalFlag(0), 1)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
                 EVT_BREAK_LOOP
             EVT_END_IF
@@ -852,16 +856,16 @@ EvtScript N(takeTurn_flying) = {
                 EVT_CALL(func_80269470)
                 EVT_BREAK_LOOP
             EVT_END_IF
-            EVT_SET(LocalFlag(0), 0)
+            EVT_SET(LFlag0, FALSE)
             EVT_LOOP(30)
                 EVT_CALL(GetActionSuccessCopy, LVar1)
                 EVT_IF_EQ(LVar1, 1)
-                    EVT_SET(LocalFlag(0), 1)
+                    EVT_SET(LFlag0, TRUE)
                     EVT_BREAK_LOOP
                 EVT_END_IF
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_IF_EQ(LocalFlag(0), 1)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
@@ -872,7 +876,7 @@ EvtScript N(takeTurn_flying) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 50, 10, 0)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Gray_Anim02)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Gray_Anim02)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, EASING_LINEAR)
     EVT_WAIT(10)
     EVT_CALL(YieldTurn)
@@ -895,7 +899,7 @@ EvtScript N(takeTurn) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Gray_Anim02)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Gray_Anim02)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_UPSIDE_DOWN, FALSE)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar1, 24)
@@ -908,25 +912,25 @@ EvtScript N(takeTurn) = {
             EVT_WAIT(10)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Gray_Anim06)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Gray_Anim06)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(AddGoalPos, ACTOR_SELF, -50, 0, 0)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Gray_Anim06)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Gray_Anim06)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -40, EASING_LINEAR)
-            EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FLOAT(10.0))
+            EVT_CALL(SetAnimationRate, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(10.0))
             EVT_WAIT(15)
-            EVT_CALL(SetAnimationRate, ACTOR_SELF, 1, EVT_FLOAT(1.0))
+            EVT_CALL(SetAnimationRate, ACTOR_SELF, PRT_MAIN, EVT_FLOAT(1.0))
             EVT_IF_EQ(LVarA, HIT_RESULT_LUCKY)
                 EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_TRIGGER_LUCKY, 0, 0, 0)
             EVT_END_IF
             EVT_CALL(YieldTurn)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
             EVT_EXEC_WAIT(N(returnHome))
-            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
+            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
@@ -935,21 +939,21 @@ EvtScript N(takeTurn) = {
         EVT_CASE_EQ(HIT_RESULT_HIT_STATIC)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_FLAG(LVar0, STATUS_FLAG_STATIC)
-                EVT_SET(LocalFlag(0), 0)
+                EVT_SET(LFlag0, FALSE)
             EVT_ELSE
-                EVT_SET(LocalFlag(0), 1)
+                EVT_SET(LFlag0, TRUE)
             EVT_END_IF
     EVT_END_SWITCH
     EVT_WAIT(10)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(5.0))
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Gray_Anim06)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Gray_Anim06)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, -4, -8, -15)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Gray_Anim06)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Gray_Anim06)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -40, EASING_LINEAR)
-    EVT_IF_EQ(LocalFlag(0), 1)
+    EVT_IF_EQ(LFlag0, TRUE)
         EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_IGNORE_DEFENSE, 0, 0, 0, BS_FLAGS1_SP_EVT_ACTIVE)
         EVT_RETURN
     EVT_END_IF
@@ -957,7 +961,7 @@ EvtScript N(takeTurn) = {
     EVT_IF_FLAG(LVar0, STATUS_FLAG_STONE)
         EVT_WAIT(10)
         EVT_LOOP(2)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Gray_Anim02)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Gray_Anim02)
             EVT_WAIT(21)
             EVT_LOOP(2)
                 EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3E0)
@@ -1010,17 +1014,17 @@ EvtScript N(takeTurn) = {
         EVT_CALL(action_command_stop_leech_start, 0, 32767, 3)
         EVT_SET(LVarD, 0)
         EVT_LOOP(5)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Gray_Anim02)
-            EVT_SET(LocalFlag(0), 0)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Gray_Anim02)
+            EVT_SET(LFlag0, FALSE)
             EVT_LOOP(21)
                 EVT_CALL(GetActionSuccessCopy, LVar1)
                 EVT_IF_EQ(LVar1, 1)
-                    EVT_SET(LocalFlag(0), 1)
+                    EVT_SET(LFlag0, TRUE)
                     EVT_BREAK_LOOP
                 EVT_END_IF
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_IF_EQ(LocalFlag(0), 1)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
                 EVT_BREAK_LOOP
             EVT_END_IF
@@ -1028,100 +1032,100 @@ EvtScript N(takeTurn) = {
             EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3E0)
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-            EVT_SET(LocalFlag(0), 0)
+            EVT_SET(LFlag0, FALSE)
             EVT_LOOP(1)
                 EVT_CALL(GetActionSuccessCopy, LVar1)
                 EVT_IF_EQ(LVar1, 1)
-                    EVT_SET(LocalFlag(0), 1)
+                    EVT_SET(LFlag0, TRUE)
                     EVT_BREAK_LOOP
                 EVT_END_IF
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_IF_EQ(LocalFlag(0), 1)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.9), EVT_FLOAT(1.2), EVT_FLOAT(1.0))
-            EVT_SET(LocalFlag(0), 0)
+            EVT_SET(LFlag0, FALSE)
             EVT_LOOP(1)
                 EVT_CALL(GetActionSuccessCopy, LVar1)
                 EVT_IF_EQ(LVar1, 1)
-                    EVT_SET(LocalFlag(0), 1)
+                    EVT_SET(LFlag0, TRUE)
                     EVT_BREAK_LOOP
                 EVT_END_IF
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_IF_EQ(LocalFlag(0), 1)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.8), EVT_FLOAT(1.3), EVT_FLOAT(1.0))
-            EVT_SET(LocalFlag(0), 0)
+            EVT_SET(LFlag0, FALSE)
             EVT_LOOP(1)
                 EVT_CALL(GetActionSuccessCopy, LVar1)
                 EVT_IF_EQ(LVar1, 1)
-                    EVT_SET(LocalFlag(0), 1)
+                    EVT_SET(LFlag0, TRUE)
                     EVT_BREAK_LOOP
                 EVT_END_IF
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_IF_EQ(LocalFlag(0), 1)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.7), EVT_FLOAT(1.4), EVT_FLOAT(1.0))
-            EVT_SET(LocalFlag(0), 0)
+            EVT_SET(LFlag0, FALSE)
             EVT_LOOP(1)
                 EVT_CALL(GetActionSuccessCopy, LVar1)
                 EVT_IF_EQ(LVar1, 1)
-                    EVT_SET(LocalFlag(0), 1)
+                    EVT_SET(LFlag0, TRUE)
                     EVT_BREAK_LOOP
                 EVT_END_IF
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_IF_EQ(LocalFlag(0), 1)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.7), EVT_FLOAT(1.5), EVT_FLOAT(1.0))
-            EVT_SET(LocalFlag(0), 0)
+            EVT_SET(LFlag0, FALSE)
             EVT_LOOP(2)
                 EVT_CALL(GetActionSuccessCopy, LVar1)
                 EVT_IF_EQ(LVar1, 1)
-                    EVT_SET(LocalFlag(0), 1)
+                    EVT_SET(LFlag0, TRUE)
                     EVT_BREAK_LOOP
                 EVT_END_IF
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_IF_EQ(LocalFlag(0), 1)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(0.6), EVT_FLOAT(1.6), EVT_FLOAT(1.0))
-            EVT_SET(LocalFlag(0), 0)
+            EVT_SET(LFlag0, FALSE)
             EVT_LOOP(10)
                 EVT_CALL(GetActionSuccessCopy, LVar1)
                 EVT_IF_EQ(LVar1, 1)
-                    EVT_SET(LocalFlag(0), 1)
+                    EVT_SET(LFlag0, TRUE)
                     EVT_BREAK_LOOP
                 EVT_END_IF
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_IF_EQ(LocalFlag(0), 1)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
                 EVT_BREAK_LOOP
             EVT_END_IF
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
-            EVT_SET(LocalFlag(0), 0)
+            EVT_SET(LFlag0, FALSE)
             EVT_LOOP(2)
                 EVT_CALL(GetActionSuccessCopy, LVar1)
                 EVT_IF_EQ(LVar1, 1)
-                    EVT_SET(LocalFlag(0), 1)
+                    EVT_SET(LFlag0, TRUE)
                     EVT_BREAK_LOOP
                 EVT_END_IF
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_IF_EQ(LocalFlag(0), 1)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
                 EVT_BREAK_LOOP
             EVT_END_IF
@@ -1157,16 +1161,16 @@ EvtScript N(takeTurn) = {
                 EVT_CALL(func_80269470)
                 EVT_BREAK_LOOP
             EVT_END_IF
-            EVT_SET(LocalFlag(0), 0)
+            EVT_SET(LFlag0, FALSE)
             EVT_LOOP(35)
                 EVT_CALL(GetActionSuccessCopy, LVar1)
                 EVT_IF_EQ(LVar1, 1)
-                    EVT_SET(LocalFlag(0), 1)
+                    EVT_SET(LFlag0, TRUE)
                     EVT_BREAK_LOOP
                 EVT_END_IF
                 EVT_WAIT(1)
             EVT_END_LOOP
-            EVT_IF_EQ(LocalFlag(0), 1)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_BREAK_LOOP
             EVT_END_IF
         EVT_END_LOOP
@@ -1177,7 +1181,7 @@ EvtScript N(takeTurn) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 50, 10, 0)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Swooper_Gray_Anim02)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Swooper_Gray_Anim02)
     EVT_CALL(FlyToGoal, ACTOR_SELF, 0, -10, EASING_LINEAR)
     EVT_WAIT(10)
     EVT_CALL(YieldTurn)

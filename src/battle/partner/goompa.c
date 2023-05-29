@@ -14,44 +14,48 @@ extern EvtScript N(runAway);
 extern EvtScript N(runAwayFail);
 extern EvtScript N(executeAction);
 
+enum N(ActorPartIDs) {
+    PRT_MAIN            = 1,
+};
+
 s32 N(IdleAnimations)[] = {
-    STATUS_NORMAL, ANIM_Goompa_Walk,
+    STATUS_KEY_NORMAL,    ANIM_Goompa_Walk,
     STATUS_END,
 };
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
 s32 N(StatusTable)[] = {
-    STATUS_NORMAL,            100,
-    STATUS_DEFAULT,           100,
-    STATUS_SLEEP,             100,
-    STATUS_POISON,            100,
-    STATUS_FROZEN,            100,
-    STATUS_DIZZY,             100,
-    STATUS_FEAR,              100,
-    STATUS_STATIC,            100,
-    STATUS_PARALYZE,          100,
-    STATUS_SHRINK,            100,
-    STATUS_STOP,              100,
-    STATUS_DEFAULT_TURN_MOD,  0,
-    STATUS_SLEEP_TURN_MOD,    0,
-    STATUS_POISON_TURN_MOD,   0,
-    STATUS_FROZEN_TURN_MOD,   0,
-    STATUS_DIZZY_TURN_MOD,    0,
-    STATUS_FEAR_TURN_MOD,     0,
-    STATUS_STATIC_TURN_MOD,   0,
-    STATUS_PARALYZE_TURN_MOD, 0,
-    STATUS_SHRINK_TURN_MOD,   0,
-    STATUS_STOP_TURN_MOD,     0,
+    STATUS_KEY_NORMAL,            100,
+    STATUS_KEY_DEFAULT,           100,
+    STATUS_KEY_SLEEP,             100,
+    STATUS_KEY_POISON,            100,
+    STATUS_KEY_FROZEN,            100,
+    STATUS_KEY_DIZZY,             100,
+    STATUS_KEY_FEAR,              100,
+    STATUS_KEY_STATIC,            100,
+    STATUS_KEY_PARALYZE,          100,
+    STATUS_KEY_SHRINK,            100,
+    STATUS_KEY_STOP,              100,
+    STATUS_TURN_MOD_DEFAULT,        0,
+    STATUS_TURN_MOD_SLEEP,          0,
+    STATUS_TURN_MOD_POISON,         0,
+    STATUS_TURN_MOD_FROZEN,         0,
+    STATUS_TURN_MOD_DIZZY,          0,
+    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_STATIC,         0,
+    STATUS_TURN_MOD_PARALYZE,       0,
+    STATUS_TURN_MOD_SHRINK,         0,
+    STATUS_TURN_MOD_STOP,           0,
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
-        .index = 1,
+        .index = PRT_MAIN,
         .opacity = 255,
         .idleAnimations = N(IdleAnimations),
         .defenseTable = N(DefenseTable),
@@ -62,15 +66,15 @@ ActorBlueprint NAMESPACE = {
     .flags = ACTOR_PART_FLAG_200000,
     .type = ACTOR_TYPE_GOOMBARIO,
     .maxHP = 99,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .spinSmashReq = 4,
     .powerBounceChance = 80,
     .size = { 29, 26 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 EvtScript N(init) = {

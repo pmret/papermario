@@ -7,7 +7,7 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(SetSpriteShading, SHADING_KMR_30)
     EVT_SETUP_CAMERA_NO_LEAD()
     EVT_CALL(MakeNpcs, FALSE, EVT_PTR(N(DefaultNPCs)))
-    EVT_CALL(EnableStatusMenu, FALSE)
+    EVT_CALL(EnableWorldStatusBar, FALSE)
     EVT_THREAD
         EVT_CALL(FadeOutMusic, 0, 0x00001388)
         EVT_WAIT(390)

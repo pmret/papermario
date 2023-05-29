@@ -77,19 +77,19 @@ API_CALLABLE(N(SetNpcShadowScale)) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(SetStatusMenuIgnoreChanges)) {
-    status_menu_ignore_changes();
+API_CALLABLE(N(SetStatusBarIgnoreChanges)) {
+    status_bar_ignore_changes();
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(SetStatusMenuRespondToChanges)) {
-    status_menu_respond_to_changes();
+API_CALLABLE(N(SetStatusBarRespondToChanges)) {
+    status_bar_respond_to_changes();
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(ForceStatusMenuToAppear)) {
-    status_menu_respond_to_changes();
-    open_status_menu_long();
+API_CALLABLE(N(ForceStatusBarToAppear)) {
+    status_bar_respond_to_changes();
+    open_status_bar_long();
     return ApiStatus_DONE2;
 }
 
@@ -100,21 +100,21 @@ EvtScript N(EVS_NpcInteract_ChetRippo) = {
     EVT_ELSE
         EVT_SET(LVar0, MSG_MAC_Housing_00A9)
     EVT_END_IF
-    EVT_CALL(N(SetStatusMenuIgnoreChanges))
+    EVT_CALL(N(SetStatusBarIgnoreChanges))
     EVT_CALL(SpeakToPlayer, NPC_ChetRippo, ANIM_ChetRippo_Talk, ANIM_ChetRippo_Idle, 0, LVar0)
     EVT_CALL(ShowCoinCounter, TRUE)
     EVT_CALL(ShowChoice, MSG_Choice_000E)
     EVT_IF_NE(LVar0, 0)
         EVT_CALL(ShowCoinCounter, FALSE)
         EVT_CALL(ContinueSpeech, NPC_ChetRippo, ANIM_ChetRippo_Talk, ANIM_ChetRippo_Idle, 0, MSG_MAC_Housing_00AA)
-        EVT_CALL(N(SetStatusMenuRespondToChanges))
+        EVT_CALL(N(SetStatusBarRespondToChanges))
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(N(GetPlayerCoins))
     EVT_IF_LT(LVar0, 39)
         EVT_CALL(ShowCoinCounter, FALSE)
         EVT_CALL(ContinueSpeech, NPC_ChetRippo, ANIM_ChetRippo_Talk, ANIM_ChetRippo_Idle, 0, MSG_MAC_Housing_00AB)
-        EVT_CALL(N(SetStatusMenuRespondToChanges))
+        EVT_CALL(N(SetStatusBarRespondToChanges))
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(N(GetCurrentStatValues))
@@ -126,7 +126,7 @@ EvtScript N(EVS_NpcInteract_ChetRippo) = {
     EVT_IF_EQ(LVar0, 3)
         EVT_CALL(ShowCoinCounter, FALSE)
         EVT_CALL(ContinueSpeech, NPC_ChetRippo, ANIM_ChetRippo_Talk, ANIM_ChetRippo_Idle, 0, MSG_MAC_Housing_00AD)
-        EVT_CALL(N(SetStatusMenuRespondToChanges))
+        EVT_CALL(N(SetStatusBarRespondToChanges))
         EVT_RETURN
     EVT_END_IF
     EVT_SET(LVar2, 0)
@@ -152,7 +152,7 @@ EvtScript N(EVS_NpcInteract_ChetRippo) = {
     EVT_IF_EQ(LVar2, 1)
         EVT_CALL(ShowCoinCounter, FALSE)
         EVT_CALL(ContinueSpeech, NPC_ChetRippo, ANIM_ChetRippo_Talk, ANIM_ChetRippo_Idle, 0, MSG_MAC_Housing_00B1)
-        EVT_CALL(N(SetStatusMenuRespondToChanges))
+        EVT_CALL(N(SetStatusBarRespondToChanges))
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(AddCoin, -39)
@@ -183,7 +183,7 @@ EvtScript N(EVS_NpcInteract_ChetRippo) = {
     EVT_PLAY_EFFECT(EFFECT_BIG_SMOKE_PUFF, LVar0, LVar1, LVar2, 1, 1, 1, 1)
     EVT_CALL(SetNpcPos, NPC_ChetRippo, NPC_DISPOSE_LOCATION)
     EVT_SET(AF_MAC_32, TRUE)
-    EVT_CALL(N(ForceStatusMenuToAppear))
+    EVT_CALL(N(ForceStatusBarToAppear))
     EVT_RETURN
     EVT_END
 };

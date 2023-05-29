@@ -11,63 +11,63 @@ extern EvtScript N(takeTurn_8022D344);
 extern EvtScript N(idle_8022CCCC);
 extern EvtScript N(handleEvent_8022CE60);
 
+enum N(ActorPartIDs) {
+    PRT_MAIN            = 1,
+};
+
 s32 N(IdleAnimations_8022CB00)[] = {
-    STATUS_NORMAL,    ANIM_PyroGuy_Anim01,
-    STATUS_STONE,     ANIM_PyroGuy_Anim00,
-    STATUS_SLEEP,     ANIM_PyroGuy_Anim07,
-    STATUS_POISON,    ANIM_PyroGuy_Anim01,
-    STATUS_STOP,      ANIM_PyroGuy_Anim00,
-    STATUS_STATIC,    ANIM_PyroGuy_Anim01,
-    STATUS_PARALYZE,  ANIM_PyroGuy_Anim00,
-    STATUS_DIZZY,     ANIM_PyroGuy_Anim08,
-    STATUS_FEAR,      ANIM_PyroGuy_Anim08,
+    STATUS_KEY_NORMAL,    ANIM_PyroGuy_Anim01,
+    STATUS_KEY_STONE,     ANIM_PyroGuy_Anim00,
+    STATUS_KEY_SLEEP,     ANIM_PyroGuy_Anim07,
+    STATUS_KEY_POISON,    ANIM_PyroGuy_Anim01,
+    STATUS_KEY_STOP,      ANIM_PyroGuy_Anim00,
+    STATUS_KEY_STATIC,    ANIM_PyroGuy_Anim01,
+    STATUS_KEY_PARALYZE,  ANIM_PyroGuy_Anim00,
+    STATUS_KEY_DIZZY,     ANIM_PyroGuy_Anim08,
+    STATUS_KEY_FEAR,      ANIM_PyroGuy_Anim08,
     STATUS_END,
 };
 
 s32 N(DefenseTable_8022CB4C)[] = {
-    ELEMENT_NORMAL, 0,
-    ELEMENT_WATER, -2,
-    ELEMENT_ICE, -2,
-    ELEMENT_FIRE, 99,
-    ELEMENT_SHOCK, 0,
-    ELEMENT_SMASH, 0,
-    ELEMENT_BLAST, -1,
+    ELEMENT_NORMAL,   0,
+    ELEMENT_WATER,   -2,
+    ELEMENT_ICE,     -2,
+    ELEMENT_FIRE,    99,
+    ELEMENT_SHOCK,    0,
+    ELEMENT_SMASH,    0,
+    ELEMENT_BLAST,   -1,
     ELEMENT_END,
 };
 
 s32 N(StatusTable_8022CB88)[] = {
-    STATUS_NORMAL, 0,
-    STATUS_DEFAULT, 0,
-    STATUS_SLEEP, 70,
-    STATUS_POISON, 50,
-    STATUS_FROZEN, 0,
-    STATUS_DIZZY, 80,
-    STATUS_FEAR, 100,
-    STATUS_STATIC, 50,
-    STATUS_PARALYZE, 90,
-    STATUS_SHRINK, 75,
-    STATUS_STOP, 90,
-    STATUS_DEFAULT_TURN_MOD, 0,
-    STATUS_SLEEP_TURN_MOD, 0,
-    STATUS_POISON_TURN_MOD, 0,
-    STATUS_FROZEN_TURN_MOD, 0,
-    STATUS_DIZZY_TURN_MOD, 0,
-    STATUS_FEAR_TURN_MOD, 0,
-    STATUS_STATIC_TURN_MOD, 0,
-    STATUS_PARALYZE_TURN_MOD, 1,
-    STATUS_SHRINK_TURN_MOD, 0,
-    STATUS_STOP_TURN_MOD, 0,
+    STATUS_KEY_NORMAL,              0,
+    STATUS_KEY_DEFAULT,             0,
+    STATUS_KEY_SLEEP,              70,
+    STATUS_KEY_POISON,             50,
+    STATUS_KEY_FROZEN,              0,
+    STATUS_KEY_DIZZY,              80,
+    STATUS_KEY_FEAR,              100,
+    STATUS_KEY_STATIC,             50,
+    STATUS_KEY_PARALYZE,           90,
+    STATUS_KEY_SHRINK,             75,
+    STATUS_KEY_STOP,               90,
+    STATUS_TURN_MOD_DEFAULT,        0,
+    STATUS_TURN_MOD_SLEEP,          0,
+    STATUS_TURN_MOD_POISON,         0,
+    STATUS_TURN_MOD_FROZEN,         0,
+    STATUS_TURN_MOD_DIZZY,          0,
+    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_STATIC,         0,
+    STATUS_TURN_MOD_PARALYZE,       1,
+    STATUS_TURN_MOD_SHRINK,         0,
+    STATUS_TURN_MOD_STOP,           0,
     STATUS_END,
 };
 
-enum PartIDs {
-    PT_MAIN     = 1,
-};
-
-ActorPartBlueprint N(PartsTable_8022CC34)[] = {
+ActorPartBlueprint N(ActorParts_8022CC34)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = PT_MAIN,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 24 },
         .opacity = 255,
@@ -84,8 +84,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_PYRO_GUY,
     .level = 15,
     .maxHP = 7,
-    .partCount = ARRAY_COUNT( N(PartsTable_8022CC34)),
-    .partsData = N(PartsTable_8022CC34),
+    .partCount = ARRAY_COUNT( N(ActorParts_8022CC34)),
+    .partsData = N(ActorParts_8022CC34),
     .initScript = &N(init_8022CC80),
     .statusTable = N(StatusTable_8022CB88),
     .escapeChance = 60,
@@ -97,9 +97,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 85,
     .coinReward = 1,
     .size = { 28, 36 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 EvtScript N(init_8022CC80) = {
@@ -110,19 +110,19 @@ EvtScript N(init_8022CC80) = {
     EVT_END
 };
 
-#include "common/UnkBattleFunc1.inc.c"
+#include "common/battle/SetAbsoluteStatusOffsets.inc.c"
 
 EvtScript N(idle_8022CCCC) = {
     EVT_LABEL(0)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
     EVT_IF_FLAG(LVar0, STATUS_FLAG_SLEEP)
-        EVT_CALL(SetTargetOffset, ACTOR_SELF, PT_MAIN, -4, 14)
-        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PT_MAIN, 0, 0)
-        EVT_CALL(N(UnkBattleFunc1), -10, 13, 10, 13)
+        EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -4, 14)
+        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, 0, 0)
+        EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 13, 10, 13)
     EVT_ELSE
-        EVT_CALL(SetTargetOffset, ACTOR_SELF, PT_MAIN, 0, 24)
-        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PT_MAIN, -1, -10)
-        EVT_CALL(N(UnkBattleFunc1), -10, 20, 10, 20)
+        EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, 0, 24)
+        EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, -1, -10)
+        EVT_CALL(N(SetAbsoluteStatusOffsets), -10, 20, 10, 20)
     EVT_END_IF
     EVT_WAIT(1)
     EVT_GOTO(0)
@@ -243,7 +243,7 @@ EvtScript N(takeTurn_8022D344) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PT_MAIN, ANIM_PyroGuy_Anim03)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_PyroGuy_Anim03)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -253,7 +253,7 @@ EvtScript N(takeTurn_8022D344) = {
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK, SOUND_20BA, SOUND_3B4)
     EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_WALK_INCREMENT, 10, 0)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PT_MAIN, ANIM_PyroGuy_Anim04)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_PyroGuy_Anim04)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -267,7 +267,7 @@ EvtScript N(takeTurn_8022D344) = {
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LVarA, LVar0)
             EVT_CALL(SetActorSounds, ACTOR_SELF, ACTOR_SOUND_JUMP, SOUND_2EF, 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PT_MAIN, ANIM_PyroGuy_Anim05)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_PyroGuy_Anim05)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
@@ -287,17 +287,17 @@ EvtScript N(takeTurn_8022D344) = {
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, PT_MAIN, 0, ACTOR_DECORATION_SWEAT)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
             EVT_EXEC_WAIT(N(8022CDDC))
-            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PT_MAIN, 0)
+            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2EF)
-    EVT_CALL(SetAnimation, ACTOR_SELF, PT_MAIN, ANIM_PyroGuy_Anim05)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_PyroGuy_Anim05)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ADD(LVar0, 10)
@@ -318,7 +318,7 @@ EvtScript N(takeTurn_8022D344) = {
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
             EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PT_MAIN, ANIM_PyroGuy_Anim01)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_PyroGuy_Anim01)
             EVT_WAIT(8)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))

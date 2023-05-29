@@ -27,7 +27,7 @@ EvtScript NAMESPACE = {
     EVT_CALL(MoveBattleCamOver, 1)
     EVT_WAIT(3)
     EVT_CALL(SetCamViewport, CAM_BATTLE, 29, 20, 262, 177)
-    EVT_CALL(func_802535B4, 0)
+    EVT_CALL(EnableBattleStatusBar, FALSE)
     EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MENU)
     EVT_CALL(N(SetupDemoPlayerMove))
     EVT_CALL(SetBattleState, BATTLE_STATE_PARTNER_MOVE)

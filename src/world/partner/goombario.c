@@ -284,7 +284,7 @@ API_CALLABLE(N(SelectTattleMsg)) {
             goombario->currentAnim = ANIM_WorldGoombario_Idle;
             goombario->yaw = clamp_angle(gCameras[CAM_DEFAULT].currentYaw + playerStatus->spriteFacingAngle - 90.0f);
             gPartnerStatus.partnerActionState = PARTNER_ACTION_USE;
-            close_status_menu();
+            close_status_bar();
             if (N(HadSpeechPrompt)) {
                 script->VAR_MSG = 0;
                 script->USE_STATE = USE_TATTLE_FORCE_NPC;

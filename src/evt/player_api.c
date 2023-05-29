@@ -42,7 +42,7 @@ ApiStatus DisablePlayerInput(Evt* script, s32 isInitialCall) {
     if (enable) {
         disable_player_input();
         partner_disable_input();
-        close_status_menu();
+        close_status_bar();
         func_800E984C();
         if (playerStatus->actionState == ACTION_STATE_SPIN) {
             playerStatus->animFlags |= PA_FLAG_INTERRUPT_SPIN;

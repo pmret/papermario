@@ -9,62 +9,66 @@ extern EvtScript N(handleEvent);
 
 BSS s32 N(slot_machine_buffer)[10];
 
-s32 N(intTable1)[] = { 0, 1, 0, 2, 0, 2, 0, 2, };
-s32 N(intTable2)[] = { 0, 1, 0, 2, 1, 2, 0, 2, };
-s32 N(intTable3)[] = { 0, 1, 0, 2, 0, 2, 0, 2, };
+enum N(ActorPartIDs) {
+    PRT_MAIN            = 1,
+};
+
+s32 N(intTable1)[] = { 0, 1, 0, 2, 0, 2, 0, 2 };
+s32 N(intTable2)[] = { 0, 1, 0, 2, 1, 2, 0, 2 };
+s32 N(intTable3)[] = { 0, 1, 0, 2, 0, 2, 0, 2 };
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
 s32 N(StatusTable)[] = {
-    STATUS_NORMAL, 0,
-    STATUS_DEFAULT, 0,
-    STATUS_SLEEP, 0,
-    STATUS_POISON, 0,
-    STATUS_FROZEN, 0,
-    STATUS_DIZZY, 0,
-    STATUS_FEAR, 0,
-    STATUS_STATIC, 0,
-    STATUS_PARALYZE, 0,
-    STATUS_SHRINK, 0,
-    STATUS_STOP, 0,
-    STATUS_DEFAULT_TURN_MOD, 0,
-    STATUS_SLEEP_TURN_MOD, 0,
-    STATUS_POISON_TURN_MOD, 0,
-    STATUS_FROZEN_TURN_MOD, 0,
-    STATUS_DIZZY_TURN_MOD, 0,
-    STATUS_FEAR_TURN_MOD, 0,
-    STATUS_STATIC_TURN_MOD, 0,
-    STATUS_PARALYZE_TURN_MOD, 0,
-    STATUS_SHRINK_TURN_MOD, 0,
-    STATUS_STOP_TURN_MOD, 0,
+    STATUS_KEY_NORMAL,              0,
+    STATUS_KEY_DEFAULT,             0,
+    STATUS_KEY_SLEEP,               0,
+    STATUS_KEY_POISON,              0,
+    STATUS_KEY_FROZEN,              0,
+    STATUS_KEY_DIZZY,               0,
+    STATUS_KEY_FEAR,                0,
+    STATUS_KEY_STATIC,              0,
+    STATUS_KEY_PARALYZE,            0,
+    STATUS_KEY_SHRINK,              0,
+    STATUS_KEY_STOP,                0,
+    STATUS_TURN_MOD_DEFAULT,        0,
+    STATUS_TURN_MOD_SLEEP,          0,
+    STATUS_TURN_MOD_POISON,         0,
+    STATUS_TURN_MOD_FROZEN,         0,
+    STATUS_TURN_MOD_DIZZY,          0,
+    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_STATIC,         0,
+    STATUS_TURN_MOD_PARALYZE,       0,
+    STATUS_TURN_MOD_SHRINK,         0,
+    STATUS_TURN_MOD_STOP,           0,
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
         .idleAnimations = NULL,
         .defenseTable = N(DefenseTable),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, 0 },
     },
 };
 
 ActorBlueprint N(slot_machine_stop) = {
-    .flags = ACTOR_FLAG_DISABLED | ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_TARGET_ONLY | ACTOR_FLAG_HIDE_HP_BAR | ACTOR_FLAG_NO_ATTACK,
+    .flags = ACTOR_FLAG_DISABLED | ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_TARGET_ONLY | ACTOR_FLAG_NO_HEALTH_BAR | ACTOR_FLAG_NO_ATTACK,
     .type = ACTOR_TYPE_SLOT_MACHINE_STOP,
     .level = 99,
     .maxHP = 99,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
@@ -76,18 +80,18 @@ ActorBlueprint N(slot_machine_stop) = {
     .powerBounceChance = 0,
     .coinReward = 0,
     .size = { 44, 40 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 ActorBlueprint N(slot_machine_start) = {
-    .flags = ACTOR_FLAG_DISABLED | ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_TARGET_ONLY | ACTOR_FLAG_HIDE_HP_BAR | ACTOR_FLAG_NO_ATTACK,
+    .flags = ACTOR_FLAG_DISABLED | ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_TARGET_ONLY | ACTOR_FLAG_NO_HEALTH_BAR | ACTOR_FLAG_NO_ATTACK,
     .type = ACTOR_TYPE_SLOT_MACHINE_START,
     .level = 99,
     .maxHP = 99,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
@@ -99,9 +103,9 @@ ActorBlueprint N(slot_machine_start) = {
     .powerBounceChance = 0,
     .coinReward = 0,
     .size = { 44, 40 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 API_CALLABLE(N(IsDemoBattle)) {
@@ -289,7 +293,7 @@ EvtScript N(idle) = {
             EVT_END_IF
             EVT_THREAD
 #if !VERSION_PAL
-                EVT_CALL(func_8026BF48, 1)
+                EVT_CALL(FreezeBattleState, TRUE)
 #endif
                 EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
                 EVT_CALL(SetBattleCamTarget, 0, 100, 0)
@@ -339,12 +343,12 @@ EvtScript N(idle) = {
                 EVT_SET(ArrayVar(3), 0)
                 EVT_SET(ArrayVar(4), 0)
 #if !VERSION_PAL
-                EVT_CALL(func_8026BF48, 0)
+                EVT_CALL(FreezeBattleState, FALSE)
 #endif
             EVT_END_THREAD
 #if VERSION_PAL
             EVT_WAIT(75)
-            EVT_CALL(UseBattleCamPreset, 2)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(MoveBattleCamOver, 25)
             EVT_WAIT(30)
 #endif
@@ -352,7 +356,7 @@ EvtScript N(idle) = {
             EVT_BREAK_LOOP
         EVT_END_LOOP
 #if VERSION_PAL
-        EVT_CALL(func_8026BF48, 0)
+        EVT_CALL(FreezeBattleState, FALSE)
 #endif
     EVT_END_IF
     EVT_LABEL(1)
@@ -407,7 +411,7 @@ EvtScript N(handleEvent) = {
                     EVT_CALL(TranslateModel, 29, 0, 0, 0)
                     EVT_IF_EQ(ArrayVar(2), 1)
 #if VERSION_PAL
-                        EVT_CALL(func_8026BF48, 1)
+                        EVT_CALL(FreezeBattleState, TRUE)
 #endif
                         EVT_SET(ArrayVar(8), 100)
                         EVT_SET(ArrayVar(9), 150)
@@ -432,7 +436,7 @@ EvtScript N(handleEvent) = {
                     EVT_CALL(TranslateModel, 29, 0, 0, 0)
                     EVT_IF_EQ(ArrayVar(3), 1)
 #if VERSION_PAL
-                        EVT_CALL(func_8026BF48, 1)
+                        EVT_CALL(FreezeBattleState, TRUE)
 #endif
                         EVT_SET(ArrayVar(8), 150)
                         EVT_SET(ArrayVar(9), 100)
@@ -457,7 +461,7 @@ EvtScript N(handleEvent) = {
                     EVT_CALL(TranslateModel, 29, 0, 0, 0)
                     EVT_IF_EQ(ArrayVar(4), 1)
 #if VERSION_PAL
-                        EVT_CALL(func_8026BF48, 1)
+                        EVT_CALL(FreezeBattleState, TRUE)
 #endif
                         EVT_SET(ArrayVar(8), 200)
                         EVT_SET(ArrayVar(9), 150)

@@ -208,11 +208,11 @@ EvtScript N(EVS_TexPan_Water) = {
 };
 
 AnimID N(ExtraAnims_Tutankoopa)[] = {
-    ANIM_Tutankoopa_Anim02,
-    ANIM_Tutankoopa_Anim06,
-    ANIM_Tutankoopa_Anim09,
-    ANIM_Tutankoopa_Anim01,
-    ANIM_Tutankoopa_Anim04,
+    ANIM_Tutankoopa_Run,
+    ANIM_Tutankoopa_Hurt,
+    ANIM_Tutankoopa_LevitateStill,
+    ANIM_Tutankoopa_Idle,
+    ANIM_Tutankoopa_Lift,
     ANIM_LIST_END
 };
 
@@ -432,42 +432,42 @@ ParadeNpcInfo N(ParadeNpcsTable)[] = {
         .yaw = 270.0f
     },
     [NPC_KoopaBrosRed] {
-        .initialAnim = ANIM_KoopaBros_Red_Anim1A,
+        .initialAnim = ANIM_KoopaBros_Red_ThumbsUp,
         .pos = { -1860.0f, 65.0f, 10.0f },
         .yaw = 270.0f
     },
     [NPC_KoopaBrosBlack] {
-        .initialAnim = ANIM_KoopaBros_Black_Anim1A,
+        .initialAnim = ANIM_KoopaBros_Black_ThumbsUp,
         .pos = { -1840.0f, 65.0f, 10.0f },
         .yaw = 90.0f
     },
     [NPC_KoopaBrosYellow] {
-        .initialAnim = ANIM_KoopaBros_Yellow_Anim1A,
+        .initialAnim = ANIM_KoopaBros_Yellow_ThumbsUp,
         .pos = { -1870.0f, 12.0f, 37.0f },
         .yaw = 270.0f
     },
     [NPC_KoopaBrosGreen] {
-        .initialAnim = ANIM_KoopaBros_Green_Anim1A,
+        .initialAnim = ANIM_KoopaBros_Green_ThumbsUp,
         .pos = { -1830.0f, 12.0f, 37.0f },
         .yaw = 90.0f
     },
     [NPC_Bobomb1] {
-        .initialAnim = ANIM_Bobomb_Anim05,
+        .initialAnim = ANIM_Bobomb_WalkLit,
         .pos = { -1750.0f, 0.0f, 43.0f },
         .yaw = 270.0f
     },
     [NPC_Bobomb2] {
-        .initialAnim = ANIM_Bobomb_Anim05,
+        .initialAnim = ANIM_Bobomb_WalkLit,
         .pos = { -1720.0f, 0.0f, 43.0f },
         .yaw = 270.0f
     },
     [NPC_Bobomb3] {
-        .initialAnim = ANIM_Bobomb_Anim05,
+        .initialAnim = ANIM_Bobomb_WalkLit,
         .pos = { -1690.0f, 0.0f, 43.0f },
         .yaw = 270.0f
     },
     [NPC_Bobomb4] {
-        .initialAnim = ANIM_Bobomb_Anim05,
+        .initialAnim = ANIM_Bobomb_WalkLit,
         .pos = { -1660.0f, 0.0f, 43.0f },
         .yaw = 270.0f
     },
@@ -512,13 +512,13 @@ ParadeNpcInfo N(ParadeNpcsTable)[] = {
         .yaw = 270.0f
     },
     [NPC_Tutankoopa1] {
-        .initialAnim = ANIM_Tutankoopa_Anim02,
+        .initialAnim = ANIM_Tutankoopa_Run,
         .animList = N(ExtraAnims_Tutankoopa),
         .pos = { -1040.0f, 0.0f, 30.0f },
         .yaw = 270.0f
     },
     [NPC_ChainChomp1] {
-        .initialAnim = ANIM_ChainChomp_Anim03,
+        .initialAnim = ANIM_ChainChomp_QuickBite,
         .pos = { -1000.0f, 0.0f, 30.0f },
         .yaw = 270.0f
     },
@@ -549,23 +549,23 @@ ParadeNpcInfo N(ParadeNpcsTable)[] = {
         .yaw = 270.0f
     },
     [NPC_Tutankoopa2] {
-        .initialAnim = ANIM_Tutankoopa_Anim02,
+        .initialAnim = ANIM_Tutankoopa_Run,
         .animList = N(ExtraAnims_Tutankoopa),
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 90.0f
     },
     [NPC_ChainChomp2] {
-        .initialAnim = ANIM_ChainChomp_Anim03,
+        .initialAnim = ANIM_ChainChomp_QuickBite,
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 90.0f
     },
     [NPC_ChainChomp3] {
-        .initialAnim = ANIM_ChainChomp_Anim03,
+        .initialAnim = ANIM_ChainChomp_QuickBite,
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 90.0f
     },
     [NPC_ChainChomp4] {
-        .initialAnim = ANIM_ChainChomp_Anim03,
+        .initialAnim = ANIM_ChainChomp_QuickBite,
         .pos = { 0.0f, -500.0f, 0.0f },
         .yaw = 90.0f
     },

@@ -228,7 +228,7 @@ s32 bActorNames[ACTOR_TYPE_COUNT] = {
     [ACTOR_TYPE_KOOPA_BROS]                  MSG_EnemyName_KoopaBros,
     [ACTOR_TYPE_GREEN_NINJAKOOPA]            MSG_EnemyName_GreenNinjakoopa,
     [ACTOR_TYPE_RED_NINJAKOOPA]              MSG_EnemyName_RedNinjakoopa,
-    [ACTOR_TYPE_BLUE_NINJAKOOPA]             MSG_EnemyName_BlueNinjakoopa,
+    [ACTOR_TYPE_BLACK_NINJAKOOPA]             MSG_EnemyName_BlueNinjakoopa,
     [ACTOR_TYPE_YELLOW_NINJAKOOPA]           MSG_EnemyName_YellowNinjakoopa,
     [ACTOR_TYPE_ELDSTAR]                     MSG_Menus_Party_Goombario,
     [ACTOR_TYPE_BUZZAR]                      MSG_EnemyName_Buzzar,
@@ -1394,7 +1394,7 @@ ActorSounds bActorSoundTable[ACTOR_TYPE_COUNT] = {
         .hurt = NULL,
         .delay = { 30, 30 }
     },
-    [ACTOR_TYPE_BLUE_NINJAKOOPA] = {
+    [ACTOR_TYPE_BLACK_NINJAKOOPA] = {
         .walk = { SOUND_20BA, SOUND_3B4 },
         .fly = { NULL, NULL },
         .jump = SOUND_JUMP_3E2,
@@ -1939,7 +1939,7 @@ s32 bActorTattles[ACTOR_TYPE_COUNT] = {
     [ACTOR_TYPE_KOOPA_BROS] = MSG_EnemyTattle_KoopaBros,
     [ACTOR_TYPE_GREEN_NINJAKOOPA] = MSG_EnemyTattle_GreenNinjakoopa,
     [ACTOR_TYPE_RED_NINJAKOOPA] = MSG_EnemyTattle_RedNinjakoopa,
-    [ACTOR_TYPE_BLUE_NINJAKOOPA] = MSG_EnemyTattle_BlueNinjakoopa,
+    [ACTOR_TYPE_BLACK_NINJAKOOPA] = MSG_EnemyTattle_BlueNinjakoopa,
     [ACTOR_TYPE_YELLOW_NINJAKOOPA] = MSG_EnemyTattle_YellowNinjakoopa,
     [ACTOR_TYPE_ELDSTAR] = NULL,
     [ACTOR_TYPE_BUZZAR] = MSG_EnemyTattle_Buzzar,
@@ -2154,7 +2154,7 @@ ActorOffsets bActorOffsets[ACTOR_TYPE_COUNT] = {
     [ACTOR_TYPE_KOOPA_BROS] = { .tattleCam = { 0, 0, 26 }, .shadow = 26 },
     [ACTOR_TYPE_GREEN_NINJAKOOPA] = { .tattleCam = { 0, 4, 0 }, .shadow = 0 },
     [ACTOR_TYPE_RED_NINJAKOOPA] = { .tattleCam = { 0, 4, 0 }, .shadow = 0 },
-    [ACTOR_TYPE_BLUE_NINJAKOOPA] = { .tattleCam = { 0, 4, 0 }, .shadow = 0 },
+    [ACTOR_TYPE_BLACK_NINJAKOOPA] = { .tattleCam = { 0, 4, 0 }, .shadow = 0 },
     [ACTOR_TYPE_YELLOW_NINJAKOOPA] = { .tattleCam = { 0, 4, 0 }, .shadow = 0 },
     [ACTOR_TYPE_ELDSTAR] = { .tattleCam = { 0, 0, 0 }, .shadow = 0 },
     [ACTOR_TYPE_BUZZAR] = { .tattleCam = { 0, 0, 0 }, .shadow = 0 },
@@ -2212,77 +2212,77 @@ ActorOffsets bActorOffsets[ACTOR_TYPE_COUNT] = {
 };
 
 u32 bMarioIdleAnims[] = {
-    STATUS_NORMAL,          ANIM_Mario1_Walk,
-    STATUS_DANGER,          ANIM_Mario1_TiredIdle,
-    STATUS_STONE,           ANIM_MarioB3_Petrified,
-    STATUS_SLEEP,           ANIM_MarioB1_Sleep,
-    STATUS_DIZZY,           ANIM_MarioB1_Sick,
-    STATUS_STOP,            ANIM_Mario1_Still,
-    STATUS_HUSTLE,          ANIM_Mario1_Run,
-    STATUS_BERSERK,         ANIM_MarioB2_BerserkIdle,
-    STATUS_PARALYZE,        ANIM_MarioB1_Sleep,
-    STATUS_FROZEN,          ANIM_Mario1_Frozen,
-    STATUS_TRANSPARENT,     ANIM_Mario1_Idle,
-    STATUS_TURN_DONE,       ANIM_Mario1_Still,
-    STATUS_13,              ANIM_MarioB2_BerserkStill,
-    STATUS_14,              ANIM_MarioB2_Inert,
-    STATUS_15,              ANIM_MarioB1_SleepStill,
-    STATUS_18,              ANIM_MarioB1_SickStill,
-    STATUS_16,              ANIM_Mario1_TiredStill,
-    STATUS_THINKING,        ANIM_Mario1_Thinking,
-    STATUS_WEARY,           ANIM_Mario1_SpinLand,
+    STATUS_KEY_NORMAL,            ANIM_Mario1_Walk,
+    STATUS_KEY_DANGER,            ANIM_Mario1_TiredIdle,
+    STATUS_KEY_STONE,             ANIM_MarioB3_Petrified,
+    STATUS_KEY_SLEEP,             ANIM_MarioB1_Sleep,
+    STATUS_KEY_DIZZY,             ANIM_MarioB1_Sick,
+    STATUS_KEY_STOP,              ANIM_Mario1_Still,
+    STATUS_KEY_HUSTLE,            ANIM_Mario1_Run,
+    STATUS_KEY_BERSERK,           ANIM_MarioB2_BerserkIdle,
+    STATUS_KEY_PARALYZE,          ANIM_MarioB1_Sleep,
+    STATUS_KEY_FROZEN,            ANIM_Mario1_Frozen,
+    STATUS_KEY_TRANSPARENT,       ANIM_Mario1_Idle,
+    STATUS_KEY_INACTIVE,          ANIM_Mario1_Still,
+    STATUS_KEY_INACTIVE_BERSERK,  ANIM_MarioB2_BerserkStill,
+    STATUS_KEY_14,                ANIM_MarioB2_Inert,
+    STATUS_KEY_INACTIVE_SLEEP,    ANIM_MarioB1_SleepStill,
+    STATUS_KEY_INACTIVE_DIZZY,    ANIM_MarioB1_SickStill,
+    STATUS_KEY_INACTIVE_WEARY,    ANIM_Mario1_TiredStill,
+    STATUS_KEY_THINKING,          ANIM_Mario1_Thinking,
+    STATUS_KEY_WEARY,             ANIM_Mario1_SpinLand,
     STATUS_END
 };
 
 s32 bMarioDefendAnims[] = {
-    STATUS_NORMAL,          ANIM_Mario1_Crouch,
-    STATUS_DANGER,          ANIM_Mario1_TiredIdle,
-    STATUS_STONE,           ANIM_MarioB3_Petrified,
-    STATUS_SLEEP,           ANIM_MarioB1_Sleep,
-    STATUS_DIZZY,           ANIM_MarioB1_Sick,
-    STATUS_STOP,            ANIM_Mario1_Still,
-    STATUS_HUSTLE,          ANIM_Mario1_Crouch,
-    STATUS_BERSERK,         ANIM_Mario1_Crouch,
-    STATUS_PARALYZE,        ANIM_MarioB1_Sleep,
-    STATUS_FROZEN,          ANIM_Mario1_Frozen,
-    STATUS_TRANSPARENT,     ANIM_Mario1_Idle,
-    STATUS_TURN_DONE,       ANIM_Mario1_Still,
-    STATUS_13,              ANIM_MarioB2_BerserkStill,
-    STATUS_14,              ANIM_MarioB2_Inert,
-    STATUS_15,              ANIM_MarioB1_SleepStill,
-    STATUS_18,              ANIM_MarioB1_SickStill,
-    STATUS_16,              ANIM_Mario1_TiredStill,
-    STATUS_THINKING,        ANIM_Mario1_Thinking,
-    STATUS_WEARY,           ANIM_Mario1_SpinLand,
+    STATUS_KEY_NORMAL,            ANIM_Mario1_Crouch,
+    STATUS_KEY_DANGER,            ANIM_Mario1_TiredIdle,
+    STATUS_KEY_STONE,             ANIM_MarioB3_Petrified,
+    STATUS_KEY_SLEEP,             ANIM_MarioB1_Sleep,
+    STATUS_KEY_DIZZY,             ANIM_MarioB1_Sick,
+    STATUS_KEY_STOP,              ANIM_Mario1_Still,
+    STATUS_KEY_HUSTLE,            ANIM_Mario1_Crouch,
+    STATUS_KEY_BERSERK,           ANIM_Mario1_Crouch,
+    STATUS_KEY_PARALYZE,          ANIM_MarioB1_Sleep,
+    STATUS_KEY_FROZEN,            ANIM_Mario1_Frozen,
+    STATUS_KEY_TRANSPARENT,       ANIM_Mario1_Idle,
+    STATUS_KEY_INACTIVE,          ANIM_Mario1_Still,
+    STATUS_KEY_INACTIVE_BERSERK,  ANIM_MarioB2_BerserkStill,
+    STATUS_KEY_14,                ANIM_MarioB2_Inert,
+    STATUS_KEY_INACTIVE_SLEEP,    ANIM_MarioB1_SleepStill,
+    STATUS_KEY_INACTIVE_DIZZY,    ANIM_MarioB1_SickStill,
+    STATUS_KEY_INACTIVE_WEARY,    ANIM_Mario1_TiredStill,
+    STATUS_KEY_THINKING,          ANIM_Mario1_Thinking,
+    STATUS_KEY_WEARY,             ANIM_Mario1_SpinLand,
     STATUS_END
 };
 
 s32 bMarioHideAnims[] = {
-    STATUS_NORMAL,          ANIM_Mario1_Crouch,
-    STATUS_DANGER,          ANIM_Mario1_TiredIdle,
-    STATUS_STONE,           ANIM_MarioB3_Petrified,
-    STATUS_SLEEP,           ANIM_MarioB1_Sleep,
-    STATUS_DIZZY,           ANIM_MarioB1_Sick,
-    STATUS_STOP,            ANIM_Mario1_Still,
-    STATUS_HUSTLE,          ANIM_MarioW2_RideLaki,
-    STATUS_BERSERK,         ANIM_MarioW2_RideLaki,
-    STATUS_PARALYZE,        ANIM_MarioB1_Sleep,
-    STATUS_FROZEN,          ANIM_Mario1_Frozen,
-    STATUS_TRANSPARENT,     ANIM_Mario1_Idle,
-    STATUS_TURN_DONE,       ANIM_Mario1_Crouch,
-    STATUS_13,              ANIM_MarioB2_BerserkStill,
-    STATUS_14,              ANIM_MarioB2_Inert,
-    STATUS_15,              ANIM_MarioB1_SleepStill,
-    STATUS_18,              ANIM_MarioB1_SickStill,
-    STATUS_16,              ANIM_Mario1_TiredStill,
-    STATUS_THINKING,        ANIM_Mario1_Thinking,
-    STATUS_WEARY,           ANIM_Mario1_SpinLand,
+    STATUS_KEY_NORMAL,            ANIM_Mario1_Crouch,
+    STATUS_KEY_DANGER,            ANIM_Mario1_TiredIdle,
+    STATUS_KEY_STONE,             ANIM_MarioB3_Petrified,
+    STATUS_KEY_SLEEP,             ANIM_MarioB1_Sleep,
+    STATUS_KEY_DIZZY,             ANIM_MarioB1_Sick,
+    STATUS_KEY_STOP,              ANIM_Mario1_Still,
+    STATUS_KEY_HUSTLE,            ANIM_MarioW2_RideLaki,
+    STATUS_KEY_BERSERK,           ANIM_MarioW2_RideLaki,
+    STATUS_KEY_PARALYZE,          ANIM_MarioB1_Sleep,
+    STATUS_KEY_FROZEN,            ANIM_Mario1_Frozen,
+    STATUS_KEY_TRANSPARENT,       ANIM_Mario1_Idle,
+    STATUS_KEY_INACTIVE,          ANIM_Mario1_Crouch,
+    STATUS_KEY_INACTIVE_BERSERK,  ANIM_MarioB2_BerserkStill,
+    STATUS_KEY_14,                ANIM_MarioB2_Inert,
+    STATUS_KEY_INACTIVE_SLEEP,    ANIM_MarioB1_SleepStill,
+    STATUS_KEY_INACTIVE_DIZZY,    ANIM_MarioB1_SickStill,
+    STATUS_KEY_INACTIVE_WEARY,    ANIM_Mario1_TiredStill,
+    STATUS_KEY_THINKING,          ANIM_Mario1_Thinking,
+    STATUS_KEY_WEARY,             ANIM_Mario1_SpinLand,
     STATUS_END
 };
 
 s32 bPeachIdleAnims[] = {
-    STATUS_NORMAL,          ANIM_Peach1_Walk,
-    STATUS_TURN_DONE,       ANIM_Peach2_Inert,
+    STATUS_KEY_NORMAL,    ANIM_Peach1_Walk,
+    STATUS_KEY_INACTIVE,  ANIM_Peach2_Inert,
     STATUS_END
 };
 
@@ -2292,27 +2292,27 @@ s32 bMarioDefenseTable[] = {
 };
 
 s32 bPlayerStatusTable[] = {
-    STATUS_NORMAL,          100,
-    STATUS_DEFAULT,         100,
-    STATUS_SLEEP,           100,
-    STATUS_POISON,          100,
-    STATUS_FROZEN,          100,
-    STATUS_DIZZY,           100,
-    STATUS_FEAR,            100,
-    STATUS_STATIC,          100,
-    STATUS_PARALYZE,        100,
-    STATUS_SHRINK,          100,
-    STATUS_STOP,            100,
-    STATUS_DEFAULT_TURN_MOD,  0,
-    STATUS_SLEEP_TURN_MOD,    0,
-    STATUS_POISON_TURN_MOD,   0,
-    STATUS_FROZEN_TURN_MOD,   0,
-    STATUS_DIZZY_TURN_MOD,    0,
-    STATUS_FEAR_TURN_MOD,     0,
-    STATUS_STATIC_TURN_MOD,   0,
-    STATUS_PARALYZE_TURN_MOD, 0,
-    STATUS_SHRINK_TURN_MOD,   0,
-    STATUS_STOP_TURN_MOD,     0,
+    STATUS_KEY_NORMAL,          100,
+    STATUS_KEY_DEFAULT,         100,
+    STATUS_KEY_SLEEP,           100,
+    STATUS_KEY_POISON,          100,
+    STATUS_KEY_FROZEN,          100,
+    STATUS_KEY_DIZZY,           100,
+    STATUS_KEY_FEAR,            100,
+    STATUS_KEY_STATIC,          100,
+    STATUS_KEY_PARALYZE,        100,
+    STATUS_KEY_SHRINK,          100,
+    STATUS_KEY_STOP,            100,
+    STATUS_TURN_MOD_DEFAULT,  0,
+    STATUS_TURN_MOD_SLEEP,    0,
+    STATUS_TURN_MOD_POISON,   0,
+    STATUS_TURN_MOD_FROZEN,   0,
+    STATUS_TURN_MOD_DIZZY,    0,
+    STATUS_TURN_MOD_FEAR,     0,
+    STATUS_TURN_MOD_STATIC,   0,
+    STATUS_TURN_MOD_PARALYZE, 0,
+    STATUS_TURN_MOD_SHRINK,   0,
+    STATUS_TURN_MOD_STOP,     0,
     STATUS_END
 };
 
@@ -2330,9 +2330,9 @@ ActorBlueprint bPlayerActorBlueprint = {
     .powerBounceChance = 80,
 
     .size = { 33, 43 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 30 },
-    .statusMessageOffset = { 10, 30 },
+    .statusTextOffset = { 10, 30 },
 };
 
 ActorPartBlueprint bMarioParts[] = {
@@ -2347,23 +2347,23 @@ ActorPartBlueprint bMarioParts[] = {
 };
 
 Vec3s btl_actorHomePositions[] = {
-    { 5, 0, -20 },
-    { 45, 0, -5 },
-    { 85, 0, 10 },
-    { 125, 0, 25 },
-    { 10, 50, -20 },
-    { 50, 45, -5 },
-    { 90, 50, 10 },
-    { 130, 55, 25 },
-    { 15, 85, -20 },
-    { 55, 80, -5 },
-    { 95, 85, 10 },
-    { 135, 90, 25 },
-    { 15, 125, -20 },
-    { 55, 120, -5 },
-    { 95, 125, 10 },
-    { 135, 130, 25 },
-    { 105, 0, 0 },
+    [BTL_POS_GROUND_A] { 5, 0, -20 },
+    [BTL_POS_GROUND_B] { 45, 0, -5 },
+    [BTL_POS_GROUND_C] { 85, 0, 10 },
+    [BTL_POS_GROUND_D] { 125, 0, 25 },
+    [BTL_POS_AIR_A] { 10, 50, -20 },
+    [BTL_POS_AIR_B] { 50, 45, -5 },
+    [BTL_POS_AIR_C] { 90, 50, 10 },
+    [BTL_POS_AIR_D] { 130, 55, 25 },
+    [BTL_POS_HIGH_A] { 15, 85, -20 },
+    [BTL_POS_HIGH_B] { 55, 80, -5 },
+    [BTL_POS_HIGH_C] { 95, 85, 10 },
+    [BTL_POS_HIGH_D] { 135, 90, 25 },
+    [BTL_POS_TOP_A] { 15, 125, -20 },
+    [BTL_POS_TOP_B] { 55, 120, -5 },
+    [BTL_POS_TOP_C] { 95, 125, 10 },
+    [BTL_POS_TOP_D] { 135, 130, 25 },
+    [BTL_POS_CENTER] { 105, 0, 0 },
 };
 
 // TODO: what is this, and look into warnings that are silenced via casts
@@ -2704,7 +2704,7 @@ extern HudScript HES_TimingBlink;
 
 void btl_bonk_update(void* data);
 void btl_bonk_render(void* data);
-void func_8024F768(void* data);
+void btl_bonk_setup_gfx(void* data);
 void btl_update_message_popup(void* popup);
 void btl_show_message_popup(void* popup);
 
@@ -2786,7 +2786,7 @@ void free_popup(PopupMessage* popup) {
     popup->active = FALSE;
 }
 
-void show_immune_bonk(f32 x, f32 y, f32 z, s32 numMessages, s32 arg4, s32 arg5) {
+void show_immune_bonk(f32 x, f32 y, f32 z, s32 numStars, s32 arg4, s32 arg5) {
     BattleStatus* battleStatus = &gBattleStatus;
     PopupMessage* popup;
     Message* message;
@@ -2807,8 +2807,8 @@ void show_immune_bonk(f32 x, f32 y, f32 z, s32 numMessages, s32 arg4, s32 arg5) 
     baseScale = 1.0f;
     cond = FALSE;
     var_f20 = 1.0f;
-    if (numMessages < 1) {
-        numMessages = 1;
+    if (numStars < 1) {
+        numStars = 1;
         cond = TRUE;
         baseScale = 0.4f;
         var_f20 = 0.7f;
@@ -2841,15 +2841,15 @@ void show_immune_bonk(f32 x, f32 y, f32 z, s32 numMessages, s32 arg4, s32 arg5) 
         popup->renderUIFunc = NULL;
         popup->messageIndex = 1;
         popup->active |= 0x10;
-        message = popup->message = heap_malloc(numMessages * sizeof(*popup->message));
+        message = popup->message = heap_malloc(numStars * sizeof(*popup->message));
         ASSERT (popup->message != NULL);
 
-        for (i = 0; i < numMessages; i++, message++) {
-            modelScript = &bBonkModelScripts[numMessages];
+        for (i = 0; i < numStars; i++, message++) {
+            modelScript = &bBonkModelScripts[numStars];
             message->unk_00 = TRUE;
-            message->unk_04 = load_entity_model(*modelScript);
-            set_entity_model_flags(message->unk_04, ENTITY_MODEL_FLAG_HIDDEN);
-            bind_entity_model_setupGfx(message->unk_04, message, func_8024F768);
+            message->entityModelIndex = load_entity_model(*modelScript);
+            set_entity_model_flags(message->entityModelIndex, ENTITY_MODEL_FLAG_HIDDEN);
+            bind_entity_model_setupGfx(message->entityModelIndex, message, btl_bonk_setup_gfx);
             message->pos.x = x;
             message->pos.y = y;
             message->pos.z = z;
@@ -2893,7 +2893,7 @@ void btl_bonk_update(void* data) {
 
     for (i = 0; i < popup->messageIndex; i++, message++) {
         if (message->unk_00) {
-            s32 modelIdx = message->unk_04;
+            s32 modelIdx = message->entityModelIndex;
 
             found = TRUE;
             if (message->unk_24 != 0) {
@@ -2961,7 +2961,7 @@ void btl_bonk_render(void* data) {
             if (message->unk_24 != 0) {
                 break;
             } else {
-                s32 modelIdx = message->unk_04;
+                s32 modelIdx = message->entityModelIndex;
 
                 guTranslateF(sp18, message->pos.x, message->pos.y, message->pos.z);
                 guRotateF(mtxRotX, 0.0f, 1.0f, 0.0f, 0.0f);
@@ -2979,7 +2979,7 @@ void btl_bonk_render(void* data) {
     }
 }
 
-void func_8024F768(void* data) {
+void btl_bonk_setup_gfx(void* data) {
     Message* message = data;
     s32 alphaAmt = message->deleteTime;
 
@@ -2989,7 +2989,7 @@ void func_8024F768(void* data) {
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, (alphaAmt * 255) / 10);
 }
 
-void func_8024F7C8(void) {
+void btl_bonk_cleanup(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(popupMessages); i++) {
@@ -3010,7 +3010,7 @@ void func_8024F7C8(void) {
     }
 }
 
-ApiStatus func_8024F84C(Evt* script, s32 isInitialCall) {
+ApiStatus ShowImmuneBonk(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 x = evt_get_variable(script, *args++);
     s32 y = evt_get_variable(script, *args++);
@@ -3023,8 +3023,8 @@ ApiStatus func_8024F84C(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8024F940(Evt* script, s32 isInitialCall) {
-    func_8024F7C8();
+ApiStatus ForceImmuneBonkCleanup(Evt* script, s32 isInitialCall) {
+    btl_bonk_cleanup();
     return ApiStatus_DONE2;
 }
 
@@ -3107,7 +3107,7 @@ void btl_update_message_popup(void* data) {
     BattleStatus* battleStatus = &gBattleStatus;
     s32 shouldDisposeWindow = FALSE;
 
-    s32 temp_a0;
+    s32 actionCommandMode;
 
     switch (popup->messageIndex) {
         case BTL_MSG_MERLEE_ATK_UP:
@@ -3211,9 +3211,9 @@ void btl_update_message_popup(void* data) {
         case BTL_MSG_ACTION_TIP_12:
         case BTL_MSG_ACTION_TIP_13:
         case BTL_MSG_ACTION_TIP_14:
-            temp_a0 = battleStatus->actionCommandMode;
+            actionCommandMode = battleStatus->actionCommandMode;
             D_8029F64A = TRUE;
-            if (temp_a0 == ACTION_COMMAND_MODE_NOT_LEARNED) {
+            if (actionCommandMode == ACTION_COMMAND_MODE_NOT_LEARNED) {
                 D_8029F64A = FALSE;
                 shouldDisposeWindow = TRUE;
                 break;
@@ -3364,7 +3364,7 @@ void btl_update_message_popup(void* data) {
                         set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_SHOW_TRANSPARENT);
                         popup->duration = 0;
                         popup->showMsgState = 2;
-                    } else if (!(gBattleStatus.flags1 & BS_FLAGS1_4000) && (temp_a0 != 2)) {
+                    } else if (!(gBattleStatus.flags1 & BS_FLAGS1_4000) && (actionCommandMode != ACTION_COMMAND_MODE_TUTORIAL)) {
                         set_window_update(WINDOW_ID_BATTLE_POPUP, WINDOW_UPDATE_SHOW_TRANSPARENT);
                         switch (popup->messageIndex) {
                             case BTL_MSG_ACTION_TIP_03:
@@ -3442,7 +3442,7 @@ void btl_update_message_popup(void* data) {
                     }
                     break;
                 case 2:
-                    if ((temp_a0 != popup->showMsgState) || (gBattleStatus.flags1 & BS_FLAGS1_10000)) {
+                    if ((actionCommandMode != popup->showMsgState) || (gBattleStatus.flags1 & BS_FLAGS1_10000)) {
                         s16* duration;
 
                         if (D_8029F64E < 192) {
@@ -3456,7 +3456,7 @@ void btl_update_message_popup(void* data) {
                             }
                         }
 
-                        gWindows[9].pos.y = D_8029F64E + D_8029F650;
+                        gWindows[WINDOW_ID_BATTLE_POPUP].pos.y = D_8029F64E + D_8029F650;
 
                         duration = &popup->duration; // TODO required to match
                         if (*duration != -1) {

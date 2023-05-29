@@ -10,71 +10,75 @@ extern EvtScript N(handleEvent);
 extern EvtScript N(spawnWhackasBump);
 extern EvtScript N(die);
 
+enum N(ActorPartIDs) {
+    PRT_MAIN            = 1,
+};
+
 s32 N(IdleAnimations)[] = {
-    STATUS_NORMAL,    ANIM_Whacka_Idle,
-    STATUS_STONE,     ANIM_Whacka_Still,
-    STATUS_SLEEP,     ANIM_Whacka_Idle,
-    STATUS_POISON,    ANIM_Whacka_Idle,
-    STATUS_STOP,      ANIM_Whacka_Still,
-    STATUS_STATIC,    ANIM_Whacka_Idle,
-    STATUS_PARALYZE,  ANIM_Whacka_Still,
-    STATUS_DIZZY,     ANIM_Whacka_Idle,
-    STATUS_FEAR,      ANIM_Whacka_Idle,
+    STATUS_KEY_NORMAL,    ANIM_Whacka_Idle,
+    STATUS_KEY_STONE,     ANIM_Whacka_Still,
+    STATUS_KEY_SLEEP,     ANIM_Whacka_Idle,
+    STATUS_KEY_POISON,    ANIM_Whacka_Idle,
+    STATUS_KEY_STOP,      ANIM_Whacka_Still,
+    STATUS_KEY_STATIC,    ANIM_Whacka_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_Whacka_Still,
+    STATUS_KEY_DIZZY,     ANIM_Whacka_Idle,
+    STATUS_KEY_FEAR,      ANIM_Whacka_Idle,
     STATUS_END,
 };
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
 s32 N(StatusTable)[] = {
-    STATUS_NORMAL, 0,
-    STATUS_DEFAULT, 0,
-    STATUS_SLEEP, 0,
-    STATUS_POISON, 0,
-    STATUS_FROZEN, 0,
-    STATUS_DIZZY, 0,
-    STATUS_FEAR, 0,
-    STATUS_STATIC, 0,
-    STATUS_PARALYZE, 0,
-    STATUS_SHRINK, 0,
-    STATUS_STOP, 0,
-    STATUS_DEFAULT_TURN_MOD, 0,
-    STATUS_SLEEP_TURN_MOD, 0,
-    STATUS_POISON_TURN_MOD, 0,
-    STATUS_FROZEN_TURN_MOD, 0,
-    STATUS_DIZZY_TURN_MOD, 0,
-    STATUS_FEAR_TURN_MOD, 0,
-    STATUS_STATIC_TURN_MOD, 0,
-    STATUS_PARALYZE_TURN_MOD, 0,
-    STATUS_SHRINK_TURN_MOD, 0,
-    STATUS_STOP_TURN_MOD, 0,
+    STATUS_KEY_NORMAL,              0,
+    STATUS_KEY_DEFAULT,             0,
+    STATUS_KEY_SLEEP,               0,
+    STATUS_KEY_POISON,              0,
+    STATUS_KEY_FROZEN,              0,
+    STATUS_KEY_DIZZY,               0,
+    STATUS_KEY_FEAR,                0,
+    STATUS_KEY_STATIC,              0,
+    STATUS_KEY_PARALYZE,            0,
+    STATUS_KEY_SHRINK,              0,
+    STATUS_KEY_STOP,                0,
+    STATUS_TURN_MOD_DEFAULT,        0,
+    STATUS_TURN_MOD_SLEEP,          0,
+    STATUS_TURN_MOD_POISON,         0,
+    STATUS_TURN_MOD_FROZEN,         0,
+    STATUS_TURN_MOD_DIZZY,          0,
+    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_STATIC,         0,
+    STATUS_TURN_MOD_PARALYZE,       0,
+    STATUS_TURN_MOD_SHRINK,         0,
+    STATUS_TURN_MOD_STOP,           0,
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 30 },
         .opacity = 255,
         .idleAnimations = N(IdleAnimations),
         .defenseTable = N(DefenseTable),
-        .eventFlags = ACTOR_EVENT_FLAG_0,
+        .eventFlags = ACTOR_EVENT_FLAGS_NONE,
         .elementImmunityFlags = 0,
         .projectileTargetOffset = { 0, -5 },
     },
 };
 
 ActorBlueprint NAMESPACE = {
-    .flags = ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_HIDE_HP_BAR,
+    .flags = ACTOR_FLAG_NO_SHADOW | ACTOR_FLAG_NO_HEALTH_BAR,
     .type = ACTOR_TYPE_WHACKA,
     .level = 0,
     .maxHP = 99,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
@@ -86,9 +90,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 50,
     .coinReward = 0,
     .size = { 47, 32 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -20, 40 },
-    .statusMessageOffset = { 10, 30 },
+    .statusTextOffset = { 10, 30 },
 };
 
 API_CALLABLE(N(IsHitEightTimes)) {
@@ -108,7 +112,7 @@ EvtScript N(init) = {
     EVT_CALL(N(IsHitEightTimes))
     EVT_IF_EQ(LVar0, 0)
         EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_DISABLED | ACTOR_FLAG_NO_ATTACK | ACTOR_FLAG_NO_DMG_APPLY, TRUE)
-        EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, ACTOR_PART_FLAG_NO_TARGET, TRUE)
+        EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_NO_TARGET, TRUE)
     EVT_END_IF
     EVT_RETURN
     EVT_END
@@ -287,7 +291,7 @@ EvtScript N(spawnWhackasBump) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2073)
     EVT_THREAD
         EVT_WAIT(15)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Whacka_Idle)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Whacka_Idle)
         EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 5)
         EVT_ADD(LVar1, 20)
@@ -302,13 +306,13 @@ EvtScript N(die) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_BURROW_DIG)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Whacka_Burrow)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Whacka_Burrow)
     EVT_WAIT(40)
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
     EVT_IF_NE(LVar0, 0)
         EVT_CALL(SetBattleFlagBits2, BS_FLAGS2_DROP_WHACKA_BUMP, TRUE)
     EVT_END_IF
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 1, ACTOR_PART_FLAG_NO_TARGET, TRUE)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_NO_TARGET, TRUE)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_DISABLED | ACTOR_FLAG_NO_ATTACK | ACTOR_FLAG_NO_DMG_APPLY, TRUE)
     EVT_CALL(RemoveActor, ACTOR_SELF)
     EVT_RETURN

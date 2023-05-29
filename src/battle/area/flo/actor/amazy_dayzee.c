@@ -12,40 +12,44 @@ extern EvtScript N(idle);
 extern EvtScript N(handleEvent);
 extern s32 N(IdleAnimations)[];
 
+enum N(ActorPartIDs) {
+    PRT_MAIN            = 1,
+};
+
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 1,
+    ELEMENT_NORMAL,   1,
     ELEMENT_END,
 };
 
 s32 N(StatusTable)[] = {
-    STATUS_NORMAL, 0,
-    STATUS_DEFAULT, 0,
-    STATUS_SLEEP, 10,
-    STATUS_POISON, 0,
-    STATUS_FROZEN, 0,
-    STATUS_DIZZY, 10,
-    STATUS_FEAR, 0,
-    STATUS_STATIC, 0,
-    STATUS_PARALYZE, 10,
-    STATUS_SHRINK, 10,
-    STATUS_STOP, 10,
-    STATUS_DEFAULT_TURN_MOD, 0,
-    STATUS_SLEEP_TURN_MOD, -1,
-    STATUS_POISON_TURN_MOD, 0,
-    STATUS_FROZEN_TURN_MOD, 0,
-    STATUS_DIZZY_TURN_MOD, -1,
-    STATUS_FEAR_TURN_MOD, 0,
-    STATUS_STATIC_TURN_MOD, 0,
-    STATUS_PARALYZE_TURN_MOD, -1,
-    STATUS_SHRINK_TURN_MOD, 0,
-    STATUS_STOP_TURN_MOD, -2,
+    STATUS_KEY_NORMAL,              0,
+    STATUS_KEY_DEFAULT,             0,
+    STATUS_KEY_SLEEP,              10,
+    STATUS_KEY_POISON,              0,
+    STATUS_KEY_FROZEN,              0,
+    STATUS_KEY_DIZZY,              10,
+    STATUS_KEY_FEAR,                0,
+    STATUS_KEY_STATIC,              0,
+    STATUS_KEY_PARALYZE,           10,
+    STATUS_KEY_SHRINK,             10,
+    STATUS_KEY_STOP,               10,
+    STATUS_TURN_MOD_DEFAULT,        0,
+    STATUS_TURN_MOD_SLEEP,         -1,
+    STATUS_TURN_MOD_POISON,         0,
+    STATUS_TURN_MOD_FROZEN,         0,
+    STATUS_TURN_MOD_DIZZY,         -1,
+    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_STATIC,         0,
+    STATUS_TURN_MOD_PARALYZE,      -1,
+    STATUS_TURN_MOD_SHRINK,         0,
+    STATUS_TURN_MOD_STOP,          -2,
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -2, 30 },
         .opacity = 255,
@@ -62,8 +66,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_AMAZY_DAYZEE,
     .level = 100,
     .maxHP = 20,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 90,
@@ -75,21 +79,21 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 70,
     .coinReward = 5,
     .size = { 32, 34 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -14, 17 },
-    .statusMessageOffset = { 9, 25 },
+    .statusTextOffset = { 9, 25 },
 };
 
 s32 N(IdleAnimations)[] = {
-    STATUS_NORMAL, ANIM_Dayzee_Amazy_Anim01,
-    STATUS_STONE, ANIM_Dayzee_Amazy_Anim00,
-    STATUS_SLEEP, ANIM_Dayzee_Amazy_Anim0C,
-    STATUS_POISON, ANIM_Dayzee_Amazy_Anim01,
-    STATUS_STOP, ANIM_Dayzee_Amazy_Anim00,
-    STATUS_STATIC, ANIM_Dayzee_Amazy_Anim01,
-    STATUS_PARALYZE, ANIM_Dayzee_Amazy_Anim00,
-    STATUS_DIZZY, ANIM_Dayzee_Amazy_Anim0B,
-    STATUS_FEAR, ANIM_Dayzee_Amazy_Anim0B,
+    STATUS_KEY_NORMAL,    ANIM_Dayzee_Amazy_Anim01,
+    STATUS_KEY_STONE,     ANIM_Dayzee_Amazy_Anim00,
+    STATUS_KEY_SLEEP,     ANIM_Dayzee_Amazy_Anim0C,
+    STATUS_KEY_POISON,    ANIM_Dayzee_Amazy_Anim01,
+    STATUS_KEY_STOP,      ANIM_Dayzee_Amazy_Anim00,
+    STATUS_KEY_STATIC,    ANIM_Dayzee_Amazy_Anim01,
+    STATUS_KEY_PARALYZE,  ANIM_Dayzee_Amazy_Anim00,
+    STATUS_KEY_DIZZY,     ANIM_Dayzee_Amazy_Anim0B,
+    STATUS_KEY_FEAR,      ANIM_Dayzee_Amazy_Anim0B,
     STATUS_END,
 };
 
@@ -205,7 +209,7 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_AirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+            EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
                 EVT_IF_FLAG(LVar0, STATUS_FLAG_SHRINK)
                     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 1, 0)
                 EVT_ELSE
@@ -235,14 +239,14 @@ EvtScript N(attackPainfulSong) = {
         EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
         EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_MINUS_1, BTL_CAM_MODEX_1, FALSE)
         EVT_CALL(MoveBattleCamOver, 70)
-        EVT_SET(LocalFlag(0), 0)
+        EVT_SET(LFlag0, FALSE)
         EVT_LABEL(0)
-        EVT_IF_EQ(LocalFlag(0), 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Dayzee_Amazy_Anim0E)
-            EVT_SET(LocalFlag(0), 1)
+        EVT_IF_EQ(LFlag0, FALSE)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Amazy_Anim0E)
+            EVT_SET(LFlag0, TRUE)
         EVT_ELSE
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Dayzee_Amazy_Anim0F)
-            EVT_SET(LocalFlag(0), 0)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Amazy_Anim0F)
+            EVT_SET(LFlag0, FALSE)
         EVT_END_IF
         EVT_WAIT(1)
         EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.5))
@@ -253,24 +257,24 @@ EvtScript N(attackPainfulSong) = {
         EVT_IF_GT(LVar0, 0)
             EVT_GOTO(0)
         EVT_END_IF
-        EVT_IF_EQ(LocalFlag(0), 0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Dayzee_Amazy_Anim0E)
-            EVT_SET(LocalFlag(0), 1)
+        EVT_IF_EQ(LFlag0, FALSE)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Amazy_Anim0E)
+            EVT_SET(LFlag0, TRUE)
         EVT_ELSE
-            EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Dayzee_Amazy_Anim0F)
-            EVT_SET(LocalFlag(0), 0)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Amazy_Anim0F)
+            EVT_SET(LFlag0, FALSE)
         EVT_END_IF
         EVT_WAIT(1)
         EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(0.5))
         EVT_CALL(SetGoalPos, ACTOR_SELF, -35, 0, 10)
         EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
     EVT_END_IF
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Dayzee_Amazy_Anim01)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Amazy_Anim01)
     EVT_WAIT(10)
     EVT_THREAD
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Dayzee_Amazy_Anim06)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Amazy_Anim06)
         EVT_WAIT(40)
-        EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Dayzee_Amazy_Anim07)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Amazy_Anim07)
     EVT_END_THREAD
     EVT_WAIT(20)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_DAYZEE_SONG)
@@ -284,7 +288,7 @@ EvtScript N(attackPainfulSong) = {
         EVT_PLAY_EFFECT(EFFECT_MUSIC_NOTE, 1, LVar3, LVar1, LVar2, 0)
         EVT_WAIT(10)
     EVT_END_LOOP
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Dayzee_Amazy_Anim01)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Amazy_Anim01)
     EVT_WAIT(10)
     EVT_CALL(EnemyTestTarget, ACTOR_SELF, LVar0, 0, 0, 1, BS_FLAGS1_10)
     EVT_SWITCH(LVar0)
@@ -298,9 +302,9 @@ EvtScript N(attackPainfulSong) = {
             EVT_WAIT(15)
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-            EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SWEAT)
+            EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
             EVT_EXEC_WAIT(N(returnHome))
-            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, 1, 0)
+            EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
@@ -309,7 +313,7 @@ EvtScript N(attackPainfulSong) = {
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_WAIT(2)
-    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_NO_CONTACT, 0, DMG_STATUS_CHANCE(STATUS_FLAG_SLEEP, 3, 15), 20, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVarF, DAMAGE_TYPE_NO_CONTACT, 0, DMG_STATUS_KEY(STATUS_FLAG_SLEEP, 3, 15), 20, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SWITCH(LVarF)
         EVT_CASE_OR_EQ(0)
         EVT_CASE_OR_EQ(2)
@@ -335,7 +339,7 @@ EvtScript N(flee) = {
     EVT_CALL(SetBattleCamTarget, LVar0, LVar1, LVar2)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Dayzee_Amazy_Anim03)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Amazy_Anim03)
     EVT_WAIT(10)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(1.0))
@@ -345,7 +349,7 @@ EvtScript N(flee) = {
     EVT_WAIT(20)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(EnableActorBlur, ACTOR_SELF, 1)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_Dayzee_Amazy_Anim04)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Dayzee_Amazy_Anim04)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(12.0))
     EVT_ADD(LVar0, 200)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)

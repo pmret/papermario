@@ -2,7 +2,7 @@
 #include "effects.h"
 
 EvtScript N(EVS_Scene_MonstarAppears) = {
-    EVT_SET(LocalFlag(0), FALSE)
+    EVT_SET(LFlag0, FALSE)
     EVT_LABEL(0)
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_WAIT(1)
@@ -26,10 +26,10 @@ EvtScript N(EVS_Scene_MonstarAppears) = {
     EVT_CALL(SetPanTarget, CAM_DEFAULT, LVar0, LVar1, LVar2)
     EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
-    EVT_IF_EQ(LocalFlag(0), FALSE)
+    EVT_IF_EQ(LFlag0, FALSE)
         EVT_CALL(SetNpcPos, NPC_Monstar, 615, 85, 0)
         EVT_WAIT(1)
-        EVT_SET(LocalFlag(0), TRUE)
+        EVT_SET(LFlag0, TRUE)
     EVT_END_IF
     EVT_CALL(SpeakToPlayer, NPC_Monstar, ANIM_Monstar_Talk, ANIM_Monstar_Idle1, 256, 50, 100, MSG_CH7_00E1)
     EVT_CALL(SetPlayerPos, 495, 80, 0)
@@ -78,7 +78,7 @@ EvtScript N(EVS_Scene_MonstarAppears) = {
             EVT_GOTO(4)
         EVT_END_IF
         EVT_CALL(SetNpcPos, NPC_Monstar, NPC_DISPOSE_LOCATION)
-        EVT_SET(LocalFlag(0), FALSE)
+        EVT_SET(LFlag0, FALSE)
         EVT_GOTO(0)
     EVT_ELSE
         EVT_CALL(CloseMessage)

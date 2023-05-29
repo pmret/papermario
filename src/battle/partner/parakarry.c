@@ -10,19 +10,6 @@
 
 #define NAMESPACE battle_partner_parakarry
 
-static EffectInstance* airRaidEffect;
-static s32 D_8023BD74_unused;
-static s32 hudMarkers[7];
-static s32 D_8023BD94_unused;
-static s32 hudShimmers[6];
-static s32 D_8023BDB0_unused;
-static s32 hudTarget;
-static s32 hudTargetRotation;
-static s32 shellShotTimer;
-static s32 hudStick;
-static s32 hudStickPosX;
-static s32 hudStickPosY;
-
 extern HudScript HES_AimMarkerA;
 extern HudScript HES_AimMarkerB;
 extern HudScript HES_AimMarkerC;
@@ -52,6 +39,24 @@ extern EvtScript N(skyDive);
 extern EvtScript N(shellShot);
 extern EvtScript N(airLift);
 extern EvtScript N(airRaid);
+
+static EffectInstance* airRaidEffect;
+static s32 D_8023BD74_unused;
+static s32 hudMarkers[7];
+static s32 D_8023BD94_unused;
+static s32 hudShimmers[6];
+static s32 D_8023BDB0_unused;
+static s32 hudTarget;
+static s32 hudTargetRotation;
+static s32 shellShotTimer;
+static s32 hudStick;
+static s32 hudStickPosX;
+static s32 hudStickPosY;
+
+enum N(ActorPartIDs) {
+    PRT_MAIN            = 1,
+    PRT_2               = 2,
+};
 
 API_CALLABLE(N(ShellShotActionCommand)) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -376,7 +381,7 @@ API_CALLABLE(N(AirLiftChance)) {
     s32 airLiftChance = targetActor->actorBlueprint->airLiftChance;
     s32 hpPercentLost = 100 - targetActor->currentHP * 100 / targetActor->maxHP;
 
-    if (targetActor->transparentStatus == STATUS_TRANSPARENT) {
+    if (targetActor->transparentStatus == STATUS_KEY_TRANSPARENT) {
         airLiftChance = 0;
     }
 
@@ -614,50 +619,50 @@ API_CALLABLE(N(GetAirRaidDamage)) {
 }
 
 s32 N(IdleAnimations)[] = {
-    STATUS_NORMAL,      ANIM_BattleParakarry_Walk,
-    STATUS_STONE,       ANIM_BattleParakarry_Still,
-    STATUS_SLEEP,       ANIM_BattleParakarry_Pray,
-    STATUS_POISON,      ANIM_BattleParakarry_Still,
-    STATUS_STOP,        ANIM_BattleParakarry_Still,
-    STATUS_DAZE,        ANIM_BattleParakarry_Injured,
-    STATUS_TURN_DONE,   ANIM_BattleParakarry_Still,
+    STATUS_KEY_NORMAL,    ANIM_BattleParakarry_Walk,
+    STATUS_KEY_STONE,     ANIM_BattleParakarry_Still,
+    STATUS_KEY_SLEEP,     ANIM_BattleParakarry_Pray,
+    STATUS_KEY_POISON,    ANIM_BattleParakarry_Still,
+    STATUS_KEY_STOP,      ANIM_BattleParakarry_Still,
+    STATUS_KEY_DAZE,      ANIM_BattleParakarry_Injured,
+    STATUS_KEY_INACTIVE,  ANIM_BattleParakarry_Still,
     STATUS_END,
 };
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
 s32 N(StatusTable)[] = {
-    STATUS_NORMAL, 100,
-    STATUS_DEFAULT, 100,
-    STATUS_SLEEP, 100,
-    STATUS_POISON, 100,
-    STATUS_FROZEN, 100,
-    STATUS_DIZZY, 100,
-    STATUS_FEAR, 100,
-    STATUS_STATIC, 100,
-    STATUS_PARALYZE, 100,
-    STATUS_SHRINK, 100,
-    STATUS_STOP, 100,
-    STATUS_DEFAULT_TURN_MOD, 0,
-    STATUS_SLEEP_TURN_MOD, 0,
-    STATUS_POISON_TURN_MOD, 0,
-    STATUS_FROZEN_TURN_MOD, 0,
-    STATUS_DIZZY_TURN_MOD, 0,
-    STATUS_FEAR_TURN_MOD, 0,
-    STATUS_STATIC_TURN_MOD, 0,
-    STATUS_PARALYZE_TURN_MOD, 0,
-    STATUS_SHRINK_TURN_MOD, 0,
-    STATUS_STOP_TURN_MOD, 0,
+    STATUS_KEY_NORMAL,            100,
+    STATUS_KEY_DEFAULT,           100,
+    STATUS_KEY_SLEEP,             100,
+    STATUS_KEY_POISON,            100,
+    STATUS_KEY_FROZEN,            100,
+    STATUS_KEY_DIZZY,             100,
+    STATUS_KEY_FEAR,              100,
+    STATUS_KEY_STATIC,            100,
+    STATUS_KEY_PARALYZE,          100,
+    STATUS_KEY_SHRINK,            100,
+    STATUS_KEY_STOP,              100,
+    STATUS_TURN_MOD_DEFAULT,        0,
+    STATUS_TURN_MOD_SLEEP,          0,
+    STATUS_TURN_MOD_POISON,         0,
+    STATUS_TURN_MOD_FROZEN,         0,
+    STATUS_TURN_MOD_DIZZY,          0,
+    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_STATIC,         0,
+    STATUS_TURN_MOD_PARALYZE,       0,
+    STATUS_TURN_MOD_SHRINK,         0,
+    STATUS_TURN_MOD_STOP,           0,
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = 0,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 11, 28 },
         .opacity = 255,
@@ -674,8 +679,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_PARAKARRY,
     .level = 0,
     .maxHP = 99,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
@@ -687,9 +692,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 80,
     .coinReward = 0,
     .size = { 38, 38 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 30 },
-    .statusMessageOffset = { 10, 30 },
+    .statusTextOffset = { 10, 30 },
 };
 
 EvtScript N(init) = {
@@ -924,7 +929,7 @@ EvtScript N(returnHome) = {
     EVT_END
 };
 
-s32 N(actionCommandTable)[] = { 7, 6, 5, 4, 3, 2, 1, 0, };
+s32 N(actionCommandTable)[] = { 7, 6, 5, 4, 3, 2, 1, 0 };
 
 EvtScript N(skyDive) = {
     EVT_CALL(EnableIdleScript, ACTOR_PARTNER, 0)
@@ -1073,7 +1078,7 @@ EvtScript N(shellShot) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
-            EVT_IF_EQ(LocalFlag(0), 1)
+            EVT_IF_EQ(LFlag0, TRUE)
                 EVT_SET_CONST(LVarA, ANIM_BattleParakarry_HurtStill)
             EVT_ELSE
                 EVT_SET_CONST(LVarA, ANIM_BattleParakarry_Think)
@@ -1262,10 +1267,10 @@ EvtScript N(airRaid) = {
     EVT_CALL(GetActionCommandResult, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(99)
-            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, SUPPRESS_EVENT_SPIKY_TOP | SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT | SUPPRESS_EVENT_FLAG_80, 0, LVarF, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40)
+            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENT_SPIKY_TOP | SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT | SUPPRESS_EVENT_FLAG_80, 0, LVarF, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40)
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_110)
         EVT_CASE_DEFAULT
-            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, SUPPRESS_EVENT_SPIKY_TOP | SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT | SUPPRESS_EVENT_FLAG_80, 0, LVarF, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, SUPPRESS_EVENT_SPIKY_TOP | SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT | SUPPRESS_EVENT_FLAG_80, 0, LVarF, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_END_SWITCH
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_0)
     EVT_WAIT(5)

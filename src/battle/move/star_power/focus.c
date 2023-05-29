@@ -289,7 +289,7 @@ EvtScript N(802A23BC) = {
 
 EvtScript N(EVS_UsePower) = {
     EVT_EXEC_WAIT(N(802A1630))
-    EVT_CALL(func_802535B4, 1)
+    EVT_CALL(EnableBattleStatusBar, TRUE)
     EVT_CALL(GetOwnerID, LVarA)
     EVT_IF_EQ(LVarA, 0)
         EVT_CALL(PlaySound, SOUND_2053)
@@ -306,7 +306,7 @@ EvtScript N(EVS_UsePower) = {
                 EVT_CALL(ShowMessageBox, BTL_MSG_STAR_POWER_FILLED, 60)
         EVT_END_SWITCH
         EVT_CALL(WaitForMessageBoxDone)
-        EVT_CALL(func_80276EFC)
+        EVT_CALL(PlayerYieldTurn)
         EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
         EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(8.0))
         EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Run)

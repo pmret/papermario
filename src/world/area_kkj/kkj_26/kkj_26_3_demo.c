@@ -2,7 +2,7 @@
 #include "sprite/player.h"
 
 EvtScript N(EVS_ProvideDemoInputs) = {
-    EVT_CALL(EnableStatusMenu, FALSE)
+    EVT_CALL(EnableWorldStatusBar, FALSE)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 550, 30, -20)
     EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(200.0))
     EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(17.5), EVT_FLOAT(-10.0))

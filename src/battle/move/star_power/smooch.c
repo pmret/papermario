@@ -391,7 +391,7 @@ EvtScript N(EVS_UsePower) = {
     EVT_THREAD
         EVT_CALL(N(UnkBackgroundFunc))
     EVT_END_THREAD
-    EVT_CALL(func_80276EFC)
+    EVT_CALL(PlayerYieldTurn)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_160)
     EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(1.0))
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(1.0))

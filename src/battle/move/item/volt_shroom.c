@@ -10,7 +10,7 @@ API_CALLABLE(N(func_802A123C_71AA2C)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
 
-    inflict_status(player, STATUS_STATIC, script->varTable[0]);
+    inflict_status(player, STATUS_KEY_STATIC, script->varTable[0]);
     player->statusAfflicted = 0;
     return ApiStatus_DONE2;
 }

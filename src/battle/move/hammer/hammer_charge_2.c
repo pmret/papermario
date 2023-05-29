@@ -133,7 +133,7 @@ EvtScript N(EVS_UseMove1_Impl) = {
         EVT_EXEC_WAIT(N(EVS_Hammer_ReturnHome_C))
         EVT_RETURN
     EVT_END_IF
-    EVT_SET(LocalFlag(0), FALSE)
+    EVT_SET(LFlag0, FALSE)
     EVT_CALL(DidActionSucceed, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
@@ -147,7 +147,7 @@ EvtScript N(EVS_UseMove1_Impl) = {
                     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10E)
             EVT_END_SWITCH
             EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, LVarF, 48)
-            EVT_SET(LocalFlag(0), TRUE)
+            EVT_SET(LFlag0, TRUE)
         EVT_CASE_DEFAULT
             EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
             EVT_SWITCH(LVar1)
@@ -159,7 +159,7 @@ EvtScript N(EVS_UseMove1_Impl) = {
                     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10E)
             EVT_END_SWITCH
             EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, LVarE, 32)
-            EVT_SET(LocalFlag(0), FALSE)
+            EVT_SET(LFlag0, FALSE)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_1)

@@ -79,7 +79,7 @@ EvtScript N(EVS_ItemPrompt_Socket1) = {
             EVT_SET(GB_ISK11_ItemSocket1, 0)
             EVT_CALL(RemoveItemEntity, MV_Socket1_ItemEntity)
             EVT_SET(MV_Socket1_ItemEntity, -1)
-            EVT_CALL(ShowGotItem, LVar0, FALSE, 1)
+            EVT_CALL(ShowGotItem, LVar0, FALSE, ITEM_PICKUP_FLAG_NO_SOUND)
         EVT_END_IF
         EVT_CALL(DisablePlayerInput, FALSE)
         EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
@@ -130,7 +130,7 @@ EvtScript N(EVS_ItemPrompt_Socket2) = {
             EVT_SET(GB_ISK11_ItemSocket2, 0)
             EVT_CALL(RemoveItemEntity, MV_Socket2_ItemEntity)
             EVT_SET(MV_Socket2_ItemEntity, -1)
-            EVT_CALL(ShowGotItem, LVar0, FALSE, 1)
+            EVT_CALL(ShowGotItem, LVar0, FALSE, ITEM_PICKUP_FLAG_NO_SOUND)
         EVT_END_IF
         EVT_CALL(DisablePlayerInput, FALSE)
         EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
@@ -181,7 +181,7 @@ EvtScript N(EVS_ItemPrompt_Socket3) = {
             EVT_SET(GB_ISK11_ItemSocket3, 0)
             EVT_CALL(RemoveItemEntity, MV_Socket3_ItemEntity)
             EVT_SET(MV_Socket3_ItemEntity, -1)
-            EVT_CALL(ShowGotItem, LVar0, FALSE, 1)
+            EVT_CALL(ShowGotItem, LVar0, FALSE, ITEM_PICKUP_FLAG_NO_SOUND)
         EVT_END_IF
         EVT_CALL(DisablePlayerInput, FALSE)
         EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
@@ -232,7 +232,7 @@ EvtScript N(EVS_ItemPrompt_Socket4) = {
             EVT_SET(GB_ISK11_ItemSocket4, 0)
             EVT_CALL(RemoveItemEntity, MV_Socket4_ItemEntity)
             EVT_SET(MV_Socket4_ItemEntity, -1)
-            EVT_CALL(ShowGotItem, LVar0, FALSE, 1)
+            EVT_CALL(ShowGotItem, LVar0, FALSE, ITEM_PICKUP_FLAG_NO_SOUND)
         EVT_END_IF
         EVT_CALL(DisablePlayerInput, FALSE)
         EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_NORMAL)
@@ -283,7 +283,7 @@ EvtScript N(EVS_ItemPrompt_Socket5) = {
             EVT_SET(GB_ISK11_ItemSocket5, 0)
             EVT_CALL(RemoveItemEntity, MV_Socket5_ItemEntity)
             EVT_SET(MV_Socket5_ItemEntity, -1)
-            EVT_CALL(ShowGotItem, LVar0, FALSE, 1)
+            EVT_CALL(ShowGotItem, LVar0, FALSE, ITEM_PICKUP_FLAG_NO_SOUND)
         EVT_END_IF
         EVT_CALL(DisablePlayerInput, FALSE)
         EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_NORMAL)

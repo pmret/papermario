@@ -732,7 +732,7 @@ EvtScript N(D_80249E84_85BFF4) = {
             EVT_END_IF
             EVT_IF_EQ(LVar5, 2)
                 EVT_IF_EQ(LVarA, 2)
-                    EVT_SET(LocalFlag(0), TRUE)
+                    EVT_SET(LFlag0, TRUE)
                     EVT_RETURN
                 EVT_ELSE
                     EVT_CALL(DisablePlayerInput, TRUE)
@@ -760,14 +760,14 @@ EvtScript N(D_80249E84_85BFF4) = {
                 EVT_END_IF
             EVT_END_IF
             EVT_IF_EQ(LVar1, ACTION_STATE_SPIN_POUND)
-                EVT_SET(LocalFlag(0), TRUE)
+                EVT_SET(LFlag0, TRUE)
                 EVT_RETURN
             EVT_END_IF
         EVT_END_IF
         EVT_CALL(N(func_802430B4_855224), LVar2)
         EVT_IF_EQ(LVar2, 29)
             EVT_IF_EQ(LVar0, 29)
-                EVT_SET(LocalFlag(0), TRUE)
+                EVT_SET(LFlag0, TRUE)
             EVT_END_IF
             EVT_RETURN
         EVT_END_IF
@@ -786,14 +786,14 @@ EvtScript N(D_8024A1F8_85C368) = {
     EVT_WAIT(10)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_EXEC_GET_TID(N(D_802486EC_85A85C), LVarA)
-    EVT_IF_EQ(LocalFlag(0), TRUE)
+    EVT_IF_EQ(LFlag0, TRUE)
         EVT_EXEC(N(D_80249C34_85BDA4))
     EVT_END_IF
     EVT_WAIT(10)
     EVT_CALL(SetNpcAnimation, NPC_Whale, ANIM_Kolorado_Run)
     EVT_WAIT(20)
     EVT_CALL(SpeakToPlayer, NPC_Whale, ANIM_Kolorado_Run, ANIM_Kolorado_Run, 5, MSG_MAC_Port_0090)
-    EVT_IF_EQ(LocalFlag(0), FALSE)
+    EVT_IF_EQ(LFlag0, FALSE)
         EVT_EXEC(N(D_80249D80_85BEF0))
     EVT_END_IF
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_CLEAR_BITS, COLLIDER_kujira, COLLIDER_FLAGS_UPPER_MASK)

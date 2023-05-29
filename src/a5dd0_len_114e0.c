@@ -1052,7 +1052,7 @@ s32 mdl_renderTaskBasePriorities[RENDER_MODE_COUNT] = {
     [RENDER_MODE_CLOUD_NO_ZB]               =  700000,
 };
 
-s8 D_8014C248[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, };
+s8 D_8014C248[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 
 // BSS
 extern ModelCustomGfxBuilderList* gCurrentCustomModelGfxBuildersPtr;

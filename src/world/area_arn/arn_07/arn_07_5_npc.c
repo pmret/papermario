@@ -12,7 +12,7 @@ API_CALLABLE(N(UpgradeStarPowerCh3)) {
     set_max_SP(3);
     gPlayerData.curHP = gPlayerData.curMaxHP;
     gPlayerData.curFP = gPlayerData.curMaxFP;
-    sync_status_menu();
+    sync_status_bar();
     return ApiStatus_DONE2;
 }
 

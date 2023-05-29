@@ -77,7 +77,7 @@ API_CALLABLE(func_802A1518_78BB18) {
 API_CALLABLE(func_802A17D4_78BDD4) {
     Actor* actor = gBattleStatus.playerActor;
 
-    if (actor->debuff != STATUS_END) {
+    if (actor->debuff != 0) {
         actor->debuffDuration = 0;
         actor->debuff = 0;
         remove_status_debuff(actor->hudElementDataIndex);
@@ -390,7 +390,7 @@ EvtScript N(EVS_UsePower) = {
     EVT_CALL(N(AddFP), 5)
     EVT_CALL(func_802A17D4_78BDD4)
     EVT_WAIT(30)
-    EVT_CALL(func_80276EFC)
+    EVT_CALL(PlayerYieldTurn)
     EVT_EXEC_WAIT(N(802A27FC))
     EVT_RETURN
     EVT_END

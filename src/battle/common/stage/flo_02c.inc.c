@@ -3,7 +3,7 @@
 #include "mapfs/flo_bt02_shape.h"
 #include "effects.h"
 
-#include "flo_RandomFlowers.inc.c"
+#include "lib/RandomFlowers.inc.c"
 #include "common/MakeSun.inc.c"
 
 EvtScript N(EVS_PreBattle) = {
