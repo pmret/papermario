@@ -18,6 +18,7 @@ from util.n64.Yay0decompress import Yay0Decompressor
 sys.path.insert(0, str(Path(__file__).parent))
 from sprite_common import AnimComponent, iter_in_groups, read_offset_list
 
+# TODO move into yaml
 PLAYER_PAL_TO_RASTER: Dict[str, int] = {
     "8bit": 0x57C90,
     "BareCake": 0x63F10,
@@ -737,8 +738,10 @@ class NpcSprite:
                     },
                 )
 
-                for cmd in comp.commands:
-                    ET.SubElement(Component, "Command", {"val": f"{cmd:X}"})
+                for anim in comp.animations:
+                    ET.SubElement(
+                        Component, anim.__class__.__name__, anim.get_attributes()
+                    )
 
         xml = ET.ElementTree(SpriteSheet)
 
@@ -802,28 +805,16 @@ class NpcSprite:
 
         animations = []
         animation_names: List[str] = []
-        for i, Animation in enumerate(SpriteSheet.findall("./AnimationList/Animation")):
-            components = []
+        for Animation in SpriteSheet.findall("./AnimationList/Animation"):
+            comps: List[AnimComponent] = []
+            for comp_xml in Animation:
+                comp: AnimComponent = AnimComponent.from_xml(comp_xml)
+                comps.append(comp)
+            animation_names.append(Animation.attrib["name"])
+            animations.append(comps)
 
-            for ComponentEl in Animation.findall("Component"):
-                x, y, z = ComponentEl.get("xyz", "0,0,0").split(",")
-                x = int(x)
-                y = int(y)
-                z = int(z)
-
-                commands = []
-                for Command in ComponentEl:
-                    commands.append(int(Command.get("val"), base=16))
-
-                comp = AnimComponent(x, y, z, commands)
-
-                components.append(comp)
-
-            animation_names.append(Animation.get("name"))
-            animations.append(components)
-
-            if len(components) > true_max_components:
-                true_max_components = len(components)
+            if len(comps) > true_max_components:
+                true_max_components = len(comps)
 
         max_components = true_max_components
         # assert self.max_components == true_max_components, f"{true_max_components} component(s) used, but SpriteSheet.a = {self.max_components}"

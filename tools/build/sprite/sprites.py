@@ -86,6 +86,7 @@ RASTER_CACHE: Dict[str, CI4Info] = {}
 PALETTE_CACHE: Dict[str, bytes] = {}
 PLAYER_XML_CACHE: Dict[str, ET.Element] = {}
 
+# TODO perhaps encode this better
 SPECIAL_RASTER_BYTES = (
     b"\x80\x30\x02\x10\x00\x00\x02\x00\x00\x00\x00\x01\x00\x10\x00\x00"
 )
@@ -434,114 +435,6 @@ def write_player_sprite_header(
         f.write(f"#endif // {ifdef_name}\n")
 
 
-def npc_sprite_to_bytes(sprite_dir: Path) -> bytes:
-    try:
-        sprite = NpcSprite.from_dir(Path(sprite_dir))
-    except AssertionError as e:
-        print("error:", e)
-        exit(1)
-
-    f = io.BytesIO()
-
-    f.seek(0x10)  # leave space for header
-
-    # leave space for animation offset list
-    f.seek((len(sprite.animations) + 1) * 4, 1)
-    animation_offsets = []
-
-    # write animations
-    for i, components in enumerate(sprite.animations):
-        animation_offsets.append(f.tell())
-
-        # leave space for component offset list
-        f.seek((len(components) + 1) * 4, 1)
-        component_offsets = []
-
-        for comp in components:
-            offset = f.tell()
-
-            for command in comp.commands:
-                f.write(command.to_bytes(2, byteorder="big"))
-
-            f.seek(f.tell() % 4, 1)
-            component_offsets.append(f.tell())
-
-            f.write(offset.to_bytes(4, byteorder="big"))
-            f.write((len(comp.commands) * 2).to_bytes(2, byteorder="big"))
-            f.write(comp.x.to_bytes(2, byteorder="big", signed=True))
-            f.write(comp.y.to_bytes(2, byteorder="big", signed=True))
-            f.write(comp.z.to_bytes(2, byteorder="big", signed=True))
-
-        next_anim = f.tell()
-
-        # write component offset list
-        f.seek(animation_offsets[i])
-        component_offsets.append(-1)
-        for offset in component_offsets:
-            f.write(offset.to_bytes(4, byteorder="big", signed=True))
-
-        f.seek(next_anim)
-
-    # palettes start 8-byte aligned
-    if (f.tell() & 7) == 4:
-        f.seek(4, 1)
-
-    # write palettes
-    palette_offsets: List[int] = []
-    for i, palette in enumerate(sprite.palettes):
-        palette_offsets.append(f.tell())
-        for rgba in palette:
-            if rgba[3] not in (0, 0xFF):
-                print(
-                    "error: translucent pixels not allowed in palette {sprite.palette_names[i]}"
-                )
-                exit(1)
-
-            color = pack_color(*rgba)
-            f.write(color.to_bytes(2, byteorder="big"))
-
-    # write images/rasters
-    image_offsets = []
-    for image in sprite.images:
-        offset = f.tell()
-
-        for a, b in iter_in_groups(image.raster, 2):
-            byte = (a << 4) | b
-            f.write(byte.to_bytes(1, byteorder="big"))
-
-        image_offsets.append(f.tell())
-
-        f.write(offset.to_bytes(4, byteorder="big"))
-        f.write(bytes([image.width, image.height, image.palette_index, 0xFF]))
-
-    # write image offset list
-    image_offset_list_offset = f.tell()
-    image_offsets.append(-1)
-    for offset in image_offsets:
-        f.write(offset.to_bytes(4, byteorder="big", signed=True))
-
-    # write palette offset list
-    palette_offset_list_offset = f.tell()
-    palette_offsets.append(-1)
-    for offset in palette_offsets:
-        f.write(offset.to_bytes(4, byteorder="big", signed=True))
-
-    # write header
-    f.seek(0)
-    f.write(image_offset_list_offset.to_bytes(4, byteorder="big"))
-    f.write(palette_offset_list_offset.to_bytes(4, byteorder="big"))
-    f.write(sprite.max_components.to_bytes(4, byteorder="big"))
-    f.write(sprite.num_variations.to_bytes(4, byteorder="big"))
-
-    # write animation offset list
-    animation_offsets.append(-1)
-    for offset in animation_offsets:
-        f.write(offset.to_bytes(4, byteorder="big", signed=True))
-
-    f.seek(0)
-    return f.read()
-
-
 def build_player_sprites(sprite_order: List[str], player_sprite_dir: Path) -> bytes:
     sprite_bytes: List[bytes] = []
 
@@ -586,35 +479,15 @@ def build_player_sprites(sprite_order: List[str], player_sprite_dir: Path) -> by
     return list_bytes + compressed_sprite_bytes
 
 
-def build_npc_sprites(sprite_order: List[str], sprite_dir: Path) -> bytes:
-    sprite_bytes: List[bytes] = []
-
-    for sprite_name in sprite_order:
-        sprite_bytes.append(npc_sprite_to_bytes(sprite_dir / "npc" / sprite_name))
-
-    # Compress sprite bytes
+def build_npc_sprites(sprite_order: List[str], build_dir: Path) -> bytes:
     compressed_sprite_bytes: bytes = b""
-    yay0_cur_offset = 4 * (len(sprite_bytes) + 1)
+    yay0_cur_offset = 4 * (len(sprite_order) + 1)
     list_bytes: bytes = struct.pack(">I", yay0_cur_offset)
 
-    # TODO figure out how to use tmp files if possible
-    yay0_in_path = sprite_dir / "yay0_bytes.bin"
-    yay0_out_path = sprite_dir / "yay0_bytes.Yay0"
-
-    for sprite_byte in sprite_bytes:
-        with open(yay0_in_path, "wb") as f:
-            f.write(sprite_byte)
-
-        subprocess.run(
-            [
-                str(TOOLS_DIR / "build/yay0/Yay0compress"),
-                yay0_in_path,
-                yay0_out_path,
-            ]
-        )
-
-        with open(yay0_out_path, "rb") as f:
+    for sprite_name in sprite_order:
+        with open(build_dir / "npc" / f"{sprite_name}.Yay0", "rb") as f:
             yay0_bytes = f.read()
+
             # Add 0s to pad to 0x8
             yay0_bytes_len = (len(yay0_bytes) + 0x7) & ~0x7
             yay0_bytes += b"\0" * (yay0_bytes_len - len(yay0_bytes))
@@ -622,9 +495,6 @@ def build_npc_sprites(sprite_order: List[str], sprite_dir: Path) -> bytes:
         compressed_sprite_bytes += yay0_bytes
         yay0_cur_offset += len(yay0_bytes)
         list_bytes += struct.pack(">I", yay0_cur_offset)
-
-    os.remove(yay0_in_path)
-    os.remove(yay0_out_path)
 
     return list_bytes + compressed_sprite_bytes
 
@@ -707,7 +577,9 @@ def build_player_rasters(sprite_order: List[str], raster_order: List[str]) -> by
     return ret
 
 
-def build(out_file: Path, player_header_path: Path, sprite_dir: Path) -> None:
+def build(
+    out_file: Path, player_header_path: Path, build_dir: Path, sprite_dir: Path
+) -> None:
     player_sprite_dir = sprite_dir / "player"
 
     build_info, player_sprite_order, player_raster_order = get_player_sprite_metadata(
@@ -730,7 +602,7 @@ def build(out_file: Path, player_header_path: Path, sprite_dir: Path) -> None:
 
     player_sprite_bytes = build_player_sprites(player_sprite_order, player_sprite_dir)
     player_raster_bytes = build_player_rasters(player_sprite_order, player_raster_order)
-    npc_sprite_bytes = build_npc_sprites(npc_sprite_order, sprite_dir)
+    npc_sprite_bytes = build_npc_sprites(npc_sprite_order, build_dir)
 
     built_raster_info_offset = 0x10 + len(player_raster_bytes)
     compressed_sprite_bytes_offset = built_raster_info_offset + len(player_sprite_bytes)
@@ -757,9 +629,9 @@ def build(out_file: Path, player_header_path: Path, sprite_dir: Path) -> None:
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 4:
-        print("usage: sprites.py [OUT] [PLAYER_HEADER_OUT] [IN_DIR]")
+    if len(sys.argv) != 5:
+        print("usage: sprites.py [OUT] [PLAYER_HEADER_OUT] [BUILD_DIR] [IN_DIR]")
         exit(1)
 
-    _, out, player_header_out, in_dir = sys.argv
-    build(Path(out), Path(player_header_out), Path(in_dir))
+    _, out, player_header_out, build_dir, in_dir = sys.argv
+    build(Path(out), Path(player_header_out), Path(build_dir), Path(in_dir))

@@ -4,7 +4,7 @@ Thank you for your interest in contributing to this project!
 
 ## Dependencies
 
-There are a few additional dependencies needed when contributing to this project. You can install them with `./install.sh --extra`.
+There are a few additional dependencies needed when contributing to this project. You can install them with `./install_deps.sh --extra`.
 
 
 ## Build System

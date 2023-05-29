@@ -4,10 +4,10 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 COPY requirements.txt /
 COPY requirements_extra.txt /
-COPY install.sh /
+COPY install_deps.sh /
 COPY install_compilers.sh /
 
-RUN apt-get update && ./install.sh --extra && ./install_compilers.sh
+RUN apt-get update && ./install_deps.sh --extra && ./install_compilers.sh
 
 RUN mkdir /papermario
 WORKDIR /papermario

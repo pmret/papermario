@@ -232,7 +232,7 @@ fi
 
 
 if [ "$supported" != true ]; then
-    echo "The following distros (and their derivatives) are supported by install.sh:"
+    echo "The following distros (and their derivatives) are supported by install_deps.sh:"
     echo "- Debian/Ubuntu (apt)"
     echo "- Arch Linux (pacman)"
     echo "- openSUSE (zypper)"

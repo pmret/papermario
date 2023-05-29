@@ -208,9 +208,15 @@ def write_ninja_rules(
     )
 
     ninja.rule(
+        "npc_sprite",
+        description="sprite $sprite_name",
+        command=f"$python {BUILD_TOOLS}/sprite/npc_sprite.py $out $sprite_dir",
+    )
+
+    ninja.rule(
         "sprites",
         description="sprites $out $header_out $in",
-        command=f"$python {BUILD_TOOLS}/sprite/sprites.py $out $header_out $in",
+        command=f"$python {BUILD_TOOLS}/sprite/sprites.py $out $header_out $build_dir $in",
     )
 
     ninja.rule(
@@ -682,9 +688,17 @@ class Configure:
             elif seg.type == "pm_sprites":
                 assert entry.object_path is not None
 
+                sprite_yay0s = []
+
+                npc_obj_path = entry.object_path.parent / "npc"
+
                 # NPC sprite headers
                 for sprite_id, sprite_dir in enumerate(entry.src_paths[1:], 1):
                     sprite_name = sprite_dir.name
+
+                    bin_path = npc_obj_path / (sprite_name + ".bin")
+                    yay0_path = bin_path.with_suffix(".Yay0")
+                    sprite_yay0s.append(yay0_path)
 
                     variables = {
                         "sprite_id": sprite_id,
@@ -692,9 +706,11 @@ class Configure:
                         "sprite_dir": str(self.resolve_asset_path(sprite_dir)),
                     }
 
+                    build(bin_path, [sprite_dir], "npc_sprite", variables=variables)
+                    build(yay0_path, [bin_path], "yay0")
                     build(
                         self.build_path() / "include/sprite/npc" / (sprite_name + ".h"),
-                        [sprite_dir],
+                        [sprite_dir, *sprite_yay0s],
                         "sprite_header",
                         variables=variables,
                     )
@@ -711,6 +727,9 @@ class Configure:
                     glob_deps=False,
                     variables={
                         "header_out": sprite_player_header_path,
+                        "build_dir": str(
+                            self.build_path() / "assets" / self.version / "sprite"
+                        ),
                     },
                     implicit_outputs=[sprite_player_header_path],
                 )
