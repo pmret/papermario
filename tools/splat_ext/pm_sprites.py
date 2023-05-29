@@ -86,6 +86,7 @@ PLAYER_PAL_TO_RASTER: Dict[str, int] = {
 
 
 PLAYER_SPRITE_MEDADATA_XML_FILENAME = "player.xml"
+NPC_SPRITE_MEDADATA_XML_FILENAME = "npc.xml"
 
 MAX_COMPONENTS_XML = "maxComponents"
 PALETTE_GROUPS_XML = "paletteGroups"
@@ -346,6 +347,29 @@ def write_player_metadata(
         ET.indent(xml, "    ")
 
     xml.write(str(out_path / PLAYER_SPRITE_MEDADATA_XML_FILENAME), encoding="unicode")
+
+
+def write_npc_metadata(
+    out_path: Path,
+    cfg: Any,
+) -> None:
+    Names = ET.Element("Names")
+
+    Sprites = ET.SubElement(Names, "Sprites")
+    for sprite_name in cfg:
+        ET.SubElement(
+            Sprites,
+            "Sprite",
+            name=sprite_name,
+        )
+
+    xml = ET.ElementTree(Names)
+
+    # pretty print (Python 3.9+)
+    if hasattr(ET, "indent"):
+        ET.indent(xml, "    ")
+
+    xml.write(str(out_path / NPC_SPRITE_MEDADATA_XML_FILENAME), encoding="unicode")
 
 
 def write_player_xmls(
@@ -874,7 +898,7 @@ class N64SegPm_sprites(N64Segment):
 
         player_out_path.mkdir(parents=True, exist_ok=True)
         write_player_metadata(
-            player_out_path,
+            self.out_path().parent,
             player_sprite_cfg,
             player_raster_names,
             build_date,
@@ -905,6 +929,11 @@ class N64SegPm_sprites(N64Segment):
 
     def split_npc(self, data: bytes) -> None:
         out_dir = self.out_path().parent / "npc"
+
+        write_npc_metadata(
+            self.out_path().parent,
+            self.npc_cfg,
+        )
 
         for i, sprite_name in enumerate(self.npc_cfg):
             sprite_dir = out_dir / sprite_name
@@ -944,7 +973,7 @@ class N64SegPm_sprites(N64Segment):
         from segtypes.linker_entry import LinkerEntry
 
         # TODO collect
-        src_paths = [options.opts.asset_path / "sprite" / "player"]
+        src_paths = [options.opts.asset_path / "sprite"]
 
         # for NPC
         src_paths += [

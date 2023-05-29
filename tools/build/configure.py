@@ -208,21 +208,9 @@ def write_ninja_rules(
     )
 
     ninja.rule(
-        "sprite",
-        description="sprite $sprite_name",
-        command=f"$python {BUILD_TOOLS}/sprite/sprite.py $out $sprite_dir",
-    )
-
-    ninja.rule(
-        "sprite_combine",
-        description="sprite_combine $in",
-        command=f"$python {BUILD_TOOLS}/sprite/combine.py $out $in",
-    )
-
-    ninja.rule(
-        "player_sprites",
-        description="player_sprites $out $in",
-        command=f"$python {BUILD_TOOLS}/sprite/player_sprites.py $out $header_out $in",
+        "sprites",
+        description="sprites $out $header_out $in",
+        command=f"$python {BUILD_TOOLS}/sprite/sprites.py $out $header_out $in",
     )
 
     ninja.rule(
@@ -688,19 +676,11 @@ class Configure:
                 )
                 build(entry.object_path, [bin_path], "bin")
             elif seg.type == "pm_sprites":
-                # NPC SPRITES
-                sprite_yay0s = []
-
                 assert entry.object_path is not None
-                npc_obj_path = entry.object_path.parent / "npc"
-                player_obj_path = entry.object_path.parent / "player"
 
+                # NPC sprite headers
                 for sprite_id, sprite_dir in enumerate(entry.src_paths[1:], 1):
                     sprite_name = sprite_dir.name
-
-                    bin_path = npc_obj_path / (sprite_name + ".bin")
-                    yay0_path = bin_path.with_suffix(".Yay0")
-                    sprite_yay0s.append(yay0_path)
 
                     variables = {
                         "sprite_id": sprite_id,
@@ -708,8 +688,6 @@ class Configure:
                         "sprite_dir": str(self.resolve_asset_path(sprite_dir)),
                     }
 
-                    build(bin_path, [sprite_dir], "sprite", variables=variables)
-                    build(yay0_path, [bin_path], "yay0")
                     build(
                         self.build_path() / "include/sprite/npc" / (sprite_name + ".h"),
                         [sprite_dir],
@@ -717,22 +695,11 @@ class Configure:
                         variables=variables,
                     )
 
+                # Sprites .bin
                 build(
-                    npc_obj_path.with_suffix(".bin"),
-                    sprite_yay0s,
-                    "sprite_combine",
-                )
-                build(
-                    npc_obj_path.with_suffix(".o"),
-                    [npc_obj_path.with_suffix(".bin")],
-                    "bin",
-                )
-
-                # PLAYER SPRITES
-                build(
-                    player_obj_path.with_suffix(".bin"),
+                    entry.object_path.with_suffix(".bin"),
                     [entry.src_paths[0]],
-                    "player_sprites",
+                    "sprites",
                     glob_deps=False,
                     variables={
                         "header_out": str(
@@ -740,11 +707,10 @@ class Configure:
                         ),
                     },
                 )
-                build(
-                    player_obj_path.with_suffix(".o"),
-                    [player_obj_path.with_suffix(".bin")],
-                    "bin",
-                )
+
+                # Sprites .o
+                build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
+
             elif seg.type == "pm_msg":
                 msg_bins = []
 
