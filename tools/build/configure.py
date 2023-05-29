@@ -443,6 +443,10 @@ class Configure:
                 if not str(object_path) in skip_outputs:
                     needs_build = True
 
+            for i_output in implicit_outputs:
+                if i_output.endswith(".h"):
+                    generated_headers.append(i_output)
+
             if needs_build:
                 skip_outputs.update(object_strs)
 
@@ -696,16 +700,19 @@ class Configure:
                     )
 
                 # Sprites .bin
+                sprite_player_header_path = str(
+                    self.build_path() / "include/sprite/player.h"
+                )
+
                 build(
                     entry.object_path.with_suffix(".bin"),
                     [entry.src_paths[0]],
                     "sprites",
                     glob_deps=False,
                     variables={
-                        "header_out": str(
-                            self.build_path() / "include/sprite/player.h"
-                        ),
+                        "header_out": sprite_player_header_path,
                     },
+                    implicit_outputs=[sprite_player_header_path],
                 )
 
                 # Sprites .o

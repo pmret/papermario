@@ -556,8 +556,8 @@ def build_player_sprites(sprite_order: List[str], player_sprite_dir: Path) -> by
     list_bytes: bytes = struct.pack(">I", yay0_cur_offset)
 
     # TODO figure out how to use tmp files if possible
-    yay0_in_path = "yay0_bytes.bin"
-    yay0_out_path = "yay0_bytes.Yay0"
+    yay0_in_path = player_sprite_dir / "yay0_bytes.bin"
+    yay0_out_path = player_sprite_dir / "yay0_bytes.Yay0"
 
     for sprite_byte in sprite_bytes:
         with open(yay0_in_path, "wb") as f:
@@ -598,10 +598,10 @@ def build_npc_sprites(sprite_order: List[str], sprite_dir: Path) -> bytes:
     list_bytes: bytes = struct.pack(">I", yay0_cur_offset)
 
     # TODO figure out how to use tmp files if possible
-    yay0_in_path = "yay0_bytes.bin"
-    yay0_out_path = "yay0_bytes.Yay0"
+    yay0_in_path = sprite_dir / "yay0_bytes.bin"
+    yay0_out_path = sprite_dir / "yay0_bytes.Yay0"
 
-    for i, sprite_byte in enumerate(sprite_bytes):
+    for sprite_byte in sprite_bytes:
         with open(yay0_in_path, "wb") as f:
             f.write(sprite_byte)
 
