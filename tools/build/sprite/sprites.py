@@ -18,7 +18,6 @@ from splat_ext.pm_sprites import (
     SPECIAL_RASTER,
     PlayerRaster,
     RasterTableEntry,
-    NpcSprite,
 )
 from splat_ext.sprite_common import AnimComponent, iter_in_groups
 
