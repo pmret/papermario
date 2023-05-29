@@ -31,33 +31,33 @@ enum N(ActorParams) {
 };
 
 s32 N(DefaultAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_Bandit_Anim01,
-    STATUS_KEY_STONE,     ANIM_Bandit_Anim00,
-    STATUS_KEY_SLEEP,     ANIM_Bandit_Anim10,
-    STATUS_KEY_POISON,    ANIM_Bandit_Anim01,
-    STATUS_KEY_STOP,      ANIM_Bandit_Anim00,
-    STATUS_KEY_STATIC,    ANIM_Bandit_Anim01,
-    STATUS_KEY_PARALYZE,  ANIM_Bandit_Anim00,
-    STATUS_KEY_DIZZY,     ANIM_Bandit_Anim11,
-    STATUS_KEY_FEAR,      ANIM_Bandit_Anim11,
+    STATUS_KEY_NORMAL,    ANIM_Bandit_Idle,
+    STATUS_KEY_STONE,     ANIM_Bandit_Still,
+    STATUS_KEY_SLEEP,     ANIM_Bandit_Sleep,
+    STATUS_KEY_POISON,    ANIM_Bandit_Idle,
+    STATUS_KEY_STOP,      ANIM_Bandit_Still,
+    STATUS_KEY_STATIC,    ANIM_Bandit_Idle,
+    STATUS_KEY_PARALYZE,  ANIM_Bandit_Still,
+    STATUS_KEY_DIZZY,     ANIM_Bandit_Dizzy,
+    STATUS_KEY_FEAR,      ANIM_Bandit_Dizzy,
     STATUS_END,
 };
 
 s32 N(HoldingAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_Bandit_Anim02,
-    STATUS_KEY_STONE,     ANIM_Bandit_Anim04,
-    STATUS_KEY_SLEEP,     ANIM_Bandit_Anim10,
-    STATUS_KEY_POISON,    ANIM_Bandit_Anim02,
-    STATUS_KEY_STOP,      ANIM_Bandit_Anim04,
-    STATUS_KEY_STATIC,    ANIM_Bandit_Anim02,
-    STATUS_KEY_PARALYZE,  ANIM_Bandit_Anim04,
-    STATUS_KEY_DIZZY,     ANIM_Bandit_Anim11,
-    STATUS_KEY_FEAR,      ANIM_Bandit_Anim11,
+    STATUS_KEY_NORMAL,    ANIM_Bandit_IdleHolding,
+    STATUS_KEY_STONE,     ANIM_Bandit_StillHolding,
+    STATUS_KEY_SLEEP,     ANIM_Bandit_Sleep,
+    STATUS_KEY_POISON,    ANIM_Bandit_IdleHolding,
+    STATUS_KEY_STOP,      ANIM_Bandit_StillHolding,
+    STATUS_KEY_STATIC,    ANIM_Bandit_IdleHolding,
+    STATUS_KEY_PARALYZE,  ANIM_Bandit_StillHolding,
+    STATUS_KEY_DIZZY,     ANIM_Bandit_Dizzy,
+    STATUS_KEY_FEAR,      ANIM_Bandit_Dizzy,
     STATUS_END,
 };
 
 s32 N(CoinAnims)[] = {
-    STATUS_KEY_NORMAL,    ANIM_Bandit_Anim14,
+    STATUS_KEY_NORMAL,    ANIM_Bandit_Coin,
     STATUS_END,
 };
 
@@ -321,7 +321,7 @@ EvtScript N(EVS_HandleEvent) = {
         EVT_CASE_EQ(EVENT_HIT_COMBO)
             EVT_EXEC_GET_TID(N(EVS_DropCoin), ArrayVar(0))
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bandit_Anim09)
+            EVT_SET_CONST(LVar1, ANIM_Bandit_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_LOOP(0)
                 EVT_IS_THREAD_RUNNING(ArrayVar(0), LVar0)
@@ -334,7 +334,7 @@ EvtScript N(EVS_HandleEvent) = {
         EVT_CASE_OR_EQ(EVENT_SPIN_SMASH_LAUNCH_HIT)
             EVT_EXEC_GET_TID(N(EVS_DropCoin), ArrayVar(0))
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bandit_Anim09)
+            EVT_SET_CONST(LVar1, ANIM_Bandit_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_LOOP(0)
                 EVT_IS_THREAD_RUNNING(ArrayVar(0), LVar0)
@@ -347,8 +347,8 @@ EvtScript N(EVS_HandleEvent) = {
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_EXEC_GET_TID(N(EVS_DropCoin), ArrayVar(0))
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bandit_Anim0A)
-            EVT_SET_CONST(LVar2, ANIM_Bandit_Anim0B)
+            EVT_SET_CONST(LVar1, ANIM_Bandit_BurnHurt)
+            EVT_SET_CONST(LVar2, ANIM_Bandit_BurnStill)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
             EVT_LOOP(0)
                 EVT_IS_THREAD_RUNNING(ArrayVar(0), LVar0)
@@ -360,11 +360,11 @@ EvtScript N(EVS_HandleEvent) = {
         EVT_CASE_EQ(EVENT_BURN_DEATH)
             EVT_EXEC_GET_TID(N(EVS_DropCoin), ArrayVar(0))
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bandit_Anim0A)
-            EVT_SET_CONST(LVar2, ANIM_Bandit_Anim0B)
+            EVT_SET_CONST(LVar1, ANIM_Bandit_BurnHurt)
+            EVT_SET_CONST(LVar2, ANIM_Bandit_BurnStill)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bandit_Anim0B)
+            EVT_SET_CONST(LVar1, ANIM_Bandit_BurnStill)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_LOOP(0)
                 EVT_IS_THREAD_RUNNING(ArrayVar(0), LVar0)
@@ -377,7 +377,7 @@ EvtScript N(EVS_HandleEvent) = {
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_EXEC_GET_TID(N(EVS_DropCoin), ArrayVar(0))
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bandit_Anim09)
+            EVT_SET_CONST(LVar1, ANIM_Bandit_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
             EVT_LOOP(0)
                 EVT_IS_THREAD_RUNNING(ArrayVar(0), LVar0)
@@ -389,10 +389,10 @@ EvtScript N(EVS_HandleEvent) = {
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
             EVT_EXEC_GET_TID(N(EVS_DropCoin), ArrayVar(0))
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bandit_Anim09)
+            EVT_SET_CONST(LVar1, ANIM_Bandit_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bandit_Anim09)
+            EVT_SET_CONST(LVar1, ANIM_Bandit_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_LOOP(0)
                 EVT_IS_THREAD_RUNNING(ArrayVar(0), LVar0)
@@ -404,22 +404,22 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bandit_Anim09)
+            EVT_SET_CONST(LVar1, ANIM_Bandit_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bandit_Anim09)
+            EVT_SET_CONST(LVar1, ANIM_Bandit_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bandit_Anim07)
+            EVT_SET_CONST(LVar1, ANIM_Bandit_Run)
             EVT_EXEC_WAIT(EVS_Enemy_ReturnHome)
             EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.6))
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bandit_Anim09)
+            EVT_SET_CONST(LVar1, ANIM_Bandit_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bandit_Anim09)
+            EVT_SET_CONST(LVar1, ANIM_Bandit_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
@@ -428,9 +428,9 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_HasCoin, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
-                    EVT_SET_CONST(LVar1, ANIM_Bandit_Anim01)
+                    EVT_SET_CONST(LVar1, ANIM_Bandit_Idle)
                 EVT_CASE_EQ(1)
-                    EVT_SET_CONST(LVar1, ANIM_Bandit_Anim02)
+                    EVT_SET_CONST(LVar1, ANIM_Bandit_IdleHolding)
             EVT_END_SWITCH
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
@@ -439,11 +439,11 @@ EvtScript N(EVS_HandleEvent) = {
         EVT_CASE_OR_EQ(EVENT_SPIN_SMASH_LAUNCH_DEATH)
             EVT_EXEC_GET_TID(N(EVS_DropCoin), ArrayVar(0))
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bandit_Anim09)
+            EVT_SET_CONST(LVar1, ANIM_Bandit_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_WAIT(10)
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bandit_Anim09)
+            EVT_SET_CONST(LVar1, ANIM_Bandit_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_LOOP(0)
                 EVT_IS_THREAD_RUNNING(ArrayVar(0), LVar0)
@@ -456,13 +456,13 @@ EvtScript N(EVS_HandleEvent) = {
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bandit_Anim01)
+            EVT_SET_CONST(LVar1, ANIM_Bandit_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_Recover)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
             EVT_EXEC_GET_TID(N(EVS_DropCoin), ArrayVar(0))
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bandit_Anim07)
-            EVT_SET_CONST(LVar2, ANIM_Bandit_Anim09)
+            EVT_SET_CONST(LVar1, ANIM_Bandit_Run)
+            EVT_SET_CONST(LVar2, ANIM_Bandit_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_ScareAway)
             EVT_LOOP(0)
                 EVT_IS_THREAD_RUNNING(ArrayVar(0), LVar0)
@@ -475,7 +475,7 @@ EvtScript N(EVS_HandleEvent) = {
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_EXEC_GET_TID(N(EVS_DropCoin), ArrayVar(0))
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bandit_Anim09)
+            EVT_SET_CONST(LVar1, ANIM_Bandit_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_AirLift)
             EVT_LOOP(0)
                 EVT_IS_THREAD_RUNNING(ArrayVar(0), LVar0)
@@ -486,13 +486,13 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_END_LOOP
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_SET_CONST(LVar0, PRT_MAIN)
-            EVT_SET_CONST(LVar1, ANIM_Bandit_Anim09)
+            EVT_SET_CONST(LVar1, ANIM_Bandit_Hurt)
             EVT_SET_CONST(LVar2, ANIM_WorldParakarry_Still)
             EVT_EXEC_WAIT(EVS_Enemy_BlowAway)
             EVT_RETURN
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Anim01)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Idle)
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
@@ -507,7 +507,7 @@ EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_HasCoin, LVar0)
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
-        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Anim08)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_RunHolding)
         EVT_WAIT(30)
         EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(10.0))
         EVT_CALL(SetGoalPos, ACTOR_SELF, 300, 0, 0)
@@ -528,16 +528,16 @@ EvtScript N(EVS_TakeTurn) = {
         EVT_SET(LVar1, 0)
         EVT_CALL(SetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_ELSE
-        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Anim07)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Run)
         EVT_CALL(SetGoalToTarget, ACTOR_SELF)
         EVT_CALL(AddGoalPos, ACTOR_SELF, 50, 0, 0)
         EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(6.0))
         EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Anim01)
+        EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Idle)
         EVT_WAIT(6)
     EVT_END_IF
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(2.0))
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Anim05)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Walk)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, 35, 0, 0)
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
@@ -548,7 +548,7 @@ EvtScript N(EVS_TakeTurn) = {
         EVT_CASE_OR_EQ(HIT_RESULT_MISS)
         EVT_CASE_OR_EQ(HIT_RESULT_LUCKY)
             EVT_SET(LVarA, LVar0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Anim0D)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Tackle)
             EVT_CALL(SetGoalToTarget, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
@@ -571,11 +571,11 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_CALL(YieldTurn)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
             EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Anim07)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Run)
             EVT_CALL(SetGoalToHome, ACTOR_SELF)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
             EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
-            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Anim01)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Idle)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
@@ -583,7 +583,7 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_RETURN
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Anim0D)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Tackle)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
     EVT_CALL(RunToGoal, ACTOR_SELF, 0, FALSE)
@@ -639,9 +639,9 @@ EvtScript N(EVS_TakeTurn) = {
                     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
                     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Anim01)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Idle)
                     EVT_WAIT(20)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Anim07)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Run)
                 EVT_CASE_EQ(1)
                     // failed to steal (player blocked or damage negated)
                     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -650,12 +650,12 @@ EvtScript N(EVS_TakeTurn) = {
                     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.8))
                     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
                     EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Anim0E)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_LookUp)
                     EVT_WAIT(20)
                     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20C3)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Anim10)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Sleep)
                     EVT_WAIT(20)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Anim07)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Run)
                 EVT_CASE_DEFAULT
                     // stole coins
                     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
@@ -686,12 +686,12 @@ EvtScript N(EVS_TakeTurn) = {
                     EVT_CALL(SetGoalPos, ACTOR_SELF, LVarA, LVarB, LVarC)
                     EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
                     EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(HoldingAnims)))
-                    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Anim0E)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_LookUp)
                     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_HasCoin, 1)
                     EVT_WAIT(7)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Anim0F)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_GotCoin)
                     EVT_WAIT(20)
-                    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_Anim08)
+                    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Bandit_RunHolding)
             EVT_END_SWITCH
             EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(YieldTurn)
