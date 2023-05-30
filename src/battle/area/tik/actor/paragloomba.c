@@ -277,7 +277,7 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_CALL(GetBattlePhase, LVar0)
             EVT_IF_EQ(LVar0, PHASE_FIRST_STRIKE)
-                EVT_CALL(GetEncounterState, LVar0)
+                EVT_CALL(GetEncounterTrigger, LVar0)
                 EVT_IF_EQ(LVar0, ENCOUNTER_TRIGGER_HAMMER)
                     EVT_EXEC_WAIT(N(fall))
                 EVT_END_IF

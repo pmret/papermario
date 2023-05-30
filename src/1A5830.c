@@ -3200,7 +3200,7 @@ ApiStatus GetInstigatorValue(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetEncounterState(Evt* script, s32 isInitialCall) {
+ApiStatus GetEncounterTrigger(Evt* script, s32 isInitialCall) {
     evt_set_variable(script, *script->ptrReadPos, gCurrentEncounter.hitType);
     return ApiStatus_DONE2;
 }

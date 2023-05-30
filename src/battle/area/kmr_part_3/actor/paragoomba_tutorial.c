@@ -270,9 +270,9 @@ EvtScript N(handleEvent_8021C808) = {
             EVT_SET_CONST(LVar1, ANIM_Paragoomba_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_CALL(GetBattlePhase, LVar0)
-            EVT_IF_EQ(LVar0, 1)
-                EVT_CALL(GetEncounterState, LVar0)
-                EVT_IF_EQ(LVar0, 4)
+            EVT_IF_EQ(LVar0, PHASE_FIRST_STRIKE)
+                EVT_CALL(GetEncounterTrigger, LVar0)
+                EVT_IF_EQ(LVar0, ENCOUNTER_TRIGGER_HAMMER)
                     EVT_EXEC_WAIT(N(8021D614))
                 EVT_END_IF
             EVT_END_IF
