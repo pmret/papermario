@@ -982,7 +982,7 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(N(onDeath))
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_LavaPiranha_Anim09)
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
@@ -1004,7 +1004,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
             EVT_CALL(SetAnimatorFlags, VINE_0, MODEL_ANIMATOR_FLAG_FREEZE_ANIMATION, 0)
         EVT_CASE_EQ(EVENT_30)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_LavaPiranha_Anim09)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_WAIT(1000)

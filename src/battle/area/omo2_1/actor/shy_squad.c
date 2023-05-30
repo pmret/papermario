@@ -582,7 +582,7 @@ EvtScript N(move_squad_to_home) = {
 };
 
 EvtScript N(displace_last_guy) = {
-    EVT_SET_CONST(LVar0, 16)
+    EVT_SET_CONST(LVar0, PRT_16)
     EVT_EXEC_WAIT(N(displace_guy))
     EVT_RETURN
     EVT_END
@@ -913,7 +913,7 @@ EvtScript N(handleEvent) = {
                     EVT_RETURN
                 EVT_END_IF
             EVT_END_IF
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_ShySquadGuy_Anim01)
             EVT_EXEC_WAIT(N(displace_last_guy))
         EVT_END_CASE_GROUP
@@ -928,11 +928,11 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(N(move_squad_to_home))
             EVT_CALL(HPBarToHome, ACTOR_SELF)
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_ShySquadGuy_Anim01)
             EVT_EXEC_WAIT(EVS_Enemy_Recover)
         EVT_CASE_EQ(EVENT_30)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_ShySquadGuy_Anim0D)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_WAIT(1000)

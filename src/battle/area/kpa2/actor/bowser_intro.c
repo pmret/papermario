@@ -248,7 +248,7 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(N(onDeath))
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBowser_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
@@ -257,7 +257,7 @@ EvtScript N(handleEvent) = {
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET(LVar1, ANIM_BattleBowser_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
             EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_TURN_COUNTER), LVar0)
@@ -272,13 +272,13 @@ EvtScript N(handleEvent) = {
             EVT_RETURN
         EVT_CASE_EQ(EVENT_END_FIRST_STRIKE)
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBowser_Jump)
             EVT_EXEC_WAIT(EVS_Enemy_Recover)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_PostJump)
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 4, EVT_FLOAT(3.0))
         EVT_CASE_EQ(EVENT_30)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBowser_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_WAIT(1000)
@@ -293,16 +293,16 @@ EvtScript N(handleEvent) = {
 };
 
 EvtScript N(onHit) = {
-    EVT_SET_CONST(LVar0, 1)
+    EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_EXEC_WAIT(EVS_Enemy_Hit)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(onDeath) = {
-    EVT_SET_CONST(LVar0, 1)
+    EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_EXEC_WAIT(EVS_Enemy_Hit)
-    EVT_SET_CONST(LVar0, 1)
+    EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_EXEC_WAIT(EVS_Enemy_Death)
     EVT_RETURN
     EVT_END

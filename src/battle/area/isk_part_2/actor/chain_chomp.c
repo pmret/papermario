@@ -671,7 +671,7 @@ EvtScript N(EVS_Chomp_SpinSmashHit) = {
     EVT_CALL(SetActorDispOffset, ACTOR_SELF, 0, 0, 0)
     EVT_WAIT(15)
     EVT_LABEL(10)
-    EVT_SET_CONST(LVar0, 1)
+    EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_SET_CONST(LVar1, ANIM_ChainChomp_Idle)
     EVT_EXEC_WAIT(N(EVS_Chomp_HopHome))
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Tutankoopa_Idle)
@@ -755,7 +755,7 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_CALL(MoveBattleCamOver, 20)
             EVT_CALL(SetActorYaw, ACTOR_SELF, 180)
             EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SWEAT)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_ChainChomp_Idle)
             EVT_EXEC_WAIT(N(EVS_Chomp_HopHome))
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_ChainChomp_Idle)
@@ -840,7 +840,7 @@ EvtScript N(EVS_TakeTurn) = {
                 EVT_RETURN
             EVT_END_IF
             EVT_CALL(YieldTurn)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_ChainChomp_Idle)
             EVT_EXEC_WAIT(N(EVS_Chomp_HopHome))
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_ChainChomp_Idle)

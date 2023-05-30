@@ -239,19 +239,19 @@ EvtScript N(handleEvent_80219050) = {
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(EVENT_HIT_COMBO)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar1)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
         EVT_CASE_EQ(EVENT_HIT)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_FLAG(LVar0, STATUS_FLAG_SHRINK)
-                EVT_SET_CONST(LVar0, 1)
+                EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar1)
                 EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_ELSE
                 EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVarA)
                 EVT_IF_EQ(LVarA, 3)
-                    EVT_SET_CONST(LVar0, 1)
+                    EVT_SET_CONST(LVar0, PRT_MAIN)
                     EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar1)
                     EVT_EXEC_WAIT(EVS_Enemy_Hit)
                 EVT_ELSE
@@ -263,7 +263,7 @@ EvtScript N(handleEvent_80219050) = {
                             EVT_EXEC_WAIT(N(8021BDE4))
                         EVT_END_CASE_GROUP
                         EVT_CASE_DEFAULT
-                            EVT_SET_CONST(LVar0, 1)
+                            EVT_SET_CONST(LVar0, PRT_MAIN)
                             EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar1)
                             EVT_EXEC_WAIT(EVS_Enemy_Hit)
                     EVT_END_SWITCH
@@ -272,14 +272,14 @@ EvtScript N(handleEvent_80219050) = {
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_FLAG(LVar0, STATUS_FLAG_SHRINK)
-                EVT_SET_CONST(LVar0, 1)
+                EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar1)
                 EVT_EXEC_WAIT(EVS_Enemy_Hit)
                 EVT_WAIT(10)
             EVT_ELSE
                 EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVarA)
                 EVT_IF_EQ(LVarA, 3)
-                    EVT_SET_CONST(LVar0, 1)
+                    EVT_SET_CONST(LVar0, PRT_MAIN)
                     EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar1)
                     EVT_EXEC_WAIT(EVS_Enemy_Hit)
                     EVT_WAIT(10)
@@ -292,21 +292,21 @@ EvtScript N(handleEvent_80219050) = {
                             EVT_EXEC_WAIT(N(8021BDE4))
                         EVT_END_CASE_GROUP
                         EVT_CASE_DEFAULT
-                            EVT_SET_CONST(LVar0, 1)
+                            EVT_SET_CONST(LVar0, PRT_MAIN)
                             EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar1)
                             EVT_EXEC_WAIT(EVS_Enemy_Hit)
                             EVT_WAIT(10)
                     EVT_END_SWITCH
                 EVT_END_IF
             EVT_END_IF
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar1)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_CALL(GetActorVar, ACTOR_SELF, 6, LVar1)
             EVT_CALL(GetActorVar, ACTOR_SELF, 7, LVar2)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
             EVT_IF_FLAG(LVar3, STATUS_FLAG_SHRINK)
                 EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
@@ -330,7 +330,7 @@ EvtScript N(handleEvent_80219050) = {
         EVT_CASE_OR_EQ(EVENT_BURN_DEATH)
             EVT_CALL(GetActorVar, ACTOR_SELF, 6, LVar1)
             EVT_CALL(GetActorVar, ACTOR_SELF, 7, LVar2)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
             EVT_IF_FLAG(LVar3, STATUS_FLAG_SHRINK)
                 EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
@@ -351,7 +351,7 @@ EvtScript N(handleEvent_80219050) = {
                     EVT_END_SWITCH
                 EVT_END_IF
             EVT_END_IF
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_CALL(GetActorVar, ACTOR_SELF, 7, LVar1)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
@@ -359,14 +359,14 @@ EvtScript N(handleEvent_80219050) = {
             EVT_EXEC_WAIT(N(8021B088))
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
             EVT_EXEC_WAIT(N(8021B088))
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar1)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_LAUNCH_HIT)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
             EVT_IF_FLAG(LVar3, STATUS_FLAG_SHRINK)
-                EVT_SET_CONST(LVar0, 1)
+                EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar1)
                 EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_ELSE
@@ -375,19 +375,19 @@ EvtScript N(handleEvent_80219050) = {
         EVT_CASE_EQ(EVENT_SPIN_SMASH_LAUNCH_DEATH)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
             EVT_IF_FLAG(LVar3, STATUS_FLAG_SHRINK)
-                EVT_SET_CONST(LVar0, 1)
+                EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar1)
                 EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_ELSE
                 EVT_EXEC_WAIT(N(8021BDE4))
             EVT_END_IF
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, -1)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar1)
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
             EVT_CALL(GetActorVar, ACTOR_SELF, 2, LVar1)
@@ -399,16 +399,16 @@ EvtScript N(handleEvent_80219050) = {
             EVT_EXEC_WAIT(EVS_Enemy_HopToPos)
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar1)
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar1)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar1)
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_END_CASE_GROUP
@@ -451,7 +451,7 @@ EvtScript N(handleEvent_80219050) = {
             EVT_PLAY_EFFECT(EFFECT_LENS_FLARE, 0, LVar3, LVar4, LVar5, 20, 0)
             EVT_WAIT(30)
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar1)
             EVT_EXEC_WAIT(EVS_Enemy_Recover)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
@@ -729,7 +729,7 @@ EvtScript N(8021A6C8) = {
 EvtScript N(8021B088) = {
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
     EVT_IF_FLAG(LVarA, STATUS_FLAG_SHRINK)
-        EVT_SET_CONST(LVar0, 1)
+        EVT_SET_CONST(LVar0, PRT_MAIN)
         EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar1)
         EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
         EVT_RETURN
@@ -743,7 +743,7 @@ EvtScript N(8021B088) = {
         EVT_CASE_EQ(2)
             EVT_EXEC_WAIT(N(8021B998))
         EVT_CASE_EQ(3)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar1)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
     EVT_END_SWITCH
@@ -862,7 +862,7 @@ EvtScript N(8021B998) = {
         EVT_CALL(SetPartScale, ACTOR_SELF, PRT_6, EVT_FLOAT(0.4), EVT_FLOAT(0.4), EVT_FLOAT(1.0))
     EVT_END_IF
     EVT_EXEC_WAIT(N(8021B1B4))
-    EVT_SET_CONST(LVar0, 1)
+    EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar1)
     EVT_CALL(SetAnimation, ACTOR_SELF, LVar0, LVar1)
     EVT_CHILD_THREAD
@@ -923,7 +923,7 @@ EvtScript N(8021BDE4) = {
         EVT_CALL(SetPartScale, ACTOR_SELF, PRT_6, EVT_FLOAT(0.4), EVT_FLOAT(0.4), EVT_FLOAT(1.0))
     EVT_END_IF
     EVT_EXEC_WAIT(N(8021B1B4))
-    EVT_SET_CONST(LVar0, 1)
+    EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar1)
     EVT_SWITCH(LVar1)
         EVT_CASE_OR_EQ(EVENT_BURN_HIT)
@@ -985,7 +985,7 @@ EvtScript N(8021BDE4) = {
 };
 
 EvtScript N(8021C2BC) = {
-    EVT_SET_CONST(LVar0, 1)
+    EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar1)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(GetActorFlags, ACTOR_SELF, LVar9)

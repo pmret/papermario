@@ -258,7 +258,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar1, ANIM_BattleBowser_Hurt)
             EVT_EXEC_WAIT(N(onHit))
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBowser_Hurt)
             EVT_EXEC_WAIT(N(onDeath))
             EVT_RETURN
@@ -291,7 +291,7 @@ EvtScript N(handleEvent) = {
             EVT_SET(LVar1, ANIM_BattleBowser_BurnHurt)
             EVT_SET(LVar2, ANIM_BattleBowser_BurnStill)
             EVT_EXEC_WAIT(N(onBurnHit))
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBowser_BurnStill)
             EVT_EXEC_WAIT(N(onDeath))
             EVT_RETURN
@@ -302,28 +302,28 @@ EvtScript N(handleEvent) = {
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
             EVT_SET_CONST(LVar1, ANIM_BattleBowser_Hurt)
             EVT_EXEC_WAIT(N(onHit))
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBowser_Hurt)
             EVT_EXEC_WAIT(N(onDeath))
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBowser_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBowser_Hurt)
             EVT_EXEC_WAIT(N(jumpHome))
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(8.0))
             EVT_SET(LVar1, ANIM_BattleBowser_Walk)
             EVT_EXEC_WAIT(N(returnHome))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBowser_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBowser_Hurt)
             EVT_EXEC_WAIT(N(jumpHome))
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBowser_Hurt)
             EVT_EXEC_WAIT(N(onDeath))
             EVT_RETURN
@@ -342,19 +342,19 @@ EvtScript N(handleEvent) = {
             EVT_END_SWITCH
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_AIR_LIFT_FAILED)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET(LVar1, ANIM_BattleBowser_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_CASE_EQ(EVENT_SPIKE_TAUNT)
         EVT_CASE_EQ(EVENT_END_FIRST_STRIKE)
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBowser_Jump)
             EVT_EXEC_WAIT(EVS_Enemy_Recover)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_PostJump)
             EVT_CALL(ShakeCam, CAM_BATTLE, 0, 4, EVT_FLOAT(3.0))
         EVT_CASE_EQ(EVENT_30)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBowser_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_WAIT(1000)
@@ -457,7 +457,7 @@ EvtScript N(onSpinSmashOrNormalHit) = {
 };
 
 EvtScript N(onHit) = {
-    EVT_SET_CONST(LVar0, 1)
+    EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_EXEC_WAIT(EVS_Enemy_Hit)
     EVT_RETURN
     EVT_END
@@ -523,7 +523,7 @@ EvtScript N(onDeath) = {
 };
 
 EvtScript N(onImmune) = {
-    EVT_SET_CONST(LVar0, 1)
+    EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
     EVT_RETURN
     EVT_END

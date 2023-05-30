@@ -239,29 +239,29 @@ EvtScript N(handleEvent) = {
                     EVT_WAIT(8)
                     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_Dark_Anim07)
                 EVT_END_CHILD_THREAD
-                EVT_SET_CONST(LVar0, 1)
+                EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_SET_CONST(LVar1, ANIM_MontyMole_Dark_Anim06)
                 EVT_EXEC_WAIT(EVS_Enemy_Hit)
                 EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_Dark_Anim08)
                 EVT_WAIT(10)
             EVT_ELSE
-                EVT_SET_CONST(LVar0, 1)
+                EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_SET_CONST(LVar1, ANIM_MontyMole_Dark_Anim05)
                 EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_END_IF
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_MontyMole_Dark_Anim0A)
             EVT_SET_CONST(LVar2, ANIM_MontyMole_Dark_Anim0B)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_MontyMole_Dark_Anim0A)
             EVT_SET_CONST(LVar2, ANIM_MontyMole_Dark_Anim0B)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
             EVT_EXEC_WAIT(N(onDeath))
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_MontyMole_Dark_Anim0C)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
@@ -280,19 +280,19 @@ EvtScript N(handleEvent) = {
                 EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_Dark_Anim14)
                 EVT_WAIT(20)
             EVT_ELSE
-                EVT_SET_CONST(LVar0, 1)
+                EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_SET_CONST(LVar1, ANIM_MontyMole_Dark_Anim01)
                 EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
             EVT_END_IF
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_MontyMole_Dark_Anim05)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_MontyMole_Dark_Anim06)
             EVT_WAIT(10)
             EVT_EXEC_WAIT(N(onDeath))
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_MontyMole_Dark_Anim09)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
@@ -314,7 +314,7 @@ EvtScript N(handleEvent) = {
             EVT_CALL(SetIdleAnimations, ACTOR_SELF, PRT_MAIN, EVT_PTR(N(IdleAnimations_hole)))
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_MontyMole_Dark_Anim05)
             EVT_EXEC_WAIT(EVS_Enemy_AirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)

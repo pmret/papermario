@@ -99,14 +99,14 @@ EvtScript N(handleEvent) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Goompa_Injured)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_CALL(PlaySound, SOUND_208C)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Goompa_Injured)
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_END_CASE_GROUP
@@ -128,7 +128,7 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
         EVT_CASE_EQ(EVENT_33)
         EVT_CASE_EQ(EVENT_RECOVER_FROM_KO)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Goompa_Idle)
             EVT_SET_CONST(LVar2, ANIM_Goompa_Run)
             EVT_EXEC_WAIT(EVS_Partner_Recover)
@@ -156,7 +156,7 @@ EvtScript N(takeTurn) = {
 };
 
 EvtScript N(celebrate) = {
-    EVT_SET_CONST(LVar0, 1)
+    EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_SET_CONST(LVar1, ANIM_Goompa_Celebrate)
     EVT_SET_CONST(LVar2, ANIM_Goompa_Walk)
     EVT_EXEC_WAIT(EVS_Partner_Celebrate)
@@ -165,7 +165,7 @@ EvtScript N(celebrate) = {
 };
 
 EvtScript N(runAway) = {
-    EVT_SET_CONST(LVar0, 1)
+    EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_SET_CONST(LVar1, ANIM_Goompa_Run)
     EVT_EXEC_WAIT(EVS_Partner_RunAway)
     EVT_RETURN
