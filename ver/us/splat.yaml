@@ -7250,8 +7250,8 @@ segments:
     subsegments:
     - [0x447440, c, area]
     - [0x447440, c, actor/spiked_goomba]
-    - [0x4476C0, c, actor/paragoomba]
-    - [0x4479A0, c, actor/paragoomba2]
+    - [0x4476C0, c, actor/paragoomba_tutorial]
+    - [0x4479A0, c, actor/paragoomba]
     - [0x447C80, c, actor/jr_troopa]
     - [0x447C80, c, actor/egg_jr_troopa]
     - [0x447C80, c, actor/para_jr_troopa]

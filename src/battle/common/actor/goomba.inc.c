@@ -3,6 +3,8 @@
 #include "script_api/battle.h"
 #include "sprite/npc/Goomba.h"
 
+#define NAMESPACE A(goomba)
+
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };

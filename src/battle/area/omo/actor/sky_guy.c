@@ -406,7 +406,7 @@ EvtScript N(handleEvent_8022A398) = {
             EVT_IF_GE(LVar1, 3)
                 EVT_EXEC_WAIT(N(80229CB0))
             EVT_ELSE
-                EVT_SET_CONST(LVar0, 2)
+                EVT_SET_CONST(LVar0, PRT_2)
                 EVT_SET_CONST(LVar1, ANIM_SkyGuy_Anim06)
                 EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_END_IF
@@ -416,21 +416,21 @@ EvtScript N(handleEvent_8022A398) = {
                 EVT_EXEC_WAIT(N(80229CB0))
                 EVT_EXEC_WAIT(N(80229F08))
             EVT_ELSE
-                EVT_SET_CONST(LVar0, 2)
+                EVT_SET_CONST(LVar0, PRT_2)
                 EVT_SET_CONST(LVar1, ANIM_SkyGuy_Anim06)
                 EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_END_IF
         EVT_CASE_EQ(EVENT_BURN_HIT)
-            EVT_SET_CONST(LVar0, 2)
+            EVT_SET_CONST(LVar0, PRT_2)
             EVT_SET_CONST(LVar1, ANIM_SkyGuy_Anim09)
             EVT_SET_CONST(LVar2, ANIM_SkyGuy_Anim0A)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
-            EVT_SET_CONST(LVar0, 2)
+            EVT_SET_CONST(LVar0, PRT_2)
             EVT_SET_CONST(LVar1, ANIM_SkyGuy_Anim09)
             EVT_SET_CONST(LVar2, ANIM_SkyGuy_Anim0A)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
-            EVT_SET_CONST(LVar0, 2)
+            EVT_SET_CONST(LVar0, PRT_2)
             EVT_SET_CONST(LVar1, ANIM_SkyGuy_Anim0A)
             EVT_EXEC_WAIT(N(80229A34))
             EVT_RETURN
@@ -439,7 +439,7 @@ EvtScript N(handleEvent_8022A398) = {
             EVT_IF_GE(LVar1, 3)
                 EVT_EXEC_WAIT(N(80229CB0))
             EVT_ELSE
-                EVT_SET_CONST(LVar0, 2)
+                EVT_SET_CONST(LVar0, PRT_2)
                 EVT_SET_CONST(LVar1, ANIM_SkyGuy_Anim01)
                 EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
             EVT_END_IF
@@ -449,17 +449,17 @@ EvtScript N(handleEvent_8022A398) = {
             EVT_IF_GE(LVar1, 3)
                 EVT_EXEC_WAIT(N(80229CB0))
             EVT_ELSE
-                EVT_SET_CONST(LVar0, 2)
+                EVT_SET_CONST(LVar0, PRT_2)
                 EVT_SET_CONST(LVar1, ANIM_SkyGuy_Anim01)
                 EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
             EVT_END_IF
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
-            EVT_SET_CONST(LVar0, 2)
+            EVT_SET_CONST(LVar0, PRT_2)
             EVT_SET_CONST(LVar1, ANIM_SkyGuy_Anim06)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_WAIT(10)
-            EVT_SET_CONST(LVar0, 2)
+            EVT_SET_CONST(LVar0, PRT_2)
             EVT_SET_CONST(LVar1, ANIM_SkyGuy_Anim06)
             EVT_EXEC_WAIT(N(80229A34))
             EVT_RETURN
@@ -476,7 +476,7 @@ EvtScript N(handleEvent_8022A398) = {
             EVT_CALL(SetActorYaw, ACTOR_SELF, 0)
             EVT_CALL(HPBarToHome, ACTOR_SELF)
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
-            EVT_SET_CONST(LVar0, 2)
+            EVT_SET_CONST(LVar0, PRT_2)
             EVT_SET_CONST(LVar1, ANIM_SkyGuy_Anim01)
             EVT_EXEC_WAIT(EVS_Enemy_Recover)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
@@ -486,17 +486,17 @@ EvtScript N(handleEvent_8022A398) = {
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_3, ANIM_SkyGuy_Anim1F)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_4, ANIM_SkyGuy_Anim1E)
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_5, ANIM_SkyGuy_Anim20)
-            EVT_SET_CONST(LVar0, 2)
+            EVT_SET_CONST(LVar0, PRT_2)
             EVT_SET_CONST(LVar1, ANIM_SkyGuy_Anim03)
             EVT_SET_CONST(LVar2, ANIM_SkyGuy_Anim06)
             EVT_EXEC_WAIT(EVS_Enemy_ScareAway)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
-            EVT_SET_CONST(LVar0, 2)
+            EVT_SET_CONST(LVar0, PRT_2)
             EVT_SET_CONST(LVar1, ANIM_SkyGuy_Anim03)
             EVT_EXEC_WAIT(EVS_Enemy_AirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
-            EVT_SET_CONST(LVar0, 2)
+            EVT_SET_CONST(LVar0, PRT_2)
             EVT_SET_CONST(LVar1, ANIM_SkyGuy_Anim07)
             EVT_EXEC_WAIT(EVS_Enemy_BlowAway)
             EVT_RETURN

@@ -2,6 +2,8 @@
 #include "battle/battle.h"
 #include "mapfs/nok_bt01_shape.h"
 
+#define NAMESPACE A(nok_01)
+
 EvtScript N(EVS_AnimateFlower) = {
     EVT_SET(LVarA, LVar0)
     EVT_LABEL(0)

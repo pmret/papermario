@@ -4,6 +4,8 @@
 #include "script_api/battle.h"
 #include "sprite/npc/SpikedGoomba.h"
 
+#define NAMESPACE A(spiked_goomba)
+
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
 };

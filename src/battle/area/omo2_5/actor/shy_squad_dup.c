@@ -489,7 +489,7 @@ EvtScript N(move_guy_to_pos) = {
 };
 
 EvtScript N(onSpinSmash) = {
-    EVT_SET_CONST(LVar0, 2)
+    EVT_SET_CONST(LVar0, PRT_2)
     EVT_LOOP(15)
         EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVarD)
         EVT_CALL(GetActorVar, ACTOR_SELF, 4, LVarE)
@@ -675,7 +675,7 @@ EvtScript N(displace_guy) = {
 };
 
 EvtScript N(onShock) = {
-    EVT_SET_CONST(LVar0, 2)
+    EVT_SET_CONST(LVar0, PRT_2)
     EVT_LOOP(15)
         EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVarD)
         EVT_CALL(GetActorVar, ACTOR_SELF, 4, LVarE)
@@ -965,7 +965,7 @@ EvtScript N(80233E48) = {
 };
 
 EvtScript N(onDeath) = {
-    EVT_SET_CONST(LVar0, 2)
+    EVT_SET_CONST(LVar0, PRT_2)
     EVT_LOOP(14)
         EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar2)
         EVT_CALL(GetActorVar, ACTOR_SELF, 4, LVar3)

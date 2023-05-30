@@ -1,5 +1,5 @@
-#include "common.h"
+#include "../area.h"
 
-#define NAMESPACE b_area_nok_fuzzy
-
+//TODO migrate into include
+#define NAMESPACE A(fuzzy)
 #include "battle/common/actor/fuzzy.inc.c"

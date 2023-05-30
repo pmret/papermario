@@ -756,7 +756,7 @@ EvtScript N(displace_guy) = {
 };
 
 EvtScript N(onShock) = {
-    EVT_SET_CONST(LVar0, 2)
+    EVT_SET_CONST(LVar0, PRT_2)
     EVT_LOOP(15)
         EVT_CALL(GetActorVar, ACTOR_SELF, N(ACTOR_VARS_GUYS_KILLED), LVarD)
         EVT_CALL(GetActorVar, ACTOR_SELF, N(ACTOR_VAR_TOTAL_DAMAGE), LVarE)
@@ -1072,7 +1072,7 @@ EvtScript N(kill_guy) = {
 };
 
 EvtScript N(onDeath) = {
-    EVT_SET_CONST(LVar0, 2)
+    EVT_SET_CONST(LVar0, PRT_2)
     EVT_LOOP(14)
         EVT_CALL(GetActorVar, ACTOR_SELF, N(ACTOR_VARS_GUYS_KILLED), LVar2)
         EVT_CALL(GetActorVar, ACTOR_SELF, N(ACTOR_VAR_TOTAL_DAMAGE), LVar3)

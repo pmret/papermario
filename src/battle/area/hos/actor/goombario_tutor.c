@@ -190,7 +190,7 @@ EvtScript N(takeTurn_80219444) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, -10, 0, 0)
     EVT_CALL(GetBattleFlags2, LVar0)
-    EVT_IF_FLAG(LVar0, 0x200)
+    EVT_IF_FLAG(LVar0, BS_FLAGS2_200)
         EVT_CALL(AddGoalPos, ACTOR_SELF, 5, 10, 0)
     EVT_END_IF
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.1))

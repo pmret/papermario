@@ -3,7 +3,6 @@
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "sprite/npc/Bandit.h"
-#include "sprite/npc/WorldParakarry.h"
 
 #define NAMESPACE A(bandit)
 
@@ -487,7 +486,7 @@ EvtScript N(EVS_HandleEvent) = {
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Bandit_Hurt)
-            EVT_SET_CONST(LVar2, ANIM_WorldParakarry_Still)
+            EVT_SET_CONST(LVar2, STATUS_FLAG_DIZZY)
             EVT_EXEC_WAIT(EVS_Enemy_BlowAway)
             EVT_RETURN
         EVT_CASE_DEFAULT

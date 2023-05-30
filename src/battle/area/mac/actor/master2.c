@@ -546,7 +546,7 @@ EvtScript N(nextTurn_8022CFFC) = {
             EVT_END_IF
         EVT_CASE_EQ(12)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-            EVT_IF_FLAG(LVar0, 0x351000)
+            EVT_IF_FLAG(LVar0, STATUS_FLAGS_DOJO)
                 EVT_BREAK_SWITCH
             EVT_END_IF
             EVT_CALL(GetActorHP, ACTOR_SELF, LVar0)
@@ -575,7 +575,7 @@ EvtScript N(nextTurn_8022CFFC) = {
 EvtScript N(handleEvent_8022D634) = {
     EVT_EXEC_WAIT(N(8022B8C0))
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-    EVT_IF_FLAG(LVar0, 0x351000)
+    EVT_IF_FLAG(LVar0, STATUS_FLAGS_DOJO)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetBattleFlags, LVar0)
@@ -597,7 +597,7 @@ EvtScript N(handleEvent_8022D634) = {
             EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVarB)
             EVT_CALL(SetActorVar, ACTOR_SELF, 2, 0)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-            EVT_IF_FLAG(LVar0, 0x3F1000)
+            EVT_IF_FLAG(LVar0, STATUS_FLAGS_DOJO | STATUS_FLAG_POISON | STATUS_FLAG_SHRINK)
                 EVT_BREAK_SWITCH
             EVT_END_IF
             EVT_SET(LFlag0, FALSE)

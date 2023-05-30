@@ -1,5 +1,5 @@
-#include "common.h"
+#include "../area.h"
 
-#define NAMESPACE b_area_nok_paragoomba
-
+//TODO migrate into include
+#define NAMESPACE A(paragoomba)
 #include "battle/common/actor/paragoomba.inc.c"

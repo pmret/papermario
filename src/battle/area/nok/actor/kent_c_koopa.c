@@ -1,10 +1,8 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/Coin.h"
 #include "sprite/npc/KentCKoopa.h"
 
-#define NAMESPACE b_area_nok_kent_c_koopa
+#define NAMESPACE A(kent_c_koopa)
 
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
@@ -795,7 +793,7 @@ EvtScript N(shellToss_KentC) = {
     EVT_CALL(YieldTurn)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 20)
-    EVT_SET_CONST(LVar0, 0x00000001)
+    EVT_SET_CONST(LVar0, 1)
     EVT_SET_CONST(LVar1, ANIM_KentCKoopa_Anim04)
     EVT_EXEC_WAIT(EVS_Enemy_ReturnHome)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_KentCKoopa_Anim01)
@@ -997,7 +995,7 @@ EvtScript N(tackle_KentC) = {
 };
 
 EvtScript N(8022AD84) = {
-    EVT_SET_CONST(LVar0, 0x00000001)
+    EVT_SET_CONST(LVar0, 1)
     EVT_SET_CONST(LVar1, ANIM_KentCKoopa_Anim04)
     EVT_EXEC_WAIT(EVS_Enemy_ReturnHome)
     EVT_RETURN
@@ -1098,7 +1096,7 @@ extern EvtScript N(8022B444);
 
 EvtScript N(8022B2E8) = {
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar3)
-    EVT_IF_FLAG(LVar3, 0x80000)
+    EVT_IF_FLAG(LVar3, STATUS_FLAG_SHRINK)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar3)

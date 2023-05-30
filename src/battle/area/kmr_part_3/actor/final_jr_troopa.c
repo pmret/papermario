@@ -368,7 +368,7 @@ EvtScript N(idle_8022D058) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(2)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
-            EVT_IF_FLAG(LVarA, 0x41000)
+            EVT_IF_FLAG(LVarA, STATUS_FLAG_DIZZY | STATUS_FLAG_SLEEP)
                 EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_2, -15, 28)
                 EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_2, 4, -6)
                 EVT_CALL(N(SetAbsoluteStatusOffsets), -25, 27, -1, 27)
@@ -512,7 +512,7 @@ EvtScript N(handleEvent_8022D1C4) = {
             EVT_EXEC_WAIT(N(80232040))
             EVT_CALL(HPBarToHome, ACTOR_SELF)
         EVT_CASE_EQ(49)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_JrTroopa_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_Recover)
         EVT_CASE_DEFAULT

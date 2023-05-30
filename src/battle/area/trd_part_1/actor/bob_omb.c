@@ -14,7 +14,7 @@ enum N(ActorPartIDs) {
 };
 
 enum N(ActorVars) {
-    AVAR_0              = 0,
+    AVAR_HitDuringCombo = 0,
     AVAR_Ignited        = 8,
 };
 
@@ -147,7 +147,7 @@ EvtScript N(EVS_Init) = {
     EVT_CALL(BindIdle, ACTOR_SELF, EVT_PTR(N(EVS_Idle)))
     EVT_CALL(BindHandleEvent, ACTOR_SELF, EVT_PTR(N(EVS_HandleEvent)))
     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_Ignited, FALSE)
-    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_0, FALSE)
+    EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_HitDuringCombo, FALSE)
     EVT_RETURN
     EVT_END
 };
@@ -236,7 +236,7 @@ EvtScript N(EVS_HandleEvent) = {
         EVT_CASE_EQ(EVENT_HIT_COMBO)
             EVT_CALL(GetLastDamage, ACTOR_SELF, LVar0)
             EVT_IF_NE(LVar0, 0)
-                EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_0, TRUE)
+                EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_HitDuringCombo, TRUE)
             EVT_END_IF
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Bobomb_Hurt)
@@ -309,7 +309,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Bobomb_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
-            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_0, LVar0)
+            EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_HitDuringCombo, LVar0)
             EVT_IF_EQ(LVar0, TRUE)
                 EVT_EXEC_WAIT(N(EVS_Ignite))
             EVT_END_IF
