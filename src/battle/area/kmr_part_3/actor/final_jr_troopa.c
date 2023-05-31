@@ -1,11 +1,9 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/JrTroopa.h"
 #include "sprite/npc/SpikedParaJrTroopa.h"
 #include "sprite/npc/MageJrTroopa.h"
 
-#define NAMESPACE b_area_kmr_part_3_final_jr_troopa
+#define NAMESPACE A(final_jr_troopa)
 
 #include "common/battle/SetAbsoluteStatusOffsets.inc.c"
 

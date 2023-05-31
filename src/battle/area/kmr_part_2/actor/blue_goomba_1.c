@@ -1,9 +1,7 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/GoombaBros.h"
 
-#define NAMESPACE b_area_kmr_part_2_blue_goomba_1
+#define NAMESPACE A(blue_goomba_1)
 
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,

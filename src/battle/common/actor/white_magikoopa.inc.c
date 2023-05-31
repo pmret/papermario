@@ -4,6 +4,8 @@
 #include "sprite/npc/FlyingMagikoopa.h"
 #include "sprite/npc/Magikoopa.h"
 
+#define NAMESPACE A(white_magikoopa)
+
 extern s32 N(IdleAnimations_80223D70)[];
 extern s32 N(IdleAnimations_80223DBC)[];
 extern s32 N(IdleAnimations_80223E08)[];

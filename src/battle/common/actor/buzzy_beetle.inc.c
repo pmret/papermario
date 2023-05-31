@@ -4,6 +4,8 @@
 #include "script_api/battle.h"
 #include "sprite/npc/BuzzyBeetle.h"
 
+#define NAMESPACE A(buzzy_beetle)
+
 extern s32 N(IdleAnimations)[];
 extern EvtScript N(init);
 extern EvtScript N(idle);

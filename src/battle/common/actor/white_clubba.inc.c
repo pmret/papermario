@@ -3,6 +3,8 @@
 #include "script_api/battle.h"
 #include "sprite/npc/BattleClubba.h"
 
+#define NAMESPACE A(white_clubba)
+
 extern EvtScript N(init);
 extern EvtScript N(idle);
 extern EvtScript N(takeTurn);

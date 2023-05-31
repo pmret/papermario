@@ -1,10 +1,7 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
-#include "effects.h"
+#include "../area.h"
 #include "sprite/npc/CrystalKing.h"
 
-#define NAMESPACE b_area_pra2_crystal_bit
+#define NAMESPACE A(crystal_bit)
 
 extern EvtScript N(init);
 extern EvtScript N(takeTurn);

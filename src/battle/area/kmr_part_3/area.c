@@ -7,8 +7,8 @@ extern ActorBlueprint A(spiked_para_jr_troopa);
 extern ActorBlueprint A(mage_jr_troopa);
 extern ActorBlueprint A(final_jr_troopa);
 extern ActorBlueprint A(paragoomba);
-extern ActorBlueprint A(paragoomba_tutorial);
-extern ActorBlueprint A(spiked_goomba);
+extern ActorBlueprint A(tutorial_paragoomba);
+extern ActorBlueprint A(tutorial_spiked_goomba);
 
 extern Stage A(kmr_02);
 extern Stage A(kmr_03);
@@ -22,12 +22,12 @@ extern Stage A(mac_01);
 extern Stage A(kpa_01);
 
 Formation A(Formation_00) = {
-    ACTOR_BY_IDX(A(spiked_goomba), BTL_POS_GROUND_C, 0),
+    ACTOR_BY_IDX(A(tutorial_spiked_goomba), BTL_POS_GROUND_C, 0),
 };
 
 Formation A(Formation_01) = {
     ACTOR_BY_IDX(A(paragoomba), BTL_POS_AIR_B, 10),
-    ACTOR_BY_IDX(A(paragoomba_tutorial), BTL_POS_AIR_C, 9),
+    ACTOR_BY_IDX(A(tutorial_paragoomba), BTL_POS_AIR_C, 9),
 };
 
 Formation A(Formation_02) = {

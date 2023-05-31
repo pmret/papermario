@@ -1,9 +1,7 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/TheMaster.h"
 
-#define NAMESPACE b_area_mac_master2
+#define NAMESPACE A(master2)
 
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,

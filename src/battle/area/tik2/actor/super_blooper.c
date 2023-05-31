@@ -1,11 +1,9 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/Blooper.h"
 
-#define NAMESPACE b_area_tik2_super_blooper
+#define NAMESPACE A(super_blooper)
 
-extern ActorBlueprint b_area_tik2_blooper_baby;
+extern ActorBlueprint A(blooper_baby);
 
 extern EvtScript N(init);
 extern EvtScript N(takeTurn);
@@ -894,12 +892,12 @@ EvtScript N(unEnrage) = {
     EVT_END
 };
 
-Vec3i N(baby_pos) = { 400, 0, 0 };
+Vec3i N(BabyPos) = { 400, 0, 0 };
 
 Formation N(formation_baby_1) = {
-    ACTOR_BY_POS(b_area_tik2_blooper_baby, N(baby_pos), 95, 30, 68),
+    ACTOR_BY_POS(A(blooper_baby), N(BabyPos), 95, 30, 68),
 };
 
 Formation N(formation_baby_2) = {
-    ACTOR_BY_POS(b_area_tik2_blooper_baby, N(baby_pos), 94, 134, 45),
+    ACTOR_BY_POS(A(blooper_baby), N(BabyPos), 94, 134, 45),
 };

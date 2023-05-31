@@ -5,6 +5,8 @@
 #include "sprite/npc/Swooper.h"
 #include "battle/action_cmd/stop_leech.h"
 
+#define NAMESPACE A(swoopula)
+
 extern EvtScript N(init);
 extern EvtScript N(idle);
 extern EvtScript N(takeTurn);

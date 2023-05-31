@@ -1,10 +1,7 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/MontyMole.h"
-#include "effects.h"
 
-#define NAMESPACE b_area_flo2_monty_mole_boss
+#define NAMESPACE A(monty_mole_boss)
 
 extern s32 N(IdleAnimations)[];
 extern s32 N(IdleAnimations2)[];

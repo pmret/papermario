@@ -1,10 +1,7 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/BattleBowser.h"
-#include "effects.h"
 
-#define NAMESPACE b_area_kpa2_bowser_phase_1
+#define NAMESPACE A(bowser_phase_1)
 
 extern EvtScript N(init);
 extern EvtScript N(idle);

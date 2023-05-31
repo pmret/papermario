@@ -1,10 +1,8 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/PetitPiranha.h"
 #include "effects.h"
 
-#define NAMESPACE b_area_kzn2_petit_piranha
+#define NAMESPACE A(petit_piranha)
 
 extern EvtScript N(init);
 extern EvtScript N(takeTurn);

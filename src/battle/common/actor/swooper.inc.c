@@ -3,6 +3,8 @@
 #include "script_api/battle.h"
 #include "sprite/npc/Swooper.h"
 
+#define NAMESPACE A(swooper)
+
 extern s32 N(IdleAnimations)[];
 extern EvtScript N(init);
 extern EvtScript N(takeTurn);

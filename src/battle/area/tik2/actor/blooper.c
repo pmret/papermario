@@ -1,9 +1,7 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/Blooper.h"
 
-#define NAMESPACE b_area_tik2_blooper
+#define NAMESPACE A(blooper)
 
 extern EvtScript N(init);
 extern EvtScript N(takeTurn);

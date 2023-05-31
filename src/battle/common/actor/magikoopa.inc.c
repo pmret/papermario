@@ -5,6 +5,8 @@
 #include "sprite/npc/FlyingMagikoopa.h"
 #include "effects.h"
 
+#define NAMESPACE A(magikoopa)
+
 extern EvtScript N(init);
 extern EvtScript N(idle);
 extern EvtScript N(takeTurn);

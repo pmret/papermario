@@ -3,6 +3,8 @@
 #include "script_api/battle.h"
 #include "sprite/npc/LavaBubble.h"
 
+#define NAMESPACE A(ember)
+
 extern s32 N(IdleAnimations_8021AE5C)[];
 extern s32 N(IdleAnimations_8021AEA8)[];
 

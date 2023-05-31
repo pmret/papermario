@@ -1,12 +1,10 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "battle/action_cmd/jump.h"
 #include "battle/action_cmd.h"
 #include "sprite/npc/BattleGoombario.h"
 #include "sprite/npc/Twink.h"
 
-#define NAMESPACE b_area_hos_goombario_tutor
+#define NAMESPACE A(goombario_tutor)
 
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,

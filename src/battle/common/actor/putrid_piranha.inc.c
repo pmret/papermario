@@ -3,6 +3,8 @@
 #include "script_api/battle.h"
 #include "sprite/npc/LargePiranha.h"
 
+#define NAMESPACE A(putrid_piranha)
+
 extern EvtScript N(init_8021B1F8);
 extern EvtScript N(takeTurn_8021B8A8);
 extern EvtScript N(idle_8021B244);

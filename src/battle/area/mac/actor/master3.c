@@ -1,9 +1,7 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/TheMaster.h"
 
-#define NAMESPACE b_area_mac_master3
+#define NAMESPACE A(master3)
 
 extern EvtScript N(init_8022DB60);
 extern EvtScript N(takeTurn_80230B20);

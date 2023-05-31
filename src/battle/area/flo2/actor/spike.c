@@ -1,10 +1,7 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/BattleLakilester.h"
-#include "effects.h"
 
-#define NAMESPACE b_area_flo2_spike
+#define NAMESPACE A(spike)
 
 extern EvtScript N(init);
 extern EvtScript N(takeTurn);

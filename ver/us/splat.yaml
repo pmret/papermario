@@ -7249,8 +7249,8 @@ segments:
     subalign: 4
     subsegments:
     - [0x447440, c, area]
-    - [0x447440, c, actor/spiked_goomba]
-    - [0x4476C0, c, actor/paragoomba_tutorial]
+    - [0x447440, c, actor/tutorial_spiked_goomba]
+    - [0x4476C0, c, actor/tutorial_paragoomba]
     - [0x4479A0, c, actor/paragoomba]
     - [0x447C80, c, actor/jr_troopa]
     - [0x447C80, c, actor/egg_jr_troopa]

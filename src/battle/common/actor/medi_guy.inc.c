@@ -4,6 +4,8 @@
 #include "script_api/battle.h"
 #include "sprite/npc/MediGuy.h"
 
+#define NAMESPACE A(medi_guy)
+
 extern EvtScript N(init);
 extern EvtScript N(takeTurn);
 extern EvtScript N(idle);

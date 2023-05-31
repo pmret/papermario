@@ -1,12 +1,9 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/LavaBud.h"
 #include "sprite/npc/PetitPiranha.h"
-#include "effects.h"
 #include "ld_addrs.h"
 
-#define NAMESPACE b_area_kzn2_lava_bud
+#define NAMESPACE A(lava_bud)
 
 extern EvtScript N(init);
 extern EvtScript N(idle);
@@ -23,10 +20,10 @@ extern EvtScript N(8022630C);
 
 API_CALLABLE(SetAnimatorFlags);
 
-extern EvtScript b_area_kzn2_lava_piranha_ignite;
+extern EvtScript A(lava_piranha_ignite);
 
-extern ActorBlueprint b_area_kzn2_petit_piranha;
-extern ActorBlueprint b_area_kzn2_petit_piranha_bomb;
+extern ActorBlueprint A(petit_piranha);
+extern ActorBlueprint A(petit_piranha_bomb);
 
 extern Formation N(formation_petit_piranha_1);
 extern Formation N(formation_petit_piranha_2);
@@ -339,7 +336,7 @@ EvtScript N(onBurnHit) = {
         EVT_ELSE
             EVT_SET(LVar0, ACTOR_ENEMY2)
         EVT_END_IF
-        EVT_EXEC_WAIT(b_area_kzn2_lava_piranha_ignite)
+        EVT_EXEC_WAIT(A(lava_piranha_ignite))
         EVT_LABEL(10)
     EVT_END_THREAD
     EVT_CALL(GetActorVar, ACTOR_ENEMY0, 0, LVar0)
@@ -445,7 +442,7 @@ EvtScript N(takeTurn) = {
                     EVT_SET(LVar0, ACTOR_ENEMY2)
                 EVT_END_IF
                 EVT_CALL(PlaySoundAtActor, LVar0, SOUND_20BF)
-                EVT_EXEC_WAIT(b_area_kzn2_lava_piranha_ignite)
+                EVT_EXEC_WAIT(A(lava_piranha_ignite))
                 EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
                 EVT_IF_EQ(LVar0, 1)
                     EVT_CALL(OverrideBattleDmaDest, VINE_1_BASE)
@@ -606,15 +603,15 @@ EvtScript N(summonPetitPiranha) = {
 Vec3i N(petit_piranha_pos) = { 260, 0, 0 };
 
 Formation N(formation_petit_piranha_1) = {
-    ACTOR_BY_POS(b_area_kzn2_petit_piranha, N(petit_piranha_pos), 95, -12, 85),
+    ACTOR_BY_POS(A(petit_piranha), N(petit_piranha_pos), 95, -12, 85),
 };
 
 Formation N(formation_petit_piranha_2) = {
-    ACTOR_BY_POS(b_area_kzn2_petit_piranha, N(petit_piranha_pos), 94, 18, 38),
+    ACTOR_BY_POS(A(petit_piranha), N(petit_piranha_pos), 94, 18, 38),
 };
 
 Formation N(formation_petit_piranha_bomb) = {
-    ACTOR_BY_POS(b_area_kzn2_petit_piranha_bomb, N(petit_piranha_pos), 95),
+    ACTOR_BY_POS(A(petit_piranha_bomb), N(petit_piranha_pos), 95),
 };
 
 EvtScript N(onDeath) = {

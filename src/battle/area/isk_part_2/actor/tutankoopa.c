@@ -1,14 +1,11 @@
-#include "common.h"
-#include "effects.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/Tutankoopa.h"
 #include "sprite/npc/ChainChomp.h"
 #include "sprite/npc/BuzzyBeetle.h"
 
-#define NAMESPACE b_area_isk_part_2_tutankoopa
+#define NAMESPACE A(tutankoopa)
 
-extern ActorBlueprint b_area_isk_part_2_chain_chomp;
+extern ActorBlueprint A(chain_chomp);
 extern EvtScript N(EVS_Init);
 extern EvtScript N(EVS_TakeTurn);
 extern EvtScript N(EVS_Idle);
@@ -955,7 +952,7 @@ EvtScript N(EVS_DropDebris_Players) = {
 Vec3i N(SummonedChompPos) = { 190, 0, 0 };
 
 Formation N(SummonedChomp) = {
-    ACTOR_BY_POS(b_area_isk_part_2_chain_chomp, N(SummonedChompPos), 100),
+    ACTOR_BY_POS(A(chain_chomp), N(SummonedChompPos), 100),
 };
 
 EvtScript N(EVS_Move_SummonChomp) = {

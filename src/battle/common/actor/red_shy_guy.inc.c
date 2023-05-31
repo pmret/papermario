@@ -3,6 +3,8 @@
 #include "script_api/battle.h"
 #include "sprite/npc/ShyGuy.h"
 
+#define NAMESPACE A(red_shy_guy)
+
 extern s32 N(IdleAnimations)[];
 extern EvtScript N(init);
 extern EvtScript N(takeTurn);

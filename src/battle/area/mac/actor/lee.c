@@ -1,6 +1,4 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/Lee.h"
 #include "sprite/npc/BattleBombette.h"
 #include "sprite/npc/BattleBow.h"
@@ -11,7 +9,7 @@
 #include "sprite/npc/BattleSushie.h"
 #include "sprite/npc/BattleWatt.h"
 
-#define NAMESPACE b_area_mac_lee
+#define NAMESPACE A(lee)
 
 extern EvtScript N(init_8021D4C8);
 extern EvtScript N(takeTurn_80229F9C);
@@ -1196,9 +1194,9 @@ EvtScript N(init_Kooper) = {
     EVT_END
 };
 
-#define NAMESPACE b_area_mac_lee_kooper
+#define NAMESPACE A(lee_kooper)
 #include "common/battle/SetAbsoluteStatusOffsets.inc.c"
-#define NAMESPACE b_area_mac_lee
+#define NAMESPACE A(lee)
 
 EvtScript N(idle_80220790) = {
     EVT_LABEL(0)
@@ -1808,9 +1806,9 @@ EvtScript N(handleEvent_80222468) = {
     EVT_END
 };
 
-#define NAMESPACE b_area_mac_lee_bombette
+#define NAMESPACE A(lee_bombette)
 #include "common/UnkActorPosFunc.inc.c"
-#define NAMESPACE b_area_mac_lee
+#define NAMESPACE A(lee)
 
 EvtScript N(takeTurn_802229C4) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)

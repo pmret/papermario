@@ -4,6 +4,8 @@
 #include "effects.h"
 #include "sprite/npc/Duplighost.h"
 
+#define NAMESPACE A(duplighost)
+
 extern EvtScript N(init);
 extern EvtScript N(takeTurn);
 extern EvtScript N(idle);

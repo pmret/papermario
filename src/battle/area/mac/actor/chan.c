@@ -1,9 +1,7 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/Chan.h"
 
-#define NAMESPACE b_area_mac_chan
+#define NAMESPACE A(chan)
 
 extern s32 N(IdleAnimations_80219EBC)[];
 extern EvtScript N(init_8021CCDC);

@@ -1,10 +1,7 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
-#include "effects.h"
+#include "../area.h"
 #include "sprite/npc/CrystalKing.h"
 
-#define NAMESPACE b_area_pra2_crystal_king
+#define NAMESPACE A(crystal_king)
 
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
@@ -42,9 +39,9 @@ enum N(ActorVars) {
 
 static Vec3f N(paths)[3][3];
 
-extern ActorBlueprint b_area_pra2_crystal_bit_1;
-extern ActorBlueprint b_area_pra2_crystal_bit_2;
-extern ActorBlueprint b_area_pra2_crystal_bit_3;
+extern ActorBlueprint A(crystal_bit_1);
+extern ActorBlueprint A(crystal_bit_2);
+extern ActorBlueprint A(crystal_bit_3);
 
 extern EvtScript N(init);
 extern EvtScript N(takeTurn);
@@ -1416,15 +1413,15 @@ EvtScript N(MakeIllusions) = {
 };
 
 Formation N(formation_bit_1) = {
-    ACTOR_BY_POS(b_area_pra2_crystal_bit_1, N(pos_crystal_clone), 0),
+    ACTOR_BY_POS(A(crystal_bit_1), N(pos_crystal_clone), 0),
 };
 
 Formation N(formation_bit_2) = {
-    ACTOR_BY_POS(b_area_pra2_crystal_bit_2, N(pos_crystal_clone), 0),
+    ACTOR_BY_POS(A(crystal_bit_2), N(pos_crystal_clone), 0),
 };
 
 Formation N(formation_bit_3) = {
-    ACTOR_BY_POS(b_area_pra2_crystal_bit_3, N(pos_crystal_clone), 0),
+    ACTOR_BY_POS(A(crystal_bit_3), N(pos_crystal_clone), 0),
 };
 
 s32 N(array_1)[16] = { };

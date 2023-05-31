@@ -1,10 +1,8 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/JrTroopa.h"
 #include "sprite/npc/ParaJrTroopa.h"
 
-#define NAMESPACE b_area_kmr_part_3_para_jr_troopa
+#define NAMESPACE A(para_jr_troopa)
 
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,

@@ -1,12 +1,9 @@
-#include "common.h"
-#include "effects.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/Buzzar.h"
 #include "battle/action_cmd/break_free.h"
 #include "battle/action_cmd/whirlwind.h"
 
-#define NAMESPACE b_area_iwa_buzzar
+#define NAMESPACE A(buzzar)
 
 extern EvtScript N(EVS_Init);
 extern EvtScript N(EVS_TakeTurn);

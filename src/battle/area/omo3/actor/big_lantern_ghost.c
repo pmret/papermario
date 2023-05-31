@@ -1,11 +1,8 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
-#include "sprite/npc/BigLanternGhost.h"
-#include "effects.h"
+#include "../area.h"
 #include "sprite.h"
+#include "sprite/npc/BigLanternGhost.h"
 
-#define NAMESPACE b_area_omo3_big_lantern_ghost
+#define NAMESPACE A(big_lantern_ghost)
 
 extern s32 N(IdleAnimations)[];
 

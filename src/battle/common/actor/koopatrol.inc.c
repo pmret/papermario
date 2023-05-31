@@ -4,6 +4,8 @@
 #include "sprite/npc/Koopatrol.h"
 #include "effects.h"
 
+#define NAMESPACE A(koopatrol)
+
 extern EvtScript N(init);
 extern EvtScript N(takeTurn);
 extern EvtScript N(idle);

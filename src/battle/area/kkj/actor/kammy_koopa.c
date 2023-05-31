@@ -1,13 +1,10 @@
-#include "common.h"
-#include "effects.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
+#include "entity.h"
 #include "sprite/npc/BattleKammy.h"
 #include "sprite/npc/Twink.h"
 #include "sprite/npc/BattleParakarry.h"
-#include "entity.h"
 
-#define NAMESPACE b_area_kkj_kammy_koopa
+#define NAMESPACE A(kammy_koopa)
 
 extern EvtScript N(init);
 extern EvtScript N(idle);

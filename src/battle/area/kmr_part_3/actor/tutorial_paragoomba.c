@@ -3,7 +3,7 @@
 #include "sprite/npc/Goomba.h"
 #include "sprite/npc/Goompa.h"
 
-#define NAMESPACE A(paragoomba_tutorial)
+#define NAMESPACE A(tutorial_paragoomba)
 
 extern s32 N(IdleAnimations_8021DB9C)[];
 extern s32 N(IdleAnimations_8021C3D8)[];

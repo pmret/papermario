@@ -1,10 +1,7 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
-#include "effects.h"
+#include "../area.h"
 #include "sprite/npc/AlbinoDino.h"
 
-#define NAMESPACE b_area_pra_albino_dino
+#define NAMESPACE A(albino_dino)
 
 extern EvtScript N(init);
 extern EvtScript N(idle);

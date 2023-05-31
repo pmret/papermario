@@ -1,13 +1,10 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/HuffNPuff.h"
 #include "sprite/npc/RuffPuff.h"
-#include "effects.h"
 #include "battle/action_cmd/whirlwind.h"
 #include "battle/action_cmd/stop_leech.h"
 
-#define NAMESPACE b_area_flo2_huff_n_puff
+#define NAMESPACE A(huff_n_puff)
 
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
@@ -38,7 +35,7 @@ enum N(Flags) {
     N(FLAG_SPEAK_4) = 0x80,
 };
 
-extern ActorBlueprint b_area_flo2_tuff_puff;
+extern ActorBlueprint A(tuff_puff);
 
 extern EvtScript N(EVS_Init);
 extern EvtScript N(takeTurn);
@@ -548,11 +545,11 @@ EvtScript N(idle) = {
 Vec3i N(tuff_puff_pos) = { NPC_DISPOSE_LOCATION };
 
 Formation N(formation_tuff_puff_small) = {
-    ACTOR_BY_POS(b_area_flo2_tuff_puff, N(tuff_puff_pos), 0),
+    ACTOR_BY_POS(A(tuff_puff), N(tuff_puff_pos), 0),
 };
 
 Formation N(formation_tuff_puff_large) = {
-    ACTOR_BY_POS(b_area_flo2_tuff_puff, N(tuff_puff_pos), 0, 1),
+    ACTOR_BY_POS(A(tuff_puff), N(tuff_puff_pos), 0, 1),
 };
 
 EvtScript N(spawnTuffPuff) = {

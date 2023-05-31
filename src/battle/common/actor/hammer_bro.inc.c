@@ -3,6 +3,8 @@
 #include "script_api/battle.h"
 #include "sprite/npc/HammerBros.h"
 
+#define NAMESPACE A(hammer_bro)
+
 extern EvtScript N(init);
 extern EvtScript N(takeTurn);
 extern EvtScript N(idle);

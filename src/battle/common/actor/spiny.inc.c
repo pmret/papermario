@@ -1,9 +1,11 @@
 #include "common.h"
+#include "effects.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "sprite/npc/Spiny.h"
 #include "sprite/npc/Lakitu.h"
-#include "effects.h"
+
+#define NAMESPACE A(spiny)
 
 extern EvtScript N(init);
 extern EvtScript N(takeTurn);

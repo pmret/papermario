@@ -4,6 +4,8 @@
 #include "script_api/battle.h"
 #include "sprite/npc/SpikeTop.h"
 
+#define NAMESPACE A(spike_top)
+
 extern s32 N(IdleAnimations)[];
 extern EvtScript N(init);
 extern EvtScript N(idle);
