@@ -47,6 +47,6 @@ Formation N(WhackaFormation) = {
     ACTOR_BY_POS(N(whacka), N(WhackaPos), 0),
 };
 
-#define NAMESPACE b_area_iwa_iwa_01_whacka
+#define AREA b_area_iwa_iwa_01
 #include "battle/common/actor/whacka.inc.c"
-#define NAMESPACE b_area_iwa_iwa_01
+#define AREA b_area_iwa

@@ -7475,7 +7475,7 @@ segments:
     vram: 0x80218000
     follows_vram: heaps
     subsegments:
-    - [0x4FEA50, c, actor/hypergoomba]
+    - [0x4FEA50, c, actor/hyper_goomba]
     - [0x4FED30, c, actor/hyper_paragoomba]
     - [0x4FF010, c, actor/hyper_cleft]
     - [0x4FF0D0, c, actor/tubbas_heart]

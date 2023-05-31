@@ -1,11 +1,8 @@
-#include "common.h"
-#include "effects.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/Goomba.h"
 #include "sprite/npc/Paragoomba.h"
 
-#define NAMESPACE b_area_arn_hyper_paragoomba
+#define NAMESPACE A(hyper_paragoomba)
 
 extern s32 N(IdleAnimations_8021C594)[];
 extern s32 N(IdleAnimations_8021C62C)[];

@@ -1,8 +1,7 @@
-#include "common.h"
-#include "battle/battle.h"
+#include "../area.h"
 #include "mapfs/nok_bt04_shape.h"
 
-#define NAMESPACE b_area_dig_dig_01
+#define NAMESPACE A(dig_01)
 
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)

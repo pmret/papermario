@@ -1,10 +1,7 @@
-#include "common.h"
-#include "effects.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/SmallPiranha.h"
 
-#define NAMESPACE b_area_mim_piranha_plant
+#define NAMESPACE A(piranha_plant)
 
 extern EvtScript N(init_8021D498);
 extern EvtScript N(takeTurn_8021DCD4);

@@ -4932,7 +4932,7 @@ segments:
     start: 0x5517A0
     vram: 0x80218000
     subsegments:
-    - [0x5517A0, c, actor/hypergoomba]
+    - [0x5517A0, c, actor/hyper_goomba]
     - [0x551A80, c, actor/hyper_paragoomba]
     - [0x551D60, c, actor/hyper_cleft]
     - [0x551E20, c, actor/tubbas_heart]

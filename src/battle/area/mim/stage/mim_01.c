@@ -1,8 +1,7 @@
-#include "common.h"
-#include "battle/battle.h"
+#include "../area.h"
 #include "mapfs/mim_bt01_shape.h"
 
-#define NAMESPACE b_area_mim_mim_01
+#define NAMESPACE A(mim_01)
 
 #include "common/UnkFogFunc2.inc.c"
 

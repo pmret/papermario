@@ -1,8 +1,7 @@
-#include "common.h"
-#include "battle/battle.h"
+#include "../area.h"
 #include "mapfs/arn_bt02_shape.h"
 
-#define NAMESPACE b_area_arn_arn_02
+#define NAMESPACE A(arn_02)
 
 EvtScript N(EVS_RotateWindmill) = {
     EVT_SET(LVarA, LVar0)

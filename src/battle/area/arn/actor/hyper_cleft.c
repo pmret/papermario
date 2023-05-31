@@ -1,10 +1,7 @@
-#include "common.h"
-#include "effects.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/Cleft.h"
 
-#define NAMESPACE b_area_arn_hyper_cleft
+#define NAMESPACE A(hyper_cleft)
 
 extern s32 N(IdleAnimations_80221CD4)[];
 extern EvtScript N(EVS_Init);

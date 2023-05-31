@@ -11,10 +11,10 @@ extern Stage A(sam_02c);
 extern Stage A(sam_02d);
 extern Stage A(sam_03);
 
-Vec3i A(80223490) = { 75, 16, 5 };
+Vec3i A(MonstarPos) = { 75, 16, 5 };
 
 Formation A(Formation_01) = {
-    ACTOR_BY_POS(A(monstar), A(80223490), 10),
+    ACTOR_BY_POS(A(monstar), A(MonstarPos), 10),
 };
 
 Formation A(Formation_02) = {

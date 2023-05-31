@@ -1,8 +1,7 @@
-#include "common.h"
-#include "battle/battle.h"
+#include "../area.h"
 #include "mapfs/dgb_bt02_shape.h"
 
-#define NAMESPACE b_area_dgb_dgb_02
+#define NAMESPACE A(dgb_02)
 
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)

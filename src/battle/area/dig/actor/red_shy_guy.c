@@ -1,5 +1,4 @@
-#include "common.h"
+#include "../area.h"
 
-#define NAMESPACE b_area_dig_red_shy_guy
-
+#define NAMESPACE A(red_shy_guy)
 #include "battle/common/actor/red_shy_guy.inc.c"

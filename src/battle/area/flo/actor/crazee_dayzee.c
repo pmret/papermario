@@ -1,10 +1,7 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/Dayzee.h"
-#include "effects.h"
 
-#define NAMESPACE b_area_flo_crazee_dayzee
+#define NAMESPACE A(crazee_dayzee)
 
 extern EvtScript N(EVS_Init);
 extern EvtScript N(takeTurn);

@@ -3,6 +3,8 @@
 #include "script_api/battle.h"
 #include "sprite/npc/MontyMole.h"
 
+#define NAMESPACE A(monty_mole)
+
 extern s32 N(IdleAnimations)[];
 extern s32 N(IdleAnimations2)[];
 extern EvtScript N(init);

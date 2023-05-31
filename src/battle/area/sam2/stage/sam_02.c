@@ -1,30 +1,28 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "mapfs/sam_bt02_shape.h"
 
-#define NAMESPACE b_area_sam2_sam_02
+#define NAMESPACE A(sam_02)
 
 #include "battle/common/stage/lib/Snowflakes.inc.c"
 
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetGroupVisibility, 10, MODEL_GROUP_HIDDEN)
-    EVT_CALL(SetGroupVisibility, 12, MODEL_GROUP_HIDDEN)
+    EVT_CALL(SetGroupVisibility, MODEL_p2, MODEL_GROUP_HIDDEN)
+    EVT_CALL(SetGroupVisibility, MODEL_p3, MODEL_GROUP_HIDDEN)
     EVT_THREAD
-        EVT_SET(LVar0, 18)
+        EVT_SET(LVar0, MODEL_o253)
         EVT_SET(LVar1, 0)
         EVT_EXEC(N(EVS_AnimateHangingSnowflake_RandomSpin))
         EVT_WAIT(5)
-        EVT_SET(LVar0, 20)
+        EVT_SET(LVar0, MODEL_o283)
         EVT_SET(LVar1, 0)
         EVT_EXEC(N(EVS_AnimateHangingSnowflake_RandomSpin))
         EVT_WAIT(5)
-        EVT_SET(LVar0, 22)
+        EVT_SET(LVar0, MODEL_o284)
         EVT_SET(LVar1, 0)
         EVT_EXEC(N(EVS_AnimateHangingSnowflake_RandomSpin))
         EVT_WAIT(5)
-        EVT_SET(LVar0, 24)
+        EVT_SET(LVar0, MODEL_o285)
         EVT_SET(LVar1, 0)
         EVT_EXEC(N(EVS_AnimateHangingSnowflake_RandomSpin))
     EVT_END_THREAD

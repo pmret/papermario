@@ -1,9 +1,7 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "mapfs/sam_bt03_shape.h"
 
-#define NAMESPACE b_area_sam2_sam_03
+#define NAMESPACE A(sam_03)
 
 #include "battle/common/stage/lib/Snowflakes.inc.c"
 
@@ -14,19 +12,19 @@ void func_80219E40_63F020(void) {
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_THREAD
-        EVT_SET(LVar0, 16)
+        EVT_SET(LVar0, MODEL_Default)
         EVT_SET(LVar1, 0)
         EVT_EXEC(N(EVS_AnimateHangingSnowflake_RandomSpin))
         EVT_WAIT(5)
-        EVT_SET(LVar0, 25)
+        EVT_SET(LVar0, MODEL_g62)
         EVT_SET(LVar1, 0)
         EVT_EXEC(N(EVS_AnimateHangingSnowflake_NoSpin))
         EVT_WAIT(5)
-        EVT_SET(LVar0, 22)
+        EVT_SET(LVar0, MODEL_g60)
         EVT_SET(LVar1, 0)
         EVT_EXEC(N(EVS_AnimateHangingSnowflake_NoSpin))
         EVT_WAIT(5)
-        EVT_SET(LVar0, 19)
+        EVT_SET(LVar0, MODEL_g58)
         EVT_SET(LVar1, 0)
         EVT_EXEC(N(EVS_AnimateHangingSnowflake_NoSpin))
     EVT_END_THREAD

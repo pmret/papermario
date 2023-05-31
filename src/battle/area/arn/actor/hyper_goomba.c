@@ -1,10 +1,7 @@
-#include "common.h"
-#include "effects.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/Goomba.h"
 
-#define NAMESPACE b_area_arn_hypergoomba
+#define NAMESPACE A(hyper_goomba)
 
 extern s32 N(IdleAnimations_80219818)[];
 extern EvtScript N(init_802188C0);

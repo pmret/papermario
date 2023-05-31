@@ -1,12 +1,9 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
-#include "effects.h"
+#include "../area.h"
 #include "sprite.h"
 #include "sprite/npc/Monstar.h"
 #include "battle/area/sam2/actor/img.png.h"
 
-#define NAMESPACE b_area_sam2_monstar
+#define NAMESPACE A(monstar)
 
 extern Gfx N(dlist)[];
 

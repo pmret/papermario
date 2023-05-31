@@ -1,8 +1,7 @@
-#include "common.h"
-#include "battle/battle.h"
+#include "../area.h"
 #include "mapfs/arn_bt04_shape.h"
 
-#define NAMESPACE b_area_arn_arn_04
+#define NAMESPACE A(arn_04)
 
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)

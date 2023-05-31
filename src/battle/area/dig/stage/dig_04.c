@@ -1,9 +1,7 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "mapfs/omo_bt04_shape.h"
 
-#define NAMESPACE b_area_dig_dig_04
+#define NAMESPACE A(dig_04)
 
 extern Formation N(Formation_SlotMachine);
 extern ActorBlueprint N(slot_machine_stop);
@@ -12,7 +10,7 @@ extern ActorBlueprint N(slot_machine_start);
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_CALL(SetTexPanner, 29, TEX_PANNER_A)
+    EVT_CALL(SetTexPanner, MODEL_o409, TEX_PANNER_A)
     EVT_THREAD
         EVT_SET(LVarE, 0)
         EVT_LOOP(0)

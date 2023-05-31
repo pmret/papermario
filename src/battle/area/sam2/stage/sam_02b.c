@@ -1,16 +1,14 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "mapfs/sam_bt02_shape.h"
 
-#define NAMESPACE b_area_sam2_sam_02b
+#define NAMESPACE A(sam_02b)
 
 #include "battle/common/stage/lib/Snowflakes.inc.c"
 
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetGroupVisibility, 3, MODEL_GROUP_HIDDEN)
-    EVT_CALL(SetGroupVisibility, 26, MODEL_GROUP_HIDDEN)
+    EVT_CALL(SetGroupVisibility, MODEL_p1, MODEL_GROUP_HIDDEN)
+    EVT_CALL(SetGroupVisibility, MODEL_yuki, MODEL_GROUP_HIDDEN)
     EVT_EXEC(N(EVS_SpawnSnowfall))
     EVT_RETURN
     EVT_END

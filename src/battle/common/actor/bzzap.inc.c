@@ -3,6 +3,8 @@
 #include "script_api/battle.h"
 #include "sprite/npc/Bzzap.h"
 
+#define NAMESPACE A(bzzap)
+
 extern EvtScript N(init);
 extern EvtScript N(takeTurn);
 extern EvtScript N(idle);

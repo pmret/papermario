@@ -3,6 +3,8 @@
 #include "script_api/battle.h"
 #include "sprite/npc/Whacka.h"
 
+#define NAMESPACE A(whacka)
+
 extern EvtScript N(init);
 extern EvtScript N(takeTurn);
 extern EvtScript N(idle);

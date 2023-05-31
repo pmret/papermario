@@ -1,11 +1,8 @@
-#include "common.h"
-#include "effects.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/BattleBow.h"
 #include "sprite/npc/TubbasHeart.h"
 
-#define NAMESPACE b_area_arn_tubbas_heart
+#define NAMESPACE A(tubbas_heart)
 
 extern EvtScript N(init_80223DA0);
 extern EvtScript N(takeTurn_802245C8);

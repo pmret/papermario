@@ -1,10 +1,7 @@
-#include "common.h"
-#include "effects.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/Fuzzy.h"
 
-#define NAMESPACE b_area_mim_forest_fuzzy
+#define NAMESPACE A(forest_fuzzy)
 
 extern s32 N(IdleAnimations_802184C4)[];
 extern EvtScript N(init_80218510);
