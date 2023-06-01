@@ -10,9 +10,9 @@
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_CALL(SetGroupVisibility, 37, MODEL_GROUP_VISIBLE)
-    EVT_CALL(SetGroupVisibility, 28, MODEL_GROUP_HIDDEN)
-    EVT_CALL(SetGroupVisibility, 22, MODEL_GROUP_HIDDEN)
+    EVT_CALL(SetGroupVisibility, MODEL_dai_03, MODEL_GROUP_VISIBLE)
+    EVT_CALL(SetGroupVisibility, MODEL_dai_04, MODEL_GROUP_HIDDEN)
+    EVT_CALL(SetGroupVisibility, MODEL_dai_05, MODEL_GROUP_HIDDEN)
     EVT_EXEC(N(EVS_RandomFlowers_Background))
     EVT_EXEC_WAIT(N(MakeSun))
     EVT_RETURN

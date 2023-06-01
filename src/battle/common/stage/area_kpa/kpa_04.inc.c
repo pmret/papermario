@@ -3,14 +3,15 @@
 
 #define NAMESPACE A(kpa_04)
 
-EvtScript N(8022F7F0) = {
+// blue torches
+EvtScript N(EVS_TexAnim_Fire) = {
     EVT_SET(LVarA, LVar0)
     EVT_CALL(SetTexPanner, LVarA, TEX_PANNER_1)
     EVT_SET(LVar0, 0)
     EVT_SET(LVar1, 0)
     EVT_LOOP(0)
         EVT_CALL(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_MAIN, LVar0, LVar1)
-        EVT_ADD(LVar0, 32768)
+        EVT_ADD(LVar0, 0x8000)
         EVT_ADD(LVar1, 0)
         EVT_WAIT(5)
     EVT_END_LOOP
@@ -21,20 +22,20 @@ EvtScript N(8022F7F0) = {
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_CALL(SetGroupVisibility, 15, MODEL_GROUP_HIDDEN)
-    EVT_CALL(SetGroupVisibility, 17, MODEL_GROUP_HIDDEN)
-    EVT_CALL(SetGroupVisibility, 16, MODEL_GROUP_HIDDEN)
-    EVT_CALL(SetGroupVisibility, 26, MODEL_GROUP_HIDDEN)
-    EVT_CALL(SetGroupVisibility, 18, MODEL_GROUP_HIDDEN)
-    EVT_CALL(SetGroupVisibility, 20, MODEL_GROUP_HIDDEN)
-    EVT_CALL(SetGroupVisibility, 22, MODEL_GROUP_HIDDEN)
-    EVT_CALL(SetGroupVisibility, 24, MODEL_GROUP_HIDDEN)
-    EVT_SET(LVar0, 32)
-    EVT_EXEC(N(8022F7F0))
-    EVT_SET(LVar0, 34)
-    EVT_EXEC(N(8022F7F0))
-    EVT_SET(LVar0, 36)
-    EVT_EXEC(N(8022F7F0))
+    EVT_CALL(SetGroupVisibility, MODEL_g3, MODEL_GROUP_HIDDEN)
+    EVT_CALL(SetGroupVisibility, MODEL_wa, MODEL_GROUP_HIDDEN)
+    EVT_CALL(SetGroupVisibility, MODEL_kusari, MODEL_GROUP_HIDDEN)
+    EVT_CALL(SetGroupVisibility, MODEL_g4, MODEL_GROUP_HIDDEN)
+    EVT_CALL(SetGroupVisibility, MODEL_hi1, MODEL_GROUP_HIDDEN)
+    EVT_CALL(SetGroupVisibility, MODEL_hi2, MODEL_GROUP_HIDDEN)
+    EVT_CALL(SetGroupVisibility, MODEL_hi3, MODEL_GROUP_HIDDEN)
+    EVT_CALL(SetGroupVisibility, MODEL_hi4, MODEL_GROUP_HIDDEN)
+    EVT_SET(LVar0, MODEL_o450)
+    EVT_EXEC(N(EVS_TexAnim_Fire))
+    EVT_SET(LVar0, MODEL_o451)
+    EVT_EXEC(N(EVS_TexAnim_Fire))
+    EVT_SET(LVar0, MODEL_o454)
+    EVT_EXEC(N(EVS_TexAnim_Fire))
     EVT_RETURN
     EVT_END
 };

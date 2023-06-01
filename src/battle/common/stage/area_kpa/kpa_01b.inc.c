@@ -3,14 +3,15 @@
 
 #define NAMESPACE A(kpa_01b)
 
-EvtScript N(8022F180) = {
+// blue torches
+EvtScript N(EVS_TexAnim_Fire) = {
     EVT_SET(LVarA, LVar0)
     EVT_CALL(SetTexPanner, LVarA, TEX_PANNER_1)
     EVT_SET(LVar0, 0)
     EVT_SET(LVar1, 0)
     EVT_LOOP(0)
         EVT_CALL(SetTexPanOffset, TEX_PANNER_1, TEX_PANNER_MAIN, LVar0, LVar1)
-        EVT_ADD(LVar0, 32768)
+        EVT_ADD(LVar0, 0x8000)
         EVT_ADD(LVar1, 0)
         EVT_WAIT(5)
     EVT_END_LOOP
@@ -21,11 +22,11 @@ EvtScript N(8022F180) = {
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_CALL(SetGroupVisibility, 25, MODEL_GROUP_HIDDEN)
-    EVT_SET(LVar0, 37)
-    EVT_EXEC(N(8022F180))
-    EVT_SET(LVar0, 39)
-    EVT_EXEC(N(8022F180))
+    EVT_CALL(SetGroupVisibility, MODEL_hasira, MODEL_GROUP_HIDDEN)
+    EVT_SET(LVar0, MODEL_o416)
+    EVT_EXEC(N(EVS_TexAnim_Fire))
+    EVT_SET(LVar0, MODEL_o418)
+    EVT_EXEC(N(EVS_TexAnim_Fire))
     EVT_RETURN
     EVT_END
 };

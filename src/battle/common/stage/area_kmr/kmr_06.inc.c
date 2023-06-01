@@ -9,10 +9,10 @@
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(N(UnkFogFunc))
-    EVT_SET(LVar0, 1)
+    EVT_SET(LVar0, MODEL_g59)
     EVT_SET(LVar2, 0)
     EVT_EXEC(N(EVS_AnimateCloud))
-    EVT_SET(LVar0, 4)
+    EVT_SET(LVar0, MODEL_g60)
     EVT_SET(LVar2, 70)
     EVT_EXEC(N(EVS_AnimateCloud))
     EVT_RETURN
