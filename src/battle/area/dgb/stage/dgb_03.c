@@ -1,3 +1,3 @@
 #include "../area.h"
 
-#include "battle/common/stage/dgb_03.inc.c"
+#include "battle/common/stage/area_dgb/dgb_03.inc.c"

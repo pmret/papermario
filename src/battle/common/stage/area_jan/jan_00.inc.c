@@ -4,7 +4,7 @@
 
 #define NAMESPACE A(jan_00)
 
-#include "lib/BeachEffects.inc.c"
+#include "battle/common/stage/lib/BeachEffects.inc.c"
 
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)

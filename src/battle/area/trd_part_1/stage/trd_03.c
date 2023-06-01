@@ -1,3 +1,3 @@
 #include "../area.h"
 
-#include "battle/common/stage/trd_03.inc.c"
+#include "battle/common/stage/area_trd/trd_03.inc.c"

@@ -1,3 +1,3 @@
 #include "../area.h"
 
-#include "battle/common/stage/flo_04.inc.c"
+#include "battle/common/stage/area_flo/flo_04.inc.c"

@@ -1,3 +1,3 @@
 #include "../area.h"
 
-#include "battle/common/stage/kpa_03.inc.c"
+#include "battle/common/stage/area_kpa/kpa_03.inc.c"

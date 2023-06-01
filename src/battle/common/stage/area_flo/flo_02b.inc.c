@@ -4,7 +4,7 @@
 
 #define NAMESPACE A(flo_02b)
 
-#include "lib/RandomFlowers.inc.c"
+#include "battle/common/stage/lib/RandomFlowers.inc.c"
 #include "common/MakeSun.inc.c"
 
 EvtScript N(EVS_PreBattle) = {

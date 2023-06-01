@@ -1,3 +1,3 @@
 #include "../area.h"
 
-#include "battle/common/stage/hos_02.inc.c"
+#include "battle/common/stage/area_hos/hos_02.inc.c"

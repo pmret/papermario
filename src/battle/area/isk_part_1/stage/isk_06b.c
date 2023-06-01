@@ -1,3 +1,3 @@
 #include "../area.h"
 
-#include "battle/common/stage/isk_06b.inc.c"
+#include "battle/common/stage/area_isk/isk_06b.inc.c"

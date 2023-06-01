@@ -1,3 +1,3 @@
 #include "../area.h"
 
-#include "battle/common/stage/mac_02.inc.c"
+#include "battle/common/stage/area_mac/mac_02.inc.c"

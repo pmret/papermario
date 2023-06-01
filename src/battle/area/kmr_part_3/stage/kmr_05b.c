@@ -1,3 +1,3 @@
 #include "../area.h"
 
-#include "battle/common/stage/kmr_05b.inc.c"
+#include "battle/common/stage/area_kmr/kmr_05b.inc.c"
