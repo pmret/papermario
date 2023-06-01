@@ -1,6 +1,8 @@
 #include "common.h"
 #include "battle/battle.h"
 
+#define NAMESPACE A(kmr_02)
+
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_RETURN

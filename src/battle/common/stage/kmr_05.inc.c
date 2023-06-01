@@ -2,6 +2,8 @@
 #include "battle/battle.h"
 #include "mapfs/kmr_bt05_shape.h"
 
+#define NAMESPACE A(kmr_05)
+
 #include "battle/common/stage/lib/MovingClouds.inc.c"
 
 EvtScript N(EVS_PreBattle) = {

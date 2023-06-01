@@ -516,49 +516,49 @@ EvtScript N(OnShockDeath) = {
 
 Vec3i N(pos_summon) = { NPC_DISPOSE_LOCATION };
 
-#include "ghost_goombario.inc.c"
+#include "duplighost/ghost_goombario.inc.c"
 
 Formation N(formation_goombario) = {
     ACTOR_BY_POS(N(goombario), N(pos_summon), 0),
 };
 
-#include "ghost_kooper.inc.c"
+#include "duplighost/ghost_kooper.inc.c"
 
 Formation N(formation_kooper) = {
     ACTOR_BY_POS(N(kooper), N(pos_summon), 0),
 };
 
-#include "ghost_bombette.inc.c"
+#include "duplighost/ghost_bombette.inc.c"
 
 Formation N(formation_bombette) = {
     ACTOR_BY_POS(N(bombette), N(pos_summon), 0),
 };
 
-#include "ghost_parakarry.inc.c"
+#include "duplighost/ghost_parakarry.inc.c"
 
 Formation N(formation_parakarry) = {
     ACTOR_BY_POS(N(parakarry), N(pos_summon), 0),
 };
 
-#include "ghost_bow.inc.c"
+#include "duplighost/ghost_bow.inc.c"
 
 Formation N(formation_bow) = {
     ACTOR_BY_POS(N(bow), N(pos_summon), 0),
 };
 
-#include "ghost_watt.inc.c"
+#include "duplighost/ghost_watt.inc.c"
 
 Formation N(formation_watt) = {
     ACTOR_BY_POS(N(watt), N(pos_summon), 0),
 };
 
-#include "ghost_sushie.inc.c"
+#include "duplighost/ghost_sushie.inc.c"
 
 Formation N(formation_sushie) = {
     ACTOR_BY_POS(N(sushie), N(pos_summon), 0),
 };
 
-#include "ghost_lakilester.inc.c"
+#include "duplighost/ghost_lakilester.inc.c"
 
 Formation N(formation_lakilester) = {
     ACTOR_BY_POS(N(lakilester), N(pos_summon), 0),

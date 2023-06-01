@@ -2,6 +2,8 @@
 #include "battle/battle.h"
 #include "mapfs/kkj_bt02_shape.h"
 
+#define NAMESPACE A(kkj_02)
+
 #include "world/common/util/SetLightningBoltPurple.inc.c"
 
 s32 N(RandomBoltPositions)[][7] = {

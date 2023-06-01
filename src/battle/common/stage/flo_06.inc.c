@@ -2,6 +2,8 @@
 #include "battle/battle.h"
 #include "mapfs/flo_bt06_shape.h"
 
+#define NAMESPACE A(flo_06)
+
 #include "common/MakeSun.inc.c"
 
 EvtScript N(EVS_PreBattle) = {

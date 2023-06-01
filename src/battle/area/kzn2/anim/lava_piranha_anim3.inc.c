@@ -1,6 +1,6 @@
-#include "common.h"
+#include "../area.h"
 
-#define NAMESPACE b_area_kzn2_lava_piranha_AnimModel_SideHeadVine
+#define NAMESPACE A(lava_piranha_AnimModel_SideHeadVine)
 
 s32 N(padding) = 0;
 

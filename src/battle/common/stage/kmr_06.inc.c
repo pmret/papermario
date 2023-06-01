@@ -2,6 +2,8 @@
 #include "battle/battle.h"
 #include "mapfs/kmr_bt06_shape.h"
 
+#define NAMESPACE A(kmr_06)
+
 #include "battle/common/stage/lib/MovingClouds.inc.c"
 #include "common/UnkFogFunc.inc.c"
 

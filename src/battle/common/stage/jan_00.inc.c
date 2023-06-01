@@ -3,6 +3,8 @@
 #include "mapfs/jan_bt00_shape.h"
 #include "effects.h"
 
+#define NAMESPACE A(jan_00)
+
 #include "lib/BeachEffects.inc.c"
 
 EvtScript N(EVS_PreBattle) = {

@@ -1,6 +1,8 @@
 #include "common.h"
 #include "battle/battle.h"
 
+#define NAMESPACE A(isk_00)
+
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)

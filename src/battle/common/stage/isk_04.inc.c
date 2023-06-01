@@ -3,6 +3,8 @@
 #include "mapfs/isk_bt04_shape.h"
 #include "effects.h"
 
+#define NAMESPACE A(isk_04)
+
 BSS EffectInstance* N(TorchFlameL);
 BSS EffectInstance* N(TorchFlameR);
 

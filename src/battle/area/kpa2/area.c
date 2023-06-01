@@ -7,8 +7,8 @@ extern ActorBlueprint A(bowser_phase_2);
 extern ActorBlueprint A(bowser_phase_3);
 
 extern Stage A(kpa_01);
-extern Stage A(kpa_02);
-extern Stage A(kpa_03);
+extern Stage A(kkj_01);
+extern Stage A(kkj_02);
 
 Vec3i A(bowser_pos) = { 80, 0, -10 };
 
@@ -34,16 +34,16 @@ Formation A(Formation_04) = {
 
 BattleList A(Formations) = {
     BATTLE(A(Formation_00), A(kpa_01), "クッパ"),
-    BATTLE(A(Formation_01), A(kpa_02), "クッパ(オープニング)"),
-    BATTLE(A(Formation_02), A(kpa_02), "クッパ(ラストバトル１)"),
-    BATTLE(A(Formation_03), A(kpa_03), "クッパ(ラストバトル２)"),
-    BATTLE(A(Formation_04), A(kpa_03), "クッパ(ラストバトル３)"),
+    BATTLE(A(Formation_01), A(kkj_01), "クッパ(オープニング)"),
+    BATTLE(A(Formation_02), A(kkj_01), "クッパ(ラストバトル１)"),
+    BATTLE(A(Formation_03), A(kkj_02), "クッパ(ラストバトル２)"),
+    BATTLE(A(Formation_04), A(kkj_02), "クッパ(ラストバトル３)"),
     {},
 };
 
 StageList A(Stages) = {
     STAGE("kpa_01", A(kpa_01)),
-    STAGE("kpa_02", A(kpa_02)),
-    STAGE("kpa_03", A(kpa_03)),
+    STAGE("kpa_02", A(kkj_01)),
+    STAGE("kpa_03", A(kkj_02)),
     {},
 };

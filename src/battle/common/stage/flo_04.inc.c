@@ -2,6 +2,8 @@
 #include "battle/battle.h"
 #include "mapfs/flo_bt04_shape.h"
 
+#define NAMESPACE A(flo_04)
+
 #include "common/CosInterpMinMax.inc.c"
 
 EvtScript N(EVS_AnimateCloud) = {

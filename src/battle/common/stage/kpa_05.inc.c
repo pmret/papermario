@@ -1,11 +1,12 @@
 #include "common.h"
 #include "battle/battle.h"
-#include "mapfs/kkj_bt01_shape.h"
+#include "mapfs/kpa_bt05_shape.h"
 
-#define NAMESPACE b_area_kpa2_kpa_02
+#define NAMESPACE A(kpa_05)
 
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
+    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_RETURN
     EVT_END
 };
@@ -16,17 +17,14 @@ EvtScript N(EVS_PostBattle) = {
 };
 
 s32 N(ForegroundModels)[] = {
-    MODEL_hana,
-    MODEL_ha1,
-    MODEL_ha2,
+    MODEL_saku,
     STAGE_MODEL_LIST_END
 };
 
 Stage NAMESPACE = {
-    .texture = "kkj_tex",
-    .shape = "kkj_bt01_shape",
-    .hit = "kkj_bt01_hit",
-    .bg = "kpa_bg",
+    .texture = "kpa_tex",
+    .shape = "kpa_bt05_shape",
+    .hit = "kpa_bt05_hit",
     .preBattle = &N(EVS_PreBattle),
     .postBattle = &N(EVS_PostBattle),
     .foregroundModelList = N(ForegroundModels),

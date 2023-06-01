@@ -2,6 +2,8 @@
 #include "battle/battle.h"
 #include "mapfs/jan_bt01_shape.h"
 
+#define NAMESPACE A(jan_01)
+
 #include "lib/BeachEffects.inc.c"
 
 EvtScript N(EVS_PreBattle) = {

@@ -13,13 +13,13 @@ extern ActorBlueprint A(tutorial_spiked_goomba);
 extern Stage A(kmr_02);
 extern Stage A(kmr_03);
 extern Stage A(kmr_04);
-extern Stage A(kmr_05);
+extern Stage A(kmr_05b);
 extern Stage A(kmr_06);
 extern Stage A(nok_01);
 extern Stage A(mim_01);
 extern Stage A(sam_01);
 extern Stage A(mac_01);
-extern Stage A(kpa_01);
+extern Stage A(kpa_13);
 
 Formation A(Formation_00) = {
     ACTOR_BY_IDX(A(tutorial_spiked_goomba), BTL_POS_GROUND_C, 0),
@@ -57,12 +57,12 @@ Formation A(Formation_07) = {
 BattleList A(Formations) = {
     BATTLE(A(Formation_00), A(kmr_03), "トゲクリボー（レクチャー）"),
     BATTLE(A(Formation_01), A(kmr_03), "パタクリボー（レクチャー）"),
-    BATTLE(A(Formation_02), A(kmr_05), "コワッパ１"),
+    BATTLE(A(Formation_02), A(kmr_05b), "コワッパ１"),
     BATTLE(A(Formation_03), A(nok_01), "コワッパ２"),
     BATTLE(A(Formation_04), A(mim_01), "コワッパ４"),
     BATTLE(A(Formation_05), A(mac_01), "コワッパ５"),
     BATTLE(A(Formation_06), A(sam_01), "コワッパ６"),
-    BATTLE(A(Formation_07), A(kpa_01), "コワッパ７"),
+    BATTLE(A(Formation_07), A(kpa_13), "コワッパ７"),
     {},
 };
 
@@ -70,7 +70,7 @@ StageList A(Stages) = {
     STAGE("kmr_02", A(kmr_02)),
     STAGE("kmr_03", A(kmr_03)),
     STAGE("kmr_04", A(kmr_04)),
-    STAGE("kmr_05", A(kmr_05)),
+    STAGE("kmr_05", A(kmr_05b)),
     STAGE("kmr_06", A(kmr_06)),
     {},
 };

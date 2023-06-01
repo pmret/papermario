@@ -2,6 +2,8 @@
 #include "battle/battle.h"
 #include "mapfs/flo_bt03_shape.h"
 
+#define NAMESPACE A(flo_03)
+
 EvtScript N(EVS_AnimateVines) = {
     EVT_SET(LVarA, LVar0)
     EVT_USE_BUF(LVarA)

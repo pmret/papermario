@@ -3,6 +3,8 @@
 #include "mapfs/flo_bt02_shape.h"
 #include "effects.h"
 
+#define NAMESPACE A(flo_02)
+
 #include "lib/RandomFlowers.inc.c"
 #include "common/MakeSun.inc.c"
 

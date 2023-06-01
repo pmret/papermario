@@ -3,6 +3,8 @@
 #include "mapfs/isk_bt06_shape.h"
 #include "effects.h"
 
+#define NAMESPACE A(isk_06b)
+
 BSS EffectInstance* N(TorchFlame);
 
 API_CALLABLE(N(CreateTorchFX)) {

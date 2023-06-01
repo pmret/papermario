@@ -2,6 +2,8 @@
 #include "battle/battle.h"
 #include "mapfs/isk_bt02_shape.h"
 
+#define NAMESPACE A(isk_02b)
+
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
