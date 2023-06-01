@@ -4,11 +4,17 @@
 #define NAMESPACE A(kmr_06)
 
 #include "battle/common/stage/lib/MovingClouds.inc.c"
-#include "common/UnkFogFunc.inc.c"
+
+API_CALLABLE(N(SetupFog)) {
+    set_world_fog_dist(980, 1000);
+    set_world_fog_color(15, 5, 55, 255);
+    enable_world_fog();
+    return ApiStatus_DONE2;
+}
 
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(N(UnkFogFunc))
+    EVT_CALL(N(SetupFog))
     EVT_SET(LVar0, MODEL_g59)
     EVT_SET(LVar2, 0)
     EVT_EXEC(N(EVS_AnimateCloud))

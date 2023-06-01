@@ -3,7 +3,8 @@
 
 #define NAMESPACE A(kpa_13)
 
-EvtScript N(80230440) = {
+// blue torches
+EvtScript N(EVS_TexAnim_Fire) = {
     EVT_SET(LVarA, LVar0)
     EVT_CALL(SetTexPanner, LVarA, TEX_PANNER_1)
     EVT_SET(LVar0, 0)

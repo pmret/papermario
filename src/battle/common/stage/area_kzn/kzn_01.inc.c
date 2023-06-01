@@ -6,7 +6,7 @@
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_CALL(SetGroupVisibility, 17, MODEL_GROUP_HIDDEN)
+    EVT_CALL(SetGroupVisibility, MODEL_o363, MODEL_GROUP_HIDDEN)
     EVT_RETURN
     EVT_END
 };
@@ -17,11 +17,11 @@ EvtScript N(EVS_PostBattle) = {
 };
 
 s32 N(ForegroundModels)[] = {
-    0x0000000E,
-    0x0000000F,
-    0x00000018,
-    0x00000019,
-    0x0000001A,
+    MODEL_ue2,
+    MODEL_ue1,
+    MODEL_iwa3,
+    MODEL_sita1,
+    MODEL_ue3,
     STAGE_MODEL_LIST_END
 };
 

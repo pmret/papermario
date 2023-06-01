@@ -15,7 +15,7 @@ EvtScript N(EVS_PreBattle) = {
     EVT_THREAD
         EVT_SET(LVarE, 0)
         EVT_LOOP(0)
-            EVT_ADD(LVarE, 32768)
+            EVT_ADD(LVarE, 0x8000)
             EVT_CALL(SetTexPanOffset, TEX_PANNER_A, TEX_PANNER_MAIN, LVarE, 0)
             EVT_WAIT(10)
         EVT_END_LOOP

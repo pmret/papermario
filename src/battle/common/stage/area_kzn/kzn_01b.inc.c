@@ -16,11 +16,11 @@ EvtScript N(EVS_PostBattle) = {
 };
 
 s32 N(ForegroundModels)[] = {
-    0x0000000E,
-    0x0000000F,
-    0x00000018,
-    0x00000019,
-    0x0000001A,
+    MODEL_ue2,
+    MODEL_ue1,
+    MODEL_iwa3,
+    MODEL_sita1,
+    MODEL_ue3,
     STAGE_MODEL_LIST_END
 };
 

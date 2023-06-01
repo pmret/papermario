@@ -3,77 +3,26 @@
 
 #define NAMESPACE A(kpa_07)
 
-EvtScript N(8022FEB0) = {
-    EVT_SET(LVarA, LVar1)
-    EVT_SET(LVarB, LVar2)
-    EVT_SET(LVarC, LVar3)
-    EVT_CALL(SetTexPanner, LVar0, LVar1)
-    EVT_SET(LVar0, 0)
-    EVT_SET(LVar1, 0)
-    EVT_LOOP(0)
-        EVT_CALL(SetTexPanOffset, LVarA, 0, LVar0, LVar1)
-        EVT_ADD(LVar0, LVarB)
-        EVT_ADD(LVar1, LVarC)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(8022FF80) = {
-    EVT_SET(LVarA, LVar1)
-    EVT_SET(LVarB, LVar2)
-    EVT_SET(LVarC, LVar3)
-    EVT_CALL(SetTexPanner, LVar0, LVar1)
-    EVT_SET(LVar0, 0)
-    EVT_SET(LVar1, 0)
-    EVT_LOOP(0)
-        EVT_CALL(SetTexPanOffset, LVarA, 0, LVar0, 0)
-        EVT_CALL(SetTexPanOffset, LVarA, 1, LVar1, 0)
-        EVT_ADD(LVar0, LVarB)
-        EVT_ADD(LVar1, LVarC)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(8023006C) = {
-    EVT_SET(LVarA, LVar1)
-    EVT_SET(LVarB, LVar2)
-    EVT_SET(LVarC, LVar3)
-    EVT_CALL(SetTexPanner, LVar0, LVar1)
-    EVT_SET(LVar0, 0)
-    EVT_SET(LVar1, 0)
-    EVT_LOOP(0)
-        EVT_CALL(SetTexPanOffset, LVarA, 0, 0, LVar0)
-        EVT_CALL(SetTexPanOffset, LVarA, 1, 0, LVar1)
-        EVT_ADD(LVar0, LVarB)
-        EVT_ADD(LVar1, LVarC)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
-};
+#include "battle/common/stage/lib/TexturePanner.inc.c"
 
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_SET(LVar0, 16)
-    EVT_SET(LVar1, 0)
+    EVT_SET(LVar0, MODEL_kemu2)
+    EVT_SET(LVar1, TEX_PANNER_0)
     EVT_SET(LVar2, -200)
     EVT_SET(LVar3, 0)
-    EVT_EXEC(N(8022FEB0))
-    EVT_SET(LVar0, 17)
-    EVT_SET(LVar1, 1)
+    EVT_EXEC(N(EVS_TexturePanMain))
+    EVT_SET(LVar0, MODEL_kemu1)
+    EVT_SET(LVar1, TEX_PANNER_1)
     EVT_SET(LVar2, -120)
     EVT_SET(LVar3, 0)
-    EVT_EXEC(N(8022FEB0))
-    EVT_SET(LVar0, 0)
-    EVT_SET(LVar1, 2)
+    EVT_EXEC(N(EVS_TexturePanMain))
+    EVT_SET(LVar0, MODEL_kemu3)
+    EVT_SET(LVar1, TEX_PANNER_2)
     EVT_SET(LVar2, -100)
     EVT_SET(LVar3, 0)
-    EVT_EXEC(N(8022FEB0))
+    EVT_EXEC(N(EVS_TexturePanMain))
     EVT_RETURN
     EVT_END
 };

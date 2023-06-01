@@ -26,7 +26,7 @@ EvtScript N(8022797C) = {
     EVT_SET(LVar1, 0)
     EVT_LOOP(0)
         EVT_CALL(SetTexPanOffset, LVarA, 0, LVar0, LVar1)
-        EVT_ADD(LVar0, 16384)
+        EVT_ADD(LVar0, 0x4000)
         EVT_ADD(LVar1, 0)
         EVT_WAIT(5)
     EVT_END_LOOP
