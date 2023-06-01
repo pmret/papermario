@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from math import floor, ceil
+from math import floor
 from sys import argv, path
 from pathlib import Path
 from typing import List

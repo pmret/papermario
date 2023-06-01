@@ -2,7 +2,7 @@
 
 import os
 import shutil
-from typing import TYPE_CHECKING, List, Dict, Set, Union
+from typing import List, Dict, Set, Union
 from pathlib import Path
 import subprocess
 import sys
@@ -15,13 +15,9 @@ DO_SHA1_CHECK = True
 
 # Paths:
 ROOT = Path(__file__).parent.parent.parent
-TOOLS = (ROOT / "tools").relative_to(ROOT)
-BUILD_TOOLS = TOOLS / "build"
+BUILD_TOOLS = Path("tools/build")
 YAY0_COMPRESS_TOOL = f"{BUILD_TOOLS}/yay0/Yay0compress"
 CRC_TOOL = f"{BUILD_TOOLS}/rom/n64crc"
-
-# if TYPE_CHECKING:
-#     from
 
 
 def exec_shell(command: List[str]) -> str:
@@ -39,7 +35,6 @@ def write_ninja_rules(
     debug: bool,
 ):
     # platform-specific
-    iconv = "iconv --from UTF-8 --to $encoding"
 
     ccache = ""
 
@@ -54,23 +49,22 @@ def write_ninja_rules(
 
     cross = "mips-linux-gnu-"
     cc = f"{BUILD_TOOLS}/cc/gcc/gcc"
-    cc_modern = f"mips-linux-gnu-gcc"
+    cc_modern = f"{cross}gcc"
     cc_ido = f"{BUILD_TOOLS}/cc/ido5.3/cc"
     cc_272_dir = f"{BUILD_TOOLS}/cc/gcc2.7.2/"
     cc_272 = f"{cc_272_dir}/gcc"
     cxx = f"{BUILD_TOOLS}/cc/gcc/g++"
+
+    ICONV = "iconv --from UTF-8 --to $encoding"
 
     CPPFLAGS_COMMON = (
         "-Iver/$version/include -Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM "
         "-DVERSION=$version -DF3DEX_GBI_2 -D_MIPS_SZLONG=32"
     )
 
-    CPPFLAGS = "-w " + CPPFLAGS_COMMON + " -nostdinc"
+    CPPFLAGS_272 = CPPFLAGS_COMMON + " -nostdinc"
 
-    CPPFLAGS_272 = (
-        "-Iver/$version/include -Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM "
-        "-DVERSION=$version -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -nostdinc"
-    )
+    CPPFLAGS = "-w " + CPPFLAGS_COMMON + " -nostdinc"
 
     cflags = f"-c -G0 -O2 -gdwarf-2 -x c -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
 
@@ -126,7 +120,7 @@ def write_ninja_rules(
     ninja.rule(
         "cc",
         description="gcc $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {extra_cppflags} -DOLD_GCC $cppflags -MD -MF $out.d $in -o - | {iconv} | {ccache}{cc} {cflags} $cflags - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {extra_cppflags} -DOLD_GCC $cppflags -MD -MF $out.d $in -o - | {ICONV} | {ccache}{cc} {cflags} $cflags - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
@@ -134,7 +128,7 @@ def write_ninja_rules(
     ninja.rule(
         "cc_modern",
         description="gcc $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {extra_cppflags} $cppflags -MD -MF $out.d $in -o - | {iconv} | {ccache}{cc_modern} {cflags_modern} $cflags - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {extra_cppflags} $cppflags -MD -MF $out.d $in -o - | {ICONV} | {ccache}{cc_modern} {cflags_modern} $cflags - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
@@ -154,7 +148,7 @@ def write_ninja_rules(
     ninja.rule(
         "cxx",
         description="cxx $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {extra_cppflags} $cppflags -MD -MF $out.d $in -o - | {iconv} | {ccache}{cxx} {cflags} $cflags - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {extra_cppflags} $cppflags -MD -MF $out.d $in -o - | {ICONV} | {ccache}{cxx} {cflags} $cflags - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
@@ -215,8 +209,8 @@ def write_ninja_rules(
 
     ninja.rule(
         "sprites",
-        description="sprites $out $header_out $in",
-        command=f"$python {BUILD_TOOLS}/sprite/sprites.py $out $header_out $build_dir $in",
+        description="sprites $out $header_out $in_dir",
+        command=f"$python {BUILD_TOOLS}/sprite/sprites.py $out $header_out $build_dir $in_dir",
     )
 
     ninja.rule(
@@ -376,15 +370,13 @@ class Configure:
     def map_path(self) -> Path:
         return self.elf_path().with_suffix(".map")
 
-    def resolve_src_paths(
-        self, src_paths: List[Path], glob_deps: bool = True
-    ) -> List[str]:
+    def resolve_src_paths(self, src_paths: List[Path]) -> List[str]:
         out = []
 
         for path in src_paths:
             path = self.resolve_asset_path(path)
 
-            if glob_deps and path.is_dir():
+            if path.is_dir():
                 out.extend(glob(str(path) + "/**/*", recursive=True))
             else:
                 out.append(str(path))
@@ -412,8 +404,14 @@ class Configure:
         modern_gcc: bool,
     ):
         import segtypes
+        import segtypes.common.c
+        import segtypes.common.bin
         import segtypes.common.data
+        import segtypes.common.group
         import segtypes.common.asm
+        import segtypes.n64.header
+        import segtypes.n64.img
+        import segtypes.n64.palette
         import segtypes.n64.yay0
 
         assert self.linker_entries is not None
@@ -427,7 +425,6 @@ class Configure:
             task: str,
             variables: Dict[str, str] = {},
             implicit_outputs: List[str] = [],
-            glob_deps: bool = True,
         ):
             if not isinstance(object_paths, list):
                 object_paths = [object_paths]
@@ -467,7 +464,7 @@ class Configure:
                 ninja.build(
                     outputs=object_strs,  # $out
                     rule=task,
-                    inputs=self.resolve_src_paths(src_paths, glob_deps),  # $in
+                    inputs=self.resolve_src_paths(src_paths),  # $in
                     implicit=implicit,
                     order_only=order_only,
                     variables={"version": self.version, **variables},
@@ -478,12 +475,19 @@ class Configure:
         for entry in self.linker_entries:
             seg = entry.segment
 
+            if seg.type == "linker" or seg.type == "linker_offset":
+                continue
+
+            assert entry.object_path is not None
+
             if isinstance(seg, segtypes.n64.header.N64SegHeader):
                 build(entry.object_path, entry.src_paths, "as")
             elif isinstance(seg, segtypes.common.asm.CommonSegAsm) or (
                 isinstance(seg, segtypes.common.data.CommonSegData)
                 and not seg.type[0] == "."
             ):
+                build(entry.object_path, entry.src_paths, "as")
+            elif seg.type in ["pm_effect_loads", "pm_effect_shims"]:
                 build(entry.object_path, entry.src_paths, "as")
             elif isinstance(seg, segtypes.common.c.CommonSegC) or (
                 isinstance(seg, segtypes.common.data.CommonSegData)
@@ -588,6 +592,7 @@ class Configure:
                                 },
                             )
 
+                            assert seg.vram_start is not None
                             c_sym = seg.create_symbol(
                                 addr=seg.vram_start,
                                 in_segment=True,
@@ -627,6 +632,7 @@ class Configure:
                                 },
                             )
 
+                            assert seg.vram_start is not None
                             c_sym = seg.create_symbol(
                                 addr=seg.vram_start,
                                 in_segment=True,
@@ -710,7 +716,7 @@ class Configure:
                     build(yay0_path, [bin_path], "yay0")
                     build(
                         self.build_path() / "include/sprite/npc" / (sprite_name + ".h"),
-                        [sprite_dir, *sprite_yay0s],
+                        [sprite_dir, yay0_path],
                         "sprite_header",
                         variables=variables,
                     )
@@ -722,10 +728,10 @@ class Configure:
 
                 build(
                     entry.object_path.with_suffix(".bin"),
-                    [entry.src_paths[0]],
+                    [entry.src_paths[0], *sprite_yay0s],
                     "sprites",
-                    glob_deps=False,
                     variables={
+                        "in_dir": str(entry.src_paths[0]),
                         "header_out": sprite_player_header_path,
                         "build_dir": str(
                             self.build_path() / "assets" / self.version / "sprite"
@@ -951,8 +957,6 @@ class Configure:
                     entry.object_path.with_suffix(""), palettes, "pm_charset_palettes"
                 )
                 build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
-            elif seg.type in ["pm_effect_loads", "pm_effect_shims"]:
-                build(entry.object_path, entry.src_paths, "as")
             elif seg.type == "pm_sprite_shading_profiles":
                 header_path = str(
                     self.build_path() / "include/sprite/sprite_shading_profiles.h"
@@ -983,8 +987,6 @@ class Configure:
                         "encoding": "CP932",  # similar to SHIFT-JIS, but includes backslash and tilde
                     },
                 )
-            elif seg.type == "linker" or seg.type == "linker_offset":
-                pass
             else:
                 raise Exception(
                     f"don't know how to build {seg.__class__.__name__} '{seg.name}'"
@@ -1106,9 +1108,12 @@ if __name__ == "__main__":
         and sys.platform == "darwin"
         and "Free Software Foundation" not in exec_shell(["cpp", "--version"])
     ):
-        if "Free Software Foundation" in exec_shell(["cpp-12", "--version"]):
-            args.cpp = "cpp-12"
-        else:
+        gcc_cpps = ("cpp-14", "cpp-13", "cpp-12", "cpp-11")
+        for ver in gcc_cpps:
+            if "Free Software Foundation" in exec_shell([ver, "--version"]):
+                args.cpp = ver
+                break
+        if args.cpp is None:
             print("error: system C preprocessor is not GNU!")
             print(
                 "This is a known issue on macOS - only clang's cpp is installed by default."
@@ -1116,7 +1121,7 @@ if __name__ == "__main__":
             print(
                 "Use 'brew' to obtain GNU cpp, then run this script again with the --cpp option, e.g."
             )
-            print("    ./configure --cpp cpp-12")
+            print(f"    ./configure --cpp {gcc_cpps[0]}")
             exit(1)
 
     # default version behaviour is to only do those that exist
@@ -1189,7 +1194,7 @@ if __name__ == "__main__":
     )
     write_ninja_for_tools(ninja)
 
-    skip_files = set()
+    skip_files: Set[str] = set()
     all_rom_oks: List[str] = []
     first_configure = None
 
