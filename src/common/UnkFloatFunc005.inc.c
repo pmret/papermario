@@ -1,4 +1,3 @@
-#include "common.h"
 #include "battle/battle.h"
 
 API_CALLABLE(N(UnkFloatFunc005)) {

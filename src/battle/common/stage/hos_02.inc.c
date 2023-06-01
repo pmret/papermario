@@ -1,4 +1,3 @@
-#include "common.h"
 #include "battle/battle.h"
 #include "mapfs/hos_bt02_shape.h"
 

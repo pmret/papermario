@@ -1,4 +1,3 @@
-#include "common.h"
 #include "battle/battle.h"
 #include "mapfs/iwa_bt01_shape.h"
 

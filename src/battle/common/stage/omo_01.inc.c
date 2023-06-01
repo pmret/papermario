@@ -1,4 +1,3 @@
-#include "common.h"
 #include "battle/battle.h"
 #include "mapfs/omo_bt01_shape.h"
 #include "model.h"

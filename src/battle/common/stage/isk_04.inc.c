@@ -1,4 +1,3 @@
-#include "common.h"
 #include "battle/battle.h"
 #include "mapfs/isk_bt04_shape.h"
 #include "effects.h"

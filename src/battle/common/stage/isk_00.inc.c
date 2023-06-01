@@ -1,4 +1,3 @@
-#include "common.h"
 #include "battle/battle.h"
 
 #define NAMESPACE A(isk_00)

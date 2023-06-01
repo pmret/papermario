@@ -1,4 +1,3 @@
-#include "common.h"
 #include "battle/battle.h"
 #include "mapfs/flo_bt02_shape.h"
 #include "effects.h"

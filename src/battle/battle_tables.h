@@ -1,7 +1,6 @@
 #ifndef _BATTLE_BATTLE_TABLE_H_
 #define _BATTLE_BATTLE_TABLE_H_
 
-#include "common.h"
 #include "battle/battle.h"
 
 extern BattleList b_area_kmr_part_1_Formations;
