@@ -4,73 +4,22 @@
 
 #define NAMESPACE A(pra_02)
 
-EvtScript N(80231B40) = {
-    EVT_SET(LVarA, LVar1)
-    EVT_SET(LVarB, LVar2)
-    EVT_SET(LVarC, LVar3)
-    EVT_CALL(SetTexPanner, LVar0, LVar1)
-    EVT_SET(LVar0, 0)
-    EVT_SET(LVar1, 0)
-    EVT_LOOP(0)
-        EVT_CALL(SetTexPanOffset, LVarA, 0, LVar0, LVar1)
-        EVT_ADD(LVar0, LVarB)
-        EVT_ADD(LVar1, LVarC)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(80231C10) = {
-    EVT_SET(LVarA, LVar1)
-    EVT_SET(LVarB, LVar2)
-    EVT_SET(LVarC, LVar3)
-    EVT_CALL(SetTexPanner, LVar0, LVar1)
-    EVT_SET(LVar0, 0)
-    EVT_SET(LVar1, 0)
-    EVT_LOOP(0)
-        EVT_CALL(SetTexPanOffset, LVarA, 0, LVar0, 0)
-        EVT_CALL(SetTexPanOffset, LVarA, 1, LVar1, 0)
-        EVT_ADD(LVar0, LVarB)
-        EVT_ADD(LVar1, LVarC)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(80231CFC) = {
-    EVT_SET(LVarA, LVar1)
-    EVT_SET(LVarB, LVar2)
-    EVT_SET(LVarC, LVar3)
-    EVT_CALL(SetTexPanner, LVar0, LVar1)
-    EVT_SET(LVar0, 0)
-    EVT_SET(LVar1, 0)
-    EVT_LOOP(0)
-        EVT_CALL(SetTexPanOffset, LVarA, 0, 0, LVar0)
-        EVT_CALL(SetTexPanOffset, LVarA, 1, 0, LVar1)
-        EVT_ADD(LVar0, LVarB)
-        EVT_ADD(LVar1, LVarC)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
-};
+#include "battle/common/stage/lib/TexturePanner.inc.c"
 
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_CALL(EnableBattleFloorReflections, TRUE)
-    EVT_SET(LVar0, 17)
-    EVT_SET(LVar1, 0)
+    EVT_SET(LVar0, MODEL_o412)
+    EVT_SET(LVar1, TEX_PANNER_0)
     EVT_SET(LVar2, 3000)
     EVT_SET(LVar3, 0)
-    EVT_EXEC(N(80231B40))
-    EVT_SET(LVar0, 18)
-    EVT_SET(LVar1, 0)
+    EVT_EXEC(N(EVS_TexturePanMain))
+    EVT_SET(LVar0, MODEL_o413)
+    EVT_SET(LVar1, TEX_PANNER_0)
     EVT_SET(LVar2, 3000)
     EVT_SET(LVar3, 0)
-    EVT_EXEC(N(80231B40))
+    EVT_EXEC(N(EVS_TexturePanMain))
     EVT_RETURN
     EVT_END
 };

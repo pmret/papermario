@@ -4,64 +4,67 @@
 
 #define NAMESPACE A(omo_01)
 
-extern EvtScript N(updateModels);
+// following part is very similar to RockingHorse.inc.c in world/area_omo,
+// but it does not match it exactly
 
-s32 N(modelList)[] = { MODEL_uma };
+extern EvtScript N(EVS_UpdateRockingHorse);
 
-typedef struct Omo01Struct {
+s32 N(RockingHorseModels)[] = { MODEL_uma };
+
+typedef struct RockingHorse {
     /* 0x00 */ f32 offsetX;
     /* 0x04 */ f32 offsetZ;
-    /* 0x08 */ f32 rotSpeed;
-    /* 0x0C */ f32 angle;
+    /* 0x08 */ f32 rockPhaseAngularVel;
+    /* 0x0C */ f32 rockPhase;
     /* 0x10 */ s32 modelID;
     /* 0x14 */ s32 unk_14;
-} Omo01Struct; // size = 0x18
+} RockingHorse; // size = 0x18
 
-API_CALLABLE(N(update_model_uma)) {
-    Omo01Struct* ptr;
+API_CALLABLE(N(UpdateRockingHorse)) {
+    RockingHorse* horse;
     Model* model;
     f32 rotZ;
     f32 offsetY;
     s32 i;
-    Matrix4f mtx1;
-    Matrix4f mtx2;
+    Matrix4f mtxPivot;
+    Matrix4f mtxRotate;
 
     if (isInitialCall) {
-        ptr = heap_malloc(sizeof(*ptr));
-        script->functionTempPtr[0] = ptr;
+        horse = heap_malloc(sizeof(*horse));
+        script->functionTempPtr[0] = horse;
 
-        for (i = 0; i == 0; i++, ptr++) {
-            ptr->modelID = N(modelList)[i];
-            ptr->unk_14 = ((s32*)N(updateModels))[i]; // WTF ???
-            model = get_model_from_list_index(get_model_list_index_from_tree_index(ptr->modelID));
-            ptr->offsetX = 0.0f;
-            ptr->offsetZ = 0.0f;
-            ptr->rotSpeed = 3.5f;
-            ptr->angle = 0.0f;
+        for (i = 0; i == 0; i++, horse++) {
+            horse->modelID = N(RockingHorseModels)[i];
+            horse->unk_14 = ((s32*)N(EVS_UpdateRockingHorse))[i]; // WTF ???
+            model = get_model_from_list_index(get_model_list_index_from_tree_index(horse->modelID));
+            horse->offsetX = 0.0f;
+            horse->offsetZ = 0.0f;
+            horse->rockPhaseAngularVel = 3.5f;
+            horse->rockPhase = 0.0f;
         }
     }
 
-    ptr = script->functionTempPtr[0];
-    for (i = 0; i == 0; i++, ptr++) {
-        ptr->angle += ptr->rotSpeed;
-        ptr->angle = clamp_angle(ptr->angle);
+    horse = script->functionTempPtr[0];
+    for (i = 0; i == 0; i++, horse++) {
+        horse->rockPhase += horse->rockPhaseAngularVel;
+        horse->rockPhase = clamp_angle(horse->rockPhase);
 
-        rotZ = sin_rad(ptr->angle * 3.14f / 180.0f) * 20.0f;
+        rotZ = sin_rad(horse->rockPhase * 3.14f / 180.0f) * 20.0f;
         offsetY = SQ(rotZ) / 90.0f;
 
-        model = get_model_from_list_index(get_model_list_index_from_tree_index(ptr->modelID));
+        model = get_model_from_list_index(get_model_list_index_from_tree_index(horse->modelID));
         model->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX | MODEL_FLAG_HAS_TRANSFORM_APPLIED;
-        guTranslateF(mtx1, -ptr->offsetX, 0.0f, -ptr->offsetZ);
-        guRotateF(mtx2, rotZ, 0.0f, 0.0f, 1.0f);
-        guMtxCatF(mtx1, mtx2, model->transformMatrix);
-        guTranslateF(mtx1, ptr->offsetX, offsetY, ptr->offsetZ);
-        guMtxCatF(model->transformMatrix, mtx1, model->transformMatrix);
+        guTranslateF(mtxPivot, -horse->offsetX, 0.0f, -horse->offsetZ);
+        guRotateF(mtxRotate, rotZ, 0.0f, 0.0f, 1.0f);
+        guMtxCatF(mtxPivot, mtxRotate, model->transformMatrix);
+        guTranslateF(mtxPivot, horse->offsetX, offsetY, horse->offsetZ);
+        guMtxCatF(model->transformMatrix, mtxPivot, model->transformMatrix);
     }
     return ApiStatus_BLOCK;
 }
 
-EvtScript N(updateModels) = {
-    EVT_CALL(N(update_model_uma))
+EvtScript N(EVS_UpdateRockingHorse) = {
+    EVT_CALL(N(UpdateRockingHorse))
     EVT_RETURN
     EVT_END
 };
@@ -82,7 +85,7 @@ EvtScript N(EVS_PreBattle) = {
             EVT_WAIT(1)
         EVT_END_LOOP
     EVT_END_THREAD
-    EVT_EXEC(N(updateModels))
+    EVT_EXEC(N(EVS_UpdateRockingHorse))
     EVT_RETURN
     EVT_END
 };

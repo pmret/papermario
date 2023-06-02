@@ -5,7 +5,7 @@
 
 #include "battle/common/stage/lib/Snowflakes.inc.c"
 
-void func_802189E0_661130(void) {
+void N(EnableBackgroundWave)(void) {
     enable_background_wave();
 }
 

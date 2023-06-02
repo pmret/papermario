@@ -1,5 +1,4 @@
 #include "common.h"
-#include "npc.h"
 #include "model.h"
 
 #ifndef DROPLET_MODEL
@@ -7,47 +6,72 @@
 #define DROPLET_MODEL 0
 #endif
 
-API_CALLABLE(N(CheckDripCollisionWithNPC)) {
-    PlayerStatus* playerStatus = &gPlayerStatus;
+API_CALLABLE(N(CheckDripCollisionWithActors)) {
+    BattleStatus* battleStatus = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
-    s32 treeIndex = evt_get_variable(script, *args++);
-    Npc* partner = get_npc_unsafe(NPC_PARTNER);
-    Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(treeIndex));
-    f32 xDiff, zDiff, yVal;
-    f32 sqrtTemp;
+    Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(evt_get_variable(script, *args++)));
+    f32 xDiff, yDiff, zDiff, temp;
+    Actor* actor;
     s32 i;
 
     script->varTable[2] = 0;
-    xDiff = playerStatus->position.x - model->center.x;
-    zDiff = playerStatus->position.z - model->center.z;
-    yVal = playerStatus->position.y + playerStatus->colliderHeight - 1.5f - model->center.y;
-    sqrtTemp = sqrtf(SQ(xDiff) + SQ(zDiff));
 
-    if (yVal > 0.0f && yVal < playerStatus->colliderHeight && sqrtTemp < playerStatus->colliderDiameter * 0.5f) {
-        script->varTable[2] = 1;
+    actor = battleStatus->playerActor;
+    if (actor != NULL) {
+        xDiff = actor->currentPos.x - model->center.x;
+        yDiff = actor->currentPos.y + actor->size.y - 1.5f - model->center.y;
+        zDiff = actor->currentPos.z - model->center.z;
+        temp = sqrtf(SQ(xDiff) + SQ(zDiff));
+
+        if (yDiff > 0.0f && yDiff < actor->size.y && temp < actor->size.x * 0.5f) {
+            script->varTable[2] = 1;
+            return ApiStatus_DONE2;
+        }
     }
 
-    xDiff = partner->pos.x - model->center.x;
-    zDiff = partner->pos.z - model->center.z;
-    yVal = partner->pos.y + partner->collisionHeight - 1.5f - model->center.y;
-    sqrtTemp = sqrtf(SQ(xDiff) + SQ(zDiff));
+    actor = battleStatus->partnerActor;
+    if (actor != NULL) {
+        xDiff = actor->currentPos.x - model->center.x;
+        yDiff = actor->currentPos.y + actor->size.y - 1.5f - model->center.y;
+        zDiff = actor->currentPos.z - model->center.z;
+        temp = sqrtf(SQ(xDiff) + SQ(zDiff));
 
-    if (yVal > 0.0f && yVal < partner->collisionHeight && sqrtTemp < partner->collisionDiameter * 0.5f) {
-        script->varTable[2] = 1;
+        if (yDiff > 0.0f && yDiff < actor->size.y && temp < actor->size.x * 0.5f) {
+            script->varTable[2] = 1;
+            return ApiStatus_DONE2;
+        }
     }
 
-    for (i = 0; i < MAX_NPCS; i++) {
-        Npc* npc = get_npc_safe(i);
+    for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
+        ActorPart* part;
 
-        if (npc != NULL) {
-            xDiff = npc->pos.x - model->center.x;
-            zDiff = npc->pos.z - model->center.z;
-            yVal = npc->pos.y + npc->collisionHeight - 1.5f - model->center.y;
-            sqrtTemp = sqrtf(SQ(xDiff) + SQ(zDiff));
+        actor = battleStatus->enemyActors[i];
 
-            if (yVal > 0.0f && yVal < npc->collisionHeight && sqrtTemp < npc->collisionDiameter * 0.5f) {
+        if (actor != NULL && !(actor->flags & ACTOR_FLAG_DISABLED)) {
+            xDiff = actor->currentPos.x - model->center.x;
+            yDiff = actor->currentPos.y + actor->size.y - 1.5f - model->center.y;
+            zDiff = actor->currentPos.z - model->center.z;
+            temp = sqrtf(SQ(xDiff) + SQ(zDiff));
+
+            if (yDiff > 0.0f && yDiff < actor->size.y && temp < actor->size.x * 0.5f) {
                 script->varTable[2] = 1;
-                break;
+                return ApiStatus_DONE2;
+            }
+
+            for (part = actor->partsTable; part != NULL; part = part->nextPart) {
+                if (!(part->flags & ACTOR_PART_FLAG_INVISIBLE)) {
+                    if (part->flags & ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION) {
+                        xDiff = part->currentPos.x - model->center.x;
+                        yDiff = part->currentPos.y + part->size.y - 1.5f - model->center.y;
+                        zDiff = part->currentPos.z - model->center.z;
+                        temp = sqrtf(SQ(xDiff) + SQ(zDiff));
+
+                        if (yDiff > 0.0f && yDiff < part->size.y && temp < part->size.x * 0.5f) {
+                            script->varTable[2] = 1;
+                            return ApiStatus_DONE2;
+                        }
+                    }
+                }
             }
         }
     }
@@ -124,7 +148,7 @@ EvtScript N(EVS_UpdateDripSplash) = {
 };
 
 EvtScript N(EVS_UpdateDripVolume) = {
-    EVT_SET_GROUP(EVT_GROUP_00)
+    EVT_SET_GROUP(0)
     EVT_USE_ARRAY(LVarA)
     EVT_SET(LVar5, ArrayVar(5))
     EVT_LOOP(5)
@@ -133,27 +157,26 @@ EvtScript N(EVS_UpdateDripVolume) = {
         EVT_ADD(LVar5, 1)
     EVT_END_LOOP
     EVT_LABEL(0)
-        EVT_CALL(RandInt, 200, LVar0)
-        EVT_ADD(LVar0, 50)
-        EVT_WAIT(LVar0)
-        EVT_CALL(EnableModel, ArrayVar(5), TRUE)
-        EVT_CALL(MakeLerp, ArrayVar(2), ArrayVar(3), ArrayVar(4), EASING_QUADRATIC_IN)
-        EVT_LABEL(1)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(TranslateModel, ArrayVar(5), ArrayVar(0), LVar0, ArrayVar(1))
-        EVT_WAIT(1)
-        EVT_CALL(N(CheckDripCollisionWithNPC), ArrayVar(5))
-        EVT_IF_EQ(LVar2, 1)
-            EVT_GOTO(10)
-        EVT_END_IF
-        EVT_IF_EQ(LVar1, 1)
-            EVT_GOTO(1)
-        EVT_END_IF
-        EVT_LABEL(10)
-        EVT_CALL(EnableModel, ArrayVar(5), FALSE)
-        EVT_CALL(PlaySound, SOUND_3F6)
-        EVT_EXEC_WAIT(N(EVS_UpdateDripSplash))
-        EVT_GOTO(0)
+    EVT_CALL(RandInt, 200, LVar0)
+    EVT_ADD(LVar0, 50)
+    EVT_WAIT(LVar0)
+    EVT_CALL(EnableModel, ArrayVar(5), TRUE)
+    EVT_CALL(MakeLerp, ArrayVar(2), ArrayVar(3), ArrayVar(4), EASING_QUADRATIC_IN)
+    EVT_LABEL(1)
+    EVT_CALL(UpdateLerp)
+    EVT_CALL(TranslateModel, ArrayVar(5), ArrayVar(0), LVar0, ArrayVar(1))
+    EVT_WAIT(1)
+    EVT_CALL(N(CheckDripCollisionWithActors), ArrayVar(5))
+    EVT_IF_EQ(LVar2, 1)
+        EVT_GOTO(10)
+    EVT_END_IF
+    EVT_IF_EQ(LVar1, 1)
+        EVT_GOTO(1)
+    EVT_END_IF
+    EVT_LABEL(10)
+    EVT_CALL(EnableModel, ArrayVar(5), FALSE)
+    EVT_EXEC_WAIT(N(EVS_UpdateDripSplash))
+    EVT_GOTO(0)
     EVT_RETURN
     EVT_END
 };
@@ -181,7 +204,9 @@ EvtScript N(EVS_CreateDripVolumes) = {
             EVT_SET(ArrayVar(3), LVar7)
             EVT_SET(ArrayVar(4), LVar8)
             EVT_SET(ArrayVar(5), LVarF)
-            EVT_EXEC(N(EVS_UpdateDripVolume))
+            EVT_CHILD_THREAD
+                EVT_EXEC(N(EVS_UpdateDripVolume))
+            EVT_END_CHILD_THREAD
             EVT_ADD(LVarF, 5)
         EVT_END_LOOP
     EVT_END_LOOP

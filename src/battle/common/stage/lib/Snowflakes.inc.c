@@ -75,7 +75,7 @@ EvtScript N(EVS_RandomlySpinSnowflake) = {
 };
 
 EvtScript N(EVS_AnimateHangingSnowflake_RandomSpin) = {
-    EVT_SET(LVarA, LVar0) // model
+    EVT_SET(LVarA, LVar0) // modelID
     EVT_SET(LVarB, LVar1)
     EVT_EXEC(N(EVS_RandomlySpinSnowflake))
     EVT_SET(LVar7, 0)

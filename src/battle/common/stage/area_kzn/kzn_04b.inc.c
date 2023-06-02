@@ -3,105 +3,43 @@
 
 #define NAMESPACE A(kzn_04b)
 
-EvtScript N(80228370) = {
-    EVT_SET(LVarA, LVar1)
-    EVT_CALL(SetTexPanner, LVar0, LVar1)
-    EVT_SET(LVar0, 0)
-    EVT_SET(LVar1, 0)
-    EVT_LOOP(0)
-        EVT_CALL(SetTexPanOffset, LVarA, 0, LVar0, 0)
-        EVT_CALL(SetTexPanOffset, LVarA, 1, LVar1, 0)
-        EVT_SUB(LVar0, -300)
-        EVT_SUB(LVar1, -500)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(8022843C) = {
-    EVT_SET(LVarA, LVar1)
-    EVT_CALL(SetTexPanner, LVar0, LVar1)
-    EVT_SET(LVar0, 0)
-    EVT_SET(LVar1, 0)
-    EVT_LOOP(0)
-        EVT_CALL(SetTexPanOffset, LVarA, 0, LVar0, LVar1)
-        EVT_ADD(LVar0, 0x4000)
-        EVT_ADD(LVar1, 0)
-        EVT_WAIT(5)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(802284EC) = {
-    EVT_SET(LVarA, LVar0)
-    EVT_SET(LVar9, LVar1)
-    EVT_SET(LVar8, LVar2)
-    EVT_SET(LVar7, LVar3)
-    EVT_LABEL(0)
-    EVT_SET(LVar2, LVar8)
-    EVT_ADD(LVar2, LVar9)
-    EVT_CALL(MakeLerp, LVar8, LVar2, LVar7, EASING_LINEAR)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(TranslateGroup, LVarA, LVar0, 0, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_SET(LVar2, LVar8)
-    EVT_ADD(LVar2, LVar9)
-    EVT_CALL(MakeLerp, LVar2, LVar8, LVar7, EASING_LINEAR)
-    EVT_LOOP(0)
-        EVT_CALL(UpdateLerp)
-        EVT_CALL(TranslateGroup, LVarA, LVar0, 0, 0)
-        EVT_WAIT(1)
-        EVT_IF_EQ(LVar1, 0)
-            EVT_BREAK_LOOP
-        EVT_END_IF
-    EVT_END_LOOP
-    EVT_GOTO(0)
-    EVT_RETURN
-    EVT_END
-};
+#include "./Decorations.inc.c"
 
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_CALL(SetGroupVisibility, 39, MODEL_GROUP_HIDDEN)
-    EVT_CALL(SetGroupVisibility, 44, MODEL_GROUP_HIDDEN)
-    EVT_SET(LVar0, 4)
-    EVT_SET(LVar1, 0)
-    EVT_EXEC(N(80228370))
-    EVT_SET(LVar0, 5)
-    EVT_SET(LVar1, 1)
-    EVT_EXEC(N(80228370))
-    EVT_SET(LVar0, 6)
-    EVT_SET(LVar1, 2)
-    EVT_EXEC(N(80228370))
-    EVT_SET(LVar0, 7)
-    EVT_SET(LVar1, 3)
-    EVT_EXEC(N(80228370))
-    EVT_SET(LVar0, 15)
-    EVT_SET(LVar1, 4)
-    EVT_EXEC(N(80228370))
-    EVT_SET(LVar0, 24)
-    EVT_SET(LVar1, 5)
-    EVT_EXEC(N(80228370))
-    EVT_SET(LVar0, 25)
-    EVT_SET(LVar1, 6)
-    EVT_EXEC(N(80228370))
-    EVT_SET(LVar0, 43)
-    EVT_SET(LVar1, 7)
-    EVT_EXEC(N(80228370))
-    EVT_SET(LVar0, 13)
-    EVT_SET(LVar1, 8)
-    EVT_EXEC(N(8022843C))
-    EVT_SET(LVar0, 14)
-    EVT_SET(LVar1, 9)
-    EVT_EXEC(N(8022843C))
+    EVT_CALL(SetGroupVisibility, MODEL_06, MODEL_GROUP_HIDDEN)
+    EVT_CALL(SetGroupVisibility, MODEL_16, MODEL_GROUP_HIDDEN)
+    EVT_SET(LVar0, MODEL_y2_1)
+    EVT_SET(LVar1, TEX_PANNER_0)
+    EVT_EXEC(N(EVS_TexPan_Lava))
+    EVT_SET(LVar0, MODEL_y2_2)
+    EVT_SET(LVar1, TEX_PANNER_1)
+    EVT_EXEC(N(EVS_TexPan_Lava))
+    EVT_SET(LVar0, MODEL_y3_1)
+    EVT_SET(LVar1, TEX_PANNER_2)
+    EVT_EXEC(N(EVS_TexPan_Lava))
+    EVT_SET(LVar0, MODEL_y3_2)
+    EVT_SET(LVar1, TEX_PANNER_3)
+    EVT_EXEC(N(EVS_TexPan_Lava))
+    EVT_SET(LVar0, MODEL_yougan)
+    EVT_SET(LVar1, TEX_PANNER_4)
+    EVT_EXEC(N(EVS_TexPan_Lava))
+    EVT_SET(LVar0, MODEL_y1_1)
+    EVT_SET(LVar1, TEX_PANNER_5)
+    EVT_EXEC(N(EVS_TexPan_Lava))
+    EVT_SET(LVar0, MODEL_y1_2)
+    EVT_SET(LVar1, TEX_PANNER_6)
+    EVT_EXEC(N(EVS_TexPan_Lava))
+    EVT_SET(LVar0, MODEL_tri)
+    EVT_SET(LVar1, TEX_PANNER_7)
+    EVT_EXEC(N(EVS_TexPan_Lava))
+    EVT_SET(LVar0, MODEL_awa1)
+    EVT_SET(LVar1, TEX_PANNER_8)
+    EVT_EXEC(N(EVS_TexAnim_LavaBubble))
+    EVT_SET(LVar0, MODEL_awa2)
+    EVT_SET(LVar1, TEX_PANNER_9)
+    EVT_EXEC(N(EVS_TexAnim_LavaBubble))
     EVT_RETURN
     EVT_END
 };
@@ -112,9 +50,9 @@ EvtScript N(EVS_PostBattle) = {
 };
 
 s32 N(ForegroundModels)[] = {
-    0x00000014,
-    0x00000015,
-    0x00000016,
+    MODEL_iwa3,
+    MODEL_sita1,
+    MODEL_ue3,
     STAGE_MODEL_LIST_END
 };
 

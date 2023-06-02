@@ -4,58 +4,7 @@
 
 #define NAMESPACE A(pra_04)
 
-EvtScript N(EVS_TexPan_Glass) = {
-    EVT_SET(LVarA, LVar1)
-    EVT_SET(LVarB, LVar2)
-    EVT_SET(LVarC, LVar3)
-    EVT_CALL(SetTexPanner, LVar0, LVar1)
-    EVT_SET(LVar0, 0)
-    EVT_SET(LVar1, 0)
-    EVT_LOOP(0)
-        EVT_CALL(SetTexPanOffset, LVarA, TEX_PANNER_MAIN, LVar0, LVar1)
-        EVT_ADD(LVar0, LVarB)
-        EVT_ADD(LVar1, LVarC)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(802321A0) = {
-    EVT_SET(LVarA, LVar1)
-    EVT_SET(LVarB, LVar2)
-    EVT_SET(LVarC, LVar3)
-    EVT_CALL(SetTexPanner, LVar0, LVar1)
-    EVT_SET(LVar0, 0)
-    EVT_SET(LVar1, 0)
-    EVT_LOOP(0)
-        EVT_CALL(SetTexPanOffset, LVarA, TEX_PANNER_MAIN, LVar0, 0)
-        EVT_CALL(SetTexPanOffset, LVarA, TEX_PANNER_AUX, LVar1, 0)
-        EVT_ADD(LVar0, LVarB)
-        EVT_ADD(LVar1, LVarC)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(8023228C) = {
-    EVT_SET(LVarA, LVar1)
-    EVT_SET(LVarB, LVar2)
-    EVT_SET(LVarC, LVar3)
-    EVT_CALL(SetTexPanner, LVar0, LVar1)
-    EVT_SET(LVar0, 0)
-    EVT_SET(LVar1, 0)
-    EVT_LOOP(0)
-        EVT_CALL(SetTexPanOffset, LVarA, TEX_PANNER_MAIN, 0, LVar0)
-        EVT_CALL(SetTexPanOffset, LVarA, TEX_PANNER_AUX, 0, LVar1)
-        EVT_ADD(LVar0, LVarB)
-        EVT_ADD(LVar1, LVarC)
-        EVT_WAIT(1)
-    EVT_END_LOOP
-    EVT_RETURN
-    EVT_END
-};
+#include "battle/common/stage/lib/TexturePanner.inc.c"
 
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
@@ -64,12 +13,12 @@ EvtScript N(EVS_PreBattle) = {
     EVT_SET(LVar1, TEX_PANNER_0)
     EVT_SET(LVar2, 3000)
     EVT_SET(LVar3, 0)
-    EVT_EXEC(N(EVS_TexPan_Glass))
+    EVT_EXEC(N(EVS_TexturePanMain))
     EVT_SET(LVar0, MODEL_kira2)
     EVT_SET(LVar1, TEX_PANNER_1)
     EVT_SET(LVar2, 3000)
     EVT_SET(LVar3, 0)
-    EVT_EXEC(N(EVS_TexPan_Glass))
+    EVT_EXEC(N(EVS_TexturePanMain))
     EVT_CALL(EnableBattleFloorReflections, TRUE)
     EVT_RETURN
     EVT_END

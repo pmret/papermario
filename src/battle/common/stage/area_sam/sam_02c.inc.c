@@ -8,9 +8,9 @@
 
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetGroupVisibility, 3, MODEL_GROUP_HIDDEN)
-    EVT_CALL(SetGroupVisibility, 10, MODEL_GROUP_HIDDEN)
-    EVT_CALL(SetGroupVisibility, 26, MODEL_GROUP_HIDDEN)
+    EVT_CALL(SetGroupVisibility, MODEL_p1, MODEL_GROUP_HIDDEN)
+    EVT_CALL(SetGroupVisibility, MODEL_p2, MODEL_GROUP_HIDDEN)
+    EVT_CALL(SetGroupVisibility, MODEL_yuki, MODEL_GROUP_HIDDEN)
     EVT_EXEC(N(EVS_SpawnSnowfall))
     EVT_RETURN
     EVT_END

@@ -9,30 +9,30 @@ EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
     EVT_THREAD
-        EVT_SET(LVar0, 15)
+        EVT_SET(LVar0, MODEL_mizu2)
         EVT_EXEC(N(EVS_AnimateWaveModel))
         EVT_WAIT(5)
-        EVT_SET(LVar0, 16)
+        EVT_SET(LVar0, MODEL_mizu3)
         EVT_EXEC(N(EVS_AnimateWaveModel))
         EVT_WAIT(5)
-        EVT_SET(LVar0, 17)
+        EVT_SET(LVar0, MODEL_mizu4)
         EVT_EXEC(N(EVS_AnimateWaveModel))
     EVT_END_THREAD
     EVT_THREAD
         EVT_WAIT(5)
-        EVT_SET(LVar0, 9)
+        EVT_SET(LVar0, MODEL_o357)
         EVT_SET(LVar1, 145)
-        EVT_EXEC(N(script3))
-        EVT_SET(LVar0, 10)
+        EVT_EXEC(N(EVS_AnimateDrifting))
+        EVT_SET(LVar0, MODEL_o361)
         EVT_SET(LVar1, 145)
-        EVT_EXEC(N(script3))
+        EVT_EXEC(N(EVS_AnimateDrifting))
     EVT_END_THREAD
-    EVT_SET(LVar0, 12)
+    EVT_SET(LVar0, MODEL_o358)
     EVT_SET(LVar1, 60)
-    EVT_EXEC(N(script3))
-    EVT_SET(LVar0, 13)
+    EVT_EXEC(N(EVS_AnimateDrifting))
+    EVT_SET(LVar0, MODEL_o360)
     EVT_SET(LVar1, 60)
-    EVT_EXEC(N(script3))
+    EVT_EXEC(N(EVS_AnimateDrifting))
     EVT_RETURN
     EVT_END
 };

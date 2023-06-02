@@ -1,11 +1,12 @@
 #include "battle/battle.h"
+#include "mapfs/omo_bt03_shape.h"
 
 #define NAMESPACE A(omo_03)
 
 EvtScript N(EVS_PreBattle) = {
     EVT_CALL(SetSpriteShading, SHADING_NONE)
     EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_CALL(SetGroupVisibility, 18, MODEL_GROUP_HIDDEN)
+    EVT_CALL(SetGroupVisibility, MODEL_g97, MODEL_GROUP_HIDDEN)
     EVT_RETURN
     EVT_END
 };

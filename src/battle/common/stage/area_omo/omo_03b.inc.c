@@ -1,4 +1,5 @@
 #include "battle/battle.h"
+#include "mapfs/omo_bt03_shape.h"
 
 #define NAMESPACE A(omo_03b)
 
