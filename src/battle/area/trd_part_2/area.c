@@ -1,6 +1,3 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
 #include "area.h"
 
 extern ActorBlueprint A(green_ninja_koopa);

@@ -252,20 +252,21 @@ EvtScript N(EVS_AnimateWaveModel) = {
     EVT_END
 };
 
-s32 N(intTable_8021CD64)[] = {
+s32 N(DriftBobbingOffsets)[] = {
      0, -1, -1, -2, -2, -3, -5, -8,
     -8, -7, -6, -4, -2, -1,  0,  255,
 };
 
-EvtScript N(script3) = {
-    EVT_SET(LVarA, LVar0)
+EvtScript N(EVS_AnimateDrifting) = {
+    EVT_SET(LVarA, LVar0) // modelID
     EVT_SET(LVarB, LVar1)
     EVT_SET(LVar5, 5)
-    EVT_USE_BUF(EVT_PTR(N(intTable_8021CD64)))
+    EVT_USE_BUF(EVT_PTR(N(DriftBobbingOffsets)))
     EVT_LABEL(0)
+        // drift along from left to right
         EVT_BUF_READ1(LVar1)
         EVT_IF_EQ(LVar1, 255)
-            EVT_USE_BUF(EVT_PTR(N(intTable_8021CD64)))
+            EVT_USE_BUF(EVT_PTR(N(DriftBobbingOffsets)))
             EVT_BUF_READ1(LVar1)
         EVT_END_IF
         EVT_SET(LVar0, LVar5)
@@ -288,6 +289,7 @@ EvtScript N(script3) = {
         EVT_END_IF
         EVT_GOTO(0)
     EVT_LABEL(1)
+        // fall down
         EVT_SET(LVar2, 0)
         EVT_LOOP(20)
             EVT_ADD(LVar5, 1)
@@ -296,6 +298,7 @@ EvtScript N(script3) = {
             EVT_CALL(TranslateModel, LVarA, LVar0, LVar1, 0)
             EVT_WAIT(1)
         EVT_END_LOOP
+        // reset to left side of stage
         EVT_SUB(LVar5, 280)
         EVT_SET(LVar1, 0)
         EVT_GOTO(0)

@@ -1,7 +1,7 @@
-#include "common.h"
+#include "../area.h"
 #include "animation_script.h"
 
-#define NAMESPACE b_area_kzn2_lava_piranha_anim1
+#define NAMESPACE A(lava_piranha_anim1)
 
 StaticAnimatorNode N(8021A120) = {
     .vertexStartOffset = -1,

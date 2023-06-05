@@ -1,9 +1,10 @@
 #include "common.h"
 
 // pan the main tile along U and V
+// (in) LVar0 : modelID
 // (in) LVar1 : tex panner ID
 // (in) LVar2 : main du
-// (in) LVar2 : main dv
+// (in) LVar3 : main dv
 EvtScript N(EVS_TexturePanMain) = {
     EVT_SET(LVarA, LVar1)
     EVT_SET(LVarB, LVar2)
@@ -22,9 +23,10 @@ EvtScript N(EVS_TexturePanMain) = {
 };
 
 // pan the main and aux tiles along U
+// (in) LVar0 : modelID
 // (in) LVar1 : tex panner ID
 // (in) LVar2 : main du
-// (in) LVar2 : aux du
+// (in) LVar3 : aux du
 EvtScript N(EVS_TexturePanBothU) = {
     EVT_SET(LVarA, LVar1)
     EVT_SET(LVarB, LVar2)
@@ -44,9 +46,10 @@ EvtScript N(EVS_TexturePanBothU) = {
 };
 
 // pan the main and aux tiles along V
+// (in) LVar0 : modelID
 // (in) LVar1 : tex panner ID
 // (in) LVar2 : main dv
-// (in) LVar2 : aux dv
+// (in) LVar3 : aux dv
 EvtScript N(EVS_TexturePanBothV) = {
     EVT_SET(LVarA, LVar1)
     EVT_SET(LVarB, LVar2)

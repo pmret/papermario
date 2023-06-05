@@ -4720,9 +4720,9 @@ segments:
     subalign: 4
     subsegments:
     - [0x49A190, c, area]
-    - [0x49A190, c, actor/spiked_goomba]
-    - [0x49A410, c, actor/paragoomba]
-    - [0x49A6F0, c, actor/paragoomba2]
+    - [0x49A190, c, actor/tutorial_spiked_goomba]
+    - [0x49A410, c, actor/tutorial_paragoomba]
+    - [0x49A6F0, c, actor/paragoomba]
     - [0x49A9D0, c, actor/jr_troopa]
     - [0x49A9D0, c, actor/egg_jr_troopa]
     - [0x49A9D0, c, actor/para_jr_troopa]
@@ -4732,13 +4732,13 @@ segments:
     - [0x49B170, c, stage/kmr_02]
     - [0x49B170, c, stage/kmr_03]
     - [0x49B3E0, c, stage/kmr_04]
-    - [0x49B650, c, stage/kmr_05]
+    - [0x49B650, c, stage/kmr_05b]
     - [0x49B8C0, c, stage/kmr_06]
     - [0x49BB70, c, stage/nok_01]
     - [0x49BB70, c, stage/mim_01]
     - [0x49BBD0, c, stage/sam_01]
     - [0x49BEF0, c, stage/mac_01]
-    - [0x49C340, c, stage/kpa_01]
+    - [0x49C340, c, stage/kpa_13]
     - [0x49C340]
   - dir: battle/area/mac
     type: code
@@ -4932,7 +4932,7 @@ segments:
     start: 0x5517A0
     vram: 0x80218000
     subsegments:
-    - [0x5517A0, c, actor/hypergoomba]
+    - [0x5517A0, c, actor/hyper_goomba]
     - [0x551A80, c, actor/hyper_paragoomba]
     - [0x551D60, c, actor/hyper_cleft]
     - [0x551E20, c, actor/tubbas_heart]
@@ -5449,8 +5449,8 @@ segments:
     - [0x6F4350, c, actor/bowser_phase_2]
     - [0x6F59E0, c, actor/bowser_phase_3]
     - [0x6F7320, c, stage/kpa_01]
-    - [0x6F7320, c, stage/kpa_02]
-    - [0x6F7320, c, stage/kpa_03]
+    - [0x6F7320, c, stage/kkj_01]
+    - [0x6F7320, c, stage/kkj_02]
     - [0x6F7370, c, area]
     - [0x6F7370]
   - dir: battle/area/kpa3

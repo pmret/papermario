@@ -1,9 +1,7 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/SpikyGoomnut.h"
 
-#define NAMESPACE b_area_kmr_part_2_goomnut_tree
+#define NAMESPACE A(goomnut_tree)
 
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,

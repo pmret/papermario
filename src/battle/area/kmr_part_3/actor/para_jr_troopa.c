@@ -1,10 +1,8 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/JrTroopa.h"
 #include "sprite/npc/ParaJrTroopa.h"
 
-#define NAMESPACE b_area_kmr_part_3_para_jr_troopa
+#define NAMESPACE A(para_jr_troopa)
 
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
@@ -226,7 +224,7 @@ EvtScript N(init_80226510) = {
 EvtScript N(idle_802265A0) = {
     EVT_LABEL(0)
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
-    EVT_IF_FLAG(LVarA, 0x41000)
+    EVT_IF_FLAG(LVarA, STATUS_FLAG_DIZZY | STATUS_FLAG_SLEEP)
         EVT_CALL(SetTargetOffset, ACTOR_SELF, PRT_MAIN, -12, 28)
         EVT_CALL(SetProjectileTargetOffset, ACTOR_SELF, PRT_MAIN, 4, -6)
         EVT_CALL(N(SetAbsoluteStatusOffsets), -25, 27, -1, 27)
@@ -252,18 +250,18 @@ EvtScript N(handleEvent_802266B0) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(9)
         EVT_CASE_OR_EQ(10)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_EXEC_WAIT(N(80225F7C))
             EVT_EXEC_WAIT(N(80227E1C))
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(32)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_WAIT(10)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_Hurt)
             EVT_EXEC_WAIT(N(802279B0))
             EVT_RETURN
@@ -278,48 +276,48 @@ EvtScript N(handleEvent_802266B0) = {
             EVT_SET(LVar2, 2424841)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
             EVT_WAIT(10)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_BurnStill)
             EVT_EXEC_WAIT(N(802279B0))
             EVT_RETURN
         EVT_CASE_EQ(11)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
         EVT_CASE_EQ(33)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_Hurt)
             EVT_EXEC_WAIT(N(802279B0))
             EVT_RETURN
         EVT_CASE_EQ(47)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
             EVT_EXEC_WAIT(N(80227D38))
             EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_ParaJrTroopa_Idle)
         EVT_CASE_EQ(38)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_Idle)
             EVT_EXEC_WAIT(N(802279B0))
             EVT_RETURN
         EVT_CASE_EQ(23)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_CASE_EQ(25)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
             EVT_EXEC_WAIT(N(80225F7C))
@@ -341,7 +339,7 @@ EvtScript N(handleEvent_802266B0) = {
         EVT_CASE_EQ(31)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
             EVT_IF_NOT_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
-                EVT_SET_CONST(LVar0, 0x00000001)
+                EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_Flail)
                 EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
                 EVT_EXEC_WAIT(N(802263D4))
@@ -349,12 +347,12 @@ EvtScript N(handleEvent_802266B0) = {
                 EVT_EXEC_WAIT(N(8022646C))
             EVT_END_IF
         EVT_CASE_EQ(53)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_ReturnHome)
             EVT_CALL(HPBarToHome, ACTOR_SELF)
         EVT_CASE_EQ(49)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_ParaJrTroopa_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_Recover)
         EVT_CASE_DEFAULT

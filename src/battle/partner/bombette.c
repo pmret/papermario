@@ -364,7 +364,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208C)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBombette_Hurt)
             EVT_EXEC_WAIT(EVS_Partner_NoDamageHit)
         EVT_END_CASE_GROUP
@@ -572,7 +572,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_BattleBombette_Hurt)
             EVT_EXEC_WAIT(EVS_Partner_Drop)
         EVT_CASE_EQ(EVENT_RECOVER_FROM_KO)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBombette_Idle)
             EVT_SET_CONST(LVar2, ANIM_BattleBombette_Run)
             EVT_SET(LVar3, 0)
@@ -580,7 +580,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_18)
         EVT_CASE_OR_EQ(EVENT_BLOCK)
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208C)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBombette_Block)
             EVT_EXEC_WAIT(EVS_Partner_NoDamageHit)
             EVT_WAIT(10)
@@ -611,7 +611,7 @@ EvtScript N(takeTurn) = {
 };
 
 EvtScript N(celebrate) = {
-    EVT_SET_CONST(LVar0, 1)
+    EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_SET_CONST(LVar1, ANIM_BattleBombette_CelebrateLoop)
     EVT_SET_CONST(LVar2, ANIM_BattleBombette_Celebrate)
     EVT_SET_CONST(LVar3, ANIM_BattleBombette_Idle)
@@ -664,7 +664,7 @@ EvtScript N(firstStrike) = {
 };
 
 EvtScript N(runAway) = {
-    EVT_SET_CONST(LVar0, 1)
+    EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_SET_CONST(LVar1, ANIM_BattleBombette_Run)
     EVT_EXEC_WAIT(EVS_Partner_RunAway)
     EVT_RETURN

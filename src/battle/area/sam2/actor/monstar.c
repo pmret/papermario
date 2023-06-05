@@ -1,12 +1,9 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
-#include "effects.h"
+#include "../area.h"
 #include "sprite.h"
 #include "sprite/npc/Monstar.h"
 #include "battle/area/sam2/actor/img.png.h"
 
-#define NAMESPACE b_area_sam2_monstar
+#define NAMESPACE A(monstar)
 
 extern Gfx N(dlist)[];
 
@@ -239,7 +236,7 @@ EvtScript N(handleEvent) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Monstar_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
         EVT_END_CASE_GROUP
@@ -253,7 +250,7 @@ EvtScript N(handleEvent) = {
             EVT_SET(LVar1, ANIM_Monstar_Hurt)
             EVT_SET(LVar2, -1)
             EVT_EXEC_WAIT(N(OnBurn))
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Monstar_Hurt)
             EVT_EXEC_WAIT(N(OnDeath))
             EVT_RETURN
@@ -261,10 +258,10 @@ EvtScript N(handleEvent) = {
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
-                    EVT_SET_CONST(LVar0, 1)
+                    EVT_SET_CONST(LVar0, PRT_MAIN)
                     EVT_SET_CONST(LVar1, ANIM_Monstar_Idle1)
                 EVT_CASE_EQ(1)
-                    EVT_SET_CONST(LVar0, 1)
+                    EVT_SET_CONST(LVar0, PRT_MAIN)
                     EVT_SET_CONST(LVar1, ANIM_Monstar_GatherStrength1)
             EVT_END_SWITCH
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
@@ -272,34 +269,34 @@ EvtScript N(handleEvent) = {
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
-                    EVT_SET_CONST(LVar0, 1)
+                    EVT_SET_CONST(LVar0, PRT_MAIN)
                     EVT_SET_CONST(LVar1, ANIM_Monstar_Idle1)
                 EVT_CASE_EQ(1)
-                    EVT_SET_CONST(LVar0, 1)
+                    EVT_SET_CONST(LVar0, PRT_MAIN)
                     EVT_SET_CONST(LVar1, ANIM_Monstar_GatherStrength1)
             EVT_END_SWITCH
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_CASE_EQ(EVENT_DEATH)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Monstar_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_WAIT(10)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Monstar_Hurt)
             EVT_EXEC_WAIT(N(OnDeath))
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Monstar_Idle1)
             EVT_EXEC_WAIT(EVS_Enemy_Recover)
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
-                    EVT_SET_CONST(LVar0, 1)
+                    EVT_SET_CONST(LVar0, PRT_MAIN)
                     EVT_SET_CONST(LVar1, ANIM_Monstar_Idle1)
                 EVT_CASE_EQ(1)
-                    EVT_SET_CONST(LVar0, 1)
+                    EVT_SET_CONST(LVar0, PRT_MAIN)
                     EVT_SET_CONST(LVar1, ANIM_Monstar_GatherStrength1)
             EVT_END_SWITCH
             EVT_EXEC_WAIT(EVS_Enemy_AirLift)
@@ -307,10 +304,10 @@ EvtScript N(handleEvent) = {
             EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
             EVT_SWITCH(LVar0)
                 EVT_CASE_EQ(0)
-                    EVT_SET_CONST(LVar0, 1)
+                    EVT_SET_CONST(LVar0, PRT_MAIN)
                     EVT_SET_CONST(LVar1, ANIM_Monstar_Idle1)
                 EVT_CASE_EQ(1)
-                    EVT_SET_CONST(LVar0, 1)
+                    EVT_SET_CONST(LVar0, PRT_MAIN)
                     EVT_SET_CONST(LVar1, ANIM_Monstar_GatherStrength1)
             EVT_END_SWITCH
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)

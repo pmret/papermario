@@ -1,6 +1,3 @@
-#include "common.h"
-#include "battle/battle.h"
+#include "../area.h"
 
-#define NAMESPACE b_area_jan_jan_04b
-
-#include "battle/common/stage/jan_04b.inc.c"
+#include "battle/common/stage/area_jan/jan_04b.inc.c"

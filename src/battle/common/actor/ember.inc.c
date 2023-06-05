@@ -1,7 +1,8 @@
-#include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "sprite/npc/LavaBubble.h"
+
+#define NAMESPACE A(ember)
 
 extern s32 N(IdleAnimations_8021AE5C)[];
 extern s32 N(IdleAnimations_8021AEA8)[];
@@ -300,7 +301,7 @@ EvtScript N(split) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetLastElement, LVar0)
-    EVT_IF_FLAG(LVar0, 0x20000000)
+    EVT_IF_FLAG(LVar0, DAMAGE_TYPE_MULTIPLE_POPUPS) // interesting use-case
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar0)
@@ -313,7 +314,7 @@ EvtScript N(split) = {
         EVT_CASE_OR_EQ(1)
         EVT_CASE_OR_EQ(2)
         EVT_CASE_OR_EQ(3)
-            EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_8021B5A0)), 0)
+            EVT_CALL(SummonEnemy, EVT_PTR(N(specialFormation_8021B5A0)), FALSE)
             EVT_CALL(SetActorVar, LVar0, 2, 1)
             EVT_CALL(GetActorHP, ACTOR_SELF, LVarB)
             EVT_CALL(SetEnemyHP, LVar0, LVarB)
@@ -349,53 +350,53 @@ EvtScript N(handleEvent_8021B8BC) = {
         EVT_CASE_OR_EQ(9)
         EVT_CASE_OR_EQ(10)
             EVT_EXEC(N(split))
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_LavaBubble_Blue_Anim07)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(14)
             EVT_EXEC(N(split))
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_LavaBubble_Blue_Anim08)
             EVT_SET_CONST(LVar2, ANIM_LavaBubble_Blue_Anim09)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
         EVT_CASE_EQ(36)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_LavaBubble_Blue_Anim08)
             EVT_SET_CONST(LVar2, ANIM_LavaBubble_Blue_Anim09)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_LavaBubble_Blue_Anim09)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_EQ(11)
             EVT_EXEC(N(split))
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_LavaBubble_Blue_Anim07)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
         EVT_CASE_EQ(33)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_LavaBubble_Blue_Anim07)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_LavaBubble_Blue_Anim07)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_EQ(47)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_359 | SOUND_ID_TRIGGER_CHANGE_SOUND)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_LavaBubble_Blue_Anim07)
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_LavaBubble_Blue_Anim07)
             EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
             EVT_EXEC_WAIT(N(8021B2FC))
         EVT_CASE_EQ(38)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_359 | SOUND_ID_TRIGGER_CHANGE_SOUND)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_LavaBubble_Blue_Anim07)
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_LavaBubble_Blue_Anim07)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
@@ -403,15 +404,15 @@ EvtScript N(handleEvent_8021B8BC) = {
         EVT_CASE_OR_EQ(25)
         EVT_CASE_OR_EQ(31)
         EVT_CASE_OR_EQ(28)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_LavaBubble_Blue_Anim01)
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(32)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_LavaBubble_Blue_Anim07)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_LavaBubble_Blue_Anim07)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
@@ -422,21 +423,21 @@ EvtScript N(handleEvent_8021B8BC) = {
             EVT_EXEC_WAIT(N(8021B2FC))
             EVT_CALL(HPBarToHome, ACTOR_SELF)
         EVT_CASE_EQ(49)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_LavaBubble_Blue_Anim01)
             EVT_EXEC_WAIT(EVS_Enemy_Recover)
         EVT_CASE_EQ(57)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_LavaBubble_Blue_Anim03)
             EVT_SET_CONST(LVar2, ANIM_LavaBubble_Blue_Anim07)
             EVT_EXEC_WAIT(EVS_Enemy_ScareAway)
             EVT_RETURN
         EVT_CASE_EQ(58)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_LavaBubble_Blue_Anim03)
             EVT_EXEC_WAIT(EVS_Enemy_AirLift)
         EVT_CASE_EQ(22)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_LavaBubble_Blue_Anim03)
             EVT_EXEC_WAIT(EVS_Enemy_BlowAway)
             EVT_RETURN
@@ -537,7 +538,7 @@ EvtScript N(8021C454) = {
     EVT_LOOP(4)
         EVT_THREAD
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVarA)
-            EVT_IF_FLAG(LVarA, 0x80000)
+            EVT_IF_FLAG(LVarA, STATUS_FLAG_SHRINK)
                 EVT_CALL(SetPartScale, ACTOR_SELF, LVar6, EVT_FLOAT(0.2), EVT_FLOAT(0.2), EVT_FLOAT(0.2))
             EVT_ELSE
                 EVT_CALL(SetPartScale, ACTOR_SELF, LVar6, EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(0.5))
@@ -759,7 +760,7 @@ EvtScript N(takeTurn_8021D284) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(1)
             EVT_CALL(GetStatusFlags, ACTOR_PARTNER, LVar0)
-            EVT_IF_FLAG(LVar0, 0x1000000)
+            EVT_IF_FLAG(LVar0, STATUS_FLAG_KO)
                 EVT_EXEC_WAIT(N(8021BE64))
             EVT_ELSE
                 EVT_CALL(RandInt, 1000, LVar0)
@@ -771,7 +772,7 @@ EvtScript N(takeTurn_8021D284) = {
             EVT_END_IF
         EVT_CASE_EQ(0)
             EVT_CALL(GetStatusFlags, ACTOR_PARTNER, LVar0)
-            EVT_IF_FLAG(LVar0, 0x1000000)
+            EVT_IF_FLAG(LVar0, STATUS_FLAG_KO)
                 EVT_EXEC_WAIT(N(8021CBC8))
             EVT_ELSE
                 EVT_CALL(RandInt, 1000, LVar0)

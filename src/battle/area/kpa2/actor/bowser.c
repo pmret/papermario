@@ -1,10 +1,7 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/BattleBowser.h"
-#include "effects.h"
 
-#define NAMESPACE b_area_kpa2_bowser
+#define NAMESPACE A(bowser)
 
 extern EvtScript N(init);
 extern EvtScript N(idle);
@@ -157,7 +154,7 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(N(onDeath))
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBowser_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
@@ -176,11 +173,11 @@ EvtScript N(handleEvent) = {
             EVT_RETURN
         EVT_CASE_EQ(EVENT_END_FIRST_STRIKE)
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBowser_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_Recover)
         EVT_CASE_EQ(EVENT_30)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBowser_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_WAIT(1000)
@@ -195,16 +192,16 @@ EvtScript N(handleEvent) = {
 };
 
 EvtScript N(onHit) = {
-    EVT_SET_CONST(LVar0, 1)
+    EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_EXEC_WAIT(EVS_Enemy_Hit)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(onDeath) = {
-    EVT_SET_CONST(LVar0, 1)
+    EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_EXEC_WAIT(EVS_Enemy_Hit)
-    EVT_SET_CONST(LVar0, 1)
+    EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_EXEC_WAIT(EVS_Enemy_Death)
     EVT_RETURN
     EVT_END

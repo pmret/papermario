@@ -1,10 +1,7 @@
-#include "common.h"
-#include "effects.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/BattleTubba.h"
 
-#define NAMESPACE b_area_dgb_tubba_blubba
+#define NAMESPACE A(tubba_blubba)
 
 extern EvtScript N(EVS_Init);
 extern EvtScript N(takeTurn_80219750);
@@ -222,7 +219,7 @@ EvtScript N(handleEvent_80219338) = {
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_EXEC_WAIT(N(802192E0))
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleTubba_Anim02)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
         EVT_END_CASE_GROUP
@@ -234,7 +231,7 @@ EvtScript N(handleEvent_80219338) = {
             EVT_WAIT(15)
             EVT_IF_EQ(LVar0, EVENT_BURN_DEATH)
                 EVT_WAIT(10)
-                EVT_SET_CONST(LVar0, 1)
+                EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_SET_CONST(LVar1, ANIM_BattleTubba_Anim14)
                 EVT_EXEC_WAIT(EVS_Enemy_Death)
                 EVT_RETURN
@@ -242,14 +239,14 @@ EvtScript N(handleEvent_80219338) = {
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
             EVT_EXEC_WAIT(N(802192E0))
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleTubba_Anim14)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleTubba_Anim14)
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleTubba_Anim14)
             EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
             EVT_EXEC_WAIT(N(80219238))
@@ -257,26 +254,26 @@ EvtScript N(handleEvent_80219338) = {
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
             EVT_EXEC_WAIT(N(802192E0))
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleTubba_Anim02)
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_SHOCK_DEATH)
         EVT_CASE_OR_EQ(EVENT_DEATH)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleTubba_Anim14)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_WAIT(10)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleTubba_Anim14)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleTubba_Anim14)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleTubba_Anim14)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
@@ -286,7 +283,7 @@ EvtScript N(handleEvent_80219338) = {
             EVT_EXEC_WAIT(N(80219238))
             EVT_CALL(HPBarToHome, ACTOR_SELF)
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleTubba_Anim02)
             EVT_EXEC_WAIT(EVS_Enemy_Recover)
         EVT_CASE_DEFAULT

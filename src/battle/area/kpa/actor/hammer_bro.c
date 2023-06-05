@@ -1,5 +1,3 @@
-#include "common.h"
-
-#define NAMESPACE b_area_kpa_hammer_bro
+#include "../area.h"
 
 #include "battle/common/actor/hammer_bro.inc.c"

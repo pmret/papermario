@@ -1,6 +1,7 @@
-#include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
+
+// namespace not defined here; actor is associated with stages
 
 extern EvtScript N(init);
 extern EvtScript N(takeTurn);

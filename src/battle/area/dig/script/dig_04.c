@@ -1,7 +1,6 @@
-#include "common.h"
-#include "script_api/battle.h"
+#include "../area.h"
 
-#define NAMESPACE b_area_dig_dig_04_script
+#define NAMESPACE A(dig_04_script)
 
 API_CALLABLE(N(SetupDemoPlayerMove)) {
     BattleStatus* battleStatus = &gBattleStatus;
