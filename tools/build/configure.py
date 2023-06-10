@@ -619,6 +619,7 @@ class Configure:
                             "img_flags": "",
                         })
                     elif name.endswith("_tex"):
+                        
                         compress = False
                         bin_path = path
                     elif name.endswith("_shape"):
