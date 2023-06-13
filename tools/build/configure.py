@@ -204,6 +204,11 @@ def write_ninja_rules(ninja: ninja_syntax.Writer, cpp: str, extra_cppflags: str,
         command=f"$python {BUILD_TOOLS}/mapfs/combine.py $version $out $in",
     )
 
+    ninja.rule("tex",
+        description="tex $out",
+        command=f"$python {BUILD_TOOLS}/mapfs/tex.py $out $in",
+    )
+
     ninja.rule("pack_title_data",
         description="pack_title_data $out",
         command=f"$python {BUILD_TOOLS}/mapfs/pack_title_data.py $out $in",
@@ -619,7 +624,9 @@ class Configure:
                             "img_flags": "",
                         })
                     elif name.endswith("_tex"):
-                        
+                        print("build path", self.build_path())
+                        print("bin path", bin_path)
+                        print("path ", path)
                         compress = False
                         bin_path = path
                     elif name.endswith("_shape"):

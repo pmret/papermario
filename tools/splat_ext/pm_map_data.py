@@ -1,7 +1,6 @@
 import os
 import struct
 import json
-from enum import Enum
 from pathlib import Path
 from segtypes.n64.segment import N64Segment
 from util.n64.Yay0decompress import Yay0Decompressor
