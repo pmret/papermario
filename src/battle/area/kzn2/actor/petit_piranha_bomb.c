@@ -1,9 +1,7 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/PetitPiranha.h"
 
-#define NAMESPACE b_area_kzn2_petit_piranha_bomb
+#define NAMESPACE A(petit_piranha_bomb)
 
 extern EvtScript N(init);
 extern EvtScript N(idle);

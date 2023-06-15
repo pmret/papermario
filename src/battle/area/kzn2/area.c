@@ -1,48 +1,45 @@
-#include "common.h"
-#include "battle/battle.h"
+#include "area.h"
 #include "ld_addrs.h"
 
-#define NAMESPACE b_area_kzn2
+extern ActorBlueprint A(lava_piranha);
+extern ActorBlueprint A(petit_piranha);
 
-extern ActorBlueprint N(lava_piranha);
-extern ActorBlueprint N(petit_piranha);
+extern Stage A(kzn_01);
+extern Stage A(kzn_01b);
+extern Stage A(kzn_02);
+extern Stage A(kzn_04);
+extern Stage A(kzn_04b);
+extern Stage A(kzn_04c);
+extern Stage A(kzn_05);
 
-extern Stage N(kzn_01);
-extern Stage N(kzn_01b);
-extern Stage N(kzn_02);
-extern Stage N(kzn_04);
-extern Stage N(kzn_04b);
-extern Stage N(kzn_04c);
-extern Stage N(kzn_05);
+Vec3i A(lava_piranha_pos) = { 60, 60, 0 };
 
-Vec3i N(lava_piranha_pos) = { 60, 60, 0 };
-
-Formation N(Formation_00) = {
-    ACTOR_BY_POS(N(lava_piranha), N(lava_piranha_pos), 60),
+Formation A(Formation_00) = {
+    ACTOR_BY_POS(A(lava_piranha), A(lava_piranha_pos), 60),
 };
 
-Vec3i N(petit_piranha_pos1) = { 40, 60, 0 };
-Vec3i N(petit_piranha_pos2) = { 80, 60, 0 };
+Vec3i A(petit_piranha_pos1) = { 40, 60, 0 };
+Vec3i A(petit_piranha_pos2) = { 80, 60, 0 };
 
-Formation N(Formation_01) = {
-    ACTOR_BY_POS(N(petit_piranha), N(petit_piranha_pos1), 10),
-    ACTOR_BY_POS(N(petit_piranha), N(petit_piranha_pos2), 10),
+Formation A(Formation_01) = {
+    ACTOR_BY_POS(A(petit_piranha), A(petit_piranha_pos1), 10),
+    ACTOR_BY_POS(A(petit_piranha), A(petit_piranha_pos2), 10),
 };
 
-BattleList N(Formations) = {
-    BATTLE(N(Formation_00), N(kzn_05), "ファイアパックン"),
-    BATTLE(N(Formation_01), N(kzn_05), "プチパックン"),
+BattleList A(Formations) = {
+    BATTLE(A(Formation_00), A(kzn_05), "ファイアパックン"),
+    BATTLE(A(Formation_01), A(kzn_05), "プチパックン"),
     {},
 };
 
-StageList N(Stages) = {
-    STAGE("kzn_01",  N(kzn_01)),
-    STAGE("kzn_01b", N(kzn_01b)),
-    STAGE("kzn_02",  N(kzn_02)),
-    STAGE("kzn_04",  N(kzn_04)),
-    STAGE("kzn_04b", N(kzn_04b)),
-    STAGE("kzn_04c", N(kzn_04c)),
-    STAGE("kzn_05",  N(kzn_05)),
+StageList A(Stages) = {
+    STAGE("kzn_01",  A(kzn_01)),
+    STAGE("kzn_01b", A(kzn_01b)),
+    STAGE("kzn_02",  A(kzn_02)),
+    STAGE("kzn_04",  A(kzn_04)),
+    STAGE("kzn_04b", A(kzn_04b)),
+    STAGE("kzn_04c", A(kzn_04c)),
+    STAGE("kzn_05",  A(kzn_05)),
     {},
 };
 
@@ -51,7 +48,7 @@ StageList N(Stages) = {
       world_model_anim_kzn_##name##_ROM_END,\
       world_model_anim_kzn_##name##_VRAM }
 
-DmaTable N(dmaTable)[] = {
+DmaTable A(dmaTable)[] = {
     PIRANHA_DMA_ENTRY(00),
     PIRANHA_DMA_ENTRY(01),
     PIRANHA_DMA_ENTRY(02),

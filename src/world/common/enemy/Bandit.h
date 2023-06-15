@@ -16,20 +16,20 @@
 
 #define BANDIT_ANIMS \
 { \
-    .idle   = ANIM_Bandit_Anim01, \
-    .walk   = ANIM_Bandit_Anim05, \
-    .run    = ANIM_Bandit_Anim07, \
-    .chase  = ANIM_Bandit_Anim07, \
-    .anim_4 = ANIM_Bandit_Anim01, \
-    .anim_5 = ANIM_Bandit_Anim01, \
-    .death  = ANIM_Bandit_Anim09, \
-    .hit    = ANIM_Bandit_Anim09, \
-    .anim_8 = ANIM_Bandit_Anim00, \
-    .anim_9 = ANIM_Bandit_Anim00, \
-    .anim_A = ANIM_Bandit_Anim00, \
-    .anim_B = ANIM_Bandit_Anim00, \
-    .anim_C = ANIM_Bandit_Anim00, \
-    .anim_D = ANIM_Bandit_Anim00, \
-    .anim_E = ANIM_Bandit_Anim00, \
-    .anim_F = ANIM_Bandit_Anim00, \
+    .idle   = ANIM_Bandit_Idle, \
+    .walk   = ANIM_Bandit_Walk, \
+    .run    = ANIM_Bandit_Run, \
+    .chase  = ANIM_Bandit_Run, \
+    .anim_4 = ANIM_Bandit_Idle, \
+    .anim_5 = ANIM_Bandit_Idle, \
+    .death  = ANIM_Bandit_Hurt, \
+    .hit    = ANIM_Bandit_Hurt, \
+    .anim_8 = ANIM_Bandit_Still, \
+    .anim_9 = ANIM_Bandit_Still, \
+    .anim_A = ANIM_Bandit_Still, \
+    .anim_B = ANIM_Bandit_Still, \
+    .anim_C = ANIM_Bandit_Still, \
+    .anim_D = ANIM_Bandit_Still, \
+    .anim_E = ANIM_Bandit_Still, \
+    .anim_F = ANIM_Bandit_Still, \
 }

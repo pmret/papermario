@@ -1,52 +1,49 @@
-#include "common.h"
-#include "battle/battle.h"
+#include "area.h"
 
-#define NAMESPACE b_area_kpa2
+extern ActorBlueprint A(bowser);
+extern ActorBlueprint A(bowser_intro);
+extern ActorBlueprint A(bowser_phase_1);
+extern ActorBlueprint A(bowser_phase_2);
+extern ActorBlueprint A(bowser_phase_3);
 
-extern ActorBlueprint N(bowser);
-extern ActorBlueprint N(bowser_intro);
-extern ActorBlueprint N(bowser_phase_1);
-extern ActorBlueprint N(bowser_phase_2);
-extern ActorBlueprint N(bowser_phase_3);
+extern Stage A(kpa_01);
+extern Stage A(kkj_01);
+extern Stage A(kkj_02);
 
-extern Stage N(kpa_01);
-extern Stage N(kpa_02);
-extern Stage N(kpa_03);
+Vec3i A(bowser_pos) = { 80, 0, -10 };
 
-Vec3i N(bowser_pos) = { 80, 0, -10 };
-
-Formation N(Formation_00) = {
-    ACTOR_BY_IDX(N(bowser), BTL_POS_GROUND_C, 10),
+Formation A(Formation_00) = {
+    ACTOR_BY_IDX(A(bowser), BTL_POS_GROUND_C, 10),
 };
 
-Formation N(Formation_01) = {
-    ACTOR_BY_IDX(N(bowser_intro), BTL_POS_GROUND_C, 10),
+Formation A(Formation_01) = {
+    ACTOR_BY_IDX(A(bowser_intro), BTL_POS_GROUND_C, 10),
 };
 
-Formation N(Formation_02) = {
-    ACTOR_BY_IDX(N(bowser_phase_1), BTL_POS_GROUND_C, 10),
+Formation A(Formation_02) = {
+    ACTOR_BY_IDX(A(bowser_phase_1), BTL_POS_GROUND_C, 10),
 };
 
-Formation N(Formation_03) = {
-    ACTOR_BY_POS(N(bowser_phase_2), N(bowser_pos), 10),
+Formation A(Formation_03) = {
+    ACTOR_BY_POS(A(bowser_phase_2), A(bowser_pos), 10),
 };
 
-Formation N(Formation_04) = {
-    ACTOR_BY_POS(N(bowser_phase_3), N(bowser_pos), 10),
+Formation A(Formation_04) = {
+    ACTOR_BY_POS(A(bowser_phase_3), A(bowser_pos), 10),
 };
 
-BattleList N(Formations) = {
-    BATTLE(N(Formation_00), N(kpa_01), "クッパ"),
-    BATTLE(N(Formation_01), N(kpa_02), "クッパ(オープニング)"),
-    BATTLE(N(Formation_02), N(kpa_02), "クッパ(ラストバトル１)"),
-    BATTLE(N(Formation_03), N(kpa_03), "クッパ(ラストバトル２)"),
-    BATTLE(N(Formation_04), N(kpa_03), "クッパ(ラストバトル３)"),
+BattleList A(Formations) = {
+    BATTLE(A(Formation_00), A(kpa_01), "クッパ"),
+    BATTLE(A(Formation_01), A(kkj_01), "クッパ(オープニング)"),
+    BATTLE(A(Formation_02), A(kkj_01), "クッパ(ラストバトル１)"),
+    BATTLE(A(Formation_03), A(kkj_02), "クッパ(ラストバトル２)"),
+    BATTLE(A(Formation_04), A(kkj_02), "クッパ(ラストバトル３)"),
     {},
 };
 
-StageList N(Stages) = {
-    STAGE("kpa_01", N(kpa_01)),
-    STAGE("kpa_02", N(kpa_02)),
-    STAGE("kpa_03", N(kpa_03)),
+StageList A(Stages) = {
+    STAGE("kpa_01", A(kpa_01)),
+    STAGE("kpa_02", A(kkj_01)),
+    STAGE("kpa_03", A(kkj_02)),
     {},
 };

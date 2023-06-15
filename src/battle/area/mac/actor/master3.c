@@ -1,9 +1,7 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/TheMaster.h"
 
-#define NAMESPACE b_area_mac_master3
+#define NAMESPACE A(master3)
 
 extern EvtScript N(init_8022DB60);
 extern EvtScript N(takeTurn_80230B20);
@@ -148,13 +146,13 @@ EvtScript N(8022DC44) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(9)
         EVT_CASE_OR_EQ(10)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_TheMaster_AscendedHurt)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(14)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_TheMaster_BurnHurt)
             EVT_SET_CONST(LVar2, ANIM_TheMaster_BurnStill)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
@@ -163,16 +161,16 @@ EvtScript N(8022DC44) = {
             EVT_CALL(ModifyActorDecoration, ACTOR_SELF, PRT_MAIN, 0, 50, 50, 0, 0)
         EVT_CASE_EQ(36)
             EVT_CALL(RemoveActorDecoration, ACTOR_SELF, PRT_MAIN, 0)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_TheMaster_BurnHurt)
             EVT_SET_CONST(LVar2, ANIM_TheMaster_BurnStill)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_TheMaster_AscendedDefeated)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_EQ(11)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_TheMaster_AscendedHurt)
             EVT_CHILD_THREAD
                 EVT_WAIT(30)
@@ -184,10 +182,10 @@ EvtScript N(8022DC44) = {
             EVT_END_CHILD_THREAD
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
         EVT_CASE_EQ(47)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_TheMaster_AscendedHurt)
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_TheMaster_AscendedHurt)
             EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
             EVT_CALL(JumpToGoal, ACTOR_SELF, 5, FALSE, TRUE, FALSE)
@@ -204,46 +202,46 @@ EvtScript N(8022DC44) = {
         EVT_CASE_OR_EQ(23)
         EVT_CASE_OR_EQ(25)
         EVT_CASE_OR_EQ(31)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_TheMaster_AscendedIdle)
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(38)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_TheMaster_AscendedHurt)
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_TheMaster_AscendedDefeated)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_EQ(32)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_TheMaster_AscendedHurt)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_WAIT(10)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_TheMaster_AscendedDefeated)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_EQ(33)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_TheMaster_AscendedHurt)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_TheMaster_AscendedDefeated)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_EQ(53)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_TheMaster_AscendedIdle)
             EVT_EXEC_WAIT(EVS_Enemy_ReturnHome)
             EVT_CALL(HPBarToHome, ACTOR_SELF)
         EVT_CASE_EQ(49)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_TheMaster_AscendedIdle)
             EVT_EXEC_WAIT(EVS_Enemy_Recover)
         EVT_CASE_EQ(57)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_TheMaster_AscendedRun)
             EVT_SET_CONST(LVar2, ANIM_TheMaster_AscendedHurt)
             EVT_EXEC_WAIT(EVS_Enemy_ScareAway)
@@ -930,7 +928,7 @@ EvtScript N(nextTurn_80230D44) = {
             EVT_END_IF
         EVT_CASE_EQ(12)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-            EVT_IF_FLAG(LVar0, 0x351000)
+            EVT_IF_FLAG(LVar0, STATUS_FLAGS_DOJO)
                 EVT_BREAK_SWITCH
             EVT_END_IF
             EVT_CALL(GetActorHP, ACTOR_SELF, LVar0)
@@ -959,7 +957,7 @@ EvtScript N(nextTurn_80230D44) = {
 EvtScript N(handleEvent_80231408) = {
     EVT_EXEC_WAIT(N(8022DC44))
     EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-    EVT_IF_FLAG(LVar0, 0x351000)
+    EVT_IF_FLAG(LVar0, STATUS_FLAGS_DOJO)
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetBattleFlags, LVar0)
@@ -981,7 +979,7 @@ EvtScript N(handleEvent_80231408) = {
             EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVarB)
             EVT_CALL(SetActorVar, ACTOR_SELF, 2, 0)
             EVT_CALL(GetStatusFlags, ACTOR_SELF, LVar0)
-            EVT_IF_FLAG(LVar0, 0x3F1000)
+            EVT_IF_FLAG(LVar0, STATUS_FLAGS_DOJO | STATUS_FLAG_POISON | STATUS_FLAG_SHRINK)
                 EVT_BREAK_SWITCH
             EVT_END_IF
             EVT_SET(LFlag0, FALSE)

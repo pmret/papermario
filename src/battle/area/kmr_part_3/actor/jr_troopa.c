@@ -1,10 +1,9 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/JrTroopa.h"
 #include "sprite/npc/ParaJrTroopa.h"
+#include "sprite/npc/Goompa.h"
 
-#define NAMESPACE b_area_kmr_part_3_jr_troopa
+#define NAMESPACE A(jr_troopa)
 
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
@@ -189,7 +188,7 @@ EvtScript N(80222C78) = {
     EVT_WAIT(1)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 180)
     EVT_WAIT(5)
-    EVT_CALL(ActorSpeak, MSG_CH0_00B4, ACTOR_PARTNER, 0, 0x009D0008, 0x009D0001)
+    EVT_CALL(ActorSpeak, MSG_CH0_00B4, ACTOR_PARTNER, 0, ANIM_Goompa_Talk, ANIM_Goompa_Idle)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 150)
     EVT_WAIT(1)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 120)
@@ -247,22 +246,22 @@ EvtScript N(handleEvent_80223290) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(9)
         EVT_CASE_OR_EQ(10)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_JrTroopa_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(32)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_JrTroopa_Hurt)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_WAIT(10)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_JrTroopa_Panic)
             EVT_EXEC_WAIT(N(80222C78))
             EVT_RETURN
         EVT_CASE_OR_EQ(23)
         EVT_CASE_OR_EQ(25)
-            EVT_SET_CONST(LVar0, 0x00000001)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_JrTroopa_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_END_CASE_GROUP
@@ -408,7 +407,7 @@ EvtScript N(nextTurn_80223D2C) = {
                     EVT_END_LOOP
                 EVT_END_THREAD
                 EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_JrTroopa_Punch)
-                EVT_CALL(ActorSpeak, MSG_CH0_00AF, ACTOR_PARTNER, 0, 0x009D0008, 0x009D0001)
+                EVT_CALL(ActorSpeak, MSG_CH0_00AF, ACTOR_PARTNER, 0, ANIM_Goompa_Talk, ANIM_Goompa_Idle)
                 EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_JrTroopa_Idle)
                 EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_NodYes)
                 EVT_WAIT(10)
@@ -443,7 +442,7 @@ EvtScript N(nextTurn_80223D2C) = {
                 EVT_END_LOOP
             EVT_END_THREAD
             EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-            EVT_CALL(ActorSpeak, MSG_CH0_00B0, ACTOR_PARTNER, 0, 0x009D0008, 0x009D0001)
+            EVT_CALL(ActorSpeak, MSG_CH0_00B0, ACTOR_PARTNER, 0, ANIM_Goompa_Talk, ANIM_Goompa_Idle)
             EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
             EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_ThumbsUp)
             EVT_WAIT(20)
@@ -457,7 +456,7 @@ EvtScript N(nextTurn_80223D2C) = {
             EVT_IF_LE(LVar0, 1)
                 EVT_CALL(SetActorVar, ACTOR_SELF, 3, 1)
                 EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, FALSE)
-                EVT_CALL(ActorSpeak, MSG_CH0_00B2, ACTOR_PARTNER, 0, 0x009D0008, 0x009D0001)
+                EVT_CALL(ActorSpeak, MSG_CH0_00B2, ACTOR_PARTNER, 0, ANIM_Goompa_Talk, ANIM_Goompa_Idle)
                 EVT_CALL(UseIdleAnimation, ACTOR_PARTNER, TRUE)
                 EVT_EXEC_WAIT(N(80222B30))
                 EVT_CALL(ActorSpeak, MSG_CH0_00B3, ACTOR_SELF, PRT_MAIN, 0x00210016, 0x00210003)

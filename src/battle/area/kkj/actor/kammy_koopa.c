@@ -1,13 +1,10 @@
-#include "common.h"
-#include "effects.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
+#include "entity.h"
 #include "sprite/npc/BattleKammy.h"
 #include "sprite/npc/Twink.h"
 #include "sprite/npc/BattleParakarry.h"
-#include "entity.h"
 
-#define NAMESPACE b_area_kkj_kammy_koopa
+#define NAMESPACE A(kammy_koopa)
 
 extern EvtScript N(init);
 extern EvtScript N(idle);
@@ -152,20 +149,20 @@ EvtScript N(handleEvent) = {
         EVT_CASE_EQ(EVENT_BEGIN_FIRST_STRIKE)
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleKammy_Anim0D)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_EXEC_WAIT(N(speakOnHit))
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleKammy_Anim05)
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
             EVT_EXEC_WAIT(N(speakOnHit))
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleKammy_Anim0D)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_WAIT(10)

@@ -1,4 +1,3 @@
-#include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "effects.h"
@@ -258,7 +257,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208C)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
             EVT_EXEC_WAIT(EVS_Partner_NoDamageHit)
         EVT_END_CASE_GROUP
@@ -289,7 +288,7 @@ EvtScript N(handleEvent) = {
             EVT_SET_CONST(LVar1, ANIM_BattleBow_Hurt)
             EVT_EXEC_WAIT(EVS_Partner_Drop)
         EVT_CASE_EQ(EVENT_RECOVER_FROM_KO)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBow_Idle)
             EVT_SET_CONST(LVar2, ANIM_BattleBow_Run)
             EVT_SET(LVar3, 20)
@@ -297,7 +296,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_18)
         EVT_CASE_OR_EQ(EVENT_BLOCK)
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208C)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleBow_Block)
             EVT_EXEC_WAIT(EVS_Partner_NoDamageHit)
             EVT_WAIT(10)
@@ -334,7 +333,7 @@ EvtScript N(celebrate) = {
 };
 
 EvtScript N(runAway) = {
-    EVT_SET_CONST(LVar0, 1)
+    EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_SET_CONST(LVar1, ANIM_BattleBow_Run)
     EVT_EXEC_WAIT(EVS_Partner_RunAway)
     EVT_RETURN

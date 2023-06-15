@@ -2044,7 +2044,7 @@ ApiStatus SummonEnemy(Evt* script, s32 isInitialCall) {
     s32 i, j;
     u16 enemyID1, enemyID2;
     s32 priority1, priority2;
-    s32 tempPriority;
+    s32 basePriority;
 
     if (isInitialCall) {
         script->functionTemp[0] = 0;
@@ -2053,7 +2053,7 @@ ApiStatus SummonEnemy(Evt* script, s32 isInitialCall) {
     switch (script->functionTemp[0]) {
         case 0:
             script->functionTempPtr[1] = create_actor((FormationRow*)evt_get_variable(script, *args++));
-            script->functionTemp[2] = evt_get_variable(script, *args++);
+            script->functionTemp[2] = evt_get_variable(script, *args++); // isLowPriority
             script->functionTemp[0] = 1;
             break;
         case 1:
@@ -2071,25 +2071,25 @@ ApiStatus SummonEnemy(Evt* script, s32 isInitialCall) {
                     }
                 }
                 battleStatus->numEnemyActors = numEnemies;
-                if (script->functionTemp[2] != 0) {
-                    tempPriority = -1000;
+                if (script->functionTemp[2]) {
+                    basePriority = -1000;
                 } else {
-                    tempPriority = 1000;
+                    basePriority = 1000;
                 }
                 enemyIDs = battleStatus->enemyIDs;
                 for (i = 0; i < numEnemies - 1; i++) {
                     for (j = i + 1; j < numEnemies; j++) {
                         enemyID1 = enemyIDs[i];
-                        actor1 = battleStatus->enemyActors[(u8) enemyID1];
+                        actor1 = battleStatus->enemyActors[enemyID1 & 0xFF];
                         priority1 = actor1->turnPriority;
                         if (actor1 == actor2) {
-                            priority1 += tempPriority;
+                            priority1 += basePriority;
                         }
                         enemyID2 = enemyIDs[j];
-                        actor1 = battleStatus->enemyActors[(u8) enemyID2];
+                        actor1 = battleStatus->enemyActors[enemyID2 & 0xFF];
                         priority2 = actor1->turnPriority;
                         if (actor1 == actor2) {
-                            priority2 += tempPriority;
+                            priority2 += basePriority;
                         }
                         if (priority1 < priority2) {
                             enemyIDs[i] = enemyID2;
@@ -2100,7 +2100,7 @@ ApiStatus SummonEnemy(Evt* script, s32 isInitialCall) {
             } else {
                 numEnemies = battleStatus->numEnemyActors;
                 for (i = 0; i < numEnemies; i++){
-                    if (battleStatus->enemyActors[(u8) enemyIDs[i]] == actor2) {
+                    if (battleStatus->enemyActors[enemyIDs[i] & 0xFF] == actor2) {
                         enemyIDs[i] = -1;
                     }
                 }
@@ -2133,21 +2133,21 @@ ApiStatus SetOwnerID(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus ActorExists(Evt* script, s32 isInitialCall) {
-    Bytecode isExist;
     Actor* partner = gBattleStatus.partnerActor;
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
+    b32 exists;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    isExist = get_actor(actorID) != NULL;
+    exists = get_actor(actorID) != NULL;
     if ((actorID == ACTOR_PARTNER) && (partner == NULL)) {
-        isExist = FALSE;
+        exists = FALSE;
     }
 
-    evt_set_variable(script, *args++, isExist);
+    evt_set_variable(script, *args++, exists);
     return ApiStatus_DONE2;
 }
 

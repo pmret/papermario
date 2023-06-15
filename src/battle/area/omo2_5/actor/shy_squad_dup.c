@@ -1,4 +1,3 @@
-#include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "effects.h"
@@ -489,7 +488,7 @@ EvtScript N(move_guy_to_pos) = {
 };
 
 EvtScript N(onSpinSmash) = {
-    EVT_SET_CONST(LVar0, 2)
+    EVT_SET_CONST(LVar0, PRT_2)
     EVT_LOOP(15)
         EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVarD)
         EVT_CALL(GetActorVar, ACTOR_SELF, 4, LVarE)
@@ -675,7 +674,7 @@ EvtScript N(displace_guy) = {
 };
 
 EvtScript N(onShock) = {
-    EVT_SET_CONST(LVar0, 2)
+    EVT_SET_CONST(LVar0, PRT_2)
     EVT_LOOP(15)
         EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVarD)
         EVT_CALL(GetActorVar, ACTOR_SELF, 4, LVarE)
@@ -808,7 +807,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_SPIKE_TAUNT)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim01)
             EVT_EXEC_WAIT(N(onSpinSmash))
         EVT_END_CASE_GROUP
@@ -817,18 +816,18 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(N(set_squad_animation))
             EVT_WAIT(1000)
         EVT_CASE_EQ(EVENT_AIR_LIFT_FAILED)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim01)
             EVT_EXEC_WAIT(N(onSpinSmash))
         EVT_CASE_EQ(EVENT_END_FIRST_STRIKE)
             EVT_CALL(SetActorSpeed, ACTOR_SELF, EVT_FLOAT(4.0))
             EVT_CALL(HPBarToHome, ACTOR_SELF)
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim01)
             EVT_EXEC_WAIT(EVS_Enemy_Recover)
         EVT_CASE_EQ(EVENT_30)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_TankGuy_Anim04)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_WAIT(1000)
@@ -965,7 +964,7 @@ EvtScript N(80233E48) = {
 };
 
 EvtScript N(onDeath) = {
-    EVT_SET_CONST(LVar0, 2)
+    EVT_SET_CONST(LVar0, PRT_2)
     EVT_LOOP(14)
         EVT_CALL(GetActorVar, ACTOR_SELF, 3, LVar2)
         EVT_CALL(GetActorVar, ACTOR_SELF, 4, LVar3)

@@ -1,3 +1,3 @@
-#define NAMESPACE b_area_kzn_red_magikoopa
+#include "../area.h"
 
 #include "battle/common/actor/red_magikoopa.inc.c"

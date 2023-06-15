@@ -1,11 +1,9 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/Blooper.h"
 
-#define NAMESPACE b_area_tik2_super_blooper
+#define NAMESPACE A(super_blooper)
 
-extern ActorBlueprint b_area_tik2_blooper_baby;
+extern ActorBlueprint A(blooper_baby);
 
 extern EvtScript N(init);
 extern EvtScript N(takeTurn);
@@ -346,15 +344,15 @@ EvtScript N(handleEvent) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Blooper_Anim04)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Blooper_Anim04)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Blooper_Anim04)
             EVT_EXEC_WAIT(N(onDeath))
             EVT_RETURN
@@ -368,19 +366,19 @@ EvtScript N(handleEvent) = {
             EVT_SET(LVar1, ANIM_Blooper_Anim05)
             EVT_SET(LVar2, ANIM_Blooper_Anim06)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Blooper_Anim06)
             EVT_EXEC_WAIT(N(onDeath))
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Blooper_Anim04)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Blooper_Anim04)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Blooper_Anim04)
             EVT_EXEC_WAIT(N(onDeath))
             EVT_RETURN
@@ -389,42 +387,42 @@ EvtScript N(handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
         EVT_CASE_OR_EQ(EVENT_INVUNERABLE_TAUNT)
         EVT_CASE_OR_EQ(EVENT_1E)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Blooper_Anim00)
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_STAR_BEAM)
         EVT_CASE_OR_EQ(EVENT_PEACH_BEAM)
             EVT_EXEC_WAIT(N(unEnrage))
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Blooper_Anim04)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_EXEC_WAIT(N(unEnrage))
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Blooper_Anim04)
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Blooper_Anim04)
             EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
             EVT_EXEC_WAIT(N(FloatToHome))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
             EVT_EXEC_WAIT(N(unEnrage))
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Blooper_Anim04)
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Blooper_Anim04)
             EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Blooper_Anim04)
             EVT_EXEC_WAIT(N(onDeath))
             EVT_RETURN
         EVT_CASE_EQ(EVENT_END_FIRST_STRIKE)
             EVT_EXEC_WAIT(N(FloatToHome))
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Blooper_Anim00)
             EVT_EXEC_WAIT(EVS_Enemy_Recover)
         EVT_CASE_DEFAULT
@@ -719,12 +717,12 @@ EvtScript N(makeBabies) = {
     EVT_CALL(ActorExists, ACTOR_ENEMY1, LVar1)
     EVT_IF_EQ(LVar1, 0)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3D9)
-        EVT_CALL(SummonEnemy, EVT_PTR(N(formation_baby_1)), 0)
+        EVT_CALL(SummonEnemy, EVT_PTR(N(formation_baby_1)), FALSE)
     EVT_END_IF
     EVT_CALL(ActorExists, ACTOR_ENEMY2, LVar1)
     EVT_IF_EQ(LVar1, 0)
         EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_3D9)
-        EVT_CALL(SummonEnemy, EVT_PTR(N(formation_baby_2)), 0)
+        EVT_CALL(SummonEnemy, EVT_PTR(N(formation_baby_2)), FALSE)
     EVT_END_IF
     EVT_WAIT(2)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_Blooper_Anim0C)
@@ -894,12 +892,12 @@ EvtScript N(unEnrage) = {
     EVT_END
 };
 
-Vec3i N(baby_pos) = { 400, 0, 0 };
+Vec3i N(BabyPos) = { 400, 0, 0 };
 
 Formation N(formation_baby_1) = {
-    ACTOR_BY_POS(b_area_tik2_blooper_baby, N(baby_pos), 95, 30, 68),
+    ACTOR_BY_POS(A(blooper_baby), N(BabyPos), 95, 30, 68),
 };
 
 Formation N(formation_baby_2) = {
-    ACTOR_BY_POS(b_area_tik2_blooper_baby, N(baby_pos), 94, 134, 45),
+    ACTOR_BY_POS(A(blooper_baby), N(BabyPos), 94, 134, 45),
 };
