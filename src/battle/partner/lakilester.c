@@ -805,7 +805,6 @@ API_CALLABLE(N(CanTargetBeBlown)) {
     }
 
     get_actor(target->actorID);
-    // actionSuccess/100
     if (rand_int(99) < battleStatus->actionSuccess) {
         *hurricaneChance = -1;
         script->varTable[0] = target->actorID;

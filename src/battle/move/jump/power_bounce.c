@@ -24,7 +24,6 @@ API_CALLABLE(N(GetHitChance)) {
     }
     N(BaseHitChance) = N(BaseHitChance) * powerBounceChance / 100;
 
-    // (100 - BaseHitChance)/101
     if (N(BaseHitChance) < rand_int(100)) {
         script->varTable[0] = 0;
     }

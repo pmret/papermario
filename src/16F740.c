@@ -366,7 +366,6 @@ void btl_state_update_normal_start(void) {
             }
 
             if (stage->stageEnemyCount != 0) {
-                // 1/(stageEnemyChance + 1)
                 if (stage->stageEnemyChance == 0 || (stage->stageEnemyChance > 0 && (rand_int(stage->stageEnemyChance) == 0))) {
                     BattleEnemiesCreated += stage->stageEnemyCount;
                     for (j = 0; i < BattleEnemiesCreated; i++, j++) {
@@ -2978,15 +2977,12 @@ void btl_state_update_end_player_turn(void) {
                 battleStatus->hpDrainCount = 0;
             }
 
-            // 50/101 ≈ 49.5%
             if (rand_int(100) < 50) {
                 hpRecovery = is_ability_active(ABILITY_CRAZY_HEART) * 3;
             }
-            // 50/101 ≈ 49.5%
             if (rand_int(100) < 50) {
                 hpRecovery += is_ability_active(ABILITY_HAPPY_HEART);
             }
-            // 50/101 ≈ 49.5%
             if (rand_int(100) < 50) {
                 fpRecovery = is_ability_active(ABILITY_HAPPY_FLOWER);
             }

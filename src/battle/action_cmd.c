@@ -268,7 +268,6 @@ void action_command_init_status(void) {
             actionCommandStatus->showHud = FALSE;
             actionCommandStatus->berserkerEnabled = TRUE;
 
-            // 25/101 ≈ 24.8%
             if (rand_int(100) < 25) {
                 actionCommandStatus->autoSucceed = TRUE;
             }

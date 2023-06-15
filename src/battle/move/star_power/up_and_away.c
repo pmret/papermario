@@ -58,7 +58,6 @@ API_CALLABLE(func_802A1628_795908) {
         if (!(flags & ACTOR_FLAG_NO_DMG_APPLY)) {
             if (!(flags & ACTOR_FLAG_2000)
                 && targetActor->actorBlueprint->upAndAwayChance != 0
-                // (upAndAwayChance + 1)/101
                 && rand_int(100) <= targetActor->actorBlueprint->upAndAwayChance
             ) {
                 script->varTable[0] = 1;

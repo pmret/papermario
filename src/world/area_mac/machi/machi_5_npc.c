@@ -12,7 +12,6 @@ FollowAnims N(GoombariaAnims) = {
 API_CALLABLE(N(func_802401B0_7E7550)) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
-    // 500/1001 ≈ 50.0%
     if (rand_int(1000) < 500) {
         npc_follow_init(npc,
             NPC_SELF,

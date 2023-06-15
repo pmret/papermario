@@ -355,7 +355,6 @@ API_CALLABLE(N(GetCookResultForSingleRecipe)) {
     hasCookbook = evt_get_variable(script, *args++);
 
     if (inputItem == ITEM_MYSTERY) {
-        // 500/1001 ≈ 50.0%
         if (rand_int(1000) < 500) {
             resultItemID = ITEM_MISTAKE;
             resultQuality = 0;

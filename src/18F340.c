@@ -89,7 +89,6 @@ API_CALLABLE(ChoosePlayerCelebrationAnim) {
     s32 temp;
     s32 i;
 
-    // randomChance/(randomChance + hpBasedChance + 1)
     if (rand_int(pcao->randomChance + pcao->hpBasedChance) < pcao->randomChance) {
         temp = 0;
         for (i = 0; i < 8; i++) {
@@ -148,7 +147,6 @@ API_CALLABLE(DetermineAutoRunAwaySuccess) {
     }
 
     var = player->state.varTable[0];
-    // (var + 1)/101
     if (var >= rand_int(100)) {
         script->varTable[0] = TRUE;
     } else {

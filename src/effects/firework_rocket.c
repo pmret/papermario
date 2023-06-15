@@ -293,7 +293,6 @@ void firework_rocket_appendGfx(void* effect) {
     for (i = 0; i < numSparks; i++, sparkDir++) {
         if (isExploded == TRUE) {
             // create blinking effect
-            // 6/17 ≈ 35.3%
             if (shim_rand_int(16) < 6) {
                 continue;
             }

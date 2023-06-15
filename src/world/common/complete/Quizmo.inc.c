@@ -166,7 +166,6 @@ API_CALLABLE(N(Quizmo_ShouldAppear)) {
     }
 
     if (!hasLocation) {
-        // 30/101 ≈ 29.7%
         if (rand_int(100) < 30) {
             locMap = rand_int(numMaps - 1);
             locTown = curTown1;

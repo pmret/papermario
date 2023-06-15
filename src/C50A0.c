@@ -1287,7 +1287,6 @@ void item_entity_update(ItemEntity* entity) {
             case ITEM_SCRIPT_OP_RandomRestart:
                 max = *args++;
                 threshold = *args++;
-                // threshold/(max + 1)
                 if (rand_int(max) < threshold) {
                     entity->readPos = entity->savedReadPos;
                 } else {
@@ -1309,7 +1308,6 @@ void update_item_entities(void) {
 
             if (item != NULL && item->flags != 0) {
                 if (item->itemID == ITEM_COIN) {
-                    // 10/101 ≈ 9.9%
                     if (rand_int(100) > 90) {
                         sparkle_script_init(item, &SparkleScript_Coin);
                         D_80155D8C = rand_int(16) - 8;
@@ -2102,7 +2100,6 @@ void update_item_entity_collectable(ItemEntity* item) {
             physData->constVelocity = 24.0f;
             if (item->spawnAngle < 0) {
                 if (IS_ITEM(item->itemID)) {
-                    // 5000/10001 ≈ 50.0%
                     if (rand_int(10000) < 5000) {
                         physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 105.0f + rand_int(30) - 15.0f);
                     } else {
@@ -2118,7 +2115,6 @@ void update_item_entity_collectable(ItemEntity* item) {
                             physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 90.0f + rand_int(120) + 60.0f);
                             break;
                         case ITEM_COIN:
-                            // 5000/10001 ≈ 50.0%
                             if (rand_int(10000) < 5000) {
                                 physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(120) - 60.0f);
                             } else {
@@ -2126,7 +2122,6 @@ void update_item_entity_collectable(ItemEntity* item) {
                             }
                             break;
                         case ITEM_KOOPA_FORTRESS_KEY:
-                            // 5001/10001 ≈ 50.0%
                             if (rand_int(10000) >= 5000) {
                                 physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 90.0f + rand_int(120) - 60.0f);
                             } else {
@@ -2138,7 +2133,6 @@ void update_item_entity_collectable(ItemEntity* item) {
                                 physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 90.0f + rand_int(120) - 60.0f);
                                 break;
                             }
-                            // 5000/10001 ≈ 50.0%
                             if (rand_int(10000) < 5000) {
                                 physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(60) - 30.0f);
                             } else {
@@ -2149,7 +2143,6 @@ void update_item_entity_collectable(ItemEntity* item) {
                             physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(120) - 60.0f);
                             break;
                         case ITEM_STAR_PIECE:
-                            // 5000/10001 ≈ 50.0%
                             if (rand_int(10000) < 5000) {
                                 physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(60) - 30.0f);
                             } else {

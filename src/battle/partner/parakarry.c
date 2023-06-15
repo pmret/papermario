@@ -210,7 +210,6 @@ API_CALLABLE(N(ShellShotActionCommand)) {
             if (shellShotTimer != 0) {
                 shellShotTimer--;
                 if (shellShotTimer == 0) {
-                    // 50/101 ≈ 49.5%
                     if (rand_int(100) < 50) {
                         state->angle = state->unk_18.x;
                     } else {

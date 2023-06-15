@@ -196,7 +196,6 @@ void N(update)(void) {
             }
 
             battleStatus->actionSuccess = battleStatus->actionResult;
-            // actionSuccess/100
             if (rand_int(99) < battleStatus->actionSuccess) {
                 battleStatus->unk_86 = 1;
                 battleStatus->actionSuccess = 1;

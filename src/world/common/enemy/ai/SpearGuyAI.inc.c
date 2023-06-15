@@ -19,7 +19,6 @@ void N(SpearGuyAI_Loiter)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
     s32 d100;
 
     if (enemy->varTable[0] == 0) {
-        // 51/101 ≈ 50.5%
         if (rand_int(100) >= 50) {
             enemy->varTable[0] = 3;
         } else {

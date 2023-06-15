@@ -181,28 +181,24 @@ HitResult calc_enemy_test_target(Actor* actor) {
     switch (actorClass) {
         case ACTOR_CLASS_PLAYER:
             if (battleStatus->cloudNineTurnsLeft) {
-                // 50/101 ≈ 49.5%
                 if (rand_int(100) < battleStatus->cloudNineDodgeChance) {
                     hitResult = HIT_RESULT_MISS;
                     break;
                 }
             } else {
                 if (player_team_is_ability_active(target2, ABILITY_PRETTY_LUCKY)) {
-                    // 10/101 ≈ 9.9%
                     if (rand_int(100) < 10) {
                         hitResult = HIT_RESULT_LUCKY;
                         break;
                     }
                 }
                 if (player_team_is_ability_active(target2, ABILITY_CLOSE_CALL) && (target2->currentHP < 6)) {
-                    // 30/101 ≈ 29.7%
                     if (rand_int(100) < 30) {
                         hitResult = HIT_RESULT_LUCKY;
                         break;
                     }
                 }
                 if (player_team_is_ability_active(target2, ABILITY_LUCKY_DAY)) {
-                    // 20/101 ≈ 19.8%
                     if (rand_int(100) < 20) {
                         hitResult = HIT_RESULT_LUCKY;
                         break;
@@ -435,7 +431,6 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
                 s32 blocked;
 
                 if (player_team_is_ability_active(target, ABILITY_BERSERKER)) {
-                    // 500/1001 ≈ 50.0%
                     blocked = rand_int(1);
                 } else {
                     blocked = check_block_input(BUTTON_A);
@@ -596,7 +591,6 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
         && event != EVENT_EXPLODE_TRIGGER
         && !(gBattleStatus.flags1 & BS_FLAGS1_ATK_BLOCKED)
         && !(gBattleStatus.flags2 & BS_FLAGS2_1000000)
-        // 50/101 ≈ 49.5%
         && !(actorClass == ACTOR_PLAYER && is_ability_active(ABILITY_HEALTHY_HEALTHY) && (rand_int(100) < 50)))
     {
         if (battleStatus->currentAttackStatus & STATUS_FLAG_SHRINK && try_inflict_status(target, STATUS_KEY_SHRINK, STATUS_TURN_MOD_SHRINK)) {

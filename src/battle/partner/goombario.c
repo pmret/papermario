@@ -67,7 +67,6 @@ API_CALLABLE(N(AdjustPowerBounceChance)) {
     script->varTable[0] = 99;
     N(powerBounceChance) *= targetActor->actorBlueprint->powerBounceChance;
     N(powerBounceChance) /= 100;
-    // (100 - powerBounceChance)/101
     if (N(powerBounceChance) < rand_int(100)) {
         script->varTable[0] = 0;
     }

@@ -36,7 +36,6 @@ API_CALLABLE(N(UpdateTrafficBooMotion)) {
             // choose random speed
             npc->moveSpeed = (2.0f * rand_float()) + 2.0f;
             // chose random direction
-            // 50/101 ≈ 49.5%
             if (rand_int(100) < 50) {
                 npc->pos.x = 270.0f;
                 npc->yaw = 270.0f;

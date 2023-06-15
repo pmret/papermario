@@ -96,7 +96,6 @@ API_CALLABLE(N(TackleAI_Main)) {
         case 2:
             basic_ai_loiter_init(script, aiSettings, territoryPtr);
             if (enemy->varTable[7] == 6) {
-                // 33/101 ≈ 32.7%
                 if (rand_int(100) < 33) {
                     if (enemy->varTable[8] != 0) {
                         enemy->varTable[8] = 0;

@@ -456,7 +456,6 @@ ApiStatus OnFleeBattleDrops(Evt* script, s32 isInitialCall) {
 
     script->functionTemp[2]++;
     if (script->functionTemp[2] >= 5) {
-        // 50/101 ≈ 49.5%
         if (rand_int(100) < 50) {
             if (playerData->coins != 0) {
                 playerData->coins--;
