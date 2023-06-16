@@ -2300,7 +2300,7 @@ void update_item_entity_collectable(ItemEntity* item) {
                 }
             }
 
-            // if the item has non-zero lateral velocity, try moving it laterally 
+            // if the item has non-zero lateral velocity, try moving it laterally
             if (!(item->flags & (ITEM_ENTITY_FLAG_DONE_FALLING | ITEM_ENTITY_FLAG_NO_MOTION))
                 && item->spawnType != ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS
                 && item->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1

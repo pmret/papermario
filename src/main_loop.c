@@ -152,6 +152,7 @@ void step_game_loop(void) {
         gOverrideFlags &= ~GLOBAL_OVERRIDES_8000;
     }
 
+    // Unused rand_int used to advance the global random seed each visual frame
     rand_int(1);
 }
 
