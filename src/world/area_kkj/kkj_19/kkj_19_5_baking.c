@@ -209,7 +209,7 @@ API_CALLABLE(N(GetItemNameRaw)) {
             break;
         } else {
             ingredientsNames += 2;
-            if (i >= 0xA)
+            if (i >= 10 /* number of ingredients */)
                 break;
         }
     }
