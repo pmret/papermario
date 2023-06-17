@@ -195,8 +195,26 @@ API_CALLABLE(N(AwaitPlayerPressATimer)) {
 
 // unlike the common import, does not mask out 0xF0000 from itemID
 #if VERSION_PAL
-API_CALLABLE(N(GetItemNameRaw));
-INCLUDE_ASM(ApiResult, "world/area_kkj/kkj_19/kkj_19_5_baking", kkj_19_GetItemNameRaw);
+extern s32 N(BakingIngredientsNames)[];
+API_CALLABLE(N(GetItemNameRaw)) {
+    Bytecode* args = script->ptrReadPos;
+    s32       inOutVar = *args++;
+    s32       itemID   = evt_get_variable(script, inOutVar);
+    s32       i        = 0;
+    s32*      ingredientsNames = kkj_19_BakingIngredientsNames;
+    while (1) {
+        i += 1;
+        if (itemID == *ingredientsNames /* itemID */) {
+            evt_set_variable(script, inOutVar, *(ingredientsNames+1));
+            break;
+        } else {
+            ingredientsNames += 2;
+            if (i >= 0xA)
+                break;
+        }
+    }
+    return ApiStatus_DONE2;
+}
 #else
 API_CALLABLE(N(GetItemNameRaw)) {
     Bytecode* args = script->ptrReadPos;
