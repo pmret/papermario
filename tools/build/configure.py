@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 
+from functools import cache
 import os
 import shutil
-from typing import List, Dict, Set, Union
+from typing import List, Dict, Optional, Set, Union
 from pathlib import Path
 import subprocess
 import sys
@@ -154,8 +155,8 @@ def write_ninja_rules(
     )
 
     ninja.rule(
-        "dead_cc",
-        description="dead_cc $in",
+        "dead_cc_fix",
+        description="dead_cc_fix $in",
         command=f"mips-linux-gnu-objcopy --redefine-sym sqrtf=dead_sqrtf $in $out",
     )
 
@@ -209,8 +210,8 @@ def write_ninja_rules(
 
     ninja.rule(
         "sprites",
-        description="sprites $out $header_out $in_dir",
-        command=f"$python {BUILD_TOOLS}/sprite/sprites.py $out $header_out $build_dir $in_dir",
+        description="sprites $out $header_out",
+        command=f"$python {BUILD_TOOLS}/sprite/sprites.py $out $header_out $build_dir $asset_stack",
     )
 
     ninja.rule(
@@ -345,7 +346,7 @@ class Configure:
             verbose=False,
         )
         self.linker_entries = split.linker_writer.entries
-        self.asset_stack = split.config["asset_stack"]
+        self.asset_stack: List[str] = split.config["asset_stack"]
 
     def build_path(self) -> Path:
         return Path(f"ver/{self.version}/build")
@@ -376,24 +377,27 @@ class Configure:
         for path in src_paths:
             path = self.resolve_asset_path(path)
 
-            if path.is_dir():
-                out.extend(glob(str(path) + "/**/*", recursive=True))
-            else:
-                out.append(str(path))
+            if path is not None:
+                if path.is_dir():
+                    out.extend(glob(str(path) + "/**/*", recursive=True))
+                else:
+                    out.append(str(path))
 
         return out
 
+    @cache
     def resolve_asset_path(self, path: Path) -> Path:
         parts = list(path.parts)
 
-        if parts[0] == "assets":
-            for d in self.asset_stack:
-                parts[1] = d
-                new_path = Path("/".join(parts))
-                if new_path.exists():
-                    return new_path
+        if parts[0] != "assets":
+            return path
 
-        # ¯\_(ツ)_/¯
+        for asset_dir in self.asset_stack:
+            parts[1] = asset_dir
+            new_path = Path("/".join(parts))
+            if new_path.exists():
+                return new_path
+
         return path
 
     def write_ninja(
@@ -549,7 +553,7 @@ class Configure:
                     build(
                         entry.object_path,
                         [init_obj_path],
-                        "dead_cc",
+                        "dead_cc_fix",
                     )
                 # Not dead cod
                 else:
@@ -709,7 +713,7 @@ class Configure:
                     variables = {
                         "sprite_id": sprite_id,
                         "sprite_name": sprite_name,
-                        "sprite_dir": str(self.resolve_asset_path(sprite_dir)),
+                        "sprite_dir": self.resolve_asset_path(sprite_dir),
                     }
 
                     build(bin_path, [sprite_dir], "npc_sprite", variables=variables)
@@ -731,11 +735,11 @@ class Configure:
                     [entry.src_paths[0], *sprite_yay0s],
                     "sprites",
                     variables={
-                        "in_dir": str(entry.src_paths[0]),
                         "header_out": sprite_player_header_path,
                         "build_dir": str(
                             self.build_path() / "assets" / self.version / "sprite"
                         ),
+                        "asset_stack": ",".join(self.asset_stack),
                     },
                     implicit_outputs=[sprite_player_header_path],
                 )

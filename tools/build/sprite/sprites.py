@@ -1,7 +1,8 @@
 #! /usr/bin/env
 
+import argparse
 from dataclasses import dataclass
-import io
+from functools import cache
 from pathlib import Path
 import sys
 from typing import List
@@ -14,6 +15,7 @@ from splat_ext.pm_sprites import (
     MAX_COMPONENTS_XML,
     NPC_SPRITE_MEDADATA_XML_FILENAME,
     PALETTE_GROUPS_XML,
+    PALETTE_XML,
     PLAYER_SPRITE_MEDADATA_XML_FILENAME,
     SPECIAL_RASTER,
     PlayerRaster,
@@ -34,6 +36,8 @@ TOOLS_DIR = Path(
 )
 sys.path.append(str(TOOLS_DIR))
 
+ASSET_DIR = TOOLS_DIR.parent / "assets"
+
 
 def pack_color(r, g, b, a) -> int:
     r = r >> 3
@@ -43,8 +47,8 @@ def pack_color(r, g, b, a) -> int:
     return (r << 11) | (g << 6) | (b << 1) | a
 
 
-def get_player_sprite_metadata(xml_dir: Path) -> Tuple[str, List[str], List[str]]:
-    orderings_tree = ET.parse(xml_dir / PLAYER_SPRITE_MEDADATA_XML_FILENAME)
+def get_player_sprite_metadata() -> Tuple[str, List[str], List[str]]:
+    orderings_tree = ET.parse(get_asset_path(PLAYER_SPRITE_MEDADATA_XML_FILENAME))
 
     build_info = str(orderings_tree.getroot()[0].text)
 
@@ -59,8 +63,8 @@ def get_player_sprite_metadata(xml_dir: Path) -> Tuple[str, List[str], List[str]
     return build_info, sprite_order, raster_order
 
 
-def get_npc_sprite_metadata(xml_dir: Path) -> List[str]:
-    orderings_tree = ET.parse(xml_dir / NPC_SPRITE_MEDADATA_XML_FILENAME)
+def get_npc_sprite_metadata() -> List[str]:
+    orderings_tree = ET.parse(get_asset_path(NPC_SPRITE_MEDADATA_XML_FILENAME))
 
     sprite_order: List[str] = []
     for sprite_tag in orderings_tree.getroot()[0]:
@@ -91,20 +95,28 @@ SPECIAL_RASTER_BYTES = (
 )
 
 
-def cache_rasters(raster_order: List[str], player_sprite_dir: Path):
-    # Read all rasters and cache them
+@cache
+def get_asset_path(asset: str) -> Path:
+    for sdir in ASSET_STACK:
+        potential_path = ASSET_DIR / sdir / "sprite" / asset
+        if potential_path.exists():
+            return potential_path
+    raise FileNotFoundError(f"Could not find asset {asset}")
+
+
+def cache_player_rasters(raster_order: List[str]):
+    # Read all player rasters and cache them
     cur_offset = 0
     for raster_name in raster_order:
+        png_path = get_asset_path(Path("player/rasters") / f"{raster_name}.png")
+
         # "Weird" raster
-        if (
-            os.path.getsize(player_sprite_dir / "rasters" / f"{raster_name}.png")
-            == 0x10
-        ):
+        if os.path.getsize(png_path) == 0x10:
             RASTER_CACHE[raster_name] = CI4Info(0, 0, cur_offset, SPECIAL_RASTER_BYTES)
             cur_offset += 0x10
             continue
 
-        with open(player_sprite_dir / "rasters" / f"{raster_name}.png", "rb") as f:
+        with open(png_path, "rb") as f:
             reader = png.Reader(f)
             width, height, rows, _ = reader.read()
             img_bytes = b""
@@ -117,7 +129,27 @@ def cache_rasters(raster_order: List[str], player_sprite_dir: Path):
             cur_offset += RASTER_CACHE[raster_name].size
 
 
-def player_xml_to_bytes(xml: ET.Element, xml_dir: Path) -> List[bytes]:
+def player_raster_from_xml(xml: ET.Element, back: bool = False) -> PlayerRaster:
+    palette = int(xml.attrib[PALETTE_XML], 16)
+    is_special = "special" in xml.attrib
+
+    if back in xml.attrib:
+        img_name = xml.attrib["back"]
+    else:
+        img_name = xml.attrib["src"]
+
+    raster_info = RASTER_CACHE[img_name[:-4]]
+
+    return PlayerRaster(
+        0,
+        raster_info.width,
+        raster_info.height,
+        palette,
+        is_special,
+    )
+
+
+def player_xml_to_bytes(xml: ET.Element) -> List[bytes]:
     has_back = False
 
     out_bytes = b""
@@ -197,7 +229,8 @@ def player_xml_to_bytes(xml: ET.Element, xml_dir: Path) -> List[bytes]:
         source = palette_xml.attrib["src"]
         front_only = bool(palette_xml.get("front_only", False))
         if source not in PALETTE_CACHE:
-            with open(xml_dir / "palettes" / source, "rb") as f:
+            palette_path = get_asset_path(Path("player/palettes") / source)
+            with open(palette_path, "rb") as f:
                 img = png.Reader(f)
                 img.preamble(True)
                 palette = img.palette(alpha="force")
@@ -231,7 +264,7 @@ def player_xml_to_bytes(xml: ET.Element, xml_dir: Path) -> List[bytes]:
     for raster_xml in xml[1]:
         if "back" in raster_xml.attrib:
             has_back = True
-        r = PlayerRaster.from_xml(xml_dir, raster_xml, back=False)
+        r = player_raster_from_xml(raster_xml, back=False)
         raster_bytes += struct.pack(
             ">IBBBB", raster_offset, r.width, r.height, r.palette_idx, 0xFF
         )
@@ -243,7 +276,7 @@ def player_xml_to_bytes(xml: ET.Element, xml_dir: Path) -> List[bytes]:
         for raster_xml in xml[1]:
             is_back = False
 
-            r = PlayerRaster.from_xml(xml_dir, raster_xml, back=is_back)
+            r = player_raster_from_xml(raster_xml, back=is_back)
             if "back" in raster_xml.attrib:
                 is_back = True
                 width = r.width
@@ -434,13 +467,11 @@ def write_player_sprite_header(
         f.write(f"#endif // {ifdef_name}\n")
 
 
-def build_player_sprites(sprite_order: List[str], player_sprite_dir: Path) -> bytes:
+def build_player_sprites(sprite_order: List[str], build_dir: Path) -> bytes:
     sprite_bytes: List[bytes] = []
 
     for sprite_name in sprite_order:
-        sprite_bytes.extend(
-            player_xml_to_bytes(PLAYER_XML_CACHE[sprite_name], player_sprite_dir)
-        )
+        sprite_bytes.extend(player_xml_to_bytes(PLAYER_XML_CACHE[sprite_name]))
 
     # Compress sprite bytes
     compressed_sprite_bytes: bytes = b""
@@ -448,8 +479,9 @@ def build_player_sprites(sprite_order: List[str], player_sprite_dir: Path) -> by
     list_bytes: bytes = struct.pack(">I", yay0_cur_offset)
 
     # TODO figure out how to use tmp files if possible
-    yay0_in_path = player_sprite_dir / "yay0_bytes.bin"
-    yay0_out_path = player_sprite_dir / "yay0_bytes.Yay0"
+    build_dir.mkdir(exist_ok=True, parents=True)
+    yay0_in_path = build_dir / "yay0_bytes.bin"
+    yay0_out_path = build_dir / "yay0_bytes.Yay0"
 
     for sprite_byte in sprite_bytes:
         with open(yay0_in_path, "wb") as f:
@@ -576,28 +608,37 @@ def build_player_rasters(sprite_order: List[str], raster_order: List[str]) -> by
     return ret
 
 
+ASSET_STACK: List[Path]
+
+
 def build(
-    out_file: Path, player_header_path: Path, build_dir: Path, sprite_dir: Path
+    out_file: Path,
+    player_header_path: Path,
+    build_dir: Path,
+    asset_stack: List[Path],
 ) -> None:
-    player_sprite_dir = sprite_dir / "player"
+    global ASSET_STACK
+    ASSET_STACK = asset_stack
 
-    build_info, player_sprite_order, player_raster_order = get_player_sprite_metadata(
-        sprite_dir
-    )
-    npc_sprite_order = get_npc_sprite_metadata(sprite_dir)
+    build_info, player_sprite_order, player_raster_order = get_player_sprite_metadata()
+    npc_sprite_order = get_npc_sprite_metadata()
 
-    cache_rasters(player_raster_order, player_sprite_dir)
+    cache_player_rasters(player_raster_order)
 
     # Read and cache player XMLs
     for sprite_name in player_sprite_order:
-        sprite_xml = ET.parse(player_sprite_dir / f"{sprite_name}.xml").getroot()
+        sprite_xml = ET.parse(
+            get_asset_path(Path(f"player/{sprite_name}.xml"))
+        ).getroot()
         PLAYER_XML_CACHE[sprite_name] = sprite_xml
 
     # Encode build_info to bytes and pad to 0x10
     build_info_bytes = build_info.encode("ascii")
     build_info_bytes += b"\0" * (0x10 - len(build_info_bytes))
 
-    player_sprite_bytes = build_player_sprites(player_sprite_order, player_sprite_dir)
+    player_sprite_bytes = build_player_sprites(
+        player_sprite_order, build_dir / "player"
+    )
     player_raster_bytes = build_player_rasters(player_sprite_order, player_raster_order)
     npc_sprite_bytes = build_npc_sprites(npc_sprite_order, build_dir)
 
@@ -628,9 +669,16 @@ def build(
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 5:
-        print("usage: sprites.py [OUT] [PLAYER_HEADER_OUT] [BUILD_DIR] [IN_DIR]")
-        exit(1)
+    parser = argparse.ArgumentParser(description="Builds sprite blobs")
+    parser.add_argument("out")
+    parser.add_argument("player_header_out")
+    parser.add_argument("build_dir")
+    parser.add_argument("asset_stack")
+    args = parser.parse_args()
 
-    _, out, player_header_out, build_dir, in_dir = sys.argv
-    build(Path(out), Path(player_header_out), Path(build_dir), Path(in_dir))
+    build(
+        Path(args.out),
+        Path(args.player_header_out),
+        Path(args.build_dir),
+        [Path(d) for d in args.asset_stack.split(",")],
+    )

@@ -177,29 +177,6 @@ class PlayerRaster:
 
         return PlayerRaster(offset, width, height, default_palette, is_special)
 
-    @staticmethod
-    def from_xml(out_path: Path, xml: ET.Element, back: bool = False) -> "PlayerRaster":
-        palette = int(xml.attrib[PALETTE_XML], 16)
-        is_special = "special" in xml.attrib
-
-        if back in xml.attrib:
-            img_name = xml.attrib["back"]
-        else:
-            img_name = xml.attrib["src"]
-
-        # TODO cache images
-        with open(out_path / "rasters" / img_name, "rb") as f:
-            img = png.Reader(f)
-            img.read()
-
-        return PlayerRaster(
-            0,
-            img.width,
-            img.height,
-            palette,
-            is_special,
-        )
-
 
 @dataclass
 class PlayerSprite:
