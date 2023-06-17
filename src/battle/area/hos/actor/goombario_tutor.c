@@ -1,12 +1,10 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "battle/action_cmd/jump.h"
 #include "battle/action_cmd.h"
 #include "sprite/npc/BattleGoombario.h"
 #include "sprite/npc/Twink.h"
 
-#define NAMESPACE b_area_hos_goombario_tutor
+#define NAMESPACE A(goombario_tutor)
 
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
@@ -140,18 +138,18 @@ EvtScript N(handleEvent_802191E0) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(9)
         EVT_CASE_OR_EQ(10)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleGoombario_HurtStill)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(23)
         EVT_CASE_OR_EQ(25)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleGoombario_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(48)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleGoombario_HurtStill)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_WAIT(1000)
@@ -190,7 +188,7 @@ EvtScript N(takeTurn_80219444) = {
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(AddGoalPos, ACTOR_SELF, -10, 0, 0)
     EVT_CALL(GetBattleFlags2, LVar0)
-    EVT_IF_FLAG(LVar0, 0x200)
+    EVT_IF_FLAG(LVar0, BS_FLAGS2_200)
         EVT_CALL(AddGoalPos, ACTOR_SELF, 5, 10, 0)
     EVT_END_IF
     EVT_CALL(SetActorJumpGravity, ACTOR_SELF, EVT_FLOAT(1.1))

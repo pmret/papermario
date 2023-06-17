@@ -3196,14 +3196,23 @@ enum StatusFlags {
     STATUS_FLAG_80000000        = 0x80000000,
 };
 
+// general combination of flags for checking if an enemy is immobilized
 #define STATUS_FLAGS_IMMOBILIZED \
-     (STATUS_FLAG_STONE \
-    | STATUS_FLAG_STOP \
-    | STATUS_FLAG_DIZZY \
-    | STATUS_FLAG_PARALYZE \
-    | STATUS_FLAG_FEAR \
+     (STATUS_FLAG_SLEEP \
     | STATUS_FLAG_FROZEN \
-    | STATUS_FLAG_SLEEP)
+    | STATUS_FLAG_FEAR \
+    | STATUS_FLAG_PARALYZE \
+    | STATUS_FLAG_DIZZY \
+    | STATUS_FLAG_STONE \
+    | STATUS_FLAG_STOP)
+
+// common set of flags used in checks throughout Dojo fights
+#define STATUS_FLAGS_DOJO \
+     (STATUS_FLAG_SLEEP \
+    | STATUS_FLAG_PARALYZE \
+    | STATUS_FLAG_DIZZY \
+    | STATUS_FLAG_STONE \
+    | STATUS_FLAG_STOP)
 
 enum DamageTypes {
     DAMAGE_TYPE_FIRE                       = 0x00000002,
@@ -3233,7 +3242,7 @@ enum DamageTypes {
     DAMAGE_TYPE_SPIN_SMASH                 = 0x04000000,
     DAMAGE_TYPE_IGNORE_DEFENSE             = 0x08000000,
     DAMAGE_TYPE_NO_CONTACT                 = 0x10000000,
-    DAMAGE_TYPE_MULTIPLE_POPUPS            = 0x20000000,
+    DAMAGE_TYPE_MULTIPLE_POPUPS            = 0x20000000, // part of an attack that hits multiple opponents
     DAMAGE_TYPE_STATUS_ALWAYS_HITS         = 0x40000000,
     DAMAGE_TYPE_TRIGGER_LUCKY              = 0x80000000,
 };

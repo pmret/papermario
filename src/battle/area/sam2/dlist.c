@@ -1,6 +1,6 @@
-#include "common.h"
+#include "area.h"
 
-#define NAMESPACE b_area_sam2_monstar
+#define NAMESPACE A(monstar)
 
 extern Vtx monstar_bubbles[66];
 

@@ -1,5 +1,3 @@
-#include "common.h"
-
-#define NAMESPACE b_area_sbk_pokey
+#include "../area.h"
 
 #include "battle/common/actor/pokey.inc.c"

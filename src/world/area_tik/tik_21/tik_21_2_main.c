@@ -70,6 +70,7 @@ EvtScript N(EVS_EnterMap) = {
     EVT_END
 };
 
+#define DROPLET_MODEL MODEL_sizuku
 #include "../common/DripVolumes.inc.c"
 
 DripVolumeList N(DripVolumes) = {

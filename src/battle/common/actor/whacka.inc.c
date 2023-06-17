@@ -1,7 +1,8 @@
-#include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "sprite/npc/Whacka.h"
+
+#define NAMESPACE A(whacka)
 
 extern EvtScript N(init);
 extern EvtScript N(takeTurn);
@@ -133,11 +134,11 @@ EvtScript N(handleEvent) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_EQ(EVENT_HIT_COMBO)
             EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2073)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
         EVT_CASE_EQ(EVENT_HIT)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Whacka_Hurt)
             EVT_EXEC_WAIT(N(spawnWhackasBump))
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
@@ -147,7 +148,7 @@ EvtScript N(handleEvent) = {
                 EVT_RETURN
             EVT_END_IF
         EVT_CASE_EQ(EVENT_BURN_HIT)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
             EVT_SET_CONST(LVar2, ANIM_Whacka_Idle)
             EVT_EXEC_WAIT(N(spawnWhackasBump))
@@ -158,7 +159,7 @@ EvtScript N(handleEvent) = {
                 EVT_RETURN
             EVT_END_IF
         EVT_CASE_EQ(EVENT_BURN_DEATH)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
             EVT_SET_CONST(LVar2, ANIM_Whacka_Idle)
             EVT_EXEC_WAIT(N(spawnWhackasBump))
@@ -167,13 +168,13 @@ EvtScript N(handleEvent) = {
                 EVT_EXEC_WAIT(N(die))
                 EVT_RETURN
             EVT_ELSE
-                EVT_SET_CONST(LVar0, 1)
+                EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
                 EVT_EXEC_WAIT(EVS_Enemy_Death)
                 EVT_RETURN
             EVT_END_IF
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
             EVT_CALL(RandInt, 100, LVar0)
@@ -182,42 +183,42 @@ EvtScript N(handleEvent) = {
                 EVT_RETURN
             EVT_END_IF
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
             EVT_IF_GE(100, 100)
                 EVT_EXEC_WAIT(N(die))
                 EVT_RETURN
             EVT_ELSE
-                EVT_SET_CONST(LVar0, 1)
+                EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
                 EVT_EXEC_WAIT(EVS_Enemy_Death)
                 EVT_RETURN
             EVT_END_IF
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_ReturnHome)
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_ZERO_DAMAGE)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_CASE_EQ(EVENT_IMMUNE)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
             EVT_CALL(RandInt, 100, LVar0)
@@ -226,7 +227,7 @@ EvtScript N(handleEvent) = {
                 EVT_RETURN
             EVT_END_IF
         EVT_CASE_EQ(EVENT_AIR_LIFT_FAILED)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
             EVT_CALL(RandInt, 100, LVar0)
@@ -235,7 +236,7 @@ EvtScript N(handleEvent) = {
                 EVT_RETURN
             EVT_END_IF
         EVT_CASE_EQ(EVENT_DEATH)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Whacka_Hurt)
             EVT_EXEC_WAIT(N(spawnWhackasBump))
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
@@ -244,27 +245,27 @@ EvtScript N(handleEvent) = {
                 EVT_EXEC_WAIT(N(die))
                 EVT_RETURN
             EVT_ELSE
-                EVT_SET_CONST(LVar0, 1)
+                EVT_SET_CONST(LVar0, PRT_MAIN)
                 EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
                 EVT_EXEC_WAIT(EVS_Enemy_Death)
                 EVT_RETURN
             EVT_END_IF
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_Recover)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
             EVT_SET_CONST(LVar2, ANIM_Whacka_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_ScareAway)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_AirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Whacka_Idle)
             EVT_EXEC_WAIT(EVS_Enemy_BlowAway)
             EVT_RETURN

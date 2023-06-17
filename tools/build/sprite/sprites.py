@@ -593,8 +593,6 @@ def build(
         sprite_xml = ET.parse(player_sprite_dir / f"{sprite_name}.xml").getroot()
         PLAYER_XML_CACHE[sprite_name] = sprite_xml
 
-    write_player_sprite_header(player_sprite_order, player_header_path)
-
     # Encode build_info to bytes and pad to 0x10
     build_info_bytes = build_info.encode("ascii")
     build_info_bytes += b"\0" * (0x10 - len(build_info_bytes))
@@ -625,6 +623,8 @@ def build(
 
     with open(out_file, "wb") as f:
         f.write(final_data)
+
+    write_player_sprite_header(player_sprite_order, player_header_path)
 
 
 if __name__ == "__main__":

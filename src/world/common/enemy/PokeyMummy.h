@@ -16,20 +16,20 @@
 
 #define POKEY_MUMMY_ANIMS \
 { \
-    .idle   = ANIM_Pokey_Mummy_Anim04, \
-    .walk   = ANIM_Pokey_Mummy_Anim08, \
-    .run    = ANIM_Pokey_Mummy_Anim08, \
-    .chase  = ANIM_Pokey_Mummy_Anim08, \
-    .anim_4 = ANIM_Pokey_Mummy_Anim04, \
-    .anim_5 = ANIM_Pokey_Mummy_Anim04, \
-    .death  = ANIM_Pokey_Mummy_Anim0C, \
-    .hit    = ANIM_Pokey_Mummy_Anim0C, \
-    .anim_8 = ANIM_Pokey_Mummy_Anim08, \
-    .anim_9 = ANIM_Pokey_Mummy_Anim08, \
-    .anim_A = ANIM_Pokey_Mummy_Anim08, \
-    .anim_B = ANIM_Pokey_Mummy_Anim08, \
-    .anim_C = ANIM_Pokey_Mummy_Anim08, \
-    .anim_D = ANIM_Pokey_Mummy_Anim08, \
-    .anim_E = ANIM_Pokey_Mummy_Anim08, \
-    .anim_F = ANIM_Pokey_Mummy_Anim08, \
+    .idle   = ANIM_Pokey_Mummy_Idle4, \
+    .walk   = ANIM_Pokey_Mummy_Run4, \
+    .run    = ANIM_Pokey_Mummy_Run4, \
+    .chase  = ANIM_Pokey_Mummy_Run4, \
+    .anim_4 = ANIM_Pokey_Mummy_Idle4, \
+    .anim_5 = ANIM_Pokey_Mummy_Idle4, \
+    .death  = ANIM_Pokey_Mummy_Hurt4, \
+    .hit    = ANIM_Pokey_Mummy_Hurt4, \
+    .anim_8 = ANIM_Pokey_Mummy_Run4, \
+    .anim_9 = ANIM_Pokey_Mummy_Run4, \
+    .anim_A = ANIM_Pokey_Mummy_Run4, \
+    .anim_B = ANIM_Pokey_Mummy_Run4, \
+    .anim_C = ANIM_Pokey_Mummy_Run4, \
+    .anim_D = ANIM_Pokey_Mummy_Run4, \
+    .anim_E = ANIM_Pokey_Mummy_Run4, \
+    .anim_F = ANIM_Pokey_Mummy_Run4, \
 }

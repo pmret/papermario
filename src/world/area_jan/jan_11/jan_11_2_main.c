@@ -4,7 +4,7 @@
 
 #include "world/common/entity/Pipe.inc.c"
 
-#define MODEL_sizuku MODEL_o140 //TODO parameterize all DripVolume includes
+#define DROPLET_MODEL MODEL_o140
 #include "world/area_tik/common/DripVolumes.inc.c"
 
 DripVolumeList N(DripVolumes) = {

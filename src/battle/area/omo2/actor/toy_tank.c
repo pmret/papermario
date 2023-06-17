@@ -1,4 +1,3 @@
-#include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "effects.h"
@@ -478,7 +477,7 @@ EvtScript N(start_stilt_guys_phase) = {
         EVT_CALL(ActorSpeak, MSG_CH4_006A, ACTOR_ENEMY0, PRT_MAIN, ANIM_GeneralGuy_Anim0C, ANIM_GeneralGuy_Anim02)
     EVT_END_IF
     EVT_CALL(LoadBattleSection, 44)
-    EVT_CALL(SummonEnemy, EVT_PTR(N(formation_signal_guy)), 1)
+    EVT_CALL(SummonEnemy, EVT_PTR(N(formation_signal_guy)), TRUE)
     EVT_WAIT(60)
     EVT_CALL(PlaySoundAtPart, ACTOR_ENEMY0, PRT_MAIN, SOUND_TOY_TANK_MOVE1)
     EVT_WAIT(5)
@@ -527,9 +526,9 @@ EvtScript N(start_shy_stack_phase) = {
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_WAIT(10)
     EVT_CALL(LoadBattleSection, 43)
-    EVT_CALL(SummonEnemy, EVT_PTR(N(formation_shy_stack_1)), 1)
+    EVT_CALL(SummonEnemy, EVT_PTR(N(formation_shy_stack_1)), TRUE)
     EVT_WAIT(124)
-    EVT_CALL(SummonEnemy, EVT_PTR(N(formation_shy_stack_2)), 1)
+    EVT_CALL(SummonEnemy, EVT_PTR(N(formation_shy_stack_2)), TRUE)
     EVT_WAIT(114)
     EVT_CALL(PlayModelAnimation, 0, EVT_PTR(toy_tank_as_idle))
     EVT_LABEL(0)
@@ -601,9 +600,9 @@ EvtScript N(summon_stilt_guys) = {
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_WAIT(10)
     EVT_CALL(LoadBattleSection, 42)
-    EVT_CALL(SummonEnemy, EVT_PTR(N(formation_stilt_guy_1)), 1)
+    EVT_CALL(SummonEnemy, EVT_PTR(N(formation_stilt_guy_1)), TRUE)
     EVT_WAIT(60)
-    EVT_CALL(SummonEnemy, EVT_PTR(N(formation_stilt_guy_2)), 1)
+    EVT_CALL(SummonEnemy, EVT_PTR(N(formation_stilt_guy_2)), TRUE)
     EVT_WAIT(60)
     EVT_LABEL(1)
     EVT_CALL(GetActorVar, ACTOR_SELF, 1, LVar0)
@@ -664,7 +663,7 @@ EvtScript N(summon_tank_squad) = {
     EVT_WAIT(30)
     EVT_CALL(SetAnimation, ACTOR_ENEMY0, PRT_MAIN, ANIM_GeneralGuy_Anim02)
     EVT_CALL(LoadBattleSection, 45)
-    EVT_CALL(SummonEnemy, EVT_PTR(N(formation_shy_squad_dup)), 1)
+    EVT_CALL(SummonEnemy, EVT_PTR(N(formation_shy_squad_dup)), TRUE)
     EVT_WAIT(155)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
     EVT_CALL(SetBattleCamZoom, 350)

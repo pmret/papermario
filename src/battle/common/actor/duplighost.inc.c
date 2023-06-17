@@ -1,8 +1,9 @@
-#include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "effects.h"
 #include "sprite/npc/Duplighost.h"
+
+#define NAMESPACE A(duplighost)
 
 extern EvtScript N(init);
 extern EvtScript N(takeTurn);
@@ -136,7 +137,7 @@ EvtScript N(idle) = {
 };
 
 EvtScript N(returnHome) = {
-    EVT_SET_CONST(LVar0, 1)
+    EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_SET_CONST(LVar1, ANIM_Duplighost_Anim04)
     EVT_EXEC_WAIT(EVS_Enemy_ReturnHome)
     EVT_RETURN
@@ -150,85 +151,85 @@ EvtScript N(handleEvent) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Duplighost_Anim0A)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Duplighost_Anim0C)
             EVT_SET_CONST(LVar2, -1)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Duplighost_Anim0C)
             EVT_SET_CONST(LVar2, -1)
             EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Duplighost_Anim0C)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SPIN_SMASH_HIT)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Duplighost_Anim0A)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
         EVT_CASE_EQ(EVENT_SPIN_SMASH_DEATH)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Duplighost_Anim0A)
             EVT_EXEC_WAIT(EVS_Enemy_SpinSmashHit)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Duplighost_Anim0A)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_CALL(ResetAllActorSounds, ACTOR_SELF)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Duplighost_Anim0A)
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Duplighost_Anim0A)
             EVT_EXEC_WAIT(EVS_Enemy_JumpBack)
             EVT_EXEC_WAIT(N(returnHome))
         EVT_CASE_EQ(EVENT_SHOCK_DEATH)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Duplighost_Anim0A)
             EVT_EXEC_WAIT(EVS_Enemy_ShockHit)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Duplighost_Anim0A)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Duplighost_Anim02)
             EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Duplighost_Anim0A)
             EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_WAIT(10)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Duplighost_Anim0A)
             EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Duplighost_Anim02)
             EVT_EXEC_WAIT(EVS_Enemy_Recover)
         EVT_CASE_EQ(EVENT_SCARE_AWAY)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Duplighost_Anim04)
             EVT_SET_CONST(LVar2, ANIM_Duplighost_Anim0A)
             EVT_EXEC_WAIT(EVS_Enemy_ScareAway)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Duplighost_Anim04)
             EVT_EXEC_WAIT(EVS_Enemy_AirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_Duplighost_Anim0A)
             EVT_EXEC_WAIT(EVS_Enemy_BlowAway)
             EVT_RETURN
@@ -514,49 +515,49 @@ EvtScript N(OnShockDeath) = {
 
 Vec3i N(pos_summon) = { NPC_DISPOSE_LOCATION };
 
-#include "ghost_goombario.inc.c"
+#include "duplighost/ghost_goombario.inc.c"
 
 Formation N(formation_goombario) = {
     ACTOR_BY_POS(N(goombario), N(pos_summon), 0),
 };
 
-#include "ghost_kooper.inc.c"
+#include "duplighost/ghost_kooper.inc.c"
 
 Formation N(formation_kooper) = {
     ACTOR_BY_POS(N(kooper), N(pos_summon), 0),
 };
 
-#include "ghost_bombette.inc.c"
+#include "duplighost/ghost_bombette.inc.c"
 
 Formation N(formation_bombette) = {
     ACTOR_BY_POS(N(bombette), N(pos_summon), 0),
 };
 
-#include "ghost_parakarry.inc.c"
+#include "duplighost/ghost_parakarry.inc.c"
 
 Formation N(formation_parakarry) = {
     ACTOR_BY_POS(N(parakarry), N(pos_summon), 0),
 };
 
-#include "ghost_bow.inc.c"
+#include "duplighost/ghost_bow.inc.c"
 
 Formation N(formation_bow) = {
     ACTOR_BY_POS(N(bow), N(pos_summon), 0),
 };
 
-#include "ghost_watt.inc.c"
+#include "duplighost/ghost_watt.inc.c"
 
 Formation N(formation_watt) = {
     ACTOR_BY_POS(N(watt), N(pos_summon), 0),
 };
 
-#include "ghost_sushie.inc.c"
+#include "duplighost/ghost_sushie.inc.c"
 
 Formation N(formation_sushie) = {
     ACTOR_BY_POS(N(sushie), N(pos_summon), 0),
 };
 
-#include "ghost_lakilester.inc.c"
+#include "duplighost/ghost_lakilester.inc.c"
 
 Formation N(formation_lakilester) = {
     ACTOR_BY_POS(N(lakilester), N(pos_summon), 0),
@@ -639,21 +640,21 @@ EvtScript N(copyPartner) = {
     EVT_CALL(N(CopyPriority), LVar5)
     EVT_SWITCH(LVar5)
         EVT_CASE_EQ(1)
-            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_goombario)), 0)
+            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_goombario)), FALSE)
         EVT_CASE_EQ(2)
-            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_kooper)), 0)
+            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_kooper)), FALSE)
         EVT_CASE_EQ(3)
-            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_bombette)), 0)
+            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_bombette)), FALSE)
         EVT_CASE_EQ(4)
-            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_parakarry)), 0)
+            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_parakarry)), FALSE)
         EVT_CASE_EQ(9)
-            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_bow)), 0)
+            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_bow)), FALSE)
         EVT_CASE_EQ(6)
-            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_watt)), 0)
+            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_watt)), FALSE)
         EVT_CASE_EQ(7)
-            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_sushie)), 0)
+            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_sushie)), FALSE)
         EVT_CASE_EQ(8)
-            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_lakilester)), 0)
+            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_lakilester)), FALSE)
     EVT_END_SWITCH
     EVT_SET(LVarA, LVar0)
     EVT_CALL(CopyStatusEffects, ACTOR_SELF, LVarA)

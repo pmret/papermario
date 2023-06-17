@@ -257,9 +257,9 @@ void N(worker_update_phonograph_hud)(void) {
             id = data->barFillWidth / 60; // TODO use of id required to match - weird
             if (id <= 50) {
                 temp = 50.0f;
-                temp *= sin_rad((((id * 90) / 50) * TAU) / 360.0f);
+                temp *= sin_rad(DEG_TO_RAD((id * 90) / 50));
             } else {
-                temp = ((1.0 - sin_rad((((((id - 50) * 90) / 50) + 90) * TAU) / 360.0f)) * 50.0) + 50.0;
+                temp = ((1.0 - sin_rad(DEG_TO_RAD((((id - 50) * 90) / 50) + 90))) * 50.0) + 50.0;
             }
             data->timeScale = (((100 - temp) * 0.25) / 100.0) + ((2.0 * temp) / 100.0);
             snd_song_set_playback_rate(data->songName, data->timeScale);

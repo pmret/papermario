@@ -915,7 +915,7 @@ typedef struct BattleStatus {
     /* 0x09F */ char unk_9F;
     /* 0x0A0 */ struct EffectInstance* waterBlockEffect;
     /* 0x0A4 */ s8 cloudNineTurnsLeft;
-    /* 0x0A5 */ s8 cloudNineDodgeChance; /* = 50% */
+    /* 0x0A5 */ s8 cloudNineDodgeChance; /* = 50/101 ≈ 49.5% */
     /* 0x0A6 */ char unk_A6[2];
     /* 0x0A8 */ struct EffectInstance* cloudNineEffect;
     /* 0x0AC */ s8 merleeAttackBoost;

@@ -246,8 +246,8 @@ s32 bActorNames[ACTOR_TYPE_COUNT] = {
     [ACTOR_TYPE_SIGNAL_GUY]                  MSG_EnemyName_ShyGuy,
     [ACTOR_TYPE_SHY_SQUAD_DUP]               MSG_EnemyName_ShySquadDup,
     [ACTOR_TYPE_SHY_GUY_DUP]                 MSG_EnemyName_ShyGuy,
-    [ACTOR_TYPE_ANTI_GUY]                    MSG_EnemyName_AntiGuy,
-    [ACTOR_TYPE_ANTI_GUY_DUP]                MSG_EnemyName_AntiGuy,
+    [ACTOR_TYPE_ANTI_GUY_OMO]                    MSG_EnemyName_AntiGuy,
+    [ACTOR_TYPE_ANTI_GUY_KPA]                MSG_EnemyName_AntiGuy,
     [ACTOR_TYPE_BIG_LANTERN_GHOST]           MSG_EnemyName_BigLanternGhost,
     [ACTOR_TYPE_GOOMBA_KING_DUP]             MSG_EnemyName_GoombaKing,
     [ACTOR_TYPE_LAVA_PIRANHA_PHASE_1]        MSG_EnemyName_LavaPiranha,
@@ -1520,14 +1520,14 @@ ActorSounds bActorSoundTable[ACTOR_TYPE_COUNT] = {
         .hurt = SOUND_10F,
         .delay = { 30, 30 }
     },
-    [ACTOR_TYPE_ANTI_GUY] = {
+    [ACTOR_TYPE_ANTI_GUY_OMO] = {
         .walk = { SOUND_20BA, SOUND_3B4 },
         .fly = { NULL, NULL },
         .jump = SOUND_JUMP_3E2,
         .hurt = SOUND_10F,
         .delay = { 30, 30 }
     },
-    [ACTOR_TYPE_ANTI_GUY_DUP] = {
+    [ACTOR_TYPE_ANTI_GUY_KPA] = {
         .walk = { SOUND_20BA, SOUND_3B4 },
         .fly = { NULL, NULL },
         .jump = SOUND_JUMP_3E2,
@@ -1957,8 +1957,8 @@ s32 bActorTattles[ACTOR_TYPE_COUNT] = {
     [ACTOR_TYPE_SIGNAL_GUY] = MSG_EnemyTattle_ShyGuy,
     [ACTOR_TYPE_SHY_SQUAD_DUP] = NULL,
     [ACTOR_TYPE_SHY_GUY_DUP] = MSG_EnemyTattle_ShyGuy,
-    [ACTOR_TYPE_ANTI_GUY] = MSG_EnemyTattle_AntiGuy,
-    [ACTOR_TYPE_ANTI_GUY_DUP] = MSG_EnemyTattle_AntiGuy,
+    [ACTOR_TYPE_ANTI_GUY_OMO] = MSG_EnemyTattle_AntiGuy,
+    [ACTOR_TYPE_ANTI_GUY_KPA] = MSG_EnemyTattle_AntiGuy,
     [ACTOR_TYPE_BIG_LANTERN_GHOST] = MSG_EnemyTattle_BigLanternGhost,
     [ACTOR_TYPE_GOOMBA_KING_DUP] = MSG_EnemyTattle_GoombaKing,
     [ACTOR_TYPE_LAVA_PIRANHA_PHASE_1] = MSG_EnemyTattle_LavaPiranhaPhase1,
@@ -2172,8 +2172,8 @@ ActorOffsets bActorOffsets[ACTOR_TYPE_COUNT] = {
     [ACTOR_TYPE_SIGNAL_GUY] = { .tattleCam = { 0, 0, 0 }, .shadow = 0 },
     [ACTOR_TYPE_SHY_SQUAD_DUP] = { .tattleCam = { 0, 0, 0 }, .shadow = 0 },
     [ACTOR_TYPE_SHY_GUY_DUP] = { .tattleCam = { 0, 0, 0 }, .shadow = 0 },
-    [ACTOR_TYPE_ANTI_GUY] = { .tattleCam = { 0, 0, 0 }, .shadow = 0 },
-    [ACTOR_TYPE_ANTI_GUY_DUP] = { .tattleCam = { 0, 0, 0 }, .shadow = 0 },
+    [ACTOR_TYPE_ANTI_GUY_OMO] = { .tattleCam = { 0, 0, 0 }, .shadow = 0 },
+    [ACTOR_TYPE_ANTI_GUY_KPA] = { .tattleCam = { 0, 0, 0 }, .shadow = 0 },
     [ACTOR_TYPE_BIG_LANTERN_GHOST] = { .tattleCam = { 0, 0, 0 }, .shadow = 0 },
     [ACTOR_TYPE_GOOMBA_KING_DUP] = { .tattleCam = { 0, 0, 0 }, .shadow = 0 },
     [ACTOR_TYPE_LAVA_PIRANHA_PHASE_1] = { .tattleCam = { 25, 250, 60 }, .shadow = 0 },

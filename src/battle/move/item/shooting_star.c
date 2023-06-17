@@ -10,8 +10,8 @@
 
 API_CALLABLE(N(func_802A123C_71D9AC)) {
     s32 t1 = 200;
-    s32 r1 = rand_int(t1) + 100; // 100-299
-    s32 r2 = rand_int(40); // 0-39
+    s32 r1 = rand_int(t1) + 100; // 100-300
+    s32 r2 = rand_int(40); // 0-40
     f32 var_f22;
 
     if ((script->varTable[0] % 4) != 0) {

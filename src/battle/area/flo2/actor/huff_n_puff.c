@@ -1,13 +1,10 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
 #include "sprite/npc/HuffNPuff.h"
 #include "sprite/npc/RuffPuff.h"
-#include "effects.h"
 #include "battle/action_cmd/whirlwind.h"
 #include "battle/action_cmd/stop_leech.h"
 
-#define NAMESPACE b_area_flo2_huff_n_puff
+#define NAMESPACE A(huff_n_puff)
 
 enum N(ActorPartIDs) {
     PRT_MAIN            = 1,
@@ -38,7 +35,7 @@ enum N(Flags) {
     N(FLAG_SPEAK_4) = 0x80,
 };
 
-extern ActorBlueprint b_area_flo2_tuff_puff;
+extern ActorBlueprint A(tuff_puff);
 
 extern EvtScript N(EVS_Init);
 extern EvtScript N(takeTurn);
@@ -549,11 +546,11 @@ EvtScript N(idle) = {
 Vec3i N(tuff_puff_pos) = { NPC_DISPOSE_LOCATION };
 
 Formation N(formation_tuff_puff_small) = {
-    ACTOR_BY_POS(b_area_flo2_tuff_puff, N(tuff_puff_pos), 0),
+    ACTOR_BY_POS(A(tuff_puff), N(tuff_puff_pos), 0),
 };
 
 Formation N(formation_tuff_puff_large) = {
-    ACTOR_BY_POS(b_area_flo2_tuff_puff, N(tuff_puff_pos), 0, 1),
+    ACTOR_BY_POS(A(tuff_puff), N(tuff_puff_pos), 0, 1),
 };
 
 EvtScript N(spawnTuffPuff) = {
@@ -612,10 +609,10 @@ EvtScript N(spawnTuffPuff) = {
         EVT_CALL(SetTuffPuffPriority)
         EVT_IF_GT(LVarA, 0)
             EVT_SUB(LVarA, 1)
-            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_tuff_puff_large)), 0)
+            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_tuff_puff_large)), FALSE)
             EVT_CALL(SetActorVar, LVar0, 5, 2)
         EVT_ELSE
-            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_tuff_puff_small)), 0)
+            EVT_CALL(SummonEnemy, EVT_PTR(N(formation_tuff_puff_small)), FALSE)
             EVT_CALL(SetActorVar, LVar0, 5, 1)
         EVT_END_IF
         EVT_CALL(GetActorVar, ACTOR_SELF, N(VAR_TUFF_PUFF_BIT_ARRAY), LVar1)

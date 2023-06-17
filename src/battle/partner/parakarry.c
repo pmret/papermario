@@ -1,4 +1,3 @@
-#include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "hud_element.h"
@@ -727,12 +726,12 @@ EvtScript N(handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208C)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleParakarry_HurtStill)
             EVT_EXEC_WAIT(EVS_Partner_NoDamageHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SPIKE_CONTACT)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleParakarry_HurtStill)
             EVT_SET(LVar2, 22)
             EVT_EXEC_WAIT(EVS_Partner_SpikeContact)
@@ -754,7 +753,7 @@ EvtScript N(handleEvent) = {
             EVT_EXEC_WAIT(EVS_Partner_Drop)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleParakarry_HurtStill)
             EVT_SET(LVar2, 22)
             EVT_EXEC_WAIT(EVS_Partner_ShockHit)
@@ -769,7 +768,7 @@ EvtScript N(handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_18)
         EVT_CASE_OR_EQ(EVENT_BLOCK)
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208C)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleParakarry_OrientShell)
             EVT_EXEC_WAIT(EVS_Partner_NoDamageHit)
             EVT_WAIT(10)
@@ -801,7 +800,7 @@ EvtScript N(takeTurn) = {
 };
 
 EvtScript N(celebrate) = {
-    EVT_SET_CONST(LVar0, 1)
+    EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_SET_CONST(LVar1, ANIM_BattleParakarry_Celebrate)
     EVT_SET_CONST(LVar2, ANIM_BattleParakarry_Walk)
     EVT_SET_CONST(LVar3, ANIM_BattleParakarry_Idle)
@@ -854,7 +853,7 @@ EvtScript N(firstStrike) = {
 };
 
 EvtScript N(runAway) = {
-    EVT_SET_CONST(LVar0, 1)
+    EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_SET_CONST(LVar1, ANIM_BattleParakarry_Run)
     EVT_EXEC_WAIT(EVS_Partner_RunAway)
     EVT_RETURN
