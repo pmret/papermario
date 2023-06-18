@@ -657,8 +657,15 @@ API_CALLABLE(N(GetCoinCount)) {
 }
 
 #if VERSION_PAL
-API_CALLABLE(N(SetMsgVars_BlocksRemaining));
-INCLUDE_ASM(ApiStatus, "world/area_mgm/mgm_01/mgm_01_2_npc", mgm_01_SetMsgVars_BlocksRemaining)
+API_CALLABLE(N(SetMsgVars_BlocksRemaining)) {
+    Enemy * scorekeeper = get_enemy(SCOREKEEPER_ENEMY_IDX);
+    s32 remaining = (scorekeeper->varTable[TOTAL_BLOCKS_VAR_IDX] - scorekeeper->varTable[BROKEN_BLOCKS_VAR_IDX]) + 1;
+
+    set_message_value(remaining, 0);
+    evt_set_variable(script, LocalVar(13), remaining);
+
+    return ApiStatus_DONE2;
+}
 #else
 API_CALLABLE(N(SetMsgVars_BlocksRemaining)) {
     Enemy* scorekeeper = get_enemy(SCOREKEEPER_ENEMY_IDX);
