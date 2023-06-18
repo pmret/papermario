@@ -4,18 +4,6 @@ pipeline {
     }
 
     stages {
-        stage('Setup') {
-            steps {
-                sh 'curl -L "https://github.com/pmret/gcc-papermario/releases/download/master/linux.tar.gz" | tar zx -C tools/build/cc/gcc'
-                sh 'curl -L "https://github.com/pmret/binutils-papermario/releases/download/master/linux.tar.gz" | tar zx -C tools/build/cc/gcc'
-                sh 'curl -L "https://github.com/decompals/ido-static-recomp/releases/download/v0.2/ido-5.3-recomp-ubuntu-latest.tar.gz" | tar zx -C tools/build/cc/ido5.3'
-                sh 'curl -L "https://github.com/decompals/mips-gcc-2.7.2/releases/download/main/gcc-2.7.2-linux.tar.gz" | tar zx -C tools/build/cc/gcc2.7.2'
-                sh 'curl -L "https://github.com/decompals/mips-binutils-2.6/releases/download/main/binutils-2.6-linux.tar.gz" | tar zx -C tools/build/cc/gcc2.7.2'
-                sh 'pip install -U -r requirements.txt'
-                
-                stash includes: 'tools', name: 'tools'
-            }
-        }
         stage('Build') {
             matrix {
                 agent any
@@ -27,11 +15,22 @@ pipeline {
                 }
 
                 stages {
-                    stage('Build') {
+                    state('Setup') {
                         steps {
-                            unstash 'tools'
+                            sh 'curl -L "https://github.com/pmret/gcc-papermario/releases/download/master/linux.tar.gz" | tar zx -C tools/build/cc/gcc'
+                            sh 'curl -L "https://github.com/pmret/binutils-papermario/releases/download/master/linux.tar.gz" | tar zx -C tools/build/cc/gcc'
+                            sh 'curl -L "https://github.com/decompals/ido-static-recomp/releases/download/v0.2/ido-5.3-recomp-ubuntu-latest.tar.gz" | tar zx -C tools/build/cc/ido5.3'
+                            sh 'curl -L "https://github.com/decompals/mips-gcc-2.7.2/releases/download/main/gcc-2.7.2-linux.tar.gz" | tar zx -C tools/build/cc/gcc2.7.2'
+                            sh 'curl -L "https://github.com/decompals/mips-binutils-2.6/releases/download/main/binutils-2.6-linux.tar.gz" | tar zx -C tools/build/cc/gcc2.7.2'
+
+                            sh 'pip install -U -r requirements.txt'
+
                             sh 'cp /usr/local/etc/roms/papermario.${VERSION}.z64 ver/${VERSION}/baserom.z64'
                             sh './configure'
+                        }
+                    }
+                    stage('Build') {
+                        steps {
                             sh "bash -o pipefail -c 'ninja 2>&1 | tee build_log_${VERSION}.txt'"
                             sh 'mkdir reports'
                             sh 'python3 progress.py ${VERSION} --pr-comment >> reports/progress_${VERSION}.txt'
