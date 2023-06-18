@@ -13,7 +13,7 @@ pipeline {
                 sh 'curl -L "https://github.com/decompals/mips-binutils-2.6/releases/download/main/binutils-2.6-linux.tar.gz" | tar zx -C tools/build/cc/gcc2.7.2'
                 sh 'pip install -U -r requirements.txt'
                 
-                stash include: 'tools', name: 'tools'
+                stash includes: 'tools', name: 'tools'
             }
         }
         stage('Build') {
