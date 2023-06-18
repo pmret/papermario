@@ -15,7 +15,7 @@ pipeline {
                 }
 
                 stages {
-                    state('Setup') {
+                    stage('Setup') {
                         steps {
                             sh 'curl -L "https://github.com/pmret/gcc-papermario/releases/download/master/linux.tar.gz" | tar zx -C tools/build/cc/gcc'
                             sh 'curl -L "https://github.com/pmret/binutils-papermario/releases/download/master/linux.tar.gz" | tar zx -C tools/build/cc/gcc'
