@@ -6,10 +6,6 @@ pipeline {
     stages {
         stage('Setup') {
             steps {
-                sh 'cp /usr/local/etc/roms/papermario.us.z64 ver/us/baserom.z64'
-                sh 'cp /usr/local/etc/roms/papermario.jp.z64 ver/jp/baserom.z64'
-                sh 'cp /usr/local/etc/roms/papermario.ique.z64 ver/ique/baserom.z64'
-                sh 'cp /usr/local/etc/roms/papermario.pal.z64 ver/pal/baserom.z64'
                 sh 'curl -L "https://github.com/pmret/gcc-papermario/releases/download/master/linux.tar.gz" | tar zx -C tools/build/cc/gcc'
                 sh 'curl -L "https://github.com/pmret/binutils-papermario/releases/download/master/linux.tar.gz" | tar zx -C tools/build/cc/gcc'
                 sh 'curl -L "https://github.com/decompals/ido-static-recomp/releases/download/v0.2/ido-5.3-recomp-ubuntu-latest.tar.gz" | tar zx -C tools/build/cc/ido5.3'
@@ -20,8 +16,27 @@ pipeline {
             }
         }
         stage('Build') {
-            steps {
-                sh "bash -o pipefail -c 'ninja 2>&1 | tee build_log.txt'"
+            matrix {
+                agent any
+                axes {
+                    axis {
+                        name 'VERSION'
+                        values 'us', 'jp', 'ique', 'pal'
+                    }
+                }
+
+                stages {
+                    stage('Build') {
+                        steps {
+                            sh 'cp /usr/local/etc/roms/papermario.${VERSION}.z64 ver/${VERSION}/baserom.z64'
+                            sh "bash -o pipefail -c 'ninja 2>&1 | tee build_log.txt'"
+                            sh 'mkdir reports'
+                            sh 'python3 progress.py ${VERSION} --pr-comment >> reports/progress_${VERSION}.txt'
+                            sh 'python3 progress.py ${VERSION} --csv >> reports/progress_${VERSION}.csv'
+                            sh 'python3 progress.py ${VERSION} --shield-json > reports/progress_${VERSION}_shield.json'
+                        }
+                    }
+                }
             }
         }
         stage("Comment") {
@@ -33,10 +48,10 @@ pipeline {
             steps {
                 script {
                     if (env.CHANGE_ID) {
-                        def us_progress = sh(returnStdout: true, script: "python3 progress.py us --pr-comment").trim()
-                        def jp_progress = sh(returnStdout: true, script: "python3 progress.py jp --pr-comment").trim()
-                        def ique_progress = sh(returnStdout: true, script: "python3 progress.py ique --pr-comment").trim()
-                        def pal_progress = sh(returnStdout: true, script: "python3 progress.py pal --pr-comment").trim()
+                        def us_progress = sh(returnStdout: true, script: "cat reports/progress_us.txt").trim()
+                        def jp_progress = sh(returnStdout: true, script: "cat reports/progress_jp.txt").trim()
+                        def ique_progress = sh(returnStdout: true, script: "cat reports/progress_ique.txt").trim()
+                        def pal_progress = sh(returnStdout: true, script: "cat reports/progress_pal.txt").trim()
                         def warnings = sh(returnStdout: true, script: "./tools/warnings_count/check_new_warnings.sh --jenkins").trim()
                         def comment_id = -1
 
@@ -65,20 +80,6 @@ pipeline {
                 branch 'main'
             }
             steps {
-                sh 'mkdir reports'
-
-                sh 'python3 progress.py us --csv >> reports/progress_us.csv'
-                sh 'python3 progress.py us --shield-json > reports/progress_us_shield.json'
-
-                sh 'python3 progress.py jp --csv >> reports/progress_jp.csv'
-                sh 'python3 progress.py jp --shield-json > reports/progress_jp_shield.json'
-
-                sh 'python3 progress.py ique --csv >> reports/progress_ique.csv'
-                sh 'python3 progress.py ique --shield-json > reports/progress_ique_shield.json'
-
-                sh 'python3 progress.py pal --csv >> reports/progress_pal.csv'
-                sh 'python3 progress.py pal --shield-json > reports/progress_pal_shield.json'
-
                 sh 'cat build_log.txt | grep warning | sort > tools/warnings_count/warnings.txt'
                 sh 'cp tools/warnings_count/warnings.txt reports/warnings.txt'
 
