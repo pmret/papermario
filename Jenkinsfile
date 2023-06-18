@@ -12,7 +12,6 @@ pipeline {
                 sh 'curl -L "https://github.com/decompals/mips-gcc-2.7.2/releases/download/main/gcc-2.7.2-linux.tar.gz" | tar zx -C tools/build/cc/gcc2.7.2'
                 sh 'curl -L "https://github.com/decompals/mips-binutils-2.6/releases/download/main/binutils-2.6-linux.tar.gz" | tar zx -C tools/build/cc/gcc2.7.2'
                 sh 'pip install -U -r requirements.txt'
-                sh './configure'
             }
         }
         stage('Build') {
@@ -29,7 +28,8 @@ pipeline {
                     stage('Build') {
                         steps {
                             sh 'cp /usr/local/etc/roms/papermario.${VERSION}.z64 ver/${VERSION}/baserom.z64'
-                            sh "bash -o pipefail -c 'ninja 2>&1 | tee build_log.txt'"
+                            sh './configure'
+                            sh "bash -o pipefail -c 'ninja 2>&1 | tee build_log_${VERSION}.txt'"
                             sh 'mkdir reports'
                             sh 'python3 progress.py ${VERSION} --pr-comment >> reports/progress_${VERSION}.txt'
                             sh 'python3 progress.py ${VERSION} --csv >> reports/progress_${VERSION}.csv'
@@ -37,6 +37,14 @@ pipeline {
                         }
                     }
                 }
+            }
+        }
+        stage("Merge output") {
+            steps {
+                sh 'cat build_log_us.txt >> build_log.txt'
+                sh 'cat build_log_jp.txt >> build_log.txt'
+                sh 'cat build_log_ique.txt >> build_log.txt'
+                sh 'cat build_log_pal.txt >> build_log.txt'
             }
         }
         stage("Comment") {
