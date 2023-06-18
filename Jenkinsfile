@@ -12,6 +12,8 @@ pipeline {
                 sh 'curl -L "https://github.com/decompals/mips-gcc-2.7.2/releases/download/main/gcc-2.7.2-linux.tar.gz" | tar zx -C tools/build/cc/gcc2.7.2'
                 sh 'curl -L "https://github.com/decompals/mips-binutils-2.6/releases/download/main/binutils-2.6-linux.tar.gz" | tar zx -C tools/build/cc/gcc2.7.2'
                 sh 'pip install -U -r requirements.txt'
+                
+                stash include: 'tools', name: 'tools'
             }
         }
         stage('Build') {
@@ -27,6 +29,7 @@ pipeline {
                 stages {
                     stage('Build') {
                         steps {
+                            unstash 'tools'
                             sh 'cp /usr/local/etc/roms/papermario.${VERSION}.z64 ver/${VERSION}/baserom.z64'
                             sh './configure'
                             sh "bash -o pipefail -c 'ninja 2>&1 | tee build_log_${VERSION}.txt'"
