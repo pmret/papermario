@@ -193,24 +193,50 @@ API_CALLABLE(N(AwaitPlayerPressATimer)) {
     return ApiStatus_BLOCK;
 }
 
+#if VERSION_PAL
+struct N(BakingIngredient) {
+    s32 itemID;
+    s32 nameID;
+};
+struct N(BakingIngredient) N(BakingIngredientsNames)[] = {
+    ITEM_BAKING_FLOUR,      MSG_Menus_BakingFlour,
+    ITEM_BAKING_SUGAR,      MSG_Menus_BakingSugar,
+    ITEM_BAKING_SALT,       MSG_Menus_BakingSalt,
+    ITEM_BAKING_EGG,        MSG_Menus_BakingEgg,
+    ITEM_BAKING_MILK,       MSG_Menus_BakingMilk,
+    ITEM_BAKING_STRAWBERRY, MSG_Menus_BakingStrawberry,
+    ITEM_BAKING_CREAM,      MSG_Menus_BakingCream,
+    ITEM_BAKING_BUTTER,     MSG_Menus_BakingButter,
+    ITEM_BAKING_CLEANSER,   MSG_Menus_BakingCleanser,
+    ITEM_BAKING_WATER,      MSG_Menus_BakingWater,
+};
+#endif
+
+s32 N(BakingIngredientsList)[] = {
+    ITEM_BAKING_SUGAR,
+    ITEM_BAKING_SALT,
+    ITEM_BAKING_EGG,
+    ITEM_BAKING_STRAWBERRY,
+    ITEM_BAKING_CREAM,
+    ITEM_BAKING_BUTTER,
+    ITEM_BAKING_CLEANSER,
+    ITEM_BAKING_WATER,
+    ITEM_BAKING_FLOUR,
+    ITEM_BAKING_MILK,
+};
+
 // unlike the common import, does not mask out 0xF0000 from itemID
 #if VERSION_PAL
-extern s32 N(BakingIngredientsNames)[];
+
 API_CALLABLE(N(GetItemNameRaw)) {
     Bytecode* args = script->ptrReadPos;
-    s32       inOutVar = *args++;
-    s32       itemID   = evt_get_variable(script, inOutVar);
-    s32       i        = 0;
-    s32*      ingredientsNames = kkj_19_BakingIngredientsNames;
-    while (1) {
-        i += 1;
-        if (itemID == *ingredientsNames /* itemID */) {
-            evt_set_variable(script, inOutVar, *(ingredientsNames+1));
+    s32 inOutVar = args[0];
+    s32 itemID = evt_get_variable(script, inOutVar);
+    s32 i;
+    for (i = 0; i < ARRAY_COUNT(kkj_19_BakingIngredientsNames); i++) {
+        if (itemID == kkj_19_BakingIngredientsNames[i].itemID) {
+            evt_set_variable(script, inOutVar, kkj_19_BakingIngredientsNames[i].nameID);
             break;
-        } else {
-            ingredientsNames += 2;
-            if (i >= 10 /* number of ingredients */)
-                break;
         }
     }
     return ApiStatus_DONE2;
@@ -271,34 +297,6 @@ API_CALLABLE(N(FadeScreenFromBlack)) {
     set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, script->functionTemp[1]);
     return ApiStatus_BLOCK;
 }
-
-#if VERSION_PAL
-s32 N(BakingIngredientsNames)[] = {
-    ITEM_BAKING_FLOUR,      MSG_Menus_BakingFlour,
-    ITEM_BAKING_SUGAR,      MSG_Menus_BakingSugar,
-    ITEM_BAKING_SALT,       MSG_Menus_BakingSalt,
-    ITEM_BAKING_EGG,        MSG_Menus_BakingEgg,
-    ITEM_BAKING_MILK,       MSG_Menus_BakingMilk,
-    ITEM_BAKING_STRAWBERRY, MSG_Menus_BakingStrawberry,
-    ITEM_BAKING_CREAM,      MSG_Menus_BakingCream,
-    ITEM_BAKING_BUTTER,     MSG_Menus_BakingButter,
-    ITEM_BAKING_CLEANSER,   MSG_Menus_BakingCleanser,
-    ITEM_BAKING_WATER,      MSG_Menus_BakingWater,
-};
-#endif
-
-s32 N(BakingIngredientsList)[] = {
-    ITEM_BAKING_SUGAR,
-    ITEM_BAKING_SALT,
-    ITEM_BAKING_EGG,
-    ITEM_BAKING_STRAWBERRY,
-    ITEM_BAKING_CREAM,
-    ITEM_BAKING_BUTTER,
-    ITEM_BAKING_CLEANSER,
-    ITEM_BAKING_WATER,
-    ITEM_BAKING_FLOUR,
-    ITEM_BAKING_MILK,
-};
 
 EvtScript N(EVS_SetCookwareOnTable) = {
     EVT_SWITCH(AB_KKJ_CompletedBakeStep)
