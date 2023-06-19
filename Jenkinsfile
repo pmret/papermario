@@ -6,7 +6,7 @@ pipeline {
     }
 
     stages {
-        stage('Build') {
+        stage('Build versions') {
             matrix {
                 agent {
                     node {
@@ -23,7 +23,7 @@ pipeline {
                 }
 
                 stages {
-                    stage('Setup ${VERSION}') {
+                    stage('Setup') {
                         steps {
                             sh 'curl -L "https://github.com/pmret/gcc-papermario/releases/download/master/linux.tar.gz" | tar zx -C tools/build/cc/gcc'
                             sh 'curl -L "https://github.com/pmret/binutils-papermario/releases/download/master/linux.tar.gz" | tar zx -C tools/build/cc/gcc'
@@ -37,7 +37,7 @@ pipeline {
                             sh './configure'
                         }
                     }
-                    stage('Build ${VERSION}') {
+                    stage('Build') {
                         steps {
                             sh "bash -o pipefail -c 'ninja 2>&1 | tee build_log_${VERSION}.txt'"
                             sh 'mkdir -p reports'
