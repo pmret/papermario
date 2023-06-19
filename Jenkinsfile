@@ -1,5 +1,9 @@
 pipeline {
-    agent any
+    agent {
+        node {
+            label '!papermario'
+        }
+    }
 
     stages {
         stage('Build') {
