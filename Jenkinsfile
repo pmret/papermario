@@ -43,6 +43,12 @@ pipeline {
                         }
                     }
                 }
+
+                post {
+                    always {
+                        cleanWs()
+                    }
+                }
             }
         }
         stage("Merge output") {
