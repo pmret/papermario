@@ -4,12 +4,18 @@ pipeline {
     }
 
     stages {
+        stage('Foo')
+            steps {
+                sh 'printenv'
+            }
+        }
+    
         stage('Build') {
             matrix {
                 agent {
                     node {
                         label 'papermario'
-                        customWorkspace "workspace/${VERSION}/"
+                        customWorkspace "${WORKSPACE}/${VERSION}/"
                     }
                 }
     
