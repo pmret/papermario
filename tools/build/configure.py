@@ -385,6 +385,21 @@ class Configure:
 
         return out
 
+    # Given a directory relative to assets/, return a list of all assets in the directory
+    # for all layers of the asset stack
+    def get_asset_list(self, asset_dir: str) -> List[str]:
+        ret: Dict[Path, Path] = {}
+
+        for stack_dir in self.asset_stack:
+            path_stem = f"assets/{stack_dir}/{asset_dir}"
+
+            for p in Path(path_stem).glob("**/*"):
+                glob_part = p.relative_to(path_stem)
+                if glob_part not in ret:
+                    ret[glob_part] = p
+
+        return [str(v) for v in ret.values()]
+
     @cache
     def resolve_asset_path(self, path: Path) -> Path:
         parts = list(path.parts)
@@ -429,6 +444,7 @@ class Configure:
             task: str,
             variables: Dict[str, str] = {},
             implicit_outputs: List[str] = [],
+            asset_deps: List[str] = [],
         ):
             if not isinstance(object_paths, list):
                 object_paths = [object_paths]
@@ -465,6 +481,9 @@ class Configure:
                 elif task in ["cc", "cxx", "cc_modern"]:
                     order_only.append("generated_headers_" + self.version)
 
+                inputs = self.resolve_src_paths(src_paths)
+                for dir in asset_deps:
+                    inputs.extend(self.get_asset_list(dir))
                 ninja.build(
                     outputs=object_strs,  # $out
                     rule=task,
@@ -742,6 +761,7 @@ class Configure:
                         "asset_stack": ",".join(self.asset_stack),
                     },
                     implicit_outputs=[sprite_player_header_path],
+                    asset_deps=["sprite/player"],
                 )
 
                 # Sprites .o
