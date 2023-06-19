@@ -6,7 +6,6 @@ pipeline {
     stages {
         stage('Build') {
             matrix {
-                agent any
                 axes {
                     axis {
                         name 'VERSION'
