@@ -1,8 +1,4 @@
 pipeline {
-    agent {
-        label 'papermario'
-    }
-
     stages {
         stage('Build') {
             matrix {
