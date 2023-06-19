@@ -19,9 +19,8 @@ pipeline {
                 }
 
                 stages {
-                    stage('Setup') {
+                    stage('Setup ${VERSION}') {
                         steps {
-                            sh 'pwd'
                             sh 'curl -L "https://github.com/pmret/gcc-papermario/releases/download/master/linux.tar.gz" | tar zx -C tools/build/cc/gcc'
                             sh 'curl -L "https://github.com/pmret/binutils-papermario/releases/download/master/linux.tar.gz" | tar zx -C tools/build/cc/gcc'
                             sh 'curl -L "https://github.com/decompals/ido-static-recomp/releases/download/v0.2/ido-5.3-recomp-ubuntu-latest.tar.gz" | tar zx -C tools/build/cc/ido5.3'
@@ -31,11 +30,10 @@ pipeline {
                             sh 'pip install -U -r requirements.txt'
 
                             sh 'cp /usr/local/etc/roms/papermario.${VERSION}.z64 ver/${VERSION}/baserom.z64'
-                            sh 'find ver'
                             sh './configure'
                         }
                     }
-                    stage('Build') {
+                    stage('Build ${VERSION}') {
                         steps {
                             sh "bash -o pipefail -c 'ninja 2>&1 | tee build_log_${VERSION}.txt'"
                             sh 'mkdir reports'
