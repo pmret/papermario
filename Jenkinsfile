@@ -44,6 +44,8 @@ pipeline {
                             sh 'python3 progress.py ${VERSION} --pr-comment >> reports/progress_${VERSION}.txt'
                             sh 'python3 progress.py ${VERSION} --csv >> reports/progress_${VERSION}.csv'
                             sh 'python3 progress.py ${VERSION} --shield-json > reports/progress_${VERSION}_shield.json'
+
+                            stash(name:"reports-${VERSION}", includes:'reports/*,build_log_*.txt')
                         }
                     }
                 }
@@ -57,6 +59,10 @@ pipeline {
         }
         stage("Merge output") {
             steps {
+                unstash 'reports-us'
+                unstash 'reports-jp'
+                unstash 'reports-ique'
+                unstash 'reports-pal'
                 sh 'cat build_log_us.txt >> build_log.txt'
                 sh 'cat build_log_jp.txt >> build_log.txt'
                 sh 'cat build_log_ique.txt >> build_log.txt'
