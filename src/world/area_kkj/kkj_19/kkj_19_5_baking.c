@@ -233,6 +233,7 @@ API_CALLABLE(N(GetItemNameRaw)) {
     s32 inOutVar = *args++;
     s32 itemID = evt_get_variable(script, inOutVar);
     s32 i;
+
     for (i = 0; i < ARRAY_COUNT(kkj_19_BakingIngredientsNames); i++) {
         if (itemID == kkj_19_BakingIngredientsNames[i].itemID) {
             evt_set_variable(script, inOutVar, kkj_19_BakingIngredientsNames[i].nameID);
