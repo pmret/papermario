@@ -36,7 +36,7 @@ pipeline {
                     stage('Build ${VERSION}') {
                         steps {
                             sh "bash -o pipefail -c 'ninja 2>&1 | tee build_log_${VERSION}.txt'"
-                            sh 'mkdir reports'
+                            sh 'mkdir -p reports'
                             sh 'python3 progress.py ${VERSION} --pr-comment >> reports/progress_${VERSION}.txt'
                             sh 'python3 progress.py ${VERSION} --csv >> reports/progress_${VERSION}.csv'
                             sh 'python3 progress.py ${VERSION} --shield-json > reports/progress_${VERSION}_shield.json'
