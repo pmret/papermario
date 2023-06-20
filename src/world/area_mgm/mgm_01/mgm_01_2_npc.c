@@ -662,7 +662,7 @@ API_CALLABLE(N(SetMsgVars_BlocksRemaining)) {
     s32 remaining = (scorekeeper->varTable[TOTAL_BLOCKS_VAR_IDX] - scorekeeper->varTable[BROKEN_BLOCKS_VAR_IDX]) + 1;
 
     set_message_value(remaining, 0);
-    evt_set_variable(script, LocalVar(13), remaining);
+    evt_set_variable(script, LVarD, remaining);
 
     return ApiStatus_DONE2;
 }
