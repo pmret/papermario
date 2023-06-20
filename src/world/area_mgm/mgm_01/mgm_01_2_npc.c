@@ -658,7 +658,7 @@ API_CALLABLE(N(GetCoinCount)) {
 
 #if VERSION_PAL
 API_CALLABLE(N(SetMsgVars_BlocksRemaining)) {
-    Enemy * scorekeeper = get_enemy(SCOREKEEPER_ENEMY_IDX);
+    Enemy* scorekeeper = get_enemy(SCOREKEEPER_ENEMY_IDX);
     s32 remaining = (scorekeeper->varTable[TOTAL_BLOCKS_VAR_IDX] - scorekeeper->varTable[BROKEN_BLOCKS_VAR_IDX]) + 1;
 
     set_message_value(remaining, 0);

@@ -194,10 +194,10 @@ API_CALLABLE(N(AwaitPlayerPressATimer)) {
 }
 
 #if VERSION_PAL
-struct N(BakingIngredient) {
+typedef struct BakingIngredient {
     s32 itemID;
     s32 nameID;
-};
+} BakingIngredient;
 struct N(BakingIngredient) N(BakingIngredientsNames)[] = {
     ITEM_BAKING_FLOUR,      MSG_Menus_BakingFlour,
     ITEM_BAKING_SUGAR,      MSG_Menus_BakingSugar,
