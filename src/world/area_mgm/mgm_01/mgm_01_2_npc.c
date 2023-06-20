@@ -656,27 +656,19 @@ API_CALLABLE(N(GetCoinCount)) {
     return ApiStatus_DONE2;
 }
 
+API_CALLABLE(N(SetMsgVars_BlocksRemaining)) {
+    Enemy* scorekeeper = get_enemy(SCOREKEEPER_ENEMY_IDX);
+    s32 remaining = (scorekeeper->varTable[TOTAL_BLOCKS_VAR_IDX] - scorekeeper->varTable[BROKEN_BLOCKS_VAR_IDX]) + 1;
+
+    set_message_value(remaining, 0);
 #if VERSION_PAL
-API_CALLABLE(N(SetMsgVars_BlocksRemaining)) {
-    Enemy* scorekeeper = get_enemy(SCOREKEEPER_ENEMY_IDX);
-    s32 remaining = (scorekeeper->varTable[TOTAL_BLOCKS_VAR_IDX] - scorekeeper->varTable[BROKEN_BLOCKS_VAR_IDX]) + 1;
-
-    set_message_value(remaining, 0);
     evt_set_variable(script, LVarD, remaining);
-
-    return ApiStatus_DONE2;
-}
 #else
-API_CALLABLE(N(SetMsgVars_BlocksRemaining)) {
-    Enemy* scorekeeper = get_enemy(SCOREKEEPER_ENEMY_IDX);
-    s32 remaining = (scorekeeper->varTable[TOTAL_BLOCKS_VAR_IDX] - scorekeeper->varTable[BROKEN_BLOCKS_VAR_IDX]) + 1;
-
-    set_message_value(remaining, 0);
     set_message_msg((remaining == 1) ? (s32)&MessageSingular : (s32)&MessagePlural, 1);
+#endif
 
     return ApiStatus_DONE2;
 }
-#endif
 
 API_CALLABLE(N(HideCoinCounter)) {
     hide_coin_counter_immediately();
