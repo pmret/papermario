@@ -198,17 +198,17 @@ typedef struct BakingIngredient {
     s32 itemID;
     s32 nameID;
 } BakingIngredient;
-struct N(BakingIngredient) N(BakingIngredientsNames)[] = {
-    ITEM_BAKING_FLOUR,      MSG_Menus_BakingFlour,
-    ITEM_BAKING_SUGAR,      MSG_Menus_BakingSugar,
-    ITEM_BAKING_SALT,       MSG_Menus_BakingSalt,
-    ITEM_BAKING_EGG,        MSG_Menus_BakingEgg,
-    ITEM_BAKING_MILK,       MSG_Menus_BakingMilk,
-    ITEM_BAKING_STRAWBERRY, MSG_Menus_BakingStrawberry,
-    ITEM_BAKING_CREAM,      MSG_Menus_BakingCream,
-    ITEM_BAKING_BUTTER,     MSG_Menus_BakingButter,
-    ITEM_BAKING_CLEANSER,   MSG_Menus_BakingCleanser,
-    ITEM_BAKING_WATER,      MSG_Menus_BakingWater,
+struct BakingIngredient N(BakingIngredientsNames)[] = {
+    {ITEM_BAKING_FLOUR,      MSG_Menus_BakingFlour},
+    {ITEM_BAKING_SUGAR,      MSG_Menus_BakingSugar},
+    {ITEM_BAKING_SALT,       MSG_Menus_BakingSalt},
+    {ITEM_BAKING_EGG,        MSG_Menus_BakingEgg},
+    {ITEM_BAKING_MILK,       MSG_Menus_BakingMilk},
+    {ITEM_BAKING_STRAWBERRY, MSG_Menus_BakingStrawberry},
+    {ITEM_BAKING_CREAM,      MSG_Menus_BakingCream},
+    {ITEM_BAKING_BUTTER,     MSG_Menus_BakingButter},
+    {ITEM_BAKING_CLEANSER,   MSG_Menus_BakingCleanser},
+    {ITEM_BAKING_WATER,      MSG_Menus_BakingWater},
 };
 #endif
 
@@ -234,9 +234,9 @@ API_CALLABLE(N(GetItemNameRaw)) {
     s32 itemID = evt_get_variable(script, inOutVar);
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(kkj_19_BakingIngredientsNames); i++) {
-        if (itemID == kkj_19_BakingIngredientsNames[i].itemID) {
-            evt_set_variable(script, inOutVar, kkj_19_BakingIngredientsNames[i].nameID);
+    for (i = 0; i < ARRAY_COUNT(N(BakingIngredientsNames)); i++) {
+        if (itemID == N(BakingIngredientsNames)[i].itemID) {
+            evt_set_variable(script, inOutVar, N(BakingIngredientsNames)[i].nameID);
             break;
         }
     }
