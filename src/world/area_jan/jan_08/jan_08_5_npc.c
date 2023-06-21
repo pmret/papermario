@@ -1,4 +1,5 @@
 #include "jan_08.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/YoshiKid.inc.c"
 #include "world/common/enemy/MBush.inc.c"
@@ -6,7 +7,6 @@
 
 #include "world/common/enemy/HurtPlant.inc.c"
 #include "world/common/enemy/SpearGuy_Wander.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_YoshiKid_CryForHelp) = {
     EVT_SET(AF_JAN_02, FALSE)

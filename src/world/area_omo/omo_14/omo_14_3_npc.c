@@ -1,5 +1,6 @@
 #include "omo_14.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(SurroundPlayer)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -78,7 +79,6 @@ API_CALLABLE(N(IsPartnerWatt)) {
 }
 
 #include "world/common/enemy/ShyGuy_Stationary.inc.c"
-#include "sprite/player.h"
 
 Vec2i N(CrowdChaseGoalPositions)[] = {
     { 200,   0 },

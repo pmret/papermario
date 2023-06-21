@@ -1,5 +1,6 @@
 #include "kzn_20.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 enum {
     SCENE_STATE_BEGIN                   = 15,
@@ -19,7 +20,6 @@ enum {
 #include "world/common/npc/StarSpirit.inc.c"
 
 #include "world/common/complete/LetterDelivery.inc.c"
-#include "sprite/player.h"
 
 s32 N(LetterList)[] = {
     ITEM_LETTER_TO_KOLORADO,

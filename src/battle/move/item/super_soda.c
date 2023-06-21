@@ -2,6 +2,7 @@
 #include "script_api/battle.h"
 #include "effects.h"
 #include "entity.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_item_super_soda
 
@@ -92,7 +93,6 @@ API_CALLABLE(N(ShowFlowerRecoveryFX)) {
 #include "common/AddFP.inc.c"
 
 #include "battle/common/move/UseItem.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_UseOnPartner) = {
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 30)

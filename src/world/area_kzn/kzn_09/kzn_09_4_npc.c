@@ -1,4 +1,5 @@
 #include "kzn_09.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/Kolorado.inc.c"
 
@@ -12,7 +13,6 @@ NpcSettings N(NpcSettings_Zipline) = {
 };
 
 #include "world/common/complete/LetterDelivery.inc.c"
-#include "sprite/player.h"
 
 s32 N(LetterList)[] = {
     ITEM_LETTER_TO_KOLORADO,

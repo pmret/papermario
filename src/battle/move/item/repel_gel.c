@@ -1,6 +1,7 @@
 #include "common.h"
 #include "script_api/battle.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_item_repel_gel
 
@@ -19,7 +20,6 @@ API_CALLABLE(N(func_802A123C_72DDAC)) {
 }
 
 #include "battle/common/move/UseItem.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_REPEL_GEL)

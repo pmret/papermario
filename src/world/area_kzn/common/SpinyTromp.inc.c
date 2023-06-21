@@ -1,5 +1,6 @@
 #include "common.h"
 #include "world/area_kzn/kzn.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(SpinyTrompHit)) {
     subtract_hp(1);
@@ -26,7 +27,6 @@ API_CALLABLE(N(SpinyTromp_GetActingPartner)) {
 #include "world/common/todo/UnkFunc50.inc.c"
 
 #include "world/common/todo/UnkFunc51.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(D_80240D10_C7EE90) = {
     EVT_CALL(DisablePlayerInput, TRUE)

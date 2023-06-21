@@ -1,5 +1,6 @@
 #include "dro_02.h"
 #include "model.h"
+#include "sprite/player.h"
 
 // cards used during Merlee's ritual
 typedef struct RitualCard {
@@ -70,7 +71,6 @@ s32 N(pad_XX111)[] = { 0 };
 #include "world/area_dro/dro_02/card_setup.gfx.inc.c"
 #include "world/area_dro/dro_02/card_1.gfx.inc.c"
 #include "world/area_dro/dro_02/card_2.gfx.inc.c"
-#include "sprite/player.h"
 
 void N(card_worker_update)(void);
 void N(card_worker_render)(void);

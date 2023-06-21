@@ -1,3 +1,4 @@
+#include "sprite/player.h"
 
 API_CALLABLE(N(UpgradeStarPowerCh4)) {
     PlayerData* playerData = &gPlayerData;
@@ -220,4 +221,3 @@ EvtScript N(EVS_NpcInit_Muskular) = {
     EVT_RETURN
     EVT_END
 };
-#include "sprite/player.h"

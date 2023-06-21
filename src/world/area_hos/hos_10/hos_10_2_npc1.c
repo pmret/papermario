@@ -1,4 +1,5 @@
 #include "hos_10.h"
+#include "sprite/player.h"
 
 #define NAME_SUFFIX _Descent
 
@@ -10,7 +11,6 @@ NpcSettings N(NpcSettings_Dummy) = {
 
 #include "world/common/npc/Twink.h"
 #include "world/common/npc/StarSpirit.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_NpcInit_Peach) = {
     EVT_CALL(SetNpcPos, NPC_Peach, -100, 200, 1300)

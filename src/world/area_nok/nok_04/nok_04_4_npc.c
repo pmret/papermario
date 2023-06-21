@@ -1,6 +1,7 @@
 
 #include "nok_04.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #define NUM_THREAD_SEGMENTS 16
 
@@ -38,7 +39,6 @@ s32 N(TreeHidingSpotPositions)[] = {
 };
 
 #include "common/CosInterpMinMax.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_AnimBranch_JumpTo) = {
     EVT_SET(LVar2, LVar0)

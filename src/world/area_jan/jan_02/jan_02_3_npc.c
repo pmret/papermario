@@ -1,4 +1,5 @@
 #include "jan_02.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/Yoshi.inc.c"
 #include "world/common/npc/Yoshi_Patrol.inc.c"
@@ -10,7 +11,6 @@
 #include "world/common/complete/Quizmo.inc.c"
 
 #include "world/common/todo/SwitchToPartner.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_GetRescuedYoshiCount) = {
     EVT_SET(LVar0, 0)

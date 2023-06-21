@@ -1,6 +1,7 @@
 #include "../area.h"
 #include "sprite/npc/BabyBlooper.h"
 #include "battle/action_cmd/stop_leech.h"
+#include "sprite/player.h"
 
 #define NAMESPACE A(blooper_baby)
 
@@ -206,7 +207,6 @@ ActorBlueprint NAMESPACE = {
 
 #include "common/StartRumbleWithParams.inc.c"
 #include "common/SpawnEnemyDrainFX.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(init) = {
     EVT_CALL(BindTakeTurn, ACTOR_SELF, EVT_PTR(N(takeTurn)))

@@ -2,6 +2,7 @@
 #include "script_api/battle.h"
 #include "ld_addrs.h"
 #include "entity.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_item_pebble
 
@@ -13,7 +14,6 @@ static s32 _pad = 0;
 #include "battle/move/item/pebble.png.h"
 #include "battle/move/item/pebble.png.inc.c"
 #include "battle/move/item/pebble.pal.inc.c"
-#include "sprite/player.h"
 
 Vtx N(model)[] = {
     { .v = { { -16, -16, 0 }, FALSE, { 0,    0 },    { 0, 0, 0, 255 } } },

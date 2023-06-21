@@ -1,4 +1,5 @@
 #include "kmr_03.h"
+#include "sprite/player.h"
 
 #include "world/common/util/ChangeNpcToPartner.inc.c"
 
@@ -12,7 +13,6 @@ API_CALLABLE(N(func_802401B0_8C8140)) {
 }
 
 #include "world/common/util/CheckPositionRelativeToPlane.inc.c"
-#include "sprite/player.h"
 
 NpcSettings N(NpcSettings_Goompa) = {
     .height = 22,

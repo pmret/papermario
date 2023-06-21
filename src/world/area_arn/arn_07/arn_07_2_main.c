@@ -1,8 +1,8 @@
 #include "arn_07.h"
+#include "sprite/player.h"
 
 #define STAR_SPIRIT_DATA_VAR MV_Unk_01
 #include "world/common/todo/StarSpiritEffectFunc.inc.c"
-#include "sprite/player.h"
 
 s32 N(KeyList)[] = {
     ITEM_MYSTICAL_KEY,

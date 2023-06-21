@@ -1,5 +1,6 @@
 #include "sam_12.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(SetScreenFadeAmount)) {
     Bytecode* args = script->ptrReadPos;
@@ -23,7 +24,6 @@ API_CALLABLE(N(SetItemPositionF)) {
 }
 
 #include "world/common/todo/PlayRisingBubble.inc.c"
-#include "sprite/player.h"
 
 API_CALLABLE(N(SpawnSleepBubble)) {
     Bytecode* args = script->ptrReadPos;

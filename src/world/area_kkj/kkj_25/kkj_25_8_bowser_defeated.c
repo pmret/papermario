@@ -1,5 +1,6 @@
 #include "kkj_25.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #include "sprite/npc/WorldGoombario.h"
 #include "sprite/npc/WorldKooper.h"
@@ -20,7 +21,6 @@
 #define NAME_SUFFIX _Unused2A
 #include "world/common/npc/StarSpirit.inc.c"
 #include "world/common/npc/StarRod.inc.c"
-#include "sprite/player.h"
 #define NAME_SUFFIX
 
 API_CALLABLE(N(FadeScreenToRedAndWhite)) {

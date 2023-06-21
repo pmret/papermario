@@ -1,10 +1,10 @@
 #include "hos_06.h"
 #include "effects.h"
 #include "model.h"
+#include "sprite/player.h"
 
 #include "world/common/complete/KeyItemChoice.inc.c"
 #include "world/common/complete/GiveReward.inc.c"
-#include "sprite/player.h"
 
 u8 N(HintPrices)[] = {
     5, 20, 30

@@ -1,6 +1,7 @@
 #include "kmr_20.h"
 #include "effects.h"
 #include "animation_script.h"
+#include "sprite/player.h"
 
 extern AnimScript Entity_SimpleSpring_AnimLaunch;
 
@@ -21,7 +22,6 @@ API_CALLABLE(N(PlaySpringLaunchAnimation)) {
 }
 
 #include "world/common/atomic/MarioSalute.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_KootFavorCheck_Luigi) = {
     EVT_IF_NE(GB_KootFavor_Current, KOOT_FAVOR_CH3_1)

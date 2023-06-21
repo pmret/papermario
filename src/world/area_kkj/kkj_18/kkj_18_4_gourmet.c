@@ -1,9 +1,9 @@
 #include "kkj_18.h"
+#include "sprite/player.h"
 
 #include "world/common/complete/KeyItemChoice.inc.c"
 MAP_STATIC_PAD(1,item_choice);
 #include "world/common/complete/NormalItemChoice.inc.c"
-#include "sprite/player.h"
 
 API_CALLABLE(N(SetHeldBakingItem)) {
     Bytecode* args = script->ptrReadPos;

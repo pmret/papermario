@@ -1,4 +1,5 @@
 #include "kkj_25.h"
+#include "sprite/player.h"
 
 #define NAME_SUFFIX _Npc1
 
@@ -8,7 +9,6 @@
 
 #include "world/common/npc/Peach.h"
 #include "world/common/npc/Twink.h"
-#include "sprite/player.h"
 
 EvtScript N(EVS_NpcIdle_Bowser) = {
     EVT_CALL(SetSelfVar, 0, 0)

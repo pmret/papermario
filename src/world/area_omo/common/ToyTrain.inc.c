@@ -1,4 +1,5 @@
 #include "common.h"
+#include "sprite/player.h"
 
 #include "world/common/todo/UnsetCamera0MoveFlag1.inc.c"
 
@@ -15,7 +16,6 @@
 #include "common/CosInterpMinMax.inc.c"
 
 #include "common/IsAOrBPressed.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_Scene_RideTrain) = {
     EVT_MALLOC_ARRAY(20, LVar0)

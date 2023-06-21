@@ -1,4 +1,5 @@
 #include "jan_11.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/YoshiKid.inc.c"
 
@@ -16,7 +17,6 @@ EvtScript N(EVS_YoshiKid_CryForHelp) = {
 };
 
 #include "world/common/todo/GetFloorCollider.inc.c"
-#include "sprite/player.h"
 
 API_CALLABLE(N(IsPartnerWatt)) {
     if (gPartnerStatus.actingPartner == PARTNER_WATT) {

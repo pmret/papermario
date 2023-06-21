@@ -1,8 +1,8 @@
 #include "kpa_14.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "sprite/player.h"
 
 API_CALLABLE(N(GetActingPartner)) {
     if (gPartnerStatus.partnerActionState != 0) {

@@ -1,4 +1,5 @@
 #include "mac_05.h"
+#include "sprite/player.h"
 
 NpcSettings N(NpcSettings_Whale) = {
     .height = 24,
@@ -685,7 +686,6 @@ EvtScript N(D_80249D80_85BEF0) = {
 };
 
 #include "world/common/todo/GetFloorCollider.inc.c"
-#include "sprite/player.h"
 
 API_CALLABLE(N(func_802430B4_855224)) {
     Bytecode* args = script->ptrReadPos;

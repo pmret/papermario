@@ -1,13 +1,13 @@
 #include "common.h"
 #include "script_api/battle.h"
 #include "sprite/npc/BattleMuskular.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_move_chill_out
 
 BSS s32 D_802A2CC0;
 
 #include "common/StarPower.inc.c"
-#include "sprite/player.h"
 
 API_CALLABLE(func_802A1518_7905E8) {
     D_802A2CC0 = 0;

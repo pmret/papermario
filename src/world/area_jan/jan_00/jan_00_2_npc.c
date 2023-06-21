@@ -1,6 +1,7 @@
 #include "jan_00.h"
 #include "effects.h"
 #include "npc.h"
+#include "sprite/player.h"
 
 NpcSettings N(NpcSettings_Kolorado_01) = {
     .height = 24,
@@ -13,7 +14,6 @@ NpcSettings N(NpcSettings_Kolorado_01) = {
 #include "world/common/enemy/HeartPlant.inc.c"
 
 #include "world/common/complete/LetterDelivery.inc.c"
-#include "sprite/player.h"
 
 s32 N(LetterList)[] = {
     ITEM_LETTER_TO_KOLORADO,

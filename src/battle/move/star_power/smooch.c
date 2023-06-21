@@ -1,13 +1,13 @@
 #include "common.h"
 #include "script_api/battle.h"
 #include "sprite/npc/BattleMisstar.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_move_smooch
 
 #include "common/StarPower.inc.c"
 
 #include "common/AddHP.inc.c"
-#include "sprite/player.h"
 
 API_CALLABLE(func_802A156C_7922FC) {
     Bytecode* args = script->ptrReadPos;

@@ -1,4 +1,5 @@
 #include "flo_08.h"
+#include "sprite/player.h"
 
 #include "world/common/enemy/AmazyDayzee.inc.c"
 #include "world/common/npc/GateFlower.inc.c"
@@ -8,7 +9,6 @@
 
 static s32 N(FlowerGuard_ItemChoiceList)[ITEM_NUM_CONSUMABLES + 1];
 #include "world/area_flo/common/ItemChoice_FlowerGuard.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_NpcInteract_GateFlower) = {
     EVT_CALL(DisablePlayerInput, TRUE)

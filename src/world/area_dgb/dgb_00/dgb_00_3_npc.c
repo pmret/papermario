@@ -1,5 +1,6 @@
 #include "dgb_00.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(PlaySentinelSounds)) {
     Npc* npc = get_npc_unsafe(get_enemy(NPC_Sentinel)->npcID);
@@ -11,7 +12,6 @@ API_CALLABLE(N(PlaySentinelSounds)) {
 #include "world/common/npc/Boo.inc.c"
 #include "world/common/npc/Dummy.inc.c"
 #include "world/common/enemy/Sentinel.h"
-#include "sprite/player.h"
 
 EvtScript N(EVS_SetDoorRots) = {
     EVT_SET(LVar3, 0)

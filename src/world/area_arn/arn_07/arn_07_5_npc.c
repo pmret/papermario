@@ -1,12 +1,12 @@
 #include "arn_07.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #include "world/common/enemy/HyperParagoomba.inc.c"
 #include "world/common/npc/TubbasHeart.inc.c"
 #include "world/common/enemy/TubbaBlubba.inc.c"
 #include "world/common/npc/Boo.inc.c"
 #include "world/common/npc/StarSpirit.inc.c"
-#include "sprite/player.h"
 
 API_CALLABLE(N(UpgradeStarPowerCh3)) {
     set_max_SP(3);

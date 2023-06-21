@@ -3,6 +3,7 @@
 #include "sprite/npc/BattleKolorado.h"
 #include "sprite/npc/LavaBud.h"
 #include "sprite/npc/PetitPiranha.h"
+#include "sprite/player.h"
 #include "animation_script.h"
 #include "entity.h"
 #include "ld_addrs.h"
@@ -269,7 +270,6 @@ ActorBlueprint NAMESPACE = {
 };
 
 #include "common/StartRumbleWithParams.inc.c"
-#include "sprite/player.h"
 
 enum {
     VINE_0      = 0,

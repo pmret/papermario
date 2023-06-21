@@ -2,6 +2,7 @@
 #include "script_api/battle.h"
 #include "battle/action_cmd/jump.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_move_jump_charge_2
 
@@ -40,7 +41,6 @@ API_CALLABLE(N(func_802A1108_74D678)) {
 }
 
 #include "world/common/todo/UnkMoveFunc3.inc.c"
-#include "sprite/player.h"
 
 API_CALLABLE(N(func_802A133C_761C5C)) {
     if (D_802A2C20 == 0) {

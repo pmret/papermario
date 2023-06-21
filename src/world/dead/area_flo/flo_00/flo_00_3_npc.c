@@ -1,4 +1,5 @@
 #include "flo_00.h"
+#include "sprite/player.h"
 
 NpcSettings N(NpcSettings_Dummy) = {
     .height = 24,
@@ -9,7 +10,6 @@ NpcSettings N(NpcSettings_Dummy) = {
 #include "world/common/npc/Bubulb_Patrol.inc.c"
 #include "world/common/npc/Tolielup.inc.c"
 #include "world/common/npc/StarSpirit.inc.c"
-#include "sprite/player.h"
 
 API_CALLABLE(N(UpgradeStarPowerCh6)) {
     set_max_SP(6);

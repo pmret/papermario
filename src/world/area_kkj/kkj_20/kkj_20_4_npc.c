@@ -1,4 +1,5 @@
 #include "kkj_20.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/Toad_Stationary.inc.c"
 
@@ -7,7 +8,6 @@
 #include "world/common/atomic/ToadHouse.data.inc.c"
 
 #include "world/common/todo/GetPeachDisguise.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_OpenDresserDoors) = {
     EVT_CALL(PlaySoundAtCollider, COLLIDER_o80, SOUND_1CF, 0)

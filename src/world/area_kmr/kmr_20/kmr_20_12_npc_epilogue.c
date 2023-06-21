@@ -1,9 +1,9 @@
 #include "kmr_20.h"
 #include "model.h"
+#include "sprite/player.h"
 
 #define NAME_SUFFIX _Epilogue
 #include "world/common/entity/Pipe.inc.c"
-#include "sprite/player.h"
 #define NAME_SUFFIX
 
 API_CALLABLE(N(func_80242030_8EDE50)) {

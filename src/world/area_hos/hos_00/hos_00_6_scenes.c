@@ -1,4 +1,5 @@
 #include "hos_00.h"
+#include "sprite/player.h"
 
 #include "world/common/complete/GiveReward.inc.c"
 
@@ -101,7 +102,6 @@ API_CALLABLE(N(UpdateMagikoopaAngles)) {
 }
 
 #include "world/common/todo/SetCamera0Flag1000.inc.c"
-#include "sprite/player.h"
 
 API_CALLABLE(N(AddOffsetForCamPos)) {
     s32 baseX = script->varTable[0];

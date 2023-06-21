@@ -1,5 +1,6 @@
 #include "obk_04.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 // redundant, but useful for documentation
 enum {
@@ -14,7 +15,6 @@ enum {
 };
 
 #include "world/common/complete/GiveReward.inc.c"
-#include "sprite/player.h"
 
 API_CALLABLE(N(GetKeepAwayCarrierYaw)) {
     Npc* npc1 = get_npc_unsafe(NPC_KeepAwayBoo1);

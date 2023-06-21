@@ -1,6 +1,7 @@
 #include "common.h"
 #include "effects.h"
 #include "entity.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_move_hammer_throw
 
@@ -26,7 +27,6 @@ static s32 pad_images = 0;
 #include "battle/move/hammer/basic_hammer.gfx.inc.c"
 #include "battle/move/hammer/super_hammer.gfx.inc.c"
 #include "battle/move/hammer/ultra_hammer.gfx.inc.c"
-#include "sprite/player.h"
 
 EntityModelScript N(EMS_DustyHammer) = STANDARD_ENTITY_MODEL_SCRIPT(N(dusty_hammer_gfx), RENDER_MODE_ALPHATEST);
 EntityModelScript N(EMS_BasicHammer) = STANDARD_ENTITY_MODEL_SCRIPT(N(basic_hammer_gfx), RENDER_MODE_ALPHATEST);

@@ -2,6 +2,7 @@
 #include "script_api/battle.h"
 #include "model.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_item_fright_jar
 
@@ -26,7 +27,6 @@ API_CALLABLE(N(func_802A12D4_72BBE4)) {
 }
 
 #include "battle/common/move/UseItem.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_FRIGHT_JAR)

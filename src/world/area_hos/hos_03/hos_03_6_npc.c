@@ -1,4 +1,5 @@
 #include "hos_03.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/StarSpirit.inc.c"
 #include "world/common/npc/StarSpirit_Wander.inc.c"
@@ -9,7 +10,6 @@
 
 #define CHUCK_QUIZMO_NPC_ID NPC_ChuckQuizmo
 #include "world/common/complete/Quizmo.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_NpcInteract_StarKid_01) = {
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_StarMan_Talk, ANIM_StarMan_Idle, 0, MSG_HOS_005F)

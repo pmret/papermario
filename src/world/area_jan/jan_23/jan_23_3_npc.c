@@ -1,8 +1,8 @@
 #include "jan_23.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/RaphaelRaven.inc.c"
 #include "world/common/npc/Raven.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_Ravens_Converse) = {
     EVT_LOOP(4)

@@ -2,6 +2,7 @@
 #include "sprite/npc/Buzzar.h"
 #include "battle/action_cmd/break_free.h"
 #include "battle/action_cmd/whirlwind.h"
+#include "sprite/player.h"
 
 #define NAMESPACE A(buzzar)
 
@@ -295,7 +296,6 @@ EvtScript N(EVS_TakeTurn) = {
 };
 
 #include "common/StartRumbleWithParams.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_Attack_WindBlast) = {
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)

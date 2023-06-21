@@ -1,4 +1,5 @@
 #include "mac_04.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/Toad_Wander.inc.c"
 #include "world/common/npc/Toad_Stationary.inc.c"
@@ -168,7 +169,6 @@ API_CALLABLE(N(EnforceNewStatLimits)) {
 #include "npc_toad_03.inc.c"
 #include "npc_gossip_trio.inc.c"
 #include "npc_goomba_family.inc.c"
-#include "sprite/player.h"
 
 NpcData N(NpcData_Townsfolk)[] = {
     {

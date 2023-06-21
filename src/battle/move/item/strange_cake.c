@@ -2,6 +2,7 @@
 #include "script_api/battle.h"
 #include "effects.h"
 #include "hud_element.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_item_strange_cake
 
@@ -201,7 +202,6 @@ API_CALLABLE(N(ShowFlowerRecoveryFX)) {
 #if !VERSION_PAL
 #include "common/AddHP.inc.c"
 #include "common/AddFP.inc.c"
-#include "sprite/player.h"
 
 API_CALLABLE(N(func_802A1A40_731D40)) {
     ItemData* item = &gItemTable[ITEM_KOOKY_COOKIE];

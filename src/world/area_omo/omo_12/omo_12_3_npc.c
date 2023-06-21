@@ -1,4 +1,5 @@
 #include "omo_12.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/BigLanternGhost.inc.c"
 
@@ -17,7 +18,6 @@ NpcSettings N(NpcSettings_Watt) = {
 
 #include "world/common/todo/SetCamera0Flag1000.inc.c"
 #include "world/common/todo/UnsetCamera0Flag1000.inc.c"
-#include "sprite/player.h"
 
 API_CALLABLE(N(SetLightOriginAndPower)) {
     Bytecode* args = script->ptrReadPos;

@@ -1,4 +1,5 @@
 #include "kzn_22.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(GetFloorCollider2)) {
     Bytecode* args = script->ptrReadPos;
@@ -15,7 +16,6 @@ API_CALLABLE(N(func_8024036C_C9A56C)) {
 
 #include "world/common/npc/Kolorado.inc.c"
 #include "world/common/npc/StarSpirit.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_ShakeScreen) = {
     EVT_LOOP(0)

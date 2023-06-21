@@ -1,5 +1,6 @@
 #include "flo_19.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(GetPlayerAngles)) {
     Bytecode* args = script->ptrReadPos;
@@ -49,7 +50,6 @@ API_CALLABLE(N(SetScreenFadeAmount)) {
 }
 
 #include "common/CosInterpMinMax.inc.c"
-#include "sprite/player.h"
 
 // all data in this file is truncated
 /*

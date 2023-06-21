@@ -1,4 +1,5 @@
 #include "flo_25.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/GateFlower.inc.c"
 #include "world/common/enemy/TuffPuff.inc.c"
@@ -8,7 +9,6 @@
 
 BSS s32 N(FlowerGuard_ItemChoiceList)[ITEM_NUM_CONSUMABLES + 1];
 #include "../common/ItemChoice_FlowerGuard.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_NpcInteract_GateFlower) = {
     EVT_CALL(DisablePlayerInput, TRUE)

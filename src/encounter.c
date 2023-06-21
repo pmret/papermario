@@ -5,26 +5,9 @@
 #include "hud_element.h"
 #include "world/partners.h"
 #include "sprite.h"
-#include "model.h"
-
-#if !VERSION_JP
-#include "sprite/player.h"
-#else
-// TODO the Japanese player sprites bin differs from that of other versions, so this can be removed once that's fixed
-// and we properly support player sprites in JP
-#define ANIM_Mario1_Idle 0x10002
-#define ANIM_Mario1_ThumbsUp 0x10032
-#define ANIM_MarioB3_Hustled 0x50000
-#define ANIM_MarioW2_LayingDown 0x80009
-#endif
-
-#if !VERSION_JP && !VERSION_IQUE
-// TODO: remove this conditional when more of the JP rom has been processed
 #include "sprite/npc/BattleMerlee.h"
-#else
-#define ANIM_BattleMerlee_Gather 0x00BB0001
-#define ANIM_BattleMerlee_Release 0x00BB0000
-#endif
+#include "sprite/player.h"
+#include "model.h"
 
 ApiStatus ShowMerleeCoinMessage(Evt* script, s32 isInitialCall);
 ApiStatus ShowMerleeRanOutMessage(Evt* script, s32 isInitialCall);

@@ -1,5 +1,6 @@
 #include "kzn_19.h"
 #include "ld_addrs.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/Kolorado.h"
 #include "world/common/npc/StarSpirit.h"
@@ -356,7 +357,6 @@ API_CALLABLE(N(CreateVineRenderer)) {
 }
 
 #include "world/common/complete/LetterDelivery.inc.c"
-#include "sprite/player.h"
 
 s32 N(LetterList)[] = {
     ITEM_LETTER_TO_KOLORADO,

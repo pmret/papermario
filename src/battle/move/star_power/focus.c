@@ -1,10 +1,10 @@
 #include "common.h"
 #include "script_api/battle.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_move_focus
 
 #include "common/StarPower.inc.c"
-#include "sprite/player.h"
 
 API_CALLABLE(func_802A1518_78A378) {
     PlayerData* playerData = &gPlayerData;

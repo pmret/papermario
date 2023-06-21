@@ -1,6 +1,7 @@
 #include "kzn_23.h"
 #include "entity.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(SetChestPosition)) {
     Bytecode* args = script->ptrReadPos;
@@ -70,7 +71,6 @@ API_CALLABLE(N(AnimateChestSize)) {
 
 #include "world/common/npc/Kolorado.inc.c"
 #include "world/common/npc/StarSpirit.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_NpcIdle_Kolorado) = {
     EVT_WAIT(30)

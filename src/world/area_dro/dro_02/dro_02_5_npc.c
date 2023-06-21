@@ -3,6 +3,7 @@
 #include "script_api/battle.h"
 #include "entity.h"
 #include "sprite.h"
+#include "sprite/player.h"
 
 #define CHUCK_QUIZMO_NPC_ID NPC_ChuckQuizmo
 
@@ -238,7 +239,6 @@ EvtScript N(EVS_NpcInit_Mouser_02) = {
 };
 
 #include "npc_moustafa.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_NpcIdle_Mouser_03) = {
     EVT_CALL(InterpNpcYaw, NPC_DisguisedMoustafa, 270, 0)

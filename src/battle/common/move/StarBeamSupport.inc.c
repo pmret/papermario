@@ -1,8 +1,8 @@
 #include "common.h"
 #include "script_api/battle.h"
+#include "sprite/player.h"
 
 #include "common/StarPower.inc.c"
-#include "sprite/player.h"
 
 API_CALLABLE(N(GetStage));
 API_CALLABLE(N(starBeam2));

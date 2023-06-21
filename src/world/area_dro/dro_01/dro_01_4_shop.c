@@ -1,5 +1,6 @@
 #include "dro_01.h"
 #define NAMESPACE dro_01_Shop
+#include "sprite/player.h"
 
 s32 N(ShopMessages)[] = {
     [SHOP_MSG_BUY_CONFIRM      ] MSG_Shop_00_DR001,
@@ -49,7 +50,6 @@ ShopSellPriceData N(PriceList)[] = {
 };
 
 #include "world/common/complete/GiveReward.inc.c"
-#include "sprite/player.h"
 
 API_CALLABLE(N(HideCoinCounter)) {
     hide_coin_counter_immediately();

@@ -1,4 +1,5 @@
 #include "kkj_11.h"
+#include "sprite/player.h"
 
 #include "../common/Searchlights.inc.c"
 #include "world/common/todo/GetPeachDisguise.inc.c"
@@ -6,7 +7,6 @@
 #include "../common/ApproachPlayer100Units.inc.c"
 
 #include "world/common/enemy/Koopatrol_Stationary.inc.c"
-#include "sprite/player.h"
 
 AnimID N(ExtraAnims_Koopatrol)[] = {
     ANIM_WorldKoopatrol_Anim00,

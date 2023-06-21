@@ -1,4 +1,5 @@
 #include "jan_22.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/Kolorado.inc.c"
 #include "world/common/enemy/SpearGuy_Patrol.inc.c"
@@ -11,7 +12,6 @@
 
 #include "world/common/todo/SetCamera0Flag1000.inc.c"
 #include "world/common/todo/UnsetCamera0Flag1000.inc.c"
-#include "sprite/player.h"
 
 enum {
     RAVEN_SCENE_AWAITING_COMMAND    = 0,

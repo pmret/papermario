@@ -1,10 +1,10 @@
 #include "common.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_move_quake_hammer
 
 #include "battle/common/move/HammerSupport.inc.c"
-#include "sprite/player.h"
 
 extern EvtScript N(EVS_802A3168);
 

@@ -1,11 +1,11 @@
 #include "common.h"
 #include "script_api/battle.h"
 #include "battle/action_cmd/jump.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_move_auto_jump
 
 #include "battle/common/move/JumpSupport.inc.c"
-#include "sprite/player.h"
 
 extern EvtScript N(EVS_UseMove_ImplA);
 extern EvtScript N(EVS_UseMove_ImplB);

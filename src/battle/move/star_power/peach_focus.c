@@ -1,11 +1,11 @@
 #include "common.h"
 #include "script_api/battle.h"
 #include "message_ids.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_move_peach_focus
 
 #include "common/StarPower.inc.c"
-#include "sprite/player.h"
 
 API_CALLABLE(func_802A1518_79C4B8) {
     // TODO: replace with actual struct when we know what it is

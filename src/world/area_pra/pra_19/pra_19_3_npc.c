@@ -1,5 +1,6 @@
 #include "pra_19.h"
 #include "sprite.h"
+#include "sprite/player.h"
 
 NpcSettings N(NpcSettings_Kooper) = {
     .height = 35,
@@ -37,7 +38,6 @@ MAP_STATIC_PAD(1,item_choice);
 #include "world/common/complete/NormalItemChoice.inc.c"
 
 #include "world/common/todo/PlayBigSmokePuff.inc.c"
-#include "sprite/player.h"
 
 API_CALLABLE(N(ChooseImposterBattleFormation)) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;

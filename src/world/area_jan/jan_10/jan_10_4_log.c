@@ -1,5 +1,6 @@
 #include "jan_10.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 EvtScript N(EVS_SetupLogObjects) = {
     EVT_IF_EQ(GF_JAN10_CreateLogBridge, FALSE)
@@ -42,7 +43,6 @@ EvtScript N(EVS_LogAnim_RiseUp) = {
 };
 
 #include "world/common/todo/UpdateLogShadow.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_LogAnim_FallDown) = {
     EVT_THREAD

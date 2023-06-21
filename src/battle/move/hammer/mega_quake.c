@@ -1,10 +1,10 @@
 #include "common.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_move_mega_quake
 
 #include "battle/common/move/HammerSupport.inc.c"
-#include "sprite/player.h"
 
 API_CALLABLE(func_802A10A4_756824) {
     if (isInitialCall) {

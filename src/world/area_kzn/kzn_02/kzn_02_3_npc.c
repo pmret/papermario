@@ -1,11 +1,11 @@
 #include "kzn_02.h"
+#include "sprite/player.h"
 
 #include "world/common/enemy/LavaBubble.inc.c"
 
 #include "world/common/npc/Kolorado.inc.c"
 
 #include "world/common/complete/LetterDelivery.inc.c"
-#include "sprite/player.h"
 
 s32 N(LetterList)[] = {
     ITEM_LETTER_TO_KOLORADO,

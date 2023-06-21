@@ -2,6 +2,7 @@
 #include "script_api/battle.h"
 #include "entity.h"
 #include "ld_addrs.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_item_coconut
 
@@ -13,7 +14,6 @@ static s32 _pad = 0;
 #include "battle/move/item/coconut.png.h"
 #include "battle/move/item/coconut.png.inc.c"
 #include "battle/move/item/coconut.pal.inc.c"
-#include "sprite/player.h"
 
 /// 32x32 square.
 Vtx N(model)[] = {

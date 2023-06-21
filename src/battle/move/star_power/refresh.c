@@ -2,6 +2,7 @@
 #include "hud_element.h"
 #include "script_api/battle.h"
 #include "sprite/npc/BattleEldstar.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_move_refresh
 
@@ -96,7 +97,6 @@ API_CALLABLE(func_802A17D4_78BDD4) {
 #include "common/AddHP.inc.c"
 
 #include "common/AddFP.inc.c"
-#include "sprite/player.h"
 
 API_CALLABLE(func_802A18E8_78BEE8) {
     Bytecode* args = script->ptrReadPos;

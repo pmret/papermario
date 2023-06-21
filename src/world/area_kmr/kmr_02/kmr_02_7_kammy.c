@@ -1,4 +1,5 @@
 #include "kmr_02.h"
+#include "sprite/player.h"
 
 #include "world/common/todo/CheckPartnerFlags1000.inc.c"
 
@@ -8,7 +9,6 @@
 #define NAME_SUFFIX
 
 #include "world/common/todo/UnkFunc42.inc.c"
-#include "sprite/player.h"
 
 Vec3f N(FlightPath_KammyAppear)[] = {
     {  473.0,   150.0,  301.0 },

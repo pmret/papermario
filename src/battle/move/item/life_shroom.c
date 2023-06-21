@@ -2,6 +2,7 @@
 #include "script_api/battle.h"
 #include "effects.h"
 #include "entity.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_item_life_shroom
 
@@ -89,7 +90,6 @@ API_CALLABLE(N(func_802A1484_72E9B4)) {
 }
 
 #include "battle/common/move/UseItem.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_UseOnPartner) = {
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 30)

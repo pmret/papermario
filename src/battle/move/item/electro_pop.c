@@ -1,5 +1,6 @@
 #include "common.h"
 #include "script_api/battle.h"
+#include "sprite/player.h"
 
 #include "effects.h"
 
@@ -93,7 +94,6 @@ API_CALLABLE(N(func_802A14F0_730A90)) {
 }
 
 #include "battle/common/move/UseItem.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_ELECTRO_POP)

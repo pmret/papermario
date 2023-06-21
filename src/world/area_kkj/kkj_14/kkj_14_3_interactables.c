@@ -1,8 +1,8 @@
 #include "kkj_14.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #include "world/common/todo/GetPeachDisguise.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_Inspect_Fireplace) = {
     EVT_CALL(DisablePlayerInput, TRUE)

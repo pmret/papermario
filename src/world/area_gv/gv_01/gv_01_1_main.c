@@ -1,11 +1,11 @@
 #include "gv_01.h"
 #include "sprite.h"
 #include "hud_element.h"
+#include "sprite/player.h"
 
 #include "world/common/entity/Pipe.inc.c"
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "sprite/player.h"
 
 s32 N(DropLetterYCurve)[] = {
     200, 170, 140, 110, 80, 50, 20, 10,

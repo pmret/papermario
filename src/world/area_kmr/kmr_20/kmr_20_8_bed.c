@@ -1,4 +1,5 @@
 #include "kmr_20.h"
+#include "sprite/player.h"
 
 #include "world/common/complete/ToadHouseBlanketAnim.inc.c"
 #include "world/common/atomic/ToadHouse.inc.c"
@@ -15,7 +16,6 @@ API_CALLABLE(N(SetAmbienceVolumeHalf_Bed)) {
 }
 
 #include "world/common/todo/WaitForPlayerToLand.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_ToadHouse_SetDialogue) = {
     EVT_SET(LVar0, MSG_CH0_0106)

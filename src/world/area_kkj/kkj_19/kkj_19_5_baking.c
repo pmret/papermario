@@ -1,4 +1,5 @@
 #include "kkj_19.h"
+#include "sprite/player.h"
 
 #include "hud_element.h"
 #include "battle/action_cmd.h"
@@ -209,7 +210,6 @@ API_CALLABLE(N(GetItemNameRaw)) {
 #endif
 
 #include "world/common/todo/GetFloorCollider.inc.c"
-#include "sprite/player.h"
 
 API_CALLABLE(N(SetHeldBakingItem)) {
     Bytecode* args = script->ptrReadPos;

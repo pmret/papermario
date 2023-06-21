@@ -1,5 +1,6 @@
 #include "obk_09.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 typedef struct ImprisonedCard {
     /* 0x00 */ Vec3f pos;
@@ -51,7 +52,6 @@ API_CALLABLE(N(ImprisonedCardUpdate)) {
 #include "world/common/npc/Bootler.h"
 #include "world/common/npc/Dummy.inc.c"
 #include "world/common/npc/StarSpirit.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_NpcInit_Bow) = {
     EVT_RETURN

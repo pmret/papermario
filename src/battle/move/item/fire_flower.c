@@ -2,6 +2,7 @@
 #include "script_api/battle.h"
 #include "effects.h"
 #include "model.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_item_fire_flower
 
@@ -37,7 +38,6 @@ API_CALLABLE(N(func_802A1378_716FD8)) {
 }
 
 #include "battle/common/move/UseItem.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_FIRE_FLOWER)

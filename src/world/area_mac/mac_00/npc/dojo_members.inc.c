@@ -1,3 +1,5 @@
+#include "sprite/player.h"
+
 s32 N(DojoBattleIDs)[] = {
     BTL_MAC_FORMATION_00,
     BTL_MAC_FORMATION_01,
@@ -333,4 +335,3 @@ EvtScript N(EVS_NpcInit_TheMaster) = {
     EVT_RETURN
     EVT_END
 };
-#include "sprite/player.h"

@@ -1,6 +1,7 @@
 #include "common.h"
 #include "script_api/battle.h"
 #include "battle/action_cmd/jump.h"
+#include "sprite/player.h"
 
 s32 N(D_802A10F0)[] = {
     9, 3, 9, 3, 9, 3, 8, 3,
@@ -8,7 +9,6 @@ s32 N(D_802A10F0)[] = {
 };
 
 #include "world/common/todo/UnkMoveFunc1.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_CheckForAPress) = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_BeforeJump)

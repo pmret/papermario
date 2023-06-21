@@ -1,4 +1,5 @@
 #include "nok_01.h"
+#include "sprite/player.h"
 
 #include "world/common/enemy/ai/GuardAI.inc.c"
 
@@ -421,7 +422,6 @@ EvtScript N(EVS_NpcInit_RelaxedKoopa) = {
 };
 
 #include "npcs_normal.inc.c"
-#include "sprite/player.h"
 
 NpcData N(NpcData_Crisis)[] = {
     {

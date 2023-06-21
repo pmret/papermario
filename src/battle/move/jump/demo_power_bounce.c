@@ -2,11 +2,11 @@
 #include "script_api/battle.h"
 #include "battle/action_cmd/jump.h"
 #include "battle/battle.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_move_demo_power_bounce
 
 #include "battle/common/move/JumpSupport.inc.c"
-#include "sprite/player.h"
 
 s32 N(DifficultyTable)[] = {
     7, 6, 5, 4, 3, 2, 1, 0

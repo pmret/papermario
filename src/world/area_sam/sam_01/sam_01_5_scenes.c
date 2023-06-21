@@ -1,8 +1,8 @@
 #include "sam_01.h"
+#include "sprite/player.h"
 
 #include "common/GetItemEntityPosition.inc.c"
 #include "world/common/todo/GetLeftRightPoints.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_MayorCarryGift) = {
     EVT_CALL(GetNpcPos, NPC_MayorPenguin, LVar0, LVar1, LVar2)

@@ -3,6 +3,7 @@
 #include "entity.h"
 #include "ld_addrs.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_item_sleepy_sheep
 
@@ -181,7 +182,6 @@ static s32 _pad = 0;
 #include "battle/move/item/sleepy_sheep3.png.h"
 #include "battle/move/item/sleepy_sheep3.png.inc.c"
 #include "battle/move/item/sleepy_sheep3.pal.inc.c"
-#include "sprite/player.h"
 
 Vtx N(model)[] = {
     { .v = {{ -28,  0,  0 }, FALSE, { 0,    1536 }, { 0, 0, 0, 255 }}},

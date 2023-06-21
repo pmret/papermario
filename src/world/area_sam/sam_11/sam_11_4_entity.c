@@ -2,6 +2,7 @@
 #include "entity.h"
 #include "effects.h"
 #include "model.h"
+#include "sprite/player.h"
 
 s32 N(TargetBackgroundColR) = 0;
 s32 N(TargetBackgroundColG) = 0;
@@ -65,7 +66,6 @@ API_CALLABLE(N(SetEntityHideMode0)) {
 
 #include "world/common/todo/UnsetCamera0MoveFlag1.inc.c"
 #include "world/common/todo/SetCamera0MoveFlag1.inc.c"
-#include "sprite/player.h"
 
 API_CALLABLE(N(MovePlayerAlongRoofSlide)) {
     PlayerStatus* playerStatus = &gPlayerStatus;

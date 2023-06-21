@@ -1,8 +1,8 @@
 #include "isk_16.h"
+#include "sprite/player.h"
 
 #define STAR_SPIRIT_DATA_VAR MV_Unk_01
 #include "world/common/todo/StarSpiritEffectFunc.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_SpawnStarCard) = {
     EVT_SWITCH(GB_StoryProgress)

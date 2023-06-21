@@ -1,12 +1,12 @@
 #include "common.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_move_hammer_charge_0
 
 #include "battle/common/move/HammerSupport.inc.c"
 
 #include "world/common/todo/IsHammerMaxCharged.inc.c"
-#include "sprite/player.h"
 
 API_CALLABLE(func_802A10C8_74F1F8) {
     Bytecode* args = script->ptrReadPos;

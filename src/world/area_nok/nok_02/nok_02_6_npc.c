@@ -1,4 +1,5 @@
 #include "nok_02.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/Koopa_Wander.inc.c"
 #include "world/common/npc/KoopaWithoutShell_Patrol.inc.c"
@@ -463,7 +464,6 @@ EvtScript N(EVS_BreakBlock_DropShell) = {
 
 #include "npcs_crisis.inc.c"
 #include "npcs_normal.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_AnimateDoor_KoloradoHouse) = {
     EVT_CALL(PlaySoundAtCollider, LVar9, SOUND_BASIC_DOOR_OPEN, 0)

@@ -1,9 +1,9 @@
 #include "hos_10.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #define NAME_SUFFIX _PreTitle
 #include "world/common/atomic/TexturePan.inc.c"
-#include "sprite/player.h"
 #define NAME_SUFFIX
 
 EvtScript N(EVS_Scene_PreTitle) = {

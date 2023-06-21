@@ -1,5 +1,6 @@
 #include "common.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_move_spin_smash
 
@@ -28,7 +29,6 @@ API_CALLABLE(func_802A1074_737904) {
 }
 
 #include "battle/common/move/HammerSupport.inc.c"
-#include "sprite/player.h"
 
 extern EvtScript N(EVS_UseMove1_Impl);
 extern EvtScript N(EVS_UseMove2_Impl);

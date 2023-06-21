@@ -1,5 +1,6 @@
 #include "sbk_02.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/StarSpirit.inc.c"
 #include "world/common/npc/Toad_Stationary.inc.c"
@@ -7,7 +8,6 @@
 #include "world/common/complete/NormalItemChoice.inc.c"
 
 #include "world/common/complete/GiveReward.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_NpcIdle_Mamar) = {
     EVT_LOOP(0)

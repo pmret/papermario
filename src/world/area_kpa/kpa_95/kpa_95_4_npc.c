@@ -1,4 +1,5 @@
 #include "kpa_95.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/Toad_Stationary.inc.c"
 #include "world/common/npc/Penguin.inc.c"
@@ -8,7 +9,6 @@
 #include "world/common/complete/ToadHouseBlanketAnim.inc.c"
 #include "world/common/atomic/ToadHouse.inc.c"
 #include "world/common/atomic/ToadHouse.data.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_ToadHouse_SetDialogue) = {
     EVT_SET(LVar0, MSG_CH8_0064)

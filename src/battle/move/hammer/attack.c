@@ -2,11 +2,11 @@
 #include "script_api/battle.h"
 #include "sprite/npc/WorldBombette.h"
 #include "battle/action_cmd/hammer.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_move_hammer_attack
 
 #include "battle/common/move/HammerSupport.inc.c"
-#include "sprite/player.h"
 
 extern EvtScript N(EVS_UseMove0_Impl);
 

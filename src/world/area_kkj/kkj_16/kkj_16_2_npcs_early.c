@@ -1,4 +1,5 @@
 #include "kkj_16.h"
+#include "sprite/player.h"
 
 #define NAME_SUFFIX _Early
 
@@ -7,7 +8,6 @@
 
 #include "../common/Searchlights.inc.c"
 #include "../common/ApproachPlayer50Units.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_CapturePeach) = {
     EVT_CALL(DisablePlayerInput, TRUE)

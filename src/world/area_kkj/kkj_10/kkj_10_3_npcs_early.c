@@ -1,11 +1,11 @@
 #include "kkj_10.h"
+#include "sprite/player.h"
 
 #define NAME_SUFFIX _Early
 #include "world/common/enemy/Koopatrol_Stationary.inc.c"
 
 #include "../common/Searchlights.inc.c"
 #include "../common/ApproachPlayer100Units.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_CapturePeach) = {
     EVT_CALL(DisablePlayerInput, TRUE)

@@ -1,3 +1,5 @@
+#include "sprite/player.h"
+
 EvtScript N(EVS_Scene_RecoverTreeShell) = {
     EVT_WAIT(1)
     EVT_IF_EQ(GF_NOK01_RecoveredTreeShell, TRUE)
@@ -582,4 +584,3 @@ EvtScript N(EVS_NpcInit_KoopaShell_03) = {
     EVT_RETURN
     EVT_END
 };
-#include "sprite/player.h"

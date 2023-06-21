@@ -1,4 +1,5 @@
 #include "kmr_04.h"
+#include "sprite/player.h"
 
 #include "world/area_kmr/kmr_04/hammer_block_message.png.h"
 #include "world/area_kmr/kmr_04/hammer_block_message.png.inc.c"
@@ -11,7 +12,6 @@
 #define NAMESPACE kmr_04
 
 #include "world/common/complete/GiveReward.inc.c"
-#include "sprite/player.h"
 
 static MessageImageData MessageImage;
 

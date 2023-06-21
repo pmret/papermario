@@ -1,6 +1,7 @@
 #include "common.h"
 #include "ld_addrs.h"
 #include "battle.h"
+#include "sprite/player.h"
 
 #include "sprite/npc/WorldGoombario.h"
 #include "sprite/npc/BattleGoombario.h"
@@ -11,7 +12,6 @@
 #include "sprite/npc/BattleSushie.h"
 #include "sprite/npc/BattleLakilester.h"
 #include "sprite/npc/BattleBow.h"
-#include "sprite/player.h"
 
 extern EvtScript battle_move_focus_EVS_UsePower;
 extern EvtScript battle_move_refresh_EVS_UsePower;

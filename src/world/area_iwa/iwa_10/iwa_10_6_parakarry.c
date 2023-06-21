@@ -1,12 +1,12 @@
 #include "iwa_10.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/Parakarry.inc.c"
 
 #include "world/common/util/ChangeNpcToPartner.inc.c"
 
 #include "world/common/complete/KeyItemChoice.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_Scene_MeetParakarry) = {
     EVT_LABEL(0)

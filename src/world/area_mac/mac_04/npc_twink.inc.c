@@ -1,3 +1,5 @@
+#include "sprite/player.h"
+
 EvtScript N(EVS_NpcInit_TwinkEndCh4) = {
     EVT_CALL(GetEntryID, LVar0)
     EVT_IF_NE(LVar0, mac_04_ENTRY_5)
@@ -94,4 +96,3 @@ EvtScript N(EVS_NpcInit_TwinkStartCh4) = {
     EVT_RETURN
     EVT_END
 };
-#include "sprite/player.h"

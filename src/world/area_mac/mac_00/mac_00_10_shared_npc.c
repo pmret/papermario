@@ -1,11 +1,11 @@
 #include "mac_00.h"
+#include "sprite/player.h"
 
 #define NAME_SUFFIX _Shared
 #include "world/common/npc/Toad_Wander.inc.c"
 #include "world/common/npc/Toad_Patrol.inc.c"
 #include "world/common/npc/Toad_Stationary.inc.c"
 #include "world/common/complete/LetterDelivery.inc.c"
-#include "sprite/player.h"
 #define NAME_SUFFIX
 
 s32 N(LetterList_MissT)[] = {

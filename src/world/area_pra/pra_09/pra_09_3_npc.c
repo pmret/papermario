@@ -1,5 +1,6 @@
 #include "pra_09.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #include "world/common/enemy/Duplighost.h"
 
@@ -16,7 +17,6 @@ MAP_STATIC_PAD(1,key_item);
 #include "world/common/complete/NormalItemChoice.inc.c"
 
 #include "world/common/todo/PlayBigSmokePuff.inc.c"
-#include "sprite/player.h"
 
 API_CALLABLE(N(ChooseImposterBattleFormation)) {
     EncounterStatus* currentEncounter = &gCurrentEncounter;

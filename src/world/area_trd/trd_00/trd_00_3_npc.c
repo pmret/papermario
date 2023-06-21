@@ -1,5 +1,6 @@
 #include "trd_00.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 extern EvtScript N(EVS_SetupMusic);
 
@@ -22,7 +23,6 @@ NpcSettings N(NpcSettings_KoopaBros) = {
 };
 
 #include "world/common/npc/StarSpirit.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_NpcIdle_KoopaBros) = {
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, TRUE)

@@ -2,13 +2,13 @@
 #include "script_api/battle.h"
 #include "battle/action_cmd/jump.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_move_jump_charge_0
 
 #include "battle/common/move/JumpSupport.inc.c"
 
 #include "world/common/todo/IsJumpMaxCharged.inc.c"
-#include "sprite/player.h"
 
 API_CALLABLE(N(func_802A1108_74D678)) {
     Bytecode* args = script->ptrReadPos;

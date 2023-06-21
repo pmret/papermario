@@ -1,5 +1,6 @@
 #include "obk_08.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #include "sprite/npc/WorldGoombario.h"
 #include "sprite/npc/WorldKooper.h"
@@ -12,7 +13,6 @@
 
 #define KNOCK_DOWN_MAP_VAR MV_Knockdown
 #include "world/common/complete/KnockDownPlayer.inc.c"
-#include "sprite/player.h"
 
 API_CALLABLE(N(DamagePlayer1HP)) {
     if (gPlayerData.curHP <= 1) {

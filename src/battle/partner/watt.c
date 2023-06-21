@@ -7,6 +7,7 @@
 #include "battle/action_cmd/water_block.h"
 #include "battle/action_cmd/mega_shock.h"
 #include "sprite/npc/BattleWatt.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_partner_watt
 
@@ -156,7 +157,6 @@ API_CALLABLE(N(WattFXSetEffect)) {
 #include "common/UnkBackgroundFunc3.inc.c"
 
 #include "common/SetBackgroundAlpha.inc.c"
-#include "sprite/player.h"
 
 API_CALLABLE(N(ElectroDashFX)) {
     Bytecode* args = script->ptrReadPos;

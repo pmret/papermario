@@ -1,7 +1,7 @@
 #include "isk_16.h"
+#include "sprite/player.h"
 
 #include "world/common/atomic/UnkFunc27.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_Scene_TutankoopaAppears) = {
     EVT_CALL(DisablePlayerInput, TRUE)

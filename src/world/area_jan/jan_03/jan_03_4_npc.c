@@ -1,4 +1,5 @@
 #include "jan_03.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/Toad_Stationary.inc.c"
 
@@ -743,7 +744,6 @@ EvtScript N(EVS_NpcInit_Sushie) = {
 };
 
 #include "world/common/npc/Raven.inc.c"
-#include "sprite/player.h"
 
 AnimID N(ExtraAnims_VillageLeader)[] = {
     ANIM_VillageLeader_Idle,

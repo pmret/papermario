@@ -2,6 +2,7 @@
 #include "script_api/battle.h"
 #include "effects.h"
 #include "sprite/npc/Swooper.h"
+#include "sprite/player.h"
 #include "battle/action_cmd/stop_leech.h"
 
 #define NAMESPACE A(swoopula)
@@ -425,7 +426,6 @@ EvtScript N(handleEvent) = {
 };
 
 #include "common/SpawnEnemyDrainFX.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(takeTurn_flying) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)

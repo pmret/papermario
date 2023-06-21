@@ -1,4 +1,5 @@
 #include "omo_13.h"
+#include "sprite/player.h"
 
 #include "world/common/enemy/ShyGuy_Wander.inc.c"
 #include "world/common/enemy/GrooveGuy.inc.c"
@@ -13,7 +14,6 @@ NpcSettings N(NpcSettings_AntiGuy) = {
 };
 
 #include "world/common/complete/NormalItemChoice.inc.c"
-#include "sprite/player.h"
 
 s32 N(BribeItemList)[] = {
     ITEM_LEMON_CANDY,

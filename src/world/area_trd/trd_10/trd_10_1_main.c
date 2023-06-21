@@ -1,4 +1,5 @@
 #include "trd_10.h"
+#include "sprite/player.h"
 
 extern EvtScript N(EVS_SetupMusic);
 extern EvtScript N(EVS_InitFakeBowser);
@@ -7,7 +8,6 @@ extern NpcGroupList N(DefaultNPCs);
 
 #define STAR_SPIRIT_DATA_VAR MV_Unk_01
 #include "world/common/todo/StarSpiritEffectFunc.inc.c"
-#include "sprite/player.h"
 
 API_CALLABLE(N(SetMapChangeFadeRate)) {
     set_map_change_fade_rate(10);

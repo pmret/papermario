@@ -1,6 +1,7 @@
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "sprite/npc/Fuzzy.h"
+#include "sprite/player.h"
 #include "effects.h"
 
 #define NAMESPACE A(fuzzy)
@@ -233,7 +234,6 @@ EvtScript N(EVS_HandleEvent) = {
 };
 
 #include "common/SpawnEnemyDrainFX.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)

@@ -2,6 +2,7 @@
 #include "script_api/battle.h"
 #include "effects.h"
 #include "model.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_item_thunder_rage
 
@@ -53,7 +54,6 @@ API_CALLABLE(N(func_802A1354_71B4F4)) {
 }
 
 #include "battle/common/move/UseItem.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_THUNDER_RAGE)

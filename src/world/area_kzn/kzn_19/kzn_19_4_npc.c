@@ -1,5 +1,6 @@
 #include "kzn_19.h"
 #include "ld_addrs.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/Kolorado.h"
 #include "world/common/npc/StarSpirit.h"
@@ -176,7 +177,6 @@ EvtScript N(EVS_Misstar_Escape) = {
 };
 
 #include "world/common/lava_piranha/LoadAnimationFromTable.inc.c"
-#include "sprite/player.h"
 
 EvtScript N(EVS_PlayVinesAnim_Emerge) = {
     EVT_THREAD

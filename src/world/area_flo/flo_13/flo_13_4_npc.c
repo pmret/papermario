@@ -1,4 +1,5 @@
 #include "flo_13.h"
+#include "sprite/player.h"
 
 #include "world/common/util/ChangeNpcToPartner.inc.c"
 
@@ -15,7 +16,6 @@ NpcSettings N(NpcSettings_Lakilester) = {
 #include "world/common/enemy/Lakitu_SpinySpawner.inc.c"
 
 #include "world/common/todo/UnkFunc42.inc.c"
-#include "sprite/player.h"
 
 API_CALLABLE(N(PlayLakiluluFlightSounds)) {
     Npc* npc = get_npc_unsafe(NPC_Lakilulu);

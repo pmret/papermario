@@ -1,10 +1,10 @@
 #include "kmr_20.h"
 #include "model.h"
+#include "sprite/player.h"
 
 #define NAME_SUFFIX _Intro
 #include "world/common/entity/Pipe.inc.c"
 #include "common/foliage.inc.c"
-#include "sprite/player.h"
 #define NAME_SUFFIX
 
 API_CALLABLE(N(func_80241C9C_8EDABC)) {

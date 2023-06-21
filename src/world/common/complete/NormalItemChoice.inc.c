@@ -2,6 +2,7 @@
 #define _COMMON_CONSUMABLE_CHOICE_
 
 #include "common.h"
+#include "sprite/player.h"
 
 static s32 N(ItemChoice_List)[ITEM_NUM_CONSUMABLES + 1];
 
@@ -13,7 +14,6 @@ s32 N(ItemChoice_SelectedItemID) = 0;
 
 #include "world/common/todo/GetNpcCollisionHeight.inc.c"
 #include "world/common/todo/AddPlayerHandsOffset.inc.c"
-#include "sprite/player.h"
 
 API_CALLABLE(N(ItemChoice_WaitForSelection)) {
     Bytecode* args = script->ptrReadPos;

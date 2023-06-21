@@ -1,10 +1,10 @@
 #include "flo_21.h"
+#include "sprite/player.h"
 
 #define STAR_SPIRIT_DATA_VAR MV_Unk_01
 #include "world/common/todo/StarSpiritEffectFunc.inc.c"
 
 #include "world/common/atomic/TexturePan.inc.c"
-#include "sprite/player.h"
 
 API_CALLABLE(N(SpawnSunEffect)) {
     fx_sun_undeclared(FX_SUN_FROM_RIGHT, 0, 0, 0, 0, 0);
