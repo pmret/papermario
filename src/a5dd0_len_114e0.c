@@ -3811,7 +3811,6 @@ void load_tile_header(ModelNodeProperty* propertyName, s32 romOffset, s32 size) 
         func_80114B58(romOffset, textureHandle, header, rasterSize, paletteSize, auxRasterSize, auxPaletteSize);
         func_80115498(romOffset + rasterSize + paletteSize + auxRasterSize + auxPaletteSize, (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].textureID, baseOffset, size);
     }
-
 }
 
 void func_80115498(u32 romOffset, s32 textureID, s32 baseOffset, s32 size) {

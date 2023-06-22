@@ -1,19 +1,32 @@
+#!/usr/bin/env python3
+
+import os
 import argparse
 from pathlib import Path
-
+from sys import argv, path
+path.append(str(Path(__file__).parent.parent.parent / "splat"))
+path.append(str(Path(__file__).parent.parent.parent / "splat_ext"))
+from pm_map_data import TexImage
 
 def build(out_path: Path, in_path: Path, endian: str = "big"):
-    dummy_out = b"meow"
-    out_path.write_bytes(dummy_out)
+    out_bytes = bytearray()
+
+    for file in sorted(os.listdir(in_path)):
+        if file.endswith('.json'):
+            img = TexImage()
+            img.build(out_bytes, in_path / file)
+
+    with open(out_path, "wb") as out_bin:
+        out_bin.write(out_bytes)
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Sprite shading profiles")
+    parser = argparse.ArgumentParser(description="Texture archives")
     parser.add_argument("bin_out", type=Path, help="Output binary file path")
-    parser.add_argument("input", type=Path)
+    parser.add_argument("in_dir", type=Path, help="File path to input tex subdirectory")
     parser.add_argument(
         "--endian", choices=["big", "little"], default="big", help="Output endianness"
     )
     args = parser.parse_args()
 
-    build(args.bin_out, args.input, args.endian)
+    build(args.bin_out, args.in_dir, args.endian)
