@@ -234,7 +234,10 @@ class TexImage:
 
     # extract texture properties and rasters from buffer
     def from_bytes(self, texbuf: TexBuffer):
-        self.img_name = decode_null_terminated_ascii(texbuf.get(32))
+        # strip area prefix and original extension suffix
+        raw_name = decode_null_terminated_ascii(texbuf.get(32))
+        self.img_name = raw_name[4:-3]
+        self.raw_ext = raw_name[-3:]
 
         (
             self.aux_width,
@@ -357,7 +360,9 @@ class TexImage:
         out = {}
         out["name"] = self.img_name
 
-        print("IMG: " + self.img_name)
+        # only a single texture in 'tst_tex' has 'rgb', otherwise this is always 'tif'
+        if self.raw_ext != "tif":
+            out["ext"] = self.raw_ext
 
         out["main"] = {
             "format": get_format_name(self.main_fmt, self.main_depth),
@@ -439,6 +444,11 @@ class TexImage:
     # read texture properties from dictionary and load images
     def from_json(self, tex_path: Path, json_data):
         self.img_name = json_data["name"]
+
+        if "ext" in json_data:
+            self.raw_ext = json_data["ext"]
+        else:
+            self.raw_ext = "tif"
 
         # read data for main tile
         main_data = json_data.get("main")
@@ -522,16 +532,18 @@ class TexImage:
         self.is_variant = json_data.get("variant", False)
         
     # write texture header and image raster/palettes to byte array
-    def add_bytes(self, bytes : bytearray):
-        # write name, padded out to 32 bytes
-        name_bytes = self.img_name.encode("ascii")
+    def add_bytes(self, tex_name: str, bytes : bytearray):
+        # form raw name and write to header
+        raw_name = tex_name[:4] + self.img_name + self.raw_ext
+        name_bytes = raw_name.encode("ascii")
         bytes += name_bytes
 
+        # pad name out to 32 bytes
         pad_len = 32 - len(name_bytes)
         assert(pad_len > 0)
         bytes += b"\0" * pad_len
 
-        # header fields
+        # write header fields
         bytes += struct.pack(">HHHHBBBBBBBB",
             self.aux_width,
             self.main_width,
@@ -547,6 +559,7 @@ class TexImage:
             self.filter_mode
         )
 
+        # write rasters and palettes
         if self.extra_tiles == TILES_BASIC:
             bytes += self.main_img
             if self.main_fmt == FMT_CI:
@@ -573,7 +586,7 @@ class TexImage:
 
 class TexArchive:
     @staticmethod
-    def extract(bytes, asset_path: Path, tex_name):
+    def extract(bytes, tex_path: Path):
         textures: List[TexImage] = []
         texbuf = TexBuffer(bytes)
 
@@ -582,30 +595,33 @@ class TexArchive:
             img.from_bytes(texbuf)
             textures.append(img)
 
-        tex_path = asset_path / tex_name 
         tex_path.mkdir(parents=True, exist_ok=True)
 
         out = []
         for texture in textures:
             texture.save_images(tex_path)
             out.append(texture.get_json_entry())
-
+            
         json_out = json.dumps(out, sort_keys=False, indent=4)
-        with open(asset_path / f"{tex_name}.json", "w") as f:
+
+        json_fn = str(tex_path) + ".json"
+        with open(json_fn, "w") as f:
             f.write(json_out)
 
     @staticmethod
     def build(out_path: Path, tex_path: Path, endian: str = "big"):
         out_bytes = bytearray()
+        tex_name = os.path.basename(tex_path)
 
-        with open(str(tex_path) + ".json", "r") as json_file:
+        json_fn = str(tex_path) + ".json"
+        with open(json_fn, "r") as json_file:
             json_str = json_file.read()
             json_data = json.loads(json_str)
 
             for img_data in json_data:
                 img = TexImage()
                 img.from_json(tex_path, img_data)
-                img.add_bytes(out_bytes)
+                img.add_bytes(tex_name, out_bytes)
 
         with open(out_path, "wb") as out_bin:
             out_bin.write(out_bytes)
@@ -760,7 +776,7 @@ class N64SegPm_map_data(N64Segment):
                         bytes, fs_dir / "bg" / f"{name}.alt.png", header_offset=0x10
                     )
             elif name.endswith("_tex"):
-                TexArchive.extract(bytes, fs_dir / "tex", name)
+                TexArchive.extract(bytes, fs_dir / "tex" / name)
             else:
                 assert path is not None
                 with open(path, "wb") as f:
