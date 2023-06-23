@@ -392,25 +392,24 @@ class TexImage:
             f.write(self.__to_json())
 
 
-    def read_json_img(self, img_data, tile_name, tex_name):
+    def read_json_img(self, img_data, tile_name, img_name):
         fmt_str = img_data.get("format")
         if fmt_str == None:
-            raise Exception(f"Texture {tex_name} is missing 'format' for '{tile_name}'")
+            raise Exception(f"Texture {img_name} is missing 'format' for '{tile_name}'")
 
         hwrap_str = img_data.get("hwrap", "Missing")
         hwrap = wrap_modes_inv.get(hwrap_str)
         if hwrap == None:
-            raise Exception(f"Texture {tex_name} has invalid 'hwrap' for '{tile_name}'")
+            raise Exception(f"Texture {img_name} has invalid 'hwrap' for '{tile_name}'")
 
         vwrap_str = img_data.get("vwrap", "Missing")
         vwrap = wrap_modes_inv.get(vwrap_str)
         if vwrap == None:
-            raise Exception(f"Texture {tex_name} has invalid 'vwrap' for '{tile_name}'")
+            raise Exception(f"Texture {img_name} has invalid 'vwrap' for '{tile_name}'")
 
         return fmt_str, hwrap, vwrap
 
     def get_img_file(self, fmt_str, img_file):
-        print("IN: " + img_file)
         (out_img, out_w, out_h) = Converter(fmt_str.lower(), img_file, None).convert() #TODO, "--flip-y")
 
         out_pal = bytearray()
@@ -455,11 +454,16 @@ class TexImage:
         # read data for aux tile
         self.has_aux = "aux" in json_data
         if self.has_aux:
-            aux_data = json_data.get("main")
+            aux_data = json_data.get("aux")
             (aux_fmt_name, self.aux_hwrap, self.aux_vwrap) = self.read_json_img(aux_data, "aux", self.img_name)
+
             if aux_fmt_name == "Shared":
-                self.aux_fmt = self.main_fmt
-                self.aux_depth = self.main_depth
+                # aux tiles have blank attributes in SHARED mode
+                aux_fmt_name = main_fmt_name
+                self.aux_fmt = 0
+                self.aux_depth = 0
+                self.aux_hwrap = 0
+                self.aux_vwrap = 0
                 self.extra_tiles = TILES_SHARED_AUX
             else:
                 (self.aux_fmt, self.aux_depth) = get_format_code(aux_fmt_name)
@@ -470,6 +474,12 @@ class TexImage:
             if not found_aux:
                 raise Exception(f"Could not find AUX image for texture: {self.img_name}")
             (self.aux_img, self.aux_pal, self.aux_width, self.aux_height) = self.get_img_file(aux_fmt_name, basename + "_AUX.png")
+            if self.extra_tiles == TILES_SHARED_AUX:
+                # aux tiles have blank sizes in SHARED mode
+                self.main_height *= 2
+                self.aux_width = 0
+                self.aux_height = 0
+
         else:
             self.aux_fmt = 0
             self.aux_depth = 0
@@ -490,7 +500,6 @@ class TexImage:
                     (raster, pal, width, height) = self.get_img_file(main_fmt_name, mipmap_path)                    
                     self.mipmaps.append(raster)
                     mipmap_idx += 1
-                    print(f"{mipmap_idx} : {width} x {height}")
                 else:
                     break
             self.extra_tiles = TILES_MIPMAPS
@@ -521,8 +530,8 @@ class TexImage:
         bytes += struct.pack(">HHHHxBBBBBBB",
             self.aux_width,
             self.main_width,
-            self.aux_height  if self.extra_tiles != TILES_SHARED_AUX else self.main_height // 2, 
-            self.main_height if self.extra_tiles != TILES_SHARED_AUX else self.main_height // 2,
+            self.aux_height, 
+            self.main_height,
             self.extra_tiles,
             self.combine,
             self.pack_byte(self.aux_fmt, self.main_fmt),

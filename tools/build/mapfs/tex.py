@@ -11,10 +11,13 @@ from pm_map_data import TexImage
 def build(out_path: Path, in_path: Path, endian: str = "big"):
     out_bytes = bytearray()
 
-    for file in sorted(os.listdir(in_path)):
-        if file.endswith('.json'):
-            img = TexImage()
-            img.build(out_bytes, in_path / file)
+    file_list = os.listdir(in_path)
+    json_list = [file for file in file_list if file.endswith('json')]
+    json_list.sort(key=lambda x: x[:-5].replace("_"," "))
+
+    for file in json_list:
+        img = TexImage()
+        img.build(out_bytes, in_path / file)
 
     with open(out_path, "wb") as out_bin:
         out_bin.write(out_bytes)
