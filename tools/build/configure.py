@@ -246,7 +246,7 @@ def write_ninja_rules(
     ninja.rule(
         "tex",
         description="tex $out",
-        command=f"$python {BUILD_TOOLS}/mapfs/tex.py $out $in_dir",
+        command=f"$python {BUILD_TOOLS}/mapfs/tex.py $out $tex_dir",
     )
 
     ninja.rule(
@@ -841,9 +841,14 @@ class Configure:
                         )
                     elif name.endswith("_tex"):
                         compress = False
-                        in_dir = path.parent / name
+                        tex_dir = path.parent / name
                         build(
-                            bin_path, [in_dir], "tex", variables={"in_dir": str(in_dir)}
+                            bin_path,
+                            [tex_dir],
+                            "tex",
+                            variables={
+                                "tex_dir": str(tex_dir)
+                            }
                         )
                     elif name.endswith("_shape"):
                         map_name = "_".join(name.split("_")[:-1])

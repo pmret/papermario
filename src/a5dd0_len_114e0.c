@@ -3829,7 +3829,7 @@ void func_80115498(u32 romOffset, s32 textureID, s32 baseOffset, s32 size) {
     for (offset = romOffset; offset < baseOffset + size;) {
         dma_copy((u8*)offset, (u8*)offset + sizeof(sp20), &sp20);
         header = &sp20;
-        if (header->unk_28 == 0) {
+        if (!header->isVariant) {
             break;
         }
 

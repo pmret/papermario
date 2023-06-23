@@ -91,6 +91,7 @@ filter_modes = {
 }
 filter_modes_inv = {v: k for k, v in filter_modes.items()}
 
+
 def get_format_name(fmt, depth):
     # get image from bytes for valid combinations of fmt and bit depth
     if fmt == FMT_RGBA:
@@ -142,6 +143,7 @@ def get_format_code(name):
     else:
         raise Exception(f"Invalid format: {name}")
 
+
 def pack_color(r, g, b, a):
     r = r >> 3
     g = g >> 3
@@ -149,6 +151,7 @@ def pack_color(r, g, b, a):
     a = a >> 7
 
     return (r << 11) | (g << 6) | (b << 1) | a
+
 
 # class for reading a tex file buffer one chunk at a time
 @dataclass
@@ -179,6 +182,7 @@ class TexImage:
     def pack_byte(self, aux, main):
         return ((aux & 0xF) << 4) | (main & 0xF)
 
+    # get n64img object from the buffer
     def get_n64_img(self, texbuf: TexBuffer, fmt, depth, w, h):
         # calculate size for bit depth
         if depth == DEPTH_4_BIT:
@@ -197,38 +201,38 @@ class TexImage:
         # get image from bytes for valid combinations of fmt and bit depth
         fmt_name = get_format_name(fmt, depth)
         if fmt_name == "RGBA16":
-            return n64img.image.RGBA16(data=bytes, width=w, height=h)
+            img = n64img.image.RGBA16(data=bytes, width=w, height=h)
         elif fmt_name == "RGBA32":
-            return n64img.image.RGBA32(data=bytes, width=w, height=h)
+            img = n64img.image.RGBA32(data=bytes, width=w, height=h)
         elif fmt_name == "CI4":
-            return n64img.image.CI4(data=bytes, width=w, height=h)
+            img = n64img.image.CI4(data=bytes, width=w, height=h)
         elif fmt_name == "CI8":
-            return n64img.image.CI8(data=bytes, width=w, height=h)
+            img = n64img.image.CI8(data=bytes, width=w, height=h)
         elif fmt_name == "IA4":
-            return n64img.image.IA4(data=bytes, width=w, height=h)
+            img = n64img.image.IA4(data=bytes, width=w, height=h)
         elif fmt_name == "IA8":
-            return n64img.image.IA8(data=bytes, width=w, height=h)
+            img = n64img.image.IA8(data=bytes, width=w, height=h)
         elif fmt_name == "IA16":
-            return n64img.image.IA16(data=bytes, width=w, height=h)
+            img = n64img.image.IA16(data=bytes, width=w, height=h)
         elif fmt_name == "I4":
-            return n64img.image.I4(data=bytes, width=w, height=h)
+            img = n64img.image.I4(data=bytes, width=w, height=h)
         elif fmt_name == "I8":
-            return n64img.image.I8(data=bytes, width=w, height=h)
+            img = n64img.image.I8(data=bytes, width=w, height=h)
         else:
             raise Exception(f"Invalid format: {fmt_name}")
-
-    def get_n64_img_and_flip(self, texbuf: TexBuffer, fmt, depth, w, h):
-        img = self.get_n64_img(texbuf, fmt, depth, w, h)
+            
     #TODO    img.flip_v = True
         return img
 
-    def decode_pal(self, texbuf, fmt, depth):
+    # get palette from the buffer
+    def get_n64_pal(self, texbuf, fmt, depth):
         if fmt == FMT_CI:
             if depth == DEPTH_4_BIT:
                 return parse_palette(texbuf.get(0x20))
             elif depth == DEPTH_8_BIT:
                 return parse_palette(texbuf.get(0x200))
 
+    # extract texture properties and rasters from buffer
     def from_bytes(self, texbuf: TexBuffer):
         self.img_name = decode_null_terminated_ascii(texbuf.get(32))
 
@@ -237,6 +241,7 @@ class TexImage:
             self.main_width,
             self.aux_height,
             self.main_height,
+            self.is_variant,
             self.extra_tiles,
             self.combine_mode,
             fmts,
@@ -244,7 +249,7 @@ class TexImage:
             hwraps,
             vwraps,
             self.filter_mode,
-        ) = struct.unpack(">HHHHxBBBBBBB", texbuf.get(16))
+        ) = struct.unpack(">HHHHBBBBBBBB", texbuf.get(16))
 
         # unpack upper/lower nibbles for aux/main
         (self.aux_fmt, self.main_fmt) = self.split_byte(fmts)
@@ -257,7 +262,7 @@ class TexImage:
 
         # main img only
         if self.extra_tiles == TILES_BASIC:
-            self.main_img = self.get_n64_img_and_flip(
+            self.main_img = self.get_n64_img(
                 texbuf,
                 self.main_fmt,
                 self.main_depth,
@@ -265,13 +270,13 @@ class TexImage:
                 self.main_height,
             )
             if self.main_fmt == FMT_CI:
-                self.main_img.palette = self.decode_pal(
+                self.main_img.palette = self.get_n64_pal(
                     texbuf, self.main_fmt, self.main_depth
                 )
         # main img + mipmaps
         elif self.extra_tiles == TILES_MIPMAPS:
             self.has_mipmaps = True
-            self.main_img = self.get_n64_img_and_flip(
+            self.main_img = self.get_n64_img(
                 texbuf,
                 self.main_fmt,
                 self.main_depth,
@@ -287,7 +292,7 @@ class TexImage:
                         break
                     mmw = self.main_width // divisor
                     mmh = self.main_height // divisor
-                    mipmap = self.get_n64_img_and_flip(
+                    mipmap = self.get_n64_img(
                         texbuf, self.main_fmt, self.main_depth, mmw, mmh
                     )
                     self.mipmaps.append(mipmap)
@@ -297,7 +302,7 @@ class TexImage:
                         break
             # read palette and assign to all images
             if self.main_fmt == FMT_CI:
-                shared_pal = self.decode_pal(texbuf, self.main_fmt, self.main_depth)
+                shared_pal = self.get_n64_pal(texbuf, self.main_fmt, self.main_depth)
                 self.main_img.palette = shared_pal
                 for mipmap in self.mipmaps:
                     mipmap.palette = shared_pal
@@ -305,14 +310,14 @@ class TexImage:
         # main + aux (shared attributes)
         elif self.extra_tiles == TILES_SHARED_AUX:
             self.has_aux = True
-            self.main_img = self.get_n64_img_and_flip(
+            self.main_img = self.get_n64_img(
                 texbuf,
                 self.main_fmt,
                 self.main_depth,
                 self.main_width,
                 self.main_height // 2,
             )
-            self.aux_img = self.get_n64_img_and_flip(
+            self.aux_img = self.get_n64_img(
                 texbuf,
                 self.main_fmt,
                 self.main_depth,
@@ -320,7 +325,7 @@ class TexImage:
                 self.main_height // 2,
             )
             if self.main_fmt == FMT_CI:
-                shared_pal = self.decode_pal(texbuf, self.main_fmt, self.main_depth)
+                shared_pal = self.get_n64_pal(texbuf, self.main_fmt, self.main_depth)
                 self.main_img.palette = shared_pal
                 self.aux_img.palette = shared_pal
 
@@ -328,7 +333,7 @@ class TexImage:
         elif self.extra_tiles == TILES_INDEPENDENT_AUX:
             self.has_aux = True
             # read main
-            self.main_img = self.get_n64_img_and_flip(
+            self.main_img = self.get_n64_img(
                 texbuf,
                 self.main_fmt,
                 self.main_depth,
@@ -336,19 +341,24 @@ class TexImage:
                 self.main_height,
             )
             if self.main_fmt == FMT_CI:
-                pal = self.decode_pal(texbuf, self.main_fmt, self.main_depth)
+                pal = self.get_n64_pal(texbuf, self.main_fmt, self.main_depth)
                 self.main_img.palette = pal
             # read aux
-            self.aux_img = self.get_n64_img_and_flip(
+            self.aux_img = self.get_n64_img(
                 texbuf, self.aux_fmt, self.aux_depth, self.aux_width, self.aux_height
             )
             if self.aux_fmt == FMT_CI:
-                self.aux_img.palette = self.decode_pal(
+                self.aux_img.palette = self.get_n64_pal(
                     texbuf, self.aux_fmt, self.aux_depth
                 )
 
-    def __to_json(self):
+    # constructs a dictionary entry for the tex archive for this texture
+    def get_json_entry(self):
         out = {}
+        out["name"] = self.img_name
+
+        print("IMG: " + self.img_name)
+
         out["main"] = {
             "format": get_format_name(self.main_fmt, self.main_depth),
             "hwrap": wrap_modes.get(self.main_hwrap),
@@ -377,19 +387,19 @@ class TexImage:
 
         out["combine"] = aux_combine_modes.get(self.combine_mode)
 
-        return json.dumps(out, sort_keys=False, indent=4)
+        if self.is_variant:
+            out["variant"] = True
+
+        return out
 
 
-    def extract(self, tex_path):
+    def save_images(self, tex_path):
         self.main_img.write(tex_path / f"{self.img_name}.png")
         if self.has_aux:
             self.aux_img.write(tex_path / f"{self.img_name}_AUX.png")
         if self.has_mipmaps:
             for idx, mipmap in enumerate(self.mipmaps):
                 mipmap.write(tex_path / f"{self.img_name}_MM{idx + 1}.png")
-
-        with open(tex_path / f"{self.img_name}.json", "w") as f:
-            f.write(self.__to_json())
 
 
     def read_json_img(self, img_data, tile_name, img_name):
@@ -426,16 +436,9 @@ class TexImage:
 
         return (out_img, out_pal, out_w, out_h) 
 
-
-    def from_json(self, json_path):
-        basename = os.path.splitext(json_path)[0]
-        self.img_name = os.path.basename(basename)
-
-        # read json file
-        with open(json_path, "r") as json_file:
-            json_str = json_file.read()
-
-        json_data = json.loads(json_str)
+    # read texture properties from dictionary and load images
+    def from_json(self, tex_path: Path, json_data):
+        self.img_name = json_data["name"]
 
         # read data for main tile
         main_data = json_data.get("main")
@@ -446,10 +449,10 @@ class TexImage:
         (self.main_fmt, self.main_depth) = get_format_code(main_fmt_name)
 
         # read main image
-        found_img = os.path.isfile(basename + ".png")
-        if not found_img:
+        img_path = str(tex_path / f"{self.img_name}.png")
+        if not os.path.isfile(img_path):
             raise Exception(f"Could not find main image for texture: {self.img_name}")
-        (self.main_img, self.main_pal, self.main_width, self.main_height) = self.get_img_file(main_fmt_name, basename + ".png")
+        (self.main_img, self.main_pal, self.main_width, self.main_height) = self.get_img_file(main_fmt_name, img_path)
 
         # read data for aux tile
         self.has_aux = "aux" in json_data
@@ -470,10 +473,10 @@ class TexImage:
                 self.extra_tiles = TILES_INDEPENDENT_AUX
 
             # read aux image
-            found_aux = os.path.isfile(basename + "_AUX.png")
-            if not found_aux:
+            img_path = str(tex_path / f"{self.img_name}_AUX.png")
+            if not os.path.isfile(img_path):
                 raise Exception(f"Could not find AUX image for texture: {self.img_name}")
-            (self.aux_img, self.aux_pal, self.aux_width, self.aux_height) = self.get_img_file(aux_fmt_name, basename + "_AUX.png")
+            (self.aux_img, self.aux_pal, self.aux_width, self.aux_height) = self.get_img_file(aux_fmt_name, img_path)
             if self.extra_tiles == TILES_SHARED_AUX:
                 # aux tiles have blank sizes in SHARED mode
                 self.main_height *= 2
@@ -495,9 +498,9 @@ class TexImage:
             self.mipmaps = []
             mipmap_idx = 1
             while True:
-                mipmap_path = basename + f"_MM{mipmap_idx}.png"
-                if os.path.isfile(mipmap_path):
-                    (raster, pal, width, height) = self.get_img_file(main_fmt_name, mipmap_path)                    
+                img_path = str(tex_path / f"{self.img_name}_MM{mipmap_idx}.png")
+                if os.path.isfile(img_path):
+                    (raster, pal, width, height) = self.get_img_file(main_fmt_name, img_path)                    
                     self.mipmaps.append(raster)
                     mipmap_idx += 1
                 else:
@@ -516,8 +519,10 @@ class TexImage:
         if self.combine == None:
             raise Exception(f"Texture {self.img_name} has invalid 'combine'")
 
-
-    def append_to(self, bytes : bytearray):
+        self.is_variant = json_data.get("variant", False)
+        
+    # write texture header and image raster/palettes to byte array
+    def add_bytes(self, bytes : bytearray):
         # write name, padded out to 32 bytes
         name_bytes = self.img_name.encode("ascii")
         bytes += name_bytes
@@ -527,11 +532,12 @@ class TexImage:
         bytes += b"\0" * pad_len
 
         # header fields
-        bytes += struct.pack(">HHHHxBBBBBBB",
+        bytes += struct.pack(">HHHHBBBBBBBB",
             self.aux_width,
             self.main_width,
             self.aux_height, 
             self.main_height,
+            self.is_variant,
             self.extra_tiles,
             self.combine,
             self.pack_byte(self.aux_fmt, self.main_fmt),
@@ -564,25 +570,45 @@ class TexImage:
             if self.aux_fmt == FMT_CI:
                 bytes += self.aux_pal
 
-    def build(self, bytes : bytearray, json_path):
-        self.from_json(json_path)
-        self.append_to(bytes)
-
 
 class TexArchive:
-    def __init__(self, bytes):
-        self.textures: List[TexImage] = []
+    @staticmethod
+    def extract(bytes, asset_path: Path, tex_name):
+        textures: List[TexImage] = []
         texbuf = TexBuffer(bytes)
 
         while texbuf.remaining() > 0:
             img = TexImage()
             img.from_bytes(texbuf)
-            self.textures.append(img)
+            textures.append(img)
 
-    def extract(self, tex_path: Path):
+        tex_path = asset_path / tex_name 
         tex_path.mkdir(parents=True, exist_ok=True)
-        for texture in self.textures:
-            texture.extract(tex_path)
+
+        out = []
+        for texture in textures:
+            texture.save_images(tex_path)
+            out.append(texture.get_json_entry())
+
+        json_out = json.dumps(out, sort_keys=False, indent=4)
+        with open(asset_path / f"{tex_name}.json", "w") as f:
+            f.write(json_out)
+
+    @staticmethod
+    def build(out_path: Path, tex_path: Path, endian: str = "big"):
+        out_bytes = bytearray()
+
+        with open(str(tex_path) + ".json", "r") as json_file:
+            json_str = json_file.read()
+            json_data = json.loads(json_str)
+
+            for img_data in json_data:
+                img = TexImage()
+                img.from_json(tex_path, img_data)
+                img.add_bytes(out_bytes)
+
+        with open(out_path, "wb") as out_bin:
+            out_bin.write(out_bytes)
 
 
 class N64SegPm_map_data(N64Segment):
@@ -734,8 +760,7 @@ class N64SegPm_map_data(N64Segment):
                         bytes, fs_dir / "bg" / f"{name}.alt.png", header_offset=0x10
                     )
             elif name.endswith("_tex"):
-                archive = TexArchive(bytes)
-                archive.extract(fs_dir / "tex" / name)
+                TexArchive.extract(bytes, fs_dir / "tex", name)
             else:
                 assert path is not None
                 with open(path, "wb") as f:
