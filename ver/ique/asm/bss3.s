@@ -268,7 +268,7 @@ dlabel texPannerAuxU
 dlabel texPannerAuxV
 .space 0x00000040
 
-dlabel mdl_nextTextureAddress
+dlabel TextureHeapPos
 .space 4
 
 dlabel mdl_currentTransformGroupChildIndex

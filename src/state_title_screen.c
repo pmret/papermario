@@ -100,7 +100,7 @@ void state_init_title_screen(void) {
 
     gOverrideFlags = 0;
     timeFreezeMode = 0;
-    D_8014C248[0] = 1;
+    D_8014C248 = TRUE;
     general_heap_create();
     clear_printers();
     sfx_set_reverb_mode(0);

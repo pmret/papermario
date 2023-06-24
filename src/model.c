@@ -6,6 +6,8 @@
 #include "model_clear_render_tasks.h"
 #include "nu/nusys.h"
 
+#define MAP_TEXTURE_MEMORY_SIZE 0x20000
+#define BTL_TEXTURE_MEMORY_SIZE 0x8000
 extern Addr MapTextureMemory;
 
 typedef struct Fog {
@@ -378,7 +380,7 @@ Gfx D_8014B400[21][5] = {
     },
 };
 
-void* mdl_textureBaseAddress = (void*) &MapTextureMemory;
+void* TextureHeapBase = (void*) &MapTextureMemory;
 
 u8 mdl_bgMultiplyColorA = 0;
 u8 mdl_bgMultiplyColorR = 0;
@@ -1019,7 +1021,7 @@ s32 mdl_renderTaskBasePriorities[RENDER_MODE_COUNT] = {
     [RENDER_MODE_CLOUD_NO_ZB]               =  700000,
 };
 
-s8 D_8014C248[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+b8 D_8014C248 = FALSE;
 
 // BSS
 extern ModelCustomGfxBuilderList* gCurrentCustomModelGfxBuildersPtr;
@@ -1066,7 +1068,7 @@ extern s32 texPannerMainU[MAX_TEX_PANNERS];
 extern s32 texPannerMainV[MAX_TEX_PANNERS];
 extern s32 texPannerAuxU[MAX_TEX_PANNERS];
 extern s32 texPannerAuxV[MAX_TEX_PANNERS];
-extern void* mdl_nextTextureAddress;
+extern void* TextureHeapPos;
 extern u16 mdl_currentTransformGroupChildIndex;
 extern u16 D_80153226;
 extern ModelNode* D_80153370;
@@ -1732,37 +1734,37 @@ void load_texture_impl(u32 romOffset, TextureHandle* handle, TextureHeader* head
     Gfx** temp;
 
     // load main img + palette to texture heap
-    handle->raster = (IMG_PTR) mdl_nextTextureAddress;
+    handle->raster = (IMG_PTR) TextureHeapPos;
     if (mainPalSize != 0) {
-        handle->palette = (PAL_PTR) (mdl_nextTextureAddress + mainSize);
+        handle->palette = (PAL_PTR) (TextureHeapPos + mainSize);
     } else {
         handle->palette = NULL;
     }
-    dma_copy((u8*) romOffset, (u8*) (romOffset + mainSize + mainPalSize), mdl_nextTextureAddress);
+    dma_copy((u8*) romOffset, (u8*) (romOffset + mainSize + mainPalSize), TextureHeapPos);
     romOffset += mainSize + mainPalSize;
-    mdl_nextTextureAddress += mainSize + mainPalSize;
+    TextureHeapPos += mainSize + mainPalSize;
 
     // load aux img + palette to texture heap
     if (auxSize != 0) {
-        handle->auxRaster = (IMG_PTR) mdl_nextTextureAddress;
+        handle->auxRaster = (IMG_PTR) TextureHeapPos;
         if (auxPalSize != 0) {
-            handle->auxPalette = (PAL_PTR) (mdl_nextTextureAddress + auxSize);
+            handle->auxPalette = (PAL_PTR) (TextureHeapPos + auxSize);
         } else {
             handle->auxPalette = NULL;
         }
-        dma_copy((u8*) romOffset, (u8*) (romOffset + auxSize + auxPalSize), mdl_nextTextureAddress);
-        mdl_nextTextureAddress += auxSize + auxPalSize;
+        dma_copy((u8*) romOffset, (u8*) (romOffset + auxSize + auxPalSize), TextureHeapPos);
+        TextureHeapPos += auxSize + auxPalSize;
     } else {
         handle->auxPalette = NULL;
         handle->auxRaster = NULL;
     }
 
     // copy header data and create a display list for the texture
-    handle->gfx = (Gfx*) mdl_nextTextureAddress;
+    handle->gfx = (Gfx*) TextureHeapPos;
     memcpy(&handle->header, header, sizeof(*header));
-    make_texture_gfx(header, (Gfx**)&mdl_nextTextureAddress, handle->raster, handle->palette, handle->auxRaster, handle->auxPalette, 0, 0, 0, 0);
+    make_texture_gfx(header, (Gfx**) &TextureHeapPos, handle->raster, handle->palette, handle->auxRaster, handle->auxPalette, 0, 0, 0, 0);
 
-    temp = (Gfx**) &mdl_nextTextureAddress;
+    temp = (Gfx**) &TextureHeapPos;
     gSPEndDisplayList((*temp)++);
 }
 
@@ -2043,10 +2045,10 @@ void mdl_load_all_textures(ModelNode* rootModel, s32 romOffset, s32 size) {
     
     // textures are loaded to the upper half of the texture heap when not in the world
     if (gGameStatusPtr->isBattle != 0) {
-        baseOffset = 0x20000;
+        baseOffset = MAP_TEXTURE_MEMORY_SIZE;
     }
 
-    mdl_nextTextureAddress = mdl_textureBaseAddress + baseOffset;
+    TextureHeapPos = TextureHeapBase + baseOffset;
 
     if (rootModel != NULL && romOffset != 0 && size != 0) {
         s32 i;
@@ -4188,16 +4190,15 @@ void mdl_draw_hidden_panel_surface(Gfx** arg0, u16 treeIndex) {
 }
 
 void* mdl_get_next_texture_address(s32 size) {
-    u32 offset = mdl_nextTextureAddress - mdl_textureBaseAddress + 0x3F;
+    u32 offset = TextureHeapPos - TextureHeapBase + 0x3F;
 
     offset = (offset >> 6) << 6;
 
-    if (size + offset > 0x28000) {
+    if (size + offset > MAP_TEXTURE_MEMORY_SIZE + BTL_TEXTURE_MEMORY_SIZE) {
         return NULL;
     } else {
-        return mdl_textureBaseAddress + offset;
+        return TextureHeapBase + offset;
     }
-
 }
 
 void mdl_set_all_fog_mode(s32 fogMode) {

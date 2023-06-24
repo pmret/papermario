@@ -146,7 +146,7 @@ extern u16 gCurrentDoorSounds;
 
 extern UNK_TYPE D_800E92D8;
 extern UNK_TYPE D_80147574;
-extern s8 D_8014C248[];
+extern b8 D_8014C248;
 
 extern UNK_FUN_PTR(TalkNotificationCallback);
 extern UNK_FUN_PTR(InteractNotificationCallback);
