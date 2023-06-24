@@ -2849,6 +2849,8 @@ s32 is_block_on_ground(Entity* block) {
     return ret;
 }
 
+//TODO likely file split
+
 void state_delegate_NOP(void) {
 }
 
@@ -3025,6 +3027,8 @@ void state_render_frontUI(void) {
         }
     }
 }
+
+//TODO likely file split
 
 void appendGfx_model(void* data) {
     Model* model = data;
