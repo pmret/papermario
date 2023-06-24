@@ -5,7 +5,7 @@ from pathlib import Path
 from sys import argv, path
 path.append(str(Path(__file__).parent.parent.parent / "splat"))
 path.append(str(Path(__file__).parent.parent.parent / "splat_ext"))
-from pm_map_data import TexArchive
+from tex_archives import TexArchive
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Texture archives")
