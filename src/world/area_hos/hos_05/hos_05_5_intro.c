@@ -1910,11 +1910,6 @@ EvtScript N(EVS_Intro_Main) = {
 
 f32 N(AnimBowser_FlyOff_Time) = 0.0;
 
-#if VERSION_PAL
-API_CALLABLE(N(AnimBowser_FlyOff));
-INCLUDE_ASM(ApiResult, "world/area_hos/hos_05/hos_05_5_intro", AnimBowser_FlyOff);
-asm(".section .data");
-#else
 API_CALLABLE(N(AnimBowser_FlyOff)) {
     Npc* bowserMain = resolve_npc(script, NPC_Bowser_Body);
     Npc* bowserProp = resolve_npc(script, NPC_Bowser_Prop);
@@ -1931,20 +1926,15 @@ API_CALLABLE(N(AnimBowser_FlyOff)) {
     bowserMain->colliderPos.y = bowserMain->pos.y;
     bowserProp->colliderPos.y = bowserProp->pos.y;
     N(AnimBowser_FlyOff_Time)++;
-    if (N(AnimBowser_FlyOff_Time) > 40.0f) {
+    if (N(AnimBowser_FlyOff_Time) > (int)(40 * DT)) {
         return ApiStatus_DONE1;
     } else {
         return ApiStatus_BLOCK;
     }
 }
-#endif
 
 f32 N(AnimKammy_FlyOff_Time) = 0.0;
 
-#if VERSION_PAL
-API_CALLABLE(N(AnimKammy_FlyOff));
-INCLUDE_ASM(ApiResult, "world/area_hos/hos_05/hos_05_5_intro", AnimKammy_FlyOff);
-#else
 API_CALLABLE(N(AnimKammy_FlyOff)) {
     Npc* kammy = resolve_npc(script, NPC_Kammy);
 
@@ -1958,13 +1948,12 @@ API_CALLABLE(N(AnimKammy_FlyOff)) {
         40.0f, &kammy->pos.y);
     kammy->colliderPos.y = kammy->pos.y;
     N(AnimKammy_FlyOff_Time)++;
-    if (N(AnimKammy_FlyOff_Time) > 40.0f) {
+    if (N(AnimKammy_FlyOff_Time) > (int)(40 * DT)) {
         return ApiStatus_DONE1;
     } else {
         return ApiStatus_BLOCK;
     }
 }
-#endif
 
 API_CALLABLE(N(func_80244934_A2EB74)) {
     if (isInitialCall) {

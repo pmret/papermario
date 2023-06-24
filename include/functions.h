@@ -1097,7 +1097,7 @@ void btl_update(void);
 void update_item_entities(void);
 void iterate_models(void);
 void restore_map_collision_data(void);
-void load_model_textures(struct ModelNode* model, s32 romOffset, s32 size);
+void mdl_load_all_textures(struct ModelNode* model, s32 romOffset, s32 size);
 void calculate_model_sizes(void);
 
 #endif

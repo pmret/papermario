@@ -178,7 +178,7 @@ dlabel D_801516FC
 dlabel gMainGameState
 .space 0x00000040
 
-dlabel gCurrentTileDescriptor
+dlabel gCurrentTextureHeader
 .space 0x00000030
 
 dlabel wModelList

@@ -199,10 +199,10 @@ void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
     sfx_reset_door_sounds();
 
     if (!skipLoadingAssets) {
-        s32 thing = get_asset_offset(wMapTexName, &decompressedSize);
+        s32 texturesOffset = get_asset_offset(wMapTexName, &decompressedSize);
 
         if (mapSettings->modelTreeRoot != NULL) {
-            load_data_for_models(mapSettings->modelTreeRoot, thing, decompressedSize);
+            load_data_for_models(mapSettings->modelTreeRoot, texturesOffset, decompressedSize);
         }
     }
 

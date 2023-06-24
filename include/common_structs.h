@@ -994,7 +994,6 @@ typedef struct BattleStatus {
     /* 0x45C */ char unk_45C[4];
 } BattleStatus; // size = 0x460
 
-// alternative name: TileDescriptor
 typedef struct TextureHeader {
     /* 0x00 */ s8 name[32];
     /* 0x20 */ u16 auxW;

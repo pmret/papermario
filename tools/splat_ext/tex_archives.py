@@ -478,14 +478,28 @@ class TexImage:
         if self.has_mipmaps:
             self.mipmaps = []
             mipmap_idx = 1
-            while True:
-                img_path = str(tex_path / f"{self.img_name}_MM{mipmap_idx}.png")
-                if os.path.isfile(img_path):
+            divisor = 2
+            if self.main_width >= (32 >> self.main_depth):
+                while True:
+                    if (self.main_width // divisor) <= 0:
+                        break
+                    mmw = self.main_width // divisor
+                    mmh = self.main_height // divisor
+
+                    img_path = str(tex_path / f"{self.img_name}_MM{mipmap_idx}.png")
+                    if not os.path.isfile(img_path):
+                        raise Exception(f"Texture {self.img_name} is missing mipmap level {mipmap_idx} (size = {mmw} x {mmh})")
+                    
                     (raster, pal, width, height) = self.get_img_file(main_fmt_name, img_path)                    
                     self.mipmaps.append(raster)
+                    if width != mmw or height != mmh:
+                        raise Exception(f"Texture {self.img_name} has wrong size for mipmap level {mipmap_idx} \n"\
+                            + f"MM{mipmap_idx} size = {width} x {height}, but should be = {mmw} x {mmh}")
+                    
+                    divisor = divisor * 2
                     mipmap_idx += 1
-                else:
-                    break
+                    if (self.main_width // divisor) < (16 >> self.main_depth):
+                        break
             self.extra_tiles = TILES_MIPMAPS
         
         # read filter mode
@@ -588,6 +602,9 @@ class TexArchive:
         with open(json_fn, "r") as json_file:
             json_str = json_file.read()
             json_data = json.loads(json_str)
+
+            if len(json_data) > 128:
+                raise Exception(f"Maximum number of textures (128) exceeded by {tex_name} ({len(json_data)})`")
 
             for img_data in json_data:
                 img = TexImage()

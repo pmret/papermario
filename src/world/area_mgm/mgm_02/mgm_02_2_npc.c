@@ -437,7 +437,7 @@ API_CALLABLE(N(RunMinigame)) {
 
     gameFinished = FALSE;
     hittingPeachBlock = FALSE;
-    data = get_enemy(0)->varTablePtr[0];
+    data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTablePtr[SMASH_DATA_VAR_IDX];
 
     for (i = 0; i < NUM_BOXES; i++) {
         if (data->box[i].npcID != -1) {

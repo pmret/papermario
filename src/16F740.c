@@ -191,8 +191,8 @@ void btl_state_update_normal_start(void) {
     s32 size;
     UiStatus* uiStatus;
     void* compressedAsset;
-    ModelNode* model;
-    s32 textureRom;
+    ModelNode* rootModel;
+    s32 texturesOffset;
     Actor* actor;
     Evt* script;
     s32 enemyNotDone;
@@ -224,10 +224,10 @@ void btl_state_update_normal_start(void) {
 
             ASSERT(size <= 0x8000);
 
-            model = gMapShapeData.header.root;
-            textureRom = get_asset_offset(stage->texture, &size);
-            if (model != NULL) {
-                load_data_for_models(model, textureRom, size);
+            rootModel = gMapShapeData.header.root;
+            texturesOffset = get_asset_offset(stage->texture, &size);
+            if (rootModel != NULL) {
+                load_data_for_models(rootModel, texturesOffset, size);
             }
             load_battle_hit_asset(stage->hit);
 

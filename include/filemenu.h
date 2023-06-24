@@ -113,7 +113,7 @@ void filemenu_choose_name_update(MenuPanel*);
 void filemenu_choose_name_cleanup(MenuPanel*);
 
 void filemenu_draw_message(u8*, s32, s32, s32, s32, u32);
-void filemenu_draw_rect(s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileDescriptor, s32 uls, s32 ult, s32 dsdx, s32 dtdy);
+void filemenu_draw_rect(s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileIdx, s32 uls, s32 ult, s32 dsdx, s32 dtdy);
 
 extern WindowStyleCustom filemenu_windowStyles[];
 extern u8 filemenu_createfile_gridData[];

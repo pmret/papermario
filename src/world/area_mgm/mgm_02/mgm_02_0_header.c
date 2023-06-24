@@ -1,8 +1,15 @@
 #include "mgm_02.h"
 
 #if VERSION_PAL
-s32 N(get_tattle)(void);
-INCLUDE_ASM(void, "world/area_mgm/mgm_02/mgm_02_0_header", mgm_02_get_tattle);
+s32 N(get_tattle)(void) {
+    s32 msgID;
+
+    msgID = MSG_MapTattle_mgm_02;
+    if (N(pal_variable)) {
+        msgID = MSG_NONE;
+    }
+    return msgID;
+}
 #endif
 
 EntryList N(Entrances) = {
