@@ -106,7 +106,7 @@ dlabel entity_numShadows
 dlabel gSpriteShadingProfile
 .space 4
 
-dlabel entity_area_specific_data_is_loaded
+dlabel isAreaSpecificEntityDataLoaded
 .space 4
 
 dlabel entity_updateCounter
