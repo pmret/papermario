@@ -5,7 +5,7 @@
 #include "sprite/player.h"
 
 #ifdef SHIFT
-#define SPRITE_ROM_START (u32) _1943000_ROM_START + 0x10
+#define SPRITE_ROM_START (u32) sprites_ROM_START + 0x10
 #else
 #define SPRITE_ROM_START 0x1943000 + 0x10
 #endif
