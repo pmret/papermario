@@ -1134,9 +1134,12 @@ if __name__ == "__main__":
     ):
         gcc_cpps = ("cpp-14", "cpp-13", "cpp-12", "cpp-11")
         for ver in gcc_cpps:
-            if "Free Software Foundation" in exec_shell([ver, "--version"]):
-                args.cpp = ver
-                break
+            try:
+                if "Free Software Foundation" in exec_shell([ver, "--version"]):
+                    args.cpp = ver
+                    break
+            except FileNotFoundError:
+                pass
         if args.cpp is None:
             print("error: system C preprocessor is not GNU!")
             print(
