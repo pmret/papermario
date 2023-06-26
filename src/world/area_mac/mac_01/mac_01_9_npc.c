@@ -1,6 +1,7 @@
 #include "mac_01.h"
 #include "effects.h"
 #include "hud_element.h"
+#include "sprite/player.h"
 
 extern IconHudScriptPair gItemHudScripts[];
 extern EvtScript N(EVS_MerlonBargeOut);

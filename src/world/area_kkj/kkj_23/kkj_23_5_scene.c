@@ -1,5 +1,6 @@
 #include "kkj_23.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 void peach_force_disguise_action(s32);
 

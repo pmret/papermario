@@ -3,6 +3,7 @@
 #include "script_api/battle.h"
 #include "entity.h"
 #include "sprite.h"
+#include "sprite/player.h"
 
 #define CHUCK_QUIZMO_NPC_ID NPC_ChuckQuizmo
 

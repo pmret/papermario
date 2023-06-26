@@ -1,4 +1,5 @@
 #include "kkj_10.h"
+#include "sprite/player.h"
 
 #define NAME_SUFFIX _Early
 #include "world/common/enemy/Koopatrol_Stationary.inc.c"

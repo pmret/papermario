@@ -1,6 +1,7 @@
 #include "../area.h"
 #include "sprite/npc/JrTroopa.h"
 #include "sprite/npc/ParaJrTroopa.h"
+#include "sprite/player.h"
 #include "sprite/npc/Goompa.h"
 
 #define NAMESPACE A(jr_troopa)

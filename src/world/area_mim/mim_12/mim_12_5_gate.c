@@ -1,4 +1,5 @@
 #include "mim_12.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(InitializeGustyFogProperties)) {
     enable_world_fog();

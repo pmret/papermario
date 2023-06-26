@@ -1,5 +1,6 @@
 #include "obk_02.h"
 #include "entity.h"
+#include "sprite/player.h"
 
 EvtScript N(EVS_ChestTrap) = {
     EVT_WAIT(15)

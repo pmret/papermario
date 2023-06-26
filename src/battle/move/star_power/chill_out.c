@@ -1,6 +1,7 @@
 #include "common.h"
 #include "script_api/battle.h"
 #include "sprite/npc/BattleMuskular.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_move_chill_out
 

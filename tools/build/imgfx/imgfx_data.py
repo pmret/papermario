@@ -5,7 +5,6 @@ import argparse
 import json
 from pathlib import Path
 from typing import Any, List
-import yaml as yaml_loader
 
 @dataclass
 class Vertex:

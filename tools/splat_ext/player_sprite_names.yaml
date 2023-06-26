@@ -1,0 +1,1107 @@
+player_sprites:
+  Mario1:
+    has_back: true
+    palettes:
+    - Default
+    - Golden
+    - Hammer1 # also used for Burnt
+    - Hammer2
+    - Hammer3
+    - Red
+    - Poisoned
+    - Golden_Poisoned
+    - Hammer1_Poisoned
+    - Hammer2_Poisoned
+    - Hammer3_Poisoned
+    - Red_Poisoned
+    - Dark
+    - Golden_Dark
+    - Hammer1_Dark
+    - Hammer2_Dark
+    - Hammer3_Dark
+    - Red_Dark
+    - Shocked
+    - Golden_Shocked
+    - Hammer1_Shocked
+    - Hammer2_Shocked
+    - Hammer3_Shocked
+    - Red_Shocked
+    - Burnt_Crouch
+    - Golden_19
+    animations:
+    - Still
+    - TiredStill
+    - Idle
+    - TiredIdle
+    - Walk
+    - Run
+    - BeforeJump
+    - Jump
+    - Fall
+    - Land
+    - Sit
+    - SpinJump
+    - SpinFall
+    - SpinLand
+    - Frozen
+    - Fallen
+    - Spin
+    - SpeedySpin
+    - SpinAttack
+    - SitUnused
+    - Crouch
+    - CrouchBurnt
+    - Throw
+    - Hurt
+    - FallDown
+    - TouchedFire
+    - HurtFoot
+    - PanicRun
+    - Eat
+    - StickOutTongue
+    - PlantFireFlower
+    - UsePower
+    - FightingStance
+    - Thinking
+    - Dizzy
+    - VacantStare
+    - GetItem
+    - Drink
+    - Squish
+    - ThinkingRun
+    - Question
+    - NodYes
+    - LookUp
+    - Flail
+    - Pray
+    - Chuckle
+    - FallBack
+    - Burnt
+    - GetUp
+    - DustOff
+    - ThumbsUp
+    - TossItem
+  MarioB1:
+    palettes:
+    - Default
+    - Golden
+    - Hammer1 # also used for Burnt
+    - Hammer2
+    - Hammer3
+    - Red
+    - Poisoned
+    - Golden_Poisoned
+    - Hammer1_Poisoned
+    - Hammer2_Poisoned
+    - Hammer3_Poisoned
+    - Red_Poisoned
+    - Dark
+    - Golden_Dark
+    - Hammer1_Dark
+    - Hammer2_Dark
+    - Hammer3_Dark
+    - Red_Dark
+    - Shocked
+    - Golden_Shocked
+    - Hammer1_Shocked
+    - Hammer2_Shocked
+    - Hammer3_Shocked
+    - Red_Shocked
+    animations:
+    - Stomp
+    - Trip
+    - Dying
+    - SleepStill
+    - Sleep
+    - SickStill
+    - Sick
+    - ReadyToDrink
+    - ApplyCream
+    - AdjustCap
+    - FingerWag
+    - JumpForJoy
+    - Leeching
+    - Smash1_Begin
+    - Smash1_PullBack
+    - Smash1_Hold1
+    - Smash1_Hold2
+    - Smash1_PreSwing
+    - Smash1_Swing
+    - Smash1_Spin
+    - Smash2_Begin
+    - Smash2_PullBack
+    - Smash2_Hold1
+    - Smash2_Hold2
+    - Smash2_PreSwing
+    - Smash2_Swing
+    - Smash2_Spin
+    - Smash3_Begin
+    - Smash3_PullBack
+    - Smash3_Hold1
+    - Smash3_Hold2
+    - Smash3_PreSwing
+    - Smash3_Swing
+    - Smash3_Spin
+  MarioB2:
+    palettes:
+    - Default
+    - Golden
+    - Hammer1 # also used for Burnt
+    - Hammer2
+    - Hammer3
+    - Red
+    - Poisoned
+    - Golden_Poisoned
+    - Hammer1_Poisoned
+    - Hammer2_Poisoned
+    - Hammer3_Poisoned
+    - Red_Poisoned
+    - Dark
+    - Golden_Dark
+    - Hammer1_Dark
+    - Hammer2_Dark
+    - Hammer3_Dark
+    - Red_Dark
+    - Shocked
+    - Golden_Shocked
+    - Hammer1_Shocked
+    - Hammer2_Shocked
+    - Hammer3_Shocked
+    - Red_Shocked
+    animations:
+    - SpinSmash1_Begin
+    - SpinSmash1_Raise
+    - SpinSmash1_Hold1
+    - SpinSmash1_Hold2
+    - SpinSmash1_PreSwing
+    - SpinSmash1_Swing
+    - SpinSmash2_Begin
+    - SpinSmash2_Raise
+    - SpinSmash2_Hold1
+    - SpinSmash2_Hold2
+    - SpinSmash2_PreSwing
+    - SpinSmash2_Swing
+    - SpinSmash3_Begin
+    - SpinSmash3_Raise
+    - SpinSmash3_Hold1
+    - SpinSmash3_Hold2
+    - SpinSmash3_PreSwing
+    - SpinSmash3_Swing
+    - Hammer1
+    - Hammer2
+    - Hammer3
+    - DustyHammer
+    - HammerThrow1_Begin
+    - HammerThrow1_Raise
+    - HammerThrow1_Hold1
+    - HammerThrow1_Hold2
+    - HammerThrow1_PreThrow
+    - HammerThrow1_Throw
+    - HammerThrow2_Begin
+    - HammerThrow2_Raise
+    - HammerThrow2_Hold1
+    - HammerThrow2_Hold2
+    - HammerThrow2_PreThrow
+    - HammerThrow2_Throw
+    - HammerThrow3_Begin
+    - HammerThrow3_Raise
+    - HammerThrow3_Hold1
+    - HammerThrow3_Hold2
+    - HammerThrow3_PreThrow
+    - HammerThrow3_Throw
+    - BerserkIdle
+    - BerserkStill
+    - Inert
+    - InertTired
+  MarioB3:
+    palettes:
+    - Default
+    - Golden
+    - Hammer1 # also used for Burnt
+    - Hammer2
+    - Hammer3
+    - Red
+    - Poisoned
+    - Golden_Poisoned
+    - Hammer1_Poisoned
+    - Hammer2_Poisoned
+    - Hammer3_Poisoned
+    - Red_Poisoned
+    - Frozen_Dark
+    - Golden_Dark
+    - Hammer1_Dark
+    - Hammer2_Dark
+    - Hammer3_Dark
+    - Red_Dark
+    - Shocked
+    - Golden_Shocked
+    - Hammer1_Shocked
+    - Hammer2_Shocked
+    - Hammer3_Shocked
+    - Red_Shocked
+    - Burnt
+    animations:
+    - Hustled
+    - Petrified
+    - StoneBurnt
+    - BurnHurt
+    - Hammer1_Charging
+    - Hammer1_Charged
+    - Hammer2_Charging
+    - Hammer2_Charged
+    - Hammer3_Charging
+    - Hammer3_Charged
+  MarioW1:
+    has_back: true
+    palettes:
+    - Default
+    - Golden
+    - Hammer1 # also used for Burnt
+    - Hammer2
+    - Hammer3
+    - Red
+    - Poisoned
+    - Golden_Poisoned
+    - Hammer1_Poisoned
+    - Hammer2_Poisoned
+    - Hammer3_Poisoned
+    - Red_Poisoned
+    - Dark
+    - Golden_Dark
+    - Hammer1_Dark
+    - Hammer2_Dark
+    - Hammer3_Dark
+    - Red_Dark
+    - Shocked
+    - Golden_Shocked
+    - Hammer1_Shocked
+    - Hammer2_Shocked
+    - Hammer3_Shocked
+    - Red_Shocked
+    animations:
+    - CarryWalk
+    - CarryAbove
+    - CarryRun
+    - CarryAboveRun
+    - PushToward
+    - TakeItem
+    - PlaceItem
+    - CarryIdle
+    - TakeItemSquashed
+    - JumpWatt
+    - FallWatt
+    - LandWatt
+    - Lift
+    - Lift_Back
+    - Toss
+    - Toss_Back
+    - Smash1_Miss
+    - Smash1_Miss_Back
+    - Smash1_Hit
+    - Smash1_Hit_Back
+    - Smash2_Miss
+    - Smash2_Miss_Back
+    - Smash2_Hit
+    - Smash2_Hit_Back
+    - Smash3_Miss
+    - Smash3_Miss_Back
+    - Smash3_Hit
+    - Smash3_Hit_Back
+    - PunchAir_Back
+  MarioW2:
+    palettes:
+    - Default
+    - Golden
+    - Hammer1 # also used for Burnt
+    - Hammer2
+    - Hammer3
+    - Red
+    - Poisoned
+    - Golden_Poisoned
+    - Hammer1_Poisoned
+    - Hammer2_Poisoned
+    - Hammer3_Poisoned
+    - Red_Poisoned
+    - Dark
+    - Golden_Dark
+    - Hammer1_Dark
+    - Hammer2_Dark
+    - Hammer3_Dark
+    - Red_Dark
+    - Shocked
+    - Golden_Shocked
+    - Hammer1_Shocked
+    - Hammer2_Shocked
+    - Hammer3_Shocked
+    - Red_Shocked
+    animations:
+    - Carried
+    - FallenPivotable
+    - TouchedLava
+    - Collapse
+    - PraiseTheSun
+    - HangSwingingLegs
+    - Hang
+    - SpeakUp
+    - IdleYawning
+    - LayingDown
+    - Shocked
+    - PleaseComeBack
+    - LookClosely
+    - HoldOnto
+    - RideLaki
+    - RideSushie
+    - DiveSushie
+    - TouchNose
+    - PanicHoverStill
+    - PanicHover
+    - Jump
+    - JumpHitHead
+    - Surprise
+    - Flail
+    - PanicStill
+    - Panic
+    - Thrown
+    - DeepExhale
+    - NodYesTwice
+    - SleepStanding
+    - JoltAwake
+    - FlailArms
+    - PushSide
+    - LookUpWalk
+    - LookAround
+    - SitStill
+    - SitIdle
+    - SitNodYes
+    - HoldLetter
+    - ReadLetter
+  MarioW3:
+    palettes:
+    - Default
+    - Golden
+    - Hammer1 # also used for Burnt
+    - Hammer2
+    - Hammer3
+    - Red
+    - Poisoned
+    - Golden_Poisoned
+    - Hammer1_Poisoned
+    - Hammer2_Poisoned
+    - Hammer3_Poisoned
+    - Red_Poisoned
+    - Dark
+    - Golden_Dark
+    - Hammer1_Dark
+    - Hammer2_Dark
+    - Hammer3_Dark
+    - Red_Dark
+    - Shocked
+    - Golden_Shocked
+    - Hammer1_Shocked
+    - Hammer2_Shocked
+    - Hammer3_Shocked
+    - Red_Shocked
+    - 8bit
+    animations:
+    - ShakeHead
+    - ShakeHeadHard
+    - 8bit_Still
+    - 8bit_Run
+    - 8bit_TurnAround
+    - 8bit_Jump
+  Peach1:
+    has_back: true
+    palettes:
+    - Peach
+    - Peach_Poisoned
+    - Peach_Dark
+    - Peach_Shocked
+    - {name: Cream, front_only: True }
+    - {name: Strawberry, front_only: True }
+    - {name: Butter, front_only: True }
+    - {name: Cleanser, front_only: True }
+    - {name: Water, front_only: True }
+    - {name: Milk, front_only: True }
+    - {name: Flour, front_only: True }
+    - {name: Egg, front_only: True }
+    - {name: CompleteCake, front_only: True }
+    - {name: CakeBowl, front_only: True }
+    - {name: CakeMixed, front_only: True }
+    - {name: CakePan, front_only: True }
+    - {name: CakeBatter, front_only: True }
+    - {name: BareCake, front_only: True }
+    - {name: Salt, front_only: True }
+    - {name: Sugar, front_only: True }
+    - {name: BerryCake, front_only: True }
+    - {name: IcingCake, front_only: True }
+    animations:
+    - Still
+    - Idle
+    - Walk
+    - Run
+    - RunLiftDress
+    - StepUp
+    - StepDown
+    - HoldCream
+    - HoldCream_Back
+    - HoldStrawberry
+    - HoldStrawberry_Back
+    - HoldButter
+    - HoldButter_Back
+    - HoldCleanser
+    - HoldCleanser_Back
+    - HoldWater
+    - HoldWater_Back
+    - HoldMilk
+    - HoldMilk_Back
+    - HoldFlour
+    - HoldFlour_Back
+    - HoldEgg
+    - HoldEgg_Back
+    - HoldCompleteCake
+    - HoldCompleteCake_Back
+    - HoldCakeBowl
+    - HoldCakeBowl_Back
+    - HoldCakeMixed
+    - HoldCakeMixed_Back
+    - HoldCakePan
+    - HoldCakePan_Back
+    - HoldCakeBatter
+    - HoldCakeBatter_Back
+    - HoldBareCake
+    - HoldBareCake_Back
+    - HoldSalt
+    - HoldSalt_Back
+    - HoldSugar
+    - HoldSugar_Back
+    - HoldIcingCake
+    - HoldIcingCake_Back
+    - HoldBerryCake
+    - HoldBerryCake_Back
+    - CarryCream
+    - CarryCream_Back
+    - CarryStrawberry
+    - CarryStrawberry_Back
+    - CarryButter
+    - CarryButter_Back
+    - CarryCleanser
+    - CarryCleanser_Back
+    - CarryWater
+    - CarryWater_Back
+    - CarryMilk
+    - CarryMilk_Back
+    - CarryFlour
+    - CarryFlour_Back
+    - CarryEgg
+    - CarryEgg_Back
+    - CarryCompleteCake
+    - CarryCompleteCake_Back
+    - CarryCakeBowl
+    - CarryCakeBowl_Back
+    - CarryCakeMixed
+    - CarryCakeMixed_Back
+    - CarryCakePan
+    - CarryCakePan_Back
+    - CarryCakeBatter
+    - CarryCakeBatter_Back
+    - CarryBareCake
+    - CarryBareCake_Back
+    - CarrySalt
+    - CarrySalt_Back
+    - CarrySugar
+    - CarrySugar_Back
+    - CarryIcingCake
+    - CarryIcingCake_Back
+    - CarryBerryCake
+    - CarryBerryCake_Back
+  Peach2:
+    palettes:
+    - Peach
+    - Parasol
+    - Bowl
+    - Glove
+    - Peach_Poisoned
+    - Parasol_Poisoned
+    - Bowl_Poisoned
+    - Glove_Poisoned
+    - Peach_Dark
+    - Parasol_Dark
+    - Bowl_Dark
+    - Glove_Dark
+    - Peach_Shocked
+    - Parasol_Shocked
+    - Bowl_Shocked
+    - Glove_Shocked
+    animations:
+    - RaiseArms
+    - Talk
+    - LowerArms
+    - Yawn
+    - Sleep
+    - Gasp
+    - GaspStill
+    - Shout
+    - EndShout
+    - Delighted
+    - GiveItem
+    - OpenDoors
+    - Curious
+    - Startle
+    - SadStill
+    - SadTalk
+    - SpreadArms
+    - LookAround
+    - ArmsCrossedIdle
+    - ArmsCrossedTalk
+    - ForwardIdle
+    - ForwardShout
+    - ForwardHappy
+    - ForwardSad
+    - Carried
+    - Thrown
+    - Land
+    - TiedHangIdle
+    - TiedHangStruggle
+    - TiedStill
+    - TiedIdle
+    - MixingFull
+    - Mixing1
+    - Mixing2
+    - Mixing3
+    - Mixing4
+    - UseParasol
+    - PutAwayParasol
+    - TalkIdle
+    - CantFitParasol
+    - Inert
+  Peach3:
+    palettes:
+    - Peach
+    - Glove
+    - Peach_Poisoned
+    - Glove_Poisoned
+    - Peach_Dark
+    - Glove_Dark
+    - Peach_Shocked
+    - Glove_Shocked
+    - CompleteCake
+    - CakeBowl
+    - BareCake
+    - BerryCake
+    - IcingCake
+    animations:
+    - PresentCompleteCake
+    - PresentBareCake
+    - PresentBerryCake
+    - PresentIcingCake
+    - InformalTalk
+    - ForwardHoldItem
+    - ForwardPlaceItem
+    - ReachIntoOven
+    - TiedSideways
+    - TiedTalk
+    - TiedShout
+    - TiedLaugh
+    - PourBatter
+    - WalkSad
+    - TiedUpsideDown
+    - Pray
+    - ReachForButtonHigh
+    - PressButtonHigh
+    - AfterPressButtonHigh
+    - ReachForButton
+    - PressButton
+    - AfterPressButton
+player_rasters:
+- PSR_00B80
+- PSR_00F00
+- PSR_01440
+- PSR_017C0
+- PSR_01B40
+- PSR_01E40
+- PSR_02380
+- PSR_028C0
+- PSR_02E00
+- PSR_03180
+- PSR_03600
+- PSR_03A80
+- PSR_03FC0
+- PSR_04500
+- PSR_04A40
+- PSR_04EC0
+- PSR_05340
+- PSR_057C0
+- PSR_05D00
+- PSR_06240
+- PSR_06780
+- PSR_06CC0
+- PSR_07200
+- PSR_07740
+- PSR_07C80
+- PSR_081C0
+- PSR_08640
+- PSR_08AC0
+- PSR_09000
+- PSR_09540
+- PSR_09B40
+- PSR_0A140
+- PSR_0A680
+- PSR_0ABC0
+- PSR_0B100
+- PSR_0B640
+- PSR_0BB80
+- PSR_0BF80
+- PSR_0C380
+- PSR_0C800
+- PSR_0CE00
+- PSR_0D400
+- PSR_0DB00
+- PSR_0E200
+- PSR_0E900
+- PSR_0F000
+- PSR_0F540
+- PSR_0FA80
+- PSR_0FFC0
+- PSR_10500
+- PSR_10980
+- PSR_10E00
+- PSR_11280
+- PSR_117C0
+- PSR_11D00
+- PSR_12080
+- PSR_12500
+- PSR_12980
+- PSR_12EC0
+- PSR_13400
+- PSR_13940
+- PSR_13CC0
+- PSR_14040
+- PSR_14580
+- PSR_14AC0
+- PSR_15000
+- PSR_15540
+- PSR_15A80
+- PSR_15FC0
+- PSR_16440
+- PSR_168C0
+- PSR_16D40
+- PSR_17280
+- PSR_177C0
+- PSR_17B40
+- PSR_17EC0
+- PSR_18240
+- PSR_185C0
+- PSR_18B00
+- PSR_19040
+- PSR_19580
+- PSR_19AC0
+- PSR_1A000
+- PSR_1A540
+- PSR_1AA80
+- PSR_1AE00
+- PSR_1B340
+- PSR_1B6C0
+- PSR_1BA40
+- PSR_1BD40
+- PSR_1C280
+- PSR_1C7C0
+- PSR_1CD00
+- PSR_1D180
+- PSR_1D600
+- PSR_1DB40
+- PSR_1E080
+- PSR_1E5C0
+- PSR_1EA40
+- PSR_1EEC0
+- PSR_1F340
+- PSR_1F880
+- PSR_1F890
+- PSR_1FD10
+- PSR_20190
+- PSR_20610
+- PSR_20B50
+- PSR_20FD0
+- PSR_21450
+- PSR_218D0
+- PSR_21E10
+- PSR_22350
+- PSR_22890
+- PSR_22DD0
+- PSR_23310
+- PSR_23710
+- PSR_23C10
+- PSR_24110
+- PSR_24510
+- PSR_24910
+- PSR_24E50
+- PSR_25450
+- PSR_25850
+- PSR_25CD0
+- PSR_26150
+- PSR_26690
+- PSR_26BD0
+- PSR_27110
+- PSR_27650
+- PSR_27B90
+- PSR_28010
+- PSR_28490
+- PSR_289D0
+- PSR_28D50
+- PSR_290D0
+- PSR_29610
+- PSR_29B50
+- PSR_29FD0
+- PSR_2A450
+- PSR_2A8D0
+- PSR_2AE10
+- PSR_2B350
+- PSR_2B7D0
+- PSR_2BC50
+- PSR_2BFD0
+- PSR_2C350
+- PSR_2C950
+- PSR_2CB50
+- PSR_2CD50
+- PSR_2CF50
+- PSR_2D250
+- PSR_2D850
+- PSR_2DE50
+- PSR_2E050
+- PSR_2E250
+- PSR_2E450
+- PSR_2E750
+- PSR_2ED50
+- PSR_2F350
+- PSR_2F710
+- PSR_2FAD0
+- PSR_2FE90
+- PSR_30250
+- PSR_30790
+- PSR_30CD0
+- PSR_31210
+- PSR_31750
+- PSR_31C90
+- PSR_32010
+- PSR_32550
+- PSR_328D0
+- PSR_32E10
+- PSR_33350
+- PSR_33890
+- PSR_33DD0
+- PSR_34250
+- PSR_346D0
+- PSR_34A90
+- PSR_34D90
+- PSR_35150
+- PSR_35550
+- PSR_35750
+- PSR_35950
+- PSR_35B50
+- PSR_35D50
+- PSR_36150
+- PSR_36350
+- PSR_36550
+- PSR_36750
+- PSR_36950
+- PSR_36B50
+- PSR_36F50
+- PSR_373D0
+- PSR_37910
+- PSR_37C90
+- PSR_38010
+- PSR_38390
+- PSR_388D0
+- PSR_38E10
+- PSR_39350
+- PSR_39890
+- PSR_39DD0
+- PSR_3A310
+- PSR_3A850
+- PSR_3AD90
+- PSR_3B2D0
+- PSR_3B750
+- PSR_3BC90
+- PSR_3C1D0
+- PSR_3C650
+- PSR_3C890
+- PSR_3CAD0
+- PSR_3CF50
+- PSR_3D490
+- PSR_3D9D0
+- PSR_3DCD0
+- PSR_3E150
+- PSR_3E5D0
+- PSR_3EB10
+- PSR_3EF90
+- PSR_3F310
+- PSR_3F690
+- PSR_3FBD0
+- PSR_40110
+- PSR_40650
+- PSR_40B90
+- PSR_41010
+- PSR_41550
+- PSR_41910
+- PSR_41E50
+- PSR_42390
+- PSR_42710
+- PSR_42A90
+- PSR_42C90
+- PSR_42E90
+- PSR_43090
+- PSR_43450
+- PSR_43810
+- PSR_43D50
+- PSR_44290
+- PSR_447D0
+- PSR_44D10
+- PSR_45250
+- PSR_45790
+- PSR_45CD0
+- PSR_46150
+- PSR_46690
+- PSR_46BD0
+- PSR_47110
+- PSR_47650
+- PSR_479D0
+- PSR_47D50
+- PSR_48290
+- PSR_487D0
+- PSR_48D10
+- PSR_49250
+- PSR_49790
+- PSR_49B90
+- PSR_4A0D0
+- PSR_4A610
+- PSR_4AB50
+- PSR_4AFD0
+- PSR_4B450
+- PSR_4B990
+- PSR_4BED0
+- PSR_4C410
+- PSR_4C790
+- PSR_4CCD0
+- PSR_4D210
+- PSR_4D690
+- PSR_4DB10
+- PSR_4DF90
+- PSR_4E590
+- PSR_4EAD0
+- PSR_4EE50
+- PSR_4F1D0
+- PSR_4F710
+- PSR_4FC50
+- PSR_50190
+- PSR_506D0
+- PSR_50CD0
+- PSR_512D0
+- PSR_51750
+- PSR_51C90
+- PSR_521D0
+- PSR_52710
+- PSR_52C50
+- PSR_53190
+- PSR_536D0
+- PSR_53C10
+- PSR_53FD0
+- PSR_54510
+- PSR_54890
+- PSR_54C10
+- PSR_54F90
+- PSR_55590
+- PSR_55AD0
+- PSR_55E50
+- PSR_561D0
+- PSR_56550
+- PSR_56A90
+- PSR_56E10
+- PSR_57190
+- PSR_57510
+- PSR_57890
+- PSR_57A90
+- PSR_57C90
+- PSR_57E90
+- PSR_58250
+- PSR_58450
+- PSR_58810
+- PSR_58B10
+- PSR_591D0
+- PSR_59890
+- PSR_59F50
+- PSR_5A610
+- PSR_5ACD0
+- PSR_5B390
+- PSR_5BA50
+- PSR_5C110
+- PSR_5C7D0
+- PSR_5CE90
+- PSR_5D550
+- PSR_5DC10
+- PSR_5E2D0
+- PSR_5E990
+- PSR_5F050
+- PSR_5F710
+- PSR_5FDD0
+- PSR_60490
+- PSR_60B50
+- PSR_61210
+- PSR_618D0
+- PSR_61F90
+- PSR_62650
+- PSR_62D10
+- PSR_62E90
+- PSR_63010
+- PSR_63190
+- PSR_63310
+- PSR_63490
+- PSR_63610
+- PSR_63790
+- PSR_63910
+- PSR_63A90
+- PSR_63C10
+- PSR_63D90
+- PSR_63F10
+- PSR_64090
+- PSR_64750
+- PSR_64E10
+- PSR_654D0
+- PSR_65B90
+- PSR_65D10
+- PSR_65E90
+- PSR_66550
+- PSR_66C10
+- PSR_672D0
+- PSR_67990
+- PSR_68050
+- PSR_68710
+- PSR_68DD0
+- PSR_69490
+- PSR_69B50
+- PSR_6A210
+- PSR_6A8D0
+- PSR_6AF90
+- PSR_6B650
+- PSR_6BD10
+- PSR_6C3D0
+- PSR_6CA90
+- PSR_6D150
+- PSR_6D810
+- PSR_6DED0
+- PSR_6E590
+- PSR_6EC50
+- PSR_6F310
+- PSR_6F9D0
+- PSR_70090
+- PSR_70750
+- PSR_70E10
+- PSR_714D0
+- PSR_71B90
+- PSR_72250
+- PSR_72910
+- PSR_72FD0
+- PSR_73690
+- PSR_73D50
+- PSR_74410
+- PSR_74AD0
+- PSR_75190
+- PSR_75850
+- PSR_75F10
+- PSR_765D0
+- PSR_76C90
+- PSR_77350
+- PSR_77A10
+- PSR_780D0
+- PSR_78790
+- PSR_78E50
+- PSR_79510
+- PSR_79BD0
+- PSR_7A290
+- PSR_7A950
+- PSR_7B010
+- PSR_7B6D0
+- PSR_7BD90
+- PSR_7C450
+- PSR_7CB10
+- PSR_7D1D0
+- PSR_7D890
+- PSR_7DF50
+- PSR_7E610
+- PSR_7ECD0
+- PSR_7F390
+- PSR_7FA50
+- PSR_80110
+- PSR_807D0
+- PSR_80E90
+- PSR_81610
+- PSR_81D90
+- PSR_82510
+- PSR_82C90
+- PSR_83410
+- PSR_83D10
+- PSR_845D0
+- PSR_84C90
+- PSR_85350
+- PSR_85C50
+- PSR_86550
+- PSR_86E50
+- PSR_87750
+- PSR_88050
+- PSR_88710
+- PSR_88DD0
+- PSR_89490
+- PSR_89510
+- PSR_89590
+- PSR_89610
+- PSR_89650
+- PSR_89750
+- PSR_89E10
+- PSR_8A4D0
+- PSR_8AB90
+- PSR_8B250
+- PSR_8B910
+- PSR_8BFD0
+- PSR_8C690
+- PSR_8CD50
+- PSR_8CF90
+- PSR_8D410
+- PSR_8D890
+- PSR_8DB90
+- PSR_8E250
+- PSR_8E910
+- PSR_8EFD0
+- PSR_8F690
+- PSR_8FD50
+- PSR_90410
+- PSR_90AD0
+- PSR_91190
+- PSR_91850
+- PSR_91F10
+- PSR_925D0
+- PSR_92D50
+- PSR_934D0
+- PSR_93C50
+- PSR_94310
+- PSR_949D0
+- PSR_95090
+- PSR_95750
+- PSR_95E10
+- PSR_964D0
+- PSR_96B90
+- PSR_97250
+- PSR_97910
+- PSR_97A90
+- PSR_98150
+- PSR_98810
+- PSR_98ED0
+- PSR_99590
+- PSR_99C50
+- PSR_9A310
+- PSR_9A9D0
+- PSR_9B090
+- PSR_9B750
+- PSR_9B790
+- PSR_9BE50
+- PSR_9C510
+- PSR_9CBD0
+- PSR_9D290
+- PSR_9CD50

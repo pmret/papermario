@@ -1,4 +1,5 @@
 #include "kkj_26.h"
+#include "sprite/player.h"
 
 EvtScript N(EVS_Scene_WhereIsMario) = {
     EVT_CALL(DisablePlayerInput, TRUE)

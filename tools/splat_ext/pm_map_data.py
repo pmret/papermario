@@ -5,7 +5,7 @@ from util.n64.Yay0decompress import Yay0Decompressor
 from util.color import unpack_color
 from segtypes.n64.palette import iter_in_groups
 from util import options
-import png
+import png  # type: ignore
 import yaml as yaml_loader
 import n64img.image
 
@@ -109,7 +109,9 @@ class N64SegPm_map_data(N64Segment):
                     w = png.Writer(150, 105, palette=parse_palette(bytes[:0x200]))
                     w.write_array(f, bytes[0x200:])
             elif name == "title_data":
-                if "ver/us" in str(options.opts.target_path) or "ver/pal" in str(options.opts.target_path):
+                if "ver/us" in str(options.opts.target_path) or "ver/pal" in str(
+                    options.opts.target_path
+                ):
                     w = 200
                     h = 112
                     img = n64img.image.RGBA32(
@@ -184,7 +186,9 @@ class N64SegPm_map_data(N64Segment):
 
                 # sbk_bg has an alternative palette
                 if name == "sbk_bg":
-                    write_bg_png(bytes, fs_dir / "bg" / f"{name}.alt.png", header_offset=0x10)
+                    write_bg_png(
+                        bytes, fs_dir / "bg" / f"{name}.alt.png", header_offset=0x10
+                    )
             else:
                 with open(path, "wb") as f:
                     f.write(bytes)

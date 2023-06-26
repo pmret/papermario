@@ -56,7 +56,7 @@ class GCRARCArchive:
         # Yay0
         elif compression_scheme == 0x59617930:
             self.compression = "yay0"
-            return Yay0Decompressor().decompress(file_bytes)
+            return Yay0Decompressor.decompress(file_bytes)
         # Not compressed!
         else:
             return file_bytes

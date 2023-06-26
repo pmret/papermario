@@ -1,4 +1,5 @@
 #include "hos_10.h"
+#include "sprite/player.h"
 
 #define NAME_SUFFIX _Descent
 

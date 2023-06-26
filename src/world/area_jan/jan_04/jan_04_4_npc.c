@@ -1,4 +1,5 @@
 #include "jan_04.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/Sushie.inc.c"
 #include "world/common/npc/Bubulb.inc.c"

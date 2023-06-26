@@ -2,6 +2,7 @@
 #include "sprite.h"
 #include "nu/nusys.h"
 #include "ld_addrs.h"
+#include "sprite/player.h"
 
 #ifdef SHIFT
 #define SPRITE_ROM_START (u32) _1943000_ROM_START + 0x10

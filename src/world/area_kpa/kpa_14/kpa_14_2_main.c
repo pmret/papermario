@@ -1,5 +1,6 @@
 #include "kpa_14.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #include "world/common/atomic/TexturePan.inc.c"
 

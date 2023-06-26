@@ -1,6 +1,7 @@
 #include "kzn_23.h"
 #include "entity.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(SetChestPosition)) {
     Bytecode* args = script->ptrReadPos;

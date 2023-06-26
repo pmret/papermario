@@ -1,3 +1,5 @@
+#include "sprite/player.h"
+
 s32 N(DojoBattleIDs)[] = {
     BTL_MAC_FORMATION_00,
     BTL_MAC_FORMATION_01,

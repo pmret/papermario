@@ -5,15 +5,9 @@
 #include "hud_element.h"
 #include "world/partners.h"
 #include "sprite.h"
-#include "model.h"
-
-#if !VERSION_JP && !VERSION_IQUE
-// TODO: remove this conditional when more of the JP rom has been processed
 #include "sprite/npc/BattleMerlee.h"
-#else
-#define ANIM_BattleMerlee_Gather 0x00BB0001
-#define ANIM_BattleMerlee_Release 0x00BB0000
-#endif
+#include "sprite/player.h"
+#include "model.h"
 
 ApiStatus ShowMerleeCoinMessage(Evt* script, s32 isInitialCall);
 ApiStatus ShowMerleeRanOutMessage(Evt* script, s32 isInitialCall);

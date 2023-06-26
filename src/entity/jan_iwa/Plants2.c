@@ -3,6 +3,7 @@
 #include "entity.h"
 #include "animation_script.h"
 #include "ld_addrs.h"
+#include "sprite/player.h"
 
 extern EntityBlueprint Entity_MunchlesiaReset;
 extern EntityBlueprint Entity_MunchlesiaGrab;

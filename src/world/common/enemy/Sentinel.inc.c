@@ -1,5 +1,6 @@
 #include "Sentinel.h"
 #include "world/partners.h"
+#include "sprite/player.h"
 
 #include "world/common/enemy/ai/SentinelAI.inc.c"
 

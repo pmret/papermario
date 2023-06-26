@@ -1,6 +1,7 @@
 #include "common.h"
 #include "script_api/battle.h"
 #include "message_ids.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_move_peach_focus
 

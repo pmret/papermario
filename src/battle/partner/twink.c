@@ -1,6 +1,7 @@
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "sprite/npc/Twink.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_partner_twink
 

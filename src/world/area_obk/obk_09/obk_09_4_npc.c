@@ -1,5 +1,6 @@
 #include "obk_09.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 typedef struct ImprisonedCard {
     /* 0x00 */ Vec3f pos;

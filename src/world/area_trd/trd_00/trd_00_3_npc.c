@@ -1,5 +1,6 @@
 #include "trd_00.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 extern EvtScript N(EVS_SetupMusic);
 

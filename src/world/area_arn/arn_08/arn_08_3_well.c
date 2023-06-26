@@ -1,4 +1,5 @@
 #include "arn_08.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(AwaitPlayerFallDist)) {
     PlayerStatus* playerStatus = &gPlayerStatus;

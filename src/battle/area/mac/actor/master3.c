@@ -1,5 +1,6 @@
 #include "../area.h"
 #include "sprite/npc/TheMaster.h"
+#include "sprite/player.h"
 
 #define NAMESPACE A(master3)
 

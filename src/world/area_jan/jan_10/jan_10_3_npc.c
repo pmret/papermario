@@ -1,4 +1,5 @@
 #include "jan_10.h"
+#include "sprite/player.h"
 
 #include "world/common/enemy/JungleFuzzy_Wander.inc.c"
 #include "world/common/npc/YoshiKid.inc.c"

@@ -1,4 +1,5 @@
 #include "kkj_26.h"
+#include "sprite/player.h"
 
 EvtScript N(EVS_ProvideDemoInputs) = {
     EVT_CALL(EnableWorldStatusBar, FALSE)

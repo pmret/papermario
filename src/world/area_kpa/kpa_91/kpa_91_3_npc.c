@@ -1,4 +1,5 @@
 #include "kpa_91.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/Toad_Stationary.inc.c"
 #include "world/common/npc/Dryite_Stationary.inc.c"

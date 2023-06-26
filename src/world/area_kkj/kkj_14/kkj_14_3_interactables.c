@@ -1,5 +1,6 @@
 #include "kkj_14.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #include "world/common/todo/GetPeachDisguise.inc.c"
 

@@ -2,6 +2,7 @@
 #include "sprite/npc/Tutankoopa.h"
 #include "sprite/npc/ChainChomp.h"
 #include "sprite/npc/BuzzyBeetle.h"
+#include "sprite/player.h"
 
 #define NAMESPACE A(tutankoopa)
 

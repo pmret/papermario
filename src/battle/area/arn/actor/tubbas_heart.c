@@ -1,6 +1,7 @@
 #include "../area.h"
 #include "sprite/npc/BattleBow.h"
 #include "sprite/npc/TubbasHeart.h"
+#include "sprite/player.h"
 
 #define NAMESPACE A(tubbas_heart)
 

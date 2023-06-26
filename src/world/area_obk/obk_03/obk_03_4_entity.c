@@ -1,5 +1,6 @@
 #include "obk_03.h"
 #include "entity.h"
+#include "sprite/player.h"
 
 extern EvtScript N(EVS_HitSwitch_Second);
 extern EvtScript N(EVS_HitSwitch_Third);

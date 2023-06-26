@@ -1,6 +1,7 @@
 #include "common.h"
 #include "script_api/battle.h"
 #include "battle/action_cmd/hammer.h"
+#include "sprite/player.h"
 
 #include "world/common/todo/IsBerserkerEquipped.inc.c"
 #include "world/common/todo/ShouldMovesAutoSucceed.inc.c"

@@ -2,6 +2,7 @@
 #include "hud_element.h"
 #include "script_api/battle.h"
 #include "sprite/npc/BattleEldstar.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_move_refresh
 

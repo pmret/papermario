@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 
-from math import floor, ceil
+from math import floor
 from sys import argv, path
 from pathlib import Path
+from typing import List
+
 path.append(str(Path(__file__).parent.parent.parent / "splat"))
 path.append(str(Path(__file__).parent.parent.parent / "splat_ext"))
-from pm_npc_sprites import Sprite
+from pm_sprites import NpcSprite
+
 
 def pack_color(r, g, b, a):
     r = floor(31 * (r / 255))
@@ -19,26 +22,29 @@ def pack_color(r, g, b, a):
 
     return s
 
+
 def iter_in_groups(iterable, n, fillvalue=None):
     from itertools import zip_longest
+
     args = [iter(iterable)] * n
     return zip_longest(*args, fillvalue=fillvalue)
 
+
 if __name__ == "__main__":
     if len(argv) != 3:
-        print("usage: compile_npc_sprite.py [OUTBIN] [DIR]")
+        print("usage: sprite.py [OUTBIN] [DIR]")
         exit(1)
 
     _, outfile, sprite_dir = argv
 
     try:
-        sprite = Sprite.from_dir(Path(sprite_dir))
+        sprite = NpcSprite.from_dir(Path(sprite_dir))
     except AssertionError as e:
         print("error:", e)
         exit(1)
 
     with open(outfile, "wb") as f:
-        f.seek(0x10) # leave space for header
+        f.seek(0x10)  # leave space for header
 
         # leave space for animation offset list
         f.seek((len(sprite.animations) + 1) * 4, 1)
@@ -82,12 +88,14 @@ if __name__ == "__main__":
             f.seek(4, 1)
 
         # write palettes
-        palette_offsets = []
+        palette_offsets: List[int] = []
         for i, palette in enumerate(sprite.palettes):
             palette_offsets.append(f.tell())
             for rgba in palette:
                 if rgba[3] not in (0, 0xFF):
-                    print("error: translucent pixels not allowed in palette {sprite.palette_names[i]}")
+                    print(
+                        "error: translucent pixels not allowed in palette {sprite.palette_names[i]}"
+                    )
                     exit(1)
 
                 color = pack_color(*rgba)

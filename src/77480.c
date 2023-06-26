@@ -3,6 +3,7 @@
 #include "world/actions.h"
 #include "sprite.h"
 #include "world/partner/watt.h"
+#include "sprite/player.h"
 
 #ifdef SHIFT
 #define inspect_icon_VRAM_DEF inspect_icon_VRAM

@@ -1,4 +1,5 @@
 #include "flo_15.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/Sun.inc.c"
 

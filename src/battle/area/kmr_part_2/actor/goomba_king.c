@@ -1,5 +1,6 @@
 #include "../area.h"
 #include "sprite/npc/GoombaKing.h"
+#include "sprite/player.h"
 
 #define NAMESPACE A(goomba_king)
 

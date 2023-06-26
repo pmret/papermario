@@ -1,5 +1,6 @@
 #include "../area.h"
 #include "sprite/npc/KentCKoopa.h"
+#include "sprite/player.h"
 #include "sprite/npc/Coin.h"
 
 #define NAMESPACE A(kent_c_koopa)

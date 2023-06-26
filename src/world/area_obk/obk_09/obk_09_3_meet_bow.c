@@ -1,5 +1,6 @@
 #include "obk_09.h"
 #include "sprite.h"
+#include "sprite/player.h"
 
 #include "world/common/util/ChangeNpcToPartner.inc.c"
 

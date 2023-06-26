@@ -1,4 +1,5 @@
 #include "arn_11.h"
+#include "sprite/player.h"
 
 EvtScript N(EVS_SetupCamera) = {
     EVT_CALL(SetCamType, CAM_DEFAULT, 6, TRUE)

@@ -1,5 +1,6 @@
 #include "common.h"
 #include "npc.h"
+#include "sprite/player.h"
 
 // ----------------------------------------------------------------
 // User macros

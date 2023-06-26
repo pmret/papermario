@@ -3,6 +3,7 @@
 #include "effects.h"
 #include "model.h"
 #include "sprite/npc/ChuckQuizmo.h"
+#include "sprite/player.h"
 
 #ifndef CHUCK_QUIZMO_NPC_ID
     #error CHUCK_QUIZMO_NPC_ID must be defined for Quizmo.inc.c

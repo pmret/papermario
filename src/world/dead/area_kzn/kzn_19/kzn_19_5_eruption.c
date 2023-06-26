@@ -1,4 +1,5 @@
 #include "kzn_19.h"
+#include "sprite/player.h"
 
 EvtScript N(EVS_CrackFloor) = {
     EVT_CALL(EnableGroup, MODEL_naka, FALSE)

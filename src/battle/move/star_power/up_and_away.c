@@ -3,6 +3,7 @@
 #include "sprite/npc/BattleKalmar.h"
 #include "entity.h"
 #include "model.h"
+#include "sprite/player.h"
 
 extern EntityModelScript EMS_StarIcon;
 

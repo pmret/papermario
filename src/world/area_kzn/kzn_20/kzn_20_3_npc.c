@@ -1,5 +1,6 @@
 #include "kzn_20.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 enum {
     SCENE_STATE_BEGIN                   = 15,

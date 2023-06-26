@@ -1,4 +1,5 @@
 #include "kzn_09.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/Kolorado.inc.c"
 

@@ -1,4 +1,5 @@
 #include "pra_22.h"
+#include "sprite/player.h"
 
 #include "world/common/todo/UnkFunc11.inc.c"
 

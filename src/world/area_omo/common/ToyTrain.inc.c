@@ -1,4 +1,5 @@
 #include "common.h"
+#include "sprite/player.h"
 
 #include "world/common/todo/UnsetCamera0MoveFlag1.inc.c"
 

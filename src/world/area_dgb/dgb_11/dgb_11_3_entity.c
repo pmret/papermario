@@ -1,6 +1,7 @@
 #include "dgb_11.h"
 #include "entity.h"
 #include "animation_script.h"
+#include "sprite/player.h"
 
 extern AnimScript Entity_ScriptSpring_AnimLaunch;
 

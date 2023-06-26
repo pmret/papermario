@@ -1,4 +1,5 @@
 #include "nok_01.h"
+#include "sprite/player.h"
 
 #include "world/common/enemy/ai/GuardAI.inc.c"
 

@@ -1,5 +1,6 @@
 #include "sam_04.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #include "common/SetAngleClamped.inc.c"
 

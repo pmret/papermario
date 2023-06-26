@@ -1,4 +1,5 @@
 #include "kkj_19.h"
+#include "sprite/player.h"
 
 #include "hud_element.h"
 #include "battle/action_cmd.h"

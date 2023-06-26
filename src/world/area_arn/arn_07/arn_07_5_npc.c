@@ -1,5 +1,6 @@
 #include "arn_07.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #include "world/common/enemy/HyperParagoomba.inc.c"
 #include "world/common/npc/TubbasHeart.inc.c"

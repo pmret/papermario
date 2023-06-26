@@ -1,4 +1,5 @@
 #include "kkj_00.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(FadeScreenToWhite)) {
     if (isInitialCall) {

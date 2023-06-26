@@ -1,4 +1,5 @@
 #include "flo_00.h"
+#include "sprite/player.h"
 
 NpcSettings N(NpcSettings_Dummy) = {
     .height = 24,

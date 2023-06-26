@@ -1,9 +1,11 @@
+from typing import List
 from segtypes.n64.segment import N64Segment
 from util import options
 import yaml as yaml_loader
 
+
 class N64SegPm_effect_loads(N64Segment):
-    effects = []
+    effects: List[str] = []
 
     @staticmethod
     def get_effect_asm(index, name):
@@ -84,11 +86,10 @@ glabel {name}
         ret = []
 
         for effect in self.effects:
-            ret.append(LinkerEntry(
-                self,
-                [self.effect_path(effect)],
-                self.effect_path(effect),
-                ".text"
-            ))
+            ret.append(
+                LinkerEntry(
+                    self, [self.effect_path(effect)], self.effect_path(effect), ".text"
+                )
+            )
 
         return ret

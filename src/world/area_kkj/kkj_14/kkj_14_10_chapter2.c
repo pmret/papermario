@@ -1,4 +1,5 @@
 #include "kkj_14.h"
+#include "sprite/player.h"
 
 Vec3f N(TwinkEmergePath)[] = {
     {  110.0,     0.0, -190.0 },

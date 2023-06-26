@@ -1,4 +1,5 @@
 #include "kmr_04.h"
+#include "sprite/player.h"
 
 #include "world/area_kmr/kmr_04/hammer_block_message.png.h"
 #include "world/area_kmr/kmr_04/hammer_block_message.png.inc.c"

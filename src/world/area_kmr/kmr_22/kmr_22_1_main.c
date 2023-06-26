@@ -1,5 +1,6 @@
 #include "kmr_22.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 BSS EffectInstance* N(ChapterEffect);
 BSS s32 N(ChapterEffectTime);

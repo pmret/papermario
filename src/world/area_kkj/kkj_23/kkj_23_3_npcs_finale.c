@@ -1,4 +1,5 @@
 #include "kkj_23.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/Bowser.inc.c"
 #include "world/common/npc/Dummy.inc.c"

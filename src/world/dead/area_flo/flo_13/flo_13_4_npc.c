@@ -1,4 +1,5 @@
 #include "flo_13.h"
+#include "sprite/player.h"
 
 #include "world/common/util/ChangeNpcToPartner.inc.c"
 

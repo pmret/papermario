@@ -1,5 +1,6 @@
 #include "trd_05.h"
 #include "sprite.h"
+#include "sprite/player.h"
 
 typedef struct FallingSprite {
     /* 0x00 */ s32 imgfxIdx;

@@ -1,6 +1,7 @@
 #include "kkj_13.h"
 #include "effects.h"
 #include "sprite.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(UpdatePropellerSoundPos_Intro)) {
     Npc* npc = get_npc_safe(NPC_Bowser_Prop);

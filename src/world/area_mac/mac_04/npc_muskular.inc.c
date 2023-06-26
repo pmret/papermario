@@ -1,3 +1,4 @@
+#include "sprite/player.h"
 
 API_CALLABLE(N(UpgradeStarPowerCh4)) {
     PlayerData* playerData = &gPlayerData;

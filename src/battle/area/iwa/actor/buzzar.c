@@ -2,6 +2,7 @@
 #include "sprite/npc/Buzzar.h"
 #include "battle/action_cmd/break_free.h"
 #include "battle/action_cmd/whirlwind.h"
+#include "sprite/player.h"
 
 #define NAMESPACE A(buzzar)
 

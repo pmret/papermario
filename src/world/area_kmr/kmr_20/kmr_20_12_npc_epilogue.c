@@ -1,5 +1,6 @@
 #include "kmr_20.h"
 #include "model.h"
+#include "sprite/player.h"
 
 #define NAME_SUFFIX _Epilogue
 #include "world/common/entity/Pipe.inc.c"

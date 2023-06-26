@@ -1,4 +1,5 @@
 #include "hos_03.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/StarSpirit.inc.c"
 #include "world/common/npc/StarSpirit_Wander.inc.c"

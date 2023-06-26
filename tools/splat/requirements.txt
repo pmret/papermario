@@ -3,8 +3,8 @@ pylibyaml
 tqdm
 intervaltree
 colorama
-# This value should be keep in sync with the version listed on split.py
-spimdisasm>=1.11.1
-rabbitizer>=1.4.0
+# This value should be keep in sync with the version listed on disassembler/spimdisasm_disassembler.py
+spimdisasm>=1.13.0
+rabbitizer>=1.7.0
 pygfxd
 n64img>=0.1.4

@@ -1,4 +1,5 @@
 #include "kkj_13.h"
+#include "sprite/player.h"
 
 #define NAME_SUFFIX _Intro
 

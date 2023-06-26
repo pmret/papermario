@@ -1,5 +1,6 @@
 #include "kmr_07.h"
 #include "animation_script.h"
+#include "sprite/player.h"
 
 #include "world/common/enemy/GoombaBros_Guard.inc.c"
 
