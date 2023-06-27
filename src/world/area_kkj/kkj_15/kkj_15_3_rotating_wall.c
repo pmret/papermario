@@ -1,4 +1,5 @@
 #include "kkj_15.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(UpdateRotatingPartyPositions)) {
     Npc* partner = get_npc_safe(NPC_PARTNER);

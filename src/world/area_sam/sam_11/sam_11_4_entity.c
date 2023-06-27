@@ -2,6 +2,7 @@
 #include "entity.h"
 #include "effects.h"
 #include "model.h"
+#include "sprite/player.h"
 
 s32 N(TargetBackgroundColR) = 0;
 s32 N(TargetBackgroundColG) = 0;

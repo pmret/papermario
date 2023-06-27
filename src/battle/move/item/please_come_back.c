@@ -1,5 +1,6 @@
 #include "common.h"
 #include "script_api/battle.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_item_please_come_back
 

@@ -2,6 +2,7 @@
 #include "script_api/battle.h"
 #include "effects.h"
 #include "sprite/npc/Swooper.h"
+#include "sprite/player.h"
 #include "battle/action_cmd/stop_leech.h"
 
 #define NAMESPACE A(swoopula)

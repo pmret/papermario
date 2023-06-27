@@ -10,9 +10,9 @@ enum StandardPalettes {
     STANDARD_PAL_STATIC     = 3,
 };
 
-#define UNPACK_PAL_R(color) (((color) >> 11) & 0x1F) 
-#define UNPACK_PAL_G(color) (((color) >> 6) & 0x1F) 
-#define UNPACK_PAL_B(color) (((color) >> 1) & 0x1F) 
+#define UNPACK_PAL_R(color) (((color) >> 11) & 0x1F)
+#define UNPACK_PAL_G(color) (((color) >> 6) & 0x1F)
+#define UNPACK_PAL_B(color) (((color) >> 1) & 0x1F)
 #define UNPACK_PAL_A(color) ((color) & 1)
 
 #define PACK_PAL_RGBA(r, g, b, a) (((r) << 11) | ((g) << 6) | ((b) << 1) | (a));
@@ -2293,7 +2293,7 @@ void render_with_static_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matr
         decorationTable->resetPalAdjust = FALSE;
         decorationTable->nextPalTime = 0;
     }
-    
+
     if (!skipAnimation) {
         if (decorationTable->nextPalTime == 0) {
             decorationTable->palAnimState += 2;
@@ -2414,7 +2414,7 @@ void render_with_fear_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matrix
                 r /= 2;
                 g /= 2;
                 b /= 2;
-                
+
                 *palOut++ = PACK_PAL_RGBA(r, g, b, a);
             }
         }
@@ -2424,6 +2424,7 @@ void render_with_fear_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Matrix
         part->palAnimPosOffset[0] = FearPaletteAnimXOffsets[abs(decorationTable->nextPalTime)];
         if (part->palAnimPosOffset[0] == PAL_ANIM_END) {
             part->palAnimPosOffset[0] = 0;
+            // 30-90
             decorationTable->nextPalTime = rand_int(60) + 30;
         }
     }
@@ -2563,6 +2564,7 @@ void render_with_paralyze_palettes(b32 isNpcSprite, ActorPart* part, s32 yaw, Ma
                 part->palAnimPosOffset[1] = ParalyzePaletteAnimXOffsets[abs(decorationTable->nextPalTime)];
                 if (part->palAnimPosOffset[1] == PAL_ANIM_END) {
                     part->palAnimPosOffset[1] = 0;
+                    // 30-90
                     decorationTable->nextPalTime = rand_int(60) + 30;
                 }
             }

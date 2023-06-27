@@ -47,29 +47,30 @@ void btl_merlee_on_start_turn(void) {
 
                 if (currentEncounter->currentEnemy != NULL) {
                     if (currentEncounter->currentEnemy->flags & ACTOR_FLAG_NO_HEALTH_BAR) {
+                        // 46/101 ≈ 45.5%
                         if (temp <= 45) {
                             playerData->merleeSpellType = MERLEE_SPELL_1;
-                        } else if (temp <= 90) {
+                        } else if (temp <= 90) { // 45/101 ≈ 44.6%
                             playerData->merleeSpellType = MERLEE_SPELL_2;
-                        } else {
+                        } else { // 10/101 ≈ 9.9%
                             playerData->merleeSpellType = MERLEE_SPELL_EXP_BOOST;
                         }
-                    } else if (temp <= 30) {
+                    } else if (temp <= 30) { // 31/101 ≈ 30.7%
                         playerData->merleeSpellType = MERLEE_SPELL_1;
-                    } else if (temp <= 60) {
+                    } else if (temp <= 60) { // 30/101 ≈ 29.7%
                         playerData->merleeSpellType = MERLEE_SPELL_2;
-                    } else if (temp <= 80) {
+                    } else if (temp <= 80) { // 20/101 ≈ 19.8%
                         playerData->merleeSpellType = MERLEE_SPELL_EXP_BOOST;
-                    } else {
+                    } else { // 20/101 ≈ 19.8%
                         playerData->merleeSpellType = MERLEE_SPELL_COIN_BOOST;
                     }
-                } else if (temp <= 30) {
+                } else if (temp <= 30) { // 31/101 ≈ 30.7%
                     playerData->merleeSpellType = MERLEE_SPELL_1;
-                } else if (temp <= 60) {
+                } else if (temp <= 60) { // 30/101 ≈ 29.7%
                     playerData->merleeSpellType = MERLEE_SPELL_2;
-                } else if (temp <= 80) {
+                } else if (temp <= 80) { // 20/101 ≈ 19.8%
                     playerData->merleeSpellType = MERLEE_SPELL_EXP_BOOST;
-                } else {
+                } else { // 20/101 ≈ 19.8%
                     playerData->merleeSpellType = MERLEE_SPELL_COIN_BOOST;
                 }
 
@@ -104,29 +105,30 @@ void btl_merlee_on_first_strike(void) {
 
                 if (currentEncounter->currentEnemy != NULL) {
                     if (currentEncounter->currentEnemy->flags & ACTOR_FLAG_NO_HEALTH_BAR) {
+                        // 46/101 ≈ 45.5%
                         if (temp <= 45) {
                             playerData->merleeSpellType = MERLEE_SPELL_1;
-                        } else if (temp <= 90) {
+                        } else if (temp <= 90) { // 45/101 ≈ 44.6%
                             playerData->merleeSpellType = MERLEE_SPELL_2;
-                        } else {
+                        } else { // 10/101 ≈ 9.9%
                             playerData->merleeSpellType = MERLEE_SPELL_EXP_BOOST;
                         }
-                    } else if (temp <= 30) {
+                    } else if (temp <= 30) { // 31/101 ≈ 30.7%
                         playerData->merleeSpellType = MERLEE_SPELL_1;
-                    } else if (temp <= 60) {
+                    } else if (temp <= 60) { // 30/101 ≈ 29.7%
                         playerData->merleeSpellType = MERLEE_SPELL_2;
-                    } else if (temp <= 80) {
+                    } else if (temp <= 80) { // 20/101 ≈ 19.8%
                         playerData->merleeSpellType = MERLEE_SPELL_EXP_BOOST;
-                    } else {
+                    } else { // 20/101 ≈ 19.8%
                         playerData->merleeSpellType = MERLEE_SPELL_COIN_BOOST;
                     }
-                } else if (temp <= 30) {
+                } else if (temp <= 30) { // 31/101 ≈ 30.7%
                     playerData->merleeSpellType = MERLEE_SPELL_1;
-                } else if (temp <= 60) {
+                } else if (temp <= 60) { // 30/101 ≈ 29.7%
                     playerData->merleeSpellType = MERLEE_SPELL_2;
-                } else if (temp <= 80) {
+                } else if (temp <= 80) { // 20/101 ≈ 19.8%
                     playerData->merleeSpellType = MERLEE_SPELL_EXP_BOOST;
-                } else {
+                } else { // 20/101 ≈ 19.8%
                     playerData->merleeSpellType = MERLEE_SPELL_COIN_BOOST;
                 }
 

@@ -1,4 +1,5 @@
 #include "flo_18.h"
+#include "sprite/player.h"
 
 #include "world/common/todo/UnkFunc42.inc.c"
 

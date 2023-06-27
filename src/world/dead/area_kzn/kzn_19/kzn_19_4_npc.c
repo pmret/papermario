@@ -1,5 +1,6 @@
 #include "kzn_19.h"
 #include "ld_addrs.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/Kolorado.h"
 #include "world/common/npc/StarSpirit.h"

@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 
+from functools import cache
 import os
 import shutil
-from typing import TYPE_CHECKING, List, Dict, Set, Union
+from typing import List, Dict, Optional, Set, Union
 from pathlib import Path
 import subprocess
 import sys
@@ -15,13 +16,10 @@ DO_SHA1_CHECK = True
 
 # Paths:
 ROOT = Path(__file__).parent.parent.parent
-TOOLS = (ROOT / "tools").relative_to(ROOT)
-BUILD_TOOLS = TOOLS / "build"
+BUILD_TOOLS = Path("tools/build")
 YAY0_COMPRESS_TOOL = f"{BUILD_TOOLS}/yay0/Yay0compress"
 CRC_TOOL = f"{BUILD_TOOLS}/rom/n64crc"
 
-# if TYPE_CHECKING:
-#     from
 
 
 def exec_shell(command: List[str]) -> str:
@@ -39,7 +37,6 @@ def write_ninja_rules(
     debug: bool,
 ):
     # platform-specific
-    iconv = "iconv --from UTF-8 --to $encoding"
 
     ccache = ""
 
@@ -54,23 +51,22 @@ def write_ninja_rules(
 
     cross = "mips-linux-gnu-"
     cc = f"{BUILD_TOOLS}/cc/gcc/gcc"
-    cc_modern = f"mips-linux-gnu-gcc"
+    cc_modern = f"{cross}gcc"
     cc_ido = f"{BUILD_TOOLS}/cc/ido5.3/cc"
     cc_272_dir = f"{BUILD_TOOLS}/cc/gcc2.7.2/"
     cc_272 = f"{cc_272_dir}/gcc"
     cxx = f"{BUILD_TOOLS}/cc/gcc/g++"
+
+    ICONV = "iconv --from UTF-8 --to $encoding"
 
     CPPFLAGS_COMMON = (
         "-Iver/$version/include -Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM "
         "-DVERSION=$version -DF3DEX_GBI_2 -D_MIPS_SZLONG=32"
     )
 
-    CPPFLAGS = "-w " + CPPFLAGS_COMMON + " -nostdinc"
+    CPPFLAGS_272 = CPPFLAGS_COMMON + " -nostdinc"
 
-    CPPFLAGS_272 = (
-        "-Iver/$version/include -Iver/$version/build/include -Iinclude -Isrc -Iassets/$version -D_LANGUAGE_C -D_FINALROM "
-        "-DVERSION=$version -DF3DEX_GBI_2 -D_MIPS_SZLONG=32 -nostdinc"
-    )
+    CPPFLAGS = "-w " + CPPFLAGS_COMMON + " -nostdinc"
 
     cflags = f"-c -G0 -O2 -gdwarf-2 -x c -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
 
@@ -126,7 +122,7 @@ def write_ninja_rules(
     ninja.rule(
         "cc",
         description="gcc $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {extra_cppflags} -DOLD_GCC $cppflags -MD -MF $out.d $in -o - | {iconv} | {ccache}{cc} {cflags} $cflags - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {extra_cppflags} -DOLD_GCC $cppflags -MD -MF $out.d $in -o - | {ICONV} | {ccache}{cc} {cflags} $cflags - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
@@ -134,7 +130,7 @@ def write_ninja_rules(
     ninja.rule(
         "cc_modern",
         description="gcc $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {extra_cppflags} $cppflags -MD -MF $out.d $in -o - | {iconv} | {ccache}{cc_modern} {cflags_modern} $cflags - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {extra_cppflags} $cppflags -MD -MF $out.d $in -o - | {ICONV} | {ccache}{cc_modern} {cflags_modern} $cflags - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
@@ -154,14 +150,14 @@ def write_ninja_rules(
     ninja.rule(
         "cxx",
         description="cxx $in",
-        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {extra_cppflags} $cppflags -MD -MF $out.d $in -o - | {iconv} | {ccache}{cxx} {cflags} $cflags - -o $out'",
+        command=f"bash -o pipefail -c '{cpp} {CPPFLAGS} {extra_cppflags} $cppflags -MD -MF $out.d $in -o - | {ICONV} | {ccache}{cxx} {cflags} $cflags - -o $out'",
         depfile="$out.d",
         deps="gcc",
     )
 
     ninja.rule(
-        "dead_cc",
-        description="dead_cc $in",
+        "dead_cc_fix",
+        description="dead_cc_fix $in",
         command=f"mips-linux-gnu-objcopy --redefine-sym sqrtf=dead_sqrtf $in $out",
     )
 
@@ -208,15 +204,15 @@ def write_ninja_rules(
     )
 
     ninja.rule(
-        "sprite",
+        "npc_sprite",
         description="sprite $sprite_name",
-        command=f"$python {BUILD_TOOLS}/sprite/sprite.py $out $sprite_dir",
+        command=f"$python {BUILD_TOOLS}/sprite/npc_sprite.py $out $sprite_dir",
     )
 
     ninja.rule(
-        "sprite_combine",
-        description="sprite_combine $in",
-        command=f"$python {BUILD_TOOLS}/sprite/combine.py $out $in",
+        "sprites",
+        description="sprites $out $header_out",
+        command=f"$python {BUILD_TOOLS}/sprite/sprites.py $out $header_out $build_dir $asset_stack",
     )
 
     ninja.rule(
@@ -332,7 +328,7 @@ class Configure:
                     "gfx_common",
                     "pm_map_data",
                     "pm_msg",
-                    "pm_npc_sprites",
+                    "pm_sprites",
                     "pm_charset",
                     "pm_charset_palettes",
                     "pm_effect_loads",
@@ -357,7 +353,7 @@ class Configure:
             verbose=False,
         )
         self.linker_entries = split.linker_writer.entries
-        self.asset_stack = split.config["asset_stack"]
+        self.asset_stack: List[str] = split.config["asset_stack"]
 
     def build_path(self) -> Path:
         return Path(f"ver/{self.version}/build")
@@ -388,24 +384,42 @@ class Configure:
         for path in src_paths:
             path = self.resolve_asset_path(path)
 
-            if path.is_dir():
-                out.extend(glob(str(path) + "/**/*", recursive=True))
-            else:
-                out.append(str(path))
+            if path is not None:
+                if path.is_dir():
+                    out.extend(glob(str(path) + "/**/*", recursive=True))
+                else:
+                    out.append(str(path))
 
         return out
 
+    # Given a directory relative to assets/, return a list of all assets in the directory
+    # for all layers of the asset stack
+    def get_asset_list(self, asset_dir: str) -> List[str]:
+        ret: Dict[Path, Path] = {}
+
+        for stack_dir in self.asset_stack:
+            path_stem = f"assets/{stack_dir}/{asset_dir}"
+
+            for p in Path(path_stem).glob("**/*"):
+                glob_part = p.relative_to(path_stem)
+                if glob_part not in ret:
+                    ret[glob_part] = p
+
+        return [str(v) for v in ret.values()]
+
+    @cache
     def resolve_asset_path(self, path: Path) -> Path:
         parts = list(path.parts)
 
-        if parts[0] == "assets":
-            for d in self.asset_stack:
-                parts[1] = d
-                new_path = Path("/".join(parts))
-                if new_path.exists():
-                    return new_path
+        if parts[0] != "assets":
+            return path
 
-        # ¯\_(ツ)_/¯
+        for asset_dir in self.asset_stack:
+            parts[1] = asset_dir
+            new_path = Path("/".join(parts))
+            if new_path.exists():
+                return new_path
+
         return path
 
     def write_ninja(
@@ -416,8 +430,14 @@ class Configure:
         modern_gcc: bool,
     ):
         import segtypes
+        import segtypes.common.c
+        import segtypes.common.bin
         import segtypes.common.data
+        import segtypes.common.group
         import segtypes.common.asm
+        import segtypes.n64.header
+        import segtypes.n64.img
+        import segtypes.n64.palette
         import segtypes.n64.yay0
 
         assert self.linker_entries is not None
@@ -431,6 +451,7 @@ class Configure:
             task: str,
             variables: Dict[str, str] = {},
             implicit_outputs: List[str] = [],
+            asset_deps: List[str] = [],
         ):
             if not isinstance(object_paths, list):
                 object_paths = [object_paths]
@@ -452,6 +473,10 @@ class Configure:
                 if not str(object_path) in skip_outputs:
                     needs_build = True
 
+            for i_output in implicit_outputs:
+                if i_output.endswith(".h"):
+                    generated_headers.append(i_output)
+
             if needs_build:
                 skip_outputs.update(object_strs)
 
@@ -463,6 +488,9 @@ class Configure:
                 elif task in ["cc", "cxx", "cc_modern"]:
                     order_only.append("generated_headers_" + self.version)
 
+                inputs = self.resolve_src_paths(src_paths)
+                for dir in asset_deps:
+                    inputs.extend(self.get_asset_list(dir))
                 ninja.build(
                     outputs=object_strs,  # $out
                     rule=task,
@@ -477,12 +505,19 @@ class Configure:
         for entry in self.linker_entries:
             seg = entry.segment
 
+            if seg.type == "linker" or seg.type == "linker_offset":
+                continue
+
+            assert entry.object_path is not None
+
             if isinstance(seg, segtypes.n64.header.N64SegHeader):
                 build(entry.object_path, entry.src_paths, "as")
             elif isinstance(seg, segtypes.common.asm.CommonSegAsm) or (
                 isinstance(seg, segtypes.common.data.CommonSegData)
                 and not seg.type[0] == "."
             ):
+                build(entry.object_path, entry.src_paths, "as")
+            elif seg.type in ["pm_effect_loads", "pm_effect_shims"]:
                 build(entry.object_path, entry.src_paths, "as")
             elif isinstance(seg, segtypes.common.c.CommonSegC) or (
                 isinstance(seg, segtypes.common.data.CommonSegData)
@@ -544,7 +579,7 @@ class Configure:
                     build(
                         entry.object_path,
                         [init_obj_path],
-                        "dead_cc",
+                        "dead_cc_fix",
                     )
                 # Not dead cod
                 else:
@@ -587,6 +622,7 @@ class Configure:
                                 },
                             )
 
+                            assert seg.vram_start is not None
                             c_sym = seg.create_symbol(
                                 addr=seg.vram_start,
                                 in_segment=True,
@@ -626,6 +662,7 @@ class Configure:
                                 },
                             )
 
+                            assert seg.vram_start is not None
                             c_sym = seg.create_symbol(
                                 addr=seg.vram_start,
                                 in_segment=True,
@@ -684,43 +721,59 @@ class Configure:
                     },
                 )
                 build(entry.object_path, [bin_path], "bin")
-            elif seg.type == "pm_npc_sprites":
+            elif seg.type == "pm_sprites":
+                assert entry.object_path is not None
+
                 sprite_yay0s = []
 
-                for sprite_id, sprite_dir in enumerate(entry.src_paths, 1):
+                npc_obj_path = entry.object_path.parent / "npc"
+
+                # NPC sprite headers
+                for sprite_id, sprite_dir in enumerate(entry.src_paths[1:], 1):
                     sprite_name = sprite_dir.name
 
-                    bin_path = entry.object_path.with_suffix("") / (
-                        sprite_name + ".bin"
-                    )
+                    bin_path = npc_obj_path / (sprite_name + ".bin")
                     yay0_path = bin_path.with_suffix(".Yay0")
                     sprite_yay0s.append(yay0_path)
 
                     variables = {
                         "sprite_id": sprite_id,
                         "sprite_name": sprite_name,
-                        "sprite_dir": str(self.resolve_asset_path(sprite_dir)),
+                        "sprite_dir": self.resolve_asset_path(sprite_dir),
                     }
 
-                    build(bin_path, [sprite_dir], "sprite", variables=variables)
+                    build(bin_path, [sprite_dir], "npc_sprite", variables=variables)
                     build(yay0_path, [bin_path], "yay0")
                     build(
-                        self.build_path()
-                        / "include"
-                        / seg.dir
-                        / seg.name
-                        / (sprite_name + ".h"),
-                        [sprite_dir],
+                        self.build_path() / "include/sprite/npc" / (sprite_name + ".h"),
+                        [sprite_dir, yay0_path],
                         "sprite_header",
                         variables=variables,
                     )
 
+                # Sprites .bin
+                sprite_player_header_path = str(
+                    self.build_path() / "include/sprite/player.h"
+                )
+
                 build(
                     entry.object_path.with_suffix(".bin"),
-                    sprite_yay0s,
-                    "sprite_combine",
+                    [entry.src_paths[0], *sprite_yay0s],
+                    "sprites",
+                    variables={
+                        "header_out": sprite_player_header_path,
+                        "build_dir": str(
+                            self.build_path() / "assets" / self.version / "sprite"
+                        ),
+                        "asset_stack": ",".join(self.asset_stack),
+                    },
+                    implicit_outputs=[sprite_player_header_path],
+                    asset_deps=["sprite/player"],
                 )
+
+                # Sprites .o
                 build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
+
             elif seg.type == "pm_msg":
                 msg_bins = []
 
@@ -943,8 +996,6 @@ class Configure:
                     entry.object_path.with_suffix(""), palettes, "pm_charset_palettes"
                 )
                 build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
-            elif seg.type in ["pm_effect_loads", "pm_effect_shims"]:
-                build(entry.object_path, entry.src_paths, "as")
             elif seg.type == "pm_sprite_shading_profiles":
                 header_path = str(
                     self.build_path() / "include/sprite/sprite_shading_profiles.h"
@@ -975,8 +1026,6 @@ class Configure:
                         "encoding": "CP932",  # similar to SHIFT-JIS, but includes backslash and tilde
                     },
                 )
-            elif seg.type == "linker" or seg.type == "linker_offset":
-                pass
             else:
                 raise Exception(
                     f"don't know how to build {seg.__class__.__name__} '{seg.name}'"
@@ -1098,9 +1147,15 @@ if __name__ == "__main__":
         and sys.platform == "darwin"
         and "Free Software Foundation" not in exec_shell(["cpp", "--version"])
     ):
-        if "Free Software Foundation" in exec_shell(["cpp-12", "--version"]):
-            args.cpp = "cpp-12"
-        else:
+        gcc_cpps = ("cpp-14", "cpp-13", "cpp-12", "cpp-11")
+        for ver in gcc_cpps:
+            try:
+                if "Free Software Foundation" in exec_shell([ver, "--version"]):
+                    args.cpp = ver
+                    break
+            except FileNotFoundError:
+                pass
+        if args.cpp is None:
             print("error: system C preprocessor is not GNU!")
             print(
                 "This is a known issue on macOS - only clang's cpp is installed by default."
@@ -1108,7 +1163,7 @@ if __name__ == "__main__":
             print(
                 "Use 'brew' to obtain GNU cpp, then run this script again with the --cpp option, e.g."
             )
-            print("    ./configure --cpp cpp-12")
+            print(f"    ./configure --cpp {gcc_cpps[0]}")
             exit(1)
 
     # default version behaviour is to only do those that exist
@@ -1181,7 +1236,7 @@ if __name__ == "__main__":
     )
     write_ninja_for_tools(ninja)
 
-    skip_files = set()
+    skip_files: Set[str] = set()
     all_rom_oks: List[str] = []
     first_configure = None
 
@@ -1192,6 +1247,9 @@ if __name__ == "__main__":
 
         if not first_configure:
             first_configure = configure
+
+        # include tools/splat_ext in the python path
+        sys.path.append(str((ROOT / "tools/splat_ext").resolve()))
 
         configure.split(
             not args.no_split_assets, args.split_code, args.shift, args.debug

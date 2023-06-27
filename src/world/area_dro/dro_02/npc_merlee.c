@@ -1,5 +1,6 @@
 #include "dro_02.h"
 #include "model.h"
+#include "sprite/player.h"
 
 // cards used during Merlee's ritual
 typedef struct RitualCard {

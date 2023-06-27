@@ -1,4 +1,5 @@
 #include "flo_00.h"
+#include "sprite/player.h"
 
 #define BEANSTALK_BASE_X -83
 #define BEANSTALK_BASE_Z  87

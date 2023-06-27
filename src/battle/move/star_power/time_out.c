@@ -1,6 +1,7 @@
 #include "common.h"
 #include "script_api/battle.h"
 #include "sprite/npc/BattleKlevar.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_move_time_out
 

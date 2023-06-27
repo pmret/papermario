@@ -1,5 +1,6 @@
 #include "common.h"
 #include "world/actions.h"
+#include "sprite/player.h"
 
 AnimID StepUpPeachAnims[] = {
     ANIM_Peach1_Walk, // none

@@ -1,6 +1,7 @@
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "sprite/npc/Fuzzy.h"
+#include "sprite/player.h"
 
 #define NAMESPACE A(forest_fuzzy)
 

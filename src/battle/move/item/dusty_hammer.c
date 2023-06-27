@@ -2,6 +2,7 @@
 #include "script_api/battle.h"
 #include "entity.h"
 #include "ld_addrs.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_item_dusty_hammer
 

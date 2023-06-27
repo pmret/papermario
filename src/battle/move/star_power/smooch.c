@@ -1,6 +1,7 @@
 #include "common.h"
 #include "script_api/battle.h"
 #include "sprite/npc/BattleMisstar.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_move_smooch
 

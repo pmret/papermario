@@ -2,6 +2,7 @@
 #include "../partners.h"
 #include "effects.h"
 #include "sprite/npc/WorldLakilester.h"
+#include "sprite/player.h"
 
 #define NAMESPACE world_lakilester
 

@@ -6,7 +6,7 @@ from util.n64.Yay0decompress import Yay0Decompressor
 from util.color import unpack_color
 from segtypes.n64.palette import iter_in_groups
 from util import options
-import png
+import png  # type: ignore
 import yaml as yaml_loader
 import n64img.image
 

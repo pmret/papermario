@@ -1,4 +1,5 @@
 #include "kmr_02.h"
+#include "sprite/player.h"
 
 #include "world/common/todo/CheckPartnerFlags1000.inc.c"
 

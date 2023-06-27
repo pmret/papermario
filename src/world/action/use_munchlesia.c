@@ -1,4 +1,5 @@
 #include "common.h"
+#include "sprite/player.h"
 
 BSS f32 Munchlesia_LaunchVelocity;
 BSS f32 Munchlesia_LateralVelocity;

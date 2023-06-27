@@ -1,5 +1,6 @@
 #include "trd_06.h"
 #include "sprite.h"
+#include "sprite/player.h"
 
 extern EvtScript N(EVS_PushSong);
 extern EvtScript N(EVS_PopSong);

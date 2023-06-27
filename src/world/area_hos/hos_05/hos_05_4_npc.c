@@ -1,5 +1,6 @@
 #include "hos_05.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(UnlockStarBeam)) {
     gPlayerData.starBeamLevel = 1;

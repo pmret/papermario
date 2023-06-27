@@ -2,6 +2,7 @@
 #include "sprite.h"
 #include "sprite/npc/BattleBowser.h"
 #include "sprite/npc/ParadePeach.h"
+#include "sprite/player.h"
 
 #define NAMESPACE A(bowser_intro)
 

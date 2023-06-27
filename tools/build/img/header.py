@@ -2,7 +2,7 @@
 
 from sys import argv
 import re
-import png
+import png  # type: ignore
 
 if __name__ == "__main__":
     infile, outfile = argv[1:3]

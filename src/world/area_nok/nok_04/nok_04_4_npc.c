@@ -1,6 +1,7 @@
 
 #include "nok_04.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #define NUM_THREAD_SEGMENTS 16
 

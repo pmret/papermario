@@ -1,4 +1,5 @@
 #include "sprite.h"
+#include "sprite/player.h"
 
 extern HeapNode heap_generalHead;
 extern HeapNode heap_spriteHead;

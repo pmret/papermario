@@ -1,6 +1,7 @@
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "sprite/npc/Fuzzy.h"
+#include "sprite/player.h"
 #include "effects.h"
 
 #define NAMESPACE A(fuzzy)

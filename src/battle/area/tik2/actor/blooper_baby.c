@@ -1,6 +1,7 @@
 #include "../area.h"
 #include "sprite/npc/BabyBlooper.h"
 #include "battle/action_cmd/stop_leech.h"
+#include "sprite/player.h"
 
 #define NAMESPACE A(blooper_baby)
 

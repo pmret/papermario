@@ -1,5 +1,6 @@
 #include "sam_06.h"
 #include "model.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/Toad_Wander.inc.c"
 

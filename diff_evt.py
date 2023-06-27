@@ -7,10 +7,10 @@ import subprocess
 import sys
 
 from diff import Display, debounced_fs_watch
-from colorama import Fore, Back, Style
+from colorama import Fore, Style
 
 sys.path.append("tools")
-from tools.update_evts import parse_symbol_addrs
+from old.update_evts import parse_symbol_addrs
 from tools.disasm_script import ScriptDisassembler, get_constants
 
 parser = argparse.ArgumentParser(

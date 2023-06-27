@@ -1,4 +1,5 @@
 #include "kkj_18.h"
+#include "sprite/player.h"
 
 #include "world/common/complete/KeyItemChoice.inc.c"
 MAP_STATIC_PAD(1,item_choice);

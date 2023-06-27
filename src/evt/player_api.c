@@ -2,6 +2,7 @@
 #include "npc.h"
 #include "sprite.h"
 #include "world/partners.h"
+#include "sprite/player.h"
 
 extern Npc playerNpcData;
 extern u16 PlayerImgFXFlags;

@@ -28,6 +28,8 @@ class CommonSegCodeSubsegment(Segment):
         self.instr_category = rabbitizer.InstrCategory.CPU
         if options.opts.platform == "ps2":
             self.instr_category = rabbitizer.InstrCategory.R5900
+        elif options.opts.platform == "psx":
+            self.instr_category = rabbitizer.InstrCategory.R3000GTE
 
     @property
     def needs_symbols(self) -> bool:

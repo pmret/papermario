@@ -2,6 +2,7 @@
 #include "../partners.h"
 #include "npc.h"
 #include "sprite/npc/WorldBow.h"
+#include "sprite/player.h"
 
 #define NAMESPACE world_bow
 

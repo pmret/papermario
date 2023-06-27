@@ -1,4 +1,5 @@
 #include "jan_22.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/Kolorado.inc.c"
 #include "world/common/enemy/SpearGuy_Patrol.inc.c"

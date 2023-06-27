@@ -1,5 +1,6 @@
 #include "../area.h"
 #include "sprite/npc/WorldEldstar.h"
+#include "sprite/player.h"
 
 #define NAMESPACE A(eldstar)
 

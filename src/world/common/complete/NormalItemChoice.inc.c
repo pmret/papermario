@@ -2,6 +2,7 @@
 #define _COMMON_CONSUMABLE_CHOICE_
 
 #include "common.h"
+#include "sprite/player.h"
 
 static s32 N(ItemChoice_List)[ITEM_NUM_CONSUMABLES + 1];
 

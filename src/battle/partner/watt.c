@@ -7,6 +7,7 @@
 #include "battle/action_cmd/water_block.h"
 #include "battle/action_cmd/mega_shock.h"
 #include "sprite/npc/BattleWatt.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_partner_watt
 

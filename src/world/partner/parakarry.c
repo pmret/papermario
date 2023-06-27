@@ -1,6 +1,7 @@
 #include "common.h"
 #include "../src/world/partners.h"
 #include "sprite/npc/WorldParakarry.h"
+#include "sprite/player.h"
 
 #define NAMESPACE world_parakarry
 

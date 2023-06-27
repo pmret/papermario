@@ -1,6 +1,7 @@
 #include "battle/battle.h"
 #include "hud_element.h"
 #include "battle/action_cmd.h"
+#include "sprite/player.h"
 
 #include "sprite/npc/Goompa.h"
 #include "sprite/npc/BattleGoombario.h"

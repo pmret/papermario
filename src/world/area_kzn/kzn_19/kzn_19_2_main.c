@@ -1,4 +1,5 @@
 #include "kzn_19.h"
+#include "sprite/player.h"
 
 #include "../common/SmokeTexPanners.inc.c"
 

@@ -2,6 +2,7 @@
 #include "entity.h"
 #include "effects.h"
 #include "ld_addrs.h"
+#include "sprite/player.h"
 
 extern Gfx Entity_Padlock_Render[];
 extern Gfx Entity_Padlock_RenderShackle[];

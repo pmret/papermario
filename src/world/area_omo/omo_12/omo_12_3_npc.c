@@ -1,4 +1,5 @@
 #include "omo_12.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/BigLanternGhost.inc.c"
 

@@ -14,7 +14,7 @@ It builds the following ROMs:
 | PAL    | `2111d39265a317414d359e35a7d971c4dfa5f9e1` | [![Progress (PAL)][progress-pal-badge]][progress-pal]    |
 | iQue   | `5c724685085eba796537573dd6f84aaddedc8582` | [![Progress (iQue)][progress-ique-badge]][progress-ique] |
 
-To set up the repository, see [INSTALL.md](INSTALL.md).
+To set up the repository, see [SETUP.md](SETUP.md).
 
 Please see [CONTRIBUTING.md](CONTRIBUTING.md) for information on how to contribute to the project. Any and all help is welcome!
 

@@ -223,6 +223,7 @@ class Segment:
         self.yaml = yaml
 
         self.extract: bool = True
+        self.has_linker_entry: bool = True
         if self.rom_start is None:
             self.extract = False
         elif self.type.startswith("."):
@@ -270,6 +271,7 @@ class Segment:
             ret.extract = bool(yaml.get("extract", ret.extract))
             ret.exclusive_ram_id = yaml.get("exclusive_ram_id")
             ret.given_dir = Path(yaml.get("dir", ""))
+            ret.has_linker_entry = bool(yaml.get("linker_entry", True))
         ret.given_symbol_name_format = Segment.parse_segment_symbol_name_format(yaml)
         ret.given_symbol_name_format_no_rom = (
             Segment.parse_segment_symbol_name_format_no_rom(yaml)
@@ -438,6 +440,9 @@ class Segment:
 
     def get_linker_entries(self) -> "List[LinkerEntry]":
         from segtypes.linker_entry import LinkerEntry
+
+        if not self.has_linker_entry:
+            return []
 
         path = self.out_path()
 

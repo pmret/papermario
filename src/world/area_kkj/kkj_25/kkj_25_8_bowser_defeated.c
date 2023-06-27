@@ -1,5 +1,6 @@
 #include "kkj_25.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #include "sprite/npc/WorldGoombario.h"
 #include "sprite/npc/WorldKooper.h"

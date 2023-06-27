@@ -4,6 +4,7 @@
 #include "npc.h"
 #include "sprite/npc/WorldWatt.h"
 #include "sprite.h"
+#include "sprite/player.h"
 
 #define NAMESPACE world_watt
 

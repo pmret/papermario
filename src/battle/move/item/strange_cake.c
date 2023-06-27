@@ -2,6 +2,7 @@
 #include "script_api/battle.h"
 #include "effects.h"
 #include "hud_element.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_item_strange_cake
 

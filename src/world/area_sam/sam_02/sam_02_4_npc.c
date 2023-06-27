@@ -1,4 +1,5 @@
 #include "sam_02.h"
+#include "sprite/player.h"
 
 #if VERSION_PAL
 #include "sprite/npc/ShiverToad.h"

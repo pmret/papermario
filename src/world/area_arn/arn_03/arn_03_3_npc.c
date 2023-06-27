@@ -1,4 +1,5 @@
 #include "arn_03.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/Boo_Patrol.inc.c"
 #include "world/common/npc/Boo.inc.c"

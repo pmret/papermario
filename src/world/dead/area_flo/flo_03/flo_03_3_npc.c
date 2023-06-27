@@ -1,4 +1,5 @@
 #include "flo_03.h"
+#include "sprite/player.h"
 
 NpcSettings N(NpcSettings_Dayzee) = {
     .height = 24,

@@ -1,4 +1,5 @@
 #include "nok_02.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/Koopa_Wander.inc.c"
 #include "world/common/npc/KoopaWithoutShell_Patrol.inc.c"

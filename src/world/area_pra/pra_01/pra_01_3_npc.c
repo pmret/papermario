@@ -1,5 +1,6 @@
 #include "pra_01.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/StarSpirit.inc.c"
 

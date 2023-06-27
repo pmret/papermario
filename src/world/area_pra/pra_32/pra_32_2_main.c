@@ -1,4 +1,5 @@
 #include "pra_32.h"
+#include "sprite/player.h"
 
 #define STAR_SPIRIT_DATA_VAR MV_Unk_01
 #include "world/common/todo/StarSpiritEffectFunc.inc.c"

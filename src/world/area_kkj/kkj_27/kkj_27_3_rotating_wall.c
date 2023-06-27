@@ -1,4 +1,5 @@
 #include "kkj_27.h"
+#include "sprite/player.h"
 
 s32 N(SpillLightAmount) = 0;
 

@@ -1,4 +1,5 @@
 #include "kmr_20.h"
+#include "sprite/player.h"
 
 #include "world/common/complete/ToadHouseBlanketAnim.inc.c"
 #include "world/common/atomic/ToadHouse.inc.c"

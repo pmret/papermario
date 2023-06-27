@@ -3,7 +3,8 @@
 from sys import argv, stderr
 from math import floor, ceil
 from glob import glob
-import png
+import png  # type: ignore
+
 
 
 def unpack_color(s):

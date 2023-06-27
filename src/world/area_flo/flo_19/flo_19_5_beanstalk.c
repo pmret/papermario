@@ -1,5 +1,6 @@
 #include "flo_19.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(GetPlayerAngles)) {
     Bytecode* args = script->ptrReadPos;

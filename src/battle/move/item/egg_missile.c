@@ -3,6 +3,7 @@
 #include "effects.h"
 #include "entity.h"
 #include "ld_addrs.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_item_egg_missile
 

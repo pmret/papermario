@@ -1,5 +1,6 @@
 #include "pra_19.h"
 #include "sprite.h"
+#include "sprite/player.h"
 
 NpcSettings N(NpcSettings_Kooper) = {
     .height = 35,

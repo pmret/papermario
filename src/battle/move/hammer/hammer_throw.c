@@ -1,6 +1,7 @@
 #include "common.h"
 #include "effects.h"
 #include "entity.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_move_hammer_throw
 

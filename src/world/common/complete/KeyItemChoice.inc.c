@@ -2,6 +2,7 @@
 #define _COMMON_KEY_CHOICE_
 
 #include "common.h"
+#include "sprite/player.h"
 
 static s32 N(KeyItemChoiceList)[ITEM_NUM_KEYS + 1];
 

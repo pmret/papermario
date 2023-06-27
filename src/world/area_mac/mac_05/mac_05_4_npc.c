@@ -1,4 +1,5 @@
 #include "mac_05.h"
+#include "sprite/player.h"
 
 NpcSettings N(NpcSettings_Whale) = {
     .height = 24,

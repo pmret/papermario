@@ -1,4 +1,5 @@
 #include "kkj_12.h"
+#include "sprite/player.h"
 
 #include "../common/Searchlights.inc.c"
 

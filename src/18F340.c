@@ -7,6 +7,7 @@
 #include "sprite/npc/BattleMerlee.h"
 #include "battle/action_cmd/flee.h"
 #include "battle/battle.h"
+#include "sprite/player.h"
 
 extern HudScript HES_Happy;
 extern HudScript HES_HPDrain;

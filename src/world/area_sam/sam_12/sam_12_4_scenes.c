@@ -1,5 +1,6 @@
 #include "sam_12.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(SetScreenFadeAmount)) {
     Bytecode* args = script->ptrReadPos;

@@ -1,5 +1,6 @@
 #include "kpa_17.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/Toad_Stationary.inc.c"
 

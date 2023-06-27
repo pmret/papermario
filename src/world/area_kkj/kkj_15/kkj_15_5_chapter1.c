@@ -1,4 +1,5 @@
 #include "kkj_15.h"
+#include "sprite/player.h"
 
 Vec3f N(TwinkFollowCh1Path1)[] = {
     {  -70.0,   120.0,  -70.0 },

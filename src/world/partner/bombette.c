@@ -2,6 +2,7 @@
 #include "world/partners.h"
 #include "effects.h"
 #include "sprite/npc/WorldBombette.h"
+#include "sprite/player.h"
 
 #define NAMESPACE world_bombette
 

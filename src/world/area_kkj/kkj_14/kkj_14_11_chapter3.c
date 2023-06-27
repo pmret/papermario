@@ -1,4 +1,5 @@
 #include "kkj_14.h"
+#include "sprite/player.h"
 
 Vec3f N(TwinkPacingPath1)[] = {
     {  -40.0,    90.0,    0.0 },

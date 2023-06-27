@@ -1,5 +1,6 @@
 #include "isk_13.h"
 #include "sprite.h"
+#include "sprite/player.h"
 
 #include "world/common/enemy/StoneChomp.inc.c"
 

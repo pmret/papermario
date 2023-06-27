@@ -2,6 +2,7 @@
 #include "script_api/battle.h"
 #include "model.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_item_fright_jar
 

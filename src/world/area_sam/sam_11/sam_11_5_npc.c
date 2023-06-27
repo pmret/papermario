@@ -1,4 +1,5 @@
 #include "sam_11.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/Penguin_Wander.inc.c"
 #include "world/common/npc/Penguin.inc.c"

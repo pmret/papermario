@@ -2,6 +2,7 @@
 #include "world/actions.h"
 #include "world/partner/sushie.h"
 #include "world/partner/lakilester.h"
+#include "sprite/player.h"
 
 BSS f32 D_802B6770_E27C80;
 

@@ -3,6 +3,7 @@
 #include "entity.h"
 #include "ld_addrs.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_item_sleepy_sheep
 

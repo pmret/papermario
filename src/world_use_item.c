@@ -1,6 +1,7 @@
 #include "common.h"
 #include "effects.h"
 #include "script_api/battle.h"
+#include "sprite/player.h"
 
 ApiStatus WorldItem_ShowUseSparkles(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

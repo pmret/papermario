@@ -2,6 +2,7 @@
 #include "script_api/battle.h"
 #include "sprite/npc/WorldBombette.h"
 #include "battle/action_cmd/hammer.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_move_hammer_attack
 

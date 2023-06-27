@@ -1,5 +1,6 @@
 #include "obk_04.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 // redundant, but useful for documentation
 enum {

@@ -251,7 +251,7 @@ class CommonSegC(CommonSegCodeSubsegment):
                     f"\t The address of the missing rodata symbol is 0x{rodata_sym.vramEnd:08X}"
                 )
                 log.write(
-                    f"\t Try to force the migration of that symbol with `force_migration:True` in the symbol_addrs.txt file; or avoid the migration of symbols around this address with `force:not_migration:True`"
+                    f"\t Try to force the migration of that symbol with `force_migration:True` in the symbol_addrs.txt file; or avoid the migration of symbols around this address with `force_not_migration:True`"
                 )
 
     def create_c_asm_file(

@@ -1,6 +1,7 @@
 #include "../area.h"
 #include "sprite/npc/HuffNPuff.h"
 #include "sprite/npc/RuffPuff.h"
+#include "sprite/player.h"
 #include "battle/action_cmd/whirlwind.h"
 #include "battle/action_cmd/stop_leech.h"
 

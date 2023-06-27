@@ -1,6 +1,7 @@
 #include "obk_07.h"
 #include "hud_element.h"
 #include "battle/action_cmd.h"
+#include "sprite/player.h"
 
 extern HudScript HES_SlowlyMashAButton;
 

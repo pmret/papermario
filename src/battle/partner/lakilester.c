@@ -7,6 +7,7 @@
 #include "battle/action_cmd/water_block.h"
 #include "battle/action_cmd/hurricane.h"
 #include "hud_element.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_partner_lakilester
 
