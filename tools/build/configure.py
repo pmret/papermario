@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from functools import cache
+from functools import lru_cache
 import os
 import shutil
 from typing import List, Dict, Optional, Set, Union
@@ -407,7 +407,7 @@ class Configure:
 
         return [str(v) for v in ret.values()]
 
-    @cache
+    @lru_cache(maxsize=None)
     def resolve_asset_path(self, path: Path) -> Path:
         parts = list(path.parts)
 
