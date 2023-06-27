@@ -397,7 +397,7 @@ class TexImage:
 
     def get_img_file(self, fmt_str, img_file):
         (out_img, out_w, out_h) = Converter(
-            fmt_str.lower(), img_file, "--flip-y"
+            mode=fmt_str.lower(), infile=img_file, flip_y=True
         ).convert()
 
         out_pal = bytearray()
