@@ -10,8 +10,10 @@ from util.color import unpack_color, pack_color
 from segtypes.n64.palette import iter_in_groups
 
 from sys import path
+
 path.append(str(Path(__file__).parent.parent / "build"))
 from img.build import Converter
+
 
 def decode_null_terminated_ascii(data):
     length = 0
@@ -191,8 +193,8 @@ class TexImage:
             img = n64img.image.I8(data=bytes, width=w, height=h)
         else:
             raise Exception(f"Invalid format: {fmt_name}")
-            
-    #TODO    img.flip_v = True
+
+        img.flip_v = True
         return img
 
     # get palette from the buffer
@@ -349,7 +351,7 @@ class TexImage:
                     "vwrap": wrap_modes.get(self.aux_vwrap),
                 }
             else:
-                 out["aux"] = {
+                out["aux"] = {
                     "format": get_format_name(self.aux_fmt, self.aux_depth),
                     "hwrap": wrap_modes.get(self.aux_hwrap),
                     "vwrap": wrap_modes.get(self.aux_vwrap),
@@ -368,7 +370,6 @@ class TexImage:
 
         return out
 
-
     def save_images(self, tex_path):
         self.main_img.write(tex_path / f"{self.img_name}.png")
         if self.has_aux:
@@ -376,7 +377,6 @@ class TexImage:
         if self.has_mipmaps:
             for idx, mipmap in enumerate(self.mipmaps):
                 mipmap.write(tex_path / f"{self.img_name}_MM{idx + 1}.png")
-
 
     def read_json_img(self, img_data, tile_name, img_name):
         fmt_str = img_data.get("format")
@@ -396,7 +396,9 @@ class TexImage:
         return fmt_str, hwrap, vwrap
 
     def get_img_file(self, fmt_str, img_file):
-        (out_img, out_w, out_h) = Converter(fmt_str.lower(), img_file, None).convert() #TODO, "--flip-y")
+        (out_img, out_w, out_h) = Converter(
+            fmt_str.lower(), img_file, "--flip-y"
+        ).convert()
 
         out_pal = bytearray()
         if fmt_str == "CI4" or fmt_str == "CI8":
@@ -410,7 +412,7 @@ class TexImage:
                 color = pack_color(*rgba)
                 out_pal += color.to_bytes(2, byteorder="big")
 
-        return (out_img, out_pal, out_w, out_h) 
+        return (out_img, out_pal, out_w, out_h)
 
     # read texture properties from dictionary and load images
     def from_json(self, tex_path: Path, json_data):
@@ -425,21 +427,30 @@ class TexImage:
         main_data = json_data.get("main")
         if main_data == None:
             raise Exception(f"Texture {self.img_name} has no definition for 'main'")
-            
-        (main_fmt_name, self.main_hwrap, self.main_vwrap) = self.read_json_img(main_data, "main", self.img_name)
+
+        (main_fmt_name, self.main_hwrap, self.main_vwrap) = self.read_json_img(
+            main_data, "main", self.img_name
+        )
         (self.main_fmt, self.main_depth) = get_format_code(main_fmt_name)
 
         # read main image
         img_path = str(tex_path / f"{self.img_name}.png")
         if not os.path.isfile(img_path):
             raise Exception(f"Could not find main image for texture: {self.img_name}")
-        (self.main_img, self.main_pal, self.main_width, self.main_height) = self.get_img_file(main_fmt_name, img_path)
+        (
+            self.main_img,
+            self.main_pal,
+            self.main_width,
+            self.main_height,
+        ) = self.get_img_file(main_fmt_name, img_path)
 
         # read data for aux tile
         self.has_aux = "aux" in json_data
         if self.has_aux:
             aux_data = json_data.get("aux")
-            (aux_fmt_name, self.aux_hwrap, self.aux_vwrap) = self.read_json_img(aux_data, "aux", self.img_name)
+            (aux_fmt_name, self.aux_hwrap, self.aux_vwrap) = self.read_json_img(
+                aux_data, "aux", self.img_name
+            )
 
             if aux_fmt_name == "Shared":
                 # aux tiles have blank attributes in SHARED mode
@@ -456,8 +467,15 @@ class TexImage:
             # read aux image
             img_path = str(tex_path / f"{self.img_name}_AUX.png")
             if not os.path.isfile(img_path):
-                raise Exception(f"Could not find AUX image for texture: {self.img_name}")
-            (self.aux_img, self.aux_pal, self.aux_width, self.aux_height) = self.get_img_file(aux_fmt_name, img_path)
+                raise Exception(
+                    f"Could not find AUX image for texture: {self.img_name}"
+                )
+            (
+                self.aux_img,
+                self.aux_pal,
+                self.aux_width,
+                self.aux_height,
+            ) = self.get_img_file(aux_fmt_name, img_path)
             if self.extra_tiles == TILES_SHARED_AUX:
                 # aux tiles have blank sizes in SHARED mode
                 self.main_height *= 2
@@ -488,20 +506,26 @@ class TexImage:
 
                     img_path = str(tex_path / f"{self.img_name}_MM{mipmap_idx}.png")
                     if not os.path.isfile(img_path):
-                        raise Exception(f"Texture {self.img_name} is missing mipmap level {mipmap_idx} (size = {mmw} x {mmh})")
-                    
-                    (raster, pal, width, height) = self.get_img_file(main_fmt_name, img_path)                    
+                        raise Exception(
+                            f"Texture {self.img_name} is missing mipmap level {mipmap_idx} (size = {mmw} x {mmh})"
+                        )
+
+                    (raster, pal, width, height) = self.get_img_file(
+                        main_fmt_name, img_path
+                    )
                     self.mipmaps.append(raster)
                     if width != mmw or height != mmh:
-                        raise Exception(f"Texture {self.img_name} has wrong size for mipmap level {mipmap_idx} \n"\
-                            + f"MM{mipmap_idx} size = {width} x {height}, but should be = {mmw} x {mmh}")
-                    
+                        raise Exception(
+                            f"Texture {self.img_name} has wrong size for mipmap level {mipmap_idx} \n"
+                            + f"MM{mipmap_idx} size = {width} x {height}, but should be = {mmw} x {mmh}"
+                        )
+
                     divisor = divisor * 2
                     mipmap_idx += 1
                     if (self.main_width // divisor) < (16 >> self.main_depth):
                         break
             self.extra_tiles = TILES_MIPMAPS
-        
+
         # read filter mode
         if json_data.get("filter", False):
             self.filter_mode = 2
@@ -515,9 +539,9 @@ class TexImage:
             raise Exception(f"Texture {self.img_name} has invalid 'combine'")
 
         self.is_variant = json_data.get("variant", False)
-        
+
     # write texture header and image raster/palettes to byte array
-    def add_bytes(self, tex_name: str, bytes : bytearray):
+    def add_bytes(self, tex_name: str, bytes: bytearray):
         # form raw name and write to header
         raw_name = tex_name[:4] + self.img_name + self.raw_ext
         name_bytes = raw_name.encode("ascii")
@@ -525,14 +549,15 @@ class TexImage:
 
         # pad name out to 32 bytes
         pad_len = 32 - len(name_bytes)
-        assert(pad_len > 0)
+        assert pad_len > 0
         bytes += b"\0" * pad_len
 
         # write header fields
-        bytes += struct.pack(">HHHHBBBBBBBB",
+        bytes += struct.pack(
+            ">HHHHBBBBBBBB",
             self.aux_width,
             self.main_width,
-            self.aux_height, 
+            self.aux_height,
             self.main_height,
             self.is_variant,
             self.extra_tiles,
@@ -541,7 +566,7 @@ class TexImage:
             self.pack_byte(self.aux_depth, self.main_depth),
             self.pack_byte(self.aux_hwrap, self.main_hwrap),
             self.pack_byte(self.aux_vwrap, self.main_vwrap),
-            self.filter_mode
+            self.filter_mode,
         )
 
         # write rasters and palettes
@@ -586,7 +611,7 @@ class TexArchive:
         for texture in textures:
             texture.save_images(tex_path)
             out.append(texture.get_json_entry())
-            
+
         json_out = json.dumps(out, sort_keys=False, indent=4)
 
         json_fn = str(tex_path) + ".json"
@@ -604,7 +629,9 @@ class TexArchive:
             json_data = json.loads(json_str)
 
             if len(json_data) > 128:
-                raise Exception(f"Maximum number of textures (128) exceeded by {tex_name} ({len(json_data)})`")
+                raise Exception(
+                    f"Maximum number of textures (128) exceeded by {tex_name} ({len(json_data)})`"
+                )
 
             for img_data in json_data:
                 img = TexImage()
