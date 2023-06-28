@@ -5,7 +5,7 @@ import sys
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Set
+from typing import Any, Dict, List, Optional, Set, Tuple
 
 import png  # type: ignore
 import yaml as yaml_loader
@@ -585,7 +585,7 @@ class NpcSprite:
     num_variations: int
 
     animations: List[List[AnimComponent]]
-    palettes: List[List[tuple[int, int, int, int]]]
+    palettes: List[List[Tuple[int, int, int, int]]]
     images: List[NpcRaster]
 
     image_names: List[str] = field(default_factory=list)
