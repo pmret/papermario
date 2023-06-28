@@ -2,7 +2,7 @@
 
 import argparse
 from dataclasses import dataclass
-from functools import cache
+from functools import lru_cache
 from pathlib import Path
 import sys
 from typing import List
@@ -95,7 +95,7 @@ SPECIAL_RASTER_BYTES = (
 )
 
 
-@cache
+@lru_cache(maxsize=None)
 def get_asset_path(asset: str) -> Path:
     for sdir in ASSET_STACK:
         potential_path = ASSET_DIR / sdir / "sprite" / asset
