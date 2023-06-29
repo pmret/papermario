@@ -338,7 +338,7 @@ void apply_transform_to_children(ApiStatus (*apiFunc)(Evt*, s32), Evt* script) {
 }
 
 ApiStatus MakeTransformGroup(Evt* script, s32 isInitialCall) {
-    make_transform_group((u16)evt_get_variable(script, *script->ptrReadPos));
+    mdl_make_transform_group((u16)evt_get_variable(script, *script->ptrReadPos));
     return ApiStatus_DONE2;
 }
 
@@ -514,16 +514,16 @@ void modify_collider_family_flags(s32 index, s32 flags, s32 mode) {
     }
 
     switch (mode) {
-        case 0:
+        case MODIFY_COLLIDER_FLAGS_SET_BITS:
             collider->flags |= flags;
             break;
-        case 1:
+        case MODIFY_COLLIDER_FLAGS_CLEAR_BITS:
             collider->flags &= ~flags;
             break;
-        case 2:
+        case MODIFY_COLLIDER_FLAGS_SET_VALUE:
             collider->flags = flags;
             break;
-        case 3:
+        case MODIFY_COLLIDER_FLAGS_SET_SURFACE:
             collider->flags &= ~0xFF;
             collider->flags |= flags & 0xFF;
             break;

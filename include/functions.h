@@ -479,7 +479,7 @@ void set_entity_fog_dist(s32 start, s32 end);
 void set_entity_fog_color(s32 r, s32 g, s32 b, s32 a);
 
 struct ModelTransformGroup* get_transform_group(s32 index);
-void make_transform_group(u16 modelID);
+void mdl_make_transform_group(u16 modelID);
 void enable_transform_group(u16 modelID);
 void disable_transform_group(u16 modelID);
 void set_map_transition_effect(ScreenTransition);

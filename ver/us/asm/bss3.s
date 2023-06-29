@@ -274,16 +274,16 @@ dlabel TextureHeapPos
 dlabel mdl_currentTransformGroupChildIndex
 .space 2
 
-dlabel D_8015336E
+dlabel mtg_SearchModelID
 .space 2
 
-dlabel D_80153370
+dlabel mtg_FoundModelNode
 .space 4
 
-dlabel D_80153374
+dlabel mtg_MinChild
 .space 2
 
-dlabel D_80153376
+dlabel mtg_MaxChild
 .space 2
 
 dlabel D_80153378

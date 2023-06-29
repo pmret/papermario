@@ -265,7 +265,7 @@ EvtScript N(EVS_UpdateLightshow) = {
     EVT_CALL(EnableModel, MODEL_kino8, TRUE)
     EVT_CALL(EnableTexPanning, MODEL_kino8, TRUE)
     EVT_CALL(SetModelCustomGfx, MODEL_kino7, CUSTOM_GFX_1, -1)
-    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_1, EVT_PTR(N(gfx_build_set_spotlight_alpha)), 0)
+    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_1, EVT_PTR(N(gfx_build_set_spotlight_alpha)), NULL)
     EVT_CHILD_THREAD
         EVT_CALL(MakeLerp, 0, 255, 90, EASING_LINEAR)
         EVT_LOOP(0)

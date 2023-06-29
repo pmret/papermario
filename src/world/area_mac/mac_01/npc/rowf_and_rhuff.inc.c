@@ -621,7 +621,7 @@ EvtScript N(EVS_NpcInit_Rowf) = {
             EVT_END_IF
     EVT_END_SWITCH
     EVT_SET(AF_MAC_41, FALSE)
-    EVT_CALL(SetModelFlags, MODEL_ju_2, MODEL_FLAG_FLAG_200, FALSE)
+    EVT_CALL(SetModelFlags, MODEL_ju_2, MODEL_FLAG_DO_BOUNDS_CULLING, FALSE)
     EVT_CALL(EnableGroup, MODEL_jutan1, FALSE)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_b1, COLLIDER_FLAGS_UPPER_MASK)
     EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_b2, COLLIDER_FLAGS_UPPER_MASK)
@@ -631,7 +631,7 @@ EvtScript N(EVS_NpcInit_Rowf) = {
     EVT_CALL(ScaleGroup, MODEL_jutan2, EVT_FLOAT(1.3), 1, EVT_FLOAT(1.3))
     EVT_SET(MV_RowfRugRotateAngle, 60)
     EVT_CALL(MakeLocalVertexCopy, VTX_COPY_0, MODEL_ju_1, TRUE)
-    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_0, EVT_PTR(N(gfx_build_rowf_rug_with_ripples)), 0)
+    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_0, EVT_PTR(N(gfx_build_rowf_rug_with_ripples)), NULL)
     EVT_CALL(SetModelCustomGfx, MODEL_ju_1, CUSTOM_GFX_0, -1)
     EVT_IF_EQ(AF_MAC_40, TRUE)
         EVT_BIND_TRIGGER(EVT_PTR(N(EVS_EnterBadgeShop)), TRIGGER_FLOOR_TOUCH, COLLIDER_roten, 1, 0)
