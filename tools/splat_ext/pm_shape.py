@@ -21,7 +21,7 @@ GFX_START_DL            = 0xDE
 GFX_END_DL              = 0xDF
 
 
-def read_ascii_string(bytes, addr):
+def read_ascii_string(bytes : bytearray, addr : int) -> str:
     start = addr - BASE_ADDR
     length = 0
 
@@ -33,7 +33,7 @@ def read_ascii_string(bytes, addr):
     return bytes[start : start + length].decode("ascii")
 
 
-def get_shape_type_name(id : int):
+def get_shape_type_name(id : int) -> str:
     if id == NODE_TYPE_ROOT:
         return "SHAPE_TYPE_ROOT"
     elif id == NODE_TYPE_MODEL:
@@ -51,7 +51,7 @@ class Segment(ABC):
         self.count = 0
         self.model_name = ""
 
-    def get_sym(self):
+    def get_sym(self) -> str:
         if self.model_name != "":
             return f"N({self.name}_{self.model_name})"
         else:
@@ -370,7 +370,7 @@ class DisplayListSegment(Segment):
                 if shape.vtx_table.count < idx + num:
                     shape.vtx_table.count = idx + num
 
-    def get_geometry_flags(self, bits : int):
+    def get_geometry_flags(self, bits : int) -> str:
         flags = []
 
         if (bits & 0x00000400) != 0:
@@ -449,7 +449,7 @@ class ShapeFile:
         self.zone_names = None,
 
 
-    def push(self, segment : Segment):
+    def push(self, segment : Segment) -> Segment:
         if segment.addr == 0:
             return None
 
@@ -461,7 +461,7 @@ class ShapeFile:
         return segment
 
 
-    def get_symbol(self, addr):
+    def get_symbol(self, addr) -> str:
         if not addr in self.visited:
             raise Exception(f"Encountered unknown pointer: {hex(addr)}")
 
@@ -487,6 +487,7 @@ class ShapeFile:
         ) = struct.unpack(">IIIII", self.file_bytes[node_start : node_start + 20])
 
         if node_type == NODE_TYPE_MODEL:
+            # set name for this model node
             self.model_name_map[node_addr] = names.pop()
             return
 
@@ -500,14 +501,15 @@ class ShapeFile:
         ) = struct.unpack(">IIIII", self.file_bytes[group_start : group_start + 20])
 
         child_start = ptr_children - BASE_ADDR
-        
+
         for i in range(num_children):
             ( ptr_child, ) = struct.unpack(">I", self.file_bytes[child_start : child_start + 4])
             self.build_model_name_map(ptr_child, names)
             child_start += 4
 
+        # set name for this group node
         self.model_name_map[node_addr] = names.pop()
-    
+
     def print_prologue(self, segments):
         self.print('#include "common.h"')
         self.print('#include "model.h"')
