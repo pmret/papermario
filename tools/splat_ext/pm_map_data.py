@@ -1,5 +1,6 @@
-import os
+import os, sys
 from pathlib import Path
+from typing import List
 from segtypes.n64.segment import N64Segment
 from util.n64.Yay0decompress import Yay0Decompressor
 from util.color import unpack_color
@@ -8,6 +9,10 @@ from util import options
 import png  # type: ignore
 import yaml as yaml_loader
 import n64img.image
+
+SPLAT_EXT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(str(Path(SPLAT_EXT_DIR)))
+from tex_archives import TexArchive
 
 script_dir = Path(os.path.dirname(os.path.realpath(__file__)))
 
@@ -69,6 +74,8 @@ class N64SegPm_map_data(N64Segment):
             self.files = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
 
     def split(self, rom_bytes):
+        assert isinstance(self.rom_start, int)
+
         fs_dir = options.opts.asset_path / self.dir / self.name
         (fs_dir / "title").mkdir(parents=True, exist_ok=True)
         (fs_dir / "party").mkdir(parents=True, exist_ok=True)
@@ -104,6 +111,7 @@ class N64SegPm_map_data(N64Segment):
                 bytes = Yay0Decompressor.decompress_python(bytes)
 
             if name.startswith("party_"):
+                assert path is not None
                 with open(path, "wb") as f:
                     # CI-8
                     w = png.Writer(150, 105, palette=parse_palette(bytes[:0x200]))
@@ -143,7 +151,7 @@ class N64SegPm_map_data(N64Segment):
                     w = 128
                     h = 32
                     img = n64img.image.CI4(
-                        data=bytes[0x10 : 0x10 + w * h], width=w, height=h
+                        data=bytes[0x10 : 0x10 + (w * h // 2)], width=w, height=h
                     )
                     img.palette = parse_palette(bytes[0x810:0x830])
                     img.write(fs_dir / "title/copyright.png")
@@ -189,7 +197,10 @@ class N64SegPm_map_data(N64Segment):
                     write_bg_png(
                         bytes, fs_dir / "bg" / f"{name}.alt.png", header_offset=0x10
                     )
+            elif name.endswith("_tex"):
+                TexArchive.extract(bytes, fs_dir / "tex" / name)
             else:
+                assert path is not None
                 with open(path, "wb") as f:
                     f.write(bytes)
 

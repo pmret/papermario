@@ -401,7 +401,9 @@ segments:
     vram: 0x8010dab0
     subsegments:
     - [0xA4990, hasm, bss3]
-    - [0xA4990, c, a5dd0_len_114e0]
+    - [0xA4990, c, entity]
+    - [auto, c, game_states]
+    - [auto, c, model]
     - [0xB3140, c, B4580]
     - [0xB5E70, c, entity_model]
     - [0xB8370, c, worker]
@@ -419,7 +421,9 @@ segments:
     - [0xDD6B0, c, sprite_shading]
     - [0xDE8C0, c, audio/sfx]
     - [0xDFAA0, c, audio/e0b30_len_b80]
-    - [0xE0620, .data, a5dd0_len_114e0]
+    - [0xE0620, .data, entity]
+    - [auto, .data, game_states]
+    - [auto, .data, model]
     - [0xE18C0, .data, B4580]
     - [0xE18D0, .data, entity_model]
     - [0xE18F0, .data, msg]

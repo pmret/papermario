@@ -106,7 +106,7 @@ dlabel entity_numShadows
 dlabel gSpriteShadingProfile
 .space 4
 
-dlabel entity_area_specific_data_is_loaded
+dlabel isAreaSpecificEntityDataLoaded
 .space 4
 
 dlabel entity_updateCounter
@@ -178,7 +178,7 @@ dlabel D_801516FC
 dlabel gMainGameState
 .space 0x00000040
 
-dlabel gCurrentTileDescriptor
+dlabel gCurrentTextureHeader
 .space 0x00000030
 
 dlabel wModelList
@@ -268,7 +268,7 @@ dlabel texPannerAuxU
 dlabel texPannerAuxV
 .space 0x00000040
 
-dlabel mdl_nextTextureAddress
+dlabel TextureHeapPos
 .space 4
 
 dlabel mdl_currentTransformGroupChildIndex

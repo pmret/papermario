@@ -195,7 +195,7 @@ void state_step_end_battle(void) {
                     set_background_size(296, 200, 12, 20);
                 }
 
-                load_model_textures(mapSettings->modelTreeRoot, get_asset_offset(wMapTexName, &sizeTemp), sizeTemp);
+                mdl_load_all_textures(mapSettings->modelTreeRoot, get_asset_offset(wMapTexName, &sizeTemp), sizeTemp);
                 calculate_model_sizes();
                 npc_reload_all();
 

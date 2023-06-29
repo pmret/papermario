@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from functools import cache
+from functools import lru_cache
 import os
 import shutil
 from typing import List, Dict, Optional, Set, Union
@@ -19,6 +19,7 @@ ROOT = Path(__file__).parent.parent.parent
 BUILD_TOOLS = Path("tools/build")
 YAY0_COMPRESS_TOOL = f"{BUILD_TOOLS}/yay0/Yay0compress"
 CRC_TOOL = f"{BUILD_TOOLS}/rom/n64crc"
+
 
 
 def exec_shell(command: List[str]) -> str:
@@ -239,6 +240,12 @@ def write_ninja_rules(
     )
 
     ninja.rule(
+        "tex",
+        description="tex $out",
+        command=f"$python {BUILD_TOOLS}/mapfs/tex.py $out $tex_dir",
+    )
+
+    ninja.rule(
         "pack_title_data",
         description="pack_title_data $out",
         command=f"$python {BUILD_TOOLS}/mapfs/pack_title_data.py $out $in",
@@ -400,7 +407,7 @@ class Configure:
 
         return [str(v) for v in ret.values()]
 
-    @cache
+    @lru_cache(maxsize=None)
     def resolve_asset_path(self, path: Path) -> Path:
         parts = list(path.parts)
 
@@ -887,7 +894,15 @@ class Configure:
                         )
                     elif name.endswith("_tex"):
                         compress = False
-                        bin_path = path
+                        tex_dir = path.parent / name
+                        build(
+                            bin_path,
+                            [tex_dir],
+                            "tex",
+                            variables={
+                                "tex_dir": str(tex_dir)
+                            }
+                        )
                     elif name.endswith("_shape"):
                         map_name = "_".join(name.split("_")[:-1])
 

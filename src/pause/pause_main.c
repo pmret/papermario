@@ -845,14 +845,14 @@ s32 pause_get_total_equipped_bp_cost(void) {
     return totalCost;
 }
 
-void pause_draw_rect(s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileDescriptor, s32 uls, s32 ult, s32 dsdx, s32 dtdy) {
+void pause_draw_rect(s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileIdx, s32 uls, s32 ult, s32 dsdx, s32 dtdy) {
     if (ulx <= -2688 || uly <= -2688 || lrx <= 0 || lry <= 0) {
         return;
     }
     if (ulx >= 1280 || uly >= 960 || lrx >= 2688 || lry >= 2688) {
         return;
     }
-    gSPScisTextureRectangle(gMainGfxPos++, ulx, uly, lrx, lry, tileDescriptor, uls, ult, dsdx, dtdy);
+    gSPScisTextureRectangle(gMainGfxPos++, ulx, uly, lrx, lry, tileIdx, uls, ult, dsdx, dtdy);
 }
 
 void pause_sort_item_list(s16* arr, s32 len, s32 (*compare)(s16*, s16 *)) {
