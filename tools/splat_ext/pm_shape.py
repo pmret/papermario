@@ -508,17 +508,17 @@ class ShapeFile:
 
         self.model_name_map[node_addr] = names.pop()
     
-    def print_header(self, segments):
+    def print_prologue(self, segments):
         self.print('#include "common.h"')
         self.print('#include "model.h"')
         self.print("")
         self.print(f"#define NAMESPACE {self.map_name}_shape")
         self.print("")
-        self.print("extern ModelNode N(root_node);")
-        self.print("extern Vtx_t N(vtx)[];")
-        self.print("extern char* N(model_names)[];")
-        self.print("extern char* N(collider_names)[];")
-        self.print("extern char* N(zone_names)[];")
+        self.print(f"extern ModelNode {self.root_node.get_sym()};")
+        self.print(f"extern Vtx_t {self.vtx_table.get_sym()}[];")
+        self.print(f"extern char* {self.model_names.get_sym()}[];")
+        self.print(f"extern char* {self.collider_names.get_sym()}[];")
+        self.print(f"extern char* {self.zone_names.get_sym()}[];")
         for segment in segments:
             if isinstance(segment, MatrixSegment):
                 self.print(f"extern Matrix4s {segment.get_sym()};")
@@ -552,7 +552,7 @@ class ShapeFile:
         segment_addrs.sort()
         sorted_segments = {i: self.visited[i] for i in segment_addrs}
 
-        self.print_header(sorted_segments.values())
+        self.print_prologue(sorted_segments.values())
 
         for addr, seg in sorted_segments.items():
             seg.print(self)
