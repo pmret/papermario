@@ -1086,7 +1086,7 @@ f32 get_player_normal_pitch(void);
 void partner_kill_ability_script(void);
 void func_800EF3D4(s32);
 
-void func_80116698(void);
+void mdl_update_transform_matrices(void);
 void func_8011B950(u16, s32, s32, s32);
 
 void backup_map_collision_data(void);

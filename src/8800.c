@@ -89,7 +89,7 @@ void render_frame(s32 isSecondPass) {
 
     if (!isSecondPass) {
         gCurrentCamID = CAM_DEFAULT;
-        func_80116698();
+        mdl_update_transform_matrices();
     }
 
     if (isSecondPass) {

@@ -46,18 +46,18 @@ typedef struct ModelNode {
 typedef struct Model {
     /* 0x00 */ u16 flags;
     /* 0x02 */ u16 modelID;
-    /* 0x04 */ Mtx* currentMatrix;
+    /* 0x04 */ Mtx* bakedMtx; // pointer to stack-allocated copy of matrix supplied by the shape file for this model
     /* 0x08 */ ModelNode* modelNode;
     /* 0x0C */ ModelGroupData* groupData;
-    /* 0x10 */ Mtx* currentSpecialMatrix;
+    /* 0x10 */ Mtx* finalMtx; // the matrix actually used while building the display list
     /* 0x14 */ char unk_14[4];
-    /* 0x18 */ Mtx specialMatrix;
-    /* 0x58 */ Matrix4f transformMatrix;
+    /* 0x18 */ Mtx savedMtx;
+    /* 0x58 */ Matrix4f userTransformMtx; // provided for user code to apply an additional multiplicative transformation
     /* 0x98 */ Vec3f center;
     /* 0xA4 */ u8 texPannerID;
     /* 0xA5 */ u8 customGfxIndex;
     /* 0xA6 */ s8 renderMode;
-    /* 0xA7 */ u8 matrixMode;
+    /* 0xA7 */ u8 matrixFreshness;
     /* 0xA8 */ u8 textureID;
     /* 0xA9 */ s8 textureVariation;
     /* 0xAA */ char unk_AA[6];
@@ -66,16 +66,16 @@ typedef struct Model {
 typedef struct ModelTransformGroup {
     /* 0x00 */ u16 flags;
     /* 0x02 */ u16 groupModelID;
-    /* 0x04 */ Mtx* matrixRDP_N;
+    /* 0x04 */ Mtx* bakedMtx; // would point to copy of matrix from shape file, but seems to always be NULL.
     /* 0x08 */ ModelNode* baseModelNode;
-    /* 0x0C */ Mtx* transformMtx;
-    /* 0x10 */ Mtx matrixA;
-    /* 0x50 */ Matrix4f matrixB;
+    /* 0x0C */ Mtx* finalMtx; // the matrix actually used while building the display list
+    /* 0x10 */ Mtx savedMtx;
+    /* 0x50 */ Matrix4f userTransformMtx; // provided for user code to apply an additional multiplicative transformation
     /* 0x90 */ Vec3f center;
     /* 0x9C */ u8 minChildModelIndex;
     /* 0x9D */ u8 maxChildModelIndex;
     /* 0x9E */ u8 renderMode;
-    /* 0x9F */ u8 matrixMode;
+    /* 0x9F */ u8 matrixFreshness;
 } ModelTransformGroup; // size = 0xA0
 
 typedef Model* ModelList[MAX_MODELS];

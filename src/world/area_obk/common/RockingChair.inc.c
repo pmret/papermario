@@ -171,24 +171,24 @@ API_CALLABLE(N(UpdateRockingChair)) {
     physics->verticalOffset = SQ(physics->rotationAngle) / 90.0f;
 
     model = get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_i3));
-    model->flags |= (MODEL_FLAG_USES_TRANSFORM_MATRIX | MODEL_FLAG_HAS_TRANSFORM_APPLIED);
-    guTranslateF(model->transformMatrix, 0.0f, physics->verticalOffset, 0.0f);
+    model->flags |= (MODEL_FLAG_MATRIX_DIRTY | MODEL_FLAG_HAS_TRANSFORM);
+    guTranslateF(model->userTransformMtx, 0.0f, physics->verticalOffset, 0.0f);
     guRotateF(tempMtx, physics->rotationAngle, 0.0f, 0.0f, 1.0f);
-    guMtxCatF(model->transformMatrix, tempMtx, model->transformMatrix);
+    guMtxCatF(model->userTransformMtx, tempMtx, model->userTransformMtx);
     update_collider_transform(COLLIDER_i3);
     update_collider_transform(COLLIDER_i2);
 
     model = get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_i2));
-    model->flags |= (MODEL_FLAG_USES_TRANSFORM_MATRIX | MODEL_FLAG_HAS_TRANSFORM_APPLIED);
-    guTranslateF(model->transformMatrix, 0.0f, physics->verticalOffset, 0.0f);
+    model->flags |= (MODEL_FLAG_MATRIX_DIRTY | MODEL_FLAG_HAS_TRANSFORM);
+    guTranslateF(model->userTransformMtx, 0.0f, physics->verticalOffset, 0.0f);
     guRotateF(tempMtx, physics->rotationAngle, 0.0f, 0.0f, 1.0f);
-    guMtxCatF(model->transformMatrix, tempMtx, model->transformMatrix);
+    guMtxCatF(model->userTransformMtx, tempMtx, model->userTransformMtx);
 
     model = get_model_from_list_index(get_model_list_index_from_tree_index(MODEL_i1));
-    model->flags |= (MODEL_FLAG_USES_TRANSFORM_MATRIX | MODEL_FLAG_HAS_TRANSFORM_APPLIED);
-    guTranslateF(model->transformMatrix, 0.0f, physics->verticalOffset, 0.0f);
+    model->flags |= (MODEL_FLAG_MATRIX_DIRTY | MODEL_FLAG_HAS_TRANSFORM);
+    guTranslateF(model->userTransformMtx, 0.0f, physics->verticalOffset, 0.0f);
     guRotateF(tempMtx, physics->rotationAngle, 0.0f, 0.0f, 1.0f);
-    guMtxCatF(model->transformMatrix, tempMtx, model->transformMatrix);
+    guMtxCatF(model->userTransformMtx, tempMtx, model->userTransformMtx);
     update_collider_transform(COLLIDER_i1);
 
     return ApiStatus_BLOCK;

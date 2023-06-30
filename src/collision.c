@@ -382,11 +382,11 @@ void update_collider_transform(s16 colliderID) {
     collider = &gCollisionData.colliderList[colliderID];
     model = get_model_from_list_index(collider->parentModelIndex);
 
-    if (!model->currentMatrix) {
-        copy_matrix(model->transformMatrix, matrix);
+    if (!model->bakedMtx) {
+        copy_matrix(model->userTransformMtx, matrix);
     } else {
-        guMtxL2F(matrix, (Mtx*)model->currentMatrix);
-        guMtxCatF(model->transformMatrix, matrix, matrix);
+        guMtxL2F(matrix, (Mtx*)model->bakedMtx);
+        guMtxCatF(model->userTransformMtx, matrix, matrix);
     }
 
     triangle = collider->triangleTable;

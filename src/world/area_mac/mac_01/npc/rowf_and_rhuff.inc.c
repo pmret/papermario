@@ -640,9 +640,9 @@ EvtScript N(EVS_NpcInit_Rowf) = {
     EVT_END_IF
     EVT_THREAD
         EVT_WAIT(5)
-        EVT_CALL(SetModelFlags, MODEL_b1, MODEL_FLAG_FLAG_4, FALSE)
-        EVT_CALL(SetModelFlags, MODEL_b2, MODEL_FLAG_FLAG_4, FALSE)
-        EVT_CALL(SetModelFlags, MODEL_b3, MODEL_FLAG_FLAG_4, FALSE)
+        EVT_CALL(SetModelFlags, MODEL_b1, MODEL_FLAG_INACTIVE, FALSE)
+        EVT_CALL(SetModelFlags, MODEL_b2, MODEL_FLAG_INACTIVE, FALSE)
+        EVT_CALL(SetModelFlags, MODEL_b3, MODEL_FLAG_INACTIVE, FALSE)
         EVT_CALL(N(HideRowfBadges))
         EVT_LABEL(0)
         EVT_IF_EQ(GF_MAC01_RowfBadgeAvailableA, FALSE)

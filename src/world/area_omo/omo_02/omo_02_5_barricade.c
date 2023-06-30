@@ -111,7 +111,7 @@ API_CALLABLE(N(AnimateBarricadeParts)) {
 
             for (j = 0; j < 4; j++) {
                 for (k = 0; k < 4; k++) {
-                    part->transformMatrix[j][k] = model->transformMatrix[j][k];
+                    part->transformMatrix[j][k] = model->userTransformMtx[j][k];
                 }
             }
         }
@@ -150,11 +150,11 @@ API_CALLABLE(N(AnimateBarricadeParts)) {
 
         for (j = 0; j < 4; j++) {
             for (k = 0; k < 4; k++) {
-                model->transformMatrix[j][k] = part->transformMatrix[j][k];
+                model->userTransformMtx[j][k] = part->transformMatrix[j][k];
             }
         }
 
-        model->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX | MODEL_FLAG_HAS_TRANSFORM_APPLIED;
+        model->flags |= MODEL_FLAG_MATRIX_DIRTY | MODEL_FLAG_HAS_TRANSFORM;
         guTranslateF(mtxTransform, part->pos.x - part->origin.x, part->pos.y - part->origin.y, part->pos.z - part->origin.z);
         part->rot.x += part->angularVelocity.x;
         part->rot.y += part->angularVelocity.y;
@@ -168,7 +168,7 @@ API_CALLABLE(N(AnimateBarricadeParts)) {
         guMtxCatF(mtxRotZ, mtxRotX, mtxRotX);
         guMtxCatF(mtxRotX, mtxRotY, mtxRotY);
         guMtxCatF(mtxRotY, mtxTransform, mtxTransform);
-        guMtxCatF(model->transformMatrix, mtxTransform, model->transformMatrix);
+        guMtxCatF(model->userTransformMtx, mtxTransform, model->userTransformMtx);
     }
 
     if ((u32) script->functionTemp[1] >= ARRAY_COUNT(N(BarricadeModels))) {

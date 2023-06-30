@@ -930,7 +930,7 @@ API_CALLABLE(MakeShop) {
         gGameStatusPtr->shopItemEntities[numShopItems].pos.y = centerY;
         gGameStatusPtr->shopItemEntities[numShopItems].pos.z = centerZ;
         model = get_model_from_list_index(get_model_list_index_from_tree_index(itemDataPositions->posModelID));
-        model->flags |= MODEL_FLAG_FLAG_4;
+        model->flags |= MODEL_FLAG_INACTIVE;
         gGameStatusPtr->shopItemEntities[numShopItems].index =
             make_item_entity_nodelay(inventory->itemID | shop->inventoryItemFlags, centerX, centerY, centerZ, 1, 0);
         set_item_entity_flags(gGameStatusPtr->shopItemEntities[numShopItems].index, ITEM_ENTITY_RESIZABLE);

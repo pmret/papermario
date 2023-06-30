@@ -1216,7 +1216,7 @@ void appendGfx_model(void* data) {
     } else {
         texturingMode = 1;
     }
-    if ((textureHeader != NULL || renderMode <= RENDER_MODE_ALPHATEST_NO_ZB) && gCurrentFogSettings->enabled && !(flags & MODEL_FLAG_FLAG_40)) {
+    if ((textureHeader != NULL || renderMode <= RENDER_MODE_ALPHATEST_NO_ZB) && gCurrentFogSettings->enabled && !(flags & MODEL_FLAG_40)) {
         texturingMode = 3;
         combineSubType = 1;
     }
@@ -1716,8 +1716,8 @@ void appendGfx_model(void* data) {
     }
 
     if (!(flags & MODEL_FLAG_TRANSFORM_GROUP_MEMBER)) {
-        if (!(flags & MODEL_FLAG_FLAG_2000)) {
-            gSPMatrix((*gfxPos)++, model->currentSpecialMatrix, mtxLoadMode | mtxPushMode | G_MTX_MODELVIEW);
+        if (!(flags & MODEL_FLAG_IGNORE_MATRIX)) {
+            gSPMatrix((*gfxPos)++, model->finalMtx, mtxLoadMode | mtxPushMode | G_MTX_MODELVIEW);
             if (mtxPushMode != G_MTX_NOPUSH) {
                 mtxPushMode = G_MTX_NOPUSH;
             }
@@ -1727,8 +1727,8 @@ void appendGfx_model(void* data) {
         }
     } else {
         mtxLoadMode = G_MTX_MUL;
-        if (!(flags & MODEL_FLAG_FLAG_2000)) {
-            gSPMatrix((*gfxPos)++, model->currentSpecialMatrix, mtxLoadMode | mtxPushMode | G_MTX_MODELVIEW);
+        if (!(flags & MODEL_FLAG_IGNORE_MATRIX)) {
+            gSPMatrix((*gfxPos)++, model->finalMtx, mtxLoadMode | mtxPushMode | G_MTX_MODELVIEW);
             if (mtxPushMode != G_MTX_NOPUSH) {
                 mtxPushMode = G_MTX_NOPUSH;
             }
@@ -2252,7 +2252,7 @@ void calculate_model_sizes(void) {
             bb->halfSizeX = (bb->maxX - bb->minX) * 0.5;
             bb->halfSizeY = (bb->maxY - bb->minY) * 0.5;
             bb->halfSizeZ = (bb->maxZ - bb->minZ) * 0.5;
-            model->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX;
+            model->flags |= MODEL_FLAG_MATRIX_DIRTY;
         }
     }
 }
@@ -2294,11 +2294,11 @@ void mdl_create_model(ModelBlueprint* bp, s32 unused) {
     }
 
     (*gCurrentModels)[modelIdx] = model = heap_malloc(sizeof(*model));
-    model->flags = bp->flags | MODEL_FLAG_FLAG_1;
+    model->flags = bp->flags | MODEL_FLAG_VALID;
     model->modelID = D_80153226;
     model->modelNode = bp->mdlNode;
     model->groupData = bp->groupData;
-    model->matrixMode = 0;
+    model->matrixFreshness = 0;
     node = model->modelNode;
 
     prop = get_model_property(node, MODEL_PROP_KEY_SPECIAL);
@@ -2330,17 +2330,17 @@ void mdl_create_model(ModelBlueprint* bp, s32 unused) {
     model->textureVariation = 0;
 
     if (!is_identity_fixed_mtx(bp->mtx)) {
-        model->currentMatrix = heap_malloc(sizeof(*model->currentMatrix));
-        *model->currentMatrix = *bp->mtx;
-        model->specialMatrix = *model->currentMatrix;
+        model->bakedMtx = heap_malloc(sizeof(*model->bakedMtx));
+        *model->bakedMtx = *bp->mtx;
+        model->savedMtx = *model->bakedMtx;
     } else {
-        model->currentMatrix = NULL;
-        guMtxIdent(&model->specialMatrix);
-        model->flags |= MODEL_FLAG_FLAG_2000;
+        model->bakedMtx = NULL;
+        guMtxIdent(&model->savedMtx);
+        model->flags |= MODEL_FLAG_IGNORE_MATRIX;
     }
 
-    guMtxIdentF(model->transformMatrix);
-    model->currentSpecialMatrix = NULL;
+    guMtxIdentF(model->userTransformMtx);
+    model->finalMtx = NULL;
     prop = get_model_property(node, MODEL_PROP_KEY_BOUNDING_BOX);
     if (prop != NULL) {
         ModelBoundingBox* bb = (ModelBoundingBox*) prop;
@@ -2352,8 +2352,8 @@ void mdl_create_model(ModelBlueprint* bp, s32 unused) {
         x = y = z = 0.0f;
     }
 
-    if (model->currentMatrix != NULL) {
-        guMtxXFML(model->currentMatrix, x, y, z, &x, &y, &z);
+    if (model->bakedMtx != NULL) {
+        guMtxXFML(model->bakedMtx, x, y, z, &x, &y, &z);
     }
 
     model->center.x = x;
@@ -2368,7 +2368,7 @@ void mdl_create_model(ModelBlueprint* bp, s32 unused) {
     bb->halfSizeY = y * 0.5;
     bb->halfSizeZ = z * 0.5;
 
-    if (model->currentMatrix == NULL && x < 100.0f && y < 100.0f && z < 100.0f) {
+    if (model->bakedMtx == NULL && x < 100.0f && y < 100.0f && z < 100.0f) {
         model->flags |= MODEL_FLAG_DO_BOUNDS_CULLING;
     }
     (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].modelIndex = modelIdx;
@@ -2389,53 +2389,67 @@ void iterate_models(void) {
     mdl = last;
 }
 
-void func_80116698(void) {
-    Matrix4f sp20;
-    Matrix4f sp60;
+void mdl_update_transform_matrices(void) {
+    Matrix4f tempModelMtx;
+    Matrix4f tempGroupMtx;
     f32 mX, mY, mZ;
     f32 mtgX, mtgY, mtgZ;
     Model* model;
-    Mtx* mtx;
+    Mtx* curMtx;
     ModelBoundingBox* bb;
     ModelTransformGroup* mtg;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentModels); i++) {
         model = (*gCurrentModels)[i];
-        if (model != NULL && (model->flags != 0) && !(model->flags & MODEL_FLAG_FLAG_4)) {
-            if (!(model->flags & MODEL_FLAG_USES_TRANSFORM_MATRIX)) {
-                if (model->matrixMode != 0) {
-                    model->matrixMode--;
-                    if (model->matrixMode <= 0) {
-                        model->specialMatrix = *model->currentSpecialMatrix;
+        if (model != NULL && (model->flags != 0) && !(model->flags & MODEL_FLAG_INACTIVE)) {
+            if (!(model->flags & MODEL_FLAG_MATRIX_DIRTY)) {
+                if (model->matrixFreshness != 0) {
+                    // matrix was recalculated recently and stored on the matrix stack
+                    // since DisplayContexts alternate, we can fetch the previous matrix from the other context
+                    model->matrixFreshness--;
+                    if (model->matrixFreshness == 0) {
+                        // since it hasn't changed in a few frames, cache the matrix
+                        model->savedMtx = *model->finalMtx;
                     }
-                    mtx = model->currentSpecialMatrix;
-                    model->currentSpecialMatrix = &gDisplayContext->matrixStack[gMatrixListPos++];
-                    *model->currentSpecialMatrix = *mtx;
+                    // copy matrix from previous DisplayContext stack to current one
+                    curMtx = model->finalMtx;
+                    model->finalMtx = &gDisplayContext->matrixStack[gMatrixListPos++];
+                    *model->finalMtx = *curMtx;
                 } else {
-                    model->currentSpecialMatrix = &model->specialMatrix;
+                    // transform matrix is not changed, have gfx build with saved matrix
+                    model->finalMtx = &model->savedMtx;
                 }
             } else {
-                model->flags &= ~MODEL_FLAG_USES_TRANSFORM_MATRIX;
-                model->matrixMode = 2;
-                mtx = &gDisplayContext->matrixStack[gMatrixListPos++];
-                if (model->currentMatrix == NULL || (model->flags & MODEL_FLAG_TRANSFORM_GROUP_MEMBER)) {
-                    guMtxF2L(model->transformMatrix, mtx);
+                // first frame with dirty matrix, need to recalculate it
+                model->flags &= ~MODEL_FLAG_MATRIX_DIRTY;
+                model->matrixFreshness = 2;
+
+                // write matrix to the matrix stack
+                curMtx = &gDisplayContext->matrixStack[gMatrixListPos++];
+                if (model->bakedMtx == NULL || (model->flags & MODEL_FLAG_TRANSFORM_GROUP_MEMBER)) {
+                    guMtxF2L(model->userTransformMtx, curMtx);
                 } else {
-                    guMtxL2F(sp20, model->currentMatrix);
-                    guMtxCatF(model->transformMatrix, sp20, sp20);
-                    guMtxF2L(sp20, mtx);
+                    guMtxL2F(tempModelMtx, model->bakedMtx);
+                    guMtxCatF(model->userTransformMtx, tempModelMtx, tempModelMtx);
+                    guMtxF2L(tempModelMtx, curMtx);
                 }
-                model->flags &= ~MODEL_FLAG_FLAG_2000;
+                model->flags &= ~MODEL_FLAG_IGNORE_MATRIX;
+
+                // recalculate the center of the model with transformation applied
                 bb = (ModelBoundingBox*) get_model_property(model->modelNode, MODEL_PROP_KEY_BOUNDING_BOX);
                 mX = (bb->minX + bb->maxX) * 0.5f;
                 mY = (bb->minY + bb->maxY) * 0.5f;
                 mZ = (bb->minZ + bb->maxZ) * 0.5f;
-                guMtxXFML(mtx, mX, mY, mZ, &mX, &mY, &mZ);
-                model->currentSpecialMatrix = mtx;
+                guMtxXFML(curMtx, mX, mY, mZ, &mX, &mY, &mZ);
                 model->center.x = mX;
                 model->center.y = mY;
                 model->center.z = mZ;
+
+                // point matrix for gfx building to our matrix on the stack
+                model->finalMtx = curMtx;
+
+                // disable bounds culling for models with dynamic transformations
                 model->flags &= ~MODEL_FLAG_DO_BOUNDS_CULLING;
             }
         }
@@ -2443,44 +2457,56 @@ void func_80116698(void) {
 
     for (i = 0; i < ARRAY_COUNT((*gCurrentTransformGroups)); i++) {
         mtg = (*gCurrentTransformGroups)[i];
-        if (mtg != NULL && mtg->flags != 0 && !(mtg->flags & MODEL_TRANSFORM_GROUP_FLAG_INACTIVE)) {
-            if (!(mtg->flags & MODEL_TRANSFORM_GROUP_FLAG_1000)) {
-                if (mtg->matrixMode != 0) {
-                    mtg->matrixMode--;
-                    if (mtg->matrixMode == 0) {
-                        mtg->matrixA = *mtg->transformMtx;
+        if (mtg != NULL && mtg->flags != 0 && !(mtg->flags & TRANSFORM_GROUP_FLAG_INACTIVE)) {
+            if (!(mtg->flags & TRANSFORM_GROUP_FLAG_MATRIX_DIRTY)) {
+                if (mtg->matrixFreshness != 0) {
+                    // matrix was recalculated recently and stored on the matrix stack
+                    // since DisplayContexts alternate, we can fetch the previous matrix from the other context
+                    mtg->matrixFreshness--;
+                    if (mtg->matrixFreshness == 0) {
+                        // since it hasn't changed in a few frames, cache the matrix
+                        mtg->savedMtx = *mtg->finalMtx;
                     }
-                    // store transformMtx on stack
-                    mtx = mtg->transformMtx;
-                    mtg->transformMtx = &gDisplayContext->matrixStack[gMatrixListPos++];
-                    *mtg->transformMtx = *mtx;
+                    // copy matrix from previous DisplayContext stack to current one
+                    curMtx = mtg->finalMtx;
+                    mtg->finalMtx = &gDisplayContext->matrixStack[gMatrixListPos++];
+                    *mtg->finalMtx = *curMtx;
                 } else {
-                    mtg->transformMtx = &mtg->matrixA;
+                    // transform matrix is not changed, have gfx build with saved matrix
+                    mtg->finalMtx = &mtg->savedMtx;
                 }
             } else {
-                mtg->flags &= ~MODEL_TRANSFORM_GROUP_FLAG_1000;
-                mtg->matrixMode = 2;
-                mtx = &gDisplayContext->matrixStack[gMatrixListPos++];
-                if (mtg->matrixRDP_N == NULL) {
-                    guMtxF2L(mtg->matrixB, mtx);
+                // first frame with dirty matrix, need to recalculate it
+                mtg->flags &= ~TRANSFORM_GROUP_FLAG_MATRIX_DIRTY;
+                mtg->matrixFreshness = 2;
+
+                // write matrix to the matrix stack
+                curMtx = &gDisplayContext->matrixStack[gMatrixListPos++];
+                if (mtg->bakedMtx == NULL) {
+                    guMtxF2L(mtg->userTransformMtx, curMtx);
                 } else {
-                    guMtxL2F(sp60, mtg->matrixRDP_N);
-                    guMtxCatF(mtg->matrixB, sp60, sp60);
-                    guMtxF2L(sp60, mtx);
+                    guMtxL2F(tempGroupMtx, mtg->bakedMtx);
+                    guMtxCatF(mtg->userTransformMtx, tempGroupMtx, tempGroupMtx);
+                    guMtxF2L(tempGroupMtx, curMtx);
                 }
-                mtg->flags &= ~MODEL_TRANSFORM_GROUP_FLAG_IGNORE_MATRIX;
+                mtg->flags &= ~TRANSFORM_GROUP_FLAG_IGNORE_MATRIX;
+
+                // recalculate the center of the transform group with transformation applied
                 bb = (ModelBoundingBox*) get_model_property(mtg->baseModelNode, MODEL_PROP_KEY_BOUNDING_BOX);
                 mtgX = (bb->minX + bb->maxX) * 0.5f;
                 mtgY = (bb->minY + bb->maxY) * 0.5f;
                 mtgZ = (bb->minZ + bb->maxZ) * 0.5f;
-                guMtxXFML(mtx, mtgX, mtgY, mtgZ, &mtgX, &mtgY, &mtgZ);
-                mtg->transformMtx = mtx;
+                guMtxXFML(curMtx, mtgX, mtgY, mtgZ, &mtgX, &mtgY, &mtgZ);
                 mtg->center.x = mtgX;
                 mtg->center.y = mtgY;
                 mtg->center.z = mtgZ;
+
+                // point matrix for gfx building to our matrix on the stack
+                mtg->finalMtx = curMtx;
             }
         }
     }
+
     build_custom_gfx();
 }
 
@@ -2492,7 +2518,7 @@ void render_models(void) {
     f32 m10, m11, m12, m13;
     f32 m20, m21, m22, m23;
     f32 m30, m31, m32, m33;
-    f32 x, y, z;
+    f32 centerX, centerY, centerZ;
     f32 bbx, bby, bbz;
 
     Camera* camera = &gCameras[gCurrentCameraID];
@@ -2548,22 +2574,22 @@ void render_models(void) {
         if (model->flags == 0) {
             continue;
         }
-        if (model->flags & MODEL_FLAG_FLAG_4) {
+        if (model->flags & MODEL_FLAG_INACTIVE) {
             continue;
         }
         if (model->flags & MODEL_FLAG_HIDDEN) {
             continue;
         }
-        if (model->flags & MODEL_FLAG_FLAG_20) {
+        if (model->flags & MODEL_FLAG_20) {
             continue;
         }
         if (model->flags & MODEL_FLAG_TRANSFORM_GROUP_MEMBER) {
             continue;
         }
 
-        x = model->center.x;
-        y = model->center.y;
-        z = model->center.z;
+        centerX = model->center.x;
+        centerY = model->center.y;
+        centerZ = model->center.z;
 
         // for models that are small enough to do bounds culling, only render if at least one
         // corner of its boundary box is visible
@@ -2576,58 +2602,58 @@ void render_models(void) {
 
             while (TRUE) {
                 if (TRUE) {
-                    xComp = x - bbx;
-                    yComp = y - bby;
-                    zComp = z - bbz;
+                    xComp = centerX - bbx;
+                    yComp = centerY - bby;
+                    zComp = centerZ - bbz;
                     TEST_POINT_VISIBILITY;
                 }
 
                 if (bbx != 0.0f) {
-                    xComp = x + bbx;
-                    yComp = y - bby;
-                    zComp = z - bbz;
+                    xComp = centerX + bbx;
+                    yComp = centerY - bby;
+                    zComp = centerZ - bbz;
                     TEST_POINT_VISIBILITY;
                 }
 
                 if (bby != 0.0f) {
-                    xComp = x - bbx;
-                    yComp = y + bby;
-                    zComp = z - bbz;
+                    xComp = centerX - bbx;
+                    yComp = centerY + bby;
+                    zComp = centerZ - bbz;
                     TEST_POINT_VISIBILITY;
                 }
 
                 if (bbx != 0.0f && bby != 0.0f) {
-                    xComp = x + bbx;
-                    yComp = y + bby;
-                    zComp = z - bbz;
+                    xComp = centerX + bbx;
+                    yComp = centerY + bby;
+                    zComp = centerZ - bbz;
                     TEST_POINT_VISIBILITY;
                 }
 
                 if (bbz != 0.0f) {
-                    xComp = x - bbx;
-                    yComp = y - bby;
-                    zComp = z + bbz;
+                    xComp = centerX - bbx;
+                    yComp = centerY - bby;
+                    zComp = centerZ + bbz;
                     TEST_POINT_VISIBILITY;
                 }
 
                 if (bbx != 0.0f && bbz != 0.0f) {
-                    xComp = x + bbx;
-                    yComp = y - bby;
-                    zComp = z + bbz;
+                    xComp = centerX + bbx;
+                    yComp = centerY - bby;
+                    zComp = centerZ + bbz;
                     TEST_POINT_VISIBILITY;
                 }
 
                 if (bby != 0.0f && bbz != 0.0f) {
-                    xComp = x - bbx;
-                    yComp = y + bby;
-                    zComp = z + bbz;
+                    xComp = centerX - bbx;
+                    yComp = centerY + bby;
+                    zComp = centerZ + bbz;
                     TEST_POINT_VISIBILITY;
                 }
 
                 if (bbx != 0.0f && bby != 0.0f && bbz != 0.0f) {
-                    xComp = x + bbx;
-                    yComp = y + bby;
-                    zComp = z + bbz;
+                    xComp = centerX + bbx;
+                    yComp = centerY + bby;
+                    zComp = centerZ + bbz;
                     TEST_POINT_VISIBILITY;
                 }
                 notVisible = TRUE;
@@ -2639,7 +2665,8 @@ void render_models(void) {
             }
         }
 
-        transform_point(camera->perspectiveMatrix, x, y, z, 1.0f, &outX, &outY, &outZ, &outW);
+        // map all model depths to the interval [0, 10k] and submit render task
+        transform_point(camera->perspectiveMatrix, centerX, centerY, centerZ, 1.0f, &outX, &outY, &outZ, &outW);
         distance = outZ + 5000.0f;
         if (distance < 0) {
             distance = 0;
@@ -2669,7 +2696,7 @@ void render_models(void) {
             continue;
         }
 
-        if (transformGroup->flags & MODEL_TRANSFORM_GROUP_FLAG_INACTIVE) {
+        if (transformGroup->flags & TRANSFORM_GROUP_FLAG_INACTIVE) {
             continue;
         }
 
@@ -2688,7 +2715,7 @@ void render_models(void) {
 
         distance = ((outZ / outW) * 10000.0f);
 
-        if (!(transformGroup->flags & MODEL_TRANSFORM_GROUP_FLAG_2)) {
+        if (!(transformGroup->flags & TRANSFORM_GROUP_FLAG_HIDDEN)) {
             rtPtr->appendGfx = render_transform_group;
             rtPtr->appendGfxArg = transformGroup;
             rtPtr->distance = -distance;
@@ -2729,7 +2756,7 @@ void func_80117D00(Model* model) {
                     ModelNodeProperty* prop;
 
                     newModel.flags = mdl->flags;
-                    newModel.currentSpecialMatrix = mdl->currentSpecialMatrix;
+                    newModel.finalMtx = mdl->finalMtx;
                     newModel.modelNode = modelNode->groupData->childList[i];
                     newModel.texPannerID = mdl->texPannerID;
                     newModel.customGfxIndex = mdl->customGfxIndex;
@@ -2811,15 +2838,15 @@ void render_transform_group(void* data) {
     ModelTransformGroup* group = data;
     Gfx** gfx = &gMainGfxPos;
 
-    if (!(group->flags & MODEL_TRANSFORM_GROUP_FLAG_INACTIVE)) {
+    if (!(group->flags & TRANSFORM_GROUP_FLAG_INACTIVE)) {
         mdl_currentTransformGroupChildIndex = group->minChildModelIndex;
-        if (!(group->flags & MODEL_TRANSFORM_GROUP_FLAG_IGNORE_MATRIX)) {
-            gSPMatrix((*gfx)++, group->transformMtx, (G_MTX_PUSH | G_MTX_LOAD) | G_MTX_MODELVIEW);
+        if (!(group->flags & TRANSFORM_GROUP_FLAG_IGNORE_MATRIX)) {
+            gSPMatrix((*gfx)++, group->finalMtx, (G_MTX_PUSH | G_MTX_LOAD) | G_MTX_MODELVIEW);
         }
 
         render_transform_group_node(group->baseModelNode);
 
-        if (!(group->flags & MODEL_TRANSFORM_GROUP_FLAG_IGNORE_MATRIX)) {
+        if (!(group->flags & TRANSFORM_GROUP_FLAG_IGNORE_MATRIX)) {
             gSPPopMatrix((*gfx)++, G_MTX_MODELVIEW);
         }
         gDPPipeSync((*gfx)++);
@@ -3302,16 +3329,16 @@ void mdl_make_transform_group(u16 modelID) {
         }
 
         (*gCurrentTransformGroups)[i] = newMtg = heap_malloc(sizeof(*newMtg));
-        newMtg->flags = MODEL_TRANSFORM_GROUP_FLAG_1;
+        newMtg->flags = TRANSFORM_GROUP_FLAG_VALID;
         newMtg->groupModelID = modelID;
         newMtg->minChildModelIndex = get_model_list_index_from_tree_index(mtg_MinChild);
         newMtg->maxChildModelIndex = get_model_list_index_from_tree_index(mtg_MaxChild);
-        newMtg->matrixMode = 0;
-        newMtg->matrixRDP_N = NULL;
+        newMtg->matrixFreshness = 0;
+        newMtg->bakedMtx = NULL;
         newMtg->baseModelNode = mtg_FoundModelNode;
-        guMtxIdent(&newMtg->matrixA);
-        newMtg->flags |= MODEL_TRANSFORM_GROUP_FLAG_IGNORE_MATRIX;
-        guMtxIdentF(newMtg->matrixB);
+        guMtxIdent(&newMtg->savedMtx);
+        newMtg->flags |= TRANSFORM_GROUP_FLAG_IGNORE_MATRIX;
+        guMtxIdentF(newMtg->userTransformMtx);
 
         node = newMtg->baseModelNode;
 
@@ -3341,8 +3368,8 @@ void mdl_make_transform_group(u16 modelID) {
             x = y = z = 0.0f;
         }
 
-        if (newMtg->matrixRDP_N != NULL) {
-            guMtxXFML(newMtg->matrixRDP_N, x, y, z, &x, &y, &z);
+        if (newMtg->bakedMtx != NULL) {
+            guMtxXFML(newMtg->bakedMtx, x, y, z, &x, &y, &z);
         }
 
         newMtg->center.x = x;
@@ -3356,15 +3383,15 @@ void enable_transform_group(u16 modelID) {
     ModelTransformGroup* group = get_transform_group(get_transform_group_index(modelID));
     s32 i;
 
-    group->flags &= ~MODEL_TRANSFORM_GROUP_FLAG_INACTIVE;
+    group->flags &= ~TRANSFORM_GROUP_FLAG_INACTIVE;
 
     for (i = group->minChildModelIndex; i <= group->maxChildModelIndex; i++) {
         Model* model = get_model_from_list_index(i);
 
         model->flags |= MODEL_FLAG_TRANSFORM_GROUP_MEMBER;
 
-        if (model->currentMatrix != NULL) {
-            model->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX;
+        if (model->bakedMtx != NULL) {
+            model->flags |= MODEL_FLAG_MATRIX_DIRTY;
         }
     }
 }
@@ -3373,15 +3400,15 @@ void disable_transform_group(u16 modelID) {
     ModelTransformGroup* group = get_transform_group(get_transform_group_index(modelID));
     s32 i;
 
-    group->flags |= MODEL_TRANSFORM_GROUP_FLAG_INACTIVE;
+    group->flags |= TRANSFORM_GROUP_FLAG_INACTIVE;
 
     for (i = group->minChildModelIndex; i <= group->maxChildModelIndex; i++) {
         Model* model = get_model_from_list_index(i);
 
         model->flags &= ~MODEL_FLAG_TRANSFORM_GROUP_MEMBER;
 
-        if (model->currentMatrix != NULL) {
-            model->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX;
+        if (model->bakedMtx != NULL) {
+            model->flags |= MODEL_FLAG_MATRIX_DIRTY;
         }
     }
 }
@@ -3528,7 +3555,7 @@ void func_8011BAE8(void) {
         Model* model = (*gCurrentModels)[i];
 
         if (model != NULL) {
-            model->flags &= ~MODEL_FLAG_HAS_TRANSFORM_APPLIED;
+            model->flags &= ~MODEL_FLAG_HAS_TRANSFORM;
         }
     }
 
@@ -3536,7 +3563,7 @@ void func_8011BAE8(void) {
         ModelTransformGroup* transformGroup = (*gCurrentTransformGroups)[i];
 
         if (transformGroup != NULL) {
-            transformGroup->flags &= ~MODEL_TRANSFORM_GROUP_FLAG_400;
+            transformGroup->flags &= ~TRANSFORM_GROUP_FLAG_HAS_TRANSFORM;
         }
     }
 }
@@ -4262,7 +4289,7 @@ void mdl_draw_hidden_panel_surface(Gfx** arg0, u16 treeIndex) {
     oldGfxPos = gMainGfxPos;
     gMainGfxPos = *arg0;
 
-    copied.flags = MODEL_FLAG_HAS_LOCAL_VERTEX_COPY | MODEL_FLAG_FLAG_1;
+    copied.flags = MODEL_FLAG_HAS_LOCAL_VERTEX_COPY | MODEL_FLAG_VALID;
     appendGfx_model(&copied);
 
     *arg0 = gMainGfxPos;
