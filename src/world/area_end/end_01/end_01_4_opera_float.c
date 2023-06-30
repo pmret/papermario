@@ -5,7 +5,7 @@
 extern s32 N(SpotlightsAlpha);
 
 API_CALLABLE(N(SetWorldDark)) {
-    func_8011B950(MODEL_Root, -1, 1, 0);
+    func_8011B950(MODEL_Root, CUSTOM_GFX_NONE, FOG_MODE_1, 0);
     set_background_color_blend(0, 0, 0, 255);
     return ApiStatus_DONE2;
 }
@@ -23,7 +23,7 @@ API_CALLABLE(N(FadeInWorld)) {
     set_background_color_blend(0, 0, 0, script->functionTemp[1]);
 
     if (script->functionTemp[1] == 0) {
-        func_8011B950(MODEL_Root, -1, 0, 0);
+        func_8011B950(MODEL_Root, CUSTOM_GFX_NONE, FOG_MODE_0, 0);
         return ApiStatus_DONE2;
     } else {
         return ApiStatus_BLOCK;

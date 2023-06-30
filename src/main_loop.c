@@ -81,7 +81,7 @@ void step_game_loop(void) {
         }
     }
 
-    func_8011BAE8();
+    mdl_reset_transform_flags();
     npc_iter_no_op();
     update_workers();
     update_triggers();

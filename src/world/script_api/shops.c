@@ -197,8 +197,8 @@ API_CALLABLE(func_802803C8) {
 }
 
 API_CALLABLE(func_80280410) {
-    static Evt* D_80286520;
-    static s32 D_80286524;
+    static Evt* ShopInteractScript;
+    static s32 ShopInteractScriptID;
 
     Shop* shop = gGameStatusPtr->mapShop;
     s32 currentItemSlot = evt_get_variable(script, *script->ptrReadPos);
@@ -210,7 +210,6 @@ API_CALLABLE(func_80280410) {
         shop->unk_358 = 5;
 
         if (gGameStatusPtr->pressedButtons[0] & BUTTON_A) {
-
             Evt* childScript;
 
             disable_player_input();
@@ -218,14 +217,14 @@ API_CALLABLE(func_80280410) {
 
             childScript = start_script(&BadgeShopInteract, EVT_PRIORITY_1, 0);
             childScript->varTable[0] = currentItemSlot;
-            D_80286520 = childScript;
-            D_80286524 = childScript->id;
+            ShopInteractScript = childScript;
+            ShopInteractScriptID = childScript->id;
             shop->flags |= SHOP_FLAG_8;
             return ApiStatus_BLOCK;
         } else {
             return ApiStatus_DONE2;
         }
-    } else if (does_script_exist(D_80286524)) {
+    } else if (does_script_exist(ShopInteractScriptID)) {
         return ApiStatus_BLOCK;
     }
 
@@ -951,7 +950,7 @@ API_CALLABLE(MakeShop) {
     gWindowStyles[11].defaultStyleID = WINDOW_STYLE_3;
     shop->currentItemSlot = 0;
     shop->selectedStoreItemSlot = 0;
-    shop->flags = SHOP_FLAG_0;
+    shop->flags = 0;
     shop->owner = NULL;
 
     return ApiStatus_DONE2;

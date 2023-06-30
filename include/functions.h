@@ -579,7 +579,7 @@ void start_bounce_b(void);
 
 void update_input(void);
 void update_max_rumble_duration(void);
-void func_8011BAE8(void);
+void mdl_reset_transform_flags(void);
 void update_workers(void);
 void update_triggers(void);
 void update_scripts(void);
@@ -1098,6 +1098,6 @@ void update_item_entities(void);
 void iterate_models(void);
 void restore_map_collision_data(void);
 void mdl_load_all_textures(struct ModelNode* model, s32 romOffset, s32 size);
-void calculate_model_sizes(void);
+void mdl_calculate_model_sizes(void);
 
 #endif

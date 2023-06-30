@@ -1411,7 +1411,7 @@ API_CALLABLE(N(func_80242F08_8B2F78)) {
 }
 
 API_CALLABLE(N(func_80242F28_8B2F98)) {
-    func_8011B950(MODEL_kinopi, -1, 1, 1);
+    func_8011B950(MODEL_kinopi, CUSTOM_GFX_NONE, FOG_MODE_1, 1);
     set_background_color_blend(0, 0, 0, 255);
     gCameras[CAM_DEFAULT].bgColor[0] = 0;
     gCameras[CAM_DEFAULT].bgColor[1] = 0;

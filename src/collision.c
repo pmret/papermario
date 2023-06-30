@@ -9,18 +9,18 @@ typedef struct HitFile {
 typedef struct ColliderBackupEntry {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s16 parentModelIndex;
-    /* 0x06 */ s16 unk_06;
+    /* 0x06 */ char pad_06[2];
 } ColliderBackupEntry; // size = 0x08
 
 typedef struct HitFileHeader {
     /* 0x00 */ s16 numColliders;
-    /* 0x02 */ s16 unk_02;
+    /* 0x02 */ char pad_02[2];
     /* 0x04 */ s32 collidersOffset;
     /* 0x08 */ s16 numVertices;
-    /* 0x0A */ s16 unk_0a;
+    /* 0x0A */ char pad_0A[2];
     /* 0x0C */ s32 verticesOffset;
     /* 0x10 */ s16 boundingBoxesDataSize;
-    /* 0x12 */ s16 unk_12;
+    /* 0x12 */ char pad_12[2];
     /* 0x14 */ s32 boundingBoxesOffset;
 } HitFileHeader; // size = 0x18
 
@@ -382,7 +382,7 @@ void update_collider_transform(s16 colliderID) {
     collider = &gCollisionData.colliderList[colliderID];
     model = get_model_from_list_index(collider->parentModelIndex);
 
-    if (!model->bakedMtx) {
+    if (model->bakedMtx == NULL) {
         copy_matrix(model->userTransformMtx, matrix);
     } else {
         guMtxL2F(matrix, (Mtx*)model->bakedMtx);

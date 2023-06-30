@@ -193,10 +193,10 @@ dlabel wTransformGroups
 dlabel bTransformGroups
 .space 0x00000010
 
-dlabel wModelSpecialDls
+dlabel wCustomModelGfx
 .space 0x00000080
 
-dlabel bModelSpecialDls
+dlabel bCustomModelGfx
 .space 0x00000080
 
 dlabel wCustomModelGfxBuilders
@@ -214,10 +214,10 @@ dlabel bModelLocalVtxBuffers
 dlabel gCurrentModelLocalVtxBuffers
 .space 4
 
-dlabel D_80152214
+dlabel wModelTreeRoot
 .space 4
 
-dlabel D_80152218
+dlabel bModelTreeRoot
 .space 4
 
 dlabel D_8015221C
@@ -271,7 +271,7 @@ dlabel texPannerAuxV
 dlabel TextureHeapPos
 .space 4
 
-dlabel mdl_currentTransformGroupChildIndex
+dlabel mtg_IterIdx
 .space 2
 
 dlabel mtg_SearchModelID
