@@ -102,9 +102,6 @@ LIST_END_BYTES = b"\xFF\xFF\xFF\xFF"
 
 def indent(elem, level=0):
     i = "\n" + level*"    "
-    if(elem.tail):
-        print(f'"{elem.tail}"')
-        elem.tail = elem.tail.strip()
     if len(elem):
         if not elem.text or not elem.text.strip():
             elem.text = i + "    "
