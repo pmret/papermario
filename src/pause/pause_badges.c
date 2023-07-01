@@ -87,7 +87,6 @@ HudScript* gPauseBadgesElements[][22] = {
 #endif
 };
 
-
 MenuWindowBP gPauseBadgesWindowBPs[] = {
     {
         .windowID = WINDOW_ID_PAUSE_BADGES,

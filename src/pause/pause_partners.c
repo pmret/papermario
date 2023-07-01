@@ -633,7 +633,6 @@ void pause_partners_init(MenuPanel* panel) {
     pause_partners_load_portrait(0);
     panel->initialized = TRUE;
 }
-//#endif
 
 void pause_partners_handle_input(MenuPanel* panel) {
     s32 delta;

@@ -609,7 +609,7 @@ void pause_draw_menu_label(s32 index, s32 x, s32 y) {
     if (gCurrentLanguage == LANGUAGE_DE && index == 5) {
         s16 xOffset2 = xOffset;
 
-        pause_draw_rect((x + 30) * 4, (y * 4), ((xOffset2 + x) + 10) * 4, (y + 16) * 4, 0, 0x280, 0, 0x400, 0x400);
+        pause_draw_rect((x + 30) * 4, (y * 4), (xOffset2 + x + 10) * 4, (y + 16) * 4, 0, 0x280, 0, 0x400, 0x400);
     }
 #endif
 }
