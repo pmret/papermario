@@ -50,9 +50,8 @@ static s32 gPauseBadgesIconIDs[22];
 #define OFFSET_3_Y 74
 #endif
 
-#if VERSION_PAL
 HudScript* gPauseBadgesElements[][22] = {
-    [LANGUAGE_EN] = {
+    [LANGUAGE_DEFAULT] = {
         &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
         &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
         &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
@@ -60,6 +59,7 @@ HudScript* gPauseBadgesElements[][22] = {
         &HES_StatBp, &HES_ListPrevPage, &HES_ListNextPage,
         &HES_Dash, &HES_LabelBpNeeded, &HES_StatusStar1
     },
+#if VERSION_PAL
     [LANGUAGE_DE] = {
         &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
         &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
@@ -84,17 +84,9 @@ HudScript* gPauseBadgesElements[][22] = {
         &HES_StatBp, &HES_ListPrevPage, &HES_ListNextPage,
         &HES_Dash, &HES_LabelBpNeeded_es, &HES_StatusStar1
     },
-};
-#else
-HudScript* gPauseBadgesElements[] = {
-    &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
-    &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
-    &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
-    &HES_StatBp, &HES_StatBp, &HES_StatBp, &HES_StatBp,
-    &HES_StatBp, &HES_ListPrevPage, &HES_ListNextPage,
-    &HES_Dash, &HES_LabelBpNeeded, &HES_StatusStar1
-};
 #endif
+};
+
 
 MenuWindowBP gPauseBadgesWindowBPs[] = {
     {
@@ -832,9 +824,6 @@ void pause_badges_load_badges(s32 onlyEquipped) {
     gPauseBadgesTargetScrollPos = gPauseBadgesCurrentScrollPos = pause_badges_get_pos_y(0, 0);
 }
 
-#if VERSION_PAL
-INCLUDE_ASM(void, "pause/pause_badges", pause_badges_init);
-#else
 void pause_badges_init(MenuPanel* panel) {
     s32 i;
 
@@ -852,7 +841,7 @@ void pause_badges_init(MenuPanel* panel) {
     }
 
     for (i = 0; i < ARRAY_COUNT(gPauseBadgesIconIDs); i++) {
-        s32 iconID = hud_element_create(gPauseBadgesElements[i]);
+        s32 iconID = hud_element_create(gPauseBadgesElements[gCurrentLanguage][i]);
 
         gPauseBadgesIconIDs[i] = iconID;
         hud_element_set_flags(iconID, HUD_ELEMENT_FLAG_80);
@@ -864,7 +853,6 @@ void pause_badges_init(MenuPanel* panel) {
     setup_pause_menu_tab(gPauseBadgesWindowBPs, ARRAY_COUNT(gPauseBadgesWindowBPs));
     panel->initialized = TRUE;
 }
-#endif
 
 void pause_badges_handle_input(MenuPanel* panel) {
     s32 selectedIndex = gPauseBadgesSelectedIndex;

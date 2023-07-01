@@ -40,11 +40,20 @@ extern HudScript HES_FPCost_de;
 extern HudScript HES_FPCost_fr;
 extern HudScript HES_FPCost_es;
 
+extern u8 D_PAL_80271B38[];
+extern u8 D_PAL_80271B3C[];
+extern u8 D_PAL_80271B40[];
+extern u8 D_PAL_80271B48[];
+extern u8 D_PAL_80271B4C[];
+extern u8 D_PAL_80271B50[];
+#endif
+
 HudScript* gPausePartnersIconScripts[][8] = {
-    [LANGUAGE_EN] = {
+    [LANGUAGE_DEFAULT] = {
         &HES_FPCost, &HES_StatFp_1, &HES_PartnerRank, &HES_PartnerRank,
         &HES_MoveDiamond, &HES_MoveBlueOrb, &HES_MoveGreenOrb, &HES_MoveRedOrb
     },
+#if VERSION_PAL
     [LANGUAGE_DE] = {
         &HES_FPCost_de, &HES_StatFp_1, &HES_PartnerRank, &HES_PartnerRank,
         &HES_MoveDiamond, &HES_MoveBlueOrb, &HES_MoveGreenOrb, &HES_MoveRedOrb
@@ -57,13 +66,8 @@ HudScript* gPausePartnersIconScripts[][8] = {
         &HES_FPCost_es, &HES_StatFp_1, &HES_PartnerRank, &HES_PartnerRank,
         &HES_MoveDiamond, &HES_MoveBlueOrb, &HES_MoveGreenOrb, &HES_MoveRedOrb
     },
-};
-#else
-HudScript* gPausePartnersIconScripts[] = {
-    &HES_FPCost, &HES_StatFp_1, &HES_PartnerRank, &HES_PartnerRank,
-    &HES_MoveDiamond, &HES_MoveBlueOrb, &HES_MoveGreenOrb, &HES_MoveRedOrb
-};
 #endif
+};
 
 Vp gPausePartnersViewport = {
     .vp = {
@@ -557,22 +561,24 @@ void pause_partners_draw_movelist(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
 }
 #endif
 
-#if VERSION_PAL
-INCLUDE_ASM(void, "pause/pause_partners", pause_partners_draw_movelist_title);
-#else
 void pause_partners_draw_movelist_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
-    draw_msg(pause_get_menu_msg(PAUSE_MSG_PARTNER_ABILITIES), baseX + 12, baseY + 1, 255, -1, DRAW_MSG_STYLE_MENU);
-}
+    s32 msgID = pause_get_menu_msg(PAUSE_MSG_PARTNER_ABILITIES);
+    s32 xOffset;
+
+#if VERSION_PAL
+    xOffset = D_PAL_80271B38[gCurrentLanguage];
+#else
+    xOffset = 12;
 #endif
+
+    draw_msg(msgID, baseX + xOffset, baseY + 1, 255, -1, DRAW_MSG_STYLE_MENU);
+}
 
 void pause_partners_draw_movelist_flower(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     hud_element_set_render_pos(gPausePartnersIconIDs[1], baseX + 17, baseY + 16);
     hud_element_draw_without_clipping(gPausePartnersIconIDs[1]);
 }
 
-#if VERSION_PAL
-INCLUDE_ASM(void, "pause/pause_partners", pause_partners_init);
-#else
 void pause_partners_init(MenuPanel* panel) {
     s32 i;
     PlayerData* playerData = get_player_data();
@@ -595,8 +601,8 @@ void pause_partners_init(MenuPanel* panel) {
         gPausePartnersSpriteIDs[i] = spr_load_npc_sprite(gPausePartnersSpriteAnims[i][0], gPausePartnersSpriteAnims[i]);
     }
 
-    for (i = 0; i < ARRAY_COUNT(gPausePartnersIconScripts); i++) {
-        gPausePartnersIconIDs[i] = hud_element_create(gPausePartnersIconScripts[i]);
+    for (i = 0; i < ARRAY_COUNT(gPausePartnersIconScripts[0]); i++) {
+        gPausePartnersIconIDs[i] = hud_element_create(gPausePartnersIconScripts[gCurrentLanguage][i]);
         hud_element_set_flags(gPausePartnersIconIDs[i], HUD_ELEMENT_FLAG_80);
     }
 
@@ -604,6 +610,14 @@ void pause_partners_init(MenuPanel* panel) {
         gPausePartnersWindowBPs[i].tab = panel;
     }
     setup_pause_menu_tab(gPausePartnersWindowBPs, ARRAY_COUNT(gPausePartnersWindowBPs));
+
+#if VERSION_PAL
+    gWindows[37].width = D_PAL_80271B50[gCurrentLanguage];
+    gWindows[37].pos.x = D_PAL_80271B4C[gCurrentLanguage];
+    gWindows[36].width = D_PAL_80271B40[gCurrentLanguage];
+    gWindows[36].pos.x = D_PAL_80271B3C[gCurrentLanguage];
+    gWindows[38].pos.x = D_PAL_80271B48[gCurrentLanguage];
+#endif
 
     gPausePartnersCurrentPartnerIdx = 0;
     for (i = 0; i < gPausePartnersNumPartners; i++) {
@@ -619,7 +633,7 @@ void pause_partners_init(MenuPanel* panel) {
     pause_partners_load_portrait(0);
     panel->initialized = TRUE;
 }
-#endif
+//#endif
 
 void pause_partners_handle_input(MenuPanel* panel) {
     s32 delta;

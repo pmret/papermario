@@ -273,7 +273,7 @@ def write_ninja_rules(
 
     with Path("tools/permuter_settings.toml").open("w") as f:
         f.write(
-            f"compiler_command = \"{cc} {CPPFLAGS.replace('$version', 'us')} {cflags} -DPERMUTER -fforce-addr\"\n"
+            f"compiler_command = \"{cc} {CPPFLAGS.replace('$version', 'pal')} {cflags} -DPERMUTER -fforce-addr\"\n"
         )
         f.write(
             f'assembler_command = "{cross}as -EB -march=vr4300 -mtune=vr4300 -Iinclude"\n'
