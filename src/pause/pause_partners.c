@@ -612,11 +612,11 @@ void pause_partners_init(MenuPanel* panel) {
     setup_pause_menu_tab(gPausePartnersWindowBPs, ARRAY_COUNT(gPausePartnersWindowBPs));
 
 #if VERSION_PAL
-    gWindows[37].width = D_PAL_80271B50[gCurrentLanguage];
-    gWindows[37].pos.x = D_PAL_80271B4C[gCurrentLanguage];
-    gWindows[36].width = D_PAL_80271B40[gCurrentLanguage];
-    gWindows[36].pos.x = D_PAL_80271B3C[gCurrentLanguage];
-    gWindows[38].pos.x = D_PAL_80271B48[gCurrentLanguage];
+    gWindows[WINDOW_ID_PAUSE_PARTNERS_MOVELIST_TITLE].width = D_PAL_80271B50[gCurrentLanguage];
+    gWindows[WINDOW_ID_PAUSE_PARTNERS_MOVELIST_TITLE].pos.x = D_PAL_80271B4C[gCurrentLanguage];
+    gWindows[WINDOW_ID_PAUSE_PARTNERS_MOVELIST].width = D_PAL_80271B40[gCurrentLanguage];
+    gWindows[WINDOW_ID_PAUSE_PARTNERS_MOVELIST].pos.x = D_PAL_80271B3C[gCurrentLanguage];
+    gWindows[WINDOW_ID_PAUSE_PARTNERS_MOVELIST_FLOWER].pos.x = D_PAL_80271B48[gCurrentLanguage];
 #endif
 
     gPausePartnersCurrentPartnerIdx = 0;
