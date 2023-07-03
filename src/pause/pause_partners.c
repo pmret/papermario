@@ -43,6 +43,7 @@ extern HudScript HES_FPCost_es;
 extern u8 D_PAL_80271B38[];
 extern u8 D_PAL_80271B3C[];
 extern u8 D_PAL_80271B40[];
+extern u8 D_PAL_80271B44[];
 extern u8 D_PAL_80271B48[];
 extern u8 D_PAL_80271B4C[];
 extern u8 D_PAL_80271B50[];
@@ -499,9 +500,6 @@ void pause_partners_draw_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width,
     }
 }
 
-#if VERSION_PAL
-INCLUDE_ASM(void, "pause/pause_partners", pause_partners_draw_movelist);
-#else
 void pause_partners_draw_movelist(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     s32 i;
     s32 moveNameID;
@@ -547,9 +545,19 @@ void pause_partners_draw_movelist(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
         hud_element_draw_without_clipping(gPausePartnersIconIDs[i + 4]);
 
         if (costFP != 0) {
-            draw_number(costFP, baseX + 125, baseY + 22 + i * 13, style, MSG_PAL_STANDARD, 255, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
+            s32 xOffset = 125;
+
+#if VERSION_PAL
+            xOffset = D_PAL_80271B44[gCurrentLanguage];
+#endif
+
+            draw_number(costFP, baseX + xOffset, baseY + 22 + i * 13, style, MSG_PAL_STANDARD, 255, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
             if (costFP > 0) {
+#if VERSION_PAL
+                hud_element_set_render_pos(gPausePartnersIconIDs[0], baseX + D_PAL_80271B44[gCurrentLanguage] + 9, baseY + 29 + i * 13);
+#else
                 hud_element_set_render_pos(gPausePartnersIconIDs[0], baseX + 134, baseY + 29 + i * 13);
+#endif
                 hud_element_draw_without_clipping(gPausePartnersIconIDs[0]);
             }
         }
@@ -559,7 +567,6 @@ void pause_partners_draw_movelist(MenuPanel* menu, s32 baseX, s32 baseY, s32 wid
         pause_set_cursor_pos(WINDOW_ID_PAUSE_PARTNERS_MOVELIST, baseX - 2, baseY + 28 + gPausePartnersSelectedMove * 13);
     }
 }
-#endif
 
 void pause_partners_draw_movelist_title(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     s32 msgID = pause_get_menu_msg(PAUSE_MSG_PARTNER_ABILITIES);
