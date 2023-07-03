@@ -1047,7 +1047,6 @@ void filemenu_init(s32 arg0) {
             gGameStatusPtr->saveSlot = D_800D95E8.saveCount;
         }
 
-
         filemenu_set_selected(menu, (gGameStatusPtr->saveSlot & 1) * 2, gGameStatusPtr->saveSlot >> 1);
 
         panelIt = filemenu_menus;
