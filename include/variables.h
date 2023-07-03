@@ -265,6 +265,8 @@ extern PlayerData gPlayerData;
 
 #if VERSION_PAL
 extern s32 gCurrentLanguage;
+#else
+#define gCurrentLanguage 0
 #endif
 
 #endif

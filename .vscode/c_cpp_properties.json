@@ -20,8 +20,8 @@
                 "F3DEX_GBI_2",
                 "_LANGUAGE_C",
                 "_MIPS_SZLONG=32",
-                "VERSION=us",
-                "VERSION_US"
+                "VERSION=pal",
+                "VERSION_PAL"
             ],
             "cStandard": "c89",
             "cppStandard": "c++17",

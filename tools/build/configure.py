@@ -21,7 +21,6 @@ YAY0_COMPRESS_TOOL = f"{BUILD_TOOLS}/yay0/Yay0compress"
 CRC_TOOL = f"{BUILD_TOOLS}/rom/n64crc"
 
 
-
 def exec_shell(command: List[str]) -> str:
     ret = subprocess.run(command, stdout=subprocess.PIPE, text=True)
     return ret.stdout
@@ -273,7 +272,7 @@ def write_ninja_rules(
 
     with Path("tools/permuter_settings.toml").open("w") as f:
         f.write(
-            f"compiler_command = \"{cc} {CPPFLAGS.replace('$version', 'us')} {cflags} -DPERMUTER -fforce-addr\"\n"
+            f"compiler_command = \"{cc} {CPPFLAGS.replace('$version', 'pal')} {cflags} -DPERMUTER -fforce-addr\"\n"
         )
         f.write(
             f'assembler_command = "{cross}as -EB -march=vr4300 -mtune=vr4300 -Iinclude"\n'
@@ -897,11 +896,9 @@ class Configure:
                         tex_dir = path.parent / name
                         build(
                             bin_path,
-                            [tex_dir],
+                            [tex_dir, path.parent / (name + ".json")],
                             "tex",
-                            variables={
-                                "tex_dir": str(tex_dir)
-                            }
+                            variables={"tex_dir": str(tex_dir)},
                         )
                     elif name.endswith("_shape"):
                         map_name = "_".join(name.split("_")[:-1])

@@ -27,6 +27,7 @@ extern HudScript HES_OptionStereoOff;
 
 #if VERSION_PAL
 extern u8 D_filemenu_802508E8[4];
+extern u8 D_filemenu_802508F0[4];
 extern u8 D_filemenu_80250938[4];
 extern u8 D_filemenu_8025093C[4];
 #define COPY_OFFSET_X (D_filemenu_8025093C[gCurrentLanguage])
@@ -472,23 +473,28 @@ void filemenu_draw_contents_option_center(
 }
 #endif
 
-#if VERSION_PAL
-INCLUDE_ASM(void, "filemenu/filemenu_main", filemenu_draw_contents_option_right);
-#else
 void filemenu_draw_contents_option_right(
     MenuPanel* menu,
     s32 baseX, s32 baseY,
     s32 width, s32 height,
     s32 opacity, s32 darkening
 ) {
+#if VERSION_PAL
+    s32 offset = D_filemenu_802508F0[gCurrentLanguage];
+
+    if (menu->col == 2 && menu->row == 2) {
+        filemenu_set_cursor_goal_pos(WINDOW_ID_FILEMENU_OPTION_RIGHT, baseX + offset - 10, baseY + 8);
+    }
+    filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_CANCEL), baseX + offset, baseY + 2, 255, 0, 1);
+#else
     if (menu->page != 2) {
         if (menu->col == 2 && menu->row == 2) {
             filemenu_set_cursor_goal_pos(WINDOW_ID_FILEMENU_OPTION_RIGHT, baseX + 8, baseY + 8);
         }
         filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_CANCEL), baseX + RIGHT_CANCEL_X, baseY + 2, 255, 0, 1);
     }
-}
 #endif
+}
 
 #if VERSION_PAL
 void filemenu_draw_contents_file_info(

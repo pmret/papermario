@@ -101,34 +101,6 @@ UnkStruct D_E010E868[] = {
     {              NULL,   0,   0,  0,  0 }
 };
 
-#if VERSION_PAL
-u32 pal_data[] = {
-        0x00000000,
-        0x00000000,
-        0x00000000,
-        0xE010E61C,
-        0xE010E5E4,
-        0xE010E5E4,
-        0xE010E5E4,
-        0xE010E5E4,
-        0xE010E5E4,
-        0xE010E5E4,
-        0xE010E5E4,
-        0xE010E5E4,
-        0xE010E60C,
-        0xE010E61C,
-        0xE010E61C,
-        0xE010E61C,
-        0xE010E61C,
-        0xE010E61C,
-        0xE010E61C,
-        0xE010E61C,
-        0xE010E61C,
-        0xE010E61C,
-        0x00000000,
-};
-#endif
-
 void chapter_change_init(EffectInstance* effect);
 void chapter_change_update(EffectInstance* effect);
 void chapter_change_render(EffectInstance* effect);
@@ -256,9 +228,6 @@ void chapter_change_render(EffectInstance* effect) {
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
-#if VERSION_PAL
-INCLUDE_ASM(void, "effects/chapter_change", chapter_change_appendGfx);
-#else
 void chapter_change_appendGfx(void* effect) {
     ChapterChangeFXData* data = ((EffectInstance*)effect)->data.chapterChange;
     s32 unk_2C = data->unk_2C;
@@ -295,6 +264,13 @@ void chapter_change_appendGfx(void* effect) {
         case 16:
         case 17:
         case 18:
+#if VERSION_PAL
+            if (gCurrentLanguage == LANGUAGE_DE) {
+                ptr0 = D_E010E838_b;
+                ptr1 = D_E010E838_c;
+                break;
+            }
+#endif
             ptr0 = D_E010E79C;
             ptr1 = D_E010E838;
             break;
@@ -316,4 +292,3 @@ void chapter_change_appendGfx(void* effect) {
 
     gDPPipeSync(gMainGfxPos++);
 }
-#endif
