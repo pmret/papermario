@@ -1012,10 +1012,9 @@ void filemenu_draw_contents_copy_arrow(MenuPanel* menu, s32 baseX, s32 baseY, s3
     }
 }
 
-#if VERSION_PAL
-INCLUDE_ASM(void, "filemenu/filemenu_common", filemenu_init);
-#else
 // TODO bad match, look into
+void func_PAL_8002B574(void); // TODO identify
+
 void filemenu_init(s32 arg0) {
     MenuPanel** panelIt;
     MenuPanel* menu;
@@ -1028,10 +1027,51 @@ void filemenu_init(s32 arg0) {
     }
 
     filemenu_cursorHudElem = filemenu_cursorHudElemID[0];
-    if (!arg0) {
+    if (arg0 == 0) {
         filemenu_common_windowBPs[0].style.customStyle->background.imgData = NULL; // ???
     }
     setup_pause_menu_tab(filemenu_common_windowBPs, ARRAY_COUNT(filemenu_common_windowBPs));
+
+#if VERSION_PAL
+    if (arg0 != 2) {
+        filemenu_currentMenu = 0;
+        menu = filemenu_menus[0];
+        menu->page = filemenu_currentMenu;
+        func_PAL_8002B574();
+
+        if (menu->page == 0) {
+            fio_has_valid_backup();
+            if (D_800D95E8.saveCount >= 4) {
+                D_800D95E8.saveCount = 0;
+            }
+            gGameStatusPtr->saveSlot = D_800D95E8.saveCount;
+        }
+
+
+        filemenu_set_selected(menu, (gGameStatusPtr->saveSlot & 1) * 2, gGameStatusPtr->saveSlot >> 1);
+
+        panelIt = filemenu_menus;
+        for (i = 0; i < ARRAY_COUNT(filemenu_menus) - 1; i++, panelIt++) {
+            if ((*panelIt)->fpInit != NULL) {
+                (*panelIt)->fpInit((*panelIt));
+            }
+        }
+        update_window_hierarchy(23, 64);
+    } else {
+        filemenu_currentMenu = 4;
+        filemenu_set_selected(filemenu_menus[4], 0, gCurrentLanguage);
+
+        panelIt = filemenu_menus;
+        for (i = 0; i < ARRAY_COUNT(filemenu_menus); i++, panelIt++) {
+            if (i == 4) {
+                if ((*panelIt)->fpInit != NULL) {
+                    (*panelIt)->fpInit((*panelIt));
+                }
+            }
+        }
+        update_window_hierarchy(23, 64);
+    }
+#else
     menu = filemenu_menus[0];
     filemenu_currentMenu = 0;
 
@@ -1069,8 +1109,8 @@ void filemenu_init(s32 arg0) {
         }
     }
     update_window_hierarchy(23, 64);
-}
 #endif
+}
 
 // TODO bad match, look into
 void filemenu_cleanup(void) {
