@@ -155,7 +155,7 @@ def main(args):
 
     sizes, vrams = get_func_info()
     total_size = sum(sizes.values())
-    # TODO hack for now since non-jp roms aren't mapped out
+    # TODO hack for now since non-us roms aren't mapped out
     if args.version != "us":
         total_size = 3718612
     all_funcs = set(sizes.keys())
