@@ -6584,6 +6584,8 @@ enum WindowStyles {
     WINDOW_STYLE_MAX    = 22,
 };
 
+// LANGUAGE_DEFAULT as 0 will be the first index into several arrays containing data based on the current language.
+// For non-PAL versions, this will be the first and only index.
 #define LANGUAGE_DEFAULT 0
 enum Language {
     LANGUAGE_EN = 0,
