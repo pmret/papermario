@@ -32,6 +32,7 @@
     ],
     "python.analysis.extraPaths": [
         "./tools",
+        "./tools/build",
         "./tools/build/sprite",
         "./tools/splat",
         "./tools/build/imgfx"
