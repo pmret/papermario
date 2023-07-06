@@ -83,9 +83,6 @@ MenuPanel filemenu_yesno_menuBP = {
     .fpCleanup = &filemenu_yesno_cleanup
 };
 
-#if VERSION_PAL
-INCLUDE_ASM(void, "filemenu/filemenu_yesno", filemenu_yesno_draw_options_contents);
-#else
 void filemenu_yesno_draw_options_contents(
     MenuPanel* menu,
     s32 baseX, s32 baseY,
@@ -124,12 +121,14 @@ void filemenu_yesno_draw_options_contents(
             xOffset2 = 28;
             yOffset2 = 21;
             break;
+#if !VERSION_PAL
         case 4:
             xOffset1 = 28;
             yOffset1 = 4;
             xOffset2 = 28;
             yOffset2 = 21;
             break;
+#endif
     }
 
     filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_YES), baseX + xOffset1, baseY + yOffset1, 0xFF, 0, 0);
@@ -146,7 +145,6 @@ void filemenu_yesno_draw_options_contents(
         filemenu_set_cursor_goal_pos(WINDOW_ID_FILEMENU_YESNO_OPTIONS, baseX + cursorGoalXOffset, baseY + cursorGoalYOffset);
     }
 }
-#endif
 
 #if VERSION_PAL
 INCLUDE_ASM(void, "filemenu/filemenu_yesno", filemenu_yesno_draw_prompt_contents);
