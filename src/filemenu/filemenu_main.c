@@ -618,8 +618,6 @@ void filemenu_draw_contents_file_title(
     s32 width, s32 height,
     s32 opacity, s32 darkening)
 {
-    s32 blah;
-
     if (filemenu_currentMenu == 0 && menu->selected == fileIdx) {
         filemenu_set_cursor_goal_pos(fileIdx + 60, baseX - 3, baseY + 8);
     }
@@ -746,9 +744,6 @@ void filemenu_draw_contents_file_3_title(
 #if VERSION_PAL
 void filemenu_main_init(MenuPanel* menu) {
     s32 halfWidth;
-    s32 halfWidth2;
-    s16* posXPtr;
-    s32 x;
     s32 i;
     s32 tmp;
 
