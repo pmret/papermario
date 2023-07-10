@@ -6,7 +6,6 @@ from glob import glob
 import png  # type: ignore
 
 
-
 def unpack_color(s):
     r = (s >> 11) & 0x1F
     g = (s >> 6) & 0x1F

@@ -205,7 +205,7 @@ def write_ninja_rules(
     ninja.rule(
         "npc_sprite",
         description="sprite $sprite_name",
-        command=f"$python {BUILD_TOOLS}/sprite/npc_sprite.py $out $sprite_dir",
+        command=f"$python {BUILD_TOOLS}/sprite/npc_sprite.py $out $sprite_name $asset_stack",
     )
 
     ninja.rule(
@@ -217,7 +217,7 @@ def write_ninja_rules(
     ninja.rule(
         "sprite_header",
         description="sprite_header $sprite_name",
-        command=f"$python {BUILD_TOOLS}/sprite/header.py $out $sprite_dir $sprite_id",
+        command=f"$python {BUILD_TOOLS}/sprite/header.py $out $sprite_name $sprite_id $asset_stack",
     )
 
     ninja.rule(
@@ -735,19 +735,27 @@ class Configure:
                     yay0_path = bin_path.with_suffix(".Yay0")
                     sprite_yay0s.append(yay0_path)
 
-                    variables = {
-                        "sprite_id": sprite_id,
-                        "sprite_name": sprite_name,
-                        "sprite_dir": self.resolve_asset_path(sprite_dir),
-                    }
-
-                    build(bin_path, [sprite_dir], "npc_sprite", variables=variables)
+                    build(
+                        bin_path,
+                        [sprite_dir],
+                        "npc_sprite",
+                        variables={
+                            "sprite_name": sprite_name,
+                            "asset_stack": ",".join(self.asset_stack),
+                        },
+                    )
                     build(yay0_path, [bin_path], "yay0")
+
+                    # NPC sprite header
                     build(
                         self.build_path() / "include/sprite/npc" / (sprite_name + ".h"),
                         [sprite_dir, yay0_path],
                         "sprite_header",
-                        variables=variables,
+                        variables={
+                            "sprite_name": sprite_name,
+                            "sprite_id": str(sprite_id),
+                            "asset_stack": ",".join(self.asset_stack),
+                        },
                     )
 
                 # Sprites .bin

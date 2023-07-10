@@ -728,86 +728,6 @@ class NpcSprite:
 
         xml.write(str(path / "SpriteSheet.xml"), encoding="unicode")
 
-    @staticmethod
-    def from_dir(path, read_images=True) -> "NpcSprite":
-        xml = ET.parse(str(path / "SpriteSheet.xml"))
-        SpriteSheet = xml.getroot()
-
-        true_max_components = 0
-        max_components = int(
-            SpriteSheet.get("a") or SpriteSheet.get(MAX_COMPONENTS_XML)
-        )  # ignored
-        num_variations = int(
-            SpriteSheet.get("b") or SpriteSheet.get(PALETTE_GROUPS_XML)
-        )
-        variation_names = SpriteSheet.get("variations", default="").split(",")
-
-        palettes = []
-        palette_names: List[str] = []
-        for Palette in SpriteSheet.findall("./PaletteList/Palette"):
-            if read_images:
-                img = png.Reader(str(path / Palette.get("src")))
-                img.preamble(True)
-                palette = img.palette(alpha="force")
-
-                palette = palette[0:16]
-                assert len(palette) == 16
-
-                palettes.append(palette)
-
-            palette_names.append(
-                Palette.get("name", Palette.get("src").split(".png")[0])
-            )
-
-        images = []
-        image_names: List[str] = []
-        for Raster in SpriteSheet.findall("./RasterList/Raster"):
-            if read_images:
-                img_path = str(path / Raster.get("src"))
-                width, height, raster, info = png.Reader(img_path).read_flat()
-
-                palette_index = int(Raster.get("palette"), base=16)
-                image = NpcRaster(width, height, palette_index, raster)
-
-                assert (
-                    image.width % 8
-                ) == 0, f"{img_path} width is not a multiple of 8"
-                assert (
-                    image.height % 8
-                ) == 0, f"{img_path} height is not a multiple of 8"
-
-                images.append(image)
-
-            image_names.append(Raster.get("src").split(".png")[0])
-
-        animations = []
-        animation_names: List[str] = []
-        for Animation in SpriteSheet.findall("./AnimationList/Animation"):
-            comps: List[AnimComponent] = []
-            for comp_xml in Animation:
-                comp: AnimComponent = AnimComponent.from_xml(comp_xml)
-                comps.append(comp)
-            animation_names.append(Animation.attrib["name"])
-            animations.append(comps)
-
-            if len(comps) > true_max_components:
-                true_max_components = len(comps)
-
-        max_components = true_max_components
-        # assert self.max_components == true_max_components, f"{true_max_components} component(s) used, but SpriteSheet.a = {self.max_components}"
-
-        return NpcSprite(
-            max_components,
-            num_variations,
-            animations,
-            palettes,
-            images,
-            image_names,
-            palette_names,
-            animation_names,
-            variation_names,
-        )
-
 
 class N64SegPm_sprites(N64Segment):
     DEFAULT_NPC_SPRITE_NAMES = [f"{i:02X}" for i in range(0xEA)]
@@ -940,7 +860,6 @@ class N64SegPm_sprites(N64Segment):
     def get_linker_entries(self):
         from segtypes.linker_entry import LinkerEntry
 
-        # TODO collect
         src_paths = [options.opts.asset_path / "sprite"]
 
         # for NPC
