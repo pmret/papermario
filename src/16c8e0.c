@@ -192,7 +192,7 @@ void initialize_battle(void) {
 
     if (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_IS_PEACH) {
         gBattleStatus.flags2 |= BS_FLAGS2_PEACH_BATTLE;
-        increment_status_menu_disabled();
+        increment_status_bar_disabled();
     } else {
         gBattleStatus.flags2 &= ~BS_FLAGS2_PEACH_BATTLE;
     }
@@ -403,12 +403,12 @@ void btl_update(void) {
 
     battleStatus->unk_90++;
     if (battleStatus->unk_90 == 40) {
-        func_8024F7C8();
+        btl_bonk_cleanup();
     }
 
-    func_80266684();
-    func_80266978();
-    func_80266B14();
+    update_damage_popups();
+    update_action_ratings();
+    update_health_bars();
     btl_popup_messages_update();
     update_actor_shadows();
 
@@ -416,46 +416,46 @@ void btl_update(void) {
         u8 paramType;
         f32 paramAmount;
 
-        get_screen_overlay_params(1, &paramType, &paramAmount);
+        get_screen_overlay_params(SCREEN_LAYER_BACK, &paramType, &paramAmount);
 
         if (battleStatus->darknessMode > BTL_DARKNESS_STATE_NONE) {
-            set_screen_overlay_color(1, 0, 0, 0);
+            set_screen_overlay_color(SCREEN_LAYER_BACK, 0, 0, 0);
             if (partner == NULL) {
-                set_screen_overlay_params_back(0, 215.0f);
+                set_screen_overlay_params_back(OVERLAY_SCREEN_COLOR, 215.0f);
             } else if (playerData->currentPartner == PARTNER_WATT) {
                 paramAmount -= 10.0f;
                 if (paramAmount < 0.0f) {
                     paramAmount = 0.0f;
                 }
-                set_screen_overlay_params_back(0, paramAmount);
+                set_screen_overlay_params_back(OVERLAY_SCREEN_COLOR, paramAmount);
             } else {
                 paramAmount += 10.0f;
                 if (paramAmount > 215.0f) {
                     paramAmount = 215.0f;
                 }
-                set_screen_overlay_params_back(0, paramAmount);
+                set_screen_overlay_params_back(OVERLAY_SCREEN_COLOR, paramAmount);
             }
         } else if (battleStatus->darknessMode < BTL_DARKNESS_STATE_NONE) {
             paramAmount -= 10.0f;
             if (paramAmount < 0.0f) {
                 paramAmount = 0.0f;
-                set_screen_overlay_params_back(255, -1.0f);
+                set_screen_overlay_params_back(OVERLAY_NONE, -1.0f);
                 battleStatus->darknessMode = BTL_DARKNESS_STATE_NONE;
             } else {
-                set_screen_overlay_params_back(0, paramAmount);
+                set_screen_overlay_params_back(OVERLAY_SCREEN_COLOR, paramAmount);
             }
         }
 
         if (cond || D_802809F6 != -1) {
             if (D_802809F6 == -1) {
-                if (gGameStatusPtr->demoState == 2) {
+                if (gGameStatusPtr->demoState == DEMO_STATE_CHANGE_MAP) {
                     u8 paramType;
                     f32 paramAmount;
 
-                    get_screen_overlay_params(0, &paramType, &paramAmount);
-                    if (paramType == 255) {
+                    get_screen_overlay_params(SCREEN_LAYER_FRONT, &paramType, &paramAmount);
+                    if (paramType == (u8) OVERLAY_NONE) {
                         D_802809F6 = 0;
-                        set_screen_overlay_params_front(0, 0.0f);
+                        set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, 0.0f);
                     }
                 }
             } else if (D_802809F6 == 255) {
@@ -468,8 +468,8 @@ void btl_update(void) {
                     D_802809F6 = 255;
                 }
 
-                set_screen_overlay_params_front(0, D_802809F6);
-                set_screen_overlay_color(0, 208, 208, 208);
+                set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, D_802809F6);
+                set_screen_overlay_color(SCREEN_LAYER_FRONT, 208, 208, 208);
                 intro_logos_set_fade_alpha(255);
                 intro_logos_set_fade_color(224);
             }
@@ -871,29 +871,29 @@ void btl_draw_enemy_health_bars(void) {
                     currentHP = enemy->currentHP;
                     temp = (currentHP * 25) / enemy->maxHP;
 
-                    if (temp < enemy->hpFraction) {
-                        enemy->hpFraction -= 2;
-                        if (enemy->hpFraction < temp) {
-                            enemy->hpFraction = temp;
+                    if (temp < enemy->healthFraction) {
+                        enemy->healthFraction -= 2;
+                        if (enemy->healthFraction < temp) {
+                            enemy->healthFraction = temp;
                         }
                     }
 
-                    if (enemy->hpFraction < temp) {
-                        enemy->hpFraction += 2;
-                        if (enemy->hpFraction > temp) {
-                            enemy->hpFraction = temp;
+                    if (enemy->healthFraction < temp) {
+                        enemy->healthFraction += 2;
+                        if (enemy->healthFraction > temp) {
+                            enemy->healthFraction = temp;
                         }
                     }
 
-                    if (!(enemy->flags & (ACTOR_FLAG_HIDE_HP_BAR | ACTOR_FLAG_TARGET_ONLY))
-                        && ((gBattleStatus.flags1 & BS_FLAGS1_MENU_OPEN) || (enemy->flags & ACTOR_FLAG_80000))
-                        && is_actor_hp_bar_visible(enemy)
+                    if (!(enemy->flags & (ACTOR_FLAG_NO_HEALTH_BAR | ACTOR_FLAG_TARGET_ONLY))
+                        && ((gBattleStatus.flags1 & BS_FLAGS1_MENU_OPEN) || (enemy->flags & ACTOR_FLAG_HEALTH_BAR_HIDDEN))
+                        && is_actor_health_bar_visible(enemy)
                     ) {
-                        f32 x = enemy->healthBarPosition.x;
-                        f32 y = enemy->healthBarPosition.y;
-                        f32 z = enemy->healthBarPosition.z;
+                        f32 x = enemy->healthBarPos.x;
+                        f32 y = enemy->healthBarPos.y;
+                        f32 z = enemy->healthBarPos.z;
 
-                        if (enemy->healthBarPosition.y >= -500) {
+                        if (enemy->healthBarPos.y >= -500) {
                             s32 screenX, screenY, screenZ;
                             s32 id;
 
@@ -926,7 +926,7 @@ void btl_draw_enemy_health_bars(void) {
                             hud_element_set_render_pos(id, screenX + 10, screenY + 6);
                             hud_element_draw_next(id);
 
-                            temp = enemy->hpFraction;
+                            temp = enemy->healthFraction;
                             temp = 25 - temp;
                             btl_draw_prim_quad(168, 0, 0, 255, screenX + 11 - temp, screenY - 7, temp, 1);
                             btl_draw_prim_quad(255, 0, 0, 255, screenX + 11 - temp, screenY - 6, temp, 4);
@@ -1122,7 +1122,7 @@ void btl_delete_actor(Actor* actor) {
     if (actor->takeTurnScript != NULL) {
         kill_script_by_ID(actor->takeTurnScriptID);
     }
-    func_80266EE8(actor, 0);
+    func_80266EE8(actor, UNK_PAL_EFFECT_0);
 
     part = actor->partsTable;
 
@@ -1140,7 +1140,7 @@ void btl_delete_actor(Actor* actor) {
                 heap_free(part->movement);
             }
 
-            if (!(part->flags & 0x2)) {
+            if (!(part->flags & ACTOR_PART_FLAG_2)) {
                 heap_free(part->decorationTable);
             }
         }
@@ -1154,7 +1154,7 @@ void btl_delete_actor(Actor* actor) {
     remove_effect(actor->disableEffect);
 
     if (actor->attackResultEffect != NULL) {
-        actor->attackResultEffect->data.attackResultText->unk_24 = 0;
+        actor->attackResultEffect->data.attackResultText->isVisible = FALSE;
     }
 
     battleStatus = &gBattleStatus;
@@ -1197,7 +1197,7 @@ void btl_delete_player_actor(Actor* player) {
     remove_effect(player->disableEffect);
 
     if (player->attackResultEffect != NULL) {
-        player->attackResultEffect->data.attackResultText->unk_24 = 0;
+        player->attackResultEffect->data.attackResultText->isVisible = FALSE;
     }
 
     heap_free(movement);

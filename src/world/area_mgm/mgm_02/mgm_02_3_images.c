@@ -6,8 +6,8 @@
 
 MessageImageData N(MsgImg_PeachPanel)[] = {
     {
-        .raster   = N(panel_peach_img), 
-        .palette  = N(panel_peach_pal), 
+        .raster   = N(panel_peach_img),
+        .palette  = N(panel_peach_pal),
         .width    = N(panel_peach_img_width),
         .height   = N(panel_peach_img_height),
         .format   = G_IM_FMT_CI,

@@ -33,7 +33,7 @@ void stars_orbiting_main(
     bp.update = stars_orbiting_update;
     bp.renderWorld = stars_orbiting_render;
     bp.unk_00 = 0;
-    bp.unk_14 = func_E005E318;
+    bp.renderUI = func_E005E318;
     bp.effectID = EFFECT_STARS_ORBITING;
 
     effect = shim_create_effect_instance(&bp);

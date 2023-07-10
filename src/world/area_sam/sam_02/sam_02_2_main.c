@@ -1,4 +1,5 @@
 #include "sam_02.h"
+#include "sprite/player.h"
 
 #include "world/common/entity/Pipe.inc.c"
 

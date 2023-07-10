@@ -2,6 +2,7 @@
 #include "hud_element.h"
 #include "script_api/battle.h"
 #include "sprite/npc/BattleEldstar.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_move_refresh
 
@@ -77,7 +78,7 @@ API_CALLABLE(func_802A1518_78BB18) {
 API_CALLABLE(func_802A17D4_78BDD4) {
     Actor* actor = gBattleStatus.playerActor;
 
-    if (actor->debuff != STATUS_END) {
+    if (actor->debuff != 0) {
         actor->debuffDuration = 0;
         actor->debuff = 0;
         remove_status_debuff(actor->hudElementDataIndex);
@@ -268,7 +269,7 @@ EvtScript N(802A21A0) = {
 EvtScript N(802A23AC) = {
     EVT_CALL(GetOwnerID, LVarA)
     EVT_IF_EQ(LVarA, 0)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(PlaySound, SOUND_2047)
         EVT_THREAD
             EVT_LOOP(5)
@@ -300,7 +301,7 @@ EvtScript N(802A23AC) = {
         EVT_CALL(EnableNpcBlur, NPC_BTL_SPIRIT, FALSE)
         EVT_CALL(DeleteNpc, NPC_BTL_SPIRIT)
     EVT_ELSE
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(PlaySound, SOUND_2045)
         EVT_THREAD
             EVT_LOOP(5)
@@ -367,7 +368,7 @@ EvtScript N(EVS_UsePower) = {
     EVT_WAIT(16)
     EVT_THREAD
         EVT_WAIT(10)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_END_THREAD
     EVT_CALL(PlaySound, SOUND_242)
     EVT_CALL(EnableNpcBlur, NPC_BTL_SPIRIT, TRUE)
@@ -389,7 +390,7 @@ EvtScript N(EVS_UsePower) = {
     EVT_CALL(N(AddFP), 5)
     EVT_CALL(func_802A17D4_78BDD4)
     EVT_WAIT(30)
-    EVT_CALL(func_80276EFC)
+    EVT_CALL(PlayerYieldTurn)
     EVT_EXEC_WAIT(N(802A27FC))
     EVT_RETURN
     EVT_END

@@ -104,7 +104,7 @@ void light_rays_main(
     bpPtr->update = light_rays_update;
     bpPtr->renderWorld = light_rays_render;
     bpPtr->unk_00 = 0;
-    bpPtr->unk_14 = NULL;
+    bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_LIGHT_RAYS;
 
     effect = shim_create_effect_instance(bpPtr);
@@ -195,8 +195,8 @@ void light_rays_update(EffectInstance* effect) {
 
     part->lifetime++;
 
-    if (effect->flags & EFFECT_INSTANCE_FLAG_10) {
-        effect->flags &= ~EFFECT_INSTANCE_FLAG_10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         part->timeLeft = 10;
     }
 

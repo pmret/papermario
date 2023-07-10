@@ -1,5 +1,3 @@
-#include "common.h"
-
-#define NAMESPACE b_area_nok_spiked_goomba
+#include "../area.h"
 
 #include "battle/common/actor/spiked_goomba.inc.c"

@@ -1,4 +1,5 @@
 #include "hos_00.h"
+#include "sprite/player.h"
 
 #include "world/common/complete/GiveReward.inc.c"
 

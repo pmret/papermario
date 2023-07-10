@@ -31,7 +31,7 @@ EffectInstance* fire_breath_main(
     bp.init = fire_breath_init;
     bp.update = fire_breath_update;
     bp.renderWorld = fire_breath_render;
-    bp.unk_14 = 0;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_FIRE_BREATH;
 
     effect = shim_create_effect_instance(&bp);

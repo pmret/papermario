@@ -7,7 +7,7 @@
 //@bug malformed script is missing EVT_RETURN and EVT_END, only works because another EvtScript follows
 EvtScript N(EVS_GotoMap_kmr_24_0) = {
     EVT_CALL(FadeOutMusic, 0, 1500)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_24"), kmr_24_ENTRY_0, TRANSITION_11)
+    EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_24"), kmr_24_ENTRY_0, TRANSITION_AFTER_SAVE_PROMPT)
     EVT_WAIT(100)
 };
 

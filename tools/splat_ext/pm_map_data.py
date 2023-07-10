@@ -1,13 +1,18 @@
-import os
+import os, sys
 from pathlib import Path
+from typing import List
 from segtypes.n64.segment import N64Segment
 from util.n64.Yay0decompress import Yay0Decompressor
 from util.color import unpack_color
 from segtypes.n64.palette import iter_in_groups
 from util import options
-import png
+import png  # type: ignore
 import yaml as yaml_loader
 import n64img.image
+
+SPLAT_EXT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(str(Path(SPLAT_EXT_DIR)))
+from tex_archives import TexArchive
 
 script_dir = Path(os.path.dirname(os.path.realpath(__file__)))
 
@@ -33,13 +38,13 @@ def parse_palette(data):
 
 def add_file_ext(name: str) -> str:
     if name.startswith("party_"):
-        return name + ".png"
+        return "party/" + name + ".png"
     elif name.endswith("_hit") or name.endswith("_shape"):
-        return name + ".bin"  # TODO: xml
+        return "geom/" + name + ".bin"  # TODO: xml
     elif name.endswith("_tex"):
-        return name + ".bin"  # TODO: texture archive
+        return "tex/" + name + ".bin"  # TODO: texture archive
     elif name.endswith("_bg"):
-        return name + ".png"
+        return "bg/" + name + ".png"
     else:
         return name + ".bin"
 
@@ -69,8 +74,14 @@ class N64SegPm_map_data(N64Segment):
             self.files = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
 
     def split(self, rom_bytes):
+        assert isinstance(self.rom_start, int)
+
         fs_dir = options.opts.asset_path / self.dir / self.name
         (fs_dir / "title").mkdir(parents=True, exist_ok=True)
+        (fs_dir / "party").mkdir(parents=True, exist_ok=True)
+        (fs_dir / "bg").mkdir(parents=True, exist_ok=True)
+        (fs_dir / "tex").mkdir(parents=True, exist_ok=True)
+        (fs_dir / "geom").mkdir(parents=True, exist_ok=True)
 
         data = rom_bytes[self.rom_start : self.rom_end]
 
@@ -100,12 +111,15 @@ class N64SegPm_map_data(N64Segment):
                 bytes = Yay0Decompressor.decompress_python(bytes)
 
             if name.startswith("party_"):
+                assert path is not None
                 with open(path, "wb") as f:
                     # CI-8
                     w = png.Writer(150, 105, palette=parse_palette(bytes[:0x200]))
                     w.write_array(f, bytes[0x200:])
             elif name == "title_data":
-                if "ver/us" in str(options.opts.target_path) or "ver/pal" in str(options.opts.target_path):
+                if "ver/us" in str(options.opts.target_path) or "ver/pal" in str(
+                    options.opts.target_path
+                ):
                     w = 200
                     h = 112
                     img = n64img.image.RGBA32(
@@ -137,7 +151,7 @@ class N64SegPm_map_data(N64Segment):
                     w = 128
                     h = 32
                     img = n64img.image.CI4(
-                        data=bytes[0x10 : 0x10 + w * h], width=w, height=h
+                        data=bytes[0x10 : 0x10 + (w * h // 2)], width=w, height=h
                     )
                     img.palette = parse_palette(bytes[0x810:0x830])
                     img.write(fs_dir / "title/copyright.png")
@@ -176,12 +190,17 @@ class N64SegPm_map_data(N64Segment):
                         )
                         w.write_array(f, bytes[raster_offset:])
 
-                write_bg_png(bytes, path)
+                write_bg_png(bytes, fs_dir / "bg" / f"{name}.png")
 
                 # sbk_bg has an alternative palette
                 if name == "sbk_bg":
-                    write_bg_png(bytes, fs_dir / f"{name}.alt.png", header_offset=0x10)
+                    write_bg_png(
+                        bytes, fs_dir / "bg" / f"{name}.alt.png", header_offset=0x10
+                    )
+            elif name.endswith("_tex"):
+                TexArchive.extract(bytes, fs_dir / "tex" / name)
             else:
+                assert path is not None
                 with open(path, "wb") as f:
                     f.write(bytes)
 

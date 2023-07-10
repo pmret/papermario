@@ -1,6 +1,7 @@
 #include "common.h"
 #include "script_api/battle.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_item_dried_shroom
 

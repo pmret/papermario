@@ -2,6 +2,15 @@
 #include "filemenu.h"
 #include "hud_element.h"
 
+#if VERSION_PAL
+extern u8 D_filemenu_802508FC[];
+extern u8 D_filemenu_80250934[];
+extern u8 D_filemenu_80250948[];
+extern u8 D_filemenu_8025094C[];
+extern s8 D_filemenu_80250950[];
+extern u8 D_filemenu_80250968[];
+#endif
+
 #if VERSION_IQUE
 #define CREATE_SUCCESS_NUMBER_X 49
 #define NUMBER_OFFSET_Y 1
@@ -53,6 +62,45 @@ void filemenu_info_draw_message_contents(
     s32 width, s32 height,
     s32 opacity, s32 darkening
 ) {
+#if VERSION_PAL
+    s32 xOffset;
+
+    // TODO figure out FILE_MESSAGE constants
+    switch (menu->page) {
+        case 0:
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_28), baseX + 10, baseY + 4, 255, 0, 0);
+            xOffset = D_filemenu_80250934[gCurrentLanguage] + 10;
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_FILE_26), baseX + xOffset, baseY + 4, 255, 0, 0);
+            xOffset += D_filemenu_802508FC[gCurrentLanguage];
+            draw_number(filemenu_menus[0]->selected + 1, baseX + xOffset, baseY + 6, 0, 0, 255, 3);
+            xOffset++;
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_HAS_BEEN_DELETED), baseX + xOffset, baseY + 4, 255, 0, 0);
+            break;
+        case 1:
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_COPY_FROM), baseX + 10, baseY + 4, 255, 0, 0);
+            xOffset = D_filemenu_80250948[gCurrentLanguage] + 10;
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_FILE_26), baseX + xOffset, baseY + 4, 255, 0, 0);
+            xOffset += D_filemenu_802508FC[gCurrentLanguage];
+            draw_number(filemenu_loadedFileIdx + 1, baseX + xOffset, baseY + 6, 0, 0, 255, 3);
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_TO), baseX + 10, baseY + 18, 255, 0, 0);
+            xOffset = D_filemenu_8025094C[gCurrentLanguage] + 10;
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_FILE_26), baseX + xOffset, baseY + 18, 255, 0, 0);
+            xOffset += D_filemenu_802508FC[gCurrentLanguage];
+            draw_number(filemenu_iterFileIdx + 1, baseX + xOffset, baseY + 0x14, 0, 0, 255, 3);
+            xOffset += D_filemenu_80250950[gCurrentLanguage];
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_HAS_BEEN_CREATED), baseX + xOffset, baseY + 18, 255, 0, 0);
+            break;
+        case 2:
+            filemenu_draw_message(filemenu_get_menu_message(0x20), baseX + 10, baseY + 4, 255, 0, 0);
+            xOffset = D_filemenu_80250968[gCurrentLanguage] + 10;
+            filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_FILE_26), baseX + xOffset, baseY + 4, 255, 0, 0);
+            xOffset += D_filemenu_802508FC[gCurrentLanguage];
+            draw_number(filemenu_menus[0]->selected + 1, baseX + xOffset, baseY + 6, 0, 0, 255, 3);
+            xOffset++;
+            filemenu_draw_message(filemenu_get_menu_message(0x1F), baseX + xOffset, baseY + 4, 255, 0, 0);
+            break;
+    }
+#else
     switch (menu->page) {
         case 0:
             filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_FILE_26), baseX + 10, baseY + 4, 255, 0, 0);
@@ -87,6 +135,7 @@ void filemenu_info_draw_message_contents(
             filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_HAS_BEEN_CREATED), baseX + 49, baseY + 4, 255, 0, 0);
             break;
     }
+#endif
     filemenu_set_cursor_alpha(0);
 }
 
@@ -108,26 +157,28 @@ void filemenu_info_handle_input(MenuPanel* menu) {
         filemenu_currentMenu = 0;
 
         switch (menu->page) {
-            case 1:
-                menu->page = 0;
+            case PAGE_1:
+                menu->page = PAGE_0;
                 set_window_update(WINDOW_ID_FILEMENU_STEREO, (s32)filemenu_update_show_options_left);
                 set_window_update(WINDOW_ID_FILEMENU_MONO, (s32)filemenu_update_show_options_right);
                 set_window_update(WINDOW_ID_FILEMENU_OPTION_LEFT, (s32)filemenu_update_show_options_bottom);
                 set_window_update(WINDOW_ID_FILEMENU_OPTION_RIGHT, (s32)filemenu_update_show_options_bottom);
                 filemenu_set_selected(menu, 0, 2);
                 break;
-            case 4:
-                menu->page = 0;
+            case PAGE_4:
+                menu->page = PAGE_0;
                 set_window_update(WINDOW_ID_FILEMENU_STEREO, (s32)filemenu_update_show_options_left);
                 set_window_update(WINDOW_ID_FILEMENU_MONO, (s32)filemenu_update_show_options_right);
                 set_window_update(WINDOW_ID_FILEMENU_OPTION_LEFT, (s32)filemenu_update_show_options_bottom);
                 set_window_update(WINDOW_ID_FILEMENU_OPTION_RIGHT, (s32)filemenu_update_show_options_bottom);
                 filemenu_set_selected(menu, 1, 2);
                 break;
-            case 2:
+#if !VERSION_PAL
+            case PAGE_2:
                 menu->page = 2;
                 filemenu_set_selected(menu, 1, 2);
                 break;
+#endif
         }
         set_window_update(WINDOW_ID_FILEMENU_INFO, WINDOW_UPDATE_HIDE);
     }

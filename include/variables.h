@@ -11,7 +11,7 @@ extern PlayerStatus* gPlayerStatusPtr;
 extern CollisionStatus gCollisionStatus;
 extern GameStatus gGameStatus;
 extern GameStatus* gGameStatusPtr;
-extern s32 gRandSeed;
+extern u32 gRandSeed;
 extern ItemData gItemTable[365];
 extern UNK_FUN_PTR(gCurrentUpdateFunction);
 extern MoveData gMoveTable[185];
@@ -146,7 +146,7 @@ extern u16 gCurrentDoorSounds;
 
 extern UNK_TYPE D_800E92D8;
 extern UNK_TYPE D_80147574;
-extern s8 D_8014C248[];
+extern b8 D_8014C248;
 
 extern UNK_FUN_PTR(TalkNotificationCallback);
 extern UNK_FUN_PTR(InteractNotificationCallback);
@@ -183,7 +183,7 @@ extern s32 Entity_WoodenCrate_RenderShatteredScript[];
 
 
 // Scripts
-extern EvtScript SCRIPT_NpcDefeat;
+extern EvtScript EVS_NpcDefeat;
 extern EvtScript ShakeCam1;
 extern EvtScript ShakeCamX;
 
@@ -265,6 +265,8 @@ extern PlayerData gPlayerData;
 
 #if VERSION_PAL
 extern s32 gCurrentLanguage;
+#else
+#define gCurrentLanguage 0
 #endif
 
 #endif

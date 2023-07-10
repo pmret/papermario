@@ -1,6 +1,7 @@
 #include "jan_00.h"
 #include "effects.h"
 #include "npc.h"
+#include "sprite/player.h"
 
 NpcSettings N(NpcSettings_Kolorado_01) = {
     .height = 24,

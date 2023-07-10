@@ -1,6 +1,7 @@
 #include "common.h"
 #include "script_api/battle.h"
 #include "battle/action_cmd/jump.h"
+#include "sprite/player.h"
 
 s32 N(D_802A10F0)[] = {
     9, 3, 9, 3, 9, 3, 8, 3,
@@ -34,7 +35,7 @@ EvtScript N(EVS_JumpSupport_A) = {
         EVT_SET(LVar3, LVar0)
     EVT_END_IF
     EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar3, LVar4, LVar5)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_26)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_ATTACK_APPROACH)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(5.0))
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Run)
     EVT_CALL(CancelablePlayerRunToGoal, 0, LVar0)
@@ -101,9 +102,9 @@ EvtScript N(EVS_JumpSupport_D) = {
 };
 
 EvtScript N(EVS_JumpSupport_E) = {
-    EVT_CALL(func_80276EFC)
+    EVT_CALL(PlayerYieldTurn)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, FALSE)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(func_802693F0)
     EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
     EVT_CALL(GetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -130,9 +131,9 @@ EvtScript N(EVS_JumpSupport_E) = {
 };
 
 EvtScript N(EVS_JumpSupport_F) = {
-    EVT_CALL(func_80276EFC)
+    EVT_CALL(PlayerYieldTurn)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, FALSE)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(func_802693F0)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 50)
@@ -159,7 +160,7 @@ EvtScript N(EVS_JumpSupport_F) = {
 };
 
 EvtScript N(EVS_JumpSupport_G) = {
-    EVT_CALL(func_80276EFC)
+    EVT_CALL(PlayerYieldTurn)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, FALSE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_29)
     EVT_CALL(func_802693F0)
@@ -188,9 +189,9 @@ EvtScript N(EVS_JumpSupport_G) = {
 };
 
 EvtScript N(EVS_JumpSupport_H) = {
-    EVT_CALL(func_80276EFC)
+    EVT_CALL(PlayerYieldTurn)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, FALSE)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(func_802693F0)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 60)
@@ -217,10 +218,10 @@ EvtScript N(EVS_JumpSupport_H) = {
 };
 
 EvtScript N(EVS_JumpSupport_I) = {
-    EVT_CALL(func_80276EFC)
+    EVT_CALL(PlayerYieldTurn)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, FALSE)
     EVT_CALL(EnablePlayerBlur, -1)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(func_802693F0)
     EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
     EVT_CALL(GetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -252,7 +253,7 @@ EvtScript N(EVS_JumpSupport_I) = {
     EVT_END
 };
 
-EvtScript N(EVS_JumpSupport_J) = {
+EvtScript N(EVS_JumpSupport_Miss) = {
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, 0, 0, ANIM_Mario1_SpinFall)
     EVT_CALL(PlayerLandJump)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_SpinFall)
@@ -266,10 +267,10 @@ EvtScript N(EVS_JumpSupport_J) = {
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_DustOff)
     EVT_WAIT(20)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, FALSE)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(func_802693F0)
     EVT_CALL(EnablePlayerBlur, -1)
-    EVT_CALL(func_80276EFC)
+    EVT_CALL(PlayerYieldTurn)
     EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
     EVT_CALL(SetActorSpeed, ACTOR_PLAYER, EVT_FLOAT(8.0))
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Run)

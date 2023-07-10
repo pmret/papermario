@@ -26,6 +26,9 @@ class N64SegCi(N64SegImg):
         self.palette: "Optional[N64SegPalette]" = None
         self.palette_name = self.parse_palette_name(self.yaml, self.args)
 
+    def scan(self, rom_bytes: bytes) -> None:
+        self.n64img.data = rom_bytes[self.rom_start : self.rom_end]
+
     def split(self, rom_bytes):
         if self.palette is None:
             # TODO: output with blank palette

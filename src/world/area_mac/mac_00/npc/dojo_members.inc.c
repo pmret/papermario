@@ -1,3 +1,5 @@
+#include "sprite/player.h"
+
 s32 N(DojoBattleIDs)[] = {
     BTL_MAC_FORMATION_00,
     BTL_MAC_FORMATION_01,
@@ -159,7 +161,7 @@ EvtScript N(EVS_NpcInit_Lee) = {
 
 API_CALLABLE(N(SetPlayer1HP)) {
     gPlayerData.curHP = 1;
-    sync_status_menu();
+    sync_status_bar();
     return ApiStatus_DONE2;
 }
 

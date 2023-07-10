@@ -1,5 +1,6 @@
 #include "osr_02.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/Peach.inc.c"
 #include "world/common/npc/Twink.inc.c"

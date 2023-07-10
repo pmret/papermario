@@ -91,7 +91,7 @@ EffectInstance* something_rotating_main(
     bp.update = something_rotating_update;
     bp.renderWorld = something_rotating_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_SOMETHING_ROTATING;
 
     effect = shim_create_effect_instance(&bp);
@@ -144,8 +144,8 @@ void something_rotating_update(EffectInstance* effect) {
     f32 angle1;
     s32 i;
 
-    if (effect->flags & EFFECT_INSTANCE_FLAG_10) {
-        effect->flags &= ~EFFECT_INSTANCE_FLAG_10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         part->unk_10 = 32;
     }
 

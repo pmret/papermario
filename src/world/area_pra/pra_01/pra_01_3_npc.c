@@ -1,5 +1,6 @@
 #include "pra_01.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/StarSpirit.inc.c"
 
@@ -11,7 +12,7 @@ API_CALLABLE(N(UpgradeStarPowerCh7)) {
     set_max_SP(7);
     gPlayerData.curHP = gPlayerData.curMaxHP;
     gPlayerData.curFP = gPlayerData.curMaxFP;
-    sync_status_menu();
+    sync_status_bar();
     return ApiStatus_DONE2;
 }
 

@@ -2,6 +2,7 @@
 #include "script_api/battle.h"
 #include "effects.h"
 #include "model.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_item_thunder_bolt
 
@@ -60,7 +61,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_EXEC_WAIT(battle_item_thunder_bolt_UseItemWithEffect)
     EVT_THREAD
         EVT_WAIT(5)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(MoveBattleCamOver, 20)
     EVT_END_THREAD
     EVT_CALL(battle_item_thunder_bolt_FadeBackgroundToBlack)
@@ -77,10 +78,10 @@ EvtScript N(EVS_UseItem) = {
     EVT_CALL(StartRumble, 10)
     EVT_CALL(ShakeCam, CAM_BATTLE, 0, 5, EVT_FLOAT(1.0))
     EVT_CALL(GetItemPower, ITEM_THUNDER_RAGE, LVar0, LVar1)
-    EVT_CALL(ItemDamageEnemy, LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, 0, LVar0, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(ItemDamageEnemy, LVar0, DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, LVar0, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_LABEL(1)
     EVT_WAIT(5)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
     EVT_WAIT(30)

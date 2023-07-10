@@ -1,42 +1,39 @@
-#include "common.h"
-#include "battle/battle.h"
+#include "area.h"
 
-#define NAMESPACE b_area_sam2
+extern ActorBlueprint A(monstar);
+extern ActorBlueprint A(paragoomba);
+extern ActorBlueprint A(gray_magikoopa);
 
-extern ActorBlueprint N(monstar);
-extern ActorBlueprint N(paragoomba);
-extern ActorBlueprint N(gray_magikoopa);
+extern Stage A(sam_01);
+extern Stage A(sam_02);
+extern Stage A(sam_02b);
+extern Stage A(sam_02c);
+extern Stage A(sam_02d);
+extern Stage A(sam_03);
 
-extern Stage N(sam_01);
-extern Stage N(sam_02);
-extern Stage N(sam_02b);
-extern Stage N(sam_02c);
-extern Stage N(sam_02d);
-extern Stage N(sam_03);
+Vec3i A(MonstarPos) = { 75, 16, 5 };
 
-Vec3i N(80223490) = { 75, 16, 5 };
-
-Formation N(Formation_01) = {
-    { .actor = &N(monstar), .home = { .vec = &N(80223490) }, .priority = 10 },
+Formation A(Formation_01) = {
+    ACTOR_BY_POS(A(monstar), A(MonstarPos), 10),
 };
 
-Formation N(Formation_02) = {
-    { .actor = &N(paragoomba), .home = { .index = 5 }, .priority = 10 },
-    { .actor = &N(gray_magikoopa), .home = { .index = 2 }, .priority = 9 },
+Formation A(Formation_02) = {
+    ACTOR_BY_IDX(A(paragoomba), BTL_POS_AIR_B, 10),
+    ACTOR_BY_IDX(A(gray_magikoopa), BTL_POS_GROUND_C, 9),
 };
 
-BattleList N(Formations) = {
-    BATTLE(N(Formation_01), &N(sam_03), "かいぶつ"),
-    BATTLE(N(Formation_02), &N(sam_01), "パタクリ,グレイカメック（チェックよう）"),
+BattleList A(Formations) = {
+    BATTLE(A(Formation_01), A(sam_03), "かいぶつ"),
+    BATTLE(A(Formation_02), A(sam_01), "パタクリ,グレイカメック（チェックよう）"),
     {},
 };
 
-StageList N(Stages) = {
-    { "sam_01", &N(sam_01) },
-    { "sam_02", &N(sam_02) },
-    { "sam_02b", &N(sam_02b) },
-    { "sam_02c", &N(sam_02c) },
-    { "sam_02d", &N(sam_02d) },
-    { "sam_03", &N(sam_03) },
+StageList A(Stages) = {
+    STAGE("sam_01", A(sam_01)),
+    STAGE("sam_02", A(sam_02)),
+    STAGE("sam_02b", A(sam_02b)),
+    STAGE("sam_02c", A(sam_02c)),
+    STAGE("sam_02d", A(sam_02d)),
+    STAGE("sam_03", A(sam_03)),
     {},
 };

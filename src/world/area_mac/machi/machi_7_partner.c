@@ -1,4 +1,5 @@
 #include "machi.h"
+#include "sprite/player.h"
 
 Vec3f N(FlightPath)[] = {
     { -332.0,    10.0,  120.0 },

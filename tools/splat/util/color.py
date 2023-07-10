@@ -17,3 +17,11 @@ def unpack_color(data):
     b = ceil(0xFF * (b / 31))
 
     return r, g, b, a
+
+def pack_color(r, g, b, a):
+    r = r >> 3
+    g = g >> 3
+    b = b >> 3
+    a = a >> 7
+
+    return (r << 11) | (g << 6) | (b << 1) | a

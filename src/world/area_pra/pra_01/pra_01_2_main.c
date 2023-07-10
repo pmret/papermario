@@ -99,7 +99,12 @@ EvtScript N(EVS_EnterMap) = {
     EVT_END
 };
 
-#include "common/UnkFogFunc.inc.c"
+API_CALLABLE(N(SetupFog)) {
+    set_world_fog_dist(980, 1000);
+    set_world_fog_color(15, 5, 55, 255);
+    enable_world_fog();
+    return ApiStatus_DONE2;
+}
 
 API_CALLABLE(N(DisableFloorReflection)) {
     gOverrideFlags &= ~GLOBAL_OVERRIDES_ENABLE_FLOOR_REFLECTION;
@@ -116,7 +121,7 @@ EvtScript N(EVS_Main) = {
     EVT_END_IF
     EVT_EXEC_WAIT(N(EVS_MakeEntities))
     EVT_EXEC_WAIT(N(EVS_SetupMusic))
-    EVT_CALL(N(UnkFogFunc))
+    EVT_CALL(N(SetupFog))
     EVT_CALL(N(DisableFloorReflection))
     EVT_SET(LVar0, MODEL_o549)
     EVT_SET(LVar1, MODEL_o549)

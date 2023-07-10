@@ -1,5 +1,6 @@
 #include "dgb_00.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(PlaySentinelSounds)) {
     Npc* npc = get_npc_unsafe(get_enemy(NPC_Sentinel)->npcID);

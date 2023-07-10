@@ -1,7 +1,3 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "mapfs/flo_bt04_shape.h"
+#include "../area.h"
 
-#define NAMESPACE b_area_flo2_flo_04
-
-#include "battle/common/stage/flo_04.inc.c"
+#include "battle/common/stage/area_flo/flo_04.inc.c"

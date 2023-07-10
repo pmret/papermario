@@ -1,6 +1,7 @@
 #include "common.h"
 #include "script_api/battle.h"
 #include "sprite/npc/BattleMamar.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_move_lullaby
 
@@ -181,7 +182,7 @@ EvtScript N(802A1D50) = {
 EvtScript N(802A1F5C) = {
     EVT_CALL(GetOwnerID, LVarA)
     EVT_IF_EQ(LVarA, 0)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(PlaySound, SOUND_2047)
         EVT_THREAD
             EVT_LOOP(5)
@@ -213,7 +214,7 @@ EvtScript N(802A1F5C) = {
         EVT_CALL(EnableNpcBlur, NPC_BTL_SPIRIT, FALSE)
         EVT_CALL(DeleteNpc, NPC_BTL_SPIRIT)
     EVT_ELSE
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(PlaySound, SOUND_2045)
         EVT_THREAD
             EVT_LOOP(5)
@@ -278,7 +279,7 @@ EvtScript N(EVS_UsePower) = {
     EVT_EXEC_WAIT(N(802A1D50))
     EVT_CALL(SetNpcAnimation, NPC_BTL_SPIRIT, ANIM_BattleMamar_Shout)
     EVT_WAIT(16)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_WAIT(15)
     EVT_CALL(PlaySound, SOUND_3F4)
     EVT_CALL(func_802A1518_78D668)
@@ -290,7 +291,7 @@ EvtScript N(EVS_UsePower) = {
     EVT_IF_EQ(LVar0, 6)
         EVT_GOTO(1)
     EVT_END_IF
-    EVT_CALL(ItemDamageEnemy, LVar0, DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS | DAMAGE_TYPE_STATUS_ALWAYS_HITS, DMG_STATUS_CHANCE(STATUS_FLAG_SLEEP, 3, 100), 0, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(ItemDamageEnemy, LVar0, DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS | DAMAGE_TYPE_STATUS_ALWAYS_HITS, DMG_STATUS_KEY(STATUS_FLAG_SLEEP, 3, 100), 0, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_LABEL(1)
     EVT_WAIT(5)
     EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
@@ -298,7 +299,7 @@ EvtScript N(EVS_UsePower) = {
         EVT_GOTO(0)
     EVT_END_IF
     EVT_WAIT(5)
-    EVT_CALL(func_80276EFC)
+    EVT_CALL(PlayerYieldTurn)
     EVT_EXEC_WAIT(N(802A1F5C))
     EVT_EXEC_WAIT(N(802A23AC))
     EVT_RETURN

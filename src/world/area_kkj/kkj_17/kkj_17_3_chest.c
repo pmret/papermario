@@ -1,5 +1,6 @@
 #include "kkj_17.h"
 #include "hud_element.h"
+#include "sprite/player.h"
 
 extern IconHudScriptPair gItemHudScripts[];
 
@@ -32,7 +33,7 @@ s32 N(ChestItems)[] = {
     ITEM_SHOOTING_STAR,
     ITEM_DEEP_FOCUS1,
     ITEM_LAST_STAND,
-    ITEM_JAMMIN_JELLY, 
+    ITEM_JAMMIN_JELLY,
 };
 
 // end modified Chest.inc.c
@@ -247,7 +248,7 @@ EvtScript N(EVS_UseMagicChest_Mario) = {
             EVT_IF_LE(LVar1, 0)
                 EVT_CALL(ShowMessageAtScreenPos, MSG_Menus_00D5, 160, 40)
             EVT_ELSE
-                EVT_CALL(ShowGotItem, LVar0, FALSE, 2)
+                EVT_CALL(ShowGotItem, LVar0, FALSE, ITEM_PICKUP_FLAG_NO_ANIMS)
                 EVT_CALL(AddItem, LVar0, LVar1)
                 EVT_CALL(N(SetItemRetrieved))
             EVT_END_IF

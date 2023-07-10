@@ -5,6 +5,7 @@ from typing import Dict, List, Optional, Set, TYPE_CHECKING
 import spimdisasm
 import tqdm
 from intervaltree import IntervalTree
+from disassembler import disassembler_instance
 
 # circular import
 if TYPE_CHECKING:
@@ -24,6 +25,21 @@ spim_context = spimdisasm.common.Context()
 
 TRUEY_VALS = ["true", "on", "yes", "y"]
 FALSEY_VALS = ["false", "off", "no", "n"]
+
+splat_sym_types = {"func", "jtbl", "jtbl_label", "label"}
+
+
+def check_valid_type(typename: str) -> bool:
+    if typename[0].isupper():
+        return True
+
+    if typename in splat_sym_types:
+        return True
+
+    if typename in disassembler_instance.get_instance().known_types():
+        return True
+
+    return False
 
 
 def is_truey(str: str) -> bool:
@@ -130,6 +146,23 @@ def initialize(all_segments: "List[Segment]"):
                                     # Non-Boolean attributes
                                     try:
                                         if attr_name == "type":
+                                            if not check_valid_type(attr_val):
+                                                log.parsing_error_preamble(
+                                                    path, line_num, line
+                                                )
+                                                log.write(
+                                                    f"Unrecognized symbol type in '{info}', it should be one of"
+                                                )
+                                                log.write(
+                                                    [
+                                                        *splat_sym_types,
+                                                        *spimdisasm.common.gKnownTypes,
+                                                    ]
+                                                )
+                                                log.write(
+                                                    "You may use a custom type that starts with a capital letter"
+                                                )
+                                                log.error("")
                                             type = attr_val
                                             sym.type = type
                                             continue
@@ -606,3 +639,8 @@ class Symbol:
 
     def contains_rom(self, offset):
         return offset >= self.rom and offset < self.rom_end
+
+
+def get_all_symbols():
+    global all_symbols
+    return all_symbols

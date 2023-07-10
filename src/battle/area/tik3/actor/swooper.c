@@ -1,5 +1,3 @@
-#include "common.h"
-
-#define NAMESPACE b_area_tik3_swooper
+#include "../area.h"
 
 #include "battle/common/actor/swooper.inc.c"

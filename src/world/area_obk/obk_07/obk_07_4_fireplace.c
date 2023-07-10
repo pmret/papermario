@@ -1,5 +1,6 @@
 #include "obk_07.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 Vec3i N(ExplosionPositions1)[] = {
     {  5,  5, -220 },

@@ -1,4 +1,5 @@
 #include "kkj_14.h"
+#include "sprite/player.h"
 
 EvtScript N(EVS_Scene_Chapter4) = {
     EVT_CALL(DisablePlayerInput, TRUE)

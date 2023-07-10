@@ -311,7 +311,7 @@ typedef struct PlayerData {
     /* 0x007 */ s8 hardMaxFP;
     /* 0x008 */ s8 maxBP;
     /* 0x009 */ s8 level;
-    /* 0x00A */ s8 hasActionCommands;
+    /* 0x00A */ b8 hasActionCommands;
     /* 0x00B */ char unk_0B;
     /* 0x00C */ s16 coins;
     /* 0x00E */ s8 fortressKeyCount;
@@ -874,9 +874,9 @@ typedef struct BattleStatus {
     /* 0x05C */ s8 lastPartnerMenuSelection[16];
     /* 0x06C */ s16 cancelTargetMenuSubstate; // might be more generally for returning from nested 'inner' state
     /* 0x06E */ s16 acceptTargetMenuSubstate; // might be more generally for returning from nested 'inner' state
-    /* 0x070 */ s16 menuDisableFlags; /* 1 = jump, 2 = hammer, 4 = items */
+    /* 0x070 */ s16 enabledMenusFlags; // zero'd bits will be unavailable, used only for tutorial battles
     /* 0x072 */ char unk_72[2];
-    /* 0x074 */ s32 enabledStarPowersMask; // zero'd bits will be unavailable, used only for tutorial battles
+    /* 0x074 */ s32 enabledStarPowersFlags; // zero'd bits will be unavailable, used only for tutorial battles
     /* 0x078 */ s8 totalStarPoints;
     /* 0x079 */ s8 pendingStarPoints; /* how many to add */
     /* 0x07A */ s8 incrementStarPointDelay; /* related to star points, set to 0x28 when they are dropped */
@@ -894,8 +894,8 @@ typedef struct BattleStatus {
     /* 0x089 */ s8 hpDrainCount;
     /* 0x08A */ s8 nextMerleeSpellType;
     /* 0x08B */ s8 hustleTurns; /* numTurns from hustle drink, normally 0 */
-    /* 0x08C */ s8 unk_8C;
-    /* 0x08D */ s8 unk_8D;
+    /* 0x08C */ s8 stateFreezeCount;
+    /* 0x08D */ s8 endBattleFadeOutRate;
     /* 0x08E */ s8 initialEnemyCount; /* used for SP award bonus */
     /* 0x08F */ char unk_8F[1];
     /* 0x090 */ s16 unk_90;
@@ -915,7 +915,7 @@ typedef struct BattleStatus {
     /* 0x09F */ char unk_9F;
     /* 0x0A0 */ struct EffectInstance* waterBlockEffect;
     /* 0x0A4 */ s8 cloudNineTurnsLeft;
-    /* 0x0A5 */ s8 cloudNineDodgeChance; /* = 50% */
+    /* 0x0A5 */ s8 cloudNineDodgeChance; /* = 50/101 ≈ 49.5% */
     /* 0x0A6 */ char unk_A6[2];
     /* 0x0A8 */ struct EffectInstance* cloudNineEffect;
     /* 0x0AC */ s8 merleeAttackBoost;
@@ -956,7 +956,7 @@ typedef struct BattleStatus {
     /* 0x197 */ s8 targetHomeIndex; /* some sort of home index used for target list construction */
     /* 0x198 */ s8 powerBounceCounter;
     /* 0x199 */ s8 wasStatusInflicted; /* during last attack */
-    /* 0x19A */ u8 unk_19A;
+    /* 0x19A */ u8 currentDamageSource;
     /* 0x19B */ char unk_19B[5];
     /* 0x1A0 */ s16 currentTargetID; /* selected? */
     /* 0x1A2 */ s8 currentTargetPart; /* selected? */
@@ -994,14 +994,13 @@ typedef struct BattleStatus {
     /* 0x45C */ char unk_45C[4];
 } BattleStatus; // size = 0x460
 
-// alternative name: TileDescriptor
 typedef struct TextureHeader {
     /* 0x00 */ s8 name[32];
     /* 0x20 */ u16 auxW;
     /* 0x22 */ u16 mainW;
     /* 0x24 */ u16 auxH;
     /* 0x26 */ u16 mainH;
-    /* 0x28 */ u8 unk_28;
+    /* 0x28 */ u8 isVariant;
     /* 0x29 */ u8 extraTiles; // 0 - none, 1 - mipmap, 2 - ?, 3 - use aux tile
     /* 0x2A */ u8 colorCombineType : 6;
     /* 0x2A */ u8 colorCombineSubType : 2;
@@ -1165,7 +1164,7 @@ typedef struct ItemEntity {
     /* 0x1B */ s8 spawnType;
     /* 0x1C */ u8 pickupDelay; /* num frames before item can be picked up */
     /* 0x1D */ s8 renderGroup;
-    /* 0x1E */ s16 wsFaceAngle; /* < 0 means none */
+    /* 0x1E */ s16 spawnAngle; /* if < 0, a random screen-relative angle is chosen: left or right */
     /* 0x20 */ s16 shadowIndex;
     /* 0x22 */ char unk_22[2];
     /* 0x24 */ u32* readPos;
@@ -1175,7 +1174,7 @@ typedef struct ItemEntity {
     /* 0x2E */ u8 nextUpdate;
     /* 0x2F */ u8 alpha;
     /* 0x30 */ f32 scale;
-    /* 0x34 */ Vec3s unk_34;
+    /* 0x34 */ Vec3s lastPos;
     /* 0x3A */ char unk_3A[2];
     /* 0x3C */ s32 sparkleNextUpdate;
     /* 0x40 */ s32* sparkleReadPos;
@@ -1405,7 +1404,7 @@ typedef struct GameStatus {
     /* 0x06B */ s8 demoStickY;
     /* 0x06C */ s32 mainScriptID;
     /* 0x070 */ s8 isBattle;
-    /* 0x071 */ s8 demoState; /* (0 = not demo, 1 = map demo, 2 = demo map changing) */
+    /* 0x071 */ s8 demoState; // see DemoState enum
     /* 0x072 */ s8 nextDemoScene; /* which part of the demo to play next */
     /* 0x073 */ u8 contBitPattern;
     /* 0x074 */ s8 debugEnemyContact;
@@ -1455,7 +1454,7 @@ typedef struct GameStatus {
     /* 0x128 */ Vec3f playerGroundTraceNormal;
     /* 0x134 */ u16 frameCounter;
     /* 0x136 */ char unk_136[2];
-    /* 0x138 */ s32 nextRNG;
+    /* 0x138 */ u32 nextRNG;
     /* 0x13C */ s16 unk_13C;
     /* 0x13E */ char unk_13E[2];
     /* 0x140 */ ShopItemEntity* shopItemEntities;
@@ -1506,13 +1505,13 @@ typedef struct PushBlockGrid {
 typedef struct ItemEntityPhysicsData {
     /* 0x00 */ f32 verticalVelocity;
     /* 0x04 */ f32 gravity; /* 2 = normal, 1 = low gravity, higher values never 'settle' */
-    /* 0x08 */ f32 unk_08;
+    /* 0x08 */ f32 collisionRadius;
     /* 0x0C */ f32 constVelocity;
     /* 0x10 */ f32 velx;
     /* 0x14 */ f32 velz;
     /* 0x18 */ f32 moveAngle;
     /* 0x1C */ s32 timeLeft;
-    /* 0x20 */ s32 unk_20;
+    /* 0x20 */ b32 useSimplePhysics;
 } ItemEntityPhysicsData; // size = 0x24
 
 typedef struct RenderTask {
@@ -1525,10 +1524,8 @@ typedef struct RenderTask {
 typedef struct SelectableTarget {
     /* 0x00 */ s16 actorID;
     /* 0x02 */ s16 partID; /* sometimes loaded as byte from 0x3 */
-    /* 0x04 */ Vec3s pos;
-    /* 0x0A */ s16 unk_0A;
-    /* 0x0C */ s16 unk_0C;
-    /* 0x0E */ s16 unk_0E;
+    /* 0x04 */ Vec3s posA;
+    /* 0x0A */ Vec3s posB;
     /* 0x10 */ s8 unk_10;
     /* 0x11 */ s8 homeCol; /* from xpos --> 0-3 */
     /* 0x12 */ s8 homeRow; /* from ypos --> 0-3 */
@@ -1587,7 +1584,7 @@ typedef struct ActorPart {
     /* 0x4C */ Vec3f scale;
     /* 0x58 */ Vec3f currentPos;
     /* 0x64 */ f32 yaw;
-    /* 0x68 */ s16 unkOffset[2];
+    /* 0x68 */ s16 palAnimPosOffset[2]; // used by some palette animations to slightly adjust the screen position
     /* 0x6C */ Vec2s targetOffset;
     /* 0x70 */ s16 unk_70;
     /* 0x72 */ Vec2bu size;
@@ -1647,6 +1644,7 @@ typedef struct CollisionStatus {
     /* 0x1C */ Vec3f bombetteExplosionPos;
 } CollisionStatus; // size = 0x28
 
+// seems to be a union differing for each decoration
 typedef struct DecorationUnk {
     /* 0x00 */ s16 unk00;
     /* 0x02 */ s16 unk02;
@@ -1661,26 +1659,26 @@ typedef struct DecorationUnk {
 #define MAX_ACTOR_DECORATIONS 2
 
 typedef struct DecorationTable {
-    /* 0x000 */ PAL_BIN copiedPalettes[2][27][16];
-    /* 0x6C0 */ s8 unk_6C0;
-    /* 0x6C1 */ s8 unk_6C1;
-    /* 0x6C2 */ s8 unk_6C2;
+    /* 0x000 */ PAL_BIN copiedPalettes[2][27][SPR_PAL_SIZE];
+    /* 0x6C0 */ s8 paletteAdjustment;
+    /* 0x6C1 */ b8 resetPalAdjust;
+    /* 0x6C2 */ s8 palAnimState;
     /* 0x6C3 */ char unk_6C3[5];
-    /* 0x6C8 */ s16 unk_6C8;
-    /* 0x6CA */ s16 unk_6CA;
+    /* 0x6C8 */ s16 nextPalTime;
+    /* 0x6CA */ s16 palBlendAlpha;
     /* 0x6CC */ s8 spriteColorVariations;
-    /* 0x6CD */ s8 numSpritePalettes;
+    /* 0x6CD */ s8 originalPalettesCount;
     /* 0x6CE */ char unk_6CE[2];
-    /* 0x6D0 */ PAL_PTR* spritePalettes;
-    /* 0x6D4 */ PAL_PTR unk_6D4[27];
-    /* 0x740 */ s16 unk_740;
-    /* 0x742 */ s16 unk_742;
-    /* 0x744 */ s16 unk_744;
-    /* 0x746 */ s16 unk_746;
-    /* 0x748 */ s16 unk_748;
-    /* 0x74A */ s16 unk_74A;
-    /* 0x74C */ s16 unk_74C;
-    /* 0x74E */ s16 unk_74E;
+    /* 0x6D0 */ PAL_PTR* originalPalettesList;
+    /* 0x6D4 */ PAL_PTR adjustedPalettes[27];
+    /* 0x740 */ s16 blendPalA; // can be either palette or palset index
+    /* 0x742 */ s16 blendPalB; // can be either palette or palset index
+    /* 0x744 */ s16 palswapTimeHoldA;
+    /* 0x746 */ s16 palswapTimeAtoB;
+    /* 0x748 */ s16 palswapTimeHoldB;
+    /* 0x74A */ s16 palswapTimeBtoA;
+    /* 0x74C */ s16 palswapUnused1; // presumably palswapTimeHoldC for unimplemented triple cycling (A->B->C->A)
+    /* 0x74E */ s16 palswapUnused2; // presumably palswapTimeCtoA  for unimplemented triple cycling (A->B->C->A)
     /* 0x750 */ s8 unk_750;
     /* 0x751 */ s8 unk_751;
     /* 0x752 */ s8 unk_752;
@@ -1785,16 +1783,19 @@ typedef struct ActorMovement {
     /* 0x5A */ s16 flyArcAmplitude;
 } ActorMovement; // size = 0x5C;
 
-typedef struct ChompChainAnimationState {
+// a single link of a chain chomp's chain
+typedef struct ChompChain {
     /* 0x00 */ Vec3f currentPos;
     /* 0x0C */ f32 unk_0C;
     /* 0x10 */ f32 unk_10;
-    /* 0x14 */ f32 unk_14;
-    /* 0x18 */ f32 unk_18;
-    /* 0x1C */ f32 unk_1C;
-    /* 0x20 */ f32 unk_20;
-    /* 0x24 */ Vec3f scale;
-} ChompChainAnimationState; // size = 0x30
+    /* 0x14 */ f32 gravAccel;
+    /* 0x18 */ f32 velY;
+    /* 0x1C */ f32 settleAmt;
+    /* 0x20 */ f32 settleRate;
+    /* 0x24 */ f32 outerLinkLen;
+    /* 0x28 */ f32 innerLinkLen;
+    /* 0x2C */ f32 linkLengthZ;
+} ChompChain; // size = 0x30
 
 typedef struct ActorState { // TODO: Make the first field of this an ActorMovement
     /* 0x00 */ Vec3f currentPos;
@@ -1844,7 +1845,7 @@ typedef struct Actor {
     /* 0x138 */ Vec3f homePos;
     /* 0x144 */ Vec3f currentPos;
     /* 0x150 */ Vec3s headOffset;
-    /* 0x156 */ Vec3s healthBarPosition;
+    /* 0x156 */ Vec3s healthBarPos;
     /* 0x15C */ Vec3f rotation;
     /* 0x168 */ Vec3s rotationPivotOffset;
     /* 0x16E */ char unk_16E[2];
@@ -1854,11 +1855,9 @@ typedef struct Actor {
     /* 0x18C */ f32 yaw;
     /* 0x190 */ Vec2bu size;
     /* 0x192 */ s16 actorID;
-    /* 0x194 */ s8 unk_194;
-    /* 0x195 */ s8 unk_195;
-    /* 0x196 */ s8 unk_196;
-    /* 0x197 */ s8 unk_197;
-    /* 0x198 */ Vec2b unk_198;
+    /* 0x194 */ Vec2b statusIconOffset;
+    /* 0x196 */ Vec2b statusTextOffset;
+    /* 0x198 */ Vec2b healthBarOffset;
     /* 0x19A */ s8 verticalRenderOffset; // visual only, does not affect target position
     /* 0x19B */ char unk_19B[1];
     /* 0x19C */ s32 actorTypeData1[6]; /* 4 = jump sound, 5 = attack sound */ // TODO: struct
@@ -1866,7 +1865,7 @@ typedef struct Actor {
     /* 0x1B8 */ s8 currentHP;
     /* 0x1B9 */ s8 maxHP;
     /* 0x1BA */ char unk_1BA[2];
-    /* 0x1BC */ s8 hpFraction; /* used to render HP bar */
+    /* 0x1BC */ s8 healthFraction; /* used to render HP bar */
     /* 0x1BD */ char unk_1BD[3];
     /* 0x1C0 */ EvtScript* idleSource;
     /* 0x1C4 */ EvtScript* takeTurnSource;
@@ -1890,9 +1889,9 @@ typedef struct Actor {
     /* 0x1FC */ s16 damageCounter;
     /* 0x1FE */ char unk_1FE[2];
     /* 0x200 */ struct EffectInstance* attackResultEffect;
-    /* 0x204 */ s8 unk_204;
-    /* 0x205 */ s8 unk_205;
-    /* 0x206 */ s8 unk_206;
+    /* 0x204 */ s8 actionRatingCombo;
+    /* 0x205 */ s8 actionRatingTime;
+    /* 0x206 */ s8 healthBarHideTime;
     /* 0x207 */ s8 extraCoinBonus;
     /* 0x208 */ s8 instigatorValue; // from the enemy which initiated the encounter if this actor is first in the formation. allows that enemy to pass information to its actor.
     /* 0x209 */ char unk_209[3];
@@ -1911,7 +1910,7 @@ typedef struct Actor {
     /* 0x21C */ s8 statusAfflicted;
     /* 0x21D */ s8 disableDismissTimer;
     /* 0x21E */ s16 unk_21E;
-    /* 0x220 */ s8 isGlowing; // charge amount for goombario
+    /* 0x220 */ s8 isGlowing; // also used for goombario charge amount
     /* 0x221 */ s8 attackBoost;
     /* 0x222 */ s8 defenseBoost;
     /* 0x223 */ s8 chillOutAmount; /* attack reduction */
@@ -2302,18 +2301,18 @@ typedef struct VirtualEntity {
 typedef VirtualEntity* VirtualEntityList[0x40];
 
 typedef struct Message {
-    /* 0x00 */ s32 unk_00;
-    /* 0x04 */ s32 unk_04;
+    /* 0x00 */ b32 unk_00;
+    /* 0x04 */ s32 entityModelIndex;
     /* 0x08 */ Vec3f accel;
     /* 0x14 */ Vec3f vel;
-    /* 0x20 */ s32 unk_20;
+    /* 0x20 */ s32 appearTime;
     /* 0x24 */ s32 unk_24;
     /* 0x28 */ f32 rotZ;
     /* 0x2C */ f32 rotVelZ;
     /* 0x30 */ f32 rotY;
     /* 0x34 */ f32 scale;
     /* 0x38 */ Vec3f pos;
-    /* 0x44 */ s32 unk_44;
+    /* 0x44 */ s32 deleteTime;
     /* 0x48 */ f32 unk_48;
 } Message; // size = 0x4C
 
@@ -2327,8 +2326,8 @@ typedef struct PopupMessage {
     /* 0x10 */ s16 active;
     /* 0x12 */ s16 messageIndex;
     /* 0x14 */ s16 duration;
-    /* 0x16 */ s8 unk_16;
-    /* 0x17 */ s8 unk_17;
+    /* 0x16 */ s8 showMsgState;
+    /* 0x17 */ s8 needsInit;
     /* 0x18 */ Message* message;
 } PopupMessage; // size = 0x1C
 

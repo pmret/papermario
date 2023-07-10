@@ -17,7 +17,7 @@ u8 __osContAddressCrc(u16 addr) {
         } else if (temp & 0x20) {
             temp ^= 0x15;
         }
-        
+
         i >>= 1;
     }
 

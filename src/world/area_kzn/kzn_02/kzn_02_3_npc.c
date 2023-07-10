@@ -1,4 +1,5 @@
 #include "kzn_02.h"
+#include "sprite/player.h"
 
 #include "world/common/enemy/LavaBubble.inc.c"
 

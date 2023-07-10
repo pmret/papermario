@@ -1,68 +1,68 @@
 #include "common.h"
-#include "sprite/unk_checkers.png.h"
-#include "sprite/curtains.png.h"
-#include "sprite/checkers.png.h"
+#include "theater/walls.png.h"
+#include "theater/curtains.png.h"
+#include "theater/floor.png.h"
 #include "ui/no_controller.png.h"
 #include "ld_addrs.h"
 #include "nu/nusys.h"
 
-#include "sprite/unk_checkers.png.inc.c"
+#include "theater/walls.png.inc.c"
 
 Gfx D_800746E0[] = {
     gsDPSetTextureLUT(G_TT_NONE),
     gsSPTexture(-1, -1, 0, G_TX_RENDERTILE, G_ON),
-    gsDPLoadTextureBlock_4b(sprite_unk_checkers_png, G_IM_FMT_I, 16, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
+    gsDPLoadTextureBlock_4b(theater_walls_png, G_IM_FMT_I, 16, 32, 0, G_TX_NOMIRROR | G_TX_WRAP,
                             G_TX_NOMIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, G_TX_NOLOD),
     gsSPEndDisplayList(),
 };
 
-#include "sprite/curtains.png.inc.c"
+#include "theater/curtains.png.inc.c"
 
 Gfx D_80075730[] = {
     gsDPSetTextureLUT(G_TT_NONE),
     gsSPTexture(-1, -1, 0, G_TX_RENDERTILE, G_ON),
-    gsDPLoadTextureBlock(sprite_curtains_png, G_IM_FMT_RGBA, G_IM_SIZ_32b, 32, 32, 0, G_TX_MIRROR | G_TX_WRAP,
+    gsDPLoadTextureBlock(theater_curtains_png, G_IM_FMT_RGBA, G_IM_SIZ_32b, 32, 32, 0, G_TX_MIRROR | G_TX_WRAP,
                          G_TX_NOMIRROR | G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD),
     gsSPEndDisplayList(),
 };
 
-#include "sprite/checkers.png.inc.c"
-#include "sprite/checkers.pal.inc.c"
+#include "theater/floor.png.inc.c"
+#include "theater/floor.pal.inc.c"
 
 Gfx D_800758A0[] = {
     gsDPSetTextureLUT(G_TT_RGBA16),
-    gsDPLoadTLUT_pal16(0, sprite_checkers_pal),
+    gsDPLoadTLUT_pal16(0, theater_floor_pal),
     gsSPTexture(-1, -1, 0, G_TX_RENDERTILE, G_ON),
-    gsDPLoadTextureBlock_4b(sprite_checkers_png, G_IM_FMT_CI, 32, 16, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR |
+    gsDPLoadTextureBlock_4b(theater_floor_png, G_IM_FMT_CI, 32, 16, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR |
                             G_TX_WRAP, 5, 4, G_TX_NOLOD, G_TX_NOLOD),
     gsSPEndDisplayList(),
 };
 
-#include "vtx/curtains1.vtx.inc.c"
-#include "vtx/curtains2.vtx.inc.c"
-#include "vtx/curtains3.vtx.inc.c"
-#include "vtx/curtains4.vtx.inc.c"
-#include "vtx/curtains5.vtx.inc.c"
-#include "vtx/curtains6.vtx.inc.c"
-#include "vtx/curtains7.vtx.inc.c"
+#include "theater/left_wall_vtx.vtx.inc.c"
+#include "theater/right_wall_vtx.vtx.inc.c"
+#include "theater/floor_vtx.vtx.inc.c"
+#include "theater/left_inset_shadow_vtx.vtx.inc.c"
+#include "theater/right_inset_shadow_vtx.vtx.inc.c"
+#include "theater/curtain_vtx.vtx.inc.c"
+#include "theater/wall_shadows_vtx.vtx.inc.c"
 
-Gfx D_80075E60[] = {
+Gfx TheaterWallShadowsGfx[] = {
     gsDPPipeSync(),
     gsDPSetRenderMode(G_RM_PASS, G_RM_CLD_SURF2),
-    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, COMBINED, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED),
+    gsDPSetCombineMode(G_CC_MODULATEIA, PM_CC_16),
     gsSPDisplayList(D_80075730),
-    gsSPVertex(vtx_curtains7, 8, 0),
+    gsSPVertex(theater_wall_shadows_vtx, 8, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
     gsSPEndDisplayList(),
 };
 
-Gfx D_80075EA0[] = {
+Gfx TheaterCurtainGfx[] = {
     gsDPPipeSync(),
     gsDPSetRenderMode(G_RM_PASS, G_RM_XLU_SURF2),
     gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, COMBINED, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED),
     gsSPDisplayList(D_80075730),
-    gsSPVertex(vtx_curtains6, 31, 0),
+    gsSPVertex(theater_curtain_vtx, 31, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSP2Triangles(4, 5, 6, 0, 4, 6, 7, 0),
     gsSP2Triangles(8, 9, 10, 0, 8, 10, 11, 0),
@@ -76,25 +76,25 @@ Gfx D_80075EA0[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80075F20[] = {
+Gfx TheaterInsetShadowsGfx[] = {
     gsDPPipeSync(),
     gsDPSetRenderMode(G_RM_PASS, G_RM_XLU_SURF2),
     gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, SHADE, COMBINED, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED),
     gsSPTexture(0x0080, 0x0080, 0, G_TX_RENDERTILE, G_OFF),
-    gsSPVertex(vtx_curtains4, 4, 0),
+    gsSPVertex(theater_left_inset_shadow_vtx, 4, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
-    gsSPVertex(vtx_curtains5, 4, 0),
+    gsSPVertex(theater_right_inset_shadow_vtx, 4, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSPEndDisplayList(),
 };
 
-Gfx D_80075F68[] = {
+Gfx TheaterFloorGfx[] = {
     gsDPPipeSync(),
     gsDPSetRenderMode(CVG_DST_FULL | ZMODE_OPA | FORCE_BL | G_RM_PASS, CVG_DST_FULL | ZMODE_OPA | FORCE_BL |
                       GBL_c2(G_BL_CLR_IN, G_BL_0, G_BL_CLR_IN, G_BL_1)),
-    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, COMBINED, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED),
+    gsDPSetCombineMode(G_CC_MODULATEIA, PM_CC_16),
     gsSPDisplayList(D_800746E0),
-    gsSPVertex(vtx_curtains3, 25, 0),
+    gsSPVertex(theater_floor_vtx, 25, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSP2Triangles(4, 5, 0, 0, 4, 0, 3, 0),
     gsSP2Triangles(1, 6, 7, 0, 1, 7, 2, 0),
@@ -110,49 +110,49 @@ Gfx D_80075F68[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_80075FF8[] = {
+Gfx TheaterRightWallGfx[] = {
     gsDPPipeSync(),
     gsDPSetRenderMode(CVG_DST_FULL | ZMODE_OPA | FORCE_BL | G_RM_PASS, CVG_DST_FULL | ZMODE_OPA | FORCE_BL |
                       GBL_c2(G_BL_CLR_IN, G_BL_0, G_BL_CLR_IN, G_BL_1)),
-    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, COMBINED, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED),
+    gsDPSetCombineMode(G_CC_MODULATEIA, PM_CC_16),
     gsSPDisplayList(D_800758A0),
-    gsSPVertex(vtx_curtains2, 6, 0),
+    gsSPVertex(theater_right_wall_vtx, 6, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSP2Triangles(1, 4, 5, 0, 1, 5, 2, 0),
     gsSPEndDisplayList(),
 };
 
-Gfx D_80076038[] = {
+Gfx TheaterLeftWallGfx[] = {
     gsDPPipeSync(),
     gsDPSetRenderMode(CVG_DST_FULL | ZMODE_OPA | FORCE_BL | G_RM_PASS, CVG_DST_FULL | ZMODE_OPA | FORCE_BL |
                       GBL_c2(G_BL_CLR_IN, G_BL_0, G_BL_CLR_IN, G_BL_1)),
-    gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, COMBINED, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED),
+    gsDPSetCombineMode(G_CC_MODULATEIA, PM_CC_16),
     gsSPDisplayList(D_800758A0),
-    gsSPVertex(vtx_curtains1, 6, 0),
+    gsSPVertex(theater_left_wall_vtx, 6, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsSP2Triangles(1, 4, 5, 0, 1, 5, 2, 0),
     gsSPEndDisplayList(),
 };
 
-Gfx D_80076078[] ={
-    gsSPDisplayList(D_80075F68),
-    gsSPDisplayList(D_80076038),
-    gsSPDisplayList(D_80075FF8),
-    gsSPDisplayList(D_80075F20),
-    gsSPDisplayList(D_80075E60),
-    gsSPDisplayList(D_80075EA0),
+Gfx TheaterGfx[] ={
+    gsSPDisplayList(TheaterFloorGfx),
+    gsSPDisplayList(TheaterLeftWallGfx),
+    gsSPDisplayList(TheaterRightWallGfx),
+    gsSPDisplayList(TheaterInsetShadowsGfx),
+    gsSPDisplayList(TheaterWallShadowsGfx),
+    gsSPDisplayList(TheaterCurtainGfx),
     gsSPEndDisplayList(),
 };
 
-Vp D_800760B0 = {
+Vp TheaterViewport = {
     {
         {(SCREEN_WIDTH/2)*4, (SCREEN_HEIGHT/2)*4, 0x200 - 1, 0},
         {(SCREEN_WIDTH/2)*4, (SCREEN_HEIGHT/2)*4, 0x200 - 1, 0},
     }
 };
 
-Gfx D_800760C0[] = {
-    gsSPViewport(&D_800760B0),
+Gfx TheaterInitGfx[] = {
+    gsSPViewport(&TheaterViewport),
     gsDPSetCycleType(G_CYC_2CYCLE),
     gsDPSetTextureLOD(G_TL_TILE),
     gsDPSetTexturePersp(G_TP_PERSP),
@@ -173,7 +173,7 @@ Gfx D_800760C0[] = {
 
 #include "ui/no_controller.png.inc.c"
 
-Gfx D_80077140[] = {
+Gfx NoControllerSetupTexGfx[] = {
     gsDPPipeSync(),
     gsSPTexture(-1, -1, 0, G_TX_RENDERTILE, G_ON),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -194,7 +194,7 @@ Gfx D_80077140[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx D_800771E8[] = {
+Gfx NoControllerGfx[] = {
     gsSPTextureRectangle(0x0180, 0x0260, 0x0380, 0x02E0, G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400),
     gsDPPipeSync(),
     gsSPEndDisplayList(),
@@ -230,7 +230,7 @@ void render_curtains(void) {
 
         gDPPipeSync(gMainGfxPos++);
         gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxCfb_ptr));
-        gSPDisplayList(gMainGfxPos++, &D_800760C0);
+        gSPDisplayList(gMainGfxPos++, &TheaterInitGfx);
 
         guFrustumF(m, -80.0f, 80.0f, -60.0f, 60.0f, 160.0f, 640.0f, 1.0f);
         guMtxF2L(m, &D_8009BAA8[0]);
@@ -249,7 +249,7 @@ void render_curtains(void) {
         gSPMatrix(gMainGfxPos++, &D_8009BAA8[1], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         rgb = 255.0f - (gCurtainFade * 255.0f);
         gDPSetPrimColor(gMainGfxPos++, 0, 0, rgb, rgb, rgb, 255);
-        gSPDisplayList(gMainGfxPos++, &D_80076078);
+        gSPDisplayList(gMainGfxPos++, &TheaterGfx);
         gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
         gDPPipeSync(gMainGfxPos++);
     }
@@ -261,17 +261,17 @@ void render_curtains(void) {
     if (!(gGameStatusPtr->contBitPattern & 1)) {
         if ((get_game_mode() == GAME_MODE_INTRO)
                 || (get_game_mode() == GAME_MODE_TITLE_SCREEN)
-                || (gGameStatusPtr->demoState != 0)) {
+                || (gGameStatusPtr->demoState != DEMO_STATE_NONE)) {
             s32 alpha = ((gGameStatusPtr->frameCounter) % 0x18) << 5;
 
             if (alpha > 255) {
                 alpha = 255;
             }
 
-            gSPDisplayList(gMainGfxPos++, &D_800760C0);
-            gSPDisplayList(gMainGfxPos++, &D_80077140);
+            gSPDisplayList(gMainGfxPos++, &TheaterInitGfx);
+            gSPDisplayList(gMainGfxPos++, &NoControllerSetupTexGfx);
             gDPSetPrimColor(gMainGfxPos++, 0, 0, 0xFF, 0x20, 0x10, alpha);
-            gSPDisplayList(gMainGfxPos++, &D_800771E8);
+            gSPDisplayList(gMainGfxPos++, &NoControllerGfx);
         }
     }
 }

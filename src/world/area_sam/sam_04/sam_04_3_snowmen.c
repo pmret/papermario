@@ -1,5 +1,6 @@
 #include "sam_04.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #include "common/SetAngleClamped.inc.c"
 
@@ -33,7 +34,7 @@ s32* N(SnowmanModelSets)[] = {
     N(CloneSet3),
     N(CloneSet4),
     N(CloneSet5),
-    N(OriginalModels), 
+    N(OriginalModels),
 };
 
 EvtScript N(EVS_SetSnowmanPosition) = {

@@ -1,5 +1,3 @@
-#include "common.h"
-
-#define NAMESPACE b_area_tik_buzzy_beetle
+#include "../area.h"
 
 #include "battle/common/actor/buzzy_beetle.inc.c"

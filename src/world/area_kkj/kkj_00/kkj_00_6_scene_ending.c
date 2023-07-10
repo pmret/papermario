@@ -1,12 +1,13 @@
 #include "kkj_00.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(FadeScreenToWhite)) {
     if (isInitialCall) {
         script->functionTemp[1] = 0;
     }
 
-    set_screen_overlay_color(0, 208, 208, 208);
-    set_screen_overlay_params_front(1, script->functionTemp[1]);
+    set_screen_overlay_color(SCREEN_LAYER_FRONT, 208, 208, 208);
+    set_screen_overlay_params_front(OVERLAY_VIEWPORT_COLOR, script->functionTemp[1]);
 
     if (script->functionTemp[1] == 255) {
         return ApiStatus_DONE2;
@@ -214,7 +215,7 @@ EvtScript N(EVS_Scene_Ending) = {
     EVT_CALL(N(FadeScreenToWhite))
     EVT_WAIT(60)
     EVT_CALL(FadeOutMusic, 0, 2000)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("end_00"), end_00_ENTRY_0, TRANSITION_5)
+    EVT_CALL(GotoMapSpecial, EVT_PTR("end_00"), end_00_ENTRY_0, TRANSITION_OUTRO_END_SCENE)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END

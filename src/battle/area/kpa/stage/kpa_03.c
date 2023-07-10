@@ -1,33 +1,3 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
-#include "mapfs/kpa_bt03_shape.h"
+#include "../area.h"
 
-#define NAMESPACE b_area_kpa_kpa_03
-
-EvtScript N(EVS_PreBattle) = {
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_CALL(SetCamBGColor, CAM_BATTLE, 0, 0, 0)
-    EVT_CALL(func_80253734, BTL_DARKNESS_MODE_1)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(EVS_PostBattle) = {
-    EVT_RETURN
-    EVT_END
-};
-
-s32 N(ForegroundModels)[] = {
-    MODEL_tar1,
-    STAGE_MODEL_LIST_END
-};
-
-Stage NAMESPACE = {
-    .texture = "kpa_tex",
-    .shape = "kpa_bt03_shape",
-    .hit = "kpa_bt03_hit",
-    .preBattle = &N(EVS_PreBattle),
-    .postBattle = &N(EVS_PostBattle),
-    .foregroundModelList = N(ForegroundModels),
-};
+#include "battle/common/stage/area_kpa/kpa_03.inc.c"

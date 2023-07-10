@@ -1,4 +1,5 @@
 #include "isk_16.h"
+#include "sprite/player.h"
 
 #define STAR_SPIRIT_DATA_VAR MV_Unk_01
 #include "world/common/todo/StarSpiritEffectFunc.inc.c"
@@ -67,7 +68,7 @@ EvtScript N(EVS_SpawnStarCard) = {
     EVT_CALL(PlaySoundAtPlayer, SOUND_138, SOUND_SPACE_MODE_0)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_SET(GB_StoryProgress, STORY_CH2_STAR_SPIRIT_RESCUED)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_23"), kmr_23_ENTRY_1, TRANSITION_14)
+    EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_23"), kmr_23_ENTRY_1, TRANSITION_GET_STAR_CARD)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END

@@ -46,7 +46,7 @@ EffectInstance* partner_buff_main(s32 useRandomValues, f32 arg1, f32 arg2, f32 a
     bp.init = partner_buff_init;
     bp.update = partner_buff_update;
     bp.renderWorld = partner_buff_render;
-    bp.unk_14 = func_E011A3A0;
+    bp.renderUI = func_E011A3A0;
     bp.effectID = EFFECT_PARTNER_BUFF;
 
     effect = shim_create_effect_instance(&bp);
@@ -87,8 +87,8 @@ void partner_buff_update(EffectInstance* effect) {
     s32 time;
     s32 i;
 
-    if (effect->flags & EFFECT_INSTANCE_FLAG_10) {
-        effect->flags &= ~EFFECT_INSTANCE_FLAG_10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         data->timeLeft = 16;
     }
     if (data->timeLeft < 1000) {
@@ -189,8 +189,7 @@ void func_E011A3BC(s16 alpha) {
         gDPSetCombineMode(gMainGfxPos++, G_CC_DECALRGBA, G_CC_DECALRGBA);
     } else {
         gDPSetRenderMode(gMainGfxPos++, G_RM_CLD_SURF, G_RM_CLD_SURF2);
-        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0, PRIMITIVE, 0,
-                          TEXEL0, 0);
+        gDPSetCombineMode(gMainGfxPos++, PM_CC_01, PM_CC_01);
         gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, alpha);
     }
 }

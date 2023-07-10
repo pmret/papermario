@@ -1,4 +1,5 @@
 #include "flo_08.h"
+#include "sprite/player.h"
 
 #include "world/common/enemy/AmazyDayzee.inc.c"
 #include "world/common/npc/GateFlower.inc.c"

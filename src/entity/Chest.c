@@ -2,6 +2,7 @@
 #include "effects.h"
 #include "ld_addrs.h"
 #include "entity.h"
+#include "sprite/player.h"
 
 extern EntityScript Entity_Chest_ScriptOpened;
 
@@ -255,7 +256,7 @@ void entity_GiantChest_hide_effect(Entity* entity) {
     EffectInstance* effect = chest->gotItemEffect;
 
     if (effect != NULL) {
-        effect->data.gotItemOutline->unk_14 = 10;
+        effect->data.gotItemOutline->timeLeft = 10;
     }
 }
 

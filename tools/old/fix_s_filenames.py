@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # Renames asm/nonmatchings/ files to match the glabel they hold.
 

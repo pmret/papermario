@@ -76,7 +76,7 @@ API_CALLABLE(N(GrooveGuyAI_Main)) {
     f32 posY;
     f32 posZ;
     f32 hitDepth;
-    
+
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
     territory.pointX = enemy->territory->wander.detectPos.x;
@@ -85,12 +85,12 @@ API_CALLABLE(N(GrooveGuyAI_Main)) {
     territory.sizeZ = enemy->territory->wander.detectSize.z;
     territory.halfHeight = 65.0f;
     territory.detectFlags = 0;
-    
+
     if (isInitialCall || enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
         script->functionTemp[0] = 0;
         npc->duration = 0;
         npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
-        
+
         npc->flags &= ~NPC_FLAG_JUMPING;
         if (!enemy->territory->wander.isFlying) {
             npc->flags |= NPC_FLAG_GRAVITY;
@@ -99,7 +99,7 @@ API_CALLABLE(N(GrooveGuyAI_Main)) {
             npc->flags &= ~NPC_FLAG_GRAVITY;
             npc->flags |= NPC_FLAG_8;
         }
-        
+
         if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;
@@ -108,7 +108,7 @@ API_CALLABLE(N(GrooveGuyAI_Main)) {
         }
         enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
         enemy->flags &= ~ENEMY_FLAG_BEGIN_WITH_CHASING;
-        
+
         hitDepth = 100.0f;
         posX = npc->pos.x;
         posY = npc->pos.y + npc->collisionHeight;
@@ -117,7 +117,7 @@ API_CALLABLE(N(GrooveGuyAI_Main)) {
             npc->pos.y = posY;
         }
     }
-    
+
     switch (script->functionTemp[0]) {
         case 0x0:
             basic_ai_wander_init(script, aiSettings, territoryPtr);

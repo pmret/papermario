@@ -3,7 +3,7 @@
 
 static s32 itemIcon;
 
-// Returns time to sleep for on $x.
+// out LVar0: time caller should wait for coin spawns
 API_CALLABLE(N(GiveRefund)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = gBattleStatus.playerActor;
@@ -11,8 +11,8 @@ API_CALLABLE(N(GiveRefund)) {
     f32 posX;
     f32 posY = player->currentPos.y + player->size.y;
     f32 posZ;
-    f32 facingAngleSign = 0.0f;
-    s32 sleepTime = 0;
+    f32 angle = 0.0f;
+    s32 delayTime = 0;
     s32 tempIcon;
 
     if (player_team_is_ability_active(player, ABILITY_REFUND) && sellValue > 0) {
@@ -28,13 +28,13 @@ API_CALLABLE(N(GiveRefund)) {
             posX = player->currentPos.x;
             posZ = player->currentPos.z;
 
-            make_item_entity(ITEM_COIN, posX, posY, posZ, ITEM_SPAWN_MODE_TOSS_FADE1, 1 + 3 * i, facingAngleSign, 0);
+            make_item_entity(ITEM_COIN, posX, posY, posZ, ITEM_SPAWN_MODE_TOSS_FADE1, 1 + 3 * i, angle, 0);
             add_coins(1);
 
-            facingAngleSign += 30.0f;
+            angle += 30.0f;
         }
 
-        sleepTime = (i * 3) + 30;
+        delayTime = (i * 3) + 30;
 
         posX = player->currentPos.x;
         posY = player->currentPos.y;
@@ -64,7 +64,7 @@ API_CALLABLE(N(GiveRefund)) {
 #endif
     }
 
-    script->varTable[0] = sleepTime;
+    script->varTable[0] = delayTime;
 
     return ApiStatus_DONE2;
 }

@@ -1,5 +1,6 @@
 #include "kmr_11.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(MakeLensFlare)) {
     Bytecode* args = script->ptrReadPos;

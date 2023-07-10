@@ -123,7 +123,7 @@ EvtScript N(EVS_Scene_ShowTitle) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_WAIT(15 * DT)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_22"), kmr_22_ENTRY_0, TRANSITION_6)
+    EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_22"), kmr_22_ENTRY_0, TRANSITION_BEGIN_OR_END_CHAPTER)
     EVT_WAIT(100 * DT)
     EVT_RETURN
     EVT_END

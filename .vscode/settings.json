@@ -1,7 +1,9 @@
 {
     "files.eol": "\n",
     "files.insertFinalNewline": true,
-    "editor.rulers": [120],
+    "editor.rulers": [
+        120
+    ],
     "clang-tidy.compilerArgs": [
         "-std=gnu89",
         "-Iinclude",
@@ -30,11 +32,16 @@
     ],
     "python.analysis.extraPaths": [
         "./tools",
+        "./tools/build",
         "./tools/build/sprite",
-        "./tools/splat"
+        "./tools/splat",
+        "./tools/build/imgfx"
     ],
     "[c]": {
         "editor.wordSeparators": "`~!@#%^&*()-=+[{]}\\|;:'\",.<>/?", // no $, for scripts
+        "editor.formatOnSave": false, // TODO: enable this once we solve EVTs, see #1004
+        "editor.formatOnSaveMode": "modifications",
+        "editor.defaultFormatter": "xaver.clang-format",
     },
     "files.associations": {
         "*.h": "c",
@@ -50,4 +57,6 @@
         "docs/doxygen": true
     },
     "C_Cpp.default.cStandard": "c89",
+    "python.linting.mypyEnabled": true,
+    "python.linting.enabled": true,
 }

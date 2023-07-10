@@ -23,12 +23,12 @@ void N(appendGfx_sticker)(void* renderData) {
     ImgFXTexture ifxImg;
     Matrix4f mtxTransform;
     Matrix4f mtxTemp;
-    
+
     StickerData* sticker = (StickerData*) evt_get_variable(NULL, MV_StickerData);
     IMG_PTR img = (IMG_PTR) evt_get_variable(NULL, MV_StickerImage);
     PAL_PTR pal = (PAL_PTR) evt_get_variable(NULL, MV_StickerPalette);
     u32 imgfxFlags = IMGFX_FLAG_400;
-    
+
     gDPPipeSync(gMainGfxPos++);
     guTranslateF(mtxTransform, sticker->pos.x, sticker->pos.y, sticker->pos.z);
     guRotateF(mtxTemp, sticker->yaw, 0.0f, 1.0f, 0.0f);
@@ -40,7 +40,7 @@ void N(appendGfx_sticker)(void* renderData) {
     guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gMainGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]),
         G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    
+
     ifxImg.raster = img;
     ifxImg.palette = pal;
     ifxImg.width = 32;
@@ -48,13 +48,13 @@ void N(appendGfx_sticker)(void* renderData) {
     ifxImg.xOffset = -16;
     ifxImg.yOffset = 16;
     ifxImg.alpha = 255;
-    
+
     if (sticker->yaw != 0.0 || sticker->pitch != 0.0) {
         imgfxFlags |= IMGFX_FLAG_2000;
     }
     imgfx_update(0, IMGFX_CLEAR, 0, 0, 0, 0, 0);
     imgfx_appendGfx_component(0, &ifxImg, imgfxFlags, mtxTransform);
-    
+
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
 
@@ -106,7 +106,7 @@ API_CALLABLE(N(CreateSticker)) {
         (u8*) (iconBase + gItemIconPaletteOffsets[itemID]),
         (u8*) (iconPalEnd + gItemIconPaletteOffsets[itemID]),
         iconPal);
-    
+
     sticker->imgfxIdx = imgfx_get_free_instances(1);
     sticker->workerID = create_worker_world(NULL, N(worker_render_sticker));
     evt_set_variable(script, MV_StickerData, (s32) sticker);
@@ -121,7 +121,7 @@ API_CALLABLE(N(SetStickerPos)) {
     f32 y = evt_get_float_variable(script, *args++);
     f32 z = evt_get_float_variable(script, *args++);
     StickerData* sticker = (StickerData*) evt_get_variable(script, MV_StickerData);
-    
+
     sticker->pos.x = x;
     sticker->pos.y = y;
     sticker->pos.z = z;
@@ -143,11 +143,11 @@ API_CALLABLE(N(JumpStickerTo)) {
     Bytecode* args = script->ptrReadPos;
     StickerData* data = (StickerData*) evt_get_variable(script, MV_StickerData);
     f32 x, y, z, dist;
-    
+
     if (isInitialCall) {
         script->functionTemp[0] = 0;
     }
-    
+
     if (script->functionTemp[0] == 0) {
         x = evt_get_float_variable(script, *args++);
         y = evt_get_float_variable(script, *args++) + 12.0f;
@@ -168,16 +168,16 @@ API_CALLABLE(N(JumpStickerTo)) {
         } else {
             data->moveSpeed = dist / data->duration;
         }
-       
+
         data->fallSpeed = (data->gravity * data->duration * 0.5f) + y / data->duration;
         script->functionTemp[0] = 1;
     }
-    
+
     data->pos.x = data->pos.x + data->moveSpeed * sin_deg(data->moveAngle);
     data->pos.z = data->pos.z - data->moveSpeed * cos_deg(data->moveAngle);
     data->pos.y = data->pos.y + data->fallSpeed;
     data->fallSpeed -= data->gravity;
-    
+
     data->duration--;
     if (data->duration < 0) {
         data->fallSpeed = 0.0f;
@@ -194,7 +194,7 @@ API_CALLABLE(N(SetStickerGravity)) {
     Bytecode* args = script->ptrReadPos;
     f32 gravity = evt_get_float_variable(script, *args++);
     StickerData* data = (StickerData*) evt_get_variable(script, MV_StickerData);
-    
+
     data->gravity = gravity;
     return ApiStatus_DONE2;
 }

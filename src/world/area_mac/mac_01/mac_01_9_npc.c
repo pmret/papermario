@@ -1,6 +1,7 @@
 #include "mac_01.h"
 #include "effects.h"
 #include "hud_element.h"
+#include "sprite/player.h"
 
 extern IconHudScriptPair gItemHudScripts[];
 extern EvtScript N(EVS_MerlonBargeOut);
@@ -226,7 +227,7 @@ API_CALLABLE(N(func_802447E0_805060)) {
         script->functionTemp[1] = 255;
     }
 
-    set_screen_overlay_params_front(0, script->functionTemp[1]);
+    set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, script->functionTemp[1]);
 
     if (script->functionTemp[1] == 255) {
         return ApiStatus_DONE2;
@@ -246,7 +247,7 @@ API_CALLABLE(N(func_80244848_8050C8)) {
         return ApiStatus_DONE2;
     }
 
-    set_screen_overlay_params_front(0, script->functionTemp[1]);
+    set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, script->functionTemp[1]);
     return ApiStatus_BLOCK;
 }
 
@@ -601,7 +602,7 @@ EvtScript N(EVS_Scene_KoopaBrosUnmasked) = {
     EVT_THREAD
         EVT_SET(MF_KoopaBrosSceneLock, FALSE)
         EVT_WAIT(5)
-        EVT_CALL(SpeakToPlayer, NPC_KoopaBros_01, ANIM_KoopaBros_Red_Anim0B, ANIM_KoopaBros_Red_Anim0B, 5, MSG_MAC_Plaza_002F)
+        EVT_CALL(SpeakToPlayer, NPC_KoopaBros_01, ANIM_KoopaBros_Red_Hurt, ANIM_KoopaBros_Red_Hurt, 5, MSG_MAC_Plaza_002F)
         EVT_SET(MF_KoopaBrosSceneLock, TRUE)
     EVT_END_THREAD
     EVT_THREAD
@@ -617,7 +618,7 @@ EvtScript N(EVS_Scene_KoopaBrosUnmasked) = {
         EVT_CALL(SetNpcPos, NPC_DarkToad_01, LVar3, NPC_DISPOSE_POS_Y, LVar2)
         EVT_CALL(SetNpcPos, NPC_KoopaBros_01, LVar3, LVar4, LVar5)
         EVT_CALL(SetNpcJumpscale, NPC_KoopaBros_01, EVT_FLOAT(1.0))
-        EVT_CALL(SetNpcAnimation, NPC_KoopaBros_01, ANIM_KoopaBros_Red_Anim0B)
+        EVT_CALL(SetNpcAnimation, NPC_KoopaBros_01, ANIM_KoopaBros_Red_Hurt)
         EVT_CALL(NpcJump0, NPC_KoopaBros_01, LVar3, LVar4, LVar5, 10 * DT)
     EVT_END_THREAD
     EVT_THREAD
@@ -634,7 +635,7 @@ EvtScript N(EVS_Scene_KoopaBrosUnmasked) = {
         EVT_CALL(SetNpcPos, NPC_DarkToad_02, LVar3, NPC_DISPOSE_POS_Y, LVar2)
         EVT_CALL(SetNpcPos, NPC_KoopaBros_02, LVar3, LVar4, LVar5)
         EVT_CALL(SetNpcJumpscale, NPC_KoopaBros_02, EVT_FLOAT(1.0))
-        EVT_CALL(SetNpcAnimation, NPC_KoopaBros_02, ANIM_KoopaBros_Black_Anim0B)
+        EVT_CALL(SetNpcAnimation, NPC_KoopaBros_02, ANIM_KoopaBros_Black_Hurt)
         EVT_CALL(NpcJump0, NPC_KoopaBros_02, LVar3, LVar4, LVar5, 10 * DT)
     EVT_END_THREAD
     EVT_THREAD
@@ -651,7 +652,7 @@ EvtScript N(EVS_Scene_KoopaBrosUnmasked) = {
         EVT_CALL(SetNpcPos, NPC_DarkToad_03, LVar3, NPC_DISPOSE_POS_Y, LVar2)
         EVT_CALL(SetNpcPos, NPC_KoopaBros_03, LVar3, LVar4, LVar5)
         EVT_CALL(SetNpcJumpscale, NPC_KoopaBros_03, EVT_FLOAT(1.0))
-        EVT_CALL(SetNpcAnimation, NPC_KoopaBros_03, ANIM_KoopaBros_Yellow_Anim0B)
+        EVT_CALL(SetNpcAnimation, NPC_KoopaBros_03, ANIM_KoopaBros_Yellow_Hurt)
         EVT_CALL(NpcJump0, NPC_KoopaBros_03, LVar3, LVar4, LVar5, 10 * DT)
     EVT_END_THREAD
     EVT_WAIT(30 * DT)
@@ -667,7 +668,7 @@ EvtScript N(EVS_Scene_KoopaBrosUnmasked) = {
     EVT_CALL(SetNpcPos, NPC_DarkToad_04, LVar3, NPC_DISPOSE_POS_Y, LVar2)
     EVT_CALL(SetNpcPos, NPC_KoopaBros_04, LVar3, LVar4, LVar5)
     EVT_CALL(SetNpcJumpscale, NPC_KoopaBros_04, EVT_FLOAT(1.0))
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBros_04, ANIM_KoopaBros_Green_Anim0B)
+    EVT_CALL(SetNpcAnimation, NPC_KoopaBros_04, ANIM_KoopaBros_Green_Hurt)
     EVT_CALL(NpcJump0, NPC_KoopaBros_04, LVar3, LVar4, LVar5, 10 * DT)
     EVT_CALL(SetNpcAnimation, NPC_Merlon, ANIM_Merlon_Idle)
     EVT_LOOP(0)
@@ -676,24 +677,24 @@ EvtScript N(EVS_Scene_KoopaBrosUnmasked) = {
         EVT_END_IF
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBros_01, ANIM_KoopaBros_Red_Anim04)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBros_02, ANIM_KoopaBros_Black_Anim04)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBros_03, ANIM_KoopaBros_Yellow_Anim04)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBros_04, ANIM_KoopaBros_Green_Anim04)
+    EVT_CALL(SetNpcAnimation, NPC_KoopaBros_01, ANIM_KoopaBros_Red_Idle)
+    EVT_CALL(SetNpcAnimation, NPC_KoopaBros_02, ANIM_KoopaBros_Black_Idle)
+    EVT_CALL(SetNpcAnimation, NPC_KoopaBros_03, ANIM_KoopaBros_Yellow_Idle)
+    EVT_CALL(SetNpcAnimation, NPC_KoopaBros_04, ANIM_KoopaBros_Green_Idle)
     EVT_CALL(SpeakToPlayer, NPC_Merlon, ANIM_Merlon_Talk, ANIM_Merlon_Idle, 0, MSG_MAC_Plaza_0030)
     EVT_WAIT(10 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_KoopaBros_01, ANIM_KoopaBros_Red_Anim14, ANIM_KoopaBros_Red_Anim04, 0, MSG_MAC_Plaza_0031)
+    EVT_CALL(SpeakToPlayer, NPC_KoopaBros_01, ANIM_KoopaBros_Red_Talk, ANIM_KoopaBros_Red_Idle, 0, MSG_MAC_Plaza_0031)
     EVT_CALL(InterpNpcYaw, NPC_KoopaBros_01, 90, 0)
     EVT_WAIT(10 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_KoopaBros_01, ANIM_KoopaBros_Red_Anim14, ANIM_KoopaBros_Red_Anim04, 5, MSG_MAC_Plaza_0032)
+    EVT_CALL(SpeakToPlayer, NPC_KoopaBros_01, ANIM_KoopaBros_Red_Talk, ANIM_KoopaBros_Red_Idle, 5, MSG_MAC_Plaza_0032)
     EVT_CALL(InterpNpcYaw, NPC_KoopaBros_01, 90, 0)
     EVT_CALL(InterpNpcYaw, NPC_KoopaBros_02, 90, 0)
     EVT_CALL(InterpNpcYaw, NPC_KoopaBros_03, 90, 0)
     EVT_CALL(InterpNpcYaw, NPC_KoopaBros_04, 90, 0)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBros_01, ANIM_KoopaBros_Red_Anim03)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBros_02, ANIM_KoopaBros_Black_Anim03)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBros_03, ANIM_KoopaBros_Yellow_Anim03)
-    EVT_CALL(SetNpcAnimation, NPC_KoopaBros_04, ANIM_KoopaBros_Green_Anim03)
+    EVT_CALL(SetNpcAnimation, NPC_KoopaBros_01, ANIM_KoopaBros_Red_Run)
+    EVT_CALL(SetNpcAnimation, NPC_KoopaBros_02, ANIM_KoopaBros_Black_Run)
+    EVT_CALL(SetNpcAnimation, NPC_KoopaBros_03, ANIM_KoopaBros_Yellow_Run)
+    EVT_CALL(SetNpcAnimation, NPC_KoopaBros_04, ANIM_KoopaBros_Green_Run)
     EVT_WAIT(15 * DT)
     EVT_CALL(PlaySoundAtNpc, NPC_KoopaBros_03, SOUND_174, SOUND_SPACE_MODE_0)
     EVT_THREAD
@@ -1132,10 +1133,10 @@ NpcData N(NpcData_DarkToads)[] = {
 };
 
 AnimID N(ExtraAnims_KoopaBros)[] = {
-    ANIM_KoopaBros_Black_Anim03,
-    ANIM_KoopaBros_Black_Anim04,
-    ANIM_KoopaBros_Black_Anim0B,
-    ANIM_KoopaBros_Black_Anim14,
+    ANIM_KoopaBros_Black_Run,
+    ANIM_KoopaBros_Black_Idle,
+    ANIM_KoopaBros_Black_Hurt,
+    ANIM_KoopaBros_Black_Talk,
     ANIM_LIST_END
 };
 
@@ -1148,22 +1149,22 @@ NpcData N(NpcData_KoopaBros)[] = {
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = {
-            .idle   = ANIM_KoopaBros_Black_Anim04,
-            .walk   = ANIM_KoopaBros_Black_Anim02,
-            .run    = ANIM_KoopaBros_Black_Anim03,
-            .chase  = ANIM_KoopaBros_Black_Anim03,
-            .anim_4 = ANIM_KoopaBros_Black_Anim04,
-            .anim_5 = ANIM_KoopaBros_Black_Anim04,
-            .death  = ANIM_KoopaBros_Black_Anim0A,
-            .hit    = ANIM_KoopaBros_Black_Anim0A,
-            .anim_8 = ANIM_KoopaBros_Black_Anim03,
-            .anim_9 = ANIM_KoopaBros_Black_Anim03,
-            .anim_A = ANIM_KoopaBros_Black_Anim03,
-            .anim_B = ANIM_KoopaBros_Black_Anim03,
-            .anim_C = ANIM_KoopaBros_Black_Anim03,
-            .anim_D = ANIM_KoopaBros_Black_Anim03,
-            .anim_E = ANIM_KoopaBros_Black_Anim03,
-            .anim_F = ANIM_KoopaBros_Black_Anim03,
+            .idle   = ANIM_KoopaBros_Black_Idle,
+            .walk   = ANIM_KoopaBros_Black_Walk,
+            .run    = ANIM_KoopaBros_Black_Run,
+            .chase  = ANIM_KoopaBros_Black_Run,
+            .anim_4 = ANIM_KoopaBros_Black_Idle,
+            .anim_5 = ANIM_KoopaBros_Black_Idle,
+            .death  = ANIM_KoopaBros_Black_HurtStill,
+            .hit    = ANIM_KoopaBros_Black_HurtStill,
+            .anim_8 = ANIM_KoopaBros_Black_Run,
+            .anim_9 = ANIM_KoopaBros_Black_Run,
+            .anim_A = ANIM_KoopaBros_Black_Run,
+            .anim_B = ANIM_KoopaBros_Black_Run,
+            .anim_C = ANIM_KoopaBros_Black_Run,
+            .anim_D = ANIM_KoopaBros_Black_Run,
+            .anim_E = ANIM_KoopaBros_Black_Run,
+            .anim_F = ANIM_KoopaBros_Black_Run,
         },
         .extraAnimations = N(ExtraAnims_KoopaBros),
     },
@@ -1175,22 +1176,22 @@ NpcData N(NpcData_KoopaBros)[] = {
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = {
-            .idle   = ANIM_KoopaBros_Red_Anim04,
-            .walk   = ANIM_KoopaBros_Red_Anim02,
-            .run    = ANIM_KoopaBros_Red_Anim03,
-            .chase  = ANIM_KoopaBros_Red_Anim03,
-            .anim_4 = ANIM_KoopaBros_Red_Anim04,
-            .anim_5 = ANIM_KoopaBros_Red_Anim04,
-            .death  = ANIM_KoopaBros_Red_Anim0A,
-            .hit    = ANIM_KoopaBros_Red_Anim0A,
-            .anim_8 = ANIM_KoopaBros_Red_Anim03,
-            .anim_9 = ANIM_KoopaBros_Red_Anim03,
-            .anim_A = ANIM_KoopaBros_Red_Anim03,
-            .anim_B = ANIM_KoopaBros_Red_Anim03,
-            .anim_C = ANIM_KoopaBros_Red_Anim03,
-            .anim_D = ANIM_KoopaBros_Red_Anim03,
-            .anim_E = ANIM_KoopaBros_Red_Anim03,
-            .anim_F = ANIM_KoopaBros_Red_Anim03,
+            .idle   = ANIM_KoopaBros_Red_Idle,
+            .walk   = ANIM_KoopaBros_Red_Walk,
+            .run    = ANIM_KoopaBros_Red_Run,
+            .chase  = ANIM_KoopaBros_Red_Run,
+            .anim_4 = ANIM_KoopaBros_Red_Idle,
+            .anim_5 = ANIM_KoopaBros_Red_Idle,
+            .death  = ANIM_KoopaBros_Red_HurtStill,
+            .hit    = ANIM_KoopaBros_Red_HurtStill,
+            .anim_8 = ANIM_KoopaBros_Red_Run,
+            .anim_9 = ANIM_KoopaBros_Red_Run,
+            .anim_A = ANIM_KoopaBros_Red_Run,
+            .anim_B = ANIM_KoopaBros_Red_Run,
+            .anim_C = ANIM_KoopaBros_Red_Run,
+            .anim_D = ANIM_KoopaBros_Red_Run,
+            .anim_E = ANIM_KoopaBros_Red_Run,
+            .anim_F = ANIM_KoopaBros_Red_Run,
         },
         .extraAnimations = N(ExtraAnims_KoopaBros),
     },
@@ -1202,22 +1203,22 @@ NpcData N(NpcData_KoopaBros)[] = {
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = {
-            .idle   = ANIM_KoopaBros_Yellow_Anim04,
-            .walk   = ANIM_KoopaBros_Yellow_Anim02,
-            .run    = ANIM_KoopaBros_Yellow_Anim03,
-            .chase  = ANIM_KoopaBros_Yellow_Anim03,
-            .anim_4 = ANIM_KoopaBros_Yellow_Anim04,
-            .anim_5 = ANIM_KoopaBros_Yellow_Anim04,
-            .death  = ANIM_KoopaBros_Yellow_Anim0A,
-            .hit    = ANIM_KoopaBros_Yellow_Anim0A,
-            .anim_8 = ANIM_KoopaBros_Yellow_Anim03,
-            .anim_9 = ANIM_KoopaBros_Yellow_Anim03,
-            .anim_A = ANIM_KoopaBros_Yellow_Anim03,
-            .anim_B = ANIM_KoopaBros_Yellow_Anim03,
-            .anim_C = ANIM_KoopaBros_Yellow_Anim03,
-            .anim_D = ANIM_KoopaBros_Yellow_Anim03,
-            .anim_E = ANIM_KoopaBros_Yellow_Anim03,
-            .anim_F = ANIM_KoopaBros_Yellow_Anim03,
+            .idle   = ANIM_KoopaBros_Yellow_Idle,
+            .walk   = ANIM_KoopaBros_Yellow_Walk,
+            .run    = ANIM_KoopaBros_Yellow_Run,
+            .chase  = ANIM_KoopaBros_Yellow_Run,
+            .anim_4 = ANIM_KoopaBros_Yellow_Idle,
+            .anim_5 = ANIM_KoopaBros_Yellow_Idle,
+            .death  = ANIM_KoopaBros_Yellow_HurtStill,
+            .hit    = ANIM_KoopaBros_Yellow_HurtStill,
+            .anim_8 = ANIM_KoopaBros_Yellow_Run,
+            .anim_9 = ANIM_KoopaBros_Yellow_Run,
+            .anim_A = ANIM_KoopaBros_Yellow_Run,
+            .anim_B = ANIM_KoopaBros_Yellow_Run,
+            .anim_C = ANIM_KoopaBros_Yellow_Run,
+            .anim_D = ANIM_KoopaBros_Yellow_Run,
+            .anim_E = ANIM_KoopaBros_Yellow_Run,
+            .anim_F = ANIM_KoopaBros_Yellow_Run,
         },
         .extraAnimations = N(ExtraAnims_KoopaBros),
     },
@@ -1229,22 +1230,22 @@ NpcData N(NpcData_KoopaBros)[] = {
         .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_ENABLE_HIT_SCRIPT | ENEMY_FLAG_IGNORE_WORLD_COLLISION | ENEMY_FLAG_IGNORE_PLAYER_COLLISION | ENEMY_FLAG_IGNORE_ENTITY_COLLISION | ENEMY_FLAG_800 | ENEMY_FLAG_NO_SHADOW_RAYCAST | ENEMY_FLAG_400000,
         .drops = NO_DROPS,
         .animations = {
-            .idle   = ANIM_KoopaBros_Green_Anim04,
-            .walk   = ANIM_KoopaBros_Green_Anim02,
-            .run    = ANIM_KoopaBros_Green_Anim03,
-            .chase  = ANIM_KoopaBros_Green_Anim03,
-            .anim_4 = ANIM_KoopaBros_Green_Anim04,
-            .anim_5 = ANIM_KoopaBros_Green_Anim04,
-            .death  = ANIM_KoopaBros_Green_Anim0A,
-            .hit    = ANIM_KoopaBros_Green_Anim0A,
-            .anim_8 = ANIM_KoopaBros_Green_Anim03,
-            .anim_9 = ANIM_KoopaBros_Green_Anim03,
-            .anim_A = ANIM_KoopaBros_Green_Anim03,
-            .anim_B = ANIM_KoopaBros_Green_Anim03,
-            .anim_C = ANIM_KoopaBros_Green_Anim03,
-            .anim_D = ANIM_KoopaBros_Green_Anim03,
-            .anim_E = ANIM_KoopaBros_Green_Anim03,
-            .anim_F = ANIM_KoopaBros_Green_Anim03,
+            .idle   = ANIM_KoopaBros_Green_Idle,
+            .walk   = ANIM_KoopaBros_Green_Walk,
+            .run    = ANIM_KoopaBros_Green_Run,
+            .chase  = ANIM_KoopaBros_Green_Run,
+            .anim_4 = ANIM_KoopaBros_Green_Idle,
+            .anim_5 = ANIM_KoopaBros_Green_Idle,
+            .death  = ANIM_KoopaBros_Green_HurtStill,
+            .hit    = ANIM_KoopaBros_Green_HurtStill,
+            .anim_8 = ANIM_KoopaBros_Green_Run,
+            .anim_9 = ANIM_KoopaBros_Green_Run,
+            .anim_A = ANIM_KoopaBros_Green_Run,
+            .anim_B = ANIM_KoopaBros_Green_Run,
+            .anim_C = ANIM_KoopaBros_Green_Run,
+            .anim_D = ANIM_KoopaBros_Green_Run,
+            .anim_E = ANIM_KoopaBros_Green_Run,
+            .anim_F = ANIM_KoopaBros_Green_Run,
         },
         .extraAnimations = N(ExtraAnims_KoopaBros),
     },

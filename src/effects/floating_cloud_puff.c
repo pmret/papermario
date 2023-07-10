@@ -29,7 +29,7 @@ EffectInstance* floating_cloud_puff_main(
     bp.update = floating_cloud_puff_update;
     bp.renderWorld = floating_cloud_puff_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_FLOATING_CLOUD_PUFF;
 
     effect = shim_create_effect_instance(&bp);
@@ -66,8 +66,8 @@ void floating_cloud_puff_update(EffectInstance* effect) {
     FloatingCloudPuffFXData* data = effect->data.floatingCloudPuff;
     s32 unk_14;
 
-    if (effect->flags & 0x10) {
-        effect->flags &= ~0x10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         data->unk_10 = 16;
     }
 

@@ -1,5 +1,6 @@
 #include "flo_10.h"
 #include "sprite/npc/Lily.h"
+#include "sprite/player.h"
 
 #include "world/common/complete/GiveReward.inc.c"
 

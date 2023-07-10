@@ -1,4 +1,5 @@
 #include "jan_03.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/Toad_Stationary.inc.c"
 
@@ -31,7 +32,7 @@ MAP_STATIC_PAD(1,key_item);
 
 s32 N(RedYoshiKidLetters)[] = {
     ITEM_LETTER_CHAIN_YOSHI_KID,
-    ITEM_NONE 
+    ITEM_NONE
 };
 
 EvtScript N(EVS_LetterPrompt_RedYoshiKid) = {
@@ -47,7 +48,7 @@ EvtScript N(EVS_LetterPrompt_RedYoshiKid) = {
 
 s32 N(KoloradoLetters)[] = {
     ITEM_LETTER_TO_KOLORADO,
-    ITEM_NONE 
+    ITEM_NONE
 };
 
 EvtScript N(EVS_LetterPrompt_Kolorado) = {
@@ -620,7 +621,7 @@ EvtScript N(EVS_NpcInit_Raven) = {
 
 s32 N(VolcanoVaseList)[] = {
     ITEM_VOLCANO_VASE,
-    -1 
+    -1
 };
 
 EvtScript N(EVS_NpcInteract_Kolorado) = {

@@ -10,8 +10,8 @@ s32 contRmbForceStopEndMesg(NUSiCommonMesg* mesg);
 
 u32 nuContRmbSearchTime = 300;
 
-s32 (*D_80093CE4[])(NUSiCommonMesg*) = { 
-    contRmbRetrace, contRmbCheckMesg, contRmbStartMesg, contRmbStopMesg, contRmbForceStopMesg, contRmbForceStopEndMesg, 
+s32 (*D_80093CE4[])(NUSiCommonMesg*) = {
+    contRmbRetrace, contRmbCheckMesg, contRmbStartMesg, contRmbStopMesg, contRmbForceStopMesg, contRmbForceStopEndMesg,
     NULL
 };
 

@@ -615,10 +615,10 @@ EvtScript N(EVS_OnInteract_Pedestal) = {
     EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
     EVT_IF_LT(LVar0, 0)
         EVT_SET(LVar0, -80)
-        EVT_SET(LocalFlag(0), FALSE)
+        EVT_SET(LFlag0, FALSE)
     EVT_ELSE
         EVT_SET(LVar0, 80)
-        EVT_SET(LocalFlag(0), TRUE)
+        EVT_SET(LFlag0, TRUE)
     EVT_END_IF
     EVT_THREAD
         EVT_WAIT(10)
@@ -645,7 +645,7 @@ EvtScript N(EVS_OnInteract_Pedestal) = {
     EVT_EXEC(N(EVS_InterpChompStatueRotation))
     EVT_WAIT(60)
     EVT_WAIT(50)
-    EVT_IF_EQ(LocalFlag(0), FALSE)
+    EVT_IF_EQ(LFlag0, FALSE)
         EVT_CALL(GotoMap, EVT_PTR("sbk_30"), sbk_30_ENTRY_4)
     EVT_ELSE
         EVT_CALL(GotoMap, EVT_PTR("sbk_30"), sbk_30_ENTRY_5)

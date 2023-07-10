@@ -1,5 +1,6 @@
 #include "kkj_14.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 Vec3f N(PeachTossPath)[] = {
     { -307.0,    30.0,  -30.0 },

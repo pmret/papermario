@@ -1,5 +1,6 @@
 #include "dgb_18.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 extern EvtScript N(EVS_NpcAI_Tubba_Chase);
 extern EvtScript N(EVS_NpcAI_Tubba_WakeUp);

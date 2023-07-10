@@ -17,6 +17,7 @@ void boot_idle(void* data);
 void boot_main(void* data);
 
 void is_debug_init(void);
+void is_debug_panic(const char* message, char* file, s32 line);
 
 f32 signF(f32 val);
 
@@ -61,7 +62,7 @@ u32 get_entity_type(s32 arg0);
 Entity* get_entity_by_index(s32 index);
 s32 create_entity(EntityBlueprint* bp, ...);
 void entity_shattering_idle(Entity* entity);
-void func_802666E4(Actor* actor, f32 x, f32 y, f32 z, s32 damage);
+void show_damage_fx(Actor* actor, f32 x, f32 y, f32 z, s32 damage);
 
 s32 entity_raycast_down(f32*, f32*, f32*, f32*, f32*, f32*);
 
@@ -137,9 +138,9 @@ f32 player_fall_distance(void);
 void func_800E4AD8(s32 arg0);
 f32 player_check_collision_below(f32, s32* colliderID);
 s32 can_trigger_loading_zone(void);
-void func_80266684(void);
-void func_802667F0(s32, Actor*, f32, f32, f32);
-s32 func_802591EC(s32, ActorPart*, s32, Matrix4f, s32);
+void update_damage_popups(void);
+void show_action_rating(s32, Actor*, f32, f32, f32);
+s32 render_with_adjusted_palettes(s32, ActorPart*, s32, Matrix4f, s32);
 
 HeapNode* general_heap_create(void);
 void* general_heap_malloc(s32 size);
@@ -286,7 +287,7 @@ void set_game_mode(s16 idx);
 
 f32 get_xz_dist_to_player(f32, f32);
 void func_800E06C0(s32);
-void close_status_menu(void);
+void close_status_bar(void);
 Evt* func_802C39F8(Evt* parentScript, Bytecode* nextLine, s32 newState);
 Evt* start_child_script(Evt* parentScript, EvtScript* source, s32 initialState);
 Evt* restart_script(Evt* script);
@@ -373,10 +374,10 @@ void btl_state_update_celebration(void);
 void btl_draw_upgrade_windows(s32);
 void btl_state_draw_celebration(void);
 
-void func_8024F7C8(void);
+void btl_bonk_cleanup(void);
 void func_80263E08(Actor*, ActorPart*, AnimID);
-void func_80266978(void);
-void func_80266B14(void);
+void update_action_ratings(void);
+void update_health_bars(void);
 s32 btl_cam_is_moving_done(void);
 void btl_popup_messages_update(void);
 void btl_popup_messages_draw_world_geometry(void);
@@ -486,8 +487,7 @@ void set_map_transition_effect(ScreenTransition);
 void set_tex_panner(struct Model* model, s32 texPannerID);
 void set_custom_gfx(s32 customGfxIndex, Gfx* pre, Gfx* post);
 
-s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 facingAngleSign,
-                     s32 pickupVar);
+s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 angle, s32 pickupVar);
 s32 make_item_entity_delayed(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pickupDelay, s32 pickupVar);
 void set_item_entity_position(s32 itemEntityIndex, f32 x, f32 y, f32 z);
 ItemEntity* get_item_entity(s32 itemEntityIndex);
@@ -562,7 +562,7 @@ void create_part_shadow_by_ref(s32 arg0, ActorPart* part);
 
 void spawn_drops(Enemy* enemy);
 
-void func_80266D6C(ActorPart*, s32);
+void set_part_pal_adjustment(ActorPart*, s32);
 char* int_to_string(s32, char*, s32);
 
 Evt* get_script_by_index(s32 index);
@@ -625,7 +625,7 @@ void suggest_player_anim_always_forward(AnimID anim);
 void suggest_player_anim_allow_backward(AnimID anim);
 void subtract_hp(s32 amt);
 void draw_status_ui(void);
-void open_status_menu_long(void);
+void open_status_bar_long(void);
 
 void suspend_all_group(s32 groupFlags);
 void kill_script(Evt* instanceToKill);
@@ -634,13 +634,13 @@ void exec_entity_commandlist(Entity* entity);
 void show_start_recovery_shimmer(f32 x, f32 y, f32 z, s32 arg3);
 void show_recovery_shimmer(f32 x, f32 y, f32 z, s32 arg3);
 
-void show_damage_popup(f32 x, f32 y, f32 z, s32 damageAmount, s32);
+void show_next_damage_popup(f32 x, f32 y, f32 z, s32 damageAmount, s32);
 void add_xz_vec3f(Vec3f* vector, f32 speed, f32 angleDeg);
 void add_xz_vec3f_copy1(Vec3f* vector, f32 speed, f32 angleDeg);
 void add_xz_vec3f_copy2(Vec3f* vector, f32 speed, f32 angleDeg);
 void play_movement_dust_effects(s32 var0, f32 xPos, f32 yPos, f32 zPos, f32 angleDeg);
 
-void func_80138D88(s32, s32, s32, s32, f32);
+void draw_prev_frame_buffer_at_screen_pos(s32, s32, s32, s32, f32);
 void func_8013A4D0(void);
 
 void btl_draw_ui(void);
@@ -664,8 +664,8 @@ void startup_draw_prim_rect(s16 left, s16 top, s16 right, s16 bottom, u16 r, u16
 void startup_draw_prim_rect_COPY(s16 left, s16 top, s16 right, s16 bottom, u16 r, u16 g, u16 b, u16 a);
 void btl_draw_prim_quad(u8 r, u8 g, u8 b, u8 a, u16 left, u16 top, u16 arg6, u16 arg7);
 void reset_all_actor_sounds(Actor*);
-void decrement_status_menu_disabled(void);
-void increment_status_menu_disabled(void);
+void decrement_status_bar_disabled(void);
+void increment_status_bar_disabled(void);
 void btl_delete_actor(Actor* actor);
 void create_status_debuff(s32, s32);
 void create_status_static(s32, s32);
@@ -744,7 +744,7 @@ void state_step_demo(void);
 void state_drawUI_demo(void);
 void game_mode_set_fpDrawAuxUI(s32 i, void (*fn)(void));
 
-void func_80260A60(void);
+void btl_set_player_idle_anims(void);
 
 void shim_create_audio_system_obfuscated(void);
 void shim_load_engine_data_obfuscated(void);
@@ -806,7 +806,7 @@ void func_80266EA8(ActorPart*, s32);
 void func_80266E40(Actor*);
 void func_80267018(Actor* actor, s32 arg1);
 void remove_player_buffs(s32);
-s32 is_actor_hp_bar_visible(Actor*);
+s32 is_actor_health_bar_visible(Actor*);
 
 void sin_cos_rad(f32 rad, f32* outSinTheta, f32* outCosTheta);
 
@@ -844,7 +844,7 @@ void partner_init_after_battle(s32 arg0);
 void load_map_script_lib(void);
 void remove_item_entity_by_index(s32 index);
 void set_entity_commandlist(Entity* entity, s32* entityScript);
-s32 func_800DFCF4(void);
+s32 is_player_dismounted(void);
 void func_800EF300(void);
 void func_800EF314(void);
 void func_800EF43C(void);
@@ -916,7 +916,7 @@ void phys_update_action_state(void);
 void collision_main_lateral(void);
 void handle_floor_behavior(void);
 void check_input_open_menus(void);
-void check_input_status_menu(void);
+void check_input_status_bar(void);
 
 void update_player(void);
 
@@ -941,7 +941,7 @@ void func_800E9810(void);
 void func_800E983C(void);
 void func_800E984C(void);
 s32 func_800E9860(void);
-void status_menu_respond_to_changes(void);
+void status_bar_respond_to_changes(void);
 void func_800E98EC(void);
 void func_800E9900(void);
 void func_800F0C9C(void);
@@ -958,9 +958,9 @@ void hide_coin_counter(void);
 void set_message_msg(s32 msgID, s32 index);
 void set_message_value(s32 value, s32 index);
 s32 store_item(s32 itemID);
-void open_status_menu_short(void);
-void func_8024EFE0(f32 x, f32 y, f32 z, s32, s32, s32);
-void func_802664DC(f32 x, f32 y, f32 z, s32 attack, s32 a);
+void open_status_bar_short(void);
+void show_immune_bonk(f32 x, f32 y, f32 z, s32, s32, s32);
+void show_primary_damage_popup(f32 x, f32 y, f32 z, s32 attack, s32 a);
 s32 dispatch_damage_event_partner(s32 damageAmount, s32 event, s32 stopMotion);
 void disable_actor_blur(Actor*);
 void reset_actor_blur(Actor*);
@@ -982,7 +982,7 @@ void func_8025DA60(ActorPart*, s32);
 void func_8025DBC8(ActorPart*, s32);
 void func_8025DD40(ActorPart*, s32);
 void func_8025DE88(ActorPart*, s32);
-void status_menu_ignore_changes(void);
+void status_bar_ignore_changes(void);
 void imgfx_release_instance(u32);
 
 void set_script_flags(Evt* script, s32 flags);
@@ -1006,23 +1006,23 @@ void render_player(void);
 void render_workers_world(void);
 void render_effects_world(void);
 s32 get_asset_offset(char*, s32*);
-void initialize_status_menu(void);
-void status_menu_start_blinking_fp(void);
-s32 is_status_menu_visible(void);
-void status_menu_start_blinking_starpoints(void);
-void status_menu_stop_blinking_starpoints(void);
-void status_menu_start_blinking_hp(void);
-void status_menu_start_blinking_sp(void);
-void status_menu_stop_blinking_fp(void);
-void status_menu_stop_blinking_hp(void);
-void status_menu_stop_blinking_sp(void);
-void status_menu_start_blinking_sp_bars(s32 numBarsToBlink);
-void status_menu_draw_number(s32 iconID, s32 x, s32 y, s32 value, s32 numDigits);
-void status_menu_draw_stat(s32 id, s32 x, s32 y, s32, s32);
+void initialize_status_bar(void);
+void status_bar_start_blinking_fp(void);
+s32 is_status_bar_visible(void);
+void status_bar_start_blinking_starpoints(void);
+void status_bar_stop_blinking_starpoints(void);
+void status_bar_start_blinking_hp(void);
+void status_bar_start_blinking_sp(void);
+void status_bar_stop_blinking_fp(void);
+void status_bar_stop_blinking_hp(void);
+void status_bar_stop_blinking_sp(void);
+void status_bar_start_blinking_sp_bars(s32 numBarsToBlink);
+void status_bar_draw_number(s32 iconID, s32 x, s32 y, s32 value, s32 numDigits);
+void status_bar_draw_stat(s32 id, s32 x, s32 y, s32, s32);
 void set_background_size(s16, s16, s16, s16);
 void read_background_size(BackgroundHeader*);
 void set_max_SP(s8);
-void sync_status_menu(void);
+void sync_status_bar(void);
 void create_cameras_a(void);
 void func_80045AC0(void);
 void func_8005AF84(void);
@@ -1038,9 +1038,9 @@ void load_map_bg(char* optAssetName);
 void reset_background_settings(void);
 void func_80138188(void);
 void func_80266970(Actor*);
-void func_80266ADC(Actor*);
-void func_80266AF8(Actor*);
-void func_80266E14(ActorPart*);
+void show_actor_health_bar(Actor*);
+void hide_actor_health_bar(Actor*);
+void clear_part_pal_adjustment(ActorPart*);
 void func_800E24F8(void);
 void load_tattle_flags(s32);
 s32 use_consumable(s32 invSlot);
@@ -1090,14 +1090,14 @@ void func_80116698(void);
 void func_8011B950(u16, s32, s32, s32);
 
 void backup_map_collision_data(void);
-void reset_status_menu(void);
+void reset_status_bar(void);
 void btl_save_world_cameras(void);
 void load_battle_section(void);
 void btl_update(void);
 void update_item_entities(void);
 void iterate_models(void);
 void restore_map_collision_data(void);
-void load_model_textures(struct ModelNode* model, s32 romOffset, s32 size);
+void mdl_load_all_textures(struct ModelNode* model, s32 romOffset, s32 size);
 void calculate_model_sizes(void);
 
 #endif

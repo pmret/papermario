@@ -1,12 +1,28 @@
 #include "common.h"
 
-s32 N(hammer_icons)[] = { ITEM_HAMMER1_ICON, ITEM_HAMMER2_ICON, ITEM_HAMMER3_ICON };
+s32 N(hammer_icons)[] = {
+    ITEM_HAMMER1_ICON,
+    ITEM_HAMMER2_ICON,
+    ITEM_HAMMER3_ICON
+};
 
-s32 N(hammer_text)[] = { 73, 74, 75 };
+s32 N(hammer_text)[] = {
+    BTL_MSG_HAMMER_DISABLED_1,
+    BTL_MSG_HAMMER_DISABLED_2,
+    BTL_MSG_HAMMER_DISABLED_3
+};
 
-s32 N(jump_icons)[] = { ITEM_BOOTS1_ICON, ITEM_BOOTS2_ICON, ITEM_BOOTS3_ICON };
+s32 N(jump_icons)[] = {
+    ITEM_BOOTS1_ICON,
+    ITEM_BOOTS2_ICON,
+    ITEM_BOOTS3_ICON
+};
 
-s32 N(jump_text)[] = { 76, 77, 78 };
+s32 N(jump_text)[] = {
+    BTL_MSG_JUMP_DISABLED_1,
+    BTL_MSG_JUMP_DISABLED_2,
+    BTL_MSG_JUMP_DISABLED_3
+};
 
 API_CALLABLE(N(DisableRandomAbility)) {
     Bytecode* args = script->ptrReadPos;
@@ -45,7 +61,7 @@ API_CALLABLE(N(DisableRandomAbility)) {
         case 2:
             battleStatus->itemLossTurns = turnsLost;
             evt_set_variable(script, *args++, ITEM_ITEMS_ICON);
-            evt_set_variable(script, *args++, 79);
+            evt_set_variable(script, *args++, BTL_MSG_ITEMS_DISABLED);
             break;
     }
 

@@ -6,10 +6,10 @@ EvtScript N(EVS_GotoMap_hos_00_1) = {
     EVT_SET(LVar0, GB_KKJ_LastPartner)
     EVT_CALL(N(RestoreFromPeachState))
     EVT_CALL(PlaySound, SOUND_DC)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("hos_00"), hos_00_ENTRY_1, TRANSITION_12)
+    EVT_CALL(GotoMapSpecial, EVT_PTR("hos_00"), hos_00_ENTRY_1, TRANSITION_END_PEACH_INTERLUDE)
     EVT_WAIT(100)
 };
-    
+
 EvtScript N(EVS_ExitDoors_kkj_14_1) = {
     EVT_SET_GROUP(EVT_GROUP_1B)
     EVT_CALL(DisablePlayerInput, TRUE)

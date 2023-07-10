@@ -12,22 +12,22 @@
 
 #define BOMBSHELL_BLASTER_ANIMS \
 { \
-    .idle   = ANIM_BillBlaster_Gold_Anim01, \
-    .walk   = ANIM_BillBlaster_Gold_Anim01, \
-    .run    = ANIM_BillBlaster_Gold_Anim01, \
-    .chase  = ANIM_BillBlaster_Gold_Anim01, \
-    .anim_4 = ANIM_BillBlaster_Gold_Anim01, \
-    .anim_5 = ANIM_BillBlaster_Gold_Anim01, \
-    .death  = ANIM_BillBlaster_Gold_Anim03, \
-    .hit    = ANIM_BillBlaster_Gold_Anim03, \
-    .anim_8 = ANIM_BillBlaster_Gold_Anim02, \
-    .anim_9 = ANIM_BillBlaster_Gold_Anim01, \
-    .anim_A = ANIM_BillBlaster_Gold_Anim01, \
-    .anim_B = ANIM_BillBlaster_Gold_Anim01, \
-    .anim_C = ANIM_BillBlaster_Gold_Anim01, \
-    .anim_D = ANIM_BillBlaster_Gold_Anim01, \
-    .anim_E = ANIM_BillBlaster_Gold_Anim01, \
-    .anim_F = ANIM_BillBlaster_Gold_Anim01, \
+    .idle   = ANIM_BillBlaster_Gold_Idle, \
+    .walk   = ANIM_BillBlaster_Gold_Idle, \
+    .run    = ANIM_BillBlaster_Gold_Idle, \
+    .chase  = ANIM_BillBlaster_Gold_Idle, \
+    .anim_4 = ANIM_BillBlaster_Gold_Idle, \
+    .anim_5 = ANIM_BillBlaster_Gold_Idle, \
+    .death  = ANIM_BillBlaster_Gold_Hurt, \
+    .hit    = ANIM_BillBlaster_Gold_Hurt, \
+    .anim_8 = ANIM_BillBlaster_Gold_Fire, \
+    .anim_9 = ANIM_BillBlaster_Gold_Idle, \
+    .anim_A = ANIM_BillBlaster_Gold_Idle, \
+    .anim_B = ANIM_BillBlaster_Gold_Idle, \
+    .anim_C = ANIM_BillBlaster_Gold_Idle, \
+    .anim_D = ANIM_BillBlaster_Gold_Idle, \
+    .anim_E = ANIM_BillBlaster_Gold_Idle, \
+    .anim_F = ANIM_BillBlaster_Gold_Idle, \
 }
 
 #define BOMBSHELL_BILL_DROPS \
@@ -45,22 +45,22 @@
 
 #define BOMBSHELL_BILL_ANIMS \
 { \
-    .idle   = ANIM_BulletBill_Gold_Anim00, \
-    .walk   = ANIM_BulletBill_Gold_Anim02, \
-    .run    = ANIM_BulletBill_Gold_Anim03, \
-    .chase  = ANIM_BulletBill_Gold_Anim03, \
-    .anim_4 = ANIM_BulletBill_Gold_Anim00, \
-    .anim_5 = ANIM_BulletBill_Gold_Anim04, \
-    .death  = ANIM_BulletBill_Gold_Anim05, \
-    .hit    = ANIM_BulletBill_Gold_Anim05, \
-    .anim_8 = ANIM_BulletBill_Gold_Anim00, \
-    .anim_9 = ANIM_BulletBill_Gold_Anim00, \
-    .anim_A = ANIM_BulletBill_Gold_Anim00, \
-    .anim_B = ANIM_BulletBill_Gold_Anim00, \
-    .anim_C = ANIM_BulletBill_Gold_Anim00, \
-    .anim_D = ANIM_BulletBill_Gold_Anim00, \
-    .anim_E = ANIM_BulletBill_Gold_Anim00, \
-    .anim_F = ANIM_BulletBill_Gold_Anim00, \
+    .idle   = ANIM_BulletBill_Gold_Still, \
+    .walk   = ANIM_BulletBill_Gold_TenseCopy, \
+    .run    = ANIM_BulletBill_Gold_Tense, \
+    .chase  = ANIM_BulletBill_Gold_Tense, \
+    .anim_4 = ANIM_BulletBill_Gold_Still, \
+    .anim_5 = ANIM_BulletBill_Gold_Fire, \
+    .death  = ANIM_BulletBill_Gold_Hurt, \
+    .hit    = ANIM_BulletBill_Gold_Hurt, \
+    .anim_8 = ANIM_BulletBill_Gold_Still, \
+    .anim_9 = ANIM_BulletBill_Gold_Still, \
+    .anim_A = ANIM_BulletBill_Gold_Still, \
+    .anim_B = ANIM_BulletBill_Gold_Still, \
+    .anim_C = ANIM_BulletBill_Gold_Still, \
+    .anim_D = ANIM_BulletBill_Gold_Still, \
+    .anim_E = ANIM_BulletBill_Gold_Still, \
+    .anim_F = ANIM_BulletBill_Gold_Still, \
 }
 
 #define BOMBSHELL_BILL_NPC(npcID) \

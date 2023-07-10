@@ -1,5 +1,6 @@
 #include "jan_05.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 EvtScript N(EVS_SetupLogObjects) = {
     EVT_IF_EQ(GF_JAN05_CreateLogBridge, FALSE)

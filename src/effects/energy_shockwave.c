@@ -26,7 +26,7 @@ void energy_shockwave_main(
     bp.update = energy_shockwave_update;
     bp.renderWorld = energy_shockwave_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_ENERGY_SHOCKWAVE;
 
     effect = shim_create_effect_instance(&bp);
@@ -80,7 +80,7 @@ void energy_shockwave_update(EffectInstance* effect) {
         angle = func_E0200044(360, unk_2C);
         shim_sin_deg(angle);
         shim_cos_deg(angle);
-        shim_load_effect(58);
+        shim_load_effect(EFFECT_SHIMMER_WAVE);
         shimmer_wave_main(0, data->unk_04, data->unk_08, data->unk_0C, unk_2C * 8, 10.0f, 10, 20);
     }
 

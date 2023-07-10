@@ -1,4 +1,5 @@
 #include "nok_01.h"
+#include "sprite/player.h"
 
 s16 N(StationMseqMapping)[] = {
     0, 2, 1, 4

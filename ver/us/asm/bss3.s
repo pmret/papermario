@@ -106,7 +106,7 @@ dlabel entity_numShadows
 dlabel gSpriteShadingProfile
 .space 4
 
-dlabel entity_area_specific_data_is_loaded
+dlabel isAreaSpecificEntityDataLoaded
 .space 4
 
 dlabel entity_updateCounter
@@ -178,7 +178,7 @@ dlabel D_801516FC
 dlabel gMainGameState
 .space 0x00000040
 
-dlabel gCurrentTileDescriptor
+dlabel gCurrentTextureHeader
 .space 0x00000030
 
 dlabel wModelList
@@ -268,7 +268,7 @@ dlabel texPannerAuxU
 dlabel texPannerAuxV
 .space 0x00000040
 
-dlabel mdl_nextTextureAddress
+dlabel TextureHeapPos
 .space 4
 
 dlabel mdl_currentTransformGroupChildIndex
@@ -485,7 +485,10 @@ dlabel D_80155D8E
 .space 2
 
 dlabel D_80155D90
-.space 0x00000010
+.space 2
+
+dlabel pad_ItemEntity
+.space 0x000000E
 
 dlabel WorldItemEntities
 .space 0x00000400
@@ -511,10 +514,10 @@ dlabel D_801565AC
 dlabel D_801565B0
 .space 0x00000330
 
-dlabel D_801568E0
+dlabel ItemPickupIconID
 .space 4
 
-dlabel D_801568E4
+dlabel ItemPickupStateDelay
 .space 4
 
 dlabel D_801568E8
@@ -523,13 +526,13 @@ dlabel D_801568E8
 dlabel D_801568EC
 .space 4
 
-dlabel D_801568F0
+dlabel ItemPickupGotOutline
 .space 4
 
-dlabel D_801568F4
+dlabel GotItemTutorialPrinter
 .space 4
 
-dlabel D_801568F8
+dlabel GotItemTutorialClosed
 .space 4
 
 dlabel D_801568FC
@@ -712,7 +715,7 @@ dlabel D_8015A57C
 dlabel mdl_textureHandles
 .space 0x00002200
 
-dlabel D_8015C790
+dlabel ScreenOverlays
 .space 0x00000030
 
 dlabel AmbientSoundData

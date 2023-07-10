@@ -1,5 +1,6 @@
 #include "hos_10.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #define NAME_SUFFIX _PreTitle
 #include "world/common/atomic/TexturePan.inc.c"
@@ -83,7 +84,7 @@ EvtScript N(EVS_Scene_PreTitle) = {
             EVT_BREAK_LOOP
         EVT_END_IF
     EVT_END_LOOP
-    EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_21"), kmr_21_ENTRY_0, TRANSITION_7)
+    EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_21"), kmr_21_ENTRY_0, TRANSITION_SLOW_FADE_TO_WHITE)
     EVT_WAIT(100 * DT)
     EVT_RETURN
     EVT_END

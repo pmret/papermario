@@ -2,14 +2,14 @@
 #include "npc.h"
 #include "../../partners.h"
 
-API_CALLABLE(N(ToadHouse_DisableStatusMenu)) {
-    status_menu_ignore_changes();
+API_CALLABLE(N(ToadHouse_DisableStatusBar)) {
+    status_bar_ignore_changes();
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(N(ToadHouse_ShowStatusMenu)) {
-    status_menu_respond_to_changes();
-    sync_status_menu();
+API_CALLABLE(N(ToadHouse_ShowWorldStatusBar)) {
+    status_bar_respond_to_changes();
+    sync_status_bar();
     return ApiStatus_DONE2;
 }
 
@@ -18,7 +18,7 @@ API_CALLABLE(N(ToadHouse_UpdateScreenOverlay)) {
     s32 type = evt_get_variable(script, *args++);
     s32 zoom = evt_get_variable(script, *args++);
 
-    set_screen_overlay_center(0, 0, 190, 145);
+    set_screen_overlay_center(SCREEN_LAYER_FRONT, 0, 190, 145);
     set_screen_overlay_params_front(type, zoom);
     return ApiStatus_DONE2;
 }
@@ -34,7 +34,7 @@ API_CALLABLE(N(ToadHouse_CamSetFOV)) {
 API_CALLABLE(N(ToadHouse_AwaitScriptComplete)) {
     Bytecode* args = script->ptrReadPos;
     s32 waitingScriptID = evt_get_variable(script, *args++);
-    
+
     if (!does_script_exist(waitingScriptID)) {
         return ApiStatus_DONE2;
     } else {
@@ -79,7 +79,7 @@ API_CALLABLE(N(ToadHouse_InitScreenOverlay)) {
     s32 g = evt_get_variable(script, *args++);
     s32 b = evt_get_variable(script, *args++);
 
-    set_screen_overlay_color(0, r, g, b);
+    set_screen_overlay_color(SCREEN_LAYER_FRONT, r, g, b);
     return ApiStatus_DONE2;
 }
 

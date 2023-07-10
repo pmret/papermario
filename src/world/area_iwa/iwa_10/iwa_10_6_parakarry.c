@@ -1,5 +1,6 @@
 #include "iwa_10.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/Parakarry.inc.c"
 
@@ -164,7 +165,7 @@ s32 N(LetterList)[] = {
 };
 
 EvtScript N(EVS_NpcInteract_Parakarry) = {
-    EVT_SET(LocalFlag(0), FALSE)
+    EVT_SET(LFlag0, FALSE)
     EVT_IF_EQ(GB_IWA10_ReturnedLetterCount, 2)
         EVT_SET(LVar0, 0)
         EVT_IF_EQ(GF_IWA01_Item_Letter01, TRUE)
@@ -211,7 +212,7 @@ EvtScript N(EVS_NpcInteract_Parakarry) = {
                         EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(4.0 / DT))
                         EVT_RETURN
                     EVT_END_IF
-                    EVT_SET(LocalFlag(0), TRUE)
+                    EVT_SET(LFlag0, TRUE)
             EVT_END_SWITCH
         EVT_CASE_EQ(-1)
             EVT_CALL(SpeakToPlayer, NPC_Parakarry, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 0, MSG_CH2_0013)
@@ -239,10 +240,10 @@ EvtScript N(EVS_NpcInteract_Parakarry) = {
                             EVT_RETURN
                         EVT_END_IF
                     EVT_END_IF
-                    EVT_SET(LocalFlag(0), TRUE)
+                    EVT_SET(LFlag0, TRUE)
             EVT_END_SWITCH
     EVT_END_SWITCH
-    EVT_IF_EQ(LocalFlag(0), TRUE)
+    EVT_IF_EQ(LFlag0, TRUE)
         EVT_CALL(DisablePartnerAI, 0)
         EVT_CALL(ContinueSpeech, NPC_Parakarry, ANIM_WorldParakarry_Talk, ANIM_WorldParakarry_Idle, 0, MSG_CH2_001D)
         EVT_CALL(N(ChangeNpcToPartner), 4, 4)

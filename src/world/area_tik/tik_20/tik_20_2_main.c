@@ -30,6 +30,7 @@ LavaReset N(SafeFloorColliders)[] = {
     { .colliderID = -1 }
 };
 
+#define DROPLET_MODEL MODEL_sizuku
 #include "../common/DripVolumes.inc.c"
 
 DripVolumeList N(DripVolumes) = {

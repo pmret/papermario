@@ -32,7 +32,7 @@ void footprint_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, 
     bp.init = footprint_init;
     bp.update = footprint_update;
     bp.renderWorld = footprint_render;
-    bp.unk_14 = 0;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_FOOTPRINT;
 
     effect = shim_create_effect_instance(&bp);

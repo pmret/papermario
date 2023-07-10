@@ -1,11 +1,11 @@
 /*---------------------------------------------------------------------
 	Copyright (C) 1997, Nintendo.
-	
+
 	File		gs2dex.h
 	Coded    by	Yoshitaka Yasumoto.	Jul 31, 1997.
-	Modified by	
+	Modified by
 	Comments	Header file for S2DEX ucode.
-	
+
 	$Id: gs2dex.h,v 1.21 1998/05/28 00:14:49 has Exp $
   ---------------------------------------------------------------------*/
 
@@ -40,12 +40,12 @@ extern "C" {
 
 /* Non scalable background plane */
 typedef	struct	{
-  u16   imageX;		/* x-coordinate of upper-left position of texture (u10.5) */ 
+  u16   imageX;		/* x-coordinate of upper-left position of texture (u10.5) */
   u16	imageW;		/* width of the texture (u10.2) */
   s16	frameX;		/* upper-left position of transferred frame (s10.2) */
   u16	frameW;		/* width of transferred frame (u10.2) */
 
-  u16   imageY; 	/* y-coordinate of upper-left position of texture (u10.5) */ 
+  u16   imageY; 	/* y-coordinate of upper-left position of texture (u10.5) */
   u16	imageH;		/* height of the texture (u10.2) */
   s16	frameY;		/* upper-left position of transferred frame (s10.2) */
   u16	frameH;		/* height of transferred frame (u10.2) */
@@ -58,7 +58,7 @@ typedef	struct	{
   u16	imageFlip;	/* right & left image inversion (Inverted by G_BG_FLAG_FLIPS) */
 
   /* The following is set in the initialization routine guS2DInitBg(). There is no need for the user to set it. */
-  u16	tmemW;		/* TMEM width and Word size of frame 1 line. 
+  u16	tmemW;		/* TMEM width and Word size of frame 1 line.
                            At LoadBlock, GS_PIX2TMEM(imageW/4,imageSiz)
                            At LoadTile  GS_PIX2TMEM(frameW/4,imageSiz)+1 */
   u16	tmemH;		/* height of TMEM loadable at a time (s13.2) 4 times value
@@ -67,24 +67,24 @@ typedef	struct	{
   u16	tmemLoadSH;	/* SH value
 			   At LoadBlock, tmemSize/2-1
 			   At LoadTile, tmemW*16-1 */
-  u16	tmemLoadTH;	/* TH value or Stride value 
+  u16	tmemLoadTH;	/* TH value or Stride value
 			   At LoadBlock, GS_CALC_DXT(tmemW)
 			   At LoadTile, tmemH-1 */
-  u16	tmemSizeW;	/* skip value of imagePtr for image 1-line 
+  u16	tmemSizeW;	/* skip value of imagePtr for image 1-line
 			   At LoadBlock, tmemW*2
                            At LoadTile, GS_PIX2TMEM(imageW/4,imageSiz)*2 */
-  u16	tmemSize;	/* skip value of imagePtr for 1-loading  
+  u16	tmemSize;	/* skip value of imagePtr for 1-loading
 			   = tmemSizeW*tmemH                          */
 } uObjBg_t;		/* 40 bytes */
 
 /* Scalable background plane */
 typedef	struct	{
-  u16   imageX;		/* x-coordinate of upper-left position of texture (u10.5) */ 
+  u16   imageX;		/* x-coordinate of upper-left position of texture (u10.5) */
   u16	imageW;		/* width of texture (u10.2) */
   s16	frameX;		/* upper-left position of transferred frame (s10.2) */
   u16	frameW;		/* width of transferred frame (u10.2) */
 
-  u16   imageY; 	/* y-coordinate of upper-left position of texture (u10.5) */ 
+  u16   imageY; 	/* y-coordinate of upper-left position of texture (u10.5) */
   u16	imageH;		/* height of texture (u10.2) */
   s16	frameY;		/* upper-left position of transferred frame (s10.2) */
   u16	frameH;		/* height of transferred frame (u10.2) */
@@ -99,9 +99,9 @@ typedef	struct	{
   u16	scaleW;		/* scale value of X-direction (u5.10) */
   u16	scaleH;		/* scale value of Y-direction (u5.10) */
   s32	imageYorig;	/* start point of drawing on image (s20.5) */
-  
+
   u8	padding[4];
-  
+
 } uObjScaleBg_t;	/* 40 bytes */
 
 typedef union {
@@ -126,7 +126,7 @@ typedef struct {
   u16  imageH;		/* u10.5 height of u10.5 texture (length of T-direction) */
   u16  paddingY;	/* Unused - Always 0 */
   u16  imageStride;	/* folding width of texel (In units of 64bit word) */
-  u16  imageAdrs;	/* texture header position in TMEM (In units of 64bit word) */  
+  u16  imageAdrs;	/* texture header position in TMEM (In units of 64bit word) */
   u8   imageFmt;	/* format of texel - G_IM_FMT_* */
   u8   imageSiz;	/* size of texel - G_IM_SIZ_* */
   u8   imagePal;	/* pallet number (0-7) */
@@ -362,7 +362,7 @@ typedef	struct	{
 #define G_RM_AA_XLU_SPRITE2	G_RM_AA_XLU_SURF2
 
 /*===========================================================================*
- *	External functions 
+ *	External functions
  *===========================================================================*/
 extern	u64	gspS2DEX_fifoTextStart[], gspS2DEX_fifoTextEnd[];
 extern	u64	gspS2DEX_fifoDataStart[], gspS2DEX_fifoDataEnd[];

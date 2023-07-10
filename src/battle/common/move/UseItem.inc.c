@@ -1,4 +1,5 @@
 #include "common.h"
+#include "sprite/player.h"
 
 /// Provide arg `TRUE` on `LVar1` to disable refunding.
 EvtScript N(UseItemWithEffect) = {

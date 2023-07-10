@@ -1,6 +1,7 @@
 #include "kzn_23.h"
 #include "entity.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(SetChestPosition)) {
     Bytecode* args = script->ptrReadPos;
@@ -190,7 +191,7 @@ EvtScript N(EVS_SpawnPyroclasts) = {
                     EVT_BREAK_LOOP
                 EVT_END_IF
             EVT_END_LOOP
-            EVT_CALL(func_802D7B10, LVarE)
+            EVT_CALL(DismissEffect, LVarE)
         EVT_END_THREAD
         EVT_WAIT(8)
     EVT_END_LOOP

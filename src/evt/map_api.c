@@ -699,7 +699,7 @@ void goto_map(Evt* script, s32 mode) {
     Bytecode* args = script->ptrReadPos;
     s16 mapID;
     s16 areaID;
-    s16 mapTransitionEffect = 0;
+    s16 mapTransitionEffect = TRANSITION_STANDARD;
 
     if (mode == 2) {
         areaID = evt_get_variable(script, *args++);

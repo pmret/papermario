@@ -1,36 +1,31 @@
-#include "common.h"
-#include "battle/battle.h"
+#include "area.h"
 
-#define NAMESPACE b_area_pra2
+extern ActorBlueprint A(crystal_king);
+extern ActorBlueprint A(crystal_bit_1);
+extern ActorBlueprint A(crystal_bit_2);
+extern ActorBlueprint A(crystal_bit_3);
 
-extern ActorBlueprint N(crystal_king);
-extern ActorBlueprint N(crystal_bit_1);
-extern ActorBlueprint N(crystal_bit_2);
-extern ActorBlueprint N(crystal_bit_3);
+extern Stage A(sam_04);
 
-extern Stage N(sam_04);
+Vec3i A(KingPos) = { 70, 0, 5 };
 
-Vec3i N(pos_crystal_king) = { 70, 0, 5 };
+Vec3i A(CrystalBitPos1) = {  10, 35,  -5 };
+Vec3i A(CrystalBitPos2) = { 112, 52,  -5 };
+Vec3i A(CrystalBitPos3) = {  42, 85, -10 };
 
-Vec3i N(pos_crystal_bit_1) = { 10, 35, -5 };
-
-Vec3i N(pos_crystal_bit_2) = { 112, 52, -5 };
-
-Vec3i N(pos_crystal_bit_3) = { 42, 85, -10 };
-
-Formation N(Formation_01) = {
-    { .actor = &N(crystal_king), .home = { .vec = &N(pos_crystal_king) }, .priority = 10 },
-    { .actor = &N(crystal_bit_1), .home = { .vec = &N(pos_crystal_bit_1) }, .priority = 9 },
-    { .actor = &N(crystal_bit_2), .home = { .vec = &N(pos_crystal_bit_2) }, .priority = 8 },
-    { .actor = &N(crystal_bit_3), .home = { .vec = &N(pos_crystal_bit_3) }, .priority = 7 },
+Formation A(Formation_01) = {
+    ACTOR_BY_POS(A(crystal_king), A(KingPos), 10),
+    ACTOR_BY_POS(A(crystal_bit_1), A(CrystalBitPos1), 9),
+    ACTOR_BY_POS(A(crystal_bit_2), A(CrystalBitPos2), 8),
+    ACTOR_BY_POS(A(crystal_bit_3), A(CrystalBitPos3), 7),
 };
 
-BattleList N(Formations) = {
-    BATTLE(N(Formation_01), &N(sam_04), "パラレラー"),
+BattleList A(Formations) = {
+    BATTLE(A(Formation_01), A(sam_04), "パラレラー"),
     {},
 };
 
-StageList N(Stages) = {
-    { "sam_04", &N(sam_04) },
+StageList A(Stages) = {
+    STAGE("sam_04", A(sam_04)),
     {},
 };

@@ -3,7 +3,7 @@
 #include "world/common/entity/Pipe.inc.c"
 
 API_CALLABLE(N(func_80240310_8EC130)){
-    set_map_transition_effect(TRANSITION_4);
+    set_map_transition_effect(TRANSITION_BEGIN_OR_END_GAME);
     return ApiStatus_DONE2;
 }
 

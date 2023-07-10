@@ -111,9 +111,7 @@ API_CALLABLE(N(SetSpotlightsAlpha)) {
 }
 
 void N(gfx_build_set_spotlight_alpha)(void) {
-    gDPSetCombineLERP(gMainGfxPos++,
-        TEXEL0, 0, SHADE, 0, SHADE, 0, PRIMITIVE, 0,
-        TEXEL0, 0, SHADE, 0, SHADE, 0, PRIMITIVE, 0);
+    gDPSetCombineLERP(gMainGfxPos++, TEXEL0, 0, SHADE, 0, SHADE, 0, PRIMITIVE, 0, TEXEL0, 0, SHADE, 0, SHADE, 0, PRIMITIVE, 0);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, N(SpotlightsAlpha));
 }
 

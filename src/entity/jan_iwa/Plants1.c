@@ -4,6 +4,7 @@
 #include "animation_script.h"
 #include "ld_addrs.h"
 #include "model.h"
+#include "sprite/player.h"
 
 extern Gfx Entity_RenderNone[];
 extern AnimScript Entity_CymbalPlant_AnimationIdle;
@@ -168,7 +169,7 @@ void entity_PinkFlowerLight_setupGfx(s32 entityIndex) {
     guMtxCatF(sp18, sp58, sp18);
     guTranslateF(sp58, entity->position.x + 16.0f * sinAngle, entity->position.y , entity->position.z - 16.0f * cosAngle);
     guMtxCatF(sp18, sp58, sp18);
-    gDPSetCombineLERP(gfxPos++, 0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0);
+    gDPSetCombineMode(gfxPos++, PM_CC_01, PM_CC_02);
     gDPSetPrimColor(gfxPos++, 0, 0, 0, 0, 0, entity->alpha);
     guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);

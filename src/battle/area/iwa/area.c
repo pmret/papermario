@@ -1,115 +1,112 @@
-#include "common.h"
-#include "battle/battle.h"
+#include "area.h"
 
-#define NAMESPACE b_area_iwa
+extern ActorBlueprint A(cleft);
+extern ActorBlueprint A(monty_mole);
+extern ActorBlueprint A(whacka);
+extern ActorBlueprint A(buzzar);
 
-extern ActorBlueprint N(cleft);
-extern ActorBlueprint N(monty_mole);
-extern ActorBlueprint N(whacka);
-extern ActorBlueprint N(buzzar);
+extern Stage A(iwa_01);
+extern Stage A(iwa_01b);
+extern Stage A(iwa_02);
 
-extern Stage N(iwa_01);
-extern Stage N(iwa_01b);
-extern Stage N(iwa_02);
-
-Formation N(Formation_00) = {
-    { .actor = &N(cleft), .home = { .index = 1 }, .priority = 10 },
+Formation A(Formation_00) = {
+    ACTOR_BY_IDX(A(cleft), BTL_POS_GROUND_B, 10),
 };
 
-Formation N(Formation_01) = {
-    { .actor = &N(cleft), .home = { .index = 1 }, .priority = 10 },
-    { .actor = &N(cleft), .home = { .index = 2 }, .priority = 9 },
+Formation A(Formation_01) = {
+    ACTOR_BY_IDX(A(cleft), BTL_POS_GROUND_B, 10),
+    ACTOR_BY_IDX(A(cleft), BTL_POS_GROUND_C, 9),
 };
 
-Formation N(Formation_02) = {
-    { .actor = &N(cleft), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(cleft), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(cleft), .home = { .index = 2 }, .priority = 8 },
+Formation A(Formation_02) = {
+    ACTOR_BY_IDX(A(cleft), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(A(cleft), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(A(cleft), BTL_POS_GROUND_C, 8),
 };
 
-Formation N(Formation_03) = {
-    { .actor = &N(cleft),        .home = { .index = 1 }, .priority = 10 },
-    { .actor = &N(monty_mole), .home = { .index = 2 }, .priority = 9 },
+Formation A(Formation_03) = {
+    ACTOR_BY_IDX(A(cleft), BTL_POS_GROUND_B, 10),
+    ACTOR_BY_IDX(A(monty_mole), BTL_POS_GROUND_C, 9),
 };
 
-Formation N(Formation_04) = {
-    { .actor = &N(cleft),        .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(monty_mole), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(monty_mole), .home = { .index = 2 }, .priority = 8 },
+Formation A(Formation_04) = {
+    ACTOR_BY_IDX(A(cleft), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(A(monty_mole), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(A(monty_mole), BTL_POS_GROUND_C, 8),
 };
 
-Formation N(Formation_05) = {
-    { .actor = &N(monty_mole), .home = { .index = 1 }, .priority = 10 },
+Formation A(Formation_05) = {
+    ACTOR_BY_IDX(A(monty_mole), BTL_POS_GROUND_B, 10),
 };
 
-Formation N(Formation_06) = {
-    { .actor = &N(monty_mole), .home = { .index = 1 }, .priority = 10 },
-    { .actor = &N(monty_mole), .home = { .index = 2 }, .priority = 9 },
+Formation A(Formation_06) = {
+    ACTOR_BY_IDX(A(monty_mole), BTL_POS_GROUND_B, 10),
+    ACTOR_BY_IDX(A(monty_mole), BTL_POS_GROUND_C, 9),
 };
 
-Formation N(Formation_07) = {
-    { .actor = &N(monty_mole), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(monty_mole), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(monty_mole), .home = { .index = 2 }, .priority = 8 },
+Formation A(Formation_07) = {
+    ACTOR_BY_IDX(A(monty_mole), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(A(monty_mole), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(A(monty_mole), BTL_POS_GROUND_C, 8),
 };
 
-Formation N(Formation_08) = {
-    { .actor = &N(monty_mole), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(monty_mole), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(monty_mole), .home = { .index = 2 }, .priority = 8 },
-    { .actor = &N(monty_mole), .home = { .index = 3 }, .priority = 7 },
+Formation A(Formation_08) = {
+    ACTOR_BY_IDX(A(monty_mole), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(A(monty_mole), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(A(monty_mole), BTL_POS_GROUND_C, 8),
+    ACTOR_BY_IDX(A(monty_mole), BTL_POS_GROUND_D, 7),
 };
 
-Formation N(Formation_09) = {
-    { .actor = &N(monty_mole), .home = { .index = 1 }, .priority = 10 },
-    { .actor = &N(cleft),        .home = { .index = 2 }, .priority = 9 },
+Formation A(Formation_09) = {
+    ACTOR_BY_IDX(A(monty_mole), BTL_POS_GROUND_B, 10),
+    ACTOR_BY_IDX(A(cleft), BTL_POS_GROUND_C, 9),
 };
 
-Formation N(Formation_0A) = {
-    { .actor = &N(monty_mole), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(monty_mole), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(cleft),        .home = { .index = 2 }, .priority = 8 },
+Formation A(Formation_0A) = {
+    ACTOR_BY_IDX(A(monty_mole), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(A(monty_mole), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(A(cleft), BTL_POS_GROUND_C, 8),
 };
 
-Formation N(Formation_0B) = {
-    { .actor = &N(monty_mole), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(cleft),        .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(monty_mole), .home = { .index = 2 }, .priority = 8 },
+Formation A(Formation_0B) = {
+    ACTOR_BY_IDX(A(monty_mole), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(A(cleft), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(A(monty_mole), BTL_POS_GROUND_C, 8),
 };
 
-Vec3i N(vector3D_8021853C) = { 90, 70, 0, };
+Vec3i A(vector3D_8021853C) = { 90, 70, 0 };
 
-Formation N(Formation_0C) = {
-    { .actor = &N(buzzar), .home = { .vec = &N(vector3D_8021853C) }, .priority = 10 },
+Formation A(Formation_0C) = {
+    ACTOR_BY_POS(A(buzzar), A(vector3D_8021853C), 10),
 };
 
-Formation N(Formation_0D) = {
-    { .actor = &N(cleft),        .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(monty_mole), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(whacka),       .home = { .index = 2 }, .priority = 8 },
+Formation A(Formation_0D) = {
+    ACTOR_BY_IDX(A(cleft), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(A(monty_mole), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(A(whacka), BTL_POS_GROUND_C, 8),
 };
 
-BattleList N(Formations) = {
-    BATTLE(N(Formation_00), &N(iwa_01), "シンエモン"),
-    BATTLE(N(Formation_01), &N(iwa_01), "シンエモンx２"),
-    BATTLE(N(Formation_02), &N(iwa_01), "シンエモンx３"),
-    BATTLE(N(Formation_03), &N(iwa_01), "シンエモン,チョロプー"),
-    BATTLE(N(Formation_04), &N(iwa_01), "シンエモン,チョロプーx２"),
-    BATTLE(N(Formation_05), &N(iwa_01), "チョロプー"),
-    BATTLE(N(Formation_06), &N(iwa_01), "チョロプーx２"),
-    BATTLE(N(Formation_07), &N(iwa_01), "チョロプーx３"),
-    BATTLE(N(Formation_08), &N(iwa_01), "チョロプーx４"),
-    BATTLE(N(Formation_09), &N(iwa_01), "チョロプー,シンエモン"),
-    BATTLE(N(Formation_0A), &N(iwa_01), "チョロプーx２,シンエモン"),
-    BATTLE(N(Formation_0B), &N(iwa_01), "チョロプー,シンエモン,チョロプー"),
-    BATTLE(N(Formation_0C), &N(iwa_02), "ゲーハー"),
-    BATTLE(N(Formation_0D), &N(iwa_02), "コブロン"),
+BattleList A(Formations) = {
+    BATTLE(A(Formation_00), A(iwa_01), "シンエモン"),
+    BATTLE(A(Formation_01), A(iwa_01), "シンエモンx２"),
+    BATTLE(A(Formation_02), A(iwa_01), "シンエモンx３"),
+    BATTLE(A(Formation_03), A(iwa_01), "シンエモン,チョロプー"),
+    BATTLE(A(Formation_04), A(iwa_01), "シンエモン,チョロプーx２"),
+    BATTLE(A(Formation_05), A(iwa_01), "チョロプー"),
+    BATTLE(A(Formation_06), A(iwa_01), "チョロプーx２"),
+    BATTLE(A(Formation_07), A(iwa_01), "チョロプーx３"),
+    BATTLE(A(Formation_08), A(iwa_01), "チョロプーx４"),
+    BATTLE(A(Formation_09), A(iwa_01), "チョロプー,シンエモン"),
+    BATTLE(A(Formation_0A), A(iwa_01), "チョロプーx２,シンエモン"),
+    BATTLE(A(Formation_0B), A(iwa_01), "チョロプー,シンエモン,チョロプー"),
+    BATTLE(A(Formation_0C), A(iwa_02), "ゲーハー"),
+    BATTLE(A(Formation_0D), A(iwa_02), "コブロン"),
     {},
 };
 
-StageList N(Stages) = {
-    { "iwa_01",  &N(iwa_01) },
-    { "iwa_01b", &N(iwa_01b) },
-    { "iwa_02",  &N(iwa_02) },
+StageList A(Stages) = {
+    STAGE("iwa_01", A(iwa_01)),
+    STAGE("iwa_01b", A(iwa_01b)),
+    STAGE("iwa_02", A(iwa_02)),
     {},
 };

@@ -17,7 +17,7 @@ API_CALLABLE(N(StoneChompFXA)) {
 
     bp.flags = NPC_FLAG_IGNORE_ENTITY_COLLISION | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION
         | NPC_FLAG_8 | NPC_FLAG_INVISIBLE;
-    bp.initialAnim = ANIM_StoneChomp_Anim02;
+    bp.initialAnim = ANIM_StoneChomp_Chain;
     bp.onUpdate = NULL;
     bp.onRender = NULL;
 

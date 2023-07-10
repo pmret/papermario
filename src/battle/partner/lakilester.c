@@ -7,6 +7,7 @@
 #include "battle/action_cmd/water_block.h"
 #include "battle/action_cmd/hurricane.h"
 #include "hud_element.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_partner_lakilester
 
@@ -24,21 +25,10 @@ extern EvtScript N(spinySurge);
 extern EvtScript N(cloudNine);
 extern EvtScript N(hurricane);
 
-typedef struct HurricaneState {
-    /* 0x00 */ char unk_00[0x44];
-    /* 0x44 */ s16 breathSizeIncrease;
-    /* 0x46 */ s16 unk_46;
-    /* 0x48 */ char unk_48[0xC];
-    /* 0x54 */ s16 unk_54;
-    /* 0x56 */ char unk_56[0x4];
-    /* 0x5A */ s16 startingTotalPower;
-    /* 0x5C */ s8 state;
-    /* 0x5D */ s8 unk_5D;
-    /* 0x5E */ char unk_5E[0x12];
-    /* 0x70 */ s16 intensity;
-    /* 0x72 */ s16 totalPower;
-    /* 0x74 */ char unk_74[0x10];
-} HurricaneState;
+extern HudScript HES_AimBlinkA;
+extern HudScript HES_AimReticle;
+extern HudScript HES_AimTarget;
+extern HudScript HES_StickTapRight;
 
 static s32 sSavedHurricaneIntensity;
 static s32 sBreathSizeIncrease;
@@ -66,10 +56,26 @@ static s32 sNumEnemiesBeingBlown;
 static s32 sIsHurricaneActive;
 static s32 D_8023D338;
 
-extern HudScript HES_AimBlinkA;
-extern HudScript HES_AimReticle;
-extern HudScript HES_AimTarget;
-extern HudScript HES_StickTapRight;
+enum N(ActorPartIDs) {
+    PRT_MAIN            = 1,
+    PRT_2               = 2,
+};
+
+typedef struct HurricaneState {
+    /* 0x00 */ char unk_00[0x44];
+    /* 0x44 */ s16 breathSizeIncrease;
+    /* 0x46 */ s16 unk_46;
+    /* 0x48 */ char unk_48[0xC];
+    /* 0x54 */ s16 unk_54;
+    /* 0x56 */ char unk_56[0x4];
+    /* 0x5A */ s16 startingTotalPower;
+    /* 0x5C */ s8 state;
+    /* 0x5D */ s8 unk_5D;
+    /* 0x5E */ char unk_5E[0x12];
+    /* 0x70 */ s16 intensity;
+    /* 0x72 */ s16 totalPower;
+    /* 0x74 */ char unk_74[0x10];
+} HurricaneState;
 
 API_CALLABLE(N(SpinyFlipUpdatePopup)) {
     if (isInitialCall) {
@@ -86,51 +92,51 @@ API_CALLABLE(N(SpinyFlipUpdatePopup)) {
 
 
 s32 N(IdleAnimations)[] = {
-    STATUS_NORMAL,  ANIM_BattleLakilester_Walk,
-    STATUS_DAZE, ANIM_BattleLakilester_Injured,
-    STATUS_TURN_DONE, ANIM_BattleLakilester_Still,
+    STATUS_KEY_NORMAL,    ANIM_BattleLakilester_Walk,
+    STATUS_KEY_DAZE,      ANIM_BattleLakilester_Injured,
+    STATUS_KEY_INACTIVE,  ANIM_BattleLakilester_Still,
     STATUS_END,
 };
 
 s32 N(IdleAnimations_spiny)[] = {
-    STATUS_NORMAL, ANIM_BattleLakilester_Spiny,
+    STATUS_KEY_NORMAL,    ANIM_BattleLakilester_Spiny,
     STATUS_END,
 };
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
 s32 N(StatusTable)[] = {
-    STATUS_NORMAL, 100,
-    STATUS_DEFAULT, 100,
-    STATUS_SLEEP, 100,
-    STATUS_POISON, 100,
-    STATUS_FROZEN, 100,
-    STATUS_DIZZY, 100,
-    STATUS_FEAR, 100,
-    STATUS_STATIC, 100,
-    STATUS_PARALYZE, 100,
-    STATUS_SHRINK, 100,
-    STATUS_STOP, 100,
-    STATUS_DEFAULT_TURN_MOD, 0,
-    STATUS_SLEEP_TURN_MOD, 0,
-    STATUS_POISON_TURN_MOD, 0,
-    STATUS_FROZEN_TURN_MOD, 0,
-    STATUS_DIZZY_TURN_MOD, 0,
-    STATUS_FEAR_TURN_MOD, 0,
-    STATUS_STATIC_TURN_MOD, 0,
-    STATUS_PARALYZE_TURN_MOD, 0,
-    STATUS_SHRINK_TURN_MOD, 0,
-    STATUS_STOP_TURN_MOD, 0,
+    STATUS_KEY_NORMAL,            100,
+    STATUS_KEY_DEFAULT,           100,
+    STATUS_KEY_SLEEP,             100,
+    STATUS_KEY_POISON,            100,
+    STATUS_KEY_FROZEN,            100,
+    STATUS_KEY_DIZZY,             100,
+    STATUS_KEY_FEAR,              100,
+    STATUS_KEY_STATIC,            100,
+    STATUS_KEY_PARALYZE,          100,
+    STATUS_KEY_SHRINK,            100,
+    STATUS_KEY_STOP,              100,
+    STATUS_TURN_MOD_DEFAULT,        0,
+    STATUS_TURN_MOD_SLEEP,          0,
+    STATUS_TURN_MOD_POISON,         0,
+    STATUS_TURN_MOD_FROZEN,         0,
+    STATUS_TURN_MOD_DIZZY,          0,
+    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_STATIC,         0,
+    STATUS_TURN_MOD_PARALYZE,       0,
+    STATUS_TURN_MOD_SHRINK,         0,
+    STATUS_TURN_MOD_STOP,           0,
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = 0,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 12, 30 },
         .opacity = 255,
@@ -142,7 +148,7 @@ ActorPartBlueprint N(parts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
-        .index = 2,
+        .index = PRT_2,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
@@ -159,8 +165,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_LAKILESTER,
     .level = 0,
     .maxHP = 99,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
@@ -172,9 +178,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 80,
     .coinReward = 0,
     .size = { 44, 40 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 30 },
-    .statusMessageOffset = { 13, 31 },
+    .statusTextOffset = { 13, 31 },
 };
 
 EvtScript N(init) = {
@@ -200,55 +206,55 @@ EvtScript N(handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar1,  ANIM_BattleLakilester_Hurt)
             EVT_SET_CONST(LVar2,  ANIM_BattleLakilester_Hurt)
-            EVT_EXEC_WAIT(D_802976E8)
+            EVT_EXEC_WAIT(EVS_Partner_LakilesterHit)
             EVT_SET_CONST(LVar1,  ANIM_BattleLakilester_Hurt)
-            EVT_EXEC_WAIT(DoPartnerHit)
+            EVT_EXEC_WAIT(EVS_Partner_Drop)
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208C)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1,  ANIM_BattleLakilester_Hurt)
-            EVT_EXEC_WAIT(DoPartnerBlock)
+            EVT_EXEC_WAIT(EVS_Partner_NoDamageHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SPIKE_CONTACT)
             EVT_SET_CONST(LVar1,  ANIM_BattleLakilester_Hurt)
             EVT_SET_CONST(LVar2, 20)
-            EVT_EXEC_WAIT(DoPartnerSpikeContact)
+            EVT_EXEC_WAIT(EVS_Partner_SpikeContact)
             EVT_SET_CONST(LVar1,  ANIM_BattleLakilester_Hurt)
-            EVT_EXEC_WAIT(DoPartnerHit)
+            EVT_EXEC_WAIT(EVS_Partner_Drop)
         EVT_CASE_EQ(EVENT_BURN_CONTACT)
             EVT_SET_CONST(LVar1,  ANIM_BattleLakilester_BurnHurt)
             EVT_SET(LVar2, 20)
             EVT_SET_CONST(LVar3,  ANIM_BattleLakilester_BurnStill)
-            EVT_EXEC_WAIT(DoPartnerBurnContact)
+            EVT_EXEC_WAIT(EVS_Partner_BurnContact)
             EVT_SET_CONST(LVar1,  ANIM_BattleLakilester_Hurt)
-            EVT_EXEC_WAIT(DoPartnerHit)
+            EVT_EXEC_WAIT(EVS_Partner_Drop)
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar1,  ANIM_BattleLakilester_BurnHurt)
             EVT_SET_CONST(LVar2,  ANIM_BattleLakilester_BurnStill)
-            EVT_EXEC_WAIT(DoPartnerBurn)
+            EVT_EXEC_WAIT(EVS_Partner_BurnHit)
             EVT_SET_CONST(LVar1,  ANIM_BattleLakilester_Hurt)
-            EVT_EXEC_WAIT(DoPartnerHit)
+            EVT_EXEC_WAIT(EVS_Partner_Drop)
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_SET_CONST(LVar1,  ANIM_BattleLakilester_Hurt)
             EVT_SET(LVar2, 20)
-            EVT_EXEC_WAIT(D_80295744)
+            EVT_EXEC_WAIT(EVS_Partner_ShockHit)
         EVT_CASE_EQ(EVENT_33)
             EVT_SET_CONST(LVar1,  ANIM_BattleLakilester_Hurt)
-            EVT_EXEC_WAIT(DoPartnerHit)
+            EVT_EXEC_WAIT(EVS_Partner_Drop)
         EVT_CASE_EQ(EVENT_RECOVER_FROM_KO)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1,  ANIM_BattleLakilester_Walk)
             EVT_SET_CONST(LVar2,  ANIM_BattleLakilester_Run)
             EVT_SET(LVar3, 10)
-            EVT_EXEC_WAIT(DoPartnerRecover)
+            EVT_EXEC_WAIT(EVS_Partner_Recover)
         EVT_CASE_OR_EQ(EVENT_18)
         EVT_CASE_OR_EQ(EVENT_BLOCK)
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208C)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleLakilester_Block)
-            EVT_EXEC_WAIT(DoPartnerBlock)
+            EVT_EXEC_WAIT(EVS_Partner_NoDamageHit)
             EVT_WAIT(10)
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
@@ -275,19 +281,19 @@ EvtScript N(takeTurn) = {
 };
 
 EvtScript N(celebrate) = {
-    EVT_SET_CONST(LVar0, 1)
+    EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_SET_CONST(LVar1, ANIM_BattleLakilester_Celebrate)
     EVT_SET_CONST(LVar2,  ANIM_BattleLakilester_Walk)
     EVT_SET_CONST(LVar3,  ANIM_BattleLakilester_Walk)
-    EVT_EXEC_WAIT(D_80294720)
+    EVT_EXEC_WAIT(EVS_Partner_Celebrate)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(runAway) = {
-    EVT_SET_CONST(LVar0, 1)
+    EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_SET_CONST(LVar1,  ANIM_BattleLakilester_Run)
-    EVT_EXEC_WAIT(DoPartnerRunAway)
+    EVT_EXEC_WAIT(EVS_Partner_RunAway)
     EVT_RETURN
     EVT_END
 };
@@ -344,7 +350,7 @@ EvtScript N(executeAction) = {
 
 EvtScript N(returnHome2) = {
     EVT_CALL(PartnerYieldTurn)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_E)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_04)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_Run)
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 15, 0, EASING_COS_IN_OUT)
@@ -749,7 +755,7 @@ API_CALLABLE(N(InitHurricane)) {
                     hurricaneChance = 150;
                 }
             }
-            if (actor->transparentStatus == STATUS_TRANSPARENT) {
+            if (actor->transparentStatus == STATUS_KEY_TRANSPARENT) {
                 hurricaneChance = 0;
             }
             if (part->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY) {
@@ -773,7 +779,7 @@ API_CALLABLE(N(InitHurricane)) {
         target = &partner->targetData[targetIdx];
         actor = get_actor(target->actorID);
         part = get_actor_part(actor, target->partID);
-        if (actor->transparentStatus == STATUS_TRANSPARENT || (part->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY)) {
+        if (actor->transparentStatus == STATUS_KEY_TRANSPARENT || (part->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY)) {
             sTargetStates[targetIdx] = -1;
         } else if (sTargetStates[targetIdx] != 0) {
             sTargetStates[targetIdx] = avgHurricaneChance;
@@ -835,7 +841,7 @@ EvtScript N(spinyFlip) = {
     EVT_CALL(SetPartPos, ACTOR_PARTNER, 2, LVar0, LVar1, LVar2)
     EVT_WAIT(1)
     EVT_CALL(SetPartFlagBits, ACTOR_PARTNER, 2, ACTOR_PART_FLAG_INVISIBLE, FALSE)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_BattleLakilester_Spiny)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_2, ANIM_BattleLakilester_Spiny)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_LiftSpiny)
     EVT_LOOP(4)
         EVT_ADD(LVar1, 6)
@@ -876,7 +882,7 @@ EvtScript N(spinyFlip) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_201B)
     EVT_SWITCH(LVarF)
         EVT_CASE_EQ(-1)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_BattleLakilester_SpinySpin)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_2, ANIM_BattleLakilester_SpinySpin)
             EVT_CALL(SetPartJumpGravity, ACTOR_PARTNER, 2, EVT_FLOAT(1.5))
             EVT_SET(LVar0, LVar7)
             EVT_SET(LVar1, LVar8)
@@ -884,7 +890,7 @@ EvtScript N(spinyFlip) = {
             EVT_CALL(JumpPartTo, ACTOR_PARTNER, 2, LVar7, LVar8, LVar9, 20)
             EVT_CALL(LandJumpPart, ACTOR_PARTNER, 2)
         EVT_CASE_EQ(0)
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_BattleLakilester_SpinySpin)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_2, ANIM_BattleLakilester_SpinySpin)
             EVT_CALL(SetPartJumpGravity, ACTOR_PARTNER, 2, EVT_FLOAT(1.5))
             EVT_SET(LVar0, LVar7)
             EVT_SET(LVar1, LVar8)
@@ -892,7 +898,7 @@ EvtScript N(spinyFlip) = {
             EVT_CALL(JumpPartTo, ACTOR_PARTNER, 2, LVar7, LVar8, LVar9, 20)
             EVT_CALL(LandJumpPart, ACTOR_PARTNER, 2)
         EVT_CASE_DEFAULT
-            EVT_CALL(SetAnimation, ACTOR_SELF, 2, ANIM_BattleLakilester_SpinySpin)
+            EVT_CALL(SetAnimation, ACTOR_SELF, PRT_2, ANIM_BattleLakilester_SpinySpin)
             EVT_CALL(GetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
             EVT_CALL(SetPartJumpGravity, ACTOR_PARTNER, 2, EVT_FLOAT(1.5))
             EVT_CALL(JumpPartTo, ACTOR_PARTNER, 2, LVar0, LVar1, LVar2, 20)
@@ -921,7 +927,7 @@ EvtScript N(spinyFlip) = {
     EVT_END_SWITCH
     EVT_SWITCH(LVarF)
         EVT_CASE_EQ(1)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_E)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_04)
         EVT_CASE_DEFAULT
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
     EVT_END_SWITCH
@@ -981,8 +987,8 @@ EvtScript N(spinySurge) = {
     EVT_CALL(InitTargetIterator)
     EVT_CALL(SetActorVar, ACTOR_PARTNER, 0, 0)
     EVT_SET(LVar9, 0)
-    EVT_SET(LocalFlag(2), 0)
-    EVT_SET(LocalFlag(3), 0)
+    EVT_SET(LFlag2, FALSE)
+    EVT_SET(LFlag3, FALSE)
     EVT_LOOP(LVarA)
         EVT_CALL(GetActionResult, LVar0)
         EVT_IF_EQ(LVar9, 2)
@@ -1009,12 +1015,12 @@ EvtScript N(spinySurge) = {
                 EVT_IF_EQ(LVar9, 0)
                     EVT_BREAK_SWITCH
                 EVT_END_IF
-                EVT_IF_EQ(LocalFlag(2), 0)
+                EVT_IF_EQ(LFlag2, FALSE)
                     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_201B)
-                    EVT_SET(LocalFlag(2), 1)
+                    EVT_SET(LFlag2, TRUE)
                 EVT_ELSE
                     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_201C)
-                    EVT_SET(LocalFlag(2), 0)
+                    EVT_SET(LFlag2, FALSE)
                 EVT_END_IF
                 EVT_CALL(N(ThrowSpinyFX))
                 EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleLakilester_ThrowSpinyAlt)
@@ -1028,7 +1034,7 @@ EvtScript N(spinySurge) = {
                     EVT_SUB(LVar0, 1)
                     EVT_CALL(SetActorVar, ACTOR_PARTNER, 0, LVar0)
                 EVT_END_CHILD_THREAD
-                EVT_SET(LocalFlag(3), 1)
+                EVT_SET(LFlag3, TRUE)
                 EVT_SET(LVar9, 0)
         EVT_END_SWITCH
         EVT_WAIT(1)
@@ -1043,7 +1049,7 @@ EvtScript N(spinySurge) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_WAIT(10)
-    EVT_IF_EQ(LocalFlag(3), 0)
+    EVT_IF_EQ(LFlag3, FALSE)
         EVT_SET(LVar0, 0)
         EVT_SET(LVarF, 0)
         EVT_WAIT(15)
@@ -1060,13 +1066,13 @@ EvtScript N(spinySurge) = {
     EVT_CALL(N(GetSpinySurgeDamage))
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(0)
-            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_SPINY_SURGE | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, 0, 0, LVarF, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40)
+            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_SPINY_SURGE | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, LVarF, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40)
         EVT_CASE_DEFAULT
-            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_SPINY_SURGE | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, 0, 0, LVarF, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)
+            EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_SPINY_SURGE | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, LVarF, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(0)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_E)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_04)
         EVT_CASE_DEFAULT
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
     EVT_END_SWITCH
@@ -1094,7 +1100,7 @@ EvtScript N(spinySurge) = {
 
 EvtScript N(cloudNine_normal) = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_8, FALSE)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_SHOW_PLAYER_DECORATIONS, FALSE)
     EVT_CALL(SetActorFlagBits, ACTOR_PLAYER, ACTOR_FLAG_20000000, TRUE)
     EVT_CALL(LoadActionCommand, ACTION_COMMAND_WATER_BLOCK)
     EVT_CALL(action_command_water_block_init, 2)
@@ -1141,7 +1147,7 @@ EvtScript N(cloudNine_normal) = {
     EVT_CALL(action_command_water_block_start, 0, 97, 3)
     EVT_CALL(AddBattleCamZoom, -75)
     EVT_CALL(MoveBattleCamOver, 100)
-    EVT_CALL(func_8024ECF8, 0, 0, 1)
+    EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
     EVT_WAIT(100)
     EVT_WAIT(3)
     EVT_CALL(AddBattleCamZoom, 50)
@@ -1201,14 +1207,14 @@ EvtScript N(cloudNine_normal) = {
         EVT_CALL(SetActorYaw, ACTOR_PARTNER, LVar0)
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_WAIT(10)
     EVT_IF_GT(LVarA, 0)
-        EVT_CALL(ShowMessageBox, BTL_MSG_28, 60)
+        EVT_CALL(ShowMessageBox, BTL_MSG_CLOUD_NINE_BEGIN, 60)
         EVT_CALL(WaitForMessageBoxDone)
     EVT_END_IF
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_8, TRUE)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_SHOW_PLAYER_DECORATIONS, TRUE)
     EVT_RETURN
     EVT_END
 };
@@ -1256,7 +1262,7 @@ EvtScript N(cloudNine_immobile) = {
     EVT_CALL(action_command_water_block_start, 0, 97, 3)
     EVT_CALL(AddBattleCamZoom, -75)
     EVT_CALL(MoveBattleCamOver, 100)
-    EVT_CALL(func_8024ECF8, 0, 0, 1)
+    EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
     EVT_WAIT(100)
     EVT_WAIT(3)
     EVT_CALL(AddBattleCamZoom, 50)
@@ -1308,11 +1314,11 @@ EvtScript N(cloudNine_immobile) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(PartnerYieldTurn)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 30)
     EVT_WAIT(10)
     EVT_IF_GT(LVarA, 0)
-        EVT_CALL(ShowMessageBox, BTL_MSG_28, 60)
+        EVT_CALL(ShowMessageBox, BTL_MSG_CLOUD_NINE_BEGIN, 60)
         EVT_CALL(WaitForMessageBoxDone)
     EVT_END_IF
     EVT_RETURN
@@ -1321,7 +1327,7 @@ EvtScript N(cloudNine_immobile) = {
 
 EvtScript N(cloudNine) = {
     EVT_CALL(GetStatusFlags, ACTOR_PLAYER, LVar0)
-    EVT_IF_FLAG(LVar0, STATUS_FLAG_SLEEP | STATUS_FLAG_FROZEN | STATUS_FLAG_FEAR | STATUS_FLAG_PARALYZE | STATUS_FLAG_DIZZY | STATUS_FLAG_STONE | STATUS_FLAG_STOP)
+    EVT_IF_FLAG(LVar0, STATUS_FLAGS_IMMOBILIZED)
         EVT_EXEC_WAIT(N(cloudNine_immobile))
     EVT_ELSE
         EVT_EXEC_WAIT(N(cloudNine_normal))
@@ -1694,7 +1700,7 @@ EvtScript N(hurricane) = {
     EVT_CALL(action_command_hurricane_init)
     EVT_CALL(SetupMashMeter, 1, 100, 0, 0, 0, 0)
     EVT_CALL(SetActionHudPrepareTime, 15)
-    EVT_CALL(func_80269EAC, 20)
+    EVT_CALL(SetDamageSource, DMG_SRC_HURRICANE)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
     EVT_CALL(SetBattleCamTarget, -45, 54, 0)
     EVT_CALL(SetBattleCamOffsetZ, 0)
@@ -1716,7 +1722,7 @@ EvtScript N(hurricane) = {
     EVT_CALL(SetBattleCamOffsetZ, 0)
     EVT_CALL(SetBattleCamZoom, 430)
     EVT_CALL(MoveBattleCamOver, 150 * DT)
-    EVT_CALL(func_8024ECF8, 0, 0, 1)
+    EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_288)
     EVT_THREAD
         EVT_CALL(N(ProcessHurricane))
@@ -1737,7 +1743,7 @@ EvtScript N(hurricane) = {
     EVT_CALL(GetActionSuccessCopy, LVar0)
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(99)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_E)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_04)
         EVT_CASE_DEFAULT
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_51)
     EVT_END_SWITCH

@@ -1187,7 +1187,7 @@ void appendGfx_npc_blur(void* data) {
             }
         }
     }
-    func_8003D3BC(npc);
+    npc_imgfx_update(npc);
 }
 
 void npc_enable_collisions(void) {
@@ -1230,7 +1230,7 @@ void npc_reload_all(void) {
                             for (j = 0; j < 2; j++) {
                                 npc_reset_current_decoration(npc, j);
                             }
-                            func_8003D3BC(npc);
+                            npc_imgfx_update(npc);
                         }
                     }
                 }
@@ -2079,7 +2079,7 @@ s32 npc_get_collider_below(Npc* npc) {
     return 0;
 }
 
-void func_8003D3BC(Npc* npc) {
+void npc_imgfx_update(Npc* npc) {
     s32 imgfxType = npc->imgfxType;
     s32 imgfxArg1 = npc->imgfxArg1;
     s32 imgfxArg2 = npc->imgfxArg2;
@@ -2155,7 +2155,7 @@ void npc_set_imgfx_params(Npc* npc, s32 imgfxType, s32 arg2, s32 arg3, s32 arg4,
     npc->imgfxArg3 = arg4;
     npc->imgfxArg4 = arg5;
     npc->imgfxFlags = arg6;
-    func_8003D3BC(npc);
+    npc_imgfx_update(npc);
 }
 
 //TODO begin split for npc_surfaces

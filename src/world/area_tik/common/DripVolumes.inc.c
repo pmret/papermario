@@ -2,6 +2,11 @@
 #include "npc.h"
 #include "model.h"
 
+#ifndef DROPLET_MODEL
+#error  DROPLET_MODEL must be defined for DripVolumes
+#define DROPLET_MODEL 0
+#endif
+
 API_CALLABLE(N(CheckDripCollisionWithNPC)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Bytecode* args = script->ptrReadPos;
@@ -123,7 +128,7 @@ EvtScript N(EVS_UpdateDripVolume) = {
     EVT_USE_ARRAY(LVarA)
     EVT_SET(LVar5, ArrayVar(5))
     EVT_LOOP(5)
-        EVT_CALL(CloneModel, MODEL_sizuku, LVar5)
+        EVT_CALL(CloneModel, DROPLET_MODEL, LVar5)
         EVT_CALL(TranslateModel, LVar5, ArrayVar(0), ArrayVar(2), ArrayVar(1))
         EVT_ADD(LVar5, 1)
     EVT_END_LOOP
@@ -180,7 +185,7 @@ EvtScript N(EVS_CreateDripVolumes) = {
             EVT_ADD(LVarF, 5)
         EVT_END_LOOP
     EVT_END_LOOP
-    EVT_CALL(EnableModel, MODEL_sizuku, FALSE)
+    EVT_CALL(EnableModel, DROPLET_MODEL, FALSE)
     EVT_RETURN
     EVT_END
 };

@@ -1,6 +1,3 @@
-#include "common.h"
-#include "battle/battle.h"
+#include "../area.h"
 
-#define NAMESPACE b_area_flo2_flo_06
-
-#include "battle/common/stage/flo_06.inc.c"
+#include "battle/common/stage/area_flo/flo_06.inc.c"

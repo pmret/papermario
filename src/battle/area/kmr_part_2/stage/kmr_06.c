@@ -1,6 +1,3 @@
-#include "common.h"
-#include "battle/battle.h"
+#include "../area.h"
 
-#define NAMESPACE b_area_kmr_part_2_kmr_06
-
-#include "battle/common/stage/kmr_06.inc.c"
+#include "battle/common/stage/area_kmr/kmr_06.inc.c"

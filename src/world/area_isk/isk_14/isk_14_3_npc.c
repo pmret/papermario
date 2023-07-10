@@ -1,5 +1,6 @@
 #include "isk_14.h"
 #include "sprite.h"
+#include "sprite/player.h"
 
 #include "world/common/enemy/StoneChomp.inc.c"
 
@@ -47,7 +48,7 @@ void N(func_80241610_993D40)(void) {
     gDPSetTextureConvert(gMainGfxPos++, G_TC_FILT);
     gDPSetCombineKey(gMainGfxPos++, G_CK_NONE);
     gDPSetAlphaCompare(gMainGfxPos++, G_AC_NONE);
-    
+
     guTranslateF(transformMtx, ambush->pos.x, ambush->pos.y, ambush->pos.z);
     guRotateF(tempMtx, ambush->rot.y + gCameras[gCurrentCameraID].currentYaw + ambush->renderYaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(tempMtx, transformMtx, transformMtx);
@@ -60,7 +61,7 @@ void N(func_80241610_993D40)(void) {
     guMtxF2L(transformMtx, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gMainGfxPos++, OS_PHYSICAL_TO_K0(&gDisplayContext->matrixStack[gMatrixListPos++]),
         G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    
+
     spr_get_npc_raster_info(&spriteRaster, ambush->spriteIndex, ambush->rasterIndex);
     ifxImg.raster  = spriteRaster.raster;
     ifxImg.palette = spriteRaster.defaultPal;
@@ -69,7 +70,7 @@ void N(func_80241610_993D40)(void) {
     ifxImg.xOffset = -(spriteRaster.width / 2);
     ifxImg.yOffset = spriteRaster.height;
     ifxImg.alpha = 255;
-    
+
     imgfx_appendGfx_component(ambush->imgfxIdx, &ifxImg, 0, transformMtx);
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
@@ -78,7 +79,7 @@ API_CALLABLE(N(func_80241AF0_994220)) {
     StoneChompAmbushIsk14* ambush = &N(ChompAmbush);
     SpriteRasterInfo rasterInfo;
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
-    
+
     ambush->spriteIndex = SPR_StoneChomp;
     ambush->rasterIndex = 0;
     spr_get_npc_raster_info(&rasterInfo, ambush->spriteIndex, ambush->rasterIndex);
@@ -159,7 +160,7 @@ EvtScript N(EVS_NpcIdle_StoneChomp) = {
     EVT_CALL(N(DestroyAmbushWorker))
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
     EVT_WAIT(10)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_StoneChomp_Anim04)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_StoneChomp_Bite)
     EVT_WAIT(18)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_INVISIBLE, FALSE)
     EVT_CALL(EnableNpcShadow, NPC_SELF, TRUE)

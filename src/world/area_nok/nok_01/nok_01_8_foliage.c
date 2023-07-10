@@ -5,7 +5,7 @@
 FoliageModelList N(Bush5_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o315);
 
 FoliageDropList N(Bush5_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_COIN,
@@ -24,7 +24,7 @@ SearchBushConfig N(SearchBush_Bush5) = {
 FoliageModelList N(Bush4_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o322, MODEL_o320);
 
 FoliageDropList N(Bush3_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_KOOT_GLASSES,
@@ -73,7 +73,7 @@ SearchBushConfig N(SearchBush_Bush6) = {
 FoliageModelList N(Bush7_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o391);
 
 FoliageDropList N(Bush7_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_DRIED_SHROOM,
@@ -92,7 +92,7 @@ SearchBushConfig N(SearchBush_Bush7) = {
 FoliageModelList N(Bush8_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o392);
 
 FoliageDropList N(Bush8_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_KOOPA_LEAF,
@@ -112,7 +112,7 @@ SearchBushConfig N(SearchBush_Bush8) = {
 FoliageModelList N(Bush9_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o393, MODEL_o402);
 
 FoliageDropList N(Bush9_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_COIN,
@@ -132,7 +132,7 @@ SearchBushConfig N(SearchBush_Bush9) = {
 FoliageModelList N(Bush2_BushModels) = FOLIAGE_MODEL_LIST(MODEL_o394, MODEL_o399, MODEL_o400, MODEL_o401);
 
 FoliageDropList N(Bush1_Drops) = {
-    .count = 1, 
+    .count = 1,
     .drops = {
         {
             .itemID = ITEM_KOOT_EMPTY_WALLET,

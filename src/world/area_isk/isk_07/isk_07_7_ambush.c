@@ -1,4 +1,5 @@
 #include "isk_07.h"
+#include "sprite/player.h"
 
 extern EvtScript N(EVS_OpenSarcophagus1);
 extern EvtScript N(EVS_OpenSarcophagus2);

@@ -1,5 +1,6 @@
 #include "obk_09.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 typedef struct ImprisonedCard {
     /* 0x00 */ Vec3f pos;
@@ -37,7 +38,7 @@ API_CALLABLE(N(ImprisonedCardUpdate)) {
     effect->data.spiritCard->pos.x = card->pos.x;
     effect->data.spiritCard->pos.y = card->pos.y;
     effect->data.spiritCard->pos.z = card->pos.z;
-    
+
     card->rot.y = clamp_angle(card->rot.y + 6.6f);
     effect->data.spiritCard->yaw = card->rot.y;
 

@@ -7,14 +7,15 @@
 #include "sprite/npc/BattleMerlee.h"
 #include "battle/action_cmd/flee.h"
 #include "battle/battle.h"
+#include "sprite/player.h"
 
 extern HudScript HES_Happy;
 extern HudScript HES_HPDrain;
 
-extern EvtScript EVS_PlayerCelebrate;
-extern EvtScript D_802988F0;
-extern EvtScript D_80298724;
-extern EvtScript D_80298948;
+extern EvtScript EVS_Player_Celebrate;
+extern EvtScript EVS_Player_SimpleHit;
+extern EvtScript EVS_Player_ComplexHit;
+extern EvtScript EVS_Player_NoDamageHit;
 
 extern PlayerCelebrationAnimOptions D_80280FC0;
 
@@ -22,7 +23,7 @@ BSS s32 D_8029FB90;
 BSS f32 D_8029FB94;
 BSS EffectInstance* BattleMerleeOrbEffect;
 BSS EffectInstance* BattleMerleeWaveEffect;
-BSS s32 D_8029FBA0;
+BSS s32 RefundHudElem;
 BSS s16 D_8029FBA4;
 BSS s32 D_8029FBA8;
 BSS s32 D_8029FBAC;
@@ -30,7 +31,7 @@ BSS s32 D_8029FBB0[3];
 
 API_CALLABLE(func_802749F8);
 
-void func_80260A60(void) {
+void btl_set_player_idle_anims(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     ActorPart* actorPart = &battleStatus->playerActor->partsTable[0];
 
@@ -45,14 +46,14 @@ void func_80260A60(void) {
 API_CALLABLE(IsPartnerImmobile) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* playerActor = battleStatus->playerActor;
-    s32 isImmobile = playerActor->debuff == STATUS_FEAR
-                     || playerActor->debuff == STATUS_DIZZY
-                     || playerActor->debuff == STATUS_PARALYZE
-                     || playerActor->debuff == STATUS_SLEEP
-                     || playerActor->debuff == STATUS_FROZEN
-                     || playerActor->debuff == STATUS_STOP;
+    s32 isImmobile = playerActor->debuff == STATUS_KEY_FEAR
+                     || playerActor->debuff == STATUS_KEY_DIZZY
+                     || playerActor->debuff == STATUS_KEY_PARALYZE
+                     || playerActor->debuff == STATUS_KEY_SLEEP
+                     || playerActor->debuff == STATUS_KEY_FROZEN
+                     || playerActor->debuff == STATUS_KEY_STOP;
 
-    if (playerActor->stoneStatus == 12) {
+    if (playerActor->stoneStatus == STATUS_KEY_STONE) {
         isImmobile = TRUE;
     }
 
@@ -73,11 +74,11 @@ API_CALLABLE(ActivateDefend) {
 API_CALLABLE(DoesMarioStatusPreventHappyAnimation) {
     Actor* player = gBattleStatus.playerActor;
 
-    func_802667F0(2, player, player->currentPos.x, player->currentPos.y + 20.0f, player->currentPos.z);
+    show_action_rating(ACTION_RATING_LUCKY, player, player->currentPos.x, player->currentPos.y + 20.0f, player->currentPos.z);
     sfx_play_sound(SOUND_3FC);
     script->varTable[0] = FALSE;
-    if (player->debuff == STATUS_FEAR || player->debuff == STATUS_DIZZY || player->debuff == STATUS_PARALYZE ||
-        player->debuff == STATUS_SLEEP ||player->debuff == STATUS_FROZEN || player->debuff == STATUS_STOP) {
+    if (player->debuff == STATUS_KEY_FEAR || player->debuff == STATUS_KEY_DIZZY || player->debuff == STATUS_KEY_PARALYZE ||
+        player->debuff == STATUS_KEY_SLEEP ||player->debuff == STATUS_KEY_FROZEN || player->debuff == STATUS_KEY_STOP) {
         script->varTable[0] = TRUE;
     }
     return ApiStatus_DONE2;
@@ -138,7 +139,7 @@ API_CALLABLE(SetFledBattleFlag) {
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_80260DD8) {
+API_CALLABLE(DetermineAutoRunAwaySuccess) {
     Actor* player = gBattleStatus.playerActor;
     s32 var;
 
@@ -156,7 +157,7 @@ API_CALLABLE(func_80260DD8) {
 }
 
 API_CALLABLE(func_80260E38) {
-    btl_show_battle_message(BTL_MSG_31, 60);
+    btl_show_battle_message(BTL_MSG_ACTION_TIP_03, 60);
     return ApiStatus_DONE2;
 }
 
@@ -167,12 +168,13 @@ API_CALLABLE(func_80260E5C) {
     return ApiStatus_DONE2;
 }
 
+// out LVar0: time caller should wait for coin spawns
 API_CALLABLE(GiveRefund) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
     s32 sellValue = gItemTable[battleStatus->moveArgument].sellValue;
-    f32 facingAngleSign = 0.0f;
-    s32 sleepTime = 0;
+    f32 angle = 0.0f;
+    s32 delayTime = 0;
     f32 posX, posY, posZ;
     posY = player->currentPos.y + player->size.y;
 
@@ -180,28 +182,29 @@ API_CALLABLE(GiveRefund) {
         s32 i;
         s32 iconPosX, iconPosY, iconPosZ;
 
+        // 75% of the item's sell value, rounded up
         sellValue = (sellValue * 75 + 99) / 100;
 
         for (i = 0; i < sellValue; i++) {
             posX = player->currentPos.x;
             posZ = player->currentPos.z;
 
-            make_item_entity(ITEM_COIN, posX, posY, posZ, ITEM_SPAWN_MODE_TOSS_FADE1, (i * 3) + 1, facingAngleSign, 0);
+            make_item_entity(ITEM_COIN, posX, posY, posZ, ITEM_SPAWN_MODE_TOSS_FADE1, (i * 3) + 1, angle, 0);
             add_coins(1);
-            facingAngleSign += 30.0f;
+            angle += 30.0f;
         }
 
-        sleepTime = (i * 3) + 30;
+        delayTime = (i * 3) + 30;
 
         posX = player->currentPos.x;
         posY = player->currentPos.y;
         posZ = player->currentPos.z;
         get_screen_coords(gCurrentCameraID, posX, posY, posZ, &iconPosX, &iconPosY, &iconPosZ);
-        D_8029FBA0 = hud_element_create(&HES_Refund);
-        hud_element_set_render_pos(D_8029FBA0, iconPosX + 36, iconPosY - 63);
+        RefundHudElem = hud_element_create(&HES_Refund);
+        hud_element_set_render_pos(RefundHudElem, iconPosX + 36, iconPosY - 63);
     }
 
-    script->varTable[0] = sleepTime;
+    script->varTable[0] = delayTime;
 
     return ApiStatus_DONE2;
 }
@@ -210,13 +213,13 @@ API_CALLABLE(GiveRefundCleanup) {
     s32 sellValue = gItemTable[gBattleStatus.moveArgument].sellValue;
 
     if (player_team_is_ability_active(gBattleStatus.playerActor, ABILITY_REFUND) && sellValue > 0) {
-        hud_element_free(D_8029FBA0);
+        hud_element_free(RefundHudElem);
     }
 
     return ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_802610CC) {
+API_CALLABLE(LifeShroomShroudWorld) {
     if (isInitialCall) {
         mdl_set_all_fog_mode(FOG_MODE_1);
         *gBackgroundFogModePtr = FOG_MODE_1;
@@ -231,7 +234,7 @@ API_CALLABLE(func_802610CC) {
     return (script->functionTemp[0] == 0) * ApiStatus_DONE2;
 }
 
-API_CALLABLE(func_80261164) {
+API_CALLABLE(LifeShroomRevealWorld) {
     if (isInitialCall) {
         script->functionTemp[0] = 20;
         btl_cam_unfreeze();
@@ -267,22 +270,26 @@ API_CALLABLE(RestorePreDefeatState) {
     PlayerData* playerData = &gPlayerData;
     BattleStatus* battleStatus = &gBattleStatus;
 
-    battleStatus->rushFlags = RUSH_FLAG_NONE;
     gBattleState = gDefeatedBattleState;
     gBattleSubState = gDefeatedBattleSubstate;
-    battleStatus->flags1 |= BS_FLAGS1_8;
+    battleStatus->flags1 |= BS_FLAGS1_SHOW_PLAYER_DECORATIONS;
+
+    // clear rush flags to initialize
+    battleStatus->rushFlags = RUSH_FLAG_NONE;
     battleStatus->flags2 &= ~BS_FLAGS2_HAS_RUSH;
 
+    // set rush flags based on danger/peril status
     if (!(battleStatus->flags2 & BS_FLAGS2_PEACH_BATTLE)) {
-        if (playerData->curHP <= 1 && is_ability_active(ABILITY_MEGA_RUSH)) {
+        if (playerData->curHP <= PERIL_THRESHOLD && is_ability_active(ABILITY_MEGA_RUSH)) {
             gBattleStatus.flags2 |= BS_FLAGS2_HAS_RUSH;
             battleStatus->rushFlags |= RUSH_FLAG_MEGA;
         }
 
-        if (playerData->curHP <= 5 && is_ability_active(ABILITY_POWER_RUSH) &&
-            !(battleStatus->rushFlags & RUSH_FLAG_MEGA)) {
-            gBattleStatus.flags2 |= BS_FLAGS2_HAS_RUSH;
-            battleStatus->rushFlags |= RUSH_FLAG_POWER;
+        if (playerData->curHP <= DANGER_THRESHOLD && is_ability_active(ABILITY_POWER_RUSH)) {
+            if (!(battleStatus->rushFlags & RUSH_FLAG_MEGA)) {
+                gBattleStatus.flags2 |= BS_FLAGS2_HAS_RUSH;
+                battleStatus->rushFlags |= RUSH_FLAG_POWER;
+            }
         }
     }
     return ApiStatus_DONE2;
@@ -417,8 +424,8 @@ API_CALLABLE(BattleMerleeUpdateFX) {
     if (D_8029FBA4 == 2) {
         BattleMerleeOrbEffect->data.energyOrbWave->scale = 0.00001f;
         BattleMerleeWaveEffect->data.energyOrbWave->scale = 0.00001f;
-        BattleMerleeOrbEffect->flags |= 0x10;
-        BattleMerleeWaveEffect->flags |= 0x10;
+        BattleMerleeOrbEffect->flags |= FX_INSTANCE_FLAG_DISMISS;
+        BattleMerleeWaveEffect->flags |= FX_INSTANCE_FLAG_DISMISS;
         return ApiStatus_DONE1;
     }
 
@@ -658,7 +665,7 @@ EvtScript EVS_Peach_OnActorCreate = {
 };
 
 EvtScript EVS_MarioEnterStage = {
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_22)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_ENTRY)
     EVT_CALL(SetBattleCamTarget, -80, 35, 8)
     EVT_CALL(BattleCamTargetActor, ACTOR_PLAYER)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -700,8 +707,8 @@ EvtScript EVS_MarioEnterStage = {
 };
 
 EvtScript EVS_PeachEnterStage = {
-    EVT_CALL(func_8026BF48, 1)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_22)
+    EVT_CALL(FreezeBattleState, TRUE)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_ENTRY)
     EVT_CALL(SetBattleCamTarget, -80, 35, 8)
     EVT_CALL(BattleCamTargetActor, ACTOR_PLAYER)
     EVT_CHILD_THREAD
@@ -721,7 +728,7 @@ EvtScript EVS_PeachEnterStage = {
     EVT_CALL(PlayerRunToGoal, 40)
     EVT_CALL(SetAnimation, ACTOR_SELF, 0, ANIM_Peach1_Walk)
     EVT_WAIT(15)
-    EVT_CALL(func_8026BF48, 0)
+    EVT_CALL(FreezeBattleState, FALSE)
     EVT_RETURN
     EVT_END
 };
@@ -734,7 +741,7 @@ EvtScript EVS_Mario_HandlePhase = {
         EVT_CASE_EQ(PHASE_FIRST_STRIKE)
             EVT_EXEC_WAIT(EVS_PlayerFirstStrike)
         EVT_CASE_EQ(PHASE_CELEBRATE)
-            EVT_EXEC_WAIT(EVS_PlayerCelebrate)
+            EVT_EXEC_WAIT(EVS_Player_Celebrate)
         EVT_CASE_EQ(PHASE_RUN_AWAY_START)
             EVT_EXEC_WAIT(EVS_RunAwayStart)
         EVT_CASE_EQ(PHASE_RUN_AWAY_FAIL)
@@ -835,7 +842,7 @@ EvtScript EVS_Player_HandleEvent = {
             EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
     EVT_END_SWITCH
     EVT_CALL(CloseActionCommandInfo)
-    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, 0)
+    EVT_CALL(SetBattleFlagBits, BS_FLAGS1_100, FALSE)
     EVT_CALL(func_802693F0)
     EVT_CALL(func_802749F8)
     EVT_CALL(GetLastEvent, ACTOR_PLAYER, LVarF)
@@ -843,7 +850,7 @@ EvtScript EVS_Player_HandleEvent = {
         EVT_CASE_OR_EQ(EVENT_SPIKE_CONTACT)
         EVT_CASE_OR_EQ(EVENT_SPIKE_DEATH)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_30)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_HIT_SPIKE)
             EVT_CALL(GetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
             EVT_SUB(LVar0, 60)
             EVT_ADD(LVar1, 40)
@@ -853,8 +860,8 @@ EvtScript EVS_Player_HandleEvent = {
             EVT_CALL(func_80273444, 5, 0, 1)
             EVT_SET_CONST(LVar1, ANIM_Mario1_HurtFoot)
             EVT_SET(LVar2, 0)
-            EVT_EXEC_WAIT(D_802988F0)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_EXEC_WAIT(EVS_Player_SimpleHit)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
             EVT_CALL(GetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
             EVT_ADD(LVar0, 30)
@@ -875,7 +882,7 @@ EvtScript EVS_Player_HandleEvent = {
         EVT_CASE_OR_EQ(EVENT_BURN_CONTACT)
         EVT_CASE_OR_EQ(EVENT_BURN_DEATH)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_31)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_HIT_HAZARD)
             EVT_CALL(GetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
             EVT_SUB(LVar0, 60)
             EVT_ADD(LVar1, 40)
@@ -888,18 +895,18 @@ EvtScript EVS_Player_HandleEvent = {
                 EVT_ADD(LVar5, 5)
                 EVT_ADD(LVar6, 4)
                 EVT_ADD(LVar7, 5)
-                EVT_CALL(PlayEffect, EFFECT_RING_BLAST, 0, LVar5, LVar6, LVar7, EVT_FLOAT(1.5), 15, 0, 0, 0, 0, 0, 0, 0)
+                EVT_PLAY_EFFECT(EFFECT_RING_BLAST, 0, LVar5, LVar6, LVar7, EVT_FLOAT(1.5), 15)
                 EVT_WAIT(2)
                 EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar5, LVar6, LVar7)
                 EVT_ADD(LVar5, -5)
                 EVT_ADD(LVar6, 18)
                 EVT_ADD(LVar7, 5)
-                EVT_CALL(PlayEffect, EFFECT_RING_BLAST, 0, LVar5, LVar6, LVar7, EVT_FLOAT(1.5), 15, 0, 0, 0, 0, 0, 0, 0)
+                EVT_PLAY_EFFECT(EFFECT_RING_BLAST, 0, LVar5, LVar6, LVar7, EVT_FLOAT(1.5), 15)
             EVT_END_CHILD_THREAD
             EVT_SET_CONST(LVar1, ANIM_MarioB3_BurnHurt)
             EVT_SET(LVar2, 0)
-            EVT_EXEC_WAIT(D_802988F0)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_EXEC_WAIT(EVS_Player_SimpleHit)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
             EVT_CALL(GetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
             EVT_ADD(LVar0, 30)
@@ -920,7 +927,7 @@ EvtScript EVS_Player_HandleEvent = {
         EVT_CASE_OR_EQ(EVENT_SHOCK_HIT)
         EVT_CASE_OR_EQ(EVENT_SHOCK_DEATH)
             EVT_CALL(SetActorRotation, ACTOR_SELF, 0, 0, 0)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_31)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_HIT_HAZARD)
             EVT_CALL(GetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
             EVT_SUB(LVar0, 60)
             EVT_ADD(LVar1, 40)
@@ -928,11 +935,11 @@ EvtScript EVS_Player_HandleEvent = {
             EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_HurtFoot, ANIM_Mario1_HurtFoot, ANIM_Mario1_HurtFoot)
             EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
             EVT_CALL(func_80273444, 5, 0, 1)
-            EVT_CALL(ShowShockEffect, -127)
+            EVT_CALL(ShowShockEffect, ACTOR_SELF)
             EVT_SET_CONST(LVar1, ANIM_Mario1_HurtFoot)
             EVT_SET(LVar2, 0)
-            EVT_EXEC_WAIT(D_802988F0)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_EXEC_WAIT(EVS_Player_SimpleHit)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(SetGoalToHome, ACTOR_PLAYER)
             EVT_CALL(GetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
             EVT_ADD(LVar0, 30)
@@ -989,38 +996,38 @@ EvtScript EVS_Player_HandleEvent = {
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar1, ANIM_Mario1_Hurt)
             EVT_SET(LVar2, 0)
-            EVT_EXEC_WAIT(D_80298724)
+            EVT_EXEC_WAIT(EVS_Player_ComplexHit)
             EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_208C)
             EVT_SET_CONST(LVar1, ANIM_Mario1_Idle)
-            EVT_EXEC_WAIT(D_80298948)
+            EVT_EXEC_WAIT(EVS_Player_NoDamageHit)
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_18)
         EVT_CASE_OR_EQ(EVENT_BLOCK)
             EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_208C)
             EVT_SET_CONST(LVar0, 1)
             EVT_SET_CONST(LVar1, ANIM_Mario1_Crouch)
-            EVT_EXEC_WAIT(D_80298948)
+            EVT_EXEC_WAIT(EVS_Player_NoDamageHit)
             EVT_WAIT(10)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar1, ANIM_MarioB3_BurnHurt)
             EVT_SET(LVar2, 0)
-            EVT_EXEC_WAIT(D_802988F0)
+            EVT_EXEC_WAIT(EVS_Player_SimpleHit)
             EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
         EVT_CASE_EQ(EVENT_FIRE_DEATH)
             EVT_SET_CONST(LVar1, ANIM_MarioB3_BurnHurt)
             EVT_SET(LVar2, 0)
-            EVT_EXEC_WAIT(D_802988F0)
+            EVT_EXEC_WAIT(EVS_Player_SimpleHit)
             EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Idle)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_DEATH)
             EVT_SET_CONST(LVar1, ANIM_Mario1_Hurt)
             EVT_SET(LVar2, 0)
-            EVT_EXEC_WAIT(D_802988F0)
+            EVT_EXEC_WAIT(EVS_Player_SimpleHit)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_FROM_KO)
             EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(1.8))
@@ -1036,7 +1043,7 @@ EvtScript EVS_Player_HandleEvent = {
     EVT_END
 };
 
-EvtScript EVS_PlayerCelebrate = {
+EvtScript EVS_Player_Celebrate = {
     EVT_SET(LVar0, 0)
     EVT_LOOP(5)
         EVT_ADD(LVar0, 72)
@@ -1065,28 +1072,28 @@ EvtScript EVS_RunAwayNoCommand = {
     EVT_WAIT(1)
     EVT_CALL(SetActorYaw, ACTOR_PLAYER, 180)
     EVT_WAIT(5)
-    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_CALL(AddActorPos, ACTOR_PLAYER, 2, 0, 0)
     EVT_WAIT(2)
-    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_CALL(AddActorPos, ACTOR_PLAYER, 2, 0, 0)
     EVT_WAIT(5)
-    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_CALL(AddActorPos, ACTOR_PLAYER, 2, 0, 0)
     EVT_WAIT(2)
-    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_CALL(AddActorPos, ACTOR_PLAYER, 2, 0, 0)
     EVT_WAIT(2)
-    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_CALL(AddActorPos, ACTOR_PLAYER, 2, 0, 0)
     EVT_WAIT(5)
-    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_CALL(AddActorPos, ACTOR_PLAYER, 2, 0, 0)
     EVT_WAIT(2)
-    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_CALL(AddActorPos, ACTOR_PLAYER, 2, 0, 0)
     EVT_WAIT(5)
-    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_CALL(AddActorPos, ACTOR_PLAYER, 2, 0, 0)
     EVT_WAIT(15)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_CALL(SetActorJumpGravity, ACTOR_PLAYER, EVT_FLOAT(1.8))
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Fall, ANIM_Mario1_Land)
     EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_CALL(func_80273444, 8, 0, 0)
-    EVT_CALL(func_80260DD8)
+    EVT_CALL(DetermineAutoRunAwaySuccess)
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(SetFledBattleFlag)
         EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_15E)
@@ -1108,7 +1115,7 @@ EvtScript EVS_RunAwayNoCommand = {
         EVT_CHILD_THREAD
             EVT_LOOP(2)
                 EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-                EVT_CALL(PlayEffect, EFFECT_LANDING_DUST, 1, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 0, 0, 0, 0, 0, 0, 0, 0)
+                EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, LVar0, LVar1, LVar2, EVT_FLOAT(1.0))
                 EVT_WAIT(5)
             EVT_END_LOOP
         EVT_END_CHILD_THREAD
@@ -1133,12 +1140,12 @@ EvtScript EVS_RunAwayNoCommand = {
                 EVT_SUB(LVar0, 8)
                 EVT_ADD(LVar1, 14)
                 EVT_ADD(LVar2, 5)
-                EVT_CALL(PlayEffect, EFFECT_WALKING_DUST, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), EVT_FLOAT(1.0), 0, 0, 0, 0, 0, 0, 0)
+                EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), EVT_FLOAT(1.0))
                 EVT_WAIT(5)
             EVT_END_LOOP
         EVT_END_CHILD_THREAD
         EVT_WAIT(5)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_WAIT(10)
     EVT_END_IF
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
@@ -1177,21 +1184,21 @@ EvtScript EVS_RunAwayStart = {
     EVT_CALL(action_command_flee_start, 0, 60, 3)
     EVT_CALL(func_80260E5C)
     EVT_WAIT(5)
-    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_CALL(AddActorPos, ACTOR_PLAYER, 2, 0, 0)
     EVT_WAIT(2)
-    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_CALL(AddActorPos, ACTOR_PLAYER, 2, 0, 0)
     EVT_WAIT(5)
-    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_CALL(AddActorPos, ACTOR_PLAYER, 2, 0, 0)
     EVT_WAIT(2)
-    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_CALL(AddActorPos, ACTOR_PLAYER, 2, 0, 0)
     EVT_WAIT(2)
-    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_CALL(AddActorPos, ACTOR_PLAYER, 2, 0, 0)
     EVT_WAIT(5)
-    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_CALL(AddActorPos, ACTOR_PLAYER, 2, 0, 0)
     EVT_WAIT(2)
-    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_CALL(AddActorPos, ACTOR_PLAYER, 2, 0, 0)
     EVT_WAIT(5)
-    EVT_CALL(AddActorPos, 0, 2, 0, 0)
+    EVT_CALL(AddActorPos, ACTOR_PLAYER, 2, 0, 0)
     EVT_WAIT(15)
     EVT_WAIT(30)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -1200,7 +1207,7 @@ EvtScript EVS_RunAwayStart = {
     EVT_CALL(SetGoalPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_CALL(func_80273444, 8, 0, 0)
     EVT_CALL(GetActionSuccess, LVar0)
-    EVT_CALL(func_80260DD8)
+    EVT_CALL(DetermineAutoRunAwaySuccess)
     EVT_IF_EQ(LVar0, 1)
         EVT_CALL(SetFledBattleFlag)
         EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_15E)
@@ -1222,7 +1229,7 @@ EvtScript EVS_RunAwayStart = {
         EVT_CHILD_THREAD
             EVT_LOOP(2)
                 EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-                EVT_CALL(PlayEffect, EFFECT_LANDING_DUST, 1, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), 0, 0, 0, 0, 0, 0, 0, 0)
+                EVT_PLAY_EFFECT(EFFECT_LANDING_DUST, 1, LVar0, LVar1, LVar2, EVT_FLOAT(1.0))
                 EVT_WAIT(5)
             EVT_END_LOOP
         EVT_END_CHILD_THREAD
@@ -1247,12 +1254,12 @@ EvtScript EVS_RunAwayStart = {
                 EVT_SUB(LVar0, 8)
                 EVT_ADD(LVar1, 14)
                 EVT_ADD(LVar2, 5)
-                EVT_CALL(PlayEffect, EFFECT_WALKING_DUST, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), EVT_FLOAT(1.0), 0, 0, 0, 0, 0, 0, 0)
+                EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 0, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), EVT_FLOAT(1.0))
                 EVT_WAIT(5)
             EVT_END_LOOP
         EVT_END_CHILD_THREAD
         EVT_WAIT(5)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_WAIT(10)
     EVT_END_IF
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, TRUE)
@@ -1314,7 +1321,7 @@ EvtScript EVS_PlayerDies = {
     EVT_CALL(SetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar2, 20)
-    EVT_CALL(PlayEffect, EFFECT_WALKING_DUST, 1, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), EVT_FLOAT(1.0), 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 1, LVar0, LVar1, LVar2, EVT_FLOAT(1.0), EVT_FLOAT(1.0))
     EVT_WAIT(15)
     EVT_RETURN
     EVT_END
@@ -1335,7 +1342,7 @@ EvtScript D_80287404 = {
         EVT_SET(LVar3, LVar1)
         EVT_ADD(LVar3, 10)
         EVT_ADD(LVar3, 2)
-        EVT_CALL(PlayEffect, EFFECT_RADIAL_SHIMMER, 1, LVar0, LVar3, LVar2, EVT_FLOAT(1.0), 30, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_RADIAL_SHIMMER, 1, LVar0, LVar3, LVar2, EVT_FLOAT(1.0), 30)
         EVT_CALL(MakeItemEntity, LVarA, LVar0, LVar1, LVar2, 1, 0)
         EVT_SET(LVarA, LVar0)
         EVT_CALL(GiveRefund)
@@ -1352,7 +1359,7 @@ EvtScript D_80287404 = {
         EVT_SET(LVar3, LVar1)
         EVT_ADD(LVar3, 10)
         EVT_ADD(LVar3, 2)
-        EVT_CALL(PlayEffect, EFFECT_RADIAL_SHIMMER, 1, LVar0, LVar3, LVar2, EVT_FLOAT(1.0), 30, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_RADIAL_SHIMMER, 1, LVar0, LVar3, LVar2, EVT_FLOAT(1.0), 30)
         EVT_CALL(MakeItemEntity, LVarA, LVar0, LVar1, LVar2, 1, 0)
         EVT_SET(LVarA, LVar0)
         EVT_WAIT(15)
@@ -1440,7 +1447,7 @@ EvtScript EVS_UseLifeShroom = {
             EVT_CALL(SetPartAlpha, ACTOR_PARTNER, -1, 0)
         EVT_END_IF
     EVT_END_CHILD_THREAD
-    EVT_CALL(func_802610CC)
+    EVT_CALL(LifeShroomShroudWorld)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_CALL(MakeItemEntity, ITEM_LIFE_SHROOM, LVar0, LVar1, LVar2, 1, 0)
     EVT_SET(LVarA, LVar0)
@@ -1468,7 +1475,7 @@ EvtScript EVS_UseLifeShroom = {
     EVT_END_IF
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_372)
     EVT_ADD(LVar4, 15)
-    EVT_CALL(PlayEffect, EFFECT_ENERGY_IN_OUT, 3, LVar3, LVar4, LVar5, EVT_FLOAT(1.0), 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_ENERGY_IN_OUT, 3, LVar3, LVar4, LVar5, EVT_FLOAT(1.0))
     EVT_SET(LVar0, LVarF)
     EVT_LOOP(4)
         EVT_CALL(SetItemFlags, LVarA, 64, 1)
@@ -1479,13 +1486,13 @@ EvtScript EVS_UseLifeShroom = {
     EVT_CALL(RemoveEffect, LVar0)
     EVT_CALL(RemoveItemEntity, LVarA)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_2055)
-    EVT_CALL(PlayEffect, EFFECT_STARS_SHIMMER, 1, LVar3, LVar4, LVar5, 70, 70, 10, 20, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_STARS_SHIMMER, 1, LVar3, LVar4, LVar5, 70, 70, 10, 20)
     EVT_WAIT(20)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_373)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-    EVT_CALL(PlayEffect, EFFECT_STARS_SHIMMER, 2, LVar0, LVar1, LVar2, 50, 20, 32, 30, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_STARS_SHIMMER, 2, LVar0, LVar1, LVar2, 50, 20, 32, 30)
     EVT_WAIT(40)
-    EVT_CALL(PlayEffect, EFFECT_STARS_SHIMMER, 2, LVar0, LVar1, LVar2, 30, 50, 32, 30, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_STARS_SHIMMER, 2, LVar0, LVar1, LVar2, 30, 50, 32, 30)
     EVT_CHILD_THREAD
         EVT_LOOP(3)
             EVT_CALL(SetActorDispOffset, ACTOR_PLAYER, 1, 0, 0)
@@ -1508,7 +1515,7 @@ EvtScript EVS_UseLifeShroom = {
     EVT_END_CHILD_THREAD
     EVT_WAIT(50)
     EVT_CHILD_THREAD
-        EVT_CALL(func_80261164)
+        EVT_CALL(LifeShroomRevealWorld)
     EVT_END_CHILD_THREAD
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_374)
     EVT_CALL(SetActorRotation, ACTOR_PLAYER, 0, 0, 0)
@@ -1516,9 +1523,9 @@ EvtScript EVS_UseLifeShroom = {
     EVT_CALL(ConsumeLifeShroom)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 25)
-    EVT_CALL(PlayEffect, EFFECT_RECOVER, 0, LVar0, LVar1, LVar2, LVar3, 0, 0, 0, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_RECOVER, 0, LVar0, LVar1, LVar2, LVar3)
     EVT_CALL(FreezeBattleCam, 0)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 15)
     EVT_CHILD_THREAD
         EVT_CALL(func_80261388)
@@ -1541,7 +1548,7 @@ EvtScript EVS_UseLifeShroom = {
         EVT_LOOP(5)
             EVT_WAIT(2)
             EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
-            EVT_CALL(PlayEffect, EFFECT_MISC_PARTICLES, 2, LVar0, LVar1, LVar2, 20, 20, EVT_FLOAT(1.0), 10, 50, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_MISC_PARTICLES, 2, LVar0, LVar1, LVar2, 20, 20, EVT_FLOAT(1.0), 10, 50)
         EVT_END_LOOP
     EVT_END_CHILD_THREAD
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_160)
@@ -1568,7 +1575,7 @@ EvtScript EVS_MerleeRunOut = {
         EVT_RETURN
     EVT_END_IF
     EVT_WAIT(15)
-    EVT_CALL(ShowMessageBox, BTL_MSG_03, 60)
+    EVT_CALL(ShowMessageBox, BTL_MSG_MERLEE_DONE, 60)
     EVT_CALL(WaitForMessageBoxDone)
     EVT_RETURN
     EVT_END
@@ -1595,7 +1602,7 @@ EvtScript EVS_MerleeAttackBonus = {
     EVT_WAIT(30)
     EVT_CALL(SetNpcAnimation, NPC_BTL_MERLEE, ANIM_BattleMerlee_Release)
     EVT_CALL(func_802619B4)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 4)
     EVT_CALL(BattleMerleeFadeStageFromBlack)
     EVT_WAIT(20)
@@ -1644,7 +1651,7 @@ EvtScript EVS_MerleeDefenseBonus = {
     EVT_WAIT(30)
     EVT_CALL(SetNpcAnimation, NPC_BTL_MERLEE, ANIM_BattleMerlee_Release)
     EVT_CALL(func_802619B4)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 4)
     EVT_CALL(BattleMerleeFadeStageFromBlack)
     EVT_WAIT(20)
@@ -1698,7 +1705,7 @@ EvtScript EVS_MerleeExpBonus = {
     EVT_WAIT(30)
     EVT_CALL(SetNpcAnimation, NPC_BTL_MERLEE, ANIM_BattleMerlee_Release)
     EVT_CALL(func_802619B4)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 4)
     EVT_CALL(BattleMerleeFadeStageFromBlack)
     EVT_WAIT(20)
@@ -1728,7 +1735,7 @@ EvtScript EVS_MerleeExpBonus = {
 
 EvtScript EVS_PlayerHappy = {
     EVT_CALL(UseIdleAnimation, ACTOR_PLAYER, FALSE)
-    EVT_CALL(UseBattleCamPresetWait, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPresetWait, BTL_CAM_DEFAULT)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_ThumbsUp)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_CALL(func_802619E8, LVar0, LVar1, LVar2)
@@ -1793,9 +1800,8 @@ EvtScript EVS_ApplyDizzyAttack = {
     EVT_END
 };
 
-
 EvtScript EVS_PlayerRegainAbility = {
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVarF, LVar1, LVar2)
     EVT_LOOP(LVar0)
         EVT_ADD(LVarF, 3)
@@ -1837,9 +1843,9 @@ EvtScript EVS_PlayerRegainAbility = {
     EVT_CALL(func_80261FB4)
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
     EVT_ADD(LVar1, 20)
-    EVT_CALL(PlayEffect, EFFECT_STARS_SHIMMER, 0, LVar0, LVar1, LVar2, 30, 30, 10, 30, 0, 0, 0, 0, 0)
+    EVT_PLAY_EFFECT(EFFECT_STARS_SHIMMER, 0, LVar0, LVar1, LVar2, 30, 30, 10, 30)
     EVT_CALL(RemoveItemEntity, LVarA)
-    EVT_CALL(func_8026BF48, 0)
+    EVT_CALL(FreezeBattleState, FALSE)
     EVT_RETURN
     EVT_END
 };

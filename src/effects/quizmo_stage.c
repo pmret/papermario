@@ -30,7 +30,7 @@ EffectInstance* quizmo_stage_main(s32 arg0, f32 posX, f32 posY, f32 posZ) {
     effectBp.update = quizmo_stage_update;
     effectBp.renderWorld = quizmo_stage_render;
     effectBp.unk_00 = 0;
-    effectBp.unk_14 = 0;
+    effectBp.renderUI = NULL;
     effectBp.effectID = EFFECT_QUIZMO_STAGE;
 
     effect = shim_create_effect_instance(&effectBp);
@@ -65,8 +65,8 @@ void quizmo_stage_update(EffectInstance *effect) {
     QuizmoStageFXData *data = effect->data.quizmoStage;
     s32 lifeTime;
 
-    if (effect->flags & 16) {
-        effect->flags &= ~16;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         data->vanishTimer = 30;
     }
 
@@ -121,7 +121,7 @@ void quizmo_stage_appendGfx(void* effect) {
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, microphoneRaiseAmt, microphoneRaiseAmt, microphoneRaiseAmt, 255);
-    gDPSetCombineLERP(gMainGfxPos++, TEXEL0, 0, SHADE, 0, TEXEL0, 0, SHADE, 0, COMBINED, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED);
+    gDPSetCombineMode(gMainGfxPos++, G_CC_MODULATEIA, PM_CC_16);
     gSPDisplayList(gMainGfxPos++, D_09007230_39FDF0);
 
     if (data->unk_3C != 255) {

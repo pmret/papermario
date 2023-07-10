@@ -37,12 +37,12 @@ void update_input(void) {
         nuContDataGet(contData, 0);
     }
 
-    if (gGameStatusPtr->demoState != 0) {
-        if (gGameStatusPtr->demoState < 2 &&
-            (contData->button & (BUTTON_A | BUTTON_B | BUTTON_Z | BUTTON_START)) &&
-            handleInput)
-        {
-            gGameStatusPtr->demoState = 2;
+    if (gGameStatusPtr->demoState != DEMO_STATE_NONE) {
+        if (gGameStatusPtr->demoState < DEMO_STATE_CHANGE_MAP
+            && (contData->button & (BUTTON_A | BUTTON_B | BUTTON_Z | BUTTON_START))
+            && handleInput
+        ) {
+            gGameStatusPtr->demoState = DEMO_STATE_CHANGE_MAP;
         }
         contData->button = gGameStatusPtr->demoButtonInput;
         contData->stick_x = gGameStatusPtr->demoStickX;

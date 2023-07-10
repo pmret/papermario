@@ -41,7 +41,7 @@ EffectInstance* water_splash_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 ar
     bpPtr->update = water_splash_update;
     bpPtr->renderWorld = water_splash_render;
     bpPtr->unk_00 = 0;
-    bpPtr->unk_14 = NULL;
+    bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_WATER_SPLASH;
     effect = shim_create_effect_instance(bpPtr);
     effect->numParts = numParts;
@@ -110,8 +110,8 @@ void water_splash_update(EffectInstance *effect) {
 
     part = effect->data.waterSplash;
     temp_a2 = part->unk_00;
-    if ((effect->flags & 0x10) != 0) {
-        effect->flags &= ~0x10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         part->unk_1C = 0x10;
     }
 
@@ -175,7 +175,7 @@ void water_splash_appendGfx(void* effect) {
     s32 temp_fp = data->unk_04.y;
     Camera* currentCamera = &gCameras[gCurrentCameraID];
     s32 i;
-    
+
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, OS_K0_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
     shim_guTranslateF(sp10, sp94, temp_fp, data->unk_04.z);
@@ -185,7 +185,7 @@ void water_splash_appendGfx(void* effect) {
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPMatrix(gMainGfxPos++, currentCamera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gSPDisplayList(gMainGfxPos++, D_09000100_3BCB90);
-    
+
     data++;
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, data++) {
         s32 temp_t2 = (s32)data->unk_04.x + sp94;
@@ -196,17 +196,17 @@ void water_splash_appendGfx(void* effect) {
         } else {
             temp_t2 = temp_t2 & 0x7F;
         }
-        
+
         if (temp_t3 > 0) {
             temp_t3 = -(temp_t3 & 0x3F);
         } else {
             temp_t3 = temp_t3 & 0x3F;
         }
 
-        gDPLoadMultiTile(gMainGfxPos++, OS_K0_TO_PHYSICAL(nuGfxCfb_ptr), 0x100, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, 0, 
+        gDPLoadMultiTile(gMainGfxPos++, OS_K0_TO_PHYSICAL(nuGfxCfb_ptr), 0x100, 1, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, 0,
                          temp_t2 + 0xA0, temp_t3 + 0x78, temp_t2 + 0xBF, temp_t3 + 0x97, 0,
                          G_TX_WRAP, G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
-        
+
         shim_guTranslateF(sp10, data->unk_04.x, data->unk_04.y, data->unk_04.z);
         shim_guScaleF(sp50, data->unk_34, data->unk_34, data->unk_34);
         shim_guMtxCatF(sp50, sp10, sp10);

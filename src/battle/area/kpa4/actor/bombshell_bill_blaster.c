@@ -17,40 +17,44 @@ extern EvtScript N(wait);
 
 extern s32 N(IdleAnimations)[];
 
+enum N(ActorPartIDs) {
+    PRT_MAIN            = 1,
+};
+
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 4,
+    ELEMENT_NORMAL,   4,
     ELEMENT_END,
 };
 
 s32 N(StatusTable)[] = {
-    STATUS_NORMAL, 0,
-    STATUS_DEFAULT, 0,
-    STATUS_SLEEP, 0,
-    STATUS_POISON, 0,
-    STATUS_FROZEN, 0,
-    STATUS_DIZZY, 0,
-    STATUS_FEAR, 0,
-    STATUS_STATIC, 0,
-    STATUS_PARALYZE, 0,
-    STATUS_SHRINK, 50,
-    STATUS_STOP, 0,
-    STATUS_DEFAULT_TURN_MOD, 0,
-    STATUS_SLEEP_TURN_MOD, 0,
-    STATUS_POISON_TURN_MOD, 0,
-    STATUS_FROZEN_TURN_MOD, 0,
-    STATUS_DIZZY_TURN_MOD, 0,
-    STATUS_FEAR_TURN_MOD, 0,
-    STATUS_STATIC_TURN_MOD, 0,
-    STATUS_PARALYZE_TURN_MOD, 0,
-    STATUS_SHRINK_TURN_MOD, 0,
-    STATUS_STOP_TURN_MOD, -1,
+    STATUS_KEY_NORMAL,              0,
+    STATUS_KEY_DEFAULT,             0,
+    STATUS_KEY_SLEEP,               0,
+    STATUS_KEY_POISON,              0,
+    STATUS_KEY_FROZEN,              0,
+    STATUS_KEY_DIZZY,               0,
+    STATUS_KEY_FEAR,                0,
+    STATUS_KEY_STATIC,              0,
+    STATUS_KEY_PARALYZE,            0,
+    STATUS_KEY_SHRINK,             50,
+    STATUS_KEY_STOP,                0,
+    STATUS_TURN_MOD_DEFAULT,        0,
+    STATUS_TURN_MOD_SLEEP,          0,
+    STATUS_TURN_MOD_POISON,         0,
+    STATUS_TURN_MOD_FROZEN,         0,
+    STATUS_TURN_MOD_DIZZY,          0,
+    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_STATIC,         0,
+    STATUS_TURN_MOD_PARALYZE,       0,
+    STATUS_TURN_MOD_SHRINK,         0,
+    STATUS_TURN_MOD_STOP,          -1,
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -6, 29 },
         .opacity = 255,
@@ -67,8 +71,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_BOMBSHELL_BLASTER,
     .level = 27,
     .maxHP = 10,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
@@ -80,16 +84,16 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 100,
     .coinReward = 2,
     .size = { 55, 32 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -24, 20 },
-    .statusMessageOffset = { 5, 25 },
+    .statusTextOffset = { 5, 25 },
 };
 
 s32 N(IdleAnimations)[] = {
-    STATUS_NORMAL, ANIM_BillBlaster_Gold_Anim01,
-    STATUS_STONE, ANIM_BillBlaster_Gold_Anim00,
-    STATUS_STOP, ANIM_BillBlaster_Gold_Anim00,
-    STATUS_PARALYZE, ANIM_BillBlaster_Gold_Anim00,
+    STATUS_KEY_NORMAL,    ANIM_BillBlaster_Gold_Idle,
+    STATUS_KEY_STONE,     ANIM_BillBlaster_Gold_Still,
+    STATUS_KEY_STOP,      ANIM_BillBlaster_Gold_Still,
+    STATUS_KEY_PARALYZE,  ANIM_BillBlaster_Gold_Still,
     STATUS_END,
 };
 
@@ -114,52 +118,52 @@ EvtScript N(handleEvent) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
-            EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Gold_Anim03)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Gold_Hurt)
+            EVT_EXEC_WAIT(EVS_Enemy_Hit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_BURN_HIT)
-            EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Gold_Anim03)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Gold_Hurt)
             EVT_SET_CONST(LVar2, -1)
-            EVT_EXEC_WAIT(DoBurnHit)
+            EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
         EVT_CASE_EQ(EVENT_BURN_DEATH)
-            EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Gold_Anim03)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Gold_Hurt)
             EVT_SET_CONST(LVar2, -1)
-            EVT_EXEC_WAIT(DoBurnHit)
-            EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Gold_Anim03)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_EXEC_WAIT(EVS_Enemy_BurnHit)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Gold_Hurt)
+            EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
         EVT_CASE_OR_EQ(EVENT_AIR_LIFT_FAILED)
-            EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Gold_Anim01)
-            EVT_EXEC_WAIT(DoImmune)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Gold_Idle)
+            EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
-            EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Gold_Anim03)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Gold_Hurt)
+            EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_WAIT(10)
-            EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Gold_Anim03)
-            EVT_EXEC_WAIT(DoDeath)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Gold_Hurt)
+            EVT_EXEC_WAIT(EVS_Enemy_Death)
             EVT_RETURN
         EVT_CASE_EQ(EVENT_RECOVER_STATUS)
-            EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Gold_Anim01)
-            EVT_EXEC_WAIT(DoRecover)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Gold_Idle)
+            EVT_EXEC_WAIT(EVS_Enemy_Recover)
         EVT_CASE_EQ(EVENT_BEGIN_AIR_LIFT)
-            EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Gold_Anim03)
-            EVT_EXEC_WAIT(DoAirLift)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Gold_Hurt)
+            EVT_EXEC_WAIT(EVS_Enemy_AirLift)
         EVT_CASE_EQ(EVENT_BLOW_AWAY)
-            EVT_SET_CONST(LVar0, 1)
-            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Gold_Anim03)
-            EVT_EXEC_WAIT(DoBlowAway)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
+            EVT_SET_CONST(LVar1, ANIM_BillBlaster_Gold_Hurt)
+            EVT_EXEC_WAIT(EVS_Enemy_BlowAway)
             EVT_RETURN
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
@@ -195,7 +199,7 @@ API_CALLABLE(ApplyBillSettings) {
 }
 
 EvtScript N(bulletShot) = {
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BillBlaster_Gold_Anim02)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BillBlaster_Gold_Fire)
     EVT_WAIT(13)
     EVT_THREAD
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 10, EVT_FLOAT(1.0))
@@ -210,7 +214,7 @@ EvtScript N(bulletShot) = {
     EVT_PLAY_EFFECT(EFFECT_00, LVar0, LVar1, LVar2, 2, 5, 2, 2, 0)
     EVT_WAIT(2)
     EVT_CALL(ApplyBillSettings)
-    EVT_CALL(SummonEnemy, EVT_PTR(N(formation_bill)), 0)
+    EVT_CALL(SummonEnemy, EVT_PTR(N(formation_bill)), FALSE)
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, LVar0)
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 1)
     EVT_RETURN
@@ -232,5 +236,5 @@ extern ActorBlueprint A(bombshell_bill);
 Vec3i N(bill_pos) = { NPC_DISPOSE_LOCATION };
 
 Formation N(formation_bill) = {
-    { .actor = &A(bombshell_bill), .home = { .vec = &N(bill_pos) }, .priority = 100, },
+    ACTOR_BY_POS(A(bombshell_bill), N(bill_pos), 100),
 };

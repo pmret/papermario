@@ -1,49 +1,45 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "area.h"
 
-#define NAMESPACE b_area_mac
+extern ActorBlueprint A(chan);
+extern ActorBlueprint A(lee);
+extern ActorBlueprint A(master1);
+extern ActorBlueprint A(master2);
+extern ActorBlueprint A(master3);
 
-extern ActorBlueprint N(chan);
-extern ActorBlueprint N(lee);
-extern ActorBlueprint N(master1);
-extern ActorBlueprint N(master2);
-extern ActorBlueprint N(master3);
+extern Stage A(mac_01);
+extern Stage A(mac_02);
 
-extern Stage N(mac_01);
-extern Stage N(mac_02);
-
-Formation N(Formation_00) = {
-    { .actor = &N(chan), .home = { .index = 2 }, .priority = 10 },
+Formation A(Formation_00) = {
+    ACTOR_BY_IDX(A(chan), BTL_POS_GROUND_C, 10),
 };
 
-Formation N(Formation_01) = {
-    { .actor = &N(lee), .home = { .index = 2 }, .priority = 10 },
+Formation A(Formation_01) = {
+    ACTOR_BY_IDX(A(lee), BTL_POS_GROUND_C, 10),
 };
 
-Formation N(Formation_02) = {
-    { .actor = &N(master1), .home = { .index = 2 }, .priority = 10 },
+Formation A(Formation_02) = {
+    ACTOR_BY_IDX(A(master1), BTL_POS_GROUND_C, 10),
 };
 
-Formation N(Formation_03) = {
-    { .actor = &N(master2), .home = { .index = 2 }, .priority = 10 },
+Formation A(Formation_03) = {
+    ACTOR_BY_IDX(A(master2), BTL_POS_GROUND_C, 10),
 };
 
-Formation N(Formation_04) = {
-    { .actor = &N(master3), .home = { .index = 2 }, .priority = 10 },
+Formation A(Formation_04) = {
+    ACTOR_BY_IDX(A(master3), BTL_POS_GROUND_C, 10),
 };
 
-BattleList N(Formations) = {
-    BATTLE(N(Formation_00), &N(mac_02), "チェン"),
-    BATTLE(N(Formation_01), &N(mac_02), "リー"),
-    BATTLE(N(Formation_02), &N(mac_02), "シショー その１"),
-    BATTLE(N(Formation_03), &N(mac_02), "シショー その２"),
-    BATTLE(N(Formation_04), &N(mac_02), "シショー その３"),
+BattleList A(Formations) = {
+    BATTLE(A(Formation_00), A(mac_02), "チェン"),
+    BATTLE(A(Formation_01), A(mac_02), "リー"),
+    BATTLE(A(Formation_02), A(mac_02), "シショー その１"),
+    BATTLE(A(Formation_03), A(mac_02), "シショー その２"),
+    BATTLE(A(Formation_04), A(mac_02), "シショー その３"),
     {},
 };
 
-StageList N(Stages) = {
-    { "mac_01", &N(mac_01) },
-    { "mac_02", &N(mac_02) },
+StageList A(Stages) = {
+    STAGE("mac_01", A(mac_01)),
+    STAGE("mac_02", A(mac_02)),
     {},
 };

@@ -1,4 +1,5 @@
 #include "kmr_02.h"
+#include "sprite/player.h"
 
 #define NAME_SUFFIX _Rooms1
 #include "world/common/npc/GoombaFamily_Wander.inc.c"

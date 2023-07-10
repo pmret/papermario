@@ -25,7 +25,7 @@ u8 sIntegerDigits[] = {
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 };
 
-s32 gRandSeed = 1;
+u32 gRandSeed = 1;
 
 f32 sAtanFactors[] = {
     1.0f, 1.273187f, 1.27303f, 1.272768f, 1.272402f, 1.271932f, 1.271358f, 1.270681f, 1.269902f, 1.269021f, 1.268038f,
@@ -487,53 +487,62 @@ void dma_write_block(Addr dramAddr, u32 devAddr, s32 size) {
     osRecvMesg(&osMesgQueue, &osMesg, 1);
 }
 
-s32 advance_rng(void) {
-    gRandSeed *= 0x5D588B65;
-    gRandSeed++;
+// advance the global RNG via LCG algorithm and return a random integer [0,2^32)
+u32 advance_rng(void) {
+    gRandSeed = gRandSeed * 0x5D588B65 + 1;
 
     gGameStatusPtr->nextRNG = gRandSeed;
 
     return gRandSeed;
 }
 
+// return a random float [0,1)
 f32 rand_float(void) {
-    u32 temp_v0 = advance_rng() & 0x7FFF;
-
-    return temp_v0 / 32768.0;
+    return (advance_rng() & 0x7FFF) / 32768.0;
 }
 
-s32 func_80029994(s32 arg0) {
-    u32 div = -1;
-    s32 plusOne = arg0 + 1;
+// return a random integer [0,max]
+s32 rand_int_internal(u32 max) {
+    u32 partitionSize = 0xFFFFFFFF;
+    u32 maxPlusOne = max + 1;
     u32 result;
 
-    div /= plusOne;
-    if (div == 0) {
-        div = 1;
+    // split [0,2^32) into ``maxPlusOne`` equally sized partitions
+    // [0, partitionSize), [partitionSize, 2*partitionSize), ... [maxPlusOne*partitionSize, 2^32)
+    partitionSize /= maxPlusOne;
+    if (partitionSize == 0) {
+        partitionSize = 1;
     }
 
-    do  {
-        result = advance_rng() / div;
-    } while (result >= plusOne);
+    // numbers in the leftover [maxPlusOne*partitionSize, 2^32) are rejected as they would return maxPlusOne
+    // this ensures the result is [0,max] whilst also ensuring each partition is the same size and equally probable
+    do {
+        // determine which partition the random number is in by dividing it by partitionSize
+        result = advance_rng() / partitionSize;
+    } while (result >= maxPlusOne);
 
     return result;
 }
 
-s32 rand_int(s32 arg0) {
+// return a random integer [0,|max|] with specific distributions for |max| = 1 and |max| = 100
+s32 rand_int(s32 max) {
     s32 ret = 0;
 
-    arg0 = abs(arg0);
+    max = abs(max);
 
-    if (arg0 != 0) {
-        switch (arg0) {
+    if (max != 0) {
+        switch (max) {
             case 1:
-                ret = func_80029994(1000) > 500;
+                // due to the off-by-one input of 1000 and the > operator being used,
+                // there is a 501/1001 chance of returning 0 and a 500/1001 chance of returning 1
+                // (assuming statistical randomness of rand_int_internal).
+                ret = rand_int_internal(1000) > 500;
                 break;
             default:
-                ret = func_80029994(arg0);
+                ret = rand_int_internal(max);
                 break;
             case 100:
-                ret = func_80029994(1009) / 10;
+                ret = rand_int_internal(1009) / 10;
                 break;
         }
     }
@@ -775,7 +784,7 @@ void appendGfx_startup_prim_rect(u8 r, u8 g, u8 b, u8 a, u16 left, u16 top, u16 
 
     if (a == 255) {
         gDPSetRenderMode(gMainGfxPos++, G_RM_OPA_SURF, G_RM_OPA_SURF2);
-        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, PRIMITIVE, 0, 0, 0, 1, 0, 0, 0, PRIMITIVE, 0, 0, 0, 1);
+        gDPSetCombineMode(gMainGfxPos++, PM_CC_08, PM_CC_08);
     } else {
         gDPSetRenderMode(gMainGfxPos++, G_RM_XLU_SURF, G_RM_XLU_SURF2);
         gDPSetCombineMode(gMainGfxPos++, G_CC_PRIMITIVE, G_CC_PRIMITIVE);

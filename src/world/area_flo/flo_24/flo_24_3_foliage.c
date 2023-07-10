@@ -6,7 +6,7 @@ FoliageModelList N(Tree1_LeafModels)  = FOLIAGE_MODEL_LIST(MODEL_o125, MODEL_o12
 FoliageModelList N(Tree1_TrunkModels) = FOLIAGE_MODEL_LIST(MODEL_o124);
 
 FoliageDropList N(Tree1_Drops) = {
-    .count = 2, 
+    .count = 2,
     .drops = {
         {
             .itemID = ITEM_BUBBLE_BERRY,

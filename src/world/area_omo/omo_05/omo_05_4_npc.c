@@ -1,4 +1,5 @@
 #include "omo_05.h"
+#include "sprite/player.h"
 
 #include "world/common/enemy/ShyGuy_Wander.inc.c"
 #include "world/common/enemy/GrooveGuy.inc.c"

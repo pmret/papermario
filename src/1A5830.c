@@ -1,4 +1,3 @@
-#include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "effects.h"
@@ -168,7 +167,7 @@ HitResult calc_enemy_test_target(Actor* actor) {
 
     hitResult = HIT_RESULT_HIT;
     target2 = target;
-    if (targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY || battleStatus->outtaSightActive || target2->transparentStatus == STATUS_TRANSPARENT) {
+    if (targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY || battleStatus->outtaSightActive || target2->transparentStatus == STATUS_KEY_TRANSPARENT) {
         if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_MAGIC)) {
             hitResult = HIT_RESULT_MISS;
         }
@@ -220,11 +219,11 @@ HitResult calc_enemy_test_target(Actor* actor) {
         return HIT_RESULT_LUCKY;
     }
 
-    if (target2->stoneStatus == STATUS_STONE) {
+    if (target2->stoneStatus == STATUS_KEY_STONE) {
         return HIT_RESULT_IMMUNE;
     }
 
-    if (target2->staticStatus == STATUS_STATIC) {
+    if (target2->staticStatus == STATUS_KEY_STATIC) {
         return HIT_RESULT_HIT_STATIC;
     }
 
@@ -289,16 +288,16 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
         return HIT_RESULT_MISS;
     }
 
-    if (target->transparentStatus == STATUS_TRANSPARENT
+    if (target->transparentStatus == STATUS_KEY_TRANSPARENT
         || targetPart->eventFlags & ACTOR_EVENT_FLAG_800
         && !(battleStatus->currentAttackElement & DAMAGE_TYPE_QUAKE)
     ) {
         return HIT_RESULT_MISS;
     }
 
-    if (target->stoneStatus == STATUS_STONE) {
-        func_8024EFE0(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, -1);
-        show_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 0);
+    if (target->stoneStatus == STATUS_KEY_STONE) {
+        show_immune_bonk(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, -1);
+        show_next_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 0);
         play_hit_sound(attacker, state->goalPos.x, state->goalPos.y, state->goalPos.z, 0);
         dispatch_event_general(target, EVENT_IMMUNE);
         return HIT_RESULT_HIT;
@@ -338,8 +337,8 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
         isIce = TRUE;
     }
 
-    if (!(attacker->staticStatus == STATUS_STATIC)
-        && ((target->staticStatus == STATUS_STATIC) || (targetPart->eventFlags & ACTOR_EVENT_FLAG_ELECTRIFIED))
+    if (!(attacker->staticStatus == STATUS_KEY_STATIC)
+        && ((target->staticStatus == STATUS_KEY_STATIC) || (targetPart->eventFlags & ACTOR_EVENT_FLAG_ELECTRIFIED))
         && !(battleStatus->currentAttackElement & (DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_NO_CONTACT))
         && !(battleStatus->currentAttackEventSuppression & SUPPRESS_EVENT_SHOCK_CONTACT)
         && !has_enchanted_part(attacker)) // enchanted attacks ignore electrified defenders
@@ -389,7 +388,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
         damage -= attacker->chillOutAmount;
     }
 
-    if (attacker->debuff == STATUS_SHRINK) {
+    if (attacker->debuff == STATUS_KEY_SHRINK) {
         if (damage > 0) {
             damage /= 2;
         }
@@ -426,8 +425,8 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
 
     switch (actorClass) {
         case ACTOR_CLASS_PLAYER:
-            // TODO figure out how to better write target->debuff >= STATUS_POISON
-            if ((target->debuff == 0 || target->debuff >= STATUS_POISON) && (target->stoneStatus == STATUS_END) && !(battleStatus->currentAttackElement & DAMAGE_TYPE_UNBLOCKABLE)) {
+            // TODO figure out how to better write target->debuff >= STATUS_KEY_POISON
+            if ((target->debuff == 0 || target->debuff >= STATUS_KEY_POISON) && (target->stoneStatus == 0) && !(battleStatus->currentAttackElement & DAMAGE_TYPE_UNBLOCKABLE)) {
                 s32 blocked;
 
                 if (player_team_is_ability_active(target, ABILITY_BERSERKER)) {
@@ -440,7 +439,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
                     damage--;
                     damage -= player_team_is_ability_active(target, ABILITY_DAMAGE_DODGE);
                     sfx_play_sound_at_position(SOUND_231, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
-                    func_802667F0(0, target, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+                    show_action_rating(ACTION_RATING_NICE, target, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                     gBattleStatus.flags1 |= BS_FLAGS1_ATK_BLOCKED;
                     break;
                 }
@@ -448,12 +447,12 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
             }
             break;
         case ACTOR_CLASS_PARTNER:
-            if (target->stoneStatus == STATUS_END) {
-                if (target->koStatus == STATUS_END && !(battleStatus->currentAttackElement & DAMAGE_TYPE_UNBLOCKABLE)) {
+            if (target->stoneStatus == 0) {
+                if (target->koStatus == 0 && !(battleStatus->currentAttackElement & DAMAGE_TYPE_UNBLOCKABLE)) {
                     if (check_block_input(BUTTON_A)) {
                         damage = 0;
                         sfx_play_sound_at_position(SOUND_231, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
-                        func_802667F0(0, target, state->goalPos.x, state->goalPos.y, state->goalPos.z);
+                        show_action_rating(ACTION_RATING_NICE, target, state->goalPos.x, state->goalPos.y, state->goalPos.z);
                         gBattleStatus.flags1 |= BS_FLAGS1_ATK_BLOCKED;
                         break;
                     }
@@ -525,7 +524,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
     }
 
     if (!(gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE)) {
-        func_80266E14(targetPart);
+        clear_part_pal_adjustment(targetPart);
     }
 
     if ((gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE)
@@ -593,54 +592,54 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
         && !(gBattleStatus.flags2 & BS_FLAGS2_1000000)
         && !(actorClass == ACTOR_PLAYER && is_ability_active(ABILITY_HEALTHY_HEALTHY) && (rand_int(100) < 50)))
     {
-        if (battleStatus->currentAttackStatus & STATUS_FLAG_SHRINK && try_inflict_status(target, STATUS_SHRINK, STATUS_SHRINK_TURN_MOD)) {
+        if (battleStatus->currentAttackStatus & STATUS_FLAG_SHRINK && try_inflict_status(target, STATUS_KEY_SHRINK, STATUS_TURN_MOD_SHRINK)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
-        if (battleStatus->currentAttackStatus & STATUS_FLAG_POISON && try_inflict_status(target, STATUS_POISON, STATUS_POISON_TURN_MOD)) {
+        if (battleStatus->currentAttackStatus & STATUS_FLAG_POISON && try_inflict_status(target, STATUS_KEY_POISON, STATUS_TURN_MOD_POISON)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
-        if (battleStatus->currentAttackStatus & STATUS_FLAG_STONE && try_inflict_status(target, STATUS_STONE, STATUS_STONE_TURN_MOD)) {
+        if (battleStatus->currentAttackStatus & STATUS_FLAG_STONE && try_inflict_status(target, STATUS_KEY_STONE, STATUS_TURN_MOD_STONE)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
-        if (battleStatus->currentAttackStatus & STATUS_FLAG_SLEEP && try_inflict_status(target, STATUS_SLEEP, STATUS_SLEEP_TURN_MOD)) {
+        if (battleStatus->currentAttackStatus & STATUS_FLAG_SLEEP && try_inflict_status(target, STATUS_KEY_SLEEP, STATUS_TURN_MOD_SLEEP)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
-        if (battleStatus->currentAttackStatus & STATUS_FLAG_DIZZY && try_inflict_status(target, STATUS_DIZZY, STATUS_DIZZY_TURN_MOD)) {
+        if (battleStatus->currentAttackStatus & STATUS_FLAG_DIZZY && try_inflict_status(target, STATUS_KEY_DIZZY, STATUS_TURN_MOD_DIZZY)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
-        if (battleStatus->currentAttackStatus & STATUS_FLAG_STOP && try_inflict_status(target, STATUS_STOP, STATUS_STOP_TURN_MOD)) {
+        if (battleStatus->currentAttackStatus & STATUS_FLAG_STOP && try_inflict_status(target, STATUS_KEY_STOP, STATUS_TURN_MOD_STOP)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
-        if (battleStatus->currentAttackStatus & STATUS_FLAG_STATIC && try_inflict_status(target, STATUS_STATIC, STATUS_STATIC_TURN_MOD)) {
+        if (battleStatus->currentAttackStatus & STATUS_FLAG_STATIC && try_inflict_status(target, STATUS_KEY_STATIC, STATUS_TURN_MOD_STATIC)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
-        if (battleStatus->currentAttackStatus & STATUS_FLAG_PARALYZE && try_inflict_status(target, STATUS_PARALYZE, STATUS_PARALYZE_TURN_MOD)) {
+        if (battleStatus->currentAttackStatus & STATUS_FLAG_PARALYZE && try_inflict_status(target, STATUS_KEY_PARALYZE, STATUS_TURN_MOD_PARALYZE)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
-        if (battleStatus->currentAttackStatus & STATUS_FLAG_FEAR && try_inflict_status(target, STATUS_FEAR, STATUS_FEAR_TURN_MOD)) {
+        if (battleStatus->currentAttackStatus & STATUS_FLAG_FEAR && try_inflict_status(target, STATUS_KEY_FEAR, STATUS_TURN_MOD_FEAR)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
 
         // @bug? repeated paralyze and dizzy infliction
-        if (battleStatus->currentAttackStatus & STATUS_FLAG_PARALYZE && try_inflict_status(target, STATUS_PARALYZE, STATUS_PARALYZE_TURN_MOD)) {
+        if (battleStatus->currentAttackStatus & STATUS_FLAG_PARALYZE && try_inflict_status(target, STATUS_KEY_PARALYZE, STATUS_TURN_MOD_PARALYZE)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
-        if (battleStatus->currentAttackStatus & STATUS_FLAG_DIZZY && try_inflict_status(target, STATUS_DIZZY, STATUS_DIZZY_TURN_MOD)) {
+        if (battleStatus->currentAttackStatus & STATUS_FLAG_DIZZY && try_inflict_status(target, STATUS_KEY_DIZZY, STATUS_TURN_MOD_DIZZY)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
 
-        if (battleStatus->currentAttackStatus & STATUS_FLAG_FROZEN && target->debuff != STATUS_FROZEN && try_inflict_status(target, STATUS_FROZEN, STATUS_FROZEN_TURN_MOD)) {
+        if (battleStatus->currentAttackStatus & STATUS_FLAG_FROZEN && target->debuff != STATUS_KEY_FROZEN && try_inflict_status(target, STATUS_KEY_FROZEN, STATUS_TURN_MOD_FROZEN)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
@@ -676,7 +675,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
         && gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE
         && !(target->flags & ACTOR_FLAG_NO_DMG_APPLY))
     {
-        inflict_partner_ko(target, STATUS_DAZE, battleStatus->lastAttackDamage);
+        inflict_partner_ko(target, STATUS_KEY_DAZE, battleStatus->lastAttackDamage);
     }
 
     if (!(target->flags & ACTOR_FLAG_NO_DMG_POPUP)) {
@@ -686,28 +685,28 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
                 if (battleStatus->lastAttackDamage == 0) {
                     if (!statusInflicted2 && !statusInflicted) {
                         // immune star fx?
-                        func_8024EFE0(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, -3);
+                        show_immune_bonk(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, -3);
                     }
-                } else if (battleStatus->currentAttackElement & (DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS | DAMAGE_TYPE_SMASH)) {
-                    show_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 1);
-                    func_802666E4(target, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
+                } else if (battleStatus->currentAttackElement & (DAMAGE_TYPE_MULTIPLE_POPUPS | DAMAGE_TYPE_SMASH)) {
+                    show_next_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 1);
+                    show_damage_fx(target, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
                 } else {
-                    func_802664DC(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 1);
-                    func_802666E4(target, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
+                    show_primary_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 1);
+                    show_damage_fx(target, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
                     break;
                 }
                 break;
             case ACTOR_CLASS_ENEMY:
                 if (battleStatus->lastAttackDamage == 0) {
                     if (!statusInflicted2 && !statusInflicted) {
-                        func_8024EFE0(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, 3);
+                        show_immune_bonk(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, 3);
                     }
-                } else if (battleStatus->currentAttackElement & (DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS | DAMAGE_TYPE_SMASH)) {
-                    show_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 0);
-                    func_802666E4(target, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
+                } else if (battleStatus->currentAttackElement & (DAMAGE_TYPE_MULTIPLE_POPUPS | DAMAGE_TYPE_SMASH)) {
+                    show_next_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 0);
+                    show_damage_fx(target, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
                 } else {
-                    func_802664DC(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 0);
-                    func_802666E4(target, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
+                    show_primary_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 0);
+                    show_damage_fx(target, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
                 }
                 break;
         }
@@ -738,42 +737,42 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
     }
 
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_SLEEP) && statusInflicted) {
-        script = start_script(&DoSleepHit, EVT_PRIORITY_A, 0);
+        script = start_script(&EVS_PlaySleepHitFX, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_SLEEP, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_DIZZY) && statusInflicted) {
-        script = start_script(&DoDizzyHit, EVT_PRIORITY_A, 0);
+        script = start_script(&EVS_PlayDizzyHitFX, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_PARALYZE) && statusInflicted) {
-        script = start_script(&DoParalyzeHit, EVT_PRIORITY_A, 0);
+        script = start_script(&EVS_PlayParalyzeHitFX, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_POISON) && statusInflicted) {
-        script = start_script(&DoPoisonHit, EVT_PRIORITY_A, 0);
+        script = start_script(&EVS_PlayPoisonHitFX, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_STOP) && statusInflicted) {
-        script = start_script(&DoStopHit, EVT_PRIORITY_A, 0);
+        script = start_script(&EVS_PlayStopHitFX, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_FROZEN) && statusInflicted) {
-        script = start_script(&DoFreezeHit, EVT_PRIORITY_A, 0);
+        script = start_script(&EVS_PlayFreezeHitFX, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
@@ -781,7 +780,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
         sfx_play_sound_at_position(SOUND_HIT_ICE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
     if ((battleStatus->currentAttackStatus & STATUS_FLAG_SHRINK) && statusInflicted) {
-        script = start_script(&DoShrinkHit, EVT_PRIORITY_A, 0);
+        script = start_script(&EVS_PlayShrinkHitFX, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
@@ -793,12 +792,13 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
         sfx_play_sound_at_position(SOUND_SMASH_GOOMNUT_TREE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
 
-    func_80266ADC(target);
-    if (attacker->staticStatus != STATUS_STATIC
-        && (target->staticStatus == STATUS_STATIC || targetPart->eventFlags & ACTOR_EVENT_FLAG_ELECTRIFIED)
+    show_actor_health_bar(target);
+
+    if (attacker->staticStatus != STATUS_KEY_STATIC
+        && (target->staticStatus == STATUS_KEY_STATIC || targetPart->eventFlags & ACTOR_EVENT_FLAG_ELECTRIFIED)
         && !(battleStatus->currentAttackElement & DAMAGE_TYPE_NO_CONTACT)
         && !(battleStatus->currentAttackEventSuppression & SUPPRESS_EVENT_SHOCK_CONTACT)
-        && (attacker->transparentStatus != STATUS_TRANSPARENT)
+        && (attacker->transparentStatus != STATUS_KEY_TRANSPARENT)
         && !has_enchanted_part(attacker))
     {
         sfx_play_sound_at_position(SOUND_HIT_SHOCK, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
@@ -838,7 +838,7 @@ s32 dispatch_damage_event_actor(Actor* actor, s32 damageAmount, s32 originalEven
 
     battleStatus->lastAttackDamage += hpChange;
     actor->lastDamageTaken = battleStatus->lastAttackDamage;
-    battleStatus->unk_19A = 0;
+    battleStatus->currentDamageSource = DMG_SRC_DEFAULT;
     if (battleStatus->flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
         if (dispatchEvent == EVENT_HIT_COMBO) {
             dispatchEvent = EVENT_HIT;
@@ -860,21 +860,21 @@ s32 dispatch_damage_event_actor(Actor* actor, s32 damageAmount, s32 originalEven
         s32 oldTargetActorID = actor->targetActorID;
 
         if (func_80263230(actor, actor) != 0) {
-            show_damage_popup(actor->targetData[0].pos.x, actor->targetData[0].pos.y, actor->targetData[0].pos.z, battleStatus->lastAttackDamage, 0);
-            func_802666E4(actor, actor->targetData[0].pos.x, actor->targetData[0].pos.y, actor->targetData[0].pos.z, battleStatus->lastAttackDamage);
+            show_next_damage_popup(actor->targetData[0].posA.x, actor->targetData[0].posA.y, actor->targetData[0].posA.z, battleStatus->lastAttackDamage, 0);
+            show_damage_fx(actor, actor->targetData[0].posA.x, actor->targetData[0].posA.y, actor->targetData[0].posA.z, battleStatus->lastAttackDamage);
             actor->targetActorID = oldTargetActorID;
         } else {
             actor->targetActorID = oldTargetActorID;
         }
     } else {
-        show_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 0);
-        func_802666E4(actor, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
+        show_next_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 0);
+        show_damage_fx(actor, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
     }
 
     if (battleStatus->lastAttackDamage > 0) {
         func_80267018(actor, 1);
     }
-    actor->flags |= ACTOR_FLAG_80000;
+    actor->flags |= ACTOR_FLAG_HEALTH_BAR_HIDDEN;
     dispatch_event_actor(actor, dispatchEvent);
     return 0;
 }
@@ -2609,7 +2609,7 @@ ApiStatus SetEnemyHP(Evt* script, s32 isInitialCall) {
         actor->currentHP = actor->maxHP;
     }
 
-    actor->hpFraction = (actor->currentHP * 25) / actor->maxHP;
+    actor->healthFraction = (actor->currentHP * 25) / actor->maxHP;
 
     return ApiStatus_DONE2;
 }
@@ -2866,7 +2866,7 @@ ApiStatus EnemyDamageTarget(Evt* script, s32 isInitialCall) {
     battleStatus->currentTargetPart = actor->targetPartIndex;
 
     battleStatus->statusChance = battleStatus->currentAttackStatus & 0xFF;
-    if (battleStatus->statusChance == STATUS_CHANCE_NEVER) {
+    if (battleStatus->statusChance == STATUS_KEY_NEVER) {
         battleStatus->statusChance = 0;
     }
     battleStatus->statusDuration = (battleStatus->currentAttackStatus & 0xF00) >> 8;
@@ -2904,7 +2904,7 @@ ApiStatus EnemyFollowupAfflictTarget(Evt* script, s32 isInitialCall) {
     battleStatus->currentTargetPart = actor->targetPartIndex;
     battleStatus->statusChance = battleStatus->currentAttackStatus;
 
-    if (battleStatus->statusChance == STATUS_CHANCE_NEVER) {
+    if (battleStatus->statusChance == STATUS_KEY_NEVER) {
         battleStatus->statusChance = 0;
     }
 
@@ -3028,25 +3028,25 @@ ApiStatus DispatchEvent(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8027D2D8(Evt* script, s32 isInitialCall) {
+ApiStatus ShowHealthBar(Evt* script, s32 isInitialCall) {
     s32 actorID = evt_get_variable(script, *script->ptrReadPos);
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    func_80266ADC(get_actor(actorID));
+    show_actor_health_bar(get_actor(actorID));
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8027D32C(Evt* script, s32 isInitialCall) {
+ApiStatus HideHealthBar(Evt* script, s32 isInitialCall) {
     s32 actorID = evt_get_variable(script, *script->ptrReadPos);
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    func_80266AF8(get_actor(actorID));
+    hide_actor_health_bar(get_actor(actorID));
     return ApiStatus_DONE2;
 }
 
@@ -3199,13 +3199,13 @@ ApiStatus GetInstigatorValue(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus GetEncounterState(Evt* script, s32 isInitialCall) {
+ApiStatus GetEncounterTrigger(Evt* script, s32 isInitialCall) {
     evt_set_variable(script, *script->ptrReadPos, gCurrentEncounter.hitType);
     return ApiStatus_DONE2;
 }
 
 ApiStatus YieldTurn(Evt* script, s32 isInitialCall) {
-    gBattleStatus.flags1 |= BS_FLAGS1_200000;
+    gBattleStatus.flags1 |= BS_FLAGS1_YIELD_TURN;
     return ApiStatus_DONE2;
 }
 
@@ -3340,7 +3340,7 @@ ApiStatus EnableActorGlow(Evt* script, s32 isInitialCall) {
             }
             it = it->nextPart;
         }
-        func_80266EE8(actor, 0);
+        func_80266EE8(actor, UNK_PAL_EFFECT_0);
     }
 
     return ApiStatus_DONE2;
@@ -3406,9 +3406,9 @@ ApiStatus ClearStatusEffects(Evt* script, s32 isInitialCall) {
 
     actor = get_actor(actorID);
 
-    if (actor->debuff != STATUS_END) {
+    if (actor->debuff != 0) {
         actor->debuffDuration = 0;
-        actor->debuff = STATUS_END;
+        actor->debuff = 0;
         remove_status_debuff(actor->hudElementDataIndex);
     }
 

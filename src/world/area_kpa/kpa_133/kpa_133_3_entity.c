@@ -1,6 +1,7 @@
 #include "kpa_133.h"
 #include "entity.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 extern EvtScript N(EVS_TriggerSwitch);
 extern EvtScript N(EVS_SetupHiddenSpring);

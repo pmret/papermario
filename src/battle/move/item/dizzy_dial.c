@@ -9,7 +9,7 @@ static s32 D_802A1CD0;
 #include "battle/common/move/ItemRefund.inc.c"
 
 void func_802A123C_727B4C(void) {
-    func_80138D88(0, 0, 320, 240, 160.0f);
+    draw_prev_frame_buffer_at_screen_pos(0, 0, 320, 240, 160.0f);
 }
 
 API_CALLABLE(N(func_802A1270_727B80)) {
@@ -51,18 +51,18 @@ API_CALLABLE(N(func_802A1270_727B80)) {
 EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_DIZZY_DIAL)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_WAIT(10)
     EVT_THREAD
         EVT_WAIT(5)
         EVT_CALL(AddBattleCamZoom, -250)
         EVT_CALL(MoveBattleCamOver, 80)
-        EVT_CALL(func_8024ECF8, 0, 0, 1)
+        EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
         EVT_WAIT(80)
         EVT_CALL(AddBattleCamZoom, 250)
         EVT_CALL(MoveBattleCamOver, 3)
-        EVT_CALL(func_8024ECF8, 0, 0, 1)
+        EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
     EVT_END_THREAD
     EVT_CALL(N(func_802A1270_727B80))
     EVT_THREAD
@@ -74,9 +74,9 @@ EvtScript N(EVS_UseItem) = {
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(1.0))
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(0.5))
         EVT_WAIT(10)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
         EVT_CALL(MoveBattleCamOver, 10)
-        EVT_CALL(func_8024ECF8, 0, 0, 0)
+        EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, FALSE)
     EVT_END_THREAD
     EVT_CALL(InitTargetIterator)
     EVT_LABEL(0)

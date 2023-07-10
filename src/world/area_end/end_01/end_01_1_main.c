@@ -12,7 +12,7 @@ EvtScript N(EVS_Main) = {
     EVT_CALL(SetCamEnabled, CAM_DEFAULT, TRUE)
     EVT_CALL(SetCamLeadPlayer, CAM_DEFAULT, FALSE)
     EVT_CALL(N(WidenCameraFOV))
-    EVT_CALL(EnableStatusMenu, FALSE)
+    EVT_CALL(EnableWorldStatusBar, FALSE)
     EVT_EXEC(N(EVS_ManageParade))
     EVT_WAIT(1)
     EVT_RETURN

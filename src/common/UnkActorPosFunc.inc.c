@@ -16,7 +16,7 @@ API_CALLABLE(N(UnkActorPosFunc)) {
     } else {
         play_movement_dust_effects(1, actor->state.currentPos.x, actor->state.currentPos.y, actor->state.currentPos.z, actor->state.angle);
     }
-    
+
     actorState->speed /= 1.5;
     actor->currentPos.x = actorState->currentPos.x;
     actor->currentPos.y = actorState->currentPos.y;

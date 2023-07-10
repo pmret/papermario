@@ -1,5 +1,6 @@
 #include "isk_11.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(SpawnLensFlare)) {
     Bytecode* args = script->ptrReadPos;

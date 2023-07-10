@@ -25,6 +25,26 @@ extern HudScript HES_OptionMonoOff;
 extern HudScript HES_OptionStereoOn;
 extern HudScript HES_OptionStereoOff;
 
+#if VERSION_PAL
+extern u8 D_filemenu_802508D0[4];
+extern u8 D_filemenu_802508D4[4];
+extern u8 D_filemenu_802508D8[4];
+extern u8 D_filemenu_802508DC[4];
+extern u8 D_filemenu_802508E0[4];
+extern u8 D_filemenu_802508E4[4];
+extern u8 D_filemenu_802508E8[4];
+extern u8 D_filemenu_802508EC[4];
+extern u8 D_filemenu_802508F0[4];
+extern u8 D_filemenu_802508F4[4];
+extern u8 D_filemenu_80250938[4];
+extern u8 D_filemenu_8025093C[4];
+#define COPY_OFFSET_X (D_filemenu_8025093C[gCurrentLanguage])
+#define SAVE_OFFSET_X (D_filemenu_80250938[gCurrentLanguage])
+#else
+#define SAVE_OFFSET_X 25
+#define COPY_OFFSET_X 16
+#endif
+
 BSS u8 filemenu_filename[8];
 
 #if VERSION_IQUE
@@ -47,11 +67,50 @@ BSS u8 filemenu_filename[8];
 #define NUMBER_OFFSET_Y     0
 #endif
 
-HudScript* filemenu_main_hudElemScripts[] = {
-    &HES_Spirit1, &HES_Spirit2, &HES_Spirit3, &HES_Spirit4, &HES_Spirit5, &HES_Spirit6, &HES_Spirit7,
-    &HES_Spirit1Missing, &HES_Spirit2Missing, &HES_Spirit3Missing, &HES_Spirit4Missing, &HES_Spirit5Missing,
-    &HES_Spirit6Missing, &HES_Spirit7Missing, &HES_JpFile, &HES_JpFileDisabled, &HES_OptionMonoOn, &HES_OptionMonoOff,
-    &HES_OptionStereoOn, &HES_OptionStereoOff,
+extern HudScript HES_OptionMonoOn_de;
+extern HudScript HES_OptionMonoOff_de;
+extern HudScript HES_OptionStereoOn_de;
+extern HudScript HES_OptionStereoOff_de;
+extern HudScript HES_OptionMonoOn_fr;
+extern HudScript HES_OptionMonoOff_fr;
+extern HudScript HES_OptionStereoOn_fr;
+extern HudScript HES_OptionStereoOff_fr;
+extern HudScript HES_OptionMonoOn_es;
+extern HudScript HES_OptionMonoOff_es;
+extern HudScript HES_OptionStereoOn_es;
+extern HudScript HES_OptionStereoOff_es;
+
+HudScript* filemenu_main_hudElemScripts[][20] = {
+    [LANGUAGE_DEFAULT] = {
+        &HES_Spirit1, &HES_Spirit2, &HES_Spirit3, &HES_Spirit4, &HES_Spirit5, &HES_Spirit6, &HES_Spirit7,
+        &HES_Spirit1Missing, &HES_Spirit2Missing, &HES_Spirit3Missing, &HES_Spirit4Missing, &HES_Spirit5Missing,
+        &HES_Spirit6Missing, &HES_Spirit7Missing, &HES_JpFile, &HES_JpFileDisabled, &HES_OptionMonoOn,
+        &HES_OptionMonoOff,
+        &HES_OptionStereoOn, &HES_OptionStereoOff,
+    },
+#if VERSION_PAL
+    [LANGUAGE_DE] = {
+        &HES_Spirit1, &HES_Spirit2, &HES_Spirit3, &HES_Spirit4, &HES_Spirit5, &HES_Spirit6, &HES_Spirit7,
+        &HES_Spirit1Missing, &HES_Spirit2Missing, &HES_Spirit3Missing, &HES_Spirit4Missing, &HES_Spirit5Missing,
+        &HES_Spirit6Missing, &HES_Spirit7Missing, &HES_JpFile, &HES_JpFileDisabled, &HES_OptionMonoOn_de,
+        &HES_OptionMonoOff_de,
+        &HES_OptionStereoOn_de, &HES_OptionStereoOff_de,
+    },
+    [LANGUAGE_FR] = {
+        &HES_Spirit1, &HES_Spirit2, &HES_Spirit3, &HES_Spirit4, &HES_Spirit5, &HES_Spirit6, &HES_Spirit7,
+        &HES_Spirit1Missing, &HES_Spirit2Missing, &HES_Spirit3Missing, &HES_Spirit4Missing, &HES_Spirit5Missing,
+        &HES_Spirit6Missing, &HES_Spirit7Missing, &HES_JpFile, &HES_JpFileDisabled, &HES_OptionMonoOn_fr,
+        &HES_OptionMonoOff_fr,
+        &HES_OptionStereoOn_fr, &HES_OptionStereoOff_fr,
+    },
+    [LANGUAGE_ES] = {
+        &HES_Spirit1, &HES_Spirit2, &HES_Spirit3, &HES_Spirit4, &HES_Spirit5, &HES_Spirit6, &HES_Spirit7,
+        &HES_Spirit1Missing, &HES_Spirit2Missing, &HES_Spirit3Missing, &HES_Spirit4Missing, &HES_Spirit5Missing,
+        &HES_Spirit6Missing, &HES_Spirit7Missing, &HES_JpFile, &HES_JpFileDisabled, &HES_OptionMonoOn_es,
+        &HES_OptionMonoOff_es,
+        &HES_OptionStereoOn_es, &HES_OptionStereoOff_es,
+    }
+#endif
 };
 
 u8 filemenu_main_gridData[] = {
@@ -59,7 +118,9 @@ u8 filemenu_main_gridData[] = {
     0, 0, 1, 2, 2, 3, 6, 6, 6,
     0, 0, 1, 2, 2, 3, 6, 6, 6,
     0, 0, 1, 2, 2, 3, 6, 6, 6,
+#if !VERSION_PAL
     0, 0, 1, 2, 2, 3, 6, 6, 6,
+#endif
 };
 
 MenuWindowBP filemenu_main_windowBPs[] = {
@@ -168,7 +229,7 @@ MenuWindowBP filemenu_main_windowBPs[] = {
         .width = 124 + OFFSET_WIDTH,
         .height = 15,
         .priority = WINDOW_PRIORITY_0,
-        .fpDrawContents = &filemenu_draw_contents_file_2_title ,
+        .fpDrawContents = &filemenu_draw_contents_file_2_title,
         .tab = NULL,
         .parentID = WINDOW_ID_FILEMENU_FILE2_INFO,
         .fpUpdate = { WINDOW_UPDATE_SHOW },
@@ -288,32 +349,34 @@ void filemenu_draw_contents_title(
     s32 yOffset;
 
     switch (menu->page) {
-        case 0:
+        case PAGE_0:
             msgIdx = FILE_MESSAGE_SELECT_FILE_TO_START;
             xOffset = 9;
             yOffset = 4;
             break;
-        case 1:
+        case PAGE_1:
             msgIdx = FILE_MESSAGE_SELECT_FILE_TO_DELETE;
             xOffset = DELETE_OFFSET_X;
             yOffset = 4;
             break;
-        case 3:
+        case PAGE_3:
             msgIdx = FILE_MESSAGE_COPY_WHICH_FILE;
-            xOffset = 25;
+            xOffset = SAVE_OFFSET_X;
             yOffset = 4;
             break;
-        case 4:
+        case PAGE_4:
             msgIdx = FILE_MESSAGE_COPY_TO_WHICH_FILE;
-            xOffset = 16;
+            xOffset = COPY_OFFSET_X;
             yOffset = 4;
             break;
-        case 2:
+#if !VERSION_PAL
+        case PAGE_2:
         default:
             msgIdx = FILE_MESSAGE_SELECT_FILE_TO_SAVE;
             xOffset = 10;
             yOffset = 4;
             break;
+#endif
     }
 
     filemenu_draw_message(filemenu_get_menu_message(msgIdx), baseX + xOffset, baseY + yOffset, 255, 0, 0);
@@ -355,14 +418,58 @@ void filemenu_draw_contents_option_left(
     s32 width, s32 height,
     s32 opacity, s32 darkening
 ) {
+#if VERSION_PAL
+    s32 offset = D_filemenu_802508E8[gCurrentLanguage];
+
+    if (menu->col == 0 && menu->row == 2) {
+        filemenu_set_cursor_goal_pos(WINDOW_ID_FILEMENU_OPTION_LEFT, (baseX + offset) - 10, baseY + 8);
+    }
+    filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_DELETE_FILE), baseX + offset + OFFSET_WIDTH, baseY + 2, 255, 0, 1);
+#else
     if (menu->page != 2) {
         if (menu->col == 0 && menu->row == 2) {
             filemenu_set_cursor_goal_pos(WINDOW_ID_FILEMENU_OPTION_LEFT, baseX, baseY + 8);
         }
         filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_DELETE_FILE), baseX + 8 + OFFSET_WIDTH, baseY + 2, 255, 0, 1);
     }
+#endif
 }
 
+#if VERSION_PAL
+void filemenu_draw_contents_option_center(
+    MenuPanel* menu,
+    s32 baseX, s32 baseY,
+    s32 width, s32 height,
+    s32 opacity, s32 darkening
+) {
+    s32 msgIdx;
+    s32 xOffset;
+    s32 yOffset;
+
+    switch (menu->page) {
+        case 1:
+        case 2:
+        case 3:
+            msgIdx = FILE_MESSAGE_CANCEL;
+            xOffset = D_filemenu_802508F4[gCurrentLanguage];
+            yOffset = 0;
+            if (menu->col == 1 && menu->row == 2) {
+                filemenu_set_cursor_goal_pos(WINDOW_ID_FILEMENU_OPTION_CENTER, baseX + xOffset - 10, baseY + 8);
+            }
+            break;
+        default:
+            msgIdx = FILE_MESSAGE_COPY_FILE;
+            xOffset = D_filemenu_802508EC[gCurrentLanguage];
+            yOffset = 0;
+            if (menu->col == 1 && menu->row == 2) {
+                filemenu_set_cursor_goal_pos(WINDOW_ID_FILEMENU_OPTION_CENTER, baseX + xOffset - 10, baseY + 8);
+            }
+            break;
+    }
+
+    filemenu_draw_message(filemenu_get_menu_message(msgIdx), baseX + xOffset, baseY + yOffset + 2, 255, 0, 1);
+}
+#else
 void filemenu_draw_contents_option_center(
     MenuPanel* menu,
     s32 baseX, s32 baseY,
@@ -397,6 +504,7 @@ void filemenu_draw_contents_option_center(
 
     filemenu_draw_message(filemenu_get_menu_message(msgIdx), baseX + xOffset, baseY + yOffset + 2, 255, 0, 1);
 }
+#endif
 
 void filemenu_draw_contents_option_right(
     MenuPanel* menu,
@@ -404,12 +512,21 @@ void filemenu_draw_contents_option_right(
     s32 width, s32 height,
     s32 opacity, s32 darkening
 ) {
+#if VERSION_PAL
+    s32 offset = D_filemenu_802508F0[gCurrentLanguage];
+
+    if (menu->col == 2 && menu->row == 2) {
+        filemenu_set_cursor_goal_pos(WINDOW_ID_FILEMENU_OPTION_RIGHT, baseX + offset - 10, baseY + 8);
+    }
+    filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_CANCEL), baseX + offset, baseY + 2, 255, 0, 1);
+#else
     if (menu->page != 2) {
         if (menu->col == 2 && menu->row == 2) {
             filemenu_set_cursor_goal_pos(WINDOW_ID_FILEMENU_OPTION_RIGHT, baseX + 8, baseY + 8);
         }
         filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_CANCEL), baseX + RIGHT_CANCEL_X, baseY + 2, 255, 0, 1);
     }
+#endif
 }
 
 void filemenu_draw_contents_file_info(s32 fileIdx,
@@ -418,7 +535,7 @@ void filemenu_draw_contents_file_info(s32 fileIdx,
     s32 width, s32 height,
     s32 opacity, s32 darkening
 ) {
-    SaveMetadata* save;
+    s32 xOffset;
     s32 temp_s0_3;
     s32 temp_s1_2;
     s32 temp_s3_2;
@@ -428,36 +545,55 @@ void filemenu_draw_contents_file_info(s32 fileIdx,
     const int MAX_DISPLAYED_TIME = 100*60*60*60 - 1; // 100 hours minus one frame at 60 fps
 
     if (!gSaveSlotHasData[fileIdx]) {
-        filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_NEW), baseX + 50, baseY + 20, 0xFF, 0xA, 0);
+#if VERSION_PAL
+        xOffset = D_filemenu_802508E0[gCurrentLanguage];
+#else
+        xOffset = 50;
+#endif
+        filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_NEW), baseX + xOffset, baseY + 20, 255, 0xA, 0);
         return;
     }
 
-    save = &gSaveSlotMetadata[fileIdx];
-    if (save->timePlayed == 0) {
-        filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_FIRST_PLAY), baseX + 30, baseY + 20, 0xFF, 0xA, 0);
+    if (gSaveSlotMetadata[fileIdx].timePlayed == 0) {
+#if VERSION_PAL
+        xOffset = D_filemenu_802508E4[gCurrentLanguage];
+#else
+        xOffset = 30;
+#endif
+        filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_FIRST_PLAY), baseX + xOffset, baseY + 20, 255, 0xA, 0);
         return;
     }
 
-    filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_LEVEL), baseX + 0x22, baseY + 10, 0xFF, 0xA, 1);
-    temp_s3_2 = save->level;
+#if VERSION_PAL
+    xOffset = D_filemenu_802508D8[gCurrentLanguage];
+#else
+    xOffset = 0x22;
+#endif
+    filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_LEVEL), baseX + xOffset, baseY + 10, 255, 0xA, 1);
+    temp_s3_2 = gSaveSlotMetadata[fileIdx].level;
     temp_s3 = temp_s3_2;
-    draw_number(temp_s3 / 10, baseX + 79, baseY + 10 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE);
-    draw_number(temp_s3 % 10, baseX + 88, baseY + 10 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE);
-    filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_PLAY_TIME), baseX + 11, baseY + 24, 0xFF, 0xA, 1);
+    draw_number(temp_s3 / 10, baseX + 79, baseY + 10 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 255, DRAW_NUMBER_STYLE_MONOSPACE);
+    draw_number(temp_s3 % 10, baseX + 88, baseY + 10 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 255, DRAW_NUMBER_STYLE_MONOSPACE);
+#if VERSION_PAL
+    xOffset = D_filemenu_802508DC[gCurrentLanguage];
+#else
+    xOffset = 11;
+#endif
+    filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_PLAY_TIME), baseX + xOffset, baseY + 24, 255, 0xA, 1);
 
-    temp_s3_2 = save->timePlayed;
+    temp_s3_2 = gSaveSlotMetadata[fileIdx].timePlayed;
     if (temp_s3_2 > MAX_DISPLAYED_TIME) {
         temp_s3_2 = MAX_DISPLAYED_TIME;
     }
 
-    draw_number((temp_s3_2 / 2160000) % 10, baseX + 76, baseY + 24 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE);
+    draw_number((temp_s3_2 / 2160000) % 10, baseX + 76, baseY + 24 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 255, DRAW_NUMBER_STYLE_MONOSPACE);
     temp_s1_2 = temp_s3_2 / 216000;
-    draw_number(temp_s1_2 - ((temp_s3_2 / 2160000) * 10), baseX + 85, baseY + 24 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE);
-    filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_PERIOD_13), baseX + 95, baseY + 23, 0xFF, 0xA, 1);
-    filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_PERIOD_13), baseX + 95, baseY + 18, 0xFF, 0xA, 1);
+    draw_number(temp_s1_2 - ((temp_s3_2 / 2160000) * 10), baseX + 85, baseY + 24 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 255, DRAW_NUMBER_STYLE_MONOSPACE);
+    filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_PERIOD_13), baseX + 95, baseY + 23, 255, 0xA, 1);
+    filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_PERIOD_13), baseX + 95, baseY + 18, 255, 0xA, 1);
     temp_s0_3 = temp_s3_2 / 36000;
-    draw_number(temp_s0_3 - (temp_s1_2 * 6), baseX + 100, baseY + 24 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE);
-    draw_number((temp_s3_2 / 3600) - (temp_s0_3 * 10), baseX + 109, baseY + 24 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 0xFF, DRAW_NUMBER_STYLE_MONOSPACE);
+    draw_number(temp_s0_3 - (temp_s1_2 * 6), baseX + 100, baseY + 24 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 255, DRAW_NUMBER_STYLE_MONOSPACE);
+    draw_number((temp_s3_2 / 3600) - (temp_s0_3 * 10), baseX + 109, baseY + 24 + NUMBER_OFFSET_Y, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_STANDARD, 255, DRAW_NUMBER_STYLE_MONOSPACE);
 
     for (i = 0; i < 7; i++) {
         if (i < gSaveSlotMetadata[fileIdx].spiritsRescued) {
@@ -474,6 +610,39 @@ void filemenu_draw_contents_file_info(s32 fileIdx,
     }
 }
 
+#if VERSION_PAL
+void filemenu_draw_contents_file_title(
+    s32 fileIdx,
+    MenuPanel* menu,
+    s32 baseX, s32 baseY,
+    s32 width, s32 height,
+    s32 opacity, s32 darkening)
+{
+    if (filemenu_currentMenu == 0 && menu->selected == fileIdx) {
+        filemenu_set_cursor_goal_pos(fileIdx + 60, baseX - 3, baseY + 8);
+    }
+
+    filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_OK), baseX + FILE_X, baseY + 1, 255, 0, 1);
+
+    if (!gSaveSlotHasData[fileIdx]) {
+        filemenu_draw_message(filemenu_get_menu_message(fileIdx + UNK3),
+            baseX + D_filemenu_802508D0[gCurrentLanguage], baseY + 1, 255, 0, 1);
+    } else {
+        s32 tmp = D_filemenu_802508D0[gCurrentLanguage];
+
+        filemenu_draw_message(filemenu_get_menu_message(fileIdx + UNK3),
+            baseX + tmp, baseY + 1, 255, 0, 1);
+
+        tmp += D_filemenu_802508D4[gCurrentLanguage];
+        tmp += 6;
+        filemenu_draw_file_name(
+            gSaveSlotMetadata[fileIdx].filename,
+            ARRAY_COUNT(gSaveSlotMetadata[fileIdx].filename),
+            baseX + tmp,
+            baseY + 1, 255, 0, 1, 9);
+        }
+}
+#else
 void filemenu_draw_contents_file_title(
     s32 fileIdx,
     MenuPanel* menu,
@@ -497,6 +666,7 @@ void filemenu_draw_contents_file_title(
             baseX + FILE_NAME_X, baseY + 1, 255, 0, 1, 9);
     }
 }
+#endif
 
 void filemenu_draw_contents_file_0_info(
     MenuPanel* menu,
@@ -570,15 +740,61 @@ void filemenu_draw_contents_file_3_title(
     filemenu_draw_contents_file_title(3, menu, baseX, baseY, width, height, opacity, darkening);
 }
 
+// TODO figure out how to merge these nicer
+#if VERSION_PAL
+void filemenu_main_init(MenuPanel* menu) {
+    s32 halfWidth;
+    s32 i;
+    s32 tmp;
+
+    for (i = 0; i < ARRAY_COUNT(filemenu_hudElemIDs); i++) {
+        filemenu_hudElemIDs[i] = hud_element_create(filemenu_main_hudElemScripts[gCurrentLanguage][i]);
+        hud_element_set_flags(filemenu_hudElemIDs[i], HUD_ELEMENT_FLAG_80);
+    }
+
+    for (i = 0; i < ARRAY_COUNT(filemenu_main_windowBPs); i++) {
+        filemenu_main_windowBPs[i].tab = menu;
+    }
+
+    setup_pause_menu_tab(filemenu_main_windowBPs, ARRAY_COUNT(filemenu_main_windowBPs));
+    menu->selected = MENU_PANEL_SELECTED_GRID_DATA(menu);
+
+    gWindows[WINDOW_ID_FILEMENU_TITLE].pos.y = 1;
+    gWindows[WINDOW_ID_FILEMENU_TITLE].width = 162;
+    gWindows[WINDOW_ID_FILEMENU_TITLE].height = 25;
+
+    halfWidth = gWindows[WINDOW_ID_FILEMENU_TITLE].width / 2;
+
+    gWindows[WINDOW_ID_FILEMENU_TITLE].pos.x = gWindows[WINDOW_ID_FILEMENU_TITLE].parent != -1
+        ? (gWindows[gWindows[WINDOW_ID_FILEMENU_TITLE].parent].width / 2) - halfWidth
+        : SCREEN_WIDTH / 2 - halfWidth;
+
+    tmp = 1;
+    halfWidth = gWindows[WINDOW_ID_FILEMENU_OPTION_CENTER].width / 2;
+
+    gWindows[WINDOW_ID_FILEMENU_OPTION_CENTER].pos.x = gWindows[WINDOW_ID_FILEMENU_OPTION_CENTER].parent != -1
+        ? (gWindows[gWindows[WINDOW_ID_FILEMENU_OPTION_CENTER].parent].width / 2) - halfWidth
+        : SCREEN_WIDTH / 2 - halfWidth;
+
+    if (menu->page != 0) {
+        set_window_update(WINDOW_ID_FILEMENU_OPTION_LEFT, WINDOW_UPDATE_HIDE);
+        set_window_update(WINDOW_ID_FILEMENU_OPTION_RIGHT, WINDOW_UPDATE_HIDE);
+        set_window_update(WINDOW_ID_FILEMENU_STEREO, WINDOW_UPDATE_HIDE);
+        set_window_update(WINDOW_ID_FILEMENU_MONO, WINDOW_UPDATE_HIDE);
+    }
+    menu->initialized = tmp;
+}
+#else
 void filemenu_main_init(MenuPanel* menu) {
     s32 halfWidth;
     s32 halfWidth2;
     s16* posXPtr;
     s32 x;
     s32 i;
+    s32 tmp;
 
     for (i = 0; i < ARRAY_COUNT(filemenu_hudElemIDs); i++) {
-        filemenu_hudElemIDs[i] = hud_element_create(filemenu_main_hudElemScripts[i]);
+        filemenu_hudElemIDs[i] = hud_element_create(filemenu_main_hudElemScripts[gCurrentLanguage][i]);
         hud_element_set_flags(filemenu_hudElemIDs[i], HUD_ELEMENT_FLAG_80);
     }
 
@@ -604,7 +820,7 @@ void filemenu_main_init(MenuPanel* menu) {
     if (gWindows[WINDOW_ID_FILEMENU_TITLE].parent != -1) {
         x = (gWindows[gWindows[WINDOW_ID_FILEMENU_TITLE].parent].width / 2) - halfWidth;
     } else {
-        x = 160 - halfWidth;
+        x = SCREEN_WIDTH / 2 - halfWidth;
     }
     *posXPtr = x;
 
@@ -613,7 +829,7 @@ void filemenu_main_init(MenuPanel* menu) {
     if (gWindows[WINDOW_ID_FILEMENU_OPTION_CENTER].parent != -1) {
         x = (gWindows[gWindows[WINDOW_ID_FILEMENU_OPTION_CENTER].parent].width / 2) - halfWidth2;
     } else {
-        x = 160 - halfWidth2;
+        x = SCREEN_WIDTH / 2 - halfWidth2;
     }
     *posXPtr = x;
 
@@ -625,7 +841,11 @@ void filemenu_main_init(MenuPanel* menu) {
     }
     menu->initialized = 1;
 }
+#endif
 
+#if VERSION_PAL
+INCLUDE_ASM(void, "filemenu/filemenu_main", filemenu_main_handle_input);
+#else
 void filemenu_main_handle_input(MenuPanel* menu) {
     s32 originalSelected = menu->selected;
     s32 i;
@@ -1065,6 +1285,7 @@ void filemenu_main_handle_input(MenuPanel* menu) {
         }
     }
 }
+#endif
 
 void filemenu_main_update(MenuPanel* menu) {
     gWindowStyles[WINDOW_ID_FILEMENU_FILE0_INFO].customStyle = &filemenu_windowStyles[15];
@@ -1095,7 +1316,7 @@ void filemenu_main_update(MenuPanel* menu) {
             break;
     }
 
-    if (filemenu_menus[0]->page == 4) {
+    if (filemenu_menus[0]->page == PAGE_4) {
         switch (filemenu_loadedFileIdx) {
             case 0:
                 gWindowStyles[WINDOW_ID_FILEMENU_FILE0_INFO].customStyle = &filemenu_windowStyles[16];

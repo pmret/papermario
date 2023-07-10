@@ -1,4 +1,5 @@
 #include "iwa_04.h"
+#include "sprite/player.h"
 
 #include "world/common/enemy/Cleft.inc.c"
 

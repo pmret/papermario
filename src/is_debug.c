@@ -89,7 +89,7 @@ char* is_debug_print(char* arg0, const char* str, size_t count) {
     return (char*) 1;
 }
 
-void func_80025F44(const char* message, char* file, s32 line) {
+void is_debug_panic(const char* message, char* file, s32 line) {
     osSyncPrintf("File:%s Line:%d  %s \n", file, line, message);
-    PANIC();
+    do {} while (TRUE);
 }

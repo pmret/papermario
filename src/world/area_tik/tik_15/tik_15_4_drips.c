@@ -1,5 +1,6 @@
 #include "tik_15.h"
 
+#define DROPLET_MODEL MODEL_sizuku
 #include "../common/DripVolumes.inc.c"
 
 DripVolumeList N(DripVolumes) = {

@@ -2,6 +2,7 @@
 #include "script_api/battle.h"
 #include "battle/action_cmd/jump.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_move_d_down_jump
 
@@ -28,7 +29,7 @@ extern EvtScript N(EVS_UseMove_ImplC);
 
 EvtScript N(EVS_UseMove) = {
     EVT_CALL(ShowActionHud, TRUE)
-    EVT_CALL(func_80269EAC, 4)
+    EVT_CALL(SetDamageSource, DMG_SRC_D_DOWN_JUMP)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar1)
         EVT_CASE_EQ(0)
@@ -46,7 +47,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
     EVT_EXEC_WAIT(N(EVS_JumpSupport_K))
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 0)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
-        EVT_EXEC_WAIT(N(EVS_JumpSupport_J))
+        EVT_EXEC_WAIT(N(EVS_JumpSupport_Miss))
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(DidActionSucceed, LVarA)
@@ -105,7 +106,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
     EVT_EXEC_WAIT(N(EVS_JumpSupport_K))
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 0)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
-        EVT_EXEC_WAIT(N(EVS_JumpSupport_J))
+        EVT_EXEC_WAIT(N(EVS_JumpSupport_Miss))
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)
@@ -166,7 +167,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
     EVT_EXEC_WAIT(N(EVS_JumpSupport_K))
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 0)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
-        EVT_EXEC_WAIT(N(EVS_JumpSupport_J))
+        EVT_EXEC_WAIT(N(EVS_JumpSupport_Miss))
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetActorPos, ACTOR_PLAYER, LVar0, LVar1, LVar2)

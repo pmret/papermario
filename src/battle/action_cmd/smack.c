@@ -1,4 +1,3 @@
-#include "common.h"
 #include "battle/battle.h"
 #include "battle/action_cmd.h"
 

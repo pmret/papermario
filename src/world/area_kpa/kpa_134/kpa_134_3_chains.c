@@ -1,4 +1,5 @@
 #include "kpa_134.h"
+#include "sprite/player.h"
 
 extern EvtScript N(EVS_LowerWaterLevel0);
 extern EvtScript N(EVS_RaiseWaterLevel1);

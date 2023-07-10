@@ -24,7 +24,7 @@ void big_snowflakes_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     bp.init = big_snowflakes_init;
     bp.update = big_snowflakes_update;
     bp.renderWorld = big_snowflakes_render;
-    bp.unk_14 = 0;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_BIG_SNOWFLAKES;
 
     effect = shim_create_effect_instance(&bp);
@@ -46,12 +46,12 @@ void big_snowflakes_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
 
     data++;
     for (i = 1; i < numParts; i++, data++) {
-        data->unk_04 = func_E0200000(10) - 5;
-        data->unk_08 = func_E0200000(10) + 5;
+        data->unk_04 = effect_rand_int(10) - 5;
+        data->unk_08 = effect_rand_int(10) + 5;
         data->unk_0C = 10.0f;
-        data->unk_18 = func_E0200000(360);
-        data->unk_20 = func_E0200000(360);
-        data->unk_1C = func_E0200000(100) / 10;
+        data->unk_18 = effect_rand_int(360);
+        data->unk_20 = effect_rand_int(360);
+        data->unk_1C = effect_rand_int(100) / 10;
         data->unk_10 = 0;
         data->unk_14 = 2.0f;
     }

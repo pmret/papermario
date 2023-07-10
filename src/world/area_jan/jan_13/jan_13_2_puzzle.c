@@ -1,6 +1,7 @@
 #include "jan_13.h"
 #include "entity.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 // geyser positions in grid coordinates
 #define POS_0_I 28
@@ -220,7 +221,7 @@ Vec3i N(GeyserSoundPositions)[] = {
     { -400 + POS_2_I * BLOCK_GRID_SIZE + (BLOCK_GRID_SIZE / 2), 0, -150 + POS_2_J * BLOCK_GRID_SIZE + (BLOCK_GRID_SIZE / 2) },
     { -400 + POS_3_I * BLOCK_GRID_SIZE + (BLOCK_GRID_SIZE / 2), 0, -150 + POS_3_J * BLOCK_GRID_SIZE + (BLOCK_GRID_SIZE / 2) },
     { -400 + POS_4_I * BLOCK_GRID_SIZE + (BLOCK_GRID_SIZE / 2), 0, -150 + POS_4_J * BLOCK_GRID_SIZE + (BLOCK_GRID_SIZE / 2) },
-    {   37, 0, -138 }, 
+    {   37, 0, -138 },
 };
 
 EvtScript N(EVS_ManageGeyserSounds) = {
@@ -260,13 +261,13 @@ EvtScript N(EVS_BoulderTremble) = {
 };
 
 EvtScript N(EVS_ManagePuzzle) = {
-    EVT_SET(LocalFlag(0), FALSE)
+    EVT_SET(LFlag0, FALSE)
     EVT_SET(AB_JAN_2, 0)
     EVT_SET(AB_JAN13_LastPuzzleProgress, -1)
     EVT_EXEC(N(EVS_ManageGeyserSounds))
     EVT_LABEL(0)
         EVT_IF_EQ(GF_JAN13_SolvedBlockPuzzle, TRUE)
-            EVT_IF_EQ(LocalFlag(0), FALSE)
+            EVT_IF_EQ(LFlag0, FALSE)
                 EVT_CALL(EnableModel, MODEL_o33, FALSE)
                 EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o33, COLLIDER_FLAGS_UPPER_MASK)
                 EVT_CALL(SetPushBlock, 0, 15, 0, PUSH_GRID_EMPTY)
@@ -284,7 +285,7 @@ EvtScript N(EVS_ManagePuzzle) = {
                 EVT_CALL(SetPushBlock, 0, 17, 2, PUSH_GRID_EMPTY)
                 EVT_CALL(SetPushBlock, 0, 18, 2, PUSH_GRID_EMPTY)
                 EVT_CALL(SetPushBlock, 0, 19, 2, PUSH_GRID_EMPTY)
-                EVT_SET(LocalFlag(0), TRUE)
+                EVT_SET(LFlag0, TRUE)
             EVT_END_IF
         EVT_END_IF
         EVT_CALL(GetPushBlock, 0, POS_0_I, POS_0_J, LVar0)
@@ -433,7 +434,7 @@ EvtScript N(EVS_ManagePuzzle) = {
             EVT_CALL(EnableModel, MODEL_o33, FALSE)
             EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o33, COLLIDER_FLAGS_UPPER_MASK)
             EVT_SET(GF_JAN13_SolvedBlockPuzzle, TRUE)
-            EVT_SET(LocalFlag(0), TRUE)
+            EVT_SET(LFlag0, TRUE)
             EVT_CALL(ResetCam, CAM_DEFAULT, EVT_FLOAT(5.0))
             EVT_CALL(DisablePlayerInput, FALSE)
         EVT_ELSE

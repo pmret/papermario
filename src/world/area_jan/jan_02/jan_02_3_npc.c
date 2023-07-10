@@ -1,4 +1,5 @@
 #include "jan_02.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/Yoshi.inc.c"
 #include "world/common/npc/Yoshi_Patrol.inc.c"

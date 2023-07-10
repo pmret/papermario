@@ -1,4 +1,5 @@
 #include "arn_09.h"
+#include "sprite/player.h"
 
 EvtScript N(EVS_LaunchPlayer) = {
     EVT_IF_EQ(AF_ARN_01, FALSE)

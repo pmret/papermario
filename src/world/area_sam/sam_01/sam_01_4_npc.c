@@ -15,7 +15,7 @@ MAP_STATIC_PAD(1,key_item);
 
 s32 N(MayorLetterList)[] = {
     ITEM_LETTER_TO_MAYOR_PENGUIN,
-    ITEM_NONE 
+    ITEM_NONE
 };
 
 EvtScript N(EVS_LetterPrompt_Mayor) = {

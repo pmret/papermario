@@ -1,4 +1,5 @@
 #include "kpa_81.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/Toad_Stationary.inc.c"
 

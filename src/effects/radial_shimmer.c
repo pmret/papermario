@@ -43,7 +43,7 @@ EffectInstance* radial_shimmer_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 
     bp.update = radial_shimmer_update;
     bp.renderWorld = radial_shimmer_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_RADIAL_SHIMMER;
 
     effect = shim_create_effect_instance(&bp);
@@ -215,8 +215,8 @@ void radial_shimmer_update(EffectInstance* effect) {
     part->timeLeft--;
     part->lifeTime++;
 
-    if (effect->flags & 0x10) {
-        effect->flags &= ~0x10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         part->timeLeft = 16;
     }
 

@@ -33,7 +33,7 @@ EffectInstance* fright_jar_main(
     bp.update = fright_jar_update;
     bp.renderWorld = fright_jar_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_FRIGHT_JAR;
 
     effect = shim_create_effect_instance(&bp);
@@ -67,8 +67,8 @@ void fright_jar_update(EffectInstance* effect) {
     FrightJarFXData* data = effect->data.frightJar;
     s32 unk_10;
 
-    if (effect->flags & 0x10) {
-        effect->flags &= ~0x10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         data->unk_10 = 16;
     }
 

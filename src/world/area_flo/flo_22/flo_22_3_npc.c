@@ -1,4 +1,5 @@
 #include "flo_22.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/Dummy.inc.c"
 #include "world/common/enemy/Bzzap.h"

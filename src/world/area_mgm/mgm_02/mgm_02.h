@@ -44,3 +44,7 @@ extern EvtScript N(EVS_Main);
 extern EvtScript N(EVS_Dummy);
 extern EvtScript N(EVS_InitializeMinigame);
 extern NpcGroupList N(DefaultNPCs);
+
+#if VERSION_PAL
+extern s32 N(pal_variable);
+#endif

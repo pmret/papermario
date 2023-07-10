@@ -1,12 +1,13 @@
 #include "hos_05.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(UnlockStarBeam)) {
     gPlayerData.starBeamLevel = 1;
     gPlayerData.curHP = gPlayerData.curMaxHP;
     gPlayerData.curFP = gPlayerData.curMaxFP;
     gPlayerData.specialBarsFilled = gPlayerData.maxStarPower * 256;
-    sync_status_menu();
+    sync_status_bar();
     return ApiStatus_DONE2;
 }
 

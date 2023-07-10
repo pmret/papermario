@@ -4,120 +4,122 @@
 extern Gfx D_090003A0_38ED30[];
 extern Gfx D_09000420_38EDB0[];
 
+// perhaps additional, unused colors? 36 bytes would give 12 RGB colors
 s32 D_E008CAF0[] = {
-    0xFEACACFE, 0xACD5FEB4, 0x9AD5B4FE, 0xB4B4FEB4, 0xDDFEB4FE,
-    0xFEB4FED5, 0xB4FEB4D5, 0xFEB4FEFE, 0xB4FED5AC
+    0xFEACACFE, 0xACD5FEB4, 0x9AD5B4FE,
+    0xB4B4FEB4, 0xDDFEB4FE, 0xFEB4FED5,
+    0xB4FEB4D5, 0xFEB4FEFE, 0xB4FED5AC
 };
 
-u8 D_E008CB14[] = { 255, 255,  64 };
-u8 D_E008CB18[] = { 255,  64,  64 };
-u8 D_E008CB1C[] = { 255,  64, 255 };
+u8 ColorsR[] = { 255, 255,  64 };
+u8 ColorsG[] = { 255,  64,  64 };
+u8 ColorsB[] = { 255,  64, 255 };
 
 void effect_46_init(EffectInstance* effect);
 void effect_46_update(EffectInstance* effect);
 void effect_46_render(EffectInstance* effect);
 void effect_46_appendGfx(void* effect);
 
-EffectInstance* effect_46_main(s32 arg0, PlayerStatus* arg1, f32 arg2, s32 arg3) {
+EffectInstance* effect_46_main(s32 type, PlayerStatus* player, f32 scale, s32 duration) {
     EffectBlueprint bp;
     EffectInstance* effect;
-    Effect46FXData* part;
+    SpinFXData* part;
     s32 numParts = 5;
-    s32 index;
+    s32 colorIdx;
     s32 i;
 
     bp.init = effect_46_init;
     bp.update = effect_46_update;
     bp.renderWorld = effect_46_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_46;
 
     effect = shim_create_effect_instance(&bp);
     effect->numParts = numParts;
-    part = effect->data.unk_46 = shim_general_heap_malloc(numParts * sizeof(*part));
-    ASSERT(effect->data.unk_46 != NULL);
+    part = effect->data.spin = shim_general_heap_malloc(numParts * sizeof(*part));
+    ASSERT(effect->data.spin != NULL);
 
-    part->unk_00 = arg0;
-    part->unk_04 = arg1;
-    part->unk_14 = arg2 * 1.2;
-    part->unk_18 = arg2 * 1.2;
-    part->unk_20 = arg3;
-    part->unk_24 = arg3;
-    part->unk_1C = 0;
-    part->unk_28 = 0;
+    part->type = type;
+    part->player = player;
+    part->scale = scale * 1.2;
+    part->initialScale = scale * 1.2;
+    part->duration = duration;
+    part->timeLeft = duration;
+    part->alpha = 0;
+    part->lifetime = 0;
 
     part++;
     for (i = 1; i < numParts; i++, part++) {
-        switch (arg0) {
+        switch (type) {
             case 0:
             case 2:
             case 4:
             case 6:
-                part->unk_08 = 0.0f;
-                part->unk_0C = i * 7 + 4;
-                part->unk_10 = 0.0f;
-                part->unk_38 = 0.0f;
-                part->unk_3C = 60.0f;
-                part->unk_40 = 0.0f;
-                part->unk_2C = 0.0f;
-                part->unk_30 = i * 120;
-                part->unk_34 = 0.0f;
-                part->unk_14 = 1.0f;
+                part->pos.x = 0.0f;
+                part->pos.y = i * 7 + 4;
+                part->pos.z = 0.0f;
+                part->rotVel.x = 0.0f;
+                part->rotVel.y = 60.0f;
+                part->rotVel.z = 0.0f;
+                part->rot.x = 0.0f;
+                part->rot.y = i * 120;
+                part->rot.z = 0.0f;
+                part->scale = 1.0f;
                 break;
             case 1:
             case 3:
             case 5:
             case 7:
-                part->unk_08 = 0.0f;
-                part->unk_0C = i * 7 + 4;
-                part->unk_10 = 0.0f;
-                part->unk_38 = 0.0f;
-                part->unk_3C = -60.0f;
-                part->unk_40 = 0.0f;
-                part->unk_2C = 0.0f;
-                part->unk_30 = i * 120;
-                part->unk_34 = 0.0f;
-                part->unk_14 = 1.0f;
-                part->unk_46 = 255;
-                part->unk_45 = 255;
-                part->unk_44 = 255;
+                part->pos.x = 0.0f;
+                part->pos.y = i * 7 + 4;
+                part->pos.z = 0.0f;
+                part->rotVel.x = 0.0f;
+                part->rotVel.y = -60.0f;
+                part->rotVel.z = 0.0f;
+                part->rot.x = 0.0f;
+                part->rot.y = i * 120;
+                part->rot.z = 0.0f;
+                part->scale = 1.0f;
+                part->color.b = 255;
+                part->color.g = 255;
+                part->color.r = 255;
                 break;
             default:
-                part->unk_08 = 0;
-                part->unk_0C = arg1->colliderHeight * 0.5;
-                part->unk_10 = 0;
-                part->unk_38 = func_E0200000(1) * 8 - 4;
-                part->unk_3C = 0;
-                part->unk_40 = func_E0200000(1) * 8 - 4;
-                part->unk_2C = i * 25;
-                part->unk_30 = (i - 1) * 360 / (numParts - 1);
-                part->unk_34 = 360 - i * 38;
-                part->unk_14 = (f32) (i - 1) / (numParts - 1) * 0.5 + 0.5;
+                part->pos.x = 0;
+                part->pos.y = player->colliderHeight * 0.5;
+                part->pos.z = 0;
+                part->rotVel.x = effect_rand_int(1) * 8 - 4;
+                part->rotVel.y = 0;
+                part->rotVel.z = effect_rand_int(1) * 8 - 4;
+                part->rot.x = i * 25;
+                part->rot.y = (i - 1) * 360 / (numParts - 1);
+                part->rot.z = 360 - i * 38;
+                part->scale = (f32) (i - 1) / (numParts - 1) * 0.5 + 0.5;
                 break;
         }
 
-        switch (arg0) {
+        switch (type) {
             case 2:
             case 3:
-                index = 1;
+                colorIdx = 1;
                 break;
             case 4:
             case 5:
-                index = 2;
+                colorIdx = 2;
                 break;
             case 6:
             case 7:
-                index = (i & 1) + 1;
+                colorIdx = (i & 1) + 1;
                 break;
             default:
-                index = 0;
+                colorIdx = 0;
                 break;
         }
 
-        part->unk_44 = D_E008CB14[index];
-        part->unk_45 = D_E008CB18[index];
-        part->unk_46 = D_E008CB1C[index];
+        part->color.r = ColorsR[colorIdx];
+        part->color.g = ColorsG[colorIdx];
+        part->color.b = ColorsB[colorIdx];
     }
 
     return effect;
@@ -127,59 +129,59 @@ void effect_46_init(EffectInstance* effect) {
 }
 
 void effect_46_update(EffectInstance* effect) {
-    Effect46FXData* part = effect->data.unk_46;
-    s32 unk_00;
-    s32 unk_24;
+    SpinFXData* part = effect->data.spin;
+    s32 type;
+    s32 time;
     s32 i;
 
-    part->unk_24--;
-    part->unk_28++;
+    part->timeLeft--;
+    part->lifetime++;
 
-    if (part->unk_24 < 0) {
+    if (part->timeLeft < 0) {
         shim_remove_effect(effect);
         return;
     }
 
-    unk_00 = part->unk_00;
-    unk_24 = part->unk_24;
+    type = part->type;
+    time = part->timeLeft;
 
-    if (unk_00 == 8) {
-        if (unk_24 >= 6) {
-            part->unk_1C += (255 - part->unk_1C) * 0.05;
+    if (type == 8) {
+        if (time >= 6) {
+            part->alpha += (255 - part->alpha) * 0.05;
         }
-        part->unk_14 = (part->unk_18 * unk_24) / part->unk_20;
-        if (unk_24 < 10) {
-            part->unk_1C = unk_24 * 25;
+        part->scale = (part->initialScale * time) / part->duration;
+        if (time < 10) {
+            part->alpha = time * 25;
         }
     } else {
-        if (unk_24 >= 6) {
-            part->unk_1C += (100 - part->unk_1C) * 0.3;
+        if (time >= 6) {
+            part->alpha += (100 - part->alpha) * 0.3;
         }
-        if (unk_24 < 10) {
-            part->unk_1C *= 0.8;
-            part->unk_14 += (2.0f * part->unk_18 - part->unk_14) * 0.1;
+        if (time < 10) {
+            part->alpha *= 0.8;
+            part->scale += (2.0f * part->initialScale - part->scale) * 0.1;
         }
     }
 
-    part->unk_08 = part->unk_04->position.x;
-    part->unk_0C = part->unk_04->position.y;
-    part->unk_10 = part->unk_04->position.z;
+    part->pos.x = part->player->position.x;
+    part->pos.y = part->player->position.y;
+    part->pos.z = part->player->position.z;
 
     part++;
     for (i = 1; i < effect->numParts; i++, part++) {
-        if (unk_00 == 8) {
+        if (type == 8) {
             if (i % 2) {
-                part->unk_3C += (40.0f - part->unk_3C) * 0.2;
+                part->rotVel.y += (40.0f - part->rotVel.y) * 0.2;
             } else {
-                part->unk_3C += (-40.0f - part->unk_3C) * 0.2;
+                part->rotVel.y += (-40.0f - part->rotVel.y) * 0.2;
             }
-            part->unk_2C += part->unk_38;
-            part->unk_30 += part->unk_3C;
-            part->unk_34 += part->unk_40;
-        } else if (unk_24 < 10) {
-            part->unk_30 += (part->unk_3C * unk_24) / 10.0f;
+            part->rot.x += part->rotVel.x;
+            part->rot.y += part->rotVel.y;
+            part->rot.z += part->rotVel.z;
+        } else if (time < 10) {
+            part->rot.y += (part->rotVel.y * time) / 10.0f;
         } else {
-            part->unk_30 += part->unk_3C;
+            part->rot.y += part->rotVel.y;
         }
     }
 }
@@ -198,45 +200,45 @@ void effect_46_render(EffectInstance* effect) {
 }
 
 void effect_46_appendGfx(void* effect) {
-    Effect46FXData* part = ((EffectInstance*)effect)->data.unk_46;
-    s32 unk_00;
-    s32 unk_1C = part->unk_1C;
-    f32 unk_14 = part->unk_14;
-    f32 unk_18 = part->unk_18;
-    Matrix4f sp20;
-    Matrix4f sp60;
+    SpinFXData* part = ((EffectInstance*)effect)->data.spin;
+    s32 type;
+    s32 alpha = part->alpha;
+    f32 curScale = part->scale;
+    f32 initialScale = part->initialScale;
+    Matrix4f mtxTransform;
+    Matrix4f mtxTemp;
     s32 i;
 
-    unk_00 = part->unk_00;
+    type = part->type;
 
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
     gSPDisplayList(gMainGfxPos++, D_09000420_38EDB0);
 
-    shim_guTranslateF(sp20, part->unk_08, part->unk_0C, part->unk_10);
-    shim_guRotateF(sp60, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-    shim_guMtxCatF(sp60, sp20, sp20);
-    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+    shim_guTranslateF(mtxTransform, part->pos.x, part->pos.y, part->pos.z);
+    shim_guRotateF(mtxTemp, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    shim_guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
+    shim_guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
     part++;
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, part++) {
-        shim_guPositionF(sp20, part->unk_2C, 0.0f, part->unk_34, unk_14 * part->unk_14, part->unk_08, part->unk_0C, part->unk_10);
-        shim_guRotateF(sp60, part->unk_30, 0.0f, 1.0f, 0.0f);
-        shim_guMtxCatF(sp60, sp20, sp20);
+        shim_guPositionF(mtxTransform, part->rot.x, 0.0f, part->rot.z, curScale * part->scale, part->pos.x, part->pos.y, part->pos.z);
+        shim_guRotateF(mtxTemp, part->rot.y, 0.0f, 1.0f, 0.0f);
+        shim_guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
 
-        if (unk_00 < 8) {
-            shim_guTranslateF(sp60, 3.0f - (unk_14 - unk_18) * 3.0f / unk_18, 0.0f, 0.0f);
-            shim_guMtxCatF(sp60, sp20, sp20);
+        if (type < 8) {
+            shim_guTranslateF(mtxTemp, 3.0f - (curScale - initialScale) * 3.0f / initialScale, 0.0f, 0.0f);
+            shim_guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
         } else {
-            shim_guTranslateF(sp60, 2.0f, 0.0f, 0.0f);
-            shim_guMtxCatF(sp60, sp20, sp20);
+            shim_guTranslateF(mtxTemp, 2.0f, 0.0f, 0.0f);
+            shim_guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
         }
 
-        gDPSetPrimColor(gMainGfxPos++, 0, 0, part->unk_44, part->unk_45, part->unk_46, unk_1C);
+        gDPSetPrimColor(gMainGfxPos++, 0, 0, part->color.r, part->color.g, part->color.b, alpha);
 
-        shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+        shim_guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         gSPDisplayList(gMainGfxPos++, D_090003A0_38ED30);

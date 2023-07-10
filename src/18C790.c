@@ -15,6 +15,7 @@
 #include "sprite/npc/BattleSushie.h"
 #include "sprite/npc/BattleLakilester.h"
 #include "sprite/npc/BattleBow.h"
+#include "sprite/player.h"
 
 extern HudScript HES_ProjectorBeam;
 extern IconHudScriptPair gItemHudScripts[];
@@ -364,7 +365,7 @@ EvtScript EVS_ShowStarpoints = {
         EVT_CALL(CreateVirtualEntity, LVar6, EVT_PTR(EMS_starpoint_starpoints))
         EVT_CALL(SetVirtualEntityPosition, LVar6, -278, 68, 70)
         EVT_CALL(SetVirtualEntityScale, LVar6, EVT_FLOAT(0.5), EVT_FLOAT(0.5), EVT_FLOAT(0.5))
-        EVT_SET(LocalFlag(0), 1)
+        EVT_SET(LFlag0, TRUE)
     EVT_END_IF
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(99)
@@ -517,7 +518,7 @@ void btl_state_update_celebration(void) {
                 }
 
                 CelebrateStateTime = 0;
-                btl_cam_use_preset(BTL_CAM_PRESET_23);
+                btl_cam_use_preset(BTL_CAM_VICTORY);
                 EndBattleRewardStep = 0;
                 CelebrateSubstateTime = 1;
                 gBattleSubState = BTL_SUBSTATE_CELEBRATE_LOAD_STAR_POINTS;
@@ -611,7 +612,7 @@ void btl_state_update_celebration(void) {
         case BTL_SUBSTATE_CELEBRATE_LEVEL_UP_LOAD:
             if (CelebrateStateTime >= 99) {
                 playerData->level++;
-                btl_cam_use_preset(BTL_CAM_PRESET_C);
+                btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(5);
                 dma_copy(level_up_ROM_START, level_up_ROM_END, level_up_VRAM);
                 sfx_play_sound(SOUND_80000008);
@@ -1410,14 +1411,14 @@ void btl_state_draw_celebration(void) {
                 }
             }
 
-            set_screen_overlay_params_front(0, bFadeToBlackAmt);
+            set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, bFadeToBlackAmt);
             break;
         case BTL_SUBSTATE_CELEBRATE_LEVEL_UP_DESTROY_HUD:
-            set_screen_overlay_params_front(0, bFadeToBlackAmt);
+            set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, bFadeToBlackAmt);
             break;
         case BTL_SUBSTATE_CELEBRATE_WALK_AWAY:
             if (bFadeToBlackAmt != 0) {
-                set_screen_overlay_params_front(0, bFadeToBlackAmt);
+                set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, bFadeToBlackAmt);
             }
             break;
     }

@@ -1,8 +1,8 @@
-#! /usr/bin/python3
+#!/usr/bin/env python3
 
 from sys import argv
 import re
-import png
+import png  # type: ignore
 
 if __name__ == "__main__":
     infile, outfile = argv[1:3]

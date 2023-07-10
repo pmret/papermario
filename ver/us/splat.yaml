@@ -300,20 +300,20 @@ segments:
       type: .data
       name: curtains
       subsegments:
-      - [0x4F9E0, i4, sprite/unk_checkers, 16, 32]
+      - [0x4F9E0, i4, theater/walls, 16, 32]
       - [0x4FAE0]
-      - [0x4FB30, rgba32, sprite/curtains, 32, 32]
+      - [0x4FB30, rgba32, theater/curtains, 32, 32] #TODO: flip
       - [0x50B30]
-      - [0x50B80, ci4, sprite/checkers, 32, 16]
-      - [0x50C80, palette, sprite/checkers]
+      - [0x50B80, ci4, theater/floor, 32, 16] #TODO: flip
+      - [0x50C80, palette, theater/floor]
       - [0x50CA0]
-      - [0x50D20, vtx, vtx/curtains1]
-      - [0x50D80, vtx, vtx/curtains2]
-      - [0x50DE0, vtx, vtx/curtains3]
-      - [0x50F70, vtx, vtx/curtains4]
-      - [0x50FB0, vtx, vtx/curtains5]
-      - [0x50FF0, vtx, vtx/curtains6]
-      - [0x511E0, vtx, vtx/curtains7]
+      - [0x50D20, vtx, theater/left_wall_vtx]
+      - [0x50D80, vtx, theater/right_wall_vtx]
+      - [0x50DE0, vtx, theater/floor_vtx]
+      - [0x50F70, vtx, theater/left_inset_shadow_vtx]
+      - [0x50FB0, vtx, theater/right_inset_shadow_vtx]
+      - [0x50FF0, vtx, theater/curtain_vtx]
+      - [0x511E0, vtx, theater/wall_shadows_vtx]
       - [0x51260]
       - [0x51540, ia8, ui/no_controller, 128, 32]
       - [0x52540]
@@ -824,7 +824,9 @@ segments:
     follows_vram: engine1
     subsegments:
     - [0xA5DD0, hasm, bss3]
-    - [0xA5DD0, c, a5dd0_len_114e0]
+    - [0xA5DD0, c, entity]
+    - [0xA9290, c, game_states]
+    - [0xA9790, c, model]
     - [0xB4580, c, B4580]
     - [0xB72B0, c, entity_model]
     - [0xB97B0, c, worker]
@@ -832,17 +834,19 @@ segments:
     - [0xC50A0, c, C50A0]
     - [0xCD180, c, cd180_len_38f0]
     - [0xCEE40, c, CEE40]
-    - [0xD0A70, c, d0a70_len_4fe0]
+    - [0xD0A70, c, imgfx]
     - [0xD5A50, c, hud_element]
     - [0xDBA20, c, dba20_len_350]
     - [0xDBD70, c, trigger]
-    - [0xDC470, c, dc470_len_14c0]
+    - [0xDC470, c, background]
     - [0xDD930, c, audio/ambience]
     - [0xDDAF0, c, windows]
     - [0xDE740, c, sprite_shading]
     - [0xDF950, c, audio/sfx]
     - [0xE0B30, c, audio/e0b30_len_b80]
-    - [0xE16B0, .data, a5dd0_len_114e0]
+    - [0xE16B0, .data, entity]
+    - [0xE16C0, .data, game_states]
+    - [0xE16C0, .data, model]
     - [0xE2950, .data, B4580]
     - [0xE2960, .data, entity_model]
     - [0xE2980, .data, msg]
@@ -861,9 +865,9 @@ segments:
       - [0xE4E70, vtx, vtx/stencil2]
       - [0xE4FF0]
     - [0xE5490, .data, CEE40]
-    - [0xE5510, .data, d0a70_len_4fe0]
+    - [0xE5510, .data, imgfx]
     - [0xE56C0, .data, hud_element]
-    - [0xE5820, .data, dc470_len_14c0]
+    - [0xE5820, .data, background]
     - [0xE5840, .data, audio/ambience]
     - [0xE5850, .data, windows]
     - [0xE59D0, .data, audio/sfx]
@@ -972,38 +976,38 @@ segments:
       - [0x10D2B0, ci4, ui/msg/bubble_mid, 8, 64, ui/msg/bubble_left]
       - [0x10D3B0, ci4, ui/msg/bubble_right, 32, 64, ui/msg/bubble_left]
       - [0x10D7B0, ci4, ui/msg/arrow, 16, 16, ui/msg/bubble_left]
-      - [0x10D830, ci4, ui/msg/frame_part_0, 8, 8, ui/msg/bubble_left]
-      - [0x10D850, ci4, ui/msg/frame_part_1, 8, 8, ui/msg/bubble_left]
-      - [0x10D870, ci4, ui/msg/frame_part_2, 8, 8, ui/msg/bubble_left]
-      - [0x10D890, ci4, ui/msg/frame_part_3, 8, 8, ui/msg/bubble_left]
-      - [0x10D8B0, ci4, ui/msg/frame_part_4, 8, 8, ui/msg/bubble_left]
-      - [0x10D8D0, ci4, ui/msg/frame_part_5, 8, 8, ui/msg/bubble_left]
-      - [0x10D8F0, ci4, ui/msg/frame_part_6, 8, 8, ui/msg/bubble_left]
-      - [0x10D910, ci4, ui/msg/frame_part_7, 8, 8, ui/msg/bubble_left]
-      - [0x10D930, ci4, ui/msg/frame_part_8, 8, 8, ui/msg/bubble_left]
-      - [0x10D950, ci4, ui/msg/frame_part_9, 8, 8, ui/msg/bubble_left]
-      - [0x10D970, ci4, ui/msg/frame_part_A, 8, 8, ui/msg/bubble_left]
-      - [0x10D990, ci4, ui/msg/frame_part_B, 8, 8, ui/msg/bubble_left]
-      - [0x10D9B0, ci4, ui/msg/frame_part_C, 8, 8, ui/msg/bubble_left]
-      - [0x10D9D0, ci4, ui/msg/frame_part_D, 8, 8, ui/msg/bubble_left]
-      - [0x10D9F0, ci4, ui/msg/frame_part_E, 8, 8, ui/msg/bubble_left]
-      - [0x10DA10, ci4, ui/msg/frame_part_F, 8, 8, ui/msg/bubble_left]
-      - [0x10DA30, ci4, ui/msg/frame_part_10, 8, 8, ui/msg/bubble_left]
-      - [0x10DA50, ci4, ui/msg/frame_part_11, 8, 8, ui/msg/bubble_left]
-      - [0x10DA70, ci4, ui/msg/frame_part_12, 8, 8, ui/msg/bubble_left]
-      - [0x10DA90, ci4, ui/msg/frame_part_13, 8, 8, ui/msg/bubble_left]
-      - [0x10DAB0, ci4, ui/msg/frame_part_14, 8, 8, ui/msg/bubble_left]
-      - [0x10DAD0, ci4, ui/msg/frame_part_15, 8, 8, ui/msg/bubble_left]
-      - [0x10DAF0, ci4, ui/msg/frame_part_16, 8, 8, ui/msg/bubble_left]
-      - [0x10DB10, ci4, ui/msg/frame_part_17, 8, 8, ui/msg/bubble_left]
-      - [0x10DB30, ci4, ui/msg/frame_part_18, 8, 8, ui/msg/bubble_left]
-      - [0x10DB50, ci4, ui/msg/frame_part_19, 8, 8, ui/msg/bubble_left]
-      - [0x10DB70, ci4, ui/msg/frame_part_1A, 8, 8, ui/msg/bubble_left]
-      - [0x10DB90, ci4, ui/msg/frame_part_1B, 8, 8, ui/msg/bubble_left]
-      - [0x10DBB0, ci4, ui/msg/frame_part_1C, 8, 8, ui/msg/bubble_left]
-      - [0x10DBD0, ci4, ui/msg/frame_part_1D, 8, 8, ui/msg/bubble_left]
-      - [0x10DBF0, ci4, ui/msg/frame_part_1E, 8, 8, ui/msg/bubble_left]
-      - [0x10DC10, ci4, ui/msg/frame_part_1F, 8, 8, ui/msg/bubble_left]
+      - [0x10D830, ci4, ui/msg/frame_a_1_1, 8, 8, ui/msg/bubble_left]
+      - [0x10D850, ci4, ui/msg/frame_a_1_2, 8, 8, ui/msg/bubble_left]
+      - [0x10D870, ci4, ui/msg/frame_a_1_3, 8, 8, ui/msg/bubble_left]
+      - [0x10D890, ci4, ui/msg/frame_a_1_4, 8, 8, ui/msg/bubble_left]
+      - [0x10D8B0, ci4, ui/msg/frame_a_1_5, 8, 8, ui/msg/bubble_left]
+      - [0x10D8D0, ci4, ui/msg/frame_a_2_1, 8, 8, ui/msg/bubble_left]
+      - [0x10D8F0, ci4, ui/msg/frame_a_2_5, 8, 8, ui/msg/bubble_left]
+      - [0x10D910, ci4, ui/msg/frame_a_3_1, 8, 8, ui/msg/bubble_left]
+      - [0x10D930, ci4, ui/msg/frame_a_3_5, 8, 8, ui/msg/bubble_left]
+      - [0x10D950, ci4, ui/msg/frame_a_4_1, 8, 8, ui/msg/bubble_left]
+      - [0x10D970, ci4, ui/msg/frame_a_4_5, 8, 8, ui/msg/bubble_left]
+      - [0x10D990, ci4, ui/msg/frame_a_5_1, 8, 8, ui/msg/bubble_left]
+      - [0x10D9B0, ci4, ui/msg/frame_a_5_2, 8, 8, ui/msg/bubble_left]
+      - [0x10D9D0, ci4, ui/msg/frame_a_5_3, 8, 8, ui/msg/bubble_left]
+      - [0x10D9F0, ci4, ui/msg/frame_a_5_4, 8, 8, ui/msg/bubble_left]
+      - [0x10DA10, ci4, ui/msg/frame_a_5_5, 8, 8, ui/msg/bubble_left]
+      - [0x10DA30, ci4, ui/msg/frame_b_1_1, 8, 8, ui/msg/bubble_left]
+      - [0x10DA50, ci4, ui/msg/frame_b_1_2, 8, 8, ui/msg/bubble_left]
+      - [0x10DA70, ci4, ui/msg/frame_b_1_3, 8, 8, ui/msg/bubble_left]
+      - [0x10DA90, ci4, ui/msg/frame_b_1_4, 8, 8, ui/msg/bubble_left]
+      - [0x10DAB0, ci4, ui/msg/frame_b_1_5, 8, 8, ui/msg/bubble_left]
+      - [0x10DAD0, ci4, ui/msg/frame_b_2_1, 8, 8, ui/msg/bubble_left]
+      - [0x10DAF0, ci4, ui/msg/frame_b_2_5, 8, 8, ui/msg/bubble_left]
+      - [0x10DB10, ci4, ui/msg/frame_b_3_1, 8, 8, ui/msg/bubble_left]
+      - [0x10DB30, ci4, ui/msg/frame_b_3_5, 8, 8, ui/msg/bubble_left]
+      - [0x10DB50, ci4, ui/msg/frame_b_4_1, 8, 8, ui/msg/bubble_left]
+      - [0x10DB70, ci4, ui/msg/frame_b_4_5, 8, 8, ui/msg/bubble_left]
+      - [0x10DB90, ci4, ui/msg/frame_b_5_1, 8, 8, ui/msg/bubble_left]
+      - [0x10DBB0, ci4, ui/msg/frame_b_5_2, 8, 8, ui/msg/bubble_left]
+      - [0x10DBD0, ci4, ui/msg/frame_b_5_3, 8, 8, ui/msg/bubble_left]
+      - [0x10DBF0, ci4, ui/msg/frame_b_5_4, 8, 8, ui/msg/bubble_left]
+      - [0x10DC10, ci4, ui/msg/frame_b_5_5, 8, 8, ui/msg/bubble_left]
       # all 16 following palettes can be applied to all images above
       - [0x10DC30, palette, ui/msg/bubble_left]
       #- [0x10DC30, palette, ui/msg/palette_0]
@@ -1386,7 +1390,7 @@ segments:
     - [0x19FAF0, c, 19FAF0]
     - [0x1A5830, c, 1A5830]
     - [0x1AC760, c]
-    - [0x1AF120, c]
+    - [0x1AF120, c, battle/btl_evt_library]
     - [0x1AF230, c, battle/use_star_powers]
     - [0x1AF2D0, .data, 16c8e0]
     - [0x1AF5C0, .data, battle_cam]
@@ -1551,8 +1555,8 @@ segments:
       - [0x1BDDC0, palette, ui/battle/cmd/aim/target_0]
       - [0x1BDDE0, ci4, ui/battle/cmd/aim/target_1, 24, 24]
       - [0x1BDF00, palette, ui/battle/cmd/aim/target_1]
-      - [0x1BDF20, ci4, ui/battle/unk_star, 32, 32]
-      - [0x1BE120, palette, ui/battle/unk_star]
+      - [0x1BDF20, ci4, ui/battle/solid_star, 32, 32]
+      - [0x1BE120, palette, ui/battle/solid_star]
       - [0x1BE140]
       - [0x1BE148, ia8, ui/battle/projector_spot, 32, 32]
       - [0x1BE548]
@@ -1568,7 +1572,7 @@ segments:
     - [0x1C2A70, .data, battle/action_cmd]
     - [0x1C2EC0, .data, 19FAF0]
     - [0x1C2FC0, .data, 1A5830]
-    - [0x1C3000, .data, 1AF120]
+    - [0x1C3000, .data, battle/btl_evt_library]
     - [0x1CB0B0, .data, battle/use_star_powers]
     - [0x1CB240]
   - [0x1CC310, ci4,     icon/present, 32, 32]
@@ -2496,9 +2500,9 @@ segments:
   - [0x1FA790, ci4,     icon/battle/ultra_boot, 32, 32]
   - [0x1FA990, palette, icon/battle/ultra_boot]
   - [0x1FA9B0, palette, icon/battle/ultra_boot.disabled]
-  - [0x1FA9D0, ci4,     icon/battle/move/items, 32, 32]
-  - [0x1FABD0, palette, icon/battle/move/items]
-  - [0x1FABF0, palette, icon/battle/move/items.disabled]
+  - [0x1FA9D0, ci4,     icon/battle/items, 32, 32]
+  - [0x1FABD0, palette, icon/battle/items]
+  - [0x1FABF0, palette, icon/battle/items.disabled]
   - [0x1FAC10, ci4,     icon/heart/heart_1, 32, 32]
   - [0x1FAE10, palette, icon/heart/heart_1]
   - [0x1FAE30, ci4,     icon/heart/heart_2, 32, 32]
@@ -2596,7 +2600,31 @@ segments:
   - [0x2435F0, ia8,     title/tape, 128, 128]
   - [0x2475F0, ci8,     title/bowser_silhouette, 128, 128]
   - [0x24B5F0, palette, title/bowser_silhouette]
-  - [0x24B7F0, bin, imgfx_gfx_data] # TODO extract into better format?
+  - start: 0x24B7F0
+    type: pm_imgfx_data
+    name: imgfx_data
+    vram: 0
+    animations:
+    - ["shock", 0x14358]
+    - ["shiver", 0x18200]
+    - ["vertical_pipe_curl", 0x1A858]
+    - ["horizontal_pipe_curl", 0x1E830]
+    - ["startle", 0x29458]
+    - ["flutter_down", 0x314E0]
+    - ["unfurl", 0x33498]
+    - ["get_in_bed", 0x38988]
+    - ["spirit_capture", 0x39228]
+    - ["unused_1", 0x5B7A8]
+    - ["unused_2", 0x7CF10]
+    - ["unused_3", 0x86490]
+    - ["tutankoopa_gather", 0x96258]
+    - ["tutankoopa_swirl_2", 0xA1820]
+    - ["tutankoopa_swirl_1", 0xACDE8]
+    - ["shuffle_cards", 0xBBF68]
+    - ["flip_card_1", 0xC0490]
+    - ["flip_card_2", 0xC49B8]
+    - ["flip_card_3", 0xC6150]
+    - ["cymbal_crush", 0xCA380]
   - [0x315B80, pm_sprite_shading_profiles, sprite_shading_profiles]
   - type: code
     start: 0x3169F0
@@ -7205,10 +7233,10 @@ segments:
     subalign: 4
     subsegments:
     - [0x439A90, c, area]
-    - [0x439A90, c, actor/blue_goomba]
-    - [0x439D10, c, actor/red_goomba]
-    - [0x439F90, c, actor/blue_goomba2]
-    - [0x43A210, c, actor/red_goomba2]
+    - [0x439A90, c, actor/blue_goomba_1]
+    - [0x439D10, c, actor/red_goomba_1]
+    - [0x439F90, c, actor/blue_goomba_2]
+    - [0x43A210, c, actor/red_goomba_2]
     - [0x43A4C0, c, actor/goomba_king]
     - [0x43A5A0, c, actor/goomnut_tree]
     - [0x43A7E0, c, stage/kmr_02]
@@ -7225,9 +7253,9 @@ segments:
     subalign: 4
     subsegments:
     - [0x447440, c, area]
-    - [0x447440, c, actor/spiked_goomba]
-    - [0x4476C0, c, actor/paragoomba]
-    - [0x4479A0, c, actor/paragoomba2]
+    - [0x447440, c, actor/tutorial_spiked_goomba]
+    - [0x4476C0, c, actor/tutorial_paragoomba]
+    - [0x4479A0, c, actor/paragoomba]
     - [0x447C80, c, actor/jr_troopa]
     - [0x447C80, c, actor/egg_jr_troopa]
     - [0x447C80, c, actor/para_jr_troopa]
@@ -7237,13 +7265,13 @@ segments:
     - [0x448420, c, stage/kmr_02]
     - [0x448420, c, stage/kmr_03]
     - [0x448690, c, stage/kmr_04]
-    - [0x448900, c, stage/kmr_05]
+    - [0x448900, c, stage/kmr_05b]
     - [0x448B70, c, stage/kmr_06]
     - [0x448E20, c, stage/nok_01]
     - [0x448E20, c, stage/mim_01]
     - [0x448E80, c, stage/sam_01]
     - [0x4491A0, c, stage/mac_01]
-    - [0x4495F0, c, stage/kpa_01]
+    - [0x4495F0, c, stage/kpa_13]
     - [0x4495F0]
   - dir: battle/area/mac
     type: code
@@ -7330,10 +7358,10 @@ segments:
     subsegments:
     - [0x4B11F0, c, area]
     - [0x4B11F0, c, actor/fake_bowser]
-    - [0x4B15D0, c, actor/green_ninja_koopa]
-    - [0x4B1D90, c, actor/red_ninja_koopa]
-    - [0x4B2550, c, actor/blue_ninja_koopa]
-    - [0x4B2D10, c, actor/yellow_ninja_koopa]
+    - [0x4B15D0, c, actor/koopa_bros_green]
+    - [0x4B1D90, c, actor/koopa_bros_red]
+    - [0x4B2550, c, actor/koopa_bros_black]
+    - [0x4B2D10, c, actor/koopa_bros_yellow]
     - [0x4B34D0, c, stage/trd_00]
     - [0x4B34D0, c, stage/trd_01]
     - [0x4B34D0, c, stage/trd_02]
@@ -7451,7 +7479,7 @@ segments:
     vram: 0x80218000
     follows_vram: heaps
     subsegments:
-    - [0x4FEA50, c, actor/hypergoomba]
+    - [0x4FEA50, c, actor/hyper_goomba]
     - [0x4FED30, c, actor/hyper_paragoomba]
     - [0x4FF010, c, actor/hyper_cleft]
     - [0x4FF0D0, c, actor/tubbas_heart]
@@ -7986,8 +8014,8 @@ segments:
     - [0x6A14C0, c, actor/bowser_phase_2]
     - [0x6A2B50, c, actor/bowser_phase_3]
     - [0x6A4490, c, stage/kpa_01]
-    - [0x6A4490, c, stage/kpa_02]
-    - [0x6A4490, c, stage/kpa_03]
+    - [0x6A4490, c, stage/kkj_01]
+    - [0x6A4490, c, stage/kkj_02]
     - [0x6A44E0, c, area]
     - [0x6A44E0]
   - dir: battle/area/kpa3
@@ -17306,268 +17334,10 @@ segments:
 ### Sprites ###
 ###############
   - [0x1942C40, bin]
-  - [0x1943000, bin] # sprite data build metadata (build date, major file divisions)
-
-  # player sprite raster table:
-  - [0x1943020, bin] # Player sprite table
-  # - [0x1943BA0, bin] # Mario world sprites
-  # - [0x199A8C0, bin] # Retro sprites
-  # - [0x199BB00, bin] # Princess Peach sprites
-
-  - [0x19E0970, bin] # Player sprite Yay0 table (offsets to the following 13 entries)
-  - { start: 0x19E09A8, type: yay0, align: 8 }
-  - { start: 0x19E1390, type: yay0, align: 8 }
-  - { start: 0x19E1888, type: yay0, align: 8 }
-  - { start: 0x19E2330, type: yay0, align: 8 }
-  - { start: 0x19E2DE0, type: yay0, align: 8 }
-  - { start: 0x19E3208, type: yay0, align: 8 }
-  - { start: 0x19E3BA8, type: yay0, align: 8 }
-  - { start: 0x19E3FD8, type: yay0, align: 8 }
-  - { start: 0x19E4828, type: yay0, align: 8 }
-  - { start: 0x19E4BE0, type: yay0, align: 8 }
-  - { start: 0x19E5758, type: yay0, align: 8 }
-  - { start: 0x19E5950, type: yay0, align: 8 }
-  - { start: 0x19E62A0, type: yay0, align: 8 }
-
-  - start: 0x19E67B8
+  - start: 0x1943000
     align: 8
-    type: pm_npc_sprites
-    dir: sprite
-    name: npc
-    files:
-      - WorldGoombario
-      - WorldKooper
-      - WorldBombette
-      - WorldParakarry
-      - WorldBow
-      - WorldWatt
-      - WorldSushie
-      - WorldLakilester
-      - BattleGoombario
-      - BattleKooper
-      - BattleBombette
-      - BattleParakarry
-      - BattleBow
-      - BattleWatt
-      - BattleSushie
-      - BattleLakilester
-      - KooperWithoutShell
-      - WorldEldstar
-      - WorldMamar
-      - WorldSkolar
-      - WorldMuskular
-      - WorldMisstar
-      - WorldKlevar
-      - WorldKalmar
-      - BattleEldstar
-      - BattleMamar
-      - BattleSkolar
-      - BattleMuskular
-      - BattleMisstar
-      - BattleKlevar
-      - BattleKalmar
-      - Twink
-      - JrTroopa
-      - SpikedJrTroopa
-      - SpikedParaJrTroopa
-      - MageJrTroopa
-      - ParaJrTroopa
-      - Goomba
-      - SpikedGoomba
-      - Paragoomba
-      - KoopaTroopa
-      - ParaTroopa
-      - Fuzzy
-      - Bobomb
-      - BulletBill
-      - BillBlaster
-      - MontyMole
-      - Cleft
-      - Pokey
-      - Bandit
-      - BuzzyBeetle
-      - Swooper
-      - StoneChomp
-      - LargePiranha
-      - SmallPiranha
-      - Sentinel
-      - WorldClubba
-      - BattleClubba
-      - ShyGuy
-      - GrooveGuy
-      - SkyGuy
-      - PyroGuy
-      - SpyGuy
-      - MediGuy
-      - Fuzzipede
-      - SpearGuy
-      - HeartPlant
-      - HurtPlant
-      - MBush
-      - LavaBubble
-      - KentCKoopa
-      - Dayzee
-      - Lakitu
-      - Spiny
-      - Bzzap
-      - RuffPuff
-      - SpikeTop
-      - Duplighost
-      - AlbinoDino
-      - Blooper
-      - BabyBlooper
-      - Gulpit
-      - DryBones
-      - ThrownBone
-      - BonyBeetle
-      - Magikoopa
-      - FlyingMagikoopa
-      - WorldKoopatrol
-      - Koopatrol
-      - HammerBros
-      - BushBasic
-      - BushBlocky
-      - BushDry
-      - BushLeafy
-      - BushMatted
-      - WorldKammy
-      - BattleKammy
-      - GoombaBros
-      - GoombaKing
-      - SpikyGoomnut
-      - DarkToad
-      - KoopaBros
-      - Buzzar
-      - Tutankoopa
-      - ChainChomp
-      - WorldTubba
-      - BattleTubba
-      - TubbasHeart
-      - BigLanternGhost
-      - ShySquadGuy
-      - MarshalGuy
-      - StiltGuy
-      - StiltGuyUnfold
-      - ShyStackGuy
-      - ShyStackUnfold
-      - ShyStackDamage
-      - ShyStackRock
-      - GeneralGuy
-      - GeneralGuyBomb
-      - TankGuy
-      - LavaPiranha
-      - PetitPiranha
-      - LavaBud
-      - HuffNPuff
-      - TuffPuff
-      - Monstar
-      - CrystalKing
-      - WorldBowser
-      - BattleBowser
-      - Luigi
-      - Toad
-      - Toadette
-      - VannaT
-      - ToadKid
-      - ToadGuard
-      - HarryT
-      - ToadMinister
-      - Postmaster
-      - ConductorToad
-      - TrainToad
-      - Fishmael
-      - Musician
-      - Koopa
-      - KoopaWithoutShell
-      - WorldBobomb
-      - Whacka
-      - Dryite
-      - Mouser
-      - Boo
-      - Yoshi
-      - YoshiKid
-      - Raven
-      - Bubulb
-      - Penguin
-      - ShiverToad
-      - AltBandit
-      - Goompa
-      - Goombaria
-      - Gooma
-      - Goompapa
-      - Goomama
-      - TheMaster
-      - Chan
-      - Lee
-      - Merlon
-      - ChetRippo
-      - Rowf
-      - MinhT
-      - RussT
-      - TayceT
-      - FiceT
-      - Bartender
-      - Chanterelle
-      - RipCheato
-      - ChuckQuizmo
-      - Merluvlee
-      - Merlar
-      - Merlow
-      - StarMan
-      - KoloradoWife
-      - KoopaKoot
-      - Kolorado
-      - BattleKolorado
-      - Archeologist
-      - Nomadimouse
-      - WorldMerlee
-      - BattleMerlee
-      - DisguisedMoustafa
-      - Moustafa
-      - Oaklie
-      - Bootler
-      - Yakkey
-      - GourmetGuy
-      - VillageLeader
-      - LeadersFriend
-      - RaphaelRaven
-      - Tolielup
-      - GateFlower
-      - Petunia
-      - Posie
-      - Lily
-      - Rosie
-      - Sun
-      - Lakilulu
-      - Ninji
-      - MayorPenguin
-      - MayorPenguinWife
-      - PenguinPatrol
-      - Herringway
-      - Merle
-      - StarRod
-      - Fire
-      - Coin
-      - ParadePeach
-      - ParadeKoopas
-      - ParadeBurntBowser
-      - ParadeLuigi
-      - ParadePartner
-      - ParadeYoshi
-      - ParadeKolorado
-      - ParadeChick
-      - ParadeIceShow
-      - ParadeToad
-      - ParadeTwirler
-      - ParadeDrummer
-      - ParadeBanner
-      - ParadeHorn
-      - ParadeTubba
-      - ParadeWizard
-      - ParadeMario
-      - ParadeShyGuy
-      - ParadeTwink
-      - Leaf
+    type: pm_sprites
+    name: sprites
   - [0x1B82208, bin] # end of sprite data - todo: figure out what this is
   - start: 0x1B83000
     type: pm_msg

@@ -1,5 +1,6 @@
 #include "dro_02.h"
 #include "model.h"
+#include "sprite/player.h"
 
 // cards used during Merlee's ritual
 typedef struct RitualCard {
@@ -553,7 +554,7 @@ void N(card_worker_update)(void) {
                 sfx_play_sound(SOUND_206);
 
                 for (j = 0; j < ARRAY_COUNT(N(D_8024EF90)); j++) {
-                    N(D_8024EF90)[j]->flags |= EFFECT_INSTANCE_FLAG_10;
+                    N(D_8024EF90)[j]->flags |= FX_INSTANCE_FLAG_DISMISS;
                 }
             }
             break;
@@ -646,7 +647,7 @@ EvtScript N(EVS_PerformRitual) = {
     EVT_SET(RITUAL_VAR_ORB_EFFECT, LVarF)
     EVT_THREAD
         EVT_WAIT(30)
-        EVT_CALL(func_802D7B10, RITUAL_VAR_ORB_EFFECT)
+        EVT_CALL(DismissEffect, RITUAL_VAR_ORB_EFFECT)
     EVT_END_THREAD
     EVT_CALL(N(DarkenWorld))
     EVT_CALL(DisablePlayerPhysics, TRUE)

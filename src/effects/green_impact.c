@@ -32,7 +32,7 @@ EffectInstance* green_impact_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 ar
     bpPtr->init = green_impact_init;
     bpPtr->update = green_impact_update;
     bpPtr->renderWorld = green_impact_render;
-    bpPtr->unk_14 = NULL;
+    bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_GREEN_IMPACT;
 
     effect = shim_create_effect_instance(bpPtr);

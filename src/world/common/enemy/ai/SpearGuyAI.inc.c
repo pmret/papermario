@@ -129,7 +129,7 @@ ApiStatus N(SpearGuyAI_Main)(Evt* script, s32 isInitialCall) {
         case AI_STATE_WANDER:
             basic_ai_wander(script, npcAISettings, territoryPtr);
             break;
-            
+
         case AI_STATE_LOITER_INIT:
             N(SpearGuyAI_LoiterInit)(script, npcAISettings, territoryPtr);
         case AI_STATE_LOITER:

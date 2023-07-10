@@ -424,10 +424,10 @@
 #endif	/* _LANGUAGE_ASSEMBLY */
 
 /*
- * floating-point status register 
+ * floating-point status register
  */
 #define FPCSR_FS	0x01000000	/* flush denorm to zero */
-#define	FPCSR_C		0x00800000	/* condition bit */	
+#define	FPCSR_C		0x00800000	/* condition bit */
 #define	FPCSR_CE	0x00020000	/* cause: unimplemented operation */
 #define	FPCSR_CV	0x00010000	/* cause: invalid operation */
 #define	FPCSR_CZ	0x00008000	/* cause: division by zero */

@@ -77,9 +77,9 @@
 #define set_message_msg dead_set_message_msg
 #define gPlayerData dead_gPlayerData
 #define gPartnerPopupProperties dead_gPartnerPopupProperties
-#define increment_status_menu_disabled dead_increment_status_menu_disabled
-#define decrement_status_menu_disabled dead_decrement_status_menu_disabled
-#define sync_status_menu dead_sync_status_menu
+#define increment_status_bar_disabled dead_increment_status_bar_disabled
+#define decrement_status_bar_disabled dead_decrement_status_bar_disabled
+#define sync_status_bar dead_sync_status_bar
 #define set_max_SP dead_set_max_SP
 #define get_current_map_settings dead_get_current_map_settings
 #define gGameStatusPtr dead_gGameStatusPtr
@@ -307,7 +307,7 @@
 #define GetNpcYaw dead_GetNpcYaw
 #define PlayAmbientSounds dead_PlayAmbientSounds
 #define SetTexPanner dead_SetTexPanner
-#define func_802D7B10 dead_func_802D7B10
+#define DismissEffect dead_DismissEffect
 #define Entity_Chest dead_Entity_Chest
 #define snd_ambient_mute dead_snd_ambient_mute
 #define GetPlayerAnimation dead_GetPlayerAnimation
