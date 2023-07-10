@@ -1,7 +1,8 @@
 from pathlib import Path
+import os
 import yaml
 import struct
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 from collections import OrderedDict
 
 
@@ -54,7 +55,7 @@ class SBN:
 
             # Decode file at entry
             sbn_file = SBNFile()
-            sbn_file.decode(data[entry.offset:])
+            sbn_file.decode(data[entry.offset:], i)
             self.files.append(sbn_file)
 
         # Decode INIT
@@ -338,11 +339,15 @@ class SBNFile:
     name: bytes
     data: bytes
 
-    def decode(self, data: bytes) -> int:
+    ident: int # we have to track this ourselves because filenames aren't unique
+
+    def decode(self, data: bytes, ident: int) -> int:
         self.signature, = struct.unpack(">4s", data[0x00:0x04])
         self.size, = struct.unpack(">i", data[0x04:0x08])
         self.name, = struct.unpack(">4s", data[0x08:0x0C])
         self.data = data[:self.size]
+        self.ident = ident
+
         return self.size
 
     def write(self, path: Path):
@@ -352,12 +357,18 @@ class SBNFile:
     def read(self, path: Path):
         with open(path, "rb") as f:
             data = f.read()
-        assert self.decode(data) == len(data), "File size mismatch"
+
+        filename = os.path.basename(path)
+
+        ident = int(filename.split("_")[0],16)
+
+        assert self.decode(data, ident) == len(data), "File size mismatch"
 
     def file_name(self) -> str:
+        prefix = f"{self.ident:02X}_"
         stem = decode_null_terminated_ascii(self.name).rstrip(" ")
         extension = decode_null_terminated_ascii(self.signature).rstrip(" ").lower()
-        return stem + "." + extension
+        return prefix + stem + "." + extension
 
     def __str__(self):
         return "SBNFile(" + self.file_name() + ")"
