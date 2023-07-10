@@ -66,12 +66,8 @@ class SBN:
 
             # Decode file at entry
             sbn_file = SBNFile()
-<<<<<<< HEAD
-            sbn_file.decode(data[entry.offset:])
-=======
             file_length = sbn_file.decode(data[entry.offset:], i)
             sbn_file.fakesize = entry.size
->>>>>>> af8e30b7c (Encoding functional)
             self.files.append(sbn_file)
 
         # Decode INIT
@@ -282,7 +278,8 @@ class SBN:
             f.write("banks:\n")
             for id, entry in enumerate(self.init.bk_entries):
                 f.write(f"  - id: 0x{id:02x}\n")
-                f.write(f"    file: {self.files[entry.fileIndex].file_name()}\n")
+                if entry.fileIndex != -1:
+                    f.write(f"    file: {self.files[entry.fileIndex].file_name()}\n")                    
                 f.write(f"    bank_index: 0x{entry.bankIndex:02X}\n")
                 f.write(f"    bank_group: 0x{entry.bankGroup:02X}\n")
             f.write("\n")
@@ -397,12 +394,10 @@ class SBN:
                 id = len(self.init.bk_entries)
             assert type(id) == int
 
-<<<<<<< HEAD
-            file = bank.get("file")
-=======
             file = bank.get("file")    
->>>>>>> af8e30b7c (Encoding functional)
             assert type(file) == str
+
+
             file_id = self.lookup_file_id(file)
 
             bank_index = bank.get("bank_index")
@@ -425,7 +420,9 @@ class SBN:
         return [config_file_path]
 
 
-    def lookup_file_id(self, filename: str) -> int:
+    def lookup_file_id(self, filename: Optional[str]) -> int:
+        if filename is None:
+            return -1
         for id, sbn_file in enumerate(self.files):
             if sbn_file.file_name() == filename:
                 return id
@@ -497,16 +494,12 @@ class SBNFile:
     name: bytes
     data: bytes
 
-<<<<<<< HEAD
-    def decode(self, data: bytes) -> int:
-=======
     host_system_name: str
     # the "size" field of the SBN File entry usually, but not always, matches the actual file size.
     # since this field is unused (I think), it doesn't actually matter other than for reproducing the original cart
     # I couldn't figure out the pattern behind these fake sizes (if there even is one), so I'm just hardcoding them.
     fakesize: int
     def decode(self, data: bytes, ident: int) -> int:
->>>>>>> af8e30b7c (Encoding functional)
         self.signature, = struct.unpack(">4s", data[0x00:0x04])
         self.size, = struct.unpack(">i", data[0x04:0x08])
         self.name, = struct.unpack(">4s", data[0x08:0x0C])
