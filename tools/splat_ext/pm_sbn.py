@@ -124,7 +124,8 @@ class SBN:
             f.write("banks:\n")
             for id, entry in enumerate(self.init.bk_entries):
                 f.write(f"  - id: 0x{id:02x}\n")
-                f.write(f"    file: {self.files[entry.fileIndex].file_name()}\n")
+                if entry.fileIndex != -1:
+                    f.write(f"    file: {self.files[entry.fileIndex].file_name()}\n")                    
                 f.write(f"    bank_index: 0x{entry.bankIndex:02X}\n")
                 f.write(f"    bank_group: 0x{entry.bankGroup:02X}\n")
             f.write("\n")
@@ -230,8 +231,8 @@ class SBN:
                 id = len(self.init.bk_entries)
             assert type(id) == int
 
-            file = bank.get("file")
-            assert type(file) == str
+            file = bank.get("file")    
+            assert (type(file) == str or file is None)
             file_id = self.lookup_file_id(file)
 
             bank_index = bank.get("bank_index")
@@ -257,7 +258,9 @@ class SBN:
         return [config_file_path]
 
 
-    def lookup_file_id(self, filename: str) -> int:
+    def lookup_file_id(self, filename: Optional[str]) -> int:
+        if filename is None:
+            return -1
         for id, sbn_file in enumerate(self.files):
             if sbn_file.file_name() == filename:
                 return id
