@@ -5941,7 +5941,7 @@ enum FileMenuMessages {
     /* 33 */ FILE_MESSAGE_QUESTION,                    // ?[End]
     /* 34 */ FILE_MESSAGE_PERIOD_34,                   // .[End]
 #if VERSION_PAL
-    UNK3,
+    FILE_MESSAGE_BASE_UNK,
 #endif
 };
 
