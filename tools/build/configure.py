@@ -746,6 +746,7 @@ class Configure:
                             "sprite_name": sprite_name,
                             "asset_stack": ",".join(self.asset_stack),
                         },
+                        asset_deps=[str(sprite_dir)],
                     )
                     build(yay0_path, [bin_path], "yay0")
 
@@ -804,9 +805,8 @@ class Configure:
                 )
                 build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
             elif seg.type == "pm_map_data":
-                bin_yay0s: List[
-                    Path
-                ] = []  # flat list of (uncompressed path, compressed? path) pairs
+                # flat list of (uncompressed path, compressed? path) pairs
+                bin_yay0s: List[Path] = []
                 src_dir = Path("assets/x") / seg.name
 
                 for path in entry.src_paths:
@@ -913,6 +913,7 @@ class Configure:
                                 "tex_name": name,
                                 "asset_stack": ",".join(self.asset_stack),
                             },
+                            asset_deps=[f"mapfs/tex/{name}"],
                         )
                     elif name.endswith("_shape"):
                         map_name = "_".join(name.split("_")[:-1])
