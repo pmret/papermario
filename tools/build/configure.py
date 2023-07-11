@@ -241,7 +241,7 @@ def write_ninja_rules(
     ninja.rule(
         "tex",
         description="tex $out",
-        command=f"$python {BUILD_TOOLS}/mapfs/tex.py $out $tex_dir",
+        command=f"$python {BUILD_TOOLS}/mapfs/tex.py $out $tex_name $asset_stack",
     )
 
     ninja.rule(
@@ -408,6 +408,9 @@ class Configure:
 
     @lru_cache(maxsize=None)
     def resolve_asset_path(self, path: Path) -> Path:
+        # Remove nonsense
+        path = Path(os.path.normpath(path))
+
         parts = list(path.parts)
 
         if parts[0] != "assets":
@@ -493,7 +496,7 @@ class Configure:
                 ninja.build(
                     outputs=object_strs,  # $out
                     rule=task,
-                    inputs=self.resolve_src_paths(src_paths),  # $in
+                    inputs=inputs,  # $in
                     implicit=implicit,
                     order_only=order_only,
                     variables={"version": self.version, **variables},
@@ -906,7 +909,10 @@ class Configure:
                             bin_path,
                             [tex_dir, path.parent / (name + ".json")],
                             "tex",
-                            variables={"tex_dir": str(tex_dir)},
+                            variables={
+                                "tex_name": name,
+                                "asset_stack": ",".join(self.asset_stack),
+                            },
                         )
                     elif name.endswith("_shape"):
                         map_name = "_".join(name.split("_")[:-1])
