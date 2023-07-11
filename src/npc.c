@@ -131,7 +131,7 @@ s32 create_npc_impl(NpcBlueprint* blueprint, AnimID* animList, s32 isPeachNpc) {
     npc->unk_96 = 0; // TODO: fix
     npc->verticalRenderOffset = 0;
     npc->alpha = 255;
-    npc->alpha2 = 255;
+    npc->hideAlpha = 255;
     npc->jumpScale = 1.0f;
     npc->moveSpeed = 4.0f;
     npc->scale.x = 1.0f;
@@ -964,12 +964,12 @@ void render_npcs(void) {
                 if (npc->flags & NPC_FLAG_HIDING) {
                     u8 r, g, b, a;
                     get_background_color_blend(&r, &g, &b, &a);
-                    npc->alpha2 = 255 - a;
+                    npc->hideAlpha = 255 - a;
                 } else {
-                    npc->alpha2 = 255;
+                    npc->hideAlpha = 255;
                 }
 
-                if (npc->alpha2 != 0) {
+                if (npc->hideAlpha != 0) {
                     queue_render_task(renderTaskPtr);
                 }
 
@@ -1323,7 +1323,7 @@ void npc_draw_palswap_mode_0(Npc* npc, s32 arg1, Matrix4f mtx) {
     }
 
     if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
-        s32 alpha = (npc->alpha * npc->alpha2 / 255);
+        s32 alpha = (npc->alpha * npc->hideAlpha / 255);
         u32 mask;
         if (alpha < 255) {
             mask = DRAW_SPRITE_OVERRIDE_ALPHA;
@@ -1419,7 +1419,7 @@ s32 npc_draw_palswap_mode_1(Npc* npc, s32 arg1, Matrix4f mtx) {
     }
 
     if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
-        s32 alpha = npc->alpha * npc->alpha2 / 255;
+        s32 alpha = npc->alpha * npc->hideAlpha / 255;
         u32 mask;
         if (alpha < 255) {
             mask = DRAW_SPRITE_OVERRIDE_ALPHA;
@@ -1557,7 +1557,7 @@ s32 npc_draw_palswap_mode_2(Npc* npc, s32 arg1, s32 arg2, Matrix4f mtx) {
         if (npc->palSwapState >= 0) {
             if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
                 u32 mask;
-                blendAlpha = npc->alpha * npc->alpha2 / 255;
+                blendAlpha = npc->alpha * npc->hideAlpha / 255;
                 if (blendAlpha < 255) {
                     mask = DRAW_SPRITE_OVERRIDE_ALPHA;
                 } else {
@@ -1701,7 +1701,7 @@ s32 npc_draw_palswap_mode_4(Npc* npc, s32 arg1, Matrix4f mtx) {
                 s32 temp;
                 u32 spriteInstanceMask;
 
-                blendAlpha = npc->alpha * npc->alpha2 / 255;
+                blendAlpha = npc->alpha * npc->hideAlpha / 255;
                 temp = blendAlpha < 255;
                 spriteInstanceMask = ((temp) << 31) | DRAW_SPRITE_OVERRIDE_PALETTES;
                 spr_draw_npc_sprite(npc->spriteInstanceID | spriteInstanceMask, arg1, blendAlpha, npc->localPalettes, mtx);

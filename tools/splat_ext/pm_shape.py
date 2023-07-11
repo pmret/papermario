@@ -1,6 +1,8 @@
 import struct
 from abc import ABC
 from collections import deque
+from io import TextIOWrapper
+from typing import List, Dict
 
 BASE_ADDR = 0x80210000
 
@@ -140,7 +142,7 @@ class VertexTableSegment(Segment):
 class StringListSegment(Segment):
     def __init__(self, addr: int, name: str):
         super().__init__(addr, name)
-        self.list: deque  # list of strings for STRING_LIST
+        self.list: deque
 
     def scan(self, shape):
         self.list = deque()
@@ -209,7 +211,7 @@ class NodeListSegment(Segment):
         super().__init__(addr, name)
         self.model_name = model_name
         self.count = num_children
-        self.children = []
+        self.children: List[NodeSegment] = []
 
     def scan(self, shape):
         pos = self.addr - BASE_ADDR
@@ -491,20 +493,20 @@ class DisplayListSegment(Segment):
 
 
 class ShapeFile:
-    def __init__(self, map_name: str, file_bytes: bytearray):
+    def __init__(self, map_name: str, file_bytes: bytes):
         self.map_name = map_name
         self.file_bytes = file_bytes
-        self.out_file = None
-        self.pending = []
-        self.visited = {}
-        self.model_name_map = {}
-        self.root_node = (None,)
-        self.vtx_table = (None,)
-        self.model_names = (None,)
-        self.collider_names = (None,)
-        self.zone_names = (None,)
+        self.out_file: TextIOWrapper
+        self.pending: List[Segment] = []
+        self.visited: Dict[int, Segment] = {}
+        self.model_name_map: Dict[int, str] = {}
+        self.root_node = None
+        self.vtx_table = None
+        self.model_names = None
+        self.collider_names = None
+        self.zone_names = None
 
-    def push(self, segment: Segment) -> Segment:
+    def push(self, segment: Segment):
         if segment.addr == 0:
             return None
 
@@ -621,10 +623,10 @@ shape_dir = "../../assets/us/mapfs/geom/"
 in_bin = shape_dir + map_name + "_shape.bin"
 out_txt = shape_dir + map_name + "_shape.c"
 
-with open(in_bin, "rb") as f:
-    file_bytes = f.read()
+with open(in_bin, "rb") as in_file:
+    file_bytes = in_file.read()
     shape = ShapeFile(map_name, file_bytes)
     shape.digest()
 
-    with open(out_txt, "w") as f:
-        shape.print_to_file(f)
+    with open(out_txt, "w") as out_file:
+        shape.print_to_file(out_file)
