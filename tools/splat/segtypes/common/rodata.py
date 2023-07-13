@@ -5,6 +5,8 @@ from util import log, options, symbols
 
 from segtypes.common.data import CommonSegData
 
+from disassembler_section import make_rodata_section
+
 
 class CommonSegRodata(CommonSegData):
     def get_linker_section(self) -> str:
@@ -53,8 +55,7 @@ class CommonSegRodata(CommonSegData):
                 f"Segment '{self.name}' (type '{self.type}') requires a vram address. Got '{self.vram_start}'"
             )
 
-        self.spim_section = spimdisasm.mips.sections.SectionRodata(
-            symbols.spim_context,
+        self.spim_section = make_rodata_section(
             self.rom_start,
             self.rom_end,
             self.vram_start,
@@ -64,21 +65,25 @@ class CommonSegRodata(CommonSegData):
             self.get_exclusive_ram_id(),
         )
 
+        assert self.spim_section is not None
+
         # Set rodata string encoding
         # First check the global configuration
         if options.opts.string_encoding is not None:
-            self.spim_section.stringEncoding = options.opts.string_encoding
+            self.spim_section.get_section().stringEncoding = (
+                options.opts.string_encoding
+            )
 
         # Then check the per-segment configuration in case we want to override the global one
         if self.str_encoding is not None:
-            self.spim_section.stringEncoding = self.str_encoding
+            self.spim_section.get_section().stringEncoding = self.str_encoding
 
         self.spim_section.analyze()
-        self.spim_section.setCommentOffset(self.rom_start)
+        self.spim_section.set_comment_offset(self.rom_start)
 
         possible_text_segments: Set[Segment] = set()
 
-        for symbol in self.spim_section.symbolList:
+        for symbol in self.spim_section.get_section().symbolList:
             generated_symbol = symbols.create_symbol_from_spim_symbol(
                 self.get_most_parent(), symbol.contextSym
             )

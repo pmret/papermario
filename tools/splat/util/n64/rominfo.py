@@ -106,7 +106,7 @@ class N64EntrypointInfo:
                 register_values[insn.rt.value] = insn.getProcessedImmediate() << 16
             elif insn.canBeLo():
                 if insn.isLikelyHandwritten():
-                    # Try to skip this instructions:
+                    # Try to skip these instructions:
                     # addi        $t0, $t0, 0x8
                     # addi        $t1, $t1, -0x8
                     pass

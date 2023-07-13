@@ -23,3 +23,4 @@ glabel func_800004A0
 /* 10E4 800004E4 03E00008 */  jr         $ra
 /* 10E8 800004E8 27BD0018 */   addiu     $sp, $sp, 0x18
 /* 10EC 800004EC 00000000 */  nop
+.size func_800004A0, . - func_800004A0

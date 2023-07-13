@@ -7,6 +7,8 @@ from util import options, symbols, log
 from segtypes.common.codesubsegment import CommonSegCodeSubsegment
 from segtypes.common.group import CommonSegGroup
 
+from disassembler_section import DisassemblerSection, make_data_section
+
 
 class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
     def out_path(self) -> Optional[Path]:
@@ -89,8 +91,7 @@ class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
                 f"Segment '{self.name}' (type '{self.type}') requires a vram address. Got '{self.vram_start}'"
             )
 
-        self.spim_section = spimdisasm.mips.sections.SectionData(
-            symbols.spim_context,
+        self.spim_section = make_data_section(
             self.rom_start,
             self.rom_end,
             self.vram_start,
@@ -100,12 +101,25 @@ class CommonSegData(CommonSegCodeSubsegment, CommonSegGroup):
             self.get_exclusive_ram_id(),
         )
 
+        assert self.spim_section is not None
+
+        # Set rodata string encoding
+        # First check the global configuration
+        if options.opts.data_string_encoding is not None:
+            self.spim_section.get_section().stringEncoding = (
+                options.opts.data_string_encoding
+            )
+
+        # Then check the per-segment configuration in case we want to override the global one
+        if self.str_encoding is not None:
+            self.spim_section.get_section().stringEncoding = self.str_encoding
+
         self.spim_section.analyze()
-        self.spim_section.setCommentOffset(self.rom_start)
+        self.spim_section.set_comment_offset(self.rom_start)
 
         rodata_encountered = False
 
-        for symbol in self.spim_section.symbolList:
+        for symbol in self.spim_section.get_section().symbolList:
             symbols.create_symbol_from_spim_symbol(
                 self.get_most_parent(), symbol.contextSym
             )
