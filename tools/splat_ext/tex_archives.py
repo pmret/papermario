@@ -1,12 +1,11 @@
 from dataclasses import dataclass
-import os
+from math import ceil
 import struct
 import json
 from pathlib import Path
 
 import png
 import n64img.image
-from util.color import unpack_color, pack_color
 from segtypes.n64.palette import iter_in_groups
 
 from sys import path
@@ -27,6 +26,21 @@ def decode_null_terminated_ascii(data):
 
 def parse_palette(data):
     palette = []
+
+    # RRRRRGGG GGBBBBBA
+    def unpack_color(data):
+        s = int.from_bytes(data[0:2], byteorder="big")
+
+        r = (s >> 11) & 0x1F
+        g = (s >> 6) & 0x1F
+        b = (s >> 1) & 0x1F
+        a = (s & 1) * 0xFF
+
+        r = ceil(0xFF * (r / 31))
+        g = ceil(0xFF * (g / 31))
+        b = ceil(0xFF * (b / 31))
+
+        return r, g, b, a
 
     for a, b in iter_in_groups(data, 2):
         palette.append(unpack_color([a, b]))
@@ -396,6 +410,14 @@ class TexImage:
         return fmt_str, hwrap, vwrap
 
     def get_img_file(self, fmt_str, img_file: str):
+        def pack_color(r, g, b, a):
+            r = r >> 3
+            g = g >> 3
+            b = b >> 3
+            a = a >> 7
+
+            return (r << 11) | (g << 6) | (b << 1) | a
+
         (out_img, out_w, out_h) = Converter(
             mode=fmt_str.lower(), infile=img_file, flip_y=True
         ).convert()

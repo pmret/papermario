@@ -1,9 +1,8 @@
+from math import ceil
 import os, sys
 from pathlib import Path
-from typing import List
 from segtypes.n64.segment import N64Segment
 from util.n64.Yay0decompress import Yay0Decompressor
-from util.color import unpack_color
 from segtypes.n64.palette import iter_in_groups
 from util import options
 import png  # type: ignore
@@ -29,6 +28,21 @@ def decode_null_terminated_ascii(data):
 
 def parse_palette(data):
     palette = []
+
+    # RRRRRGGG GGBBBBBA
+    def unpack_color(data):
+        s = int.from_bytes(data[0:2], byteorder="big")
+
+        r = (s >> 11) & 0x1F
+        g = (s >> 6) & 0x1F
+        b = (s >> 1) & 0x1F
+        a = (s & 1) * 0xFF
+
+        r = ceil(0xFF * (r / 31))
+        g = ceil(0xFF * (g / 31))
+        b = ceil(0xFF * (b / 31))
+
+        return r, g, b, a
 
     for a, b in iter_in_groups(data, 2):
         palette.append(unpack_color([a, b]))

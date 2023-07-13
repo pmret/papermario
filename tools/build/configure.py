@@ -15,7 +15,10 @@ VERSIONS = ["us", "jp", "ique", "pal"]
 DO_SHA1_CHECK = True
 
 # Paths:
-ROOT = Path(__file__).parent.parent.parent.relative_to(Path.cwd())
+ROOT = Path(__file__).parent.parent.parent
+if ROOT.is_absolute():
+    ROOT = ROOT.relative_to(Path.cwd())
+
 BUILD_TOOLS = Path("tools/build")
 YAY0_COMPRESS_TOOL = f"{BUILD_TOOLS}/yay0/Yay0compress"
 CRC_TOOL = f"{BUILD_TOOLS}/rom/n64crc"
