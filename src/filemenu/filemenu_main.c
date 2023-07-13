@@ -567,7 +567,7 @@ void filemenu_draw_contents_file_info(s32 fileIdx,
 #if VERSION_PAL
     xOffset = D_filemenu_802508D8[gCurrentLanguage];
 #else
-    xOffset = 0x22;
+    xOffset = 34;
 #endif
     filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_LEVEL), baseX + xOffset, baseY + 10, 255, 0xA, 1);
     temp_s3_2 = gSaveSlotMetadata[fileIdx].level;
@@ -625,12 +625,12 @@ void filemenu_draw_contents_file_title(
     filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_OK), baseX + FILE_X, baseY + 1, 255, 0, 1);
 
     if (!gSaveSlotHasData[fileIdx]) {
-        filemenu_draw_message(filemenu_get_menu_message(fileIdx + UNK3),
+        filemenu_draw_message(filemenu_get_menu_message(fileIdx + FILE_MESSAGE_BASE_UNK),
             baseX + D_filemenu_802508D0[gCurrentLanguage], baseY + 1, 255, 0, 1);
     } else {
         s32 tmp = D_filemenu_802508D0[gCurrentLanguage];
 
-        filemenu_draw_message(filemenu_get_menu_message(fileIdx + UNK3),
+        filemenu_draw_message(filemenu_get_menu_message(fileIdx + FILE_MESSAGE_BASE_UNK),
             baseX + tmp, baseY + 1, 255, 0, 1);
 
         tmp += D_filemenu_802508D4[gCurrentLanguage];

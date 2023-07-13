@@ -16,6 +16,9 @@ DO_SHA1_CHECK = True
 
 # Paths:
 ROOT = Path(__file__).parent.parent.parent
+if ROOT.is_absolute():
+    ROOT = ROOT.relative_to(Path.cwd())
+
 BUILD_TOOLS = Path("tools/build")
 YAY0_COMPRESS_TOOL = f"{BUILD_TOOLS}/yay0/Yay0compress"
 CRC_TOOL = f"{BUILD_TOOLS}/rom/n64crc"
@@ -241,7 +244,7 @@ def write_ninja_rules(
     ninja.rule(
         "tex",
         description="tex $out",
-        command=f"$python {BUILD_TOOLS}/mapfs/tex.py $out $tex_dir",
+        command=f"$python {BUILD_TOOLS}/mapfs/tex.py $out $tex_name $asset_stack",
     )
 
     ninja.rule(
@@ -408,6 +411,9 @@ class Configure:
 
     @lru_cache(maxsize=None)
     def resolve_asset_path(self, path: Path) -> Path:
+        # Remove nonsense
+        path = Path(os.path.normpath(path))
+
         parts = list(path.parts)
 
         if parts[0] != "assets":
@@ -493,7 +499,7 @@ class Configure:
                 ninja.build(
                     outputs=object_strs,  # $out
                     rule=task,
-                    inputs=self.resolve_src_paths(src_paths),  # $in
+                    inputs=inputs,  # $in
                     implicit=implicit,
                     order_only=order_only,
                     variables={"version": self.version, **variables},
@@ -743,6 +749,7 @@ class Configure:
                             "sprite_name": sprite_name,
                             "asset_stack": ",".join(self.asset_stack),
                         },
+                        asset_deps=[str(sprite_dir)],
                     )
                     build(yay0_path, [bin_path], "yay0")
 
@@ -801,9 +808,8 @@ class Configure:
                 )
                 build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
             elif seg.type == "pm_map_data":
-                bin_yay0s: List[
-                    Path
-                ] = []  # flat list of (uncompressed path, compressed? path) pairs
+                # flat list of (uncompressed path, compressed? path) pairs
+                bin_yay0s: List[Path] = []
                 src_dir = Path("assets/x") / seg.name
 
                 for path in entry.src_paths:
@@ -906,7 +912,11 @@ class Configure:
                             bin_path,
                             [tex_dir, path.parent / (name + ".json")],
                             "tex",
-                            variables={"tex_dir": str(tex_dir)},
+                            variables={
+                                "tex_name": name,
+                                "asset_stack": ",".join(self.asset_stack),
+                            },
+                            asset_deps=[f"mapfs/tex/{name}"],
                         )
                     elif name.endswith("_shape"):
                         map_name = "_".join(name.split("_")[:-1])
