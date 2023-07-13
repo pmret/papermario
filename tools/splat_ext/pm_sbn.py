@@ -29,7 +29,6 @@ def decode_null_terminated_ascii(data):
 
 def align(misaligned: int):
     return  (misaligned + 0xf) &(~0xf)
-    
 
 class SBN:
     files: List["SBNFile"]
@@ -53,8 +52,6 @@ class SBN:
         # Decode file entries
         entry_addr = header.tableOffset
         seen_entry_offsets = set()
-
-
         for i in range(header.numEntries):
             entry = SBNFileEntry(*struct.unpack_from(SBNFileEntry.fstring, data, entry_addr))
             entry_addr += SBNFileEntry.length
@@ -66,84 +63,73 @@ class SBN:
 
             # Decode file at entry
             sbn_file = SBNFile()
-            file_length = sbn_file.decode(data[entry.offset:], i)
+            sbn_file.decode(data[entry.offset:], i)
             sbn_file.fakesize = entry.size
             self.files.append(sbn_file)
 
         # Decode INIT
-        self.init.decode(data[header.INIToffset:], header.INIToffset)
-
-        for idx, file in enumerate(self.files):
-            if os.path.splitext(file.file_name())[1] != ".bgm":
-                continue
-
-            print(f"Potential human readable names for {file.file_name()}: ")
-            for sid, song in enumerate(self.init.song_entries):
-                if song.bgmFileIndex == idx:
-                    print(f" - {get_song_symbol_name(sid)}.bgm")
-
-
+        self.init.decode(data[header.INIToffset:])
 
         return len(data)
 
     def encode(self) -> bytes:
-        numBytes = 0
-        numBytes += 0x40 # header
+        num_bytes = 0
+        num_bytes += 0x40 # header
 
-        entriesOffset = numBytes
-        numBytes += 8 * len(self.files) # file entry table.
-        numBytes = align(numBytes)
+        entries_offset = num_bytes
+        num_bytes += 8 * len(self.files) # file entry table.
+        num_bytes = align(num_bytes)
         
-        unknownDataOffset = numBytes
-        numBytes += 0x20 # unknown data
+        unknown_data_offset = num_bytes
+        num_bytes += 0x20 # unknown data
 
-        filesOffset = numBytes
+        files_offset = num_bytes
         for file in self.files:
-            numBytes += file.size # file data itself
-            numBytes = align(numBytes)
+            num_bytes += file.size # file data itself
+            num_bytes = align(num_bytes)
         
-        initHeaderOffset = numBytes
-        numBytes += 0x20 # init table header
+        init_header_offset = num_bytes
+        num_bytes += 0x20 # init table header
         
-        bankEntryOffset = numBytes
-        numBytes +=  4 * len(self.init.bk_entries) # bank entries
-        numBytes += 4 # bank sentinel
-        bankEntryEnd = numBytes
-        numBytes = align(numBytes)
+        bank_entry_offset = num_bytes
+        num_bytes +=  4 * len(self.init.bk_entries) # bank entries
+        num_bytes += 4 # bank sentinel
+        bank_entry_end = num_bytes
+        num_bytes = align(num_bytes)
 
-        songEntryOffset = numBytes
-        numBytes += 8 * len(self.init.song_entries) # song entries
-        numBytes += 8 # song sentinel
-        songEntryEnd = numBytes
-        numBytes = align(numBytes)
+        song_entry_offset = num_bytes
+        num_bytes += 8 * len(self.init.song_entries) # song entries
+        num_bytes += 8 # song sentinel
+        song_entry_end = num_bytes
+        num_bytes = align(num_bytes)
 
-        mseqOffset = numBytes
-        numBytes += 2 * len(self.init.mseq_entries) # mseq entries
-        numBytes += 2 # mseq sentinel
-        mseqEnd = numBytes
+        mseq_offset = num_bytes
+        num_bytes += 2 * len(self.init.mseq_entries) # mseq entries
+        num_bytes += 2 # mseq sentinel
+        mseq_end = num_bytes
 
-        initFileEnd = numBytes
-        numBytes = align(numBytes)
+        init_file_end = num_bytes
+        num_bytes = align(num_bytes)
 
-        data = bytearray(numBytes)
+        data = bytearray(num_bytes)
 
         # header
 
         header = SBNHeader(
-            size = numBytes,
-            tableOffset = entriesOffset,
+            size = num_bytes,
+            tableOffset = entries_offset,
             numEntries = len(self.files),
-            INIToffset = initHeaderOffset,
+            INIToffset = init_header_offset,
         )
 
         struct.pack_into(SBNHeader.fstring, data, 0, *header)
 
         #unknown data
         for offset, byte in enumerate(self.unknown_data):
-            data[unknownDataOffset + offset] = byte 
+            data[unknown_data_offset + offset] = byte 
 
         # files
-        currFileOffset = filesOffset
+        current_file_offset = files_offset
         for index, file in enumerate(self.files):
 
 
@@ -159,55 +145,55 @@ class SBN:
             }.get(extension, 0)
             
             entry = SBNFileEntry(
-                offset = currFileOffset,
+                offset = current_file_offset,
                 fmt = format,
                 size = file.fakesize
             )
 
-            struct.pack_into(SBNFileEntry.fstring, data, entriesOffset + index * SBNFileEntry.length, *entry)
+            struct.pack_into(SBNFileEntry.fstring, data, entries_offset + index * SBNFileEntry.length, *entry)
 
             for offset,byte in enumerate(file.data):
-                data[currFileOffset + offset] = byte
+                data[current_file_offset + offset] = byte
 
-            currFileOffset += file.size
-            currFileOffset = align(currFileOffset)
+            current_file_offset += file.size
+            current_file_offset = align(current_file_offset)
 
 
         initHeader = INITHeader(
-            size = initFileEnd - initHeaderOffset,
+            size = init_file_end - init_header_offset,
 
-            tblOffset = songEntryOffset - initHeaderOffset,
-            tblSize = songEntryEnd - songEntryOffset,
+            tblOffset = song_entry_offset - init_header_offset,
+            tblSize = song_entry_end - song_entry_offset,
 
-            entriesOffset = bankEntryOffset - initHeaderOffset,
-            entriesSize = bankEntryEnd - bankEntryOffset,
+            entriesOffset = bank_entry_offset - init_header_offset,
+            entriesSize = bank_entry_end - bank_entry_offset,
 
-            shortsOffset = mseqOffset - initHeaderOffset,
-            shortsSize = mseqEnd - mseqOffset,
+            shortsOffset = mseq_offset - init_header_offset,
+            shortsSize = mseq_end - mseq_offset,
         )
 
-        struct.pack_into(INITHeader.fstring, data, initHeaderOffset, *initHeader)
+        struct.pack_into(INITHeader.fstring, data, init_header_offset, *initHeader)
 
-        currBankOffset = bankEntryOffset
+        current_bank_offset = bank_entry_offset
         for bank in self.init.bk_entries:
-            struct.pack_into(BufferEntry.fstring, data, currBankOffset, *bank)
-            currBankOffset += BufferEntry.length
+            struct.pack_into(BufferEntry.fstring, data, current_bank_offset, *bank)
+            current_bank_offset += BufferEntry.length
 
         sentinel = BufferEntry(0xffff, 0x00, 0x00)
-        struct.pack_into(BufferEntry.fstring, data, currBankOffset, *sentinel)
+        struct.pack_into(BufferEntry.fstring, data, current_bank_offset, *sentinel)
 
-        currSongOffset = songEntryOffset
+        current_song_offset = song_entry_offset
         for song in self.init.song_entries:
-            struct.pack_into(InitSongEntry.fstring, data, currSongOffset, *song)
-            currSongOffset += InitSongEntry.length
+            struct.pack_into(InitSongEntry.fstring, data, current_song_offset, *song)
+            current_song_offset += InitSongEntry.length
 
         sentinel = InitSongEntry(0xffff,0x00,0x00,0x00)
-        struct.pack_into(InitSongEntry.fstring, data, currSongOffset, *sentinel)
+        struct.pack_into(InitSongEntry.fstring, data, current_song_offset, *sentinel)
 
-        currMseqOffset = mseqOffset
+        current_mseq_offset = mseq_offset
         for mseq in self.init.mseq_entries:
-            struct.pack_into(">H", data, currMseqOffset, mseq)
-            currMseqOffset += 2
+            struct.pack_into(">H", data, current_mseq_offset, mseq)
+            current_mseq_offset += 2
         struct.pack_into(">H", data, currMseqOffset, 0xffff)
 
         return bytes(data)
@@ -394,7 +380,7 @@ class SBN:
                 id = len(self.init.bk_entries)
             assert type(id) == int
 
-            file = bank.get("file")    
+            file = bank.get("file")
             assert type(file) == str
             file_id = self.lookup_file_id(file)
 
@@ -495,6 +481,8 @@ class SBNFile:
     # since this field is unused (I think), it doesn't actually matter other than for reproducing the original cart
     # I couldn't figure out the pattern behind these fake sizes (if there even is one), so I'm just hardcoding them.
     fakesize: int
+    # The file ID of the SBN file - needed to guarantee unique filenames. the filename in the header can't be used because it's not unique
+    ident: int
     def decode(self, data: bytes, ident: int) -> int:
         self.signature, = struct.unpack(">4s", data[0x00:0x04])
         self.size, = struct.unpack(">i", data[0x04:0x08])
@@ -544,7 +532,7 @@ class INIT:
         self.mseq_entries = []
         self.bk_entries = []
 
-    def decode(self, data: bytes, offset: int) -> int:
+    def decode(self, data: bytes) -> int:
         # see au_load_INIT
 
         header = INITHeader(*struct.unpack_from(INITHeader.fstring, data))
@@ -581,7 +569,6 @@ class INIT:
 
         for i in range(entries_len):
             entry = BufferEntry(*struct.unpack_from(BufferEntry.fstring, data, entries_addr))
-            entries_addr_old = entries_addr
             entries_addr += BufferEntry.length
 
             self.bk_entries.append(entry)
