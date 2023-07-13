@@ -17,20 +17,20 @@
 
 #define BOBOMB_ANIMS \
 { \
-    .idle   = ANIM_Bobomb_Anim02, \
-    .walk   = ANIM_Bobomb_Anim04, \
-    .run    = ANIM_Bobomb_Anim06, \
-    .chase  = ANIM_Bobomb_Anim06, \
-    .anim_4 = ANIM_Bobomb_Anim02, \
-    .anim_5 = ANIM_Bobomb_Anim02, \
-    .death  = ANIM_Bobomb_Anim0E, \
-    .hit    = ANIM_Bobomb_Anim0E, \
-    .anim_8 = ANIM_Bobomb_Anim06, \
-    .anim_9 = ANIM_Bobomb_Anim06, \
-    .anim_A = ANIM_Bobomb_Anim06, \
-    .anim_B = ANIM_Bobomb_Anim06, \
-    .anim_C = ANIM_Bobomb_Anim06, \
-    .anim_D = ANIM_Bobomb_Anim06, \
-    .anim_E = ANIM_Bobomb_Anim06, \
-    .anim_F = ANIM_Bobomb_Anim06, \
+    .idle   = ANIM_Bobomb_Idle, \
+    .walk   = ANIM_Bobomb_Walk, \
+    .run    = ANIM_Bobomb_Run, \
+    .chase  = ANIM_Bobomb_Run, \
+    .anim_4 = ANIM_Bobomb_Idle, \
+    .anim_5 = ANIM_Bobomb_Idle, \
+    .death  = ANIM_Bobomb_Hurt, \
+    .hit    = ANIM_Bobomb_Hurt, \
+    .anim_8 = ANIM_Bobomb_Run, \
+    .anim_9 = ANIM_Bobomb_Run, \
+    .anim_A = ANIM_Bobomb_Run, \
+    .anim_B = ANIM_Bobomb_Run, \
+    .anim_C = ANIM_Bobomb_Run, \
+    .anim_D = ANIM_Bobomb_Run, \
+    .anim_E = ANIM_Bobomb_Run, \
+    .anim_F = ANIM_Bobomb_Run, \
 }

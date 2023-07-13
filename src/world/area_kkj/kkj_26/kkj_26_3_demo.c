@@ -1,7 +1,8 @@
 #include "kkj_26.h"
+#include "sprite/player.h"
 
 EvtScript N(EVS_ProvideDemoInputs) = {
-    EVT_CALL(EnableStatusMenu, FALSE)
+    EVT_CALL(EnableWorldStatusBar, FALSE)
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, 550, 30, -20)
     EVT_CALL(SetCamDistance, CAM_DEFAULT, EVT_FLOAT(200.0))
     EVT_CALL(SetCamPitch, CAM_DEFAULT, EVT_FLOAT(17.5), EVT_FLOAT(-10.0))
@@ -22,7 +23,7 @@ EvtScript N(EVS_ProvideDemoInputs) = {
         EVT_RETURN
     EVT_END_IF
     EVT_SET(GF_DemoSceneDone, TRUE)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("kkj_26"), kkj_26_ENTRY_2, TRANSITION_7)
+    EVT_CALL(GotoMapSpecial, EVT_PTR("kkj_26"), kkj_26_ENTRY_2, TRANSITION_SLOW_FADE_TO_WHITE)
     EVT_WAIT(110)
     EVT_RETURN
     EVT_END
@@ -41,7 +42,7 @@ EvtScript N(EVS_MonitorDemoState) = {
         EVT_RETURN
     EVT_END_IF
     EVT_SET(GF_DemoSceneDone, TRUE)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("kkj_26"), kkj_26_ENTRY_2, TRANSITION_7)
+    EVT_CALL(GotoMapSpecial, EVT_PTR("kkj_26"), kkj_26_ENTRY_2, TRANSITION_SLOW_FADE_TO_WHITE)
     EVT_WAIT(100)
     EVT_RETURN
     EVT_END

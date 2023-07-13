@@ -45,7 +45,7 @@ EffectInstance* energy_in_out_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 a
     bp.update = energy_in_out_update;
     bp.renderWorld = energy_in_out_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_ENERGY_IN_OUT;
 
     effect = shim_create_effect_instance(&bp);
@@ -173,8 +173,8 @@ void energy_in_out_update(EffectInstance* effect) {
     f32 angle;
     s32 i;
 
-    if (effect->flags & 0x10) {
-        effect->flags &= ~0x10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         part->unk_10 = 16;
     }
 

@@ -220,8 +220,8 @@
 #include "ui/battle/cmd/aim/target_1.png.inc.c"
 #include "ui/battle/cmd/aim/target_1.pal.inc.c"
 
-#include "ui/battle/unk_star.png.inc.c"
-#include "ui/battle/unk_star.pal.inc.c"
+#include "ui/battle/solid_star.png.inc.c"
+#include "ui/battle/solid_star.pal.inc.c"
 
 Gfx D_8028F860[] = {
     gsSPEndDisplayList(),

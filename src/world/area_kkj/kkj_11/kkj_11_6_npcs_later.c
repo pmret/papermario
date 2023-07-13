@@ -1,4 +1,5 @@
 #include "kkj_11.h"
+#include "sprite/player.h"
 
 #include "../common/Searchlights.inc.c"
 #include "world/common/todo/GetPeachDisguise.inc.c"
@@ -46,7 +47,7 @@ EvtScript N(EVS_CapturePeach) = {
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_WorldKoopatrol_Anim08, ANIM_WorldKoopatrol_Anim01, 0, MSG_Peach_0175)
     EVT_CALL(SetPlayerAnimation, ANIM_Peach2_ForwardSad)
     EVT_WAIT(20)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("kkj_14"), kkj_14_ENTRY_B, TRANSITION_13)
+    EVT_CALL(GotoMapSpecial, EVT_PTR("kkj_14"), kkj_14_ENTRY_B, TRANSITION_PEACH_CAPTURED)
     EVT_WAIT(100)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_CALL(SetTimeFreezeMode, TIME_FREEZE_NORMAL)

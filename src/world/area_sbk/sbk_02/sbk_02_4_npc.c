@@ -1,5 +1,6 @@
 #include "sbk_02.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/StarSpirit.inc.c"
 #include "world/common/npc/Toad_Stationary.inc.c"
@@ -31,7 +32,7 @@ API_CALLABLE(N(UpgradeStarPowerCh2)) {
     set_max_SP(2);
     gPlayerData.curHP = gPlayerData.curMaxHP;
     gPlayerData.curFP = gPlayerData.curMaxFP;
-    sync_status_menu();
+    sync_status_bar();
     return ApiStatus_DONE2;
 }
 

@@ -29,7 +29,7 @@ EffectInstance* breaking_junk_main(s32 arg0, f32 x, f32 y, f32 z, f32 scale, s32
     bp.init = breaking_junk_init;
     bp.update = breaking_junk_update;
     bp.renderWorld = breaking_junk_render;
-    bp.unk_14 = 0;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_BREAKING_JUNK;
 
     effect = shim_create_effect_instance(bpPtr);
@@ -87,8 +87,8 @@ void breaking_junk_update(EffectInstance* effect) {
     BreakingJunkFXData* data = effect->data.breakingJunk;
     s32 i;
 
-    if (effect->flags & 0x10) {
-        effect->flags &= ~0x10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         data->timeLeft = 16;
     }
     if (data->timeLeft < 1000) {

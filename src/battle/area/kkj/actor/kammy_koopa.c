@@ -1,13 +1,10 @@
-#include "common.h"
-#include "effects.h"
-#include "battle/battle.h"
-#include "script_api/battle.h"
+#include "../area.h"
+#include "entity.h"
 #include "sprite/npc/BattleKammy.h"
 #include "sprite/npc/Twink.h"
 #include "sprite/npc/BattleParakarry.h"
-#include "entity.h"
 
-#define NAMESPACE b_area_kkj_kammy_koopa
+#define NAMESPACE A(kammy_koopa)
 
 extern EvtScript N(init);
 extern EvtScript N(idle);
@@ -17,50 +14,55 @@ extern EvtScript N(handleEvent);
 extern EvtScript N(speakOnHit);
 extern EvtScript N(onDeath);
 
+enum N(ActorPartIDs) {
+    PRT_MAIN            = 1,
+    PRT_2               = 2,
+};
+
 s32 N(IdleAnimations)[] = {
-    STATUS_NORMAL, ANIM_BattleKammy_Anim05,
+    STATUS_KEY_NORMAL,    ANIM_BattleKammy_Anim05,
     STATUS_END,
 };
 
 s32 N(IdleAnimations_broomstick)[] = {
-    STATUS_NORMAL, ANIM_BattleKammy_Anim0C,
+    STATUS_KEY_NORMAL,    ANIM_BattleKammy_Anim0C,
     STATUS_END,
 };
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
 s32 N(StatusTable)[] = {
-    STATUS_NORMAL, 0,
-    STATUS_DEFAULT, 0,
-    STATUS_SLEEP, 0,
-    STATUS_POISON, 0,
-    STATUS_FROZEN, 0,
-    STATUS_DIZZY, 0,
-    STATUS_FEAR, 0,
-    STATUS_STATIC, 0,
-    STATUS_PARALYZE, 0,
-    STATUS_SHRINK, 0,
-    STATUS_STOP, 0,
-    STATUS_DEFAULT_TURN_MOD, 0,
-    STATUS_SLEEP_TURN_MOD, 0,
-    STATUS_POISON_TURN_MOD, 0,
-    STATUS_FROZEN_TURN_MOD, 0,
-    STATUS_DIZZY_TURN_MOD, 0,
-    STATUS_FEAR_TURN_MOD, 0,
-    STATUS_STATIC_TURN_MOD, 0,
-    STATUS_PARALYZE_TURN_MOD, 0,
-    STATUS_SHRINK_TURN_MOD, 0,
-    STATUS_STOP_TURN_MOD, 0,
+    STATUS_KEY_NORMAL,              0,
+    STATUS_KEY_DEFAULT,             0,
+    STATUS_KEY_SLEEP,               0,
+    STATUS_KEY_POISON,              0,
+    STATUS_KEY_FROZEN,              0,
+    STATUS_KEY_DIZZY,               0,
+    STATUS_KEY_FEAR,                0,
+    STATUS_KEY_STATIC,              0,
+    STATUS_KEY_PARALYZE,            0,
+    STATUS_KEY_SHRINK,              0,
+    STATUS_KEY_STOP,                0,
+    STATUS_TURN_MOD_DEFAULT,        0,
+    STATUS_TURN_MOD_SLEEP,          0,
+    STATUS_TURN_MOD_POISON,         0,
+    STATUS_TURN_MOD_FROZEN,         0,
+    STATUS_TURN_MOD_DIZZY,          0,
+    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_STATIC,         0,
+    STATUS_TURN_MOD_PARALYZE,       0,
+    STATUS_TURN_MOD_SHRINK,         0,
+    STATUS_TURN_MOD_STOP,           0,
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = ACTOR_PART_FLAG_MULTI_TARGET,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { -10, 35 },
         .opacity = 255,
@@ -72,7 +74,7 @@ ActorPartBlueprint N(parts)[] = {
     },
     {
         .flags = ACTOR_PART_FLAG_INVISIBLE | ACTOR_PART_FLAG_NO_TARGET | ACTOR_PART_FLAG_USE_ABSOLUTE_POSITION,
-        .index = 2,
+        .index = PRT_2,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 0, 0 },
         .opacity = 255,
@@ -89,8 +91,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_KAMMY_KOOPA,
     .level = 99,
     .maxHP = 10,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
@@ -102,9 +104,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 80,
     .coinReward = 0,
     .size = { 24, 32 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 EvtScript N(init) = {
@@ -147,22 +149,22 @@ EvtScript N(handleEvent) = {
         EVT_CASE_EQ(EVENT_BEGIN_FIRST_STRIKE)
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
         EVT_CASE_OR_EQ(EVENT_HIT)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleKammy_Anim0D)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_EXEC_WAIT(N(speakOnHit))
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleKammy_Anim05)
-            EVT_EXEC_WAIT(DoImmune)
+            EVT_EXEC_WAIT(EVS_Enemy_NoDamageHit)
             EVT_EXEC_WAIT(N(speakOnHit))
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_DEATH)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleKammy_Anim0D)
-            EVT_EXEC_WAIT(DoNormalHit)
+            EVT_EXEC_WAIT(EVS_Enemy_Hit)
             EVT_WAIT(10)
             EVT_EXEC_WAIT(N(onDeath))
             EVT_RETURN
@@ -200,36 +202,36 @@ API_CALLABLE(N(BlockAppear)) {
 API_CALLABLE(func_8021833C_6DC0DC) {
     if (isInitialCall) {
         script->functionTemp[0] = 20;
-        set_screen_overlay_center(1, 0, 0, 0);
-        set_screen_overlay_center(1, 1, 320, 240);
-        set_screen_overlay_params_back(12, 150);
+        set_screen_overlay_center(SCREEN_LAYER_BACK, 0, 0, 0);
+        set_screen_overlay_center(SCREEN_LAYER_BACK, 1, 320, 240);
+        set_screen_overlay_params_back(OVERLAY_BLUR, 150);
     }
     if (script->functionTemp[0] != 0) {
         script->functionTemp[0]--;
         return ApiStatus_BLOCK;
     }
 
-    set_screen_overlay_center(1, 0, 0, 0);
-    set_screen_overlay_center(1, 1, 320, 240);
-    set_screen_overlay_params_back(0xFF, -1);
+    set_screen_overlay_center(SCREEN_LAYER_BACK, 0, 0, 0);
+    set_screen_overlay_center(SCREEN_LAYER_BACK, 1, 320, 240);
+    set_screen_overlay_params_back(OVERLAY_NONE, -1);
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(func_802183EC_6DC18C) {
     if (isInitialCall) {
         script->functionTemp[0] = 30;
-        set_screen_overlay_center(1, 0, 0, 0);
-        set_screen_overlay_center(1, 1, 320, 240);
-        set_screen_overlay_params_back(12, 150);
+        set_screen_overlay_center(SCREEN_LAYER_BACK, 0, 0, 0);
+        set_screen_overlay_center(SCREEN_LAYER_BACK, 1, 320, 240);
+        set_screen_overlay_params_back(OVERLAY_BLUR, 150);
     }
     if (script->functionTemp[0] != 0) {
         script->functionTemp[0]--;
         return ApiStatus_BLOCK;
     }
 
-    set_screen_overlay_center(1, 0, 0, 0);
-    set_screen_overlay_center(1, 1, 320, 240);
-    set_screen_overlay_params_back(0xFF, -1);
+    set_screen_overlay_center(SCREEN_LAYER_BACK, 0, 0, 0);
+    set_screen_overlay_center(SCREEN_LAYER_BACK, 1, 320, 240);
+    set_screen_overlay_params_back(OVERLAY_NONE, -1);
     return ApiStatus_DONE2;
 }
 
@@ -258,7 +260,7 @@ EvtScript N(takeTurn) = {
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_WAIT(30)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleKammy_Anim07)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleKammy_Anim07)
     EVT_WAIT(5)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_207A)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -302,7 +304,7 @@ EvtScript N(takeTurn) = {
         EVT_END_IF
     EVT_END_LOOP
     EVT_WAIT(20)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleKammy_Anim08)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleKammy_Anim08)
     EVT_WAIT(10)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
     EVT_CALL(SetBattleCamTarget, -80, 37, 5)
@@ -345,7 +347,7 @@ EvtScript N(takeTurn) = {
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(0.5))
         EVT_CALL(ShakeCam, CAM_BATTLE, 0, 2, EVT_FLOAT(0.2))
     EVT_END_CHILD_THREAD
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleKammy_Anim05)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleKammy_Anim05)
     EVT_WAIT(2)
     EVT_CALL(EnemyDamageTarget, ACTOR_SELF, LVar0, DAMAGE_TYPE_MAGIC | DAMAGE_TYPE_NO_CONTACT, 0, 0, 4, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_SET(LVarF, LVar0)
@@ -353,7 +355,7 @@ EvtScript N(takeTurn) = {
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
         EVT_CASE_OR_EQ(HIT_RESULT_NO_DAMAGE)
             EVT_WAIT(19)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(GetLastDamage, ACTOR_PARTNER, LVar0)
@@ -370,10 +372,10 @@ EvtScript N(takeTurn) = {
             EVT_CALL(AddGoalPos, ACTOR_SELF, 10, 5, 0)
             EVT_CALL(FlyToGoal, ACTOR_SELF, 6, 0, EASING_LINEAR)
         EVT_END_THREAD
-        EVT_CALL(ActorSpeak, MSG_CH8_009A, ACTOR_SELF, 1, ANIM_BattleKammy_Anim06, ANIM_BattleKammy_Anim05)
+        EVT_CALL(ActorSpeak, MSG_CH8_009A, ACTOR_SELF, PRT_MAIN, ANIM_BattleKammy_Anim06, ANIM_BattleKammy_Anim05)
         EVT_WAIT(10)
         EVT_CALL(FreezeBattleCam, FALSE)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_END_IF
     EVT_WAIT(10)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
@@ -395,7 +397,7 @@ EvtScript N(nextTurn) = {
                     EVT_CALL(SetBattleCamOffsetZ, 62)
                     EVT_CALL(MoveBattleCamOver, 20)
                     EVT_WAIT(20)
-                    EVT_CALL(ActorSpeak, MSG_CH8_0093, ACTOR_SELF, 1, ANIM_BattleKammy_Anim06, ANIM_BattleKammy_Anim05)
+                    EVT_CALL(ActorSpeak, MSG_CH8_0093, ACTOR_SELF, PRT_MAIN, ANIM_BattleKammy_Anim06, ANIM_BattleKammy_Anim05)
                     EVT_WAIT(10)
                     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
                     EVT_CALL(SetBattleCamTarget, -56, -9, -18)
@@ -413,7 +415,7 @@ EvtScript N(nextTurn) = {
                     EVT_WAIT(10)
                     EVT_CALL(ActorSpeak, MSG_CH8_0095, ACTOR_PLAYER, 1, ANIM_BattleParakarry_EnterShell, ANIM_BattleParakarry_ShellFly)
                     EVT_WAIT(10)
-                    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+                    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
                     EVT_CALL(AddActorVar, ACTOR_SELF, 0, 1)
             EVT_END_SWITCH
         EVT_CASE_EQ(12)
@@ -424,7 +426,7 @@ EvtScript N(nextTurn) = {
 };
 
 EvtScript N(speakOnHit) = {
-    EVT_CALL(func_8026BF48, 1)
+    EVT_CALL(FreezeBattleState, TRUE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 1)
     EVT_CALL(GetActorHP, ACTOR_SELF, LVar0)
@@ -437,10 +439,10 @@ EvtScript N(speakOnHit) = {
             EVT_CALL(MoveBattleCamOver, 20)
             EVT_CALL(FreezeBattleCam, TRUE)
             EVT_WAIT(20)
-            EVT_CALL(ActorSpeak, MSG_CH8_0097, ACTOR_SELF, 1, ANIM_BattleKammy_Anim09, ANIM_BattleKammy_Anim05)
+            EVT_CALL(ActorSpeak, MSG_CH8_0097, ACTOR_SELF, PRT_MAIN, ANIM_BattleKammy_Anim09, ANIM_BattleKammy_Anim05)
             EVT_WAIT(10)
             EVT_CALL(FreezeBattleCam, FALSE)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CASE_OR_EQ(9)
         EVT_CASE_OR_EQ(8)
             EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_19)
@@ -450,10 +452,10 @@ EvtScript N(speakOnHit) = {
             EVT_CALL(MoveBattleCamOver, 20)
             EVT_CALL(FreezeBattleCam, TRUE)
             EVT_WAIT(20)
-            EVT_CALL(ActorSpeak, MSG_CH8_0098, ACTOR_SELF, 1, ANIM_BattleKammy_Anim0A, ANIM_BattleKammy_Anim05)
+            EVT_CALL(ActorSpeak, MSG_CH8_0098, ACTOR_SELF, PRT_MAIN, ANIM_BattleKammy_Anim0A, ANIM_BattleKammy_Anim05)
             EVT_WAIT(10)
             EVT_CALL(FreezeBattleCam, FALSE)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(7)
         EVT_CASE_OR_EQ(6)
@@ -473,32 +475,32 @@ EvtScript N(speakOnHit) = {
             EVT_CALL(MoveBattleCamOver, 20)
             EVT_CALL(FreezeBattleCam, TRUE)
             EVT_WAIT(20)
-            EVT_CALL(ActorSpeak, MSG_CH8_0099, ACTOR_SELF, 1, ANIM_BattleKammy_Anim06, ANIM_BattleKammy_Anim05)
+            EVT_CALL(ActorSpeak, MSG_CH8_0099, ACTOR_SELF, PRT_MAIN, ANIM_BattleKammy_Anim06, ANIM_BattleKammy_Anim05)
             EVT_WAIT(10)
             EVT_CALL(FreezeBattleCam, FALSE)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
             EVT_CALL(AddActorVar, ACTOR_SELF, 0, 1)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
     EVT_CALL(SetActorVar, ACTOR_SELF, 1, 0)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
-    EVT_CALL(func_8026BF48, 0)
+    EVT_CALL(FreezeBattleState, FALSE)
     EVT_RETURN
     EVT_END
 };
 
 EvtScript N(onDeath) = {
     EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
-    EVT_CALL(func_8027D32C, ACTOR_SELF)
+    EVT_CALL(HideHealthBar, ACTOR_SELF)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_14)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
     EVT_CALL(MoveBattleCamOver, 60)
     EVT_WAIT(10)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleKammy_Anim02)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleKammy_Anim02)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SUB(LVar2, 1)
-    EVT_CALL(SetPartPos, ACTOR_SELF, 2, LVar0, LVar1, LVar2)
-    EVT_CALL(SetPartFlagBits, ACTOR_SELF, 2, ACTOR_PART_FLAG_INVISIBLE, FALSE)
+    EVT_CALL(SetPartPos, ACTOR_SELF, PRT_2, LVar0, LVar1, LVar2)
+    EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_2, ACTOR_PART_FLAG_INVISIBLE, FALSE)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_301)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_SET(LVar1, 0)
@@ -506,7 +508,7 @@ EvtScript N(onDeath) = {
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 15, FALSE, TRUE, FALSE)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20E4)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_B)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_01)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(JumpToGoal, ACTOR_SELF, 10, FALSE, TRUE, FALSE)
     EVT_CALL(SetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
@@ -514,14 +516,14 @@ EvtScript N(onDeath) = {
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_20E5)
     EVT_CALL(GetActorPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(ForceHomePos, ACTOR_SELF, LVar0, LVar1, LVar2)
-    EVT_CALL(AddActorDecoration, ACTOR_SELF, 1, 0, ACTOR_DECORATION_SEEING_STARS)
-    EVT_CALL(SetAnimation, ACTOR_SELF, 1, ANIM_BattleKammy_Anim03)
+    EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_MAIN, 0, ACTOR_DECORATION_SEEING_STARS)
+    EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleKammy_Anim03)
     EVT_WAIT(50)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_DISABLE_CELEBRATION | BS_FLAGS1_BATTLE_FLED, TRUE)
     EVT_CALL(SetActorFlagBits, ACTOR_SELF, ACTOR_FLAG_NO_DMG_APPLY, TRUE)
-    EVT_CALL(ActorSpeak, MSG_CH8_009B, ACTOR_SELF, 1, ANIM_BattleKammy_Anim03, ANIM_BattleKammy_Anim03)
+    EVT_CALL(ActorSpeak, MSG_CH8_009B, ACTOR_SELF, PRT_MAIN, ANIM_BattleKammy_Anim03, ANIM_BattleKammy_Anim03)
     EVT_WAIT(10)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 60)
     EVT_WAIT(40)
     EVT_CALL(SetBattleFlagBits, BS_FLAGS1_PLAYER_IN_BACK, FALSE)

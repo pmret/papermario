@@ -1,6 +1,7 @@
 #include "common.h"
 #include "script_api/battle.h"
 #include "sprite/npc/BattleKlevar.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_move_time_out
 
@@ -153,7 +154,7 @@ EvtScript N(802A1C50) = {
 EvtScript N(802A1E5C) = {
     EVT_CALL(GetOwnerID, LVarA)
     EVT_IF_EQ(LVarA, 0)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(PlaySound, SOUND_2047)
         EVT_THREAD
             EVT_LOOP(5)
@@ -185,7 +186,7 @@ EvtScript N(802A1E5C) = {
         EVT_CALL(EnableNpcBlur, NPC_BTL_SPIRIT, FALSE)
         EVT_CALL(DeleteNpc, NPC_BTL_SPIRIT)
     EVT_ELSE
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(PlaySound, SOUND_2045)
         EVT_THREAD
             EVT_LOOP(5)
@@ -250,7 +251,7 @@ EvtScript N(EVS_UsePower) = {
     EVT_EXEC_WAIT(N(802A1C50))
     EVT_CALL(SetNpcAnimation, NPC_BTL_SPIRIT, ANIM_BattleKlevar_Shout)
     EVT_WAIT(16)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(PlaySound, SOUND_246)
     EVT_PLAY_EFFECT(EFFECT_STOP_WATCH, 0, 0, 0, 0, EVT_FLOAT(1.0), 200, 0)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_246)
@@ -262,7 +263,7 @@ EvtScript N(EVS_UsePower) = {
     EVT_IF_EQ(LVar0, 6)
         EVT_GOTO(1)
     EVT_END_IF
-    EVT_CALL(ItemDamageEnemy, LVar0, DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS | DAMAGE_TYPE_STATUS_ALWAYS_HITS, DMG_STATUS_CHANCE(STATUS_FLAG_STOP, 5, 100), 0, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(ItemDamageEnemy, LVar0, DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS | DAMAGE_TYPE_STATUS_ALWAYS_HITS, DMG_STATUS_KEY(STATUS_FLAG_STOP, 5, 100), 0, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_WAIT(5)
     EVT_LABEL(1)
     EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
@@ -270,7 +271,7 @@ EvtScript N(EVS_UsePower) = {
         EVT_GOTO(0)
     EVT_END_IF
     EVT_WAIT(5)
-    EVT_CALL(func_80276EFC)
+    EVT_CALL(PlayerYieldTurn)
     EVT_EXEC_WAIT(N(802A1E5C))
     EVT_EXEC_WAIT(N(802A22AC))
     EVT_RETURN

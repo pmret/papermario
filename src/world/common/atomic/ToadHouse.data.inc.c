@@ -72,7 +72,7 @@ EvtScript N(EVS_NpcInteract_ToadHouseKeeper) = {
     EVT_CALL(SetPlayerJumpscale, 1)
     EVT_CALL(DisablePlayerPhysics, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, TRUE)
-    EVT_CALL(N(ToadHouse_DisableStatusMenu))
+    EVT_CALL(N(ToadHouse_DisableStatusBar))
     EVT_IF_NE(LVar4, 0)
         EVT_EXEC(N(EVS_ToadHouse_Unk2))
     EVT_END_IF
@@ -109,7 +109,7 @@ EvtScript N(EVS_NpcInteract_ToadHouseKeeper) = {
     EVT_CALL(DisablePlayerPhysics, FALSE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_PLAYER_COLLISION, FALSE)
     EVT_CALL(SpeakToPlayer, NPC_SELF, TOADHOUSE_ANIM_TALK, TOADHOUSE_ANIM_IDLE, 0, LVarB)
-    EVT_CALL(N(ToadHouse_ShowStatusMenu))
+    EVT_CALL(N(ToadHouse_ShowWorldStatusBar))
     EVT_RETURN
     EVT_END
 };

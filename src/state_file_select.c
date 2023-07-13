@@ -46,7 +46,7 @@ void state_init_language_select(void) {
     D_800A0932[0] = 0;
     disable_player_input();
     set_time_freeze_mode(TIME_FREEZE_FULL);
-    set_screen_overlay_params_front(0, D_800A0932[0]);
+    set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, D_800A0932[0]);
 }
 
 void state_init_file_select(void) {
@@ -57,7 +57,7 @@ void state_init_file_select(void) {
     general_heap_create();
     hud_element_set_aux_cache(0, 0);
     hud_element_clear_cache();
-    load_model_textures(0, 0, 0);
+    mdl_load_all_textures(NULL, 0, 0);
     gCameras[CAM_DEFAULT].updateMode = CAM_UPDATE_MODE_6;
     gCameras[CAM_DEFAULT].needsInit = TRUE;
     gCameras[CAM_DEFAULT].nearClip = 16;
@@ -99,7 +99,7 @@ void state_step_language_select(void) {
                 if (D_800A0932[0] > 255) {
                     D_800A0932[0] = 255;
                 }
-                set_screen_overlay_params_front(0, D_800A0932[0]);
+                set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, D_800A0932[0]);
                 if (D_800A0932[0] == 255) {
 
                     D_800A0931 = 1;
@@ -147,16 +147,16 @@ void state_step_language_select(void) {
                     clear_worker_list();
                     hud_element_set_aux_cache(&D_80200000, 0x20000);
                     hud_element_clear_cache();
-                    reset_status_menu();
+                    reset_status_bar();
                     clear_item_entity_data();
                     clear_script_list();
                     clear_npcs();
                     clear_entity_data(0);
                     clear_trigger_data();
                     nuPiReadRomOverlay(&D_8007798C);
-                    filemenu_init(TRUE);
+                    filemenu_init(1);
                     gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
-                    set_screen_overlay_params_front(255, 255.0f);
+                    set_screen_overlay_params_front(OVERLAY_NONE, 255.0f);
                 }
                 if (D_800A0930 >= 0) {
                     break;
@@ -168,7 +168,7 @@ void state_step_language_select(void) {
             if (D_800A0932[0] < 0) {
                 D_800A0932[0] = 0;
             }
-            set_screen_overlay_params_front(0, D_800A0932[0]);
+            set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, D_800A0932[0]);
             break;
     }
 }
@@ -193,7 +193,7 @@ void state_step_file_select(void) {
                     D_800A0930 = -1;
                     battle_heap_create();
                     nuPiReadRomOverlay(&D_8007798C);
-                    filemenu_init(FALSE);
+                    filemenu_init(0);
                 }
             }
 
@@ -213,10 +213,10 @@ void state_drawUI_file_select(void) {
 void state_init_exit_language_select(void) {
     if (D_800A0932[0] > 0) {
         D_800A0931 = 0;
-        set_screen_overlay_params_front(0, D_800A0932[0]);
+        set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, D_800A0932[0]);
     } else {
         D_800A0931 = 1;
-        set_screen_overlay_params_front(0, D_800A0932[0]);
+        set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, D_800A0932[0]);
     }
     D_800A0930 = 1;
     gOverrideFlags &= ~GLOBAL_OVERRIDES_40;
@@ -228,9 +228,9 @@ void state_init_exit_file_select(void) {
     D_800A0930 = 0;
 
     if (func_80244BC4() == 0) {
-        set_map_transition_effect(7);
+        set_map_transition_effect(TRANSITION_SLOW_FADE_TO_WHITE);
     } else {
-        set_map_transition_effect(8);
+        set_map_transition_effect(TRANSITION_ENTER_WORLD);
         gOverrideFlags &= ~GLOBAL_OVERRIDES_WINDOWS_IN_FRONT_OF_CURTAINS;
         bgm_set_song(0, -1, 0, 1000, 8);
     }
@@ -245,7 +245,7 @@ void state_step_exit_language_select(void) {
                 if (D_800A0932[0] < 0) {
                     D_800A0932[0] = 0;
                 }
-                set_screen_overlay_params_front(0, D_800A0932[0]);
+                set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, D_800A0932[0]);
                 if (D_800A0932[0] == 0) {
                     D_800A0931 = 1;
                 }
@@ -259,7 +259,7 @@ void state_step_exit_language_select(void) {
                 if (D_800A0932[0] > 255) {
                     D_800A0932[0] = 255;
                 }
-                set_screen_overlay_params_front(0U, D_800A0932[0]);
+                set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, D_800A0932[0]);
                 if (D_800A0932[0] == 255) {
                     D_800A0931 = 2;
                 }
@@ -325,7 +325,7 @@ void state_step_exit_language_select(void) {
 
                     calculate_model_sizes();
                     npc_reload_all();
-                    status_menu_respond_to_changes();
+                    status_bar_respond_to_changes();
                     set_time_freeze_mode(TIME_FREEZE_PARTIAL);
                 }
                 set_windows_visible(WINDOW_GROUP_ALL);
@@ -339,7 +339,7 @@ void state_step_exit_language_select(void) {
                 if (D_800A0932[0] < 0) {
                     D_800A0932[0] = 0;
                 }
-                set_screen_overlay_params_front(0, D_800A0932[0]);
+                set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, D_800A0932[0]);
             }
             break;
         case 3:
@@ -355,7 +355,7 @@ void state_step_exit_language_select(void) {
                 if (D_800A0932[0] < 0) {
                     D_800A0932[0] = 0;
                 }
-                set_screen_overlay_params_front(0, D_800A0932[0]);
+                set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, D_800A0932[0]);
             }
             break;
         case 4:
@@ -366,7 +366,7 @@ void state_step_exit_language_select(void) {
             update_effects();
             enable_player_input();
             set_game_mode(GAME_MODE_CHANGE_MAP);
-            set_screen_overlay_params_front(255, -1.0f);
+            set_screen_overlay_params_front(OVERLAY_NONE, -1.0f);
             break;
         }
 }

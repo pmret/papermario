@@ -29,14 +29,14 @@ void gather_energy_pink_main(s32 type, f32 posX, f32 posY, f32 posZ, f32 scale, 
     bp.init = gather_energy_pink_init;
     bp.update = gather_energy_pink_update;
     bp.renderWorld = gather_energy_pink_render;
-    bp.unk_14 = 0;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_GATHER_ENERGY_PINK;
 
     effect = shim_create_effect_instance(&bp);
     effect->numParts = numParts;
     data = effect->data.gatherEnergyPink = shim_general_heap_malloc(sizeof(*data));
     ASSERT (data != NULL);
-    
+
     data->unk_00 = type;
     data->unk_28 = duration;
     data->unk_2C = 0;
@@ -58,12 +58,12 @@ void gather_energy_pink_main(s32 type, f32 posX, f32 posY, f32 posZ, f32 scale, 
 
     data->unk_1C = 10.0f;
 
-    data->unk_58 = func_E0200000(360);
+    data->unk_58 = effect_rand_int(360);
     data->unk_5C = 4.0f;
 
     data->unk_50 = 0;
     data->unk_54 = 0;
-    
+
     if (type == 1) {
         data->unk_3C = 96;
         data->unk_20 = scale;

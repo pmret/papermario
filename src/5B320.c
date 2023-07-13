@@ -432,18 +432,18 @@ extern HudScript HES_PartnerADisabled;
 extern HudScript HES_PartnerBDisabled;
 
 IconHudScriptPair gPartnerIconHudScripts[] = {
-    { .enabled = &HES_Partner0, .disabled = &HES_Partner0Disabled, },
-    { .enabled = &HES_Goombario, .disabled = &HES_GoombarioDisabled, },
-    { .enabled = &HES_Kooper, .disabled = &HES_KooperDisabled, },
-    { .enabled = &HES_Bombette, .disabled = &HES_BombetteDisabled, },
-    { .enabled = &HES_Parakarry, .disabled = &HES_ParakarryDisabled, },
-    { .enabled = &HES_Bow, .disabled = &HES_BowDisabled, },
-    { .enabled = &HES_Watt, .disabled = &HES_WattDisabled, },
-    { .enabled = &HES_Sushie, .disabled = &HES_SushieDisabled, },
-    { .enabled = &HES_Lakilester, .disabled = &HES_LakilesterDisabled, },
-    { .enabled = &HES_Partner9, .disabled = &HES_Partner9Disabled, },
-    { .enabled = &HES_PartnerA, .disabled = &HES_PartnerADisabled, },
-    { .enabled = &HES_PartnerB, .disabled = &HES_PartnerBDisabled, },
+    { .enabled = &HES_Partner0, .disabled = &HES_Partner0Disabled },
+    { .enabled = &HES_Goombario, .disabled = &HES_GoombarioDisabled },
+    { .enabled = &HES_Kooper, .disabled = &HES_KooperDisabled },
+    { .enabled = &HES_Bombette, .disabled = &HES_BombetteDisabled },
+    { .enabled = &HES_Parakarry, .disabled = &HES_ParakarryDisabled },
+    { .enabled = &HES_Bow, .disabled = &HES_BowDisabled },
+    { .enabled = &HES_Watt, .disabled = &HES_WattDisabled },
+    { .enabled = &HES_Sushie, .disabled = &HES_SushieDisabled },
+    { .enabled = &HES_Lakilester, .disabled = &HES_LakilesterDisabled },
+    { .enabled = &HES_Partner9, .disabled = &HES_Partner9Disabled },
+    { .enabled = &HES_PartnerA, .disabled = &HES_PartnerADisabled },
+    { .enabled = &HES_PartnerB, .disabled = &HES_PartnerBDisabled },
     { .enabled = &HES_PartnerB, .disabled = &HES_PartnerBDisabled },
 };
 
@@ -454,50 +454,50 @@ s32 pad_after_move_table[] = {
     0x00000000, 0x00000000, 0x00000000
 };
 
-extern IMG_BIN ui_msg_frame_part_0_png[];
-extern IMG_BIN ui_msg_frame_part_1_png[];
-extern IMG_BIN ui_msg_frame_part_2_png[];
-extern IMG_BIN ui_msg_frame_part_3_png[];
-extern IMG_BIN ui_msg_frame_part_4_png[];
-extern IMG_BIN ui_msg_frame_part_5_png[];
-extern IMG_BIN ui_msg_frame_part_6_png[];
-extern IMG_BIN ui_msg_frame_part_7_png[];
-extern IMG_BIN ui_msg_frame_part_8_png[];
-extern IMG_BIN ui_msg_frame_part_9_png[];
-extern IMG_BIN ui_msg_frame_part_A_png[];
-extern IMG_BIN ui_msg_frame_part_B_png[];
-extern IMG_BIN ui_msg_frame_part_C_png[];
-extern IMG_BIN ui_msg_frame_part_D_png[];
-extern IMG_BIN ui_msg_frame_part_E_png[];
-extern IMG_BIN ui_msg_frame_part_F_png[];
-extern IMG_BIN ui_msg_frame_part_10_png[];
-extern IMG_BIN ui_msg_frame_part_11_png[];
-extern IMG_BIN ui_msg_frame_part_12_png[];
-extern IMG_BIN ui_msg_frame_part_13_png[];
-extern IMG_BIN ui_msg_frame_part_14_png[];
-extern IMG_BIN ui_msg_frame_part_15_png[];
-extern IMG_BIN ui_msg_frame_part_16_png[];
-extern IMG_BIN ui_msg_frame_part_17_png[];
-extern IMG_BIN ui_msg_frame_part_18_png[];
-extern IMG_BIN ui_msg_frame_part_19_png[];
-extern IMG_BIN ui_msg_frame_part_1A_png[];
-extern IMG_BIN ui_msg_frame_part_1B_png[];
-extern IMG_BIN ui_msg_frame_part_1C_png[];
-extern IMG_BIN ui_msg_frame_part_1D_png[];
-extern IMG_BIN ui_msg_frame_part_1E_png[];
-extern IMG_BIN ui_msg_frame_part_1F_png[];
+extern IMG_BIN ui_msg_frame_a_1_1_png[];
+extern IMG_BIN ui_msg_frame_a_1_2_png[];
+extern IMG_BIN ui_msg_frame_a_1_3_png[];
+extern IMG_BIN ui_msg_frame_a_1_4_png[];
+extern IMG_BIN ui_msg_frame_a_1_5_png[];
+extern IMG_BIN ui_msg_frame_a_2_1_png[];
+extern IMG_BIN ui_msg_frame_a_2_5_png[];
+extern IMG_BIN ui_msg_frame_a_3_1_png[];
+extern IMG_BIN ui_msg_frame_a_3_5_png[];
+extern IMG_BIN ui_msg_frame_a_4_1_png[];
+extern IMG_BIN ui_msg_frame_a_4_5_png[];
+extern IMG_BIN ui_msg_frame_a_5_1_png[];
+extern IMG_BIN ui_msg_frame_a_5_2_png[];
+extern IMG_BIN ui_msg_frame_a_5_3_png[];
+extern IMG_BIN ui_msg_frame_a_5_4_png[];
+extern IMG_BIN ui_msg_frame_a_5_5_png[];
+extern IMG_BIN ui_msg_frame_b_1_1_png[];
+extern IMG_BIN ui_msg_frame_b_1_2_png[];
+extern IMG_BIN ui_msg_frame_b_1_3_png[];
+extern IMG_BIN ui_msg_frame_b_1_4_png[];
+extern IMG_BIN ui_msg_frame_b_1_5_png[];
+extern IMG_BIN ui_msg_frame_b_2_1_png[];
+extern IMG_BIN ui_msg_frame_b_2_5_png[];
+extern IMG_BIN ui_msg_frame_b_3_1_png[];
+extern IMG_BIN ui_msg_frame_b_3_5_png[];
+extern IMG_BIN ui_msg_frame_b_4_1_png[];
+extern IMG_BIN ui_msg_frame_b_4_5_png[];
+extern IMG_BIN ui_msg_frame_b_5_1_png[];
+extern IMG_BIN ui_msg_frame_b_5_2_png[];
+extern IMG_BIN ui_msg_frame_b_5_3_png[];
+extern IMG_BIN ui_msg_frame_b_5_4_png[];
+extern IMG_BIN ui_msg_frame_b_5_5_png[];
 
 IMG_BIN* gMessageBoxFrameParts[2][16] = {
     {
-        ui_msg_frame_part_0_png, ui_msg_frame_part_1_png, ui_msg_frame_part_2_png, ui_msg_frame_part_3_png,
-        ui_msg_frame_part_4_png, ui_msg_frame_part_5_png, ui_msg_frame_part_6_png, ui_msg_frame_part_7_png,
-        ui_msg_frame_part_8_png, ui_msg_frame_part_9_png, ui_msg_frame_part_A_png, ui_msg_frame_part_B_png,
-        ui_msg_frame_part_C_png, ui_msg_frame_part_D_png, ui_msg_frame_part_E_png, ui_msg_frame_part_F_png,
+        ui_msg_frame_a_1_1_png, ui_msg_frame_a_1_2_png, ui_msg_frame_a_1_3_png, ui_msg_frame_a_1_4_png,
+        ui_msg_frame_a_1_5_png, ui_msg_frame_a_2_1_png, ui_msg_frame_a_2_5_png, ui_msg_frame_a_3_1_png,
+        ui_msg_frame_a_3_5_png, ui_msg_frame_a_4_1_png, ui_msg_frame_a_4_5_png, ui_msg_frame_a_5_1_png,
+        ui_msg_frame_a_5_2_png, ui_msg_frame_a_5_3_png, ui_msg_frame_a_5_4_png, ui_msg_frame_a_5_5_png,
     },
     {
-        ui_msg_frame_part_10_png, ui_msg_frame_part_11_png, ui_msg_frame_part_12_png, ui_msg_frame_part_13_png,
-        ui_msg_frame_part_14_png, ui_msg_frame_part_15_png, ui_msg_frame_part_16_png, ui_msg_frame_part_17_png,
-        ui_msg_frame_part_18_png, ui_msg_frame_part_19_png, ui_msg_frame_part_1A_png, ui_msg_frame_part_1B_png,
-        ui_msg_frame_part_1C_png, ui_msg_frame_part_1D_png, ui_msg_frame_part_1E_png, ui_msg_frame_part_1F_png,
+        ui_msg_frame_b_1_1_png, ui_msg_frame_b_1_2_png, ui_msg_frame_b_1_3_png, ui_msg_frame_b_1_4_png,
+        ui_msg_frame_b_1_5_png, ui_msg_frame_b_2_1_png, ui_msg_frame_b_2_5_png, ui_msg_frame_b_3_1_png,
+        ui_msg_frame_b_3_5_png, ui_msg_frame_b_4_1_png, ui_msg_frame_b_4_5_png, ui_msg_frame_b_5_1_png,
+        ui_msg_frame_b_5_2_png, ui_msg_frame_b_5_3_png, ui_msg_frame_b_5_4_png, ui_msg_frame_b_5_5_png,
     }
 };

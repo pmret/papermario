@@ -106,11 +106,246 @@ segments:
     - [0x132C28, palette, letter_content_12]
     - [0x132E28, bin] # length 0x18, non zero
 
-  - type: bin
-    name: ui_images
+  - name: ui_images
+    type: code
     start: 0x132E40
     vram: 0x8023E000
+    subsegments:
+    - [0x132E40, ci4, ui/pause/unused_badge_points, 24, 24]
+    - [0x132F60, palette, ui/pause/unused_badge_points]
+    - [0x132F80, palette, ui/pause/unused_badge_points.disabled]
+    - [0x132FA0, ci4, ui/pause/unused_compass, 24, 24]
+    - [0x1330C0, palette, ui/pause/unused_compass]
+    - [0x1330E0, palette, ui/pause/unused_compass.disabled]
+    - [0x133100, ci4, ui/pause/cursor_hand, 16, 16]
+    - [0x133180, palette, ui/pause/cursor_hand]
+    - [0x1331A0, ci4, ui/files/filename_caret, 16, 16]
+    - [0x133220, palette, ui/files/filename_caret]
+    - [0x133240, ci4, ui/files/filename_space, 8, 8]
+    - [0x133260, palette, ui/files/filename_space]
 
+    - [0x133280, ci4, ui/pause/label_stats, 48, 16]
+    - [0x133400, palette, ui/pause/label_stats]
+    - [0x133420, ci4, ui/pause/label_badges, 48, 16]
+    - [0x1335A0, palette, ui/pause/label_badges]
+    - [0x1335C0, ci4, ui/pause/label_items, 48, 16]
+    - [0x133740, palette, ui/pause/label_items]
+    - [0x133760, ci4, ui/pause/label_party, 48, 16]
+    - [0x1338E0, palette, ui/pause/label_party]
+    - [0x133900, ci4, ui/pause/label_spirits, 48, 16]
+    - [0x133A80, palette, ui/pause/label_spirits]
+    - [0x133AA0, ci4, ui/pause/label_map, 48, 16]
+    - [0x133C20, palette, ui/pause/label_map]
+
+    - [0x133c40, ci4, de/ui/pause/label_stats, 48, 16]
+    - [0x133dc0, palette, de/ui/pause/label_stats]
+    - [0x133de0, ci4, de/ui/pause/label_badges, 48, 16]
+    - [0x133f60, palette, de/ui/pause/label_badges]
+    - [0x133f80, ci4, de/ui/pause/label_items, 48, 16]
+    - [0x134100, palette, de/ui/pause/label_items]
+    - [0x134120, ci4, de/ui/pause/label_party, 48, 16]
+    - [0x1342a0, palette, de/ui/pause/label_party]
+    - [0x1342c0, ci4, de/ui/pause/label_spirits, 48, 16]
+    - [0x134440, palette, de/ui/pause/label_spirits]
+    - [0x134460, ci4, de/ui/pause/label_map, 48, 16]
+    - [0x1345e0, palette, de/ui/pause/label_map]
+
+    - [0x134600, ci4, fr/ui/pause/label_stats, 48, 16]
+    - [0x134780, palette, fr/ui/pause/label_stats]
+    - [0x1347a0, ci4, fr/ui/pause/label_badges, 48, 16]
+    - [0x134920, palette, fr/ui/pause/label_badges]
+    - [0x134940, ci4, fr/ui/pause/label_items, 48, 16]
+    - [0x134ac0, palette, fr/ui/pause/label_items]
+    - [0x134ae0, ci4, fr/ui/pause/label_party, 48, 16]
+    - [0x134c60, palette, fr/ui/pause/label_party]
+    - [0x134c80, ci4, fr/ui/pause/label_spirits, 48, 16]
+    - [0x134e00, palette, fr/ui/pause/label_spirits]
+    - [0x134e20, ci4, fr/ui/pause/label_map, 48, 16]
+    - [0x134fa0, palette, fr/ui/pause/label_map]
+
+    - [0x134fc0, ci4, es/ui/pause/label_stats, 48, 16]
+    - [0x135140, palette, es/ui/pause/label_stats]
+    - [0x135160, ci4, es/ui/pause/label_badges, 48, 16]
+    - [0x1352e0, palette, es/ui/pause/label_badges]
+    - [0x135300, ci4, es/ui/pause/label_items, 48, 16]
+    - [0x135480, palette, es/ui/pause/label_items]
+    - [0x1354a0, ci4, es/ui/pause/label_party, 48, 16]
+    - [0x135620, palette, es/ui/pause/label_party]
+    - [0x135640, ci4, es/ui/pause/label_spirits, 48, 16]
+    - [0x1357c0, palette, es/ui/pause/label_spirits]
+    - [0x1357e0, ci4, es/ui/pause/label_map, 48, 16]
+    - [0x135960, palette, es/ui/pause/label_map]
+
+    - [0x135980, ci4, ui/pause/small_digit_0, 8, 8]
+    - [0x1359A0, palette, ui/pause/small_digit_0]
+    - [0x1359C0, ci4, ui/pause/small_digit_1, 8, 8]
+    - [0x1359E0, palette, ui/pause/small_digit_1]
+    - [0x135A00, ci4, ui/pause/small_digit_2, 8, 8]
+    - [0x135A20, palette, ui/pause/small_digit_2]
+    - [0x135A40, ci4, ui/pause/small_digit_3, 8, 8]
+    - [0x135A60, palette, ui/pause/small_digit_3]
+    - [0x135A80, ci4, ui/pause/small_digit_4, 8, 8]
+    - [0x135AA0, palette, ui/pause/small_digit_4]
+    - [0x135AC0, ci4, ui/pause/small_digit_5, 8, 8]
+    - [0x135AE0, palette, ui/pause/small_digit_5]
+    - [0x135B00, ci4, ui/pause/small_digit_6, 8, 8]
+    - [0x135B20, palette, ui/pause/small_digit_6]
+    - [0x135B40, ci4, ui/pause/small_digit_7, 8, 8]
+    - [0x135B60, palette, ui/pause/small_digit_7]
+    - [0x135B80, ci4, ui/pause/small_digit_8, 8, 8]
+    - [0x135BA0, palette, ui/pause/small_digit_8]
+    - [0x135BC0, ci4, ui/pause/small_digit_9, 8, 8]
+    - [0x135BE0, palette, ui/pause/small_digit_9]
+    - [0x135C00, ci4, ui/pause/small_text_bp, 8, 8]
+    - [0x135C20, palette, ui/pause/small_text_bp]
+    - [0x135C40, ci4, ui/pause/label_jp_file, 32, 16]
+    - [0x135D40, palette, ui/pause/label_jp_file]
+    - [0x135D60, ci4, ui/pause/label_jp_file_disabled, 32, 16]
+    - [0x135E60, palette, ui/pause/label_jp_file_disabled]
+
+    # English
+    - [0x135E80, ci4, ui/files/option_mono_on, 64, 16]
+    - [0x136080, palette, ui/files/option_mono_on]
+    - [0x1360A0, ci4, ui/files/option_mono_off, 64, 16]
+    - [0x1362A0, palette, ui/files/option_mono_off]
+    - [0x1362C0, ci4, ui/files/option_stereo_on, 64, 16]
+    - [0x1364C0, palette, ui/files/option_stereo_on]
+    - [0x1364E0, ci4, ui/files/option_stereo_off, 64, 16]
+    - [0x1366E0, palette, ui/files/option_stereo_off]
+
+    # German
+    - [0x136700, ci4, de/ui/files/option_mono_on, 64, 16]
+    - [0x136900, palette, de/ui/files/option_mono_on]
+    - [0x136920, ci4, de/ui/files/option_mono_off, 64, 16]
+    - [0x136b20, palette, de/ui/files/option_mono_off]
+    - [0x136b40, ci4, de/ui/files/option_stereo_on, 64, 16]
+    - [0x136d40, palette, de/ui/files/option_stereo_on]
+    - [0x136d60, ci4, de/ui/files/option_stereo_off, 64, 16]
+    - [0x136f60, palette, de/ui/files/option_stereo_off]
+
+    # French
+    - [0x136f80, ci4, fr/ui/files/option_mono_on, 64, 16]
+    - [0x137180, palette, fr/ui/files/option_mono_on]
+    - [0x1371a0, ci4, fr/ui/files/option_mono_off, 64, 16]
+    - [0x1373a0, palette, fr/ui/files/option_mono_off]
+    - [0x1373c0, ci4, fr/ui/files/option_stereo_on, 64, 16]
+    - [0x1375c0, palette, fr/ui/files/option_stereo_on]
+    - [0x1375e0, ci4, fr/ui/files/option_stereo_off, 64, 16]
+    - [0x1377e0, palette, fr/ui/files/option_stereo_off]
+
+    - [0x137800, ci4, es/ui/files/option_mono_on, 64, 16]
+    - [0x137a00, palette, es/ui/files/option_mono_on]
+    - [0x137a20, ci4, es/ui/files/option_mono_off, 64, 16]
+    - [0x137c20, palette, es/ui/files/option_mono_off]
+    - [0x137c40, ci4, es/ui/files/option_stereo_on, 64, 16]
+    - [0x137e40, palette, es/ui/files/option_stereo_on]
+    - [0x137e60, ci4, es/ui/files/option_stereo_off, 64, 16]
+    - [0x138060, palette, es/ui/files/option_stereo_off]
+
+    - [0x138080, ci4, ui/files/eldstar, 16, 16]
+    - [0x138100, palette, ui/files/eldstar]
+    - [0x138120, ci4, ui/files/eldstar_silhouette, 16, 16]
+    - [0x1381A0, palette, ui/files/eldstar_silhouette]
+    - [0x1381C0, ci4, ui/files/mamar, 16, 16]
+    - [0x138240, palette, ui/files/mamar]
+    - [0x138260, ci4, ui/files/mamar_silhouette, 16, 16]
+    - [0x1382E0, palette, ui/files/mamar_silhouette]
+    - [0x138300, ci4, ui/files/skolar, 16, 16]
+    - [0x138380, palette, ui/files/skolar]
+    - [0x1383A0, ci4, ui/files/skolar_silhouette, 16, 16]
+    - [0x138420, palette, ui/files/skolar_silhouette]
+    - [0x138440, ci4, ui/files/muskular, 16, 16]
+    - [0x1384C0, palette, ui/files/muskular]
+    - [0x1384E0, ci4, ui/files/muskular_silhouette, 16, 16]
+    - [0x138560, palette, ui/files/muskular_silhouette]
+    - [0x138580, ci4, ui/files/misstar, 16, 16]
+    - [0x138600, palette, ui/files/misstar]
+    - [0x138620, ci4, ui/files/misstar_silhouette, 16, 16]
+    - [0x1386A0, palette, ui/files/misstar_silhouette]
+    - [0x1386C0, ci4, ui/files/klevar, 16, 16]
+    - [0x138740, palette, ui/files/klevar]
+    - [0x138760, ci4, ui/files/klevar_silhouette, 16, 16]
+    - [0x1387E0, palette, ui/files/klevar_silhouette]
+    - [0x138800, ci4, ui/files/kalmar, 16, 16]
+    - [0x138880, palette, ui/files/kalmar]
+    - [0x1388A0, ci4, ui/files/kalmar_silhouette, 16, 16]
+    - [0x138920, palette, ui/files/kalmar_silhouette]
+    - [0x138940, ci4, ui/pause/map_walk0, 24, 24]
+    - [0x138A60, palette, ui/pause/map_walk0]
+    - [0x138A80, ci4, ui/pause/map_walk1, 24, 24]
+    - [0x138BA0, palette, ui/pause/map_walk1]
+    - [0x138BC0, ci4, ui/pause/map_walk2, 24, 24]
+    - [0x138CE0, palette, ui/pause/map_walk2]
+    - [0x138D00, ci4, ui/pause/jp_super, 40, 16]
+    - [0x138E40, palette, ui/pause/jp_super]
+    - [0x138E60, ci4, ui/pause/jp_ultra, 40, 16]
+    - [0x138FA0, palette, ui/pause/jp_ultra]
+    - [0x138FC0, ci4, ui/pause/list_prev_page, 16, 16]
+    - [0x139040, palette, ui/pause/list_prev_page]
+    - [0x139060, ci4, ui/pause/list_next_page, 16, 16]
+    - [0x1390E0, palette, ui/pause/list_next_page]
+    - [0x139100, ci4, ui/pause/unused_z_up_arrow, 16, 16]
+    - [0x139180, palette, ui/pause/unused_z_up_arrow]
+    - [0x1391A0, ci4, ui/pause/unused_r_down_arrow, 16, 16]
+    - [0x139220, palette, ui/pause/unused_r_down_arrow]
+    - [0x139240, ci4, ui/pause/desc_msg_prev, 16, 16]
+    - [0x1392C0, palette, ui/pause/desc_msg_prev]
+    - [0x1392E0, ci4, ui/pause/desc_msg_next, 16, 16]
+    - [0x139360, palette, ui/pause/desc_msg_next]
+
+    - [0x139380, ci4, ui/pause/bp_needed, 48, 8]
+    - [0x139440, palette, ui/pause/bp_needed]
+
+    - [0x139460, ci4, de/ui/pause/bp_needed, 48, 8]
+    - [0x139520, palette, de/ui/pause/bp_needed]
+
+    - [0x139540, ci4, fr/ui/pause/bp_needed, 48, 8]
+    - [0x139600, palette, fr/ui/pause/bp_needed]
+
+    - [0x139620, ci4, es/ui/pause/bp_needed, 48, 8]
+    - [0x1396e0, palette, es/ui/pause/bp_needed]
+
+    - [0x139700, ci4, ui/pause/mario_large, 32, 32]
+    - [0x139900, palette, ui/pause/mario_large]
+    - [0x139920, ci4, ui/pause/dash, 16, 8]
+    - [0x139960, palette, ui/pause/dash]
+    - [0x139980, ci4, ui/pause/stat_bp, 16, 16]
+    - [0x139A00, palette, ui/pause/stat_bp]
+    - [0x139A20, ci4, ui/pause/stat_mario, 16, 16]
+    - [0x139AA0, palette, ui/pause/stat_mario]
+    - [0x139AC0, ci4, ui/pause/stat_time, 16, 16]
+    - [0x139B40, palette, ui/pause/stat_time]
+    - [0x139B60, ci4, ui/pause/stat_star_piece0, 16, 16]
+    - [0x139BE0, palette, ui/pause/stat_star_piece0]
+    - [0x139C00, ci4, ui/pause/stat_star_piece1, 16, 16]
+    - [0x139C80, palette, ui/pause/stat_star_piece1]
+    - [0x139CA0, ci4, ui/pause/stat_star_piece2, 16, 16]
+    - [0x139D20, palette, ui/pause/stat_star_piece2]
+    - [0x139D40, ci4, ui/pause/stat_fp, 16, 16]
+    - [0x139DC0, palette, ui/pause/stat_fp]
+    - [0x139DE0, ci4, ui/pause/stat_times, 8, 8]
+    - [0x139E00, palette, ui/pause/stat_times]
+    - [0x139E20, ci4, ui/pause/stat_boots0, 16, 16]
+    - [0x139EA0, palette, ui/pause/stat_boots0]
+    - [0x139EC0, ci4, ui/pause/stat_boots1, 16, 16]
+    - [0x139F40, palette, ui/pause/stat_boots1]
+    - [0x139F60, ci4, ui/pause/stat_boots2, 16, 16]
+    - [0x139FE0, palette, ui/pause/stat_boots2]
+    - [0x13A000, ci4, ui/pause/stat_boots3, 16, 16]
+    - [0x13A080, palette, ui/pause/stat_boots3]
+    - [0x13A0A0, ci4, ui/pause/stat_hammer0, 16, 16]
+    - [0x13A120, palette, ui/pause/stat_hammer0]
+    - [0x13A140, ci4, ui/pause/stat_hammer1, 16, 16]
+    - [0x13A1C0, palette, ui/pause/stat_hammer1]
+    - [0x13A1E0, ci4, ui/pause/stat_hammer2, 16, 16]
+    - [0x13A260, palette, ui/pause/stat_hammer2]
+    - [0x13A280, ci4, ui/pause/stat_hammer3, 16, 16]
+    - [0x13A300, palette, ui/pause/stat_hammer3]
+    - [0x13A320, ci4, ui/pause/partner_rank, 16, 16]
+    - [0x13A3A0, palette, ui/pause/partner_rank]
+    - [0x13A3C0, ci4, ui/pause/unused_bubble, 56, 16]
+    - [0x13A580, palette, ui/pause/unused_bubble]
+    - [0x13A5A0, .data, menu_hud_scripts]
   - type: code
     dir: pause
     start: 0x13B8F0
@@ -184,7 +419,36 @@ segments:
   - [0x16B3D0, bin, pause_gfx_fr] # TODO: French
   - [0x16D450, bin, pause_gfx_es] # TODO: Spanish
 
-  - [0x16F4D0, bin]
+  - type: code
+    dir: filemenu
+    start: 0x16F4D0
+    vram: 0x80246AB0
+    subsegments:
+    - [0x16F4D0, c, filemenu_common]
+    - [0x1716E0, c, filemenu_main]
+    - [0x1737E0, c, filemenu_yesno]
+    - [0x174820, c, filemenu_info]
+    - [0x174D50, c, filemenu_createfile]
+    - [0x1760C0, c, filemenu_selectlanguage]
+    - [0x176B40, c, filemenu_msg]
+    - [0x1773A0, .data, filemenu_common]
+    - [0x177680, .data, filemenu_main]
+    - [0x177A00, .data, filemenu_yesno]
+    - [0x177A70, .data, filemenu_info]
+    - [0x177AC0, .data, filemenu_createfile]
+    - [0x177B40, .data, filemenu_selectlanguage]
+    - start: 0x177CD0
+      type: .data
+      name: filemenu_gfx
+      subsegments:
+      - [0x177CD0, ia4, copyarrow, 64, 16]
+      - [0x177ED0, rgba32, corners_yellow, 16, 64]
+      - [0x178ED0, ia8, corners_gray, 16, 32]
+      - [0x1790D0, .data, filemenu_gfx]
+    - [0x179200, .data, filemenu_msg]
+    - [0x179C30, .data, filemenu_styles]
+
+  - [0x17A160, bin]
 
   - [0x1DA1E0, ci4,     icon/present, 32, 32]
   - [0x1DA3E0, palette, icon/present]
@@ -195,6 +459,13 @@ segments:
   - [0x231790, palette, title/bg_1]
 
   - [0x231990, bin]
+
+  - type: bin
+    name: titlemenu_flags
+    start: 0x25C5A0
+    # TODO: split into images
+
+  - [0x2705A0, bin]
 
   - type: code
     dir: world/partner
@@ -4430,10 +4701,10 @@ segments:
     subalign: 4
     subsegments:
     - [0x48C7E0, c, area]
-    - [0x48C7E0, c, actor/blue_goomba]
-    - [0x48CA60, c, actor/red_goomba]
-    - [0x48CCE0, c, actor/blue_goomba2]
-    - [0x48CF90, c, actor/red_goomba2]
+    - [0x48C7E0, c, actor/blue_goomba_1]
+    - [0x48CA60, c, actor/red_goomba_1]
+    - [0x48CCE0, c, actor/blue_goomba_2]
+    - [0x48CF90, c, actor/red_goomba_2]
     - [0x48D240, c, actor/goomba_king]
     - [0x48D2F0, c, actor/goomnut_tree]
     - [0x48D530, c, stage/kmr_02]
@@ -4449,9 +4720,9 @@ segments:
     subalign: 4
     subsegments:
     - [0x49A190, c, area]
-    - [0x49A190, c, actor/spiked_goomba]
-    - [0x49A410, c, actor/paragoomba]
-    - [0x49A6F0, c, actor/paragoomba2]
+    - [0x49A190, c, actor/tutorial_spiked_goomba]
+    - [0x49A410, c, actor/tutorial_paragoomba]
+    - [0x49A6F0, c, actor/paragoomba]
     - [0x49A9D0, c, actor/jr_troopa]
     - [0x49A9D0, c, actor/egg_jr_troopa]
     - [0x49A9D0, c, actor/para_jr_troopa]
@@ -4461,13 +4732,13 @@ segments:
     - [0x49B170, c, stage/kmr_02]
     - [0x49B170, c, stage/kmr_03]
     - [0x49B3E0, c, stage/kmr_04]
-    - [0x49B650, c, stage/kmr_05]
+    - [0x49B650, c, stage/kmr_05b]
     - [0x49B8C0, c, stage/kmr_06]
     - [0x49BB70, c, stage/nok_01]
     - [0x49BB70, c, stage/mim_01]
     - [0x49BBD0, c, stage/sam_01]
     - [0x49BEF0, c, stage/mac_01]
-    - [0x49C340, c, stage/kpa_01]
+    - [0x49C340, c, stage/kpa_13]
     - [0x49C340]
   - dir: battle/area/mac
     type: code
@@ -4549,10 +4820,10 @@ segments:
     subsegments:
     - [0x503F40, c, area]
     - [0x503F40, c, actor/fake_bowser]
-    - [0x504320, c, actor/green_ninja_koopa]
-    - [0x504AE0, c, actor/red_ninja_koopa]
-    - [0x5052A0, c, actor/blue_ninja_koopa]
-    - [0x505A60, c, actor/yellow_ninja_koopa]
+    - [0x504320, c, actor/koopa_bros_green]
+    - [0x504AE0, c, actor/koopa_bros_red]
+    - [0x5052A0, c, actor/koopa_bros_black]
+    - [0x505A60, c, actor/koopa_bros_yellow]
     - [0x506220, c, stage/trd_00]
     - [0x506220, c, stage/trd_01]
     - [0x506220, c, stage/trd_02]
@@ -4661,7 +4932,7 @@ segments:
     start: 0x5517A0
     vram: 0x80218000
     subsegments:
-    - [0x5517A0, c, actor/hypergoomba]
+    - [0x5517A0, c, actor/hyper_goomba]
     - [0x551A80, c, actor/hyper_paragoomba]
     - [0x551D60, c, actor/hyper_cleft]
     - [0x551E20, c, actor/tubbas_heart]
@@ -5178,8 +5449,8 @@ segments:
     - [0x6F4350, c, actor/bowser_phase_2]
     - [0x6F59E0, c, actor/bowser_phase_3]
     - [0x6F7320, c, stage/kpa_01]
-    - [0x6F7320, c, stage/kpa_02]
-    - [0x6F7320, c, stage/kpa_03]
+    - [0x6F7320, c, stage/kkj_01]
+    - [0x6F7320, c, stage/kkj_02]
     - [0x6F7370, c, area]
     - [0x6F7370]
   - dir: battle/area/kpa3
@@ -11373,266 +11644,10 @@ segments:
 ### Sprites ###
 ###############
   - [0x1DE2C40, bin, 1942C40]
-  - [0x1DF0000, bin, 1943000] # sprite data build metadata (build date, major file divisions)
-
-  # player sprite raster table:
-  - [0x1DF0020, bin, 1943020] # Player sprite table
-
-  - [0x1E8D970, bin] # Player sprite Yay0 table (offsets to the following 13 entries)
-  - { start: 0x1E8D9A8, type: yay0, align: 8, name: 19E09A8 }
-  - { start: 0x1E8E390, type: yay0, align: 8, name: 19E1390 }
-  - { start: 0x1E8E888, type: yay0, align: 8, name: 19E1888 }
-  - { start: 0x1E8F330, type: yay0, align: 8, name: 19E2330 }
-  - { start: 0x1E8FDE0, type: yay0, align: 8, name: 19E2DE0 }
-  - { start: 0x1E90208, type: yay0, align: 8, name: 19E3208 }
-  - { start: 0x1E90BA8, type: yay0, align: 8, name: 19E3BA8 }
-  - { start: 0x1E90FD8, type: yay0, align: 8, name: 19E3FD8 }
-  - { start: 0x1E91828, type: yay0, align: 8, name: 19E4828 }
-  - { start: 0x1E91BE0, type: yay0, align: 8, name: 19E4BE0 }
-  - { start: 0x1E92758, type: yay0, align: 8, name: 19E5758 }
-  - { start: 0x1E92950, type: yay0, align: 8, name: 19E5950 }
-  - { start: 0x1E932A0, type: yay0, align: 8, name: 19E62A0 }
-
-  - start: 0x1e937b8
+  - start: 0x1DF0000
     align: 8
-    type: pm_npc_sprites
-    dir: sprite
-    name: npc
-    files:
-      - WorldGoombario
-      - WorldKooper
-      - WorldBombette
-      - WorldParakarry
-      - WorldBow
-      - WorldWatt
-      - WorldSushie
-      - WorldLakilester
-      - BattleGoombario
-      - BattleKooper
-      - BattleBombette
-      - BattleParakarry
-      - BattleBow
-      - BattleWatt
-      - BattleSushie
-      - BattleLakilester
-      - KooperWithoutShell
-      - WorldEldstar
-      - WorldMamar
-      - WorldSkolar
-      - WorldMuskular
-      - WorldMisstar
-      - WorldKlevar
-      - WorldKalmar
-      - BattleEldstar
-      - BattleMamar
-      - BattleSkolar
-      - BattleMuskular
-      - BattleMisstar
-      - BattleKlevar
-      - BattleKalmar
-      - Twink
-      - JrTroopa
-      - SpikedJrTroopa
-      - SpikedParaJrTroopa
-      - MageJrTroopa
-      - ParaJrTroopa
-      - Goomba
-      - SpikedGoomba
-      - Paragoomba
-      - KoopaTroopa
-      - ParaTroopa
-      - Fuzzy
-      - Bobomb
-      - BulletBill
-      - BillBlaster
-      - MontyMole
-      - Cleft
-      - Pokey
-      - Bandit
-      - BuzzyBeetle
-      - Swooper
-      - StoneChomp
-      - LargePiranha
-      - SmallPiranha
-      - Sentinel
-      - WorldClubba
-      - BattleClubba
-      - ShyGuy
-      - GrooveGuy
-      - SkyGuy
-      - PyroGuy
-      - SpyGuy
-      - MediGuy
-      - Fuzzipede
-      - SpearGuy
-      - HeartPlant
-      - HurtPlant
-      - MBush
-      - LavaBubble
-      - KentCKoopa
-      - Dayzee
-      - Lakitu
-      - Spiny
-      - Bzzap
-      - RuffPuff
-      - SpikeTop
-      - Duplighost
-      - AlbinoDino
-      - Blooper
-      - BabyBlooper
-      - Gulpit
-      - DryBones
-      - ThrownBone
-      - BonyBeetle
-      - Magikoopa
-      - FlyingMagikoopa
-      - WorldKoopatrol
-      - Koopatrol
-      - HammerBros
-      - BushBasic
-      - BushBlocky
-      - BushDry
-      - BushLeafy
-      - BushMatted
-      - WorldKammy
-      - BattleKammy
-      - GoombaBros
-      - GoombaKing
-      - SpikyGoomnut
-      - DarkToad
-      - KoopaBros
-      - Buzzar
-      - Tutankoopa
-      - ChainChomp
-      - WorldTubba
-      - BattleTubba
-      - TubbasHeart
-      - BigLanternGhost
-      - ShySquadGuy
-      - MarshalGuy
-      - StiltGuy
-      - StiltGuyUnfold
-      - ShyStackGuy
-      - ShyStackUnfold
-      - ShyStackDamage
-      - ShyStackRock
-      - GeneralGuy
-      - GeneralGuyBomb
-      - TankGuy
-      - LavaPiranha
-      - PetitPiranha
-      - LavaBud
-      - HuffNPuff
-      - TuffPuff
-      - Monstar
-      - CrystalKing
-      - WorldBowser
-      - BattleBowser
-      - Luigi
-      - Toad
-      - Toadette
-      - VannaT
-      - ToadKid
-      - ToadGuard
-      - HarryT
-      - ToadMinister
-      - Postmaster
-      - ConductorToad
-      - TrainToad
-      - Fishmael
-      - Musician
-      - Koopa
-      - KoopaWithoutShell
-      - WorldBobomb
-      - Whacka
-      - Dryite
-      - Mouser
-      - Boo
-      - Yoshi
-      - YoshiKid
-      - Raven
-      - Bubulb
-      - Penguin
-      - ShiverToad
-      - AltBandit
-      - Goompa
-      - Goombaria
-      - Gooma
-      - Goompapa
-      - Goomama
-      - TheMaster
-      - Chan
-      - Lee
-      - Merlon
-      - ChetRippo
-      - Rowf
-      - MinhT
-      - RussT
-      - TayceT
-      - FiceT
-      - Bartender
-      - Chanterelle
-      - RipCheato
-      - ChuckQuizmo
-      - Merluvlee
-      - Merlar
-      - Merlow
-      - StarMan
-      - KoloradoWife
-      - KoopaKoot
-      - Kolorado
-      - BattleKolorado
-      - Archeologist
-      - Nomadimouse
-      - WorldMerlee
-      - BattleMerlee
-      - DisguisedMoustafa
-      - Moustafa
-      - Oaklie
-      - Bootler
-      - Yakkey
-      - GourmetGuy
-      - VillageLeader
-      - LeadersFriend
-      - RaphaelRaven
-      - Tolielup
-      - GateFlower
-      - Petunia
-      - Posie
-      - Lily
-      - Rosie
-      - Sun
-      - Lakilulu
-      - Ninji
-      - MayorPenguin
-      - MayorPenguinWife
-      - PenguinPatrol
-      - Herringway
-      - Merle
-      - StarRod
-      - Fire
-      - Coin
-      - ParadePeach
-      - ParadeKoopas
-      - ParadeBurntBowser
-      - ParadeLuigi
-      - ParadePartner
-      - ParadeYoshi
-      - ParadeKolorado
-      - ParadeChick
-      - ParadeIceShow
-      - ParadeToad
-      - ParadeTwirler
-      - ParadeDrummer
-      - ParadeBanner
-      - ParadeHorn
-      - ParadeTubba
-      - ParadeWizard
-      - ParadeMario
-      - ParadeShyGuy
-      - ParadeTwink
-      - Leaf
-
+    type: pm_sprites
+    name: sprites
   - [0x202f208, bin] # end of sprite data - todo: figure out what this is
 
   - start: 0x2030000

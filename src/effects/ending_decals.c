@@ -38,7 +38,7 @@ void ending_decals_main(s32 type, f32 posX, f32 posY, f32 posZ, f32 arg4, Effect
     bp.update = ending_decals_update;
     bp.renderWorld = ending_decals_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_ENDING_DECALS;
 
     effect = shim_create_effect_instance(&bp);
@@ -86,8 +86,8 @@ void ending_decals_init(EffectInstance* effect) {
 void ending_decals_update(EffectInstance* effect) {
     EndingDecalsFXData* data = effect->data.endingDecals;
 
-    if (effect->flags & 0x10) {
-        effect->flags &= ~0x10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         data->unk_1C = 10;
     }
 

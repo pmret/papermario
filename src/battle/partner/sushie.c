@@ -26,6 +26,10 @@ extern EvtScript N(tidalWave);
 
 static EffectInstance* sEffect;
 
+enum N(ActorPartIDs) {
+    PRT_MAIN            = 1,
+};
+
 API_CALLABLE(N(SetSquirtAngle)) {
     ActorPart* targetPart;
     Actor* partner = gBattleStatus.partnerActor;
@@ -354,7 +358,7 @@ API_CALLABLE(N(ProcessTidalWave)) {
             sEffect->data.waterFountain->unk_40 = partner->scale.x;
             if (state->moveTime == 0) {
                 partner->rotation.z = 0.0f;
-                sEffect->flags |= EFFECT_INSTANCE_FLAG_10;
+                sEffect->flags |= FX_INSTANCE_FLAG_DISMISS;
                 return ApiStatus_DONE2;
             }
             state->moveTime--;
@@ -384,50 +388,50 @@ API_CALLABLE(N(SetScaleTidalWaveCharge)) {
 }
 
 s32 N(IdleAnimations)[] = {
-    STATUS_NORMAL, ANIM_BattleSushie_Walk,
-    STATUS_STONE, ANIM_BattleSushie_Still,
-    STATUS_SLEEP, ANIM_BattleSushie_Pray,
-    STATUS_POISON, ANIM_BattleSushie_Still,
-    STATUS_STOP, ANIM_BattleSushie_Still,
-    STATUS_DAZE, ANIM_BattleSushie_Injured,
-    STATUS_TURN_DONE, ANIM_BattleSushie_Still,
+    STATUS_KEY_NORMAL,    ANIM_BattleSushie_Walk,
+    STATUS_KEY_STONE,     ANIM_BattleSushie_Still,
+    STATUS_KEY_SLEEP,     ANIM_BattleSushie_Pray,
+    STATUS_KEY_POISON,    ANIM_BattleSushie_Still,
+    STATUS_KEY_STOP,      ANIM_BattleSushie_Still,
+    STATUS_KEY_DAZE,      ANIM_BattleSushie_Injured,
+    STATUS_KEY_INACTIVE,  ANIM_BattleSushie_Still,
     STATUS_END,
 };
 
 s32 N(DefenseTable)[] = {
-    ELEMENT_NORMAL, 0,
+    ELEMENT_NORMAL,   0,
     ELEMENT_END,
 };
 
 s32 N(StatusTable)[] = {
-    STATUS_NORMAL, 100,
-    STATUS_DEFAULT, 100,
-    STATUS_SLEEP, 100,
-    STATUS_POISON, 100,
-    STATUS_FROZEN, 100,
-    STATUS_DIZZY, 100,
-    STATUS_FEAR, 100,
-    STATUS_STATIC, 100,
-    STATUS_PARALYZE, 100,
-    STATUS_SHRINK, 100,
-    STATUS_STOP, 100,
-    STATUS_DEFAULT_TURN_MOD, 0,
-    STATUS_SLEEP_TURN_MOD, 0,
-    STATUS_POISON_TURN_MOD, 0,
-    STATUS_FROZEN_TURN_MOD, 0,
-    STATUS_DIZZY_TURN_MOD, 0,
-    STATUS_FEAR_TURN_MOD, 0,
-    STATUS_STATIC_TURN_MOD, 0,
-    STATUS_PARALYZE_TURN_MOD, 0,
-    STATUS_SHRINK_TURN_MOD, 0,
-    STATUS_STOP_TURN_MOD, 0,
+    STATUS_KEY_NORMAL,            100,
+    STATUS_KEY_DEFAULT,           100,
+    STATUS_KEY_SLEEP,             100,
+    STATUS_KEY_POISON,            100,
+    STATUS_KEY_FROZEN,            100,
+    STATUS_KEY_DIZZY,             100,
+    STATUS_KEY_FEAR,              100,
+    STATUS_KEY_STATIC,            100,
+    STATUS_KEY_PARALYZE,          100,
+    STATUS_KEY_SHRINK,            100,
+    STATUS_KEY_STOP,              100,
+    STATUS_TURN_MOD_DEFAULT,        0,
+    STATUS_TURN_MOD_SLEEP,          0,
+    STATUS_TURN_MOD_POISON,         0,
+    STATUS_TURN_MOD_FROZEN,         0,
+    STATUS_TURN_MOD_DIZZY,          0,
+    STATUS_TURN_MOD_FEAR,           0,
+    STATUS_TURN_MOD_STATIC,         0,
+    STATUS_TURN_MOD_PARALYZE,       0,
+    STATUS_TURN_MOD_SHRINK,         0,
+    STATUS_TURN_MOD_STOP,           0,
     STATUS_END,
 };
 
-ActorPartBlueprint N(parts)[] = {
+ActorPartBlueprint N(ActorParts)[] = {
     {
         .flags = 0,
-        .index = 1,
+        .index = PRT_MAIN,
         .posOffset = { 0, 0, 0 },
         .targetOffset = { 12, 17 },
         .opacity = 255,
@@ -444,8 +448,8 @@ ActorBlueprint NAMESPACE = {
     .type = ACTOR_TYPE_SUSHIE,
     .level = 0,
     .maxHP = 99,
-    .partCount = ARRAY_COUNT(N(parts)),
-    .partsData = N(parts),
+    .partCount = ARRAY_COUNT(N(ActorParts)),
+    .partsData = N(ActorParts),
     .initScript = &N(init),
     .statusTable = N(StatusTable),
     .escapeChance = 0,
@@ -457,9 +461,9 @@ ActorBlueprint NAMESPACE = {
     .powerBounceChance = 80,
     .coinReward = 0,
     .size = { 37, 26 },
-    .hpBarOffset = { 0, 0 },
+    .healthBarOffset = { 0, 0 },
     .statusIconOffset = { -10, 20 },
-    .statusMessageOffset = { 10, 20 },
+    .statusTextOffset = { 10, 20 },
 };
 
 EvtScript N(init) = {
@@ -485,55 +489,55 @@ EvtScript N(handleEvent) = {
         EVT_CASE_OR_EQ(EVENT_HIT)
             EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
             EVT_SET_CONST(LVar2, ANIM_BattleSushie_Hurt)
-            EVT_EXEC_WAIT(D_802977BC)
+            EVT_EXEC_WAIT(EVS_Partner_Hit)
             EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
-            EVT_EXEC_WAIT(DoPartnerHit)
+            EVT_EXEC_WAIT(EVS_Partner_Drop)
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(EVENT_ZERO_DAMAGE)
         EVT_CASE_OR_EQ(EVENT_IMMUNE)
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208C)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
-            EVT_EXEC_WAIT(DoPartnerBlock)
+            EVT_EXEC_WAIT(EVS_Partner_NoDamageHit)
         EVT_END_CASE_GROUP
         EVT_CASE_EQ(EVENT_SPIKE_CONTACT)
             EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
             EVT_SET(LVar2, 20)
-            EVT_EXEC_WAIT(DoPartnerSpikeContact)
+            EVT_EXEC_WAIT(EVS_Partner_SpikeContact)
             EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
-            EVT_EXEC_WAIT(DoPartnerHit)
+            EVT_EXEC_WAIT(EVS_Partner_Drop)
         EVT_CASE_EQ(EVENT_BURN_CONTACT)
             EVT_SET_CONST(LVar1, ANIM_BattleSushie_BurnHurt)
             EVT_SET(LVar2, 20)
             EVT_SET_CONST(LVar3, ANIM_BattleSushie_BurnStill)
-            EVT_EXEC_WAIT(DoPartnerBurnContact)
+            EVT_EXEC_WAIT(EVS_Partner_BurnContact)
             EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
-            EVT_EXEC_WAIT(DoPartnerHit)
+            EVT_EXEC_WAIT(EVS_Partner_Drop)
         EVT_CASE_EQ(EVENT_BURN_HIT)
             EVT_SET_CONST(LVar1, ANIM_BattleSushie_BurnHurt)
             EVT_SET_CONST(LVar2, ANIM_BattleSushie_BurnStill)
-            EVT_EXEC_WAIT(DoPartnerBurn)
+            EVT_EXEC_WAIT(EVS_Partner_BurnHit)
             EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
-            EVT_EXEC_WAIT(DoPartnerHit)
+            EVT_EXEC_WAIT(EVS_Partner_Drop)
         EVT_CASE_EQ(EVENT_SHOCK_HIT)
             EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
             EVT_SET(LVar2, 20)
-            EVT_EXEC_WAIT(D_80295744)
+            EVT_EXEC_WAIT(EVS_Partner_ShockHit)
         EVT_CASE_EQ(EVENT_33)
             EVT_SET_CONST(LVar1, ANIM_BattleSushie_Hurt)
-            EVT_EXEC_WAIT(DoPartnerHit)
+            EVT_EXEC_WAIT(EVS_Partner_Drop)
         EVT_CASE_EQ(EVENT_RECOVER_FROM_KO)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleSushie_Idle)
             EVT_SET_CONST(LVar2, ANIM_BattleSushie_Run)
             EVT_SET(LVar3, 0)
-            EVT_EXEC_WAIT(DoPartnerRecover)
+            EVT_EXEC_WAIT(EVS_Partner_Recover)
         EVT_CASE_OR_EQ(EVENT_18)
         EVT_CASE_OR_EQ(EVENT_BLOCK)
             EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_208C)
-            EVT_SET_CONST(LVar0, 1)
+            EVT_SET_CONST(LVar0, PRT_MAIN)
             EVT_SET_CONST(LVar1, ANIM_BattleSushie_Block)
-            EVT_EXEC_WAIT(DoPartnerBlock)
+            EVT_EXEC_WAIT(EVS_Partner_NoDamageHit)
             EVT_WAIT(10)
         EVT_END_CASE_GROUP
         EVT_CASE_DEFAULT
@@ -568,9 +572,9 @@ EvtScript N(celebrate) = {
 };
 
 EvtScript N(runAway) = {
-    EVT_SET_CONST(LVar0, 1)
+    EVT_SET_CONST(LVar0, PRT_MAIN)
     EVT_SET_CONST(LVar1, ANIM_BattleSushie_Run)
-    EVT_EXEC_WAIT(DoPartnerRunAway)
+    EVT_EXEC_WAIT(EVS_Partner_RunAway)
     EVT_RETURN
     EVT_END
 };
@@ -624,7 +628,7 @@ EvtScript N(executeAction) = {
 
 EvtScript N(returnHome2) = {
     EVT_CALL(PartnerYieldTurn)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_E)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_04)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Fall)
     EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
     EVT_SUB(LVar0, 60)
@@ -677,7 +681,7 @@ EvtScript N(returnHome) = {
 
 EvtScript N(restoreFromSquirt2) = {
     EVT_CALL(PartnerYieldTurn)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_E)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_04)
     EVT_CALL(SetGoalToHome, ACTOR_PARTNER)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleSushie_Run)
     EVT_CALL(FlyToGoal, ACTOR_PARTNER, 30, 0, EASING_COS_IN_OUT)
@@ -921,7 +925,7 @@ EvtScript N(bellyFlop) = {
         EVT_END_CASE_GROUP
         EVT_CASE_OR_EQ(HIT_RESULT_1)
         EVT_CASE_OR_EQ(HIT_RESULT_3)
-            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+            EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
             EVT_CALL(MoveBattleCamOver, 8)
             EVT_EXEC_WAIT(N(returnHome2))
         EVT_END_CASE_GROUP
@@ -979,7 +983,7 @@ EvtScript N(squirt) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_297)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(MoveBattleCamOver, 10)
     EVT_CALL(PartnerTestEnemy, LVar0, DAMAGE_TYPE_WATER | DAMAGE_TYPE_NO_CONTACT, SUPPRESS_EVENT_SPIKY_FRONT | SUPPRESS_EVENT_BURN_CONTACT, 0, 1, BS_FLAGS1_10)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
@@ -1110,7 +1114,7 @@ EvtScript N(waterBlock) = {
     EVT_ADD(LVarF, 6)
     EVT_PLAY_EFFECT(EFFECT_STAT_CHANGE, LVarF, LVar0, LVar1, LVar2, EVT_FLOAT(1.5), 60, 0)
     EVT_WAIT(4)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(PartnerYieldTurn)
     EVT_LABEL(10)
@@ -1126,7 +1130,7 @@ EvtScript N(waterBlock) = {
     EVT_CALL(SetActorYaw, ACTOR_PARTNER, 0)
     EVT_IF_EQ(LVarA, 0)
     EVT_ELSE
-        EVT_CALL(ShowVariableMessageBox, BTL_MSG_26, 60, LVarA)
+        EVT_CALL(ShowVariableMessageBox, BTL_MSG_WATER_BLOCK_BEGIN, 60, LVarA)
     EVT_END_IF
     EVT_CALL(WaitForMessageBoxDone)
     EVT_RETURN
@@ -1183,7 +1187,7 @@ EvtScript N(tidalWave) = {
         EVT_CALL(N(SetScaleTidalWaveCharge))
         EVT_WAIT(1)
     EVT_END_LOOP
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_CALL(MoveBattleCamOver, 5)
     EVT_WAIT(10)
     EVT_CALL(EnableActorBlur, ACTOR_PARTNER, 1)
@@ -1191,7 +1195,7 @@ EvtScript N(tidalWave) = {
     EVT_CALL(SetActorPos, ACTOR_PARTNER, -220, 0, 0)
     EVT_CALL(EnableActorBlur, ACTOR_PARTNER, 0)
     EVT_WAIT(15)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(MoveBattleCamOver, 20)
     EVT_CALL(GetActionSuccessCopy, LVar0)
     EVT_SET(LVarE, LVar0)
@@ -1205,9 +1209,9 @@ EvtScript N(tidalWave) = {
         EVT_END_IF
         EVT_SWITCH(LVarE)
             EVT_CASE_GE(6)
-                EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_WATER | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, 0, 0, LVarF, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40)
+                EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_WATER | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, LVarF, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE | BS_FLAGS1_40)
             EVT_CASE_DEFAULT
-                EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_WATER | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, 0, 0, LVarF, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)
+                EVT_CALL(PartnerDamageEnemy, LVar0, DAMAGE_TYPE_WATER | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 0, LVarF, BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)
         EVT_END_SWITCH
         EVT_WAIT(5)
         EVT_LABEL(10)

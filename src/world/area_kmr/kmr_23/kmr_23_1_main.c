@@ -1,4 +1,5 @@
 #include "kmr_23.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(func_80240010_907A40)) {
     set_curtain_scale_goal(2.0f);
@@ -16,9 +17,9 @@ EvtScript N(D_80241190_908BC0) = {
         EVT_END_LOOP
     EVT_CALL(GetEntryID, LVar0)
     EVT_IF_NE(LVar0, kmr_23_ENTRY_4)
-        EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_24"), kmr_24_ENTRY_0, TRANSITION_6)
+        EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_24"), kmr_24_ENTRY_0, TRANSITION_BEGIN_OR_END_CHAPTER)
     EVT_ELSE
-        EVT_CALL(GotoMapSpecial, EVT_PTR("kzn_19"), kzn_19_ENTRY_3, TRANSITION_15)
+        EVT_CALL(GotoMapSpecial, EVT_PTR("kzn_19"), kzn_19_ENTRY_3, TRANSITION_END_CHAPTER_INTERRUPTED)
     EVT_END_IF
     EVT_CALL(FadeOutMusic, 0, 2000)
     EVT_CALL(N(func_80240010_907A40))

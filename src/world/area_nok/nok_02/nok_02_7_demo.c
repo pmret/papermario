@@ -124,7 +124,7 @@ EvtScript N(EVS_ProvideDemoInputs) = {
         EVT_RETURN
     EVT_END_IF
     EVT_SET(GF_DemoSceneDone, TRUE)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("nok_02"), nok_02_ENTRY_2, TRANSITION_2)
+    EVT_CALL(GotoMapSpecial, EVT_PTR("nok_02"), nok_02_ENTRY_2, TRANSITION_END_DEMO_SCENE_BLACK)
     EVT_WAIT(110)
     EVT_RETURN
     EVT_END
@@ -143,7 +143,7 @@ EvtScript N(EVS_MonitorDemoState) = {
         EVT_RETURN
     EVT_END_IF
     EVT_SET(GF_DemoSceneDone, TRUE)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("nok_02"), nok_02_ENTRY_2, TRANSITION_3)
+    EVT_CALL(GotoMapSpecial, EVT_PTR("nok_02"), nok_02_ENTRY_2, TRANSITION_END_DEMO_SCENE_WHITE)
     EVT_WAIT(110)
     EVT_RETURN
     EVT_END

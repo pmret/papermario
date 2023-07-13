@@ -42,7 +42,7 @@ EffectInstance* lightning_main(
     bp.update = lightning_update;
     bp.renderWorld = lightning_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_LIGHTNING;
 
     effect = shim_create_effect_instance(&bp);
@@ -114,8 +114,8 @@ void lightning_update(EffectInstance* effect) {
     LightningFXData* data = effect->data.lightning;
     s32 unk_00;
 
-    if (effect->flags & 0x10) {
-        effect->flags &= ~0x10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         data->unk_14 = 0;
     }
 

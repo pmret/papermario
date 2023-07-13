@@ -31,7 +31,9 @@ u8 filemenu_yesno_gridData[] = {
     0, 1,
     0, 1,
     0, 1,
+#if !VERSION_PAL
     0, 1
+#endif
 };
 
 MenuWindowBP filemenu_yesno_windowBPs[] = {
@@ -119,12 +121,14 @@ void filemenu_yesno_draw_options_contents(
             xOffset2 = 28;
             yOffset2 = 21;
             break;
+#if !VERSION_PAL
         case 4:
             xOffset1 = 28;
             yOffset1 = 4;
             xOffset2 = 28;
             yOffset2 = 21;
             break;
+#endif
     }
 
     filemenu_draw_message(filemenu_get_menu_message(FILE_MESSAGE_YES), baseX + xOffset1, baseY + yOffset1, 0xFF, 0, 0);
@@ -142,6 +146,9 @@ void filemenu_yesno_draw_options_contents(
     }
 }
 
+#if VERSION_PAL
+INCLUDE_ASM(void, "filemenu/filemenu_yesno", filemenu_yesno_draw_prompt_contents);
+#else
 void filemenu_yesno_draw_prompt_contents(
     MenuPanel* menu,
     s32 baseX, s32 baseY,
@@ -190,6 +197,7 @@ void filemenu_yesno_draw_prompt_contents(
             break;
     }
 }
+#endif
 
 void filemenu_yesno_init(MenuPanel* tab) {
     s32 i;
@@ -202,6 +210,9 @@ void filemenu_yesno_init(MenuPanel* tab) {
     tab->initialized = TRUE;
 }
 
+#if VERSION_PAL
+INCLUDE_ASM(void, "filemenu/filemenu_yesno", filemenu_yesno_handle_input);
+#else
 void filemenu_yesno_handle_input(MenuPanel* menu) {
     s32 oldSelected = menu->selected;
 
@@ -427,6 +438,7 @@ void filemenu_yesno_handle_input(MenuPanel* menu) {
         }
     }
 }
+#endif
 
 void filemenu_yesno_update(MenuPanel* menu) {
 }

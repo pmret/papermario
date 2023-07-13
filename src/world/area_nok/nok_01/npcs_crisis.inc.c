@@ -1,3 +1,5 @@
+#include "sprite/player.h"
+
 EvtScript N(EVS_Scene_RecoverTreeShell) = {
     EVT_WAIT(1)
     EVT_IF_EQ(GF_NOK01_RecoveredTreeShell, TRUE)

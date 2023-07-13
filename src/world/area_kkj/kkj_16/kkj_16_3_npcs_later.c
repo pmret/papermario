@@ -1,4 +1,5 @@
 #include "kkj_16.h"
+#include "sprite/player.h"
 
 #define NAME_SUFFIX _Later
 
@@ -26,7 +27,7 @@ AnimID N(ExtraAnims_HammerBros)[] = {
 EvtScript N(EVS_NpcInteract_HammerBros_01) = {
     EVT_IF_EQ(GF_KKJ16_Gift_ShootingStar, FALSE)
         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 16, MSG_Peach_013A)
-        EVT_CALL(ShowGotItem, ITEM_SHOOTING_STAR, TRUE, 2)
+        EVT_CALL(ShowGotItem, ITEM_SHOOTING_STAR, TRUE, ITEM_PICKUP_FLAG_NO_ANIMS)
         EVT_SET(GF_KKJ16_Gift_ShootingStar, TRUE)
     EVT_ELSE
         EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 16, MSG_Peach_013B)
@@ -88,7 +89,7 @@ EvtScript N(EVS_CapturePeach) = {
     EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_HammerBros_Anim0A, ANIM_HammerBros_Anim02, 0, MSG_Peach_0175)
     EVT_CALL(SetPlayerAnimation, ANIM_Peach2_ForwardSad)
     EVT_WAIT(20)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("kkj_14"), kkj_14_ENTRY_B, TRANSITION_13)
+    EVT_CALL(GotoMapSpecial, EVT_PTR("kkj_14"), kkj_14_ENTRY_B, TRANSITION_PEACH_CAPTURED)
     EVT_WAIT(100)
     EVT_CALL(DisablePlayerInput, FALSE)
     EVT_RETURN

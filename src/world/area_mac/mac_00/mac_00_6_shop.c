@@ -1,29 +1,29 @@
 #include "mac_00.h"
 
 s32 N(ShopMessages)[] = {
-    [SHOP_MSG_BUY_CONFIRM      ] MSG_Shop_00_MAC00, 
+    [SHOP_MSG_BUY_CONFIRM      ] MSG_Shop_00_MAC00,
     [SHOP_MSG_NOT_ENOUGH_COINS ] MSG_Shop_01_MAC00,
     [SHOP_MSG_NOT_ENOUGH_ROOM  ] MSG_Shop_02_MAC00,
     [SHOP_MSG_BUY_THANK_YOU    ] MSG_Shop_03_MAC00,
     [SHOP_MSG_GREETING         ] MSG_Shop_04_MAC00,
     [SHOP_MSG_INSTRUCTIONS     ] MSG_Shop_05_MAC00,
     [SHOP_MSG_NOTHING_TO_SELL  ] MSG_Shop_06_MAC00,
-    [SHOP_MSG_SELL_WHICH       ] MSG_Shop_07_MAC00, 
-    [SHOP_MSG_SELL_CONFIRM     ] MSG_Shop_08_MAC00, 
+    [SHOP_MSG_SELL_WHICH       ] MSG_Shop_07_MAC00,
+    [SHOP_MSG_SELL_CONFIRM     ] MSG_Shop_08_MAC00,
     [SHOP_MSG_SELL_CANCEL      ] MSG_Shop_09_MAC00,
     [SHOP_MSG_SELL_MORE        ] MSG_Shop_0A_MAC00,
     [SHOP_MSG_SELL_THANKS      ] MSG_Shop_0B_MAC00,
     [SHOP_MSG_NOTHING_TO_CHECK ] MSG_Shop_0C_MAC00,
     [SHOP_MSG_NO_CHECK_ROOM    ] MSG_Shop_0D_MAC00,
     [SHOP_MSG_CHECK_WHICH      ] MSG_Shop_0E_MAC00,
-    [SHOP_MSG_CHECK_ACCEPTED   ] MSG_Shop_0F_MAC00, 
-    [SHOP_MSG_CHECK_MORE       ] MSG_Shop_10_MAC00, 
+    [SHOP_MSG_CHECK_ACCEPTED   ] MSG_Shop_0F_MAC00,
+    [SHOP_MSG_CHECK_MORE       ] MSG_Shop_10_MAC00,
     [SHOP_MSG_NOTHING_TO_CLAIM ] MSG_Shop_11_MAC00,
     [SHOP_MSG_NO_CLAIM_ROOM    ] MSG_Shop_12_MAC00,
     [SHOP_MSG_CLAIM_WHICH      ] MSG_Shop_13_MAC00,
     [SHOP_MSG_CLAIM_ACCEPTED   ] MSG_Shop_14_MAC00,
     [SHOP_MSG_CLAIM_MORE       ] MSG_Shop_15_MAC00,
-    [SHOP_MSG_FAREWELL         ] MSG_Shop_16_MAC00, 
+    [SHOP_MSG_FAREWELL         ] MSG_Shop_16_MAC00,
 };
 
 ShopItemData N(Inventory)[] = {
@@ -76,7 +76,7 @@ ShopOwner N(Owner) = {
 };
 
 EvtScript N(EVS_SetupShop) = {
-    EVT_CALL(MakeShop, EVT_PTR(N(ItemPositions)), EVT_PTR(N(Inventory)), EVT_PTR(N(PriceList)), ITEM_ENTITY_FLAG_10000)
+    EVT_CALL(MakeShop, EVT_PTR(N(ItemPositions)), EVT_PTR(N(Inventory)), EVT_PTR(N(PriceList)), ITEM_ENTITY_FLAG_TOSS_LOWER)
     EVT_CALL(MakeShopOwner, EVT_PTR(N(Owner)))
     EVT_RETURN
     EVT_END

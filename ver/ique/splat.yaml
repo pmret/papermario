@@ -299,20 +299,20 @@ segments:
       type: .data
       name: curtains
       subsegments:
-        - [0x4E650, i4, sprite/unk_checkers, 16, 32]
+        - [0x4E650, i4, theater/walls, 16, 32]
         - [0x4E750]
-        - [0x4E7A0, rgba32, sprite/curtains, 32, 32]
+        - [0x4E7A0, rgba32, theater/curtains, 32, 32]
         - [0x4F7A0]
-        - [0x4F7F0, ci4, sprite/checkers, 32, 16]
-        - [0x4F8F0, palette, sprite/checkers]
+        - [0x4F7F0, ci4, theater/floor, 32, 16]
+        - [0x4F8F0, palette, theater/floor]
         - [0x4F910]
-        - [0x4F990, vtx, vtx/curtains1]
-        - [0x4F9F0, vtx, vtx/curtains2]
-        - [0x4FA50, vtx, vtx/curtains3]
-        - [0x4FBE0, vtx, vtx/curtains4]
-        - [0x4FC20, vtx, vtx/curtains5]
-        - [0x4FC60, vtx, vtx/curtains6]
-        - [0x4FE50, vtx, vtx/curtains7]
+        - [0x4F990, vtx, theater/left_wall_vtx]
+        - [0x4F9F0, vtx, theater/right_wall_vtx]
+        - [0x4FA50, vtx, theater/floor_vtx]
+        - [0x4FBE0, vtx, theater/left_inset_shadow_vtx]
+        - [0x4FC20, vtx, theater/right_inset_shadow_vtx]
+        - [0x4FC60, vtx, theater/curtain_vtx]
+        - [0x4FE50, vtx, theater/wall_shadows_vtx]
         - [0x4FED0]
         - [0x501B0, ia8, ui/no_controller, 128, 32]
         - [0x511B0]
@@ -401,7 +401,9 @@ segments:
     vram: 0x8010dab0
     subsegments:
     - [0xA4990, hasm, bss3]
-    - [0xA4990, c, a5dd0_len_114e0]
+    - [0xA4990, c, entity]
+    - [auto, c, game_states]
+    - [auto, c, model]
     - [0xB3140, c, B4580]
     - [0xB5E70, c, entity_model]
     - [0xB8370, c, worker]
@@ -409,17 +411,19 @@ segments:
     - [0xC4010, c, C50A0]
     - [0xCC0F0, c, cd180_len_38f0]
     - [0xCDDB0, c, CEE40]
-    - [0xCF9E0, c, d0a70_len_4fe0]
+    - [0xCF9E0, c, imgfx]
     - [0xD49C0, c, hud_element]
     - [0xDA990, c, dba20_len_350]
     - [0xDACE0, c, trigger]
-    - [0xDB3E0, c, dc470_len_14c0]
+    - [0xDB3E0, c, background]
     - [0xDC8A0, c, audio/ambience]
     - [0xDCA60, c, windows]
     - [0xDD6B0, c, sprite_shading]
     - [0xDE8C0, c, audio/sfx]
     - [0xDFAA0, c, audio/e0b30_len_b80]
-    - [0xE0620, .data, a5dd0_len_114e0]
+    - [0xE0620, .data, entity]
+    - [auto, .data, game_states]
+    - [auto, .data, model]
     - [0xE18C0, .data, B4580]
     - [0xE18D0, .data, entity_model]
     - [0xE18F0, .data, msg]
@@ -438,27 +442,14 @@ segments:
       - [0xE3DE0, vtx, vtx/stencil2]
       - [0xE3F60]
     - [0xE4400, .data, CEE40]
-    - [0xE4480, .data, d0a70_len_4fe0]
+    - [0xE4480, .data, imgfx]
     - [0xE4630, .data, hud_element]
-    - [0xE4790, .data, dc470_len_14c0]
+    - [0xE4790, .data, background]
     - [0xE47B0, .data, audio/ambience]
     - [0xE47C0, .data, windows]
     - [0xE4940, .data, audio/sfx]
     - [0xE4D60, .data, audio/e0b30_len_b80]
-    - [0xE4DB0, .rodata, a5dd0_len_114e0]
-    - [0xE54D0, .rodata, B4580]
-    - [0xE5720, .rodata, entity_model]
-    - [0xE59E0, .rodata, msg]
-    - [0xE60B0, .rodata, C50A0]
-    - [0xE6510, .rodata, cd180_len_38f0]
-    - [0xE65F0, .rodata, CEE40]
-    - [0xE6620, .rodata, d0a70_len_4fe0]
-    - [0xE67B0, .rodata, hud_element]
-    - [0xE6890, .rodata, dc470_len_14c0]
-    - [0xE68B0, .rodata, windows]
-    - [0xE68C0, .rodata, audio/sfx]
-    - [0xE6900, .rodata, audio/e0b30_len_b80]
-    - [0xE6920]
+    - [0xE4DB0]
   - name: evt
     dir: evt
     type: code
@@ -3376,246 +3367,10 @@ segments:
     - [0xE68B50]
 
   - [ 0xE68B50, bin ]
-
-  - start: 0x19E67B8
+  - start: 0x1943000
     align: 8
-    type: pm_npc_sprites
-    dir: sprite
-    name: npc
-    files:
-      - WorldGoombario
-      - WorldKooper
-      - WorldBombette
-      - WorldParakarry
-      - WorldBow
-      - WorldWatt
-      - WorldSushie
-      - WorldLakilester
-      - BattleGoombario
-      - BattleKooper
-      - BattleBombette
-      - BattleParakarry
-      - BattleBow
-      - BattleWatt
-      - BattleSushie
-      - BattleLakilester
-      - KooperWithoutShell
-      - WorldEldstar
-      - WorldMamar
-      - WorldSkolar
-      - WorldMuskular
-      - WorldMisstar
-      - WorldKlevar
-      - WorldKalmar
-      - BattleEldstar
-      - BattleMamar
-      - BattleSkolar
-      - BattleMuskular
-      - BattleMisstar
-      - BattleKlevar
-      - BattleKalmar
-      - Twink
-      - JrTroopa
-      - SpikedJrTroopa
-      - SpikedParaJrTroopa
-      - MageJrTroopa
-      - ParaJrTroopa
-      - Goomba
-      - SpikedGoomba
-      - Paragoomba
-      - KoopaTroopa
-      - ParaTroopa
-      - Fuzzy
-      - Bobomb
-      - BulletBill
-      - BillBlaster
-      - MontyMole
-      - Cleft
-      - Pokey
-      - Bandit
-      - BuzzyBeetle
-      - Swooper
-      - StoneChomp
-      - LargePiranha
-      - SmallPiranha
-      - Sentinel
-      - WorldClubba
-      - BattleClubba
-      - ShyGuy
-      - GrooveGuy
-      - SkyGuy
-      - PyroGuy
-      - SpyGuy
-      - MediGuy
-      - Fuzzipede
-      - SpearGuy
-      - HeartPlant
-      - HurtPlant
-      - MBush
-      - LavaBubble
-      - KentCKoopa
-      - Dayzee
-      - Lakitu
-      - Spiny
-      - Bzzap
-      - RuffPuff
-      - SpikeTop
-      - Duplighost
-      - AlbinoDino
-      - Blooper
-      - BabyBlooper
-      - Gulpit
-      - DryBones
-      - ThrownBone
-      - BonyBeetle
-      - Magikoopa
-      - FlyingMagikoopa
-      - WorldKoopatrol
-      - Koopatrol
-      - HammerBros
-      - BushBasic
-      - BushBlocky
-      - BushDry
-      - BushLeafy
-      - BushMatted
-      - WorldKammy
-      - BattleKammy
-      - GoombaBros
-      - GoombaKing
-      - SpikyGoomnut
-      - DarkToad
-      - KoopaBros
-      - Buzzar
-      - Tutankoopa
-      - ChainChomp
-      - WorldTubba
-      - BattleTubba
-      - TubbasHeart
-      - BigLanternGhost
-      - ShySquadGuy
-      - MarshalGuy
-      - StiltGuy
-      - StiltGuyUnfold
-      - ShyStackGuy
-      - ShyStackUnfold
-      - ShyStackDamage
-      - ShyStackRock
-      - GeneralGuy
-      - GeneralGuyBomb
-      - TankGuy
-      - LavaPiranha
-      - PetitPiranha
-      - LavaBud
-      - HuffNPuff
-      - TuffPuff
-      - Monstar
-      - CrystalKing
-      - WorldBowser
-      - BattleBowser
-      - Luigi
-      - Toad
-      - Toadette
-      - VannaT
-      - ToadKid
-      - ToadGuard
-      - HarryT
-      - ToadMinister
-      - Postmaster
-      - ConductorToad
-      - TrainToad
-      - Fishmael
-      - Musician
-      - Koopa
-      - KoopaWithoutShell
-      - WorldBobomb
-      - Whacka
-      - Dryite
-      - Mouser
-      - Boo
-      - Yoshi
-      - YoshiKid
-      - Raven
-      - Bubulb
-      - Penguin
-      - ShiverToad
-      - AltBandit
-      - Goompa
-      - Goombaria
-      - Gooma
-      - Goompapa
-      - Goomama
-      - TheMaster
-      - Chan
-      - Lee
-      - Merlon
-      - ChetRippo
-      - Rowf
-      - MinhT
-      - RussT
-      - TayceT
-      - FiceT
-      - Bartender
-      - Chanterelle
-      - RipCheato
-      - ChuckQuizmo
-      - Merluvlee
-      - Merlar
-      - Merlow
-      - StarMan
-      - KoloradoWife
-      - KoopaKoot
-      - Kolorado
-      - BattleKolorado
-      - Archeologist
-      - Nomadimouse
-      - WorldMerlee
-      - BattleMerlee
-      - DisguisedMoustafa
-      - Moustafa
-      - Oaklie
-      - Bootler
-      - Yakkey
-      - GourmetGuy
-      - VillageLeader
-      - LeadersFriend
-      - RaphaelRaven
-      - Tolielup
-      - GateFlower
-      - Petunia
-      - Posie
-      - Lily
-      - Rosie
-      - Sun
-      - Lakilulu
-      - Ninji
-      - MayorPenguin
-      - MayorPenguinWife
-      - PenguinPatrol
-      - Herringway
-      - Merle
-      - StarRod
-      - Fire
-      - Coin
-      - ParadePeach
-      - ParadeKoopas
-      - ParadeBurntBowser
-      - ParadeLuigi
-      - ParadePartner
-      - ParadeYoshi
-      - ParadeKolorado
-      - ParadeChick
-      - ParadeIceShow
-      - ParadeToad
-      - ParadeTwirler
-      - ParadeDrummer
-      - ParadeBanner
-      - ParadeHorn
-      - ParadeTubba
-      - ParadeWizard
-      - ParadeMario
-      - ParadeShyGuy
-      - ParadeTwink
-      - Leaf
+    type: pm_sprites
+    name: sprites
   - [0x1B82208, bin] # end of sprite data - todo: figure out what this is
 
   - [0x2800000]

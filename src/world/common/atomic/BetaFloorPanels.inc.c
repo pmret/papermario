@@ -30,7 +30,7 @@ API_CALLABLE(N(CheckShouldFlipFloor)) {
     f32 distance = dist2D(
         playerStatus->position.x, playerStatus->position.z,
         script->array[2], script->array[4]);
-    
+
     script->varTable[0] = 0;
     if (distance < 112.5f) {
         script->varTable[0] = 2;

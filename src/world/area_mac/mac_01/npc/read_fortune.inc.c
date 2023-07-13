@@ -260,12 +260,12 @@ EvtScript N(EVS_Merlon_ReadFortuneFX) = {
     EVT_CALL(PlaySoundAt, SOUND_208, SOUND_SPACE_MODE_0, LVar0, LVar1, LVar2)
     EVT_PLAY_EFFECT(EFFECT_ENERGY_ORB_WAVE, 4, LVar0, LVar1, LVar2, EVT_FLOAT(0.5), 20)
     EVT_WAIT(70)
-    EVT_CALL(func_802D7B10, ArrayVar(2))
+    EVT_CALL(DismissEffect, ArrayVar(2))
     EVT_WAIT(40)
     EVT_CALL(PlaySoundAt, SOUND_207 | SOUND_ID_TRIGGER_CHANGE_SOUND, 0, LVar0, LVar1, LVar2)
     EVT_CALL(N(func_802446AC_804F2C), ArrayVar(1))
     EVT_WAIT(15)
-    EVT_CALL(func_802D7B10, ArrayVar(1))
+    EVT_CALL(DismissEffect, ArrayVar(1))
     EVT_THREAD
         EVT_CALL(N(func_80244308_804B88))
     EVT_END_THREAD

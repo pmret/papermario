@@ -79,7 +79,7 @@ EffectInstance* water_block_main(s32 arg0, f32 x, f32 y, f32 z, f32 arg4, s32 ar
     bpPtr->update = &water_block_update;
     bpPtr->renderWorld = water_block_render;
     bpPtr->unk_00 = 0;
-    bpPtr->unk_14 = NULL;
+    bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_WATER_BLOCK;
 
     effect = shim_create_effect_instance(bpPtr);
@@ -125,12 +125,12 @@ void water_block_update(EffectInstance* effect) {
 
     data = effect->data.waterBlock;
     temp_a0 = data->unk_00;
-    if (effect->flags & 0x10) {
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
         if (temp_a0 == 1) {
-            effect->flags = effect->flags & ~0x10;
+            effect->flags = effect->flags & ~FX_INSTANCE_FLAG_DISMISS;
             data->unk_10 = 4;
         } else {
-            effect->flags = effect->flags & ~0x10;
+            effect->flags = effect->flags & ~FX_INSTANCE_FLAG_DISMISS;
             data->unk_10 = 16;
         }
     }
@@ -226,7 +226,7 @@ void water_block_appendGfx(void *effect) {
     Vtx* var_fp;
     s32 temp_s0;
     s32 i;
-    
+
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->graphics->data));
     shim_guTranslateF(sp20, data->pos.x, data->pos.y, data->pos.z);
@@ -239,7 +239,7 @@ void water_block_appendGfx(void *effect) {
     gMainGfxPos = &gMainGfxPos[80];
 
     temp_s0 = gGameStatusPtr->frameCounter * 4;
-    
+
     for (var_s6 = D_E00B4CF0, i = 0, var_fp = spA8; i < 40; i++, var_s6++, var_fp++) {
         f32 x = var_s6->unk_00 * 10;
         f32 y = var_s6->unk_01 * 10;
@@ -257,7 +257,7 @@ void water_block_appendGfx(void *effect) {
         var_fp->v.ob[0] = x;
         var_fp->v.ob[1] = y;
         var_fp->v.ob[2] = z;
-        
+
         var_fp->v.tc[0] = var_s6->unk_04;
         var_fp->v.tc[1] = var_s6->unk_06;
 
@@ -289,14 +289,14 @@ void water_block_appendGfx(void *effect) {
     gDPSetPrimColor(gMainGfxPos++, 0, 0, data->unk_18, data->unk_1C, data->unk_20, spA4 * 0.3);
     gSPClearGeometryMode(gMainGfxPos++, G_CULL_BOTH);
     gSPSetGeometryMode(gMainGfxPos++, G_CULL_BACK);
-    
+
     gSPVertex(gMainGfxPos++, spA8, 30, 0);
 
     gSPDisplayList(gMainGfxPos++, D_090004D8_3B70C8);
 
     gSPVertex(gMainGfxPos++, &spA8[28], 12, 0);
 
-    gSPDisplayList(gMainGfxPos++, D_09000538_3B7128)    
+    gSPDisplayList(gMainGfxPos++, D_09000538_3B7128)
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }

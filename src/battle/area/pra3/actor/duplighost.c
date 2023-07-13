@@ -1,5 +1,3 @@
-#include "common.h"
-
-#define NAMESPACE b_area_pra3_duplighost
+#include "../area.h"
 
 #include "battle/common/actor/duplighost.inc.c"

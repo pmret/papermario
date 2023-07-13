@@ -41,7 +41,7 @@ EffectInstance* motion_blur_flame_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f
     bp.update = motion_blur_flame_update;
     bp.renderWorld = motion_blur_flame_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_MOTION_BLUR_FLAME;
 
     effect = shim_create_effect_instance(&bp);
@@ -80,8 +80,8 @@ void motion_blur_flame_update(EffectInstance* effect) {
     MotionBlurFlameFXData* data = effect->data.motionBlurFlame;
     s32 temp;
 
-    if (effect->flags & 0x10) {
-        effect->flags &= ~0x10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         data->unk_50 = 30;
     }
     data->unk_54++;

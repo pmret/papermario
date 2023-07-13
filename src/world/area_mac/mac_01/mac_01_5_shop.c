@@ -26,7 +26,7 @@ API_CALLABLE(N(CreateShopInventory)) {
     s32 available;
     s32 count;
     s32 i;
-    
+
     ShopItemData* inventory = heap_malloc(4 * sizeof(ShopItemData));
     s32* buyFlags = heap_malloc(3 * sizeof(s32));
     buyFlags[0] = 0;
@@ -36,7 +36,7 @@ API_CALLABLE(N(CreateShopInventory)) {
     inventory[1].itemID = 0;
     inventory[2].itemID = 0;
     inventory[3].itemID = 0;
-    
+
     if (!evt_get_variable(script, GF_MAC01_RowfBadgesChosen)) {
         available = 0;
         for (i = 0; i < (u32) ARRAY_COUNT(options); i++) {
@@ -46,7 +46,7 @@ API_CALLABLE(N(CreateShopInventory)) {
                 options[available++] = i;
             }
         }
-        
+
         count = 0;
         while (available != 0) {
             randIdx = rand_int(available - 1);
@@ -57,7 +57,7 @@ API_CALLABLE(N(CreateShopInventory)) {
             inventory[count].price = gItemTable[itemID].sellValue;
             inventory[count].descMsg = mac_01_RowfBadgeInventory[shopIdx].descMsg;
             buyFlags[count] = varBaseHasBought + shopIdx;
-            
+
             evt_set_variable(script, GB_MAC01_Rowf_Badge0 + count, shopIdx);
 
             count++;
@@ -84,7 +84,7 @@ API_CALLABLE(N(CreateShopInventory)) {
         }
         script->varTable[3] = TRUE;
     }
-    
+
     script->varTable[0] = count;
     script->varTablePtr[1] = buyFlags;
     script->varTablePtr[2] = inventory;
@@ -99,7 +99,7 @@ s32 N(ShopMessages)[] = {
     [SHOP_MSG_GREETING         ] MSG_Shop_04_MAC00,
     [SHOP_MSG_INSTRUCTIONS     ] MSG_Shop_05_MAC00,
     [SHOP_MSG_NOTHING_TO_SELL  ] MSG_Shop_06_MAC00,
-    [SHOP_MSG_SELL_WHICH       ] MSG_Shop_07_MAC00, 
+    [SHOP_MSG_SELL_WHICH       ] MSG_Shop_07_MAC00,
     [SHOP_MSG_SELL_CONFIRM     ] MSG_Shop_08_MAC00,
     [SHOP_MSG_SELL_CANCEL      ] MSG_Shop_09_MAC00,
     [SHOP_MSG_SELL_MORE        ] MSG_Shop_0A_MAC00,
@@ -107,14 +107,14 @@ s32 N(ShopMessages)[] = {
     [SHOP_MSG_NOTHING_TO_CHECK ] MSG_Shop_0C_MAC00,
     [SHOP_MSG_NO_CHECK_ROOM    ] MSG_Shop_0D_MAC00,
     [SHOP_MSG_CHECK_WHICH      ] MSG_Shop_0E_MAC00,
-    [SHOP_MSG_CHECK_ACCEPTED   ] MSG_Shop_0F_MAC00, 
+    [SHOP_MSG_CHECK_ACCEPTED   ] MSG_Shop_0F_MAC00,
     [SHOP_MSG_CHECK_MORE       ] MSG_Shop_10_MAC00,
     [SHOP_MSG_NOTHING_TO_CLAIM ] MSG_Shop_11_MAC00,
     [SHOP_MSG_NO_CLAIM_ROOM    ] MSG_Shop_12_MAC00,
     [SHOP_MSG_CLAIM_WHICH      ] MSG_Shop_13_MAC00,
     [SHOP_MSG_CLAIM_ACCEPTED   ] MSG_Shop_14_MAC00,
     [SHOP_MSG_CLAIM_MORE       ] MSG_Shop_15_MAC00,
-    [SHOP_MSG_FAREWELL         ] MSG_Shop_16_MAC01, 
+    [SHOP_MSG_FAREWELL         ] MSG_Shop_16_MAC01,
 };
 
 ShopSellPriceData N(RowfDummyPriceList)[] = {
@@ -165,9 +165,9 @@ ShopItemData N(RowfBadgeInventory)[] = {
 };
 
 ShopItemLocation N(RowfItemPositions)[] = {
-    { .posModelID = MODEL_b3, .triggerColliderID = COLLIDER_b3 }, 
-    { .posModelID = MODEL_b2, .triggerColliderID = COLLIDER_b2 }, 
-    { .posModelID = MODEL_b1, .triggerColliderID = COLLIDER_b1 }, 
+    { .posModelID = MODEL_b3, .triggerColliderID = COLLIDER_b3 },
+    { .posModelID = MODEL_b2, .triggerColliderID = COLLIDER_b2 },
+    { .posModelID = MODEL_b1, .triggerColliderID = COLLIDER_b1 },
 };
 
 ShopOwner N(ShopOwnerRowf) = {

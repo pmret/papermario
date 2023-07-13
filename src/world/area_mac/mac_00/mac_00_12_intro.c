@@ -1,4 +1,5 @@
 #include "mac_00.h"
+#include "sprite/player.h"
 
 EvtScript N(EVS_PlayerExitPipe_Intro) = {
     EVT_CALL(DisablePlayerPhysics, TRUE)

@@ -1,4 +1,5 @@
 #include "flo_00.h"
+#include "sprite/player.h"
 
 NpcSettings N(NpcSettings_Dummy) = {
     .height = 24,
@@ -14,7 +15,7 @@ API_CALLABLE(N(UpgradeStarPowerCh6)) {
     set_max_SP(6);
     gPlayerData.curHP = gPlayerData.curMaxHP;
     gPlayerData.curFP = gPlayerData.curMaxFP;
-    sync_status_menu();
+    sync_status_bar();
     return ApiStatus_DONE2;
 }
 

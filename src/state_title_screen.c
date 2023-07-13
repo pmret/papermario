@@ -26,10 +26,10 @@
 s16 D_800779C0[2] = {0, 0};
 
 SaveMetadata gSaveSlotMetadata[4] = {
-    { .filename = {FILENAME_ERROR}, },
-    { .filename = {FILENAME_ERROR}, },
-    { .filename = {FILENAME_ERROR}, },
-    { .filename = {FILENAME_ERROR}, },
+    { .filename = {FILENAME_ERROR} },
+    { .filename = {FILENAME_ERROR} },
+    { .filename = {FILENAME_ERROR} },
+    { .filename = {FILENAME_ERROR} },
 };
 
 u8 gSaveSlotHasData[4] = {TRUE, TRUE, TRUE, TRUE};
@@ -70,10 +70,16 @@ typedef struct TitleDataStruct {
     /* 0xC */ s32 copyrightPalette;
 } TitleDataStruct; // size = 0x10
 
+#if VERSION_JP
+#define COPYRIGHT_WIDTH 128
+#else
+#define COPYRIGHT_WIDTH 144
+#endif
+
 extern s16 D_800A0970;
 extern TitleDataStruct* TitleScreen_ImgList;
 extern s32* TitleScreen_ImgList_Logo;
-extern s32* TitleScreen_ImgList_Copyright;
+extern u8 (*TitleScreen_ImgList_Copyright)[COPYRIGHT_WIDTH];
 extern s32* TitleScreen_ImgList_PressStart;
 #if VERSION_JP
 extern s32* TitleScreen_ImgList_CopyrightPalette;
@@ -94,7 +100,7 @@ void state_init_title_screen(void) {
 
     gOverrideFlags = 0;
     timeFreezeMode = 0;
-    D_8014C248[0] = 1;
+    D_8014C248 = TRUE;
     general_heap_create();
     clear_printers();
     sfx_set_reverb_mode(0);
@@ -109,7 +115,7 @@ void state_init_title_screen(void) {
     general_heap_free(titleData);
 
     TitleScreen_ImgList_Logo = (s32*)(TitleScreen_ImgList->logo + (s32) TitleScreen_ImgList);
-    TitleScreen_ImgList_Copyright = (s32*)(TitleScreen_ImgList->copyright + (s32) TitleScreen_ImgList);
+    TitleScreen_ImgList_Copyright = (u8 (*)[COPYRIGHT_WIDTH]) ((s32*)(TitleScreen_ImgList->copyright + (s32) TitleScreen_ImgList));
     TitleScreen_ImgList_PressStart = (s32*)(TitleScreen_ImgList->pressStart + (s32) TitleScreen_ImgList);
 #if VERSION_JP
     TitleScreen_ImgList_CopyrightPalette = (s32*)(TitleScreen_ImgList->copyrightPalette + (s32) TitleScreen_ImgList);
@@ -450,15 +456,29 @@ void title_screen_draw_press_start(void) {
     gDPSetCombineMode(gMainGfxPos++, G_CC_MODULATEIA_PRIM, G_CC_MODULATEIA_PRIM);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 248, 240, 152, TitleScreen_PressStart_Alpha);
     gDPPipeSync(gMainGfxPos++);
-    gDPLoadTextureBlock(gMainGfxPos++, TitleScreen_ImgList_PressStart, G_IM_FMT_IA, G_IM_SIZ_8b, 128, VAR_1, 0, G_TX_NOMIRROR | G_TX_WRAP,
-              G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD, G_TX_NOLOD);
+    gDPLoadTextureBlock(gMainGfxPos++, TitleScreen_ImgList_PressStart, G_IM_FMT_IA, G_IM_SIZ_8b, 128, VAR_1, 0,
+                        G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
+                        G_TX_NOLOD);
     gSPTextureRectangle(gMainGfxPos++, 384, 548, 896, VAR_2, G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
     gDPPipeSync(gMainGfxPos++);
 }
 
 #if VERSION_IQUE
-INCLUDE_ASM(void, "state_title_screen", title_screen_draw_copyright);
+#define RECT_SIZE 0x28
+#define YL_BASE 724
+#define YH_BASE 764
+#define COPYRIGHT_TEX_CHUNKS 4
+#define COPYRIGHT_IMG(k, i) &TitleScreen_ImgList_Copyright[k]
+#define LTT_LRT 9
 #else
+#define RECT_SIZE 0x40
+#define YL_BASE 764
+#define YH_BASE 828
+#define COPYRIGHT_TEX_CHUNKS 2
+#define COPYRIGHT_IMG(k, i) &TitleScreen_ImgList_Copyright[16 * i]
+#define LTT_LRT 15
+#endif
+
 void title_screen_draw_copyright(f32 arg0) {
     s32 alpha;
     s32 i;
@@ -474,28 +494,30 @@ void title_screen_draw_copyright(f32 arg0) {
         if (alpha < 0) {
             alpha = 0;
         }
-        gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, TEXEL0, TEXEL0, 0,
-                          PRIMITIVE, 0);
+        gDPSetCombineMode(gMainGfxPos++, PM_CC_02, PM_CC_02);
         gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, alpha);
     }
 
 #if VERSION_JP
     gDPLoadTLUT_pal16(gMainGfxPos++, 0, TitleScreen_ImgList_CopyrightPalette);
-    gDPLoadTextureTile_4b(gMainGfxPos++, TitleScreen_ImgList_Copyright, G_IM_FMT_CI, 128, 0, 0, 0, 127, 31, 0,
+    gDPLoadTextureTile_4b(gMainGfxPos++, TitleScreen_ImgList_Copyright, G_IM_FMT_CI,
+                          COPYRIGHT_WIDTH, 0, 0, 0, 127, 31, 0,
                           G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                           G_TX_NOLOD);
-    gSPTextureRectangle(gMainGfxPos++, 388, 764, 900, 892, G_TX_RENDERTILE,
+    gSPTextureRectangle(gMainGfxPos++, 388, YL_BASE, 900, 892, G_TX_RENDERTILE,
                         0, 0, 0x0400, 0x0400);
 #else
-    for (i = 0; i < 2; i++) {
+    for (i = 0; i < COPYRIGHT_TEX_CHUNKS; i++) {
+        s32 k = 10 * i;
         alpha = 0; // TODO figure out why this is needed
-        gDPLoadTextureTile(gMainGfxPos++, &TitleScreen_ImgList_Copyright[0x240 * i], G_IM_FMT_IA, G_IM_SIZ_8b, 144, 32, 0, 0, 143, 15, 0,
+
+        gDPLoadTextureTile(gMainGfxPos++, COPYRIGHT_IMG(k, i), G_IM_FMT_IA, G_IM_SIZ_8b,
+                           COPYRIGHT_WIDTH, 32, 0, 0, 143, LTT_LRT, 0,
                            G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMASK, G_TX_NOMASK, G_TX_NOLOD,
                            G_TX_NOLOD);
-        gSPTextureRectangle(gMainGfxPos++, 356, 764 + (0x40 * i), 932, 828 + (0x40 * i), G_TX_RENDERTILE,
-                            0, 0, 0x0400, 0x0400);
+        gSPTextureRectangle(gMainGfxPos++, 356, YL_BASE + (RECT_SIZE * i), 932, YH_BASE + (RECT_SIZE * i),
+                            G_TX_RENDERTILE, 0, 0, 0x0400, 0x0400);
     }
 #endif
     gDPPipeSync(gMainGfxPos++);
 }
-#endif

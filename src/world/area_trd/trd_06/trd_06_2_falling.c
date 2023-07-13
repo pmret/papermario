@@ -1,5 +1,6 @@
 #include "trd_06.h"
 #include "sprite.h"
+#include "sprite/player.h"
 
 typedef struct FallingSprite {
     /* 0x00 */ s32 animationEnabled;
@@ -49,7 +50,7 @@ void N(appendGfx_FallingSprite)(void) {
     guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gMainGfxPos++, VIRTUAL_TO_PHYSICAL(&gDisplayContext->matrixStack[gMatrixListPos++]),
         G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-    
+
     //TODO use SPR_RASTER_Mario8_XYZ here once they are defined
     if (!falling->animationEnabled) {
         falling->playerSpriteID = SPR_MarioW2;
@@ -93,7 +94,7 @@ API_CALLABLE(N(InitializeFallingSprite)) {
     falling->scale.x = SPRITE_WORLD_SCALE_F;
     falling->scale.y = SPRITE_WORLD_SCALE_F;
     falling->scale.z = SPRITE_WORLD_SCALE_F;
-   
+
     falling->imgfxIdx = imgfx_get_free_instances(1);
     falling->workerID = create_worker_world(0, &N(appendGfx_FallingSprite));
     return ApiStatus_DONE2;
@@ -152,7 +153,7 @@ API_CALLABLE(N(InitializeFallingPartner)) {
 
 API_CALLABLE(N(InitializeGetUp)) {
     FallingSprite* falling = &N(Falling);
-    
+
     falling->playerSpriteID = SPR_Mario1;
     falling->rasterID = 0;
     return ApiStatus_DONE2;

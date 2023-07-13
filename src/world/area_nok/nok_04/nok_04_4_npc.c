@@ -1,6 +1,7 @@
 
 #include "nok_04.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #define NUM_THREAD_SEGMENTS 16
 
@@ -34,7 +35,7 @@ s32 N(TreeHidingSpotPositions)[] = {
     -82, 101, 130,
     38, 164, 130,
     158, 135, 157,
-    281, 156, 202, 
+    281, 156, 202,
 };
 
 #include "common/CosInterpMinMax.inc.c"
@@ -466,13 +467,13 @@ EvtScript N(EVS_Scene_ShuffleFuzzyPositions) = {
                 EVT_CALL(N(GetTreeHidingSpotPos), LVarA, LVar0, LVar1, LVar2)
                 EVT_CALL(NpcJump0, NPC_Fuzzy_01, LVar0, LVar1, LVar2, LVarD)
             EVT_END_THREAD
-            EVT_SET(LocalFlag(0), FALSE)
+            EVT_SET(LFlag0, FALSE)
             EVT_IF_EQ(LVarB, 0)
                 EVT_IF_EQ(LVarC, 3)
-                    EVT_SET(LocalFlag(0), TRUE)
+                    EVT_SET(LFlag0, TRUE)
                 EVT_END_IF
             EVT_END_IF
-            EVT_IF_EQ(LocalFlag(0), FALSE)
+            EVT_IF_EQ(LFlag0, FALSE)
                 EVT_THREAD
                     EVT_CALL(N(GetTreeHidingSpotPos), LVarB, LVar0, LVar1, LVar2)
                     EVT_CALL(SetNpcPos, NPC_Fuzzy_02, LVar0, LVar1, LVar2)
@@ -553,7 +554,7 @@ EvtScript N(EVS_Scene_ShuffleFuzzyPositions) = {
 
 EvtScript N(EVS_FuzzyBoss_TauntFromTree) = {
     EVT_SET(AF_NOK04_PlayingGame, TRUE)
-    EVT_IF_EQ(LocalFlag(0), FALSE)
+    EVT_IF_EQ(LFlag0, FALSE)
         EVT_CALL(DisablePlayerInput, TRUE)
         EVT_THREAD
             EVT_WAIT(20 * DT)
@@ -598,7 +599,7 @@ EvtScript N(EVS_Scene_HideInTree) = {
                     EVT_WAIT(1)
                     EVT_GOTO(0)
                 EVT_END_IF
-            EVT_SET(LocalFlag(0), FALSE)
+            EVT_SET(LFlag0, FALSE)
             EVT_EXEC(N(EVS_FuzzyBoss_TauntFromTree))
             EVT_RETURN
         EVT_CASE_GE(STORY_CH1_KOOPER_JOINED_PARTY)
@@ -671,7 +672,7 @@ EvtScript N(EVS_Scene_HideInTree) = {
     EVT_CALL(PlaySound, SOUND_SHAKE_TREE)
     EVT_CALL(SetPlayerPos, -152, 0, 235)
     EVT_CALL(PlayerMoveTo, 58, 227, 60 * DT)
-    EVT_SET(LocalFlag(0), TRUE)
+    EVT_SET(LFlag0, TRUE)
     EVT_EXEC(N(EVS_FuzzyBoss_TauntFromTree))
     EVT_RETURN
     EVT_END
@@ -828,14 +829,14 @@ API_CALLABLE(N(SetShellChosen)) {
 }
 
 EvtScript N(EVS_ShellPrompt) = {
-    EVT_SET(LocalFlag(10), FALSE)
+    EVT_SET(LFlagA, FALSE)
     EVT_CALL(DisablePlayerInput, TRUE)
     EVT_LABEL(0)
         EVT_CALL(ShowKeyChoicePopup)
         EVT_CALL(CloseChoicePopup)
         EVT_IF_NE(LVar0, 25)
-            EVT_IF_EQ(LocalFlag(10), FALSE)
-                EVT_SET(LocalFlag(10), TRUE)
+            EVT_IF_EQ(LFlagA, FALSE)
+                EVT_SET(LFlagA, TRUE)
                 EVT_CALL(SpeakToPlayer, NPC_Kooper, ANIM_KooperWithoutShell_Talk, ANIM_KooperWithoutShell_Idle, 0, MSG_CH1_00C5)
             EVT_ELSE
                 EVT_CALL(SpeakToPlayer, NPC_Kooper, ANIM_KooperWithoutShell_Talk, ANIM_KooperWithoutShell_Idle, 0, MSG_CH1_00C6)

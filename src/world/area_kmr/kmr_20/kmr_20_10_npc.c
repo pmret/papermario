@@ -1,6 +1,7 @@
 #include "kmr_20.h"
 #include "effects.h"
 #include "animation_script.h"
+#include "sprite/player.h"
 
 extern AnimScript Entity_SimpleSpring_AnimLaunch;
 

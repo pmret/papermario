@@ -1,3 +1,4 @@
+#include "sprite/player.h"
 
 API_CALLABLE(N(UpgradeStarPowerCh4)) {
     PlayerData* playerData = &gPlayerData;
@@ -5,7 +6,7 @@ API_CALLABLE(N(UpgradeStarPowerCh4)) {
     set_max_SP(4);
     playerData->curHP = playerData->curMaxHP;
     playerData->curFP = playerData->curMaxFP;
-    sync_status_menu();
+    sync_status_bar();
     return ApiStatus_DONE2;
 }
 

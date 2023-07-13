@@ -1,4 +1,5 @@
 #include "kkj_00.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/Toad_Stationary.inc.c"
 #include "world/common/npc/Peach.inc.c"

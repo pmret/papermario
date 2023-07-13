@@ -1,10 +1,11 @@
 #include "sam_12.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(SetScreenFadeAmount)) {
     Bytecode* args = script->ptrReadPos;
 
-    set_screen_overlay_params_front(0, evt_get_float_variable(script, *args++));
+    set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, evt_get_float_variable(script, *args++));
     return ApiStatus_DONE2;
 }
 
@@ -52,7 +53,7 @@ s32 N(FlickeringStaticAmts)[] = {
     EVT_FLOAT(80.0),
     EVT_FLOAT(70.0),
     EVT_FLOAT(60.0),
-    EVT_FLOAT(50.0), 
+    EVT_FLOAT(50.0),
 };
 
 EvtScript N(EVS_MerlarFlickering) = {

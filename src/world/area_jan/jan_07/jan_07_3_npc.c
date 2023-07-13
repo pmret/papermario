@@ -1,4 +1,5 @@
 #include "jan_07.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/YoshiKid.inc.c"
 

@@ -57,7 +57,7 @@ void flower_trail_main(s32 triggeredByNpc, f32 posX, f32 posY, f32 posZ, f32 ang
     bp.update = flower_trail_update;
     bp.renderWorld = flower_trail_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_FLOWER_TRAIL;
 
     effect = shim_create_effect_instance(&bp);
@@ -72,7 +72,7 @@ void flower_trail_main(s32 triggeredByNpc, f32 posX, f32 posY, f32 posZ, f32 ang
         part->alive = TRUE;
         part->triggeredByNpc = triggeredByNpc;
         part->unk_7C = 0.0f;
-        
+
         part->pos.x = posX;
         part->pos.y = posY;
         part->pos.z = posZ;

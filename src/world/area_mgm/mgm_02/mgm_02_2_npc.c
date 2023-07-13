@@ -3,6 +3,7 @@
 #include "effects.h"
 #include "model.h"
 #include "entity.h"
+#include "sprite/player.h"
 
 void delete_entity(s32);
 void partner_enable_input(void);
@@ -226,8 +227,8 @@ API_CALLABLE(N(CreateScoreDisplay)) {
 
 API_CALLABLE(N(DisableMenus)) {
     gOverrideFlags |= GLOBAL_OVERRIDES_DISABLE_MENUS;
-    status_menu_ignore_changes();
-    close_status_menu();
+    status_bar_ignore_changes();
+    close_status_bar();
     return ApiStatus_DONE2;
 }
 
@@ -437,7 +438,7 @@ API_CALLABLE(N(RunMinigame)) {
 
     gameFinished = FALSE;
     hittingPeachBlock = FALSE;
-    data = get_enemy(0)->varTablePtr[0];
+    data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTablePtr[SMASH_DATA_VAR_IDX];
 
     for (i = 0; i < NUM_BOXES; i++) {
         if (data->box[i].npcID != -1) {
@@ -618,7 +619,7 @@ API_CALLABLE(N(RunMinigame)) {
                 case BOX_STATE_BOMB_HIT:
                     enable_npc_shadow(npc);
                     npc->duration = 15;
-                    npc->currentAnim = ANIM_Bobomb_Anim05;
+                    npc->currentAnim = ANIM_Bobomb_WalkLit;
                     data->stunFlags |= (STUN_FLAG_STUNNED | STUN_FLAG_CHANGED);
                     data->box[i].state = BOX_STATE_BOMB_ATTACK;
                     get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
@@ -959,7 +960,7 @@ API_CALLABLE(N(CleanupGame)) {
                     if (data->box[i].state != BOX_STATE_BOMB_END) {
                         data->box[i].state = BOX_STATE_BOMB_END;
                         fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, 0.0f, 30, &writeback);
-                        npc->currentAnim = ANIM_Bobomb_Anim1C;
+                        npc->currentAnim = ANIM_Bobomb_Dizzy;
                         enable_npc_shadow(npc);
                     }
                     break;
@@ -978,8 +979,8 @@ API_CALLABLE(N(CreateMinigame)) {
     data->windowB_posX = SCREEN_WIDTH;
     data->timeLeft = PLAY_TIME;
 
-    status_menu_ignore_changes();
-    close_status_menu();
+    status_bar_ignore_changes();
+    close_status_bar();
 
     return ApiStatus_DONE2;
 }
@@ -1841,7 +1842,7 @@ EvtScript N(EVS_NpcInit_Fuzzy) = {
 };
 
 EvtScript N(EVS_NpcInit_Bobomb) = {
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Bobomb_Anim0B)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_Bobomb_AngryIdle)
     EVT_CALL(SetSelfVar, 0, 0)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_8 | NPC_FLAG_JUMPING, TRUE)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_GRAVITY, FALSE)

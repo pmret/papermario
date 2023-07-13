@@ -35,7 +35,7 @@ EffectInstance* small_gold_sparkle_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, 
     bp.update = small_gold_sparkle_update;
     bp.renderWorld = small_gold_sparkle_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_SMALL_GOLD_SPARKLE;
 
     effect = shim_create_effect_instance(&bp);

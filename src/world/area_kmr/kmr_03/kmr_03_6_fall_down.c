@@ -1,4 +1,5 @@
 #include "kmr_03.h"
+#include "sprite/player.h"
 
 EvtScript N(EVS_Scene_FallingDown) = {
     EVT_CALL(UseSettingsFrom, CAM_DEFAULT, -270, 20, -80)

@@ -53,9 +53,7 @@ API_CALLABLE(N(SetWorldColorParams)) {
 #define NAME_SUFFIX
 
 void N(setup_gfx_light_beam)(void) {
-    gDPSetCombineLERP(gMainGfxPos++,
-        TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0,
-        TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0);
+    gDPSetCombineMode(gMainGfxPos++, PM_CC_05, PM_CC_05);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, StarShrineLightBeamAlpha & 0xFF);
 }
 
@@ -69,9 +67,7 @@ API_CALLABLE(N(SetLightBeamAlpha)) {
 s32 N(StarshipShimmerAmt) = 255;
 
 void N(setup_gfx_starship_shimmer)(void) {
-    gDPSetCombineLERP(gMainGfxPos++,
-        TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0,
-        TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0);
+    gDPSetCombineMode(gMainGfxPos++, PM_CC_05, PM_CC_05);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, N(StarshipShimmerAmt));
 }
 
@@ -85,9 +81,7 @@ API_CALLABLE(N(SetStarshipShimmerAmt)) {
 s32 N(UnusedAlphaParam) = 255;
 
 void N(setup_gfx_unused)(void) {
-    gDPSetCombineLERP(gMainGfxPos++,
-        TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0,
-        TEXEL0, 0, SHADE, 0, TEXEL0, 0, PRIMITIVE, 0);
+    gDPSetCombineMode(gMainGfxPos++, PM_CC_05, PM_CC_05);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 0, 0, 0, N(UnusedAlphaParam));
 }
 
@@ -239,7 +233,7 @@ EvtScript N(EVS_Starship_Summon) = {
     EVT_END_LOOP
     EVT_WAIT(40)
     EVT_CALL(PlaySoundAt, SOUND_A3 | SOUND_ID_TRIGGER_CHANGE_SOUND, 0, 0, 250, 0)
-    EVT_CALL(func_802D7B10, LVar9)
+    EVT_CALL(DismissEffect, LVar9)
     EVT_CALL(EnableGroup, MODEL_g277, TRUE)
     EVT_CALL(MakeLerp, 200, 0, 45, EASING_QUADRATIC_OUT)
     EVT_LOOP(0)

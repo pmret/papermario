@@ -6,7 +6,7 @@
 
 API_CALLABLE(N(IsPlayerOnFirstCliff)) {
     s32 result = -1;
-    
+
     if (gPlayerStatus.lastGoodPosition.y > 800.0) {
         result = 0;
     }
@@ -16,7 +16,7 @@ API_CALLABLE(N(IsPlayerOnFirstCliff)) {
     if (result >= 0) {
         evt_set_variable(script, MV_PlayerCliffState, result);
     }
-    
+
     return ApiStatus_BLOCK;
 }
 

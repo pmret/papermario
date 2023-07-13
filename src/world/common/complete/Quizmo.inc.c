@@ -3,6 +3,7 @@
 #include "effects.h"
 #include "model.h"
 #include "sprite/npc/ChuckQuizmo.h"
+#include "sprite/player.h"
 
 #ifndef CHUCK_QUIZMO_NPC_ID
     #error CHUCK_QUIZMO_NPC_ID must be defined for Quizmo.inc.c
@@ -248,7 +249,7 @@ API_CALLABLE(N(Quizmo_HideWorld)) {
             ItemEntity* itemEntity = get_item_entity(i);
 
             if (itemEntity != NULL && itemEntity->flags & ITEM_ENTITY_FLAG_10) {
-                itemEntity->flags |= ITEM_ENTITY_FLAG_8000000;
+                itemEntity->flags |= ITEM_ENTITY_FLAG_HIDING;
             }
         }
 
@@ -302,7 +303,7 @@ API_CALLABLE(N(Quizmo_FadeInWorld)) {
         for (i = 0; i < MAX_ITEM_ENTITIES; i++) {
             ItemEntity* entity = get_item_entity(i);
             if (entity != NULL && entity->flags & ITEM_ENTITY_FLAG_10) {
-                entity->flags &= ~ITEM_ENTITY_FLAG_8000000;
+                entity->flags &= ~ITEM_ENTITY_FLAG_HIDING;
             }
         }
 
@@ -374,8 +375,8 @@ API_CALLABLE(N(Quizmo_DestroyEffects)) {
     QuizmoStageFXData* stageData;
 
     if (isInitialCall) {
-        N(Quizmo_AudienceEffect)->flags |= EFFECT_INSTANCE_FLAG_10;
-        N(Quizmo_VannaTEffect)->flags |= EFFECT_INSTANCE_FLAG_10;
+        N(Quizmo_AudienceEffect)->flags |= FX_INSTANCE_FLAG_DISMISS;
+        N(Quizmo_VannaTEffect)->flags |= FX_INSTANCE_FLAG_DISMISS;
     }
 
     stageData = N(Quizmo_StageEffect)->data.quizmoStage;
@@ -1059,18 +1060,18 @@ EvtScript N(EVS_Quizmo_QuizMain) = {
             EVT_CALL(GetPlayerPos, LVar0, LVar1, LVar2)
             EVT_ADD(LVar1, 50)
             EVT_CALL(N(Quizmo_AddViewRelativeOffset), 0, 0, 83, LVar0, LVar2)
-            EVT_CALL(PlayEffect, 0x7, 2, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-            EVT_CALL(PlayEffect, 0x44, 4, LVar0, LVar1, LVar2, 1, 60, 0, 0, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 2, LVar0, LVar1, LVar2)
+            EVT_PLAY_EFFECT(EFFECT_CONFETTI, 4, LVar0, LVar1, LVar2, 1, 60)
             EVT_WAIT(15)
             EVT_ADD(LVar1, -3)
             EVT_CALL(N(Quizmo_AddViewRelativeOffset), 0, 0, 58, LVar0, LVar2)
-            EVT_CALL(PlayEffect, 0x7, 2, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-            EVT_CALL(PlayEffect, 0x44, 4, LVar0, LVar1, LVar2, 1, 60, 0, 0, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 2, LVar0, LVar1, LVar2)
+            EVT_PLAY_EFFECT(EFFECT_CONFETTI, 4, LVar0, LVar1, LVar2, 1, 60)
             EVT_WAIT(15)
             EVT_ADD(LVar1, 30)
             EVT_CALL(N(Quizmo_AddViewRelativeOffset), 0, 0, 93, LVar0, LVar2)
-            EVT_CALL(PlayEffect, 0x7, 2, LVar0, LVar1, LVar2, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-            EVT_CALL(PlayEffect, 0x44, 4, LVar0, LVar1, LVar2, 1, 60, 0, 0, 0, 0, 0, 0, 0)
+            EVT_PLAY_EFFECT(EFFECT_WALKING_DUST, 2, LVar0, LVar1, LVar2)
+            EVT_PLAY_EFFECT(EFFECT_CONFETTI, 4, LVar0, LVar1, LVar2, 1, 60)
             EVT_WAIT(15)
         EVT_END_THREAD
         EVT_WAIT(20)
@@ -1137,7 +1138,7 @@ EvtScript N(EVS_Quizmo_QuizMain) = {
         EVT_CALL(PlaySound, SOUND_8B)
         EVT_EXEC_GET_TID(N(EVS_Quizmo_WrongAnswer), LVar1)
         EVT_CALL(GetPlayerPos, LVar2, LVar3, LVar4)
-        EVT_CALL(PlayEffect, 0x2B, 0, LVar2, LVar3, LVar4, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        EVT_PLAY_EFFECT(EFFECT_WINDY_LEAVES, 0, LVar2, LVar3, LVar4)
         EVT_CALL(ContinueSpeech, -1, -1, -1, 0, MSG_MGM_000D)
         EVT_CALL(SetNpcAnimation, CHUCK_QUIZMO_NPC_ID, ANIM_ChuckQuizmo_CloseWrong)
         EVT_LOOP(0)

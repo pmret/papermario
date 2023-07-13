@@ -1,5 +1,6 @@
 #include "flo_21.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #include "world/common/enemy/HuffNPuff.h"
 #include "world/common/enemy/TuffPuff.h"

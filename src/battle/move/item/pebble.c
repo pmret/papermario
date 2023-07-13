@@ -2,6 +2,7 @@
 #include "script_api/battle.h"
 #include "ld_addrs.h"
 #include "entity.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_item_pebble
 
@@ -15,10 +16,10 @@ static s32 _pad = 0;
 #include "battle/move/item/pebble.pal.inc.c"
 
 Vtx N(model)[] = {
-    { .v = { { -16, -16, 0 }, FALSE, { 0,    0 },    { 0, 0, 0, 255 }, } },
-    { .v = { { 15,  -16, 0 }, FALSE, { 1024, 0 },    { 0, 0, 0, 255 }, } },
-    { .v = { { 15,  15,  0 }, FALSE, { 1024, 1024 }, { 0, 0, 0, 255 }, } },
-    { .v = { { -16, 15,  0 }, FALSE, { 0,    1024 }, { 0, 0, 0, 255 }, } },
+    { .v = { { -16, -16, 0 }, FALSE, { 0,    0 },    { 0, 0, 0, 255 } } },
+    { .v = { { 15,  -16, 0 }, FALSE, { 1024, 0 },    { 0, 0, 0, 255 } } },
+    { .v = { { 15,  15,  0 }, FALSE, { 1024, 1024 }, { 0, 0, 0, 255 } } },
+    { .v = { { -16, 15,  0 }, FALSE, { 0,    1024 }, { 0, 0, 0, 255 } } },
 };
 
 Gfx N(displayList)[] = {
@@ -48,7 +49,7 @@ EntityModelScript N(modelCommandList) = STANDARD_ENTITY_MODEL_SCRIPT(N(displayLi
 EvtScript N(EVS_UseItem) = {
     EVT_SET_CONST(LVarA, ITEM_PEBBLE)
     EVT_EXEC_WAIT(N(UseItemWithEffect))
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(MoveBattleCamOver, 15)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_Mario1_Throw)
     EVT_CALL(PlaySound, SOUND_THROW)

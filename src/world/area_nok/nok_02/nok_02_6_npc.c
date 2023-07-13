@@ -1,4 +1,5 @@
 #include "nok_02.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/Koopa_Wander.inc.c"
 #include "world/common/npc/KoopaWithoutShell_Patrol.inc.c"
@@ -20,7 +21,7 @@ MAP_STATIC_PAD(1,key_item);
 #include "world/common/complete/LetterDelivery.inc.c"
 
 s32 N(LetterList_Kolorado)[] = {
-    ITEM_LETTER_TO_KOLORADO, ITEM_NONE 
+    ITEM_LETTER_TO_KOLORADO, ITEM_NONE
 };
 
 EvtScript N(EVS_LetterPrompt_Kolorado) = {

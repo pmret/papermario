@@ -1,30 +1,3 @@
-#include "common.h"
-#include "battle/battle.h"
-#include "mapfs/dgb_bt04_shape.h"
+#include "../area.h"
 
-#define NAMESPACE b_area_dgb_dgb_04
-
-EvtScript N(EVS_PreBattle) = {
-    EVT_CALL(SetSpriteShading, SHADING_NONE)
-    EVT_RETURN
-    EVT_END
-};
-
-EvtScript N(EVS_PostBattle) = {
-    EVT_RETURN
-    EVT_END
-};
-
-s32 N(ForegroundModels)[] = {
-    MODEL_kumo1,
-    STAGE_MODEL_LIST_END
-};
-
-Stage NAMESPACE = {
-    .texture = "dgb_tex",
-    .shape = "dgb_bt04_shape",
-    .hit = "dgb_bt04_hit",
-    .preBattle = &N(EVS_PreBattle),
-    .postBattle = &N(EVS_PostBattle),
-    .foregroundModelList = N(ForegroundModels),
-};
+#include "battle/common/stage/area_dgb/dgb_04.inc.c"

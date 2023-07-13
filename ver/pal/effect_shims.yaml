@@ -32,7 +32,7 @@
 - shim_guPositionF
 - shim_guOrthoF
 - shim_guFrustumF
-- shim_func_80138D88
+- shim_draw_prev_frame_buffer_at_screen_pos
 - shim_draw_box
 - shim_draw_msg
 - shim_get_msg_width

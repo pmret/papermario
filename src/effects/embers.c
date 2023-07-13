@@ -45,7 +45,7 @@ EffectInstance* embers_main(
     bp.update = embers_update;
     bp.renderWorld = embers_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_EMBERS;
 
     effect = shim_create_effect_instance(&bp);
@@ -54,11 +54,11 @@ EffectInstance* embers_main(
     ASSERT(effect->data.embers != NULL);
 
     part->unk_00 = arg0;
-    part->unk_1C = 0;
+    part->lifetime = 0;
     if (arg8 <= 0) {
-        part->unk_18 = 1000;
+        part->timeLeft = 1000;
     } else {
-        part->unk_18 = arg8;
+        part->timeLeft = arg8;
     }
     part->unk_2C = 0;
     part->unk_04 = arg1;
@@ -96,38 +96,38 @@ void embers_update(EffectInstance* effect) {
     EmbersFXData* part = effect->data.embers;
     f32 unk_10;
     f32 unk_14;
-    s32 unk_1C;
+    s32 time;
     f32 unk_68;
     f32 unk_6C;
     s32 i;
 
-    if (effect->flags & 0x10) {
-        effect->flags &= ~0x10;
-        part->unk_18 = 0x10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
+        part->timeLeft = 16;
     }
 
-    if (part->unk_18 < 1000) {
-        part->unk_18--;
+    if (part->timeLeft < 1000) {
+        part->timeLeft--;
     }
 
-    part->unk_1C++;
-    if (part->unk_1C > 324000) {
-        part->unk_1C = 256;
+    part->lifetime++;
+    if (part->lifetime > 324000) {
+        part->lifetime = 256;
     }
 
-    if (part->unk_18 < 0) {
+    if (part->timeLeft < 0) {
         shim_remove_effect(effect);
         return;
     }
 
-    unk_1C = part->unk_1C;
+    time = part->lifetime;
 
-    if (part->unk_18 < 16) {
-        part->unk_2C = part->unk_18 * 16;
+    if (part->timeLeft < 16) {
+        part->unk_2C = part->timeLeft * 16;
     }
 
-    if (unk_1C < 16) {
-        part->unk_2C = unk_1C * 16 + 15;
+    if (time < 16) {
+        part->unk_2C = time * 16 + 15;
     }
 
     unk_10 = part->unk_10;

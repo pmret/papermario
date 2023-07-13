@@ -1,5 +1,6 @@
 #include "pra_32.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #include "world/common/enemy/CrystalKing.inc.c"
 #include "world/common/npc/StarSpirit.inc.c"

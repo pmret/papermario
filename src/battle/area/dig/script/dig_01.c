@@ -1,7 +1,6 @@
-#include "common.h"
-#include "script_api/battle.h"
+#include "../area.h"
 
-#define NAMESPACE b_area_dig_dig_01_script
+#define NAMESPACE A(dig_01_script)
 
 #include "common/SetDemoBattleBeginDelay.inc.c"
 
@@ -27,7 +26,7 @@ API_CALLABLE(N(SetupDemoPlayerMove)) {
 EvtScript NAMESPACE = {
     EVT_WAIT(3)
     EVT_CALL(SetCamViewport, CAM_BATTLE, 29, 20, 262, 177)
-    EVT_CALL(func_802535B4, 0)
+    EVT_CALL(EnableBattleStatusBar, FALSE)
     EVT_SET(LVar0, 15)
     EVT_CALL(N(SetDemoBattleBeginDelay))
     EVT_CALL(WaitForState, BATTLE_STATE_PLAYER_MENU)

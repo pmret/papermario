@@ -52,7 +52,7 @@ void set_goal_pos_to_part(ActorState* state, s32 actorID, s32 partID) {
             state->goalPos.x = actor->currentPos.x + part->partOffset.x * actor->scalingFactor;
             state->goalPos.y = actor->currentPos.y + part->partOffset.y * actor->scalingFactor;
             state->goalPos.z = actor->currentPos.z + 10.0f;
-            if (actor->stoneStatus == STATUS_STONE) {
+            if (actor->stoneStatus == STATUS_KEY_STONE) {
                 state->goalPos.y -= actor->scalingFactor * 5.0f;
             }
             break;
@@ -190,15 +190,15 @@ ApiStatus GetLastElement(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80269E80(Evt* script, s32 isInitialCall) {
-    evt_set_variable(script, *script->ptrReadPos, gBattleStatus.unk_19A);
+ApiStatus GetDamageSource(Evt* script, s32 isInitialCall) {
+    evt_set_variable(script, *script->ptrReadPos, gBattleStatus.currentDamageSource);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_80269EAC(Evt* script, s32 isInitialCall) {
-    s32 a0 = *script->ptrReadPos;
+ApiStatus SetDamageSource(Evt* script, s32 isInitialCall) {
+    s32 damageSource = *script->ptrReadPos;
 
-    gBattleStatus.unk_19A = a0;
+    gBattleStatus.currentDamageSource = damageSource;
     return ApiStatus_DONE2;
 }
 
@@ -410,21 +410,21 @@ ApiStatus SetGoalPos(Evt* script, s32 isInitialCall) {
     actor = get_actor(actorID);
     walk = &actor->state;
 
-    if (*args == -12345678) {
+    if (*args == ACTOR_API_SKIP_ARG) {
         x = walk->goalPos.x;
     } else {
         x = evt_get_variable(script, *args);
     }
 
     *args++;
-    if (*args == -12345678) {
+    if (*args == ACTOR_API_SKIP_ARG) {
         y = walk->goalPos.y;
     } else {
         y = evt_get_variable(script, *args);
     }
 
     *args++;
-    if (*args == -12345678) {
+    if (*args == ACTOR_API_SKIP_ARG) {
         z = walk->goalPos.z;
     } else {
         z = evt_get_variable(script, *args);
@@ -450,21 +450,21 @@ ApiStatus SetIdleGoal(Evt* script, s32 isInitialCall) {
     actor = get_actor(actorID);
     fly = &actor->fly;
 
-    if (*args == -12345678) {
+    if (*args == ACTOR_API_SKIP_ARG) {
         x = actor->fly.goalPos.x;
     } else {
         x = evt_get_variable(script, *args);
     }
 
     *args++;
-    if (*args == -12345678) {
+    if (*args == ACTOR_API_SKIP_ARG) {
         y = fly->goalPos.y;
     } else {
         y = evt_get_variable(script, *args);
     }
 
     *args++;
-    if (*args == -12345678) {
+    if (*args == ACTOR_API_SKIP_ARG) {
         z = fly->goalPos.z;
     } else {
         z = evt_get_variable(script, *args);
@@ -1186,15 +1186,16 @@ ApiStatus AddPartDispOffset(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8026BF48(Evt* script, s32 isInitialCall) {
+ApiStatus FreezeBattleState(Evt* script, s32 isInitialCall) {
     BattleStatus* battleStatus = &gBattleStatus;
     BattleStatus* battleStatus2 = &gBattleStatus;
     Bytecode* args = script->ptrReadPos;
+    b32 increaseFreeze = evt_get_variable(script, *args++);
 
-    if (evt_get_variable(script, *args++) != 0) {
-        battleStatus->unk_8C++;
-    } else if (battleStatus->unk_8C > 0) {
-        battleStatus2->unk_8C--;
+    if (increaseFreeze) {
+        battleStatus->stateFreezeCount++;
+    } else if (battleStatus->stateFreezeCount > 0) {
+        battleStatus2->stateFreezeCount--;
     }
 
     return ApiStatus_DONE2;
@@ -1932,15 +1933,15 @@ ApiStatus HPBarToHome(Evt* script, s32 isInitialCall) {
     }
 
     actor = get_actor(actorID);
-    actor->healthBarPosition.x = actor->homePos.x + actor->actorBlueprint->hpBarOffset.x;
-    actor->healthBarPosition.y = actor->homePos.y + actor->actorBlueprint->hpBarOffset.y;
-    actor->healthBarPosition.z = actor->homePos.z;
+    actor->healthBarPos.x = actor->homePos.x + actor->actorBlueprint->healthBarOffset.x;
+    actor->healthBarPos.y = actor->homePos.y + actor->actorBlueprint->healthBarOffset.y;
+    actor->healthBarPos.z = actor->homePos.z;
 
     if (actor->flags & ACTOR_FLAG_UPSIDE_DOWN) {
-        actor->healthBarPosition.y = actor->homePos.y - actor->size.y - actor->actorBlueprint->hpBarOffset.y;
+        actor->healthBarPos.y = actor->homePos.y - actor->size.y - actor->actorBlueprint->healthBarOffset.y;
     }
 
-    actor->hpFraction = (actor->currentHP * 25) / actor->maxHP;
+    actor->healthFraction = (actor->currentHP * 25) / actor->maxHP;
 
     return ApiStatus_DONE2;
 }
@@ -1955,15 +1956,15 @@ ApiStatus HPBarToCurrent(Evt* script, s32 isInitialCall) {
     }
 
     actor = get_actor(actorID);
-    actor->healthBarPosition.x = actor->currentPos.x + actor->actorBlueprint->hpBarOffset.x;
-    actor->healthBarPosition.y = actor->currentPos.y + actor->actorBlueprint->hpBarOffset.y;
-    actor->healthBarPosition.z = actor->currentPos.z;
+    actor->healthBarPos.x = actor->currentPos.x + actor->actorBlueprint->healthBarOffset.x;
+    actor->healthBarPos.y = actor->currentPos.y + actor->actorBlueprint->healthBarOffset.y;
+    actor->healthBarPos.z = actor->currentPos.z;
 
     if (actor->flags & ACTOR_FLAG_UPSIDE_DOWN) {
-        actor->healthBarPosition.y = actor->currentPos.y - actor->size.y - actor->actorBlueprint->hpBarOffset.y;
+        actor->healthBarPos.y = actor->currentPos.y - actor->size.y - actor->actorBlueprint->healthBarOffset.y;
     }
 
-    actor->hpFraction = (actor->currentHP * 25) / actor->maxHP;
+    actor->healthFraction = (actor->currentHP * 25) / actor->maxHP;
 
     return ApiStatus_DONE2;
 }
@@ -1976,7 +1977,7 @@ ApiStatus func_8026D8EC(Evt* script, s32 isInitialCall) {
         actorID = script->owner1.actorID;
     }
 
-    func_80266AF8(get_actor(actorID));
+    hide_actor_health_bar(get_actor(actorID));
 
     return ApiStatus_DONE2;
 }
@@ -1996,39 +1997,39 @@ ApiStatus func_8026D940(Evt* script, s32 isInitialCall) {
 
     actor = get_actor(actorID);
 
-    actor->unk_198.x = x;
-    actor->unk_198.y = y;
-    actor->healthBarPosition.x = actor->homePos.x + actor->actorBlueprint->hpBarOffset.x + actor->unk_198.x;
-    actor->healthBarPosition.y = actor->homePos.y + actor->actorBlueprint->hpBarOffset.y + actor->unk_198.y;
-    actor->healthBarPosition.z = actor->homePos.z;
+    actor->healthBarOffset.x = x;
+    actor->healthBarOffset.y = y;
+    actor->healthBarPos.x = actor->homePos.x + actor->actorBlueprint->healthBarOffset.x + actor->healthBarOffset.x;
+    actor->healthBarPos.y = actor->homePos.y + actor->actorBlueprint->healthBarOffset.y + actor->healthBarOffset.y;
+    actor->healthBarPos.z = actor->homePos.z;
 
     if (actor->flags & ACTOR_FLAG_UPSIDE_DOWN) {
-        actor->healthBarPosition.y = actor->homePos.y - actor->size.y;
+        actor->healthBarPos.y = actor->homePos.y - actor->size.y;
     }
 
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8026DA94(Evt* script, s32 isInitialCall) {
+ApiStatus SetActorStatusOffsets(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     Actor* actor;
-    s32 a, b, c, d;
+    s32 iconX, iconY, textX, textY;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    a = evt_get_variable(script, *args++);
-    b = evt_get_variable(script, *args++);
-    c = evt_get_variable(script, *args++);
-    d = evt_get_variable(script, *args++);
+    iconX = evt_get_variable(script, *args++);
+    iconY = evt_get_variable(script, *args++);
+    textX = evt_get_variable(script, *args++);
+    textY = evt_get_variable(script, *args++);
 
     actor = get_actor(actorID);
-    actor->unk_194 = a;
-    actor->unk_195 = b;
-    actor->unk_196 = c;
-    actor->unk_197 = d;
+    actor->statusIconOffset.x = iconX;
+    actor->statusIconOffset.y = iconY;
+    actor->statusTextOffset.x = textX;
+    actor->statusTextOffset.y = textY;
 
     return ApiStatus_DONE2;
 }
@@ -2043,7 +2044,7 @@ ApiStatus SummonEnemy(Evt* script, s32 isInitialCall) {
     s32 i, j;
     u16 enemyID1, enemyID2;
     s32 priority1, priority2;
-    s32 tempPriority;
+    s32 basePriority;
 
     if (isInitialCall) {
         script->functionTemp[0] = 0;
@@ -2052,70 +2053,71 @@ ApiStatus SummonEnemy(Evt* script, s32 isInitialCall) {
     switch (script->functionTemp[0]) {
         case 0:
             script->functionTempPtr[1] = create_actor((FormationRow*)evt_get_variable(script, *args++));
-            script->functionTemp[2] = evt_get_variable(script, *args++);
+            script->functionTemp[2] = evt_get_variable(script, *args++); // isLowPriority
             script->functionTemp[0] = 1;
             break;
         case 1:
             actor2 = script->functionTempPtr[1];
-            if (does_script_exist(actor2->takeTurnScriptID) == FALSE) {
-                enemyIDs = battleStatus->enemyIDs;
-                if (battleStatus->nextEnemyIndex == 0) {
-                    numEnemies = 0;
-                    for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
-                        if (battleStatus->enemyActors[i]) {
-                            battleStatus->enemyIDs[numEnemies++] = i | 0x200;
-                        }
-                    }
-                    battleStatus->numEnemyActors = numEnemies;
-                    if (script->functionTemp[2] != 0) {
-                        tempPriority = -1000;
-                    } else {
-                        tempPriority = 1000;
-                    }
-                    enemyIDs = battleStatus->enemyIDs;
-                    for (i = 0; i < numEnemies - 1; i++) {
-                        for (j = i + 1; j < numEnemies; j++) {
-                            enemyID1 = enemyIDs[i];
-                            actor1 = battleStatus->enemyActors[(u8) enemyID1];
-                            priority1 = actor1->turnPriority;
-                            if (actor1 == actor2) {
-                                priority1 += tempPriority;
-                            }
-                            enemyID2 = enemyIDs[j];
-                            actor1 = battleStatus->enemyActors[(u8) enemyID2];
-                            priority2 = actor1->turnPriority;
-                            if (actor1 == actor2) {
-                                priority2 += tempPriority;
-                            }
-                            if (priority1 < priority2) {
-                                enemyIDs[i] = enemyID2;
-                                enemyIDs[j] = enemyID1;
-                            }
-                        }
-                    }
-                } else {
-                    numEnemies = battleStatus->numEnemyActors;
-                    for (i = 0; i < numEnemies; i++){
-                        if (battleStatus->enemyActors[(u8) enemyIDs[i]] == actor2) {
-                            enemyIDs[i] = -1;
-                        }
-                    }
-                    if (script->functionTemp[2] == 0) {
-                        for (i = numEnemies; i >= battleStatus->nextEnemyIndex; i--) {
-                            battleStatus->enemyIDs[i] = battleStatus->enemyIDs[i - 1];
-                        }
-                        battleStatus->enemyIDs[battleStatus->nextEnemyIndex - 1] = actor2->actorID;
-                        battleStatus->numEnemyActors++;
-                        battleStatus->nextEnemyIndex++;
-                    } else {
-                        battleStatus->enemyIDs[battleStatus->numEnemyActors] = actor2->actorID;
-                        battleStatus->numEnemyActors++;
+            if (does_script_exist(actor2->takeTurnScriptID)) {
+                break;
+            }
+            
+            enemyIDs = battleStatus->enemyIDs;
+            if (battleStatus->nextEnemyIndex == 0) {
+                numEnemies = 0;
+                for (i = 0; i < ARRAY_COUNT(battleStatus->enemyActors); i++) {
+                    if (battleStatus->enemyActors[i]) {
+                        battleStatus->enemyIDs[numEnemies++] = i | ACTOR_CLASS_ENEMY;
                     }
                 }
-                script->varTable[0] = actor2->actorID;
-                return ApiStatus_DONE2;
+                battleStatus->numEnemyActors = numEnemies;
+                if (script->functionTemp[2]) {
+                    basePriority = -1000;
+                } else {
+                    basePriority = 1000;
+                }
+                enemyIDs = battleStatus->enemyIDs;
+                for (i = 0; i < numEnemies - 1; i++) {
+                    for (j = i + 1; j < numEnemies; j++) {
+                        enemyID1 = enemyIDs[i];
+                        actor1 = battleStatus->enemyActors[enemyID1 & 0xFF];
+                        priority1 = actor1->turnPriority;
+                        if (actor1 == actor2) {
+                            priority1 += basePriority;
+                        }
+                        enemyID2 = enemyIDs[j];
+                        actor1 = battleStatus->enemyActors[enemyID2 & 0xFF];
+                        priority2 = actor1->turnPriority;
+                        if (actor1 == actor2) {
+                            priority2 += basePriority;
+                        }
+                        if (priority1 < priority2) {
+                            enemyIDs[i] = enemyID2;
+                            enemyIDs[j] = enemyID1;
+                        }
+                    }
+                }
+            } else {
+                numEnemies = battleStatus->numEnemyActors;
+                for (i = 0; i < numEnemies; i++){
+                    if (battleStatus->enemyActors[enemyIDs[i] & 0xFF] == actor2) {
+                        enemyIDs[i] = -1;
+                    }
+                }
+                if (script->functionTemp[2] == 0) {
+                    for (i = numEnemies; i >= battleStatus->nextEnemyIndex; i--) {
+                        battleStatus->enemyIDs[i] = battleStatus->enemyIDs[i - 1];
+                    }
+                    battleStatus->enemyIDs[battleStatus->nextEnemyIndex - 1] = actor2->actorID;
+                    battleStatus->numEnemyActors++;
+                    battleStatus->nextEnemyIndex++;
+                } else {
+                    battleStatus->enemyIDs[battleStatus->numEnemyActors] = actor2->actorID;
+                    battleStatus->numEnemyActors++;
+                }
             }
-            break;
+            script->varTable[0] = actor2->actorID;
+            return ApiStatus_DONE2;
     }
     return ApiStatus_BLOCK;
 }
@@ -2131,21 +2133,21 @@ ApiStatus SetOwnerID(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus ActorExists(Evt* script, s32 isInitialCall) {
-    Bytecode isExist;
     Actor* partner = gBattleStatus.partnerActor;
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
+    b32 exists;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
 
-    isExist = get_actor(actorID) != NULL;
+    exists = get_actor(actorID) != NULL;
     if ((actorID == ACTOR_PARTNER) && (partner == NULL)) {
-        isExist = FALSE;
+        exists = FALSE;
     }
 
-    evt_set_variable(script, *args++, isExist);
+    evt_set_variable(script, *args++, exists);
     return ApiStatus_DONE2;
 }
 
@@ -2179,15 +2181,15 @@ ApiStatus func_8026DF88(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus SetBattleMenuDisableFlags(Evt* script, s32 isInitialCall) {
+ApiStatus SetBattleMenuEnabledFlags(Evt* script, s32 isInitialCall) {
     s32 flagsValue = *script->ptrReadPos;
 
-    gBattleStatus.menuDisableFlags = flagsValue;
+    gBattleStatus.enabledMenusFlags = flagsValue;
     return ApiStatus_DONE2;
 }
 
 ApiStatus SetEnabledStarPowers(Evt* script, s32 isInitialCall) {
-    gBattleStatus.enabledStarPowersMask = *script->ptrReadPos;
+    gBattleStatus.enabledStarPowersFlags = *script->ptrReadPos;
     return ApiStatus_DONE2;
 }
 
@@ -2551,70 +2553,77 @@ ApiStatus GetDistanceToGoal(Evt* script, s32 isInitialCall) {
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
-
     actor = get_actor(actorID);
+
     dist = dist2D(actor->currentPos.x, actor->currentPos.z, actor->state.goalPos.x, actor->state.goalPos.z);
     evt_set_variable(script, outVar, dist);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8026EA7C(Evt* script, s32 isInitialCall) {
+ApiStatus SetActorPaletteEffect(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     s32 partID = evt_get_variable(script, *args++);
-    s32 temp_s3 = evt_get_variable(script, *args++);
+    s32 palAdjustment = evt_get_variable(script, *args++);
     Actor* actor;
     ActorPart* actorPart;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
-
     actor = get_actor(actorID);
     actorPart = get_actor_part(actor, partID);
-    func_80266D6C(actorPart, temp_s3);
+
+    set_part_pal_adjustment(actorPart, palAdjustment);
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8026EB20(Evt* script, s32 isInitialCall) {
+ApiStatus SetActorPaletteSwapTimes(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    s32 temp_s3 = evt_get_variable(script, *args++);
+    s32 partID = evt_get_variable(script, *args++);
+    Actor* actor;
+    ActorPart* actorPart;
     DecorationTable* decorationTable;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
+    actor = get_actor(actorID);
+    actorPart = get_actor_part(actor, partID);
+    decorationTable = actorPart->decorationTable;
 
-    decorationTable = get_actor_part(get_actor(actorID), temp_s3)->decorationTable;
-    decorationTable->unk_740 = evt_get_variable(script, *args++);
-    decorationTable->unk_742 = evt_get_variable(script, *args++);
-    decorationTable->unk_744 = evt_get_variable(script, *args++);
-    decorationTable->unk_746 = evt_get_variable(script, *args++);
+    decorationTable->blendPalA = evt_get_variable(script, *args++);
+    decorationTable->blendPalB = evt_get_variable(script, *args++);
+    decorationTable->palswapTimeHoldA = evt_get_variable(script, *args++);
+    decorationTable->palswapTimeAtoB = evt_get_variable(script, *args++);
 
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8026EBF8(Evt* script, s32 isInitialCall) {
+ApiStatus SetActorPaletteSwapParams(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
     s32 partID = evt_get_variable(script, *args++);
+    Actor* actor;
+    ActorPart* actorPart;
     DecorationTable* table;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
+    actor = get_actor(actorID);
+    actorPart = get_actor_part(actor, partID);
+    table = actorPart->decorationTable;
 
-    table = get_actor_part(get_actor(actorID), partID)->decorationTable;
-
-    table->unk_740 = evt_get_variable(script, *args++);
-    table->unk_742 = evt_get_variable(script, *args++);
-    table->unk_744 = evt_get_variable(script, *args++);
-    table->unk_746 = evt_get_variable(script, *args++);
-    table->unk_748 = evt_get_variable(script, *args++);
-    table->unk_74A = evt_get_variable(script, *args++);
-    table->unk_74C = evt_get_variable(script, *args++);
-    table->unk_74E = evt_get_variable(script, *args++);
+    table->blendPalA = evt_get_variable(script, *args++);
+    table->blendPalB = evt_get_variable(script, *args++);
+    table->palswapTimeHoldA = evt_get_variable(script, *args++);
+    table->palswapTimeAtoB = evt_get_variable(script, *args++);
+    table->palswapTimeHoldB = evt_get_variable(script, *args++);
+    table->palswapTimeBtoA = evt_get_variable(script, *args++);
+    table->palswapUnused1 = evt_get_variable(script, *args++);
+    table->palswapUnused2 = evt_get_variable(script, *args++);
 
     return ApiStatus_DONE2;
 }
@@ -2622,16 +2631,18 @@ ApiStatus func_8026EBF8(Evt* script, s32 isInitialCall) {
 ApiStatus func_8026ED20(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 actorID = evt_get_variable(script, *args++);
-    s32 temp_s0_3 = evt_get_variable(script, *args++);
-    s32 temp_s3 = evt_get_variable(script, *args++);
+    s32 partID = evt_get_variable(script, *args++);
+    s32 enable = evt_get_variable(script, *args++);
+    Actor* actor;
     ActorPart* actorPart;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
+    actor = get_actor(actorID);
+    actorPart = get_actor_part(actor, partID);
 
-    actorPart = get_actor_part(get_actor(actorID), temp_s0_3);
-    if (temp_s3) {
+    if (enable) {
         actorPart->flags |= ACTOR_FLAG_1000000;
     } else {
         actorPart->flags &= ~ACTOR_FLAG_1000000;
@@ -2645,12 +2656,16 @@ ApiStatus func_8026EDE4(Evt* script, s32 isInitialCall) {
     s32 actorID = evt_get_variable(script, *args++);
     s32 partID = evt_get_variable(script, *args++);
     s32 temp_s3 = evt_get_variable(script, *args++);
+    Actor* actor;
+    ActorPart* actorPart;
 
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
+    actor = get_actor(actorID);
+    actorPart = get_actor_part(actor, partID);
 
-    func_80266EA8(get_actor_part(get_actor(actorID), partID), temp_s3);
+    func_80266EA8(actorPart, temp_s3);
 
     return ApiStatus_DONE2;
 }
@@ -2667,9 +2682,9 @@ ApiStatus AddActorDecoration(Evt* script, s32 isInitialCall) {
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
-
     actor = get_actor(actorID);
     actorPart = get_actor_part(actor, partID);
+
     add_part_decoration(actorPart, decorationIndex, decorationType);
     return ApiStatus_DONE2;
 }
@@ -2685,9 +2700,9 @@ ApiStatus RemoveActorDecoration(Evt* script, s32 isInitialCall) {
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.enemyID;
     }
-
     actor = get_actor(actorID);
     actorPart = get_actor_part(actor, partID);
+
     remove_part_decoration(actorPart, decorationIndex);
     return ApiStatus_DONE2;
 }
@@ -2704,10 +2719,10 @@ ApiStatus ModifyActorDecoration(Evt* script, s32 isInitialCall) {
     if (actorID == ACTOR_SELF) {
         actorID = script->owner1.actorID;
     }
-
     actor = get_actor(actorID);
     actorPart = get_actor_part(actor, partID);
     decorationtable = actorPart->decorationTable;
+
     decorationtable->unk_8C6[temp_s4].unk00 = evt_get_variable(script, *args++);
     decorationtable->unk_8C6[temp_s4].unk02 = evt_get_variable(script, *args++);
     decorationtable->unk_8C6[temp_s4].unk04 = evt_get_variable(script, *args++);
@@ -2780,61 +2795,61 @@ ApiStatus GetStatusFlags(Evt* script, s32 isInitialCall) {
     actorClass = actor->actorID & ACTOR_CLASS_MASK;
     flags = 0;
 
-    if (debuff != STATUS_END) {
-        if (debuff == STATUS_STOP) {
+    if (debuff != 0) {
+        if (debuff == STATUS_KEY_STOP) {
             flags |= STATUS_FLAG_STOP;
         }
-        if (debuff == STATUS_FROZEN) {
+        if (debuff == STATUS_KEY_FROZEN) {
             flags |= STATUS_FLAG_FROZEN;
         }
-        if (debuff == STATUS_SLEEP) {
+        if (debuff == STATUS_KEY_SLEEP) {
             flags |= STATUS_FLAG_SLEEP;
         }
-        if (debuff == STATUS_PARALYZE) {
+        if (debuff == STATUS_KEY_PARALYZE) {
             flags |= STATUS_FLAG_PARALYZE;
         }
-        if (debuff == STATUS_DIZZY) {
+        if (debuff == STATUS_KEY_DIZZY) {
             flags |= STATUS_FLAG_DIZZY;
         }
-        if (debuff == STATUS_FEAR) {
+        if (debuff == STATUS_KEY_FEAR) {
             flags |= STATUS_FLAG_FEAR;
         }
-        if (debuff == STATUS_POISON) {
+        if (debuff == STATUS_KEY_POISON) {
             flags |= STATUS_FLAG_POISON;
         }
-        if (debuff == STATUS_SHRINK) {
+        if (debuff == STATUS_KEY_SHRINK) {
             flags |= STATUS_FLAG_SHRINK;
         }
     }
 
     switch (actor->staticStatus) {
-        case STATUS_END:
+        case 0:
             break;
-        case STATUS_STATIC:
+        case STATUS_KEY_STATIC:
             flags |= STATUS_FLAG_STATIC;
             break;
     }
 
     switch (actor->stoneStatus) {
-        case STATUS_END:
+        case 0:
             break;
-        case STATUS_STONE:
+        case STATUS_KEY_STONE:
             flags |= STATUS_FLAG_STONE;
             break;
     }
 
     switch (actor->koStatus) {
-        case STATUS_END:
+        case 0:
             break;
-        case STATUS_DAZE:
+        case STATUS_KEY_DAZE:
             flags |= STATUS_FLAG_KO;
             break;
     }
 
     switch (actor->transparentStatus) {
-        case STATUS_END:
+        case 0:
             break;
-        case STATUS_TRANSPARENT:
+        case STATUS_KEY_TRANSPARENT:
             flags |= STATUS_FLAG_TRANSPARENT;
             break;
     }
@@ -2932,8 +2947,8 @@ ApiStatus RemovePartShadow(Evt* script, s32 isInitialCall) {
     return ApiStatus_DONE2;
 }
 
-ApiStatus func_8026F60C(Evt* script, s32 isInitialCall) {
-    gBattleStatus.unk_8D = evt_get_variable(script, *script->ptrReadPos);
+ApiStatus SetEndBattleFadeOutRate(Evt* script, s32 isInitialCall) {
+    gBattleStatus.endBattleFadeOutRate = evt_get_variable(script, *script->ptrReadPos);
     return ApiStatus_DONE2;
 }
 
@@ -3108,7 +3123,7 @@ ApiStatus SetActorType(Evt* script, s32 isInitialCall) {
     actorType = evt_get_variable(script, *args++);
     enemy = get_actor(actorID);
 
-    if (is_actor_hp_bar_visible(enemy)) {
+    if (is_actor_health_bar_visible(enemy)) {
         load_tattle_flags(actorType);
     }
 
@@ -3180,7 +3195,7 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
         script->functionTempPtr[1] = actor;
         script->functionTemp[2] = attackBoost;
 
-        btl_cam_use_preset(BTL_CAM_PRESET_I);
+        btl_cam_use_preset(BTL_CAM_PRESET_08);
         btl_cam_set_zoffset(12);
         btl_cam_target_actor(actor->actorID);
         btl_cam_set_zoom(250);
@@ -3234,7 +3249,7 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
         case 2:
             if (script->functionTemp[3] == 0) {
                 dispatch_event_actor(actor, EVENT_SWAP_PARTNER);
-                btl_cam_use_preset(BTL_CAM_PRESET_C);
+                btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(15);
                 actor->isGlowing = 1;
                 actor->attackBoost += attackBoost;
@@ -3251,7 +3266,7 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
             break;
         case 3:
             if (script->functionTemp[3] == 0) {
-                btl_show_variable_battle_message(BTL_MSG_1D, 60, attackBoost);
+                btl_show_variable_battle_message(BTL_MSG_ATTACK_UP, 60, attackBoost);
                 script->functionTemp[0] = 4;
             } else {
                 script->functionTemp[3]--;
@@ -3260,7 +3275,7 @@ ApiStatus BoostAttack(Evt* script, s32 isInitialCall) {
             break;
         case 4:
             if (btl_is_popup_displayed() == 0) {
-                btl_cam_use_preset(BTL_CAM_PRESET_C);
+                btl_cam_use_preset(BTL_CAM_DEFAULT);
                 script->functionTemp[3] = 10;
                 script->functionTemp[0] = 5;
             }
@@ -3303,7 +3318,7 @@ ApiStatus BoostDefense(Evt* script, s32 isInitialCall) {
         script->functionTempPtr[1] = actor;
         script->functionTemp[2] = defenseBoost;
 
-        btl_cam_use_preset(BTL_CAM_PRESET_I);
+        btl_cam_use_preset(BTL_CAM_PRESET_08);
         btl_cam_set_zoffset(12);
         btl_cam_target_actor(actor->actorID);
         btl_cam_set_zoom(250);
@@ -3358,7 +3373,7 @@ ApiStatus BoostDefense(Evt* script, s32 isInitialCall) {
         case 2:
             if (script->functionTemp[3] == 0) {
                 dispatch_event_actor(actor, EVENT_SWAP_PARTNER);
-                btl_cam_use_preset(BTL_CAM_PRESET_C);
+                btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(15);
                 actor->isGlowing = 1;
                 actor->defenseBoost += defenseBoost;
@@ -3375,7 +3390,7 @@ ApiStatus BoostDefense(Evt* script, s32 isInitialCall) {
             break;
         case 3:
             if (script->functionTemp[3] == 0) {
-                btl_show_variable_battle_message(BTL_MSG_1E, 60, defenseBoost);
+                btl_show_variable_battle_message(BTL_MSG_DEFENCE_UP, 60, defenseBoost);
                 script->functionTemp[0] = 4;
             } else {
                 script->functionTemp[3]--;
@@ -3384,7 +3399,7 @@ ApiStatus BoostDefense(Evt* script, s32 isInitialCall) {
             break;
         case 4:
             if (btl_is_popup_displayed() == 0) {
-                btl_cam_use_preset(BTL_CAM_PRESET_C);
+                btl_cam_use_preset(BTL_CAM_DEFAULT);
                 script->functionTemp[3] = 10;
                 script->functionTemp[0] = 5;
             }
@@ -3425,7 +3440,7 @@ ApiStatus VanishActor(Evt* script, s32 isInitialCall) {
         script->functionTemp[1] = (s32) actor;
         script->functionTemp[2] = vanished;
 
-        btl_cam_use_preset(BTL_CAM_PRESET_I);
+        btl_cam_use_preset(BTL_CAM_PRESET_08);
         btl_cam_set_zoffset(12);
         btl_cam_target_actor(actor->actorID);
         btl_cam_set_zoom(250);
@@ -3469,7 +3484,7 @@ ApiStatus VanishActor(Evt* script, s32 isInitialCall) {
         case 2:
             if (script->functionTemp[3] == 0) {
                 dispatch_event_actor(actor, EVENT_SWAP_PARTNER);
-                btl_cam_use_preset(BTL_CAM_PRESET_C);
+                btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(15);
                 inflict_status(actor, 0xE, vanished);
                 script->functionTemp[3] = 15;
@@ -3481,7 +3496,7 @@ ApiStatus VanishActor(Evt* script, s32 isInitialCall) {
             break;
         case 3:
             if (script->functionTemp[3] == 0) {
-                btl_show_variable_battle_message(BTL_MSG_21, 60, vanished);
+                btl_show_variable_battle_message(BTL_MSG_ENEMY_TRANSPARENT, 60, vanished);
                 script->functionTemp[0] = 4;
             } else {
                 script->functionTemp[3]--;
@@ -3490,7 +3505,7 @@ ApiStatus VanishActor(Evt* script, s32 isInitialCall) {
             break;
         case 4:
             if (btl_is_popup_displayed() == 0) {
-                btl_cam_use_preset(BTL_CAM_PRESET_C);
+                btl_cam_use_preset(BTL_CAM_DEFAULT);
                 script->functionTemp[3] = 10;
                 script->functionTemp[0] = 5;
             }
@@ -3531,7 +3546,7 @@ ApiStatus ElectrifyActor(Evt* script, s32 isInitialCall) {
         script->functionTempPtr[1] = actor;
         script->functionTemp[2] = electrified;
 
-        btl_cam_use_preset(BTL_CAM_PRESET_I);
+        btl_cam_use_preset(BTL_CAM_PRESET_08);
         btl_cam_set_zoffset(12);
         btl_cam_target_actor(actor->actorID);
         btl_cam_set_zoom(250);
@@ -3575,7 +3590,7 @@ ApiStatus ElectrifyActor(Evt* script, s32 isInitialCall) {
         case 2:
             if (script->functionTemp[3] == 0) {
                 dispatch_event_actor(actor, EVENT_SWAP_PARTNER);
-                btl_cam_use_preset(BTL_CAM_PRESET_C);
+                btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(15);
                 inflict_status(actor, 0xB, electrified);
                 script->functionTemp[3] = 15;
@@ -3587,7 +3602,7 @@ ApiStatus ElectrifyActor(Evt* script, s32 isInitialCall) {
             break;
         case 3:
             if (script->functionTemp[3] == 0) {
-                btl_show_variable_battle_message(BTL_MSG_22, 60, electrified);
+                btl_show_variable_battle_message(BTL_MSG_ENEMY_CHARGED, 60, electrified);
                 script->functionTemp[0] = 4;
             } else {
                 script->functionTemp[3]--;
@@ -3596,7 +3611,7 @@ ApiStatus ElectrifyActor(Evt* script, s32 isInitialCall) {
             break;
         case 4:
             if (btl_is_popup_displayed() == 0) {
-                btl_cam_use_preset(BTL_CAM_PRESET_C);
+                btl_cam_use_preset(BTL_CAM_DEFAULT);
                 script->functionTemp[3] = 10;
                 script->functionTemp[0] = 5;
             }
@@ -3641,7 +3656,7 @@ ApiStatus HealActor(Evt* script, s32 isInitialCall) {
         script->functionTempPtr[1] = actor;
         script->functionTemp[2] = hpBoost;
 
-        btl_cam_use_preset(BTL_CAM_PRESET_I);
+        btl_cam_use_preset(BTL_CAM_PRESET_08);
         btl_cam_set_zoffset(12);
         btl_cam_target_actor(actor->actorID);
         btl_cam_move(10);
@@ -3692,7 +3707,7 @@ ApiStatus HealActor(Evt* script, s32 isInitialCall) {
             break;
         case 2:
             if (script->functionTemp[3] == 0) {
-                btl_cam_use_preset(BTL_CAM_PRESET_C);
+                btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(15);
                 actor->currentHP += hpBoost;
                 if (actor->maxHP < actor->currentHP) {

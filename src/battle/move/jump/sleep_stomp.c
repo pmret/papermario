@@ -1,6 +1,7 @@
 #include "common.h"
 #include "script_api/battle.h"
 #include "battle/action_cmd/jump.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_move_sleep_stomp
 
@@ -29,7 +30,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
     EVT_EXEC_WAIT(N(EVS_JumpSupport_K))
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 0)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
-        EVT_EXEC_WAIT(N(EVS_JumpSupport_J))
+        EVT_EXEC_WAIT(N(EVS_JumpSupport_Miss))
         EVT_RETURN
     EVT_END_IF
     EVT_WAIT(1)
@@ -37,10 +38,10 @@ EvtScript N(EVS_UseMove_ImplA) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
             EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_15A, SOUND_0)
-            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, DMG_STATUS_CHANCE(STATUS_FLAG_SLEEP, 3, 75), 1, 80)
+            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, DMG_STATUS_KEY(STATUS_FLAG_SLEEP, 3, 75), 1, 80)
         EVT_CASE_DEFAULT
             EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_15A, SOUND_0)
-            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, DMG_STATUS_CHANCE(STATUS_FLAG_SLEEP, 3, 75), 1, 48)
+            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, DMG_STATUS_KEY(STATUS_FLAG_SLEEP, 3, 75), 1, 48)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
@@ -69,7 +70,7 @@ EvtScript N(EVS_UseMove_ImplA) = {
     EVT_CALL(func_80274A18, 24, 3)
     EVT_WAIT(1)
     EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_15A, SOUND_0)
-    EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, DMG_STATUS_CHANCE(STATUS_FLAG_SLEEP, 3, 100), 1, 224)
+    EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, DMG_STATUS_KEY(STATUS_FLAG_SLEEP, 3, 100), 1, 224)
     EVT_CALL(func_80269550, LVarF)
     EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
     EVT_RETURN
@@ -80,7 +81,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
     EVT_EXEC_WAIT(N(EVS_JumpSupport_K))
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 0)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
-        EVT_EXEC_WAIT(N(EVS_JumpSupport_J))
+        EVT_EXEC_WAIT(N(EVS_JumpSupport_Miss))
         EVT_RETURN
     EVT_END_IF
     EVT_WAIT(1)
@@ -88,10 +89,10 @@ EvtScript N(EVS_UseMove_ImplB) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
             EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_15B, SOUND_0)
-            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, DMG_STATUS_CHANCE(STATUS_FLAG_SLEEP, 3, 75), 2, 80)
+            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, DMG_STATUS_KEY(STATUS_FLAG_SLEEP, 3, 75), 2, 80)
         EVT_CASE_DEFAULT
             EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_15B, SOUND_0)
-            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, DMG_STATUS_CHANCE(STATUS_FLAG_SLEEP, 3, 75), 2, 48)
+            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, DMG_STATUS_KEY(STATUS_FLAG_SLEEP, 3, 75), 2, 48)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
@@ -124,7 +125,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
     EVT_CALL(EnablePlayerBlur, 0)
     EVT_WAIT(1)
     EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_15B, SOUND_0)
-    EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, DMG_STATUS_CHANCE(STATUS_FLAG_SLEEP, 3, 100), 2, 224)
+    EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, DMG_STATUS_KEY(STATUS_FLAG_SLEEP, 3, 100), 2, 224)
     EVT_CALL(func_80269550, LVarF)
     EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
     EVT_RETURN
@@ -135,7 +136,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
     EVT_EXEC_WAIT(N(EVS_JumpSupport_K))
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, 0, 1, 0)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
-        EVT_EXEC_WAIT(N(EVS_JumpSupport_J))
+        EVT_EXEC_WAIT(N(EVS_JumpSupport_Miss))
         EVT_RETURN
     EVT_END_IF
     EVT_WAIT(1)
@@ -143,10 +144,10 @@ EvtScript N(EVS_UseMove_ImplC) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
             EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_15B, SOUND_0)
-            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, DMG_STATUS_CHANCE(STATUS_FLAG_SLEEP, 3, 75), 3, 80)
+            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, DMG_STATUS_KEY(STATUS_FLAG_SLEEP, 3, 75), 3, 80)
         EVT_CASE_DEFAULT
             EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_15B, SOUND_0)
-            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, DMG_STATUS_CHANCE(STATUS_FLAG_SLEEP, 3, 75), 3, 48)
+            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, DMG_STATUS_KEY(STATUS_FLAG_SLEEP, 3, 75), 3, 48)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
@@ -177,7 +178,7 @@ EvtScript N(EVS_UseMove_ImplC) = {
     EVT_CALL(EnablePlayerBlur, 0)
     EVT_WAIT(1)
     EVT_CALL(SetActorSounds, ACTOR_PLAYER, ACTOR_SOUND_HURT, SOUND_15B, SOUND_0)
-    EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, DMG_STATUS_CHANCE(STATUS_FLAG_SLEEP, 3, 100), 3, 224)
+    EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_JUMP, 0, DMG_STATUS_KEY(STATUS_FLAG_SLEEP, 3, 100), 3, 224)
     EVT_CALL(func_80269550, LVarF)
     EVT_EXEC_WAIT(N(EVS_JumpSupport_E))
     EVT_RETURN

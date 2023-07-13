@@ -20,7 +20,7 @@ EffectInstance* whirlwind_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4,
     bp.update = whirlwind_update;
     bp.renderWorld = whirlwind_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_WHIRLWIND;
 
     numParts = 1;
@@ -78,8 +78,8 @@ void whirlwind_update(EffectInstance* effect) {
     f32 temp;
 
     part = effect->data.whirlwind;
-    if ((effect->flags & 0x10)) {
-        effect->flags &= ~0x10;
+    if ((effect->flags & FX_INSTANCE_FLAG_DISMISS)) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         part->unk_10 = 16;
     }
     if (part->unk_10 < 1000) {
@@ -165,7 +165,7 @@ void whirlwind_appendGfx(void* effect) {
     s32 i;
     EffectInstance* eff = (EffectInstance*)effect;
     WhirlwindFXData* data = eff->data.whirlwind;
-    
+
     spA0 = data->unk_10;
     primAlpha = data->primAlpha >> 1;
     spB8 = data->unk_34;
@@ -206,7 +206,7 @@ void whirlwind_appendGfx(void* effect) {
 
     // Reserve 0x88 bytes (17 commands, including this one) for a separate dynamically generated display list
     gSPBranchList(gMainGfxPos, &gMainGfxPos[17]);
-    
+
     // Get a reference to the dynamically generated display list
     triangleDisplayList = ++gMainGfxPos;
 

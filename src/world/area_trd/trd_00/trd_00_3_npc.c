@@ -1,5 +1,6 @@
 #include "trd_00.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 extern EvtScript N(EVS_SetupMusic);
 
@@ -7,11 +8,11 @@ API_CALLABLE(N(UpgradeStarPowerCh1)) {
     set_max_SP(1);
     gPlayerData.curHP = gPlayerData.curMaxHP;
     gPlayerData.curFP = gPlayerData.curMaxFP;
-    sync_status_menu();
+    sync_status_bar();
     return ApiStatus_DONE2;
 }
 
-#include "world/common/todo/SyncStatusMenu.inc.c"
+#include "world/common/todo/SyncStatusBar.inc.c"
 
 NpcSettings N(NpcSettings_KoopaBros) = {
     .height = 34,
@@ -48,22 +49,22 @@ EvtScript N(EVS_NpcIdle_KoopaBros) = {
         EVT_CALL(SetCamSpeed, CAM_DEFAULT, EVT_FLOAT(3.0 / DT))
         EVT_CALL(PanToTarget, CAM_DEFAULT, 0, 1)
     EVT_END_THREAD
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_Anim03)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_Run)
     EVT_CALL(SetNpcFlagBits, NPC_SELF, NPC_FLAG_IGNORE_WORLD_COLLISION, TRUE)
     EVT_CALL(SetNpcSpeed, NPC_SELF, EVT_FLOAT(4.5 / DT))
     EVT_CALL(NpcMoveTo, NPC_SELF, -556, 180, 0)
     EVT_CALL(WaitForCam, CAM_DEFAULT, EVT_FLOAT(1.0))
     EVT_CALL(SetNpcImgFXParams, NPC_SELF, IMGFX_SET_ANIM, IMGFX_ANIM_STARTLE, 2, 1, 0)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_Anim1E)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_Shock)
     EVT_WAIT(12 * DT)
     EVT_CALL(SetNpcImgFXParams, NPC_SELF, IMGFX_CLEAR, 0, 0, 0, 0)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_Anim04)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_Idle)
     EVT_WAIT(10 * DT)
-    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_KoopaBros_Black_Anim14, ANIM_KoopaBros_Black_Anim04, 0, MSG_CH1_00D2)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_Anim02)
+    EVT_CALL(SpeakToPlayer, NPC_SELF, ANIM_KoopaBros_Black_Talk, ANIM_KoopaBros_Black_Idle, 0, MSG_CH1_00D2)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_Walk)
     EVT_CALL(InterpNpcYaw, NPC_SELF, 45, 2)
     EVT_CALL(PlaySoundAtNpc, NPC_SELF, SOUND_173, SOUND_SPACE_MODE_0)
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_Anim03)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_Run)
     EVT_CALL(SetNpcJumpscale, NPC_SELF, EVT_FLOAT(0.8))
     EVT_CALL(GetNpcPos, NPC_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(NpcJump0, NPC_SELF, LVar0, LVar1, LVar2, 8 * DT)
@@ -214,7 +215,7 @@ EvtScript N(D_80241DA4_99BA14) = {
         EVT_WAIT(1)
     EVT_END_LOOP
     EVT_CALL(FullyRestoreSP)
-    EVT_CALL(N(SyncStatusMenu))
+    EVT_CALL(N(SyncStatusBar))
     EVT_LABEL(10)
     EVT_WAIT(30 * DT)
     EVT_CALL(GetNpcPos, NPC_Eldstar, LVar0, LVar1, LVar2)
@@ -313,22 +314,22 @@ NpcData N(NpcData_KoopaBros) = {
     .flags = ENEMY_FLAG_PASSIVE | ENEMY_FLAG_800,
     .drops = NO_DROPS,
     .animations = {
-        .idle   = ANIM_KoopaBros_Green_Anim04,
-        .walk   = ANIM_KoopaBros_Green_Anim02,
-        .run    = ANIM_KoopaBros_Green_Anim03,
-        .chase  = ANIM_KoopaBros_Green_Anim03,
-        .anim_4 = ANIM_KoopaBros_Green_Anim04,
-        .anim_5 = ANIM_KoopaBros_Green_Anim04,
-        .death  = ANIM_KoopaBros_Green_Anim0A,
-        .hit    = ANIM_KoopaBros_Green_Anim0A,
-        .anim_8 = ANIM_KoopaBros_Green_Anim03,
-        .anim_9 = ANIM_KoopaBros_Green_Anim03,
-        .anim_A = ANIM_KoopaBros_Green_Anim03,
-        .anim_B = ANIM_KoopaBros_Green_Anim03,
-        .anim_C = ANIM_KoopaBros_Green_Anim03,
-        .anim_D = ANIM_KoopaBros_Green_Anim03,
-        .anim_E = ANIM_KoopaBros_Green_Anim03,
-        .anim_F = ANIM_KoopaBros_Green_Anim03,
+        .idle   = ANIM_KoopaBros_Green_Idle,
+        .walk   = ANIM_KoopaBros_Green_Walk,
+        .run    = ANIM_KoopaBros_Green_Run,
+        .chase  = ANIM_KoopaBros_Green_Run,
+        .anim_4 = ANIM_KoopaBros_Green_Idle,
+        .anim_5 = ANIM_KoopaBros_Green_Idle,
+        .death  = ANIM_KoopaBros_Green_HurtStill,
+        .hit    = ANIM_KoopaBros_Green_HurtStill,
+        .anim_8 = ANIM_KoopaBros_Green_Run,
+        .anim_9 = ANIM_KoopaBros_Green_Run,
+        .anim_A = ANIM_KoopaBros_Green_Run,
+        .anim_B = ANIM_KoopaBros_Green_Run,
+        .anim_C = ANIM_KoopaBros_Green_Run,
+        .anim_D = ANIM_KoopaBros_Green_Run,
+        .anim_E = ANIM_KoopaBros_Green_Run,
+        .anim_F = ANIM_KoopaBros_Green_Run,
     },
 };
 

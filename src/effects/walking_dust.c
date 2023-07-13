@@ -29,7 +29,7 @@ void walking_dust_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg
     bp.init = walking_dust_init;
     bp.update = walking_dust_update;
     bp.renderWorld = walking_dust_render;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_WALKING_DUST;
 
     effect = shim_create_effect_instance(&bp);

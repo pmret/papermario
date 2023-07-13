@@ -1,9 +1,7 @@
-#! /usr/bin/python3
+#!/usr/bin/env python3
 
-import os
 from sys import argv
 from pathlib import Path
-from itertools import tee
 import struct
 
 def next_multiple(pos, multiple):

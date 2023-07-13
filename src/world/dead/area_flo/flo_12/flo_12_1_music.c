@@ -16,7 +16,7 @@ EvtScript N(EVS_SetupMusic) = {
     EVT_END
 };
 
-EvtScript N(EVS_PushFlowerSong) = { 
+EvtScript N(EVS_PushFlowerSong) = {
     EVT_CALL(PushSong, SONG_FLOWER_NPC_THEME, 3)
     EVT_RETURN
     EVT_END

@@ -1,4 +1,5 @@
 #include "kmr_03.h"
+#include "sprite/player.h"
 
 #include "world/common/util/ChangeNpcToPartner.inc.c"
 

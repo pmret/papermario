@@ -9,6 +9,7 @@
 extern u16 gFrameBuf0[];
 extern u16 gFrameBuf1[];
 extern u16 gFrameBuf2[];
+
 u16* bFrameBuffers[] = {
     gFrameBuf0, gFrameBuf1, gFrameBuf2
 };
@@ -85,7 +86,7 @@ void state_step_battle(void) {
             clear_worker_list();
             hud_element_set_aux_cache(NULL, 0);
             hud_element_clear_cache();
-            reset_status_menu();
+            reset_status_bar();
             clear_item_entity_data();
             clear_script_list();
             clear_npcs();
@@ -194,7 +195,7 @@ void state_step_end_battle(void) {
                     set_background_size(296, 200, 12, 20);
                 }
 
-                load_model_textures(mapSettings->modelTreeRoot, get_asset_offset(wMapTexName, &sizeTemp), sizeTemp);
+                mdl_load_all_textures(mapSettings->modelTreeRoot, get_asset_offset(wMapTexName, &sizeTemp), sizeTemp);
                 calculate_model_sizes();
                 npc_reload_all();
 

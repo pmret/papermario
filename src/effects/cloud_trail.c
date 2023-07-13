@@ -20,7 +20,7 @@ void cloud_trail_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     bp.init = cloud_trail_init;
     bp.update = cloud_trail_update;
     bp.renderWorld = cloud_trail_render;
-    bp.unk_14 = 0;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_CLOUD_TRAIL;
 
     effect = shim_create_effect_instance(&bp);
@@ -46,12 +46,12 @@ void cloud_trail_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
         part->alpha = -1;
         part->unk_28 = (shim_rand_int(10) * 0.03) + 1.4;
         part->unk_2C = (shim_rand_int(10) * 0.03) + 1.5;
-        part->unk_30 = func_E0200000(60);
+        part->unk_30 = effect_rand_int(60);
         part->unk_04 = arg0;
         part->lifetime = 15;
         part->unk_38 = 2.0f;
         part->unk_3C = -0.5f;
-        part->unk_18 = func_E0200000(360);
+        part->unk_18 = effect_rand_int(360);
         part->alpha = -1;
     }
 }

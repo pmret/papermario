@@ -1,6 +1,7 @@
 #include "common.h"
 #include "script_api/battle.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_item_repel_gel
 
@@ -11,7 +12,7 @@ API_CALLABLE(N(func_802A123C_72DDAC)) {
     Actor* player = battleStatus->playerActor;
     ActorPart* part = player->partsTable;
 
-    inflict_status(player, STATUS_TRANSPARENT, script->varTable[0]);
+    inflict_status(player, STATUS_KEY_TRANSPARENT, script->varTable[0]);
     player->statusAfflicted = 0;
     part->flags |= ACTOR_PART_FLAG_100;
 
@@ -34,7 +35,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_CALL(GetItemPower, ITEM_REPEL_GEL, LVar0, LVar1)
     EVT_CALL(N(func_802A123C_72DDAC))
     EVT_WAIT(20)
-    EVT_CALL(ShowMessageBox, BTL_MSG_11, 60)
+    EVT_CALL(ShowMessageBox, BTL_MSG_PLAYER_TRANSPARENT, 60)
     EVT_CALL(WaitForMessageBoxDone)
     EVT_EXEC_WAIT(N(PlayerGoHome))
     EVT_RETURN

@@ -1,64 +1,61 @@
-#include "common.h"
-#include "battle/battle.h"
+#include "area.h"
 
-#define NAMESPACE b_area_dgb
+extern ActorBlueprint A(clubba);
+extern ActorBlueprint A(tubba_blubba);
 
-extern ActorBlueprint N(clubba);
-extern ActorBlueprint N(tubba_blubba);
+extern Stage A(dgb_01);
+extern Stage A(dgb_02);
+extern Stage A(dgb_03);
+extern Stage A(dgb_04);
+extern Stage A(dgb_05);
 
-extern Stage N(dgb_01);
-extern Stage N(dgb_02);
-extern Stage N(dgb_03);
-extern Stage N(dgb_04);
-extern Stage N(dgb_05);
-
-Formation N(Formation_00) = {
-    { .actor = &N(clubba), .home = { .index = 1 }, .priority = 10 },
+Formation A(Formation_00) = {
+    ACTOR_BY_IDX(A(clubba), BTL_POS_GROUND_B, 10),
 };
 
-Formation N(Formation_01) = {
-    { .actor = &N(clubba), .home = { .index = 1 }, .priority = 10 },
-    { .actor = &N(clubba), .home = { .index = 2 }, .priority = 9 },
+Formation A(Formation_01) = {
+    ACTOR_BY_IDX(A(clubba), BTL_POS_GROUND_B, 10),
+    ACTOR_BY_IDX(A(clubba), BTL_POS_GROUND_C, 9),
 };
 
-Formation N(Formation_02) = {
-    { .actor = &N(clubba), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(clubba), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(clubba), .home = { .index = 2 }, .priority = 8 },
+Formation A(Formation_02) = {
+    ACTOR_BY_IDX(A(clubba), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(A(clubba), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(A(clubba), BTL_POS_GROUND_C, 8),
 };
 
-Formation N(Formation_03) = {
-    { .actor = &N(clubba), .home = { .index = 0 }, .priority = 10 },
-    { .actor = &N(clubba), .home = { .index = 1 }, .priority = 9 },
-    { .actor = &N(clubba), .home = { .index = 2 }, .priority = 8 },
-    { .actor = &N(clubba), .home = { .index = 3 }, .priority = 7 },
+Formation A(Formation_03) = {
+    ACTOR_BY_IDX(A(clubba), BTL_POS_GROUND_A, 10),
+    ACTOR_BY_IDX(A(clubba), BTL_POS_GROUND_B, 9),
+    ACTOR_BY_IDX(A(clubba), BTL_POS_GROUND_C, 8),
+    ACTOR_BY_IDX(A(clubba), BTL_POS_GROUND_D, 7),
 };
 
-Vec3i N(vector3D_8021B348) = { 75, 0, 10 };
+Vec3i A(vector3D_8021B348) = { 75, 0, 10 };
 
-Formation N(Formation_04) = {
-    { .actor = &N(tubba_blubba), .home = { .vec = &N(vector3D_8021B348) }, .priority = 10 },
+Formation A(Formation_04) = {
+    ACTOR_BY_POS(A(tubba_blubba), A(vector3D_8021B348), 10),
 };
 
-Formation N(Formation_05) = {
-    { .actor = &N(tubba_blubba), .home = { .vec = &N(vector3D_8021B348) }, .priority = 10, .var0 = 1 },
+Formation A(Formation_05) = {
+    ACTOR_BY_POS(A(tubba_blubba), A(vector3D_8021B348), 10, 1),
 };
 
-BattleList N(Formations) = {
-    BATTLE(N(Formation_00), &N(dgb_01), "ガボンへい"),
-    BATTLE(N(Formation_01), &N(dgb_01), "ガボンへいx２"),
-    BATTLE(N(Formation_02), &N(dgb_01), "ガボンへいx３"),
-    BATTLE(N(Formation_03), &N(dgb_01), "ガボンへいx４"),
-    BATTLE(N(Formation_04), &N(dgb_01), "むてきドガボン"),
-    BATTLE(N(Formation_05), &N(dgb_01), "むてきドガボンせりふなし"),
+BattleList A(Formations) = {
+    BATTLE(A(Formation_00), A(dgb_01), "ガボンへい"),
+    BATTLE(A(Formation_01), A(dgb_01), "ガボンへいx２"),
+    BATTLE(A(Formation_02), A(dgb_01), "ガボンへいx３"),
+    BATTLE(A(Formation_03), A(dgb_01), "ガボンへいx４"),
+    BATTLE(A(Formation_04), A(dgb_01), "むてきドガボン"),
+    BATTLE(A(Formation_05), A(dgb_01), "むてきドガボンせりふなし"),
     {},
 };
 
-StageList N(Stages) = {
-    { "dgb_01", &N(dgb_01) },
-    { "dgb_02", &N(dgb_02) },
-    { "dgb_03", &N(dgb_03) },
-    { "dgb_04", &N(dgb_04) },
-    { "dgb_05", &N(dgb_05) },
+StageList A(Stages) = {
+    STAGE("dgb_01", A(dgb_01)),
+    STAGE("dgb_02", A(dgb_02)),
+    STAGE("dgb_03", A(dgb_03)),
+    STAGE("dgb_04", A(dgb_04)),
+    STAGE("dgb_05", A(dgb_05)),
     {},
 };

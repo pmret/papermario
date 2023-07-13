@@ -1,11 +1,11 @@
-#include "common.h"
 #include "battle/battle.h"
 #include "script_api/battle.h"
 #include "sprite/npc/BattleKalmar.h"
 #include "entity.h"
 #include "model.h"
+#include "sprite/player.h"
 
-extern EntityModelScript D_80283EE8;
+extern EntityModelScript EMS_StarIcon;
 
 #define NAMESPACE battle_move_up_and_away
 
@@ -217,7 +217,7 @@ EvtScript N(802A1E00) = {
 EvtScript N(802A200C) = {
     EVT_CALL(GetOwnerID, LVarA)
     EVT_IF_EQ(LVarA, 0)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(PlaySound, SOUND_2047)
         EVT_THREAD
             EVT_LOOP(5)
@@ -249,7 +249,7 @@ EvtScript N(802A200C) = {
         EVT_CALL(EnableNpcBlur, NPC_BTL_SPIRIT, FALSE)
         EVT_CALL(DeleteNpc, NPC_BTL_SPIRIT)
     EVT_ELSE
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(PlaySound, SOUND_2045)
         EVT_THREAD
             EVT_LOOP(5)
@@ -313,7 +313,7 @@ EvtScript N(EVS_UsePower) = {
     EVT_SET_CONST(LVar0, ANIM_BattleKalmar_Idle)
     EVT_EXEC_WAIT(N(802A1E00))
     EVT_CALL(SetNpcAnimation, NPC_BTL_SPIRIT, ANIM_BattleKalmar_Shout)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
     EVT_WAIT(20)
     EVT_CALL(SetMotionBlurParams, 0, 0, 0, 320, 240, 128, 10)
     EVT_CALL(func_802A1518_7957F8)
@@ -330,11 +330,11 @@ EvtScript N(EVS_UsePower) = {
     EVT_LABEL(0)
     EVT_CALL(SetGoalToTarget, ACTOR_SELF)
     EVT_CALL(func_802A1628_795908)
-    EVT_SET(LocalFlag(0), 0)
+    EVT_SET(LFlag0, FALSE)
     EVT_CALL(ItemCheckHit, LVar1, 0, 0, 0, 0)
     EVT_IF_EQ(LVar1, 6)
         EVT_SET(LVar0, 0)
-        EVT_SET(LocalFlag(0), 1)
+        EVT_SET(LFlag0, TRUE)
     EVT_END_IF
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(0)
@@ -344,7 +344,7 @@ EvtScript N(EVS_UsePower) = {
             EVT_THREAD
                 EVT_CALL(GetOwnerTarget, LVarB, LVar1)
                 EVT_WAIT(10)
-                EVT_CALL(CreateVirtualEntity, LVarA, EVT_PTR(D_80283EE8))
+                EVT_CALL(CreateVirtualEntity, LVarA, EVT_PTR(EMS_StarIcon))
                 EVT_CALL(GetActorPos, LVarB, LVar0, LVar1, LVar2)
                 EVT_SET(LVarD, LVar0)
                 EVT_SET(LVarE, LVar1)
@@ -397,7 +397,7 @@ EvtScript N(EVS_UsePower) = {
                 EVT_CALL(RemoveActor, LVarA)
             EVT_END_THREAD
         EVT_CASE_DEFAULT
-            EVT_IF_EQ(LocalFlag(0), 0)
+            EVT_IF_EQ(LFlag0, FALSE)
                 EVT_CALL(PlayerDamageEnemy, LVar0, 0, SUPPRESS_EVENT_ALL, 0, 0, BS_FLAGS1_FORCE_HIT_IMMUNE | BS_FLAGS1_SP_EVT_ACTIVE)
             EVT_END_IF
     EVT_END_SWITCH
@@ -409,7 +409,7 @@ EvtScript N(EVS_UsePower) = {
     EVT_WAIT(70)
     EVT_CALL(func_802A15B4_795894)
     EVT_EXEC_WAIT(N(802A200C))
-    EVT_CALL(func_80276EFC)
+    EVT_CALL(PlayerYieldTurn)
     EVT_EXEC_WAIT(N(802A245C))
     EVT_RETURN
     EVT_END

@@ -3,6 +3,7 @@
 #include "world/actions.h"
 #include "sprite.h"
 #include "world/partner/watt.h"
+#include "sprite/player.h"
 
 #ifdef SHIFT
 #define inspect_icon_VRAM_DEF inspect_icon_VRAM
@@ -665,7 +666,7 @@ void update_player(void) {
 
     check_input_open_menus();
     if (!(playerStatus->animFlags & PA_FLAG_USING_PEACH_PHYSICS)) {
-        check_input_status_menu();
+        check_input_status_bar();
     }
 
     update_player_shadow();
@@ -781,7 +782,7 @@ void player_reset_data(void) {
     func_800E5520();
 }
 
-s32 func_800DFCF4(void) {
+b32 is_player_dismounted(void) {
     if (gPartnerStatus.partnerActionState == PARTNER_ACTION_USE &&
         (gPartnerStatus.actingPartner == PARTNER_WATT
         || gPartnerStatus.actingPartner == PARTNER_BOW
@@ -824,7 +825,7 @@ s32 get_overriding_player_anim(s32 anim) {
 
     if (anim == ANIM_MarioW1_Lift || anim == ANIM_Peach2_SpreadArms || anim == ANIM_Mario1_Idle) {
         if (!(playerStatus->animFlags & PA_FLAG_USING_PEACH_PHYSICS)) {
-            if (!func_800DFCF4()) {
+            if (!is_player_dismounted()) {
                 return -1;
             }
         } else if (!(playerStatus->animFlags & PA_FLAG_INVISIBLE)) {

@@ -1,4 +1,5 @@
 #include "flo_25.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/GateFlower.inc.c"
 #include "world/common/enemy/TuffPuff.inc.c"

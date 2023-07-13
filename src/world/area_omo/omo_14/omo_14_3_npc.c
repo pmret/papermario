@@ -1,5 +1,6 @@
 #include "omo_14.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(SurroundPlayer)) {
     PlayerStatus* playerStatus = &gPlayerStatus;

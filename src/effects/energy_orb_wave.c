@@ -22,7 +22,7 @@ EffectInstance* energy_orb_wave_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32
     bp.update = energy_orb_wave_update;
     bp.renderWorld = energy_orb_wave_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_ENERGY_ORB_WAVE;
 
     effect = shim_create_effect_instance(&bp);
@@ -88,8 +88,8 @@ void energy_orb_wave_update(EffectInstance* effect) {
     u16 var_4;
     s32 var_3;
 
-    if (effect->flags & EFFECT_INSTANCE_FLAG_10) {
-        effect->flags &= ~EFFECT_INSTANCE_FLAG_10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         data->unk_10 = 30;
     }
 

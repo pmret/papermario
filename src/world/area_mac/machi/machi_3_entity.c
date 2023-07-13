@@ -20,7 +20,7 @@ API_CALLABLE(N(func_80240048_7E73E8)) {
         gOverrideFlags |= GLOBAL_OVERRIDES_10;
     }
 
-    set_screen_overlay_params_front(0, script->functionTemp[1]);
+    set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, script->functionTemp[1]);
 
     if (script->functionTemp[1] == 255) {
         return ApiStatus_DONE2;
@@ -52,7 +52,7 @@ API_CALLABLE(N(func_80240114_7E74B4)) {
         gOverrideFlags |= GLOBAL_OVERRIDES_10;
     }
 
-    set_screen_overlay_params_front(0, script->functionTemp[1]);
+    set_screen_overlay_params_front(OVERLAY_SCREEN_COLOR, script->functionTemp[1]);
 
     if (script->functionTemp[1] == 0) {
         gOverrideFlags &= ~GLOBAL_OVERRIDES_10;

@@ -4,6 +4,7 @@
 #include "common.h"
 
 #define SPR_PLAYER_COLOR_VARIATIONS 6
+#define SPR_PEACH_BTL_PAL_STRIDE 4
 
 enum SpriteIDFields {
     SPRITE_ID_ANIM_MASK         = 0x000000FF,
@@ -85,6 +86,12 @@ typedef struct SpriteInstance {
     /* 0x0C */ s32 currentAnimID;
     /* 0x10 */ s32 notifyValue;
 } SpriteInstance; // size = 0x14
+
+typedef struct PlayerRastersHeader {
+    /* 0x00 */ s32 indexRanges;
+    /* 0x04 */ s32 loadDescriptors;
+    /* 0x08 */ s32 imageData;
+} PlayerRastersHeader; // size = 0xC
 
 typedef struct PlayerSpriteSet {
     /// Number of cache entries.

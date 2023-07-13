@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 import argparse
 import os
@@ -22,6 +22,7 @@ rom_path = root_dir / "ver/current/baserom.z64"
 
 OBJDUMP = "mips-linux-gnu-objdump"
 
+
 @dataclass
 class Symbol:
     name: str
@@ -39,7 +40,6 @@ class Symbol:
 
 @dataclass
 class Bytes:
-    offset: int
     normalized: str
     bytes: bytes
 
@@ -60,10 +60,14 @@ def get_all_unmatched_functions():
 
 def get_func_sizes() -> Dict[str, int]:
     try:
-        result = subprocess.run(['mips-linux-gnu-objdump', '-x', elf_path], stdout=subprocess.PIPE)
+        result = subprocess.run(
+            ["mips-linux-gnu-objdump", "-x", elf_path], stdout=subprocess.PIPE
+        )
         nm_lines = result.stdout.decode().split("\n")
     except:
-        print(f"Error: Could not run objdump on {elf_path} - make sure that the project is built")
+        print(
+            f"Error: Could not run objdump on {elf_path} - make sure that the project is built"
+        )
         sys.exit(1)
 
     sizes: Dict[str, int] = {}
@@ -76,6 +80,7 @@ def get_func_sizes() -> Dict[str, int]:
             sizes[name] = size
 
     return sizes
+
 
 def get_symbol_bytes(func: str) -> Optional[Bytes]:
     if func not in syms or syms[func].rom_end is None:
@@ -204,8 +209,15 @@ def get_hashes(bytes: Bytes, window_size: int) -> list[str]:
     return ret
 
 
-def group_matches(query: str, target: str, matches: list[Match], window_size: int,
-                  min: Optional[int], max: Optional[int], contains: Optional[int]) -> list[Result]:
+def group_matches(
+    query: str,
+    target: str,
+    matches: list[Match],
+    window_size: int,
+    min: Optional[int],
+    max: Optional[int],
+    contains: Optional[int],
+) -> list[Result]:
     ret = []
 
     matches.sort(key=lambda m: m.query_offset)
@@ -228,7 +240,9 @@ def group_matches(query: str, target: str, matches: list[Match], window_size: in
             continue
         if max is not None and query_start > max:
             continue
-        if contains is not None and (query_start > contains or query_start + length < contains):
+        if contains is not None and (
+            query_start > contains or query_start + length < contains
+        ):
             continue
 
         ret.append(Result(query, target, query_start, target_start, length))
@@ -295,8 +309,9 @@ def get_tu_offset(obj_file: Path, symbol: str) -> Optional[int]:
             return int(pieces[0], 16)
     return None
 
+
 @dataclass
-class CRange():
+class CRange:
     start: Optional[int] = None
     end: Optional[int] = None
     start_exact = False
@@ -350,7 +365,14 @@ def get_c_range(insn_start: int, insn_end: int, line_numbers: Dict[int, int]) ->
     return range
 
 
-def get_matches(query: str, window_size: int, min: Optional[int], max: Optional[int], contains: Optional[int], show_disasm: bool):
+def get_matches(
+    query: str,
+    window_size: int,
+    min: Optional[int],
+    max: Optional[int],
+    contains: Optional[int],
+    show_disasm: bool,
+):
     query_bytes: Optional[Bytes] = get_symbol_bytes(query)
 
     if query_bytes is None:
@@ -376,7 +398,9 @@ def get_matches(query: str, window_size: int, min: Optional[int], max: Optional[
         if not matches:
             continue
 
-        results: list[Result] = group_matches(query, symbol, matches, window_size, min, max, contains)
+        results: list[Result] = group_matches(
+            query, symbol, matches, window_size, min, max, contains
+        )
         if not results:
             continue
 
@@ -408,9 +432,7 @@ def get_matches(query: str, window_size: int, min: Optional[int], max: Optional[
                 )
 
             query_str = f"query [{result.query_start}-{result.query_end}]"
-            target_str = (
-                f"{symbol} [insn {result.target_start}-{result.target_end}] ({result.length} total){target_range_str}"
-            )
+            target_str = f"{symbol} [insn {result.target_start}-{result.target_end}] ({result.length} total){target_range_str}"
             print(f"\t{query_str} matches {target_str}")
 
             if show_disasm:
@@ -419,12 +441,20 @@ def get_matches(query: str, window_size: int, min: Optional[int], max: Optional[
                 except ImportError:
                     print("rabbitizer not found, cannot show disassembly")
                     sys.exit(1)
-                result_query_bytes = query_bytes.bytes[result.query_start * 4 : result.query_end * 4]
-                result_target_bytes = sym_bytes.bytes[result.target_start * 4 : result.target_end * 4]
+                result_query_bytes = query_bytes.bytes[
+                    result.query_start * 4 : result.query_end * 4
+                ]
+                result_target_bytes = sym_bytes.bytes[
+                    result.target_start * 4 : result.target_end * 4
+                ]
 
                 for i in range(0, len(result_query_bytes), 4):
-                    q_insn = rabbitizer.Instruction(int.from_bytes(result_query_bytes[i:i+4], "big"))
-                    t_insn = rabbitizer.Instruction(int.from_bytes(result_target_bytes[i:i+4], "big"))
+                    q_insn = rabbitizer.Instruction(
+                        int.from_bytes(result_query_bytes[i : i + 4], "big")
+                    )
+                    t_insn = rabbitizer.Instruction(
+                        int.from_bytes(result_target_bytes[i : i + 4], "big")
+                    )
 
                     print(f"\t\t{q_insn.disassemble():35} | {t_insn.disassemble()}")
 
@@ -447,10 +477,30 @@ parser.add_argument(
     default=20,
     required=False,
 )
-parser.add_argument("--min", help="lower bound of instruction for matches against query", type=int, required=False)
-parser.add_argument("--max", help="upper bound of instruction for matches against query", type=int, required=False)
-parser.add_argument("--contains", help="All matches must contain this number'th instruction from the query", type=int, required=False)
-parser.add_argument("--show-disasm", help="Show disassembly of matches", action="store_true", required=False)
+parser.add_argument(
+    "--min",
+    help="lower bound of instruction for matches against query",
+    type=int,
+    required=False,
+)
+parser.add_argument(
+    "--max",
+    help="upper bound of instruction for matches against query",
+    type=int,
+    required=False,
+)
+parser.add_argument(
+    "--contains",
+    help="All matches must contain this number'th instruction from the query",
+    type=int,
+    required=False,
+)
+parser.add_argument(
+    "--show-disasm",
+    help="Show disassembly of matches",
+    action="store_true",
+    required=False,
+)
 
 args = parser.parse_args()
 
@@ -460,4 +510,11 @@ if __name__ == "__main__":
     func_sizes = get_func_sizes()
     syms = parse_map()
 
-    do_query(args.query, args.window_size, args.min, args.max, args.contains, args.show_disasm)
+    do_query(
+        args.query,
+        args.window_size,
+        args.min,
+        args.max,
+        args.contains,
+        args.show_disasm,
+    )

@@ -198,46 +198,46 @@ EvtScript N(EVS_AnimateTrain) = {
         EVT_IF_EQ(MF_TrainDepartDoorOpen, TRUE)
             EVT_CALL(PlaySoundAt, SOUND_20A5, SOUND_SPACE_MODE_0, -435, 84, 37)
             EVT_SET(LVar8, 10)
-            EVT_SET(LocalFlag(1), TRUE)
+            EVT_SET(LFlag1, TRUE)
             EVT_SET(MF_TrainDepartDoorOpen, FALSE)
         EVT_END_IF
         EVT_IF_EQ(MF_TrainDepartPlayerBoard, TRUE)
             EVT_SET(LVar8, -10)
-            EVT_SET(LocalFlag(1), TRUE)
+            EVT_SET(LFlag1, TRUE)
             EVT_SET(MF_TrainDepartPlayerBoard, FALSE)
         EVT_END_IF
         EVT_IF_EQ(MF_TrainArriveDoorOpen, TRUE)
             EVT_CALL(PlaySoundAt, SOUND_20A5, SOUND_SPACE_MODE_0, -413, 84, 38)
             EVT_SET(LVar8, 10)
-            EVT_SET(LocalFlag(2), TRUE)
+            EVT_SET(LFlag2, TRUE)
             EVT_SET(MF_TrainArriveDoorOpen, FALSE)
         EVT_END_IF
         EVT_IF_EQ(MF_TrainArrivePlayerDisembark, TRUE)
             EVT_SET(LVar8, -10)
-            EVT_SET(LocalFlag(2), TRUE)
+            EVT_SET(LFlag2, TRUE)
             EVT_SET(MF_TrainArrivePlayerDisembark, FALSE)
         EVT_END_IF
-        EVT_IF_EQ(LocalFlag(1), TRUE)
+        EVT_IF_EQ(LFlag1, TRUE)
             EVT_ADD(LVar9, LVar8)
             EVT_IF_GE(LVar9, 90)
                 EVT_SET(LVar9, 90)
-                EVT_SET(LocalFlag(1), FALSE)
+                EVT_SET(LFlag1, FALSE)
             EVT_END_IF
             EVT_IF_LE(LVar9, 0)
                 EVT_SET(LVar9, 0)
-                EVT_SET(LocalFlag(1), FALSE)
+                EVT_SET(LFlag1, FALSE)
                 EVT_CALL(PlaySoundAt, SOUND_20A6, SOUND_SPACE_MODE_0, -435, 84, 37)
             EVT_END_IF
         EVT_END_IF
-        EVT_IF_EQ(LocalFlag(2), TRUE)
+        EVT_IF_EQ(LFlag2, TRUE)
             EVT_ADD(LVarA, LVar8)
             EVT_IF_GE(LVarA, 90)
                 EVT_SET(LVarA, 90)
-                EVT_SET(LocalFlag(2), FALSE)
+                EVT_SET(LFlag2, FALSE)
             EVT_END_IF
             EVT_IF_LE(LVarA, 0)
                 EVT_SET(LVarA, 0)
-                EVT_SET(LocalFlag(2), FALSE)
+                EVT_SET(LFlag2, FALSE)
                 EVT_CALL(PlaySoundAt, SOUND_20A6, SOUND_SPACE_MODE_0, -413, 84, 38)
             EVT_END_IF
         EVT_END_IF
@@ -247,21 +247,21 @@ EvtScript N(EVS_AnimateTrain) = {
         EVT_CALL(RotateModel, MODEL_ura2, LVarA, 0, 1, 0)
         EVT_IF_GT(MV_TrainMoveDist, 100)
             EVT_IF_LT(MV_TrainMoveDist, 600)
-                EVT_IF_EQ(LocalFlag(0), FALSE)
-                    EVT_SET(LocalFlag(0), TRUE)
+                EVT_IF_EQ(LFlag0, FALSE)
+                    EVT_SET(LFlag0, TRUE)
                     EVT_EXEC(N(EVS_OpenCrossingGates))
                 EVT_END_IF
             EVT_END_IF
         EVT_END_IF
         EVT_IF_LE(MV_TrainMoveDist, 100)
-            EVT_IF_EQ(LocalFlag(0), TRUE)
-                EVT_SET(LocalFlag(0), FALSE)
+            EVT_IF_EQ(LFlag0, TRUE)
+                EVT_SET(LFlag0, FALSE)
                 EVT_EXEC(N(EVS_CloseCrossingGates))
             EVT_END_IF
         EVT_END_IF
         EVT_IF_GE(MV_TrainMoveDist, 600)
-            EVT_IF_EQ(LocalFlag(0), TRUE)
-                EVT_SET(LocalFlag(0), FALSE)
+            EVT_IF_EQ(LFlag0, TRUE)
+                EVT_SET(LFlag0, FALSE)
                 EVT_EXEC(N(EVS_CloseCrossingGates))
             EVT_END_IF
         EVT_END_IF

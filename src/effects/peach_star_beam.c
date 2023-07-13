@@ -45,7 +45,7 @@ EffectInstance* peach_star_beam_main(s32 type, f32 x, f32 y, f32 z, f32 arg4, s3
     bp.init = peach_star_beam_init;
     bp.update = peach_star_beam_update;
     bp.renderWorld = peach_star_beam_render;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_PEACH_STAR_BEAM;
 
     effect = shim_create_effect_instance(&bp);
@@ -106,8 +106,8 @@ void peach_star_beam_update(EffectInstance* effect) {
     f32 spiritAngle;
     s32 i;
 
-    if (effect->flags & 0x10) {
-        effect->flags &= ~0x10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         data->timeLeft = 16;
     }
 

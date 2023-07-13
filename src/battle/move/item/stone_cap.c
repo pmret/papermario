@@ -1,6 +1,7 @@
 #include "common.h"
 #include "script_api/battle.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_item_stone_cap
 
@@ -17,7 +18,7 @@ API_CALLABLE(N(func_802A123C_7217DC)) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            inflict_status(player, STATUS_STONE, script->varTable[0]);
+            inflict_status(player, STATUS_KEY_STONE, script->varTable[0]);
             player->statusAfflicted = 0;
             script->functionTemp[1] = 3;
             script->functionTemp[0] = 1;

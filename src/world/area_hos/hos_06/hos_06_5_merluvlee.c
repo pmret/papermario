@@ -1,6 +1,7 @@
 #include "hos_06.h"
 #include "effects.h"
 #include "model.h"
+#include "sprite/player.h"
 
 #include "world/common/complete/KeyItemChoice.inc.c"
 #include "world/common/complete/GiveReward.inc.c"
@@ -627,14 +628,14 @@ EvtScript N(EVS_PerformHintRitual) = {
     EVT_CALL(PlaySoundAt, SOUND_208, 0, LVar0, LVar1, LVar2)
     EVT_PLAY_EFFECT(EFFECT_ENERGY_ORB_WAVE, 6, LVar0, LVar1, LVar2, EVT_FLOAT(0.5), 20)
     EVT_WAIT(70)
-    EVT_CALL(func_802D7B10, ArrayVar(2))
+    EVT_CALL(DismissEffect, ArrayVar(2))
     EVT_WAIT(40)
     EVT_CALL(PlaySoundAt, SOUND_207 | SOUND_ID_TRIGGER_CHANGE_SOUND, 0, LVar0, LVar1, LVar2)
     EVT_CALL(N(func_80241F98_A3B478), ArrayVar(1))
     EVT_WAIT(15)
     EVT_CALL(EnableModel, MODEL_o185, TRUE)
     EVT_CALL(EnableModel, MODEL_o186, TRUE)
-    EVT_CALL(func_802D7B10, ArrayVar(1))
+    EVT_CALL(DismissEffect, ArrayVar(1))
     EVT_THREAD
         EVT_CALL(N(func_80241B74_A3B054))
     EVT_END_THREAD

@@ -299,7 +299,7 @@ EvtScript N(EVS_Scene_FlowerGateAppears) = {
     EVT_END_LOOP
     EVT_CALL(EnableModel, MODEL_r_door, FALSE)
     EVT_CALL(EnableGroup, MODEL_to_flo, TRUE)
-    EVT_CALL(func_802D7B10, LVar9)
+    EVT_CALL(DismissEffect, LVar9)
     EVT_CALL(PlaySoundAt, SOUND_2A4, SOUND_SPACE_MODE_0, 266, 50, 338)
     EVT_LOOP(3)
         EVT_PLAY_EFFECT(EFFECT_ENERGY_ORB_WAVE, 5, 266, 50, 338, 1, 20)
@@ -709,7 +709,7 @@ EvtScript N(EVS_ExitFlowerGate) = {
     EVT_IF_EQ(GF_StartedChapter6, FALSE)
         EVT_SET(GF_StartedChapter6, TRUE)
         EVT_CALL(FadeOutMusic, 0, 1500)
-        EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_22"), kmr_22_ENTRY_6, TRANSITION_6)
+        EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_22"), kmr_22_ENTRY_6, TRANSITION_BEGIN_OR_END_CHAPTER)
         EVT_WAIT(100)
         EVT_RETURN
     EVT_END_IF

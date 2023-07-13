@@ -3,7 +3,17 @@
 
 #include "common.h"
 
-extern MenuPanel* filemenu_menus[4];
+enum {
+  PAGE_0,
+  PAGE_1,
+#if !VERSION_PAL
+  PAGE_2,
+#endif
+  PAGE_3,
+  PAGE_4,
+};
+
+extern MenuPanel* filemenu_menus[];
 
 extern s32 filemenu_iterFileIdx;
 extern s32 filemenu_pressedButtons;
@@ -18,6 +28,13 @@ extern s32 filemenu_8024C0A4[3];
 extern s32 filemenu_hudElemIDs[20];
 extern s32 filemenu_createfile_hudElems[4];
 extern u8 filemenu_filename[8];
+
+#if VERSION_PAL
+extern s32 D_802517D0[1];
+extern s32 D_802517D4[1];
+extern u16 D_802517E0[2][0x400];
+extern u8 D_filemenu_8025095C[4];
+#endif
 
 #define WINDOW_UPDATE_FUNC(name) void (name)( \
     s32 windowIdx,\
@@ -50,6 +67,10 @@ WINDOW_UPDATE_FUNC(filemenu_update_hidden_name_confirm);
 WINDOW_UPDATE_FUNC(main_menu_window_update);
 
 WINDOW_UPDATE_FUNC(filemenu_update_show_title);
+
+#if VERSION_PAL
+WINDOW_UPDATE_FUNC(filemenu_selectlanguage_80248018);
+#endif
 
 void filemenu_draw_file_name(u8*, s32, s32, s32, s32, s32, s32, s32);
 void filemenu_draw_contents_title(MenuPanel*, s32, s32, s32, s32, s32, s32);
@@ -92,7 +113,7 @@ void filemenu_choose_name_update(MenuPanel*);
 void filemenu_choose_name_cleanup(MenuPanel*);
 
 void filemenu_draw_message(u8*, s32, s32, s32, s32, u32);
-void filemenu_draw_rect(s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileDescriptor, s32 uls, s32 ult, s32 dsdx, s32 dtdy);
+void filemenu_draw_rect(s32 ulx, s32 uly, s32 lrx, s32 lry, s32 tileIdx, s32 uls, s32 ult, s32 dsdx, s32 dtdy);
 
 extern WindowStyleCustom filemenu_windowStyles[];
 extern u8 filemenu_createfile_gridData[];

@@ -1,4 +1,5 @@
 #include "kgr_02.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(AwaitPartnerWatt)) {
     if (gPartnerStatus.actingPartner == PARTNER_WATT) {

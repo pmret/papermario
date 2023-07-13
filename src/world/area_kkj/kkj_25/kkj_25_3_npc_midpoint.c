@@ -1,4 +1,5 @@
 #include "kkj_25.h"
+#include "sprite/player.h"
 
 #define NAME_SUFFIX _Npc2
 
@@ -50,7 +51,7 @@ EvtScript N(EVS_NpcDefeat_Bowser) = {
 };
 
 s32 N(FlyingKammyHoverOffsets)[] = {
-    1, 2, 3, 2, 1, -1, -2, -3, -2, -1, 
+    1, 2, 3, 2, 1, -1, -2, -3, -2, -1,
 };
 
 EvtScript N(EVS_NpcAux_Kammy_Broom) = {

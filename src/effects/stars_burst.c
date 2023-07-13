@@ -49,7 +49,7 @@ void stars_burst_main(
         bpPtr->update = stars_burst_update;
         bpPtr->renderWorld = stars_burst_render;
         bpPtr->unk_00 = 0;
-        bpPtr->unk_14 = NULL;
+        bpPtr->renderUI = NULL;
         bpPtr->effectID = EFFECT_STARS_BURST;
 
         effect = shim_create_effect_instance(bpPtr);

@@ -91,7 +91,7 @@ void damage_stars_main(
                 bpPtr->init = damage_stars_init;
                 bpPtr->update = damage_stars_update;
                 bpPtr->renderWorld = damage_stars_render;
-                bpPtr->unk_14 = NULL;
+                bpPtr->renderUI = NULL;
                 bpPtr->effectID = EFFECT_DAMAGE_STARS;
 
                 effect = shim_create_effect_instance(bpPtr);

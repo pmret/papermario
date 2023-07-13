@@ -82,7 +82,7 @@ EvtScript N(EVS_UseMove_Impl) = {
                     EVT_END_THREAD
             EVT_END_SWITCH
     EVT_END_SWITCH
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_44)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_HAMMER_STRIKE)
     EVT_WAIT(1)
     EVT_CALL(PlayerTestEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, 0, 0, 16)
     EVT_IF_EQ(LVar0, HIT_RESULT_MISS)
@@ -101,7 +101,7 @@ EvtScript N(EVS_UseMove_Impl) = {
                 EVT_CASE_EQ(2)
                     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10E)
             EVT_END_SWITCH
-            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, DMG_STATUS_CHANCE(STATUS_FLAG_SHRINK, 3, 100), LVarF, 112)
+            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, DMG_STATUS_KEY(STATUS_FLAG_SHRINK, 3, 100), LVarF, 112)
         EVT_CASE_DEFAULT
             EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
             EVT_SWITCH(LVar1)
@@ -112,7 +112,7 @@ EvtScript N(EVS_UseMove_Impl) = {
                 EVT_CASE_EQ(2)
                     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10E)
             EVT_END_SWITCH
-            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, DMG_STATUS_CHANCE(STATUS_FLAG_SHRINK, 3, 75), LVarE, 48)
+            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH, 25, DMG_STATUS_KEY(STATUS_FLAG_SHRINK, 3, 75), LVarE, 48)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_1)

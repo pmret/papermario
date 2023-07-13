@@ -4,7 +4,7 @@
 #include "world/common/todo/SwitchToPartner.inc.c"
 
 EvtScript N(EVS_ProvideDemoInputs) = {
-    EVT_CALL(EnableStatusMenu, FALSE)
+    EVT_CALL(EnableWorldStatusBar, FALSE)
     EVT_CALL(DemoSetButtons, BUTTON_C_DOWN)
     EVT_WAIT(5)
     EVT_CALL(DemoSetButtons, 0)
@@ -83,7 +83,7 @@ EvtScript N(EVS_ProvideDemoInputs) = {
         EVT_RETURN
     EVT_END_IF
     EVT_SET(GF_DemoSceneDone, TRUE)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("isk_04"), isk_04_ENTRY_5, TRANSITION_2)
+    EVT_CALL(GotoMapSpecial, EVT_PTR("isk_04"), isk_04_ENTRY_5, TRANSITION_END_DEMO_SCENE_BLACK)
     EVT_WAIT(323)
     EVT_RETURN
     EVT_END
@@ -102,7 +102,7 @@ EvtScript N(EVS_MonitorDemoState) = {
         EVT_RETURN
     EVT_END_IF
     EVT_SET(GF_DemoSceneDone, TRUE)
-    EVT_CALL(GotoMapSpecial, EVT_PTR("isk_04"), isk_04_ENTRY_2, TRANSITION_3)
+    EVT_CALL(GotoMapSpecial, EVT_PTR("isk_04"), isk_04_ENTRY_2, TRANSITION_END_DEMO_SCENE_WHITE)
     EVT_WAIT(313)
     EVT_RETURN
     EVT_END

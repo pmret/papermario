@@ -1,6 +1,7 @@
 #include "common.h"
 #include "script_api/battle.h"
 #include "sprite/npc/BattleSkolar.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_move_star_storm
 
@@ -181,7 +182,7 @@ EvtScript N(802A1E20) = {
 EvtScript N(802A202C) = {
     EVT_CALL(GetOwnerID, LVarA)
     EVT_IF_EQ(LVarA, 0)
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(PlaySound, SOUND_2047)
         EVT_THREAD
             EVT_LOOP(5)
@@ -213,7 +214,7 @@ EvtScript N(802A202C) = {
         EVT_CALL(EnableNpcBlur, NPC_BTL_SPIRIT, FALSE)
         EVT_CALL(DeleteNpc, NPC_BTL_SPIRIT)
     EVT_ELSE
-        EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_C)
+        EVT_CALL(UseBattleCamPreset, BTL_CAM_DEFAULT)
         EVT_CALL(PlaySound, SOUND_2045)
         EVT_THREAD
             EVT_LOOP(5)
@@ -278,7 +279,7 @@ EvtScript N(EVS_UsePower) = {
     EVT_EXEC_WAIT(N(802A1E20))
     EVT_CALL(SetNpcAnimation, NPC_BTL_SPIRIT, ANIM_BattleSkolar_Shout)
     EVT_WAIT(16)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_THREAD
         EVT_SET(LVar0, 0)
         EVT_LOOP(10)
@@ -321,7 +322,7 @@ EvtScript N(EVS_UsePower) = {
     EVT_END_IF
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(func_802A1628_78EDF8, LVar0, LVar1, LVar2)
-    EVT_CALL(ItemDamageEnemy, LVar0, DAMAGE_TYPE_COSMIC | DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, 0, 7, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(ItemDamageEnemy, LVar0, DAMAGE_TYPE_COSMIC | DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, 7, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_LABEL(1)
     EVT_WAIT(10)
     EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)
@@ -330,7 +331,7 @@ EvtScript N(EVS_UsePower) = {
     EVT_END_IF
     EVT_WAIT(20)
     EVT_EXEC_WAIT(N(802A202C))
-    EVT_CALL(func_80276EFC)
+    EVT_CALL(PlayerYieldTurn)
     EVT_EXEC_WAIT(N(802A247C))
     EVT_RETURN
     EVT_END

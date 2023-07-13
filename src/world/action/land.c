@@ -1,4 +1,5 @@
 #include "common.h"
+#include "sprite/player.h"
 
 enum {
     SUBSTATE_INIT   = 0,

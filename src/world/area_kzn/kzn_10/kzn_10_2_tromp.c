@@ -1,5 +1,6 @@
 #include "kzn_10.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #define UNK_FUNC_50_LVar1 -469.0
 #define UNK_FUNC_50_LVar2 46.0

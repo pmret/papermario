@@ -20,7 +20,7 @@ void falling_leaves_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     bp.update = falling_leaves_update;
     bp.renderWorld = falling_leaves_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_FALLING_LEAVES;
 
     effect = shim_create_effect_instance(&bp);

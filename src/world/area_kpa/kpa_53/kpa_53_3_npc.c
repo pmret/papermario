@@ -1,5 +1,6 @@
 #include "kpa_53.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(UpdateFollowerPosition)) {
     PlayerStatus* playerStatus = &gPlayerStatus;

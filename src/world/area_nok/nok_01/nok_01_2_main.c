@@ -40,17 +40,17 @@ EvtScript N(EVS_EnterMap) = {
         EVT_RETURN
     EVT_END_IF
     EVT_CALL(GetEntryID, LVar0)
-    EVT_SET(LocalFlag(0), FALSE)
+    EVT_SET(LFlag0, FALSE)
     EVT_IF_EQ(LVar0, nok_01_ENTRY_0)
         EVT_IF_LT(GB_StoryProgress, STORY_CH1_ARRIVED_AT_KOOPA_VILLAGE)
-            EVT_SET(LocalFlag(0), TRUE)
+            EVT_SET(LFlag0, TRUE)
             EVT_THREAD
                 EVT_WAIT(30)
                 EVT_EXEC(N(EVS_BindExitTriggers))
             EVT_END_THREAD
         EVT_END_IF
     EVT_END_IF
-    EVT_IF_EQ(LocalFlag(0), FALSE)
+    EVT_IF_EQ(LFlag0, FALSE)
         EVT_SET(LVar0, EVT_PTR(N(EVS_BindExitTriggers)))
         EVT_EXEC(EnterWalk)
     EVT_END_IF

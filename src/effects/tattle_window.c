@@ -26,10 +26,8 @@ WindowStyleCustom D_E00D87E0 = {
         .size3 = {16, 8},
         .size4 = {16, 8},
     },
-    .opaqueCombineMode = gsDPSetCombineLERP(PRIMITIVE, ENVIRONMENT, TEXEL1, ENVIRONMENT, 0, 0, 0, TEXEL1, 0, 0, 0,
-                                            COMBINED, 0, 0, 0, COMBINED),
-    .transparentCombineMode = gsDPSetCombineLERP(PRIMITIVE, ENVIRONMENT, TEXEL1, ENVIRONMENT, PRIMITIVE, 0, TEXEL1, 0,
-                                                 0, 0, 0, COMBINED, 0, 0, 0, COMBINED),
+    .opaqueCombineMode = gsDPSetCombineMode(PM_CC_15, G_CC_PASS2),
+    .transparentCombineMode = gsDPSetCombineMode(PM_CC_14, G_CC_PASS2),
     .color1 = { 61, 74, 188, 255 },
     .color2 = { 0, 25, 28, 255},
 };
@@ -70,7 +68,7 @@ EffectInstance* tattle_window_main(s32 arg0, f32 x, f32 y, f32 z, f32 arg4, s32 
     bp.init = tattle_window_init;
     bp.update = tattle_window_update;
     bp.renderWorld = tattle_window_render;
-    bp.unk_14 = func_E00D8264;
+    bp.renderUI = func_E00D8264;
     bp.unk_00 = 0;
     bp.effectID = EFFECT_TATTLE_WINDOW;
 
@@ -110,8 +108,8 @@ void tattle_window_update(EffectInstance* effect) {
     s32 old_unk_14;
     TattleWindowFXData* part = effect->data.tattleWindow;
 
-    if (effect->flags & 0x10) {
-        effect->flags &= ~0x10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         part->unk_10 = 23;
     }
 

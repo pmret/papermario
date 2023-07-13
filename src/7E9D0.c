@@ -32,6 +32,7 @@ s32 phys_adjust_cam_on_landing(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 ret = 1;
 
+    //TODO hardcoded map IDs
     switch (gameStatus->areaID) {
         case AREA_OBK:
             ret = gameStatus->mapID != 4;
@@ -401,7 +402,7 @@ void set_action_state(s32 actionState) {
     }
 
     if (playerStatus->specialDecorationEffect != NULL) {
-        playerStatus->specialDecorationEffect->data.unk_46->unk_24 = 10;
+        playerStatus->specialDecorationEffect->data.spin->timeLeft = 10;
         playerStatus->specialDecorationEffect = NULL;
     }
 }

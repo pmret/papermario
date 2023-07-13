@@ -1,4 +1,5 @@
 #include "sam_01.h"
+#include "sprite/player.h"
 
 #include "common/GetItemEntityPosition.inc.c"
 #include "world/common/todo/GetLeftRightPoints.inc.c"

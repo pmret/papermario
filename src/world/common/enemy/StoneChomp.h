@@ -14,20 +14,20 @@
 
 #define STONE_CHOMP_ANIMS \
 { \
-    .idle   = ANIM_StoneChomp_Anim01, \
-    .walk   = ANIM_StoneChomp_Anim05, \
-    .run    = ANIM_StoneChomp_Anim04, \
-    .chase  = ANIM_StoneChomp_Anim04, \
-    .anim_4 = ANIM_StoneChomp_Anim01, \
-    .anim_5 = ANIM_StoneChomp_Anim01, \
-    .death  = ANIM_StoneChomp_Anim06, \
-    .hit    = ANIM_StoneChomp_Anim06, \
-    .anim_8 = ANIM_StoneChomp_Anim00, \
-    .anim_9 = ANIM_StoneChomp_Anim00, \
-    .anim_A = ANIM_StoneChomp_Anim00, \
-    .anim_B = ANIM_StoneChomp_Anim00, \
-    .anim_C = ANIM_StoneChomp_Anim00, \
-    .anim_D = ANIM_StoneChomp_Anim00, \
-    .anim_E = ANIM_StoneChomp_Anim00, \
-    .anim_F = ANIM_StoneChomp_Anim00, \
+    .idle   = ANIM_StoneChomp_Idle, \
+    .walk   = ANIM_StoneChomp_SlowBite, \
+    .run    = ANIM_StoneChomp_Bite, \
+    .chase  = ANIM_StoneChomp_Bite, \
+    .anim_4 = ANIM_StoneChomp_Idle, \
+    .anim_5 = ANIM_StoneChomp_Idle, \
+    .death  = ANIM_StoneChomp_Hurt, \
+    .hit    = ANIM_StoneChomp_Hurt, \
+    .anim_8 = ANIM_StoneChomp_Still, \
+    .anim_9 = ANIM_StoneChomp_Still, \
+    .anim_A = ANIM_StoneChomp_Still, \
+    .anim_B = ANIM_StoneChomp_Still, \
+    .anim_C = ANIM_StoneChomp_Still, \
+    .anim_D = ANIM_StoneChomp_Still, \
+    .anim_E = ANIM_StoneChomp_Still, \
+    .anim_F = ANIM_StoneChomp_Still, \
 }

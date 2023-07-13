@@ -1,6 +1,7 @@
 #include "common.h"
 #include "../src/world/partners.h"
 #include "sprite/npc/WorldKooper.h"
+#include "sprite/player.h"
 
 #define NAMESPACE world_kooper
 

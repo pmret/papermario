@@ -1,5 +1,6 @@
 #include "common.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_move_spin_smash
 
@@ -35,7 +36,7 @@ extern EvtScript N(EVS_UseMove3_Impl);
 
 EvtScript N(EVS_UseMove) = {
     EVT_CALL(ShowActionHud, TRUE)
-    EVT_CALL(func_80269EAC, 2)
+    EVT_CALL(SetDamageSource, DMG_SRC_SPIN_SMASH)
     EVT_CALL(GetMenuSelection, LVar0, LVar1, LVar2)
     EVT_SWITCH(LVar1)
         EVT_CASE_EQ(0)
@@ -91,7 +92,7 @@ EvtScript N(EVS_UseMove1_Impl) = {
     EVT_CALL(InitTargetIterator)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_AIM_HAMMER)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10B)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_SpinSmash1_Raise)
     EVT_WAIT(8)
@@ -148,10 +149,10 @@ EvtScript N(EVS_UseMove1_Impl) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
             EVT_CALL(func_802A1000_737890)
-            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH | DAMAGE_TYPE_SPIN_SMASH | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, 25, 0, LVarF, 112)
+            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH | DAMAGE_TYPE_SPIN_SMASH | DAMAGE_TYPE_MULTIPLE_POPUPS, 25, 0, LVarF, 112)
         EVT_CASE_DEFAULT
             EVT_CALL(func_802A1074_737904)
-            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH | DAMAGE_TYPE_SPIN_SMASH | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, 25, 0, LVarE, 48)
+            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH | DAMAGE_TYPE_SPIN_SMASH | DAMAGE_TYPE_MULTIPLE_POPUPS, 25, 0, LVarE, 48)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
@@ -213,7 +214,7 @@ EvtScript N(EVS_UseMove2_Impl) = {
     EVT_CALL(InitTargetIterator)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(AddGoalPos, ACTOR_PLAYER, 0, 0, 0)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_AIM_HAMMER)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10B)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_SpinSmash2_Raise)
     EVT_WAIT(8)
@@ -270,10 +271,10 @@ EvtScript N(EVS_UseMove2_Impl) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
             EVT_CALL(func_802A1000_737890)
-            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH | DAMAGE_TYPE_SPIN_SMASH | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, 25, 0, LVarF, 112)
+            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH | DAMAGE_TYPE_SPIN_SMASH | DAMAGE_TYPE_MULTIPLE_POPUPS, 25, 0, LVarF, 112)
         EVT_CASE_DEFAULT
             EVT_CALL(func_802A1074_737904)
-            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH | DAMAGE_TYPE_SPIN_SMASH | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, 25, 0, LVarE, 48)
+            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH | DAMAGE_TYPE_SPIN_SMASH | DAMAGE_TYPE_MULTIPLE_POPUPS, 25, 0, LVarE, 48)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)
@@ -333,7 +334,7 @@ EvtScript N(EVS_UseMove3_Impl) = {
             EVT_WAIT(0)
     EVT_END_SWITCH
     EVT_CALL(InitTargetIterator)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_43)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PLAYER_AIM_HAMMER)
     EVT_CALL(PlaySoundAtActor, ACTOR_PLAYER, SOUND_10B)
     EVT_CALL(SetAnimation, ACTOR_PLAYER, 0, ANIM_MarioB2_SpinSmash3_Raise)
     EVT_WAIT(8)
@@ -390,10 +391,10 @@ EvtScript N(EVS_UseMove3_Impl) = {
     EVT_SWITCH(LVar0)
         EVT_CASE_GT(FALSE)
             EVT_CALL(func_802A1000_737890)
-            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH | DAMAGE_TYPE_SPIN_SMASH | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, 25, 0, LVarF, 112)
+            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH | DAMAGE_TYPE_SPIN_SMASH | DAMAGE_TYPE_MULTIPLE_POPUPS, 25, 0, LVarF, 112)
         EVT_CASE_DEFAULT
             EVT_CALL(func_802A1074_737904)
-            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH | DAMAGE_TYPE_SPIN_SMASH | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, 25, 0, LVarE, 48)
+            EVT_CALL(PlayerDamageEnemy, LVar0, DAMAGE_TYPE_SMASH | DAMAGE_TYPE_SPIN_SMASH | DAMAGE_TYPE_MULTIPLE_POPUPS, 25, 0, LVarE, 48)
     EVT_END_SWITCH
     EVT_SWITCH(LVar0)
         EVT_CASE_OR_EQ(HIT_RESULT_HIT)

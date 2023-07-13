@@ -34,13 +34,13 @@ void N(MagikoopaAI_01)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
     npc->scale.x = N(MagikoopaAI_TeleportAnim)[npc->duration].scaleX;
     npc->scale.y = N(MagikoopaAI_TeleportAnim)[npc->duration].scaleY;
     npc->alpha = N(MagikoopaAI_TeleportAnim)[npc->duration].alpha;
-    
+
     npc->duration++;
     if (npc->duration == 4) {
         disable_npc_shadow(npc);
         enemy->flags |= ENEMY_FLAG_COMBINATION;
     }
-    
+
     if (N(MagikoopaAI_TeleportAnim)[npc->duration].alpha == 0) {
         npc->alpha = 0xFF;
         npc->scale.x = 1.0f;
@@ -103,7 +103,7 @@ void N(MagikoopaAI_11)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
     Npc* npc = get_npc_unsafe((s32) enemy->npcID);
     f32 scale;
     s16 alpha;
-    
+
     if (enemy->varTable[0] == 0) {
         alpha = (npc->duration * 15) + 130;
     } else {
@@ -113,14 +113,14 @@ void N(MagikoopaAI_11)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
         alpha = 255;
     }
     npc->alpha = alpha;
-    
+
     npc->scale.x = ((f32)npc->duration * 0.1) + 0.4;
     if (npc->scale.x > 1.0) {
        npc->scale.x = 1.0f;
     }
     npc->scale.y = npc->scale.x;
     npc->scale.z = npc->scale.x;
-    
+
     npc->duration++;
     if (npc->duration == 5) {
         enable_npc_shadow(npc);
@@ -157,7 +157,7 @@ void N(MagikoopaAI_21)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ;
     s32 emoteTemp;
-    
+
     npc->duration--;
     if (npc->duration == 0) {
         npc->currentAnim = enemy->animList[0];
@@ -183,7 +183,7 @@ void N(MagikoopaAI_21)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
 void N(MagikoopaAI_22)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* temp_s0 = script->owner1.enemy;
     Npc* temp_v0 = get_npc_unsafe(temp_s0->npcID);
-    
+
     temp_v0->duration--;
     if (temp_v0->duration <= 0) {
         temp_v0->currentAnim = temp_s0->animList[9];
@@ -197,7 +197,7 @@ void N(MagikoopaAI_23)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 projectileEnemy;
     s32 emoteTemp;
-    
+
     npc->duration--;
     if (npc->duration <= 0) {
         projectileEnemy = N(MagikoopaAI_CanShootSpell)(script, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, territory);
@@ -218,7 +218,7 @@ void N(MagikoopaAI_23)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
 void N(MagikoopaAI_24)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    
+
     npc->duration--;
     if (npc->duration <= 0) {
         npc->currentAnim = enemy->animList[0];
@@ -238,7 +238,7 @@ API_CALLABLE(N(MagikoopaAI_Main)) {
     f32 posY;
     f32 posZ;
     f32 hitDepth;
-    
+
     territory.skipPlayerDetectChance = 0;
     territory.shape = enemy->territory->wander.detectShape;
     territory.pointX = enemy->territory->wander.detectPos.x;
@@ -247,7 +247,7 @@ API_CALLABLE(N(MagikoopaAI_Main)) {
     territory.sizeZ = enemy->territory->wander.detectSize.z;
     territory.halfHeight = 100.0f;
     territory.detectFlags = 0;
-    
+
     if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND)) {
         npc->currentAnim = enemy->animList[0];
         npc->flags &= ~NPC_FLAG_JUMPING;
@@ -264,7 +264,7 @@ API_CALLABLE(N(MagikoopaAI_Main)) {
         }
         script->AI_TEMP_STATE = 0;
     }
-    
+
     switch (script->AI_TEMP_STATE) {
     case 0:
         N(MagikoopaAI_00)(script, aiSettings, territoryPtr);

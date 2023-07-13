@@ -1,4 +1,5 @@
 #include "kzn_22.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(GetFloorCollider2)) {
     Bytecode* args = script->ptrReadPos;

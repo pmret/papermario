@@ -34,7 +34,7 @@ void attack_result_text_render(EffectInstance* effect);
 void func_E0090428(EffectInstance* effect);
 void func_E0090444(EffectInstance* effect);
 
-EffectInstance* attack_result_text_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5) {
+EffectInstance* attack_result_text_main(s32 type, f32 posX, f32 posY, f32 posZ, f32 appearVel, s32 duration) {
     EffectBlueprint bp;
     EffectInstance* effect;
     AttackResultTextFXData* data;
@@ -44,7 +44,7 @@ EffectInstance* attack_result_text_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, 
     bp.init = attack_result_text_init;
     bp.update = attack_result_text_update;
     bp.renderWorld = attack_result_text_render;
-    bp.unk_14 = func_E0090428;
+    bp.renderUI = func_E0090428;
     bp.effectID = EFFECT_ATTACK_RESULT_TEXT;
 
     effect = shim_create_effect_instance(&bp);
@@ -54,32 +54,32 @@ EffectInstance* attack_result_text_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, 
 
     ASSERT(data != NULL);
 
-    data->unk_24 = 1;
+    data->isVisible = TRUE;
     data->unk_20 = 0;
-    data->unk_00 = arg0;
-    data->unk_1C = 0;
-    data->unk_04 = arg0 % 5;
+    data->type = type;
+    data->lifetime = 0;
+    data->unk_04 = type % 5;
 
-    if (arg5 <= 0) {
-        data->unk_18 = 100;
+    if (duration <= 0) {
+        data->timeLeft = 100;
     } else {
-        data->unk_18 = arg5;
+        data->timeLeft = duration;
     }
 
-    data->unk_14 = 0xFF;
+    data->alpha = 0xFF;
 
-    if (arg0 < 5) {
-        data->unk_08 = arg1;
-        data->unk_0C = arg2;
-        data->unk_10 = arg3;
-        data->unk_30 = 2.0f * (-shim_sin_deg(30.0f) * arg4);
-        data->unk_34 = 2.0f * (shim_cos_deg(30.0f) * arg4);
+    if (type < 5) {
+        data->pos.x = posX;
+        data->pos.y = posY;
+        data->pos.z = posZ;
+        data->vel.x = 2.0f * (-shim_sin_deg(30.0f) * appearVel);
+        data->vel.y = 2.0f * (shim_cos_deg(30.0f) * appearVel);
     } else {
-        data->unk_08 = -100.0f;
-        data->unk_0C = 40.0f;
-        data->unk_10 = 0.0f;
-        data->unk_30 = 115.0f;
-        data->unk_34 = 0.0f;
+        data->pos.x = -100.0f;
+        data->pos.y = 40.0f;
+        data->pos.z = 0.0f;
+        data->vel.x = 115.0f;
+        data->vel.y = 0.0f;
     }
 
     return effect;
@@ -90,73 +90,73 @@ void attack_result_text_init(EffectInstance* effect) {
 
 void attack_result_text_update(EffectInstance* effect) {
     AttackResultTextFXData* data = effect->data.attackResultText;
-    s32 unk_00 = data->unk_00;
-    s32 old_unk_1C;
-    s32 unk_1C;
-    s32 unk_18;
+    s32 type = data->type;
+    s32 prevTime;
+    s32 curTime;
+    s32 timeLeft;
     u32 temp1C;
 
-    if (data->unk_18 < 100) {
-        data->unk_18--;
+    if (data->timeLeft < 100) {
+        data->timeLeft--;
     }
 
-    old_unk_1C = data->unk_1C;
-    data->unk_1C++;
-    unk_1C = data->unk_1C;
+    prevTime = data->lifetime;
+    data->lifetime++;
+    curTime = data->lifetime;
 
-    if (data->unk_18 < 0) {
-        data->unk_24 = 0;
-        data->unk_18 = -1;
+    if (data->timeLeft < 0) {
+        data->isVisible = FALSE;
+        data->timeLeft = -1;
         shim_remove_effect(effect);
         return;
     }
 
-    unk_18 = data->unk_18;
+    timeLeft = data->timeLeft;
 
-    if (unk_00 < 5) {
-        if (data->unk_1C < 9) {
-            data->unk_28 = (f32) D_E0090A68[old_unk_1C] * 0.01;
+    if (type < 5) {
+        if (data->lifetime < 9) {
+            data->scale = (f32) D_E0090A68[prevTime] * 0.01;
         }
 
-        temp1C = old_unk_1C - 100;
-        if (unk_1C == 10) {
-            data->unk_1C = 9;
+        temp1C = prevTime - 100;
+        if (curTime == 10) {
+            data->lifetime = 9;
         }
 
         if (temp1C < 7) {
-            data->unk_28 = (f32) D_E0090A70[temp1C] * 0.01;
+            data->scale = (f32) D_E0090A70[temp1C] * 0.01;
         }
 
-        if (unk_1C == 109) {
-            data->unk_1C = 108;
+        if (curTime == 109) {
+            data->lifetime = 108;
         }
-        if (unk_1C > 1000) {
-            data->unk_1C = 1000;
+        if (curTime > 1000) {
+            data->lifetime = 1000;
         }
-        if (unk_18 >= 6) {
-            data->unk_30 *= 0.75;
-            data->unk_34 *= 0.75;
+        if (timeLeft >= 6) {
+            data->vel.x *= 0.75;
+            data->vel.y *= 0.75;
         }
-        if (unk_18 < 5) {
-            data->unk_30 *= 0.7;
-            data->unk_34 *= 0.7;
+        if (timeLeft < 5) {
+            data->vel.x *= 0.7;
+            data->vel.y *= 0.7;
         }
     } else {
-        if (unk_18 >= 6) {
-            data->unk_30 *= 0.7;
-            data->unk_34 *= 0.7;
+        if (timeLeft >= 6) {
+            data->vel.x *= 0.7;
+            data->vel.y *= 0.7;
         }
-        if (unk_18 < 5) {
-            data->unk_30 *= 0.6;
-            data->unk_34 *= 0.6;
+        if (timeLeft < 5) {
+            data->vel.x *= 0.6;
+            data->vel.y *= 0.6;
         }
     }
 
-    data->unk_08 += data->unk_30;
-    data->unk_0C += data->unk_34;
+    data->pos.x += data->vel.x;
+    data->pos.y += data->vel.y;
     if (data->unk_20 != 0) {
         data->unk_20 = 0;
-        data->unk_1C = 100;
+        data->lifetime = 100;
         data->unk_04++;
         if (data->unk_04 > 2) {
             data->unk_04 = 2;
@@ -173,15 +173,15 @@ void func_E0090428(EffectInstance* effect) {
 
 void func_E0090444(EffectInstance* effect) {
     AttackResultTextFXData* data = effect->data.attackResultText;
-    s32 unk_00 = data->unk_00;
-    s32 unk_1C = data->unk_1C;
-    Matrix4f sp18;
-    Matrix4f sp58;
+    s32 type = data->type;
+    s32 unk_1C = data->lifetime;
+    Matrix4f mtxA;
+    Matrix4f mtxB;
     s32 z;
     f32 scale;
 
-    if (data->unk_24 != 0) {
-        scale = data->unk_28;
+    if (data->isVisible) {
+        scale = data->scale;
         gDPPipeSync(gMainGfxPos++);
         gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->graphics->data));
         gDPSetDepthSource(gMainGfxPos++, G_ZS_PRIM);
@@ -191,32 +191,32 @@ void func_E0090444(EffectInstance* effect) {
         }
         gDPSetPrimDepth(gMainGfxPos++, z, 0);
 
-        if (unk_00 < 5) {
-            shim_guTranslateF(sp18, data->unk_08, data->unk_0C, data->unk_10);
-            shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-            shim_guMtxCatF(sp58, sp18, sp18);
-            shim_guScaleF(sp58, scale, scale, 1.0f);
-            shim_guMtxCatF(sp58, sp18, sp18);
-            shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+        if (type < 5) {
+            shim_guTranslateF(mtxA, data->pos.x, data->pos.y, data->pos.z);
+            shim_guRotateF(mtxB, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+            shim_guMtxCatF(mtxB, mtxA, mtxA);
+            shim_guScaleF(mtxB, scale, scale, 1.0f);
+            shim_guMtxCatF(mtxB, mtxA, mtxA);
+            shim_guMtxF2L(mtxA, &gDisplayContext->matrixStack[gMatrixListPos]);
             gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                       G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-            gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 255, data->unk_14);
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 255, data->alpha);
             gSPDisplayList(gMainGfxPos++, D_090015A8_391978);
             gSPDisplayList(gMainGfxPos++, D_E0090A40[data->unk_04]);
             gSPDisplayList(gMainGfxPos++, D_E0090A54[data->unk_04]);
             gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
         } else {
-            unk_00 -= 5;
-            gDPSetPrimColor(gMainGfxPos++, 0, 0, D_E0090A78[unk_00][0], D_E0090A78[unk_00][1], D_E0090A78[unk_00][2], data->unk_14);
-            gDPSetEnvColor(gMainGfxPos++, D_E0090A78[unk_00][3], D_E0090A78[unk_00][4], D_E0090A78[unk_00][5], 0);
+            type -= 5;
+            gDPSetPrimColor(gMainGfxPos++, 0, 0, D_E0090A78[type][0], D_E0090A78[type][1], D_E0090A78[type][2], data->alpha);
+            gDPSetEnvColor(gMainGfxPos++, D_E0090A78[type][3], D_E0090A78[type][4], D_E0090A78[type][5], 0);
             gSPDisplayList(gMainGfxPos++, D_09001500_3918D0);
             gSPDisplayList(gMainGfxPos++, D_E0090A40[data->unk_04]);
 
             gSPScisTextureRectangle(gMainGfxPos++,
-                data->unk_08 * 4.0f,
-                data->unk_0C * 4.0f,
-                (data->unk_08 + 128.0f) * 4.0f,
-                (data->unk_0C + 64.0f) * 4.0f,
+                data->pos.x * 4.0f,
+                data->pos.y * 4.0f,
+                (data->pos.x + 128.0f) * 4.0f,
+                (data->pos.y + 64.0f) * 4.0f,
                 G_TX_RENDERTILE, 0, 1024, 512, 65024);
         }
         gDPPipeSync(gMainGfxPos++);

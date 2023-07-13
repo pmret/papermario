@@ -1,4 +1,5 @@
 #include "kkj_15.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(SetPeachDepressed)) {
     gGameStatusPtr->peachFlags |= PEACH_STATUS_FLAG_DEPRESSED;

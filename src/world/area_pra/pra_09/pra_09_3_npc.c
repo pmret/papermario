@@ -1,5 +1,6 @@
 #include "pra_09.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #include "world/common/enemy/Duplighost.h"
 

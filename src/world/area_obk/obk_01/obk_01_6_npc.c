@@ -9,7 +9,7 @@
 
 s32 N(LetterList_Franky)[] = {
     ITEM_LETTER_CHAIN_FRANKY,
-    ITEM_NONE 
+    ITEM_NONE
 };
 
 EvtScript N(EVS_LetterPrompt_Franky) = {

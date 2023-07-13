@@ -272,7 +272,7 @@ Gfx gPauseDLOrbs[] = {
     gsDPSetTextureLUT(G_TT_NONE),
     gsDPLoadTextureTile(pause_orbs_png, G_IM_FMT_RGBA, G_IM_SIZ_16b, pause_orbs_png_width, pause_orbs_png_height, 0, 0, pause_orbs_png_width - 1, pause_orbs_png_height - 1, 0, G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP, 3, 5, G_TX_NOLOD, G_TX_NOLOD),
     gsDPSetRenderMode(AA_EN | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA | GBL_c1(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM), AA_EN | CVG_DST_FULL | ZMODE_OPA | CVG_X_ALPHA | GBL_c2(G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM)),
-    gsDPSetCombineLERP(0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0, 0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0),
+    gsDPSetCombineMode(PM_CC_01, PM_CC_01),
     gsSPClearGeometryMode(G_LIGHTING),
     gsSPSetGeometryMode(G_SHADE | G_CULL_BACK | G_SHADING_SMOOTH),
     gsSPEndDisplayList(),
@@ -583,9 +583,6 @@ s32 pause_get_menu_msg(s32 index) {
     return gPauseMessages[index];
 }
 
-#if VERSION_PAL
-INCLUDE_ASM(void, "pause/pause_gfx", pause_draw_menu_label);
-#else
 void pause_draw_menu_label(s32 index, s32 x, s32 y) {
     s32 xOffset = 64;
 
@@ -607,8 +604,15 @@ void pause_draw_menu_label(s32 index, s32 x, s32 y) {
 
     gSPDisplayList(gMainGfxPos++, gPauseDLLabels[index]);
     pause_draw_rect(x * 4, y * 4, (x + xOffset) * 4, (y + 16) * 4, 0, 0, 0, 0x400, 0x400);
-}
+
+#if VERSION_PAL
+    if (gCurrentLanguage == LANGUAGE_DE && index == 5) {
+        s16 xOffset2 = xOffset;
+
+        pause_draw_rect((x + 30) * 4, (y * 4), (xOffset2 + x + 10) * 4, (y + 16) * 4, 0, 0x280, 0, 0x400, 0x400);
+    }
 #endif
+}
 
 BSS s8 gPauseBufferPal1[512];
 BSS s8 gPauseBufferImg1[15752];

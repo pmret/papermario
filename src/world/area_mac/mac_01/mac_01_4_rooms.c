@@ -231,7 +231,7 @@ EvtScript N(EVS_SetupRooms) = {
         EVT_PTR(N(EVS_RoomListener_ToadHouse)),
         COLLIDER_deilit2,
         COLLIDER_deilit2u,
-        MODEL_kinopi, 
+        MODEL_kinopi,
         EVT_PTR(N(InsideNPCs_ToadHouse)))
     // merlon's house
     EVT_CALL(CreateMapRoom,

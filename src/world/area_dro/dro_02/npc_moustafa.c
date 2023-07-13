@@ -1,4 +1,5 @@
 #include "dro_02.h"
+#include "sprite/player.h"
 
 EvtScript N(EVS_PartyWatchingMoustafa) = {
     EVT_LOOP(0)

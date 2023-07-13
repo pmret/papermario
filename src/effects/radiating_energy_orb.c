@@ -37,7 +37,7 @@ EffectInstance* radiating_energy_orb_main(
     bp.init = radiating_energy_orb_init;
     bp.update = radiating_energy_orb_update;
     bp.renderWorld = radiating_energy_orb_render;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_RADIATING_ENERGY_ORB;
 
     effect = shim_create_effect_instance(&bp);
@@ -77,8 +77,8 @@ void radiating_energy_orb_update(EffectInstance* effect) {
     s32 unk_1C;
     s32 i;
 
-    if (effect->flags & 0x10) {
-        effect->flags &= ~0x10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         part->unk_18 = 30;
     }
 
@@ -168,7 +168,7 @@ void radiating_energy_orb_appendGfx(void* effect) {
 
         if (scale != 0.0f) {
             gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 255, (part->unk_14 * unk_14) >> 8);
-            gDPSetCombineLERP(gMainGfxPos++, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0, PRIMITIVE, 0);
+            gDPSetCombineMode(gMainGfxPos++, PM_CC_07, PM_CC_07);
 
             shim_guRotateF(sp18, part->unk_20, 0.0f, 0.0f, 1.0f);
             shim_guTranslateF(sp58, part->unk_2C, 0.0f, 0.0f);

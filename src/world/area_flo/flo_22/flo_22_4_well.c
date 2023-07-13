@@ -1,4 +1,5 @@
 #include "flo_22.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(UnusedCallback)) {
     return ApiStatus_DONE2;

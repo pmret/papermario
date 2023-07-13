@@ -1,6 +1,7 @@
 #include "common.h"
 #include "script_api/battle.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_item_volt_shroom
 
@@ -10,7 +11,7 @@ API_CALLABLE(N(func_802A123C_71AA2C)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
 
-    inflict_status(player, STATUS_STATIC, script->varTable[0]);
+    inflict_status(player, STATUS_KEY_STATIC, script->varTable[0]);
     player->statusAfflicted = 0;
     return ApiStatus_DONE2;
 }
@@ -33,7 +34,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_CALL(GetItemPower, ITEM_VOLT_SHROOM, LVar0, LVar1)
     EVT_CALL(N(func_802A123C_71AA2C))
     EVT_WAIT(20)
-    EVT_CALL(ShowMessageBox, BTL_MSG_10, 60)
+    EVT_CALL(ShowMessageBox, BTL_MSG_PLAYER_CHARGED, 60)
     EVT_CALL(WaitForMessageBoxDone)
     EVT_EXEC_WAIT(N(PlayerGoHome))
     EVT_RETURN

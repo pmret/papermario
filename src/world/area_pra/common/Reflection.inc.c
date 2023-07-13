@@ -7,6 +7,7 @@
 #include "entity.h"
 #include "npc.h"
 #include "sprite.h"
+#include "sprite/player.h"
 
 enum ReflectMode {
     REFLECTION_FLOOR_WALL   = 0,

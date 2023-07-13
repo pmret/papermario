@@ -1,5 +1,3 @@
-#include "common.h"
-
-#define NAMESPACE b_area_tik_spiny
+#include "../area.h"
 
 #include "battle/common/actor/spiny.inc.c"

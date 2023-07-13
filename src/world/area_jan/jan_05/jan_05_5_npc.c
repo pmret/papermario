@@ -1,4 +1,5 @@
 #include "jan_05.h"
+#include "sprite/player.h"
 
 #include "world/common/enemy/MBush.inc.c"
 #include "world/common/npc/YoshiKid.inc.c"

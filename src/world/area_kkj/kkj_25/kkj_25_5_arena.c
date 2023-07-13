@@ -1,5 +1,6 @@
 #include "kkj_25.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #include "world/common/todo/GetFloorCollider.inc.c"
 
@@ -103,7 +104,7 @@ s32 N(BridgeModels)[] = {
     MODEL_g45,
     MODEL_g44,
     MODEL_g43,
-    MODEL_g42, 
+    MODEL_g42,
     MODEL_g41,
     MODEL_g40,
     MODEL_g39,
@@ -111,7 +112,7 @@ s32 N(BridgeModels)[] = {
     MODEL_g37,
     MODEL_g36,
     MODEL_g35,
-    MODEL_g34, 
+    MODEL_g34,
 };
 
 EvtScript N(EVS_Scene_BowserTrapsMario) = {
@@ -285,7 +286,7 @@ Vec3i N(PowerUpBoltOrigins2)[] = {
     { 330, 160,  50 },
     { 360, 160, -50 },
     { 370, 160,  50 },
-    { 330, 160, -50 }, 
+    { 330, 160, -50 },
 };
 
 EvtScript N(EVS_Scene_ActivateMachine) = {

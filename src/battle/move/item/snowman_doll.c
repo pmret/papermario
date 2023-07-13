@@ -2,6 +2,7 @@
 #include "script_api/battle.h"
 #include "effects.h"
 #include "model.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_item_snowman_doll
 
@@ -56,7 +57,7 @@ EvtScript N(EVS_UseItem) = {
         EVT_END_LOOP
     EVT_END_THREAD
     EVT_WAIT(10)
-    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_D)
+    EVT_CALL(UseBattleCamPreset, BTL_CAM_PRESET_03)
     EVT_CALL(MoveBattleCamOver, 50)
     EVT_WAIT(50)
     EVT_PLAY_EFFECT(EFFECT_SNOWMAN_DOLL, 0, 0, 0, 20, EVT_FLOAT(1.0), 160, 0)
@@ -94,7 +95,7 @@ EvtScript N(EVS_UseItem) = {
     EVT_CALL(GetGoalPos, ACTOR_SELF, LVar0, LVar1, LVar2)
     EVT_CALL(N(func_802A123C_71C06C), LVar0, LVar1, LVar2)
     EVT_CALL(GetItemPower, ITEM_SNOWMAN_DOLL, LVar0, LVar1)
-    EVT_CALL(ItemDamageEnemy, LVar0, DAMAGE_TYPE_ICE | DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_NO_OTHER_DAMAGE_POPUPS, 0, LVar0, BS_FLAGS1_SP_EVT_ACTIVE)
+    EVT_CALL(ItemDamageEnemy, LVar0, DAMAGE_TYPE_ICE | DAMAGE_TYPE_IGNORE_DEFENSE | DAMAGE_TYPE_NO_CONTACT | DAMAGE_TYPE_MULTIPLE_POPUPS, 0, LVar0, BS_FLAGS1_SP_EVT_ACTIVE)
     EVT_WAIT(5)
     EVT_LABEL(1)
     EVT_CALL(ChooseNextTarget, ITER_NEXT, LVar0)

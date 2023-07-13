@@ -1,5 +1,3 @@
-#include "common.h"
-
-#define NAMESPACE b_area_flo_bzzap
+#include "../area.h"
 
 #include "battle/common/actor/bzzap.inc.c"

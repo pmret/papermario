@@ -6,7 +6,7 @@ EvtScript N(EVS_NpcInit_Eldstar) = {
 };
 
 EvtScript N(EVS_NpcInit_KoopaBros) = {
-    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_Anim1B)
+    EVT_CALL(SetNpcAnimation, NPC_SELF, ANIM_KoopaBros_Black_PointForward)
     EVT_CALL(SetNpcImgFXParams, NPC_SELF, IMGFX_FILL_COLOR, 80, 80, 80, 0)
     EVT_RETURN
     EVT_END

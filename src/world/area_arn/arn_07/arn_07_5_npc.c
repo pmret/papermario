@@ -1,5 +1,6 @@
 #include "arn_07.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #include "world/common/enemy/HyperParagoomba.inc.c"
 #include "world/common/npc/TubbasHeart.inc.c"
@@ -11,7 +12,7 @@ API_CALLABLE(N(UpgradeStarPowerCh3)) {
     set_max_SP(3);
     gPlayerData.curHP = gPlayerData.curMaxHP;
     gPlayerData.curFP = gPlayerData.curMaxFP;
-    sync_status_menu();
+    sync_status_bar();
     return ApiStatus_DONE2;
 }
 

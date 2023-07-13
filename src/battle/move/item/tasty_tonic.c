@@ -1,6 +1,7 @@
 #include "common.h"
 #include "script_api/battle.h"
 #include "effects.h"
+#include "sprite/player.h"
 
 #define NAMESPACE battle_item_tasty_tonic
 
@@ -11,7 +12,7 @@ API_CALLABLE(N(func_802A123C_72223C)) {
     Actor* actor = get_actor(actorId);
     s32 id = actor->actorID & ACTOR_CLASS_MASK;
 
-    if (actor->debuff != STATUS_END) {
+    if (actor->debuff != 0) {
         actor->debuffDuration = 0;
         actor->debuff = 0;
         remove_status_debuff(actor->hudElementDataIndex);

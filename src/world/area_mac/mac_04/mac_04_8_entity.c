@@ -143,7 +143,7 @@ EvtScript N(EVS_EnterToybox) = {
     EVT_IF_EQ(GF_StartedChapter4, FALSE)
         EVT_SET(GF_StartedChapter4, TRUE)
         EVT_CALL(FadeOutMusic, 0, 1500)
-        EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_22"), kmr_22_ENTRY_4, TRANSITION_6)
+        EVT_CALL(GotoMapSpecial, EVT_PTR("kmr_22"), kmr_22_ENTRY_4, TRANSITION_BEGIN_OR_END_CHAPTER)
         EVT_WAIT(100)
         EVT_RETURN
     EVT_END_IF

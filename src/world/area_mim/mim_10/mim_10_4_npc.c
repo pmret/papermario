@@ -1,4 +1,5 @@
 #include "mim_10.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(AwaitPlayerApproachForest)) {
     if (gPlayerStatus.position.x < 100.0f) {

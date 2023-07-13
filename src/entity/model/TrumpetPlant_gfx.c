@@ -83,7 +83,7 @@ Gfx Entity_TrumpetPlant_RenderNode2[] = {
     gsSP2Triangles(22, 3, 5, 0, 22, 5, 21, 0),
     gsSP2Triangles(23, 0, 3, 0, 23, 3, 22, 0),
     gsDPPipeSync(),
-    gsDPSetCombineLERP(PRIMITIVE, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_04, PM_CC_04),
     gsSPTexture(0x0001, 0x0001, 0, G_TX_RENDERTILE, G_OFF),
     gsSPEndDisplayList(),
 };
@@ -108,7 +108,7 @@ Gfx Entity_TrumpetPlant_RenderNode1[] = {
     gsSPVertex(&D_0A000000_E6D390[32], 4, 0),
     gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
     gsDPPipeSync(),
-    gsDPSetCombineLERP(PRIMITIVE, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0),
+    gsDPSetCombineMode(PM_CC_04, PM_CC_04),
     gsSPTexture(0x0001, 0x0001, 0, G_TX_RENDERTILE, G_OFF),
     gsSPEndDisplayList(),
 };

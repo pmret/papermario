@@ -1,4 +1,5 @@
 #include "kkj_03.h"
+#include "sprite/player.h"
 
 #include "world/common/npc/Peach.inc.c"
 

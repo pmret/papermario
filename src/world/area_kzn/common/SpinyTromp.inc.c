@@ -1,5 +1,6 @@
 #include "common.h"
 #include "world/area_kzn/kzn.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(SpinyTrompHit)) {
     subtract_hp(1);

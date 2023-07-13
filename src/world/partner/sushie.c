@@ -4,6 +4,7 @@
 #include "effects.h"
 #include "sprite/npc/WorldSushie.h"
 #include "sprite.h"
+#include "sprite/player.h"
 
 #define NAMESPACE world_sushie
 

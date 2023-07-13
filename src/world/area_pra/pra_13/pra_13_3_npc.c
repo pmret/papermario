@@ -1,5 +1,6 @@
 #include "pra_13.h"
 #include "sprite.h"
+#include "sprite/player.h"
 
 #include "world/common/enemy/Bombette.h"
 #include "world/common/enemy/Duplighost.h"

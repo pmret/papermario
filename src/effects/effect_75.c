@@ -24,7 +24,7 @@ EffectInstance* effect_75_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 scale
     bp.update = effect_75_update;
     bp.renderWorld = effect_75_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_75;
 
     effect = shim_create_effect_instance(&bp);
@@ -79,8 +79,8 @@ void effect_75_update(EffectInstance* effect) {
     Effect75FXData* data = effect->data.unk_75;
     s32 unk_14;
 
-    if (effect->flags & 0x10) {
-        effect->flags &= ~0x10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         data->unk_10 = 0x10;
     }
 

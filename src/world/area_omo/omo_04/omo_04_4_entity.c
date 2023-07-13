@@ -35,7 +35,7 @@ Vec3i N(StarBoxLaunchTargets)[] = {
     { -647,  80,  132 },
     { -507,  80,  132 },
     {  672, 105,  132 },
-    {  927,  80,  -87 }, 
+    {  927,  80,  -87 },
 };
 
 EvtScript N(EVS_StarBoxLaunch_Impl) = {
@@ -117,7 +117,7 @@ API_CALLABLE(N(func_802402F4_DAD6F4)) {
     f32 playerVz = gPlayerStatus.currentSpeed * 5.0f * -cos_deg(gPlayerStatus.targetYaw);
     script->varTable[0] = (gPlayerStatus.position.x + playerVx);
     script->varTable[1] = (gPlayerStatus.position.z + playerVz);
-    
+
     return ApiStatus_DONE2;
 }
 

@@ -1,22 +1,19 @@
-#include "common.h"
-#include "battle/battle.h"
+#include "area.h"
 
-#define NAMESPACE b_area_kgr
+extern ActorBlueprint A(fuzzipede);
 
-extern ActorBlueprint N(fuzzipede);
+extern Stage A(kgr_01);
 
-extern Stage N(kgr_01);
-
-Formation N(Formation_00) = {
-    { .actor = &N(fuzzipede), .home = { .index = 2 }, .priority = 10 },
+Formation A(Formation_00) = {
+    ACTOR_BY_IDX(A(fuzzipede), BTL_POS_GROUND_C, 10),
 };
 
-BattleList N(Formations) = {
-    BATTLE(N(Formation_00), &N(kgr_01), "ケムシ"),
+BattleList A(Formations) = {
+    BATTLE(A(Formation_00), A(kgr_01), "ケムシ"),
     {},
 };
 
-StageList N(Stages) = {
-    { "kgr_01", &N(kgr_01) },
+StageList A(Stages) = {
+    STAGE("kgr_01", A(kgr_01)),
     {},
 };

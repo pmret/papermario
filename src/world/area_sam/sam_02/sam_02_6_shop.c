@@ -4,23 +4,23 @@ s32 N(ShopMessages)[] = {
     [SHOP_MSG_BUY_CONFIRM      ] MSG_Shop_00_SAM02,
     [SHOP_MSG_NOT_ENOUGH_COINS ] MSG_Shop_01_SAM02,
     [SHOP_MSG_NOT_ENOUGH_ROOM  ] MSG_Shop_02_SAM02,
-    [SHOP_MSG_BUY_THANK_YOU    ] MSG_Shop_03_SAM02, 
+    [SHOP_MSG_BUY_THANK_YOU    ] MSG_Shop_03_SAM02,
     [SHOP_MSG_GREETING         ] MSG_Shop_04_SAM02,
     [SHOP_MSG_INSTRUCTIONS     ] MSG_Shop_05_SAM02,
     [SHOP_MSG_NOTHING_TO_SELL  ] MSG_Shop_06_SAM02,
-    [SHOP_MSG_SELL_WHICH       ] MSG_Shop_07_SAM02, 
+    [SHOP_MSG_SELL_WHICH       ] MSG_Shop_07_SAM02,
     [SHOP_MSG_SELL_CONFIRM     ] MSG_Shop_08_SAM02,
     [SHOP_MSG_SELL_CANCEL      ] MSG_Shop_09_SAM02,
     [SHOP_MSG_SELL_MORE        ] MSG_Shop_0A_SAM02,
-    [SHOP_MSG_SELL_THANKS      ] MSG_Shop_0B_SAM02, 
+    [SHOP_MSG_SELL_THANKS      ] MSG_Shop_0B_SAM02,
     [SHOP_MSG_NOTHING_TO_CHECK ] MSG_Shop_0C_SAM02,
     [SHOP_MSG_NO_CHECK_ROOM    ] MSG_Shop_0D_SAM02,
     [SHOP_MSG_CHECK_WHICH      ] MSG_Shop_0E_SAM02,
-    [SHOP_MSG_CHECK_ACCEPTED   ] MSG_Shop_0F_SAM02, 
+    [SHOP_MSG_CHECK_ACCEPTED   ] MSG_Shop_0F_SAM02,
     [SHOP_MSG_CHECK_MORE       ] MSG_Shop_10_SAM02,
     [SHOP_MSG_NOTHING_TO_CLAIM ] MSG_Shop_11_SAM02,
     [SHOP_MSG_NO_CLAIM_ROOM    ] MSG_Shop_12_SAM02,
-    [SHOP_MSG_CLAIM_WHICH      ] MSG_Shop_13_SAM02, 
+    [SHOP_MSG_CLAIM_WHICH      ] MSG_Shop_13_SAM02,
     [SHOP_MSG_CLAIM_ACCEPTED   ] MSG_Shop_14_SAM02,
     [SHOP_MSG_CLAIM_MORE       ] MSG_Shop_15_SAM02,
     [SHOP_MSG_FAREWELL         ] MSG_Shop_16_SAM02,
@@ -37,24 +37,24 @@ ShopItemData N(Inventory)[] = {
 };
 
 ShopSellPriceData N(PriceList)[] = {
-    { .itemID = ITEM_FIRE_FLOWER,  .sellPrice =  8 }, 
-    { .itemID = ITEM_BLAND_MEAL,   .sellPrice = 15 }, 
-    { .itemID = ITEM_YUMMY_MEAL,   .sellPrice = 20 }, 
-    { .itemID = ITEM_DELUXE_FEAST, .sellPrice = 70 }, 
-    { .itemID = ITEM_FROZEN_FRIES, .sellPrice = 18 }, 
-    { .itemID = ITEM_POTATO_SALAD, .sellPrice = 10 }, 
+    { .itemID = ITEM_FIRE_FLOWER,  .sellPrice =  8 },
+    { .itemID = ITEM_BLAND_MEAL,   .sellPrice = 15 },
+    { .itemID = ITEM_YUMMY_MEAL,   .sellPrice = 20 },
+    { .itemID = ITEM_DELUXE_FEAST, .sellPrice = 70 },
+    { .itemID = ITEM_FROZEN_FRIES, .sellPrice = 18 },
+    { .itemID = ITEM_POTATO_SALAD, .sellPrice = 10 },
     {},
 };
 
 s32 N(UnknownData)[] = {
-    ITEM_FIRE_FLOWER,     5, 
+    ITEM_FIRE_FLOWER,     5,
     ITEM_SNOWMAN_DOLL,    5,
-    ITEM_THUNDER_RAGE,    5, 
-    ITEM_SHOOTING_STAR,  10, 
-    ITEM_DUSTY_HAMMER,    3, 
-    ITEM_PEBBLE,          3, 
+    ITEM_THUNDER_RAGE,    5,
+    ITEM_SHOOTING_STAR,  10,
+    ITEM_DUSTY_HAMMER,    3,
+    ITEM_PEBBLE,          3,
     ITEM_STONE_CAP,       5,
-    ITEM_VOLT_SHROOM,    ITEM_VOLT_SHROOM, 
+    ITEM_VOLT_SHROOM,    ITEM_VOLT_SHROOM,
 };
 
 EvtScript N(EVS_OnBuy) = {
@@ -99,7 +99,7 @@ EvtScript N(EVS_SetupShop) = {
         EVT_CASE_GE(STORY_CH7_MAYOR_MURDER_SOLVED)
             EVT_CALL(ModifyColliderFlags, MODIFY_COLLIDER_FLAGS_SET_BITS, COLLIDER_o512, COLLIDER_FLAGS_UPPER_MASK)
     EVT_END_SWITCH
-    EVT_CALL(MakeShop, EVT_PTR(N(ItemPositions)), EVT_PTR(N(Inventory)), EVT_PTR(N(PriceList)), ITEM_ENTITY_FLAG_10000)
+    EVT_CALL(MakeShop, EVT_PTR(N(ItemPositions)), EVT_PTR(N(Inventory)), EVT_PTR(N(PriceList)), ITEM_ENTITY_FLAG_TOSS_LOWER)
     EVT_CALL(MakeShopOwner, EVT_PTR(N(Owner)))
     EVT_RETURN
     EVT_END

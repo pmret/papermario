@@ -57,7 +57,7 @@ void flame_main(
     bpPtr->update = flame_update;
     bpPtr->renderWorld = flame_render;
     bpPtr->unk_00 = 0;
-    bpPtr->unk_14 = NULL;
+    bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_FLAME;
 
     effect = shim_create_effect_instance(bpPtr);

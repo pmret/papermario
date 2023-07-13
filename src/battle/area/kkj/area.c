@@ -1,22 +1,19 @@
-#include "common.h"
-#include "battle/battle.h"
+#include "area.h"
 
-#define NAMESPACE b_area_kkj
+extern ActorBlueprint A(kammy_koopa);
 
-extern ActorBlueprint N(kammy_koopa);
+extern Stage A(kkj_02);
 
-extern Stage N(kpa_05);
-
-Formation N(Formation_00) = {
-    { .actor = &N(kammy_koopa), .home = { .index = 6 }, .priority = 10, },
+Formation A(Formation_00) = {
+    ACTOR_BY_IDX(A(kammy_koopa), BTL_POS_AIR_C, 10),
 };
 
-BattleList N(Formations) = {
-    BATTLE(N(Formation_00), &N(kpa_05), "カメックばば（ピーチ、ティンクせん）"),
+BattleList A(Formations) = {
+    BATTLE(A(Formation_00), A(kkj_02), "カメックばば（ピーチ、ティンクせん）"),
     {},
 };
 
-StageList N(Stages) = {
-    { "kpa_05", &N(kpa_05) },
+StageList A(Stages) = {
+    STAGE("kpa_05", A(kkj_02)),
     {},
 };

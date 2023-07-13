@@ -35,7 +35,7 @@ static s32 gPauseMapSpacesInSnapRange;
 HudScript* gPauseMapIconScripts[] = { &HES_MapWalk0 };
 s32 D_8024FA34 = -1;
 Vec2b gPauseMapPaths[][32] = {
-    { { 1, -10 }, { 1, -8 }, { -9, -2 }, { -8, 0 }, { -8, 0 }, { -7, -3 }, { -5, -3 }, },
+    { { 1, -10 }, { 1, -8 }, { -9, -2 }, { -8, 0 }, { -8, 0 }, { -7, -3 }, { -5, -3 } },
     { { -1, 24 }, { 1, -8 }, { 2, -7 } },
     { { -3, 7 }, { -7, 4 }, { -8, 2 } },
     { },

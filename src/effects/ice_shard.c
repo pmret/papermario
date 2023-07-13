@@ -30,7 +30,7 @@ EffectInstance* ice_shard_main(
     bp.update = ice_shard_update;
     bp.renderWorld = ice_shard_render;
     bp.unk_00 = 0;
-    bp.unk_14 = NULL;
+    bp.renderUI = NULL;
     bp.effectID = EFFECT_ICE_SHARD;
 
     effect = shim_create_effect_instance(&bp);
@@ -76,8 +76,8 @@ void ice_shard_update(EffectInstance* effect) {
     IceShardFXData* data = effect->data.iceShard;
     s32 unk_00 = data->type;
 
-    if (effect->flags & EFFECT_INSTANCE_FLAG_10) {
-        effect->flags &= ~EFFECT_INSTANCE_FLAG_10;
+    if (effect->flags & FX_INSTANCE_FLAG_DISMISS) {
+        effect->flags &= ~FX_INSTANCE_FLAG_DISMISS;
         data->timeLeft = 16;
     }
 

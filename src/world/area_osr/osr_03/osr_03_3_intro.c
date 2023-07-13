@@ -1,4 +1,5 @@
 #include "osr_03.h"
+#include "sprite/player.h"
 
 API_CALLABLE(N(MakeCastleChainAngle)) {
     Bytecode* args = script->ptrReadPos;
