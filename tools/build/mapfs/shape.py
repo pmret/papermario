@@ -107,7 +107,8 @@ class HeaderSegment(Segment):
         shape.print(f"\t.vertexTable = {shape.get_symbol(self.ptr_vtx_table)},")
         shape.print(f"\t.modelNames = {shape.get_symbol(self.ptr_model_names)},")
         shape.print(f"\t.colliderNames = {shape.get_symbol(self.ptr_collider_names)},")
-        shape.print(f"\t.zoneNames = {shape.get_symbol(self.ptr_zone_names)},")
+        if self.ptr_zone_names != 0:
+            shape.print(f"\t.zoneNames = {shape.get_symbol(self.ptr_zone_names)},")
         shape.print("};")
 
 
@@ -336,7 +337,7 @@ class LightSetSegment(Segment):
         shape.print(f"\t{hex(a)}, {hex(b)},")
 
         for i in range(self.count):
-            (a, b, c) = struct.unpack(">III", shape.file_bytes[pos : pos + 8])
+            (a, b, c) = struct.unpack(">III", shape.file_bytes[pos : pos + 12])
             pos += 12
             shape.print(f"\t{hex(a)}, {hex(b)}, {hex(c)},")
 
@@ -352,21 +353,21 @@ class MatrixSegment(Segment):
         pos = self.addr - BASE_ADDR
         shape.print(f"Matrix4s {self.get_sym()} = {{")
 
-        shape.print("\t.whole = {{")
+        shape.print("\t.whole = {")
         for i in range(4):
-            (a, b, c, d) = struct.unpack(">hhhh", shape.file_bytes[pos : pos + 16])
+            (a, b, c, d) = struct.unpack(">hhhh", shape.file_bytes[pos : pos + 8])
             pos += 16
             shape.print(f"\t\t{{ {hex(a):4}, {hex(b):4}, {hex(c):4}, {hex(d):4} }},")
-        shape.print("\t}},")
+        shape.print("\t},")
 
-        shape.print("\t.frac = {{")
+        shape.print("\t.frac = {")
         for i in range(4):
-            (a, b, c, d) = struct.unpack(">hhhh", shape.file_bytes[pos : pos + 16])
+            (a, b, c, d) = struct.unpack(">hhhh", shape.file_bytes[pos : pos + 8])
             pos += 16
             shape.print(f"\t\t{{ {hex(a):4}, {hex(b):4}, {hex(c):4}, {hex(d):4} }},")
-        shape.print("\t}},")
+        shape.print("\t},")
 
-        shape.print("}};")
+        shape.print("};")
 
 
 class DisplayDataSegment(Segment):
@@ -573,7 +574,6 @@ class ShapeFile:
         assert self.vtx_table is not None
         assert self.model_names is not None
         assert self.collider_names is not None
-        assert self.zone_names is not None
 
         self.print('#include "common.h"')
         self.print('#include "model.h"')
@@ -584,16 +584,15 @@ class ShapeFile:
         self.print(f"extern Vtx_t {self.vtx_table.get_sym()}[];")
         self.print(f"extern char* {self.model_names.get_sym()}[];")
         self.print(f"extern char* {self.collider_names.get_sym()}[];")
-        self.print(f"extern char* {self.zone_names.get_sym()}[];")
+
+        if self.zone_names is not None:
+            self.print(f"extern char* {self.zone_names.get_sym()}[];")
         for segment in segments:
             if isinstance(segment, MatrixSegment):
                 self.print(f"extern Matrix4s {segment.get_sym()};")
         self.print("")
 
     def digest(self):
-        assert self.model_names is not None
-        assert self.root_node is not None
-
         # first pass just scans the header and string lists
         self.push(HeaderSegment(BASE_ADDR, "Header"))
 
