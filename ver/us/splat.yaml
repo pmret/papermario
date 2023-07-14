@@ -902,7 +902,6 @@ segments:
     - [auto, c, fa4c0_len_3bf0]
     - [auto, c, fx_api]
     - [auto, c, demo_api]
-    - [0xFE650]
   - name: engine4
     type: code
     start: 0xFEE30
@@ -911,7 +910,6 @@ segments:
     subsegments:
     - [auto, c, sprite]
     - [auto, c, 101b90_len_8f0]
-    - [0x102480]
   - name: entity
     type: code
     start: 0x102610
@@ -1377,12 +1375,12 @@ segments:
     - [auto, c, 16F740]
     - [auto, c, battle_cam]
     - [auto, c, 17D6A0]
-    - [0x17FEB0, c]
+    - [auto, c, 17FEB0]
     - [auto, c, 181810]
     - [auto, c, 182B30]
     - [auto, c, 18C790]
     - [auto, c, 18F340]
-    - [0x190A10, c]
+    - [auto, c, 190A10]
     - [auto, c, 190B20]
     - [auto, c, battle/use_items]
     - [auto, c, battle/use_moves]
@@ -1390,7 +1388,7 @@ segments:
     - [auto, c, actor_api]
     - [auto, c, 19FAF0]
     - [auto, c, 1A5830]
-    - [0x1AC760, c]
+    - [auto, c, 1AC760]
     - [auto, c, battle/btl_evt_library]
     - [auto, c, battle/use_star_powers]
     - [auto, .data, 16c8e0]
@@ -2666,7 +2664,6 @@ segments:
     vram_of_symbol: entity_data_vram_end
     subsegments:
     - [auto, c, goombario]
-    - [0x317B60]
   - type: code
     dir: world/partner
     name: world_partner_bombette
@@ -2675,7 +2672,6 @@ segments:
     vram_of_symbol: entity_data_vram_end
     subsegments:
     - [auto, c, bombette]
-    - [0x3195D0]
   - type: code
     dir: world/partner
     name: world_partner_parakarry
@@ -2684,7 +2680,6 @@ segments:
     vram_of_symbol: entity_data_vram_end
     subsegments:
     - [auto, c, parakarry]
-    - [0x31B000]
   - type: code
     dir: world/partner
     name: world_partner_kooper
@@ -2693,7 +2688,6 @@ segments:
     vram_of_symbol: entity_data_vram_end
     subsegments:
     - [auto, c, kooper]
-    - [0x31CB60]
   - type: code
     dir: world/partner
     name: world_partner_watt
@@ -2702,7 +2696,6 @@ segments:
     vram_of_symbol: entity_data_vram_end
     subsegments:
     - [auto, c, watt]
-    - [0x31DDC0]
   - type: code
     dir: world/partner
     name: world_partner_sushie
@@ -2711,7 +2704,6 @@ segments:
     vram_of_symbol: entity_data_vram_end
     subsegments:
     - [auto, c, sushie]
-    - [0x320B20]
   - type: code
     dir: world/partner
     name: world_partner_lakilester
@@ -2720,7 +2712,6 @@ segments:
     vram_of_symbol: entity_data_vram_end
     subsegments:
     - [auto, c, lakilester]
-    - [0x3239B0]
   - type: code
     dir: world/partner
     name: world_partner_bow
@@ -2729,7 +2720,6 @@ segments:
     vram_of_symbol: entity_data_vram_end
     subsegments:
     - [auto, c, bow]
-    - [0x324930]
   - type: code
     dir: world/partner
     name: world_partner_goompa
@@ -2738,7 +2728,6 @@ segments:
     vram_of_symbol: entity_data_vram_end
     subsegments:
     - [auto, c, goompa]
-    - [0x324E80]
   - type: code
     dir: world/partner
     name: world_partner_goombaria
@@ -2747,7 +2736,6 @@ segments:
     vram_of_symbol: entity_data_vram_end
     subsegments:
     - [auto, c, goombaria]
-    - [0x325000]
   - type: code
     dir: world/partner
     name: world_partner_twink
@@ -2756,7 +2744,6 @@ segments:
     vram_of_symbol: entity_data_vram_end
     subsegments:
     - [auto, c, twink]
-    - [0x325160]
   - type: code
     start: 0x3251D0
     name: world_use_item
@@ -2764,7 +2751,6 @@ segments:
     vram_of_symbol: world_partner_vram_end
     subsegments:
     - [auto, c, world_use_item]
-    - [0x3255E0]
 
 ###############
 ### Effects ###
@@ -2773,7 +2759,7 @@ segments:
     start: 0x325AD0
     vram: 0xE0200000
     subsegments:
-    - [0x325AD0, c]
+    - [auto, c, 325AD0]
     - [0x325EE0, pm_effect_shims, effect_shims]
     - [0x326160]
   - name: effect_gfx_big_smoke_puff
@@ -2819,7 +2805,6 @@ segments:
     vram: 0xE0002000
     subsegments:
     - [auto, c, big_smoke_puff]
-    - [0x328050]
   - name: effect_landing_dust
     dir: effects
     type: code
@@ -2827,7 +2812,6 @@ segments:
     vram: 0xE000C000
     subsegments:
     - [auto, c, landing_dust]
-    - [0x328D20]
   - name: effect_gfx_landing_dust
     dir: effects/gfx
     type: code
@@ -2881,7 +2865,6 @@ segments:
     vram: 0xE000E000
     subsegments:
     - [auto, c, walking_dust]
-    - [0x32C770]
   - name: effect_flower_splash
     dir: effects
     type: code
@@ -2889,7 +2872,6 @@ segments:
     vram: 0xE0010000
     subsegments:
     - [auto, c, flower_splash]
-    - [0x32CEB0]
   - name: effect_gfx_flower_splash_trail
     dir: effects/gfx
     type: code
@@ -2935,7 +2917,6 @@ segments:
     vram: 0xE0014000
     subsegments:
     - [auto, c, cloud_puff]
-    - [0x32EC10]
   - name: effect_gfx_cloud_puff_trail
     dir: effects/gfx
     type: code
@@ -2961,7 +2942,6 @@ segments:
     vram: 0xE0016000
     subsegments:
     - [auto, c, cloud_trail]
-    - [0x32F550]
   - name: effect_footprint
     dir: effects
     type: code
@@ -2992,7 +2972,6 @@ segments:
     vram: 0xE001A000
     subsegments:
     - [auto, c, floating_flower]
-    - [0x330440]
   - name: effect_gfx_floating_flower
     dir: effects/gfx
     type: code
@@ -3020,7 +2999,6 @@ segments:
     vram: 0xE001C000
     subsegments:
     - [auto, c, snowflake]
-    - [0x330EF0]
   - name: effect_gfx_snowflake
     dir: effects/gfx
     type: code
@@ -3048,7 +3026,6 @@ segments:
     vram: 0xE001E000
     subsegments:
     - [auto, c, star]
-    - [0x332690]
   - name: effect_gfx_star
     dir: effects/gfx
     type: code
@@ -3078,7 +3055,6 @@ segments:
     vram: 0xE0020000
     subsegments:
     - [auto, c, emote]
-    - [0x334B50]
   - name: effect_gfx_emote
     dir: effects/gfx
     type: code
@@ -3119,7 +3095,6 @@ segments:
     vram: 0xE0022000
     subsegments:
     - [auto, c, sparkles]
-    - [0x337F10]
   - name: effect_gfx_sparkles
     dir: effects/gfx
     type: code
@@ -3158,7 +3133,6 @@ segments:
     vram: 0xE0024000
     subsegments:
     - [auto, c, shape_spell]
-    - [0x339F10]
   - name: effect_gfx_shape_spell
     dir: effects/gfx
     type: code
@@ -3189,7 +3163,6 @@ segments:
     vram: 0xE0026000
     subsegments:
     - [auto, c, gather_energy_pink]
-    - [0x33BB70]
   - name: effect_gfx_gather_energy_pink
     dir: effects/gfx
     type: code
@@ -3219,7 +3192,6 @@ segments:
     vram: 0xE0028000
     subsegments:
     - [auto, c, drop_leaves]
-    - [0x33D5D0]
   - name: effect_gfx_drop_leaves
     dir: effects/gfx
     type: code
@@ -3248,7 +3220,6 @@ segments:
     vram: 0xE002A000
     subsegments:
     - [auto, c, dust]
-    - [0x33EFE0]
   - name: effect_gfx_dust
     dir: effects/gfx
     type: code
@@ -3279,7 +3250,6 @@ segments:
     vram: 0xE002C000
     subsegments:
     - [auto, c, shattering_stones]
-    - [0x3407C0]
   - name: effect_gfx_shattering_stones
     dir: effects/gfx
     type: code
@@ -3320,7 +3290,6 @@ segments:
     vram: 0xE002E000
     subsegments:
     - [auto, c, smoke_ring]
-    - [0x342120]
   - name: effect_damage_stars
     dir: effects
     type: code
@@ -3328,7 +3297,6 @@ segments:
     vram: 0xE0030000
     subsegments:
     - [auto, c, damage_stars]
-    - [0x342FD0]
   - name: effect_gfx_damage_stars
     dir: effects/gfx
     type: code
@@ -3357,7 +3325,6 @@ segments:
     vram: 0xE0032000
     subsegments:
     - [auto, c, explosion]
-    - [0x343F30]
   - name: effect_gfx_explosion
     dir: effects/gfx
     type: code
@@ -3389,7 +3356,6 @@ segments:
     vram: 0xE0034000
     subsegments:
     - [auto, c, lens_flare]
-    - [0x345190]
   - name: effect_gfx_lens_flare
     dir: effects/gfx
     type: code
@@ -3413,7 +3379,6 @@ segments:
     vram: 0xE0036000
     subsegments:
     - [auto, c, got_item_outline]
-    - [0x345B10]
   - name: effect_gfx_got_item_outline
     dir: effects/gfx
     type: code
@@ -3448,7 +3413,6 @@ segments:
     vram: 0xE0038000
     subsegments:
     - [auto, c, spiky_white_aura]
-    - [0x34E710]
   - name: effect_gfx_spiky_white_aura
     dir: effects/gfx
     type: code
@@ -3473,7 +3437,6 @@ segments:
     vram: 0xE003A000
     subsegments:
     - [auto, c, smoke_impact]
-    - [0x34F480]
   - name: effect_damage_indicator
     dir: effects
     type: code
@@ -3481,7 +3444,6 @@ segments:
     vram: 0xE003C000
     subsegments:
     - [auto, c, damage_indicator]
-    - [0x350160]
   - name: effect_gfx_damage_indicator
     dir: effects/gfx
     type: code
@@ -3545,7 +3507,6 @@ segments:
     vram: 0xE003E000
     subsegments:
     - [auto, c, purple_ring]
-    - [0x352CB0]
   - name: effect_gfx_purple_ring
     dir: effects/gfx
     type: code
@@ -3573,7 +3534,6 @@ segments:
     vram: 0xE0040000
     subsegments:
     - [auto, c, flame]
-    - [0x353B40]
   - name: effect_gfx_flame
     dir: effects/gfx
     type: code
@@ -3602,7 +3562,6 @@ segments:
     vram: 0xE0042000
     subsegments:
     - [auto, c, stars_burst]
-    - [0x354F20]
   - name: effect_stars_shimmer
     dir: effects
     type: code
@@ -3610,7 +3569,6 @@ segments:
     vram: 0xE0044000
     subsegments:
     - [auto, c, stars_shimmer]
-    - [0x355D10]
   - name: effect_rising_bubble
     dir: effects
     type: code
@@ -3618,7 +3576,6 @@ segments:
     vram: 0xE0046000
     subsegments:
     - [auto, c, rising_bubble]
-    - [0x3564E0]
   - name: effect_gfx_rising_bubble
     dir: effects/gfx
     type: code
@@ -3650,7 +3607,6 @@ segments:
     vram: 0xE0048000
     subsegments:
     - [auto, c, ring_blast]
-    - [0x357380]
   - name: effect_gfx_ring_blast
     dir: effects/gfx
     type: code
@@ -3675,7 +3631,6 @@ segments:
     vram: 0xE004A000
     subsegments:
     - [auto, c, shockwave]
-    - [0x359320]
   - name: effect_gfx_shockwave
     dir: effects/gfx
     type: code
@@ -3703,7 +3658,6 @@ segments:
     vram: 0xE004C000
     subsegments:
     - [auto, c, music_note]
-    - [0x35A580]
   - name: effect_gfx_music_note
     dir: effects/gfx
     type: code
@@ -3746,7 +3700,6 @@ segments:
     vram: 0xE004E000
     subsegments:
     - [auto, c, smoke_burst]
-    - [0x35BFB0]
   - name: effect_sweat
     dir: effects
     type: code
@@ -3754,7 +3707,6 @@ segments:
     vram: 0xE0050000
     subsegments:
     - [auto, c, sweat]
-    - [0x35C530]
   - name: effect_gfx_sweat
     dir: effects/gfx
     type: code
@@ -3782,7 +3734,6 @@ segments:
     vram: 0xE0052000
     subsegments:
     - [auto, c, sleep_bubble]
-    - [0x35D460]
   - name: effect_gfx_sleep_bubble
     dir: effects/gfx
     type: code
@@ -3809,7 +3760,6 @@ segments:
     vram: 0xE0056000
     subsegments:
     - [auto, c, windy_leaves]
-    - [0x35E8A0]
   - name: effect_falling_leaves
     dir: effects
     type: code
@@ -3817,7 +3767,6 @@ segments:
     vram: 0xE0058000
     subsegments:
     - [auto, c, falling_leaves]
-    - [0x35F0A0]
   - name: effect_gfx_falling_leaves
     dir: effects/gfx
     type: code
@@ -3842,7 +3791,6 @@ segments:
     vram: 0xE005A000
     subsegments:
     - [auto, c, stars_spread]
-    - [0x360A10]
   - name: effect_gfx_stars_spread
     dir: effects/gfx
     type: code
@@ -3866,7 +3814,6 @@ segments:
     vram: 0xE005C000
     subsegments:
     - [auto, c, steam_burst]
-    - [0x361640]
   - name: effect_gfx_steam_burst
     dir: effects/gfx
     type: code
@@ -3890,7 +3837,6 @@ segments:
     vram: 0xE005E000
     subsegments:
     - [auto, c, stars_orbiting]
-    - [0x362C30]
   - name: effect_gfx_stars_orbiting
     dir: effects/gfx
     type: code
@@ -3914,7 +3860,6 @@ segments:
     vram: 0xE0060000
     subsegments:
     - [auto, c, big_snowflakes]
-    - [0x363890]
   - name: effect_gfx_big_snowflakes
     dir: effects/gfx
     type: code
@@ -3942,7 +3887,6 @@ segments:
     vram: 0xE0062000
     subsegments:
     - [auto, c, debuff]
-    - [0x364BC0]
   - name: effect_gfx_debuff
     dir: effects/gfx
     type: code
@@ -3967,7 +3911,6 @@ segments:
     vram: 0xE0064000
     subsegments:
     - [auto, c, green_impact]
-    - [0x365970]
   - name: effect_gfx_green_impact
     dir: effects/gfx
     type: code
@@ -3992,7 +3935,6 @@ segments:
     vram: 0xE0066000
     subsegments:
     - [auto, c, radial_shimmer]
-    - [0x366C80]
   - name: effect_gfx_radial_shimmer
     dir: effects/gfx
     type: code
@@ -4034,7 +3976,6 @@ segments:
     vram: 0xE0068000
     subsegments:
     - [auto, c, ending_decals]
-    - [0x36AE80]
   - name: effect_gfx_ending_decals
     dir: effects/gfx
     type: code
@@ -4069,7 +4010,6 @@ segments:
     vram: 0xE006A000
     subsegments:
     - [auto, c, light_rays]
-    - [0x36DE10]
   - name: effect_gfx_light_rays
     dir: effects/gfx
     type: code
@@ -4096,7 +4036,6 @@ segments:
     vram: 0xE006C000
     subsegments:
     - [auto, c, lightning]
-    - [0x36ED30]
   - name: effect_gfx_lightning
     dir: effects/gfx
     type: code
@@ -4155,7 +4094,6 @@ segments:
     vram: 0xE006E000
     subsegments:
     - [auto, c, fire_breath]
-    - [0x373390]
   - name: effect_gfx_fire_breath
     dir: effects/gfx
     type: code
@@ -4186,7 +4124,6 @@ segments:
     vram: 0xE0070000
     subsegments:
     - [auto, c, shimmer_burst]
-    - [0x374D80]
   - name: effect_energy_shockwave
     dir: effects
     type: code
@@ -4194,7 +4131,6 @@ segments:
     vram: 0xE0072000
     subsegments:
     - [auto, c, energy_shockwave]
-    - [0x375500]
   - name: effect_gfx_energy_shockwave
     dir: effects/gfx
     type: code
@@ -4221,7 +4157,6 @@ segments:
     vram: 0xE0074000
     subsegments:
     - [auto, c, shimmer_wave]
-    - [0x376FC0]
   - name: effect_aura
     dir: effects
     type: code
@@ -4229,7 +4164,6 @@ segments:
     vram: 0xE0076000
     subsegments:
     - [auto, c, aura]
-    - [0x377F00]
   - name: effect_gfx_aura
     dir: effects/gfx
     type: code
@@ -4273,7 +4207,6 @@ segments:
     vram: 0xE0078000
     subsegments:
     - [auto, c, bulb_glow]
-    - [0x37ACF0]
   - name: effect_gfx_bulb_glow
     dir: effects/gfx
     type: code
@@ -4302,7 +4235,6 @@ segments:
     vram: 0xE007A000
     subsegments:
     - [auto, c, effect_3D]
-    - [0x37D140]
   - name: effect_gfx_effect_3D
     dir: effects/gfx
     type: code
@@ -4327,7 +4259,6 @@ segments:
     vram: 0xE007C000
     subsegments:
     - [auto, c, blast]
-    - [0x37D9A0]
   - name: effect_gfx_blast
     dir: effects/gfx
     type: code
@@ -4379,7 +4310,6 @@ segments:
     vram: 0xE007E000
     subsegments:
     - [auto, c, fire_flower]
-    - [0x380350]
   - name: effect_gfx_fire_flower
     dir: effects/gfx
     type: code
@@ -4417,7 +4347,6 @@ segments:
     vram: 0xE0080000
     subsegments:
     - [auto, c, recover]
-    - [0x381D80]
   - name: effect_gfx_recover
     dir: effects/gfx
     type: code
@@ -4484,7 +4413,6 @@ segments:
     vram: 0xE0082000
     subsegments:
     - [auto, c, disable_x]
-    - [0x386340]
   - name: effect_gfx_disable_x
     dir: effects/gfx
     type: code
@@ -4540,7 +4468,6 @@ segments:
     vram: 0xE0084000
     subsegments:
     - [auto, c, bombette_breaking]
-    - [0x3897E0]
   - name: effect_firework
     dir: effects
     type: code
@@ -4548,7 +4475,6 @@ segments:
     vram: 0xE0086000
     subsegments:
     - [auto, c, firework]
-    - [0x38A2F0]
   - name: effect_gfx_firework
     dir: effects/gfx
     type: code
@@ -4580,7 +4506,6 @@ segments:
     vram: 0xE0088000
     subsegments:
     - [auto, c, confetti]
-    - [0x38BAB0]
   - name: effect_gfx_confetti
     dir: effects/gfx
     type: code
@@ -4609,7 +4534,6 @@ segments:
     vram: 0xE008A000
     subsegments:
     - [auto, c, snowfall]
-    - [0x38D040]
   - name: effect_gfx_snowfall
     dir: effects/gfx
     type: code
@@ -4639,7 +4563,6 @@ segments:
     vram: 0xE008C000
     subsegments:
     - [auto, c, effect_46]
-    - [0x38E8F0]
   - name: effect_gfx_effect_46
     dir: effects/gfx
     type: code
@@ -4663,7 +4586,6 @@ segments:
     vram: 0xE008E000
     subsegments:
     - [auto, c, gather_magic]
-    - [0x38F6F0]
   - name: effect_gfx_gather_magic
     dir: effects/gfx
     type: code
@@ -4690,7 +4612,6 @@ segments:
     vram: 0xE0090000
     subsegments:
     - [auto, c, attack_result_text]
-    - [0x390340]
   - name: effect_gfx_attack_result_text
     dir: effects/gfx
     type: code
@@ -4734,7 +4655,6 @@ segments:
     vram: 0xE0092000
     subsegments:
     - [auto, c, small_gold_sparkle]
-    - [0x3923C0]
   - name: effect_gfx_small_gold_sparkle
     dir: effects/gfx
     type: code
@@ -4767,7 +4687,6 @@ segments:
     vram: 0xE0094000
     subsegments:
     - [auto, c, flashing_box_shockwave]
-    - [0x393080]
   - name: effect_gfx_flashing_box_shockwave
     dir: effects/gfx
     type: code
@@ -4801,7 +4720,6 @@ segments:
     vram: 0xE0096000
     subsegments:
     - [auto, c, balloon]
-    - [0x394660]
   - name: effect_gfx_balloon
     dir: effects/gfx
     type: code
@@ -4838,7 +4756,6 @@ segments:
     vram: 0xE0098000
     subsegments:
     - [auto, c, floating_rock]
-    - [0x3960C0]
   - name: effect_gfx_floating_rock
     dir: effects/gfx
     type: code
@@ -4866,7 +4783,6 @@ segments:
     vram: 0xE009A000
     subsegments:
     - [auto, c, chomp_drop]
-    - [0x397010]
   - name: effect_gfx_chomp_drop
     dir: effects/gfx
     type: code
@@ -4988,7 +4904,6 @@ segments:
     vram: 0xE009E000
     subsegments:
     - [auto, c, radiating_energy_orb]
-    - [0x3A0D10]
   - name: effect_gfx_radiating_energy_orb
     dir: effects/gfx
     type: code
@@ -5045,7 +4960,6 @@ segments:
     vram: 0xE00A2000
     subsegments:
     - [auto, c, motion_blur_flame]
-    - [0x3A3360]
   - name: effect_gfx_motion_blur_flame
     dir: effects/gfx
     type: code
@@ -5071,7 +4985,6 @@ segments:
     vram: 0xE00A4000
     subsegments:
     - [auto, c, energy_orb_wave]
-    - [0x3A42B0]
   - name: effect_gfx_energy_orb_wave
     dir: effects/gfx
     type: code
@@ -5130,7 +5043,6 @@ segments:
     vram: 0xE00A8000
     subsegments:
     - [auto, c, quizmo_audience]
-    - [0x3A7710]
   - name: effect_gfx_quizmo_audience
     dir: effects/gfx
     type: code
@@ -5191,7 +5103,6 @@ segments:
     vram: 0xE00AA000
     subsegments:
     - [auto, c, butterflies]
-    - [0x3AAFE0]
   - name: effect_gfx_butterflies
     dir: effects/gfx
     type: code
@@ -5248,7 +5159,6 @@ segments:
     vram: 0xE00AC000
     subsegments:
     - [auto, c, stat_change]
-    - [0x3AF5D0]
   - name: effect_gfx_stat_change
     dir: effects/gfx
     type: code
@@ -5330,7 +5240,6 @@ segments:
     vram: 0xE00B0000
     subsegments:
     - [auto, c, thunderbolt_ring]
-    - [0x3B4690]
   - name: effect_gfx_thunderbolt_ring
     dir: effects/gfx
     type: code
@@ -5353,7 +5262,6 @@ segments:
     vram: 0xE00B2000
     subsegments:
     - [auto, c, squirt]
-    - [0x3B5330]
   - name: effect_gfx_squirt
     dir: effects/gfx
     type: code
@@ -5379,7 +5287,6 @@ segments:
     vram: 0xE00B4000
     subsegments:
     - [auto, c, water_block]
-    - [0x3B69E0]
   - name: effect_gfx_water_block
     dir: effects/gfx
     type: code
@@ -5409,7 +5316,6 @@ segments:
     vram: 0xE00B6000
     subsegments:
     - [auto, c, waterfall]
-    - [0x3B78B0]
   - name: effect_gfx_waterfall
     dir: effects/gfx
     type: code
@@ -5432,7 +5338,6 @@ segments:
     vram: 0xE00B8000
     subsegments:
     - [auto, c, water_fountain]
-    - [0x3B8470]
   - name: effect_gfx_water_fountain
     dir: effects/gfx
     type: code
@@ -5459,7 +5364,6 @@ segments:
     vram: 0xE00BA000
     subsegments:
     - [auto, c, underwater]
-    - [0x3B9A50]
   - name: effect_gfx_underwater
     dir: effects/gfx
     type: code
@@ -5493,7 +5397,6 @@ segments:
     vram: 0xE00BC000
     subsegments:
     - [auto, c, lightning_bolt]
-    - [0x3BAC60]
   - name: effect_gfx_lightning_bolt
     dir: effects/gfx
     type: code
@@ -5516,7 +5419,6 @@ segments:
     vram: 0xE00BE000
     subsegments:
     - [auto, c, water_splash]
-    - [0x3BCA50]
   - name: effect_gfx_water_splash
     dir: effects/gfx
     type: code
@@ -5545,7 +5447,6 @@ segments:
     vram: 0xE00C0000
     subsegments:
     - [auto, c, snowman_doll]
-    - [0x3BD770]
   - name: effect_gfx_snowman_doll
     dir: effects/gfx
     type: code
@@ -5672,7 +5573,6 @@ segments:
     vram: 0xE00C2000
     subsegments:
     - [auto, c, fright_jar]
-    - [0x3C1B60]
   - name: effect_gfx_fright_jar
     dir: effects/gfx
     type: code
@@ -5703,7 +5603,6 @@ segments:
     vram: 0xE00C4000
     subsegments:
     - [auto, c, stop_watch]
-    - [0x3CB7C0]
   - name: effect_gfx_stop_watch
     dir: effects/gfx
     type: code
@@ -5729,7 +5628,6 @@ segments:
     vram: 0xE00C6000
     subsegments:
     - [auto, c, effect_63]
-    - [0x3CD670]
   - name: effect_gfx_effect_63
     dir: effects/gfx
     type: code
@@ -5769,7 +5667,6 @@ segments:
     vram: 0xE00C8000
     subsegments:
     - [auto, c, throw_spiny]
-    - [0x3CFAB0]
   - name: effect_gfx_throw_spiny
     dir: effects/gfx
     type: code
@@ -5799,7 +5696,6 @@ segments:
     vram: 0xE00CA000
     subsegments:
     - [auto, c, effect_65]
-    - [0x3D11B0]
   - name: effect_gfx_effect_65
     dir: effects/gfx
     type: code
@@ -5822,7 +5718,6 @@ segments:
     vram: 0xE00CC000
     subsegments:
     - [auto, c, tubba_heart_attack]
-    - [0x3D2460]
   - name: effect_gfx_tubba_heart_attack
     dir: effects/gfx
     type: code
@@ -5849,7 +5744,6 @@ segments:
     vram: 0xE00CE000
     subsegments:
     - [auto, c, whirlwind]
-    - [0x3D3910]
   - name: effect_gfx_whirlwind
     dir: effects/gfx
     type: code
@@ -5872,7 +5766,6 @@ segments:
     vram: 0xE00D0000
     subsegments:
     - [auto, c, red_impact]
-    - [0x3D4930]
   - name: effect_floating_cloud_puff
     dir: effects
     type: code
@@ -5880,7 +5773,6 @@ segments:
     vram: 0xE00D2000
     subsegments:
     - [auto, c, floating_cloud_puff]
-    - [0x3D4E70]
   - name: effect_gfx_floating_cloud_puff
     dir: effects/gfx
     type: code
@@ -5905,7 +5797,6 @@ segments:
     vram: 0xE00D6000
     subsegments:
     - [auto, c, energy_in_out]
-    - [0x3D5E60]
   - name: effect_gfx_energy_in_out
     dir: effects/gfx
     type: code
@@ -5960,7 +5851,6 @@ segments:
     vram: 0xE00D8000
     subsegments:
     - [auto, c, tattle_window]
-    - [0x3D6FA0]
   - name: effect_gfx_tattle_window
     dir: effects/gfx
     type: code
@@ -5981,7 +5871,6 @@ segments:
     vram: 0xE00DA000
     subsegments:
     - [auto, c, shiny_flare]
-    - [0x3D7740]
   - name: effect_gfx_shiny_flare
     dir: effects/gfx
     type: code
@@ -6005,7 +5894,6 @@ segments:
     vram: 0xE00DC000
     subsegments:
     - [auto, c, huff_puff_breath]
-    - [0x3D80B0]
   - name: effect_gfx_huff_puff_breath
     dir: effects/gfx
     type: code
@@ -6034,7 +5922,6 @@ segments:
     vram: 0xE00DE000
     subsegments:
     - [auto, c, cold_breath]
-    - [0x3D8F30]
   - name: effect_gfx_cold_breath
     dir: effects/gfx
     type: code
@@ -6068,7 +5955,6 @@ segments:
     vram: 0xE00E0000
     subsegments:
     - [auto, c, embers]
-    - [0x3DBEA0]
   - name: effect_gfx_embers
     dir: effects/gfx
     type: code
@@ -6093,7 +5979,6 @@ segments:
     vram: 0xE00E2000
     subsegments:
     - [auto, c, hieroglyphs]
-    - [0x3DCD00]
   - name: effect_gfx_hieroglyphs
     dir: effects/gfx
     type: code
@@ -6117,7 +6002,6 @@ segments:
     vram: 0xE00E4000
     subsegments:
     - [auto, c, misc_particles]
-    - [0x3DED90]
   - name: effect_gfx_misc_particles
     dir: effects/gfx
     type: code
@@ -6155,7 +6039,6 @@ segments:
     vram: 0xE00E6000
     subsegments:
     - [auto, c, static_status]
-    - [0x3E11B0]
   - name: effect_gfx_static_status
     dir: effects/gfx
     type: code
@@ -6181,7 +6064,6 @@ segments:
     vram: 0xE00E8000
     subsegments:
     - [auto, c, moving_cloud]
-    - [0x3E1CC0]
   - name: effect_gfx_moving_cloud
     dir: effects/gfx
     type: code
@@ -6206,7 +6088,6 @@ segments:
     vram: 0xE00EA000
     subsegments:
     - [auto, c, effect_75]
-    - [0x3E2930]
   - name: effect_gfx_effect_75
     dir: effects/gfx
     type: code
@@ -6242,7 +6123,6 @@ segments:
     vram: 0xE010A000
     subsegments:
     - [auto, c, firework_rocket]
-    - [0x3E5060]
   - name: effect_gfx_firework_rocket
     dir: effects/gfx
     type: code
@@ -6266,7 +6146,6 @@ segments:
     vram: 0xE010C000
     subsegments:
     - [auto, c, peach_star_beam]
-    - [0x3E5ED0]
   - name: effect_gfx_peach_star_beam
     dir: effects/gfx
     type: code
@@ -6341,7 +6220,6 @@ segments:
     vram: 0xE010E000
     subsegments:
     - [auto, c, chapter_change]
-    - [0x3EBC30]
   - name: effect_gfx_chapter_change
     dir: effects/gfx
     type: code
@@ -6396,7 +6274,6 @@ segments:
     vram: 0xE0110000
     subsegments:
     - [auto, c, ice_shard]
-    - [0x3F8CA0]
   - name: effect_gfx_ice_shard
     dir: effects/gfx
     type: code
@@ -6422,7 +6299,6 @@ segments:
     vram: 0xE0112000
     subsegments:
     - [auto, c, spirit_card]
-    - [0x3FA480]
   - name: effect_gfx_spirit_card # effect spirit_card, something_rotating gfx
     dir: effects/gfx
     type: code
@@ -6493,7 +6369,6 @@ segments:
     vram: 0xE0114000
     subsegments:
     - [auto, c, lil_oink]
-    - [0x3FF180]
   - name: effect_gfx_lil_oink
     dir: effects/gfx
     type: code
@@ -6618,7 +6493,6 @@ segments:
     vram: 0xE0116000
     subsegments:
     - [auto, c, something_rotating]
-    - [0x4032A0]
   - name: effect_breaking_junk
     dir: effects
     type: code
@@ -6626,7 +6500,6 @@ segments:
     vram: 0xE0118000
     subsegments:
     - [auto, c, breaking_junk]
-    - [0x403BB0]
   - name: effect_gfx_breaking_junk
     dir: effects/gfx
     type: code
@@ -6660,7 +6533,6 @@ segments:
     vram: 0xE011A000
     subsegments:
     - [auto, c, partner_buff]
-    - [0x404E40]
   - name: effect_gfx_partner_buff
     dir: effects/gfx
     type: code
@@ -6703,7 +6575,6 @@ segments:
     vram: 0xE011C000
     subsegments:
     - [auto, c, quizmo_assistant]
-    - [0x407040]
   - name: effect_gfx_quizmo_assistant
     dir: effects/gfx
     type: code
@@ -6745,7 +6616,6 @@ segments:
     vram: 0xE011E000
     subsegments:
     - [auto, c, ice_pillar]
-    - [0x40A180]
   - name: effect_gfx_ice_pillar
     dir: effects/gfx
     type: code
@@ -6780,7 +6650,6 @@ segments:
     vram: 0xE0120000
     subsegments:
     - [auto, c, sun]
-    - [0x40BB70]
   - name: effect_gfx_sun
     dir: effects/gfx
     type: code
@@ -6822,7 +6691,6 @@ segments:
     vram: 0xE0122000
     subsegments:
     - [auto, c, star_spirits_energy]
-    - [0x40D130]
   - name: effect_gfx_star_spirits_energy
     dir: effects/gfx
     type: code
@@ -6868,7 +6736,6 @@ segments:
     vram: 0xE0124000
     subsegments:
     - [auto, c, pink_sparkles]
-    - [0x412FD0]
   - name: effect_star_outline
     dir: effects
     type: code
@@ -6876,7 +6743,6 @@ segments:
     vram: 0xE0126000
     subsegments:
     - [auto, c, star_outline]
-    - [0x413F20]
   - name: effect_gfx_star_outline
     dir: effects/gfx
     type: code
@@ -6902,7 +6768,6 @@ segments:
     vram: 0xE0128000
     subsegments:
     - [auto, c, effect_86]
-    - [0x415020]
   - name: effect_gfx_effect_86
     dir: effects/gfx
     type: code
@@ -6953,7 +6818,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, 415D90]
-    - [0x4200D0]
   - type: code
     start: 0x4219F0
     vram: 0x802A9000
@@ -6962,7 +6826,6 @@ segments:
     name: action_cmd_jump
     subsegments:
     - [auto, c, jump]
-    - [0x421FC0]
   - type: code
     start: 0x422000
     vram: 0x802A9000
@@ -6971,7 +6834,6 @@ segments:
     name: action_cmd_hammer
     subsegments:
     - [auto, c, hammer]
-    - [0x422A90]
   - type: code
     start: 0x422AD0
     vram: 0x802A9000
@@ -6980,7 +6842,6 @@ segments:
     name: action_cmd_flee
     subsegments:
     - [auto, c, flee]
-    - [0x4233B0]
   - type: code
     start: 0x4233F0
     vram: 0x802A9000
@@ -6989,7 +6850,6 @@ segments:
     name: action_cmd_break_free
     subsegments:
     - [auto, c, break_free]
-    - [0x423C30]
   - type: code
     start: 0x423C70
     vram: 0x802A9000
@@ -7028,7 +6888,6 @@ segments:
     name: action_cmd_stop_leech
     subsegments:
     - [auto, c, stop_leech]
-    - [0x425B10]
   - type: code
     start: 0x425B50
     vram: 0x802A9000
@@ -7037,7 +6896,6 @@ segments:
     name: action_cmd_07
     subsegments:
     - [auto, c, "07"]
-    - [0x426130]
   - type: code
     start: 0x426170
     vram: 0x802A9000
@@ -7046,7 +6904,6 @@ segments:
     name: action_cmd_dizzy_shell
     subsegments:
     - [auto, c, dizzy_shell]
-    - [0x426970]
   - type: code
     start: 0x4269D0
     vram: 0x802A9000
@@ -7055,7 +6912,6 @@ segments:
     name: action_cmd_fire_shell
     subsegments:
     - [auto, c, fire_shell]
-    - [0x427320]
   - type: code
     start: 0x4273B0
     vram: 0x802A9000
@@ -7064,7 +6920,6 @@ segments:
     name: action_cmd_0A
     subsegments:
     - [auto, c, 0A]
-    - [0x427A30]
   - type: code
     start: 0x427A70
     vram: 0x802A9000
@@ -7073,7 +6928,6 @@ segments:
     name: action_cmd_bomb
     subsegments:
     - [auto, c, bomb]
-    - [0x428280]
   - type: code
     start: 0x4282E0
     vram: 0x802A9000
@@ -7082,7 +6936,6 @@ segments:
     name: action_cmd_body_slam
     subsegments:
     - [auto, c, body_slam]
-    - [0x428A30]
   - type: code
     start: 0x428A70
     vram: 0x802A9000
@@ -7091,7 +6944,6 @@ segments:
     name: action_cmd_air_lift
     subsegments:
     - [auto, c, air_lift]
-    - [0x4292C0]
   - type: code
     start: 0x429320
     vram: 0x802A9000
@@ -7100,7 +6952,6 @@ segments:
     name: action_cmd_air_raid
     subsegments:
     - [auto, c, air_raid]
-    - [0x429C90]
   - type: code
     start: 0x429D20
     vram: 0x802A9000
@@ -7109,7 +6960,6 @@ segments:
     name: action_cmd_squirt
     subsegments:
     - [auto, c, squirt]
-    - [0x42A480]
   - type: code
     start: 0x42A4F0
     vram: 0x802A9000
@@ -7148,7 +6998,6 @@ segments:
     name: action_cmd_tidal_wave
     subsegments:
     - [auto, c, tidal_wave]
-    - [0x42CEB0]
   - type: code
     start: 0x42CF10
     vram: 0x802A9000
@@ -7157,7 +7006,6 @@ segments:
     name: action_cmd_power_shock
     subsegments:
     - [auto, c, power_shock]
-    - [0x42D9B0]
   - type: code
     start: 0x42DA10
     vram: 0x802A9000
@@ -7166,7 +7014,6 @@ segments:
     name: action_cmd_mega_shock
     subsegments:
     - [auto, c, mega_shock]
-    - [0x42E342] # todo offset ?
   - type: code
     start: 0x42E3A0
     vram: 0x802A9000
@@ -7175,7 +7022,6 @@ segments:
     name: action_cmd_smack
     subsegments:
     - [auto, c, smack]
-    - [0x42ED70]
   - type: code
     start: 0x42EE20
     vram: 0x802A9000
@@ -7184,7 +7030,6 @@ segments:
     name: action_cmd_spiny_surge
     subsegments:
     - [auto, c, spiny_surge]
-    - [0x42F680]
   - type: code
     start: 0x42F6E0
     vram: 0x802A9000
@@ -7193,7 +7038,6 @@ segments:
     name: action_cmd_hurricane
     subsegments:
     - [auto, c, hurricane]
-    - [0x42FFC0]
   - type: code
     start: 0x430020
     vram: 0x802A9000
@@ -7202,7 +7046,6 @@ segments:
     name: action_cmd_spook
     subsegments:
     - [auto, c, spook]
-    - [0x430940]
 
 ####################
 ### Battle Areas ###
@@ -7223,7 +7066,6 @@ segments:
     - [auto, c, stage/kmr_04]
     - [auto, c, stage/kmr_05]
     - [auto, c, stage/kmr_06]
-    - [0x431B80]
   - dir: battle/area/kmr_part_2
     type: code
     start: 0x439A90
@@ -7243,7 +7085,6 @@ segments:
     - [auto, c, stage/kmr_04]
     - [auto, c, stage/kmr_05]
     - [auto, c, stage/kmr_06]
-    - [0x43B1E0]
   - dir: battle/area/kmr_part_3
     type: code
     start: 0x447440
@@ -7271,7 +7112,6 @@ segments:
     - [auto, c, stage/sam_01]
     - [auto, c, stage/mac_01]
     - [auto, c, stage/kpa_13]
-    - [0x4495F0]
   - dir: battle/area/mac
     type: code
     start: 0x464490
@@ -7286,7 +7126,6 @@ segments:
     - [auto, c, stage/mac_01]
     - [auto, c, stage/mac_02]
     - [auto, c, area]
-    - [0x4661E0]
   - dir: battle/area/hos
     type: code
     start: 0x47F0B0
@@ -7300,7 +7139,6 @@ segments:
     - [auto, c, stage/hos_00]
     - [auto, c, stage/hos_02]
     - [auto, c, area]
-    - [0x4800C0]
   - dir: battle/area/nok
     type: code
     start: 0x48D1A0
@@ -7320,7 +7158,6 @@ segments:
     - [auto, c, stage/nok_02]
     - [auto, c, stage/nok_03]
     - [auto, c, stage/nok_04]
-    - [0x48DFC0]
   - dir: battle/area/trd_part_1
     type: code
     start: 0x4A10A0
@@ -7347,7 +7184,6 @@ segments:
     - [auto, c, stage/trd_05d]
     - [auto, c, stage/trd_05e]
     - [auto, c, stage/trd_05f]
-    - [0x4A1530]
   - dir: battle/area/trd_part_2
     type: code
     start: 0x4B11F0
@@ -7373,7 +7209,6 @@ segments:
     - [auto, c, stage/trd_05d]
     - [auto, c, stage/trd_05e]
     - [auto, c, stage/trd_05f]
-    - [0x4B3740]
   - dir: battle/area/trd_part_3
     type: code
     start: 0x4CF1B0
@@ -7383,7 +7218,6 @@ segments:
     - [auto, c, area]
     - [auto, c, actor/eldstar]
     - [auto, c, stage/nok_01]
-    - [0x4CF3D0]
   - dir: battle/area/iwa
     type: code
     start: 0x4D01F0
@@ -7399,7 +7233,6 @@ segments:
     - [auto, c, stage/iwa_01]
     - [auto, c, stage/iwa_01b]
     - [auto, c, stage/iwa_02]
-    - [0x4D0400]
   - dir: battle/area/sbk
     type: code
     start: 0x4DA5E0
@@ -7411,7 +7244,6 @@ segments:
     - [auto, c, actor/bandit]
     - [auto, c, stage/sbk_02]
     - [auto, c, area]
-    - [0x4DA860]
   - dir: battle/area/isk_part_1
     type: code
     start: 0x4E2740
@@ -7437,7 +7269,6 @@ segments:
     - [auto, c, stage/isk_06b]
     - [auto, c, stage/isk_08]
     - [auto, c, area]
-    - [0x4E3350]
   - dir: battle/area/isk_part_2
     type: code
     start: 0x4EF4A0
@@ -7459,7 +7290,6 @@ segments:
     - [auto, c, stage/isk_06b]
     - [auto, c, stage/isk_07]
     - [auto, c, area]
-    - [0x4EFFE0]
   - dir: battle/area/mim
     type: code
     start: 0x4F7BE0
@@ -7471,7 +7301,6 @@ segments:
     - [auto, c, actor/piranha_plant]
     - [auto, c, stage/mim_01]
     - [auto, c, area]
-    - [0x4F7FA0]
   - dir: battle/area/arn
     type: code
     start: 0x4FEA50
@@ -7490,7 +7319,6 @@ segments:
     - [auto, c, stage/arn_05]
     - [auto, c, stage/arn_06]
     - [auto, c, area]
-    - [0x4FF1C0]
   - dir: battle/area/dgb
     type: code
     start: 0x50F020
@@ -7505,7 +7333,6 @@ segments:
     - [auto, c, stage/dgb_04]
     - [auto, c, stage/dgb_05]
     - [auto, c, area]
-    - [0x50F020]
   - dir: battle/area/omo
     type: code
     start: 0x5125D0
@@ -7533,7 +7360,6 @@ segments:
     - [auto, c, stage/omo_06]
     - [auto, c, stage/omo_07]
     - [auto, c, area]
-    - [0x5137E0]
   - dir: battle/area/omo2
     type: code
     start: 0x52B6A0
@@ -7611,7 +7437,6 @@ segments:
     - [auto, c, actor/koopatrol]
     - [auto, c, actor/red_shy_guy]
     - [auto, c, area]
-    - [0x558190]
   - dir: battle/area/kgr
     type: code
     start: 0x56E2A0
@@ -7621,7 +7446,6 @@ segments:
     - [auto, c, actor/fuzzipede]
     - [auto, c, stage/kgr_01]
     - [auto, c, area]
-    - [0x56EC50]
   - dir: battle/area/jan
     type: code
     start: 0x573920
@@ -7643,7 +7467,6 @@ segments:
     - [auto, c, stage/jan_04]
     - [auto, c, stage/jan_04b]
     - [auto, c, area]
-    - [0x573EE0]
   - dir: battle/area/jan2
     type: code
     start: 0x584940
@@ -7661,7 +7484,6 @@ segments:
     - [auto, c, stage/jan_04]
     - [auto, c, stage/jan_04b]
     - [auto, c, area]
-    - [0x585000]
   - dir: battle/area/kzn
     type: code
     start: 0x58C2F0
@@ -7682,7 +7504,6 @@ segments:
     - [auto, c, stage/kzn_04c]
     - [auto, c, stage/kzn_05]
     - [auto, c, area]
-    - [0x58D100]
   - dir: battle/area/kzn2
     type: code
     start: 0x59E6E0
@@ -7788,7 +7609,6 @@ segments:
     - [auto, c, stage/flo_05]
     - [auto, c, stage/flo_06]
     - [auto, c, area]
-    - [0x5B3370]
   - dir: battle/area/flo2
     type: code
     start: 0x5CE690
@@ -7810,7 +7630,6 @@ segments:
     - [auto, c, stage/flo_05]
     - [auto, c, stage/flo_06]
     - [auto, c, area]
-    - [0x5CFF00]
   - dir: battle/area/tik
     type: code
     start: 0x5EC490
@@ -7831,7 +7650,6 @@ segments:
     - [auto, c, stage/tik_04]
     - [auto, c, stage/tik_05]
     - [auto, c, area]
-    - [0x5EE550]
   - dir: battle/area/tik2
     type: code
     start: 0x608AB0
@@ -7848,7 +7666,6 @@ segments:
     - [auto, c, stage/tik_04]
     - [auto, c, stage/tik_05]
     - [auto, c, area]
-    - [0x60ABD0]
   - dir: battle/area/tik3
     type: code
     start: 0x6186F0
@@ -7863,7 +7680,6 @@ segments:
     - [auto, c, stage/tik_04]
     - [auto, c, stage/tik_05]
     - [auto, c, area]
-    - [0x619F40]
   - dir: battle/area/sam
     type: code
     start: 0x623BA0
@@ -8001,7 +7817,6 @@ segments:
     - [auto, c, stage/kpa_13]
     - [auto, c, stage/kpa_14]
     - [auto, c, area]
-    - [0x685260]
   - dir: battle/area/kpa2
     type: code
     start: 0x69F200
@@ -8017,7 +7832,6 @@ segments:
     - [auto, c, stage/kkj_01]
     - [auto, c, stage/kkj_02]
     - [auto, c, area]
-    - [0x6A44E0]
   - dir: battle/area/kpa3
     type: code
     start: 0x6BBB90
@@ -8028,7 +7842,6 @@ segments:
     - [auto, c, actor/duplighost]
     - [auto, c, stage/kpa_01]
     - [auto, c, area]
-    - [0x6BD250]
   - dir: battle/area/kpa4
     type: code
     start: 0x6CC070
@@ -8054,7 +7867,6 @@ segments:
     - [auto, c, stage/kpa_13]
     - [auto, c, stage/kpa_14]
     - [auto, c, area]
-    - [0x6CC6C0]
   - dir: battle/area/kkj
     type: code
     start: 0x6DBDA0
@@ -8064,7 +7876,6 @@ segments:
     - [auto, c, area]
     - [auto, c, actor/kammy_koopa]
     - [auto, c, stage/kpa_05]
-    - [0x6DC340]
   - dir: battle/area/dig
     type: code
     start: 0x6DDDC0
@@ -8102,7 +7913,6 @@ segments:
     vram_of_symbol: battle_partner_vram_start
     subsegments:
     - [auto, c, goompa]
-    - [0x6F0B30]
   - name: battle_partner_goombario
     dir: battle/partner
     type: code
@@ -8111,7 +7921,6 @@ segments:
     vram_of_symbol: battle_partner_vram_start
     subsegments:
     - [auto, c, goombario]
-    - [0x6F2290]
   - name: battle_partner_kooper
     dir: battle/partner
     type: code
@@ -8120,7 +7929,6 @@ segments:
     vram_of_symbol: battle_partner_vram_start
     subsegments:
     - [auto, c, kooper]
-    - [0x6F62B0]
   - name: battle_partner_bombette
     dir: battle/partner
     type: code
@@ -8129,7 +7937,6 @@ segments:
     vram_of_symbol: battle_partner_vram_start
     subsegments:
     - [auto, c, bombette]
-    - [0x6FB350]
   - name: battle_partner_parakarry
     dir: battle/partner
     type: code
@@ -8138,7 +7945,6 @@ segments:
     vram_of_symbol: battle_partner_vram_start
     subsegments:
     - [auto, c, parakarry]
-    - [0x701590]
   - name: battle_partner_watt
     dir: battle/partner
     type: code
@@ -8147,7 +7953,6 @@ segments:
     vram_of_symbol: battle_partner_vram_start
     subsegments:
     - [auto, c, watt]
-    - [0x704A80]
   - name: battle_partner_sushie
     dir: battle/partner
     type: code
@@ -8156,7 +7961,6 @@ segments:
     vram_of_symbol: battle_partner_vram_start
     subsegments:
     - [auto, c, sushie]
-    - [0x708B70]
   - name: battle_partner_lakilester
     dir: battle/partner
     type: code
@@ -8165,7 +7969,6 @@ segments:
     vram_of_symbol: battle_partner_vram_start
     subsegments:
     - [auto, c, lakilester]
-    - [0x70DEE0]
   - name: battle_partner_bow
     dir: battle/partner
     type: code
@@ -8174,7 +7977,6 @@ segments:
     vram_of_symbol: battle_partner_vram_start
     subsegments:
     - [auto, c, bow]
-    - [0x7111F0]
   - name: battle_partner_twink
     dir: battle/partner
     type: code
@@ -8183,7 +7985,6 @@ segments:
     vram_of_symbol: battle_partner_vram_start
     subsegments:
     - [auto, c, twink]
-    - [0x714DC0]
 
 ####################
 ### Battle Items ###
@@ -8196,7 +7997,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, mushroom]
-    - [0x715E50]
   - name: fire_flower
     dir: battle/move/item
     type: code
@@ -8205,7 +8005,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, fire_flower]
-    - [0x717060]
   - name: dusty_hammer
     dir: battle/move/item
     type: code
@@ -8229,7 +8028,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, pow_block]
-    - [0x718BF0]
   - name: pebble
     dir: battle/move/item
     type: code
@@ -8253,7 +8051,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, volt_shroom]
-    - [0x71AA70]
   - name: thunder_rage
     dir: battle/move/item
     type: code
@@ -8262,7 +8059,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, thunder_rage]
-    - [0x71B640]
   - name: snowman_doll
     dir: battle/move/item
     type: code
@@ -8271,7 +8067,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, snowman_doll]
-    - [0x71C270]
   - name: dried_shroom
     dir: battle/move/item
     type: code
@@ -8280,7 +8075,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, dried_shroom]
-    - [0x71D010]
   - name: shooting_star
     dir: battle/move/item
     type: code
@@ -8289,7 +8083,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, shooting_star]
-    - [0x71DCC0]
   - name: sleepy_sheep
     dir: battle/move/item
     type: code
@@ -8318,7 +8111,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, stone_cap]
-    - [0x721970]
   - name: tasty_tonic
     dir: battle/move/item
     type: code
@@ -8327,7 +8119,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, tasty_tonic]
-    - [0x7222D0]
   - name: thunder_bolt
     dir: battle/move/item
     type: code
@@ -8336,7 +8127,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, thunder_bolt]
-    - [0x722FE0]
   - name: ultra_shroom
     dir: battle/move/item
     type: code
@@ -8345,7 +8135,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, ultra_shroom]
-    - [0x723AB0]
   - name: unknown_item
     dir: battle/move/item
     type: code
@@ -8354,7 +8143,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, unknown_item]
-    - [0x724570]
   - name: super_soda
     dir: battle/move/item
     type: code
@@ -8363,7 +8151,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, super_soda]
-    - [0x725210]
   - name: hustle_drink
     dir: battle/move/item
     type: code
@@ -8372,7 +8159,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, hustle_drink]
-    - [0x726240]
   - name: stop_watch
     dir: battle/move/item
     type: code
@@ -8381,7 +8167,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, stop_watch]
-    - [0x727120]
   - name: dizzy_dial
     dir: battle/move/item
     type: code
@@ -8390,7 +8175,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, dizzy_dial]
-    - [0x727CE0]
   - name: please_come_back
     dir: battle/move/item
     type: code
@@ -8399,7 +8183,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, please_come_back]
-    - [0x728820]
   - name: egg_missile
     dir: battle/move/item
     type: code
@@ -8446,7 +8229,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, fright_jar]
-    - [0x72BC60]
   - name: mystery
     dir: battle/move/item
     type: code
@@ -8471,7 +8253,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, repel_gel]
-    - [0x72DE00]
   - name: life_shroom
     dir: battle/move/item
     type: code
@@ -8480,7 +8261,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, life_shroom]
-    - [0x72EA20]
   - name: coconut
     dir: battle/move/item
     type: code
@@ -8505,7 +8285,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, electro_pop]
-    - [0x730AE0]
   - name: strange_cake
     dir: battle/move/item
     type: code
@@ -8534,7 +8313,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, food]
-    - [0x733700]
 
 ####################
 ### Battle Moves ###
@@ -8547,7 +8325,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, attack]
-    - [0x734650]
   - name: battle_move_spin_smash
     dir: battle/move/hammer
     type: code
@@ -8556,7 +8333,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, spin_smash]
-    - [0x737A20]
   - name: battle_move_quake_hammer
     dir: battle/move/hammer
     type: code
@@ -8565,7 +8341,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, quake_hammer]
-    - [0x73AF80]
   - name: battle_move_jump_attack
     dir: battle/move/jump
     type: code
@@ -8574,7 +8349,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, attack]
-    - [0x73D9A0]
   - name: battle_move_multibounce
     dir: battle/move/jump
     type: code
@@ -8583,7 +8357,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, multibounce]
-    - [0x740DB0]
   - name: battle_move_power_bounce
     dir: battle/move/jump
     type: code
@@ -8592,7 +8365,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, power_bounce]
-    - [0x743FF0]
   - name: battle_move_sleep_stomp
     dir: battle/move/jump
     type: code
@@ -8601,7 +8373,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, sleep_stomp]
-    - [0x746F00]
   - name: battle_move_dizzy_stomp
     dir: battle/move/jump
     type: code
@@ -8610,7 +8381,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, dizzy_stomp]
-    - [0x748EC0]
   - name: battle_move_d_down_pound
     dir: battle/move/hammer
     type: code
@@ -8619,7 +8389,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, d_down_pound]
-    - [0x74AF40]
   - name: battle_move_jump_charge_0
     dir: battle/move/jump
     type: code
@@ -8628,7 +8397,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, jump_charge_0]
-    - [0x74D850]
   - name: battle_move_hammer_charge_0
     dir: battle/move/hammer
     type: code
@@ -8637,7 +8405,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, hammer_charge_0]
-    - [0x74F3D0]
   - name: battle_move_hammer_throw
     dir: battle/move/hammer
     type: code
@@ -8673,7 +8440,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, mega_quake]
-    - [0x756900]
   - name: battle_move_hammer_charge_1
     dir: battle/move/hammer
     type: code
@@ -8682,7 +8448,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, hammer_charge_1]
-    - [0x7598D0]
   - name: battle_move_jump_charge_1
     dir: battle/move/jump
     type: code
@@ -8691,7 +8456,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, jump_charge_1]
-    - [0x75CCE0]
   - name: battle_move_hammer_charge_2
     dir: battle/move/hammer
     type: code
@@ -8700,7 +8464,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, hammer_charge_2]
-    - [0x75E8F0]
   - name: battle_move_jump_charge_2
     dir: battle/move/jump
     type: code
@@ -8709,7 +8472,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, jump_charge_2]
-    - [0x761C80]
   - name: battle_move_auto_smash
     dir: battle/move/hammer
     type: code
@@ -8718,7 +8480,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, auto_smash]
-    - [0x7635F0]
   - name: battle_move_auto_jump
     dir: battle/move/jump
     type: code
@@ -8727,7 +8488,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, auto_jump]
-    - [0x765D10]
   - name: battle_move_power_quake
     dir: battle/move/hammer
     type: code
@@ -8736,7 +8496,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, power_quake]
-    - [0x767D40]
   - name: battle_move_auto_multibounce
     dir: battle/move/jump
     type: code
@@ -8745,7 +8504,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, auto_multibounce]
-    - [0x76A920]
   - name: battle_move_power_jump
     dir: battle/move/jump
     type: code
@@ -8754,7 +8512,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, power_jump]
-    - [0x76D850]
   - name: battle_move_super_jump
     dir: battle/move/jump
     type: code
@@ -8763,7 +8520,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, super_jump]
-    - [0x76F420]
   - name: battle_move_mega_jump
     dir: battle/move/jump
     type: code
@@ -8772,7 +8528,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, mega_jump]
-    - [0x771020]
   - name: battle_move_power_smash
     dir: battle/move/hammer
     type: code
@@ -8781,7 +8536,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, power_smash]
-    - [0x772C50]
   - name: battle_move_super_smash
     dir: battle/move/hammer
     type: code
@@ -8790,7 +8544,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, super_smash]
-    - [0x7751B0]
   - name: battle_move_mega_smash
     dir: battle/move/hammer
     type: code
@@ -8799,7 +8552,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, mega_smash]
-    - [0x777740]
   - name: battle_move_demo_power_bounce
     dir: battle/move/jump
     type: code
@@ -8808,7 +8560,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, demo_power_bounce]
-    - [0x779E30]
   - name: battle_move_shrink_smash
     dir: battle/move/hammer
     type: code
@@ -8817,7 +8568,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, shrink_smash]
-    - [0x77CC30]
   - name: battle_move_shell_crack
     dir: battle/move/hammer
     type: code
@@ -8826,7 +8576,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, shell_crack]
-    - [0x77F3D0]
   - name: battle_move_d_down_jump
     dir: battle/move/jump
     type: code
@@ -8835,7 +8584,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, d_down_jump]
-    - [0x781AF0]
   - name: battle_move_shrink_stomp
     dir: battle/move/jump
     type: code
@@ -8844,7 +8592,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, shrink_stomp]
-    - [0x783C90]
   - name: battle_move_earthquake_jump
     dir: battle/move/jump
     type: code
@@ -8853,7 +8600,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, earthquake_jump]
-    - [0x785C20]
   - name: battle_move_focus
     dir: battle/move/star_power
     type: code
@@ -8862,7 +8608,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, focus]
-    - [0x78A490]
   - name: battle_move_refresh
     dir: battle/move/star_power
     type: code
@@ -8871,7 +8616,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, refresh]
-    - [0x78C070]
   - name: battle_move_lullaby
     dir: battle/move/star_power
     type: code
@@ -8880,7 +8624,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, lullaby]
-    - [0x78D770]
   - name: battle_move_star_storm
     dir: battle/move/star_power
     type: code
@@ -8889,7 +8632,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, star_storm]
-    - [0x78EEC0]
   - name: battle_move_chill_out
     dir: battle/move/star_power
     type: code
@@ -8898,7 +8640,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, chill_out]
-    - [0x7909C0]
   - name: battle_move_smooch
     dir: battle/move/star_power
     type: code
@@ -8907,7 +8648,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, smooch]
-    - [0x7923C0]
   - name: battle_move_time_out
     dir: battle/move/star_power
     type: code
@@ -8916,7 +8656,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, time_out]
-    - [0x794240]
   - name: battle_move_up_and_away
     dir: battle/move/star_power
     type: code
@@ -8925,7 +8664,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, up_and_away]
-    - [0x7959B0]
   - name: battle_move_star_beam
     dir: battle/move/star_power
     type: code
@@ -8934,7 +8672,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, star_beam]
-    - [0x7984B0]
   - name: battle_move_peach_beam
     dir: battle/move/star_power
     type: code
@@ -8943,7 +8680,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, peach_beam]
-    - [0x79ACA0]
   - name: battle_move_peach_focus
     dir: battle/move/star_power
     type: code
@@ -8952,7 +8688,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, peach_focus]
-    - [0x79C4D0]
   - name: battle_move_twink_dash
     dir: battle/move/star_power
     type: code
@@ -8961,7 +8696,6 @@ segments:
     follows_vram: battle_code
     subsegments:
     - [auto, c, twink_dash]
-    - [0x79DE50]
   - type: code
     name: level_up
     start: 0x79EF40
@@ -9486,7 +9220,6 @@ segments:
     - [auto, c, rooms]
     - [auto, c, push_blocks]
     - [auto, c, enter_exit]
-    - [0x7E7380]
   - name: texture_memory
     type: code
     start: 0x7E73A0
@@ -9514,7 +9247,6 @@ segments:
     - [auto, c, machi_5_npc]
     - [auto, c, machi_6_misstar]
     - [auto, c, machi_7_partner]
-    - [0x7E7A30]
   - name: mac_00
     dir: world/area_mac/mac_00
     type: code
@@ -9537,7 +9269,6 @@ segments:
     - [auto, c, mac_00_12_intro]
     - [auto, c, mac_00_13_epilogue_npc]
     - [auto, c, mac_00_14_epilogue]
-    - [0x7EE870]
   - name: mac_01
     dir: world/area_mac/mac_01
     type: code
@@ -9597,7 +9328,6 @@ segments:
     - [auto, c, mac_02_5_entity]
     - [auto, c, mac_02_6_npc]
     - [auto, c, mac_02_7_music_mix]
-    - [0x8267E0]
   - name: mac_03
     dir: world/area_mac/mac_03
     type: code
@@ -9614,7 +9344,6 @@ segments:
     - [auto, c, mac_03_6_foliage]
     - [auto, c, mac_03_7_oinks]
     - [auto, c, mac_03_8_demo]
-    - [0x834070]
   - name: mac_04
     dir: world/area_mac/mac_04
     type: code
@@ -9632,7 +9361,6 @@ segments:
     - [auto, c, mac_04_7_wish_scene]
     - [auto, c, mac_04_8_entity]
     - [auto, c, mac_04_9_music_mix]
-    - [0x844BF0]
   - name: mac_05
     dir: world/area_mac/mac_05
     type: code
@@ -9648,7 +9376,6 @@ segments:
     - [auto, c, mac_05_5_whale]
     - [auto, c, mac_05_6_rooms]
     - [auto, c, mac_05_7_club64_sign]
-    - [0x8562D0]
   - name: mac_06
     dir: world/area_mac/mac_06
     type: code
@@ -9660,7 +9387,6 @@ segments:
     - [auto, c, mac_06_1_main]
     - [auto, c, mac_06_2_whale]
     - [auto, c, mac_06_3_npc]
-    - [0x8661D0]
   - name: tik_01
     dir: world/area_tik/tik_01
     type: code
@@ -9674,7 +9400,6 @@ segments:
     - [auto, c, tik_01_3_drips]
     - [auto, c, tik_01_4_entity]
     - [auto, c, tik_01_5_npc]
-    - [0x869F40]
   - name: tik_02
     dir: world/area_tik/tik_02
     type: code
@@ -9688,7 +9413,6 @@ segments:
     - [auto, c, tik_02_3_entity]
     - [auto, c, tik_02_4_drips]
     - [auto, c, tik_02_5_npc]
-    - [0x86D0E0]
   - name: tik_03
     dir: world/area_tik/tik_03
     type: code
@@ -9703,7 +9427,6 @@ segments:
     - [auto, c, tik_03_4_platforms]
     - [auto, c, tik_03_5_entity]
     - [auto, c, tik_03_6_demo]
-    - [0x86F5D0]
   - name: tik_04
     dir: world/area_tik/tik_04
     type: code
@@ -9717,7 +9440,6 @@ segments:
     - [auto, c, tik_04_3_drips]
     - [auto, c, tik_04_4_platforms]
     - [auto, c, tik_04_5_npc]
-    - [0x8726A0]
   - name: tik_05
     dir: world/area_tik/tik_05
     type: code
@@ -9731,7 +9453,6 @@ segments:
     - [auto, c, tik_05_3_drips]
     - [auto, c, tik_05_4_entity]
     - [auto, c, tik_05_5_npc]
-    - [0x875810]
   - name: tik_06
     dir: world/area_tik/tik_06
     type: code
@@ -9744,7 +9465,6 @@ segments:
     - [auto, c, tik_06_2_main]
     - [auto, c, tik_06_3_drips]
     - [auto, c, tik_06_4_entity]
-    - [0x877840]
   - name: tik_07
     dir: world/area_tik/tik_07
     type: code
@@ -9759,7 +9479,6 @@ segments:
     - [auto, c, tik_07_4_drips]
     - [auto, c, tik_07_5_platforms]
     - [auto, c, tik_07_6_npc]
-    - [0x87C4D0]
   - name: tik_08
     dir: world/area_tik/tik_08
     type: code
@@ -9773,7 +9492,6 @@ segments:
     - [auto, c, tik_08_3_drips]
     - [auto, c, tik_08_4_entity]
     - [auto, c, tik_08_5_npc]
-    - [0x87F8B0]
   - name: tik_09
     dir: world/area_tik/tik_09
     type: code
@@ -9787,7 +9505,6 @@ segments:
     - [auto, c, tik_09_3_drips]
     - [auto, c, tik_09_4_entity]
     - [auto, c, tik_09_5_npc]
-    - [0x883460]
   - name: tik_10
     dir: world/area_tik/tik_10
     type: code
@@ -9800,7 +9517,6 @@ segments:
     - [auto, c, tik_10_2_main]
     - [auto, c, tik_10_3_drips]
     - [auto, c, tik_10_4_entity]
-    - [0x887780]
   - name: tik_12
     dir: world/area_tik/tik_12
     type: code
@@ -9814,7 +9530,6 @@ segments:
     - [auto, c, tik_12_3_drips]
     - [auto, c, tik_12_4_entity]
     - [auto, c, tik_12_5_npc]
-    - [0x88AE20]
   - name: tik_14
     dir: world/area_tik/tik_14
     type: code
@@ -9827,7 +9542,6 @@ segments:
     - [auto, c, tik_14_2_main]
     - [auto, c, tik_14_3_drips]
     - [auto, c, tik_14_4_entity]
-    - [0x88DF60]
   - name: tik_15
     dir: world/area_tik/tik_15
     type: code
@@ -9841,7 +9555,6 @@ segments:
     - [auto, c, tik_15_3_entity]
     - [auto, c, tik_15_4_drips]
     - [auto, c, tik_15_5_npc]
-    - [0x8906B0]
   - name: tik_17
     dir: world/area_tik/tik_17
     type: code
@@ -9853,7 +9566,6 @@ segments:
     - [auto, c, tik_17_1_music]
     - [auto, c, tik_17_2_entity]
     - [auto, c, tik_17_3_main]
-    - [0x893D80]
   - name: tik_18
     dir: world/area_tik/tik_18
     type: code
@@ -9867,7 +9579,6 @@ segments:
     - [auto, c, tik_18_3_drips]
     - [auto, c, tik_18_4_npc]
     - [auto, c, tik_18_5_entity]
-    - [0x895D90]
   - name: tik_19
     dir: world/area_tik/tik_19
     type: code
@@ -9879,7 +9590,6 @@ segments:
     - [auto, c, tik_19_1_music]
     - [auto, c, tik_19_2_main]
     - [auto, c, tik_19_3_entity]
-    - [0x898910]
   - name: tik_20
     dir: world/area_tik/tik_20
     type: code
@@ -9892,7 +9602,6 @@ segments:
     - [auto, c, tik_20_2_main]
     - [auto, c, tik_20_3_npc]
     - [auto, c, tik_20_4_entity]
-    - [0x89B490]
   - name: tik_21
     dir: world/area_tik/tik_21
     type: code
@@ -9904,7 +9613,6 @@ segments:
     - [auto, c, tik_21_1_music]
     - [auto, c, tik_21_2_main]
     - [auto, c, tik_21_3_entity]
-    - [0x89E100]
   - name: tik_22
     dir: world/area_tik/tik_22
     type: code
@@ -9915,7 +9623,6 @@ segments:
     - [auto, c, tik_22_0_header]
     - [auto, c, tik_22_1_music]
     - [auto, c, tik_22_2_main]
-    - [0x8A0870]
   - name: tik_23
     dir: world/area_tik/tik_23
     type: code
@@ -9928,7 +9635,6 @@ segments:
     - [auto, c, tik_23_2_main]
     - [auto, c, tik_23_3_entity]
     - [auto, c, tik_23_4_npc]
-    - [0x8A3510]
   - name: tik_24
     dir: world/area_tik/tik_24
     type: code
@@ -9942,7 +9648,6 @@ segments:
     - [auto, c, tik_24_3_drips]
     - [auto, c, tik_24_4_entity]
     - [auto, c, tik_24_5_npc]
-    - [0x8A6930]
   - name: tik_25
     dir: world/area_tik/tik_25
     type: code
@@ -9954,7 +9659,6 @@ segments:
     - [auto, c, tik_25_1_music]
     - [auto, c, tik_25_2_main]
     - [auto, c, tik_25_3_entity]
-    - [0x8A8740]
   - name: kgr_01
     dir: world/area_kgr/kgr_01
     type: code
@@ -9965,7 +9669,6 @@ segments:
     - [auto, c, kgr_01_1_main]
     - [auto, c, kgr_01_2_wiggle]
     - [auto, c, kgr_01_3_extra]
-    - [0x8A9F30]
   - name: kgr_02
     dir: world/area_kgr/kgr_02
     type: code
@@ -9977,7 +9680,6 @@ segments:
     - [auto, c, kgr_02_2_unused]
     - [auto, c, kgr_02_3_npc]
     - [auto, c, kgr_02_4_extra]
-    - [0x8AABD0]
   - name: kmr_00
     dir: world/area_kmr/kmr_00
     type: code
@@ -9991,7 +9693,6 @@ segments:
     - [auto, c, kmr_00_3_revival]
     - [auto, c, kmr_00_4_npc]
     - [auto, c, kmr_00_5_entity]
-    - [0x8ACD00]
   - name: kmr_02
     dir: world/area_kmr/kmr_02
     type: code
@@ -10039,7 +9740,6 @@ segments:
     - [auto, c, kmr_03_4_entity]
     - [auto, c, kmr_03_5_foliage]
     - [auto, c, kmr_03_6_fall_down]
-    - [0x8C8680]
   - name: kmr_04
     dir: world/area_kmr/kmr_04
     type: code
@@ -10078,7 +9778,6 @@ segments:
     - [auto, c, kmr_05_3_npc]
     - [auto, c, kmr_05_4_entity]
     - [auto, c, kmr_05_5_foliage]
-    - [0x8CF7F0]
   - name: kmr_06
     dir: world/area_kmr/kmr_06
     type: code
@@ -10092,7 +9791,6 @@ segments:
     - [auto, c, kmr_06_3_npc]
     - [auto, c, kmr_06_4_entity]
     - [auto, c, kmr_06_5_sticker_sign]
-    - [0x8D32B0]
   - name: kmr_07
     dir: world/area_kmr/kmr_07
     type: code
@@ -10105,7 +9803,6 @@ segments:
     - [auto, c, kmr_07_2_main]
     - [auto, c, kmr_07_3_npc]
     - [auto, c, kmr_07_4_entity]
-    - [0x8D4880]
   - name: kmr_09
     dir: world/area_kmr/kmr_09
     type: code
@@ -10118,7 +9815,6 @@ segments:
     - [auto, c, kmr_09_2_main]
     - [auto, c, kmr_09_3_npc]
     - [auto, c, kmr_09_4_entity]
-    - [0x8D7330]
   - name: kmr_10
     dir: world/area_kmr/kmr_10
     type: code
@@ -10132,7 +9828,6 @@ segments:
     - [auto, c, kmr_10_3_npc]
     - [auto, c, kmr_10_4_entity]
     - [auto, c, kmr_10_5_foliage]
-    - [0x8D8AE0]
   - name: kmr_11
     dir: world/area_kmr/kmr_11
     type: code
@@ -10152,7 +9847,6 @@ segments:
     - [auto, c, kmr_11_9_fortress_animation]
     - [auto, c, kmr_11_10_bridge_skeleton]
     - [auto, c, kmr_11_11_bridge_animation]
-    - [0x8DB260]
   - name: kmr_12
     dir: world/area_kmr/kmr_12
     type: code
@@ -10165,7 +9859,6 @@ segments:
     - [auto, c, kmr_12_2_main]
     - [auto, c, kmr_12_3_npc]
     - [auto, c, kmr_12_4_entity]
-    - [0x8EB390]
   - name: kmr_20
     dir: world/area_kmr/kmr_20
     type: code
@@ -10215,7 +9908,6 @@ segments:
     subsegments:
     - [auto, c, kmr_21_0_header]
     - [auto, c, kmr_21_1_main]
-    - [0x8FF160]
   - name: kmr_22
     dir: world/area_kmr/kmr_22
     type: code
@@ -10268,7 +9960,6 @@ segments:
     subsegments:
     - [auto, c, kmr_24_0_header]
     - [auto, c, kmr_24_1_main]
-    - [0x90B350]
   - name: kmr_30
     dir: world/area_kmr/kmr_30
     type: code
@@ -10280,7 +9971,6 @@ segments:
     - [auto, c, kmr_30_1_main]
     - [auto, c, kmr_30_2_npc]
     - [auto, c, kmr_30_3_the_end]
-    - [0x90BBB0]
   - name: iwa_00
     dir: world/area_iwa/iwa_00
     type: code
@@ -10293,7 +9983,6 @@ segments:
     - [auto, c, iwa_00_2_entity]
     - [auto, c, iwa_00_3_npc]
     - [auto, c, iwa_00_4_slide]
-    - [0x90CF20]
   - name: iwa_01
     dir: world/area_iwa/iwa_01
     type: code
@@ -10331,7 +10020,6 @@ segments:
     - [auto, c, iwa_02_1_main]
     - [auto, c, iwa_02_2_entity]
     - [auto, c, iwa_02_3_npc]
-    - [0x916E70]
   - name: iwa_03
     dir: world/area_iwa/iwa_03
     type: code
@@ -10344,7 +10032,6 @@ segments:
     - [auto, c, iwa_03_2_entity]
     - [auto, c, iwa_03_3_npc]
     - [auto, c, iwa_03_4_slide]
-    - [0x919F00]
   - name: iwa_04
     dir: world/area_iwa/iwa_04
     type: code
@@ -10357,7 +10044,6 @@ segments:
     - [auto, c, iwa_04_2_main]
     - [auto, c, iwa_04_3_entity]
     - [auto, c, iwa_04_4_npc]
-    - [0x91C9C0]
   - name: iwa_10
     dir: world/area_iwa/iwa_10
     type: code
@@ -10374,7 +10060,6 @@ segments:
     - [auto, c, iwa_10_6_parakarry]
     - [auto, c, iwa_10_7_new_partner]
     - [auto, c, iwa_10_8_foliage]
-    - [0x91FD60]
   - name: iwa_11
     dir: world/area_iwa/iwa_11
     type: code
@@ -10388,7 +10073,6 @@ segments:
     - [auto, c, iwa_11_3_train]
     - [auto, c, iwa_11_4_scenery]
     - [auto, c, iwa_11_5_npc]
-    - [0x926D00]
   - name: sbk_00
     dir: world/area_sbk/sbk_00
     type: code
@@ -10400,7 +10084,6 @@ segments:
     - [auto, c, sbk_00_1_main]
     - [auto, c, sbk_00_2_npc]
     - [auto, c, sbk_00_3_entity]
-    - [0x9292D0]
   - name: sbk_01
     dir: world/area_sbk/sbk_01
     type: code
@@ -10410,7 +10093,6 @@ segments:
     subsegments:
     - [auto, c, sbk_01_1_main]
     - [auto, c, sbk_01_2_npc]
-    - [0x929AF0]
   - name: sbk_02 #TODO
     dir: world/area_sbk/sbk_02
     type: code
@@ -10424,7 +10106,6 @@ segments:
     - [auto, c, sbk_02_3_ruins]
     - [auto, c, sbk_02_4_npc]
     - [auto, c, sbk_02_5_entity]
-    - [0x92AEB0]
   - name: sbk_03
     dir: world/area_sbk/sbk_03
     type: code
@@ -10434,7 +10115,6 @@ segments:
     subsegments:
     - [auto, c, sbk_03_1_main]
     - [auto, c, sbk_03_2_npc]
-    - [0x92F910]
   - name: sbk_04
     dir: world/area_sbk/sbk_04
     type: code
@@ -10444,7 +10124,6 @@ segments:
     subsegments:
     - [auto, c, sbk_04_1_main]
     - [auto, c, sbk_04_2_npc]
-    - [0x930530]
   - name: sbk_05
     dir: world/area_sbk/sbk_05
     type: code
@@ -10455,7 +10134,6 @@ segments:
     - [auto, c, sbk_05_1_main]
     - [auto, c, sbk_05_2_entity]
     - [auto, c, sbk_05_3_npc]
-    - [0x930D50]
   - name: sbk_06
     dir: world/area_sbk/sbk_06
     type: code
@@ -10467,7 +10145,6 @@ segments:
     - [auto, c, sbk_06_2_npc]
     - [auto, c, sbk_06_3_foliage]
     - [auto, c, sbk_06_4_entity]
-    - [0x932940]
   - name: sbk_10
     dir: world/area_sbk/sbk_10
     type: code
@@ -10477,7 +10154,6 @@ segments:
     subsegments:
     - [auto, c, sbk_10_1_main]
     - [auto, c, sbk_10_2_entity]
-    - [0x933CC0]
   - name: sbk_11
     dir: world/area_sbk/sbk_11
     type: code
@@ -10487,7 +10163,6 @@ segments:
     subsegments:
     - [auto, c, sbk_11_1_main]
     - [auto, c, sbk_11_2_npc]
-    - [0x9341A0]
   - name: sbk_12
     dir: world/area_sbk/sbk_12
     type: code
@@ -10497,7 +10172,6 @@ segments:
     subsegments:
     - [auto, c, sbk_12_1_main]
     - [auto, c, sbk_12_2_npc]
-    - [0x934DA0]
   - name: sbk_13
     dir: world/area_sbk/sbk_13
     type: code
@@ -10507,7 +10181,6 @@ segments:
     subsegments:
     - [auto, c, sbk_13_1_main]
     - [auto, c, sbk_13_2_npc]
-    - [0x935940]
   - name: sbk_14
     dir: world/area_sbk/sbk_14
     type: code
@@ -10517,7 +10190,6 @@ segments:
     subsegments:
     - [auto, c, sbk_14_1_main]
     - [auto, c, sbk_14_2_entity]
-    - [0x936720]
   - name: sbk_15
     dir: world/area_sbk/sbk_15
     type: code
@@ -10527,7 +10199,6 @@ segments:
     subsegments:
     - [auto, c, sbk_15_1_main]
     - [auto, c, sbk_15_2_npc]
-    - [0x936D30]
   - name: sbk_16
     dir: world/area_sbk/sbk_16
     type: code
@@ -10537,7 +10208,6 @@ segments:
     subsegments:
     - [auto, c, sbk_16_1_main]
     - [auto, c, sbk_16_2_foliage]
-    - [0x9377F0]
   - name: sbk_20
     dir: world/area_sbk/sbk_20
     type: code
@@ -10548,7 +10218,6 @@ segments:
     - [auto, c, sbk_20_1_main]
     - [auto, c, sbk_20_2_entity]
     - [auto, c, sbk_20_2_npc]
-    - [0x9386D0]
   - name: sbk_21
     dir: world/area_sbk/sbk_21
     type: code
@@ -10557,7 +10226,6 @@ segments:
     vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [auto, c, sbk_21_1_main]
-    - [0x9395A0]
   - name: sbk_22
     dir: world/area_sbk/sbk_22
     type: code
@@ -10568,7 +10236,6 @@ segments:
     - [auto, c, sbk_22_1_main]
     - [auto, c, sbk_22_2_npc]
     - [auto, c, sbk_22_3_entity]
-    - [0x939A90]
   - name: sbk_23
     dir: world/area_sbk/sbk_23
     type: code
@@ -10578,7 +10245,6 @@ segments:
     subsegments:
     - [auto, c, sbk_23_1_main]
     - [auto, c, sbk_23_2_entity]
-    - [0x93A7A0]
   - name: sbk_24
     dir: world/area_sbk/sbk_24
     type: code
@@ -10590,7 +10256,6 @@ segments:
     - [auto, c, sbk_24_2_npc]
     - [auto, c, sbk_24_3_entity]
     - [auto, c, sbk_24_4_foliage]
-    - [0x93AFB0]
   - name: sbk_25
     dir: world/area_sbk/sbk_25
     type: code
@@ -10602,7 +10267,6 @@ segments:
     - [auto, c, sbk_25_2_npc]
     - [auto, c, sbk_25_3_foliage]
     - [auto, c, sbk_25_4_entity]
-    - [0x93C600]
   - name: sbk_26
     dir: world/area_sbk/sbk_26
     type: code
@@ -10613,7 +10277,6 @@ segments:
     - [auto, c, sbk_26_1_main]
     - [auto, c, sbk_26_2_npc]
     - [auto, c, sbk_26_3_foliage]
-    - [0x93E070]
   - name: sbk_30
     dir: world/area_sbk/sbk_30
     type: code
@@ -10626,7 +10289,6 @@ segments:
     - [auto, c, sbk_30_2_main]
     - [auto, c, sbk_30_3_npc]
     - [auto, c, sbk_30_4_foliage]
-    - [0x940DC0]
   - name: sbk_31
     dir: world/area_sbk/sbk_31
     type: code
@@ -10636,7 +10298,6 @@ segments:
     subsegments:
     - [auto, c, sbk_31_1_main]
     - [auto, c, sbk_31_2_npc]
-    - [0x944140]
   - name: sbk_32
     dir: world/area_sbk/sbk_32
     type: code
@@ -10646,7 +10307,6 @@ segments:
     subsegments:
     - [auto, c, sbk_32_1_main]
     - [auto, c, sbk_32_2_npc]
-    - [0x944BC0]
   - name: sbk_33
     dir: world/area_sbk/sbk_33
     type: code
@@ -10657,7 +10317,6 @@ segments:
     - [auto, c, sbk_33_0_header]
     - [auto, c, sbk_33_1_entity]
     - [auto, c, sbk_33_2_main]
-    - [0x945A10]
   - name: sbk_34
     dir: world/area_sbk/sbk_34
     type: code
@@ -10668,7 +10327,6 @@ segments:
     - [auto, c, sbk_34_1_main]
     - [auto, c, sbk_34_2_npc]
     - [auto, c, sbk_34_3_foliage]
-    - [0x9468B0]
   - name: sbk_35
     dir: world/area_sbk/sbk_35
     type: code
@@ -10679,7 +10337,6 @@ segments:
     - [auto, c, sbk_35_1_main]
     - [auto, c, sbk_35_2_npc]
     - [auto, c, sbk_35_3_foliage]
-    - [0x949E40]
   - name: sbk_36
     dir: world/area_sbk/sbk_36
     type: code
@@ -10690,7 +10347,6 @@ segments:
     - [auto, c, sbk_36_1_main]
     - [auto, c, sbk_36_2_foliage]
     - [auto, c, sbk_36_3_entity]
-    - [0x94A0E0]
   - name: sbk_40
     dir: world/area_sbk/sbk_40
     type: code
@@ -10701,7 +10357,6 @@ segments:
     - [auto, c, sbk_40_1_main]
     - [auto, c, sbk_40_2_npc]
     - [auto, c, sbk_40_3_entity]
-    - [0x94B4E0]
   - name: sbk_41
     dir: world/area_sbk/sbk_41
     type: code
@@ -10711,7 +10366,6 @@ segments:
     subsegments:
     - [auto, c, sbk_41_1_main]
     - [auto, c, sbk_41_2_entity]
-    - [0x94C080]
   - name: sbk_42
     dir: world/area_sbk/sbk_42
     type: code
@@ -10721,7 +10375,6 @@ segments:
     subsegments:
     - [auto, c, sbk_42_1_main]
     - [auto, c, sbk_42_2_npc]
-    - [0x94C650]
   - name: sbk_43
     dir: world/area_sbk/sbk_43
     type: code
@@ -10731,7 +10384,6 @@ segments:
     subsegments:
     - [auto, c, sbk_43_1_main]
     - [auto, c, sbk_43_2_entity]
-    - [0x94D170]
   - name: sbk_44
     dir: world/area_sbk/sbk_44
     type: code
@@ -10741,7 +10393,6 @@ segments:
     subsegments:
     - [auto, c, sbk_44_1_main]
     - [auto, c, sbk_44_2_npc]
-    - [0x94D700]
   - name: sbk_45
     dir: world/area_sbk/sbk_45
     type: code
@@ -10751,7 +10402,6 @@ segments:
     subsegments:
     - [auto, c, sbk_45_1_main]
     - [auto, c, sbk_45_2_entity]
-    - [0x94E4E0]
   - name: sbk_46
     dir: world/area_sbk/sbk_46
     type: code
@@ -10763,7 +10413,6 @@ segments:
     - [auto, c, sbk_46_2_npc]
     - [auto, c, sbk_46_3_foliage]
     - [auto, c, sbk_46_4_entity]
-    - [0x94ED40]
   - name: sbk_50
     dir: world/area_sbk/sbk_50
     type: code
@@ -10772,7 +10421,6 @@ segments:
     vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [auto, c, sbk_50_1_main]
-    - [0x950650]
   - name: sbk_51
     dir: world/area_sbk/sbk_51
     type: code
@@ -10782,7 +10430,6 @@ segments:
     subsegments:
     - [auto, c, sbk_51_1_main]
     - [auto, c, sbk_51_2_npc]
-    - [0x950AD0]
   - name: sbk_52
     dir: world/area_sbk/sbk_52
     type: code
@@ -10792,7 +10439,6 @@ segments:
     subsegments:
     - [auto, c, sbk_52_1_main]
     - [auto, c, sbk_52_2_entity]
-    - [0x9516B0]
   - name: sbk_53
     dir: world/area_sbk/sbk_53
     type: code
@@ -10802,7 +10448,6 @@ segments:
     subsegments:
     - [auto, c, sbk_53_1_main]
     - [auto, c, sbk_53_2_npc]
-    - [0x951B40]
   - name: sbk_54
     dir: world/area_sbk/sbk_54
     type: code
@@ -10812,7 +10457,6 @@ segments:
     subsegments:
     - [auto, c, sbk_54_1_main]
     - [auto, c, sbk_54_2_entity]
-    - [0x9525C0]
   - name: sbk_55
     dir: world/area_sbk/sbk_55
     type: code
@@ -10824,7 +10468,6 @@ segments:
     - [auto, c, sbk_55_2_npc]
     - [auto, c, sbk_55_3_foliage]
     - [auto, c, sbk_55_4_entity]
-    - [0x952CF0]
   - name: sbk_56
     dir: world/area_sbk/sbk_56
     type: code
@@ -10835,7 +10478,6 @@ segments:
     - [auto, c, sbk_56_1_main]
     - [auto, c, sbk_56_2_entity]
     - [auto, c, sbk_56_3_foliage]
-    - [0x954FC0]
   - name: sbk_60
     dir: world/area_sbk/sbk_60
     type: code
@@ -10845,7 +10487,6 @@ segments:
     subsegments:
     - [auto, c, sbk_60_1_main]
     - [auto, c, sbk_60_2_npc]
-    - [0x956A50]
   - name: sbk_61
     dir: world/area_sbk/sbk_61
     type: code
@@ -10855,7 +10496,6 @@ segments:
     subsegments:
     - [auto, c, sbk_61_1_main]
     - [auto, c, sbk_61_2_entity]
-    - [0x956FD0]
   - name: sbk_62
     dir: world/area_sbk/sbk_62
     type: code
@@ -10865,7 +10505,6 @@ segments:
     subsegments:
     - [auto, c, sbk_62_1_main]
     - [auto, c, sbk_62_2_npc]
-    - [0x9573B0]
   - name: sbk_63
     dir: world/area_sbk/sbk_63
     type: code
@@ -10875,7 +10514,6 @@ segments:
     subsegments:
     - [auto, c, sbk_63_1_main]
     - [auto, c, sbk_63_2_npc]
-    - [0x957DD0]
   - name: sbk_64
     dir: world/area_sbk/sbk_64
     type: code
@@ -10885,7 +10523,6 @@ segments:
     subsegments:
     - [auto, c, sbk_64_1_main]
     - [auto, c, sbk_64_2_entity]
-    - [0x9585D0]
   - name: sbk_65
     dir: world/area_sbk/sbk_65
     type: code
@@ -10894,7 +10531,6 @@ segments:
     vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [auto, c, sbk_65_1_main]
-    - [0x958990]
   - name: sbk_66
     dir: world/area_sbk/sbk_66
     type: code
@@ -10906,7 +10542,6 @@ segments:
     - [auto, c, sbk_66_2_npc]
     - [auto, c, sbk_66_3_foliage]
     - [auto, c, sbk_66_4_entity]
-    - [0x959030]
   - name: sbk_99
     dir: world/area_sbk/sbk_99
     type: code
@@ -10916,7 +10551,6 @@ segments:
     subsegments:
     - [auto, c, sbk_99_1_main]
     - [auto, c, sbk_99_2_entity]
-    - [0x95AEB0]
   - name: dro_01
     dir: world/area_dro/dro_01
     type: code
@@ -10932,7 +10566,6 @@ segments:
     - [auto, c, dro_01_5_rooms]
     - [auto, c, dro_01_6_entity]
     - [auto, c, dro_01_7_foliage]
-    - [0x95ECC0]
   - name: dro_02
     dir: world/area_dro/dro_02
     type: code
@@ -10979,7 +10612,6 @@ segments:
     - [auto, c, isk_01_2_main]
     - [auto, c, isk_01_3_haze]
     - [auto, c, isk_01_4_entity]
-    - [0x978140]
   - name: isk_02
     dir: world/area_isk/isk_02
     type: code
@@ -10993,7 +10625,6 @@ segments:
     - [auto, c, isk_02_3_ambush]
     - [auto, c, isk_02_4_entity]
     - [auto, c, isk_02_5_npc]
-    - [0x978820]
   - name: isk_03
     dir: world/area_isk/isk_03
     type: code
@@ -11006,7 +10637,6 @@ segments:
     - [auto, c, isk_03_2_sand]
     - [auto, c, isk_03_3_entity]
     - [auto, c, isk_03_4_switch]
-    - [0x979E50]
   - name: isk_04
     dir: world/area_isk/isk_04
     type: code
@@ -11021,7 +10651,6 @@ segments:
     - [auto, c, isk_04_4_entity]
     - [auto, c, isk_04_5_npc]
     - [auto, c, isk_04_6_demo]
-    - [0x97DA40]
   - name: isk_05
     dir: world/area_isk/isk_05
     type: code
@@ -11033,7 +10662,6 @@ segments:
     - [auto, c, isk_05_1_main]
     - [auto, c, isk_05_2_entity]
     - [auto, c, isk_05_3_npc]
-    - [0x97F990]
   - name: isk_06
     dir: world/area_isk/isk_06
     type: code
@@ -11046,7 +10674,6 @@ segments:
     - [auto, c, isk_06_2_entity]
     - [auto, c, isk_06_3_sand]
     - [auto, c, isk_06_4_switch]
-    - [0x980A20]
   - name: isk_07
     dir: world/area_isk/isk_07
     type: code
@@ -11062,7 +10689,6 @@ segments:
     - [auto, c, isk_07_5_lock]
     - [auto, c, isk_07_6_switch]
     - [auto, c, isk_07_7_ambush]
-    - [0x984E20]
   - name: isk_08
     dir: world/area_isk/isk_08
     type: code
@@ -11074,7 +10700,6 @@ segments:
     - [auto, c, isk_08_1_main]
     - [auto, c, isk_08_2_npc]
     - [auto, c, isk_08_3_entity]
-    - [0x986090]
   - name: isk_09
     dir: world/area_isk/isk_09
     type: code
@@ -11088,7 +10713,6 @@ segments:
     - [auto, c, isk_09_3_entity]
     - [auto, c, isk_09_4_stairs]
     - [auto, c, isk_09_5_switch]
-    - [0x988B50]
   - name: isk_10
     dir: world/area_isk/isk_10
     type: code
@@ -11100,7 +10724,6 @@ segments:
     - [auto, c, isk_10_1_main]
     - [auto, c, isk_10_2_entity]
     - [auto, c, isk_10_3_bombable]
-    - [0x98A9E0]
   - name: isk_11
     dir: world/area_isk/isk_11
     type: code
@@ -11115,7 +10738,6 @@ segments:
     - [auto, c, isk_11_4_scene]
     - [auto, c, isk_11_5_puzzle]
     - [auto, c, isk_11_6_lock]
-    - [0x98AB70]
   - name: isk_12
     dir: world/area_isk/isk_12
     type: code
@@ -11128,7 +10750,6 @@ segments:
     - [auto, c, isk_12_2_entity]
     - [auto, c, isk_12_3_sand]
     - [auto, c, isk_12_4_switch]
-    - [0x98F7C0]
   - name: isk_13
     dir: world/area_isk/isk_13
     type: code
@@ -11140,7 +10761,6 @@ segments:
     - [auto, c, isk_13_1_main]
     - [auto, c, isk_13_2_entity]
     - [auto, c, isk_13_3_npc]
-    - [0x992680]
   - name: isk_14
     dir: world/area_isk/isk_14
     type: code
@@ -11152,7 +10772,6 @@ segments:
     - [auto, c, isk_14_1_main]
     - [auto, c, isk_14_2_entity]
     - [auto, c, isk_14_3_npc]
-    - [0x994490]
   - name: isk_16
     dir: world/area_isk/isk_16
     type: code
@@ -11165,7 +10784,6 @@ segments:
     - [auto, c, isk_16_2_npc]
     - [auto, c, isk_16_3_boss]
     - [auto, c, isk_16_4_entity]
-    - [0x997F40]
   - name: isk_18
     dir: world/area_isk/isk_18
     type: code
@@ -11177,7 +10795,6 @@ segments:
     - [auto, c, isk_18_1_main]
     - [auto, c, isk_18_2_npc]
     - [auto, c, isk_18_3_entity]
-    - [0x9996D0]
   - name: isk_19
     dir: world/area_isk/isk_19
     type: code
@@ -11189,7 +10806,6 @@ segments:
     - [auto, c, isk_19_1_music]
     - [auto, c, isk_19_2_main]
     - [auto, c, isk_19_3_entity]
-    - [0x999740]
   - name: trd_00
     dir: world/area_trd/trd_00
     type: code
@@ -11201,7 +10817,6 @@ segments:
     - [auto, c, trd_00_1_main]
     - [auto, c, trd_00_2_entity]
     - [auto, c, trd_00_3_npc]
-    - [0x99A2A0]
   - name: trd_01
     dir: world/area_trd/trd_01
     type: code
@@ -11213,7 +10828,6 @@ segments:
     - [auto, c, trd_01_1_main]
     - [auto, c, trd_01_2_entity]
     - [auto, c, trd_01_3_npc]
-    - [0x99E050]
   - name: trd_02
     dir: world/area_trd/trd_02
     type: code
@@ -11225,7 +10839,6 @@ segments:
     - [auto, c, trd_02_1_main]
     - [auto, c, trd_02_2_entity]
     - [auto, c, trd_02_3_npc]
-    - [0x9A2A30]
   - name: trd_03
     dir: world/area_trd/trd_03
     type: code
@@ -11238,7 +10851,6 @@ segments:
     - [auto, c, trd_03_2_entity]
     - [auto, c, trd_03_3_npc]
     - [auto, c, trd_03_4_puzzle]
-    - [0x9A5040]
   - name: trd_04
     dir: world/area_trd/trd_04
     type: code
@@ -11250,7 +10862,6 @@ segments:
     - [auto, c, trd_04_1_main]
     - [auto, c, trd_04_2_entity]
     - [auto, c, trd_04_3_npc]
-    - [0x9ABC90]
   - name: trd_05
     dir: world/area_trd/trd_05
     type: code
@@ -11263,7 +10874,6 @@ segments:
     - [auto, c, trd_05_2_entity]
     - [auto, c, trd_05_3_trap]
     - [auto, c, trd_05_4_npc]
-    - [0x9AEE70]
   - name: trd_06
     dir: world/area_trd/trd_06
     type: code
@@ -11277,7 +10887,6 @@ segments:
     - [auto, c, trd_06_3_npc_prisoners]
     - [auto, c, trd_06_4_npc_koopa_bros]
     - [auto, c, trd_06_5_entity]
-    - [0x9B24B0]
   - name: trd_07
     dir: world/area_trd/trd_07
     type: code
@@ -11289,7 +10898,6 @@ segments:
     - [auto, c, trd_07_1_main]
     - [auto, c, trd_07_2_npc]
     - [auto, c, trd_07_3_magic_doors]
-    - [0x9B9270]
   - name: trd_08
     dir: world/area_trd/trd_08
     type: code
@@ -11301,7 +10909,6 @@ segments:
     - [auto, c, trd_08_1_main]
     - [auto, c, trd_08_2_entity]
     - [auto, c, trd_08_3_npc]
-    - [0x9BBCC0]
   - name: trd_09
     dir: world/area_trd/trd_09
     type: code
@@ -11314,7 +10921,6 @@ segments:
     - [auto, c, trd_09_2_entity]
     - [auto, c, trd_09_3_npc]
     - [auto, c, trd_09_4_demo]
-    - [0x9BD830]
   - name: trd_10
     dir: world/area_trd/trd_10
     type: code
@@ -11326,7 +10932,6 @@ segments:
     - [auto, c, trd_10_1_main]
     - [auto, c, trd_10_2_npc]
     - [auto, c, trd_10_3_fake_bowser]
-    - [0x9C3160]
   - name: nok_01
     dir: world/area_nok/nok_01
     type: code
@@ -11343,7 +10948,6 @@ segments:
     - [auto, c, nok_01_6_rooms]
     - [auto, c, nok_01_7_radio]
     - [auto, c, nok_01_8_foliage]
-    - [0x9C7F50]
   - name: nok_02
     dir: world/area_nok/nok_02
     type: code
@@ -11362,7 +10966,6 @@ segments:
     - [auto, c, nok_02_8_koot_favors]
     - [auto, c, nok_02_9_foliage]
     - [auto, c, nok_02_10_epilogue]
-    - [0x9DB5C0]
   - name: nok_03
     dir: world/area_nok/nok_03
     type: code
@@ -11375,7 +10978,6 @@ segments:
     - [auto, c, nok_03_2_main]
     - [auto, c, nok_03_3_entity]
     - [auto, c, nok_03_4_npc]
-    - [0x9EC610]
   - name: nok_04
     dir: world/area_nok/nok_04
     type: code
@@ -11389,7 +10991,6 @@ segments:
     - [auto, c, nok_04_3_entity]
     - [auto, c, nok_04_4_npc]
     - [auto, c, nok_04_5_new_partner]
-    - [0x9EEB20]
   - name: nok_11
     dir: world/area_nok/nok_11
     type: code
@@ -11402,7 +11003,6 @@ segments:
     - [auto, c, nok_11_2_main]
     - [auto, c, nok_11_3_entity]
     - [auto, c, nok_11_4_npc]
-    - [0x9F6990]
   - name: nok_12
     dir: world/area_nok/nok_12
     type: code
@@ -11418,7 +11018,6 @@ segments:
     - [auto, c, nok_12_5_foliage]
     - [auto, c, nok_12_6_npc]
     - [auto, c, nok_12_7_demo]
-    - [0x9FC8B0]
   - name: nok_13
     dir: world/area_nok/nok_13
     type: code
@@ -11432,7 +11031,6 @@ segments:
     - [auto, c, nok_13_3_entity]
     - [auto, c, nok_13_4_npc]
     - [auto, c, nok_13_5]
-    - [0xA01A90]
   - name: nok_14
     dir: world/area_nok/nok_14
     type: code
@@ -11446,7 +11044,6 @@ segments:
     - [auto, c, nok_14_3_entity]
     - [auto, c, nok_14_4_bridge]
     - [auto, c, nok_14_5_npc]
-    - [0xA04C60]
   - name: nok_15
     dir: world/area_nok/nok_15
     type: code
@@ -11460,7 +11057,6 @@ segments:
     - [auto, c, nok_15_3_entity]
     - [auto, c, nok_15_4_npc]
     - [auto, c, nok_15_5_foliage]
-    - [0xA09680]
   - name: hos_00
     dir: world/area_hos/hos_00
     type: code
@@ -11476,7 +11072,6 @@ segments:
     - [auto, c, hos_00_5_entity]
     - [auto, c, hos_00_6_scenes]
     - [auto, c, hos_00_7_shade_gfx]
-    - [0xA0CA00]
   - name: hos_01
     dir: world/area_hos/hos_01
     type: code
@@ -11491,7 +11086,6 @@ segments:
     - [auto, c, hos_01_4_npc]
     - [auto, c, hos_01_5_entity]
     - [auto, c, hos_01_6_star_way]
-    - [0xA116A0]
   - name: hos_02
     dir: world/area_hos/hos_02
     type: code
@@ -11506,7 +11100,6 @@ segments:
     - [auto, c, hos_02_4_unused]
     - [auto, c, hos_02_5_npc]
     - [auto, c, hos_02_6_descent]
-    - [0xA18D00]
   - name: hos_03
     dir: world/area_hos/hos_03
     type: code
@@ -11523,7 +11116,6 @@ segments:
     - [auto, c, hos_03_6_npc]
     - [auto, c, hos_03_7_shop]
     - [auto, c, hos_03_8_entity]
-    - [0xA1E640]
   - name: hos_04
     dir: world/area_hos/hos_04
     type: code
@@ -11539,7 +11131,6 @@ segments:
     - [auto, c, hos_04_6_intro]
     - [auto, c, hos_04_7_starship]
     - [auto, c, hos_04_8_narrator]
-    - [0xA27D60]
   - name: hos_05
     dir: world/area_hos/hos_05
     type: code
@@ -11556,7 +11147,6 @@ segments:
     - [auto, c, hos_05_6_narrator]
     - [auto, c, hos_05_7_model_fx]
     - [auto, c, hos_05_8_star_ship]
-    - [0xA2FAA0]
   - name: hos_06
     dir: world/area_hos/hos_06
     type: code
@@ -11571,7 +11161,6 @@ segments:
     - [auto, c, hos_06_4_rooms]
     - [auto, c, hos_06_5_merluvlee]
     - [auto, c, hos_06_6_chest]
-    - [0xA3BA40]
   - name: hos_10
     dir: world/area_hos/hos_10
     type: code
@@ -11587,7 +11176,6 @@ segments:
     - [auto, c, hos_10_5_intro]
     - [auto, c, hos_10_6_pre_title]
     - [auto, c, hos_10_7_ending]
-    - [0xA403C0]
   - name: hos_20
     dir: world/area_hos/hos_20
     type: code
@@ -11598,7 +11186,6 @@ segments:
     - [auto, c, hos_20_0_header]
     - [auto, c, hos_20_1_main]
     - [auto, c, hos_20_2_starship]
-    - [0xA45C90]
   - name: kpa_01
     dir: world/area_kpa/kpa_01
     type: code
@@ -11611,7 +11198,6 @@ segments:
     - [auto, c, kpa_01_2_main]
     - [auto, c, kpa_01_3_npc]
     - [auto, c, kpa_01_4_entity]
-    - [0xA479B0]
   - name: kpa_03
     dir: world/area_kpa/kpa_03
     type: code
@@ -11624,7 +11210,6 @@ segments:
     - [auto, c, kpa_03_2_main]
     - [auto, c, kpa_03_3_npc]
     - [auto, c, kpa_03_4_entity]
-    - [0xA4A480]
   - name: kpa_04
     dir: world/area_kpa/kpa_04
     type: code
@@ -11636,7 +11221,6 @@ segments:
     - [auto, c, kpa_04_1_music]
     - [auto, c, kpa_04_2_main]
     - [auto, c, kpa_04_3_statues]
-    - [0xA4C0D0]
   - name: kpa_08
     dir: world/area_kpa/kpa_08
     type: code
@@ -11649,7 +11233,6 @@ segments:
     - [auto, c, kpa_08_2_main]
     - [auto, c, kpa_08_3_entity]
     - [auto, c, kpa_08_4_npc]
-    - [0xA4DEC0]
   - name: kpa_09
     dir: world/area_kpa/kpa_09
     type: code
@@ -11662,7 +11245,6 @@ segments:
     - [auto, c, kpa_09_2_main]
     - [auto, c, kpa_09_3_entity]
     - [auto, c, kpa_09_4_npc]
-    - [0xA502F0]
   - name: kpa_10
     dir: world/area_kpa/kpa_10
     type: code
@@ -11675,7 +11257,6 @@ segments:
     - [auto, c, kpa_10_2_main]
     - [auto, c, kpa_10_3_npc]
     - [auto, c, kpa_10_4_entity]
-    - [0xA51C90]
   - name: kpa_11
     dir: world/area_kpa/kpa_11
     type: code
@@ -11688,7 +11269,6 @@ segments:
     - [auto, c, kpa_11_2_main]
     - [auto, c, kpa_11_3_entity]
     - [auto, c, kpa_11_4_npc]
-    - [0xA533B0]
   - name: kpa_12
     dir: world/area_kpa/kpa_12
     type: code
@@ -11700,7 +11280,6 @@ segments:
     - [auto, c, kpa_12_1_music]
     - [auto, c, kpa_12_2_main]
     - [auto, c, kpa_12_3_platforms]
-    - [0xA54DC0]
   - name: kpa_13
     dir: world/area_kpa/kpa_13
     type: code
@@ -11713,7 +11292,6 @@ segments:
     - [auto, c, kpa_13_2_main]
     - [auto, c, kpa_13_3_entity]
     - [auto, c, kpa_13_4_platforms]
-    - [0xA56390]
   - name: kpa_14
     dir: world/area_kpa/kpa_14
     type: code
@@ -11726,7 +11304,6 @@ segments:
     - [auto, c, kpa_14_2_main]
     - [auto, c, kpa_14_3_entity]
     - [auto, c, kpa_14_4_platforms]
-    - [0xA57D20]
   - name: kpa_15
     dir: world/area_kpa/kpa_15
     type: code
@@ -11738,7 +11315,6 @@ segments:
     - [auto, c, kpa_15_1_music]
     - [auto, c, kpa_15_2_main]
     - [auto, c, kpa_15_3_entity]
-    - [0xA59960]
   - name: kpa_16
     dir: world/area_kpa/kpa_16
     type: code
@@ -11751,7 +11327,6 @@ segments:
     - [auto, c, kpa_16_2_main]
     - [auto, c, kpa_16_3_entity]
     - [auto, c, kpa_16_4_npc]
-    - [0xA5A3D0]
   - name: kpa_17
     dir: world/area_kpa/kpa_17
     type: code
@@ -11764,7 +11339,6 @@ segments:
     - [auto, c, kpa_17_2_entity]
     - [auto, c, kpa_17_3_main]
     - [auto, c, kpa_17_4_npc]
-    - [0xA5CA20]
   - name: kpa_32
     dir: world/area_kpa/kpa_32
     type: code
@@ -11776,7 +11350,6 @@ segments:
     - [auto, c, kpa_32_1_music]
     - [auto, c, kpa_32_2_entity]
     - [auto, c, kpa_32_3_main]
-    - [0xA5E3D0]
   - name: kpa_33
     dir: world/area_kpa/kpa_33
     type: code
@@ -11788,7 +11361,6 @@ segments:
     - [auto, c, kpa_33_1_music]
     - [auto, c, kpa_33_2_entity]
     - [auto, c, kpa_33_3_main]
-    - [0xA5F390]
   - name: kpa_40
     dir: world/area_kpa/kpa_40
     type: code
@@ -11799,7 +11371,6 @@ segments:
     - [auto, c, kpa_40_0_header]
     - [auto, c, kpa_40_1_music]
     - [auto, c, kpa_40_2_main]
-    - [0xA60040]
   - name: kpa_41
     dir: world/area_kpa/kpa_41
     type: code
@@ -11810,7 +11381,6 @@ segments:
     - [auto, c, kpa_41_0_header]
     - [auto, c, kpa_41_1_music]
     - [auto, c, kpa_41_2_main]
-    - [0xA60470]
   - name: kpa_50
     dir: world/area_kpa/kpa_50
     type: code
@@ -11822,7 +11392,6 @@ segments:
     - [auto, c, kpa_50_1_music]
     - [auto, c, kpa_50_2_main]
     - [auto, c, kpa_50_3_npc]
-    - [0xA623F0]
   - name: kpa_51
     dir: world/area_kpa/kpa_51
     type: code
@@ -11834,7 +11403,6 @@ segments:
     - [auto, c, kpa_51_1_music]
     - [auto, c, kpa_51_2_main]
     - [auto, c, kpa_51_3_npc]
-    - [0xA65CB0]
   - name: kpa_52
     dir: world/area_kpa/kpa_52
     type: code
@@ -11847,7 +11415,6 @@ segments:
     - [auto, c, kpa_52_2_entity]
     - [auto, c, kpa_52_3_main]
     - [auto, c, kpa_52_4_npc]
-    - [0xA68430]
   - name: kpa_53
     dir: world/area_kpa/kpa_53
     type: code
@@ -11860,7 +11427,6 @@ segments:
     - [auto, c, kpa_53_2_main]
     - [auto, c, kpa_53_3_npc]
     - [auto, c, kpa_53_4_entity]
-    - [0xA6AE10]
   - name: kpa_60
     dir: world/area_kpa/kpa_60
     type: code
@@ -11873,7 +11439,6 @@ segments:
     - [auto, c, kpa_60_2_entity]
     - [auto, c, kpa_60_3_main]
     - [auto, c, kpa_60_4_scenes]
-    - [0xA6CEF0]
   - name: kpa_61
     dir: world/area_kpa/kpa_61
     type: code
@@ -11886,7 +11451,6 @@ segments:
     - [auto, c, kpa_61_2_main]
     - [auto, c, kpa_61_3_npc]
     - [auto, c, kpa_61_4_entity]
-    - [0xA70720]
   - name: kpa_62
     dir: world/area_kpa/kpa_62
     type: code
@@ -11898,7 +11462,6 @@ segments:
     - [auto, c, kpa_62_1_music]
     - [auto, c, kpa_62_2_entity]
     - [auto, c, kpa_62_3_main]
-    - [0xA72610]
   - name: kpa_63
     dir: world/area_kpa/kpa_63
     type: code
@@ -11911,7 +11474,6 @@ segments:
     - [auto, c, kpa_63_2_entity]
     - [auto, c, kpa_63_3_main]
     - [auto, c, kpa_63_4_scenes]
-    - [0xA73740]
   - name: kpa_70
     dir: world/area_kpa/kpa_70
     type: code
@@ -11925,7 +11487,6 @@ segments:
     - [auto, c, kpa_70_3_npc]
     - [auto, c, kpa_70_4_chain_skele]
     - [auto, c, kpa_70_5_chain_anim]
-    - [0xA75360]
   - name: kpa_81
     dir: world/area_kpa/kpa_81
     type: code
@@ -11937,7 +11498,6 @@ segments:
     - [auto, c, kpa_81_1_music]
     - [auto, c, kpa_81_2_main]
     - [auto, c, kpa_81_3_npc]
-    - [0xA78900]
   - name: kpa_82
     dir: world/area_kpa/kpa_82
     type: code
@@ -11949,7 +11509,6 @@ segments:
     - [auto, c, kpa_82_1_music]
     - [auto, c, kpa_82_2_main]
     - [auto, c, kpa_82_3_npc]
-    - [0xA7A940]
   - name: kpa_83
     dir: world/area_kpa/kpa_83
     type: code
@@ -11961,7 +11520,6 @@ segments:
     - [auto, c, kpa_83_1_music]
     - [auto, c, kpa_83_2_main]
     - [auto, c, kpa_83_3_npc]
-    - [0xA83500]
   - name: kpa_90
     dir: world/area_kpa/kpa_90
     type: code
@@ -11972,7 +11530,6 @@ segments:
     - [auto, c, kpa_90_0_header]
     - [auto, c, kpa_90_1_music]
     - [auto, c, kpa_90_2_main]
-    - [0xA867B0]
   - name: kpa_91
     dir: world/area_kpa/kpa_91
     type: code
@@ -11985,7 +11542,6 @@ segments:
     - [auto, c, kpa_91_2_main]
     - [auto, c, kpa_91_3_npc]
     - [auto, c, kpa_91_4_entity]
-    - [0xA88360]
   - name: kpa_94
     dir: world/area_kpa/kpa_94
     type: code
@@ -11996,7 +11552,6 @@ segments:
     - [auto, c, kpa_94_0_header]
     - [auto, c, kpa_94_1_music]
     - [auto, c, kpa_94_2_main]
-    - [0xA8C7C0]
   - name: kpa_95
     dir: world/area_kpa/kpa_95
     type: code
@@ -12009,7 +11564,6 @@ segments:
     - [auto, c, kpa_95_2_entity]
     - [auto, c, kpa_95_3_main]
     - [auto, c, kpa_95_4_npc]
-    - [0xA8E390]
   - name: kpa_96
     dir: world/area_kpa/kpa_96
     type: code
@@ -12021,7 +11575,6 @@ segments:
     - [auto, c, kpa_96_1_music]
     - [auto, c, kpa_96_2_main]
     - [auto, c, kpa_96_3_npc]
-    - [0xA927F0]
   - name: kpa_100
     dir: world/area_kpa/kpa_100
     type: code
@@ -12033,7 +11586,6 @@ segments:
     - [auto, c, kpa_100_1_music]
     - [auto, c, kpa_100_2_main]
     - [auto, c, kpa_100_3_entity]
-    - [0xA931B0]
   - name: kpa_101
     dir: world/area_kpa/kpa_101
     type: code
@@ -12045,7 +11597,6 @@ segments:
     - [auto, c, kpa_101_1_music]
     - [auto, c, kpa_101_2_main]
     - [auto, c, kpa_101_3_entity]
-    - [0xA93710]
   - name: kpa_102
     dir: world/area_kpa/kpa_102
     type: code
@@ -12057,7 +11608,6 @@ segments:
     - [auto, c, kpa_102_1_music]
     - [auto, c, kpa_102_2_main]
     - [auto, c, kpa_102_3_npc]
-    - [0xA96CD0]
   - name: kpa_111
     dir: world/area_kpa/kpa_111
     type: code
@@ -12071,7 +11621,6 @@ segments:
     - [auto, c, kpa_111_3_statues]
     - [auto, c, kpa_111_4_npc]
     - [auto, c, kpa_111_5_entity]
-    - [0xA9A950]
   - name: kpa_112
     dir: world/area_kpa/kpa_112
     type: code
@@ -12082,7 +11631,6 @@ segments:
     - [auto, c, kpa_112_0_header]
     - [auto, c, kpa_112_1_music]
     - [auto, c, kpa_112_2_main]
-    - [0xA9C990]
   - name: kpa_113
     dir: world/area_kpa/kpa_113
     type: code
@@ -12096,7 +11644,6 @@ segments:
     - [auto, c, kpa_113_3_entity]
     - [auto, c, kpa_113_4_statues]
     - [auto, c, kpa_113_5_npc]
-    - [0xA9D6D0]
   - name: kpa_114
     dir: world/area_kpa/kpa_114
     type: code
@@ -12108,7 +11655,6 @@ segments:
     - [auto, c, kpa_114_1_music]
     - [auto, c, kpa_114_2_main]
     - [auto, c, kpa_114_3_entity]
-    - [0xA9E9D0]
   - name: kpa_115
     dir: world/area_kpa/kpa_115
     type: code
@@ -12121,7 +11667,6 @@ segments:
     - [auto, c, kpa_115_2_main]
     - [auto, c, kpa_115_3_statues]
     - [auto, c, kpa_115_4_npc]
-    - [0xAA0100]
   - name: kpa_116
     dir: world/area_kpa/kpa_116
     type: code
@@ -12132,7 +11677,6 @@ segments:
     - [auto, c, kpa_116_0_header]
     - [auto, c, kpa_116_1_music]
     - [auto, c, kpa_116_2_main]
-    - [0xAA1EE0]
   - name: kpa_117
     dir: world/area_kpa/kpa_117
     type: code
@@ -12143,7 +11687,6 @@ segments:
     - [auto, c, kpa_117_0_header]
     - [auto, c, kpa_117_1_music]
     - [auto, c, kpa_117_2_main]
-    - [0xAA2180]
   - name: kpa_118
     dir: world/area_kpa/kpa_118
     type: code
@@ -12154,7 +11697,6 @@ segments:
     - [auto, c, kpa_118_0_header]
     - [auto, c, kpa_118_1_music]
     - [auto, c, kpa_118_2_main]
-    - [0xAA23C0]
   - name: kpa_119
     dir: world/area_kpa/kpa_119
     type: code
@@ -12166,7 +11708,6 @@ segments:
     - [auto, c, kpa_119_1_music]
     - [auto, c, kpa_119_2_entity]
     - [auto, c, kpa_119_3_main]
-    - [0xAA2660]
   - name: kpa_121
     dir: world/area_kpa/kpa_121
     type: code
@@ -12177,7 +11718,6 @@ segments:
     - [auto, c, kpa_121_0_header]
     - [auto, c, kpa_121_1_music]
     - [auto, c, kpa_121_2_main]
-    - [0xAA28F0]
   - name: kpa_130
     dir: world/area_kpa/kpa_130
     type: code
@@ -12189,7 +11729,6 @@ segments:
     - [auto, c, kpa_130_1_music]
     - [auto, c, kpa_130_2_main]
     - [auto, c, kpa_130_3_npc]
-    - [0xAA3460]
   - name: kpa_133
     dir: world/area_kpa/kpa_133
     type: code
@@ -12204,7 +11743,6 @@ segments:
     - [auto, c, kpa_133_4_npc]
     - [auto, c, kpa_133_5_water]
     - [auto, c, kpa_133_6]
-    - [0xAA78F0]
   - name: kpa_134
     dir: world/area_kpa/kpa_134
     type: code
@@ -12219,7 +11757,6 @@ segments:
     - [auto, c, kpa_134_4_npc]
     - [auto, c, kpa_134_5_panels]
     - [auto, c, kpa_134_6_entity]
-    - [0xAA96A0]
   - name: osr_00
     dir: world/area_osr/osr_00
     type: code
@@ -12233,7 +11770,6 @@ segments:
     - [auto, c, osr_00_3_npc_intro]
     - [auto, c, osr_00_4_npc_epilogue]
     - [auto, c, osr_00_5_scenes]
-    - [0xAACFC0]
   - name: osr_01
     dir: world/area_osr/osr_01
     type: code
@@ -12245,7 +11781,6 @@ segments:
     - [auto, c, osr_01_1_music]
     - [auto, c, osr_01_2_main]
     - [auto, c, osr_01_3_npc]
-    - [0xAB0AB0]
   - name: osr_02
     dir: world/area_osr/osr_02
     type: code
@@ -12258,7 +11793,6 @@ segments:
     - [auto, c, osr_02_2_entity]
     - [auto, c, osr_02_3_npc]
     - [auto, c, osr_02_4_npc_peach]
-    - [0xAB22C0]
   - name: osr_03
     dir: world/area_osr/osr_03
     type: code
@@ -12273,7 +11807,6 @@ segments:
     - [auto, c, osr_03_4_starship]
     - [auto, c, osr_03_5_interlude]
     - [auto, c, osr_03_6_ending]
-    - [0xAB6610]
   - name: osr_04
     dir: world/area_osr/osr_04
     type: code
@@ -12284,7 +11817,6 @@ segments:
     - [auto, c, osr_04_0_header]
     - [auto, c, osr_04_1_main]
     - [auto, c, osr_04_2_assault]
-    - [0xAB9370]
   - name: kkj_00
     dir: world/area_kkj/kkj_00
     type: code
@@ -12299,7 +11831,6 @@ segments:
     - [auto, c, kkj_00_4_scene_intro]
     - [auto, c, kkj_00_5_npc_ending]
     - [auto, c, kkj_00_6_scene_ending]
-    - [0xABC250]
   - name: kkj_01
     dir: world/area_kkj/kkj_01
     type: code
@@ -12311,7 +11842,6 @@ segments:
     - [auto, c, kkj_01_1_music]
     - [auto, c, kkj_01_2_main]
     - [auto, c, kkj_01_3_npc]
-    - [0xAC6000]
   - name: kkj_02
     dir: world/area_kkj/kkj_02
     type: code
@@ -12323,7 +11853,6 @@ segments:
     - [auto, c, kkj_02_1_music]
     - [auto, c, kkj_02_2_main]
     - [auto, c, kkj_02_3_npc]
-    - [0xAC8D20]
   - name: kkj_03
     dir: world/area_kkj/kkj_03
     type: code
@@ -12336,7 +11865,6 @@ segments:
     - [auto, c, kkj_03_2_main]
     - [auto, c, kkj_03_3_npc]
     - [auto, c, kkj_03_4_scenes]
-    - [0xAC9A40]
   - name: kkj_10
     dir: world/area_kkj/kkj_10
     type: code
@@ -12349,7 +11877,6 @@ segments:
     - [auto, c, kkj_10_2_entity]
     - [auto, c, kkj_10_3_npcs_early]
     - [auto, c, kkj_10_4_npcs_later]
-    - [0xACBBF0]
   - name: kkj_11
     dir: world/area_kkj/kkj_11
     type: code
@@ -12364,7 +11891,6 @@ segments:
     - [auto, c, kkj_11_4_demo]
     - [auto, c, kkj_11_5_npcs_early]
     - [auto, c, kkj_11_6_npcs_later]
-    - [0xACF210]
   - name: kkj_12
     dir: world/area_kkj/kkj_12
     type: code
@@ -12375,7 +11901,6 @@ segments:
     - [auto, c, kkj_12_0_header]
     - [auto, c, kkj_12_1_main]
     - [auto, c, kkj_12_2_npc]
-    - [0xAD4940]
   - name: kkj_13
     dir: world/area_kkj/kkj_13
     type: code
@@ -12389,7 +11914,6 @@ segments:
     - [auto, c, kkj_13_3_npcs_finale]
     - [auto, c, kkj_13_4_npcs_intro]
     - [auto, c, kkj_13_5_intro_scenes]
-    - [0xAD6630]
   - name: kkj_14
     dir: world/area_kkj/kkj_14
     type: code
@@ -12413,7 +11937,6 @@ segments:
     - [auto, c, kkj_14_13_chapter5]
     - [auto, c, kkj_14_14_chapter6]
     - [auto, c, kkj_14_15_chapter7]
-    - [0xADB360]
   - name: kkj_15
     dir: world/area_kkj/kkj_15
     type: code
@@ -12432,7 +11955,6 @@ segments:
     - [auto, c, kkj_15_8_npc_chapter0]
     - [auto, c, kkj_15_9_npc_chapter1]
     - [auto, c, kkj_15_10_npc_chapter3]
-    - [0xAE5BA0]
   - name: kkj_16
     dir: world/area_kkj/kkj_16
     type: code
@@ -12446,7 +11968,6 @@ segments:
     - [auto, c, kkj_16_3_npcs_later]
     - [auto, c, kkj_16_4_stealth]
     - [auto, c, kkj_16_5_entity]
-    - [0xAEE490]
   - name: kkj_17
     dir: world/area_kkj/kkj_17
     type: code
@@ -12458,7 +11979,6 @@ segments:
     - [auto, c, kkj_17_1_main]
     - [auto, c, kkj_17_2_entity]
     - [auto, c, kkj_17_3_chest]
-    - [0xAF2200]
   - name: kkj_18
     dir: world/area_kkj/kkj_18
     type: code
@@ -12471,7 +11991,6 @@ segments:
     - [auto, c, kkj_18_2_main]
     - [auto, c, kkj_18_3_npc]
     - [auto, c, kkj_18_4_gourmet]
-    - [0xAF34C0]
   - name: kkj_19
     dir: world/area_kkj/kkj_19
     type: code
@@ -12485,7 +12004,6 @@ segments:
     - [auto, c, kkj_19_3_npcs_intro]
     - [auto, c, kkj_19_4_npcs_peach]
     - [auto, c, kkj_19_5_baking]
-    - [0xAF8660]
   - name: kkj_20
     dir: world/area_kkj/kkj_20
     type: code
@@ -12498,7 +12016,6 @@ segments:
     - [auto, c, kkj_20_2_main]
     - [auto, c, kkj_20_3_entity]
     - [auto, c, kkj_20_4_npc]
-    - [0xAFE130]
   - name: kkj_21
     dir: world/area_kkj/kkj_21
     type: code
@@ -12508,7 +12025,6 @@ segments:
     subsegments:
     - [auto, c, kkj_21_0_header]
     - [auto, c, kkj_21_1_main]
-    - [0xB022A0]
   - name: kkj_22
     dir: world/area_kkj/kkj_22
     type: code
@@ -12519,7 +12035,6 @@ segments:
     - [auto, c, kkj_22_0_header]
     - [auto, c, kkj_22_1_music]
     - [auto, c, kkj_22_2_main]
-    - [0xB024F0]
   - name: kkj_23
     dir: world/area_kkj/kkj_23
     type: code
@@ -12533,7 +12048,6 @@ segments:
     - [auto, c, kkj_23_3_npcs_finale]
     - [auto, c, kkj_23_4_npcs_peach]
     - [auto, c, kkj_23_5_scene]
-    - [0xB03250]
   - name: kkj_24
     dir: world/area_kkj/kkj_24
     type: code
@@ -12545,7 +12059,6 @@ segments:
     - [auto, c, kkj_24_1_music]
     - [auto, c, kkj_24_2_main]
     - [auto, c, kkj_24_3_entity]
-    - [0xB06590]
   - name: kkj_25
     dir: world/area_kkj/kkj_25
     type: code
@@ -12563,7 +12076,6 @@ segments:
     - [auto, c, kkj_25_7_kammy_defeated]
     - [auto, c, kkj_25_8_bowser_defeated]
     - [auto, c, kkj_25_9_entity]
-    - [0xB07940]
   - name: kkj_26
     dir: world/area_kkj/kkj_26
     type: code
@@ -12575,7 +12087,6 @@ segments:
     - [auto, c, kkj_26_1_main]
     - [auto, c, kkj_26_2_scenes]
     - [auto, c, kkj_26_3_demo]
-    - [0xB13150]
   - name: kkj_27
     dir: world/area_kkj/kkj_27
     type: code
@@ -12587,7 +12098,6 @@ segments:
     - [auto, c, kkj_27_1_music]
     - [auto, c, kkj_27_2_main]
     - [auto, c, kkj_27_3_rotating_wall]
-    - [0xB14210]
   - name: kkj_28
     dir: world/area_kkj/kkj_28
     type: code
@@ -12597,7 +12107,6 @@ segments:
     subsegments:
     - [auto, c, kkj_28_0_header]
     - [auto, c, kkj_28_1_main]
-    - [0xB14EA0]
   - name: kkj_29
     dir: world/area_kkj/kkj_29
     type: code
@@ -12609,7 +12118,6 @@ segments:
     - [auto, c, kkj_29_1_main]
     - [auto, c, kkj_29_2_npc]
     - [auto, c, kkj_29_3_quiz]
-    - [0xB15120]
   - name: tst_01
     dir: world/area_tst/tst_01
     type: code
@@ -12619,7 +12127,6 @@ segments:
     subsegments:
     - [auto, c, tst_01_1_main]
     - [auto, c, tst_01_2_entity]
-    - [0xB1A900]
   - name: tst_02
     dir: world/area_tst/tst_02
     type: code
@@ -12629,7 +12136,6 @@ segments:
     subsegments:
     - [auto, c, tst_02_1_main]
     - [auto, c, tst_02_2_entity]
-    - [0xB1AC30]
   - name: tst_03
     dir: world/area_tst/tst_03
     type: code
@@ -12639,7 +12145,6 @@ segments:
     subsegments:
     - [auto, c, tst_03_1_main]
     - [auto, c, tst_03_2_entity]
-    - [0xB1AF80]
   - name: tst_04
     dir: world/area_tst/tst_04
     type: code
@@ -12651,7 +12156,6 @@ segments:
     - [auto, c, tst_04_2_entity]
     - [auto, c, tst_04_3_reflection]
     - [auto, c, tst_04_4_npc]
-    - [0xB1BC00]
   - name: tst_10
     dir: world/area_tst/tst_10
     type: code
@@ -12660,7 +12164,6 @@ segments:
     vram_of_symbol: world_model_data_vram_end
     subsegments:
     - [auto, c, tst_10_1_main]
-    - [0xB1C540]
   - name: tst_11
     dir: world/area_tst/tst_11
     type: code
@@ -12670,7 +12173,6 @@ segments:
     subsegments:
     - [auto, c, tst_11_1_main]
     - [auto, c, tst_11_2_extra]
-    - [0xB1D1C0]
   - name: tst_12
     dir: world/area_tst/tst_12
     type: code
@@ -12716,7 +12218,6 @@ segments:
     - [auto, c, jan_00_3_entity]
     - [auto, c, jan_00_4_whale]
     - [auto, c, jan_00_5_foliage]
-    - [0xB220E0]
   - name: jan_01
     dir: world/area_jan/jan_01
     type: code
@@ -12730,7 +12231,6 @@ segments:
     - [auto, c, jan_01_3_npc]
     - [auto, c, jan_01_4_entity]
     - [auto, c, jan_01_5_foliage]
-    - [0xB29400]
   - name: jan_02
     dir: world/area_jan/jan_02
     type: code
@@ -12744,7 +12244,6 @@ segments:
     - [auto, c, jan_02_3_npc]
     - [auto, c, jan_02_4_entity]
     - [auto, c, jan_02_5_foliage]
-    - [0xB2ED90]
   - name: jan_03
     dir: world/area_jan/jan_03
     type: code
@@ -12760,7 +12259,6 @@ segments:
     - [auto, c, jan_03_5_entity]
     - [auto, c, jan_03_6_rooms]
     - [auto, c, jan_03_7_foliage]
-    - [0xB37E60]
   - name: jan_04
     dir: world/area_jan/jan_04
     type: code
@@ -12779,7 +12277,6 @@ segments:
     - [auto, c, jan_04_8_treasure]
     - [auto, c, jan_04_9_bushes]
     - [auto, c, jan_04_10_demo]
-    - [0xB45860]
   - name: jan_05
     dir: world/area_jan/jan_05
     type: code
@@ -12795,7 +12292,6 @@ segments:
     - [auto, c, jan_05_5_npc]
     - [auto, c, jan_05_6_trees]
     - [auto, c, jan_05_7_entity]
-    - [0xB4D140]
   - name: jan_06
     dir: world/area_jan/jan_06
     type: code
@@ -12811,7 +12307,6 @@ segments:
     - [auto, c, jan_06_5_entity]
     - [auto, c, jan_06_6_npc]
     - [auto, c, jan_06_7_bushes]
-    - [0xB54E10]
   - name: jan_07
     dir: world/area_jan/jan_07
     type: code
@@ -12825,7 +12320,6 @@ segments:
     - [auto, c, jan_07_3_npc]
     - [auto, c, jan_07_4_trees]
     - [auto, c, jan_07_5_bushes]
-    - [0xB5AA90]
   - name: jan_08
     dir: world/area_jan/jan_08
     type: code
@@ -12840,7 +12334,6 @@ segments:
     - [auto, c, jan_08_4_entity]
     - [auto, c, jan_08_5_npc]
     - [auto, c, jan_08_6_trees]
-    - [0xB606E0]
   - name: jan_09
     dir: world/area_jan/jan_09
     type: code
@@ -12854,7 +12347,6 @@ segments:
     - [auto, c, jan_09_3_npc]
     - [auto, c, jan_09_4_trees]
     - [auto, c, jan_09_5_entity]
-    - [0xB673D0]
   - name: jan_10
     dir: world/area_jan/jan_10
     type: code
@@ -12870,7 +12362,6 @@ segments:
     - [auto, c, jan_10_5_trees]
     - [auto, c, jan_10_6_bushes]
     - [auto, c, jan_10_7_entity]
-    - [0xB6DAD0]
   - name: jan_11
     dir: world/area_jan/jan_11
     type: code
@@ -12882,7 +12373,6 @@ segments:
     - [auto, c, jan_11_1_music]
     - [auto, c, jan_11_2_main]
     - [auto, c, jan_11_3_npc]
-    - [0xB71060]
   - name: jan_12
     dir: world/area_jan/jan_12
     type: code
@@ -12896,7 +12386,6 @@ segments:
     - [auto, c, jan_12_3_trees]
     - [auto, c, jan_12_4_entity]
     - [auto, c, jan_12_5_npc]
-    - [0xB74310]
   - name: jan_13
     dir: world/area_jan/jan_13
     type: code
@@ -12909,7 +12398,6 @@ segments:
     - [auto, c, jan_13_2_puzzle]
     - [auto, c, jan_13_3_trees]
     - [auto, c, jan_13_4_entity]
-    - [0xB76D80]
   - name: jan_14
     dir: world/area_jan/jan_14
     type: code
@@ -12922,7 +12410,6 @@ segments:
     - [auto, c, jan_14_2_vines]
     - [auto, c, jan_14_3_trees]
     - [auto, c, jan_14_4_npc]
-    - [0xB7B330]
   - name: jan_15
     dir: world/area_jan/jan_15
     type: code
@@ -12935,7 +12422,6 @@ segments:
     - [auto, c, jan_15_2_npc]
     - [auto, c, jan_15_3_trees]
     - [auto, c, jan_15_4_entity]
-    - [0xB7DC20]
   - name: jan_16
     dir: world/area_jan/jan_16
     type: code
@@ -12949,7 +12435,6 @@ segments:
     - [auto, c, jan_16_3_npc]
     - [auto, c, jan_16_4_entity]
     - [auto, c, jan_16_5_bushes]
-    - [0xB80540]
   - name: jan_17
     dir: world/area_jan/jan_17
     type: code
@@ -12961,7 +12446,6 @@ segments:
     - [auto, c, jan_17_1_music]
     - [auto, c, jan_17_2_main]
     - [auto, c, jan_17_3_entity]
-    - [0xB837E0]
   - name: jan_18
     dir: world/area_jan/jan_18
     type: code
@@ -12973,7 +12457,6 @@ segments:
     - [auto, c, jan_18_1_music]
     - [auto, c, jan_18_2_main]
     - [auto, c, jan_18_3_entity]
-    - [0xB83B90]
   - name: jan_19
     dir: world/area_jan/jan_19
     type: code
@@ -12985,7 +12468,6 @@ segments:
     - [auto, c, jan_19_1_music]
     - [auto, c, jan_19_2_main]
     - [auto, c, jan_19_3_entity]
-    - [0xB83E80]
   - name: jan_22
     dir: world/area_jan/jan_22
     type: code
@@ -13001,7 +12483,6 @@ segments:
     - [auto, c, jan_22_5_zipline]
     - [auto, c, jan_22_6_bushes]
     - [auto, c, jan_22_7_trees]
-    - [0xB85AE0]
   - name: jan_23
     dir: world/area_jan/jan_23
     type: code
@@ -13013,7 +12494,6 @@ segments:
     - [auto, c, jan_23_1_music]
     - [auto, c, jan_23_2_main]
     - [auto, c, jan_23_3_npc]
-    - [0xB8FCD0]
   - name: mim_01
     dir: world/area_mim/mim_01
     type: code
@@ -13028,7 +12508,6 @@ segments:
     - [auto, c, mim_01_4_hint]
     - [auto, c, mim_01_5_gate]
     - [auto, c, mim_01_6_npc]
-    - [0xB952F0]
   - name: mim_02
     dir: world/area_mim/mim_02
     type: code
@@ -13042,7 +12521,6 @@ segments:
     - [auto, c, mim_02_3_npc]
     - [auto, c, mim_02_4_gate]
     - [auto, c, mim_02_5_hint]
-    - [0xB98DE0]
   - name: mim_03
     dir: world/area_mim/mim_03
     type: code
@@ -13057,7 +12535,6 @@ segments:
     - [auto, c, mim_03_4_hint]
     - [auto, c, mim_03_5_gate]
     - [auto, c, mim_03_6_npc]
-    - [0xB9B9B0]
   - name: mim_04
     dir: world/area_mim/mim_04
     type: code
@@ -13072,7 +12549,6 @@ segments:
     - [auto, c, mim_04_4_hint]
     - [auto, c, mim_04_5_gate]
     - [auto, c, mim_04_6_npc]
-    - [0xB9EA90]
   - name: mim_05
     dir: world/area_mim/mim_05
     type: code
@@ -13087,7 +12563,6 @@ segments:
     - [auto, c, mim_05_4_hint]
     - [auto, c, mim_05_5_gate]
     - [auto, c, mim_05_6_npc]
-    - [0xBA2150]
   - name: mim_06
     dir: world/area_mim/mim_06
     type: code
@@ -13102,7 +12577,6 @@ segments:
     - [auto, c, mim_06_4_hint]
     - [auto, c, mim_06_5_gate]
     - [auto, c, mim_06_6_npc]
-    - [0xBA74B0]
   - name: mim_07
     dir: world/area_mim/mim_07
     type: code
@@ -13117,7 +12591,6 @@ segments:
     - [auto, c, mim_07_4_hint]
     - [auto, c, mim_07_5_gate]
     - [auto, c, mim_07_6_npc]
-    - [0xBAB1D0]
   - name: mim_08
     dir: world/area_mim/mim_08
     type: code
@@ -13131,7 +12604,6 @@ segments:
     - [auto, c, mim_08_3_entity]
     - [auto, c, mim_08_4_gate]
     - [auto, c, mim_08_5_npc]
-    - [0xBB0880]
   - name: mim_09
     dir: world/area_mim/mim_09
     type: code
@@ -13146,7 +12618,6 @@ segments:
     - [auto, c, mim_09_4_hint]
     - [auto, c, mim_09_5_gate]
     - [auto, c, mim_09_6_npc]
-    - [0xBB3CC0]
   - name: mim_10
     dir: world/area_mim/mim_10
     type: code
@@ -13159,7 +12630,6 @@ segments:
     - [auto, c, mim_10_2_entity]
     - [auto, c, mim_10_3_main]
     - [auto, c, mim_10_4_npc]
-    - [0xBB5B70]
   - name: mim_11
     dir: world/area_mim/mim_11
     type: code
@@ -13174,7 +12644,6 @@ segments:
     - [auto, c, mim_11_4_entity]
     - [auto, c, mim_11_5_npc]
     - [auto, c, mim_11_6_foliage]
-    - [0xBB7C30]
   - name: mim_12
     dir: world/area_mim/mim_12
     type: code
@@ -13188,7 +12657,6 @@ segments:
     - [auto, c, mim_12_3_main]
     - [auto, c, mim_12_4_npc]
     - [auto, c, mim_12_5_gate]
-    - [0xBBB960]
   - name: obk_01
     dir: world/area_obk/obk_01
     type: code
@@ -13204,7 +12672,6 @@ segments:
     - [auto, c, obk_01_5_jump_scare]
     - [auto, c, obk_01_6_npc]
     - [auto, c, obk_01_7_entity]
-    - [0xBBE2E0]
   - name: obk_02
     dir: world/area_obk/obk_02
     type: code
@@ -13219,7 +12686,6 @@ segments:
     - [auto, c, obk_02_4_bombable]
     - [auto, c, obk_02_5_clock]
     - [auto, c, obk_02_6_entity]
-    - [0xBC4260]
   - name: obk_03
     dir: world/area_obk/obk_03
     type: code
@@ -13235,7 +12701,6 @@ segments:
     - [auto, c, obk_03_5_stairs]
     - [auto, c, obk_03_6_npc]
     - [auto, c, obk_03_7_rocking_chair]
-    - [0xBC5270]
   - name: obk_04
     dir: world/area_obk/obk_04
     type: code
@@ -13250,7 +12715,6 @@ segments:
     - [auto, c, obk_04_4_main]
     - [auto, c, obk_04_5_hole]
     - [auto, c, obk_04_6_game]
-    - [0xBC8CE0]
   - name: obk_05
     dir: world/area_obk/obk_05
     type: code
@@ -13265,7 +12729,6 @@ segments:
     - [auto, c, obk_05_4_hole]
     - [auto, c, obk_05_5_npc]
     - [auto, c, obk_05_6_entity]
-    - [0xBCDA40]
   - name: obk_06
     dir: world/area_obk/obk_06
     type: code
@@ -13278,7 +12741,6 @@ segments:
     - [auto, c, obk_06_2_main]
     - [auto, c, obk_06_3_bombable]
     - [auto, c, obk_06_4_entity]
-    - [0xBCE690]
   - name: obk_07
     dir: world/area_obk/obk_07
     type: code
@@ -13293,7 +12755,6 @@ segments:
     - [auto, c, obk_07_4_fireplace]
     - [auto, c, obk_07_5_npc]
     - [auto, c, obk_07_6_phonograph]
-    - [0xBD0780]
   - name: obk_08
     dir: world/area_obk/obk_08
     type: code
@@ -13308,7 +12769,6 @@ segments:
     - [auto, c, obk_08_4_entity]
     - [auto, c, obk_08_5_npc]
     - [auto, c, obk_08_6_game]
-    - [0xBD5010]
   - name: obk_09
     dir: world/area_obk/obk_09
     type: code
@@ -13323,7 +12783,6 @@ segments:
     - [auto, c, obk_09_4_npc]
     - [auto, c, obk_09_5_new_partner]
     - [auto, c, obk_09_6_epilogue]
-    - [0xBDABE0]
   - name: arn_02
     dir: world/area_arn/arn_02
     type: code
@@ -13336,7 +12795,6 @@ segments:
     - [auto, c, arn_02_2_main]
     - [auto, c, arn_02_3_entity]
     - [auto, c, arn_02_4_npc]
-    - [0xBDE190]
   - name: arn_03
     dir: world/area_arn/arn_03
     type: code
@@ -13349,7 +12807,6 @@ segments:
     - [auto, c, arn_03_2_main]
     - [auto, c, arn_03_3_npc]
     - [auto, c, arn_03_4_entity]
-    - [0xBE04B0]
   - name: arn_04
     dir: world/area_arn/arn_04
     type: code
@@ -13362,7 +12819,6 @@ segments:
     - [auto, c, arn_04_2_main]
     - [auto, c, arn_04_3_npc]
     - [auto, c, arn_04_4_entity]
-    - [0xBE6B20]
   - name: arn_05
     dir: world/area_arn/arn_05
     type: code
@@ -13375,7 +12831,6 @@ segments:
     - [auto, c, arn_05_2_main]
     - [auto, c, arn_05_3_npc]
     - [auto, c, arn_05_4_entity]
-    - [0xBE8EE0]
   - name: arn_07
     dir: world/area_arn/arn_07
     type: code
@@ -13389,7 +12844,6 @@ segments:
     - [auto, c, arn_07_3_windmill]
     - [auto, c, arn_07_4_entity]
     - [auto, c, arn_07_5_npc]
-    - [0xBEEC80]
   - name: arn_08
     dir: world/area_arn/arn_08
     type: code
@@ -13405,7 +12859,6 @@ segments:
     - [auto, c, arn_08_5_demo]
     - [auto, c, arn_08_6_npc]
     - [auto, c, arn_08_7_entity]
-    - [0xBF4A30]
   - name: arn_09
     dir: world/area_arn/arn_09
     type: code
@@ -13419,7 +12872,6 @@ segments:
     - [auto, c, arn_09_3_entity]
     - [auto, c, arn_09_4_launch]
     - [auto, c, arn_09_5_npc]
-    - [0xBF60A0]
   - name: arn_10
     dir: world/area_arn/arn_10
     type: code
@@ -13432,7 +12884,6 @@ segments:
     - [auto, c, arn_10_2_main]
     - [auto, c, arn_10_3_npc]
     - [auto, c, arn_10_4_entity]
-    - [0xBF6A00]
   - name: arn_11
     dir: world/area_arn/arn_11
     type: code
@@ -13444,7 +12895,6 @@ segments:
     - [auto, c, arn_11_1_music]
     - [auto, c, arn_11_2_main]
     - [auto, c, arn_11_3_npc]
-    - [0xBF7680]
   - name: arn_12
     dir: world/area_arn/arn_12
     type: code
@@ -13457,7 +12907,6 @@ segments:
     - [auto, c, arn_12_2_main]
     - [auto, c, arn_12_3_npc]
     - [auto, c, arn_12_4_entity]
-    - [0xBF8790]
   - name: arn_13
     dir: world/area_arn/arn_13
     type: code
@@ -13470,7 +12919,6 @@ segments:
     - [auto, c, arn_13_2_main]
     - [auto, c, arn_13_3_npc]
     - [auto, c, arn_13_4_entity]
-    - [0xBF9410]
   - name: dgb_00
     dir: world/area_dgb/dgb_00
     type: code
@@ -13483,7 +12931,6 @@ segments:
     - [auto, c, dgb_00_2_main]
     - [auto, c, dgb_00_3_npc]
     - [auto, c, dgb_00_4_entity]
-    - [0xBFA150]
   - name: dgb_01
     dir: world/area_dgb/dgb_01
     type: code
@@ -13875,7 +13322,6 @@ segments:
     - [auto, c, dgb_02_1_music]
     - [auto, c, dgb_02_2_main]
     - [auto, c, dgb_02_3_npc]
-    - [0xC2FFD0]
   - name: dgb_03
     dir: world/area_dgb/dgb_03
     type: code
@@ -13889,7 +13335,6 @@ segments:
     - [auto, c, dgb_03_3_clock]
     - [auto, c, dgb_03_4_entity]
     - [auto, c, dgb_03_5_npc]
-    - [0xC33CB0]
   - name: dgb_04
     dir: world/area_dgb/dgb_04
     type: code
@@ -13902,7 +13347,6 @@ segments:
     - [auto, c, dgb_04_2_main]
     - [auto, c, dgb_04_3_npc]
     - [auto, c, dgb_04_4_entity]
-    - [0xC39640]
   - name: dgb_05
     dir: world/area_dgb/dgb_05
     type: code
@@ -13916,7 +13360,6 @@ segments:
     - [auto, c, dgb_05_3_hole]
     - [auto, c, dgb_05_4_entity]
     - [auto, c, dgb_05_5_npc]
-    - [0xC3BEA0]
   - name: dgb_06
     dir: world/area_dgb/dgb_06
     type: code
@@ -13929,7 +13372,6 @@ segments:
     - [auto, c, dgb_06_2_main]
     - [auto, c, dgb_06_3_entity]
     - [auto, c, dgb_06_4_npc]
-    - [0xC3D340]
   - name: dgb_07
     dir: world/area_dgb/dgb_07
     type: code
@@ -13942,7 +13384,6 @@ segments:
     - [auto, c, dgb_07_2_main]
     - [auto, c, dgb_07_3_entity]
     - [auto, c, dgb_07_4_npc]
-    - [0xC3F020]
   - name: dgb_08
     dir: world/area_dgb/dgb_08
     type: code
@@ -13955,7 +13396,6 @@ segments:
     - [auto, c, dgb_08_2_main]
     - [auto, c, dgb_08_3_npc]
     - [auto, c, dgb_08_4_entity]
-    - [0xC43A40]
   - name: dgb_09
     dir: world/area_dgb/dgb_09
     type: code
@@ -13968,7 +13408,6 @@ segments:
     - [auto, c, dgb_09_2_main]
     - [auto, c, dgb_09_3_breakable]
     - [auto, c, dgb_09_4_npc]
-    - [0xC4A3E0]
   - name: dgb_10
     dir: world/area_dgb/dgb_10
     type: code
@@ -13981,7 +13420,6 @@ segments:
     - [auto, c, dgb_10_2_main]
     - [auto, c, dgb_10_3_hole]
     - [auto, c, dgb_10_4_entity]
-    - [0xC4C580]
   - name: dgb_11
     dir: world/area_dgb/dgb_11
     type: code
@@ -13993,7 +13431,6 @@ segments:
     - [auto, c, dgb_11_1_music]
     - [auto, c, dgb_11_2_main]
     - [auto, c, dgb_11_3_entity]
-    - [0xC4D430]
   - name: dgb_12
     dir: world/area_dgb/dgb_12
     type: code
@@ -14006,7 +13443,6 @@ segments:
     - [auto, c, dgb_12_2_main]
     - [auto, c, dgb_12_3_spikes]
     - [auto, c, dgb_12_4_entity]
-    - [0xC4E1B0]
   - name: dgb_13
     dir: world/area_dgb/dgb_13
     type: code
@@ -14019,7 +13455,6 @@ segments:
     - [auto, c, dgb_13_2_main]
     - [auto, c, dgb_13_3_entity]
     - [auto, c, dgb_13_4_drawer]
-    - [0xC4E960]
   - name: dgb_14
     dir: world/area_dgb/dgb_14
     type: code
@@ -14031,7 +13466,6 @@ segments:
     - [auto, c, dgb_14_1_music]
     - [auto, c, dgb_14_2_main]
     - [auto, c, dgb_14_3_entity]
-    - [0xC4F030]
   - name: dgb_15
     dir: world/area_dgb/dgb_15
     type: code
@@ -14044,7 +13478,6 @@ segments:
     - [auto, c, dgb_15_2_main]
     - [auto, c, dgb_15_3_npc]
     - [auto, c, dgb_15_4_entity]
-    - [0xC50D80]
   - name: dgb_16
     dir: world/area_dgb/dgb_16
     type: code
@@ -14057,7 +13490,6 @@ segments:
     - [auto, c, dgb_16_2_main]
     - [auto, c, dgb_16_3_entity]
     - [auto, c, dgb_16_4_npc]
-    - [0xC53970]
   - name: dgb_17
     dir: world/area_dgb/dgb_17
     type: code
@@ -14069,7 +13501,6 @@ segments:
     - [auto, c, dgb_17_1_music]
     - [auto, c, dgb_17_2_main]
     - [auto, c, dgb_17_3_entity]
-    - [0xC55A60]
   - name: dgb_18
     dir: world/area_dgb/dgb_18
     type: code
@@ -14082,7 +13513,6 @@ segments:
     - [auto, c, dgb_18_2_main]
     - [auto, c, dgb_18_3_npc]
     - [auto, c, dgb_18_4_entity]
-    - [0xC571B0]
   - name: kzn_01
     dir: world/area_kzn/kzn_01
     type: code
@@ -14093,7 +13523,6 @@ segments:
     - [auto, c, kzn_01_0_header]
     - [auto, c, kzn_01_1_main]
     - [auto, c, kzn_01_2_npc]
-    - [0xC59CE0]
   - name: kzn_02
     dir: world/area_kzn/kzn_02
     type: code
@@ -14106,7 +13535,6 @@ segments:
     - [auto, c, kzn_02_2_platforms]
     - [auto, c, kzn_02_3_npc]
     - [auto, c, kzn_02_4_demo]
-    - [0xC5CF60]
   - name: kzn_03
     dir: world/area_kzn/kzn_03
     type: code
@@ -14119,7 +13547,6 @@ segments:
     - [auto, c, kzn_03_2_npc]
     - [auto, c, kzn_03_3_entity]
     - [auto, c, kzn_03_4_ziplines]
-    - [0xC63DA0]
   - name: kzn_04
     dir: world/area_kzn/kzn_04
     type: code
@@ -14131,7 +13558,6 @@ segments:
     - [auto, c, kzn_04_1_main]
     - [auto, c, kzn_04_2_entity]
     - [auto, c, kzn_04_3_npc]
-    - [0xC69890]
   - name: kzn_05
     dir: world/area_kzn/kzn_05
     type: code
@@ -14141,7 +13567,6 @@ segments:
     subsegments:
     - [auto, c, kzn_05_0_header]
     - [auto, c, kzn_05_1_main]
-    - [0xC6C3E0]
   - name: kzn_06
     dir: world/area_kzn/kzn_06
     type: code
@@ -14153,7 +13578,6 @@ segments:
     - [auto, c, kzn_06_1_main]
     - [auto, c, kzn_06_2_entity]
     - [auto, c, kzn_06_3_extra]
-    - [0xC6D390]
   - name: kzn_07
     dir: world/area_kzn/kzn_07
     type: code
@@ -14166,7 +13590,6 @@ segments:
     - [auto, c, kzn_07_2_main]
     - [auto, c, kzn_07_3_entity]
     - [auto, c, kzn_07_4_npc]
-    - [0xC70640]
   - name: kzn_08
     dir: world/area_kzn/kzn_08
     type: code
@@ -14179,7 +13602,6 @@ segments:
     - [auto, c, kzn_08_2_entity]
     - [auto, c, kzn_08_3_npc]
     - [auto, c, kzn_08_4_extra]
-    - [0xC755A0]
   - name: kzn_09
     dir: world/area_kzn/kzn_09
     type: code
@@ -14192,7 +13614,6 @@ segments:
     - [auto, c, kzn_09_2_entity]
     - [auto, c, kzn_09_3_zipline]
     - [auto, c, kzn_09_4_npc]
-    - [0xC7A6F0]
   - name: kzn_10
     dir: world/area_kzn/kzn_10
     type: code
@@ -14203,7 +13624,6 @@ segments:
     - [auto, c, kzn_10_0_header]
     - [auto, c, kzn_10_1_main]
     - [auto, c, kzn_10_2_tromp]
-    - [0xC7E850]
   - name: kzn_11
     dir: world/area_kzn/kzn_11
     type: code
@@ -14215,7 +13635,6 @@ segments:
     - [auto, c, kzn_11_1_main]
     - [auto, c, kzn_11_2_platforms]
     - [auto, c, kzn_11_3_npc]
-    - [0xC82800]
   - name: kzn_17
     dir: world/area_kzn/kzn_17
     type: code
@@ -14228,7 +13647,6 @@ segments:
     - [auto, c, kzn_17_2_entity]
     - [auto, c, kzn_17_3_npc]
     - [auto, c, kzn_17_4_tromp]
-    - [0xC88B50]
   - name: kzn_18
     dir: world/area_kzn/kzn_18
     type: code
@@ -14240,7 +13658,6 @@ segments:
     - [auto, c, kzn_18_1_main]
     - [auto, c, kzn_18_2_npc]
     - [auto, c, kzn_18_3_entity]
-    - [0xC8C460]
   - name: kzn_19
     dir: world/area_kzn/kzn_19
     type: code
@@ -14281,7 +13698,6 @@ segments:
     - [auto, c, kzn_20_1_music]
     - [auto, c, kzn_20_2_main]
     - [auto, c, kzn_20_3_npc]
-    - [0xC969F0]
   - name: kzn_22
     dir: world/area_kzn/kzn_22
     type: code
@@ -14294,7 +13710,6 @@ segments:
     - [auto, c, kzn_22_2_main]
     - [auto, c, kzn_22_3_entity]
     - [auto, c, kzn_22_4_npc]
-    - [0xC9A590]
   - name: kzn_23
     dir: world/area_kzn/kzn_23
     type: code
@@ -14306,7 +13721,6 @@ segments:
     - [auto, c, kzn_23_1_music]
     - [auto, c, kzn_23_2_main]
     - [auto, c, kzn_23_3_npc]
-    - [0xC9C920]
   - name: flo_00
     dir: world/area_flo/flo_00
     type: code
@@ -14321,7 +13735,6 @@ segments:
     - [auto, c, flo_00_4_epilogue]
     - [auto, c, flo_00_5_beanstalk]
     - [auto, c, flo_00_6_entity]
-    - [0xC9F300]
   - name: flo_03
     dir: world/area_flo/flo_03
     type: code
@@ -14335,7 +13748,6 @@ segments:
     - [auto, c, flo_03_3_npc]
     - [auto, c, flo_03_4_foliage]
     - [auto, c, flo_03_5_entity]
-    - [0xCA78D0]
   - name: flo_07
     dir: world/area_flo/flo_07
     type: code
@@ -14347,7 +13759,6 @@ segments:
     - [auto, c, flo_07_1_music]
     - [auto, c, flo_07_2_main]
     - [auto, c, flo_07_3_npc]
-    - [0xCAC5D0]
   - name: flo_08
     dir: world/area_flo/flo_08
     type: code
@@ -14362,7 +13773,6 @@ segments:
     - [auto, c, flo_08_4_npc]
     - [auto, c, flo_08_5_foliage]
     - [auto, c, flo_08_6_vines]
-    - [0xCB0C20]
   - name: flo_09
     dir: world/area_flo/flo_09
     type: code
@@ -14376,7 +13786,6 @@ segments:
     - [auto, c, flo_09_3_vines]
     - [auto, c, flo_09_4_foliage]
     - [auto, c, flo_09_5_npc]
-    - [0xCB6820]
   - name: flo_10
     dir: world/area_flo/flo_10
     type: code
@@ -14392,7 +13801,6 @@ segments:
     - [auto, c, flo_10_5_npc]
     - [auto, c, flo_10_6_waterfx]
     - [auto, c, flo_10_7_foliage]
-    - [0xCBA670]
   - name: flo_11
     dir: world/area_flo/flo_11
     type: code
@@ -14405,7 +13813,6 @@ segments:
     - [auto, c, flo_11_2_main]
     - [auto, c, flo_11_3_npc]
     - [auto, c, flo_11_4_entity]
-    - [0xCBDFF0]
   - name: flo_12
     dir: world/area_flo/flo_12
     type: code
@@ -14417,7 +13824,6 @@ segments:
     - [auto, c, flo_12_1_music]
     - [auto, c, flo_12_2_main]
     - [auto, c, flo_12_3_npc]
-    - [0xCC1520]
   - name: flo_13
     dir: world/area_flo/flo_13
     type: code
@@ -14431,7 +13837,6 @@ segments:
     - [auto, c, flo_13_3_main]
     - [auto, c, flo_13_4_npc]
     - [auto, c, flo_13_5_new_partner]
-    - [0xCC6E80]
   - name: flo_14
     dir: world/area_flo/flo_14
     type: code
@@ -14446,7 +13851,6 @@ segments:
     - [auto, c, flo_14_4_npc]
     - [auto, c, flo_14_5_entity]
     - [auto, c, flo_14_6_logs]
-    - [0xCCD6A0]
   - name: flo_15
     dir: world/area_flo/flo_15
     type: code
@@ -14460,7 +13864,6 @@ segments:
     - [auto, c, flo_15_3_npc]
     - [auto, c, flo_15_4_entity]
     - [auto, c, flo_15_5_stairs]
-    - [0xCD06C0]
   - name: flo_16
     dir: world/area_flo/flo_16
     type: code
@@ -14475,7 +13878,6 @@ segments:
     - [auto, c, flo_16_4_entity]
     - [auto, c, flo_16_5_npc]
     - [auto, c, flo_16_6_puzzle]
-    - [0xCD47A0]
   - name: flo_17
     dir: world/area_flo/flo_17
     type: code
@@ -14489,7 +13891,6 @@ segments:
     - [auto, c, flo_17_3_logs]
     - [auto, c, flo_17_4_npc]
     - [auto, c, flo_17_5_entity]
-    - [0xCDA500]
   - name: flo_18
     dir: world/area_flo/flo_18
     type: code
@@ -14503,7 +13904,6 @@ segments:
     - [auto, c, flo_18_3_machine]
     - [auto, c, flo_18_4_npc]
     - [auto, c, flo_18_5_foliage]
-    - [0xCDCE70]
   - name: flo_19
     dir: world/area_flo/flo_19
     type: code
@@ -14517,7 +13917,6 @@ segments:
     - [auto, c, flo_19_3_main]
     - [auto, c, flo_19_4_clouds]
     - [auto, c, flo_19_5_beanstalk]
-    - [0xCE4030]
   - name: flo_21
     dir: world/area_flo/flo_21
     type: code
@@ -14530,7 +13929,6 @@ segments:
     - [auto, c, flo_21_2_main]
     - [auto, c, flo_21_3_clouds]
     - [auto, c, flo_21_4_npc]
-    - [0xCE73F0]
   - name: flo_22
     dir: world/area_flo/flo_22
     type: code
@@ -14544,7 +13942,6 @@ segments:
     - [auto, c, flo_22_3_npc]
     - [auto, c, flo_22_4_well]
     - [auto, c, flo_22_5_foliage]
-    - [0xCEC4D0]
   - name: flo_23
     dir: world/area_flo/flo_23
     type: code
@@ -14557,7 +13954,6 @@ segments:
     - [auto, c, flo_23_2_main]
     - [auto, c, flo_23_3_npc]
     - [auto, c, flo_23_4_entity]
-    - [0xCEEF30]
   - name: flo_24
     dir: world/area_flo/flo_24
     type: code
@@ -14571,7 +13967,6 @@ segments:
     - [auto, c, flo_24_3_foliage]
     - [auto, c, flo_24_4_water]
     - [auto, c, flo_24_5_entity]
-    - [0xCF0ED0]
   - name: flo_25
     dir: world/area_flo/flo_25
     type: code
@@ -14586,7 +13981,6 @@ segments:
     - [auto, c, flo_25_4_entity]
     - [auto, c, flo_25_5_foliage]
     - [auto, c, flo_25_6_vine]
-    - [0xCF4EA0]
   - name: sam_01
     dir: world/area_sam/sam_01
     type: code
@@ -14601,7 +13995,6 @@ segments:
     - [auto, c, sam_01_4_npc]
     - [auto, c, sam_01_5_scenes]
     - [auto, c, sam_01_6_entity]
-    - [0xCF9AC0]
   - name: sam_02
     dir: world/area_sam/sam_02
     type: code
@@ -14616,7 +14009,6 @@ segments:
     - [auto, c, sam_02_4_npc]
     - [auto, c, sam_02_5_entity]
     - [auto, c, sam_02_6_shop]
-    - [0xD072F0]
   - name: sam_03
     dir: world/area_sam/sam_03
     type: code
@@ -14629,7 +14021,6 @@ segments:
     - [auto, c, sam_03_2_main]
     - [auto, c, sam_03_3_npc1]
     - [auto, c, sam_03_4_npc2]
-    - [0xD119E0]
   - name: sam_04
     dir: world/area_sam/sam_04
     type: code
@@ -14643,7 +14034,6 @@ segments:
     - [auto, c, sam_04_3_snowmen]
     - [auto, c, sam_04_4_npc]
     - [auto, c, sam_04_5_entity]
-    - [0xD13CD0]
   - name: sam_05
     dir: world/area_sam/sam_05
     type: code
@@ -14699,7 +14089,6 @@ segments:
     - [auto, c, sam_06_3_rooms]
     - [auto, c, sam_06_4_npc]
     - [auto, c, sam_06_5_entity]
-    - [0xD224B0]
   - name: sam_07
     dir: world/area_sam/sam_07
     type: code
@@ -14713,7 +14102,6 @@ segments:
     - [auto, c, sam_07_3_entity]
     - [auto, c, sam_07_4_frozen_pit]
     - [auto, c, sam_07_5_npc]
-    - [0xD2DD30]
   - name: sam_08
     dir: world/area_sam/sam_08
     type: code
@@ -14727,7 +14115,6 @@ segments:
     - [auto, c, sam_08_3_entity]
     - [auto, c, sam_08_4_npc]
     - [auto, c, sam_08_5_scenes]
-    - [0xD31430]
   - name: sam_09
     dir: world/area_sam/sam_09
     type: code
@@ -14740,7 +14127,6 @@ segments:
     - [auto, c, sam_09_2_main]
     - [auto, c, sam_09_3_entity]
     - [auto, c, sam_09_4_sockets]
-    - [0xD366F0]
   - name: sam_10
     dir: world/area_sam/sam_10
     type: code
@@ -14754,7 +14140,6 @@ segments:
     - [auto, c, sam_10_3_entity]
     - [auto, c, sam_10_4_stairs]
     - [auto, c, sam_10_5_npc]
-    - [0xD384A0]
   - name: sam_11
     dir: world/area_sam/sam_11
     type: code
@@ -14772,7 +14157,6 @@ segments:
     - [auto, c, sam_11_7_staircase]
     - [auto, c, sam_11_8_pond_anim]
     - [auto, c, sam_11_9_pond_skele]
-    - [0xD3C740]
   - name: sam_12
     dir: world/area_sam/sam_12
     type: code
@@ -14786,7 +14170,6 @@ segments:
     - [auto, c, sam_12_3_npc]
     - [auto, c, sam_12_4_scenes]
     - [auto, c, sam_12_5_entity]
-    - [0xD4BDC0]
   - name: pra_01
     dir: world/area_pra/pra_01
     type: code
@@ -14799,7 +14182,6 @@ segments:
     - [auto, c, pra_01_2_main]
     - [auto, c, pra_01_3_npc]
     - [auto, c, pra_01_4_entity]
-    - [0xD4E3F0]
   - name: pra_02
     dir: world/area_pra/pra_02
     type: code
@@ -14812,7 +14194,6 @@ segments:
     - [auto, c, pra_02_2_main]
     - [auto, c, pra_02_3_npc]
     - [auto, c, pra_02_4_entity]
-    - [0xD51650]
   - name: pra_03
     dir: world/area_pra/pra_03
     type: code
@@ -14824,7 +14205,6 @@ segments:
     - [auto, c, pra_03_1_music]
     - [auto, c, pra_03_2_main]
     - [auto, c, pra_03_3_entity]
-    - [0xD53E60]
   - name: pra_04
     dir: world/area_pra/pra_04
     type: code
@@ -14837,7 +14217,6 @@ segments:
     - [auto, c, pra_04_2_main]
     - [auto, c, pra_04_3_entity]
     - [auto, c, pra_04_4_npc]
-    - [0xD54FD0]
   - name: pra_05
     dir: world/area_pra/pra_05
     type: code
@@ -14849,7 +14228,6 @@ segments:
     - [auto, c, pra_05_1_music]
     - [auto, c, pra_05_2_main]
     - [auto, c, pra_05_3_entity]
-    - [0xD56D90]
   - name: pra_06
     dir: world/area_pra/pra_06
     type: code
@@ -14861,7 +14239,6 @@ segments:
     - [auto, c, pra_06_1_music]
     - [auto, c, pra_06_2_main]
     - [auto, c, pra_06_3_entity]
-    - [0xD58380]
   - name: pra_09
     dir: world/area_pra/pra_09
     type: code
@@ -14873,7 +14250,6 @@ segments:
     - [auto, c, pra_09_1_music]
     - [auto, c, pra_09_2_main]
     - [auto, c, pra_09_3_npc]
-    - [0xD59EE0]
   - name: pra_10
     dir: world/area_pra/pra_10
     type: code
@@ -14885,7 +14261,6 @@ segments:
     - [auto, c, pra_10_1_music]
     - [auto, c, pra_10_2_main]
     - [auto, c, pra_10_3_npc]
-    - [0xD60960]
   - name: pra_11
     dir: world/area_pra/pra_11
     type: code
@@ -14897,7 +14272,6 @@ segments:
     - [auto, c, pra_11_1_music]
     - [auto, c, pra_11_2_main]
     - [auto, c, pra_11_3_entity]
-    - [0xD626E0]
   - name: pra_12
     dir: world/area_pra/pra_12
     type: code
@@ -14909,7 +14283,6 @@ segments:
     - [auto, c, pra_12_1_music]
     - [auto, c, pra_12_2_main]
     - [auto, c, pra_12_3_entity]
-    - [0xD63F20]
   - name: pra_13
     dir: world/area_pra/pra_13
     type: code
@@ -14921,7 +14294,6 @@ segments:
     - [auto, c, pra_13_1_music]
     - [auto, c, pra_13_2_main]
     - [auto, c, pra_13_3_npc]
-    - [0xD65BC0]
   - name: pra_14
     dir: world/area_pra/pra_14
     type: code
@@ -14933,7 +14305,6 @@ segments:
     - [auto, c, pra_14_1_music]
     - [auto, c, pra_14_2_main]
     - [auto, c, pra_14_3_entity]
-    - [0xD68EE0]
   - name: pra_15
     dir: world/area_pra/pra_15
     type: code
@@ -14945,7 +14316,6 @@ segments:
     - [auto, c, pra_15_1_music]
     - [auto, c, pra_15_2_main]
     - [auto, c, pra_15_3_entity]
-    - [0xD69850]
   - name: pra_16
     dir: world/area_pra/pra_16
     type: code
@@ -14956,7 +14326,6 @@ segments:
     - [auto, c, pra_16_0_header]
     - [auto, c, pra_16_1_music]
     - [auto, c, pra_16_2_main]
-    - [0xD6AA40]
   - name: pra_18
     dir: world/area_pra/pra_18
     type: code
@@ -14968,7 +14337,6 @@ segments:
     - [auto, c, pra_18_1_music]
     - [auto, c, pra_18_2_main]
     - [auto, c, pra_18_3_npc]
-    - [0xD6C540]
   - name: pra_19
     dir: world/area_pra/pra_19
     type: code
@@ -14980,7 +14348,6 @@ segments:
     - [auto, c, pra_19_1_music]
     - [auto, c, pra_19_2_main]
     - [auto, c, pra_19_3_npc]
-    - [0xD70360]
   - name: pra_20
     dir: world/area_pra/pra_20
     type: code
@@ -14991,7 +14358,6 @@ segments:
     - [auto, c, pra_20_0_header]
     - [auto, c, pra_20_1_music]
     - [auto, c, pra_20_2_main]
-    - [0xD772C0]
   - name: pra_21
     dir: world/area_pra/pra_21
     type: code
@@ -15003,7 +14369,6 @@ segments:
     - [auto, c, pra_21_1_music]
     - [auto, c, pra_21_2_main]
     - [auto, c, pra_21_3_entity]
-    - [0xD78040]
   - name: pra_22
     dir: world/area_pra/pra_22
     type: code
@@ -15015,7 +14380,6 @@ segments:
     - [auto, c, pra_22_1_music]
     - [auto, c, pra_22_2_main]
     - [auto, c, pra_22_3_entity]
-    - [0xD78B50]
   - name: pra_27
     dir: world/area_pra/pra_27
     type: code
@@ -15027,7 +14391,6 @@ segments:
     - [auto, c, pra_27_1_music]
     - [auto, c, pra_27_2_main]
     - [auto, c, pra_27_3_entity]
-    - [0xD7AC00]
   - name: pra_28
     dir: world/area_pra/pra_28
     type: code
@@ -15039,7 +14402,6 @@ segments:
     - [auto, c, pra_28_1_music]
     - [auto, c, pra_28_2_main]
     - [auto, c, pra_28_3_entity]
-    - [0xD7C4B0]
   - name: pra_29
     dir: world/area_pra/pra_29
     type: code
@@ -15052,7 +14414,6 @@ segments:
     - [auto, c, pra_29_2_entity]
     - [auto, c, pra_29_3_main]
     - [auto, c, pra_29_4_bridge]
-    - [0xD7DDD0]
   - name: pra_31
     dir: world/area_pra/pra_31
     type: code
@@ -15160,7 +14521,6 @@ segments:
     - [auto, c, pra_32_1_music]
     - [auto, c, pra_32_2_main]
     - [auto, c, pra_32_3_npc]
-    - [0xD87240]
   - name: pra_33
     dir: world/area_pra/pra_33
     type: code
@@ -15172,7 +14532,6 @@ segments:
     - [auto, c, pra_33_1_music]
     - [auto, c, pra_33_2_main]
     - [auto, c, pra_33_3_entity]
-    - [0xD8A770]
   - name: pra_34
     dir: world/area_pra/pra_34
     type: code
@@ -15184,7 +14543,6 @@ segments:
     - [auto, c, pra_34_1_music]
     - [auto, c, pra_34_2_main]
     - [auto, c, pra_34_3_entity]
-    - [0xD8C3B0]
   - name: pra_35
     dir: world/area_pra/pra_35
     type: code
@@ -15197,7 +14555,6 @@ segments:
     - [auto, c, pra_35_2_main]
     - [auto, c, pra_35_3_npc]
     - [auto, c, pra_35_4_entity]
-    - [0xD8FE60]
   - name: pra_36
     dir: world/area_pra/pra_36
     type: code
@@ -15209,7 +14566,6 @@ segments:
     - [auto, c, pra_36_1_music]
     - [auto, c, pra_36_2_main]
     - [auto, c, pra_36_3_npc]
-    - [0xD92650]
   - name: pra_37
     dir: world/area_pra/pra_37
     type: code
@@ -15221,7 +14577,6 @@ segments:
     - [auto, c, pra_37_1_music]
     - [auto, c, pra_37_2_main]
     - [auto, c, pra_37_3_npc]
-    - [0xD94760]
   - name: pra_38
     dir: world/area_pra/pra_38
     type: code
@@ -15233,7 +14588,6 @@ segments:
     - [auto, c, pra_38_1_music]
     - [auto, c, pra_38_2_main]
     - [auto, c, pra_38_3_npc]
-    - [0xD96CD0]
   - name: pra_39
     dir: world/area_pra/pra_39
     type: code
@@ -15245,7 +14599,6 @@ segments:
     - [auto, c, pra_39_1_music]
     - [auto, c, pra_39_2_main]
     - [auto, c, pra_39_3_npc]
-    - [0xD98F70]
   - name: pra_40
     dir: world/area_pra/pra_40
     type: code
@@ -15257,7 +14610,6 @@ segments:
     - [auto, c, pra_40_1_music]
     - [auto, c, pra_40_2_main]
     - [auto, c, pra_40_3_entity]
-    - [0xD9A8D0]
   - name: omo_01
     dir: world/area_omo/omo_01
     type: code
@@ -15271,7 +14623,6 @@ segments:
     - [auto, c, omo_01_3_gizmos]
     - [auto, c, omo_01_4_npc]
     - [auto, c, omo_01_5_entity]
-    - [0xD9BB20]
   - name: omo_02
     dir: world/area_omo/omo_02
     type: code
@@ -15286,7 +14637,6 @@ segments:
     - [auto, c, omo_02_4_gizmos]
     - [auto, c, omo_02_5_barricade]
     - [auto, c, omo_02_6_npc]
-    - [0xDA0080]
   - name: omo_03
     dir: world/area_omo/omo_03
     type: code
@@ -15303,7 +14653,6 @@ segments:
     - [auto, c, omo_03_6_train]
     - [auto, c, omo_03_7_train_drop]
     - [auto, c, omo_03_8_epilogue]
-    - [0xDA5AD0]
   - name: omo_04
     dir: world/area_omo/omo_04
     type: code
@@ -15318,7 +14667,6 @@ segments:
     - [auto, c, omo_04_4_entity]
     - [auto, c, omo_04_5_npc]
     - [auto, c, omo_04_6_scenes]
-    - [0xDAF320]
   - name: omo_05
     dir: world/area_omo/omo_05
     type: code
@@ -15332,7 +14680,6 @@ segments:
     - [auto, c, omo_05_3_gizmos]
     - [auto, c, omo_05_4_npc]
     - [auto, c, omo_05_5_entity]
-    - [0xDB46C0]
   - name: omo_06
     dir: world/area_omo/omo_06
     type: code
@@ -15347,7 +14694,6 @@ segments:
     - [auto, c, omo_06_4_train]
     - [auto, c, omo_06_5_npc]
     - [auto, c, omo_06_6_entity]
-    - [0xDB8440]
   - name: omo_07
     dir: world/area_omo/omo_07
     type: code
@@ -15362,7 +14708,6 @@ segments:
     - [auto, c, omo_07_4_npc]
     - [auto, c, omo_07_5_entity]
     - [auto, c, omo_07_6_scenes]
-    - [0xDC05B0]
   - name: omo_08
     dir: world/area_omo/omo_08
     type: code
@@ -15377,7 +14722,6 @@ segments:
     - [auto, c, omo_08_4_train]
     - [auto, c, omo_08_5_entity]
     - [auto, c, omo_08_6_npc]
-    - [0xDC51B0]
   - name: omo_09
     dir: world/area_omo/omo_09
     type: code
@@ -15394,7 +14738,6 @@ segments:
     - [auto, c, omo_09_6_entity]
     - [auto, c, omo_09_7_npc]
     - [auto, c, omo_09_8_scenes]
-    - [0xDD03C0]
   - name: omo_10
     dir: world/area_omo/omo_10
     type: code
@@ -15409,7 +14752,6 @@ segments:
     - [auto, c, omo_10_4_train]
     - [auto, c, omo_10_5_npc]
     - [auto, c, omo_10_6_entity]
-    - [0xDD8220]
   - name: omo_11
     dir: world/area_omo/omo_11
     type: code
@@ -15423,7 +14765,6 @@ segments:
     - [auto, c, omo_11_3_gizmos]
     - [auto, c, omo_11_4_entity]
     - [auto, c, omo_11_5_npc]
-    - [0xDDDD00]
   - name: omo_12
     dir: world/area_omo/omo_12
     type: code
@@ -15436,7 +14777,6 @@ segments:
     - [auto, c, omo_12_2_main]
     - [auto, c, omo_12_3_npc]
     - [auto, c, omo_12_4_new_partner]
-    - [0xDDF7D0]
   - name: omo_13
     dir: world/area_omo/omo_13
     type: code
@@ -15450,7 +14790,6 @@ segments:
     - [auto, c, omo_13_3_gizmos]
     - [auto, c, omo_13_4_npc]
     - [auto, c, omo_13_5_entity]
-    - [0xDE3980]
   - name: omo_14
     dir: world/area_omo/omo_14
     type: code
@@ -15462,7 +14801,6 @@ segments:
     - [auto, c, omo_14_1_music]
     - [auto, c, omo_14_2_main]
     - [auto, c, omo_14_3_npc]
-    - [0xDE5C70]
   - name: omo_15
     dir: world/area_omo/omo_15
     type: code
@@ -15474,7 +14812,6 @@ segments:
     - [auto, c, omo_15_1_music]
     - [auto, c, omo_15_2_main]
     - [auto, c, omo_15_3_npc]
-    - [0xDE8F70]
   - name: omo_16
     dir: world/area_omo/omo_16
     type: code
@@ -15486,7 +14823,6 @@ segments:
     - [auto, c, omo_16_1_main]
     - [auto, c, omo_16_2_train]
     - [auto, c, omo_16_3_npc]
-    - [0xDEC4D0]
   - name: omo_17
     dir: world/area_omo/omo_17
     type: code
@@ -15500,7 +14836,6 @@ segments:
     - [auto, c, omo_17_3_train]
     - [auto, c, omo_17_4_npc]
     - [auto, c, omo_17_5_entity]
-    - [0xDF25B0]
   - name: end_00
     dir: world/area_end/end_00
     type: code
@@ -15520,7 +14855,6 @@ segments:
     - [auto, c, end_00_9_huff_n_puff]
     - [auto, c, end_00_A_crystal_king]
     - [auto, c, end_00_B_bowser]
-    - [0xDF9540]
   - name: end_01
     dir: world/area_end/end_01
     type: code
@@ -15536,7 +14870,6 @@ segments:
     - [auto, c, end_01_5_flower_float]
     - [auto, c, end_01_6_shyguy_float]
     - [auto, c, end_01_7_peach_float]
-    - [0xE08350]
   - name: mgm_00
     dir: world/area_mgm/mgm_00
     type: code
@@ -15548,7 +14881,6 @@ segments:
     - [auto, c, mgm_00_1_main]
     - [auto, c, mgm_00_2_npc]
     - [auto, c, mgm_00_3_scoreboard]
-    - [0xE0FF60]
   - name: mgm_01
     dir: world/area_mgm/mgm_01
     type: code
@@ -15617,7 +14949,6 @@ segments:
     subsegments:
     - [auto, c, gv_01_0_header]
     - [auto, c, gv_01_1_main]
-    - [0xE1EC20]
   - name: heaps2
     type: code
     start: 0xE20110
@@ -15707,7 +15038,6 @@ segments:
     follows_vram: texture_memory
     subsegments:
     - [auto, c, idle]
-    - [0xE23690]
   - type: code
     name: world_action_walk
     dir: world/action
@@ -15716,7 +15046,6 @@ segments:
     follows_vram: texture_memory
     subsegments:
     - [auto, c, walk]
-    - [0xE23FF0]
   - type: code
     name: world_action_jump
     dir: world/action
@@ -15733,7 +15062,6 @@ segments:
     follows_vram: texture_memory
     subsegments:
     - [auto, c, step_up]
-    - [0xE248D0]
   - type: code
     name: world_action_land
     dir: world/action
@@ -15750,7 +15078,6 @@ segments:
     follows_vram: texture_memory
     subsegments:
     - [auto, c, hammer]
-    - [0xE25C80]
   - type: code
     name: world_action_spin
     dir: world/action
@@ -15759,7 +15086,6 @@ segments:
     follows_vram: texture_memory
     subsegments:
     - [auto, c, spin]
-    - [0xE26700]
   - type: code
     name: world_action_tornado_jump
     dir: world/action
@@ -15768,7 +15094,6 @@ segments:
     follows_vram: texture_memory
     subsegments:
     - [auto, c, tornado_jump]
-    - [0xE26DA0]
   - type: code
     name: world_action_spin_jump
     dir: world/action
@@ -15777,7 +15102,6 @@ segments:
     follows_vram: texture_memory
     subsegments:
     - [auto, c, spin_jump]
-    - [0xE274C0]
   - type: code
     name: world_action_slide
     dir: world/action
@@ -15786,7 +15110,6 @@ segments:
     follows_vram: texture_memory
     subsegments:
     - [auto, c, slide]
-    - [0xE27C50]
   - type: code
     name: world_action_hit_fire
     dir: world/action
@@ -15803,7 +15126,6 @@ segments:
     follows_vram: texture_memory
     subsegments:
     - [auto, c, hit_lava]
-    - [0xE28790]
   - type: code
     name: world_action_knockback
     dir: world/action
@@ -15820,7 +15142,6 @@ segments:
     follows_vram: texture_memory
     subsegments:
     - [auto, c, misc]
-    - [0xE29190]
   - type: code
     name: world_action_use_munchlesia
     dir: world/action
@@ -15829,7 +15150,6 @@ segments:
     follows_vram: texture_memory
     subsegments:
     - [auto, c, use_munchlesia]
-    - [0xE29450]
   - type: code
     name: world_action_use_spinning_flower
     dir: world/action
@@ -15838,7 +15158,6 @@ segments:
     follows_vram: texture_memory
     subsegments:
     - [auto, c, use_spinning_flower]
-    - [0xE2A300]
   - type: code
     name: world_action_use_tweester
     dir: world/action
@@ -15847,7 +15166,6 @@ segments:
     follows_vram: texture_memory
     subsegments:
     - [auto, c, use_tweester]
-    - [0xE2A690]
   - type: code
     name: world_action_sneaky_parasol
     dir: world/action
@@ -15856,7 +15174,6 @@ segments:
     follows_vram: texture_memory
     subsegments:
     - [auto, c, sneaky_parasol]
-    - [0xE2B430]
   - type: code
     dir: entity/default
     start: 0xE2B530
@@ -15866,7 +15183,6 @@ segments:
     - [auto, c, Padlock]
     - [auto, c, BoardedFloor]
     - [auto, c, BombableRock]
-    - [0xE2D410]
   - type: code
     dir: entity/jan_iwa
     start: 0xE2D730
@@ -15876,7 +15192,6 @@ segments:
     - [auto, c, Plants1]
     - [auto, c, Plants2]
     - [auto, c, ArrowSign]
-    - [0xE2EFD0]
   - type: code
     dir: entity/sbk_omo
     start: 0xE2F750
@@ -15885,7 +15200,6 @@ segments:
     subsegments:
     - [auto, c, Tweester]
     - [auto, c, StarBoxLauncher]
-    - [0xE31380]
   - name: entity_model_Hammer1Block
     dir: entity/model
     type: code
@@ -17049,7 +16363,6 @@ segments:
     - [auto, c, kzn_17_2_entity]
     - [auto, c, kzn_17_3_npc]
     - [auto, c, kzn_17_4_tromp]
-    - [0xEA3A80]
   - name: dead_kzn_18
     dir: world/dead/area_kzn/kzn_18
     type: code
@@ -17061,7 +16374,6 @@ segments:
     - [auto, c, kzn_18_1_main]
     - [auto, c, kzn_18_2_npc]
     - [auto, c, kzn_18_3_entity]
-    - [0xEA7390]
   - name: dead_kzn_19
     dir: world/dead/area_kzn/kzn_19
     type: code
@@ -17076,7 +16388,6 @@ segments:
     - [auto, c, kzn_19_4_npc]
     - [auto, c, kzn_19_5_eruption]
     - [auto, c, kzn_19_6_entity]
-    - [0xEAA810]
   - name: dead_kzn_20
     dir: world/dead/area_kzn/kzn_20
     type: code
@@ -17088,7 +16399,6 @@ segments:
     - [auto, c, kzn_20_1_music]
     - [auto, c, kzn_20_2_main]
     - [auto, c, kzn_20_3_npc]
-    - [0xEB1920]
   - name: dead_kzn_22
     dir: world/dead/area_kzn/kzn_22
     type: code
@@ -17101,7 +16411,6 @@ segments:
     - [auto, c, kzn_22_2_main]
     - [auto, c, kzn_22_3_entity]
     - [auto, c, kzn_22_4_npc]
-    - [0xEB54C0]
   - name: dead_kzn_23
     dir: world/dead/area_kzn/kzn_23
     type: code
@@ -17113,7 +16422,6 @@ segments:
     - [auto, c, kzn_23_1_music]
     - [auto, c, kzn_23_2_main]
     - [auto, c, kzn_23_3_npc]
-    - [0xEB7850]
   - name: dead_flo_00
     dir: world/dead/area_flo/flo_00
     type: code
@@ -17128,7 +16436,6 @@ segments:
     - [auto, c, flo_00_4_epilogue]
     - [auto, c, flo_00_5_beanstalk]
     - [auto, c, flo_00_6_entity]
-    - [0xEBA260]
   - name: dead_flo_03
     dir: world/dead/area_flo/flo_03
     type: code
@@ -17142,7 +16449,6 @@ segments:
     - [auto, c, flo_03_3_npc]
     - [auto, c, flo_03_4_foliage]
     - [auto, c, flo_03_5_entity]
-    - [0xEC2850]
   - name: dead_flo_07
     dir: world/dead/area_flo/flo_07
     type: code
@@ -17154,7 +16460,6 @@ segments:
     - [auto, c, flo_07_1_music]
     - [auto, c, flo_07_2_main]
     - [auto, c, flo_07_3_npc]
-    - [0xEC7590]
   - name: dead_flo_08
     dir: world/dead/area_flo/flo_08
     type: code
@@ -17169,7 +16474,6 @@ segments:
     - [auto, c, flo_08_4_npc]
     - [auto, c, flo_08_5_foliage]
     - [auto, c, flo_08_6_vines]
-    - [0xECBC10]
   - name: dead_flo_09
     dir: world/dead/area_flo/flo_09
     type: code
@@ -17183,7 +16487,6 @@ segments:
     - [auto, c, flo_09_3_vines]
     - [auto, c, flo_09_4_foliage]
     - [auto, c, flo_09_5_npc]
-    - [0xED1840]
   - name: dead_flo_10
     dir: world/dead/area_flo/flo_10
     type: code
@@ -17199,7 +16502,6 @@ segments:
     - [auto, c, flo_10_5_npc]
     - [auto, c, flo_10_6_waterfx]
     - [auto, c, flo_10_7_foliage]
-    - [0xED5780]
   - name: dead_flo_11
     dir: world/dead/area_flo/flo_11
     type: code
@@ -17212,7 +16514,6 @@ segments:
     - [auto, c, flo_11_2_main]
     - [auto, c, flo_11_3_npc]
     - [auto, c, flo_11_4_entity]
-    - [0xED9170]
   - name: dead_flo_12
     dir: world/dead/area_flo/flo_12
     type: code
@@ -17224,7 +16525,6 @@ segments:
     - [auto, c, flo_12_1_music]
     - [auto, c, flo_12_2_main]
     - [auto, c, flo_12_3_npc]
-    - [0xEDC6D0]
   - name: dead_flo_13
     dir: world/dead/area_flo/flo_13
     type: code
@@ -17238,7 +16538,6 @@ segments:
     - [auto, c, flo_13_3_main]
     - [auto, c, flo_13_4_npc]
     - [auto, c, flo_13_5_new_partner]
-    - [0xEE20E0]
   - name: dead_flo_14
     dir: world/dead/area_flo/flo_14
     type: code
@@ -17253,7 +16552,6 @@ segments:
     - [auto, c, flo_14_4_npc]
     - [auto, c, flo_14_5_entity]
     - [auto, c, flo_14_6_logs]
-    - [0xEE8970]
   - name: dead_flo_15
     dir: world/dead/area_flo/flo_15
     type: code
@@ -17267,7 +16565,6 @@ segments:
     - [auto, c, flo_15_3_npc]
     - [auto, c, flo_15_4_entity]
     - [auto, c, flo_15_5_stairs]
-    - [0xEEB990]
   - name: dead_flo_16
     dir: world/dead/area_flo/flo_16
     type: code
@@ -17282,7 +16579,6 @@ segments:
     - [auto, c, flo_16_4_entity]
     - [auto, c, flo_16_5_npc]
     - [auto, c, flo_16_6_puzzle]
-    - [0xEEFAD0]
   - name: dead_flo_17
     dir: world/dead/area_flo/flo_17
     type: code
@@ -17296,7 +16592,6 @@ segments:
     - [auto, c, flo_17_3_logs]
     - [auto, c, flo_17_4_npc]
     - [auto, c, flo_17_5_entity]
-    - [0xEF58E0]
   - name: dead_flo_18
     dir: world/dead/area_flo/flo_18
     type: code
@@ -17310,7 +16605,6 @@ segments:
     - [auto, c, flo_18_3_machine]
     - [auto, c, flo_18_4_npc]
     - [auto, c, flo_18_5_foliage]
-    - [0xEF8250]
   - name: dead_flo_19
     dir: world/dead/area_flo/flo_19
     type: code
@@ -17324,7 +16618,6 @@ segments:
     - [auto, c, flo_19_3_main]
     - [auto, c, flo_19_4_clouds]
     - [auto, c, flo_19_5_beanstalk]
-    - [0xEFF440]
 
 #############
 ### Audio ###
