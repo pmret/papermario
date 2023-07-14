@@ -154,7 +154,7 @@ void state_step_language_select(void) {
                     clear_entity_data(0);
                     clear_trigger_data();
                     nuPiReadRomOverlay(&D_8007798C);
-                    filemenu_init(TRUE);
+                    filemenu_init(1);
                     gOverrideFlags &= ~GLOBAL_OVERRIDES_8;
                     set_screen_overlay_params_front(OVERLAY_NONE, 255.0f);
                 }
@@ -193,7 +193,7 @@ void state_step_file_select(void) {
                     D_800A0930 = -1;
                     battle_heap_create();
                     nuPiReadRomOverlay(&D_8007798C);
-                    filemenu_init(FALSE);
+                    filemenu_init(0);
                 }
             }
 

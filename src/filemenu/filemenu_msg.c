@@ -2,6 +2,8 @@
 #include "filemenu.h"
 #include "ld_addrs.h"
 
+s32 msg_get_print_char_width(s32 character, s32 charset, s32 variation, f32 msgScale, s32 overrideCharWidth, u8 flags);
+
 #if VERSION_IQUE
 // TODO: remove when charset segment is split for iQue
 extern Addr charset_standard_OFFSET;
@@ -98,7 +100,7 @@ u8 D_filemenu_8025093C[] = {0x10, 0x0A, 0x0A, 0x14};
 u16 D_filemenu_80250940[] = {0x00B6, 0x0113, 0x00BE, 0x00C6};
 u8 D_filemenu_80250948[] = {0x4A, 0x1E, 0x46, 0x44};
 u8 D_filemenu_8025094C[] = {0x14, 0x25, 0x15, 0x12};
-u8 D_filemenu_80250950[] = {0xFD, 0x02, 0xFD, 0xFD};
+s8 D_filemenu_80250950[] = {0xFD, 0x02, 0xFD, 0xFD};
 u8 D_filemenu_80250954[] = {0x9A, 0xAE, 0x9A, 0x9A};
 u8 D_filemenu_80250958[] = {0xA4, 0xA4, 0xC0, 0xA4};
 u8 D_filemenu_8025095C[] = {0x24, 0x24, 0x32, 0x24};
@@ -670,9 +672,6 @@ u8* filemenu_get_menu_message(s32 idx) {
 }
 #endif
 
-#if VERSION_PAL
-INCLUDE_ASM(void, "filemenu/filemenu_msg", filemenu_draw_file_name);
-#else
 void filemenu_draw_file_name(u8* filename, s32 length, s32 x, s32 y, s32 alpha, s32 arg5, s32 arg6, s32 charWidth) {
     s32 i;
 
@@ -687,10 +686,13 @@ void filemenu_draw_file_name(u8* filename, s32 length, s32 x, s32 y, s32 alpha, 
             } else {
                 filemenu_draw_message((u8*)c, x + (i * charWidth), y, alpha, arg5, arg6);
             }
+#elif VERSION_PAL
+            s32 offset = (8 - msg_get_print_char_width(c, 0, 0, 1.0f, 0, 1)) / 2;
+
+            filemenu_draw_message((u8*)c, x + (i * charWidth) + offset, y, alpha, arg5, arg6);
 #else
             filemenu_draw_message((u8*)c, x + (i * charWidth), y, alpha, arg5, arg6);
 #endif
         }
     }
 }
-#endif

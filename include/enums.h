@@ -5909,6 +5909,9 @@ enum FileMenuMessages {
     /* 32 */ FILE_MESSAGE_ENTER_A_FILE_NAME,           // Enter a file name![End]
     /* 33 */ FILE_MESSAGE_QUESTION,                    // ?[End]
     /* 34 */ FILE_MESSAGE_PERIOD_34,                   // .[End]
+#if VERSION_PAL
+    FILE_MESSAGE_BASE_UNK,
+#endif
 };
 
 // specifically used with draw_msg, not to be confused with MsgStyles
@@ -6553,13 +6556,14 @@ enum WindowStyles {
     WINDOW_STYLE_MAX    = 22,
 };
 
-#if VERSION_PAL
+// LANGUAGE_DEFAULT as 0 will be the first index into several arrays containing data based on the current language.
+// For non-PAL versions, this will be the first and only index.
+#define LANGUAGE_DEFAULT 0
 enum Language {
     LANGUAGE_EN = 0,
     LANGUAGE_DE = 1,
     LANGUAGE_FR = 2,
     LANGUAGE_ES = 3,
 };
-#endif
 
 #endif

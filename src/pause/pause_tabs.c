@@ -44,12 +44,14 @@ extern HudScript HES_HeaderItems_es;
 extern HudScript HES_HeaderParty_es;
 extern HudScript HES_HeaderSpirits_es;
 extern HudScript HES_HeaderMap_es;
+#endif
 
 HudScript* gPauseTabsHudScripts[][6] = {
-    [LANGUAGE_EN] = {
+    [LANGUAGE_DEFAULT] = {
         &HES_HeaderStats, &HES_HeaderBadges, &HES_HeaderItems,
         &HES_HeaderParty, &HES_HeaderSpirits, &HES_HeaderMap
     },
+#if VERSION_PAL
     [LANGUAGE_DE] = {
         &HES_HeaderStats_de, &HES_HeaderBadges_de, &HES_HeaderItems_de,
         &HES_HeaderParty_de, &HES_HeaderSpirits_de, &HES_HeaderMap_de
@@ -62,11 +64,9 @@ HudScript* gPauseTabsHudScripts[][6] = {
         &HES_HeaderStats_es, &HES_HeaderBadges_es, &HES_HeaderItems_es,
         &HES_HeaderParty_es, &HES_HeaderSpirits_es, &HES_HeaderMap_es
     },
-};
-#else
-HudScript* gPauseTabsHudScripts[] = { &HES_HeaderStats, &HES_HeaderBadges, &HES_HeaderItems,
-                            &HES_HeaderParty, &HES_HeaderSpirits, &HES_HeaderMap };
 #endif
+};
+
 s8 gPauseTabsGridData[] = { 0, 1, 2, 3, 4, 5 };
 u8 gPauseTabsPanelIDs[] = { 1, 2, 3, 4, 5, 6 };
 u8 gPauseTabsWindowIDs[] = { WINDOW_ID_PAUSE_TAB_STATS, WINDOW_ID_PAUSE_TAB_BADGES, WINDOW_ID_PAUSE_TAB_ITEMS, WINDOW_ID_PAUSE_TAB_PARTY, WINDOW_ID_PAUSE_TAB_SPIRITS, WINDOW_ID_PAUSE_TAB_MAP };
@@ -309,14 +309,19 @@ void pause_tabs_draw_map(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 h
     }
 }
 
-#if VERSION_PAL
-INCLUDE_ASM(void, "pause/pause_tabs", pause_tabs_init);
-#else
+// #if VERSION_PAL
+// INCLUDE_ASM(void, "pause/pause_tabs", pause_tabs_init);
+// #else
 void pause_tabs_init(MenuPanel* tab) {
     s32 i;
 
-    for (i = 0; i < ARRAY_COUNT(gPauseTabsHudScripts); i++) {
-        gPauseTabsIconIDs[i] = hud_element_create(gPauseTabsHudScripts[i]);
+    for (i = 0; i < ARRAY_COUNT(gPauseTabsHudScripts[0]); i++) {
+        HudScript* hs;
+
+        //hs = gPauseTabsHudScripts[i];
+        hs = gPauseTabsHudScripts[gCurrentLanguage][i];
+
+        gPauseTabsIconIDs[i] = hud_element_create(hs);
         hud_element_set_flags(gPauseTabsIconIDs[i], HUD_ELEMENT_FLAG_80);
     }
 
@@ -330,7 +335,7 @@ void pause_tabs_init(MenuPanel* tab) {
     tab->initialized = TRUE;
     gPauseTabsPreviousTab = 5;
 }
-#endif
+//#endif
 
 void pause_tabs_handle_input(MenuPanel* tab) {
     Window* pauseWindows;

@@ -16,10 +16,12 @@ DO_SHA1_CHECK = True
 
 # Paths:
 ROOT = Path(__file__).parent.parent.parent
+if ROOT.is_absolute():
+    ROOT = ROOT.relative_to(Path.cwd())
+
 BUILD_TOOLS = Path("tools/build")
 YAY0_COMPRESS_TOOL = f"{BUILD_TOOLS}/yay0/Yay0compress"
 CRC_TOOL = f"{BUILD_TOOLS}/rom/n64crc"
-
 
 
 def exec_shell(command: List[str]) -> str:
@@ -206,7 +208,7 @@ def write_ninja_rules(
     ninja.rule(
         "npc_sprite",
         description="sprite $sprite_name",
-        command=f"$python {BUILD_TOOLS}/sprite/npc_sprite.py $out $sprite_dir",
+        command=f"$python {BUILD_TOOLS}/sprite/npc_sprite.py $out $sprite_name $asset_stack",
     )
 
     ninja.rule(
@@ -218,7 +220,7 @@ def write_ninja_rules(
     ninja.rule(
         "sprite_header",
         description="sprite_header $sprite_name",
-        command=f"$python {BUILD_TOOLS}/sprite/header.py $out $sprite_dir $sprite_id",
+        command=f"$python {BUILD_TOOLS}/sprite/header.py $out $sprite_name $sprite_id $asset_stack",
     )
 
     ninja.rule(
@@ -242,7 +244,7 @@ def write_ninja_rules(
     ninja.rule(
         "tex",
         description="tex $out",
-        command=f"$python {BUILD_TOOLS}/mapfs/tex.py $out $tex_dir",
+        command=f"$python {BUILD_TOOLS}/mapfs/tex.py $out $tex_name $asset_stack",
     )
 
     ninja.rule(
@@ -273,7 +275,7 @@ def write_ninja_rules(
 
     with Path("tools/permuter_settings.toml").open("w") as f:
         f.write(
-            f"compiler_command = \"{cc} {CPPFLAGS.replace('$version', 'us')} {cflags} -DPERMUTER -fforce-addr\"\n"
+            f"compiler_command = \"{cc} {CPPFLAGS.replace('$version', 'pal')} {cflags} -DPERMUTER -fforce-addr\"\n"
         )
         f.write(
             f'assembler_command = "{cross}as -EB -march=vr4300 -mtune=vr4300 -Iinclude"\n'
@@ -409,6 +411,9 @@ class Configure:
 
     @lru_cache(maxsize=None)
     def resolve_asset_path(self, path: Path) -> Path:
+        # Remove nonsense
+        path = Path(os.path.normpath(path))
+
         parts = list(path.parts)
 
         if parts[0] != "assets":
@@ -494,7 +499,7 @@ class Configure:
                 ninja.build(
                     outputs=object_strs,  # $out
                     rule=task,
-                    inputs=self.resolve_src_paths(src_paths),  # $in
+                    inputs=inputs,  # $in
                     implicit=implicit,
                     order_only=order_only,
                     variables={"version": self.version, **variables},
@@ -736,19 +741,28 @@ class Configure:
                     yay0_path = bin_path.with_suffix(".Yay0")
                     sprite_yay0s.append(yay0_path)
 
-                    variables = {
-                        "sprite_id": sprite_id,
-                        "sprite_name": sprite_name,
-                        "sprite_dir": self.resolve_asset_path(sprite_dir),
-                    }
-
-                    build(bin_path, [sprite_dir], "npc_sprite", variables=variables)
+                    build(
+                        bin_path,
+                        [sprite_dir],
+                        "npc_sprite",
+                        variables={
+                            "sprite_name": sprite_name,
+                            "asset_stack": ",".join(self.asset_stack),
+                        },
+                        asset_deps=[str(sprite_dir)],
+                    )
                     build(yay0_path, [bin_path], "yay0")
+
+                    # NPC sprite header
                     build(
                         self.build_path() / "include/sprite/npc" / (sprite_name + ".h"),
                         [sprite_dir, yay0_path],
                         "sprite_header",
-                        variables=variables,
+                        variables={
+                            "sprite_name": sprite_name,
+                            "sprite_id": str(sprite_id),
+                            "asset_stack": ",".join(self.asset_stack),
+                        },
                     )
 
                 # Sprites .bin
@@ -794,9 +808,8 @@ class Configure:
                 )
                 build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
             elif seg.type == "pm_map_data":
-                bin_yay0s: List[
-                    Path
-                ] = []  # flat list of (uncompressed path, compressed? path) pairs
+                # flat list of (uncompressed path, compressed? path) pairs
+                bin_yay0s: List[Path] = []
                 src_dir = Path("assets/x") / seg.name
 
                 for path in entry.src_paths:
@@ -897,11 +910,13 @@ class Configure:
                         tex_dir = path.parent / name
                         build(
                             bin_path,
-                            [tex_dir],
+                            [tex_dir, path.parent / (name + ".json")],
                             "tex",
                             variables={
-                                "tex_dir": str(tex_dir)
-                            }
+                                "tex_name": name,
+                                "asset_stack": ",".join(self.asset_stack),
+                            },
+                            asset_deps=[f"mapfs/tex/{name}"],
                         )
                     elif name.endswith("_shape"):
                         map_name = "_".join(name.split("_")[:-1])

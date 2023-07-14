@@ -583,9 +583,6 @@ s32 pause_get_menu_msg(s32 index) {
     return gPauseMessages[index];
 }
 
-#if VERSION_PAL
-INCLUDE_ASM(void, "pause/pause_gfx", pause_draw_menu_label);
-#else
 void pause_draw_menu_label(s32 index, s32 x, s32 y) {
     s32 xOffset = 64;
 
@@ -607,8 +604,15 @@ void pause_draw_menu_label(s32 index, s32 x, s32 y) {
 
     gSPDisplayList(gMainGfxPos++, gPauseDLLabels[index]);
     pause_draw_rect(x * 4, y * 4, (x + xOffset) * 4, (y + 16) * 4, 0, 0, 0, 0x400, 0x400);
-}
+
+#if VERSION_PAL
+    if (gCurrentLanguage == LANGUAGE_DE && index == 5) {
+        s16 xOffset2 = xOffset;
+
+        pause_draw_rect((x + 30) * 4, (y * 4), (xOffset2 + x + 10) * 4, (y + 16) * 4, 0, 0x280, 0, 0x400, 0x400);
+    }
 #endif
+}
 
 BSS s8 gPauseBufferPal1[512];
 BSS s8 gPauseBufferImg1[15752];

@@ -10,6 +10,8 @@ from segtypes.common.code import CommonSegCode
 
 from segtypes.segment import Segment
 
+from disassembler_section import DisassemblerSection, make_text_section
+
 
 # abstract class for c, asm, data, etc
 class CommonSegCodeSubsegment(Segment):
@@ -24,7 +26,7 @@ class CommonSegCodeSubsegment(Segment):
             self.yaml.get("str_encoding", None) if isinstance(self.yaml, dict) else None
         )
 
-        self.spim_section: Optional[spimdisasm.mips.sections.SectionBase] = None
+        self.spim_section: Optional[DisassemblerSection] = None
         self.instr_category = rabbitizer.InstrCategory.CPU
         if options.opts.platform == "ps2":
             self.instr_category = rabbitizer.InstrCategory.R5900
@@ -56,8 +58,7 @@ class CommonSegCodeSubsegment(Segment):
                 f"Segment '{self.name}' (type '{self.type}') requires a vram address. Got '{self.vram_start}'"
             )
 
-        self.spim_section = spimdisasm.mips.sections.SectionText(
-            symbols.spim_context,
+        self.spim_section = make_text_section(
             self.rom_start,
             self.rom_end,
             self.vram_start,
@@ -67,13 +68,15 @@ class CommonSegCodeSubsegment(Segment):
             self.get_exclusive_ram_id(),
         )
 
-        self.spim_section.isHandwritten = is_hasm
-        self.spim_section.instrCat = self.instr_category
+        assert self.spim_section is not None
+
+        self.spim_section.get_section().isHandwritten = is_hasm
+        self.spim_section.get_section().instrCat = self.instr_category
 
         self.spim_section.analyze()
-        self.spim_section.setCommentOffset(self.rom_start)
+        self.spim_section.set_comment_offset(self.rom_start)
 
-        for func in self.spim_section.symbolList:
+        for func in self.spim_section.get_section().symbolList:
             assert isinstance(func, spimdisasm.mips.symbols.SymbolFunction)
 
             self.process_insns(func)
@@ -85,7 +88,7 @@ class CommonSegCodeSubsegment(Segment):
                 jtbl_label_vram, True, type="jtbl_label", define=True
             )
             sym.type = "jtbl_label"
-            symbols.add_symbol_to_spim_section(self.spim_section, sym)
+            symbols.add_symbol_to_spim_section(self.spim_section.get_section(), sym)
 
     def process_insns(
         self,
@@ -103,7 +106,7 @@ class CommonSegCodeSubsegment(Segment):
 
         # Gather symbols found by spimdisasm and create those symbols in splat's side
         for referenced_vram in func_spim.instrAnalyzer.referencedVrams:
-            context_sym = self.spim_section.getSymbol(
+            context_sym = self.spim_section.get_section().getSymbol(
                 referenced_vram, tryPlusOffset=False
             )
             if context_sym is not None:
@@ -124,7 +127,7 @@ class CommonSegCodeSubsegment(Segment):
             if instr_offset in func_spim.instrAnalyzer.symbolInstrOffset:
                 sym_address = func_spim.instrAnalyzer.symbolInstrOffset[instr_offset]
 
-                context_sym = self.spim_section.getSymbol(
+                context_sym = self.spim_section.get_section().getSymbol(
                     sym_address, tryPlusOffset=False
                 )
                 if context_sym is not None:
@@ -141,7 +144,7 @@ class CommonSegCodeSubsegment(Segment):
 
         assert isinstance(self.rom_start, int)
 
-        for in_file_offset in self.spim_section.fileBoundaries:
+        for in_file_offset in self.spim_section.get_section().fileBoundaries:
             if (in_file_offset % 16) != 0:
                 continue
 
@@ -150,8 +153,10 @@ class CommonSegCodeSubsegment(Segment):
 
                 # Look up for the last symbol in this boundary
                 sym_addr = 0
-                for sym in self.spim_section.symbolList:
-                    symOffset = sym.inFileOffset - self.spim_section.inFileOffset
+                for sym in self.spim_section.get_section().symbolList:
+                    symOffset = (
+                        sym.inFileOffset - self.spim_section.get_section().inFileOffset
+                    )
                     if in_file_offset == symOffset:
                         break
                     sym_addr = sym.vram

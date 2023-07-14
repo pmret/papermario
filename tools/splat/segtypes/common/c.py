@@ -153,10 +153,10 @@ class CommonSegC(CommonSegCodeSubsegment):
             self.print_file_boundaries()
 
             assert self.spim_section is not None and isinstance(
-                self.spim_section, spimdisasm.mips.sections.SectionText
+                self.spim_section.get_section(), spimdisasm.mips.sections.SectionText
             ), f"{self.name}, rom_start:{self.rom_start}, rom_end:{self.rom_end}"
 
-            rodata_spim_segment = None
+            rodata_spim_segment: Optional[spimdisasm.mips.sections.SectionRodata] = None
             if (
                 options.opts.migrate_rodata_to_functions
                 and self.rodata_sibling is not None
@@ -166,15 +166,15 @@ class CommonSegC(CommonSegCodeSubsegment):
                 ), self.rodata_sibling.type
                 if self.rodata_sibling.spim_section is not None:
                     assert isinstance(
-                        self.rodata_sibling.spim_section,
+                        self.rodata_sibling.spim_section.get_section(),
                         spimdisasm.mips.sections.SectionRodata,
                     )
-                    rodata_spim_segment = self.rodata_sibling.spim_section
+                    rodata_spim_segment = self.rodata_sibling.spim_section.get_section()
 
             # Precompute function-rodata pairings
             symbols_entries = (
                 spimdisasm.mips.FunctionRodataEntry.getAllEntriesFromSections(
-                    self.spim_section, rodata_spim_segment
+                    self.spim_section.get_section(), rodata_spim_segment
                 )
             )
 
@@ -319,7 +319,7 @@ class CommonSegC(CommonSegCodeSubsegment):
         macro_name: str,
     ) -> str:
         if options.opts.compiler == IDO:
-            # IDO uses the asm processor to embeed assembly and it doesn't require a special directive to include symbols
+            # IDO uses the asm processor to embeed assembly, and it doesn't require a special directive to include symbols
             asm_outpath = Path(
                 os.path.join(asm_out_dir, self.name, spim_sym.getName() + ".s")
             )

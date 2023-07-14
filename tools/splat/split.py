@@ -19,7 +19,7 @@ from segtypes.linker_entry import (
 from segtypes.segment import Segment
 from util import log, options, palettes, symbols, relocs
 
-VERSION = "0.14.0"
+VERSION = "0.15.1"
 
 parser = argparse.ArgumentParser(
     description="Split a rom given a rom, a config, and output directory"
@@ -349,7 +349,7 @@ def main(config_path, modes, verbose, use_cache=True, skip_version_check=False):
     if (
         options.opts.is_mode_active("ld") and options.opts.platform != "gc"
     ):  # TODO move this to platform initialization when it gets implemented
-        # Calculate list of segments for which we need to find the largest so we can safely place the symbol after it
+        # Calculate list of segments for which we need to find the largest, so we can safely place the symbol after it
         max_vram_end_syms: Dict[str, List[Segment]] = {}
         for sym in symbols.appears_after_overlays_syms:
             max_vram_end_syms[sym.name] = [

@@ -3,11 +3,24 @@
 from math import floor
 from sys import argv, path
 from pathlib import Path
-from typing import List
+from typing import List, Tuple
+import xml.etree.ElementTree as ET
+import png  # type: ignore
 
+path.append(str(Path(__file__).parent.parent))
+path.append(str(Path(__file__).parent.parent.parent))
 path.append(str(Path(__file__).parent.parent.parent / "splat"))
 path.append(str(Path(__file__).parent.parent.parent / "splat_ext"))
-from pm_sprites import NpcSprite
+
+from common import get_asset_path, iter_in_groups
+from splat_ext.pm_sprites import (
+    MAX_COMPONENTS_XML,
+    PALETTE_GROUPS_XML,
+    NpcRaster,
+    NpcSprite,
+)
+
+from splat_ext.sprite_common import AnimComponent
 
 
 def pack_color(r, g, b, a):
@@ -23,22 +36,108 @@ def pack_color(r, g, b, a):
     return s
 
 
-def iter_in_groups(iterable, n, fillvalue=None):
-    from itertools import zip_longest
+def from_dir(
+    sprite_name: str,
+    asset_stack: Tuple[Path, ...],
+    load_images: bool = True,
+) -> NpcSprite:
+    sprite_dir = Path(f"sprite/npc/{sprite_name}")
 
-    args = [iter(iterable)] * n
-    return zip_longest(*args, fillvalue=fillvalue)
+    sprite_sheet_xml_path = get_asset_path(sprite_dir / "SpriteSheet.xml", asset_stack)
+    xml = ET.parse(sprite_sheet_xml_path)
+    SpriteSheet = xml.getroot()
+
+    true_max_components = 0
+
+    if "a" in SpriteSheet.attrib:
+        max_components = int(SpriteSheet.attrib["a"])
+    else:
+        max_components = int(SpriteSheet.attrib[MAX_COMPONENTS_XML])
+
+    if "b" in SpriteSheet.attrib:
+        num_variations = int(SpriteSheet.attrib["b"])
+    else:
+        num_variations = int(SpriteSheet.attrib[PALETTE_GROUPS_XML])
+
+    variation_names = SpriteSheet.get("variations", default="").split(",")
+
+    palettes = []
+    palette_names: List[str] = []
+    for Palette in SpriteSheet.findall("./PaletteList/Palette"):
+        if asset_stack is not None and load_images:
+            img_name = Palette.attrib["src"]
+            img_path = str(get_asset_path(sprite_dir / img_name, asset_stack))
+            img = png.Reader(img_path)
+            img.preamble(True)
+            palette = img.palette(alpha="force")
+
+            palette = palette[0:16]
+            assert len(palette) == 16
+
+            palettes.append(palette)
+
+        palette_names.append(
+            Palette.get("name", Palette.attrib["src"].split(".png")[0])
+        )
+
+    images = []
+    image_names: List[str] = []
+    for Raster in SpriteSheet.findall("./RasterList/Raster"):
+        if asset_stack is not None and load_images:
+            img_name = Raster.attrib["src"]
+            img_path = str(get_asset_path(sprite_dir / img_name, asset_stack))
+            width, height, raster, info = png.Reader(img_path).read_flat()
+
+            palette_index = int(Raster.attrib["palette"], base=16)
+            image = NpcRaster(width, height, palette_index, raster)
+
+            assert (image.width % 8) == 0, f"{img_path} width is not a multiple of 8"
+            assert (image.height % 8) == 0, f"{img_path} height is not a multiple of 8"
+
+            images.append(image)
+
+        image_names.append(Raster.attrib["src"].split(".png")[0])
+
+    animations = []
+    animation_names: List[str] = []
+    for Animation in SpriteSheet.findall("./AnimationList/Animation"):
+        comps: List[AnimComponent] = []
+        for comp_xml in Animation:
+            comp: AnimComponent = AnimComponent.from_xml(comp_xml)
+            comps.append(comp)
+        animation_names.append(Animation.attrib["name"])
+        animations.append(comps)
+
+        if len(comps) > true_max_components:
+            true_max_components = len(comps)
+
+    max_components = true_max_components
+    # assert self.max_components == true_max_components, f"{true_max_components} component(s) used, but SpriteSheet.a = {self.max_components}"
+
+    return NpcSprite(
+        max_components,
+        num_variations,
+        animations,
+        palettes,
+        images,
+        image_names,
+        palette_names,
+        animation_names,
+        variation_names,
+    )
 
 
 if __name__ == "__main__":
-    if len(argv) != 3:
-        print("usage: sprite.py [OUTBIN] [DIR]")
+    if len(argv) != 4:
+        print("usage: sprite.py [OUTBIN] [SPRITE_NAME] [ASSET_STACK]")
         exit(1)
 
-    _, outfile, sprite_dir = argv
+    _, outfile, sprite_name, asset_stack_raw = argv
+
+    asset_stack = tuple(Path(d) for d in asset_stack_raw.split(","))
 
     try:
-        sprite = NpcSprite.from_dir(Path(sprite_dir))
+        sprite = from_dir(sprite_name, asset_stack)
     except AssertionError as e:
         print("error:", e)
         exit(1)

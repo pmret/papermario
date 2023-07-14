@@ -278,8 +278,17 @@ class CommonSegCode(CommonSegGroup):
             )
 
             segment.sibling = base_segments.get(segment.name, None)
-            if segment.is_rodata() and segment.sibling is not None:
-                segment.sibling.rodata_sibling = segment
+
+            if segment.sibling is not None:
+                if self.section_order.index(".text") < self.section_order.index(
+                    ".rodata"
+                ):
+                    if segment.is_rodata():
+                        segment.sibling.rodata_sibling = segment
+                else:
+                    if segment.is_text() and segment.sibling.is_rodata():
+                        segment.rodata_sibling = segment.sibling
+                        segment.sibling.sibling = segment
 
             segment.parent = self
             if segment.special_vram_segment:
@@ -299,6 +308,10 @@ class CommonSegCode(CommonSegGroup):
 
             if segment.is_text():
                 base_segments[segment.name] = segment
+
+            if self.section_order.index(".rodata") < self.section_order.index(".text"):
+                if segment.is_rodata() and segment.sibling is None:
+                    base_segments[segment.name] = segment
 
             prev_start = start
             if end is not None:

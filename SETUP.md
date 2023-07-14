@@ -23,6 +23,7 @@ cd papermario
 Install build dependencies:
 ```sh
 ./install_deps.sh
+./install_compilers.sh
 ```
 
 > **NOTE:** On Mac, if you get an error that looks like
@@ -43,7 +44,12 @@ Continue onto [building](#building)
 1. Install or upgrade to **WSL 2** following [these instructions](https://aka.ms/wsl2-install) (Ubuntu is recommended)
 2. Open a WSL terminal
 3. Run the following command: `sudo apt update && sudo apt upgrade && cd ~`
-4. Continue with [building](#building)
+4. Install build dependencies:
+```sh
+./install_deps.sh
+./install_compilers.sh
+```
+5. Continue with [building](#building)
 
 If you have Visual Studio Code, you can type `code .` to open the repo within it.
 `Ctrl + J` opens up a Linux terminal within VS Code.
