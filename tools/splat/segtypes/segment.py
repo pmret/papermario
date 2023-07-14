@@ -236,7 +236,7 @@ class Segment:
         # For segments which are not in the usual VRAM segment space, like N64's IPL3 which lives in 0xA4...
         self.special_vram_segment: bool = False
 
-        if isinstance(self.rom_start, int) and isinstance(self.rom_end, int):
+        if self.rom_start is not None and self.rom_end is not None:
             if self.rom_start > self.rom_end:
                 log.error(
                     f"Error: segments out of order - ({self.name} starts at 0x{self.rom_start:X}, but next segment starts at 0x{self.rom_end:X})"
@@ -343,7 +343,7 @@ class Segment:
         # For larger symbols, add their ranges to interval trees for faster lookup
         if symbol.size > 4:
             self.symbol_ranges_ram.addi(symbol.vram_start, symbol.vram_end, symbol)
-            if symbol.rom and isinstance(symbol.rom, int):
+            if symbol.rom is not None:
                 self.symbol_ranges_rom.addi(symbol.rom, symbol.rom_end, symbol)
 
     @property
@@ -355,7 +355,7 @@ class Segment:
 
     @property
     def size(self) -> Optional[int]:
-        if isinstance(self.rom_start, int) and isinstance(self.rom_end, int):
+        if self.rom_start is not None and self.rom_end is not None:
             return self.rom_end - self.rom_start
         else:
             return None
@@ -386,16 +386,13 @@ class Segment:
             return False
 
     def contains_rom(self, rom: int) -> bool:
-        if isinstance(self.rom_start, int) and isinstance(self.rom_end, int):
+        if self.rom_start is not None and self.rom_end is not None:
             return rom >= self.rom_start and rom < self.rom_end
         else:
             return False
 
     def rom_to_ram(self, rom_addr: int) -> Optional[int]:
-        if not self.contains_rom(rom_addr) and rom_addr != self.rom_end:
-            return None
-
-        if self.vram_start is not None and isinstance(self.rom_start, int):
+        if self.vram_start is not None and self.rom_start is not None:
             return self.vram_start + rom_addr - self.rom_start
         else:
             return None
@@ -404,7 +401,7 @@ class Segment:
         if not self.contains_vram(ram_addr) and ram_addr != self.vram_end:
             return None
 
-        if self.vram_start is not None and isinstance(self.rom_start, int):
+        if self.vram_start is not None and self.rom_start is not None:
             return self.rom_start + ram_addr - self.vram_start
         else:
             return None
@@ -461,6 +458,10 @@ class Segment:
     def max_length(self):
         return None
 
+    @staticmethod
+    def get_default_name(addr) -> str:
+        return f"{addr:X}"
+
     def is_name_default(self):
         return self.name == self.get_default_name(self.rom_start)
 
@@ -471,18 +472,6 @@ class Segment:
             s = ""
 
         return s + self.type + "_" + self.name
-
-    def status(self):
-        if len(self.warnings) > 0:
-            return "warn"
-        elif self.did_run:
-            return "ok"
-        else:
-            return "skip"
-
-    @staticmethod
-    def get_default_name(addr) -> str:
-        return f"{addr:X}"
 
     @staticmethod
     def visible_ram(seg1: "Segment", seg2: "Segment") -> bool:

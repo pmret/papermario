@@ -68,8 +68,12 @@ class CommonSegGroup(CommonSegment):
 
             vram = None
             if start is not None:
-                assert isinstance(start, int)
-                vram = self.get_most_parent().rom_to_ram(start)
+                most_parent = self.get_most_parent()
+                if (
+                    most_parent.vram_start is not None
+                    and most_parent.rom_start is not None
+                ):
+                    vram = most_parent.vram_start + start - most_parent.rom_start
 
             if segment_class.is_noload():
                 # Pretend bss's rom address is after the last actual rom segment
