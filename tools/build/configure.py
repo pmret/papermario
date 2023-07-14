@@ -112,6 +112,12 @@ def write_ninja_rules(
     )
 
     ninja.rule(
+        "objcopy_data",
+        description="objcopy $in $out",
+        command=f"{cross}objcopy $in $out -O binary",
+    )
+
+    ninja.rule(
         "sha1sum",
         description="check $in",
         command="sha1sum -c $in && touch $out" if DO_SHA1_CHECK else "touch $out",
@@ -924,6 +930,7 @@ class Configure:
                         raw_bin_path = self.resolve_asset_path(
                             f"assets/x/mapfs/geom/{name[:-6]}.bin"
                         )
+                        built_data_path = bin_path.parent / (name + "_data.bin")
 
                         build(c_file_path, [raw_bin_path], "shape")
                         build(
@@ -936,6 +943,13 @@ class Configure:
                                 "encoding": "CP932",  # similar to SHIFT-JIS, but includes backslash and tilde
                             },
                         )
+                        build(
+                            built_data_path,
+                            [bin_path],
+                            "objcopy_data",
+                        )
+
+                        bin_path = built_data_path
 
                         compress = True
                     else:
