@@ -1,8 +1,10 @@
+import argparse
+from pathlib import Path
 import struct
 from abc import ABC
 from collections import deque
 from io import TextIOWrapper
-from typing import List, Dict
+from typing import List, Dict, Optional
 
 BASE_ADDR = 0x80210000
 
@@ -500,11 +502,11 @@ class ShapeFile:
         self.pending: List[Segment] = []
         self.visited: Dict[int, Segment] = {}
         self.model_name_map: Dict[int, str] = {}
-        self.root_node = None
-        self.vtx_table = None
-        self.model_names = None
-        self.collider_names = None
-        self.zone_names = None
+        self.root_node: Optional[Segment] = None
+        self.vtx_table: Optional[Segment] = None
+        self.model_names: Optional[StringListSegment] = None
+        self.collider_names: Optional[Segment] = None
+        self.zone_names: Optional[Segment] = None
 
     def push(self, segment: Segment):
         if segment.addr == 0:
@@ -567,6 +569,12 @@ class ShapeFile:
         self.model_name_map[node_addr] = names.pop()
 
     def print_prologue(self, segments):
+        assert self.root_node is not None
+        assert self.vtx_table is not None
+        assert self.model_names is not None
+        assert self.collider_names is not None
+        assert self.zone_names is not None
+
         self.print('#include "common.h"')
         self.print('#include "model.h"')
         self.print("")
@@ -583,6 +591,9 @@ class ShapeFile:
         self.print("")
 
     def digest(self):
+        assert self.model_names is not None
+        assert self.root_node is not None
+
         # first pass just scans the header and string lists
         self.push(HeaderSegment(BASE_ADDR, "Header"))
 
@@ -603,7 +614,7 @@ class ShapeFile:
             segment = self.pending.pop()
             segment.scan(self)
 
-    def print_to_file(self, out_file):
+    def write_to_c(self, out_file):
         self.out_file = out_file
         # create a sorted segment map
         segment_addrs = list(self.visited.keys())
@@ -617,16 +628,23 @@ class ShapeFile:
             self.print("")
 
 
-# TODO integrate this with extraction process
-map_name = "arn_02"
-shape_dir = "../../assets/us/mapfs/geom/"
-in_bin = shape_dir + map_name + "_shape.bin"
-out_txt = shape_dir + map_name + "_shape.c"
+def run(in_bin: Path, out: Path) -> None:
+    map_name = "_".join(in_bin.stem.split("_")[:-1])
 
-with open(in_bin, "rb") as in_file:
-    file_bytes = in_file.read()
-    shape = ShapeFile(map_name, file_bytes)
-    shape.digest()
+    with open(in_bin, "rb") as f:
+        file_bytes = f.read()
+        shape = ShapeFile(map_name, file_bytes)
+        shape.digest()
 
-    with open(out_txt, "w") as out_file:
-        shape.print_to_file(out_file)
+        with open(out, "w") as out_file:
+            shape.write_to_c(out_file)
+
+
+if __name__ == "__main__":
+    # Use argparse to take in and out as args
+    parser = argparse.ArgumentParser()
+    parser.add_argument("in_bin", type=Path, help="input binary file")
+    parser.add_argument("out_c", type=Path, help="output text file")
+    args = parser.parse_args()
+
+    run(args.in_bin, args.out_c)

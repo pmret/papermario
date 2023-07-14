@@ -257,21 +257,23 @@ def write_ninja_rules(
         "map_header", command=f"$python {BUILD_TOOLS}/mapfs/map_header.py $in > $out"
     )
 
-    ninja.rule("pm_charset", command=f"$python {BUILD_TOOLS}/pm_charset.py $out $in")
+    ninja.rule("charset", command=f"$python {BUILD_TOOLS}/pm_charset.py $out $in")
 
     ninja.rule(
-        "pm_charset_palettes",
+        "charset_palettes",
         command=f"$python {BUILD_TOOLS}/pm_charset_palettes.py $out $in",
     )
 
     ninja.rule(
-        "pm_sprite_shading_profiles",
+        "sprite_shading_profiles",
         command=f"$python {BUILD_TOOLS}/sprite/sprite_shading_profiles.py $in $out $header_path",
     )
 
     ninja.rule(
-        "pm_imgfx_data", command=f"$python {BUILD_TOOLS}/imgfx/imgfx_data.py $in $out"
+        "imgfx_data", command=f"$python {BUILD_TOOLS}/imgfx/imgfx_data.py $in $out"
     )
+
+    ninja.rule("shape", command=f"$python {BUILD_TOOLS}/mapfs/shape.py $in $out")
 
     with Path("tools/permuter_settings.toml").open("w") as f:
         f.write(
@@ -895,7 +897,6 @@ class Configure:
                         build(bin_path, imgs, "pack_title_data")
                     elif name.endswith("_bg"):
                         compress = True
-                        bin_path = self.build_path() / bin_path
                         build(
                             bin_path,
                             [path],
@@ -918,34 +919,25 @@ class Configure:
                             },
                             asset_deps=[f"mapfs/tex/{name}"],
                         )
-                    elif name.endswith("_shape"):
-                        map_name = "_".join(name.split("_")[:-1])
-
-                        # Handle map XML files, if they exist (TODO: have splat output these)
-                        map_xml = self.resolve_asset_path(
-                            Path(f"assets/{self.version}")
-                            / seg.dir
-                            / seg.name
-                            / (map_name + ".xml")
+                    elif name.endswith("_shape_built"):
+                        c_file_path = (bin_path.parent / name[:-6]).with_suffix(".c")
+                        raw_bin_path = self.resolve_asset_path(
+                            f"assets/x/mapfs/geom/{name[:-6]}.bin"
                         )
-                        if map_xml.exists():
-                            # Build a header file for this map
-                            build(
-                                self.build_path()
-                                / "include"
-                                / seg.dir
-                                / seg.name
-                                / (map_name + ".h"),
-                                [map_xml],
-                                "map_header",
-                            )
 
-                            # NOTE: we don't build the map xml into a _shape or _hit file (yet); the Star Rod Map Editor
-                            # is able to build the xml nonmatchingly into assets/star_rod_build/mapfs/*.bin for people
-                            # who want that (i.e. modders). 'star_rod_build' should be added to asset_stack also.
+                        build(c_file_path, [raw_bin_path], "shape")
+                        build(
+                            bin_path,
+                            [c_file_path],
+                            "cc" if not modern_gcc else "cc_modern",
+                            variables={
+                                "cflags": "",
+                                "cppflags": f"-DVERSION_{self.version.upper()}",
+                                "encoding": "CP932",  # similar to SHIFT-JIS, but includes backslash and tilde
+                            },
+                        )
 
                         compress = True
-                        bin_path = path
                     else:
                         compress = True
                         bin_path = path
@@ -983,7 +975,7 @@ class Configure:
                     )
                     rasters.append(out_path)
 
-                build(entry.object_path.with_suffix(""), rasters, "pm_charset")
+                build(entry.object_path.with_suffix(""), rasters, "charset")
                 build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
             elif seg.type == "pm_charset_palettes":
                 palettes = []
@@ -1007,9 +999,7 @@ class Configure:
                     )
                     palettes.append(out_path)
 
-                build(
-                    entry.object_path.with_suffix(""), palettes, "pm_charset_palettes"
-                )
+                build(entry.object_path.with_suffix(""), palettes, "charset_palettes")
                 build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
             elif seg.type == "pm_sprite_shading_profiles":
                 header_path = str(
@@ -1018,7 +1008,7 @@ class Configure:
                 build(
                     entry.object_path.with_suffix(""),
                     entry.src_paths,
-                    "pm_sprite_shading_profiles",
+                    "sprite_shading_profiles",
                     implicit_outputs=[header_path],
                     variables={
                         "header_path": header_path,
@@ -1029,7 +1019,7 @@ class Configure:
                 c_file_path = (
                     Path(f"assets/{self.version}") / "imgfx" / (seg.name + ".c")
                 )
-                build(c_file_path, entry.src_paths, "pm_imgfx_data")
+                build(c_file_path, entry.src_paths, "imgfx_data")
 
                 build(
                     entry.object_path,
