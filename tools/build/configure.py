@@ -564,11 +564,7 @@ class Configure:
                     encoding = "EUC-JP"
 
                 # Dead cod
-                if (
-                    isinstance(seg, segtypes.common.c.CommonSegC)
-                    and isinstance(seg.rom_start, int)
-                    and seg.rom_start >= 0xEA0900
-                ):
+                if "dead" in entry.src_paths[0].parts:
                     obj_path = str(entry.object_path)
                     init_obj_path = Path(obj_path + ".dead")
                     build(
@@ -627,7 +623,8 @@ class Configure:
                                 },
                             )
 
-                            assert seg.vram_start is not None
+                            assert seg.vram_start is not None, "img with vram_start unset: " + seg.name
+
                             c_sym = seg.create_symbol(
                                 addr=seg.vram_start,
                                 in_segment=True,
