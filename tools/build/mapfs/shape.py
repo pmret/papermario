@@ -4,7 +4,7 @@ import struct
 from abc import ABC
 from collections import deque
 from io import TextIOWrapper
-from typing import List, Dict, Optional
+from typing import List, Dict, Optional, Tuple
 
 BASE_ADDR = 0x80210000
 
@@ -85,8 +85,11 @@ class HeaderSegment(Segment):
             self.ptr_zone_names,
         ) = struct.unpack(">IIIII", shape.file_bytes[start : start + 20])
 
+        # 0x14 = size of ModelNode
+        root_bounds_space = self.ptr_model_names - (self.ptr_root_node + 0x14)
+        num_root_bounds = root_bounds_space // 0xC
         # note: do not push model root yet
-        shape.root_node = NodeSegment(self.ptr_root_node, "Node", True)
+        shape.root_node = NodeSegment(self.ptr_root_node, "Node", num_root_bounds)
 
         shape.vtx_table = shape.push(
             VertexTableSegment(self.ptr_vtx_table, "VertexTable")
@@ -162,7 +165,11 @@ class StringListSegment(Segment):
             self.list.append(string)
 
     def print(self, shape):
-        shape.print(f"char* {self.get_sym()}[] = {{")
+        align_attribute = ""
+        if self.name == "ModelNames":
+            align_attribute = "__attribute__ ((aligned (16))) "
+
+        shape.print(f"{align_attribute}char* {self.get_sym()}[] = {{")
 
         for name in self.list:
             shape.print(f'\t"{name}",')
@@ -171,9 +178,10 @@ class StringListSegment(Segment):
 
 
 class NodeSegment(Segment):
-    def __init__(self, addr: int, name: str, is_root):
+    def __init__(self, addr: int, name: str, num_root_bounds: int = 0):
         super().__init__(addr, name)
-        self.is_root = is_root
+        self.num_root_bounds = num_root_bounds
+        self.root_bounds: List[Tuple[float, float, float]] = []
 
     def scan(self, shape):
         pos = self.addr - BASE_ADDR
@@ -186,18 +194,11 @@ class NodeSegment(Segment):
         ) = struct.unpack(">IIIII", shape.file_bytes[pos : pos + 20])
         pos += 20
 
-        if self.is_root:
-            (
-                self.Ax,
-                self.Ay,
-                self.Az,
-                self.Bx,
-                self.By,
-                self.Bz,
-                self.Cx,
-                self.Cy,
-                self.Cz,
-            ) = struct.unpack(">fffffffff", shape.file_bytes[pos : pos + 36])
+        for i in range(self.num_root_bounds):
+            self.root_bounds.append(
+                struct.unpack(">fff", shape.file_bytes[pos : pos + 12])
+            )
+            pos += 12
 
         self.model_name = shape.model_name_map[self.addr]
         shape.push(GroupDataSegment(self.ptr_group_data, "GroupData", self.model_name))
@@ -223,12 +224,11 @@ class NodeSegment(Segment):
         shape.print(f"\t.numProperties = {self.num_properties},")
         shape.print("};")
 
-        if self.is_root:
+        if self.num_root_bounds > 0:
             shape.print("")
             shape.print("Vec3f RootBounds[] = {")
-            shape.print(f"\t{{{self.Ax}, {self.Ay}, {self.Az}}},")
-            shape.print(f"\t{{{self.Bx}, {self.By}, {self.Bz}}},")
-            shape.print(f"\t{{{self.Cx}, {self.Cy}, {self.Cz}}},")
+            for x, y, z in self.root_bounds:
+                shape.print(f"\t{{{x}, {y}, {z}}},")
             shape.print("};")
 
 
