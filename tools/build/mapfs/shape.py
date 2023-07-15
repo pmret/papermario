@@ -86,7 +86,7 @@ class HeaderSegment(Segment):
         ) = struct.unpack(">IIIII", shape.file_bytes[start : start + 20])
 
         # note: do not push model root yet
-        shape.root_node = NodeSegment(self.ptr_root_node, "Node")
+        shape.root_node = NodeSegment(self.ptr_root_node, "Node", True)
 
         shape.vtx_table = shape.push(
             VertexTableSegment(self.ptr_vtx_table, "VertexTable")
@@ -171,18 +171,33 @@ class StringListSegment(Segment):
 
 
 class NodeSegment(Segment):
-    def __init__(self, addr: int, name: str):
+    def __init__(self, addr: int, name: str, is_root):
         super().__init__(addr, name)
+        self.is_root = is_root
 
     def scan(self, shape):
-        start = self.addr - BASE_ADDR
+        pos = self.addr - BASE_ADDR
         (
             self.node_type,
             self.ptr_display_data,
             self.num_properties,
             self.ptr_property_list,
             self.ptr_group_data,
-        ) = struct.unpack(">IIIII", shape.file_bytes[start : start + 20])
+        ) = struct.unpack(">IIIII", shape.file_bytes[pos : pos + 20])
+        pos += 20
+
+        if self.is_root:
+            (
+                self.Ax,
+                self.Ay,
+                self.Az,
+                self.Bx,
+                self.By,
+                self.Bz,
+                self.Cx,
+                self.Cy,
+                self.Cz,
+            ) = struct.unpack(">fffffffff", shape.file_bytes[pos : pos + 36])
 
         self.model_name = shape.model_name_map[self.addr]
         shape.push(GroupDataSegment(self.ptr_group_data, "GroupData", self.model_name))
@@ -208,6 +223,14 @@ class NodeSegment(Segment):
         shape.print(f"\t.numProperties = {self.num_properties},")
         shape.print("};")
 
+        if self.is_root:
+            shape.print("")
+            shape.print("Vec3f RootBounds[] = {")
+            shape.print(f"\t{{{self.Ax}, {self.Ay}, {self.Az}}},")
+            shape.print(f"\t{{{self.Bx}, {self.By}, {self.Bz}}},")
+            shape.print(f"\t{{{self.Cx}, {self.Cy}, {self.Cz}}},")
+            shape.print("};")
+
 
 class NodeListSegment(Segment):
     def __init__(self, addr: int, name: str, model_name: str, num_children: int):
@@ -224,7 +247,7 @@ class NodeListSegment(Segment):
             pos += 4
 
             self.children.append(ptr_child)
-            shape.push(NodeSegment(ptr_child, "Node"))
+            shape.push(NodeSegment(ptr_child, "Node", False))
 
     def print(self, shape):
         pos = self.addr - BASE_ADDR
@@ -333,6 +356,11 @@ class LightSetSegment(Segment):
         (a, b) = struct.unpack(">II", shape.file_bytes[pos : pos + 8])
         pos += 8
 
+        shape.print(f"s32 N({self.get_sym()[2:-1]}_pad_before)[] = {{")
+        shape.print(f"\t0x0, 0x0, 0x0, 0x0,")
+        shape.print("};")
+        shape.print("")
+
         shape.print(f"s32 {self.get_sym()}[] = {{")
         shape.print(f"\t{hex(a)}, {hex(b)},")
 
@@ -341,6 +369,7 @@ class LightSetSegment(Segment):
             pos += 12
             shape.print(f"\t{hex(a)}, {hex(b)}, {hex(c)},")
 
+        shape.print(f"\t0x0, 0x0, 0x0, 0x0, 0x0, 0x0,")
         shape.print("};")
 
 
