@@ -96,6 +96,18 @@ def write_ninja_rules(
             command=f"{cross}ld {ld_args}",
         )
 
+    ninja.rule(
+        "shape_ld",
+        description="link($version) shape $out",
+        command=f"{cross}ld -T src/map_shape.ld $in -o $out",
+    )
+
+    ninja.rule(
+        "shape_objcopy",
+        description="objcopy($version) shape $out",
+        command=f"{cross}objcopy $in $out -O binary",
+    )
+
     Z64_DEBUG = ""
     if debug:
         Z64_DEBUG = "-gS -R .data -R .note -R .eh_frame -R .gnu.attributes -R .comment -R .options"
@@ -109,12 +121,6 @@ def write_ninja_rules(
         "z64_ique",
         description="rom $out",
         command=f"{cross}objcopy $in $out -O binary {Z64_DEBUG}",
-    )
-
-    ninja.rule(
-        "objcopy_data",
-        description="objcopy $in $out",
-        command=f"{cross}objcopy $in $out -O binary",
     )
 
     ninja.rule(
@@ -926,15 +932,18 @@ class Configure:
                             asset_deps=[f"mapfs/tex/{name}"],
                         )
                     elif name.endswith("_shape_built"):
-                        c_file_path = (bin_path.parent / name[:-6]).with_suffix(".c")
+                        # raw bin -> c-> o -> elf -> objcopy -> final bin file
                         raw_bin_path = self.resolve_asset_path(
                             f"assets/x/mapfs/geom/{name[:-6]}.bin"
                         )
-                        built_data_path = bin_path.parent / (name + "_data.bin")
+                        c_file_path = (bin_path.parent / name[:-6]).with_suffix(".c")
+                        o_path = bin_path.parent / (name + ".o")
+                        elf_path = bin_path.parent / (name + ".elf")
+                        bin_path = bin_path.parent / (name + "_data.bin")
 
                         build(c_file_path, [raw_bin_path], "shape")
                         build(
-                            bin_path,
+                            o_path,
                             [c_file_path],
                             "cc" if not modern_gcc else "cc_modern",
                             variables={
@@ -943,14 +952,8 @@ class Configure:
                                 "encoding": "CP932",  # similar to SHIFT-JIS, but includes backslash and tilde
                             },
                         )
-                        build(
-                            built_data_path,
-                            [bin_path],
-                            "objcopy_data",
-                        )
-
-                        bin_path = built_data_path
-
+                        build(elf_path, [o_path], "shape_ld")
+                        build(bin_path, [elf_path], "shape_objcopy")
                         compress = True
                     else:
                         compress = True
