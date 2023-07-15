@@ -933,13 +933,16 @@ class Configure:
                         )
                     elif name.endswith("_shape_built"):
                         # raw bin -> c-> o -> elf -> objcopy -> final bin file
+                        base_name = name[:-6]
                         raw_bin_path = self.resolve_asset_path(
-                            f"assets/x/mapfs/geom/{name[:-6]}.bin"
+                            f"assets/x/mapfs/geom/{base_name}.bin"
                         )
-                        c_file_path = (bin_path.parent / name[:-6]).with_suffix(".c")
-                        o_path = bin_path.parent / (name + ".o")
-                        elf_path = bin_path.parent / (name + ".elf")
-                        bin_path = bin_path.parent / (name + "_data.bin")
+                        c_file_path = (
+                            bin_path.parent / "geom" / base_name
+                        ).with_suffix(".c")
+                        o_path = bin_path.parent / "geom" / (base_name + ".o")
+                        elf_path = bin_path.parent / "geom" / (base_name + ".elf")
+                        bin_path = bin_path.parent / "geom" / (base_name + "_data.bin")
 
                         build(c_file_path, [raw_bin_path], "shape")
                         build(
@@ -955,6 +958,7 @@ class Configure:
                         build(elf_path, [o_path], "shape_ld")
                         build(bin_path, [elf_path], "shape_objcopy")
                         compress = True
+                        out_dir = out_dir / "geom"
                     else:
                         compress = True
                         bin_path = path
