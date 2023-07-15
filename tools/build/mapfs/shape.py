@@ -23,6 +23,8 @@ GFX_LOAD_MATRIX = 0xDA
 GFX_START_DL = 0xDE
 GFX_END_DL = 0xDF
 
+ALIGN_16 = "__attribute__ ((aligned (16))) "
+
 
 def read_ascii_string(bytes: bytearray, addr: int) -> str:
     start = addr - BASE_ADDR
@@ -167,7 +169,7 @@ class StringListSegment(Segment):
     def print(self, shape):
         align_attribute = ""
         if self.name == "ModelNames":
-            align_attribute = "__attribute__ ((aligned (16))) "
+            align_attribute = ALIGN_16
 
         shape.print(f"{align_attribute}char* {self.get_sym()}[] = {{")
 
@@ -356,12 +358,7 @@ class LightSetSegment(Segment):
         (a, b) = struct.unpack(">II", shape.file_bytes[pos : pos + 8])
         pos += 8
 
-        shape.print(f"s32 N({self.get_sym()[2:-1]}_pad_before)[] = {{")
-        shape.print(f"\t0x0, 0x0, 0x0, 0x0,")
-        shape.print("};")
-        shape.print("")
-
-        shape.print(f"s32 {self.get_sym()}[] = {{")
+        shape.print(f"{ALIGN_16}s32 {self.get_sym()}[] = {{")
         shape.print(f"\t{hex(a)}, {hex(b)},")
 
         for i in range(self.count):

@@ -110,17 +110,17 @@ def write_ninja_rules(
 
     Z64_DEBUG = ""
     if debug:
-        Z64_DEBUG = "-gS -R .data -R .note -R .eh_frame -R .gnu.attributes -R .comment -R .options"
+        Z64_DEBUG = " -gS -R .data -R .note -R .eh_frame -R .gnu.attributes -R .comment -R .options"
     ninja.rule(
         "z64",
         description="rom $out",
-        command=f"{cross}objcopy $in $out -O binary {Z64_DEBUG} && {BUILD_TOOLS}/rom/n64crc $out",
+        command=f"{cross}objcopy $in $out -O binary{Z64_DEBUG} && {BUILD_TOOLS}/rom/n64crc $out",
     )
 
     ninja.rule(
         "z64_ique",
         description="rom $out",
-        command=f"{cross}objcopy $in $out -O binary {Z64_DEBUG}",
+        command=f"{cross}objcopy $in $out -O binary{Z64_DEBUG}",
     )
 
     ninja.rule(
