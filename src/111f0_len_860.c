@@ -37,7 +37,7 @@ void state_step_enter_world(void) {
                 gGameStatusPtr->isBattle = FALSE;
                 gGameStatusPtr->disableScripts = FALSE;
 
-                if (gLoadedFromFileSelect == FALSE) {
+                if (!gLoadedFromFileSelect) {
                     load_map_by_IDs(gGameStatusPtr->areaID, gGameStatusPtr->mapID, LOAD_FROM_MAP);
                 } else {
                     load_map_by_IDs(gGameStatusPtr->areaID, gGameStatusPtr->mapID, LOAD_FROM_FILE_SELECT);
