@@ -91,7 +91,7 @@ extern s16 D_800A0932[1];
 extern s16 gMapTransitionFadeRate;
 extern s16 gMapTransitionState;
 extern s16 gMapTransitionStateTime;
-extern s16 gMapLoadFrom;
+extern s16 gLoadedFromFileSelect;
 extern s16 D_800A0954;
 extern s16 D_800A0956;
 extern s16 D_800A0958;
