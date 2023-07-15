@@ -6,12 +6,12 @@ void set_map_change_fade_rate(s16 fadeRate) {
 }
 
 void state_init_enter_demo(void) {
-    D_800A0948 = 0;
+    gLoadedFromFileSelect = FALSE;
     init_enter_world_shared();
 }
 
 void state_init_enter_world(void) {
-    D_800A0948 = 1;
+    gLoadedFromFileSelect = TRUE;
     set_map_transition_effect(TRANSITION_ENTER_WORLD);
     init_enter_world_shared();
 }
@@ -37,7 +37,7 @@ void state_step_enter_world(void) {
                 gGameStatusPtr->isBattle = FALSE;
                 gGameStatusPtr->disableScripts = FALSE;
 
-                if (D_800A0948 == 0) {
+                if (!gLoadedFromFileSelect) {
                     load_map_by_IDs(gGameStatusPtr->areaID, gGameStatusPtr->mapID, LOAD_FROM_MAP);
                 } else {
                     load_map_by_IDs(gGameStatusPtr->areaID, gGameStatusPtr->mapID, LOAD_FROM_FILE_SELECT);

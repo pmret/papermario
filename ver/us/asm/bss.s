@@ -347,7 +347,7 @@ dlabel gMapTransitionState
 dlabel gMapTransitionStateTime
 .space 2
 
-dlabel D_800A0948
+dlabel gLoadedFromFileSelect
 .space 4
 
 dlabel D_800A094C
