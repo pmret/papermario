@@ -385,14 +385,14 @@ class MatrixSegment(Segment):
         shape.print("\t.whole = {")
         for i in range(4):
             (a, b, c, d) = struct.unpack(">hhhh", shape.file_bytes[pos : pos + 8])
-            pos += 16
+            pos += 8
             shape.print(f"\t\t{{ {hex(a):4}, {hex(b):4}, {hex(c):4}, {hex(d):4} }},")
         shape.print("\t},")
 
         shape.print("\t.frac = {")
         for i in range(4):
             (a, b, c, d) = struct.unpack(">hhhh", shape.file_bytes[pos : pos + 8])
-            pos += 16
+            pos += 8
             shape.print(f"\t\t{{ {hex(a):4}, {hex(b):4}, {hex(c):4}, {hex(d):4} }},")
         shape.print("\t},")
 
@@ -652,6 +652,7 @@ class ShapeFile:
         self.print_prologue(sorted_segments.values())
 
         for addr, seg in sorted_segments.items():
+            self.print(f"// {hex(seg.addr - BASE_ADDR)}")
             seg.print(self)
             self.print("")
 
