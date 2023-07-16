@@ -470,20 +470,12 @@ s8 gRenderModelEnvR = 0;
 s8 gRenderModelEnvG = 0;
 s8 gRenderModelEnvB = 0;
 
-Matrix4s mdl_RDPIdentity = {
-    .whole = {
-        {1, 0, 0, 0},
-        {0, 1, 0, 0},
-        {0, 0, 1, 0},
-        {0, 0, 0, 1}
-    },
-    .frac = {
-        {0, 0, 0, 0},
-        {0, 0, 0, 0},
-        {0, 0, 0, 0},
-        {0, 0, 0, 0}
-    }
-};
+Mtx mdl_RDPIdentity = RDP_MATRIX(
+    1.000000, 0.000000, 0.000000, 0.000000,
+    0.000000, 1.000000, 0.000000, 0.000000,
+    0.000000, 0.000000, 1.000000, 0.000000,
+    0.000000, 0.000000, 0.000000, 1.000000
+);
 
 // The depth buffer contains values encoded in a custom 18-bit floating-point format.
 // There are 3 bits of exponent, 11 bits of mantissa, and 4 bits of "dz".

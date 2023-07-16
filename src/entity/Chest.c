@@ -8,7 +8,7 @@ extern EntityScript Entity_Chest_ScriptOpened;
 
 extern Gfx Entity_Chest_RenderBox[];
 extern Gfx Entity_Chest_RenderLid[];
-extern Mtx Entity_Chest_lidMtx;
+extern Mtx Entity_Chest_LidMtx;
 
 EvtScript Entity_Chest_AdjustCam_ISK = {
     EVT_THREAD
@@ -98,7 +98,7 @@ void entity_Chest_setupGfx(s32 entityIndex) {
     Gfx* gfx;
 
     guRotateF(sp58, data->lidAngle, 1.0f, 0.0f, 0.0f);
-    guMtxL2F(sp18, ENTITY_ADDR(entity, Mtx*, &Entity_Chest_lidMtx));
+    guMtxL2F(sp18, ENTITY_ADDR(entity, Mtx*, &Entity_Chest_LidMtx));
     guMtxCatF(sp58, sp18, sp18);
     guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
