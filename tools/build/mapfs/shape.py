@@ -4,7 +4,7 @@ import struct
 from abc import ABC
 from collections import deque
 from io import TextIOWrapper
-from typing import List, Dict, Optional, Tuple
+from typing import List, Dict, Optional
 
 BASE_ADDR = 0x80210000
 
@@ -87,11 +87,8 @@ class HeaderSegment(Segment):
             self.ptr_zone_names,
         ) = struct.unpack(">IIIII", shape.file_bytes[start : start + 20])
 
-        # 0x14 = size of ModelNode
-        root_bounds_space = self.ptr_model_names - (self.ptr_root_node + 0x14)
-        num_root_bounds = root_bounds_space // 0xC
         # note: do not push model root yet
-        shape.root_node = NodeSegment(self.ptr_root_node, "Node", num_root_bounds)
+        shape.root_node = NodeSegment(self.ptr_root_node, "Node")
 
         shape.vtx_table = shape.push(
             VertexTableSegment(self.ptr_vtx_table, "VertexTable")
@@ -146,6 +143,28 @@ class VertexTableSegment(Segment):
 
         shape.print("};")
 
+class VectorListSegment(Segment):
+    def __init__(self, addr: int, name: str):
+        super().__init__(addr, name)
+
+    def print(self, shape):
+        next = shape.get_segment_after(self)
+
+        pos = self.addr - BASE_ADDR
+        end = next.addr - BASE_ADDR
+        count = (end - pos) // 12
+
+        shape.print(f"Vec3f {self.get_sym()}[] = {{")
+
+        for _ in range(count):
+            (x, y, z) = struct.unpack(">fff", shape.file_bytes[pos : pos + 12])
+            pos += 12
+
+            shape.print(
+                f"\t{{ {x}, {y}, {z} }},"
+            )
+
+        shape.print("};")
 
 class StringListSegment(Segment):
     def __init__(self, addr: int, name: str):
@@ -180,10 +199,8 @@ class StringListSegment(Segment):
 
 
 class NodeSegment(Segment):
-    def __init__(self, addr: int, name: str, num_root_bounds: int = 0):
+    def __init__(self, addr: int, name: str):
         super().__init__(addr, name)
-        self.num_root_bounds = num_root_bounds
-        self.root_bounds: List[Tuple[float, float, float]] = []
 
     def scan(self, shape):
         pos = self.addr - BASE_ADDR
@@ -194,13 +211,6 @@ class NodeSegment(Segment):
             self.ptr_property_list,
             self.ptr_group_data,
         ) = struct.unpack(">IIIII", shape.file_bytes[pos : pos + 20])
-        pos += 20
-
-        for i in range(self.num_root_bounds):
-            self.root_bounds.append(
-                struct.unpack(">fff", shape.file_bytes[pos : pos + 12])
-            )
-            pos += 12
 
         self.model_name = shape.model_name_map[self.addr]
         shape.push(GroupDataSegment(self.ptr_group_data, "GroupData", self.model_name))
@@ -226,13 +236,6 @@ class NodeSegment(Segment):
         shape.print(f"\t.numProperties = {self.num_properties},")
         shape.print("};")
 
-        if self.num_root_bounds > 0:
-            shape.print("")
-            shape.print("Vec3f RootBounds[] = {")
-            for x, y, z in self.root_bounds:
-                shape.print(f"\t{{{x}, {y}, {z}}},")
-            shape.print("};")
-
 
 class NodeListSegment(Segment):
     def __init__(self, addr: int, name: str, model_name: str, num_children: int):
@@ -244,15 +247,14 @@ class NodeListSegment(Segment):
     def scan(self, shape):
         pos = self.addr - BASE_ADDR
 
-        for i in range(self.count):
+        for _ in range(self.count):
             (ptr_child,) = struct.unpack(">I", shape.file_bytes[pos : pos + 4])
             pos += 4
 
             self.children.append(ptr_child)
-            shape.push(NodeSegment(ptr_child, "Node", False))
+            shape.push(NodeSegment(ptr_child, "Node"))
 
     def print(self, shape):
-        pos = self.addr - BASE_ADDR
         shape.print(f"ModelNode* {self.get_sym()}[] = {{")
 
         for addr in self.children:
@@ -270,7 +272,7 @@ class PropertyListSegment(Segment):
         pos = self.addr - BASE_ADDR
         shape.print(f"ModelNodeProperty {self.get_sym()}[] = {{")
 
-        for idx in range(self.count):
+        for _ in range(self.count):
             (
                 key,
                 fmt,
@@ -354,19 +356,15 @@ class LightSetSegment(Segment):
         self.count = count
 
     def print(self, shape):
+        next = shape.get_segment_after(self)
         pos = self.addr - BASE_ADDR
-        (a, b) = struct.unpack(">II", shape.file_bytes[pos : pos + 8])
-        pos += 8
+        end = next.addr - BASE_ADDR
 
-        shape.print(f"{ALIGN_16}s32 {self.get_sym()}[] = {{")
-        shape.print(f"\t{hex(a)}, {hex(b)},")
-
-        for i in range(self.count):
-            (a, b, c) = struct.unpack(">III", shape.file_bytes[pos : pos + 12])
-            pos += 12
-            shape.print(f"\t{hex(a)}, {hex(b)}, {hex(c)},")
-
-        shape.print(f"\t0x0, 0x0, 0x0, 0x0, 0x0, 0x0,")
+        shape.print(f"s32 {self.get_sym()}[] = {{")
+        while pos < end:
+            (v,) = struct.unpack(">I", shape.file_bytes[pos : pos + 4])
+            pos += 4
+            shape.print(f"\t0x{v:08X},")
         shape.print("};")
 
 
@@ -377,7 +375,7 @@ class MatrixSegment(Segment):
 
     def print(self, shape):
         pos = self.addr - BASE_ADDR
-        shape.print(f"Matrix4s {self.get_sym()} = {{")
+        shape.print(f"{ALIGN_16}Matrix4s {self.get_sym()} = {{")
 
         shape.print("\t.whole = {")
         for i in range(4):
@@ -520,6 +518,17 @@ class DisplayListSegment(Segment):
 
         shape.print("};")
 
+        if self.model_name == "root":
+            next = shape.get_segment_after(self)
+            end = next.addr - BASE_ADDR
+
+            shape.print(f"\ns32 N(PostGfxPad)[] = {{")
+            while pos < end:
+                (v,) = struct.unpack(">I", shape.file_bytes[pos : pos + 4])
+                pos += 4
+                shape.print(f"\t0x{v:08X},")
+            shape.print("};")
+
 
 class ShapeFile:
     def __init__(self, map_name: str, file_bytes: bytes):
@@ -634,25 +643,35 @@ class ShapeFile:
 
         # second pass scans the model tree and subordinate data structures
         self.push(self.root_node)
+        self.push(VectorListSegment(self.root_node.addr + 0x14, "UnknownVectors"))
 
         while len(self.pending) > 0:
             segment = self.pending.pop()
             segment.scan(self)
 
-    def write_to_c(self, out_file):
-        self.out_file = out_file
         # create a sorted segment map
         segment_addrs = list(self.visited.keys())
         segment_addrs.sort()
-        sorted_segments = {i: self.visited[i] for i in segment_addrs}
+        self.sorted_segments = {i: self.visited[i] for i in segment_addrs}
 
-        self.print_prologue(sorted_segments.values())
+    def get_segment_after(self, seg: Segment) -> Optional[Segment]:
+        keys = list(self.sorted_segments.keys())
+        idx = keys.index(seg.addr)
+        if idx + 1 < len(keys):
+            next_addr = keys[idx + 1]
+            ret = self.sorted_segments[next_addr]
+        else:
+            ret = None
+        return ret
 
-        for addr, seg in sorted_segments.items():
+    def write_to_c(self, out_file):
+        self.out_file = out_file
+        self.print_prologue(self.sorted_segments.values())
+
+        for addr, seg in self.sorted_segments.items():
             self.print(f"// {hex(seg.addr - BASE_ADDR)}")
             seg.print(self)
             self.print("")
-
 
 def run(in_bin: Path, out: Path) -> None:
     map_name = "_".join(in_bin.stem.split("_")[:-1])
