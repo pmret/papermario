@@ -364,6 +364,7 @@ class LightSetSegment(Segment):
         pos = self.addr - BASE_ADDR
         end = next.addr - BASE_ADDR
 
+        shape.print(f"// num: {self.count}")
         shape.print(f"s32 {self.get_sym()}[] = {{")
         while pos < end:
             (v,) = struct.unpack(">I", shape.file_bytes[pos : pos + 4])
@@ -379,7 +380,7 @@ class MatrixSegment(Segment):
 
     def print(self, shape):
         pos = self.addr - BASE_ADDR
-        shape.print(f"{ALIGN_16}Matrix4s {self.get_sym()} = {{")
+        shape.print(f"Matrix4s {self.get_sym()} = {{")
 
         shape.print("\t.whole = {")
         for i in range(4):
@@ -606,7 +607,10 @@ class ShapeFile:
             child_start += 4
 
         # set name for this group node
-        self.model_name_map[node_addr] = names.pop()
+        if node_type == NODE_TYPE_ROOT:
+            self.model_name_map[node_addr] = "root"
+        else:
+            self.model_name_map[node_addr] = names.pop()
 
     def print_prologue(self, segments):
         assert self.root_node is not None
@@ -641,7 +645,6 @@ class ShapeFile:
 
         # traverse the model tree to create initial name map
         model_names = deque(self.model_names.list)
-        model_names.append("root")
         model_names.reverse()
         self.build_model_name_map(self.root_node.addr, model_names)
 
