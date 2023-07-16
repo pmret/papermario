@@ -290,6 +290,10 @@ class PropertyListSegment(Segment):
                     shape.print(
                         f'\t{{ .key = {hex(key)}, .dataType = {fmt}, .data = {{ .p = "{tex_name}" }}}},'
                     )
+            elif key == 0x5F:
+                 shape.print(
+                        f"\t{{ .key = {hex(key)}, .dataType = {fmt}, .data = {{ .s = {hex(value)} }}}},"
+                    )
             else:
                 if fmt == 0:  # int
                     shape.print(
@@ -305,10 +309,9 @@ class PropertyListSegment(Segment):
                     shape.print(
                         f'\t{{ .key = {hex(key)}, .dataType = {fmt}, .data = {{ .p = "{shape.get_symbol(value)}" }}}},'
                     )
-                else:  # ???
-                    shape.print(
-                        f"\t{{ .key = {hex(key)}, .dataType = {fmt}, .data = {{ .s = {hex(value)} }}}},"
-                    )
+                else:
+                    raise Exception(f"Invalid property: 0x{key:08X} 0x{fmt:08X} 0x{value:08X}")
+                   
 
         shape.print("};")
 
