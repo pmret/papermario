@@ -143,6 +143,7 @@ class VertexTableSegment(Segment):
 
         shape.print("};")
 
+
 class VectorListSegment(Segment):
     def __init__(self, addr: int, name: str):
         super().__init__(addr, name)
@@ -160,11 +161,10 @@ class VectorListSegment(Segment):
             (x, y, z) = struct.unpack(">fff", shape.file_bytes[pos : pos + 12])
             pos += 12
 
-            shape.print(
-                f"\t{{ {x}, {y}, {z} }},"
-            )
+            shape.print(f"\t{{ {x}, {y}, {z} }},")
 
         shape.print("};")
+
 
 class StringListSegment(Segment):
     def __init__(self, addr: int, name: str):
@@ -304,6 +304,10 @@ class PropertyListSegment(Segment):
                 elif fmt == 2:  # pointer
                     shape.print(
                         f'\t{{ .key = {hex(key)}, .dataType = {fmt}, .data = {{ .p = "{shape.get_symbol(value)}" }}}},'
+                    )
+                else:  # ???
+                    shape.print(
+                        f"\t{{ .key = {hex(key)}, .dataType = {fmt}, .data = {{ .s = {hex(value)} }}}},"
                     )
 
         shape.print("};")
@@ -672,6 +676,7 @@ class ShapeFile:
             self.print(f"// {hex(seg.addr - BASE_ADDR)}")
             seg.print(self)
             self.print("")
+
 
 def run(in_bin: Path, out: Path) -> None:
     map_name = "_".join(in_bin.stem.split("_")[:-1])
