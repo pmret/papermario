@@ -643,6 +643,9 @@ class ShapeFile:
             segment = self.pending.pop()
             segment.scan(self)
 
+        assert self.model_names is not None
+        assert self.root_node is not None
+
         # traverse the model tree to create initial name map
         model_names = deque(self.model_names.list)
         model_names.reverse()

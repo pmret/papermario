@@ -942,7 +942,7 @@ class Configure:
                         ).with_suffix(".c")
                         o_path = bin_path.parent / "geom" / (base_name + ".o")
                         elf_path = bin_path.parent / "geom" / (base_name + ".elf")
-                        bin_path = bin_path.parent / "geom" / (base_name + "_data.bin")
+                        bin_path = bin_path.parent / "geom" / (base_name + ".bin")
 
                         build(c_file_path, [raw_bin_path], "shape")
                         build(
