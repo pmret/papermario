@@ -194,7 +194,7 @@ class SBN:
         for mseq in self.init.mseq_entries:
             struct.pack_into(">H", data, current_mseq_offset, mseq)
             current_mseq_offset += 2
-        struct.pack_into(">H", data, currMseqOffset, 0xffff)
+        struct.pack_into(">H", data, current_mseq_offset, 0xffff)
 
         return bytes(data)
 
@@ -484,11 +484,11 @@ class SBNFile:
     # The file ID of the SBN file - needed to guarantee unique filenames. the filename in the header can't be used because it's not unique
     ident: int
     def decode(self, data: bytes, ident: int) -> int:
-        self.signature, = struct.unpack(">4s", data[0x00:0x04])
-        self.size, = struct.unpack(">i", data[0x04:0x08])
-        self.name, = struct.unpack(">4s", data[0x08:0x0C])
+        self.signature, self.size, self.name = struct.unpack_from(">4si4s", data)
         self.data = data[:self.size]
         self.ident = ident
+        
+        self.fakesize = self.size 
 
         return self.size
 
@@ -504,7 +504,9 @@ class SBNFile:
 
         ident = int(filename.split("_")[0],16)
 
-        assert self.decode(data, ident) == len(data), "File size mismatch"
+        size = self.decode(data, ident)
+
+        assert size == len(data), "File size mismatch"
 
     def file_name(self) -> str:
         prefix = f"{self.ident:02X}_"
