@@ -23,9 +23,14 @@ BUILD_TOOLS = Path("tools/build")
 YAY0_COMPRESS_TOOL = f"{BUILD_TOOLS}/yay0/Yay0compress"
 CRC_TOOL = f"{BUILD_TOOLS}/rom/n64crc"
 
+PIGMENT = "pigment64"
+PIGMENT_REQ_VERSION = "0.2.2"
+
 
 def exec_shell(command: List[str]) -> str:
-    ret = subprocess.run(command, stdout=subprocess.PIPE, text=True)
+    ret = subprocess.run(
+        command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
+    )
     return ret.stdout
 
 
@@ -179,6 +184,12 @@ def write_ninja_rules(
         "img",
         description="img($img_type) $in",
         command=f"$python {BUILD_TOOLS}/img/build.py $img_type $in $out $img_flags",
+    )
+
+    ninja.rule(
+        "pigment",
+        description="img($img_type) $in",
+        command=f"{PIGMENT} $img_flags $in $img_type -o $out",
     )
 
     ninja.rule(
@@ -620,7 +631,7 @@ class Configure:
                             build(
                                 bin_path,
                                 src_paths,
-                                "img",
+                                "pigment",
                                 variables={
                                     "img_type": seg.type,
                                     "img_flags": flags,
@@ -660,7 +671,7 @@ class Configure:
                             build(
                                 bin_path,
                                 src_paths,
-                                "img",
+                                "pigment",
                                 variables={
                                     "img_type": seg.type,
                                     "img_flags": "",
@@ -700,7 +711,7 @@ class Configure:
                 build(
                     bin_path,
                     entry.src_paths,
-                    "img",
+                    "pigment",
                     variables={
                         "img_type": seg.type,
                         "img_flags": flags,
@@ -719,7 +730,7 @@ class Configure:
                 build(
                     bin_path,
                     entry.src_paths,
-                    "img",
+                    "pigment",
                     variables={
                         "img_type": seg.type,
                         "img_flags": "",
@@ -839,7 +850,7 @@ class Configure:
                         build(
                             logotype_path,
                             [src_dir / "title/logotype.png"],
-                            "img",
+                            "pigment",
                             variables={
                                 "img_type": "rgba32",
                                 "img_flags": "",
@@ -848,7 +859,7 @@ class Configure:
                         build(
                             press_start_path,
                             [src_dir / "title/press_start.png"],
-                            "img",
+                            "pigment",
                             variables={
                                 "img_type": "ia8",
                                 "img_flags": "",
@@ -859,7 +870,7 @@ class Configure:
                             build(
                                 copyright_path,
                                 [src_dir / "title/copyright.png"],
-                                "img",
+                                "pigment",
                                 variables={
                                     "img_type": "ci4",
                                     "img_flags": "",
@@ -868,7 +879,7 @@ class Configure:
                             build(
                                 copyright_pal_path,
                                 [src_dir / "title/copyright.png"],
-                                "img",
+                                "pigment",
                                 variables={
                                     "img_type": "palette",
                                     "img_flags": "",
@@ -884,7 +895,7 @@ class Configure:
                             build(
                                 copyright_path,
                                 [src_dir / "title/copyright.png"],
-                                "img",
+                                "pigment",
                                 variables={
                                     "img_type": "ia8",
                                     "img_flags": "",
@@ -975,7 +986,7 @@ class Configure:
                     build(
                         out_path,
                         [src_path],
-                        "img",
+                        "pigment",
                         variables={
                             "img_type": "ci4",
                             "img_flags": "",
@@ -999,7 +1010,7 @@ class Configure:
                     build(
                         out_path,
                         [src_path],
-                        "img",
+                        "pigment",
                         variables={
                             "img_type": "palette",
                             "img_flags": "",
@@ -1180,6 +1191,22 @@ if __name__ == "__main__":
             )
             print(f"    ./configure --cpp {gcc_cpps[0]}")
             exit(1)
+
+    try:
+        version = exec_shell([PIGMENT, "--version"]).split(" ")[1].strip()
+
+        if version < PIGMENT_REQ_VERSION:
+            print(
+                f"error: {PIGMENT} version {PIGMENT_REQ_VERSION} or newer is required, system version is {version}\n"
+            )
+            exit(1)
+    except FileNotFoundError:
+        print(f"error: {PIGMENT} is not installed\n")
+        print(
+            "To build and install it, obtain cargo:\n\tcurl https://sh.rustup.rs -sSf | sh"
+        )
+        print(f"and then run:\n\tcargo install {PIGMENT}")
+        exit(1)
 
     # default version behaviour is to only do those that exist
     if len(args.version) > 0:
