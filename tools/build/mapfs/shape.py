@@ -105,12 +105,14 @@ class HeaderSegment(Segment):
 
     def print(self, shape):
         shape.print(f"ShapeFileHeader {self.get_sym()} = {{")
-        shape.print(f"\t.root = &{shape.get_symbol(self.ptr_root_node)},")
-        shape.print(f"\t.vertexTable = {shape.get_symbol(self.ptr_vtx_table)},")
-        shape.print(f"\t.modelNames = {shape.get_symbol(self.ptr_model_names)},")
-        shape.print(f"\t.colliderNames = {shape.get_symbol(self.ptr_collider_names)},")
+        shape.print(f"    .root = &{shape.get_symbol(self.ptr_root_node)},")
+        shape.print(f"    .vertexTable = {shape.get_symbol(self.ptr_vtx_table)},")
+        shape.print(f"    .modelNames = {shape.get_symbol(self.ptr_model_names)},")
+        shape.print(
+            f"    .colliderNames = {shape.get_symbol(self.ptr_collider_names)},"
+        )
         if self.ptr_zone_names != 0:
-            shape.print(f"\t.zoneNames = {shape.get_symbol(self.ptr_zone_names)},")
+            shape.print(f"    .zoneNames = {shape.get_symbol(self.ptr_zone_names)},")
         shape.print("};")
 
 
@@ -138,7 +140,7 @@ class VertexTableSegment(Segment):
             pos += 16
 
             shape.print(
-                f"\t{{{{{x:4}, {y:4}, {z:4} }}, {flag}, {{ {u:6}, {v:6} }}, {{ {r:3}, {g:3}, {b:3}, {a:3} }}}},"
+                f"    {{{{ {x:4}, {y:4}, {z:4} }}, {flag}, {{ {u:6}, {v:6} }}, {{ {r:3}, {g:3}, {b:3}, {a:3} }}}},"
             )
 
         shape.print("};")
@@ -161,7 +163,7 @@ class VectorListSegment(Segment):
             (x, y, z) = struct.unpack(">fff", shape.file_bytes[pos : pos + 12])
             pos += 12
 
-            shape.print(f"\t{{ {x}, {y}, {z} }},")
+            shape.print(f"    {{ {x}, {y}, {z} }},")
 
         shape.print("};")
 
@@ -193,8 +195,8 @@ class StringListSegment(Segment):
         shape.print(f"{align_attribute}char* {self.get_sym()}[] = {{")
 
         for name in self.list:
-            shape.print(f'\t"{name}",')
-        shape.print('\t"db",')
+            shape.print(f'    "{name}",')
+        shape.print('    "db",')
         shape.print("};")
 
 
@@ -228,12 +230,12 @@ class NodeSegment(Segment):
 
     def print(self, shape):
         shape.print(f"ModelNode {self.get_sym()} = {{")
-        shape.print(f"\t.type = {get_shape_type_name(self.node_type)},")
+        shape.print(f"    .type = {get_shape_type_name(self.node_type)},")
         if self.ptr_group_data != 0:
-            shape.print(f"\t.groupData = &{shape.get_symbol(self.ptr_group_data)},")
-        shape.print(f"\t.displayData = &{shape.get_symbol(self.ptr_display_data)},")
-        shape.print(f"\t.propertyList = {shape.get_symbol(self.ptr_property_list)},")
-        shape.print(f"\t.numProperties = {self.num_properties},")
+            shape.print(f"    .groupData = &{shape.get_symbol(self.ptr_group_data)},")
+        shape.print(f"    .displayData = &{shape.get_symbol(self.ptr_display_data)},")
+        shape.print(f"    .propertyList = {shape.get_symbol(self.ptr_property_list)},")
+        shape.print(f"    .numProperties = {self.num_properties},")
         shape.print("};")
 
 
@@ -258,7 +260,7 @@ class NodeListSegment(Segment):
         shape.print(f"ModelNode* {self.get_sym()}[] = {{")
 
         for addr in self.children:
-            shape.print(f"\t&{shape.get_symbol(addr)},")
+            shape.print(f"    &{shape.get_symbol(addr)},")
         shape.print("};")
 
 
@@ -283,35 +285,36 @@ class PropertyListSegment(Segment):
             if key == 0x5E:
                 if value == 0:
                     shape.print(
-                        f"\t{{ .key = {hex(key)}, .dataType = {fmt}, .data = {{ .p = NULL }}}},"
+                        f"    {{ .key = {hex(key)}, .dataType = {fmt}, .data = {{ .p = NULL }}}},"
                     )
                 else:
                     tex_name = read_ascii_string(shape.file_bytes, value)
                     shape.print(
-                        f'\t{{ .key = {hex(key)}, .dataType = {fmt}, .data = {{ .p = "{tex_name}" }}}},'
+                        f'    {{ .key = {hex(key)}, .dataType = {fmt}, .data = {{ .p = "{tex_name}" }}}},'
                     )
             elif key == 0x5F:
-                 shape.print(
-                        f"\t{{ .key = {hex(key)}, .dataType = {fmt}, .data = {{ .s = {hex(value)} }}}},"
-                    )
+                shape.print(
+                    f"    {{ .key = {hex(key)}, .dataType = {fmt}, .data = {{ .s = {hex(value)} }}}},"
+                )
             else:
                 if fmt == 0:  # int
                     shape.print(
-                        f"\t{{ .key = {hex(key)}, .dataType = {fmt}, .data = {{ .s = {hex(value)} }}}},"
+                        f"    {{ .key = {hex(key)}, .dataType = {fmt}, .data = {{ .s = {hex(value)} }}}},"
                     )
                 elif fmt == 1:  # float
                     temp = struct.pack(">I", value)
                     (f,) = struct.unpack(">f", temp)
                     shape.print(
-                        f"\t{{ .key = {hex(key)}, .dataType = {fmt}, .data = {{ .f = {f} }}}},"
+                        f"    {{ .key = {hex(key)}, .dataType = {fmt}, .data = {{ .f = {f} }}}},"
                     )
                 elif fmt == 2:  # pointer
                     shape.print(
-                        f'\t{{ .key = {hex(key)}, .dataType = {fmt}, .data = {{ .p = "{shape.get_symbol(value)}" }}}},'
+                        f'    {{ .key = {hex(key)}, .dataType = {fmt}, .data = {{ .p = "{shape.get_symbol(value)}" }}}},'
                     )
                 else:
-                    raise Exception(f"Invalid property: 0x{key:08X} 0x{fmt:08X} 0x{value:08X}")
-                   
+                    raise Exception(
+                        f"Invalid property: 0x{key:08X} 0x{fmt:08X} 0x{value:08X}"
+                    )
 
         shape.print("};")
 
@@ -345,14 +348,14 @@ class GroupDataSegment(Segment):
         shape.print(f"ModelGroupData {self.get_sym()} = {{")
         if self.ptr_transform_mtx != 0:
             shape.print(
-                f"\t.transformMatrix = (Mtx*) &{shape.get_symbol(self.ptr_transform_mtx)},"
+                f"    .transformMatrix = (Mtx*) &{shape.get_symbol(self.ptr_transform_mtx)},"
             )
         shape.print(
-            f"\t.lightingGroup = (Lightsn*) &{shape.get_symbol(self.ptr_lights)},"
+            f"    .lightingGroup = (Lightsn*) &{shape.get_symbol(self.ptr_lights)},"
         )
-        shape.print(f"\t.numLights = {self.num_lights},")
-        shape.print(f"\t.childList = {shape.get_symbol(self.ptr_children)},")
-        shape.print(f"\t.numChildren = {self.num_children},")
+        shape.print(f"    .numLights = {self.num_lights},")
+        shape.print(f"    .childList = {shape.get_symbol(self.ptr_children)},")
+        shape.print(f"    .numChildren = {self.num_children},")
         shape.print("};")
 
 
@@ -372,7 +375,7 @@ class LightSetSegment(Segment):
         while pos < end:
             (v,) = struct.unpack(">I", shape.file_bytes[pos : pos + 4])
             pos += 4
-            shape.print(f"\t0x{v:08X},")
+            shape.print(f"    0x{v:08X},")
         shape.print("};")
 
 
@@ -385,19 +388,23 @@ class MatrixSegment(Segment):
         pos = self.addr - BASE_ADDR
         shape.print(f"Matrix4s {self.get_sym()} = {{")
 
-        shape.print("\t.whole = {")
+        shape.print("    .whole = {")
         for i in range(4):
             (a, b, c, d) = struct.unpack(">hhhh", shape.file_bytes[pos : pos + 8])
             pos += 8
-            shape.print(f"\t\t{{ {hex(a):4}, {hex(b):4}, {hex(c):4}, {hex(d):4} }},")
-        shape.print("\t},")
+            shape.print(
+                f"        {{ {hex(a):4}, {hex(b):4}, {hex(c):4}, {hex(d):4} }},"
+            )
+        shape.print("    },")
 
-        shape.print("\t.frac = {")
+        shape.print("    .frac = {")
         for i in range(4):
             (a, b, c, d) = struct.unpack(">hhhh", shape.file_bytes[pos : pos + 8])
             pos += 8
-            shape.print(f"\t\t{{ {hex(a):4}, {hex(b):4}, {hex(c):4}, {hex(d):4} }},")
-        shape.print("\t},")
+            shape.print(
+                f"        {{ {hex(a):4}, {hex(b):4}, {hex(c):4}, {hex(d):4} }},"
+            )
+        shape.print("    },")
 
         shape.print("};")
 
@@ -423,7 +430,7 @@ class DisplayDataSegment(Segment):
     def print(self, shape):
         start = self.addr - BASE_ADDR
         shape.print(f"ModelDisplayData {self.get_sym()} = {{")
-        shape.print(f"\t.displayList = {shape.get_symbol(self.ptr_display_list)},")
+        shape.print(f"    .displayList = {shape.get_symbol(self.ptr_display_list)},")
         shape.print("};")
 
 
@@ -486,13 +493,13 @@ class DisplayListSegment(Segment):
                 buf_pos = end - num
                 index = (w2 - shape.vtx_table.addr) // 0x10
                 shape.print(
-                    f"\tgsSPVertex(&{shape.vtx_table.get_sym()}[{index}], {num}, {buf_pos}),"
+                    f"    gsSPVertex(&{shape.vtx_table.get_sym()}[{index}], {num}, {buf_pos}),"
                 )
             elif op == GFX_DRAW_TRI:
                 i = (w1 & 0x00FF0000) >> 16
                 j = (w1 & 0x0000FF00) >> 8
                 k = w1 & 0x000000FF
-                shape.print(f"\tgsSP1Triangle({i // 2}, {j // 2}, {k // 2}, 0),")
+                shape.print(f"    gsSP1Triangle({i // 2}, {j // 2}, {k // 2}, 0),")
             elif op == GFX_DRAW_TRIS:
                 a = (w1 & 0x00FF0000) >> 16
                 b = (w1 & 0x0000FF00) >> 8
@@ -501,27 +508,27 @@ class DisplayListSegment(Segment):
                 e = (w2 & 0x0000FF00) >> 8
                 f = w2 & 0x000000FF
                 shape.print(
-                    f"\tgsSP2Triangles({a // 2}, {b // 2}, {c // 2}, 0, {d // 2}, {e // 2}, {f // 2}, 0),"
+                    f"    gsSP2Triangles({a // 2}, {b // 2}, {c // 2}, 0, {d // 2}, {e // 2}, {f // 2}, 0),"
                 )
             elif op == GFX_RDP_PIPE_SYNC:
-                shape.print("\tgsDPPipeSync(),")
+                shape.print("    gsDPPipeSync(),")
             elif op == GFX_POP_MATRIX:
-                shape.print("\tgsSPPopMatrix(G_MTX_MODELVIEW),")
+                shape.print("    gsSPPopMatrix(G_MTX_MODELVIEW),")
             elif op == GFX_GEOMETRYMODE:
                 if w1 == 0xD9FFFFFF:
                     flags = self.get_geometry_flags(w2)
-                    shape.print(f"\tgsSPSetGeometryMode({flags}),")
+                    shape.print(f"    gsSPSetGeometryMode({flags}),")
                 else:
                     flags = self.get_geometry_flags(~(w1 | 0xFF000000))
-                    shape.print(f"\tgsSPClearGeometryMode({flags}),")
+                    shape.print(f"    gsSPClearGeometryMode({flags}),")
             elif op == GFX_LOAD_MATRIX:
                 shape.print(
-                    f"\tgsSPMatrix(&{shape.get_symbol(w2)}, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),"
+                    f"    gsSPMatrix(&{shape.get_symbol(w2)}, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),"
                 )
             elif op == GFX_START_DL:
-                shape.print(f"\tgsSPDisplayList({shape.get_symbol(w2)}),")
+                shape.print(f"    gsSPDisplayList({shape.get_symbol(w2)}),")
             elif op == GFX_END_DL:
-                shape.print("\tgsSPEndDisplayList(),")
+                shape.print("    gsSPEndDisplayList(),")
                 break
 
         shape.print("};")
@@ -534,7 +541,7 @@ class DisplayListSegment(Segment):
             while pos < end:
                 (v,) = struct.unpack(">I", shape.file_bytes[pos : pos + 4])
                 pos += 4
-                shape.print(f"\t0x{v:08X},")
+                shape.print(f"    0x{v:08X},")
             shape.print("};")
 
 
@@ -700,7 +707,6 @@ def run(in_bin: Path, out: Path) -> None:
 
 
 if __name__ == "__main__":
-    # Use argparse to take in and out as args
     parser = argparse.ArgumentParser()
     parser.add_argument("in_bin", type=Path, help="input binary file")
     parser.add_argument("out_c", type=Path, help="output text file")

@@ -182,6 +182,12 @@ def write_ninja_rules(
     )
 
     ninja.rule(
+        "cp",
+        description="cp $in $out",
+        command=f"cp $in $out",
+    )
+
+    ninja.rule(
         "as",
         description="as $in",
         command=f"{cross}as -EB -march=vr4300 -mtune=vr4300 -Iinclude $in -o $out",
@@ -447,6 +453,7 @@ class Configure:
         skip_outputs: Set[str],
         non_matching: bool,
         modern_gcc: bool,
+        c_maps: bool = False,
     ):
         import segtypes
         import segtypes.common.c
@@ -932,31 +939,36 @@ class Configure:
                             asset_deps=[f"mapfs/tex/{name}"],
                         )
                     elif name.endswith("_shape_built"):
-                        # raw bin -> c-> o -> elf -> objcopy -> final bin file
                         base_name = name[:-6]
                         raw_bin_path = self.resolve_asset_path(
                             f"assets/x/mapfs/geom/{base_name}.bin"
                         )
-                        c_file_path = (
-                            bin_path.parent / "geom" / base_name
-                        ).with_suffix(".c")
-                        o_path = bin_path.parent / "geom" / (base_name + ".o")
-                        elf_path = bin_path.parent / "geom" / (base_name + ".elf")
                         bin_path = bin_path.parent / "geom" / (base_name + ".bin")
 
-                        build(c_file_path, [raw_bin_path], "shape")
-                        build(
-                            o_path,
-                            [c_file_path],
-                            "cc" if not modern_gcc else "cc_modern",
-                            variables={
-                                "cflags": "",
-                                "cppflags": f"-DVERSION_{self.version.upper()}",
-                                "encoding": "CP932",  # similar to SHIFT-JIS, but includes backslash and tilde
-                            },
-                        )
-                        build(elf_path, [o_path], "shape_ld")
-                        build(bin_path, [elf_path], "shape_objcopy")
+                        if c_maps:
+                            # raw bin -> c -> o -> elf -> objcopy -> final bin file
+                            c_file_path = (
+                                bin_path.parent / "geom" / base_name
+                            ).with_suffix(".c")
+                            o_path = bin_path.parent / "geom" / (base_name + ".o")
+                            elf_path = bin_path.parent / "geom" / (base_name + ".elf")
+
+                            build(c_file_path, [raw_bin_path], "shape")
+                            build(
+                                o_path,
+                                [c_file_path],
+                                "cc" if not modern_gcc else "cc_modern",
+                                variables={
+                                    "cflags": "",
+                                    "cppflags": f"-DVERSION_{self.version.upper()}",
+                                    "encoding": "CP932",  # similar to SHIFT-JIS, but includes backslash and tilde
+                                },
+                            )
+                            build(elf_path, [o_path], "shape_ld")
+                            build(bin_path, [elf_path], "shape_objcopy")
+                        else:
+                            build(bin_path, [raw_bin_path], "cp")
+
                         compress = True
                         out_dir = out_dir / "geom"
                     else:
@@ -1163,6 +1175,11 @@ if __name__ == "__main__":
         help="Use modern GCC instead of the original compiler",
     )
     parser.add_argument("--ccache", action="store_true", help="Use ccache")
+    parser.add_argument(
+        "--c-maps",
+        action="store_true",
+        help="Convert map binaries to C as part of the build process",
+    )
     args = parser.parse_args()
 
     exec_shell(["make", "-C", str(ROOT / args.splat)])
@@ -1280,7 +1297,9 @@ if __name__ == "__main__":
         configure.split(
             not args.no_split_assets, args.split_code, args.shift, args.debug
         )
-        configure.write_ninja(ninja, skip_files, non_matching, args.modern_gcc)
+        configure.write_ninja(
+            ninja, skip_files, non_matching, args.modern_gcc, args.c_maps
+        )
 
         all_rom_oks.append(str(configure.rom_ok_path()))
 
