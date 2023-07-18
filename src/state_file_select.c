@@ -323,7 +323,7 @@ void state_step_exit_language_select(void) {
                         set_background_size(296, 200, 12, 20);
                     }
 
-                    calculate_model_sizes();
+                    mdl_calculate_model_sizes();
                     npc_reload_all();
                     status_bar_respond_to_changes();
                     set_time_freeze_mode(TIME_FREEZE_PARTIAL);

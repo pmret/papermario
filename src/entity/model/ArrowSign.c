@@ -28,18 +28,12 @@ Gfx Entity_ArrowSign_LoadTexture[] = {
     gsSPEndDisplayList(),
 };
 
-Mtx Entity_ArrowSign_mtxSign = {
-    .m = {
-        { 0x00010000, 0x00000000,
-          0x00000001, 0x00000000 },
-        { 0x00000000, 0x00010000,
-          0xFFFF0014, 0x00010001 },
-        { 0x00000000, 0x00000000,
-          0x00000000, 0x00000000 },
-        { 0x00000000, 0x00000000,
-          0xD1B40000, 0x00000000 }
-    }
-};
+Mtx Entity_ArrowSign_mtxSign = RDP_MATRIX(
+    1.000000, 0.000000, 0.000000, -0.180848,
+    0.000000, 1.000000, 0.000000, 20.000000,
+    0.000000, 0.000000, 1.000000,  1.000000,
+    0.000000, 0.000000, 0.000000,  1.000000
+);
 
 Gfx Entity_ArrowSign_RenderPole[] = {
     gsDPPipeSync(),

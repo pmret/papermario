@@ -111,7 +111,7 @@ API_CALLABLE(N(UpdateChandelier)) {
         }
 
         model = chandelier->models[0];
-        copy_matrix(model->transformMatrix, chandelier->transformMtx);
+        copy_matrix(model->userTransformMtx, chandelier->transformMtx);
 
         lastDropDistance = 0.0f;
         chandelier->dropDistance = 0.0f;
@@ -247,17 +247,17 @@ API_CALLABLE(N(UpdateChandelier)) {
     }
 
     script->varTable[1] = cabinetPos;
-    guTranslateF(model->transformMatrix, 0.0f, chandelier->dropDistance - 300.0f, 0.0f);
+    guTranslateF(model->userTransformMtx, 0.0f, chandelier->dropDistance - 300.0f, 0.0f);
     guRotateF(tempMtx, chandelier->swingAngle, 0.0f, 0.0f, 1.0f);
-    guMtxCatF(model->transformMatrix, tempMtx, model->transformMatrix);
+    guMtxCatF(model->userTransformMtx, tempMtx, model->userTransformMtx);
     guTranslateF(tempMtx, 0.0f, 300.0f, 0.0f);
-    guMtxCatF(model->transformMatrix, tempMtx, model->transformMatrix);
-    guMtxCatF(chandelier->transformMtx, model->transformMatrix, model->transformMatrix);
-    model->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX | MODEL_FLAG_HAS_TRANSFORM_APPLIED;
+    guMtxCatF(model->userTransformMtx, tempMtx, model->userTransformMtx);
+    guMtxCatF(chandelier->transformMtx, model->userTransformMtx, model->userTransformMtx);
+    model->flags |= MODEL_FLAG_MATRIX_DIRTY | MODEL_FLAG_HAS_TRANSFORM;
 
     for (i = 1; i < ARRAY_COUNT(chandelier->models); i++) {
-        copy_matrix(model->transformMatrix, chandelier->models[i]->transformMatrix);
-        chandelier->models[i]->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX | MODEL_FLAG_HAS_TRANSFORM_APPLIED;
+        copy_matrix(model->userTransformMtx, chandelier->models[i]->userTransformMtx);
+        chandelier->models[i]->flags |= MODEL_FLAG_MATRIX_DIRTY | MODEL_FLAG_HAS_TRANSFORM;
     }
 
     if (chandelier->flags & CHANDELIER_FLAG_TETHER_PLAYER) {

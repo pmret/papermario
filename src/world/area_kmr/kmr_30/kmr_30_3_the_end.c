@@ -197,7 +197,7 @@ EvtScript N(EVS_Scene_TheEnd) = {
     EVT_CALL(SetModelCustomGfx, MODEL_e, CUSTOM_GFX_1, -1)
     EVT_CALL(SetModelCustomGfx, MODEL_d, CUSTOM_GFX_1, -1)
     EVT_CALL(SetModelCustomGfx, MODEL_n, CUSTOM_GFX_1, -1)
-    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_1, EVT_PTR(N(gfx_build_the_end)), 0)
+    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_1, EVT_PTR(N(gfx_build_the_end)), NULL)
     EVT_CALL(MakeLerp, 0, 255, 90, EASING_LINEAR)
     EVT_LOOP(0)
         EVT_CALL(UpdateLerp)

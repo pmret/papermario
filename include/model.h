@@ -46,18 +46,18 @@ typedef struct ModelNode {
 typedef struct Model {
     /* 0x00 */ u16 flags;
     /* 0x02 */ u16 modelID;
-    /* 0x04 */ Mtx* currentMatrix;
+    /* 0x04 */ Mtx* bakedMtx; // pointer to stack-allocated copy of matrix supplied by the shape file for this model
     /* 0x08 */ ModelNode* modelNode;
     /* 0x0C */ ModelGroupData* groupData;
-    /* 0x10 */ Mtx* currentSpecialMatrix;
+    /* 0x10 */ Mtx* finalMtx; // the matrix actually used while building the display list
     /* 0x14 */ char unk_14[4];
-    /* 0x18 */ Mtx specialMatrix;
-    /* 0x58 */ Matrix4f transformMatrix;
+    /* 0x18 */ Mtx savedMtx;
+    /* 0x58 */ Matrix4f userTransformMtx; // provided for user code to apply an additional multiplicative transformation
     /* 0x98 */ Vec3f center;
     /* 0xA4 */ u8 texPannerID;
     /* 0xA5 */ u8 customGfxIndex;
     /* 0xA6 */ s8 renderMode;
-    /* 0xA7 */ u8 matrixMode;
+    /* 0xA7 */ u8 matrixFreshness;
     /* 0xA8 */ u8 textureID;
     /* 0xA9 */ s8 textureVariation;
     /* 0xAA */ char unk_AA[6];
@@ -66,16 +66,16 @@ typedef struct Model {
 typedef struct ModelTransformGroup {
     /* 0x00 */ u16 flags;
     /* 0x02 */ u16 groupModelID;
-    /* 0x04 */ Mtx* matrixRDP_N;
-    /* 0x08 */ ModelNode* modelNode;
-    /* 0x0C */ Mtx* transformMtx;
-    /* 0x10 */ Mtx matrixA;
-    /* 0x50 */ Matrix4f matrixB;
+    /* 0x04 */ Mtx* bakedMtx; // would point to copy of matrix from shape file, but seems to always be NULL.
+    /* 0x08 */ ModelNode* baseModelNode;
+    /* 0x0C */ Mtx* finalMtx; // the matrix actually used while building the display list
+    /* 0x10 */ Mtx savedMtx;
+    /* 0x50 */ Matrix4f userTransformMtx; // provided for user code to apply an additional multiplicative transformation
     /* 0x90 */ Vec3f center;
     /* 0x9C */ u8 minChildModelIndex;
     /* 0x9D */ u8 maxChildModelIndex;
     /* 0x9E */ u8 renderMode;
-    /* 0x9F */ u8 matrixMode;
+    /* 0x9F */ u8 matrixFreshness;
 } ModelTransformGroup; // size = 0xA0
 
 typedef Model* ModelList[MAX_MODELS];
@@ -126,28 +126,33 @@ typedef Gfx* ModelCustomGfxList[32];
 typedef ModelCustomGfxBuilderFunc ModelCustomGfxBuilderList[32];
 
 typedef enum ModelPropertyKeys {
-    MODEL_PROP_KEY_RENDER_MODE = 0x5C,
-    MODEL_PROP_KEY_CAMERA_DATA = 0x5D,
-    MODEL_PROP_KEY_TEXTURE_NAME = 0x5E,
-    MODEL_PROP_KEY_SPECIAL = 0x5F,
-    MODEL_PROP_KEY_GROUP_TYPE = 0x60,
-    MODEL_PROP_KEY_BOUNDING_BOX = 0x61,
-    MODEL_PROP_KEY_62 = 0x62,
+    MODEL_PROP_KEY_RENDER_MODE      = 0x5C,
+    MODEL_PROP_KEY_CAMERA_DATA      = 0x5D,
+    MODEL_PROP_KEY_TEXTURE_NAME     = 0x5E,
+    MODEL_PROP_KEY_SPECIAL          = 0x5F,
+    MODEL_PROP_KEY_GROUP_INFO       = 0x60,
+    MODEL_PROP_KEY_BOUNDING_BOX     = 0x61,
+    MODEL_PROP_KEY_62               = 0x62,
 } ModelPropertyKeys;
 
 typedef enum ShapeTypes {
-    SHAPE_TYPE_MODEL = 2,
-    SHAPE_TYPE_GROUP = 5,
-    SHAPE_TYPE_ROOT = 7,
-    SHAPE_TYPE_SPECIAL_GROUP = 10,
+    SHAPE_TYPE_MODEL                = 2,
+    SHAPE_TYPE_GROUP                = 5,
+    SHAPE_TYPE_ROOT                 = 7,
+    SHAPE_TYPE_SPECIAL_GROUP        = 10,
 } ShapeTypes;
 
+typedef enum GroupTypes {
+    GROUP_TYPE_0                    = 0,
+    GROUP_TYPE_1                    = 1,
+} GroupTypes;
+
 typedef enum ExtraTileTypes {
-    EXTRA_TILE_NONE = 0,
-    EXTRA_TILE_MIPMAPS = 1,
-    EXTRA_TILE_AUX_SAME_AS_MAIN = 2,
-    EXTRA_TILE_AUX_INDEPENDENT = 3,
-    EXTRA_TILE_4 = 4,
+    EXTRA_TILE_NONE                 = 0,
+    EXTRA_TILE_MIPMAPS              = 1,
+    EXTRA_TILE_AUX_SAME_AS_MAIN     = 2,
+    EXTRA_TILE_AUX_INDEPENDENT      = 3,
+    EXTRA_TILE_4                    = 4,
 } ExtraTileTypes;
 
 #define SHAPE_SIZE_LIMIT 0x8000

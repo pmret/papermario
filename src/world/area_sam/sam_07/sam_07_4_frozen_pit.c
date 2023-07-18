@@ -63,7 +63,7 @@ API_CALLABLE(N(AnimateIceShattering)) {
 
             for (j = 0; j < 4; j++) {
                 for (k = 0; k < 4; k++) {
-                    it->transformMatrix[j][k] = model->transformMatrix[j][k];
+                    it->transformMatrix[j][k] = model->userTransformMtx[j][k];
                 }
             }
         }
@@ -87,11 +87,11 @@ API_CALLABLE(N(AnimateIceShattering)) {
 
         for (j = 0; j < 4; j++) {
             for (k = 0; k < 4; k++) {
-                model->transformMatrix[j][k] = it->transformMatrix[j][k];
+                model->userTransformMtx[j][k] = it->transformMatrix[j][k];
             }
         }
 
-        model->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX | MODEL_FLAG_HAS_TRANSFORM_APPLIED;
+        model->flags |= MODEL_FLAG_MATRIX_DIRTY | MODEL_FLAG_HAS_TRANSFORM;
         guTranslateF(mtxTransform, it->pos.x - it->initialPos.x, it->pos.y - it->initialPos.y, it->pos.z - it->initialPos.z);
         it->rot.x += it->rotVel.x;
         it->rot.y += it->rotVel.y;
@@ -105,7 +105,7 @@ API_CALLABLE(N(AnimateIceShattering)) {
         guMtxCatF(mtxRotZ, mtxRotX, mtxRotX);
         guMtxCatF(mtxRotX, mtxRotY, mtxRotY);
         guMtxCatF(mtxRotY, mtxTransform, mtxTransform);
-        guMtxCatF(mtxTransform, model->transformMatrix, model->transformMatrix);
+        guMtxCatF(mtxTransform, model->userTransformMtx, model->userTransformMtx);
     }
 
     if ((u32) script->functionTemp[1] >= ARRAY_COUNT(N(IceShardModels))) {

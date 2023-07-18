@@ -94,7 +94,7 @@ void N(gfx_build_club_64)(s32 index) {
 
 EvtScript N(EVS_AnimateClub64Sign) = {
     EVT_CALL(MakeLocalVertexCopy, VTX_COPY_3, MODEL_o187, TRUE)
-    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_3, EVT_PTR(N(gfx_build_club_64)), 0)
+    EVT_CALL(SetCustomGfxBuilders, CUSTOM_GFX_3, EVT_PTR(N(gfx_build_club_64)), NULL)
     EVT_CALL(SetModelCustomGfx, MODEL_o187, CUSTOM_GFX_3, -1)
     EVT_RETURN
     EVT_END

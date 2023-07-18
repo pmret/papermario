@@ -164,11 +164,11 @@ API_CALLABLE(N(func_802412AC_865DEC)) {
     Model* model = get_model_from_list_index(modelIndex);
     f32 x, y, z;
 
-    if (model->flags & MODEL_FLAG_HAS_TRANSFORM_APPLIED) {
+    if (model->flags & MODEL_FLAG_HAS_TRANSFORM) {
         // get model translation from transform matrix
-        x = model->transformMatrix[3][0];
-        y = model->transformMatrix[3][1];
-        z = model->transformMatrix[3][2];
+        x = model->userTransformMtx[3][0];
+        y = model->userTransformMtx[3][1];
+        z = model->userTransformMtx[3][2];
     } else {
         z = 0.0f;
         y = 0.0f;

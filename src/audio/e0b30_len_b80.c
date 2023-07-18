@@ -121,7 +121,7 @@ void bgm_update_music_settings(void) {
         case 2:
             flags = music->flags;
             music->flags &= ~flag4;
-            if (flags & 1) {
+            if (flags & MUSIC_SETTINGS_FLAG_1) {
                 if (au_song_is_playing(music->songName) == AU_RESULT_OK) {
                     music->flags &= ~MUSIC_SETTINGS_FLAG_1;
                     music->state = 3;

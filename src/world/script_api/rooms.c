@@ -257,7 +257,7 @@ API_CALLABLE(RoomVisibilityToggleImpl) {
 
     if (isInitialCall) {
         if (script->varTable[0] == ROOM_VISIBILITY_SHOW) {
-            func_8011B950(script->varTable[15], -1, FOG_MODE_1, 1);
+            func_8011B950(script->varTable[15], CUSTOM_GFX_NONE, FOG_MODE_1, 1);
         }
         script->functionTemp[1] = 0;
     }
@@ -281,7 +281,7 @@ API_CALLABLE(RoomVisibilityToggleImpl) {
     if (script->functionTemp[1] >= 255) {
         if (script->varTable[0] == ROOM_VISIBILITY_HIDE) {
             // ROOM_DATA_MODEL_ID
-            func_8011B950(script->varTable[15], -1, FOG_MODE_0, 1);
+            func_8011B950(script->varTable[15], CUSTOM_GFX_NONE, FOG_MODE_0, 1);
         }
         return ApiStatus_DONE2;
     } else {

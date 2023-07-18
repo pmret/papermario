@@ -3538,6 +3538,71 @@ enum WindowPriority {
     WINDOW_PRIORITY_64              = 64,
 };
 
+enum RenderModeIndex {
+    RENDER_MODE_IDX_00 = 0x00,
+    RENDER_MODE_IDX_01 = 0x01,
+    RENDER_MODE_IDX_02 = 0x02,
+    RENDER_MODE_IDX_03 = 0x03,
+    RENDER_MODE_IDX_04 = 0x04,
+    RENDER_MODE_IDX_05 = 0x05,
+    RENDER_MODE_IDX_06 = 0x06,
+    RENDER_MODE_IDX_07 = 0x07,
+    RENDER_MODE_IDX_08 = 0x08,
+    RENDER_MODE_IDX_09 = 0x09,
+    RENDER_MODE_IDX_0A = 0x0A,
+    RENDER_MODE_IDX_0B = 0x0B,
+    RENDER_MODE_IDX_0C = 0x0C,
+    RENDER_MODE_IDX_0D = 0x0D,
+    RENDER_MODE_IDX_0E = 0x0E,
+    RENDER_MODE_IDX_0F = 0x0F,
+    RENDER_MODE_IDX_10 = 0x10,
+    RENDER_MODE_IDX_11 = 0x11,
+    RENDER_MODE_IDX_12 = 0x12,
+    RENDER_MODE_IDX_13 = 0x13,
+    RENDER_MODE_IDX_14 = 0x14,
+    RENDER_MODE_IDX_15 = 0x15,
+    RENDER_MODE_IDX_16 = 0x16,
+    RENDER_MODE_IDX_17 = 0x17,
+    RENDER_MODE_IDX_18 = 0x18,
+    RENDER_MODE_IDX_19 = 0x19,
+    RENDER_MODE_IDX_1A = 0x1A,
+    RENDER_MODE_IDX_1B = 0x1B,
+    RENDER_MODE_IDX_1C = 0x1C,
+    RENDER_MODE_IDX_1D = 0x1D,
+    RENDER_MODE_IDX_1E = 0x1E,
+    RENDER_MODE_IDX_1F = 0x1F,
+    RENDER_MODE_IDX_20 = 0x20,
+    RENDER_MODE_IDX_21 = 0x21,
+    RENDER_MODE_IDX_22 = 0x22,
+    RENDER_MODE_IDX_23 = 0x23,
+    RENDER_MODE_IDX_24 = 0x24,
+    RENDER_MODE_IDX_25 = 0x25,
+    RENDER_MODE_IDX_26 = 0x26,
+    RENDER_MODE_IDX_27 = 0x27,
+    RENDER_MODE_IDX_28 = 0x28,
+    RENDER_MODE_IDX_29 = 0x29,
+    RENDER_MODE_IDX_2A = 0x2A,
+    RENDER_MODE_IDX_2B = 0x2B,
+    RENDER_MODE_IDX_2C = 0x2C,
+    RENDER_MODE_IDX_2D = 0x2D,
+    RENDER_MODE_IDX_2E = 0x2E,
+    RENDER_MODE_IDX_2F = 0x2F,
+    RENDER_MODE_IDX_30 = 0x30,
+    RENDER_MODE_IDX_31 = 0x31,
+    RENDER_MODE_IDX_32 = 0x32,
+    RENDER_MODE_IDX_33 = 0x33,
+    RENDER_MODE_IDX_34 = 0x34,
+    RENDER_MODE_IDX_35 = 0x35,
+    RENDER_MODE_IDX_36 = 0x36,
+    RENDER_MODE_IDX_37 = 0x37,
+    RENDER_MODE_IDX_38 = 0x38,
+    RENDER_MODE_IDX_39 = 0x39,
+    RENDER_MODE_IDX_3A = 0x3A,
+    RENDER_MODE_IDX_3B = 0x3B,
+    RENDER_MODE_IDX_3C = 0x3C,
+    RENDER_MODE_IDX_3D = 0x3D,
+};
+
 /// not really
 enum RenderMode {
     RENDER_MODE_SURF_SOLID_AA_ZB_LAYER0          = 0x00000000,
@@ -4786,25 +4851,37 @@ enum GlobalOverrides {
     GLOBAL_OVERRIDES_CANT_PICK_UP_ITEMS                         = 0x00200000,
 };
 
-#define MODEL_FLAGS_MASK_FFF0  (MODEL_FLAG_USES_CUSTOM_GFX | MODEL_FLAG_FLAG_20 | MODEL_FLAG_FLAG_40 | MODEL_FLAG_HAS_LOCAL_VERTEX_COPY | MODEL_FLAG_USE_CAMERA_UNK_MATRIX | MODEL_FLAG_FLAG_200 | MODEL_FLAG_HAS_TRANSFORM_APPLIED | MODEL_FLAG_HAS_TEX_PANNER | MODEL_FLAG_USES_TRANSFORM_MATRIX | MODEL_FLAG_FLAG_2000 | MODEL_FLAG_FLAG_4000 | MODEL_FLAG_FLAG_8000)
+#define MODEL_FLAGS_MASK_FFF0  (\
+      MODEL_FLAG_USES_CUSTOM_GFX \
+    | MODEL_FLAG_20 \
+    | MODEL_FLAG_40 \
+    | MODEL_FLAG_HAS_LOCAL_VERTEX_COPY \
+    | MODEL_FLAG_USE_CAMERA_UNK_MATRIX \
+    | MODEL_FLAG_DO_BOUNDS_CULLING \
+    | MODEL_FLAG_HAS_TRANSFORM \
+    | MODEL_FLAG_HAS_TEX_PANNER \
+    | MODEL_FLAG_MATRIX_DIRTY \
+    | MODEL_FLAG_IGNORE_MATRIX \
+    | MODEL_FLAG_4000 \
+    | MODEL_FLAG_8000)
 
 enum ModelFlags {
-    MODEL_FLAG_FLAG_1                  = 0x0001,
-    MODEL_FLAG_HIDDEN                  = 0x0002,
-    MODEL_FLAG_FLAG_4                  = 0x0004,
-    MODEL_FLAG_TRANSFORM_GROUP_MEMBER  = 0x0008,
-    MODEL_FLAG_USES_CUSTOM_GFX         = 0x0010,
-    MODEL_FLAG_FLAG_20                 = 0x0020,
-    MODEL_FLAG_FLAG_40                 = 0x0040,
-    MODEL_FLAG_HAS_LOCAL_VERTEX_COPY   = 0x0080,
-    MODEL_FLAG_USE_CAMERA_UNK_MATRIX   = 0x0100,
-    MODEL_FLAG_FLAG_200                = 0x0200,
-    MODEL_FLAG_HAS_TRANSFORM_APPLIED   = 0x0400,
-    MODEL_FLAG_HAS_TEX_PANNER          = 0x0800,
-    MODEL_FLAG_USES_TRANSFORM_MATRIX   = 0x1000,
-    MODEL_FLAG_FLAG_2000               = 0x2000,
-    MODEL_FLAG_FLAG_4000               = 0x4000,
-    MODEL_FLAG_FLAG_8000               = 0x8000,
+    MODEL_FLAG_VALID                    = 0x0001,
+    MODEL_FLAG_HIDDEN                   = 0x0002,
+    MODEL_FLAG_INACTIVE                 = 0x0004,
+    MODEL_FLAG_TRANSFORM_GROUP_MEMBER   = 0x0008,
+    MODEL_FLAG_USES_CUSTOM_GFX          = 0x0010,
+    MODEL_FLAG_20                       = 0x0020,
+    MODEL_FLAG_40                       = 0x0040,
+    MODEL_FLAG_HAS_LOCAL_VERTEX_COPY    = 0x0080,
+    MODEL_FLAG_USE_CAMERA_UNK_MATRIX    = 0x0100,
+    MODEL_FLAG_DO_BOUNDS_CULLING        = 0x0200,
+    MODEL_FLAG_HAS_TRANSFORM            = 0x0400,
+    MODEL_FLAG_HAS_TEX_PANNER           = 0x0800,
+    MODEL_FLAG_MATRIX_DIRTY             = 0x1000, // transform matrix changed and combined matrix needs to be recalculated
+    MODEL_FLAG_IGNORE_MATRIX            = 0x2000, // set until dirty combined matrix has been recalculated
+    MODEL_FLAG_4000                     = 0x4000,
+    MODEL_FLAG_8000                     = 0x8000,
 };
 
 enum ModelGroupVisibility {
@@ -5081,10 +5158,9 @@ enum MusicSettingsFlags {
     MUSIC_SETTINGS_FLAG_20                = 0x00000020,
 };
 
-// the lower byte of Collider::flags
+// the lower byte of ColliderFlags
 enum SurfaceType {
     SURFACE_TYPE_DEFAULT            = 0,
-    /*
     SURFACE_TYPE_WATER              = 1,
     SURFACE_TYPE_SPIKES             = 2,
     SURFACE_TYPE_LAVA               = 3,
@@ -5094,7 +5170,7 @@ enum SurfaceType {
     SURFACE_TYPE_CLOUD              = 7, ///< used with clouds in flo_19 and flo_21
     SURFACE_TYPE_SNOW               = 8,
     SURFACE_TYPE_HEDGES             = 9, ///< used within hedge maze in flo_11
-    */
+    SURFACE_TYPE_INVALID            = -1,
 };
 
 typedef enum SurfaceInteractMode {
@@ -5103,30 +5179,15 @@ typedef enum SurfaceInteractMode {
     SURFACE_INTERACT_LAND       = 2,
 } SurfaceInteractMode;
 
-//TODO -- temporarily combined with SurfaceType for map data dumper
 enum ColliderFlags {
-    COLLIDER_FLAGS_UPPER_MASK        = 0x7FFFFE00, // map data dumper needs this to be first
-    COLLIDER_FLAGS_SURFACE_TYPE_MASK = 0x000000FF,
-
-//    SURFACE_TYPE_DEFAULT            = 0,
-    SURFACE_TYPE_HEDGES             = 9, ///< used within hedge maze in flo_11
-    SURFACE_TYPE_SNOW               = 8,
-    SURFACE_TYPE_CLOUD              = 7, ///< used with clouds in flo_19 and flo_21
-    SURFACE_TYPE_FLOWERS            = 6,
-    SURFACE_TYPE_SLIDE              = 5,
-    SURFACE_TYPE_DOCK_WALL          = 4,
-    SURFACE_TYPE_LAVA               = 3,
-    SURFACE_TYPE_SPIKES             = 2,
-    SURFACE_TYPE_WATER              = 1,
-    SURFACE_TYPE_INVALID            = -1,
-
-    COLLIDER_FLAG_SAFE_FLOOR        = 0x00000100,
-    COLLIDER_FLAG_IGNORE_SHELL      = 0x00008000,
-    COLLIDER_FLAG_IGNORE_PLAYER     = 0x00010000,
-    COLLIDER_FLAG_80000             = 0x00080000, // test version of DOCK walls?
-    COLLIDER_FLAG_HAS_MODEL_PARENT  = 0x80000000
+    COLLIDER_FLAGS_UPPER_MASK           = 0x7FFFFE00, // map data dumper needs this to be first
+    COLLIDER_FLAGS_SURFACE_TYPE_MASK    = 0x000000FF,
+    COLLIDER_FLAG_SAFE_FLOOR            = 0x00000100,
+    COLLIDER_FLAG_IGNORE_SHELL          = 0x00008000,
+    COLLIDER_FLAG_IGNORE_PLAYER         = 0x00010000,
+    COLLIDER_FLAG_80000                 = 0x00080000, // test version of DOCK walls?
+    COLLIDER_FLAG_HAS_MODEL_PARENT      = 0x80000000
 };
-
 
 //TODO reversed for map dumper with 0 separated
 enum ColliderFlagsModifyMode {
@@ -5145,41 +5206,6 @@ enum CollisionChannels {
     COLLISION_IGNORE_ENTITIES       = 0x00040000,
     COLLISION_CHANNEL_80000         = 0x00080000,
     COLLISION_ONLY_ENTITIES         = 0x00100000,
-};
-
-enum CameraInitDataFlags {
-    CAMERA_INIT_DATA_FLAG_1                 = 0x00000001,
-    CAMERA_INIT_DATA_FLAG_2                 = 0x00000002,
-    CAMERA_INIT_DATA_FLAG_4                 = 0x00000004,
-    CAMERA_INIT_DATA_FLAG_8                 = 0x00000008,
-    CAMERA_INIT_DATA_FLAG_10                = 0x00000010,
-    CAMERA_INIT_DATA_FLAG_20                = 0x00000020,
-    CAMERA_INIT_DATA_FLAG_40                = 0x00000040,
-    CAMERA_INIT_DATA_FLAG_80                = 0x00000080,
-    CAMERA_INIT_DATA_FLAG_100               = 0x00000100,
-    CAMERA_INIT_DATA_FLAG_200               = 0x00000200,
-    CAMERA_INIT_DATA_FLAG_400               = 0x00000400,
-    CAMERA_INIT_DATA_FLAG_800               = 0x00000800,
-    CAMERA_INIT_DATA_FLAG_1000              = 0x00001000,
-    CAMERA_INIT_DATA_FLAG_2000              = 0x00002000,
-    CAMERA_INIT_DATA_FLAG_4000              = 0x00004000,
-    CAMERA_INIT_DATA_FLAG_8000              = 0x00008000,
-    CAMERA_INIT_DATA_FLAG_10000             = 0x00010000,
-    CAMERA_INIT_DATA_FLAG_20000             = 0x00020000,
-    CAMERA_INIT_DATA_FLAG_40000             = 0x00040000,
-    CAMERA_INIT_DATA_FLAG_80000             = 0x00080000,
-    CAMERA_INIT_DATA_FLAG_100000            = 0x00100000,
-    CAMERA_INIT_DATA_FLAG_200000            = 0x00200000,
-    CAMERA_INIT_DATA_FLAG_400000            = 0x00400000,
-    CAMERA_INIT_DATA_FLAG_800000            = 0x00800000,
-    CAMERA_INIT_DATA_FLAG_1000000           = 0x01000000,
-    CAMERA_INIT_DATA_FLAG_2000000           = 0x02000000,
-    CAMERA_INIT_DATA_FLAG_4000000           = 0x04000000,
-    CAMERA_INIT_DATA_FLAG_8000000           = 0x08000000,
-    CAMERA_INIT_DATA_FLAG_10000000          = 0x10000000,
-    CAMERA_INIT_DATA_FLAG_20000000          = 0x20000000,
-    CAMERA_INIT_DATA_FLAG_40000000          = 0x40000000,
-    CAMERA_INIT_DATA_FLAG_80000000          = 0x80000000,
 };
 
 enum CameraFlags {
@@ -5238,7 +5264,7 @@ enum CameraControlType {
     // Uses: A/B as 2D points
     // Yaw is defined by the line segment AB
     // flag 0 = free forward movement (follow player)
-	// flag 1 = lock forward movement (must intersect B)
+    // flag 1 = lock forward movement (must intersect B)
     CAM_CONTROL_FIXED_ORIENTATION   = 0,
 
     // Camera faces toward or away from a point with the player in the center of the frame.
@@ -5420,39 +5446,8 @@ enum ModelAnimatorFlags {
 };
 
 enum ShopFlags {
-    SHOP_FLAG_0                 = 0x00000000,
     SHOP_FLAG_1                 = 0x00000001,
-    SHOP_FLAG_2                 = 0x00000002,
-    SHOP_FLAG_4                 = 0x00000004,
     SHOP_FLAG_8                 = 0x00000008,
-    SHOP_FLAG_10                = 0x00000010,
-    SHOP_FLAG_20                = 0x00000020,
-    SHOP_FLAG_40                = 0x00000040,
-    SHOP_FLAG_80                = 0x00000080,
-    SHOP_FLAG_100               = 0x00000100,
-    SHOP_FLAG_200               = 0x00000200,
-    SHOP_FLAG_400               = 0x00000400,
-    SHOP_FLAG_800               = 0x00000800,
-    SHOP_FLAG_1000              = 0x00001000,
-    SHOP_FLAG_2000              = 0x00002000,
-    SHOP_FLAG_4000              = 0x00004000,
-    SHOP_FLAG_8000              = 0x00008000,
-    SHOP_FLAG_10000             = 0x00010000,
-    SHOP_FLAG_20000             = 0x00020000,
-    SHOP_FLAG_40000             = 0x00040000,
-    SHOP_FLAG_80000             = 0x00080000,
-    SHOP_FLAG_100000            = 0x00100000,
-    SHOP_FLAG_200000            = 0x00200000,
-    SHOP_FLAG_400000            = 0x00400000,
-    SHOP_FLAG_800000            = 0x00800000,
-    SHOP_FLAG_1000000           = 0x01000000,
-    SHOP_FLAG_2000000           = 0x02000000,
-    SHOP_FLAG_4000000           = 0x04000000,
-    SHOP_FLAG_8000000           = 0x08000000,
-    SHOP_FLAG_10000000          = 0x10000000,
-    SHOP_FLAG_20000000          = 0x20000000,
-    SHOP_FLAG_40000000          = 0x40000000,
-    SHOP_FLAG_80000000          = 0x80000000,
 };
 
 enum {
@@ -5614,38 +5609,12 @@ enum TempSetZoneEnabledFlags {
 };
 
 enum ModelTransformGroupFlags {
-    MODEL_TRANSFORM_GROUP_FLAG_1                 = 0x00000001,
-    MODEL_TRANSFORM_GROUP_FLAG_2                 = 0x00000002,
-    MODEL_TRANSFORM_GROUP_FLAG_4                 = 0x00000004,
-    MODEL_TRANSFORM_GROUP_FLAG_8                 = 0x00000008,
-    MODEL_TRANSFORM_GROUP_FLAG_10                = 0x00000010,
-    MODEL_TRANSFORM_GROUP_FLAG_20                = 0x00000020,
-    MODEL_TRANSFORM_GROUP_FLAG_40                = 0x00000040,
-    MODEL_TRANSFORM_GROUP_FLAG_80                = 0x00000080,
-    MODEL_TRANSFORM_GROUP_FLAG_100               = 0x00000100,
-    MODEL_TRANSFORM_GROUP_FLAG_200               = 0x00000200,
-    MODEL_TRANSFORM_GROUP_FLAG_400               = 0x00000400,
-    MODEL_TRANSFORM_GROUP_FLAG_800               = 0x00000800,
-    MODEL_TRANSFORM_GROUP_FLAG_1000              = 0x00001000,
-    MODEL_TRANSFORM_GROUP_FLAG_2000              = 0x00002000,
-    MODEL_TRANSFORM_GROUP_FLAG_4000              = 0x00004000,
-    MODEL_TRANSFORM_GROUP_FLAG_8000              = 0x00008000,
-    MODEL_TRANSFORM_GROUP_FLAG_10000             = 0x00010000,
-    MODEL_TRANSFORM_GROUP_FLAG_20000             = 0x00020000,
-    MODEL_TRANSFORM_GROUP_FLAG_40000             = 0x00040000,
-    MODEL_TRANSFORM_GROUP_FLAG_80000             = 0x00080000,
-    MODEL_TRANSFORM_GROUP_FLAG_100000            = 0x00100000,
-    MODEL_TRANSFORM_GROUP_FLAG_200000            = 0x00200000,
-    MODEL_TRANSFORM_GROUP_FLAG_400000            = 0x00400000,
-    MODEL_TRANSFORM_GROUP_FLAG_800000            = 0x00800000,
-    MODEL_TRANSFORM_GROUP_FLAG_1000000           = 0x01000000,
-    MODEL_TRANSFORM_GROUP_FLAG_2000000           = 0x02000000,
-    MODEL_TRANSFORM_GROUP_FLAG_4000000           = 0x04000000,
-    MODEL_TRANSFORM_GROUP_FLAG_8000000           = 0x08000000,
-    MODEL_TRANSFORM_GROUP_FLAG_10000000          = 0x10000000,
-    MODEL_TRANSFORM_GROUP_FLAG_20000000          = 0x20000000,
-    MODEL_TRANSFORM_GROUP_FLAG_40000000          = 0x40000000,
-    MODEL_TRANSFORM_GROUP_FLAG_80000000          = 0x80000000,
+    TRANSFORM_GROUP_FLAG_VALID                  = 0x00000001,
+    TRANSFORM_GROUP_FLAG_HIDDEN                 = 0x00000002, // update, but do not render
+    TRANSFORM_GROUP_FLAG_INACTIVE               = 0x00000004,
+    TRANSFORM_GROUP_FLAG_HAS_TRANSFORM          = 0x00000400,
+    TRANSFORM_GROUP_FLAG_MATRIX_DIRTY           = 0x00001000,
+    TRANSFORM_GROUP_FLAG_IGNORE_MATRIX          = 0x00002000, // set until dirty matrix has been recalculated
 };
 
 enum NpcDropFlags {
@@ -5660,7 +5629,7 @@ enum NpcDropFlags {
 };
 
 enum ImgFXStateFlags {
-    IMGFX_FLAG_IN_USE               = 0x00000001,
+    IMGFX_FLAG_VALID                = 0x00000001,
     IMGFX_FLAG_G_CULL_BACK          = 0x00000002,
     IMGFX_FLAG_G_CULL_FRONT         = 0x00000004,
     IMGFX_FLAG_8                    = 0x00000008,

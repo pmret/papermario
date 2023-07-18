@@ -1478,7 +1478,7 @@ EvtScript N(EVS_SetupMinigame) = {
     EVT_CALL(EnableNpcShadow, NPC_Fuzzy_01, FALSE)
     EVT_CALL(EnableNpcShadow, NPC_Fuzzy_02, FALSE)
     EVT_CALL(EnableNpcShadow, NPC_Fuzzy_03, FALSE)
-    EVT_CALL(SetModelFlags, MODEL_o177, MODEL_FLAG_FLAG_200, FALSE)
+    EVT_CALL(SetModelFlags, MODEL_o177, MODEL_FLAG_DO_BOUNDS_CULLING, FALSE)
     EVT_IF_GE(GB_StoryProgress, STORY_CH1_FUZZY_THIEF_HID_IN_TREE)
         EVT_CALL(N(GetTreeHidingSpotPos), LVar4, LVar0, LVar1, LVar2)
         EVT_CALL(SetNpcPos, NPC_BossFuzzy, LVar0, LVar1, LVar2)
