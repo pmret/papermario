@@ -16,6 +16,7 @@ pipeline {
                 sh 'curl -L "https://github.com/decompals/mips-gcc-2.7.2/releases/download/main/gcc-2.7.2-linux.tar.gz" | tar zx -C tools/build/cc/gcc2.7.2'
                 sh 'curl -L "https://github.com/decompals/mips-binutils-2.6/releases/download/main/binutils-2.6-linux.tar.gz" | tar zx -C tools/build/cc/gcc2.7.2'
                 sh 'pip install -U -r requirements.txt'
+                sh 'cargo install pigment64'
                 sh './configure'
             }
         }

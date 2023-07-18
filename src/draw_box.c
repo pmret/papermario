@@ -322,26 +322,12 @@ Vp gBoxViewport = {
 
 #include "vtx/drawbox1.vtx.inc.c"
 
-/*
-| 0.0  0.0  0.0  0.0|
-| 0.0  0.0  0.0  0.0|
-| 0.0  0.0  0.0  0.0|
-|-6.0  0.0  0.0  0.0|
-*/
-Mtx gBoxMatrix = {
-    .m = {
-        // integer portion
-        { 0x00000000, 0x00000000,
-          0x00000000, 0x00000000 },
-        { 0x00000000, 0x00000000,
-          0xFFFA0000, 0x00000000 },
-        // fractional portion
-        { 0x00000000, 0x00000000,
-          0x00000000, 0x00000000 },
-        { 0x00000000, 0x00000000,
-          0x00000000, 0x00000000 }
-    }
-};
+Mtx gBoxMatrix = RDP_MATRIX(
+    0.000000, 0.000000, 0.000000, -6.000000,
+    0.000000, 0.000000, 0.000000,  0.000000,
+    0.000000, 0.000000, 0.000000,  0.000000,
+    0.000000, 0.000000, 0.000000,  0.000000
+);
 
 s32 draw_box(s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s32 width, s32 height, u8 opacity,
               u8 darkening, f32 scaleX, f32 scaleY, f32 rotX, f32 rotY, f32 rotZ, void (*fpDrawContents)(s32, s32, s32, s32, s32, s32, s32),

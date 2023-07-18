@@ -50,13 +50,17 @@ def parse_palette(data):
     return palette
 
 
-def add_file_ext(name: str) -> str:
+def add_file_ext(name: str, linker: bool = False) -> str:
     if name.startswith("party_"):
         return "party/" + name + ".png"
-    elif name.endswith("_hit") or name.endswith("_shape"):
-        return "geom/" + name + ".bin"  # TODO: xml
+    elif name.endswith("_hit"):
+        return "geom/" + name + ".bin"
+    elif name.endswith("_shape"):
+        if linker:
+            name += "_built"
+        return "geom/" + name + ".bin"
     elif name.endswith("_tex"):
-        return "tex/" + name + ".bin"  # TODO: texture archive
+        return "tex/" + name + ".bin"
     elif name.endswith("_bg"):
         return "bg/" + name + ".png"
     else:
@@ -228,7 +232,7 @@ class N64SegPm_map_data(N64Segment):
         return [
             LinkerEntry(
                 self,
-                [fs_dir / add_file_ext(name) for name in self.files],
+                [fs_dir / add_file_ext(name, linker=True) for name in self.files],
                 fs_dir.with_suffix(".dat"),
                 ".data",
             ),

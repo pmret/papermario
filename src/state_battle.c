@@ -196,7 +196,7 @@ void state_step_end_battle(void) {
                 }
 
                 mdl_load_all_textures(mapSettings->modelTreeRoot, get_asset_offset(wMapTexName, &sizeTemp), sizeTemp);
-                calculate_model_sizes();
+                mdl_calculate_model_sizes();
                 npc_reload_all();
 
                 playerStatus->animFlags = D_800A0904;

@@ -24,20 +24,12 @@ s16 D_800741A0 = 0;
 s16 D_800741A2 = 0;
 s32 D_800741A4 = 0;
 
-Matrix4s MasterIdentityMtx = {
-    .whole = {
-        {1, 0, 0, 0},
-        {0, 1, 0, 0},
-        {0, 0, 1, 0},
-        {0, 0, 0, 1}
-    },
-    .frac = {
-        {0, 0, 0, 0},
-        {0, 0, 0, 0},
-        {0, 0, 0, 0},
-        {0, 0, 0, 0}
-    }
-};
+Mtx MasterIdentityMtx = RDP_MATRIX(
+    1.000000, 0.000000, 0.000000, 0.000000,
+    0.000000, 1.000000, 0.000000, 0.000000,
+    0.000000, 0.000000, 1.000000, 0.000000,
+    0.000000, 0.000000, 0.000000, 1.000000
+);
 
 s32 D_800741E8[2] = {0, 0}; // padding?
 u16 gMatrixListPos = 0;
@@ -81,7 +73,7 @@ void step_game_loop(void) {
         }
     }
 
-    func_8011BAE8();
+    mdl_reset_transform_flags();
     npc_iter_no_op();
     update_workers();
     update_triggers();

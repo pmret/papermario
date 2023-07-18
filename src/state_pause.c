@@ -200,7 +200,7 @@ void state_step_unpause(void) {
                         }
 
                         gGameStatusPtr->backgroundDarkness = gGameStatusPtr->savedBackgroundDarkness;
-                        calculate_model_sizes();
+                        mdl_calculate_model_sizes();
                         npc_reload_all();
                         set_windows_visible(WINDOW_GROUP_ALL);
                         status_bar_respond_to_changes();

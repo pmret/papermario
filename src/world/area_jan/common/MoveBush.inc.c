@@ -16,12 +16,12 @@ ApiStatus N(MoveBush_AnimateShearing)(Evt* script) {
     Model* mdl = get_model_from_list_index(modelIndex);
     Matrix4f mtx;
 
-    if (!(mdl->flags & MODEL_FLAG_HAS_TRANSFORM_APPLIED)) {
-        N(MoveBush_apply_shear_mtx)(mdl->transformMatrix, f);
-        mdl->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX | MODEL_FLAG_HAS_TRANSFORM_APPLIED;
+    if (!(mdl->flags & MODEL_FLAG_HAS_TRANSFORM)) {
+        N(MoveBush_apply_shear_mtx)(mdl->userTransformMtx, f);
+        mdl->flags |= MODEL_FLAG_MATRIX_DIRTY | MODEL_FLAG_HAS_TRANSFORM;
     } else {
         N(MoveBush_apply_shear_mtx)(mtx, f);
-        guMtxCatF(mtx, mdl->transformMatrix, mdl->transformMatrix);
+        guMtxCatF(mtx, mdl->userTransformMtx, mdl->userTransformMtx);
     }
     return ApiStatus_DONE2;
 }

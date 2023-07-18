@@ -23,9 +23,14 @@ BUILD_TOOLS = Path("tools/build")
 YAY0_COMPRESS_TOOL = f"{BUILD_TOOLS}/yay0/Yay0compress"
 CRC_TOOL = f"{BUILD_TOOLS}/rom/n64crc"
 
+PIGMENT = "pigment64"
+PIGMENT_REQ_VERSION = "0.2.2"
+
 
 def exec_shell(command: List[str]) -> str:
-    ret = subprocess.run(command, stdout=subprocess.PIPE, text=True)
+    ret = subprocess.run(
+        command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
+    )
     return ret.stdout
 
 
@@ -96,19 +101,31 @@ def write_ninja_rules(
             command=f"{cross}ld {ld_args}",
         )
 
+    ninja.rule(
+        "shape_ld",
+        description="link($version) shape $out",
+        command=f"{cross}ld -T src/map_shape.ld $in -o $out",
+    )
+
+    ninja.rule(
+        "shape_objcopy",
+        description="objcopy($version) shape $out",
+        command=f"{cross}objcopy $in $out -O binary",
+    )
+
     Z64_DEBUG = ""
     if debug:
-        Z64_DEBUG = "-gS -R .data -R .note -R .eh_frame -R .gnu.attributes -R .comment -R .options"
+        Z64_DEBUG = " -gS -R .data -R .note -R .eh_frame -R .gnu.attributes -R .comment -R .options"
     ninja.rule(
         "z64",
         description="rom $out",
-        command=f"{cross}objcopy $in $out -O binary {Z64_DEBUG} && {BUILD_TOOLS}/rom/n64crc $out",
+        command=f"{cross}objcopy $in $out -O binary{Z64_DEBUG} && {BUILD_TOOLS}/rom/n64crc $out",
     )
 
     ninja.rule(
         "z64_ique",
         description="rom $out",
-        command=f"{cross}objcopy $in $out -O binary {Z64_DEBUG}",
+        command=f"{cross}objcopy $in $out -O binary{Z64_DEBUG}",
     )
 
     ninja.rule(
@@ -170,6 +187,12 @@ def write_ninja_rules(
     )
 
     ninja.rule(
+        "cp",
+        description="cp $in $out",
+        command=f"cp $in $out",
+    )
+
+    ninja.rule(
         "as",
         description="as $in",
         command=f"{cross}as -EB -march=vr4300 -mtune=vr4300 -Iinclude $in -o $out",
@@ -179,6 +202,12 @@ def write_ninja_rules(
         "img",
         description="img($img_type) $in",
         command=f"$python {BUILD_TOOLS}/img/build.py $img_type $in $out $img_flags",
+    )
+
+    ninja.rule(
+        "pigment",
+        description="img($img_type) $in",
+        command=f"{PIGMENT} $img_flags $in $img_type -o $out",
     )
 
     ninja.rule(
@@ -257,21 +286,23 @@ def write_ninja_rules(
         "map_header", command=f"$python {BUILD_TOOLS}/mapfs/map_header.py $in > $out"
     )
 
-    ninja.rule("pm_charset", command=f"$python {BUILD_TOOLS}/pm_charset.py $out $in")
+    ninja.rule("charset", command=f"$python {BUILD_TOOLS}/pm_charset.py $out $in")
 
     ninja.rule(
-        "pm_charset_palettes",
+        "charset_palettes",
         command=f"$python {BUILD_TOOLS}/pm_charset_palettes.py $out $in",
     )
 
     ninja.rule(
-        "pm_sprite_shading_profiles",
+        "sprite_shading_profiles",
         command=f"$python {BUILD_TOOLS}/sprite/sprite_shading_profiles.py $in $out $header_path",
     )
 
     ninja.rule(
-        "pm_imgfx_data", command=f"$python {BUILD_TOOLS}/imgfx/imgfx_data.py $in $out"
+        "imgfx_data", command=f"$python {BUILD_TOOLS}/imgfx/imgfx_data.py $in $out"
     )
+
+    ninja.rule("shape", command=f"$python {BUILD_TOOLS}/mapfs/shape.py $in $out")
 
     with Path("tools/permuter_settings.toml").open("w") as f:
         f.write(
@@ -433,6 +464,7 @@ class Configure:
         skip_outputs: Set[str],
         non_matching: bool,
         modern_gcc: bool,
+        c_maps: bool = False,
     ):
         import segtypes
         import segtypes.common.c
@@ -616,7 +648,7 @@ class Configure:
                             build(
                                 bin_path,
                                 src_paths,
-                                "img",
+                                "pigment",
                                 variables={
                                     "img_type": seg.type,
                                     "img_flags": flags,
@@ -657,7 +689,7 @@ class Configure:
                             build(
                                 bin_path,
                                 src_paths,
-                                "img",
+                                "pigment",
                                 variables={
                                     "img_type": seg.type,
                                     "img_flags": "",
@@ -697,7 +729,7 @@ class Configure:
                 build(
                     bin_path,
                     entry.src_paths,
-                    "img",
+                    "pigment",
                     variables={
                         "img_type": seg.type,
                         "img_flags": flags,
@@ -716,7 +748,7 @@ class Configure:
                 build(
                     bin_path,
                     entry.src_paths,
-                    "img",
+                    "pigment",
                     variables={
                         "img_type": seg.type,
                         "img_flags": "",
@@ -836,7 +868,7 @@ class Configure:
                         build(
                             logotype_path,
                             [src_dir / "title/logotype.png"],
-                            "img",
+                            "pigment",
                             variables={
                                 "img_type": "rgba32",
                                 "img_flags": "",
@@ -845,7 +877,7 @@ class Configure:
                         build(
                             press_start_path,
                             [src_dir / "title/press_start.png"],
-                            "img",
+                            "pigment",
                             variables={
                                 "img_type": "ia8",
                                 "img_flags": "",
@@ -856,7 +888,7 @@ class Configure:
                             build(
                                 copyright_path,
                                 [src_dir / "title/copyright.png"],
-                                "img",
+                                "pigment",
                                 variables={
                                     "img_type": "ci4",
                                     "img_flags": "",
@@ -865,7 +897,7 @@ class Configure:
                             build(
                                 copyright_pal_path,
                                 [src_dir / "title/copyright.png"],
-                                "img",
+                                "pigment",
                                 variables={
                                     "img_type": "palette",
                                     "img_flags": "",
@@ -881,7 +913,7 @@ class Configure:
                             build(
                                 copyright_path,
                                 [src_dir / "title/copyright.png"],
-                                "img",
+                                "pigment",
                                 variables={
                                     "img_type": "ia8",
                                     "img_flags": "",
@@ -892,7 +924,6 @@ class Configure:
                         build(bin_path, imgs, "pack_title_data")
                     elif name.endswith("_bg"):
                         compress = True
-                        bin_path = self.build_path() / bin_path
                         build(
                             bin_path,
                             [path],
@@ -915,34 +946,39 @@ class Configure:
                             },
                             asset_deps=[f"mapfs/tex/{name}"],
                         )
-                    elif name.endswith("_shape"):
-                        map_name = "_".join(name.split("_")[:-1])
-
-                        # Handle map XML files, if they exist (TODO: have splat output these)
-                        map_xml = self.resolve_asset_path(
-                            Path(f"assets/{self.version}")
-                            / seg.dir
-                            / seg.name
-                            / (map_name + ".xml")
+                    elif name.endswith("_shape_built"):
+                        base_name = name[:-6]
+                        raw_bin_path = self.resolve_asset_path(
+                            f"assets/x/mapfs/geom/{base_name}.bin"
                         )
-                        if map_xml.exists():
-                            # Build a header file for this map
-                            build(
-                                self.build_path()
-                                / "include"
-                                / seg.dir
-                                / seg.name
-                                / (map_name + ".h"),
-                                [map_xml],
-                                "map_header",
-                            )
+                        bin_path = bin_path.parent / "geom" / (base_name + ".bin")
 
-                            # NOTE: we don't build the map xml into a _shape or _hit file (yet); the Star Rod Map Editor
-                            # is able to build the xml nonmatchingly into assets/star_rod_build/mapfs/*.bin for people
-                            # who want that (i.e. modders). 'star_rod_build' should be added to asset_stack also.
+                        if c_maps:
+                            # raw bin -> c -> o -> elf -> objcopy -> final bin file
+                            c_file_path = (
+                                bin_path.parent / "geom" / base_name
+                            ).with_suffix(".c")
+                            o_path = bin_path.parent / "geom" / (base_name + ".o")
+                            elf_path = bin_path.parent / "geom" / (base_name + ".elf")
+
+                            build(c_file_path, [raw_bin_path], "shape")
+                            build(
+                                o_path,
+                                [c_file_path],
+                                "cc" if not modern_gcc else "cc_modern",
+                                variables={
+                                    "cflags": "",
+                                    "cppflags": f"-DVERSION_{self.version.upper()}",
+                                    "encoding": "CP932",  # similar to SHIFT-JIS, but includes backslash and tilde
+                                },
+                            )
+                            build(elf_path, [o_path], "shape_ld")
+                            build(bin_path, [elf_path], "shape_objcopy")
+                        else:
+                            build(bin_path, [raw_bin_path], "cp")
 
                         compress = True
-                        bin_path = path
+                        out_dir = out_dir / "geom"
                     else:
                         compress = True
                         bin_path = path
@@ -972,7 +1008,7 @@ class Configure:
                     build(
                         out_path,
                         [src_path],
-                        "img",
+                        "pigment",
                         variables={
                             "img_type": "ci4",
                             "img_flags": "",
@@ -980,7 +1016,7 @@ class Configure:
                     )
                     rasters.append(out_path)
 
-                build(entry.object_path.with_suffix(""), rasters, "pm_charset")
+                build(entry.object_path.with_suffix(""), rasters, "charset")
                 build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
             elif seg.type == "pm_charset_palettes":
                 palettes = []
@@ -996,7 +1032,7 @@ class Configure:
                     build(
                         out_path,
                         [src_path],
-                        "img",
+                        "pigment",
                         variables={
                             "img_type": "palette",
                             "img_flags": "",
@@ -1004,9 +1040,7 @@ class Configure:
                     )
                     palettes.append(out_path)
 
-                build(
-                    entry.object_path.with_suffix(""), palettes, "pm_charset_palettes"
-                )
+                build(entry.object_path.with_suffix(""), palettes, "charset_palettes")
                 build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
             elif seg.type == "pm_sprite_shading_profiles":
                 header_path = str(
@@ -1015,7 +1049,7 @@ class Configure:
                 build(
                     entry.object_path.with_suffix(""),
                     entry.src_paths,
-                    "pm_sprite_shading_profiles",
+                    "sprite_shading_profiles",
                     implicit_outputs=[header_path],
                     variables={
                         "header_path": header_path,
@@ -1026,7 +1060,7 @@ class Configure:
                 c_file_path = (
                     Path(f"assets/{self.version}") / "imgfx" / (seg.name + ".c")
                 )
-                build(c_file_path, entry.src_paths, "pm_imgfx_data")
+                build(c_file_path, entry.src_paths, "imgfx_data")
 
                 build(
                     entry.object_path,
@@ -1149,6 +1183,11 @@ if __name__ == "__main__":
         help="Use modern GCC instead of the original compiler",
     )
     parser.add_argument("--ccache", action="store_true", help="Use ccache")
+    parser.add_argument(
+        "--c-maps",
+        action="store_true",
+        help="Convert map binaries to C as part of the build process",
+    )
     args = parser.parse_args()
 
     exec_shell(["make", "-C", str(ROOT / args.splat)])
@@ -1177,6 +1216,22 @@ if __name__ == "__main__":
             )
             print(f"    ./configure --cpp {gcc_cpps[0]}")
             exit(1)
+
+    try:
+        version = exec_shell([PIGMENT, "--version"]).split(" ")[1].strip()
+
+        if version < PIGMENT_REQ_VERSION:
+            print(
+                f"error: {PIGMENT} version {PIGMENT_REQ_VERSION} or newer is required, system version is {version}\n"
+            )
+            exit(1)
+    except FileNotFoundError:
+        print(f"error: {PIGMENT} is not installed\n")
+        print(
+            "To build and install it, obtain cargo:\n\tcurl https://sh.rustup.rs -sSf | sh"
+        )
+        print(f"and then run:\n\tcargo install {PIGMENT}")
+        exit(1)
 
     # default version behaviour is to only do those that exist
     if len(args.version) > 0:
@@ -1266,7 +1321,9 @@ if __name__ == "__main__":
         configure.split(
             not args.no_split_assets, args.split_code, args.shift, args.debug
         )
-        configure.write_ninja(ninja, skip_files, non_matching, args.modern_gcc)
+        configure.write_ninja(
+            ninja, skip_files, non_matching, args.modern_gcc, args.c_maps
+        )
 
         all_rom_oks.append(str(configure.rom_ok_path()))
 

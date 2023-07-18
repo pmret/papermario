@@ -479,7 +479,7 @@ void set_entity_fog_dist(s32 start, s32 end);
 void set_entity_fog_color(s32 r, s32 g, s32 b, s32 a);
 
 struct ModelTransformGroup* get_transform_group(s32 index);
-void make_transform_group(u16 modelID);
+void mdl_make_transform_group(u16 modelID);
 void enable_transform_group(u16 modelID);
 void disable_transform_group(u16 modelID);
 void set_map_transition_effect(ScreenTransition);
@@ -579,7 +579,7 @@ void start_bounce_b(void);
 
 void update_input(void);
 void update_max_rumble_duration(void);
-void func_8011BAE8(void);
+void mdl_reset_transform_flags(void);
 void update_workers(void);
 void update_triggers(void);
 void update_scripts(void);
@@ -1086,7 +1086,7 @@ f32 get_player_normal_pitch(void);
 void partner_kill_ability_script(void);
 void func_800EF3D4(s32);
 
-void func_80116698(void);
+void mdl_update_transform_matrices(void);
 void func_8011B950(u16, s32, s32, s32);
 
 void backup_map_collision_data(void);
@@ -1098,6 +1098,6 @@ void update_item_entities(void);
 void iterate_models(void);
 void restore_map_collision_data(void);
 void mdl_load_all_textures(struct ModelNode* model, s32 romOffset, s32 size);
-void calculate_model_sizes(void);
+void mdl_calculate_model_sizes(void);
 
 #endif

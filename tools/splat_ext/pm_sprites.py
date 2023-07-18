@@ -2,6 +2,7 @@
 
 import struct
 import sys
+import re
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -97,6 +98,31 @@ BACK_PALETTE_XML = "backPalette"
 SPECIAL_RASTER = 0x1F880
 
 LIST_END_BYTES = b"\xFF\xFF\xFF\xFF"
+
+
+def indent(elem, level=0):
+    i = "\n" + level*"    "
+    if len(elem):
+        if not elem.text or not elem.text.strip():
+            elem.text = i + "    "
+        if not elem.tail or not elem.tail.strip():
+            elem.tail = i
+        for elem in elem:
+            indent(elem, level+1)
+        if not elem.tail or not elem.tail.strip():
+            elem.tail = i
+    else:
+        if level and (not elem.tail or not elem.tail.strip()):
+            elem.tail = i 
+
+
+def pretty_print_xml(tree : ET.ElementTree, path : Path):
+    root = tree.getroot()
+    indent(root)
+    xml_str = ET.tostring(root, encoding="unicode")
+    xml_str = re.sub(" />", "/>", xml_str)
+    with open(path, "w") as f:
+        f.write(xml_str)
 
 
 @dataclass
@@ -319,12 +345,7 @@ def write_player_metadata(
         )
 
     xml = ET.ElementTree(Names)
-
-    # pretty print (Python 3.9+)
-    if hasattr(ET, "indent"):
-        ET.indent(xml, "    ")
-
-    xml.write(str(out_path / PLAYER_SPRITE_MEDADATA_XML_FILENAME), encoding="unicode")
+    pretty_print_xml(xml, out_path / PLAYER_SPRITE_MEDADATA_XML_FILENAME)
 
 
 def write_npc_metadata(
@@ -342,12 +363,7 @@ def write_npc_metadata(
         )
 
     xml = ET.ElementTree(Names)
-
-    # pretty print (Python 3.9+)
-    if hasattr(ET, "indent"):
-        ET.indent(xml, "    ")
-
-    xml.write(str(out_path / NPC_SPRITE_MEDADATA_XML_FILENAME), encoding="unicode")
+    pretty_print_xml(xml, out_path / NPC_SPRITE_MEDADATA_XML_FILENAME)
 
 
 def write_player_xmls(
@@ -472,12 +488,7 @@ def write_player_xmls(
                     )
 
         xml = ET.ElementTree(SpriteSheet)
-
-        # pretty print (Python 3.9+)
-        if hasattr(ET, "indent"):
-            ET.indent(xml, "    ")
-
-        xml.write(str(out_path / f"{cur_sprite_name}.xml"), encoding="unicode")
+        pretty_print_xml(xml, out_path / f"{cur_sprite_name}.xml")
 
         if has_back:
             sprite_idx += 2
@@ -721,12 +732,7 @@ class NpcSprite:
                     )
 
         xml = ET.ElementTree(SpriteSheet)
-
-        # pretty print (Python 3.9+)
-        if hasattr(ET, "indent"):
-            ET.indent(xml, "    ")
-
-        xml.write(str(path / "SpriteSheet.xml"), encoding="unicode")
+        pretty_print_xml(xml, path / "SpriteSheet.xml")
 
 
 class N64SegPm_sprites(N64Segment):

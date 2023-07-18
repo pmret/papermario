@@ -696,13 +696,13 @@ API_CALLABLE(N(RunMinigame)) {
                         data->box[i].stateTimer = 0;
                         model = get_model_from_list_index(get_model_list_index_from_tree_index(data->box[i].peachPanelModelID));
                         model->flags &= ~MODEL_FLAG_HIDDEN;
-                        if (!(model->flags & MODEL_FLAG_HAS_TRANSFORM_APPLIED)) {
-                            guTranslateF(model->transformMatrix, npc->pos.x, npc->pos.y, npc->pos.z);
-                            model->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX | MODEL_FLAG_HAS_TRANSFORM_APPLIED;
+                        if (!(model->flags & MODEL_FLAG_HAS_TRANSFORM)) {
+                            guTranslateF(model->userTransformMtx, npc->pos.x, npc->pos.y, npc->pos.z);
+                            model->flags |= MODEL_FLAG_MATRIX_DIRTY | MODEL_FLAG_HAS_TRANSFORM;
                         }
                         else {
                             guTranslateF(mtx, npc->pos.x, npc->pos.y, npc->pos.z);
-                            guMtxCatF(mtx, model->transformMatrix, model->transformMatrix);
+                            guMtxCatF(mtx, model->userTransformMtx, model->userTransformMtx);
                         }
                     }
                     break;
@@ -711,12 +711,12 @@ API_CALLABLE(N(RunMinigame)) {
                     npc->pos.y += npc->jumpVelocity;
                     npc->jumpVelocity -= npc->jumpScale;
                     model = get_model_from_list_index(get_model_list_index_from_tree_index(data->box[i].peachPanelModelID));
-                    if (!(model->flags & MODEL_FLAG_HAS_TRANSFORM_APPLIED)) {
-                        guTranslateF(model->transformMatrix, npc->pos.x, npc->pos.y, npc->pos.z);
-                        model->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX | MODEL_FLAG_HAS_TRANSFORM_APPLIED;
+                    if (!(model->flags & MODEL_FLAG_HAS_TRANSFORM)) {
+                        guTranslateF(model->userTransformMtx, npc->pos.x, npc->pos.y, npc->pos.z);
+                        model->flags |= MODEL_FLAG_MATRIX_DIRTY | MODEL_FLAG_HAS_TRANSFORM;
                     } else {
                         guTranslateF(mtx, npc->pos.x, npc->pos.y, npc->pos.z);
-                        guMtxCatF(mtx, model->transformMatrix, model->transformMatrix);
+                        guMtxCatF(mtx, model->userTransformMtx, model->userTransformMtx);
                     }
                     if ((npc->moveToPos.y + 20.0f) < npc->pos.y) {
                         enable_npc_shadow(npc);
@@ -742,12 +742,12 @@ API_CALLABLE(N(RunMinigame)) {
                     hittingPeachBlock = TRUE;
                     model = get_model_from_list_index(get_model_list_index_from_tree_index(data->box[i].peachPanelModelID));
                     centerY = update_lerp(EASING_QUADRATIC_OUT, npc->moveToPos.y, npc->moveToPos.y + 30.0, npc->duration, 30);
-                    if (!(model->flags & MODEL_FLAG_HAS_TRANSFORM_APPLIED)) {
-                        guTranslateF(model->transformMatrix, npc->pos.x, centerY, npc->pos.z);
-                        model->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX | MODEL_FLAG_HAS_TRANSFORM_APPLIED;
+                    if (!(model->flags & MODEL_FLAG_HAS_TRANSFORM)) {
+                        guTranslateF(model->userTransformMtx, npc->pos.x, centerY, npc->pos.z);
+                        model->flags |= MODEL_FLAG_MATRIX_DIRTY | MODEL_FLAG_HAS_TRANSFORM;
                     } else {
                         guTranslateF(mtx, npc->pos.x, centerY, npc->pos.z);
-                        guMtxCatF(mtx, model->transformMatrix, model->transformMatrix);
+                        guMtxCatF(mtx, model->userTransformMtx, model->userTransformMtx);
                     }
                     npc->duration++;
                     if (npc->duration >= 30) {

@@ -683,10 +683,10 @@ void animator_node_update_model_transform(ModelAnimator* animator, f32 (*flipMtx
     if (node->flags & MODEL_ANIMATOR_FLAG_HAS_MODEL) {
         Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(node->fcData.modelID));
 
-        copy_matrix(sp10, model->transformMatrix);
+        copy_matrix(sp10, model->userTransformMtx);
         guMtxL2F(sp10, rootTransform);
-        guMtxCatF(model->transformMatrix, sp10, model->transformMatrix);
-        model->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX;
+        guMtxCatF(model->userTransformMtx, sp10, model->userTransformMtx);
+        model->flags |= MODEL_FLAG_MATRIX_DIRTY;
     }
 
     for (i = 0; i < ARRAY_COUNT(node->children); i++) {

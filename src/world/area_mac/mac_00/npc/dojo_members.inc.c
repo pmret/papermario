@@ -17,7 +17,7 @@ API_CALLABLE(N(SetDojoBattle)) {
 }
 
 API_CALLABLE(N(ResetBackgroundPostBattle)) {
-    func_8011B950(MODEL_minka_1, -1, FOG_MODE_1, 1);
+    func_8011B950(MODEL_minka_1, CUSTOM_GFX_NONE, FOG_MODE_1, 1);
     set_background_color_blend(0, 0, 0, 255);
     gCameras[CAM_DEFAULT].bgColor[0] = 0;
     gCameras[CAM_DEFAULT].bgColor[1] = 0;

@@ -264,7 +264,7 @@ typedef struct Npc {
     /* 0x0AA */ s8 renderMode;
     /* 0x0AB */ s8 verticalRenderOffset;
     /* 0x0AC */ u8 alpha;
-    /* 0x0AD */ u8 alpha2; ///< Multiplied with Npc::alpha
+    /* 0x0AD */ u8 hideAlpha; ///< Used when hiding NPCs; Multiplied with Npc::alpha
     /* 0x0AE */ char unk_AE[2];
     /* 0x0B0 */ AnimID* extraAnimList;
     /* 0x0B4 */ s8 palSwapType; // 0..4 inclusive

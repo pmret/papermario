@@ -3,6 +3,19 @@ from itertools import zip_longest
 import struct
 from typing import Dict, List
 import xml.etree.ElementTree as ET
+from enum import IntEnum
+
+
+class CMD(IntEnum):
+    WAIT = 0
+    SET_IMG = 1
+    GOTO = 2
+    SET_POS = 3
+    SET_ROT = 4
+    SET_SCALE = 5
+    SET_PAL = 6
+    LOOP = 7
+    SET_META = 8
 
 
 def iter_in_groups(iterable, n, fillvalue=None):
@@ -28,6 +41,16 @@ class Animation:
 
     def get_attributes(self) -> Dict[str, str]:
         raise NotImplementedError()
+
+
+@dataclass
+class Label(Animation):
+    lbl_name: str
+
+    def get_attributes(self):
+        return {
+            "name": str(self.lbl_name),
+        }
 
 
 @dataclass
@@ -62,24 +85,37 @@ class SetPalette(Animation):
 
 @dataclass
 class Goto(Animation):
+    dest: str
     pos: int
 
     def get_attributes(self):
-        return {
-            "pos": str(self.pos),
-        }
+        if self.pos != 0:
+            return {
+                "pos": str(self.pos),
+            }
+        else:
+            return {
+                "dest": str(self.dest),
+            }
 
 
 @dataclass
 class Loop(Animation):
     count: int
+    dest: str
     pos: int
 
     def get_attributes(self):
-        return {
-            "count": str(self.count),
-            "pos": str(self.pos),
-        }
+        if self.pos != 0:
+            return {
+                "count": str(self.count),
+                "pos": str(self.pos),
+            }
+        else:
+            return {
+                "count": str(self.count),
+                "dest": str(self.dest),
+            }
 
 
 @dataclass
@@ -181,9 +217,37 @@ class AnimComponent:
     def size(self):
         return len(self.commands)
 
+
     @staticmethod
     def parse_commands(command_list: List[int]) -> List[Animation]:
         ret: List[Animation] = []
+
+        labels = {}
+        boundaries = []
+        labels[0] = "Start"
+        i = 0
+        while i < len(command_list):
+            boundaries.append(i)
+            cmd_start = command_list[i]
+            cmd_op = cmd_start >> 12
+            cmd_arg = cmd_start & 0xFFF
+
+            if cmd_op == CMD.GOTO:
+                dest = cmd_arg
+                if dest in boundaries and dest not in labels:
+                    labels[dest] = f"Pos_{dest}"
+            elif cmd_op == CMD.SET_POS:
+                i += 3
+            elif cmd_op == CMD.SET_ROT:
+                i += 2
+            elif cmd_op == CMD.SET_SCALE:
+                i += 1
+            elif cmd_op == CMD.LOOP:
+                dest = command_list[i + 1]
+                if dest in boundaries and dest not in labels:
+                    labels[dest] = f"Pos_{dest}"
+                i += 1
+            i += 1
 
         def to_signed(value):
             return -(value & 0x8000) | (value & 0x7FFF)
@@ -191,52 +255,67 @@ class AnimComponent:
         i = 0
         while i < len(command_list):
             cmd_start = command_list[i]
+            cmd_op = cmd_start >> 12
+            cmd_arg = cmd_start & 0xFFF
 
-            if cmd_start <= 0xFFF:
+            if i in labels:
+                ret.append(Label(labels[i]))
+
+            if cmd_op == CMD.WAIT:
                 ret.append(Wait(cmd_start))
-            elif cmd_start <= 0x1FFF:
-                raster = cmd_start % 0x1000
+            elif cmd_op == CMD.SET_IMG:
+                raster = cmd_arg
                 if raster == 0xFFF:
                     raster = -1
                 ret.append(SetRaster(raster))
-            elif cmd_start <= 0x2FFF:
-                ret.append(Goto(cmd_start % 0x2000))
-            elif cmd_start <= 0x3FFF:
-                flag = cmd_start % 0x3000
+            elif cmd_op == CMD.GOTO:
+                dest = cmd_arg
+                if dest in labels:
+                    lbl_name = labels[dest]
+                    ret.append(Goto(lbl_name, 0))
+                else:
+                    ret.append(Goto(None, dest))
+            elif cmd_op == CMD.SET_POS:
+                flag = cmd_arg
                 x, y, z = command_list[i + 1 : i + 4]
                 x = to_signed(x)
                 y = to_signed(y)
                 z = to_signed(z)
                 i += 3
                 ret.append(SetPos(flag, x, y, z))
-            elif cmd_start <= 0x4FFF:
+            elif cmd_op == CMD.SET_ROT:
                 x, y, z = command_list[i : i + 3]
-                x = ((x % 0x4000) << 20) >> 20
+                x = (cmd_arg << 20) >> 20
                 y = to_signed(y)
                 z = to_signed(z)
                 i += 2
                 ret.append(SetRot(x, y, z))
-            elif cmd_start <= 0x5FFF:
-                mode = cmd_start % 0x5000
+            elif cmd_op == CMD.SET_SCALE:
+                mode = cmd_arg
                 percent = command_list[i + 1]
                 i += 1
                 ret.append(SetScale(mode, percent))
-            elif cmd_start <= 0x6FFF:
-                palette = cmd_start % 0x6000
+            elif cmd_op == CMD.SET_PAL:
+                palette = cmd_arg
                 if palette == 0xFFF:
                     palette = -1
                 ret.append(SetPalette(palette))
-            elif cmd_start <= 0x7FFF:
-                count = cmd_start % 0x7000
-                pos = command_list[i + 1]
+            elif cmd_op == CMD.LOOP:
+                count = cmd_arg
+                dest = command_list[i + 1]
+                if dest in labels:
+                    lbl_name = labels[dest]
+                    ret.append(Loop(count, lbl_name, 0))
+                else:
+                    ret.append(Loop(count, None, dest))
                 i += 1
-                ret.append(Loop(count, pos))
-            elif cmd_start <= 0x80FF:
-                ret.append(Unknown(cmd_start % 0x8000))
-            elif cmd_start <= 0x81FF:
-                ret.append(SetParent(cmd_start % 0x8100))
-            elif cmd_start <= 0x82FF:
-                ret.append(SetNotify(cmd_start % 0x8200))
+            elif cmd_op == CMD.SET_META:
+                if cmd_start <= 0x80FF:
+                    ret.append(Unknown(cmd_arg & 0xFF))
+                elif cmd_start <= 0x81FF:
+                    ret.append(SetParent(cmd_arg & 0xFF))
+                elif cmd_start <= 0x82FF:
+                    ret.append(SetNotify(cmd_arg & 0xFF))
             else:
                 raise Exception("Unknown command")
             i += 1
@@ -263,8 +342,12 @@ class AnimComponent:
     @staticmethod
     def from_xml(xml: ET.Element):
         commands: List[int] = []
+        labels = {}
         for cmd in xml:
-            if cmd.tag == "Wait":
+            if cmd.tag == "Label":
+                idx = len(commands)
+                labels[cmd.attrib["name"]] = idx
+            elif cmd.tag == "Wait":
                 duration = int(cmd.attrib["duration"])
                 commands.append(duration)
             elif cmd.tag == "SetRaster":
@@ -273,7 +356,16 @@ class AnimComponent:
                     raster = 0xFFF
                 commands.append(0x1000 + raster)
             elif cmd.tag == "Goto":
-                commands.append(0x2000 + int(cmd.attrib["pos"]))
+                if "pos" in cmd.attrib:
+                    # support hardcoded positions for glitched animations
+                    pos = int(cmd.attrib["pos"])
+                else:
+                    # properly formatted animations will have labels
+                    lbl_name = cmd.attrib["dest"]
+                    if not lbl_name in labels:
+                        raise Exception("Label missing for Goto dest: " + lbl_name)
+                    pos = labels[lbl_name]
+                commands.append(0x2000 + pos)
             elif cmd.tag == "SetPos":
                 flag = int(cmd.attrib["flag"])
                 x, y, z = cmd.attrib["xyz"].split(",")
@@ -298,7 +390,15 @@ class AnimComponent:
                 commands.append(0x6000 + palette)
             elif cmd.tag == "Loop":
                 count = int(cmd.attrib["count"])
-                pos = int(cmd.attrib["pos"])
+                if "pos" in cmd.attrib:
+                    # support hardcoded positions for glitched animations
+                    pos = int(cmd.attrib["pos"])
+                else:
+                    # properly formatted animations will have labels
+                    lbl_name = cmd.attrib["dest"]
+                    if not lbl_name in labels:
+                        raise Exception("Label missing for Loop dest: " + lbl_name)
+                    pos = labels[lbl_name]
                 commands.append(0x7000 + count)
                 commands.append(pos)
             elif cmd.tag == "Unknown":

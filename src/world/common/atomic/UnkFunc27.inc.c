@@ -34,7 +34,7 @@ API_CALLABLE(N(UnkFunc27)) {
                 if (*modelIDList == 0xFFFF) {
                     break;
                 }
-                func_8011B950(*modelIDList, -1, fogType, 0);
+                func_8011B950(*modelIDList, CUSTOM_GFX_NONE, fogType, 0);
                 modelIDList++;
             };
             break;
