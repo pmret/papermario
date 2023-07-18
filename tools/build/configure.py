@@ -3,7 +3,7 @@
 from functools import lru_cache
 import os
 import shutil
-from typing import List, Dict, Optional, Set, Union
+from typing import List, Dict, Set, Union
 from pathlib import Path
 import subprocess
 import sys
@@ -655,7 +655,9 @@ class Configure:
                                 },
                             )
 
-                            assert seg.vram_start is not None, "img with vram_start unset: " + seg.name
+                            assert seg.vram_start is not None, (
+                                "img with vram_start unset: " + seg.name
+                            )
 
                             c_sym = seg.create_symbol(
                                 addr=seg.vram_start,

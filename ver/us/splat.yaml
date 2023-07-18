@@ -16769,10 +16769,7 @@ segments:
   - [0xFAE860, bin] # more audio stuff
   - [0x19425C0, bin] # INIT file
   - [0x1942C40, bin]
-  - start: 0x1943000
-    align: 8
-    type: pm_sprites
-    name: sprites
+  - { start: 0x1943000, align: 8, type: pm_sprites, name: sprites }
   - [0x1B82208, bin] # end of sprite data - todo: figure out what this is
   - start: 0x1B83000
     type: pm_msg
@@ -16827,7 +16824,5 @@ segments:
   - [0x1C84D30, bin] # junk(?)
   - [0x1E00000, bin] # junk (player sprite data; can be zeroed out with no effect)
   - [0x1E40000, pm_map_data, mapfs]
-  - type: bin
-    start: 0x27FEE22
-    subalign: 2
+  - { type: bin, start: 0x27FEE22, subalign: 2 }
   - [0x2800000]
