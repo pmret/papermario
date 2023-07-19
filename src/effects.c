@@ -1,6 +1,5 @@
 #include "common.h"
 #include "effects.h"
-#include "effects_internal.h"
 #include "ld_addrs.h"
 
 typedef s32 TlbEntry[0x1000 / 4];

@@ -105,9 +105,9 @@ EffectInstance* star_spirits_energy_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3,
     bp.renderUI = NULL;
     bp.effectID = EFFECT_STAR_SPIRITS_ENERGY;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    data = effect->data.starSpiritsEnergy = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.starSpiritsEnergy = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.starSpiritsEnergy != NULL);
 
     data->unk_00 = arg0 & 0xFF00;
@@ -180,7 +180,7 @@ void star_spirits_energy_update(EffectInstance* effect) {
     data->unk_18++;
 
     if (data->unk_14 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -194,10 +194,10 @@ void star_spirits_energy_update(EffectInstance* effect) {
         case 0:
             data->unk_50[0] = (unk_18 & 3) * 30 + 200;
             data->unk_74++;
-            data->unk_40[0] = shim_sin_deg(unk_18 * 20) * 0.04 + 0.5;
+            data->unk_40[0] = sin_deg(unk_18 * 20) * 0.04 + 0.5;
             if (data->unk_00 != 0) {
-                data->unk_08 += shim_sin_deg(unk_18);
-                data->unk_0C += shim_cos_deg(unk_18 * 1.235631);
+                data->unk_08 += sin_deg(unk_18);
+                data->unk_0C += cos_deg(unk_18 * 1.235631);
                 if (data->unk_74 > 50) {
                     data->unk_74 = 0;
                     if (unk_04 == 3) {
@@ -331,7 +331,7 @@ void star_spirits_energy_render(EffectInstance* effect) {
     renderTask.distance = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -345,9 +345,9 @@ void star_spirits_energy_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f,
+    guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f,
                      data->unk_3C, data->unk_08, data->unk_0C, data->unk_10);
-    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
               G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
@@ -357,8 +357,8 @@ void star_spirits_energy_appendGfx(void* effect) {
     for (i = 0; i < 4; i++) {
         if (unk_04 != 1 || i != 2) {
             if (data->unk_40[i] != 0.0f && data->unk_50[i] != 0) {
-                shim_guPositionF(sp20, 0.0f, 0.0f, 0.0f, data->unk_40[i], 0.0f, 0.0f, 0.0f);
-                shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+                guPositionF(sp20, 0.0f, 0.0f, 0.0f, data->unk_40[i], 0.0f, 0.0f, 0.0f);
+                guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
                 gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                           G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);

@@ -33,9 +33,9 @@ EffectInstance* effect_65_main(
     bp.renderUI = NULL;
     bp.effectID = EFFECT_65;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    data = effect->data.unk_65 = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.unk_65 = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.unk_65 != NULL);
 
     data->variation = variation;
@@ -104,7 +104,7 @@ EffectInstance* effect_65_main(
     data->pathPointEnabled[0] = TRUE;
     data->pathTimestamp[0] = 0;
     data->pathLength[0] = 0;
-    data->pathJitterX = shim_rand_int(30) + 10;
+    data->pathJitterX = rand_int(30) + 10;
     data->pathJitterY = 0;
     data->pathJitterZ = 0;
 
@@ -139,7 +139,7 @@ void effect_65_update(EffectInstance* effect) {
 
     data->lifeTime++;
     if (data->timeLeft < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -150,8 +150,8 @@ void effect_65_update(EffectInstance* effect) {
     }
 
     if (variation == 3) {
-        data->pathJitterX += shim_rand_int(10) - 5;
-        data->pathJitterY += shim_rand_int(10) - 5;
+        data->pathJitterX += rand_int(10) - 5;
+        data->pathJitterY += rand_int(10) - 5;
         data->pos.x += data->pathJitterX;
         data->pos.y += data->pathJitterY;
         data->pos.z += data->pathJitterZ;
@@ -186,7 +186,7 @@ void effect_65_update(EffectInstance* effect) {
 
         dist = SQ(posX - lastPointX) + SQ(posY - lastPointY) + SQ(posZ - lastPointZ);
         if (dist != 0.0f) {
-            dist = shim_sqrtf(dist);
+            dist = sqrtf(dist);
         }
 
         data->pathLength[idx] = pathLength + dist;
@@ -202,7 +202,7 @@ void effect_65_render(EffectInstance* effect) {
     renderTask.distance = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -249,8 +249,8 @@ void effect_65_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guTranslateF(mtx, 0.0f, 0.0f, 0.0f);
-    shim_guMtxF2L(mtx, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(mtx, 0.0f, 0.0f, 0.0f);
+    guMtxF2L(mtx, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(gMainGfxPos++, D_E00CACB0[variation]);
@@ -286,7 +286,7 @@ void effect_65_appendGfx(void* effect) {
             fadeOutPhase = phase / numPoints;
             idx = (data->lastPointIndex + a1) % MAX_POINTS;
 
-            a = shim_sin_deg(fadeOutPhase) * 255.0f;
+            a = sin_deg(fadeOutPhase) * 255.0f;
             if (a > 200) {
                 a = 200;
             }
@@ -301,7 +301,7 @@ void effect_65_appendGfx(void* effect) {
                     next = 0;
                 }
                 firstPointIdx = i;
-                angle = -shim_atan2(data->pathY[next], -data->pathX[next], data->pathY[idx], -data->pathX[idx]);
+                angle = -atan2(data->pathY[next], -data->pathX[next], data->pathY[idx], -data->pathX[idx]);
             } else {
                 if (i != MAX_POINTS - 1) {
                     next = idx + 1;
@@ -312,8 +312,8 @@ void effect_65_appendGfx(void* effect) {
                     if (prev < 0) {
                         prev = MAX_POINTS - 1;
                     }
-                    nextAngle = -shim_atan2(data->pathY[next], -data->pathX[next], data->pathY[idx], -data->pathX[idx]);
-                    prevAngle = -shim_atan2(data->pathY[idx], -data->pathX[idx], data->pathY[prev], -data->pathX[prev]);
+                    nextAngle = -atan2(data->pathY[next], -data->pathX[next], data->pathY[idx], -data->pathX[idx]);
+                    prevAngle = -atan2(data->pathY[idx], -data->pathX[idx], data->pathY[prev], -data->pathX[prev]);
                     deltaAngle = prevAngle - nextAngle;
                     if (deltaAngle > 180.0f) {
                         nextAngle += 360.0f;
@@ -328,7 +328,7 @@ void effect_65_appendGfx(void* effect) {
             pathPointY = data->pathY[idx];
             pathPointZ = data->pathZ[idx];
             pathPointLifetime = lifeTime - data->pathTimestamp[idx];
-            width = shim_sin_deg((lifeTime - data->pathTimestamp[idx] * 80) * 4) * 3.0f + 16.0f + pathPointLifetime;
+            width = sin_deg((lifeTime - data->pathTimestamp[idx] * 80) * 4) * 3.0f + 16.0f + pathPointLifetime;
 
             width *= scale;
             if (variation >= 0) {
@@ -352,8 +352,8 @@ void effect_65_appendGfx(void* effect) {
                 }
             }
 
-            deltaX = width * shim_sin_deg(angle);
-            deltaY = width * shim_cos_deg(angle);
+            deltaX = width * sin_deg(angle);
+            deltaY = width * cos_deg(angle);
             deltaZ = 0.0f;
 
             vtx->ob[0] = pathPointX + deltaX;

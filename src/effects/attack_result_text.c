@@ -47,10 +47,10 @@ EffectInstance* attack_result_text_main(s32 type, f32 posX, f32 posY, f32 posZ, 
     bp.renderUI = func_E0090428;
     bp.effectID = EFFECT_ATTACK_RESULT_TEXT;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
 
-    data = effect->data.attackResultText = shim_general_heap_malloc(effect->numParts * sizeof(*data));
+    data = effect->data.attackResultText = general_heap_malloc(effect->numParts * sizeof(*data));
 
     ASSERT(data != NULL);
 
@@ -72,8 +72,8 @@ EffectInstance* attack_result_text_main(s32 type, f32 posX, f32 posY, f32 posZ, 
         data->pos.x = posX;
         data->pos.y = posY;
         data->pos.z = posZ;
-        data->vel.x = 2.0f * (-shim_sin_deg(30.0f) * appearVel);
-        data->vel.y = 2.0f * (shim_cos_deg(30.0f) * appearVel);
+        data->vel.x = 2.0f * (-sin_deg(30.0f) * appearVel);
+        data->vel.y = 2.0f * (cos_deg(30.0f) * appearVel);
     } else {
         data->pos.x = -100.0f;
         data->pos.y = 40.0f;
@@ -107,7 +107,7 @@ void attack_result_text_update(EffectInstance* effect) {
     if (data->timeLeft < 0) {
         data->isVisible = FALSE;
         data->timeLeft = -1;
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -192,12 +192,12 @@ void func_E0090444(EffectInstance* effect) {
         gDPSetPrimDepth(gMainGfxPos++, z, 0);
 
         if (type < 5) {
-            shim_guTranslateF(mtxA, data->pos.x, data->pos.y, data->pos.z);
-            shim_guRotateF(mtxB, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-            shim_guMtxCatF(mtxB, mtxA, mtxA);
-            shim_guScaleF(mtxB, scale, scale, 1.0f);
-            shim_guMtxCatF(mtxB, mtxA, mtxA);
-            shim_guMtxF2L(mtxA, &gDisplayContext->matrixStack[gMatrixListPos]);
+            guTranslateF(mtxA, data->pos.x, data->pos.y, data->pos.z);
+            guRotateF(mtxB, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+            guMtxCatF(mtxB, mtxA, mtxA);
+            guScaleF(mtxB, scale, scale, 1.0f);
+            guMtxCatF(mtxB, mtxA, mtxA);
+            guMtxF2L(mtxA, &gDisplayContext->matrixStack[gMatrixListPos]);
             gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                       G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 255, data->alpha);

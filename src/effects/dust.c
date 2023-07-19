@@ -33,9 +33,9 @@ EffectInstance* dust_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4) {
     bp.renderUI = NULL;
     bp.effectID = EFFECT_DUST;
 
-    effect = shim_create_effect_instance(bpPtr);
+    effect = create_effect_instance(bpPtr);
     effect->numParts = numParts;
-    part = effect->data.dust = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = effect->data.dust = general_heap_malloc(numParts * sizeof(*part));
     ASSERT(effect->data.dust != NULL);
 
     part->unk_00 = arg0;
@@ -53,14 +53,14 @@ EffectInstance* dust_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4) {
 
     part++;
     for (i = 1; i < numParts; i++, part++) {
-        part->unk_04 = shim_rand_int(200) - 100;
-        part->unk_08 = shim_rand_int(50);
+        part->unk_04 = rand_int(200) - 100;
+        part->unk_08 = rand_int(50);
         part->unk_0C = 0;
         part->unk_14 = 0;
         part->unk_1C = 1.0f;
         part->unk_20 = 1.0f;
         part->unk_10 = -1.0f;
-        part->unk_24 = shim_rand_int(10) / 200;
+        part->unk_24 = rand_int(10) / 200;
         switch (arg0) {
             case 0:
                 part->unk_28 = part->unk_24 * 0.1;
@@ -72,8 +72,8 @@ EffectInstance* dust_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4) {
                 part->unk_24 = 0.4f;
                 part->unk_28 = 0.4f;
                 part->unk_10 = 0;
-                part->unk_04 = (shim_rand_int(40) - 20) * 0.1;
-                part->unk_08 = (shim_rand_int(40) - 20) * 0.1;
+                part->unk_04 = (rand_int(40) - 20) * 0.1;
+                part->unk_08 = (rand_int(40) - 20) * 0.1;
                 break;
         }
     }
@@ -91,7 +91,7 @@ void dust_update(EffectInstance* effect) {
 
     part->unk_2C--;
     if (part->unk_2C < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -121,7 +121,7 @@ void dust_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -139,20 +139,20 @@ void dust_appendGfx(void* effect) {
     gDPSetPrimColor(gMainGfxPos++, 0, 0, part->unk_30, part->unk_34, part->unk_38, part->unk_18);
     gDPSetEnvColor(gMainGfxPos++, part->unk_3C, part->unk_40, part->unk_44, 0);
 
-    shim_guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
-    shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-    shim_guMtxCatF(sp58, sp18, sp98);
+    guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
+    guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(sp58, sp18, sp98);
 
     unk_00 = part->unk_00;
     part++;
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, part++) {
         matrix = &gDisplayContext->matrixStack[gMatrixListPos++];
 
-        shim_guScaleF(sp18, part->unk_20, part->unk_1C, part->unk_20);
-        shim_guMtxF2L(sp18, matrix);
-        shim_guTranslateF(sp58, part->unk_04, part->unk_08, part->unk_0C);
-        shim_guMtxCatF(sp58, sp98, sp18);
-        shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guScaleF(sp18, part->unk_20, part->unk_1C, part->unk_20);
+        guMtxF2L(sp18, matrix);
+        guTranslateF(sp58, part->unk_04, part->unk_08, part->unk_0C);
+        guMtxCatF(sp58, sp98, sp18);
+        guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         gSPMatrix(gMainGfxPos++, matrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);

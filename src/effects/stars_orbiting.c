@@ -36,12 +36,12 @@ void stars_orbiting_main(
     bp.renderUI = func_E005E318;
     bp.effectID = EFFECT_STARS_ORBITING;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numStars;
-    part = effect->data.starsOrbiting = shim_general_heap_malloc(numStars * sizeof(*part));
+    part = effect->data.starsOrbiting = general_heap_malloc(numStars * sizeof(*part));
     ASSERT(effect->data.starsOrbiting != NULL);
 
-    shim_mem_clear(part, numStars * sizeof(*part));
+    mem_clear(part, numStars * sizeof(*part));
 
     part->type = type;
     part->pos.x = posX;
@@ -81,9 +81,9 @@ void stars_orbiting_update(EffectInstance* effect) {
 
         part++;
         for (i = 1; i < effect->numParts; i++, part++) {
-            part->pos.x = radius * shim_sin_deg(part->yaw);
-            part->pos.z = radius * shim_cos_deg(part->yaw) * shim_cos_deg(part->pitch);
-            part->pos.y = radius * shim_cos_deg(part->yaw) * shim_sin_deg(part->pitch);
+            part->pos.x = radius * sin_deg(part->yaw);
+            part->pos.z = radius * cos_deg(part->yaw) * cos_deg(part->pitch);
+            part->pos.y = radius * cos_deg(part->yaw) * sin_deg(part->pitch);
             part->roll += part->rollSpinRate;
             part->pitch = 0.0f;
             part->yaw += 16;
@@ -116,20 +116,20 @@ void func_E005E334(EffectInstance* effect) {
         gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
         gSPDisplayList(gMainGfxPos++, dlist2);
 
-        shim_guTranslateF(sp18, part->pos.x, part->pos.y, part->pos.z);
-        shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-        shim_guMtxCatF(sp58, sp18, sp98);
-        shim_guMtxF2L(sp98, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guTranslateF(sp18, part->pos.x, part->pos.y, part->pos.z);
+        guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+        guMtxCatF(sp58, sp18, sp98);
+        guMtxF2L(sp98, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         gDPSetPrimColor(gMainGfxPos++, 0, 0, 220, 220, 40, 255);
 
         part++;
         for (i = 1; i < effect->numParts; i++, part++) {
-            shim_guTranslateF(sp18, part->pos.x, part->pos.y, part->pos.z);
-            shim_guRotateF(sp58, part->roll, 0.0f, 0.0f, 1.0f);
-            shim_guMtxCatF(sp58, sp18, sp18);
-            shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+            guTranslateF(sp18, part->pos.x, part->pos.y, part->pos.z);
+            guRotateF(sp58, part->roll, 0.0f, 0.0f, 1.0f);
+            guMtxCatF(sp58, sp18, sp18);
+            guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
             gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
             gSPDisplayList(gMainGfxPos++, dlist);

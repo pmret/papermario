@@ -48,9 +48,9 @@ EffectInstance* energy_in_out_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 a
     bp.renderUI = NULL;
     bp.effectID = EFFECT_ENERGY_IN_OUT;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    firstPart = part = effect->data.energyInOut = shim_general_heap_malloc(numParts * sizeof(*part));
+    firstPart = part = effect->data.energyInOut = general_heap_malloc(numParts * sizeof(*part));
     ASSERT(effect->data.energyInOut != NULL);
 
     part->unk_00 = arg0;
@@ -74,7 +74,7 @@ EffectInstance* energy_in_out_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 a
     part->unk_44 = 1.0f;
     part->unk_38 = D_E00D6E84[arg0];
 
-    randAngle = shim_rand_int(360);
+    randAngle = rand_int(360);
 
     part++;
     for (i = 1; i < effect->numParts; i++, part++) {
@@ -84,38 +84,38 @@ EffectInstance* energy_in_out_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 a
             case 0:
             case 1:
             case 2:
-                part->unk_38 = -(shim_rand_int(10) * 0.2 + 0.2);
+                part->unk_38 = -(rand_int(10) * 0.2 + 0.2);
                 part->unk_10 = 20;
                 part->unk_40 = 0;
                 part->scale = 1.0 - (i % 3) * 0.1;
                 break;
             case 3:
             case 5:
-                part->unk_38 = shim_rand_int(10) * 0.2 + 0.2;
+                part->unk_38 = rand_int(10) * 0.2 + 0.2;
                 part->unk_10 = 20;
                 part->unk_40 = 0;
                 part->scale = 1.0 - (i % 3) * 0.1;
                 break;
             case 6:
-                part->unk_38 = -(shim_rand_int(10) + 4);
+                part->unk_38 = -(rand_int(10) + 4);
                 part->unk_10 = 10;
                 part->unk_40 = 0;
                 part->scale = 1.0 - (i % 3) * 0.3;
                 break;
             case 7:
-                part->unk_38 = -(shim_rand_int(10) + 4);
+                part->unk_38 = -(rand_int(10) + 4);
                 part->unk_10 = 10;
                 part->unk_40 = 0;
                 part->scale = 1.0 - (i % 3) * 0.3;
                 break;
             case 8:
-                part->unk_38 = shim_rand_int(10) * 0.2 + 0.6;
+                part->unk_38 = rand_int(10) * 0.2 + 0.6;
                 part->unk_10 = 20;
                 part->unk_40 = -1.0f;
                 part->scale = 1.0 - (i % 3) * 0.3;
                 break;
             case 9:
-                part->unk_38 = -(shim_rand_int(10) * 0.2 + 0.6);
+                part->unk_38 = -(rand_int(10) * 0.2 + 0.6);
                 part->unk_10 = 20;
                 part->unk_40 = -2.0f;
                 part->scale = 1.0 - (i % 3) * 0.3;
@@ -127,27 +127,27 @@ EffectInstance* energy_in_out_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 a
                 firstPart->unk_30 = 10;
                 break;
             case 10:
-                part->unk_38 = shim_rand_int(10) * 0.1 + 2.0;
+                part->unk_38 = rand_int(10) * 0.1 + 2.0;
                 part->unk_10 = 10;
                 part->unk_40 = 0;
                 part->scale = (1.0 - (i % 3) * 0.3) * 0.5;
                 break;
             case 11:
-                part->unk_38 = shim_rand_int(10) * 0.05 + 0.2;
+                part->unk_38 = rand_int(10) * 0.05 + 0.2;
                 part->unk_40 = -1.0f;
                 part->unk_10 = 30;
                 part->scale = 1.0 - (i % 3) * 0.3;
                 break;
             case 4:
             case 12:
-                part->unk_38 = shim_rand_int(10) * 0.2 + 0.6;
+                part->unk_38 = rand_int(10) * 0.2 + 0.6;
                 part->unk_10 = 20;
                 part->unk_40 = -2.0f;
                 part->scale = 1.0 - (i % 3) * 0.3;
                 break;
         }
 
-        part->unk_14 = -shim_rand_int(part->unk_10);
+        part->unk_14 = -rand_int(part->unk_10);
 
         if (part->unk_38 < 0.0f) {
             part->pos.x = (part->unk_10 - part->unk_14) * (-part->unk_38);
@@ -184,7 +184,7 @@ void energy_in_out_update(EffectInstance* effect) {
 
     part->unk_14++;
     if (part->unk_10 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -209,7 +209,7 @@ void energy_in_out_update(EffectInstance* effect) {
             } else {
                 part->pos.x = 0.0f;
             }
-            part->unk_3C = shim_rand_int(359);
+            part->unk_3C = rand_int(359);
         }
 
         part->pos.x += part->unk_38;
@@ -219,7 +219,7 @@ void energy_in_out_update(EffectInstance* effect) {
         if (angle < 0.0f || angle > 180.0f) {
             part->unk_24 = 0;
         } else {
-            part->unk_24 = shim_sin_deg(angle) * 255.0f;
+            part->unk_24 = sin_deg(angle) * 255.0f;
         }
     }
 }
@@ -233,7 +233,7 @@ void energy_in_out_render(EffectInstance* effect) {
     renderTask.distance = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
 }
 
 void func_E00D6978(void) {
@@ -255,8 +255,8 @@ void energy_in_out_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, scale, part->pos.x, part->pos.y, part->pos.z);
-    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, scale, part->pos.x, part->pos.y, part->pos.z);
+    guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, part->unk_18, part->unk_1C, part->unk_20, unk_24);
@@ -269,16 +269,16 @@ void energy_in_out_appendGfx(void* effect) {
 
         gDPSetPrimColor(gMainGfxPos++, 0, 0, unk_18, unk_1C, unk_20, (unk_24 * part->unk_24) / 255);
 
-        shim_guRotateF(sp20, part->unk_3C, 0.0f, 0.0f, 1.0f);
-        shim_guTranslateF(sp60, part->pos.x + unk_38, 0.0f, 0.0f);
-        shim_guMtxCatF(sp60, sp20, sp20);
+        guRotateF(sp20, part->unk_3C, 0.0f, 0.0f, 1.0f);
+        guTranslateF(sp60, part->pos.x + unk_38, 0.0f, 0.0f);
+        guMtxCatF(sp60, sp20, sp20);
         if (D_E00D6E40[unk_00] == D_09000688_3D65B8 || D_E00D6E40[unk_00] == D_09000808_3D6738) {
-            shim_guScaleF(sp60, scale, 1.0f, 1.0f);
+            guScaleF(sp60, scale, 1.0f, 1.0f);
         } else {
-            shim_guScaleF(sp60, scale, scale, 1.0f);
+            guScaleF(sp60, scale, scale, 1.0f);
         }
-        shim_guMtxCatF(sp60, sp20, sp20);
-        shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guMtxCatF(sp60, sp20, sp20);
+        guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         gSPDisplayList(gMainGfxPos++, D_E00D6E40[unk_00]);

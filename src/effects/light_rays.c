@@ -107,9 +107,9 @@ void light_rays_main(
     bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_LIGHT_RAYS;
 
-    effect = shim_create_effect_instance(bpPtr);
+    effect = create_effect_instance(bpPtr);
     effect->numParts = numParts;
-    part = effect->data.lightRays = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = effect->data.lightRays = general_heap_malloc(numParts * sizeof(*part));
     ASSERT(effect->data.lightRays != NULL);
 
     part->type = type;
@@ -201,7 +201,7 @@ void light_rays_update(EffectInstance* effect) {
     }
 
     if (part->timeLeft < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -263,7 +263,7 @@ void light_rays_render(EffectInstance* effect) {
     renderTask.distance = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -291,7 +291,7 @@ void light_rays_appendGfx(void* effect) {
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
     gSPDisplayList(gMainGfxPos++, dlist2);
 
-    shim_guTranslateF(mtxTranslate, part->pos.x, part->pos.y, part->pos.z);
+    guTranslateF(mtxTranslate, part->pos.x, part->pos.y, part->pos.z);
 
     part++;
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, part++) {
@@ -306,8 +306,8 @@ void light_rays_appendGfx(void* effect) {
             func_E006A85C(part);
         }
 
-        shim_guRotateF(mtxTemp, part->rotation.x, 1.0f, 0.0f, 0.0f);
-        shim_guMtxCatF(mtxTemp, mtxTranslate, mtxTransform);
+        guRotateF(mtxTemp, part->rotation.x, 1.0f, 0.0f, 0.0f);
+        guMtxCatF(mtxTemp, mtxTranslate, mtxTransform);
 
         if (type >= 2) {
             unk_64 = part->rotation.z;
@@ -317,12 +317,12 @@ void light_rays_appendGfx(void* effect) {
                 angleZ = unk_64 + 0.0f;
             }
 
-            shim_guRotateF(mtxTemp, angleZ, 0.0f, 0.0f, 1.0f);
-            shim_guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
-            shim_guRotateF(mtxTemp, part->rotation.y, 0.0f, 1.0f, 0.0f);
-            shim_guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
-            shim_guTranslateF(mtxTemp, part->unk_58, 0.0f, 0.0f);
-            shim_guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
+            guRotateF(mtxTemp, angleZ, 0.0f, 0.0f, 1.0f);
+            guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
+            guRotateF(mtxTemp, part->rotation.y, 0.0f, 1.0f, 0.0f);
+            guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
+            guTranslateF(mtxTemp, part->unk_58, 0.0f, 0.0f);
+            guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
 
             scaleX = scaleZ = (temp + 3.0f) * 0.25;
             switch (i & 3) {
@@ -341,22 +341,22 @@ void light_rays_appendGfx(void* effect) {
                     break;
             }
 
-            shim_guScaleF(mtxTemp, scaleX, scaleY, scaleZ);
-            shim_guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
+            guScaleF(mtxTemp, scaleX, scaleY, scaleZ);
+            guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
 
             gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 240, part->alpha);
         } else {
-            shim_guRotateF(mtxTemp, part->rotation.y, 0.0f, 1.0f, 0.0f);
-            shim_guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
-            shim_guRotateF(mtxTemp, part->rotation.z, 0.0f, 0.0f, 1.0f);
-            shim_guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
-            shim_guTranslateF(mtxTemp, part->unk_58, 0.0f, 0.0f);
-            shim_guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
+            guRotateF(mtxTemp, part->rotation.y, 0.0f, 1.0f, 0.0f);
+            guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
+            guRotateF(mtxTemp, part->rotation.z, 0.0f, 0.0f, 1.0f);
+            guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
+            guTranslateF(mtxTemp, part->unk_58, 0.0f, 0.0f);
+            guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
 
             gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 181, part->alpha);
         }
 
-        shim_guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gSPDisplayList(gMainGfxPos++, dlist);

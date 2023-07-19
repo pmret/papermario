@@ -13,16 +13,16 @@ void flower_trail_update_part_transform(FlowerFXData* effect) {
     Matrix4f transformMtx;
     Matrix4f tempMtx;
 
-    shim_guRotateF(transformMtx, effect->rot.x, 1.0f, 0.0f, 0.0f);
-    shim_guRotateF(tempMtx, effect->rot.z, 0.0f, 0.0f, 1.0f);
-    shim_guMtxCatF(tempMtx, transformMtx, transformMtx);
-    shim_guRotateF(tempMtx, effect->rot.y, 0.0f, 1.0f, 0.0f);
-    shim_guMtxCatF(transformMtx, tempMtx, transformMtx);
-    shim_guScaleF(tempMtx, effect->scale.x, effect->scale.y, effect->scale.z);
-    shim_guMtxCatF(tempMtx, transformMtx, transformMtx);
-    shim_guTranslateF(tempMtx, effect->pos.x, effect->pos.y, effect->pos.z);
-    shim_guMtxCatF(transformMtx, tempMtx, transformMtx);
-    shim_guMtxF2L(transformMtx, &effect->transformMtx);
+    guRotateF(transformMtx, effect->rot.x, 1.0f, 0.0f, 0.0f);
+    guRotateF(tempMtx, effect->rot.z, 0.0f, 0.0f, 1.0f);
+    guMtxCatF(tempMtx, transformMtx, transformMtx);
+    guRotateF(tempMtx, effect->rot.y, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(transformMtx, tempMtx, transformMtx);
+    guScaleF(tempMtx, effect->scale.x, effect->scale.y, effect->scale.z);
+    guMtxCatF(tempMtx, transformMtx, transformMtx);
+    guTranslateF(tempMtx, effect->pos.x, effect->pos.y, effect->pos.z);
+    guMtxCatF(transformMtx, tempMtx, transformMtx);
+    guMtxF2L(transformMtx, &effect->transformMtx);
 }
 
 void flower_trail_update_part(FlowerFXData* effect) {
@@ -60,13 +60,13 @@ void flower_trail_main(s32 triggeredByNpc, f32 posX, f32 posY, f32 posZ, f32 ang
     bp.renderUI = NULL;
     bp.effectID = EFFECT_FLOWER_TRAIL;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
 
-    part = effect->data.flowerTrail = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = effect->data.flowerTrail = general_heap_malloc(numParts * sizeof(*part));
     ASSERT(effect->data.flowerTrail != NULL);
 
-    shim_mem_clear(part, numParts * sizeof(*part));
+    mem_clear(part, numParts * sizeof(*part));
 
     for (i = 0; i < numParts; i++, part++) {
         part->alive = TRUE;
@@ -100,18 +100,18 @@ void flower_trail_main(s32 triggeredByNpc, f32 posX, f32 posY, f32 posZ, f32 ang
         part->rot.y = angle;
         part->rot.x = 0.0f;
         part->rot.z = 0.0f;
-        part->useAltColor = (shim_rand_int(100) >> 4) & 1;
+        part->useAltColor = (rand_int(100) >> 4) & 1;
 
         if (direction != 0.0f) {
             angleOffset = -90.0f;
-            partAngle = shim_clamp_angle(angle + angleOffset);
+            partAngle = clamp_angle(angle + angleOffset);
         } else {
             angleOffset = 90.0f;
-            partAngle = shim_clamp_angle(angle + angleOffset);
+            partAngle = clamp_angle(angle + angleOffset);
         }
 
-        part->velocity.x = shim_sin_deg(partAngle);
-        part->velocity.z = shim_cos_deg(partAngle);
+        part->velocity.x = sin_deg(partAngle);
+        part->velocity.z = cos_deg(partAngle);
     }
 }
 
@@ -137,7 +137,7 @@ void flower_trail_update(EffectInstance* effect) {
     }
 
     if (!anyAlive) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
     }
 }
 
@@ -150,12 +150,12 @@ void flower_trail_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_28;
 
-    queuedTaskPtr = shim_queue_render_task(&renderTask);
+    queuedTaskPtr = queue_render_task(&renderTask);
     queuedTaskPtr->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
 void flower_trail_dispose(EffectInstance* effect) {
-    shim_remove_effect(effect);
+    remove_effect(effect);
 }
 
 void flower_trail_appendGfx(void* argEffect) {

@@ -67,9 +67,9 @@ EffectInstance* lightning_bolt_main(
     bp.renderUI = NULL;
     bp.effectID = EFFECT_LIGHTNING_BOLT;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    data = effect->data.lightningBolt = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.lightningBolt = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.lightningBolt != NULL);
 
     data->type = type;
@@ -94,14 +94,14 @@ EffectInstance* lightning_bolt_main(
     temp = SQ(startX - endX) + SQ(startY - endY) + SQ(startZ - endZ);
 
     if (temp != 0.0f) {
-        data->unk_114 = shim_sqrtf(temp) * 0.005;
+        data->unk_114 = sqrtf(temp) * 0.005;
         data->outerColor.r = 255;
         data->outerColor.g = 220;
         data->outerColor.b = 20;
         data->innerColor.r = 255;
         data->innerColor.g = 255;
         data->innerColor.b = 255;
-        data->unk_110 = shim_rand_int(359);
+        data->unk_110 = rand_int(359);
 
         return effect;
     } else {
@@ -113,7 +113,7 @@ void lightning_bolt_init(EffectInstance* effect) {
 }
 
 f32 lightning_bolt_get_rand_symmetric(f32 interval) {
-    return (f32)shim_rand_int(interval) - interval * 0.5;
+    return (f32)rand_int(interval) - interval * 0.5;
 }
 
 void lightning_bolt_update(EffectInstance* effect) {
@@ -132,7 +132,7 @@ void lightning_bolt_update(EffectInstance* effect) {
     data->lifetime++;
 
     if (data->timeLeft < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -162,7 +162,7 @@ void lightning_bolt_render(EffectInstance *effect) {
     }
 
     renderTaskPointer->renderMode = RENDER_MODE_2D;
-    retTask = shim_queue_render_task(renderTaskPointer);
+    retTask = queue_render_task(renderTaskPointer);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -208,8 +208,8 @@ void lightning_bolt_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guScaleF(sp10, 0.1f, 0.1f, 0.1f);
-    shim_guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guScaleF(sp10, 0.1f, 0.1f, 0.1f);
+    guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, data->outerColor.r, data->outerColor.g, data->outerColor.b, alpha);
@@ -237,8 +237,8 @@ void lightning_bolt_appendGfx(void* effect) {
         theta = (data->unk_110 + (i - lifetime) * 10) % 120 - 60;
         deltaPos = preset->offset[i];
 
-        sinAngle = shim_sin_deg(theta) * deltaPos * 0.04;
-        cosAngle = shim_cos_deg(theta) * deltaPos * 0.04;
+        sinAngle = sin_deg(theta) * deltaPos * 0.04;
+        cosAngle = cos_deg(theta) * deltaPos * 0.04;
 
         deltaX = avgDeltaX * cosAngle - avgDeltaY * sinAngle;
         deltaY = avgDeltaX * sinAngle + avgDeltaY * cosAngle;
@@ -258,14 +258,14 @@ void lightning_bolt_appendGfx(void* effect) {
     for (i = 0; i < ARRAY_COUNT(data->boltVertexPosX); i++) {
         if (i == 0) {
             edgeLength = 8.0f;
-            edgeAngle = -shim_atan2(data->boltVertexPosY[1], -data->boltVertexPosX[1], data->boltVertexPosY[0], -data->boltVertexPosX[0]);
+            edgeAngle = -atan2(data->boltVertexPosY[1], -data->boltVertexPosX[1], data->boltVertexPosY[0], -data->boltVertexPosX[0]);
         } else {
             edgeLength = 8.0f;
             if (i == ARRAY_COUNT(data->boltVertexPosX) - 1) {
                 edgeAngle = -90.0f;
             } else {
-                nextAngle = -shim_atan2(data->boltVertexPosY[i + 1], -data->boltVertexPosX[i + 1], data->boltVertexPosY[i], -data->boltVertexPosX[i]);
-                prevAngle = -shim_atan2(data->boltVertexPosY[i], -data->boltVertexPosX[i], data->boltVertexPosY[i - 1], -data->boltVertexPosX[i - 1]);
+                nextAngle = -atan2(data->boltVertexPosY[i + 1], -data->boltVertexPosX[i + 1], data->boltVertexPosY[i], -data->boltVertexPosX[i]);
+                prevAngle = -atan2(data->boltVertexPosY[i], -data->boltVertexPosX[i], data->boltVertexPosY[i - 1], -data->boltVertexPosX[i - 1]);
                 if (prevAngle - nextAngle > 180.0f) {
                     nextAngle += 360.0f;
                 } else if (prevAngle - nextAngle < -180.0f) {
@@ -283,8 +283,8 @@ void lightning_bolt_appendGfx(void* effect) {
 
         edgeLength *= (widthScale * data->edgeLength[i]);
         texOffsetX = (128 - i * 12) * 32;
-        edgeDeltaX = edgeLength  * shim_sin_deg(edgeAngle);
-        edgeDeltaY = edgeLength * shim_cos_deg(edgeAngle);
+        edgeDeltaX = edgeLength  * sin_deg(edgeAngle);
+        edgeDeltaY = edgeLength * cos_deg(edgeAngle);
         edgeDeltaZ = 0.0f;
 
         vtx->ob[0] = (data->boltVertexPosX[i] + edgeDeltaX) * 10.0f;

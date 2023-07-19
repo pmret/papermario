@@ -29,9 +29,9 @@ EffectInstance* floating_rock_main(s32 type, f32 posX, f32 posY, f32 posZ, f32 f
     bp.renderUI = NULL;
     bp.effectID = EFFECT_FLOATING_ROCK;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    data = effect->data.floatingRock = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.floatingRock = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.floatingRock != NULL);
 
     data->type = type;
@@ -46,8 +46,8 @@ EffectInstance* floating_rock_main(s32 type, f32 posX, f32 posY, f32 posZ, f32 f
     data->vel.x = 0;
     data->vel.z = 0;
     data->rot.x = 0;
-    data->rot.y = shim_rand_int(360);
-    data->rot.z = shim_rand_int(360);
+    data->rot.y = rand_int(360);
+    data->rot.z = rand_int(360);
     data->rotVel.x = 0.0f;
     data->rotVel.z = 20.0f;
     data->rotVel.y = -20.0f;
@@ -69,7 +69,7 @@ void floating_rock_update(EffectInstance* effect) {
     data->timeLeft--;
     data->lifetime++;
     if (data->timeLeft < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -82,7 +82,7 @@ void floating_rock_update(EffectInstance* effect) {
         data->rot.y += data->rotVel.y;
         if (data->pos.y <= data->floorY) {
             data->pos.y = data->floorY;
-            shim_load_effect(EFFECT_DUST);
+            load_effect(EFFECT_DUST);
             dust_main(2, data->pos.x, data->pos.y, data->pos.z, 20);
             data->timeLeft = 30;
         }
@@ -103,7 +103,7 @@ void floating_rock_render(EffectInstance *effect) {
     renderTask.distance = effect76->pos.z;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -115,8 +115,8 @@ void floating_rock_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guPositionF(mtxTransform, data->rot.x, data->rot.z, data->rot.y, data->scale, data->pos.x, data->pos.y, data->pos.z);
-    shim_guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guPositionF(mtxTransform, data->rot.x, data->rot.z, data->rot.y, data->scale, data->pos.x, data->pos.y, data->pos.z);
+    guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 215, 215, 110, alpha);

@@ -25,9 +25,9 @@ EffectInstance* squirt_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f3
     bp.renderUI = NULL;
     bp.effectID = EFFECT_SQUIRT;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    data = effect->data.squirt = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.squirt = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.squirt != NULL);
 
     data->unk_00 = arg0;
@@ -104,7 +104,7 @@ void squirt_update(EffectInstance* effect) {
     data->unk_30++;
 
     if (data->unk_2C < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -132,7 +132,7 @@ void squirt_update(EffectInstance* effect) {
                 data->unk_148[i] = data->unk_18 + (data->unk_24 - data->unk_18) * factor;
             } else {
                 data->unk_E8[i] = data->unk_10 + (data->unk_1C - data->unk_10) * factor;
-                data->unk_118[i] = data->unk_14 + (data->unk_20 - data->unk_14) * factor + shim_sin_deg(factor * 180.0f) * 120.0f;
+                data->unk_118[i] = data->unk_14 + (data->unk_20 - data->unk_14) * factor + sin_deg(factor * 180.0f) * 120.0f;
                 data->unk_148[i] = data->unk_18 + (data->unk_24 - data->unk_18) * factor;
                 data->unk_1D8[i] = 255.0f - factor * 255.0f;
             }
@@ -149,7 +149,7 @@ void squirt_render(EffectInstance* effect) {
     renderTask.distance = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -175,10 +175,10 @@ void squirt_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guTranslateF(sp10, 0.0f, 0.0f, 0.0f);
-    shim_guScaleF(sp50, 0.05f, 0.05f, 0.05f);
-    shim_guMtxCatF(sp50, sp10, sp10);
-    shim_guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp10, 0.0f, 0.0f, 0.0f);
+    guScaleF(sp50, 0.05f, 0.05f, 0.05f);
+    guMtxCatF(sp50, sp10, sp10);
+    guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, data->unk_34, data->unk_38, data->unk_3C, data->unk_40);
@@ -197,7 +197,7 @@ void squirt_appendGfx(void* effect) {
 
         if (i == 0 || zero == i || (i != 11 && data->unk_178[i] == 0)) {
             theta = data->unk_118[inc];
-            theta = -shim_atan2(theta, -data->unk_E8[i + 1], data->unk_118[i], -data->unk_E8[i]);
+            theta = -atan2(theta, -data->unk_E8[i + 1], data->unk_118[i], -data->unk_E8[i]);
         }
 
         if (data->unk_00 == 0) {
@@ -218,8 +218,8 @@ void squirt_appendGfx(void* effect) {
         tc0 *= 64;
 
         var_f22 *= unk_50;
-        sinComp = var_f22 * shim_sin_deg(theta);
-        cosComp = var_f22 * shim_cos_deg(theta);
+        sinComp = var_f22 * sin_deg(theta);
+        cosComp = var_f22 * cos_deg(theta);
 
         vtx->ob[0] = (data->unk_E8[i] + sinComp) * 20.0f;
         vtx->ob[1] = (data->unk_118[i] + cosComp) * 20.0f;

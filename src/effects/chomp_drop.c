@@ -25,9 +25,9 @@ EffectInstance* chomp_drop_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4
     bp.renderUI = NULL;
     bp.effectID = EFFECT_CHOMP_DROP;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    data = effect->data.chompDrop = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.chompDrop = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.chompDrop != NULL);
 
     data->unk_00 = arg0;
@@ -40,7 +40,7 @@ EffectInstance* chomp_drop_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4
     data->unk_18 = arg6;
     data->unk_34 = 1.0f;
     data->unk_20 = arg7;
-    data->unk_38 = shim_rand_int(0x168);
+    data->unk_38 = rand_int(0x168);
     data->unk_40 = arg9;
     data->unk_44 = 0;
     data->unk_3C = arg5;
@@ -61,7 +61,7 @@ void chomp_drop_update(EffectInstance* effect) {
     data->unk_40--;
     data->unk_44++;
     if (data->unk_40 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -96,7 +96,7 @@ void chomp_drop_update(EffectInstance* effect) {
             data->unk_08 += data->unk_10;
             if (data->unk_08 < 0.0f) {
                 data->unk_08 = 0.0f;
-                shim_load_effect(EFFECT_DUST);
+                load_effect(EFFECT_DUST);
                 dust_main(2, data->unk_04 + 5.0f, data->unk_08, data->unk_0C, 30);
                 dust_main(2, data->unk_04 - 5.0f, data->unk_08, data->unk_0C, 30);
                 data->unk_2C = 4;
@@ -127,7 +127,7 @@ void chomp_drop_render(EffectInstance* effect) {
     renderTask.distance = -10;
     renderTask.renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -146,17 +146,17 @@ void chomp_drop_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effectTemp)->graphics->data));
 
-    shim_guScaleF(sp20, 0.01f, 0.01f, 0.01f);
-    shim_guPositionF(sp60, 0.0f, 0.0f, 0.0f, data->unk_24, data->unk_04 * 100.0f, data->unk_08 * 100.0f, data->unk_0C * 100.0f);
-    shim_guMtxCatF(sp60, sp20, sp20);
-    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guScaleF(sp20, 0.01f, 0.01f, 0.01f);
+    guPositionF(sp60, 0.0f, 0.0f, 0.0f, data->unk_24, data->unk_04 * 100.0f, data->unk_08 * 100.0f, data->unk_0C * 100.0f);
+    guMtxCatF(sp60, sp20, sp20);
+    guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
               G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gDPSetPrimColor(
         gMainGfxPos++, 0, 0,
-        (shim_sin_deg(temp_s6 * 30) * 25.0f) + 225.0f,
-        (shim_sin_deg(temp_s6 * 30) * 25.0f) + 225.0f,
+        (sin_deg(temp_s6 * 30) * 25.0f) + 225.0f,
+        (sin_deg(temp_s6 * 30) * 25.0f) + 225.0f,
         255,
         primA
     );
@@ -181,8 +181,8 @@ void chomp_drop_appendGfx(void* effect) {
 
         for (i = 0; i < 16; i++) {
             Vtx_t* vtx = &vtxTemp[i * 2];
-            s32 temp_s1 = shim_sin_deg(((temp_s6 * 10) + (i * 60)) + temp_s7) * 500.0f * temp_f22;
-            s32 temp_v0_3 = (i * 400) + (s32) (shim_sin_deg(((temp_s6 * 10) + (i * 6)) + temp_s7) * 200.0f * temp_f22);
+            s32 temp_s1 = sin_deg(((temp_s6 * 10) + (i * 60)) + temp_s7) * 500.0f * temp_f22;
+            s32 temp_v0_3 = (i * 400) + (s32) (sin_deg(((temp_s6 * 10) + (i * 6)) + temp_s7) * 200.0f * temp_f22);
 
             vtx->ob[0] = temp_s1 - 3200;
             vtx->ob[1] = temp_v0_3;

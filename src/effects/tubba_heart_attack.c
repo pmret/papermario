@@ -60,9 +60,9 @@ EffectInstance* tubba_heart_attack_main(
     bp.renderUI = NULL;
     bp.effectID = EFFECT_TUBBA_HEART_ATTACK;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    data = effect->data.tubbaHeartAttack = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.tubbaHeartAttack = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.tubbaHeartAttack != NULL);
 
     data->unk_00 = arg0;
@@ -82,10 +82,10 @@ EffectInstance* tubba_heart_attack_main(
     data->unk_20 = 120;
 
     for (i = 0; i < 25; i++) {
-        f32 sin = shim_sin_deg(i * 1080 / 25);
-        f32 cos = shim_cos_deg(i * 1080 / 25);
+        f32 sin = sin_deg(i * 1080 / 25);
+        f32 cos = cos_deg(i * 1080 / 25);
 
-        data->unk_478[i] = shim_rand_int(359) - 180;
+        data->unk_478[i] = rand_int(359) - 180;
         data->unk_284[i] = sin * 15.0f;
         data->unk_2E8[i] = D_E00CCE4C[i] + 10;
         data->unk_34C[i] = cos * 15.0f;
@@ -131,7 +131,7 @@ void tubba_heart_attack_update(EffectInstance* effect) {
     data->unk_14++;
 
     if (data->unk_10 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -224,9 +224,9 @@ void tubba_heart_attack_update(EffectInstance* effect) {
                 break;
             case 4:
                 factor = D_E00CCE04[data->unk_734[i]] * 0.01;
-                angle = i * 1080 / 25 + (1.0f - factor) * 1080.0f * 0.5 * shim_cos_deg(i * 180 / 25);
-                sin = shim_sin_deg(angle);
-                cos = shim_cos_deg(angle);
+                angle = i * 1080 / 25 + (1.0f - factor) * 1080.0f * 0.5 * cos_deg(i * 180 / 25);
+                sin = sin_deg(angle);
+                cos = cos_deg(angle);
 
                 data->unk_2C[i] = ((15.0f / factor) / factor) * sin;
                 data->unk_90[i] = D_E00CCE4C[i] + 10;
@@ -261,10 +261,10 @@ void tubba_heart_attack_update(EffectInstance* effect) {
 
                 break;
             case 6:
-                shim_load_effect(EFFECT_FLOATING_CLOUD_PUFF);
-                shim_guRotateF(sp18, data->unk_4DC[i], 0.0f, 1.0f, 0.0f);
-                shim_guTranslateF(sp58, data->unk_2C[i], data->unk_90[i], data->unk_F4[i]);
-                shim_guMtxCatF(sp58, sp18, sp18);
+                load_effect(EFFECT_FLOATING_CLOUD_PUFF);
+                guRotateF(sp18, data->unk_4DC[i], 0.0f, 1.0f, 0.0f);
+                guTranslateF(sp58, data->unk_2C[i], data->unk_90[i], data->unk_F4[i]);
+                guMtxCatF(sp58, sp18, sp18);
 
                 puffEffect = floating_cloud_puff_main(0, data->unk_04 + sp18[3][0], data->unk_08 + sp18[3][1], data->unk_0C + sp18[3][2], 1.0f, 16);
                 puffEffect->data.floatingCloudPuff->unk_28 = 100;
@@ -287,7 +287,7 @@ void tubba_heart_attack_render(EffectInstance* effect) {
     renderTask.distance = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -305,10 +305,10 @@ void tubba_heart_attack_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guTranslateF(sp18, data->unk_04, data->unk_08, data->unk_0C);
-    shim_guScaleF(sp58, data->unk_28, data->unk_28, data->unk_28);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp18, data->unk_04, data->unk_08, data->unk_0C);
+    guScaleF(sp58, data->unk_28, data->unk_28, data->unk_28);
+    guMtxCatF(sp58, sp18, sp18);
+    guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, data->unk_18, data->unk_1C, data->unk_20, unk_24);
@@ -317,16 +317,16 @@ void tubba_heart_attack_appendGfx(void* effect) {
 
     for (i = 0; i < 25; i++) {
         if (data->unk_6D0[i] != 0 && data->unk_6D0[i] != 7) {
-            shim_guRotateF(sp18, data->unk_4DC[i], 0.0f, 1.0f, 0.0f);
-            shim_guTranslateF(sp58, data->unk_2C[i], data->unk_90[i], data->unk_F4[i]);
-            shim_guMtxCatF(sp58, sp18, sp18);
-            shim_guRotateF(sp58, -data->unk_4DC[i], 0.0f, 1.0f, 0.0f);
-            shim_guMtxCatF(sp58, sp18, sp18);
-            shim_guRotateF(sp58, data->unk_478[i], 0.0f, 0.0f, 1.0f);
-            shim_guMtxCatF(sp58, sp18, sp18);
-            shim_guScaleF(sp58, data->unk_3B0[i], data->unk_414[i], 1.0f);
-            shim_guMtxCatF(sp58, sp18, sp18);
-            shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+            guRotateF(sp18, data->unk_4DC[i], 0.0f, 1.0f, 0.0f);
+            guTranslateF(sp58, data->unk_2C[i], data->unk_90[i], data->unk_F4[i]);
+            guMtxCatF(sp58, sp18, sp18);
+            guRotateF(sp58, -data->unk_4DC[i], 0.0f, 1.0f, 0.0f);
+            guMtxCatF(sp58, sp18, sp18);
+            guRotateF(sp58, data->unk_478[i], 0.0f, 0.0f, 1.0f);
+            guMtxCatF(sp58, sp18, sp18);
+            guScaleF(sp58, data->unk_3B0[i], data->unk_414[i], 1.0f);
+            guMtxCatF(sp58, sp18, sp18);
+            guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
             gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
             gSPMatrix(gMainGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);

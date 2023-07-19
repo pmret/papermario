@@ -36,9 +36,9 @@ void lens_flare_main(s32 type, f32 posX, f32 posY, f32 posZ, s32 duration) {
     bp.renderUI = NULL;
     bp.effectID = EFFECT_LENS_FLARE;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    data = effect->data.lensFlare = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.lensFlare = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.lensFlare != NULL);
 
     data->type = type;
@@ -73,7 +73,7 @@ void lens_flare_update(EffectInstance* effect) {
     data->lifetime++;
 
     if (data->timeLeft < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -89,8 +89,8 @@ void lens_flare_update(EffectInstance* effect) {
     data->largeFlareScaleVel += 0.29;
     data->largeFlareRot += data->largeFlareRotVel;
     data->largeFlareRotVel *= 0.93;
-    data->smallFlareScale = shim_sin_deg(time * 50) * 0.5 + 0.9;
-    data->smallFlareAlpha = shim_sin_deg(time * 40) * 64.0f + 144.0f;
+    data->smallFlareScale = sin_deg(time * 50) * 0.5 + 0.9;
+    data->smallFlareAlpha = sin_deg(time * 40) * 64.0f + 144.0f;
 }
 
 void lens_flare_render(EffectInstance* effect) {
@@ -102,7 +102,7 @@ void lens_flare_render(EffectInstance* effect) {
     renderTask.distance = 20;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -119,18 +119,18 @@ void lens_flare_appendGfx(void* effect) {
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
     gSPDisplayList(gMainGfxPos++, D_E0034788[type]);
 
-    shim_guTranslateF(mtxTransform, data->pos.x, data->pos.y, data->pos.z);
-    shim_guRotateF(mtxTemp, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-    shim_guMtxCatF(mtxTemp, mtxTransform, mtxShared);
+    guTranslateF(mtxTransform, data->pos.x, data->pos.y, data->pos.z);
+    guRotateF(mtxTemp, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(mtxTemp, mtxTransform, mtxShared);
 
     alpha = data->smallFlareAlpha;
     idx = data->lifetime * 3;
 
     // small twinkling shine which changes color
     if (type == 0) {
-        shim_guScaleF(mtxTemp, data->smallFlareScale, data->smallFlareScale, data->smallFlareScale);
-        shim_guMtxCatF(mtxTemp, mtxShared, mtxTransform);
-        shim_guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guScaleF(mtxTemp, data->smallFlareScale, data->smallFlareScale, data->smallFlareScale);
+        guMtxCatF(mtxTemp, mtxShared, mtxTransform);
+        guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         idx %= ARRAY_COUNT(D_E0034790);
 
@@ -147,11 +147,11 @@ void lens_flare_appendGfx(void* effect) {
 
     // large growing white shine
     if (alpha > 0) {
-        shim_guScaleF(mtxTemp, data->largeFlareScale, data->largeFlareScale, data->largeFlareScale);
-        shim_guMtxCatF(mtxTemp, mtxShared, mtxTransform);
-        shim_guRotateF(mtxTemp, data->largeFlareRot, 0.0f, 0.0f, 1.0f);
-        shim_guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
-        shim_guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guScaleF(mtxTemp, data->largeFlareScale, data->largeFlareScale, data->largeFlareScale);
+        guMtxCatF(mtxTemp, mtxShared, mtxTransform);
+        guRotateF(mtxTemp, data->largeFlareRot, 0.0f, 0.0f, 1.0f);
+        guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
+        guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gDPSetPrimColor(gMainGfxPos++, 0, 0, D_E0034790[idx], D_E0034790[idx + 1], D_E0034790[idx + 2], alpha);
         gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 255, alpha);

@@ -40,9 +40,9 @@ EffectInstance* moving_cloud_main(
     bp.renderUI = NULL;
     bp.effectID = EFFECT_MOVING_CLOUD;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    data = effect->data.movingCloud = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.movingCloud = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.movingCloud != NULL);
 
     data->unk_00 = arg0;
@@ -54,7 +54,7 @@ EffectInstance* moving_cloud_main(
     var_f12 = SQ(temp_f24) + SQ(temp_f22) + SQ(temp_f20);
 
     if (var_f12 != 0.0f) {
-        var_f12 = shim_sqrtf(var_f12);
+        var_f12 = sqrtf(var_f12);
     }
 
     if (arg7 > 0.0f) {
@@ -132,7 +132,7 @@ void moving_cloud_update(EffectInstance* effect) {
     data->unk_20++;
 
     if (data->unk_1C < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -172,7 +172,7 @@ void moving_cloud_render(EffectInstance* effect) {
     renderTask.distance = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -186,10 +186,10 @@ void moving_cloud_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guTranslateF(sp10, data->unk_04, data->unk_08, data->unk_0C);
-    shim_guScaleF(sp50, data->unk_44, data->unk_44, data->unk_44);
-    shim_guMtxCatF(sp50, sp10, sp10);
-    shim_guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp10, data->unk_04, data->unk_08, data->unk_0C);
+    guScaleF(sp50, data->unk_44, data->unk_44, data->unk_44);
+    guMtxCatF(sp50, sp10, sp10);
+    guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPMatrix(gMainGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);

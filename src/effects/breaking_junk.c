@@ -32,10 +32,10 @@ EffectInstance* breaking_junk_main(s32 arg0, f32 x, f32 y, f32 z, f32 scale, s32
     bp.renderUI = NULL;
     bp.effectID = EFFECT_BREAKING_JUNK;
 
-    effect = shim_create_effect_instance(bpPtr);
+    effect = create_effect_instance(bpPtr);
     effect->numParts = numParts;
 
-    data = effect->data.breakingJunk = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.breakingJunk = general_heap_malloc(numParts * sizeof(*data));
 
     ASSERT(effect->data.breakingJunk != NULL);
 
@@ -52,12 +52,12 @@ EffectInstance* breaking_junk_main(s32 arg0, f32 x, f32 y, f32 z, f32 scale, s32
         data->pos.x = x;
         data->pos.y = y;
         data->pos.z = z;
-        data->vel.x = (shim_rand_int(10) - 5) * 0.5;
-        data->vel.y = (shim_rand_int(5) + 1) * 0.8;
-        data->vel.z = (shim_rand_int(10) - 5) * 0.5;
+        data->vel.x = (rand_int(10) - 5) * 0.5;
+        data->vel.y = (rand_int(5) + 1) * 0.8;
+        data->vel.z = (rand_int(10) - 5) * 0.5;
         data->scale = scale;
-        data->primR = data->envR = shim_rand_int(255);
-        g = shim_rand_int(255 - data->envR);
+        data->primR = data->envR = rand_int(255);
+        g = rand_int(255 - data->envR);
         data->primG = data->envG = g;
         data->primB = data->envB = (255 - g) - data->envR;
         data->primR += 168;
@@ -75,7 +75,7 @@ EffectInstance* breaking_junk_main(s32 arg0, f32 x, f32 y, f32 z, f32 scale, s32
         data->envR = data->envR * 0.6;
         data->envG = data->envG * 0.6;
         data->envB = data->envB * 0.6;
-        data->rot = shim_rand_int(359);
+        data->rot = rand_int(359);
     }
     return effect;
 }
@@ -97,7 +97,7 @@ void breaking_junk_update(EffectInstance* effect) {
 
     data->lifeTime++;
     if (data->timeLeft < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -127,7 +127,7 @@ void breaking_junk_render(EffectInstance* effect) {
     renderTask.distance = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -142,10 +142,10 @@ void breaking_junk_appendGfx(void* effect) {
     gSPDisplayList(gMainGfxPos++, D_E01187C0[0]);
 
     for (i = 0; i < ((EffectInstance*)effect)->numParts; i++, data++) {
-        shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, data->scale * 0.5, data->pos.x, data->pos.y, data->pos.z);
-        shim_guRotateF(sp60, data->rot, 0.0f, 0.0f, 1.0f);
-        shim_guMtxCatF(sp60, sp20, sp20);
-        shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, data->scale * 0.5, data->pos.x, data->pos.y, data->pos.z);
+        guRotateF(sp60, data->rot, 0.0f, 0.0f, 1.0f);
+        guMtxCatF(sp60, sp20, sp20);
+        guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gDPSetPrimColor(gMainGfxPos++, 0, 0, data->primR, data->primG, data->primB, alpha);
         gDPSetEnvColor(gMainGfxPos++, data->envR, data->envG, data->envB, data->envA);

@@ -27,15 +27,15 @@ void big_snowflakes_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     bp.renderUI = NULL;
     bp.effectID = EFFECT_BIG_SNOWFLAKES;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
 
-    data = shim_general_heap_malloc(effect->numParts * sizeof(*data));
+    data = general_heap_malloc(effect->numParts * sizeof(*data));
     effect->data.bigSnowflakes = data;
 
     ASSERT(data != NULL);
 
-    shim_mem_clear(data, numParts * sizeof(*data));
+    mem_clear(data, numParts * sizeof(*data));
     data->unk_00 = arg0;
     data->unk_04 = arg1;
     data->unk_08 = arg2;
@@ -68,7 +68,7 @@ void big_snowflakes_update(EffectInstance* effect) {
     data->unk_28--;
     data->unk_2C++;
     if (data->unk_28 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -82,13 +82,13 @@ void big_snowflakes_update(EffectInstance* effect) {
 
     data++;
     for (i = 1; i < effect->numParts; i++, data++) {
-        data->unk_10 += (f32) (shim_sin_deg(2.0f * data->unk_18) * 0.2);
+        data->unk_10 += (f32) (sin_deg(2.0f * data->unk_18) * 0.2);
         data->unk_14 += -0.05f;
         data->unk_10 *= 0.92;
         data->unk_14 += -0.05f;
         data->unk_1C += func_E0200044(50, unk_28 + (i * 20)) - 25;
-        data->unk_18 += shim_sin_deg(data->unk_1C) * 10.0f;
-        data->unk_20 += shim_cos_deg(data->unk_1C * 0.5f) * 10.0f;
+        data->unk_18 += sin_deg(data->unk_1C) * 10.0f;
+        data->unk_20 += cos_deg(data->unk_1C * 0.5f) * 10.0f;
         data->unk_04 += data->unk_10;
         data->unk_08 += data->unk_14;
     }
@@ -103,7 +103,7 @@ void big_snowflakes_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -119,24 +119,24 @@ void big_snowflakes_appendGfx(void* effect) {
     gSPDisplayList(gMainGfxPos++, dlist);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 20, 100, 20, data->unk_24);
 
-    shim_guTranslateF(sp18, data->unk_04, data->unk_08, data->unk_0C);
-    shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-    shim_guMtxCatF(sp58, sp18, sp98);
+    guTranslateF(sp18, data->unk_04, data->unk_08, data->unk_0C);
+    guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(sp58, sp18, sp98);
 
     data++;
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, data++) {
         Gfx* dlist2 = D_E0060730[i & 1]; // should be able to be i % 2 (ARRAY_COUNT(D_E0060730))
 
-        shim_guTranslateF(sp58, data->unk_04, data->unk_08, data->unk_0C);
-        shim_guMtxCatF(sp58, sp98, sp18);
+        guTranslateF(sp58, data->unk_04, data->unk_08, data->unk_0C);
+        guMtxCatF(sp58, sp98, sp18);
 
         if (!(i & 1)) {
-            shim_guRotateF(sp58, data->unk_18, 0.0f, 0.0f, 1.0f);
-            shim_guMtxCatF(sp58, sp18, sp18);
-            shim_guRotateF(sp58, data->unk_20, 0.0f, 1.0f, 0.0f);
-            shim_guMtxCatF(sp58, sp18, sp18);
+            guRotateF(sp58, data->unk_18, 0.0f, 0.0f, 1.0f);
+            guMtxCatF(sp58, sp18, sp18);
+            guRotateF(sp58, data->unk_20, 0.0f, 1.0f, 0.0f);
+            guMtxCatF(sp58, sp18, sp18);
         }
-        shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         gSPDisplayList(gMainGfxPos++, dlist2);

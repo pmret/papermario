@@ -56,9 +56,9 @@ EffectInstance* shimmer_wave_main(
     bp.renderUI = NULL;
     bp.effectID = EFFECT_SHIMMER_WAVE;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = arg6;
-    part = effect->data.shimmerWave = shim_general_heap_malloc(arg6 * sizeof(*part));
+    part = effect->data.shimmerWave = general_heap_malloc(arg6 * sizeof(*part));
     ASSERT(effect->data.shimmerWave != NULL);
 
     part->unk_00 = arg0;
@@ -119,7 +119,7 @@ void shimmer_wave_update(EffectInstance* effect) {
     part->unk_3C++;
 
     if (part->unk_38 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -139,20 +139,20 @@ void shimmer_wave_update(EffectInstance* effect) {
 
         if (part->unk_30 >= 0) {
             if (part->unk_30 == 0) {
-                f32 rand = shim_rand_int(359);
-                shim_rand_int(359);
+                f32 rand = rand_int(359);
+                rand_int(359);
 
-                part->unk_04 = unk_10 * shim_sin_deg(rand);
-                part->unk_08 = shim_rand_int(unk_14) - unk_14 * 0.5;
-                part->unk_0C = unk_10 * shim_cos_deg(rand);
-                part->unk_18 = shim_sin_deg(rand) * 15.0f;
+                part->unk_04 = unk_10 * sin_deg(rand);
+                part->unk_08 = rand_int(unk_14) - unk_14 * 0.5;
+                part->unk_0C = unk_10 * cos_deg(rand);
+                part->unk_18 = sin_deg(rand) * 15.0f;
                 part->unk_1C = part->unk_08 * 0.4;
-                part->unk_20 = shim_cos_deg(rand) * 15.0f;
+                part->unk_20 = cos_deg(rand) * 15.0f;
                 part->unk_24 = part->unk_18 * 0.5;
                 part->unk_28 = part->unk_1C * 0.5;
                 part->unk_2C = part->unk_20 * 0.5;
-                part->unk_64 = shim_rand_int(15);
-                part->unk_68 = shim_rand_int(15);
+                part->unk_64 = rand_int(15);
+                part->unk_68 = rand_int(15);
                 part->unk_34 = 0.0f;
                 part->unk_4C = 255;
             }
@@ -180,7 +180,7 @@ void shimmer_wave_render(EffectInstance* effect) {
     renderTask.distance = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -198,10 +198,10 @@ void shimmer_wave_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guTranslateF(sp20, part->unk_04, part->unk_08, part->unk_0C);
-    shim_guScaleF(sp60, part->unk_60, part->unk_60, part->unk_60);
-    shim_guMtxCatF(sp60, sp20, sp20);
-    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp20, part->unk_04, part->unk_08, part->unk_0C);
+    guScaleF(sp60, part->unk_60, part->unk_60, part->unk_60);
+    guMtxCatF(sp60, sp20, sp20);
+    guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gDPSetEnvColor(gMainGfxPos++, part->unk_40, part->unk_44, part->unk_48, part->unk_5C);
@@ -213,8 +213,8 @@ void shimmer_wave_appendGfx(void* effect) {
     part++;
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, part++) {
         if (part->unk_30 >= 0) {
-            shim_guPositionF(sp20, 0.0f, 0.0f, part->unk_34, part->unk_60 * temp_4C, part->unk_04, part->unk_08, part->unk_0C);
-            shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+            guPositionF(sp20, 0.0f, 0.0f, part->unk_34, part->unk_60 * temp_4C, part->unk_04, part->unk_08, part->unk_0C);
+            guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
             gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
             gDPSetPrimColor(gMainGfxPos++, 0, 0, unk_50, unk_54, unk_58, part->unk_4C * temp_4C);
@@ -227,15 +227,15 @@ void shimmer_wave_appendGfx(void* effect) {
     gSPBranchList(savedGfxPos, gMainGfxPos);
     gSPDisplayList(gMainGfxPos++, savedGfxPos + 1);
 
-    shim_guRotateF(sp20, 120.0f, 0.0f, 1.0f, 0.0f);
-    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guRotateF(sp20, 120.0f, 0.0f, 1.0f, 0.0f);
+    guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gSPDisplayList(gMainGfxPos++, savedGfxPos + 1);
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 
-    shim_guRotateF(sp20, -120.0f, 0.0f, 1.0f, 0.0f);
-    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guRotateF(sp20, -120.0f, 0.0f, 1.0f, 0.0f);
+    guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gSPDisplayList(gMainGfxPos++, savedGfxPos + 1);

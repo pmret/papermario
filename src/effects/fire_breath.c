@@ -34,9 +34,9 @@ EffectInstance* fire_breath_main(
     bp.renderUI = NULL;
     bp.effectID = EFFECT_FIRE_BREATH;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    data = effect->data.fireBreath = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.fireBreath = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.fireBreath != NULL);
 
     data->type = type;
@@ -102,7 +102,7 @@ void fire_breath_update(EffectInstance* effect) {
     data->spawnTimer++;
 
     if (data->timeLeft < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -126,7 +126,7 @@ void fire_breath_update(EffectInstance* effect) {
     if (spawnTimer == data->spawnDelay + 1 && data->numChildren > 0) {
         EffectInstance* spawned;
 
-        shim_load_effect(EFFECT_FIRE_BREATH);
+        load_effect(EFFECT_FIRE_BREATH);
         spawned = fire_breath_main(
             data->type, data->initPos.x, data->initPos.y, data->initPos.z, data->endPos.x, data->endPos.y,
             data->endPos.z, data->numChildren - 1, data->spawnDelay, lifeTime
@@ -174,7 +174,7 @@ void fire_breath_render(EffectInstance* effect) {
     }
 
     renderTaskPointer->renderMode = RENDER_MODE_2D;
-    retTask = shim_queue_render_task(renderTaskPointer);
+    retTask = queue_render_task(renderTaskPointer);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -192,10 +192,10 @@ void fire_breath_appendGfx(void* effect) {
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     if (type == FIRE_BREATH_SMALL) {
-        shim_guTranslateF(sp18, data->initPos.x, data->initPos.y, data->initPos.z);
-        shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-        shim_guMtxCatF(sp58, sp18, sp18);
-        shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guTranslateF(sp18, data->initPos.x, data->initPos.y, data->initPos.z);
+        guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+        guMtxCatF(sp58, sp18, sp18);
+        guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                   G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
@@ -210,12 +210,12 @@ void fire_breath_appendGfx(void* effect) {
     gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, ((unk_5C * 32) + 0)  * 4, 0, ((unk_5C * 32) + 32) * 4, 128);
     gDPSetTileSize(gMainGfxPos++, 1,               ((unk_5C * 32) + 32) * 4, 0, ((unk_5C * 32) + 64) * 4, 128);
 
-    shim_guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
-    shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guScaleF(sp58, data->scale, data->scale, 0.0f);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
+    guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(sp58, sp18, sp18);
+    guScaleF(sp58, data->scale, data->scale, 0.0f);
+    guMtxCatF(sp58, sp18, sp18);
+    guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
               G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);

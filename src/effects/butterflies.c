@@ -43,9 +43,9 @@ EffectInstance* butterflies_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     bp.renderUI = NULL;
     bp.effectID = EFFECT_BUTTERFLIES;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    part = effect->data.butterflies = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = effect->data.butterflies = general_heap_malloc(numParts * sizeof(*part));
     ASSERT(effect->data.butterflies != NULL);
 
     part->unk_04 = 1000;
@@ -93,7 +93,7 @@ void butterflies_update(EffectInstance* effect) {
     }
     temp_s0->unk_08 += 1;
     if (temp_s0->unk_04 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
     if (temp_s0->unk_04 < 0x10) {
@@ -104,11 +104,11 @@ void butterflies_update(EffectInstance* effect) {
     if (temp_s0->unk_30 <= 0) {
         s32 t;
 
-        temp_f20 = shim_rand_int(359);
-        temp_f24 = temp_s0->unk_18 + (temp_s0->unk_34 * shim_sin_deg(temp_f20));
-        temp_f22 = temp_s0->unk_1C + shim_rand_int(temp_s0->unk_38);
-        temp_f20_2 = temp_s0->unk_20 + (temp_s0->unk_34 * shim_cos_deg(temp_f20));
-        t = shim_rand_int(100) + 10;
+        temp_f20 = rand_int(359);
+        temp_f24 = temp_s0->unk_18 + (temp_s0->unk_34 * sin_deg(temp_f20));
+        temp_f22 = temp_s0->unk_1C + rand_int(temp_s0->unk_38);
+        temp_f20_2 = temp_s0->unk_20 + (temp_s0->unk_34 * cos_deg(temp_f20));
+        t = rand_int(100) + 10;
         temp_f4 = temp_s0->unk_0C;
         temp_f6 = temp_s0->unk_10;
         temp_f8 = temp_s0->unk_14;
@@ -128,7 +128,7 @@ void butterflies_update(EffectInstance* effect) {
         }
         var_f12 = SQ(var_f24) + SQ(var_f22) + SQ(var_f20);
         if (var_f12 != 0.0f) {
-            var_f12 = 1.0f / shim_sqrtf(var_f12);
+            var_f12 = 1.0f / sqrtf(var_f12);
         }
         var_f24 *= var_f12;
         var_f22 *= var_f12;
@@ -136,7 +136,7 @@ void butterflies_update(EffectInstance* effect) {
         temp_s0->unk_3C = var_f24;
         temp_s0->unk_40 = var_f22;
         temp_s0->unk_44 = var_f20;
-        temp_s0->unk_28 = shim_atan2(0.0f, 0.0f, -temp_s0->unk_3C, temp_s0->unk_44);
+        temp_s0->unk_28 = atan2(0.0f, 0.0f, -temp_s0->unk_3C, temp_s0->unk_44);
     }
     temp_s0->unk_2C += 3;
     if (temp_s0->unk_2C >= 30) {
@@ -156,7 +156,7 @@ void butterflies_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -173,12 +173,12 @@ void butterflies_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->graphics->data));
 
-    shim_guTranslateF(sp18, data->unk_0C, data->unk_10 + D_E00AA6EC[data->unk_2C] * 0.3f, data->unk_14);
-    shim_guRotateF(sp58, data->unk_28, 0.0f, 1.0f, 0.0f);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guScaleF(sp58, 0.02f, 0.02f, 0.02f);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp18, data->unk_0C, data->unk_10 + D_E00AA6EC[data->unk_2C] * 0.3f, data->unk_14);
+    guRotateF(sp58, data->unk_28, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(sp58, sp18, sp18);
+    guScaleF(sp58, 0.02f, 0.02f, 0.02f);
+    guMtxCatF(sp58, sp18, sp18);
+    guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, primColor, primColor, primColor, 255);

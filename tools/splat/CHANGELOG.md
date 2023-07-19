@@ -1,5 +1,8 @@
 # splat Release Notes
 
+### 0.15.2
+* Various cleanup and fixes to support more liberal use of `auto` for rom addresses
+
 ### 0.15.1
 * Made some modifications such that linker object paths should be simpler in some circumstances
 

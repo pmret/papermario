@@ -44,9 +44,9 @@ EffectInstance* motion_blur_flame_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f
     bp.renderUI = NULL;
     bp.effectID = EFFECT_MOTION_BLUR_FLAME;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    data = effect->data.motionBlurFlame = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.motionBlurFlame = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.motionBlurFlame != NULL);
 
     data->unk_00 = arg0;
@@ -90,7 +90,7 @@ void motion_blur_flame_update(EffectInstance* effect) {
     }
 
     if (data->unk_50 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
     temp = data->unk_50;
@@ -116,7 +116,7 @@ void motion_blur_flame_render(EffectInstance* effect) {
     renderTask.distance = 100;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -165,7 +165,7 @@ void motion_blur_flame_appendGfx(void* effect) {
         s32 height = temp_s1->unk_14;
 
         if (i == 0) {
-            var_a2 = shim_is_point_visible(temp_f12, temp_f14, temp_f0, -1, &sp48, &sp4C);
+            var_a2 = is_point_visible(temp_f12, temp_f14, temp_f0, -1, &sp48, &sp4C);
         } else {
             var_a2 = temp_f0;
             sp48 = temp_f12;
