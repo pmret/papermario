@@ -738,8 +738,8 @@ glabel msg_copy_to_print_buffer
 /* BA0C8 801231E8 26730001 */  addiu     $s3, $s3, 0x1
 /* BA0CC 801231EC 3C068016 */  lui       $a2, %hi(D_80159B50)
 /* BA0D0 801231F0 24C6BED0 */  addiu     $a2, $a2, %lo(D_80159B50)
-/* BA0D4 801231F4 3C110021 */  lui       $s1, %hi(icon_present_ROM_START)
-/* BA0D8 801231F8 26315390 */  addiu     $s1, $s1, %lo(icon_present_ROM_START)
+/* BA0D4 801231F4 3C110021 */  lui       $s1, %hi(icon_ROM_START)
+/* BA0D8 801231F8 26315390 */  addiu     $s1, $s1, %lo(icon_ROM_START)
 /* BA0DC 801231FC 3C018015 */  lui       $at, %hi(D_8015131C)
 /* BA0E0 80123200 AC26FAAC */  sw        $a2, %lo(D_8015131C)($at)
 /* BA0E4 80123204 00108200 */  sll       $s0, $s0, 8

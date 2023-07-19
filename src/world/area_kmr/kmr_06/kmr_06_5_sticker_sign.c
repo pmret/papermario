@@ -77,7 +77,7 @@ API_CALLABLE(N(CreateSticker)) {
     IMG_PTR iconImg = heap_malloc(0x200);
     PAL_PTR iconPal = heap_malloc(0x20);
 
-    s32 iconBase = (s32) icon_present_ROM_START;
+    s32 iconBase = (s32) icon_ROM_START;
     s32 iconImgEnd = iconBase + 0x200;
     s32 iconPalEnd = iconBase + 0x20;
 

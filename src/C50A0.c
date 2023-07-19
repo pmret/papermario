@@ -12,7 +12,7 @@
 
 #if VERSION_IQUE
 // TODO: remove if section is split in iQue release
-extern Addr icon_present_ROM_START;
+extern Addr icon_ROM_START;
 #endif
 
 #define MAX_ITEM_ENTITIES 256
@@ -807,7 +807,7 @@ void item_entity_load(ItemEntity* item) {
                         entry->data = &gHudElementCacheBuffer[*gHudElementCacheSize];
 
                         ASSERT(*gHudElementCacheSize + size < 0x11000);
-                        nuPiReadRom((s32)icon_present_ROM_START + raster, entry->data, size);
+                        nuPiReadRom((s32)icon_ROM_START + raster, entry->data, size);
                         *gHudElementCacheSize += size;
                         if (!gGameStatusPtr->isBattle) {
                             *pos = i;
@@ -840,7 +840,7 @@ void item_entity_load(ItemEntity* item) {
                         entry->id = palette;
                         entry->data = &gHudElementCacheBuffer[*gHudElementCacheSize];
                         ASSERT(*gHudElementCacheSize + 0x20 < 0x11000);
-                        nuPiReadRom((s32)icon_present_ROM_START + palette, entry->data, 0x20);
+                        nuPiReadRom((s32)icon_ROM_START + palette, entry->data, 0x20);
                         *gHudElementCacheSize += 0x20;
                         if (!gGameStatusPtr->isBattle) {
                             *pos = i;

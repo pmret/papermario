@@ -1,4 +1,5 @@
 #include "item_entity.h"
+#include "icon_offsets.h"
 
 ItemScript IES_Jump = {
     is_SetIcon(255, key_Gift)
