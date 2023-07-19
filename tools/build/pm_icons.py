@@ -33,7 +33,7 @@ def get_img_file(fmt_str, img_file: str):
 
     return (out_img, out_pal, out_w, out_h)
 
-def build(out_bin: Path, in_xml: Path, asset_stack: Tuple[Path, ...]):
+def build(out_bin: Path, in_xml: Path, asset_stack: Tuple[Path, ...], out_header: Path):
     out_bytes = bytearray()
     offsets: Dict[int, str] = {}
 
@@ -80,15 +80,24 @@ def build(out_bin: Path, in_xml: Path, asset_stack: Tuple[Path, ...]):
     with open(out_bin, "wb") as f:
         f.write(out_bytes)
 
-    print(offsets)
+    with open(out_header, "w") as f:
+        f.write("#ifndef ICON_OFFSETS_H\n")
+        f.write("#define ICON_OFFSETS_H\n")
+        f.write(f"/* This file is auto-generated. Do not edit. */\n\n")
+        
+        for offset, name in offsets.items():
+            f.write(f"#define ICON_{name} 0x{offset:X}\n")
+
+        f.write("\n#endif // ICON_OFFSETS_H\n")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Icon archive")
-    parser.add_argument("out_bin", type=Path, help="Output binary file path")
-    parser.add_argument("in_xml", type=Path, help="Input xml file path")
+    parser.add_argument("out_bin", type=Path, help="output binary file path")
+    parser.add_argument("in_xml", type=Path, help="input xml file path")
     parser.add_argument("asset_stack", help="comma-separated asset stack")
+    parser.add_argument("header_path", help="output header file to generate")
     args = parser.parse_args()
 
     asset_stack = tuple(Path(d) for d in args.asset_stack.split(","))
 
-    build(args.out_bin, args.in_xml, asset_stack)
+    build(args.out_bin, args.in_xml, asset_stack, args.header_path)

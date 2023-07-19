@@ -307,8 +307,8 @@ s32 pad_after_item_hudscripts[] = {
 
 //TODO split for partner popup menu data?
 
-// change parter menu position -> partnerID
-s32 D_8008EEC0[] = {
+// "change partner" menu position -> partnerID
+s32 PartnerMenuIndex_to_ID[] = {
     PARTNER_NONE,
     PARTNER_GOOMBARIO,
     PARTNER_KOOPER,
@@ -323,8 +323,8 @@ s32 D_8008EEC0[] = {
     PARTNER_TWINK
 };
 
-// partnerID -> change parter menu position
-s32 D_8008EEF0[] = {
+// partnerID -> "change partner" menu position
+s32 PartnerID_to_MenuIndex[] = {
     [PARTNER_NONE]          0,
     [PARTNER_GOOMBARIO]     1,
     [PARTNER_KOOPER]        2,

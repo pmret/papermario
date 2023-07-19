@@ -2166,7 +2166,7 @@ s32 can_btl_state_update_switch_to_player(void) {
     }
 }
 
-extern s32 D_8008EEF0[]; // TODO MOVE
+extern s32 PartnerID_to_MenuIndex[]; // TODO MOVE
 
 s32 func_802A58D0(void) {
     BattleStatus* battleStatus = &gBattleStatus;
@@ -3460,7 +3460,7 @@ void btl_state_update_player_menu(void) {
         case BTL_SUBSTATE_PLAYER_MENU_CHANGE_MEMBER_1:
             entryIdx = 0;
             for (i = 1; i < ARRAY_COUNT(playerData->partners); i++) {
-                s32 partnerId = D_8008EEC0[i];
+                s32 partnerId = PartnerMenuIndex_to_ID[i];
                 if (playerData->partners[partnerId].enabled) {
                     prop = &gPartnerPopupProperties[partnerId];
                     popup->ptrIcon[entryIdx] = battle_menu_PartnerHudScripts[partnerId];
@@ -3481,7 +3481,7 @@ void btl_state_update_player_menu(void) {
             }
             popup->popupType = POPUP_MENU_SWITCH_PARTNER;
             popup->numEntries = entryIdx;
-            popup->initialPos = D_8008EEF0[playerData->currentPartner] - 1;
+            popup->initialPos = PartnerID_to_MenuIndex[playerData->currentPartner] - 1;
             popup->dipMode = 0;
             popup->titleNumber = 0;
             create_battle_popup_menu(popup);
@@ -4050,8 +4050,8 @@ void btl_state_update_partner_menu(void) {
         break;
     case BTL_SUBSTATE_PARTNER_MENU_UNUSED_CHANGE_PARTNER_1:
         popupIndex = 0;
-        for (i = 1; i < ARRAY_COUNT(D_8008EEC0); i++) {
-            s32 partnerId = D_8008EEC0[i];
+        for (i = 1; i < ARRAY_COUNT(PartnerMenuIndex_to_ID); i++) {
+            s32 partnerId = PartnerMenuIndex_to_ID[i];
             if (playerData->partners[partnerId].enabled) {
                 popupProps = &gPartnerPopupProperties[partnerId];
                 popupMenu->ptrIcon[popupIndex] = battle_menu_PartnerHudScripts[partnerId];
@@ -4072,7 +4072,7 @@ void btl_state_update_partner_menu(void) {
         }
         popupMenu->popupType = POPUP_MENU_SWITCH_PARTNER;
         popupMenu->numEntries = popupIndex;
-        popupMenu->initialPos = D_8008EEF0[playerData->currentPartner] - 1;
+        popupMenu->initialPos = PartnerID_to_MenuIndex[playerData->currentPartner] - 1;
         popupMenu->dipMode = 0;
         popupMenu->titleNumber = 0;
         create_battle_popup_menu(popupMenu);
@@ -4325,7 +4325,7 @@ void btl_state_update_partner_menu(void) {
     case BTL_SUBSTATE_PARTNER_MENU_CHANGE_PARTNER_1:
         popupIndex = 0;
         for (i = 1; i < 12; i++) {
-            s32 partnerId = D_8008EEC0[i];
+            s32 partnerId = PartnerMenuIndex_to_ID[i];
             if (playerData->partners[partnerId].enabled) {
                 popupProps = &gPartnerPopupProperties[partnerId];
                 popupMenu->ptrIcon[popupIndex] = battle_menu_PartnerHudScripts[partnerId];
@@ -4346,7 +4346,7 @@ void btl_state_update_partner_menu(void) {
         }
         popupMenu->popupType = POPUP_MENU_SWITCH_PARTNER;
         popupMenu->numEntries = popupIndex;
-        popupMenu->initialPos = D_8008EEF0[playerData->currentPartner] - 1;
+        popupMenu->initialPos = PartnerID_to_MenuIndex[playerData->currentPartner] - 1;
         popupMenu->dipMode = 0;
         popupMenu->titleNumber = 0;
         create_battle_popup_menu(popupMenu);

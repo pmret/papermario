@@ -260,8 +260,7 @@ def write_ninja_rules(
 
     ninja.rule(
         "icons",
-        description="icons $in $out $asset_stack",
-        command=f"$python {BUILD_TOOLS}/pm_icons.py $out $in $asset_stack",
+        command=f"$python {BUILD_TOOLS}/pm_icons.py $out $in $asset_stack $header_path",
     )
 
     ninja.rule(
@@ -849,17 +848,18 @@ class Configure:
             
             elif seg.type == "pm_icons":
                 out_path = entry.object_path.with_suffix("") / "icon"
-                print("OBJ: " + str(out_path))
-                print("OUT: " + str(out_path))
-                print("SRC: " + str(entry.src_paths))
-                for src_path in entry.src_paths:
-                    build(
-                        out_path / "icons.bin",
-                        [src_path],
-                        "icons",
-                        variables={
-                            "asset_stack": ",".join(self.asset_stack),
-                        },)
+                src_path = entry.src_paths[0]
+                header_path = str(self.build_path() / "include/icon_offsets.h")
+
+                build(
+                    out_path / "icons.bin",
+                    [src_path],
+                    "icons",
+                    implicit_outputs=[header_path],
+                    variables={
+                        "asset_stack": ",".join(self.asset_stack),
+                        "header_path": header_path,
+                    },)
 
                 build(entry.object_path, [out_path / "icons.bin"], "bin")
 

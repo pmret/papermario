@@ -175,7 +175,7 @@ extern s32 D_8009A678;
 
 extern u8 D_800779B0;
 extern u32 D_80078174;
-extern s32 D_8008EEC0[12]; // partner IDs
+extern s32 PartnerMenuIndex_to_ID[12]; // partner IDs
 extern u8 D_800A0963;
 
 extern s32 D_802EA310[];
