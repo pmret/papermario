@@ -16357,6 +16357,7 @@ segments:
     start: 0xEA0900
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
+    dead_code: True
     subsegments:
     - [auto, c, kzn_17_0_header]
     - [auto, c, kzn_17_1_main]
@@ -16369,6 +16370,7 @@ segments:
     start: 0xEA6FD0
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
+    dead_code: True
     subsegments:
     - [auto, c, kzn_18_0_header]
     - [auto, c, kzn_18_1_main]
@@ -16380,6 +16382,7 @@ segments:
     start: 0xEA8AE0
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
+    dead_code: True
     subsegments:
     - [auto, c, kzn_19_0_header]
     - [auto, c, kzn_19_1_music]
@@ -16394,6 +16397,7 @@ segments:
     start: 0xEB0E60
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
+    dead_code: True
     subsegments:
     - [auto, c, kzn_20_0_header]
     - [auto, c, kzn_20_1_music]
@@ -16405,6 +16409,7 @@ segments:
     start: 0xEB5130
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
+    dead_code: True
     subsegments:
     - [auto, c, kzn_22_0_header]
     - [auto, c, kzn_22_1_music]
@@ -16417,6 +16422,7 @@ segments:
     start: 0xEB7230
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
+    dead_code: True
     subsegments:
     - [auto, c, kzn_23_0_header]
     - [auto, c, kzn_23_1_music]
@@ -16428,6 +16434,7 @@ segments:
     start: 0xEB8E50
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
+    dead_code: True
     subsegments:
     - [auto, c, flo_00_0_header]
     - [auto, c, flo_00_1_music]
@@ -16442,6 +16449,7 @@ segments:
     start: 0xEC2200
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
+    dead_code: True
     subsegments:
     - [auto, c, flo_03_0_header]
     - [auto, c, flo_03_1_music]
@@ -16455,6 +16463,7 @@ segments:
     start: 0xEC71B0
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
+    dead_code: True
     subsegments:
     - [auto, c, flo_07_0_header]
     - [auto, c, flo_07_1_music]
@@ -16466,6 +16475,7 @@ segments:
     start: 0xEC9D00
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
+    dead_code: True
     subsegments:
     - [auto, c, flo_08_0_header]
     - [auto, c, flo_08_1_music]
@@ -16480,6 +16490,7 @@ segments:
     start: 0xECFFF0
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
+    dead_code: True
     subsegments:
     - [auto, c, flo_09_0_header]
     - [auto, c, flo_09_1_music]
@@ -16493,6 +16504,7 @@ segments:
     start: 0xED4220
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
+    dead_code: True
     subsegments:
     - [auto, c, flo_10_0_header]
     - [auto, c, flo_10_1_music]
@@ -16508,6 +16520,7 @@ segments:
     start: 0xED8E20
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
+    dead_code: True
     subsegments:
     - [auto, c, flo_11_0_header]
     - [auto, c, flo_11_1_music]
@@ -16520,6 +16533,7 @@ segments:
     start: 0xEDBFE0
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
+    dead_code: True
     subsegments:
     - [auto, c, flo_12_0_header]
     - [auto, c, flo_12_1_music]
@@ -16531,6 +16545,7 @@ segments:
     start: 0xEDE9C0
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
+    dead_code: True
     subsegments:
     - [auto, c, flo_13_0_header]
     - [auto, c, flo_13_1_music]
@@ -16544,6 +16559,7 @@ segments:
     start: 0xEE65B0
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
+    dead_code: True
     subsegments:
     - [auto, c, flo_14_0_header]
     - [auto, c, flo_14_1_music]
@@ -16558,6 +16574,7 @@ segments:
     start: 0xEEB990
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
+    dead_code: True
     subsegments:
     - [auto, c, flo_15_0_header]
     - [auto, c, flo_15_1_music]
@@ -16571,6 +16588,7 @@ segments:
     start: 0xEED100
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
+    dead_code: True
     subsegments:
     - [auto, c, flo_16_0_header]
     - [auto, c, flo_16_1_music]
@@ -16585,6 +16603,7 @@ segments:
     start: 0xEF2610
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
+    dead_code: True
     subsegments:
     - [auto, c, flo_17_0_header]
     - [auto, c, flo_17_1_music]
@@ -16598,6 +16617,7 @@ segments:
     start: 0xEF7A80
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
+    dead_code: True
     subsegments:
     - [auto, c, flo_18_0_header]
     - [auto, c, flo_18_1_music]
@@ -16611,6 +16631,7 @@ segments:
     start: 0xEFEB00
     vram: 0x80240000
     vram_of_symbol: world_model_data_vram_end
+    dead_code: True
     subsegments:
     - [auto, c, flo_19_0_header]
     - [auto, c, flo_19_1_music]

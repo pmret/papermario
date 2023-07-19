@@ -596,7 +596,7 @@ class Configure:
                     encoding = "EUC-JP"
 
                 # Dead cod
-                if "dead" in entry.src_paths[0].parts:
+                if isinstance(seg.parent.yaml, dict) and seg.parent.yaml.get("dead_code", False):
                     obj_path = str(entry.object_path)
                     init_obj_path = Path(obj_path + ".dead")
                     build(
