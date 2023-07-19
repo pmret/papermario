@@ -60,9 +60,9 @@ void flame_main(
     bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_FLAME;
 
-    effect = shim_create_effect_instance(bpPtr);
+    effect = create_effect_instance(bpPtr);
     effect->numParts = numParts;
-    data = effect->data.flame = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.flame = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.flame != NULL);
 
     data->unk_00 = arg0;
@@ -120,7 +120,7 @@ void flame_render(EffectInstance* effect) {
     f32 outZ;
     f32 outW;
 
-    shim_transform_point(gCameras[gCurrentCameraID].perspectiveMatrix, data->pos.x, data->pos.y, data->pos.z, 1.0f,
+    transform_point(gCameras[gCurrentCameraID].perspectiveMatrix, data->pos.x, data->pos.y, data->pos.z, 1.0f,
                          &outX, &outY, &outZ, &outW);
 
     outDist = outZ + 5000;
@@ -139,7 +139,7 @@ void flame_render(EffectInstance* effect) {
     renderTaskPtr->appendGfxArg = effect;
     renderTaskPtr->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
 
-    shim_queue_render_task(renderTaskPtr);
+    queue_render_task(renderTaskPtr);
 }
 
 void flame_appendGfx(void* effect) {
@@ -177,12 +177,12 @@ void flame_appendGfx(void* effect) {
     gDPSetPrimColor(gMainGfxPos++, 0, 0, unkStruct->unk_07, unkStruct->unk_07, unkStruct->unk_07, 0);
     gDPSetEnvColor(gMainGfxPos++, unkStruct->unk_04, unkStruct->unk_05, unkStruct->unk_06, 0);
 
-    shim_guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
-    shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-    shim_guMtxCatF(sp58, sp18, sp98);
-    shim_guScaleF(sp58, data->unk_10 * data->unk_30, data->unk_10 * data->unk_2C, data->unk_10);
-    shim_guMtxCatF(sp58, sp98, sp98);
-    shim_guMtxF2L(sp98, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
+    guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(sp58, sp18, sp98);
+    guScaleF(sp58, data->unk_10 * data->unk_30, data->unk_10 * data->unk_2C, data->unk_10);
+    guMtxCatF(sp58, sp98, sp98);
+    guMtxF2L(sp98, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
               G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);

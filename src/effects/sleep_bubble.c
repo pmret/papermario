@@ -32,9 +32,9 @@ void sleep_bubble_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg
     bp.renderUI = NULL;
     bp.effectID = EFFECT_SLEEP_BUBBLE;
 
-    effect = shim_create_effect_instance(bpPtr);
+    effect = create_effect_instance(bpPtr);
     effect->numParts = numParts;
-    part = effect->data.sleepBubble = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = effect->data.sleepBubble = general_heap_malloc(numParts * sizeof(*part));
 
     ASSERT(effect->data.sleepBubble != NULL);
 
@@ -72,7 +72,7 @@ void sleep_bubble_update(EffectInstance* effect) {
     }
 
     if (part->timeLeft < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -81,7 +81,7 @@ void sleep_bubble_update(EffectInstance* effect) {
 
     temp1 = part->unk_18 + (part->unk_14 - part->unk_18) * 0.1f;
     part->unk_18 = temp1;
-    temp2 = temp1 + (temp1 * shim_sin_deg(unk_20 * 3)) * 0.1;
+    temp2 = temp1 + (temp1 * sin_deg(unk_20 * 3)) * 0.1;
 
     i = 0;
     yPtr = &part->points->y;
@@ -90,11 +90,11 @@ void sleep_bubble_update(EffectInstance* effect) {
     for (i = 0; i < ARRAY_COUNT(part->points); i++) {
         angle = i * 360.0f / 21.0f + 17.0f;
 
-        *xPtr = temp2 * shim_sin_deg(angle);
-        *yPtr = -temp2 * shim_cos_deg(angle);
+        *xPtr = temp2 * sin_deg(angle);
+        *yPtr = -temp2 * cos_deg(angle);
 
-        *xPtr += shim_sin_deg((f32)unk_20 * (shim_sin_deg(xAngle) * 0.1 + 2.0) + (i + 5.0f) * 30.0f) * 1.5;
-        *yPtr += shim_cos_deg((f32)unk_20 * (shim_cos_deg(yAngle) * 0.1 + 2.0) + (i + 5.0f) * 50.0f) * 1.5;
+        *xPtr += sin_deg((f32)unk_20 * (sin_deg(xAngle) * 0.1 + 2.0) + (i + 5.0f) * 30.0f) * 1.5;
+        *yPtr += cos_deg((f32)unk_20 * (cos_deg(yAngle) * 0.1 + 2.0) + (i + 5.0f) * 50.0f) * 1.5;
 
         xAngle += 53;
         yAngle += 36;
@@ -120,7 +120,7 @@ void sleep_bubble_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -142,29 +142,29 @@ void sleep_bubble_appendGfx(void* effect) {
         gSPDisplayList(gMainGfxPos++, D_090002E0_35D7F0);
     }
 
-    shim_guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
-    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
+    guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
               G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPVertex(gMainGfxPos++, &D_09000180_35D690[1], 1, 0);
 
-    shim_guRotateF(sp18, data->unk_10, 0.0f, 0.0f, 1.0f);
-    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guRotateF(sp18, data->unk_10, 0.0f, 0.0f, 1.0f);
+    guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
               G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
-    shim_guRotateF(sp18, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-    shim_guTranslateF(sp58, data->unk_C4, data->unk_C8, 0.0f);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guRotateF(sp18, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guTranslateF(sp58, data->unk_C4, data->unk_C8, 0.0f);
+    guMtxCatF(sp58, sp18, sp18);
+    guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
               G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gSPVertex(gMainGfxPos++, &D_09000180_35D690[0], 1, 1);
 
     for (i = 0; i < ARRAY_COUNT(data->points); i++) {
-        shim_guTranslateF(sp18, data->points[i].x, data->points[i].y, 0.0f);
-        shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guTranslateF(sp18, data->points[i].x, data->points[i].y, 0.0f);
+        guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                   G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         gSPVertex(gMainGfxPos++, &D_09000180_35D690[i + 2], 1, i + 2);

@@ -43,9 +43,9 @@ EffectInstance* water_splash_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 ar
     bpPtr->unk_00 = 0;
     bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_WATER_SPLASH;
-    effect = shim_create_effect_instance(bpPtr);
+    effect = create_effect_instance(bpPtr);
     effect->numParts = numParts;
-    effect->data.waterSplash = part = shim_general_heap_malloc(numParts * sizeof(*part));
+    effect->data.waterSplash = part = general_heap_malloc(numParts * sizeof(*part));
     ASSERT(part != NULL);
 
     part->unk_00 = arg0;
@@ -72,24 +72,24 @@ EffectInstance* water_splash_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 ar
         part->unk_34 = 2.0f;
         switch (arg0) {
             case 0:
-                part->unk_10.x = shim_rand_int(10) - 2;
-                part->unk_10.y = shim_rand_int(10) - 5;
-                part->unk_10.z = shim_rand_int(10) - 5;
+                part->unk_10.x = rand_int(10) - 2;
+                part->unk_10.y = rand_int(10) - 5;
+                part->unk_10.z = rand_int(10) - 5;
                 break;
             case 1:
-                part->unk_10.x = 2 - shim_rand_int(10);
-                part->unk_10.y = shim_rand_int(10) - 5;
-                part->unk_10.z = shim_rand_int(10) - 5;
+                part->unk_10.x = 2 - rand_int(10);
+                part->unk_10.y = rand_int(10) - 5;
+                part->unk_10.z = rand_int(10) - 5;
                 break;
             case 2:
-                part->unk_10.x = (shim_rand_int(100) - 50) * 0.07f;
-                part->unk_10.y = (shim_rand_int(100) + 10) * 0.2f;
-                part->unk_10.z = (shim_rand_int(100) - 50) * 0.07f;
+                part->unk_10.x = (rand_int(100) - 50) * 0.07f;
+                part->unk_10.y = (rand_int(100) + 10) * 0.2f;
+                part->unk_10.z = (rand_int(100) - 50) * 0.07f;
                 break;
             default:
-                part->unk_10.x = (shim_rand_int(10) - 5) * 0.5;
-                part->unk_10.y = (shim_rand_int(10) - 5) * 0.5;
-                part->unk_10.z = (shim_rand_int(10) - 5) * 0.5;
+                part->unk_10.x = (rand_int(10) - 5) * 0.5;
+                part->unk_10.y = (rand_int(10) - 5) * 0.5;
+                part->unk_10.z = (rand_int(10) - 5) * 0.5;
                 part->unk_1C = i;
                 part->unk_34 = 0.4f;
                 break;
@@ -122,7 +122,7 @@ void water_splash_update(EffectInstance *effect) {
     temp_a1_3 = part->unk_1C;
     part->unk_20++;
     if (temp_a1_3 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -160,7 +160,7 @@ void water_splash_render(EffectInstance* effect) {
     renderTask.distance = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
 }
 
 void func_E00BE5B4(void) {
@@ -178,10 +178,10 @@ void water_splash_appendGfx(void* effect) {
 
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, OS_K0_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
-    shim_guTranslateF(sp10, sp94, temp_fp, data->unk_04.z);
-    shim_guScaleF(sp50, data->unk_34, data->unk_34, data->unk_34);
-    shim_guMtxCatF(sp50, sp10, sp10);
-    shim_guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp10, sp94, temp_fp, data->unk_04.z);
+    guScaleF(sp50, data->unk_34, data->unk_34, data->unk_34);
+    guMtxCatF(sp50, sp10, sp10);
+    guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPMatrix(gMainGfxPos++, currentCamera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gSPDisplayList(gMainGfxPos++, D_09000100_3BCB90);
@@ -207,10 +207,10 @@ void water_splash_appendGfx(void* effect) {
                          temp_t2 + 0xA0, temp_t3 + 0x78, temp_t2 + 0xBF, temp_t3 + 0x97, 0,
                          G_TX_WRAP, G_TX_WRAP, 5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
-        shim_guTranslateF(sp10, data->unk_04.x, data->unk_04.y, data->unk_04.z);
-        shim_guScaleF(sp50, data->unk_34, data->unk_34, data->unk_34);
-        shim_guMtxCatF(sp50, sp10, sp10);
-        shim_guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guTranslateF(sp10, data->unk_04.x, data->unk_04.y, data->unk_04.z);
+        guScaleF(sp50, data->unk_34, data->unk_34, data->unk_34);
+        guMtxCatF(sp50, sp10, sp10);
+        guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         gDPSetPrimColor(gMainGfxPos++, 0, 0, 200, 255, 255, (sp90 * data->unk_30) / 255);
         gDPSetEnvColor(gMainGfxPos++, 0, 32, 32, 0);

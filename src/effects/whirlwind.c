@@ -24,9 +24,9 @@ EffectInstance* whirlwind_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4,
     bp.effectID = EFFECT_WHIRLWIND;
 
     numParts = 1;
-    effect = shim_create_effect_instance(bpPtr);
+    effect = create_effect_instance(bpPtr);
     effect->numParts = numParts;
-    part = effect->data.whirlwind = shim_general_heap_malloc(effect->numParts * sizeof(*part));
+    part = effect->data.whirlwind = general_heap_malloc(effect->numParts * sizeof(*part));
     ASSERT(part != NULL);
 
     part->unk_00 = arg0;
@@ -55,9 +55,9 @@ EffectInstance* whirlwind_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4,
         part->unk_58[i] = arg2;
         part->unk_78[i] = arg3;
         part->unk_98[i] = i * 0.2 + 1.0;
-        part->unk_B8[i] = shim_rand_int(360);
-        part->unk_D8[i] = shim_rand_int(100) * 0.1 + 2.0;
-        part->unk_F8[i] = shim_rand_int(30) * 0.1;
+        part->unk_B8[i] = rand_int(360);
+        part->unk_D8[i] = rand_int(100) * 0.1 + 2.0;
+        part->unk_F8[i] = rand_int(30) * 0.1;
         part->unk_118[i] = 0;
     }
     part->unk_138 = 0;
@@ -87,7 +87,7 @@ void whirlwind_update(EffectInstance* effect) {
     }
     part->unk_14++;
     if (part->unk_10 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
     temp = part->unk_34;
@@ -139,7 +139,7 @@ void whirlwind_render(EffectInstance* effect) {
     renderTask.distance = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    queuedTask = shim_queue_render_task(&renderTask);
+    queuedTask = queue_render_task(&renderTask);
     queuedTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -174,8 +174,8 @@ void whirlwind_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, OS_K0_TO_PHYSICAL(eff->graphics->data));
 
-    shim_guTranslateF(sp20, 0.0f, 0.0f, 0.0f);
-    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp20, 0.0f, 0.0f, 0.0f);
+    guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(gMainGfxPos++, D_09000400_3D3D30);
@@ -190,16 +190,16 @@ void whirlwind_appendGfx(void* effect) {
     // fill the vertex buffer; 2 sets of 16 verticies
     for (i = 0; i <= (360 / 24); i++) {
         Vtx* vtx = &vertexBuffer[i];
-        vtx->v.ob[0] = shim_cos_deg(i * (360 / 15)) * 100.0f;
+        vtx->v.ob[0] = cos_deg(i * (360 / 15)) * 100.0f;
         vtx->v.ob[1] = 0;
-        vtx->v.ob[2] = shim_sin_deg(i * (360 / 15)) * 100.0f;
+        vtx->v.ob[2] = sin_deg(i * (360 / 15)) * 100.0f;
         vtx->v.tc[0] = i * 128;
         vtx->v.tc[1] = 0;
 
         vtx = &vertexBuffer[i + (360 / 24 + 1)];
-        vtx->v.ob[0] = shim_cos_deg(i * (360 / 15)) * 100.0f;
+        vtx->v.ob[0] = cos_deg(i * (360 / 15)) * 100.0f;
         vtx->v.ob[1] = 0;
-        vtx->v.ob[2] = shim_sin_deg(i * (360 / 15)) * 100.0f;
+        vtx->v.ob[2] = sin_deg(i * (360 / 15)) * 100.0f;
         vtx->v.tc[0] = i * 512;
         vtx->v.tc[1] = 1024;
     }
@@ -218,8 +218,8 @@ void whirlwind_appendGfx(void* effect) {
     // This marks the end of our dynamically generated display list, return control back to the main display list
     gSPEndDisplayList(gMainGfxPos++);
 
-    shim_guScaleF(sp20, 0.1f, 0.1f, 0.1f);
-    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guScaleF(sp20, 0.1f, 0.1f, 0.1f);
+    guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
     // Save position to later insert a branch around the commands that follow this
@@ -230,33 +230,33 @@ void whirlwind_appendGfx(void* effect) {
 
     // Generate main display list
     for(i = 0; i < (MAX_WHIRLWIND_SEGMENTS - 1); i++) {
-        shim_guPositionF(sp20, 0.0f, 0.0f, data->unk_118[i], 1.0f, data->unk_38[i] * 10.0f, data->unk_58[i] * 10.0f, data->unk_78[i] * 10.0f);
-        shim_guRotateF(sp60, data->unk_138 + i * i, -0.03f, 1.0f, 0.1f);
-        shim_guMtxCatF(sp60, sp20, sp20);
+        guPositionF(sp20, 0.0f, 0.0f, data->unk_118[i], 1.0f, data->unk_38[i] * 10.0f, data->unk_58[i] * 10.0f, data->unk_78[i] * 10.0f);
+        guRotateF(sp60, data->unk_138 + i * i, -0.03f, 1.0f, 0.1f);
+        guMtxCatF(sp60, sp20, sp20);
         var_f4 = data->unk_98[i] * spB8;
         if (spA0 < 0x10) {
             var_f4 += (127 - primAlpha) * 0.02f;
         }
-        shim_guScaleF(sp60, var_f4, spB8, var_f4);
-        shim_guMtxCatF(sp60, sp20, sp20);
+        guScaleF(sp60, var_f4, spB8, var_f4);
+        guMtxCatF(sp60, sp20, sp20);
         temp_f20_2 = data->unk_F8[i] * 10.0f;
         f22 = data->unk_B8[i];
-        shim_guTranslateF(sp60, temp_f20_2 * shim_sin_deg(f22), 0.0f, temp_f20_2 * shim_cos_deg(f22));
-        shim_guMtxCatF(sp60, sp20, sp20);
-        shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guTranslateF(sp60, temp_f20_2 * sin_deg(f22), 0.0f, temp_f20_2 * cos_deg(f22));
+        guMtxCatF(sp60, sp20, sp20);
+        guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         gSPVertex(gMainGfxPos++, vertexBuffer, 16, 0);
         gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 
-        shim_guPositionF(sp20, 0.0f, 0.0f, data->unk_118[i + 1], 1.0f, data->unk_38[i + 1] * 10.0f, data->unk_58[i + 1] * 10.0f, data->unk_78[i + 1] * 10.0f);
-        shim_guRotateF(sp60, data->unk_138 + i * i, 0.03f, 1.0f, 0.0f);
-        shim_guMtxCatF(sp60, sp20, sp20);
-        shim_guScaleF(sp60, data->unk_98[i + 1] * spB8, spB8, data->unk_98[i + 1] * spB8);
-        shim_guMtxCatF(sp60, sp20, sp20);
+        guPositionF(sp20, 0.0f, 0.0f, data->unk_118[i + 1], 1.0f, data->unk_38[i + 1] * 10.0f, data->unk_58[i + 1] * 10.0f, data->unk_78[i + 1] * 10.0f);
+        guRotateF(sp60, data->unk_138 + i * i, 0.03f, 1.0f, 0.0f);
+        guMtxCatF(sp60, sp20, sp20);
+        guScaleF(sp60, data->unk_98[i + 1] * spB8, spB8, data->unk_98[i + 1] * spB8);
+        guMtxCatF(sp60, sp20, sp20);
         temp_f20_3 = data->unk_F8[i] * 10.0f;
-        shim_guTranslateF(sp60, temp_f20_3 * shim_sin_deg(data->unk_B8[i]), 0.0f, temp_f20_3 * shim_cos_deg(data->unk_B8[i]));
-        shim_guMtxCatF(sp60, sp20, sp20);
-        shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guTranslateF(sp60, temp_f20_3 * sin_deg(data->unk_B8[i]), 0.0f, temp_f20_3 * cos_deg(data->unk_B8[i]));
+        guMtxCatF(sp60, sp20, sp20);
+        guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         gSPVertex(gMainGfxPos++, &vertexBuffer[16], 16, 16);
         gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);

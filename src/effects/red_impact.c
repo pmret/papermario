@@ -36,9 +36,9 @@ EffectInstance* red_impact_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4
     bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_RED_IMPACT;
 
-    effect = shim_create_effect_instance(bpPtr);
+    effect = create_effect_instance(bpPtr);
     effect->numParts = numParts;
-    part = effect->data.redImpact = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = effect->data.redImpact = general_heap_malloc(numParts * sizeof(*part));
     ASSERT(effect->data.redImpact != NULL);
 
     part->unk_2C = 0;
@@ -80,7 +80,7 @@ void red_impact_update(EffectInstance* effect) {
     part->unk_28--;
 
     if (part->unk_28 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -98,8 +98,8 @@ void red_impact_update(EffectInstance* effect) {
                 part->unk_04 = 0;
                 part->unk_08 = 0;
                 part->unk_0C = 0;
-                part->unk_10 = -shim_sin_deg(part->unk_34) * 0.5;
-                part->unk_14 = shim_cos_deg(part->unk_34) * 0.5;
+                part->unk_10 = -sin_deg(part->unk_34) * 0.5;
+                part->unk_14 = cos_deg(part->unk_34) * 0.5;
                 part->unk_18 = 0;
                 part->unk_3C = 32.0f;
                 part->unk_40 = 32.0f;
@@ -136,7 +136,7 @@ void red_impact_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_28;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -170,8 +170,8 @@ void red_impact_appendGfx(void* effect) {
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
     gSPDisplayList(gMainGfxPos++, dlist);
 
-    shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, part->unk_04, part->unk_08, part->unk_0C);
-    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, part->unk_04, part->unk_08, part->unk_0C);
+    guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
@@ -190,14 +190,14 @@ void red_impact_appendGfx(void* effect) {
     part++;
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, part++) {
         if (part->unk_4C >= 0) {
-            shim_guTranslateF(sp20, part->unk_04, part->unk_08, part->unk_0C);
-            shim_guRotateF(sp60, part->unk_34, 0.0f, 0.0f, 1.0f);
-            shim_guMtxCatF(sp60, sp20, sp20);
-            shim_guScaleF(sp60, part->unk_1C * temp_1C, part->unk_20 * temp_20, part->unk_24 * temp_24);
-            shim_guMtxCatF(sp60, sp20, sp20);
-            shim_guRotateF(sp60, part->unk_30, 0.0f, 1.0f, 0.0f);
-            shim_guMtxCatF(sp60, sp20, sp20);
-            shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+            guTranslateF(sp20, part->unk_04, part->unk_08, part->unk_0C);
+            guRotateF(sp60, part->unk_34, 0.0f, 0.0f, 1.0f);
+            guMtxCatF(sp60, sp20, sp20);
+            guScaleF(sp60, part->unk_1C * temp_1C, part->unk_20 * temp_20, part->unk_24 * temp_24);
+            guMtxCatF(sp60, sp20, sp20);
+            guRotateF(sp60, part->unk_30, 0.0f, 1.0f, 0.0f);
+            guMtxCatF(sp60, sp20, sp20);
+            guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
             dlist2 = D_09000940_359CF0;
 

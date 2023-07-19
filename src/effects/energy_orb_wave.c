@@ -25,9 +25,9 @@ EffectInstance* energy_orb_wave_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32
     bp.renderUI = NULL;
     bp.effectID = EFFECT_ENERGY_ORB_WAVE;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    data = effect->data.energyOrbWave = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.energyOrbWave = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.energyOrbWave != NULL);
 
     data->unk_00 = arg0;
@@ -99,7 +99,7 @@ void energy_orb_wave_update(EffectInstance* effect) {
     data->unk_14++;
 
     if (data->unk_10 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -121,7 +121,7 @@ void energy_orb_wave_update(EffectInstance* effect) {
             data->unk_20 = 70;
             data->unk_24 = 180;
             data->unk_28 = 120;
-            var_float = shim_sin_deg(unk_14 * 2) * 10.0f + 190.0f;
+            var_float = sin_deg(unk_14 * 2) * 10.0f + 190.0f;
             data->unk_2C = ((s32) var_float * var_1) / 255;
             break;
         case 1:
@@ -135,7 +135,7 @@ void energy_orb_wave_update(EffectInstance* effect) {
             data->unk_20 = 170;
             data->unk_24 = 40;
             data->unk_28 = 110;
-            var_float = shim_sin_deg(unk_14 * 2) * 10.0f + 190.0f;
+            var_float = sin_deg(unk_14 * 2) * 10.0f + 190.0f;
             data->unk_2C = ((s32) var_float * var_1) / 255;
             break;
         case 3:
@@ -149,7 +149,7 @@ void energy_orb_wave_update(EffectInstance* effect) {
             data->unk_20 = 235;
             data->unk_24 = 235;
             data->unk_28 = 200;
-            var_float = shim_sin_deg(unk_14 * 2) * 15.0f + 215.0f;
+            var_float = sin_deg(unk_14 * 2) * 15.0f + 215.0f;
             data->unk_2C = ((s32) var_float * var_1) / 255;
             break;
         case 5:
@@ -213,11 +213,11 @@ void energy_orb_wave_render(EffectInstance* effect) {
     renderTask.appendGfxArg = effect;
     renderTask.renderMode = RENDER_MODE_2D;
     if (effect82->unk_00 >= 3) {
-        shim_queue_render_task(renderTaskPointer);
+        queue_render_task(renderTaskPointer);
         return;
     }
 
-    retTask = shim_queue_render_task(renderTaskPointer);
+    retTask = queue_render_task(renderTaskPointer);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -236,10 +236,10 @@ void energy_orb_wave_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
-    shim_guScaleF(sp58, data->scale, data->scale, data->scale);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
+    guScaleF(sp58, data->scale, data->scale, data->scale);
+    guMtxCatF(sp58, sp18, sp18);
+    guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPMatrix(gMainGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
@@ -250,16 +250,16 @@ void energy_orb_wave_appendGfx(void* effect) {
     if (unk_00 < 3) {
         gSPDisplayList(gMainGfxPos++, D_09001000_3A5320);
 
-        shim_guRotateF(sp18, unk_14, 0.0f, 0.0f, 1.0f);
-        shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guRotateF(sp18, unk_14, 0.0f, 0.0f, 1.0f);
+        guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         gSPDisplayList(gMainGfxPos++, D_090011D0_3A54F0);
         gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
         gDPSetColorDither(gMainGfxPos++, G_CD_MAGICSQ);
 
-        shim_guRotateF(sp18, -unk_14 * 8, 0.0f, 0.0f, 1.0f);
-        shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guRotateF(sp18, -unk_14 * 8, 0.0f, 0.0f, 1.0f);
+        guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         gSPDisplayList(gMainGfxPos++, D_090011F0_3A5510);

@@ -36,9 +36,9 @@ EffectInstance* quizmo_assistant_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f3
     bp.renderUI = NULL;
     bp.effectID = EFFECT_QUIZMO_ASSISTANT;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    data = effect->data.quizmoAssistant = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.quizmoAssistant = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.quizmoAssistant != NULL);
 
     data->unk_00 = arg0;
@@ -75,7 +75,7 @@ void quizmo_assistant_update(EffectInstance* effect) {
     data->lifetime++;
 
     if (data->vanishTimer < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -93,7 +93,7 @@ void quizmo_assistant_render(EffectInstance* effect) {
     renderTask.distance = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -108,14 +108,14 @@ void quizmo_assistant_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guTranslateF(sp18, data->position.x, data->position.y, data->position.z);
-    shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guTranslateF(sp58, 89.5f, 0.0f, 2.0f);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guScaleF(sp58, 5.0f / 7, 5.0f / 7, 5.0f / 7);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp18, data->position.x, data->position.y, data->position.z);
+    guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(sp58, sp18, sp18);
+    guTranslateF(sp58, 89.5f, 0.0f, 2.0f);
+    guMtxCatF(sp58, sp18, sp18);
+    guScaleF(sp58, 5.0f / 7, 5.0f / 7, 5.0f / 7);
+    guMtxCatF(sp58, sp18, sp18);
+    guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, fadeInAmt, fadeInAmt, fadeInAmt, 255);

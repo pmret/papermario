@@ -35,9 +35,9 @@ void rising_bubble_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 arg4) {
     effectBp.renderUI = NULL;
     effectBp.effectID = EFFECT_RISING_BUBBLE;
 
-    effect = shim_create_effect_instance(&effectBp);
+    effect = create_effect_instance(&effectBp);
     effect->numParts = numParts;
-    data = effect->data.risingBubble = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.risingBubble = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(data != NULL);
 
     data->unk_00 = arg0;
@@ -47,12 +47,12 @@ void rising_bubble_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 arg4) {
     data->unk_14 = 0;
     data->lifeTime = 0;
     if (arg4 != 0.0f) {
-        data->unk_10 = ((shim_rand_int(3) * 0.1) + 0.7) * 0.4;
+        data->unk_10 = ((rand_int(3) * 0.1) + 0.7) * 0.4;
     } else {
         data->unk_10 = 1.0f;
     }
     data->timeLeft = 32;
-    data->unk_20 = shim_rand_int(31);
+    data->unk_20 = rand_int(31);
     data->unk_24 = posY + arg4;
 }
 
@@ -68,7 +68,7 @@ void rising_bubble_update(EffectInstance* effect) {
         data->lifeTime++;
 
         if (data->timeLeft < 0) {
-            shim_remove_effect(effect);
+            remove_effect(effect);
             return;
         }
 
@@ -101,7 +101,7 @@ void rising_bubble_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -128,18 +128,18 @@ void rising_bubble_appendGfx(void* effect) {
             (uls     ) * 4, (ult     ) * 4,
             (uls + 32) * 4, (ult + 32) * 4);
 
-        shim_guTranslateF(sp20, data->pos.x, data->pos.y, data->pos.z);
-        shim_guScaleF(sp60, data->unk_10, 1.0f, data->unk_10);
-        shim_guMtxCatF(sp60, sp20, sp20);
+        guTranslateF(sp20, data->pos.x, data->pos.y, data->pos.z);
+        guScaleF(sp60, data->unk_10, 1.0f, data->unk_10);
+        guMtxCatF(sp60, sp20, sp20);
     } else {
         gSPDisplayList(gMainGfxPos++, D_E0046618[0]);
         gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 255, data->unk_14);
         gDPSetEnvColor(gMainGfxPos++, 128, 128, 255, data->unk_14);
 
-        shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, data->unk_10, data->pos.x, data->pos.y, data->pos.z);
+        guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, data->unk_10, data->pos.x, data->pos.y, data->pos.z);
     }
 
-    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
     if (data->pos.y >= data->unk_24) {

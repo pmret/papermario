@@ -31,9 +31,9 @@ EffectInstance* fire_flower_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg
     bp.renderUI = NULL;
     bp.effectID = EFFECT_FIRE_FLOWER;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    part = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = general_heap_malloc(numParts * sizeof(*part));
     effect->data.fireFlower = part;
 
     ASSERT(effect->data.fireFlower != NULL);
@@ -90,13 +90,13 @@ void fire_flower_update(EffectInstance* effect) {
     unk_40X = part->unk_40.x;
 
     if (unk_04 == 7) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
     switch (unk_04) {
         case 0:
-            shim_load_effect(EFFECT_STARS_SPREAD);
+            load_effect(EFFECT_STARS_SPREAD);
             stars_spread_main(0, part->pos.x - 10.0f, part->pos.y, part->pos.z, 7, 20);
             part->unk_34 = 0;
             part->unk_38 = 0;
@@ -194,7 +194,7 @@ void fire_flower_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -212,18 +212,18 @@ void fire_flower_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guTranslateF(sp18, part->pos.x, part->pos.y, part->pos.z);
-    shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp18, part->pos.x, part->pos.y, part->pos.z);
+    guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(sp58, sp18, sp18);
+    guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 0, 0, part->unk_3C);
     gDPSetEnvColor(gMainGfxPos++, 255, 0, 0, part->unk_38);
 
     if ((u32) (unk_04 - 4) < 3U) {
-        shim_guTranslateF(sp18, 0.0f, 16.0f, 0.0f);
-        shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guTranslateF(sp18, 0.0f, 16.0f, 0.0f);
+        guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         gSPDisplayList(gMainGfxPos++, D_09000DE0_381180);
@@ -231,10 +231,10 @@ void fire_flower_appendGfx(void* effect) {
         part++;
         for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, part++) {
             if (part->unk_40.z == 0) {
-                shim_guRotateF(sp18, part->unk_24, 0.0f, 0.0f, 1.0f);
-                shim_guTranslateF(sp58, part->pos.x, part->pos.y, part->pos.z);
-                shim_guMtxCatF(sp58, sp18, sp18);
-                shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+                guRotateF(sp18, part->unk_24, 0.0f, 0.0f, 1.0f);
+                guTranslateF(sp58, part->pos.x, part->pos.y, part->pos.z);
+                guMtxCatF(sp58, sp18, sp18);
+                guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
                 gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
                 gSPDisplayList(gMainGfxPos++, part->unk_00 != 0 ? D_09000ED8_381278 : D_09000EB8_381258);
@@ -257,12 +257,12 @@ void fire_flower_appendGfx(void* effect) {
         G_TX_MIRROR | G_TX_WRAP, G_TX_MIRROR | G_TX_WRAP,
         5, 5, G_TX_NOLOD, G_TX_NOLOD);
 
-    shim_guTranslateF(sp18, unk_2C, 0.0f, 0.0f);
-    shim_guScaleF(sp58, unk_30, unk_30, unk_30);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guRotateF(sp58, unk_28, 0.0f, 1.0f, 0.0f);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp18, unk_2C, 0.0f, 0.0f);
+    guScaleF(sp58, unk_30, unk_30, unk_30);
+    guMtxCatF(sp58, sp18, sp18);
+    guRotateF(sp58, unk_28, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(sp58, sp18, sp18);
+    guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gSPDisplayList(gMainGfxPos++, D_09000EF8_381298);

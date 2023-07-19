@@ -52,9 +52,9 @@ void shattering_stones_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4) {
     bp.renderUI = NULL;
     bp.effectID = EFFECT_SHATTERING_STONES;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    part = effect->data.shatteringStones = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = effect->data.shatteringStones = general_heap_malloc(numParts * sizeof(*part));
     ASSERT(effect->data.shatteringStones != NULL);
 
     part->unk_24 = 0;
@@ -65,9 +65,9 @@ void shattering_stones_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4) {
     part->unk_2C = 0;
     part->unk_30 = 0;
     part->unk_14 = -2.0f;
-    part->unk_34 = shim_rand_int(60) - 30;
+    part->unk_34 = rand_int(60) - 30;
     part->unk_28 = 255;
-    part->unk_38 = shim_rand_int(60) - 30;
+    part->unk_38 = rand_int(60) - 30;
     part->unk_3C = part->unk_38 * 0.25;
     part->unk_20 = 20;
 
@@ -79,7 +79,7 @@ void shattering_stones_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4) {
         part->unk_04 = 0;
         part->unk_08 = 0;
         part->unk_10 = D_E002C964[i - 1] * 2.0f;
-        part->unk_14 = (f32) shim_rand_int(10) * 0.1 * 2.0 + 1.0;
+        part->unk_14 = (f32) rand_int(10) * 0.1 * 2.0 + 1.0;
         part->unk_2C = 0;
         part->unk_34 = 0;
     }
@@ -105,7 +105,7 @@ void shattering_stones_update(EffectInstance* effect) {
     if (part->unk_24 == 1) {
         part->unk_20--;
         if (part->unk_20 < 0) {
-            shim_remove_effect(effect);
+            remove_effect(effect);
             return;
         }
 
@@ -134,7 +134,7 @@ void shattering_stones_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -150,18 +150,18 @@ void shattering_stones_appendGfx(void* effect) {
     gSPDisplayList(gMainGfxPos++, D_09000C00_341480);
 
     if (part->unk_24 == 0) {
-        shim_guTranslateF(sp20, part->unk_00, part->unk_04, part->unk_08);
-        shim_guScaleF(sp60, 1.5f, 1.5f, 1.5f);
-        shim_guMtxCatF(sp60, sp20, spA0);
-        shim_guRotateF(sp60, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-        shim_guMtxCatF(sp60, spA0, spA0);
-        shim_guRotateF(sp60, part->unk_34, 0.0f, 0.0f, 1.0f);
-        shim_guMtxCatF(sp60, spA0, spA0);
-        shim_guRotateF(sp60, part->unk_2C, 1.0f, 0.0f, 0.0f);
-        shim_guMtxCatF(sp60, spA0, spA0);
-        shim_guRotateF(sp60, part->unk_30, 0.0f, 1.0f, 0.0f);
-        shim_guMtxCatF(sp60, spA0, spA0);
-        shim_guMtxF2L(spA0, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guTranslateF(sp20, part->unk_00, part->unk_04, part->unk_08);
+        guScaleF(sp60, 1.5f, 1.5f, 1.5f);
+        guMtxCatF(sp60, sp20, spA0);
+        guRotateF(sp60, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+        guMtxCatF(sp60, spA0, spA0);
+        guRotateF(sp60, part->unk_34, 0.0f, 0.0f, 1.0f);
+        guMtxCatF(sp60, spA0, spA0);
+        guRotateF(sp60, part->unk_2C, 1.0f, 0.0f, 0.0f);
+        guMtxCatF(sp60, spA0, spA0);
+        guRotateF(sp60, part->unk_30, 0.0f, 1.0f, 0.0f);
+        guMtxCatF(sp60, spA0, spA0);
+        guMtxF2L(spA0, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         gDPSetPrimColor(gMainGfxPos++, 0, 0, 102, 109, 123, part->unk_28);
@@ -170,23 +170,23 @@ void shattering_stones_appendGfx(void* effect) {
     } else {
         s32 unk_28 = part->unk_28;
 
-        shim_guTranslateF(sp20, part->unk_00, part->unk_04, part->unk_08);
-        shim_guScaleF(sp60, 1.5f, 1.5f, 1.5f);
-        shim_guMtxCatF(sp60, sp20, spA0);
-        shim_guRotateF(sp60, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-        shim_guMtxCatF(sp60, spA0, spA0);
-        shim_guRotateF(spE0, part->unk_2C, 1.0f, 0.0f, 0.0f);
+        guTranslateF(sp20, part->unk_00, part->unk_04, part->unk_08);
+        guScaleF(sp60, 1.5f, 1.5f, 1.5f);
+        guMtxCatF(sp60, sp20, spA0);
+        guRotateF(sp60, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+        guMtxCatF(sp60, spA0, spA0);
+        guRotateF(spE0, part->unk_2C, 1.0f, 0.0f, 0.0f);
 
         part++;
         for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, part++) {
             Gfx* dlist = D_E002C940[i];
 
-            shim_guTranslateF(sp60, part->unk_00, part->unk_04, part->unk_08);
-            shim_guMtxCatF(sp60, spA0, sp20);
-            shim_guMtxCatF(spE0, sp20, sp20);
-            shim_guPositionF(sp60, part->unk_2C, 0.0f, part->unk_34, 1.0f, part->unk_18, part->unk_1C, 0.0f);
-            shim_guMtxCatF(sp60, sp20, sp20);
-            shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+            guTranslateF(sp60, part->unk_00, part->unk_04, part->unk_08);
+            guMtxCatF(sp60, spA0, sp20);
+            guMtxCatF(spE0, sp20, sp20);
+            guPositionF(sp60, part->unk_2C, 0.0f, part->unk_34, 1.0f, part->unk_18, part->unk_1C, 0.0f);
+            guMtxCatF(sp60, sp20, sp20);
+            guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
             gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
             gDPSetPrimColor(gMainGfxPos++, 0, 0, 150, 150, 200, unk_28);

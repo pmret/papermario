@@ -48,10 +48,10 @@ void music_note_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     bp.renderUI = NULL;
     bp.effectID = EFFECT_MUSIC_NOTE;
 
-    effect = shim_create_effect_instance(bpPtr);
+    effect = create_effect_instance(bpPtr);
     effect->numParts = numParts;
 
-    part = effect->data.musicNote = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = effect->data.musicNote = general_heap_malloc(numParts * sizeof(*part));
 
     ASSERT(effect->data.musicNote != NULL);
 
@@ -63,7 +63,7 @@ void music_note_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     part->timeLeft = 0x40;
     part->unk_14 = 0;
     part->unk_1C = 0;
-    part->unk_20 = shim_rand_int(6);
+    part->unk_20 = rand_int(6);
     switch (arg0) {
         case 0:
             part->unk_24 = 0.0f;
@@ -72,16 +72,16 @@ void music_note_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
             part->unk_30 = 1.0f;
             break;
         case 1:
-            randInt = shim_rand_int(10);
+            randInt = rand_int(10);
             part->unk_24 = (randInt * 0.1) + -5.0;
-            part->unk_28 = (shim_rand_int(10) * 0.1) + 0.5;
+            part->unk_28 = (rand_int(10) * 0.1) + 0.5;
             part->unk_2C = 0;
             part->unk_30 = 0.0f;
             break;
         default:
-            randInt = shim_rand_int(10);
+            randInt = rand_int(10);
             part->unk_24 = 5.0 - (randInt * 0.1);
-            part->unk_28 = (shim_rand_int(10) * 0.1) + 1.0;
+            part->unk_28 = (rand_int(10) * 0.1) + 1.0;
             part->unk_2C = 0;
             part->unk_30 = 0.0f;
             break;
@@ -99,7 +99,7 @@ void music_note_update(EffectInstance* effect) {
     part->unk_1C++;
     timeLeft = part->timeLeft;
     if (timeLeft < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
     if (timeLeft >= 6) {
@@ -124,7 +124,7 @@ void music_note_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -146,12 +146,12 @@ void music_note_appendGfx(void* data) {
     gDPSetPrimColor(gMainGfxPos++, 0, 0,
         D_E004C67C[rgbOffset], D_E004C67C[rgbOffset + 1], D_E004C67C[rgbOffset + 2], fxData->unk_14
     );
-    shim_guTranslateF(sp18, fxData->pos.x, fxData->pos.y, fxData->pos.z);
-    shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guScaleF(sp58, fxData->unk_10, fxData->unk_10, 0.0f);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp18, fxData->pos.x, fxData->pos.y, fxData->pos.z);
+    guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(sp58, sp18, sp18);
+    guScaleF(sp58, fxData->unk_10, fxData->unk_10, 0.0f);
+    guMtxCatF(sp58, sp18, sp18);
+    guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gSPDisplayList(gMainGfxPos++, D_E004C660[dlistIdx]);
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);

@@ -35,12 +35,12 @@ u8 D_E0088D00[] = { 0, 1, 2, 3, 2, 1, 0, 0 };
 u8 D_E0088D08[] = { 0, 45, 0, 60 };
 
 void func_E0088000(ConfettiFXData* part) {
-    part->unk_04 = shim_rand_int(700) * 0.1f - 35.0f;
+    part->unk_04 = rand_int(700) * 0.1f - 35.0f;
     part->unk_08 = 0;
-    part->unk_0C = shim_rand_int(300) * 0.1f - 15.0f;
-    part->unk_10 = (part->unk_04 + shim_rand_int(100) * 0.1f - 5.0f) * 0.03;
-    part->unk_14 = -1.7 - shim_rand_int(800) * 0.1f * 0.01;
-    part->unk_18 = (shim_rand_int(200) * 0.1f - 10.0f) * 0.05;
+    part->unk_0C = rand_int(300) * 0.1f - 15.0f;
+    part->unk_10 = (part->unk_04 + rand_int(100) * 0.1f - 5.0f) * 0.03;
+    part->unk_14 = -1.7 - rand_int(800) * 0.1f * 0.01;
+    part->unk_18 = (rand_int(200) * 0.1f - 10.0f) * 0.05;
     part->unk_20 = 120;
 }
 
@@ -108,9 +108,9 @@ EffectInstance* confetti_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, 
     bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_CONFETTI;
 
-    effect = shim_create_effect_instance(bpPtr);
+    effect = create_effect_instance(bpPtr);
     effect->numParts = numParts;
-    data = effect->data.confetti = (ConfettiFXData*)shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.confetti = (ConfettiFXData*)general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.confetti != NULL);
 
     data->unk_04 = arg1;
@@ -123,7 +123,7 @@ EffectInstance* confetti_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, 
     data->unk_28 = 255;
 
     data++;
-    temp_fp = shim_rand_int(360);
+    temp_fp = rand_int(360);
 
     for (i = 0; i < np; i++, data++) {
         temp_f30 = sp28 * (effect_rand_int(100) * 0.01f);
@@ -147,10 +147,10 @@ EffectInstance* confetti_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, 
 
         data->unk_00 = arg0;
 
-        sinTheta = shim_sin_deg(theta);
-        cosTheta = shim_cos_deg(theta);
-        sinTheta2 = shim_sin_deg(theta2);
-        cosTheta2 = shim_cos_deg(theta2);
+        sinTheta = sin_deg(theta);
+        cosTheta = cos_deg(theta);
+        sinTheta2 = sin_deg(theta2);
+        cosTheta2 = cos_deg(theta2);
         if (arg0 == 3) {
             func_E0088000(data);
             data->unk_30 = i * 3;
@@ -184,7 +184,7 @@ void confetti_update(EffectInstance* effect) {
 
     part->unk_20--;
     if (part->unk_20 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -241,7 +241,7 @@ void confetti_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
 }
 
 void confetti_appendGfx(void* effect) {
@@ -270,10 +270,10 @@ void confetti_appendGfx(void* effect) {
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
     gSPDisplayList(gMainGfxPos++, D_09000940_38C4E0);
 
-    shim_guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
-    shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
+    guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(sp58, sp18, sp18);
+    guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     savedGfxPos = gMainGfxPos++;
@@ -283,8 +283,8 @@ void confetti_appendGfx(void* effect) {
         color = &D_E0088CDC[i % 12];
 
         if (part->unk_30 <= 0) {
-            shim_guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
-            shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+            guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
+            guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
             gDPSetPrimColor(gMainGfxPos++, 0, 0, color->r, color->g, color->b, unk_28);
 

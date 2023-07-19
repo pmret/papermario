@@ -134,10 +134,10 @@ EffectInstance* water_fountain_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 
     effectBp.renderUI = NULL;
     effectBp.effectID = EFFECT_WATER_FOUNTAIN;
 
-    effect = shim_create_effect_instance(&effectBp);
+    effect = create_effect_instance(&effectBp);
     effect->numParts = numParts;
 
-    data = effect->data.waterFountain = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.waterFountain = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(data != NULL);
 
     data->unk_00 = arg0;
@@ -180,7 +180,7 @@ void water_fountain_update(EffectInstance* effect) {
     }
     data->lifeTime++;
     if (data->timeLeft < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
     if (data->lifeTime < 8) {
@@ -198,7 +198,7 @@ void water_fountain_render(EffectInstance* effect) {
     renderTask.distance = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -238,19 +238,19 @@ void water_fountain_appendGfx(void *effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
-    shim_guScaleF(sp58, data->unk_34, data->unk_34, data->unk_34);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
+    guScaleF(sp58, data->unk_34, data->unk_34, data->unk_34);
+    guMtxCatF(sp58, sp18, sp18);
+    guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPMatrix(gMainGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gSPDisplayList(gMainGfxPos++, D_09000280_3B8AE0);
 
-    shim_guRotateF(sp18, data->unk_38, 0.0f, 0.0f, 1.0f);
-    shim_guScaleF(sp58, data->unk_3C, data->unk_40, 1.0f);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guRotateF(sp18, data->unk_38, 0.0f, 0.0f, 1.0f);
+    guScaleF(sp58, data->unk_3C, data->unk_40, 1.0f);
+    guMtxCatF(sp58, sp18, sp18);
+    guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gDPSetEnvColor(gMainGfxPos++, data->unk_28, data->unk_2C, data->unk_30, unk_24);
@@ -269,12 +269,12 @@ void water_fountain_appendGfx(void *effect) {
             if (lifeTime * 5 >= idx) {
                 s32 temp2 = idx + 1;
                 if (timeLeft >= var_s6 - temp2) {
-                    shim_guTranslateF(sp18, (f32) ptr[idx].unk_00, (f32) ptr[idx].unk_01 + 10.0f, 0.0f);
-                    shim_guScaleF(sp58, (f32) basePtr[idx].unk_02 * 0.01, (f32) basePtr[idx].unk_04 * 0.01, 1.0f);
-                    shim_guMtxCatF(sp58, sp18, sp18);
-                    shim_guRotateF(sp58, (f32) ptr[idx].unk_06 + D_E00B8CA4[(j + i) & 7], 0.0f, 0.0f, 1.0f);
-                    shim_guMtxCatF(sp58, sp18, sp18);
-                    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+                    guTranslateF(sp18, (f32) ptr[idx].unk_00, (f32) ptr[idx].unk_01 + 10.0f, 0.0f);
+                    guScaleF(sp58, (f32) basePtr[idx].unk_02 * 0.01, (f32) basePtr[idx].unk_04 * 0.01, 1.0f);
+                    guMtxCatF(sp58, sp18, sp18);
+                    guRotateF(sp58, (f32) ptr[idx].unk_06 + D_E00B8CA4[(j + i) & 7], 0.0f, 0.0f, 1.0f);
+                    guMtxCatF(sp58, sp18, sp18);
+                    guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
                     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
                     gDPSetPrimColor(gMainGfxPos++, 0, 0, unk_18, unk_1C, unk_20, (unk_24 * basePtr[idx].unk_08) >> 8);

@@ -52,9 +52,9 @@ void stars_burst_main(
         bpPtr->renderUI = NULL;
         bpPtr->effectID = EFFECT_STARS_BURST;
 
-        effect = shim_create_effect_instance(bpPtr);
+        effect = create_effect_instance(bpPtr);
         effect->numParts = numParts;
-        part = effect->data.starsBurst = shim_general_heap_malloc(numParts * sizeof(*part));
+        part = effect->data.starsBurst = general_heap_malloc(numParts * sizeof(*part));
         ASSERT(effect->data.starsBurst != NULL);
 
         part->unk_00 = arg0;
@@ -67,15 +67,15 @@ void stars_burst_main(
 
         part++;
         for (i = 1; i < numParts; i++, part++) {
-            temp = shim_rand_int(10) * 0.25f + 5.0f;
+            temp = rand_int(10) * 0.25f + 5.0f;
 
             part->unk_00 = arg0;
             part->unk_04 = arg1;
             part->unk_08 = arg2;
             part->unk_0C = arg3;
-            part->unk_10 = shim_cos_deg(arg5 + (i & 2) * (i / 2) * 4) * shim_sin_deg(arg4);
-            part->unk_14 = shim_sin_deg(arg5 + (i & 2) * (i / 2) * 4);
-            part->unk_18 = shim_cos_deg(arg5 + (i & 2) * (i / 2) * 4) * shim_cos_deg(arg4);
+            part->unk_10 = cos_deg(arg5 + (i & 2) * (i / 2) * 4) * sin_deg(arg4);
+            part->unk_14 = sin_deg(arg5 + (i & 2) * (i / 2) * 4);
+            part->unk_18 = cos_deg(arg5 + (i & 2) * (i / 2) * 4) * cos_deg(arg4);
             part->unk_28 = temp;
             part->unk_24 = temp / 10.0;
         }
@@ -94,7 +94,7 @@ void stars_burst_update(EffectInstance* effect) {
     part->unk_34++;
 
     if (part->unk_30 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -124,7 +124,7 @@ void stars_burst_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -154,12 +154,12 @@ void stars_burst_appendGfx(void* effect) {
 
         gDPSetPrimColor(gMainGfxPos++, 0, 0, D_E0042780[rIdx % 36], D_E0042780[gIdx % 36], D_E0042780[bIdx % 36], unk_2C);
 
-        shim_guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
-        shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-        shim_guMtxCatF(sp58, sp18, sp18);
-        shim_guScaleF(sp58, part->unk_24, part->unk_24, 1.0f);
-        shim_guMtxCatF(sp58, sp18, sp18);
-        shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
+        guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+        guMtxCatF(sp58, sp18, sp18);
+        guScaleF(sp58, part->unk_24, part->unk_24, 1.0f);
+        guMtxCatF(sp58, sp18, sp18);
+        guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         gSPDisplayList(gMainGfxPos++, dlist);

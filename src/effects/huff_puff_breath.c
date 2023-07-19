@@ -26,10 +26,10 @@ EffectInstance* huff_puff_breath_main(s32 type, f32 posX, f32 posY, f32 posZ, f3
     effectBp.renderUI = NULL;
     effectBp.effectID = EFFECT_HUFF_PUFF_BREATH;
 
-    effect = shim_create_effect_instance(&effectBp);
+    effect = create_effect_instance(&effectBp);
     effect->numParts = numParts;
 
-    data = effect->data.huffPuffBreath = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.huffPuffBreath = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(data != NULL);
 
     data->type = type;
@@ -55,8 +55,8 @@ EffectInstance* huff_puff_breath_main(s32 type, f32 posX, f32 posY, f32 posZ, f3
     data->angle = angle;
     data->speedY = 0;
     data->speedX = speed;
-    data->texOffsetX = shim_rand_int(32);
-    data->texOffsetY = shim_rand_int(16);
+    data->texOffsetX = rand_int(32);
+    data->texOffsetY = rand_int(16);
     data->primB = 150;
     data->envR = 215;
     data->envG = 210;
@@ -84,7 +84,7 @@ void huff_puff_breath_update(EffectInstance* effect) {
     temp_a2 = ++data->lifeTime;
 
     if (data->timeLeft < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
     if (data->timeLeft < 16) {
@@ -118,7 +118,7 @@ void huff_puff_breath_render(EffectInstance* effect) {
     renderTask.distance = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
 }
 
 void func_E00DC2FC(void) {
@@ -137,12 +137,12 @@ void huff_puff_breath_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
-    shim_guRotateF(sp58, data->angle, 0.0f, 0.0f, 1.0f);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guScaleF(sp58, data->scale, data->scale, data->scale);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
+    guRotateF(sp58, data->angle, 0.0f, 0.0f, 1.0f);
+    guMtxCatF(sp58, sp18, sp18);
+    guScaleF(sp58, data->scale, data->scale, data->scale);
+    guMtxCatF(sp58, sp18, sp18);
+    guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPMatrix(gMainGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);

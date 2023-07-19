@@ -49,9 +49,9 @@ EffectInstance* partner_buff_main(s32 useRandomValues, f32 arg1, f32 arg2, f32 a
     bp.renderUI = func_E011A3A0;
     bp.effectID = EFFECT_PARTNER_BUFF;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    part = effect->data.partnerBuff = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = effect->data.partnerBuff = general_heap_malloc(numParts * sizeof(*part));
     ASSERT(effect->data.partnerBuff != NULL);
 
     part->useRandomValues = useRandomValues;
@@ -97,7 +97,7 @@ void partner_buff_update(EffectInstance* effect) {
 
     data->lifeTime++;
     if (data->timeLeft < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -111,7 +111,7 @@ void partner_buff_update(EffectInstance* effect) {
         }
         // possibly a leftover debug option
         if (useRandomValues == 1 && time % 30 == 0) {
-            buff->turnsLeft = shim_rand_int(4);
+            buff->turnsLeft = rand_int(4);
         }
 
         switch (buff->state) {

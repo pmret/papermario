@@ -65,9 +65,9 @@ EffectInstance* stop_watch_main(
     bp.renderUI = NULL;
     bp.effectID = EFFECT_STOP_WATCH;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    data = effect->data.stopWatch = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.stopWatch = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.stopWatch != NULL);
 
     data->unk_00 = arg0;
@@ -123,7 +123,7 @@ void stop_watch_update(EffectInstance* effect) {
     data->unk_14++;
 
     if (data->unk_10 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -171,7 +171,7 @@ void stop_watch_render(EffectInstance* effect) {
     renderTask.distance = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
 }
 
 void func_E00C4300(void) {
@@ -191,10 +191,10 @@ void stop_watch_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guTranslateF(sp20, data->unk_04, data->unk_08, data->unk_0C);
-    shim_guScaleF(sp60, data->unk_28, data->unk_28, data->unk_28);
-    shim_guMtxCatF(sp60, sp20, sp20);
-    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp20, data->unk_04, data->unk_08, data->unk_0C);
+    guScaleF(sp60, data->unk_28, data->unk_28, data->unk_28);
+    guMtxCatF(sp60, sp20, sp20);
+    guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPMatrix(gMainGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
@@ -208,8 +208,8 @@ void stop_watch_appendGfx(void* effect) {
     for (i = 0; i < 16; i++) {
         Vtx_t* vtx = &vtxBuffer[i * 2];
         f32 unk_30 = data->unk_30;
-        s32 temp_s1 = shim_sin_deg(unk_14 * 10 + i * 60) * 500.0f * unk_30;
-        s32 temp_f0 = shim_sin_deg(unk_14 * 10 + i * 6) * 200.0f * unk_30;
+        s32 temp_s1 = sin_deg(unk_14 * 10 + i * 60) * 500.0f * unk_30;
+        s32 temp_f0 = sin_deg(unk_14 * 10 + i * 6) * 200.0f * unk_30;
 
         vtx->ob[0] = temp_s1 - 3200;
         vtx->ob[1] = i * 400 + temp_f0 - 3000;
@@ -231,8 +231,8 @@ void stop_watch_appendGfx(void* effect) {
     gMainGfxPos++;
     savedGfxPos = gMainGfxPos;
 
-    shim_guScaleF(sp20, 0.01f, 0.01f, 0.01f);
-    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guScaleF(sp20, 0.01f, 0.01f, 0.01f);
+    guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gSPVertex(gMainGfxPos++, vtxBuffer, 32, 0);
@@ -248,8 +248,8 @@ void stop_watch_appendGfx(void* effect) {
     gSPEndDisplayList(gMainGfxPos++);
 
     for (i = 0; i < 10; i++) {
-        shim_guPositionF(sp20, data->unk_AC[i], data->unk_D4[i], data->unk_FC[i], D_E00C49D0[i % 4] * 0.01, data->unk_34[i], data->unk_5C[i], data->unk_84[i]);
-        shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guPositionF(sp20, data->unk_AC[i], data->unk_D4[i], data->unk_FC[i], D_E00C49D0[i % 4] * 0.01, data->unk_34[i], data->unk_5C[i], data->unk_84[i]);
+        guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         gDPSetPrimColor(gMainGfxPos++, 0, 0, D_E00C49D4[i], D_E00C49E8[i], D_E00C49FC[i], unk_24 * data->unk_124[i] / 255);

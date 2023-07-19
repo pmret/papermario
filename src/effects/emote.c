@@ -63,9 +63,9 @@ void func_E0020000(EmoteFXData* part, s32 arg1) {
     f32 sin;
     f32 cos;
 
-    sin = shim_sin_deg(gCameras[gCurrentCameraID].currentYaw);
-    cos = shim_cos_deg(gCameras[gCurrentCameraID].currentYaw);
-    shim_guRotateF(sp18, -(unk_1C - 20.0f + arg1 * 20), sin, 0.0f, -cos);
+    sin = sin_deg(gCameras[gCurrentCameraID].currentYaw);
+    cos = cos_deg(gCameras[gCurrentCameraID].currentYaw);
+    guRotateF(sp18, -(unk_1C - 20.0f + arg1 * 20), sin, 0.0f, -cos);
 
     if (npc == PTR_LIST_END) {
         part->unk_04 = gPlayerStatus.position.x + part->unk_10 + sp18[1][0] * (unk_20 + 16.0f);
@@ -105,9 +105,9 @@ void emote_main(s32 arg0, Npc* arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32
     bp.renderUI = NULL;
     bp.effectID = EFFECT_EMOTE;
 
-    effect = shim_create_effect_instance(bpPtr);
+    effect = create_effect_instance(bpPtr);
     effect->numParts = numParts;
-    data = effect->data.emote = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.emote = general_heap_malloc(numParts * sizeof(*data));
 
     ASSERT(effect->data.emote != NULL);
     data->unk_3C = arg1;
@@ -161,7 +161,7 @@ void emote_update(EffectInstance* effect) {
             part->unk_38 = D_E0020D80[part->unk_30][0];
             part->unk_34 = 1;
         } else {
-            shim_remove_effect(effect);
+            remove_effect(effect);
             return;
         }
     }
@@ -171,7 +171,7 @@ void emote_update(EffectInstance* effect) {
     }
 
     if (part->unk_2C < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -197,7 +197,7 @@ void emote_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -221,18 +221,18 @@ void emote_appendGfx(void* effect) {
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
     if (type != 1) {
-        shim_guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
-        shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-        shim_guMtxCatF(sp58, sp18, sp18);
+        guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
+        guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+        guMtxCatF(sp58, sp18, sp18);
 
         matrix = &gDisplayContext->matrixStack[gMatrixListPos];
 
-        shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos++]);
-        shim_guScaleF(sp58, 1.0f, 0.8f, 1.0f);
-        shim_guMtxCatF(sp58, sp18, sp18);
-        shim_guRotateF(sp58, part->unk_24, 0.0f, 0.0f, 1.0f);
-        shim_guMtxCatF(sp58, sp18, sp18);
-        shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos++]);
+        guScaleF(sp58, 1.0f, 0.8f, 1.0f);
+        guMtxCatF(sp58, sp18, sp18);
+        guRotateF(sp58, part->unk_24, 0.0f, 0.0f, 1.0f);
+        guMtxCatF(sp58, sp18, sp18);
+        guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
         gSPDisplayList(gMainGfxPos++, D_09002170_336DE0);
@@ -240,14 +240,14 @@ void emote_appendGfx(void* effect) {
     } else {
         if (part->unk_38 == 0) {
             for (i = 0; i < 3; i++, part++) {
-                shim_guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
-                shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-                shim_guMtxCatF(sp58, sp18, sp18);
-                shim_guRotateF(sp58, part->unk_24, 0.0f, 0.0f, 1.0f);
-                shim_guMtxCatF(sp58, sp18, sp18);
-                shim_guScaleF(sp58, part->unk_28, part->unk_28, 1.0f);
-                shim_guMtxCatF(sp58, sp18, sp18);
-                shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+                guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
+                guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+                guMtxCatF(sp58, sp18, sp18);
+                guRotateF(sp58, part->unk_24, 0.0f, 0.0f, 1.0f);
+                guMtxCatF(sp58, sp18, sp18);
+                guScaleF(sp58, part->unk_28, part->unk_28, 1.0f);
+                guMtxCatF(sp58, sp18, sp18);
+                guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
                 gDPSetPrimColor(gMainGfxPos++, 0, 0, 235, 28, 0, 255);
                 gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);

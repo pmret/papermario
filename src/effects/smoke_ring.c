@@ -48,12 +48,12 @@ void smoke_ring_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_SMOKE_RING;
 
-    effect = shim_create_effect_instance(bpPtr);
+    effect = create_effect_instance(bpPtr);
     effect->numParts = numParts;
-    part = effect->data.smokeRing = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = effect->data.smokeRing = general_heap_malloc(numParts * sizeof(*part));
     ASSERT(effect->data.smokeRing != NULL);
 
-    shim_mem_clear(part, numParts * sizeof(*part));
+    mem_clear(part, numParts * sizeof(*part));
 
     part->unk_38 = 0;
     part->unk_3C = 0;
@@ -74,11 +74,11 @@ void smoke_ring_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
         part->unk_24 = -0.16f;
         part->unk_28 = 0;
         part->unk_2C = 0;
-        part->unk_04 = -shim_sin_deg(angle) * factor;
-        part->unk_08 = -shim_cos_deg(angle) * factor;
+        part->unk_04 = -sin_deg(angle) * factor;
+        part->unk_08 = -cos_deg(angle) * factor;
         part->unk_0C = 0;
-        part->unk_30 = shim_sin_deg(angle);
-        part->unk_34 = shim_cos_deg(angle);
+        part->unk_30 = sin_deg(angle);
+        part->unk_34 = cos_deg(angle);
     }
 }
 
@@ -92,7 +92,7 @@ void smoke_ring_update(EffectInstance* effect) {
     part->unk_40 = D_E002E754[part->unk_38][part->unk_3C++];
 
     if (part->unk_40 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -115,7 +115,7 @@ void smoke_ring_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_28;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
 }
 
 void smoke_ring_appendGfx(void* effect) {
@@ -140,10 +140,10 @@ void smoke_ring_appendGfx(void* effect) {
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
     gSPDisplayList(gMainGfxPos++, D_09002950_32B7F0);
 
-    shim_guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
-    shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-    shim_guMtxCatF(sp58, sp18, sp98);
-    shim_guMtxF2L(sp98, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
+    guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(sp58, sp18, sp98);
+    guMtxF2L(sp98, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 238, 220, 215, 160);
@@ -166,8 +166,8 @@ void smoke_ring_appendGfx(void* effect) {
 
     part++;
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, part++) {
-        shim_guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
-        shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
+        guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         gSPDisplayList(gMainGfxPos++, dlist);

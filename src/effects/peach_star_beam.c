@@ -48,9 +48,9 @@ EffectInstance* peach_star_beam_main(s32 type, f32 x, f32 y, f32 z, f32 arg4, s3
     bp.renderUI = NULL;
     bp.effectID = EFFECT_PEACH_STAR_BEAM;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    data = effect->data.peachStarBeam = shim_general_heap_malloc(sizeof(*data));
+    data = effect->data.peachStarBeam = general_heap_malloc(sizeof(*data));
     ASSERT(effect->data.peachStarBeam != NULL);
 
     data->type = type;
@@ -117,7 +117,7 @@ void peach_star_beam_update(EffectInstance* effect) {
 
     data->lifetime++;
     if (data->timeLeft < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -137,9 +137,9 @@ void peach_star_beam_update(EffectInstance* effect) {
             part->pos.z = centerZ;
         } else {
             spiritAngle = rotationAngle + ((-360 + (360 * i)) / 7);
-            part->pos.x = centerX + radius * shim_sin_deg(spiritAngle);
+            part->pos.x = centerX + radius * sin_deg(spiritAngle);
             part->pos.y = centerY;
-            part->pos.z = centerZ + radius * shim_cos_deg(spiritAngle);
+            part->pos.z = centerZ + radius * cos_deg(spiritAngle);
         }
         if (!(part->flags & 2)) {
             part->lockedPos.x = part->pos.x;
@@ -158,7 +158,7 @@ void peach_star_beam_render(EffectInstance* effect) {
     renderTask.distance = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -189,8 +189,8 @@ void peach_star_beam_appendGfx(void* effect) {
             }
 
             if (!(data->pos.z < partZ)) {
-                shim_guPositionF(sp20, 0.0f, 0.0f, 0.0f, SPRITE_WORLD_SCALE_F, partX, partY, partZ);
-                shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+                guPositionF(sp20, 0.0f, 0.0f, 0.0f, SPRITE_WORLD_SCALE_F, partX, partY, partZ);
+                guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
                 gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                           G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
@@ -203,10 +203,10 @@ void peach_star_beam_appendGfx(void* effect) {
         }
     }
 
-    shim_guTranslateF(sp20, data->pos.x, data->pos.y - (((f32) (255 - data->unk_3C) * 400.0) / 255.0), data->pos.z);
-    shim_guScaleF(sp60, data->beamScale * 0.4, data->beamScale * 0.4, data->beamScale * 0.4);
-    shim_guMtxCatF(sp60, sp20, sp20);
-    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp20, data->pos.x, data->pos.y - (((f32) (255 - data->unk_3C) * 400.0) / 255.0), data->pos.z);
+    guScaleF(sp60, data->beamScale * 0.4, data->beamScale * 0.4, data->beamScale * 0.4);
+    guMtxCatF(sp60, sp20, sp20);
+    guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
               G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
@@ -233,8 +233,8 @@ void peach_star_beam_appendGfx(void* effect) {
             }
 
             if (!(partZ <= data->pos.z)) {
-                shim_guPositionF(sp20, 0.0f, 0.0f, 0.0f, 0.67f, partX, partY, partZ);
-                shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+                guPositionF(sp20, 0.0f, 0.0f, 0.0f, 0.67f, partX, partY, partZ);
+                guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
                 gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                           G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);

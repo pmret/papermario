@@ -46,9 +46,9 @@ EffectInstance* radial_shimmer_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 
     bp.renderUI = NULL;
     bp.effectID = EFFECT_RADIAL_SHIMMER;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    data = effect->data.radialShimmer = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.radialShimmer = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.radialShimmer != NULL);
 
     data->unk_00 = arg0;
@@ -221,7 +221,7 @@ void radial_shimmer_update(EffectInstance* effect) {
     }
 
     if (part->timeLeft < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -241,7 +241,7 @@ void radial_shimmer_update(EffectInstance* effect) {
 
     part->unk_1C = part->unk_20;
 
-    shim_transform_point(&gCameras[gCurrentCameraID].perspectiveMatrix[0], part->unk_04, part->unk_08, part->unk_0C,
+    transform_point(&gCameras[gCurrentCameraID].perspectiveMatrix[0], part->unk_04, part->unk_08, part->unk_0C,
                          1.0f, &outX, &outY, &outZ, &outS);
 
     outS = 1.0f / outS;
@@ -280,7 +280,7 @@ void radial_shimmer_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -313,18 +313,18 @@ void radial_shimmer_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guTranslateF(sp20, data->unk_10, data->unk_14, data->unk_18);
-    shim_guScaleF(sp60, data->unk_1C, data->unk_1C, 1.0f);
-    shim_guMtxCatF(sp60, sp20, sp20);
-    shim_guPerspectiveF(sp60, &spA0, data->unk_60, (f32) camera->viewportW / camera->viewportH, 4.0f, 16384.0f, 1.0f);
-    shim_guMtxCatF(sp60, sp20, sp20);
-    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp20, data->unk_10, data->unk_14, data->unk_18);
+    guScaleF(sp60, data->unk_1C, data->unk_1C, 1.0f);
+    guMtxCatF(sp60, sp20, sp20);
+    guPerspectiveF(sp60, &spA0, data->unk_60, (f32) camera->viewportW / camera->viewportH, 4.0f, 16384.0f, 1.0f);
+    guMtxCatF(sp60, sp20, sp20);
+    guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
               G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
 
-    shim_guTranslateF(sp20, 0.0f, 0.0f, data->unk_64);
-    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp20, 0.0f, 0.0f, data->unk_64);
+    guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
               G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);

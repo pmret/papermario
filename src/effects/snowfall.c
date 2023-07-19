@@ -37,10 +37,10 @@ EffectInstance* snowfall_main(s32 arg0, s32 arg1) {
     effectBp.renderUI = NULL;
     effectBp.effectID = EFFECT_SNOWFALL;
 
-    effect = shim_create_effect_instance(&effectBp);
+    effect = create_effect_instance(&effectBp);
     effect->numParts = numParts;
 
-    data = effect->data.snowfall = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.snowfall = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(data != NULL);
 
     data->timeLeft = 100;
@@ -123,7 +123,7 @@ void snowfall_update(EffectInstance* effect) {
         data->timeLeft--;
     }
     if (data->timeLeft < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -156,7 +156,7 @@ void snowfall_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -178,7 +178,7 @@ void snowfall_appendGfx(void* effect) {
         unk_2C = data->unk_2C;
         dlist = D_E008AA50[data->unk_04];
         if (*gBackgroundFogModePtr == 1) {
-            shim_get_background_color_blend(&bgRGB, &bgRGB, &bgRGB, &bgAlpha);
+            get_background_color_blend(&bgRGB, &bgRGB, &bgRGB, &bgAlpha);
             unk_28 = 255 - bgAlpha;
         }
 
@@ -189,16 +189,16 @@ void snowfall_appendGfx(void* effect) {
             gSPDisplayList(gMainGfxPos++, D_09000C00_38DC70);
             gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 255, unk_28);
 
-            shim_guRotateF(sp18, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-            shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+            guRotateF(sp18, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+            guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
             mtx = &gDisplayContext->matrixStack[gMatrixListPos++];
 
             data++;
             for (i = 0; i < unk_2C; i++, data++) {
                 if (data->unk_30 <= 0 && data->unk_28 != 0) {
-                    shim_guTranslateF(sp18, data->unk_08, data->unk_0C, data->unk_10);
-                    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+                    guTranslateF(sp18, data->unk_08, data->unk_0C, data->unk_10);
+                    guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
                     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                               G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);

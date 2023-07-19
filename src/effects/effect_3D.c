@@ -26,7 +26,7 @@ void effect_3D_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, 
 
         temp_f12 = SQ(arg4) + SQ(arg5) + SQ(arg6);
         if (temp_f12 != 0.0f) {
-            temp_f12 = -1.0f / shim_sqrtf(temp_f12);
+            temp_f12 = -1.0f / sqrtf(temp_f12);
 
             arg4 *= temp_f12;
             arg5 *= temp_f12;
@@ -48,7 +48,7 @@ void effect_3D_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, 
 
             temp_f12 = SQ(temp_f30) + SQ(sp70) + SQ(temp_f28);
             if (temp_f12 != 0.0f) {
-                temp_f12 = 1.0f / shim_sqrtf(temp_f12);
+                temp_f12 = 1.0f / sqrtf(temp_f12);
 
                 temp_f30 *= temp_f12;
                 sp70 *= temp_f12;
@@ -68,9 +68,9 @@ void effect_3D_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, 
                 bpPtr->renderUI = NULL;
                 bpPtr->effectID = EFFECT_3D;
 
-                effect = shim_create_effect_instance(bpPtr);
+                effect = create_effect_instance(bpPtr);
                 effect->numParts = arg7;
-                part = effect->data.unk_3D = shim_general_heap_malloc(arg7 * sizeof(*part));
+                part = effect->data.unk_3D = general_heap_malloc(arg7 * sizeof(*part));
                 ASSERT(effect->data.unk_3D != NULL);
 
                 part->unk_04 = 0;
@@ -86,7 +86,7 @@ void effect_3D_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, 
                     part->pos.x = 0;
                     part->pos.y = 0;
                     part->pos.z = 0;
-                    shim_guRotateF(sp30, i * 72, arg4, arg5, arg6);
+                    guRotateF(sp30, i * 72, arg4, arg5, arg6);
                     part->unk_14 = part->unk_20 = 2.0f * arg4;
                     part->unk_18 = part->unk_24 = 2.0f * arg5;
                     part->unk_1C = part->unk_28 = 2.0f * arg6;
@@ -124,7 +124,7 @@ void effect_3D_update(EffectInstance* effect) {
     part->unk_5C--;
     part->unk_60++;
     if (part->unk_5C < 0 && unk_04 == 2) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -207,7 +207,7 @@ void effect_3D_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -224,8 +224,8 @@ void effect_3D_appendGfx(void* effect) {
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
     gSPDisplayList(gMainGfxPos++, D_09000240_37D3C0);
 
-    shim_guTranslateF(sp18, part->pos.x, part->pos.y, part->pos.z);
-    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp18, part->pos.x, part->pos.y, part->pos.z);
+    guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
@@ -233,14 +233,14 @@ void effect_3D_appendGfx(void* effect) {
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, part++) {
         gDPSetPrimColor(gMainGfxPos++, 0, 0, 200, 255, 255, part->unk_58);
 
-        shim_guTranslateF(sp18, part->pos.x, part->pos.y, part->pos.z);
-        shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-        shim_guMtxCatF(sp58, sp18, sp18);
-        shim_guScaleF(sp58, part->unk_44, part->unk_48, part->unk_44);
-        shim_guMtxCatF(sp58, sp18, sp18);
-        shim_guRotateF(sp58, part->unk_4C, 0.0f, 0.0f, 1.0f);
-        shim_guMtxCatF(sp58, sp18, sp18);
-        shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guTranslateF(sp18, part->pos.x, part->pos.y, part->pos.z);
+        guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+        guMtxCatF(sp58, sp18, sp18);
+        guScaleF(sp58, part->unk_44, part->unk_48, part->unk_44);
+        guMtxCatF(sp58, sp18, sp18);
+        guRotateF(sp58, part->unk_4C, 0.0f, 0.0f, 1.0f);
+        guMtxCatF(sp58, sp18, sp18);
+        guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         gSPDisplayList(gMainGfxPos++, D_090002E8_37D468);

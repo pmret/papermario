@@ -42,10 +42,10 @@ void big_smoke_puff_main(f32 x, f32 y, f32 z) {
     bp.renderUI = NULL;
     bp.effectID = EFFECT_BIG_SMOKE_PUFF;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
 
-    data = shim_general_heap_malloc(effect->numParts * sizeof(*data));
+    data = general_heap_malloc(effect->numParts * sizeof(*data));
     effect->data.bigSmokePuff = data;
 
     ASSERT(data != NULL);
@@ -63,8 +63,8 @@ void big_smoke_puff_main(f32 x, f32 y, f32 z) {
 
         theta = D_E0002760[i] + 90.0f;
         temp_f20 = 2.0 * D_E0002788[i];
-        sinTheta = shim_sin_deg(theta);
-        cosTheta = shim_cos_deg(theta);
+        sinTheta = sin_deg(theta);
+        cosTheta = cos_deg(theta);
 
         data->unk_20 = temp_f20 * sinTheta;
         data->unk_24 = -temp_f20 * cosTheta;
@@ -102,7 +102,7 @@ void big_smoke_puff_update(EffectInstance* effect) {
     }
 
     if (!cond) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
     }
 }
 
@@ -115,7 +115,7 @@ void big_smoke_puff_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -128,8 +128,8 @@ void big_smoke_puff_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guPositionF(mtx, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, data->x, data->y, data->z);
-    shim_guMtxF2L(mtx, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guPositionF(mtx, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, data->x, data->y, data->z);
+    guMtxF2L(mtx, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++,
               &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
@@ -145,9 +145,9 @@ void big_smoke_puff_appendGfx(void* effect) {
                 primAlpha = 16;
             }
 
-            shim_guPositionF(mtx, 0.0f, 0.0f, sPartYaws[i], sPartScales[i], data->partX,
+            guPositionF(mtx, 0.0f, 0.0f, sPartYaws[i], sPartScales[i], data->partX,
                              data->partY, 0.0f);
-            shim_guMtxF2L(mtx, &gDisplayContext->matrixStack[gMatrixListPos]);
+            guMtxF2L(mtx, &gDisplayContext->matrixStack[gMatrixListPos]);
 
             gSPMatrix(gMainGfxPos++,
                       &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
@@ -158,7 +158,7 @@ void big_smoke_puff_appendGfx(void* effect) {
                 envAlpha = 255;
                 dlist = sDlists[ARRAY_COUNT(sDlists) - 1];
             } else {
-                f32 temp = shim_sin_deg((((temp_f12 * 7.0f) / data->unk_04) * 90.0f) / 7.0f) * 7.0f;
+                f32 temp = sin_deg((((temp_f12 * 7.0f) / data->unk_04) * 90.0f) / 7.0f) * 7.0f;
 
                 envAlpha = (s32)(temp * 255.0f) % 256;
                 dlist = sDlists[(s32)temp];
@@ -176,5 +176,5 @@ void big_smoke_puff_appendGfx(void* effect) {
 }
 
 void func_E0002738(EffectInstance* effect) {
-    shim_remove_effect(effect);
+    remove_effect(effect);
 }

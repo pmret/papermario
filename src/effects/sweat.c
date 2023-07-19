@@ -26,14 +26,14 @@ void sweat_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, s32 
     effectBp.renderUI = NULL;
     effectBp.effectID = EFFECT_SWEAT;
 
-    effect = shim_create_effect_instance(&effectBp);
+    effect = create_effect_instance(&effectBp);
     effect->numParts = numParts;
 
-    data = effect->data.sweat = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.sweat = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(data != NULL);
 
     data->unk_00 = arg0;
-    shim_guRotateF(matrix, -arg5, shim_sin_deg(gCameras[gCurrentCameraID].currentYaw), 0.0f, -shim_cos_deg(gCameras[gCurrentCameraID].currentYaw));
+    guRotateF(matrix, -arg5, sin_deg(gCameras[gCurrentCameraID].currentYaw), 0.0f, -cos_deg(gCameras[gCurrentCameraID].currentYaw));
     temp_f2 = arg4 + 16.0f;
     data->pos.x = arg1 + (matrix[1][0] * temp_f2);
     data->pos.y = arg2 + (matrix[1][1] * temp_f2);
@@ -54,7 +54,7 @@ void sweat_update(EffectInstance *effect) {
 
     data->timeLeft--;
     if (data->timeLeft < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
     data->pos.x += data->unk_18;
@@ -77,7 +77,7 @@ void sweat_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -89,12 +89,12 @@ void sweat_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
-    shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guRotateF(sp58, data->unk_10, 0.0f, 0.0f, 1.0f);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
+    guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(sp58, sp18, sp18);
+    guRotateF(sp58, data->unk_10, 0.0f, 0.0f, 1.0f);
+    guMtxCatF(sp58, sp18, sp18);
+    guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
