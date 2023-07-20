@@ -24,7 +24,7 @@ YAY0_COMPRESS_TOOL = f"{BUILD_TOOLS}/yay0/Yay0compress"
 CRC_TOOL = f"{BUILD_TOOLS}/rom/n64crc"
 
 PIGMENT = "pigment64"
-PIGMENT_REQ_VERSION = "0.2.2"
+PIGMENT_REQ_VERSION = "0.3.0"
 
 
 def exec_shell(command: List[str]) -> str:
@@ -207,7 +207,7 @@ def write_ninja_rules(
     ninja.rule(
         "pigment",
         description="img($img_type) $in",
-        command=f"{PIGMENT} $img_flags $in $img_type -o $out",
+        command=f"{PIGMENT} to-bin $img_flags -f $img_type -o $out $in",
     )
 
     ninja.rule(
@@ -596,7 +596,9 @@ class Configure:
                     encoding = "EUC-JP"
 
                 # Dead cod
-                if isinstance(seg.parent.yaml, dict) and seg.parent.yaml.get("dead_code", False):
+                if isinstance(seg.parent.yaml, dict) and seg.parent.yaml.get(
+                    "dead_code", False
+                ):
                     obj_path = str(entry.object_path)
                     init_obj_path = Path(obj_path + ".dead")
                     build(
