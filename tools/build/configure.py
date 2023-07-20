@@ -75,7 +75,7 @@ def write_ninja_rules(
 
     CPPFLAGS = "-w " + CPPFLAGS_COMMON + " -nostdinc"
 
-    cflags = f"-c -G0 -O2 -gdwarf-2 -x c -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags} -Wno-redundant-decls"
+    cflags = f"-c -G0 -O2 -gdwarf-2 -x c -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
 
     cflags_modern = f"-c -G0 -O2 -gdwarf-2 -fno-builtin-bcopy -fno-tree-loop-distribute-patterns -funsigned-char -mgp32 -mfp32 -mabi=32 -mfix4300 -march=vr4300 -mno-gpopt -fno-toplevel-reorder -mno-abicalls -fno-pic -fno-exceptions -fno-stack-protector -fno-zero-initialized-in-bss -Wno-builtin-declaration-mismatch -x c {extra_cflags}"
 
@@ -1287,7 +1287,7 @@ if __name__ == "__main__":
     if args.shift:
         extra_cppflags += " -DSHIFT"
 
-    extra_cflags += " -Wmissing-braces -Wimplicit -Wredundant-decls -Wstrict-prototypes"
+    extra_cflags += " -Wmissing-braces -Wimplicit -Wredundant-decls -Wstrict-prototypes -Wno-redundant-decls"
 
     # add splat to python import path
     sys.path.insert(0, str((ROOT / args.splat).resolve()))
