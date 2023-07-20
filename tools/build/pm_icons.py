@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
+import re
 from pathlib import Path
 from typing import Dict, Tuple
 from common import get_asset_path
@@ -35,43 +36,46 @@ def get_img_file(fmt_str, img_file: str):
 
 def build(out_bin: Path, in_xml: Path, asset_stack: Tuple[Path, ...], out_header: Path):
     out_bytes = bytearray()
-    offsets: Dict[int, str] = {}
+    offsets: Dict[str, int] = {}
 
     xml = ET.parse(in_xml)
     IconList = xml.getroot()
 
     for Icon in IconList.findall("Icon"):
         type = Icon.attrib["type"]
-        name = Icon.attrib["name"]
+        file = Icon.attrib["name"]
 
-        if name is None:
+        if file is None:
             raise Exception("Icon os missing attribute: 'name'")
         
         if type is None:
             raise Exception("Icon os missing attribute: 'type'")
+        
+        name = re.sub("\\W","_",file)
 
-        if type == "single" or type == "pair":
-            img_path = str(get_asset_path(Path(f"icon/{name}.png"), asset_stack))
+        if type == "solo" or type == "pair":
+            img_path = str(get_asset_path(Path(f"icon/{file}.png"), asset_stack))
             (out_img, out_pal, out_w, out_h) = get_img_file("CI4", str(img_path))
 
-            offsets[len(out_bytes)] = name + "_raster"
+            offsets[name + "_raster"] = len(out_bytes)
             out_bytes += out_img
 
-            offsets[len(out_bytes)] = name + "_palette" 
+            offsets[name + "_palette"] = len(out_bytes)
             out_bytes += out_pal
 
             if type == "pair":
-                img_path = str(get_asset_path(Path(f"icon/{name}.disabled.png"), asset_stack))
+                img_path = str(get_asset_path(Path(f"icon/{file}.disabled.png"), asset_stack))
                 (out_img, out_pal, out_w, out_h) = get_img_file("CI4", str(img_path))
                 
-                offsets[len(out_bytes)] = name + "_disabled_palette"
+                offsets[name + "_disabled_raster"] = offsets[name + "_raster"]
+                offsets[name + "_disabled_palette"] = len(out_bytes)
                 out_bytes += out_pal
 
         elif type == "rgba16":
-            img_path = str(get_asset_path(Path(f"icon/{name}.png"), asset_stack))
+            img_path = str(get_asset_path(Path(f"icon/{file}.png"), asset_stack))
             (out_img, out_pal, out_w, out_h) = get_img_file("RGBA16", str(img_path))
 
-            offsets[len(out_bytes)] = name + "_raster"
+            offsets[name + "_raster"] = len(out_bytes)
             out_bytes += out_img
 
         else:
@@ -85,7 +89,7 @@ def build(out_bin: Path, in_xml: Path, asset_stack: Tuple[Path, ...], out_header
         f.write("#define ICON_OFFSETS_H\n")
         f.write(f"/* This file is auto-generated. Do not edit. */\n\n")
         
-        for offset, name in offsets.items():
+        for name, offset in offsets.items():
             f.write(f"#define ICON_{name} 0x{offset:X}\n")
 
         f.write("\n#endif // ICON_OFFSETS_H\n")

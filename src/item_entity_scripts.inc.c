@@ -88,7 +88,7 @@ ItemScript IES_Items = {
 
 ItemScript IES_PleaseComeBack = STANDARD_ITEM_SCRIPT(battle_PleaseComeBack);
 
-ItemScript IES_ITEM_139 = STANDARD_ITEM_SCRIPT(battle_139);
+ItemScript IES_ITEM_139 = STANDARD_ITEM_SCRIPT(battle_item_139);
 
 ItemScript IES_FrightJar = STANDARD_ITEM_SCRIPT(battle_FrightJar);
 
@@ -98,9 +98,9 @@ ItemScript IES_RepelGel = STANDARD_ITEM_SCRIPT(battle_RepelGel);
 
 ItemScript IES_InsecticideHerb = STANDARD_ITEM_SCRIPT(battle_InsecticideHerb);
 
-ItemScript IES_ITEM_13E = STANDARD_ITEM_SCRIPT(battle_13E);
+ItemScript IES_ITEM_13E = STANDARD_ITEM_SCRIPT(battle_item_13E);
 
-ItemScript IES_ITEM_13F = STANDARD_ITEM_SCRIPT(battle_13F);
+ItemScript IES_ITEM_13F = STANDARD_ITEM_SCRIPT(battle_item_13F);
 
 ItemScript IES_GearBoots1 = STANDARD_ITEM_SCRIPT(key_gear_boots_1);
 
@@ -272,11 +272,11 @@ ItemScript IES_Unused_08B = STANDARD_ITEM_SCRIPT(key_Postcard);
 
 ItemScript IES_Unused_08C = STANDARD_ITEM_SCRIPT(key_EmptyBook);
 
-ItemScript IES_Unused_08D = STANDARD_ITEM_SCRIPT(unused_08D);
+ItemScript IES_Unused_08D = STANDARD_ITEM_SCRIPT(unused_item_08D);
 
-ItemScript IES_Unused_08E = STANDARD_ITEM_SCRIPT(unused_08E);
+ItemScript IES_Unused_08E = STANDARD_ITEM_SCRIPT(unused_item_08E);
 
-ItemScript IES_Unused_08F = STANDARD_ITEM_SCRIPT(unused_08F);
+ItemScript IES_Unused_08F = STANDARD_ITEM_SCRIPT(unused_item_08F);
 
 ItemScript IES_SpinSmash = STANDARD_ITEM_SCRIPT(badge_SpinSmash);
 
@@ -416,11 +416,11 @@ ItemScript IES_CloseCall = STANDARD_ITEM_SCRIPT(badge_CloseCall);
 
 ItemScript IES_CrazyHeart = STANDARD_ITEM_SCRIPT(badge_CrazyHeart);
 
-ItemScript IES_Unused_0D5 = STANDARD_ITEM_SCRIPT(unused_0D5);
+ItemScript IES_Unused_0D5 = STANDARD_ITEM_SCRIPT(unused_item_0D5);
 
-ItemScript IES_Unused_0D6 = STANDARD_ITEM_SCRIPT(unused_0D6);
+ItemScript IES_Unused_0D6 = STANDARD_ITEM_SCRIPT(unused_item_0D6);
 
-ItemScript IES_Unused_0D7 = STANDARD_ITEM_SCRIPT(unused_0D7);
+ItemScript IES_Unused_0D7 = STANDARD_ITEM_SCRIPT(unused_item_0D7);
 
 ItemScript IES_ShrinkSmash = STANDARD_ITEM_SCRIPT(badge_ShrinkSmash);
 
@@ -436,7 +436,7 @@ ItemScript IES_HappyFlower = STANDARD_ITEM_SCRIPT(badge_HappyFlower);
 
 ItemScript IES_HappyCoin = STANDARD_ITEM_SCRIPT(badge_HappyCoin);
 
-ItemScript IES_Unused_0DF = STANDARD_ITEM_SCRIPT(unused_0DF);
+ItemScript IES_Unused_0DF = STANDARD_ITEM_SCRIPT(unused_item_0DF);
 
 ItemScript IES_DeepFocus = STANDARD_ITEM_SCRIPT(badge_DeepFocus);
 
@@ -446,13 +446,13 @@ ItemScript IES_Kaiden = STANDARD_ITEM_SCRIPT(badge_Kaiden);
 
 ItemScript IES_QuickChange = STANDARD_ITEM_SCRIPT(badge_QuickChange);
 
-ItemScript IES_Unused_0E4 = STANDARD_ITEM_SCRIPT(unused_0E4);
+ItemScript IES_Unused_0E4 = STANDARD_ITEM_SCRIPT(unused_item_0E4);
 
-ItemScript IES_Unused_0E5 = STANDARD_ITEM_SCRIPT(unused_0E5);
+ItemScript IES_Unused_0E5 = STANDARD_ITEM_SCRIPT(unused_item_0E5);
 
-ItemScript IES_Unused_0E6 = STANDARD_ITEM_SCRIPT(unused_0E6);
+ItemScript IES_Unused_0E6 = STANDARD_ITEM_SCRIPT(unused_item_0E6);
 
-ItemScript IES_Unused_0E7 = STANDARD_ITEM_SCRIPT(unused_0E7);
+ItemScript IES_Unused_0E7 = STANDARD_ITEM_SCRIPT(unused_item_0E7);
 
 ItemScript IES_Peekaboo = STANDARD_ITEM_SCRIPT(badge_Peekaboo);
 
@@ -468,23 +468,23 @@ ItemScript IES_AttackFXC = STANDARD_ITEM_SCRIPT(badge_AttackFXC);
 
 ItemScript IES_AttackFXF = STANDARD_ITEM_SCRIPT(badge_AttackFXF);
 
-ItemScript IES_Unused_0EF = STANDARD_ITEM_SCRIPT(unused_0EF);
+ItemScript IES_Unused_0EF = STANDARD_ITEM_SCRIPT(unused_item_0EF);
 
 ItemScript IES_HealthyHealthy = STANDARD_ITEM_SCRIPT(badge_HealthyHealthy);
 
-ItemScript IES_Unused_0F1 = STANDARD_ITEM_SCRIPT(unused_0F1);
+ItemScript IES_Unused_0F1 = STANDARD_ITEM_SCRIPT(unused_item_0F1);
 
-ItemScript IES_Unused_0F2 = STANDARD_ITEM_SCRIPT(unused_0F2);
+ItemScript IES_Unused_0F2 = STANDARD_ITEM_SCRIPT(unused_item_0F2);
 
-ItemScript IES_Unused_0F3 = STANDARD_ITEM_SCRIPT(unused_0F3);
+ItemScript IES_Unused_0F3 = STANDARD_ITEM_SCRIPT(unused_item_0F3);
 
-ItemScript IES_Unused_0F4 = STANDARD_ITEM_SCRIPT(unused_0F4);
+ItemScript IES_Unused_0F4 = STANDARD_ITEM_SCRIPT(unused_item_0F4);
 
-ItemScript IES_Unused_0F5 = STANDARD_ITEM_SCRIPT(unused_0F5);
+ItemScript IES_Unused_0F5 = STANDARD_ITEM_SCRIPT(unused_item_0F5);
 
-ItemScript IES_Unused_0F6 = STANDARD_ITEM_SCRIPT(unused_0F6);
+ItemScript IES_Unused_0F6 = STANDARD_ITEM_SCRIPT(unused_item_0F6);
 
-ItemScript IES_Unused_0F7 = STANDARD_ITEM_SCRIPT(unused_0F7);
+ItemScript IES_Unused_0F7 = STANDARD_ITEM_SCRIPT(unused_item_0F7);
 
 ItemScript IES_Heart = {
     is_SetIcon(10, anim_heart_0)
@@ -644,15 +644,15 @@ ItemScript IES_YoshiCookie = STANDARD_ITEM_SCRIPT(food_YoshiCookie);
 
 ItemScript IES_JellyShroom = STANDARD_ITEM_SCRIPT(food_JellyShroom);
 
-ItemScript IES_Unused_02C = STANDARD_ITEM_SCRIPT(unused_02C);
+ItemScript IES_Unused_02C = STANDARD_ITEM_SCRIPT(unused_item_02C);
 
-ItemScript IES_Unused_02D = STANDARD_ITEM_SCRIPT(unused_02D);
+ItemScript IES_Unused_02D = STANDARD_ITEM_SCRIPT(unused_item_02D);
 
-ItemScript IES_Unused_02E = STANDARD_ITEM_SCRIPT(unused_02E);
+ItemScript IES_Unused_02E = STANDARD_ITEM_SCRIPT(unused_item_02E);
 
-ItemScript IES_Unused_02F = STANDARD_ITEM_SCRIPT(unused_02F);
+ItemScript IES_Unused_02F = STANDARD_ITEM_SCRIPT(unused_item_02F);
 
-ItemScript IES_Unused_030 = STANDARD_ITEM_SCRIPT(unused_030);
+ItemScript IES_Unused_030 = STANDARD_ITEM_SCRIPT(unused_item_030);
 
 ItemScript IES_FireFlower = STANDARD_ITEM_SCRIPT(battle_FireFlower);
 
@@ -668,7 +668,7 @@ ItemScript IES_DustyHammer = STANDARD_ITEM_SCRIPT(battle_DustyHammer);
 
 ItemScript IES_Pebble = STANDARD_ITEM_SCRIPT(battle_Pebble);
 
-ItemScript IES_ITEM_127 = STANDARD_ITEM_SCRIPT(unused_127);
+ItemScript IES_ITEM_127 = STANDARD_ITEM_SCRIPT(unused_item_127);
 
 ItemScript IES_StoneCap = STANDARD_ITEM_SCRIPT(battle_StoneCap);
 
@@ -680,11 +680,11 @@ ItemScript IES_Parasol = STANDARD_ITEM_SCRIPT(battle_Parasol);
 
 ItemScript IES_MagicMirror = STANDARD_ITEM_SCRIPT(battle_MagicMirror);
 
-ItemScript IES_ITEM_12D = STANDARD_ITEM_SCRIPT(unused_12D);
+ItemScript IES_ITEM_12D = STANDARD_ITEM_SCRIPT(unused_item_12D);
 
-ItemScript IES_ITEM_12E = STANDARD_ITEM_SCRIPT(unused_12E);
+ItemScript IES_ITEM_12E = STANDARD_ITEM_SCRIPT(unused_item_12E);
 
-ItemScript IES_ITEM_12F = STANDARD_ITEM_SCRIPT(unused_12F);
+ItemScript IES_ITEM_12F = STANDARD_ITEM_SCRIPT(unused_item_12F);
 
 ItemScript IES_Mushroom = STANDARD_ITEM_SCRIPT(food_Mushroom);
 
@@ -764,7 +764,7 @@ ItemScript IES_BakingFlour = STANDARD_ITEM_SCRIPT(peach_BakingFlour);
 
 ItemScript IES_BakingMilk = STANDARD_ITEM_SCRIPT(peach_BakingMilk);
 
-ItemScript IES_ITEM_11F = STANDARD_ITEM_SCRIPT(unused_11F);
+ItemScript IES_ITEM_11F = STANDARD_ITEM_SCRIPT(unused_item_11F);
 
 ItemScript IES_SleepySheep = STANDARD_ITEM_SCRIPT(battle_SleepySheep);
 
@@ -778,9 +778,9 @@ ItemScript IES_StopWatch = STANDARD_ITEM_SCRIPT(battle_StopWatch);
 
 ItemScript IES_DizzyDial = STANDARD_ITEM_SCRIPT(battle_DizzyDial);
 
-ItemScript IES_ITEM_136 = STANDARD_ITEM_SCRIPT(battle_136);
+ItemScript IES_ITEM_136 = STANDARD_ITEM_SCRIPT(battle_item_136);
 
-ItemScript IES_ITEM_137 = STANDARD_ITEM_SCRIPT(battle_137);
+ItemScript IES_ITEM_137 = STANDARD_ITEM_SCRIPT(battle_item_137);
 
 /* indexed by itemID */
 s32* gItemEntityScripts[] = {

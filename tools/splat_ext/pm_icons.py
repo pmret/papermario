@@ -72,7 +72,7 @@ class N64SegPm_icons(N64Segment):
             w = int(icon[2]) 
             h = int(icon[3])
 
-            if fmt == "single" or fmt == "pair":
+            if fmt == "solo" or fmt == "pair":
                 img_size = w * h // 2
                 img_bytes = data[pos : pos + img_size]
                 pos += img_size

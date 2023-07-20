@@ -411,20 +411,20 @@ HudScript HES_Item_Unused_08B_disabled = STANDARD_ITEM_HUD_SCRIPT(key_Postcard_d
 HudScript HES_Item_Unused_08C = STANDARD_ITEM_HUD_SCRIPT(key_EmptyBook);
 HudScript HES_Item_Unused_08C_disabled = STANDARD_ITEM_HUD_SCRIPT(key_EmptyBook_disabled);
 
-HudScript HES_Item_Unused_08D = STANDARD_ITEM_HUD_SCRIPT(unused_08D);
-HudScript HES_Item_Unused_08D_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_08D_disabled);
+HudScript HES_Item_Unused_08D = STANDARD_ITEM_HUD_SCRIPT(unused_item_08D);
+HudScript HES_Item_Unused_08D_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_item_08D_disabled);
 
-HudScript HES_Item_Unused_08E = STANDARD_ITEM_HUD_SCRIPT(unused_08E);
-HudScript HES_Item_Unused_08E_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_08E_disabled);
+HudScript HES_Item_Unused_08E = STANDARD_ITEM_HUD_SCRIPT(unused_item_08E);
+HudScript HES_Item_Unused_08E_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_item_08E_disabled);
 
-HudScript HES_Item_Unused_08F = STANDARD_ITEM_HUD_SCRIPT(unused_08F);
-HudScript HES_Item_Unused_08F_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_08F_disabled);
+HudScript HES_Item_Unused_08F = STANDARD_ITEM_HUD_SCRIPT(unused_item_08F);
+HudScript HES_Item_Unused_08F_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_item_08F_disabled);
 
 HudScript HES_Item_PleaseComeBack = STANDARD_ITEM_HUD_SCRIPT(battle_PleaseComeBack);
 HudScript HES_Item_PleaseComeBack_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_PleaseComeBack_disabled);
 
-HudScript HES_Item_Unused_139 = STANDARD_ITEM_HUD_SCRIPT(battle_139);
-HudScript HES_Item_Unused_139_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_139_disabled);
+HudScript HES_Item_Unused_139 = STANDARD_ITEM_HUD_SCRIPT(battle_item_139);
+HudScript HES_Item_Unused_139_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_item_139_disabled);
 
 HudScript HES_Item_FrightJar = STANDARD_ITEM_HUD_SCRIPT(battle_FrightJar);
 HudScript HES_Item_FrightJar_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_FrightJar_disabled);
@@ -438,11 +438,11 @@ HudScript HES_Item_RepelGel_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_RepelGel_
 HudScript HES_Item_InsecticideHerb = STANDARD_ITEM_HUD_SCRIPT(battle_InsecticideHerb);
 HudScript HES_Item_InsecticideHerb_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_InsecticideHerb_disabled);
 
-HudScript HES_Item_Unused_13E = STANDARD_ITEM_HUD_SCRIPT(battle_13E);
-HudScript HES_Item_Unused_13E_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_13E_disabled);
+HudScript HES_Item_Unused_13E = STANDARD_ITEM_HUD_SCRIPT(battle_item_13E);
+HudScript HES_Item_Unused_13E_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_item_13E_disabled);
 
-HudScript HES_Item_Unused_13F = STANDARD_ITEM_HUD_SCRIPT(battle_13F);
-HudScript HES_Item_Unused_13F_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_13F_disabled);
+HudScript HES_Item_Unused_13F = STANDARD_ITEM_HUD_SCRIPT(battle_item_13F);
+HudScript HES_Item_Unused_13F_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_item_13F_disabled);
 
 HudScript HES_Item_SpicySoup = STANDARD_ITEM_HUD_SCRIPT(food_SpicySoup);
 HudScript HES_Item_SpicySoup_disabled = STANDARD_ITEM_HUD_SCRIPT(food_SpicySoup_disabled);
@@ -573,20 +573,20 @@ HudScript HES_Item_YoshiCookie_disabled = STANDARD_ITEM_HUD_SCRIPT(food_YoshiCoo
 HudScript HES_Item_JellyShroom = STANDARD_ITEM_HUD_SCRIPT(food_JellyShroom);
 HudScript HES_Item_JellyShroom_disabled = STANDARD_ITEM_HUD_SCRIPT(food_JellyShroom_disabled);
 
-HudScript HES_Item_Unused_02C = STANDARD_ITEM_HUD_SCRIPT(unused_02C);
-HudScript HES_Item_Unused_02C_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_02C_disabled);
+HudScript HES_Item_Unused_02C = STANDARD_ITEM_HUD_SCRIPT(unused_item_02C);
+HudScript HES_Item_Unused_02C_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_item_02C_disabled);
 
-HudScript HES_Item_Unused_02D = STANDARD_ITEM_HUD_SCRIPT(unused_02D);
-HudScript HES_Item_Unused_02D_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_02D_disabled);
+HudScript HES_Item_Unused_02D = STANDARD_ITEM_HUD_SCRIPT(unused_item_02D);
+HudScript HES_Item_Unused_02D_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_item_02D_disabled);
 
-HudScript HES_Item_Unused_02E = STANDARD_ITEM_HUD_SCRIPT(unused_02E);
-HudScript HES_Item_Unused_02E_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_02E_disabled);
+HudScript HES_Item_Unused_02E = STANDARD_ITEM_HUD_SCRIPT(unused_item_02E);
+HudScript HES_Item_Unused_02E_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_item_02E_disabled);
 
-HudScript HES_Item_Unused_02F = STANDARD_ITEM_HUD_SCRIPT(unused_02F);
-HudScript HES_Item_Unused_02F_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_02F_disabled);
+HudScript HES_Item_Unused_02F = STANDARD_ITEM_HUD_SCRIPT(unused_item_02F);
+HudScript HES_Item_Unused_02F_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_item_02F_disabled);
 
-HudScript HES_Item_Unused_030 = STANDARD_ITEM_HUD_SCRIPT(unused_030);
-HudScript HES_Item_Unused_030_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_030_disabled);
+HudScript HES_Item_Unused_030 = STANDARD_ITEM_HUD_SCRIPT(unused_item_030);
+HudScript HES_Item_Unused_030_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_item_030_disabled);
 
 HudScript HES_Item_SpinSmash = STANDARD_ITEM_HUD_SCRIPT(badge_SpinSmash);
 HudScript HES_Item_SpinSmash_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_SpinSmash_disabled);
@@ -795,14 +795,14 @@ HudScript HES_Item_CloseCall_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_CloseCall
 HudScript HES_Item_CrazyHeart = STANDARD_ITEM_HUD_SCRIPT(badge_CrazyHeart);
 HudScript HES_Item_CrazyHeart_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_CrazyHeart_disabled);
 
-HudScript HES_Item_Unused_0D5 = STANDARD_ITEM_HUD_SCRIPT(unused_0D5);
-HudScript HES_Item_Unused_0D5_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_0D5_disabled);
+HudScript HES_Item_Unused_0D5 = STANDARD_ITEM_HUD_SCRIPT(unused_item_0D5);
+HudScript HES_Item_Unused_0D5_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_item_0D5_disabled);
 
-HudScript HES_Item_Unused_0D6 = STANDARD_ITEM_HUD_SCRIPT(unused_0D6);
-HudScript HES_Item_Unused_0D6_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_0D6_disabled);
+HudScript HES_Item_Unused_0D6 = STANDARD_ITEM_HUD_SCRIPT(unused_item_0D6);
+HudScript HES_Item_Unused_0D6_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_item_0D6_disabled);
 
-HudScript HES_Item_Unused_0D7 = STANDARD_ITEM_HUD_SCRIPT(unused_0D7);
-HudScript HES_Item_Unused_0D7_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_0D7_disabled);
+HudScript HES_Item_Unused_0D7 = STANDARD_ITEM_HUD_SCRIPT(unused_item_0D7);
+HudScript HES_Item_Unused_0D7_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_item_0D7_disabled);
 
 HudScript HES_Item_ShrinkSmash = STANDARD_ITEM_HUD_SCRIPT(badge_ShrinkSmash);
 HudScript HES_Item_ShrinkSmash_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_ShrinkSmash_disabled);
@@ -825,8 +825,8 @@ HudScript HES_Item_HappyFlower_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_HappyFl
 HudScript HES_Item_Unused_0DE = STANDARD_ITEM_HUD_SCRIPT(badge_HappyCoin);
 HudScript HES_Item_Unused_0DE_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_HappyCoin_disabled);
 
-HudScript HES_Item_Unused_0DF = STANDARD_ITEM_HUD_SCRIPT(unused_0DF);
-HudScript HES_Item_Unused_0DF_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_0DF_disabled);
+HudScript HES_Item_Unused_0DF = STANDARD_ITEM_HUD_SCRIPT(unused_item_0DF);
+HudScript HES_Item_Unused_0DF_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_item_0DF_disabled);
 
 HudScript HES_Item_DeepFocus = STANDARD_ITEM_HUD_SCRIPT(badge_DeepFocus);
 HudScript HES_Item_DeepFocus_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_DeepFocus_disabled);
@@ -840,17 +840,17 @@ HudScript HES_Item_Kaiden_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_Kaiden_disab
 HudScript HES_Item_QuickChange = STANDARD_ITEM_HUD_SCRIPT(badge_QuickChange);
 HudScript HES_Item_QuickChange_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_QuickChange_disabled);
 
-HudScript HES_Item_Unused_0E4 = STANDARD_ITEM_HUD_SCRIPT(unused_0E4);
-HudScript HES_Item_Unused_0E4_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_0E4_disabled);
+HudScript HES_Item_Unused_0E4 = STANDARD_ITEM_HUD_SCRIPT(unused_item_0E4);
+HudScript HES_Item_Unused_0E4_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_item_0E4_disabled);
 
-HudScript HES_Item_Unused_0E5 = STANDARD_ITEM_HUD_SCRIPT(unused_0E5);
-HudScript HES_Item_Unused_0E5_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_0E5_disabled);
+HudScript HES_Item_Unused_0E5 = STANDARD_ITEM_HUD_SCRIPT(unused_item_0E5);
+HudScript HES_Item_Unused_0E5_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_item_0E5_disabled);
 
-HudScript HES_Item_Unused_0E6 = STANDARD_ITEM_HUD_SCRIPT(unused_0E6);
-HudScript HES_Item_Unused_0E6_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_0E6_disabled);
+HudScript HES_Item_Unused_0E6 = STANDARD_ITEM_HUD_SCRIPT(unused_item_0E6);
+HudScript HES_Item_Unused_0E6_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_item_0E6_disabled);
 
-HudScript HES_Item_Unused_0E7 = STANDARD_ITEM_HUD_SCRIPT(unused_0E7);
-HudScript HES_Item_Unused_0E7_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_0E7_disabled);
+HudScript HES_Item_Unused_0E7 = STANDARD_ITEM_HUD_SCRIPT(unused_item_0E7);
+HudScript HES_Item_Unused_0E7_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_item_0E7_disabled);
 
 HudScript HES_Item_Peekaboo = STANDARD_ITEM_HUD_SCRIPT(badge_Peekaboo);
 HudScript HES_Item_Peekaboo_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_Peekaboo_disabled);
@@ -873,32 +873,32 @@ HudScript HES_Item_AttackFXC_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_AttackFXC
 HudScript HES_Item_AttackFXF = STANDARD_ITEM_HUD_SCRIPT(badge_AttackFXF);
 HudScript HES_Item_AttackFXF_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_AttackFXF_disabled);
 
-HudScript HES_Item_Unused_0EF = STANDARD_ITEM_HUD_SCRIPT(unused_0EF);
-HudScript HES_Item_Unused_0EF_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_0EF_disabled);
+HudScript HES_Item_Unused_0EF = STANDARD_ITEM_HUD_SCRIPT(unused_item_0EF);
+HudScript HES_Item_Unused_0EF_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_item_0EF_disabled);
 
 HudScript HES_Item_HealthyHealthy = STANDARD_ITEM_HUD_SCRIPT(badge_HealthyHealthy);
 HudScript HES_Item_HealthyHealthy_disabled = STANDARD_ITEM_HUD_SCRIPT(badge_HealthyHealthy_disabled);
 
-HudScript HES_Item_Unused_0F1 = STANDARD_ITEM_HUD_SCRIPT(unused_0F1);
-HudScript HES_Item_Unused_0F1_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_0F1_disabled);
+HudScript HES_Item_Unused_0F1 = STANDARD_ITEM_HUD_SCRIPT(unused_item_0F1);
+HudScript HES_Item_Unused_0F1_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_item_0F1_disabled);
 
-HudScript HES_Item_Unused_0F2 = STANDARD_ITEM_HUD_SCRIPT(unused_0F2);
-HudScript HES_Item_Unused_0F2_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_0F2_disabled);
+HudScript HES_Item_Unused_0F2 = STANDARD_ITEM_HUD_SCRIPT(unused_item_0F2);
+HudScript HES_Item_Unused_0F2_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_item_0F2_disabled);
 
-HudScript HES_Item_Unused_0F3 = STANDARD_ITEM_HUD_SCRIPT(unused_0F3);
-HudScript HES_Item_Unused_0F3_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_0F3_disabled);
+HudScript HES_Item_Unused_0F3 = STANDARD_ITEM_HUD_SCRIPT(unused_item_0F3);
+HudScript HES_Item_Unused_0F3_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_item_0F3_disabled);
 
-HudScript HES_Item_Unused_0F4 = STANDARD_ITEM_HUD_SCRIPT(unused_0F4);
-HudScript HES_Item_Unused_0F4_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_0F4_disabled);
+HudScript HES_Item_Unused_0F4 = STANDARD_ITEM_HUD_SCRIPT(unused_item_0F4);
+HudScript HES_Item_Unused_0F4_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_item_0F4_disabled);
 
-HudScript HES_Item_Unused_0F5 = STANDARD_ITEM_HUD_SCRIPT(unused_0F5);
-HudScript HES_Item_Unused_0F5_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_0F5_disabled);
+HudScript HES_Item_Unused_0F5 = STANDARD_ITEM_HUD_SCRIPT(unused_item_0F5);
+HudScript HES_Item_Unused_0F5_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_item_0F5_disabled);
 
-HudScript HES_Item_Unused_0F6 = STANDARD_ITEM_HUD_SCRIPT(unused_0F6);
-HudScript HES_Item_Unused_0F6_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_0F6_disabled);
+HudScript HES_Item_Unused_0F6 = STANDARD_ITEM_HUD_SCRIPT(unused_item_0F6);
+HudScript HES_Item_Unused_0F6_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_item_0F6_disabled);
 
-HudScript HES_Item_Unused_0F7 = STANDARD_ITEM_HUD_SCRIPT(unused_0F7);
-HudScript HES_Item_Unused_0F7_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_0F7_disabled);
+HudScript HES_Item_Unused_0F7 = STANDARD_ITEM_HUD_SCRIPT(unused_item_0F7);
+HudScript HES_Item_Unused_0F7_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_item_0F7_disabled);
 
 HudScript HES_Item_FireFlower = STANDARD_ITEM_HUD_SCRIPT(battle_FireFlower);
 HudScript HES_Item_FireFlower_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_FireFlower_disabled);
@@ -921,8 +921,8 @@ HudScript HES_Item_DustyHammer_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_DustyH
 HudScript HES_Item_Pebble = STANDARD_ITEM_HUD_SCRIPT(battle_Pebble);
 HudScript HES_Item_Pebble_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_Pebble_disabled);
 
-HudScript HES_Item_Unused_127 = STANDARD_ITEM_HUD_SCRIPT(unused_127);
-HudScript HES_Item_Unused_127_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_127_disabled);
+HudScript HES_Item_Unused_127 = STANDARD_ITEM_HUD_SCRIPT(unused_item_127);
+HudScript HES_Item_Unused_127_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_item_127_disabled);
 
 HudScript HES_Item_StoneCap = STANDARD_ITEM_HUD_SCRIPT(battle_StoneCap);
 HudScript HES_Item_StoneCap_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_StoneCap_disabled);
@@ -939,14 +939,14 @@ HudScript HES_Item_Parasol_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_Parasol_di
 HudScript HES_Item_MagicMirror = STANDARD_ITEM_HUD_SCRIPT(battle_MagicMirror);
 HudScript HES_Item_MagicMirror_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_MagicMirror_disabled);
 
-HudScript HES_Item_Unused_12D = STANDARD_ITEM_HUD_SCRIPT(unused_12D);
-HudScript HES_Item_Unused_12D_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_12D_disabled);
+HudScript HES_Item_Unused_12D = STANDARD_ITEM_HUD_SCRIPT(unused_item_12D);
+HudScript HES_Item_Unused_12D_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_item_12D_disabled);
 
-HudScript HES_Item_Unused_12E = STANDARD_ITEM_HUD_SCRIPT(unused_12E);
-HudScript HES_Item_Unused_12E_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_12E_disabled);
+HudScript HES_Item_Unused_12E = STANDARD_ITEM_HUD_SCRIPT(unused_item_12E);
+HudScript HES_Item_Unused_12E_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_item_12E_disabled);
 
-HudScript HES_Item_Unused_12F = STANDARD_ITEM_HUD_SCRIPT(unused_12F);
-HudScript HES_Item_Unused_12F_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_12F_disabled);
+HudScript HES_Item_Unused_12F = STANDARD_ITEM_HUD_SCRIPT(unused_item_12F);
+HudScript HES_Item_Unused_12F_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_item_12F_disabled);
 
 HudScript HES_Item_Mushroom = STANDARD_ITEM_HUD_SCRIPT(food_Mushroom);
 HudScript HES_Item_Mushroom_disabled = STANDARD_ITEM_HUD_SCRIPT(food_Mushroom_disabled);
@@ -1065,8 +1065,8 @@ HudScript HES_Item_BakingFlour_disabled = STANDARD_ITEM_HUD_SCRIPT(peach_BakingF
 HudScript HES_Item_BakingMilk = STANDARD_ITEM_HUD_SCRIPT(peach_BakingMilk);
 HudScript HES_Item_BakingMilk_disabled = STANDARD_ITEM_HUD_SCRIPT(peach_BakingMilk_disabled);
 
-HudScript HES_Item_Unused_11F = STANDARD_ITEM_HUD_SCRIPT(unused_11F);
-HudScript HES_Item_Unused_11F_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_11F_disabled);
+HudScript HES_Item_Unused_11F = STANDARD_ITEM_HUD_SCRIPT(unused_item_11F);
+HudScript HES_Item_Unused_11F_disabled = STANDARD_ITEM_HUD_SCRIPT(unused_item_11F_disabled);
 
 HudScript HES_Item_SleepySheep = STANDARD_ITEM_HUD_SCRIPT(battle_SleepySheep);
 HudScript HES_Item_SleepySheep_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_SleepySheep_disabled);
@@ -1086,8 +1086,8 @@ HudScript HES_Item_StopWatch_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_StopWatc
 HudScript HES_Item_DizzyDial = STANDARD_ITEM_HUD_SCRIPT(battle_DizzyDial);
 HudScript HES_Item_DizzyDial_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_DizzyDial_disabled);
 
-HudScript HES_Item_Unused_136 = STANDARD_ITEM_HUD_SCRIPT(battle_136);
-HudScript HES_Item_Unused_136_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_136_disabled);
+HudScript HES_Item_Unused_136 = STANDARD_ITEM_HUD_SCRIPT(battle_item_136);
+HudScript HES_Item_Unused_136_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_item_136_disabled);
 
-HudScript HES_Item_Unused_137 = STANDARD_ITEM_HUD_SCRIPT(battle_137);
-HudScript HES_Item_Unused_137_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_137_disabled);
+HudScript HES_Item_Unused_137 = STANDARD_ITEM_HUD_SCRIPT(battle_item_137);
+HudScript HES_Item_Unused_137_disabled = STANDARD_ITEM_HUD_SCRIPT(battle_item_137_disabled);
