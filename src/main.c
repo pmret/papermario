@@ -16,6 +16,7 @@ SHIFT_BSS OSPifRam __MotorDataBuf[MAXCONTROLLERS];
 SHIFT_BSS u16 retrace;
 SHIFT_BSS OSThread viThread;
 SHIFT_BSS unsigned char viThreadStack[OS_VIM_STACKSIZE] ALIGNED(16);
+SHIFT_BSS char piThreadStack[OS_PIM_STACKSIZE] ALIGNED(16);
 SHIFT_BSS OSMesgQueue viEventQueue;
 SHIFT_BSS OSMesg viEventBuf[5] ALIGNED(8);
 SHIFT_BSS OSIoMesg viRetraceMsg ALIGNED(8);
@@ -24,7 +25,6 @@ SHIFT_BSS OSTask tmp_task;
 SHIFT_BSS OSMesg piAccessBuf[1];
 SHIFT_BSS OSMesgQueue __osPiAccessQueue;
 SHIFT_BSS OSThread piThread;
-SHIFT_BSS char piThreadStack[OS_PIM_STACKSIZE];
 SHIFT_BSS OSMesgQueue piEventQueue;
 SHIFT_BSS OSMesg piEventBuf[1];
 SHIFT_BSS OSContStatus nuContStatus[5]; // ??? enough space for 5, but it makes no sense
@@ -38,7 +38,7 @@ SHIFT_BSS OSContPad nuContData[3]; // 0x8 each, size 0x18 ???
 SHIFT_BSS u32 nuContNum;
 SHIFT_BSS volatile u32 nuGfxTaskSpool;
 SHIFT_BSS OSMesgQueue nuGfxMesgQ;
-SHIFT_BSS s32 GfxStack[NU_GFX_STACK_SIZE / 4];
+SHIFT_BSS char GfxStack[NU_GFX_STACK_SIZE] ALIGNED(16);
 SHIFT_BSS OSThread D_800B1B90;
 SHIFT_BSS OSMesg nuGfxMesgBuf[NU_GFX_MESGS];
 SHIFT_BSS OSPiHandle* nuPiCartHandle;
