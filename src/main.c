@@ -77,6 +77,14 @@ SHIFT_BSS s32 D_800B0D08;
 // boot.s
 SHIFT_BSS u8 nuBootStack[0x2000];
 
+//osFlash.c (IDO)
+SHIFT_BSS u32 __osFlashID[4];
+SHIFT_BSS OSIoMesg __osFlashMsg;
+SHIFT_BSS OSMesgQueue __osFlashMessageQ;
+SHIFT_BSS OSPiHandle __osFlashHandler;
+SHIFT_BSS OSMesg __osFlashMsgBuf;
+SHIFT_BSS s32 __osFlashVersion;
+
 //
 // End of libultra BSS
 //

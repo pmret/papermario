@@ -1,19 +1,13 @@
 #include "ultra64.h"
 #include "PR/os_flash.h"
 
-#ifdef SHIFT
-#define SHIFT_BSS
-#else
-#define SHIFT_BSS extern
-#endif
-
-// TODO did this work?
-SHIFT_BSS u32 __osFlashID[4];
-SHIFT_BSS OSIoMesg __osFlashMsg;
-SHIFT_BSS OSMesgQueue __osFlashMessageQ;
-SHIFT_BSS OSPiHandle __osFlashHandler;
-SHIFT_BSS OSMesg __osFlashMsgBuf;
-SHIFT_BSS s32 __osFlashVersion;
+// BSS
+extern u32 __osFlashID[4];
+extern OSIoMesg __osFlashMsg;
+extern OSMesgQueue __osFlashMessageQ;
+extern OSPiHandle __osFlashHandler;
+extern OSMesg __osFlashMsgBuf;
+extern s32 __osFlashVersion;
 
 OSPiHandle* osFlashReInit(u8 latency, u8 pulse, u8 page_size, u8 rel_duration, u32 start) {
     __osFlashHandler.baseAddress = PHYS_TO_K1(start);
