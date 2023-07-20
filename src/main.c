@@ -72,9 +72,7 @@ SHIFT_BSS u64 GfxTaskMgrStack[NU_GFX_TASKMGR_STACK_SIZE / sizeof(u64)];
 SHIFT_BSS u8 nuYieldBuf[0xC10];
 SHIFT_BSS OSMesg siAccessBuf[1];
 SHIFT_BSS OSMesgQueue __osSiAccessQueue;
-
-// exceptasm.s
-SHIFT_BSS s32 D_800B0D08;
+SHIFT_BSS OSThread __osThreadSave;
 
 // boot.s
 SHIFT_BSS u8 nuBootStack[0x2000];

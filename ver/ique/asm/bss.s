@@ -751,7 +751,6 @@ dlabel wMapTexName
 dlabel D_800B0CF4
 .space 0x00000014
 
-dlabel D_800B0D08
 dlabel __osThreadSave
 .space 0x1b0
 

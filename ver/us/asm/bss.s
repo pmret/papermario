@@ -801,11 +801,8 @@ dlabel D_800B0CEC
 dlabel wMapTexName
 .space 0x18
 
-dlabel D_800B0D08
-.space 4
-
-dlabel D_800B0D0C
-.space 0x000001ac
+dlabel __osThreadSave
+.space 0x000001B0
 
 dlabel nuContWaitMesgQ
 .space 4
