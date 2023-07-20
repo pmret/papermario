@@ -735,15 +735,12 @@ dlabel piEventQueue
 .space 0x18
 
 dlabel piEventBuf
-.space 4
-
-dlabel D_800AF8AC
-.space 4
+.space 0x8
 
 dlabel piAccessBuf
-.space 4
+.space 0x8
 
-.space 0x24
+.space 0x20
 
 dlabel wMapTexName
 .space 4

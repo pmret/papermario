@@ -682,16 +682,10 @@ dlabel D_800AF890
 .space 0x00000014
 
 dlabel piEventBuf
-.space 4
-
-dlabel D_800AF8AC
-.space 4
+.space 0x8
 
 dlabel piAccessBuf
-.space 4
-
-dlabel D_800AF8B4
-.space 0x0000000c
+.space 0x10
 
 dlabel tmp_task
 .space 0x00000040
