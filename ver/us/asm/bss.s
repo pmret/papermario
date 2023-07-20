@@ -724,46 +724,16 @@ dlabel D_800B0AD4
 .space 0x00000014
 
 dlabel viEventBuf
-.space 4
-
-dlabel D_800B0AEC
-.space 0x00000014
+.space 0x18
 
 dlabel viRetraceMsg
-.space 2
-
-dlabel D_800B0B02
-.space 2
-
-dlabel D_800B0B04
-.space 4
-
-dlabel D_800B0B08
-.space 0x00000010
+.space 0x18
 
 dlabel viCounterMsg
-.space 2
-
-dlabel D_800B0B1A
-.space 2
-
-dlabel D_800B0B1C
-.space 4
-
-dlabel D_800B0B20
-.space 0x00000010
+.space 0x18
 
 dlabel __MotorDataBuf
-.space 4
-
-dlabel D_800B0B34
-.space 0x00000038
-
-dlabel D_800B0B6C
-.space 4
-
-dlabel D_800B0B70
-.space 0x000000c0
+.space 0x100
 
 dlabel __osFlashID
 .space 4
