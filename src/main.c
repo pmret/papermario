@@ -66,16 +66,16 @@ SHIFT_BSS s16 taskDoneMsg;
 SHIFT_BSS s16 swapBufMsg;
 SHIFT_BSS OSThread GfxTaskMgrThread;
 SHIFT_BSS NUScTask nuGfxTask[NU_GFX_TASK_NUM];
-SHIFT_BSS s32 D_800DA040;
+SHIFT_BSS u64 D_800DA040[0x400 / sizeof(u64)];
 SHIFT_BSS s32 D_800B91D0[NU_GFX_RDP_OUTPUTBUFF_SIZE / sizeof(u32)];
 SHIFT_BSS u64 GfxTaskMgrStack[NU_GFX_TASKMGR_STACK_SIZE / sizeof(u64)];
-SHIFT_BSS u8 nuYieldBuf[0xC10];
+SHIFT_BSS u8 nuYieldBuf[0xC10] ALIGNED(16);
 SHIFT_BSS OSMesg siAccessBuf[1] ALIGNED(8);
 SHIFT_BSS OSMesgQueue __osSiAccessQueue;
 SHIFT_BSS OSThread __osThreadSave;
 
 // boot.s
-SHIFT_BSS u8 nuBootStack[0x2000];
+SHIFT_BSS u8 nuBootStack[0x2000] ALIGNED(8);
 
 //osFlash.c (IDO)
 SHIFT_BSS u32 __osFlashID[4];
