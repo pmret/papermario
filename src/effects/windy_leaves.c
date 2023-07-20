@@ -26,9 +26,9 @@ void windy_leaves_main(s32 type, f32 arg1, f32 arg2, f32 arg3) {
     bp.effectID = EFFECT_WINDY_LEAVES;
 
     numParts = 5;
-    effect = shim_create_effect_instance(bpPtr);
+    effect = create_effect_instance(bpPtr);
     effect->numParts = numParts;
-    effect->data.windyLeaves = part = shim_general_heap_malloc(numParts * sizeof(*part));
+    effect->data.windyLeaves = part = general_heap_malloc(numParts * sizeof(*part));
     ASSERT(part != NULL);
 
     part->type = type;
@@ -70,8 +70,8 @@ void windy_leaves_main(s32 type, f32 arg1, f32 arg2, f32 arg3) {
                 break;
             case 2:
                 part->unk_1C = 2.0 * ((f32)temp_v0_2 * 0.1);
-                part->unk_10 = -part->unk_04.x * (shim_rand_int(10) * 0.008 + 0.05);
-                part->unk_14 = -part->unk_04.y * (shim_rand_int(10) * 0.008 + 0.05);
+                part->unk_10 = -part->unk_04.x * (rand_int(10) * 0.008 + 0.05);
+                part->unk_14 = -part->unk_04.y * (rand_int(10) * 0.008 + 0.05);
                 break;
             default:
                 break;
@@ -96,7 +96,7 @@ void windy_leaves_update(EffectInstance* effect) {
     part->unk_28--;
     part->unk_2C++;
     if (part->unk_28 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
     temp_a1 = part->unk_2C;
@@ -113,19 +113,19 @@ void windy_leaves_update(EffectInstance* effect) {
     switch (temp) {
         case 0:
             for (i = 1; i < effect->numParts; i++, part++) {
-                f32 temp3 = (shim_sin_deg(2.0f * part->unk_18) * 0.2);
+                f32 temp3 = (sin_deg(2.0f * part->unk_18) * 0.2);
                 part->unk_14 += -0.05f;
                 part->unk_10 += temp3;
                 if (temp == 0) {
                     part->unk_10 *= 0.94;
-                    part->unk_14 *= shim_sin_deg(part->unk_18) * 0.05 + 0.95;
+                    part->unk_14 *= sin_deg(part->unk_18) * 0.05 + 0.95;
                 } else {
                     part->unk_14 += -0.05f;
                     part->unk_10 *= 0.92;
                 }
                 part->unk_1C += func_E0200044(50, temp_a1 + i * 20) - 25;
-                part->unk_18 += shim_sin_deg(part->unk_1C) * 10.0f;
-                part->unk_20 += shim_cos_deg(part->unk_1C * 0.5) * 10.0f;
+                part->unk_18 += sin_deg(part->unk_1C) * 10.0f;
+                part->unk_20 += cos_deg(part->unk_1C * 0.5) * 10.0f;
                 part->unk_04.x += part->unk_10;
                 part->unk_04.y += part->unk_14;
                 if (part->unk_04.y < 30.0f) {
@@ -163,13 +163,13 @@ void windy_leaves_update(EffectInstance* effect) {
             break;
         case 1:
             for (i = 1; i < effect->numParts; i++, part++) {
-                part->unk_10 += (f32)(shim_sin_deg(2.0f * part->unk_18) * 0.2 * 2.0);
+                part->unk_10 += (f32)(sin_deg(2.0f * part->unk_18) * 0.2 * 2.0);
                 part->unk_14 += -0.05f;
                 part->unk_10 *= 0.8464;
                 part->unk_14 += -0.05f;
                 part->unk_1C += func_E0200044(50, temp_a1 + i * 20) - 25;
-                part->unk_18 += shim_sin_deg(part->unk_1C) * 10.0f;
-                part->unk_20 += shim_cos_deg(part->unk_1C * 0.5) * 10.0f;
+                part->unk_18 += sin_deg(part->unk_1C) * 10.0f;
+                part->unk_20 += cos_deg(part->unk_1C * 0.5) * 10.0f;
                 part->unk_04.x += part->unk_10;
                 part->unk_04.y += part->unk_14;
                 if (part->unk_04.y < 30.0f) {
@@ -208,8 +208,8 @@ void windy_leaves_update(EffectInstance* effect) {
         case 2:
             for (i = 1; i < effect->numParts; i++, part++) {
                 part->unk_1C += func_E0200044(50,  temp_a1 + i * 20) - 25;
-                part->unk_18 += shim_sin_deg(part->unk_1C) * 10.0f;
-                part->unk_20 += shim_cos_deg(part->unk_1C * 0.5) * 10.0f;
+                part->unk_18 += sin_deg(part->unk_1C) * 10.0f;
+                part->unk_20 += cos_deg(part->unk_1C * 0.5) * 10.0f;
                 part->unk_04.x += part->unk_10;
                 part->unk_04.y += part->unk_14;
             }
@@ -226,7 +226,7 @@ void windy_leaves_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -244,19 +244,19 @@ void windy_leaves_appendGfx(void* effect) {
     gSPSegment(gMainGfxPos++, 0x09, OS_K0_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
     gSPDisplayList(gMainGfxPos++, D_09001180_33E790);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 20, 100, 20, part->alpha);
-    shim_guTranslateF(sp18, part->unk_04.x, part->unk_04.y, part->unk_04.z);
-    shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-    shim_guMtxCatF(sp58, sp18, sp98);
+    guTranslateF(sp18, part->unk_04.x, part->unk_04.y, part->unk_04.z);
+    guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(sp58, sp18, sp98);
 
     part++;
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, part++) {
-        shim_guTranslateF(sp58, part->unk_04.x, part->unk_04.y, part->unk_04.z);
-        shim_guMtxCatF(sp58, sp98, sp18);
-        shim_guRotateF(sp58, part->unk_18, 0.0f, 0.0f, 1.0f);
-        shim_guMtxCatF(sp58, sp18, sp18);
-        shim_guRotateF(sp58, part->unk_20, 0.0f, 1.0f, 0.0f);
-        shim_guMtxCatF(sp58, sp18, sp18);
-        shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guTranslateF(sp58, part->unk_04.x, part->unk_04.y, part->unk_04.z);
+        guMtxCatF(sp58, sp98, sp18);
+        guRotateF(sp58, part->unk_18, 0.0f, 0.0f, 1.0f);
+        guMtxCatF(sp58, sp18, sp18);
+        guRotateF(sp58, part->unk_20, 0.0f, 1.0f, 0.0f);
+        guMtxCatF(sp58, sp18, sp18);
+        guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         gSPDisplayList(gMainGfxPos++, dlist);
         gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);

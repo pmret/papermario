@@ -62,12 +62,12 @@ void shockwave_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_SHOCKWAVE;
 
-    effect = shim_create_effect_instance(bpPtr);
+    effect = create_effect_instance(bpPtr);
     effect->numParts = numParts;
-    part = effect->data.shockwave = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = effect->data.shockwave = general_heap_malloc(numParts * sizeof(*part));
     ASSERT(effect->data.shockwave != NULL);
 
-    shim_mem_clear(part, numParts * sizeof(*part));
+    mem_clear(part, numParts * sizeof(*part));
 
     if (arg0 >= 2) {
         part->unk_28 = 60;
@@ -155,7 +155,7 @@ void shockwave_update(EffectInstance* effect) {
     part->unk_28--;
 
     if (part->unk_28 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -184,8 +184,8 @@ void shockwave_update(EffectInstance* effect) {
                 part->pos.x = 0.0f;
                 part->pos.y = 0.0f;
                 part->pos.z = 0.0f;
-                part->unk_10 = -shim_sin_deg(part->unk_34) * 0.5;
-                part->unk_14 = shim_cos_deg(part->unk_34) * 0.5;
+                part->unk_10 = -sin_deg(part->unk_34) * 0.5;
+                part->unk_14 = cos_deg(part->unk_34) * 0.5;
                 part->unk_18 = 0;
                 part->unk_3C = 32.0f;
                 part->unk_40 = 32.0f;
@@ -261,7 +261,7 @@ void shockwave_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_28;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -309,9 +309,9 @@ void shockwave_appendGfx(void* effect) {
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
     gSPDisplayList(gMainGfxPos++, dlist2);
 
-    shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f,
+    guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f,
                      data->pos.x, data->pos.y, data->pos.z);
-    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
               G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
@@ -324,14 +324,14 @@ void shockwave_appendGfx(void* effect) {
     data++;
     for (i = 1; i < ((EffectInstance*) effect)->numParts; i++, data++) {
         if (data->unk_4C >= 0) {
-            shim_guTranslateF(sp20, data->pos.x, data->pos.y, data->pos.z);
-            shim_guRotateF(sp60, data->unk_34, 0.0f, 0.0f, 1.0f);
-            shim_guMtxCatF(sp60, sp20, sp20);
-            shim_guScaleF(sp60, data->unk_1C * 0.3, data->unk_20 * 0.3, data->unk_24 * 0.3);
-            shim_guMtxCatF(sp60, sp20, sp20);
-            shim_guRotateF(sp60, data->unk_30, 0.0f, 1.0f, 0.0f);
-            shim_guMtxCatF(sp60, sp20, sp20);
-            shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+            guTranslateF(sp20, data->pos.x, data->pos.y, data->pos.z);
+            guRotateF(sp60, data->unk_34, 0.0f, 0.0f, 1.0f);
+            guMtxCatF(sp60, sp20, sp20);
+            guScaleF(sp60, data->unk_1C * 0.3, data->unk_20 * 0.3, data->unk_24 * 0.3);
+            guMtxCatF(sp60, sp20, sp20);
+            guRotateF(sp60, data->unk_30, 0.0f, 1.0f, 0.0f);
+            guMtxCatF(sp60, sp20, sp20);
+            guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
             gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, 0, (s32) data->unk_3C, 0x00FC, (s32) data->unk_3C + 0x7C);
             gDPSetTileSize(gMainGfxPos++, 1, 0, (s32) data->unk_44, 0x007C, (s32) data->unk_44 + 0x7C);

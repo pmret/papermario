@@ -24,9 +24,9 @@ void floating_flower_main(s32 type, f32 posX, f32 posY, f32 posZ, s32 duration) 
     bp.renderUI = NULL;
     bp.effectID = EFFECT_FLOATING_FLOWER;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = 1;
-    part = effect->data.floatingFlower = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = effect->data.floatingFlower = general_heap_malloc(numParts * sizeof(*part));
 
     ASSERT(effect->data.floatingFlower != NULL);
 
@@ -55,15 +55,15 @@ void floating_flower_main(s32 type, f32 posX, f32 posY, f32 posZ, s32 duration) 
     } else {
         part->accelY = 0.12f;
         part->jerkY = -0.0152f;
-        part->rot.x = (shim_rand_int(1) * 30) - 15;
-        part->rot.y = shim_rand_int(360);
+        part->rot.x = (rand_int(1) * 30) - 15;
+        part->rot.y = rand_int(360);
         part->angularVel.x = 0;
-        part->angularVel.y = (shim_rand_int(1) * 8) - 4;
+        part->angularVel.y = (rand_int(1) * 8) - 4;
         part->timeLeft = duration;
         part->lifetime = 0;
-        part->unk_44 = shim_rand_int(10);
-        part->unk_40 = shim_rand_int(20);
-        part->unk_3C = (shim_rand_int(1) * 2) - 1;
+        part->unk_44 = rand_int(10);
+        part->unk_40 = rand_int(20);
+        part->unk_3C = (rand_int(1) * 2) - 1;
     }
 
     D_E001A610++;
@@ -123,7 +123,7 @@ void floating_flower_update(EffectInstance* effect) {
     data->timeLeft--;
     data->lifetime++;
     if (data->timeLeft < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
     }
 }
 
@@ -136,7 +136,7 @@ void floating_flower_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -150,15 +150,15 @@ void floating_flower_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->graphics->data));
 
-    shim_guPositionF(mtxTransform, part->rot.x, part->rot.y, 0.0f, 1.0f, part->pos.x, part->pos.y, part->pos.z);
-    shim_guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guPositionF(mtxTransform, part->rot.x, part->rot.y, 0.0f, 1.0f, part->pos.x, part->pos.y, part->pos.z);
+    guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     a = alpha = 255;
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
     if (*gBackgroundFogModePtr == FOG_MODE_1) {
-        shim_get_background_color_blend(&rgb, &rgb, &rgb, &a);
+        get_background_color_blend(&rgb, &rgb, &rgb, &a);
         alpha -= a;
     }
 

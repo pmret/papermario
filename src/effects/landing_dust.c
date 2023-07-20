@@ -101,14 +101,14 @@ void landing_dust_main(s32 type, f32 x, f32 y, f32 z, f32 arg4) {
     bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_LANDING_DUST;
 
-    effect = shim_create_effect_instance(bpPtr);
+    effect = create_effect_instance(bpPtr);
     effect->numParts = numParts;
 
-    data = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = general_heap_malloc(numParts * sizeof(*data));
     effect->data.landingDust = data;
     ASSERT(effect->data.landingDust != NULL);
 
-    shim_mem_clear(data, numParts * sizeof(*data));
+    mem_clear(data, numParts * sizeof(*data));
 
     switch (type) {
         case 0:
@@ -147,9 +147,9 @@ void landing_dust_main(s32 type, f32 x, f32 y, f32 z, f32 arg4) {
                 data->x = 0.0f;
                 data->y = 0.0f;
                 data->z = 4.0f;
-                theta = shim_clamp_angle(90 + (180 * (i - 1)));
-                data->unk_30 = shim_sin_deg(theta);
-                data->unk_34 = shim_cos_deg(theta);
+                theta = clamp_angle(90 + (180 * (i - 1)));
+                data->unk_30 = sin_deg(theta);
+                data->unk_34 = cos_deg(theta);
             }
             break;
         case 2:
@@ -159,27 +159,27 @@ void landing_dust_main(s32 type, f32 x, f32 y, f32 z, f32 arg4) {
                 switch (i - 1) {
                     case 0:
                         theta = 135.0f;
-                        data->x = -shim_sin_deg(theta) * 25.0f;
+                        data->x = -sin_deg(theta) * 25.0f;
                         data->y = 0.0f;
-                        data->z = -shim_cos_deg(theta) * 25.0f;
+                        data->z = -cos_deg(theta) * 25.0f;
                         data->unk_24 = -0.04f;
                         data->unk_28 = 0.94f;
                         data->unk_20 = 0.95f;
                         break;
                     case 1:
                         theta = -135.0f;
-                        data->x = -shim_sin_deg(theta) * 25.0f;
+                        data->x = -sin_deg(theta) * 25.0f;
                         data->y = 4.0f;
-                        data->z = -shim_cos_deg(theta) * 25.0f;
+                        data->z = -cos_deg(theta) * 25.0f;
                         data->unk_24 = -0.04f;
                         data->unk_28 = 0.94f;
                         data->unk_20 = 0.84999996f;
                         break;
                     case 2:
                         theta = 20.0f;
-                        data->x = -shim_sin_deg(theta) * 25.0f;
+                        data->x = -sin_deg(theta) * 25.0f;
                         data->y = 10.0f;
-                        data->z = -shim_cos_deg(theta) * 25.0f;
+                        data->z = -cos_deg(theta) * 25.0f;
                         data->unk_24 = -0.04f;
                         data->unk_28 = 0.94f;
                         data->unk_20 = 0.75f;
@@ -199,11 +199,11 @@ void landing_dust_main(s32 type, f32 x, f32 y, f32 z, f32 arg4) {
                 data->unk_28 = 0.94f;
                 data->unk_2C = 0.94f;
                 theta = arg4 + ((i - 1) * 360 / (numParts - 1));
-                data->x = -shim_sin_deg(theta) * 10.0f;
+                data->x = -sin_deg(theta) * 10.0f;
                 data->y = 0.0f;
-                data->z = -shim_cos_deg(theta) * 10.0f;
-                data->unk_30 = shim_sin_deg(theta);
-                data->unk_34 = shim_cos_deg(theta);
+                data->z = -cos_deg(theta) * 10.0f;
+                data->unk_30 = sin_deg(theta);
+                data->unk_34 = cos_deg(theta);
             }
             break;
     }
@@ -218,7 +218,7 @@ void landing_dust_update(EffectInstance* effect) {
     data->unk_40 = D_E000CD24[data->unk_38][data->unk_3C++];
 
     if (data->unk_40 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
     } else {
         s32 type = data->type;
         s32 i;
@@ -253,7 +253,7 @@ void landing_dust_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_28;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -286,10 +286,10 @@ void landing_dust_appendGfx(void* effect) {
     spD8 = temp_t0 & 7;
     spDC = temp_t0 & 0x40;
 
-    shim_guTranslateF(mtx1, part->x, part->y, part->z);
-    shim_guRotateF(mtx2, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-    shim_guMtxCatF(mtx2, mtx1, mtx3);
-    shim_guMtxF2L(mtx3, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(mtx1, part->x, part->y, part->z);
+    guRotateF(mtx2, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(mtx2, mtx1, mtx3);
+    guMtxF2L(mtx3, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++,
               &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
@@ -332,8 +332,8 @@ void landing_dust_appendGfx(void* effect) {
     part++;
 
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, part++) {
-        shim_guTranslateF(mtx1, part->x, part->y, part->z);
-        shim_guMtxF2L(mtx1, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guTranslateF(mtx1, part->x, part->y, part->z);
+        guMtxF2L(mtx1, &gDisplayContext->matrixStack[gMatrixListPos]);
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                   G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         gSPDisplayList(gMainGfxPos++, dlist1);

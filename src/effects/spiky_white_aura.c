@@ -46,7 +46,7 @@ void spiky_white_aura_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4) {
 
     temp_f12 = SQ(fs3) + SQ(fs2) + SQ(fs1);
     if (temp_f12 != 0.0f) {
-        temp_f12 = -1.0f / shim_sqrtf(temp_f12);
+        temp_f12 = -1.0f / sqrtf(temp_f12);
 
         fs3 *= temp_f12;
         fs2 *= temp_f12;
@@ -68,7 +68,7 @@ void spiky_white_aura_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4) {
 
         temp_f12 = SQ(var_f0) + SQ(var_f2) + SQ(var_f4);
         if (temp_f12 != 0.0f) {
-            temp_f12 = 1.0 / shim_sqrtf(temp_f12);
+            temp_f12 = 1.0 / sqrtf(temp_f12);
 
             fs3 *= 18.0f;
             fs2 *= 18.0f;
@@ -81,9 +81,9 @@ void spiky_white_aura_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4) {
             bpPtr->renderUI = NULL;
             bpPtr->effectID = EFFECT_SPIKY_WHITE_AURA;
 
-            effect = shim_create_effect_instance(bpPtr);
+            effect = create_effect_instance(bpPtr);
             effect->numParts = numParts;
-            part = effect->data.spikyWhiteAura = shim_general_heap_malloc(numParts * sizeof(*part));
+            part = effect->data.spikyWhiteAura = general_heap_malloc(numParts * sizeof(*part));
             ASSERT(effect->data.spikyWhiteAura != NULL);
 
             for (i = 0; i < numParts; i++, part++) {
@@ -95,8 +95,8 @@ void spiky_white_aura_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4) {
                 part->unk_08 = arg2;
                 part->unk_0C = arg3;
 
-                sinYaw = shim_sin_deg(gCameras[gCurrentCameraID].currentYaw);
-                cosYaw = -shim_cos_deg(gCameras[gCurrentCameraID].currentYaw);
+                sinYaw = sin_deg(gCameras[gCurrentCameraID].currentYaw);
+                cosYaw = -cos_deg(gCameras[gCurrentCameraID].currentYaw);
 
                 if (numParts != 1) {
                     rotateA = (i * 100) / (numParts - 1) - 50;
@@ -104,7 +104,7 @@ void spiky_white_aura_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg4) {
                     rotateA = 0.0f;
                 }
 
-                shim_guRotateF(matrix, rotateA, sinYaw, 0.0f, cosYaw);
+                guRotateF(matrix, rotateA, sinYaw, 0.0f, cosYaw);
 
                 part->unk_10 = (sp30[0][0] * fs3 + sp30[1][0] * fs2 + sp30[2][0] * fs1) * 0.6;
                 part->unk_14 = sp30[0][1] * fs3 + sp30[1][1] * fs2 + sp30[2][1] * fs1;
@@ -132,7 +132,7 @@ void spiky_white_aura_update(EffectInstance* effect) {
     part->unk_2C++;
 
     if (part->unk_28 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -145,7 +145,7 @@ void spiky_white_aura_update(EffectInstance* effect) {
             part->unk_14 *= 0.8;
             part->unk_18 *= 0.8;
             part->unk_24 += (255 - part->unk_24) * 0.4;
-            part->unk_20 = shim_sin_deg(part->unk_24 / 2) * 3.0f + shim_sin_deg(unk_2C * 30.0f);
+            part->unk_20 = sin_deg(part->unk_24 / 2) * 3.0f + sin_deg(unk_2C * 30.0f);
         }
 
         if (unk_28 < 5) {
@@ -153,7 +153,7 @@ void spiky_white_aura_update(EffectInstance* effect) {
             part->unk_10 *= 0.7;
             part->unk_14 *= 0.7;
             part->unk_18 *= 0.7;
-            part->unk_20 = shim_sin_deg(part->unk_24 / 2) * 3.0f + shim_sin_deg(unk_2C * 30.0f) + (255 - part->unk_24) / 30.0f;
+            part->unk_20 = sin_deg(part->unk_24 / 2) * 3.0f + sin_deg(unk_2C * 30.0f) + (255 - part->unk_24) / 30.0f;
         }
 
         part->unk_04 += part->unk_10;
@@ -171,7 +171,7 @@ void spiky_white_aura_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -186,14 +186,14 @@ void spiky_white_aura_appendGfx(void* effect) {
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 255, part->unk_24);
 
     for (i = 0; i < ((EffectInstance*)effect)->numParts; i++, part++) {
-        shim_guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
-        shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-        shim_guMtxCatF(sp58, sp18, sp18);
-        shim_guRotateF(sp58, part->unk_1C, 0.0f, 0.0f, 1.0f);
-        shim_guMtxCatF(sp58, sp18, sp18);
-        shim_guScaleF(sp58, part->unk_20, part->unk_20, 1.0f);
-        shim_guMtxCatF(sp58, sp18, sp18);
-        shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
+        guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+        guMtxCatF(sp58, sp18, sp18);
+        guRotateF(sp58, part->unk_1C, 0.0f, 0.0f, 1.0f);
+        guMtxCatF(sp58, sp18, sp18);
+        guScaleF(sp58, part->unk_20, part->unk_20, 1.0f);
+        guMtxCatF(sp58, sp18, sp18);
+        guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gDPPipeSync(gMainGfxPos++);
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);

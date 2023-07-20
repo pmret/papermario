@@ -3,7 +3,7 @@
 from functools import lru_cache
 import os
 import shutil
-from typing import List, Dict, Optional, Set, Union
+from typing import List, Dict, Set, Union
 from pathlib import Path
 import subprocess
 import sys
@@ -602,11 +602,7 @@ class Configure:
                     encoding = "EUC-JP"
 
                 # Dead cod
-                if (
-                    isinstance(seg, segtypes.common.c.CommonSegC)
-                    and isinstance(seg.rom_start, int)
-                    and seg.rom_start >= 0xEA0900
-                ):
+                if isinstance(seg.parent.yaml, dict) and seg.parent.yaml.get("dead_code", False):
                     obj_path = str(entry.object_path)
                     init_obj_path = Path(obj_path + ".dead")
                     build(
@@ -665,7 +661,10 @@ class Configure:
                                 },
                             )
 
-                            assert seg.vram_start is not None
+                            assert seg.vram_start is not None, (
+                                "img with vram_start unset: " + seg.name
+                            )
+
                             c_sym = seg.create_symbol(
                                 addr=seg.vram_start,
                                 in_segment=True,

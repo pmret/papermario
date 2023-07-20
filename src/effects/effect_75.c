@@ -27,9 +27,9 @@ EffectInstance* effect_75_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 scale
     bp.renderUI = NULL;
     bp.effectID = EFFECT_75;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    data = effect->data.unk_75 = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.unk_75 = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.unk_75 != NULL);
 
     data->type = arg0;
@@ -94,7 +94,7 @@ void effect_75_update(EffectInstance* effect) {
     }
 
     if (data->unk_10 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -147,7 +147,7 @@ void effect_75_update(EffectInstance* effect) {
     }
 
     data->unk_34 = data->unk_60
-        + (shim_sin_deg(unk_14 * 20) * (data->unk_64 - data->unk_60)
+        + (sin_deg(unk_14 * 20) * (data->unk_64 - data->unk_60)
         + (data->unk_64 - data->unk_60)) * 0.5;
 }
 
@@ -162,7 +162,7 @@ void effect_75_render(EffectInstance* effect) {
     f32 outZ;
     f32 outS;
 
-    shim_transform_point(&gCameras[gCurrentCameraID].perspectiveMatrix[0],
+    transform_point(&gCameras[gCurrentCameraID].perspectiveMatrix[0],
         data->pos.x, data->pos.y, data->pos.z, 1.0f,
         &outX, &outY, &outZ, &outS);
 
@@ -182,7 +182,7 @@ void effect_75_render(EffectInstance* effect) {
     renderTaskPtr->appendGfxArg = effect;
     renderTaskPtr->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
 
-    retTask = shim_queue_render_task(renderTaskPtr);
+    retTask = queue_render_task(renderTaskPtr);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -203,14 +203,14 @@ void effect_75_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guTranslateF(mtxTransfrom, data->pos.x, data->pos.y, data->pos.z);
-    shim_guScaleF(mtxTemp, data->scale, data->scale, data->scale);
-    shim_guMtxCatF(mtxTemp, mtxTransfrom, mtxTransfrom);
+    guTranslateF(mtxTransfrom, data->pos.x, data->pos.y, data->pos.z);
+    guScaleF(mtxTemp, data->scale, data->scale, data->scale);
+    guMtxCatF(mtxTemp, mtxTransfrom, mtxTransfrom);
     if (type == 1) {
-        shim_guRotateF(mtxTemp, 180.0f, 0.0f, 0.0f, 1.0f);
-        shim_guMtxCatF(mtxTemp, mtxTransfrom, mtxTransfrom);
+        guRotateF(mtxTemp, 180.0f, 0.0f, 0.0f, 1.0f);
+        guMtxCatF(mtxTemp, mtxTransfrom, mtxTransfrom);
     }
-    shim_guMtxF2L(mtxTransfrom, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guMtxF2L(mtxTransfrom, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPMatrix(gMainGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);

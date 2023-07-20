@@ -52,7 +52,7 @@ void damage_stars_main(
     if (arg7 != 0) {
         temp_f12 = SQ(arg4) + SQ(arg5) + SQ(arg6);
         if (temp_f12 != 0.0f) {
-            temp_f12 = -1.0f / shim_sqrtf(temp_f12);
+            temp_f12 = -1.0f / sqrtf(temp_f12);
 
             arg4 *= temp_f12;
             arg5 *= temp_f12;
@@ -74,7 +74,7 @@ void damage_stars_main(
 
             temp_f12 = SQ(var_f30) + SQ(sp70) + SQ(var_f28);
             if (temp_f12 != 0) {
-                temp_f12 = 1.0f / shim_sqrtf(temp_f12);
+                temp_f12 = 1.0f / sqrtf(temp_f12);
 
                 var_f30 *= temp_f12;
                 sp70 *= temp_f12;
@@ -94,9 +94,9 @@ void damage_stars_main(
                 bpPtr->renderUI = NULL;
                 bpPtr->effectID = EFFECT_DAMAGE_STARS;
 
-                effect = shim_create_effect_instance(bpPtr);
+                effect = create_effect_instance(bpPtr);
                 effect->numParts = arg7;
-                part = effect->data.damageStars = shim_general_heap_malloc(arg7 * sizeof(*part));
+                part = effect->data.damageStars = general_heap_malloc(arg7 * sizeof(*part));
                 ASSERT(effect->data.damageStars != NULL);
 
                 for (i = 0; i < arg7; i++, part++) {
@@ -109,15 +109,15 @@ void damage_stars_main(
                         case 0:
                         case 1:
                         case 2:
-                            shim_guRotateF(sp30, (i * 360) / (arg7 - 1), arg4, arg5, arg6);
+                            guRotateF(sp30, (i * 360) / (arg7 - 1), arg4, arg5, arg6);
                             part->unk_10 = arg4 + sp30[0][0] * var_f30 + sp30[1][0] * sp70 + sp30[2][0] * var_f28;
                             part->unk_14 = arg5 + sp30[0][1] * var_f30 + sp30[1][1] * sp70 + sp30[2][1] * var_f28;
                             part->unk_18 = arg6 + sp30[0][2] * var_f30 + sp30[1][2] * sp70 + sp30[2][2] * var_f28;
                             break;
                         case 3:
-                            rotateX = shim_sin_deg(gCameras[gCurrentCameraID].currentYaw);
-                            rotateZ = -shim_cos_deg(gCameras[gCurrentCameraID].currentYaw);
-                            shim_guRotateF(sp30,
+                            rotateX = sin_deg(gCameras[gCurrentCameraID].currentYaw);
+                            rotateZ = -cos_deg(gCameras[gCurrentCameraID].currentYaw);
+                            guRotateF(sp30,
                                 (arg7 != 1) ? (i * 100) / (arg7 - 1) - 50 : 0.0f,
                                 rotateX, 0.0f, rotateZ);
                             part->unk_10 = sp30[0][0] * arg4 + sp30[1][0] * arg5 + sp30[2][0] * arg6;
@@ -125,9 +125,9 @@ void damage_stars_main(
                             part->unk_18 = sp30[0][2] * arg4 + sp30[1][2] * arg5 + sp30[2][2] * arg6;
                             break;
                         case 4:
-                            rotateX = shim_sin_deg(gCameras[gCurrentCameraID].currentYaw);
-                            rotateZ = -shim_cos_deg(gCameras[gCurrentCameraID].currentYaw);
-                            shim_guRotateF(sp30, (i * 360.0f) / (arg7 - 1), rotateX, 0.0f, rotateZ);
+                            rotateX = sin_deg(gCameras[gCurrentCameraID].currentYaw);
+                            rotateZ = -cos_deg(gCameras[gCurrentCameraID].currentYaw);
+                            guRotateF(sp30, (i * 360.0f) / (arg7 - 1), rotateX, 0.0f, rotateZ);
                             part->unk_10 = sp30[0][0] * arg4 + sp30[1][0] * arg5 + sp30[2][0] * arg6;
                             part->unk_14 = sp30[0][1] * arg4 + sp30[1][1] * arg5 + sp30[2][1] * arg6;
                             part->unk_18 = sp30[0][2] * arg4 + sp30[1][2] * arg5 + sp30[2][2] * arg6;
@@ -184,7 +184,7 @@ void damage_stars_update(EffectInstance* effect) {
     part->unk_2C++;
 
     if (part->unk_28 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -193,7 +193,7 @@ void damage_stars_update(EffectInstance* effect) {
 
     for (i = 0; i < effect->numParts; i++, part++) {
         if (part->unk_00 == 2) {
-            part->unk_14 = shim_cos_deg(unk_2C * 6) * 4.0f;
+            part->unk_14 = cos_deg(unk_2C * 6) * 4.0f;
             part->unk_10 *= 0.94;
             part->unk_18 *= 0.94;
             if (part->unk_14 < 0.0f) {
@@ -235,7 +235,7 @@ void damage_stars_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -259,15 +259,15 @@ void damage_stars_appendGfx(void* effect) {
         s32 bIdx = baseIdx + 2 + i * 3;
 
         gDPSetPrimColor(gMainGfxPos++, 0, 0, D_E0030E90[rIdx % 36], D_E0030E90[gIdx % 36], D_E0030E90[bIdx % 36], part->unk_24);
-        shim_guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
-        shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-        shim_guMtxCatF(sp58, sp18, sp18);
-        shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
+        guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+        guMtxCatF(sp58, sp18, sp18);
+        guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
-        shim_guRotateF(sp18, part->unk_1C, 0.0f, 0.0f, 1.0f);
-        shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guRotateF(sp18, part->unk_1C, 0.0f, 0.0f, 1.0f);
+        guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         gSPDisplayList(gMainGfxPos++, D_090005E0_343620);

@@ -33,12 +33,12 @@ void steam_burst_main(
     bp.renderUI = NULL;
     bp.effectID = EFFECT_STEAM_BURST;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    part = effect->data.steamBurst = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = effect->data.steamBurst = general_heap_malloc(numParts * sizeof(*part));
     ASSERT(effect->data.steamBurst != NULL);
 
-    shim_mem_clear(part, numParts * sizeof(*part));
+    mem_clear(part, numParts * sizeof(*part));
 
     part->unk_24 = arg5;
     part->unk_28 = 0;
@@ -58,9 +58,9 @@ void steam_burst_main(
         part->unk_04 = zero;
         part->unk_08 = zero;
         part->unk_0C = zero;
-        part->unk_10 = shim_sin_deg(0.0f);
+        part->unk_10 = sin_deg(0.0f);
         part->unk_14 = 0.0f;
-        part->unk_18 = shim_cos_deg(0.0f);
+        part->unk_18 = cos_deg(0.0f);
     }
 }
 
@@ -77,7 +77,7 @@ void steam_burst_update(EffectInstance* effect) {
     part->unk_24--;
 
     if (part->unk_24 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -103,7 +103,7 @@ void steam_burst_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_28;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -123,10 +123,10 @@ void steam_burst_appendGfx(void* effect) {
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
     gSPDisplayList(gMainGfxPos++, dlist2);
 
-    shim_guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
-    shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-    shim_guMtxCatF(sp58, sp18, sp98);
-    shim_guMtxF2L(sp98, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
+    guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(sp58, sp18, sp98);
+    guMtxF2L(sp98, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 230, 222, 222, 130);
@@ -147,8 +147,8 @@ void steam_burst_appendGfx(void* effect) {
 
     part++;
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, part++) {
-        shim_guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
-        shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
+        guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         gSPDisplayList(gMainGfxPos++, dlist);

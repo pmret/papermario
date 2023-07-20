@@ -94,9 +94,9 @@ EffectInstance* something_rotating_main(
     bp.renderUI = NULL;
     bp.effectID = EFFECT_SOMETHING_ROTATING;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    part = effect->data.somethingRotating = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = effect->data.somethingRotating = general_heap_malloc(numParts * sizeof(*part));
     ASSERT(effect->data.somethingRotating != NULL);
 
     part->unk_00 = arg0;
@@ -156,7 +156,7 @@ void something_rotating_update(EffectInstance* effect) {
     part->unk_14++;
 
     if (part->unk_10 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -167,12 +167,12 @@ void something_rotating_update(EffectInstance* effect) {
     part++;
     for (i = 1; i < effect->numParts; i++, part++) {
         f32 angle2 = unk_14 * 4.0f + (f32) i * 51.43;
-        f32 temp_f24 = shim_sin_deg(angle2);
+        f32 temp_f24 = sin_deg(angle2);
         f32 temp_f22 = part->unk_2C;
 
-        part->pos.x = x + temp_f22 * shim_sin_deg(angle1) * temp_f24;
-        part->pos.y = y + temp_f22 * shim_cos_deg(angle2);
-        part->pos.z = z + temp_f22 * shim_cos_deg(angle1) * temp_f24;
+        part->pos.x = x + temp_f22 * sin_deg(angle1) * temp_f24;
+        part->pos.y = y + temp_f22 * cos_deg(angle2);
+        part->pos.z = z + temp_f22 * cos_deg(angle1) * temp_f24;
 
         switch (part->state) {
             case 1:
@@ -224,7 +224,7 @@ void something_rotating_update(EffectInstance* effect) {
                 unk_14_2 = part->unk_14;
 
                 if (unk_14_2 < 18) {
-                    part->unk_2C = (shim_sin_deg(90 - unk_14_2 * 10) + 1.0f) * 50.0f * 0.5;
+                    part->unk_2C = (sin_deg(90 - unk_14_2 * 10) + 1.0f) * 50.0f * 0.5;
                 } else {
                     part->unk_2C = 0.0f;
                     part->state++;
@@ -248,7 +248,7 @@ void something_rotating_render(EffectInstance* effect) {
     renderTask.distance = 10;
     renderTask.renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -263,16 +263,16 @@ void func_E01166E8(s32 arg0, SomethingRotatingFXData* part) {
         temp = 0.0f;
     }
 
-    shim_guPositionF(sp20, 0.0f, part->unk_20 - temp, 0.0f, part->unk_18,
+    guPositionF(sp20, 0.0f, part->unk_20 - temp, 0.0f, part->unk_18,
         part->pos.x + 2.0f,
         part->pos.y,
         part->pos.z + 2.0f
     );
-    shim_guRotateF(sp60, part->unk_1C, 0.0f, 0.0f, 1.0f);
-    shim_guMtxCatF(sp60, sp20, sp20);
-    shim_guTranslateF(sp60, 0.0f, 0.0f, -2.0f);
-    shim_guMtxCatF(sp60, sp20, sp20);
-    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guRotateF(sp60, part->unk_1C, 0.0f, 0.0f, 1.0f);
+    guMtxCatF(sp60, sp20, sp20);
+    guTranslateF(sp60, 0.0f, 0.0f, -2.0f);
+    guMtxCatF(sp60, sp20, sp20);
+    guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
               G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);

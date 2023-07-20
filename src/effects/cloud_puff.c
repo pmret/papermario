@@ -24,13 +24,13 @@ void cloud_puff_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     bp.renderUI = NULL;
     bp.effectID = EFFECT_CLOUD_PUFF;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    part = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = general_heap_malloc(numParts * sizeof(*part));
     effect->data.cloudPuff = part;
     ASSERT(effect->data.cloudPuff != NULL);
 
-    shim_mem_clear(part, numParts * sizeof(*part));
+    mem_clear(part, numParts * sizeof(*part));
 
     for (i = 0; i < numParts; i++, part++) {
         part->alive = TRUE;
@@ -42,17 +42,17 @@ void cloud_puff_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3) {
         part->unk_1C = 1.0f;
         part->unk_20 = 1.0f;
         part->alpha = 255;
-        part->unk_24 = (shim_rand_int(10) * 0.03) + 1.0;
-        part->unk_28 = (shim_rand_int(10) * 0.03) + 1.7;
+        part->unk_24 = (rand_int(10) * 0.03) + 1.0;
+        part->unk_28 = (rand_int(10) * 0.03) + 1.7;
         part->unk_2C = effect_rand_int(60);
         part->timeLeft = 30;
         part->unk_34 = 0.5f;
         part->unk_38 = -0.02f;
         part->unk_3C = 0.00005f;
         part->unk_30 = -3.9f;
-        temp_f20 = shim_clamp_angle(arg3 + i * 45);
-        part->unk_44 = shim_sin_deg(temp_f20);
-        part->unk_48 = shim_cos_deg(temp_f20);
+        temp_f20 = clamp_angle(arg3 + i * 45);
+        part->unk_44 = sin_deg(temp_f20);
+        part->unk_48 = cos_deg(temp_f20);
     }
 }
 
@@ -71,9 +71,9 @@ void cloud_puff_update(EffectInstance* effect) {
                 part->alive = FALSE;
             } else {
                 cond = TRUE;
-                part->unk_2C = shim_clamp_angle(part->unk_2C + 12.0f);
-                part->unk_18 = part->unk_24 + shim_sin_deg(part->unk_2C) * 0.1;
-                part->unk_1C = part->unk_28 + shim_cos_deg(part->unk_2C) * 0.1;
+                part->unk_2C = clamp_angle(part->unk_2C + 12.0f);
+                part->unk_18 = part->unk_24 + sin_deg(part->unk_2C) * 0.1;
+                part->unk_1C = part->unk_28 + cos_deg(part->unk_2C) * 0.1;
                 part->unk_30 *= 0.83;
                 part->unk_0C += part->unk_30 * part->unk_44;
                 part->unk_14 += part->unk_30 * part->unk_48;
@@ -95,7 +95,7 @@ void cloud_puff_update(EffectInstance* effect) {
     }
 
     if (!cond) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
     }
 }
 
@@ -108,7 +108,7 @@ void cloud_puff_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_28;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -125,11 +125,11 @@ void cloud_puff_appendGfx(void* effect) {
 
     for (i = 0; i < effectTemp->numParts; i++, part++) {
         if (part->alive) {
-            shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f,
+            guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f,
                              part->unk_0C, part->unk_10, part->unk_14);
-            shim_guScaleF(sp60, part->unk_18, part->unk_1C, part->unk_20);
-            shim_guMtxCatF(sp60, sp20, sp20);
-            shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+            guScaleF(sp60, part->unk_18, part->unk_1C, part->unk_20);
+            guMtxCatF(sp60, sp20, sp20);
+            guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
             gDPSetPrimColor(gMainGfxPos++, 0, 0, 112, 96, 24, part->alpha);
             gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],

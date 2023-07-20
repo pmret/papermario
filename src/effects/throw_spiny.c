@@ -33,9 +33,9 @@ EffectInstance* throw_spiny_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg
     bp.renderUI = NULL;
     bp.effectID = EFFECT_THROW_SPINY;
 
-    effect = (EffectInstance*)shim_create_effect_instance(bpPtr);
+    effect = (EffectInstance*)create_effect_instance(bpPtr);
     effect->numParts = numParts;
-    spinyObject = effect->data.throwSpiny = shim_general_heap_malloc(numParts * sizeof(*spinyObject));
+    spinyObject = effect->data.throwSpiny = general_heap_malloc(numParts * sizeof(*spinyObject));
     ASSERT(effect->data.throwSpiny != NULL);
     spinyObject->unk_00 = arg0;
     spinyObject->lifeDuration = 0;
@@ -74,8 +74,8 @@ EffectInstance* throw_spiny_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg
     spinyObject->unk_30 = 70;
     spinyObject->unk_34 = 180;
     spinyObject->unk_38 = 120;
-    spinyObject->yaw = shim_rand_int(360);
-    spinyObject->rotationSpeed = shim_rand_int(10) + 5;
+    spinyObject->yaw = rand_int(360);
+    spinyObject->rotationSpeed = rand_int(10) + 5;
     spinyObject->state = -1;
     spinyObject->xScale = 1.0f;
     spinyObject->yScale = 1.0f;
@@ -103,7 +103,7 @@ void throw_spiny_update(EffectInstance* effectInstance) {
     spinyObject->lifeDuration++;
 
     if (spinyObject->life < 0) {
-        shim_remove_effect(effectInstance);
+        remove_effect(effectInstance);
         return;
     }
 
@@ -149,7 +149,7 @@ void throw_spiny_render(EffectInstance* effect) {
     renderTask.distance = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -168,12 +168,12 @@ void throw_spiny_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
-    shim_guScaleF(sp58, scale * data->xScale, scale * data->yScale, scale);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guRotateF(sp58, data->yaw, 0.0f, 0.0f, 1.0f);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
+    guScaleF(sp58, scale * data->xScale, scale * data->yScale, scale);
+    guMtxCatF(sp58, sp18, sp18);
+    guRotateF(sp58, data->yaw, 0.0f, 0.0f, 1.0f);
+    guMtxCatF(sp58, sp18, sp18);
+    guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPMatrix(gMainGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);

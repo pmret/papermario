@@ -40,9 +40,9 @@ void explosion_main(s32 type, f32 x, f32 y, f32 z) {
     bpPtr->effectID = EFFECT_EXPLOSION;
 
 
-    effect = shim_create_effect_instance(bpPtr);
+    effect = create_effect_instance(bpPtr);
     effect->numParts = numParts;
-    effect->data.explosion = data = shim_general_heap_malloc(effect->numParts * sizeof(*data));
+    effect->data.explosion = data = general_heap_malloc(effect->numParts * sizeof(*data));
     ASSERT(effect->data.explosion != NULL);
 
     data->pos.x = x;
@@ -100,7 +100,7 @@ void explosion_update(EffectInstance* effect) {
 
     part->unk_30--;
     if (part->unk_30 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -110,10 +110,10 @@ void explosion_update(EffectInstance* effect) {
     unk_34 = part->unk_34;
 
     if (unk_34 == 7) {
-        shim_load_effect(EFFECT_SMOKE_RING);
+        load_effect(EFFECT_SMOKE_RING);
         smoke_ring_main(unk_00, part->pos.x, part->pos.y, part->pos.z);
     } else if (unk_34 == 1) {
-        shim_load_effect(EFFECT_CONFETTI);
+        load_effect(EFFECT_CONFETTI);
         confetti_main(unk_00 + 4, part->pos.x, part->pos.y, part->pos.z, 1.0f, 50);
     }
 
@@ -156,7 +156,7 @@ void explosion_render(EffectInstance* effect) {
     renderTask.distance = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
 }
 
 void explosion_appendGfx(void* effect) {
@@ -171,10 +171,10 @@ void explosion_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guTranslateF(sp18, part->pos.x, part->pos.y, part->pos.z);
-    shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp18, part->pos.x, part->pos.y, part->pos.z);
+    guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(sp58, sp18, sp18);
+    guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     part++;
 
@@ -183,8 +183,8 @@ void explosion_appendGfx(void* effect) {
     if (part->unk_00 != -1) {
         gSPDisplayList(gMainGfxPos++, D_09000840_3447B0);
 
-        shim_guScaleF(sp18, part->unk_20, part->unk_20, 1.0f);
-        shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guScaleF(sp18, part->unk_20, part->unk_20, 1.0f);
+        guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 240, part->unk_38);
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
@@ -196,10 +196,10 @@ void explosion_appendGfx(void* effect) {
 
     gSPDisplayList(gMainGfxPos++, D_09000910_344880);
 
-    shim_guScaleF(sp18, part->unk_20, part->unk_20, part->unk_20);
-    shim_guRotateF(sp58, part->unk_28, 0.0f, 0.0f, 1.0f);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guScaleF(sp18, part->unk_20, part->unk_20, part->unk_20);
+    guRotateF(sp58, part->unk_28, 0.0f, 0.0f, 1.0f);
+    guMtxCatF(sp58, sp18, sp18);
+    guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     switch (unk_34) {
         default:

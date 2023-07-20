@@ -89,9 +89,9 @@ EffectInstance* cold_breath_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg
     bp.renderUI = NULL;
     bp.effectID = EFFECT_COLD_BREATH;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    data = effect->data.coldBreath = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.coldBreath = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.coldBreath != NULL);
 
     data->unk_00 = arg0;
@@ -138,7 +138,7 @@ void cold_breath_update(EffectInstance* effect) {
     data->unk_14++;
 
     if (data->unk_10 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
     if (data->unk_10 < 16) {
@@ -172,7 +172,7 @@ void cold_breath_render(EffectInstance* effect) {
     renderTask.distance = 6;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -196,10 +196,10 @@ void cold_breath_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guTranslateF(sp20, data->unk_04, data->unk_08, data->unk_0C);
-    shim_guScaleF(sp60, data->unk_40, data->unk_40, data->unk_40);
-    shim_guMtxCatF(sp60, sp20, sp20);
-    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp20, data->unk_04, data->unk_08, data->unk_0C);
+    guScaleF(sp60, data->unk_40, data->unk_40, data->unk_40);
+    guMtxCatF(sp60, sp20, sp20);
+    guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPMatrix(gMainGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
@@ -212,8 +212,8 @@ void cold_breath_appendGfx(void* effect) {
     temp2 = D_E00DE8B4[unkIndex];
     temp3 = D_E00DE858[unkIndex];
 
-    shim_guPositionF(sp20, 0.0f, 0.0f, -temp1, temp2 * 0.01f, temp3, 0.0f, 0.0f);
-    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guPositionF(sp20, 0.0f, 0.0f, -temp1, temp2 * 0.01f, temp3, 0.0f, 0.0f);
+    guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
     temp_f32 = D_E00DE910[unkIndex] * 5.0f / 256.0f;

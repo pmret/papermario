@@ -50,9 +50,9 @@ EffectInstance* effect_63_main(
     bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_63;
 
-    effect = shim_create_effect_instance(bpPtr);
+    effect = create_effect_instance(bpPtr);
     effect->numParts = numParts;
-    part = effect->data.unk_63 = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = effect->data.unk_63 = general_heap_malloc(numParts * sizeof(*part));
     ASSERT(effect->data.unk_63 != NULL);
 
     if (arg9 <= 0) {
@@ -85,8 +85,8 @@ EffectInstance* effect_63_main(
             part->unk_3C = 51;
             part->unk_40 = 123;
             part->unk_44 = 255;
-            part->unk_4C = shim_rand_int(64);
-            part->unk_50 = shim_rand_int(64);
+            part->unk_4C = rand_int(64);
+            part->unk_50 = rand_int(64);
             part->unk_54 = 0;
             part->unk_58 = 0;
             part->unk_74 = 0;
@@ -102,16 +102,16 @@ EffectInstance* effect_63_main(
             part->unk_3C = 51;
             part->unk_40 = 123;
             part->unk_44 = 255;
-            randInt = shim_rand_int(360);
+            randInt = rand_int(360);
 
             for (i = 0; i < numParts; i++, part++) {
                 part->unk_04 = arg1;
                 part->unk_08 = arg2;
                 part->unk_0C = arg3;
-                part->unk_60 = shim_sin_deg(i * 45 + randInt) * 5.0f;
-                part->unk_64 = shim_cos_deg(i * 45 + randInt) * 2.0f + 3.0f;
-                part->unk_4C = shim_rand_int(64);
-                part->unk_50 = shim_rand_int(64);
+                part->unk_60 = sin_deg(i * 45 + randInt) * 5.0f;
+                part->unk_64 = cos_deg(i * 45 + randInt) * 2.0f + 3.0f;
+                part->unk_4C = rand_int(64);
+                part->unk_50 = rand_int(64);
                 part->unk_70 = 1.0f;
                 part->unk_6C = 1.0f;
                 part->unk_54 = 0;
@@ -145,12 +145,12 @@ void effect_63_update(EffectInstance* effect) {
 
     part->unk_24++;
     if (part->unk_20 == 1 && unk_00 == 1) {
-        shim_load_effect(EFFECT_63);
+        load_effect(EFFECT_63);
         effect_63_main(2, part->unk_04, part->unk_08, part->unk_0C, part->unk_10, part->unk_14, part->unk_18, 1.0f, 32, 32);
     }
 
     if (part->unk_20 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -159,7 +159,7 @@ void effect_63_update(EffectInstance* effect) {
     switch (unk_00) {
         case 0:
             if (!(unk_24 & (1 | 2))) {
-                shim_load_effect(EFFECT_63);
+                load_effect(EFFECT_63);
                 effect_63_main(1, part->unk_04, part->unk_08, part->unk_0C, part->unk_10, part->unk_14, part->unk_18, 1.0f, part->unk_1C, part->unk_1C);
             }
             break;
@@ -203,7 +203,7 @@ void effect_63_render(EffectInstance* effect) {
     renderTask.distance = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -231,9 +231,9 @@ void effect_63_appendGfx(void* effect) {
             part->unk_4C += part->unk_54;
             part->unk_50 += part->unk_58;
 
-            angle = -shim_atan2(0.0f, 0.0f, part->unk_60, part->unk_64) + part->unk_74;
-            part->unk_54 = shim_sin_deg(angle);
-            part->unk_58 = shim_cos_deg(angle);
+            angle = -atan2(0.0f, 0.0f, part->unk_60, part->unk_64) + part->unk_74;
+            part->unk_54 = sin_deg(angle);
+            part->unk_58 = cos_deg(angle);
 
             if (part->unk_4C < 0.0f) {
                 part->unk_4C += 128.0f;
@@ -246,18 +246,18 @@ void effect_63_appendGfx(void* effect) {
             tempX = part->unk_4C * 4.0f;
             tempY = part->unk_50 * 4.0f;
 
-            shim_guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
-            shim_guScaleF(sp58, unk_48, unk_48, unk_48);
-            shim_guMtxCatF(sp58, sp18, sp18);
-            shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+            guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
+            guScaleF(sp58, unk_48, unk_48, unk_48);
+            guMtxCatF(sp58, sp18, sp18);
+            guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
             gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gSPMatrix(gMainGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
-            shim_guScaleF(sp18, part->unk_70, part->unk_6C, 1.0f);
-            shim_guRotateF(sp58, part->unk_74, 0.0f, 0.0f, 1.0f);
-            shim_guMtxCatF(sp58, sp18, sp18);
-            shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+            guScaleF(sp18, part->unk_70, part->unk_6C, 1.0f);
+            guRotateF(sp58, part->unk_74, 0.0f, 0.0f, 1.0f);
+            guMtxCatF(sp58, sp18, sp18);
+            guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
             gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
             gDPSetTileSize(gMainGfxPos++, 1, tempX, tempY, (tempX + 0x3F) * 4, (tempY + 0xF) * 4);

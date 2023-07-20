@@ -26,14 +26,14 @@ EffectInstance* debuff_main(s32 type, f32 x, f32 y, f32 z) {
     bp.renderUI = NULL;
     bp.effectID = EFFECT_DEBUFF;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
 
-    effect->data.debuff = data = shim_general_heap_malloc(numParts * sizeof(*data));
+    effect->data.debuff = data = general_heap_malloc(numParts * sizeof(*data));
 
     ASSERT(data != NULL);
 
-    shim_mem_clear(data, numParts * sizeof(*data));
+    mem_clear(data, numParts * sizeof(*data));
 
     data->timeLeft = 30;
     data->lifetime = 0;
@@ -64,8 +64,8 @@ EffectInstance* debuff_main(s32 type, f32 x, f32 y, f32 z) {
         s32 angle = ((i - 1) * 360) / (numParts - 1);
         f32 temp2 = 1.0f;
 
-        data->pos.x = shim_cos_deg(angle + 90.0f);
-        data->pos.y = shim_sin_deg(angle + 90.0f);
+        data->pos.x = cos_deg(angle + 90.0f);
+        data->pos.y = sin_deg(angle + 90.0f);
         data->pos.z = 0.0f;
         data->unk_10 = 0.0f;
         data->unk_14 = 0.0f;
@@ -90,7 +90,7 @@ void debuff_update(EffectInstance* effect) {
     data->lifetime++;
     data->timeLeft--;
     if (data->timeLeft < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -112,8 +112,8 @@ void debuff_update(EffectInstance* effect) {
             data->scaleX += (1.0f - data->scaleX) * 0.1;
             data->unk_30 += ((10.0f - data->unk_30) * 0.05) * 0.6;
         }
-        data->pos.x = shim_cos_deg(data->rotZ + 90.0f) * data->unk_30;
-        data->pos.y = shim_sin_deg(data->rotZ + 90.0f) * data->unk_30;
+        data->pos.x = cos_deg(data->rotZ + 90.0f) * data->unk_30;
+        data->pos.y = sin_deg(data->rotZ + 90.0f) * data->unk_30;
     }
 }
 
@@ -126,7 +126,7 @@ void debuff_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_28;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -144,10 +144,10 @@ void debuff_appendGfx(void* effect) {
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(eff->graphics->data));
     gSPDisplayList(gMainGfxPos++, dlist2);
 
-    shim_guTranslateF(mtxTranslate, data->pos.x, data->pos.y, data->pos.z);
-    shim_guRotateF(mtxRotate, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-    shim_guMtxCatF(mtxRotate, mtxTranslate, mtxTransform);
-    shim_guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(mtxTranslate, data->pos.x, data->pos.y, data->pos.z);
+    guRotateF(mtxRotate, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(mtxRotate, mtxTranslate, mtxTransform);
+    guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++,
               &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
@@ -156,12 +156,12 @@ void debuff_appendGfx(void* effect) {
 
     data++;
     for (i = 1; i < eff->numParts; i++, data++) {
-        shim_guTranslateF(mtxTranslate, data->pos.x, data->pos.y, data->pos.z);
-        shim_guRotateF(mtxRotate, data->rotZ, 0.0f, 0.0f, 1.0f);
-        shim_guMtxCatF(mtxRotate, mtxTranslate, mtxTranslate);
-        shim_guScaleF(mtxRotate, data->scaleX, data->scaleY, 1.0f);
-        shim_guMtxCatF(mtxRotate, mtxTranslate, mtxTranslate);
-        shim_guMtxF2L(mtxTranslate, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guTranslateF(mtxTranslate, data->pos.x, data->pos.y, data->pos.z);
+        guRotateF(mtxRotate, data->rotZ, 0.0f, 0.0f, 1.0f);
+        guMtxCatF(mtxRotate, mtxTranslate, mtxTranslate);
+        guScaleF(mtxRotate, data->scaleX, data->scaleY, 1.0f);
+        guMtxCatF(mtxRotate, mtxTranslate, mtxTranslate);
+        guMtxF2L(mtxTranslate, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++,
                   &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);

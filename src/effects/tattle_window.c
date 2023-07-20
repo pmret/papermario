@@ -72,9 +72,9 @@ EffectInstance* tattle_window_main(s32 arg0, f32 x, f32 y, f32 z, f32 arg4, s32 
     bp.unk_00 = 0;
     bp.effectID = EFFECT_TATTLE_WINDOW;
 
-    effect = shim_create_effect_instance(bpPtr);
+    effect = create_effect_instance(bpPtr);
     effect->numParts = numParts;
-    part = effect->data.tattleWindow = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = effect->data.tattleWindow = general_heap_malloc(numParts * sizeof(*part));
 
     ASSERT(effect->data.tattleWindow != NULL);
 
@@ -121,7 +121,7 @@ void tattle_window_update(EffectInstance* effect) {
     unk_10 = part->unk_10;
 
     if (unk_10 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
     unk_10_2 = unk_10;
@@ -230,7 +230,7 @@ void func_E00D8630(EffectInstance* effect) {
         flags = 1;
     }
 
-    shim_draw_box(
+    draw_box(
         flags, &D_E00D87E0,
         (data->pos.x + data->offset.x) - 75.0f,
         (data->pos.y + data->offset.y) - 53.0f,

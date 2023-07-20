@@ -38,10 +38,10 @@ EffectInstance* small_gold_sparkle_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, 
     bp.renderUI = NULL;
     bp.effectID = EFFECT_SMALL_GOLD_SPARKLE;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
 
-    data = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = general_heap_malloc(numParts * sizeof(*data));
     effect->data.smallGoldSparkle = data;
     part = data;
 
@@ -77,7 +77,7 @@ void small_gold_sparkle_update(EffectInstance* effect) {
     part->unk_18++;
 
     if (part->unk_14 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -105,7 +105,7 @@ void small_gold_sparkle_render(EffectInstance* effect) {
     renderTask.distance = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -117,13 +117,13 @@ void small_gold_sparkle_appendGfx(void* effect) {
     Mtx* spD8;
     s32 i;
 
-    shim_guRotateF(sp98, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-    shim_guMtxF2L(sp98, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guRotateF(sp98, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guMtxF2L(sp98, &gDisplayContext->matrixStack[gMatrixListPos]);
     spD8 = &gDisplayContext->matrixStack[gMatrixListPos++];
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
-    shim_guTranslateF(sp18, part->unk_08, part->unk_0C, part->unk_10);
-    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp18, part->unk_08, part->unk_0C, part->unk_10);
+    guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(gMainGfxPos++, D_090002C0_392700);
@@ -134,12 +134,12 @@ void small_gold_sparkle_appendGfx(void* effect) {
         if (part->unk_20 == 0) {
             f32 temp_f20 = part->unk_1C;
 
-            shim_guTranslateF(sp18, part->unk_08, part->unk_0C, part->unk_10);
+            guTranslateF(sp18, part->unk_08, part->unk_0C, part->unk_10);
             if (temp_f20 != 1.0f) {
-                shim_guScaleF(sp58, temp_f20, temp_f20, 1.0f);
-                shim_guMtxCatF(sp58, sp18, sp18);
+                guScaleF(sp58, temp_f20, temp_f20, 1.0f);
+                guMtxCatF(sp58, sp18, sp18);
             }
-            shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+            guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
             gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                       G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
             gSPMatrix(gMainGfxPos++, spD8, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
