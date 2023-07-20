@@ -12,7 +12,7 @@ u32 nuAuFrameCounter = 0;
 u8 nuAuTaskStop = NU_AU_TASK_RUN;
 u8 volatile AuSynUseStereo = TRUE;
 
-//bss
+SHIFT_BSS NUDMAState nuAuDmaState;
 SHIFT_BSS Acmd* AlCmdListBuffers[3];
 SHIFT_BSS NUScTask nuAuTasks[3];
 SHIFT_BSS u8* D_800A3628[3];
@@ -26,7 +26,6 @@ SHIFT_BSS AuSynDriver auSynDriver;
 SHIFT_BSS u8 rspbootUcodeBuffer[0x100];
 SHIFT_BSS u64 AuStack[NU_AU_STACK_SIZE / sizeof(u64)];
 SHIFT_BSS u16 AuInitialGlobalVolume;
-SHIFT_BSS NUDMAState nuAuDmaState;
 SHIFT_BSS OSThread nuAuMgrThread;
 SHIFT_BSS ALHeap nuAuHeap;
 

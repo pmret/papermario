@@ -8,10 +8,10 @@
 .section .text, "ax"
 
 glabel entry_point
-/* 1000 80025C00 3C08800A */  lui       $t0, %hi(nuScPreNMIFlag)
-/* 1004 80025C04 2508A5B0 */  addiu     $t0, $t0, %lo(nuScPreNMIFlag)
-/* 1008 80025C08 3C090004 */  lui       $t1, 4
-/* 100C 80025C0C 25291F50 */  addiu     $t1, $t1, 0x1f50
+/* 1000 80025C00 3C08800A */  lui       $t0, %hi(main_BSS_START)
+/* 1004 80025C04 2508A5B0 */  addiu     $t0, $t0, %lo(main_BSS_START)
+/* 1008 80025C08 3C090004 */  lui       $t1, %hi(main_BSS_SIZE)
+/* 100C 80025C0C 25291F50 */  addiu     $t1, $t1, %lo(main_BSS_SIZE)
 .L80025C10:
 /* 1010 80025C10 AD000000 */  sw        $zero, ($t0)
 /* 1014 80025C14 AD000004 */  sw        $zero, 4($t0)
