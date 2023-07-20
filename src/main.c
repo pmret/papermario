@@ -70,6 +70,8 @@ SHIFT_BSS s32 D_800DA040;
 SHIFT_BSS s32 D_800B91D0[NU_GFX_RDP_OUTPUTBUFF_SIZE / sizeof(u32)];
 SHIFT_BSS u64 GfxTaskMgrStack[NU_GFX_TASKMGR_STACK_SIZE / sizeof(u64)];
 SHIFT_BSS u8 nuYieldBuf[0xC10];
+SHIFT_BSS OSMesg siAccessBuf[1];
+SHIFT_BSS OSMesgQueue __osSiAccessQueue;
 
 // exceptasm.s
 SHIFT_BSS s32 D_800B0D08;
