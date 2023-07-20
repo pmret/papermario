@@ -573,7 +573,6 @@ D_802F39D0 = 0x802f39d0;
 charset_postcard_png = 0x00054fa8;
 charset_postcard_pal + 5 = 0x00056e70;
 D_80159B50 = 0x8015bed0;
-icon_ROM_START = 0x00215390;
 gOverrideFlags = 0x80099228;
 D_801565A6 = 0x80158926;
 gHudElementCacheTableRaster = 0x8014fa58;

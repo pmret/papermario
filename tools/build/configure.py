@@ -859,7 +859,7 @@ class Configure:
                         "asset_stack": ",".join(self.asset_stack),
                         "header_path": header_path,
                     },)
-
+                
                 build(entry.object_path, [out_path / "icons.bin"], "bin")
 
             elif seg.type == "pm_map_data":
