@@ -23,7 +23,7 @@ BSS char D_8010CD14[0xA];
 BSS s32 D_8010CD20;
 BSS char D_8010CD24[0xC];
 
-extern s32 PartnerID_to_MenuIndex[];
+extern s32 MenuIndexFromPartnerID[];
 
 void func_800E6860(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
@@ -128,8 +128,8 @@ s32 setup_partner_popup(PopupMenu* menu) {
     s32 optionCount = 0;
     s32 i;
 
-    for (i = 1; i < ARRAY_COUNT(PartnerMenuIndex_to_ID); i++) {
-        s32 partnerID = PartnerMenuIndex_to_ID[i];
+    for (i = 1; i < ARRAY_COUNT(PartnerIDFromMenuIndex); i++) {
+        s32 partnerID = PartnerIDFromMenuIndex[i];
 
         if (playerData->partners[partnerID].enabled && partnerID != PARTNER_GOOMPA) {
             PartnerPopupProperties* properties = &gPartnerPopupProperties[partnerID];
@@ -251,7 +251,7 @@ block_17:
                             }
                             popup->numEntries = numEntries;
                             popup->popupType = POPUP_MENU_SWITCH_PARTNER;
-                            popup->initialPos = PartnerID_to_MenuIndex[playerData->currentPartner] - 1;
+                            popup->initialPos = MenuIndexFromPartnerID[playerData->currentPartner] - 1;
                             break;
                         }
                         return;
