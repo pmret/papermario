@@ -76,15 +76,15 @@ typedef struct TitleDataStruct {
 #define COPYRIGHT_WIDTH 144
 #endif
 
-extern s16 D_800A0970;
-extern TitleDataStruct* TitleScreen_ImgList;
-extern s32* TitleScreen_ImgList_Logo;
-extern u8 (*TitleScreen_ImgList_Copyright)[COPYRIGHT_WIDTH];
-extern s32* TitleScreen_ImgList_PressStart;
+SHIFT_BSS s16 D_800A0970;
+SHIFT_BSS TitleDataStruct* TitleScreen_ImgList;
+SHIFT_BSS s32* TitleScreen_ImgList_Logo;
+SHIFT_BSS u8 (*TitleScreen_ImgList_Copyright)[COPYRIGHT_WIDTH];
+SHIFT_BSS s32* TitleScreen_ImgList_PressStart;
 #if VERSION_JP
-extern s32* TitleScreen_ImgList_CopyrightPalette;
+SHIFT_BSS s32* TitleScreen_ImgList_CopyrightPalette;
 #endif
-extern s16 D_800A0988;
+SHIFT_BSS s16 D_800A0988;
 
 void appendGfx_title_screen(void);
 void draw_title_screen_NOP(void);

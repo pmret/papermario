@@ -18,9 +18,9 @@ s32 D_800778AC[] = {
     0x00000000, 0xFFFFFF00, 0xFFFFFF00, 0x00000000, 0x00000000
 };
 
-// BSS
-extern s32 D_800A0904;
-extern s32 D_800A0908;
+SHIFT_BSS s8 D_800A0900;
+SHIFT_BSS s32 D_800A0904;
+SHIFT_BSS s32 D_800A0908;
 
 #ifdef SHIFT
 #define shim_battle_heap_create_obfuscated battle_heap_create

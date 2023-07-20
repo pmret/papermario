@@ -5,6 +5,8 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
+#ifndef SHIFT
+
 .section .bss
 
 dlabel nuScPreNMIFlag
@@ -797,10 +799,7 @@ dlabel D_800B0CEC
 .space 4
 
 dlabel wMapTexName
-.space 4
-
-dlabel D_800B0CF4
-.space 0x00000014
+.space 0x18
 
 dlabel D_800B0D08
 .space 4
@@ -1080,3 +1079,5 @@ dlabel D_800DC4F8
 
 dlabel gCurrentBattlePtr
 .space 4
+
+#endif

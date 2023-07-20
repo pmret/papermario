@@ -29,27 +29,27 @@ extern HudCacheEntry* gHudElementCacheTablePalette;
 extern u8* gHudElementCacheBuffer;
 extern s32* gHudElementCacheSize;
 
-extern s32 ItemEntitiesCreated;
-extern s32 D_80155D80;
-extern s32 ItemEntityAlternatingSpawn;
-extern s32 ItemEntityRenderGroup;
-extern s16 D_80155D8C;
-extern s16 D_80155D8E;
-extern s16 D_80155D90;
-extern ItemEntity* WorldItemEntities[MAX_ITEM_ENTITIES];
-extern ItemEntity* BattleItemEntities[MAX_ITEM_ENTITIES];
-extern ItemEntity** gCurrentItemEntities;
-extern s16 isPickingUpItem;
-extern s16 D_801565A6;
-extern s16 D_801565A8; // some hack relating to kooper item pickups
-extern PopupMenu D_801565B0;
-extern s32 ItemPickupIconID;
-extern s32 ItemPickupStateDelay;
-extern s32 D_801568E8;
-extern s32 D_801568EC;
-extern EffectInstance* ItemPickupGotOutline;
-extern MessagePrintState* GotItemTutorialPrinter;
-extern b32 GotItemTutorialClosed;
+SHIFT_BSS s32 ItemEntitiesCreated;
+SHIFT_BSS s32 D_80155D80;
+SHIFT_BSS s32 ItemEntityAlternatingSpawn;
+SHIFT_BSS s32 ItemEntityRenderGroup;
+SHIFT_BSS s16 D_80155D8C;
+SHIFT_BSS s16 D_80155D8E;
+SHIFT_BSS s16 D_80155D90;
+SHIFT_BSS ItemEntity* WorldItemEntities[MAX_ITEM_ENTITIES];
+SHIFT_BSS ItemEntity* BattleItemEntities[MAX_ITEM_ENTITIES];
+SHIFT_BSS ItemEntity** gCurrentItemEntities;
+SHIFT_BSS s16 isPickingUpItem;
+SHIFT_BSS s16 D_801565A6;
+SHIFT_BSS s16 D_801565A8; // some hack relating to kooper item pickups
+SHIFT_BSS PopupMenu D_801565B0;
+SHIFT_BSS s32 ItemPickupIconID;
+SHIFT_BSS s32 ItemPickupStateDelay;
+SHIFT_BSS s32 D_801568E8;
+SHIFT_BSS s32 D_801568EC;
+SHIFT_BSS EffectInstance* ItemPickupGotOutline;
+SHIFT_BSS MessagePrintState* GotItemTutorialPrinter;
+SHIFT_BSS b32 GotItemTutorialClosed;
 
 void item_entity_update(ItemEntity*);
 void appendGfx_item_entity(void*);

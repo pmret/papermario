@@ -5,8 +5,10 @@
 
 NOP_FIX
 
-extern u64 nuMainStack[NU_SC_STACK_SIZE / sizeof(u64)];
-extern u64 IdleStack[NU_SC_STACK_SIZE / sizeof(u64)];
+SHIFT_BSS u64 nuMainStack[NU_SC_STACK_SIZE / sizeof(u64)];
+SHIFT_BSS u64 IdleStack[NU_SC_STACK_SIZE / sizeof(u64)];
+SHIFT_BSS OSThread IdleThread; // idle thread, id 1
+SHIFT_BSS OSThread MainThread; // id 3
 
 void nuBoot(void) {
     osInitialize();

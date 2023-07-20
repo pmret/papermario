@@ -2,7 +2,19 @@
 #include "hud_element.h"
 #include "sprite.h"
 
-extern s32 D_800A0950;
+SHIFT_BSS s32 D_800A0950;
+SHIFT_BSS s16 D_800A0954;
+SHIFT_BSS s16 D_800A0956;
+SHIFT_BSS s16 D_800A0958;
+SHIFT_BSS s16 D_800A095A;
+SHIFT_BSS u8 D_800A095B; // todo doesn't fit
+SHIFT_BSS s16 D_800A095C;
+SHIFT_BSS u8 D_800A095D; // todo doesn't fit
+SHIFT_BSS s16 D_800A095E;
+SHIFT_BSS u8 D_800A095F; // todo doesn't fit
+SHIFT_BSS s32 D_800A0960;
+SHIFT_BSS u8 D_800A0963; // todo doesn't fit
+SHIFT_BSS s32 D_800A0964;
 
 void state_init_intro(void) {
     s8 unk_A8;

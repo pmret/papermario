@@ -5,6 +5,7 @@
 #include "entity.h"
 #include "model.h"
 
+
 extern Gfx Entity_YellowBlock_Render[];
 extern Gfx Entity_RedBlock_Render[];
 extern AnimScript Entity_HitYellowBlock_AnimationHit;
@@ -14,6 +15,8 @@ extern AnimScript Entity_HitFloatingYellowBlock_AnimationIdle;
 extern StaticAnimatorNode* Entity_HitFloatingYellowBlock_Mesh[];
 extern AnimScript Entity_HitRedBlock_AnimationHit;
 extern StaticAnimatorNode* Entity_HitRedBlock_Mesh[];
+
+extern s32 D_802EA310[];
 
 extern EntityBlueprint Entity_HitGroundedYellowBlock;
 extern EntityBlueprint Entity_HitFloatingYellowBlock;

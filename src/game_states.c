@@ -1,6 +1,6 @@
 #include "common.h"
 
-extern GameMode gMainGameState[2]; // TODO rename
+SHIFT_BSS GameMode gMainGameState[2]; // TODO rename
 
 void state_delegate_NOP(void) {
 }

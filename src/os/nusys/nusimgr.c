@@ -5,7 +5,6 @@ NUCallBackList* nuSiCallBackList = NULL;
 
 extern OSMesg nuSiMesgBuf[8];
 extern OSThread siMgrThread;
-extern s32 D_800A08C0;
 
 static void nuSiMgrThread(void* arg);
 

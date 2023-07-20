@@ -5,6 +5,12 @@
 #include "sprite.h"
 #include "world/partners.h"
 
+SHIFT_BSS s16 gNpcCount;
+SHIFT_BSS NpcList gWorldNpcList;
+SHIFT_BSS NpcList gBattleNpcList;
+SHIFT_BSS NpcList* gCurrentNpcListPtr;
+SHIFT_BSS b8 gNpcPlayerCollisionsEnabled;
+
 u8 D_80077BF0[] = {
     1, 2,
     0, 52,

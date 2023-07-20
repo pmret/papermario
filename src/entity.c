@@ -29,25 +29,36 @@ extern Addr WorldEntityHeapBase;
 
 s32 D_8014AFB0 = 255;
 
-// BSS
-extern s32 D_801516FC;
-extern s32 D_801512BC;
-extern s32 D_80151304;
-extern s32 D_80151344;
-extern s32 entity_numEntities;
-extern s32 gEntityHeapBase;
-extern s32 gLastCreatedEntityIndex;
+SHIFT_BSS s32 CreateEntityVarArgBuffer[4];
+SHIFT_BSS HiddenPanelsData gCurrentHiddenPanels;
+SHIFT_BSS s32 gEntityHideMode;
 
-extern s32 gEntityHeapBottom;
-extern s32 entity_numShadows;
-extern s32 isAreaSpecificEntityDataLoaded;
-extern s32 entity_updateCounter;
+SHIFT_BSS s32 D_801516FC;
+SHIFT_BSS s32 D_801512BC;
+SHIFT_BSS s32 D_80151304;
+SHIFT_BSS s32 D_80151344;
+SHIFT_BSS s32 entity_numEntities;
+SHIFT_BSS s32 gEntityHeapBase;
+SHIFT_BSS s32 gLastCreatedEntityIndex;
 
-extern s32 wEntityDataLoadedSize;
-extern s32 bEntityDataLoadedSize;
+SHIFT_BSS s32 gEntityHeapBottom;
+SHIFT_BSS s32 entity_numShadows;
+SHIFT_BSS s32 isAreaSpecificEntityDataLoaded;
+SHIFT_BSS s32 entity_updateCounter;
 
-extern EntityBlueprint* wEntityBlueprint[30];
-extern EntityBlueprint* bEntityBlueprint[4];
+SHIFT_BSS s32 wEntityDataLoadedSize;
+SHIFT_BSS s32 bEntityDataLoadedSize;
+
+SHIFT_BSS EntityBlueprint* wEntityBlueprint[30];
+SHIFT_BSS EntityBlueprint* bEntityBlueprint[4];
+
+SHIFT_BSS EntityList gWorldEntityList;
+SHIFT_BSS EntityList gBattleEntityList;
+SHIFT_BSS EntityList* gCurrentEntityListPtr;
+
+SHIFT_BSS ShadowList gWorldShadowList;
+SHIFT_BSS ShadowList gBattleShadowList;
+SHIFT_BSS ShadowList* gCurrentShadowListPtr;
 
 extern Addr BattleEntityHeapBottom; // todo ???
 

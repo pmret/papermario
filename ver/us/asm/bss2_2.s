@@ -5,6 +5,8 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
+#ifndef SHIFT
+
 .section .bss
 
 dlabel wPartnerTetherDistance
@@ -59,10 +61,10 @@ dlabel D_8010CFF8
 .space 8
 
 dlabel D_8010D000
-.space 4
-
-dlabel D_8010D004
 .space 0x63C
+
+dlabel D_8010D63C
+.space 0x4
 
 dlabel gPopupState
 .space 4
@@ -219,3 +221,5 @@ dlabel gPlayerData
 
 dlabel gSpinHistoryPosAngle
 .space 0x10
+
+#endif

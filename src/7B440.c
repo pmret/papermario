@@ -1,5 +1,15 @@
 #include "common.h"
 
+SHIFT_BSS s32 PeachDisguiseNpcIndex;
+SHIFT_BSS Entity* TweesterTouchingPartner;
+SHIFT_BSS Entity* TweesterTouchingPlayer;
+SHIFT_BSS s32 PrevPlayerDirection;
+SHIFT_BSS s32 D_8010C980;
+SHIFT_BSS f32 D_8010C938;
+SHIFT_BSS f32 D_8010C990;
+SHIFT_BSS PlayerSpinState gPlayerSpinState;
+SHIFT_BSS s32 D_8010C9A0;
+
 void update_player_input(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 inputBufPos = playerStatus->inputBufPos;

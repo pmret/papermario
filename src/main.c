@@ -1,6 +1,86 @@
 #include "common.h"
 #include "nu/nusys.h"
 
+//
+// Start of libultra BSS
+//
+
+#include "PR/controller.h"
+#include "PR/osint.h"
+SHIFT_BSS OSPifRam __osEepPifRam;
+SHIFT_BSS OSPifRam __osPfsPifRam;
+SHIFT_BSS __OSEventState __osEventStateTab[OS_NUM_EVENTS];
+SHIFT_BSS u32 __osFinalrom;
+SHIFT_BSS __OSInode __osPfsInodeCache;
+SHIFT_BSS OSPifRam __MotorDataBuf[MAXCONTROLLERS];
+SHIFT_BSS u16 retrace;
+SHIFT_BSS OSThread viThread;
+SHIFT_BSS unsigned char viThreadStack[OS_VIM_STACKSIZE] ALIGNED(16);
+SHIFT_BSS OSMesgQueue viEventQueue;
+SHIFT_BSS OSMesg viEventBuf[5] ALIGNED(8);
+SHIFT_BSS OSIoMesg viRetraceMsg ALIGNED(8);
+SHIFT_BSS OSIoMesg viCounterMsg ALIGNED(8);
+SHIFT_BSS OSTask tmp_task;
+SHIFT_BSS OSMesg piAccessBuf[1];
+SHIFT_BSS OSMesgQueue __osPiAccessQueue;
+SHIFT_BSS OSThread piThread;
+SHIFT_BSS char piThreadStack[OS_PIM_STACKSIZE];
+SHIFT_BSS OSMesgQueue piEventQueue;
+SHIFT_BSS OSMesg piEventBuf[1];
+SHIFT_BSS OSContStatus nuContStatus[5]; // ??? enough space for 5, but it makes no sense
+SHIFT_BSS OSMesgQueue nuSiMesgQ;
+SHIFT_BSS u32 nuContDataLockKey;
+SHIFT_BSS OSMesg nuContWaitMesgBuf;
+SHIFT_BSS OSMesg nuContDataMutexBuf;
+SHIFT_BSS OSMesgQueue nuContDataMutexQ;
+SHIFT_BSS OSMesgQueue nuContWaitMesgQ;
+SHIFT_BSS OSContPad nuContData[3]; // 0x8 each, size 0x18 ???
+SHIFT_BSS u32 nuContNum;
+SHIFT_BSS volatile u32 nuGfxTaskSpool;
+SHIFT_BSS OSMesgQueue nuGfxMesgQ;
+SHIFT_BSS s32 GfxStack[NU_GFX_STACK_SIZE / 4];
+SHIFT_BSS OSThread D_800B1B90;
+SHIFT_BSS OSMesg nuGfxMesgBuf[NU_GFX_MESGS];
+SHIFT_BSS OSPiHandle* nuPiCartHandle;
+SHIFT_BSS NUContRmbCtl nuContRmbCtl[4];
+SHIFT_BSS OSPfs nuContPfs[4];
+SHIFT_BSS NUUcode* nuGfxUcode;
+SHIFT_BSS OSMesgQueue D_800AC5D0;
+SHIFT_BSS OSMesg D_800AC5E8[NU_PI_MESG_NUM];
+SHIFT_BSS u32 nuGfxDisplay;
+SHIFT_BSS u32 nuGfxCfbCounter;
+SHIFT_BSS NUSched nusched;
+SHIFT_BSS u8 nuScPreNMIFlag;
+SHIFT_BSS u64 nuScStack[NU_SC_STACK_SIZE / sizeof(u64)];
+SHIFT_BSS u64 nuScAudioStack[NU_SC_STACK_SIZE / sizeof(u64)];
+SHIFT_BSS u64 nuScGraphicsStack[NU_SC_STACK_SIZE / sizeof(u64)];
+SHIFT_BSS NUIdleFunc nuIdleFunc;
+SHIFT_BSS OSMesgQueue nuSiMgrMesgQ;
+SHIFT_BSS OSMesg nuSiMesgBuf[8];
+SHIFT_BSS OSThread siMgrThread;
+SHIFT_BSS u64 siMgrStack[NU_SI_STACK_SIZE/sizeof(u64)];
+SHIFT_BSS OSMesg D_8009E6D0[NU_GFX_TASKMGR_MESGS];
+SHIFT_BSS OSMesgQueue D_800DAC90;
+SHIFT_BSS NUScTask* nuGfxTask_ptr;
+SHIFT_BSS s16 taskDoneMsg;
+SHIFT_BSS s16 swapBufMsg;
+SHIFT_BSS OSThread GfxTaskMgrThread;
+SHIFT_BSS NUScTask nuGfxTask[NU_GFX_TASK_NUM];
+SHIFT_BSS s32 D_800DA040;
+SHIFT_BSS s32 D_800B91D0[NU_GFX_RDP_OUTPUTBUFF_SIZE / sizeof(u32)];
+SHIFT_BSS u64 GfxTaskMgrStack[NU_GFX_TASKMGR_STACK_SIZE / sizeof(u64)];
+SHIFT_BSS u8 nuYieldBuf[0xC10];
+
+// exceptasm.s
+SHIFT_BSS s32 D_800B0D08;
+
+// boot.s
+SHIFT_BSS u8 nuBootStack[0x2000];
+
+//
+// End of libultra BSS
+//
+
 s16 D_80074010 = 8; // might be an array, could be size 1-8
 
 void gfxRetrace_Callback(s32);
@@ -18,12 +98,14 @@ extern u16* D_80073E04;
 extern s16 D_80073E08;
 extern s16 D_80073E0A;
 extern s32 D_80073E10[];
-extern u16* D_8009A680;
 
 #ifdef SHIFT
 #define shim_create_audio_system_obfuscated create_audio_system
 #define shim_load_engine_data_obfuscated load_engine_data
 #endif
+
+SHIFT_BSS u16* D_8009A680;
+SHIFT_BSS u16* nuGfxZBuffer;
 
 void boot_main(void* data) {
 #if VERSION_JP

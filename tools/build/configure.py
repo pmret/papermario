@@ -75,7 +75,7 @@ def write_ninja_rules(
 
     CPPFLAGS = "-w " + CPPFLAGS_COMMON + " -nostdinc"
 
-    cflags = f"-c -G0 -O2 -gdwarf-2 -x c -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags}"
+    cflags = f"-c -G0 -O2 -gdwarf-2 -x c -B {BUILD_TOOLS}/cc/gcc/ {extra_cflags} -Wno-redundant-decls"
 
     cflags_modern = f"-c -G0 -O2 -gdwarf-2 -fno-builtin-bcopy -fno-tree-loop-distribute-patterns -funsigned-char -mgp32 -mfp32 -mabi=32 -mfix4300 -march=vr4300 -mno-gpopt -fno-toplevel-reorder -mno-abicalls -fno-pic -fno-exceptions -fno-stack-protector -fno-zero-initialized-in-bss -Wno-builtin-declaration-mismatch -x c {extra_cflags}"
 
@@ -195,7 +195,7 @@ def write_ninja_rules(
     ninja.rule(
         "as",
         description="as $in",
-        command=f"{cross}as -EB -march=vr4300 -mtune=vr4300 -Iinclude $in -o $out",
+        command=f"{cpp} {CPPFLAGS} {extra_cppflags} $cppflags $in -o  - | {cross}as -EB -march=vr4300 -mtune=vr4300 -Iinclude -o $out",
     )
 
     ninja.rule(
@@ -618,7 +618,7 @@ class Configure:
                     )
                 # Not dead cod
                 else:
-                    if seg.get_most_parent().name not in ["main", "engine1", "engine2"]:
+                    if non_matching or seg.get_most_parent().name not in ["main", "engine1", "engine2"]:
                         cflags += " -fno-common"
                     build(
                         entry.object_path,

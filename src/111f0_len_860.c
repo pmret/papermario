@@ -1,6 +1,12 @@
 #include "common.h"
 #include "nu/nusys.h"
 
+SHIFT_BSS s16 gMapTransitionAlpha;
+SHIFT_BSS s16 gMapTransitionFadeRate;
+SHIFT_BSS s16 gMapTransitionState;
+SHIFT_BSS s16 gMapTransitionStateTime;
+SHIFT_BSS s16 gLoadedFromFileSelect;
+
 void set_map_change_fade_rate(s16 fadeRate) {
     gMapTransitionFadeRate = fadeRate;
 }

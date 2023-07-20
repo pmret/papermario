@@ -2666,7 +2666,6 @@ PartnerDMAData bPartnerDmaTable[] = {
     BATTLE_PARTNER_ENTRY(twink, 30),
 };
 
-// BSS
 BSS PopupMessage popupMessages[32];
 BSS s16 D_8029F640;
 BSS s16 D_8029F642;

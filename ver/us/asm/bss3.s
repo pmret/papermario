@@ -5,6 +5,8 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
+#ifndef SHIFT
+
 .section .bss
 
 dlabel gAuxSpriteShadingProfile
@@ -410,16 +412,7 @@ dlabel D_80154387
 .space 1
 
 dlabel entity_fog_alpha
-.space 1
-
-dlabel D_80154389
-.space 1
-
-dlabel D_8015438A
-.space 1
-
-dlabel D_8015438B
-.space 1
+.space 4
 
 dlabel entity_fog_dist_min
 .space 4
@@ -725,7 +718,12 @@ dlabel CreateEntityVarArgBuffer
 .space 0x00000010
 
 dlabel D_8015C7E0
-.space 0x7820
+.space 0x20
+
+dlabel D_8015C800
+.space 0x7800
 
 dlabel D_80164000
 .space 0x32C60
+
+#endif

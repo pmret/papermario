@@ -113,16 +113,16 @@ typedef ImgFXState ImgFXInstanceList[MAX_IMGFX_INSTANCES];
 
 extern HeapNode heap_spriteHead;
 
-// BSS
-extern ImgFXWorkingTexture ImgFXCurrentTexture;
-extern Vtx* ImgFXVtxBuffers[2];
-extern Vtx* imgfx_vtxBuf;
-extern ImgFXInstanceList* ImgFXInstances;
-extern s8 D_80156958[2];
-extern s32 D_80156960[2];
-extern s32 D_80156968[2];
-extern s8 D_80156970;
-extern ImgFXAnimHeader ImgFXAnimHeaders[4];
+SHIFT_BSS ImgFXWorkingTexture ImgFXCurrentTexture;
+SHIFT_BSS Vtx* ImgFXVtxBuffers[2];
+SHIFT_BSS Vtx* imgfx_vtxBuf;
+SHIFT_BSS ImgFXInstanceList* ImgFXInstances;
+SHIFT_BSS s8 D_80156958[2];
+SHIFT_BSS s32 D_80156960[2];
+SHIFT_BSS s32 D_80156968[2];
+SHIFT_BSS s8 D_80156970;
+SHIFT_BSS ImgFXAnimHeader ImgFXAnimHeaders[4];
+SHIFT_BSS ImgFXCacheEntry ImgFXDataCache[8];
 
 // Data
 ImgFXWorkingTexture* ImgFXCurrentTexturePtr = &ImgFXCurrentTexture;
@@ -222,8 +222,6 @@ u8* ImgFXAnimOffsets[] = {
     [IMGFX_ANIM_FLIP_CARD_3]           flip_card_3_header,
     [IMGFX_ANIM_CYMBAL_CRUSH]          cymbal_crush_header,
 };
-
-extern ImgFXCacheEntry ImgFXDataCache[8];
 
 void imgfx_cache_instance_data(ImgFXState* state);
 void imgfx_clear_instance_data(ImgFXState* state);

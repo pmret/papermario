@@ -92,8 +92,7 @@ GameMode* gameModeMap[] = {
     NULL,
 };
 
-// BSS
-extern s16 gameMode;
+SHIFT_BSS s16 gameMode;
 
 GameMode* set_game_mode_slot(s32 i, GameMode* mode);
 

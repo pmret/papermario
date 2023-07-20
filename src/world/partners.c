@@ -41,25 +41,27 @@
 
 extern s32 D_8010CD20;
 
-// BSS
+SHIFT_BSS PartnerStatus gPartnerStatus;
+SHIFT_BSS Npc* wPartnerNpc;
+
 BSS s32 PartnerCommandState;
 BSS PlayerPathElement gPlayerMoveHistory[40];
 BSS s32 gPlayerMoveHistoryIndex;
 BSS s32 D_8010CFBC;
-extern f32 wPartnerTetherDistance;
-extern s32 D_8010CFC4;
-extern s16 wPartnerFollowState;
-extern s16 D_8010CFCA;
-extern s16 D_8010CFCC;
-extern s16 D_8010CFCE;
-extern s32 wPartnerNpcIndex;
-extern Evt* wPartnerCurrentScript;
-extern s32 wCurrentPartnerId;
-extern s32 wPartnerCurrentScriptID;
-extern s32 D_8010CFE0;
-extern s32 NextPartnerID;
-extern s32 NextPartnerCommand;
-extern WorldPartner* wPartner;
+SHIFT_BSS f32 wPartnerTetherDistance;
+SHIFT_BSS s32 D_8010CFC4;
+SHIFT_BSS s16 wPartnerFollowState;
+SHIFT_BSS s16 D_8010CFCA;
+SHIFT_BSS s16 D_8010CFCC;
+SHIFT_BSS s16 D_8010CFCE;
+SHIFT_BSS s32 wPartnerNpcIndex;
+SHIFT_BSS Evt* wPartnerCurrentScript;
+SHIFT_BSS s32 wCurrentPartnerId;
+SHIFT_BSS s32 wPartnerCurrentScriptID;
+SHIFT_BSS s32 D_8010CFE0;
+SHIFT_BSS s32 NextPartnerID;
+SHIFT_BSS s32 NextPartnerCommand;
+SHIFT_BSS WorldPartner* wPartner;
 
 extern HudScript HES_Partner0;
 extern HudScript HES_Goombario;
