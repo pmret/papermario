@@ -374,28 +374,16 @@ dlabel D_800A0958
 .space 2
 
 dlabel D_800A095A
-.space 1
-
-dlabel D_800A095B
-.space 1
+.space 2
 
 dlabel D_800A095C
-.space 1
-
-dlabel D_800A095D
-.space 1
+.space 2
 
 dlabel D_800A095E
-.space 1
-
-dlabel D_800A095F
-.space 1
+.space 2
 
 dlabel D_800A0960
-.space 0x00000003
-
-dlabel D_800A0963
-.space 1
+.space 0x00000004
 
 dlabel D_800A0964
 .space 4
