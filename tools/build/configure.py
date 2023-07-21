@@ -260,7 +260,7 @@ def write_ninja_rules(
 
     ninja.rule(
         "icons",
-        command=f"$python {BUILD_TOOLS}/pm_icons.py $out $asset_stack $header_path $in",
+        command=f"$python {BUILD_TOOLS}/pm_icons.py $out $list_path $header_path $asset_stack",
     )
 
     ninja.rule(
@@ -846,22 +846,21 @@ class Configure:
                 build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
             
             elif seg.type == "pm_icons":
-                out_path = entry.object_path.with_suffix("")
-                src_path = entry.src_paths[0]
+                # make icons.bin
                 header_path = str(self.build_path() / "include" / "icon_offsets.h")
-
                 build(
-                    out_path,
-                    [src_path],
+                    entry.object_path.with_suffix(""),
+                    entry.src_paths,
                     "icons",
                     variables={
-                        "asset_stack": ",".join(self.asset_stack),
+                        "list_path": entry.src_paths[0],
                         "header_path": header_path,
+                        "asset_stack": ",".join(self.asset_stack),
                     },
                     implicit_outputs=[header_path],
                     asset_deps=["icon"],
                 )
-                # make .bin.o
+                # make icons.bin.o
                 build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
 
             elif seg.type == "pm_map_data":
