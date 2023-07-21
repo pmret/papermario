@@ -1086,7 +1086,7 @@ SHIFT_BSS ModelNode** gCurrentModelTreeRoot;
 SHIFT_BSS ModelTransformGroupList* gCurrentTransformGroups;
 SHIFT_BSS ModelCustomGfxList* gCurrentCustomModelGfxPtr;
 
-SHIFT_BSS TextureHeader gCurrentTextureHeader;
+SHIFT_BSS TextureHeader gCurrentTextureHeader ALIGNED(16);
 
 SHIFT_BSS ModelList wModelList;
 SHIFT_BSS ModelList bModelList;
