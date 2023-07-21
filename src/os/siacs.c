@@ -1,5 +1,4 @@
 #include <PR/os_internal.h>
-#include "macros.h"
 
 #define SI_Q_BUF_LEN 1
 u32 __osSiAccessQueueEnabled = 0;

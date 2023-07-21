@@ -329,9 +329,15 @@ Mtx gBoxMatrix = RDP_MATRIX(
     0.000000, 0.000000, 0.000000,  0.000000
 );
 
+// @bug there's an issue with the way the "quads" temp below is used, sometimes going out of bounds.
+// In vanilla, this results in some data being written to an unused struct field inside gPartnerStatus, which doesn't
+// cause any issues. In shiftable builds, there's no telling where quads might be, so we make some adjustments to
+// prevent the overflow
 s32 draw_box(s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s32 width, s32 height, u8 opacity,
-              u8 darkening, f32 scaleX, f32 scaleY, f32 rotX, f32 rotY, f32 rotZ, void (*fpDrawContents)(s32, s32, s32, s32, s32, s32, s32),
-              void* drawContentsArg0, Matrix4f rotScaleMtx, s32 translateX, s32 translateY, Matrix4f outMtx) {
+              u8 darkening, f32 scaleX, f32 scaleY, f32 rotX, f32 rotY, f32 rotZ,
+              void (*fpDrawContents)(s32, s32, s32, s32, s32, s32, s32), void* drawContentsArg0, Matrix4f rotScaleMtx,
+              s32 translateX, s32 translateY, Matrix4f outMtx)
+{
     Matrix4f mtx1, mtx2, mtx3;
     u8 primR, primG, primB, primA, envR, envG, envB, envA;
     DefaultWindowStyle* defaultStyle = NULL;

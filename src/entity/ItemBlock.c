@@ -5,7 +5,6 @@
 #include "entity.h"
 #include "model.h"
 
-
 extern Gfx Entity_YellowBlock_Render[];
 extern Gfx Entity_RedBlock_Render[];
 extern AnimScript Entity_HitYellowBlock_AnimationHit;

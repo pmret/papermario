@@ -16,7 +16,7 @@ extern NUScTask nuGfxTask[NU_GFX_TASK_NUM];
 extern s32 D_800DA040;
 extern s32 D_800B91D0[NU_GFX_RDP_OUTPUTBUFF_SIZE / sizeof(u32)];
 extern u64 GfxTaskMgrStack[NU_GFX_TASKMGR_STACK_SIZE / sizeof(u64)];
-extern u8 rspbootUcodeBuffer[0x100];
+extern u8 rspbootUcodeBuffer[];
 
 void nuGfxTaskMgr(void* data) {
     NUScTask* task;
