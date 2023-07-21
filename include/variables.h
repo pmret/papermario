@@ -106,7 +106,7 @@ extern EvtScript EVS_NpcDefeat;
 extern EvtScript ShakeCam1;
 extern EvtScript ShakeCamX;
 
-extern MusicSettings gMusicSettings[4];
+extern MusicSettings gMusicSettings[2];
 
 // gfx
 extern DisplayContext* gDisplayContext;

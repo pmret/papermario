@@ -553,16 +553,7 @@ dlabel D_800A3FF4
 .space 0x0000000c
 
 dlabel gEffectGraphicsData
-.space 0x000001b4
-
-dlabel D_800A41B4
-.space 0x0000000c
-
-dlabel D_800A41C0
-.space 4
-
-dlabel D_800A41C4
-.space 0x0000001c
+.space 0x000001E0
 
 dlabel gMapConfig
 .space 4
@@ -571,10 +562,9 @@ dlabel D_800A41E4
 .space 4
 
 dlabel gMapSettings
-.space 4
+.space 0x40
 
-dlabel D_800A41EC
-.space 0x00000044
+.space 8
 
 dlabel gCollisionRayStartX
 .space 4

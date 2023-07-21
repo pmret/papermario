@@ -40,10 +40,7 @@ dlabel gAnimCount
 .space 4
 
 dlabel gMsgBGScrollAmtX
-.space 2
-
-dlabel D_801512DA
-.space 2
+.space 4
 
 dlabel D_801512DC
 .space 4
