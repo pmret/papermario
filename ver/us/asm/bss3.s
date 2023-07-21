@@ -162,7 +162,6 @@ dlabel D_80151664
 dlabel wEntityBlueprint
 .space 0x00000078
 
-dlabel D_8015DCE0
 .space 8
 
 dlabel bEntityBlueprint
@@ -367,40 +366,13 @@ dlabel entity_fog_enabled
 .space 4
 
 dlabel entity_fog_red
-.space 1
-
-dlabel D_8015437D
-.space 1
-
-dlabel D_8015437E
-.space 1
-
-dlabel D_8015437F
-.space 1
+.space 4
 
 dlabel entity_fog_green
-.space 1
-
-dlabel D_80154381
-.space 1
-
-dlabel D_80154382
-.space 1
-
-dlabel D_80154383
-.space 1
+.space 4
 
 dlabel entity_fog_blue
-.space 1
-
-dlabel D_80154385
-.space 1
-
-dlabel D_80154386
-.space 1
-
-dlabel D_80154387
-.space 1
+.space 4
 
 dlabel entity_fog_alpha
 .space 4
@@ -622,10 +594,7 @@ dlabel D_80159394
 .space 0x0000000c
 
 dlabel gBackgroundPalette
-.space 0x000001fe
-
-dlabel D_8015959E
-.space 2
+.space 0x00000200
 
 dlabel gBackroundLastScrollValue
 .space 0x00000020
@@ -688,13 +657,9 @@ dlabel gCollisionStatus
 .space 0x00000028
 
 dlabel gCurrentHiddenPanels
-.space 2
+.space 0x10
 
-dlabel D_8015A57A
-.space 2
-
-dlabel D_8015A57C
-.space 0x00000014
+.space 8
 
 dlabel mdl_textureHandles
 .space 0x00002200

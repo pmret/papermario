@@ -810,7 +810,7 @@ void clear_entity_data(s32 arg0) {
         }
     } else {
         bEntityDataLoadedSize = 0;
-        for (i = 0; i < 4; i++) {
+        for (i = 0; i < ARRAY_COUNT(bEntityBlueprint); i++) {
             bEntityBlueprint[i] = NULL;
         }
     }
@@ -843,7 +843,7 @@ void init_entity_data(void) {
     } else {
         s32 i;
 
-        for (i = 0; i < 4; i++) {
+        for (i = 0; i < ARRAY_COUNT(bEntityBlueprint); i++) {
             bEntityBlueprint[i] = 0;
         }
         gEntityHeapBottom = (s32) BattleEntityHeapBottom;

@@ -183,7 +183,7 @@ void clear_effect_data(void) {
     }
 
     for (i = 0; i < ARRAY_COUNT(gEffectInstances); i++) {
-        gEffectInstances[i] = 0;
+        gEffectInstances[i] = NULL;
     }
 
     osUnmapTLBAll();

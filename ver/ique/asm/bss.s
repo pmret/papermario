@@ -730,10 +730,7 @@ dlabel piAccessBuf
 .space 0x20
 
 dlabel wMapTexName
-.space 4
-
-dlabel D_800B0CF4
-.space 0x00000014
+.space 0x18
 
 dlabel __osThreadSave
 .space 0x1b0

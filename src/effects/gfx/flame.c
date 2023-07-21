@@ -5,8 +5,8 @@
 #include "effects/gfx/D_09000400_353FB0.png.inc.c"
 #include "effects/gfx/D_09000600_3541B0.png.inc.c"
 
-SHIFT_BSS unsigned char D_800B32E0[0x800];
-SHIFT_BSS unsigned char D_800B3AE0[0x800];
+extern unsigned char D_800B32E0[0x800];
+extern unsigned char D_800B3AE0[0x800];
 
 //#include "effects/gfx/D_09000800_3543B0.gfx.inc.c"
 #include "common.h"

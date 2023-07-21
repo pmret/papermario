@@ -89,6 +89,10 @@ SHIFT_BSS s32 __osFlashVersion;
 // End of libultra BSS
 //
 
+// used in effects/gfx/flame.c
+SHIFT_BSS unsigned char D_800B32E0[0x800] ALIGNED(16);
+SHIFT_BSS unsigned char D_800B3AE0[0x800] ALIGNED(16);
+
 s16 D_80074010 = 8; // might be an array, could be size 1-8
 
 void gfxRetrace_Callback(s32);

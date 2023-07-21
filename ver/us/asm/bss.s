@@ -708,28 +708,16 @@ dlabel __MotorDataBuf
 .space 0x100
 
 dlabel __osFlashID
-.space 4
-
-dlabel D_800B0C34
-.space 0x0000000c
+.space 0x10
 
 dlabel __osFlashMsg
-.space 4
-
-dlabel D_800B0C44
-.space 0x00000014
+.space 0x18
 
 dlabel __osFlashMessageQ
-.space 4
-
-dlabel D_800B0C5C
-.space 0x00000014
+.space 0x18
 
 dlabel __osFlashHandler
-.space 4
-
-dlabel D_800B0C74
-.space 0x00000070
+.space 0x74
 
 dlabel __osFlashMsgBuf
 .space 4
@@ -750,16 +738,7 @@ dlabel nuContWaitMesgQ
 .space 0x18
 
 dlabel __osContPifRam
-.space 4
-
-dlabel D_800B0ED4
-.space 0x00000034
-
-dlabel D_800B0F08
-.space 4
-
-dlabel D_800B0F0C
-.space 4
+.space 0x40
 
 dlabel gCurrentEncounter
 .space 0x00000bf8
@@ -807,10 +786,7 @@ dlabel D_800B3AE0
 .space 0x800
 
 dlabel gCollisionData
-.space 4
-
-dlabel D_800B42E4
-.space 0x0000000c
+.space 0x10
 
 dlabel nuGfxMesgQ
 .space 0x18
@@ -846,10 +822,7 @@ dlabel D_800B431C
 .space 0x00000064
 
 dlabel __osPiAccessQueue
-.space 4
-
-dlabel D_800B4384
-.space 0x00000014
+.space 0x18
 
 dlabel gEffectInstances
 .space 0x00000180
@@ -930,10 +903,7 @@ dlabel __osEventStateTab
 .space 0x00000080
 
 dlabel __osPfsPifRam
-.space 0x0000003c
-
-dlabel D_800DA03C
-.space 4
+.space 0x00000040
 
 dlabel D_800DA040
 .space 0x00000400
