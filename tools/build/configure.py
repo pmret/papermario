@@ -846,21 +846,23 @@ class Configure:
                 build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
             
             elif seg.type == "pm_icons":
-                out_path = entry.object_path.with_suffix("") / "icon"
+                out_path = entry.object_path.with_suffix("")
                 src_path = entry.src_paths[0]
-                header_path = str(self.build_path() / "include/icon_offsets.h")
+                header_path = str(self.build_path() / "include" / "icon_offsets.h")
 
                 build(
-                    out_path / "icons.bin",
+                    out_path,
                     [src_path],
                     "icons",
-                    implicit_outputs=[header_path],
                     variables={
                         "asset_stack": ",".join(self.asset_stack),
                         "header_path": header_path,
-                    },)
-                
-                build(entry.object_path, [out_path / "icons.bin"], "bin")
+                    },
+                    implicit_outputs=[header_path],
+                #    asset_deps=["icon"],
+                )
+                # make .bin.o
+                build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
 
             elif seg.type == "pm_map_data":
                 # flat list of (uncompressed path, compressed? path) pairs
