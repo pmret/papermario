@@ -622,7 +622,9 @@ s32 draw_box(s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s
                             quads[7].v.tc[0] = width * 32;
                             quads[7].v.tc[1] = (height / 2) * 32;
 
+#ifndef SHIFT
                             quads += 4;
+#endif
                             break;
                         case 2:
                             quads[8].v.ob[0] = -width / 2;
@@ -653,7 +655,9 @@ s32 draw_box(s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s
                             quads[11].v.tc[0] = (width / 2) * 32;
                             quads[11].v.tc[1] = height * 32;
 
+#ifndef SHIFT
                             quads += 8;
+#endif
                             break;
                         case 3:
                             quads[12].v.ob[0] = 0;
@@ -684,10 +688,16 @@ s32 draw_box(s32 flags, WindowStyle windowStyle, s32 posX, s32 posY, s32 posZ, s
                             quads[15].v.tc[0] = width * 32;
                             quads[15].v.tc[1] = height * 32;
 
+#ifndef SHIFT
                             quads += 12;
+#endif
                             break;
                     }
+#ifdef SHIFT
+                    gSPVertex(gMainGfxPos++, &quads[idx*4], 4, 0);
+#else
                     gSPVertex(gMainGfxPos++, quads, 4, 0);
+#endif
                     gSP2Triangles(gMainGfxPos++, 0, 3, 1, 0, 0, 2, 3, 0);
                 } else {
                     switch (idx) {
