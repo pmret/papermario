@@ -168,16 +168,21 @@ EvtScript EnemyNpcDefeat = {
     EVT_END
 };
 
-extern s8 D_8009A63C;
-extern s8 D_8009A654;
-extern s16 gFirstStrikeMessagePos;
-extern s8 D_8009A670;
-extern s32 D_800A0BA0;
-extern f32 D_800A0BA4;
-extern Evt* D_800A0BB0;
-extern s32 D_800A0BB4;
-extern EffectInstance* WorldMerleeOrbEffect;
-extern EffectInstance* WorldMerleeWaveEffect;
+SHIFT_BSS s32 gEncounterState;
+SHIFT_BSS s32 gEncounterSubState;
+SHIFT_BSS EncounterStatus gCurrentEncounter;
+SHIFT_BSS s8 D_8009A63C;
+SHIFT_BSS s8 D_8009A654;
+SHIFT_BSS s16 gFirstStrikeMessagePos;
+SHIFT_BSS s8 D_8009A670;
+SHIFT_BSS s32 D_8009A678;
+SHIFT_BSS s32 D_800A0BA0;
+SHIFT_BSS f32 D_800A0BA4;
+SHIFT_BSS Evt* D_800A0BB0;
+SHIFT_BSS s32 D_800A0BB4;
+SHIFT_BSS s16 D_800A0BB8;
+SHIFT_BSS EffectInstance* WorldMerleeOrbEffect;
+SHIFT_BSS EffectInstance* WorldMerleeWaveEffect;
 
 void set_battle_formation(Battle*);
 void func_800E97E4(void);

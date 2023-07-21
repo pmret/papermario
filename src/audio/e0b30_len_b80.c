@@ -5,10 +5,11 @@ void bgm_update_volume(void);
 void bgm_set_target_volume(s16 volume);
 
 // these are BSS
-extern s16 MusicDefaultVolume;
-extern s16 MusicMaxVolume;
-extern s16 MusicCurrentVolume;
-extern s16 MusicTargetVolume;
+SHIFT_BSS s16 MusicDefaultVolume;
+SHIFT_BSS s16 MusicMaxVolume;
+SHIFT_BSS s16 MusicCurrentVolume;
+SHIFT_BSS s16 MusicTargetVolume;
+SHIFT_BSS MusicSettings gMusicSettings[2];
 
 MusicSettings BlankMusicSettings = {
     .flags = 0,
@@ -62,7 +63,7 @@ s32 bgm_get_map_default_variation(s32 songID) {
 void bgm_reset_sequence_players(void) {
     s32 i;
 
-    for (i = 0; i < 2; i++) {
+    for (i = 0; i < ARRAY_COUNT(gMusicSettings); i++) {
         gMusicSettings[i] = BlankMusicSettings;
     }
 
@@ -79,7 +80,7 @@ void bgm_reset_volume(void) {
 
 //TODO refactor out constants
 void bgm_update_music_settings(void) {
-    MusicSettings* music = gMusicSettings;
+    MusicSettings* music = &gMusicSettings[0];
     s32 i = 0;
     s16 state2 = 2;
     s16 flag4 = MUSIC_SETTINGS_FLAG_4;

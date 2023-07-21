@@ -5,6 +5,12 @@
 #include "sprite.h"
 #include "overlay.h"
 
+SHIFT_BSS s32 gOverrideFlags;
+SHIFT_BSS s32 timeFreezeMode;
+SHIFT_BSS u16** nuGfxCfb;
+SHIFT_BSS s16 D_8009A690;
+SHIFT_BSS DisplayContext D_80164000[2];
+
 s8 gGameStepDelayAmount = 1;
 s8 gGameStepDelayCount = 5;
 
@@ -37,8 +43,6 @@ u16 D_800741F2 = 0;
 s32 gCurrentDisplayContextIndex = 0;
 s32 gPauseBackgroundFade = 0;
 s32 D_800741FC = 0;
-
-extern s16 D_8009A690;
 
 void gfx_init_state(void);
 void gfx_draw_background(void);

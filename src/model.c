@@ -8,6 +8,11 @@
 
 #define MAP_TEXTURE_MEMORY_SIZE 0x20000
 #define BTL_TEXTURE_MEMORY_SIZE 0x8000
+
+SHIFT_BSS u8* gBackgroundFogModePtr;
+SHIFT_BSS ModelList* gCurrentModels;
+SHIFT_BSS ModelTreeInfoList* mdl_currentModelTreeNodeInfo;
+
 extern Addr MapTextureMemory;
 
 typedef struct Fog {
@@ -1076,67 +1081,58 @@ s32 mdl_renderTaskBasePriorities[RENDER_MODE_COUNT] = {
 
 b8 D_8014C248 = FALSE;
 
-// BSS
-extern ModelCustomGfxBuilderList* gCurrentCustomModelGfxBuildersPtr;
-extern s32 D_801512BC;
-extern s32 D_80151304;
-extern s32 D_80151344;
-extern s32 entity_numEntities;
-extern s32 gEntityHeapBase;
-extern HudCacheEntry* gHudElementCacheTableRaster;
-extern HudCacheEntry* gHudElementCacheTablePalette;
-extern ModelNode** gCurrentModelTreeRoot;
-extern ModelTransformGroupList* gCurrentTransformGroups;
-extern ModelCustomGfxList* gCurrentCustomModelGfxPtr;
+SHIFT_BSS ModelCustomGfxBuilderList* gCurrentCustomModelGfxBuildersPtr;
+SHIFT_BSS ModelNode** gCurrentModelTreeRoot;
+SHIFT_BSS ModelTransformGroupList* gCurrentTransformGroups;
+SHIFT_BSS ModelCustomGfxList* gCurrentCustomModelGfxPtr;
 
-extern TextureHeader gCurrentTextureHeader;
+SHIFT_BSS TextureHeader gCurrentTextureHeader ALIGNED(16);
 
-extern ModelList wModelList;
-extern ModelList bModelList;
+SHIFT_BSS ModelList wModelList;
+SHIFT_BSS ModelList bModelList;
 
-extern ModelTransformGroupList wTransformGroups;
-extern ModelTransformGroupList bTransformGroups;
+SHIFT_BSS ModelTransformGroupList wTransformGroups;
+SHIFT_BSS ModelTransformGroupList bTransformGroups;
 
-extern ModelCustomGfxList wCustomModelGfx;
-extern ModelCustomGfxList bCustomModelGfx;
+SHIFT_BSS ModelCustomGfxList wCustomModelGfx;
+SHIFT_BSS ModelCustomGfxList bCustomModelGfx;
 
-extern ModelCustomGfxBuilderList wCustomModelGfxBuilders;
-extern ModelCustomGfxBuilderList bCustomModelGfxBuilders;
-extern ModelLocalVertexCopyList wModelLocalVtxBuffers;
-extern ModelLocalVertexCopyList bModelLocalVtxBuffers;
-extern ModelLocalVertexCopyList* gCurrentModelLocalVtxBuffers;
+SHIFT_BSS ModelCustomGfxBuilderList wCustomModelGfxBuilders;
+SHIFT_BSS ModelCustomGfxBuilderList bCustomModelGfxBuilders;
+SHIFT_BSS ModelLocalVertexCopyList wModelLocalVtxBuffers;
+SHIFT_BSS ModelLocalVertexCopyList bModelLocalVtxBuffers;
+SHIFT_BSS ModelLocalVertexCopyList* gCurrentModelLocalVtxBuffers;
 
-extern ModelNode* wModelTreeRoot;
-extern ModelNode* bModelTreeRoot;
-extern ModelTreeInfoList D_80152220;
-extern ModelTreeInfoList D_80152A20;
+SHIFT_BSS ModelNode* wModelTreeRoot;
+SHIFT_BSS ModelNode* bModelTreeRoot;
+SHIFT_BSS ModelTreeInfoList D_80152220;
+SHIFT_BSS ModelTreeInfoList D_80152A20;
 
-extern s8 wBackgroundFogMode;
-extern s8 bBackgroundFogMode;
-extern s32 mdl_treeIterPos;
-extern Fog wFogSettings;
-extern Fog bFogSettings;
-extern Fog* gCurrentFogSettings;
-extern s32 texPannerMainU[MAX_TEX_PANNERS];
-extern s32 texPannerMainV[MAX_TEX_PANNERS];
-extern s32 texPannerAuxU[MAX_TEX_PANNERS];
-extern s32 texPannerAuxV[MAX_TEX_PANNERS];
-extern void* TextureHeapPos;
-extern u16 mtg_IterIdx;
-extern u16 D_80153226;
-extern ModelNode* mtg_FoundModelNode;
-extern u16 mtg_MinChild;
-extern u16 mtg_MaxChild;
-extern u16 mtg_SearchModelID;
-extern RenderTask* mdl_renderTaskLists[3];
-extern s32 mdl_renderTaskQueueIdx;
-extern s32 mdl_renderTaskCount;
+SHIFT_BSS s8 wBackgroundFogMode;
+SHIFT_BSS s8 bBackgroundFogMode;
+SHIFT_BSS s32 mdl_treeIterPos;
+SHIFT_BSS Fog wFogSettings;
+SHIFT_BSS Fog bFogSettings;
+SHIFT_BSS Fog* gCurrentFogSettings;
+SHIFT_BSS s32 texPannerMainU[MAX_TEX_PANNERS];
+SHIFT_BSS s32 texPannerMainV[MAX_TEX_PANNERS];
+SHIFT_BSS s32 texPannerAuxU[MAX_TEX_PANNERS];
+SHIFT_BSS s32 texPannerAuxV[MAX_TEX_PANNERS];
+SHIFT_BSS void* TextureHeapPos;
+SHIFT_BSS u16 mtg_IterIdx;
+SHIFT_BSS ModelNode* mtg_FoundModelNode;
+SHIFT_BSS u16 mtg_MinChild;
+SHIFT_BSS u16 mtg_MaxChild;
+SHIFT_BSS u16 mtg_SearchModelID;
+SHIFT_BSS RenderTask* mdl_renderTaskLists[3];
+SHIFT_BSS s32 mdl_renderTaskQueueIdx;
+SHIFT_BSS s32 mdl_renderTaskCount;
 
-extern TextureHandle mdl_textureHandles[128];
+SHIFT_BSS TextureHandle mdl_textureHandles[128];
+
+SHIFT_BSS u16 depthCopyBuffer[16];
 
 extern Addr BattleEntityHeapBottom; // todo ???
-
-extern u16 depthCopyBuffer[16];
 
 void func_80117D00(Model* model);
 void appendGfx_model_group(void* model);
@@ -2049,12 +2045,12 @@ void load_texture_variants(u32 romOffset, s32 textureID, s32 baseOffset, s32 siz
             auxPaletteSize = 0;
             auxRasterSize = 0;
         }
-        
+
         textureID++;
         currentTextureID = textureID;
         textureHandle = &mdl_textureHandles[currentTextureID];
         load_texture_impl(offset + sizeof(*header), textureHandle, header, rasterSize, paletteSize, auxRasterSize, auxPaletteSize);
-        
+
         mainSize = rasterSize + paletteSize + sizeof(*header);
         offset += mainSize;
         offset += auxRasterSize + auxPaletteSize;
@@ -2100,7 +2096,7 @@ void load_next_model_textures(ModelNode* model, s32 romOffset, s32 texSize) {
 // load all textures used by models, starting from the root
 void mdl_load_all_textures(ModelNode* rootModel, s32 romOffset, s32 size) {
     s32 baseOffset = 0;
-    
+
     // textures are loaded to the upper half of the texture heap when not in the world
     if (gGameStatusPtr->isBattle != 0) {
         baseOffset = MAP_TEXTURE_MEMORY_SIZE;
@@ -2286,7 +2282,7 @@ void mdl_create_model(ModelBlueprint* bp, s32 unused) {
 
     (*gCurrentModels)[modelIdx] = model = heap_malloc(sizeof(*model));
     model->flags = bp->flags | MODEL_FLAG_VALID;
-    model->modelID = D_80153226;
+    model->modelID = mdl_treeIterPos;
     model->modelNode = bp->mdlNode;
     model->groupData = bp->groupData;
     model->matrixFreshness = 0;
@@ -3250,11 +3246,11 @@ void func_8011B1D8(ModelNode* node) {
 
     // stop searching if node is a model
     if (node->type == SHAPE_TYPE_MODEL) {
-        mtg_MaxChild = D_80153226;
+        mtg_MaxChild = mdl_treeIterPos;
         return;
     }
 
-    // stop searching if node is a group with GROUP_TYPE_0 
+    // stop searching if node is a group with GROUP_TYPE_0
     if (node->type == SHAPE_TYPE_GROUP) {
         prop = get_model_property(node, MODEL_PROP_KEY_GROUP_INFO);
         if (prop != NULL && prop->data.s != GROUP_TYPE_0) {
@@ -4110,7 +4106,7 @@ s32 is_model_center_visible(u16 modelID, s32 depthQueryID, f32* screenX, f32* sc
     if (outX >= 0.0f && outY >= 0.0f && outX < 320.0f && outY < 240.0f) {
         gDPPipeSync(gMainGfxPos++);
         // Load a 4x1 pixel tile of the depth buffer
-        gDPLoadTextureTile(gMainGfxPos++, osVirtualToPhysical(&nuGfxZBuffer[(s32) outY * 320]), G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, 1,
+        gDPLoadTextureTile(gMainGfxPos++, osVirtualToPhysical(&nuGfxZBuffer[(s32) outY * SCREEN_WIDTH]), G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, 1,
             (s32) outX, 0, (s32) outX + 3, 0,
             0,
             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP,
@@ -4118,7 +4114,7 @@ s32 is_model_center_visible(u16 modelID, s32 depthQueryID, f32* screenX, f32* sc
             G_TX_NOLOD, G_TX_NOLOD);
         gDPPipeSync(gMainGfxPos++);
         // Set the current color image to the buffer where copied depth values are stored.
-        gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, depthCopyBuffer);
+        gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, depthCopyBuffer);
         gDPPipeSync(gMainGfxPos++);
         // Set up 1 cycle mode and all other relevant othermode params.
         // One cycle mode must be used here because only one pixel is copied, and copy mode only supports multiples of 4 pixels.
@@ -4137,7 +4133,7 @@ s32 is_model_center_visible(u16 modelID, s32 depthQueryID, f32* screenX, f32* sc
         gSPTextureRectangle(gMainGfxPos++, depthQueryID << 2, 0 << 2, 4 << 2, 1 << 2, G_TX_RENDERTILE, (s32) outX << 5, 0, 1 << 10, 1 << 10);
         // Sync and swap the color image back to the current framebuffer.
         gDPPipeSync(gMainGfxPos++);
-        gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, osVirtualToPhysical(nuGfxCfb_ptr));
+        gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxCfb_ptr));
         gDPPipeSync(gMainGfxPos++);
         // Reconfigure the frame's normal scissor.
         gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, camera->viewportStartX, camera->viewportStartY, camera->viewportStartX + camera->viewportW, camera->viewportStartY + camera->viewportH);
@@ -4216,7 +4212,7 @@ s32 is_point_visible(f32 x, f32 y, f32 z, s32 depthQueryID, f32* screenX, f32* s
     if (outX >= 0.0f && outY >= 0.0f && outX < 320.0f && outY < 240.0f) {
         gDPPipeSync(gMainGfxPos++);
         // Load a 4x1 pixel tile of the depth buffer
-        gDPLoadTextureTile(gMainGfxPos++, osVirtualToPhysical(&nuGfxZBuffer[(s32) outY * 320]), G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, 1,
+        gDPLoadTextureTile(gMainGfxPos++, osVirtualToPhysical(&nuGfxZBuffer[(s32) outY * SCREEN_WIDTH]), G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, 1,
             (s32) outX, 0, (s32) outX + 3, 0,
             0,
             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP,
@@ -4224,7 +4220,7 @@ s32 is_point_visible(f32 x, f32 y, f32 z, s32 depthQueryID, f32* screenX, f32* s
             G_TX_NOLOD, G_TX_NOLOD);
         gDPPipeSync(gMainGfxPos++);
         // Set the current color image to the buffer where copied depth values are stored.
-        gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, depthCopyBuffer);
+        gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, depthCopyBuffer);
         gDPPipeSync(gMainGfxPos++);
         // Set up 1 cycle mode and all other relevant othermode params.
         // One cycle mode must be used here because only one pixel is copied, and copy mode only supports multiples of 4 pixels.
@@ -4243,7 +4239,7 @@ s32 is_point_visible(f32 x, f32 y, f32 z, s32 depthQueryID, f32* screenX, f32* s
         gSPTextureRectangle(gMainGfxPos++, depthQueryID << 2, 0 << 2, (depthQueryID + 1) << 2, 1 << 2, G_TX_RENDERTILE, (s32) outX << 5, 0, 1 << 10, 1 << 10);
         // Sync and swap the color image back to the current framebuffer.
         gDPPipeSync(gMainGfxPos++);
-        gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, osVirtualToPhysical(nuGfxCfb_ptr));
+        gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxCfb_ptr));
         gDPPipeSync(gMainGfxPos++);
         // Reconfigure the frame's normal scissor.
         gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, camera->viewportStartX, camera->viewportStartY, camera->viewportStartX + camera->viewportW, camera->viewportStartY + camera->viewportH);

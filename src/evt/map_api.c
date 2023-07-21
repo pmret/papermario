@@ -4,6 +4,7 @@
 
 extern LavaReset* gLavaResetList;
 extern s32 LastSafeFloor;
+extern ModelTreeInfoList* mdl_currentModelTreeNodeInfo;
 
 ApiStatus TranslateModel(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

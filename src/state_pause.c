@@ -38,6 +38,11 @@ NUPiOverlaySegment D_8007795C = {
     .bssEnd = pause_BSS_END,
 };
 
+SHIFT_BSS s8 D_800A0920;
+SHIFT_BSS s8 D_800A0921;
+SHIFT_BSS s16 D_800A0922;
+SHIFT_BSS s32 SavedReverbMode;
+
 void state_init_pause(void) {
     D_800A0921 = 0;
     D_800A0922 = 0;
