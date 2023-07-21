@@ -1,6 +1,8 @@
 #include "common.h"
 #include "hud_element.h"
 
+SHIFT_BSS UiStatus gUIStatus;
+
 extern HudScript* TimesHudScript;
 extern HudScript* SPIncrementHudScripts[];
 extern HudScript* SPStarHudScripts[];

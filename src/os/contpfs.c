@@ -2,6 +2,7 @@
 #include "macros.h"
 
 extern __OSInode __osPfsInodeCache;
+
 s32 __osPfsInodeCacheChannel = -1;
 u8 __osPfsInodeCacheBank = 250;
 

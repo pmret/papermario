@@ -24,7 +24,7 @@ YAY0_COMPRESS_TOOL = f"{BUILD_TOOLS}/yay0/Yay0compress"
 CRC_TOOL = f"{BUILD_TOOLS}/rom/n64crc"
 
 PIGMENT = "pigment64"
-PIGMENT_REQ_VERSION = "0.2.2"
+PIGMENT_REQ_VERSION = "0.3.0"
 
 
 def exec_shell(command: List[str]) -> str:
@@ -195,7 +195,7 @@ def write_ninja_rules(
     ninja.rule(
         "as",
         description="as $in",
-        command=f"{cross}as -EB -march=vr4300 -mtune=vr4300 -Iinclude $in -o $out",
+        command=f"{cpp} {CPPFLAGS} {extra_cppflags} $cppflags $in -o  - | {cross}as -EB -march=vr4300 -mtune=vr4300 -Iinclude -o $out",
     )
 
     ninja.rule(
@@ -207,7 +207,7 @@ def write_ninja_rules(
     ninja.rule(
         "pigment",
         description="img($img_type) $in",
-        command=f"{PIGMENT} $img_flags $in $img_type -o $out",
+        command=f"{PIGMENT} to-bin $img_flags -f $img_type -o $out $in",
     )
 
     ninja.rule(
@@ -602,7 +602,9 @@ class Configure:
                     encoding = "EUC-JP"
 
                 # Dead cod
-                if isinstance(seg.parent.yaml, dict) and seg.parent.yaml.get("dead_code", False):
+                if isinstance(seg.parent.yaml, dict) and seg.parent.yaml.get(
+                    "dead_code", False
+                ):
                     obj_path = str(entry.object_path)
                     init_obj_path = Path(obj_path + ".dead")
                     build(
@@ -622,7 +624,7 @@ class Configure:
                     )
                 # Not dead cod
                 else:
-                    if seg.get_most_parent().name not in ["main", "engine1", "engine2"]:
+                    if non_matching or seg.get_most_parent().name not in ["main", "engine1", "engine2"]:
                         cflags += " -fno-common"
                     build(
                         entry.object_path,
@@ -1310,7 +1312,7 @@ if __name__ == "__main__":
     if args.shift:
         extra_cppflags += " -DSHIFT"
 
-    extra_cflags += " -Wmissing-braces -Wimplicit -Wredundant-decls -Wstrict-prototypes"
+    extra_cflags += " -Wmissing-braces -Wimplicit -Wredundant-decls -Wstrict-prototypes -Wno-redundant-decls"
 
     # add splat to python import path
     sys.path.insert(0, str((ROOT / args.splat).resolve()))

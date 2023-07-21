@@ -1,15 +1,3 @@
-// #include "ultra64.h"
-// #include "include_asm.h"
-
-// OSDevMgr __osPiDevMgr = {0};
-// OSPiHandle* __osPiTable = NULL;
-
-// extern OSPiHandle __Dom1SpeedParam;
-// extern OSPiHandle __Dom2SpeedParam;
-// OSPiHandle* __osCurrentHandle[2] = {&__Dom1SpeedParam, &__Dom2SpeedParam};
-
-// INCLUDE_ASM(void, "os/osCreatePiManager", osCreatePiManager, OSPri prio, OSMesgQueue* queue, OSMesg* mesg, s32 unk);
-
 #include "macros.h"
 #include "PR/os_internal.h"
 #include "PR/piint.h"

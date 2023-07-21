@@ -7,6 +7,7 @@ extern Gfx Entity_RenderNone[];
 extern Gfx Entity_WoodenCrate_Render[];
 extern Gfx* Entity_WoodenCrate_FragmentsRender[];
 extern Mtx Entity_WoodenCrate_FragmentsMatrices[];
+extern s32 Entity_WoodenCrate_RenderShatteredScript[];
 
 void entity_WoodenCrate_setupGfx(s32);
 

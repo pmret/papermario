@@ -13,14 +13,15 @@
 #define PLAYER_ACTION_VRAM_DEF (void*) 0x802B6000
 #endif
 
-extern void* D_8010C924;
-extern s32 D_8010C964;
-extern s32 gSpinHistoryBufferPos;
-extern s16 D_8010C9B0;
-extern s32 gSpinHistoryPosY[5];
-extern s32 gSpinHistoryPosX[5];
-extern s32 gSpinHistoryPosZ[5];
-extern s16 gSpinHistoryPosAngle[5];
+SHIFT_BSS void* D_8010C924;
+SHIFT_BSS s32 D_8010C92C;
+SHIFT_BSS s32 D_8010C964;
+SHIFT_BSS s32 gSpinHistoryBufferPos;
+SHIFT_BSS s16 D_8010C9B0;
+SHIFT_BSS s32 gSpinHistoryPosY[5];
+SHIFT_BSS s32 gSpinHistoryPosX[5];
+SHIFT_BSS s32 gSpinHistoryPosZ[5];
+SHIFT_BSS s16 gSpinHistoryPosAngle[5];
 
 void func_800E5520(void) {
     D_8010C9B0 = 0;

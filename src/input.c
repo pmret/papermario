@@ -1,7 +1,11 @@
 #include "common.h"
 #include "nu/nusys.h"
 
-extern OSContPad D_8009A5B8;
+SHIFT_BSS OSContPad D_8009A5B8;
+SHIFT_BSS s16 D_8009A6A0;
+SHIFT_BSS s16 D_8009A6A2;
+SHIFT_BSS s16 D_8009A6A4;
+SHIFT_BSS s16 D_8009A6A6;
 
 void func_800287F0(void) {
     gGameStatusPtr->currentButtons[0] = 0;

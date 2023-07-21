@@ -4,6 +4,9 @@
 #include "world/partners.h"
 #include "sprite/player.h"
 
+SHIFT_BSS PlayerStatus gPlayerStatus;
+SHIFT_BSS PlayerData gPlayerData;
+
 extern Npc playerNpcData;
 extern u16 PlayerImgFXFlags;
 extern s32 D_802DB5B4[3]; // unused

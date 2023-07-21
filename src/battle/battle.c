@@ -5,8 +5,22 @@
 #include "hud_element.h"
 #include "sprite.h"
 
-extern s32 D_800DC060;
-extern StageListRow* gCurrentStagePtr;
+SHIFT_BSS s32 D_800DC060;
+SHIFT_BSS StageListRow* gCurrentStagePtr;
+SHIFT_BSS s32 gBattleState;
+SHIFT_BSS BattleStatus gBattleStatus;
+SHIFT_BSS s32 gLastDrawBattleState;
+SHIFT_BSS s32 D_800DC4D4;
+SHIFT_BSS s32 gDefeatedBattleSubstate;
+SHIFT_BSS s32 gBattleSubState;
+SHIFT_BSS s32 D_800DC4E0;
+SHIFT_BSS s32 gDefeatedBattleState;
+SHIFT_BSS s32 gCurrentBattleID;
+SHIFT_BSS s32 gCurrentStageID;
+SHIFT_BSS s32 D_800DC4F0;
+SHIFT_BSS Battle* gOverrideBattlePtr;
+SHIFT_BSS s32 D_800DC4F8;
+SHIFT_BSS Battle* gCurrentBattlePtr;
 
 // standard battle area table entry
 #define BTL_AREA(id, jpName) { \

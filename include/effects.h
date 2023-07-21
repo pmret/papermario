@@ -3058,7 +3058,7 @@ EffectInstance* huff_puff_breath_main(s32, f32, f32, f32, f32, f32, f32, s32);
 EffectInstance* cold_breath_main(s32, f32, f32, f32, f32, s32);
 EffectInstance* embers_main(s32, f32, f32, f32, f32, f32, f32, s32, s32, f32, f32);
 EffectInstance* hieroglyphs_main(s32, f32, f32, f32, f32, s32);
-EffectInstance *misc_particles_main(s32, f32, f32, f32, f32, f32, f32, s32, s32);
+EffectInstance* misc_particles_main(s32, f32, f32, f32, f32, f32, f32, s32, s32);
 EffectInstance* static_status_main(s32, f32, f32, f32, f32, s32, s32);
 EffectInstance* moving_cloud_main(s32, f32, f32, f32, f32, f32, f32, f32, f32);
 EffectInstance* effect_75_main(s32, f32, f32, f32, f32, s32);

@@ -80,12 +80,11 @@ s32 D_80078168[] = {
     MSG_Menus_Merlee_Exhausted,
 };
 
+SHIFT_BSS PopupMessage D_800A0BC0[32];
+SHIFT_BSS s32 D_800A0F40;
+SHIFT_BSS HudStatusIcon* D_800A0F44;
+
 extern HudScript HES_Item_Present;
-
-extern PopupMessage D_800A0BC0[32];
-extern s32 D_800A0F40;
-extern HudStatusIcon* D_800A0F44;
-
 extern HudScript HES_AsleepBegin;
 extern HudScript HES_AsleepEnd;
 extern HudScript HES_ElectrifiedBegin;

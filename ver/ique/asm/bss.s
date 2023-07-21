@@ -374,28 +374,16 @@ dlabel D_800A0958
 .space 2
 
 dlabel D_800A095A
-.space 1
-
-dlabel D_800A095B
-.space 1
+.space 2
 
 dlabel D_800A095C
-.space 1
-
-dlabel D_800A095D
-.space 1
+.space 2
 
 dlabel D_800A095E
-.space 1
-
-dlabel D_800A095F
-.space 1
+.space 2
 
 dlabel D_800A0960
-.space 0x00000003
-
-dlabel D_800A0963
-.space 1
+.space 0x00000004
 
 dlabel D_800A0964
 .space 4
@@ -515,10 +503,7 @@ dlabel D_800A363C
 .space 4
 
 dlabel nuAuDmaMesgQ
-.space 4
-
-dlabel D_800A3644
-.space 0x00000014
+.space 0x18
 
 dlabel nuAuDmaMesgBuf
 .space 0x000000c8
@@ -569,16 +554,7 @@ dlabel D_800A3FF4
 .space 0x0000000c
 
 dlabel gEffectGraphicsData
-.space 0x000001b4
-
-dlabel D_800A41B4
-.space 0x0000000c
-
-dlabel D_800A41C0
-.space 4
-
-dlabel D_800A41C4
-.space 0x0000001c
+.space 0x000001E0
 
 dlabel gMapConfig
 .space 4
@@ -587,10 +563,9 @@ dlabel D_800A41E4
 .space 4
 
 dlabel gMapSettings
-.space 4
+.space 0x40
 
-dlabel D_800A41EC
-.space 0x00000044
+.space 8
 
 dlabel gCollisionRayStartX
 .space 4
@@ -735,23 +710,16 @@ dlabel piEventQueue
 .space 0x18
 
 dlabel piEventBuf
-.space 4
-
-dlabel D_800AF8AC
-.space 4
+.space 0x8
 
 dlabel piAccessBuf
-.space 4
+.space 0x8
 
-.space 0x24
+.space 0x20
 
 dlabel wMapTexName
-.space 4
+.space 0x18
 
-dlabel D_800B0CF4
-.space 0x00000014
-
-dlabel D_800B0D08
 dlabel __osThreadSave
 .space 0x1b0
 

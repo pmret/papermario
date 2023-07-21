@@ -17,9 +17,14 @@
 #define i_spy_VRAM_DEF (void*)0x802B7000
 #endif
 
+SHIFT_BSS UNK_FUN_PTR(ISpyNotificationCallback);
+SHIFT_BSS UNK_FUN_PTR(PulseStoneNotificationCallback);
+SHIFT_BSS UNK_FUN_PTR(TalkNotificationCallback);
+SHIFT_BSS UNK_FUN_PTR(InteractNotificationCallback);
+SHIFT_BSS s32 D_8010C950;
+
 extern f32 D_800F7B48;
 extern s32 D_800F7B4C;
-extern s8 D_8015A57A;
 extern s32 WorldTattleInteractionID;
 
 s32 player_raycast_down(f32*, f32*, f32*, f32*);
@@ -997,7 +1002,7 @@ void player_render_interact_prompts(void) {
 void check_for_ispy(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (D_8015A57A != 0 && ISpyNotificationCallback == NULL) {
+    if (gCurrentHiddenPanels.activateISpy && ISpyNotificationCallback == NULL) {
         if (!(playerStatus->animFlags &
             (PA_FLAG_SPEECH_PROMPT_AVAILABLE | PA_FLAG_INTERACT_PROMPT_AVAILABLE))) {
             dma_copy(i_spy_ROM_START, i_spy_ROM_END, i_spy_VRAM_DEF);

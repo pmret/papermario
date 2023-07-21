@@ -5,8 +5,8 @@
 typedef s32 TlbEntry[0x1000 / 4];
 typedef TlbEntry TlbMappablePage[15];
 
-extern EffectGraphics gEffectGraphicsData[15];
-extern EffectInstance* gEffectInstances[96];
+SHIFT_BSS EffectGraphics gEffectGraphicsData[15];
+SHIFT_BSS EffectInstance* gEffectInstances[96];
 
 extern TlbMappablePage D_80197000;
 extern Addr D_801A6000;
@@ -183,7 +183,7 @@ void clear_effect_data(void) {
     }
 
     for (i = 0; i < ARRAY_COUNT(gEffectInstances); i++) {
-        gEffectInstances[i] = 0;
+        gEffectInstances[i] = NULL;
     }
 
     osUnmapTLBAll();

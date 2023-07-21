@@ -1214,19 +1214,9 @@ extern u8 AuSynStereoDirty;
 extern AuGlobals* gSoundGlobals;
 extern BGMPlayer* gBGMPlayerC;
 extern BGMPlayer* gBGMPlayerB;
-extern AuCallback BeginSoundUpdateCallback;
 extern AmbienceManager* gAuAmbienceManager;
 extern SoundManager* gSoundManager;
 extern BGMPlayer* gBGMPlayerA;
-
-extern u16 AuInitialGlobalVolume;
-
-extern s16* AuDelayBufferMain;
-extern s16* AuDelayBufferAux;
-extern s32 AuDelayCounter;
-extern u8 AuDelayedVoiceGroup;
-extern s16 AuDelayedChannel;
-extern s32 AuDelayCount;
 
 #include "audio/private.h"
 

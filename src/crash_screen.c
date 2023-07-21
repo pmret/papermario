@@ -14,7 +14,7 @@ typedef struct {
     /* 0x9D2 */ u16 height;
 } CrashScreen; // size = 0x9D4
 
-extern CrashScreen gCrashScreen; // bss, externed for now until issues are figured out
+SHIFT_BSS CrashScreen gCrashScreen;
 
 u8 gCrashScreencharToGlyph[128] = {
     -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
