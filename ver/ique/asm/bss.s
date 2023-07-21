@@ -515,10 +515,7 @@ dlabel D_800A363C
 .space 4
 
 dlabel nuAuDmaMesgQ
-.space 4
-
-dlabel D_800A3644
-.space 0x00000014
+.space 0x18
 
 dlabel nuAuDmaMesgBuf
 .space 0x000000c8

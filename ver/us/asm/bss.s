@@ -506,10 +506,7 @@ dlabel D_800A363C
 .space 4
 
 dlabel nuAuDmaMesgQ
-.space 4
-
-dlabel D_800A3644
-.space 0x00000014
+.space 0x18
 
 dlabel nuAuDmaMesgBuf
 .space 0x000000c8
@@ -676,10 +673,7 @@ dlabel piThreadStack
 .space 0x1000
 
 dlabel piEventQueue
-.space 4
-
-dlabel D_800AF890
-.space 0x00000014
+.space 0x18
 
 dlabel piEventBuf
 .space 0x8
@@ -703,19 +697,13 @@ dlabel D_800AF914
 .space 4
 
 dlabel viThread
-.space 4
-
-dlabel D_800AF91C
-.space 0x1B4
+.space 0x1B8
 
 dlabel viThreadStack
 .space 0x1000
 
 dlabel viEventQueue
-.space 4
-
-dlabel D_800B0AD4
-.space 0x00000014
+.space 0x18
 
 dlabel viEventBuf
 .space 0x18
@@ -769,10 +757,7 @@ dlabel __osThreadSave
 .space 0x000001B0
 
 dlabel nuContWaitMesgQ
-.space 4
-
-dlabel D_800B0EBC
-.space 0x00000014
+.space 0x18
 
 dlabel __osContPifRam
 .space 4
@@ -838,10 +823,7 @@ dlabel D_800B42E4
 .space 0x0000000c
 
 dlabel nuGfxMesgQ
-.space 4
-
-dlabel D_800B42F4
-.space 0x00000014
+.space 0x18
 
 dlabel __CartRomHandle
 .space 4

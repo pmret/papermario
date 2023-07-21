@@ -161,10 +161,7 @@ dlabel D_80151664
 .space 4
 
 dlabel wEntityBlueprint
-.space 0x00000074
-
-dlabel D_801516DC
-.space 4
+.space 0x00000078
 
 dlabel D_8015DCE0
 .space 8
@@ -242,10 +239,7 @@ dlabel D_80153223
 .space 1
 
 dlabel mdl_treeIterPos
-.space 2
-
-dlabel D_80153226
-.space 2
+.space 4
 
 dlabel wFogSettings
 .space 0x00000020

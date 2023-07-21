@@ -23,7 +23,7 @@ SHIFT_BSS OSMesg nuAuDmaMesgBuf[50];
 SHIFT_BSS OSIoMesg nuAuDmaIOMesgBuf[50];
 SHIFT_BSS NUDMABuffer nuAuDmaBufList[50];
 SHIFT_BSS AuSynDriver auSynDriver;
-SHIFT_BSS u8 rspbootUcodeBuffer[0x100];
+SHIFT_BSS u8 rspbootUcodeBuffer[0x100] ALIGNED(16);
 SHIFT_BSS u64 AuStack[NU_AU_STACK_SIZE / sizeof(u64)];
 SHIFT_BSS u16 AuInitialGlobalVolume;
 SHIFT_BSS OSThread nuAuMgrThread;

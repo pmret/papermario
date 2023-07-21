@@ -1120,7 +1120,6 @@ SHIFT_BSS s32 texPannerAuxU[MAX_TEX_PANNERS];
 SHIFT_BSS s32 texPannerAuxV[MAX_TEX_PANNERS];
 SHIFT_BSS void* TextureHeapPos;
 SHIFT_BSS u16 mtg_IterIdx;
-SHIFT_BSS u16 D_80153226;
 SHIFT_BSS ModelNode* mtg_FoundModelNode;
 SHIFT_BSS u16 mtg_MinChild;
 SHIFT_BSS u16 mtg_MaxChild;
@@ -2283,7 +2282,7 @@ void mdl_create_model(ModelBlueprint* bp, s32 unused) {
 
     (*gCurrentModels)[modelIdx] = model = heap_malloc(sizeof(*model));
     model->flags = bp->flags | MODEL_FLAG_VALID;
-    model->modelID = D_80153226;
+    model->modelID = mdl_treeIterPos;
     model->modelNode = bp->mdlNode;
     model->groupData = bp->groupData;
     model->matrixFreshness = 0;
@@ -3247,7 +3246,7 @@ void func_8011B1D8(ModelNode* node) {
 
     // stop searching if node is a model
     if (node->type == SHAPE_TYPE_MODEL) {
-        mtg_MaxChild = D_80153226;
+        mtg_MaxChild = mdl_treeIterPos;
         return;
     }
 
