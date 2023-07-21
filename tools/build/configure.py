@@ -260,7 +260,7 @@ def write_ninja_rules(
 
     ninja.rule(
         "icons",
-        command=f"$python {BUILD_TOOLS}/pm_icons.py $out $in $asset_stack $header_path",
+        command=f"$python {BUILD_TOOLS}/pm_icons.py $out $asset_stack $header_path $in",
     )
 
     ninja.rule(
@@ -859,7 +859,7 @@ class Configure:
                         "header_path": header_path,
                     },
                     implicit_outputs=[header_path],
-                #    asset_deps=["icon"],
+                    asset_deps=["icon"],
                 )
                 # make .bin.o
                 build(entry.object_path, [entry.object_path.with_suffix("")], "bin")

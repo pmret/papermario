@@ -97,10 +97,10 @@ def build(out_bin: Path, in_xml: Path, asset_stack: Tuple[Path, ...], out_header
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Icon archive")
     parser.add_argument("out_bin", type=Path, help="output binary file path")
-    parser.add_argument("in_xml", type=Path, help="input xml file path")
     parser.add_argument("asset_stack", help="comma-separated asset stack")
     parser.add_argument("header_path", help="output header file to generate")
-    args = parser.parse_args()
+    parser.add_argument("in_xml", type=Path, help="input xml file path")
+    args, _ = parser.parse_known_args()
 
     asset_stack = tuple(Path(d) for d in args.asset_stack.split(","))
 
