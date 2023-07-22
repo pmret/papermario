@@ -5,8 +5,6 @@ This repository supports:
 - [Linux](#unix)
 - [macOS](#unix)
 - [Windows Subsystem for Linux 2](#wsl-2)
-- [Docker](#docker) (any host OS)
-- [Nix](#nix)
 
 If you encounter any issues setting up the repo, please feel free to [reach out to us on Discord](https://discord.gg/urUm3VG).
 
@@ -54,27 +52,6 @@ Continue onto [building](#building)
 If you have Visual Studio Code, you can type `code .` to open the repo within it.
 `Ctrl + J` opens up a Linux terminal within VS Code.
 
-
-## Docker
-
-A Docker image containing all dependencies can be built and ran as follows:
-```sh
-docker build . -t pm
-docker run --rm -ti -v $(pwd):/papermario pm
-```
-
-Then continue with [building](#building)
-
-## Nix
-
-Install [Nix](https://nixos.org/download.html) and run `nix-shell`. You will need to set the `NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM` environment variable to `1` (required for cross compiling).
-
-```sh
-export NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1
-nix-shell
-```
-
-Like the instructions for Docker, continue with [building](#building)
 
 # Building
 
