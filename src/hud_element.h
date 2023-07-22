@@ -284,6 +284,16 @@ extern HudScript* wPartnerHudScripts[];
         hs_End \
     }
 
+#define STANDARD_ITEM_HUD_SCRIPT(icon) \
+    { \
+        hs_SetVisible \
+        hs_SetTileSize(HUD_ELEMENT_SIZE_32x32) \
+        hs_Loop \
+            hs_SetIcon(60, icon) \
+        hs_Restart \
+        hs_End \
+    }
+
 void hud_element_load_script(HudElement* hudElement, HudScript* anim);
 
 /// @param clamp        0 = repeat; 1 = clamp

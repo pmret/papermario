@@ -587,8 +587,7 @@ segments:
       - [0x1b59a0, bin]
       - [0x215390]
 
-  - [0x215390, bin]
-
+  - [0x215390, pm_icons, icon]
 
   - name: logos
     type: code

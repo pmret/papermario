@@ -1011,9 +1011,10 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         offset = arg << 8 | argQ;
 
                         D_8015131C = D_80159B50;
-                        dma_copy(icon_present_ROM_START + gItemIconRasterOffsets[offset], icon_present_ROM_START + gItemIconRasterOffsets[offset] + 0x200, a2);
-                        romEnd = icon_present_ROM_START + gItemIconPaletteOffsets[offset] + 0x20;
-                        dma_copy(icon_present_ROM_START + gItemIconPaletteOffsets[offset],
+                        dma_copy(icon_ROM_START + gItemIconRasterOffsets[offset],
+                                icon_ROM_START + gItemIconRasterOffsets[offset] + 0x200, a2);
+                        romEnd = icon_ROM_START + gItemIconPaletteOffsets[offset] + 0x20;
+                        dma_copy(icon_ROM_START + gItemIconPaletteOffsets[offset],
                                  romEnd, D_8015C7E0);
                         printer->currentPrintDelay = printer->printDelayTime;
                         if (--arg1 <= 0) {

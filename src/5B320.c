@@ -170,23 +170,6 @@
 #define MSG_PartnerMoveName_SpinyFlip3 MSG_PartnerMoveName_SpinyFlip
 #endif
 
-#define STANDARD_ITEM_SCRIPT(icon) \
-    { \
-        is_SetIcon(60, icon) \
-        is_Restart \
-        is_End \
-    }
-
-#define STANDARD_ITEM_HUD_SCRIPT(icon) \
-    { \
-        hs_SetVisible \
-        hs_SetTileSize(HUD_ELEMENT_SIZE_32x32) \
-        hs_Loop \
-            hs_SetIcon(60, icon) \
-        hs_Restart \
-        hs_End \
-    }
-
 HudScript HES_HandPointDownLoop = {
     hs_SetVisible
     hs_SetTileSize(HUD_ELEMENT_SIZE_24x24)
@@ -322,9 +305,39 @@ s32 pad_after_item_hudscripts[] = {
 
 #include "item_entity_scripts.inc.c"
 
-s32 D_8008EEC0[] = { 0, 1, 2, 3, 4, 9, 6, 7, 8, 5, 10, 11 };
+//TODO split for partner popup menu data?
 
-s32 D_8008EEF0[] = { 0, 1, 2, 3, 4, 0, 6, 7, 8, 5, 0, 0 };
+// "change partner" menu position -> partnerID
+s32 PartnerIDFromMenuIndex[] = {
+    PARTNER_NONE,
+    PARTNER_GOOMBARIO,
+    PARTNER_KOOPER,
+    PARTNER_BOMBETTE,
+    PARTNER_PARAKARRY,
+    PARTNER_BOW,
+    PARTNER_WATT,
+    PARTNER_SUSHIE,
+    PARTNER_LAKILESTER,
+    PARTNER_GOOMPA,
+    PARTNER_GOOMBARIA,
+    PARTNER_TWINK
+};
+
+// partnerID -> "change partner" menu position
+s32 MenuIndexFromPartnerID[] = {
+    [PARTNER_NONE]          0,
+    [PARTNER_GOOMBARIO]     1,
+    [PARTNER_KOOPER]        2,
+    [PARTNER_BOMBETTE]      3,
+    [PARTNER_PARAKARRY]     4,
+    [PARTNER_GOOMPA]        0,
+    [PARTNER_WATT]          6,
+    [PARTNER_SUSHIE]        7,
+    [PARTNER_LAKILESTER]    8,
+    [PARTNER_BOW]           5,
+    [PARTNER_GOOMBARIA]     0,
+    [PARTNER_TWINK]         0,
+};
 
 PartnerPopupProperties gPartnerPopupProperties[] = {
     [PARTNER_NONE] {

@@ -450,10 +450,8 @@ segments:
 
   - [0x17A160, bin]
 
-  - [0x1DA1E0, ci4,     icon/present, 32, 32]
-  - [0x1DA3E0, palette, icon/present]
-
-  - [0x1DA400, bin]
+  - [0x1DA1E0, pm_icons, icon]
+  - [0x20C080, bin]
 
   - [0x227080, ci8,     title/bg_1, 264, 162]
   - [0x231790, palette, title/bg_1]

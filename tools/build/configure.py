@@ -259,6 +259,11 @@ def write_ninja_rules(
     )
 
     ninja.rule(
+        "icons",
+        command=f"$python {BUILD_TOOLS}/pm_icons.py $out $list_path $header_path $asset_stack",
+    )
+
+    ninja.rule(
         "msg_combine",
         description="msg_combine $out",
         command=f"$python {BUILD_TOOLS}/msg/combine.py $out $in",
@@ -360,6 +365,7 @@ class Configure:
                     "gfx",
                     "gfx_common",
                     "pm_map_data",
+                    "pm_icons",
                     "pm_msg",
                     "pm_sprites",
                     "pm_charset",
@@ -840,6 +846,25 @@ class Configure:
                     "msg_combine",
                 )
                 build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
+            
+            elif seg.type == "pm_icons":
+                # make icons.bin
+                header_path = str(self.build_path() / "include" / "icon_offsets.h")
+                build(
+                    entry.object_path.with_suffix(""),
+                    entry.src_paths,
+                    "icons",
+                    variables={
+                        "list_path": entry.src_paths[0],
+                        "header_path": header_path,
+                        "asset_stack": ",".join(self.asset_stack),
+                    },
+                    implicit_outputs=[header_path],
+                    asset_deps=["icon"],
+                )
+                # make icons.bin.o
+                build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
+
             elif seg.type == "pm_map_data":
                 # flat list of (uncompressed path, compressed? path) pairs
                 bin_yay0s: List[Path] = []

@@ -99,7 +99,7 @@ extern s32 timeFreezeMode;
 extern s32 D_8009A678;
 
 extern u8 D_800779B0;
-extern s32 D_8008EEC0[12]; // partner IDs
+extern s32 PartnerIDFromMenuIndex[12]; // partner IDs
 
 // Scripts
 extern EvtScript EVS_NpcDefeat;

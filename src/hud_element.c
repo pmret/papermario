@@ -5,7 +5,7 @@
 
 #if VERSION_IQUE
 // TODO: remove if section is split in iQue release
-extern Addr icon_present_ROM_START;
+extern Addr icon_ROM_START;
 #endif
 
 #define MAX_HUD_CACHE_ENTRIES 192
@@ -198,7 +198,7 @@ void hud_element_load_script(HudElement* hudElement, HudScript* anim) {
                             capacity = gHudElementCacheCapacity / 2;
                         }
                         ASSERT(capacity > *gHudElementCacheSize + gHudElementSizes[preset].size);
-                        nuPiReadRom((s32)icon_present_ROM_START + raster, entry->data, gHudElementSizes[preset].size);
+                        nuPiReadRom((s32)icon_ROM_START + raster, entry->data, gHudElementSizes[preset].size);
                         *gHudElementCacheSize += gHudElementSizes[preset].size;
                         if (!gGameStatusPtr->isBattle) {
                             *pos = i;
@@ -234,7 +234,7 @@ void hud_element_load_script(HudElement* hudElement, HudScript* anim) {
                             capacity = gHudElementCacheCapacity / 2;
                         }
                         ASSERT(capacity > *gHudElementCacheSize + 32);
-                        nuPiReadRom((s32)icon_present_ROM_START + palette, entry->data, 32);
+                        nuPiReadRom((s32)icon_ROM_START + palette, entry->data, 32);
                         *gHudElementCacheSize += 32;
                         if (!gGameStatusPtr->isBattle) {
                             *pos = i;
