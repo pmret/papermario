@@ -69,7 +69,7 @@ void N(CleftAI_HidingInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetec
 void N(CleftAI_Hiding)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* volume) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    s32 emoteTemp;
+    EffectInstance* emoteTemp;
 
     if (script->functionTemp[1] <= 0) {
         script->functionTemp[1] = aiSettings->playerSearchInterval;
@@ -124,7 +124,7 @@ void N(CleftAI_FindPlayerInit)(Evt* script, MobileAISettings* aiSettings, EnemyD
 void N(CleftAI_FindPlayer)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* volume) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    s32 var;
+    EffectInstance* var;
 
     if (basic_ai_check_player_dist(volume, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 0)) {
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);

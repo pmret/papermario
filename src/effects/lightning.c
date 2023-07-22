@@ -25,6 +25,11 @@ void lightning_update(EffectInstance* effect);
 void lightning_render(EffectInstance* effect);
 void lightning_appendGfx(void* effect);
 
+EFFECT_DEF_GATHER_MAGIC(gather_magic_main);
+EFFECT_DEF_BULB_GLOW(bulb_glow_main);
+EFFECT_DEF_SNAKING_STATIC(snaking_static_main);
+EFFECT_DEF_FLASHING_BOX_SHOCKWAVE(flashing_box_shockwave_main);
+
 EffectInstance* lightning_main(
     s32 arg0,
     f32 arg1,

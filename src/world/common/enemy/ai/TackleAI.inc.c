@@ -61,7 +61,7 @@ API_CALLABLE(N(TackleAI_Main)) {
         }
 
         if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
-            s32 emoteTemp;
+            EffectInstance* emoteTemp;
 
             script->AI_TEMP_STATE = 99;
             script->functionTemp[1] = 0;

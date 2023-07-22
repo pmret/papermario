@@ -49,7 +49,7 @@ Gfx* D_E0114718[] = {
 
 s8 lil_oink_AnimateGfxSelect[] = { 1, 2, 1, 0 };
 
-EffectInstance* lil_oink_main(void) {
+EffectInstance* lil_oink_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5) {
     EffectBlueprint bp;
     EffectInstance* effect;
     LilOinkFXData* data;

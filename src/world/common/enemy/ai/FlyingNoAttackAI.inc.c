@@ -38,7 +38,7 @@ void N(FlyingNoAttackAI_13)(Evt* script, MobileAISettings* aiSettings, EnemyDete
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 x, y, z, w;
-    s32 var;
+    EffectInstance* var;
     s32 flag;
     f32 temp_f6;
 

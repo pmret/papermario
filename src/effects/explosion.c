@@ -93,6 +93,10 @@ void explosion_main(s32 type, f32 x, f32 y, f32 z) {
 void explosion_init(EffectInstance* effect) {
 }
 
+
+EFFECT_DEF_SMOKE_RING(smoke_ring_main);
+EFFECT_DEF_CONFETTI(confetti_main);
+
 void explosion_update(EffectInstance* effect) {
     ExplosionFXData* part = effect->data.explosion;
     s32 unk_00;

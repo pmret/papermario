@@ -23,7 +23,7 @@ void N(PiranhaPlantAI_00)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
 void N(PiranhaPlantAI_01)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    s32 temp;
+    EffectInstance* temp;
 
     if (basic_ai_check_player_dist(territory, enemy, aiSettings->alertRadius, aiSettings->alertOffsetDist, 0)) {
         ai_enemy_play_sound(npc, SOUND_BURROW_DIG, 0);
@@ -237,7 +237,7 @@ void N(PiranhaPlantAI_11)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
 void N(PiranhaPlantAI_12)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    s32 temp;
+    EffectInstance* temp;
 
     npc->duration++;
     if (npc->duration == enemy->varTable[13]) {
@@ -269,7 +269,7 @@ void N(PiranhaPlantAI_13)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
 void N(PiranhaPlantAI_LosePlayer)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    s32 retVal;
+    EffectInstance* retVal;
 
     npc->duration--;
     if (npc->duration == 0) {

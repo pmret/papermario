@@ -31,7 +31,7 @@ void N(LakituAI_Wander)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 x, y, z, w;
-    s32 emoteTemp;
+    EffectInstance* emoteTemp;
     f32 temp_f20;
     f32 temp_f22;
     f32 temp_f24;
@@ -117,7 +117,7 @@ void N(LakituAI_Loiter)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ, hitDepth;
-    s32 emoteTemp;
+    EffectInstance* emoteTemp;
     f32 var1 = enemy->varTable[3];
     f32 var2;
     f32 temp_f20;

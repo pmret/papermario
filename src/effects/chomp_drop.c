@@ -54,6 +54,8 @@ EffectInstance* chomp_drop_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4
 void chomp_drop_init(EffectInstance* effect) {
 }
 
+EFFECT_DEF_DUST(dust_main);
+
 void chomp_drop_update(EffectInstance* effect) {
     ChompDropFXData* data = effect->data.chompDrop;
     s32 unk40;

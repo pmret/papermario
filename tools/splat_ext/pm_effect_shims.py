@@ -49,7 +49,7 @@ glabel {name}
             yaml=yaml,
         )
 
-        with open(options.opts.asm_path / ".." / "effect_shims.yaml") as f:
+        with open(options.opts.src_path / "effect_shims.yaml") as f:
             self.shims = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
 
     def split(self, rom_bytes):

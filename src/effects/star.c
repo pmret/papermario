@@ -116,6 +116,8 @@ EffectInstance* star_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 
 void star_init(EffectInstance* effect) {
 }
 
+EFFECT_DEF_LANDING_DUST(landing_dust_main);
+
 void star_update(EffectInstance* effect) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     StarFXData* data = effect->data.star;

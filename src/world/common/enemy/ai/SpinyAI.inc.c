@@ -67,7 +67,7 @@ API_CALLABLE(N(SpinyAI_Main)) {
             npc->jumpScale = 1.0f;
             script->AI_TEMP_STATE = 102;
         } else {
-            s32 emoteTemp;
+            EffectInstance* emoteTemp;
             fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0x28, &emoteTemp);
             npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
             script->functionTemp[1] = 0;

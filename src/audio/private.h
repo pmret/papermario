@@ -62,7 +62,6 @@ void au_load_INIT(AuGlobals* arg0, s32 romAddr, ALHeap* heap);
 AuResult au_fetch_SBN_file(u32 fileIdx, AuFileFormat format, SBNFileEntry* arg2);
 void au_load_PER(AuGlobals* globals, s32 romAddr);
 void au_load_PRG(AuGlobals* arg0, s32 romAddr);
-// INCLUDE_ASM(s32, "audio/2e230_len_2190", snd_load_BGM);
 InstrumentGroup* au_get_BK_instruments(s32 bankGroup, u32 bankIndex);
 SoundBank* au_load_BK_to_bank(s32 bkFileOffset, SoundBank* bank, s32 bankIndex, s32 bankGroup);
 void au_swizzle_BK_instruments(s32 bkFileOffset, SoundBank* bank, InstrumentGroup instruments, u32 instrumentCount, u8 arg4);

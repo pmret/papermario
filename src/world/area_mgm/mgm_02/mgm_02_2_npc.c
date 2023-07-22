@@ -425,7 +425,7 @@ API_CALLABLE(N(RunMinigame)) {
     Enemy* enemy;
 
     Npc* npc;
-    s32 writeback;
+    EffectInstance* writeback;
 
     Model* model;
     Matrix4f mtx;
@@ -911,7 +911,7 @@ API_CALLABLE(N(CleanupGame)) {
     SmashGameData* data = enemy->varTablePtr[SMASH_DATA_VAR_IDX];
     Npc* npc;
     u32 screenX, screenY,screenZ;
-    s32 writeback;
+    EffectInstance* writeback;
     s32 i;
 
     if (enemy->varTable[3] == 4) {
