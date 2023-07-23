@@ -55,8 +55,16 @@ segments:
     - [auto, c, fx_api]
     - [auto, c, demo_api]
     - [auto, pm_effect_loads, effect_loads]
+  - name: engine4
+    type: code
+    start: 0x100910
+    vram: 0x802E2020
+    follows_vram: evt
+    subsegments:
+      - [auto, c, sprite]
+      - [auto, c, 101b90_len_8f0]
 
-  - [0x100910, bin]
+  - [0x1040F0, bin]
 
   - type: group
     dir: charset
