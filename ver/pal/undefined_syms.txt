@@ -1,6 +1,5 @@
 Entity_ScriptSpring_AnimLaunch = 0x1E4;
 Entity_SimpleSpring_AnimLaunch = 0x1E4;
-sprite_shading_profiles_ROM_START = 0x33A930;
 set_time_freeze_mode = 0x80027008;
 get_time_freeze_mode = 0x80027110;
 start_rumble = 0x80028E88;
