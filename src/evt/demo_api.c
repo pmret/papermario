@@ -1,6 +1,10 @@
 #include "common.h"
 #include "ld_addrs.h"
 
+#if VERSION_PAL
+extern Addr sprite_shading_profiles_ROM_START;
+#endif
+
 // TODO: not sure where these go
 u8 D_802D9D70 = 254;
 u8 D_802D9D71 = 254;
@@ -9,7 +13,7 @@ u16 StarShrineLightBeamAlpha = 255;
 extern s32 gSpriteShadingHeader[2];
 extern u8 gSpriteShadingData[0x100];
 
-extern u8 sprite_shading_profiles_data_ROM_START[];
+extern Addr sprite_shading_profiles_data_ROM_START;
 
 s32 SetSpriteShading(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;

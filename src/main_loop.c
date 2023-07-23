@@ -5,6 +5,24 @@
 #include "sprite.h"
 #include "overlay.h"
 
+#if VERSION_PAL
+extern Addr engine4_ROM_START;
+extern Addr engine4_ROM_END;
+extern Addr engine4_VRAM;
+extern Addr engine1_ROM_START;
+extern Addr engine1_ROM_END;
+extern Addr engine1_VRAM;
+extern Addr entity_ROM_START;
+extern Addr entity_ROM_END;
+extern Addr entity_VRAM;
+extern Addr engine2_ROM_START;
+extern Addr engine2_ROM_END;
+extern Addr engine2_VRAM;
+extern Addr font_width_ROM_START;
+extern Addr font_width_ROM_END;
+extern Addr font_width_VRAM;
+#endif
+
 SHIFT_BSS s32 gOverrideFlags;
 SHIFT_BSS s32 timeFreezeMode;
 SHIFT_BSS u16** nuGfxCfb;

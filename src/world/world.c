@@ -8,6 +8,12 @@
 #include "model.h"
 #include "gcc/string.h"
 
+#if VERSION_PAL
+extern Addr world_script_api_ROM_START;
+extern Addr world_script_api_ROM_END;
+extern Addr world_script_api_VRAM;
+#endif
+
 s32 WorldReverbModeMapping[] = { 0, 1, 2, 3 };
 
 //TODO possible data split here
