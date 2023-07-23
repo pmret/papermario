@@ -20,3 +20,4 @@ D_B0000000 = 0xB0000000;
 D_B0000008 = 0xB0000008;
 D_B0000010 = 0xB0000010;
 fx_sun_undeclared = fx_sun;
+sprite_shading_profiles_data_ROM_START = sprite_shading_profiles_ROM_START + 0x1D0;
