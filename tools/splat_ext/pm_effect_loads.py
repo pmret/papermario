@@ -93,3 +93,6 @@ glabel {name}
             )
 
         return ret
+
+    def should_split(self) -> bool:
+        return options.opts.is_mode_active(self.type)
