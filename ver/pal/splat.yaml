@@ -11572,17 +11572,50 @@ segments:
   - [0xE8D120, bin]
 
   - name: entity_model_Hammer1Block
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xE9E540
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, Hammer1Block]
+    - start: 0xE9E540
+      type: .data
+      name: Hammer1Block
+      subsegments:
+      - [0xE9E540, vtx, Hammer1Block]
+      - [0xE9E7C0, ci4, Hammer1Block_face, 16, 32]
+      - [0xE9E8C0, palette, Hammer1Block_face]
+      - [0xE9E8E0]
   - name: entity_model_Hammer2Block
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xE9EA40
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, Hammer2Block]
+    - start: 0xE9EA40
+      type: .data
+      name: Hammer2Block
+      subsegments:
+      - [0xE9EA40, vtx, Hammer2Block]
+      - [0xE9ECC0, ci4, Hammer2Block_face, 16, 32]
+      - [0xE9EDC0, palette, Hammer2Block_face]
+      - [0xE9EDE0]
   - name: entity_model_Hammer3Block
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xE9EF40
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, Hammer3Block]
+    - start: 0xE9EF40
+      type: .data
+      name: Hammer3Block
+      subsegments:
+      - [0xE9EF40, vtx, Hammer3Block]
+      - [0xE9F1C0, ci4, Hammer3Block_face, 16, 32]
+      - [0xE9F2C0, palette, Hammer3Block_face]
+      - [0xE9F2E0]
   - name: entity_model_ShatteringHammer1Block
     type: bin
     start: 0xE9F430
