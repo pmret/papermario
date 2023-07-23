@@ -23,6 +23,26 @@ class Effect:
         return f"EFFECT_DEF_{self.name.upper()}({func_name})"
 
 
+def effects_from_yaml(yaml_path: Path) -> List[Effect]:
+    with open(yaml_path) as f:
+        effects_yaml = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
+
+    effects: List[Effect] = []
+    for effect_yaml in effects_yaml:
+        name = str(effect_yaml.get("name", f"{len(effects):02X}"))
+        effects.append(
+            Effect(
+                name=name,
+                args=effect_yaml.get("args", ""),
+                gfx=effect_yaml.get("gfx", name),
+                empty="name" not in effect_yaml,
+                returns_void=effect_yaml.get("void", False),
+            )
+        )
+
+    return effects
+
+
 class N64SegPm_effect_loads(N64Segment):
     effects: List[Effect] = []
 
@@ -84,34 +104,12 @@ glabel fx_{name}
             yaml=yaml,
         )
 
-        with open(options.opts.src_path / "effects.yaml") as f:
-            effects_yaml = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
-
-        effects = []
-        for effect_yaml in effects_yaml:
-            name = str(effect_yaml.get("name", f"{len(effects):02X}"))
-            effects.append(
-                Effect(
-                    name=name,
-                    args=effect_yaml.get("args", ""),
-                    gfx=effect_yaml.get("gfx", name),
-                    empty="name" not in effect_yaml,
-                    returns_void=effect_yaml.get("void", False),
-                )
-            )
-
-        self.effects = effects
+        self.effects = effects_from_yaml(options.opts.src_path / "effects.yaml")
 
     def effect_s_path(self, effect_name: str):
         return options.opts.build_path / "asm" / "effects" / f"{effect_name}.s"
 
     def split(self, rom_bytes):
-        effect_enum_text = "enum EffectID {\n"
-        effect_table_text = "EffectTableEntry gEffectTable[] = {\n"
-        fx_decls_text = '#include "effects/effect_macros.h"\n\n'
-        main_decls_text = '#include "effects/effect_macros.h"\n\n'
-        macro_defs = ""
-
         for i, effect in enumerate(self.effects):
             # .s file for effect
             effect_asm = N64SegPm_effect_loads.get_effect_asm(i, effect.name)
@@ -120,32 +118,6 @@ glabel fx_{name}
 
             with open(self.effect_s_path(effect.name), "w") as f:
                 f.write(effect_asm)
-
-            enum_name = effect.name.upper()
-            if not enum_name.startswith("EFFECT_"):
-                enum_name = "EFFECT_" + enum_name
-
-            effect_enum_text += f"    {enum_name} = 0x{i:02X},\n"
-            if not effect.empty:
-                effect_table_text += (
-                    f"    FX_ENTRY({effect.name}, effect_gfx_{effect.gfx}),\n"
-                )
-                fx_decls_text += effect.get_macro_call("fx_" + effect.name) + ";\n"
-                main_decls_text += effect.get_macro_call(effect.name + "_main") + ";\n"
-                macro_defs += effect.get_macro_def() + "\n"
-            else:
-                effect_table_text += "    {},\n"
-
-        (options.opts.asset_path / "effects").mkdir(parents=True, exist_ok=True)
-
-        with open(options.opts.asset_path / "effects" / "effect_macros.h", "w") as f:
-            f.write(macro_defs)
-
-        with open(options.opts.asset_path / "effects" / "effect_table.c", "w") as f:
-            f.write(main_decls_text + "\n" + effect_table_text + "};\n")
-
-        with open(options.opts.asset_path / "effects" / "effect_defs.h", "w") as f:
-            f.write(effect_enum_text + "};\n\n" + fx_decls_text)
 
     def get_linker_entries(self):
         from segtypes.linker_entry import LinkerEntry
