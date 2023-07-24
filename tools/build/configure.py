@@ -624,7 +624,11 @@ class Configure:
                     )
                 # Not dead cod
                 else:
-                    if non_matching or seg.get_most_parent().name not in ["main", "engine1", "engine2"]:
+                    if non_matching or seg.get_most_parent().name not in [
+                        "main",
+                        "engine1",
+                        "engine2",
+                    ]:
                         cflags += " -fno-common"
                     build(
                         entry.object_path,
@@ -846,7 +850,7 @@ class Configure:
                     "msg_combine",
                 )
                 build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
-            
+
             elif seg.type == "pm_icons":
                 # make icons.bin
                 header_path = str(self.build_path() / "include" / "icon_offsets.h")
@@ -1171,6 +1175,7 @@ if __name__ == "__main__":
         "version",
         nargs="*",
         default=[],
+        choices=VERSIONS,
         help="Version(s) to configure for. Most tools will operate on the first-provided only. Supported versions: "
         + ",".join(VERSIONS),
     )
