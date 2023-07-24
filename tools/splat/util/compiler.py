@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import Optional
 
 
 @dataclass
@@ -11,6 +12,7 @@ class Compiler:
     c_newline: str = "\n"
     asm_inc_header: str = ""
     include_macro_inc: bool = True
+    asm_emit_size_directive: Optional[bool] = None
 
 
 GCC = Compiler(
@@ -26,9 +28,10 @@ SN64 = Compiler(
     asm_end_label=".end",
     c_newline="\r\n",
     include_macro_inc=False,
+    asm_emit_size_directive=False,
 )
 
-IDO = Compiler("IDO")
+IDO = Compiler("IDO", include_macro_inc=False, asm_emit_size_directive=False)
 
 compiler_for_name = {"GCC": GCC, "SN64": SN64, "IDO": IDO}
 
