@@ -45,23 +45,33 @@ class CommonSegGroup(CommonSegment):
         prev_start: Optional[int] = -1
         last_rom_end = 0
 
-        for i, subsection_yaml in enumerate(yaml["subsegments"]):
+        for i, subsegment_yaml in enumerate(yaml["subsegments"]):
             # endpos marker
-            if isinstance(subsection_yaml, list) and len(subsection_yaml) == 1:
+            if isinstance(subsegment_yaml, list) and len(subsegment_yaml) == 1:
                 continue
 
-            typ = Segment.parse_segment_type(subsection_yaml)
-            start = Segment.parse_segment_start(subsection_yaml)
+            typ = Segment.parse_segment_type(subsegment_yaml)
+            start = Segment.parse_segment_start(subsegment_yaml)
 
             segment_class = Segment.get_class_for_type(typ)
 
             end = self.get_next_seg_start(i, yaml["subsegments"])
 
-            if (
-                isinstance(start, int)
-                and isinstance(prev_start, int)
-                and start < prev_start
-            ):
+            if start is None:
+                # Attempt to infer the start address
+                if i == 0:
+                    # The start address of this segment is the start address of the group
+                    start = self.rom_start
+                else:
+                    # The start address is the end address of the previous segment
+                    start = last_rom_end
+
+            if start is not None and end is None:
+                est_size = segment_class.estimate_size(subsegment_yaml)
+                if est_size is not None:
+                    end = start + est_size
+
+            if start is not None and prev_start is not None and start < prev_start:
                 log.error(
                     f"Error: Group segment {self.name} contains subsegments which are out of ascending rom order (0x{prev_start:X} followed by 0x{start:X})"
                 )
@@ -82,7 +92,7 @@ class CommonSegGroup(CommonSegment):
                 end = last_rom_end
 
             segment: Segment = Segment.from_yaml(
-                segment_class, subsection_yaml, start, end, vram
+                segment_class, subsegment_yaml, start, end, vram
             )
             segment.parent = self
             if segment.special_vram_segment:

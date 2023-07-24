@@ -19,7 +19,7 @@ from segtypes.linker_entry import (
 from segtypes.segment import Segment
 from util import log, options, palettes, symbols, relocs
 
-VERSION = "0.15.2"
+VERSION = "0.16.1"
 
 parser = argparse.ArgumentParser(
     description="Split a rom given a rom, a config, and output directory"

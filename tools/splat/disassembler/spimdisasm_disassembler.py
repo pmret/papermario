@@ -8,7 +8,7 @@ from typing import Set
 
 class SpimdisasmDisassembler(disassembler.Disassembler):
     # This value should be kept in sync with the version listed on requirements.txt
-    SPIMDISASM_MIN = (1, 15, 0)
+    SPIMDISASM_MIN = (1, 16, 0)
 
     def configure(self, opts: SplatOpts):
         # Configure spimdisasm
@@ -72,6 +72,10 @@ class SpimdisasmDisassembler(disassembler.Disassembler):
             spimdisasm.common.GlobalConfig.COMPILER = spimdisasm.common.Compiler.GCC
         elif selected_compiler == compiler.IDO:
             spimdisasm.common.GlobalConfig.COMPILER = spimdisasm.common.Compiler.IDO
+
+        spimdisasm.common.GlobalConfig.DETECT_REDUNDANT_FUNCTION_END = (
+            opts.detect_redundant_function_end
+        )
 
         spimdisasm.common.GlobalConfig.GP_VALUE = opts.gp
 

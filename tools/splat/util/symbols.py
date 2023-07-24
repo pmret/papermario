@@ -72,10 +72,18 @@ def to_cname(symbol_name: str) -> str:
     return symbol_name
 
 
-def handle_sym_addrs(path: Path, sym_addrs_lines: List[str], all_segments):
+def handle_sym_addrs(
+    path: Path, sym_addrs_lines: List[str], all_segments: "List[Segment]"
+):
     def get_seg_for_name(name: str) -> Optional["Segment"]:
         for segment in all_segments:
             if segment.name == name:
+                return segment
+        return None
+
+    def get_seg_for_rom(rom: int) -> Optional["Segment"]:
+        for segment in all_segments:
+            if segment.contains_rom(rom):
                 return segment
         return None
 
@@ -233,6 +241,9 @@ def handle_sym_addrs(path: Path, sym_addrs_lines: List[str], all_segments):
                     )
 
                 continue
+
+            if sym.segment is None and sym.rom is not None:
+                sym.segment = get_seg_for_rom(sym.rom)
 
             if sym.segment:
                 sym.segment.add_symbol(sym)
