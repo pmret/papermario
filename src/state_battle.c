@@ -92,7 +92,7 @@ void state_step_battle(void) {
             clear_npcs();
             clear_entity_data(1);
             clear_trigger_data();
-            DMA_SEGMENT(battle_code);
+            DMA_COPY_SEGMENT(battle_code);
             initialize_battle();
             btl_save_world_cameras();
             load_battle_section();

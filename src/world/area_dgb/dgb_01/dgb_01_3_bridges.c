@@ -3,7 +3,7 @@
 #include "sprite/player.h"
 
 ApiStatus N(LoadSmashBridgesGraphics)(void) {
-    DMA_SEGMENT(dgb_01_smash_bridges);
+    DMA_COPY_SEGMENT(dgb_01_smash_bridges);
     return ApiStatus_DONE2;
 }
 

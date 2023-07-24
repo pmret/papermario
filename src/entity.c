@@ -773,11 +773,11 @@ void entity_reset_collision(Entity* entity) {
 void load_area_specific_entity_data(void) {
     if (!isAreaSpecificEntityDataLoaded) {
         if (gGameStatusPtr->areaID == AREA_JAN || gGameStatusPtr->areaID == AREA_IWA) {
-            DMA_SEGMENT(entity_jan_iwa);
+            DMA_COPY_SEGMENT(entity_jan_iwa);
         } else if (gGameStatusPtr->areaID == AREA_SBK || gGameStatusPtr->areaID == AREA_OMO) {
-            DMA_SEGMENT(entity_sbk_omo);
+            DMA_COPY_SEGMENT(entity_sbk_omo);
         } else {
-            DMA_SEGMENT(entity_default);
+            DMA_COPY_SEGMENT(entity_default);
         }
 
         isAreaSpecificEntityDataLoaded = TRUE;

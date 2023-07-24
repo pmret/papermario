@@ -1005,7 +1005,7 @@ void check_for_ispy(void) {
     if (gCurrentHiddenPanels.activateISpy && ISpyNotificationCallback == NULL) {
         if (!(playerStatus->animFlags &
             (PA_FLAG_SPEECH_PROMPT_AVAILABLE | PA_FLAG_INTERACT_PROMPT_AVAILABLE))) {
-            DMA_SEGMENT(i_spy);
+            DMA_COPY_SEGMENT(i_spy);
             ISpyNotificationCallback = ispy_notification_setup;
         }
     }
@@ -1054,7 +1054,7 @@ void check_for_pulse_stone(void) {
         }
 
         if (!(gPlayerStatus.animFlags & (PA_FLAG_SPEECH_PROMPT_AVAILABLE | PA_FLAG_INTERACT_PROMPT_AVAILABLE))) {
-            DMA_SEGMENT(pulse_stone);
+            DMA_COPY_SEGMENT(pulse_stone);
             PulseStoneNotificationCallback = pulse_stone_notification_setup;
         }
     }
@@ -1100,7 +1100,7 @@ void check_for_conversation_prompt(void) {
 
         if (has_valid_conversation_npc()) {
             TalkNotificationCallback = NULL;
-            DMA_SEGMENT(speech_bubble);
+            DMA_COPY_SEGMENT(speech_bubble);
             TalkNotificationCallback = interact_speech_setup;
         } else {
             TalkNotificationCallback = NULL;
@@ -1274,7 +1274,7 @@ void check_for_interactables(void) {
     }
 
     if (InteractNotificationCallback == NULL) {
-        DMA_SEGMENT(inspect_icon);
+        DMA_COPY_SEGMENT(inspect_icon);
         InteractNotificationCallback = interact_inspect_setup;
 
     }

@@ -68,7 +68,7 @@ void load_map_hit_asset(void);
 extern ShapeFile gMapShapeData;
 
 void load_map_script_lib(void) {
-    DMA_SEGMENT(world_script_api);
+    DMA_COPY_SEGMENT(world_script_api);
 }
 
 void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {
