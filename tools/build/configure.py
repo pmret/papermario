@@ -1175,7 +1175,7 @@ if __name__ == "__main__":
         "version",
         nargs="*",
         default=[],
-        choices=VERSIONS,
+        choices=[*VERSIONS, []],
         help="Version(s) to configure for. Most tools will operate on the first-provided only. Supported versions: "
         + ",".join(VERSIONS),
     )
