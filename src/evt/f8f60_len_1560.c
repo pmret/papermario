@@ -556,3 +556,12 @@ ApiStatus ClampAngleFloat(Evt* script, s32 isInitialCall) {
 
     return ApiStatus_DONE2;
 }
+
+#if VERSION_PAL
+ApiStatus GetLanguage(Evt* script, s32 isInitialCall) {
+    Bytecode* args = script->ptrReadPos;
+
+    evt_set_variable(script, *args++, gCurrentLanguage);
+    return ApiStatus_DONE2;
+}
+#endif

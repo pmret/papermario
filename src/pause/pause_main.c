@@ -718,8 +718,6 @@ void pause_tutorial_input(s32 *pressed, s32 *held) {
     *held = heldNew;
 }
 
-
-
 void pause_handle_input(s32 pressed, s32 held) {
     s32 height;
     s32 width;
@@ -826,8 +824,6 @@ void pause_cleanup(void) {
 
     set_window_update(WINDOW_ID_PAUSE_CURSOR, WINDOW_UPDATE_HIDE);
 }
-
-
 
 s32 pause_get_total_equipped_bp_cost(void) {
     s32 totalCost = 0;

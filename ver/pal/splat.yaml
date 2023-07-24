@@ -34,6 +34,38 @@ segments:
     start: 0
   - [0x40, bin]
 
+  - name: evt
+    type: code
+    dir: evt
+    start: 0xE61D0
+    vram: 0x802C6000
+    # follows_vram: world_use_item # TODO this causes the vram to be wrong
+    subsegments:
+    - [auto, c, script_list]
+    - [auto, c, evt]
+    - [auto, c, map_api]
+    - [auto, c, cam_api]
+    - [auto, c, model_api]
+    - [auto, c, npc_api]
+    - [auto, c, msg_api]
+    - [auto, c, player_api]
+    - [auto, c, virtual_entity]
+    - [auto, c, f8f60_len_1560]
+    - [auto, c, fa4c0_len_3bf0]
+    - [auto, c, fx_api]
+    - [auto, c, demo_api]
+    - [auto, pm_effect_loads, effect_loads]
+  - name: engine4
+    type: code
+    start: 0x100910
+    vram: 0x802E2020
+    follows_vram: evt
+    subsegments:
+    - [auto, c, sprite]
+    - [auto, c, 101b90_len_8f0]
+
+  - [0x1040F0, bin]
+
   - type: group
     dir: charset
     vram: 0
@@ -464,6 +496,10 @@ segments:
     # TODO: split into images
 
   - [0x2705A0, bin]
+
+  - [0x33A930, pm_sprite_shading_profiles, sprite_shading_profiles]
+
+  - [0x33B7A0, bin]
 
   - type: code
     dir: world/partner
