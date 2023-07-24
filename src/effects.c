@@ -45,7 +45,7 @@ void clear_effect_data(void) {
 
     osUnmapTLBAll();
     osMapTLB(0x10, NULL, _325AD0_VRAM, (s32)&D_801A6000 & 0xFFFFFF, -1, -1);
-    dma_copy(_325AD0_ROM_START, _325AD0_ROM_END, _325AD0_VRAM);
+    DMA_COPY_SEGMENT(_325AD0);
 }
 
 void func_80059D48(void) {

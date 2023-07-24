@@ -529,7 +529,7 @@ void btl_state_update_celebration(void) {
             if (CelebrateSubstateTime != 0) {
                 CelebrateSubstateTime--;
             } else if (btl_cam_is_moving_done()) {
-                dma_copy(starpoint_ROM_START, starpoint_ROM_END, starpoint_VRAM);
+                DMA_COPY_SEGMENT(starpoint);
                 script = start_script(&EVS_ShowStarpoints, EVT_PRIORITY_A, 0);
                 EndBattleRewardsDone = FALSE;
                 // divide reward into 20 increments
@@ -614,7 +614,7 @@ void btl_state_update_celebration(void) {
                 playerData->level++;
                 btl_cam_use_preset(BTL_CAM_DEFAULT);
                 btl_cam_move(5);
-                dma_copy(level_up_ROM_START, level_up_ROM_END, level_up_VRAM);
+                DMA_COPY_SEGMENT(level_up);
                 sfx_play_sound(SOUND_80000008);
                 CelebrateStateTime = 0;
                 gBattleSubState = BTL_SUBSTATE_CELEBRATE_LEVEL_UP_BEGIN;

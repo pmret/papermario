@@ -18,13 +18,15 @@ extern Addr WorldEntityHeapBottom;
 extern Addr WorldEntityHeapBase;
 #define WORLD_ENTITY_HEAP_BOTTOM (s32) WorldEntityHeapBottom
 #define WORLD_ENTITY_HEAP_BASE (s32) WorldEntityHeapBase
-// TODO this only refers to one of 3 overlays which happen to share the same address space
-// but don't necessarily have to
-#define AREA_SPECIFIC_ENTITY_VRAM (s32) entity_default_VRAM
+#define entity_jan_iwa_VRAM (s32) entity_jan_iwa_VRAM
+#define entity_sbk_omo_VRAM (s32) entity_sbk_omo_VRAM
+#define entity_default_VRAM (s32) entity_default_VRAM
 #else
 #define WORLD_ENTITY_HEAP_BOTTOM 0x80250000
 #define WORLD_ENTITY_HEAP_BASE 0x80267FF0
-#define AREA_SPECIFIC_ENTITY_VRAM 0x802BAE00
+#define entity_jan_iwa_VRAM (void*) 0x802BAE00
+#define entity_sbk_omo_VRAM (void*) 0x802BAE00
+#define entity_default_VRAM (void*) 0x802BAE00
 #endif
 
 s32 D_8014AFB0 = 255;
@@ -771,11 +773,11 @@ void entity_reset_collision(Entity* entity) {
 void load_area_specific_entity_data(void) {
     if (!isAreaSpecificEntityDataLoaded) {
         if (gGameStatusPtr->areaID == AREA_JAN || gGameStatusPtr->areaID == AREA_IWA) {
-            dma_copy(entity_jan_iwa_ROM_START, entity_jan_iwa_ROM_END, (void*)AREA_SPECIFIC_ENTITY_VRAM);
+            DMA_COPY_SEGMENT(entity_jan_iwa);
         } else if (gGameStatusPtr->areaID == AREA_SBK || gGameStatusPtr->areaID == AREA_OMO) {
-            dma_copy(entity_sbk_omo_ROM_START, entity_sbk_omo_ROM_END, (void*)AREA_SPECIFIC_ENTITY_VRAM);
+            DMA_COPY_SEGMENT(entity_sbk_omo);
         } else {
-            dma_copy(entity_default_ROM_START, entity_default_ROM_END, (void*)AREA_SPECIFIC_ENTITY_VRAM);
+            DMA_COPY_SEGMENT(entity_default);
         }
 
         isAreaSpecificEntityDataLoaded = TRUE;
