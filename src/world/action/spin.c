@@ -118,7 +118,7 @@ void action_update_spin(void) {
             playerStatus->spinRate = -playerSpinState->spinRate;
         }
         if (spinFlags != 0) {
-            playerStatus->specialDecorationEffect = fx_46(effectType, playerStatus, 1.0f, 1000);
+            playerStatus->specialDecorationEffect = fx_effect_46(effectType, playerStatus, 1.0f, 1000);
         }
 
         phys_clear_spin_history();

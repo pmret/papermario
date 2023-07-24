@@ -122,7 +122,7 @@ void N(AvoidPlayerAI_ChaseInit)(Evt* script, MobileAISettings* npcAISettings, En
 void N(AvoidPlayerAI_Chase)(Evt* script, MobileAISettings* npcAISettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    s32 emoteTemp;
+    EffectInstance* emoteTemp;
 
     if (!basic_ai_check_player_dist(territory, enemy, npcAISettings->chaseRadius, npcAISettings->chaseOffsetDist, 1)) {
         fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);

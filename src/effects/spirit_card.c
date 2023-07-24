@@ -26,6 +26,9 @@ void spirit_card_update(EffectInstance* effect);
 void spirit_card_render(EffectInstance* effect);
 void spirit_card_appendGfx(void* effect);
 
+EFFECT_DEF_RING_BLAST(ring_blast_main);
+EFFECT_DEF_MISC_PARTICLES(misc_particles_main);
+
 EffectInstance* spirit_card_main(
     s32 arg0,
     f32 arg1,

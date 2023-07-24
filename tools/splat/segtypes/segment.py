@@ -304,6 +304,10 @@ class Segment:
     def is_noload() -> bool:
         return False
 
+    @staticmethod
+    def estimate_size(yaml: Union[Dict, List]) -> Optional[int]:
+        return None
+
     @property
     def needs_symbols(self) -> bool:
         return False
@@ -454,9 +458,6 @@ class Segment:
 
     def warn(self, msg: str):
         self.warnings.append(msg)
-
-    def max_length(self):
-        return None
 
     @staticmethod
     def get_default_name(addr) -> str:

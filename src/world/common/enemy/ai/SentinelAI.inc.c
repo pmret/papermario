@@ -175,7 +175,7 @@ void N(SentinelAI_LosePlayer)(Evt* script, MobileAISettings* aiSettings, EnemyDe
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ, posW;
     f32 idleHeight = (f32)enemy->varTable[3] / 100.0;
-    s32 emoteTemp;
+    EffectInstance* emoteTemp;
 
     npc->pos.y += 2.5;
     posX = npc->pos.x;
@@ -242,7 +242,7 @@ void N(SentinelAI_ReturnHome)(Evt* script, MobileAISettings* aiSettings, EnemyDe
     f32 temp_f24 = idleHeight + (f32)((f32)enemy->varTable[7] / 100.0);
     f32 undulateAmplitude = (f32)enemy->varTable[1] / 100.0;
     f32 undulateAmount = sin_deg(enemy->varTable[2]);
-    s32 emoteTemp;
+    EffectInstance* emoteTemp;
 
     if (npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &hitDepth)) {
         npc->pos.y = posY + idleHeight + (undulateAmount * undulateAmplitude);

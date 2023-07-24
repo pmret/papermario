@@ -20,7 +20,7 @@ void shiny_flare_update(EffectInstance* effect);
 void shiny_flare_render(EffectInstance* effect);
 void shiny_flare_appendGfx(void* effect);
 
-EffectInstance* shiny_flare_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4) {
+EffectInstance* shiny_flare_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5) {
     EffectBlueprint effectBp;
     EffectInstance* effect;
     ShinyFlareFXData* data;

@@ -156,7 +156,7 @@ void N(MagikoopaAI_21)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ;
-    s32 emoteTemp;
+    EffectInstance* emoteTemp;
 
     npc->duration--;
     if (npc->duration == 0) {
@@ -196,7 +196,7 @@ void N(MagikoopaAI_23)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 projectileEnemy;
-    s32 emoteTemp;
+    EffectInstance* emoteTemp;
 
     npc->duration--;
     if (npc->duration <= 0) {

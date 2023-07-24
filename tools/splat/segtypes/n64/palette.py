@@ -1,6 +1,6 @@
 from itertools import zip_longest
 from pathlib import Path
-from typing import List, Optional, Tuple, TYPE_CHECKING
+from typing import Dict, List, Optional, Tuple, TYPE_CHECKING, Union
 
 from util import log, options
 from util.color import unpack_color
@@ -14,6 +14,9 @@ if TYPE_CHECKING:
 def iter_in_groups(iterable, n, fillvalue=None):
     args = [iter(iterable)] * n
     return zip_longest(*args, fillvalue=fillvalue)
+
+
+VALID_SIZES = [0x20, 0x40, 0x80, 0x100, 0x200]
 
 
 class N64SegPalette(N64Segment):
@@ -40,18 +43,21 @@ class N64SegPalette(N64Segment):
                     f"segment {self.name} needs to know where it ends; add a position marker [0xDEADBEEF] after it"
                 )
 
-            if self.max_length() and isinstance(self.rom_end, int):
-                expected_len = int(self.max_length())
-                assert isinstance(self.rom_end, int)
-                assert isinstance(self.rom_start, int)
-                assert isinstance(self.subalign, int)
+            if not isinstance(self.yaml, dict) or "size" not in self.yaml:
+                assert self.rom_end is not None
+                assert self.rom_start is not None
                 actual_len = self.rom_end - self.rom_start
-                if (
-                    actual_len > expected_len
-                    and actual_len - expected_len > self.subalign
-                ):
+
+                hint_msg = "(hint: add a 'bin' segment after it or specify the size in the segment)"
+
+                if actual_len > VALID_SIZES[-1]:
                     log.error(
-                        f"Error: {self.name} should end at 0x{self.rom_start + expected_len:X}, but it ends at 0x{self.rom_end:X}\n(hint: add a 'bin' segment after it)"
+                        f"Error: {self.name} (0x{actual_len:X} bytes) is too long, max 0x{VALID_SIZES[-1]:X})\n{hint_msg}"
+                    )
+
+                if actual_len not in VALID_SIZES:
+                    log.error(
+                        f"Error: {self.name} (0x{actual_len:X} bytes) is not a valid palette size ({', '.join(hex(s) for s in VALID_SIZES)})\n{hint_msg}"
                     )
 
     def split(self, rom_bytes):
@@ -66,9 +72,6 @@ class N64SegPalette(N64Segment):
         self.raster.extract = False
 
     def parse_palette(self, rom_bytes) -> List[Tuple[int, int, int, int]]:
-        assert isinstance(self.rom_start, int)
-        assert isinstance(self.rom_end, int)
-
         data = rom_bytes[self.rom_start : self.rom_end]
         palette = []
 
@@ -76,9 +79,6 @@ class N64SegPalette(N64Segment):
             palette.append(unpack_color([a, b]))
 
         return palette
-
-    def max_length(self):
-        return 256 * 2
 
     def out_path(self) -> Path:
         return options.opts.asset_path / self.dir / f"{self.name}.png"
@@ -97,3 +97,10 @@ class N64SegPalette(N64Segment):
                 self.get_linker_section(),
             )
         ]
+
+    @staticmethod
+    def estimate_size(yaml: Union[Dict, List]) -> int:
+        if isinstance(yaml, dict):
+            if "size" in yaml:
+                return int(yaml["size"])
+        return 0x20

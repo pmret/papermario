@@ -77,6 +77,8 @@ EffectInstance* fire_flower_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, s32 arg
 void fire_flower_init(EffectInstance* effect) {
 }
 
+EFFECT_DEF_STARS_SPREAD(stars_spread_main);
+
 void fire_flower_update(EffectInstance* effect) {
     FireFlowerFXData* part = effect->data.fireFlower;
     s32 unk_04;

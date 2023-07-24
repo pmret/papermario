@@ -573,7 +573,7 @@ void basic_ai_wander(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolum
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 stillWithinTerritory = FALSE;
     f32 x, y, z;
-    s32 sp34;
+    EffectInstance* sp34;
     f32 yaw;
 
     if (aiSettings->playerSearchInterval >= 0) {
@@ -673,7 +673,7 @@ void basic_ai_loiter(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolum
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 x, y, z;
     f32 yaw;
-    s32 emoteTemp;
+    EffectInstance* emoteTemp;
 
     if (aiSettings->playerSearchInterval >= 0) {
         if (basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 0)) {
@@ -784,7 +784,7 @@ void basic_ai_chase_init(Evt* script, MobileAISettings* npcAISettings, EnemyDete
 void basic_ai_chase(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    s32 sp28;
+    EffectInstance* sp28;
     f32 x, y, z;
 
     if (!basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 1)) {

@@ -11,7 +11,7 @@ void red_impact_update(EffectInstance* effect);
 void red_impact_render(EffectInstance* effect);
 void red_impact_appendGfx(void* effect);
 
-EffectInstance* red_impact_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4) {
+EffectInstance* red_impact_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5) {
     EffectBlueprint bp;
     EffectBlueprint* bpPtr = &bp;
     EffectInstance* effect;

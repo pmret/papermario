@@ -2999,11 +2999,11 @@ segments:
       - [0x3D8E30, ci4, D_09000420_3AB450, 32, 64]
       - [0x3D9230, palette, D_09000420_3AB450]
       - [0x3D9250, ci4, D_09000840_3AB870, 32, 64]
-      - [0x3D9650, palette, D_09000840_3AB870]
+      - {start: 0x3D9650, type: palette, name: D_09000840_3AB870, size: 0x10}
       - [0x3D9660, ci4, D_09000C50_3ABC80, 32, 64]
       - [0x3D9A60, palette, D_09000C50_3ABC80]
       - [0x3D9A80, ci4, D_09001070_3AC0A0, 32, 64]
-      - [0x3D9E80, palette, D_09001070_3AC0A0]
+      - {start: 0x3D9E80, type: palette, name: D_09001070_3AC0A0, size: 0x10}
       - [0x3D9E90, ci4, D_09001480_3AC4B0, 32, 64]
       - [0x3DA290, palette, D_09001480_3AC4B0]
       - [0x3DA2B0, ci4, D_090018A0_3AC8D0, 32, 64]

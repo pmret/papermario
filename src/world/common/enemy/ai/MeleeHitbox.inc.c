@@ -34,7 +34,7 @@ void N(MeleeHitbox_31)(Evt* script) {
 void N(MeleeHitbox_32)(Evt* script) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    s32 emoteTemp;
+    EffectInstance* emoteTemp;
 
     npc->duration--;
     if (npc->duration <= 0) {

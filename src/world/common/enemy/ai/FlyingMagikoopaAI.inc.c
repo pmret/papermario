@@ -15,7 +15,7 @@ void N(FlyingMagikoopaAI_11)(Evt* script, MobileAISettings* aiSettings, EnemyDet
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 basePosY = (f32)enemy->varTable[1] / 100.0;
-    s32 emoteTemp;
+    EffectInstance* emoteTemp;
 
     npc->pos.y = basePosY + sin_deg(enemy->varTable[0]) * 6.0;
     enemy->varTable[0] = clamp_angle(enemy->varTable[0] + 10);
@@ -189,7 +189,7 @@ void N(FlyingMagikoopaAI_21)(Evt* script, MobileAISettings* aiSettings, EnemyDet
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     f32 posX, posY, posZ;
-    s32 emoteTemp;
+    EffectInstance* emoteTemp;
 
     npc->duration--;
     if (npc->duration == 0) {
@@ -227,7 +227,7 @@ void N(FlyingMagikoopaAI_23)(Evt* script, MobileAISettings* aiSettings, EnemyDet
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
     s32 temp_s1;
-    s32 emoteTemp;
+    EffectInstance* emoteTemp;
 
     npc->duration--;
     if (npc->duration <= 0) {

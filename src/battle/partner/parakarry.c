@@ -484,7 +484,7 @@ API_CALLABLE(N(FlyAround)) {
             script->functionTemp[1] = 0;
             script->functionTemp[2] = 0;
             script->functionTemp[3] = 0;
-            airRaidEffect = fx_65(0, state->currentPos.x, state->currentPos.y, state->currentPos.z, 1.0f, 0);
+            airRaidEffect = fx_effect_65(0, state->currentPos.x, state->currentPos.y, state->currentPos.z, 1.0f, 0);
             script->functionTemp[0] = 1;
             break;
         case 1:

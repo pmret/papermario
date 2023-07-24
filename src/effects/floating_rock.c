@@ -62,6 +62,8 @@ EffectInstance* floating_rock_main(s32 type, f32 posX, f32 posY, f32 posZ, f32 f
 void floating_rock_init(EffectInstance* effect) {
 }
 
+EFFECT_DEF_DUST(dust_main);
+
 void floating_rock_update(EffectInstance* effect) {
     FloatingRockFXData* data = effect->data.floatingRock;
     s32 time;

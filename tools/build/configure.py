@@ -309,6 +309,10 @@ def write_ninja_rules(
 
     ninja.rule("shape", command=f"$python {BUILD_TOOLS}/mapfs/shape.py $in $out")
 
+    ninja.rule(
+        "effect_data", command=f"$python {BUILD_TOOLS}/effects.py $in_yaml $out_dir"
+    )
+
     with Path("tools/permuter_settings.toml").open("w") as f:
         f.write(
             f"compiler_command = \"{cc} {CPPFLAGS.replace('$version', 'pal')} {cflags} -DPERMUTER -fforce-addr\"\n"
@@ -544,6 +548,23 @@ class Configure:
                     implicit_outputs=implicit_outputs,
                 )
 
+        # Effect data includes
+        effect_yaml = ROOT / "src/effects.yaml"
+        effect_data_outdir = ROOT / "assets" / version / "effects"
+        effect_macros_path = effect_data_outdir / "effect_macros.h"
+        effect_defs_path = effect_data_outdir / "effect_defs.h"
+        effect_table_path = effect_data_outdir / "effect_table.c"
+
+        build(
+            [effect_macros_path, effect_defs_path, effect_table_path],
+            [effect_yaml],
+            "effect_data",
+            variables={
+                "in_yaml": str(effect_yaml),
+                "out_dir": str(effect_data_outdir),
+            },
+        )
+
         # Build objects
         for entry in self.linker_entries:
             seg = entry.segment
@@ -624,7 +645,11 @@ class Configure:
                     )
                 # Not dead cod
                 else:
-                    if non_matching or seg.get_most_parent().name not in ["main", "engine1", "engine2"]:
+                    if non_matching or seg.get_most_parent().name not in [
+                        "main",
+                        "engine1",
+                        "engine2",
+                    ]:
                         cflags += " -fno-common"
                     build(
                         entry.object_path,
@@ -846,7 +871,7 @@ class Configure:
                     "msg_combine",
                 )
                 build(entry.object_path, [entry.object_path.with_suffix(".bin")], "bin")
-            
+
             elif seg.type == "pm_icons":
                 # make icons.bin
                 header_path = str(self.build_path() / "include" / "icon_offsets.h")
@@ -1171,6 +1196,7 @@ if __name__ == "__main__":
         "version",
         nargs="*",
         default=[],
+        choices=[*VERSIONS, []],
         help="Version(s) to configure for. Most tools will operate on the first-provided only. Supported versions: "
         + ",".join(VERSIONS),
     )
