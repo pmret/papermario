@@ -5,11 +5,6 @@
 #include "sprite.h"
 #include "nu/nusys.h"
 
-#if VERSION_PAL
-extern Addr logos_ROM_END;
-extern Addr logos_ROM_START;
-#endif
-
 void appendGfx_intro_logos(void);
 
 #if VERSION_JP

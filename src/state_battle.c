@@ -6,12 +6,6 @@
 #include "battle/battle.h"
 #include "model.h"
 
-#if VERSION_PAL
-extern Addr battle_code_ROM_START;
-extern Addr battle_code_ROM_END;
-extern Addr battle_code_VRAM;
-#endif
-
 extern u16 gFrameBuf0[];
 extern u16 gFrameBuf1[];
 extern u16 gFrameBuf2[];
