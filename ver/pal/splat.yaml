@@ -61,8 +61,8 @@ segments:
     vram: 0x802E2020
     follows_vram: evt
     subsegments:
-      - [auto, c, sprite]
-      - [auto, c, 101b90_len_8f0]
+    - [auto, c, sprite]
+    - [auto, c, 101b90_len_8f0]
 
   - [0x1040F0, bin]
 
