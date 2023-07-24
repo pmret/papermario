@@ -3,7 +3,7 @@
 #include "sprite/player.h"
 
 ApiStatus N(LoadSmashBridgesGraphics)(void) {
-    dma_copy(dgb_01_smash_bridges_ROM_START, dgb_01_smash_bridges_ROM_END, dgb_01_smash_bridges_VRAM);
+    DMA_SEGMENT(dgb_01_smash_bridges);
     return ApiStatus_DONE2;
 }
 

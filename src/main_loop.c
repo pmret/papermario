@@ -249,12 +249,12 @@ void gfx_draw_frame(void) {
 void load_engine_data(void) {
     s32 i;
 
-    dma_copy(engine4_ROM_START, engine4_ROM_END, engine4_VRAM);
-    dma_copy(engine1_ROM_START, engine1_ROM_END, engine1_VRAM);
-    dma_copy(evt_ROM_START, evt_ROM_END, evt_VRAM);
-    dma_copy(entity_ROM_START, entity_ROM_END, entity_VRAM);
-    dma_copy(engine2_ROM_START, engine2_ROM_END, engine2_VRAM);
-    dma_copy(font_width_ROM_START, font_width_ROM_END, font_width_VRAM);
+    DMA_SEGMENT(engine4);
+    DMA_SEGMENT(engine1);
+    DMA_SEGMENT(evt);
+    DMA_SEGMENT(entity);
+    DMA_SEGMENT(engine2);
+    DMA_SEGMENT(font_width);
 
     gOverrideFlags = 0;
     gGameStatusPtr->unk_79 = 0;

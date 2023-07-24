@@ -330,4 +330,6 @@
 #define DT (1.0f)
 #endif
 
+#define DMA_SEGMENT(segment) dma_copy(segment##_ROM_START, segment##_ROM_END, segment##_VRAM)
+
 #endif

@@ -612,7 +612,7 @@ void pause_init(void) {
     MenuPanel** menuPanels;
     s32 i;
 
-    dma_copy(ui_images_ROM_START, ui_images_ROM_END, ui_images_VRAM);
+    DMA_SEGMENT(ui_images);
 
     for (i = 0; i < ARRAY_COUNT(gPauseIconScripts); i++) {
         gPauseCommonIconIDs[i] = hud_element_create(gPauseIconScripts[i]);
