@@ -154,7 +154,7 @@ static void N(MontyMoleAI_Surface)(Evt* script, MobileAISettings* aiSettings, En
 static void N(MontyMoleAI_DrawRock)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    s32 emoteOut;
+    EffectInstance* emoteOut;
 
     npc->duration--;
     if ((npc->duration) <= 0) {

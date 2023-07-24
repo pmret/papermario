@@ -11,7 +11,7 @@ void snowflake_update(EffectInstance* effect);
 void snowflake_render(EffectInstance* effect);
 void snowflake_appendGfx(void* effect);
 
-void snowflake_main(f32 x, f32 y, f32 z, s32 arg3, s32 arg4) {
+void snowflake_main(f32 x, f32 y, f32 z, s32 arg3) {
     EffectBlueprint bp;
     EffectInstance* effect;
     SnowflakeFXData* part;

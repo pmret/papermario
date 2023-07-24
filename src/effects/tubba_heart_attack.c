@@ -105,6 +105,8 @@ EffectInstance* tubba_heart_attack_main(
 void tubba_heart_attack_init(EffectInstance* effect) {
 }
 
+EFFECT_DEF_FLOATING_CLOUD_PUFF(floating_cloud_puff_main);
+
 void tubba_heart_attack_update(EffectInstance* effect) {
     TubbaHeartAttackFXData* data = effect->data.tubbaHeartAttack;
     EffectInstance* puffEffect;

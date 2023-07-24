@@ -47,7 +47,7 @@ API_CALLABLE(N(KoopaPatrolAI_Main)) {
         }
 
         if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {
-            s32 emoteTemp;
+            EffectInstance* emoteTemp;
 
             script->functionTemp[0] = 99;
             script->functionTemp[1] = 0;

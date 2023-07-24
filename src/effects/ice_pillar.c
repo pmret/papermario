@@ -15,6 +15,10 @@ extern Gfx D_09001208_40B3C8[];
 Gfx* D_E011E7F0[] = { D_090011A8_40B368, D_090011C8_40B388, D_090011E8_40B3A8, D_09001208_40B3C8 };
 Gfx* D_E011E800[] = { D_09001000_40B1C0 };
 
+EFFECT_DEF_MISC_PARTICLES(misc_particles_main);
+EFFECT_DEF_ICE_SHARD(ice_shard_main);
+EFFECT_DEF_COLD_BREATH(cold_breath_main);
+
 EffectInstance* ice_pillar_main(s32 arg0, f32 x, f32 y, f32 z, f32 scale, s32 arg5) {
     EffectBlueprint effectBp;
     EffectInstance* effect;

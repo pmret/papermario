@@ -59,6 +59,8 @@ void energy_shockwave_main(
 void energy_shockwave_init(EffectInstance* effect) {
 }
 
+EFFECT_DEF_SHIMMER_WAVE(shimmer_wave_main);
+
 void energy_shockwave_update(EffectInstance* effect) {
     EnergyShockwaveFXData* data = effect->data.energyShockwave;
     s32 unk_28;

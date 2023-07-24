@@ -115,6 +115,8 @@ EffectInstance* water_block_main(s32 arg0, f32 x, f32 y, f32 z, f32 arg4, s32 ar
 void water_block_init(EffectInstance* effect) {
 }
 
+EFFECT_DEF_WATER_SPLASH(water_splash_main);
+
 void water_block_update(EffectInstance* effect) {
     WaterBlockFXData *data;
     f32 temp_f20;

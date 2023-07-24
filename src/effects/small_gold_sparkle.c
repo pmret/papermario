@@ -56,12 +56,12 @@ EffectInstance* small_gold_sparkle_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, 
 
     part++;
     for (i = 1; i < numParts; i++, part++) {
-            part->unk_08 = sPartParams[1 + (i - 1) * 5];
-            part->unk_0C = sPartParams[2 + (i - 1) * 5];
-            part->unk_10 = sPartParams[3 + (i - 1) * 5];
-            part->unk_04 = -1;
-            part->unk_20 = sPartParams[0 + (i - 1) * 5];
-            part->unk_1C = (arg4 * sPartParams[4 + (i - 1) * 5]) * 0.01;
+        part->unk_08 = sPartParams[1 + (i - 1) * 5];
+        part->unk_0C = sPartParams[2 + (i - 1) * 5];
+        part->unk_10 = sPartParams[3 + (i - 1) * 5];
+        part->unk_04 = -1;
+        part->unk_20 = sPartParams[0 + (i - 1) * 5];
+        part->unk_1C = (arg4 * sPartParams[4 + (i - 1) * 5]) * 0.01;
     }
     return effect;
 }

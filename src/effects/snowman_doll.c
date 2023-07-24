@@ -120,6 +120,9 @@ EffectInstance* snowman_doll_main(
 void snowman_doll_init(EffectInstance* effect) {
 }
 
+EFFECT_DEF_COLD_BREATH(cold_breath_main);
+EFFECT_DEF_MISC_PARTICLES(misc_particles_main);
+
 void snowman_doll_update(EffectInstance* effect) {
     SnowmanDollFXData* data = effect->data.snowmanDoll;
     s32 unk_14;

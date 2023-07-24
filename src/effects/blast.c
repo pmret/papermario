@@ -130,6 +130,3 @@ void blast_appendGfx(void *effect) {
     gSPDisplayList(gMainGfxPos++, dlist);
     gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 }
-// #else
-// INCLUDE_ASM(s32, "effects/blast", blast_appendGfx);
-// #endif
