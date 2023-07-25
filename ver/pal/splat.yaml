@@ -11707,17 +11707,49 @@ segments:
       - [0xEAA728, palette, UnusedBlock_img2]
       - [0xEAA748]
   - name: entity_model_PushBlock
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEAAA70
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, PushBlock]
+    - start: 0xEAAA70
+      type: .data
+      name: PushBlock
+      subsegments:
+      - [0xEAAA70, vtx, PushBlock]
+      - [0xEAAB90, ci4, PushBlock_face, 16, 16]
+      - [0xEAAC10, palette, PushBlock_face]
+      - [0xEAAC30]
   - name: entity_model_BrickBlock
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEAADC0
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, BrickBlock]
+    - start: 0xEAADC0
+      type: .data
+      name: BrickBlock
+      subsegments:
+      - [0xEAADC0, vtx, BrickBlock]
+      - [0xEAAF00, ci4, BrickBlock_face, 32, 32]
+      - [0xEAB100, palette, BrickBlock_face]
+      - [0xEAB120]
   - name: entity_model_ShatteringBrickBlock
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEAB270
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, ShatteringBrickBlock]
+    - start: 0xEAB270
+      type: .data
+      name: ShatteringBrickBlock
+      subsegments:
+      - [0xEAB270, vtx, ShatteringBrickBlock]
+      - [0xEACD10, rgba16, ShatteringBrickBlock_texture, 32, 32]
+      - [0xEAD510]
   - name: entity_model_InertYellowBlock
     type: bin
     start: 0xEAF250
