@@ -313,6 +313,8 @@ def write_ninja_rules(
         "effect_data", command=f"$python {BUILD_TOOLS}/effects.py $in_yaml $out_dir"
     )
 
+    ninja.rule("pm_sbn", command=f"$python {BUILD_TOOLS}/audio/sbn.py $out $in")
+
     with Path("tools/permuter_settings.toml").open("w") as f:
         f.write(
             f"compiler_command = \"{cc} {CPPFLAGS.replace('$version', 'pal')} {cflags} -DPERMUTER -fforce-addr\"\n"
@@ -378,6 +380,7 @@ class Configure:
                     "pm_effect_shims",
                     "pm_sprite_shading_profiles",
                     "pm_imgfx_data",
+                    "pm_sbn",
                 ]
             )
         if code:
@@ -1110,6 +1113,12 @@ class Configure:
                     },
                 )
                 build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
+            elif seg.type == "pm_sbn":
+                sbn_path = entry.object_path.with_suffix("")
+                build(sbn_path, entry.src_paths, "pm_sbn") # could have non-yaml inputs be implicit
+                build(entry.object_path, [sbn_path], "bin")
+            elif seg.type == "linker" or seg.type == "linker_offset":
+                pass
             elif seg.type == "pm_imgfx_data":
                 c_file_path = (
                     Path(f"assets/{self.version}") / "imgfx" / (seg.name + ".c")

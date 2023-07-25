@@ -49,6 +49,7 @@ build/
 /assets/jp
 /assets/pal
 /assets/ique
+*.sbn
 
 # Star Rod
 /sprite/SpriteTable.xml
