@@ -11617,17 +11617,49 @@ segments:
       - [0xE9F2C0, palette, Hammer3Block_face]
       - [0xE9F2E0]
   - name: entity_model_ShatteringHammer1Block
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xE9F430
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, ShatteringHammer1Block]
+    - start: 0xE9F430
+      type: .data
+      name: ShatteringHammer1Block
+      subsegments:
+      - [0xE9F430, vtx, ShatteringHammer1Block]
+      - [0xEA0490, ci8, ShatteringHammer1Block_texture, 16, 32]
+      - [0xEA0690, palette, ShatteringHammer1Block_texture]
+      - [0xEA0890]
   - name: entity_model_ShatteringHammer2Block
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEA2680
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, ShatteringHammer2Block]
+    - start: 0xEA2680
+      type: .data
+      name: ShatteringHammer2Block
+      subsegments:
+      - [0xEA2680, vtx, ShatteringHammer2Block]
+      - [0xEA36E0, rgba16, ShatteringHammer2Block_texture, 16, 32]
+      - [0xEA3AE0]
   - name: entity_model_ShatteringHammer3Block
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEA58A0
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, ShatteringHammer3Block]
+    - start: 0xEA58A0
+      type: .data
+      name: ShatteringHammer3Block
+      subsegments:
+      - [0xEA58A0, vtx, ShatteringHammer3Block]
+      - [0xEA68F0, ci4, ShatteringHammer3Block_texture, 16, 32]
+      - [0xEA69F0, palette, ShatteringHammer3Block_texture]
+      - [0xEA6A10]
   - name: entity_model_YellowBlock
     type: bin
     start: 0xEA8880
