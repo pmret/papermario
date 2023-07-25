@@ -11751,17 +11751,50 @@ segments:
       - [0xEACD10, rgba16, ShatteringBrickBlock_texture, 32, 32]
       - [0xEAD510]
   - name: entity_model_InertYellowBlock
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEAF250
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, InertYellowBlock]
+    - start: 0xEAF250
+      type: .data
+      name: InertYellowBlock
+      subsegments:
+      - [0xEAF250, vtx, InertYellowBlock_1]
+      - [0xEAF350, vtx, InertYellowBlock_2]
+      - [0xEAF3D0, ci4, InertYellowBlock_face, 32, 32]
+      - [0xEAF5D0, palette, InertYellowBlock_face]
+      - [0xEAF5F0]
   - name: entity_model_InertRedBlock
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEAF750
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, InertRedBlock]
+    - start: 0xEAF750
+      type: .data
+      name: InertRedBlock
+      subsegments:
+      - [0xEAF750, vtx, InertRedBlock_1]
+      - [0xEAF850, vtx, InertRedBlock_2]
+      - [0xEAF8D0, rgba16, InertRedBlock_face, 32, 32]
+      - [0xEB00D0]
   - name: entity_model_HeartBlock
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEB0200
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, HeartBlock]
+    - start: 0xEB0200
+      type: .data
+      name: HeartBlock
+      subsegments:
+      - [0xEB0200, vtx, HeartBlock]
+      - [0xEB05C0, rgba16, HeartBlock_face, 16, 32]
+      - [0xEB09C0]
   - name: entity_model_PowBlock
     type: bin
     start: 0xEB0B30
