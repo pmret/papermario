@@ -49,7 +49,7 @@ Gfx* D_E0114718[] = {
 
 s8 lil_oink_AnimateGfxSelect[] = { 1, 2, 1, 0 };
 
-EffectInstance* lil_oink_main(void) {
+EffectInstance* lil_oink_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, s32 arg5) {
     EffectBlueprint bp;
     EffectInstance* effect;
     LilOinkFXData* data;
@@ -63,9 +63,9 @@ EffectInstance* lil_oink_main(void) {
     bp.renderUI = NULL;
     bp.effectID = EFFECT_LIL_OINK;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    data = effect->data.lilOink = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.lilOink = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(data != NULL);
 
     data->lifetime = 0;
@@ -109,7 +109,7 @@ void lil_oink_update(EffectInstance* effect) {
                 break;
             case LIL_OINK_ANIM_3:
                 data->gfxFrame[i] = lil_oink_AnimateGfxSelect[time % ARRAY_COUNT(lil_oink_AnimateGfxSelect)];
-                data->rot[i] = data->rot[i] + shim_sin_deg(time * 10);
+                data->rot[i] = data->rot[i] + sin_deg(time * 10);
                 if (time >= 36) {
                     animDone = TRUE;
                     data->animTime[i] = 0;
@@ -117,7 +117,7 @@ void lil_oink_update(EffectInstance* effect) {
                 break;
             case LIL_OINK_ANIM_2:
                 data->gfxFrame[i] = lil_oink_AnimateGfxSelect[time % ARRAY_COUNT(lil_oink_AnimateGfxSelect)];
-                data->jumpOffset[i] = shim_sin_deg(time * 20) * 2.0f;
+                data->jumpOffset[i] = sin_deg(time * 20) * 2.0f;
                 animDone = TRUE;
                 if (time >= 9) {
                     data->jumpOffset[i] = 0.0f;
@@ -126,7 +126,7 @@ void lil_oink_update(EffectInstance* effect) {
                 break;
             case LIL_OINK_ANIM_4:
                 data->gfxFrame[i] = lil_oink_AnimateGfxSelect[time % ARRAY_COUNT(lil_oink_AnimateGfxSelect)];
-                data->jumpOffset[i] = shim_sin_deg(time * 20) * 4.0f;
+                data->jumpOffset[i] = sin_deg(time * 20) * 4.0f;
                 if (!(time < 9)) {
                     animDone = TRUE;
                     data->jumpOffset[i] = 0.0f;
@@ -136,7 +136,7 @@ void lil_oink_update(EffectInstance* effect) {
             case LIL_OINK_ANIM_5:
             default:
                 data->gfxFrame[i] = lil_oink_AnimateGfxSelect[time % ARRAY_COUNT(lil_oink_AnimateGfxSelect)];
-                data->jumpOffset[i] = shim_sin_deg(time * 5) * 12.0f;
+                data->jumpOffset[i] = sin_deg(time * 5) * 12.0f;
                 if (!(time < 36)) {
                     animDone = TRUE;
                     data->jumpOffset[i] = 0.0f;
@@ -164,7 +164,7 @@ void lil_oink_render(EffectInstance* effect) {
     renderTask.distance = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -183,15 +183,15 @@ void lil_oink_appendGfx(void* effect) {
 
     for (i = 0; i < MAX_LIL_OINKS; i++) {
         if (data->flags[i] & LIL_OINK_FLAG_VISIBLE) {
-            shim_guPositionF(mtxTransform, 0.0f, 180.0f - data->rot[i], 0.0f, 1.0f,
+            guPositionF(mtxTransform, 0.0f, 180.0f - data->rot[i], 0.0f, 1.0f,
                              data->x[i], data->y[i] + data->jumpOffset[i], data->z[i]);
-            shim_guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
+            guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
             gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                       G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gSPDisplayList(gMainGfxPos++, D_E0114718[data->type[i]]);
             if (data->type[i] == LIL_OINK_TYPE_SILVER || data->type[i] == LIL_OINK_TYPE_GOLD) {
-                f32 shineVariation = shim_sin_deg(angle) * 63.0f;
+                f32 shineVariation = sin_deg(angle) * 63.0f;
                 s8 primColor = shineVariation + 63.0f;
 
                 gDPSetPrimColor(gMainGfxPos++, 0, 0, primColor, primColor, primColor, 0);

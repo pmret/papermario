@@ -113,9 +113,9 @@ EffectInstance* pink_sparkles_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 a
     bp.renderUI = NULL;
     bp.effectID = EFFECT_PINK_SPARKLES;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    part = effect->data.pinkSparkles = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = effect->data.pinkSparkles = general_heap_malloc(numParts * sizeof(*part));
     ASSERT(effect->data.pinkSparkles != NULL);
 
     part->unk_04 = arg1;
@@ -132,15 +132,15 @@ EffectInstance* pink_sparkles_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 a
     for (i = 0; i < 16; i++) {
         for (j = 0; j < 16; j++) {
             if (D_E01248C0[j + (15 - i) * 16 + arg0 * 256] != 46) {
-                f32 temp_f20 = j * 2 - 16 + (shim_rand_int(20) - 10) * 0.1;
+                f32 temp_f20 = j * 2 - 16 + (rand_int(20) - 10) * 0.1;
 
-                part->unk_04 = temp_f20 * shim_cos_deg(angle);
-                part->unk_08 = i * 2 + (shim_rand_int(20) - 10) * 0.1;
-                part->unk_0C = temp_f20 * shim_sin_deg(angle);
+                part->unk_04 = temp_f20 * cos_deg(angle);
+                part->unk_08 = i * 2 + (rand_int(20) - 10) * 0.1;
+                part->unk_0C = temp_f20 * sin_deg(angle);
                 part->unk_10 = part->unk_04 * 0.04;
                 part->unk_14 = part->unk_08 * 0.04;
-                part->unk_18 = shim_rand_int(10) * 0.001;
-                part->unk_1C = shim_rand_int(7) + 30;
+                part->unk_18 = rand_int(10) * 0.001;
+                part->unk_1C = rand_int(7) + 30;
                 part->unk_20 = 0;
 
                 count++;
@@ -210,7 +210,7 @@ void pink_sparkles_update(EffectInstance* effect) {
     }
 
     if (count >= effect->numParts - 1) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
     }
 }
 
@@ -223,7 +223,7 @@ void pink_sparkles_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
 }
 
 void pink_sparkles_appendGfx(void* effect) {
@@ -246,21 +246,21 @@ void pink_sparkles_appendGfx(void* effect) {
 
     colorIdx = (part->unk_20 - 1) * 3;
 
-    shim_guTranslateF(sp98, part->unk_04, part->unk_08, part->unk_0C);
-    shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-    shim_guMtxCatF(sp58, sp98, sp98);
+    guTranslateF(sp98, part->unk_04, part->unk_08, part->unk_0C);
+    guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(sp58, sp98, sp98);
 
     part++;
     for (i = 0; i < ((EffectInstance*)effect)->numParts - 1; i++, part++) {
         s32 unk_28 = part->unk_28;
 
         if (unk_28 >= 0) {
-            shim_guTranslateF(sp58, part->unk_04, part->unk_08, part->unk_0C);
+            guTranslateF(sp58, part->unk_04, part->unk_08, part->unk_0C);
 
             sp58[0][0] = sp58[1][1] = sp58[2][2] = part->unk_24;
 
-            shim_guMtxCatF(sp58, sp98, sp18);
-            shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+            guMtxCatF(sp58, sp98, sp18);
+            guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
             if (colorIdx >= ARRAY_COUNT(D_E0124BC0)) {
                 colorIdx = 0;

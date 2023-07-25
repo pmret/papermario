@@ -24,12 +24,21 @@ f32 D_802938A4 = 0.0f;
 s16 D_802938A8 = 4;
 
 EffectInstance* gDamageCountEffects[] = {
-    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-    NULL, NULL, NULL, NULL, NULL,
+    NULL, NULL, NULL, NULL, 
+    NULL, NULL, NULL, NULL, 
+    NULL, NULL, NULL, NULL, 
+    NULL, NULL, NULL, NULL, 
+    NULL, NULL, NULL, NULL, 
+    NULL, NULL, NULL, NULL,
 };
 
 s32 gDamageCountTimers[] = {
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
 };
 
 Gfx D_80293970[] = {

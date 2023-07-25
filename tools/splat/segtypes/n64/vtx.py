@@ -34,7 +34,7 @@ class N64SegVtx(CommonSegCodeSubsegment):
             args=args,
             yaml=yaml,
         )
-        self.file_text = None
+        self.file_text: Optional[str] = None
         self.data_only = isinstance(yaml, dict) and yaml.get("data_only", False)
 
     def format_sym_name(self, sym) -> str:
@@ -49,7 +49,7 @@ class N64SegVtx(CommonSegCodeSubsegment):
     def scan(self, rom_bytes: bytes):
         self.file_text = self.disassemble_data(rom_bytes)
 
-    def disassemble_data(self, rom_bytes):
+    def disassemble_data(self, rom_bytes) -> str:
         assert isinstance(self.rom_start, int)
         assert isinstance(self.rom_end, int)
         assert isinstance(self.vram_start, int)
@@ -96,11 +96,7 @@ class N64SegVtx(CommonSegCodeSubsegment):
                 f.write(self.file_text)
 
     def should_scan(self) -> bool:
-        return (
-            options.opts.is_mode_active("vtx")
-            and self.rom_start is not None
-            and self.rom_end is not None
-        )
+        return options.opts.is_mode_active("vtx")
 
     def should_split(self) -> bool:
         return self.extract and options.opts.is_mode_active("vtx")

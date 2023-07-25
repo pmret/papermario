@@ -18,9 +18,9 @@ s32 D_800778AC[] = {
     0x00000000, 0xFFFFFF00, 0xFFFFFF00, 0x00000000, 0x00000000
 };
 
-// BSS
-extern s32 D_800A0904;
-extern s32 D_800A0908;
+SHIFT_BSS s8 D_800A0900;
+SHIFT_BSS s32 D_800A0904;
+SHIFT_BSS s32 D_800A0908;
 
 #ifdef SHIFT
 #define shim_battle_heap_create_obfuscated battle_heap_create
@@ -92,7 +92,7 @@ void state_step_battle(void) {
             clear_npcs();
             clear_entity_data(1);
             clear_trigger_data();
-            dma_copy(battle_code_ROM_START, battle_code_ROM_END, battle_code_VRAM);
+            DMA_COPY_SEGMENT(battle_code);
             initialize_battle();
             btl_save_world_cameras();
             load_battle_section();
@@ -196,7 +196,7 @@ void state_step_end_battle(void) {
                 }
 
                 mdl_load_all_textures(mapSettings->modelTreeRoot, get_asset_offset(wMapTexName, &sizeTemp), sizeTemp);
-                calculate_model_sizes();
+                mdl_calculate_model_sizes();
                 npc_reload_all();
 
                 playerStatus->animFlags = D_800A0904;

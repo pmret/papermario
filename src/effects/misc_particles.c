@@ -69,9 +69,9 @@ EffectInstance* misc_particles_main(
     bp.renderUI = NULL;
     bp.effectID = EFFECT_MISC_PARTICLES;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParticles;
-    part = effect->data.miscParticles = shim_general_heap_malloc(numParticles * sizeof(*part));
+    part = effect->data.miscParticles = general_heap_malloc(numParticles * sizeof(*part));
     ASSERT(effect->data.miscParticles != NULL);
 
     part->variation = variation;
@@ -113,9 +113,9 @@ EffectInstance* misc_particles_main(
             part->glowColor.a = 255;
             break;
         default:
-            part->innerColor.r = shim_rand_int(127) + 128;
-            part->innerColor.g = shim_rand_int(255 - part->innerColor.r) + 128;
-            part->innerColor.b = shim_rand_int(383 - part->innerColor.r - part->innerColor.g) + 128;
+            part->innerColor.r = rand_int(127) + 128;
+            part->innerColor.g = rand_int(255 - part->innerColor.r) + 128;
+            part->innerColor.b = rand_int(383 - part->innerColor.r - part->innerColor.g) + 128;
             part->glowColor.r = 127;
             part->glowColor.g = 127;
             part->glowColor.b = 127;
@@ -172,7 +172,7 @@ void misc_particles_update(EffectInstance* effect) {
     particle->lifetime++;
 
     if (particle->timeLeft < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -187,8 +187,8 @@ void misc_particles_update(EffectInstance* effect) {
     posX = particle->pos.x;
     posY = particle->pos.y;
     posZ = particle->pos.z;
-    temp_cos = shim_cos_deg(gCameras[gCurrentCameraID].currentYaw);
-    temp_sin = shim_sin_deg(gCameras[gCurrentCameraID].currentYaw);
+    temp_cos = cos_deg(gCameras[gCurrentCameraID].currentYaw);
+    temp_sin = sin_deg(gCameras[gCurrentCameraID].currentYaw);
     innerColorR = particle->innerColor.r;
     innerColorG = particle->innerColor.g;
     innerColorB = particle->innerColor.b;
@@ -208,9 +208,9 @@ void misc_particles_update(EffectInstance* effect) {
 
         if (particle->animTime >= 0) {
             if (particle->animTime == 0) {
-                f32 randMag = shim_rand_int(scaleX) - scaleX * 0.5;
+                f32 randMag = rand_int(scaleX) - scaleX * 0.5;
                 particle->pos.x = posX + randMag * temp_cos - temp_sin;
-                particle->pos.y = posY + shim_rand_int(scaleY);
+                particle->pos.y = posY + rand_int(scaleY);
                 particle->pos.z = posZ + randMag * temp_sin + temp_cos;
                 particle->innerColor.r = innerColorR;
                 particle->innerColor.g = innerColorG;
@@ -224,10 +224,10 @@ void misc_particles_update(EffectInstance* effect) {
                         particle->unk_18 = 0.0f;
                         particle->unk_1C = 0.0f;
                         particle->unk_24 = 0.0f;
-                        particle->unk_28 = (f32) (-shim_rand_int(10) - 2) * 0.05;
+                        particle->unk_28 = (f32) (-rand_int(10) - 2) * 0.05;
                         particle->unk_5C = 0.0f;
                         particle->unk_60 = 0.0f;
-                        particle->scale = (f32) shim_rand_int(10) * 0.05 + 0.5;
+                        particle->scale = (f32) rand_int(10) * 0.05 + 0.5;
                     }
                     particle->innerColor.a = D_E00E4E00[particle->animTime];
                     particle->pos.x += particle->unk_18;
@@ -241,16 +241,16 @@ void misc_particles_update(EffectInstance* effect) {
                 case 3:
                     if (particle->animTime == 0) {
                         if (variation == 2) {
-                            particle->unk_18 = (f32) (shim_rand_int(20) - 10) * 0.05;
-                            particle->unk_1C = (f32) (shim_rand_int(20) - 10) * 0.05;
+                            particle->unk_18 = (f32) (rand_int(20) - 10) * 0.05;
+                            particle->unk_1C = (f32) (rand_int(20) - 10) * 0.05;
                         } else {
                             particle->unk_18 = 0.0f;
                             particle->unk_1C = 0.0f;
                         }
                         particle->unk_24 = 0.0f;
                         particle->unk_28 = 0.0f;
-                        particle->unk_5C = shim_rand_int(15);
-                        particle->unk_60 = shim_rand_int(15);
+                        particle->unk_5C = rand_int(15);
+                        particle->unk_60 = rand_int(15);
                         particle->innerColor.a = 255;
                     }
                     particle->scale = (f32) D_E00E4DC0[particle->animTime] * 0.1;
@@ -267,9 +267,9 @@ void misc_particles_update(EffectInstance* effect) {
                         particle->unk_60 = 0.0f;
                         particle->innerColor.a = 255;
                         particle->scale = 1.0f;
-                        particle->innerColor.r = shim_rand_int(127) + 128;
-                        particle->innerColor.g = shim_rand_int(255 - particle->innerColor.r) + 128;
-                        particle->innerColor.b = shim_rand_int(383 - particle->innerColor.r - particle->innerColor.g) + 128;
+                        particle->innerColor.r = rand_int(127) + 128;
+                        particle->innerColor.g = rand_int(255 - particle->innerColor.r) + 128;
+                        particle->innerColor.b = rand_int(383 - particle->innerColor.r - particle->innerColor.g) + 128;
                     }
                     if (variation == 4) {
                         particle->scale = (f32) D_E00E4DE0[particle->animTime] * 0.01;
@@ -291,7 +291,7 @@ void misc_particles_render(EffectInstance* effect) {
     renderTask.distance = 7;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -314,8 +314,8 @@ void misc_particles_appendGfx(void* effect) {
     particle++;
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, particle++) {
         if (particle->animTime >= 0) {
-            shim_guPositionF(mtxTransform, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, particle->scale * alphaScale, particle->pos.x, particle->pos.y, particle->pos.z);
-            shim_guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
+            guPositionF(mtxTransform, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, particle->scale * alphaScale, particle->pos.x, particle->pos.y, particle->pos.z);
+            guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
             gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
             gDPSetPrimColor(gMainGfxPos++, 0, 80 - particle->animTime, particle->innerColor.r, particle->innerColor.g, particle->innerColor.b, alphaScale * particle->innerColor.a);

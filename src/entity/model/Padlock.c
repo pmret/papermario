@@ -50,18 +50,12 @@ Gfx Entity_Padlock_LoadTextureBody[] = {
     gsSPEndDisplayList(),
 };
 
-Mtx Entity_Padlock_mtxShackle = {
-    .m = {
-        { 0x00010000, 0x00000000,
-          0x00000001, 0x00000000 },
-        { 0x00000000, 0x00010000,
-          0x00000016, 0x00000001 },
-        { 0x00000000, 0x00000000,
-          0x00000000, 0x00000000 },
-        { 0x00000000, 0x00000000,
-          0x00008000, 0x00000000 }
-    }
-};
+Mtx Entity_Padlock_mtxShackle = RDP_MATRIX(
+    1.000000, 0.000000, 0.000000,  0.000000,
+    0.000000, 1.000000, 0.000000, 22.500000,
+    0.000000, 0.000000, 1.000000,  0.000000,
+    0.000000, 0.000000, 0.000000,  1.000000
+);
 
 Gfx Entity_Padlock_RenderShackleMain[] = {
     gsDPPipeSync(),

@@ -31,12 +31,12 @@ void stars_spread_main(
     bp.renderUI = NULL;
     bp.effectID = EFFECT_STARS_SPREAD;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = arg4;
-    part = effect->data.starsSpread = shim_general_heap_malloc(arg4 * sizeof(*part));
+    part = effect->data.starsSpread = general_heap_malloc(arg4 * sizeof(*part));
     ASSERT(effect->data.starsSpread != NULL);
 
-    shim_mem_clear(part, arg4 * sizeof(*part));
+    mem_clear(part, arg4 * sizeof(*part));
 
     part->unk_24 = arg5;
     part->unk_28 = 0;
@@ -51,8 +51,8 @@ void stars_spread_main(
         part->unk_04 = 0;
         part->unk_08 = 0;
         part->unk_0C = 0;
-        part->unk_10 = shim_sin_deg((i - 1) * 360 / (arg4 - 1)) * 8.0;
-        part->unk_14 = shim_cos_deg((i - 1) * 360 / (arg4 - 1)) * 8.0;
+        part->unk_10 = sin_deg((i - 1) * 360 / (arg4 - 1)) * 8.0;
+        part->unk_14 = cos_deg((i - 1) * 360 / (arg4 - 1)) * 8.0;
         part->unk_18 = 0;
         part->unk_1C = 0;
         part->unk_20 = 20.0f;
@@ -73,7 +73,7 @@ void stars_spread_update(EffectInstance* effect) {
     part->unk_24--;
 
     if (part->unk_24 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -115,7 +115,7 @@ void stars_spread_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_28;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -130,22 +130,22 @@ void stars_spread_appendGfx(void* effect) {
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
     gSPDisplayList(gMainGfxPos++, D_09000440_360E70);
 
-    shim_guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
-    shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
+    guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(sp58, sp18, sp18);
+    guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, 220, 220, 40, 230);
 
     part++;
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, part++) {
-        shim_guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
-        shim_guRotateF(sp58, part->unk_1C, 0.0f, 0.0f, 1.0f);
-        shim_guMtxCatF(sp58, sp18, sp18);
-        shim_guScaleF(sp58, part->unk_30, part->unk_30, 1.0f);
-        shim_guMtxCatF(sp58, sp18, sp18);
-        shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
+        guRotateF(sp58, part->unk_1C, 0.0f, 0.0f, 1.0f);
+        guMtxCatF(sp58, sp18, sp18);
+        guScaleF(sp58, part->unk_30, part->unk_30, 1.0f);
+        guMtxCatF(sp58, sp18, sp18);
+        guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         gSPDisplayList(gMainGfxPos++, dlist);

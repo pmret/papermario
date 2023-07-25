@@ -132,7 +132,7 @@ void N(FlyingAI_Wander)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
                 if (gPlayerStatusPtr->position.y < (npc->pos.y + npc->collisionHeight) + 10.0 &&
                     basic_ai_check_player_dist(territory, enemy, aiSettings->alertRadius, aiSettings->alertOffsetDist, 0) != 0)
                 {
-                    s32 emoteTemp;
+                    EffectInstance* emoteTemp;
                     fx_emote(EMOTE_EXCLAMATION, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xC, &emoteTemp);
                     npc->moveToPos.y = npc->pos.y;
                     ai_enemy_play_sound(npc, SOUND_2F4, SOUND_PARAM_MORE_QUIET);
@@ -198,7 +198,7 @@ void N(FlyingAI_Loiter)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
     f32 posX, posY, posZ, posW;
     f32 hoverHeight = (f32)enemy->varTable[3] / 100.0;
     f32 temp_f26 = hoverHeight + (f32)((f32)enemy->varTable[7] / 100.0);
-    s32 var;
+    EffectInstance* var;
 
     if (npc->duration > 0) {
         npc->duration--;

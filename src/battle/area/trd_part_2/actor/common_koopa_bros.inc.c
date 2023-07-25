@@ -160,7 +160,7 @@ API_CALLABLE(N(SpawnSpinEffect)) {
     N(DummyPlayerStatus).position.y = posY - 10.0f;
     N(DummyPlayerStatus).position.z = posZ;
 
-    fx_46(6, &N(DummyPlayerStatus), 1.0f, duration);
+    fx_effect_46(6, &N(DummyPlayerStatus), 1.0f, duration);
     return ApiStatus_DONE2;
 }
 

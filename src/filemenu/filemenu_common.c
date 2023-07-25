@@ -1020,7 +1020,7 @@ void filemenu_init(s32 arg0) {
     MenuPanel* menu;
     s32 i;
 
-    dma_copy(ui_images_ROM_START, ui_images_ROM_END, ui_images_VRAM);
+    DMA_COPY_SEGMENT(ui_images);
     for (i = 0; i < ARRAY_COUNT(filemenu_cursorHudElemID); i++) {
         filemenu_cursorHudElemID[i] = hud_element_create(filemenu_cursor_hudElemScripts[i]);
         hud_element_set_flags(filemenu_cursorHudElemID[i], HUD_ELEMENT_FLAG_DROP_SHADOW | HUD_ELEMENT_FLAG_80);

@@ -5,7 +5,7 @@ API_CALLABLE(N(InitEntryFromTunnels)) {
     Npc* npc;
     s32 i;
 
-    func_8011B950(MODEL_souko, -1, FOG_MODE_1, 1);
+    func_8011B950(MODEL_souko, CUSTOM_GFX_NONE, FOG_MODE_1, 1);
     set_background_color_blend(0, 0, 0, 255);
     gCameras[CAM_DEFAULT].bgColor[0] = 0;
     gCameras[CAM_DEFAULT].bgColor[1] = 0;

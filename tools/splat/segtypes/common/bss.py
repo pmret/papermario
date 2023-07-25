@@ -1,7 +1,8 @@
-import spimdisasm
 from util import options, symbols, log
 
 from segtypes.common.data import CommonSegData
+
+from disassembler_section import make_bss_section
 
 
 class CommonSegBss(CommonSegData):
@@ -37,8 +38,7 @@ class CommonSegBss(CommonSegData):
             bss_end = next_subsegment.vram_start
         assert isinstance(bss_end, int), f"{self.name} {bss_end}"
 
-        self.spim_section = spimdisasm.mips.sections.SectionBss(
-            symbols.spim_context,
+        self.spim_section = make_bss_section(
             self.rom_start,
             self.rom_end,
             self.vram_start,
@@ -48,10 +48,12 @@ class CommonSegBss(CommonSegData):
             self.get_exclusive_ram_id(),
         )
 
-        self.spim_section.analyze()
-        self.spim_section.setCommentOffset(self.rom_start)
+        assert self.spim_section is not None
 
-        for spim_sym in self.spim_section.symbolList:
+        self.spim_section.analyze()
+        self.spim_section.set_comment_offset(self.rom_start)
+
+        for spim_sym in self.spim_section.get_section().symbolList:
             symbols.create_symbol_from_spim_symbol(
                 self.get_most_parent(), spim_sym.contextSym
             )

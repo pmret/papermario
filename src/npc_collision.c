@@ -1,10 +1,11 @@
 #include "common.h"
 
-extern s32 D_8010C94C;
-extern s32 D_8010C968;
-extern s32 D_8010C970;
-extern s32 D_8010C974;
-extern s32 D_8010C98C;
+SHIFT_BSS s32 D_8010C94C;
+SHIFT_BSS s32 D_8010C968;
+SHIFT_BSS s32 D_8010C98C;
+SHIFT_BSS s32 D_8010C970;
+SHIFT_BSS s32 D_8010C974;
+SHIFT_BSS s32 NpcHitQueryColliderID;
 
 PlayerStatus* gPlayerStatusPtr = &gPlayerStatus; // maybe wPlayerStatus
 

@@ -41,6 +41,10 @@ u8 D_800779B0 = 0;
 extern s32 D_80200000;
 extern ShapeFile gMapShapeData;
 
+SHIFT_BSS s8 D_800A0930;
+SHIFT_BSS s8 D_800A0931;
+SHIFT_BSS s16 D_800A0932[1];
+
 void state_init_language_select(void) {
     D_800A0931 = 0;
     D_800A0932[0] = 0;
@@ -323,7 +327,7 @@ void state_step_exit_language_select(void) {
                         set_background_size(296, 200, 12, 20);
                     }
 
-                    calculate_model_sizes();
+                    mdl_calculate_model_sizes();
                     npc_reload_all();
                     status_bar_respond_to_changes();
                     set_time_freeze_mode(TIME_FREEZE_PARTIAL);

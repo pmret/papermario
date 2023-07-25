@@ -482,7 +482,7 @@ segments:
     start: 0x1749F0
     vram: 0x8023E000
 
-  - [0x1D4720, bin]
+  - [0x1D4720, pm_icons, icon]
 
   - name: logos
     type: bin
@@ -3230,7 +3230,7 @@ segments:
     type: pm_sprites
     name: sprites
 
-  - [ 0x1C7F208, bin ]
+  - [0x1C7F208, bin ]
 
   - start: 0x1D40000
     type: bin

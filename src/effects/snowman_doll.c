@@ -81,9 +81,9 @@ EffectInstance* snowman_doll_main(
     bp.renderUI = NULL;
     bp.effectID = EFFECT_SNOWMAN_DOLL;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    data = effect->data.snowmanDoll = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.snowmanDoll = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.snowmanDoll != NULL);
 
     data->unk_00 = arg0;
@@ -120,6 +120,9 @@ EffectInstance* snowman_doll_main(
 void snowman_doll_init(EffectInstance* effect) {
 }
 
+EFFECT_DEF_COLD_BREATH(cold_breath_main);
+EFFECT_DEF_MISC_PARTICLES(misc_particles_main);
+
 void snowman_doll_update(EffectInstance* effect) {
     SnowmanDollFXData* data = effect->data.snowmanDoll;
     s32 unk_14;
@@ -137,7 +140,7 @@ void snowman_doll_update(EffectInstance* effect) {
     data->unk_14++;
 
     if (data->unk_10 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -255,13 +258,13 @@ void snowman_doll_update(EffectInstance* effect) {
     }
 
     if ((unk_14 & 7) == 1) {
-        shim_load_effect(EFFECT_COLD_BREATH);
+        load_effect(EFFECT_COLD_BREATH);
         cold_breath_main(2,
-            data->unk_04 + data->unk_30 + shim_rand_int(60) - 30.0f,
-            data->unk_08 + data->unk_34 + shim_rand_int(100) + 50.0f,
+            data->unk_04 + data->unk_30 + rand_int(60) - 30.0f,
+            data->unk_08 + data->unk_34 + rand_int(100) + 50.0f,
             data->unk_0C + data->unk_38,
             4.0f, 40);
-        shim_load_effect(EFFECT_MISC_PARTICLES);
+        load_effect(EFFECT_MISC_PARTICLES);
         misc_particles_main(1,
             data->unk_04 + data->unk_30,
             data->unk_08 + data->unk_34 + 10.0f,
@@ -279,7 +282,7 @@ void snowman_doll_render(EffectInstance* effect) {
     renderTask.distance = -10;
     renderTask.renderMode = RENDER_MODE_28;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -295,19 +298,19 @@ void snowman_doll_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guTranslateF(sp18, data->unk_04, data->unk_08, data->unk_0C);
-    shim_guScaleF(sp58, data->unk_28, data->unk_28, data->unk_28);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp18, data->unk_04, data->unk_08, data->unk_0C);
+    guScaleF(sp58, data->unk_28, data->unk_28, data->unk_28);
+    guMtxCatF(sp58, sp18, sp18);
+    guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
-    shim_guTranslateF(sp18, data->unk_30, data->unk_34, data->unk_38);
-    shim_guScaleF(sp58, data->unk_48, data->unk_4C, data->unk_48);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guRotateF(sp58, data->unk_2C, 0.0f, 1.0f, 0.0f);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp18, data->unk_30, data->unk_34, data->unk_38);
+    guScaleF(sp58, data->unk_48, data->unk_4C, data->unk_48);
+    guMtxCatF(sp58, sp18, sp18);
+    guRotateF(sp58, data->unk_2C, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(sp58, sp18, sp18);
+    guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, data->unk_18, data->unk_1C, data->unk_20, unk_24);

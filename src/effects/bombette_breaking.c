@@ -70,9 +70,9 @@ EffectInstance* bombette_breaking_main(s32 type, s32 modelID, s32 treeIndex, f32
     f40 *= 0.5;
 
     numParts = (xParts * yParts * zParts) + 1;
-    effect = shim_create_effect_instance(bpPtr);
+    effect = create_effect_instance(bpPtr);
     effect->numParts = numParts;
-    effect->data.bombetteBreaking = data = shim_general_heap_malloc(numParts * sizeof(*data));
+    effect->data.bombetteBreaking = data = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(data != NULL);
 
     data->unk_04 = -sizeY * 0.5;
@@ -152,7 +152,7 @@ void bombette_breaking_update(EffectInstance* effect) {
     data->timeLeft--;
 
     if (data->timeLeft < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -198,7 +198,7 @@ void bombette_breaking_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_28;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -218,17 +218,17 @@ void bombette_breaking_appendGfx(void* effect) {
 
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
-    shim_guTranslateF(sp20, data->center.x, data->center.y, data->center.z);
-    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp20, data->center.x, data->center.y, data->center.z);
+    guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
-    shim_mdl_draw_hidden_panel_surface(&gMainGfxPos, data->treeIndex);
+    mdl_draw_hidden_panel_surface(&gMainGfxPos, data->treeIndex);
 
     data++;
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, data++) {
-        shim_guPositionF(sp20, timeLeft + (130 * i), timeLeft - (40 * i), timeLeft + (80 * i), unk_40,
+        guPositionF(sp20, timeLeft + (130 * i), timeLeft - (40 * i), timeLeft + (80 * i), unk_40,
                          data->unk_14.x, data->unk_14.y, data->unk_14.z);
-        shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                   G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         gSPDisplayList(gMainGfxPos++, D_E0084E1C[type]);
@@ -241,9 +241,9 @@ void bombette_breaking_appendGfx(void* effect) {
     data++;
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, data++) {
         gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 255, (data->alpha * mainAlpha) / 255);
-        shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, unk_38,
+        guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, unk_38,
                          data->center.x, data->center.y, data->center.z);
-        shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],
                   G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         gSPDisplayList(gMainGfxPos++, sp60);

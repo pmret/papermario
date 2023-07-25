@@ -42,12 +42,12 @@ void smoke_impact_main(
     bp.renderUI = NULL;
     bp.effectID = EFFECT_SMOKE_IMPACT;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = arg5;
-    part = effect->data.smokeImpact = shim_general_heap_malloc(arg5 * sizeof(*part));
+    part = effect->data.smokeImpact = general_heap_malloc(arg5 * sizeof(*part));
     ASSERT(effect->data.smokeImpact != NULL);
 
-    shim_mem_clear(part, arg5 * sizeof(*part));
+    mem_clear(part, arg5 * sizeof(*part));
 
     part->unk_24 = arg7;
     part->unk_28 = 0;
@@ -67,9 +67,9 @@ void smoke_impact_main(
         part->unk_04 = 0;
         part->unk_08 = 0;
         part->unk_0C = 0;
-        part->unk_10 = shim_sin_deg(angle);
+        part->unk_10 = sin_deg(angle);
         part->unk_14 = 0;
-        part->unk_18 = shim_cos_deg(angle);
+        part->unk_18 = cos_deg(angle);
     }
 }
 
@@ -86,7 +86,7 @@ void smoke_impact_update(EffectInstance* effect) {
     part->unk_24--;
 
     if (part->unk_24 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -112,7 +112,7 @@ void smoke_impact_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_28;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -134,10 +134,10 @@ void smoke_impact_appendGfx(void* effect) {
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
     gSPDisplayList(gMainGfxPos++, dlist2);
 
-    shim_guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
-    shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-    shim_guMtxCatF(sp58, sp18, sp98);
-    shim_guMtxF2L(sp98, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
+    guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(sp58, sp18, sp98);
+    guMtxF2L(sp98, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
@@ -165,8 +165,8 @@ void smoke_impact_appendGfx(void* effect) {
 
     part++;
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, part++) {
-        shim_guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
-        shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
+        guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         gSPDisplayList(gMainGfxPos++, dlist);

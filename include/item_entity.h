@@ -19,4 +19,11 @@ enum {
 #define is_Loop ITEM_SCRIPT_OP_Loop,
 #define is_RandomRestart(max, cutoff) ITEM_SCRIPT_OP_RandomRestart, max, cutoff,
 
+#define STANDARD_ITEM_SCRIPT(icon) \
+    { \
+        is_SetIcon(60, icon) \
+        is_Restart \
+        is_End \
+    }
+
 #endif

@@ -31,13 +31,13 @@ void smoke_burst_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 arg4, s32 time
     effectBp.renderUI = NULL;
     effectBp.effectID = EFFECT_SMOKE_BURST;
 
-    effect = shim_create_effect_instance(&effectBp);
+    effect = create_effect_instance(&effectBp);
     effect->numParts = numParts;
 
-    data = effect->data.smokeBurst = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.smokeBurst = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(data != NULL);
 
-    shim_mem_clear(data, numParts * sizeof(*data));
+    mem_clear(data, numParts * sizeof(*data));
     data->timeLeft = timeLeft;
     data->lifeTime = 0;
     data->unk_1C = timeLeft;
@@ -81,7 +81,7 @@ void smoke_burst_update(EffectInstance *effect) {
     data->timeLeft--;
 
     if (data->timeLeft < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
     }
 }
 
@@ -94,7 +94,7 @@ void smoke_burst_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_28;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -113,10 +113,10 @@ void smoke_burst_appendGfx(void* effect) {
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
     gSPDisplayList(gMainGfxPos++, dlist2);
 
-    shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, data->unk_10, data->pos.x, data->pos.y, data->pos.z);
-    shim_guRotateF(sp60, 20.0f, 0.0f, 0.0f, 1.0f);
-    shim_guMtxCatF(sp60, sp20, sp20);
-    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, data->unk_10, data->pos.x, data->pos.y, data->pos.z);
+    guRotateF(sp60, 20.0f, 0.0f, 0.0f, 1.0f);
+    guMtxCatF(sp60, sp20, sp20);
+    guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, data->rgba.r, data->rgba.g, data->rgba.b, data->rgba.a);

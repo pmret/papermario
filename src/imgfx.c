@@ -113,16 +113,16 @@ typedef ImgFXState ImgFXInstanceList[MAX_IMGFX_INSTANCES];
 
 extern HeapNode heap_spriteHead;
 
-// BSS
-extern ImgFXWorkingTexture ImgFXCurrentTexture;
-extern Vtx* ImgFXVtxBuffers[2];
-extern Vtx* imgfx_vtxBuf;
-extern ImgFXInstanceList* ImgFXInstances;
-extern s8 D_80156958[2];
-extern s32 D_80156960[2];
-extern s32 D_80156968[2];
-extern s8 D_80156970;
-extern ImgFXAnimHeader ImgFXAnimHeaders[4];
+SHIFT_BSS ImgFXWorkingTexture ImgFXCurrentTexture;
+SHIFT_BSS Vtx* ImgFXVtxBuffers[2];
+SHIFT_BSS Vtx* imgfx_vtxBuf;
+SHIFT_BSS ImgFXInstanceList* ImgFXInstances;
+SHIFT_BSS s8 D_80156958[2];
+SHIFT_BSS s32 D_80156960[2];
+SHIFT_BSS s32 D_80156968[2];
+SHIFT_BSS s8 D_80156970;
+SHIFT_BSS ImgFXAnimHeader ImgFXAnimHeaders[MAX_IMGFX_INSTANCES];
+SHIFT_BSS ImgFXCacheEntry ImgFXDataCache[8];
 
 // Data
 ImgFXWorkingTexture* ImgFXCurrentTexturePtr = &ImgFXCurrentTexture;
@@ -223,8 +223,6 @@ u8* ImgFXAnimOffsets[] = {
     [IMGFX_ANIM_CYMBAL_CRUSH]          cymbal_crush_header,
 };
 
-extern ImgFXCacheEntry ImgFXDataCache[8];
-
 void imgfx_cache_instance_data(ImgFXState* state);
 void imgfx_clear_instance_data(ImgFXState* state);
 void imgfx_init_instance(ImgFXState* state);
@@ -284,16 +282,16 @@ void func_8013A4D0(void) {
     imgfx_vtxCount = 0;
     imgfx_init_instance(&(*ImgFXInstances)[0]);
 
-    (*ImgFXInstances)[0].flags |= IMGFX_FLAG_IN_USE;
+    (*ImgFXInstances)[0].flags |= IMGFX_FLAG_VALID;
 
     for (i = 1; i < ARRAY_COUNT(*ImgFXInstances); i++) {
-        if (((*ImgFXInstances)[i].flags & IMGFX_FLAG_IN_USE) && (*ImgFXInstances)[i].lastAnimCmd != IMGFX_SET_ANIM) {
+        if (((*ImgFXInstances)[i].flags & IMGFX_FLAG_VALID) && (*ImgFXInstances)[i].lastAnimCmd != IMGFX_SET_ANIM) {
             imgfx_cache_instance_data(&(*ImgFXInstances)[i]);
         }
     }
 
     for (i = 1; i < ARRAY_COUNT(*ImgFXInstances); i++) {
-        if ((*ImgFXInstances)[i].flags & IMGFX_FLAG_IN_USE && (*ImgFXInstances)[i].colorBuf != NULL) {
+        if ((*ImgFXInstances)[i].flags & IMGFX_FLAG_VALID && (*ImgFXInstances)[i].colorBuf != NULL) {
             if ((*ImgFXInstances)[i].lastColorCmd == IMGFX_COLOR_BUF_SET_MULTIPLY) {
                 continue;
             }
@@ -357,7 +355,7 @@ s32 imgfx_get_free_instances(s32 count) {
 
     numAssigned = 0;
     for (i = 1; i < ARRAY_COUNT(*ImgFXInstances); i++) {
-        if (!((*ImgFXInstances)[i].flags & IMGFX_FLAG_IN_USE)) {
+        if (!((*ImgFXInstances)[i].flags & IMGFX_FLAG_VALID)) {
             numAssigned++;
         }
     }
@@ -371,7 +369,7 @@ s32 imgfx_get_free_instances(s32 count) {
     numAssigned = 0;
     iPrev = -1;
     for (i = 1; i < ARRAY_COUNT(*ImgFXInstances); i++) {
-        if ((*ImgFXInstances)[i].flags & IMGFX_FLAG_IN_USE) {
+        if ((*ImgFXInstances)[i].flags & IMGFX_FLAG_VALID) {
             continue;
         }
 
@@ -385,7 +383,7 @@ s32 imgfx_get_free_instances(s32 count) {
         (*ImgFXInstances)[i].arrayIdx = i;
         imgfx_init_instance(&(*ImgFXInstances)[i]);
         numAssigned++;
-        (*ImgFXInstances)[i].flags |= IMGFX_FLAG_IN_USE;
+        (*ImgFXInstances)[i].flags |= IMGFX_FLAG_VALID;
         iPrev = i;
         if (numAssigned == count) {
             (*ImgFXInstances)[i].nextIdx = -1;
@@ -503,7 +501,7 @@ void imgfx_update(u32 idx, ImgFXType type, s32 imgfxArg1, s32 imgfxArg2, s32 img
     s32 t1;
     u8 r, g, b, a;
 
-    if (!(state->flags & IMGFX_FLAG_IN_USE) || (idx >= MAX_IMGFX_INSTANCES)) {
+    if (!(state->flags & IMGFX_FLAG_VALID) || (idx >= MAX_IMGFX_INSTANCES)) {
         return;
     }
 
@@ -521,7 +519,7 @@ void imgfx_update(u32 idx, ImgFXType type, s32 imgfxArg1, s32 imgfxArg2, s32 img
             state->ints.raw[0][0] = -1;
             state->ints.raw[1][0] = -1;
 
-            state->flags &= IMGFX_FLAG_IN_USE;
+            state->flags &= IMGFX_FLAG_VALID;
             if (flags != 0) {
                 state->flags |= flags;
             } else {
@@ -592,7 +590,7 @@ void imgfx_update(u32 idx, ImgFXType type, s32 imgfxArg1, s32 imgfxArg2, s32 img
         state->ints.args.color[3] = imgfxArg4;
     }
 
-    state->flags &= IMGFX_FLAG_IN_USE;
+    state->flags &= IMGFX_FLAG_VALID;
     if (flags != 0) {
         state->flags |= flags;
     }
@@ -704,7 +702,7 @@ void imgfx_update(u32 idx, ImgFXType type, s32 imgfxArg1, s32 imgfxArg2, s32 img
 }
 
 void imgfx_set_state_flags(s32 idx, u16 flagBits, s32 mode) {
-    if ((*ImgFXInstances)[idx].flags & IMGFX_FLAG_IN_USE) {
+    if ((*ImgFXInstances)[idx].flags & IMGFX_FLAG_VALID) {
         if (mode) {
             (*ImgFXInstances)[idx].flags |= flagBits;
         } else {
@@ -762,7 +760,7 @@ s32 imgfx_appendGfx_component(s32 idx, ImgFXTexture* ifxImg, u32 flagBits, Matri
         state->renderType = IMGFX_RENDER_DEFAULT;
         state->ints.raw[0][0] = -1;
         state->ints.raw[1][0] = -1;
-        state->flags &= IMGFX_FLAG_IN_USE;
+        state->flags &= IMGFX_FLAG_VALID;
         ret = 1;
     }
     return ret;

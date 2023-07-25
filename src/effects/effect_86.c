@@ -42,10 +42,10 @@ EffectInstance* effect_86_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4,
     bp.renderUI = NULL;
     bp.effectID = EFFECT_86;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
 
-    data = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = general_heap_malloc(numParts * sizeof(*data));
     effect->data.unk_86 = data;
     part = data;
 
@@ -90,7 +90,7 @@ void effect_86_update(EffectInstance* effect) {
 
     data->unk_14++;
     if (data->unk_10 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
     }
 }
 
@@ -103,7 +103,7 @@ void effect_86_render(EffectInstance* effect) {
     renderTask.distance = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -118,10 +118,10 @@ void effect_86_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guTranslateF(sp10, part->unk_04, part->unk_08, part->unk_0C);
-    shim_guScaleF(sp50, part->unk_34, part->unk_34, part->unk_34);
-    shim_guMtxCatF(sp50, sp10, sp10);
-    shim_guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp10, part->unk_04, part->unk_08, part->unk_0C);
+    guScaleF(sp50, part->unk_34, part->unk_34, part->unk_34);
+    guMtxCatF(sp50, sp10, sp10);
+    guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPMatrix(gMainGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);

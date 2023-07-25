@@ -8,6 +8,11 @@
 
 #define MAP_TEXTURE_MEMORY_SIZE 0x20000
 #define BTL_TEXTURE_MEMORY_SIZE 0x8000
+
+SHIFT_BSS u8* gBackgroundFogModePtr;
+SHIFT_BSS ModelList* gCurrentModels;
+SHIFT_BSS ModelTreeInfoList* mdl_currentModelTreeNodeInfo;
+
 extern Addr MapTextureMemory;
 
 typedef struct Fog {
@@ -80,9 +85,72 @@ extern Gfx D_8014C110[];
 extern Gfx D_8014C138[];
 extern Gfx D_8014C160[];
 
-Gfx* D_8014AFC0[] = { D_8014B7F8, D_8014B910, D_8014B820, D_8014B938, D_8014B848, D_8014B960, D_8014B870, D_8014B988, D_8014B898, D_8014BA20, D_8014B9B0, D_8014BAC0, D_8014B8C0, D_8014B9D8, D_8014B8E8, D_8014BA00, D_8014BB60, D_8014BC78, D_8014BB88, D_8014BCA0, D_8014BBB0, D_8014BCC8, D_8014BBD8, D_8014BCF8, D_8014BC00, D_8014BD88, D_8014BD18, D_8014BC28, D_8014BD40, D_8014BC50, D_8014BD68, D_8014BE78, D_8014BF90, D_8014BEA0, D_8014BFB8, D_8014BEC8, D_8014BFE0, D_8014BEF0, D_8014C008, D_8014BF18, D_8014C098, D_8014C028, D_8014BF40, D_8014C050, D_8014BF68, D_8014C078, D_8014BA48, D_8014BA70, D_8014BA98, D_8014BDB0, D_8014BDD8, D_8014BE00, D_8014C0C0, D_8014C0E8, D_8014C110, D_8014BB10, D_8014BB38, D_8014BE28, D_8014BE50, D_8014C138, D_8014C160, NULL };
+Gfx* ModelRenderModes[] = {
+	[RENDER_MODE_IDX_00] D_8014B7F8,
+	[RENDER_MODE_IDX_01] D_8014B910,
+	[RENDER_MODE_IDX_02] D_8014B820,
+	[RENDER_MODE_IDX_03] D_8014B938,
+	[RENDER_MODE_IDX_04] D_8014B848,
+	[RENDER_MODE_IDX_05] D_8014B960,
+	[RENDER_MODE_IDX_06] D_8014B870,
+	[RENDER_MODE_IDX_07] D_8014B988,
+	[RENDER_MODE_IDX_08] D_8014B898,
+	[RENDER_MODE_IDX_09] D_8014BA20,
+	[RENDER_MODE_IDX_0A] D_8014B9B0,
+	[RENDER_MODE_IDX_0B] D_8014BAC0,
+	[RENDER_MODE_IDX_0C] D_8014B8C0,
+	[RENDER_MODE_IDX_0D] D_8014B9D8,
+	[RENDER_MODE_IDX_0E] D_8014B8E8,
+	[RENDER_MODE_IDX_0F] D_8014BA00,
+	[RENDER_MODE_IDX_10] D_8014BB60,
+	[RENDER_MODE_IDX_11] D_8014BC78,
+	[RENDER_MODE_IDX_12] D_8014BB88,
+	[RENDER_MODE_IDX_13] D_8014BCA0,
+	[RENDER_MODE_IDX_14] D_8014BBB0,
+	[RENDER_MODE_IDX_15] D_8014BCC8,
+	[RENDER_MODE_IDX_16] D_8014BBD8,
+	[RENDER_MODE_IDX_17] D_8014BCF8,
+	[RENDER_MODE_IDX_18] D_8014BC00,
+	[RENDER_MODE_IDX_19] D_8014BD88,
+	[RENDER_MODE_IDX_1A] D_8014BD18,
+	[RENDER_MODE_IDX_1B] D_8014BC28,
+	[RENDER_MODE_IDX_1C] D_8014BD40,
+	[RENDER_MODE_IDX_1D] D_8014BC50,
+	[RENDER_MODE_IDX_1E] D_8014BD68,
+	[RENDER_MODE_IDX_1F] D_8014BE78,
+	[RENDER_MODE_IDX_20] D_8014BF90,
+	[RENDER_MODE_IDX_21] D_8014BEA0,
+	[RENDER_MODE_IDX_22] D_8014BFB8,
+	[RENDER_MODE_IDX_23] D_8014BEC8,
+	[RENDER_MODE_IDX_24] D_8014BFE0,
+	[RENDER_MODE_IDX_25] D_8014BEF0,
+	[RENDER_MODE_IDX_26] D_8014C008,
+	[RENDER_MODE_IDX_27] D_8014BF18,
+	[RENDER_MODE_IDX_28] D_8014C098,
+	[RENDER_MODE_IDX_29] D_8014C028,
+	[RENDER_MODE_IDX_2A] D_8014BF40,
+	[RENDER_MODE_IDX_2B] D_8014C050,
+	[RENDER_MODE_IDX_2C] D_8014BF68,
+	[RENDER_MODE_IDX_2D] D_8014C078,
+	[RENDER_MODE_IDX_2E] D_8014BA48,
+	[RENDER_MODE_IDX_2F] D_8014BA70,
+	[RENDER_MODE_IDX_30] D_8014BA98,
+	[RENDER_MODE_IDX_31] D_8014BDB0,
+	[RENDER_MODE_IDX_32] D_8014BDD8,
+	[RENDER_MODE_IDX_33] D_8014BE00,
+	[RENDER_MODE_IDX_34] D_8014C0C0,
+	[RENDER_MODE_IDX_35] D_8014C0E8,
+	[RENDER_MODE_IDX_36] D_8014C110,
+	[RENDER_MODE_IDX_37] D_8014BB10,
+	[RENDER_MODE_IDX_38] D_8014BB38,
+	[RENDER_MODE_IDX_39] D_8014BE28,
+	[RENDER_MODE_IDX_3A] D_8014BE50,
+	[RENDER_MODE_IDX_3B] D_8014C138,
+	[RENDER_MODE_IDX_3C] D_8014C160,
+	[RENDER_MODE_IDX_3D] NULL
+};
 
-Gfx D_8014B0B8[21][5] = {
+Gfx ModelCombineModesA[21][5] = {
     {
         gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
         gsDPSetCombineMode(G_CC_SHADE, G_CC_PASS2),
@@ -230,7 +298,7 @@ Gfx D_8014B0B8[21][5] = {
     },
 };
 
-Gfx D_8014B400[21][5] = {
+Gfx ModelCombineModesB[21][5] = {
     {
         gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
         gsDPSetCombineMode(G_CC_SHADE, G_CC_PASS2),
@@ -406,23 +474,13 @@ s8 gRenderModelPrimB = 255;
 s8 gRenderModelEnvR = 0;
 s8 gRenderModelEnvG = 0;
 s8 gRenderModelEnvB = 0;
-s8 D_8014B766 = 0;
-s8 D_8014B767 = 0;
 
-Matrix4s mdl_RDPIdentity = {
-    .whole = {
-        {1, 0, 0, 0},
-        {0, 1, 0, 0},
-        {0, 0, 1, 0},
-        {0, 0, 0, 1}
-    },
-    .frac = {
-        {0, 0, 0, 0},
-        {0, 0, 0, 0},
-        {0, 0, 0, 0},
-        {0, 0, 0, 0}
-    }
-};
+Mtx mdl_RDPIdentity = RDP_MATRIX(
+    1.000000, 0.000000, 0.000000, 0.000000,
+    0.000000, 1.000000, 0.000000, 0.000000,
+    0.000000, 0.000000, 1.000000, 0.000000,
+    0.000000, 0.000000, 0.000000, 1.000000
+);
 
 // The depth buffer contains values encoded in a custom 18-bit floating-point format.
 // There are 3 bits of exponent, 11 bits of mantissa, and 4 bits of "dz".
@@ -1023,67 +1081,58 @@ s32 mdl_renderTaskBasePriorities[RENDER_MODE_COUNT] = {
 
 b8 D_8014C248 = FALSE;
 
-// BSS
-extern ModelCustomGfxBuilderList* gCurrentCustomModelGfxBuildersPtr;
-extern s32 D_801512BC;
-extern s32 D_80151304;
-extern s32 D_80151344;
-extern s32 entity_numEntities;
-extern s32 gEntityHeapBase;
-extern HudCacheEntry* gHudElementCacheTableRaster;
-extern HudCacheEntry* gHudElementCacheTablePalette;
-extern ModelNode** gCurrentModelTreeRoot;
-extern ModelTransformGroupList* gCurrentTransformGroups;
-extern ModelCustomGfxList* gCurrentCustomModelGfxPtr;
+SHIFT_BSS ModelCustomGfxBuilderList* gCurrentCustomModelGfxBuildersPtr;
+SHIFT_BSS ModelNode** gCurrentModelTreeRoot;
+SHIFT_BSS ModelTransformGroupList* gCurrentTransformGroups;
+SHIFT_BSS ModelCustomGfxList* gCurrentCustomModelGfxPtr;
 
-extern TextureHeader gCurrentTextureHeader;
+SHIFT_BSS TextureHeader gCurrentTextureHeader ALIGNED(16);
 
-extern ModelList wModelList;
-extern ModelList bModelList;
+SHIFT_BSS ModelList wModelList;
+SHIFT_BSS ModelList bModelList;
 
-extern ModelTransformGroupList wTransformGroups;
-extern ModelTransformGroupList bTransformGroups;
+SHIFT_BSS ModelTransformGroupList wTransformGroups;
+SHIFT_BSS ModelTransformGroupList bTransformGroups;
 
-extern ModelCustomGfxList wModelSpecialDls;
-extern ModelCustomGfxList bModelSpecialDls;
+SHIFT_BSS ModelCustomGfxList wCustomModelGfx;
+SHIFT_BSS ModelCustomGfxList bCustomModelGfx;
 
-extern ModelCustomGfxBuilderList wCustomModelGfxBuilders;
-extern ModelCustomGfxBuilderList bCustomModelGfxBuilders;
-extern ModelLocalVertexCopyList wModelLocalVtxBuffers;
-extern ModelLocalVertexCopyList bModelLocalVtxBuffers;
-extern ModelLocalVertexCopyList* gCurrentModelLocalVtxBuffers;
+SHIFT_BSS ModelCustomGfxBuilderList wCustomModelGfxBuilders;
+SHIFT_BSS ModelCustomGfxBuilderList bCustomModelGfxBuilders;
+SHIFT_BSS ModelLocalVertexCopyList wModelLocalVtxBuffers;
+SHIFT_BSS ModelLocalVertexCopyList bModelLocalVtxBuffers;
+SHIFT_BSS ModelLocalVertexCopyList* gCurrentModelLocalVtxBuffers;
 
-extern ModelNode* D_80152214;
-extern ModelNode* D_80152218;
-extern ModelTreeInfoList D_80152220;
-extern ModelTreeInfoList D_80152A20;
+SHIFT_BSS ModelNode* wModelTreeRoot;
+SHIFT_BSS ModelNode* bModelTreeRoot;
+SHIFT_BSS ModelTreeInfoList D_80152220;
+SHIFT_BSS ModelTreeInfoList D_80152A20;
 
-extern s8 wBackgroundFogMode;
-extern s8 bBackgroundFogMode;
-extern s32 mdl_treeIterPos;
-extern Fog wFogSettings;
-extern Fog bFogSettings;
-extern Fog* gCurrentFogSettings;
-extern s32 texPannerMainU[MAX_TEX_PANNERS];
-extern s32 texPannerMainV[MAX_TEX_PANNERS];
-extern s32 texPannerAuxU[MAX_TEX_PANNERS];
-extern s32 texPannerAuxV[MAX_TEX_PANNERS];
-extern void* TextureHeapPos;
-extern u16 mdl_currentTransformGroupChildIndex;
-extern u16 D_80153226;
-extern ModelNode* D_80153370;
-extern u16 D_80153374;
-extern u16 D_80153376;
-extern u16 D_8015336E;
-extern RenderTask* mdl_renderTaskLists[3];
-extern s32 mdl_renderTaskQueueIdx;
-extern s32 mdl_renderTaskCount;
+SHIFT_BSS s8 wBackgroundFogMode;
+SHIFT_BSS s8 bBackgroundFogMode;
+SHIFT_BSS s32 mdl_treeIterPos;
+SHIFT_BSS Fog wFogSettings;
+SHIFT_BSS Fog bFogSettings;
+SHIFT_BSS Fog* gCurrentFogSettings;
+SHIFT_BSS s32 texPannerMainU[MAX_TEX_PANNERS];
+SHIFT_BSS s32 texPannerMainV[MAX_TEX_PANNERS];
+SHIFT_BSS s32 texPannerAuxU[MAX_TEX_PANNERS];
+SHIFT_BSS s32 texPannerAuxV[MAX_TEX_PANNERS];
+SHIFT_BSS void* TextureHeapPos;
+SHIFT_BSS u16 mtg_IterIdx;
+SHIFT_BSS ModelNode* mtg_FoundModelNode;
+SHIFT_BSS u16 mtg_MinChild;
+SHIFT_BSS u16 mtg_MaxChild;
+SHIFT_BSS u16 mtg_SearchModelID;
+SHIFT_BSS RenderTask* mdl_renderTaskLists[3];
+SHIFT_BSS s32 mdl_renderTaskQueueIdx;
+SHIFT_BSS s32 mdl_renderTaskCount;
 
-extern TextureHandle mdl_textureHandles[128];
+SHIFT_BSS TextureHandle mdl_textureHandles[128];
+
+SHIFT_BSS u16 depthCopyBuffer[16];
 
 extern Addr BattleEntityHeapBottom; // todo ???
-
-extern u16 depthCopyBuffer[16];
 
 void func_80117D00(Model* model);
 void appendGfx_model_group(void* model);
@@ -1155,7 +1204,7 @@ void appendGfx_model(void* data) {
     } else {
         texturingMode = 1;
     }
-    if ((textureHeader != NULL || renderMode <= RENDER_MODE_ALPHATEST_NO_ZB) && gCurrentFogSettings->enabled && !(flags & MODEL_FLAG_FLAG_40)) {
+    if ((textureHeader != NULL || renderMode <= RENDER_MODE_ALPHATEST_NO_ZB) && gCurrentFogSettings->enabled && !(flags & MODEL_FLAG_40)) {
         texturingMode = 3;
         combineSubType = 1;
     }
@@ -1269,9 +1318,9 @@ void appendGfx_model(void* data) {
         }
 
         if (renderMode != RENDER_MODE_ALPHATEST && renderMode != RENDER_MODE_ALPHATEST_ONESIDED) {
-            *(*gfxPos) = D_8014B0B8[v1][combineSubType];
+            *(*gfxPos) = ModelCombineModesA[v1][combineSubType];
         } else {
-            *(*gfxPos) = D_8014B400[v1][combineSubType];
+            *(*gfxPos) = ModelCombineModesB[v1][combineSubType];
         }
         (*gfxPos)++;
     }
@@ -1280,198 +1329,198 @@ void appendGfx_model(void* data) {
         case 1:
             switch (renderMode) {
                 case RENDER_MODE_SURFACE_OPA:
-                    renderModeIdx = 0;
+                    renderModeIdx = RENDER_MODE_IDX_00;
                     break;
                 case RENDER_MODE_SURFACE_OPA_NO_AA:
-                    renderModeIdx = 1;
+                    renderModeIdx = RENDER_MODE_IDX_01;
                     break;
                 case RENDER_MODE_DECAL_OPA:
-                    renderModeIdx = 2;
+                    renderModeIdx = RENDER_MODE_IDX_02;
                     break;
                 case RENDER_MODE_DECAL_OPA_NO_AA:
-                    renderModeIdx = 3;
+                    renderModeIdx = RENDER_MODE_IDX_03;
                     break;
                 case RENDER_MODE_INTERSECTING_OPA:
-                    renderModeIdx = 4;
+                    renderModeIdx = RENDER_MODE_IDX_04;
                     break;
                 case RENDER_MODE_ALPHATEST:
-                    renderModeIdx = 6;
+                    renderModeIdx = RENDER_MODE_IDX_06;
                     break;
                 case RENDER_MODE_ALPHATEST_ONESIDED:
-                    renderModeIdx = 7;
+                    renderModeIdx = RENDER_MODE_IDX_07;
                     break;
                 case RENDER_MODE_SURFXLU_AA_ZB_ZUPD:
-                    renderModeIdx = 9;
+                    renderModeIdx = RENDER_MODE_IDX_09;
                     break;
                 case RENDER_MODE_SURFACE_XLU_LAYER1:
                 case RENDER_MODE_SURFACE_XLU_LAYER2:
                 case RENDER_MODE_SURFACE_XLU_LAYER3:
-                    renderModeIdx = 8;
+                    renderModeIdx = RENDER_MODE_IDX_08;
                     break;
                 case RENDER_MODE_SURFACE_XLU_NO_AA:
-                    renderModeIdx = 10;
+                    renderModeIdx = RENDER_MODE_IDX_0A;
                     break;
                 case RENDER_MODE_SURFXLU_ZB_ZUPD:
-                    renderModeIdx = 11;
+                    renderModeIdx = RENDER_MODE_IDX_0B;
                     break;
                 case RENDER_MODE_DECAL_XLU:
-                    renderModeIdx = 12;
+                    renderModeIdx = RENDER_MODE_IDX_0C;
                     break;
                 case RENDER_MODE_DECAL_XLU_NOAA:
-                    renderModeIdx = 13;
+                    renderModeIdx = RENDER_MODE_IDX_0D;
                     break;
                 case RENDER_MODE_INTERSECTING_XLU:
-                    renderModeIdx = 14;
+                    renderModeIdx = RENDER_MODE_IDX_0E;
                     break;
                 case RENDER_MODE_SURFACE_OPA_NO_ZB:
-                    renderModeIdx = 0x2E;
+                    renderModeIdx = RENDER_MODE_IDX_2E;
                     break;
                 case RENDER_MODE_ALPHATEST_NO_ZB:
-                    renderModeIdx = 0x2F;
+                    renderModeIdx = RENDER_MODE_IDX_2F;
                     break;
                 case RENDER_MODE_SURFACE_XLU_NO_ZB:
-                    renderModeIdx = 0x30;
+                    renderModeIdx = RENDER_MODE_IDX_30;
                     break;
                 case RENDER_MODE_CLOUD:
-                    renderModeIdx = 0x37;
+                    renderModeIdx = RENDER_MODE_IDX_37;
                     break;
                 case RENDER_MODE_CLOUD_NO_ZB:
-                    renderModeIdx = 0x38;
+                    renderModeIdx = RENDER_MODE_IDX_38;
                     break;
                 default:
-                    renderModeIdx = 0;
+                    renderModeIdx = RENDER_MODE_IDX_00;
                     break;
             }
-            gSPDisplayList((*gfxPos)++, D_8014AFC0[renderModeIdx]);
+            gSPDisplayList((*gfxPos)++, ModelRenderModes[renderModeIdx]);
             break;
         case 2:
             switch (renderMode) {
                 case RENDER_MODE_SURFACE_OPA_NO_AA:
-                    renderModeIdx = 0x11;
+                    renderModeIdx = RENDER_MODE_IDX_11;
                     break;
                 case RENDER_MODE_DECAL_OPA:
-                    renderModeIdx = 0x12;
+                    renderModeIdx = RENDER_MODE_IDX_12;
                     break;
                 case RENDER_MODE_DECAL_OPA_NO_AA:
-                    renderModeIdx = 0x13;
+                    renderModeIdx = RENDER_MODE_IDX_13;
                     break;
                 case RENDER_MODE_INTERSECTING_OPA:
-                    renderModeIdx = 0x14;
+                    renderModeIdx = RENDER_MODE_IDX_14;
                     break;
                 case RENDER_MODE_ALPHATEST:
-                    renderModeIdx = 0x16;
+                    renderModeIdx = RENDER_MODE_IDX_16;
                     break;
                 case RENDER_MODE_ALPHATEST_ONESIDED:
-                    renderModeIdx = 0x17;
+                    renderModeIdx = RENDER_MODE_IDX_17;
                     break;
                 case RENDER_MODE_SURFACE_XLU_LAYER1:
                 case RENDER_MODE_SURFACE_XLU_LAYER2:
                 case RENDER_MODE_SURFACE_XLU_LAYER3:
-                    renderModeIdx = 0x18;
+                    renderModeIdx = RENDER_MODE_IDX_18;
                     break;
                 case RENDER_MODE_SURFXLU_AA_ZB_ZUPD:
-                    renderModeIdx = 0x19;
+                    renderModeIdx = RENDER_MODE_IDX_19;
                     break;
                 case RENDER_MODE_SURFACE_XLU_NO_AA:
-                    renderModeIdx = 0x1A;
+                    renderModeIdx = RENDER_MODE_IDX_1A;
                     break;
                 case RENDER_MODE_DECAL_XLU:
-                    renderModeIdx = 0x1B;
+                    renderModeIdx = RENDER_MODE_IDX_1B;
                     break;
                 case RENDER_MODE_DECAL_XLU_NOAA:
-                    renderModeIdx = 0x1C;
+                    renderModeIdx = RENDER_MODE_IDX_1C;
                     break;
                 case RENDER_MODE_INTERSECTING_XLU:
-                    renderModeIdx = 0x1D;
+                    renderModeIdx = RENDER_MODE_IDX_1D;
                     break;
                 case RENDER_MODE_SURFACE_OPA_NO_ZB:
-                    renderModeIdx = 0x31;
+                    renderModeIdx = RENDER_MODE_IDX_31;
                     break;
                 case RENDER_MODE_ALPHATEST_NO_ZB:
-                    renderModeIdx = 0x32;
+                    renderModeIdx = RENDER_MODE_IDX_32;
                     break;
                 case RENDER_MODE_SURFACE_XLU_NO_ZB:
-                    renderModeIdx = 0x33;
+                    renderModeIdx = RENDER_MODE_IDX_33;
                     break;
                 case RENDER_MODE_CLOUD:
-                    renderModeIdx = 0x39;
+                    renderModeIdx = RENDER_MODE_IDX_39;
                     break;
                 case RENDER_MODE_CLOUD_NO_ZB:
-                    renderModeIdx = 0x3A;
+                    renderModeIdx = RENDER_MODE_IDX_3A;
                     break;
                 case RENDER_MODE_SURFACE_OPA:
-                    renderModeIdx = 0x10;
+                    renderModeIdx = RENDER_MODE_IDX_10;
                     break;
                 default:
-                    renderModeIdx = 0x10;
+                    renderModeIdx = RENDER_MODE_IDX_10;
                     break;
             }
-            gSPDisplayList((*gfxPos)++, D_8014AFC0[renderModeIdx]);
+            gSPDisplayList((*gfxPos)++, ModelRenderModes[renderModeIdx]);
             break;
         case 3:
-            temp = 0x25; // required to match
+            temp = RENDER_MODE_IDX_25; // required to match
             switch (renderMode) {
                 case RENDER_MODE_SURFACE_OPA_NO_AA:
-                    renderModeIdx = 0x20;
+                    renderModeIdx = RENDER_MODE_IDX_20;
                     break;
                 case RENDER_MODE_DECAL_OPA:
-                    renderModeIdx = 0x21;
+                    renderModeIdx = RENDER_MODE_IDX_21;
                     break;
                 case RENDER_MODE_DECAL_OPA_NO_AA:
-                    renderModeIdx = 0x22;
+                    renderModeIdx = RENDER_MODE_IDX_22;
                     break;
                 case RENDER_MODE_INTERSECTING_OPA:
-                    renderModeIdx = 0x23;
+                    renderModeIdx = RENDER_MODE_IDX_23;
                     break;
                 case RENDER_MODE_ALPHATEST:
                     renderModeIdx = temp;
                     break;
                 case RENDER_MODE_ALPHATEST_ONESIDED:
-                    renderModeIdx = 0x26;
+                    renderModeIdx = RENDER_MODE_IDX_26;
                     break;
                 case RENDER_MODE_SURFACE_XLU_LAYER1:
                 case RENDER_MODE_SURFACE_XLU_LAYER2:
                 case RENDER_MODE_SURFACE_XLU_LAYER3:
-                    renderModeIdx = 0x27;
+                    renderModeIdx = RENDER_MODE_IDX_27;
                     break;
                 case RENDER_MODE_SURFXLU_AA_ZB_ZUPD:
-                    renderModeIdx = 0x28;
+                    renderModeIdx = RENDER_MODE_IDX_28;
                     break;
                 case RENDER_MODE_SURFACE_XLU_NO_AA:
-                    renderModeIdx = 0x29;
+                    renderModeIdx = RENDER_MODE_IDX_29;
                     break;
                 case RENDER_MODE_DECAL_XLU:
-                    renderModeIdx = 0x2A;
+                    renderModeIdx = RENDER_MODE_IDX_2A;
                     break;
                 case RENDER_MODE_DECAL_XLU_NOAA:
-                    renderModeIdx = 0x2B;
+                    renderModeIdx = RENDER_MODE_IDX_2B;
                     break;
                 case RENDER_MODE_INTERSECTING_XLU:
-                    renderModeIdx = 0x2C;
+                    renderModeIdx = RENDER_MODE_IDX_2C;
                     break;
                 case RENDER_MODE_SURFACE_OPA_NO_ZB:
-                    renderModeIdx = 0x34;
+                    renderModeIdx = RENDER_MODE_IDX_34;
                     break;
                 case RENDER_MODE_ALPHATEST_NO_ZB:
-                    renderModeIdx = 0x35;
+                    renderModeIdx = RENDER_MODE_IDX_35;
                     break;
                 case RENDER_MODE_SURFACE_XLU_NO_ZB:
-                    renderModeIdx = 0x36;
+                    renderModeIdx = RENDER_MODE_IDX_36;
                     break;
                 case RENDER_MODE_CLOUD:
-                    renderModeIdx = 0x3B;
+                    renderModeIdx = RENDER_MODE_IDX_3B;
                     break;
                 case RENDER_MODE_CLOUD_NO_ZB:
-                    renderModeIdx = 0x3C;
+                    renderModeIdx = RENDER_MODE_IDX_3C;
                     break;
                 case RENDER_MODE_SURFACE_OPA:
-                    renderModeIdx = 0x1F;
+                    renderModeIdx = RENDER_MODE_IDX_1F;
                     break;
                 default:
-                    renderModeIdx = 0x1F;
+                    renderModeIdx = RENDER_MODE_IDX_1F;
                     break;
             }
-            gSPDisplayList((*gfxPos)++, D_8014AFC0[renderModeIdx]);
+            gSPDisplayList((*gfxPos)++, ModelRenderModes[renderModeIdx]);
             gDPSetFogColor((*gfxPos)++, gCurrentFogSettings->color.r,
                                             gCurrentFogSettings->color.g,
                                             gCurrentFogSettings->color.b,
@@ -1483,7 +1532,7 @@ void appendGfx_model(void* data) {
             if (mdl_bgMultiplyColorA == 255) {
                 return;
             }
-            gSPDisplayList((*gfxPos)++, D_8014AFC0[0x10]);
+            gSPDisplayList((*gfxPos)++, ModelRenderModes[RENDER_MODE_IDX_10]);
             switch (renderMode) {
                 case RENDER_MODE_SURFACE_OPA:
                     gDPSetRenderMode(gMainGfxPos++, GBL_c1(G_BL_CLR_BL, G_BL_A_FOG, G_BL_CLR_IN, G_BL_1MA), G_RM_AA_ZB_OPA_SURF2);
@@ -1556,66 +1605,66 @@ void appendGfx_model(void* data) {
         case 6:
             switch (renderMode) {
                 case RENDER_MODE_SURFACE_OPA_NO_AA:
-                    renderModeIdx = 0x20;
+                    renderModeIdx = RENDER_MODE_IDX_20;
                     break;
                 case RENDER_MODE_DECAL_OPA:
-                    renderModeIdx = 0x21;
+                    renderModeIdx = RENDER_MODE_IDX_21;
                     break;
                 case RENDER_MODE_DECAL_OPA_NO_AA:
-                    renderModeIdx = 0x22;
+                    renderModeIdx = RENDER_MODE_IDX_22;
                     break;
                 case RENDER_MODE_INTERSECTING_OPA:
-                    renderModeIdx = 0x23;
+                    renderModeIdx = RENDER_MODE_IDX_23;
                     break;
                 case RENDER_MODE_ALPHATEST:
-                    renderModeIdx = 0x25;
+                    renderModeIdx = RENDER_MODE_IDX_25;
                     break;
                 case RENDER_MODE_ALPHATEST_ONESIDED:
-                    renderModeIdx = 0x26;
+                    renderModeIdx = RENDER_MODE_IDX_26;
                     break;
                 case RENDER_MODE_SURFACE_XLU_LAYER1:
                 case RENDER_MODE_SURFACE_XLU_LAYER2:
                 case RENDER_MODE_SURFACE_XLU_LAYER3:
-                    renderModeIdx = 0x27;
+                    renderModeIdx = RENDER_MODE_IDX_27;
                     break;
                 case RENDER_MODE_SURFXLU_AA_ZB_ZUPD:
-                    renderModeIdx = 0x28;
+                    renderModeIdx = RENDER_MODE_IDX_28;
                     break;
                 case RENDER_MODE_SURFACE_XLU_NO_AA:
-                    renderModeIdx = 0x29;
+                    renderModeIdx = RENDER_MODE_IDX_29;
                     break;
                 case RENDER_MODE_DECAL_XLU:
-                    renderModeIdx = 0x2A;
+                    renderModeIdx = RENDER_MODE_IDX_2A;
                     break;
                 case RENDER_MODE_DECAL_XLU_NOAA:
-                    renderModeIdx = 0x2B;
+                    renderModeIdx = RENDER_MODE_IDX_2B;
                     break;
                 case RENDER_MODE_INTERSECTING_XLU:
-                    renderModeIdx = 0x2C;
+                    renderModeIdx = RENDER_MODE_IDX_2C;
                     break;
                 case RENDER_MODE_SURFACE_OPA_NO_ZB:
-                    renderModeIdx = 0x34;
+                    renderModeIdx = RENDER_MODE_IDX_34;
                     break;
                 case RENDER_MODE_ALPHATEST_NO_ZB:
-                    renderModeIdx = 0x35;
+                    renderModeIdx = RENDER_MODE_IDX_35;
                     break;
                 case RENDER_MODE_SURFACE_XLU_NO_ZB:
-                    renderModeIdx = 0x36;
+                    renderModeIdx = RENDER_MODE_IDX_36;
                     break;
                 case RENDER_MODE_CLOUD:
-                    renderModeIdx = 0x3B;
+                    renderModeIdx = RENDER_MODE_IDX_3B;
                     break;
                 case RENDER_MODE_CLOUD_NO_ZB:
-                    renderModeIdx = 0x3C;
+                    renderModeIdx = RENDER_MODE_IDX_3C;
                     break;
                 case RENDER_MODE_SURFACE_OPA:
-                    renderModeIdx = 0x1F;
+                    renderModeIdx = RENDER_MODE_IDX_1F;
                     break;
                 default:
-                    renderModeIdx = 0x1F;
+                    renderModeIdx = RENDER_MODE_IDX_1F;
                     break;
             }
-            gSPDisplayList((*gfxPos)++, D_8014AFC0[renderModeIdx]);
+            gSPDisplayList((*gfxPos)++, ModelRenderModes[renderModeIdx]);
 
             fogR = (gCurrentFogSettings->color.r * (255 - mdl_bgMultiplyColorA) + mdl_bgMultiplyColorR * mdl_bgMultiplyColorA) / 255;
             fogG = (gCurrentFogSettings->color.g * (255 - mdl_bgMultiplyColorA) + mdl_bgMultiplyColorG * mdl_bgMultiplyColorA) / 255;
@@ -1631,32 +1680,32 @@ void appendGfx_model(void* data) {
         case 11:
             switch (renderMode) {
                 case RENDER_MODE_DECAL_OPA:
-                    renderModeIdx = 0x21;
+                    renderModeIdx = RENDER_MODE_IDX_21;
                     break;
                 case RENDER_MODE_INTERSECTING_OPA:
-                    renderModeIdx = 0x23;
+                    renderModeIdx = RENDER_MODE_IDX_23;
                     break;
                 case RENDER_MODE_ALPHATEST:
-                    renderModeIdx = 0x25;
+                    renderModeIdx = RENDER_MODE_IDX_25;
                     break;
                 case RENDER_MODE_CLOUD:
-                    renderModeIdx = 0x3B;
+                    renderModeIdx = RENDER_MODE_IDX_3B;
                     break;
                 case RENDER_MODE_CLOUD_NO_ZB:
-                    renderModeIdx = 0x3C;
+                    renderModeIdx = RENDER_MODE_IDX_3C;
                     break;
                 case RENDER_MODE_SURFACE_OPA:
                 default:
-                    renderModeIdx = 0x1F;
+                    renderModeIdx = RENDER_MODE_IDX_1F;
                     break;
             }
-            gSPDisplayList((*gfxPos)++, D_8014AFC0[renderModeIdx]);
+            gSPDisplayList((*gfxPos)++, ModelRenderModes[renderModeIdx]);
             break;
     }
 
     if (!(flags & MODEL_FLAG_TRANSFORM_GROUP_MEMBER)) {
-        if (!(flags & MODEL_FLAG_FLAG_2000)) {
-            gSPMatrix((*gfxPos)++, model->currentSpecialMatrix, mtxLoadMode | mtxPushMode | G_MTX_MODELVIEW);
+        if (!(flags & MODEL_FLAG_IGNORE_MATRIX)) {
+            gSPMatrix((*gfxPos)++, model->finalMtx, mtxLoadMode | mtxPushMode | G_MTX_MODELVIEW);
             if (mtxPushMode != G_MTX_NOPUSH) {
                 mtxPushMode = G_MTX_NOPUSH;
             }
@@ -1666,14 +1715,15 @@ void appendGfx_model(void* data) {
         }
     } else {
         mtxLoadMode = G_MTX_MUL;
-        if (!(flags & MODEL_FLAG_FLAG_2000)) {
-            gSPMatrix((*gfxPos)++, model->currentSpecialMatrix, mtxLoadMode | mtxPushMode | G_MTX_MODELVIEW);
+        if (!(flags & MODEL_FLAG_IGNORE_MATRIX)) {
+            gSPMatrix((*gfxPos)++, model->finalMtx, mtxLoadMode | mtxPushMode | G_MTX_MODELVIEW);
             if (mtxPushMode != G_MTX_NOPUSH) {
                 mtxPushMode = G_MTX_NOPUSH;
             }
         }
     }
 
+    // custom gfx 'pre'
     if (flags & MODEL_FLAG_USES_CUSTOM_GFX) {
         customGfxIndex = (model->customGfxIndex & 0xF) * 2;
         if ((*gCurrentCustomModelGfxPtr)[customGfxIndex] != NULL) {
@@ -1681,6 +1731,7 @@ void appendGfx_model(void* data) {
         }
     }
 
+    // add tex panner gfx
     if (textureHeader != NULL) {
         if (flags & MODEL_FLAG_HAS_TEX_PANNER) {
             s32 panMainU = texPannerMainU[model->texPannerID] >> 8;
@@ -1703,6 +1754,7 @@ void appendGfx_model(void* data) {
             }
         }
     }
+
     if (flags & MODEL_FLAG_USE_CAMERA_UNK_MATRIX) {
         gSPMatrix((*gfxPos)++, gCameras[gCurrentCamID].unkMatrix, mtxLoadMode | mtxPushMode | G_MTX_MODELVIEW);
         if (mtxPushMode != G_MTX_NOPUSH) {
@@ -1712,10 +1764,13 @@ void appendGfx_model(void* data) {
             mtxLoadMode = G_MTX_MUL;
         }
     }
+
+    // render the model
     if (!(flags & MODEL_FLAG_HAS_LOCAL_VERTEX_COPY)) {
         gSPDisplayList((*gfxPos)++, modelNode->displayData->displayList);
     }
 
+    // custom gfx 'post'
     if (flags & MODEL_FLAG_USES_CUSTOM_GFX) {
         customGfxIndex++;
         if ((*gCurrentCustomModelGfxPtr)[customGfxIndex] != NULL) {
@@ -1770,7 +1825,7 @@ void load_texture_impl(u32 romOffset, TextureHandle* handle, TextureHeader* head
 
 void load_texture_by_name(ModelNodeProperty* propertyName, s32 romOffset, s32 size) {
     char* textureName = (char*)propertyName->data.p;
-    u32 baseOffset = romOffset;
+    u32 startOffset = romOffset;
     s32 textureIdx = 0;
     u32 paletteSize;
     u32 rasterSize;
@@ -1785,7 +1840,7 @@ void load_texture_by_name(ModelNodeProperty* propertyName, s32 romOffset, s32 si
         return;
     }
 
-    while (romOffset < baseOffset + size) {
+    while (romOffset < startOffset + size) {
         dma_copy((u8*)romOffset, (u8*)romOffset + sizeof(gCurrentTextureHeader), &gCurrentTextureHeader);
         header = &gCurrentTextureHeader;
 
@@ -1876,7 +1931,7 @@ void load_texture_by_name(ModelNodeProperty* propertyName, s32 romOffset, s32 si
         romOffset += auxRasterSize + auxPaletteSize;
     }
 
-    if (romOffset >= baseOffset + 0x40000) {
+    if (romOffset >= startOffset + 0x40000) {
         // did not find the texture with `textureName`
         (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].textureID = 0;
         return;
@@ -1888,7 +1943,7 @@ void load_texture_by_name(ModelNodeProperty* propertyName, s32 romOffset, s32 si
 
     if (textureHandle->gfx == NULL) {
         load_texture_impl(romOffset, textureHandle, header, rasterSize, paletteSize, auxRasterSize, auxPaletteSize);
-        load_texture_variants(romOffset + rasterSize + paletteSize + auxRasterSize + auxPaletteSize, (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].textureID, baseOffset, size);
+        load_texture_variants(romOffset + rasterSize + paletteSize + auxRasterSize + auxPaletteSize, (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].textureID, startOffset, size);
     }
 }
 
@@ -1990,19 +2045,18 @@ void load_texture_variants(u32 romOffset, s32 textureID, s32 baseOffset, s32 siz
             auxPaletteSize = 0;
             auxRasterSize = 0;
         }
-        
+
         textureID++;
         currentTextureID = textureID;
         textureHandle = &mdl_textureHandles[currentTextureID];
         load_texture_impl(offset + sizeof(*header), textureHandle, header, rasterSize, paletteSize, auxRasterSize, auxPaletteSize);
-        
+
         mainSize = rasterSize + paletteSize + sizeof(*header);
         offset += mainSize;
         offset += auxRasterSize + auxPaletteSize;
     }
 }
 
-// Goofy temps needed to match
 ModelNodeProperty* get_model_property(ModelNode* node, ModelPropertyKeys key) {
     s32 numProperties = node->numProperties;
     ModelNodeProperty* propertyList = node->propertyList;
@@ -2042,7 +2096,7 @@ void load_next_model_textures(ModelNode* model, s32 romOffset, s32 texSize) {
 // load all textures used by models, starting from the root
 void mdl_load_all_textures(ModelNode* rootModel, s32 romOffset, s32 size) {
     s32 baseOffset = 0;
-    
+
     // textures are loaded to the upper half of the texture heap when not in the world
     if (gGameStatusPtr->isBattle != 0) {
         baseOffset = MAP_TEXTURE_MEMORY_SIZE;
@@ -2088,9 +2142,9 @@ void clear_model_data(void) {
     if (!gGameStatusPtr->isBattle) {
         gCurrentModels = &wModelList;
         gCurrentTransformGroups = &wTransformGroups;
-        gCurrentCustomModelGfxPtr = &wModelSpecialDls;
+        gCurrentCustomModelGfxPtr = &wCustomModelGfx;
         gCurrentCustomModelGfxBuildersPtr = &wCustomModelGfxBuilders;
-        gCurrentModelTreeRoot = &D_80152214;
+        gCurrentModelTreeRoot = &wModelTreeRoot;
         gCurrentModelLocalVtxBuffers = &wModelLocalVtxBuffers;
         mdl_currentModelTreeNodeInfo = &D_80152220;
         gBackgroundFogModePtr = &wBackgroundFogMode;
@@ -2102,9 +2156,9 @@ void clear_model_data(void) {
     } else {
         gCurrentModels = &bModelList;
         gCurrentTransformGroups = &bTransformGroups;
-        gCurrentCustomModelGfxPtr = &bModelSpecialDls;
+        gCurrentCustomModelGfxPtr = &bCustomModelGfx;
         gCurrentCustomModelGfxBuildersPtr = &bCustomModelGfxBuilders;
-        gCurrentModelTreeRoot = &D_80152218;
+        gCurrentModelTreeRoot = &bModelTreeRoot;
         gCurrentModelLocalVtxBuffers = &bModelLocalVtxBuffers;
         mdl_currentModelTreeNodeInfo = &D_80152A20;
         gBackgroundFogModePtr = &bBackgroundFogMode;
@@ -2153,9 +2207,9 @@ void init_model_data(void) {
     if (!gGameStatusPtr->isBattle) {
         gCurrentModels = &wModelList;
         gCurrentTransformGroups = &wTransformGroups;
-        gCurrentCustomModelGfxPtr = &wModelSpecialDls;
+        gCurrentCustomModelGfxPtr = &wCustomModelGfx;
         gCurrentCustomModelGfxBuildersPtr = &wCustomModelGfxBuilders;
-        gCurrentModelTreeRoot = &D_80152214;
+        gCurrentModelTreeRoot = &wModelTreeRoot;
         gCurrentModelLocalVtxBuffers = &wModelLocalVtxBuffers;
         mdl_currentModelTreeNodeInfo = &D_80152220;
         gBackgroundFogModePtr = &wBackgroundFogMode;
@@ -2163,9 +2217,9 @@ void init_model_data(void) {
     } else {
         gCurrentModels = &bModelList;
         gCurrentTransformGroups = &bTransformGroups;
-        gCurrentCustomModelGfxPtr = &bModelSpecialDls;
+        gCurrentCustomModelGfxPtr = &bCustomModelGfx;
         gCurrentCustomModelGfxBuildersPtr = &bCustomModelGfxBuilders;
-        gCurrentModelTreeRoot = &D_80152218;
+        gCurrentModelTreeRoot = &bModelTreeRoot;
         gCurrentModelLocalVtxBuffers = &bModelLocalVtxBuffers;
         mdl_currentModelTreeNodeInfo = &D_80152A20;
         gBackgroundFogModePtr = &bBackgroundFogMode;
@@ -2173,7 +2227,7 @@ void init_model_data(void) {
     }
 }
 
-void calculate_model_sizes(void) {
+void mdl_calculate_model_sizes(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentModels); i++) {
@@ -2185,13 +2239,12 @@ void calculate_model_sizes(void) {
             bb->halfSizeX = (bb->maxX - bb->minX) * 0.5;
             bb->halfSizeY = (bb->maxY - bb->minY) * 0.5;
             bb->halfSizeZ = (bb->maxZ - bb->minZ) * 0.5;
-            model->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX;
+            model->flags |= MODEL_FLAG_MATRIX_DIRTY;
         }
     }
 }
 
-void mdl_create_model(ModelBlueprint* bp, s32 arg1) {
-    EffectInstance* effect;
+void mdl_create_model(ModelBlueprint* bp, s32 unused) {
     ModelNode* node = bp->mdlNode;
     ModelNodeProperty* prop;
     ModelBoundingBox* bb;
@@ -2208,10 +2261,14 @@ void mdl_create_model(ModelBlueprint* bp, s32 arg1) {
             prop = get_model_property(node, MODEL_PROP_KEY_BOUNDING_BOX);
             if (prop != NULL) {
                 ModelBoundingBox* bb = (ModelBoundingBox*) prop;
+                EffectInstance* effect;
 
-                fx_flame(
-                    replaceWithFlame - 1, (bb->minX + bb->maxX) * 0.5f, bb->minY, (bb->minZ + bb->maxZ) * 0.5f, 1.0f, &effect
-                );
+                fx_flame(replaceWithFlame - 1,
+                    (bb->minX + bb->maxX) * 0.5f,
+                    bb->minY,
+                    (bb->minZ + bb->maxZ) * 0.5f,
+                    1.0f,
+                    &effect);
                 return;
             }
         }
@@ -2224,12 +2281,13 @@ void mdl_create_model(ModelBlueprint* bp, s32 arg1) {
     }
 
     (*gCurrentModels)[modelIdx] = model = heap_malloc(sizeof(*model));
-    model->flags = bp->flags | MODEL_FLAG_FLAG_1;
-    model->modelID = D_80153226;
+    model->flags = bp->flags | MODEL_FLAG_VALID;
+    model->modelID = mdl_treeIterPos;
     model->modelNode = bp->mdlNode;
     model->groupData = bp->groupData;
-    model->matrixMode = 0;
+    model->matrixFreshness = 0;
     node = model->modelNode;
+
     prop = get_model_property(node, MODEL_PROP_KEY_SPECIAL);
     if (prop != NULL) {
         model->texPannerID = prop->data.s & 0xF;
@@ -2241,9 +2299,10 @@ void mdl_create_model(ModelBlueprint* bp, s32 arg1) {
     if (node->type != SHAPE_TYPE_GROUP) {
         prop = get_model_property(node, MODEL_PROP_KEY_RENDER_MODE);
     } else {
-        prop = get_model_property(node, MODEL_PROP_KEY_GROUP_TYPE);
+        prop = get_model_property(node, MODEL_PROP_KEY_GROUP_INFO);
 
         if (prop != NULL) {
+            // GROUP_INFO properties always come in pairs, with the second giving the render mode
             prop++;
         }
     }
@@ -2258,17 +2317,17 @@ void mdl_create_model(ModelBlueprint* bp, s32 arg1) {
     model->textureVariation = 0;
 
     if (!is_identity_fixed_mtx(bp->mtx)) {
-        model->currentMatrix = heap_malloc(sizeof(*model->currentMatrix));
-        *model->currentMatrix = *bp->mtx;
-        model->specialMatrix = *model->currentMatrix;
+        model->bakedMtx = heap_malloc(sizeof(*model->bakedMtx));
+        *model->bakedMtx = *bp->mtx;
+        model->savedMtx = *model->bakedMtx;
     } else {
-        model->currentMatrix = NULL;
-        guMtxIdent(&model->specialMatrix);
-        model->flags |= MODEL_FLAG_FLAG_2000;
+        model->bakedMtx = NULL;
+        guMtxIdent(&model->savedMtx);
+        model->flags |= MODEL_FLAG_IGNORE_MATRIX;
     }
 
-    guMtxIdentF(model->transformMatrix);
-    model->currentSpecialMatrix = NULL;
+    guMtxIdentF(model->userTransformMtx);
+    model->finalMtx = NULL;
     prop = get_model_property(node, MODEL_PROP_KEY_BOUNDING_BOX);
     if (prop != NULL) {
         ModelBoundingBox* bb = (ModelBoundingBox*) prop;
@@ -2280,14 +2339,13 @@ void mdl_create_model(ModelBlueprint* bp, s32 arg1) {
         x = y = z = 0.0f;
     }
 
-    if (model->currentMatrix != NULL) {
-        guMtxXFML(model->currentMatrix, x, y, z, &x, &y, &z);
+    if (model->bakedMtx != NULL) {
+        guMtxXFML(model->bakedMtx, x, y, z, &x, &y, &z);
     }
 
     model->center.x = x;
     model->center.y = y;
     model->center.z = z;
-
 
     bb = (ModelBoundingBox*) prop;
     x = bb->maxX - bb->minX;
@@ -2297,8 +2355,8 @@ void mdl_create_model(ModelBlueprint* bp, s32 arg1) {
     bb->halfSizeY = y * 0.5;
     bb->halfSizeZ = z * 0.5;
 
-    if (model->currentMatrix == NULL && x < 100.0f && y < 100.0f && z < 100.0f) {
-        model->flags |= MODEL_FLAG_FLAG_200;
+    if (model->bakedMtx == NULL && x < 100.0f && y < 100.0f && z < 100.0f) {
+        model->flags |= MODEL_FLAG_DO_BOUNDS_CULLING;
     }
     (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].modelIndex = modelIdx;
 }
@@ -2318,98 +2376,124 @@ void iterate_models(void) {
     mdl = last;
 }
 
-void func_80116698(void) {
-    Matrix4f sp20;
-    Matrix4f sp60;
+void mdl_update_transform_matrices(void) {
+    Matrix4f tempModelMtx;
+    Matrix4f tempGroupMtx;
     f32 mX, mY, mZ;
     f32 mtgX, mtgY, mtgZ;
     Model* model;
-    Mtx* mtx;
+    Mtx* curMtx;
     ModelBoundingBox* bb;
     ModelTransformGroup* mtg;
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentModels); i++) {
         model = (*gCurrentModels)[i];
-        if (model != NULL && (model->flags != 0) && !(model->flags & MODEL_FLAG_FLAG_4)) {
-            if (!(model->flags & MODEL_FLAG_USES_TRANSFORM_MATRIX)) {
-                if (model->matrixMode != 0) {
-                    model->matrixMode--;
-                    if (model->matrixMode <= 0) {
-                        model->specialMatrix = *model->currentSpecialMatrix;
+        if (model != NULL && (model->flags != 0) && !(model->flags & MODEL_FLAG_INACTIVE)) {
+            if (!(model->flags & MODEL_FLAG_MATRIX_DIRTY)) {
+                if (model->matrixFreshness != 0) {
+                    // matrix was recalculated recently and stored on the matrix stack
+                    // since DisplayContexts alternate, we can fetch the previous matrix from the other context
+                    model->matrixFreshness--;
+                    if (model->matrixFreshness == 0) {
+                        // since it hasn't changed in a few frames, cache the matrix
+                        model->savedMtx = *model->finalMtx;
                     }
-                    mtx = model->currentSpecialMatrix;
-                    model->currentSpecialMatrix = &gDisplayContext->matrixStack[gMatrixListPos++];
-                    *model->currentSpecialMatrix = *mtx;
+                    // copy matrix from previous DisplayContext stack to current one
+                    curMtx = model->finalMtx;
+                    model->finalMtx = &gDisplayContext->matrixStack[gMatrixListPos++];
+                    *model->finalMtx = *curMtx;
                 } else {
-                    model->currentSpecialMatrix = &model->specialMatrix;
+                    // transform matrix is not changed, have gfx build with saved matrix
+                    model->finalMtx = &model->savedMtx;
                 }
             } else {
-                model->flags &= ~MODEL_FLAG_USES_TRANSFORM_MATRIX;
-                model->matrixMode = 2;
-                mtx = &gDisplayContext->matrixStack[gMatrixListPos++];
-                if (model->currentMatrix == NULL || (model->flags & MODEL_FLAG_TRANSFORM_GROUP_MEMBER)) {
-                    guMtxF2L(model->transformMatrix, mtx);
+                // first frame with dirty matrix, need to recalculate it
+                model->flags &= ~MODEL_FLAG_MATRIX_DIRTY;
+                model->matrixFreshness = 2;
+
+                // write matrix to the matrix stack
+                curMtx = &gDisplayContext->matrixStack[gMatrixListPos++];
+                if (model->bakedMtx == NULL || (model->flags & MODEL_FLAG_TRANSFORM_GROUP_MEMBER)) {
+                    guMtxF2L(model->userTransformMtx, curMtx);
                 } else {
-                    guMtxL2F(sp20, model->currentMatrix);
-                    guMtxCatF(model->transformMatrix, sp20, sp20);
-                    guMtxF2L(sp20, mtx);
+                    guMtxL2F(tempModelMtx, model->bakedMtx);
+                    guMtxCatF(model->userTransformMtx, tempModelMtx, tempModelMtx);
+                    guMtxF2L(tempModelMtx, curMtx);
                 }
-                model->flags &= ~MODEL_FLAG_FLAG_2000;
+                model->flags &= ~MODEL_FLAG_IGNORE_MATRIX;
+
+                // recalculate the center of the model with transformation applied
                 bb = (ModelBoundingBox*) get_model_property(model->modelNode, MODEL_PROP_KEY_BOUNDING_BOX);
                 mX = (bb->minX + bb->maxX) * 0.5f;
                 mY = (bb->minY + bb->maxY) * 0.5f;
                 mZ = (bb->minZ + bb->maxZ) * 0.5f;
-                guMtxXFML(mtx, mX, mY, mZ, &mX, &mY, &mZ);
-                model->currentSpecialMatrix = mtx;
+                guMtxXFML(curMtx, mX, mY, mZ, &mX, &mY, &mZ);
                 model->center.x = mX;
                 model->center.y = mY;
                 model->center.z = mZ;
-                model->flags &= ~MODEL_FLAG_FLAG_200;
+
+                // point matrix for gfx building to our matrix on the stack
+                model->finalMtx = curMtx;
+
+                // disable bounds culling for models with dynamic transformations
+                model->flags &= ~MODEL_FLAG_DO_BOUNDS_CULLING;
             }
         }
     }
 
     for (i = 0; i < ARRAY_COUNT((*gCurrentTransformGroups)); i++) {
         mtg = (*gCurrentTransformGroups)[i];
-        if (mtg != NULL && mtg->flags != 0 && !(mtg->flags & MODEL_TRANSFORM_GROUP_FLAG_4)) {
-            if (!(mtg->flags & MODEL_TRANSFORM_GROUP_FLAG_1000)) {
-                if (mtg->matrixMode != 0) {
-                    mtg->matrixMode--;
-                    if (mtg->matrixMode == 0) {
-                        mtg->matrixA = *mtg->transformMtx;
+        if (mtg != NULL && mtg->flags != 0 && !(mtg->flags & TRANSFORM_GROUP_FLAG_INACTIVE)) {
+            if (!(mtg->flags & TRANSFORM_GROUP_FLAG_MATRIX_DIRTY)) {
+                if (mtg->matrixFreshness != 0) {
+                    // matrix was recalculated recently and stored on the matrix stack
+                    // since DisplayContexts alternate, we can fetch the previous matrix from the other context
+                    mtg->matrixFreshness--;
+                    if (mtg->matrixFreshness == 0) {
+                        // since it hasn't changed in a few frames, cache the matrix
+                        mtg->savedMtx = *mtg->finalMtx;
                     }
-                    // store transformMtx on stack
-                    mtx = mtg->transformMtx;
-                    mtg->transformMtx = &gDisplayContext->matrixStack[gMatrixListPos++];
-                    *mtg->transformMtx = *mtx;
+                    // copy matrix from previous DisplayContext stack to current one
+                    curMtx = mtg->finalMtx;
+                    mtg->finalMtx = &gDisplayContext->matrixStack[gMatrixListPos++];
+                    *mtg->finalMtx = *curMtx;
                 } else {
-                    mtg->transformMtx = &mtg->matrixA;
+                    // transform matrix is not changed, have gfx build with saved matrix
+                    mtg->finalMtx = &mtg->savedMtx;
                 }
             } else {
-                mtg->flags &= ~MODEL_TRANSFORM_GROUP_FLAG_1000;
-                mtg->matrixMode = 2;
-                mtx = &gDisplayContext->matrixStack[gMatrixListPos++];
-                if (mtg->matrixRDP_N == NULL) {
-                    guMtxF2L(mtg->matrixB, mtx);
+                // first frame with dirty matrix, need to recalculate it
+                mtg->flags &= ~TRANSFORM_GROUP_FLAG_MATRIX_DIRTY;
+                mtg->matrixFreshness = 2;
+
+                // write matrix to the matrix stack
+                curMtx = &gDisplayContext->matrixStack[gMatrixListPos++];
+                if (mtg->bakedMtx == NULL) {
+                    guMtxF2L(mtg->userTransformMtx, curMtx);
                 } else {
-                    guMtxL2F(sp60, mtg->matrixRDP_N);
-                    guMtxCatF(mtg->matrixB, sp60, sp60);
-                    guMtxF2L(sp60, mtx);
+                    guMtxL2F(tempGroupMtx, mtg->bakedMtx);
+                    guMtxCatF(mtg->userTransformMtx, tempGroupMtx, tempGroupMtx);
+                    guMtxF2L(tempGroupMtx, curMtx);
                 }
-                mtg->flags &= ~MODEL_TRANSFORM_GROUP_FLAG_2000;
-                bb = (ModelBoundingBox*) get_model_property(mtg->modelNode, MODEL_PROP_KEY_BOUNDING_BOX);
+                mtg->flags &= ~TRANSFORM_GROUP_FLAG_IGNORE_MATRIX;
+
+                // recalculate the center of the transform group with transformation applied
+                bb = (ModelBoundingBox*) get_model_property(mtg->baseModelNode, MODEL_PROP_KEY_BOUNDING_BOX);
                 mtgX = (bb->minX + bb->maxX) * 0.5f;
                 mtgY = (bb->minY + bb->maxY) * 0.5f;
                 mtgZ = (bb->minZ + bb->maxZ) * 0.5f;
-                guMtxXFML(mtx, mtgX, mtgY, mtgZ, &mtgX, &mtgY, &mtgZ);
-                mtg->transformMtx = mtx;
+                guMtxXFML(curMtx, mtgX, mtgY, mtgZ, &mtgX, &mtgY, &mtgZ);
                 mtg->center.x = mtgX;
                 mtg->center.y = mtgY;
                 mtg->center.z = mtgZ;
+
+                // point matrix for gfx building to our matrix on the stack
+                mtg->finalMtx = curMtx;
             }
         }
     }
+
     build_custom_gfx();
 }
 
@@ -2421,7 +2505,7 @@ void render_models(void) {
     f32 m10, m11, m12, m13;
     f32 m20, m21, m22, m23;
     f32 m30, m31, m32, m33;
-    f32 x, y, z;
+    f32 centerX, centerY, centerZ;
     f32 bbx, bby, bbz;
 
     Camera* camera = &gCameras[gCurrentCameraID];
@@ -2431,10 +2515,10 @@ void render_models(void) {
     f32 xComp, yComp, zComp;
 
     s32 distance;
-    s32 cond;
+    s32 notVisible;
     s32 i;
 
-#define COMMON_RENDER_MODELS \
+#define TEST_POINT_VISIBILITY \
     outX = (m00 * xComp) + (m10 * yComp) + (m20 * zComp) + m30; \
     outY = (m01 * xComp) + (m11 * yComp) + (m21 * zComp) + m31; \
     outZ = (m02 * xComp) + (m12 * yComp) + (m22 * zComp) + m32; \
@@ -2468,6 +2552,7 @@ void render_models(void) {
     m32 = camera->perspectiveMatrix[3][2];
     m33 = camera->perspectiveMatrix[3][3];
 
+    // enqueue all visible models not in transform groups
     for (i = 0; i < ARRAY_COUNT(*gCurrentModels); i++) {
         model = (*gCurrentModels)[i];
         if (model == NULL) {
@@ -2476,25 +2561,27 @@ void render_models(void) {
         if (model->flags == 0) {
             continue;
         }
-        if (model->flags & MODEL_FLAG_FLAG_4) {
+        if (model->flags & MODEL_FLAG_INACTIVE) {
             continue;
         }
         if (model->flags & MODEL_FLAG_HIDDEN) {
             continue;
         }
-        if (model->flags & MODEL_FLAG_FLAG_20) {
+        if (model->flags & MODEL_FLAG_20) {
             continue;
         }
         if (model->flags & MODEL_FLAG_TRANSFORM_GROUP_MEMBER) {
             continue;
         }
 
-        x = model->center.x;
-        y = model->center.y;
-        z = model->center.z;
+        centerX = model->center.x;
+        centerY = model->center.y;
+        centerZ = model->center.z;
 
-        if (model->flags & MODEL_FLAG_FLAG_200) {
-            cond = FALSE;
+        // for models that are small enough to do bounds culling, only render if at least one
+        // corner of its boundary box is visible
+        if (model->flags & MODEL_FLAG_DO_BOUNDS_CULLING) {
+            notVisible = FALSE;
             boundingBox = (ModelBoundingBox*) model->modelNode->propertyList;
             bbx = boundingBox->halfSizeX;
             bby = boundingBox->halfSizeY;
@@ -2502,69 +2589,71 @@ void render_models(void) {
 
             while (TRUE) {
                 if (TRUE) {
-                    xComp = x - bbx;
-                    yComp = y - bby;
-                    zComp = z - bbz;
-                    COMMON_RENDER_MODELS;
+                    xComp = centerX - bbx;
+                    yComp = centerY - bby;
+                    zComp = centerZ - bbz;
+                    TEST_POINT_VISIBILITY;
                 }
 
                 if (bbx != 0.0f) {
-                    xComp = x + bbx;
-                    yComp = y - bby;
-                    zComp = z - bbz;
-                    COMMON_RENDER_MODELS;
+                    xComp = centerX + bbx;
+                    yComp = centerY - bby;
+                    zComp = centerZ - bbz;
+                    TEST_POINT_VISIBILITY;
                 }
 
                 if (bby != 0.0f) {
-                    xComp = x - bbx;
-                    yComp = y + bby;
-                    zComp = z - bbz;
-                    COMMON_RENDER_MODELS;
+                    xComp = centerX - bbx;
+                    yComp = centerY + bby;
+                    zComp = centerZ - bbz;
+                    TEST_POINT_VISIBILITY;
                 }
 
                 if (bbx != 0.0f && bby != 0.0f) {
-                    xComp = x + bbx;
-                    yComp = y + bby;
-                    zComp = z - bbz;
-                    COMMON_RENDER_MODELS;
+                    xComp = centerX + bbx;
+                    yComp = centerY + bby;
+                    zComp = centerZ - bbz;
+                    TEST_POINT_VISIBILITY;
                 }
 
                 if (bbz != 0.0f) {
-                    xComp = x - bbx;
-                    yComp = y - bby;
-                    zComp = z + bbz;
-                    COMMON_RENDER_MODELS;
+                    xComp = centerX - bbx;
+                    yComp = centerY - bby;
+                    zComp = centerZ + bbz;
+                    TEST_POINT_VISIBILITY;
                 }
 
                 if (bbx != 0.0f && bbz != 0.0f) {
-                    xComp = x + bbx;
-                    yComp = y - bby;
-                    zComp = z + bbz;
-                    COMMON_RENDER_MODELS;
+                    xComp = centerX + bbx;
+                    yComp = centerY - bby;
+                    zComp = centerZ + bbz;
+                    TEST_POINT_VISIBILITY;
                 }
 
                 if (bby != 0.0f && bbz != 0.0f) {
-                    xComp = x - bbx;
-                    yComp = y + bby;
-                    zComp = z + bbz;
-                    COMMON_RENDER_MODELS;
+                    xComp = centerX - bbx;
+                    yComp = centerY + bby;
+                    zComp = centerZ + bbz;
+                    TEST_POINT_VISIBILITY;
                 }
 
                 if (bbx != 0.0f && bby != 0.0f && bbz != 0.0f) {
-                    xComp = x + bbx;
-                    yComp = y + bby;
-                    zComp = z + bbz;
-                    COMMON_RENDER_MODELS;
+                    xComp = centerX + bbx;
+                    yComp = centerY + bby;
+                    zComp = centerZ + bbz;
+                    TEST_POINT_VISIBILITY;
                 }
-                cond = TRUE;
+                notVisible = TRUE;
                 break;
             }
-            if (cond) {
+            // no points of the models bounding box were visible
+            if (notVisible) {
                 continue;
             }
         }
 
-        transform_point(camera->perspectiveMatrix, x, y, z, 1.0f, &outX, &outY, &outZ, &outW);
+        // map all model depths to the interval [0, 10k] and submit render task
+        transform_point(camera->perspectiveMatrix, centerX, centerY, centerZ, 1.0f, &outX, &outY, &outZ, &outW);
         distance = outZ + 5000.0f;
         if (distance < 0) {
             distance = 0;
@@ -2582,6 +2671,8 @@ void render_models(void) {
         queue_render_task(rtPtr);
     }
 
+    // enqueue models in transform groups
+    // only the center of the group is used for depth sorting
     for (i = 0; i < ARRAY_COUNT(*gCurrentTransformGroups); i++) {
         transformGroup = (*gCurrentTransformGroups)[i];
         if (transformGroup == NULL) {
@@ -2592,7 +2683,7 @@ void render_models(void) {
             continue;
         }
 
-        if (transformGroup->flags & 4) {
+        if (transformGroup->flags & TRANSFORM_GROUP_FLAG_INACTIVE) {
             continue;
         }
 
@@ -2611,7 +2702,7 @@ void render_models(void) {
 
         distance = ((outZ / outW) * 10000.0f);
 
-        if (!(transformGroup->flags & 2)) {
+        if (!(transformGroup->flags & TRANSFORM_GROUP_FLAG_HIDDEN)) {
             rtPtr->appendGfx = render_transform_group;
             rtPtr->appendGfxArg = transformGroup;
             rtPtr->distance = -distance;
@@ -2652,7 +2743,7 @@ void func_80117D00(Model* model) {
                     ModelNodeProperty* prop;
 
                     newModel.flags = mdl->flags;
-                    newModel.currentSpecialMatrix = mdl->currentSpecialMatrix;
+                    newModel.finalMtx = mdl->finalMtx;
                     newModel.modelNode = modelNode->groupData->childList[i];
                     newModel.texPannerID = mdl->texPannerID;
                     newModel.customGfxIndex = mdl->customGfxIndex;
@@ -2687,14 +2778,14 @@ void render_transform_group_node(ModelNode* node) {
 
     if (node != NULL) {
         if (node->type == SHAPE_TYPE_GROUP) {
-            ModelNodeProperty* groupTypeProp = get_model_property(node, MODEL_PROP_KEY_GROUP_TYPE);
+            ModelNodeProperty* groupInfoProp = get_model_property(node, MODEL_PROP_KEY_GROUP_INFO);
 
-            if (groupTypeProp != NULL && groupTypeProp->data.s != 0) {
-                model = get_model_from_list_index(mdl_currentTransformGroupChildIndex);
+            if (groupInfoProp != NULL && groupInfoProp->data.s != 0) {
+                model = get_model_from_list_index(mtg_IterIdx);
                 if (!(model->flags & MODEL_FLAG_HIDDEN)) {
                     appendGfx_model_group(model);
                 }
-                mdl_currentTransformGroupChildIndex++;
+                mtg_IterIdx++;
                 return;
             }
         }
@@ -2704,8 +2795,7 @@ void render_transform_group_node(ModelNode* node) {
                 s32 i;
 
                 if (node->groupData->transformMatrix != NULL) {
-                    gSPMatrix((*gfx)++, node->groupData->transformMatrix,
-                              G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+                    gSPMatrix((*gfx)++, node->groupData->transformMatrix, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
                 }
 
                 numChildren = node->groupData->numChildren;
@@ -2722,28 +2812,28 @@ void render_transform_group_node(ModelNode* node) {
             return;
         }
 
-        model = get_model_from_list_index(mdl_currentTransformGroupChildIndex);
+        model = get_model_from_list_index(mtg_IterIdx);
         if (!(model->flags & MODEL_FLAG_HIDDEN)) {
             appendGfx_model(model);
         }
-        mdl_currentTransformGroupChildIndex++;
+        mtg_IterIdx++;
     }
 }
-
 
 // gfx temps needed
 void render_transform_group(void* data) {
     ModelTransformGroup* group = data;
     Gfx** gfx = &gMainGfxPos;
 
-    if (!(group->flags & MODEL_TRANSFORM_GROUP_FLAG_4)) {
-        mdl_currentTransformGroupChildIndex = group->minChildModelIndex;
-        if (!(group->flags & MODEL_TRANSFORM_GROUP_FLAG_2000)) {
-            gSPMatrix((*gfx)++, group->transformMtx, (G_MTX_PUSH | G_MTX_LOAD) | G_MTX_MODELVIEW);
+    if (!(group->flags & TRANSFORM_GROUP_FLAG_INACTIVE)) {
+        mtg_IterIdx = group->minChildModelIndex;
+        if (!(group->flags & TRANSFORM_GROUP_FLAG_IGNORE_MATRIX)) {
+            gSPMatrix((*gfx)++, group->finalMtx, (G_MTX_PUSH | G_MTX_LOAD) | G_MTX_MODELVIEW);
         }
 
-        render_transform_group_node(group->modelNode);
-        if (!(group->flags & MODEL_TRANSFORM_GROUP_FLAG_2000)) {
+        render_transform_group_node(group->baseModelNode);
+
+        if (!(group->flags & TRANSFORM_GROUP_FLAG_IGNORE_MATRIX)) {
             gSPPopMatrix((*gfx)++, G_MTX_MODELVIEW);
         }
         gDPPipeSync((*gfx)++);
@@ -2837,7 +2927,7 @@ void make_texture_gfx(TextureHeader* header, Gfx** gfxPos, IMG_PTR raster, PAL_P
         renderType = header->extraTiles * 3 + 1 + header->colorCombineSubType;
     }
 
-    **gfxPos = D_8014B0B8[renderType][0];
+    **gfxPos = ModelCombineModesA[renderType][0];
     (*gfxPos)++;
 
     switch (extraTileType) {
@@ -3026,11 +3116,11 @@ void load_data_for_models(ModelNode* rootModel, s32 texturesOffset, s32 size) {
 }
 
 void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTransformMtx, s32 treeDepth) {
-    Matrix4f sp10;
+    Matrix4f combinedMtx;
     Mtx sp50;
     ModelBlueprint modelBP;
     ModelBlueprint* modelBPptr = &modelBP;
-    ModelNodeProperty* groupTypeProperty;
+    ModelNodeProperty* prop;
     ModelNode* modelTemp;
     s32 i;
 
@@ -3038,23 +3128,24 @@ void load_model_transforms(ModelNode* model, ModelNode* parent, Matrix4f mdlTran
         s32 groupType;
 
         if (model->groupData->transformMatrix != NULL) {
-            Matrix4f spA0;
+            Matrix4f tempMtx;
 
-            guMtxL2F(spA0, model->groupData->transformMatrix);
-            guMtxCatF(spA0, mdlTransformMtx, sp10);
+            guMtxL2F(tempMtx, model->groupData->transformMatrix);
+            guMtxCatF(tempMtx, mdlTransformMtx, combinedMtx);
         }
-        groupTypeProperty = get_model_property(model, MODEL_PROP_KEY_GROUP_TYPE);
 
-        if (groupTypeProperty == NULL) {
-            groupType = 0;
+        prop = get_model_property(model, MODEL_PROP_KEY_GROUP_INFO);
+        if (prop == NULL) {
+            groupType = GROUP_TYPE_0;
         } else {
-            groupType = groupTypeProperty->data.s;
+            groupType = prop->data.s;
         }
 
-        if (model->type != SHAPE_TYPE_GROUP || groupType == 0) {
+        if (model->type != SHAPE_TYPE_GROUP || groupType == GROUP_TYPE_0) {
             for (i = 0; i < model->groupData->numChildren; i++) {
                 load_model_transforms(model->groupData->childList[i], model,
-                                      model->groupData->transformMatrix != NULL ? sp10 : mdlTransformMtx, treeDepth + 1);
+                                      model->groupData->transformMatrix != NULL ? combinedMtx : mdlTransformMtx,
+                                      treeDepth + 1);
             }
 
             (*mdl_currentModelTreeNodeInfo)[mdl_treeIterPos].modelIndex = -1;
@@ -3121,7 +3212,6 @@ s32 get_transform_group_index(s32 modelID) {
     return -1;
 }
 
-// TODO this seems to be returning center for the model and center for the BB (not the size)
 void get_model_center_and_size(u16 modelID, f32* centerX, f32* centerY, f32* centerZ, f32* sizeX, f32* sizeY, f32* sizeZ) {
     Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(modelID));
     ModelNode* node = model->modelNode;
@@ -3146,23 +3236,26 @@ ModelTransformGroup* get_transform_group(s32 index) {
     return (*gCurrentTransformGroups)[index];
 }
 
+// find group info?
 void func_8011B1D8(ModelNode* node) {
-    ModelNode* childNode;
+    ModelNode* currentNode;
     ModelNodeProperty* prop;
     s32 numChildren;
     s32 i;
-    u16 childCount;
+    u16 currentID;
 
+    // stop searching if node is a model
     if (node->type == SHAPE_TYPE_MODEL) {
-        D_80153376 = D_80153226;
+        mtg_MaxChild = mdl_treeIterPos;
         return;
     }
 
+    // stop searching if node is a group with GROUP_TYPE_0
     if (node->type == SHAPE_TYPE_GROUP) {
-        prop = get_model_property(node, MODEL_PROP_KEY_GROUP_TYPE);
-        if (prop != NULL && prop->data.s != 0) {
+        prop = get_model_property(node, MODEL_PROP_KEY_GROUP_INFO);
+        if (prop != NULL && prop->data.s != GROUP_TYPE_0) {
             mdl_treeIterPos += mdl_get_child_count(node);
-            D_80153376 = mdl_treeIterPos;
+            mtg_MaxChild = mdl_treeIterPos;
             return;
         }
     }
@@ -3171,24 +3264,27 @@ void func_8011B1D8(ModelNode* node) {
         numChildren = node->groupData->numChildren;
         if (numChildren != 0) {
             for (i = 0; i < numChildren; i++) {
-                childNode = node->groupData->childList[i];
-                childCount = mdl_treeIterPos;
-                if (childNode->type == SHAPE_TYPE_GROUP) {
-                    prop = get_model_property(childNode, MODEL_PROP_KEY_GROUP_TYPE);
-                    if (prop != NULL && prop->data.s != 0) {
-                        childCount += mdl_get_child_count(childNode);
+                currentNode = node->groupData->childList[i];
+                currentID = mdl_treeIterPos;
+
+                if (currentNode->type == SHAPE_TYPE_GROUP) {
+                    prop = get_model_property(currentNode, MODEL_PROP_KEY_GROUP_INFO);
+                    if (prop != NULL && prop->data.s != GROUP_TYPE_0) {
+                        currentID += mdl_get_child_count(currentNode);
                     }
                 }
-                func_8011B1D8(childNode);
+                func_8011B1D8(currentNode);
 
-                if (D_80153370 != NULL) {
-                    break;
+                if (mtg_FoundModelNode != NULL) {
+                    // not possible
+                    return;
                 }
 
-                if (D_8015336E == mdl_treeIterPos) {
-                    D_80153370 = childNode;
-                    D_80153374 = childCount;
-                    break;
+                // the current model is the one we're looking for
+                if (mtg_SearchModelID == mdl_treeIterPos) {
+                    mtg_FoundModelNode = currentNode;
+                    mtg_MinChild = currentID;
+                    return;
                 }
 
                 mdl_treeIterPos++;
@@ -3197,15 +3293,15 @@ void func_8011B1D8(ModelNode* node) {
     }
 }
 
-void make_transform_group(u16 modelID) {
+void mdl_make_transform_group(u16 modelID) {
     mdl_treeIterPos = 0;
-    D_80153370 = NULL;
-    D_8015336E = modelID;
-    D_80153376 = 0;
-    D_80153374 = 0;
+    mtg_FoundModelNode = NULL;
+    mtg_SearchModelID = modelID;
+    mtg_MaxChild = 0;
+    mtg_MinChild = 0;
     func_8011B1D8(*gCurrentModelTreeRoot);
 
-    if (D_80153370 != 0) {
+    if (mtg_FoundModelNode != NULL) {
         ModelTransformGroup* newMtg;
         ModelNode* node;
         ModelNodeProperty* prop;
@@ -3220,33 +3316,34 @@ void make_transform_group(u16 modelID) {
         }
 
         (*gCurrentTransformGroups)[i] = newMtg = heap_malloc(sizeof(*newMtg));
-        newMtg->flags = MODEL_TRANSFORM_GROUP_FLAG_1;
+        newMtg->flags = TRANSFORM_GROUP_FLAG_VALID;
         newMtg->groupModelID = modelID;
-        newMtg->minChildModelIndex = get_model_list_index_from_tree_index(D_80153374);
-        newMtg->maxChildModelIndex = get_model_list_index_from_tree_index(D_80153376);
-        newMtg->matrixMode = 0;
-        newMtg->matrixRDP_N = NULL;
-        newMtg->modelNode = D_80153370;
-        guMtxIdent(&newMtg->matrixA);
-        newMtg->flags |= 0x2000;
-        guMtxIdentF(newMtg->matrixB);
+        newMtg->minChildModelIndex = get_model_list_index_from_tree_index(mtg_MinChild);
+        newMtg->maxChildModelIndex = get_model_list_index_from_tree_index(mtg_MaxChild);
+        newMtg->matrixFreshness = 0;
+        newMtg->bakedMtx = NULL;
+        newMtg->baseModelNode = mtg_FoundModelNode;
+        guMtxIdent(&newMtg->savedMtx);
+        newMtg->flags |= TRANSFORM_GROUP_FLAG_IGNORE_MATRIX;
+        guMtxIdentF(newMtg->userTransformMtx);
 
-        node = newMtg->modelNode;
+        node = newMtg->baseModelNode;
 
         if (node->type != SHAPE_TYPE_GROUP) {
             prop = get_model_property(node, MODEL_PROP_KEY_RENDER_MODE);
         } else {
-            prop = get_model_property(node, MODEL_PROP_KEY_GROUP_TYPE);
+            prop = get_model_property(node, MODEL_PROP_KEY_GROUP_INFO);
 
             if (prop != NULL) {
-                prop = &prop[1];
+                // GROUP_INFO properties always come in pairs, with the second giving the render mode
+                prop++;
             }
         }
 
         if (prop != NULL) {
             newMtg->renderMode = prop->data.s;
         } else {
-            newMtg->renderMode = 1;
+            newMtg->renderMode = RENDER_MODE_SURFACE_OPA;
         }
 
         bb = (ModelBoundingBox*)get_model_property(node, MODEL_PROP_KEY_BOUNDING_BOX);
@@ -3258,8 +3355,8 @@ void make_transform_group(u16 modelID) {
             x = y = z = 0.0f;
         }
 
-        if (newMtg->matrixRDP_N != NULL) {
-            guMtxXFML(newMtg->matrixRDP_N, x, y, z, &x, &y, &z);
+        if (newMtg->bakedMtx != NULL) {
+            guMtxXFML(newMtg->bakedMtx, x, y, z, &x, &y, &z);
         }
 
         newMtg->center.x = x;
@@ -3273,15 +3370,15 @@ void enable_transform_group(u16 modelID) {
     ModelTransformGroup* group = get_transform_group(get_transform_group_index(modelID));
     s32 i;
 
-    group->flags &= ~0x4;
+    group->flags &= ~TRANSFORM_GROUP_FLAG_INACTIVE;
 
     for (i = group->minChildModelIndex; i <= group->maxChildModelIndex; i++) {
         Model* model = get_model_from_list_index(i);
 
         model->flags |= MODEL_FLAG_TRANSFORM_GROUP_MEMBER;
 
-        if (model->currentMatrix != NULL) {
-            model->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX;
+        if (model->bakedMtx != NULL) {
+            model->flags |= MODEL_FLAG_MATRIX_DIRTY;
         }
     }
 }
@@ -3290,15 +3387,15 @@ void disable_transform_group(u16 modelID) {
     ModelTransformGroup* group = get_transform_group(get_transform_group_index(modelID));
     s32 i;
 
-    group->flags |= MODEL_TRANSFORM_GROUP_FLAG_4;
+    group->flags |= TRANSFORM_GROUP_FLAG_INACTIVE;
 
     for (i = group->minChildModelIndex; i <= group->maxChildModelIndex; i++) {
         Model* model = get_model_from_list_index(i);
 
         model->flags &= ~MODEL_FLAG_TRANSFORM_GROUP_MEMBER;
 
-        if (model->currentMatrix != NULL) {
-            model->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX;
+        if (model->bakedMtx != NULL) {
+            model->flags |= MODEL_FLAG_MATRIX_DIRTY;
         }
     }
 }
@@ -3377,19 +3474,19 @@ void set_model_group_visibility(u16 treeIndex, s32 flags, s32 mode) {
     }
 }
 
-void func_8011B950(u16 treeIndex, s32 customGfxIndex, s32 fogType, s32 arg3) {
+void func_8011B950(u16 modelID, s32 customGfxIndex, s32 fogType, s32 arg3) {
     s32 maxGroupIndex = -1;
     s32 i;
     s32 minGroupIndex;
-    s32 modelIndex = (*mdl_currentModelTreeNodeInfo)[treeIndex].modelIndex;
+    s32 modelIndex = (*mdl_currentModelTreeNodeInfo)[modelID].modelIndex;
     s32 siblingIndex;
-    s32 maskLow, maskHigh, newIndex;
+    s32 maskLow, maskHigh, packedFogType;
 
     if (modelIndex < MAX_MODELS - 1) {
         minGroupIndex = maxGroupIndex = modelIndex;
     } else {
-        s32 treeDepth = (*mdl_currentModelTreeNodeInfo)[treeIndex].treeDepth;
-        for (i = treeIndex - 1; i >= 0; i--) {
+        s32 treeDepth = (*mdl_currentModelTreeNodeInfo)[modelID].treeDepth;
+        for (i = modelID - 1; i >= 0; i--) {
             if ((*mdl_currentModelTreeNodeInfo)[i].treeDepth <= treeDepth) {
                 break;
             }
@@ -3417,35 +3514,35 @@ void func_8011B950(u16 treeIndex, s32 customGfxIndex, s32 fogType, s32 arg3) {
         fogType = 0;
     }
 
-    newIndex = customGfxIndex + (fogType << 4);
+    packedFogType = customGfxIndex + (fogType << 4);
 
     if (arg3 == 0) {
         for (i = minGroupIndex; i <= maxGroupIndex; i++) {
             Model* model = (*gCurrentModels)[i];
-            model->customGfxIndex = (model->customGfxIndex & (maskLow + maskHigh)) + newIndex;
+            model->customGfxIndex = (model->customGfxIndex & (maskLow + maskHigh)) + packedFogType;
         }
     } else {
         for (i = 0; i < minGroupIndex; i++) {
             Model* model = (*gCurrentModels)[i];
-            model->customGfxIndex = (model->customGfxIndex & (maskLow + maskHigh)) + newIndex;
+            model->customGfxIndex = (model->customGfxIndex & (maskLow + maskHigh)) + packedFogType;
         }
         for (i = maxGroupIndex + 1; i < MAX_MODELS; i++) {
             Model* model = (*gCurrentModels)[i];
             if (model != NULL) {
-                model->customGfxIndex = (model->customGfxIndex & (maskLow + maskHigh)) + newIndex;
+                model->customGfxIndex = (model->customGfxIndex & (maskLow + maskHigh)) + packedFogType;
             }
         }
     }
 }
 
-void func_8011BAE8(void) {
+void mdl_reset_transform_flags(void) {
     s32 i;
 
     for (i = 0; i < ARRAY_COUNT(*gCurrentModels); i++) {
         Model* model = (*gCurrentModels)[i];
 
         if (model != NULL) {
-            model->flags &= ~MODEL_FLAG_HAS_TRANSFORM_APPLIED;
+            model->flags &= ~MODEL_FLAG_HAS_TRANSFORM;
         }
     }
 
@@ -3453,7 +3550,7 @@ void func_8011BAE8(void) {
         ModelTransformGroup* transformGroup = (*gCurrentTransformGroups)[i];
 
         if (transformGroup != NULL) {
-            transformGroup->flags &= ~MODEL_TRANSFORM_GROUP_FLAG_400;
+            transformGroup->flags &= ~TRANSFORM_GROUP_FLAG_HAS_TRANSFORM;
         }
     }
 }
@@ -3658,8 +3755,8 @@ void mdl_get_vertex_count(Gfx* gfx, s32* numVertices, Vtx** baseVtx, s32* gfxCou
     maxVtx = 0;
 
     if (gfx == NULL) {
-        *numVertices = maxVtx;
-        *baseVtx = (Vtx*)minVtx;
+        *numVertices = 0;
+        *baseVtx = NULL;
     } else {
         Gfx* baseGfx = gfx;
 
@@ -3692,7 +3789,7 @@ void mdl_get_vertex_count(Gfx* gfx, s32* numVertices, Vtx** baseVtx, s32* gfxCou
         *numVertices = (maxVtx - minVtx) >> 4;
         *baseVtx = (Vtx*)minVtx;
         *gfxCount = gfx - baseGfx;
-        w1 = gfx->words.w1; // TODO required to match
+        w1 = 64; // TODO required to match -- can be any operation that stores w1
     }
 }
 
@@ -3779,7 +3876,7 @@ Gfx* mdl_get_copied_gfx(s32 copyIndex) {
     return gfxCopy;
 }
 
-void mdl_project_tex_coords(s32 modelID, Gfx* arg1, Matrix4f arg2, Vtx* arg3) {
+void mdl_project_tex_coords(s32 modelID, Gfx* outGfx, Matrix4f arg2, Vtx* arg3) {
     s32 sp18;
     Vtx* baseVtx;
     s32 sp20;
@@ -3913,7 +4010,7 @@ void mdl_project_tex_coords(s32 modelID, Gfx* arg1, Matrix4f arg2, Vtx* arg3) {
         var_f20 = v0tc1 - var_f24 * v0ob0 - var_f26 * v0ob2; // used later
     }
 
-    mdl_get_vertex_count(arg1, &sp18, &baseVtx, &sp20, arg3);
+    mdl_get_vertex_count(outGfx, &sp18, &baseVtx, &sp20, arg3);
 
     for (i = 0; i < sp18; i++) {
         ob0 = baseVtx->v.ob[0];
@@ -4009,7 +4106,7 @@ s32 is_model_center_visible(u16 modelID, s32 depthQueryID, f32* screenX, f32* sc
     if (outX >= 0.0f && outY >= 0.0f && outX < 320.0f && outY < 240.0f) {
         gDPPipeSync(gMainGfxPos++);
         // Load a 4x1 pixel tile of the depth buffer
-        gDPLoadTextureTile(gMainGfxPos++, osVirtualToPhysical(&nuGfxZBuffer[(s32) outY * 320]), G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, 1,
+        gDPLoadTextureTile(gMainGfxPos++, osVirtualToPhysical(&nuGfxZBuffer[(s32) outY * SCREEN_WIDTH]), G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, 1,
             (s32) outX, 0, (s32) outX + 3, 0,
             0,
             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP,
@@ -4017,7 +4114,7 @@ s32 is_model_center_visible(u16 modelID, s32 depthQueryID, f32* screenX, f32* sc
             G_TX_NOLOD, G_TX_NOLOD);
         gDPPipeSync(gMainGfxPos++);
         // Set the current color image to the buffer where copied depth values are stored.
-        gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, depthCopyBuffer);
+        gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, depthCopyBuffer);
         gDPPipeSync(gMainGfxPos++);
         // Set up 1 cycle mode and all other relevant othermode params.
         // One cycle mode must be used here because only one pixel is copied, and copy mode only supports multiples of 4 pixels.
@@ -4036,7 +4133,7 @@ s32 is_model_center_visible(u16 modelID, s32 depthQueryID, f32* screenX, f32* sc
         gSPTextureRectangle(gMainGfxPos++, depthQueryID << 2, 0 << 2, 4 << 2, 1 << 2, G_TX_RENDERTILE, (s32) outX << 5, 0, 1 << 10, 1 << 10);
         // Sync and swap the color image back to the current framebuffer.
         gDPPipeSync(gMainGfxPos++);
-        gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, osVirtualToPhysical(nuGfxCfb_ptr));
+        gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxCfb_ptr));
         gDPPipeSync(gMainGfxPos++);
         // Reconfigure the frame's normal scissor.
         gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, camera->viewportStartX, camera->viewportStartY, camera->viewportStartX + camera->viewportW, camera->viewportStartY + camera->viewportH);
@@ -4115,7 +4212,7 @@ s32 is_point_visible(f32 x, f32 y, f32 z, s32 depthQueryID, f32* screenX, f32* s
     if (outX >= 0.0f && outY >= 0.0f && outX < 320.0f && outY < 240.0f) {
         gDPPipeSync(gMainGfxPos++);
         // Load a 4x1 pixel tile of the depth buffer
-        gDPLoadTextureTile(gMainGfxPos++, osVirtualToPhysical(&nuGfxZBuffer[(s32) outY * 320]), G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, 1,
+        gDPLoadTextureTile(gMainGfxPos++, osVirtualToPhysical(&nuGfxZBuffer[(s32) outY * SCREEN_WIDTH]), G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, 1,
             (s32) outX, 0, (s32) outX + 3, 0,
             0,
             G_TX_NOMIRROR | G_TX_WRAP, G_TX_NOMIRROR | G_TX_WRAP,
@@ -4123,7 +4220,7 @@ s32 is_point_visible(f32 x, f32 y, f32 z, s32 depthQueryID, f32* screenX, f32* s
             G_TX_NOLOD, G_TX_NOLOD);
         gDPPipeSync(gMainGfxPos++);
         // Set the current color image to the buffer where copied depth values are stored.
-        gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, depthCopyBuffer);
+        gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, depthCopyBuffer);
         gDPPipeSync(gMainGfxPos++);
         // Set up 1 cycle mode and all other relevant othermode params.
         // One cycle mode must be used here because only one pixel is copied, and copy mode only supports multiples of 4 pixels.
@@ -4142,7 +4239,7 @@ s32 is_point_visible(f32 x, f32 y, f32 z, s32 depthQueryID, f32* screenX, f32* s
         gSPTextureRectangle(gMainGfxPos++, depthQueryID << 2, 0 << 2, (depthQueryID + 1) << 2, 1 << 2, G_TX_RENDERTILE, (s32) outX << 5, 0, 1 << 10, 1 << 10);
         // Sync and swap the color image back to the current framebuffer.
         gDPPipeSync(gMainGfxPos++);
-        gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, 320, osVirtualToPhysical(nuGfxCfb_ptr));
+        gDPSetColorImage(gMainGfxPos++, G_IM_FMT_RGBA, G_IM_SIZ_16b, SCREEN_WIDTH, osVirtualToPhysical(nuGfxCfb_ptr));
         gDPPipeSync(gMainGfxPos++);
         // Reconfigure the frame's normal scissor.
         gDPSetScissor(gMainGfxPos++, G_SC_NON_INTERLACE, camera->viewportStartX, camera->viewportStartY, camera->viewportStartX + camera->viewportW, camera->viewportStartY + camera->viewportH);
@@ -4179,7 +4276,7 @@ void mdl_draw_hidden_panel_surface(Gfx** arg0, u16 treeIndex) {
     oldGfxPos = gMainGfxPos;
     gMainGfxPos = *arg0;
 
-    copied.flags = MODEL_FLAG_HAS_LOCAL_VERTEX_COPY | MODEL_FLAG_FLAG_1;
+    copied.flags = MODEL_FLAG_HAS_LOCAL_VERTEX_COPY | MODEL_FLAG_VALID;
     appendGfx_model(&copied);
 
     *arg0 = gMainGfxPos;

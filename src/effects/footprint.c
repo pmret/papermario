@@ -13,13 +13,13 @@ void func_E0018000(FootprintFXData* part) {
     Matrix4f sp18;
     Matrix4f sp58;
 
-    shim_guTranslateF(sp18, part->unk_0C, part->unk_10, part->unk_14);
-    shim_guRotateF(sp58, part->unk_28, 0.0f, 1.0f, 0.0f);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guMtxF2L(sp18, &part->mtx);
+    guTranslateF(sp18, part->unk_0C, part->unk_10, part->unk_14);
+    guRotateF(sp58, part->unk_28, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(sp58, sp18, sp18);
+    guMtxF2L(sp18, &part->mtx);
 }
 
-void footprint_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, f32 arg6, f32 arg7) {
+void footprint_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4) {
     EffectBlueprint bp;
     EffectInstance* effect;
     FootprintFXData* part;
@@ -35,14 +35,14 @@ void footprint_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, 
     bp.renderUI = NULL;
     bp.effectID = EFFECT_FOOTPRINT;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = 1;
-    part = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = general_heap_malloc(numParts * sizeof(*part));
     effect->data.footprint = part;
 
     ASSERT(effect->data.footprint != NULL);
 
-    shim_mem_clear(part, numParts * sizeof(*part));
+    mem_clear(part, numParts * sizeof(*part));
 
     for (i = 0; i < numParts; i++, part++) {
         part->alive = TRUE;
@@ -61,12 +61,12 @@ void footprint_main(f32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5, 
         part->unk_24 = 0.0f;
         part->unk_28 = (arg3 + (arg4 * 30.0f)) - 15.0f;
         part->unk_2C = 0.0f;
-        temp_f20 = shim_clamp_angle(arg3);
-        part->unk_90 = shim_sin_deg(temp_f20);
-        part->unk_94 = shim_cos_deg(temp_f20);
+        temp_f20 = clamp_angle(arg3);
+        part->unk_90 = sin_deg(temp_f20);
+        part->unk_94 = cos_deg(temp_f20);
         temp_f20_2 = (temp_f20 + 45.0f) - (arg4 * 180.0f);
-        part->unk_0C += shim_sin_deg(temp_f20_2) * 5.0f;
-        part->unk_14 += shim_cos_deg(temp_f20_2) * 5.0f;
+        part->unk_0C += sin_deg(temp_f20_2) * 5.0f;
+        part->unk_14 += cos_deg(temp_f20_2) * 5.0f;
         part->alpha = 200;
     }
 }
@@ -93,7 +93,7 @@ void footprint_update(EffectInstance* effect) {
     }
 
     if (!cond) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
     }
 }
 
@@ -106,12 +106,12 @@ void footprint_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_28;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
 void func_E00183BC(EffectInstance* effect) {
-    shim_remove_effect(effect);
+    remove_effect(effect);
 }
 
 void footprint_appendGfx(void* effect) {

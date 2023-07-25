@@ -142,7 +142,7 @@ API_CALLABLE(N(UpdateRotatingPlatforms)) {
 
             for (j = 0; j < 4; j++) {
                 for (k = 0; k < 4; k++) {
-                    it->transformMatrix[j][k] = loopModel->transformMatrix[j][k];
+                    it->transformMatrix[j][k] = loopModel->userTransformMtx[j][k];
                 }
             }
 
@@ -155,7 +155,7 @@ API_CALLABLE(N(UpdateRotatingPlatforms)) {
 
             for (j = 0; j < 4; j++) {
                 for (k = 0; k < 4; k++) {
-                    it->transformMatrix[j][k] = loopModel->transformMatrix[j][k];
+                    it->transformMatrix[j][k] = loopModel->userTransformMtx[j][k];
                 }
             }
         }
@@ -167,11 +167,11 @@ API_CALLABLE(N(UpdateRotatingPlatforms)) {
 
         for (j = 0; j < 4; j++) {
             for (k = 0; k < 4; k++) {
-                loopModel->transformMatrix[j][k] = it->transformMatrix[j][k];
+                loopModel->userTransformMtx[j][k] = it->transformMatrix[j][k];
             }
         }
 
-        loopModel->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX | MODEL_FLAG_HAS_TRANSFORM_APPLIED;
+        loopModel->flags |= MODEL_FLAG_MATRIX_DIRTY | MODEL_FLAG_HAS_TRANSFORM;
         guTranslateF(sp20, it->relativePos.x, it->relativePos.y, it->relativePos.z);
         guRotateF(spA0, script->functionTemp[1], 0.0f, 0.0f, 1.0f);
         guTranslateF(sp60, -it->relativePos.x, -it->relativePos.y, -it->relativePos.z);
@@ -179,9 +179,9 @@ API_CALLABLE(N(UpdateRotatingPlatforms)) {
         guMtxCatF(sp20, spA0, spA0);
         guMtxCatF(spA0, sp60, sp60);
         guMtxCatF(spE0, sp60, sp60);
-        guMtxCatF(loopModel->transformMatrix, sp60, loopModel->transformMatrix);
+        guMtxCatF(loopModel->userTransformMtx, sp60, loopModel->userTransformMtx);
         update_collider_transform(N(RotatingPlatformColliders)[i]);
-        guMtxXFMF(loopModel->transformMatrix, 0.0f, 0.0f, 0.0f, &ox, &oy, &oz);
+        guMtxXFMF(loopModel->userTransformMtx, 0.0f, 0.0f, 0.0f, &ox, &oy, &oz);
         if (gCollisionStatus.currentFloor == N(RotatingPlatformColliders)[i] ||
             gCollisionStatus.lastTouchedFloor == N(RotatingPlatformColliders)[i])
         {
@@ -199,12 +199,12 @@ API_CALLABLE(N(UpdateRotatingPlatforms)) {
         it->lastRelativePos.z = oz;
     }
 
-    guRotateF(axisModel->transformMatrix, script->functionTemp[1], 0.0f, 0.0f, 1.0f);
-    axisModel->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX | MODEL_FLAG_HAS_TRANSFORM_APPLIED;
+    guRotateF(axisModel->userTransformMtx, script->functionTemp[1], 0.0f, 0.0f, 1.0f);
+    axisModel->flags |= MODEL_FLAG_MATRIX_DIRTY | MODEL_FLAG_HAS_TRANSFORM;
     update_collider_transform(COLLIDER_fl);
 
-    guRotateF(ringModel->transformMatrix, script->functionTemp[1], 0.0f, 0.0f, 1.0f);
-    ringModel->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX | MODEL_FLAG_HAS_TRANSFORM_APPLIED;
+    guRotateF(ringModel->userTransformMtx, script->functionTemp[1], 0.0f, 0.0f, 1.0f);
+    ringModel->flags |= MODEL_FLAG_MATRIX_DIRTY | MODEL_FLAG_HAS_TRANSFORM;
     update_collider_transform(COLLIDER_1_0);
 
     isPounding = FALSE;

@@ -29,9 +29,9 @@ void energy_shockwave_main(
     bp.renderUI = NULL;
     bp.effectID = EFFECT_ENERGY_SHOCKWAVE;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    data = effect->data.energyShockwave = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.energyShockwave = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.energyShockwave != NULL);
 
     data->unk_00 = arg0;
@@ -59,6 +59,8 @@ void energy_shockwave_main(
 void energy_shockwave_init(EffectInstance* effect) {
 }
 
+EFFECT_DEF_SHIMMER_WAVE(shimmer_wave_main);
+
 void energy_shockwave_update(EffectInstance* effect) {
     EnergyShockwaveFXData* data = effect->data.energyShockwave;
     s32 unk_28;
@@ -72,15 +74,15 @@ void energy_shockwave_update(EffectInstance* effect) {
     unk_2C = data->unk_2C;
 
     if (unk_28 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
     if (unk_2C % 2) {
         angle = func_E0200044(360, unk_2C);
-        shim_sin_deg(angle);
-        shim_cos_deg(angle);
-        shim_load_effect(EFFECT_SHIMMER_WAVE);
+        sin_deg(angle);
+        cos_deg(angle);
+        load_effect(EFFECT_SHIMMER_WAVE);
         shimmer_wave_main(0, data->unk_04, data->unk_08, data->unk_0C, unk_2C * 8, 10.0f, 10, 20);
     }
 
@@ -131,7 +133,7 @@ void energy_shockwave_render(EffectInstance* effect) {
     renderTask.distance = 10;
     renderTask.renderMode = RENDER_MODE_SURFACE_XLU_LAYER3;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -158,10 +160,10 @@ void energy_shockwave_appendGfx(void* effect) {
     gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, uls, ult, uls + 252, ult + 252);
     gDPSetTileSize(gMainGfxPos++, 1, uls2, ult2, uls2 + 124, ult2 + 124);
 
-    shim_guTranslateF(sp10, data->unk_04, data->unk_08, data->unk_0C);
-    shim_guScaleF(sp50, data->unk_1C, data->unk_1C, data->unk_1C);
-    shim_guMtxCatF(sp50, sp10, sp10);
-    shim_guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp10, data->unk_04, data->unk_08, data->unk_0C);
+    guScaleF(sp50, data->unk_1C, data->unk_1C, data->unk_1C);
+    guMtxCatF(sp50, sp10, sp10);
+    guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gSPDisplayList(gMainGfxPos++, D_09000DC0_3762D0);

@@ -41,9 +41,9 @@ void got_item_outline_main(
     bp.renderUI = NULL;
     bp.effectID = EFFECT_GOT_ITEM_OUTLINE;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    data = effect->data.gotItemOutline = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.gotItemOutline = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.gotItemOutline != NULL);
 
     data->timeLeft = 100;
@@ -67,7 +67,7 @@ void got_item_outline_update(EffectInstance* effect) {
     if (data->timeLeft < 100) {
         data->timeLeft--;
         if (data->timeLeft < 0) {
-            shim_remove_effect(effect);
+            remove_effect(effect);
             return;
         }
     }
@@ -100,7 +100,7 @@ void got_item_outline_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -128,17 +128,17 @@ void got_item_outline_appendGfx(void* effect) {
             gDPSetEnvColor(gMainGfxPos++, 255, 255, 0, 255);
         }
 
-        shim_guTranslateF(mtxTransform, data->pos.x, data->pos.y, data->pos.z);
-        shim_guRotateF(mtxTemp, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-        shim_guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
-        shim_guTranslateF(mtxTemp, 0.0f, 0.0f, -2.0f);
-        shim_guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
+        guTranslateF(mtxTransform, data->pos.x, data->pos.y, data->pos.z);
+        guRotateF(mtxTemp, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+        guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
+        guTranslateF(mtxTemp, 0.0f, 0.0f, -2.0f);
+        guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
 
         scale *= 0.6;
 
-        shim_guScaleF(mtxTemp, scale, scale, 1.0f);
-        shim_guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
-        shim_guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guScaleF(mtxTemp, scale, scale, 1.0f);
+        guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
+        guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 

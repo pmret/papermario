@@ -1,11 +1,50 @@
+from dataclasses import dataclass
+from pathlib import Path
 from typing import List
 from segtypes.n64.segment import N64Segment
 from util import options
 import yaml as yaml_loader
 
 
+@dataclass
+class Effect:
+    name: str
+    args: str
+    gfx: str
+    empty: bool
+    returns_void: bool
+
+    def get_macro_def(self) -> str:
+        ret_type = "void" if self.returns_void else "EffectInstance*"
+
+        return f"#define EFFECT_DEF_{self.name.upper()}(func_name) {ret_type} func_name({self.args})"
+
+    def get_macro_call(self, func_name: str) -> str:
+        return f"EFFECT_DEF_{self.name.upper()}({func_name})"
+
+
+def effects_from_yaml(yaml_path: Path) -> List[Effect]:
+    with open(yaml_path) as f:
+        effects_yaml = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
+
+    effects: List[Effect] = []
+    for effect_yaml in effects_yaml:
+        name = str(effect_yaml.get("name", f"{len(effects):02X}"))
+        effects.append(
+            Effect(
+                name=name,
+                args=effect_yaml.get("args", ""),
+                gfx=effect_yaml.get("gfx", name),
+                empty="name" not in effect_yaml,
+                returns_void=effect_yaml.get("void", False),
+            )
+        )
+
+    return effects
+
+
 class N64SegPm_effect_loads(N64Segment):
-    effects: List[str] = []
+    effects: List[Effect] = []
 
     @staticmethod
     def get_effect_asm(index, name):
@@ -18,7 +57,7 @@ class N64SegPm_effect_loads(N64Segment):
 
 .section .text, "ax"
 
-glabel {name}
+glabel fx_{name}
 /* 00 27BDFFD0 */  addiu     $sp, $sp, -0x30
 /* 04 AFA40010 */  sw        $a0, 0x10($sp)
 /* 08 AFA50014 */  sw        $a1, 0x14($sp)
@@ -45,9 +84,6 @@ glabel {name}
 /* 5C 00000000 */   nop
 """
 
-    def effect_path(self, effect):
-        return options.opts.build_path / "asm" / "effects" / f"{effect}.s"
-
     def __init__(
         self,
         rom_start,
@@ -68,16 +104,19 @@ glabel {name}
             yaml=yaml,
         )
 
-        with open(options.opts.asm_path / ".." / "effects.yaml") as f:
-            self.effects = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
+        self.effects = effects_from_yaml(options.opts.src_path / "effects.yaml")
+
+    def effect_s_path(self, effect_name: str):
+        return options.opts.build_path / "asm" / "effects" / f"{effect_name}.s"
 
     def split(self, rom_bytes):
         for i, effect in enumerate(self.effects):
-            effect_asm = N64SegPm_effect_loads.get_effect_asm(i, effect)
+            # .s file for effect
+            effect_asm = N64SegPm_effect_loads.get_effect_asm(i, effect.name)
 
-            self.effect_path("").parent.mkdir(parents=True, exist_ok=True)
+            self.effect_s_path("").parent.mkdir(parents=True, exist_ok=True)
 
-            with open(self.effect_path(effect), "w") as f:
+            with open(self.effect_s_path(effect.name), "w") as f:
                 f.write(effect_asm)
 
     def get_linker_entries(self):
@@ -88,8 +127,14 @@ glabel {name}
         for effect in self.effects:
             ret.append(
                 LinkerEntry(
-                    self, [self.effect_path(effect)], self.effect_path(effect), ".text"
+                    self,
+                    [self.effect_s_path(effect.name)],
+                    self.effect_s_path(effect.name),
+                    ".text",
                 )
             )
 
         return ret
+
+    def should_split(self) -> bool:
+        return options.opts.is_mode_active(self.type)

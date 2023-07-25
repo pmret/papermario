@@ -27,10 +27,10 @@ EffectInstance* star_outline_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 ar
     effectBp.renderUI = NULL;
     effectBp.effectID = EFFECT_STAR_OUTLINE;
 
-    effect = shim_create_effect_instance(&effectBp);
+    effect = create_effect_instance(&effectBp);
     effect->numParts = numParts;
 
-    data = effect->data.starOutline = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.starOutline = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(data != NULL);
 
     data->unk_00 = 1;
@@ -81,7 +81,7 @@ void star_outline_update(EffectInstance* effect) {
     data->lifeTime++;
 
     if (data->timeLeft < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
     lifeTime = data->lifeTime;
@@ -114,14 +114,14 @@ void star_outline_update(EffectInstance* effect) {
         data->unk_24 = 255;
         data->unk_3C.y = (lifeTime * 4.0f * 0.4953);
         data->unk_3C.z = (lifeTime * 4.0f * 0.2234);
-        data->unk_34 = ((shim_sin_deg (lifetimeF * 7.12343)) * 127.0f) + 128.0f;
-        data->unk_18 = ((shim_sin_deg (lifetimeF * 1.231)) * 127.0f) + 215.0f;
-        data->unk_1C = ((shim_sin_deg (lifetimeF * 0.531)) * 127.0f) + 215.0f;
-        data->unk_20 = ((shim_sin_deg (lifetimeF * 3.231)) * 127.0f) + 215.0f;
-        data->unk_28 = ((shim_sin_deg (lifetimeF * 0.298)) * 127.0f) + 188.0f;
-        data->unk_2C = ((shim_sin_deg (lifetimeF * 0.831)) * 127.0f) + 188.0f;
-        data->unk_30 = ((shim_sin_deg (lifetimeF * 2.231)) * 127.0f) + 188.0f;
-        data->unk_38 = ((shim_sin_deg (lifetimeF * 2.044)) * 0.3) + 0.7;
+        data->unk_34 = ((sin_deg (lifetimeF * 7.12343)) * 127.0f) + 128.0f;
+        data->unk_18 = ((sin_deg (lifetimeF * 1.231)) * 127.0f) + 215.0f;
+        data->unk_1C = ((sin_deg (lifetimeF * 0.531)) * 127.0f) + 215.0f;
+        data->unk_20 = ((sin_deg (lifetimeF * 3.231)) * 127.0f) + 215.0f;
+        data->unk_28 = ((sin_deg (lifetimeF * 0.298)) * 127.0f) + 188.0f;
+        data->unk_2C = ((sin_deg (lifetimeF * 0.831)) * 127.0f) + 188.0f;
+        data->unk_30 = ((sin_deg (lifetimeF * 2.231)) * 127.0f) + 188.0f;
+        data->unk_38 = ((sin_deg (lifetimeF * 2.044)) * 0.3) + 0.7;
     }
     if (lifeTime == 1) {
         data->unk_48 = data->unk_3C.x;
@@ -140,7 +140,7 @@ void star_outline_render(EffectInstance* effect) {
     renderTask.distance = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -211,10 +211,10 @@ void star_outline_appendGfx(void* effect) {
     gSPDisplayList(gMainGfxPos++, D_E0126BC8[0]);
 
     if (unk_34 != 0) {
-        shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, (f32) ((f64) data->unk_54 * 0.4), data->pos.x, data->pos.y, data->pos.z);
-        shim_guPositionF(sp60, data->unk_48, data->unk_4C, data->unk_50, 1.0f, 0.0f, 0.0f, 0.0f);
-        shim_guMtxCatF(sp60, sp20, sp20);
-        shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, (f32) ((f64) data->unk_54 * 0.4), data->pos.x, data->pos.y, data->pos.z);
+        guPositionF(sp60, data->unk_48, data->unk_4C, data->unk_50, 1.0f, 0.0f, 0.0f, 0.0f);
+        guMtxCatF(sp60, sp20, sp20);
+        guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
@@ -230,10 +230,10 @@ void star_outline_appendGfx(void* effect) {
         gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     }
 
-    shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, data->unk_38 * 0.4, data->pos.x, data->pos.y, data->pos.z);
-    shim_guPositionF(sp60, data->unk_3C.x, data->unk_3C.y, data->unk_3C.z, 1.0f, 0.0f, 0.0f, 0.0f);
-    shim_guMtxCatF(sp60, sp20, sp20);
-    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, data->unk_38 * 0.4, data->pos.x, data->pos.y, data->pos.z);
+    guPositionF(sp60, data->unk_3C.x, data->unk_3C.y, data->unk_3C.z, 1.0f, 0.0f, 0.0f, 0.0f);
+    guMtxCatF(sp60, sp20, sp20);
+    guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 

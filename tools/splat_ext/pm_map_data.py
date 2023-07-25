@@ -1,9 +1,8 @@
+from math import ceil
 import os, sys
 from pathlib import Path
-from typing import List
 from segtypes.n64.segment import N64Segment
 from util.n64.Yay0decompress import Yay0Decompressor
-from util.color import unpack_color
 from segtypes.n64.palette import iter_in_groups
 from util import options
 import png  # type: ignore
@@ -30,19 +29,38 @@ def decode_null_terminated_ascii(data):
 def parse_palette(data):
     palette = []
 
+    # RRRRRGGG GGBBBBBA
+    def unpack_color(data):
+        s = int.from_bytes(data[0:2], byteorder="big")
+
+        r = (s >> 11) & 0x1F
+        g = (s >> 6) & 0x1F
+        b = (s >> 1) & 0x1F
+        a = (s & 1) * 0xFF
+
+        r = ceil(0xFF * (r / 31))
+        g = ceil(0xFF * (g / 31))
+        b = ceil(0xFF * (b / 31))
+
+        return r, g, b, a
+
     for a, b in iter_in_groups(data, 2):
         palette.append(unpack_color([a, b]))
 
     return palette
 
 
-def add_file_ext(name: str) -> str:
+def add_file_ext(name: str, linker: bool = False) -> str:
     if name.startswith("party_"):
         return "party/" + name + ".png"
-    elif name.endswith("_hit") or name.endswith("_shape"):
-        return "geom/" + name + ".bin"  # TODO: xml
+    elif name.endswith("_hit"):
+        return "geom/" + name + ".bin"
+    elif name.endswith("_shape"):
+        if linker:
+            name += "_built"
+        return "geom/" + name + ".bin"
     elif name.endswith("_tex"):
-        return "tex/" + name + ".bin"  # TODO: texture archive
+        return "tex/" + name + ".bin"
     elif name.endswith("_bg"):
         return "bg/" + name + ".png"
     else:
@@ -214,7 +232,7 @@ class N64SegPm_map_data(N64Segment):
         return [
             LinkerEntry(
                 self,
-                [fs_dir / add_file_ext(name) for name in self.files],
+                [fs_dir / add_file_ext(name, linker=True) for name in self.files],
                 fs_dir.with_suffix(".dat"),
                 ".data",
             ),

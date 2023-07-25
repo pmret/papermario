@@ -3781,7 +3781,7 @@ void func_8025D640(ActorPart* part, s32 decorationIndex) {
 
     switch (decor->state[decorationIndex]) {
         case 0:
-            decor->effect[decorationIndex] = fx_65(1, part->currentPos.x, part->currentPos.y, part->currentPos.z, 1.0f, 0);
+            decor->effect[decorationIndex] = fx_effect_65(1, part->currentPos.x, part->currentPos.y, part->currentPos.z, 1.0f, 0);
             decor->state[decorationIndex] = 1;
             break;
         case 1:
@@ -3803,7 +3803,7 @@ void func_8025D71C(ActorPart* part, s32 decorationIndex) {
 
     switch (decor->state[decorationIndex]) {
         case 0:
-            decor->effect[decorationIndex] = fx_65(2, part->currentPos.x, part->currentPos.y, part->currentPos.z, 1.0f, 0);
+            decor->effect[decorationIndex] = fx_effect_65(2, part->currentPos.x, part->currentPos.y, part->currentPos.z, 1.0f, 0);
             decor->unk_8C6[decorationIndex].unk00 = 1;
             decor->state[decorationIndex] = 1;
             break;

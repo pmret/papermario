@@ -615,7 +615,7 @@ s32 func_8021878C_512D5C(Evt* script, s32 isInitialCall) {
     D_802310D0.position.x = x;
     D_802310D0.position.y = y;
     D_802310D0.position.z = z;
-    fx_46(6, &D_802310D0, temp_f20, temp_v0);
+    fx_effect_46(6, &D_802310D0, temp_f20, temp_v0);
 
     return ApiStatus_DONE2;
 }

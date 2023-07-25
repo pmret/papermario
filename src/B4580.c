@@ -2,13 +2,6 @@
 #include "animation_script.h"
 #include "model.h"
 
-AnimScript gAnimScriptDefault = {
-    AS_WAIT, 60,
-    AS_END,
-};
-
-extern s32 gAnimCount;
-
 typedef struct DisplayListBufferHandle {
     /* 0x0 */ s32 ttl;
     /* 0x4 */ void* addr;
@@ -16,23 +9,25 @@ typedef struct DisplayListBufferHandle {
 
 typedef DisplayListBufferHandle AnimatedMeshVertexCopyList[0x60];
 
-extern AnimatedMeshVertexCopyList D_801533C0;
-extern AnimatedMeshVertexCopyList D_801536C0;
-extern AnimatedMeshList D_801539C0;
-extern AnimatedMeshList D_80153A00;
-extern s32 gAnimModelFogEnabled;
-extern s32 gAnimModelFogR;
-extern s32 gAnimModelFogG;
-extern s32 gAnimModelFogB;
-extern s32 gAnimModelFogA;
-extern s32 gAnimModelFogStart;
-extern s32 gAnimModelFogEnd;
-extern s32 gAnimVtxSegment;
-extern Matrix4f gAnimRotMtx;
-extern Matrix4f gAnimScaleMtx;
-extern Matrix4f gAnimTranslateMtx;
-extern Matrix4f gAnimRotScaleMtx;
-extern StaticAnimatorNode** gAnimTreeRoot;
+SHIFT_BSS AnimatedMeshList* gCurrentAnimMeshListPtr;
+SHIFT_BSS s32 gAnimCount;
+SHIFT_BSS AnimatedMeshVertexCopyList D_801533C0;
+SHIFT_BSS AnimatedMeshVertexCopyList D_801536C0;
+SHIFT_BSS AnimatedMeshList D_801539C0;
+SHIFT_BSS AnimatedMeshList D_80153A00;
+SHIFT_BSS s32 gAnimModelFogEnabled;
+SHIFT_BSS s32 gAnimModelFogR;
+SHIFT_BSS s32 gAnimModelFogG;
+SHIFT_BSS s32 gAnimModelFogB;
+SHIFT_BSS s32 gAnimModelFogA;
+SHIFT_BSS s32 gAnimModelFogStart;
+SHIFT_BSS s32 gAnimModelFogEnd;
+SHIFT_BSS s32 gAnimVtxSegment;
+SHIFT_BSS Matrix4f gAnimRotMtx;
+SHIFT_BSS Matrix4f gAnimScaleMtx;
+SHIFT_BSS Matrix4f gAnimTranslateMtx;
+SHIFT_BSS Matrix4f gAnimRotScaleMtx;
+SHIFT_BSS StaticAnimatorNode** gAnimTreeRoot;
 
 extern Gfx D_8014B7F8[];
 extern Gfx D_8014B820[];
@@ -48,6 +43,11 @@ extern Gfx D_8014BEF0[];
 extern Gfx D_8014BF18[];
 extern Gfx D_8014BF40[];
 extern Gfx D_8014BF68[];
+
+AnimScript gAnimScriptDefault = {
+    AS_WAIT, 60,
+    AS_END,
+};
 
 void appendGfx_animator_node(ModelAnimator*, AnimatorNode*, Matrix4f);
 
@@ -683,10 +683,10 @@ void animator_node_update_model_transform(ModelAnimator* animator, f32 (*flipMtx
     if (node->flags & MODEL_ANIMATOR_FLAG_HAS_MODEL) {
         Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(node->fcData.modelID));
 
-        copy_matrix(sp10, model->transformMatrix);
+        copy_matrix(sp10, model->userTransformMtx);
         guMtxL2F(sp10, rootTransform);
-        guMtxCatF(model->transformMatrix, sp10, model->transformMatrix);
-        model->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX;
+        guMtxCatF(model->userTransformMtx, sp10, model->userTransformMtx);
+        model->flags |= MODEL_FLAG_MATRIX_DIRTY;
     }
 
     for (i = 0; i < ARRAY_COUNT(node->children); i++) {

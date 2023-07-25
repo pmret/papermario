@@ -1,8 +1,6 @@
 #include "common.h"
 #include "effects_internal.h"
 
-void shim_draw_prev_frame_buffer_at_screen_pos(s32, s32, s32, s32, f32);
-
 void firework_rocket_init(EffectInstance* effect);
 void firework_rocket_render(EffectInstance* effect);
 void firework_rocket_update(EffectInstance* effect);
@@ -96,9 +94,9 @@ EffectInstance* firework_rocket_main(s32 variation, f32 centerX, f32 centerY, f3
     bp.renderUI = NULL;
     bp.effectID = EFFECT_FIREWORK_ROCKET;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    data = effect->data.fireworkRocket = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.fireworkRocket = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.fireworkRocket != NULL);
 
     data->variation = variation;
@@ -159,7 +157,7 @@ void firework_rocket_update(EffectInstance* effect) {
     data->lifeTime++;
 
     if (data->timeLeft < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -185,11 +183,11 @@ void firework_rocket_update(EffectInstance* effect) {
     i = lifeTime & 3;
     data->rocketX[i] = data->pos.x - data->velocity.x * (32 - lifeTime);
     data->rocketY[i] = data->pos.y - data->velocity.y * (32 - lifeTime)
-        - (80.0f - shim_sin_deg((s32)(lifeTime * 90) >> 5) * 80.0f);
+        - (80.0f - sin_deg((s32)(lifeTime * 90) >> 5) * 80.0f);
     data->rocketZ[i] = data->pos.z - data->velocity.z * (32 - lifeTime);
-    data->rocketVelocityX[i] = (shim_rand_int(10) - 5) * 0.1f;
-    data->rocketVelocityY[i] = (shim_rand_int(10) - 5) * 0.1f;
-    data->rocketVelocityZ[i] = (shim_rand_int(10) - 5) * 0.1f;
+    data->rocketVelocityX[i] = (rand_int(10) - 5) * 0.1f;
+    data->rocketVelocityY[i] = (rand_int(10) - 5) * 0.1f;
+    data->rocketVelocityZ[i] = (rand_int(10) - 5) * 0.1f;
 
     for (i = 0; i < 4; i++) {
         data->rocketX[i] += data->rocketVelocityX[i];
@@ -216,7 +214,7 @@ void firework_rocket_render(EffectInstance* effect) {
     renderTask.distance = 700;
     renderTask.renderMode =  RENDER_MODE_SURFACE_OPA;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -241,12 +239,12 @@ void firework_rocket_appendGfx(void* effect) {
     s32 i;
 
     negYaw = -camera->currentYaw;
-    sinTheta = shim_sin_deg(negYaw);
-    cosTheta = shim_cos_deg(negYaw);
+    sinTheta = sin_deg(negYaw);
+    cosTheta = cos_deg(negYaw);
     isExploded = data->isExploded;
     if (firework_rocket_frame_counter != gGameStatusPtr->frameCounter) {
         // draw previous frame to create motion blur effect
-        shim_draw_prev_frame_buffer_at_screen_pos(10, 10, SCREEN_WIDTH - 10, SCREEN_HEIGHT - 10, firework_rocket_blur_alpha * 0.8);
+        draw_prev_frame_buffer_at_screen_pos(10, 10, SCREEN_WIDTH - 10, SCREEN_HEIGHT - 10, firework_rocket_blur_alpha * 0.8);
         firework_rocket_frame_counter = gGameStatusPtr->frameCounter;
         firework_rocket_blur_alpha = 0;
     }
@@ -293,7 +291,7 @@ void firework_rocket_appendGfx(void* effect) {
     for (i = 0; i < numSparks; i++, sparkDir++) {
         if (isExploded == TRUE) {
             // create blinking effect
-            if (shim_rand_int(16) < 6) {
+            if (rand_int(16) < 6) {
                 continue;
             }
             x = (sparkDir->x * cosTheta + sparkDir->z * sinTheta) * radius + centerX;

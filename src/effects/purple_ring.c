@@ -42,7 +42,7 @@ EffectInstance* purple_ring_main(
         return NULL;
     }
 
-    temp_f12 = 1.0f / shim_sqrtf(temp_f12);
+    temp_f12 = 1.0f / sqrtf(temp_f12);
     arg4 *= temp_f12;
     arg5 *= temp_f12;
     arg6 *= temp_f12;
@@ -66,7 +66,7 @@ EffectInstance* purple_ring_main(
         return NULL;
     }
 
-    temp_f12 = 1.0f / shim_sqrtf(temp_f12);
+    temp_f12 = 1.0f / sqrtf(temp_f12);
     var_f22 *= temp_f12;
     var_f24 *= temp_f12;
     var_f20 *= temp_f12;
@@ -80,7 +80,7 @@ EffectInstance* purple_ring_main(
         return NULL;
     }
 
-    temp_f12 = 1.0f / shim_sqrtf(temp_f12);
+    temp_f12 = 1.0f / sqrtf(temp_f12);
     sp68 *= temp_f12;
     sp6C *= temp_f12;
     sp70 *= temp_f12;
@@ -92,9 +92,9 @@ EffectInstance* purple_ring_main(
     bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_PURPLE_RING;
 
-    effect = shim_create_effect_instance(bpPtr);
+    effect = create_effect_instance(bpPtr);
     effect->numParts = numParts;
-    data = effect->data.purpleRing = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.purpleRing = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.purpleRing != NULL);
 
     data->unk_00 = arg0;
@@ -148,7 +148,7 @@ void purple_ring_update(EffectInstance* effect) {
     part->unk_70++;
 
     if (part->unk_6C < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -184,7 +184,7 @@ void purple_ring_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -200,11 +200,11 @@ void purple_ring_appendGfx(void* effect) {
     gSPDisplayList(gMainGfxPos++, D_09000200_352EE0);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, data->unk_74, data->unk_75, data->unk_76, data->unk_68);
 
-    shim_guTranslateF(sp10, data->unk_04, data->unk_08, data->unk_0C);
-    shim_guMtxCatF(data->unk_1C, sp10, sp10);
-    shim_guScaleF(sp50, data->unk_64, data->unk_64, data->unk_64);
-    shim_guMtxCatF(sp50, sp10, sp10);
-    shim_guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp10, data->unk_04, data->unk_08, data->unk_0C);
+    guMtxCatF(data->unk_1C, sp10, sp10);
+    guScaleF(sp50, data->unk_64, data->unk_64, data->unk_64);
+    guMtxCatF(sp50, sp10, sp10);
+    guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, 0, unk_5C, temp * 4, unk_5C + temp);

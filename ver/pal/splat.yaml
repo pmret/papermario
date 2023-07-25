@@ -34,6 +34,38 @@ segments:
     start: 0
   - [0x40, bin]
 
+  - name: evt
+    type: code
+    dir: evt
+    start: 0xE61D0
+    vram: 0x802C6000
+    # follows_vram: world_use_item # TODO this causes the vram to be wrong
+    subsegments:
+    - [auto, c, script_list]
+    - [auto, c, evt]
+    - [auto, c, map_api]
+    - [auto, c, cam_api]
+    - [auto, c, model_api]
+    - [auto, c, npc_api]
+    - [auto, c, msg_api]
+    - [auto, c, player_api]
+    - [auto, c, virtual_entity]
+    - [auto, c, f8f60_len_1560]
+    - [auto, c, fa4c0_len_3bf0]
+    - [auto, c, fx_api]
+    - [auto, c, demo_api]
+    - [auto, pm_effect_loads, effect_loads]
+  - name: engine4
+    type: code
+    start: 0x100910
+    vram: 0x802E2020
+    follows_vram: evt
+    subsegments:
+    - [auto, c, sprite]
+    - [auto, c, 101b90_len_8f0]
+
+  - [0x1040F0, bin]
+
   - type: group
     dir: charset
     vram: 0
@@ -450,10 +482,8 @@ segments:
 
   - [0x17A160, bin]
 
-  - [0x1DA1E0, ci4,     icon/present, 32, 32]
-  - [0x1DA3E0, palette, icon/present]
-
-  - [0x1DA400, bin]
+  - [0x1DA1E0, pm_icons, icon]
+  - [0x20C080, bin]
 
   - [0x227080, ci8,     title/bg_1, 264, 162]
   - [0x231790, palette, title/bg_1]
@@ -466,6 +496,10 @@ segments:
     # TODO: split into images
 
   - [0x2705A0, bin]
+
+  - [0x33A930, pm_sprite_shading_profiles, sprite_shading_profiles]
+
+  - [0x33B7A0, bin]
 
   - type: code
     dir: world/partner
@@ -2965,11 +2999,11 @@ segments:
       - [0x3D8E30, ci4, D_09000420_3AB450, 32, 64]
       - [0x3D9230, palette, D_09000420_3AB450]
       - [0x3D9250, ci4, D_09000840_3AB870, 32, 64]
-      - [0x3D9650, palette, D_09000840_3AB870]
+      - {start: 0x3D9650, type: palette, name: D_09000840_3AB870, size: 0x10}
       - [0x3D9660, ci4, D_09000C50_3ABC80, 32, 64]
       - [0x3D9A60, palette, D_09000C50_3ABC80]
       - [0x3D9A80, ci4, D_09001070_3AC0A0, 32, 64]
-      - [0x3D9E80, palette, D_09001070_3AC0A0]
+      - {start: 0x3D9E80, type: palette, name: D_09001070_3AC0A0, size: 0x10}
       - [0x3D9E90, ci4, D_09001480_3AC4B0, 32, 64]
       - [0x3DA290, palette, D_09001480_3AC4B0]
       - [0x3DA2B0, ci4, D_090018A0_3AC8D0, 32, 64]

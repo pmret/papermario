@@ -59,10 +59,10 @@ void N(set_spotlight_pos_scale)(s32 modelID, f32 x, f32 y, f32 z, f32 scale) {
     Matrix4f mtxTemp;
     Model* model = get_model_from_list_index(get_model_list_index_from_tree_index(modelID));
 
-    guTranslateF(model->transformMatrix, x, y, z);
+    guTranslateF(model->userTransformMtx, x, y, z);
     guScaleF(mtxTemp, scale, 1.0f, scale);
-    guMtxCatF(mtxTemp, model->transformMatrix, model->transformMatrix);
-    model->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX | MODEL_FLAG_HAS_TRANSFORM_APPLIED;
+    guMtxCatF(mtxTemp, model->userTransformMtx, model->userTransformMtx);
+    model->flags |= MODEL_FLAG_MATRIX_DIRTY | MODEL_FLAG_HAS_TRANSFORM;
 }
 
 API_CALLABLE(N(UpdateSearchlight)) {

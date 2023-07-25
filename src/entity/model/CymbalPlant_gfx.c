@@ -24,35 +24,23 @@ Gfx Entity_CymbalPlant_LoadTexture[] = {
 #include "entity/model/CymbalPlant_7.vtx.inc.c"
 #include "entity/model/CymbalPlant_8.vtx.inc.c"
 
-Mtx D_0A001078_E9A368 = {
-    .m = {
-        { 0x00010000, 0x00000000,
-          0x00000001, 0x00000000 },
-        { 0x00000000, 0x00010000,
-          0x0002001A, 0x00000001 },
-        { 0x00000000, 0x00000000,
-          0x00000000, 0x00000000 },
-        { 0x00000000, 0x00000000,
-          0xAB15AB15, 0x00000000 }
-    }
-};
+Mtx Entity_CymbalPlant_RightMtx = RDP_MATRIX(
+    1.000000, 0.000000, 0.000000,  2.668290,
+    0.000000, 1.000000, 0.000000, 26.668290,
+    0.000000, 0.000000, 1.000000,  0.000000,
+    0.000000, 0.000000, 0.000000,  1.000000
+);
 
-Mtx D_0A0010B8_E9A3A8 = {
-    .m = {
-        { 0x00010000, 0x00000000,
-          0x00000001, 0x00000000 },
-        { 0x00000000, 0x00010000,
-          0xFFFD001A, 0x00000001 },
-        { 0x00000000, 0x00000000,
-          0x00000000, 0x00000000 },
-        { 0x00000000, 0x00000000,
-          0xAB15AB15, 0x00000000 }
-    }
-};
+Mtx Entity_CymbalPlant_LeftMtx = RDP_MATRIX(
+    1.000000, 0.000000, 0.000000, -2.331711,
+    0.000000, 1.000000, 0.000000, 26.668290,
+    0.000000, 0.000000, 1.000000,  0.000000,
+    0.000000, 0.000000, 0.000000,  1.000000
+);
 
 Gfx Entity_CymbalPlant_RenderNode3[] = {
     gsDPPipeSync(),
-    gsSPMatrix(&D_0A0010B8_E9A3A8, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
+    gsSPMatrix(&Entity_CymbalPlant_LeftMtx, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
     gsSPDisplayList(Entity_CymbalPlant_LoadTexture),
@@ -80,7 +68,7 @@ Gfx Entity_CymbalPlant_RenderNode3[] = {
 
 Gfx Entity_CymbalPlant_RenderNode4[] = {
     gsDPPipeSync(),
-    gsSPMatrix(&D_0A0010B8_E9A3A8, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
+    gsSPMatrix(&Entity_CymbalPlant_LeftMtx, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
     gsSPDisplayList(Entity_CymbalPlant_LoadTexture),
@@ -108,7 +96,7 @@ Gfx Entity_CymbalPlant_RenderNode4[] = {
 
 Gfx Entity_CymbalPlant_RenderNode5[] = {
     gsDPPipeSync(),
-    gsSPMatrix(&D_0A0010B8_E9A3A8, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
+    gsSPMatrix(&Entity_CymbalPlant_LeftMtx, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
     gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
@@ -126,7 +114,7 @@ Gfx Entity_CymbalPlant_RenderNode5[] = {
 };
 
 Gfx D_0A001308_E9A5F8[] = {
-    gsSPMatrix(&D_0A0010B8_E9A3A8, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
+    gsSPMatrix(&Entity_CymbalPlant_LeftMtx, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(Entity_CymbalPlant_RenderNode5),
     gsSPDisplayList(Entity_CymbalPlant_RenderNode4),
     gsSPDisplayList(Entity_CymbalPlant_RenderNode3),
@@ -136,7 +124,7 @@ Gfx D_0A001308_E9A5F8[] = {
 
 Gfx Entity_CymbalPlant_RenderNode7[] = {
     gsDPPipeSync(),
-    gsSPMatrix(&D_0A001078_E9A368, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
+    gsSPMatrix(&Entity_CymbalPlant_RightMtx, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
     gsSPDisplayList(Entity_CymbalPlant_LoadTexture),
@@ -164,7 +152,7 @@ Gfx Entity_CymbalPlant_RenderNode7[] = {
 
 Gfx Entity_CymbalPlant_RenderNode9[] = {
     gsDPPipeSync(),
-    gsSPMatrix(&D_0A001078_E9A368, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
+    gsSPMatrix(&Entity_CymbalPlant_RightMtx, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
     gsSPDisplayList(Entity_CymbalPlant_LoadTexture),
@@ -192,7 +180,7 @@ Gfx Entity_CymbalPlant_RenderNode9[] = {
 
 Gfx Entity_CymbalPlant_RenderNode8[] = {
     gsDPPipeSync(),
-    gsSPMatrix(&D_0A001078_E9A368, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
+    gsSPMatrix(&Entity_CymbalPlant_RightMtx, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsDPSetCycleType(G_CYC_1CYCLE),
     gsDPSetRenderMode(G_RM_AA_ZB_OPA_SURF, G_RM_AA_ZB_OPA_SURF2),
     gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
@@ -209,7 +197,7 @@ Gfx Entity_CymbalPlant_RenderNode8[] = {
 };
 
 Gfx D_0A001540_E9A830[] = {
-    gsSPMatrix(&D_0A001078_E9A368, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
+    gsSPMatrix(&Entity_CymbalPlant_RightMtx, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW),
     gsSPDisplayList(Entity_CymbalPlant_RenderNode8),
     gsSPDisplayList(Entity_CymbalPlant_RenderNode9),
     gsSPDisplayList(Entity_CymbalPlant_RenderNode7),

@@ -35,9 +35,9 @@ EffectInstance* effect_46_main(s32 type, PlayerStatus* player, f32 scale, s32 du
     bp.renderUI = NULL;
     bp.effectID = EFFECT_46;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    part = effect->data.spin = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = effect->data.spin = general_heap_malloc(numParts * sizeof(*part));
     ASSERT(effect->data.spin != NULL);
 
     part->type = type;
@@ -138,7 +138,7 @@ void effect_46_update(EffectInstance* effect) {
     part->lifetime++;
 
     if (part->timeLeft < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -195,7 +195,7 @@ void effect_46_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -215,30 +215,30 @@ void effect_46_appendGfx(void* effect) {
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
     gSPDisplayList(gMainGfxPos++, D_09000420_38EDB0);
 
-    shim_guTranslateF(mtxTransform, part->pos.x, part->pos.y, part->pos.z);
-    shim_guRotateF(mtxTemp, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-    shim_guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
-    shim_guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(mtxTransform, part->pos.x, part->pos.y, part->pos.z);
+    guRotateF(mtxTemp, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
+    guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
     part++;
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, part++) {
-        shim_guPositionF(mtxTransform, part->rot.x, 0.0f, part->rot.z, curScale * part->scale, part->pos.x, part->pos.y, part->pos.z);
-        shim_guRotateF(mtxTemp, part->rot.y, 0.0f, 1.0f, 0.0f);
-        shim_guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
+        guPositionF(mtxTransform, part->rot.x, 0.0f, part->rot.z, curScale * part->scale, part->pos.x, part->pos.y, part->pos.z);
+        guRotateF(mtxTemp, part->rot.y, 0.0f, 1.0f, 0.0f);
+        guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
 
         if (type < 8) {
-            shim_guTranslateF(mtxTemp, 3.0f - (curScale - initialScale) * 3.0f / initialScale, 0.0f, 0.0f);
-            shim_guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
+            guTranslateF(mtxTemp, 3.0f - (curScale - initialScale) * 3.0f / initialScale, 0.0f, 0.0f);
+            guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
         } else {
-            shim_guTranslateF(mtxTemp, 2.0f, 0.0f, 0.0f);
-            shim_guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
+            guTranslateF(mtxTemp, 2.0f, 0.0f, 0.0f);
+            guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
         }
 
         gDPSetPrimColor(gMainGfxPos++, 0, 0, part->color.r, part->color.g, part->color.b, alpha);
 
-        shim_guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         gSPDisplayList(gMainGfxPos++, D_090003A0_38ED30);

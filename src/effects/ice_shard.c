@@ -33,9 +33,9 @@ EffectInstance* ice_shard_main(
     bp.renderUI = NULL;
     bp.effectID = EFFECT_ICE_SHARD;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    data = effect->data.iceShard = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.iceShard = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.iceShard != NULL);
 
     data->type = arg0;
@@ -58,12 +58,12 @@ EffectInstance* ice_shard_main(
     data->envCol.b = 255;
     data->envCol.a = 255;
     data->animFrame = 0;
-    data->animRate = (shim_rand_int(1) * 2 - 1) * 0.25 * (shim_rand_int(4) * 0.1 + 0.1);
-    data->rotation = shim_rand_int(359);
-    data->vel.x = shim_rand_int(10) - 5;
-    data->vel.y = shim_rand_int(10) - 5;
-    data->vel.z = shim_rand_int(10) - 5;
-    data->angularVel = shim_rand_int(40) - 20;
+    data->animRate = (rand_int(1) * 2 - 1) * 0.25 * (rand_int(4) * 0.1 + 0.1);
+    data->rotation = rand_int(359);
+    data->vel.x = rand_int(10) - 5;
+    data->vel.y = rand_int(10) - 5;
+    data->vel.z = rand_int(10) - 5;
+    data->angularVel = rand_int(40) - 20;
     data->gravAccel = -0.1f;
 
     return effect;
@@ -88,7 +88,7 @@ void ice_shard_update(EffectInstance* effect) {
     data->lifetime++;
 
     if (data->timeLeft < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -126,7 +126,7 @@ void ice_shard_render(EffectInstance* effect) {
     renderTask.distance = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -143,13 +143,13 @@ void ice_shard_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, data->scale, data->pos.x, data->pos.y, data->pos.z);
-    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, data->scale, data->pos.x, data->pos.y, data->pos.z);
+    guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
-    shim_guRotateF(sp20, data->rotation, 0.0f, 0.0f, 1.0f);
-    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guRotateF(sp20, data->rotation, 0.0f, 0.0f, 1.0f);
+    guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gSPDisplayList(gMainGfxPos++, D_E01108B4[0]);

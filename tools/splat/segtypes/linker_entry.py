@@ -39,7 +39,10 @@ def path_to_object_path(path: Path) -> Path:
         full_suffix = ".o"
     else:
         full_suffix = path.suffix + ".o"
-    return clean_up_path(options.opts.build_path / path.with_suffix(full_suffix))
+
+    if not str(path).startswith(str(options.opts.build_path)):
+        path = options.opts.build_path / path
+    return clean_up_path(path.with_suffix(full_suffix))
 
 
 def write_file_if_different(path: Path, new_content: str):

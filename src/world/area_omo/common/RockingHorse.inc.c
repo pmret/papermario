@@ -52,12 +52,12 @@ API_CALLABLE(N(UpdateRockingHorses)) {
             horse->lastRockAngle = rockAngle;
         }
         model = get_model_from_list_index(get_model_list_index_from_tree_index(horse->modelID));
-        model->flags |= MODEL_FLAG_USES_TRANSFORM_MATRIX | MODEL_FLAG_HAS_TRANSFORM_APPLIED;
+        model->flags |= MODEL_FLAG_MATRIX_DIRTY | MODEL_FLAG_HAS_TRANSFORM;
         guTranslateF(mtxPivot, -horse->posX, 0.0f, -horse->posZ);
         guRotateF(mtxRotate, rockAngle, 0.0f, 0.0f, 1.0f);
-        guMtxCatF(mtxPivot, mtxRotate, model->transformMatrix);
+        guMtxCatF(mtxPivot, mtxRotate, model->userTransformMtx);
         guTranslateF(mtxPivot, horse->posX, offsetY, horse->posZ);
-        guMtxCatF(model->transformMatrix, mtxPivot, model->transformMatrix);
+        guMtxCatF(model->userTransformMtx, mtxPivot, model->userTransformMtx);
     }
     return ApiStatus_BLOCK;
 }

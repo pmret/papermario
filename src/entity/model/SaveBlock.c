@@ -42,18 +42,12 @@ Gfx Entity_SaveBlock_LoadTextureLetterS[] = {
     gsSPEndDisplayList(),
 };
 
-Mtx Entity_SaveBlock_Mtx = {
-    .m = {
-        { 0x00010000, 0x00000000,
-          0x00000001, 0x00000000 },
-        { 0x00000000, 0x00010000,
-          0x00000000, 0x00000001 },
-        { 0x00000000, 0x00000000,
-          0x00000000, 0x00000000 },
-        { 0x00000000, 0x00000000,
-          0x00000000, 0x00000000 }
-    }
-};
+Mtx Entity_SaveBlock_Mtx = RDP_MATRIX(
+    1.000000, 0.000000, 0.000000, 0.000000,
+    0.000000, 1.000000, 0.000000, 0.000000,
+    0.000000, 0.000000, 1.000000, 0.000000,
+    0.000000, 0.000000, 0.000000, 1.000000
+);
 
 Gfx Entity_SaveBlock_RenderLetterS[] = {
     gsDPPipeSync(),

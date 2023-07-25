@@ -5,6 +5,12 @@
 #include "sprite.h"
 #include "overlay.h"
 
+SHIFT_BSS s32 gOverrideFlags;
+SHIFT_BSS s32 timeFreezeMode;
+SHIFT_BSS u16** nuGfxCfb;
+SHIFT_BSS s16 D_8009A690;
+SHIFT_BSS DisplayContext D_80164000[2];
+
 s8 gGameStepDelayAmount = 1;
 s8 gGameStepDelayCount = 5;
 
@@ -24,20 +30,12 @@ s16 D_800741A0 = 0;
 s16 D_800741A2 = 0;
 s32 D_800741A4 = 0;
 
-Matrix4s MasterIdentityMtx = {
-    .whole = {
-        {1, 0, 0, 0},
-        {0, 1, 0, 0},
-        {0, 0, 1, 0},
-        {0, 0, 0, 1}
-    },
-    .frac = {
-        {0, 0, 0, 0},
-        {0, 0, 0, 0},
-        {0, 0, 0, 0},
-        {0, 0, 0, 0}
-    }
-};
+Mtx MasterIdentityMtx = RDP_MATRIX(
+    1.000000, 0.000000, 0.000000, 0.000000,
+    0.000000, 1.000000, 0.000000, 0.000000,
+    0.000000, 0.000000, 1.000000, 0.000000,
+    0.000000, 0.000000, 0.000000, 1.000000
+);
 
 s32 D_800741E8[2] = {0, 0}; // padding?
 u16 gMatrixListPos = 0;
@@ -45,8 +43,6 @@ u16 D_800741F2 = 0;
 s32 gCurrentDisplayContextIndex = 0;
 s32 gPauseBackgroundFade = 0;
 s32 D_800741FC = 0;
-
-extern s16 D_8009A690;
 
 void gfx_init_state(void);
 void gfx_draw_background(void);
@@ -81,7 +77,7 @@ void step_game_loop(void) {
         }
     }
 
-    func_8011BAE8();
+    mdl_reset_transform_flags();
     npc_iter_no_op();
     update_workers();
     update_triggers();
@@ -253,12 +249,12 @@ void gfx_draw_frame(void) {
 void load_engine_data(void) {
     s32 i;
 
-    dma_copy(engine4_ROM_START, engine4_ROM_END, engine4_VRAM);
-    dma_copy(engine1_ROM_START, engine1_ROM_END, engine1_VRAM);
-    dma_copy(evt_ROM_START, evt_ROM_END, evt_VRAM);
-    dma_copy(entity_ROM_START, entity_ROM_END, entity_VRAM);
-    dma_copy(engine2_ROM_START, engine2_ROM_END, engine2_VRAM);
-    dma_copy(font_width_ROM_START, font_width_ROM_END, font_width_VRAM);
+    DMA_COPY_SEGMENT(engine4);
+    DMA_COPY_SEGMENT(engine1);
+    DMA_COPY_SEGMENT(evt);
+    DMA_COPY_SEGMENT(entity);
+    DMA_COPY_SEGMENT(engine2);
+    DMA_COPY_SEGMENT(font_width);
 
     gOverrideFlags = 0;
     gGameStatusPtr->unk_79 = 0;

@@ -2,10 +2,12 @@
 #include "PR/os_flash.h"
 #include "gcc/string.h"
 
-extern SaveData D_8009A6B0;
-extern s32 logicalSaveInfo[4][2];
-extern s32 physicalSaveInfo[6][2];
-extern s32 nextAvailableSavePage;
+SHIFT_BSS SaveData D_8009A6B0;
+SHIFT_BSS s32 logicalSaveInfo[4][2];
+SHIFT_BSS s32 physicalSaveInfo[6][2];
+SHIFT_BSS s32 nextAvailableSavePage;
+SHIFT_BSS SaveDataHeader D_800D95E8;
+SHIFT_BSS SaveData gCurrentSaveFile;
 
 char magicSaveString[] = "Mario Story 006";
 

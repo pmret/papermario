@@ -65,6 +65,10 @@ BSS s32 RunningMusicEventIDs[10];
 BSS s32 D_802DB828[2]; // unused?
 BSS PopupMenu D_802DB830;
 
+#if VERSION_PAL
+BSS s32 D_PAL_BSS_802E1E34[0x3]; // TODO: probably just alignment
+#endif
+
 // demo_api
 BSS s32 gSpriteShadingHeader;
 BSS s32 D_802DBB64; // unused?

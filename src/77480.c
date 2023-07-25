@@ -6,20 +6,25 @@
 #include "sprite/player.h"
 
 #ifdef SHIFT
-#define inspect_icon_VRAM_DEF inspect_icon_VRAM
-#define speech_bubble_VRAM_DEF speech_bubble_VRAM
-#define pulse_stone_VRAM_DEF pulse_stone_VRAM
-#define i_spy_VRAM_DEF i_spy_VRAM
+#define inspect_icon_VRAM inspect_icon_VRAM
+#define speech_bubble_VRAM speech_bubble_VRAM
+#define pulse_stone_VRAM pulse_stone_VRAM
+#define i_spy_VRAM i_spy_VRAM
 #else
-#define inspect_icon_VRAM_DEF (void*)0x802B7000
-#define speech_bubble_VRAM_DEF (void*)0x802B7000
-#define pulse_stone_VRAM_DEF (void*)0x802B7000
-#define i_spy_VRAM_DEF (void*)0x802B7000
+#define inspect_icon_VRAM (void*)0x802B7000
+#define speech_bubble_VRAM (void*)0x802B7000
+#define pulse_stone_VRAM (void*)0x802B7000
+#define i_spy_VRAM (void*)0x802B7000
 #endif
+
+SHIFT_BSS UNK_FUN_PTR(ISpyNotificationCallback);
+SHIFT_BSS UNK_FUN_PTR(PulseStoneNotificationCallback);
+SHIFT_BSS UNK_FUN_PTR(TalkNotificationCallback);
+SHIFT_BSS UNK_FUN_PTR(InteractNotificationCallback);
+SHIFT_BSS s32 D_8010C950;
 
 extern f32 D_800F7B48;
 extern s32 D_800F7B4C;
-extern s8 D_8015A57A;
 extern s32 WorldTattleInteractionID;
 
 s32 player_raycast_down(f32*, f32*, f32*, f32*);
@@ -997,10 +1002,10 @@ void player_render_interact_prompts(void) {
 void check_for_ispy(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (D_8015A57A != 0 && ISpyNotificationCallback == NULL) {
+    if (gCurrentHiddenPanels.activateISpy && ISpyNotificationCallback == NULL) {
         if (!(playerStatus->animFlags &
             (PA_FLAG_SPEECH_PROMPT_AVAILABLE | PA_FLAG_INTERACT_PROMPT_AVAILABLE))) {
-            dma_copy(i_spy_ROM_START, i_spy_ROM_END, i_spy_VRAM_DEF);
+            DMA_COPY_SEGMENT(i_spy);
             ISpyNotificationCallback = ispy_notification_setup;
         }
     }
@@ -1049,7 +1054,7 @@ void check_for_pulse_stone(void) {
         }
 
         if (!(gPlayerStatus.animFlags & (PA_FLAG_SPEECH_PROMPT_AVAILABLE | PA_FLAG_INTERACT_PROMPT_AVAILABLE))) {
-            dma_copy(pulse_stone_ROM_START, pulse_stone_ROM_END, pulse_stone_VRAM_DEF);
+            DMA_COPY_SEGMENT(pulse_stone);
             PulseStoneNotificationCallback = pulse_stone_notification_setup;
         }
     }
@@ -1095,7 +1100,7 @@ void check_for_conversation_prompt(void) {
 
         if (has_valid_conversation_npc()) {
             TalkNotificationCallback = NULL;
-            dma_copy(speech_bubble_ROM_START, speech_bubble_ROM_END, speech_bubble_VRAM_DEF);
+            DMA_COPY_SEGMENT(speech_bubble);
             TalkNotificationCallback = interact_speech_setup;
         } else {
             TalkNotificationCallback = NULL;
@@ -1269,7 +1274,7 @@ void check_for_interactables(void) {
     }
 
     if (InteractNotificationCallback == NULL) {
-        dma_copy(inspect_icon_ROM_START, inspect_icon_ROM_END, inspect_icon_VRAM_DEF);
+        DMA_COPY_SEGMENT(inspect_icon);
         InteractNotificationCallback = interact_inspect_setup;
 
     }

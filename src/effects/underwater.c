@@ -26,9 +26,9 @@ EffectInstance* underwater_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4
     bp.renderUI = NULL;
     bp.effectID = EFFECT_UNDERWATER;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    data = effect->data.underwater = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.underwater = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.underwater != NULL);
 
     data->unk_00 = arg0;
@@ -84,7 +84,7 @@ void underwater_update(EffectInstance* effect) {
     data->lifeTime++;
 
     if (data->timeLeft < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -103,7 +103,7 @@ void underwater_update(EffectInstance* effect) {
     factor = (f32) alpha / 255.0f;
 
     for (i = 1; i < ARRAY_COUNT(data->unk_23) - 1; i++) {
-        data->unk_23[i][6] = shim_sin_deg(-((lifeTime - i) * 20)) * -64.0f * factor;
+        data->unk_23[i][6] = sin_deg(-((lifeTime - i) * 20)) * -64.0f * factor;
     }
 
     for (i = 1; i < ARRAY_COUNT(data->unk_23) - 1; i++) {
@@ -145,7 +145,7 @@ void underwater_render(EffectInstance* effect) {
     renderTask.distance = 100;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
 }
 
 void func_E00BA618(void) {
@@ -193,8 +193,8 @@ void underwater_appendGfx(void* effect) {
     gDPSetTexturePersp(gMainGfxPos++, G_TP_PERSP);
     gDPSetTextureFilter(gMainGfxPos++, G_TF_BILERP);
 
-    shim_guFrustumF(mtx, -80.0f, 80.0f, 60.0f, -60.0f, 160.0f, 640.0f, 1.0f);
-    shim_guMtxF2L(mtx, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guFrustumF(mtx, -80.0f, 80.0f, 60.0f, -60.0f, 160.0f, 640.0f, 1.0f);
+    guMtxF2L(mtx, &gDisplayContext->matrixStack[gMatrixListPos]);
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_PROJECTION);
     gSPClearGeometryMode(gMainGfxPos++, G_CULL_BOTH | G_LIGHTING);
     gSPSetGeometryMode(gMainGfxPos++, G_SHADE | G_SHADING_SMOOTH);

@@ -6,8 +6,10 @@
 
 #ifdef SHIFT
 #define SPRITE_ROM_START (u32) sprites_ROM_START + 0x10
-#else
+#elif VERSION_US
 #define SPRITE_ROM_START 0x1943000 + 0x10
+#elif VERSION_PAL
+#define SPRITE_ROM_START 0x1DF0000 + 0x10
 #endif
 
 extern s32 spr_allocateBtlComponentsOnWorldHeap;

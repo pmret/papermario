@@ -83,9 +83,9 @@ void sparkles_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4) {
     bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_SPARKLES;
 
-    effect = shim_create_effect_instance(bpPtr);
+    effect = create_effect_instance(bpPtr);
     effect->numParts = numParts;
-    part = effect->data.sparkles = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = effect->data.sparkles = general_heap_malloc(numParts * sizeof(*part));
     ASSERT(effect->data.sparkles != NULL);
 
     part->unk_04 = arg1;
@@ -97,31 +97,31 @@ void sparkles_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4) {
 
     part++;
     for (i = 1; i < numParts; i++, part++) {
-        f32 rand1 = shim_rand_int(arg4 * 1000.0f) / 1000.0f;
-        f32 rand2 = shim_rand_int(var_f30 * 1000.0f) / 1000.0f;
+        f32 rand1 = rand_int(arg4 * 1000.0f) / 1000.0f;
+        f32 rand2 = rand_int(var_f30 * 1000.0f) / 1000.0f;
 
         switch (arg0) {
             case 0:
                 angle = (360.0f / (numParts - 1)) * i;
                 angle2 = (1800.0f / (numParts - 1)) * i - 90.0f;
                 part->unk_18 = 0.0f;
-                part->unk_10 = (shim_sin_deg(angle) * (85.0f - shim_sin_deg(angle2) * 15.0f - (i & 1) * 5) / 100.0f) * arg4;
-                part->unk_14 = (shim_cos_deg(angle) * (85.0f - shim_sin_deg(angle2) * 15.0f - (i & 1) * 5) / 100.0f) * arg4;
+                part->unk_10 = (sin_deg(angle) * (85.0f - sin_deg(angle2) * 15.0f - (i & 1) * 5) / 100.0f) * arg4;
+                part->unk_14 = (cos_deg(angle) * (85.0f - sin_deg(angle2) * 15.0f - (i & 1) * 5) / 100.0f) * arg4;
                 part->unk_0C = 0;
                 part->unk_28 = 0;
                 break;
             case 1:
             case 2:
-                angle = (360.0f / (numParts - 1)) * i + shim_rand_int(359);
+                angle = (360.0f / (numParts - 1)) * i + rand_int(359);
                 if (i & 1) {
-                    part->unk_18 = -(shim_rand_int(50) / 1000 + 0.05);
+                    part->unk_18 = -(rand_int(50) / 1000 + 0.05);
                 } else {
                     part->unk_18 = 0;
                 }
                 part->unk_10 = 0;
                 part->unk_14 = 0;
-                part->unk_04 = rand1 * shim_sin_deg(angle);
-                part->unk_08 = rand2 * shim_cos_deg(angle);
+                part->unk_04 = rand1 * sin_deg(angle);
+                part->unk_08 = rand2 * cos_deg(angle);
                 part->unk_0C = 0;
                 part->unk_1C = 1.0f;
                 part->unk_24 = i * 2 + 30;
@@ -131,12 +131,12 @@ void sparkles_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4) {
             case 3:
             case 4:
             default:
-                angle = (360.0f / (numParts - 1)) * i + shim_rand_int(359);
-                part->unk_18 = -(shim_rand_int(50) / 1000 + 0.05);
+                angle = (360.0f / (numParts - 1)) * i + rand_int(359);
+                part->unk_18 = -(rand_int(50) / 1000 + 0.05);
                 part->unk_10 = 0.0f;
                 part->unk_14 = 0.0f;
-                part->unk_04 = rand1 * shim_sin_deg(angle);
-                part->unk_08 = rand2 * shim_cos_deg(angle);
+                part->unk_04 = rand1 * sin_deg(angle);
+                part->unk_08 = rand2 * cos_deg(angle);
                 part->unk_0C = 0;
                 part->unk_1C = 1.0f;
                 part->unk_24 = i * 2 + 18;
@@ -168,7 +168,7 @@ void sparkles_update(EffectInstance *effect) {
     unk_20 = part->unk_20;
 
     if ((unk_00 == 0 || unk_00 == 10) && part->unk_24 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -186,8 +186,8 @@ void sparkles_update(EffectInstance *effect) {
                     angle = func_E0200044(360, i + 177);
                     temp_f20 = (i & 3) * 0.5f + 1.0f;
                     firstPart->unk_00 = 10;
-                    part->unk_10 = temp_f20 * shim_sin_deg(angle);
-                    part->unk_14 = temp_f20 * shim_cos_deg(angle);
+                    part->unk_10 = temp_f20 * sin_deg(angle);
+                    part->unk_14 = temp_f20 * cos_deg(angle);
                     part->unk_18 = -0.05f;
                 }
                 break;
@@ -226,7 +226,7 @@ void sparkles_update(EffectInstance *effect) {
     }
 
     if (unk_00 != 0 && unk_00 != 10 && count >= effect->numParts - 1) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
     }
 }
 
@@ -239,7 +239,7 @@ void sparkles_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
 }
 
 void sparkles_appendGfx(void* effect) {
@@ -256,24 +256,24 @@ void sparkles_appendGfx(void* effect) {
 
     colorIdx = (part->unk_20 - 1) * 3;
 
-    shim_guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
-    shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-    shim_guMtxCatF(sp58, sp18, sp98);
+    guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
+    guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(sp58, sp18, sp98);
 
     part++;
     for (i = 0; i < ((EffectInstance*)effect)->numParts - 1; i++, part++) {
         s32 unk_2C = part->unk_2C;
 
         if (unk_2C >= 0) {
-            shim_guTranslateF(sp58, part->unk_04, part->unk_08, part->unk_0C);
+            guTranslateF(sp58, part->unk_04, part->unk_08, part->unk_0C);
 
             sp58[0][0] = part->unk_1C;
             sp58[1][1] = part->unk_1C;
             sp58[2][2] = part->unk_1C;
             colorIdx += 3;
 
-            shim_guMtxCatF(sp58, sp98, sp18);
-            shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+            guMtxCatF(sp58, sp98, sp18);
+            guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
             colorIdx %= ARRAY_COUNT(D_E0022CF0);
 

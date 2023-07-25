@@ -36,18 +36,12 @@ Gfx Entity_BlueWarpPipe_LoadTexturePipe[] = {
     gsSPEndDisplayList(),
 };
 
-Mtx Entity_BlueWarpPipe_mtx = {
-    .m = {
-        { 0x00010000, 0x00000000,
-          0x00000001, 0x00000000 },
-        { 0x00000000, 0x00010000,
-          0x0000FFC9, 0x00000001 },
-        { 0x00000000, 0x00000000,
-          0x00000000, 0x00000000 },
-        { 0x00000000, 0x00000000,
-          0x00000000, 0x00000000 }
-    }
-};
+Mtx Entity_BlueWarpPipe_mtx = RDP_MATRIX(
+    1.000000, 0.000000, 0.000000,   0.000000,
+    0.000000, 1.000000, 0.000000, -55.000000,
+    0.000000, 0.000000, 1.000000,   0.000000,
+    0.000000, 0.000000, 0.000000,   1.000000
+);
 
 Gfx Entity_BlueWarpPipe_RenderBase[] = {
     gsDPPipeSync(),

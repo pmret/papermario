@@ -48,9 +48,9 @@ EffectInstance* embers_main(
     bp.renderUI = NULL;
     bp.effectID = EFFECT_EMBERS;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = arg7;
-    part = effect->data.embers = shim_general_heap_malloc(arg7 * sizeof(*part));
+    part = effect->data.embers = general_heap_malloc(arg7 * sizeof(*part));
     ASSERT(effect->data.embers != NULL);
 
     part->unk_00 = arg0;
@@ -116,7 +116,7 @@ void embers_update(EffectInstance* effect) {
     }
 
     if (part->timeLeft < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -144,17 +144,17 @@ void embers_update(EffectInstance* effect) {
 
         if (part->unk_64 >= 0) {
             if (part->unk_64 == 0) {
-                part->unk_04 = shim_rand_int(unk_10) - unk_10 * 0.5;
-                part->unk_08 = shim_rand_int(unk_14);
+                part->unk_04 = rand_int(unk_10) - unk_10 * 0.5;
+                part->unk_08 = rand_int(unk_14);
                 part->unk_0C = 0.0f;
-                part->unk_44 = (f32) (shim_rand_int(20) - 10) * 0.05;
-                part->unk_48 = (shim_rand_int(40) - 1) * unk_68 * 0.05;
+                part->unk_44 = (f32) (rand_int(20) - 10) * 0.05;
+                part->unk_48 = (rand_int(40) - 1) * unk_68 * 0.05;
                 part->unk_4C = 0.0f;
-                part->unk_50 = (f32) (shim_rand_int(20) - 10) * 0.05;
-                part->unk_54 = (shim_rand_int(30) - 1) * unk_6C * 0.05;
+                part->unk_50 = (f32) (rand_int(20) - 10) * 0.05;
+                part->unk_54 = (rand_int(30) - 1) * unk_6C * 0.05;
                 part->unk_58 = 0.0f;
-                part->unk_5C = shim_rand_int(15);
-                part->unk_60 = shim_rand_int(15);
+                part->unk_5C = rand_int(15);
+                part->unk_60 = rand_int(15);
             }
             part->unk_40 = D_E00E0A48[part->unk_64];
             part->unk_04 += part->unk_44;
@@ -178,7 +178,7 @@ void embers_render(EffectInstance* effect) {
     renderTask.distance = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -196,10 +196,10 @@ void embers_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guTranslateF(sp10, part->unk_04, part->unk_08, part->unk_0C);
-    shim_guScaleF(sp50, part->unk_40, part->unk_40, part->unk_40);
-    shim_guMtxCatF(sp50, sp10, sp10);
-    shim_guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp10, part->unk_04, part->unk_08, part->unk_0C);
+    guScaleF(sp50, part->unk_40, part->unk_40, part->unk_40);
+    guMtxCatF(sp50, sp10, sp10);
+    guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPMatrix(gMainGfxPos++, camera->unkMatrix, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
@@ -210,8 +210,8 @@ void embers_appendGfx(void* effect) {
     part++;
     for (i = 1; i < ((EffectInstance*)effect)->numParts; i++, part++) {
         if (part->unk_64 >= 0) {
-            shim_guTranslateF(sp10, part->unk_04, part->unk_08, part->unk_0C);
-            shim_guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
+            guTranslateF(sp10, part->unk_04, part->unk_08, part->unk_0C);
+            guMtxF2L(sp10, &gDisplayContext->matrixStack[gMatrixListPos]);
 
             gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
             gDPSetTileSize(gMainGfxPos++, G_TX_RENDERTILE, 0, (i % 4) * 16 * 4, 15 * 4, ((i % 4) * 16 + 15) * 4);

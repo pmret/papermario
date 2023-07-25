@@ -33,10 +33,10 @@ EffectInstance* quizmo_stage_main(s32 arg0, f32 posX, f32 posY, f32 posZ) {
     effectBp.renderUI = NULL;
     effectBp.effectID = EFFECT_QUIZMO_STAGE;
 
-    effect = shim_create_effect_instance(&effectBp);
+    effect = create_effect_instance(&effectBp);
     effect->numParts = numParts;
 
-    data = effect->data.quizmoStage = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.quizmoStage = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(data != NULL);
 
     data->vanishTimer = 100;
@@ -78,7 +78,7 @@ void quizmo_stage_update(EffectInstance *effect) {
     lifeTime = data->lifetime;
 
     if (data->vanishTimer < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
     if (data->vanishTimer < 16) {
@@ -101,7 +101,7 @@ void quizmo_stage_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_SURFACE_OPA;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -114,10 +114,10 @@ void quizmo_stage_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guTranslateF(sp18, data->origin.x, data->origin.y, data->origin.z);
-    shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-    shim_guMtxCatF(sp58, sp18, sp18);
-    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp18, data->origin.x, data->origin.y, data->origin.z);
+    guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(sp58, sp18, sp18);
+    guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, microphoneRaiseAmt, microphoneRaiseAmt, microphoneRaiseAmt, 255);
@@ -127,8 +127,8 @@ void quizmo_stage_appendGfx(void* effect) {
     if (data->unk_3C != 255) {
         gSPMatrix(gMainGfxPos++, &D_09004148_39CD08[2], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
-        shim_guRotateF(sp18, (data->rearWallRaiseAmt * 180) / 255 - 180, 1.0f, 0.0f, 0.0f);
-        shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guRotateF(sp18, (data->rearWallRaiseAmt * 180) / 255 - 180, 1.0f, 0.0f, 0.0f);
+        guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         gSPDisplayList(gMainGfxPos++, D_09006E28_39F9E8);
@@ -138,16 +138,16 @@ void quizmo_stage_appendGfx(void* effect) {
         gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
         gSPMatrix(gMainGfxPos++, &D_09004148_39CD08[0], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
-        shim_guRotateF(sp18, 90 - (data->leftWallRaiseAmt * 90) / 255, 0.0f, 0.0f, 1.0f);
-        shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guRotateF(sp18, 90 - (data->leftWallRaiseAmt * 90) / 255, 0.0f, 0.0f, 1.0f);
+        guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         gSPDisplayList(gMainGfxPos++, D_09006FB0_39FB70);
         gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
         gSPMatrix(gMainGfxPos++, &D_09004148_39CD08[1], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
-        shim_guRotateF(sp18, (data->rightWallRaiseAmt * 90) / 255 - 90, 0.0f, 0.0f, 1.0f);
-        shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guRotateF(sp18, (data->rightWallRaiseAmt * 90) / 255 - 90, 0.0f, 0.0f, 1.0f);
+        guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         gSPDisplayList(gMainGfxPos++, D_09006F20_39FAE0);
@@ -159,8 +159,8 @@ void quizmo_stage_appendGfx(void* effect) {
         gSPDisplayList(gMainGfxPos++, D_09006FD8_39FB98);
         gSPMatrix(gMainGfxPos++, &D_09004148_39CD08[3], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
-        shim_guRotateF(sp18, 90 - (data->podiumRaiseAmt * 90) / 255, 1.0f, 0.0f, 0.0f);
-        shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guRotateF(sp18, 90 - (data->podiumRaiseAmt * 90) / 255, 1.0f, 0.0f, 0.0f);
+        guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         gSPDisplayList(gMainGfxPos++, D_09006D48_39F908);

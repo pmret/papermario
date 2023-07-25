@@ -69,9 +69,9 @@ void stars_shimmer_main(s32 type, f32 x, f32 y, f32 z, f32 arg4, f32 arg5, s32 n
     bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_STARS_SHIMMER;
 
-    effect = shim_create_effect_instance(bpPtr);
+    effect = create_effect_instance(bpPtr);
     effect->numParts = numParts;
-    part = effect->data.starsShimmer = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = effect->data.starsShimmer = general_heap_malloc(numParts * sizeof(*part));
     ASSERT(effect->data.starsShimmer != NULL);
 
     if (type == 6) {
@@ -91,14 +91,14 @@ void stars_shimmer_main(s32 type, f32 x, f32 y, f32 z, f32 arg4, f32 arg5, s32 n
     for (i = 1; i < numParts; i++, part++) {
         temp_f22 = (360.0f / (numParts - 1)) * i;
         if (type > 1) {
-            theta = temp_f22 + shim_rand_int(359);
+            theta = temp_f22 + rand_int(359);
         } else {
             theta = temp_f22 + 0.0f;
         }
         t3 = (temp_f22 * 10.0f) - 90.0f;
-        sinTheta = shim_sin_deg(theta);
-        cosTheta = shim_cos_deg(theta);
-        temp_f22 = shim_sin_deg(t3);
+        sinTheta = sin_deg(theta);
+        cosTheta = cos_deg(theta);
+        temp_f22 = sin_deg(t3);
         temp_f8 = (arg4 * 0.4) - (arg4 * 0.1 * temp_f22);
         temp_ft = (arg5 * 0.4) - (arg5 * 0.1 * temp_f22);
         new_var = 1.0f; // TODO dumb temp and cast later required to match
@@ -117,8 +117,8 @@ void stars_shimmer_main(s32 type, f32 x, f32 y, f32 z, f32 arg4, f32 arg5, s32 n
                 part->unk_14 = cosTheta * temp_ft;
                 break;
             case 3:
-                part->pos.x = (sinTheta * arg4 * shim_rand_int(100)) * 0.005;
-                part->pos.y = (cosTheta * arg5 * shim_rand_int(100)) * 0.005;
+                part->pos.x = (sinTheta * arg4 * rand_int(100)) * 0.005;
+                part->pos.y = (cosTheta * arg5 * rand_int(100)) * 0.005;
                 part->pos.z = 0.0f;
 
                 part->unk_18 = part->unk_10 = part->unk_14 = 0.0f;
@@ -132,8 +132,8 @@ void stars_shimmer_main(s32 type, f32 x, f32 y, f32 z, f32 arg4, f32 arg5, s32 n
                 part->unk_10 = sinTheta * temp_f8;
                 part->pos.y = temp5;
                 part->pos.z = cosTheta * temp_f8;
-                part->unk_14 = -shim_rand_int(10) * 0.03f;
-                part->unk_18 = (shim_rand_int(10) * 0.04f) + 0.01;
+                part->unk_14 = -rand_int(10) * 0.03f;
+                part->unk_18 = (rand_int(10) * 0.04f) + 0.01;
                 break;
         }
     }
@@ -155,7 +155,7 @@ void stars_shimmer_update(EffectInstance* effect) {
     lifeTime = it->lifeTime;
     if (state == 0 || state == 1 || state == 3 || state >= 10) {
         if (it->timeLeft < 0) {
-            shim_remove_effect(effect);
+            remove_effect(effect);
             return;
         }
     }
@@ -180,8 +180,8 @@ void stars_shimmer_update(EffectInstance* effect) {
                         var_f20 -= 120.0f;
                     }
                     data->state = 10;
-                    it->unk_10 = shim_sin_deg(var_f20);
-                    it->unk_14 = shim_cos_deg(var_f20);
+                    it->unk_10 = sin_deg(var_f20);
+                    it->unk_14 = cos_deg(var_f20);
                     it->unk_18 = -0.05f;
                 }
                 break;
@@ -252,8 +252,8 @@ void stars_shimmer_update(EffectInstance* effect) {
                         it->unk_1C += (0.1 - it->unk_1C) * 0.1;
                     }
                     if (state == 4) {
-                        it->pos.x = (it->unk_10 * shim_sin_deg(lifeTime * 12));
-                        it->pos.z = (it->unk_10 * shim_cos_deg(lifeTime * 12));
+                        it->pos.x = (it->unk_10 * sin_deg(lifeTime * 12));
+                        it->pos.z = (it->unk_10 * cos_deg(lifeTime * 12));
                     } else {
                         it->pos.x = it->unk_10;
                     }
@@ -263,7 +263,7 @@ void stars_shimmer_update(EffectInstance* effect) {
     }
 
     if (state != 0 && state != 1 && state != 3 && state < 10 && deadParts >= effect->numParts - 1) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
     }
 }
 
@@ -276,7 +276,7 @@ void stars_shimmer_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
 }
 
 void stars_shimmer_appendGfx(void* effect) {
@@ -296,9 +296,9 @@ void stars_shimmer_appendGfx(void* effect) {
     gSPDisplayList(gMainGfxPos++, D_09000F20_338EE0);
 
     temp_s4 = (data->lifeTime - 1) * 3;
-    shim_guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
-    shim_guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-    shim_guMtxCatF(sp58, sp18, sp98);
+    guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
+    guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(sp58, sp18, sp98);
 
     switch (type) {
         case 0:
@@ -334,10 +334,10 @@ void stars_shimmer_appendGfx(void* effect) {
     for (i = 0; i < ((EffectInstance*)effect)->numParts - 1; i++, data++) {
         unk_28 = data->unk_28;
         if (unk_28 >= 0) {
-            shim_guTranslateF(sp58, data->pos.x, data->pos.y, data->pos.z);
+            guTranslateF(sp58, data->pos.x, data->pos.y, data->pos.z);
             sp58[0][0] = sp58[1][1] = sp58[2][2] = data->unk_1C;
-            shim_guMtxCatF(sp58, sp98, sp18);
-            shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+            guMtxCatF(sp58, sp98, sp18);
+            guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
             if (temp_s4 >= 36) {
                 temp_s4 = 0;
             }

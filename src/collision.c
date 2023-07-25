@@ -9,18 +9,18 @@ typedef struct HitFile {
 typedef struct ColliderBackupEntry {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s16 parentModelIndex;
-    /* 0x06 */ s16 unk_06;
+    /* 0x06 */ char pad_06[2];
 } ColliderBackupEntry; // size = 0x08
 
 typedef struct HitFileHeader {
     /* 0x00 */ s16 numColliders;
-    /* 0x02 */ s16 unk_02;
+    /* 0x02 */ char pad_02[2];
     /* 0x04 */ s32 collidersOffset;
     /* 0x08 */ s16 numVertices;
-    /* 0x0A */ s16 unk_0a;
+    /* 0x0A */ char pad_0A[2];
     /* 0x0C */ s32 verticesOffset;
     /* 0x10 */ s16 boundingBoxesDataSize;
-    /* 0x12 */ s16 unk_12;
+    /* 0x12 */ char pad_12[2];
     /* 0x14 */ s32 boundingBoxesOffset;
 } HitFileHeader; // size = 0x18
 
@@ -32,23 +32,26 @@ typedef struct HitAssetCollider {
     /* 0x08 */ s32 trianglesOffset;
 } HitAssetCollider; // size = 0x0C
 
+SHIFT_BSS CollisionData gCollisionData;
+SHIFT_BSS CollisionData gZoneCollisionData;
+SHIFT_BSS f32 gCollisionRayStartX;
+SHIFT_BSS f32 gCollisionRayStartY;
+SHIFT_BSS f32 gCollisionRayStartZ;
+SHIFT_BSS f32 gCollisionRayDirX;
+SHIFT_BSS f32 gCollisionRayDirY;
+SHIFT_BSS f32 gCollisionRayDirZ;
+SHIFT_BSS f32 gCollisionPointX;
+SHIFT_BSS f32 gCollisionPointY;
+SHIFT_BSS f32 gCollisionPointZ;
+SHIFT_BSS f32 gCollisionRayLength;
+SHIFT_BSS f32 gCollisionNormalX;
+SHIFT_BSS f32 gCollisionNormalY;
+SHIFT_BSS f32 gCollisionNormalZ;
+SHIFT_BSS ColliderBackupEntry* gCollisionDataBackup;
+SHIFT_BSS ColliderBackupEntry* gCollisionDataZoneBackup;
+
 extern Vec3s gEntityColliderFaces[];
 extern Vec3f gEntityColliderNormals[];
-extern f32 gCollisionRayStartX;
-extern f32 gCollisionRayStartY;
-extern f32 gCollisionRayStartZ;
-extern f32 gCollisionRayDirX;
-extern f32 gCollisionRayDirY;
-extern f32 gCollisionRayDirZ;
-extern f32 gCollisionPointX;
-extern f32 gCollisionPointY;
-extern f32 gCollisionPointZ;
-extern f32 gCollisionRayLength;
-extern f32 gCollisionNormalX;
-extern f32 gCollisionNormalY;
-extern f32 gCollisionNormalZ;
-extern ColliderBackupEntry* gCollisionDataBackup;
-extern ColliderBackupEntry* gCollisionDataZoneBackup;
 
 s32 collision_heap_create(void);
 void* collision_heap_malloc(s32 size);
@@ -382,11 +385,11 @@ void update_collider_transform(s16 colliderID) {
     collider = &gCollisionData.colliderList[colliderID];
     model = get_model_from_list_index(collider->parentModelIndex);
 
-    if (!model->currentMatrix) {
-        copy_matrix(model->transformMatrix, matrix);
+    if (model->bakedMtx == NULL) {
+        copy_matrix(model->userTransformMtx, matrix);
     } else {
-        guMtxL2F(matrix, (Mtx*)model->currentMatrix);
-        guMtxCatF(model->transformMatrix, matrix, matrix);
+        guMtxL2F(matrix, (Mtx*)model->bakedMtx);
+        guMtxCatF(model->userTransformMtx, matrix, matrix);
     }
 
     triangle = collider->triangleTable;

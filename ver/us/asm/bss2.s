@@ -5,6 +5,8 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
+#ifndef SHIFT
+
 .section .bss
 
 dlabel PulseStoneNotificationCallback
@@ -108,3 +110,5 @@ dlabel D_8010C9B0
 
 dlabel D_8010C9B4
 .space 0x0000000c
+
+#endif

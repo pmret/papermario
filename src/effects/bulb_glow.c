@@ -60,9 +60,9 @@ void bulb_glow_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, EffectInst
     bp.renderUI = NULL;
     bp.effectID = EFFECT_BULB_GLOW;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    data = effect->data.bulbGlow = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.bulbGlow = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.bulbGlow != NULL);
 
     data->unk_00 = arg0 & 255;
@@ -83,7 +83,7 @@ void bulb_glow_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 arg4, EffectInst
         D_E00789A8 = 0;
     }
 
-    data->unk_20 = shim_rand_int(7);
+    data->unk_20 = rand_int(7);
     *outEffect = effect;
 }
 
@@ -105,7 +105,7 @@ void bulb_glow_update(EffectInstance* effect) {
         data->unk_14--;
     }
     if (data->unk_14 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -144,7 +144,7 @@ void bulb_glow_render(EffectInstance* effect) {
         renderTaskPtr->renderMode = RENDER_MODE_2D;
     }
 
-    retTask = shim_queue_render_task(renderTaskPtr);
+    retTask = queue_render_task(renderTaskPtr);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -189,7 +189,7 @@ void bulb_glow_appendGfx(void* effect) {
     glowExtent = temp_s1->unk_10;
     rectHeight = temp_s1->unk_14;
 
-    isPointVisible = shim_is_point_visible(data->pos.x, data->pos.y, data->pos.z, data->unk_1C, &centerX, &centerY);
+    isPointVisible = is_point_visible(data->pos.x, data->pos.y, data->pos.z, data->unk_1C, &centerX, &centerY);
 
     if (temp_s2 == 5) {
         isPointVisible = TRUE;

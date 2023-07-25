@@ -5,6 +5,8 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
+#ifndef SHIFT
+
 .section .bss
 
 dlabel nuScPreNMIFlag
@@ -347,7 +349,7 @@ dlabel gMapTransitionState
 dlabel gMapTransitionStateTime
 .space 2
 
-dlabel D_800A0948
+dlabel gLoadedFromFileSelect
 .space 4
 
 dlabel D_800A094C
@@ -366,28 +368,16 @@ dlabel D_800A0958
 .space 2
 
 dlabel D_800A095A
-.space 1
-
-dlabel D_800A095B
-.space 1
+.space 2
 
 dlabel D_800A095C
-.space 1
-
-dlabel D_800A095D
-.space 1
+.space 2
 
 dlabel D_800A095E
-.space 1
-
-dlabel D_800A095F
-.space 1
+.space 2
 
 dlabel D_800A0960
-.space 0x00000003
-
-dlabel D_800A0963
-.space 1
+.space 0x00000004
 
 dlabel D_800A0964
 .space 4
@@ -504,10 +494,7 @@ dlabel D_800A363C
 .space 4
 
 dlabel nuAuDmaMesgQ
-.space 4
-
-dlabel D_800A3644
-.space 0x00000014
+.space 0x18
 
 dlabel nuAuDmaMesgBuf
 .space 0x000000c8
@@ -554,16 +541,7 @@ dlabel D_800A3FF4
 .space 0x0000000c
 
 dlabel gEffectGraphicsData
-.space 0x000001b4
-
-dlabel D_800A41B4
-.space 0x0000000c
-
-dlabel D_800A41C0
-.space 4
-
-dlabel D_800A41C4
-.space 0x0000001c
+.space 0x000001E0
 
 dlabel gMapConfig
 .space 4
@@ -572,10 +550,9 @@ dlabel D_800A41E4
 .space 4
 
 dlabel gMapSettings
-.space 4
+.space 0x40
 
-dlabel D_800A41EC
-.space 0x00000044
+.space 8
 
 dlabel gCollisionRayStartX
 .space 4
@@ -674,22 +651,13 @@ dlabel piThreadStack
 .space 0x1000
 
 dlabel piEventQueue
-.space 4
-
-dlabel D_800AF890
-.space 0x00000014
+.space 0x18
 
 dlabel piEventBuf
-.space 4
-
-dlabel D_800AF8AC
-.space 4
+.space 0x8
 
 dlabel piAccessBuf
-.space 4
-
-dlabel D_800AF8B4
-.space 0x0000000c
+.space 0x10
 
 dlabel tmp_task
 .space 0x00000040
@@ -707,85 +675,37 @@ dlabel D_800AF914
 .space 4
 
 dlabel viThread
-.space 4
-
-dlabel D_800AF91C
-.space 0x1B4
+.space 0x1B8
 
 dlabel viThreadStack
 .space 0x1000
 
 dlabel viEventQueue
-.space 4
-
-dlabel D_800B0AD4
-.space 0x00000014
+.space 0x18
 
 dlabel viEventBuf
-.space 4
-
-dlabel D_800B0AEC
-.space 0x00000014
+.space 0x18
 
 dlabel viRetraceMsg
-.space 2
-
-dlabel D_800B0B02
-.space 2
-
-dlabel D_800B0B04
-.space 4
-
-dlabel D_800B0B08
-.space 0x00000010
+.space 0x18
 
 dlabel viCounterMsg
-.space 2
-
-dlabel D_800B0B1A
-.space 2
-
-dlabel D_800B0B1C
-.space 4
-
-dlabel D_800B0B20
-.space 0x00000010
+.space 0x18
 
 dlabel __MotorDataBuf
-.space 4
-
-dlabel D_800B0B34
-.space 0x00000038
-
-dlabel D_800B0B6C
-.space 4
-
-dlabel D_800B0B70
-.space 0x000000c0
+.space 0x100
 
 dlabel __osFlashID
-.space 4
-
-dlabel D_800B0C34
-.space 0x0000000c
+.space 0x10
 
 dlabel __osFlashMsg
-.space 4
-
-dlabel D_800B0C44
-.space 0x00000014
+.space 0x18
 
 dlabel __osFlashMessageQ
-.space 4
-
-dlabel D_800B0C5C
-.space 0x00000014
+.space 0x18
 
 dlabel __osFlashHandler
-.space 4
-
-dlabel D_800B0C74
-.space 0x00000070
+.space 0x74
 
 dlabel __osFlashMsgBuf
 .space 4
@@ -797,34 +717,16 @@ dlabel D_800B0CEC
 .space 4
 
 dlabel wMapTexName
-.space 4
+.space 0x18
 
-dlabel D_800B0CF4
-.space 0x00000014
-
-dlabel D_800B0D08
-.space 4
-
-dlabel D_800B0D0C
-.space 0x000001ac
+dlabel __osThreadSave
+.space 0x000001B0
 
 dlabel nuContWaitMesgQ
-.space 4
-
-dlabel D_800B0EBC
-.space 0x00000014
+.space 0x18
 
 dlabel __osContPifRam
-.space 4
-
-dlabel D_800B0ED4
-.space 0x00000034
-
-dlabel D_800B0F08
-.space 4
-
-dlabel D_800B0F0C
-.space 4
+.space 0x40
 
 dlabel gCurrentEncounter
 .space 0x00000bf8
@@ -872,16 +774,10 @@ dlabel D_800B3AE0
 .space 0x800
 
 dlabel gCollisionData
-.space 4
-
-dlabel D_800B42E4
-.space 0x0000000c
+.space 0x10
 
 dlabel nuGfxMesgQ
-.space 4
-
-dlabel D_800B42F4
-.space 0x00000014
+.space 0x18
 
 dlabel __CartRomHandle
 .space 4
@@ -914,10 +810,7 @@ dlabel D_800B431C
 .space 0x00000064
 
 dlabel __osPiAccessQueue
-.space 4
-
-dlabel D_800B4384
-.space 0x00000014
+.space 0x18
 
 dlabel gEffectInstances
 .space 0x00000180
@@ -998,10 +891,7 @@ dlabel __osEventStateTab
 .space 0x00000080
 
 dlabel __osPfsPifRam
-.space 0x0000003c
-
-dlabel D_800DA03C
-.space 4
+.space 0x00000040
 
 dlabel D_800DA040
 .space 0x00000400
@@ -1080,3 +970,5 @@ dlabel D_800DC4F8
 
 dlabel gCurrentBattlePtr
 .space 4
+
+#endif

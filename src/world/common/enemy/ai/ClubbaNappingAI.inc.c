@@ -35,7 +35,7 @@ void N(ClubbaNappingAI_Sleep)(Evt* script, MobileAISettings* aiSettings, EnemyDe
     Npc* npc = get_npc_unsafe(enemy->npcID);
     PlayerData* playerData = get_player_data();
     s32 shouldWakeUp = FALSE;
-    s32 emoteTemp;
+    EffectInstance* emoteTemp;
     f32 posX, posZ;
 
     if (basic_ai_check_player_dist(territory, enemy, 80.0f, 0.0f, 0)) {

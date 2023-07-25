@@ -4,11 +4,16 @@
 #include "hud_element.h"
 #include "camera.h"
 
-//extern f32 D_8009A5EC; TODO BSS
-
 void render_models(void);
 void execute_render_tasks(void);
 void render_item_entities(void);
+
+SHIFT_BSS f32 D_8009A5EC;
+SHIFT_BSS s16 gCurrentCamID;
+SHIFT_BSS u16* nuGfxCfb_ptr;
+SHIFT_BSS Gfx* gMainGfxPos;
+SHIFT_BSS DisplayContext* gDisplayContext;
+SHIFT_BSS Camera gCameras[4];
 
 void update_cameras(void) {
     s32 i;
@@ -89,7 +94,7 @@ void render_frame(s32 isSecondPass) {
 
     if (!isSecondPass) {
         gCurrentCamID = CAM_DEFAULT;
-        func_80116698();
+        mdl_update_transform_matrices();
     }
 
     if (isSecondPass) {

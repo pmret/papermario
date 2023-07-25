@@ -309,9 +309,6 @@ void pause_tabs_draw_map(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 h
     }
 }
 
-// #if VERSION_PAL
-// INCLUDE_ASM(void, "pause/pause_tabs", pause_tabs_init);
-// #else
 void pause_tabs_init(MenuPanel* tab) {
     s32 i;
 
@@ -335,7 +332,6 @@ void pause_tabs_init(MenuPanel* tab) {
     tab->initialized = TRUE;
     gPauseTabsPreviousTab = 5;
 }
-//#endif
 
 void pause_tabs_handle_input(MenuPanel* tab) {
     Window* pauseWindows;

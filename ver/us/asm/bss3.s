@@ -5,6 +5,8 @@
 .set noreorder # don't insert nops after branches
 .set gp=64     # allow use of 64-bit general purpose registers
 
+#ifndef SHIFT
+
 .section .bss
 
 dlabel gAuxSpriteShadingProfile
@@ -38,10 +40,7 @@ dlabel gAnimCount
 .space 4
 
 dlabel gMsgBGScrollAmtX
-.space 2
-
-dlabel D_801512DA
-.space 2
+.space 4
 
 dlabel D_801512DC
 .space 4
@@ -161,12 +160,8 @@ dlabel D_80151664
 .space 4
 
 dlabel wEntityBlueprint
-.space 0x00000074
+.space 0x00000078
 
-dlabel D_801516DC
-.space 4
-
-dlabel D_8015DCE0
 .space 8
 
 dlabel bEntityBlueprint
@@ -193,10 +188,10 @@ dlabel wTransformGroups
 dlabel bTransformGroups
 .space 0x00000010
 
-dlabel wModelSpecialDls
+dlabel wCustomModelGfx
 .space 0x00000080
 
-dlabel bModelSpecialDls
+dlabel bCustomModelGfx
 .space 0x00000080
 
 dlabel wCustomModelGfxBuilders
@@ -214,10 +209,10 @@ dlabel bModelLocalVtxBuffers
 dlabel gCurrentModelLocalVtxBuffers
 .space 4
 
-dlabel D_80152214
+dlabel wModelTreeRoot
 .space 4
 
-dlabel D_80152218
+dlabel bModelTreeRoot
 .space 4
 
 dlabel D_8015221C
@@ -242,10 +237,7 @@ dlabel D_80153223
 .space 1
 
 dlabel mdl_treeIterPos
-.space 2
-
-dlabel D_80153226
-.space 2
+.space 4
 
 dlabel wFogSettings
 .space 0x00000020
@@ -271,19 +263,19 @@ dlabel texPannerAuxV
 dlabel TextureHeapPos
 .space 4
 
-dlabel mdl_currentTransformGroupChildIndex
+dlabel mtg_IterIdx
 .space 2
 
-dlabel D_8015336E
+dlabel mtg_SearchModelID
 .space 2
 
-dlabel D_80153370
+dlabel mtg_FoundModelNode
 .space 4
 
-dlabel D_80153374
+dlabel mtg_MinChild
 .space 2
 
-dlabel D_80153376
+dlabel mtg_MaxChild
 .space 2
 
 dlabel D_80153378
@@ -374,52 +366,16 @@ dlabel entity_fog_enabled
 .space 4
 
 dlabel entity_fog_red
-.space 1
-
-dlabel D_8015437D
-.space 1
-
-dlabel D_8015437E
-.space 1
-
-dlabel D_8015437F
-.space 1
+.space 4
 
 dlabel entity_fog_green
-.space 1
-
-dlabel D_80154381
-.space 1
-
-dlabel D_80154382
-.space 1
-
-dlabel D_80154383
-.space 1
+.space 4
 
 dlabel entity_fog_blue
-.space 1
-
-dlabel D_80154385
-.space 1
-
-dlabel D_80154386
-.space 1
-
-dlabel D_80154387
-.space 1
+.space 4
 
 dlabel entity_fog_alpha
-.space 1
-
-dlabel D_80154389
-.space 1
-
-dlabel D_8015438A
-.space 1
-
-dlabel D_8015438B
-.space 1
+.space 4
 
 dlabel entity_fog_dist_min
 .space 4
@@ -638,10 +594,7 @@ dlabel D_80159394
 .space 0x0000000c
 
 dlabel gBackgroundPalette
-.space 0x000001fe
-
-dlabel D_8015959E
-.space 2
+.space 0x00000200
 
 dlabel gBackroundLastScrollValue
 .space 0x00000020
@@ -704,13 +657,9 @@ dlabel gCollisionStatus
 .space 0x00000028
 
 dlabel gCurrentHiddenPanels
-.space 2
+.space 0x10
 
-dlabel D_8015A57A
-.space 2
-
-dlabel D_8015A57C
-.space 0x00000014
+.space 8
 
 dlabel mdl_textureHandles
 .space 0x00002200
@@ -725,7 +674,12 @@ dlabel CreateEntityVarArgBuffer
 .space 0x00000010
 
 dlabel D_8015C7E0
-.space 0x7820
+.space 0x20
+
+dlabel D_8015C800
+.space 0x7800
 
 dlabel D_80164000
 .space 0x32C60
+
+#endif

@@ -113,7 +113,7 @@ enum {
 typedef struct HudCacheEntry {
     /* 0x00 */ s32 id;
     /* 0x04 */ u8* data;
-} HudCacheEntry; // size = 0x08;
+} HudCacheEntry; // size = 0x8;
 
 typedef struct PopupMenu {
     /* 0x000 */ HudScript* ptrIcon[32];
@@ -280,6 +280,16 @@ extern HudScript* wPartnerHudScripts[];
         hs_SetCustomSize(sizeX, sizeY) \
         hs_Loop \
             hs_SetCI(60, name) \
+        hs_Restart \
+        hs_End \
+    }
+
+#define STANDARD_ITEM_HUD_SCRIPT(icon) \
+    { \
+        hs_SetVisible \
+        hs_SetTileSize(HUD_ELEMENT_SIZE_32x32) \
+        hs_Loop \
+            hs_SetIcon(60, icon) \
         hs_Restart \
         hs_End \
     }

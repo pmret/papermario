@@ -31,9 +31,9 @@ EffectInstance* flashing_box_shockwave_main(
     bp.renderUI = NULL;
     bp.effectID = EFFECT_FLASHING_BOX_SHOCKWAVE;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    data = effect->data.flashingBoxShockwave = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = effect->data.flashingBoxShockwave = general_heap_malloc(numParts * sizeof(*data));
     ASSERT(effect->data.flashingBoxShockwave != NULL);
 
     data->unk_1C = 30;
@@ -93,7 +93,7 @@ void flashing_box_shockwave_update(EffectInstance* effect) {
     data->unk_20++;
 
     if (data->unk_1C < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -131,7 +131,7 @@ void flashing_box_shockwave_render(EffectInstance* effect) {
     renderTask.distance = 10;
     renderTask.renderMode = RENDER_MODE_SURFACE_XLU_LAYER3;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
 }
 
 void flashing_box_shockwave_appendGfx(void* effect) {
@@ -142,22 +142,22 @@ void flashing_box_shockwave_appendGfx(void* effect) {
     Matrix4f sp58;
     Matrix4f sp98;
 
-    shim_guRotateF(sp98, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guRotateF(sp98, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
 
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
-    shim_guMtxCatF(sp98, sp18, sp18);
-    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
+    guMtxCatF(sp98, sp18, sp18);
+    guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gDPSetPrimColor(gMainGfxPos++, 0, 0, data->unk_30, data->unk_34, data->unk_38, data->unk_18);
     gDPSetEnvColor(gMainGfxPos++, data->unk_3C, data->unk_40, data->unk_44, 0);
 
     if ((unk_00 == 0 || unk_00 == 1) && unk_20 % 2) {
-        shim_guScaleF(sp18, data->unk_28, data->unk_2C, 15.0f / 14);
-        shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guScaleF(sp18, data->unk_28, data->unk_2C, 15.0f / 14);
+        guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         gSPDisplayList(gMainGfxPos++, D_09000600_3936A0);
@@ -171,10 +171,10 @@ void flashing_box_shockwave_appendGfx(void* effect) {
             gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 0, data->unk_14);
         }
 
-        shim_guTranslateF(sp18, 0.0f, data->unk_2C, 0.0f);
-        shim_guScaleF(sp58, data->unk_24 * 0.25, data->unk_24 * 0.25, 1.0f);
-        shim_guMtxCatF(sp58, sp18, sp18);
-        shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guTranslateF(sp18, 0.0f, data->unk_2C, 0.0f);
+        guScaleF(sp58, data->unk_24 * 0.25, data->unk_24 * 0.25, 1.0f);
+        guMtxCatF(sp58, sp18, sp18);
+        guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
         gSPDisplayList(gMainGfxPos++, D_09000950_3939F0);

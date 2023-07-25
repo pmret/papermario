@@ -851,7 +851,7 @@ ApiStatus OnPlayerFled(Evt* script, s32 isInitialCall) {
     enemy->aiFlags |= ENEMY_AI_FLAG_SUSPEND;
 
     if (!skipReaction) {
-        s32 unk;
+        EffectInstance* unk;
 
         if (!(enemy->aiFlags & ENEMY_AI_FLAG_10)) {
             npc->currentAnim = *enemy->animList;

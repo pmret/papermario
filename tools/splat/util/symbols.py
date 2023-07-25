@@ -6,6 +6,7 @@ import spimdisasm
 import tqdm
 from intervaltree import IntervalTree
 from disassembler import disassembler_instance
+from pathlib import Path
 
 # circular import
 if TYPE_CHECKING:
@@ -71,6 +72,186 @@ def to_cname(symbol_name: str) -> str:
     return symbol_name
 
 
+def handle_sym_addrs(
+    path: Path, sym_addrs_lines: List[str], all_segments: "List[Segment]"
+):
+    def get_seg_for_name(name: str) -> Optional["Segment"]:
+        for segment in all_segments:
+            if segment.name == name:
+                return segment
+        return None
+
+    def get_seg_for_rom(rom: int) -> Optional["Segment"]:
+        for segment in all_segments:
+            if segment.contains_rom(rom):
+                return segment
+        return None
+
+    for line_num, line in enumerate(
+        tqdm.tqdm(sym_addrs_lines, desc=f"Loading symbols ({path.stem})")
+    ):
+        line = line.strip()
+        if not line == "" and not line.startswith("//"):
+            comment_loc = line.find("//")
+            line_main = line
+            line_ext = ""
+
+            if comment_loc != -1:
+                line_ext = line[comment_loc + 2 :].strip()
+                line_main = line[:comment_loc].strip()
+
+            try:
+                line_split = line_main.split("=")
+                name = line_split[0].strip()
+                addr = int(line_split[1].strip()[:-1], 0)
+            except:
+                log.parsing_error_preamble(path, line_num, line)
+                log.write("Line should be of the form")
+                log.write("<function_name> = <address> // attr0:val0 attr1:val1 [...]")
+                log.write("with <address> in hex preceded by 0x, or dec")
+                log.write("")
+                raise
+
+            sym = Symbol(addr, given_name=name)
+
+            ignore_sym = False
+            if line_ext:
+                for info in line_ext.split(" "):
+                    if ":" in info:
+                        if info.count(":") > 1:
+                            log.parsing_error_preamble(path, line_num, line)
+                            log.write(f"Too many ':'s in '{info}'")
+                            log.error("")
+
+                        attr_name, attr_val = info.split(":")
+                        if attr_name == "":
+                            log.parsing_error_preamble(path, line_num, line)
+                            log.write(
+                                f"Missing attribute name in '{info}', is there extra whitespace?"
+                            )
+                            log.error("")
+                        if attr_val == "":
+                            log.parsing_error_preamble(path, line_num, line)
+                            log.write(
+                                f"Missing attribute value in '{info}', is there extra whitespace?"
+                            )
+                            log.error("")
+
+                        # Non-Boolean attributes
+                        try:
+                            if attr_name == "type":
+                                if not check_valid_type(attr_val):
+                                    log.parsing_error_preamble(path, line_num, line)
+                                    log.write(
+                                        f"Unrecognized symbol type in '{info}', it should be one of"
+                                    )
+                                    log.write(
+                                        [
+                                            *splat_sym_types,
+                                            *spimdisasm.common.gKnownTypes,
+                                        ]
+                                    )
+                                    log.write(
+                                        "You may use a custom type that starts with a capital letter"
+                                    )
+                                    log.error("")
+                                type = attr_val
+                                sym.type = type
+                                continue
+                            if attr_name == "size":
+                                size = int(attr_val, 0)
+                                sym.given_size = size
+                                continue
+                            if attr_name == "rom":
+                                rom_addr = int(attr_val, 0)
+                                sym.rom = rom_addr
+                                continue
+                            if attr_name == "segment":
+                                seg = get_seg_for_name(attr_val)
+                                if seg is None:
+                                    log.parsing_error_preamble(path, line_num, line)
+                                    log.write(f"Cannot find segment '{attr_val}'")
+                                    log.error("")
+                                else:
+                                    # Add segment to symbol
+                                    sym.segment = seg
+                                continue
+                            if attr_name == "name_end":
+                                sym.given_name_end = attr_val
+                                continue
+                            if attr_name == "appears_after_overlays_addr":
+                                sym.appears_after_overlays_addr = int(attr_val, 0)
+                                appears_after_overlays_syms.append(sym)
+                                continue
+                        except:
+                            log.parsing_error_preamble(path, line_num, line)
+                            log.write(
+                                f"value of attribute '{attr_name}' could not be read:"
+                            )
+                            log.write("")
+                            raise
+
+                        # Boolean attributes
+                        tf_val = (
+                            True
+                            if is_truey(attr_val)
+                            else False
+                            if is_falsey(attr_val)
+                            else None
+                        )
+                        if tf_val is None:
+                            log.parsing_error_preamble(path, line_num, line)
+                            log.write(
+                                f"Invalid Boolean value '{attr_val}' for attribute '{attr_name}', should be one of"
+                            )
+                            log.write([*TRUEY_VALS, *FALSEY_VALS])
+                            log.error("")
+                        else:
+                            if attr_name == "dead":
+                                sym.dead = tf_val
+                                continue
+                            if attr_name == "defined":
+                                sym.defined = tf_val
+                                continue
+                            if attr_name == "extract":
+                                sym.extract = tf_val
+                                continue
+                            if attr_name == "ignore":
+                                ignore_sym = tf_val
+                                continue
+                            if attr_name == "force_migration":
+                                sym.force_migration = tf_val
+                                continue
+                            if attr_name == "force_not_migration":
+                                sym.force_not_migration = tf_val
+                                continue
+                            if attr_name == "allow_addend":
+                                sym.allow_addend = tf_val
+                                continue
+                            if attr_name == "dont_allow_addend":
+                                sym.dont_allow_addend = tf_val
+                                continue
+
+            if ignore_sym:
+                if sym.given_size is None or sym.given_size == 0:
+                    ignored_addresses.add(sym.vram_start)
+                else:
+                    spim_context.addBannedSymbolRangeBySize(
+                        sym.vram_start, sym.given_size
+                    )
+
+                continue
+
+            if sym.segment is None and sym.rom is not None:
+                sym.segment = get_seg_for_rom(sym.rom)
+
+            if sym.segment:
+                sym.segment.add_symbol(sym)
+
+            sym.user_declared = True
+            add_symbol(sym)
+
+
 def initialize(all_segments: "List[Segment]"):
     global all_symbols
     global all_symbols_dict
@@ -80,187 +261,12 @@ def initialize(all_segments: "List[Segment]"):
     all_symbols_dict = {}
     all_symbols_ranges = IntervalTree()
 
-    def get_seg_for_name(name: str) -> Optional["Segment"]:
-        for segment in all_segments:
-            if segment.name == name:
-                return segment
-        return None
-
     # Manual list of func name / addrs
     for path in options.opts.symbol_addrs_paths:
         if path.exists():
             with open(path) as f:
                 sym_addrs_lines = f.readlines()
-                for line_num, line in enumerate(
-                    tqdm.tqdm(sym_addrs_lines, desc=f"Loading symbols ({path.stem})")
-                ):
-                    line = line.strip()
-                    if not line == "" and not line.startswith("//"):
-                        comment_loc = line.find("//")
-                        line_main = line
-                        line_ext = ""
-
-                        if comment_loc != -1:
-                            line_ext = line[comment_loc + 2 :].strip()
-                            line_main = line[:comment_loc].strip()
-
-                        try:
-                            line_split = line_main.split("=")
-                            name = line_split[0].strip()
-                            addr = int(line_split[1].strip()[:-1], 0)
-                        except:
-                            log.parsing_error_preamble(path, line_num, line)
-                            log.write("Line should be of the form")
-                            log.write(
-                                "<function_name> = <address> // attr0:val0 attr1:val1 [...]"
-                            )
-                            log.write("with <address> in hex preceded by 0x, or dec")
-                            log.write("")
-                            raise
-
-                        sym = Symbol(addr, given_name=name)
-
-                        ignore_sym = False
-                        if line_ext:
-                            for info in line_ext.split(" "):
-                                if ":" in info:
-                                    if info.count(":") > 1:
-                                        log.parsing_error_preamble(path, line_num, line)
-                                        log.write(f"Too many ':'s in '{info}'")
-                                        log.error("")
-
-                                    attr_name, attr_val = info.split(":")
-                                    if attr_name == "":
-                                        log.parsing_error_preamble(path, line_num, line)
-                                        log.write(
-                                            f"Missing attribute name in '{info}', is there extra whitespace?"
-                                        )
-                                        log.error("")
-                                    if attr_val == "":
-                                        log.parsing_error_preamble(path, line_num, line)
-                                        log.write(
-                                            f"Missing attribute value in '{info}', is there extra whitespace?"
-                                        )
-                                        log.error("")
-
-                                    # Non-Boolean attributes
-                                    try:
-                                        if attr_name == "type":
-                                            if not check_valid_type(attr_val):
-                                                log.parsing_error_preamble(
-                                                    path, line_num, line
-                                                )
-                                                log.write(
-                                                    f"Unrecognized symbol type in '{info}', it should be one of"
-                                                )
-                                                log.write(
-                                                    [
-                                                        *splat_sym_types,
-                                                        *spimdisasm.common.gKnownTypes,
-                                                    ]
-                                                )
-                                                log.write(
-                                                    "You may use a custom type that starts with a capital letter"
-                                                )
-                                                log.error("")
-                                            type = attr_val
-                                            sym.type = type
-                                            continue
-                                        if attr_name == "size":
-                                            size = int(attr_val, 0)
-                                            sym.given_size = size
-                                            continue
-                                        if attr_name == "rom":
-                                            rom_addr = int(attr_val, 0)
-                                            sym.rom = rom_addr
-                                            continue
-                                        if attr_name == "segment":
-                                            seg = get_seg_for_name(attr_val)
-                                            if seg is None:
-                                                log.parsing_error_preamble(
-                                                    path, line_num, line
-                                                )
-                                                log.write(
-                                                    f"Cannot find segment '{attr_val}'"
-                                                )
-                                                log.error("")
-                                            else:
-                                                # Add segment to symbol
-                                                sym.segment = seg
-                                            continue
-                                        if attr_name == "name_end":
-                                            sym.given_name_end = attr_val
-                                            continue
-                                        if attr_name == "appears_after_overlays_addr":
-                                            sym.appears_after_overlays_addr = int(
-                                                attr_val, 0
-                                            )
-                                            appears_after_overlays_syms.append(sym)
-                                            continue
-                                    except:
-                                        log.parsing_error_preamble(path, line_num, line)
-                                        log.write(
-                                            f"value of attribute '{attr_name}' could not be read:"
-                                        )
-                                        log.write("")
-                                        raise
-
-                                    # Boolean attributes
-                                    tf_val = (
-                                        True
-                                        if is_truey(attr_val)
-                                        else False
-                                        if is_falsey(attr_val)
-                                        else None
-                                    )
-                                    if tf_val is None:
-                                        log.parsing_error_preamble(path, line_num, line)
-                                        log.write(
-                                            f"Invalid Boolean value '{attr_val}' for attribute '{attr_name}', should be one of"
-                                        )
-                                        log.write([*TRUEY_VALS, *FALSEY_VALS])
-                                        log.error("")
-                                    else:
-                                        if attr_name == "dead":
-                                            sym.dead = tf_val
-                                            continue
-                                        if attr_name == "defined":
-                                            sym.defined = tf_val
-                                            continue
-                                        if attr_name == "extract":
-                                            sym.extract = tf_val
-                                            continue
-                                        if attr_name == "ignore":
-                                            ignore_sym = tf_val
-                                            continue
-                                        if attr_name == "force_migration":
-                                            sym.force_migration = tf_val
-                                            continue
-                                        if attr_name == "force_not_migration":
-                                            sym.force_not_migration = tf_val
-                                            continue
-                                        if attr_name == "allow_addend":
-                                            sym.allow_addend = tf_val
-                                            continue
-                                        if attr_name == "dont_allow_addend":
-                                            sym.dont_allow_addend = tf_val
-                                            continue
-                        if ignore_sym:
-                            if sym.given_size == None or sym.given_size == 0:
-                                ignored_addresses.add(sym.vram_start)
-                            else:
-                                spim_context.addBannedSymbolRangeBySize(
-                                    sym.vram_start, sym.given_size
-                                )
-
-                            ignore_sym = False
-                            continue
-
-                        if sym.segment:
-                            sym.segment.add_symbol(sym)
-
-                        sym.user_declared = True
-                        add_symbol(sym)
+                handle_sym_addrs(path, sym_addrs_lines, all_segments)
 
 
 def initialize_spim_context(all_segments: "List[Segment]") -> None:
@@ -292,6 +298,7 @@ def initialize_spim_context(all_segments: "List[Segment]") -> None:
             continue
 
         ram_id = segment.get_exclusive_ram_id()
+
         if ram_id is None:
             if global_vram_start is None:
                 global_vram_start = segment.vram_start
@@ -644,3 +651,18 @@ class Symbol:
 def get_all_symbols():
     global all_symbols
     return all_symbols
+
+
+def reset_symbols():
+    global all_symbols
+    global all_symbols_dict
+    global all_symbols_ranges
+    global ignored_addresses
+    global to_mark_as_defined
+    global appears_after_overlays_syms
+    all_symbols = []
+    all_symbols_dict = {}
+    all_symbols_ranges = IntervalTree()
+    ignored_addresses = set()
+    to_mark_as_defined = set()
+    appears_after_overlays_syms = []

@@ -68,23 +68,21 @@ Gfx D_8014C2D8[] = {
     gsSPEndDisplayList(),
 };
 
-// unsorted
-extern u8* D_8015131C;
-extern MessageDrawState D_80155D20;
-extern IMG_BIN D_80159B50[];
-extern PAL_BIN D_8015C7E0[];
-
-// BSS
-extern s32 gMsgBGScrollAmtX;
-extern u16 gMsgGlobalWaveCounter;
-extern MessageImageDataList gMsgVarImages;
-extern s32 gMsgBGScrollAmtY;
-extern Gfx* D_80151338;
-extern char gMessageBuffers[2][1024];
-extern u8 gMessageMsgVars[3][32];
-extern s16 D_80155C98;
-extern Mtx gMessageWindowProjMatrix[2];
-extern MessageDrawState* msg_drawState;
+SHIFT_BSS s32 gMsgBGScrollAmtX;
+SHIFT_BSS u16 gMsgGlobalWaveCounter;
+SHIFT_BSS MessageImageDataList gMsgVarImages;
+SHIFT_BSS s32 gMsgBGScrollAmtY;
+SHIFT_BSS u8* D_8015131C;
+SHIFT_BSS Gfx* D_80151338;
+SHIFT_BSS char gMessageBuffers[2][1024];
+SHIFT_BSS u8 gMessageMsgVars[3][32];
+SHIFT_BSS s16 D_80155C98;
+SHIFT_BSS Mtx gMessageWindowProjMatrix[2];
+SHIFT_BSS MessageDrawState D_80155D20;
+SHIFT_BSS MessageDrawState* msg_drawState;
+SHIFT_BSS IMG_BIN D_80159B50[0x200];
+SHIFT_BSS PAL_BIN D_8015C7E0[0x10];
+SHIFT_BSS MessagePrintState gMessagePrinters[3];
 
 extern s16 D_802EB644[22];
 
@@ -1013,9 +1011,10 @@ void msg_copy_to_print_buffer(MessagePrintState* printer, s32 arg1, s32 arg2) {
                         offset = arg << 8 | argQ;
 
                         D_8015131C = D_80159B50;
-                        dma_copy(icon_present_ROM_START + gItemIconRasterOffsets[offset], icon_present_ROM_START + gItemIconRasterOffsets[offset] + 0x200, a2);
-                        romEnd = icon_present_ROM_START + gItemIconPaletteOffsets[offset] + 0x20;
-                        dma_copy(icon_present_ROM_START + gItemIconPaletteOffsets[offset],
+                        dma_copy(icon_ROM_START + gItemIconRasterOffsets[offset],
+                                icon_ROM_START + gItemIconRasterOffsets[offset] + 0x200, a2);
+                        romEnd = icon_ROM_START + gItemIconPaletteOffsets[offset] + 0x20;
+                        dma_copy(icon_ROM_START + gItemIconPaletteOffsets[offset],
                                  romEnd, D_8015C7E0);
                         printer->currentPrintDelay = printer->printDelayTime;
                         if (--arg1 <= 0) {

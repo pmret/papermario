@@ -2,11 +2,13 @@
 #include "world/partners.h"
 #include "sprite/player.h"
 
+SHIFT_BSS CollisionStatus gCollisionStatus;
+SHIFT_BSS f32 D_8010C928;
+SHIFT_BSS f32 JumpedOnSwitchX;
+SHIFT_BSS f32 JumpedOnSwitchZ;
+SHIFT_BSS f32 D_8010C984;
+
 extern f32 GravityParamsStartJump[];
-extern f32 D_8010C928;
-extern f32 JumpedOnSwitchX;
-extern f32 JumpedOnSwitchZ;
-extern f32 D_8010C984;
 
 s32 collision_check_player_intersecting_world(s32 mode, s32 arg1, f32 yaw);
 s32 phys_check_interactable_collision(void);

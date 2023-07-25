@@ -2,7 +2,15 @@
 #include "hud_element.h"
 #include "sprite.h"
 
-extern s32 D_800A0950;
+SHIFT_BSS s32 D_800A0950;
+SHIFT_BSS s16 D_800A0954;
+SHIFT_BSS s16 D_800A0956;
+SHIFT_BSS s16 D_800A0958;
+SHIFT_BSS s16 D_800A095A;
+SHIFT_BSS s16 D_800A095C;
+SHIFT_BSS s16 D_800A095E;
+SHIFT_BSS s32 D_800A0960;
+SHIFT_BSS s32 D_800A0964;
 
 void state_init_intro(void) {
     s8 unk_A8;
@@ -66,8 +74,8 @@ void state_init_intro(void) {
             break;
     }
 
-    set_screen_overlay_params_back(D_800A0963, D_800A0954);
-    set_screen_overlay_color(SCREEN_LAYER_BACK, D_800A095B, D_800A095D, D_800A095F);
+    set_screen_overlay_params_back(D_800A0960, D_800A0954);
+    set_screen_overlay_color(SCREEN_LAYER_BACK, D_800A095A, D_800A095C, D_800A095E);
 
     intro_logos_update_fade();
 }
@@ -227,8 +235,8 @@ void state_step_intro(void) {
             break;
     }
 
-    set_screen_overlay_params_back(D_800A0963, D_800A0954);
-    set_screen_overlay_color(SCREEN_LAYER_BACK, D_800A095B, D_800A095D, D_800A095F);
+    set_screen_overlay_params_back(D_800A0960, D_800A0954);
+    set_screen_overlay_color(SCREEN_LAYER_BACK, D_800A095A, D_800A095C, D_800A095E);
     intro_logos_update_fade();
 }
 

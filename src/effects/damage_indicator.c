@@ -94,10 +94,10 @@ void damage_indicator_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 starsRadi
     bp.unk_00 = 0;
     bp.effectID = EFFECT_DAMAGE_INDICATOR;
 
-    effect = shim_create_effect_instance(bpPtr);
+    effect = create_effect_instance(bpPtr);
     effect->numParts = damageAmt;
 
-    effect->data.damageIndicator = part = shim_general_heap_malloc(damageAmt * sizeof(*part));
+    effect->data.damageIndicator = part = general_heap_malloc(damageAmt * sizeof(*part));
     ASSERT(effect->data.damageIndicator != NULL);
 
     part->unk_00 = arg0;
@@ -119,8 +119,8 @@ void damage_indicator_main(s32 arg0, f32 posX, f32 posY, f32 posZ, f32 starsRadi
         part->curPos.z = part->basePos.z;
         angle = starsAngle + (((s32) ((((i % 2) * 2) - 1) * i) / 2) * (30.0f - damageAmt));
         part->scale = 0.2f;
-        part->relPos.x = -shim_sin_deg(angle) * starsRadius * 1.5;
-        part->relPos.y = shim_cos_deg(angle) * starsRadius * 1.5;
+        part->relPos.x = -sin_deg(angle) * starsRadius * 1.5;
+        part->relPos.y = cos_deg(angle) * starsRadius * 1.5;
         part->relPos.z = 0;
         part->alpha = 255;
     }
@@ -147,7 +147,7 @@ void damage_indicator_update(EffectInstance* effect) {
     timeLeft = part->timeLeft;
 
     if (timeLeft < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -204,10 +204,10 @@ void damage_indicator_render_impl(EffectInstance* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effect->graphics->data));
 
-    shim_guTranslateF(mtxTransform, part->basePos.x, part->basePos.y, part->basePos.z);
-    shim_guRotateF(mtxTemp, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-    shim_guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
-    shim_guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(mtxTransform, part->basePos.x, part->basePos.y, part->basePos.z);
+    guRotateF(mtxTemp, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(mtxTemp, mtxTransform, mtxTransform);
+    guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
@@ -230,18 +230,18 @@ void damage_indicator_render_impl(EffectInstance* effect) {
         gSPDisplayList(gMainGfxPos++, D_09001D40_351F60);
 
         if (i == lastPartIdx) {
-            shim_guPositionF(mtxTransform, 0.0f, 0.0f, 0.0f, part->scale, part->curPos.x, part->curPos.y, part->curPos.z);
-            shim_guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
+            guPositionF(mtxTransform, 0.0f, 0.0f, 0.0f, part->scale, part->curPos.x, part->curPos.y, part->curPos.z);
+            guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
             gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
             gSPDisplayList(gMainGfxPos++, D_09002150_352370);
             gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
 
-            shim_guPositionF(mtxTransform, 0.0f, 0.0f, 0.0f, part->scale,
+            guPositionF(mtxTransform, 0.0f, 0.0f, 0.0f, part->scale,
                 (part->curPos.x + part->basePos.x) * 0.5,
                 (part->curPos.y + part->basePos.y) * 0.5,
                 (part->curPos.z + part->basePos.z) * 0.5);
-            shim_guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
+            guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
             gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
             gSPDisplayList(gMainGfxPos++, D_09002160_352380);
@@ -250,13 +250,13 @@ void damage_indicator_render_impl(EffectInstance* effect) {
 
         gSPDisplayList(gMainGfxPos++, D_09001D40_351F60);
 
-        shim_guTranslateF(mtxTransform, part->basePos.x, part->basePos.y, part->basePos.z);
-        shim_guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guTranslateF(mtxTransform, part->basePos.x, part->basePos.y, part->basePos.z);
+        guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
-        shim_guScaleF(mtxTransform, part->scale, part->scale, 1.0f);
-        shim_guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guScaleF(mtxTransform, part->scale, part->scale, 1.0f);
+        guMtxF2L(mtxTransform, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 

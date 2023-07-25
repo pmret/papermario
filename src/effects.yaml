@@ -1,0 +1,325 @@
+- {}
+- name: big_smoke_puff
+  args: f32, f32, f32
+  void: True
+- {}
+- {}
+- {}
+- {}
+- name: landing_dust
+  args: s32, f32, f32, f32, f32
+  void: True
+- name: walking_dust
+  args: s32, f32, f32, f32, f32, f32
+  gfx: landing_dust
+  void: True
+- name: flower_splash
+  args: f32, f32, f32, f32
+  gfx: flower_splash_trail
+  void: True
+- name: flower_trail
+  args: s32, f32, f32, f32, f32, f32
+  gfx: flower_splash_trail
+  void: True
+- name: cloud_puff
+  args: f32, f32, f32, f32
+  gfx: cloud_puff_trail
+  void: True
+- name: cloud_trail
+  args: s32, f32, f32, f32
+  gfx: cloud_puff_trail
+  void: True
+- name: footprint
+  args: f32, f32, f32, f32, f32
+  void: True
+- name: floating_flower
+  args: s32, f32, f32, f32, s32
+  void: True
+- name: snowflake
+  args: f32, f32, f32, s32
+  void: True
+- name: star
+  args: s32, f32, f32, f32, f32, f32, f32, f32
+- name: emote
+  args: s32, Npc*, f32, f32, f32, f32, f32, s32, EffectInstance**
+  void: True
+- name: sparkles
+  args: s32, f32, f32, f32, f32
+  void: True
+- name: shape_spell
+  args: s32, f32, f32, f32, f32, f32, f32, s32
+- name: gather_energy_pink
+  args: s32, f32, f32, f32, f32, s32
+  void: True
+- name: drop_leaves
+  args: s32, f32, f32, f32, s32
+  void: True
+- name: dust
+  args: s32, f32, f32, f32, s32
+- name: shattering_stones
+  args: s32, f32, f32, f32, f32
+  void: True
+- name: smoke_ring
+  args: s32, f32, f32, f32
+  gfx: landing_dust
+  void: True
+- name: damage_stars
+  args: s32, f32, f32, f32, f32, f32, f32, s32
+  void: True
+- name: explosion
+  args: s32, f32, f32, f32
+  void: True
+- name: lens_flare
+  args: s32, f32, f32, f32, s32
+  void: True
+- name: got_item_outline
+  args: s32, f32, f32, f32, f32, EffectInstance**
+  void: True
+- name: spiky_white_aura
+  args: s32, f32, f32, f32, s32
+  void: True
+- name: smoke_impact
+  args: s32, f32, f32, f32, f32, s32, f32, s32
+  gfx: landing_dust
+  void: True
+- name: damage_indicator
+  args: s32, f32, f32, f32, f32, f32, s32, EffectInstance**
+  void: True
+- name: purple_ring
+  args: s32, f32, f32, f32, f32, f32, f32, f32
+- name: flame
+  args: s32, f32, f32, f32, f32, EffectInstance**
+  void: True
+- name: stars_burst
+  args: s32, f32, f32, f32, f32, f32, s32
+  gfx: damage_stars
+  void: True
+- name: stars_shimmer
+  args: s32, f32, f32, f32, f32, f32, s32, s32
+  gfx: sparkles
+  void: True
+- name: rising_bubble
+  args: s32, f32, f32, f32, f32
+  void: True
+- name: ring_blast
+  args: s32, f32, f32, f32, f32, s32
+  void: True
+- name: shockwave
+  args: s32, f32, f32, f32
+  void: True
+- name: music_note
+  args: s32, f32, f32, f32
+  void: True
+- name: smoke_burst
+  args: s32, f32, f32, f32, f32, s32
+  gfx: landing_dust
+  void: True
+- name: sweat
+  args: s32, f32, f32, f32, f32, f32, s32
+  void: True
+- name: sleep_bubble
+  args: s32, f32, f32, f32, f32, f32, EffectInstance**
+  void: True
+- {}
+- name: windy_leaves
+  args: s32, f32, f32, f32
+  gfx: drop_leaves
+  void: True
+- name: falling_leaves
+  args: s32, f32, f32, f32
+  void: True
+- name: stars_spread
+  args: s32, f32, f32, f32, s32, s32
+  void: True
+- name: steam_burst
+  args: s32, f32, f32, f32, f32, s32
+  void: True
+- name: stars_orbiting
+  args: s32, f32, f32, f32, f32, s32, EffectInstance**
+  void: True
+- name: big_snowflakes
+  args: s32, f32, f32, f32
+  void: True
+- name: debuff
+  args: s32, f32, f32, f32
+- name: green_impact
+  args: s32, f32, f32, f32, f32
+- name: radial_shimmer
+  args: s32, f32, f32, f32, f32, s32
+- name: ending_decals
+  args: s32, f32, f32, f32, f32, EffectInstance**
+  void: True
+- name: light_rays
+  args: s32, f32, f32, f32, f32, EffectInstance**
+  void: True
+- name: lightning
+  args: s32, f32, f32, f32, f32, f32
+- name: fire_breath
+  args: s32, f32, f32, f32, f32, f32, f32, s32, s32, s32
+- name: shimmer_burst
+  args: s32, f32, f32, f32, f32, s32
+  gfx: sparkles
+- name: energy_shockwave
+  args: s32, f32, f32, f32, f32, s32
+  void: True
+- name: shimmer_wave
+  args: s32, f32, f32, f32, f32, f32, s32, s32
+  gfx: sparkles
+- name: aura
+  args: s32, f32, f32, f32, f32, EffectInstance**
+  void: True
+- name: bulb_glow
+  args: s32, f32, f32, f32, f32, EffectInstance**
+  void: True
+- name: effect_3D
+  args: s32, f32, f32, f32, f32, f32, f32, s32, EffectInstance**
+  void: True
+- name: blast
+  args: s32, f32, f32, f32, f32, s32
+  void: True
+- name: fire_flower
+  args: s32, f32, f32, f32, s32
+- name: recover
+  args: s32, f32, f32, f32, s32
+- name: disable_x
+  args: s32, f32, f32, f32, s32
+- name: bombette_breaking
+  args: s32, s32, s32, f32, s32, s32
+  gfx: blast
+- name: firework
+  args: s32, f32, f32, f32, f32, s32
+- name: confetti
+  args: s32, f32, f32, f32, f32, s32
+- name: snowfall
+  args: s32, s32
+- name: effect_46
+  args: s32, PlayerStatus*, f32, s32
+- name: gather_magic
+  args: s32, f32, f32, f32, f32, s32
+- name: attack_result_text
+  args: s32, f32, f32, f32, f32, s32
+- name: small_gold_sparkle
+  args: s32, f32, f32, f32, f32, s32
+- name: flashing_box_shockwave
+  args: s32, f32, f32, f32, f32, f32
+- name: balloon
+  args: s32, f32, f32, f32, f32, s32
+- name: floating_rock
+  args: s32, f32, f32, f32, f32, f32, f32, f32, s32
+- name: chomp_drop
+  args: s32, f32, f32, f32, f32, s32, f32, s32, f32, s32
+- name: quizmo_stage
+  args: s32, f32, f32, f32
+- name: radiating_energy_orb
+  args: s32, f32, f32, f32, f32, s32
+- name: quizmo_answer
+  args: s32, f32, f32, f32
+- name: motion_blur_flame
+  args: s32, f32, f32, f32, f32, s32
+- name: energy_orb_wave
+  args: s32, f32, f32, f32, f32, s32
+- name: merlin_house_stars
+  args: s32, f32, f32, f32
+- name: quizmo_audience
+  args: s32, f32, f32, f32
+- name: butterflies
+  args: s32, f32, f32, f32
+- name: stat_change
+  args: s32, f32, f32, f32, f32, s32
+- name: snaking_static
+  args: s32, f32, f32, f32, f32, s32
+- name: thunderbolt_ring
+  args: s32, f32, f32, f32, f32, s32
+- name: squirt
+  args: s32, f32, f32, f32, f32, f32, f32, f32, s32
+- name: water_block
+  args: s32, f32, f32, f32, f32, s32
+- name: waterfall
+  args: s32, f32, f32, f32, f32, s32
+- name: water_fountain
+  args: s32, f32, f32, f32, f32, s32
+- name: underwater
+  args: s32, f32, f32, f32, f32, s32
+- name: lightning_bolt
+  args: s32, f32, f32, f32, f32, f32, f32, f32, s32
+- name: water_splash
+  args: s32, f32, f32, f32, f32, s32
+- name: snowman_doll
+  args: s32, f32, f32, f32, f32, s32
+- name: fright_jar
+  args: s32, f32, f32, f32, f32, s32
+- name: stop_watch
+  args: s32, f32, f32, f32, f32, s32
+- name: effect_63
+  args: s32, f32, f32, f32, f32, f32, f32, f32, s32, s32
+- name: throw_spiny
+  args: s32, f32, f32, f32, f32, f32, f32, f32, s32
+- name: effect_65
+  args: s32, f32, f32, f32, f32, s32
+- name: tubba_heart_attack
+  args: s32, f32, f32, f32, f32, s32
+- name: whirlwind
+  args: s32, f32, f32, f32, f32, s32
+- name: red_impact
+  args: s32, f32, f32, f32, f32, s32
+  gfx: shockwave
+- name: floating_cloud_puff
+  args: s32, f32, f32, f32, f32, s32
+- {}
+- name: energy_in_out
+  args: s32, f32, f32, f32, f32, s32
+- name: tattle_window
+  args: s32, f32, f32, f32, f32, s32
+- name: shiny_flare
+  args: s32, f32, f32, f32, f32, s32
+- name: huff_puff_breath
+  args: s32, f32, f32, f32, f32, f32, f32, s32
+- name: cold_breath
+  args: s32, f32, f32, f32, f32, s32
+- name: embers
+  args: s32, f32, f32, f32, f32, f32, f32, s32, s32, f32, f32
+- name: hieroglyphs
+  args: s32, f32, f32, f32, f32, s32
+- name: misc_particles
+  args: s32, f32, f32, f32, f32, f32, f32, s32, s32
+- name: static_status
+  args: s32, f32, f32, f32, f32, s32, s32
+- name: moving_cloud
+  args: s32, f32, f32, f32, f32, f32, f32, f32, f32
+- name: effect_75
+  args: s32, f32, f32, f32, f32, s32
+- {}
+- name: firework_rocket
+  args: s32, f32, f32, f32, f32, f32, f32, f32, s32
+- name: peach_star_beam
+  args: s32, f32, f32, f32, f32, s32
+- name: chapter_change
+  args: s32, f32, f32, f32, f32, s32
+- name: ice_shard
+  args: s32, f32, f32, f32, f32, s32
+- name: spirit_card
+  args: s32, f32, f32, f32, f32, s32
+- name: lil_oink
+  args: s32, f32, f32, f32, f32, s32
+- name: something_rotating
+  args: s32, f32, f32, f32, f32, s32
+  gfx: spirit_card
+- name: breaking_junk
+  args: s32, f32, f32, f32, f32, s32
+- name: partner_buff
+  args: s32, f32, f32, f32, f32, s32
+- name: quizmo_assistant
+  args: s32, f32, f32, f32, f32, s32
+- name: ice_pillar
+  args: s32, f32, f32, f32, f32, s32
+- name: sun
+  args: s32, f32, f32, f32, f32, s32
+- name: star_spirits_energy
+  args: s32, f32, f32, f32, f32, s32
+- name: pink_sparkles
+  args: s32, f32, f32, f32, f32, f32
+  gfx: sparkles
+- name: star_outline
+  args: s32, f32, f32, f32, f32, s32
+- name: effect_86
+  args: s32, f32, f32, f32, f32, s32

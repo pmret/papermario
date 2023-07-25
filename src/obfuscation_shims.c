@@ -7,37 +7,21 @@ void general_heap_create_obfuscated(void);
 void battle_heap_create_obfuscated(void);
 
 void shim_create_audio_system_obfuscated(void) {
-    dma_copy(
-        create_audio_system_obfuscated_ROM_START,
-        create_audio_system_obfuscated_ROM_END,
-        create_audio_system_obfuscated_VRAM
-    );
+    DMA_COPY_SEGMENT(create_audio_system_obfuscated);
     create_audio_system_obfuscated();
 }
 
 void shim_load_engine_data_obfuscated(void) {
-    dma_copy(
-        load_engine_data_obfuscated_ROM_START,
-        load_engine_data_obfuscated_ROM_END,
-        load_engine_data_obfuscated_VRAM
-    );
+    DMA_COPY_SEGMENT(load_engine_data_obfuscated);
     load_engine_data_obfuscated();
 }
 
 void shim_general_heap_create_obfuscated(void) {
-    dma_copy(
-        general_heap_create_obfuscated_ROM_START,
-        general_heap_create_obfuscated_ROM_END,
-        general_heap_create_obfuscated_VRAM
-    );
+    DMA_COPY_SEGMENT(general_heap_create_obfuscated);
     general_heap_create_obfuscated();
 }
 
 void shim_battle_heap_create_obfuscated(void) {
-    dma_copy(
-        battle_heap_create_obfuscated_ROM_START,
-        battle_heap_create_obfuscated_ROM_END,
-        battle_heap_create_obfuscated_VRAM
-    );
+    DMA_COPY_SEGMENT(battle_heap_create_obfuscated);
     battle_heap_create_obfuscated();
 }

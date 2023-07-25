@@ -15,7 +15,7 @@ EffectInstance* quizmo_answer_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     bp.renderUI = NULL;
     bp.effectID = EFFECT_QUIZMO_ANSWER;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->data.quizmoAnswer = NULL;
 
     gDPPipeSync(gMainGfxPos++);
@@ -34,6 +34,6 @@ EffectInstance* quizmo_answer_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x00, NULL);
 
-    shim_remove_effect(effect);
+    remove_effect(effect);
     return NULL;
 }

@@ -82,9 +82,9 @@ EffectInstance* water_block_main(s32 arg0, f32 x, f32 y, f32 z, f32 arg4, s32 ar
     bpPtr->renderUI = NULL;
     bpPtr->effectID = EFFECT_WATER_BLOCK;
 
-    effect = shim_create_effect_instance(bpPtr);
+    effect = create_effect_instance(bpPtr);
     effect->numParts = numParts;
-    data = effect->data.waterBlock = shim_general_heap_malloc(sizeof(*data));
+    data = effect->data.waterBlock = general_heap_malloc(sizeof(*data));
     ASSERT(data != NULL);
 
     data->unk_00 = arg0;
@@ -114,6 +114,8 @@ EffectInstance* water_block_main(s32 arg0, f32 x, f32 y, f32 z, f32 arg4, s32 ar
 
 void water_block_init(EffectInstance* effect) {
 }
+
+EFFECT_DEF_WATER_SPLASH(water_splash_main);
 
 void water_block_update(EffectInstance* effect) {
     WaterBlockFXData *data;
@@ -147,11 +149,11 @@ void water_block_update(EffectInstance* effect) {
     temp_v1_3 = data->unk_10;
     if (temp_v1_3 < 0) {
         if (temp_a0 == 1) {
-            shim_load_effect(EFFECT_WATER_SPLASH);
+            load_effect(EFFECT_WATER_SPLASH);
             water_splash_main(0, data->pos.x, data->pos.y + 24.0f, data->pos.z, 2.0f, 0x1E);
             water_splash_main(1, data->pos.x, data->pos.y + 24.0f, data->pos.z, 2.0f, 0x1E);
         }
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
     temp_s0 = data->unk_14;
@@ -170,9 +172,9 @@ void water_block_update(EffectInstance* effect) {
     }
 
 
-    data->unk_1C = shim_sin_deg((temp_s0 * 6) + temp_s0) * 32.0f + 127.0f;
+    data->unk_1C = sin_deg((temp_s0 * 6) + temp_s0) * 32.0f + 127.0f;
     temp_f20 = (f32)temp_s0 * 0.01;
-    data->unk_30 = (shim_sin_deg(temp_f20 * 6.0f) * 32.0f * shim_sin_deg(temp_f20)) + 256.0f + (shim_cos_deg(2.0f * temp_f20) * 32.0f) + (shim_cos_deg(temp_f20) * 32.0f);
+    data->unk_30 = (sin_deg(temp_f20 * 6.0f) * 32.0f * sin_deg(temp_f20)) + 256.0f + (cos_deg(2.0f * temp_f20) * 32.0f) + (cos_deg(temp_f20) * 32.0f);
     data->unk_34 += 0.2;
     if (data->unk_34 >= 128.0f) {
         data->unk_34 = 0.0f;
@@ -184,16 +186,16 @@ void water_block_update(EffectInstance* effect) {
             if (data->unk_88[i] == 0) {
                 data->unk_38[i] = 0.0f;
                 data->unk_48[i] = 240.0f;
-                data->unk_58[i] = (shim_rand_int(10) - 5) * 0.2;
-                data->unk_68[i] = shim_rand_int(10) + 2;
-                data->unk_78[i] = shim_rand_int(10) + 1;
+                data->unk_58[i] = (rand_int(10) - 5) * 0.2;
+                data->unk_68[i] = rand_int(10) + 2;
+                data->unk_78[i] = rand_int(10) + 1;
             }
             data->unk_48[i] += data->unk_68[i];
             data->unk_38[i] += data->unk_58[i];
             data->unk_58[i] *= 0.97;
             data->unk_68[i] += (10.0f - data->unk_68[i]) * 0.1;
             if (data->unk_48[i] > 480.0f) {
-                data->unk_88[i] = ~shim_rand_int(10);
+                data->unk_88[i] = ~rand_int(10);
             }
         }
     }
@@ -208,7 +210,7 @@ void water_block_render(EffectInstance* effect) {
     renderTask.distance = 20;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -229,8 +231,8 @@ void water_block_appendGfx(void *effect) {
 
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(effectTemp->graphics->data));
-    shim_guTranslateF(sp20, data->pos.x, data->pos.y, data->pos.z);
-    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp20, data->pos.x, data->pos.y, data->pos.z);
+    guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
@@ -246,9 +248,9 @@ void water_block_appendGfx(void *effect) {
         f32 z = var_s6->unk_02 * 10;
 
         if (y != 0.0f) {
-            f32 dx = shim_sin_deg(temp_s0 + func_E0200044(1000, (x + (y * 10.0f) + (z * 100.0f)))) * 20.0f;
-            f32 dy = shim_sin_deg(temp_s0 + func_E0200044(1000, ((x * 10.0f) + (y * 100.0f) + z))) * 20.0f;
-            f32 dz = shim_sin_deg(temp_s0 + func_E0200044(1000, ((x * 100.0f) + y + (z * 10.0f)))) * 20.0f;
+            f32 dx = sin_deg(temp_s0 + func_E0200044(1000, (x + (y * 10.0f) + (z * 100.0f)))) * 20.0f;
+            f32 dy = sin_deg(temp_s0 + func_E0200044(1000, ((x * 10.0f) + (y * 100.0f) + z))) * 20.0f;
+            f32 dz = sin_deg(temp_s0 + func_E0200044(1000, ((x * 100.0f) + y + (z * 10.0f)))) * 20.0f;
             x += dx;
             y += dy;
             z += dz;
@@ -267,8 +269,8 @@ void water_block_appendGfx(void *effect) {
         var_fp->v.cn[3] = 80;
     }
 
-    shim_guScaleF(sp20, 0.1f, 0.1f, 0.1f);
-    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guScaleF(sp20, 0.1f, 0.1f, 0.1f);
+    guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gDPSetEnvColor(gMainGfxPos++, 0, 0, 255, data->unk_28);
@@ -277,8 +279,8 @@ void water_block_appendGfx(void *effect) {
 
     for (i = 0; i < NUM_WATER_BLOCK_COMPONENTS; i++) {
         if (data->unk_88[i] >= 0) {
-            shim_guPositionF(sp20, 0.0f, 0.0f, 0.0f, data->unk_78[i], data->unk_38[i], data->unk_48[i], 0.0f);
-            shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+            guPositionF(sp20, 0.0f, 0.0f, 0.0f, data->unk_78[i], data->unk_38[i], data->unk_48[i], 0.0f);
+            guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
             gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
             gSPDisplayList(gMainGfxPos++, D_090004A0_3B7090);
             gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);

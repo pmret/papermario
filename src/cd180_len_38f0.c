@@ -1,13 +1,12 @@
 #include "common.h"
 #include "overlay.h"
 
-// BSS
-extern s32 screen_overlay_frontType;
-extern f32 screen_overlay_frontZoom;
-extern s32 screen_overlay_backType;
-extern f32 screen_overlay_backZoom;
-extern s32 D_80156910;
-extern ScreenOverlay ScreenOverlays[2];
+SHIFT_BSS s32 screen_overlay_frontType;
+SHIFT_BSS f32 screen_overlay_frontZoom;
+SHIFT_BSS s32 screen_overlay_backType;
+SHIFT_BSS f32 screen_overlay_backZoom;
+SHIFT_BSS s32 D_80156910;
+SHIFT_BSS ScreenOverlay ScreenOverlays[2];
 
 ScreenTransition CurrentScreenTransition = TRANSITION_END_DEMO_SCENE_BLACK;
 

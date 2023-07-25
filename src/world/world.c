@@ -34,7 +34,7 @@ Vec3f gEntityColliderNormals[] = {
 s32 pad_map_table[] = { 0, 0 };
 
 #ifdef SHIFT
-#define ASSET_TABLE_ROM_START mapfs_ROM_START
+#define ASSET_TABLE_ROM_START (s32) mapfs_ROM_START
 #elif VERSION_JP
 #define ASSET_TABLE_ROM_START 0x1E00000
 #else
@@ -44,9 +44,12 @@ s32 pad_map_table[] = { 0, 0 };
 #define ASSET_TABLE_HEADER_SIZE 0x20
 #define ASSET_TABLE_FIRST_ENTRY (ASSET_TABLE_ROM_START + ASSET_TABLE_HEADER_SIZE)
 
-// bss
-extern MapSettings gMapSettings;
-extern MapConfig* gMapConfig;
+SHIFT_BSS MapSettings gMapSettings;
+SHIFT_BSS MapConfig* gMapConfig;
+SHIFT_BSS char wMapHitName[0x18];
+SHIFT_BSS char wMapShapeName[0x18];
+SHIFT_BSS char wMapTexName[0x18];
+SHIFT_BSS char wMapBgName[0x18];
 
 typedef struct {
     /* 0x00 */ char name[16];
@@ -65,7 +68,7 @@ void load_map_hit_asset(void);
 extern ShapeFile gMapShapeData;
 
 void load_map_script_lib(void) {
-    dma_copy(world_script_api_ROM_START, world_script_api_ROM_END, world_script_api_VRAM);
+    DMA_COPY_SEGMENT(world_script_api);
 }
 
 void load_map_by_IDs(s16 areaID, s16 mapID, s16 loadType) {

@@ -218,6 +218,45 @@
 #define DMG_STATUS_ALWAYS(typeFlag, duration) (STATUS_FLAG_80000000 | STATUS_FLAG_RIGHT_ON | typeFlag | (duration << 8))
 #define DMG_STATUS_IGNORE_RES(typeFlag, duration) (STATUS_KEY_IGNORE_RES | typeFlag | (duration << 8))
 
+#define _RDP_WHOLE(x) (((s32)(x * 65536.0) >> 16) & 0xFFFF)
+#define _RDP_FRAC(x) ((s32)(x * 65536.0) & 0xFFFF)
+#define _RDP_PACK_WHOLE(a, b) (_RDP_WHOLE(a) << 16) | _RDP_WHOLE(b)
+#define _RDP_PACK_FRAC(a, b) (_RDP_FRAC(a) << 16) | _RDP_FRAC(b)
+
+#define RDP_MATRIX(  \
+    Ax, Bx, Cx, Dx, \
+    Ay, By, Cy, Dy, \
+    Az, Bz, Cz, Dz, \
+    Aw, Bw, Cw, Dw ) \
+{ \
+    .m = { \
+        { \
+            _RDP_PACK_WHOLE(Ax, Ay), \
+            _RDP_PACK_WHOLE(Az, Aw), \
+            _RDP_PACK_WHOLE(Bx, By), \
+            _RDP_PACK_WHOLE(Bz, Bw), \
+        }, \
+        { \
+            _RDP_PACK_WHOLE(Cx, Cy), \
+            _RDP_PACK_WHOLE(Cz, Cw), \
+            _RDP_PACK_WHOLE(Dx, Dy), \
+            _RDP_PACK_WHOLE(Dz, Dw), \
+        }, \
+        { \
+            _RDP_PACK_FRAC(Ax, Ay), \
+            _RDP_PACK_FRAC(Az, Aw), \
+            _RDP_PACK_FRAC(Bx, By), \
+            _RDP_PACK_FRAC(Bz, Bw), \
+        }, \
+        { \
+            _RDP_PACK_FRAC(Cx, Cy), \
+            _RDP_PACK_FRAC(Cz, Cw), \
+            _RDP_PACK_FRAC(Dx, Dy), \
+            _RDP_PACK_FRAC(Dz, Dw), \
+        } \
+    } \
+};
+
 #define PM_CC_01        0, 0, 0, TEXEL0, PRIMITIVE, 0, TEXEL0, 0
 #define PM_CC_02        0, 0, 0, TEXEL0, TEXEL0, 0, PRIMITIVE, 0
 #define PM_CC_03        TEXEL0, 0, SHADE, 0, PRIMITIVE, 0, SHADE, 0
@@ -290,5 +329,7 @@
 #else
 #define DT (1.0f)
 #endif
+
+#define DMA_COPY_SEGMENT(segment) dma_copy(segment##_ROM_START, segment##_ROM_END, segment##_VRAM)
 
 #endif

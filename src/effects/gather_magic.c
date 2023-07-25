@@ -26,9 +26,9 @@ EffectInstance* gather_magic_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f32 ar
     bp.renderUI = NULL;
     bp.effectID = EFFECT_GATHER_MAGIC;
 
-    effect = shim_create_effect_instance(&bp);
+    effect = create_effect_instance(&bp);
     effect->numParts = numParts;
-    data = shim_general_heap_malloc(numParts * sizeof(*data));
+    data = general_heap_malloc(numParts * sizeof(*data));
     effect->data.gatherMagic = data;
     ASSERT(effect->data.gatherMagic != NULL);
 
@@ -88,7 +88,7 @@ void gather_magic_update(EffectInstance* effect) {
     part->unk_1C++;
 
     if (part->unk_18 < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -111,10 +111,10 @@ void gather_magic_update(EffectInstance* effect) {
         f32 unk_20 = part->unk_20;
         f32 unk_2C = part->unk_2C;
         f32 unk_24 = part->unk_24;
-        f32 sin_20 = shim_sin_deg(unk_20);
-        f32 cos_20 = shim_cos_deg(unk_20);
-        f32 sin_24 = shim_sin_deg(unk_24);
-        f32 cos_24 = shim_cos_deg(unk_24);
+        f32 sin_20 = sin_deg(unk_20);
+        f32 cos_20 = cos_deg(unk_20);
+        f32 sin_24 = sin_deg(unk_24);
+        f32 cos_24 = cos_deg(unk_24);
 
         part->unk_08 = unk_2C * sin_20 * cos_24;
         part->unk_0C = unk_2C * cos_20 * cos_24;
@@ -147,7 +147,7 @@ void gather_magic_render(EffectInstance* effect) {
     renderTask.distance = 10;
     renderTask.renderMode = RENDER_MODE_SURFACE_XLU_LAYER3;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
@@ -164,10 +164,10 @@ void gather_magic_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    shim_guTranslateF(sp18, part->unk_08, part->unk_0C, part->unk_10);
-    shim_guRotateF(sp98, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
-    shim_guMtxCatF(sp98, sp18, sp18);
-    shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guTranslateF(sp18, part->unk_08, part->unk_0C, part->unk_10);
+    guRotateF(sp98, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guMtxCatF(sp98, sp18, sp18);
+    guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
     gSPDisplayList(gMainGfxPos++, D_09000080_38F790);
@@ -180,10 +180,10 @@ void gather_magic_appendGfx(void* effect) {
         if (scale != 0.0f) {
             gDPSetPrimColor(gMainGfxPos++, 0, 0, unk_30, unk_34, unk_38, part->unk_14);
 
-            shim_guTranslateF(sp18, part->unk_08, part->unk_0C, part->unk_10);
-            shim_guScaleF(sp58, scale, scale, scale);
-            shim_guMtxCatF(sp58, sp18, sp18);
-            shim_guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
+            guTranslateF(sp18, part->unk_08, part->unk_0C, part->unk_10);
+            guScaleF(sp58, scale, scale, scale);
+            guMtxCatF(sp58, sp18, sp18);
+            guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
             gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
             gSPDisplayList(gMainGfxPos++, D_E008E890[i & 1]);

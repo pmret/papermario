@@ -1,5 +1,56 @@
 # splat Release Notes
 
+### 0.16.1
+* Various changes so that series of image and palette subsegments can have `auto` rom addresses (as long as the first can find its rom address from the parent segment or its own definition)
+
+### 0.16.0
+
+* Add option `detect_redundant_function_end`. It tries to detect redundant and unreferenced functions ends and merge them together.
+  * This option is ignored if the compiler is not set to IDO.
+  * This type of codegen is only affected by flags `-g`, `-g1` and `-g2`.
+  * This option can also be overriden per file.
+* Disable `include_macro_inc` by default for IDO projects.
+* Disable `asm_emit_size_directive` by default for SN64 projects.
+* `spimdisasm` 1.16.0 or above is now required.
+
+### 0.15.4
+
+* Try to assign a segment to an user-declared symbol if the user declared the rom address.
+  * Helps to disambiguate symbols for same-address overlays.
+
+### 0.15.3
+
+* Disabled `asm_emit_size_directive` by default for IDO projects.
+
+### 0.15.2
+
+* Various cleanup and fixes to support more liberal use of `auto` for rom addresses
+
+### 0.15.1
+
+* Made some modifications such that linker object paths should be simpler in some circumstances
+
+### 0.15.0
+
+* New options:
+  * `data_string_encoding` can be set at the global level (or `str_encoding` at the segment level) to specify the encoding using when guessing and disassembling strings the the data section. In spimdisasm this value defaults to ASCII.
+  * `rodata_string_guesser_level` changes the behaviour of the rodata string guesser. A higher value means more agressive guessing, while 0 and negative means no guessing at all. Even if the guesser feature is disabled, symbols manually marked as strings in the symbol_addrs.txt file will still be disassembled as strings. In spimdisasm this value defaults to 1.
+    * level 0: Completely disable the guessing feature.
+    * level 1: The most conservative guessing level. Imposes the following restrictions:
+      * Do not try to guess if the user provided a type for the symbol.
+      * Do no try to guess if type information for the symbol can be inferred by other means.
+      * A string symbol must be referenced only once.
+      * Strings must not be empty.
+    * level 2: A string no longer needs to be referenced only once to be considered a possible string. This can happen because of a deduplication optimization.
+    * level 3: Empty strings are allowed.
+    * level 4: Symbols with autodetected type information but no user type information can still be guessed as strings.
+  * `data_string_guesser_level` is similar to `rodata_string_guesser_level`, but for the data section instead. In spimdisasm this value defaults to 2.
+  * `asm_emit_size_directive` toggles the size directived emitted by the disassembler. In spimdisasm this defaults to True.
+
+### 0.14.1
+
+* Fix bug, cod cleanup
+
 ### 0.14.0
 
 * Add support for PSX's GTE instruction set
@@ -40,7 +91,7 @@
 
 ### 0.13.3
 
-* Added a new symbol_addrs attribute `appears_after_overlays_addr:0x1234` which will modify the linker script such that the symbol's address is equal to the value of the end of the longest overlay starting with address 0x1234. It achieve this by writing a series of sym = MAX(sym, seg_vram_END) statements into the linker script. For some games, it's feasible to manually create such statements, but for games with hundreds of overlays at the same address, this is very tedious and prone to error. The new attribute allows you to have peace of mind that the symbol will end up after all of these overlays.
+* Added a new symbol_addrs attribute `appears_after_overlays_addr:0x1234` which will modify the linker script such that the symbol's address is equal to the value of the end of the longest overlay starting with address 0x1234. It achieves this by writing a series of sym = MAX(sym, seg_vram_END) statements into the linker script. For some games, it's feasible to manually create such statements, but for games with hundreds of overlays at the same address, this is very tedious and prone to error. The new attribute allows you to have peace of mind that the symbol will end up after all of these overlays.
 
 ### 0.13.2
 
@@ -61,7 +112,7 @@
 ### 0.12.14
 
 * New option: `pair_rodata_to_text`.
-  * If enabled, splat will try to find to which text segment an unpaired rodata segment belongs and it will hint it to the user.
+  * If enabled, splat will try to find to which text segment an unpaired rodata segment belongs, and it will hint it to the user.
 
 ### 0.12.13
 
@@ -91,7 +142,7 @@
 ### 0.12.8
 
 * The gfx and vtx segments now have a `data_only` option, which, if enabled, will emit only the plain data for the type and omit the enclosing symbol definition. This mode is useful when you want to manually declare the symbol and then #include the extracted data within the declaration.
-* The gfx segment has a method, `format_sym_name()`, which will allow custom overriding of the output of symbol names by extending the `gfx` segment. For example, this can be used to transform context-specific symbol names like mac_01_vtx into N(vtx), where N() is a macro that applies the current "namespace" to the symbol. Paper Mario plans to use this so we can extract an asset once and then #include it in multiple places, while giving each inclusion unique symbol names for each component.
+* The gfx segment has a method, `format_sym_name()`, which will allow custom overriding of the output of symbol names by extending the `gfx` segment. For example, this can be used to transform context-specific symbol names like mac_01_vtx into N(vtx), where N() is a macro that applies the current "namespace" to the symbol. Paper Mario plans to use this, so we can extract an asset once and then #include it in multiple places, while giving each inclusion unique symbol names for each component.
 
 ### 0.12.7
 
@@ -115,7 +166,7 @@
 
 * Update minimal spimdisasm version to 1.7.1.
 * Fix spimdisasm>=1.7.0 non being able to see symbols which only are referenced by other data symbols.
-* An check was added to prevent segments marked with `exclusive_ram_id` have a vram address range which overlaps with segments not marked with said tag. If this happens it will be warned to the user.
+* A check was added to prevent segments marked with `exclusive_ram_id` have a vram address range which overlaps with segments not marked with said tag. If this happens it will be warned to the user.
 
 ### 0.12.4
 
@@ -322,7 +373,7 @@ The `auto_all_sections` option, when set to true, will automatically add `all_` 
     * Code and ASM modes have been combined into the `code` mode
 * BREAKING: The `name` attribute of a segment now should no longer be a subdirectory but rather a meaningful name for the segment which will be used as the name of the linker section. If your `name` was previously a directory, please change it into a `dir`.
 * BREAKING: `subsections` has been renamed to `subsegments`
-* New `dir` segment attribute specifies a subdirectory into which files will be saved. You can combine `dir` ("foo") with a subsection file name containing a subdirectory ("bar/out"), and the paths will be joined (foo/bar/out.c)
+* New `dir` segment attribute specifies a subdirectory into which files will be saved. You can combine `dir` ("foo") with a subsegment name containing a subdirectory ("bar/out"), and the paths will be joined (foo/bar/out.c)
   * If the `dir` attribute is specified but the `name` isn't, the `name` becomes `dir` with directory separation slashes replaced with underscores (foo/bar/baz -> foo_bar_baz)
 * BREAKING: Many configuration options have been renamed. `_dir` options have been changed to the suffix `_path`.
 * BREAKING: Assets (non-code, like `bin` and images) are now placed in the directory `asset_path` (defaults to `assets`).

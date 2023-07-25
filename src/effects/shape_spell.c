@@ -43,9 +43,9 @@ EffectInstance* shape_spell_main(s32 isChild, f32 x, f32 y, f32 z, f32 arg4, f32
     bp.renderUI = NULL;
     bp.effectID = EFFECT_SHAPE_SPELL;
 
-    effect = shim_create_effect_instance(bpPtr);
+    effect = create_effect_instance(bpPtr);
     effect->numParts = numParts;
-    part = effect->data.shapeSpell = shim_general_heap_malloc(numParts * sizeof(*part));
+    part = effect->data.shapeSpell = general_heap_malloc(numParts * sizeof(*part));
 
     ASSERT(effect->data.shapeSpell != NULL);
 
@@ -94,7 +94,7 @@ void shape_spell_update(EffectInstance* effect) {
     part->unk_2C++;
 
     if (part->timeLeft < 0) {
-        shim_remove_effect(effect);
+        remove_effect(effect);
         return;
     }
 
@@ -129,14 +129,14 @@ void shape_spell_render(EffectInstance* effect) {
     renderTask.distance = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
-    retTask = shim_queue_render_task(&renderTask);
+    retTask = queue_render_task(&renderTask);
     retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;
 }
 
 s32 func_E0024324(s32 arg0, s32 arg1) {
     s32 frameCounter = gGameStatusPtr->frameCounter * 32;
 
-    return (f32)((shim_sin_deg(frameCounter + arg1) * (255 - arg0) + (255 - arg0)) * 0.5 + arg0);
+    return (f32)((sin_deg(frameCounter + arg1) * (255 - arg0) + (255 - arg0)) * 0.5 + arg0);
 }
 
 s32 func_E00243BC(s32 arg0, s32 arg1) {
@@ -144,7 +144,7 @@ s32 func_E00243BC(s32 arg0, s32 arg1) {
 
     arg1 += 180;
 
-    return (f32)((shim_sin_deg(frameCounter + arg1) * -arg0 + -arg0) * 0.5 + arg0);
+    return (f32)((sin_deg(frameCounter + arg1) * -arg0 + -arg0) * 0.5 + arg0);
 }
 
 void shape_spell_appendGfx(void* effect) {
@@ -205,34 +205,34 @@ void shape_spell_appendGfx(void* effect) {
             primA = data->unk_34 * 100 / 255;
         }
 
-        shim_guPositionF(sp20, 0.0f, var_f30, 0.0f, unk_28, unk_10, unk_14, unk_18);
-        shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+        guPositionF(sp20, 0.0f, var_f30, 0.0f, unk_28, unk_10, unk_14, unk_18);
+        guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
-        shim_guTranslateF(sp20,
-            shim_sin_deg(angle) * factor,
-            shim_cos_deg(angle) * factor, 0.0f);
+        guTranslateF(sp20,
+            sin_deg(angle) * factor,
+            cos_deg(angle) * factor, 0.0f);
 
         angle += 120.0f;
         sp60[0] = &gDisplayContext->matrixStack[gMatrixListPos++];
 
-        shim_guMtxF2L(sp20, sp60[0]);
-        shim_guTranslateF(sp20,
-            shim_sin_deg(angle) * factor,
-            shim_cos_deg(angle) * factor, 0.0f);
+        guMtxF2L(sp20, sp60[0]);
+        guTranslateF(sp20,
+            sin_deg(angle) * factor,
+            cos_deg(angle) * factor, 0.0f);
 
         angle += 120.0f;
         sp60[1] = &gDisplayContext->matrixStack[gMatrixListPos++];
 
-        shim_guMtxF2L(sp20, sp60[1]);
-        shim_guTranslateF(sp20,
-            shim_sin_deg(angle) * factor,
-            shim_cos_deg(angle) * factor, 0.0f);
+        guMtxF2L(sp20, sp60[1]);
+        guTranslateF(sp20,
+            sin_deg(angle) * factor,
+            cos_deg(angle) * factor, 0.0f);
 
         sp60[2] = &gDisplayContext->matrixStack[gMatrixListPos++];
 
-        shim_guMtxF2L(sp20, sp60[2]);
+        guMtxF2L(sp20, sp60[2]);
 
         for (j = 0; j < 3; j++) {
             gSPMatrix(gMainGfxPos++, sp60[j], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
@@ -263,18 +263,18 @@ void shape_spell_appendGfx(void* effect) {
         var_f30 = -gCameras[gCurrentCameraID].currentYaw;
     }
 
-    shim_guPositionF(sp20, 0.0f, var_f30, 0.0f, 1.0f, data->pos.x, data->pos.y, data->pos.z);
-    shim_guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
+    guPositionF(sp20, 0.0f, var_f30, 0.0f, 1.0f, data->pos.x, data->pos.y, data->pos.z);
+    guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
     if (!isChild) {
         gSPDisplayList(gMainGfxPos++, savedGfxPos2);
     } else {
-        shim_guRotateF(sp20, 30.0f, 0.0f, 0.0f, 1.0f);
+        guRotateF(sp20, 30.0f, 0.0f, 0.0f, 1.0f);
 
         mtx = &gDisplayContext->matrixStack[gMatrixListPos++];
-        shim_guMtxF2L(sp20, mtx);
+        guMtxF2L(sp20, mtx);
 
         for (i = 0; i < 12; i++) {
             gSPMatrix(gMainGfxPos++, mtx, G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
