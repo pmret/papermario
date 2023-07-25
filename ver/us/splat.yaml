@@ -15632,13 +15632,7 @@ segments:
     - [auto, c, flo_19_4_clouds]
     - [auto, c, flo_19_5_beanstalk]
 
-#############
-### Audio ###
-#############
   - [0xF00000, pm_sbn, audio]
-###############
-### Sprites ###
-###############
   - [0x1942C40, bin]
   - { start: 0x1943000, align: 8, type: pm_sprites, name: sprites }
   - [0x1B82208, bin] # end of sprite data - todo: figure out what this is

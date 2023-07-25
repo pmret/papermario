@@ -148,7 +148,7 @@ class SBN:
             }
 
             if extension in FORMATS:
-                format = formats[extension]
+                format = FORMATS[extension]
             else:
                 raise ValueError("Unsupported file extension")
 
@@ -210,7 +210,7 @@ class SBN:
         if not path.exists():
             path.mkdir()
 
-        with open("unknown.bin", "wb") as f:
+        with open(path / "unknown.bin", "wb") as f:
             f.write(self.unknown_data)
 
         for sbn_file in self.files:
@@ -227,10 +227,10 @@ class SBN:
             )
             f.write(
                 """
-# 'fakesize is an interesting case. In the final ROM, the size of a file is stored in the file header and the entry table. 
+# 'fakesize is an interesting case. In the final ROM, the size of a file is stored in the file header and the entry table.
 # For bank files, however, the entry table has seemingly random data stored for file size. This data appears to be unused.
 # It would take a lot of time for no clear benefit to figure out how this data is generated, so instead it's extracted.
-# Modders: the fakesize field needs to be set for any file larger than 65536 bytes, however what it's set to doesn't seem to matter"""
+# Modders: the fakesize field needs to be set for any file larger than 65536 bytes, however what it's set to doesn't seem to matter\n"""
             )
 
             f.write("files:\n")
@@ -291,7 +291,7 @@ class SBN:
         with config_file_path.open("r") as f:
             config = yaml.safe_load(f)
 
-        with open("unknown.bin", "rb") as f:
+        with open(dir / "unknown.bin", "rb") as f:
             self.unknown_data = f.read()
 
         files = config.get("files", {})
@@ -543,7 +543,7 @@ class SBNFile:
 
 
 class INIT:
-    song_entries = List["InitSongEntry"]
+    song_entries: List["InitSongEntry"]
     mseq_entries: List[int]
     bk_entries: List["BufferEntry"]
 
@@ -697,6 +697,7 @@ if splat_loaded:
             byte_count = sbn.decode(data)
             sbn.write(dir)
 
+            assert self.rom_start is not None
             if self.rom_end:
                 assert byte_count == self.rom_end - self.rom_start
             else:
@@ -877,41 +878,3 @@ def sort_by_id_or_auto(list):
         return 0xFFFF if id == "auto" else id
 
     list.sort(key=get_id)
-
-
-# For testing, run from root directory with `python -m tools.splat_ext.pm_sbn`.
-if __name__ == "__main__":
-    with open("ver/us/baserom.z64", "rb") as f:
-        f.seek(0xF00000)
-        data = f.read()
-
-    (size,) = struct.unpack_from(">i", data, 4)
-
-    data = data[:size]
-
-    dir = Path("assets/us/audio")
-
-    with open("sbn_a.sbn", "wb") as f:
-        f.write(data)
-
-    # Write to directory
-    sbn = SBN()
-    sbn.decode(data)
-    sbn.write(dir)
-    with open("sbn_a.txt", "w") as f:
-        f.write(str(sbn))
-    print("Wrote to directory:", dir)
-    expected_hash = hash(sbn)
-
-    # Read back and check matching
-    sbn = SBN()
-    sbn.read(dir)
-    with open("sbn_b.txt", "w") as f:
-        f.write(str(sbn))
-    assert (
-        hash(sbn) == expected_hash
-    ), "read-write mismatch! try `diff sbn_a.txt sbn_b.txt`"
-    data_b = sbn.encode()
-    with open("sbn_b.sbn", "wb") as f:
-        f.write(data_b)
-    assert data_b == data, "encode-decode mismatch! try `vbindiff sbn_a.sbn sbn_b.sbn`"
