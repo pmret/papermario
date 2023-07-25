@@ -11841,21 +11841,51 @@ segments:
       - [0xEB26A0, palette, UltraBlock_tex]
       - [0xEB26C0]
   - name: entity_model_HitYellowBlock_gfx
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEB2A00
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, HitYellowBlock_gfx]
+    - start: 0xEB2A00
+      type: .data
+      name: HitYellowBlock_gfx
+      subsegments:
+      - [0xEB2A00, vtx, HitYellowBlock_1]
+      - [0xEB2B60, vtx, HitYellowBlock_2]
+      - [0xEB2CC0]
+      - [0xEB2E20, rgba16, HitYellowBlock_face1, 32, 32]
+      - [0xEB3620, rgba16, HitYellowBlock_face2, 32, 32]
   - name: entity_model_HitYellowBlock_anim
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEB3E20
     vram: 0x00000000
+    subsegments:
+    - [auto, c, HitYellowBlock_anim]
   - name: entity_model_HitFloatingYellowBlock_gfx
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEB40C0
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, HitFloatingYellowBlock_gfx]
+    - start: 0xEB40C0
+      type: .data
+      name: HitFloatingYellowBlock_gfx
+      subsegments:
+      - [0xEB40C0, vtx, HitFloatingYellowBlock_1]
+      - [0xEB4220, vtx, HitFloatingYellowBlock_2]
+      - [0xEB43A0]
+      - [0xEB4500, rgba16, HitFloatingYellowBlock_face1, 32, 32]
+      - [0xEB4D00, rgba16, HitFloatingYellowBlock_face2, 32, 32]
   - name: entity_model_HitFloatingYellowBlock_anim
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEB5500
     vram: 0x00000000
+    subsegments:
+    - [auto, c, HitFloatingYellowBlock_anim]
   - name: entity_model_HitRedBlock_gfx
     type: bin
     start: 0xEB5790

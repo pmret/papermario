@@ -1,14 +1,9 @@
-Entity_HitFloatingYellowBlock_Mesh = 0x84;
 Entity_HitRedBlock_Mesh = 0x84;
-Entity_HitYellowBlock_Mesh = 0x84;
 Entity_HitRedBlock_AnimationHit = 0x94;
-Entity_HitYellowBlock_AnimationHit = 0x94;
 Entity_ScriptSpring_Mesh = 0x1B8;
 Entity_SimpleSpring_Mesh = 0x1B8;
 Entity_ScriptSpring_AnimLaunch = 0x1E4;
 Entity_SimpleSpring_AnimLaunch = 0x1E4;
-Entity_HitFloatingYellowBlock_AnimationIdle = 0x22C;
-Entity_HitYellowBlock_AnimationIdle = 0x23C;
 Entity_ScriptSpring_AnimIdle = 0x131C;
 Entity_SimpleSpring_AnimIdle = 0x131C;
 Gfx_HiddenPanel_RenderTop = 0xA000180;
