@@ -11796,17 +11796,50 @@ segments:
       - [0xEB05C0, rgba16, HeartBlock_face, 16, 32]
       - [0xEB09C0]
   - name: entity_model_PowBlock
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEB0B30
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, PowBlock]
+    - start: 0xEB0B30
+      type: .data
+      name: PowBlock
+      subsegments:
+      - [0xEB0B30, vtx, PowBlock]
+      - [0xEB0C30, ci8, PowBlock_face, 64, 32]
+      - [0xEB1430, palette, PowBlock_face]
+      - [0xEB1630]
   - name: entity_model_SuperBlock
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEB1810
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, SuperBlock]
+    - start: 0xEB1810
+      type: .data
+      name: SuperBlock
+      subsegments:
+      - [0xEB1810, vtx, SuperBlock]
+      - [0xEB1C90, ci4, SuperBlock_tex, 16, 32]
+      - [0xEB1D90, palette, SuperBlock_tex]
+      - [0xEB1DB0]
   - name: entity_model_UltraBlock
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEB2120
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, UltraBlock]
+    - start: 0xEB2120
+      type: .data
+      name: UltraBlock
+      subsegments:
+      - [0xEB2120, vtx, UltraBlock]
+      - [0xEB25A0, ci4, UltraBlock_tex, 16, 32]
+      - [0xEB26A0, palette, UltraBlock_tex]
+      - [0xEB26C0]
   - name: entity_model_HitYellowBlock_gfx
     type: bin
     start: 0xEB2A00
