@@ -11661,17 +11661,51 @@ segments:
       - [0xEA69F0, palette, ShatteringHammer3Block_texture]
       - [0xEA6A10]
   - name: entity_model_YellowBlock
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEA8880
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, YellowBlock]
+    - start: 0xEA8880
+      type: .data
+      name: YellowBlock
+      subsegments:
+      - [0xEA8880, vtx, YellowBlock]
+      - [0xEA8A00, rgba16, YellowBlock_face, 32, 32]
+      - [0xEA9200]
   - name: entity_model_RedBlock
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEA9330
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, RedBlock]
+    - start: 0xEA9330
+      type: .data
+      name: RedBlock
+      subsegments:
+      - [0xEA9330, vtx, RedBlock]
+      - [0xEA94B0, rgba16, RedBlock_face, 32, 32]
+      - [0xEA9CB0]
   - name: entity_model_UnusedBlock
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEA9DE0
     vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, UnusedBlock]
+    - start: 0xEA9DE0
+      type: .data
+      name: UnusedBlock
+      subsegments:
+      - [0xEA9DE0, vtx, UnusedBlock]
+      - [0xEAA1A0, rgba16, UnusedBlock_img1, 16, 32]
+      - [0xEAA5A0]
+      - [0xEAA628, ci4, UnusedBlock_img2, 16, 32]
+      - [0xEAA728, palette, UnusedBlock_img2]
+      - [0xEAA748]
   - name: entity_model_PushBlock
     type: bin
     start: 0xEAAA70
