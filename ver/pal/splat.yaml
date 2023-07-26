@@ -11970,17 +11970,72 @@ segments:
       - [0xEBA460, ia8, SaveBlock_letterG, 64, 32]
       - [0xEBAC60]
   - name: entity_model_BoardedFloor
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEBB0E0
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, BoardedFloor]
+    - start: 0xEBB0E0
+      type: .data
+      name: BoardedFloor
+      subsegments:
+      - [0xEBB0E0, vtx, BoardedFloor_1]
+      - [0xEBB2C0, vtx, BoardedFloor_2]
+      - [0xEBB4A0, vtx, BoardedFloor_3]
+      - [0xEBB680, vtx, BoardedFloor_4]
+      - [0xEBB860, vtx, BoardedFloor_5]
+      - [0xEBB9E0, vtx, BoardedFloor_6]
+      - [0xEBBB60, vtx, BoardedFloor_7]
+      - [0xEBBD60, vtx, BoardedFloor_8]
+      - [0xEBBF60, vtx, BoardedFloor_9]
+      - [0xEBC0E0, vtx, BoardedFloor_A]
+      - [0xEBC260, vtx, BoardedFloor_B]
+      - [0xEBC360, vtx, BoardedFloor_C]
+      - [0xEBC4E0, rgba16, BoardedFloor, 64, 32]
+      - [0xEBD4E0]
   - name: entity_model_WoodenCrate
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEBDF30
     vram: 0x0A000000
+    symbol_name_format: $VRAM_$ROM
+    subsegments:
+    - [auto, c, WoodenCrate]
+    - start: 0xEBDF30
+      type: .data
+      name: WoodenCrate
+      subsegments:
+      - [0xEBDF30, vtx, WoodenCrate]
+      - [0xEBF490, ci4, WoodenCrate_img1, 64, 64]
+      - [0xEBFC90, palette, WoodenCrate_img1]
+      - [0xEBFCB0]
+      - [0xEBFD58, ci4, WoodenCrate_img2, 64, 64]
+      - [0xEC0558, palette, WoodenCrate_img2]
+      - [0xEC0578]
   - name: entity_model_StarBoxLauncher
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEC2330
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, StarBoxLauncher]
+    - start: 0xEC2330
+      type: .data
+      name: StarBoxLauncher
+      subsegments:
+      - [0xEC2330, vtx, StarBoxLauncher_1]
+      - [0xEC2420, vtx, StarBoxLauncher_2]
+      - [0xEC2540, vtx, StarBoxLauncher_3]
+      - [0xEC2580, vtx, StarBoxLauncher_4]
+      - [0xEC25C0, rgba16, StarBoxLauncher_link, 16, 16]
+      - [0xEC27C0]
+      - [0xEC2838, ci4, StarBoxLauncher_face, 128, 32]
+      - [0xEC3038, palette, StarBoxLauncher_face]
+      - [0xEC3058]
+      - [0xEC3100, ci4, StarBoxLauncher_box, 16, 32]
+      - [0xEC3200, palette, StarBoxLauncher_box]
+      - [0xEC3220]
   - name: entity_model_HiddenPanel
     type: bin
     start: 0xEC3490
