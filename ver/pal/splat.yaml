@@ -11887,25 +11887,69 @@ segments:
     subsegments:
     - [auto, c, HitFloatingYellowBlock_anim]
   - name: entity_model_HitRedBlock_gfx
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEB5790
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, HitRedBlock_gfx]
+    - start: 0xEB5790
+      type: .data
+      name: HitRedBlock_gfx
+      subsegments:
+      - [0xEB5790, vtx, HitRedBlock_1]
+      - [0xEB58F0, vtx, HitRedBlock_2]
+      - [0xEB5A50]
+      - [0xEB5BF0, rgba16, HitRedBlock_face1, 32, 32]
+      - [0xEB63F0, rgba16, HitRedBlock_face2, 32, 32]
   - name: entity_model_HitRedBlock_anim
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEB6BF0
     vram: 0x00000000
+    subsegments:
+    - [auto, c, HitRedBlock_anim]
   - name: entity_model_HeartBlockContent
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEB6E50
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, HeartBlockContent]
+    - start: 0xEB6E50
+      type: .data
+      name: HeartBlockContent
+      subsegments:
+      - [0xEB6E50]
   - name: entity_model_SuperBlockContent
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEB76B0
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, SuperBlockContent]
+    - start: 0xEB76B0
+      type: .data
+      name: SuperBlockContent
+      subsegments:
+      - [0xEB76B0, ci4, SuperBlockContent, 32, 32]
+      - [0xEB78B0, palette, SuperBlockContent]
+      - [0xEB78D0, palette, SuperBlockContent.pal2]
+      - [0xEB78F0, palette, SuperBlockContent.pal3]
+      - [0xEB7910, palette, SuperBlockContent.pal4]
+      - [0xEB7930]
   - name: entity_model_UltraBlockContent
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEB7A90
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, UltraBlockContent]
+    - start: 0xEB7A90
+      type: .data
+      name: UltraBlockContent
+      subsegments:
+      - [0xEB7A90]
   - name: entity_model_SaveBlock
     dir: entity/model
     type: code
