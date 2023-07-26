@@ -299,6 +299,15 @@ void enforce_hpfp_limits(void) {
     }
 }
 
+extern HudScript HES_StatusHP_de;
+extern HudScript HES_StatusHP_fr;
+extern HudScript HES_StatusHP_es;
+extern HudScript D_80106D18;
+extern HudScript D_80106980;
+extern HudScript D_80106A20;
+extern HudScript D_80106A70;
+extern HudScript D_801069D0;
+
 void initialize_status_bar(void) {
     UiStatus* uiStatus = &gUIStatus;
     PlayerData* playerData = &gPlayerData;
@@ -346,6 +355,61 @@ void initialize_status_bar(void) {
 
     close_status_bar();
 
+#if VERSION_PAL
+    switch (gCurrentLanguage) {
+        case LANGUAGE_EN:
+            iconIndex = hud_element_create(&HES_StatusHP);
+            uiStatus->hpIconIndices[0] = iconIndex;
+            break;
+        case LANGUAGE_DE:
+            iconIndex = hud_element_create(&HES_StatusHP_de);
+            uiStatus->hpIconIndices[0] = iconIndex;
+            break;
+        case LANGUAGE_FR:
+            iconIndex = hud_element_create(&HES_StatusHP_fr);
+            uiStatus->hpIconIndices[0] = iconIndex;
+            break;
+        case LANGUAGE_ES:
+            iconIndex = hud_element_create(&HES_StatusHP_es);
+            uiStatus->hpIconIndices[0] = iconIndex;
+            break;
+    }
+
+    hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAG_80);
+    hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAG_FILTER_TEX);
+
+    iconIndex = hud_element_create(&D_80106D18);
+    uiStatus->hpIconIndices[1] = iconIndex;
+    hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAG_80);
+    hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAG_FILTER_TEX);
+
+    switch (gCurrentLanguage) {
+        case 0:
+            iconIndex = hud_element_create(&D_80106980);
+            uiStatus->fpIconIndices[0] = iconIndex;
+            break;
+        case 1:
+            iconIndex = hud_element_create(&D_801069D0);
+            uiStatus->fpIconIndices[0] = iconIndex;
+            break;
+        case 2:
+            iconIndex = hud_element_create(&D_80106A20);
+            uiStatus->fpIconIndices[0] = iconIndex;
+            break;
+        case 3:
+            iconIndex = hud_element_create(&D_80106A70);
+            uiStatus->fpIconIndices[0] = iconIndex;
+            break;
+    }
+
+    __asm__("nop");
+    __asm__("nop");
+    __asm__("nop");
+    __asm__("nop");
+    __asm__("nop");
+    __asm__("nop");
+    __asm__("nop");
+#else
     iconIndex = hud_element_create(&HES_StatusHP);
     uiStatus->hpIconIndices[0] = iconIndex;
     hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAG_80);
@@ -360,7 +424,7 @@ void initialize_status_bar(void) {
     uiStatus->fpIconIndices[0] = iconIndex;
     hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAG_80);
     hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAG_FILTER_TEX);
-
+#endif
     iconIndex = hud_element_create(&HES_StatusFlower);
     uiStatus->fpIconIndices[1] = iconIndex;
     hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAG_80);

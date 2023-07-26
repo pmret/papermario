@@ -152,6 +152,62 @@
 #define ui_pow_cost_notenough_png ui_pow_cost_png
 #include "ui/pow_cost.notenough.pal.inc.c"
 
+#if VERSION_PAL
+#include "ui/fp_cost_de.png.inc.c"
+#include "ui/fp_cost_de.pal.inc.c"
+#define ui_fp_cost_de_reduced_png ui_fp_cost_de_png
+#include "ui/fp_cost_de.reduced.pal.inc.c"
+#define ui_fp_cost_de_reduced_twice_png ui_fp_cost_de_png
+#include "ui/fp_cost_de.reduced_twice.pal.inc.c"
+#define ui_fp_cost_de_notenough_png ui_fp_cost_de_png
+#include "ui/fp_cost_de.notenough.pal.inc.c"
+
+#include "ui/pow_cost_de.png.inc.c"
+#include "ui/pow_cost_de.pal.inc.c"
+#define ui_pow_cost_de_reduced_png ui_pow_cost_de_png
+#include "ui/pow_cost_de.reduced.pal.inc.c"
+#define ui_pow_cost_de_reduced_twice_png ui_pow_cost_de_png
+#include "ui/pow_cost_de.reduced_twice.pal.inc.c"
+#define ui_pow_cost_de_notenough_png ui_pow_cost_de_png
+#include "ui/pow_cost_de.notenough.pal.inc.c"
+
+#include "ui/fp_cost_fr.png.inc.c"
+#include "ui/fp_cost_fr.pal.inc.c"
+#define ui_fp_cost_fr_reduced_png ui_fp_cost_fr_png
+#include "ui/fp_cost_fr.reduced.pal.inc.c"
+#define ui_fp_cost_fr_reduced_twice_png ui_fp_cost_fr_png
+#include "ui/fp_cost_fr.reduced_twice.pal.inc.c"
+#define ui_fp_cost_fr_notenough_png ui_fp_cost_fr_png
+#include "ui/fp_cost_fr.notenough.pal.inc.c"
+
+#include "ui/pow_cost_fr.png.inc.c"
+#include "ui/pow_cost_fr.pal.inc.c"
+#define ui_pow_cost_fr_reduced_png ui_pow_cost_fr_png
+#include "ui/pow_cost_fr.reduced.pal.inc.c"
+#define ui_pow_cost_fr_reduced_twice_png ui_pow_cost_fr_png
+#include "ui/pow_cost_fr.reduced_twice.pal.inc.c"
+#define ui_pow_cost_fr_notenough_png ui_pow_cost_fr_png
+#include "ui/pow_cost_fr.notenough.pal.inc.c"
+
+#include "ui/fp_cost_es.png.inc.c"
+#include "ui/fp_cost_es.pal.inc.c"
+#define ui_fp_cost_es_reduced_png ui_fp_cost_es_png
+#include "ui/fp_cost_es.reduced.pal.inc.c"
+#define ui_fp_cost_es_reduced_twice_png ui_fp_cost_es_png
+#include "ui/fp_cost_es.reduced_twice.pal.inc.c"
+#define ui_fp_cost_es_notenough_png ui_fp_cost_es_png
+#include "ui/fp_cost_es.notenough.pal.inc.c"
+
+#include "ui/pow_cost_es.png.inc.c"
+#include "ui/pow_cost_es.pal.inc.c"
+#define ui_pow_cost_es_reduced_png ui_pow_cost_es_png
+#include "ui/pow_cost_es.reduced.pal.inc.c"
+#define ui_pow_cost_es_reduced_twice_png ui_pow_cost_es_png
+#include "ui/pow_cost_es.reduced_twice.pal.inc.c"
+#define ui_pow_cost_es_notenough_png ui_pow_cost_es_png
+#include "ui/pow_cost_es.notenough.pal.inc.c"
+#endif
+
 #include "ui/green_arrow_down.png.inc.c"
 #include "ui/green_arrow_down.pal.inc.c"
 
@@ -328,6 +384,26 @@
 
 #include "ui/status/text_fp.png.inc.c"
 #include "ui/status/text_fp.pal.inc.c"
+
+#if VERSION_PAL
+#include "ui/status/text_hp_de.png.inc.c"
+#include "ui/status/text_hp_de.pal.inc.c"
+
+#include "ui/status/text_fp_de.png.inc.c"
+#include "ui/status/text_fp_de.pal.inc.c"
+
+#include "ui/status/text_hp_fr.png.inc.c"
+#include "ui/status/text_hp_fr.pal.inc.c"
+
+#include "ui/status/text_fp_fr.png.inc.c"
+#include "ui/status/text_fp_fr.pal.inc.c"
+
+#include "ui/status/text_hp_es.png.inc.c"
+#include "ui/status/text_hp_es.pal.inc.c"
+
+#include "ui/status/text_fp_es.png.inc.c"
+#include "ui/status/text_fp_es.pal.inc.c"
+#endif
 
 #include "ui/status/pow_unit_1.png.inc.c"
 #include "ui/status/pow_unit_1.pal.inc.c"
@@ -562,6 +638,53 @@
 
 #include "ui/battle/status/hp_drain.png.inc.c"
 #include "ui/battle/status/hp_drain.pal.inc.c"
+
+#if VERSION_PAL
+#include "ui/battle/status/peril_de.png.inc.c"
+#include "ui/battle/status/peril_de.pal.inc.c"
+
+#include "ui/battle/status/danger_de.png.inc.c"
+#include "ui/battle/status/danger_de.pal.inc.c"
+
+#include "ui/battle/status/refund_de.png.inc.c"
+#include "ui/battle/status/refund_de.pal.inc.c"
+
+#include "ui/battle/status/happy_de.png.inc.c"
+#include "ui/battle/status/happy_de.pal.inc.c"
+
+#include "ui/battle/status/hp_drain_de.png.inc.c"
+#include "ui/battle/status/hp_drain_de.pal.inc.c"
+
+#include "ui/battle/status/peril_fr.png.inc.c"
+#include "ui/battle/status/peril_fr.pal.inc.c"
+
+#include "ui/battle/status/danger_fr.png.inc.c"
+#include "ui/battle/status/danger_fr.pal.inc.c"
+
+#include "ui/battle/status/refund_fr.png.inc.c"
+#include "ui/battle/status/refund_fr.pal.inc.c"
+
+#include "ui/battle/status/happy_fr.png.inc.c"
+#include "ui/battle/status/happy_fr.pal.inc.c"
+
+#include "ui/battle/status/hp_drain_fr.png.inc.c"
+#include "ui/battle/status/hp_drain_fr.pal.inc.c"
+
+#include "ui/battle/status/peril_es.png.inc.c"
+#include "ui/battle/status/peril_es.pal.inc.c"
+
+#include "ui/battle/status/danger_es.png.inc.c"
+#include "ui/battle/status/danger_es.pal.inc.c"
+
+#include "ui/battle/status/refund_es.png.inc.c"
+#include "ui/battle/status/refund_es.pal.inc.c"
+
+#include "ui/battle/status/happy_es.png.inc.c"
+#include "ui/battle/status/happy_es.pal.inc.c"
+
+#include "ui/battle/status/hp_drain_es.png.inc.c"
+#include "ui/battle/status/hp_drain_es.pal.inc.c"
+#endif
 
 #include "ui/move_basic.png.inc.c"
 #include "ui/move_basic.pal.inc.c"
