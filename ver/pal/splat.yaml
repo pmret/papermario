@@ -545,6 +545,9 @@ segments:
       - [0xA3878, vtx, vtx/drawbox1]
       - [0xA38B8]
     - [0xA3900]
+
+  - [0xA4520, bin]
+
   - name: evt
     type: code
     dir: evt
