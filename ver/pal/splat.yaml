@@ -12205,37 +12205,152 @@ segments:
       - [0xECE660, palette, PadlockBlueFace_body]
       - [0xECE860]
   - name: entity_model_GreenStompSwitch
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xECEC60
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, GreenStompSwitch]
+    - start: 0xECEC60
+      type: .data
+      name: GreenStompSwitch
+      subsegments:
+      - [0xECEC60, vtx, GreenStompSwitch_1]
+      - [0xECECE0, vtx, GreenStompSwitch_2]
+      - [0xECEEE0, ci4, GreenStompSwitch_tex, 16, 16]
+      - [0xECEF60, palette, GreenStompSwitch_tex]
+      - [0xECEF80]
+      - [0xECF038, ci4, GreenStompSwitch_exclamationMark, 16, 32]
+      - [0xECF138, palette, GreenStompSwitch_exclamationMark]
+      - [0xECF158]
   - name: entity_model_RedSwitch
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xECF3B0
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, RedSwitch]
+    - start: 0xECF3B0
+      type: .data
+      name: RedSwitch
+      subsegments:
+      - [0xECF3B0, vtx, RedSwitch_1]
+      - [0xECF740, vtx, RedSwitch_2]
+      - [0xECF780, vtx, RedSwitch_3]
+      - [0xECF980, ci8, RedSwitch_tex, 16, 16]
+      - [0xECFA80, palette, RedSwitch_tex]
+      - [0xECFC80]
+      - [0xECFD28, ia4, RedSwitch_exclamationMark, 16, 32]
+      - [0xECFE28]
   - name: entity_model_BlueSwitch
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xED02B0
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, BlueSwitch]
+    - start: 0xED02B0
+      type: .data
+      name: BlueSwitch
+      subsegments:
+      - [0xED02B0, vtx, BlueSwitch_1]
+      - [0xED05B0, vtx, BlueSwitch_2]
+      - [0xED0640, vtx, BlueSwitch_3]
+      - [0xED0680, vtx, BlueSwitch_4]
+      - [0xED0880, ci8, BlueSwitch_tex, 16, 16]
+      - [0xED0980, palette, BlueSwitch_tex]
+      - [0xED0B80]
+      - [0xED0C28, ia4, BlueSwitch_exclamationMark, 16, 32]
+      - [0xED0D28]
   - name: entity_model_Chest
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xED11C0
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, Chest]
+    - start: 0xED11C0
+      type: .data
+      name: Chest
+      subsegments:
+      - [0xED11C0, vtx, Chest_1]
+      - [0xED1350, vtx, Chest_2]
+      - [0xED13D0, vtx, Chest_3]
+      - [0xED1550, vtx, Chest_4]
+      - [0xED15D0, rgba16, Chest_tex1, 16, 32]
+      - [0xED19D0]
+      - [0xED1A58, ci4, Chest_tex2, 16, 32]
+      - [0xED1B58, palette, Chest_tex2]
+      - [0xED1B78]
+      - [0xED1C30, ci4, Chest_lock, 16, 32]
+      - [0xED1D30, palette, Chest_lock]
+      - [0xED1D50]
   - name: entity_model_ScriptSpring_gfx
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xED2090
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, ScriptSpring_gfx]
+    - start: 0xED2090
+      type: .data
+      name: ScriptSpring_gfx
+      subsegments:
+      - [0xED2090, vtx, ScriptSpring_1]
+      - [0xED2310, vtx, ScriptSpring_2]
+      - [0xED2390, vtx, ScriptSpring_3]
+      - [0xED2410, vtx, ScriptSpring_4]
+      - [0xED2490, vtx, ScriptSpring_5]
+      - [0xED2710, vtx, ScriptSpring_6]
+      - [0xED2870, vtx, ScriptSpring_7]
+      - [0xED28F0, ci8, ScriptSpring_tex1, 16, 16]
+      - [0xED29F0, palette, ScriptSpring_tex1]
+      - [0xED2BF0]
+      - [0xED2C98, ci8, ScriptSpring_tex2, 16, 16]
+      - [0xED2D98, palette, ScriptSpring_tex2]
+      - [0xED2F98]
+      - [0xED3040, ci8, ScriptSpring_star, 32, 32]
+      - [0xED3440, palette, ScriptSpring_star]
+      - [0xED3640]
   - name: entity_model_ScriptSpring_anim
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xED3A10
     vram: 0x00000000
+    subsegments:
+    - [auto, c, ScriptSpring_anim]
   - name: entity_model_SimpleSpring_gfx
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xED4E70
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, SimpleSpring_gfx]
+    - start: 0xED4E70
+      type: .data
+      name: SimpleSpring_gfx
+      subsegments:
+      - [0xED4E70, vtx, SimpleSpring_1]
+      - [0xED50F0, vtx, SimpleSpring_2]
+      - [0xED5170, vtx, SimpleSpring_3]
+      - [0xED51F0, vtx, SimpleSpring_4]
+      - [0xED5470, vtx, SimpleSpring_5]
+      - [0xED55D0, vtx, SimpleSpring_6]
+      - [0xED5650, ci8, SimpleSpring_tex1, 16, 16]
+      - [0xED5750, palette, SimpleSpring_tex1]
+      - [0xED5950]
+      - [0xED59F8, rgba16, SimpleSpring_tex2, 16, 16]
+      - [0xED5BF8]
+      - [0xED5C70, ci8, SimpleSpring_star, 32, 32]
+      - [0xED6070, palette, SimpleSpring_star]
+      - [0xED6270]
   - name: entity_model_SimpleSpring_anim
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xED6640
     vram: 0x00000000
+    subsegments:
+    - [auto, c, SimpleSpring_anim]
   - name: entity_model_BellbellPlant_gfx
     type: bin
     start: 0xED7AA0

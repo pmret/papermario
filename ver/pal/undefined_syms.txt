@@ -1,15 +1,3 @@
-Entity_ScriptSpring_Mesh = 0x1B8;
-Entity_SimpleSpring_Mesh = 0x1B8;
-Entity_ScriptSpring_AnimLaunch = 0x1E4;
-Entity_SimpleSpring_AnimLaunch = 0x1E4;
-Entity_ScriptSpring_AnimIdle = 0x131C;
-Entity_SimpleSpring_AnimIdle = 0x131C;
-Entity_GreenStompSwitch_Render = 0xA000740;
-Entity_Chest_LidMtx = 0xA000C48;
-Entity_Chest_RenderLid = 0xA000DC0;
-Entity_Chest_RenderBox = 0xA000EB8;
-Entity_RedSwitch_Render = 0xA000EE8;
-Entity_BlueSwitch_Render = 0xA000EF8;
 set_time_freeze_mode = 0x80027008;
 get_time_freeze_mode = 0x80027110;
 start_rumble = 0x80028E88;
