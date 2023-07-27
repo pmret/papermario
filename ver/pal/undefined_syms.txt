@@ -1,3 +1,5 @@
+D_0A000000_E91890 = 0xA000000;
+Entity_MunchlesiaReset1_Render = 0xA0063C0;
 set_time_freeze_mode = 0x80027008;
 get_time_freeze_mode = 0x80027110;
 start_rumble = 0x80028E88;

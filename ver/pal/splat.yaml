@@ -12420,33 +12420,107 @@ segments:
     start: 0xEFE180
     vram: 0x0A000000
   - name: entity_model_MunchlesiaReset1_anim
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xF04BC0
     vram: 0x00000000
+    subsegments:
+    - [auto, c, MunchlesiaReset1_anim]
   - name: entity_model_CymbalPlant_anim
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xF05030
     vram: 0x00000000
+    subsegments:
+    - [auto, c, CymbalPlant_anim]
   - name: entity_model_CymbalPlant_gfx
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xF05BE0
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, CymbalPlant_gfx]
+    - start: 0xF05BE0
+      type: .data
+      name: CymbalPlant_gfx
+      subsegments:
+      - [0xF05BE0, ci4, CymbalPlant, 64, 64]
+      - [0xF063E0, palette, CymbalPlant]
+      - [0xF06400]
+      - [0xF064A8, vtx, CymbalPlant_1]
+      - [0xF06548, vtx, CymbalPlant_2]
+      - [0xF065A8, vtx, CymbalPlant_3]
+      - [0xF06648, vtx, CymbalPlant_4]
+      - [0xF06798, vtx, CymbalPlant_5]
+      - [0xF06908, vtx, CymbalPlant_6]
+      - [0xF06998, vtx, CymbalPlant_7]
+      - [0xF06B08, vtx, CymbalPlant_8]
+      - [0xF06C58]
   - name: entity_model_PinkFlower_anim
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xF07280
     vram: 0x00000000
+    subsegments:
+    - [auto, c, PinkFlower_anim]
   - name: entity_model_PinkFlower_gfx
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xF07DF0
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, PinkFlower_gfx]
+    - start: 0xF07DF0
+      type: .data
+      name: PinkFlower_gfx
+      subsegments:
+      - [0xF07DF0, vtx, PinkFlower_1]
+      - [0xF07E30, vtx, PinkFlower_2]
+      - [0xF08080, vtx, PinkFlower_3]
+      - [0xF081A0, vtx, PinkFlower_4]
+      - [0xF082A0, vtx, PinkFlower_5]
+      - [0xF083A0, ia16, PinkFlower_light, 16, 16]
+      - [0xF085A0]
+      - [0xF08610, rgba16, PinkFlower_tex, 16, 64]
+      - [0xF08E10]
   - name: entity_model_SpinningFlower
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xF091F0
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, SpinningFlower]
+    - start: 0xF091F0
+      type: .data
+      name: SpinningFlower
+      subsegments:
+      - [0xF091F0, vtx, SpinningFlower_1]
+      - [0xF09240, vtx, SpinningFlower_2]
+      - [0xF09290, vtx, SpinningFlower_3]
+      - [0xF09310, vtx, SpinningFlower_4]
+      - [0xF09370, ia4, SpinningFlower_img1, 16, 32]
+      - [0xF09470]
+      - [0xF094E8, rgba16, SpinningFlower_petal, 32, 32]
+      - [0xF09CE8]
   - name: entity_model_BombableRock
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xF09F40
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, BombableRock]
+    - start: 0xF09F40
+      type: .data
+      name: BombableRock
+      subsegments:
+      - [0xF09F40, vtx, BombableRock_1]
+      - [0xF0A2C0, vtx, BombableRock_2]
+      - [0xF0A3E0, vtx, BombableRock_3]
+      - [0xF0A540, vtx, BombableRock_4]
+      - [0xF0A660, vtx, BombableRock_5]
+      - [0xF0A780, ci4, BombableRock, 64, 64]
+      - [0xF0AF80, palette, BombableRock]
+      - [0xF0AFA0]
   - [0xF0B5C0, bin]
 
   - [0x13A0000, pm_sbn, audio]
