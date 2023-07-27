@@ -63,8 +63,54 @@ segments:
     subsegments:
     - [auto, c, sprite]
     - [auto, c, 101b90_len_8f0]
+  - name: entity
+    type: code
+    start: 0x1040F0
+    vram: 0x802E7070
+    follows_vram: engine4
+    subsegments:
+      - [auto, c, entity/Shadow]
+      - [auto, c, entity/SaveBlock]
+      - [auto, c, entity/Switch]
+      - [auto, c, entity/ShatteringBlock_common]
+      - [auto, c, entity/ShatteringBlock]
+      - [auto, c, entity/Block]
+      - [auto, c, entity/ItemBlock]
+      - [auto, c, entity/HeartBlock]
+      - [auto, c, entity/SuperBlock]
+      - [auto, c, entity/SimpleSpring]
+      - [auto, c, entity/HiddenPanel]
+      - [auto, c, entity/Chest]
+      - [auto, c, entity/WoodenCrate]
+      - [auto, c, entity/BlueWarpPipe]
+      - [auto, c, entity/Signpost]
+      - start: 0x10A9F0
+        type: .data
+        name: entity/Shadow
+        subsegments:
+          - [0x10C4F0, i4, entity/shadow/square, 16, 16]
+          - [0x10C570, i4, entity/shadow/circle, 16, 16]
+          - [0x10C5F0, vtx, entity/vtx/shadow1]
+          - [0x10C630, vtx, entity/vtx/shadow2]
+          - [0x10C670, i4, entity/shadow/square_big, 32, 32]
+          - [0x10C870, i4, entity/shadow/circle_big, 32, 32]
+          - [0x10CA70]
+      - [auto, .data, entity/SaveBlock]
+      - [auto, .data, entity/Switch]
+      - [auto, .data, entity/ShatteringBlock_common]
+      - [auto, .data, entity/ShatteringBlock]
+      - [auto, .data, entity/Block]
+      - [auto, .data, entity/ItemBlock]
+      - [auto, .data, entity/HeartBlock]
+      - [auto, .data, entity/SuperBlock]
+      - [auto, .data, entity/SimpleSpring]
+      - [auto, .data, entity/HiddenPanel]
+      - [auto, .data, entity/Chest]
+      - [auto, .data, entity/WoodenCrate]
+      - [auto, .data, entity/BlueWarpPipe]
+      - [auto, .data, entity/Signpost]
 
-  - [0x1040F0, bin]
+  - [0x10E710, bin]
 
   - type: group
     dir: charset
@@ -11524,6 +11570,1077 @@ segments:
     - [0xE8AFB0, c, gv_01_1_main]
 
   - [0xE8D120, bin]
+
+  - name: entity_model_Hammer1Block
+    dir: entity/model
+    type: code
+    start: 0xE9E540
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, Hammer1Block]
+    - start: 0xE9E540
+      type: .data
+      name: Hammer1Block
+      subsegments:
+      - [0xE9E540, vtx, Hammer1Block]
+      - [0xE9E7C0, ci4, Hammer1Block_face, 16, 32]
+      - [0xE9E8C0, palette, Hammer1Block_face]
+      - [0xE9E8E0]
+  - name: entity_model_Hammer2Block
+    dir: entity/model
+    type: code
+    start: 0xE9EA40
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, Hammer2Block]
+    - start: 0xE9EA40
+      type: .data
+      name: Hammer2Block
+      subsegments:
+      - [0xE9EA40, vtx, Hammer2Block]
+      - [0xE9ECC0, ci4, Hammer2Block_face, 16, 32]
+      - [0xE9EDC0, palette, Hammer2Block_face]
+      - [0xE9EDE0]
+  - name: entity_model_Hammer3Block
+    dir: entity/model
+    type: code
+    start: 0xE9EF40
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, Hammer3Block]
+    - start: 0xE9EF40
+      type: .data
+      name: Hammer3Block
+      subsegments:
+      - [0xE9EF40, vtx, Hammer3Block]
+      - [0xE9F1C0, ci4, Hammer3Block_face, 16, 32]
+      - [0xE9F2C0, palette, Hammer3Block_face]
+      - [0xE9F2E0]
+  - name: entity_model_ShatteringHammer1Block
+    dir: entity/model
+    type: code
+    start: 0xE9F430
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, ShatteringHammer1Block]
+    - start: 0xE9F430
+      type: .data
+      name: ShatteringHammer1Block
+      subsegments:
+      - [0xE9F430, vtx, ShatteringHammer1Block]
+      - [0xEA0490, ci8, ShatteringHammer1Block_texture, 16, 32]
+      - [0xEA0690, palette, ShatteringHammer1Block_texture]
+      - [0xEA0890]
+  - name: entity_model_ShatteringHammer2Block
+    dir: entity/model
+    type: code
+    start: 0xEA2680
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, ShatteringHammer2Block]
+    - start: 0xEA2680
+      type: .data
+      name: ShatteringHammer2Block
+      subsegments:
+      - [0xEA2680, vtx, ShatteringHammer2Block]
+      - [0xEA36E0, rgba16, ShatteringHammer2Block_texture, 16, 32]
+      - [0xEA3AE0]
+  - name: entity_model_ShatteringHammer3Block
+    dir: entity/model
+    type: code
+    start: 0xEA58A0
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, ShatteringHammer3Block]
+    - start: 0xEA58A0
+      type: .data
+      name: ShatteringHammer3Block
+      subsegments:
+      - [0xEA58A0, vtx, ShatteringHammer3Block]
+      - [0xEA68F0, ci4, ShatteringHammer3Block_texture, 16, 32]
+      - [0xEA69F0, palette, ShatteringHammer3Block_texture]
+      - [0xEA6A10]
+  - name: entity_model_YellowBlock
+    dir: entity/model
+    type: code
+    start: 0xEA8880
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, YellowBlock]
+    - start: 0xEA8880
+      type: .data
+      name: YellowBlock
+      subsegments:
+      - [0xEA8880, vtx, YellowBlock]
+      - [0xEA8A00, rgba16, YellowBlock_face, 32, 32]
+      - [0xEA9200]
+  - name: entity_model_RedBlock
+    dir: entity/model
+    type: code
+    start: 0xEA9330
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, RedBlock]
+    - start: 0xEA9330
+      type: .data
+      name: RedBlock
+      subsegments:
+      - [0xEA9330, vtx, RedBlock]
+      - [0xEA94B0, rgba16, RedBlock_face, 32, 32]
+      - [0xEA9CB0]
+  - name: entity_model_UnusedBlock
+    dir: entity/model
+    type: code
+    start: 0xEA9DE0
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, UnusedBlock]
+    - start: 0xEA9DE0
+      type: .data
+      name: UnusedBlock
+      subsegments:
+      - [0xEA9DE0, vtx, UnusedBlock]
+      - [0xEAA1A0, rgba16, UnusedBlock_img1, 16, 32]
+      - [0xEAA5A0]
+      - [0xEAA628, ci4, UnusedBlock_img2, 16, 32]
+      - [0xEAA728, palette, UnusedBlock_img2]
+      - [0xEAA748]
+  - name: entity_model_PushBlock
+    dir: entity/model
+    type: code
+    start: 0xEAAA70
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, PushBlock]
+    - start: 0xEAAA70
+      type: .data
+      name: PushBlock
+      subsegments:
+      - [0xEAAA70, vtx, PushBlock]
+      - [0xEAAB90, ci4, PushBlock_face, 16, 16]
+      - [0xEAAC10, palette, PushBlock_face]
+      - [0xEAAC30]
+  - name: entity_model_BrickBlock
+    dir: entity/model
+    type: code
+    start: 0xEAADC0
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, BrickBlock]
+    - start: 0xEAADC0
+      type: .data
+      name: BrickBlock
+      subsegments:
+      - [0xEAADC0, vtx, BrickBlock]
+      - [0xEAAF00, ci4, BrickBlock_face, 32, 32]
+      - [0xEAB100, palette, BrickBlock_face]
+      - [0xEAB120]
+  - name: entity_model_ShatteringBrickBlock
+    dir: entity/model
+    type: code
+    start: 0xEAB270
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, ShatteringBrickBlock]
+    - start: 0xEAB270
+      type: .data
+      name: ShatteringBrickBlock
+      subsegments:
+      - [0xEAB270, vtx, ShatteringBrickBlock]
+      - [0xEACD10, rgba16, ShatteringBrickBlock_texture, 32, 32]
+      - [0xEAD510]
+  - name: entity_model_InertYellowBlock
+    dir: entity/model
+    type: code
+    start: 0xEAF250
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, InertYellowBlock]
+    - start: 0xEAF250
+      type: .data
+      name: InertYellowBlock
+      subsegments:
+      - [0xEAF250, vtx, InertYellowBlock_1]
+      - [0xEAF350, vtx, InertYellowBlock_2]
+      - [0xEAF3D0, ci4, InertYellowBlock_face, 32, 32]
+      - [0xEAF5D0, palette, InertYellowBlock_face]
+      - [0xEAF5F0]
+  - name: entity_model_InertRedBlock
+    dir: entity/model
+    type: code
+    start: 0xEAF750
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, InertRedBlock]
+    - start: 0xEAF750
+      type: .data
+      name: InertRedBlock
+      subsegments:
+      - [0xEAF750, vtx, InertRedBlock_1]
+      - [0xEAF850, vtx, InertRedBlock_2]
+      - [0xEAF8D0, rgba16, InertRedBlock_face, 32, 32]
+      - [0xEB00D0]
+  - name: entity_model_HeartBlock
+    dir: entity/model
+    type: code
+    start: 0xEB0200
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, HeartBlock]
+    - start: 0xEB0200
+      type: .data
+      name: HeartBlock
+      subsegments:
+      - [0xEB0200, vtx, HeartBlock]
+      - [0xEB05C0, rgba16, HeartBlock_face, 16, 32]
+      - [0xEB09C0]
+  - name: entity_model_PowBlock
+    dir: entity/model
+    type: code
+    start: 0xEB0B30
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, PowBlock]
+    - start: 0xEB0B30
+      type: .data
+      name: PowBlock
+      subsegments:
+      - [0xEB0B30, vtx, PowBlock]
+      - [0xEB0C30, ci8, PowBlock_face, 64, 32]
+      - [0xEB1430, palette, PowBlock_face]
+      - [0xEB1630]
+  - name: entity_model_SuperBlock
+    dir: entity/model
+    type: code
+    start: 0xEB1810
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, SuperBlock]
+    - start: 0xEB1810
+      type: .data
+      name: SuperBlock
+      subsegments:
+      - [0xEB1810, vtx, SuperBlock]
+      - [0xEB1C90, ci4, SuperBlock_tex, 16, 32]
+      - [0xEB1D90, palette, SuperBlock_tex]
+      - [0xEB1DB0]
+  - name: entity_model_UltraBlock
+    dir: entity/model
+    type: code
+    start: 0xEB2120
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, UltraBlock]
+    - start: 0xEB2120
+      type: .data
+      name: UltraBlock
+      subsegments:
+      - [0xEB2120, vtx, UltraBlock]
+      - [0xEB25A0, ci4, UltraBlock_tex, 16, 32]
+      - [0xEB26A0, palette, UltraBlock_tex]
+      - [0xEB26C0]
+  - name: entity_model_HitYellowBlock_gfx
+    dir: entity/model
+    type: code
+    start: 0xEB2A00
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, HitYellowBlock_gfx]
+    - start: 0xEB2A00
+      type: .data
+      name: HitYellowBlock_gfx
+      subsegments:
+      - [0xEB2A00, vtx, HitYellowBlock_1]
+      - [0xEB2B60, vtx, HitYellowBlock_2]
+      - [0xEB2CC0]
+      - [0xEB2E20, rgba16, HitYellowBlock_face1, 32, 32]
+      - [0xEB3620, rgba16, HitYellowBlock_face2, 32, 32]
+  - name: entity_model_HitYellowBlock_anim
+    dir: entity/model
+    type: code
+    start: 0xEB3E20
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, HitYellowBlock_anim]
+  - name: entity_model_HitFloatingYellowBlock_gfx
+    dir: entity/model
+    type: code
+    start: 0xEB40C0
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, HitFloatingYellowBlock_gfx]
+    - start: 0xEB40C0
+      type: .data
+      name: HitFloatingYellowBlock_gfx
+      subsegments:
+      - [0xEB40C0, vtx, HitFloatingYellowBlock_1]
+      - [0xEB4220, vtx, HitFloatingYellowBlock_2]
+      - [0xEB43A0]
+      - [0xEB4500, rgba16, HitFloatingYellowBlock_face1, 32, 32]
+      - [0xEB4D00, rgba16, HitFloatingYellowBlock_face2, 32, 32]
+  - name: entity_model_HitFloatingYellowBlock_anim
+    dir: entity/model
+    type: code
+    start: 0xEB5500
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, HitFloatingYellowBlock_anim]
+  - name: entity_model_HitRedBlock_gfx
+    dir: entity/model
+    type: code
+    start: 0xEB5790
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, HitRedBlock_gfx]
+    - start: 0xEB5790
+      type: .data
+      name: HitRedBlock_gfx
+      subsegments:
+      - [0xEB5790, vtx, HitRedBlock_1]
+      - [0xEB58F0, vtx, HitRedBlock_2]
+      - [0xEB5A50]
+      - [0xEB5BF0, rgba16, HitRedBlock_face1, 32, 32]
+      - [0xEB63F0, rgba16, HitRedBlock_face2, 32, 32]
+  - name: entity_model_HitRedBlock_anim
+    dir: entity/model
+    type: code
+    start: 0xEB6BF0
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, HitRedBlock_anim]
+  - name: entity_model_HeartBlockContent
+    dir: entity/model
+    type: code
+    start: 0xEB6E50
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, HeartBlockContent]
+    - start: 0xEB6E50
+      type: .data
+      name: HeartBlockContent
+      subsegments:
+      - [0xEB6E50]
+  - name: entity_model_SuperBlockContent
+    dir: entity/model
+    type: code
+    start: 0xEB76B0
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, SuperBlockContent]
+    - start: 0xEB76B0
+      type: .data
+      name: SuperBlockContent
+      subsegments:
+      - [0xEB76B0, ci4, SuperBlockContent, 32, 32]
+      - [0xEB78B0, palette, SuperBlockContent]
+      - [0xEB78D0, palette, SuperBlockContent.pal2]
+      - [0xEB78F0, palette, SuperBlockContent.pal3]
+      - [0xEB7910, palette, SuperBlockContent.pal4]
+      - [0xEB7930]
+  - name: entity_model_UltraBlockContent
+    dir: entity/model
+    type: code
+    start: 0xEB7A90
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, UltraBlockContent]
+    - start: 0xEB7A90
+      type: .data
+      name: UltraBlockContent
+      subsegments:
+      - [0xEB7A90]
+  - name: entity_model_SaveBlock
+    dir: entity/model
+    type: code
+    start: 0xEB82F0
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, SaveBlock]
+    - start: 0xEB82F0
+      type: .data
+      name: SaveBlock
+      subsegments:
+      - [0xEB82F0, vtx, SaveBlock_1]
+      - [0xEB8660, vtx, SaveBlock_2]
+      - [0xEB89B0, vtx, SaveBlock_3]
+      - [0xEB8BF0, rgba16, SaveBlock_star, 32, 32]
+      - [0xEB93F0]
+      - [0xEB9460, rgba16, SaveBlock_letterS, 64, 32]
+      - [0xEBA460, ia8, SaveBlock_letterG, 64, 32]
+      - [0xEBAC60]
+  - name: entity_model_BoardedFloor
+    dir: entity/model
+    type: code
+    start: 0xEBB0E0
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, BoardedFloor]
+    - start: 0xEBB0E0
+      type: .data
+      name: BoardedFloor
+      subsegments:
+      - [0xEBB0E0, vtx, BoardedFloor_1]
+      - [0xEBB2C0, vtx, BoardedFloor_2]
+      - [0xEBB4A0, vtx, BoardedFloor_3]
+      - [0xEBB680, vtx, BoardedFloor_4]
+      - [0xEBB860, vtx, BoardedFloor_5]
+      - [0xEBB9E0, vtx, BoardedFloor_6]
+      - [0xEBBB60, vtx, BoardedFloor_7]
+      - [0xEBBD60, vtx, BoardedFloor_8]
+      - [0xEBBF60, vtx, BoardedFloor_9]
+      - [0xEBC0E0, vtx, BoardedFloor_A]
+      - [0xEBC260, vtx, BoardedFloor_B]
+      - [0xEBC360, vtx, BoardedFloor_C]
+      - [0xEBC4E0, rgba16, BoardedFloor, 64, 32]
+      - [0xEBD4E0]
+  - name: entity_model_WoodenCrate
+    dir: entity/model
+    type: code
+    start: 0xEBDF30
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, WoodenCrate]
+    - start: 0xEBDF30
+      type: .data
+      name: WoodenCrate
+      subsegments:
+      - [0xEBDF30, vtx, WoodenCrate]
+      - [0xEBF490, ci4, WoodenCrate_img1, 64, 64]
+      - [0xEBFC90, palette, WoodenCrate_img1]
+      - [0xEBFCB0]
+      - [0xEBFD58, ci4, WoodenCrate_img2, 64, 64]
+      - [0xEC0558, palette, WoodenCrate_img2]
+      - [0xEC0578]
+  - name: entity_model_StarBoxLauncher
+    dir: entity/model
+    type: code
+    start: 0xEC2330
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, StarBoxLauncher]
+    - start: 0xEC2330
+      type: .data
+      name: StarBoxLauncher
+      subsegments:
+      - [0xEC2330, vtx, StarBoxLauncher_1]
+      - [0xEC2420, vtx, StarBoxLauncher_2]
+      - [0xEC2540, vtx, StarBoxLauncher_3]
+      - [0xEC2580, vtx, StarBoxLauncher_4]
+      - [0xEC25C0, rgba16, StarBoxLauncher_link, 16, 16]
+      - [0xEC27C0]
+      - [0xEC2838, ci4, StarBoxLauncher_face, 128, 32]
+      - [0xEC3038, palette, StarBoxLauncher_face]
+      - [0xEC3058]
+      - [0xEC3100, ci4, StarBoxLauncher_box, 16, 32]
+      - [0xEC3200, palette, StarBoxLauncher_box]
+      - [0xEC3220]
+  - name: entity_model_HiddenPanel
+    dir: entity/model
+    type: code
+    start: 0xEC3490
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, HiddenPanel]
+  - name: entity_model_Tweester
+    dir: entity/model
+    type: code
+    start: 0xEC3750
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, Tweester]
+    - start: 0xEC3750
+      type: .data
+      name: Tweester
+      subsegments:
+      - [0xEC3750, vtx, Tweester_1]
+      - [0xEC3B60, vtx, Tweester_2]
+      - [0xEC3F70, vtx, Tweester_3]
+      - [0xEC3FB0, vtx, Tweester_4]
+      - [0xEC4340, i8, Tweester_img1, 32, 32]
+      - [0xEC4740, i8, Tweester_img2, 32, 32]
+      - [0xEC4B40]
+      - [0xEC4BF0, ci4, Tweester_img3, 64, 32]
+      - [0xEC4FF0, palette, Tweester_img3]
+      - [0xEC5010]
+  - name: entity_model_BlueWarpPipe
+    dir: entity/model
+    type: code
+    start: 0xEC55C0
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, BlueWarpPipe]
+    - start: 0xEC55C0
+      type: .data
+      name: BlueWarpPipe
+      subsegments:
+      - [0xEC55C0, vtx, BlueWarpPipe_1]
+      - [0xEC5620, vtx, BlueWarpPipe_2]
+      - [0xEC58A0, vtx, BlueWarpPipe_3]
+      - [0xEC58E0, ci4, BlueWarpPipe_texBase, 16, 16]
+      - [0xEC5960, palette, BlueWarpPipe_texBase]
+      - [0xEC5980]
+      - [0xEC5A30, ci4, BlueWarpPipe_texPipe, 32, 16]
+      - [0xEC5B30, palette, BlueWarpPipe_texPipe]
+      - [0xEC5B50]
+  - name: entity_model_Signpost
+    dir: entity/model
+    type: code
+    start: 0xEC5D70
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, Signpost]
+    - start: 0xEC5D70
+      type: .data
+      name: Signpost
+      subsegments:
+      - [0xEC5D70, vtx, Signpost_1]
+      - [0xEC5E90, vtx, Signpost_2]
+      - [0xEC62F0, ci4, Signpost, 32, 32]
+      - [0xEC64F0, palette, Signpost]
+      - [0xEC6510]
+  - name: entity_model_ArrowSign
+    dir: entity/model
+    type: code
+    start: 0xEC67F0
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, ArrowSign]
+    - start: 0xEC67F0
+      type: .data
+      name: ArrowSign
+      subsegments:
+      - [0xEC67F0]
+      - [0xEC6870, ci8, ArrowSign, 64, 32]
+      - [0xEC7070, palette, ArrowSign]
+      - [0xEC7270]
+  - name: entity_model_Padlock
+    dir: entity/model
+    type: code
+    start: 0xEC7440
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, Padlock]
+    - start: 0xEC7440
+      type: .data
+      name: Padlock
+      subsegments:
+      - [0xEC7440, vtx, Padlock_1]
+      - [0xEC7A00, vtx, Padlock_2]
+      - [0xEC7A60, vtx, Padlock_3]
+      - [0xEC7AA0, vtx, Padlock_4]
+      - [0xEC7B40, ci8, Padlock_face, 32, 32]
+      - [0xEC7F40, palette, Padlock_face]
+      - [0xEC8140]
+      - [0xEC81E8, ci8, Padlock_keyhole, 32, 64]
+      - [0xEC89E8, palette, Padlock_keyhole]
+      - [0xEC8BE8]
+      - [0xEC8C90, ci8, Padlock_body, 32, 32]
+      - [0xEC9090, palette, Padlock_body]
+      - [0xEC9290]
+  - name: entity_model_PadlockRedFrame
+    dir: entity/model
+    type: code
+    start: 0xEC9670
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, PadlockRedFrame]
+    - start: 0xEC9670
+      type: .data
+      name: PadlockRedFrame
+      subsegments:
+      - [0xEC9670, vtx, PadlockRedFrame_1]
+      - [0xEC9870, vtx, PadlockRedFrame_2]
+      - [0xEC98B0, vtx, PadlockRedFrame_3]
+      - [0xEC98F0, vtx, PadlockRedFrame_4]
+      - [0xEC9BB0, ci8, PadlockRedFrame_keyhole, 32, 64]
+      - [0xECA3B0, palette, PadlockRedFrame_keyhole]
+      - [0xECA5B0]
+      - [0xECA658, ci8, PadlockRedFrame_face, 32, 32]
+      - [0xECAA58, palette, PadlockRedFrame_face]
+      - [0xECAC58]
+  - name: entity_model_PadlockRedFace
+    dir: entity/model
+    type: code
+    start: 0xECB020
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, PadlockRedFace]
+    - start: 0xECB020
+      type: .data
+      name: PadlockRedFace
+      subsegments:
+      - [0xECB020, vtx, PadlockRedFace_1]
+      - [0xECB5E0, vtx, PadlockRedFace_2]
+      - [0xECB640, vtx, PadlockRedFace_3]
+      - [0xECB680, vtx, PadlockRedFace_4]
+      - [0xECB720, i4, PadlockRedFace_face, 32, 32]
+      - [0xECB920]
+      - [0xECB998, ci8, PadlockRedFace_keyhole, 32, 64]
+      - [0xECC198, palette, PadlockRedFace_keyhole]
+      - [0xECC398]
+      - [0xECC440, ci8, PadlockRedFace_body, 32, 32]
+      - [0xECC840, palette, PadlockRedFace_body]
+      - [0xECCA40]
+  - name: entity_model_PadlockBlueFace
+    dir: entity/model
+    type: code
+    start: 0xECCE40
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, PadlockBlueFace]
+    - start: 0xECCE40
+      type: .data
+      name: PadlockBlueFace
+      subsegments:
+      - [0xECCE40, vtx, PadlockBlueFace_1]
+      - [0xECD400, vtx, PadlockBlueFace_2]
+      - [0xECD460, vtx, PadlockBlueFace_3]
+      - [0xECD4A0, vtx, PadlockBlueFace_4]
+      - [0xECD540, i4, PadlockBlueFace_face, 32, 32]
+      - [0xECD740]
+      - [0xECD7B8, ci8, PadlockBlueFace_keyhole, 32, 64]
+      - [0xECDFB8, palette, PadlockBlueFace_keyhole]
+      - [0xECE1B8]
+      - [0xECE260, ci8, PadlockBlueFace_body, 32, 32]
+      - [0xECE660, palette, PadlockBlueFace_body]
+      - [0xECE860]
+  - name: entity_model_GreenStompSwitch
+    dir: entity/model
+    type: code
+    start: 0xECEC60
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, GreenStompSwitch]
+    - start: 0xECEC60
+      type: .data
+      name: GreenStompSwitch
+      subsegments:
+      - [0xECEC60, vtx, GreenStompSwitch_1]
+      - [0xECECE0, vtx, GreenStompSwitch_2]
+      - [0xECEEE0, ci4, GreenStompSwitch_tex, 16, 16]
+      - [0xECEF60, palette, GreenStompSwitch_tex]
+      - [0xECEF80]
+      - [0xECF038, ci4, GreenStompSwitch_exclamationMark, 16, 32]
+      - [0xECF138, palette, GreenStompSwitch_exclamationMark]
+      - [0xECF158]
+  - name: entity_model_RedSwitch
+    dir: entity/model
+    type: code
+    start: 0xECF3B0
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, RedSwitch]
+    - start: 0xECF3B0
+      type: .data
+      name: RedSwitch
+      subsegments:
+      - [0xECF3B0, vtx, RedSwitch_1]
+      - [0xECF740, vtx, RedSwitch_2]
+      - [0xECF780, vtx, RedSwitch_3]
+      - [0xECF980, ci8, RedSwitch_tex, 16, 16]
+      - [0xECFA80, palette, RedSwitch_tex]
+      - [0xECFC80]
+      - [0xECFD28, ia4, RedSwitch_exclamationMark, 16, 32]
+      - [0xECFE28]
+  - name: entity_model_BlueSwitch
+    dir: entity/model
+    type: code
+    start: 0xED02B0
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, BlueSwitch]
+    - start: 0xED02B0
+      type: .data
+      name: BlueSwitch
+      subsegments:
+      - [0xED02B0, vtx, BlueSwitch_1]
+      - [0xED05B0, vtx, BlueSwitch_2]
+      - [0xED0640, vtx, BlueSwitch_3]
+      - [0xED0680, vtx, BlueSwitch_4]
+      - [0xED0880, ci8, BlueSwitch_tex, 16, 16]
+      - [0xED0980, palette, BlueSwitch_tex]
+      - [0xED0B80]
+      - [0xED0C28, ia4, BlueSwitch_exclamationMark, 16, 32]
+      - [0xED0D28]
+  - name: entity_model_Chest
+    dir: entity/model
+    type: code
+    start: 0xED11C0
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, Chest]
+    - start: 0xED11C0
+      type: .data
+      name: Chest
+      subsegments:
+      - [0xED11C0, vtx, Chest_1]
+      - [0xED1350, vtx, Chest_2]
+      - [0xED13D0, vtx, Chest_3]
+      - [0xED1550, vtx, Chest_4]
+      - [0xED15D0, rgba16, Chest_tex1, 16, 32]
+      - [0xED19D0]
+      - [0xED1A58, ci4, Chest_tex2, 16, 32]
+      - [0xED1B58, palette, Chest_tex2]
+      - [0xED1B78]
+      - [0xED1C30, ci4, Chest_lock, 16, 32]
+      - [0xED1D30, palette, Chest_lock]
+      - [0xED1D50]
+  - name: entity_model_ScriptSpring_gfx
+    dir: entity/model
+    type: code
+    start: 0xED2090
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, ScriptSpring_gfx]
+    - start: 0xED2090
+      type: .data
+      name: ScriptSpring_gfx
+      subsegments:
+      - [0xED2090, vtx, ScriptSpring_1]
+      - [0xED2310, vtx, ScriptSpring_2]
+      - [0xED2390, vtx, ScriptSpring_3]
+      - [0xED2410, vtx, ScriptSpring_4]
+      - [0xED2490, vtx, ScriptSpring_5]
+      - [0xED2710, vtx, ScriptSpring_6]
+      - [0xED2870, vtx, ScriptSpring_7]
+      - [0xED28F0, ci8, ScriptSpring_tex1, 16, 16]
+      - [0xED29F0, palette, ScriptSpring_tex1]
+      - [0xED2BF0]
+      - [0xED2C98, ci8, ScriptSpring_tex2, 16, 16]
+      - [0xED2D98, palette, ScriptSpring_tex2]
+      - [0xED2F98]
+      - [0xED3040, ci8, ScriptSpring_star, 32, 32]
+      - [0xED3440, palette, ScriptSpring_star]
+      - [0xED3640]
+  - name: entity_model_ScriptSpring_anim
+    dir: entity/model
+    type: code
+    start: 0xED3A10
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, ScriptSpring_anim]
+  - name: entity_model_SimpleSpring_gfx
+    dir: entity/model
+    type: code
+    start: 0xED4E70
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, SimpleSpring_gfx]
+    - start: 0xED4E70
+      type: .data
+      name: SimpleSpring_gfx
+      subsegments:
+      - [0xED4E70, vtx, SimpleSpring_1]
+      - [0xED50F0, vtx, SimpleSpring_2]
+      - [0xED5170, vtx, SimpleSpring_3]
+      - [0xED51F0, vtx, SimpleSpring_4]
+      - [0xED5470, vtx, SimpleSpring_5]
+      - [0xED55D0, vtx, SimpleSpring_6]
+      - [0xED5650, ci8, SimpleSpring_tex1, 16, 16]
+      - [0xED5750, palette, SimpleSpring_tex1]
+      - [0xED5950]
+      - [0xED59F8, rgba16, SimpleSpring_tex2, 16, 16]
+      - [0xED5BF8]
+      - [0xED5C70, ci8, SimpleSpring_star, 32, 32]
+      - [0xED6070, palette, SimpleSpring_star]
+      - [0xED6270]
+  - name: entity_model_SimpleSpring_anim
+    dir: entity/model
+    type: code
+    start: 0xED6640
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, SimpleSpring_anim]
+  - name: entity_model_BellbellPlant_gfx
+    dir: entity/model
+    type: code
+    start: 0xED7AA0
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, BellbellPlant_gfx]
+    - start: 0xED7AA0
+      type: .data
+      name: BellbellPlant_gfx
+      subsegments:
+      - [0xED7AA0, vtx, BellbellPlant_1]
+      - [0xED7E30, vtx, BellbellPlant_2]
+      - [0xED80E0, vtx, BellbellPlant_3]
+      - [0xED81C0, vtx, BellbellPlant_4]
+      - [0xED84B0, vtx, BellbellPlant_5]
+      - [0xED8590]
+      - [0xED8B30, rgba16, BellbellPlant, 16, 16]
+  - name: entity_model_BellbellPlant_anim
+    dir: entity/model
+    type: code
+    start: 0xED8D30
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, BellbellPlant_anim]
+  - name: entity_model_TrumpetPlant_gfx
+    dir: entity/model
+    type: code
+    start: 0xED9C80
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, TrumpetPlant_gfx]
+    - start: 0xED9C80
+      type: .data
+      name: TrumpetPlant_gfx
+      subsegments:
+      - [0xED9C80, vtx, TrumpetPlant_1]
+      - [0xED9EC0, vtx, TrumpetPlant_2]
+      - [0xEDA630]
+      - [0xEDA9C0, rgba16, TrumpetPlant, 16, 16]
+  - name: entity_model_TrumpetPlant_anim
+    dir: entity/model
+    type: code
+    start: 0xEDABC0
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, TrumpetPlant_anim]
+  - name: entity_model_MunchlesiaReset_gfx
+    dir: entity/model
+    type: code
+    start: 0xEDAF50
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, MunchlesiaReset_gfx]
+    - start: 0xEDAF50
+      type: .data
+      name: MunchlesiaReset_gfx
+      subsegments:
+      - [0xEDAF50, vtx, MunchlesiaReset]
+      - [0xEDC840]
+      - [0xEE0E38, rgba16, MunchlesiaReset, 16, 16]
+  - name: entity_model_MunchlesiaReset_anim
+    dir: entity/model
+    type: code
+    start: 0xEE1040
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, MunchlesiaReset_anim]
+  - name: entity_model_MunchlesiaGrab_gfx
+    dir: entity/model
+    type: code
+    start: 0xEE14C0
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, MunchlesiaGrab_gfx]
+    - start: 0xEE14C0
+      type: .data
+      name: MunchlesiaGrab_gfx
+      subsegments:
+      - [0xEE14C0, vtx, MunchlesiaGrab]
+      - [0xEE2DB0]
+      - [0xEE73A8, rgba16, MunchlesiaGrab, 16, 16]
+  - name: entity_model_MunchlesiaGrab_anim
+    dir: entity/model
+    type: code
+    start: 0xEE75B0
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, MunchlesiaGrab_anim]
+  - name: entity_model_MunchlesiaEnvelop_gfx
+    dir: entity/model
+    type: code
+    start: 0xEE79D0
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, MunchlesiaEnvelop_gfx]
+    - start: 0xEE79D0
+      type: .data
+      name: MunchlesiaEnvelop_gfx
+      subsegments:
+      - [0xEE79D0, vtx, MunchlesiaEnvelop]
+      - [0xEE92C0]
+      - [0xEED8B8, rgba16, MunchlesiaEnvelop, 16, 16]
+  - name: entity_model_MunchlesiaEnvelop_anim
+    dir: entity/model
+    type: code
+    start: 0xEEDAC0
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, MunchlesiaEnvelop_anim]
+  - name: entity_model_MunchlesiaBeginChew_gfx
+    dir: entity/model
+    type: code
+    start: 0xEEDEE0
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, MunchlesiaBeginChew_gfx]
+    - start: 0xEEDEE0
+      type: .data
+      name: MunchlesiaBeginChew_gfx
+      subsegments:
+      - [0xEEDEE0, vtx, MunchlesiaBeginChew]
+      - [0xEEF7D0]
+      - [0xEF4720, rgba16, MunchlesiaBeginChew, 16, 16]
+  - name: entity_model_MunchlesiaBeginChew_anim
+    dir: entity/model
+    type: code
+    start: 0xEF4920
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, MunchlesiaBeginChew_anim]
+  - name: entity_model_MunchlesiaChewing_gfx
+    dir: entity/model
+    type: code
+    start: 0xEF4D90
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, MunchlesiaChewing_gfx]
+    - start: 0xEF4D90
+      type: .data
+      name: MunchlesiaChewing_gfx
+      subsegments:
+      - [0xEF4D90, vtx, MunchlesiaChewing]
+      - [0xEF6680]
+      - [0xEF6B00, rgba16, MunchlesiaChewing, 16, 16]
+  - name: entity_model_MunchlesiaChewing_anim
+    dir: entity/model
+    type: code
+    start: 0xEF6D00
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, MunchlesiaChewing_anim]
+  - name: entity_model_MunchlesiaSpitOut_gfx
+    dir: entity/model
+    type: code
+    start: 0xEF72D0
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, MunchlesiaSpitOut_gfx]
+    - start: 0xEF72D0
+      type: .data
+      name: MunchlesiaSpitOut_gfx
+      subsegments:
+      - [0xEF72D0, vtx, MunchlesiaSpitOut]
+      - [0xEF8BC0]
+      - [0xEFDB10, rgba16, MunchlesiaSpitOut, 16, 16]
+  - name: entity_model_MunchlesiaSpitOut_anim
+    dir: entity/model
+    type: code
+    start: 0xEFDD10
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, MunchlesiaSpitOut_anim]
+  - name: entity_model_MunchlesiaReset1_gfx
+    dir: entity/model
+    type: code
+    start: 0xEFE180
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, MunchlesiaReset1_gfx]
+    - start: 0xEFE180
+      type: .data
+      name: MunchlesiaReset1_gfx
+      subsegments:
+      - [0xEFE180, vtx, MunchlesiaReset1]
+      - [0xEFFA70]
+      - [0xF049C0, rgba16, MunchlesiaReset1, 16, 16]
+  - name: entity_model_MunchlesiaReset1_anim
+    dir: entity/model
+    type: code
+    start: 0xF04BC0
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, MunchlesiaReset1_anim]
+  - name: entity_model_CymbalPlant_anim
+    dir: entity/model
+    type: code
+    start: 0xF05030
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, CymbalPlant_anim]
+  - name: entity_model_CymbalPlant_gfx
+    dir: entity/model
+    type: code
+    start: 0xF05BE0
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, CymbalPlant_gfx]
+    - start: 0xF05BE0
+      type: .data
+      name: CymbalPlant_gfx
+      subsegments:
+      - [0xF05BE0, ci4, CymbalPlant, 64, 64]
+      - [0xF063E0, palette, CymbalPlant]
+      - [0xF06400]
+      - [0xF064A8, vtx, CymbalPlant_1]
+      - [0xF06548, vtx, CymbalPlant_2]
+      - [0xF065A8, vtx, CymbalPlant_3]
+      - [0xF06648, vtx, CymbalPlant_4]
+      - [0xF06798, vtx, CymbalPlant_5]
+      - [0xF06908, vtx, CymbalPlant_6]
+      - [0xF06998, vtx, CymbalPlant_7]
+      - [0xF06B08, vtx, CymbalPlant_8]
+      - [0xF06C58]
+  - name: entity_model_PinkFlower_anim
+    dir: entity/model
+    type: code
+    start: 0xF07280
+    vram: 0x00000000
+    subsegments:
+    - [auto, c, PinkFlower_anim]
+  - name: entity_model_PinkFlower_gfx
+    dir: entity/model
+    type: code
+    start: 0xF07DF0
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, PinkFlower_gfx]
+    - start: 0xF07DF0
+      type: .data
+      name: PinkFlower_gfx
+      subsegments:
+      - [0xF07DF0, vtx, PinkFlower_1]
+      - [0xF07E30, vtx, PinkFlower_2]
+      - [0xF08080, vtx, PinkFlower_3]
+      - [0xF081A0, vtx, PinkFlower_4]
+      - [0xF082A0, vtx, PinkFlower_5]
+      - [0xF083A0, ia16, PinkFlower_light, 16, 16]
+      - [0xF085A0]
+      - [0xF08610, rgba16, PinkFlower_tex, 16, 64]
+      - [0xF08E10]
+  - name: entity_model_SpinningFlower
+    dir: entity/model
+    type: code
+    start: 0xF091F0
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, SpinningFlower]
+    - start: 0xF091F0
+      type: .data
+      name: SpinningFlower
+      subsegments:
+      - [0xF091F0, vtx, SpinningFlower_1]
+      - [0xF09240, vtx, SpinningFlower_2]
+      - [0xF09290, vtx, SpinningFlower_3]
+      - [0xF09310, vtx, SpinningFlower_4]
+      - [0xF09370, ia4, SpinningFlower_img1, 16, 32]
+      - [0xF09470]
+      - [0xF094E8, rgba16, SpinningFlower_petal, 32, 32]
+      - [0xF09CE8]
+  - name: entity_model_BombableRock
+    dir: entity/model
+    type: code
+    start: 0xF09F40
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, BombableRock]
+    - start: 0xF09F40
+      type: .data
+      name: BombableRock
+      subsegments:
+      - [0xF09F40, vtx, BombableRock_1]
+      - [0xF0A2C0, vtx, BombableRock_2]
+      - [0xF0A3E0, vtx, BombableRock_3]
+      - [0xF0A540, vtx, BombableRock_4]
+      - [0xF0A660, vtx, BombableRock_5]
+      - [0xF0A780, ci4, BombableRock, 64, 64]
+      - [0xF0AF80, palette, BombableRock]
+      - [0xF0AFA0]
+  - [0xF0B5C0, bin]
 
   - [0x13A0000, pm_sbn, audio]
   - [0x1DE2C40, bin, 1942C40]

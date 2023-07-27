@@ -16,13 +16,19 @@ BSS s32 SaveBlockResultPrinterClosed;
 BSS MessagePrintState* SaveBlockTutorialPrinter;
 BSS MessagePrintState* SaveBlockResultPrinter;
 
+#if VERSION_PAL
+extern Gfx Entity_SaveBlock_RenderBlock_es[];
+extern s32 gCurrentLanguage;
+#endif
+
 void entity_SaveBlock_setupGfx(s32 index) {
     Gfx* gfxPos = gMainGfxPos;
+    Gfx* dlist = Entity_SaveBlock_RenderContent;
     Entity* entity = get_entity_by_index(index);
     SaveBlockData* blockData = entity->dataBuf.saveBlock;
+    s32 alpha = 128;
     Matrix4f sp18;
     Matrix4f sp58;
-    Gfx* dlist;
 
     guMtxL2F(sp18, ENTITY_ADDR(entity, Mtx*, &Entity_SaveBlock_Mtx));
     sp18[3][1] += 12.5f;
@@ -33,11 +39,23 @@ void entity_SaveBlock_setupGfx(s32 index) {
     gSPMatrix(gfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gDPSetRenderMode(gfxPos++, G_RM_ZB_CLD_SURF, G_RM_ZB_CLD_SURF2);
     gDPSetCombineMode(gfxPos++, PM_CC_01, PM_CC_02);
-    gDPSetPrimColor(gfxPos++, 0, 0, 0, 0, 0, 128);
-    gSPDisplayList(gfxPos++, Entity_SaveBlock_RenderContent);
+    gDPSetPrimColor(gfxPos++, 0, 0, 0, 0, 0, alpha);
+    gSPDisplayList(gfxPos++, dlist);
     gSPPopMatrix(gfxPos++, G_MTX_MODELVIEW);
 
+#if VERSION_PAL
+    switch (gCurrentLanguage) {
+        default:
+            dlist = ENTITY_ADDR(entity, Gfx*, Entity_SaveBlock_RenderBlock);
+            break;
+
+        case LANGUAGE_ES:
+            dlist = ENTITY_ADDR(entity, Gfx*, Entity_SaveBlock_RenderBlock_es);
+            break;
+    }
+#else
     dlist = ENTITY_ADDR(entity, Gfx*, Entity_SaveBlock_RenderBlock);
+#endif
     guMtxL2F(sp58, ENTITY_ADDR(entity, Mtx*, &Entity_SaveBlock_Mtx));
     sp58[3][1] += 12.5f;
     gDPPipeSync(gfxPos++);
@@ -46,7 +64,7 @@ void entity_SaveBlock_setupGfx(s32 index) {
     gSPMatrix(gfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
     gDPSetRenderMode(gfxPos++, G_RM_AA_XLU_SURF | Z_CMP, G_RM_AA_XLU_SURF2 | Z_CMP);
     gDPSetCombineMode(gfxPos++, PM_CC_01, PM_CC_02);
-    gDPSetPrimColor(gfxPos++, 0, 0, 0, 0, 0, 128);
+    gDPSetPrimColor(gfxPos++, 0, 0, 0, 0, 0, alpha);
     gSPDisplayList(gfxPos++, dlist);
     gSPPopMatrix(gfxPos++, G_MTX_MODELVIEW);
 
