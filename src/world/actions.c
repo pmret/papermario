@@ -231,3 +231,5 @@ Action PlayerActionsTable[] = {
     [ACTION_STATE_INVALID_25]           { action_update_launch, ACTION_FILE(walk), FALSE },
     [ACTION_STATE_USE_SPRING]           { action_update_launch, ACTION_FILE(misc), TRUE },
 };
+
+// 8D1CC

@@ -540,6 +540,36 @@ s32 popup_menu_update(void) {
             __asm__("nop");
             __asm__("nop");
             __asm__("nop");
+            __asm__(".section .rodata");
+            __asm__("nop");
+            __asm__("nop");
+            __asm__("nop");
+            __asm__("nop");
+            __asm__("nop");
+            __asm__("nop");
+            __asm__("nop");
+            __asm__("nop");
+            __asm__("nop");
+            __asm__("nop");
+            __asm__("nop");
+            __asm__("nop");
+            __asm__("nop");
+            __asm__("nop");
+            __asm__("nop");
+            __asm__("nop");
+            __asm__("nop");
+            __asm__("nop");
+            __asm__("nop");
+            __asm__("nop");
+            __asm__("nop");
+            __asm__("nop");
+            __asm__("nop");
+            __asm__("nop");
+            __asm__("nop");
+            __asm__("nop");
+            __asm__("nop");
+            __asm__("nop");
+            __asm__(".section .text");
 #else
             switch (gPopupMenu->popupType) {
                 case POPUP_MENU_USE_ITEM:
