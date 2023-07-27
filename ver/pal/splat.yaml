@@ -12483,25 +12483,61 @@ segments:
     subsegments:
     - [auto, c, MunchlesiaBeginChew_anim]
   - name: entity_model_MunchlesiaChewing_gfx
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEF4D90
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, MunchlesiaChewing_gfx]
+    - start: 0xEF4D90
+      type: .data
+      name: MunchlesiaChewing_gfx
+      subsegments:
+      - [0xEF4D90, vtx, MunchlesiaChewing]
+      - [0xEF6680]
+      - [0xEF6B00, rgba16, MunchlesiaChewing, 16, 16]
   - name: entity_model_MunchlesiaChewing_anim
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEF6D00
     vram: 0x00000000
+    subsegments:
+    - [auto, c, MunchlesiaChewing_anim]
   - name: entity_model_MunchlesiaSpitOut_gfx
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEF72D0
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, MunchlesiaSpitOut_gfx]
+    - start: 0xEF72D0
+      type: .data
+      name: MunchlesiaSpitOut_gfx
+      subsegments:
+      - [0xEF72D0, vtx, MunchlesiaSpitOut]
+      - [0xEF8BC0]
+      - [0xEFDB10, rgba16, MunchlesiaSpitOut, 16, 16]
   - name: entity_model_MunchlesiaSpitOut_anim
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEFDD10
     vram: 0x00000000
+    subsegments:
+    - [auto, c, MunchlesiaSpitOut_anim]
   - name: entity_model_MunchlesiaReset1_gfx
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEFE180
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, MunchlesiaReset1_gfx]
+    - start: 0xEFE180
+      type: .data
+      name: MunchlesiaReset1_gfx
+      subsegments:
+      - [0xEFE180, vtx, MunchlesiaReset1]
+      - [0xEFFA70]
+      - [0xF049C0, rgba16, MunchlesiaReset1, 16, 16]
   - name: entity_model_MunchlesiaReset1_anim
     dir: entity/model
     type: code
