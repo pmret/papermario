@@ -12352,53 +12352,136 @@ segments:
     subsegments:
     - [auto, c, SimpleSpring_anim]
   - name: entity_model_BellbellPlant_gfx
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xED7AA0
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, BellbellPlant_gfx]
+    - start: 0xED7AA0
+      type: .data
+      name: BellbellPlant_gfx
+      subsegments:
+      - [0xED7AA0, vtx, BellbellPlant_1]
+      - [0xED7E30, vtx, BellbellPlant_2]
+      - [0xED80E0, vtx, BellbellPlant_3]
+      - [0xED81C0, vtx, BellbellPlant_4]
+      - [0xED84B0, vtx, BellbellPlant_5]
+      - [0xED8590]
+      - [0xED8B30, rgba16, BellbellPlant, 16, 16]
   - name: entity_model_BellbellPlant_anim
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xED8D30
     vram: 0x00000000
+    subsegments:
+    - [auto, c, BellbellPlant_anim]
   - name: entity_model_TrumpetPlant_gfx
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xED9C80
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, TrumpetPlant_gfx]
+    - start: 0xED9C80
+      type: .data
+      name: TrumpetPlant_gfx
+      subsegments:
+      - [0xED9C80, vtx, TrumpetPlant_1]
+      - [0xED9EC0, vtx, TrumpetPlant_2]
+      - [0xEDA630]
+      - [0xEDA9C0, rgba16, TrumpetPlant, 16, 16]
   - name: entity_model_TrumpetPlant_anim
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEDABC0
     vram: 0x00000000
+    subsegments:
+    - [auto, c, TrumpetPlant_anim]
   - name: entity_model_MunchlesiaReset_gfx
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEDAF50
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, MunchlesiaReset_gfx]
+    - start: 0xEDAF50
+      type: .data
+      name: MunchlesiaReset_gfx
+      subsegments:
+      - [0xEDAF50, vtx, MunchlesiaReset]
+      - [0xEDC840]
+      - [0xEE0E38, rgba16, MunchlesiaReset, 16, 16]
   - name: entity_model_MunchlesiaReset_anim
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEE1040
     vram: 0x00000000
+    subsegments:
+    - [auto, c, MunchlesiaReset_anim]
   - name: entity_model_MunchlesiaGrab_gfx
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEE14C0
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, MunchlesiaGrab_gfx]
+    - start: 0xEE14C0
+      type: .data
+      name: MunchlesiaGrab_gfx
+      subsegments:
+      - [0xEE14C0, vtx, MunchlesiaGrab]
+      - [0xEE2DB0]
+      - [0xEE73A8, rgba16, MunchlesiaGrab, 16, 16]
   - name: entity_model_MunchlesiaGrab_anim
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEE75B0
     vram: 0x00000000
+    subsegments:
+    - [auto, c, MunchlesiaGrab_anim]
   - name: entity_model_MunchlesiaEnvelop_gfx
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEE79D0
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, MunchlesiaEnvelop_gfx]
+    - start: 0xEE79D0
+      type: .data
+      name: MunchlesiaEnvelop_gfx
+      subsegments:
+      - [0xEE79D0, vtx, MunchlesiaEnvelop]
+      - [0xEE92C0]
+      - [0xEED8B8, rgba16, MunchlesiaEnvelop, 16, 16]
   - name: entity_model_MunchlesiaEnvelop_anim
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEEDAC0
     vram: 0x00000000
+    subsegments:
+    - [auto, c, MunchlesiaEnvelop_anim]
   - name: entity_model_MunchlesiaBeginChew_gfx
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEEDEE0
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, MunchlesiaBeginChew_gfx]
+    - start: 0xEEDEE0
+      type: .data
+      name: MunchlesiaBeginChew_gfx
+      subsegments:
+      - [0xEEDEE0, vtx, MunchlesiaBeginChew]
+      - [0xEEF7D0]
+      - [0xEF4720, rgba16, MunchlesiaBeginChew, 16, 16]
   - name: entity_model_MunchlesiaBeginChew_anim
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEF4920
     vram: 0x00000000
+    subsegments:
+    - [auto, c, MunchlesiaBeginChew_anim]
   - name: entity_model_MunchlesiaChewing_gfx
     type: bin
     start: 0xEF4D90
