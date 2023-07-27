@@ -11693,7 +11693,6 @@ segments:
     type: code
     start: 0xEA9DE0
     vram: 0x0A000000
-    symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, UnusedBlock]
     - start: 0xEA9DE0
@@ -11999,7 +11998,6 @@ segments:
     type: code
     start: 0xEBDF30
     vram: 0x0A000000
-    symbol_name_format: $VRAM_$ROM
     subsegments:
     - [auto, c, WoodenCrate]
     - start: 0xEBDF30
@@ -12037,41 +12035,175 @@ segments:
       - [0xEC3200, palette, StarBoxLauncher_box]
       - [0xEC3220]
   - name: entity_model_HiddenPanel
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEC3490
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, HiddenPanel]
   - name: entity_model_Tweester
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEC3750
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, Tweester]
+    - start: 0xEC3750
+      type: .data
+      name: Tweester
+      subsegments:
+      - [0xEC3750, vtx, Tweester_1]
+      - [0xEC3B60, vtx, Tweester_2]
+      - [0xEC3F70, vtx, Tweester_3]
+      - [0xEC3FB0, vtx, Tweester_4]
+      - [0xEC4340, i8, Tweester_img1, 32, 32]
+      - [0xEC4740, i8, Tweester_img2, 32, 32]
+      - [0xEC4B40]
+      - [0xEC4BF0, ci4, Tweester_img3, 64, 32]
+      - [0xEC4FF0, palette, Tweester_img3]
+      - [0xEC5010]
   - name: entity_model_BlueWarpPipe
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEC55C0
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, BlueWarpPipe]
+    - start: 0xEC55C0
+      type: .data
+      name: BlueWarpPipe
+      subsegments:
+      - [0xEC55C0, vtx, BlueWarpPipe_1]
+      - [0xEC5620, vtx, BlueWarpPipe_2]
+      - [0xEC58A0, vtx, BlueWarpPipe_3]
+      - [0xEC58E0, ci4, BlueWarpPipe_texBase, 16, 16]
+      - [0xEC5960, palette, BlueWarpPipe_texBase]
+      - [0xEC5980]
+      - [0xEC5A30, ci4, BlueWarpPipe_texPipe, 32, 16]
+      - [0xEC5B30, palette, BlueWarpPipe_texPipe]
+      - [0xEC5B50]
   - name: entity_model_Signpost
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEC5D70
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, Signpost]
+    - start: 0xEC5D70
+      type: .data
+      name: Signpost
+      subsegments:
+      - [0xEC5D70, vtx, Signpost_1]
+      - [0xEC5E90, vtx, Signpost_2]
+      - [0xEC62F0, ci4, Signpost, 32, 32]
+      - [0xEC64F0, palette, Signpost]
+      - [0xEC6510]
   - name: entity_model_ArrowSign
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEC67F0
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, ArrowSign]
+    - start: 0xEC67F0
+      type: .data
+      name: ArrowSign
+      subsegments:
+      - [0xEC67F0]
+      - [0xEC6870, ci8, ArrowSign, 64, 32]
+      - [0xEC7070, palette, ArrowSign]
+      - [0xEC7270]
   - name: entity_model_Padlock
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEC7440
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, Padlock]
+    - start: 0xEC7440
+      type: .data
+      name: Padlock
+      subsegments:
+      - [0xEC7440, vtx, Padlock_1]
+      - [0xEC7A00, vtx, Padlock_2]
+      - [0xEC7A60, vtx, Padlock_3]
+      - [0xEC7AA0, vtx, Padlock_4]
+      - [0xEC7B40, ci8, Padlock_face, 32, 32]
+      - [0xEC7F40, palette, Padlock_face]
+      - [0xEC8140]
+      - [0xEC81E8, ci8, Padlock_keyhole, 32, 64]
+      - [0xEC89E8, palette, Padlock_keyhole]
+      - [0xEC8BE8]
+      - [0xEC8C90, ci8, Padlock_body, 32, 32]
+      - [0xEC9090, palette, Padlock_body]
+      - [0xEC9290]
   - name: entity_model_PadlockRedFrame
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xEC9670
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, PadlockRedFrame]
+    - start: 0xEC9670
+      type: .data
+      name: PadlockRedFrame
+      subsegments:
+      - [0xEC9670, vtx, PadlockRedFrame_1]
+      - [0xEC9870, vtx, PadlockRedFrame_2]
+      - [0xEC98B0, vtx, PadlockRedFrame_3]
+      - [0xEC98F0, vtx, PadlockRedFrame_4]
+      - [0xEC9BB0, ci8, PadlockRedFrame_keyhole, 32, 64]
+      - [0xECA3B0, palette, PadlockRedFrame_keyhole]
+      - [0xECA5B0]
+      - [0xECA658, ci8, PadlockRedFrame_face, 32, 32]
+      - [0xECAA58, palette, PadlockRedFrame_face]
+      - [0xECAC58]
   - name: entity_model_PadlockRedFace
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xECB020
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, PadlockRedFace]
+    - start: 0xECB020
+      type: .data
+      name: PadlockRedFace
+      subsegments:
+      - [0xECB020, vtx, PadlockRedFace_1]
+      - [0xECB5E0, vtx, PadlockRedFace_2]
+      - [0xECB640, vtx, PadlockRedFace_3]
+      - [0xECB680, vtx, PadlockRedFace_4]
+      - [0xECB720, i4, PadlockRedFace_face, 32, 32]
+      - [0xECB920]
+      - [0xECB998, ci8, PadlockRedFace_keyhole, 32, 64]
+      - [0xECC198, palette, PadlockRedFace_keyhole]
+      - [0xECC398]
+      - [0xECC440, ci8, PadlockRedFace_body, 32, 32]
+      - [0xECC840, palette, PadlockRedFace_body]
+      - [0xECCA40]
   - name: entity_model_PadlockBlueFace
-    type: bin
+    dir: entity/model
+    type: code
     start: 0xECCE40
     vram: 0x0A000000
+    subsegments:
+    - [auto, c, PadlockBlueFace]
+    - start: 0xECCE40
+      type: .data
+      name: PadlockBlueFace
+      subsegments:
+      - [0xECCE40, vtx, PadlockBlueFace_1]
+      - [0xECD400, vtx, PadlockBlueFace_2]
+      - [0xECD460, vtx, PadlockBlueFace_3]
+      - [0xECD4A0, vtx, PadlockBlueFace_4]
+      - [0xECD540, i4, PadlockBlueFace_face, 32, 32]
+      - [0xECD740]
+      - [0xECD7B8, ci8, PadlockBlueFace_keyhole, 32, 64]
+      - [0xECDFB8, palette, PadlockBlueFace_keyhole]
+      - [0xECE1B8]
+      - [0xECE260, ci8, PadlockBlueFace_body, 32, 32]
+      - [0xECE660, palette, PadlockBlueFace_body]
+      - [0xECE860]
   - name: entity_model_GreenStompSwitch
     type: bin
     start: 0xECEC60
