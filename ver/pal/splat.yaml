@@ -63,8 +63,54 @@ segments:
     subsegments:
     - [auto, c, sprite]
     - [auto, c, 101b90_len_8f0]
+  - name: entity
+    type: code
+    start: 0x1040F0
+    vram: 0x802E7070
+    follows_vram: engine4
+    subsegments:
+      - [auto, c, entity/Shadow]
+      - [auto, c, entity/SaveBlock]
+      - [auto, c, entity/Switch]
+      - [auto, c, entity/ShatteringBlock_common]
+      - [auto, c, entity/ShatteringBlock]
+      - [auto, c, entity/Block]
+      - [auto, c, entity/ItemBlock]
+      - [auto, c, entity/HeartBlock]
+      - [auto, c, entity/SuperBlock]
+      - [auto, c, entity/SimpleSpring]
+      - [auto, c, entity/HiddenPanel]
+      - [auto, c, entity/Chest]
+      - [auto, c, entity/WoodenCrate]
+      - [auto, c, entity/BlueWarpPipe]
+      - [auto, c, entity/Signpost]
+      - start: 0x10A9F0
+        type: .data
+        name: entity/Shadow
+        subsegments:
+          - [0x10C4F0, i4, entity/shadow/square, 16, 16]
+          - [0x10C570, i4, entity/shadow/circle, 16, 16]
+          - [0x10C5F0, vtx, entity/vtx/shadow1]
+          - [0x10C630, vtx, entity/vtx/shadow2]
+          - [0x10C670, i4, entity/shadow/square_big, 32, 32]
+          - [0x10C870, i4, entity/shadow/circle_big, 32, 32]
+          - [0x10CA70]
+      - [auto, .data, entity/SaveBlock]
+      - [auto, .data, entity/Switch]
+      - [auto, .data, entity/ShatteringBlock_common]
+      - [auto, .data, entity/ShatteringBlock]
+      - [auto, .data, entity/Block]
+      - [auto, .data, entity/ItemBlock]
+      - [auto, .data, entity/HeartBlock]
+      - [auto, .data, entity/SuperBlock]
+      - [auto, .data, entity/SimpleSpring]
+      - [auto, .data, entity/HiddenPanel]
+      - [auto, .data, entity/Chest]
+      - [auto, .data, entity/WoodenCrate]
+      - [auto, .data, entity/BlueWarpPipe]
+      - [auto, .data, entity/Signpost]
 
-  - [0x1040F0, bin]
+  - [0x10E710, bin]
 
   - type: group
     dir: charset
@@ -11524,6 +11570,311 @@ segments:
     - [0xE8AFB0, c, gv_01_1_main]
 
   - [0xE8D120, bin]
+
+  - name: entity_model_Hammer1Block
+    type: bin
+    start: 0xE9E540
+    vram: 0x0A000000
+  - name: entity_model_Hammer2Block
+    type: bin
+    start: 0xE9EA40
+    vram: 0x0A000000
+  - name: entity_model_Hammer3Block
+    type: bin
+    start: 0xE9EF40
+    vram: 0x0A000000
+  - name: entity_model_ShatteringHammer1Block
+    type: bin
+    start: 0xE9F430
+    vram: 0x0A000000
+  - name: entity_model_ShatteringHammer2Block
+    type: bin
+    start: 0xEA2680
+    vram: 0x0A000000
+  - name: entity_model_ShatteringHammer3Block
+    type: bin
+    start: 0xEA58A0
+    vram: 0x0A000000
+  - name: entity_model_YellowBlock
+    type: bin
+    start: 0xEA8880
+    vram: 0x0A000000
+  - name: entity_model_RedBlock
+    type: bin
+    start: 0xEA9330
+    vram: 0x0A000000
+  - name: entity_model_UnusedBlock
+    type: bin
+    start: 0xEA9DE0
+    vram: 0x0A000000
+  - name: entity_model_PushBlock
+    type: bin
+    start: 0xEAAA70
+    vram: 0x0A000000
+  - name: entity_model_BrickBlock
+    type: bin
+    start: 0xEAADC0
+    vram: 0x0A000000
+  - name: entity_model_ShatteringBrickBlock
+    type: bin
+    start: 0xEAB270
+    vram: 0x0A000000
+  - name: entity_model_InertYellowBlock
+    type: bin
+    start: 0xEAF250
+    vram: 0x0A000000
+  - name: entity_model_InertRedBlock
+    type: bin
+    start: 0xEAF750
+    vram: 0x0A000000
+  - name: entity_model_HeartBlock
+    type: bin
+    start: 0xEB0200
+    vram: 0x0A000000
+  - name: entity_model_PowBlock
+    type: bin
+    start: 0xEB0B30
+    vram: 0x0A000000
+  - name: entity_model_SuperBlock
+    type: bin
+    start: 0xEB1810
+    vram: 0x0A000000
+  - name: entity_model_UltraBlock
+    type: bin
+    start: 0xEB2120
+    vram: 0x0A000000
+  - name: entity_model_HitYellowBlock_gfx
+    type: bin
+    start: 0xEB2A00
+    vram: 0x0A000000
+  - name: entity_model_HitYellowBlock_anim
+    type: bin
+    start: 0xEB3E20
+    vram: 0x00000000
+  - name: entity_model_HitFloatingYellowBlock_gfx
+    type: bin
+    start: 0xEB40C0
+    vram: 0x0A000000
+  - name: entity_model_HitFloatingYellowBlock_anim
+    type: bin
+    start: 0xEB5500
+    vram: 0x00000000
+  - name: entity_model_HitRedBlock_gfx
+    type: bin
+    start: 0xEB5790
+    vram: 0x0A000000
+  - name: entity_model_HitRedBlock_anim
+    type: bin
+    start: 0xEB6BF0
+    vram: 0x00000000
+  - name: entity_model_HeartBlockContent
+    type: bin
+    start: 0xEB6E50
+    vram: 0x0A000000
+  - name: entity_model_SuperBlockContent
+    type: bin
+    start: 0xEB76B0
+    vram: 0x0A000000
+  - name: entity_model_UltraBlockContent
+    type: bin
+    start: 0xEB7A90
+    vram: 0x0A000000
+  - name: entity_model_SaveBlock
+    dir: entity/model
+    type: code
+    start: 0xEB82F0
+    vram: 0x0A000000
+    subsegments:
+    - [auto, c, SaveBlock]
+    - start: 0xEB82F0
+      type: .data
+      name: SaveBlock
+      subsegments:
+      - [0xEB82F0, vtx, SaveBlock_1]
+      - [0xEB8660, vtx, SaveBlock_2]
+      - [0xEB89B0, vtx, SaveBlock_3]
+      - [0xEB8BF0, rgba16, SaveBlock_star, 32, 32]
+      - [0xEB93F0]
+      - [0xEB9460, rgba16, SaveBlock_letterS, 64, 32]
+      - [0xEBA460, ia8, SaveBlock_letterG, 64, 32]
+      - [0xEBAC60]
+  - name: entity_model_BoardedFloor
+    type: bin
+    start: 0xEBB0E0
+    vram: 0x0A000000
+  - name: entity_model_WoodenCrate
+    type: bin
+    start: 0xEBDF30
+    vram: 0x0A000000
+  - name: entity_model_StarBoxLauncher
+    type: bin
+    start: 0xEC2330
+    vram: 0x0A000000
+  - name: entity_model_HiddenPanel
+    type: bin
+    start: 0xEC3490
+    vram: 0x0A000000
+  - name: entity_model_Tweester
+    type: bin
+    start: 0xEC3750
+    vram: 0x0A000000
+  - name: entity_model_BlueWarpPipe
+    type: bin
+    start: 0xEC55C0
+    vram: 0x0A000000
+  - name: entity_model_Signpost
+    type: bin
+    start: 0xEC5D70
+    vram: 0x0A000000
+  - name: entity_model_ArrowSign
+    type: bin
+    start: 0xEC67F0
+    vram: 0x0A000000
+  - name: entity_model_Padlock
+    type: bin
+    start: 0xEC7440
+    vram: 0x0A000000
+  - name: entity_model_PadlockRedFrame
+    type: bin
+    start: 0xEC9670
+    vram: 0x0A000000
+  - name: entity_model_PadlockRedFace
+    type: bin
+    start: 0xECB020
+    vram: 0x0A000000
+  - name: entity_model_PadlockBlueFace
+    type: bin
+    start: 0xECCE40
+    vram: 0x0A000000
+  - name: entity_model_GreenStompSwitch
+    type: bin
+    start: 0xECEC60
+    vram: 0x0A000000
+  - name: entity_model_RedSwitch
+    type: bin
+    start: 0xECF3B0
+    vram: 0x0A000000
+  - name: entity_model_BlueSwitch
+    type: bin
+    start: 0xED02B0
+    vram: 0x0A000000
+  - name: entity_model_Chest
+    type: bin
+    start: 0xED11C0
+    vram: 0x0A000000
+  - name: entity_model_ScriptSpring_gfx
+    type: bin
+    start: 0xED2090
+    vram: 0x0A000000
+  - name: entity_model_ScriptSpring_anim
+    type: bin
+    start: 0xED3A10
+    vram: 0x00000000
+  - name: entity_model_SimpleSpring_gfx
+    type: bin
+    start: 0xED4E70
+    vram: 0x0A000000
+  - name: entity_model_SimpleSpring_anim
+    type: bin
+    start: 0xED6640
+    vram: 0x00000000
+  - name: entity_model_BellbellPlant_gfx
+    type: bin
+    start: 0xED7AA0
+    vram: 0x0A000000
+  - name: entity_model_BellbellPlant_anim
+    type: bin
+    start: 0xED8D30
+    vram: 0x00000000
+  - name: entity_model_TrumpetPlant_gfx
+    type: bin
+    start: 0xED9C80
+    vram: 0x0A000000
+  - name: entity_model_TrumpetPlant_anim
+    type: bin
+    start: 0xEDABC0
+    vram: 0x00000000
+  - name: entity_model_MunchlesiaReset_gfx
+    type: bin
+    start: 0xEDAF50
+    vram: 0x0A000000
+  - name: entity_model_MunchlesiaReset_anim
+    type: bin
+    start: 0xEE1040
+    vram: 0x00000000
+  - name: entity_model_MunchlesiaGrab_gfx
+    type: bin
+    start: 0xEE14C0
+    vram: 0x0A000000
+  - name: entity_model_MunchlesiaGrab_anim
+    type: bin
+    start: 0xEE75B0
+    vram: 0x00000000
+  - name: entity_model_MunchlesiaEnvelop_gfx
+    type: bin
+    start: 0xEE79D0
+    vram: 0x0A000000
+  - name: entity_model_MunchlesiaEnvelop_anim
+    type: bin
+    start: 0xEEDAC0
+    vram: 0x00000000
+  - name: entity_model_MunchlesiaBeginChew_gfx
+    type: bin
+    start: 0xEEDEE0
+    vram: 0x0A000000
+  - name: entity_model_MunchlesiaBeginChew_anim
+    type: bin
+    start: 0xEF4920
+    vram: 0x00000000
+  - name: entity_model_MunchlesiaChewing_gfx
+    type: bin
+    start: 0xEF4D90
+    vram: 0x0A000000
+  - name: entity_model_MunchlesiaChewing_anim
+    type: bin
+    start: 0xEF6D00
+    vram: 0x00000000
+  - name: entity_model_MunchlesiaSpitOut_gfx
+    type: bin
+    start: 0xEF72D0
+    vram: 0x0A000000
+  - name: entity_model_MunchlesiaSpitOut_anim
+    type: bin
+    start: 0xEFDD10
+    vram: 0x00000000
+  - name: entity_model_MunchlesiaReset1_gfx
+    type: bin
+    start: 0xEFE180
+    vram: 0x0A000000
+  - name: entity_model_MunchlesiaReset1_anim
+    type: bin
+    start: 0xF04BC0
+    vram: 0x00000000
+  - name: entity_model_CymbalPlant_anim
+    type: bin
+    start: 0xF05030
+    vram: 0x00000000
+  - name: entity_model_CymbalPlant_gfx
+    type: bin
+    start: 0xF05BE0
+    vram: 0x0A000000
+  - name: entity_model_PinkFlower_anim
+    type: bin
+    start: 0xF07280
+    vram: 0x00000000
+  - name: entity_model_PinkFlower_gfx
+    type: bin
+    start: 0xF07DF0
+    vram: 0x0A000000
+  - name: entity_model_SpinningFlower
+    type: bin
+    start: 0xF091F0
+    vram: 0x0A000000
+  - name: entity_model_BombableRock
+    type: bin
+    start: 0xF09F40
+    vram: 0x0A000000
+  - [0xF0B5C0, bin]
 
   - [0x13A0000, pm_sbn, audio]
   - [0x1DE2C40, bin, 1942C40]
