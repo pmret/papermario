@@ -1644,10 +1644,14 @@ __asm__("nop");
 #endif
 
 #if VERSION_PAL
+#define X_800F4C1C 16
+#else
+#define X_800F4C1C 11
+#endif
+
 void func_800F4C1C(s32* userData, s32 x, s32 y) {
-    s32 xPos = x + 16;
+    s32 xPos = x + X_800F4C1C;
     s32 yPos = y + 8;
-    s32 numLines;
     s32 msg;
 
     if (PopupDipMode == 1) {
@@ -1656,24 +1660,13 @@ void func_800F4C1C(s32* userData, s32 x, s32 y) {
         msg = MSG_Menus_0069;
     }
 
-    numLines = get_msg_lines(msg);
-    if (numLines != 1) {
+#if VERSION_PAL
+    if (get_msg_lines(msg) != 1) {
         yPos -= 4;
     }
-    draw_msg(msg, xPos, yPos, 255, MSG_PAL_0F, 0);
-}
-#else
-void func_800F4C1C(s32* userData, s32 x, s32 y) {
-    s32 msg = MSG_Menus_0069;
-    s32 xPos = x + 11;
-    s32 yPos = y + 8;
-
-    if (PopupDipMode == 1) {
-        msg = MSG_Menus_0068;
-    }
-    draw_msg(msg, xPos, yPos, 255, MSG_PAL_0F, 0);
-}
 #endif
+    draw_msg(msg, xPos, yPos, 255, MSG_PAL_0F, 0);
+}
 
 void popup_draw_cost_icon(s32* userData, s32 x, s32 y) {
     s32 hudElement;
