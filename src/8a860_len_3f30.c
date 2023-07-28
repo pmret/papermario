@@ -1549,7 +1549,19 @@ void func_800F48F4(s32* userData, s32 baseX, s32 baseY, s32 width, s32 height, s
 }
 
 #if VERSION_PAL
-INCLUDE_ASM(s32, "8a860_len_3f30", func_800F4944);
+void func_800F4944(s32* userData, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
+    s32 x = baseX;
+    s32 y = baseY + 7;
+
+    if (PopupNotBattle) {
+        s32 msgWidth = get_msg_width(gPopupMenu->unk_33C, 0);
+        s32 msgLines = get_msg_lines(gPopupMenu->unk_33C);
+
+        x += ((gPopupMenu->unk_340 + 144) / 2) - (msgWidth / 2);
+
+        draw_msg(gPopupMenu->unk_33C, x, msgLines != 1 ? y - 4 : y, 255, MSG_PAL_0F, 0);
+    }
+}
 #else
 void func_800F4944(s32* userData, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     s32 msgWidth;
@@ -1573,7 +1585,6 @@ void func_800F4944(s32* userData, s32 baseX, s32 baseY, s32 width, s32 height, s
                 baseX += 72 - (msgWidth / 2);
                 draw_msg(MSG_Menus_0064, baseX, baseY - 4, 255, MSG_PAL_0F, 0);
                 break;
-#if !VERSION_PAL // TODO PAL
             case POPUP_MENU_TRADE_FOR_BADGE:
                 msgWidth = get_msg_width(MSG_Menus_0070, 0);
                 baseX += 64 - (msgWidth / 2);
@@ -1629,17 +1640,8 @@ void func_800F4944(s32* userData, s32 baseX, s32 baseY, s32 width, s32 height, s
                 baseX += 72 - (msgWidth / 2);
                 draw_msg(MSG_Menus_0062, baseX, baseY, 255, MSG_PAL_0F, 0);
                 break;
-#endif
         }
     }
-#if VERSION_PAL
-__asm__("nop");
-__asm__("nop");
-__asm__("nop");
-__asm__("nop");
-__asm__("nop");
-__asm__("nop");
-#endif
 }
 #endif
 
