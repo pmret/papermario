@@ -1470,22 +1470,47 @@ void popup_menu_draw_menu_contents(s32* userData, s32 baseX, s32 baseY, s32 widt
 }
 
 #if VERSION_PAL
-INCLUDE_ASM(s32, "8a860_len_3f30", popup_menu_draw_title_contents);
+void popup_menu_draw_title_contents(s32* userData, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
+    draw_msg(gPopupMenu->unk_330, baseX + gPopupMenu->unk_334, baseY + 2, PopupMenu_Alpha, gPopupMenu->unk_338 == 0 ? MSG_PAL_32 : MSG_PAL_34, DRAW_MSG_STYLE_MENU);
+
+    switch (gPopupMenu->popupType) {
+        case POPUP_MENU_USE_ITEM:
+        case POPUP_MENU_THROW_AWAY_ITEM:
+        case POPUP_MENU_SELL_ITEM:
+        case POPUP_MENU_CHECK_ITEM:
+        case POPUP_MENU_CLAIM_ITEM:
+            switch (gPopupMenu->dipMode) {
+                case 1:
+                    draw_number(gPopupMenu->titleNumber, baseX + 94, baseY + 2, 1, MSG_PAL_32, PopupMenu_Alpha,
+                                DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
+                    draw_number(2, baseX + 114, baseY + 2, 1, MSG_PAL_32, PopupMenu_Alpha,
+                                DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
+                    draw_msg(MSG_MenuTip_0034, baseX + 94, baseY + 2, PopupMenu_Alpha, MSG_PAL_32, DRAW_MSG_STYLE_MENU);
+                    break;
+                case 2:
+                    draw_number(gPopupMenu->titleNumber, baseX + 94, baseY + 2, 1, MSG_PAL_32, PopupMenu_Alpha,
+                                DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
+                    draw_number(3, baseX + 114, baseY + 2, 1, MSG_PAL_32, PopupMenu_Alpha,
+                                DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
+                    draw_msg(MSG_MenuTip_0034, baseX + 94, baseY + 2, PopupMenu_Alpha, MSG_PAL_32, DRAW_MSG_STYLE_MENU);
+                    break;
+            }
+            break;
+    }
+}
 #else
 void popup_menu_draw_title_contents(
     s32* userData, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening)
 {
     switch (gPopupMenu->popupType) {
         case POPUP_MENU_USE_ITEM:
+        case POPUP_MENU_THROW_AWAY_ITEM:
         case POPUP_MENU_SELL_ITEM:
         case POPUP_MENU_CHECK_ITEM:
         case POPUP_MENU_CLAIM_ITEM:
-        case POPUP_MENU_THROW_AWAY_ITEM:
             switch (gPopupMenu->dipMode) {
                 case 0:
-#if !VERSION_PAL // TODO PAL
                     draw_msg(MSG_Menus_Items, baseX + 26, baseY + 2, PopupMenu_Alpha, MSG_PAL_32, DRAW_MSG_STYLE_MENU);
-#endif
                     break;
                 case 1:
                     draw_msg(MSG_Menus_DoubleDip, baseX + 4, baseY + 2, PopupMenu_Alpha, MSG_PAL_32, DRAW_MSG_STYLE_MENU);
@@ -1499,7 +1524,6 @@ void popup_menu_draw_title_contents(
                     break;
             }
             break;
-#if !VERSION_PAL // TODO PAL
         case POPUP_MENU_TRADE_FOR_BADGE:
             draw_msg(MSG_MenuTip_0032, baseX + 27, baseY + 2, PopupMenu_Alpha, MSG_PAL_32, DRAW_MSG_STYLE_MENU);
             break;
@@ -1523,24 +1547,7 @@ void popup_menu_draw_title_contents(
         case POPUP_MENU_POST_OFFICE:
             draw_msg(MSG_Menus_PartyMember, baseX + 8, baseY + 2, PopupMenu_Alpha, MSG_PAL_34, DRAW_MSG_STYLE_MENU);
             break;
-#endif
     }
-
-#if VERSION_PAL // TODO PAL
-    __asm__("nop");
-    __asm__("nop");
-    __asm__("nop");
-    __asm__("nop");
-    __asm__("nop");
-    __asm__("nop");
-    __asm__("nop");
-    __asm__("nop");
-    __asm__("nop");
-    __asm__("nop");
-    __asm__("nop");
-    __asm__("nop");
-    __asm__("nop");
-#endif
 }
 #endif
 
