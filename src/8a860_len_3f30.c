@@ -524,57 +524,6 @@ s32 popup_menu_update(void) {
             posX = D_8010D684;
             posY = D_8010D686;
 
-
-#if VERSION_PAL // TODO PAL diff to line things up
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__(".section .rodata");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__("nop");
-            __asm__(".section .text");
-#else
             switch (gPopupMenu->popupType) {
                 case POPUP_MENU_USE_ITEM:
                 case POPUP_MENU_CHECK_ITEM:
@@ -659,7 +608,6 @@ s32 popup_menu_update(void) {
                 }
                 set_window_update(WINDOW_ID_21, WINDOW_UPDATE_SHOW);
             }
-#endif
 
             if (gPopupMenu->popupType == POPUP_MENU_TRADE_FOR_BADGE) {
                 set_window_update(WINDOW_ID_16, (s32)basic_window_update);
@@ -1514,13 +1462,16 @@ void popup_menu_draw_title_contents(
                     break;
                 case 1:
                     draw_msg(MSG_Menus_DoubleDip, baseX + 4, baseY + 2, PopupMenu_Alpha, MSG_PAL_32, DRAW_MSG_STYLE_MENU);
-                    draw_number(gPopupMenu->titleNumber, baseX + 94, baseY + 2, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_32, PopupMenu_Alpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
+                    draw_number(gPopupMenu->titleNumber, baseX + 94, baseY + 2, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_32,
+                                PopupMenu_Alpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
                     draw_number(2, baseX + 114, baseY + 2, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_32, PopupMenu_Alpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
                     break;
                 case 2:
                     draw_msg(MSG_Menus_TripleDip, baseX + 6, baseY + 2, PopupMenu_Alpha, MSG_PAL_32, DRAW_MSG_STYLE_MENU);
-                    draw_number(gPopupMenu->titleNumber, baseX + 94, baseY + 2, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_32, PopupMenu_Alpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
-                    draw_number(3, baseX + 114, baseY + 2, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_32, PopupMenu_Alpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
+                    draw_number(gPopupMenu->titleNumber, baseX + 94, baseY + 2, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_32,
+                                PopupMenu_Alpha, DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
+                    draw_number(3, baseX + 114, baseY + 2, DRAW_NUMBER_CHARSET_THIN, MSG_PAL_32, PopupMenu_Alpha,
+                                DRAW_NUMBER_STYLE_MONOSPACE | DRAW_NUMBER_STYLE_ALIGN_RIGHT);
                     break;
             }
             break;
