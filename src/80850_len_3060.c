@@ -14,8 +14,14 @@ extern s16 D_8010CD12;
 extern HudScript* DigitHudScripts[10];
 
 extern HudScript HES_StatusHP;
+extern HudScript HES_StatusHP_de;
+extern HudScript HES_StatusHP_fr;
+extern HudScript HES_StatusHP_es;
 extern HudScript HES_StatusHeart;
 extern HudScript HES_StatusFP;
+extern HudScript HES_StatusFP_de;
+extern HudScript HES_StatusFP_fr;
+extern HudScript HES_StatusFP_es;
 extern HudScript HES_StatusFlower;
 extern HudScript HES_Item_CoinSparkleRandom;
 extern HudScript HES_StatusStarPoint;
@@ -299,20 +305,10 @@ void enforce_hpfp_limits(void) {
     }
 }
 
-extern HudScript HES_StatusHP_de;
-extern HudScript HES_StatusHP_fr;
-extern HudScript HES_StatusHP_es;
-extern HudScript D_80106D18;
-extern HudScript D_80106980;
-extern HudScript D_80106A20;
-extern HudScript D_80106A70;
-extern HudScript D_801069D0;
-
 void initialize_status_bar(void) {
     UiStatus* uiStatus = &gUIStatus;
     PlayerData* playerData = &gPlayerData;
     s32 iconIndex;
-    s32 newVar;
 
     uiStatus->drawPosX = 12;
     D_8010CD10 = 0;
@@ -358,121 +354,92 @@ void initialize_status_bar(void) {
 #if VERSION_PAL
     switch (gCurrentLanguage) {
         case LANGUAGE_EN:
-            iconIndex = hud_element_create(&HES_StatusHP);
-            uiStatus->hpIconIndices[0] = iconIndex;
+            iconIndex = uiStatus->hpIconIndices[0] = hud_element_create(&HES_StatusHP);
             break;
         case LANGUAGE_DE:
-            iconIndex = hud_element_create(&HES_StatusHP_de);
-            uiStatus->hpIconIndices[0] = iconIndex;
+            iconIndex = uiStatus->hpIconIndices[0] = hud_element_create(&HES_StatusHP_de);
             break;
         case LANGUAGE_FR:
-            iconIndex = hud_element_create(&HES_StatusHP_fr);
-            uiStatus->hpIconIndices[0] = iconIndex;
+            iconIndex = uiStatus->hpIconIndices[0] = hud_element_create(&HES_StatusHP_fr);
             break;
         case LANGUAGE_ES:
-            iconIndex = hud_element_create(&HES_StatusHP_es);
-            uiStatus->hpIconIndices[0] = iconIndex;
+            iconIndex = uiStatus->hpIconIndices[0] = hud_element_create(&HES_StatusHP_es);
             break;
     }
 
     hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAG_80);
     hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAG_FILTER_TEX);
-
-    iconIndex = hud_element_create(&D_80106D18);
-    uiStatus->hpIconIndices[1] = iconIndex;
-    hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAG_80);
-    hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAG_FILTER_TEX);
-
-    switch (gCurrentLanguage) {
-        case 0:
-            iconIndex = hud_element_create(&D_80106980);
-            uiStatus->fpIconIndices[0] = iconIndex;
-            break;
-        case 1:
-            iconIndex = hud_element_create(&D_801069D0);
-            uiStatus->fpIconIndices[0] = iconIndex;
-            break;
-        case 2:
-            iconIndex = hud_element_create(&D_80106A20);
-            uiStatus->fpIconIndices[0] = iconIndex;
-            break;
-        case 3:
-            iconIndex = hud_element_create(&D_80106A70);
-            uiStatus->fpIconIndices[0] = iconIndex;
-            break;
-    }
-
-    __asm__("nop");
-    __asm__("nop");
-    __asm__("nop");
-    __asm__("nop");
-    __asm__("nop");
-    __asm__("nop");
-    __asm__("nop");
 #else
-    iconIndex = hud_element_create(&HES_StatusHP);
-    uiStatus->hpIconIndices[0] = iconIndex;
-    hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAG_80);
-    hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAG_FILTER_TEX);
-
-    iconIndex = hud_element_create(&HES_StatusHeart);
-    uiStatus->hpIconIndices[1] = iconIndex;
-    hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAG_80);
-    hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAG_FILTER_TEX);
-
-    iconIndex = hud_element_create(&HES_StatusFP);
-    uiStatus->fpIconIndices[0] = iconIndex;
+    uiStatus->hpIconIndices[0] = iconIndex = hud_element_create(&HES_StatusHP);
     hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAG_80);
     hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAG_FILTER_TEX);
 #endif
-    iconIndex = hud_element_create(&HES_StatusFlower);
-    uiStatus->fpIconIndices[1] = iconIndex;
+
+    uiStatus->hpIconIndices[1] = iconIndex = hud_element_create(&HES_StatusHeart);
     hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAG_80);
     hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAG_FILTER_TEX);
 
-    iconIndex = hud_element_create(&HES_StatusCoin);
-    uiStatus->coinIconIndex = iconIndex;
+#if VERSION_PAL
+    switch (gCurrentLanguage) {
+        case LANGUAGE_EN:
+            iconIndex = uiStatus->fpIconIndices[0] = hud_element_create(&HES_StatusFP);
+            break;
+        case LANGUAGE_DE:
+            iconIndex = uiStatus->fpIconIndices[0] = hud_element_create(&HES_StatusFP_de);
+            break;
+        case LANGUAGE_FR:
+            iconIndex = uiStatus->fpIconIndices[0] = hud_element_create(&HES_StatusFP_fr);
+            break;
+        case LANGUAGE_ES:
+            iconIndex = uiStatus->fpIconIndices[0] = hud_element_create(&HES_StatusFP_es);
+            break;
+    }
+
+    hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAG_80);
+    hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAG_FILTER_TEX);
+#else
+    uiStatus->fpIconIndices[0] = iconIndex = hud_element_create(&HES_StatusFP);
+    hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAG_80);
+    hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAG_FILTER_TEX);
+#endif
+
+    uiStatus->fpIconIndices[1] = iconIndex = hud_element_create(&HES_StatusFlower);
     hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAG_80);
     hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAG_FILTER_TEX);
 
-    iconIndex = hud_element_create(&HES_Item_CoinSparkleRandom);
-    uiStatus->coinSparkleIconIndex = iconIndex;
+    uiStatus->coinIconIndex = iconIndex = hud_element_create(&HES_StatusCoin);
     hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAG_80);
     hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAG_FILTER_TEX);
 
-    iconIndex = hud_element_create(&HES_StatusStarPoint);
-    uiStatus->starpointsIconIndex = iconIndex;
+    uiStatus->coinSparkleIconIndex = iconIndex = hud_element_create(&HES_Item_CoinSparkleRandom);
     hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAG_80);
     hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAG_FILTER_TEX);
 
-    iconIndex = hud_element_create(&HES_StatusSPShine);
-    uiStatus->starpointsShineIconIndex = iconIndex;
+    uiStatus->starpointsIconIndex = iconIndex = hud_element_create(&HES_StatusStarPoint);
     hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAG_80);
     hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAG_FILTER_TEX);
 
-    newVar = hud_element_create(&HES_StatusTimes);
-    iconIndex = newVar;
-    uiStatus->iconIndex8 = iconIndex;
+    uiStatus->starpointsShineIconIndex = iconIndex = hud_element_create(&HES_StatusSPShine);
+    hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAG_80);
+    hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAG_FILTER_TEX);
+
+    uiStatus->iconIndex8 = iconIndex = hud_element_create(&HES_StatusTimes);
     hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
     hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAG_FILTER_TEX);
 
-    iconIndex = hud_element_create(&HES_StatusTimes);
-    uiStatus->iconIndex9 = iconIndex;
+    uiStatus->iconIndex9 = iconIndex = hud_element_create(&HES_StatusTimes);
     hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
     hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAG_FILTER_TEX);
 
-    iconIndex = hud_element_create(&HES_StatusTimes);
-    uiStatus->iconIndexA = iconIndex;
+    uiStatus->iconIndexA = iconIndex = hud_element_create(&HES_StatusTimes);
     hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
     hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAG_FILTER_TEX);
 
-    iconIndex = hud_element_create(&HES_StatusTimes);
-    uiStatus->iconIndexB = iconIndex;
+    uiStatus->iconIndexB = iconIndex = hud_element_create(&HES_StatusTimes);
     hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAG_80 | HUD_ELEMENT_FLAG_DISABLED);
     hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAG_FILTER_TEX);
 
-    iconIndex = hud_element_create(&HES_StatusStar1);
-    uiStatus->starIconIndex = iconIndex;
+    uiStatus->starIconIndex = iconIndex = hud_element_create(&HES_StatusStar1);
     hud_element_set_flags(iconIndex, HUD_ELEMENT_FLAG_80);
     hud_element_clear_flags(iconIndex, HUD_ELEMENT_FLAG_FILTER_TEX);
 

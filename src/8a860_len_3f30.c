@@ -315,6 +315,10 @@ void func_800F16CC(void) {
     gPopupState = POPUP_STATE_20;
 }
 
+#if VERSION_PAL
+s32 popup_menu_update(void);
+INCLUDE_ASM(s32, "8a860_len_3f30", popup_menu_update);
+#else
 s32 popup_menu_update(void) {
     s32 posX;
     s32 posY;
@@ -521,7 +525,7 @@ s32 popup_menu_update(void) {
             posY = D_8010D686;
 
 
-#if VERSION_PAL // TODO bullshit diff to line things up
+#if VERSION_PAL // TODO PAL diff to line things up
             __asm__("nop");
             __asm__("nop");
             __asm__("nop");
@@ -1092,6 +1096,7 @@ s32 popup_menu_update(void) {
     gPopupMenu->result = POPUP_RESULT_CHOOSING;
     return 0;
 }
+#endif
 
 void popup_menu_draw_menu_contents(s32* userData, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     s32 x, y;
@@ -1464,6 +1469,9 @@ void popup_menu_draw_menu_contents(s32* userData, s32 baseX, s32 baseY, s32 widt
     }
 }
 
+#if VERSION_PAL
+INCLUDE_ASM(s32, "8a860_len_3f30", popup_menu_draw_title_contents);
+#else
 void popup_menu_draw_title_contents(
     s32* userData, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening)
 {
@@ -1475,7 +1483,7 @@ void popup_menu_draw_title_contents(
         case POPUP_MENU_THROW_AWAY_ITEM:
             switch (gPopupMenu->dipMode) {
                 case 0:
-#if !VERSION_PAL // TODO BULLSHIT
+#if !VERSION_PAL // TODO PAL
                     draw_msg(MSG_Menus_Items, baseX + 26, baseY + 2, PopupMenu_Alpha, MSG_PAL_32, DRAW_MSG_STYLE_MENU);
 #endif
                     break;
@@ -1491,7 +1499,7 @@ void popup_menu_draw_title_contents(
                     break;
             }
             break;
-#if !VERSION_PAL // TODO BULLSHIT
+#if !VERSION_PAL // TODO PAL
         case POPUP_MENU_TRADE_FOR_BADGE:
             draw_msg(MSG_MenuTip_0032, baseX + 27, baseY + 2, PopupMenu_Alpha, MSG_PAL_32, DRAW_MSG_STYLE_MENU);
             break;
@@ -1518,7 +1526,7 @@ void popup_menu_draw_title_contents(
 #endif
     }
 
-#if VERSION_PAL // TODO BULLSHIT
+#if VERSION_PAL // TODO PAL
     __asm__("nop");
     __asm__("nop");
     __asm__("nop");
@@ -1534,11 +1542,15 @@ void popup_menu_draw_title_contents(
     __asm__("nop");
 #endif
 }
+#endif
 
 void func_800F48F4(s32* userData, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     draw_msg(gPopupMenu->descMsg[PopupMenu_SelectedIndex], baseX + 8, baseY, PopupMenu_Alpha, D_8010D690, 0);
 }
 
+#if VERSION_PAL
+INCLUDE_ASM(s32, "8a860_len_3f30", func_800F4944);
+#else
 void func_800F4944(s32* userData, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening) {
     s32 msgWidth;
 
@@ -1561,7 +1573,7 @@ void func_800F4944(s32* userData, s32 baseX, s32 baseY, s32 width, s32 height, s
                 baseX += 72 - (msgWidth / 2);
                 draw_msg(MSG_Menus_0064, baseX, baseY - 4, 255, MSG_PAL_0F, 0);
                 break;
-#if !VERSION_PAL // TODO BULLSHIT
+#if !VERSION_PAL // TODO PAL
             case POPUP_MENU_TRADE_FOR_BADGE:
                 msgWidth = get_msg_width(MSG_Menus_0070, 0);
                 baseX += 64 - (msgWidth / 2);
@@ -1629,7 +1641,28 @@ __asm__("nop");
 __asm__("nop");
 #endif
 }
+#endif
 
+#if VERSION_PAL
+void func_800F4C1C(s32* userData, s32 x, s32 y) {
+    s32 xPos = x + 16;
+    s32 yPos = y + 8;
+    s32 numLines;
+    s32 msg;
+
+    if (PopupDipMode == 1) {
+        msg = MSG_Menus_0068;
+    } else {
+        msg = MSG_Menus_0069;
+    }
+
+    numLines = get_msg_lines(msg);
+    if (numLines != 1) {
+        yPos -= 4;
+    }
+    draw_msg(msg, xPos, yPos, 255, MSG_PAL_0F, 0);
+}
+#else
 void func_800F4C1C(s32* userData, s32 x, s32 y) {
     s32 msg = MSG_Menus_0069;
     s32 xPos = x + 11;
@@ -1640,6 +1673,7 @@ void func_800F4C1C(s32* userData, s32 x, s32 y) {
     }
     draw_msg(msg, xPos, yPos, 255, MSG_PAL_0F, 0);
 }
+#endif
 
 void popup_draw_cost_icon(s32* userData, s32 x, s32 y) {
     s32 hudElement;
