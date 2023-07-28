@@ -5,17 +5,6 @@
 #include "world/partner/watt.h"
 #include "sprite/player.h"
 
-#if VERSION_PAL
-extern Addr i_spy_ROM_START;
-extern Addr i_spy_ROM_END;
-extern Addr pulse_stone_ROM_START;
-extern Addr pulse_stone_ROM_END;
-extern Addr speech_bubble_ROM_START;
-extern Addr speech_bubble_ROM_END;
-extern Addr inspect_icon_ROM_START;
-extern Addr inspect_icon_ROM_END;
-#endif
-
 #ifdef SHIFT
 #define inspect_icon_VRAM inspect_icon_VRAM
 #define speech_bubble_VRAM speech_bubble_VRAM

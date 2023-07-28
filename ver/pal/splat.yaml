@@ -12083,7 +12083,254 @@ segments:
     - [0xE8AFB0, c, gv_01_0_header]
     - [0xE8AFB0, c, gv_01_1_main]
 
+
+# todo: add heaps2
   - [0xE8D120, bin]
+
+  - type: code
+    start: 0xE8D120
+    name: inspect_icon
+    vram: 0x802B7000
+    subsegments:
+    - [auto, c, inspect_icon]
+    - start: 0xE8DB40
+      type: .data
+      name: inspect_icon
+      subsegments:
+      - [0xE8DB40, ci4, inspect_icon, 32, 32]
+      - [0xE8DD40, palette, inspect_icon]
+      - [0xE8DD60, gfx, inspect_icon]
+      - [0xE8DDD8]
+    - [0xE8DEC0]
+  - type: code
+    start: 0xE8DEC0
+    name: speech_bubble
+    vram: 0x802B7000
+    #    vram_of_symbol: world_action_vram_end
+    subsegments:
+    - [auto, c, speech_bubble]
+    - start: 0xE8E5D0
+      type: .data
+      name: speech_bubble
+      subsegments:
+      - [0xE8E5D0, ci4, speech_bubble, 32, 32]
+      - [0xE8E7D0, palette, speech_bubble]
+      - [0xE8E7F0, gfx, speech_bubble]
+      - [0xE8E868]
+    - [0xE8E880]
+  - type: code
+    start: 0xE8E880
+    name: pulse_stone
+    vram: 0x802B7000
+    #    vram_of_symbol: world_action_vram_end
+    subsegments:
+    - [auto, c, pulse_stone]
+    - start: 0xE8EEC0
+      type: .data
+      name: pulse_stone
+      subsegments:
+      - [0xE8EEC0, ci4, pulse_stone_icon, 56, 56]
+      - [0xE8F4E0, palette, pulse_stone_icon]
+      - [0xE8F500, palette, pulse_stone_icon.flash]
+      - [0xE8F520, gfx, pulse_stone_icon]
+      - [0xE8F598]
+    - [0xE8F5C0]
+  - type: code
+    start: 0xE8F5C0
+    name: i_spy
+    vram: 0x802B7000
+    #    vram_of_symbol: world_action_vram_end
+    subsegments:
+    - [auto, c, i_spy]
+    - start: 0xE8FB40
+      type: .data
+      name: i_spy
+      subsegments:
+      - [0xE8FB40, ci4, ispy_icon, 56, 56]
+      - [0xE90160, palette, ispy_icon]
+      - [0xE90180, palette, ispy_icon.2]
+      - [0xE901A0, palette, ispy_icon.3]
+      - [0xE901C0, gfx, ispy_icon]
+      - [0xE90238]
+    - [0xE90270]
+
+  - type: code
+    name: model_clear_render_tasks
+    start: 0xE90270
+    vram: 0x802B7E00
+#    vram_of_symbol: world_misc_vram_end
+    subsegments:
+    - [auto, c, model_clear_render_tasks]
+  - type: code
+    name: world_action_idle
+    dir: world/action
+    start: 0xE90270
+    vram: 0x802B6000
+#    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, idle]
+  - type: code
+    name: world_action_walk
+    dir: world/action
+    start: 0xE906F0
+    vram: 0x802B6000
+#    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, walk]
+  - type: code
+    name: world_action_jump
+    dir: world/action
+    start: 0xE91050
+    vram: 0x802B6000
+#    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, jump]
+  - type: code
+    name: world_action_step_up
+    dir: world/action
+    start: 0xE915E0
+    vram: 0x802B6000
+#    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, step_up]
+  - type: code
+    name: world_action_land
+    dir: world/action
+    start: 0xE91930
+    vram: 0x802B6000
+#    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, land]
+  - type: code
+    name: world_action_hammer
+    dir: world/action
+    start: 0xE91EE0
+    vram: 0x802B6000
+#    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, hammer]
+  - type: code
+    name: world_action_spin
+    dir: world/action
+    start: 0xE92D70
+    vram: 0x802B6000
+#    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, spin]
+  - type: code
+    name: world_action_tornado_jump
+    dir: world/action
+    start: 0xE93720
+    vram: 0x802B6000
+#    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, tornado_jump]
+  - type: code
+    name: world_action_spin_jump
+    dir: world/action
+    start: 0xE93DF0
+    vram: 0x802B6000
+#    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, spin_jump]
+  - type: code
+    name: world_action_slide
+    dir: world/action
+    start: 0xE94520
+    vram: 0x802B6000
+#    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, slide]
+  - type: code
+    name: world_action_hit_fire
+    dir: world/action
+    start: 0xE94CA0
+    vram: 0x802B6000
+#    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, hit_fire]
+  - type: code
+    name: world_action_hit_lava
+    dir: world/action
+    start: 0xE94F50
+    vram: 0x802B6000
+#    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, hit_lava]
+  - type: code
+    name: world_action_knockback
+    dir: world/action
+    start: 0xE95800
+    vram: 0x802B6000
+#    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, knockback]
+  - type: code
+    name: world_action_misc
+    dir: world/action
+    start: 0xE95A40
+    vram: 0x802B6000
+#    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, misc]
+  - type: code
+    name: world_action_use_munchlesia
+    dir: world/action
+    start: 0xE961B0
+    vram: 0x802B6000
+#    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, use_munchlesia]
+  - type: code
+    name: world_action_use_spinning_flower
+    dir: world/action
+    start: 0xE96480
+    vram: 0x802B6000
+#    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, use_spinning_flower]
+  - type: code
+    name: world_action_use_tweester
+    dir: world/action
+    start: 0xE97350
+    vram: 0x802B6000
+#    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, use_tweester]
+  - type: code
+    name: world_action_sneaky_parasol
+    dir: world/action
+    start: 0xE976C0
+    vram: 0x802B6000
+#    follows_vram: texture_memory
+    subsegments:
+    - [auto, c, sneaky_parasol]
+  - type: code
+    dir: entity/default
+    start: 0xE98540
+    vram: 0x802BAE00
+#    follows_vram: model_clear_render_tasks
+    subsegments:
+    - [auto, c, Padlock]
+    - [auto, c, BoardedFloor]
+    - [auto, c, BombableRock]
+  - type: code
+    dir: entity/jan_iwa
+    start: 0xE9A740
+    vram: 0x802BAE00
+#    follows_vram: model_clear_render_tasks
+    subsegments:
+    - [auto, c, Plants1]
+    - [auto, c, Plants2]
+    - [auto, c, ArrowSign]
+  - type: code
+    dir: entity/sbk_omo
+    start: 0xE9C760
+    vram: 0x802BAE00
+#    follows_vram: model_clear_render_tasks
+    subsegments:
+    - [auto, c, Tweester]
+    - [auto, c, StarBoxLauncher]
 
   - name: entity_model_Hammer1Block
     dir: entity/model
