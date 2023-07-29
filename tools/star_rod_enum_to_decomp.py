@@ -12,11 +12,11 @@ def create_enum(file_content, prefix, ordering):
     max_size = 0
 
     if ordering:
-        for (key, value) in re.findall(r"(\S+)\s+=\s+(\S+)", file_content):
+        for key, value in re.findall(r"(\S+)\s+=\s+(\S+)", file_content):
             if len(key) > max_size:
                 max_size = len(key)
     else:
-        for (key, value) in re.findall(r"(\S+)\s+=\s+(\S+)", file_content):
+        for key, value in re.findall(r"(\S+)\s+=\s+(\S+)", file_content):
             if len(value) > max_size:
                 max_size = len(value)
 
@@ -25,7 +25,7 @@ def create_enum(file_content, prefix, ordering):
     else:
         prefix = ""
 
-    for (key, value) in re.findall(r"(\S+)\s+=\s+(\S+)", file_content):
+    for key, value in re.findall(r"(\S+)\s+=\s+(\S+)", file_content):
         if ordering:
             key = (
                 "_".join(re.sub(r"([A-Z]{1,2})", r" \1", key).split())

@@ -1274,7 +1274,6 @@ if __name__ == "__main__":
                     args.vram += 4
     else:
         with open(args.file, "rb") as f:
-
             f.seek(offset)
             loffset = args.offset
             looping = 1

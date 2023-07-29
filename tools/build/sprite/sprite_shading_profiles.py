@@ -93,7 +93,6 @@ def build(
     endian: Literal["big", "little"] = "big",
     matching: bool = True,
 ):
-
     END = ">" if endian == "big" else "<"
 
     with open(input, "r") as f:

@@ -348,7 +348,6 @@ def print_data(vals, indent, needs_name, is_array=False, is_struct=False):
                 if not is_array:
                     line += ","
             else:
-
                 if "flags" in val["name"].lower() or "animations" in val["name"].lower():
                     if val["name"] == "flags":
                         val["fmt"] = "08X"

@@ -65,7 +65,7 @@ class N64SegPm_icons(N64Segment):
 
         IconList = ET.Element("Icons")
 
-        for (_, icon) in enumerate(self.icons):
+        for _, icon in enumerate(self.icons):
             # read yaml entry
             fmt = icon[0]
             name = icon[1]
