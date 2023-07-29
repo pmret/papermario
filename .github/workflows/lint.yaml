@@ -4,7 +4,7 @@ on:
 
 jobs:
   cpp_lint:
-    name: C++ format and lint
+    name: C format and lint
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
