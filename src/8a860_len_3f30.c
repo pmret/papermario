@@ -331,11 +331,11 @@ s32 popup_menu_update(void) {
     s32 one;
     s32 i;
 
-    s32 var_s6 = 0;
     s32 var_s5 = 0;
+    s32 var_s6 = 0; // maybe 6 before 5
     s32 msgWidth;
-    s32 var_s1;
-    s32 var_s2;
+    s32 width2;
+    s32 posX2;
 
     switch (gPopupState) {
         case POPUP_STATE_INIT:
@@ -426,114 +426,117 @@ s32 popup_menu_update(void) {
             gPopupMenu->unk_340 = 0;
 
             switch (gPopupMenu->popupType) {
-                case 0:
-                    gPopupMenu->unk_33C = 0x1D0061;
+                case POPUP_MENU_USE_ITEM:
+                    gPopupMenu->unk_33C = MSG_Menus_0061;
                     switch (gPopupMenu->dipMode) {
                         case 0:
-                            gPopupMenu->unk_330 = 0x1D003F;
+                            gPopupMenu->unk_330 = MSG_Menus_Items;
                             break;
                         case 1:
-                            gPopupMenu->unk_330 = 0x1D0041;
+                            gPopupMenu->unk_330 = MSG_Menus_DoubleDip;
                             break;
                         case 2:
-                            gPopupMenu->unk_330 = 0x1D0042;
+                            gPopupMenu->unk_330 = MSG_Menus_TripleDip;
                             break;
                     }
-                case 2:
-                    gPopupMenu->unk_330 = 0x1D003F;
-                    gPopupMenu->unk_33C = 0x1D0064;
-                case 6:
-                    gPopupMenu->unk_330 = 0x1D003F;
-                    gPopupMenu->unk_33C = 0x1D0066;
-                case 7:
-                    gPopupMenu->unk_330 = 0x1D003F;
-                    gPopupMenu->unk_33C = 0x1D0067;
-                case 12:
-                    var_s6 = 0x91;
-                    var_s5 = 0x91;
-                    gPopupMenu->unk_33C = 0x1D0062;
-                    gPopupMenu->unk_330 = 0x1D003F;
+                case POPUP_MENU_THROW_AWAY_ITEM:
+                    gPopupMenu->unk_330 = MSG_Menus_Items;
+                    gPopupMenu->unk_33C = MSG_Menus_0064;
+                case POPUP_MENU_CHECK_ITEM:
+                    gPopupMenu->unk_330 = MSG_Menus_Items;
+                    gPopupMenu->unk_33C = MSG_Menus_0066;
+                case POPUP_MENU_CLAIM_ITEM:
+                    gPopupMenu->unk_330 = MSG_Menus_Items;
+                    gPopupMenu->unk_33C = MSG_Menus_0067;
+                case POPUP_MENU_USEKEY:
+                    var_s6 = 145;
+                    var_s5 = 145;
+                    gPopupMenu->unk_33C = MSG_Menus_0062;
+                    gPopupMenu->unk_330 = MSG_Menus_Items;
                     break;
-                case 1:
-                    var_s6 = 0x8B;
-                    var_s5 = 0x8B;
-                    gPopupMenu->unk_330 = 0x1D003D;
+                case POPUP_MENU_SWITCH_PARTNER:
+                    var_s6 = 139;
+                    var_s5 = 139;
+                    gPopupMenu->unk_330 = MSG_Menus_PartyMember;
                     gPopupMenu->unk_338 = 1;
-                    gPopupMenu->unk_33C = 0x1D0063;
+                    gPopupMenu->unk_33C = MSG_Menus_0063;
                     break;
-                case 3:
-                    var_s6 = 0xA2;
-                    var_s5 = 0x8C;
-                    gPopupMenu->unk_340 = -0x10;
-                    gPopupMenu->unk_330 = 0x1F0032;
-                    gPopupMenu->unk_33C = 0x1D0070;
+                case POPUP_MENU_TRADE_FOR_BADGE:
+                    var_s6 = 162;
+                    var_s5 = 140;
+                    gPopupMenu->unk_340 = -16;
+                    gPopupMenu->unk_330 = MSG_MenuTip_0032;
+                    gPopupMenu->unk_33C = MSG_Menus_0070;
                     break;
-                case 4:
-                    var_s6 = 0x92;
-                    var_s5 = 0x8C;
+                case POPUP_MENU_UPGRADE_PARTNER:
+                    var_s6 = 146;
+                    var_s5 = 140;
                     gPopupMenu->unk_340 = -8;
-                    gPopupMenu->unk_330 = 0x1D003D;
+                    gPopupMenu->unk_330 = MSG_Menus_PartyMember;
                     gPopupMenu->unk_338 = 1;
-                    gPopupMenu->unk_33C = 0x1D006A;
+                    gPopupMenu->unk_33C = MSG_Menus_006A;
                     break;
-                case 5:
-                    var_s6 = 0xA7;
-                    var_s5 = 0x91;
-                    gPopupMenu->unk_340 = -0x18;
-                    gPopupMenu->unk_330 = 0x1D003F;
-                    gPopupMenu->unk_33C = 0x1D0065;
+                case POPUP_MENU_SELL_ITEM:
+                    var_s6 = 167;
+                    var_s5 = 145;
+                    gPopupMenu->unk_340 = -24;
+                    gPopupMenu->unk_330 = MSG_Menus_Items;
+                    gPopupMenu->unk_33C = MSG_Menus_0065;
                     break;
-                case 8:
-                    var_s6 = 0xAA;
-                    var_s5 = 0xAA;
-                    gPopupMenu->unk_340 = -0x20;
-                    gPopupMenu->unk_330 = 0x1F0033;
-                    gPopupMenu->unk_33C = 0x1D006D;
+                case POPUP_MENU_READ_LETTER:
+                    var_s6 = 170;
+                    var_s5 = 170;
+                    gPopupMenu->unk_340 = -32;
+                    gPopupMenu->unk_330 = MSG_MenuTip_0033;
+                    gPopupMenu->unk_33C = MSG_Menus_006D;
                     break;
-                case 9:
-                    var_s6 = 0x91;
-                    var_s5 = 0x91;
-                    gPopupMenu->unk_330 = 0x1D00D7;
-                    gPopupMenu->unk_33C = 0x1D00D6;
+                case POPUP_MENU_TAKE_FROM_CHEST:
+                    var_s6 = 145;
+                    var_s5 = 145;
+                    gPopupMenu->unk_330 = MSG_Menus_00D7;
+                    gPopupMenu->unk_33C = MSG_Menus_00D6;
                     break;
-                case 10:
-                    var_s6 = 0x8C;
-                    var_s5 = 0x8C;
-                    gPopupMenu->unk_340 = -0x10;
-                    gPopupMenu->unk_330 = 0x1D00CE;
-                    gPopupMenu->unk_33C = 0x1D006C;
+                case POPUP_MENU_READ_DIARY_PAGE:
+                    var_s6 = 140;
+                    var_s5 = 140;
+                    gPopupMenu->unk_340 = -16;
+                    gPopupMenu->unk_330 = MSG_Menus_00CE;
+                    gPopupMenu->unk_33C = MSG_Menus_006C;
                     break;
-                case 11:
-                    var_s6 = 0x95;
-                    var_s5 = 0x95;
-                    gPopupMenu->unk_340 = -0x10;
-                    gPopupMenu->unk_330 = 0x1D00D0;
-                    gPopupMenu->unk_33C = 0x1D006D;
+                case POPUP_MENU_READ_POSTCARD:
+                    var_s6 = 149;
+                    var_s5 = 149;
+                    gPopupMenu->unk_340 = -16;
+                    gPopupMenu->unk_330 = MSG_Menus_00D0;
+                    gPopupMenu->unk_33C = MSG_Menus_006D;
                     break;
-                case 13:
-                    var_s6 = 0x83;
-                    var_s5 = 0x83;
-                    gPopupMenu->unk_330 = 0x1D003D;
+                case POPUP_MENU_POST_OFFICE:
+                    var_s6 = 131;
+                    var_s5 = 131;
+                    gPopupMenu->unk_330 = MSG_Menus_PartyMember;
                     gPopupMenu->unk_338 = 1;
-                    gPopupMenu->unk_33C = 0x1D006F;
+                    gPopupMenu->unk_33C = MSG_Menus_006F;
                     break;
             }
             msgWidth = get_msg_width(gPopupMenu->unk_330, 0);
-            var_s1 = msgWidth + (((var_s5 - msgWidth) * 2) / 5);
-            var_s2 = (var_s5 - var_s1) / 2;
-            gPopupMenu->unk_334 = (var_s1 - msgWidth) / 2;
-            if (gPopupMenu->popupType == 0 && gPopupMenu->dipMode != 0) {
-                var_s1 = 125;
-                var_s2 = (var_s5 - var_s1) / 2;
+            width2 = msgWidth + (((var_s5 - msgWidth) * 2) / 5);
+            posX2 = (var_s5 - width2) / 2;
+            gPopupMenu->unk_334 = (width2 - msgWidth) / 2;
+            if (gPopupMenu->popupType == POPUP_MENU_USE_ITEM && gPopupMenu->dipMode != 0) {
+                width2 = 125;
+                posX2 = (var_s5 - width2) / 2;
                 gPopupMenu->unk_334 = (80 - msgWidth) / 2;
             }
-            set_window_properties(WINDOW_ID_14, posX, posY, var_s6, (PopupMenu_DisplayedEntryCount * LINE_HEIGHT) + 26, 0x14, popup_menu_draw_menu_contents, NULL, -1);
+            set_window_properties(WINDOW_ID_14, posX, posY, var_s6, (PopupMenu_DisplayedEntryCount * LINE_HEIGHT) + 26,
+                                  WINDOW_PRIORITY_20, popup_menu_draw_menu_contents, NULL, -1);
             if (gPopupMenu->unk_338 == 0) {
-                set_window_properties(WINDOW_ID_15, var_s2, -6, var_s1, 0x10, 0x15, popup_menu_draw_title_contents, NULL, 0xE);
+                set_window_properties(WINDOW_ID_15, posX2, -6, width2, 16, WINDOW_PRIORITY_21,
+                                      popup_menu_draw_title_contents, NULL, WINDOW_ID_14);
                 set_window_update(WINDOW_ID_15, 1);
                 set_window_update(WINDOW_ID_17, 2);
             } else {
-                set_window_properties(WINDOW_ID_17, var_s2, -6, var_s1, 0x10, 0x15, popup_menu_draw_title_contents, NULL, 0xE);
+                set_window_properties(WINDOW_ID_17, posX2, -6, width2, 16, WINDOW_PRIORITY_21,
+                                      popup_menu_draw_title_contents, NULL, WINDOW_ID_14);
                 set_window_update(WINDOW_ID_15, 2);
                 set_window_update(WINDOW_ID_17, 1);
             }
@@ -1030,7 +1033,7 @@ s32 popup_menu_update(void) {
             }
 #if VERSION_PAL
             width = get_msg_width(MSG_Menus_006B, 0) + 32;
-            if (get_msg_lines(0x1D006B) == 1) {
+            if (get_msg_lines(MSG_Menus_006B) == 1) {
                 posY = 76;
             } else {
                 posY = 72;
