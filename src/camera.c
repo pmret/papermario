@@ -368,7 +368,7 @@ void func_80032C64(Camera* camera) {
     f32 deltaPosX, deltaPosZ;
     f32 f24, f22, cosYaw, sinYaw;
 
-    rotationRad = camera->trueRotation.x / 180.0f * PI;
+    rotationRad = camera->trueRot.x / 180.0f * PI;
     leadAmount = camera->leadAmount;
     s2 = 0;
     cos_rad(rotationRad);

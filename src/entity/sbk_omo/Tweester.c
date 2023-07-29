@@ -222,28 +222,28 @@ void entity_Tweester_idle(Entity* entity) {
 
     if (data->frameCounter < 100) {
         targetRotationSpeed = 3.5f;
-        delta = (targetRotationSpeed - data->rotationSpeed) / 28.0f;
+        delta = (targetRotationSpeed - data->rotSpeed) / 28.0f;
         if (delta < 0.02) {
             delta = 0.02f;
         }
-        data->rotationSpeed += delta;
-        if (data->rotationSpeed >= targetRotationSpeed){
-            data->rotationSpeed = targetRotationSpeed;
+        data->rotSpeed += delta;
+        if (data->rotSpeed >= targetRotationSpeed){
+            data->rotSpeed = targetRotationSpeed;
         }
     } else {
         targetRotationSpeed = 1.3f;
-        delta = (targetRotationSpeed - data->rotationSpeed) * 0.0625f;
+        delta = (targetRotationSpeed - data->rotSpeed) * 0.0625f;
         if (delta > -0.02) {
             delta = -0.02f;
         }
-        data->rotationSpeed += delta;
-        if (data->rotationSpeed <= targetRotationSpeed){
-            data->rotationSpeed = targetRotationSpeed;
+        data->rotSpeed += delta;
+        if (data->rotSpeed <= targetRotationSpeed){
+            data->rotSpeed = targetRotationSpeed;
             data->frameCounter = 0;
         }
     }
 
-    data->innerWhirlRotY += data->rotationSpeed;
+    data->innerWhirlRotY += data->rotSpeed;
     if (data->innerWhirlRotY > 360.0f) {
         data->innerWhirlRotY = 0.0f;
     }
@@ -263,7 +263,7 @@ void entity_Tweester_idle(Entity* entity) {
     data->outerWhirlTexOffsetX += 4;
     data->outerWhirlTexOffsetY -= 16;
 
-    entity->rotation.y = -gCameras[CAM_DEFAULT].currentYaw;
+    entity->rot.y = -gCameras[CAM_DEFAULT].currentYaw;
 
     if (partnerStatus->partnerActionState == PARTNER_ACTION_NONE || partnerStatus->actingPartner != PARTNER_BOW) {
         if (playerStatus->actionState == ACTION_STATE_USE_TWEESTER) {

@@ -41,7 +41,7 @@ API_CALLABLE(N(FireBarAI_Main)) {
         data->centerPos.x = settings->centerPos.x;
         data->centerPos.y = settings->centerPos.y;
         data->centerPos.z = settings->centerPos.z;
-        data->rotationRate = settings->rotationRate;
+        data->rotRate = settings->rotRate;
         data->firstNpc = settings->firstNpc;
         data->npcCount = settings->npcCount;
         data->callback = settings->callback;
@@ -87,7 +87,7 @@ API_CALLABLE(N(FireBarAI_Main)) {
     if (playerStatus->flags & PS_FLAG_HAZARD_INVINCIBILITY) {
         hitDetected = -1;
     }
-    data->yaw += data->rotationRate;
+    data->yaw += data->rotRate;
     clampedYaw = clamp_angle(data->yaw);
     if (clampedYaw != data->yaw) {
         data->yaw = clampedYaw;
@@ -115,7 +115,7 @@ API_CALLABLE(N(FireBarAI_Main)) {
         }
     } else if ((tempPlayerDist < distToNpc) && !(data->flags & 2)
         && (hitDetected == 0) && (playerStatus->actionState != ACTION_STATE_HIT_FIRE)) {
-        if (data->rotationRate > 0.0f) {
+        if (data->rotRate > 0.0f) {
             if (data->lastDeltaYaw < 0.0f) {
                 if (deltaYaw > 0.0f) {
                     data->soundIndex++;
@@ -144,11 +144,11 @@ void N(FireBarAI_Callback)(FireBarData* data, s32 mode) {
     switch (mode) {
         case FIRE_BAR_SLOW_DOWN:
             if (data->flags & 2) {
-                data->rotationRate *= 0.95f;
+                data->rotRate *= 0.95f;
             }
             break;
         case FIRE_BAR_SPEED_UP:
-            data->rotationRate *= 1.12f;
+            data->rotRate *= 1.12f;
             if (data->soundIndex == 10) {
                 Evt* script = start_script(&N(EVS_FireBar_Defeated), EVT_PRIORITY_1, 0);
                 script->varTable[0] = data->firstNpc;
@@ -157,7 +157,7 @@ void N(FireBarAI_Callback)(FireBarData* data, s32 mode) {
             }
             break;
         case FIRE_BAR_HIT:
-            data->rotationRate = abs(data->settings->rotationRate) * signF(-data->rotationRate);
+            data->rotRate = abs(data->settings->rotRate) * signF(-data->rotRate);
             break;
     }
     return;

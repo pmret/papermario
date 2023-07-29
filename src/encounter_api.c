@@ -698,9 +698,9 @@ ApiStatus SetSelfRotation(Evt* script, s32 isInitialCall) {
     s32 rotY = evt_get_variable(script, *args++);
     s32 rotZ = evt_get_variable(script, *args++);
 
-    self->rotation.x = rotX;
-    self->rotation.y = rotY;
-    self->rotation.z = rotZ;
+    self->rot.x = rotX;
+    self->rot.y = rotY;
+    self->rot.z = rotZ;
 
     return ApiStatus_DONE2;
 }

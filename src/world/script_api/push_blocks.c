@@ -51,8 +51,8 @@ API_CALLABLE(UpdatePushBlockMotion) {
         script->varTable[3] = entity->pos.x;
         script->varTable[4] = entity->pos.y;
         script->varTable[5] = entity->pos.z;
-        script->varTable[9] = entity->rotation.x;
-        script->varTable[12] = entity->rotation.z;
+        script->varTable[9] = entity->rot.x;
+        script->varTable[12] = entity->rot.z;
     }
 
     moveRatio = PushBlockMovePositions[script->functionTemp[0]];
@@ -64,13 +64,13 @@ API_CALLABLE(UpdatePushBlockMotion) {
     entity->pos.z = script->varTable[5] + (script->varTable[8] * moveRatio * BLOCK_GRID_SIZE);
 
     if (script->functionTemp[0] < 12) {
-        entity->rotation.z = script->varTable[12] + (script->varTable[6] * moveRatio * -90.0f);
-        entity->rotation.x = script->varTable[9] + (script->varTable[8] * moveRatio * 90.0f);
+        entity->rot.z = script->varTable[12] + (script->varTable[6] * moveRatio * -90.0f);
+        entity->rot.x = script->varTable[9] + (script->varTable[8] * moveRatio * 90.0f);
         entity->pos.y = entity->pos.y + (sin_deg(moveRatio * 90.0f) * BLOCK_GRID_SIZE * 0.5);
         entity->pos.x = entity->pos.x - (script->varTable[6] * sin_deg(moveRatio * 90.0f) * BLOCK_GRID_SIZE * 0.5);
         entity->pos.z = entity->pos.z - (script->varTable[8] * sin_deg(moveRatio * 90.0f) * BLOCK_GRID_SIZE * 0.5);
     } else {
-        entity->rotation.z = entity->rotation.x = 0.0f;
+        entity->rot.z = entity->rot.x = 0.0f;
     }
 
     gCameras[CAM_DEFAULT].targetPos.x = playerStatus->pos.x;

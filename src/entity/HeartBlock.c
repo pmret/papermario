@@ -107,9 +107,9 @@ void entity_HeartBlockContent__reset(Entity* entity) {
 
     data->unk_0C = 0;
     data->unk_10 = 0;
-    entity->rotation.x = 0.0f;
-    entity->rotation.y = 0.0f;
-    entity->rotation.z = 0.0f;
+    entity->rot.x = 0.0f;
+    entity->rot.y = 0.0f;
+    entity->rot.z = 0.0f;
     entity->scale.y = entity->scale.x;
     entity->scale.z = entity->scale.x;
 
@@ -171,7 +171,7 @@ void entity_HeartBlockContent_reset_data(Entity* entity) {
     entity->scale.x = 1.0f;
     entity->scale.y = 1.0f;
     entity->scale.z = 1.0f;
-    entity->rotation.z = 0.0f;
+    entity->rot.z = 0.0f;
 }
 
 void entity_HeartBlockContent__anim_heal(Entity* entity, s32 arg1) {
@@ -192,7 +192,7 @@ void entity_HeartBlockContent__anim_heal(Entity* entity, s32 arg1) {
             if (data->riseVelocity <= 2.0f) {
                 data->state++;
                 entity->flags &= ~ENTITY_FLAG_ALWAYS_FACE_CAMERA;
-                data->rotationRate = -10.0f;
+                data->rotRate = -10.0f;
                 entity_set_render_script(entity, &Entity_HeartBlockContent_RenderScriptHit);
                 entity->renderSetupFunc = entity_HeartBlockContent_setupGfx;
             }
@@ -203,9 +203,9 @@ void entity_HeartBlockContent__anim_heal(Entity* entity, s32 arg1) {
             if (data->bouncePhase < 0.0f) {
                 data->bouncePhase += 360.0f;
             }
-            entity->rotation.y += data->rotationRate;
-            data->rotationRate += 2.0f;
-            if (data->rotationRate >= 0.0f) {
+            entity->rot.y += data->rotRate;
+            data->rotRate += 2.0f;
+            if (data->rotRate >= 0.0f) {
                 data->sparkleTrailAngle = 0.0f;
                 data->sparkleTrailRadius = 0.0f;
                 data->state++;
@@ -215,7 +215,7 @@ void entity_HeartBlockContent__anim_heal(Entity* entity, s32 arg1) {
                 recover_fp(-1);
                 sfx_play_sound(SOUND_131);
             }
-            data->yawBuffer[data->yawBufferPos] = entity->rotation.y;
+            data->yawBuffer[data->yawBufferPos] = entity->rot.y;
             data->yawBufferPos++;
             if (data->yawBufferPos > ARRAY_COUNT(data->yawBuffer)) {
                 data->yawBufferPos = 0;
@@ -254,13 +254,13 @@ void entity_HeartBlockContent__anim_heal(Entity* entity, s32 arg1) {
             if (data->bouncePhase < 0.0f) {
                 data->bouncePhase += 360.0f;
             }
-            data->rotationRate += 1.0;
-            if (data->rotationRate > 30.0f) {
-                data->rotationRate = 30.0f;
+            data->rotRate += 1.0;
+            if (data->rotRate > 30.0f) {
+                data->rotRate = 30.0f;
             }
-            entity->rotation.y += data->rotationRate;
-            if (entity->rotation.y >= 360.0f) {
-                entity->rotation.y -= 360.0f;
+            entity->rot.y += data->rotRate;
+            if (entity->rot.y >= 360.0f) {
+                entity->rot.y -= 360.0f;
             }
             entity->alpha -= 5;
             if (entity->alpha < 7) {
@@ -269,7 +269,7 @@ void entity_HeartBlockContent__anim_heal(Entity* entity, s32 arg1) {
                     data->state++;
                 }
             }
-            data->yawBuffer[data->yawBufferPos] = entity->rotation.y;
+            data->yawBuffer[data->yawBufferPos] = entity->rot.y;
             data->yawBufferPos++;
             if (data->yawBufferPos > ARRAY_COUNT(data->yawBuffer)) {
                 data->yawBufferPos = 0;

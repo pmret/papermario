@@ -235,8 +235,8 @@ typedef struct Npc {
     /* 0x030 */ f32 animationSpeed;
     /* 0x034 */ f32 renderYaw;
     /* 0x038 */ Vec3f pos;
-    /* 0x044 */ Vec3f rotation;
-    /* 0x050 */ f32 rotationPivotOffsetY;
+    /* 0x044 */ Vec3f rot;
+    /* 0x050 */ f32 rotPivotOffsetY;
     /* 0x054 */ Vec3f scale;
     /* 0x060 */ Vec3f moveToPos;
     /* 0x06C */ Vec3f colliderPos; /* used during collision with player */
@@ -583,7 +583,7 @@ typedef struct Entity {
     /* 0x44 */ void* gfxBaseAddr;
     /* 0x48 */ Vec3f pos;
     /* 0x54 */ Vec3f scale;
-    /* 0x60 */ Vec3f rotation;
+    /* 0x60 */ Vec3f rot;
     /* 0x6C */ f32 shadowPosY;
     /* 0x70 */ Matrix4f inverseTransformMatrix; /* world-to-local */
     /* 0xB0 */ f32 effectiveSize;
@@ -620,7 +620,7 @@ typedef struct Shadow {
     /* 0x0C */ Vec3s* vertexArray;
     /* 0x10 */ Vec3f pos;
     /* 0x1C */ Vec3f scale;
-    /* 0x28 */ Vec3f rotation;
+    /* 0x28 */ Vec3f rot;
     /* 0x34 */ char unk_34[0x4];
     /* 0x38 */ Mtx transformMatrix;
 } Shadow; // size = 0x78
@@ -796,7 +796,7 @@ typedef struct Camera {
     /* 0x078 */ f32 currentBoomLength;
     /* 0x07C */ f32 currentYOffset;
     /* 0x080 */ char unk_80[4];
-    /* 0x084 */ Vec3f trueRotation;
+    /* 0x084 */ Vec3f trueRot;
     /* 0x090 */ f32 currentBlendedYawNegated;
     /* 0x094 */ f32 currentPitch;
     /* 0x098 */ f32 unk_98;
@@ -1071,7 +1071,7 @@ typedef struct AnimatorNode {
     /* 0x04 */ struct AnimatorNode* children[32];
     /* 0x84 */ Vec3f basePos; // ?
     /* 0x90 */ Vec3f pos;
-    /* 0x9C */ Vec3f rotation;
+    /* 0x9C */ Vec3f rot;
     /* 0xA8 */ Vec3f scale;
     /* 0xB4 */ Matrix4f mtx;
     /* 0xF4 */ s16 flags;
@@ -1087,7 +1087,7 @@ typedef struct AnimatorNode {
 typedef struct AnimatorNodeBlueprint {
     /* 0x00 */ void* displayList;
     /* 0x04 */ Vec3f basePos;
-    /* 0x10 */ Vec3f rotation;
+    /* 0x10 */ Vec3f rot;
     /* 0x1C */ char unk_1C[0x4];
 } AnimatorNodeBlueprint; // size = 0x20
 
@@ -1578,8 +1578,8 @@ typedef struct ActorPart {
     /* 0x1A */ Vec3s visualOffset;
     /* 0x20 */ Vec3f partOffsetFloat;
     /* 0x2C */ Vec3f absolutePos;
-    /* 0x38 */ Vec3f rotation;
-    /* 0x44 */ Vec3s rotationPivotOffset;
+    /* 0x38 */ Vec3f rot;
+    /* 0x44 */ Vec3s rotPivotOffset;
     /* 0x4A */ char unk_4A[2];
     /* 0x4C */ Vec3f scale;
     /* 0x58 */ Vec3f currentPos;
@@ -1703,8 +1703,8 @@ typedef struct DecorationTable {
     /* 0x7FC */ s16 posX[16];
     /* 0x81C */ s16 posY[16];
     /* 0x83C */ s16 posZ[16];
-    /* 0x85C */ s8 rotationPivotOffsetX[16];
-    /* 0x86C */ s8 rotationPivotOffsetY[16];
+    /* 0x85C */ s8 rotPivotOffsetX[16];
+    /* 0x86C */ s8 rotPivotOffsetY[16];
     /* 0x87C */ u8 rotX[16];
     /* 0x88C */ u8 rotY[16];
     /* 0x89C */ u8 rotZ[16];
@@ -1846,8 +1846,8 @@ typedef struct Actor {
     /* 0x144 */ Vec3f currentPos;
     /* 0x150 */ Vec3s headOffset;
     /* 0x156 */ Vec3s healthBarPos;
-    /* 0x15C */ Vec3f rotation;
-    /* 0x168 */ Vec3s rotationPivotOffset;
+    /* 0x15C */ Vec3f rot;
+    /* 0x168 */ Vec3s rotPivotOffset;
     /* 0x16E */ char unk_16E[2];
     /* 0x170 */ Vec3f scale;
     /* 0x17C */ Vec3f scaleModifier; /* multiplies normal scale factors componentwise */

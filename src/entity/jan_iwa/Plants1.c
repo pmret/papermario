@@ -36,10 +36,10 @@ void entity_SpinningFlower_setupGfx(s32 entityIndex) {
     Gfx* gfx;
 
     guMtxL2F(sp18, ENTITY_ADDR(entity, Mtx*, &D_0A000B70_E9D470));
-    guRotateF(sp58, data->rotation.x, 1.0f, 0.0f, 0.0f);
-    guRotateF(sp98, data->rotation.z, 0.0f, 0.0f, 1.0f);
+    guRotateF(sp58, data->rot.x, 1.0f, 0.0f, 0.0f);
+    guRotateF(sp98, data->rot.z, 0.0f, 0.0f, 1.0f);
     guMtxCatF(sp58, sp98, sp98);
-    guRotateF(sp58, data->rotation.y, 0.0f, 1.0f, 0.0f);
+    guRotateF(sp58, data->rot.y, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp98, sp58, sp58);
     guMtxCatF(sp58, sp18, sp18);
     guMtxF2L(sp18, &data->unk_30);
@@ -77,8 +77,8 @@ void func_802BB0A0_E2D9D0(Entity* entity) {
             data->unk_18 = 0;
             data->unk_00 = 0;
             data->state = 1;
-            data->rotation.x = 0.0f;
-            data->rotation.z = 0.0f;
+            data->rot.x = 0.0f;
+            data->rot.z = 0.0f;
             break;
         case 1:
             if (!(entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR)) {
@@ -97,7 +97,7 @@ void func_802BB0A0_E2D9D0(Entity* entity) {
             break;
     }
 
-    data->rotation.y = clamp_angle(data->rotation.y + data->spinSpeed);
+    data->rot.y = clamp_angle(data->rot.y + data->spinSpeed);
 
     if (!(entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) &&
         (playerStatus->animFlags & PA_FLAG_SPINNING) &&
@@ -115,7 +115,7 @@ void func_802BB228_E2DB58(Entity* entity) {
     if (data->spinSpeed > 40.0f) {
         data->spinSpeed = 40.0f;
     }
-    data->rotation.y = clamp_angle(data->rotation.y + data->spinSpeed);
+    data->rot.y = clamp_angle(data->rot.y + data->spinSpeed);
 }
 
 void entity_SpinningFlower_init(Entity* entity) {
@@ -155,7 +155,7 @@ void entity_PinkFlowerLight_setupGfx(s32 entityIndex) {
     Matrix4f sp58;
     f32 sinAngle, cosAngle;
 
-    guRotateF(sp58, entity->rotation.y, 0.0f, 1.0f, 0.0f);
+    guRotateF(sp58, entity->rot.y, 0.0f, 1.0f, 0.0f);
     guScaleF(sp18, entity->scale.x, entity->scale.x, entity->scale.x);
     guMtxCatF(sp18, sp58, sp58);
     guMtxL2F(sp18, ENTITY_ADDR(entity, Mtx*, &D_0A001098_E9C598));
@@ -163,7 +163,7 @@ void entity_PinkFlowerLight_setupGfx(s32 entityIndex) {
     sp18[3][1] += 10.0f;
     sp18[3][2] -= 10.0f;
     guMtxCatF(sp58, sp18, sp18);
-    guRotateF(sp58, entity->rotation.z, 0.0f, 0.0f, 1.0f);
+    guRotateF(sp58, entity->rot.z, 0.0f, 0.0f, 1.0f);
     guMtxCatF(sp18, sp58, sp18);
     guRotateF(sp58, data->initialRotY, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp18, sp58, sp18);
@@ -206,7 +206,7 @@ void entity_PinkFlower_init(Entity* entity) {
     newEntity = get_entity_by_index(entityIndex);
     data = newEntity->dataBuf.pinkFlower;
     data->linkedEntityIndex = entity->listIndex;
-    data->initialRotY = newEntity->rotation.y;
+    data->initialRotY = newEntity->rot.y;
 }
 
 void entity_PinkFlowerLight_init(Entity* entity) {
@@ -222,15 +222,15 @@ void entity_PinkFlowerLight_idle(Entity* entity) {
             if (data->state != 0) {
                 data->state = 0;
                 data->timer++;
-                entity->rotation.z = -25.0f;
+                entity->rot.z = -25.0f;
                 entity->scale.x = 1.8f;
                 entity->alpha = 255;
             }
             break;
         case 1:
-            entity->rotation.z += 1.0f;
-            if (entity->rotation.z >= 8.0f) {
-                entity->rotation.z = 8.0f;
+            entity->rot.z += 1.0f;
+            if (entity->rot.z >= 8.0f) {
+                entity->rot.z = 8.0f;
             }
 
             entity->alpha -= 6;
@@ -248,8 +248,8 @@ void entity_PinkFlowerLight_idle(Entity* entity) {
             break;
     }
 
-    data->initialRotY = get_entity_by_index(data->linkedEntityIndex)->rotation.y;
-    entity->rotation.y = gCameras[CAM_DEFAULT].currentYaw;
+    data->initialRotY = get_entity_by_index(data->linkedEntityIndex)->rot.y;
+    entity->rot.y = gCameras[CAM_DEFAULT].currentYaw;
 }
 
 void func_802BB8D4_E2E204(Entity* entity) {

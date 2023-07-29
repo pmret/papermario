@@ -409,7 +409,7 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
             N(effect)->data.peachStarBeam->circleRadius = playerState->distance;
             N(effect)->data.peachStarBeam->beamAlpha = 0;
             N(effect)->data.peachStarBeam->twinkYOffset = 30.0f;
-            N(effect)->data.peachStarBeam->rotationSpeed = 5.0f;
+            N(effect)->data.peachStarBeam->rotSpeed = 5.0f;
             for (i = 0; i < ARRAY_COUNT(N(miscParticlesTimeLeft)); i++) {
                 N(miscParticlesTimeLeft)[i] = rand_int(20);
             }

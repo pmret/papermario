@@ -186,8 +186,8 @@ void game_input_to_move_vector(f32* outAngle, f32* outMagnitude) {
 
 void func_800E24F8(void) {
     Shadow* shadow = get_shadow_by_index(gPlayerStatus.shadowID);
-    f32 x = shadow->rotation.x + 180.0;
-    f32 z = shadow->rotation.z + 180.0;
+    f32 x = shadow->rot.x + 180.0;
+    f32 z = shadow->rot.z + 180.0;
     Camera* camera = &gCameras[CAM_DEFAULT];
     f32 temp;
 

@@ -126,7 +126,7 @@ API_CALLABLE(N(SpinyAI_Main)) {
             }
             npc->pos.y = npc2->pos.y + 25.0;
             npc->pos.z = npc2->pos.z + 1.0;
-            npc->rotation.y = 0.0f;
+            npc->rot.y = 0.0f;
             npc->flags |= NPC_FLAG_8;
             npc->flags &= ~NPC_FLAG_INVISIBLE;
             npc->flags &= ~NPC_FLAG_GRAVITY;

@@ -150,18 +150,18 @@ void entity_StarBoxLauncher_launch(Entity* entity) {
 
             if (entity->pos.y > data->basePosY + 50.0f) {
                 entity->pos.y = data->basePosY + 50.0f;
-                data->maxRotationZ = 2.0f;
+                data->maxRotZ = 2.0f;
                 data->state++;
                 data->riseVelocity = 3.0f;
-                data->rotationZPhase = 90.0f;
+                data->rotZPhase = 90.0f;
             }
             break;
         case 2:
-            entity->rotation.z = data->maxRotationZ * sin_rad(DEG_TO_RAD(data->rotationZPhase));
-            clamp_angle(entity->rotation.z);
-            data->rotationZPhase += 30.0f;
-            if (data->rotationZPhase >= 360.0f) {
-                data->rotationZPhase -= 360.0f;
+            entity->rot.z = data->maxRotZ * sin_rad(DEG_TO_RAD(data->rotZPhase));
+            clamp_angle(entity->rot.z);
+            data->rotZPhase += 30.0f;
+            if (data->rotZPhase >= 360.0f) {
+                data->rotZPhase -= 360.0f;
             }
 
             entity->pos.y += data->riseVelocity * cos_rad(DEG_TO_RAD(data->riseSpeedPhase));
@@ -176,16 +176,16 @@ void entity_StarBoxLauncher_launch(Entity* entity) {
             }
             break;
         case 3:
-            data->maxRotationZ -= 0.1;
-            if (data->maxRotationZ <= 0.0f) {
-                data->maxRotationZ = 0.0f;
+            data->maxRotZ -= 0.1;
+            if (data->maxRotZ <= 0.0f) {
+                data->maxRotZ = 0.0f;
             }
 
-            entity->rotation.z = data->maxRotationZ * sin_rad(DEG_TO_RAD(data->rotationZPhase));
-            clamp_angle(entity->rotation.z);
-            data->rotationZPhase += 30.0f;
-            if (data->rotationZPhase >= 360.0f) {
-                data->rotationZPhase -= 360.0f;
+            entity->rot.z = data->maxRotZ * sin_rad(DEG_TO_RAD(data->rotZPhase));
+            clamp_angle(entity->rot.z);
+            data->rotZPhase += 30.0f;
+            if (data->rotZPhase >= 360.0f) {
+                data->rotZPhase -= 360.0f;
             }
 
             entity_StarBoxLauncher_update_face_anim(entity);
@@ -201,7 +201,7 @@ void entity_StarBoxLauncher_launch(Entity* entity) {
                 data->riseVelocity = 0.0f;
                 data->timer = 8;
                 data->state++;
-                entity->rotation.z = 0.0f;
+                entity->rot.z = 0.0f;
             }
             break;
         case 4:

@@ -1695,9 +1695,9 @@ void update_player_shadow(void) {
     shadowScale = 1024.0f;
     gCollisionStatus.floorBelow = player_raycast_below(raycastYaw, playerStatus->colliderDiameter, &x, &y, &z,
                                                        &shadowScale, &hitRx, &hitRz, &hitDirX, &hitDirZ);
-    shadow->rotation.x = hitRx;
-    shadow->rotation.z = hitRz;
-    shadow->rotation.y = clamp_angle(-camera->currentYaw);
+    shadow->rot.x = hitRx;
+    shadow->rot.z = hitRz;
+    shadow->rot.y = clamp_angle(-camera->currentYaw);
     hitRx += 180.0f;
     hitRz += 180.0f;
 

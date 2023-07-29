@@ -45,7 +45,7 @@ void update_camera_mode_unused(Camera* camera) {
         camera->lookAt_obj.x = camera->lookAt_obj_target.x;
         camera->lookAt_obj.y = camera->lookAt_obj_target.y;
         camera->lookAt_obj.z = camera->lookAt_obj_target.z;
-        camera->trueRotation.x = camera->auxBoomYaw;
+        camera->trueRot.x = camera->auxBoomYaw;
         camera->currentBoomYaw = camera->auxBoomPitch;
         camera->currentBoomLength = camera->auxBoomLength;
         camera->vfov = (10000 / camera->lookAt_dist) / 4;
@@ -62,7 +62,7 @@ void update_camera_mode_unused(Camera* camera) {
         deltaX = deltaX2;
         deltaY = cosBoom * deltaY2 + deltaZ2 * sinBoom;
         deltaZ = sinBoom * boomYaw + deltaZ2 * cosBoom;
-        boomYaw = DEG_TO_RAD(camera->trueRotation.x);
+        boomYaw = DEG_TO_RAD(camera->trueRot.x);
         sinBoom = sin_rad(boomYaw);
         cosBoom = cos_rad(boomYaw);
         deltaZ2 = cosBoom * deltaX - deltaZ * sinBoom;
@@ -94,7 +94,7 @@ void update_camera_mode_5(Camera* camera) {
     if (camera->needsInit) {
         camera->unk_550 = 0.0f;
         camera->unk_70 = 0.0f;
-        camera->trueRotation.x = 0.0f;
+        camera->trueRot.x = 0.0f;
         camera->needsInit = FALSE;
         camera->unk_554 = 0;
         camera->lookAt_obj.x = camera->targetPos.x;
@@ -1099,7 +1099,7 @@ void update_camera_zone_interp(Camera* camera) {
     camera->lookAt_obj.x = camera->lookAt_eye.x + (temp_f26 * temp_f4_4);
     camera->lookAt_obj.z = camera->lookAt_eye.z + (temp_f24_2 * temp_f4_4);
     camera->currentYaw = gCurrentCamConfiguration.boomYaw + D_800A08E0;
-    camera->trueRotation.x = camera->currentYaw;
+    camera->trueRot.x = camera->currentYaw;
     camera->currentBoomLength = gCurrentCamConfiguration.boomLength;
     camera->currentBlendedYawNegated = -gCurrentCamConfiguration.boomYaw;
     camera->currentPitch = -gCurrentCamConfiguration.boomPitch - gCurrentCamConfiguration.viewPitch;

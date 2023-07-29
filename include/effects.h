@@ -833,7 +833,7 @@ typedef struct LightRaysFXData {
     /* 0x50 */ f32 unk_50;
     /* 0x54 */ f32 unk_54;
     /* 0x58 */ f32 unk_58;
-    /* 0x5C */ Vec3f rotation;
+    /* 0x5C */ Vec3f rot;
     /* 0x68 */ f32 unk_68;
     /* 0x6C */ f32 unk_6C;
     /* 0x70 */ Vec3f initialRot;
@@ -1746,7 +1746,7 @@ typedef struct ThrowSpinyFXData {
     /* 0x48 */ f32 gravity;
     /* 0x4C */ f32 unk_4C;
     /* 0x50 */ f32 yaw;
-    /* 0x54 */ f32 rotationSpeed;
+    /* 0x54 */ f32 rotSpeed;
     /* 0x58 */ f32 xScale;
     /* 0x5C */ f32 yScale;
     /* 0x60 */ u32 state;
@@ -2065,7 +2065,7 @@ typedef struct StaticStatusFXData {
     /* 0x18 */ f32 unk_18;
     /* 0x1C */ f32 unk_1C;
     /* 0x20 */ s32 frame; // not visible when negative
-    /* 0x24 */ f32 rotation;
+    /* 0x24 */ f32 rot;
     /* 0x28 */ s32 timeLeft;
     /* 0x2C */ s32 lifetime;
     /* 0x30 */ s32 alpha;
@@ -2168,8 +2168,8 @@ typedef struct PeachStarBeamFXData {
     /* 0x34 */ s32 envA;
     /* 0x38 */ f32 beamScale;
     /* 0x3C */ s32 unk_3C;
-    /* 0x40 */ f32 rotationSpeed;
-    /* 0x44 */ f32 rotationAngle;
+    /* 0x40 */ f32 rotSpeed;
+    /* 0x44 */ f32 rotAngle;
     /* 0x48 */ f32 circleRadius;
     /* 0x4C */ Vec3f circleCenter;
     /* 0x58 */ f32 twinkYOffset;
@@ -2207,7 +2207,7 @@ typedef struct IceShardFXData {
     /* 0x18 */ Color4i primCol;
     /* 0x28 */ Color4i envCol;
     /* 0x38 */ f32 scale;
-    /* 0x3C */ f32 rotation;
+    /* 0x3C */ f32 rot;
     /* 0x40 */ f32 angularVel;
     /* 0x44 */ f32 animFrame;
     /* 0x48 */ f32 animRate;

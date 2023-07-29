@@ -457,9 +457,9 @@ void spr_draw_component(s32 drawOpts, SpriteComponent* component, SpriteAnimComp
         spr_appendGfx_component(
             cacheEntry,
             dx, dy, dz,
-            rotX + component->rotation.x,
-            rotY + component->rotation.y,
-            rotZ + component->rotation.z,
+            rotX + component->rot.x,
+            rotY + component->rot.y,
+            rotZ + component->rot.z,
             component->scale.x,
             component->scale.y,
             component->scale.z,
@@ -528,9 +528,9 @@ void spr_component_update_commands(SpriteComponent* comp, SpriteAnimComponent* a
                     comp->posOffset.z = 0.0f;
                     comp->posOffset.y = 0.0f;
                     comp->posOffset.x = 0.0f;
-                    comp->rotation.z = 0;
-                    comp->rotation.y = 0;
-                    comp->rotation.x = 0;
+                    comp->rot.z = 0;
+                    comp->rot.y = 0;
+                    comp->rot.x = 0;
                     comp->scale.z = 1.0f;
                     comp->scale.y = 1.0f;
                     comp->scale.x = 1.0f;
@@ -653,9 +653,9 @@ void spr_component_update_commands(SpriteComponent* comp, SpriteAnimComponent* a
             comp->posOffset.z = posZ;
         }
         if (changedFlags & 2) {
-            comp->rotation.x = rotX;
-            comp->rotation.y = rotY;
-            comp->rotation.z = rotZ;
+            comp->rot.x = rotX;
+            comp->rot.y = rotY;
+            comp->rot.z = rotZ;
         }
         if (changedFlags & 4) {
             comp->scale.x = scaleX;
@@ -736,9 +736,9 @@ void spr_init_component_anim_state(SpriteComponent* comp, SpriteAnimComponent* a
     comp->compPos.x = 0.0f;
     comp->compPos.y = 0.0f;
     comp->compPos.z = 0.0f;
-    comp->rotation.x = 0.0f;
-    comp->rotation.y = 0.0f;
-    comp->rotation.z = 0.0f;
+    comp->rot.x = 0.0f;
+    comp->rot.y = 0.0f;
+    comp->rot.z = 0.0f;
     comp->scale.x = 1.0f;
     comp->scale.y = 1.0f;
     comp->scale.z = 1.0f;

@@ -1474,9 +1474,9 @@ void render_hud_element(HudElement* hudElement) {
     guScaleF(sp260, hudElement->uniformScale * xScaleFactor * transform->scale.x,
                     hudElement->uniformScale * yScaleFactor * transform->scale.y,
                     transform->scale.z);
-    guRotateF(sp120, transform->rotation.y, 0.0f, 1.0f, 0.0f);
-    guRotateF(sp160, transform->rotation.z, 0.0f, 0.0f, 1.0f);
-    guRotateF(spE0, transform->rotation.x, 1.0f, 0.0f, 0.0f);
+    guRotateF(sp120, transform->rot.y, 0.0f, 1.0f, 0.0f);
+    guRotateF(sp160, transform->rot.z, 0.0f, 0.0f, 1.0f);
+    guRotateF(spE0, transform->rot.x, 1.0f, 0.0f, 0.0f);
     guMtxCatF(sp160, spE0, sp20);
     guMtxCatF(sp20, sp120, spA0);
     guMtxCatF(sp260, sp1E0, sp20);
@@ -2119,9 +2119,9 @@ void hud_element_create_transform_A(s32 id) {
     transform->pos.x = 0.0f;
     transform->pos.y = 0.0f;
     transform->pos.z = 0.0f;
-    transform->rotation.x = 0.0f;
-    transform->rotation.y = 0.0f;
-    transform->rotation.z = 0.0f;
+    transform->rot.x = 0.0f;
+    transform->rot.y = 0.0f;
+    transform->rot.z = 0.0f;
     transform->scale.x = 1.0f;
     transform->scale.y = 1.0f;
     transform->scale.z = 1.0f;
@@ -2141,9 +2141,9 @@ void hud_element_create_transform_B(s32 id) {
     transform->pos.x = 0.0f;
     transform->pos.y = 0.0f;
     transform->pos.z = 0.0f;
-    transform->rotation.x = 0.0f;
-    transform->rotation.y = 0.0f;
-    transform->rotation.z = 0.0f;
+    transform->rot.x = 0.0f;
+    transform->rot.y = 0.0f;
+    transform->rot.z = 0.0f;
     transform->scale.x = 1.0f;
     transform->scale.y = 1.0f;
     transform->scale.z = 1.0f;
@@ -2161,9 +2161,9 @@ void hud_element_create_transform_C(s32 id) {
     transform->pos.x = 0.0f;
     transform->pos.y = 0.0f;
     transform->pos.z = 0.0f;
-    transform->rotation.x = 0.0f;
-    transform->rotation.y = 0.0f;
-    transform->rotation.z = 0.0f;
+    transform->rot.x = 0.0f;
+    transform->rot.y = 0.0f;
+    transform->rot.z = 0.0f;
     transform->scale.x = 1.0f;
     transform->scale.y = 1.0f;
     transform->scale.z = 1.0f;
@@ -2210,9 +2210,9 @@ void hud_element_set_transform_rotation(s32 id, f32 x, f32 y, f32 z) {
     HudTransform* transform = element->hudTransform;
 
     if (element->flags & HUD_ELEMENT_FLAG_TRANSFORM) {
-        transform->rotation.x = x;
-        transform->rotation.y = y;
-        transform->rotation.z = z;
+        transform->rot.x = x;
+        transform->rot.y = y;
+        transform->rot.z = z;
     }
 }
 

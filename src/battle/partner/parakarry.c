@@ -598,7 +598,7 @@ API_CALLABLE(N(FlyAround)) {
         case 3:
             add_vec2D_polar(&state->currentPos.x, &state->currentPos.y, state->speed, state->angle);
             if (state->moveTime == 0) {
-                partner->rotation.z = 0.0f;
+                partner->rot.z = 0.0f;
                 return ApiStatus_DONE2;
             }
             state->moveTime--;

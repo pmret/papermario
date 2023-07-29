@@ -1134,9 +1134,9 @@ s32 make_item_entity(s32 itemID, f32 x, f32 y, f32 z, s32 itemSpawnMode, s32 pic
             shadow->pos.x = x;
             shadow->pos.y = y;
             shadow->pos.z = z;
-            shadow->rotation.x = gGameStatusPtr->playerGroundTraceAngles.x;
-            shadow->rotation.y = 0.0f;
-            shadow->rotation.z = gGameStatusPtr->playerGroundTraceAngles.z;
+            shadow->rot.x = gGameStatusPtr->playerGroundTraceAngles.x;
+            shadow->rot.y = 0.0f;
+            shadow->rot.z = gGameStatusPtr->playerGroundTraceAngles.z;
             set_standard_shadow_scale(shadow, hitDepth * 0.5f);
             break;
     }
@@ -1237,9 +1237,9 @@ s32 make_item_entity_at_player(s32 itemID, s32 category, s32 pickupMsgFlags) {
     shadow->pos.y = posY;
     shadow->pos.z = posZ;
 
-    shadow->rotation.x = gGameStatusPtr->playerGroundTraceAngles.x;
-    shadow->rotation.y = 0.0f;
-    shadow->rotation.z = gGameStatusPtr->playerGroundTraceAngles.z;
+    shadow->rot.x = gGameStatusPtr->playerGroundTraceAngles.x;
+    shadow->rot.y = 0.0f;
+    shadow->rot.z = gGameStatusPtr->playerGroundTraceAngles.z;
     set_standard_shadow_scale(shadow, depth * 0.5f);
 
     item_entity_load(item);
@@ -1366,9 +1366,9 @@ void update_item_entities(void) {
                                 shadow->pos.x = x;
                                 shadow->pos.y = y;
                                 shadow->pos.z = z;
-                                shadow->rotation.x = gGameStatusPtr->playerGroundTraceAngles.x;
-                                shadow->rotation.y = 0.0f;
-                                shadow->rotation.z = gGameStatusPtr->playerGroundTraceAngles.z;
+                                shadow->rot.x = gGameStatusPtr->playerGroundTraceAngles.x;
+                                shadow->rot.y = 0.0f;
+                                shadow->rot.z = gGameStatusPtr->playerGroundTraceAngles.z;
                                 set_standard_shadow_scale(shadow, hitDepth * 0.5f);
                             }
                             break;

@@ -29,7 +29,7 @@ API_CALLABLE(N(SpawnIceShards)) {
         a5 = 4.0f;
         effect->data.iceShard->animFrame = 0.0f;
         effect->data.iceShard->animRate = (rand_int(10) * 0.2) + 0.1;
-        effect->data.iceShard->rotation = i * 35;
+        effect->data.iceShard->rot = i * 35;
         effect->data.iceShard->angularVel = rand_int(10) - 5;
         effect->data.iceShard->vel.x = t1;
         effect->data.iceShard->vel.y = a5;

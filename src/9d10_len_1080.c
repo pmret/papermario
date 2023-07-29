@@ -36,7 +36,7 @@ void update_camera_mode_4(Camera* camera) {
     camera->lookAt_obj_target.z = f4;
     camera->unk_70 = 0.0f;
     camera->currentBoomYaw = 0.0f;
-    camera->trueRotation.x = camera->unk_70;
+    camera->trueRot.x = camera->unk_70;
     camera->currentBoomLength = camera->lookAt_dist * D_8009A5EC;
     camera->currentYOffset = camera->auxBoomPitch * D_8009A5EC;
     if (camera->needsInit) {
@@ -123,7 +123,7 @@ void update_camera_mode_2(Camera *camera) {
     camera->currentBoomLength = camera->lookAt_dist * D_8009A5EC;
     camera->currentYOffset = camera->auxBoomPitch * D_8009A5EC;
     camera->currentBoomYaw = camera->auxPitch;
-    camera->trueRotation.x = camera->unk_70;
+    camera->trueRot.x = camera->unk_70;
     if (camera->needsInit) {
         camera->needsInit = FALSE;
         camera->unk_98 = 0.0f;
@@ -293,12 +293,12 @@ void update_camera_mode_1(Camera* camera) {
 
         f20 = atan2(deltaX, deltaZ2, deltaX2, deltaZ);
         if ((dist2D(deltaX, deltaZ2, deltaX2, deltaZ) < camera->auxBoomLength * 100 / D_8009A5EC)) {
-            f20 = camera->trueRotation.x;
-            camera->trueRotation.x = f20;
+            f20 = camera->trueRot.x;
+            camera->trueRot.x = f20;
         } else {
-            camera->trueRotation.x = f20;
+            camera->trueRot.x = f20;
         }
-        camera->trueRotation.y = f20;
+        camera->trueRot.y = f20;
 
         camera->lookAt_obj.x = camera->lookAt_obj_target.x;
         camera->lookAt_obj.y = camera->lookAt_obj_target.y + camera->currentYOffset;
@@ -365,12 +365,12 @@ void update_camera_mode_1(Camera* camera) {
 
     f20 = atan2(deltaX, deltaZ2, deltaX2, deltaZ);
     if ((dist2D(deltaX, deltaZ2, deltaX2, deltaZ) < camera->auxBoomLength * 100 / D_8009A5EC)) {
-        f20 = camera->trueRotation.x;
+        f20 = camera->trueRot.x;
     } else {
-        camera->trueRotation.x = f20;
+        camera->trueRot.x = f20;
     }
-    camera->trueRotation.y -= get_clamped_angle_diff(f20, camera->trueRotation.y) / 10.0f;
-    f20 = camera->trueRotation.y;
+    camera->trueRot.y -= get_clamped_angle_diff(f20, camera->trueRot.y) / 10.0f;
+    f20 = camera->trueRot.y;
 
     boomYaw = DEG_TO_RAD(camera->currentBoomYaw);
     sinBoom = sin_rad(boomYaw);

@@ -378,7 +378,7 @@ API_CALLABLE(N(UseAbility)) {
                 kooper->flags &= ~NPC_FLAG_IGNORE_PLAYER_COLLISION;
                 partnerStatus->actingPartner = PARTNER_KOOPER;
                 partnerStatus->partnerActionState = PARTNER_ACTION_KOOPER_TOSS;
-                kooper->rotation.z = 0.0f;
+                kooper->rot.z = 0.0f;
                 kooper->planarFlyDist = 0.0f;
                 kooper->moveSpeed = 8.0f;
                 kooper->currentAnim = ANIM_WorldKooper_SpinShell;

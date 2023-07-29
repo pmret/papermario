@@ -57,10 +57,10 @@ void entity_TrumpetPlant_idle(Entity* entity) {
 void entity_TrumpetPlant_create_effect(Entity* entity) {
     f32 xOffset, zOffset, angle;
 
-    angle = DEG_TO_RAD(clamp_angle(entity->rotation.y));
+    angle = DEG_TO_RAD(clamp_angle(entity->rot.y));
     xOffset = -26.0 * cos_rad(angle);
     zOffset = 6.0 * sin_rad(angle);
-    fx_stars_burst(0, entity->pos.x + xOffset, entity->pos.y + 62.0f, entity->pos.z + zOffset, clamp_angle(entity->rotation.y - 90.0), 54.0f, 2);
+    fx_stars_burst(0, entity->pos.x + xOffset, entity->pos.y + 62.0f, entity->pos.z + zOffset, clamp_angle(entity->rot.y - 90.0), 54.0f, 2);
 }
 
 void entity_TrumpetPlant_spawn_coin(Entity* entity) {
@@ -70,12 +70,12 @@ void entity_TrumpetPlant_spawn_coin(Entity* entity) {
     if (data->numCoins < 3) {
         f32 xOffset, zOffset, angle;
 
-        angle = DEG_TO_RAD(clamp_angle(entity->rotation.y));
+        angle = DEG_TO_RAD(clamp_angle(entity->rot.y));
         xOffset = -26.0 * cos_rad(angle);
         zOffset = 6.0 * sin_rad(angle);
 
         if (rand_int(32) > 16) {
-            f32 facingAngle = entity->rotation.y - 110.0f + (data->numCoins % 3) * 30;
+            f32 facingAngle = entity->rot.y - 110.0f + (data->numCoins % 3) * 30;
             data->numCoins++;
             make_item_entity(ITEM_COIN,
                              entity->pos.x + xOffset,
@@ -127,7 +127,7 @@ void func_802BC17C_E2EAAC(Entity* entity) {
 }
 
 s32 entity_Munchlesia_create_child(Entity* entity, EntityBlueprint* EntityBlueprint) {
-    return create_entity(EntityBlueprint, (s32)entity->pos.x, (s32)entity->pos.y, (s32)entity->pos.z, (s32)entity->rotation.y);
+    return create_entity(EntityBlueprint, (s32)entity->pos.x, (s32)entity->pos.y, (s32)entity->pos.z, (s32)entity->rot.y);
 }
 
 void func_802BC220_E2EB50(Entity* entity) {

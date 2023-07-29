@@ -109,10 +109,10 @@ void entity_HiddenPanel_flip_over(Entity* entity) {
 
     yaw = clamp_angle(gCameras[CAM_DEFAULT].currentYaw + 45.0f);
     if (yaw < 90.0f || yaw >= 180.0f && yaw < 270.0f) {
-        rotAngle = entity->rotation.z;
+        rotAngle = entity->rot.z;
         flipAxis = 1;
     } else {
-        rotAngle = entity->rotation.x;
+        rotAngle = entity->rot.x;
         flipAxis = 0;
     }
 
@@ -122,7 +122,7 @@ void entity_HiddenPanel_flip_over(Entity* entity) {
             data->state = 1;
             data->unk_02 = TRUE;
             data->riseInterpPhase = 90.0f;
-            data->rotationSpeed = 65.0f;
+            data->rotSpeed = 65.0f;
             set_time_freeze_mode(TIME_FREEZE_PARTIAL);
             disable_player_static_collisions();
             gPlayerStatusPtr->animFlags |= PA_FLAG_OPENED_HIDDEN_PANEL;
@@ -138,8 +138,8 @@ void entity_HiddenPanel_flip_over(Entity* entity) {
             entity->pos.y += data->riseVelocity * sin_rad(DEG_TO_RAD(data->riseInterpPhase));
             if (entity->pos.y <= data->initialY) {
                 entity->pos.y = data->initialY;
-                entity->rotation.x = 0.0f;
-                entity->rotation.z = 0.0f;
+                entity->rot.x = 0.0f;
+                entity->rot.z = 0.0f;
                 rotAngle = 0.0f;
                 data->timer = 10;
             }
@@ -152,19 +152,19 @@ void entity_HiddenPanel_flip_over(Entity* entity) {
             }
 
             if (data->riseInterpPhase > 110.0f) {
-                rotAngle += data->rotationSpeed;
+                rotAngle += data->rotSpeed;
                 if (rotAngle >= 360.0f) {
                     rotAngle -= 360.0f;
                 }
             }
             break;
         case 2:
-            data->rotationSpeed -= 2.0f;
-            if (data->rotationSpeed <= 0.0f) {
-                data->rotationSpeed = 0.0f;
+            data->rotSpeed -= 2.0f;
+            if (data->rotSpeed <= 0.0f) {
+                data->rotSpeed = 0.0f;
             }
 
-            rotAngle += data->rotationSpeed;
+            rotAngle += data->rotSpeed;
             if (rotAngle >= 360.0f) {
                 rotAngle -= 360.0f;
             }
@@ -174,12 +174,12 @@ void entity_HiddenPanel_flip_over(Entity* entity) {
             }
             break;
         case 3:
-            data->rotationSpeed -= 5.0f;
-            if (data->rotationSpeed <= 0.0f) {
-                data->rotationSpeed = 0.0f;
+            data->rotSpeed -= 5.0f;
+            if (data->rotSpeed <= 0.0f) {
+                data->rotSpeed = 0.0f;
             }
 
-            rotAngle += data->rotationSpeed;
+            rotAngle += data->rotSpeed;
             if (rotAngle >= 360.0f) {
                 rotAngle = 360.0f;
             }
@@ -194,8 +194,8 @@ void entity_HiddenPanel_flip_over(Entity* entity) {
                 data->state++;
 
                 entity->pos.y = data->initialY;
-                entity->rotation.x = 0.0f;
-                entity->rotation.z = 0.0f;
+                entity->rot.x = 0.0f;
+                entity->rot.z = 0.0f;
                 rotAngle = 0.0f;
                 data->timer = 10;
                 exec_ShakeCamX(CAM_DEFAULT, CAM_SHAKE_DECAYING_VERTICAL, 1, 0.2f);
@@ -247,9 +247,9 @@ void entity_HiddenPanel_flip_over(Entity* entity) {
     }
 
     if (flipAxis == 0) {
-        entity->rotation.x = rotAngle;
+        entity->rot.x = rotAngle;
     } else {
-        entity->rotation.z = rotAngle;
+        entity->rot.z = rotAngle;
     }
 
     if (data->spawnedItemIndex >= 0) {
@@ -310,11 +310,11 @@ void entity_HiddenPanel_init(Entity* entity) {
 
     guMtxIdentF(data->entityMatrix);
     guTranslateF(sp18, entity->pos.x, entity->pos.y, entity->pos.z);
-    guRotateF(sp58, entity->rotation.y, 0.0f, 1.0f, 0.0f);
+    guRotateF(sp58, entity->rot.y, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp58, sp18, sp18);
-    guRotateF(sp58, entity->rotation.x, 1.0f, 0.0f, 0.0f);
+    guRotateF(sp58, entity->rot.x, 1.0f, 0.0f, 0.0f);
     guMtxCatF(sp58, sp18, sp18);
-    guRotateF(sp58, entity->rotation.z, 0.0f, 0.0f, 1.0f);
+    guRotateF(sp58, entity->rot.z, 0.0f, 0.0f, 1.0f);
     guMtxCatF(sp58, sp18, sp18);
     guScaleF(sp58, entity->scale.x, entity->scale.y, entity->scale.z);
     guMtxCatF(sp58, sp18, data->entityMatrix);

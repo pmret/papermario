@@ -101,9 +101,9 @@ ApiStatus SetNpcRotation(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    npc->rotation.x = rotX;
-    npc->rotation.y = rotY;
-    npc->rotation.z = rotZ;
+    npc->rot.x = rotX;
+    npc->rot.y = rotY;
+    npc->rot.z = rotZ;
     return ApiStatus_DONE2;
 }
 
@@ -118,7 +118,7 @@ ApiStatus SetNpcRotationPivot(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    npc->rotationPivotOffsetY = value;
+    npc->rotPivotOffsetY = value;
     return ApiStatus_DONE2;
 }
 

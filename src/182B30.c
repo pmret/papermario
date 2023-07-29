@@ -214,12 +214,12 @@ void enable_actor_blur(Actor* actor) {
                 decorationTable->posY[j] = partsTable->currentPos.y;
                 decorationTable->posZ[j] = partsTable->currentPos.z;
                 decorationTable->yaw[j] = actor->yaw;
-                decorationTable->rotationPivotOffsetX[j] = (s32)(actor->rotationPivotOffset.x * actor->scalingFactor);
-                decorationTable->rotationPivotOffsetY[j] = (s32)(actor->rotationPivotOffset.y * actor->scalingFactor);
+                decorationTable->rotPivotOffsetX[j] = (s32)(actor->rotPivotOffset.x * actor->scalingFactor);
+                decorationTable->rotPivotOffsetY[j] = (s32)(actor->rotPivotOffset.y * actor->scalingFactor);
 
-                decorationTable->rotX[j] = clamp_angle(actor->rotation.x) * 0.5f;
-                decorationTable->rotY[j] = clamp_angle(actor->rotation.y) * 0.5f;
-                decorationTable->rotZ[j] = clamp_angle(actor->rotation.z) * 0.5f;
+                decorationTable->rotX[j] = clamp_angle(actor->rot.x) * 0.5f;
+                decorationTable->rotY[j] = clamp_angle(actor->rot.y) * 0.5f;
+                decorationTable->rotZ[j] = clamp_angle(actor->rot.z) * 0.5f;
             }
         }
         partsTable = partsTable->nextPart;
@@ -301,12 +301,12 @@ void enable_player_blur(void) {
         decorationTable->posY[i] = partsTable->currentPos.y;
         decorationTable->posZ[i] = partsTable->currentPos.z;
         decorationTable->yaw[i] = playerActor->yaw;
-        decorationTable->rotationPivotOffsetX[i] = playerActor->rotationPivotOffset.x * playerActor->scalingFactor;
-        decorationTable->rotationPivotOffsetY[i] = playerActor->rotationPivotOffset.y * playerActor->scalingFactor;
+        decorationTable->rotPivotOffsetX[i] = playerActor->rotPivotOffset.x * playerActor->scalingFactor;
+        decorationTable->rotPivotOffsetY[i] = playerActor->rotPivotOffset.y * playerActor->scalingFactor;
 
-        decorationTable->rotX[i] = clamp_angle(playerActor->rotation.x) * 0.5f;
-        decorationTable->rotY[i] = clamp_angle(playerActor->rotation.y) * 0.5f;
-        decorationTable->rotZ[i] = clamp_angle(playerActor->rotation.z) * 0.5f;
+        decorationTable->rotX[i] = clamp_angle(playerActor->rot.x) * 0.5f;
+        decorationTable->rotY[i] = clamp_angle(playerActor->rot.y) * 0.5f;
+        decorationTable->rotZ[i] = clamp_angle(playerActor->rot.z) * 0.5f;
     }
 }
 
@@ -362,12 +362,12 @@ void func_802549F4(Actor* actor) {
         decorationTable->posZ[i] = partsTable->currentPos.z;
         decorationTable->yaw[i] = actor->yaw;
 
-        decorationTable->rotationPivotOffsetX[i] = actor->rotationPivotOffset.x * actor->scalingFactor;
-        decorationTable->rotationPivotOffsetY[i] = actor->rotationPivotOffset.y * actor->scalingFactor;
+        decorationTable->rotPivotOffsetX[i] = actor->rotPivotOffset.x * actor->scalingFactor;
+        decorationTable->rotPivotOffsetY[i] = actor->rotPivotOffset.y * actor->scalingFactor;
 
-        decorationTable->rotX[i] = clamp_angle(actor->rotation.x) * 0.5f;
-        decorationTable->rotY[i] = clamp_angle(actor->rotation.y) * 0.5f;
-        decorationTable->rotZ[i] = clamp_angle(actor->rotation.z) * 0.5f;
+        decorationTable->rotX[i] = clamp_angle(actor->rot.x) * 0.5f;
+        decorationTable->rotY[i] = clamp_angle(actor->rot.y) * 0.5f;
+        decorationTable->rotZ[i] = clamp_angle(actor->rot.z) * 0.5f;
 
         i++;
         if (i >= ARRAY_COUNT(decorationTable->posX)) {
@@ -436,8 +436,8 @@ void appendGfx_player_actor_blur(Actor* actor) {
 
                 yaw = decorationTable->yaw[bufPos];
 
-                pivotOffsetX = decorationTable->rotationPivotOffsetX[bufPos];
-                pivotOffsetY = decorationTable->rotationPivotOffsetY[bufPos];
+                pivotOffsetX = decorationTable->rotPivotOffsetX[bufPos];
+                pivotOffsetY = decorationTable->rotPivotOffsetY[bufPos];
 
                 rotX = decorationTable->rotX[bufPos] * 2;
                 rotY = decorationTable->rotY[bufPos] * 2;
@@ -498,12 +498,12 @@ void func_802550BC(s32 arg0, Actor* actor) {
             decorationTable->posZ[j] = partsTable->currentPos.z;
             decorationTable->yaw[j] = actor->yaw;
 
-            decorationTable->rotationPivotOffsetX[j] = actor->rotationPivotOffset.x;
-            decorationTable->rotationPivotOffsetY[j] = actor->rotationPivotOffset.y;
+            decorationTable->rotPivotOffsetX[j] = actor->rotPivotOffset.x;
+            decorationTable->rotPivotOffsetY[j] = actor->rotPivotOffset.y;
 
-            decorationTable->rotX[j] = clamp_angle(actor->rotation.x) * 0.5f;
-            decorationTable->rotY[j] = clamp_angle(actor->rotation.y) * 0.5f;
-            decorationTable->rotZ[j] = clamp_angle(actor->rotation.z) * 0.5f;
+            decorationTable->rotX[j] = clamp_angle(actor->rot.x) * 0.5f;
+            decorationTable->rotY[j] = clamp_angle(actor->rot.y) * 0.5f;
+            decorationTable->rotZ[j] = clamp_angle(actor->rot.z) * 0.5f;
 
             j++;
             if (j >= ARRAY_COUNT(decorationTable->posX)) {
@@ -535,9 +535,9 @@ void func_802552EC(s32 arg0, Actor* actor) {
     s32 temp;
     s32 flags;
 
-    guRotateF(mtxRotX, actor->rotation.x, 1.0f, 0.0f, 0.0f);
-    guRotateF(mtxRotY, actor->rotation.y, 0.0f, 1.0f, 0.0f);
-    guRotateF(mtxRotZ, actor->rotation.z, 0.0f, 0.0f, 1.0f);
+    guRotateF(mtxRotX, actor->rot.x, 1.0f, 0.0f, 0.0f);
+    guRotateF(mtxRotY, actor->rot.y, 0.0f, 1.0f, 0.0f);
+    guRotateF(mtxRotZ, actor->rot.z, 0.0f, 0.0f, 1.0f);
     guMtxCatF(mtxRotX, mtxRotY, mtxTemp);
     guMtxCatF(mtxTemp, mtxRotZ, mtxRotation);
     guScaleF(mtxScale, actor->scale.x * SPRITE_WORLD_SCALE_D * actor->scalingFactor,
@@ -607,8 +607,8 @@ void func_802552EC(s32 arg0, Actor* actor) {
 
             yaw = decorationTable->yaw[j];
 
-            pivotX = decorationTable->rotationPivotOffsetX[j];
-            pivotY = decorationTable->rotationPivotOffsetY[j];
+            pivotX = decorationTable->rotPivotOffsetX[j];
+            pivotY = decorationTable->rotPivotOffsetY[j];
 
             rotX = decorationTable->rotX[j] * 2;
             rotY = decorationTable->rotY[j] * 2;
@@ -766,7 +766,7 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
                         shadow->pos.x = x1;
                         shadow->pos.y = y1;
                         shadow->pos.z = z1;
-                        shadow->rotation.y = clamp_angle(yaw - camera->currentYaw);
+                        shadow->rot.y = clamp_angle(yaw - camera->currentYaw);
                         set_standard_shadow_scale(shadow, dist);
                         shadow->scale.x *= actorPart->shadowScale;
                     }
@@ -799,7 +799,7 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
             shadow->pos.x = x1;
             shadow->pos.y = y1;
             shadow->pos.z = z1 + bActorOffsets[actor->actorType].shadow;
-            shadow->rotation.y = clamp_angle(actor->yaw - camera->currentYaw);
+            shadow->rot.y = clamp_angle(actor->yaw - camera->currentYaw);
             set_standard_shadow_scale(shadow, dist);
             shadow->scale.x *= actor->shadowScale * actor->scalingFactor;
         }
@@ -920,26 +920,26 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
 
     if (!(actor->flags & ACTOR_FLAG_UPSIDE_DOWN)) {
         guTranslateF(mtxPivotOn,
-            -actor->rotationPivotOffset.x * actor->scalingFactor,
-            -actor->rotationPivotOffset.y * actor->scalingFactor,
-            -actor->rotationPivotOffset.z * actor->scalingFactor);
+            -actor->rotPivotOffset.x * actor->scalingFactor,
+            -actor->rotPivotOffset.y * actor->scalingFactor,
+            -actor->rotPivotOffset.z * actor->scalingFactor);
         guTranslateF(mtxPivotOff,
-            actor->rotationPivotOffset.x * actor->scalingFactor,
-            actor->rotationPivotOffset.y * actor->scalingFactor,
-            actor->rotationPivotOffset.z * actor->scalingFactor);
+            actor->rotPivotOffset.x * actor->scalingFactor,
+            actor->rotPivotOffset.y * actor->scalingFactor,
+            actor->rotPivotOffset.z * actor->scalingFactor);
     } else {
         guTranslateF(mtxPivotOn,
-            -actor->rotationPivotOffset.x * actor->scalingFactor,
-             actor->rotationPivotOffset.y * actor->scalingFactor,
-            -actor->rotationPivotOffset.z * actor->scalingFactor);
+            -actor->rotPivotOffset.x * actor->scalingFactor,
+             actor->rotPivotOffset.y * actor->scalingFactor,
+            -actor->rotPivotOffset.z * actor->scalingFactor);
         guTranslateF(mtxPivotOff,
-             actor->rotationPivotOffset.x * actor->scalingFactor,
-            -actor->rotationPivotOffset.y * actor->scalingFactor,
-             actor->rotationPivotOffset.z * actor->scalingFactor);
+             actor->rotPivotOffset.x * actor->scalingFactor,
+            -actor->rotPivotOffset.y * actor->scalingFactor,
+             actor->rotPivotOffset.z * actor->scalingFactor);
     }
-    guRotateF(mtxRotX, actor->rotation.x, 1.0f, 0.0f, 0.0f);
-    guRotateF(mtxRotY, actor->rotation.y, 0.0f, 1.0f, 0.0f);
-    guRotateF(mtxRotZ, actor->rotation.z, 0.0f, 0.0f, 1.0f);
+    guRotateF(mtxRotX, actor->rot.x, 1.0f, 0.0f, 0.0f);
+    guRotateF(mtxRotY, actor->rot.y, 0.0f, 1.0f, 0.0f);
+    guRotateF(mtxRotZ, actor->rot.z, 0.0f, 0.0f, 1.0f);
     guMtxCatF(mtxRotY, mtxRotX, mtxTemp);
     guMtxCatF(mtxTemp, mtxRotZ, mtxRotation);
     guScaleF(mtxScale,
@@ -1172,30 +1172,30 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
         }
         if (!(actor->flags & ACTOR_FLAG_UPSIDE_DOWN)) {
             guTranslateF(mtxPivotOn,
-                -part->rotationPivotOffset.x * actor->scalingFactor,
-                -part->rotationPivotOffset.y * actor->scalingFactor,
-                -part->rotationPivotOffset.z * actor->scalingFactor);
+                -part->rotPivotOffset.x * actor->scalingFactor,
+                -part->rotPivotOffset.y * actor->scalingFactor,
+                -part->rotPivotOffset.z * actor->scalingFactor);
             guTranslateF(mtxPivotOff,
-                part->rotationPivotOffset.x * actor->scalingFactor,
-                part->rotationPivotOffset.y * actor->scalingFactor,
-                part->rotationPivotOffset.z * actor->scalingFactor);
+                part->rotPivotOffset.x * actor->scalingFactor,
+                part->rotPivotOffset.y * actor->scalingFactor,
+                part->rotPivotOffset.z * actor->scalingFactor);
         } else {
             guTranslateF(mtxPivotOn,
-                -part->rotationPivotOffset.x * actor->scalingFactor,
-                 part->rotationPivotOffset.y * actor->scalingFactor,
-                -part->rotationPivotOffset.z * actor->scalingFactor);
+                -part->rotPivotOffset.x * actor->scalingFactor,
+                 part->rotPivotOffset.y * actor->scalingFactor,
+                -part->rotPivotOffset.z * actor->scalingFactor);
             guTranslateF(mtxPivotOff,
-                 part->rotationPivotOffset.x * actor->scalingFactor,
-                -part->rotationPivotOffset.y * actor->scalingFactor,
-                 part->rotationPivotOffset.z * actor->scalingFactor);
+                 part->rotPivotOffset.x * actor->scalingFactor,
+                -part->rotPivotOffset.y * actor->scalingFactor,
+                 part->rotPivotOffset.z * actor->scalingFactor);
         }
         guTranslateF(mtxTranslate,
             partPosX + part->palAnimPosOffset[0],
             partPosY + part->palAnimPosOffset[1],
             partPosZ);
-        guRotateF(mtxRotX, part->rotation.x, 1.0f, 0.0f, 0.0f);
-        guRotateF(mtxRotY, part->rotation.y, 0.0f, 1.0f, 0.0f);
-        guRotateF(mtxRotZ, part->rotation.z, 0.0f, 0.0f, 1.0f);
+        guRotateF(mtxRotX, part->rot.x, 1.0f, 0.0f, 0.0f);
+        guRotateF(mtxRotY, part->rot.y, 0.0f, 1.0f, 0.0f);
+        guRotateF(mtxRotZ, part->rot.z, 0.0f, 0.0f, 1.0f);
         guMtxCatF(mtxRotY, mtxRotX, mtxTemp);
         guMtxCatF(mtxTemp, mtxRotZ, mtxRotation);
         guScaleF(mtxScale, part->scale.x, part->scale.y * part->verticalStretch, part->scale.z);
@@ -1254,27 +1254,27 @@ void appendGfx_npc_actor_reflection(s32 flipYaw, Actor* actor) {
 
     if (!(actor->flags & ACTOR_FLAG_UPSIDE_DOWN)) {
         guTranslateF(mtxPivotOn,
-            -actor->rotationPivotOffset.x * actor->scalingFactor,
-            -actor->rotationPivotOffset.y * actor->scalingFactor,
-            -actor->rotationPivotOffset.z * actor->scalingFactor);
+            -actor->rotPivotOffset.x * actor->scalingFactor,
+            -actor->rotPivotOffset.y * actor->scalingFactor,
+            -actor->rotPivotOffset.z * actor->scalingFactor);
          guTranslateF(mtxPivotOff,
-             actor->rotationPivotOffset.x * actor->scalingFactor,
-             actor->rotationPivotOffset.y * actor->scalingFactor,
-             actor->rotationPivotOffset.z * actor->scalingFactor);
+             actor->rotPivotOffset.x * actor->scalingFactor,
+             actor->rotPivotOffset.y * actor->scalingFactor,
+             actor->rotPivotOffset.z * actor->scalingFactor);
     } else {
         guTranslateF(mtxPivotOn,
-            -actor->rotationPivotOffset.x * actor->scalingFactor,
-             actor->rotationPivotOffset.y * actor->scalingFactor,
-            -actor->rotationPivotOffset.z * actor->scalingFactor);
+            -actor->rotPivotOffset.x * actor->scalingFactor,
+             actor->rotPivotOffset.y * actor->scalingFactor,
+            -actor->rotPivotOffset.z * actor->scalingFactor);
          guTranslateF(mtxPivotOff,
-             actor->rotationPivotOffset.x * actor->scalingFactor,
-             -actor->rotationPivotOffset.y * actor->scalingFactor,
-             actor->rotationPivotOffset.z * actor->scalingFactor);
+             actor->rotPivotOffset.x * actor->scalingFactor,
+             -actor->rotPivotOffset.y * actor->scalingFactor,
+             actor->rotPivotOffset.z * actor->scalingFactor);
     }
 
-    guRotateF(mtxRotX, actor->rotation.x, 1.0f, 0.0f, 0.0f);
-    guRotateF(mtxRotY, actor->rotation.y, 0.0f, 1.0f, 0.0f);
-    guRotateF(mtxRotZ, actor->rotation.z, 0.0f, 0.0f, 1.0f);
+    guRotateF(mtxRotX, actor->rot.x, 1.0f, 0.0f, 0.0f);
+    guRotateF(mtxRotY, actor->rot.y, 0.0f, 1.0f, 0.0f);
+    guRotateF(mtxRotZ, actor->rot.z, 0.0f, 0.0f, 1.0f);
     guMtxCatF(mtxRotY, mtxRotX, mtxTemp);
     guMtxCatF(mtxTemp, mtxRotZ, mtxRotation);
 
@@ -1322,31 +1322,31 @@ void appendGfx_npc_actor_reflection(s32 flipYaw, Actor* actor) {
 
         if (!(actor->flags & ACTOR_FLAG_UPSIDE_DOWN)) {
             guTranslateF(mtxPivotOn,
-                -part->rotationPivotOffset.x * actor->scalingFactor,
-                -part->rotationPivotOffset.y * actor->scalingFactor,
-                -part->rotationPivotOffset.z * actor->scalingFactor);
+                -part->rotPivotOffset.x * actor->scalingFactor,
+                -part->rotPivotOffset.y * actor->scalingFactor,
+                -part->rotPivotOffset.z * actor->scalingFactor);
             guTranslateF(mtxPivotOff,
-                 part->rotationPivotOffset.x * actor->scalingFactor,
-                 part->rotationPivotOffset.y * actor->scalingFactor,
-                 part->rotationPivotOffset.z * actor->scalingFactor);
+                 part->rotPivotOffset.x * actor->scalingFactor,
+                 part->rotPivotOffset.y * actor->scalingFactor,
+                 part->rotPivotOffset.z * actor->scalingFactor);
         } else {
             guTranslateF(mtxPivotOn,
-                -part->rotationPivotOffset.x * actor->scalingFactor,
-                 part->rotationPivotOffset.y * actor->scalingFactor,
-                -part->rotationPivotOffset.z * actor->scalingFactor);
+                -part->rotPivotOffset.x * actor->scalingFactor,
+                 part->rotPivotOffset.y * actor->scalingFactor,
+                -part->rotPivotOffset.z * actor->scalingFactor);
             guTranslateF(mtxPivotOff,
-                 part->rotationPivotOffset.x * actor->scalingFactor,
-                -part->rotationPivotOffset.y * actor->scalingFactor,
-                 part->rotationPivotOffset.z * actor->scalingFactor);
+                 part->rotPivotOffset.x * actor->scalingFactor,
+                -part->rotPivotOffset.y * actor->scalingFactor,
+                 part->rotPivotOffset.z * actor->scalingFactor);
         }
         guTranslateF(mtxTranslate,
             partPosX + part->palAnimPosOffset[0],
             partPosY + part->palAnimPosOffset[1],
             partPosZ - 1.0f);
 
-        guRotateF(mtxRotX, part->rotation.x, 1.0f, 0.0f, 0.0f);
-        guRotateF(mtxRotY, part->rotation.y, 0.0f, 1.0f, 0.0f);
-        guRotateF(mtxRotZ, part->rotation.z, 0.0f, 0.0f, 1.0f);
+        guRotateF(mtxRotX, part->rot.x, 1.0f, 0.0f, 0.0f);
+        guRotateF(mtxRotY, part->rot.y, 0.0f, 1.0f, 0.0f);
+        guRotateF(mtxRotZ, part->rot.z, 0.0f, 0.0f, 1.0f);
         guMtxCatF(mtxRotY, mtxRotX, mtxTemp);
         guMtxCatF(mtxTemp, mtxRotZ, mtxRotation);
 
@@ -1430,7 +1430,7 @@ void update_player_actor_shadow(void) {
     shadow->pos.x = x;
     shadow->pos.y = y;
     shadow->pos.z = z;
-    shadow->rotation.y = clamp_angle(player->yaw - camera->currentYaw);
+    shadow->rot.y = clamp_angle(player->yaw - camera->currentYaw);
     set_standard_shadow_scale(shadow, distance);
     shadow->scale.x *= player->shadowScale * player->scalingFactor;
 
@@ -1860,17 +1860,17 @@ end:
     guTranslateF(mtxTranslate, playerPosX, playerPosY, playerPosZ);
 
     guTranslateF(mtxPivotOn,
-        -player->rotationPivotOffset.x * player->scalingFactor,
-        -player->rotationPivotOffset.y * player->scalingFactor,
-        -player->rotationPivotOffset.z * player->scalingFactor);
+        -player->rotPivotOffset.x * player->scalingFactor,
+        -player->rotPivotOffset.y * player->scalingFactor,
+        -player->rotPivotOffset.z * player->scalingFactor);
     guTranslateF(mtxPivotOff,
-        player->rotationPivotOffset.x * player->scalingFactor,
-        player->rotationPivotOffset.y * player->scalingFactor,
-        player->rotationPivotOffset.z * player->scalingFactor);
+        player->rotPivotOffset.x * player->scalingFactor,
+        player->rotPivotOffset.y * player->scalingFactor,
+        player->rotPivotOffset.z * player->scalingFactor);
 
-    guRotateF(mtxRotX, player->rotation.x, 1.0f, 0.0f, 0.0f);
-    guRotateF(mtxRotY, player->rotation.y, 0.0f, 1.0f, 0.0f);
-    guRotateF(mtxRotZ, player->rotation.z, 0.0f, 0.0f, 1.0f);
+    guRotateF(mtxRotX, player->rot.x, 1.0f, 0.0f, 0.0f);
+    guRotateF(mtxRotY, player->rot.y, 0.0f, 1.0f, 0.0f);
+    guRotateF(mtxRotZ, player->rot.z, 0.0f, 0.0f, 1.0f);
     guMtxCatF(mtxRotY, mtxRotX, mtxTemp);
     guMtxCatF(mtxTemp, mtxRotZ, mtxRotation);
 
@@ -1912,17 +1912,17 @@ void appendGfx_player_actor_reflection(void* arg0) {
     guTranslateF(mtxTranslate, dx, dy, dz - 1.0f);
 
     guTranslateF(mtxPivotOn,
-        -player->rotationPivotOffset.x * player->scalingFactor,
-        -player->rotationPivotOffset.y * player->scalingFactor,
-        -player->rotationPivotOffset.z * player->scalingFactor);
+        -player->rotPivotOffset.x * player->scalingFactor,
+        -player->rotPivotOffset.y * player->scalingFactor,
+        -player->rotPivotOffset.z * player->scalingFactor);
     guTranslateF(mtxPivotOff,
-        player->rotationPivotOffset.x * player->scalingFactor,
-        player->rotationPivotOffset.y * player->scalingFactor,
-        player->rotationPivotOffset.z * player->scalingFactor);
+        player->rotPivotOffset.x * player->scalingFactor,
+        player->rotPivotOffset.y * player->scalingFactor,
+        player->rotPivotOffset.z * player->scalingFactor);
 
-    guRotateF(mtxRotX, player->rotation.x, 1.0f, 0.0f, 0.0f);
-    guRotateF(mtxRotY, player->rotation.y, 0.0f, 1.0f, 0.0f);
-    guRotateF(mtxRotZ, player->rotation.z, 0.0f, 0.0f, 1.0f);
+    guRotateF(mtxRotX, player->rot.x, 1.0f, 0.0f, 0.0f);
+    guRotateF(mtxRotY, player->rot.y, 0.0f, 1.0f, 0.0f);
+    guRotateF(mtxRotZ, player->rot.z, 0.0f, 0.0f, 1.0f);
     guMtxCatF(mtxRotY, mtxRotX, mtxTemp);
     guMtxCatF(mtxTemp, mtxRotZ, mtxRotation);
     guScaleF(mtxScale,

@@ -70,14 +70,14 @@ API_CALLABLE(N(ImposterFallFromCeiling)) {
         npc->currentAnim = ANIM_WorldBombette_Aftermath;
         npc->jumpScale = 0.8f;
     }
-    npc->rotation.z -= 39.0f;
-    npc->rotation.x -= 33.0f;
+    npc->rot.z -= 39.0f;
+    npc->rot.x -= 33.0f;
     npc->pos.y -= npc->jumpVelocity;
     npc->jumpVelocity += npc->jumpScale;
     if (npc->pos.y <= 0.0f) {
         npc->pos.y = 0.0f;
-        npc->rotation.z = 0.0f;
-        npc->rotation.x = 0.0f;
+        npc->rot.z = 0.0f;
+        npc->rot.x = 0.0f;
         npc->jumpVelocity = 0.0f;
         npc->jumpScale = 0.0f;
         npc->currentAnim = ANIM_WorldBombette_Idle;

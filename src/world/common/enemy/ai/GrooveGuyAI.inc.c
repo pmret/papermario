@@ -23,7 +23,7 @@ void N(GrooveGuyAI_03)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
             enemy->varTable[1] = 0;
             npc->currentAnim = ANIM_GrooveGuy_Anim0C;
             set_npc_yaw(npc, 270.0f);
-            npc->rotation.y = 0.0f;
+            npc->rot.y = 0.0f;
             // fallthrough
         case 1:
             phase = enemy->varTable[1] % 16;
@@ -44,13 +44,13 @@ void N(GrooveGuyAI_03)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
         case 2:
             enemy->varTable[0] = 3;
             enemy->varTable[1] = 0;
-            npc->rotation.y = 0.0f;
+            npc->rot.y = 0.0f;
             npc->currentAnim = ANIM_GrooveGuy_Anim0C;
             // fallthrough
         case 3:
-            npc->rotation.y += 35.0;
-            if (npc->rotation.y > 360.0) {
-                npc->rotation.y -= 360.0;
+            npc->rot.y += 35.0;
+            if (npc->rot.y > 360.0) {
+                npc->rot.y -= 360.0;
             }
             enemy->varTable[1]++;
             if (enemy->varTable[1] >= 0x2E) {
@@ -59,7 +59,7 @@ void N(GrooveGuyAI_03)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
             break;
     }
     if (enemy->varTable[0] == 4) {
-        npc->rotation.y = 0.0f;
+        npc->rot.y = 0.0f;
         set_npc_yaw(npc, 270.0f);
         script->functionTemp[0] = 0;
     }

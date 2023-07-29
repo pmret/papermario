@@ -50,10 +50,10 @@ API_CALLABLE(N(SetSquirtAngle)) {
         partner->state.goalPos.x, partner->state.goalPos.y
     );
 
-    partner->rotation.z = (partner->state.angle - 90.0f) * 0.25f;
+    partner->rot.z = (partner->state.angle - 90.0f) * 0.25f;
 
-    if (partner->rotation.z < 0.0f) {
-        partner->rotation.z = 0.0f;
+    if (partner->rot.z < 0.0f) {
+        partner->rot.z = 0.0f;
     }
 
     return ApiStatus_DONE2;
@@ -315,7 +315,7 @@ API_CALLABLE(N(ProcessTidalWave)) {
             }
 
             state->angle = clamp_angle(state->angle + (state->bounceDivisor * 0.5));
-            partner->rotation.z = clamp_angle(state->angle - 315.0f);
+            partner->rot.z = clamp_angle(state->angle - 315.0f);
             partner->scale.z = partner->scale.y = partner->scale.x = partner->scale.x - 0.06;
             if (partner->scale.x < 1.0) {
                 partner->scale.x = 1.0f;
@@ -357,7 +357,7 @@ API_CALLABLE(N(ProcessTidalWave)) {
             sEffect->data.waterFountain->unk_3C = partner->scale.x;
             sEffect->data.waterFountain->unk_40 = partner->scale.x;
             if (state->moveTime == 0) {
-                partner->rotation.z = 0.0f;
+                partner->rot.z = 0.0f;
                 sEffect->flags |= FX_INSTANCE_FLAG_DISMISS;
                 return ApiStatus_DONE2;
             }

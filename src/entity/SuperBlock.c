@@ -58,7 +58,7 @@ void entity_upgrade_block_init(Entity* entity) {
     BlockData* data = entity->dataBuf.block;
 
     entity_base_block_init(entity);
-    entity->rotation.y += 180.0f;
+    entity->rot.y += 180.0f;
     data->gameFlagIndex = 0xFFFF;
     data->childEntityIndex = -1;
 }
@@ -190,8 +190,8 @@ void entity_SuperBlockContent_idle(Entity* entity) {
         entity->renderSetupFunc = NULL;
     }
 
-    entity->rotation.y = clamp_angle(entity->rotation.y + 3.0);
-    data->yawBuffer[data->yawBufferPos] = entity->rotation.y;
+    entity->rot.y = clamp_angle(entity->rot.y + 3.0);
+    data->yawBuffer[data->yawBufferPos] = entity->rot.y;
 
     data->yawBufferPos++;
     if (data->yawBufferPos > ARRAY_COUNT(data->yawBuffer)) {

@@ -195,9 +195,9 @@ API_CALLABLE(N(update_effect)) {
     posY = actor->currentPos.y;
     posZ = actor->currentPos.z;
 
-    rotX = actor->rotation.x;
-    rotY = actor->rotation.y + actor->yaw;
-    rotZ = actor->rotation.z;
+    rotX = actor->rot.x;
+    rotY = actor->rot.y + actor->yaw;
+    rotZ = actor->rot.z;
 
     actorPart = get_actor_part(actor, 1);
     if (actorPart->currentAnimation == ANIM_BigLanternGhost_Anim0C) {

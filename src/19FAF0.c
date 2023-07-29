@@ -2090,19 +2090,19 @@ ApiStatus func_802752AC(Evt* script, s32 isInitialCall) {
             if (playerState->moveTime == 0) {
                 sfx_play_sound_at_position(SOUND_160, SOUND_SPACE_MODE_0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
                 set_animation(ACTOR_PLAYER, 0, playerState->animJumpFall);
-                player->rotationPivotOffset.y = 14;
-                player->rotation.z -= 66.0f;
+                player->rotPivotOffset.y = 14;
+                player->rot.z -= 66.0f;
                 playerState->moveTime = 7;
                 script->functionTemp[0] = 2;
             }
             break;
         case 2:
-            player->rotationPivotOffset.y = 14;
-            player->rotation.z -= 66.0f;
+            player->rotPivotOffset.y = 14;
+            player->rot.z -= 66.0f;
             playerState->moveTime--;
             if (playerState->moveTime == 0) {
-                player->rotation.z = 0.0f;
-                player->rotationPivotOffset.y = 0;
+                player->rot.z = 0.0f;
+                player->rotPivotOffset.y = 0;
                 set_animation(ACTOR_PLAYER, 0, playerState->animJumpLand);
                 return ApiStatus_DONE1;
             }
@@ -2293,7 +2293,7 @@ ApiStatus func_80275F00(Evt* script, s32 isInitialCall) {
         case 20:
             playerState->moveTime = 1;
             set_animation(ACTOR_PLAYER, 1, 0x1000C);
-            player->rotation.y = 0.0f;
+            player->rot.y = 0.0f;
             playerState->unk_24 = 90.0f;
             playerState->bounceDivisor = fabsf(playerState->unk_18.x - playerState->unk_18.y) / 16.5;
             playerState->unk_28 = 360 / playerState->moveTime;
@@ -2359,8 +2359,8 @@ ApiStatus func_80275F00(Evt* script, s32 isInitialCall) {
             playerState->unk_18.y = player->currentPos.y;
             playerState->unk_24 += playerState->unk_28;
             playerState->unk_24 = clamp_angle(playerState->unk_24);
-            player->rotation.y += 133.0f;
-            player->rotation.y = clamp_angle(player->rotation.y);
+            player->rot.y += 133.0f;
+            player->rot.y = clamp_angle(player->rot.y);
             if (gBattleStatus.flags1 & BS_FLAGS1_2000) {
                 return ApiStatus_DONE2;
             }
@@ -2387,14 +2387,14 @@ ApiStatus func_80275F00(Evt* script, s32 isInitialCall) {
             playerState->unk_24 += playerState->unk_28;
             playerState->unk_24 = clamp_angle(playerState->unk_24);
             set_animation(ACTOR_PLAYER, 0, playerState->animJumpFall);
-            player->rotation.y += 133.0f;
-            player->rotation.y = clamp_angle(player->rotation.y);
+            player->rot.y += 133.0f;
+            player->rot.y = clamp_angle(player->rot.y);
             playerState->moveTime--;
             if (playerState->moveTime == 0) {
                 playerState->acceleration = 1.8f;
                 playerState->velocity = -(playerState->unk_18.x - playerState->unk_18.y);
                 player->currentPos.y = playerState->goalPos.y;
-                player->rotation.y = 0.0f;
+                player->rot.y = 0.0f;
                 set_animation(ACTOR_PLAYER, 0, playerState->animJumpLand);
                 play_movement_dust_effects(2, player->currentPos.x, player->currentPos.y, player->currentPos.z, player->yaw);
                 return ApiStatus_DONE1;
@@ -2436,12 +2436,12 @@ ApiStatus func_80275F00(Evt* script, s32 isInitialCall) {
             playerState->unk_24 += playerState->unk_28;
             playerState->unk_24 = clamp_angle(playerState->unk_24);
             set_animation(ACTOR_PLAYER, 0, playerState->animJumpFall);
-            player->rotation.y += 133.0f;
-            player->rotation.y = clamp_angle(player->rotation.y);
+            player->rot.y += 133.0f;
+            player->rot.y = clamp_angle(player->rot.y);
             playerState->moveTime--;
             if (playerState->moveTime == 0) {
                 player->currentPos.y = playerState->goalPos.y;
-                player->rotation.y = 0.0f;
+                player->rot.y = 0.0f;
                 set_animation(ACTOR_PLAYER, 0, playerState->animJumpLand);
                 playerState->acceleration = 1.8f;
                 playerState->velocity = -(playerState->unk_18.x - playerState->unk_18.y);

@@ -111,7 +111,7 @@ void update_entities(void) {
                         }
 
                         if (entity->flags & ENTITY_FLAG_ALWAYS_FACE_CAMERA) {
-                            entity->rotation.y = -gCameras[gCurrentCameraID].currentYaw;
+                            entity->rot.y = -gCameras[gCurrentCameraID].currentYaw;
                         }
 
                         if (!(entity->flags & ENTITY_FLAG_SKIP_UPDATE_TRANSFORM_MATRIX)) {
@@ -150,7 +150,7 @@ void update_entities(void) {
                 }
 
                 if (entity->flags & ENTITY_FLAG_ALWAYS_FACE_CAMERA) {
-                    entity->rotation.y = -gCameras[gCurrentCameraID].currentYaw;
+                    entity->rot.y = -gCameras[gCurrentCameraID].currentYaw;
                 }
 
                 if (!gGameStatusPtr->disableScripts) {
@@ -214,7 +214,7 @@ void update_shadows(void) {
 
             if (!(shadow->flags & ENTITY_FLAG_SKIP_UPDATE)) {
                 if (shadow->flags & ENTITY_FLAG_ALWAYS_FACE_CAMERA) {
-                    shadow->rotation.y = -gCameras[gCurrentCameraID].currentYaw;
+                    shadow->rot.y = -gCameras[gCurrentCameraID].currentYaw;
                 }
 
                 update_shadow_transform_matrix(shadow);
@@ -483,9 +483,9 @@ void update_entity_transform_matrix(Entity* entity) {
     }
 
     guTranslateF(sp58, entity->pos.x, entity->pos.y, entity->pos.z);
-    guRotateF(spD8, entity->rotation.x, 1.0f, 0.0f, 0.0f);
-    guRotateF(sp118, entity->rotation.y, 0.0f, 1.0f, 0.0f);
-    guRotateF(sp158, entity->rotation.z, 0.0f, 0.0f, 1.0f);
+    guRotateF(spD8, entity->rot.x, 1.0f, 0.0f, 0.0f);
+    guRotateF(sp118, entity->rot.y, 0.0f, 1.0f, 0.0f);
+    guRotateF(sp158, entity->rot.z, 0.0f, 0.0f, 1.0f);
     guMtxCatF(sp158, spD8, sp18);
     guMtxCatF(sp18, sp118, sp98);
     guScaleF(sp198, entity->scale.x, entity->scale.y, entity->scale.z);
@@ -504,9 +504,9 @@ void update_shadow_transform_matrix(Shadow* shadow) {
     Matrix4f sp198;
 
     guTranslateF(sp58, shadow->pos.x, shadow->pos.y, shadow->pos.z);
-    guRotateF(sp118, shadow->rotation.x, 1.0f, 0.0f, 0.0f);
-    guRotateF(spD8, shadow->rotation.y, 0.0f, 1.0f, 0.0f);
-    guRotateF(sp158, shadow->rotation.z, 0.0f, 0.0f, 1.0f);
+    guRotateF(sp118, shadow->rot.x, 1.0f, 0.0f, 0.0f);
+    guRotateF(spD8, shadow->rot.y, 0.0f, 1.0f, 0.0f);
+    guRotateF(sp158, shadow->rot.z, 0.0f, 0.0f, 1.0f);
     guMtxCatF(sp158, sp118, sp98);
     guMtxCatF(spD8, sp98, sp98);
     guScaleF(sp198, shadow->scale.x, shadow->scale.y, shadow->scale.z);
@@ -519,10 +519,10 @@ void update_entity_inverse_rotation_matrix(Entity* entity) {
     Matrix4f sp18;
     Matrix4f sp58;
 
-    guRotateF(sp18, -entity->rotation.y, 0.0f, 1.0f, 0.0f);
-    guRotateF(sp58, -entity->rotation.z, 0.0f, 0.0f, 1.0f);
+    guRotateF(sp18, -entity->rot.y, 0.0f, 1.0f, 0.0f);
+    guRotateF(sp58, -entity->rot.z, 0.0f, 0.0f, 1.0f);
     guMtxCatF(sp18, sp58, sp18);
-    guRotateF(sp58, -entity->rotation.x, 1.0f, 0.0f, 0.0f);
+    guRotateF(sp58, -entity->rot.x, 1.0f, 0.0f, 0.0f);
     guMtxCatF(sp18, sp58, entity->inverseTransformMatrix);
 
     entity->effectiveSize = sqrtf(((SQ(entity->aabb.x) + SQ(entity->aabb.z)) * 0.25f) + SQ(entity->aabb.y));
@@ -1264,9 +1264,9 @@ s32 create_entity(EntityBlueprint* bp, ...) {
     entity->pos.x = x;
     entity->pos.y = y;
     entity->pos.z = z;
-    entity->rotation.x = 0.0f;
-    entity->rotation.y = rotY;
-    entity->rotation.z = 0.0f;
+    entity->rot.x = 0.0f;
+    entity->rot.y = rotY;
+    entity->rot.z = 0.0f;
     entity->scale.x = 1.0f;
     entity->scale.y = 1.0f;
     entity->scale.z = 1.0f;
@@ -1631,9 +1631,9 @@ void update_entity_shadow_position(Entity* entity) {
         shadow->pos.z = entity->pos.z;
         shadow->pos.y = rayY;
         entity->shadowPosY = rayY;
-        shadow->rotation.x = hitYaw;
-        shadow->rotation.z = hitPitch;
-        shadow->rotation.y = entity->rotation.y;
+        shadow->rot.x = hitYaw;
+        shadow->rot.z = hitPitch;
+        shadow->rot.y = entity->rot.y;
 
         if (entity->pos.y < rayY) {
             shadow->flags |= ENTITY_FLAG_SKIP_UPDATE;

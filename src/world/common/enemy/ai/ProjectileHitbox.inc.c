@@ -187,9 +187,9 @@ API_CALLABLE(N(ProjectileAI_Main)) {
                         enemy->unk_10.x = npc->pos.x;
                         enemy->unk_10.y = npc->pos.y;
                         enemy->unk_10.z = npc->pos.z;
-                        npc->rotation.x = 0.0f;
-                        npc->rotation.y = 0.0f;
-                        npc->rotation.z = 0.0f;
+                        npc->rot.x = 0.0f;
+                        npc->rot.y = 0.0f;
+                        npc->rot.z = 0.0f;
                         npc->moveSpeed = aiSettings->moveSpeed;
                         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
                         npc->jumpVelocity = aiSettings->alertRadius;
@@ -241,7 +241,7 @@ API_CALLABLE(N(ProjectileAI_Main)) {
 
             if (phi_s6 == 0) {
                 if (enemy->varTable[1] & 1) {
-                    npc->rotation.z += 40.0;
+                    npc->rot.z += 40.0;
                 }
                 npc_move_heading(npc, npc->moveSpeed, npc->yaw);
                 npc->pos.y += npc->jumpVelocity;
@@ -367,7 +367,7 @@ API_CALLABLE(N(ProjectileAI_Reflect)) {
                 return ApiStatus_DONE2;
             }
             if (enemy->varTable[1] & 1) {
-                npc->rotation.z += 60.0;
+                npc->rot.z += 60.0;
             }
             break;
     }

@@ -59,7 +59,7 @@ EffectInstance* ice_shard_main(
     data->envCol.a = 255;
     data->animFrame = 0;
     data->animRate = (rand_int(1) * 2 - 1) * 0.25 * (rand_int(4) * 0.1 + 0.1);
-    data->rotation = rand_int(359);
+    data->rot = rand_int(359);
     data->vel.x = rand_int(10) - 5;
     data->vel.y = rand_int(10) - 5;
     data->vel.z = rand_int(10) - 5;
@@ -109,7 +109,7 @@ void ice_shard_update(EffectInstance* effect) {
     data->pos.x += data->vel.x;
     data->pos.y += data->vel.y;
     data->pos.z += data->vel.z;
-    data->rotation += data->angularVel;
+    data->rot += data->angularVel;
 
     if (unk_00 >= 2 && data->pos.y < 0.0f && data->vel.y < 0.0f) {
         data->pos.y = 0.0f;
@@ -148,7 +148,7 @@ void ice_shard_appendGfx(void* effect) {
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
-    guRotateF(sp20, data->rotation, 0.0f, 0.0f, 1.0f);
+    guRotateF(sp20, data->rot, 0.0f, 0.0f, 1.0f);
     guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);

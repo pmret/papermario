@@ -126,7 +126,7 @@ API_CALLABLE(N(UnkFunc62)) {
                 actor->currentPos.y = state->goalPos.y;
             }
 
-            actor->rotation.z = -atan2(oldActorX, -oldActorY, actor->currentPos.x, -actor->currentPos.y);
+            actor->rot.z = -atan2(oldActorX, -oldActorY, actor->currentPos.x, -actor->currentPos.y);
             state->unk_18.y = actor->currentPos.y;
             if (state->moveArcAmplitude < 3) {
                 phi_f20_2 = state->velocity;

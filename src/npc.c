@@ -127,10 +127,10 @@ s32 create_npc_impl(NpcBlueprint* blueprint, AnimID* animList, s32 isPeachNpc) {
     npc->colliderPos.x = 0.0f;
     npc->colliderPos.y = 0.0f;
     npc->colliderPos.z = 0.0f;
-    npc->rotationPivotOffsetY = 0.0f;
-    npc->rotation.x = 0.0f;
-    npc->rotation.y = 0.0f;
-    npc->rotation.z = 0.0f;
+    npc->rotPivotOffsetY = 0.0f;
+    npc->rot.x = 0.0f;
+    npc->rot.y = 0.0f;
+    npc->rot.z = 0.0f;
     npc->homePos.x = 0.0f;
     npc->homePos.y = 0.0f;
     npc->homePos.z = 0.0f;
@@ -710,9 +710,9 @@ void update_npcs(void) {
                                 shadow->pos.x = x;
                                 shadow->pos.y = y;
                                 shadow->pos.z = z;
-                                shadow->rotation.x = hitYaw;
-                                shadow->rotation.y = npc->renderYaw;
-                                shadow->rotation.z = hitPitch;
+                                shadow->rot.x = hitYaw;
+                                shadow->rot.y = npc->renderYaw;
+                                shadow->rot.z = hitPitch;
                                 shadow->scale.x *= npc->shadowScale;
                                 npc->flags &= ~NPC_FLAG_DIRTY_SHADOW;
                             }
@@ -826,28 +826,28 @@ void appendGfx_npc(void* data) {
         guMtxCatF(mtx2, mtx1, mtx1);
     }
 
-    if (npc->rotationPivotOffsetY != 0.0f) {
-        guTranslateF(mtx2, 0.0f, npc->rotationPivotOffsetY, 0.0f);
+    if (npc->rotPivotOffsetY != 0.0f) {
+        guTranslateF(mtx2, 0.0f, npc->rotPivotOffsetY, 0.0f);
         guMtxCatF(mtx2, mtx1, mtx1);
     }
 
-    if (npc->rotation.y != 0.0f) {
-        guRotateF(mtx2, npc->rotation.y, 0.0f, 1.0f, 0.0f);
+    if (npc->rot.y != 0.0f) {
+        guRotateF(mtx2, npc->rot.y, 0.0f, 1.0f, 0.0f);
         guMtxCatF(mtx2, mtx1, mtx1);
     }
 
-    if (npc->rotation.x != 0.0f) {
-        guRotateF(mtx2, npc->rotation.x, 1.0f, 0.0f, 0.0f);
+    if (npc->rot.x != 0.0f) {
+        guRotateF(mtx2, npc->rot.x, 1.0f, 0.0f, 0.0f);
         guMtxCatF(mtx2, mtx1, mtx1);
     }
 
-    if (npc->rotation.z != 0.0f) {
-        guRotateF(mtx2, npc->rotation.z, 0.0f, 0.0f, 1.0f);
+    if (npc->rot.z != 0.0f) {
+        guRotateF(mtx2, npc->rot.z, 0.0f, 0.0f, 1.0f);
         guMtxCatF(mtx2, mtx1, mtx1);
     }
 
-    if (npc->rotationPivotOffsetY != 0.0f) {
-        guTranslateF(mtx2, 0.0f, -npc->rotationPivotOffsetY, 0.0f);
+    if (npc->rotPivotOffsetY != 0.0f) {
+        guTranslateF(mtx2, 0.0f, -npc->rotPivotOffsetY, 0.0f);
         guMtxCatF(mtx2, mtx1, mtx1);
     }
 
@@ -879,8 +879,8 @@ void appendGfx_npc(void* data) {
             mtx_ident_mirror_y(mtx2);
             guMtxCatF(mtx2, mtx1, mtx1);
         }
-        if ((npc->rotation.y != 0.0f) || (npc->rotation.x != 0.0f) || (npc->rotation.z != 0.0f)) {
-            guRotateRPYF(mtx2, npc->rotation.x, npc->rotation.y, npc->rotation.z);
+        if ((npc->rot.y != 0.0f) || (npc->rot.x != 0.0f) || (npc->rot.z != 0.0f)) {
+            guRotateRPYF(mtx2, npc->rot.x, npc->rot.y, npc->rot.z);
             guMtxCatF(mtx2, mtx1, mtx1);
         }
 
@@ -911,8 +911,8 @@ void appendGfx_npc(void* data) {
         mtx_ident_mirror_y(mtx2);
         guMtxCatF(mtx2, mtx1, mtx1);
 
-        if (npc->rotation.y != 0.0f || npc->rotation.x != 0.0f || npc->rotation.z != 0.0f) {
-            guRotateRPYF(mtx2, npc->rotation.x, npc->rotation.y, npc->rotation.z);
+        if (npc->rot.y != 0.0f || npc->rot.x != 0.0f || npc->rot.z != 0.0f) {
+            guRotateRPYF(mtx2, npc->rot.x, npc->rot.y, npc->rot.z);
             guMtxCatF(mtx2, mtx1, mtx1);
         }
 
@@ -1157,16 +1157,16 @@ void appendGfx_npc_blur(void* data) {
             yaw = npc->renderYaw;
             guTranslateF(sp20, x, y, z);
 
-            if (npc->rotation.y != 0.0f) {
-                guRotateF(sp60, npc->rotation.y, 0.0f, 1.0f, 0.0f);
+            if (npc->rot.y != 0.0f) {
+                guRotateF(sp60, npc->rot.y, 0.0f, 1.0f, 0.0f);
                 guMtxCatF(sp60, sp20, sp20);
             }
-            if (npc->rotation.x != 0.0f) {
-                guRotateF(sp60, npc->rotation.y, 0.0f, 1.0f, 0.0f);
+            if (npc->rot.x != 0.0f) {
+                guRotateF(sp60, npc->rot.y, 0.0f, 1.0f, 0.0f);
                 guMtxCatF(sp60, sp20, sp20);
             }
-            if (npc->rotation.z != 0.0f) {
-                guRotateF(sp60, npc->rotation.y, 0.0f, 1.0f, 0.0f);
+            if (npc->rot.z != 0.0f) {
+                guRotateF(sp60, npc->rot.y, 0.0f, 1.0f, 0.0f);
                 guMtxCatF(sp60, sp20, sp20);
             }
 

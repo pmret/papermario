@@ -465,8 +465,8 @@ API_CALLABLE(N(UseAbility)) {
         case BLAST_STATE_FLY:
             npc->pos.y += npc->jumpVelocity;
             npc->jumpVelocity -= npc->jumpScale;
-            npc->rotation.z -= (script->functionTemp[2] * 79) / 2;
-            npc->rotation.x -= (script->functionTemp[2] * 67) / 2;
+            npc->rot.z -= (script->functionTemp[2] * 79) / 2;
+            npc->rot.x -= (script->functionTemp[2] * 67) / 2;
             if (script->functionTemp[1] != 0) {
                 script->functionTemp[1]--;
                 break;
@@ -498,8 +498,8 @@ API_CALLABLE(N(UseAbility)) {
             if (npc->jumpVelocity < -8.0) {
                 npc->jumpVelocity = -8.0f;
             }
-            npc->rotation.z -= (script->functionTemp[2] * 79) / 2;
-            npc->rotation.x -= (script->functionTemp[2] * 67) / 2;
+            npc->rot.z -= (script->functionTemp[2] * 79) / 2;
+            npc->rot.x -= (script->functionTemp[2] * 67) / 2;
             break;
     }
 
@@ -520,8 +520,8 @@ API_CALLABLE(N(UseAbility)) {
             N(IsBlasting) = FALSE;
             N(TriggeredEarlyDetonation) = FALSE;
             npc->pos.y = playerStatus->pos.y;
-            npc->rotation.x = 0.0f;
-            npc->rotation.z = 0.0f;
+            npc->rot.x = 0.0f;
+            npc->rot.z = 0.0f;
             npc->currentAnim = ANIM_WorldBombette_Idle;
             partner_clear_player_tracking(npc);
             if (N(PlayingFuseSound)) {
@@ -539,8 +539,8 @@ API_CALLABLE(N(UseAbility)) {
             partnerStatus->actingPartner = PARTNER_NONE;
             npc->jumpVelocity = 0.0f;
             npc->pos.y = playerStatus->pos.y;
-            npc->rotation.x = 0.0f;
-            npc->rotation.z = 0.0f;
+            npc->rot.x = 0.0f;
+            npc->rot.z = 0.0f;
             npc->currentAnim = ANIM_WorldBombette_Idle;
             npc->pos.x = playerStatus->pos.x;
             npc->pos.y = playerStatus->pos.y;
@@ -676,8 +676,8 @@ void N(pre_battle)(Npc* bombette) {
 
         bombette->jumpVelocity = 0.0f;
         bombette->pos.y = playerStatus->pos.y;
-        bombette->rotation.x = 0.0f;
-        bombette->rotation.z = 0.0f;
+        bombette->rot.x = 0.0f;
+        bombette->rot.z = 0.0f;
         bombette->currentAnim = ANIM_WorldBombette_Idle;
         partner_clear_player_tracking(bombette);
         disable_npc_blur(bombette);

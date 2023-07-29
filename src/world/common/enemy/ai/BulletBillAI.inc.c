@@ -68,7 +68,7 @@ API_CALLABLE(N(BulletBillAI_Main)) {
             npc->pos.x = NPC_DISPOSE_POS_X;
             npc->pos.y = NPC_DISPOSE_POS_Y;
             npc->pos.z = NPC_DISPOSE_POS_Z;
-            npc->rotation.y = 0.0f;
+            npc->rot.y = 0.0f;
             npc->duration = 0;
             npc->flags |= NPC_FLAG_INVISIBLE;
             npc->flags &= ~NPC_FLAG_DONT_UPDATE_SHADOW_Y;

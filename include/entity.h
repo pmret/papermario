@@ -163,7 +163,7 @@ typedef struct HeartBlockContentData {
     /* 0x026 */ s16 unk_26;
     /* 0x028 */ f32 yawBuffer[10];
     /* 0x050 */ f32 unk_50;
-    /* 0x054 */ f32 rotationRate;
+    /* 0x054 */ f32 rotRate;
     /* 0x058 */ Mtx unk_58;
     /* 0x098 */ Mtx unk_98;
 } HeartBlockContentData; // size = 0xD8
@@ -171,7 +171,7 @@ typedef struct HeartBlockContentData {
 typedef struct WoodenCrateData {
     /* 0x000 */ s32 itemID;
     /* 0x004 */ u16 globalFlagIndex;
-    /* 0x006 */ u8  unk_06[2];
+    /* 0x006 */ u8 unk_06[2];
     /* 0x008 */ Gfx** fragmentsGfx;
     /* 0x00C */ f32 basePosY;
     /* 0x010 */ s8 fragmentRebounds[36];
@@ -179,7 +179,7 @@ typedef struct WoodenCrateData {
     /* 0x058 */ u8 fragmentRotX[36]; // scaled to map [0,255] -> [0,360]
     /* 0x07C */ u8 fragmentRotY[36]; // scaled to map [0,255] -> [0,360]
     /* 0x0A0 */ u8 fragmentLateralSpeed[36]; // scaled to map [0,255] -> [0,25.5]
-    /* 0x0C4 */ f32 fragmentRotationSpeed[36];
+    /* 0x0C4 */ f32 fragmentRotSpeed[36];
     /* 0x154 */ f32 fragmentPosX[36];
     /* 0x1E4 */ f32 fragmentPosY[36];
     /* 0x274 */ f32 fragmentPosZ[36];
@@ -237,7 +237,7 @@ typedef struct HiddenPanelData {
     /* 0x24 */ f32 initialY;
     /* 0x28 */ f32 riseVelocity;
     /* 0x2C */ f32 riseInterpPhase;
-    /* 0x30 */ f32 rotationSpeed;
+    /* 0x30 */ f32 rotSpeed;
     /* 0x34 */ Matrix4f entityMatrix;
     /* 0x74 */ u16 modelID;
     /* 0x76 */ char unk_76[0x2];
@@ -252,7 +252,7 @@ typedef struct PadlockData {
     /* 0x00 */ f32 pushSpeed;
     /* 0x04 */ f32 shacklePos;
     /* 0x08 */ f32 fallSpeed;
-    /* 0x0C */ f32 rotationSpeed;
+    /* 0x0C */ f32 rotSpeed;
     /* 0x10 */ u8 blinkCounter;
     /* 0x11 */ s8 timer;
     /* 0x12 */ s8 state;
@@ -269,7 +269,7 @@ typedef struct BoardedFloorData {
     /* 0x022 */ u8 fragmentRotX[13];
     /* 0x02F */ u8 fragmentRotY[13];
     /* 0x03C */ u8 fragmentLateralSpeed[13];
-    /* 0x04C */ f32 fragmentRotationSpeed[13];
+    /* 0x04C */ f32 fragmentRotSpeed[13];
     /* 0x080 */ f32 fragmentPosX[13];
     /* 0x0B4 */ f32 fragmentPosY[13];
     /* 0x0E8 */ f32 fragmentPosZ[13];
@@ -284,7 +284,7 @@ typedef struct BombableRockData {
     /* 0x14 */ u8 fragmentRotX[6];
     /* 0x1A */ u8 fragmentRotY[6];
     /* 0x20 */ u8 fragmentLateralSpeed[6];
-    /* 0x28 */ f32 fragmentRotationSpeed[6];
+    /* 0x28 */ f32 fragmentRotSpeed[6];
     /* 0x40 */ f32 fragmentPosX[6];
     /* 0x58 */ f32 fragmentPosY[6];
     /* 0x70 */ f32 fragmentPosZ[6];
@@ -298,7 +298,7 @@ typedef struct TweesterData {
     /* 0x01 */ s8 faceAnimState;
     /* 0x02 */ s8 faceAnimTimer;
     /* 0x03 */ s8 faceAnimTexOffset;
-    /* 0x04 */ f32 rotationSpeed;
+    /* 0x04 */ f32 rotSpeed;
     /* 0x08 */ f32 innerWhirlRotY;
     /* 0x0C */ f32 outerWhirlRotY;
     /* 0x10 */ Mtx mtxInnerWhirl;
@@ -331,8 +331,8 @@ typedef struct StarBoxLauncherData {
     /* 0x10 */ f32 basePosY;
     /* 0x14 */ f32 riseSpeedPhase;
     /* 0x18 */ f32 riseVelocity;
-    /* 0x1C */ f32 rotationZPhase;
-    /* 0x20 */ f32 maxRotationZ;
+    /* 0x1C */ f32 rotZPhase;
+    /* 0x20 */ f32 maxRotZ;
 } StarBoxLauncherData; // size = 0x24
 
 typedef struct CymbalPlantData {
@@ -353,7 +353,7 @@ typedef struct PinkFlowerData {
 typedef struct SpinningFlowerData {
     /* 0x00 */ s16 unk_00;
     /* 0x02 */ s8 state;
-    /* 0x04 */ Vec3f rotation;
+    /* 0x04 */ Vec3f rot;
     /* 0x10 */ s32 unk_10;
     /* 0x14 */ f32 spinSpeed;
     /* 0x18 */ s32 unk_18;

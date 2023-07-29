@@ -59,7 +59,7 @@ API_CALLABLE(N(AnimateChestSize)) {
     entity->scale.y = script->functionTemp[1] / 60.0f;
     entity->scale.z = script->functionTemp[1] / 60.0f;
 
-    entity->rotation.y = (1.0f - cos_rad(entity->scale.y * PI)) * 990.0 / 2.0;
+    entity->rot.y = (1.0f - cos_rad(entity->scale.y * PI)) * 990.0 / 2.0;
 
     script->functionTemp[1]--;
     if (~script->functionTemp[1] == 0) { //TODO remove ~ optimization

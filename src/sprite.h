@@ -44,7 +44,7 @@ typedef struct SpriteComponent {
     /* 0x18 */ s32 currentPalette;
     /* 0x1C */ Vec3f posOffset;
     /* 0x28 */ Vec3f compPos;
-    /* 0x34 */ Vec3i rotation;
+    /* 0x34 */ Vec3i rot;
     /* 0x40 */ Vec3f scale;
     /* 0x4C */ s32 imgfxIdx;
 } SpriteComponent; // size = 0x50

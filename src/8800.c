@@ -191,7 +191,7 @@ void render_frame(s32 isSecondPass) {
 
         camera->unkMatrix = &gDisplayContext->matrixStack[gMatrixListPos];
         matrixListPos = gMatrixListPos++;
-        guRotate(&gDisplayContext->matrixStack[matrixListPos], -camera->trueRotation.x, 0.0f, 1.0f, 0.0f);
+        guRotate(&gDisplayContext->matrixStack[matrixListPos], -camera->trueRot.x, 0.0f, 1.0f, 0.0f);
         camera->vpAlt.vp.vtrans[0] = camera->vp.vp.vtrans[0] + gGameStatusPtr->unk_82;
         camera->vpAlt.vp.vtrans[1] = camera->vp.vp.vtrans[1] + gGameStatusPtr->unk_83;
 
@@ -369,9 +369,9 @@ Camera* initialize_next_camera(CameraInitData* initData) {
     camera->currentYaw = 0;
     camera->currentBoomLength = 0;
     camera->currentYOffset = 0;
-    camera->trueRotation.x = 0.0f;
-    camera->trueRotation.y = 0.0f;
-    camera->trueRotation.z = 0.0f;
+    camera->trueRot.x = 0.0f;
+    camera->trueRot.y = 0.0f;
+    camera->trueRot.z = 0.0f;
     camera->updateMode = initData->updateMode;
     camera->needsInit = TRUE;
     camera->nearClip = initData->nearClip;

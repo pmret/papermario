@@ -92,12 +92,12 @@ API_CALLABLE(N(UpdatePlatformShadows)) {
         scale = 1000.0f;
         entity_raycast_down(&x, &y, &z, &rotX, &rotZ, &scale);
         set_standard_shadow_scale(shadow, scale);
-        shadow->rotation.y = 0.0f;
+        shadow->rot.y = 0.0f;
         shadow->pos.x = x;
         shadow->pos.y = y;
         shadow->pos.z = z;
-        shadow->rotation.x = rotX;
-        shadow->rotation.z = rotZ;
+        shadow->rot.x = rotX;
+        shadow->rot.z = rotZ;
         shadow->scale.x *= 3.0f;
         shadow->scale.z *= 3.0f;
     }

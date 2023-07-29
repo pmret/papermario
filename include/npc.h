@@ -117,7 +117,7 @@ typedef void (*FireBarCallback)(struct FireBarData*, s32);
 
 typedef struct FireBarAISettings {
     /* 0x00 */ Vec3i centerPos;
-    /* 0x0C */ s32 rotationRate;
+    /* 0x0C */ s32 rotRate;
     /* 0x10 */ s32 firstNpc;
     /* 0x14 */ s32 npcCount;
     /* 0x18 */ FireBarCallback callback;
@@ -126,7 +126,7 @@ typedef struct FireBarAISettings {
 typedef struct FireBarData {
     /* 0x00 */ s32 flags;
     /* 0x04 */ Vec3f centerPos;
-    /* 0x10 */ f32 rotationRate;
+    /* 0x10 */ f32 rotRate;
     /* 0x14 */ s32 firstNpc;
     /* 0x18 */ s32 npcCount;
     /* 0x1C */ FireBarCallback callback;

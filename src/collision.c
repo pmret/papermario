@@ -1052,10 +1052,10 @@ s32 test_ray_entities(f32 startX, f32 startY, f32 startZ, f32 dirX, f32 dirY, f3
                     break;
             }
 
-            guRotateF(tempMatrix1, entity->rotation.x, 1.0f, 0.0f, 0.0f);
-            guRotateF(tempMatrix2, entity->rotation.z, 0.0f, 0.0f, 1.0f);
+            guRotateF(tempMatrix1, entity->rot.x, 1.0f, 0.0f, 0.0f);
+            guRotateF(tempMatrix2, entity->rot.z, 0.0f, 0.0f, 1.0f);
             guMtxCatF(tempMatrix1, tempMatrix2, tempMatrix1);
-            guRotateF(tempMatrix2, entity->rotation.y, 0.0f, 1.0f, 0.0f);
+            guRotateF(tempMatrix2, entity->rot.y, 0.0f, 1.0f, 0.0f);
             guMtxCatF(tempMatrix1, tempMatrix2, tempMatrix1);
             guTranslateF(tempMatrix2, entity->pos.x, entity->pos.y, entity->pos.z);
             guMtxCatF(tempMatrix1, tempMatrix2, tempMatrix1);

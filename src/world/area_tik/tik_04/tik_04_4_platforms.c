@@ -29,9 +29,9 @@ API_CALLABLE(N(UpdatePlatformShadows)) {
     shadow->pos.x = x;
     shadow->pos.y = y;
     shadow->pos.z = z;
-    shadow->rotation.x = hitYaw;
-    shadow->rotation.y = 0.0f;
-    shadow->rotation.z = hitPitch;
+    shadow->rot.x = hitYaw;
+    shadow->rot.y = 0.0f;
+    shadow->rot.z = hitPitch;
     shadow->scale.x *= 4.5f;
     shadow->scale.z *= 4.5f;
 
@@ -46,9 +46,9 @@ API_CALLABLE(N(UpdatePlatformShadows)) {
     shadow->pos.x = x;
     shadow->pos.y = y;
     shadow->pos.z = z;
-    shadow->rotation.x = hitYaw;
-    shadow->rotation.y = 0.0f;
-    shadow->rotation.z = hitPitch;
+    shadow->rot.x = hitYaw;
+    shadow->rot.y = 0.0f;
+    shadow->rot.z = hitPitch;
     shadow->scale.x *= 4.5f;
     shadow->scale.z *= 4.5f;
 

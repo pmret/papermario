@@ -803,9 +803,9 @@ API_CALLABLE(N(UpdateSlotMachineBlockShadows)) {
         shadow->pos.x = x;
         shadow->pos.y = y;
         shadow->pos.z = z;
-        shadow->rotation.x = rotX;
-        shadow->rotation.y = 0.0f;
-        shadow->rotation.z = rotZ;
+        shadow->rot.x = rotX;
+        shadow->rot.y = 0.0f;
+        shadow->rot.z = rotZ;
         shadow->scale.x *= 1.3f;
         shadow->scale.z *= 1.3f;
     }

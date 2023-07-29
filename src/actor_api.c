@@ -1334,15 +1334,15 @@ ApiStatus SetActorRotation(Evt* script, s32 isInitialCall) {
     actor = get_actor(actorID);
 
     if (x != EVT_IGNORE_ARG) {
-        actor->rotation.x = x;
+        actor->rot.x = x;
     }
 
     if (y != EVT_IGNORE_ARG) {
-        actor->rotation.y = y;
+        actor->rot.y = y;
     }
 
     if (z != EVT_IGNORE_ARG) {
-        actor->rotation.z = z;
+        actor->rot.z = z;
     }
 
     return ApiStatus_DONE2;
@@ -1364,9 +1364,9 @@ ApiStatus SetActorRotationOffset(Evt* script, s32 isInitialCall) {
 
     actor = get_actor(actorID);
 
-    actor->rotationPivotOffset.x = x;
-    actor->rotationPivotOffset.y = y;
-    actor->rotationPivotOffset.z = z;
+    actor->rotPivotOffset.x = x;
+    actor->rotPivotOffset.y = y;
+    actor->rotPivotOffset.z = z;
 
     return ApiStatus_DONE2;
 }
@@ -1387,9 +1387,9 @@ ApiStatus GetActorRotation(Evt* script, s32 isInitialCall) {
 
     actor = get_actor(actorID);
 
-    evt_set_variable(script, x, actor->rotation.x);
-    evt_set_variable(script, y, actor->rotation.y);
-    evt_set_variable(script, z, actor->rotation.z);
+    evt_set_variable(script, x, actor->rot.x);
+    evt_set_variable(script, y, actor->rot.y);
+    evt_set_variable(script, z, actor->rot.z);
 
     return ApiStatus_DONE2;
 }
@@ -1411,9 +1411,9 @@ ApiStatus SetPartRotation(Evt* script, s32 isInitialCall) {
 
     actorPart = get_actor_part(get_actor(actorID), partID);
 
-    actorPart->rotation.x = x;
-    actorPart->rotation.y = y;
-    actorPart->rotation.z = z;
+    actorPart->rot.x = x;
+    actorPart->rot.y = y;
+    actorPart->rot.z = z;
 
     return ApiStatus_DONE2;
 }
@@ -1435,9 +1435,9 @@ ApiStatus SetPartRotationOffset(Evt* script, s32 isInitialCall) {
 
     actorPart = get_actor_part(get_actor(actorID), partID);
 
-    actorPart->rotationPivotOffset.x = x;
-    actorPart->rotationPivotOffset.y = y;
-    actorPart->rotationPivotOffset.z = z;
+    actorPart->rotPivotOffset.x = x;
+    actorPart->rotPivotOffset.y = y;
+    actorPart->rotPivotOffset.z = z;
 
     return ApiStatus_DONE2;
 }
@@ -1459,9 +1459,9 @@ ApiStatus GetPartRotation(Evt* script, s32 isInitialCall) {
 
     actorPart = get_actor_part(get_actor(actorID), partID);
 
-    evt_set_float_variable(script, x, actorPart->rotation.x);
-    evt_set_float_variable(script, y, actorPart->rotation.y);
-    evt_set_float_variable(script, z, actorPart->rotation.z);
+    evt_set_float_variable(script, x, actorPart->rot.x);
+    evt_set_float_variable(script, y, actorPart->rot.y);
+    evt_set_float_variable(script, z, actorPart->rot.z);
 
     return ApiStatus_DONE2;
 }

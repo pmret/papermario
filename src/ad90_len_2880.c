@@ -33,7 +33,7 @@ void update_camera_mode_6(Camera* camera) {
         camera->lookAt_obj.x = camera->lookAt_obj_target.x + camera->targetPos.x;
         camera->lookAt_obj.y = camera->lookAt_obj_target.y + camera->targetPos.y + camera->auxBoomZOffset / 256.0;
         camera->lookAt_obj.z = camera->lookAt_obj_target.z + camera->targetPos.z;
-        camera->trueRotation.x = camera->auxBoomYaw;
+        camera->trueRot.x = camera->auxBoomYaw;
         camera->currentBoomYaw = camera->auxBoomPitch;
         camera->currentBoomLength = camera->auxBoomLength;
         camera->vfov = (10000 / camera->lookAt_dist) / 4;
@@ -51,7 +51,7 @@ void update_camera_mode_6(Camera* camera) {
         deltaX = deltaX2;
         deltaY = cosBoom * deltaY2 + deltaZ2 * sinBoom;
         deltaZ = sinBoom * new_var + deltaZ2 * cosBoom;
-        boomYaw = DEG_TO_RAD(camera->trueRotation.x);
+        boomYaw = DEG_TO_RAD(camera->trueRot.x);
         sinBoom = sin_rad(boomYaw);
         cosBoom = cos_rad(boomYaw);
         deltaZ2 = cosBoom * deltaX - deltaZ * sinBoom;

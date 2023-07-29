@@ -124,7 +124,7 @@ void entity_Chest_idle(Entity* entity) {
     ChestData* data;
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    rotation = clamp_angle(180.0f - entity->rotation.y);
+    rotation = clamp_angle(180.0f - entity->rot.y);
     angle = fabsf(rotation - clamp_angle(atan2(entity->pos.x, entity->pos.z, playerStatus->pos.x, playerStatus->pos.z)));
     if ((!(playerStatus->animFlags & PA_FLAG_USING_WATT)) &&
         (!(entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR)) &&
@@ -382,7 +382,7 @@ void entity_GiantChest_give_equipment(Entity* entity) {
     }
 
     if (data->itemID != 0) {
-        angle = DEG_TO_RAD(entity->rotation.y);
+        angle = DEG_TO_RAD(entity->rot.y);
         data->itemEntityPos.x = entity->pos.x + (sin_rad(angle) * 10.0f);
         data->itemEntityPos.y = entity->pos.y;
         data->itemEntityPos.z = entity->pos.z + (cos_rad(angle) * 10.0f);

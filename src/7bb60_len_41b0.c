@@ -844,7 +844,7 @@ s32 phys_should_player_be_sliding(void) {
     s32 ret = FALSE;
 
     if (gGameStatusPtr->areaID == AREA_IWA) {
-        f32 temp_f0 = shadow->rotation.z + 180.0;
+        f32 temp_f0 = shadow->rot.z + 180.0;
 
         if (temp_f0 != 0.0f) {
             ret = TRUE;
@@ -867,8 +867,8 @@ s32 phys_should_player_be_sliding(void) {
 
 s32 phys_is_on_sloped_ground(void) {
     Shadow* playerShadow = get_shadow_by_index(gPlayerStatus.shadowID);
-    f32 rotZ = playerShadow->rotation.z + 180.0;
-    f32 rotX = playerShadow->rotation.x + 180.0;
+    f32 rotZ = playerShadow->rot.z + 180.0;
+    f32 rotX = playerShadow->rot.x + 180.0;
     s32 ret = TRUE;
 
     if (fabsf(rotZ) < 20.0f && fabsf(rotX) < 20.0f) {
