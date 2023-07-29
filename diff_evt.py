@@ -27,13 +27,9 @@ parser.add_argument(
     help="Watch for file changes and update the diff automatically.",
 )
 
-parser.add_argument(
-    "-m", "--make", action="store_true", help="Run ninja automatically."
-)
+parser.add_argument("-m", "--make", action="store_true", help="Run ninja automatically.")
 
-parser.add_argument(
-    "-o", action="store_true", help="Ignored for compatibility with diff.py."
-)
+parser.add_argument("-o", action="store_true", help="Ignored for compatibility with diff.py.")
 
 
 class EvtDisplay(Display):
@@ -150,8 +146,7 @@ def main():
                     ret = run_ninja()
                     if ret.returncode != 0:
                         display.update(
-                            ret.stderr.decode("utf-8-sig", "replace")
-                            or ret.stdout.decode("utf-8-sig", "replace"),
+                            ret.stderr.decode("utf-8-sig", "replace") or ret.stdout.decode("utf-8-sig", "replace"),
                             error=True,
                         )
                         continue

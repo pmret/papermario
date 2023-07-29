@@ -51,12 +51,7 @@ def scan_map():
 
             prev_line = line
 
-            if (
-                ram_offset is None
-                or "=" in line
-                or "*fill*" in line
-                or " 0x" not in line
-            ):
+            if ram_offset is None or "=" in line or "*fill*" in line or " 0x" not in line:
                 continue
 
             ram = int(line[16 : 16 + 18], 0)
@@ -123,14 +118,10 @@ def read_symbol_addrs():
 
 def read_elf():
     try:
-        result = subprocess.run(
-            ["mips-linux-gnu-objdump", "-x", elf_path], stdout=subprocess.PIPE
-        )
+        result = subprocess.run(["mips-linux-gnu-objdump", "-x", elf_path], stdout=subprocess.PIPE)
         objdump_lines = result.stdout.decode().split("\n")
     except:
-        print(
-            f"Error: Could not run objdump on {elf_path} - make sure that the project is built"
-        )
+        print(f"Error: Could not run objdump on {elf_path} - make sure that the project is built")
         sys.exit(1)
 
     for line in objdump_lines:
@@ -214,9 +205,7 @@ def reconcile_symbols():
             rom_match[0] = elf_sym[0]
         elif not rom_match and elf_sym[3]:
             if name_match[3] >= 0:
-                log(
-                    f"Correcting rom address {name_match[3]} to {elf_sym[3]} for symbol {name_match[0]}"
-                )
+                log(f"Correcting rom address {name_match[3]} to {elf_sym[3]} for symbol {name_match[0]}")
             else:
                 log(f"Adding rom address {elf_sym[3]} to symbol {name_match[0]}")
             name_match[3] = elf_sym[3]
@@ -224,9 +213,7 @@ def reconcile_symbols():
 
 def write_new_symbol_addrs():
     with open(symbol_addrs_path, "w", newline="\n") as f:
-        for symbol in sorted(
-            symbol_addrs, key=lambda x: (x[3] == -1, x[3], x[1], x[0])
-        ):
+        for symbol in sorted(symbol_addrs, key=lambda x: (x[3] == -1, x[3], x[1], x[0])):
             line = f"{symbol[0]} = 0x{symbol[1]:X}; //"
             if symbol[2] and len(symbol[2]) > 0:
                 line += f" type:{symbol[2]}"
@@ -236,9 +223,7 @@ def write_new_symbol_addrs():
                 for thing in symbol[4]:
                     line += f" {thing}"
             f.write(line + "\n")
-        for symbol in sorted(
-            dead_symbols, key=lambda x: (x[3] == -1, x[3], x[1], x[0])
-        ):
+        for symbol in sorted(dead_symbols, key=lambda x: (x[3] == -1, x[3], x[1], x[0])):
             line = f"{symbol[0]} = 0x{symbol[1]:X}; //"
             if symbol[2] and len(symbol[2]) > 0:
                 line += f" type:{symbol[2]}"

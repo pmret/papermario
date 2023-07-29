@@ -39,11 +39,7 @@ def build_mapfs(out_bin, assets, version):
             name = decompressed.stem + "\0"
             offset = next_data_pos
             decompressed_size = decompressed.stat().st_size
-            size = (
-                next_multiple(compressed.stat().st_size, 2)
-                if compressed.exists()
-                else decompressed_size
-            )
+            size = next_multiple(compressed.stat().st_size, 2) if compressed.exists() else decompressed_size
 
             # print(f"{name} {offset:08X} {size:08X} {decompressed_size:08X}")
 
@@ -58,11 +54,7 @@ def build_mapfs(out_bin, assets, version):
 
             # write data.
             f.seek(0x20 + next_data_pos)
-            f.write(
-                compressed.read_bytes()
-                if compressed.exists()
-                else decompressed.read_bytes()
-            )
+            f.write(compressed.read_bytes() if compressed.exists() else decompressed.read_bytes())
             next_data_pos += size
 
             asset_idx += 1

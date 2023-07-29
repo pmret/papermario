@@ -46,16 +46,12 @@ def parse_command(source):
             key, value = arg.split("=", 1)
 
             if "," in value:
-                named_args[key.lower()] = [
-                    try_convert_int(v) for v in value.lower().split(",")
-                ]
+                named_args[key.lower()] = [try_convert_int(v) for v in value.lower().split(",")]
             else:
                 named_args[key.lower()] = try_convert_int(value.lower())
         else:
             if "," in arg:
-                args.append(
-                    [try_convert_int(value) for value in arg.lower().split(",")]
-                )
+                args.append([try_convert_int(value) for value in arg.lower().split(",")])
             else:
                 args.append(try_convert_int(arg.lower()))
 
@@ -420,9 +416,7 @@ if __name__ == "__main__":
                     message = Message(directive[1], None, None)
                 else:
                     if len(directive) != 3:
-                        print(
-                            f"{filename}:{lineno}: expected #message:SECTION:INDEX directive"
-                        )
+                        print(f"{filename}:{lineno}: expected #message:SECTION:INDEX directive")
                         exit(1)
 
                     section = int(directive[1], 16)
@@ -477,9 +471,7 @@ if __name__ == "__main__":
                         message.bytes += [0xF1]
                     elif command == "pause":
                         if len(args) != 1:
-                            print(
-                                f"{filename}:{lineno}: {command} command requires 1 parameter"
-                            )
+                            print(f"{filename}:{lineno}: {command} command requires 1 parameter")
                             exit(1)
 
                         message.bytes += [0xF2, args[0]]
@@ -493,9 +485,7 @@ if __name__ == "__main__":
                         message.bytes += [0xFF, 0x25]
                     elif command == "color":
                         if len(args) != 1:
-                            print(
-                                f"{filename}:{lineno}: color command requires 1 parameter"
-                            )
+                            print(f"{filename}:{lineno}: color command requires 1 parameter")
                             exit(1)
 
                         color = color_to_code(args[0], style)
@@ -529,17 +519,13 @@ if __name__ == "__main__":
                                 pos = named_args.get("pos")
 
                                 if not isinstance(pos, list) or len(pos) != 2:
-                                    print(
-                                        f"{filename}:{lineno}: 'choice' style requires pos=_,_"
-                                    )
+                                    print(f"{filename}:{lineno}: 'choice' style requires pos=_,_")
                                     exit(1)
 
                                 size = named_args.get("size")
 
                                 if not isinstance(size, list) or len(size) != 2:
-                                    print(
-                                        f"{filename}:{lineno}: 'choice' style requires size=_,_"
-                                    )
+                                    print(f"{filename}:{lineno}: 'choice' style requires size=_,_")
                                     exit(1)
 
                                 message.bytes += [
@@ -557,9 +543,7 @@ if __name__ == "__main__":
                                 height = named_args.get("height")
 
                                 if not isinstance(height, int):
-                                    print(
-                                        f"{filename}:{lineno}: 'lamppost' style requires height=_"
-                                    )
+                                    print(f"{filename}:{lineno}: 'lamppost' style requires height=_")
                                     exit(1)
 
                                 message.bytes += [0x08, height]
@@ -567,9 +551,7 @@ if __name__ == "__main__":
                                 index = named_args.get("index")
 
                                 if not isinstance(index, int):
-                                    print(
-                                        f"{filename}:{lineno}: 'postcard' style requires index=_"
-                                    )
+                                    print(f"{filename}:{lineno}: 'postcard' style requires index=_")
                                     exit(1)
 
                                 message.bytes += [0x09, index]
@@ -579,17 +561,13 @@ if __name__ == "__main__":
                                 pos = named_args.get("pos")
 
                                 if not isinstance(pos, list) or len(pos) != 2:
-                                    print(
-                                        f"{filename}:{lineno}: 'upgrade' style requires pos=_,_"
-                                    )
+                                    print(f"{filename}:{lineno}: 'upgrade' style requires pos=_,_")
                                     exit(1)
 
                                 size = named_args.get("size")
 
                                 if not isinstance(size, list) or len(size) != 2:
-                                    print(
-                                        f"{filename}:{lineno}: 'upgrade' style requires size=_,_"
-                                    )
+                                    print(f"{filename}:{lineno}: 'upgrade' style requires size=_,_")
                                     exit(1)
 
                                 message.bytes += [
@@ -605,9 +583,7 @@ if __name__ == "__main__":
                                 message.bytes += [0x0E]
                     elif command == "font":
                         if len(args) != 1:
-                            print(
-                                f"{filename}:{lineno}: font command requires 1 parameter"
-                            )
+                            print(f"{filename}:{lineno}: font command requires 1 parameter")
                             exit(1)
 
                         font = args[0]
@@ -650,17 +626,13 @@ if __name__ == "__main__":
                         message.bytes += [0xFF, 0x0A]
                     elif command == "charwidth":
                         if len(args) != 1:
-                            print(
-                                f"{filename}:{lineno}: {command} command requires 1 parameter"
-                            )
+                            print(f"{filename}:{lineno}: {command} command requires 1 parameter")
                             exit(1)
 
                         message.bytes += [0xFF, 0x0B, args[0]]
                     elif command == "scroll":
                         if len(args) != 1:
-                            print(
-                                f"{filename}:{lineno}: {command} command requires 1 parameter"
-                            )
+                            print(f"{filename}:{lineno}: {command} command requires 1 parameter")
                             exit(1)
 
                         message.bytes += [0xFF, 0x0C, args[0]]
@@ -671,9 +643,7 @@ if __name__ == "__main__":
                             args.append(args[0])
 
                         if len(args) != 2:
-                            print(
-                                f"{filename}:{lineno}: {command} command requires 2 parameters"
-                            )
+                            print(f"{filename}:{lineno}: {command} command requires 2 parameters")
                             exit(1)
 
                         message.bytes += [0xFF, 0x0D, args[0], args[1]]
@@ -683,17 +653,13 @@ if __name__ == "__main__":
                         delay = named_args.get("delay")
 
                         if not isinstance(delay, int):
-                            print(
-                                f"{filename}:{lineno}: {command} command requires delay=_"
-                            )
+                            print(f"{filename}:{lineno}: {command} command requires delay=_")
                             exit(1)
 
                         chars = named_args.get("chars")
 
                         if not isinstance(delay, int):
-                            print(
-                                f"{filename}:{lineno}: {command} command requires chars=_"
-                            )
+                            print(f"{filename}:{lineno}: {command} command requires chars=_")
                             exit(1)
 
                         message.bytes += [0xFF, 0x0F, delay, chars]
@@ -708,17 +674,13 @@ if __name__ == "__main__":
                     #         message.bytes += [0xFF, 0x11, named_args["y"]]
                     elif command == "setposx":
                         if len(args) != 1:
-                            print(
-                                f"{filename}:{lineno}: {command} command requires 1 parameter"
-                            )
+                            print(f"{filename}:{lineno}: {command} command requires 1 parameter")
                             exit(1)
 
                         message.bytes += [0xFF, 0x10, args[0] >> 8, args[0] & 0xFF]
                     elif command == "setposy":
                         if len(args) != 1:
-                            print(
-                                f"{filename}:{lineno}: {command} command requires 1 parameter"
-                            )
+                            print(f"{filename}:{lineno}: {command} command requires 1 parameter")
                             exit(1)
 
                         message.bytes += [0xFF, 0x11, *args]
@@ -727,9 +689,7 @@ if __name__ == "__main__":
                             message.bytes += [0x95]
                         else:
                             if len(args) != 1:
-                                print(
-                                    f"{filename}:{lineno}: {command} command requires 1 parameter"
-                                )
+                                print(f"{filename}:{lineno}: {command} command requires 1 parameter")
                                 exit(1)
 
                             message.bytes += [0xFF, 0x12, args[0]]
@@ -738,9 +698,7 @@ if __name__ == "__main__":
                             message.bytes += [0x93]
                         else:
                             if len(args) != 1:
-                                print(
-                                    f"{filename}:{lineno}: {command} command requires 1 parameter"
-                                )
+                                print(f"{filename}:{lineno}: {command} command requires 1 parameter")
                                 exit(1)
 
                             message.bytes += [0xFF, 0x13, args[0]]
@@ -749,9 +707,7 @@ if __name__ == "__main__":
                             message.bytes += [0x92]
                         else:
                             if len(args) != 1:
-                                print(
-                                    f"{filename}:{lineno}: {command} command requires 1 parameter"
-                                )
+                                print(f"{filename}:{lineno}: {command} command requires 1 parameter")
                                 exit(1)
 
                             message.bytes += [0xFF, 0x14, args[0]]
@@ -759,9 +715,7 @@ if __name__ == "__main__":
                         index = named_args.get("index")
 
                         if not isinstance(index, int):
-                            print(
-                                f"{filename}:{lineno}: {command} command requires index=_"
-                            )
+                            print(f"{filename}:{lineno}: {command} command requires index=_")
                             exit(1)
 
                         message.bytes += [0xFF, 0x15, index]
@@ -772,14 +726,10 @@ if __name__ == "__main__":
                         # TODO: named sprite id and raster
 
                         if not isinstance(spriteid, int):
-                            print(
-                                f"{filename}:{lineno}: {command} command requires spriteid=_"
-                            )
+                            print(f"{filename}:{lineno}: {command} command requires spriteid=_")
                             exit(1)
                         if not isinstance(raster, int):
-                            print(
-                                f"{filename}:{lineno}: {command} command requires raster=_"
-                            )
+                            print(f"{filename}:{lineno}: {command} command requires raster=_")
                             exit(1)
 
                         message.bytes += [
@@ -795,9 +745,7 @@ if __name__ == "__main__":
                         # TODO: itemname
 
                         if not isinstance(itemid, int):
-                            print(
-                                f"{filename}:{lineno}: {command} command requires itemid=_"
-                            )
+                            print(f"{filename}:{lineno}: {command} command requires itemid=_")
                             exit(1)
 
                         message.bytes += [0xFF, 0x17, itemid >> 8, itemid & 0xFF]
@@ -809,29 +757,19 @@ if __name__ == "__main__":
                         fadeamount = named_args.get("fadeamount")
 
                         if not isinstance(index, int):
-                            print(
-                                f"{filename}:{lineno}: {command} command requires index=_"
-                            )
+                            print(f"{filename}:{lineno}: {command} command requires index=_")
                             exit(1)
                         if not isinstance(pos, list) or len(pos) != 2:
-                            print(
-                                f"{filename}:{lineno}: {command} command requires pos=_,_"
-                            )
+                            print(f"{filename}:{lineno}: {command} command requires pos=_,_")
                             exit(1)
                         if not isinstance(hasborder, int):
-                            print(
-                                f"{filename}:{lineno}: {command} command requires hasborder=_"
-                            )
+                            print(f"{filename}:{lineno}: {command} command requires hasborder=_")
                             exit(1)
                         if not isinstance(alpha, int):
-                            print(
-                                f"{filename}:{lineno}: {command} command requires alpha=_"
-                            )
+                            print(f"{filename}:{lineno}: {command} command requires alpha=_")
                             exit(1)
                         if not isinstance(fadeamount, int):
-                            print(
-                                f"{filename}:{lineno}: {command} command requires fadeamount=_"
-                            )
+                            print(f"{filename}:{lineno}: {command} command requires fadeamount=_")
                             exit(1)
 
                         message.bytes += [
@@ -849,9 +787,7 @@ if __name__ == "__main__":
                         fadeamount = named_args.get("fadeamount", 0)
 
                         if not isinstance(fadeamount, int):
-                            print(
-                                f"{filename}:{lineno}: {command} command requires fadeamount=_"
-                            )
+                            print(f"{filename}:{lineno}: {command} command requires fadeamount=_")
                             exit(1)
 
                         message.bytes += [0xFF, 0x19, fadeamount]
@@ -860,29 +796,21 @@ if __name__ == "__main__":
                         delay = named_args.get("delay")
 
                         if not isinstance(index, int):
-                            print(
-                                f"{filename}:{lineno}: {command} command requires index=_"
-                            )
+                            print(f"{filename}:{lineno}: {command} command requires index=_")
                             exit(1)
                         if not isinstance(delay, int):
-                            print(
-                                f"{filename}:{lineno}: {command} command requires delay=_"
-                            )
+                            print(f"{filename}:{lineno}: {command} command requires delay=_")
                             exit(1)
 
                         message.bytes += [0xFF, 0x1A, 0, index, delay]
                     elif command == "animloop":
                         if len(args) != 2:
-                            print(
-                                f"{filename}:{lineno}: {command} command requires 2 parameters"
-                            )
+                            print(f"{filename}:{lineno}: {command} command requires 2 parameters")
                             exit(1)
                         message.bytes += [0xFF, 0x1B, args[0], args[1]]
                     elif command == "animdone":
                         if len(args) != 1:
-                            print(
-                                f"{filename}:{lineno}: {command} command requires 1 parameter"
-                            )
+                            print(f"{filename}:{lineno}: {command} command requires 1 parameter")
                             exit(1)
                         message.bytes += [0xFF, 0x1C, args[0]]
                     elif command == "setcursorpos":
@@ -890,46 +818,34 @@ if __name__ == "__main__":
                         pos = named_args.get("pos")
 
                         if not isinstance(index, int):
-                            print(
-                                f"{filename}:{lineno}: {command} command requires index=_"
-                            )
+                            print(f"{filename}:{lineno}: {command} command requires index=_")
                             exit(1)
                         if not isinstance(pos, list) or len(pos) != 2:
-                            print(
-                                f"{filename}:{lineno}: {command} command requires pos=_,_"
-                            )
+                            print(f"{filename}:{lineno}: {command} command requires pos=_,_")
                             exit(1)
 
                         message.bytes += [0xFF, 0x1D, index, pos, pos]
                     elif command == "cursor":
                         if len(args) != 1:
-                            print(
-                                f"{filename}:{lineno}: cursor command requires 1 parameter"
-                            )
+                            print(f"{filename}:{lineno}: cursor command requires 1 parameter")
                             exit(1)
 
                         message.bytes += [0xFF, 0x1E, *args]
                     elif command == "option" and choiceindex == -1:
                         if len(args) != 1:
-                            print(
-                                f"{filename}:{lineno}: option command requires 1 parameter"
-                            )
+                            print(f"{filename}:{lineno}: option command requires 1 parameter")
                             exit(1)
 
                         message.bytes += [0xFF, 0x21, *args]
                     elif command == "endchoice" and choiceindex == -1:
                         if len(args) != 1:
-                            print(
-                                f"{filename}:{lineno}: {command} command requires 1 parameter"
-                            )
+                            print(f"{filename}:{lineno}: {command} command requires 1 parameter")
                             exit(1)
 
                         message.bytes += [0xFF, 0x1F, args[0]]
                     elif command == "setcancel":
                         if len(args) != 1:
-                            print(
-                                f"{filename}:{lineno}: {command} command requires 1 parameter"
-                            )
+                            print(f"{filename}:{lineno}: {command} command requires 1 parameter")
                             exit(1)
 
                         message.bytes += [0xFF, 0x20, args[0]]
@@ -959,9 +875,7 @@ if __name__ == "__main__":
                         message.bytes += [0xFF, 0x27, 0x02]
                     elif command == "static":
                         if len(args) != 1:
-                            print(
-                                f"{filename}:{lineno}: {command} command requires 1 parameter"
-                            )
+                            print(f"{filename}:{lineno}: {command} command requires 1 parameter")
                             exit(1)
 
                         fx_stack.append(0x03)
@@ -980,9 +894,7 @@ if __name__ == "__main__":
                             _dir = 2
 
                         if not isinstance(_dir, int):
-                            print(
-                                f"{filename}:{lineno}: {command} command requires dir=_"
-                            )
+                            print(f"{filename}:{lineno}: {command} command requires dir=_")
                             exit(1)
 
                         fx_stack.append(0x05)
@@ -998,9 +910,7 @@ if __name__ == "__main__":
                         message.bytes += [0xFF, 0x27, 0x06]
                     elif command == "ditherfade":
                         if len(args) != 1:
-                            print(
-                                f"{filename}:{lineno}: {command} command requires 1 parameter"
-                            )
+                            print(f"{filename}:{lineno}: {command} command requires 1 parameter")
                             exit(1)
 
                         fx_stack.append(0x07)
@@ -1040,17 +950,13 @@ if __name__ == "__main__":
                         message.bytes += [0xFF, 0x27, 0x0E]
                     elif command == "var":
                         if len(args) != 1:
-                            print(
-                                f"{filename}:{lineno}: var command requires 1 parameter"
-                            )
+                            print(f"{filename}:{lineno}: var command requires 1 parameter")
                             exit(1)
 
                         message.bytes += [0xFF, 0x28, *args]
                     elif command == "centerx":
                         if len(args) != 1:
-                            print(
-                                f"{filename}:{lineno}: {command} command requires 1 parameter"
-                            )
+                            print(f"{filename}:{lineno}: {command} command requires 1 parameter")
                             exit(1)
 
                         message.bytes += [0xFF, 0x29, *args]
@@ -1062,9 +968,7 @@ if __name__ == "__main__":
                         soundids = named_args.get("soundids")
 
                         if not isinstance(soundids, list) or len(pos) != 2:
-                            print(
-                                f"{filename}:{lineno}: {command} command requires soundids=_,_"
-                            )
+                            print(f"{filename}:{lineno}: {command} command requires soundids=_,_")
                             exit(1)
 
                         message.bytes += [
@@ -1081,17 +985,13 @@ if __name__ == "__main__":
                         ]
                     elif command == "volume":
                         if len(args) != 1:
-                            print(
-                                f"{filename}:{lineno}: {command} command requires 1 parameter"
-                            )
+                            print(f"{filename}:{lineno}: {command} command requires 1 parameter")
                             exit(1)
 
                         message.bytes += [0xFF, 0x2E, *args]
                     elif command == "voice":
                         if len(args) != 1:
-                            print(
-                                f"{filename}:{lineno}: {command} command requires 1 parameter"
-                            )
+                            print(f"{filename}:{lineno}: {command} command requires 1 parameter")
                             exit(1)
 
                         sound = args[0]
@@ -1325,9 +1225,7 @@ if __name__ == "__main__":
                         choiceindex = -1
                     elif command == "animation" and choiceindex >= 0:
                         # TODO
-                        print(
-                            f"{filename}:{lineno}: '{command}' tag is not yet implemented"
-                        )
+                        print(f"{filename}:{lineno}: '{command}' tag is not yet implemented")
                         exit(1)
                     else:
                         print(f"{filename}:{lineno}: unknown command '{command}'")
@@ -1335,9 +1233,7 @@ if __name__ == "__main__":
                 else:
                     if source[0] == "}":
                         if not explicit_end:
-                            print(
-                                f"{filename}:{lineno}: warning: string lacks an [end] command"
-                            )
+                            print(f"{filename}:{lineno}: warning: string lacks an [end] command")
                             # message.bytes += [0xFD]
                         explicit_end = False
 
@@ -1369,9 +1265,7 @@ if __name__ == "__main__":
 
                         source = source[1:]
                     else:
-                        print(
-                            f"{filename}:{lineno}: unsupported character '{source[0]}' for current font"
-                        )
+                        print(f"{filename}:{lineno}: unsupported character '{source[0]}' for current font")
                         exit(1)
 
         if message != None:

@@ -86,12 +86,8 @@ for root, dirs, files in os.walk(asm_dir):
             if f_text != f_text_orig:
                 if non_matching:
                     syms = sorted(set(re.findall(r"D_[0-9A-F]{8}_[0-9A-F]{6}", f_text)))
-                    to_replace.append(
-                        syms[0] + " " + namespace + "_ItemChoice_HasSelectedItem\n"
-                    )
-                    to_replace.append(
-                        syms[1] + " " + namespace + "_ItemChoice_SelectedItemID\n"
-                    )
+                    to_replace.append(syms[0] + " " + namespace + "_ItemChoice_HasSelectedItem\n")
+                    to_replace.append(syms[1] + " " + namespace + "_ItemChoice_SelectedItemID\n")
 
                 with open(f_path, "w", newline="\n") as f:
                     f.write(f_text)

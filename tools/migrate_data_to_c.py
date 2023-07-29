@@ -25,14 +25,7 @@ def data_to_c(file_path):
     for (all, symbol, type, data) in re.findall(pattern, s):
         if type == "word":
             if symbol.startswith("jtbl_"):
-                output += (
-                    "dlabel "
-                    + symbol
-                    + "\n"
-                    + ".word "
-                    + data.replace("L", ".L")
-                    + "\n\n"
-                )
+                output += "dlabel " + symbol + "\n" + ".word " + data.replace("L", ".L") + "\n\n"
             else:
                 output += "s32 " + symbol + "[] = { " + data + " };\n\n"
         elif type == "byte":
@@ -61,11 +54,7 @@ def get_all():
             file_path = os.fspath(os.path.join(root, f))
             out_to_file(data_to_c(file_path), file_path)
 
-    print(
-        "Files have been translated successfully and stored at "
-        + os.getcwd()
-        + "/data2c/"
-    )
+    print("Files have been translated successfully and stored at " + os.getcwd() + "/data2c/")
 
 
 def query(file, to_file):
@@ -84,9 +73,7 @@ def query(file, to_file):
     print("File not found: " + file)
 
 
-parser = argparse.ArgumentParser(
-    description="Tool to translate .data.s files to data arrays"
-)
+parser = argparse.ArgumentParser(description="Tool to translate .data.s files to data arrays")
 parser.add_argument("query", help="data file", nargs="?", default=None)
 parser.add_argument(
     "--all",

@@ -94,13 +94,9 @@ class HudElementScript:
             elif op == 0x05:
                 print(f"{indent}hs_SetTileSize({fmt_size(next(buf))})")
             elif op == 0x06:
-                print(
-                    f"{indent}hs_SetSizesAutoScale({fmt_size(next(buf))}, {fmt_size(next(buf))})"
-                )
+                print(f"{indent}hs_SetSizesAutoScale({fmt_size(next(buf))}, {fmt_size(next(buf))})")
             elif op == 0x07:
-                print(
-                    f"{indent}hs_SetSizesFixedScale({fmt_size(next(buf))}, {fmt_size(next(buf))})"
-                )
+                print(f"{indent}hs_SetSizesFixedScale({fmt_size(next(buf))}, {fmt_size(next(buf))})")
             elif op == 0x08:
                 print(f"{indent}hs_SetVisible")
             elif op == 0x09:
@@ -112,9 +108,7 @@ class HudElementScript:
             elif op == 0x0C:
                 print(f"{indent}hs_SetTexelOffset({next(buf)}, {next(buf)})")
             elif op == 0x0D:
-                print(
-                    f"{indent}hs_SetIcon({next(buf)}, {next(buf)}, {next(buf)}, {next(buf)}, {next(buf)})"
-                )
+                print(f"{indent}hs_SetIcon({next(buf)}, {next(buf)}, {next(buf)}, {next(buf)}, {next(buf)})")
             elif op == 0x0E:
                 print(f"{indent}hs_SetScale({next(buf)})")
             elif op == 0x0F:

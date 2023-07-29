@@ -6,12 +6,8 @@ import argparse
 script_dir = os.path.dirname(os.path.realpath(__file__))
 root_dir = os.path.abspath(os.path.join(script_dir, ".."))
 
-parser = argparse.ArgumentParser(
-    description="Display various information about a symbol or address."
-)
-parser.add_argument(
-    "name", type=str, default="", help="symbol name or ROM/RAM address to lookup"
-)
+parser = argparse.ArgumentParser(description="Display various information about a symbol or address.")
+parser.add_argument("name", type=str, default="", help="symbol name or ROM/RAM address to lookup")
 parser.add_argument(
     "-e",
     "--expected",
@@ -24,9 +20,7 @@ parser.add_argument(
 def get_map(expected: bool = False):
     mymap = os.path.join(root_dir, "ver", "current", "build", "papermario.map")
     if expected:
-        mymap = os.path.join(
-            root_dir, "ver", "current", "expected", "build", "papermario.map"
-        )
+        mymap = os.path.join(root_dir, "ver", "current", "expected", "build", "papermario.map")
     return mymap
 
 
@@ -53,12 +47,7 @@ def search_address(target_addr, map=get_map()):
 
             prev_line = line
 
-            if (
-                ram_offset is None
-                or "=" in line
-                or "*fill*" in line
-                or " 0x" not in line
-            ):
+            if ram_offset is None or "=" in line or "*fill*" in line or " 0x" not in line:
                 continue
 
             ram = int(line[16 : 16 + 18], 0)
@@ -100,12 +89,7 @@ def search_symbol(target_sym, map=get_map()):
 
             prev_line = line
 
-            if (
-                ram_offset is None
-                or "=" in line
-                or "*fill*" in line
-                or " 0x" not in line
-            ):
+            if ram_offset is None or "=" in line or "*fill*" in line or " 0x" not in line:
                 continue
 
             ram = int(line[16 : 16 + 18], 0)
@@ -143,8 +127,6 @@ if __name__ == "__main__":
             sym_rom = sym_info[0]
             sym_file = sym_info[1]
             sym_ram = sym_info[2]
-            print(
-                f"Symbol {args.name} (RAM: 0x{sym_ram:08X}, ROM: 0x{sym_rom:06X}, {sym_file})"
-            )
+            print(f"Symbol {args.name} (RAM: 0x{sym_ram:08X}, ROM: 0x{sym_rom:06X}, {sym_file})")
         else:
             print(f"Symbol {args.name} not found in map file {map}")

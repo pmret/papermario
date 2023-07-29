@@ -44,9 +44,7 @@ def parse(f):
         elif op == 16:
             print(f"{indent}AS_CLEAR_NODE_FLAGS, {read(f)}, {read(f)},")
         elif op == 17:
-            print(
-                f"{indent}AS_SET_SCALE, {read(f)}, AS_F({i2f(read(f))}), AS_F({i2f(read(f))}), AS_F({i2f(read(f))}),"
-            )
+            print(f"{indent}AS_SET_SCALE, {read(f)}, AS_F({i2f(read(f))}), AS_F({i2f(read(f))}), AS_F({i2f(read(f))}),")
         elif op == 18:
             print(f"{indent}AS_SET_RENDER_MODE, {read(f)},")
         elif op == 19:

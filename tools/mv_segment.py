@@ -11,9 +11,7 @@ args = parser.parse_args()
 
 # make dirs
 Path(f"src/{args.dest}.c").parent.mkdir(parents=True, exist_ok=True)
-Path(f"ver/current/asm/nonmatchings/{args.dest}").parent.mkdir(
-    parents=True, exist_ok=True
-)
+Path(f"ver/current/asm/nonmatchings/{args.dest}").parent.mkdir(parents=True, exist_ok=True)
 Path(f"ver/current/asm/data/{args.dest}").parent.mkdir(parents=True, exist_ok=True)
 
 if os.path.exists(f"src/{args.src}.c"):

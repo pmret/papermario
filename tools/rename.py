@@ -61,9 +61,7 @@ for line in renames_text:
             renames[split[0]] = split[1]
             patterns.append(split[0])
     elif len(split) != 0:
-        raise Exception(
-            'input contains invalid rename pattern: \n"' + line.strip() + '"'
-        )
+        raise Exception('input contains invalid rename pattern: \n"' + line.strip() + '"')
 
 ac = ahocorasick_rs.AhoCorasick(patterns, matchkind=MATCHKIND_LEFTMOST_LONGEST)
 
@@ -106,9 +104,7 @@ for root, dirs, files in os.walk(asm_dir):
     for dir_name in dirs:
         for rename in renames:
             if rename == dir_name:
-                os.rename(
-                    os.path.join(root, dir_name), os.path.join(root, renames[rename])
-                )
+                os.rename(os.path.join(root, dir_name), os.path.join(root, renames[rename]))
 
 # Rename stuff in symbol_addrs.txt
 handle_file(os.path.join(root_dir, "ver", "current", "symbol_addrs.txt"))

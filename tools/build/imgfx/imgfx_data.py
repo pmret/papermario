@@ -58,10 +58,7 @@ class Anim:
 
     def toJSON(self):
         framestr = ",\n".join(
-            [
-                "    [\n" + ",\n".join([v.toJSON() for v in frame]) + "\n    ]"
-                for i, frame in enumerate(self.frames)
-            ]
+            ["    [\n" + ",\n".join([v.toJSON() for v in frame]) + "\n    ]" for i, frame in enumerate(self.frames)]
         )
         trianglestr = ",\n".join([t.toJSON() for t in self.triangles])
 
@@ -77,10 +74,7 @@ class Anim:
     def fromJSON(name: str, data: Any) -> "Anim":
         flags = data["flags"]
         frames = [
-            [
-                Vertex(idx, *vtx["pos"], *vtx["uv"], *vtx["rgba"])
-                for idx, vtx in enumerate(frame)
-            ]
+            [Vertex(idx, *vtx["pos"], *vtx["uv"], *vtx["rgba"]) for idx, vtx in enumerate(frame)]
             for frame in data["frames"]
         ]
         triangles = [Triangle(*t) for t in data["triangles"]]
@@ -120,9 +114,7 @@ def build(inputs: List[Path], output: Path):
                 f.write(f"s32 padding_{anim.name}[] = {{ 0, 0 }};\n\n")
 
             # vtx
-            f.write(
-                f"ImgFXVtx {vtx_name}[{len(anim.frames)}][{len(anim.frames[0])}] = {{\n"
-            )
+            f.write(f"ImgFXVtx {vtx_name}[{len(anim.frames)}][{len(anim.frames[0])}] = {{\n")
             for frame in anim.frames:
                 f.write("    {\n")
                 for vtx in frame:
@@ -147,11 +139,7 @@ def build(inputs: List[Path], output: Path):
             while cur_tri < len(anim.triangles):
                 # Vertex command every 16 triangles
                 t1 = anim.triangles[cur_tri]
-                t2 = (
-                    anim.triangles[cur_tri + 1]
-                    if cur_tri + 1 < len(anim.triangles)
-                    else None
-                )
+                t2 = anim.triangles[cur_tri + 1] if cur_tri + 1 < len(anim.triangles) else None
 
                 t1x = t1.i - sub_num
                 t1y = t1.j - sub_num
@@ -166,8 +154,7 @@ def build(inputs: List[Path], output: Path):
                 # We need a new chunk
                 if max_t1 >= 32 and not just_chunked:
                     chunk_text = (
-                        f"    gsSPVertex((u8*){vtx_name} + 0xC * {sub_num}, {min(32, max_t1 + 1)}, 0),\n"
-                        + chunk_text
+                        f"    gsSPVertex((u8*){vtx_name} + 0xC * {sub_num}, {min(32, max_t1 + 1)}, 0),\n" + chunk_text
                     )
                     just_chunked = True
                     f.write(chunk_text)
@@ -190,8 +177,7 @@ def build(inputs: List[Path], output: Path):
 
             # Dump final chunk
             chunk_text = (
-                f"    gsSPVertex((u8*){vtx_name} + 0xC * {sub_num}, {max(max_t1, max_t2) + 1}, 0),\n"
-                + chunk_text
+                f"    gsSPVertex((u8*){vtx_name} + 0xC * {sub_num}, {max(max_t1, max_t2) + 1}, 0),\n" + chunk_text
             )
             f.write(chunk_text)
             f.write("    gsSPEndDisplayList(),\n")
@@ -210,9 +196,7 @@ def build(inputs: List[Path], output: Path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="ImgFX animation c file builder")
-    parser.add_argument(
-        "inputs", type=Path, help="json files to build, passed in order", nargs="+"
-    )
+    parser.add_argument("inputs", type=Path, help="json files to build, passed in order", nargs="+")
     parser.add_argument("output", type=Path, help="Output c file path")
     args = parser.parse_args()
 

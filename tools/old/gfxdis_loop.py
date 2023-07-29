@@ -27,10 +27,7 @@ while i < args.end:
 
     # print(f"Start {hex(dis_start)} end {hex(i)}")
     gfxdis = subprocess.run(
-        f"{gfxdis_path.resolve()} "
-        + f"-x "
-        + f"-dc "
-        + f"-d {baserom[dis_start:i].hex()}",
+        f"{gfxdis_path.resolve()} " + f"-x " + f"-dc " + f"-d {baserom[dis_start:i].hex()}",
         capture_output=True,
         shell=True,
         text=True,

@@ -33,16 +33,8 @@ def create_enum(file_content, prefix, ordering):
                 .replace("__", "_")
                 .replace("-", "")
             )
-            key = (
-                prefix.upper() + "_{:<{width}}".format(key, width=max_size + 2).upper()
-            )
-            ret += (
-                "    "
-                + key
-                + " = 0x"
-                + "{:>{fill}{width}}".format(value, fill=0, width=8)
-                + ",\n"
-            )
+            key = prefix.upper() + "_{:<{width}}".format(key, width=max_size + 2).upper()
+            ret += "    " + key + " = 0x" + "{:>{fill}{width}}".format(value, fill=0, width=8) + ",\n"
         else:
             value = (
                 "_".join(re.sub(r"([A-Z]{1,2})", r" \1", value).split())
@@ -50,17 +42,8 @@ def create_enum(file_content, prefix, ordering):
                 .replace("__", "_")
                 .replace("-", "")
             )
-            value = (
-                prefix.upper()
-                + "_{:<{width}}".format(value, width=max_size + 2).upper()
-            )
-            ret += (
-                "    "
-                + value
-                + " = 0x"
-                + "{:>{fill}{width}}".format(key, fill=0, width=8)
-                + ",\n"
-            )
+            value = prefix.upper() + "_{:<{width}}".format(value, width=max_size + 2).upper()
+            ret += "    " + value + " = 0x" + "{:>{fill}{width}}".format(key, fill=0, width=8) + ",\n"
 
     ret += "};\n"
 
@@ -94,11 +77,7 @@ def single_translation(file_path):
 def recursive_translation(database_path):
     ret = ""
 
-    stuff = [
-        f
-        for f in glob(database_path + "/**/*.*", recursive=True)
-        if f.endswith(".enum") or f.endswith(".flags")
-    ]
+    stuff = [f for f in glob(database_path + "/**/*.*", recursive=True) if f.endswith(".enum") or f.endswith(".flags")]
     for element in stuff:
         try:
             file = open(element)

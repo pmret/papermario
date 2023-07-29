@@ -25,11 +25,7 @@ def load_latest_progress(version):
 
         version = Path("ver/current").resolve().parts[-1]
 
-    csv = (
-        urlopen(f"https://papermar.io/reports/progress_{version}.csv")
-        .read()
-        .decode("utf-8")
-    )
+    csv = urlopen(f"https://papermar.io/reports/progress_{version}.csv").read().decode("utf-8")
     latest = csv.split("\n")[-2]
 
     (
@@ -56,14 +52,10 @@ def load_latest_progress(version):
 
 def get_func_info():
     try:
-        result = subprocess.run(
-            ["mips-linux-gnu-objdump", "-x", elf_path], stdout=subprocess.PIPE
-        )
+        result = subprocess.run(["mips-linux-gnu-objdump", "-x", elf_path], stdout=subprocess.PIPE)
         nm_lines = result.stdout.decode().split("\n")
     except:
-        print(
-            f"Error: Could not run objdump on {elf_path} - make sure that the project is built"
-        )
+        print(f"Error: Could not run objdump on {elf_path} - make sure that the project is built")
         sys.exit(1)
 
     sizes = {}
@@ -135,19 +127,13 @@ def do_section_progress(
     section_vram_end,
 ):
     funcs = get_funcs_in_vram_range(vrams, section_vram_start, section_vram_end)
-    matching_size, nonmatching_size = get_funcs_sizes(
-        sizes, matchings, nonmatchings, restrict_to=funcs
-    )
+    matching_size, nonmatching_size = get_funcs_sizes(sizes, matchings, nonmatchings, restrict_to=funcs)
     section_total_size = matching_size + nonmatching_size
     progress_ratio = (matching_size / section_total_size) * 100
     matching_ratio = (matching_size / total_size) * 100
     total_ratio = (section_total_size / total_size) * 100
-    print(
-        f"\t{section_name}: {matching_size} matching bytes / {section_total_size} total ({progress_ratio:.2f}%)"
-    )
-    print(
-        f"\t\t(matched {matching_ratio:.2f}% of {total_ratio:.2f}% total rom for {section_name})"
-    )
+    print(f"\t{section_name}: {matching_size} matching bytes / {section_total_size} total ({progress_ratio:.2f}%)")
+    print(f"\t\t(matched {matching_ratio:.2f}% of {total_ratio:.2f}% total rom for {section_name})")
 
 
 def main(args):
@@ -163,9 +149,7 @@ def main(args):
     nonmatching_funcs = get_nonmatching_funcs()
     matching_funcs = all_funcs - nonmatching_funcs
 
-    matching_size, nonmatching_size = get_funcs_sizes(
-        sizes, matching_funcs, nonmatching_funcs
-    )
+    matching_size, nonmatching_size = get_funcs_sizes(sizes, matching_funcs, nonmatching_funcs)
 
     if len(all_funcs) == 0:
         funcs_matching_ratio = 0.0
@@ -238,19 +222,9 @@ def main(args):
             print(f"Warning: category/total size mismatch on version {args.version}!\n")
             print("Matching size: " + str(matching_size))
             print("Nonmatching size: " + str(nonmatching_size))
-            print(
-                "Sum: "
-                + str(matching_size + nonmatching_size)
-                + " (should be "
-                + str(total_size)
-                + ")"
-            )
-        print(
-            f"{len(matching_funcs)} matched functions / {len(all_funcs)} total ({funcs_matching_ratio:.2f}%)"
-        )
-        print(
-            f"{matching_size} matching bytes / {total_size} total ({matching_ratio:.2f}%)"
-        )
+            print("Sum: " + str(matching_size + nonmatching_size) + " (should be " + str(total_size) + ")")
+        print(f"{len(matching_funcs)} matched functions / {len(all_funcs)} total ({funcs_matching_ratio:.2f}%)")
+        print(f"{matching_size} matching bytes / {total_size} total ({matching_ratio:.2f}%)")
 
         do_section_progress(
             "effects",

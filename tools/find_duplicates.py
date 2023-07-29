@@ -44,11 +44,7 @@ def get_symbol_length(sym_name):
 
 
 def get_symbol_bytes(offsets, func):
-    if (
-        func not in offsets
-        or "start" not in offsets[func]
-        or "end" not in offsets[func]
-    ):
+    if func not in offsets or "start" not in offsets[func] or "end" not in offsets[func]:
         return None
     start = offsets[func]["start"]
     end = offsets[func]["end"]
@@ -84,12 +80,7 @@ def parse_map(fname):
                 continue
             prev_line = line
 
-            if (
-                ram_offset is None
-                or "=" in line
-                or "*fill*" in line
-                or " 0x" not in line
-            ):
+            if ram_offset is None or "=" in line or "*fill*" in line or " 0x" not in line:
                 continue
             ram = int(line[16 : 16 + 18], 0)
             rom = ram - ram_offset
@@ -245,9 +236,7 @@ def all_matches(all_funcs_flag):
         match_dict.update({file: (num_matches, match_list)})
         to_match_files.remove(file)
 
-    output_match_dict(
-        match_dict, num_decomped_dupes, num_undecomped_dupes, num_perfect_dupes, i
-    )
+    output_match_dict(match_dict, num_decomped_dupes, num_undecomped_dupes, num_perfect_dupes, i)
 
 
 def output_match_dict(
@@ -257,9 +246,7 @@ def output_match_dict(
     num_perfect_dupes,
     num_checked_files,
 ):
-    out_file = open(
-        datetime.today().strftime("%Y-%m-%d-%H-%M-%S") + "_all_matches.txt", "w+"
-    )
+    out_file = open(datetime.today().strftime("%Y-%m-%d-%H-%M-%S") + "_all_matches.txt", "w+")
 
     out_file.write(
         "Number of s-files: " + str(len(s_files)) + "\n"
@@ -269,9 +256,7 @@ def output_match_dict(
         "Number of overall exact duplicates found: " + str(num_perfect_dupes) + "\n\n"
     )
 
-    sorted_dict = OrderedDict(
-        sorted(match_dict.items(), key=lambda item: item[1][0], reverse=True)
-    )
+    sorted_dict = OrderedDict(sorted(match_dict.items(), key=lambda item: item[1][0], reverse=True))
 
     print("Creating output file: " + out_file.name, end="\n")
     for file_name, matches in sorted_dict.items():
@@ -321,9 +306,7 @@ def do_cross_query():
                     ccount[cluster_first] += len(sym_bytes[cluster_first][0])
 
                 if len(cluster) % 10 == 0 and len(cluster) >= 10:
-                    print(
-                        f"Cluster {cluster_first} grew to size {len(cluster)} - {sym_name}: {str(cluster_score)}"
-                    )
+                    print(f"Cluster {cluster_first} grew to size {len(cluster)} - {sym_name}: {str(cluster_score)}")
                 break
         if not cluster_match:
             clusters.append([sym_name])
@@ -377,9 +360,7 @@ args = parser.parse_args()
 
 if __name__ == "__main__":
     rom_bytes = read_rom()
-    map_syms = parse_map(
-        os.path.join(root_dir, "ver", "current", "build", "papermario.map")
-    )
+    map_syms = parse_map(os.path.join(root_dir, "ver", "current", "build", "papermario.map"))
     map_offsets = get_map_offsets(map_syms)
 
     s_files = get_all_s_files()

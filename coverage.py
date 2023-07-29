@@ -21,9 +21,7 @@ def strip_c_comments(text):
     return re.sub(pattern, replacer, text)
 
 
-c_func_pattern = re.compile(
-    r"^(static\s+)?[^\s]+\s+([^\s(]+)\(([^;)]*)\)[^;]+{", re.MULTILINE
-)
+c_func_pattern = re.compile(r"^(static\s+)?[^\s]+\s+([^\s(]+)\(([^;)]*)\)[^;]+{", re.MULTILINE)
 
 
 def funcs_in_c(text):
@@ -52,27 +50,19 @@ def stuff(version):
             matched.extend((m for m in funcs_in_c(text) if not m in matched))
             asm.extend((m for m in include_asms_in_c(text) if not m in asm))
 
-    non_matched = [
-        os.path.splitext(os.path.basename(filename))[0] for filename in ASM_FILES
-    ]
+    non_matched = [os.path.splitext(os.path.basename(filename))[0] for filename in ASM_FILES]
 
     partial_matched = [f for f in matched if f in asm]
     matched = [f for f in matched if not f in partial_matched]
-    matched_but_undeleted_asm = set(
-        [f for f in matched if f in non_matched and not f in partial_matched]
-    )
+    matched_but_undeleted_asm = set([f for f in matched if f in non_matched and not f in partial_matched])
     orphan_asm = set(non_matched) - set(asm) - matched_but_undeleted_asm
 
     to_delete = matched_but_undeleted_asm | orphan_asm
 
     if __name__ == "__main__":
         if "--help" in sys.argv:
-            print(
-                "--fail-undeleted            exit with error code 1 if obsolete .s functions exist"
-            )
-            print(
-                "--delete                    delete obsolete .s functions without asking"
-            )
+            print("--fail-undeleted            exit with error code 1 if obsolete .s functions exist")
+            print("--delete                    delete obsolete .s functions without asking")
             exit()
 
         if len(to_delete) > 0:

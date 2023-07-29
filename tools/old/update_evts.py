@@ -52,11 +52,7 @@ def parse_symbol_addrs():
         attributes = line[line.find("//") :].split(" ")
         ram_addr = int(line[: line.find(";")].split("=")[1].strip(), base=0)
         rom_addr = next(
-            (
-                int(attr.split(":")[1], base=0)
-                for attr in attributes
-                if attr.split(":")[0] == "rom"
-            ),
+            (int(attr.split(":")[1], base=0) for attr in attributes if attr.split(":")[0] == "rom"),
             None,
         )
 
@@ -76,9 +72,7 @@ def find_old_script_ranges(lines, filename):
 
     for line_no, line_content in enumerate(lines):
         r = re.compile(r".*\.h")
-        namespace_temp = list(
-            filter(r.match, os.listdir(os.path.dirname(os.path.abspath(filename))))
-        )
+        namespace_temp = list(filter(r.match, os.listdir(os.path.dirname(os.path.abspath(filename)))))
 
         if "#define NAMESPACE " in line_content:
             namespace = line_content.split(" ")[2].strip()
@@ -128,14 +122,10 @@ def replace_old_script_macros(filename, symbol_addrs):
             try:
                 range_sym = symbol_addrs[range.symbol_name]
             except KeyError:
-                raise UserException(
-                    f"Symbol {range.symbol_name} is not in symbol_addrs"
-                )
+                raise UserException(f"Symbol {range.symbol_name} is not in symbol_addrs")
 
             if not range_sym.rom_addr:
-                raise UserException(
-                    f"Symbol {range.symbol_name} lacks a rom address in symbol_addrs"
-                )
+                raise UserException(f"Symbol {range.symbol_name} lacks a rom address in symbol_addrs")
 
             # Make local symbol map, replacing namespaced symbols with N(sym)
             local_symbol_map = {}

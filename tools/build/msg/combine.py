@@ -72,14 +72,10 @@ if __name__ == "__main__":
             #     messages_by_file[message.header_file_index] = set([message])
 
             if message.index in section:
-                print(
-                    f"warning: multiple messages allocated to id {section_idx:02X}:{message.index:03X}"
-                )
+                print(f"warning: multiple messages allocated to id {section_idx:02X}:{message.index:03X}")
 
                 if section[message.index].name and message.name:
-                    print(
-                        f"warning: message '{section[message.index].name}' and '{message.name}' conflict"
-                    )
+                    print(f"warning: message '{section[message.index].name}' and '{message.name}' conflict")
 
             section[message.index] = message
 
@@ -88,9 +84,7 @@ if __name__ == "__main__":
         section_offsets = []
         for section in sections:
             # convert dict into sorted list
-            section = [
-                msg for idx, msg in sorted(section.items(), key=lambda ele: ele[0])
-            ]
+            section = [msg for idx, msg in sorted(section.items(), key=lambda ele: ele[0])]
 
             message_offsets = []
             for message in section:
@@ -113,18 +107,10 @@ if __name__ == "__main__":
         f.write(b"\0\0\0\0")
 
     with open(header_file, "w") as f:
-        f.write(
-            f"#ifndef _MESSAGE_IDS_H_\n"
-            f"#define _MESSAGE_IDS_H_\n"
-            "\n"
-            '#include "messages.h"\n'
-            "\n"
-        )
+        f.write(f"#ifndef _MESSAGE_IDS_H_\n" f"#define _MESSAGE_IDS_H_\n" "\n" '#include "messages.h"\n' "\n")
 
         for message in messages:
             if message.name:
-                f.write(
-                    f"#define MSG_{message.name} MESSAGE_ID(0x{message.section:02X}, 0x{message.index:03X})\n"
-                )
+                f.write(f"#define MSG_{message.name} MESSAGE_ID(0x{message.section:02X}, 0x{message.index:03X})\n")
 
         f.write("\n#endif\n")

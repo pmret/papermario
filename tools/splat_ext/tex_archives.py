@@ -260,9 +260,7 @@ class TexImage:
                 self.main_height,
             )
             if self.main_fmt == FMT_CI:
-                self.main_img.palette = self.get_n64_pal(
-                    texbuf, self.main_fmt, self.main_depth
-                )
+                self.main_img.palette = self.get_n64_pal(texbuf, self.main_fmt, self.main_depth)
         # main img + mipmaps
         elif self.extra_tiles == TILES_MIPMAPS:
             self.has_mipmaps = True
@@ -282,9 +280,7 @@ class TexImage:
                         break
                     mmw = self.main_width // divisor
                     mmh = self.main_height // divisor
-                    mipmap = self.get_n64_img(
-                        texbuf, self.main_fmt, self.main_depth, mmw, mmh
-                    )
+                    mipmap = self.get_n64_img(texbuf, self.main_fmt, self.main_depth, mmw, mmh)
                     self.mipmaps.append(mipmap)
 
                     divisor = divisor * 2
@@ -334,13 +330,9 @@ class TexImage:
                 pal = self.get_n64_pal(texbuf, self.main_fmt, self.main_depth)
                 self.main_img.palette = pal
             # read aux
-            self.aux_img = self.get_n64_img(
-                texbuf, self.aux_fmt, self.aux_depth, self.aux_width, self.aux_height
-            )
+            self.aux_img = self.get_n64_img(texbuf, self.aux_fmt, self.aux_depth, self.aux_width, self.aux_height)
             if self.aux_fmt == FMT_CI:
-                self.aux_img.palette = self.get_n64_pal(
-                    texbuf, self.aux_fmt, self.aux_depth
-                )
+                self.aux_img.palette = self.get_n64_pal(texbuf, self.aux_fmt, self.aux_depth)
 
     # constructs a dictionary entry for the tex archive for this texture
     def get_json_entry(self):
@@ -418,9 +410,7 @@ class TexImage:
 
             return (r << 11) | (g << 6) | (b << 1) | a
 
-        (out_img, out_w, out_h) = Converter(
-            mode=fmt_str.lower(), infile=img_file, flip_y=True
-        ).convert()
+        (out_img, out_w, out_h) = Converter(mode=fmt_str.lower(), infile=img_file, flip_y=True).convert()
 
         out_pal = bytearray()
         if fmt_str == "CI4" or fmt_str == "CI8":

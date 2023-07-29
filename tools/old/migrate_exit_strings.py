@@ -37,9 +37,7 @@ for segment in config["segments"]:
         if len(segment["subsegments"][-1]) != 1:
             continue
 
-        asm_file_path = (
-            f"{asm_data_dir}{segment['dir']}/{segment['subsegments'][-1][0]:X}.rodata.s"
-        )
+        asm_file_path = f"{asm_data_dir}{segment['dir']}/{segment['subsegments'][-1][0]:X}.rodata.s"
 
         if not os.path.exists(asm_file_path):
             continue
@@ -57,15 +55,11 @@ for segment in config["segments"]:
         exit_strings = []
         for i in range(0, len(exit_data), 16):
             exit_string = exit_data[i : i + 16]
-            decoded = (
-                bytearray.fromhex(exit_string).replace(b"\0", b"").decode("EUC-JP")
-            )
+            decoded = bytearray.fromhex(exit_string).replace(b"\0", b"").decode("EUC-JP")
             exit_strings.append(decoded)
 
         for i in range(len(exit_strings)):
-            c_lines.insert(
-                2 + i, f'static char* N(exit_str_{i}) = "{exit_strings[i]}";\n'
-            )
+            c_lines.insert(2 + i, f'static char* N(exit_str_{i}) = "{exit_strings[i]}";\n')
         c_lines.insert(2 + len(exit_strings), "\n")
 
         with open(c_file_path, "w", newline="\n") as f:

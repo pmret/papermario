@@ -33,9 +33,7 @@ import xml.etree.ElementTree as ET
 from dataclasses import dataclass
 from typing import Dict, List, Tuple
 
-TOOLS_DIR = Path(
-    os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-)
+TOOLS_DIR = Path(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 sys.path.append(str(TOOLS_DIR))
 
 ASSET_DIR = TOOLS_DIR.parent / "assets"
@@ -52,11 +50,7 @@ def pack_color(r, g, b, a) -> int:
 def get_player_sprite_metadata(
     asset_stack: Tuple[Path, ...],
 ) -> Tuple[str, List[str], List[str]]:
-    orderings_tree = ET.parse(
-        get_asset_path(
-            Path("sprite") / PLAYER_SPRITE_MEDADATA_XML_FILENAME, asset_stack
-        )
-    )
+    orderings_tree = ET.parse(get_asset_path(Path("sprite") / PLAYER_SPRITE_MEDADATA_XML_FILENAME, asset_stack))
 
     build_info = str(orderings_tree.getroot()[0].text)
 
@@ -72,9 +66,7 @@ def get_player_sprite_metadata(
 
 
 def get_npc_sprite_metadata(asset_stack: Tuple[Path, ...]) -> List[str]:
-    orderings_tree = ET.parse(
-        get_asset_path(Path("sprite") / NPC_SPRITE_MEDADATA_XML_FILENAME, asset_stack)
-    )
+    orderings_tree = ET.parse(get_asset_path(Path("sprite") / NPC_SPRITE_MEDADATA_XML_FILENAME, asset_stack))
 
     sprite_order: List[str] = []
     for sprite_tag in orderings_tree.getroot()[0]:
@@ -100,18 +92,14 @@ PALETTE_CACHE: Dict[str, bytes] = {}
 PLAYER_XML_CACHE: Dict[str, ET.Element] = {}
 
 # TODO perhaps encode this better
-SPECIAL_RASTER_BYTES = (
-    b"\x80\x30\x02\x10\x00\x00\x02\x00\x00\x00\x00\x01\x00\x10\x00\x00"
-)
+SPECIAL_RASTER_BYTES = b"\x80\x30\x02\x10\x00\x00\x02\x00\x00\x00\x00\x01\x00\x10\x00\x00"
 
 
 def cache_player_rasters(raster_order: List[str], asset_stack: Tuple[Path, ...]):
     # Read all player rasters and cache them
     cur_offset = 0
     for raster_name in raster_order:
-        png_path = get_asset_path(
-            Path(f"sprite/player/rasters/{raster_name}.png"), asset_stack
-        )
+        png_path = get_asset_path(Path(f"sprite/player/rasters/{raster_name}.png"), asset_stack)
 
         # "Weird" raster
         if os.path.getsize(png_path) == 0x10:
@@ -232,9 +220,7 @@ def player_xml_to_bytes(xml: ET.Element, asset_stack: Tuple[Path, ...]) -> List[
         source = palette_xml.attrib["src"]
         front_only = bool(palette_xml.get("front_only", False))
         if source not in PALETTE_CACHE:
-            palette_path = get_asset_path(
-                Path(f"sprite/player/palettes/{source}"), asset_stack
-            )
+            palette_path = get_asset_path(Path(f"sprite/player/palettes/{source}"), asset_stack)
             with open(palette_path, "rb") as f:
                 img = png.Reader(f)
                 img.preamble(True)
@@ -270,9 +256,7 @@ def player_xml_to_bytes(xml: ET.Element, asset_stack: Tuple[Path, ...]) -> List[
         if "back" in raster_xml.attrib:
             has_back = True
         r = player_raster_from_xml(raster_xml, back=False)
-        raster_bytes += struct.pack(
-            ">IBBBB", raster_offset, r.width, r.height, r.palette_idx, 0xFF
-        )
+        raster_bytes += struct.pack(">IBBBB", raster_offset, r.width, r.height, r.palette_idx, 0xFF)
 
         raster_offset += r.width * r.height // 2
 
@@ -292,9 +276,7 @@ def player_xml_to_bytes(xml: ET.Element, asset_stack: Tuple[Path, ...]) -> List[
                 height = int(special[1], 16)
             palette = int(raster_xml.attrib.get(BACK_PALETTE_XML, r.palette_idx))
 
-            raster_bytes_back += struct.pack(
-                ">IBBBB", raster_offset, width, height, palette, 0xFF
-            )
+            raster_bytes_back += struct.pack(">IBBBB", raster_offset, width, height, palette, 0xFF)
 
             if is_back:
                 raster_offset += width * height // 2
@@ -312,9 +294,7 @@ def player_xml_to_bytes(xml: ET.Element, asset_stack: Tuple[Path, ...]) -> List[
     raster_offsets_bytes_back = b""
     for i in range(len(xml[1])):
         raster_offsets_bytes += int.to_bytes(raster_list_start + i * 8, 4, "big")
-        raster_offsets_bytes_back += int.to_bytes(
-            raster_list_start_back + i * 8, 4, "big"
-        )
+        raster_offsets_bytes_back += int.to_bytes(raster_list_start_back + i * 8, 4, "big")
     raster_offsets_bytes += LIST_END_BYTES
     raster_offsets_bytes_back += LIST_END_BYTES
 
@@ -330,9 +310,7 @@ def player_xml_to_bytes(xml: ET.Element, asset_stack: Tuple[Path, ...]) -> List[
         palette_offsets_bytes += int.to_bytes(palette_list_start + i * 0x20, 4, "big")
         front_only = bool(palette_xml.attrib.get("front_only", False))
         if not front_only:
-            palette_offsets_bytes_back += int.to_bytes(
-                palette_list_start_back + i * 0x20, 4, "big"
-            )
+            palette_offsets_bytes_back += int.to_bytes(palette_list_start_back + i * 0x20, 4, "big")
     palette_offsets_bytes += LIST_END_BYTES
     palette_offsets_bytes_back += LIST_END_BYTES
 
@@ -397,9 +375,7 @@ def write_player_sprite_header(
         for palette_xml in sprite_xml[0]:
             palette_id = int(palette_xml.attrib["id"], 0x10)
             palette_name = palette_xml.attrib["name"]
-            player_palettes[sprite_name][
-                f"SPR_PAL_{sprite_name}_{palette_name}"
-            ] = palette_id
+            player_palettes[sprite_name][f"SPR_PAL_{sprite_name}_{palette_name}"] = palette_id
 
             for anim_id, anim_xml in enumerate(sprite_xml[2]):
                 anim_name = anim_xml.attrib["name"]
@@ -413,9 +389,7 @@ def write_player_sprite_header(
         for raster_xml in sprite_xml[1]:
             raster_id = int(raster_xml.attrib["id"], 0x10)
             raster_name = raster_xml.attrib["name"]
-            player_rasters[sprite_name][
-                f"SPR_IMG_{sprite_name}_{raster_name}"
-            ] = raster_id
+            player_rasters[sprite_name][f"SPR_IMG_{sprite_name}_{raster_name}"] = raster_id
 
             raster = RASTER_CACHE[raster_xml.attrib["src"][:-4]]
             if max_size < raster.size:
@@ -449,9 +423,7 @@ def write_player_sprite_header(
         f.write("};\n\n")
 
         for sprite_name in max_sprite_sizes:
-            f.write(
-                f"#define MAX_IMG_{sprite_name} 0x{max_sprite_sizes[sprite_name]:04X}\n"
-            )
+            f.write(f"#define MAX_IMG_{sprite_name} 0x{max_sprite_sizes[sprite_name]:04X}\n")
         f.write("\n")
 
         for sprite_name in sprite_order:
@@ -472,15 +444,11 @@ def write_player_sprite_header(
         f.write(f"#endif // {ifdef_name}\n")
 
 
-def build_player_sprites(
-    sprite_order: List[str], build_dir: Path, asset_stack: Tuple[Path, ...]
-) -> bytes:
+def build_player_sprites(sprite_order: List[str], build_dir: Path, asset_stack: Tuple[Path, ...]) -> bytes:
     sprite_bytes: List[bytes] = []
 
     for sprite_name in sprite_order:
-        sprite_bytes.extend(
-            player_xml_to_bytes(PLAYER_XML_CACHE[sprite_name], asset_stack)
-        )
+        sprite_bytes.extend(player_xml_to_bytes(PLAYER_XML_CACHE[sprite_name], asset_stack))
 
     # Compress sprite bytes
     compressed_sprite_bytes: bytes = b""
@@ -560,9 +528,7 @@ def build_player_rasters(sprite_order: List[str], raster_order: List[str]) -> by
             if has_back:
                 if "back" in raster_xml.attrib:
                     png_info = RASTER_CACHE[raster_xml.attrib["back"][:-4]]
-                    sheet_rtes_back.append(
-                        RasterTableEntry(png_info.offset, png_info.size)
-                    )
+                    sheet_rtes_back.append(RasterTableEntry(png_info.offset, png_info.size))
                 else:
                     sheet_rtes_back.append(RasterTableEntry(SPECIAL_RASTER, 0x10))
 
@@ -623,27 +589,21 @@ def build(
     build_dir: Path,
     asset_stack: Tuple[Path, ...],
 ) -> None:
-    build_info, player_sprite_order, player_raster_order = get_player_sprite_metadata(
-        asset_stack
-    )
+    build_info, player_sprite_order, player_raster_order = get_player_sprite_metadata(asset_stack)
     npc_sprite_order = get_npc_sprite_metadata(asset_stack)
 
     cache_player_rasters(player_raster_order, asset_stack)
 
     # Read and cache player XMLs
     for sprite_name in player_sprite_order:
-        sprite_xml = ET.parse(
-            get_asset_path(Path(f"sprite/player/{sprite_name}.xml"), asset_stack)
-        ).getroot()
+        sprite_xml = ET.parse(get_asset_path(Path(f"sprite/player/{sprite_name}.xml"), asset_stack)).getroot()
         PLAYER_XML_CACHE[sprite_name] = sprite_xml
 
     # Encode build_info to bytes and pad to 0x10
     build_info_bytes = build_info.encode("ascii")
     build_info_bytes += b"\0" * (0x10 - len(build_info_bytes))
 
-    player_sprite_bytes = build_player_sprites(
-        player_sprite_order, build_dir / "player", asset_stack
-    )
+    player_sprite_bytes = build_player_sprites(player_sprite_order, build_dir / "player", asset_stack)
     player_raster_bytes = build_player_rasters(player_sprite_order, player_raster_order)
     npc_sprite_bytes = build_npc_sprites(npc_sprite_order, build_dir)
 
@@ -659,13 +619,7 @@ def build(
         npc_sprites_offset,
     )
 
-    final_data = (
-        build_info_bytes
-        + major_file_divisons
-        + player_raster_bytes
-        + player_sprite_bytes
-        + npc_sprite_bytes
-    )
+    final_data = build_info_bytes + major_file_divisons + player_raster_bytes + player_sprite_bytes + npc_sprite_bytes
 
     with open(out_file, "wb") as f:
         f.write(final_data)

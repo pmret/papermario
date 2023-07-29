@@ -66,9 +66,7 @@ def build(out_bin: Path, in_xml: Path, out_header: Path, asset_stack: Tuple[Path
             out_bytes += out_pal
 
             if type == "pair":
-                img_path = str(
-                    get_asset_path(Path(f"icon/{file}.disabled.png"), asset_stack)
-                )
+                img_path = str(get_asset_path(Path(f"icon/{file}.disabled.png"), asset_stack))
                 (out_img, out_pal, out_w, out_h) = get_img_file("CI4", str(img_path))
 
                 offsets[name + "_disabled_raster"] = offsets[name + "_raster"]

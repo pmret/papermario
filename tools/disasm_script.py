@@ -231,13 +231,7 @@ def get_constants():
     # exit()
     # sprites
     sprite_path = Path(
-        Path(__file__).resolve().parent.parent
-        / "ver"
-        / "current"
-        / "build"
-        / "include"
-        / "sprite"
-        / "npc"
+        Path(__file__).resolve().parent.parent / "ver" / "current" / "build" / "include" / "sprite" / "npc"
     )
     for file in sprite_path.iterdir():
         fd = file.read_text()
@@ -296,9 +290,7 @@ def fix_args(self, func, args, info):
     new_args = []
     args = args.split(", ")
     for i, arg in enumerate(args):
-        if (remove_evt_ptr(arg).startswith("D_B")) or (
-            i == 0 and func == "MakeEntity" and arg.startswith("D_")
-        ):
+        if (remove_evt_ptr(arg).startswith("D_B")) or (i == 0 and func == "MakeEntity" and arg.startswith("D_")):
             if func == "MakeEntity":
                 arg = "MAKE_ENTITY_END"
             else:
@@ -338,9 +330,7 @@ def fix_args(self, func, args, info):
                         if func == "SetAnimation" and int(new_args[1], 10) == 0:
                             call = f"{CONSTANTS['PlayerAnims'][argNum]}"
                         elif value in CONSTANTS["NPC_SPRITE"]:
-                            self.INCLUDES_NEEDED["sprites"].add(
-                                CONSTANTS["NPC_SPRITE"][str(value) + ".h"]
-                            )
+                            self.INCLUDES_NEEDED["sprites"].add(CONSTANTS["NPC_SPRITE"][str(value) + ".h"])
                             call = CONSTANTS["NPC_SPRITE"][value]
                         else:
                             call = f"{argNum:06X}"
@@ -668,9 +658,7 @@ class ScriptDisassembler:
         self.prelude = prelude
 
         if use_script_lib:
-            self.symbol_map = extend_symbol_map(
-                symbol_map, script_lib(self.bytes.tell())
-            )
+            self.symbol_map = extend_symbol_map(symbol_map, script_lib(self.bytes.tell()))
         else:
             self.symbol_map = symbol_map
 
@@ -699,9 +687,7 @@ class ScriptDisassembler:
             # print(f"Op {opcode:X}, argc {argc}")
 
             if opcode > 0xFF or argc > 0xFF:
-                raise Exception(
-                    f"script '{self.script_name}' is malformed (opcode {opcode:X}, argc {argc:X})"
-                )
+                raise Exception(f"script '{self.script_name}' is malformed (opcode {opcode:X}, argc {argc:X})")
 
             argv = []
             for i in range(0, argc):
@@ -777,12 +763,7 @@ class ScriptDisassembler:
 
     def replace_star_rod_function_name(self, name):
         vram = int(name.split("_", 1)[1], 16)
-        name = (
-            "N("
-            + name.replace("function", "func")
-            + f"_{(vram - 0x80240000)+self.romstart:X}"
-            + ")"
-        )
+        name = "N(" + name.replace("function", "func") + f"_{(vram - 0x80240000)+self.romstart:X}" + ")"
         return name
 
     def replace_star_rod_prefix(self, addr, isArg=False):
@@ -1007,9 +988,7 @@ class ScriptDisassembler:
             if self.var(argv[0]).startswith("LW"):
                 new_arg = trim_lw(self.var(argv[0]))
                 if self.var(argv[1]).startswith("LW"):
-                    from_arg = trim_lw(
-                        self.var(argv[1])
-                    )  # Carry type info of LW if being set from an LW
+                    from_arg = trim_lw(self.var(argv[1]))  # Carry type info of LW if being set from an LW
                 else:
                     from_arg = 0  # If a constant, we no longer know the type
                 LOCAL_WORDS[int(new_arg)] = LOCAL_WORDS[int(from_arg)]
@@ -1068,17 +1047,11 @@ class ScriptDisassembler:
         elif opcode == 0x3D:
             self.write_line(f"EVT_USE_FLAG_ARRAY({self.var(argv[0])})")
         elif opcode == 0x3E:
-            self.write_line(
-                f"EVT_MALLOC_ARRAY({self.var(argv[0])}, {self.var(argv[1])})"
-            )
+            self.write_line(f"EVT_MALLOC_ARRAY({self.var(argv[0])}, {self.var(argv[1])})")
         elif opcode == 0x3F:
-            self.write_line(
-                f"EVT_BITWISE_AND({self.var(argv[0])}, {self.var(argv[1])})"
-            )
+            self.write_line(f"EVT_BITWISE_AND({self.var(argv[0])}, {self.var(argv[1])})")
         elif opcode == 0x40:
-            self.write_line(
-                f"EVT_BITWISE_AND_CONST({self.var(argv[0])}, {self.var(argv[1])})"
-            )
+            self.write_line(f"EVT_BITWISE_AND_CONST({self.var(argv[0])}, {self.var(argv[1])})")
         elif opcode == 0x41:
             self.write_line(f"EVT_BITWISE_OR({self.var(argv[0])}, 0x{argv[1]:X})")
         elif opcode == 0x42:
@@ -1096,9 +1069,7 @@ class ScriptDisassembler:
             elif func == "GotoMap" or func == "GotoMapSpecial":
                 args = [self.var(a, use_evt_ptr=True) for a in argv[2:]]
                 args_str = ", ".join(args)
-                self.write_line(
-                    f"EVT_CALL({func}, EVT_PTR(UNK_STR_{argv[1]:X}), {args_str})"
-                )
+                self.write_line(f"EVT_CALL({func}, EVT_PTR(UNK_STR_{argv[1]:X}), {args_str})")
             elif args_str:
                 self.write_line(f"EVT_CALL({func}, {args_str})")
             else:
@@ -1106,9 +1077,7 @@ class ScriptDisassembler:
         elif opcode == 0x44:
             self.write_line(f"EVT_EXEC({self.addr_ref(argv[0])})")
         elif opcode == 0x45:
-            self.write_line(
-                f"EVT_EXEC_GET_TID({self.addr_ref(argv[0])}, {self.var(argv[1])})"
-            )
+            self.write_line(f"EVT_EXEC_GET_TID({self.addr_ref(argv[0])}, {self.var(argv[1])})")
         elif opcode == 0x46:
             self.write_line(f"EVT_EXEC_WAIT({self.addr_ref(argv[0])})")
         elif opcode == 0x47:
@@ -1152,9 +1121,7 @@ class ScriptDisassembler:
         elif opcode == 0x54:
             self.write_line(f"EVT_RESUME_THREAD({self.var(argv[0])})")
         elif opcode == 0x55:
-            self.write_line(
-                f"EVT_IS_THREAD_RUNNING({self.var(argv[0])}, {self.var(argv[1])})"
-            )
+            self.write_line(f"EVT_IS_THREAD_RUNNING({self.var(argv[0])}, {self.var(argv[1])})")
         elif opcode == 0x56:
             self.write_line("EVT_THREAD")
             self.indent += 1
@@ -1256,9 +1223,7 @@ if __name__ == "__main__":
             first_print = False
             while offset < args.end:
                 f.seek(offset)
-                script = ScriptDisassembler(
-                    f, args.offset, {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED
-                )
+                script = ScriptDisassembler(f, args.offset, {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED)
                 try:
                     script_text = script.disassemble()
                     if script.instructions > 1 and "_EVT_CMD" not in script_text:
@@ -1315,15 +1280,11 @@ if __name__ == "__main__":
             looping = 1
             while looping:
                 try:
-                    script = ScriptDisassembler(
-                        f, loffset, {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED
-                    )
+                    script = ScriptDisassembler(f, loffset, {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED)
 
                     if args.si:
                         print(
-                            ScriptDisassembler(
-                                f, loffset, {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED
-                            ).disassemble(),
+                            ScriptDisassembler(f, loffset, {}, 0x978DE0, INCLUDES_NEEDED, INCLUDED).disassemble(),
                             end="",
                         )
                     else:

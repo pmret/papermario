@@ -81,9 +81,7 @@ if __name__ == "__main__":
     out_addrs = {sym: max(addrs[sym]) for sym in addrs}
 
     out_addrs["entity_data_vram_end"] = (
-        out_addrs["entity_data_vram_end"]
-        + out_addrs["world_action_vram_end"]
-        - HARDCODED_ADDR
+        out_addrs["entity_data_vram_end"] + out_addrs["world_action_vram_end"] - HARDCODED_ADDR
     )
 
     out = ""
