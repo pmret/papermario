@@ -4,8 +4,10 @@ from sys import argv, stderr
 from os import path
 from xml.dom.minidom import parse
 
+
 def eprint(*args, **kwargs):
     print(*args, file=stderr, **kwargs)
+
 
 if __name__ == "__main__":
     _, xml_path = argv
@@ -13,8 +15,8 @@ if __name__ == "__main__":
 
     map_name = path.basename(xml_path)[:-4]
 
-    print("#include \"common.h\"")
-    print("#include \"map.h\"")
+    print('#include "common.h"')
+    print('#include "map.h"')
     print("")
     print("#ifndef NAMESPACE")
     print(f"#define NAMESPACE {map_name}")

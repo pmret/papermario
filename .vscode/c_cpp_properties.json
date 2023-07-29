@@ -12,9 +12,9 @@
             },
             "includePath": [
                 "${workspaceFolder}/include",
-                "${workspaceFolder}/ver/us/build/include",
+                "${workspaceFolder}/ver/pal/build/include",
                 "${workspaceFolder}/src",
-                "${workspaceFolder}/assets/us"
+                "${workspaceFolder}/assets/pal"
             ],
             "defines": [
                 "F3DEX_GBI_2",

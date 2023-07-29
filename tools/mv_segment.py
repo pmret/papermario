@@ -26,12 +26,21 @@ if os.path.exists(f"src/{args.src}.c"):
 
 if os.path.exists(f"ver/current/asm/nonmatchings/{args.src}"):
     print("moving asm/nonmatchings files")
-    os.rename(f"ver/current/asm/nonmatchings/{args.src}", f"ver/current/asm/nonmatchings/{args.dest}")
+    os.rename(
+        f"ver/current/asm/nonmatchings/{args.src}",
+        f"ver/current/asm/nonmatchings/{args.dest}",
+    )
 
 if os.path.exists(f"ver/current/asm/data/{args.src}.data.s"):
     print("moving data file")
-    os.rename(f"ver/current/asm/data/{args.src}.data.s", f"ver/current/asm/data/{args.dest}.data.s")
+    os.rename(
+        f"ver/current/asm/data/{args.src}.data.s",
+        f"ver/current/asm/data/{args.dest}.data.s",
+    )
 
 if os.path.exists(f"ver/current/asm/data/{args.src}.rodata.s"):
     print("moving rodata file")
-    os.rename(f"ver/current/asm/data/{args.src}.rodata.s", f"ver/current/asm/data/{args.dest}.rodata.s")
+    os.rename(
+        f"ver/current/asm/data/{args.src}.rodata.s",
+        f"ver/current/asm/data/{args.dest}.rodata.s",
+    )

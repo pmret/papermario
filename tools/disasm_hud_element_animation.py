@@ -3,62 +3,63 @@
 import struct
 import argparse
 
+
 def fmt_size(val):
     if val == 0:
-        return 'HUD_ELEMENT_SIZE_8x8'
+        return "HUD_ELEMENT_SIZE_8x8"
     elif val == 1:
-        return 'HUD_ELEMENT_SIZE_16x16'
+        return "HUD_ELEMENT_SIZE_16x16"
     elif val == 2:
-        return 'HUD_ELEMENT_SIZE_24x24'
+        return "HUD_ELEMENT_SIZE_24x24"
     elif val == 3:
-        return 'HUD_ELEMENT_SIZE_32x32'
+        return "HUD_ELEMENT_SIZE_32x32"
     elif val == 4:
-        return 'HUD_ELEMENT_SIZE_48x48'
+        return "HUD_ELEMENT_SIZE_48x48"
     elif val == 5:
-        return 'HUD_ELEMENT_SIZE_64x64'
+        return "HUD_ELEMENT_SIZE_64x64"
     elif val == 6:
-        return 'HUD_ELEMENT_SIZE_8x16'
+        return "HUD_ELEMENT_SIZE_8x16"
     elif val == 7:
-        return 'HUD_ELEMENT_SIZE_16x8'
+        return "HUD_ELEMENT_SIZE_16x8"
     elif val == 8:
-        return 'HUD_ELEMENT_SIZE_16x24'
+        return "HUD_ELEMENT_SIZE_16x24"
     elif val == 9:
-        return 'HUD_ELEMENT_SIZE_16x32'
+        return "HUD_ELEMENT_SIZE_16x32"
     elif val == 10:
-        return 'HUD_ELEMENT_SIZE_64x32'
+        return "HUD_ELEMENT_SIZE_64x32"
     elif val == 11:
-        return 'HUD_ELEMENT_SIZE_32x16'
+        return "HUD_ELEMENT_SIZE_32x16"
     elif val == 12:
-        return 'HUD_ELEMENT_SIZE_12x12'
+        return "HUD_ELEMENT_SIZE_12x12"
     elif val == 13:
-        return 'HUD_ELEMENT_SIZE_48x24'
+        return "HUD_ELEMENT_SIZE_48x24"
     elif val == 14:
-        return 'HUD_ELEMENT_SIZE_32x8'
+        return "HUD_ELEMENT_SIZE_32x8"
     elif val == 15:
-        return 'HUD_ELEMENT_SIZE_24x8'
+        return "HUD_ELEMENT_SIZE_24x8"
     elif val == 16:
-        return 'HUD_ELEMENT_SIZE_64x16'
+        return "HUD_ELEMENT_SIZE_64x16"
     elif val == 17:
-        return 'HUD_ELEMENT_SIZE_16x64'
+        return "HUD_ELEMENT_SIZE_16x64"
     elif val == 18:
-        return 'HUD_ELEMENT_SIZE_192x32'
+        return "HUD_ELEMENT_SIZE_192x32"
     elif val == 19:
-        return 'HUD_ELEMENT_SIZE_40x40'
+        return "HUD_ELEMENT_SIZE_40x40"
     elif val == 20:
-        return 'HUD_ELEMENT_SIZE_24x16'
+        return "HUD_ELEMENT_SIZE_24x16"
     elif val == 21:
-        return 'HUD_ELEMENT_SIZE_32x40'
+        return "HUD_ELEMENT_SIZE_32x40"
     elif val == 22:
-        return 'HUD_ELEMENT_SIZE_40x16'
+        return "HUD_ELEMENT_SIZE_40x16"
     elif val == 23:
-        return 'HUD_ELEMENT_SIZE_40x24'
+        return "HUD_ELEMENT_SIZE_40x24"
     elif val == 24:
-        return 'HUD_ELEMENT_SIZE_32x24'
+        return "HUD_ELEMENT_SIZE_32x24"
     else:
         return val
 
 
-class HudElementScript():
+class HudElementScript:
     def __init__(self, symbol):
         self.symbol = symbol
         self.buffer = []
@@ -172,7 +173,7 @@ if __name__ == "__main__":
                         if word > 0x8000000:
                             word = f"0x{word:X}"
                         else:
-                            word, = struct.unpack(">i", struct.pack(">I", word))
+                            (word,) = struct.unpack(">i", struct.pack(">I", word))
                             print(word)
                     except ValueError:
                         pass

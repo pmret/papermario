@@ -217,7 +217,6 @@ class AnimComponent:
     def size(self):
         return len(self.commands)
 
-
     @staticmethod
     def parse_commands(command_list: List[int]) -> List[Animation]:
         ret: List[Animation] = []
@@ -329,10 +328,7 @@ class AnimComponent:
 
         x, y, z = struct.unpack(">hhh", data[6:12])
 
-        commands = [
-            int.from_bytes(d[0:2], byteorder="big", signed=False)
-            for d in iter_in_groups(commands_data, 2)
-        ]
+        commands = [int.from_bytes(d[0:2], byteorder="big", signed=False) for d in iter_in_groups(commands_data, 2)]
         return AnimComponent(x, y, z, commands)
 
     @property

@@ -9,9 +9,7 @@ from splat_ext.pm_effect_loads import effects_from_yaml
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
-        description="Builds effect table, function declarations, macros, and enum"
-    )
+    parser = argparse.ArgumentParser(description="Builds effect table, function declarations, macros, and enum")
     parser.add_argument("in_yaml")
     parser.add_argument("out_dir", type=Path)
     args = parser.parse_args()
@@ -31,9 +29,7 @@ if __name__ == "__main__":
 
         effect_enum_text += f"    {enum_name} = 0x{i:02X},\n"
         if not effect.empty:
-            effect_table_text += (
-                f"    FX_ENTRY({effect.name}, effect_gfx_{effect.gfx}),\n"
-            )
+            effect_table_text += f"    FX_ENTRY({effect.name}, effect_gfx_{effect.gfx}),\n"
             fx_decls_text += effect.get_macro_call("fx_" + effect.name) + ";\n"
             main_decls_text += effect.get_macro_call(effect.name + "_main") + ";\n"
             macro_defs += effect.get_macro_def() + "\n"

@@ -22,7 +22,7 @@ def data_to_c(file_path):
     output = ""
     pattern = re.compile(r"(dlabel (jtbl_.*|.+_.*)\n.(\w+) (.*))")
 
-    for (all, symbol, type, data) in re.findall(pattern, s):
+    for all, symbol, type, data in re.findall(pattern, s):
         if type == "word":
             if symbol.startswith("jtbl_"):
                 output += "dlabel " + symbol + "\n" + ".word " + data.replace("L", ".L") + "\n\n"
@@ -42,7 +42,7 @@ def out_to_file(output, file_path):
     if not os.path.exists(output_dir):
         os.mkdir(output_dir)
 
-    file_name = file_path[file_path.rfind("/"):-7]
+    file_name = file_path[file_path.rfind("/") : -7]
     file = open("data2c/" + file_name + ".c", "w+")
     file.write(output)
     file.close()
@@ -74,9 +74,19 @@ def query(file, to_file):
 
 
 parser = argparse.ArgumentParser(description="Tool to translate .data.s files to data arrays")
-parser.add_argument("query", help="data file", nargs='?', default=None)
-parser.add_argument("--all", help="translate all data files at once and output them into /data2c", action='store_true', required=False)
-parser.add_argument("--to-file", help="redirect the output into a file. Can not be used in combination with --all", action='store_true', required=False)
+parser.add_argument("query", help="data file", nargs="?", default=None)
+parser.add_argument(
+    "--all",
+    help="translate all data files at once and output them into /data2c",
+    action="store_true",
+    required=False,
+)
+parser.add_argument(
+    "--to-file",
+    help="redirect the output into a file. Can not be used in combination with --all",
+    action="store_true",
+    required=False,
+)
 
 args = parser.parse_args()
 

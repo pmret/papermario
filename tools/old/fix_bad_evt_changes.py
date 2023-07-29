@@ -28,7 +28,7 @@ for filename, line_number, bad_symbol_name in problems:
         continue
 
     if old_line.startswith("N(") or old_line.startswith("await N("):
-        good_symbol_name = old_line[old_line.find("N("):].split(")", 1)[0] + ")"
+        good_symbol_name = old_line[old_line.find("N(") :].split(")", 1)[0] + ")"
     else:
         good_symbol_name = old_line.split("(", 1)[0]
 
@@ -38,4 +38,3 @@ for filename, line_number, bad_symbol_name in problems:
 
     with open(filename, "w") as f:
         f.writelines(lines)
-

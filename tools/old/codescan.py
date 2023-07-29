@@ -11,6 +11,7 @@ script_dir = os.path.dirname(os.path.realpath(__file__))
 root_dir = os.path.abspath(os.path.join(script_dir, "../.."))
 
 import glob, os
+
 os.chdir(root_dir)
 
 for f in Path(root_dir).rglob("*.bin"):
@@ -20,7 +21,10 @@ for f in Path(root_dir).rglob("*.bin"):
         continue
 
     ras = []
-    result = subprocess.run(["mips-linux-gnu-objdump", "-Dz",  "-bbinary", "-mmips", "-EB" , f], stdout=subprocess.PIPE)
+    result = subprocess.run(
+        ["mips-linux-gnu-objdump", "-Dz", "-bbinary", "-mmips", "-EB", f],
+        stdout=subprocess.PIPE,
+    )
     output = result.stdout.decode().split("\n")
 
     for line in output:

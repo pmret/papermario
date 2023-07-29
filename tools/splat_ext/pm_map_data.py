@@ -135,65 +135,45 @@ class N64SegPm_map_data(N64Segment):
                     w = png.Writer(150, 105, palette=parse_palette(bytes[:0x200]))
                     w.write_array(f, bytes[0x200:])
             elif name == "title_data":
-                if "ver/us" in str(options.opts.target_path) or "ver/pal" in str(
-                    options.opts.target_path
-                ):
+                if "ver/us" in str(options.opts.target_path) or "ver/pal" in str(options.opts.target_path):
                     w = 200
                     h = 112
-                    img = n64img.image.RGBA32(
-                        data=bytes[0x2210 : 0x2210 + w * h * 4], width=w, height=h
-                    )
+                    img = n64img.image.RGBA32(data=bytes[0x2210 : 0x2210 + w * h * 4], width=w, height=h)
                     img.write(fs_dir / "title/logotype.png")
 
                     w = 144
                     h = 32
-                    img = n64img.image.IA8(
-                        data=bytes[0x10 : 0x10 + w * h], width=w, height=h
-                    )
+                    img = n64img.image.IA8(data=bytes[0x10 : 0x10 + w * h], width=w, height=h)
                     img.write(fs_dir / "title/copyright.png")
 
                     w = 128
                     h = 32
-                    img = n64img.image.IA8(
-                        data=bytes[0x1210 : 0x1210 + w * h], width=w, height=h
-                    )
+                    img = n64img.image.IA8(data=bytes[0x1210 : 0x1210 + w * h], width=w, height=h)
                     img.write(fs_dir / "title/press_start.png")
                 else:
                     w = 272
                     h = 88
-                    img = n64img.image.RGBA32(
-                        data=bytes[0x1830 : 0x1830 + w * h * 4], width=w, height=h
-                    )
+                    img = n64img.image.RGBA32(data=bytes[0x1830 : 0x1830 + w * h * 4], width=w, height=h)
                     img.write(fs_dir / "title/logotype.png")
 
                     w = 128
                     h = 32
-                    img = n64img.image.CI4(
-                        data=bytes[0x10 : 0x10 + (w * h // 2)], width=w, height=h
-                    )
+                    img = n64img.image.CI4(data=bytes[0x10 : 0x10 + (w * h // 2)], width=w, height=h)
                     img.palette = parse_palette(bytes[0x810:0x830])
                     img.write(fs_dir / "title/copyright.png")
 
                     w = 128
                     h = 32
-                    img = n64img.image.IA8(
-                        data=bytes[0x830 : 0x830 + w * h], width=w, height=h
-                    )
+                    img = n64img.image.IA8(data=bytes[0x830 : 0x830 + w * h], width=w, height=h)
                     img.write(fs_dir / "title/press_start.png")
             elif name.endswith("_bg"):
 
                 def write_bg_png(bytes, path, header_offset=0):
                     header = bytes[header_offset : header_offset + 0x10]
 
-                    raster_offset = (
-                        int.from_bytes(header[0:4], byteorder="big") - 0x80200000
-                    )
-                    palette_offset = (
-                        int.from_bytes(header[4:8], byteorder="big") - 0x80200000
-                    )
-                    assert (
-                        int.from_bytes(header[8:12], byteorder="big") == 0x000C0014
-                    )  # draw pos
+                    raster_offset = int.from_bytes(header[0:4], byteorder="big") - 0x80200000
+                    palette_offset = int.from_bytes(header[4:8], byteorder="big") - 0x80200000
+                    assert int.from_bytes(header[8:12], byteorder="big") == 0x000C0014  # draw pos
                     width = int.from_bytes(header[12:14], byteorder="big")
                     height = int.from_bytes(header[14:16], byteorder="big")
 
@@ -202,9 +182,7 @@ class N64SegPm_map_data(N64Segment):
                         w = png.Writer(
                             width,
                             height,
-                            palette=parse_palette(
-                                bytes[palette_offset : palette_offset + 512]
-                            ),
+                            palette=parse_palette(bytes[palette_offset : palette_offset + 512]),
                         )
                         w.write_array(f, bytes[raster_offset:])
 
@@ -212,9 +190,7 @@ class N64SegPm_map_data(N64Segment):
 
                 # sbk_bg has an alternative palette
                 if name == "sbk_bg":
-                    write_bg_png(
-                        bytes, fs_dir / "bg" / f"{name}.alt.png", header_offset=0x10
-                    )
+                    write_bg_png(bytes, fs_dir / "bg" / f"{name}.alt.png", header_offset=0x10)
             elif name.endswith("_tex"):
                 TexArchive.extract(bytes, fs_dir / "tex" / name)
             else:

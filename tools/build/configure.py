@@ -28,9 +28,7 @@ PIGMENT_REQ_VERSION = "0.3.0"
 
 
 def exec_shell(command: List[str]) -> str:
-    ret = subprocess.run(
-        command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
-    )
+    ret = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     return ret.stdout
 
 
@@ -50,9 +48,7 @@ def write_ninja_rules(
     if use_ccache:
         ccache = "ccache "
         try:
-            subprocess.call(
-                ["ccache"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
-            )
+            subprocess.call(["ccache"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         except FileNotFoundError:
             ccache = ""
 
@@ -134,9 +130,7 @@ def write_ninja_rules(
         command="sha1sum -c $in && touch $out" if DO_SHA1_CHECK else "touch $out",
     )
 
-    ninja.rule(
-        "cpp", description="cpp $in", command=f"{cpp} $in {extra_cppflags} -P -o $out"
-    )
+    ninja.rule("cpp", description="cpp $in", command=f"{cpp} $in {extra_cppflags} -P -o $out")
 
     ninja.rule(
         "cc",
@@ -287,9 +281,7 @@ def write_ninja_rules(
         command=f"$python {BUILD_TOOLS}/mapfs/pack_title_data.py $out $in",
     )
 
-    ninja.rule(
-        "map_header", command=f"$python {BUILD_TOOLS}/mapfs/map_header.py $in > $out"
-    )
+    ninja.rule("map_header", command=f"$python {BUILD_TOOLS}/mapfs/map_header.py $in > $out")
 
     ninja.rule("charset", command=f"$python {BUILD_TOOLS}/pm_charset.py $out $in")
 
@@ -303,25 +295,17 @@ def write_ninja_rules(
         command=f"$python {BUILD_TOOLS}/sprite/sprite_shading_profiles.py $in $out $header_path",
     )
 
-    ninja.rule(
-        "imgfx_data", command=f"$python {BUILD_TOOLS}/imgfx/imgfx_data.py $in $out"
-    )
+    ninja.rule("imgfx_data", command=f"$python {BUILD_TOOLS}/imgfx/imgfx_data.py $in $out")
 
     ninja.rule("shape", command=f"$python {BUILD_TOOLS}/mapfs/shape.py $in $out")
 
-    ninja.rule(
-        "effect_data", command=f"$python {BUILD_TOOLS}/effects.py $in_yaml $out_dir"
-    )
+    ninja.rule("effect_data", command=f"$python {BUILD_TOOLS}/effects.py $in_yaml $out_dir")
 
     ninja.rule("pm_sbn", command=f"$python {BUILD_TOOLS}/audio/sbn.py $out $in")
 
     with Path("tools/permuter_settings.toml").open("w") as f:
-        f.write(
-            f"compiler_command = \"{cc} {CPPFLAGS.replace('$version', 'pal')} {cflags} -DPERMUTER -fforce-addr\"\n"
-        )
-        f.write(
-            f'assembler_command = "{cross}as -EB -march=vr4300 -mtune=vr4300 -Iinclude"\n'
-        )
+        f.write(f"compiler_command = \"{cc} {CPPFLAGS.replace('$version', 'pal')} {cflags} -DPERMUTER -fforce-addr\"\n")
+        f.write(f'assembler_command = "{cross}as -EB -march=vr4300 -mtune=vr4300 -Iinclude"\n')
         f.write(f'compiler_type = "gcc"\n')
         f.write(
             """
@@ -512,11 +496,7 @@ class Configure:
             for object_path in object_paths:
                 if object_path.suffixes[-1] == ".o":
                     built_objects.add(str(object_path))
-                elif (
-                    object_path.suffixes[-1] == ".h"
-                    or task == "bin_inc_c"
-                    or task == "pal_inc_c"
-                ):
+                elif object_path.suffixes[-1] == ".h" or task == "bin_inc_c" or task == "pal_inc_c":
                     generated_headers.append(str(object_path))
 
                 # don't rebuild objects if we've already seen all of them
@@ -580,15 +560,13 @@ class Configure:
             if isinstance(seg, segtypes.n64.header.N64SegHeader):
                 build(entry.object_path, entry.src_paths, "as")
             elif isinstance(seg, segtypes.common.asm.CommonSegAsm) or (
-                isinstance(seg, segtypes.common.data.CommonSegData)
-                and not seg.type[0] == "."
+                isinstance(seg, segtypes.common.data.CommonSegData) and not seg.type[0] == "."
             ):
                 build(entry.object_path, entry.src_paths, "as")
             elif seg.type in ["pm_effect_loads", "pm_effect_shims"]:
                 build(entry.object_path, entry.src_paths, "as")
             elif isinstance(seg, segtypes.common.c.CommonSegC) or (
-                isinstance(seg, segtypes.common.data.CommonSegData)
-                and seg.type[0] == "."
+                isinstance(seg, segtypes.common.data.CommonSegData) and seg.type[0] == "."
             ):
                 cflags = None
                 if isinstance(seg.yaml, dict):
@@ -619,16 +597,12 @@ class Configure:
                     task = "cc_272"
                     cflags = cflags.replace("gcc_272", "")
 
-                encoding = (
-                    "CP932"  # similar to SHIFT-JIS, but includes backslash and tilde
-                )
+                encoding = "CP932"  # similar to SHIFT-JIS, but includes backslash and tilde
                 if version == "ique":
                     encoding = "EUC-JP"
 
                 # Dead cod
-                if isinstance(seg.parent.yaml, dict) and seg.parent.yaml.get(
-                    "dead_code", False
-                ):
+                if isinstance(seg.parent.yaml, dict) and seg.parent.yaml.get("dead_code", False):
                     obj_path = str(entry.object_path)
                     init_obj_path = Path(obj_path + ".dead")
                     build(
@@ -677,9 +651,7 @@ class Configure:
 
                             src_paths = [seg.out_path().relative_to(ROOT)]
                             inc_dir = self.build_path() / "include" / seg.dir
-                            bin_path = (
-                                self.build_path() / seg.dir / (seg.name + ".png.bin")
-                            )
+                            bin_path = self.build_path() / seg.dir / (seg.name + ".png.bin")
 
                             build(
                                 bin_path,
@@ -691,9 +663,7 @@ class Configure:
                                 },
                             )
 
-                            assert seg.vram_start is not None, (
-                                "img with vram_start unset: " + seg.name
-                            )
+                            assert seg.vram_start is not None, "img with vram_start unset: " + seg.name
 
                             c_sym = seg.create_symbol(
                                 addr=seg.vram_start,
@@ -720,9 +690,7 @@ class Configure:
                         elif isinstance(seg, segtypes.n64.palette.N64SegPalette):
                             src_paths = [seg.out_path().relative_to(ROOT)]
                             inc_dir = self.build_path() / "include" / seg.dir
-                            bin_path = (
-                                self.build_path() / seg.dir / (seg.name + ".pal.bin")
-                            )
+                            bin_path = self.build_path() / seg.dir / (seg.name + ".pal.bin")
 
                             build(
                                 bin_path,
@@ -833,9 +801,7 @@ class Configure:
                     )
 
                 # Sprites .bin
-                sprite_player_header_path = str(
-                    self.build_path() / "include/sprite/player.h"
-                )
+                sprite_player_header_path = str(self.build_path() / "include/sprite/player.h")
 
                 build(
                     entry.object_path.with_suffix(".bin"),
@@ -843,9 +809,7 @@ class Configure:
                     "sprites",
                     variables={
                         "header_out": sprite_player_header_path,
-                        "build_dir": str(
-                            self.build_path() / "assets" / self.version / "sprite"
-                        ),
+                        "build_dir": str(self.build_path() / "assets" / self.version / "sprite"),
                         "asset_stack": ",".join(self.asset_stack),
                     },
                     implicit_outputs=[sprite_player_header_path],
@@ -859,9 +823,7 @@ class Configure:
                 msg_bins = []
 
                 for section_idx, msg_path in enumerate(entry.src_paths):
-                    bin_path = (
-                        entry.object_path.with_suffix("") / f"{section_idx:02X}.bin"
-                    )
+                    bin_path = entry.object_path.with_suffix("") / f"{section_idx:02X}.bin"
                     msg_bins.append(bin_path)
                     build(bin_path, [msg_path], "msg")
 
@@ -1005,16 +967,12 @@ class Configure:
                         )
                     elif name.endswith("_shape_built"):
                         base_name = name[:-6]
-                        raw_bin_path = self.resolve_asset_path(
-                            f"assets/x/mapfs/geom/{base_name}.bin"
-                        )
+                        raw_bin_path = self.resolve_asset_path(f"assets/x/mapfs/geom/{base_name}.bin")
                         bin_path = bin_path.parent / "geom" / (base_name + ".bin")
 
                         if c_maps:
                             # raw bin -> c -> o -> elf -> objcopy -> final bin file
-                            c_file_path = (
-                                bin_path.parent / "geom" / base_name
-                            ).with_suffix(".c")
+                            c_file_path = (bin_path.parent / "geom" / base_name).with_suffix(".c")
                             o_path = bin_path.parent / "geom" / (base_name + ".o")
                             elf_path = bin_path.parent / "geom" / (base_name + ".elf")
 
@@ -1056,12 +1014,7 @@ class Configure:
                 rasters = []
 
                 for src_path in entry.src_paths:
-                    out_path = (
-                        self.build_path()
-                        / seg.dir
-                        / seg.name
-                        / (src_path.stem + ".bin")
-                    )
+                    out_path = self.build_path() / seg.dir / seg.name / (src_path.stem + ".bin")
                     build(
                         out_path,
                         [src_path],
@@ -1079,13 +1032,7 @@ class Configure:
                 palettes = []
 
                 for src_path in entry.src_paths:
-                    out_path = (
-                        self.build_path()
-                        / seg.dir
-                        / seg.name
-                        / "palette"
-                        / (src_path.stem + ".bin")
-                    )
+                    out_path = self.build_path() / seg.dir / seg.name / "palette" / (src_path.stem + ".bin")
                     build(
                         out_path,
                         [src_path],
@@ -1100,9 +1047,7 @@ class Configure:
                 build(entry.object_path.with_suffix(""), palettes, "charset_palettes")
                 build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
             elif seg.type == "pm_sprite_shading_profiles":
-                header_path = str(
-                    self.build_path() / "include/sprite/sprite_shading_profiles.h"
-                )
+                header_path = str(self.build_path() / "include/sprite/sprite_shading_profiles.h")
                 build(
                     entry.object_path.with_suffix(""),
                     entry.src_paths,
@@ -1115,14 +1060,12 @@ class Configure:
                 build(entry.object_path, [entry.object_path.with_suffix("")], "bin")
             elif seg.type == "pm_sbn":
                 sbn_path = entry.object_path.with_suffix("")
-                build(sbn_path, entry.src_paths, "pm_sbn") # could have non-yaml inputs be implicit
+                build(sbn_path, entry.src_paths, "pm_sbn")  # could have non-yaml inputs be implicit
                 build(entry.object_path, [sbn_path], "bin")
             elif seg.type == "linker" or seg.type == "linker_offset":
                 pass
             elif seg.type == "pm_imgfx_data":
-                c_file_path = (
-                    Path(f"assets/{self.version}") / "imgfx" / (seg.name + ".c")
-                )
+                c_file_path = Path(f"assets/{self.version}") / "imgfx" / (seg.name + ".c")
                 build(c_file_path, entry.src_paths, "imgfx_data")
 
                 build(
@@ -1136,9 +1079,7 @@ class Configure:
                     },
                 )
             else:
-                raise Exception(
-                    f"don't know how to build {seg.__class__.__name__} '{seg.name}'"
-                )
+                raise Exception(f"don't know how to build {seg.__class__.__name__} '{seg.name}'")
 
         # Run undefined_syms through cpp
         ninja.build(
@@ -1216,20 +1157,14 @@ if __name__ == "__main__":
         action="store_true",
         help="Delete assets and previously-built files",
     )
-    parser.add_argument(
-        "--splat", default="tools/splat", help="Path to splat tool to use"
-    )
-    parser.add_argument(
-        "--split-code", action="store_true", help="Re-split code segments to asm files"
-    )
+    parser.add_argument("--splat", default="tools/splat", help="Path to splat tool to use")
+    parser.add_argument("--split-code", action="store_true", help="Re-split code segments to asm files")
     parser.add_argument(
         "--no-split-assets",
         action="store_true",
         help="Don't split assets from the baserom(s)",
     )
-    parser.add_argument(
-        "-d", "--debug", action="store_true", help="Generate debugging information"
-    )
+    parser.add_argument("-d", "--debug", action="store_true", help="Generate debugging information")
     parser.add_argument(
         "-n",
         "--non-matching",
@@ -1272,12 +1207,8 @@ if __name__ == "__main__":
                 pass
         if args.cpp is None:
             print("error: system C preprocessor is not GNU!")
-            print(
-                "This is a known issue on macOS - only clang's cpp is installed by default."
-            )
-            print(
-                "Use 'brew' to obtain GNU cpp, then run this script again with the --cpp option, e.g."
-            )
+            print("This is a known issue on macOS - only clang's cpp is installed by default.")
+            print("Use 'brew' to obtain GNU cpp, then run this script again with the --cpp option, e.g.")
             print(f"    ./configure --cpp {gcc_cpps[0]}")
             exit(1)
 
@@ -1285,15 +1216,11 @@ if __name__ == "__main__":
         version = exec_shell([PIGMENT, "--version"]).split(" ")[1].strip()
 
         if version < PIGMENT_REQ_VERSION:
-            print(
-                f"error: {PIGMENT} version {PIGMENT_REQ_VERSION} or newer is required, system version is {version}\n"
-            )
+            print(f"error: {PIGMENT} version {PIGMENT_REQ_VERSION} or newer is required, system version is {version}\n")
             exit(1)
     except FileNotFoundError:
         print(f"error: {PIGMENT} is not installed\n")
-        print(
-            "To build and install it, obtain cargo:\n\tcurl https://sh.rustup.rs -sSf | sh"
-        )
+        print("To build and install it, obtain cargo:\n\tcurl https://sh.rustup.rs -sSf | sh")
         print(f"and then run:\n\tcargo install {PIGMENT}")
         exit(1)
 
@@ -1382,12 +1309,8 @@ if __name__ == "__main__":
         # include tools/splat_ext in the python path
         sys.path.append(str((ROOT / "tools/splat_ext").resolve()))
 
-        configure.split(
-            not args.no_split_assets, args.split_code, args.shift, args.debug
-        )
-        configure.write_ninja(
-            ninja, skip_files, non_matching, args.modern_gcc, args.c_maps
-        )
+        configure.split(not args.no_split_assets, args.split_code, args.shift, args.debug)
+        configure.write_ninja(ninja, skip_files, non_matching, args.modern_gcc, args.c_maps)
 
         all_rom_oks.append(str(configure.rom_ok_path()))
 

@@ -22,7 +22,7 @@ parser.add_argument(
     action="store",
     default=False,
     const="prompt",
-    help="run diff.py on the result with the provided arguments"
+    help="run diff.py on the result with the provided arguments",
 )
 parser.add_argument(
     "-m", "--make", help="run ninja before finding difference(s)", action="store_true"
@@ -101,7 +101,9 @@ def search_rom_address(target_addr):
                 continue
 
             if rom > target_addr:
-                return f"{prev_sym} (RAM 0x{prev_ram:X}, ROM 0x{prev_rom:X}, {prev_file})"
+                return (
+                    f"{prev_sym} (RAM 0x{prev_ram:X}, ROM 0x{prev_rom:X}, {prev_file})"
+                )
 
             prev_ram = ram
             prev_rom = rom
@@ -214,9 +216,7 @@ if diffs == 0:
 if len(found_instr_diff) > 0:
     for i in found_instr_diff:
         print(f"Instruction difference at ROM addr 0x{i:X}, {search_rom_address(i)}")
-        print(
-            f"Bytes: {hexbytes(mybin[i : i + 4])} vs {hexbytes(basebin[i : i + 4])}"
-        )
+        print(f"Bytes: {hexbytes(mybin[i : i + 4])} vs {hexbytes(basebin[i : i + 4])}")
 print()
 
 definite_shift = diffs > shift_cap

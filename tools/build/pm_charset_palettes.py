@@ -3,7 +3,7 @@
 from sys import argv
 
 if __name__ == "__main__":
-    argv.pop(0) # python3
+    argv.pop(0)  # python3
     out = argv.pop(0)
 
     with open(out, "wb") as f:

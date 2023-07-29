@@ -3,7 +3,8 @@
 from sys import argv
 from collections import OrderedDict
 import re
-import msgpack # way faster than pickle
+import msgpack  # way faster than pickle
+
 
 class Message:
     def __init__(self, name, section, index):
@@ -11,7 +12,8 @@ class Message:
         self.section = section
         self.index = index
 
-        self.bytes = [] # XXX: bytearray would be better
+        self.bytes = []  # XXX: bytearray would be better
+
 
 def try_convert_int(s):
     try:
@@ -19,10 +21,11 @@ def try_convert_int(s):
     except:
         return s
 
+
 def parse_command(source):
     if source[0] != "[":
         return None, [], {}, source
-    source = source[1:] # "["
+    source = source[1:]  # "["
 
     inside_brackets = ""
     while source[0] != "]":
@@ -31,7 +34,7 @@ def parse_command(source):
 
         inside_brackets += source[0]
         source = source[1:]
-    source = source[1:] # "]"
+    source = source[1:]  # "]"
 
     command, *raw_args = inside_brackets.split(" ")
 
@@ -57,6 +60,7 @@ def parse_command(source):
     #     args.append(try_convert_int(arg.lower()))
 
     return command.lower(), args, named_args, source
+
 
 def color_to_code(color, style):
     COLORS = {
@@ -90,26 +94,30 @@ def color_to_code(color, style):
             "red": 0x19,
             "blue": 0x1A,
             "green": 0x1B,
-        }
+        },
     }
 
     if type(color) is int:
         return color
 
-    return COLORS.get(style, {
-        # [style:left], [style:right]
-        "normal": 0x0A,
-        "red": 0x20,
-        "pink": 0x21,
-        "purple": 0x22,
-        "blue": 0x23,
-        "cyan": 0x24,
-        "green": 0x25,
-        "yellow": 0x26,
-    }).get(color)
+    return COLORS.get(
+        style,
+        {
+            # [style:left], [style:right]
+            "normal": 0x0A,
+            "red": 0x20,
+            "pink": 0x21,
+            "purple": 0x22,
+            "blue": 0x23,
+            "cyan": 0x24,
+            "green": 0x25,
+            "yellow": 0x26,
+        },
+    ).get(color)
+
 
 CHARSET = {
-    #"𝅘𝅥𝅮": 0x00,
+    # "𝅘𝅥𝅮": 0x00,
     "!": 0x01,
     '"': 0x02,
     "#": 0x03,
@@ -323,18 +331,21 @@ CHARSET_CREDITS = {
     " ": 0xF7,
 }
 
+
 def strip_c_comments(text):
     def replacer(match):
         s = match.group(0)
-        if s.startswith('/'):
+        if s.startswith("/"):
             return " "
         else:
             return s
+
     pattern = re.compile(
         r'//.*?$|/\*.*?\*/|\'(?:\\.|[^\\\'])*\'|"(?:\\.|[^\\"])*"',
-        re.DOTALL | re.MULTILINE
+        re.DOTALL | re.MULTILINE,
     )
     return re.sub(pattern, replacer, text)
+
 
 if __name__ == "__main__":
     if len(argv) < 3:
@@ -435,7 +446,7 @@ if __name__ == "__main__":
                         print(f"{filename}:{lineno}: expected opening brace ('{{')")
                         exit(1)
 
-                source = source[1:] # {
+                source = source[1:]  # {
 
                 # count indent level
                 indent_level = 0
@@ -484,8 +495,8 @@ if __name__ == "__main__":
                             exit(1)
 
                         message.bytes += [0xFF, 0x05, color]
-                        #color_stack.append(color)
-                    #elif command == "/color":
+                        # color_stack.append(color)
+                    # elif command == "/color":
                     #    color_stack.pop()
                     #    message.bytes += [0xFF, 0x05, color_stack[0]]
                     elif command == "style":
@@ -517,7 +528,13 @@ if __name__ == "__main__":
                                     print(f"{filename}:{lineno}: 'choice' style requires size=_,_")
                                     exit(1)
 
-                                message.bytes += [0x05, pos[0], pos[1], size[0], size[1]]
+                                message.bytes += [
+                                    0x05,
+                                    pos[0],
+                                    pos[1],
+                                    size[0],
+                                    size[1],
+                                ]
                             elif style == "inspect":
                                 message.bytes += [0x06]
                             elif style == "sign":
@@ -553,7 +570,13 @@ if __name__ == "__main__":
                                     print(f"{filename}:{lineno}: 'upgrade' style requires size=_,_")
                                     exit(1)
 
-                                message.bytes += [0x0C, pos[0], pos[1], size[0], size[1]]
+                                message.bytes += [
+                                    0x0C,
+                                    pos[0],
+                                    pos[1],
+                                    size[0],
+                                    size[1],
+                                ]
                             elif style == "narrate":
                                 message.bytes += [0x0D]
                             elif style == "epilogue":
@@ -579,7 +602,7 @@ if __name__ == "__main__":
                             exit(1)
 
                         message.bytes += [0xFF, 0x00, font]
-                        #font_stack.append(font)
+                        # font_stack.append(font)
 
                         if font == 3 or font == 4:
                             charset = CHARSET_CREDITS
@@ -709,7 +732,13 @@ if __name__ == "__main__":
                             print(f"{filename}:{lineno}: {command} command requires raster=_")
                             exit(1)
 
-                        message.bytes += [0xFF, 0x16, spriteid >> 8, spriteid & 0xFF, raster]
+                        message.bytes += [
+                            0xFF,
+                            0x16,
+                            spriteid >> 8,
+                            spriteid & 0xFF,
+                            raster,
+                        ]
                     elif command == "itemicon":
                         itemid = named_args.get("itemid")
 
@@ -722,7 +751,7 @@ if __name__ == "__main__":
                         message.bytes += [0xFF, 0x17, itemid >> 8, itemid & 0xFF]
                     elif command == "image":
                         index = named_args.get("index")
-                        pos = named_args.get("pos") # xx,y
+                        pos = named_args.get("pos")  # xx,y
                         hasborder = named_args.get("hasborder")
                         alpha = named_args.get("alpha")
                         fadeamount = named_args.get("fadeamount")
@@ -743,7 +772,17 @@ if __name__ == "__main__":
                             print(f"{filename}:{lineno}: {command} command requires fadeamount=_")
                             exit(1)
 
-                        message.bytes += [0xFF, 0x18, index, pos[0] >> 8, pos[0] & 0xFF, pos[1], hasborder, alpha, fadeamount]
+                        message.bytes += [
+                            0xFF,
+                            0x18,
+                            index,
+                            pos[0] >> 8,
+                            pos[0] & 0xFF,
+                            pos[1],
+                            hasborder,
+                            alpha,
+                            fadeamount,
+                        ]
                     elif command == "hideimage":
                         fadeamount = named_args.get("fadeamount", 0)
 
@@ -933,9 +972,16 @@ if __name__ == "__main__":
                             exit(1)
 
                         message.bytes += [
-                            0xFF, 0x2C,
-                            soundids[0] >> 24, (soundids[0] >> 16) & 0xFF, (soundids[0] >> 8) & 0xFF, soundids[0] & 0xFF,
-                            soundids[1] >> 24, (soundids[1] >> 16) & 0xFF, (soundids[1] >> 8) & 0xFF, soundids[1] & 0xFF,
+                            0xFF,
+                            0x2C,
+                            soundids[0] >> 24,
+                            (soundids[0] >> 16) & 0xFF,
+                            (soundids[0] >> 8) & 0xFF,
+                            soundids[0] & 0xFF,
+                            soundids[1] >> 24,
+                            (soundids[1] >> 16) & 0xFF,
+                            (soundids[1] >> 8) & 0xFF,
+                            soundids[1] & 0xFF,
                         ]
                     elif command == "volume":
                         if len(args) != 1:
@@ -962,70 +1008,184 @@ if __name__ == "__main__":
                             exit(1)
 
                         message.bytes += [0xFF, 0x2F, sound]
-                        #sound_stack.append(sound)
+                        # sound_stack.append(sound)
                     # elif command == "/sound":
                     #     sound_stack.pop()
                     #     message.bytes += [0xFF, 0x2F, sound_stack[0]]
                     elif command == "a":
                         color_code = color_to_code("blue", "button")
                         assert color_code is not None
-                        message.bytes += [0xFF, 0x24, 0xFF, 0x05, color_code, 0x98, 0xFF, 0x25]
+                        message.bytes += [
+                            0xFF,
+                            0x24,
+                            0xFF,
+                            0x05,
+                            color_code,
+                            0x98,
+                            0xFF,
+                            0x25,
+                        ]
                     elif command == "b":
-                        color_code = color_to_code(named_args.get("color", "green"), named_args.get("ctx", "button"))
+                        color_code = color_to_code(
+                            named_args.get("color", "green"),
+                            named_args.get("ctx", "button"),
+                        )
                         assert color_code is not None
-                        message.bytes += [0xFF, 0x24, 0xFF, 0x05, color_code, 0x99, 0xFF, 0x25]
+                        message.bytes += [
+                            0xFF,
+                            0x24,
+                            0xFF,
+                            0x05,
+                            color_code,
+                            0x99,
+                            0xFF,
+                            0x25,
+                        ]
                     elif command == "l":
-                        color_code = color_to_code(named_args.get("color", "gray"), named_args.get("ctx", "button"))
+                        color_code = color_to_code(
+                            named_args.get("color", "gray"),
+                            named_args.get("ctx", "button"),
+                        )
                         assert color_code is not None
-                        message.bytes += [0xFF, 0x24, 0xFF, 0x05, color_code, 0x9A, 0xFF, 0x25]
+                        message.bytes += [
+                            0xFF,
+                            0x24,
+                            0xFF,
+                            0x05,
+                            color_code,
+                            0x9A,
+                            0xFF,
+                            0x25,
+                        ]
                     elif command == "r":
-                        color_code = color_to_code(named_args.get("color", "gray"), named_args.get("ctx", "button"))
+                        color_code = color_to_code(
+                            named_args.get("color", "gray"),
+                            named_args.get("ctx", "button"),
+                        )
                         assert color_code is not None
-                        message.bytes += [0xFF, 0x24, 0xFF, 0x05, color_code, 0x9B, 0xFF, 0x25]
+                        message.bytes += [
+                            0xFF,
+                            0x24,
+                            0xFF,
+                            0x05,
+                            color_code,
+                            0x9B,
+                            0xFF,
+                            0x25,
+                        ]
                     elif command == "z":
                         color_code = color_to_code("grey", "button")
                         assert color_code is not None
-                        message.bytes += [0xFF, 0x24, 0xFF, 0x05, color_code, 0x9C, 0xFF, 0x25]
+                        message.bytes += [
+                            0xFF,
+                            0x24,
+                            0xFF,
+                            0x05,
+                            color_code,
+                            0x9C,
+                            0xFF,
+                            0x25,
+                        ]
                     elif command == "c-up":
-                        color_code = color_to_code(named_args.get("color", "yellow"), named_args.get("ctx", "button"))
+                        color_code = color_to_code(
+                            named_args.get("color", "yellow"),
+                            named_args.get("ctx", "button"),
+                        )
                         assert color_code is not None
-                        message.bytes += [0xFF, 0x24, 0xFF, 0x05, color_code, 0x9D, 0xFF, 0x25]
+                        message.bytes += [
+                            0xFF,
+                            0x24,
+                            0xFF,
+                            0x05,
+                            color_code,
+                            0x9D,
+                            0xFF,
+                            0x25,
+                        ]
                     elif command == "c-down":
-                        color_code = color_to_code(named_args.get("color", "yellow"), named_args.get("ctx", "button"))
+                        color_code = color_to_code(
+                            named_args.get("color", "yellow"),
+                            named_args.get("ctx", "button"),
+                        )
                         assert color_code is not None
-                        message.bytes += [0xFF, 0x24, 0xFF, 0x05, color_code, 0x9E, 0xFF, 0x25]
+                        message.bytes += [
+                            0xFF,
+                            0x24,
+                            0xFF,
+                            0x05,
+                            color_code,
+                            0x9E,
+                            0xFF,
+                            0x25,
+                        ]
                     elif command == "c-left":
-                        color_code = color_to_code(named_args.get("color", "yellow"), named_args.get("ctx", "button"))
+                        color_code = color_to_code(
+                            named_args.get("color", "yellow"),
+                            named_args.get("ctx", "button"),
+                        )
                         assert color_code is not None
-                        message.bytes += [0xFF, 0x24, 0xFF, 0x05, color_code, 0x9F, 0xFF, 0x25]
+                        message.bytes += [
+                            0xFF,
+                            0x24,
+                            0xFF,
+                            0x05,
+                            color_code,
+                            0x9F,
+                            0xFF,
+                            0x25,
+                        ]
                     elif command == "c-right":
-                        color_code = color_to_code(named_args.get("color", "yellow"), named_args.get("ctx", "button"))
+                        color_code = color_to_code(
+                            named_args.get("color", "yellow"),
+                            named_args.get("ctx", "button"),
+                        )
                         assert color_code is not None
-                        message.bytes += [0xFF, 0x24, 0xFF, 0x05, color_code, 0xA0, 0xFF, 0x25]
+                        message.bytes += [
+                            0xFF,
+                            0x24,
+                            0xFF,
+                            0x05,
+                            color_code,
+                            0xA0,
+                            0xFF,
+                            0x25,
+                        ]
                     elif command == "start":
-                        color_code = color_to_code(named_args.get("color", "red"), named_args.get("ctx", "button"))#
+                        color_code = color_to_code(
+                            named_args.get("color", "red"),
+                            named_args.get("ctx", "button"),
+                        )  #
                         assert color_code is not None
-                        message.bytes += [0xFF, 0x24, 0xFF, 0x05, color_code, 0xA1, 0xFF, 0x25]
+                        message.bytes += [
+                            0xFF,
+                            0x24,
+                            0xFF,
+                            0x05,
+                            color_code,
+                            0xA1,
+                            0xFF,
+                            0x25,
+                        ]
                     elif command == "~a":
                         message.bytes += [0x98]
                     elif command == "~b":
                         message.bytes += [0x99]
                     elif command == "~l":
-                        message.bytes += [0x9a]
+                        message.bytes += [0x9A]
                     elif command == "~r":
-                        message.bytes += [0x9b]
+                        message.bytes += [0x9B]
                     elif command == "~z":
-                        message.bytes += [0x9c]
+                        message.bytes += [0x9C]
                     elif command == "~c-up":
-                        message.bytes += [0x9d]
+                        message.bytes += [0x9D]
                     elif command == "~c-down":
-                        message.bytes += [0x9e]
+                        message.bytes += [0x9E]
                     elif command == "~c-left":
-                        message.bytes += [0x9f]
+                        message.bytes += [0x9F]
                     elif command == "~c-right":
-                        message.bytes += [0xa0]
+                        message.bytes += [0xA0]
                     elif command == "~start":
-                        message.bytes += [0xa1]
+                        message.bytes += [0xA1]
                     elif command == "note":
                         message.bytes += [0x00]
                     elif command == "heart":
@@ -1043,24 +1203,24 @@ if __name__ == "__main__":
                     elif command == "restorepos":
                         message.bytes += [0xFF, 0x23]
                     elif command == "enablecdownnext":
-                        message.bytes += [0xFF, 0x2b]
+                        message.bytes += [0xFF, 0x2B]
                     elif command == "beginchoice":
                         choiceindex = 0
-                        message.bytes += [0xFF, 0x09] # delayoff
+                        message.bytes += [0xFF, 0x09]  # delayoff
                     elif command == "option" and choiceindex >= 0:
-                        message.bytes += [0xFF, 0x1E, choiceindex] # cursor n
-                        message.bytes += [0xFF, 0x21, choiceindex] # option n
+                        message.bytes += [0xFF, 0x1E, choiceindex]  # cursor n
+                        message.bytes += [0xFF, 0x21, choiceindex]  # option n
                         choiceindex += 1
                     elif command == "endchoice" and choiceindex >= 0:
                         cancel = named_args.get("cancel")
 
-                        message.bytes += [0xFF, 0x21, 255] # option 255
-                        message.bytes += [0xFF, 0x0A] # delayon
+                        message.bytes += [0xFF, 0x21, 255]  # option 255
+                        message.bytes += [0xFF, 0x0A]  # delayon
 
                         if isinstance(cancel, int):
-                            message.bytes += [0xFF, 0x20, cancel] # setcancel n
+                            message.bytes += [0xFF, 0x20, cancel]  # setcancel n
 
-                        message.bytes += [0xFF, 0x1F, choiceindex] # endchoice n
+                        message.bytes += [0xFF, 0x1F, choiceindex]  # endchoice n
 
                         choiceindex = -1
                     elif command == "animation" and choiceindex >= 0:
@@ -1074,7 +1234,7 @@ if __name__ == "__main__":
                     if source[0] == "}":
                         if not explicit_end:
                             print(f"{filename}:{lineno}: warning: string lacks an [end] command")
-                            #message.bytes += [0xFD]
+                            # message.bytes += [0xFD]
                         explicit_end = False
 
                         # sanity check
@@ -1087,7 +1247,7 @@ if __name__ == "__main__":
                             message.bytes += [0x00]
 
                         message = None
-                        source = source[1:] # }
+                        source = source[1:]  # }
                         indent_level = 0
                         choiceindex = -1
                         continue
@@ -1124,9 +1284,15 @@ if __name__ == "__main__":
 
     else:
         with open(outfile, "wb") as f:
-            msgpack.pack([{
-                "section": message.section,
-                "index": message.index,
-                "name": message.name,
-                "bytes": bytes(message.bytes),
-            } for message in messages], f)
+            msgpack.pack(
+                [
+                    {
+                        "section": message.section,
+                        "index": message.index,
+                        "name": message.name,
+                        "bytes": bytes(message.bytes),
+                    }
+                    for message in messages
+                ],
+                f,
+            )

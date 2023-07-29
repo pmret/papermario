@@ -188,13 +188,23 @@ CHARSET = {
         0x02: "[Style left]\n",
         0x03: "[Style center]\n",
         0x04: "[Style tattle]\n",
-        0x05: {None: lambda d: (f"[Style choice pos={d[0]},{d[1]} size={d[2]},{d[3]}]\n", 4)},
+        0x05: {
+            None: lambda d: (
+                f"[Style choice pos={d[0]},{d[1]} size={d[2]},{d[3]}]\n",
+                4,
+            )
+        },
         0x06: "[Style inspect]\n",
         0x07: "[Style sign]\n",
         0x08: {None: lambda d: (f"[Style lamppost height={d[0]}]\n", 1)},
         0x09: {None: lambda d: (f"[Style postcard index={d[0]}]\n", 1)},
         0x0A: "[Style popup]\n",
-        0x0C: {None: lambda d: (f"[Style upgrade pos={d[0]},{d[1]} size={d[2]},{d[3]}]\n", 4)},
+        0x0C: {
+            None: lambda d: (
+                f"[Style upgrade pos={d[0]},{d[1]} size={d[2]},{d[3]}]\n",
+                4,
+            )
+        },
         0x0D: "[Style narrate]\n",
         0x0E: "[Style epilogue]\n",
     },
@@ -215,17 +225,13 @@ CHARSET = {
             # 0x24: "[color:cyan]",
             # 0x25: "[color:green]",
             # 0x26: "[color:yellow]",
-
             # 0x00: "[color=normal ctx=diary]",
             # 0x07: "[color=red ctx=diary]",
-
             # 0x17: "[color=dark ctx=inspect]",
-
             # 0x18: "[color=normal ctx=sign]",
             # 0x19: "[color=red ctx=sign]",
             # 0x1A: "[color=blue ctx=sign]",
             # 0x1B: "[color=green ctx=sign]",
-
             # 0x28: "[color=red ctx=popup]",
             # 0x29: "[color=pink ctx=popup]",
             # 0x2A: "[color=purple ctx=popup]",
@@ -234,7 +240,6 @@ CHARSET = {
             # 0x2D: "[color=green ctx=popup]",
             # 0x2E: "[color=yellow ctx=popup]",
             # 0x2F: "[color=normal ctx=popup]",
-
             None: lambda d: (f"[Color 0x{d[0]:X}]", 1),
         },
         0x07: "[InputOff]\n",
@@ -252,9 +257,19 @@ CHARSET = {
         0x13: {None: lambda d: (f"[Down {d[0]}]", 1)},
         0x14: {None: lambda d: (f"[Up {d[0]}]", 1)},
         0x15: {None: lambda d: (f"[InlineImage index={d[0]}]\n", 1)},
-        0x16: {None: lambda d: (f"[AnimSprite spriteID=0x{d[0]:02X}{d[1]:02X} raster={d[2]}]\n", 3)},
+        0x16: {
+            None: lambda d: (
+                f"[AnimSprite spriteID=0x{d[0]:02X}{d[1]:02X} raster={d[2]}]\n",
+                3,
+            )
+        },
         0x17: {None: lambda d: (f"[ItemIcon itemID=0x{d[0]:02X}{d[1]:02X}]\n", 2)},
-        0x18: {None: lambda d: (f"[Image index={d[0]} pos={(d[1] << 8) + d[2]},{d[3]} hasBorder={d[4]} alpha={d[5]} fadeAmount={d[6]}]\n", 7)},
+        0x18: {
+            None: lambda d: (
+                f"[Image index={d[0]} pos={(d[1] << 8) + d[2]},{d[3]} hasBorder={d[4]} alpha={d[5]} fadeAmount={d[6]}]\n",
+                7,
+            )
+        },
         0x19: {None: lambda d: (f"[HideImage fadeAmount={d[0]}]\n", 1)},
         0x1A: {None: lambda d: (f"[AnimDelay index={d[1]} delay={d[2]}]", 3)},
         0x1B: {None: lambda d: (f"[AnimLoop {d[0]} {d[1]}]", 2)},
@@ -265,20 +280,24 @@ CHARSET = {
         0x21: {None: lambda d: (f"[Option {d[0]}]", 1)},
         0x22: "[SavePos]",
         0x23: "[RestorePos]",
-        0x24: {0xFF: {0x05: {
-            0x10: {0x98: {0xFF: {0x25: "[A]"}}},
-            0x11: {0x99: {0xFF: {0x25: "[B]"}}},
-            0x12: {0xA1: {0xFF: {0x25: "[START]"}}},
-            0x13: {
-                0x9D: {0xFF: {0x25: "[C-UP]"}},
-                0x9E: {0xFF: {0x25: "[C-DOWN]"}},
-                0x9F: {0xFF: {0x25: "[C-LEFT]"}},
-                0xA0: {0xFF: {0x25: "[C-RIGHT]"}},
-            },
-            0x14: {0x9C: {0xFF: {0x25: "[Z]"}}},
-        }}},
-        #0x24: "[SaveColor]",
-		#0x25: "[RestoreColor]",
+        0x24: {
+            0xFF: {
+                0x05: {
+                    0x10: {0x98: {0xFF: {0x25: "[A]"}}},
+                    0x11: {0x99: {0xFF: {0x25: "[B]"}}},
+                    0x12: {0xA1: {0xFF: {0x25: "[START]"}}},
+                    0x13: {
+                        0x9D: {0xFF: {0x25: "[C-UP]"}},
+                        0x9E: {0xFF: {0x25: "[C-DOWN]"}},
+                        0x9F: {0xFF: {0x25: "[C-LEFT]"}},
+                        0xA0: {0xFF: {0x25: "[C-RIGHT]"}},
+                    },
+                    0x14: {0x9C: {0xFF: {0x25: "[Z]"}}},
+                }
+            }
+        },
+        # 0x24: "[SaveColor]",
+        # 0x25: "[RestoreColor]",
         0x26: {
             0x00: "[Shake]",
             0x01: "[Wave]",
@@ -307,7 +326,12 @@ CHARSET = {
         0x28: {None: lambda d: (f"[Var {d[0]}]", 1)},
         0x29: {None: lambda d: (f"[CenterX {d[0]}]", 1)},
         0x2B: "[EnableCDownNext]",
-        0x2C: {None: lambda d: (f"[CustomVoice soundIDs=0x{d[0]:02X}{d[1]:02X}{d[2]:02X}{d[3]:02X},{d[4]:02X}{d[5]:02X}{d[6]:02X}{d[7]:02X}]", 8)},
+        0x2C: {
+            None: lambda d: (
+                f"[CustomVoice soundIDs=0x{d[0]:02X}{d[1]:02X}{d[2]:02X}{d[3]:02X},{d[4]:02X}{d[5]:02X}{d[6]:02X}{d[7]:02X}]",
+                8,
+            )
+        },
         0x2E: {None: lambda d: (f"[Volume {d[0]}]", 1)},
         0x2F: {
             0: "[Voice normal]\n",
@@ -315,7 +339,7 @@ CHARSET = {
             2: "[Voice star]\n",
             None: lambda d: (f"[Voice {d[0]}]\n", 1),
         },
-        #None: lambda d: (f"[func_{d[0]:02X}]", 1),
+        # None: lambda d: (f"[func_{d[0]:02X}]", 1),
     },
     None: lambda d: (f"[Raw 0x{d[0]:02X}]", 1),
 }
@@ -366,6 +390,7 @@ CHARSET_CREDITS = {
     0xF7: " ",
 }
 
+
 class N64SegPm_msg(N64Segment):
     def __init__(
         self,
@@ -393,12 +418,12 @@ class N64SegPm_msg(N64Segment):
             self.msg_names = yaml_loader.load(f.read(), Loader=yaml_loader.SafeLoader)
 
     def split(self, rom_bytes):
-        data = rom_bytes[self.rom_start: self.rom_end]
+        data = rom_bytes[self.rom_start : self.rom_end]
 
         section_offsets = []
         pos = 0
         while True:
-            offset = int.from_bytes(data[pos:pos+4], byteorder="big")
+            offset = int.from_bytes(data[pos : pos + 4], byteorder="big")
 
             if offset == 0:
                 break
@@ -417,7 +442,7 @@ class N64SegPm_msg(N64Segment):
             msg_offsets = []
             pos = section_offset
             while True:
-                offset = int.from_bytes(data[pos:pos+4], byteorder="big")
+                offset = int.from_bytes(data[pos : pos + 4], byteorder="big")
 
                 if offset == section_offset:
                     break
@@ -425,7 +450,7 @@ class N64SegPm_msg(N64Segment):
                 msg_offsets.append(offset)
                 pos += 4
 
-            #self.log(f"Reading {len(msg_offsets)} messages in section {name} (0x{i:02X})")
+            # self.log(f"Reading {len(msg_offsets)} messages in section {name} (0x{i:02X})")
 
             path = msg_dir / Path(name + ".msg")
 
@@ -449,7 +474,6 @@ class N64SegPm_msg(N64Segment):
                     self.write_message_markup(data[msg_offset:])
                     self.f.write("\n}\n")
 
-
     def get_linker_entries(self):
         from segtypes.linker_entry import LinkerEntry
 
@@ -457,7 +481,6 @@ class N64SegPm_msg(N64Segment):
         out_paths = [base_path / Path(f + ".msg") for f in self.files]
 
         return [LinkerEntry(self, out_paths, base_path, ".data")]
-
 
     @staticmethod
     def get_default_name(addr):

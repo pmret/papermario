@@ -12,6 +12,6 @@ if __name__ == "__main__":
 
         with open(infile, "rb") as i:
             for char in i.read():
-                f.write(f'0x{char:02X}, ')
+                f.write(f"0x{char:02X}, ")
 
         f.write(f"}};\n")

@@ -47,11 +47,14 @@ def parse_symbol_addrs():
     symbol_addrs = {}
 
     for line in lines:
-        name = line[:line.find(" ")]
+        name = line[: line.find(" ")]
 
-        attributes = line[line.find("//"):].split(" ")
-        ram_addr = int(line[:line.find(";")].split("=")[1].strip(), base=0)
-        rom_addr = next((int(attr.split(":")[1], base=0) for attr in attributes if attr.split(":")[0] == "rom"), None)
+        attributes = line[line.find("//") :].split(" ")
+        ram_addr = int(line[: line.find(";")].split("=")[1].strip(), base=0)
+        rom_addr = next(
+            (int(attr.split(":")[1], base=0) for attr in attributes if attr.split(":")[0] == "rom"),
+            None,
+        )
 
         symbol_addrs[name] = Symbol(ram_addr, rom_addr)
 
@@ -73,7 +76,7 @@ def find_old_script_ranges(lines, filename):
 
         if "#define NAMESPACE " in line_content:
             namespace = line_content.split(" ")[2].strip()
-        #elif namespace == "events" or namespace == "header":
+        # elif namespace == "events" or namespace == "header":
         #    namespace = NAMESPACES.get(filename, filename.split("/")[-2].split(".")[0])
         elif namespace_temp is not None:
             namespace = namespace_temp[0][:-2]
@@ -113,7 +116,7 @@ def replace_old_script_macros(filename, symbol_addrs):
             lines[range.start] = lines[range.start][:macro_start_idx] + "{\n"
 
             # Remove other lines
-            lines = lines[:range.start + 1] + lines[range.end + 1:]
+            lines = lines[: range.start + 1] + lines[range.end + 1 :]
 
             # Find the symbol
             try:
@@ -128,7 +131,7 @@ def replace_old_script_macros(filename, symbol_addrs):
             local_symbol_map = {}
             for sym in symbol_addrs:
                 if sym.startswith(range.namespace):
-                    key = "N(" + sym[len(range.namespace)+1:] + ")"
+                    key = "N(" + sym[len(range.namespace) + 1 :] + ")"
                 else:
                     key = sym
 
@@ -143,7 +146,8 @@ def replace_old_script_macros(filename, symbol_addrs):
 
             # Disassemble the script
             rom.seek(range_sym.rom_addr)
-            evt_code = ScriptDisassembler(rom,
+            evt_code = ScriptDisassembler(
+                rom,
                 script_name=range.symbol_name,
                 romstart=range_sym.rom_addr,
                 prelude=False,

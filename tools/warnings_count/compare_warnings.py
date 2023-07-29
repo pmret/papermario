@@ -11,8 +11,14 @@ def countFileLines(filename: str) -> int:
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('currentwarnings', help="Name of file which contains the current warnings of the repo.")
-    parser.add_argument('newwarnings', help="Name of file which contains the *new* warnings of the repo.")
+    parser.add_argument(
+        "currentwarnings",
+        help="Name of file which contains the current warnings of the repo.",
+    )
+    parser.add_argument(
+        "newwarnings",
+        help="Name of file which contains the *new* warnings of the repo.",
+    )
     parser.add_argument("--pr-message", action="store_true")
     args = parser.parse_args()
 
