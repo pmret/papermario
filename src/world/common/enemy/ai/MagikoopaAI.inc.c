@@ -338,7 +338,7 @@ API_CALLABLE(N(MagikoopaAI_OnHit)) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     if (enemy->varTable[0] == 2) {
-        npc->jumpVelocity = 0.0f;
+        npc->jumpVel = 0.0f;
         npc->moveSpeed = 0.0f;
     }
     return ApiStatus_DONE2;

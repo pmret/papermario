@@ -31,8 +31,8 @@ void func_802B6000_E27510(void) {
     playerStatus->gravityIntegrator[3] = slide->integrator[3];
     playerStatus->heading = slide->heading;
     MaxSlideAccel = slide->maxDescendAccel;
-    SlideLaunchSpeed = slide->launchVelocity;
-    MaxSlideVelocity = slide->maxDescendVelocity;
+    SlideLaunchSpeed = slide->launchVel;
+    MaxSlideVelocity = slide->maxDescendVel;
 }
 
 void action_update_sliding(void) {

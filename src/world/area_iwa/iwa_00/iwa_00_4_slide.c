@@ -3,8 +3,8 @@
 SlideParams N(SlideData) = {
     .heading = 270.0f,
     .maxDescendAccel = 0.4f,
-    .launchVelocity = -0.05f,
-    .maxDescendVelocity = 20.0f,
+    .launchVel = -0.05f,
+    .maxDescendVel = 20.0f,
     .integrator = { 0.0, 0.0, 0.0, 0.0 },
 };
 

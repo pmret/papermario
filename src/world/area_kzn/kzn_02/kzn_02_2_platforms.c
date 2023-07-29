@@ -43,7 +43,7 @@ API_CALLABLE(N(AddPushVelocity)) {
 
     if ((collisionStatus->currentFloor == floorA) || (collisionStatus->lastTouchedFloor == floorA)
      || (collisionStatus->currentFloor == floorB) || (collisionStatus->lastTouchedFloor == floorB)) {
-        playerStatus->pushVelocity.x = velX;
+        playerStatus->pushVel.x = velX;
     }
     if (gPlayerData.currentPartner != PARTNER_NONE){
         partner = get_npc_unsafe(NPC_PARTNER);

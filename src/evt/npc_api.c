@@ -334,19 +334,19 @@ ApiStatus _npc_jump_to(Evt* script, s32 isInitialCall, s32 snapYaw) {
         }
 
         npc->flags |= NPC_FLAG_JUMPING;
-        npc->jumpVelocity = (npc->jumpScale * npc->duration * 0.5f) + (goalY / npc->duration);
+        npc->jumpVel = (npc->jumpScale * npc->duration * 0.5f) + (goalY / npc->duration);
         script->functionTemp[0] =1;
     }
 
     npc = script->functionTempPtr[1];
     npc_move_heading(npc, npc->moveSpeed, *yaw);
 
-    npc->pos.y += npc->jumpVelocity;
-    npc->jumpVelocity -= npc->jumpScale;
+    npc->pos.y += npc->jumpVel;
+    npc->jumpVel -= npc->jumpScale;
 
     npc->duration--;
     if (npc->duration < 0) {
-        npc->jumpVelocity = 0.0f;
+        npc->jumpVel = 0.0f;
         npc->pos.x = npc->moveToPos.x;
         npc->pos.y = npc->moveToPos.y;
         npc->pos.z = npc->moveToPos.z;
@@ -840,15 +840,15 @@ s32 BringPartnerOut(Evt* script, s32 isInitialCall) {
             npc->moveSpeed = npc->planarFlyDist / npc->duration;
         }
 
-        npc->jumpVelocity = ((playerY - targetY) + (npc->jumpScale * npc->duration * npc->duration * 0.5f)) / npc->duration;
+        npc->jumpVel = ((playerY - targetY) + (npc->jumpScale * npc->duration * npc->duration * 0.5f)) / npc->duration;
         npc->currentAnim = gPartnerAnimations[wExtraPartnerID].walk;
         return ApiStatus_BLOCK;
     }
 
     npc = get_npc_by_index(wExtraPartnerNpcID);
-    npc->jumpVelocity -= npc->jumpScale;
-    npc->pos.y += npc->jumpVelocity;
-    if (npc->jumpVelocity <= 0.0f) {
+    npc->jumpVel -= npc->jumpScale;
+    npc->pos.y += npc->jumpVel;
+    if (npc->jumpVel <= 0.0f) {
         npc->currentAnim = gPartnerAnimations[wExtraPartnerID].jump;
     }
     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
@@ -863,7 +863,7 @@ s32 BringPartnerOut(Evt* script, s32 isInitialCall) {
     npc->duration--;
     if (npc->duration < 0) {
         npc->currentAnim = gPartnerAnimations[wExtraPartnerID].idle;
-        npc->jumpVelocity = 0.0f;
+        npc->jumpVel = 0.0f;
         npc->pos.y = npc->moveToPos.y;
         npc->scale.x = 1.0f;
         npc->scale.y = 1.0f;
@@ -910,7 +910,7 @@ ApiStatus PutPartnerAway(Evt* script, s32 isInitialCall) {
             }
 
             partnerY = targetY - partnerY;
-            partner->jumpVelocity = (partnerY + (partner->jumpScale * partner->duration * partner->duration * 0.5f)) / partner->duration;
+            partner->jumpVel = (partnerY + (partner->jumpScale * partner->duration * partner->duration * 0.5f)) / partner->duration;
             partner->currentAnim = gPartnerAnimations[wExtraPartnerID].walk;
             return ApiStatus_BLOCK;
         } else {
@@ -918,9 +918,9 @@ ApiStatus PutPartnerAway(Evt* script, s32 isInitialCall) {
         }
     }
 
-    partner->jumpVelocity -= partner->jumpScale;
-    partner->pos.y += partner->jumpVelocity;
-    if (partner->jumpVelocity <= 0.0f) {
+    partner->jumpVel -= partner->jumpScale;
+    partner->pos.y += partner->jumpVel;
+    if (partner->jumpVel <= 0.0f) {
         partner->currentAnim = gPartnerAnimations[wExtraPartnerID].jump;
     }
     npc_move_heading(partner, partner->moveSpeed, partner->yaw);
@@ -937,7 +937,7 @@ ApiStatus PutPartnerAway(Evt* script, s32 isInitialCall) {
     partner->duration--;
     if (partner->duration < 0) {
         partner->currentAnim = gPartnerAnimations[wExtraPartnerID].fall;
-        partner->jumpVelocity = 0.0f;
+        partner->jumpVel = 0.0f;
         partner->pos.y = partner->moveToPos.y;
         free_npc_by_index(wExtraPartnerNpcID);
         get_npc_unsafe(-5)->npcID = NPC_PARTNER;

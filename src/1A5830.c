@@ -1073,7 +1073,7 @@ ApiStatus JumpToGoal(Evt* script, s32 isInitialCall) {
             return ApiStatus_DONE2;
         }
 
-        actorState->velocity = (actorState->acceleration * actorState->moveTime * 0.5f) + (posY / actorState->moveTime);
+        actorState->vel = (actorState->acceleration * actorState->moveTime * 0.5f) + (posY / actorState->moveTime);
         actorState->speed += (moveDist / actorState->moveTime);
 
         if (script->functionTemp[2] != 0) {
@@ -1088,13 +1088,13 @@ ApiStatus JumpToGoal(Evt* script, s32 isInitialCall) {
     actor = script->functionTempPtr[1];
     actorState = &actor->state;
 
-    actorState->currentPos.y += actorState->velocity;
-    actorState->velocity -= actorState->acceleration;
+    actorState->currentPos.y += actorState->vel;
+    actorState->vel -= actorState->acceleration;
 
-    if ((script->functionTemp[2] != 0) && (actorState->velocity < 0.0f)) {
+    if ((script->functionTemp[2] != 0) && (actorState->vel < 0.0f)) {
         set_animation(actor->actorID, (s8) actorState->jumpPartIndex, actorState->animJumpFall);
     }
-    if (actorState->velocity < 0.0f) {
+    if (actorState->vel < 0.0f) {
         if (actorState->currentPos.y < actorState->goalPos.y) {
             actorState->currentPos.y = actorState->goalPos.y;
         }
@@ -1178,7 +1178,7 @@ ApiStatus IdleJumpToGoal(Evt* script, s32 isInitialCall) {
             return ApiStatus_DONE2;
         }
 
-        movement->velocity = (movement->acceleration * movement->flyTime * 0.5f) + (posY / movement->flyTime);
+        movement->vel = (movement->acceleration * movement->flyTime * 0.5f) + (posY / movement->flyTime);
         movement->speed += moveDist / movement->flyTime;
         script->functionTemp[0] = TRUE;
     }
@@ -1186,9 +1186,9 @@ ApiStatus IdleJumpToGoal(Evt* script, s32 isInitialCall) {
     actor = script->functionTempPtr[1];
     movement = &actor->fly;
 
-    movement->currentPos.y += movement->velocity;
-    movement->velocity -= movement->acceleration;
-    if (movement->velocity < 0.0f && movement->goalPos.y > movement->currentPos.y) {
+    movement->currentPos.y += movement->vel;
+    movement->vel -= movement->acceleration;
+    if (movement->vel < 0.0f && movement->goalPos.y > movement->currentPos.y) {
         movement->currentPos.y = movement->goalPos.y;
     }
     add_xz_vec3f_copy2(&movement->currentPos, movement->speed, movement->angle);
@@ -1263,7 +1263,7 @@ ApiStatus JumpToGoalSimple2(Evt* script, s32 isInitialCall) {
             return ApiStatus_DONE2;
         }
 
-        state->velocity = ((state->acceleration * state->moveTime) * 0.5f) + (posY / state->moveTime);
+        state->vel = ((state->acceleration * state->moveTime) * 0.5f) + (posY / state->moveTime);
         state->speed += moveDist / state->moveTime;
         if (actor->actorTypeData1[4] != 0) {
             sfx_play_sound_at_position(actor->actorTypeData1[4], SOUND_SPACE_MODE_0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
@@ -1274,9 +1274,9 @@ ApiStatus JumpToGoalSimple2(Evt* script, s32 isInitialCall) {
     actor = script->functionTempPtr[1];
     state = &actor->state;
 
-    state->currentPos.y -= state->velocity;
-    state->velocity -= state->acceleration;
-    if (state->velocity > 0.0f && state->goalPos.y < state->currentPos.y) {
+    state->currentPos.y -= state->vel;
+    state->vel -= state->acceleration;
+    if (state->vel > 0.0f && state->goalPos.y < state->currentPos.y) {
         state->currentPos.y = state->goalPos.y;
     }
     add_xz_vec3f(&state->currentPos, state->speed, state->angle);
@@ -1350,7 +1350,7 @@ ApiStatus JumpWithBounce(Evt* script, s32 isInitialCall) {
             return ApiStatus_DONE2;
         }
 
-        actorState->velocity = (actorState->acceleration * actorState->moveTime * 0.5f) + (posY / actorState->moveTime);
+        actorState->vel = (actorState->acceleration * actorState->moveTime * 0.5f) + (posY / actorState->moveTime);
         actorState->speed += moveDist / actorState->moveTime;
 
         if (actor->actorTypeData1[4] != 0) {
@@ -1364,19 +1364,19 @@ ApiStatus JumpWithBounce(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 1:
-            actorState->currentPos.y += actorState->velocity;
-            actorState->velocity -= actorState->acceleration;
-            if ((actorState->velocity < 0.0f) && (actorState->currentPos.y < actorState->goalPos.y)) {
+            actorState->currentPos.y += actorState->vel;
+            actorState->vel -= actorState->acceleration;
+            if ((actorState->vel < 0.0f) && (actorState->currentPos.y < actorState->goalPos.y)) {
                 actorState->acceleration = -actorState->acceleration;
-                actorState->velocity /= actorState->bounceDivisor;
+                actorState->vel /= actorState->bounceDivisor;
                 script->functionTemp[0] = 2;
             }
             add_xz_vec3f(&actorState->currentPos, actorState->speed, actorState->angle);
             break;
         case 2:
-            actorState->currentPos.y += actorState->velocity;
-            actorState->velocity -= actorState->acceleration;
-            if (actorState->velocity > 0.0f) {
+            actorState->currentPos.y += actorState->vel;
+            actorState->vel -= actorState->acceleration;
+            if (actorState->vel > 0.0f) {
                 if (actorState->goalPos.y < actorState->currentPos.y) {
                     actorState->currentPos.y = actorState->goalPos.y;
                     script->functionTemp[0] = 3;
@@ -1422,8 +1422,8 @@ ApiStatus LandJump(Evt* script, s32 isInitialCall) {
     }
 
     actor = script->functionTempPtr[1];
-    actor->state.currentPos.y += actor->state.velocity;
-    actor->state.velocity -= actor->state.acceleration;
+    actor->state.currentPos.y += actor->state.vel;
+    actor->state.vel -= actor->state.acceleration;
 
     add_xz_vec3f(&actor->state.currentPos, actor->state.speed, actor->state.angle);
     actor->currentPos.x = actor->state.currentPos.x;
@@ -1487,8 +1487,8 @@ ApiStatus FallToGoal(Evt* script, s32 isInitialCall) {
             actor->state.speed = actor->state.distance / actor->state.moveTime;
         }
 
-        state->velocity = 0.0f;
-        state->acceleration = (posY / state->moveTime - state->velocity) / (-state->moveTime * 0.5);
+        state->vel = 0.0f;
+        state->acceleration = (posY / state->moveTime - state->vel) / (-state->moveTime * 0.5);
 
         if (actor->actorTypeData1[4] != 0) {
             sfx_play_sound_at_position(actor->actorTypeData1[4], SOUND_SPACE_MODE_0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
@@ -1497,8 +1497,8 @@ ApiStatus FallToGoal(Evt* script, s32 isInitialCall) {
     }
 
     actor = script->functionTempPtr[1];
-    actor->state.currentPos.y += actor->state.velocity;
-    actor->state.velocity -= actor->state.acceleration;
+    actor->state.currentPos.y += actor->state.vel;
+    actor->state.vel -= actor->state.acceleration;
     add_xz_vec3f(&actor->state.currentPos, actor->state.speed, actor->state.angle);
     actor->currentPos.x = actor->state.currentPos.x;
     actor->currentPos.y = actor->state.currentPos.y;
@@ -2209,9 +2209,9 @@ ApiStatus FlyToGoal(Evt* script, s32 isInitialCall) {
         actorState->bounceDivisor = 0.0f;
         actorState->angle = 0.0f;
         if (actor->actorTypeData1b[1] >= 0) {
-            actorState->velocity = actor->actorTypeData1b[1] + 1;
+            actorState->vel = actor->actorTypeData1b[1] + 1;
         } else {
-            actorState->velocity = ~actor->actorTypeData1b[1];
+            actorState->vel = ~actor->actorTypeData1b[1];
         }
         if ((actor->actorTypeData1[2] != 0) && (actor->actorTypeData1[3] == 0)) {
             sfx_play_sound_at_position(actor->actorTypeData1[2], SOUND_SPACE_MODE_0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
@@ -2244,10 +2244,10 @@ ApiStatus FlyToGoal(Evt* script, s32 isInitialCall) {
     }
     if ((actor->actorTypeData1[2] != 0) && (actor->actorTypeData1[3] != 0)) {
         if (actor->actorTypeData1b[1] >= 0) {
-            actorState->velocity += actorState->speed;
-            if (actor->actorTypeData1b[1] < actorState->velocity) {
+            actorState->vel += actorState->speed;
+            if (actor->actorTypeData1b[1] < actorState->vel) {
                 actor->footStepCounter++;
-                actorState->velocity = 0.0f;
+                actorState->vel = 0.0f;
                 if (actor->footStepCounter & 1) {
                     if (actor->actorTypeData1[2] != 0) {
                         sfx_play_sound_at_position(actor->actorTypeData1[2], SOUND_SPACE_MODE_0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
@@ -2259,10 +2259,10 @@ ApiStatus FlyToGoal(Evt* script, s32 isInitialCall) {
                 }
             }
         } else {
-            actorState->velocity += 1.0f;
-            if (-actor->actorTypeData1b[1] <= actorState->velocity) {
+            actorState->vel += 1.0f;
+            if (-actor->actorTypeData1b[1] <= actorState->vel) {
                 actor->footStepCounter++;
-                actorState->velocity = 0.0f;
+                actorState->vel = 0.0f;
                 if (actor->footStepCounter & 1) {
                     if (actor->actorTypeData1[2] != 0) {
                         sfx_play_sound_at_position(actor->actorTypeData1[2], SOUND_SPACE_MODE_0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
@@ -2357,7 +2357,7 @@ ApiStatus IdleFlyToGoal(Evt* script, s32 isInitialCall) {
 
         movement->flyElapsed = 0.0f;
         movement->angle = 0.0f;
-        movement->velocity = 0.0f;
+        movement->vel = 0.0f;
     }
 
     actor = script->functionTempPtr[1];

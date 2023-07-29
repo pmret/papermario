@@ -66,19 +66,19 @@ API_CALLABLE(N(ImposterFallFromCeiling)) {
         npc->pos.x = script->varTable[1];
         npc->pos.y = script->varTable[2];
         npc->pos.z = script->varTable[3];
-        npc->jumpVelocity = 0.0f;
+        npc->jumpVel = 0.0f;
         npc->currentAnim = ANIM_WorldBombette_Aftermath;
         npc->jumpScale = 0.8f;
     }
     npc->rot.z -= 39.0f;
     npc->rot.x -= 33.0f;
-    npc->pos.y -= npc->jumpVelocity;
-    npc->jumpVelocity += npc->jumpScale;
+    npc->pos.y -= npc->jumpVel;
+    npc->jumpVel += npc->jumpScale;
     if (npc->pos.y <= 0.0f) {
         npc->pos.y = 0.0f;
         npc->rot.z = 0.0f;
         npc->rot.x = 0.0f;
-        npc->jumpVelocity = 0.0f;
+        npc->jumpVel = 0.0f;
         npc->jumpScale = 0.0f;
         npc->currentAnim = ANIM_WorldBombette_Idle;
         return ApiStatus_DONE2;

@@ -70,8 +70,8 @@ API_CALLABLE(N(AddConveyorPush)) {
 
             for (i = 0; i < ARRAY_COUNT(N(ConveyorColliders)); i++) {
                 if (hit == N(ConveyorColliders)[i]) {
-                    playerStatus->pushVelocity.x = N(ConveyorPushVels)[i][0];
-                    playerStatus->pushVelocity.z = N(ConveyorPushVels)[i][one]; // TODO needed to match
+                    playerStatus->pushVel.x = N(ConveyorPushVels)[i][0];
+                    playerStatus->pushVel.z = N(ConveyorPushVels)[i][one]; // TODO needed to match
                 }
             }
             script->varTable[0] = 1;
@@ -86,8 +86,8 @@ API_CALLABLE(N(AddConveyorPush)) {
             if (gCollisionStatus.currentFloor == N(ConveyorColliders)[i] ||
                 gCollisionStatus.lastTouchedFloor == N(ConveyorColliders)[i])
             {
-                playerStatus->pushVelocity.x = N(ConveyorPushVels)[i][0];
-                playerStatus->pushVelocity.z = N(ConveyorPushVels)[i][one]; // TODO needed to match
+                playerStatus->pushVel.x = N(ConveyorPushVels)[i][0];
+                playerStatus->pushVel.z = N(ConveyorPushVels)[i][one]; // TODO needed to match
             }
 
             if (partner->currentFloor == N(ConveyorColliders)[i] &&

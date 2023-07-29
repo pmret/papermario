@@ -185,9 +185,9 @@ API_CALLABLE(N(UpdateRotatingPlatforms)) {
         if (gCollisionStatus.currentFloor == N(RotatingPlatformColliders)[i] ||
             gCollisionStatus.lastTouchedFloor == N(RotatingPlatformColliders)[i])
         {
-            playerStatus->pushVelocity.x = ox - it->lastRelativePos.x;
-            playerStatus->pushVelocity.y = oy - it->lastRelativePos.y;
-            playerStatus->pushVelocity.z = oz - it->lastRelativePos.z;
+            playerStatus->pushVel.x = ox - it->lastRelativePos.x;
+            playerStatus->pushVel.y = oy - it->lastRelativePos.y;
+            playerStatus->pushVel.z = oz - it->lastRelativePos.z;
         }
         if (partner->currentFloor == N(RotatingPlatformColliders)[i]) {
             partner->pos.x += ox - it->lastRelativePos.x;

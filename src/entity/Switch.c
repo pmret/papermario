@@ -62,10 +62,10 @@ void entity_switch_fall_down(Entity* entity) {
     entity_raycast_down(&x, &y, &z, &hitYaw, &hitPitch, &hitDepth);
 
     if (entity->pos.y != y && entity->pos.y > y) {
-        f32 fallVelocity = data->fallVelocity;
+        f32 fallVelocity = data->fallVel;
 
         fallVelocity += 0.5;
-        data->fallVelocity = fallVelocity;
+        data->fallVel = fallVelocity;
         entity->pos.y -= fallVelocity;
         if (entity->pos.y < y) {
             entity->pos.y = y;
@@ -139,7 +139,7 @@ void entity_RedSwitch_wait_and_reset(Entity* entity) {
 void entity_base_switch_anim_init(Entity* entity) {
     SwitchData* data = entity->dataBuf.swtch;
 
-    data->fallVelocity = 1.0f;
+    data->fallVel = 1.0f;
     data->deltaScaleX = 0.1f;
     data->deltaScaleY = -0.1f;
     data->animStateScaleX = 0;

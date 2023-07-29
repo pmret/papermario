@@ -128,7 +128,7 @@ API_CALLABLE(N(JumpOnTarget)) {
         state->unk_30.y = (state->goalPos.y - state->currentPos.y) / state->moveTime;
         state->unk_30.z = (state->goalPos.z - state->currentPos.z) / state->moveTime;
         state->acceleration = PI_S / state->moveTime;
-        state->velocity = 0.0f;
+        state->vel = 0.0f;
         state->speed += temp / state->moveTime;
 
         if (state->moveArcAmplitude < 3) {
@@ -144,9 +144,9 @@ API_CALLABLE(N(JumpOnTarget)) {
             }
             state->unk_18.x = 0.0f;
             state->unk_18.y = 0.0f;
-            vel3 = state->velocity;
+            vel3 = state->vel;
             acc3 = state->acceleration;
-            state->velocity = vel3 + ((sin_rad(DEG_TO_RAD(state->unk_24)) * 0.53 * acc3) + acc3);
+            state->vel = vel3 + ((sin_rad(DEG_TO_RAD(state->unk_24)) * 0.53 * acc3) + acc3);
         } else {
             state->unk_24 = 90.0f;
             state->unk_28 = 360 / state->moveTime;
@@ -160,9 +160,9 @@ API_CALLABLE(N(JumpOnTarget)) {
             }
             state->unk_18.x = 0.0f;
             state->unk_18.y = 0.0f;
-            vel4 = state->velocity;
+            vel4 = state->vel;
             acc4 = state->acceleration;
-            state->velocity = vel4 + ((sin_rad(DEG_TO_RAD(state->unk_24)) * 0.8 * acc4) + acc4);
+            state->vel = vel4 + ((sin_rad(DEG_TO_RAD(state->unk_24)) * 0.8 * acc4) + acc4);
         }
         set_animation(ACTOR_PARTNER, 1, state->animJumpRise);
         script->functionTemp[0] = 1;
@@ -170,7 +170,7 @@ API_CALLABLE(N(JumpOnTarget)) {
 
     switch (script->functionTemp[0]) {
         case 1:
-            if (state->velocity > PI_S / 2) {
+            if (state->vel > PI_S / 2) {
                 set_animation(ACTOR_PARTNER, 1, state->animJumpFall);
             }
             oldActorX = actor->currentPos.x;
@@ -180,7 +180,7 @@ API_CALLABLE(N(JumpOnTarget)) {
             state->currentPos.z = state->currentPos.z + state->unk_30.z;
             state->unk_18.x = actor->currentPos.y;
             actor->currentPos.x = state->currentPos.x;
-            actor->currentPos.y = state->currentPos.y + (state->bounceDivisor * sin_rad(state->velocity));
+            actor->currentPos.y = state->currentPos.y + (state->bounceDivisor * sin_rad(state->vel));
             actor->currentPos.z = state->currentPos.z;
             if (state->goalPos.y > actor->currentPos.y && state->moveTime < 3) {
                 actor->currentPos.y = state->goalPos.y;
@@ -189,13 +189,13 @@ API_CALLABLE(N(JumpOnTarget)) {
             actor->rot.z = -atan2(oldActorX, -oldActorY, actor->currentPos.x, -actor->currentPos.y);
             state->unk_18.y = actor->currentPos.y;
             if (state->moveArcAmplitude < 3) {
-                vel1 = state->velocity;
+                vel1 = state->vel;
                 acc1 = state->acceleration;
-                state->velocity = vel1 + ((sin_rad(DEG_TO_RAD(state->unk_24)) * 0.53 * acc1) + acc1);
+                state->vel = vel1 + ((sin_rad(DEG_TO_RAD(state->unk_24)) * 0.53 * acc1) + acc1);
             } else {
-                vel2 = state->velocity;
+                vel2 = state->vel;
                 acc2 = state->acceleration;
-                state->velocity = vel2 + ((sin_rad(DEG_TO_RAD(state->unk_24)) * 0.8 * acc2) + acc2);
+                state->vel = vel2 + ((sin_rad(DEG_TO_RAD(state->unk_24)) * 0.8 * acc2) + acc2);
             }
 
             state->unk_24 += state->unk_28;
@@ -204,7 +204,7 @@ API_CALLABLE(N(JumpOnTarget)) {
             if (state->moveTime == 0) {
                 actor->currentPos.y = state->goalPos.y;
                 state->acceleration = 1.8f;
-                state->velocity = -(state->unk_18.x - state->unk_18.y);
+                state->vel = -(state->unk_18.x - state->unk_18.y);
                 set_animation(ACTOR_PARTNER, 1, state->animJumpLand);
                 return ApiStatus_DONE1;
             }
@@ -216,7 +216,7 @@ API_CALLABLE(N(JumpOnTarget)) {
             state->moveTime = 1;
             state->acceleration = 1.8f;
             state->unk_24 = 90.0f;
-            state->velocity = -(state->unk_18.x - state->unk_18.y);
+            state->vel = -(state->unk_18.x - state->unk_18.y);
             state->bounceDivisor = fabsf(state->unk_18.x - state->unk_18.y) / 16.5;
             state->unk_28 = 360 / state->moveTime;
             state->currentPos.x = actor->currentPos.x;
@@ -264,16 +264,16 @@ API_CALLABLE(N(OnMissHeadbonk)) {
         script->functionTemp[0] = 1;
     }
 
-    if (partner->state.velocity > 0.0f) {
+    if (partner->state.vel > 0.0f) {
         set_animation(ACTOR_PARTNER, 0, partner->state.animJumpRise);
     }
 
-    if (partner->state.velocity < 0.0f) {
+    if (partner->state.vel < 0.0f) {
         set_animation(ACTOR_PARTNER, 0, partner->state.animJumpFall);
     }
 
-    partner->state.currentPos.y = (partner->state.currentPos.y + partner->state.velocity);
-    partner->state.velocity = (partner->state.velocity - partner->state.acceleration);
+    partner->state.currentPos.y = (partner->state.currentPos.y + partner->state.vel);
+    partner->state.vel = (partner->state.vel - partner->state.acceleration);
     add_xz_vec3f(pos, partner->state.speed, partner->state.angle);
     partner->currentPos.x = partner->state.currentPos.x;
     partner->currentPos.y = partner->state.currentPos.y;

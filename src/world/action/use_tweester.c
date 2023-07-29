@@ -27,8 +27,8 @@ void action_update_use_tweester(void) {
         mem_clear(PlayerTweesterPhysicsPtr, sizeof(*PlayerTweesterPhysicsPtr));
         PlayerTweesterPhysicsPtr->radius = fabsf(dist2D(playerStatus->pos.x, playerStatus->pos.z, entity->pos.x, entity->pos.z));
         PlayerTweesterPhysicsPtr->angle = atan2(entity->pos.x, entity->pos.z, playerStatus->pos.x, playerStatus->pos.z);
-        PlayerTweesterPhysicsPtr->angularVelocity = 6.0f;
-        PlayerTweesterPhysicsPtr->liftoffVelocityPhase = 50.0f;
+        PlayerTweesterPhysicsPtr->angularVel = 6.0f;
+        PlayerTweesterPhysicsPtr->liftoffVelPhase = 50.0f;
         PlayerTweesterPhysicsPtr->countdown = 120;
         sfx_play_sound_at_player(SOUND_TWEESTER_LAUNCH, SOUND_SPACE_MODE_0);
     }
@@ -40,7 +40,7 @@ void action_update_use_tweester(void) {
             playerStatus->pos.x = entity->pos.x + (sinAngle * PlayerTweesterPhysicsPtr->radius);
             playerStatus->pos.z = entity->pos.z - (cosAngle * PlayerTweesterPhysicsPtr->radius);
 
-            PlayerTweesterPhysicsPtr->angle = clamp_angle(PlayerTweesterPhysicsPtr->angle - PlayerTweesterPhysicsPtr->angularVelocity);
+            PlayerTweesterPhysicsPtr->angle = clamp_angle(PlayerTweesterPhysicsPtr->angle - PlayerTweesterPhysicsPtr->angularVel);
 
             if (PlayerTweesterPhysicsPtr->radius > 20.0f) {
                 PlayerTweesterPhysicsPtr->radius--;
@@ -48,17 +48,17 @@ void action_update_use_tweester(void) {
                 PlayerTweesterPhysicsPtr->radius++;
             }
 
-            liftoffVelocity = sin_rad(DEG_TO_RAD(PlayerTweesterPhysicsPtr->liftoffVelocityPhase))  * 3.0f;
-            PlayerTweesterPhysicsPtr->liftoffVelocityPhase += 3.0f;
-            if (PlayerTweesterPhysicsPtr->liftoffVelocityPhase > 150.0f) {
-                PlayerTweesterPhysicsPtr->liftoffVelocityPhase = 150.0f;
+            liftoffVelocity = sin_rad(DEG_TO_RAD(PlayerTweesterPhysicsPtr->liftoffVelPhase))  * 3.0f;
+            PlayerTweesterPhysicsPtr->liftoffVelPhase += 3.0f;
+            if (PlayerTweesterPhysicsPtr->liftoffVelPhase > 150.0f) {
+                PlayerTweesterPhysicsPtr->liftoffVelPhase = 150.0f;
             }
 
             playerStatus->pos.y += liftoffVelocity;
             playerStatus->spriteFacingAngle = clamp_angle(360.0f - PlayerTweesterPhysicsPtr->angle);
-            PlayerTweesterPhysicsPtr->angularVelocity += 0.6;
-            if (PlayerTweesterPhysicsPtr->angularVelocity > 40.0f) {
-                PlayerTweesterPhysicsPtr->angularVelocity = 40.0f;
+            PlayerTweesterPhysicsPtr->angularVel += 0.6;
+            if (PlayerTweesterPhysicsPtr->angularVel > 40.0f) {
+                PlayerTweesterPhysicsPtr->angularVel = 40.0f;
             }
             if (--PlayerTweesterPhysicsPtr->countdown == 0) {
                 playerStatus->actionSubstate++; // SUBSTATE_DONE

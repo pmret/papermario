@@ -66,7 +66,7 @@ API_CALLABLE(N(SwooperAI_Main)) {
             npc->currentAnim = enemy->animList[3];
             npc->planarFlyDist = atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
             npc->jumpScale = 1.3f;
-            npc->jumpVelocity = 0.0f;
+            npc->jumpVel = 0.0f;
             npc->moveSpeed = aiSettings->moveSpeed;
             x = npc->pos.x;
             y = npc->pos.y;
@@ -92,8 +92,8 @@ API_CALLABLE(N(SwooperAI_Main)) {
                 npc_move_heading(npc, npc->moveSpeed, npc->yaw);
             }
 
-            npc->jumpVelocity -= npc->jumpScale;
-            npc->pos.y += npc->jumpVelocity;
+            npc->jumpVel -= npc->jumpScale;
+            npc->pos.y += npc->jumpVel;
             if (npc->pos.y < npc->moveToPos.y) {
                 npc->pos.y = npc->moveToPos.y;
                 script->functionTemp[0] = 12;
@@ -114,25 +114,25 @@ API_CALLABLE(N(SwooperAI_Main)) {
             if (npc->duration == 0) {
                 npc->duration = 1;
             }
-            npc->jumpScale = -fabsf(-(2.0f * ((-npc->jumpVelocity * npc->duration) + y2)) / SQ(npc->duration));
+            npc->jumpScale = -fabsf(-(2.0f * ((-npc->jumpVel * npc->duration) + y2)) / SQ(npc->duration));
             npc->verticalRenderOffset = 0;
             npc->flags &= ~NPC_FLAG_UPSIDE_DOWN;
             enemy->varTable[0] = 5;
             npc->duration = 0;
             script->functionTemp[0] = 13;
         case 13:
-            npc->jumpVelocity -= npc->jumpScale;
-            if (npc->jumpVelocity < 0.0f) {
+            npc->jumpVel -= npc->jumpScale;
+            if (npc->jumpVel < 0.0f) {
                 x = npc->pos.x;
                 y = npc->pos.y;
                 z = npc->pos.z;
-                hitDepth = -npc->jumpVelocity;
+                hitDepth = -npc->jumpVel;
                 if (npc_raycast_down_sides(npc->collisionChannel, &x, &y, &z, &hitDepth) != 0) {
-                    npc->jumpVelocity = 0.0f;
+                    npc->jumpVel = 0.0f;
                 }
             }
 
-            npc->pos.y += npc->jumpVelocity;
+            npc->pos.y += npc->jumpVel;
             if (npc->moveSpeed > 0.0) {
                 x = npc->pos.x;
                 y = npc->pos.y;
@@ -141,7 +141,7 @@ API_CALLABLE(N(SwooperAI_Main)) {
                                                        npc->collisionHeight, npc->collisionDiameter) != 0)
                 {
                     npc->moveSpeed = 0.0f;
-                } else if (npc->jumpVelocity < -2.5) {
+                } else if (npc->jumpVel < -2.5) {
                     npc->duration++;
                     if (npc->duration >= aiSettings->chaseUpdateInterval) {
                         f32 yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);

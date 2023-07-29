@@ -59,7 +59,7 @@ void npc_follow_init(Npc* npc, s32 targetNpcID, FollowAnims* anims, f32 walkSpee
     followData->idleRadius = idleRadius;
     followData->walkRadius = walkRadius;
     npc->currentAnim = followData->anims->idle;
-    npc->jumpVelocity = 0.0f;
+    npc->jumpVel = 0.0f;
     npc->flags |= NPC_FLAG_GRAVITY;
     npc->flags &= ~NPC_FLAG_IGNORE_PLAYER_COLLISION;
     npc->collisionChannel = COLLISION_CHANNEL_10000;
@@ -218,7 +218,7 @@ void npc_follow_npc(Npc* npc) {
                     dist = currentY;
                 }
                 if (dist < followData->idleRadius) {
-                    npc->jumpVelocity = 0.0f;
+                    npc->jumpVel = 0.0f;
                     npc->flags |= NPC_FLAG_GRAVITY;
                     npc->yaw = atan2(npc->pos.x, npc->pos.z, x, z);
                     followData->followState = NPC_FOLLOW_STATE_RUN;
@@ -229,29 +229,29 @@ void npc_follow_npc(Npc* npc) {
                     npc->duration = 10;
                 }
                 npc->moveSpeed = npc->planarFlyDist / npc->duration;
-                npc->jumpVelocity = (currentY + (npc->jumpScale * npc->duration * npc->duration * 0.5f)) / npc->duration;
+                npc->jumpVel = (currentY + (npc->jumpScale * npc->duration * npc->duration * 0.5f)) / npc->duration;
                 npc->currentAnim = followData->anims->jump;
                 npc->flags &= ~NPC_FLAG_GRAVITY;
                 followData->followState = NPC_FOLLOW_STATE_FALL;
             }
             break;
         case NPC_FOLLOW_STATE_FALL:
-            npc->jumpVelocity -= npc->jumpScale;
-            npc->pos.y += npc->jumpVelocity;
-            if (npc->jumpVelocity <= 0.0f) {
+            npc->jumpVel -= npc->jumpScale;
+            npc->pos.y += npc->jumpVel;
+            if (npc->jumpVel <= 0.0f) {
                 npc->currentAnim = followData->anims->fall;
             }
             npc_move_heading(npc, npc->moveSpeed, npc->yaw);
-            if (npc->jumpVelocity <= 0.0f) {
+            if (npc->jumpVel <= 0.0f) {
                 currentX = npc->pos.x;
-                dist = fabsf(npc->jumpVelocity) + 8.0;
+                dist = fabsf(npc->jumpVel) + 8.0;
                 currentY = npc->pos.y + dist;
                 currentZ = npc->pos.z;
                 if (npc_raycast_down_sides(npc->collisionChannel, &currentX, &currentY, &currentZ, &dist) != 0 &&
-                    dist <= fabsf(npc->jumpVelocity) + 8.0)
+                    dist <= fabsf(npc->jumpVel) + 8.0)
                 {
                     npc->currentAnim = followData->anims->land;
-                    npc->jumpVelocity = 0.0f;
+                    npc->jumpVel = 0.0f;
                     npc->pos.y = currentY;
                     npc->flags |= NPC_FLAG_GRAVITY;
                     npc->yaw = atan2(currentX, currentZ, x, z);

@@ -74,7 +74,7 @@ typedef struct SaveBlockData {
 } SaveBlockData; // size = 0x20
 
 typedef struct SwitchData {
-    /* 0x000 */ f32 fallVelocity;
+    /* 0x000 */ f32 fallVel;
     /* 0x004 */ f32 deltaScaleX;
     /* 0x008 */ f32 deltaScaleY;
     /* 0x00C */ char unk_0C[4];
@@ -155,7 +155,7 @@ typedef struct HeartBlockContentData {
     /* 0x00B */ char unk_0B; // padding?
     /* 0x00C */ s32 unk_0C;
     /* 0x010 */ s32 unk_10;
-    /* 0x014 */ f32 riseVelocity;
+    /* 0x014 */ f32 riseVel;
     /* 0x018 */ f32 sparkleTrailAngle;
     /* 0x01C */ f32 sparkleTrailRadius;
     /* 0x020 */ f32 bouncePhase;
@@ -218,7 +218,7 @@ typedef struct BlueWarpPipeData {
 } BlueWarpPipeData; // size = 0x1C
 
 typedef struct SimpleSpringData {
-    /* 0x00 */ s32 launchVelocity;
+    /* 0x00 */ s32 launchVel;
 } SimpleSpringData; // size = 0x04
 
 typedef struct HiddenPanelData {
@@ -235,7 +235,7 @@ typedef struct HiddenPanelData {
     /* 0x14 */ s32 spawnedItemIndex;
     /* 0x18 */ Vec3i spawnedItemPos;
     /* 0x24 */ f32 initialY;
-    /* 0x28 */ f32 riseVelocity;
+    /* 0x28 */ f32 riseVel;
     /* 0x2C */ f32 riseInterpPhase;
     /* 0x30 */ f32 rotSpeed;
     /* 0x34 */ Matrix4f entityMatrix;
@@ -330,7 +330,7 @@ typedef struct StarBoxLauncherData {
     /* 0x0C */ f32 basePosZ;
     /* 0x10 */ f32 basePosY;
     /* 0x14 */ f32 riseSpeedPhase;
-    /* 0x18 */ f32 riseVelocity;
+    /* 0x18 */ f32 riseVel;
     /* 0x1C */ f32 rotZPhase;
     /* 0x20 */ f32 maxRotZ;
 } StarBoxLauncherData; // size = 0x24

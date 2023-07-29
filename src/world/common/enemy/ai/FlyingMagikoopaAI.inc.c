@@ -125,7 +125,7 @@ void N(FlyingMagikoopaAI_15)(Evt* arg0, MobileAISettings* arg1, EnemyDetectVolum
         enemy->varTable[3] = rand_int(10) + 35;
         npc->duration = 0;
         npc->moveSpeed = 3.0f;
-        npc->jumpVelocity = 1.4f;
+        npc->jumpVel = 1.4f;
         npc->jumpScale = 0.2f;
         arg0->functionTemp[0] = 0x10;
     }
@@ -370,7 +370,7 @@ API_CALLABLE(N(FlyingMagikoopaAI_OnHit)) {
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     if (enemy->varTable[0] == 2) {
-        npc->jumpVelocity = 0.0f;
+        npc->jumpVel = 0.0f;
         npc->moveSpeed = 0.0f;
     }
     return ApiStatus_DONE2;

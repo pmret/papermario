@@ -92,7 +92,7 @@ API_CALLABLE(N(MagikoopaAI_SpellMain)) {
 
                 t1 = fabsf(npc1->pos.x - gPlayerStatusPtr->pos.x);
                 t2 = atan2(0.0f, npc1->pos.y, t1, (gPlayerStatusPtr->pos.y + 10.0)) - 90.0;
-                npc1->jumpVelocity = cosine(t2) * npc1->moveSpeed;
+                npc1->jumpVel = cosine(t2) * npc1->moveSpeed;
                 npc1->yaw = atan2(npc1->pos.x, npc1->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
                 duration = dist3D(npc1->pos.x, npc1->pos.y, npc1->pos.z,
                                   gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.y + 10.0,
@@ -115,12 +115,12 @@ API_CALLABLE(N(MagikoopaAI_SpellMain)) {
             }
             if (timer == 0) {
                 npc_move_heading(npc1, npc1->moveSpeed, npc1->yaw);
-                npc1->pos.y += npc1->jumpVelocity;
+                npc1->pos.y += npc1->jumpVel;
                 break;
             }
             // fallthrough
         case 3:
-            npc1->jumpVelocity = 0.0f;
+            npc1->jumpVel = 0.0f;
             npc1->moveSpeed = 0.0f;
             npc1->pos.y -= npc1->collisionHeight * 0.5;
             enemy->varTable[0] = 3;

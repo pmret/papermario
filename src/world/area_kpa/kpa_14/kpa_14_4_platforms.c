@@ -21,7 +21,7 @@ API_CALLABLE(N(AddPlatformPushVelocity)) {
             playerStatus->actionState != ACTION_STATE_SPIN_JUMP &&
             temp_a0 == 0)
         {
-            playerStatus->pushVelocity.x = velX;
+            playerStatus->pushVel.x = velX;
         }
     }
     if (gPlayerData.currentPartner != PARTNER_NONE) {

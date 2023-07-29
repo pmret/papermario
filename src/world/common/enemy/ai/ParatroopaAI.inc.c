@@ -18,7 +18,7 @@ void N(ParatroopaAI_Windup)(Evt* script, MobileAISettings* aiSettings, EnemyDete
     f32 yawTemp;
 
     npc->currentAnim = enemy->animList[9];
-    npc->jumpVelocity = -5.0f;
+    npc->jumpVel = -5.0f;
     npc->jumpScale = 0.15f;
     npc->collisionHeight = enemy->varTable[8] / 2;
 
@@ -40,15 +40,15 @@ void N(ParatroopaAI_Dive)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
-    npc->jumpVelocity += npc->jumpScale;
-    npc->pos.y += npc->jumpVelocity;
+    npc->jumpVel += npc->jumpScale;
+    npc->pos.y += npc->jumpVel;
     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
     npc->duration--;
 
     if (npc->duration <= 0) {
         enemy->hitboxIsActive = FALSE;
         npc->jumpScale = 0.3f;
-        npc->jumpVelocity = 0.0f;
+        npc->jumpVel = 0.0f;
         npc->moveSpeed = 3.0f;
         npc->currentAnim = enemy->animList[10];
         script->AI_TEMP_STATE = AI_STATE_PARATROOPA_OVERSHOOT;
@@ -64,8 +64,8 @@ void N(ParatroopaAI_Overshoot)(Evt* script, MobileAISettings *arg1, EnemyDetectV
     f32 endOvershootHeight;
     f32 overshootAmt;
 
-    npc->jumpVelocity += npc->jumpScale;
-    npc->pos.y += npc->jumpVelocity;
+    npc->jumpVel += npc->jumpScale;
+    npc->pos.y += npc->jumpVel;
     overshootAmt = overshootAmtRaw / 100.0;
     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
 

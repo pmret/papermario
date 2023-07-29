@@ -160,7 +160,7 @@ void N(PatrolAI_JumpInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_JUMP];
-    npc->jumpVelocity = 10.0f;
+    npc->jumpVel = 10.0f;
     npc->jumpScale = 2.0f;
     npc->moveToPos.y = npc->pos.y;
     npc->flags |= NPC_FLAG_JUMPING;
@@ -170,12 +170,12 @@ void N(PatrolAI_JumpInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
 void N(PatrolAI_Jump)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Npc* npc = get_npc_unsafe(script->owner1.enemy->npcID);
 
-    npc->pos.y += npc->jumpVelocity;
-    npc->jumpVelocity -= npc->jumpScale;
+    npc->pos.y += npc->jumpVel;
+    npc->jumpVel -= npc->jumpScale;
 
     if (!(npc->pos.y > npc->moveToPos.y)) {
         npc->pos.y = npc->moveToPos.y;
-        npc->jumpVelocity = 0.0f;
+        npc->jumpVel = 0.0f;
         npc->flags &= ~NPC_FLAG_JUMPING;
         script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
     }

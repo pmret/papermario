@@ -492,12 +492,12 @@ API_CALLABLE(N(UseAbility)) {
             sushie->currentAnim = ANIM_WorldSushie_Ride;
             playerStatus->flags |= PS_FLAG_MOVEMENT_LOCKED;
             dist = dist2D(playerStatus->pos.x, playerStatus->pos.z, sushie->moveToPos.x, sushie->moveToPos.z);
-            sushie->jumpVelocity = 5.0f;
+            sushie->jumpVel = 5.0f;
             sushie->jumpScale = 0.6f;
             y = sushie->moveToPos.y - playerStatus->pos.y;
-            sushie->duration = (2.0f * sushie->jumpVelocity) / 0.6f;
+            sushie->duration = (2.0f * sushie->jumpVel) / 0.6f;
             sushie->moveSpeed = dist / sushie->duration;
-            sushie->jumpVelocity += y / sushie->duration;
+            sushie->jumpVel += y / sushie->duration;
             suggest_player_anim_allow_backward(ANIM_Mario1_Jump);
             script->USE_STATE++; // SWIM_STATE_EMBARK_1
             fx_rising_bubble(0, sushie->pos.x, sushie->moveToPos.y + (sushie->collisionHeight * 0.5f), sushie->pos.z, 0.0f);
@@ -511,10 +511,10 @@ API_CALLABLE(N(UseAbility)) {
             script->USE_STATE++;
             // fallthrough
         case SWIM_STATE_EMBARK_4:
-            playerStatus->pos.y += sushie->jumpVelocity;
-            sushie->jumpVelocity -= sushie->jumpScale;
+            playerStatus->pos.y += sushie->jumpVel;
+            sushie->jumpVel -= sushie->jumpScale;
             add_vec2D_polar(&playerStatus->pos.x, &playerStatus->pos.z, sushie->moveSpeed, sushie->yaw);
-            if (sushie->jumpVelocity <= 0.0f) {
+            if (sushie->jumpVel <= 0.0f) {
                 suggest_player_anim_allow_backward(ANIM_Mario1_Fall);
             }
             gCameras[CAM_DEFAULT].targetPos.x = playerStatus->pos.x;
@@ -649,11 +649,11 @@ API_CALLABLE(N(UseAbility)) {
                     playerStatus->targetYaw = atan2(playerStatus->pos.x, playerStatus->pos.z, x, z);
                     sushie->yaw = playerStatus->targetYaw;
                     dist = dist2D(playerStatus->pos.x, playerStatus->pos.z, sushie->moveToPos.x, sushie->moveToPos.z);
-                    sushie->jumpVelocity = 5.0f;
+                    sushie->jumpVel = 5.0f;
                     sushie->jumpScale = 0.6f;
-                    sushie->duration = (2.0f * sushie->jumpVelocity) / 0.6f;
+                    sushie->duration = (2.0f * sushie->jumpVel) / 0.6f;
                     sushie->moveSpeed = dist / sushie->duration;
-                    sushie->jumpVelocity += (sushie->moveToPos.y - playerStatus->pos.y) / sushie->duration;
+                    sushie->jumpVel += (sushie->moveToPos.y - playerStatus->pos.y) / sushie->duration;
                     sfx_play_sound_at_npc(SOUND_JUMP_2081, SOUND_SPACE_MODE_0, NPC_PARTNER);
                     suggest_player_anim_allow_backward(ANIM_Mario1_BeforeJump);
                     enable_player_shadow();
@@ -667,21 +667,21 @@ API_CALLABLE(N(UseAbility)) {
             script->USE_STATE++;
             // fallthrough
         case SWIM_STATE_DISEMBARK_2:
-            if (sushie->jumpVelocity <= 0.0f) {
+            if (sushie->jumpVel <= 0.0f) {
                 suggest_player_anim_allow_backward(ANIM_Mario1_Fall);
                 script->USE_STATE++;
             }
             // fallthrough
         case SWIM_STATE_DISEMBARK_3:
-            if (sushie->jumpVelocity <= 0.0f) {
-                playerStatus->pos.y = y = player_check_collision_below(sushie->jumpVelocity, &collider);
+            if (sushie->jumpVel <= 0.0f) {
+                playerStatus->pos.y = y = player_check_collision_below(sushie->jumpVel, &collider);
                 if (collider > 0) {
                     suggest_player_anim_allow_backward(ANIM_Mario1_Land);
                 }
             } else {
-                playerStatus->pos.y += sushie->jumpVelocity;
+                playerStatus->pos.y += sushie->jumpVel;
             }
-            sushie->jumpVelocity -= sushie->jumpScale;
+            sushie->jumpVel -= sushie->jumpScale;
             gCameras[CAM_DEFAULT].targetPos.x = playerStatus->pos.x;
             gCameras[CAM_DEFAULT].targetPos.y = playerStatus->pos.y;
             gCameras[CAM_DEFAULT].targetPos.z = playerStatus->pos.z;
@@ -696,19 +696,19 @@ API_CALLABLE(N(UseAbility)) {
                 sushie->flags |= NPC_FLAG_IGNORE_WORLD_COLLISION;
                 dist = dist2D(sushie->pos.x, sushie->pos.z, sushie->moveToPos.x, sushie->moveToPos.z) +
                             (playerStatus->colliderDiameter * 0.5f);
-                sushie->jumpVelocity = 8.0f;
+                sushie->jumpVel = 8.0f;
                 sushie->jumpScale = 1.0f;
                 sushie->moveSpeed = 4.0f;
                 y = sushie->moveToPos.y - sushie->pos.y;
-                sushie->duration = (2.0f * sushie->jumpVelocity) / sushie->jumpScale;
+                sushie->duration = (2.0f * sushie->jumpVel) / sushie->jumpScale;
                 sushie->moveSpeed = dist / sushie->duration;
-                sushie->jumpVelocity += y / sushie->duration;
+                sushie->jumpVel += y / sushie->duration;
                 script->USE_STATE = SWIM_STATE_EXIT_WATER;
             }
             break;
         case SWIM_STATE_EXIT_WATER:
-            sushie->pos.y += sushie->jumpVelocity;
-            sushie->jumpVelocity -= sushie->jumpScale;
+            sushie->pos.y += sushie->jumpVel;
+            sushie->jumpVel -= sushie->jumpScale;
             add_vec2D_polar(&sushie->pos.x, &sushie->pos.z, sushie->moveSpeed, sushie->yaw);
             if (sushie->duration == 0) {
                 enable_player_static_collisions();
@@ -798,8 +798,8 @@ API_CALLABLE(N(Update)) {
             N(TweesterPhysicsPtr)->radius = fabsf(dist2D(sushie->pos.x, sushie->pos.z,
                                                      entity->pos.x, entity->pos.z));
             N(TweesterPhysicsPtr)->angle = atan2(entity->pos.x, entity->pos.z, sushie->pos.x, sushie->pos.z);
-            N(TweesterPhysicsPtr)->angularVelocity = 6.0f;
-            N(TweesterPhysicsPtr)->liftoffVelocityPhase = 50.0f;
+            N(TweesterPhysicsPtr)->angularVel = 6.0f;
+            N(TweesterPhysicsPtr)->liftoffVelPhase = 50.0f;
             N(TweesterPhysicsPtr)->countdown = 120;
             sushie->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
             sushie->flags &= ~NPC_FLAG_GRAVITY;
@@ -807,7 +807,7 @@ API_CALLABLE(N(Update)) {
             sin_cos_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->angle), &sinAngle, &cosAngle);
             sushie->pos.x = entity->pos.x + (sinAngle * N(TweesterPhysicsPtr)->radius);
             sushie->pos.z = entity->pos.z - (cosAngle * N(TweesterPhysicsPtr)->radius);
-            N(TweesterPhysicsPtr)->angle = clamp_angle(N(TweesterPhysicsPtr)->angle - N(TweesterPhysicsPtr)->angularVelocity);
+            N(TweesterPhysicsPtr)->angle = clamp_angle(N(TweesterPhysicsPtr)->angle - N(TweesterPhysicsPtr)->angularVel);
 
             if (N(TweesterPhysicsPtr)->radius > 20.0f) {
                 N(TweesterPhysicsPtr)->radius--;
@@ -815,19 +815,19 @@ API_CALLABLE(N(Update)) {
                 N(TweesterPhysicsPtr)->radius++;
             }
 
-            liftoffVelocity = sin_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->liftoffVelocityPhase)) * 3.0f;
-            N(TweesterPhysicsPtr)->liftoffVelocityPhase += 3.0f;
+            liftoffVelocity = sin_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->liftoffVelPhase)) * 3.0f;
+            N(TweesterPhysicsPtr)->liftoffVelPhase += 3.0f;
 
-            if (N(TweesterPhysicsPtr)->liftoffVelocityPhase > 150.0f) {
-                N(TweesterPhysicsPtr)->liftoffVelocityPhase = 150.0f;
+            if (N(TweesterPhysicsPtr)->liftoffVelPhase > 150.0f) {
+                N(TweesterPhysicsPtr)->liftoffVelPhase = 150.0f;
             }
 
             sushie->pos.y += liftoffVelocity;
             sushie->renderYaw = clamp_angle(360.0f - N(TweesterPhysicsPtr)->angle);
-            N(TweesterPhysicsPtr)->angularVelocity += 0.8;
+            N(TweesterPhysicsPtr)->angularVel += 0.8;
 
-            if (N(TweesterPhysicsPtr)->angularVelocity > 40.0f) {
-                N(TweesterPhysicsPtr)->angularVelocity = 40.0f;
+            if (N(TweesterPhysicsPtr)->angularVel > 40.0f) {
+                N(TweesterPhysicsPtr)->angularVel = 40.0f;
             }
 
             if (--N(TweesterPhysicsPtr)->countdown == 0) {

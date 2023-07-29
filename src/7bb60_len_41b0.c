@@ -527,52 +527,52 @@ void collision_main_lateral(void) {
             break;
         case ACTION_STATE_RIDE:
             if (get_current_partner_id() == PARTNER_BOW) {
-                playerStatus->pos.x += playerStatus->pushVelocity.x;
-                playerStatus->pos.y += playerStatus->pushVelocity.y;
-                playerStatus->pos.z += playerStatus->pushVelocity.z;
+                playerStatus->pos.x += playerStatus->pushVel.x;
+                playerStatus->pos.y += playerStatus->pushVel.y;
+                playerStatus->pos.z += playerStatus->pushVel.z;
 
-                if (playerStatus->pushVelocity.x != 0.0f ||
-                    playerStatus->pushVelocity.y != 0.0f ||
-                    playerStatus->pushVelocity.z != 0.0f)
+                if (playerStatus->pushVel.x != 0.0f ||
+                    playerStatus->pushVel.y != 0.0f ||
+                    playerStatus->pushVel.z != 0.0f)
                 {
                     gCameras[CAM_DEFAULT].targetPos.x = playerStatus->pos.x;
                     gCameras[CAM_DEFAULT].targetPos.y = playerStatus->pos.y;
                     gCameras[CAM_DEFAULT].targetPos.z = playerStatus->pos.z;
                     if (playerStatus->alpha1 != 128) {
                         collision_check_player_intersecting_world(0, 0,
-                            atan2(0.0f, 0.0f, playerStatus->pushVelocity.x, playerStatus->pushVelocity.z));
+                            atan2(0.0f, 0.0f, playerStatus->pushVel.x, playerStatus->pushVel.z));
                     }
                 }
             }
             break;
         case ACTION_STATE_SPIN_POUND:
         case ACTION_STATE_TORNADO_POUND:
-            playerStatus->pos.x += playerStatus->pushVelocity.x;
-            playerStatus->pos.y += playerStatus->pushVelocity.y;
-            playerStatus->pos.z += playerStatus->pushVelocity.z;
-            if (playerStatus->pushVelocity.x != 0.0f ||
-                playerStatus->pushVelocity.y != 0.0f ||
-                playerStatus->pushVelocity.z != 0.0f)
+            playerStatus->pos.x += playerStatus->pushVel.x;
+            playerStatus->pos.y += playerStatus->pushVel.y;
+            playerStatus->pos.z += playerStatus->pushVel.z;
+            if (playerStatus->pushVel.x != 0.0f ||
+                playerStatus->pushVel.y != 0.0f ||
+                playerStatus->pushVel.z != 0.0f)
             {
                 gCameras[CAM_DEFAULT].targetPos.x = playerStatus->pos.x;
                 gCameras[CAM_DEFAULT].targetPos.y = playerStatus->pos.y;
                 gCameras[CAM_DEFAULT].targetPos.z = playerStatus->pos.z;
             }
-            if (playerStatus->pushVelocity.x != 0.0f ||
-                playerStatus->pushVelocity.y != 0.0f ||
-                playerStatus->pushVelocity.z != 0.0f)
+            if (playerStatus->pushVel.x != 0.0f ||
+                playerStatus->pushVel.y != 0.0f ||
+                playerStatus->pushVel.z != 0.0f)
             {
                 collision_check_player_intersecting_world(0, 0,
                     playerStatus->spriteFacingAngle - 90.0f + gCameras[gCurrentCameraID].currentYaw);
             }
             break;
         case ACTION_STATE_HAMMER:
-            playerStatus->pos.x += playerStatus->pushVelocity.x;
-            playerStatus->pos.y += playerStatus->pushVelocity.y;
-            playerStatus->pos.z += playerStatus->pushVelocity.z;
-            if (playerStatus->pushVelocity.x != 0.0f ||
-                playerStatus->pushVelocity.y != 0.0f ||
-                playerStatus->pushVelocity.z != 0.0f)
+            playerStatus->pos.x += playerStatus->pushVel.x;
+            playerStatus->pos.y += playerStatus->pushVel.y;
+            playerStatus->pos.z += playerStatus->pushVel.z;
+            if (playerStatus->pushVel.x != 0.0f ||
+                playerStatus->pushVel.y != 0.0f ||
+                playerStatus->pushVel.z != 0.0f)
             {
                 gCameras[CAM_DEFAULT].targetPos.x = playerStatus->pos.x;
                 gCameras[CAM_DEFAULT].targetPos.y = playerStatus->pos.y;
@@ -591,9 +591,9 @@ void collision_main_lateral(void) {
                 player_test_move_with_slipping(playerStatus, &playerX, &playerY, &playerZ,
                                                playerStatus->colliderDiameter * 0.5f, yaw);
 
-            if (playerStatus->pushVelocity.x != 0.0f ||
-                playerStatus->pushVelocity.y != 0.0f ||
-                playerStatus->pushVelocity.z != 0.0f)
+            if (playerStatus->pushVel.x != 0.0f ||
+                playerStatus->pushVel.y != 0.0f ||
+                playerStatus->pushVel.z != 0.0f)
             {
                 collision_check_player_intersecting_world(0, 0,
                     playerStatus->spriteFacingAngle - 90.0f + gCameras[gCurrentCameraID].currentYaw);
@@ -652,16 +652,16 @@ void collision_main_lateral(void) {
                     }
                 }
 
-                playerStatus->pos.x += playerStatus->pushVelocity.x;
-                playerStatus->pos.z += playerStatus->pushVelocity.z;
+                playerStatus->pos.x += playerStatus->pushVel.x;
+                playerStatus->pos.z += playerStatus->pushVel.z;
                 if (playerStatus->timeInAir == 0) {
-                    playerStatus->pos.y += playerStatus->pushVelocity.y;
+                    playerStatus->pos.y += playerStatus->pushVel.y;
                 }
 
                 if (
-                    playerStatus->pushVelocity.x != 0.0f ||
-                    playerStatus->pushVelocity.y != 0.0f ||
-                    playerStatus->pushVelocity.z != 0.0f)
+                    playerStatus->pushVel.x != 0.0f ||
+                    playerStatus->pushVel.y != 0.0f ||
+                    playerStatus->pushVel.z != 0.0f)
                 {
                     gCameras[CAM_DEFAULT].targetPos.x = playerStatus->pos.x;
                     gCameras[CAM_DEFAULT].targetPos.y = playerStatus->pos.y;

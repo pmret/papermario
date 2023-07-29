@@ -282,11 +282,11 @@ void N(FlyingAI_Jump)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolu
 void N(FlyingAI_ChaseInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
-    f32 jumpVelocity = (f32)enemy->varTable[5] / 100.0;
+    f32 jumpVel = (f32)enemy->varTable[5] / 100.0;
     f32 jumpScale = (f32)enemy->varTable[6] / 100.0;
 
     npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_PRE];
-    npc->jumpVelocity = jumpVelocity;
+    npc->jumpVel = jumpVel;
     npc->jumpScale = jumpScale;
     npc->moveSpeed = aiSettings->chaseSpeed;
     npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
@@ -330,13 +330,13 @@ void N(FlyingAI_LosePlayer)(Evt* script, MobileAISettings* aiSettings, EnemyDete
     f32 a = enemy->varTable[3];
     f32 b = enemy->varTable[7];
 
-    npc->jumpVelocity += npc->jumpScale;
+    npc->jumpVel += npc->jumpScale;
     temp_f20 = a / 100.0;
     temp_f22 = b / 100.0;
     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
 
-    if (npc->jumpVelocity >= 0.0) {
-        npc->pos.y += npc->jumpVelocity;
+    if (npc->jumpVel >= 0.0) {
+        npc->pos.y += npc->jumpVel;
         npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_HIT];
         enemy->hitboxIsActive = FALSE;
         if (!(npc->flags & NPC_FLAG_8)) {
@@ -357,7 +357,7 @@ void N(FlyingAI_LosePlayer)(Evt* script, MobileAISettings* aiSettings, EnemyDete
         } else if (npc->pos.y >= npc->moveToPos.y) {
             script->functionTemp[0] = 0;
         }
-    } else if (npc->jumpVelocity < 0.0) {
+    } else if (npc->jumpVel < 0.0) {
         npc->duration++;
         if (npc->duration >= aiSettings->chaseUpdateInterval) {
             npc->duration = 0;
@@ -375,11 +375,11 @@ void N(FlyingAI_LosePlayer)(Evt* script, MobileAISettings* aiSettings, EnemyDete
         }
 
         if (npc->flags & NPC_FLAG_8) {
-            if (npc->pos.y + npc->jumpVelocity < temp_f22) {
+            if (npc->pos.y + npc->jumpVel < temp_f22) {
                 npc->pos.y = temp_f22;
-                npc->jumpVelocity = 0.0f;
+                npc->jumpVel = 0.0f;
             } else {
-                npc->pos.y += npc->jumpVelocity;
+                npc->pos.y += npc->jumpVel;
             }
             return;
         }
@@ -387,20 +387,20 @@ void N(FlyingAI_LosePlayer)(Evt* script, MobileAISettings* aiSettings, EnemyDete
         posX = npc->pos.x;
         posY = npc->pos.y + npc->collisionHeight;
         posZ = npc->pos.z;
-        posW = (fabsf(npc->jumpVelocity) + npc->collisionHeight) + 10.0;
+        posW = (fabsf(npc->jumpVel) + npc->collisionHeight) + 10.0;
         if (npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &posW)) {
-            if (posW <= (npc->collisionHeight + fabsf(npc->jumpVelocity))) {
-                npc->jumpVelocity = 0.0f;
+            if (posW <= (npc->collisionHeight + fabsf(npc->jumpVel))) {
+                npc->jumpVel = 0.0f;
                 npc->pos.y = posY;
             } else {
-                npc->pos.y += npc->jumpVelocity;
+                npc->pos.y += npc->jumpVel;
             }
             return;
-        } else if (fabsf(npc->jumpVelocity) < ((npc->pos.y - temp_f22) + npc->collisionHeight)) {
-            npc->pos.y = npc->pos.y + npc->jumpVelocity;
+        } else if (fabsf(npc->jumpVel) < ((npc->pos.y - temp_f22) + npc->collisionHeight)) {
+            npc->pos.y = npc->pos.y + npc->jumpVel;
             return;
         }
-        npc->jumpVelocity = 0.0f;
+        npc->jumpVel = 0.0f;
     }
 }
 

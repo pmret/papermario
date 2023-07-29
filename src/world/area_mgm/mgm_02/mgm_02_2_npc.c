@@ -459,7 +459,7 @@ API_CALLABLE(N(RunMinigame)) {
                         data->box[i].state = BOX_STATE_FUZZY_POPUP;
                         sfx_play_sound_at_position(enemy->varTable[8], SOUND_SPACE_MODE_0 | SOUND_PARAM_MOST_QUIET, npc->pos.x, npc->pos.y, npc->pos.z);
                         get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
-                        npc->jumpVelocity = 10.5f;
+                        npc->jumpVel = 10.5f;
                         npc->pos.x = centerX;
                         npc->jumpScale = 1.5f;
                         npc->pos.y = centerY - 12.5;
@@ -470,14 +470,14 @@ API_CALLABLE(N(RunMinigame)) {
                     break;
                 case BOX_STATE_FUZZY_POPUP:
                     data->box[i].stateTimer++;
-                    npc->pos.y += npc->jumpVelocity;
-                    npc->jumpVelocity -= npc->jumpScale;
+                    npc->pos.y += npc->jumpVel;
+                    npc->jumpVel -= npc->jumpScale;
                     if ((npc->moveToPos.y + 20.0f) < npc->pos.y) {
                         enable_npc_shadow(npc);
                     } else {
                         disable_npc_shadow(npc);
                     }
-                    if ((npc->jumpVelocity < 0.0) && (npc->pos.y <= npc->moveToPos.y)) {
+                    if ((npc->jumpVel < 0.0) && (npc->pos.y <= npc->moveToPos.y)) {
                         data->box[i].state = BOX_STATE_FUZZY_IDLE;
                         data->box[i].stateTimer = rand_int(330) + 90;
                         npc->pos.y = NPC_DISPOSE_POS_Y;
@@ -507,7 +507,7 @@ API_CALLABLE(N(RunMinigame)) {
                     npc->pos.y = centerY;
                     npc->pos.z = centerZ + 2.0;
                     npc->moveToPos.y = gPlayerStatusPtr->pos.y + 35.0f;
-                    npc->jumpVelocity = 10.5f;
+                    npc->jumpVel = 10.5f;
                     npc->jumpScale = 1.5f;
 
                     data->box[i].stateTimer = 0;
@@ -586,7 +586,7 @@ API_CALLABLE(N(RunMinigame)) {
                         data->box[i].state = BOX_STATE_BOMB_POPUP;
                         sfx_play_sound_at_position(enemy->varTable[8], 0x100000, npc->pos.x, npc->pos.y, npc->pos.z);
                         get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
-                        npc->jumpVelocity = 10.5f;
+                        npc->jumpVel = 10.5f;
                         npc->pos.x = centerX;
                         npc->jumpScale = 1.5f;
                         npc->pos.y = centerY - 12.5;
@@ -597,14 +597,14 @@ API_CALLABLE(N(RunMinigame)) {
                     break;
                 case BOX_STATE_BOMB_POPUP:
                     data->box[i].stateTimer++;
-                    npc->pos.y += npc->jumpVelocity;
-                    npc->jumpVelocity -= npc->jumpScale;
+                    npc->pos.y += npc->jumpVel;
+                    npc->jumpVel -= npc->jumpScale;
                     if ((npc->moveToPos.y + 20.0f) < npc->pos.y) {
                         enable_npc_shadow(npc);
                     } else {
                         disable_npc_shadow(npc);
                     }
-                    if ((npc->jumpVelocity < 0.0) && (npc->pos.y <= npc->moveToPos.y)) {
+                    if ((npc->jumpVel < 0.0) && (npc->pos.y <= npc->moveToPos.y)) {
                         data->box[i].state = BOX_STATE_BOMB_IDLE;
                         data->box[i].stateTimer = rand_int(330) + 90;
                         npc->pos.y = NPC_DISPOSE_POS_Y;
@@ -690,7 +690,7 @@ API_CALLABLE(N(RunMinigame)) {
                         data->box[i].state = BOX_STATE_PEACH_POPUP;
                         sfx_play_sound_at_position(SOUND_214, SOUND_PARAM_MORE_QUIET | SOUND_SPACE_MODE_0, npc->pos.x, npc->pos.y, npc->pos.z);
                         get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
-                        npc->jumpVelocity = 10.0f;
+                        npc->jumpVel = 10.0f;
                         npc->pos.y = npc->moveToPos.y;
                         npc->jumpScale = 1.1f;
                         data->box[i].stateTimer = 0;
@@ -708,8 +708,8 @@ API_CALLABLE(N(RunMinigame)) {
                     break;
                 case BOX_STATE_PEACH_POPUP:
                     data->box[i].stateTimer++;
-                    npc->pos.y += npc->jumpVelocity;
-                    npc->jumpVelocity -= npc->jumpScale;
+                    npc->pos.y += npc->jumpVel;
+                    npc->jumpVel -= npc->jumpScale;
                     model = get_model_from_list_index(get_model_list_index_from_tree_index(data->box[i].peachPanelModelID));
                     if (!(model->flags & MODEL_FLAG_HAS_TRANSFORM)) {
                         guTranslateF(model->userTransformMtx, npc->pos.x, npc->pos.y, npc->pos.z);
@@ -723,7 +723,7 @@ API_CALLABLE(N(RunMinigame)) {
                     } else {
                         disable_npc_shadow(npc);
                     }
-                    if ((npc->jumpVelocity < 0.0) && (npc->pos.y <= npc->moveToPos.y)) {
+                    if ((npc->jumpVel < 0.0) && (npc->pos.y <= npc->moveToPos.y)) {
                         data->box[i].state = BOX_STATE_PEACH_IDLE;
                         data->box[i].stateTimer = rand_int(330) + 90;
                         disable_npc_shadow(npc);

@@ -219,7 +219,7 @@ typedef struct Npc {
     /* 0x010 */ f32 planarFlyDist; /* also used for speech, temp0? */
     /* 0x014 */ f32 jumpScale; /* also used for speech, temp1? */
     /* 0x018 */ f32 moveSpeed;
-    /* 0x01C */ f32 jumpVelocity;
+    /* 0x01C */ f32 jumpVel;
     /* 0x020 */ union {
                 void* any;
                 NpcMotionBlur* motion; ///< Null unless flag 0x100000 is set.
@@ -326,7 +326,7 @@ typedef struct PlayerData {
     /* 0x1B4 */ s16 invItems[10];
     /* 0x1C8 */ s16 storedItems[32];
     /* 0x208 */ s16 equippedBadges[64];
-    /* 0x288 */ char unk_288;
+    /* 0x288 */ s8 unk_288;
     /* 0x289 */ s8 merleeSpellType;
     /* 0x28A */ s8 merleeCastsLeft;
     /* 0x28B */ char unk_28B;
@@ -417,11 +417,6 @@ typedef struct TriggerBlueprint {
     /* 0x18 */ s32 hasPlayerInteractPrompt;
     /* 0x1C */ s32* itemList;
 } TriggerBlueprint; // size = 0x20
-
-typedef union X32 {
-    s32 s;
-    f32 f;
-} X32;
 
 typedef struct Evt {
     /* 0x000 */ u8 stateFlags;
@@ -1503,12 +1498,12 @@ typedef struct PushBlockGrid {
 } PushBlockGrid; // size = 0x1C
 
 typedef struct ItemEntityPhysicsData {
-    /* 0x00 */ f32 verticalVelocity;
+    /* 0x00 */ f32 verticalVel;
     /* 0x04 */ f32 gravity; /* 2 = normal, 1 = low gravity, higher values never 'settle' */
     /* 0x08 */ f32 collisionRadius;
-    /* 0x0C */ f32 constVelocity;
-    /* 0x10 */ f32 velx;
-    /* 0x14 */ f32 velz;
+    /* 0x0C */ f32 constVel;
+    /* 0x10 */ f32 velX;
+    /* 0x14 */ f32 velZ;
     /* 0x18 */ f32 moveAngle;
     /* 0x1C */ s32 timeLeft;
     /* 0x20 */ b32 useSimplePhysics;
@@ -1774,7 +1769,7 @@ typedef struct ActorMovement {
     /* 0x24 */ char unk_24[0x18];
     /* 0x3C */ f32 acceleration;
     /* 0x40 */ f32 speed;
-    /* 0x44 */ f32 velocity;
+    /* 0x44 */ f32 vel;
     /* 0x48 */ f32 angle;
     /* 0x4C */ f32 distance;
     /* 0x50 */ f32 flyElapsed;
@@ -1807,7 +1802,7 @@ typedef struct ActorState { // TODO: Make the first field of this an ActorMoveme
     /* 0x30 */ Vec3f unk_30;
     /* 0x3C */ f32 acceleration;
     /* 0x40 */ f32 speed;
-    /* 0x44 */ f32 velocity;
+    /* 0x44 */ f32 vel;
     /* 0x48 */ f32 angle;
     /* 0x4C */ f32 distance;
     /* 0x50 */ f32 bounceDivisor;
@@ -1950,12 +1945,12 @@ typedef struct FontData {
 } FontData; // size = 0x18
 
 typedef struct SlideParams {
-    f32 heading;
-    f32 maxDescendAccel;
-    f32 launchVelocity;
-    f32 maxDescendVelocity;
-    f32 integrator[4];
-} SlideParams;
+    /* 0x00 */ f32 heading;
+    /* 0x04 */ f32 maxDescendAccel;
+    /* 0x08 */ f32 launchVel;
+    /* 0x0C */ f32 maxDescendVel;
+    /* 0x10 */ f32 integrator[4];
+} SlideParams; // size = 0x14
 
 typedef struct PlayerStatus {
     /* 0x000 */ s32 flags; // PlayerStatusFlags
@@ -1972,7 +1967,7 @@ typedef struct PlayerStatus {
     /* 0x014 */ s8 enableCollisionOverlapsCheck;
     /* 0x015 */ s8 inputDisabledCount; /* whether the C-up menu can appear */
     /* 0x016 */ Vec3s lastGoodPos;
-    /* 0x01C */ Vec3f pushVelocity;
+    /* 0x01C */ Vec3f pushVel;
     /* 0x028 */ Vec3f pos;
     /* 0x034 */ Vec2f groundAnglesXZ; /* angles along X/Z axes of ground beneath player */
     /* 0x03C */ VecXZf jumpFromPos;
@@ -2244,8 +2239,8 @@ typedef struct TweesterPhysics {
     /* 0x08 */ s32 prevFlags; ///< Partner npc flags before contact with Tweester
     /* 0x0C */ f32 radius;
     /* 0x10 */ f32 angle;
-    /* 0x14 */ f32 angularVelocity;
-    /* 0x18 */ f32 liftoffVelocityPhase;
+    /* 0x14 */ f32 angularVel;
+    /* 0x18 */ f32 liftoffVelPhase;
 } TweesterPhysics; // size = 0x1C
 
 typedef struct PartnerStatus {
@@ -2294,7 +2289,7 @@ typedef struct VirtualEntity {
     /* 0x38 */ f32 moveAngle;
     /* 0x3C */ f32 moveSpeed;
     /* 0x40 */ f32 jumpGravity;
-    /* 0x44 */ f32 jumpVelocity;
+    /* 0x44 */ f32 jumpVel;
     /* 0x48 */ f32 moveTime;
 } VirtualEntity; // size = 0x4C
 

@@ -265,7 +265,7 @@ API_CALLABLE(N(TurboChargeUnwindWatt)) {
             partner->state.currentPos.z = partner->currentPos.z;
 
             partner->state.angle = 90.0f;
-            partner->state.velocity = 5.0f;
+            partner->state.vel = 5.0f;
             partner->state.acceleration = 0.5f;
             partner->state.moveTime = 90;
             script->functionTemp[1] = 10;
@@ -275,9 +275,9 @@ API_CALLABLE(N(TurboChargeUnwindWatt)) {
             theta = DEG_TO_RAD(partner->state.angle);
             sinTheta = sin_rad(theta);
             cosTheta = cos_rad(theta);
-            partner->state.velocity += partner->state.acceleration;
+            partner->state.vel += partner->state.acceleration;
             angle = partner->state.angle;
-            angle += partner->state.velocity;
+            angle += partner->state.vel;
             deltaX = partner->state.distance * sinTheta;
             deltaY = -partner->state.distance * cosTheta;
             partner->state.currentPos.x = partner->state.goalPos.x + deltaX;
@@ -296,7 +296,7 @@ API_CALLABLE(N(TurboChargeUnwindWatt)) {
             cosTheta = cos_rad(theta);
             distance = partner->state.distance;
             angle = partner->state.angle;
-            angle += partner->state.velocity;
+            angle += partner->state.vel;
             deltaX = partner->state.distance * sinTheta;
             deltaY = -partner->state.distance * cosTheta;
             partner->state.currentPos.x = partner->state.goalPos.x + deltaX;

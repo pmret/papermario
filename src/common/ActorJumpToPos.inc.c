@@ -14,15 +14,15 @@ API_CALLABLE(N(ActorJumpToPos)) {
         script->functionTemp[0] = 1;
     }
 
-    if (actor->state.velocity > 0.0f) {
+    if (actor->state.vel > 0.0f) {
         set_animation(ACTOR_SELF, 1, actor->state.animJumpRise);
     }
-    if (actor->state.velocity < 0.0f) {
+    if (actor->state.vel < 0.0f) {
         set_animation(ACTOR_SELF, 1, actor->state.animJumpFall);
     }
 
-    actor->state.currentPos.y += actor->state.velocity;
-    actor->state.velocity = actor->state.velocity - actor->state.acceleration;
+    actor->state.currentPos.y += actor->state.vel;
+    actor->state.vel = actor->state.vel - actor->state.acceleration;
     add_xz_vec3f(temp_f0, actor->state.speed, actor->state.angle);
     actor->currentPos.x = actor->state.currentPos.x;
     actor->currentPos.y = actor->state.currentPos.y;

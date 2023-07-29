@@ -70,12 +70,12 @@ typedef struct FlowerFXData {
     /* 0x18 */ Vec3f scale;
     /* 0x24 */ Vec3f rot;
     /* 0x30 */ Mtx transformMtx;
-    /* 0x70 */ f32 velocityScaleA;
-    /* 0x74 */ f32 velocityScaleB;
+    /* 0x70 */ f32 velScaleA;
+    /* 0x74 */ f32 velScaleB;
     /* 0x78 */ f32 visibilityAmt;   // when this is zero, the flower can vanish. may have once controlled alpha.
     /* 0x7C */ f32 unk_7C;
     /* 0x80 */ f32 integrator[4];
-    /* 0x90 */ VecXZf velocity;
+    /* 0x90 */ VecXZf vel;
 } FlowerFXData; // size = 0x98
 
 typedef struct CloudPuffFXData {
@@ -2125,7 +2125,7 @@ typedef struct Effect75FXData {
 typedef struct FireworkRocketFXData {
     /* 0x00 */ s32 variation;
     /* 0x04 */ Vec3f pos;
-    /* 0x10 */ Vec3f velocity;
+    /* 0x10 */ Vec3f vel;
     /* 0x1C */ s32 timeLeft;
     /* 0x20 */ s32 lifeTime;
     /* 0x24 */ s32 r;
@@ -2142,9 +2142,9 @@ typedef struct FireworkRocketFXData {
     /* 0x50 */ f32 rocketX[4];
     /* 0x60 */ f32 rocketY[4];
     /* 0x70 */ f32 rocketZ[4];
-    /* 0x80 */ f32 rocketVelocityX[4];
-    /* 0x90 */ f32 rocketVelocityY[4];
-    /* 0xA0 */ f32 rocketVelocityZ[4];
+    /* 0x80 */ f32 rocketVelX[4];
+    /* 0x90 */ f32 rocketVelY[4];
+    /* 0xA0 */ f32 rocketVelZ[4];
 } FireworkRocketFXData; // size = 0xB0
 
 typedef struct PeachStarBeamSpirit {

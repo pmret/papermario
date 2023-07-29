@@ -2087,18 +2087,18 @@ void update_item_entity_collectable(ItemEntity* item) {
             ASSERT(physData != NULL);
 
             if (item->flags & ITEM_ENTITY_FLAG_TOSS_HIGHER) {
-                physData->verticalVelocity = 16.0f;
+                physData->verticalVel = 16.0f;
                 physData->gravity = 2.0f;
             } else if (!(item->flags & ITEM_ENTITY_FLAG_TOSS_LOWER)) {
-                physData->verticalVelocity = 12.0f;
+                physData->verticalVel = 12.0f;
                 physData->gravity = 2.0f;
             } else {
-                physData->verticalVelocity = 14.0f;
+                physData->verticalVel = 14.0f;
                 physData->gravity = 2.0f;
             }
 
             physData->collisionRadius = 24.0f;
-            physData->constVelocity = 24.0f;
+            physData->constVel = 24.0f;
             if (item->spawnAngle < 0) {
                 if (IS_ITEM(item->itemID)) {
                     if (rand_int(10000) < 5000) {
@@ -2106,7 +2106,7 @@ void update_item_entity_collectable(ItemEntity* item) {
                     } else {
                         physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 105.0f + rand_int(30) - 15.0f);
                     }
-                    physData->verticalVelocity += 4.0f;
+                    physData->verticalVel += 4.0f;
                 } else {
                     switch (item->itemID) {
                         case ITEM_HEART:
@@ -2165,16 +2165,16 @@ void update_item_entity_collectable(ItemEntity* item) {
                     theta = DEG_TO_RAD(physData->moveAngle);
                     sinAngle = sin_rad(theta);
                     cosAngle = cos_rad(theta);
-                    physData->velx = temp * sinAngle;
-                    physData->velz = -temp * cosAngle;
+                    physData->velX = temp * sinAngle;
+                    physData->velZ = -temp * cosAngle;
                 } else {
                     temp = rand_int(2000);
                     temp = (temp / 1000.0f) + 2.0;
                     theta = DEG_TO_RAD(physData->moveAngle);
                     sinAngle = sin_rad(theta);
                     cosAngle = cos_rad(theta);
-                    physData->velx = temp * sinAngle;
-                    physData->velz = -temp * cosAngle;
+                    physData->velX = temp * sinAngle;
+                    physData->velZ = -temp * cosAngle;
                 }
             } else {
                 physData->moveAngle = clamp_angle(item->spawnAngle);
@@ -2186,8 +2186,8 @@ void update_item_entity_collectable(ItemEntity* item) {
                 theta = DEG_TO_RAD(physData->moveAngle);
                 sinAngle = sin_rad(theta);
                 cosAngle = cos_rad(theta);
-                physData->velx = temp * sinAngle;
-                physData->velz = -temp * cosAngle;
+                physData->velX = temp * sinAngle;
+                physData->velZ = -temp * cosAngle;
             }
 
             if (item->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1) {
@@ -2200,28 +2200,28 @@ void update_item_entity_collectable(ItemEntity* item) {
                     physData->timeLeft = 20;
                 }
                 physData->useSimplePhysics = FALSE;
-                physData->verticalVelocity = 15.0f;
+                physData->verticalVel = 15.0f;
                 physData->gravity = 1.6f;
             }
 
             if (item->spawnType == ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS) {
                 physData->timeLeft = 60;
                 physData->useSimplePhysics = FALSE;
-                physData->velx = 0.0f;
-                physData->velz = 0.0f;
+                physData->velX = 0.0f;
+                physData->velZ = 0.0f;
             }
 
             if (item->spawnType == ITEM_SPAWN_MODE_FALL_SPAWN_ALWAYS) {
-                physData->verticalVelocity = 0.0f;
-                physData->velx = 0.0f;
-                physData->velz = 0.0f;
+                physData->verticalVel = 0.0f;
+                physData->velX = 0.0f;
+                physData->velZ = 0.0f;
                 physData->useSimplePhysics = TRUE;
             }
 
             if (item->spawnType == ITEM_SPAWN_MODE_FIXED_SPAWN_ALWAYS) {
-                physData->verticalVelocity = 0.0f;
-                physData->velx = 0.0f;
-                physData->velz = 0.0f;
+                physData->verticalVel = 0.0f;
+                physData->velX = 0.0f;
+                physData->velZ = 0.0f;
                 physData->useSimplePhysics = TRUE;
             }
 
@@ -2259,19 +2259,19 @@ void update_item_entity_collectable(ItemEntity* item) {
             // apply gravity
             if (!(item->flags & ITEM_ENTITY_FLAG_NO_GRAVITY)) {
                 if (!(item->flags & ITEM_ENTITY_FLAG_CANT_COLLECT)) {
-                    physData->verticalVelocity -= physData->gravity;
-                    if (physData->verticalVelocity < -16.0) {
-                        physData->verticalVelocity = -16.0f;
+                    physData->verticalVel -= physData->gravity;
+                    if (physData->verticalVel < -16.0) {
+                        physData->verticalVel = -16.0f;
                     }
-                    item->pos.y += physData->verticalVelocity;
-                    item->pos.x += physData->velx;
-                    item->pos.z += physData->velz;
+                    item->pos.y += physData->verticalVel;
+                    item->pos.x += physData->velX;
+                    item->pos.z += physData->velZ;
                 }
             }
 
             // handle auto-collection from multi-coin bricks
             if (item->spawnType == ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS
-                && physData->verticalVelocity <= 0.0f
+                && physData->verticalVel <= 0.0f
             ) {
                 item->state = ITEM_PHYSICS_STATE_TOUCH;
                 break;
@@ -2281,13 +2281,13 @@ void update_item_entity_collectable(ItemEntity* item) {
             if (!(item->flags & (ITEM_ENTITY_FLAG_DONE_FALLING | ITEM_ENTITY_FLAG_NO_MOTION))
                 && item->spawnType != ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS
                 && item->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1
-                && physData->verticalVelocity > 0.0f
+                && physData->verticalVel > 0.0f
             ) {
-                temp = physData->constVelocity;
+                temp = physData->constVel;
                 outX = item->pos.x;
                 outY = item->pos.y;
                 outZ = item->pos.z;
-                outDepth = temp + physData->verticalVelocity;
+                outDepth = temp + physData->verticalVel;
 
                 if (!physData->useSimplePhysics) {
                     hit = npc_raycast_up(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, &outDepth);
@@ -2297,7 +2297,7 @@ void update_item_entity_collectable(ItemEntity* item) {
 
                 if (hit && outDepth < temp) {
                     item->pos.y = outY - temp;
-                    physData->verticalVelocity = 0.0f;
+                    physData->verticalVel = 0.0f;
                 }
             }
 
@@ -2305,16 +2305,16 @@ void update_item_entity_collectable(ItemEntity* item) {
             if (!(item->flags & (ITEM_ENTITY_FLAG_DONE_FALLING | ITEM_ENTITY_FLAG_NO_MOTION))
                 && item->spawnType != ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS
                 && item->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1
-                && (physData->velx != 0.0f || physData->velz != 0.0f)
+                && (physData->velX != 0.0f || physData->velZ != 0.0f)
             ) {
                 outX = item->pos.x;
                 outY = item->pos.y;
                 outZ = item->pos.z;
 
                 if (!physData->useSimplePhysics) {
-                    hit = npc_test_move_complex_with_slipping(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, 0.0f, physData->moveAngle, physData->constVelocity, physData->collisionRadius);
+                    hit = npc_test_move_complex_with_slipping(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, 0.0f, physData->moveAngle, physData->constVel, physData->collisionRadius);
                 } else {
-                    hit = npc_test_move_simple_with_slipping(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, 0.0f, physData->moveAngle, physData->constVelocity, physData->collisionRadius);
+                    hit = npc_test_move_simple_with_slipping(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, 0.0f, physData->moveAngle, physData->constVel, physData->collisionRadius);
                 }
 
                 if (hit) {
@@ -2326,22 +2326,22 @@ void update_item_entity_collectable(ItemEntity* item) {
                     theta = DEG_TO_RAD(physData->moveAngle);
                     sinAngle = sin_rad(theta);
                     cosAngle = cos_rad(theta);
-                    physData->velx = sinAngle * 2.0;
-                    physData->velz = cosAngle * -2.0;
+                    physData->velX = sinAngle * 2.0;
+                    physData->velZ = cosAngle * -2.0;
                 }
             }
 
             // if the item has downward velocity, try moving it down
             if (!(item->flags & ITEM_ENTITY_FLAG_NO_MOTION)
                 && item->spawnType != ITEM_SPAWN_MODE_ITEM_BLOCK_SPAWN_ALWAYS
-                && physData->verticalVelocity <= 0.0
+                && physData->verticalVel <= 0.0
             ) {
                 physData->useSimplePhysics = TRUE;
                 if (item->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1) {
                     outX = item->pos.x;
-                    outY = (item->pos.y - physData->verticalVelocity) + 12.0f;
+                    outY = (item->pos.y - physData->verticalVel) + 12.0f;
                     outZ = item->pos.z;
-                    outDepth = -physData->verticalVelocity + 12.0f;
+                    outDepth = -physData->verticalVel + 12.0f;
                     if (!physData->useSimplePhysics) {
                         hit = npc_raycast_down_sides(COLLISION_CHANNEL_20000, &outX, &outY, &outZ, &outDepth);
                     } else {
@@ -2349,9 +2349,9 @@ void update_item_entity_collectable(ItemEntity* item) {
                     }
                 } else {
                     outX = item->pos.x;
-                    outY = (item->pos.y - physData->verticalVelocity) + 12.0f;
+                    outY = (item->pos.y - physData->verticalVel) + 12.0f;
                     outZ = item->pos.z;
-                    outDepth = -physData->verticalVelocity + 12.0f;
+                    outDepth = -physData->verticalVel + 12.0f;
                     if (outY < outDepth + 0.0f) {
                         outY = 0.0f;
                         hit = TRUE;
@@ -2363,11 +2363,11 @@ void update_item_entity_collectable(ItemEntity* item) {
                 // handle bounce
                 if (hit) {
                     item->pos.y = outY;
-                    physData->verticalVelocity = -physData->verticalVelocity / 1.25;
-                    if (physData->verticalVelocity < 3.0) {
-                        physData->verticalVelocity = 0.0f;
-                        physData->velx = 0.0f;
-                        physData->velz = 0.0f;
+                    physData->verticalVel = -physData->verticalVel / 1.25;
+                    if (physData->verticalVel < 3.0) {
+                        physData->verticalVel = 0.0f;
+                        physData->velX = 0.0f;
+                        physData->velZ = 0.0f;
                         item->flags |= ITEM_ENTITY_FLAG_DONE_FALLING;
                     } else {
                         if (IS_BADGE(item->itemID)) {

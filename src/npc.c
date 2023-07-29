@@ -120,7 +120,7 @@ s32 create_npc_impl(NpcBlueprint* blueprint, AnimID* animList, s32 isPeachNpc) {
     npc->renderMode = 13;
     npc->blur.any = NULL;
     npc->yaw = 0.0f;
-    npc->jumpVelocity = 0.0f;
+    npc->jumpVel = 0.0f;
     npc->pos.x = 0.0f;
     npc->pos.y = 0.0f;
     npc->pos.z = 0.0f;
@@ -562,13 +562,13 @@ void npc_try_apply_gravity(Npc* npc) {
     }
 
     npc->jumpScale = 1.0f;
-    npc->jumpVelocity -= npc->jumpScale;
-    npc->pos.y += npc->jumpVelocity;
+    npc->jumpVel -= npc->jumpScale;
+    npc->pos.y += npc->jumpVel;
 
     x = npc->pos.x;
     y = npc->pos.y + 13;
     z = npc->pos.z;
-    testLength = length = fabsf(npc->jumpVelocity) + 16;
+    testLength = length = fabsf(npc->jumpVel) + 16;
 
     if (!(npc->flags & NPC_FLAG_PARTNER)) {
         hitID = npc_raycast_down_sides(npc->collisionChannel, &x, &y, &z, &length);
@@ -577,7 +577,7 @@ void npc_try_apply_gravity(Npc* npc) {
     }
 
     if (hitID && length <= testLength) {
-        npc->jumpVelocity = 0.0f;
+        npc->jumpVel = 0.0f;
         npc->flags |= NPC_FLAG_GROUNDED;
         npc->pos.y = y;
         npc->currentFloor = NpcHitQueryColliderID;
@@ -665,7 +665,7 @@ void update_npcs(void) {
 
                     if ((npc->pos.y < -2000.0f) && !(npc->flags & NPC_FLAG_PARTNER)) {
                         npc->pos.y = playerStatus->pos.y;
-                        npc->jumpVelocity = 0.0f;
+                        npc->jumpVel = 0.0f;
                         npc->moveSpeed = 0.0f;
                         npc->jumpScale = 0.0f;
                         npc->flags &= ~NPC_FLAG_JUMPING;

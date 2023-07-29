@@ -10,7 +10,7 @@ void N(HoppingAI_HopInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
 
     basic_ai_wander_init(script, aiSettings, territory);
     npc->flags |= NPC_FLAG_JUMPING;
-    npc->jumpVelocity = (rand_int(45) / 10.0) + 8.0;
+    npc->jumpVel = (rand_int(45) / 10.0) + 8.0;
     npc->jumpScale = 1.5f;
     ai_enemy_play_sound(npc, SOUND_B0000017, 0);
 
@@ -83,16 +83,16 @@ void N(HoppingAI_Hop)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolu
         }
     }
 
-    if (npc->jumpVelocity < 0.0) {
+    if (npc->jumpVel < 0.0) {
         posX = npc->pos.x;
         posY = npc->pos.y + 13.0;
         posZ = npc->pos.z;
-        hitDepth = fabsf(npc->jumpVelocity) + 16.0;
+        hitDepth = fabsf(npc->jumpVel) + 16.0;
 
         if (npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &hitDepth) &&
-            hitDepth <= fabsf(npc->jumpVelocity) + 13.0)
+            hitDepth <= fabsf(npc->jumpVel) + 13.0)
         {
-            npc->jumpVelocity = 0.0f;
+            npc->jumpVel = 0.0f;
             npc->pos.y = posY;
             npc->flags &= ~NPC_FLAG_JUMPING;
             script->AI_TEMP_STATE = 2;
@@ -108,8 +108,8 @@ void N(HoppingAI_Hop)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolu
             return;
         }
     }
-    npc->pos.y += npc->jumpVelocity;
-    npc->jumpVelocity -= npc->jumpScale;
+    npc->pos.y += npc->jumpVel;
+    npc->jumpVel -= npc->jumpScale;
 }
 
 void N(HoppingAI_LoiterInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {
@@ -151,7 +151,7 @@ void N(HoppingAI_ChaseInit)(Evt* script, MobileAISettings* aiSettings, EnemyDete
 
     basic_ai_chase_init(script, aiSettings, territory);
     enemy->flags |= ENEMY_FLAG_800;
-    enemy->jumpVelocity = rand_int(5) + 10.0;
+    enemy->jumpVel = rand_int(5) + 10.0;
     enemy->jumpScale = 1.5f;
     enemy->yaw = atan2(enemy->pos.x, enemy->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
     enemy->moveSpeed = aiSettings->chaseSpeed;
@@ -179,7 +179,7 @@ void N(HoppingAI_Chase)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
         }
     }
 
-    if (npc->jumpVelocity < 0.0) {
+    if (npc->jumpVel < 0.0) {
         posX = npc->pos.x;
         groundY = 100.0f;
         posZ = npc->pos.z;
@@ -189,9 +189,9 @@ void N(HoppingAI_Chase)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
         posX = npc->pos.x;
         posY = npc->pos.y + 13.0;
         posZ = npc->pos.z;
-        hitDepth = fabsf(npc->jumpVelocity) + 16.0;
-        if (npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &hitDepth) && hitDepth <= fabsf(npc->jumpVelocity) + 13.0) {
-            npc->jumpVelocity = 0.0f;
+        hitDepth = fabsf(npc->jumpVel) + 16.0;
+        if (npc_raycast_down_sides(npc->collisionChannel, &posX, &posY, &posZ, &hitDepth) && hitDepth <= fabsf(npc->jumpVel) + 13.0) {
+            npc->jumpVel = 0.0f;
             npc->pos.y = posY;
             npc->flags &= ~NPC_FLAG_JUMPING;
             fx_walking_dust(2, npc->pos.x, npc->pos.y, npc->pos.z, 0.0f, 0.0f);
@@ -205,8 +205,8 @@ void N(HoppingAI_Chase)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
             return;
         }
     }
-    npc->pos.y += npc->jumpVelocity;
-    npc->jumpVelocity -= npc->jumpScale;
+    npc->pos.y += npc->jumpVel;
+    npc->jumpVel -= npc->jumpScale;
 }
 
 void N(HoppingAI_LosePlayer)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume* territory) {

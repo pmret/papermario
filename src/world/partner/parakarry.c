@@ -90,8 +90,8 @@ API_CALLABLE(N(Update)) {
                                                      entity->pos.x, entity->pos.z));
             N(TweesterPhysicsPtr)->angle = atan2(entity->pos.x, entity->pos.z,
                                               parakarry->pos.x, parakarry->pos.z);
-            N(TweesterPhysicsPtr)->angularVelocity = 6.0f;
-            N(TweesterPhysicsPtr)->liftoffVelocityPhase = 50.0f;
+            N(TweesterPhysicsPtr)->angularVel = 6.0f;
+            N(TweesterPhysicsPtr)->liftoffVelPhase = 50.0f;
             N(TweesterPhysicsPtr)->countdown = 120;
             parakarry->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
             parakarry->flags &= ~NPC_FLAG_GRAVITY;
@@ -99,7 +99,7 @@ API_CALLABLE(N(Update)) {
             sin_cos_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->angle), &sinAngle, &cosAngle);
             parakarry->pos.x = entity->pos.x + (sinAngle * N(TweesterPhysicsPtr)->radius);
             parakarry->pos.z = entity->pos.z - (cosAngle * N(TweesterPhysicsPtr)->radius);
-            N(TweesterPhysicsPtr)->angle = clamp_angle(N(TweesterPhysicsPtr)->angle - N(TweesterPhysicsPtr)->angularVelocity);
+            N(TweesterPhysicsPtr)->angle = clamp_angle(N(TweesterPhysicsPtr)->angle - N(TweesterPhysicsPtr)->angularVel);
 
             if (N(TweesterPhysicsPtr)->radius > 20.0f) {
                 N(TweesterPhysicsPtr)->radius--;
@@ -107,19 +107,19 @@ API_CALLABLE(N(Update)) {
                 N(TweesterPhysicsPtr)->radius++;
             }
 
-            liftoffVelocity = sin_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->liftoffVelocityPhase)) * 3.0f;
-            N(TweesterPhysicsPtr)->liftoffVelocityPhase += 3.0f;
+            liftoffVelocity = sin_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->liftoffVelPhase)) * 3.0f;
+            N(TweesterPhysicsPtr)->liftoffVelPhase += 3.0f;
 
-            if (N(TweesterPhysicsPtr)->liftoffVelocityPhase > 150.0f) {
-                N(TweesterPhysicsPtr)->liftoffVelocityPhase = 150.0f;
+            if (N(TweesterPhysicsPtr)->liftoffVelPhase > 150.0f) {
+                N(TweesterPhysicsPtr)->liftoffVelPhase = 150.0f;
             }
 
             parakarry->pos.y += liftoffVelocity;
             parakarry->renderYaw = clamp_angle(360.0f - N(TweesterPhysicsPtr)->angle);
-            N(TweesterPhysicsPtr)->angularVelocity += 0.8;
+            N(TweesterPhysicsPtr)->angularVel += 0.8;
 
-            if (N(TweesterPhysicsPtr)->angularVelocity > 40.0f) {
-                N(TweesterPhysicsPtr)->angularVelocity = 40.0f;
+            if (N(TweesterPhysicsPtr)->angularVel > 40.0f) {
+                N(TweesterPhysicsPtr)->angularVel = 40.0f;
             }
 
             if (--N(TweesterPhysicsPtr)->countdown == 0) {
@@ -429,7 +429,7 @@ API_CALLABLE(N(UseAbility)) {
             if (N(AbilityStateTime) != 0) {
                 N(AbilityStateTime)--;
             } else {
-                parakarry->jumpVelocity = -0.5f;
+                parakarry->jumpVel = -0.5f;
                 parakarry->jumpScale = -0.01f;
                 parakarry->moveToPos.y = playerStatus->pos.y;
                 parakarry->duration = 0;
@@ -470,13 +470,13 @@ API_CALLABLE(N(UseAbility)) {
                 sfx_play_sound_at_npc(SOUND_2009, SOUND_SPACE_MODE_0, NPC_PARTNER);
             }
 
-            parakarry->jumpVelocity -= parakarry->jumpScale;
-            if (parakarry->jumpVelocity > 0.0) {
-                parakarry->jumpVelocity = 0.0f;
+            parakarry->jumpVel -= parakarry->jumpScale;
+            if (parakarry->jumpVel > 0.0) {
+                parakarry->jumpVel = 0.0f;
             }
 
-            parakarry->pos.y += parakarry->jumpVelocity;
-            playerStatus->pos.y += parakarry->jumpVelocity;
+            parakarry->pos.y += parakarry->jumpVel;
+            playerStatus->pos.y += parakarry->jumpVel;
             if (!(playerStatus->animFlags & PA_FLAG_NPC_COLLIDED)) {
                 parakarry->moveSpeed += 0.1;
                 if (parakarry->moveSpeed > 2.0) {
@@ -579,7 +579,7 @@ API_CALLABLE(N(UseAbility)) {
     ) {
         parakarry->currentAnim = ANIM_WorldParakarry_Idle;
         N(UsingAbility)  = FALSE;
-        parakarry->jumpVelocity = 0.0f;
+        parakarry->jumpVel = 0.0f;
         parakarry->flags &= ~NPC_FLAG_JUMPING;
         parakarry->animationSpeed = 1.0f;
         partner_clear_player_tracking(parakarry);

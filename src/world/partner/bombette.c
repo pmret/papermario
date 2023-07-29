@@ -123,8 +123,8 @@ API_CALLABLE(N(Update)) {
                                                      entity->pos.x, entity->pos.z));
             N(TweesterPhysicsPtr)->angle = atan2(entity->pos.x, entity->pos.z,
                                               bombette->pos.x, bombette->pos.z);
-            N(TweesterPhysicsPtr)->angularVelocity = 6.0f;
-            N(TweesterPhysicsPtr)->liftoffVelocityPhase = 50.0f;
+            N(TweesterPhysicsPtr)->angularVel = 6.0f;
+            N(TweesterPhysicsPtr)->liftoffVelPhase = 50.0f;
             N(TweesterPhysicsPtr)->countdown = 120;
             bombette->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
             bombette->flags &= ~NPC_FLAG_GRAVITY;
@@ -132,7 +132,7 @@ API_CALLABLE(N(Update)) {
             sin_cos_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->angle), &sinAngle, &cosAngle);
             bombette->pos.x = entity->pos.x + (sinAngle * N(TweesterPhysicsPtr)->radius);
             bombette->pos.z = entity->pos.z - (cosAngle * N(TweesterPhysicsPtr)->radius);
-            N(TweesterPhysicsPtr)->angle = clamp_angle(N(TweesterPhysicsPtr)->angle - N(TweesterPhysicsPtr)->angularVelocity);
+            N(TweesterPhysicsPtr)->angle = clamp_angle(N(TweesterPhysicsPtr)->angle - N(TweesterPhysicsPtr)->angularVel);
 
             if (N(TweesterPhysicsPtr)->radius > 20.0f) {
                 N(TweesterPhysicsPtr)->radius--;
@@ -140,19 +140,19 @@ API_CALLABLE(N(Update)) {
                 N(TweesterPhysicsPtr)->radius++;
             }
 
-            liftoffVelocity = sin_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->liftoffVelocityPhase)) * 3.0f;
-            N(TweesterPhysicsPtr)->liftoffVelocityPhase += 3.0f;
+            liftoffVelocity = sin_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->liftoffVelPhase)) * 3.0f;
+            N(TweesterPhysicsPtr)->liftoffVelPhase += 3.0f;
 
-            if (N(TweesterPhysicsPtr)->liftoffVelocityPhase > 150.0f) {
-                N(TweesterPhysicsPtr)->liftoffVelocityPhase = 150.0f;
+            if (N(TweesterPhysicsPtr)->liftoffVelPhase > 150.0f) {
+                N(TweesterPhysicsPtr)->liftoffVelPhase = 150.0f;
             }
 
             bombette->pos.y += liftoffVelocity;
             bombette->renderYaw = clamp_angle(360.0f - N(TweesterPhysicsPtr)->angle);
-            N(TweesterPhysicsPtr)->angularVelocity += 0.8;
+            N(TweesterPhysicsPtr)->angularVel += 0.8;
 
-            if (N(TweesterPhysicsPtr)->angularVelocity > 40.0f) {
-                N(TweesterPhysicsPtr)->angularVelocity = 40.0f;
+            if (N(TweesterPhysicsPtr)->angularVel > 40.0f) {
+                N(TweesterPhysicsPtr)->angularVel = 40.0f;
             }
 
             if (--N(TweesterPhysicsPtr)->countdown == 0) {
@@ -318,7 +318,7 @@ API_CALLABLE(N(UseAbility)) {
             N(PlayingFuseSound) = TRUE;
             add_vec2D_polar(&npc->pos.x, &npc->pos.z, 0.0f, npc->yaw);
             npc->currentAnim = ANIM_WorldBombette_WalkLit;
-            npc->jumpVelocity = 0.0f;
+            npc->jumpVel = 0.0f;
             N(MovementBlocked) = FALSE;
             npc->flags |= NPC_FLAG_GRAVITY;
             npc->flags &= ~NPC_FLAG_IGNORE_PLAYER_COLLISION;
@@ -442,7 +442,7 @@ API_CALLABLE(N(UseAbility)) {
             }
             partnerStatus->partnerActionState = PARTNER_ACTION_BOMBETTE_3;
             N(IsBlasting) = FALSE;
-            npc->jumpVelocity = ((playerStatus->pos.y - npc->pos.y) / 20.0f) + 30.0;
+            npc->jumpVel = ((playerStatus->pos.y - npc->pos.y) / 20.0f) + 30.0;
             npc->moveSpeed = 0.8f;
             npc->yaw = rand_int(360);
             npc->jumpScale = 0.8f;
@@ -463,8 +463,8 @@ API_CALLABLE(N(UseAbility)) {
             script->USE_STATE = BLAST_STATE_FLY;
             break;
         case BLAST_STATE_FLY:
-            npc->pos.y += npc->jumpVelocity;
-            npc->jumpVelocity -= npc->jumpScale;
+            npc->pos.y += npc->jumpVel;
+            npc->jumpVel -= npc->jumpScale;
             npc->rot.z -= (script->functionTemp[2] * 79) / 2;
             npc->rot.x -= (script->functionTemp[2] * 67) / 2;
             if (script->functionTemp[1] != 0) {
@@ -477,7 +477,7 @@ API_CALLABLE(N(UseAbility)) {
             }
             npc->yaw = clamp_angle(gCameras[CAM_DEFAULT].currentYaw + playerStatus->spriteFacingAngle);
             add_vec2D_polar(&npc->pos.x, &npc->pos.z, 10.0f, npc->yaw);
-            npc->jumpVelocity = 0.0f;
+            npc->jumpVel = 0.0f;
             npc->currentAnim = ANIM_WorldBombette_Aftermath;
             npc->flags |= NPC_FLAG_JUMPING;
             script->USE_STATE = BLAST_STATE_FALL;
@@ -488,15 +488,15 @@ API_CALLABLE(N(UseAbility)) {
                 if (fabsf(playerStatus->pos.y - npc->pos.y) < 500.0) {
                     script->USE_STATE = BLAST_STATE_FINISH;
                     break;
-                } else if (npc_try_snap_to_ground(npc, npc->jumpVelocity)) {
+                } else if (npc_try_snap_to_ground(npc, npc->jumpVel)) {
                     script->USE_STATE = BLAST_STATE_CANCEL;
                     break;
                 }
             }
-            npc->pos.y += npc->jumpVelocity;
-            npc->jumpVelocity -= npc->jumpScale;
-            if (npc->jumpVelocity < -8.0) {
-                npc->jumpVelocity = -8.0f;
+            npc->pos.y += npc->jumpVel;
+            npc->jumpVel -= npc->jumpScale;
+            if (npc->jumpVel < -8.0) {
+                npc->jumpVel = -8.0f;
             }
             npc->rot.z -= (script->functionTemp[2] * 79) / 2;
             npc->rot.x -= (script->functionTemp[2] * 67) / 2;
@@ -516,7 +516,7 @@ API_CALLABLE(N(UseAbility)) {
             }
             partnerStatus->partnerActionState = ACTION_STATE_IDLE;
             partnerStatus->actingPartner = PARTNER_NONE;
-            npc->jumpVelocity = 0.0f;
+            npc->jumpVel = 0.0f;
             N(IsBlasting) = FALSE;
             N(TriggeredEarlyDetonation) = FALSE;
             npc->pos.y = playerStatus->pos.y;
@@ -537,7 +537,7 @@ API_CALLABLE(N(UseAbility)) {
             }
             partnerStatus->partnerActionState = PARTNER_ACTION_NONE;
             partnerStatus->actingPartner = PARTNER_NONE;
-            npc->jumpVelocity = 0.0f;
+            npc->jumpVel = 0.0f;
             npc->pos.y = playerStatus->pos.y;
             npc->rot.x = 0.0f;
             npc->rot.z = 0.0f;
@@ -552,7 +552,7 @@ API_CALLABLE(N(UseAbility)) {
             } else {
                 add_vec2D_polar(&npc->pos.x, &npc->pos.z, playerStatus->colliderDiameter / 4, clamp_angle(playerStatus->targetYaw - 90.0f));
             }
-            npc->jumpVelocity = 0.0f;
+            npc->jumpVel = 0.0f;
             partner_clear_player_tracking(npc);
             temp_ret = ApiStatus_DONE2;
             if (N(PlayingFuseSound)) {
@@ -653,7 +653,7 @@ void N(pre_battle)(Npc* bombette) {
 
         N(IsBlasting) = FALSE;
         playerStatus->flags &= ~PS_FLAG_JUMPING;
-        bombette->jumpVelocity = 0.0f;
+        bombette->jumpVel = 0.0f;
         bombette->flags &= ~NPC_FLAG_JUMPING;
 
         set_action_state(ACTION_STATE_IDLE);
@@ -674,7 +674,7 @@ void N(pre_battle)(Npc* bombette) {
                             playerStatus->colliderDiameter / 4, clamp_angle(playerStatus->targetYaw - 90.0f));
         }
 
-        bombette->jumpVelocity = 0.0f;
+        bombette->jumpVel = 0.0f;
         bombette->pos.y = playerStatus->pos.y;
         bombette->rot.x = 0.0f;
         bombette->rot.z = 0.0f;

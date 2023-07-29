@@ -152,7 +152,7 @@ void entity_StarBoxLauncher_launch(Entity* entity) {
                 entity->pos.y = data->basePosY + 50.0f;
                 data->maxRotZ = 2.0f;
                 data->state++;
-                data->riseVelocity = 3.0f;
+                data->riseVel = 3.0f;
                 data->rotZPhase = 90.0f;
             }
             break;
@@ -164,14 +164,14 @@ void entity_StarBoxLauncher_launch(Entity* entity) {
                 data->rotZPhase -= 360.0f;
             }
 
-            entity->pos.y += data->riseVelocity * cos_rad(DEG_TO_RAD(data->riseSpeedPhase));
+            entity->pos.y += data->riseVel * cos_rad(DEG_TO_RAD(data->riseSpeedPhase));
             data->riseSpeedPhase += 30.0f;
             if (data->riseSpeedPhase >= 360.0f) {
                 data->riseSpeedPhase -= 360.0f;
             }
 
-            data->riseVelocity -= 0.08;
-            if (data->riseVelocity < 2.8) {
+            data->riseVel -= 0.08;
+            if (data->riseVel < 2.8) {
                 data->state++;
             }
             break;
@@ -190,15 +190,15 @@ void entity_StarBoxLauncher_launch(Entity* entity) {
 
             entity_StarBoxLauncher_update_face_anim(entity);
 
-            entity->pos.y += data->riseVelocity * cos_rad(DEG_TO_RAD(data->riseSpeedPhase));
+            entity->pos.y += data->riseVel * cos_rad(DEG_TO_RAD(data->riseSpeedPhase));
             data->riseSpeedPhase += 30.0f;
             if (data->riseSpeedPhase >= 360.0f) {
                 data->riseSpeedPhase -= 360.0f;
             }
 
-            data->riseVelocity -= 0.08;
-            if (data->riseVelocity <= 0.0f) {
-                data->riseVelocity = 0.0f;
+            data->riseVel -= 0.08;
+            if (data->riseVel <= 0.0f) {
+                data->riseVel = 0.0f;
                 data->timer = 8;
                 data->state++;
                 entity->rot.z = 0.0f;

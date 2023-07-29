@@ -69,10 +69,10 @@ void entity_HiddenPanel_idle(Entity* entity) {
         distToPlayer = get_xz_dist_to_player(entity->pos.x, entity->pos.z);
         if (distToPlayer <= 100) {
             if (entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR) {
-                data->riseVelocity = 0.5f;
+                data->riseVel = 0.5f;
                 exec_entity_commandlist(entity);
             } else if (entity_HiddenPanel_is_item_on_top(entity)) {
-                data->riseVelocity = 0.5f;
+                data->riseVel = 0.5f;
                 exec_entity_commandlist(entity);
             } else {
                 s32 npcIndex = npc_find_standing_on_entity(entity->listIndex);
@@ -83,16 +83,16 @@ void entity_HiddenPanel_idle(Entity* entity) {
                     data->npcFlags = npc->flags & (NPC_FLAG_GRAVITY | NPC_FLAG_8);
                     npc->flags &= ~NPC_FLAG_8;
                     npc->flags |= NPC_FLAG_GRAVITY;
-                    data->riseVelocity = 0.5f;
+                    data->riseVel = 0.5f;
                     exec_entity_commandlist(entity);
                 } else {
                     entity->flags |= ENTITY_FLAG_DISABLE_COLLISION;
                     if (distToPlayer > 60) {
-                        data->riseVelocity = 0.5f;
+                        data->riseVel = 0.5f;
                         exec_entity_commandlist(entity);
                     } else {
                         data->state = 0;
-                        data->riseVelocity = 10.0f;
+                        data->riseVel = 10.0f;
                         exec_entity_commandlist(entity);
                     }
                 }
@@ -135,7 +135,7 @@ void entity_HiddenPanel_flip_over(Entity* entity) {
             entity->flags &= ~ENTITY_FLAG_HIDDEN;
             break;
         case 1:
-            entity->pos.y += data->riseVelocity * sin_rad(DEG_TO_RAD(data->riseInterpPhase));
+            entity->pos.y += data->riseVel * sin_rad(DEG_TO_RAD(data->riseInterpPhase));
             if (entity->pos.y <= data->initialY) {
                 entity->pos.y = data->initialY;
                 entity->rot.x = 0.0f;
@@ -184,7 +184,7 @@ void entity_HiddenPanel_flip_over(Entity* entity) {
                 rotAngle = 360.0f;
             }
 
-            entity->pos.y += data->riseVelocity * sin_rad(DEG_TO_RAD(data->riseInterpPhase));
+            entity->pos.y += data->riseVel * sin_rad(DEG_TO_RAD(data->riseInterpPhase));
             data->riseInterpPhase += 10.0f;
             if (data->riseInterpPhase > 270.0f) {
                 data->riseInterpPhase = 270.0f;

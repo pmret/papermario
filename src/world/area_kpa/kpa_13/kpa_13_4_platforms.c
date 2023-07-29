@@ -15,7 +15,7 @@ API_CALLABLE(N(AddPlatformPushVelocity)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (gCollisionStatus.currentFloor == floor || gCollisionStatus.lastTouchedFloor == floor) {
-        playerStatus->pushVelocity.x = velocity;
+        playerStatus->pushVel.x = velocity;
     }
 
     if (gPlayerData.currentPartner != PARTNER_NONE) {

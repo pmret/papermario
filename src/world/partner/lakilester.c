@@ -143,8 +143,8 @@ API_CALLABLE(N(Update)) {
             N(TweesterPhysicsPtr)->prevFlags = lakilester->flags;
             N(TweesterPhysicsPtr)->radius = fabsf(dist2D(lakilester->pos.x, lakilester->pos.z, entity->pos.x, entity->pos.z));
             N(TweesterPhysicsPtr)->angle = atan2(entity->pos.x, entity->pos.z, lakilester->pos.x, lakilester->pos.z);
-            N(TweesterPhysicsPtr)->angularVelocity = 6.0f;
-            N(TweesterPhysicsPtr)->liftoffVelocityPhase = 50.0f;
+            N(TweesterPhysicsPtr)->angularVel = 6.0f;
+            N(TweesterPhysicsPtr)->liftoffVelPhase = 50.0f;
             N(TweesterPhysicsPtr)->countdown = 120;
             lakilester->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW | NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8;
             lakilester->flags &= ~NPC_FLAG_GRAVITY;
@@ -152,7 +152,7 @@ API_CALLABLE(N(Update)) {
             sin_cos_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->angle), &sinAngle, &cosAngle);
             lakilester->pos.x = entity->pos.x + (sinAngle * N(TweesterPhysicsPtr)->radius);
             lakilester->pos.z = entity->pos.z - (cosAngle * N(TweesterPhysicsPtr)->radius);
-            N(TweesterPhysicsPtr)->angle = clamp_angle(N(TweesterPhysicsPtr)->angle - N(TweesterPhysicsPtr)->angularVelocity);
+            N(TweesterPhysicsPtr)->angle = clamp_angle(N(TweesterPhysicsPtr)->angle - N(TweesterPhysicsPtr)->angularVel);
 
             if (N(TweesterPhysicsPtr)->radius > 20.0f) {
                 N(TweesterPhysicsPtr)->radius--;
@@ -160,19 +160,19 @@ API_CALLABLE(N(Update)) {
                 N(TweesterPhysicsPtr)->radius++;
             }
 
-            liftoffVelocity = sin_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->liftoffVelocityPhase)) * 3.0f;
-            N(TweesterPhysicsPtr)->liftoffVelocityPhase += 3.0f;
+            liftoffVelocity = sin_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->liftoffVelPhase)) * 3.0f;
+            N(TweesterPhysicsPtr)->liftoffVelPhase += 3.0f;
 
-            if (N(TweesterPhysicsPtr)->liftoffVelocityPhase > 150.0f) {
-                N(TweesterPhysicsPtr)->liftoffVelocityPhase = 150.0f;
+            if (N(TweesterPhysicsPtr)->liftoffVelPhase > 150.0f) {
+                N(TweesterPhysicsPtr)->liftoffVelPhase = 150.0f;
             }
 
             lakilester->pos.y += liftoffVelocity;
             lakilester->renderYaw = clamp_angle(360.0f - N(TweesterPhysicsPtr)->angle);
-            N(TweesterPhysicsPtr)->angularVelocity += 0.8;
+            N(TweesterPhysicsPtr)->angularVel += 0.8;
 
-            if (N(TweesterPhysicsPtr)->angularVelocity > 40.0f) {
-                N(TweesterPhysicsPtr)->angularVelocity = 40.0f;
+            if (N(TweesterPhysicsPtr)->angularVel > 40.0f) {
+                N(TweesterPhysicsPtr)->angularVel = 40.0f;
             }
 
             if (--N(TweesterPhysicsPtr)->countdown == 0) {
@@ -720,7 +720,7 @@ API_CALLABLE(N(UseAbility)) {
             lakilester->yaw = atan2(lakilester->pos.x, lakilester->pos.z, lakilester->moveToPos.x, lakilester->moveToPos.z);
             lakilester->duration = 12;
             lakilester->currentAnim = ANIM_WorldLakilester_Walk;
-            lakilester->jumpVelocity = 8.0f;
+            lakilester->jumpVel = 8.0f;
             lakilester->jumpScale = 1.4f;
             suggest_player_anim_allow_backward(ANIM_Mario1_BeforeJump);
             N(AbilityState) = RIDE_STATE_MOUNT_2;
@@ -737,13 +737,13 @@ API_CALLABLE(N(UseAbility)) {
                 lakilester->pos.x += (lakilester->moveToPos.x - lakilester->pos.x) / lakilester->duration;
                 lakilester->pos.z += (lakilester->moveToPos.z - lakilester->pos.z) / lakilester->duration;
                 lakilester->pos.y += (lakilester->moveToPos.y - lakilester->pos.y) / lakilester->duration;
-                playerStatus->pos.y += lakilester->jumpVelocity;
+                playerStatus->pos.y += lakilester->jumpVel;
                 N(test_mounting_height_adjustment)(lakilester, playerStatus->colliderHeight, 2 * playerStatus->colliderHeight);
                 playerStatus->pos.y += N(MountingDeltaY);
                 lakilester->pos.y += N(MountingDeltaY);
-                lakilester->jumpVelocity -= lakilester->jumpScale;
+                lakilester->jumpVel -= lakilester->jumpScale;
 
-                if (lakilester->jumpVelocity <= 0.0f) {
+                if (lakilester->jumpVel <= 0.0f) {
                     suggest_player_anim_allow_backward(ANIM_Mario1_Fall);
                 }
 
@@ -842,9 +842,9 @@ API_CALLABLE(N(UseAbility)) {
             lakilester->jumpScale = 1.2f;
 
             if (lakilester->moveToPos.y > lakilester->pos.y) {
-                lakilester->jumpVelocity = 6.0f + (lakilester->moveToPos.y - lakilester->pos.y) / 14.0f;
+                lakilester->jumpVel = 6.0f + (lakilester->moveToPos.y - lakilester->pos.y) / 14.0f;
             } else {
-                lakilester->jumpVelocity = 6.0f;
+                lakilester->jumpVel = 6.0f;
             }
 
             lakilester->moveSpeed = dist / lakilester->duration;
@@ -857,7 +857,7 @@ API_CALLABLE(N(UseAbility)) {
             // fallthrough
         case RIDE_STATE_DISMOUNT_3:
             gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
-            playerStatus->pos.y += lakilester->jumpVelocity;
+            playerStatus->pos.y += lakilester->jumpVel;
             dist = playerStatus->colliderHeight * 0.5f;
 
             x = playerStatus->pos.x;
@@ -871,7 +871,7 @@ API_CALLABLE(N(UseAbility)) {
                 break;
             }
 
-            lakilester->jumpVelocity -= lakilester->jumpScale;
+            lakilester->jumpVel -= lakilester->jumpScale;
             add_vec2D_polar(&playerStatus->pos.x, &playerStatus->pos.z, lakilester->moveSpeed, lakilester->yaw);
 
             func_800E4AD8(0);
@@ -975,9 +975,9 @@ API_CALLABLE(N(PutAway)) {
             lakilester->duration = 14;
 
             if (lakilester->moveToPos.y > lakilester->pos.y ) {
-                lakilester->jumpVelocity = (lakilester->moveToPos.y - lakilester->pos.y) / 14.0f + 6.0f;
+                lakilester->jumpVel = (lakilester->moveToPos.y - lakilester->pos.y) / 14.0f + 6.0f;
             } else {
-                lakilester->jumpVelocity = 6.0f;
+                lakilester->jumpVel = 6.0f;
             }
             lakilester->jumpScale = 1.2f;
             lakilester->moveSpeed = sp2C / lakilester->duration;
@@ -990,15 +990,15 @@ API_CALLABLE(N(PutAway)) {
             suggest_player_anim_allow_backward(ANIM_Mario1_Jump);
             N(PutAwayState)++;
         case PUT_AWAY_DISMOUNT_3:
-            playerStatus->pos.y += lakilester->jumpVelocity;
-            lakilester->jumpVelocity -= lakilester->jumpScale;
+            playerStatus->pos.y += lakilester->jumpVel;
+            lakilester->jumpVel -= lakilester->jumpScale;
             add_vec2D_polar(&playerStatus->pos.x, &playerStatus->pos.z,
                             lakilester->moveSpeed, lakilester->yaw);
             func_800E4AD8(0);
-            if (lakilester->jumpVelocity <= 0.0f) {
+            if (lakilester->jumpVel <= 0.0f) {
                 playerStatus->flags |= PS_FLAG_FALLING;
-                if (lakilester->jumpVelocity < -10.0) {
-                    lakilester->jumpVelocity = -10.0f;
+                if (lakilester->jumpVel < -10.0) {
+                    lakilester->jumpVel = -10.0f;
                 }
             }
             sp20 = playerStatus->pos.x;

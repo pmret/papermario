@@ -192,9 +192,9 @@ API_CALLABLE(N(ShellShotActionCommand)) {
             hudTargetRotation = 0;
             shellShotTimer = 90;
 #if VERSION_PAL
-            state->velocity = 4.0f;
+            state->vel = 4.0f;
 #else
-            state->velocity = 3.0f;
+            state->vel = 3.0f;
 #endif
             battleStatus->unk_86 = 0;
             action_command_init_status();
@@ -243,16 +243,16 @@ API_CALLABLE(N(ShellShotActionCommand)) {
                 }
             }
 
-            state->angle += state->velocity;
+            state->angle += state->vel;
 
             if (state->angle <= state->unk_18.x) {
                 state->angle = state->unk_18.x;
-                state->velocity = 0.0f - state->velocity;
+                state->vel = 0.0f - state->vel;
             }
 
             if (state->angle >= state->unk_18.y) {
                 state->angle = state->unk_18.y;
-                state->velocity = 0.0f - state->velocity;
+                state->vel = 0.0f - state->vel;
             }
             break;
         case 3:
@@ -260,7 +260,7 @@ API_CALLABLE(N(ShellShotActionCommand)) {
             clampedAngleDiff = get_clamped_angle_diff(state->angle, state->bounceDivisor);
             aimAngle = fabsf(clampedAngleDiff) / state->unk_24 * targetActor->scalingFactor;
 
-            if (state->velocity >= 0.0f) {
+            if (state->vel >= 0.0f) {
                 if (clampedAngleDiff < 0.0f) {
                     battleStatus->unk_86 = 0;
                 } else {

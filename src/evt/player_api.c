@@ -218,7 +218,7 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
     f32 xTemp;
     f32 yTemp;
     f32 zTemp;
-    f32 jumpVelocity;
+    f32 jumpVel;
     s32 duration;
     AnimID anim;
     f32 dist;
@@ -255,7 +255,7 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
             playerNpc->moveSpeed = dist / playerNpc->duration;
         }
 
-        playerNpc->jumpVelocity = (playerNpc->jumpScale * (playerNpc->duration - 1) / 2) + (yTemp / playerNpc->duration);
+        playerNpc->jumpVel = (playerNpc->jumpScale * (playerNpc->duration - 1) / 2) + (yTemp / playerNpc->duration);
         playerStatus->flags |= PS_FLAG_FLYING;
         playerStatus->animFlags |= PA_FLAG_NO_OOB_RESPAWN;
 
@@ -276,11 +276,11 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
     }
 
     npc_move_heading(playerNpc, playerNpc->moveSpeed, playerNpc->yaw);
-    playerNpc->pos.y += playerNpc->jumpVelocity;
-    jumpVelocity = playerNpc->jumpVelocity; // TODO: temp needed and used specifically only once below for this to match
-    playerNpc->jumpVelocity -= playerNpc->jumpScale;
+    playerNpc->pos.y += playerNpc->jumpVel;
+    jumpVel = playerNpc->jumpVel; // TODO: temp needed and used specifically only once below for this to match
+    playerNpc->jumpVel -= playerNpc->jumpScale;
 
-    if (mode == 0 && jumpVelocity > 0.0f && playerNpc->jumpVelocity <= 0.0f) {
+    if (mode == 0 && jumpVel > 0.0f && playerNpc->jumpVel <= 0.0f) {
         if (!(playerStatus->animFlags & PA_FLAG_8BIT_MARIO)) {
             if (!(playerStatus->animFlags & PA_FLAG_USING_WATT)) {
                 anim = ANIM_Mario1_Fall;
@@ -323,7 +323,7 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
         if (mode == 0 || mode == 2) {
             s32 colliderID;
 
-            yTemp = player_check_collision_below(playerNpc->jumpVelocity, &colliderID);
+            yTemp = player_check_collision_below(playerNpc->jumpVel, &colliderID);
 
             if (colliderID >= 0) {
                 playerStatus->pos.y = yTemp;
@@ -830,9 +830,9 @@ ApiStatus SetPlayerPushVelocity(Evt* script, s32 isInitialCall) {
     f32 y;
     f32 z;
 
-    gPlayerStatus.pushVelocity.x = x;
-    gPlayerStatus.pushVelocity.y = evt_get_variable(script, *args++);
-    gPlayerStatus.pushVelocity.z = evt_get_variable(script, *args++);
+    gPlayerStatus.pushVel.x = x;
+    gPlayerStatus.pushVel.y = evt_get_variable(script, *args++);
+    gPlayerStatus.pushVel.z = evt_get_variable(script, *args++);
 
     return ApiStatus_DONE2;
 }

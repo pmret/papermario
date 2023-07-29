@@ -63,7 +63,7 @@ API_CALLABLE(N(SpinyAI_Main)) {
         if (npc->flags & NPC_FLAG_JUMPING) {
             npc->currentAnim = ANIM_Spiny_Anim18;
             npc->moveSpeed = 0.0f;
-            npc->jumpVelocity = 0.0f;
+            npc->jumpVel = 0.0f;
             npc->jumpScale = 1.0f;
             script->AI_TEMP_STATE = 102;
         } else {
@@ -140,7 +140,7 @@ API_CALLABLE(N(SpinyAI_Main)) {
             enemy->varTable[10] = 4;
             npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
             npc->moveSpeed = 2.5f;
-            npc->jumpVelocity = 8.0f;
+            npc->jumpVel = 8.0f;
             npc->jumpScale = 0.8f;
             npc->flags |= NPC_FLAG_JUMPING;
             script->AI_TEMP_STATE = 102;
@@ -156,12 +156,12 @@ API_CALLABLE(N(SpinyAI_Main)) {
                     npc->moveSpeed = 0.0f;
                 }
             }
-            if (npc->jumpVelocity < 0.0) {
+            if (npc->jumpVel < 0.0) {
                 x2 = npc->pos.x;
                 y2 = npc->pos.y + 13.0;
                 z2 = npc->pos.z;
-                w2 = fabsf(npc->jumpVelocity) + 16.0;
-                if ((npc_raycast_down_sides(npc->collisionChannel, &x2, &y2, &z2, &w2) != 0) && (w2 <= (fabsf(npc->jumpVelocity) + 13.0))) {
+                w2 = fabsf(npc->jumpVel) + 16.0;
+                if ((npc_raycast_down_sides(npc->collisionChannel, &x2, &y2, &z2, &w2) != 0) && (w2 <= (fabsf(npc->jumpVel) + 13.0))) {
                     npc->pos.y = y2;
                     enemy->territory->wander.centerPos.x = npc->pos.x;
                     enemy->territory->wander.centerPos.y = npc->pos.y;
@@ -187,7 +187,7 @@ API_CALLABLE(N(SpinyAI_Main)) {
                     }
                     npc->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW;
                     npc->flags &= ~NPC_FLAG_JUMPING;
-                    npc->jumpVelocity = 0.0f;
+                    npc->jumpVel = 0.0f;
                     npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
                     npc->currentAnim = ANIM_Spiny_Anim1A;
                     npc->duration = 3;
@@ -195,8 +195,8 @@ API_CALLABLE(N(SpinyAI_Main)) {
                     break;
                 }
             }
-            npc->pos.y += npc->jumpVelocity;
-            npc->jumpVelocity -= npc->jumpScale;
+            npc->pos.y += npc->jumpVel;
+            npc->jumpVel -= npc->jumpScale;
             break;
         case 103:
             npc->duration--;

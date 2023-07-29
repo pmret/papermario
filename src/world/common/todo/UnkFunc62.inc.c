@@ -63,7 +63,7 @@ API_CALLABLE(N(UnkFunc62)) {
         state->unk_30.y = (state->goalPos.y - state->currentPos.y) / state->moveTime;
         state->unk_30.z = (state->goalPos.z - state->currentPos.z) / state->moveTime;
         state->acceleration = PI_S / state->moveTime;
-        state->velocity = 0.0f;
+        state->vel = 0.0f;
         state->speed += phi_f8 / state->moveTime;
 
         if (state->moveArcAmplitude < 3) {
@@ -79,11 +79,11 @@ API_CALLABLE(N(UnkFunc62)) {
             }
             state->unk_18.x = 0.0f;
             state->unk_18.y = 0.0f;
-            phi_f20 = state->velocity;
+            phi_f20 = state->vel;
             temp_f22_2 = state->acceleration;
             phi_f0 = sin_rad(DEG_TO_RAD(state->unk_24));
             phi_f2 = 0.53;
-            state->velocity = phi_f20 + ((phi_f0 * phi_f2 * temp_f22_2) + temp_f22_2);
+            state->vel = phi_f20 + ((phi_f0 * phi_f2 * temp_f22_2) + temp_f22_2);
         } else {
             state->unk_24 = 90.0f;
             state->unk_28 = 360 / state->moveTime;
@@ -97,11 +97,11 @@ API_CALLABLE(N(UnkFunc62)) {
             }
             state->unk_18.x = 0.0f;
             state->unk_18.y = 0.0f;
-            velocity = state->velocity;
+            velocity = state->vel;
             temp_f22_3 = state->acceleration;
             phi_f0 = sin_rad(DEG_TO_RAD(state->unk_24));
             phi_f2 = 0.8;
-            state->velocity = velocity + ((phi_f0 * phi_f2 * temp_f22_3) + temp_f22_3);
+            state->vel = velocity + ((phi_f0 * phi_f2 * temp_f22_3) + temp_f22_3);
         }
         set_animation(ACTOR_SELF, 1, state->animJumpRise);
         sfx_play_sound(SOUND_JUMP_2081);
@@ -110,7 +110,7 @@ API_CALLABLE(N(UnkFunc62)) {
 
     switch (script->functionTemp[0]) {
         case 1:
-            if (state->velocity > PI_S / 2) {
+            if (state->vel > PI_S / 2) {
                 set_animation(ACTOR_SELF, 1, state->animJumpFall);
             }
             oldActorX = actor->currentPos.x;
@@ -120,7 +120,7 @@ API_CALLABLE(N(UnkFunc62)) {
             state->currentPos.z = state->currentPos.z + state->unk_30.z;
             state->unk_18.x = actor->currentPos.y;
             actor->currentPos.x = state->currentPos.x;
-            actor->currentPos.y = state->currentPos.y + (state->bounceDivisor * sin_rad(state->velocity));
+            actor->currentPos.y = state->currentPos.y + (state->bounceDivisor * sin_rad(state->vel));
             actor->currentPos.z = state->currentPos.z;
             if (state->goalPos.y > actor->currentPos.y && state->moveTime < 3) {
                 actor->currentPos.y = state->goalPos.y;
@@ -129,17 +129,17 @@ API_CALLABLE(N(UnkFunc62)) {
             actor->rot.z = -atan2(oldActorX, -oldActorY, actor->currentPos.x, -actor->currentPos.y);
             state->unk_18.y = actor->currentPos.y;
             if (state->moveArcAmplitude < 3) {
-                phi_f20_2 = state->velocity;
+                phi_f20_2 = state->vel;
                 temp_f22_5 = state->acceleration;
                 phi_f0_2 = sin_rad(DEG_TO_RAD(state->unk_24));
                 phi_f2_2 = 0.53;
-                state->velocity = phi_f20_2 + ((phi_f0_2 * phi_f2_2 * temp_f22_5) + temp_f22_5);
+                state->vel = phi_f20_2 + ((phi_f0_2 * phi_f2_2 * temp_f22_5) + temp_f22_5);
             } else {
-                temp_f20_6 = state->velocity;
+                temp_f20_6 = state->vel;
                 temp_f22_6 = state->acceleration;
                 phi_f0_2 = sin_rad(DEG_TO_RAD(state->unk_24));
                 phi_f2_2 = 0.8;
-                state->velocity = temp_f20_6 + ((phi_f0_2 * phi_f2_2 * temp_f22_6) + temp_f22_6);
+                state->vel = temp_f20_6 + ((phi_f0_2 * phi_f2_2 * temp_f22_6) + temp_f22_6);
             }
 
             state->unk_24 += state->unk_28;
@@ -148,7 +148,7 @@ API_CALLABLE(N(UnkFunc62)) {
             if (state->moveTime == 0) {
                 actor->currentPos.y = state->goalPos.y;
                 state->acceleration = 1.8f;
-                state->velocity = -(state->unk_18.x - state->unk_18.y);
+                state->vel = -(state->unk_18.x - state->unk_18.y);
                 set_animation(ACTOR_SELF, 1, state->animJumpLand);
                 return ApiStatus_DONE1;
             }
@@ -157,7 +157,7 @@ API_CALLABLE(N(UnkFunc62)) {
             state->moveTime = 1;
             state->acceleration = 1.8f;
             state->unk_24 = 90.0f;
-            state->velocity = -(state->unk_18.x - state->unk_18.y);
+            state->vel = -(state->unk_18.x - state->unk_18.y);
             state->bounceDivisor = fabsf(state->unk_18.x - state->unk_18.y) / 16.5;
             state->unk_28 = 360 / state->moveTime;
             state->currentPos.x = actor->currentPos.x;

@@ -184,12 +184,12 @@ void entity_HeartBlockContent__anim_heal(Entity* entity, s32 arg1) {
             fx_sparkles(FX_SPARKLES_0, entity->pos.x, entity->pos.y, entity->pos.z, 2.0f);
             data->bouncePhase = 0.0f;
             data->state++;
-            data->riseVelocity = 6.0f;
+            data->riseVel = 6.0f;
             break;
         case 1:
-            entity->pos.y = entity->pos.y + data->riseVelocity;
-            data->riseVelocity -= 1.0f;
-            if (data->riseVelocity <= 2.0f) {
+            entity->pos.y = entity->pos.y + data->riseVel;
+            data->riseVel -= 1.0f;
+            if (data->riseVel <= 2.0f) {
                 data->state++;
                 entity->flags &= ~ENTITY_FLAG_ALWAYS_FACE_CAMERA;
                 data->rotRate = -10.0f;

@@ -31,7 +31,7 @@ void entity_SimpleSpring_idle(Entity* entity) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (playerStatus->actionState != ACTION_STATE_RIDE && (entity->collisionFlags & ENTITY_COLLISION_PLAYER_TOUCH_FLOOR)) {
-        if (data->launchVelocity >= 70) {
+        if (data->launchVel >= 70) {
             playerStatus->camResetDelay = 5;
         }
         play_model_animation(entity->virtualModelIndex, Entity_SimpleSpring_AnimLaunch);
@@ -49,7 +49,7 @@ void entity_SimpleSpring_set_jump_params(Entity* entity) {
     set_action_state(ACTION_STATE_LAUNCH);
     gPlayerStatus.gravityIntegrator[0] = 15.0f;
     gPlayerStatus.gravityIntegrator[1] = 0;
-    gPlayerStatus.gravityIntegrator[2] = data->launchVelocity;
+    gPlayerStatus.gravityIntegrator[2] = data->launchVel;
     gPlayerStatus.gravityIntegrator[3] = entity->pos.y;
 }
 
@@ -61,7 +61,7 @@ void entity_ScriptSpring_init(Entity* entity) {
 }
 
 void entity_SimpleSpring_init(Entity* entity) {
-    entity->dataBuf.simpleSpring->launchVelocity = CreateEntityVarArgBuffer[0];
+    entity->dataBuf.simpleSpring->launchVel = CreateEntityVarArgBuffer[0];
 }
 
 EntityScript Entity_ScriptSpring_Script = {
