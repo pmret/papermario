@@ -662,12 +662,19 @@ void hud_element_clear_cache(void) {
 }
 
 #if VERSION_PAL
-INCLUDE_ASM(void, "hud_element", init_hud_element_list);
-#else
+extern Addr D_80200000;
+#endif
+
 void init_hud_element_list(void) {
     if (!gGameStatusPtr->isBattle) {
         if (gHudElementCacheBufferBattle != NULL) {
+#if VERSION_PAL
+            if (gHudElementCacheBufferBattle != &D_80200000) {
+                general_heap_free(gHudElementCacheBufferBattle);
+            }
+#else
             general_heap_free(gHudElementCacheBufferBattle);
+#endif
             gHudElementCacheBufferBattle = NULL;
         }
 
@@ -687,7 +694,6 @@ void init_hud_element_list(void) {
     gHudElementsNumber = 0;
     D_80159180 = 0;
 }
-#endif
 
 void func_801413F8(void) {
     set_cam_viewport(CAM_3, 0, 0, SCREEN_WIDTH - 1, SCREEN_HEIGHT - 1);
