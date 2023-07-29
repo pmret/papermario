@@ -303,7 +303,8 @@ s32 pad_after_item_hudscripts[] = {
 
 #include "item_hud_script_table.inc.c"
 
-#include "item_entity_scripts.inc.c"
+#include "item_entity_scripts.h"
+#include "item_entity_script_tables.inc.c"
 
 //TODO split for partner popup menu data?
 

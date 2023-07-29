@@ -264,6 +264,11 @@ def write_ninja_rules(
     )
 
     ninja.rule(
+        "item_scripts",
+        command=f"$python {BUILD_TOOLS}/pm_item_scripts.py $in $out",
+    )
+
+    ninja.rule(
         "msg_combine",
         description="msg_combine $out",
         command=f"$python {BUILD_TOOLS}/msg/combine.py $out $in",
@@ -567,6 +572,11 @@ class Configure:
                 "out_dir": str(effect_data_outdir),
             },
         )
+        
+        build(
+            self.build_path() / "include/item_entity_scripts.h",
+            [Path("src/gen/item_scripts.xml")],
+            "item_scripts",)
 
         # Build objects
         for entry in self.linker_entries:
