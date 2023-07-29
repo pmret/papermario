@@ -1117,7 +1117,7 @@ EvtScript N(8023AE8C) = {
     EVT_CALL(MoveBattleCamOver, 100 * DT)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
     EVT_THREAD
-        EVT_CALL(EnableActorBlur, ACTOR_PARTNER, 1)
+        EVT_CALL(EnableActorBlur, ACTOR_PARTNER, IDLE_SCRIPT_DISABLE)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Strain)
         EVT_CALL(N(TurboChargeUnwindWatt), 0)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Run)
@@ -1125,7 +1125,7 @@ EvtScript N(8023AE8C) = {
         EVT_CALL(FlyToGoal, ACTOR_PARTNER, 10, -10, EASING_CUBIC_OUT)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Idle)
         EVT_WAIT(10)
-        EVT_CALL(EnableActorBlur, ACTOR_PARTNER, 0)
+        EVT_CALL(EnableActorBlur, ACTOR_PARTNER, IDLE_SCRIPT_ENABLE)
     EVT_END_THREAD
     EVT_WAIT(30)
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_28B)
@@ -1200,7 +1200,7 @@ EvtScript N(8023B450) = {
     EVT_CALL(MoveBattleCamOver, 100 * DT)
     EVT_CALL(func_8024ECF8, BTL_CAM_MODEY_0, BTL_CAM_MODEX_0, TRUE)
     EVT_THREAD
-        EVT_CALL(EnableActorBlur, ACTOR_PARTNER, 1)
+        EVT_CALL(EnableActorBlur, ACTOR_PARTNER, IDLE_SCRIPT_DISABLE)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Strain)
         EVT_CALL(N(TurboChargeUnwindWatt), 1)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Run)
@@ -1208,7 +1208,7 @@ EvtScript N(8023B450) = {
         EVT_CALL(FlyToGoal, ACTOR_PARTNER, 10, -10, EASING_CUBIC_OUT)
         EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleWatt_Idle)
         EVT_WAIT(10)
-        EVT_CALL(EnableActorBlur, ACTOR_PARTNER, 0)
+        EVT_CALL(EnableActorBlur, ACTOR_PARTNER, IDLE_SCRIPT_ENABLE)
     EVT_END_THREAD
     EVT_WAIT(30)
     EVT_CALL(PlaySoundAtActor, ACTOR_PARTNER, SOUND_28B)

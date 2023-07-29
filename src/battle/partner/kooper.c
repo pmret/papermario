@@ -943,7 +943,7 @@ EvtScript N(dizzyShell) = {
     EVT_DIVF(LVarB, LVarA)
     EVT_THREAD
         EVT_CALL(AddActorDecoration, ACTOR_SELF, PRT_ZERO, 0, ACTOR_DECORATION_GREY_SMOKE_TRAIL)
-        EVT_CALL(EnableActorBlur, ACTOR_PARTNER, 1)
+        EVT_CALL(EnableActorBlur, ACTOR_PARTNER, IDLE_SCRIPT_DISABLE)
         EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 350)
         EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
@@ -958,7 +958,7 @@ EvtScript N(dizzyShell) = {
         EVT_CALL(AddGoalPos, ACTOR_PARTNER, 40, 0, 0)
         EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(12.0))
         EVT_CALL(FlyToGoal, ACTOR_PARTNER, 0, 0, EASING_QUARTIC_OUT)
-        EVT_CALL(EnableActorBlur, ACTOR_PARTNER, 0)
+        EVT_CALL(EnableActorBlur, ACTOR_PARTNER, IDLE_SCRIPT_ENABLE)
         EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
     EVT_END_THREAD
     EVT_THREAD
@@ -1191,7 +1191,7 @@ EvtScript N(fireShell) = {
             EVT_CASE_EQ(4)
                 EVT_CALL(ModifyActorDecoration, ACTOR_PARTNER, -1, 1, 300, 0, 0, 0)
         EVT_END_SWITCH
-        EVT_CALL(EnableActorBlur, ACTOR_PARTNER, 1)
+        EVT_CALL(EnableActorBlur, ACTOR_PARTNER, IDLE_SCRIPT_DISABLE)
         EVT_CALL(GetActorPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
         EVT_ADD(LVar0, 350)
         EVT_CALL(SetGoalPos, ACTOR_PARTNER, LVar0, LVar1, LVar2)
@@ -1207,7 +1207,7 @@ EvtScript N(fireShell) = {
         EVT_CALL(AddGoalPos, ACTOR_PARTNER, 40, 0, 0)
         EVT_CALL(SetActorSpeed, ACTOR_PARTNER, EVT_FLOAT(12.0))
         EVT_CALL(FlyToGoal, ACTOR_PARTNER, 0, 0, EASING_QUARTIC_OUT)
-        EVT_CALL(EnableActorBlur, ACTOR_PARTNER, 0)
+        EVT_CALL(EnableActorBlur, ACTOR_PARTNER, IDLE_SCRIPT_ENABLE)
         EVT_CALL(SetActorVar, ACTOR_SELF, 0, 1)
     EVT_END_THREAD
     EVT_CALL(SetActorVar, ACTOR_SELF, 0, 0)
@@ -1370,7 +1370,7 @@ EvtScript N(shellTossOnFirstStrike) = {
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_Run)
     EVT_CALL(RunToGoal, ACTOR_PARTNER, 0)
     EVT_CALL(SetAnimation, ACTOR_PARTNER, -1, ANIM_BattleKooper_Idle)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END

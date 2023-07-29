@@ -581,7 +581,7 @@ EvtScript N(onDeath) = {
             EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
         EVT_END_IF
     EVT_END_THREAD
-    EVT_CALL(EnableActorBlur, ACTOR_SELF, 1)
+    EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(MakeLerp, 0, 0x00001950, 100, EASING_COS_IN_OUT)
     EVT_LABEL(2)
     EVT_CALL(UpdateLerp)
@@ -591,7 +591,7 @@ EvtScript N(onDeath) = {
     EVT_IF_EQ(LVar1, 1)
         EVT_GOTO(2)
     EVT_END_IF
-    EVT_CALL(EnableActorBlur, ACTOR_SELF, 0)
+    EVT_CALL(EnableActorBlur, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetAnimation, ACTOR_SELF, PRT_MAIN, ANIM_BattleBowser_HurtStill)
     EVT_WAIT(15)
     EVT_CALL(PlaySoundAtActor, ACTOR_SELF, SOUND_2129)

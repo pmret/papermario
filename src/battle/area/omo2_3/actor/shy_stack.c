@@ -361,7 +361,7 @@ EvtScript N(init) = {
     EVT_CALL(SetActorVar, ACTOR_SELF, 6, ANIM_ShyStackGuy_Anim1B)
     EVT_CALL(SetActorVar, ACTOR_SELF, 8, 0)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(GetActorVar, ACTOR_SELF, 0, LVar0)
     EVT_IF_EQ(LVar0, 0)
         EVT_SET(LVar0, 10)
@@ -489,7 +489,7 @@ EvtScript N(init) = {
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_14, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, FALSE)
             EVT_CALL(HPBarToHome, ACTOR_SELF)
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
         EVT_END_THREAD
     EVT_ELSE
@@ -628,7 +628,7 @@ EvtScript N(init) = {
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_14, ACTOR_PART_FLAG_INVISIBLE, TRUE)
             EVT_CALL(SetPartFlagBits, ACTOR_SELF, PRT_MAIN, ACTOR_PART_FLAG_INVISIBLE, FALSE)
             EVT_CALL(HPBarToHome, ACTOR_SELF)
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_CALL(SetActorVar, ACTOR_ENEMY1, 2, 4)
         EVT_END_THREAD
@@ -1259,7 +1259,7 @@ EvtScript N(80235168) = {
 
 EvtScript N(takeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetTargetActor, ACTOR_SELF, ACTOR_PLAYER)
     EVT_CALL(UseBattleCamPreset, BTL_CAM_ENEMY_APPROACH)
     EVT_CALL(BattleCamTargetActor, ACTOR_SELF)
@@ -1344,7 +1344,7 @@ EvtScript N(takeTurn) = {
             EVT_WAIT(15)
         EVT_END_CASE_GROUP
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END

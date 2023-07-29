@@ -173,7 +173,7 @@ EvtScript N(80225FD4) = {
 
 EvtScript N(handleEvent_802260D0) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVarA)
     EVT_SWITCH(LVarA)
         EVT_CASE_OR_EQ(EVENT_HIT_COMBO)
@@ -241,7 +241,7 @@ EvtScript N(handleEvent_802260D0) = {
             EVT_EXEC_WAIT(EVS_Enemy_Recover)
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -249,14 +249,14 @@ EvtScript N(handleEvent_802260D0) = {
 
 EvtScript N(takeTurn_802264AC) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(RandInt, 100, LVar0)
     EVT_IF_LT(LVar0, 60)
         EVT_EXEC_WAIT(N(80226558))
     EVT_ELSE
         EVT_EXEC_WAIT(N(80226B88))
     EVT_END_IF
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END

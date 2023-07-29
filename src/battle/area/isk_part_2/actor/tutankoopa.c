@@ -326,7 +326,7 @@ EvtScript N(EVS_Idle) = {
 
 EvtScript N(EVS_HandleEvent) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_CALL(SetActorScale, ACTOR_SELF, EVT_FLOAT(1.0), EVT_FLOAT(1.0), EVT_FLOAT(1.0))
     EVT_CALL(GetLastElement, LVarE)
     EVT_CALL(GetLastEvent, ACTOR_SELF, LVar0)
@@ -448,7 +448,7 @@ EvtScript N(EVS_HandleEvent) = {
             EVT_EXEC_WAIT(EVS_Enemy_Recover)
         EVT_CASE_DEFAULT
     EVT_END_SWITCH
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_END
@@ -528,7 +528,7 @@ EvtScript N(EVS_TemporaryKnockout) = {
 
 EvtScript N(EVS_TakeTurn) = {
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, FALSE)
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 0)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_ENABLE)
     EVT_LABEL(0)
         EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_Stunned, LVar0)
         EVT_IF_EQ(LVar0, FALSE)
@@ -537,7 +537,7 @@ EvtScript N(EVS_TakeTurn) = {
                 EVT_CALL(GetActorVar, ACTOR_SELF, AVAR_NextSummonTime, LVar0)
                 EVT_IF_EQ(LVar0, 0)
                     EVT_EXEC_WAIT(N(EVS_Move_SummonChomp))
-                    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+                    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
                     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
                     EVT_RETURN
                 EVT_ELSE
@@ -574,7 +574,7 @@ EvtScript N(EVS_TakeTurn) = {
                     EVT_CALL(SetActorVar, ACTOR_SELF, AVAR_NextAttack, AVAL_TRY_TOSS_NEXT)
                     EVT_EXEC_WAIT(N(EVS_Attack_DropDebris))
             EVT_END_SWITCH
-            EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+            EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
             EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
             EVT_RETURN
         EVT_ELSE
@@ -584,7 +584,7 @@ EvtScript N(EVS_TakeTurn) = {
             EVT_EXEC_WAIT(N(EVS_LevitateToHomePos))
             EVT_GOTO(0)
         EVT_END_IF
-    EVT_CALL(EnableIdleScript, ACTOR_SELF, 1)
+    EVT_CALL(EnableIdleScript, ACTOR_SELF, IDLE_SCRIPT_DISABLE)
     EVT_CALL(UseIdleAnimation, ACTOR_SELF, TRUE)
     EVT_RETURN
     EVT_RETURN

@@ -263,7 +263,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
     EVT_SUB(LVarD, 1)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Sit, ANIM_Mario1_SpinJump)
-    EVT_CALL(EnablePlayerBlur, 1)
+    EVT_CALL(EnablePlayerBlur, IDLE_SCRIPT_DISABLE)
     EVT_IF_EQ(LVarF, 0)
         EVT_CALL(func_802752AC, 20, 3)
         EVT_WAIT(7)
@@ -273,7 +273,7 @@ EvtScript N(EVS_UseMove_ImplB) = {
         EVT_WAIT(7)
         EVT_CALL(func_802752AC, 3, 5)
     EVT_END_IF
-    EVT_CALL(EnablePlayerBlur, 0)
+    EVT_CALL(EnablePlayerBlur, IDLE_SCRIPT_ENABLE)
     EVT_CALL(GetCommandAutoSuccess, LVar1)
     EVT_IF_EQ(LVar1, 1)
         EVT_IF_GT(LVarF, 3)
@@ -398,14 +398,14 @@ EvtScript N(EVS_UseMove_ImplC) = {
     EVT_END_SWITCH
     EVT_SUB(LVarD, 1)
     EVT_CALL(SetGoalToTarget, ACTOR_PLAYER)
-    EVT_CALL(EnablePlayerBlur, 1)
+    EVT_CALL(EnablePlayerBlur, IDLE_SCRIPT_DISABLE)
     EVT_CALL(SetJumpAnimations, ACTOR_PLAYER, 0, ANIM_Mario1_Jump, ANIM_Mario1_Jump, ANIM_Mario1_SpinFall)
     EVT_IF_EQ(LVarF, 0)
         EVT_CALL(func_80275F00, 25, 2)
     EVT_ELSE
         EVT_CALL(func_80275F00, 25, 4)
     EVT_END_IF
-    EVT_CALL(EnablePlayerBlur, 0)
+    EVT_CALL(EnablePlayerBlur, IDLE_SCRIPT_ENABLE)
     EVT_CALL(GetCommandAutoSuccess, LVar1)
     EVT_IF_EQ(LVar1, 1)
         EVT_IF_GT(LVarF, 3)
