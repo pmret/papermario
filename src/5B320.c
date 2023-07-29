@@ -292,7 +292,7 @@ HudScript HES_HandPointLeftHeld = {
     hs_End
 };
 
-#include "item_hud_scripts.inc.c"
+#include "item_hud_scripts.h"
 
 //TODO padding
 s32 pad_after_item_hudscripts[] = {

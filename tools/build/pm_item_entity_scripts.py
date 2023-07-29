@@ -13,7 +13,8 @@ def build(in_xml: Path, out_c: Path):
 
         f.write("#ifndef ITEM_ENTITY_SCRIPTS_H\n")
         f.write("#define ITEM_ENTITY_SCRIPTS_H\n")
-        f.write(f"/* This file is auto-generated. Do not edit. */\n\n")
+        f.write("/* This file is auto-generated. Do not edit. */\n\n")
+        f.write("#include \"item_entity.h\"\n\n")
 
         for Script in ScriptList.findall("IScript"):
             name = Script.attrib.get("name", None)

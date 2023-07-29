@@ -1,4 +1,4 @@
-<ItemScripts>
+<ItemEntityScripts>
     <IScript name="Jump" template="BASIC" icon="key/Gift"/>
     <IScript name="CompleteCake" template="BASIC" icon="key/Gift"/>
     <IScript name="CakeDone" template="BASIC" icon="key/CakeDone"/>
@@ -335,4 +335,4 @@
     <IScript name="DizzyDial" template="STANDARD" icon="battle/DizzyDial"/>
     <IScript name="ITEM_136" template="STANDARD" icon="battle/item_136"/>
     <IScript name="ITEM_137" template="STANDARD" icon="battle/item_137"/>
-</ItemScripts>
+</ItemEntityScripts>

@@ -1,4 +1,4 @@
-#include "item_hud_scripts.h"
+#include "item_hud_scripts_map.h"
 #include "message_ids.h"
 
 // handle the mapping from HudScript name to gItemHudScripts array index,
