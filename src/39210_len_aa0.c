@@ -58,7 +58,7 @@ void npc_follow_init(Npc* npc, s32 targetNpcID, FollowAnims* anims, f32 walkSpee
     followData->runSpeed = runSpeed;
     followData->idleRadius = idleRadius;
     followData->walkRadius = walkRadius;
-    npc->currentAnim = followData->anims->idle;
+    npc->curAnim = followData->anims->idle;
     npc->jumpVel = 0.0f;
     npc->flags |= NPC_FLAG_GRAVITY;
     npc->flags &= ~NPC_FLAG_IGNORE_PLAYER_COLLISION;
@@ -129,9 +129,9 @@ void npc_follow_npc(Npc* npc) {
                 npc->moveSpeed = followData->runSpeed;
             }
 
-            npc->currentAnim = followData->anims->run;
+            npc->curAnim = followData->anims->run;
             if (!(npc->flags & NPC_FLAG_GROUNDED)) {
-                npc->currentAnim = followData->anims->fall;
+                npc->curAnim = followData->anims->fall;
             }
 
             while (TRUE) {
@@ -157,7 +157,7 @@ void npc_follow_npc(Npc* npc) {
                 if (followData->targetPointIdx == followData->lastPointIdx) {
                     npc->moveSpeed = 0.0f;
                     yaw = npc->yaw;
-                    npc->currentAnim = followData->anims->idle;
+                    npc->curAnim = followData->anims->idle;
                     break;
                 }
 
@@ -165,7 +165,7 @@ void npc_follow_npc(Npc* npc) {
                 if (dist <= followData->idleRadius) {
                     npc->moveSpeed = 0.0f;
                     yaw = npc->yaw;
-                    npc->currentAnim = followData->anims->idle;
+                    npc->curAnim = followData->anims->idle;
                     followData->followState = NPC_FOLLOW_STATE_IDLE;
                     break;
                 }
@@ -230,7 +230,7 @@ void npc_follow_npc(Npc* npc) {
                 }
                 npc->moveSpeed = npc->planarFlyDist / npc->duration;
                 npc->jumpVel = (currentY + (npc->jumpScale * npc->duration * npc->duration * 0.5f)) / npc->duration;
-                npc->currentAnim = followData->anims->jump;
+                npc->curAnim = followData->anims->jump;
                 npc->flags &= ~NPC_FLAG_GRAVITY;
                 followData->followState = NPC_FOLLOW_STATE_FALL;
             }
@@ -239,7 +239,7 @@ void npc_follow_npc(Npc* npc) {
             npc->jumpVel -= npc->jumpScale;
             npc->pos.y += npc->jumpVel;
             if (npc->jumpVel <= 0.0f) {
-                npc->currentAnim = followData->anims->fall;
+                npc->curAnim = followData->anims->fall;
             }
             npc_move_heading(npc, npc->moveSpeed, npc->yaw);
             if (npc->jumpVel <= 0.0f) {
@@ -250,7 +250,7 @@ void npc_follow_npc(Npc* npc) {
                 if (npc_raycast_down_sides(npc->collisionChannel, &currentX, &currentY, &currentZ, &dist) != 0 &&
                     dist <= fabsf(npc->jumpVel) + 8.0)
                 {
-                    npc->currentAnim = followData->anims->land;
+                    npc->curAnim = followData->anims->land;
                     npc->jumpVel = 0.0f;
                     npc->pos.y = currentY;
                     npc->flags |= NPC_FLAG_GRAVITY;

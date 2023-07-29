@@ -135,7 +135,7 @@ void smoke_impact_appendGfx(void* effect) {
     gSPDisplayList(gMainGfxPos++, dlist2);
 
     guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
-    guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp58, sp18, sp98);
     guMtxF2L(sp98, &gDisplayContext->matrixStack[gMatrixListPos]);
 

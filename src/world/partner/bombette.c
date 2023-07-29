@@ -272,7 +272,7 @@ API_CALLABLE(N(UseAbility)) {
             npc->moveToPos.x = playerStatus->pos.x;
             npc->moveToPos.y = playerStatus->pos.y;
             npc->moveToPos.z = playerStatus->pos.z;
-            npc->currentAnim = ANIM_WorldBombette_Run;
+            npc->curAnim = ANIM_WorldBombette_Run;
             add_vec2D_polar(&npc->moveToPos.x, &npc->moveToPos.z, 0.0f, playerStatus->targetYaw);
             temp_f0 = clamp_angle(playerStatus->targetYaw + (N(PlayerWasFacingLeft) ? -90.0f : 90.0f));
             add_vec2D_polar(&npc->moveToPos.x, &npc->moveToPos.z, playerStatus->colliderDiameter / 4, temp_f0);
@@ -296,7 +296,7 @@ API_CALLABLE(N(UseAbility)) {
             disable_npc_blur(npc);
             suggest_player_anim_allow_backward(ANIM_MarioW1_Lift);
             npc->yaw = playerStatus->targetYaw;
-            npc->currentAnim = ANIM_WorldBombette_Walk;
+            npc->curAnim = ANIM_WorldBombette_Walk;
             script->USE_STATE = BLAST_STATE_LIFT;
             script->functionTemp[1] = 10;
             // fallthrough
@@ -317,7 +317,7 @@ API_CALLABLE(N(UseAbility)) {
             sfx_play_sound_at_npc(SOUND_80000000, SOUND_SPACE_MODE_0, NPC_PARTNER);
             N(PlayingFuseSound) = TRUE;
             add_vec2D_polar(&npc->pos.x, &npc->pos.z, 0.0f, npc->yaw);
-            npc->currentAnim = ANIM_WorldBombette_WalkLit;
+            npc->curAnim = ANIM_WorldBombette_WalkLit;
             npc->jumpVel = 0.0f;
             N(MovementBlocked) = FALSE;
             npc->flags |= NPC_FLAG_GRAVITY;
@@ -351,7 +351,7 @@ API_CALLABLE(N(UseAbility)) {
                     if (playerStatus->actionState == ACTION_STATE_IDLE) {
                         suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
                     }
-                    npc->currentAnim = ANIM_WorldBombette_AboutToExplode;
+                    npc->curAnim = ANIM_WorldBombette_AboutToExplode;
                     npc->flags &= ~NPC_FLAG_GRAVITY;
                     script->functionTemp[1] = 2;
                     script->USE_STATE = BLAST_STATE_EXPLODE;
@@ -393,7 +393,7 @@ API_CALLABLE(N(UseAbility)) {
                     break;
                 }
             }
-            npc->currentAnim = ANIM_WorldBombette_AboutToExplode;
+            npc->curAnim = ANIM_WorldBombette_AboutToExplode;
             script->functionTemp[1] = 20;
             script->USE_STATE = BLAST_STATE_EXPLODE;
             if (playerStatus->actionState == ACTION_STATE_IDLE) {
@@ -411,8 +411,8 @@ API_CALLABLE(N(UseAbility)) {
                 N(PlayingFuseSound) = FALSE;
                 sfx_stop_sound(SOUND_80000000);
             }
-            fx_explosion(gPlayerData.partners[gPlayerData.currentPartner].level, npc->pos.x, npc->pos.y + (npc->collisionHeight * 0.5f), npc->pos.z);
-            switch (gPlayerData.partners[gPlayerData.currentPartner].level) {
+            fx_explosion(gPlayerData.partners[gPlayerData.curPartner].level, npc->pos.x, npc->pos.y + (npc->collisionHeight * 0.5f), npc->pos.z);
+            switch (gPlayerData.partners[gPlayerData.curPartner].level) {
                 case 0:
                     sfx_play_sound_at_npc(SOUND_CANNON1, SOUND_SPACE_MODE_0, NPC_PARTNER);
                     break;
@@ -452,9 +452,9 @@ API_CALLABLE(N(UseAbility)) {
             collisionStatus->bombetteExplosionPos.x = npc->pos.x;
             collisionStatus->bombetteExplosionPos.y = npc->pos.y;
             collisionStatus->bombetteExplosionPos.z = npc->pos.z;
-            npc->currentAnim = ANIM_WorldBombette_Aftermath;
+            npc->curAnim = ANIM_WorldBombette_Aftermath;
             angleToPlayer = atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
-            if (!(get_clamped_angle_diff(camera->currentYaw, angleToPlayer) < 0.0f)) {
+            if (!(get_clamped_angle_diff(camera->curYaw, angleToPlayer) < 0.0f)) {
                 script->functionTemp[2] = 1;
             } else {
                 script->functionTemp[2] = -1;
@@ -475,10 +475,10 @@ API_CALLABLE(N(UseAbility)) {
                 npc->pos.x = playerStatus->pos.x;
                 npc->pos.z = playerStatus->pos.z;
             }
-            npc->yaw = clamp_angle(gCameras[CAM_DEFAULT].currentYaw + playerStatus->spriteFacingAngle);
+            npc->yaw = clamp_angle(gCameras[CAM_DEFAULT].curYaw + playerStatus->spriteFacingAngle);
             add_vec2D_polar(&npc->pos.x, &npc->pos.z, 10.0f, npc->yaw);
             npc->jumpVel = 0.0f;
-            npc->currentAnim = ANIM_WorldBombette_Aftermath;
+            npc->curAnim = ANIM_WorldBombette_Aftermath;
             npc->flags |= NPC_FLAG_JUMPING;
             script->USE_STATE = BLAST_STATE_FALL;
             break;
@@ -522,7 +522,7 @@ API_CALLABLE(N(UseAbility)) {
             npc->pos.y = playerStatus->pos.y;
             npc->rot.x = 0.0f;
             npc->rot.z = 0.0f;
-            npc->currentAnim = ANIM_WorldBombette_Idle;
+            npc->curAnim = ANIM_WorldBombette_Idle;
             partner_clear_player_tracking(npc);
             if (N(PlayingFuseSound)) {
                 N(PlayingFuseSound) = FALSE;
@@ -541,7 +541,7 @@ API_CALLABLE(N(UseAbility)) {
             npc->pos.y = playerStatus->pos.y;
             npc->rot.x = 0.0f;
             npc->rot.z = 0.0f;
-            npc->currentAnim = ANIM_WorldBombette_Idle;
+            npc->curAnim = ANIM_WorldBombette_Idle;
             npc->pos.x = playerStatus->pos.x;
             npc->pos.y = playerStatus->pos.y;
             npc->pos.z = playerStatus->pos.z;
@@ -678,7 +678,7 @@ void N(pre_battle)(Npc* bombette) {
         bombette->pos.y = playerStatus->pos.y;
         bombette->rot.x = 0.0f;
         bombette->rot.z = 0.0f;
-        bombette->currentAnim = ANIM_WorldBombette_Idle;
+        bombette->curAnim = ANIM_WorldBombette_Idle;
         partner_clear_player_tracking(bombette);
         disable_npc_blur(bombette);
 

@@ -122,13 +122,13 @@ API_CALLABLE(N(Update)) {
                 if (!N(WattIsMoving)) {
                     N(WattIsMoving) = TRUE;
                     N(reset_static_effect)(1);
-                    watt->currentAnim = ANIM_WorldWatt_Run;
+                    watt->curAnim = ANIM_WorldWatt_Run;
                 }
             } else {
                 if (N(WattIsMoving)) {
                     N(WattIsMoving) = FALSE;
                     N(reset_static_effect)(0);
-                    watt->currentAnim = ANIM_WorldWatt_Idle;
+                    watt->curAnim = ANIM_WorldWatt_Idle;
                 }
             }
             if (N(StaticEffect) != NULL) {
@@ -253,7 +253,7 @@ API_CALLABLE(N(UseAbility)) {
             partnerStatus->shouldResumeAbility = FALSE;
             playerStatus->animFlags |= (PA_FLAG_USING_WATT | PA_FLAG_WATT_IN_HANDS);
             N(update_player_carry_anim)();
-            npc->currentAnim = ANIM_WorldWatt_Idle;
+            npc->curAnim = ANIM_WorldWatt_Idle;
             N(AbilityState) = SHINING_STATE_HOLDING;
             script->functionTemp[1] = 2;
         }
@@ -297,10 +297,10 @@ API_CALLABLE(N(UseAbility)) {
                 npc->moveToPos.x = playerStatus->pos.x;
                 npc->moveToPos.y = playerStatus->pos.y + 5.0f;
                 npc->moveToPos.z = playerStatus->pos.z;
-                npc->currentAnim = ANIM_WorldWatt_Walk;
+                npc->curAnim = ANIM_WorldWatt_Walk;
                 add_vec2D_polar(&npc->moveToPos.x, &npc->moveToPos.z, 15.0f, playerStatus->targetYaw);
                 npc->yaw = playerStatus->targetYaw;
-                npc->currentAnim = ANIM_WorldWatt_Idle;
+                npc->curAnim = ANIM_WorldWatt_Idle;
                 playerStatus->animFlags |= PA_FLAG_WATT_IN_HANDS;
                 N(update_player_carry_anim)();
                 npc_set_palswap_mode_A(npc, 1);
@@ -317,7 +317,7 @@ API_CALLABLE(N(UseAbility)) {
                 npc->moveToPos.x = playerStatus->pos.x;
                 npc->moveToPos.y = playerStatus->pos.y + 5.0f;
                 npc->moveToPos.z = playerStatus->pos.z;
-                npc->currentAnim = ANIM_WorldWatt_Walk;
+                npc->curAnim = ANIM_WorldWatt_Walk;
                 add_vec2D_polar(&npc->moveToPos.x, &npc->moveToPos.z, 15.0f, playerStatus->targetYaw);
                 npc->duration = 8;
                 npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
@@ -331,7 +331,7 @@ API_CALLABLE(N(UseAbility)) {
             npc->duration--;
             if (npc->duration == 0) {
                 npc->yaw = playerStatus->targetYaw;
-                npc->currentAnim = ANIM_WorldWatt_Idle;
+                npc->curAnim = ANIM_WorldWatt_Idle;
                 partnerStatus->actingPartner = PARTNER_WATT;
                 playerStatus->animFlags |= PA_FLAG_WATT_IN_HANDS;
                 N(update_player_carry_anim)();
@@ -369,7 +369,7 @@ API_CALLABLE(N(UseAbility)) {
 
     if (N(AbilityState) == SHINING_STATE_RELEASE) {
         playerStatus->animFlags &= ~(PA_FLAG_WATT_IN_HANDS | PA_FLAG_USING_WATT);
-        npc->currentAnim = ANIM_WorldWatt_Idle;
+        npc->curAnim = ANIM_WorldWatt_Idle;
         partner_clear_player_tracking(npc);
         N(IsPlayerHolding) = FALSE;
         partnerStatus->actingPartner = PARTNER_NONE;
@@ -497,7 +497,7 @@ API_CALLABLE(N(EnterMap)) {
 
 void N(update_player_carry_anim)(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    f32 currentSpeed = playerStatus->currentSpeed;
+    f32 currentSpeed = playerStatus->curSpeed;
     AnimID anim;
 
     if (playerStatus->runSpeed <= currentSpeed) {
@@ -539,7 +539,7 @@ void N(sync_held_position)(void) {
             }
         }
 
-        angle = DEG_TO_RAD(camera->currentYaw + 270.0f - gPlayerStatusPtr->spriteFacingAngle + angleOffset);
+        angle = DEG_TO_RAD(camera->curYaw + 270.0f - gPlayerStatusPtr->spriteFacingAngle + angleOffset);
 
         playerStatus = gPlayerStatusPtr;
         partnerNPC = wPartnerNpc;

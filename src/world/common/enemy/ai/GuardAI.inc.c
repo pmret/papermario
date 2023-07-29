@@ -26,7 +26,7 @@ void N(GuardAI_IdleInit)(Evt* script, GuardAISettings* aiSettings, EnemyDetectVo
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
+    npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
     script->AI_TEMP_STATE = AI_STATE_GUARD_IDLE;
 
     if (enemy->flags & ENEMY_FLAG_100000) {
@@ -89,7 +89,7 @@ void N(GuardAI_ChaseInit)(Evt* script, GuardAISettings* aiSettings, EnemyDetectV
     f32 angleDiff;
 
     npc->duration = (aiSettings->chaseUpdateInterval / 2) + rand_int(aiSettings->chaseUpdateInterval / 2 + 1);
-    npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_CHASE];
+    npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_CHASE];
     npc->moveSpeed = aiSettings->chaseSpeed;
 
     tempAngle = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
@@ -116,7 +116,7 @@ void N(GuardAI_Chase)(Evt* script, GuardAISettings* aiSettings, EnemyDetectVolum
 
     if (!basic_ai_check_player_dist(arg2, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 1)) {
         fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
+        npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         npc->duration = 25;
         script->AI_TEMP_STATE = AI_STATE_LOSE_PLAYER;
     } else {
@@ -142,7 +142,7 @@ void N(GuardAI_ReturnHomeInit)(Evt* script, GuardAISettings* aiSettings, EnemyDe
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_WALK];
+    npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_WALK];
     if (enemy->territory->wander.moveSpeedOverride < 0) {
         npc->moveSpeed = aiSettings->chaseSpeed * 0.3;
     } else {
@@ -209,7 +209,7 @@ API_CALLABLE(N(GuardAI_Main)) {
         script->AI_TEMP_STATE = AI_STATE_GUARD_IDLE_INIT;
         npc->duration = 0;
         enemy->varTable[0] = npc->yaw;
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
+        npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         npc->flags &= ~NPC_FLAG_JUMPING;
 
         if (!(enemy->territory->wander.isFlying)) {

@@ -332,8 +332,8 @@ void entity_GiantChest_open(Entity* entity) {
                 chest->state++;
                 if (chest->itemID != 0) {
                     suggest_player_anim_always_forward(ANIM_MarioW1_Lift);
-                    sin_cos_rad(DEG_TO_RAD(90.0f - gCameras[CAM_DEFAULT].currentYaw), &sinRight, &cosRight);
-                    sin_cos_rad(DEG_TO_RAD(180.0f - gCameras[CAM_DEFAULT].currentYaw), &sinFwd, &cosFwd);
+                    sin_cos_rad(DEG_TO_RAD(90.0f - gCameras[CAM_DEFAULT].curYaw), &sinRight, &cosRight);
+                    sin_cos_rad(DEG_TO_RAD(180.0f - gCameras[CAM_DEFAULT].curYaw), &sinFwd, &cosFwd);
                     horizontalOffset = 0.0f;
                     depthOffset = 4.0f;
                     //RadialFlowOut

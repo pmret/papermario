@@ -149,7 +149,7 @@ API_CALLABLE(N(SetupDemoScene1)) {
             func_800EF3D4(0);
             set_npc_yaw(wPartnerNpc, 90.0f);
             playerStatus->targetYaw = 90.0f;
-            playerStatus->currentYaw = 90.0f;
+            playerStatus->curYaw = 90.0f;
             playerStatus->spriteFacingAngle = 0.0f;
             return ApiStatus_DONE2;
     }
@@ -186,7 +186,7 @@ API_CALLABLE(N(SetupDemoScene2)) {
             func_800EF3D4(0);
             set_npc_yaw(wPartnerNpc, 90.0f);
             playerStatus->targetYaw = 90.0f;
-            playerStatus->currentYaw = 90.0f;
+            playerStatus->curYaw = 90.0f;
             playerStatus->spriteFacingAngle = 0.0f;
             return ApiStatus_DONE2;
     }

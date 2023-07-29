@@ -108,7 +108,7 @@ void blast_appendGfx(void *effect) {
     gSPDisplayList(gMainGfxPos++, D_E007C510[unk_20]);
 
     guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
-    guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp58, sp18, sp98);
     guScaleF(sp18, data->unk_10, data->unk_10, 1.0f);
     guMtxCatF(sp18, sp98, sp98);

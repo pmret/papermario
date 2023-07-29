@@ -125,7 +125,7 @@ API_CALLABLE(N(SetupDemoScene)) {
         case 3:
             wPartnerNpc->yaw = 270.0f;
             playerStatus->targetYaw = 270.0f;
-            playerStatus->currentYaw = 270.0f;
+            playerStatus->curYaw = 270.0f;
             playerStatus->spriteFacingAngle = 180.0f;
             D_8024A290->functionTemp[1] = 1;
             return ApiStatus_DONE2;

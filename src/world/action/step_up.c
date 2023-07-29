@@ -95,18 +95,18 @@ void action_update_step_up_peach(void) {
     if (playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED) {
         playerStatus->flags &= ~PS_FLAG_ACTION_STATE_CHANGED;
         suggest_player_anim_allow_backward(ANIM_Peach1_StepUp);
-        playerStatus->currentStateTime = 8;
+        playerStatus->curStateTime = 8;
     }
 
-    if (playerStatus->currentStateTime != 0) {
-        playerStatus->currentStateTime--;
-        if (playerStatus->currentStateTime == 4) {
+    if (playerStatus->curStateTime != 0) {
+        playerStatus->curStateTime--;
+        if (playerStatus->curStateTime == 4) {
             try_player_footstep_sounds(1);
         }
     } else {
         if (!(playerStatus->flags & PS_FLAG_CUTSCENE_MOVEMENT)) {
             set_action_state(ACTION_STATE_IDLE);
-        } else if (playerStatus->currentSpeed >= playerStatus->runSpeed) {
+        } else if (playerStatus->curSpeed >= playerStatus->runSpeed) {
             set_action_state(ACTION_STATE_RUN);
         } else {
             set_action_state(ACTION_STATE_WALK);

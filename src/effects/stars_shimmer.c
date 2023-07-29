@@ -297,7 +297,7 @@ void stars_shimmer_appendGfx(void* effect) {
 
     temp_s4 = (data->lifeTime - 1) * 3;
     guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
-    guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp58, sp18, sp98);
 
     switch (type) {

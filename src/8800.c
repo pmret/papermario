@@ -366,9 +366,9 @@ Camera* initialize_next_camera(CameraInitData* initData) {
     camera->lookAt_obj.x = 0;
     camera->lookAt_obj.y = 0;
     camera->lookAt_obj.z = -100.0f;
-    camera->currentYaw = 0;
-    camera->currentBoomLength = 0;
-    camera->currentYOffset = 0;
+    camera->curYaw = 0;
+    camera->curBoomLength = 0;
+    camera->curYOffset = 0;
     camera->trueRot.x = 0.0f;
     camera->trueRot.y = 0.0f;
     camera->trueRot.z = 0.0f;

@@ -124,7 +124,7 @@ void N(animate_and_draw_record)(void* renderData) {
         case RECORD_STATE_VISIBLE:
             data->alpha = 255;
             data->curAlpha = 255;
-            if (gGameStatusPtr->currentButtons[0] & (BUTTON_A | BUTTON_B)) {
+            if (gGameStatusPtr->curButtons[0] & (BUTTON_A | BUTTON_B)) {
                 data->state = RECORD_START_HIDE;
             }
             if (data->state != RECORD_START_HIDE) {

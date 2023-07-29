@@ -345,7 +345,7 @@ void star_spirits_energy_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f,
+    guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].curYaw, 0.0f,
                      data->unk_3C, data->unk_08, data->unk_0C, data->unk_10);
     guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
 

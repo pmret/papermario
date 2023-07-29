@@ -16,7 +16,7 @@ void update_player_input(void) {
 
     playerStatus->stickAxis[0] = gGameStatusPtr->stickX[0];
     playerStatus->stickAxis[1] = gGameStatusPtr->stickY[0];
-    playerStatus->currentButtons = gGameStatusPtr->currentButtons[0];
+    playerStatus->curButtons = gGameStatusPtr->curButtons[0];
     playerStatus->pressedButtons = gGameStatusPtr->pressedButtons[0];
     playerStatus->heldButtons = gGameStatusPtr->heldButtons[0];
 
@@ -27,7 +27,7 @@ void update_player_input(void) {
 
     playerStatus->stickXBuffer[inputBufPos] = playerStatus->stickAxis[0];
     playerStatus->stickYBuffer[inputBufPos] = playerStatus->stickAxis[1];
-    playerStatus->currentButtonsBuffer[inputBufPos] = playerStatus->currentButtons;
+    playerStatus->curButtonsBuffer[inputBufPos] = playerStatus->curButtons;
     playerStatus->pressedButtonsBuffer[inputBufPos] = playerStatus->pressedButtons;
     playerStatus->heldButtonsBuffer[inputBufPos] = playerStatus->heldButtons;
     playerStatus->inputBufPos = inputBufPos;
@@ -35,7 +35,7 @@ void update_player_input(void) {
     if (playerStatus->flags & (PS_FLAG_INPUT_DISABLED | PS_FLAG_NO_STATIC_COLLISION)) {
         playerStatus->stickAxis[0] = 0;
         playerStatus->stickAxis[1] = 0;
-        playerStatus->currentButtons = 0;
+        playerStatus->curButtons = 0;
         playerStatus->pressedButtons = 0;
         playerStatus->heldButtons = 0;
     }
@@ -97,7 +97,7 @@ void reset_player_status(void) {
 
     set_action_state(ACTION_STATE_IDLE);
 
-    playerStatus->currentSpeed = 0.0f;
+    playerStatus->curSpeed = 0.0f;
     playerStatus->targetYaw = 0.0f;
     playerStatus->overlapPushAmount = 0.0f;
     playerStatus->overlapPushYaw = 0.0f;
@@ -106,7 +106,7 @@ void reset_player_status(void) {
     playerStatus->pos.x = 0.0f;
     playerStatus->pos.y = 0.0f;
     playerStatus->pos.z = 0.0f;
-    playerStatus->currentYaw = 0.0f;
+    playerStatus->curYaw = 0.0f;
     playerStatus->flipYaw[CAM_DEFAULT] = 0.0f;
     playerStatus->flipYaw[CAM_BATTLE] = 0.0f;
     playerStatus->flipYaw[CAM_TATTLE] = 0.0f;
@@ -119,7 +119,7 @@ void reset_player_status(void) {
             playerStatus->pos.x = (*mapSettings->entryList)[gGameStatusPtr->entryID].x;
             playerStatus->pos.y = (*mapSettings->entryList)[gGameStatusPtr->entryID].y;
             playerStatus->pos.z = (*mapSettings->entryList)[gGameStatusPtr->entryID].z;
-            playerStatus->currentYaw = (*mapSettings->entryList)[gGameStatusPtr->entryID].yaw;
+            playerStatus->curYaw = (*mapSettings->entryList)[gGameStatusPtr->entryID].yaw;
         }
     }
 
@@ -134,7 +134,7 @@ void reset_player_status(void) {
 void get_packed_buttons(s32* arg0) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    *arg0 = (u16)playerStatus->currentButtons | (playerStatus->pressedButtons << 16);
+    *arg0 = (u16)playerStatus->curButtons | (playerStatus->pressedButtons << 16);
 }
 
 void player_input_to_move_vector(f32* angle, f32* magnitude) {
@@ -153,7 +153,7 @@ void player_input_to_move_vector(f32* angle, f32* magnitude) {
         mag = magMax;
     }
 
-    ang = clamp_angle(atan2(0.0f, 0.0f, stickAxisX, stickAxisY) + gCameras[CAM_DEFAULT].currentYaw);
+    ang = clamp_angle(atan2(0.0f, 0.0f, stickAxisX, stickAxisY) + gCameras[CAM_DEFAULT].curYaw);
     if (mag == 0.0f) {
         ang = playerStatus->targetYaw;
     }
@@ -175,7 +175,7 @@ void game_input_to_move_vector(f32* outAngle, f32* outMagnitude) {
         magnitude = maxRadius;
     }
 
-    angle = clamp_angle(atan2(0.0f, 0.0f, stickX, stickY) + gCameras[CAM_DEFAULT].currentYaw);
+    angle = clamp_angle(atan2(0.0f, 0.0f, stickX, stickY) + gCameras[CAM_DEFAULT].curYaw);
     if (magnitude == 0.0f) {
         angle = playerStatus->targetYaw;
     }

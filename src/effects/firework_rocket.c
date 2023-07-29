@@ -238,7 +238,7 @@ void firework_rocket_appendGfx(void* effect) {
     Vec3b* sparkDir;
     s32 i;
 
-    negYaw = -camera->currentYaw;
+    negYaw = -camera->curYaw;
     sinTheta = sin_deg(negYaw);
     cosTheta = cos_deg(negYaw);
     isExploded = data->isExploded;

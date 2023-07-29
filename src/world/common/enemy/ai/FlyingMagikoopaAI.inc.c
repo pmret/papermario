@@ -193,14 +193,14 @@ void N(FlyingMagikoopaAI_21)(Evt* script, MobileAISettings* aiSettings, EnemyDet
 
     npc->duration--;
     if (npc->duration == 0) {
-        npc->currentAnim = enemy->animList[0];
+        npc->curAnim = enemy->animList[0];
         fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &emoteTemp);
-        npc->currentAnim = enemy->animList[0];
+        npc->curAnim = enemy->animList[0];
         npc->duration = 15;
         script->functionTemp[0] = 50;
     } else if ((N(MagikoopaAI_CanShootSpell)(script, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, territory) == 1) && (npc->turnAroundYawAdjustment == 0)) {
         ai_enemy_play_sound(npc, 0x20D4, 0);
-        npc->currentAnim = enemy->animList[8];
+        npc->curAnim = enemy->animList[8];
         posX = npc->pos.x;
         posY = npc->pos.y + 29.0f;
         posZ = npc->pos.z + 1.0f;
@@ -217,7 +217,7 @@ void N(FlyingMagikoopaAI_22)(Evt* script, MobileAISettings* aiSettings, EnemyDet
 
     npc->duration--;
     if (npc->duration <= 0) {
-        npc->currentAnim = enemy->animList[9];
+        npc->curAnim = enemy->animList[9];
         npc->duration = 7;
         script->functionTemp[0] = 0x17;
     }
@@ -234,7 +234,7 @@ void N(FlyingMagikoopaAI_23)(Evt* script, MobileAISettings* aiSettings, EnemyDet
         temp_s1 = N(MagikoopaAI_CanShootSpell)(script, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, territory);
         if (temp_s1 != 1) {
             fx_emote(2, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &emoteTemp);
-            npc->currentAnim = enemy->animList[0];
+            npc->curAnim = enemy->animList[0];
             npc->duration = 15;
             script->functionTemp[0] =  50;
         } else {
@@ -256,7 +256,7 @@ void N(FlyingMagikoopaAI_24)(Evt* script, MobileAISettings* aiSettings, EnemyDet
 
     npc->duration--;
     if (npc->duration <= 0) {
-        npc->currentAnim = enemy->animList[0];
+        npc->curAnim = enemy->animList[0];
         npc->duration = 3;
         script->AI_TEMP_STATE = 50;
     }
@@ -361,7 +361,7 @@ API_CALLABLE(N(FlyingMagikoopaAI_Main)) {
 API_CALLABLE(N(FlyingMagikoopaAI_OnHitInit)) {
     Enemy* enemy = script->owner1.enemy;
 
-    evt_set_variable(script, LVar0, gCurrentEncounter.currentEnemy == enemy);
+    evt_set_variable(script, LVar0, gCurrentEncounter.curEnemy == enemy);
     return ApiStatus_DONE2;
 }
 

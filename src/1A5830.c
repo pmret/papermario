@@ -129,16 +129,16 @@ void dispatch_event_actor(Actor* actor, s32 event) {
 HitResult calc_enemy_test_target(Actor* actor) {
     PlayerData* playerData = &gPlayerData;
     BattleStatus* battleStatus = &gBattleStatus;
-    s32 targetID = battleStatus->currentTargetID;
-    s32 targetPartIdx = battleStatus->currentTargetPart;
+    s32 targetID = battleStatus->curTargetID;
+    s32 targetPartIdx = battleStatus->curTargetPart;
     Actor* target;
     Actor* target2;
     ActorPart* targetPart;
     s32 actorClass;
     s32 hitResult;
 
-    battleStatus->currentTargetID2 = battleStatus->currentTargetID;
-    battleStatus->currentTargetPart2 = battleStatus->currentTargetPart;
+    battleStatus->curTargetID2 = battleStatus->curTargetID;
+    battleStatus->curTargetPart2 = battleStatus->curTargetPart;
 
     target = get_actor(targetID);
     if (target == NULL) {
@@ -151,16 +151,16 @@ HitResult calc_enemy_test_target(Actor* actor) {
     actorClass = targetID & ACTOR_CLASS_MASK;
     switch (actorClass) {
         case ACTOR_CLASS_PLAYER:
-            target->currentHP = playerData->curHP;
+            target->curHP = playerData->curHP;
             break;
         case ACTOR_CLASS_PARTNER:
-            target->currentHP = 127;
+            target->curHP = 127;
             break;
         case ACTOR_CLASS_ENEMY:
             break;
     }
 
-    if (battleStatus->currentAttackElement & DAMAGE_TYPE_TRIGGER_LUCKY) {
+    if (battleStatus->curAttackElement & DAMAGE_TYPE_TRIGGER_LUCKY) {
         dispatch_event_general(target, EVENT_LUCKY);
         return HIT_RESULT_HIT;
     }
@@ -168,7 +168,7 @@ HitResult calc_enemy_test_target(Actor* actor) {
     hitResult = HIT_RESULT_HIT;
     target2 = target;
     if (targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY || battleStatus->outtaSightActive || target2->transparentStatus == STATUS_KEY_TRANSPARENT) {
-        if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_MAGIC)) {
+        if (!(battleStatus->curAttackElement & DAMAGE_TYPE_MAGIC)) {
             hitResult = HIT_RESULT_MISS;
         }
     }
@@ -191,7 +191,7 @@ HitResult calc_enemy_test_target(Actor* actor) {
                         break;
                     }
                 }
-                if (player_team_is_ability_active(target2, ABILITY_CLOSE_CALL) && (target2->currentHP < 6)) {
+                if (player_team_is_ability_active(target2, ABILITY_CLOSE_CALL) && (target2->curHP < 6)) {
                     if (rand_int(100) < 30) {
                         hitResult = HIT_RESULT_LUCKY;
                         break;
@@ -233,8 +233,8 @@ HitResult calc_enemy_test_target(Actor* actor) {
 HitResult calc_enemy_damage_target(Actor* attacker) {
     BattleStatus* battleStatus = &gBattleStatus;
     ActorState* state = &attacker->state;
-    s32 targetID = battleStatus->currentTargetID;
-    s32 targetPartIdx = battleStatus->currentTargetPart;
+    s32 targetID = battleStatus->curTargetID;
+    s32 targetPartIdx = battleStatus->curTargetPart;
     s32 actorClass;
     Actor* target;
     ActorPart* targetPart;
@@ -257,8 +257,8 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
     battleStatus->lastAttackDamage = 0;
 
     battleStatus->attackerActorID = attacker->actorID;
-    battleStatus->currentTargetID2 = targetID;
-    battleStatus->currentTargetPart2 = targetPartIdx;
+    battleStatus->curTargetID2 = targetID;
+    battleStatus->curTargetPart2 = targetPartIdx;
 
     target = get_actor(targetID);
     if (target == NULL) {
@@ -273,10 +273,10 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
 
     switch (actorClass) {
         case ACTOR_CLASS_PLAYER:
-            target->currentHP = gPlayerData.curHP;
+            target->curHP = gPlayerData.curHP;
             break;
         case ACTOR_CLASS_PARTNER:
-            target->currentHP = 127;
+            target->curHP = 127;
             break;
         case ACTOR_CLASS_ENEMY:
             break;
@@ -290,7 +290,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
 
     if (target->transparentStatus == STATUS_KEY_TRANSPARENT
         || targetPart->eventFlags & ACTOR_EVENT_FLAG_800
-        && !(battleStatus->currentAttackElement & DAMAGE_TYPE_QUAKE)
+        && !(battleStatus->curAttackElement & DAMAGE_TYPE_QUAKE)
     ) {
         return HIT_RESULT_MISS;
     }
@@ -305,8 +305,8 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
 
     // handle attack element
 
-    if (battleStatus->currentAttackElement & DAMAGE_TYPE_BLAST) {
-        if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_NO_CONTACT)
+    if (battleStatus->curAttackElement & DAMAGE_TYPE_BLAST) {
+        if (!(battleStatus->curAttackElement & DAMAGE_TYPE_NO_CONTACT)
             && (targetPart->eventFlags & ACTOR_EVENT_FLAG_EXPLODE_ON_IGNITION)
         ) {
             do {
@@ -316,31 +316,31 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
             return HIT_RESULT_BACKFIRE;
         }
     }
-    if ((battleStatus->currentAttackElement & DAMAGE_TYPE_QUAKE) && (target->flags & ACTOR_FLAG_FLYING)) {
+    if ((battleStatus->curAttackElement & DAMAGE_TYPE_QUAKE) && (target->flags & ACTOR_FLAG_FLYING)) {
         play_hit_sound(attacker, state->goalPos.x, state->goalPos.y, state->goalPos.z, 1);
         return HIT_RESULT_NO_DAMAGE;
     }
-    if (battleStatus->currentAttackElement & DAMAGE_TYPE_FIRE) {
+    if (battleStatus->curAttackElement & DAMAGE_TYPE_FIRE) {
         fx_ring_blast(0, state->goalPos.x, state->goalPos.y, state->goalPos.z + 5.0f, 1.0f, 24);
         isFire = TRUE;
     }
-    if (battleStatus->currentAttackElement & DAMAGE_TYPE_SHOCK) {
+    if (battleStatus->curAttackElement & DAMAGE_TYPE_SHOCK) {
         apply_shock_effect(target);
         isElectric = TRUE;
     }
-    if (battleStatus->currentAttackElement & DAMAGE_TYPE_WATER) {
+    if (battleStatus->curAttackElement & DAMAGE_TYPE_WATER) {
         fx_water_splash(0, state->goalPos.x, state->goalPos.y, state->goalPos.z + 5.0f, 1.0f, 24);
         isWater = TRUE;
     }
-    if (battleStatus->currentAttackElement & DAMAGE_TYPE_ICE) {
+    if (battleStatus->curAttackElement & DAMAGE_TYPE_ICE) {
         fx_big_snowflakes(0, state->goalPos.x, state->goalPos.y, state->goalPos.z + 5.0f);
         isIce = TRUE;
     }
 
     if (!(attacker->staticStatus == STATUS_KEY_STATIC)
         && ((target->staticStatus == STATUS_KEY_STATIC) || (targetPart->eventFlags & ACTOR_EVENT_FLAG_ELECTRIFIED))
-        && !(battleStatus->currentAttackElement & (DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_NO_CONTACT))
-        && !(battleStatus->currentAttackEventSuppression & SUPPRESS_EVENT_SHOCK_CONTACT)
+        && !(battleStatus->curAttackElement & (DAMAGE_TYPE_SHOCK | DAMAGE_TYPE_NO_CONTACT))
+        && !(battleStatus->curAttackEventSuppression & SUPPRESS_EVENT_SHOCK_CONTACT)
         && !has_enchanted_part(attacker)) // enchanted attacks ignore electrified defenders
     {
         madeElectricContact = TRUE;
@@ -351,14 +351,14 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
 
     gBattleStatus.flags1 &= ~BS_FLAGS1_ATK_BLOCKED;
 
-    defense = get_defense(target, targetPart->defenseTable, battleStatus->currentAttackElement);
+    defense = get_defense(target, targetPart->defenseTable, battleStatus->curAttackElement);
 
-    if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_IGNORE_DEFENSE)) {
+    if (!(battleStatus->curAttackElement & DAMAGE_TYPE_IGNORE_DEFENSE)) {
         defense += target->defenseBoost;
 
         if (actorClass == ACTOR_CLASS_PLAYER) {
             if (battleStatus->waterBlockTurnsLeft > 0) {
-                if ((battleStatus->currentAttackElement & (DAMAGE_TYPE_BLAST | DAMAGE_TYPE_FIRE))) {
+                if ((battleStatus->curAttackElement & (DAMAGE_TYPE_BLAST | DAMAGE_TYPE_FIRE))) {
                     defense += 2;
                 } else {
                     defense += 1;
@@ -371,7 +371,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
         }
     }
 
-    damage = battleStatus->currentAttackDamage;
+    damage = battleStatus->curAttackDamage;
 
     switch (actorClass) {
         case ACTOR_CLASS_PLAYER:
@@ -407,7 +407,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
     isPlayer = actorClass == ACTOR_CLASS_PLAYER;
     if (isPlayer) {
         if (player_team_is_ability_active(target, ABILITY_FIRE_SHIELD)) {
-            if (battleStatus->currentAttackElement & DAMAGE_TYPE_FIRE) {
+            if (battleStatus->curAttackElement & DAMAGE_TYPE_FIRE) {
                 damage--;
             }
         }
@@ -416,7 +416,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
         damage -= player_team_is_ability_active(target, ABILITY_P_DOWN_D_UP);
         damage += player_team_is_ability_active(target, ABILITY_P_UP_D_DOWN);
 
-        if (target->currentHP <= 5) {
+        if (target->curHP <= 5) {
             if (player_team_is_ability_active(target, ABILITY_LAST_STAND)) {
                 damage /= 2;
             }
@@ -426,7 +426,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
     switch (actorClass) {
         case ACTOR_CLASS_PLAYER:
             // TODO figure out how to better write target->debuff >= STATUS_KEY_POISON
-            if ((target->debuff == 0 || target->debuff >= STATUS_KEY_POISON) && (target->stoneStatus == 0) && !(battleStatus->currentAttackElement & DAMAGE_TYPE_UNBLOCKABLE)) {
+            if ((target->debuff == 0 || target->debuff >= STATUS_KEY_POISON) && (target->stoneStatus == 0) && !(battleStatus->curAttackElement & DAMAGE_TYPE_UNBLOCKABLE)) {
                 s32 blocked;
 
                 if (player_team_is_ability_active(target, ABILITY_BERSERKER)) {
@@ -448,7 +448,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
             break;
         case ACTOR_CLASS_PARTNER:
             if (target->stoneStatus == 0) {
-                if (target->koStatus == 0 && !(battleStatus->currentAttackElement & DAMAGE_TYPE_UNBLOCKABLE)) {
+                if (target->koStatus == 0 && !(battleStatus->curAttackElement & DAMAGE_TYPE_UNBLOCKABLE)) {
                     if (check_block_input(BUTTON_A)) {
                         damage = 0;
                         sfx_play_sound_at_position(SOUND_231, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
@@ -471,13 +471,13 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
     event = EVENT_HIT_COMBO;
     if (damage < 1) {
         target->hpChangeCounter = 0;
-        if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_STATUS_ALWAYS_HITS)) {
+        if (!(battleStatus->curAttackElement & DAMAGE_TYPE_STATUS_ALWAYS_HITS)) {
             hitResult = HIT_RESULT_NO_DAMAGE;
             event = EVENT_ZERO_DAMAGE;
         } else {
             hitResult = HIT_RESULT_NO_DAMAGE;
             event = EVENT_ZERO_DAMAGE;
-            if (target->currentHP < 1) {
+            if (target->curHP < 1) {
                 event = EVENT_DEATH;
             }
         }
@@ -491,11 +491,11 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
             && !(gBattleStatus.flags1 & BS_FLAGS1_TUTORIAL_BATTLE)
         ) {
             if (!(target->flags & ACTOR_FLAG_NO_DMG_APPLY)) {
-                target->currentHP -= damage;
+                target->curHP -= damage;
             }
 
-            if (target->currentHP < 1) {
-                target->currentHP = 0;
+            if (target->curHP < 1) {
+                target->curHP = 0;
                 event = EVENT_DEATH;
             }
         }
@@ -505,7 +505,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
 
         if (actorClass == ACTOR_CLASS_PLAYER) {
             battleStatus->damageTaken += damage;
-            gPlayerData.curHP = target->currentHP;
+            gPlayerData.curHP = target->curHP;
         }
     }
 
@@ -516,7 +516,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
         if (event == EVENT_ZERO_DAMAGE) {
             event = EVENT_IMMUNE;
         }
-        if (target->currentHP < 1 && event == EVENT_IMMUNE) {
+        if (target->curHP < 1 && event == EVENT_IMMUNE) {
             event = EVENT_DEATH;
         }
     } else if (event == EVENT_DEATH) {
@@ -528,7 +528,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
     }
 
     if ((gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE)
-        && (battleStatus->currentAttackElement & (DAMAGE_TYPE_POW | DAMAGE_TYPE_QUAKE | DAMAGE_TYPE_JUMP))
+        && (battleStatus->curAttackElement & (DAMAGE_TYPE_POW | DAMAGE_TYPE_QUAKE | DAMAGE_TYPE_JUMP))
         && (targetPart->eventFlags & ACTOR_EVENT_FLAG_FLIPABLE)
     ) {
         if (event == EVENT_HIT) {
@@ -540,7 +540,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
     }
 
     if (!(gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE)
-        && (battleStatus->currentAttackElement & (DAMAGE_TYPE_POW | DAMAGE_TYPE_QUAKE | DAMAGE_TYPE_JUMP))
+        && (battleStatus->curAttackElement & (DAMAGE_TYPE_POW | DAMAGE_TYPE_QUAKE | DAMAGE_TYPE_JUMP))
         && (targetPart->eventFlags & ACTOR_EVENT_FLAG_FLIPABLE)
     ) {
         if (event == EVENT_HIT_COMBO) {
@@ -552,7 +552,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
     }
 
     if ((gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE)
-        && (battleStatus->currentAttackElement & (DAMAGE_TYPE_FIRE | DAMAGE_TYPE_BLAST | DAMAGE_TYPE_4000))
+        && (battleStatus->curAttackElement & (DAMAGE_TYPE_FIRE | DAMAGE_TYPE_BLAST | DAMAGE_TYPE_4000))
     ) {
         if (event == EVENT_HIT) {
             event = EVENT_BURN_HIT;
@@ -592,54 +592,54 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
         && !(gBattleStatus.flags2 & BS_FLAGS2_1000000)
         && !(actorClass == ACTOR_PLAYER && is_ability_active(ABILITY_HEALTHY_HEALTHY) && (rand_int(100) < 50)))
     {
-        if (battleStatus->currentAttackStatus & STATUS_FLAG_SHRINK && try_inflict_status(target, STATUS_KEY_SHRINK, STATUS_TURN_MOD_SHRINK)) {
+        if (battleStatus->curAttackStatus & STATUS_FLAG_SHRINK && try_inflict_status(target, STATUS_KEY_SHRINK, STATUS_TURN_MOD_SHRINK)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
-        if (battleStatus->currentAttackStatus & STATUS_FLAG_POISON && try_inflict_status(target, STATUS_KEY_POISON, STATUS_TURN_MOD_POISON)) {
+        if (battleStatus->curAttackStatus & STATUS_FLAG_POISON && try_inflict_status(target, STATUS_KEY_POISON, STATUS_TURN_MOD_POISON)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
-        if (battleStatus->currentAttackStatus & STATUS_FLAG_STONE && try_inflict_status(target, STATUS_KEY_STONE, STATUS_TURN_MOD_STONE)) {
+        if (battleStatus->curAttackStatus & STATUS_FLAG_STONE && try_inflict_status(target, STATUS_KEY_STONE, STATUS_TURN_MOD_STONE)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
-        if (battleStatus->currentAttackStatus & STATUS_FLAG_SLEEP && try_inflict_status(target, STATUS_KEY_SLEEP, STATUS_TURN_MOD_SLEEP)) {
+        if (battleStatus->curAttackStatus & STATUS_FLAG_SLEEP && try_inflict_status(target, STATUS_KEY_SLEEP, STATUS_TURN_MOD_SLEEP)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
-        if (battleStatus->currentAttackStatus & STATUS_FLAG_DIZZY && try_inflict_status(target, STATUS_KEY_DIZZY, STATUS_TURN_MOD_DIZZY)) {
+        if (battleStatus->curAttackStatus & STATUS_FLAG_DIZZY && try_inflict_status(target, STATUS_KEY_DIZZY, STATUS_TURN_MOD_DIZZY)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
-        if (battleStatus->currentAttackStatus & STATUS_FLAG_STOP && try_inflict_status(target, STATUS_KEY_STOP, STATUS_TURN_MOD_STOP)) {
+        if (battleStatus->curAttackStatus & STATUS_FLAG_STOP && try_inflict_status(target, STATUS_KEY_STOP, STATUS_TURN_MOD_STOP)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
-        if (battleStatus->currentAttackStatus & STATUS_FLAG_STATIC && try_inflict_status(target, STATUS_KEY_STATIC, STATUS_TURN_MOD_STATIC)) {
+        if (battleStatus->curAttackStatus & STATUS_FLAG_STATIC && try_inflict_status(target, STATUS_KEY_STATIC, STATUS_TURN_MOD_STATIC)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
-        if (battleStatus->currentAttackStatus & STATUS_FLAG_PARALYZE && try_inflict_status(target, STATUS_KEY_PARALYZE, STATUS_TURN_MOD_PARALYZE)) {
+        if (battleStatus->curAttackStatus & STATUS_FLAG_PARALYZE && try_inflict_status(target, STATUS_KEY_PARALYZE, STATUS_TURN_MOD_PARALYZE)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
-        if (battleStatus->currentAttackStatus & STATUS_FLAG_FEAR && try_inflict_status(target, STATUS_KEY_FEAR, STATUS_TURN_MOD_FEAR)) {
+        if (battleStatus->curAttackStatus & STATUS_FLAG_FEAR && try_inflict_status(target, STATUS_KEY_FEAR, STATUS_TURN_MOD_FEAR)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
 
         // @bug? repeated paralyze and dizzy infliction
-        if (battleStatus->currentAttackStatus & STATUS_FLAG_PARALYZE && try_inflict_status(target, STATUS_KEY_PARALYZE, STATUS_TURN_MOD_PARALYZE)) {
+        if (battleStatus->curAttackStatus & STATUS_FLAG_PARALYZE && try_inflict_status(target, STATUS_KEY_PARALYZE, STATUS_TURN_MOD_PARALYZE)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
-        if (battleStatus->currentAttackStatus & STATUS_FLAG_DIZZY && try_inflict_status(target, STATUS_KEY_DIZZY, STATUS_TURN_MOD_DIZZY)) {
+        if (battleStatus->curAttackStatus & STATUS_FLAG_DIZZY && try_inflict_status(target, STATUS_KEY_DIZZY, STATUS_TURN_MOD_DIZZY)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
 
-        if (battleStatus->currentAttackStatus & STATUS_FLAG_FROZEN && target->debuff != STATUS_KEY_FROZEN && try_inflict_status(target, STATUS_KEY_FROZEN, STATUS_TURN_MOD_FROZEN)) {
+        if (battleStatus->curAttackStatus & STATUS_FLAG_FROZEN && target->debuff != STATUS_KEY_FROZEN && try_inflict_status(target, STATUS_KEY_FROZEN, STATUS_TURN_MOD_FROZEN)) {
             statusInflicted = one;
             statusInflicted2 = one;
         }
@@ -687,7 +687,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
                         // immune star fx?
                         show_immune_bonk(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, -3);
                     }
-                } else if (battleStatus->currentAttackElement & (DAMAGE_TYPE_MULTIPLE_POPUPS | DAMAGE_TYPE_SMASH)) {
+                } else if (battleStatus->curAttackElement & (DAMAGE_TYPE_MULTIPLE_POPUPS | DAMAGE_TYPE_SMASH)) {
                     show_next_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 1);
                     show_damage_fx(target, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
                 } else {
@@ -701,7 +701,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
                     if (!statusInflicted2 && !statusInflicted) {
                         show_immune_bonk(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, 3);
                     }
-                } else if (battleStatus->currentAttackElement & (DAMAGE_TYPE_MULTIPLE_POPUPS | DAMAGE_TYPE_SMASH)) {
+                } else if (battleStatus->curAttackElement & (DAMAGE_TYPE_MULTIPLE_POPUPS | DAMAGE_TYPE_SMASH)) {
                     show_next_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 0);
                     show_damage_fx(target, state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage);
                 } else {
@@ -736,42 +736,42 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
         sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
 
-    if ((battleStatus->currentAttackStatus & STATUS_FLAG_SLEEP) && statusInflicted) {
+    if ((battleStatus->curAttackStatus & STATUS_FLAG_SLEEP) && statusInflicted) {
         script = start_script(&EVS_PlaySleepHitFX, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_SLEEP, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
-    if ((battleStatus->currentAttackStatus & STATUS_FLAG_DIZZY) && statusInflicted) {
+    if ((battleStatus->curAttackStatus & STATUS_FLAG_DIZZY) && statusInflicted) {
         script = start_script(&EVS_PlayDizzyHitFX, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
-    if ((battleStatus->currentAttackStatus & STATUS_FLAG_PARALYZE) && statusInflicted) {
+    if ((battleStatus->curAttackStatus & STATUS_FLAG_PARALYZE) && statusInflicted) {
         script = start_script(&EVS_PlayParalyzeHitFX, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
-    if ((battleStatus->currentAttackStatus & STATUS_FLAG_POISON) && statusInflicted) {
+    if ((battleStatus->curAttackStatus & STATUS_FLAG_POISON) && statusInflicted) {
         script = start_script(&EVS_PlayPoisonHitFX, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
-    if ((battleStatus->currentAttackStatus & STATUS_FLAG_STOP) && statusInflicted) {
+    if ((battleStatus->curAttackStatus & STATUS_FLAG_STOP) && statusInflicted) {
         script = start_script(&EVS_PlayStopHitFX, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
-    if ((battleStatus->currentAttackStatus & STATUS_FLAG_FROZEN) && statusInflicted) {
+    if ((battleStatus->curAttackStatus & STATUS_FLAG_FROZEN) && statusInflicted) {
         script = start_script(&EVS_PlayFreezeHitFX, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
@@ -779,7 +779,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
         script->varTablePtr[3] = target;
         sfx_play_sound_at_position(SOUND_HIT_ICE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
-    if ((battleStatus->currentAttackStatus & STATUS_FLAG_SHRINK) && statusInflicted) {
+    if ((battleStatus->curAttackStatus & STATUS_FLAG_SHRINK) && statusInflicted) {
         script = start_script(&EVS_PlayShrinkHitFX, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
@@ -788,7 +788,7 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
 
-    if ((battleStatus->currentAttackElement & DAMAGE_TYPE_SMASH) && target->actorType == ACTOR_TYPE_GOOMNUT_TREE) {
+    if ((battleStatus->curAttackElement & DAMAGE_TYPE_SMASH) && target->actorType == ACTOR_TYPE_GOOMNUT_TREE) {
         sfx_play_sound_at_position(SOUND_SMASH_GOOMNUT_TREE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
 
@@ -796,8 +796,8 @@ HitResult calc_enemy_damage_target(Actor* attacker) {
 
     if (attacker->staticStatus != STATUS_KEY_STATIC
         && (target->staticStatus == STATUS_KEY_STATIC || targetPart->eventFlags & ACTOR_EVENT_FLAG_ELECTRIFIED)
-        && !(battleStatus->currentAttackElement & DAMAGE_TYPE_NO_CONTACT)
-        && !(battleStatus->currentAttackEventSuppression & SUPPRESS_EVENT_SHOCK_CONTACT)
+        && !(battleStatus->curAttackElement & DAMAGE_TYPE_NO_CONTACT)
+        && !(battleStatus->curAttackEventSuppression & SUPPRESS_EVENT_SHOCK_CONTACT)
         && (attacker->transparentStatus != STATUS_KEY_TRANSPARENT)
         && !has_enchanted_part(attacker))
     {
@@ -820,7 +820,7 @@ s32 dispatch_damage_event_actor(Actor* actor, s32 damageAmount, s32 originalEven
     s32 flagCheck;
     s32 new_var;
 
-    battleStatus->currentAttackDamage = damageAmount;
+    battleStatus->curAttackDamage = damageAmount;
     hpChange = (s16) damageAmount;
     actor->hpChangeCounter += hpChange;
     new_var = actor->hpChangeCounter;
@@ -828,17 +828,17 @@ s32 dispatch_damage_event_actor(Actor* actor, s32 damageAmount, s32 originalEven
     actor->damageCounter += hpChange;
     actor->hpChangeCounter -= hpChange;
     battleStatus->lastAttackDamage = 0;
-    actor->currentHP -= hpChange;
+    actor->curHP -= hpChange;
 
-    if (actor->currentHP <= 0) {
+    if (actor->curHP <= 0) {
         dispatchEvent = EVENT_DEATH;
-        battleStatus->lastAttackDamage += actor->currentHP;
-        actor->currentHP = 0;
+        battleStatus->lastAttackDamage += actor->curHP;
+        actor->curHP = 0;
     }
 
     battleStatus->lastAttackDamage += hpChange;
     actor->lastDamageTaken = battleStatus->lastAttackDamage;
-    battleStatus->currentDamageSource = DMG_SRC_DEFAULT;
+    battleStatus->curDamageSource = DMG_SRC_DEFAULT;
     if (battleStatus->flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
         if (dispatchEvent == EVENT_HIT_COMBO) {
             dispatchEvent = EVENT_HIT;
@@ -1043,13 +1043,13 @@ ApiStatus JumpToGoal(Evt* script, s32 isInitialCall) {
             script->functionTemp[3] |= 2;
         }
 
-        actorState->currentPos.x = actor->currentPos.x;
-        actorState->currentPos.y = actor->currentPos.y;
-        actorState->currentPos.z = actor->currentPos.z;
+        actorState->curPos.x = actor->curPos.x;
+        actorState->curPos.y = actor->curPos.y;
+        actorState->curPos.z = actor->curPos.z;
 
-        posX = actorState->currentPos.x;
-        posY = actorState->currentPos.y;
-        posZ = actorState->currentPos.z;
+        posX = actorState->curPos.x;
+        posY = actorState->curPos.y;
+        posZ = actorState->curPos.z;
         goalX = actorState->goalPos.x;
         goalY = actorState->goalPos.y;
         goalZ = actorState->goalPos.z;
@@ -1080,7 +1080,7 @@ ApiStatus JumpToGoal(Evt* script, s32 isInitialCall) {
             set_animation(actor->actorID, (s8) actor->state.jumpPartIndex, actor->state.animJumpRise);
         }
         if (!(script->functionTemp[3] & 2) && (actor->actorTypeData1[4] != 0)) {
-            sfx_play_sound_at_position(actor->actorTypeData1[4], SOUND_SPACE_MODE_0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
+            sfx_play_sound_at_position(actor->actorTypeData1[4], SOUND_SPACE_MODE_0, actor->curPos.x, actor->curPos.y, actor->curPos.z);
         }
         script->functionTemp[0] = 1;
     }
@@ -1088,22 +1088,22 @@ ApiStatus JumpToGoal(Evt* script, s32 isInitialCall) {
     actor = script->functionTempPtr[1];
     actorState = &actor->state;
 
-    actorState->currentPos.y += actorState->vel;
+    actorState->curPos.y += actorState->vel;
     actorState->vel -= actorState->acceleration;
 
     if ((script->functionTemp[2] != 0) && (actorState->vel < 0.0f)) {
         set_animation(actor->actorID, (s8) actorState->jumpPartIndex, actorState->animJumpFall);
     }
     if (actorState->vel < 0.0f) {
-        if (actorState->currentPos.y < actorState->goalPos.y) {
-            actorState->currentPos.y = actorState->goalPos.y;
+        if (actorState->curPos.y < actorState->goalPos.y) {
+            actorState->curPos.y = actorState->goalPos.y;
         }
     }
 
-    add_xz_vec3f(&actorState->currentPos, actorState->speed, actorState->angle);
-    actor->currentPos.x = actorState->currentPos.x;
-    actor->currentPos.y = actorState->currentPos.y;
-    actor->currentPos.z = actorState->currentPos.z;
+    add_xz_vec3f(&actorState->curPos, actorState->speed, actorState->angle);
+    actor->curPos.x = actorState->curPos.x;
+    actor->curPos.y = actorState->curPos.y;
+    actor->curPos.z = actorState->curPos.z;
 
     actorState->moveTime--;
     if (actorState->moveTime > 0) {
@@ -1113,9 +1113,9 @@ ApiStatus JumpToGoal(Evt* script, s32 isInitialCall) {
     if (script->functionTemp[3] & 1) {
         play_movement_dust_effects(2, actorState->goalPos.x, actorState->goalPos.y, actorState->goalPos.z, actorState->angle);
     }
-    actor->currentPos.x = actorState->goalPos.x;
-    actor->currentPos.y = actorState->goalPos.y;
-    actor->currentPos.z = actorState->goalPos.z;
+    actor->curPos.x = actorState->goalPos.x;
+    actor->curPos.y = actorState->goalPos.y;
+    actor->curPos.z = actorState->goalPos.z;
     if (script->functionTemp[2] != 0) {
         set_animation(actor->actorID, (s8) actorState->jumpPartIndex, actorState->animJumpLand);
     }
@@ -1148,13 +1148,13 @@ ApiStatus IdleJumpToGoal(Evt* script, s32 isInitialCall) {
         script->functionTemp[2] = evt_get_variable(script, *args++);
         script->functionTemp[3] = evt_get_variable(script, *args++);
 
-        movement->currentPos.x = actor->currentPos.x;
-        movement->currentPos.y = actor->currentPos.y;
-        movement->currentPos.z = actor->currentPos.z;
+        movement->curPos.x = actor->curPos.x;
+        movement->curPos.y = actor->curPos.y;
+        movement->curPos.z = actor->curPos.z;
 
-        posX = movement->currentPos.x;
-        posY = movement->currentPos.y;
-        posZ = movement->currentPos.z;
+        posX = movement->curPos.x;
+        posY = movement->curPos.y;
+        posZ = movement->curPos.z;
         goalX = movement->goalPos.x;
         goalY = movement->goalPos.y;
         goalZ = movement->goalPos.z;
@@ -1186,24 +1186,24 @@ ApiStatus IdleJumpToGoal(Evt* script, s32 isInitialCall) {
     actor = script->functionTempPtr[1];
     movement = &actor->fly;
 
-    movement->currentPos.y += movement->vel;
+    movement->curPos.y += movement->vel;
     movement->vel -= movement->acceleration;
-    if (movement->vel < 0.0f && movement->goalPos.y > movement->currentPos.y) {
-        movement->currentPos.y = movement->goalPos.y;
+    if (movement->vel < 0.0f && movement->goalPos.y > movement->curPos.y) {
+        movement->curPos.y = movement->goalPos.y;
     }
-    add_xz_vec3f_copy2(&movement->currentPos, movement->speed, movement->angle);
-    actor->currentPos.x = movement->currentPos.x;
-    actor->currentPos.y = movement->currentPos.y;
-    actor->currentPos.z = movement->currentPos.z;
+    add_xz_vec3f_copy2(&movement->curPos, movement->speed, movement->angle);
+    actor->curPos.x = movement->curPos.x;
+    actor->curPos.y = movement->curPos.y;
+    actor->curPos.z = movement->curPos.z;
 
     movement->flyTime--;
     if (movement->flyTime <= 0) {
         if (script->functionTemp[3] != 0) {
             play_movement_dust_effects(2, movement->goalPos.x, movement->goalPos.y, movement->goalPos.z, movement->angle);
         }
-        actor->currentPos.x = movement->goalPos.x;
-        actor->currentPos.y = movement->goalPos.y;
-        actor->currentPos.z = movement->goalPos.z;
+        actor->curPos.x = movement->goalPos.x;
+        actor->curPos.y = movement->goalPos.y;
+        actor->curPos.z = movement->goalPos.z;
         return ApiStatus_DONE1;
     }
 
@@ -1233,13 +1233,13 @@ ApiStatus JumpToGoalSimple2(Evt* script, s32 isInitialCall) {
         state = &actor->state;
 
         state->moveTime = evt_get_variable(script, *args++);
-        state->currentPos.x = actor->currentPos.x;
-        state->currentPos.y = actor->currentPos.y;
-        state->currentPos.z = actor->currentPos.z;
+        state->curPos.x = actor->curPos.x;
+        state->curPos.y = actor->curPos.y;
+        state->curPos.z = actor->curPos.z;
 
-        posX = state->currentPos.x;
-        posY = state->currentPos.y;
-        posZ = state->currentPos.z;
+        posX = state->curPos.x;
+        posY = state->curPos.y;
+        posZ = state->curPos.z;
         goalX = state->goalPos.x;
         goalY = state->goalPos.y;
         goalZ = state->goalPos.z;
@@ -1266,7 +1266,7 @@ ApiStatus JumpToGoalSimple2(Evt* script, s32 isInitialCall) {
         state->vel = ((state->acceleration * state->moveTime) * 0.5f) + (posY / state->moveTime);
         state->speed += moveDist / state->moveTime;
         if (actor->actorTypeData1[4] != 0) {
-            sfx_play_sound_at_position(actor->actorTypeData1[4], SOUND_SPACE_MODE_0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
+            sfx_play_sound_at_position(actor->actorTypeData1[4], SOUND_SPACE_MODE_0, actor->curPos.x, actor->curPos.y, actor->curPos.z);
         }
         script->functionTemp[0] = TRUE;
     }
@@ -1274,22 +1274,22 @@ ApiStatus JumpToGoalSimple2(Evt* script, s32 isInitialCall) {
     actor = script->functionTempPtr[1];
     state = &actor->state;
 
-    state->currentPos.y -= state->vel;
+    state->curPos.y -= state->vel;
     state->vel -= state->acceleration;
-    if (state->vel > 0.0f && state->goalPos.y < state->currentPos.y) {
-        state->currentPos.y = state->goalPos.y;
+    if (state->vel > 0.0f && state->goalPos.y < state->curPos.y) {
+        state->curPos.y = state->goalPos.y;
     }
-    add_xz_vec3f(&state->currentPos, state->speed, state->angle);
-    actor->currentPos.x = state->currentPos.x;
-    actor->currentPos.y = state->currentPos.y;
-    actor->currentPos.z = state->currentPos.z;
+    add_xz_vec3f(&state->curPos, state->speed, state->angle);
+    actor->curPos.x = state->curPos.x;
+    actor->curPos.y = state->curPos.y;
+    actor->curPos.z = state->curPos.z;
 
     state->moveTime--;
     if (state->moveTime <= 0) {
         play_movement_dust_effects(2, state->goalPos.x, state->goalPos.y, state->goalPos.z, state->angle);
-        actor->currentPos.x = state->goalPos.x;
-        actor->currentPos.y = state->goalPos.y;
-        actor->currentPos.z = state->goalPos.z;
+        actor->curPos.x = state->goalPos.x;
+        actor->curPos.y = state->goalPos.y;
+        actor->curPos.z = state->goalPos.z;
         return ApiStatus_DONE1;
     }
 
@@ -1320,13 +1320,13 @@ ApiStatus JumpWithBounce(Evt* script, s32 isInitialCall) {
         actorState->moveTime = evt_get_variable(script, *args++);
         actorState->bounceDivisor = evt_get_float_variable(script, *args++);
 
-        actorState->currentPos.x = actor->currentPos.x;
-        actorState->currentPos.y = actor->currentPos.y;
-        actorState->currentPos.z = actor->currentPos.z;
+        actorState->curPos.x = actor->curPos.x;
+        actorState->curPos.y = actor->curPos.y;
+        actorState->curPos.z = actor->curPos.z;
 
-        posX = actorState->currentPos.x;
-        posY = actorState->currentPos.y;
-        posZ = actorState->currentPos.z;
+        posX = actorState->curPos.x;
+        posY = actorState->curPos.y;
+        posZ = actorState->curPos.z;
         goalX = actorState->goalPos.x;
         goalZ = actorState->goalPos.z;
         goalY = actorState->goalPos.y;
@@ -1354,7 +1354,7 @@ ApiStatus JumpWithBounce(Evt* script, s32 isInitialCall) {
         actorState->speed += moveDist / actorState->moveTime;
 
         if (actor->actorTypeData1[4] != 0) {
-            sfx_play_sound_at_position(actor->actorTypeData1[4], SOUND_SPACE_MODE_0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
+            sfx_play_sound_at_position(actor->actorTypeData1[4], SOUND_SPACE_MODE_0, actor->curPos.x, actor->curPos.y, actor->curPos.z);
         }
         script->functionTemp[0] = TRUE;
     }
@@ -1364,37 +1364,37 @@ ApiStatus JumpWithBounce(Evt* script, s32 isInitialCall) {
 
     switch (script->functionTemp[0]) {
         case 1:
-            actorState->currentPos.y += actorState->vel;
+            actorState->curPos.y += actorState->vel;
             actorState->vel -= actorState->acceleration;
-            if ((actorState->vel < 0.0f) && (actorState->currentPos.y < actorState->goalPos.y)) {
+            if ((actorState->vel < 0.0f) && (actorState->curPos.y < actorState->goalPos.y)) {
                 actorState->acceleration = -actorState->acceleration;
                 actorState->vel /= actorState->bounceDivisor;
                 script->functionTemp[0] = 2;
             }
-            add_xz_vec3f(&actorState->currentPos, actorState->speed, actorState->angle);
+            add_xz_vec3f(&actorState->curPos, actorState->speed, actorState->angle);
             break;
         case 2:
-            actorState->currentPos.y += actorState->vel;
+            actorState->curPos.y += actorState->vel;
             actorState->vel -= actorState->acceleration;
             if (actorState->vel > 0.0f) {
-                if (actorState->goalPos.y < actorState->currentPos.y) {
-                    actorState->currentPos.y = actorState->goalPos.y;
+                if (actorState->goalPos.y < actorState->curPos.y) {
+                    actorState->curPos.y = actorState->goalPos.y;
                     script->functionTemp[0] = 3;
                 }
             }
-            add_xz_vec3f(&actorState->currentPos, actorState->speed, actorState->angle);
-            actor->currentPos.x = actorState->currentPos.x;
-            actor->currentPos.y = actorState->currentPos.y;
-            actor->currentPos.z = actorState->currentPos.z;
+            add_xz_vec3f(&actorState->curPos, actorState->speed, actorState->angle);
+            actor->curPos.x = actorState->curPos.x;
+            actor->curPos.y = actorState->curPos.y;
+            actor->curPos.z = actorState->curPos.z;
             break;
 
         case 3:
             return ApiStatus_DONE2;
     }
 
-    actor->currentPos.x = actorState->currentPos.x;
-    actor->currentPos.y = actorState->currentPos.y;
-    actor->currentPos.z = actorState->currentPos.z;
+    actor->curPos.x = actorState->curPos.x;
+    actor->curPos.y = actorState->curPos.y;
+    actor->curPos.z = actorState->curPos.z;
     return ApiStatus_BLOCK;
 }
 
@@ -1415,24 +1415,24 @@ ApiStatus LandJump(Evt* script, s32 isInitialCall) {
 
         actor = get_actor(actorID);
         script->functionTempPtr[1] = actor;
-        actor->state.currentPos.x = actor->currentPos.x;
-        actor->state.currentPos.y = actor->currentPos.y;
-        actor->state.currentPos.z = actor->currentPos.z;
+        actor->state.curPos.x = actor->curPos.x;
+        actor->state.curPos.y = actor->curPos.y;
+        actor->state.curPos.z = actor->curPos.z;
         script->functionTemp[0] = TRUE;
     }
 
     actor = script->functionTempPtr[1];
-    actor->state.currentPos.y += actor->state.vel;
+    actor->state.curPos.y += actor->state.vel;
     actor->state.vel -= actor->state.acceleration;
 
-    add_xz_vec3f(&actor->state.currentPos, actor->state.speed, actor->state.angle);
-    actor->currentPos.x = actor->state.currentPos.x;
-    actor->currentPos.y = actor->state.currentPos.y;
-    actor->currentPos.z = actor->state.currentPos.z;
+    add_xz_vec3f(&actor->state.curPos, actor->state.speed, actor->state.angle);
+    actor->curPos.x = actor->state.curPos.x;
+    actor->curPos.y = actor->state.curPos.y;
+    actor->curPos.z = actor->state.curPos.z;
 
-    if (actor->currentPos.y < 0.0f) {
-        actor->currentPos.y = 0.0f;
-        play_movement_dust_effects(2, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z, actor->yaw);
+    if (actor->curPos.y < 0.0f) {
+        actor->curPos.y = 0.0f;
+        play_movement_dust_effects(2, actor->curPos.x, actor->curPos.y, actor->curPos.z, actor->yaw);
         return ApiStatus_DONE1;
     }
 
@@ -1462,13 +1462,13 @@ ApiStatus FallToGoal(Evt* script, s32 isInitialCall) {
 
         actor->state.moveTime = evt_get_variable(script, *args++);
 
-        actor->state.currentPos.x = actor->currentPos.x;
-        actor->state.currentPos.y = actor->currentPos.y;
-        actor->state.currentPos.z = actor->currentPos.z;
+        actor->state.curPos.x = actor->curPos.x;
+        actor->state.curPos.y = actor->curPos.y;
+        actor->state.curPos.z = actor->curPos.z;
 
-        posX = actor->state.currentPos.x;
-        posY = actor->state.currentPos.y;
-        posZ = actor->state.currentPos.z;
+        posX = actor->state.curPos.x;
+        posY = actor->state.curPos.y;
+        posZ = actor->state.curPos.z;
         goalX = actor->state.goalPos.x;
         goalY = actor->state.goalPos.y;
         goalZ = actor->state.goalPos.z;
@@ -1491,25 +1491,25 @@ ApiStatus FallToGoal(Evt* script, s32 isInitialCall) {
         state->acceleration = (posY / state->moveTime - state->vel) / (-state->moveTime * 0.5);
 
         if (actor->actorTypeData1[4] != 0) {
-            sfx_play_sound_at_position(actor->actorTypeData1[4], SOUND_SPACE_MODE_0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
+            sfx_play_sound_at_position(actor->actorTypeData1[4], SOUND_SPACE_MODE_0, actor->curPos.x, actor->curPos.y, actor->curPos.z);
         }
         script->functionTemp[0] = 1;
     }
 
     actor = script->functionTempPtr[1];
-    actor->state.currentPos.y += actor->state.vel;
+    actor->state.curPos.y += actor->state.vel;
     actor->state.vel -= actor->state.acceleration;
-    add_xz_vec3f(&actor->state.currentPos, actor->state.speed, actor->state.angle);
-    actor->currentPos.x = actor->state.currentPos.x;
-    actor->currentPos.y = actor->state.currentPos.y;
-    actor->currentPos.z = actor->state.currentPos.z;
+    add_xz_vec3f(&actor->state.curPos, actor->state.speed, actor->state.angle);
+    actor->curPos.x = actor->state.curPos.x;
+    actor->curPos.y = actor->state.curPos.y;
+    actor->curPos.z = actor->state.curPos.z;
     actor->state.moveTime--;
 
     if (actor->state.moveTime <= 0) {
         play_movement_dust_effects(2, actor->state.goalPos.x, actor->state.goalPos.y, actor->state.goalPos.z, actor->state.angle);
-        actor->currentPos.x = actor->state.goalPos.x;
-        actor->currentPos.y = actor->state.goalPos.y;
-        actor->currentPos.z = actor->state.goalPos.z;
+        actor->curPos.x = actor->state.goalPos.x;
+        actor->curPos.y = actor->state.goalPos.y;
+        actor->curPos.z = actor->state.goalPos.z;
         return ApiStatus_DONE1;
     } else {
         return ApiStatus_BLOCK;
@@ -1539,16 +1539,16 @@ ApiStatus RunToGoal(Evt* script, s32 isInitialCall) {
         actorState->moveTime = evt_get_variable(script, *args++);
         script->functionTemp[2] = evt_get_variable(script, *args++);
 
-        actorState->currentPos.x = actor->currentPos.x;
-        actorState->currentPos.y = actor->currentPos.y;
-        actorState->currentPos.z = actor->currentPos.z;
+        actorState->curPos.x = actor->curPos.x;
+        actorState->curPos.y = actor->curPos.y;
+        actorState->curPos.z = actor->curPos.z;
 
         goalX = actorState->goalPos.x;
         goalY = actorState->goalPos.y;
         goalZ = actorState->goalPos.z;
-        posX = actorState->currentPos.x;
-        posY = actorState->currentPos.y;
-        posZ = actorState->currentPos.z;
+        posX = actorState->curPos.x;
+        posY = actorState->curPos.y;
+        posZ = actorState->curPos.z;
 
         actorState->unk_18.x = goalX;
         actorState->unk_18.y = goalY;
@@ -1573,7 +1573,7 @@ ApiStatus RunToGoal(Evt* script, s32 isInitialCall) {
             actorState->dist = ~actor->actorTypeData1b[0]; //TODO optimization?
         }
         if ((actor->actorTypeData1[0] != 0) && (actor->actorTypeData1[1] == 0)) {
-            sfx_play_sound_at_position(actor->actorTypeData1[0], SOUND_SPACE_MODE_0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
+            sfx_play_sound_at_position(actor->actorTypeData1[0], SOUND_SPACE_MODE_0, actor->curPos.x, actor->curPos.y, actor->curPos.z);
         }
         script->functionTemp[0] = TRUE;
     }
@@ -1581,16 +1581,16 @@ ApiStatus RunToGoal(Evt* script, s32 isInitialCall) {
     actor = script->functionTempPtr[1];
     actorState = &actor->state;
 
-    add_xz_vec3f(&actorState->currentPos, actorState->speed, actorState->angle);
+    add_xz_vec3f(&actorState->curPos, actorState->speed, actorState->angle);
     if (script->functionTemp[2] == 0) {
         if (actorState->speed < 4.0f) {
-            play_movement_dust_effects(0, actorState->currentPos.x, actorState->currentPos.y, actorState->currentPos.z, actorState->angle);
+            play_movement_dust_effects(0, actorState->curPos.x, actorState->curPos.y, actorState->curPos.z, actorState->angle);
         } else {
-            play_movement_dust_effects(1, actorState->currentPos.x, actorState->currentPos.y, actorState->currentPos.z, actorState->angle);
+            play_movement_dust_effects(1, actorState->curPos.x, actorState->curPos.y, actorState->curPos.z, actorState->angle);
         }
     }
-    actor->currentPos.x = actorState->currentPos.x;
-    actor->currentPos.z = actorState->currentPos.z;
+    actor->curPos.x = actorState->curPos.x;
+    actor->curPos.z = actorState->curPos.z;
 
     if ((actor->actorTypeData1[0] != 0) && (actor->actorTypeData1[1] != 0)) {
         if (actor->actorTypeData1b[0] >= 0) {
@@ -1600,11 +1600,11 @@ ApiStatus RunToGoal(Evt* script, s32 isInitialCall) {
                 actorState->dist = 0.0f;
                 if (actor->footStepCounter & 1) {
                     if (actor->actorTypeData1[0] != 0) {
-                        sfx_play_sound_at_position(actor->actorTypeData1[0], SOUND_SPACE_MODE_0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
+                        sfx_play_sound_at_position(actor->actorTypeData1[0], SOUND_SPACE_MODE_0, actor->curPos.x, actor->curPos.y, actor->curPos.z);
                     }
                 } else {
                     if (actor->actorTypeData1[1] != 0) {
-                        sfx_play_sound_at_position(actor->actorTypeData1[1], SOUND_SPACE_MODE_0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
+                        sfx_play_sound_at_position(actor->actorTypeData1[1], SOUND_SPACE_MODE_0, actor->curPos.x, actor->curPos.y, actor->curPos.z);
                     }
                 }
             }
@@ -1615,11 +1615,11 @@ ApiStatus RunToGoal(Evt* script, s32 isInitialCall) {
                 actorState->dist = 0.0f;
                 if (actor->footStepCounter & 1) {
                     if (actor->actorTypeData1[0] != 0) {
-                        sfx_play_sound_at_position(actor->actorTypeData1[0], SOUND_SPACE_MODE_0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
+                        sfx_play_sound_at_position(actor->actorTypeData1[0], SOUND_SPACE_MODE_0, actor->curPos.x, actor->curPos.y, actor->curPos.z);
                     }
                 } else {
                     if (actor->actorTypeData1[1] != 0) {
-                        sfx_play_sound_at_position(actor->actorTypeData1[1], SOUND_SPACE_MODE_0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
+                        sfx_play_sound_at_position(actor->actorTypeData1[1], SOUND_SPACE_MODE_0, actor->curPos.x, actor->curPos.y, actor->curPos.z);
                     }
                 }
             }
@@ -1631,8 +1631,8 @@ ApiStatus RunToGoal(Evt* script, s32 isInitialCall) {
         return ApiStatus_BLOCK;
     }
 
-    actor->currentPos.x = actorState->unk_18.x;
-    actor->currentPos.z = actorState->unk_18.z;
+    actor->curPos.x = actorState->unk_18.x;
+    actor->curPos.z = actorState->unk_18.z;
     if (actor->actorTypeData1[0] != 0) {
         if (actor->actorTypeData1[1] == 0) {
             snd_stop_sound(actor->actorTypeData1[0]);
@@ -1663,17 +1663,17 @@ ApiStatus IdleRunToGoal(Evt* script, s32 isInitialCall) {
 
         movement->flyTime = evt_get_variable(script, *args++);
 
-        movement->currentPos.x = actor->currentPos.x;
-        movement->currentPos.y = actor->currentPos.y;
-        movement->currentPos.z = actor->currentPos.z;
+        movement->curPos.x = actor->curPos.x;
+        movement->curPos.y = actor->curPos.y;
+        movement->curPos.z = actor->curPos.z;
 
         goalX = movement->goalPos.x;
         goalY = movement->goalPos.y;
         goalZ = movement->goalPos.z;
 
-        posX = movement->currentPos.x;
-        posY = movement->currentPos.y;
-        posZ = movement->currentPos.z;
+        posX = movement->curPos.x;
+        posY = movement->curPos.y;
+        posZ = movement->curPos.z;
 
         movement->unk_18.x = goalX;
         movement->unk_18.y = goalY;
@@ -1704,22 +1704,22 @@ ApiStatus IdleRunToGoal(Evt* script, s32 isInitialCall) {
     actor = script->functionTempPtr[1];
     movement = &actor->fly;
 
-    add_xz_vec3f_copy2(&movement->currentPos, movement->speed, movement->angle);
+    add_xz_vec3f_copy2(&movement->curPos, movement->speed, movement->angle);
     if (movement->speed < 4.0f) {
-        play_movement_dust_effects(0, movement->currentPos.x, movement->currentPos.y, movement->currentPos.z, movement->angle);
+        play_movement_dust_effects(0, movement->curPos.x, movement->curPos.y, movement->curPos.z, movement->angle);
     } else {
-        play_movement_dust_effects(1, movement->currentPos.x, movement->currentPos.y, movement->currentPos.z, movement->angle);
+        play_movement_dust_effects(1, movement->curPos.x, movement->curPos.y, movement->curPos.z, movement->angle);
     }
-    actor->currentPos.x = movement->currentPos.x;
-    actor->currentPos.z = movement->currentPos.z;
+    actor->curPos.x = movement->curPos.x;
+    actor->curPos.z = movement->curPos.z;
 
     movement->flyTime--;
     if (movement->flyTime > 0) {
         return ApiStatus_BLOCK;
     }
 
-    actor->currentPos.x = movement->unk_18.x;
-    actor->currentPos.z = movement->unk_18.z;
+    actor->curPos.x = movement->unk_18.x;
+    actor->curPos.z = movement->unk_18.z;
     if (actor->actorTypeData1[0] != 0 && actor->actorTypeData1[1] == 0) {
         snd_stop_sound(actor->actorTypeData1[0]);
     }
@@ -2180,19 +2180,19 @@ ApiStatus FlyToGoal(Evt* script, s32 isInitialCall) {
         goalY = actorState->goalPos.y;
         goalZ = actorState->goalPos.z;
 
-        posX = actor->currentPos.x;
-        posY = actor->currentPos.y;
-        posZ = actor->currentPos.z;
+        posX = actor->curPos.x;
+        posY = actor->curPos.y;
+        posZ = actor->curPos.z;
 
         deltaX = posX - goalX;
         deltaY = posY - goalY;
         deltaZ = posZ - goalZ;
 
-        actorState->currentPos.x = posX;
+        actorState->curPos.x = posX;
         actorState->unk_18.x = posX;
-        actorState->currentPos.y = posY;
+        actorState->curPos.y = posY;
         actorState->unk_18.y = posY;
-        actorState->currentPos.z = posZ;
+        actorState->curPos.z = posZ;
         actorState->unk_18.z = posZ;
 
         actorState->dist = sqrtf(SQ(deltaX) + SQ(deltaY) + SQ(deltaZ));
@@ -2214,27 +2214,27 @@ ApiStatus FlyToGoal(Evt* script, s32 isInitialCall) {
             actorState->vel = ~actor->actorTypeData1b[1];
         }
         if ((actor->actorTypeData1[2] != 0) && (actor->actorTypeData1[3] == 0)) {
-            sfx_play_sound_at_position(actor->actorTypeData1[2], SOUND_SPACE_MODE_0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
+            sfx_play_sound_at_position(actor->actorTypeData1[2], SOUND_SPACE_MODE_0, actor->curPos.x, actor->curPos.y, actor->curPos.z);
         }
     }
 
     actor = script->functionTempPtr[1];
     actorState = &actor->state;
 
-    actorState->currentPos.x = update_lerp_battle(script->functionTemp[3], actorState->unk_18.x, actorState->goalPos.x, actorState->bounceDivisor, actorState->moveTime);
-    actorState->currentPos.y = update_lerp_battle(script->functionTemp[3], actorState->unk_18.y, actorState->goalPos.y, actorState->bounceDivisor, actorState->moveTime);
-    actorState->currentPos.z = update_lerp_battle(script->functionTemp[3], actorState->unk_18.z, actorState->goalPos.z, actorState->bounceDivisor, actorState->moveTime);
-    if ((actorState->functionTemp[0]) && (actorState->currentPos.y < 0.0f)) {
+    actorState->curPos.x = update_lerp_battle(script->functionTemp[3], actorState->unk_18.x, actorState->goalPos.x, actorState->bounceDivisor, actorState->moveTime);
+    actorState->curPos.y = update_lerp_battle(script->functionTemp[3], actorState->unk_18.y, actorState->goalPos.y, actorState->bounceDivisor, actorState->moveTime);
+    actorState->curPos.z = update_lerp_battle(script->functionTemp[3], actorState->unk_18.z, actorState->goalPos.z, actorState->bounceDivisor, actorState->moveTime);
+    if ((actorState->functionTemp[0]) && (actorState->curPos.y < 0.0f)) {
         actorState->bounceDivisor = actorState->moveTime;
-        actorState->goalPos.x = actorState->currentPos.x;
+        actorState->goalPos.x = actorState->curPos.x;
         actorState->goalPos.y = 0.0f;
-        actorState->goalPos.z = actorState->currentPos.z;
+        actorState->goalPos.z = actorState->curPos.z;
     }
     actorState->bounceDivisor += 1.0f;
     if (actorState->moveTime < actorState->bounceDivisor) {
-        actor->currentPos.x = actorState->goalPos.x;
-        actor->currentPos.y = actorState->goalPos.y;
-        actor->currentPos.z = actorState->goalPos.z;
+        actor->curPos.x = actorState->goalPos.x;
+        actor->curPos.y = actorState->goalPos.y;
+        actor->curPos.z = actorState->goalPos.z;
         if (actor->actorTypeData1[2] != 0) {
             if (actor->actorTypeData1[3] == 0) {
                 snd_stop_sound(actor->actorTypeData1[2]);
@@ -2250,11 +2250,11 @@ ApiStatus FlyToGoal(Evt* script, s32 isInitialCall) {
                 actorState->vel = 0.0f;
                 if (actor->footStepCounter & 1) {
                     if (actor->actorTypeData1[2] != 0) {
-                        sfx_play_sound_at_position(actor->actorTypeData1[2], SOUND_SPACE_MODE_0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
+                        sfx_play_sound_at_position(actor->actorTypeData1[2], SOUND_SPACE_MODE_0, actor->curPos.x, actor->curPos.y, actor->curPos.z);
                     }
                 } else {
                     if (actor->actorTypeData1[3] != 0) {
-                        sfx_play_sound_at_position(actor->actorTypeData1[3], SOUND_SPACE_MODE_0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
+                        sfx_play_sound_at_position(actor->actorTypeData1[3], SOUND_SPACE_MODE_0, actor->curPos.x, actor->curPos.y, actor->curPos.z);
                     }
                 }
             }
@@ -2265,20 +2265,20 @@ ApiStatus FlyToGoal(Evt* script, s32 isInitialCall) {
                 actorState->vel = 0.0f;
                 if (actor->footStepCounter & 1) {
                     if (actor->actorTypeData1[2] != 0) {
-                        sfx_play_sound_at_position(actor->actorTypeData1[2], SOUND_SPACE_MODE_0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
+                        sfx_play_sound_at_position(actor->actorTypeData1[2], SOUND_SPACE_MODE_0, actor->curPos.x, actor->curPos.y, actor->curPos.z);
                     }
                 } else {
                     if (actor->actorTypeData1[3] != 0) {
-                        sfx_play_sound_at_position(actor->actorTypeData1[3], SOUND_SPACE_MODE_0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
+                        sfx_play_sound_at_position(actor->actorTypeData1[3], SOUND_SPACE_MODE_0, actor->curPos.x, actor->curPos.y, actor->curPos.z);
                     }
                 }
             }
         }
     }
 
-    deltaX = actorState->goalPos.x - actorState->currentPos.x;
-    deltaY = actorState->goalPos.y - actorState->currentPos.y;
-    deltaZ = actorState->goalPos.z - actorState->currentPos.z;
+    deltaX = actorState->goalPos.x - actorState->curPos.x;
+    deltaY = actorState->goalPos.y - actorState->curPos.y;
+    deltaZ = actorState->goalPos.z - actorState->curPos.z;
     dist3D = sqrtf(SQ(deltaX) + SQ(deltaY) + SQ(deltaZ));
     if (dist3D == 0.0f) {
         dist3D = 1.0f;
@@ -2296,9 +2296,9 @@ ApiStatus FlyToGoal(Evt* script, s32 isInitialCall) {
     if (actorState->moveArcAmplitude > 0) {
         offsetY = offsetY * actorState->moveArcAmplitude;
     }
-    actor->currentPos.x = actorState->currentPos.x;
-    actor->currentPos.y = actorState->currentPos.y + offsetY;
-    actor->currentPos.z = actorState->currentPos.z;
+    actor->curPos.x = actorState->curPos.x;
+    actor->curPos.y = actorState->curPos.y + offsetY;
+    actor->curPos.z = actorState->curPos.z;
     return ApiStatus_BLOCK;
 }
 
@@ -2329,19 +2329,19 @@ ApiStatus IdleFlyToGoal(Evt* script, s32 isInitialCall) {
         goalY = movement->goalPos.y;
         goalZ = movement->goalPos.z;
 
-        posX = actor->currentPos.x;
-        posY = actor->currentPos.y;
-        posZ = actor->currentPos.z;
+        posX = actor->curPos.x;
+        posY = actor->curPos.y;
+        posZ = actor->curPos.z;
 
         deltaX = posX - goalX;
         deltaY = posY - goalY;
         deltaZ = posZ - goalZ;
 
-        movement->currentPos.x = posX;
+        movement->curPos.x = posX;
         movement->unk_18.x = posX;
-        movement->currentPos.y = posY;
+        movement->curPos.y = posY;
         movement->unk_18.y = posY;
-        movement->currentPos.z = posZ;
+        movement->curPos.z = posZ;
         movement->unk_18.z = posZ;
 
         movement->dist = sqrtf(SQ(deltaX) + SQ(deltaY) + SQ(deltaZ));
@@ -2363,21 +2363,21 @@ ApiStatus IdleFlyToGoal(Evt* script, s32 isInitialCall) {
     actor = script->functionTempPtr[1];
     movement = &actor->fly;
 
-    movement->currentPos.x = update_lerp_battle(script->functionTemp[3], movement->unk_18.x, movement->goalPos.x, movement->flyElapsed, movement->flyTime);
-    movement->currentPos.y = update_lerp_battle(script->functionTemp[3], movement->unk_18.y, movement->goalPos.y, movement->flyElapsed, movement->flyTime);
-    movement->currentPos.z = update_lerp_battle(script->functionTemp[3], movement->unk_18.z, movement->goalPos.z, movement->flyElapsed, movement->flyTime);
+    movement->curPos.x = update_lerp_battle(script->functionTemp[3], movement->unk_18.x, movement->goalPos.x, movement->flyElapsed, movement->flyTime);
+    movement->curPos.y = update_lerp_battle(script->functionTemp[3], movement->unk_18.y, movement->goalPos.y, movement->flyElapsed, movement->flyTime);
+    movement->curPos.z = update_lerp_battle(script->functionTemp[3], movement->unk_18.z, movement->goalPos.z, movement->flyElapsed, movement->flyTime);
 
     movement->flyElapsed += 1.0f;
     if (movement->flyTime < movement->flyElapsed) {
-        actor->currentPos.x = movement->goalPos.x;
-        actor->currentPos.y = movement->goalPos.y;
-        actor->currentPos.z = movement->goalPos.z;
+        actor->curPos.x = movement->goalPos.x;
+        actor->curPos.y = movement->goalPos.y;
+        actor->curPos.z = movement->goalPos.z;
         return ApiStatus_DONE2;
     }
 
-    deltaX = movement->goalPos.x - movement->currentPos.x;
-    deltaY = movement->goalPos.y - movement->currentPos.y;
-    deltaZ = movement->goalPos.z - movement->currentPos.z;
+    deltaX = movement->goalPos.x - movement->curPos.x;
+    deltaY = movement->goalPos.y - movement->curPos.y;
+    deltaZ = movement->goalPos.z - movement->curPos.z;
     dist3D = sqrtf(SQ(deltaX) + SQ(deltaY) + SQ(deltaZ));
     if (dist3D == 0.0f) {
         dist3D = 1.0f;
@@ -2397,9 +2397,9 @@ ApiStatus IdleFlyToGoal(Evt* script, s32 isInitialCall) {
         offsetY = offsetY * movement->flyArcAmplitude;
     }
 
-    actor->currentPos.x = movement->currentPos.x;
-    actor->currentPos.y = movement->currentPos.y + offsetY;
-    actor->currentPos.z = movement->currentPos.z;
+    actor->curPos.x = movement->curPos.x;
+    actor->curPos.y = movement->curPos.y + offsetY;
+    actor->curPos.z = movement->curPos.z;
     return ApiStatus_BLOCK;
 }
 
@@ -2604,12 +2604,12 @@ ApiStatus SetEnemyHP(Evt* script, s32 isInitialCall) {
     newHP = evt_get_variable(script, *args++);
     actor = get_actor(actorID);
 
-    actor->currentHP = newHP;
+    actor->curHP = newHP;
     if (newHP > actor->maxHP) {
-        actor->currentHP = actor->maxHP;
+        actor->curHP = actor->maxHP;
     }
 
-    actor->healthFraction = (actor->currentHP * 25) / actor->maxHP;
+    actor->healthFraction = (actor->curHP * 25) / actor->maxHP;
 
     return ApiStatus_DONE2;
 }
@@ -2637,7 +2637,7 @@ ApiStatus GetActorHP(Evt* script, s32 isInitialCall) {
             outVal = 99;
             break;
         default:
-            outVal = actor->currentHP;
+            outVal = actor->curHP;
             break;
     }
 
@@ -2737,7 +2737,7 @@ ApiStatus DropStarPoints(Evt* script, s32 isInitialCall) {
 
         for (i = 0; i < numToDrop; i++) {
             make_item_entity_delayed(ITEM_STAR_POINT,
-                dropper->currentPos.x, dropper->currentPos.y, dropper->currentPos.z, spawnMode, i, 0);
+                dropper->curPos.x, dropper->curPos.y, dropper->curPos.z, spawnMode, i, 0);
         }
 
         battleStatus->incrementStarPointDelay = 40;
@@ -2829,10 +2829,10 @@ ApiStatus EnemyDamageTarget(Evt* script, s32 isInitialCall) {
 
     actor = get_actor(actorID);
     outVar = *args++;
-    battleStatus->currentAttackElement = *args++;
-    battleStatus->currentAttackEventSuppression = *args++;
-    battleStatus->currentAttackStatus = *args++;
-    battleStatus->currentAttackDamage = evt_get_variable(script, *args++);
+    battleStatus->curAttackElement = *args++;
+    battleStatus->curAttackEventSuppression = *args++;
+    battleStatus->curAttackStatus = *args++;
+    battleStatus->curAttackDamage = evt_get_variable(script, *args++);
     battleFlagsModifier = *args++;
 
     if (battleFlagsModifier & BS_FLAGS1_10) {
@@ -2862,14 +2862,14 @@ ApiStatus EnemyDamageTarget(Evt* script, s32 isInitialCall) {
         gBattleStatus.flags1 &= ~BS_FLAGS1_80;
     }
 
-    battleStatus->currentTargetID = actor->targetActorID;
-    battleStatus->currentTargetPart = actor->targetPartIndex;
+    battleStatus->curTargetID = actor->targetActorID;
+    battleStatus->curTargetPart = actor->targetPartIndex;
 
-    battleStatus->statusChance = battleStatus->currentAttackStatus & 0xFF;
+    battleStatus->statusChance = battleStatus->curAttackStatus & 0xFF;
     if (battleStatus->statusChance == STATUS_KEY_NEVER) {
         battleStatus->statusChance = 0;
     }
-    battleStatus->statusDuration = (battleStatus->currentAttackStatus & 0xF00) >> 8;
+    battleStatus->statusDuration = (battleStatus->curAttackStatus & 0xF00) >> 8;
 
     hitResult = calc_enemy_damage_target(actor);
     if (hitResult < 0) {
@@ -2900,15 +2900,15 @@ ApiStatus EnemyFollowupAfflictTarget(Evt* script, s32 isInitialCall) {
     actor = get_actor(actorID);
     outVar = *args++;
 
-    battleStatus->currentTargetID = actor->targetActorID;
-    battleStatus->currentTargetPart = actor->targetPartIndex;
-    battleStatus->statusChance = battleStatus->currentAttackStatus;
+    battleStatus->curTargetID = actor->targetActorID;
+    battleStatus->curTargetPart = actor->targetPartIndex;
+    battleStatus->statusChance = battleStatus->curAttackStatus;
 
     if (battleStatus->statusChance == STATUS_KEY_NEVER) {
         battleStatus->statusChance = 0;
     }
 
-    anotherBattleStatus->statusDuration = (anotherBattleStatus->currentAttackStatus & 0xF00) >> 8;
+    anotherBattleStatus->statusDuration = (anotherBattleStatus->curAttackStatus & 0xF00) >> 8;
     hitResults = calc_enemy_damage_target(actor);
 
     if (hitResults < 0) {
@@ -2939,10 +2939,10 @@ ApiStatus EnemyTestTarget(Evt* script, s32 isInitialCall) {
 
     actor = get_actor(actorID);
     outVar = *args++;
-    battleStatus->currentAttackElement = *args++;
-    battleStatus->currentAttackEventSuppression = 0;
-    battleStatus->currentAttackStatus = *args++;
-    battleStatus->currentAttackDamage = evt_get_variable(script, *args++);
+    battleStatus->curAttackElement = *args++;
+    battleStatus->curAttackEventSuppression = 0;
+    battleStatus->curAttackStatus = *args++;
+    battleStatus->curAttackDamage = evt_get_variable(script, *args++);
     battleFlagsModifier = *args++;
 
     if (battleFlagsModifier & BS_FLAGS1_10) {
@@ -2972,17 +2972,17 @@ ApiStatus EnemyTestTarget(Evt* script, s32 isInitialCall) {
         gBattleStatus.flags1 &= ~BS_FLAGS1_80;
     }
 
-    attackStatus = battleStatus->currentAttackStatus;
-    battleStatus->currentTargetID = actor->targetActorID;
+    attackStatus = battleStatus->curAttackStatus;
+    battleStatus->curTargetID = actor->targetActorID;
 
-    battleStatus->currentTargetPart = actor->targetPartIndex;
+    battleStatus->curTargetPart = actor->targetPartIndex;
     battleStatus->statusChance = attackStatus;
 
     if ((attackStatus & 0xFF) == 0xFF) {
         battleStatus->statusChance = 0;
     }
 
-    battleStatus->statusDuration = (battleStatus->currentAttackStatus & 0xF00) >> 8;
+    battleStatus->statusDuration = (battleStatus->curAttackStatus & 0xF00) >> 8;
     hitResult = calc_enemy_test_target(actor);
 
     if (hitResult < 0) {

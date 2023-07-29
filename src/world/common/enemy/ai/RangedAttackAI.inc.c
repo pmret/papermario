@@ -32,7 +32,7 @@ API_CALLABLE(N(RangedAttackAI_Main)) {
     if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND)) {
         script->AI_TEMP_STATE = 0;
         npc->duration = 0;
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
+        npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         npc->flags &= ~NPC_FLAG_JUMPING;
 
         if (!enemy->territory->wander.isFlying) {

@@ -222,7 +222,7 @@ void N(update)(void) {
             }
 
             if (!actionCommandStatus->berserkerEnabled) {
-                if (battleStatus->currentButtonsPressed & BUTTON_A) {
+                if (battleStatus->curButtonsPressed & BUTTON_A) {
                     s32 amt;
 
                     if (actionCommandStatus->targetWeakness == 0) {

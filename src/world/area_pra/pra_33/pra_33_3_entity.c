@@ -3,7 +3,7 @@
 
 API_CALLABLE(N(CheckPlayerOnDais)) {
     script->varTable[10] = 0;
-    if (gCollisionStatus.currentFloor == COLLIDER_o1045) {
+    if (gCollisionStatus.curFloor == COLLIDER_o1045) {
         script->varTable[10] = 1;
     }
     if (gCollisionStatus.lastTouchedFloor == COLLIDER_o1045) {

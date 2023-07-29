@@ -281,8 +281,8 @@ API_CALLABLE(N(SelectTattleMsg)) {
         case USE_TATTLE_FACE_PLAYER:
             set_time_freeze_mode(1);
             playerStatus->flags &= ~PS_FLAG_HAS_CONVERSATION_NPC;
-            goombario->currentAnim = ANIM_WorldGoombario_Idle;
-            goombario->yaw = clamp_angle(gCameras[CAM_DEFAULT].currentYaw + playerStatus->spriteFacingAngle - 90.0f);
+            goombario->curAnim = ANIM_WorldGoombario_Idle;
+            goombario->yaw = clamp_angle(gCameras[CAM_DEFAULT].curYaw + playerStatus->spriteFacingAngle - 90.0f);
             gPartnerStatus.partnerActionState = PARTNER_ACTION_USE;
             close_status_bar();
             if (N(HadSpeechPrompt)) {

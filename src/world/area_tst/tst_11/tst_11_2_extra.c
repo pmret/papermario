@@ -38,7 +38,7 @@ void N(test_reflection_worker_render_wall)(void) {
 
 void N(appendGfx_test_reflection_wall)(void* data) {
     PlayerStatus* playerStatus = data;
-    f32 yaw = -gCameras[gCurrentCamID].currentYaw;
+    f32 yaw = -gCameras[gCurrentCamID].curYaw;
     Matrix4f main;
     Matrix4f translation;
     Matrix4f rotation;
@@ -89,7 +89,7 @@ void N(test_reflection_worker_render_floor)(void) {
 
 void N(appendGfx_test_reflection_floor)(void* data) {
     PlayerStatus* playerStatus = data;
-    f32 yaw = -gCameras[gCurrentCamID].currentYaw;
+    f32 yaw = -gCameras[gCurrentCamID].curYaw;
     s32 trueAnimation;
     Matrix4f sp20;
     Matrix4f sp60;

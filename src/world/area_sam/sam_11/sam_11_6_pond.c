@@ -41,7 +41,7 @@ API_CALLABLE(N(SpawnIceShards)) {
 
 API_CALLABLE(N(func_80241FB0_D3C580)) {
     script->varTable[10] = 0;
-    if (gCollisionStatus.currentFloor == COLLIDER_suimen) {
+    if (gCollisionStatus.curFloor == COLLIDER_suimen) {
         script->varTable[10] = 1;
     }
     if (gCollisionStatus.lastTouchedFloor == COLLIDER_suimen) {

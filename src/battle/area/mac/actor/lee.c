@@ -2892,8 +2892,8 @@ API_CALLABLE(func_80219188_465618) {
         wattEffectData->angle = 0;
         wattEffectData->unk_0C = TRUE;
         wattEffectData->unk_10 = 0;
-        wattEffectData->effect1 = fx_static_status(0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z, (actor->debuff != STATUS_KEY_SHRINK) ? 1.0f : 0.4f, 5, 0);
-        wattEffectData->effect2 = fx_static_status(1, actor->currentPos.x, NPC_DISPOSE_POS_Y, actor->currentPos.z, (actor->debuff != STATUS_KEY_SHRINK) ? 1.0f : 0.4f, 5, 0);
+        wattEffectData->effect1 = fx_static_status(0, actor->curPos.x, actor->curPos.y, actor->curPos.z, (actor->debuff != STATUS_KEY_SHRINK) ? 1.0f : 0.4f, 5, 0);
+        wattEffectData->effect2 = fx_static_status(1, actor->curPos.x, NPC_DISPOSE_POS_Y, actor->curPos.z, (actor->debuff != STATUS_KEY_SHRINK) ? 1.0f : 0.4f, 5, 0);
         wattEffectData->flags = TRUE;
         wattEffectData->debuff = actor->debuff;
     }
@@ -2906,9 +2906,9 @@ API_CALLABLE(func_80219188_465618) {
         }
         actor->verticalRenderOffset = sin_rad(DEG_TO_RAD(wattEffectData->angle)) * 3.0f;
 
-        x = actor->currentPos.x + actor->headOffset.x;
-        y = actor->currentPos.y + actor->headOffset.y + actor->verticalRenderOffset + (actor->debuff != STATUS_KEY_SHRINK ? 12.0 : 4.800000000000001); // 4.8 doesn't match
-        z = actor->currentPos.z + actor->headOffset.z;
+        x = actor->curPos.x + actor->headOffset.x;
+        y = actor->curPos.y + actor->headOffset.y + actor->verticalRenderOffset + (actor->debuff != STATUS_KEY_SHRINK ? 12.0 : 4.800000000000001); // 4.8 doesn't match
+        z = actor->curPos.z + actor->headOffset.z;
         if (wattEffectData->unk_0C) {
             switch (wattEffectData->unk_10) {
                 case 0:
@@ -4119,8 +4119,8 @@ Formation N(formation_lakilester) = {
 API_CALLABLE(func_802197B8_465C48) {
     Bytecode* args = script->ptrReadPos;
 
-    evt_set_variable(script, *args++, gPlayerData.currentPartner);
-    evt_set_variable(script, *args++, gPlayerData.partners[gPlayerData.currentPartner].level);
+    evt_set_variable(script, *args++, gPlayerData.curPartner);
+    evt_set_variable(script, *args++, gPlayerData.partners[gPlayerData.curPartner].level);
     return ApiStatus_DONE2;
 }
 

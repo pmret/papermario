@@ -154,7 +154,7 @@ s32 phys_adjust_cam_on_landing(void) {
     }
 
     if (ret == 1) {
-        s32 surfaceType = get_collider_flags(gCollisionStatus.currentFloor) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
+        s32 surfaceType = get_collider_flags(gCollisionStatus.curFloor) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
 
         if (surfaceType == SURFACE_TYPE_LAVA) {
             gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
@@ -363,7 +363,7 @@ void set_action_state(s32 actionState) {
         }
 
         // Whilst Sushie, Lakilester, or Parakarry's ability is active, hazards have no effect.
-        partner = playerData->currentPartner;
+        partner = playerData->curPartner;
 
         if (partner == PARTNER_SUSHIE || partner == PARTNER_LAKILESTER || partner == PARTNER_PARAKARRY) {
             if (gPartnerStatus.partnerActionState != PARTNER_ACTION_NONE) {
@@ -457,7 +457,7 @@ s32 check_input_hammer(void) {
             return FALSE;
         }
 
-        if (gPartnerStatus.partnerActionState == PARTNER_ACTION_USE && playerData->currentPartner == PARTNER_WATT) {
+        if (gPartnerStatus.partnerActionState == PARTNER_ACTION_USE && playerData->curPartner == PARTNER_WATT) {
             return FALSE;
         }
 
@@ -481,7 +481,7 @@ s32 check_input_jump(void) {
     }
 
     // @bug? collider flags not properly masked with COLLIDER_FLAG_SURFACE_TYPE
-    surfaceType = get_collider_flags((u16)gCollisionStatus.currentFloor);
+    surfaceType = get_collider_flags((u16)gCollisionStatus.curFloor);
     if ((surfaceType == SURFACE_TYPE_SLIDE) && phys_should_player_be_sliding()) {
         return FALSE;
     }
@@ -493,8 +493,8 @@ s32 check_input_jump(void) {
         return FALSE;
     }
 
-    if ((collisionStatus->currentInspect != -1) && (collisionStatus->currentInspect & COLLISION_WITH_ENTITY_BIT)) {
-        Entity* entity = get_entity_by_index(collisionStatus->currentInspect);
+    if ((collisionStatus->curInspect != -1) && (collisionStatus->curInspect & COLLISION_WITH_ENTITY_BIT)) {
+        Entity* entity = get_entity_by_index(collisionStatus->curInspect);
 
         if (entity->flags & ENTITY_FLAG_SHOWS_INSPECT_PROMPT) {
             if ((entity->boundScriptBytecode == 0) || (entity->flags & ENTITY_FLAG_4000)) {
@@ -521,7 +521,7 @@ void check_input_spin(void) {
 
     if (!((playerStatus->flags & (PS_FLAG_NO_STATIC_COLLISION | PS_FLAG_CUTSCENE_MOVEMENT)) ||
           (playerStatus->animFlags & PA_FLAG_USING_WATT) ||
-          (playerStatus->currentButtons & BUTTON_C_DOWN) ||
+          (playerStatus->curButtons & BUTTON_C_DOWN) ||
           is_ability_active(ABILITY_SLOW_GO))) {
 
         s32 actionState = playerStatus->actionState;
@@ -553,7 +553,7 @@ void peach_set_disguise_anim(AnimID anim) {
     s32 listIndex = PeachDisguiseNpcIndex;
 
     if (listIndex >= 0) {
-        get_npc_by_index(listIndex)->currentAnim = anim;
+        get_npc_by_index(listIndex)->curAnim = anim;
     }
 }
 
@@ -666,9 +666,9 @@ s32 peach_disguise_check_overlaps(void) {
     s32 i;
 
     if (playerStatus->spriteFacingAngle >= 90.0f && playerStatus->spriteFacingAngle < 270.0f) {
-        yaw = camera->currentYaw - 270.0f;
+        yaw = camera->curYaw - 270.0f;
     } else {
-        yaw = camera->currentYaw - 90.0f;
+        yaw = camera->curYaw - 90.0f;
     }
     sin_cos_rad(DEG_TO_RAD(clamp_angle(yaw)), &dx, &dy);
 

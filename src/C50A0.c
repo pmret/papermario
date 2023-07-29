@@ -664,7 +664,7 @@ void draw_coin_sparkles(ItemEntity* item) {
     x = D_80155D8C;
     y = D_80155D8E;
     z = D_80155D90;
-    angle = clamp_angle(180.0f - gCameras[gCurrentCamID].currentYaw);
+    angle = clamp_angle(180.0f - gCameras[gCurrentCamID].curYaw);
 
     guTranslateF(sp18, x, y, z);
     guTranslateF(sp58, item->pos.x, item->pos.y + 12.0f, item->pos.z);
@@ -1414,7 +1414,7 @@ void appendGfx_item_entity(void* data) {
         item->scale = 1.0f;
     }
 
-    rot = clamp_angle(180.0f - gCameras[gCurrentCamID].currentYaw);
+    rot = clamp_angle(180.0f - gCameras[gCurrentCamID].curYaw);
     guTranslateF(mtxTranslate, item->pos.x, item->pos.y + yOffset, item->pos.z);
     guRotateF(mtxRotY, rot, 0.0f, 1.0f, 0.0f);
     if (item->flags & ITEM_ENTITY_RESIZABLE) {
@@ -1624,7 +1624,7 @@ void render_item_entities(void) {
                             item->scale = 1.0f;
                         }
 
-                        rotX = clamp_angle(180.0f - gCameras[gCurrentCamID].currentYaw);
+                        rotX = clamp_angle(180.0f - gCameras[gCurrentCamID].curYaw);
                         guTranslateF(sp58, item->pos.x, -item->pos.y - offsetY, item->pos.z);
                         guRotateF(sp98, rotX, 0.0f, 1.0f, 0.0f);
                         if (item->flags & ITEM_ENTITY_RESIZABLE) {
@@ -1886,21 +1886,21 @@ b32 test_item_player_collision(ItemEntity* item) {
     colliderDiameterQuart = playerStatus->colliderDiameter / 4;
     spriteFacingAngle = playerStatus->spriteFacingAngle;
     if (spriteFacingAngle < 180.0f) {
-        spriteFacingAngle = clamp_angle(camera->currentYaw - 90.0f);
+        spriteFacingAngle = clamp_angle(camera->curYaw - 90.0f);
     } else {
-        spriteFacingAngle = clamp_angle(camera->currentYaw + 90.0f);
+        spriteFacingAngle = clamp_angle(camera->curYaw + 90.0f);
     }
 
     tmpX = playerX;
     playerY2 = playerY;
     tmpZ = playerZ;
-    if (get_clamped_angle_diff(camera->currentYaw, spriteFacingAngle) < 0.0f) {
-        angle = clamp_angle(camera->currentYaw - 90.0f);
+    if (get_clamped_angle_diff(camera->curYaw, spriteFacingAngle) < 0.0f) {
+        angle = clamp_angle(camera->curYaw - 90.0f);
         if (playerStatus->trueAnimation & 0x01000000) {
             angle = clamp_angle(angle + 30.0f);
         }
     } else {
-        angle = clamp_angle(camera->currentYaw + 90.0f);
+        angle = clamp_angle(camera->curYaw + 90.0f);
         if (playerStatus->trueAnimation & 0x01000000) {
             angle = clamp_angle(angle - 30.0f);
         }
@@ -2102,56 +2102,56 @@ void update_item_entity_collectable(ItemEntity* item) {
             if (item->spawnAngle < 0) {
                 if (IS_ITEM(item->itemID)) {
                     if (rand_int(10000) < 5000) {
-                        physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 105.0f + rand_int(30) - 15.0f);
+                        physData->moveAngle = clamp_angle(gCameras[camID].curYaw + 105.0f + rand_int(30) - 15.0f);
                     } else {
-                        physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 105.0f + rand_int(30) - 15.0f);
+                        physData->moveAngle = clamp_angle(gCameras[camID].curYaw - 105.0f + rand_int(30) - 15.0f);
                     }
                     physData->verticalVel += 4.0f;
                 } else {
                     switch (item->itemID) {
                         case ITEM_HEART:
-                            physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(120) - 60.0f);
+                            physData->moveAngle = clamp_angle(gCameras[camID].curYaw + 90.0f + rand_int(120) - 60.0f);
                             break;
                         case ITEM_FLOWER_POINT:
-                            physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 90.0f + rand_int(120) + 60.0f);
+                            physData->moveAngle = clamp_angle(gCameras[camID].curYaw - 90.0f + rand_int(120) + 60.0f);
                             break;
                         case ITEM_COIN:
                             if (rand_int(10000) < 5000) {
-                                physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(120) - 60.0f);
+                                physData->moveAngle = clamp_angle(gCameras[camID].curYaw + 90.0f + rand_int(120) - 60.0f);
                             } else {
-                                physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 90.0f + rand_int(120) - 60.0f);
+                                physData->moveAngle = clamp_angle(gCameras[camID].curYaw - 90.0f + rand_int(120) - 60.0f);
                             }
                             break;
                         case ITEM_KOOPA_FORTRESS_KEY:
                             if (rand_int(10000) >= 5000) {
-                                physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 90.0f + rand_int(120) - 60.0f);
+                                physData->moveAngle = clamp_angle(gCameras[camID].curYaw - 90.0f + rand_int(120) - 60.0f);
                             } else {
-                                physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(120) - 60.0f);
+                                physData->moveAngle = clamp_angle(gCameras[camID].curYaw + 90.0f + rand_int(120) - 60.0f);
                             }
                             break;
                         case ITEM_STAR_POINT:
                             if (item->spawnType != ITEM_SPAWN_MODE_TOSS_FADE1) {
-                                physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 90.0f + rand_int(120) - 60.0f);
+                                physData->moveAngle = clamp_angle(gCameras[camID].curYaw - 90.0f + rand_int(120) - 60.0f);
                                 break;
                             }
                             if (rand_int(10000) < 5000) {
-                                physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(60) - 30.0f);
+                                physData->moveAngle = clamp_angle(gCameras[camID].curYaw + 90.0f + rand_int(60) - 30.0f);
                             } else {
-                                physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 90.0f + rand_int(60) - 30.0f);
+                                physData->moveAngle = clamp_angle(gCameras[camID].curYaw - 90.0f + rand_int(60) - 30.0f);
                             }
                             break;
                         case ITEM_HEART_POINT:
-                            physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(120) - 60.0f);
+                            physData->moveAngle = clamp_angle(gCameras[camID].curYaw + 90.0f + rand_int(120) - 60.0f);
                             break;
                         case ITEM_STAR_PIECE:
                             if (rand_int(10000) < 5000) {
-                                physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(60) - 30.0f);
+                                physData->moveAngle = clamp_angle(gCameras[camID].curYaw + 90.0f + rand_int(60) - 30.0f);
                             } else {
-                                physData->moveAngle = clamp_angle(gCameras[camID].currentYaw - 90.0f + rand_int(60) - 30.0f);
+                                physData->moveAngle = clamp_angle(gCameras[camID].curYaw - 90.0f + rand_int(60) - 30.0f);
                             }
                             break;
                         case ITEM_HEART_PIECE:
-                            physData->moveAngle = clamp_angle(gCameras[camID].currentYaw + 90.0f + rand_int(120) - 60.0f);
+                            physData->moveAngle = clamp_angle(gCameras[camID].curYaw + 90.0f + rand_int(120) - 60.0f);
                             break;
                         default:
                             physData->moveAngle = 0.0f;

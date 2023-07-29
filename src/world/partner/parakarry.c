@@ -218,7 +218,7 @@ API_CALLABLE(N(UseAbility)) {
             parakarry->flags &= ~(NPC_FLAG_JUMPING | NPC_FLAG_GRAVITY);
             N(UsingAbility)  = TRUE;
             gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
-            parakarry->currentAnim = ANIM_WorldParakarry_CarryLight;
+            parakarry->curAnim = ANIM_WorldParakarry_CarryLight;
             partnerStatus->actingPartner = PARTNER_PARAKARRY;
             partnerStatus->partnerActionState = PARTNER_ACTION_PARAKARRY_HOVER;
             parakarry->flags &= ~NPC_FLAG_COLLDING_FORWARD_WITH_WORLD;
@@ -281,7 +281,7 @@ API_CALLABLE(N(UseAbility)) {
                 parakarry->moveToPos.x = playerStatus->pos.x;
                 parakarry->moveToPos.y = playerStatus->pos.y + 32.0f;
                 parakarry->moveToPos.z = playerStatus->pos.z;
-                parakarry->currentAnim = ANIM_WorldParakarry_Run;
+                parakarry->curAnim = ANIM_WorldParakarry_Run;
                 add_vec2D_polar(&parakarry->moveToPos.x, &parakarry->moveToPos.z, 0.0f, playerStatus->targetYaw);
                 yaw = playerStatus->targetYaw;
 
@@ -302,13 +302,13 @@ API_CALLABLE(N(UseAbility)) {
                     disable_npc_blur(parakarry);
                     parakarry->yaw = playerStatus->targetYaw;
                     parakarry->moveSpeed = 0.2f;
-                    parakarry->currentAnim = ANIM_WorldParakarry_CarryHeavy;
+                    parakarry->curAnim = ANIM_WorldParakarry_CarryHeavy;
                     parakarry->planarFlyDist = 0;
                     suggest_player_anim_always_forward(ANIM_MarioW2_HoldOnto);
                     sfx_play_sound_at_npc(SOUND_2009, SOUND_SPACE_MODE_0, NPC_PARTNER);
                     gCollisionStatus.lastTouchedFloor = NO_COLLIDER;
-                    gCollisionStatus.currentFloor = NO_COLLIDER;
-                    parakarry->currentFloor = NO_COLLIDER;
+                    gCollisionStatus.curFloor = NO_COLLIDER;
+                    parakarry->curFloor = NO_COLLIDER;
                     N(AbilityStateTime) = 20;
                     N(AbilityState) = AIR_LIFT_PICKUP;
                 }
@@ -352,7 +352,7 @@ API_CALLABLE(N(UseAbility)) {
             x = playerStatus->pos.x;
             y = playerStatus->pos.y + playerStatus->colliderHeight / 2.0f;
             z = playerStatus->pos.z;
-            halfCollisionHeight = playerStatus->spriteFacingAngle - 90.0f + gCameras[gCurrentCameraID].currentYaw;
+            halfCollisionHeight = playerStatus->spriteFacingAngle - 90.0f + gCameras[gCurrentCameraID].curYaw;
             if (player_raycast_up_corners(playerStatus, &x, &y, &z, &length, halfCollisionHeight) >= 0) {
                 suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
                 N(AbilityState) = AIR_LIFT_DROP;
@@ -433,14 +433,14 @@ API_CALLABLE(N(UseAbility)) {
                 parakarry->jumpScale = -0.01f;
                 parakarry->moveToPos.y = playerStatus->pos.y;
                 parakarry->duration = 0;
-                parakarry->currentAnim = ANIM_WorldParakarry_CarryHeavy;
+                parakarry->curAnim = ANIM_WorldParakarry_CarryHeavy;
                 parakarry->animationSpeed = 1.8f;
-                gCollisionStatus.currentFloor = NO_COLLIDER;
+                gCollisionStatus.curFloor = NO_COLLIDER;
                 N(AbilityState)++; // AIR_LIFT_CARRY
             }
             break;
         case AIR_LIFT_CARRY:
-            gCollisionStatus.currentFloor = N(update_current_floor)();
+            gCollisionStatus.curFloor = N(update_current_floor)();
             if (playerStatus->actionState == ACTION_STATE_HIT_FIRE
              || playerStatus->actionState == ACTION_STATE_HIT_LAVA
              || playerStatus->actionState == ACTION_STATE_KNOCKBACK
@@ -577,7 +577,7 @@ API_CALLABLE(N(UseAbility)) {
      || N(AbilityState) == AIR_LIFT_DROP
      || N(AbilityState) == AIR_LIFT_CANCEL
     ) {
-        parakarry->currentAnim = ANIM_WorldParakarry_Idle;
+        parakarry->curAnim = ANIM_WorldParakarry_Idle;
         N(UsingAbility)  = FALSE;
         parakarry->jumpVel = 0.0f;
         parakarry->flags &= ~NPC_FLAG_JUMPING;

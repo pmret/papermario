@@ -49,7 +49,7 @@ void N(SentinelAI_ChaseInit)(Evt* script, MobileAISettings* aiSettings, EnemyDet
     if (npc->duration <= 0) {
         npc->flags &= ~NPC_FLAG_200000;
         npc->duration = aiSettings->chaseUpdateInterval / 2 + rand_int(aiSettings->chaseUpdateInterval / 2 + 1);
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_PRE];
+        npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_PRE];
         npc->moveSpeed = aiSettings->chaseSpeed;
         angle = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
         deltaAngle = get_clamped_angle_diff(npc->yaw, angle);
@@ -165,7 +165,7 @@ void N(SentinelAI_LosePlayerInit)(Evt* script, MobileAISettings* aiSettings, Ene
         sfx_stop_sound(SOUND_80000011);
         enemy->varTable[0] &= ~SENTINEL_AI_FLAG_PLAYING_SOUND;
     }
-    npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_HIT];
+    npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_HIT];
     npc->duration = 20;
     script->AI_TEMP_STATE = AI_STATE_SENTINEL_LOSE_PLAYER;
 }

@@ -50,7 +50,7 @@ void interact_inspect_setup(void) {
         InspectIconPtr->pos.z = playerStatus->pos.z;
         InspectIconPtr->scale = 0.4f;
         InspectIconPtr->state = INSPECT_ICON_APPEAR;
-        InspectIconPtr->yaw = -gCameras[gCurrentCameraID].currentYaw;
+        InspectIconPtr->yaw = -gCameras[gCurrentCameraID].curYaw;
         InteractNotificationCallback = interact_inspect_update;
         InspectIconPtr->brightness = 255;
         InspectIconPtr->alpha = 255;
@@ -63,7 +63,7 @@ void appendGfx_interact_prompt(void) {
 
     if (gPlayerStatus.animFlags & PA_FLAG_INTERACT_PROMPT_AVAILABLE) {
         guScaleF(sp38, InspectIconPtr->scale, InspectIconPtr->scale, InspectIconPtr->scale);
-        guRotateF(sp78, InspectIconPtr->yaw - gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+        guRotateF(sp78, InspectIconPtr->yaw - gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
         guMtxCatF(sp38, sp78, sp38);
         guTranslateF(sp78, InspectIconPtr->pos.x, InspectIconPtr->pos.y, InspectIconPtr->pos.z);
         guMtxCatF(sp38, sp78, sp78);
@@ -94,11 +94,11 @@ void appendGfx_interact_prompt(void) {
 s32 should_continue_inspect(void) {
     CollisionStatus* collisionStatus = &gCollisionStatus;
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s32 curInteraction = collisionStatus->currentWall;
+    s32 curInteraction = collisionStatus->curWall;
     Npc* npc = playerStatus->encounteredNPC;
 
     if (curInteraction == NO_COLLIDER) {
-        s32 floor = gCollisionStatus.currentFloor;
+        s32 floor = gCollisionStatus.curFloor;
 
         if (floor >= 0 && (floor & COLLISION_WITH_ENTITY_BIT)) {
             curInteraction = floor;

@@ -157,14 +157,14 @@ void entity_Tweester_select_target_point(Entity* entity) {
         }
         j = rand_int(i * 10 - 1) / 10;
         paths = data->paths;
-        data->currentPath = paths[j];
+        data->curPath = paths[j];
     }
-    pathPtr = &data->currentPath[pathOffset];
+    pathPtr = &data->curPath[pathOffset];
     if (*pathPtr != TWEESTER_PATH_STOP) {
         pathOffset += 3;
         if (*pathPtr == TWEESTER_PATH_LOOP){
             pathOffset = 0;
-            pathPtr = data->currentPath;
+            pathPtr = data->curPath;
             data->targetX = *pathPtr++;
             data->targetY = *pathPtr++;
             data->targetZ = *pathPtr++;
@@ -210,7 +210,7 @@ void entity_Tweester_idle(Entity* entity) {
     if (get_time_freeze_mode() == TIME_FREEZE_NORMAL &&
         !is_picking_up_item() &&
         !(playerStatus->flags & PS_FLAG_PAUSED) &&
-        (playerData->currentPartner != PARTNER_GOOMBARIO ||
+        (playerData->curPartner != PARTNER_GOOMBARIO ||
          playerStatus->inputDisabledCount == 0 ||
          playerStatus->actionState == ACTION_STATE_USE_TWEESTER
         )) {
@@ -263,7 +263,7 @@ void entity_Tweester_idle(Entity* entity) {
     data->outerWhirlTexOffsetX += 4;
     data->outerWhirlTexOffsetY -= 16;
 
-    entity->rot.y = -gCameras[CAM_DEFAULT].currentYaw;
+    entity->rot.y = -gCameras[CAM_DEFAULT].curYaw;
 
     if (partnerStatus->partnerActionState == PARTNER_ACTION_NONE || partnerStatus->actingPartner != PARTNER_BOW) {
         if (playerStatus->actionState == ACTION_STATE_USE_TWEESTER) {

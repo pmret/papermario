@@ -143,7 +143,7 @@ s32 create_npc_impl(NpcBlueprint* blueprint, AnimID* animList, s32 isPeachNpc) {
     npc->scale.x = 1.0f;
     npc->scale.y = 1.0f;
     npc->scale.z = 1.0f;
-    npc->currentAnim = blueprint->initialAnim;
+    npc->curAnim = blueprint->initialAnim;
     npc->animationSpeed = 1.0f;
     npc->renderYaw = 0.0f;
     npc->imgfxType = IMGFX_CLEAR;
@@ -152,8 +152,8 @@ s32 create_npc_impl(NpcBlueprint* blueprint, AnimID* animList, s32 isPeachNpc) {
     npc->isFacingAway = FALSE;
     npc->yawCamOffset = 0;
     npc->turnAroundYawAdjustment = 0;
-    npc->currentFloor = NO_COLLIDER;
-    npc->currentWall = NO_COLLIDER;
+    npc->curFloor = NO_COLLIDER;
+    npc->curWall = NO_COLLIDER;
     npc->palSwapType = 0;
     npc->palSwapPrevType = 0;
     npc->screenSpaceOffset2D[0] = 0.0f;
@@ -178,9 +178,9 @@ s32 create_npc_impl(NpcBlueprint* blueprint, AnimID* animList, s32 isPeachNpc) {
         npc->extraAnimList = animList;
         if (!(npc->flags & NPC_FLAG_HAS_NO_SPRITE)) {
             if (!(npc->flags & NPC_FLAG_PARTNER)) {
-                npc->spriteInstanceID = spr_load_npc_sprite(npc->currentAnim, animList);
+                npc->spriteInstanceID = spr_load_npc_sprite(npc->curAnim, animList);
             } else {
-                npc->spriteInstanceID = spr_load_npc_sprite(npc->currentAnim | SPRITE_ID_TAIL_ALLOCATE, animList);
+                npc->spriteInstanceID = spr_load_npc_sprite(npc->curAnim | SPRITE_ID_TAIL_ALLOCATE, animList);
             }
         } else {
             npc->flags |= NPC_FLAG_INVISIBLE;
@@ -313,7 +313,7 @@ void npc_do_world_collision(Npc* npc) {
 
         if (hit) {
             npc->flags |= (NPC_FLAG_COLLDING_WITH_WORLD | NPC_FLAG_COLLDING_FORWARD_WITH_WORLD);
-            npc->currentWall = NpcHitQueryColliderID;
+            npc->curWall = NpcHitQueryColliderID;
             npc->pos.x = testX;
             npc->pos.z = testZ;
         } else {
@@ -580,7 +580,7 @@ void npc_try_apply_gravity(Npc* npc) {
         npc->jumpVel = 0.0f;
         npc->flags |= NPC_FLAG_GROUNDED;
         npc->pos.y = y;
-        npc->currentFloor = NpcHitQueryColliderID;
+        npc->curFloor = NpcHitQueryColliderID;
     } else {
         npc->flags &= ~NPC_FLAG_GROUNDED;
     }
@@ -614,7 +614,7 @@ s32 npc_try_snap_to_ground(Npc* npc, f32 velocity) {
 
     if (hitID != 0 && length <= testLength) {
         npc->pos.y = y;
-        npc->currentFloor = NpcHitQueryColliderID;
+        npc->curFloor = NpcHitQueryColliderID;
         npc->flags |= NPC_FLAG_GROUNDED;
         return TRUE;
     }
@@ -649,8 +649,8 @@ void update_npcs(void) {
                         npc->collisionChannel &= ~COLLISION_IGNORE_ENTITIES;
                     }
 
-                    npc->currentFloor = NO_COLLIDER;
-                    npc->currentWall = NO_COLLIDER;
+                    npc->curFloor = NO_COLLIDER;
+                    npc->curWall = NO_COLLIDER;
                     npc->flags &= ~(NPC_FLAG_COLLDING_FORWARD_WITH_WORLD | NPC_FLAG_COLLDING_WITH_WORLD);
 
                     npc_do_world_collision(npc);
@@ -673,14 +673,14 @@ void update_npcs(void) {
 
                     if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
                         if (!(npc->flags & NPC_FLAG_HAS_NO_SPRITE)) {
-                            if (npc->currentAnim != 0) {
+                            if (npc->curAnim != 0) {
                                 if (npc->spriteInstanceID >= 0) {
-                                    spr_update_sprite(npc->spriteInstanceID, npc->currentAnim, npc->animationSpeed);
+                                    spr_update_sprite(npc->spriteInstanceID, npc->curAnim, npc->animationSpeed);
                                 }
                             }
                         }
                     } else {
-                        spr_update_player_sprite(PLAYER_SPRITE_AUX1, npc->currentAnim, npc->animationSpeed);
+                        spr_update_player_sprite(PLAYER_SPRITE_AUX1, npc->curAnim, npc->animationSpeed);
                     }
 
                     if (npc->flags & NPC_FLAG_HAS_SHADOW) {
@@ -738,9 +738,9 @@ void update_npcs(void) {
                             if (npc->spriteInstanceID < 0) {
                                 npc->spriteInstanceID++;
                                 if (npc->spriteInstanceID == -1) {
-                                    npc->spriteInstanceID = spr_load_npc_sprite(npc->currentAnim, npc->extraAnimList);
+                                    npc->spriteInstanceID = spr_load_npc_sprite(npc->curAnim, npc->extraAnimList);
                                     ASSERT(npc->spriteInstanceID >= 0);
-                                    spr_update_sprite(npc->spriteInstanceID, npc->currentAnim, npc->animationSpeed);
+                                    spr_update_sprite(npc->spriteInstanceID, npc->curAnim, npc->animationSpeed);
                                 }
                             }
                         }
@@ -759,7 +759,7 @@ f32 npc_get_render_yaw(Npc* npc) {
     s32 direction;
 
     if (!(gOverrideFlags & (GLOBAL_OVERRIDES_8000 | GLOBAL_OVERRIDES_4000))) {
-        cameraYaw = camera->currentYaw;
+        cameraYaw = camera->curYaw;
         camRelativeYaw = get_clamped_angle_diff(cameraYaw, npc->yaw);
 
         if (camRelativeYaw < -5.0f && camRelativeYaw > -175.0f) {
@@ -864,7 +864,7 @@ void appendGfx_npc(void* data) {
     }
 
     if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
-        if (!(npc->flags & NPC_FLAG_HAS_NO_SPRITE) && (npc->currentAnim != 0) && (npc->spriteInstanceID >= 0)) {
+        if (!(npc->flags & NPC_FLAG_HAS_NO_SPRITE) && (npc->curAnim != 0) && (npc->spriteInstanceID >= 0)) {
             npc_draw_with_palswap(npc, renderYaw, mtx1);
             npc->animNotifyValue = spr_get_notify_value(npc->spriteInstanceID);
         }
@@ -898,7 +898,7 @@ void appendGfx_npc(void* data) {
         }
 
         if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
-            if (!(npc->flags & NPC_FLAG_HAS_NO_SPRITE) && (npc->currentAnim != 0)) {
+            if (!(npc->flags & NPC_FLAG_HAS_NO_SPRITE) && (npc->curAnim != 0)) {
                 spr_draw_npc_sprite(npc->spriteInstanceID, renderYaw, 0, 0, mtx1);
             }
         } else {
@@ -928,7 +928,7 @@ void appendGfx_npc(void* data) {
             guMtxCatF(mtx2, mtx1, mtx1);
         }
         if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
-            if (!(npc->flags & NPC_FLAG_HAS_NO_SPRITE) && (npc->currentAnim != 0)) {
+            if (!(npc->flags & NPC_FLAG_HAS_NO_SPRITE) && (npc->curAnim != 0)) {
                 spr_draw_npc_sprite(npc->spriteInstanceID, renderYaw, 0, 0, mtx1);
             }
         } else {
@@ -1063,7 +1063,7 @@ void set_npc_sprite(Npc* npc, s32 anim, AnimID* extraAnimList) {
         ASSERT(npc->spriteInstanceID >= 0);
     }
 
-    npc->currentAnim = anim;
+    npc->curAnim = anim;
 
     if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
         if (!(npc->flags & NPC_FLAG_HAS_NO_SPRITE)) {
@@ -1217,19 +1217,19 @@ void npc_reload_all(void) {
             if (npc->flags && !(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
                 if (!(npc->flags & NPC_FLAG_HAS_NO_SPRITE)) {
                     if (!(npc->flags & NPC_FLAG_PARTNER)) {
-                        npc->spriteInstanceID = spr_load_npc_sprite(npc->currentAnim, npc->extraAnimList);
+                        npc->spriteInstanceID = spr_load_npc_sprite(npc->curAnim, npc->extraAnimList);
                     } else {
-                        npc->spriteInstanceID = spr_load_npc_sprite(npc->currentAnim | SPRITE_ID_TAIL_ALLOCATE, npc->extraAnimList);
+                        npc->spriteInstanceID = spr_load_npc_sprite(npc->curAnim | SPRITE_ID_TAIL_ALLOCATE, npc->extraAnimList);
                     }
                 }
                 if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
                     if (!(npc->flags & NPC_FLAG_HAS_NO_SPRITE) && (npc->palSwapType != 0)) {
-                        npc->spritePaletteList = spr_get_npc_palettes(npc->currentAnim >> 16);
+                        npc->spritePaletteList = spr_get_npc_palettes(npc->curAnim >> 16);
                         npc->paletteCount = 0;
                         while (npc->spritePaletteList[npc->paletteCount] != (PAL_PTR) -1) {
                             npc->paletteCount++;
                         }
-                        npc->unk_C0 = spr_get_npc_color_variations(npc->currentAnim >> 16);
+                        npc->unk_C0 = spr_get_npc_color_variations(npc->curAnim >> 16);
                     }
                     if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
                         if (!(npc->flags & NPC_FLAG_HAS_NO_SPRITE)) {
@@ -1248,7 +1248,7 @@ void npc_reload_all(void) {
 void set_npc_yaw(Npc* npc, f32 yaw) {
     npc->yaw = yaw;
 
-    if (get_clamped_angle_diff(gCameras[gCurrentCameraID].currentYaw, yaw) >= 0.0f) {
+    if (get_clamped_angle_diff(gCameras[gCurrentCameraID].curYaw, yaw) >= 0.0f) {
         npc->yawCamOffset = 180;
         npc->isFacingAway = TRUE;
     } else {
@@ -1349,13 +1349,13 @@ s32 npc_draw_palswap_mode_1(Npc* npc, s32 arg1, Matrix4f mtx) {
     PAL_PTR dst;
 
     if (npc->dirtyPalettes != 0) {
-        npc->spritePaletteList = spr_get_npc_palettes(npc->currentAnim >> 16);
+        npc->spritePaletteList = spr_get_npc_palettes(npc->curAnim >> 16);
         npc->paletteCount = 0;
         while ((s32)npc->spritePaletteList[npc->paletteCount] != -1) {
             npc->paletteCount++;
         }
 
-        npc->unk_C0 = spr_get_npc_color_variations(npc->currentAnim >> 16);
+        npc->unk_C0 = spr_get_npc_color_variations(npc->curAnim >> 16);
         for (i = 0; i < npc->paletteCount; i++) {
             dst = npc->localPaletteData[i];
             src = npc->spritePaletteList[i];
@@ -1455,7 +1455,7 @@ s32 npc_draw_palswap_mode_2(Npc* npc, s32 arg1, s32 arg2, Matrix4f mtx) {
 
     if (npc->dirtyPalettes != 0) {
         if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
-            npc->spritePaletteList = spr_get_npc_palettes(npc->currentAnim >> 16);
+            npc->spritePaletteList = spr_get_npc_palettes(npc->curAnim >> 16);
         }
 
         npc->paletteCount = 0;
@@ -1585,7 +1585,7 @@ s32 npc_draw_palswap_mode_4(Npc* npc, s32 arg1, Matrix4f mtx) {
 
     if (npc->dirtyPalettes != 0) {
         if (!(npc->flags & NPC_FLAG_NO_ANIMS_LOADED)) {
-            npc->spritePaletteList = spr_get_npc_palettes(npc->currentAnim >> 16);
+            npc->spritePaletteList = spr_get_npc_palettes(npc->curAnim >> 16);
         }
 
         npc->paletteCount = 0;
@@ -2048,8 +2048,8 @@ s32 npc_find_standing_on_entity(s32 entityIndex) {
                 }
             }
         } else {
-            var_v1 = npc->currentFloor;
-            if (npc->currentFloor & COLLISION_WITH_ENTITY_BIT) { // TODO required to match (can't use var_v1)
+            var_v1 = npc->curFloor;
+            if (npc->curFloor & COLLISION_WITH_ENTITY_BIT) { // TODO required to match (can't use var_v1)
                 if (idx == var_v1) {
                     npc->pos = npc->pos; // TODO required to match
                     return i;
@@ -2171,7 +2171,7 @@ void spawn_surface_effects(Npc* npc, SurfaceInteractMode mode) {
 
     if ((npc->flags & (NPC_FLAG_TOUCHES_GROUND | NPC_FLAG_INVISIBLE)) == NPC_FLAG_TOUCHES_GROUND) {
         if (npc->moveSpeed != 0.0f) {
-            s32 surfaceType = get_collider_flags((u16)npc->currentFloor) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
+            s32 surfaceType = get_collider_flags((u16)npc->curFloor) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
             switch (surfaceType) {
                 case SURFACE_TYPE_FLOWERS:
                     spawn_flower_surface_effects(npc, mode);
@@ -2455,9 +2455,9 @@ void clear_encounter_status(void) {
     currentEncounter->firstStrikeType = FIRST_STRIKE_NONE;
     currentEncounter->hitType = 0;
     currentEncounter->battleTriggerCooldown = 0;
-    currentEncounter->currentAreaIndex = gGameStatusPtr->areaID;
-    currentEncounter->currentMapIndex = gGameStatusPtr->mapID;
-    currentEncounter->currentEntryIndex = gGameStatusPtr->entryID;
+    currentEncounter->curAreaIndex = gGameStatusPtr->areaID;
+    currentEncounter->curMapIndex = gGameStatusPtr->mapID;
+    currentEncounter->curEntryIndex = gGameStatusPtr->entryID;
     currentEncounter->npcGroupList = 0;
     currentEncounter->unk_08 = 0;
     currentEncounter->scriptedBattle = FALSE;
@@ -2630,7 +2630,7 @@ void kill_enemy(Enemy* enemy) {
 
     do {
         if (!(enemy->flags & ENEMY_FLAG_4)
-            && (!(enemy->flags & ENEMY_FLAG_ENABLE_HIT_SCRIPT) || (enemy == encounterStatus->currentEnemy))
+            && (!(enemy->flags & ENEMY_FLAG_ENABLE_HIT_SCRIPT) || (enemy == encounterStatus->curEnemy))
             && !(enemy->flags & ENEMY_FLAG_PASSIVE)
         ) {
             if (!(enemy->flags & ENEMY_FLAG_FLED)) {

@@ -38,7 +38,7 @@ void appendGfx_ispy_icon(void) {
 
     if (gPlayerStatus.animFlags & PA_FLAG_ISPY_VISIBLE) {
         guScaleF(matrix1, ISpyPtr->scale, ISpyPtr->scale, ISpyPtr->scale);
-        guRotateF(matrix2, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+        guRotateF(matrix2, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
         guMtxCatF(matrix1, matrix2, matrix1);
         guTranslateF(matrix2, ISpyPtr->pos.x, ISpyPtr->pos.y, ISpyPtr->pos.z);
         guMtxCatF(matrix1, matrix2, matrix2);

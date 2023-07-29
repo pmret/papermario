@@ -112,7 +112,7 @@ ApiStatus SetPlayerAnimation(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     AnimID anim = evt_get_variable(script, *args++);
 
-    gPlayerStatus.anim = playerNpc->currentAnim = anim;
+    gPlayerStatus.anim = playerNpc->curAnim = anim;
 
     if (gPlayerStatus.anim == ANIM_MarioW2_Collapse) {
         exec_ShakeCam1(0, 0, 2);
@@ -591,7 +591,7 @@ s32 func_802D23F8(void) {
 }
 
 ApiStatus WaitForPlayerTouchingFloor(Evt* script, s32 isInitialCall) {
-    if ((gCollisionStatus.currentFloor >= 0) && func_802D23F8()) {
+    if ((gCollisionStatus.curFloor >= 0) && func_802D23F8()) {
         return ApiStatus_DONE2;
     } else {
         return ApiStatus_BLOCK;
@@ -599,7 +599,7 @@ ApiStatus WaitForPlayerTouchingFloor(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus func_802D2484(Evt* script, s32 isInitialCall) {
-    if (gCollisionStatus.currentFloor >= 0) {
+    if (gCollisionStatus.curFloor >= 0) {
         return ApiStatus_DONE2;
     } else {
         return ApiStatus_BLOCK;
@@ -610,7 +610,7 @@ ApiStatus IsPlayerOnValidFloor(Evt* script, s32 isInitialCall) {
     Bytecode* args = script->ptrReadPos;
     s32 result = FALSE;
 
-    if (gCollisionStatus.currentFloor >= 0) {
+    if (gCollisionStatus.curFloor >= 0) {
         result = (func_802D23F8() != 0);
     }
     evt_set_variable(script, *args++, result);
@@ -777,7 +777,7 @@ ApiStatus GetPartnerInUse(Evt* script, s32 isInitialCall) {
     s32 currentPartner = PARTNER_NONE;
 
     if (gPartnerStatus.partnerActionState != PARTNER_ACTION_NONE) {
-        currentPartner = playerData->currentPartner;
+        currentPartner = playerData->curPartner;
     }
 
     evt_set_variable(script, outVar, currentPartner);

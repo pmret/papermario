@@ -106,7 +106,7 @@ API_CALLABLE(N(CreateEndChapterData)) {
         if ((data->yaw > 90.0f) && (data->yaw < 270.0f)) {
             backFacing = TRUE;
         }
-        npc->currentAnim = N(StarSpiritAnimations)[data->chapter][backFacing];
+        npc->curAnim = N(StarSpiritAnimations)[data->chapter][backFacing];
     }
 
     if (data->spiritCardEffect != NULL) {

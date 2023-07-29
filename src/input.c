@@ -8,7 +8,7 @@ SHIFT_BSS s16 D_8009A6A4;
 SHIFT_BSS s16 D_8009A6A6;
 
 void func_800287F0(void) {
-    gGameStatusPtr->currentButtons[0] = 0;
+    gGameStatusPtr->curButtons[0] = 0;
     gGameStatusPtr->pressedButtons[0] = 0;
     gGameStatusPtr->heldButtons[0] = 0;
     gGameStatusPtr->stickX[0] = 0;
@@ -207,17 +207,17 @@ void update_input(void) {
         }
     }
 
-    gGameStatusPtr->currentButtons[0] = buttons;
-    gGameStatusPtr->pressedButtons[0] = gGameStatusPtr->currentButtons[0] ^ gGameStatusPtr->prevButtons[0];
-    gGameStatusPtr->pressedButtons[0] &= gGameStatusPtr->currentButtons[0];
+    gGameStatusPtr->curButtons[0] = buttons;
+    gGameStatusPtr->pressedButtons[0] = gGameStatusPtr->curButtons[0] ^ gGameStatusPtr->prevButtons[0];
+    gGameStatusPtr->pressedButtons[0] &= gGameStatusPtr->curButtons[0];
     do {
-        if (gGameStatusPtr->currentButtons[0] == 0) {
+        if (gGameStatusPtr->curButtons[0] == 0) {
             gGameStatusPtr->heldButtons[0] = 0;
-        } else if (gGameStatusPtr->prevButtons[0] != gGameStatusPtr->currentButtons[0]) {
-            gGameStatusPtr->heldButtons[0] = gGameStatusPtr->currentButtons[0];
+        } else if (gGameStatusPtr->prevButtons[0] != gGameStatusPtr->curButtons[0]) {
+            gGameStatusPtr->heldButtons[0] = gGameStatusPtr->curButtons[0];
             gGameStatusPtr->unk_60 = -1;
-            gGameStatusPtr->heldButtons[0] = gGameStatusPtr->currentButtons[0] ^ gGameStatusPtr->prevButtons[0];
-            gGameStatusPtr->heldButtons[0] &= gGameStatusPtr->currentButtons[0];
+            gGameStatusPtr->heldButtons[0] = gGameStatusPtr->curButtons[0] ^ gGameStatusPtr->prevButtons[0];
+            gGameStatusPtr->heldButtons[0] &= gGameStatusPtr->curButtons[0];
             gGameStatusPtr->unk_58 = gGameStatusPtr->unk_48[0];
         } else {
             if (gGameStatusPtr->unk_60 >= 0) {
@@ -225,7 +225,7 @@ void update_input(void) {
                 if (gGameStatusPtr->unk_60 != 0) {
                     gGameStatusPtr->heldButtons[0] = 0;
                 } else {
-                    gGameStatusPtr->heldButtons[0] = gGameStatusPtr->currentButtons[0];
+                    gGameStatusPtr->heldButtons[0] = gGameStatusPtr->curButtons[0];
                     gGameStatusPtr->unk_60 = gGameStatusPtr->unk_50[0];
                 }
             } else {
@@ -233,12 +233,12 @@ void update_input(void) {
                 if (gGameStatusPtr->unk_58 != 0) {
                     gGameStatusPtr->heldButtons[0] = 0;
                 } else {
-                    gGameStatusPtr->heldButtons[0] = gGameStatusPtr->currentButtons[0];
+                    gGameStatusPtr->heldButtons[0] = gGameStatusPtr->curButtons[0];
                     gGameStatusPtr->unk_60 = gGameStatusPtr->unk_50[0];
                 }
             }
         }
     } while (0);
 
-    gGameStatusPtr->prevButtons[0] = gGameStatusPtr->currentButtons[0];
+    gGameStatusPtr->prevButtons[0] = gGameStatusPtr->curButtons[0];
 }

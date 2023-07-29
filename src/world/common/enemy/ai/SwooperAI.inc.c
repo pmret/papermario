@@ -43,7 +43,7 @@ API_CALLABLE(N(SwooperAI_Main)) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            npc->currentAnim = enemy->animList[0];
+            npc->curAnim = enemy->animList[0];
             npc->verticalRenderOffset = npc->collisionHeight;
             npc->flags |= NPC_FLAG_UPSIDE_DOWN;
             script->functionTemp[1] = 0;
@@ -63,7 +63,7 @@ API_CALLABLE(N(SwooperAI_Main)) {
                 break;
             }
         case 10:
-            npc->currentAnim = enemy->animList[3];
+            npc->curAnim = enemy->animList[3];
             npc->planarFlyDist = atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
             npc->jumpScale = 1.3f;
             npc->jumpVel = 0.0f;
@@ -173,7 +173,7 @@ API_CALLABLE(N(SwooperAI_Main)) {
                 break;
             }
         case 14:
-            npc->currentAnim = enemy->animList[8];
+            npc->curAnim = enemy->animList[8];
             npc->verticalRenderOffset = npc->collisionHeight;
             npc->flags |= NPC_FLAG_UPSIDE_DOWN;
             npc->duration = 15;

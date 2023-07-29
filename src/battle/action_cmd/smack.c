@@ -151,11 +151,11 @@ void N(update)(void) {
                 }
 
                 if (!actionCommandStatus->isBarFilled) {
-                    if (battleStatus->currentButtonsDown & BUTTON_STICK_LEFT) {
+                    if (battleStatus->curButtonsDown & BUTTON_STICK_LEFT) {
                         actionCommandStatus->unk_5C = TRUE;
                     }
 
-                    if (!(battleStatus->currentButtonsDown & BUTTON_STICK_LEFT) && actionCommandStatus->unk_5C) {
+                    if (!(battleStatus->curButtonsDown & BUTTON_STICK_LEFT) && actionCommandStatus->unk_5C) {
                         if (actionCommandStatus->targetWeakness == 0) {
                             actionCommandStatus->barFillLevel += battleStatus->actionCmdDifficultyTable[actionCommandStatus->difficulty] * 13;
                         } else {
@@ -165,7 +165,7 @@ void N(update)(void) {
                         actionCommandStatus->unk_5C = 0;
                     }
 
-                    if (battleStatus->currentButtonsPressed & BUTTON_STICK_RIGHT) {
+                    if (battleStatus->curButtonsPressed & BUTTON_STICK_RIGHT) {
                         actionCommandStatus->barFillLevel -= battleStatus->actionCmdDifficultyTable[actionCommandStatus->difficulty] * 11;
                     }
                 }

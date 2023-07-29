@@ -127,7 +127,7 @@ void snowflake_appendGfx(void* effect) {
     gSPDisplayList(gMainGfxPos++, D_09000900_331800);
 
     guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
-    guRotateF(spD8, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guRotateF(spD8, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(spD8, sp18, sp118);
     guMtxF2L(sp118, &gDisplayContext->matrixStack[gMatrixListPos]);
 

@@ -25,14 +25,14 @@ void clear_trigger_data(void) {
 
     gTriggerCount = 0;
     collisionStatus->pushingAgainstWall = NO_COLLIDER;
-    collisionStatus->currentFloor = NO_COLLIDER;
+    collisionStatus->curFloor = NO_COLLIDER;
     collisionStatus->lastTouchedFloor = NO_COLLIDER;
-    collisionStatus->currentCeiling = NO_COLLIDER;
-    collisionStatus->currentInspect = NO_COLLIDER;
+    collisionStatus->curCeiling = NO_COLLIDER;
+    collisionStatus->curInspect = NO_COLLIDER;
     collisionStatus->unk_0C = -1;
     collisionStatus->unk_0E = -1;
     collisionStatus->unk_10 = -1;
-    collisionStatus->currentWall = NO_COLLIDER;
+    collisionStatus->curWall = NO_COLLIDER;
     collisionStatus->lastWallHammered = NO_COLLIDER;
     collisionStatus->touchingWallTrigger = 0;
     collisionStatus->bombetteExploded = -1;
@@ -109,7 +109,7 @@ void update_triggers(void) {
         }
 
         if (listTrigger->flags.flags & TRIGGER_WALL_PUSH) {
-            if (listTrigger->location.colliderID == collisionStatus->currentWall) {
+            if (listTrigger->location.colliderID == collisionStatus->curWall) {
                 func_800E06C0(1);
             }
             if (listTrigger->location.colliderID == collisionStatus->pushingAgainstWall) {
@@ -120,7 +120,7 @@ void update_triggers(void) {
         }
 
         if (listTrigger->flags.flags & TRIGGER_FLOOR_TOUCH) {
-            if (listTrigger->location.colliderID != collisionStatus->currentFloor) {
+            if (listTrigger->location.colliderID != collisionStatus->curFloor) {
                 continue;
             }
         }
@@ -132,16 +132,16 @@ void update_triggers(void) {
         }
 
         if (listTrigger->flags.flags & TRIGGER_WALL_PRESS_A) {
-            if (listTrigger->location.colliderID == collisionStatus->currentWall) {
+            if (listTrigger->location.colliderID == collisionStatus->curWall) {
                 collisionStatus->touchingWallTrigger = 1;
             }
-            if ((listTrigger->location.colliderID != collisionStatus->currentInspect) || !phys_can_player_interact()) {
+            if ((listTrigger->location.colliderID != collisionStatus->curInspect) || !phys_can_player_interact()) {
                 continue;
             }
         }
 
         if (listTrigger->flags.flags & TRIGGER_WALL_TOUCH) {
-            if (listTrigger->location.colliderID != collisionStatus->currentWall) {
+            if (listTrigger->location.colliderID != collisionStatus->curWall) {
                 continue;
             }
         }
@@ -153,7 +153,7 @@ void update_triggers(void) {
         }
 
         if (listTrigger->flags.flags & TRIGGER_FLOOR_PRESS_A) {
-            if ((listTrigger->location.colliderID != collisionStatus->currentFloor) ||
+            if ((listTrigger->location.colliderID != collisionStatus->curFloor) ||
                 !(gGameStatusPtr->pressedButtons[0] & BUTTON_A) || (gPlayerStatus.flags & PS_FLAG_INPUT_DISABLED)) {
                 continue;
             }
@@ -166,7 +166,7 @@ void update_triggers(void) {
         }
 
         if (listTrigger->flags.flags & TRIGGER_CEILING_TOUCH) {
-            if (listTrigger->location.colliderID != collisionStatus->currentCeiling) {
+            if (listTrigger->location.colliderID != collisionStatus->curCeiling) {
                 continue;
             }
         }

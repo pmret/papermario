@@ -30,12 +30,12 @@ void action_update_knockback(void) {
 
         ReturnAngle = atan2(playerStatus->pos.x, playerStatus->pos.z, playerStatus->lastGoodPos.x,
                            playerStatus->lastGoodPos.z);
-        playerStatus->currentSpeed = get_xz_dist_to_player(playerStatus->lastGoodPos.x, playerStatus->lastGoodPos.z) / 18.0f;
+        playerStatus->curSpeed = get_xz_dist_to_player(playerStatus->lastGoodPos.x, playerStatus->lastGoodPos.z) / 18.0f;
     }
 
     sin_cos_rad(DEG_TO_RAD(ReturnAngle), &dx, &dy);
 
-    speed = playerStatus->currentSpeed;
+    speed = playerStatus->curSpeed;
 
     if (playerStatus->flags & PS_FLAG_ENTERING_BATTLE) {
         speed *= 0.5f;

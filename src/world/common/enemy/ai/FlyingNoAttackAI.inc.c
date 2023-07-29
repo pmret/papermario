@@ -14,7 +14,7 @@ void N(FlyingNoAttackAI_12)(Evt* script, MobileAISettings* aiSettings, EnemyDete
     f32 angleDiff;
 
     npc->duration = (aiSettings->chaseUpdateInterval / 2) + rand_int(aiSettings->chaseUpdateInterval / 2 + 1);
-    npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_CHASE];
+    npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_CHASE];
     npc->moveSpeed = aiSettings->chaseSpeed;
 
     tempAngle = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
@@ -44,7 +44,7 @@ void N(FlyingNoAttackAI_13)(Evt* script, MobileAISettings* aiSettings, EnemyDete
 
     if (basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 1) == 0) {
         fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0xF, &var);
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
+        npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         npc->duration = 30;
         script->functionTemp[0] = 20;
         enemy->varTable[9] = 30;

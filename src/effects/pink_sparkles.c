@@ -247,7 +247,7 @@ void pink_sparkles_appendGfx(void* effect) {
     colorIdx = (part->unk_20 - 1) * 3;
 
     guTranslateF(sp98, part->unk_04, part->unk_08, part->unk_0C);
-    guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp58, sp98, sp98);
 
     part++;

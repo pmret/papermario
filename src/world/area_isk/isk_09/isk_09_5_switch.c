@@ -8,7 +8,7 @@ extern EvtScript N(EVS_OnTouch_RedSwitch);
 API_CALLABLE(N(WaitForPlayerTouchingGround)) {
     Bytecode* args = script->ptrReadPos;
     s32 colliderID = evt_get_variable(script, *args++);
-    if (gCollisionStatus.currentFloor != colliderID) {
+    if (gCollisionStatus.curFloor != colliderID) {
         return ApiStatus_DONE2;
     } else {
         return ApiStatus_BLOCK;

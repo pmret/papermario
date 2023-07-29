@@ -82,8 +82,8 @@ ApiStatus func_802CA988(Evt* script, s32 isInitialCall) {
 
     gCameras[id].updateMode = CAM_UPDATE_MODE_2;
     gCameras[id].needsInit = FALSE;
-    gCameras[id].auxPitch = -round(gCameras[id].currentPitch);
-    gCameras[id].auxBoomLength = -gCameras[id].currentBlendedYawNegated;
+    gCameras[id].auxPitch = -round(gCameras[id].curPitch);
+    gCameras[id].auxBoomLength = -gCameras[id].curBlendedYawNegated;
 
     dx = gCameras[id].lookAt_obj.x - gCameras[id].lookAt_eye.x;
     dy = gCameras[id].lookAt_obj.y - gCameras[id].lookAt_eye.y;

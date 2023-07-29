@@ -234,7 +234,7 @@ void effect_3D_appendGfx(void* effect) {
         gDPSetPrimColor(gMainGfxPos++, 0, 0, 200, 255, 255, part->unk_58);
 
         guTranslateF(sp18, part->pos.x, part->pos.y, part->pos.z);
-        guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+        guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
         guMtxCatF(sp58, sp18, sp18);
         guScaleF(sp58, part->unk_44, part->unk_48, part->unk_44);
         guMtxCatF(sp58, sp18, sp18);

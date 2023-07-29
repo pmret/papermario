@@ -157,7 +157,7 @@ void N(appendGfx_records)(void* data) {
         case RECORDS_STATE_IDLE:
             records->alpha = 255;
             records->lastAlpha = records->alpha;
-            if (gGameStatusPtr->currentButtons[0] & (BUTTON_A | BUTTON_B)) {
+            if (gGameStatusPtr->curButtons[0] & (BUTTON_A | BUTTON_B)) {
                 records->state = RECORDS_STATE_BEGIN_FADE_OUT;
             }
             if (records->state != RECORDS_STATE_BEGIN_FADE_OUT) {

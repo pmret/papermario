@@ -195,7 +195,7 @@ void state_step_intro(void) {
                 playerData->partners[i].enabled = 0;
             }
 
-            playerData->currentPartner = PARTNER_NONE;
+            playerData->curPartner = PARTNER_NONE;
             load_map_by_IDs(gGameStatusPtr->areaID, gGameStatusPtr->mapID, 0);
             gGameStatusPtr->introState = INTRO_STATE_3;
             disable_player_input();

@@ -50,7 +50,7 @@ void N(func_80241610_990DF0)(void) {
     gDPSetAlphaCompare(gMainGfxPos++, G_AC_NONE);
 
     guTranslateF(transformMtx, ambush->pos.x, ambush->pos.y, ambush->pos.z);
-    guRotateF(tempMtx, ambush->rot.y + gCameras[gCurrentCameraID].currentYaw + ambush->renderYaw, 0.0f, 1.0f, 0.0f);
+    guRotateF(tempMtx, ambush->rot.y + gCameras[gCurrentCameraID].curYaw + ambush->renderYaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(tempMtx, transformMtx, transformMtx);
     guRotateF(tempMtx, ambush->rot.z, 0.0f, 0.0f, 1.0f);
     guMtxCatF(tempMtx, transformMtx, transformMtx);

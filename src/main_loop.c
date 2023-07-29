@@ -15,7 +15,7 @@ s8 gGameStepDelayAmount = 1;
 s8 gGameStepDelayCount = 5;
 
 GameStatus gGameStatus = {
-    .currentButtons = {0},
+    .curButtons = {0},
     .pressedButtons = {0},
     .heldButtons = {0},
     .prevButtons = {0},

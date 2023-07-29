@@ -115,8 +115,8 @@ API_CALLABLE(N(UpdateAntiGuyPosition)) {
     }
 
     if (npc->pos.x != x || npc->pos.y != y || npc->pos.z != z) {
-        if (npc->currentAnim != ANIM_ShyGuy_Black_Anim02 && script->varTable[10]++ >= 6) {
-            npc->currentAnim = ANIM_ShyGuy_Black_Anim02;
+        if (npc->curAnim != ANIM_ShyGuy_Black_Anim02 && script->varTable[10]++ >= 6) {
+            npc->curAnim = ANIM_ShyGuy_Black_Anim02;
             script->varTable[10] = 0;
         }
         npc->pos.x = x;
@@ -125,8 +125,8 @@ API_CALLABLE(N(UpdateAntiGuyPosition)) {
         npc->colliderPos.y = npc->pos.y;
         npc->colliderPos.z = npc->pos.z;
         npc->flags |= NPC_FLAG_DIRTY_SHADOW;
-    } else if (npc->currentAnim != ANIM_ShyGuy_Black_Anim01) {
-        npc->currentAnim = ANIM_ShyGuy_Black_Anim01;
+    } else if (npc->curAnim != ANIM_ShyGuy_Black_Anim01) {
+        npc->curAnim = ANIM_ShyGuy_Black_Anim01;
     }
     npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
     return ApiStatus_DONE2;

@@ -140,7 +140,7 @@ void dust_appendGfx(void* effect) {
     gDPSetEnvColor(gMainGfxPos++, part->unk_3C, part->unk_40, part->unk_44, 0);
 
     guTranslateF(sp18, part->unk_04, part->unk_08, part->unk_0C);
-    guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp58, sp18, sp98);
 
     unk_00 = part->unk_00;

@@ -69,7 +69,7 @@ API_CALLABLE(N(SetupDemoScene)) {
             func_800EF3D4(0);
             wPartnerNpc->yaw = 270.0f;
             gPlayerStatus.targetYaw = 270.0f;
-            gPlayerStatus.currentYaw = 270.0f;
+            gPlayerStatus.curYaw = 270.0f;
             gPlayerStatus.spriteFacingAngle = 180.0f;
             return ApiStatus_DONE2;
     }

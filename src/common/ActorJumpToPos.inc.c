@@ -2,15 +2,15 @@
 
 API_CALLABLE(N(ActorJumpToPos)) {
     Actor* actor = get_actor(script->owner1.actorID);
-    Vec3f* temp_f0 = &actor->state.currentPos;
+    Vec3f* temp_f0 = &actor->state.curPos;
 
     if (isInitialCall) {
         script->functionTemp[0] = 0;
     }
     if (script->functionTemp[0] == 0) {
-        actor->state.currentPos.x = actor->currentPos.x;
-        actor->state.currentPos.y = actor->currentPos.y;
-        actor->state.currentPos.z = actor->currentPos.z;
+        actor->state.curPos.x = actor->curPos.x;
+        actor->state.curPos.y = actor->curPos.y;
+        actor->state.curPos.z = actor->curPos.z;
         script->functionTemp[0] = 1;
     }
 
@@ -21,16 +21,16 @@ API_CALLABLE(N(ActorJumpToPos)) {
         set_animation(ACTOR_SELF, 1, actor->state.animJumpFall);
     }
 
-    actor->state.currentPos.y += actor->state.vel;
+    actor->state.curPos.y += actor->state.vel;
     actor->state.vel = actor->state.vel - actor->state.acceleration;
     add_xz_vec3f(temp_f0, actor->state.speed, actor->state.angle);
-    actor->currentPos.x = actor->state.currentPos.x;
-    actor->currentPos.y = actor->state.currentPos.y;
-    actor->currentPos.z = actor->state.currentPos.z;
+    actor->curPos.x = actor->state.curPos.x;
+    actor->curPos.y = actor->state.curPos.y;
+    actor->curPos.z = actor->state.curPos.z;
 
-    if (actor->currentPos.y < 0.0f) {
-        actor->currentPos.y = 0.0f;
-        play_movement_dust_effects(2, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z, actor->yaw);
+    if (actor->curPos.y < 0.0f) {
+        actor->curPos.y = 0.0f;
+        play_movement_dust_effects(2, actor->curPos.x, actor->curPos.y, actor->curPos.z, actor->yaw);
         sfx_play_sound(SOUND_SOFT_LAND);
         return ApiStatus_DONE1;
     }

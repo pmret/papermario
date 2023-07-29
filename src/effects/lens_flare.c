@@ -120,7 +120,7 @@ void lens_flare_appendGfx(void* effect) {
     gSPDisplayList(gMainGfxPos++, D_E0034788[type]);
 
     guTranslateF(mtxTransform, data->pos.x, data->pos.y, data->pos.z);
-    guRotateF(mtxTemp, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guRotateF(mtxTemp, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(mtxTemp, mtxTransform, mtxShared);
 
     alpha = data->smallFlareAlpha;

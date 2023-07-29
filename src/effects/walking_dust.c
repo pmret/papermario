@@ -155,7 +155,7 @@ void walking_dust_appendGfx(void* effect) {
 
     for (i = 0; i < effectTemp->numParts; i++, data++) {
         guTranslateF(sp18, data->unk_08, data->unk_0C, data->unk_10);
-        guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+        guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
         guMtxCatF(sp58, sp18, sp18);
         guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++],

@@ -17,9 +17,9 @@ API_CALLABLE(N(func_802A123C_722D7C)) {
     if (actor != NULL) {
         sfx_play_sound(SOUND_366);
 
-        posX = actor->currentPos.x;
-        posY = actor->currentPos.y + (actor->size.y / 10);
-        posZ = actor->currentPos.z;
+        posX = actor->curPos.x;
+        posY = actor->curPos.y + (actor->size.y / 10);
+        posZ = actor->curPos.z;
 
         scaleX = (actor->size.x + (actor->size.x >> 2)) * actor->scalingFactor;
         scaleY = (actor->size.y - 2) * actor->scalingFactor;

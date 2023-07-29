@@ -212,7 +212,7 @@ s32 entity_TriggerBlock_start_bound_script(Entity* entity) {
 
 void entity_TriggerBlock_disable_player_input(void) {
     disable_player_input();
-    gPlayerStatus.currentSpeed = 0.0f;
+    gPlayerStatus.curSpeed = 0.0f;
     gPlayerStatus.flags |= PS_FLAG_SCRIPTED_FALL;
     set_action_state(ACTION_STATE_FALLING);
     gravity_use_fall_parms();

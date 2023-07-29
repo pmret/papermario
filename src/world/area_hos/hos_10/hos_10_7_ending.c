@@ -88,7 +88,7 @@ API_CALLABLE(N(SetHaloAlpha)) {
 }
 
 API_CALLABLE(N(ClearCurrentPartner)) {
-    gPlayerData.currentPartner = PARTNER_NONE;
+    gPlayerData.curPartner = PARTNER_NONE;
     return ApiStatus_DONE2;
 }
 

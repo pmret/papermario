@@ -176,7 +176,7 @@ API_CALLABLE(N(func_80240F14_B21454)) {
 
     switch (script->functionTemp[2]) {
         case 0:
-            npc->currentAnim = 0xB60001;
+            npc->curAnim = 0xB60001;
             npc->yaw -= 1.0f;
             npc->pos.x -= 3.0f;
             script->functionTemp[1]--;

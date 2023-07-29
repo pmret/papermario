@@ -193,7 +193,7 @@ void func_E0090444(EffectInstance* effect) {
 
         if (type < 5) {
             guTranslateF(mtxA, data->pos.x, data->pos.y, data->pos.z);
-            guRotateF(mtxB, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+            guRotateF(mtxB, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
             guMtxCatF(mtxB, mtxA, mtxA);
             guScaleF(mtxB, scale, scale, 1.0f);
             guMtxCatF(mtxB, mtxA, mtxA);

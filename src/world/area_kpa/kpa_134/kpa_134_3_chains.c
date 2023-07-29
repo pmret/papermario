@@ -75,7 +75,7 @@ API_CALLABLE(N(DetectLowerChainGrab)) {
     playerStatus->pos.x = 50.0f;
     playerStatus->pos.y = 150.0f;
     playerStatus->pos.z = -34.0f;
-    playerStatus->currentSpeed = 0.0f;
+    playerStatus->curSpeed = 0.0f;
     return ApiStatus_DONE2;
 }
 
@@ -322,7 +322,7 @@ API_CALLABLE(N(DetectUpperChainGrab)) {
     playerStatus->pos.x = 680.0f;
     playerStatus->pos.y = 275.0f;
     playerStatus->pos.z = -35.0f;
-    playerStatus->currentSpeed = 0.0f;
+    playerStatus->curSpeed = 0.0f;
     return ApiStatus_DONE2;
 }
 

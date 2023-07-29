@@ -44,7 +44,7 @@ API_CALLABLE(N(SpinyAI_Main)) {
     if (isInitialCall || (enemy->varTable[10] == 100)) {
         script->AI_TEMP_STATE = 100;
         npc->duration = 0;
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
+        npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         npc->flags &= ~NPC_FLAG_JUMPING;
         enemy->flags |= ENEMY_FLAG_ACTIVE_WHILE_OFFSCREEN;
         npc->flags &= ~NPC_FLAG_GRAVITY;
@@ -61,7 +61,7 @@ API_CALLABLE(N(SpinyAI_Main)) {
         npc->collisionHeight = enemy->varTable[6];
         enemy->aiFlags &= ~ENEMY_AI_FLAG_SUSPEND;
         if (npc->flags & NPC_FLAG_JUMPING) {
-            npc->currentAnim = ANIM_Spiny_Anim18;
+            npc->curAnim = ANIM_Spiny_Anim18;
             npc->moveSpeed = 0.0f;
             npc->jumpVel = 0.0f;
             npc->jumpScale = 1.0f;
@@ -69,7 +69,7 @@ API_CALLABLE(N(SpinyAI_Main)) {
         } else {
             EffectInstance* emoteTemp;
             fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 0x28, &emoteTemp);
-            npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
+            npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
             script->functionTemp[1] = 0;
             script->AI_TEMP_STATE = 200;
         }
@@ -131,7 +131,7 @@ API_CALLABLE(N(SpinyAI_Main)) {
             npc->flags &= ~NPC_FLAG_INVISIBLE;
             npc->flags &= ~NPC_FLAG_GRAVITY;
             npc->renderYaw = 0.0f;
-            npc->currentAnim = ANIM_Spiny_Anim18;
+            npc->curAnim = ANIM_Spiny_Anim18;
             script->AI_TEMP_STATE = 101;
         case 101:
             if (enemy->varTable[10] != 3) {
@@ -189,7 +189,7 @@ API_CALLABLE(N(SpinyAI_Main)) {
                     npc->flags &= ~NPC_FLAG_JUMPING;
                     npc->jumpVel = 0.0f;
                     npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
-                    npc->currentAnim = ANIM_Spiny_Anim1A;
+                    npc->curAnim = ANIM_Spiny_Anim1A;
                     npc->duration = 3;
                     script->AI_TEMP_STATE = 103;
                     break;
@@ -202,7 +202,7 @@ API_CALLABLE(N(SpinyAI_Main)) {
             npc->duration--;
             if (npc->duration <= 0) {
                 npc->flags &= ~NPC_FLAG_IGNORE_CAMERA_FOR_YAW;
-                npc->currentAnim = ANIM_Spiny_Anim01;
+                npc->curAnim = ANIM_Spiny_Anim01;
                 script->AI_TEMP_STATE = 0;
             }
             break;
