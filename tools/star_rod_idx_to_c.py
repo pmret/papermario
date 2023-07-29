@@ -24,12 +24,16 @@ INCLUDES_NEEDED["npcs"] = {}
 INCLUDES_NEEDED["sprites"] = set()
 INCLUDES_NEEDED["tattle"] = []
 
+
 def get_flag_name(arg):
-    v = arg - 2**32 # convert to s32
+    v = arg - 2**32  # convert to s32
     if v > -250000000:
-        if v <= -220000000: return str((v + 230000000) / 1024)
-        elif v <= -200000000: return f"ArrayFlag({v + 210000000})"
-        elif v <= -180000000: return f"ArrayVar({v + 190000000})"
+        if v <= -220000000:
+            return str((v + 230000000) / 1024)
+        elif v <= -200000000:
+            return f"ArrayFlag({v + 210000000})"
+        elif v <= -180000000:
+            return f"ArrayVar({v + 190000000})"
         elif v <= -160000000:
             if v + 170000000 == 0:
                 return "GB_StoryProgress"
@@ -37,13 +41,20 @@ def get_flag_name(arg):
                 return "GB_WorldLocation"
             else:
                 return f"GameByte({v + 170000000})"
-        elif v <= -140000000: return f"AreaByte({v + 150000000})"
-        elif v <= -120000000: return f"GameFlag({v + 130000000})"
-        elif v <= -100000000: return f"AreaFlag({v + 110000000})"
-        elif v <= -80000000: return f"MapFlag({v + 90000000})"
-        elif v <= -60000000: return f"LocalFlag({v + 70000000})"
-        elif v <= -40000000: return f"MapVar({v + 50000000})"
-        elif v <= -20000000: return f"LocalVar({v + 30000000})"
+        elif v <= -140000000:
+            return f"AreaByte({v + 150000000})"
+        elif v <= -120000000:
+            return f"GameFlag({v + 130000000})"
+        elif v <= -100000000:
+            return f"AreaFlag({v + 110000000})"
+        elif v <= -80000000:
+            return f"MapFlag({v + 90000000})"
+        elif v <= -60000000:
+            return f"LocalFlag({v + 70000000})"
+        elif v <= -40000000:
+            return f"MapVar({v + 50000000})"
+        elif v <= -20000000:
+            return f"LocalVar({v + 30000000})"
 
     if arg == 0xFFFFFFFF:
         return "-1"
@@ -54,8 +65,13 @@ def get_flag_name(arg):
     else:
         return f"{arg}"
 
+
 def get_function_list(area_name, map_name, rom_offset):
-    map_file = (Path(__file__).parent.parent / "ver" / "current" / "build" / "papermario.map").read_text().splitlines()
+    map_file = (
+        (Path(__file__).parent.parent / "ver" / "current" / "build" / "papermario.map")
+        .read_text()
+        .splitlines()
+    )
     i = 0
     firstFind = False
     functions = {}
@@ -70,7 +86,7 @@ def get_function_list(area_name, map_name, rom_offset):
                     vram = int(vram, 16)
                     func = func.replace(f"{map_name}_", "")
                     if func.count("_") == 2:
-                        func = func.rsplit("_",1)[0]
+                        func = func.rsplit("_", 1)[0]
                     functions[vram] = func
                 i += 1
         if firstFind:
@@ -79,6 +95,7 @@ def get_function_list(area_name, map_name, rom_offset):
 
     return functions
 
+
 def get_include_list(area_name, map_name):
     include_path = Path(__file__).parent.parent / "src" / "world" / "common"
     includes = set()
@@ -86,16 +103,20 @@ def get_include_list(area_name, map_name):
         if file.is_file() and ".inc.c" in file.parts[-1]:
             with open(file, "r", encoding="utf8") as f:
                 for line in f:
-                    if (line.startswith("void N(") or line.startswith("ApiStatus N(")) and "{" in line:
-                        func_name = line.split("N(",1)[1].split(")",1)[0]
+                    if (
+                        line.startswith("void N(") or line.startswith("ApiStatus N(")
+                    ) and "{" in line:
+                        func_name = line.split("N(", 1)[1].split(")", 1)[0]
                         includes.add(func_name)
     return includes
+
 
 def read_enum(num: int, constants_name: str) -> str:
     if num in disasm_script.CONSTANTS[constants_name]:
         return disasm_script.CONSTANTS[constants_name][num]
     else:
         return num
+
 
 def read_flags(flags: int, constants_name: str) -> str:
     enabled = []
@@ -115,6 +136,7 @@ def read_flags(flags: int, constants_name: str) -> str:
 
     return " | ".join(enabled)
 
+
 def read_ptr(addr: int, symbol_map: dict, needs_ampersand: bool = False) -> str:
     if addr == 0:
         return "NULL"
@@ -125,6 +147,7 @@ def read_ptr(addr: int, symbol_map: dict, needs_ampersand: bool = False) -> str:
             return f"{symbol_map[addr][0][1]}"
     else:
         return f"(void*) 0x{addr:08X}"
+
 
 def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace=None):
     global INCLUDES_NEEDED, INCLUDED
@@ -139,7 +162,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
 
     def transform_symbol_name(symbol):
         if namespace and symbol.startswith(namespace + "_"):
-            return "N(" + symbol[len(namespace)+1:] + ")"
+            return "N(" + symbol[len(namespace) + 1 :] + ")"
         return symbol
 
     while len(midx) > 0:
@@ -148,12 +171,16 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
         name = struct["name"]
         print(name, file=sys.stderr)
 
-        #INCLUDED["functions"].add(name)
+        # INCLUDED["functions"].add(name)
 
         if comments:
             out += f"// {romstart+struct['start']:X}-{romstart+struct['end']:X} (VRAM: {struct['vaddr']:X})\n"
 
-        if struct["type"] == "ASCII" or struct["type"] == "SJIS" or struct["type"] == "ConstDouble":
+        if (
+            struct["type"] == "ASCII"
+            or struct["type"] == "SJIS"
+            or struct["type"] == "ConstDouble"
+        ):
             # rodata string hopefully inlined elsewhere
             out += f"// rodata: {struct['name']}\n"
 
@@ -165,18 +192,23 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                 main_script_name = name
 
             # For PlayMusic script if using a separate header file
-            #if afterHeader:
+            # if afterHeader:
             #    INCLUDES_NEEDED["forward"].append(f"EvtScript " + name + ";")
             #    afterHeader = False
-            disasm_script.LOCAL_WORDS = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+            disasm_script.LOCAL_WORDS = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
             script_text = disasm_script.ScriptDisassembler(
-                bytes, name, symbol_map, romstart, INCLUDES_NEEDED, INCLUDED,
+                bytes,
+                name,
+                symbol_map,
+                romstart,
+                INCLUDES_NEEDED,
+                INCLUDED,
                 transform_symbol_name=transform_symbol_name,
                 use_script_lib=False,
             ).disassemble()
 
             if "EVS_ShakeTree" in name or "EVS_SearchBush" in name:
-                symbol_map[struct["vaddr"]][0][1] = name.split("_",1)[0] + ")"
+                symbol_map[struct["vaddr"]][0][1] = name.split("_", 1)[0] + ")"
                 if not treePrint:
                     out += f"=======================================\n"
                     out += f"==========BELOW foliage.inc.c==========\n"
@@ -188,9 +220,13 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                 script_text = script_text.splitlines()
                 walkDistance = exitIdx = map_ = entryIdx = ""
                 if "UseExitHeading" in script_text[2]:
-                    walkDistance, exitIdx = script_text[2].split("(",1)[1].split(")",1)[0].split(",")
+                    walkDistance, exitIdx = (
+                        script_text[2].split("(", 1)[1].split(")", 1)[0].split(",")
+                    )
                 if "GotoMap" in script_text[4]:
-                    map_, entryIdx = script_text[4].split("(",1)[1].split(")",1)[0].split(",")
+                    map_, entryIdx = (
+                        script_text[4].split("(", 1)[1].split(")", 1)[0].split(",")
+                    )
                 if walkDistance and exitIdx and map_ and entryIdx:
                     out += f"EvtScript {name} = EVT_EXIT_WALK({walkDistance}, {exitIdx}, {map_}, {entryIdx});\n"
                 else:
@@ -210,8 +246,11 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
             z = []
             w = []
             for _ in range(entry_count):
-                a,b,c,d = unpack_from(">ffff", entry_list, pos)
-                x.append(f"{a:.01f}"); y.append(f"{b:.01f}"); z.append(f"{c:.01f}"); w.append(f"{d:.01f}")
+                a, b, c, d = unpack_from(">ffff", entry_list, pos)
+                x.append(f"{a:.01f}")
+                y.append(f"{b:.01f}")
+                z.append(f"{c:.01f}")
+                w.append(f"{d:.01f}")
                 pos += 16
 
             x_size = max([len(a) for a in x])
@@ -219,7 +258,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
             z_size = max([len(a) for a in z])
             w_size = max([len(a) for a in w])
 
-            for a,b,c,d in zip(x,y,z,w):
+            for a, b, c, d in zip(x, y, z, w):
                 out += f"\n    {{ {a:>{x_size}}f, {b:>{y_size}}f, {c:>{z_size}}f, {d:>{w_size}}f }},"
 
             out += f"\n}};\n"
@@ -233,16 +272,29 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                     var_names = ["unk_00", "unk_24"]
                     data = unpack_from(">4B", npcSettings, i)
                     if not sum(data) == 0:
-                        tmp_out += INDENT + f".{var_names[0] if i == 0 else var_names[1]} = {{ " + ", ".join(f"0x{x:02X}" for x in data) + f" }},\n"
+                        tmp_out += (
+                            INDENT
+                            + f".{var_names[0] if i == 0 else var_names[1]} = {{ "
+                            + ", ".join(f"0x{x:02X}" for x in data)
+                            + f" }},\n"
+                        )
                 elif i == 0x4 or i == 0x28:
                     var_names = ["height", "radius", "level", "unk_2A"]
-                    for x,var in enumerate(unpack_from(">2h", npcSettings, i)):
-                        var_name = var_names[x if i == 0x4 else x+2]
+                    for x, var in enumerate(unpack_from(">2h", npcSettings, i)):
+                        var_name = var_names[x if i == 0x4 else x + 2]
                         if not var == 0:
                             tmp_out += INDENT + f".{var_name} = {var},\n"
                 elif i == 0x8:
-                    var_names = ["otherAI", "onInteract", "ai", "onHit", "aux", "onDefeat", "flags"]
-                    for x,var in enumerate(unpack_from(f">7I", npcSettings, i)):
+                    var_names = [
+                        "otherAI",
+                        "onInteract",
+                        "ai",
+                        "onHit",
+                        "aux",
+                        "onDefeat",
+                        "flags",
+                    ]
+                    for x, var in enumerate(unpack_from(f">7I", npcSettings, i)):
                         var_name = var_names[x]
                         if not var == 0:
                             if var == 0x80077F70:
@@ -250,9 +302,14 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                             elif var == 0x8007809C:
                                 tmp_out += INDENT + f".{var_name} = &EnemyNpcDefeat,\n"
                             elif var_name != "flags" and var in symbol_map:
-                                tmp_out += INDENT + f".{var_name} = &{symbol_map[var][0][1]},\n"
+                                tmp_out += (
+                                    INDENT
+                                    + f".{var_name} = &{symbol_map[var][0][1]},\n"
+                                )
                                 if symbol_map[var][0][1] not in INCLUDED["functions"]:
-                                    INCLUDES_NEEDED["forward"].append(symbol_map[var][0][1])
+                                    INCLUDES_NEEDED["forward"].append(
+                                        symbol_map[var][0][1]
+                                    )
                             else:
                                 tmp_out += INDENT + f".{var_name} = 0x{var:08X},\n"
                 i += 1
@@ -264,8 +321,20 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
             npcAISettings = bytes.read(struct["length"])
 
             i = x = 0
-            var_names = ["moveSpeed", "moveTime", "waitTime", "alertRadius", "unk_10", "unk_14",
-                         "chaseSpeed", "unk_1C", "unk_20", "chaseRadius", "unk_28", "unk_2C"]
+            var_names = [
+                "moveSpeed",
+                "moveTime",
+                "waitTime",
+                "alertRadius",
+                "unk_10",
+                "unk_14",
+                "chaseSpeed",
+                "unk_1C",
+                "unk_20",
+                "chaseRadius",
+                "unk_28",
+                "unk_2C",
+            ]
             while i < struct["length"]:
                 var_f, var_i1, var_i2 = unpack_from(f">fii", npcAISettings, i)
                 if not var_f == 0:
@@ -274,9 +343,14 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                     # account for X32
                     if var_names[x + 1] in ["unk_10", "unk_1C", "unk_28"]:
                         if var_i1 < -100000 or var_i1 > 100000:
-                            tmp_out += INDENT + f".{var_names[x + 1]} = {{ .f = {unpack_from('>f', npcAISettings, i+4)[0]:.01f}f }},\n"
+                            tmp_out += (
+                                INDENT
+                                + f".{var_names[x + 1]} = {{ .f = {unpack_from('>f', npcAISettings, i+4)[0]:.01f}f }},\n"
+                            )
                         else:
-                            tmp_out += INDENT + f".{var_names[x + 1]} = {{ .s = {var_i1} }},\n"
+                            tmp_out += (
+                                INDENT + f".{var_names[x + 1]} = {{ .s = {var_i1} }},\n"
+                            )
                     else:
                         tmp_out += INDENT + f".{var_names[x + 1]} = {var_i1},\n"
                 if not var_i2 == 0:
@@ -289,66 +363,118 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
         elif struct["type"] == "NpcGroup":
             staticNpc = bytes.read(struct["length"])
             curr_base = 0
-            numNpcs = struct['length'] // 0x1F0
+            numNpcs = struct["length"] // 0x1F0
             tmp_out = f"NpcData {name}" + ("[]" if numNpcs > 1 else "") + f" = {{\n"
 
             for z in range(numNpcs):
                 i = 0
-                var_names = ["id", "settings", "pos", "flags",
-                             "init", "unk_1C", "yaw", "dropFlags",
-                             "itemDropChance", "itemDrops", "heartDrops", "flowerDrops",
-                             "minCoinBonus", "maxCoinBonus", "movement", "animations",
-                             "unk_1E0", "extraAnimations", "tattle"]
+                var_names = [
+                    "id",
+                    "settings",
+                    "pos",
+                    "flags",
+                    "init",
+                    "unk_1C",
+                    "yaw",
+                    "dropFlags",
+                    "itemDropChance",
+                    "itemDrops",
+                    "heartDrops",
+                    "flowerDrops",
+                    "minCoinBonus",
+                    "maxCoinBonus",
+                    "movement",
+                    "animations",
+                    "unk_1E0",
+                    "extraAnimations",
+                    "tattle",
+                ]
 
                 if numNpcs > 1:
                     tmp_out += INDENT + f"{{\n"
-                    INDENT = INDENT*2
+                    INDENT = INDENT * 2
 
                 while i < 0x1F0:
                     if i == 0x0 or i == 0x24:
                         var_name = var_names[0] if i == 0x0 else var_names[6]
-                        var = unpack_from(f">i", staticNpc, curr_base+i)[0]
+                        var = unpack_from(f">i", staticNpc, curr_base + i)[0]
                         if var_name == "id":
-                            tmp_out += INDENT + f".{var_name} = {disasm_script.CONSTANTS['MAP_NPCS'][var]},\n"
+                            tmp_out += (
+                                INDENT
+                                + f".{var_name} = {disasm_script.CONSTANTS['MAP_NPCS'][var]},\n"
+                            )
                         else:
                             tmp_out += INDENT + f".{var_name} = {var},\n"
                     elif i == 0x4 or i == 0x14 or i == 0x18 or i == 0x1E8:
-                        var_name = var_names[1] if i == 0x4 else var_names[3] if i == 0x14 else var_names[4] if i == 0x18 else var_names[17]
-                        addr = unpack_from(f">I", staticNpc, curr_base+i)[0]
+                        var_name = (
+                            var_names[1]
+                            if i == 0x4
+                            else var_names[3]
+                            if i == 0x14
+                            else var_names[4]
+                            if i == 0x18
+                            else var_names[17]
+                        )
+                        addr = unpack_from(f">I", staticNpc, curr_base + i)[0]
                         if not addr == 0:
                             if var_name != "flags" and addr in symbol_map:
                                 if var_name == "extraAnimations":
-                                    tmp_out += INDENT + f".{var_name} = {symbol_map[addr][0][1]},\n"
+                                    tmp_out += (
+                                        INDENT
+                                        + f".{var_name} = {symbol_map[addr][0][1]},\n"
+                                    )
                                 else:
-                                    tmp_out += INDENT + f".{var_name} = &{symbol_map[addr][0][1]},\n"
+                                    tmp_out += (
+                                        INDENT
+                                        + f".{var_name} = &{symbol_map[addr][0][1]},\n"
+                                    )
 
                                 if symbol_map[addr][0][1] not in INCLUDED["functions"]:
-                                    INCLUDES_NEEDED["forward"].append(symbol_map[addr][0][1])
+                                    INCLUDES_NEEDED["forward"].append(
+                                        symbol_map[addr][0][1]
+                                    )
                             else:
                                 enabled = []
                                 for x in range(32):
                                     val = addr & (1 << x)
                                     if val:
                                         if val in disasm_script.CONSTANTS["NpcFlags"]:
-                                            enabled.append(disasm_script.CONSTANTS["NpcFlags"][val])
+                                            enabled.append(
+                                                disasm_script.CONSTANTS["NpcFlags"][val]
+                                            )
                                         else:
-                                            print(f"NpcFlag 0x{val:08X} missing from NpcFlag enums!")
+                                            print(
+                                                f"NpcFlag 0x{val:08X} missing from NpcFlag enums!"
+                                            )
                                             enabled.append(f"0x{val:08X}")
                                 if not enabled:
                                     enabled.append(0)
-                                tmp_out += INDENT + f".{var_name} = " + " | ".join(enabled) + f",\n"
+                                tmp_out += (
+                                    INDENT
+                                    + f".{var_name} = "
+                                    + " | ".join(enabled)
+                                    + f",\n"
+                                )
                     elif i == 0x8:
-                        pos = unpack_from(f">fff", staticNpc, curr_base+i)
+                        pos = unpack_from(f">fff", staticNpc, curr_base + i)
                         if not sum(pos) == 0:
-                            tmp_out += INDENT + f".pos = {{ {pos[0]:.01f}f, {pos[1]:.01f}f, {pos[2]:.01f}f }},\n"
+                            tmp_out += (
+                                INDENT
+                                + f".pos = {{ {pos[0]:.01f}f, {pos[1]:.01f}f, {pos[2]:.01f}f }},\n"
+                            )
                     elif i == 0x1C or i == 0x1E0:
                         var_name = var_names[5] if i == 0x1C else var_names[16]
-                        data = unpack_from(f">8B", staticNpc, curr_base+i)
+                        data = unpack_from(f">8B", staticNpc, curr_base + i)
                         if not sum(data) == 0:
-                            tmp_out += INDENT + f".{var_name} = {{ " + ", ".join(f"{x:02X}" for x in data) + f"}},\n"
+                            tmp_out += (
+                                INDENT
+                                + f".{var_name} = {{ "
+                                + ", ".join(f"{x:02X}" for x in data)
+                                + f"}},\n"
+                            )
                     elif i == 0x28 or i == 0x29:
                         var_name = var_names[7] if i == 0x28 else var_names[8]
-                        var = unpack_from(f">b", staticNpc, curr_base+i)[0]
+                        var = unpack_from(f">b", staticNpc, curr_base + i)[0]
                         if not var == 0:
                             if var_name == "dropFlags":
                                 tmp_out += INDENT + f".{var_name} = 0x{abs(var):02X},\n"
@@ -358,10 +484,18 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                         var_name = var_names[9]
                         tmp_tmp = ""
                         for x in range(8):
-                            item, weight, unk_08 = unpack_from(f">3h", staticNpc, curr_base+i)
+                            item, weight, unk_08 = unpack_from(
+                                f">3h", staticNpc, curr_base + i
+                            )
                             if not (item == 0 and weight == 0 and unk_08 == 0):
-                                item = disasm_script.CONSTANTS["ItemIDs"][item] if item in disasm_script.CONSTANTS["ItemIDs"] else f"{item}"
-                                tmp_tmp += INDENT*2 + f"{{ {item}, {weight}, {unk_08} }},\n"
+                                item = (
+                                    disasm_script.CONSTANTS["ItemIDs"][item]
+                                    if item in disasm_script.CONSTANTS["ItemIDs"]
+                                    else f"{item}"
+                                )
+                                tmp_tmp += (
+                                    INDENT * 2 + f"{{ {item}, {weight}, {unk_08} }},\n"
+                                )
                             i += 0x6
 
                         if tmp_tmp:
@@ -374,82 +508,149 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                         var_name = var_names[10] if i == 0x5A else var_names[11]
                         drops = []
                         for x in range(8):
-                            cutoff, generalChance, attempts, chancePerAttempt = unpack_from(f">4h", staticNpc, curr_base+i)
-                            if not (cutoff == 0 and generalChance == 0 and attempts == 0 and chancePerAttempt == 0):
-                                drops.append([cutoff, generalChance, attempts, chancePerAttempt])
+                            (
+                                cutoff,
+                                generalChance,
+                                attempts,
+                                chancePerAttempt,
+                            ) = unpack_from(f">4h", staticNpc, curr_base + i)
+                            if not (
+                                cutoff == 0
+                                and generalChance == 0
+                                and attempts == 0
+                                and chancePerAttempt == 0
+                            ):
+                                drops.append(
+                                    [cutoff, generalChance, attempts, chancePerAttempt]
+                                )
                             i += 0x8
                         i -= 1
                         if drops:
                             tmp_out += INDENT + f".{var_name} = "
                             if var_name == "heartDrops":
-                                if round(drops[0][1] / 327.67, 2) == 70 and round(drops[0][3] / 327.67, 2) == 50:
+                                if (
+                                    round(drops[0][1] / 327.67, 2) == 70
+                                    and round(drops[0][3] / 327.67, 2) == 50
+                                ):
                                     tmp_out += f"STANDARD_HEART_DROPS({drops[0][2]})"
-                                elif round(drops[0][1] / 327.67, 2) == 80 and round(drops[0][3] / 327.67, 2) == 50:
+                                elif (
+                                    round(drops[0][1] / 327.67, 2) == 80
+                                    and round(drops[0][3] / 327.67, 2) == 50
+                                ):
                                     tmp_out += f"GENEROUS_HEART_DROPS({drops[0][2]})"
-                                elif round(drops[0][1] / 327.67, 2) == 80 and round(drops[0][3] / 327.67, 2) == 60:
-                                    tmp_out += f"GENEROUS_WHEN_LOW_HEART_DROPS({drops[0][2]})"
-                                elif round(drops[0][0] / 327.67, 2) == 100 and round(drops[0][1] / 327.67, 2) == 0 and round(drops[0][2] / 327.67, 2) == 0:
+                                elif (
+                                    round(drops[0][1] / 327.67, 2) == 80
+                                    and round(drops[0][3] / 327.67, 2) == 60
+                                ):
+                                    tmp_out += (
+                                        f"GENEROUS_WHEN_LOW_HEART_DROPS({drops[0][2]})"
+                                    )
+                                elif (
+                                    round(drops[0][0] / 327.67, 2) == 100
+                                    and round(drops[0][1] / 327.67, 2) == 0
+                                    and round(drops[0][2] / 327.67, 2) == 0
+                                ):
                                     tmp_out += f"NO_DROPS"
                                 else:
-                                    print(f"Unknown heart drop macro, values were {round(drops[0][1] / 327.67, 2)} and {round(drops[0][3] / 327.67, 2)}")
+                                    print(
+                                        f"Unknown heart drop macro, values were {round(drops[0][1] / 327.67, 2)} and {round(drops[0][3] / 327.67, 2)}"
+                                    )
                                     exit()
                             else:
-                                if round(drops[0][1] / 327.67, 2) == 50 and round(drops[0][3] / 327.67, 2) == 40:
+                                if (
+                                    round(drops[0][1] / 327.67, 2) == 50
+                                    and round(drops[0][3] / 327.67, 2) == 40
+                                ):
                                     tmp_out += f"STANDARD_FLOWER_DROPS({drops[0][2]})"
-                                elif round(drops[0][1] / 327.67, 2) == 70 and round(drops[0][3] / 327.67, 2) == 50:
-                                    tmp_out += f"GENEROUS_WHEN_LOW_FLOWER_DROPS({drops[0][2]})"
-                                elif round(drops[0][1] / 327.67, 2) == 40 and round(drops[0][3] / 327.67, 2) == 40:
+                                elif (
+                                    round(drops[0][1] / 327.67, 2) == 70
+                                    and round(drops[0][3] / 327.67, 2) == 50
+                                ):
+                                    tmp_out += (
+                                        f"GENEROUS_WHEN_LOW_FLOWER_DROPS({drops[0][2]})"
+                                    )
+                                elif (
+                                    round(drops[0][1] / 327.67, 2) == 40
+                                    and round(drops[0][3] / 327.67, 2) == 40
+                                ):
                                     tmp_out += f"REDUCED_FLOWER_DROPS({drops[0][2]})"
-                                elif round(drops[0][0] / 327.67, 2) == 100 and round(drops[0][1] / 327.67, 2) == 0 and round(drops[0][2] / 327.67, 2) == 0:
+                                elif (
+                                    round(drops[0][0] / 327.67, 2) == 100
+                                    and round(drops[0][1] / 327.67, 2) == 0
+                                    and round(drops[0][2] / 327.67, 2) == 0
+                                ):
                                     tmp_out += f"NO_DROPS"
                                 else:
-                                    print(f"Unknown flower drop macro, values were {round(drops[0][1] / 327.67, 2)} and {round(drops[0][3] / 327.67, 2)}")
+                                    print(
+                                        f"Unknown flower drop macro, values were {round(drops[0][1] / 327.67, 2)} and {round(drops[0][3] / 327.67, 2)}"
+                                    )
                                     exit()
 
                             tmp_out += f",\n"
                     elif i == 0xDA or i == 0xDC:
                         var_name = var_names[12] if i == 0xDA else var_names[13]
-                        var = unpack_from(">h", staticNpc, curr_base+i)[0]
+                        var = unpack_from(">h", staticNpc, curr_base + i)[0]
                         if not var == 0:
                             tmp_out += INDENT + f".{var_name} = {var},\n"
                     elif i == 0xE0:
-                        data = unpack_from(">48i", staticNpc, curr_base+i)
+                        data = unpack_from(">48i", staticNpc, curr_base + i)
                         if not sum(data) == 0:
                             end_pos = len(data)
-                            for x,datum in enumerate(data):
+                            for x, datum in enumerate(data):
                                 if not datum == 0:
                                     end_pos = x
-                            tmp_out += INDENT + f".territory = { .temp = {{ " + ", ".join(f"{x}" for x in data[:end_pos+1]) + f" }}},\n"
+                            tmp_out += (
+                                INDENT
+                                + f".territory = {{ .temp = {{ "
+                                + ", ".join(f"{x}" for x in data[: end_pos + 1])
+                                + f" }}}},\n"
+                            )
                     elif i == 0x1A0:
                         tmp_out += INDENT + f".{var_names[15]} = {{\n"
                         for x in range(16):
-                            anim = unpack_from(">I", staticNpc, curr_base+i)[0]
+                            anim = unpack_from(">I", staticNpc, curr_base + i)[0]
                             if not anim == 0:
-                                sprite_id =  (anim & 0x00FF0000) >> 16
+                                sprite_id = (anim & 0x00FF0000) >> 16
                                 palette_id = (anim & 0x0000FF00) >> 8
-                                anim_id =    (anim & 0x000000FF) >> 0
-                                sprite =  disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["name"]
-                                palette = disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["palettes"][palette_id]
-                                anim =    disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["anims"][anim_id]
+                                anim_id = (anim & 0x000000FF) >> 0
+                                sprite = disasm_script.CONSTANTS["NPC_SPRITE"][
+                                    sprite_id
+                                ]["name"]
+                                palette = disasm_script.CONSTANTS["NPC_SPRITE"][
+                                    sprite_id
+                                ]["palettes"][palette_id]
+                                anim = disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id][
+                                    "anims"
+                                ][anim_id]
                                 if numNpcs > 1:
-                                    tmp_out += INDENT + "    " + f"NPC_ANIM_{sprite}_{palette}_{anim},\n"
+                                    tmp_out += (
+                                        INDENT
+                                        + "    "
+                                        + f"NPC_ANIM_{sprite}_{palette}_{anim},\n"
+                                    )
                                 else:
-                                    tmp_out += INDENT*2 + f"NPC_ANIM_{sprite}_{palette}_{anim},\n"
+                                    tmp_out += (
+                                        INDENT * 2
+                                        + f"NPC_ANIM_{sprite}_{palette}_{anim},\n"
+                                    )
                                 INCLUDES_NEEDED["sprites"].add(sprite)
                             i += 4
                         tmp_out += INDENT + f"}},\n"
                         i -= 1
                     elif i == 0x1EC:
-                        var = unpack_from(">I", staticNpc, curr_base+i)[0]
+                        var = unpack_from(">I", staticNpc, curr_base + i)[0]
                         if not var == 0:
-                            tmp_out += INDENT + f".{var_names[18]} = MESSAGE_ID(0x{(var & 0xFF0000) >> 16:02X}, 0x{var & 0xFFFF:04X}),\n"
+                            tmp_out += (
+                                INDENT
+                                + f".{var_names[18]} = MESSAGE_ID(0x{(var & 0xFF0000) >> 16:02X}, 0x{var & 0xFFFF:04X}),\n"
+                            )
 
                     i += 1
 
                 if numNpcs > 1:
-                    INDENT = INDENT[:len(INDENT)//2]
+                    INDENT = INDENT[: len(INDENT) // 2]
                     tmp_out += INDENT + f"}},\n"
-                if z+1 == numNpcs:
+                if z + 1 == numNpcs:
                     tmp_out += "};\n"
 
                 curr_base += 0x1F0
@@ -464,12 +665,16 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                 if anim == 0xFFFFFFFF:
                     tmp_out += INDENT + f"ANIM_LIST_END,\n"
                 elif not anim == 0:
-                    sprite_id =  (anim & 0x00FF0000) >> 16
+                    sprite_id = (anim & 0x00FF0000) >> 16
                     palette_id = (anim & 0x0000FF00) >> 8
-                    anim_id =    (anim & 0x000000FF) >> 0
-                    sprite =  disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["name"]
-                    palette = disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["palettes"][palette_id]
-                    anim =    disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["anims"][anim_id]
+                    anim_id = (anim & 0x000000FF) >> 0
+                    sprite = disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["name"]
+                    palette = disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id][
+                        "palettes"
+                    ][palette_id]
+                    anim = disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["anims"][
+                        anim_id
+                    ]
                     tmp_out += INDENT + f"NPC_ANIM_{sprite}_{palette}_{anim},\n"
                     INCLUDES_NEEDED["sprites"].add(sprite)
                 i += 4
@@ -487,7 +692,10 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                     battle_b = (battle & 0x00FF0000) >> 16
                     battle_c = (battle & 0x0000FF00) >> 8
                     battle_d = (battle & 0x000000FF) >> 0
-                    tmp_out += INDENT + f"NPC_GROUP({symbol_map[npcs][0][1]}, BATTLE_ID({battle_a}, {battle_b}, {battle_c}, {battle_d})),\n"
+                    tmp_out += (
+                        INDENT
+                        + f"NPC_GROUP({symbol_map[npcs][0][1]}, BATTLE_ID({battle_a}, {battle_b}, {battle_c}, {battle_d})),\n"
+                    )
                     if symbol_map[npcs][0][1] not in INCLUDED["functions"]:
                         INCLUDES_NEEDED["forward"].append(symbol_map[npcs][0][1])
                 i += 0xC
@@ -502,7 +710,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                 out += f"    {disasm_script.CONSTANTS['ItemIDs'][item]},\n"
             out += f"}};\n"
         elif struct["type"] == "TreeDropList":
-            new_name = "N(" + name.split('_',1)[1][:-1].lower() + "_Drops)"
+            new_name = "N(" + name.split("_", 1)[1][:-1].lower() + "_Drops)"
             symbol_map[struct["vaddr"]][0][1] = new_name
 
             out += f"FoliageDropList {new_name} = {{\n"
@@ -518,11 +726,17 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
             pos = 4
             for _ in range(count):
                 entry = list(unpack_from(">7I", data, pos))
-                pos += 7*4
+                pos += 7 * 4
 
-                entry[1] = entry[1] - 0x100000000 if entry[1] >= 0x80000000 else entry[1]
-                entry[2] = entry[2] - 0x100000000 if entry[2] >= 0x80000000 else entry[2]
-                entry[3] = entry[3] - 0x100000000 if entry[3] >= 0x80000000 else entry[3]
+                entry[1] = (
+                    entry[1] - 0x100000000 if entry[1] >= 0x80000000 else entry[1]
+                )
+                entry[2] = (
+                    entry[2] - 0x100000000 if entry[2] >= 0x80000000 else entry[2]
+                )
+                entry[3] = (
+                    entry[3] - 0x100000000 if entry[3] >= 0x80000000 else entry[3]
+                )
 
                 flag1 = get_flag_name(entry[5])
                 flag2 = get_flag_name(entry[6])
@@ -532,9 +746,9 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                 out += f"{INDENT * 3}.pos = {{ {entry[1]}, {entry[2]}, {entry[3]} }},\n"
                 if entry[4] != 0:
                     out += f"{INDENT * 3}.spawnMode = 0x{entry[4]:X},\n"
-                if flag1 != '0':
+                if flag1 != "0":
                     out += f"{INDENT * 3}.pickupFlag = {flag1},\n"
-                if flag2 != '0':
+                if flag2 != "0":
                     out += f"{INDENT * 3}.spawnFlag = {flag2},\n"
                 out += f"{INDENT * 2}}},\n"
 
@@ -546,7 +760,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
         elif struct["type"] == "TreeModelList" or struct["type"] == "TreeEffectVectors":
             isModelList = struct["type"] == "TreeModelList"
 
-            name_parts = name.split('_')
+            name_parts = name.split("_")
             if isModelList:
                 new_name = "N(" + name_parts[1].lower() + "_" + name_parts[2]
             else:
@@ -586,11 +800,17 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                 for _ in range(count):
                     entry = list(unpack_from(">3I", data, pos))
 
-                    entry[0] = entry[0] - 0x100000000 if entry[0] >= 0x80000000 else entry[0]
-                    entry[1] = entry[1] - 0x100000000 if entry[1] >= 0x80000000 else entry[1]
-                    entry[2] = entry[2] - 0x100000000 if entry[2] >= 0x80000000 else entry[2]
+                    entry[0] = (
+                        entry[0] - 0x100000000 if entry[0] >= 0x80000000 else entry[0]
+                    )
+                    entry[1] = (
+                        entry[1] - 0x100000000 if entry[1] >= 0x80000000 else entry[1]
+                    )
+                    entry[2] = (
+                        entry[2] - 0x100000000 if entry[2] >= 0x80000000 else entry[2]
+                    )
 
-                    pos += 3*4
+                    pos += 3 * 4
 
                     out += f"{INDENT * 2}{{ {entry[0]}, {entry[1]}, {entry[2]} }},\n"
 
@@ -600,10 +820,10 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
             out += f"}};\n"
 
         elif struct["type"] == "SearchBushEvent":
-            new_name = "N(" + name.split('_',1)[1].lower()
+            new_name = "N(" + name.split("_", 1)[1].lower()
             symbol_map[struct["vaddr"]][0][1] = new_name
 
-            num = int(new_name.split("bush",1)[1][:-1])
+            num = int(new_name.split("bush", 1)[1][:-1])
             out += f"SearchBushConfig {new_name} = {{\n"
 
             data = bytes.read(struct["length"])
@@ -621,10 +841,10 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
             out += f"}};\n"
 
         elif struct["type"] == "ShakeTreeEvent":
-            new_name = "N(" + name.split('_',1)[1].lower()
+            new_name = "N(" + name.split("_", 1)[1].lower()
             symbol_map[struct["vaddr"]][0][1] = new_name
 
-            num = int(new_name.split("tree",1)[1][:-1])
+            num = int(new_name.split("tree", 1)[1][:-1])
             out += f"ShakeTreeConfig {new_name} = {{\n"
 
             data = bytes.read(struct["length"])
@@ -656,20 +876,22 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
 
             bytes.read(0x10)
 
-            main,entry_list,entry_count = unpack(">IIi", bytes.read(4 * 3))
+            main, entry_list, entry_count = unpack(">IIi", bytes.read(4 * 3))
             out += f"    .main = &N(main),\n"
             out += f"    .entryList = &{entry_list_name},\n"
             out += f"    .entryCount = ENTRY_COUNT({entry_list_name}),\n"
 
             bytes.read(0x1C)
 
-            bg,tattle = unpack(">II", bytes.read(4 * 2))
+            bg, tattle = unpack(">II", bytes.read(4 * 2))
             if bg == 0x80200000:
                 out += f"    .background = &gBackgroundImage,\n"
             elif bg != 0:
                 raise Exception(f"unknown MapSettings background {bg:X}")
-            #out += f"    .tattle = 0x{tattle:X},\n"
-            INCLUDES_NEEDED["tattle"].append(f"- [0x{(tattle & 0xFF0000) >> 16:02X}, 0x{tattle & 0xFFFF:04X}, {map_name}_tattle]")
+            # out += f"    .tattle = 0x{tattle:X},\n"
+            INCLUDES_NEEDED["tattle"].append(
+                f"- [0x{(tattle & 0xFF0000) >> 16:02X}, 0x{tattle & 0xFFFF:04X}, {map_name}_tattle]"
+            )
             out += f"    .tattle = {{ MSG_{map_name}_tattle }},\n"
 
             out += f"}};\n"
@@ -678,7 +900,7 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
             bytes.read(struct["length"])
             out += f"s32 {name}();\n"
         elif struct["type"] == "FloatTable":
-            vram = int(name.split("_",1)[1][:-1], 16)
+            vram = int(name.split("_", 1)[1][:-1], 16)
             name = f"N(D_{vram:X}_{(vram - 0x80240000) + romstart:X})"
             struct["name"] = name
             out += f"f32 {name}[] = {{"
@@ -695,10 +917,10 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
             if len(data) > 0:
                 out += f"Vec3f {name}[] = {{\n"
                 out += f"\t"
-            for i,pos in enumerate(range(0, len(data), 0xC)):
+            for i, pos in enumerate(range(0, len(data), 0xC)):
                 x, y, z = unpack_from(">fff", data, pos)
                 out += f" {{ {x:.01f}, {y:.01f}, {z:.01f} }},"
-                if (i+1) % 2 == 0:
+                if (i + 1) % 2 == 0:
                     out += f"\n\t"
             out += f"\n}};\n"
 
@@ -707,7 +929,9 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
 
             num_bytes_remaining = struct["length"]
             while num_bytes_remaining > 0:
-                actor, position, priority, var0, var1, var2, var3 = unpack(">IIIIIII", bytes.read(0x1C))
+                actor, position, priority, var0, var1, var2, var3 = unpack(
+                    ">IIIIIII", bytes.read(0x1C)
+                )
                 num_bytes_remaining -= 0x1C
 
                 out += "    { "
@@ -720,7 +944,6 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                         INCLUDES_NEEDED["forward"].append(s)
                 else:
                     out += f".actor = {actor}, "
-
 
                 if position in symbol_map:
                     out += f".home = {{ .vec = &{symbol_map[position][0][1]} }}"
@@ -746,7 +969,9 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
 
             num_bytes_remaining = struct["length"]
             while num_bytes_remaining > 0:
-                name, formation_length, ptr, stage_ptr, zero = unpack(">IIIII", bytes.read(4 * 5))
+                name, formation_length, ptr, stage_ptr, zero = unpack(
+                    ">IIIII", bytes.read(4 * 5)
+                )
                 num_bytes_remaining -= 4 * 5
 
                 if name == 0:
@@ -829,11 +1054,13 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
 
                 element = disasm_script.CONSTANTS["Statuses"][element]
 
-                value = (anim & 0x00FFFFFF)
+                value = anim & 0x00FFFFFF
 
                 if value in disasm_script.CONSTANTS["NPC_SPRITE"]:
-                   INCLUDES_NEEDED["sprites"].add(disasm_script.CONSTANTS['NPC_SPRITE'][str(value) + ".h"])
-                   anim =  disasm_script.CONSTANTS['NPC_SPRITE'][value]
+                    INCLUDES_NEEDED["sprites"].add(
+                        disasm_script.CONSTANTS["NPC_SPRITE"][str(value) + ".h"]
+                    )
+                    anim = disasm_script.CONSTANTS["NPC_SPRITE"][value]
                 else:
                     anim = f"{anim:06X}"
 
@@ -849,17 +1076,35 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                 d = unpack(">IbbbbbbhIIIIbbxxxxxx", bytes.read(36))
 
                 out += INDENT + "{\n"
-                out += INDENT + INDENT + f".flags = {read_flags(d[0], 'ActorPartFlags')},\n"
+                out += (
+                    INDENT
+                    + INDENT
+                    + f".flags = {read_flags(d[0], 'ActorPartFlags')},\n"
+                )
                 out += INDENT + INDENT + f".index = {d[1]},\n"
-                out += INDENT + INDENT  + f".posOffset = {{ {d[2]}, {d[3]}, {d[4]} }},\n"
-                out += INDENT + INDENT  + f".targetOffset = {{ {d[5]}, {d[6]} }},\n"
-                out += INDENT + INDENT  + f".opacity = {d[7]},\n"
-                out += INDENT + INDENT  + f".idleAnimations = N(IdleAnimations_{d[8]:08X}),\n"
-                out += INDENT + INDENT  + f".defenseTable = N(DefenseTable_{d[9]:08X}),\n"
-                out += INDENT + INDENT  + f".eventFlags = {read_flags(d[10], 'ActorEventFlags')},\n"
-                out += INDENT + INDENT  + f".elementImmunityFlags = {read_flags(d[11], 'ElementImmunityFlags')},\n"
-                out += INDENT + INDENT  + f".unk_1C = {d[12]},\n"
-                out += INDENT + INDENT  + f".unk_1D = {d[13]},\n"
+                out += INDENT + INDENT + f".posOffset = {{ {d[2]}, {d[3]}, {d[4]} }},\n"
+                out += INDENT + INDENT + f".targetOffset = {{ {d[5]}, {d[6]} }},\n"
+                out += INDENT + INDENT + f".opacity = {d[7]},\n"
+                out += (
+                    INDENT
+                    + INDENT
+                    + f".idleAnimations = N(IdleAnimations_{d[8]:08X}),\n"
+                )
+                out += (
+                    INDENT + INDENT + f".defenseTable = N(DefenseTable_{d[9]:08X}),\n"
+                )
+                out += (
+                    INDENT
+                    + INDENT
+                    + f".eventFlags = {read_flags(d[10], 'ActorEventFlags')},\n"
+                )
+                out += (
+                    INDENT
+                    + INDENT
+                    + f".elementImmunityFlags = {read_flags(d[11], 'ElementImmunityFlags')},\n"
+                )
+                out += INDENT + INDENT + f".unk_1C = {d[12]},\n"
+                out += INDENT + INDENT + f".unk_1D = {d[13]},\n"
                 out += INDENT + "},\n"
 
             out += f"}};\n"
@@ -895,7 +1140,18 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
         elif struct["type"] == "Stage":
             out += f"Stage NAMESPACE = {{\n"
 
-            texture, shape, hit, preBattle, postBattle, bg, unk_18, unk_1C, unk_20, unk_24 = unpack(">IIIIIIIIII", bytes.read(struct["length"]))
+            (
+                texture,
+                shape,
+                hit,
+                preBattle,
+                postBattle,
+                bg,
+                unk_18,
+                unk_1C,
+                unk_20,
+                unk_24,
+            ) = unpack(">IIIIIIIIII", bytes.read(struct["length"]))
 
             if texture != 0:
                 out += f"    .texture = {symbol_map[texture][0][1]},\n"
@@ -928,9 +1184,9 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
                 out += f"    .unk_24 = {unk_24:X},\n"
 
             out += f"}};\n"
-        else: # unknown type of struct
+        else:  # unknown type of struct
             if struct["name"].startswith("N(unk_802"):
-                vram = int(name.split("_",1)[1][:-1], 16)
+                vram = int(name.split("_", 1)[1][:-1], 16)
                 name = f"N(D_{vram:X}_{(vram - 0x80240000) + romstart:X})"
                 struct["name"] = name
 
@@ -957,52 +1213,62 @@ def disassemble(bytes, midx, symbol_map={}, comments=True, romstart=0, namespace
     # end of data
     return out
 
+
 def parse_midx(file, prefix="", vram=0x80240000):
     structs = []
 
     for line in file.readlines():
         s = line.split("#")
         if len(s) == 5 or len(s) == 6:
-            if s[0] == "$Start": continue
-            if s[0] == "$End": continue
+            if s[0] == "$Start":
+                continue
+            if s[0] == "$End":
+                continue
 
-            structs.append({
-                "name": "N(" + prefix + name_struct(s[0]) + ")",
-                "type": s[1],
-                "start": int(s[2], 16),
-                "vaddr": int(s[3], 16),
-                "length": int(s[4], 16),
-                "end": int(s[2], 16) + int(s[4], 16),
-            })
+            structs.append(
+                {
+                    "name": "N(" + prefix + name_struct(s[0]) + ")",
+                    "type": s[1],
+                    "start": int(s[2], 16),
+                    "vaddr": int(s[3], 16),
+                    "length": int(s[4], 16),
+                    "end": int(s[2], 16) + int(s[4], 16),
+                }
+            )
         elif "Missing" in s:
             start = int(s[1], 16)
             end = int(s[2], 16)
             vaddr = start + vram
-            structs.append({
-                "name": f"{prefix}unk_missing_{vaddr:X}",
-                "type": "Missing",
-                "start": start,
-                "vaddr": vaddr,
-                "length": end - start,
-                "end": end,
-            })
+            structs.append(
+                {
+                    "name": f"{prefix}unk_missing_{vaddr:X}",
+                    "type": "Missing",
+                    "start": start,
+                    "vaddr": vaddr,
+                    "length": end - start,
+                    "end": end,
+                }
+            )
         elif "Padding" in s:
             start = int(s[1], 16)
             end = int(s[2], 16)
             vaddr = start + vram
-            structs.append({
-                "name": f"{prefix}pad_{start:X}",
-                "type": "Padding",
-                "start": start,
-                "vaddr": vaddr,
-                "length": end - start,
-                "end": end,
-            })
+            structs.append(
+                {
+                    "name": f"{prefix}pad_{start:X}",
+                    "type": "Padding",
+                    "start": start,
+                    "vaddr": vaddr,
+                    "length": end - start,
+                    "end": end,
+                }
+            )
         else:
             raise Exception(str(s))
 
     structs.sort(key=lambda s: s["start"])
     return structs
+
 
 def name_struct(s):
     s = s[1:].replace("???", "unk")
@@ -1032,11 +1298,16 @@ def name_struct(s):
 
     return s[0].lower() + s[1:]
 
+
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Converts split data to C using a Star Rod idx file")
+    parser = argparse.ArgumentParser(
+        description="Converts split data to C using a Star Rod idx file"
+    )
     parser.add_argument("idxfile", help="Input .*idx file from Star Rod dump")
-    parser.add_argument("namespace", nargs='?', help="Value of NAMESPACE macro")
-    parser.add_argument("--comments", action="store_true", help="Write offset/vaddr comments")
+    parser.add_argument("namespace", nargs="?", help="Value of NAMESPACE macro")
+    parser.add_argument(
+        "--comments", action="store_true", help="Write offset/vaddr comments"
+    )
 
     args = parser.parse_args()
 
@@ -1053,8 +1324,7 @@ if __name__ == "__main__":
             segment_name = f"battle/partners/{battle_area}"
         elif "/starpower/src/" in args.idxfile:
             segment_name = (
-                f"battle/star/{battle_area}"
-                .replace("starstorm", "star_storm")
+                f"battle/star/{battle_area}".replace("starstorm", "star_storm")
                 .replace("chillout", "chill_out")
                 .replace("timeout", "time_out")
                 .replace("upandaway", "up_and_away")
@@ -1069,6 +1339,7 @@ if __name__ == "__main__":
         is_battle = True
 
     symbol_map = disasm_script.script_lib()
+
     def add_to_symbol_map(addr, pair):
         if addr in symbol_map:
             symbol_map[addr].append(pair)
@@ -1082,7 +1353,10 @@ if __name__ == "__main__":
 
         rom_offset = -1
         for segment in splat_config["segments"]:
-            if isinstance(segment, dict) and (segment.get("dir") == segment_name or segment.get("name") == segment_name):
+            if isinstance(segment, dict) and (
+                segment.get("dir") == segment_name
+                or segment.get("name") == segment_name
+            ):
                 rom_offset = segment["start"]
                 vram = segment["vram"]
                 break
@@ -1102,11 +1376,11 @@ if __name__ == "__main__":
 
     with open(os.path.join(DIR, "../ver/current/baserom.z64"), "rb") as romfile:
         name_fixes = {
-                       "script_NpcAI": "npcAI",
-                       "aISettings": "npcAISettings",
-                       "script_ExitWalk": "exitWalk",
-                       "script_MakeEntities": "makeEntities",
-                     }
+            "script_NpcAI": "npcAI",
+            "aISettings": "npcAISettings",
+            "script_ExitWalk": "exitWalk",
+            "script_MakeEntities": "makeEntities",
+        }
         total_npc_counts = {}
         for struct in midx:
             romfile.seek(struct["start"] + rom_offset)
@@ -1116,13 +1390,13 @@ if __name__ == "__main__":
             if name.startswith("N("):
                 name = name[2:-1]
 
-            if struct['vaddr'] in function_replacements:
-                name = function_replacements[struct['vaddr']]
+            if struct["vaddr"] in function_replacements:
+                name = function_replacements[struct["vaddr"]]
 
-            if name.split("_",1)[0] in name_fixes:
-                name = name_fixes[name.split("_",1)[0]] + "_" + name.rsplit("_",1)[1]
+            if name.split("_", 1)[0] in name_fixes:
+                name = name_fixes[name.split("_", 1)[0]] + "_" + name.rsplit("_", 1)[1]
             elif name.startswith("script_"):
-                name = name.split("script_",1)[1]
+                name = name.split("script_", 1)[1]
             elif "_Main_" in name:
                 name = "main"
             elif "ASCII" in name:
@@ -1154,19 +1428,21 @@ if __name__ == "__main__":
                 double_literal = f"{double}"
                 add_to_symbol_map(struct["vaddr"], [struct["vaddr"], double_literal])
             elif struct["type"] == "NpcGroup":
-                for z in range(struct["length"]//0x1F0):
+                for z in range(struct["length"] // 0x1F0):
                     npc = romfile.read(0x1F0)
                     npc_id = unpack_from(">I", npc, 0)[0]
                     if npc_id >= 0:
                         anim = unpack_from(">I", npc, 0x1A0)[0]
                         if not anim == 0:
-                            sprite_id =  (anim & 0x00FF0000) >> 16
-                            sprite =  disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id]["name"].upper()
+                            sprite_id = (anim & 0x00FF0000) >> 16
+                            sprite = disasm_script.CONSTANTS["NPC_SPRITE"][sprite_id][
+                                "name"
+                            ].upper()
                             if npc_id not in total_npc_counts:
                                 total_npc_counts[npc_id] = sprite
                 add_to_symbol_map(struct["vaddr"], [struct["vaddr"], struct["name"]])
             else:
-                add_to_symbol_map(struct["vaddr"],  [struct["vaddr"], struct["name"]])
+                add_to_symbol_map(struct["vaddr"], [struct["vaddr"], struct["name"]])
 
         # fix NPC names
         curr_counts = {}
@@ -1186,17 +1462,24 @@ if __name__ == "__main__":
 
         romfile.seek(rom_offset, 0)
 
-        disasm = disassemble(romfile, midx, symbol_map, args.comments, rom_offset, namespace=args.namespace)
+        disasm = disassemble(
+            romfile,
+            midx,
+            symbol_map,
+            args.comments,
+            rom_offset,
+            namespace=args.namespace,
+        )
 
         print("========== Includes needed: ===========\n")
         if is_battle:
-            print(f"#include \"battle/battle.h\"")
+            print(f'#include "battle/battle.h"')
         else:
-            print(f"#include \"map.h\"")
-        print(f"#include \"message_ids.h\"")
+            print(f'#include "map.h"')
+        print(f'#include "message_ids.h"')
         if INCLUDES_NEEDED["sprites"]:
             for npc in sorted(INCLUDES_NEEDED["sprites"]):
-                print(f"#include \"sprite/npc/{npc}\"")
+                print(f'#include "sprite/npc/{npc}"')
         print()
 
         if INCLUDES_NEEDED["forward"]:
@@ -1213,7 +1496,11 @@ if __name__ == "__main__":
             print(f"enum {{")
             lastnum = -1
             for i, (k, v) in enumerate(sorted(INCLUDES_NEEDED["npcs"].items())):
-                print(f"    {v}" + (f" = {k}" if ((k > 0 and i == 0) or (k != lastnum+1)) else "") + ",")
+                print(
+                    f"    {v}"
+                    + (f" = {k}" if ((k > 0 and i == 0) or (k != lastnum + 1)) else "")
+                    + ","
+                )
                 lastnum = k
             print(f"}};")
             print()
