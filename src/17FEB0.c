@@ -5,15 +5,15 @@
 HitResult calc_item_check_hit(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     ActorState* state = &battleStatus->playerActor->state;
-    s32 actorID = battleStatus->currentTargetID;
+    s32 actorID = battleStatus->curTargetID;
     s8 currentTargetPartS8;
     u32 currentTargetPart;
     Actor* actor;
     ActorPart* actorPart;
 
-    battleStatus->currentTargetID2 = battleStatus->currentTargetID;
-    currentTargetPart = currentTargetPartS8 = battleStatus->currentTargetPart;
-    battleStatus->currentTargetPart2 = currentTargetPartS8;
+    battleStatus->curTargetID2 = battleStatus->curTargetID;
+    currentTargetPart = currentTargetPartS8 = battleStatus->curTargetPart;
+    battleStatus->curTargetPart2 = currentTargetPartS8;
 
     actor = get_actor(actorID);
     if (actor == NULL) {
@@ -36,7 +36,7 @@ HitResult calc_item_check_hit(void) {
         return HIT_RESULT_IMMUNE;
     }
 
-    if ((battleStatus->currentAttackElement & DAMAGE_TYPE_JUMP)
+    if ((battleStatus->curAttackElement & DAMAGE_TYPE_JUMP)
         && (actorPart->eventFlags & ACTOR_EVENT_FLAG_SPIKY_TOP))
     {
         sfx_play_sound_at_position(SOUND_HIT_NORMAL, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
@@ -49,9 +49,9 @@ HitResult calc_item_check_hit(void) {
 HitResult calc_item_damage_enemy(void) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* player = battleStatus->playerActor;
-    s32 currentTargetID = battleStatus->currentTargetID;
+    s32 currentTargetID = battleStatus->curTargetID;
     Actor* partner = battleStatus->partnerActor;
-    s32 currentTargetPartID = battleStatus->currentTargetPart;
+    s32 currentTargetPartID = battleStatus->curTargetPart;
     s32 partImmuneToElement;
     s32 sp1C = FALSE;
     s32 actorClass;
@@ -73,8 +73,8 @@ HitResult calc_item_damage_enemy(void) {
     battleStatus->wasStatusInflicted = FALSE;
     battleStatus->lastAttackDamage = 0;
     battleStatus->attackerActorID = player->actorID;
-    battleStatus->currentTargetID2 = battleStatus->currentTargetID;
-    battleStatus->currentTargetPart2 = battleStatus->currentTargetPart;
+    battleStatus->curTargetID2 = battleStatus->curTargetID;
+    battleStatus->curTargetPart2 = battleStatus->curTargetPart;
     target = get_actor(currentTargetID);
     wasStatusInflicted = FALSE;
 
@@ -95,28 +95,28 @@ HitResult calc_item_damage_enemy(void) {
         state = &partner->state;
     }
 
-    if (battleStatus->currentAttackElement & DAMAGE_TYPE_FIRE) {
+    if (battleStatus->curAttackElement & DAMAGE_TYPE_FIRE) {
         fx_ring_blast(0, state->goalPos.x, state->goalPos.y, state->goalPos.z + 5.0f, 1.0f, 24);
         isFireDamage = TRUE;
     }
-    if (battleStatus->currentAttackElement & DAMAGE_TYPE_SHOCK) {
+    if (battleStatus->curAttackElement & DAMAGE_TYPE_SHOCK) {
         apply_shock_effect(target);
         isShockDamage = TRUE;
     }
-    if (battleStatus->currentAttackElement & DAMAGE_TYPE_WATER) {
+    if (battleStatus->curAttackElement & DAMAGE_TYPE_WATER) {
         fx_water_splash(0, state->goalPos.x, state->goalPos.y, state->goalPos.z + 5.0f, 1.0f, 24);
         isWaterDamage = TRUE;
     }
-    if (battleStatus->currentAttackElement & DAMAGE_TYPE_ICE) {
+    if (battleStatus->curAttackElement & DAMAGE_TYPE_ICE) {
         fx_big_snowflakes(0, state->goalPos.x, state->goalPos.y, state->goalPos.z + 5.0f);
         isIceDamage = TRUE;
     }
 
-    if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_REMOVE_BUFFS)) {
+    if (!(battleStatus->curAttackElement & DAMAGE_TYPE_REMOVE_BUFFS)) {
         if ((targetPart->eventFlags & ACTOR_EVENT_FLAG_ILLUSORY)
             || (target->transparentStatus == STATUS_KEY_TRANSPARENT)
             || (targetPart->eventFlags & ACTOR_EVENT_FLAG_800)
-            && !(battleStatus->currentAttackElement & DAMAGE_TYPE_QUAKE)
+            && !(battleStatus->curAttackElement & DAMAGE_TYPE_QUAKE)
         ) {
             return HIT_RESULT_MISS;
         }
@@ -132,22 +132,22 @@ HitResult calc_item_damage_enemy(void) {
         return HIT_RESULT_HIT;
     }
 
-    if (targetPart->elementalImmunities & battleStatus->currentAttackElement) {
+    if (targetPart->elementalImmunities & battleStatus->curAttackElement) {
         partImmuneToElement = TRUE;
     } else {
         partImmuneToElement = FALSE;
     }
 
     if (targetPart->eventFlags & (ACTOR_EVENT_FLAG_ENCHANTED | ACTOR_EVENT_FLAG_STAR_ROD_ENCHANTED)) {
-        battleStatus->currentAttackElement &= ~DAMAGE_TYPE_IGNORE_DEFENSE;
+        battleStatus->curAttackElement &= ~DAMAGE_TYPE_IGNORE_DEFENSE;
     }
 
-    temp = get_defense(target, targetPart->defenseTable, battleStatus->currentAttackElement);
-    if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_IGNORE_DEFENSE)) {
+    temp = get_defense(target, targetPart->defenseTable, battleStatus->curAttackElement);
+    if (!(battleStatus->curAttackElement & DAMAGE_TYPE_IGNORE_DEFENSE)) {
         temp += target->defenseBoost;
     }
 
-    attackDamage = battleStatus->currentAttackDamage;
+    attackDamage = battleStatus->curAttackDamage;
     if (attackDamage > 99) {
         attackDamage = 99;
     }
@@ -162,7 +162,7 @@ HitResult calc_item_damage_enemy(void) {
         target->hpChangeCounter = 0;
         hitResult = HIT_RESULT_NO_DAMAGE;
 
-        if (!(battleStatus->currentAttackElement & DAMAGE_TYPE_STATUS_ALWAYS_HITS)) {
+        if (!(battleStatus->curAttackElement & DAMAGE_TYPE_STATUS_ALWAYS_HITS)) {
             dispatchEvent = EVENT_ZERO_DAMAGE;
             sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             battleStatus->lastAttackDamage = 0;
@@ -181,9 +181,9 @@ HitResult calc_item_damage_enemy(void) {
             && !partImmuneToElement
             && !(targetPart->targetFlags & ACTOR_PART_TARGET_FLAG_4)
         ) {
-            target->currentHP -= attackDamage;
-            if (target->currentHP <= 0) {
-                target->currentHP = 0;
+            target->curHP -= attackDamage;
+            if (target->curHP <= 0) {
+                target->curHP = 0;
                 dispatchEvent = EVENT_DEATH;
             }
         }
@@ -199,7 +199,7 @@ HitResult calc_item_damage_enemy(void) {
         return HIT_RESULT_NO_DAMAGE;
     }
 
-    if (battleStatus->currentAttackElement & DAMAGE_TYPE_DEATH) {
+    if (battleStatus->curAttackElement & DAMAGE_TYPE_DEATH) {
         battleStatus->lastAttackDamage = 0;
         dispatchEvent = EVENT_DEATH;
         hitResult = HIT_RESULT_HIT;
@@ -212,7 +212,7 @@ HitResult calc_item_damage_enemy(void) {
         if (dispatchEvent == EVENT_ZERO_DAMAGE) {
             dispatchEvent = EVENT_IMMUNE;
         }
-        if (target->currentHP <= 0 && dispatchEvent == EVENT_IMMUNE) {
+        if (target->curHP <= 0 && dispatchEvent == EVENT_IMMUNE) {
             dispatchEvent = EVENT_DEATH;
         }
     } else if (dispatchEvent == EVENT_DEATH) {
@@ -220,7 +220,7 @@ HitResult calc_item_damage_enemy(void) {
     }
 
     if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
-        if (battleStatus->currentAttackElement & DAMAGE_TYPE_REMOVE_BUFFS) {
+        if (battleStatus->curAttackElement & DAMAGE_TYPE_REMOVE_BUFFS) {
             dispatchEvent = EVENT_IMMUNE;
             if (targetPart->eventFlags & ACTOR_EVENT_FLAG_ENCHANTED) {
                 dispatchEvent = EVENT_STAR_BEAM;
@@ -237,7 +237,7 @@ HitResult calc_item_damage_enemy(void) {
         }
     }
 
-    if (battleStatus->currentAttackElement & DAMAGE_TYPE_REMOVE_BUFFS) {
+    if (battleStatus->curAttackElement & DAMAGE_TYPE_REMOVE_BUFFS) {
         if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
             if ((target->attackBoost > 0 || target->defenseBoost > 0) ||
                 ((target->staticStatus == 0 && target->transparentStatus != 0) || target->staticStatus != 0))
@@ -263,7 +263,7 @@ HitResult calc_item_damage_enemy(void) {
     }
 
     if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
-        if (battleStatus->currentAttackElement & DAMAGE_TYPE_PEACH_BEAM) {
+        if (battleStatus->curAttackElement & DAMAGE_TYPE_PEACH_BEAM) {
             dispatchEvent = EVENT_IMMUNE;
             if (targetPart->eventFlags & ACTOR_EVENT_FLAG_ENCHANTED) {
                 dispatchEvent = EVENT_PEACH_BEAM;
@@ -277,7 +277,7 @@ HitResult calc_item_damage_enemy(void) {
     }
 
     if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
-        if (battleStatus->currentAttackElement & DAMAGE_TYPE_SPIN_SMASH) {
+        if (battleStatus->curAttackElement & DAMAGE_TYPE_SPIN_SMASH) {
             if (dispatchEvent == EVENT_HIT) {
                 dispatchEvent = EVENT_SPIN_SMASH_HIT;
             }
@@ -288,7 +288,7 @@ HitResult calc_item_damage_enemy(void) {
     }
 
     if ((gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE)
-        && (battleStatus->currentAttackElement & (DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POW))
+        && (battleStatus->curAttackElement & (DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POW))
         && (targetPart->eventFlags & ACTOR_EVENT_FLAG_GROUNDABLE)
     ) {
         if (dispatchEvent == EVENT_HIT) {
@@ -300,7 +300,7 @@ HitResult calc_item_damage_enemy(void) {
     }
 
     if ((gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE)
-        && (battleStatus->currentAttackElement & DAMAGE_TYPE_POW)
+        && (battleStatus->curAttackElement & DAMAGE_TYPE_POW)
         && (targetPart->eventFlags & ACTOR_EVENT_FLAG_RIDING_BROOMSTICK)
     ) {
         if (dispatchEvent == EVENT_HIT) {
@@ -312,7 +312,7 @@ HitResult calc_item_damage_enemy(void) {
     }
 
     if ((gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE)
-        && (battleStatus->currentAttackElement & (DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POW | DAMAGE_TYPE_QUAKE))
+        && (battleStatus->curAttackElement & (DAMAGE_TYPE_JUMP | DAMAGE_TYPE_POW | DAMAGE_TYPE_QUAKE))
         && (targetPart->eventFlags & ACTOR_EVENT_FLAG_FLIPABLE)
     ) {
         if (dispatchEvent == EVENT_HIT) {
@@ -324,7 +324,7 @@ HitResult calc_item_damage_enemy(void) {
     }
 
     if (gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) {
-        if (battleStatus->currentAttackElement & DAMAGE_TYPE_FIRE) {
+        if (battleStatus->curAttackElement & DAMAGE_TYPE_FIRE) {
             if (dispatchEvent == EVENT_HIT) {
                 dispatchEvent = EVENT_BURN_HIT;
             }
@@ -345,7 +345,7 @@ HitResult calc_item_damage_enemy(void) {
         // do-while-0 OR to wrap each one individually. It's more likely that it's a macro instead, and much cleaner
         #define INFLICT_STATUS(STATUS_TYPE) \
             do { \
-                if ((battleStatus->currentAttackStatus & STATUS_FLAG_##STATUS_TYPE) && \
+                if ((battleStatus->curAttackStatus & STATUS_FLAG_##STATUS_TYPE) && \
                     try_inflict_status(target, STATUS_KEY_##STATUS_TYPE, STATUS_TURN_MOD_##STATUS_TYPE)) { \
                     wasStatusInflicted = TRUE; \
                 } \
@@ -377,7 +377,7 @@ HitResult calc_item_damage_enemy(void) {
     temp = target->actorBlueprint->spookChance;
     temp = (battleStatus->statusChance * temp) / 100;
 
-    if ((gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) && (battleStatus->currentAttackElement & DAMAGE_TYPE_FEAR)) {
+    if ((gBattleStatus.flags1 & BS_FLAGS1_SP_EVT_ACTIVE) && (battleStatus->curAttackElement & DAMAGE_TYPE_FEAR)) {
         if (rand_int(99) < temp
             && (target->debuff != STATUS_KEY_FEAR
                 && target->debuff != STATUS_KEY_DIZZY
@@ -410,7 +410,7 @@ HitResult calc_item_damage_enemy(void) {
             sfx_play_sound_at_position(SOUND_231, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
         }
 
-        if (battleStatus->lastAttackDamage > 0 || (battleStatus->currentAttackElement & DAMAGE_TYPE_STATUS_ALWAYS_HITS) && sp1C) {
+        if (battleStatus->lastAttackDamage > 0 || (battleStatus->curAttackElement & DAMAGE_TYPE_STATUS_ALWAYS_HITS) && sp1C) {
             if (gBattleStatus.flags1 & BS_FLAGS1_40) {
                 show_action_rating(ACTION_RATING_NICE, target, state->goalPos.x, state->goalPos.y, state->goalPos.z);
             } else {
@@ -437,7 +437,7 @@ HitResult calc_item_damage_enemy(void) {
                 show_immune_bonk(state->goalPos.x, state->goalPos.y, state->goalPos.z, 0, 1, 3);
             }
         } else if (!partImmuneToElement) {
-            if (battleStatus->currentAttackElement & (DAMAGE_TYPE_MULTIPLE_POPUPS | DAMAGE_TYPE_SMASH)) {
+            if (battleStatus->curAttackElement & (DAMAGE_TYPE_MULTIPLE_POPUPS | DAMAGE_TYPE_SMASH)) {
                 show_next_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 0);
             } else {
                 show_primary_damage_popup(state->goalPos.x, state->goalPos.y, state->goalPos.z, battleStatus->lastAttackDamage, 0);
@@ -465,42 +465,42 @@ HitResult calc_item_damage_enemy(void) {
         sfx_play_sound_at_position(SOUND_IMMUNE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
 
-    if ((battleStatus->currentAttackStatus & STATUS_FLAG_SLEEP) && wasStatusInflicted) {
+    if ((battleStatus->curAttackStatus & STATUS_FLAG_SLEEP) && wasStatusInflicted) {
         script = start_script(&EVS_PlaySleepHitFX, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_SLEEP, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
-    if ((battleStatus->currentAttackStatus & STATUS_FLAG_DIZZY) && wasStatusInflicted) {
+    if ((battleStatus->curAttackStatus & STATUS_FLAG_DIZZY) && wasStatusInflicted) {
         script = start_script(&EVS_PlayDizzyHitFX, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
-    if ((battleStatus->currentAttackStatus & STATUS_FLAG_PARALYZE) && wasStatusInflicted) {
+    if ((battleStatus->curAttackStatus & STATUS_FLAG_PARALYZE) && wasStatusInflicted) {
         script = start_script(&EVS_PlayParalyzeHitFX, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
-    if ((battleStatus->currentAttackStatus & STATUS_FLAG_POISON) && wasStatusInflicted) {
+    if ((battleStatus->curAttackStatus & STATUS_FLAG_POISON) && wasStatusInflicted) {
         script = start_script(&EVS_PlayPoisonHitFX, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
-    if ((battleStatus->currentAttackStatus & STATUS_FLAG_STOP) && wasStatusInflicted) {
+    if ((battleStatus->curAttackStatus & STATUS_FLAG_STOP) && wasStatusInflicted) {
         script = start_script(&EVS_PlayStopHitFX, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
         script->varTable[2] = state->goalPos.z;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
-    if ((battleStatus->currentAttackStatus & STATUS_FLAG_FROZEN) && wasStatusInflicted) {
+    if ((battleStatus->curAttackStatus & STATUS_FLAG_FROZEN) && wasStatusInflicted) {
         script = start_script(&EVS_PlayFreezeHitFX, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
@@ -508,7 +508,7 @@ HitResult calc_item_damage_enemy(void) {
         script->varTablePtr[3] = target;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
-    if ((battleStatus->currentAttackStatus & STATUS_FLAG_SHRINK) && wasStatusInflicted) {
+    if ((battleStatus->curAttackStatus & STATUS_FLAG_SHRINK) && wasStatusInflicted) {
         script = start_script(&EVS_PlayShrinkHitFX, EVT_PRIORITY_A, 0);
         script->varTable[0] = state->goalPos.x;
         script->varTable[1] = state->goalPos.y;
@@ -516,7 +516,7 @@ HitResult calc_item_damage_enemy(void) {
         script->varTablePtr[3] = target;
         sfx_play_sound_at_position(SOUND_INFLICT_STATUS, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
-    if ((battleStatus->currentAttackElement & DAMAGE_TYPE_SMASH) && (target->actorType == ACTOR_TYPE_GOOMNUT_TREE)) {
+    if ((battleStatus->curAttackElement & DAMAGE_TYPE_SMASH) && (target->actorType == ACTOR_TYPE_GOOMNUT_TREE)) {
         sfx_play_sound_at_position(SOUND_SMASH_GOOMNUT_TREE, SOUND_SPACE_MODE_0, state->goalPos.x, state->goalPos.y, state->goalPos.z);
     }
 
@@ -542,10 +542,10 @@ ApiStatus ItemDamageEnemy(Evt* script, s32 isInitialCall) {
     Actor* actor;
     HitResult hitResult;
 
-    battleStatus->currentAttackElement = *args++;
-    battleStatus->currentAttackEventSuppression = 0;
-    battleStatus->currentAttackStatus = *args++;
-    battleStatus->currentAttackDamage = evt_get_variable(script, *args++);
+    battleStatus->curAttackElement = *args++;
+    battleStatus->curAttackEventSuppression = 0;
+    battleStatus->curAttackStatus = *args++;
+    battleStatus->curAttackDamage = evt_get_variable(script, *args++);
     flags = *args++;
 
     if ((flags & (BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)) == (BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)) {
@@ -581,15 +581,15 @@ ApiStatus ItemDamageEnemy(Evt* script, s32 isInitialCall) {
     }
 
     actor = get_actor(script->owner1.actorID);
-    battleStatus->currentTargetID = actor->targetActorID;
-    battleStatus->currentTargetPart = actor->targetPartIndex;
-    battleStatus->statusChance = battleStatus->currentAttackStatus;
+    battleStatus->curTargetID = actor->targetActorID;
+    battleStatus->curTargetPart = actor->targetPartIndex;
+    battleStatus->statusChance = battleStatus->curAttackStatus;
 
     if (battleStatus->statusChance == STATUS_KEY_NEVER) {
         battleStatus->statusChance = 0;
     }
 
-    battleStatus->statusDuration = (battleStatus->currentAttackStatus & 0xF00) >> 8;
+    battleStatus->statusDuration = (battleStatus->curAttackStatus & 0xF00) >> 8;
 
     hitResult = calc_item_damage_enemy();
     if (hitResult < 0) {
@@ -612,11 +612,11 @@ ApiStatus ItemSpookEnemy(Evt* script, s32 isInitialCall) {
     HitResult hitResult;
     s32 flags;
 
-    battleStatus->currentAttackElement = *args++;
-    battleStatus->currentAttackEventSuppression = 0;
-    battleStatus->currentAttackStatus = *args++;
-    battleStatus->currentAttackStatus |= evt_get_variable(script, *args++);
-    battleStatus->currentAttackDamage = evt_get_variable(script, *args++);
+    battleStatus->curAttackElement = *args++;
+    battleStatus->curAttackEventSuppression = 0;
+    battleStatus->curAttackStatus = *args++;
+    battleStatus->curAttackStatus |= evt_get_variable(script, *args++);
+    battleStatus->curAttackDamage = evt_get_variable(script, *args++);
     flags = *args++;
 
     if ((flags & (BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)) == (BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)) {
@@ -651,15 +651,15 @@ ApiStatus ItemSpookEnemy(Evt* script, s32 isInitialCall) {
     }
 
     actor = get_actor(script->owner1.actorID);
-    battleStatus->currentTargetID = actor->targetActorID;
-    battleStatus->currentTargetPart = actor->targetPartIndex;
-    battleStatus->statusChance = battleStatus->currentAttackStatus;
+    battleStatus->curTargetID = actor->targetActorID;
+    battleStatus->curTargetPart = actor->targetPartIndex;
+    battleStatus->statusChance = battleStatus->curAttackStatus;
 
     if (battleStatus->statusChance == STATUS_KEY_NEVER) {
         battleStatus->statusChance = 0;
     }
 
-    battleStatus->statusDuration = (battleStatus->currentAttackStatus & 0xF00) >> 8;
+    battleStatus->statusDuration = (battleStatus->curAttackStatus & 0xF00) >> 8;
 
     hitResult = calc_item_damage_enemy();
     if (hitResult < 0) {
@@ -682,10 +682,10 @@ ApiStatus ItemAfflictEnemy(Evt* script, s32 isInitialCall) {
     Actor* actor;
     HitResult hitResult;
 
-    battleStatus->currentAttackElement = *args++;
-    battleStatus->currentAttackEventSuppression = 0;
-    battleStatus->currentAttackStatus = evt_get_variable(script, *args++);
-    battleStatus->currentAttackDamage = evt_get_variable(script, *args++);
+    battleStatus->curAttackElement = *args++;
+    battleStatus->curAttackEventSuppression = 0;
+    battleStatus->curAttackStatus = evt_get_variable(script, *args++);
+    battleStatus->curAttackDamage = evt_get_variable(script, *args++);
     flags = *args++;
 
     if ((flags & (BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)) == (BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)) {
@@ -720,15 +720,15 @@ ApiStatus ItemAfflictEnemy(Evt* script, s32 isInitialCall) {
     }
 
     actor = get_actor(script->owner1.actorID);
-    battleStatus->currentTargetID = actor->targetActorID;
-    battleStatus->currentTargetPart = actor->targetPartIndex;
-    battleStatus->statusChance = battleStatus->currentAttackStatus;
+    battleStatus->curTargetID = actor->targetActorID;
+    battleStatus->curTargetPart = actor->targetPartIndex;
+    battleStatus->statusChance = battleStatus->curAttackStatus;
 
     if (battleStatus->statusChance == STATUS_KEY_NEVER) {
         battleStatus->statusChance = 0;
     }
 
-    battleStatus->statusDuration = (battleStatus->currentAttackStatus & 0xF00) >> 8;
+    battleStatus->statusDuration = (battleStatus->curAttackStatus & 0xF00) >> 8;
 
     hitResult = calc_item_damage_enemy();
     if (hitResult < 0) {
@@ -751,10 +751,10 @@ ApiStatus ItemCheckHit(Evt* script, s32 isInitialCall) {
     Actor* actor;
     HitResult hitResult;
 
-    battleStatus->currentAttackElement = *args++;
-    battleStatus->currentAttackEventSuppression = 0;
-    battleStatus->currentAttackStatus = *args++;
-    battleStatus->currentAttackDamage = evt_get_variable(script, *args++);
+    battleStatus->curAttackElement = *args++;
+    battleStatus->curAttackEventSuppression = 0;
+    battleStatus->curAttackStatus = *args++;
+    battleStatus->curAttackDamage = evt_get_variable(script, *args++);
     flags = *args++;
 
     if ((flags & (BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)) == (BS_FLAGS1_10 | BS_FLAGS1_SP_EVT_ACTIVE)) {
@@ -789,15 +789,15 @@ ApiStatus ItemCheckHit(Evt* script, s32 isInitialCall) {
     }
 
     actor = get_actor(script->owner1.actorID);
-    battleStatus->currentTargetID = actor->targetActorID;
-    battleStatus->currentTargetPart = actor->targetPartIndex;
-    battleStatus->statusChance = battleStatus->currentAttackStatus;
+    battleStatus->curTargetID = actor->targetActorID;
+    battleStatus->curTargetPart = actor->targetPartIndex;
+    battleStatus->statusChance = battleStatus->curAttackStatus;
 
     if (battleStatus->statusChance == STATUS_KEY_NEVER) {
         battleStatus->statusChance = 0;
     }
 
-    battleStatus->statusDuration = (battleStatus->currentAttackStatus & 0xF00) >> 8;
+    battleStatus->statusDuration = (battleStatus->curAttackStatus & 0xF00) >> 8;
 
     hitResult = calc_item_check_hit();
     if (hitResult < 0) {

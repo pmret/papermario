@@ -59,14 +59,14 @@ API_CALLABLE(N(GetFloorCollider)) {
     Bytecode* args = script->ptrReadPos;
     s32 outVar = *args++;
 
-    evt_set_variable(script, outVar, gCollisionStatus.currentFloor);
+    evt_set_variable(script, outVar, gCollisionStatus.curFloor);
     return ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(PausePlatformsDuringPound)) {
     PlayerStatus* player = &gPlayerStatus;
 
-    if (gCollisionStatus.currentFloor == COLLIDER_erb1 || gCollisionStatus.currentFloor == COLLIDER_erb2) {
+    if (gCollisionStatus.curFloor == COLLIDER_erb1 || gCollisionStatus.curFloor == COLLIDER_erb2) {
         if (player->actionState == ACTION_STATE_SPIN_POUND || player->actionState == ACTION_STATE_TORNADO_POUND) {
             return ApiStatus_BLOCK;
         }

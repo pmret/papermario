@@ -478,10 +478,10 @@ void sfx_play_sound_with_params(s32 soundID, u8 volume, u8 pan, s16 pitchShift) 
             case SOUND_TYPE_ALTERNATING:
                 // 0xBxxxxxxx
                 alternatingSet = &AlternatingSounds[soundIndex];
-                if (alternatingSet->currentIndex >= alternatingSet->soundCount) {
-                    alternatingSet->currentIndex = 0;
+                if (alternatingSet->curIndex >= alternatingSet->soundCount) {
+                    alternatingSet->curIndex = 0;
                 }
-                soundID = alternatingSet->sounds[alternatingSet->currentIndex++];
+                soundID = alternatingSet->sounds[alternatingSet->curIndex++];
                 break;
         }
     }

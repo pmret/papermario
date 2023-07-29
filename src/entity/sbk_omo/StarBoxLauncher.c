@@ -60,7 +60,7 @@ void entity_StarBoxLauncher_setupGfx(s32 entityIndex) {
 }
 
 void entity_StarBoxLauncher_check_launch(Entity* entity) {
-    u16 currentFloor = gCollisionStatus.currentFloor;
+    u16 currentFloor = gCollisionStatus.curFloor;
     StarBoxLauncherData* data = entity->dataBuf.starBoxLauncher;
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 actionState = playerStatus->actionState;

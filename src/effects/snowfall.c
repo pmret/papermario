@@ -133,7 +133,7 @@ void snowfall_update(EffectInstance* effect) {
     if (timeLeft < 10) {
         data->unk_28 = timeLeft * 25;
     }
-    boomLength = camera->currentBoomLength;
+    boomLength = camera->curBoomLength;
     temp_s6 = (boomLength * 0.3) + 1.0;
 
     data++;
@@ -189,7 +189,7 @@ void snowfall_appendGfx(void* effect) {
             gSPDisplayList(gMainGfxPos++, D_09000C00_38DC70);
             gDPSetPrimColor(gMainGfxPos++, 0, 0, 255, 255, 255, unk_28);
 
-            guRotateF(sp18, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+            guRotateF(sp18, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
             guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
             mtx = &gDisplayContext->matrixStack[gMatrixListPos++];

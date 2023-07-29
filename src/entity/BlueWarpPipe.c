@@ -38,12 +38,12 @@ void entity_BlueWarpPipe_wait_for_player_to_get_off(Entity* entity) {
     if (pipeData->entryID == gGameStatusPtr->entryID) {
         switch (pipeData->timer) {
             case 0:
-                if (gCollisionStatus.currentFloor > 0) {
+                if (gCollisionStatus.curFloor > 0) {
                     pipeData->timer = 1;
                 }
                 break;
             case 1:
-                if (gCollisionStatus.currentFloor <= NO_COLLIDER) {
+                if (gCollisionStatus.curFloor <= NO_COLLIDER) {
                     pipeData->timer = 2;
                 }
                 break;
@@ -112,7 +112,7 @@ void entity_BlueWarpPipe_enter_pipe_init(Entity* bluePipe) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     BlueWarpPipeData* pipeData = bluePipe->dataBuf.bluePipe;
 
-    playerStatus->targetYaw = gCameras[gCurrentCameraID].currentYaw + 180.0f;
+    playerStatus->targetYaw = gCameras[gCurrentCameraID].curYaw + 180.0f;
     pipeData->timer = 25;
     playerStatus->renderMode = RENDER_MODE_ALPHATEST;
 

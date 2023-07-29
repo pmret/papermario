@@ -107,7 +107,7 @@ void entity_HiddenPanel_flip_over(Entity* entity) {
     f32 rotAngle;
     s32 flipAxis;
 
-    yaw = clamp_angle(gCameras[CAM_DEFAULT].currentYaw + 45.0f);
+    yaw = clamp_angle(gCameras[CAM_DEFAULT].curYaw + 45.0f);
     if (yaw < 90.0f || yaw >= 180.0f && yaw < 270.0f) {
         rotAngle = entity->rot.z;
         flipAxis = 1;

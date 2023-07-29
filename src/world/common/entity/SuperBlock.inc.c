@@ -196,7 +196,7 @@ API_CALLABLE(N(SuperBlock_SwitchToPartner)) {
 }
 
 API_CALLABLE(N(SuperBlock_LoadCurrentPartnerName)) {
-    set_message_msg(gPartnerPopupProperties[gPlayerData.currentPartner].nameMsg, 0);
+    set_message_msg(gPartnerPopupProperties[gPlayerData.curPartner].nameMsg, 0);
     return ApiStatus_DONE2;
 }
 
@@ -256,7 +256,7 @@ API_CALLABLE(N(SuperBlock_AnimateEnergyOrbs)) {
     f32 t1;
     s32 i;
 
-    sin_cos_deg(gCameras[gCurrentCameraID].currentYaw, &sinTheta, &cosTheta);
+    sin_cos_deg(gCameras[gCurrentCameraID].curYaw, &sinTheta, &cosTheta);
 
     if (isInitialCall) {
         script->userData = (EnergyOrbSet*)general_heap_malloc(sizeof(EnergyOrbSet));

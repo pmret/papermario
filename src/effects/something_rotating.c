@@ -258,7 +258,7 @@ void func_E01166E8(s32 arg0, SomethingRotatingFXData* part) {
     Matrix4f sp60;
 
     if (arg0 == 0) {
-        temp = gCameras[gCurrentCameraID].currentYaw;
+        temp = gCameras[gCurrentCameraID].curYaw;
     } else {
         temp = 0.0f;
     }

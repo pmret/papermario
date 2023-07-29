@@ -125,7 +125,7 @@ void cloud_puff_appendGfx(void* effect) {
 
     for (i = 0; i < effectTemp->numParts; i++, part++) {
         if (part->alive) {
-            guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f,
+            guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f,
                              part->unk_0C, part->unk_10, part->unk_14);
             guScaleF(sp60, part->unk_18, part->unk_1C, part->unk_20);
             guMtxCatF(sp60, sp20, sp20);

@@ -37,9 +37,9 @@ enum N(ActorPartIDs) {
 API_CALLABLE(N(GetReturnMoveTime)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partner = battleStatus->partnerActor;
-    f32 posX = partner->currentPos.x;
-    f32 posY = partner->currentPos.y;
-    f32 posZ = partner->currentPos.z;
+    f32 posX = partner->curPos.x;
+    f32 posY = partner->curPos.y;
+    f32 posZ = partner->curPos.z;
     f32 goalX = partner->state.goalPos.x;
     f32 goalY = partner->state.goalPos.y;
     f32 goalZ = partner->state.goalPos.z;
@@ -103,13 +103,13 @@ API_CALLABLE(N(JumpOnTarget)) {
     }
 
     if (script->functionTemp[0] == 0) {
-        state->currentPos.x = actor->currentPos.x;
-        state->currentPos.y = actor->currentPos.y;
+        state->curPos.x = actor->curPos.x;
+        state->curPos.y = actor->curPos.y;
         stateGoalX = state->goalPos.x;
         stateGoalZ = state->goalPos.z;
-        stateCurrentX = state->currentPos.x;
-        stateCurrentZ = actor->currentPos.z;
-        state->currentPos.z = stateCurrentZ;
+        stateCurrentX = state->curPos.x;
+        stateCurrentZ = actor->curPos.z;
+        state->curPos.z = stateCurrentZ;
         state->angle = atan2(stateCurrentX, stateCurrentZ, stateGoalX, stateGoalZ);
         state->dist = dist2D(stateCurrentX, stateCurrentZ, stateGoalX, stateGoalZ);
         if (state->moveTime == 0) {
@@ -124,9 +124,9 @@ API_CALLABLE(N(JumpOnTarget)) {
             return ApiStatus_DONE2;
         }
 
-        state->unk_30.x = (state->goalPos.x - state->currentPos.x) / state->moveTime;
-        state->unk_30.y = (state->goalPos.y - state->currentPos.y) / state->moveTime;
-        state->unk_30.z = (state->goalPos.z - state->currentPos.z) / state->moveTime;
+        state->unk_30.x = (state->goalPos.x - state->curPos.x) / state->moveTime;
+        state->unk_30.y = (state->goalPos.y - state->curPos.y) / state->moveTime;
+        state->unk_30.z = (state->goalPos.z - state->curPos.z) / state->moveTime;
         state->acceleration = PI_S / state->moveTime;
         state->vel = 0.0f;
         state->speed += temp / state->moveTime;
@@ -173,21 +173,21 @@ API_CALLABLE(N(JumpOnTarget)) {
             if (state->vel > PI_S / 2) {
                 set_animation(ACTOR_PARTNER, 1, state->animJumpFall);
             }
-            oldActorX = actor->currentPos.x;
-            oldActorY = actor->currentPos.y;
-            state->currentPos.x += state->unk_30.x;
-            state->currentPos.y = state->currentPos.y + state->unk_30.y;
-            state->currentPos.z = state->currentPos.z + state->unk_30.z;
-            state->unk_18.x = actor->currentPos.y;
-            actor->currentPos.x = state->currentPos.x;
-            actor->currentPos.y = state->currentPos.y + (state->bounceDivisor * sin_rad(state->vel));
-            actor->currentPos.z = state->currentPos.z;
-            if (state->goalPos.y > actor->currentPos.y && state->moveTime < 3) {
-                actor->currentPos.y = state->goalPos.y;
+            oldActorX = actor->curPos.x;
+            oldActorY = actor->curPos.y;
+            state->curPos.x += state->unk_30.x;
+            state->curPos.y = state->curPos.y + state->unk_30.y;
+            state->curPos.z = state->curPos.z + state->unk_30.z;
+            state->unk_18.x = actor->curPos.y;
+            actor->curPos.x = state->curPos.x;
+            actor->curPos.y = state->curPos.y + (state->bounceDivisor * sin_rad(state->vel));
+            actor->curPos.z = state->curPos.z;
+            if (state->goalPos.y > actor->curPos.y && state->moveTime < 3) {
+                actor->curPos.y = state->goalPos.y;
             }
 
-            actor->rot.z = -atan2(oldActorX, -oldActorY, actor->currentPos.x, -actor->currentPos.y);
-            state->unk_18.y = actor->currentPos.y;
+            actor->rot.z = -atan2(oldActorX, -oldActorY, actor->curPos.x, -actor->curPos.y);
+            state->unk_18.y = actor->curPos.y;
             if (state->moveArcAmplitude < 3) {
                 vel1 = state->vel;
                 acc1 = state->acceleration;
@@ -202,7 +202,7 @@ API_CALLABLE(N(JumpOnTarget)) {
             state->unk_24 = clamp_angle(state->unk_24);
             state->moveTime--;
             if (state->moveTime == 0) {
-                actor->currentPos.y = state->goalPos.y;
+                actor->curPos.y = state->goalPos.y;
                 state->acceleration = 1.8f;
                 state->vel = -(state->unk_18.x - state->unk_18.y);
                 set_animation(ACTOR_PARTNER, 1, state->animJumpLand);
@@ -219,20 +219,20 @@ API_CALLABLE(N(JumpOnTarget)) {
             state->vel = -(state->unk_18.x - state->unk_18.y);
             state->bounceDivisor = fabsf(state->unk_18.x - state->unk_18.y) / 16.5;
             state->unk_28 = 360 / state->moveTime;
-            state->currentPos.x = actor->currentPos.x;
-            state->currentPos.y = actor->currentPos.y;
-            state->currentPos.z = actor->currentPos.z;
+            state->curPos.x = actor->curPos.x;
+            state->curPos.y = actor->curPos.y;
+            state->curPos.z = actor->curPos.z;
             script->functionTemp[0] = 3;
             // fallthrough
         case 3:
-            currentPosX64 = state->currentPos.x; // required to match
-            state->currentPos.x = currentPosX64 + state->bounceDivisor * sin_rad(DEG_TO_RAD(state->unk_24)) / 33.0;
-            state->currentPos.y -= state->bounceDivisor * sin_rad(DEG_TO_RAD(state->unk_24));
+            currentPosX64 = state->curPos.x; // required to match
+            state->curPos.x = currentPosX64 + state->bounceDivisor * sin_rad(DEG_TO_RAD(state->unk_24)) / 33.0;
+            state->curPos.y -= state->bounceDivisor * sin_rad(DEG_TO_RAD(state->unk_24));
             state->unk_24 += state->unk_28;
             state->unk_24 = clamp_angle(state->unk_24);
-            actor->currentPos.x = state->currentPos.x;
-            actor->currentPos.y = state->currentPos.y;
-            actor->currentPos.z = state->currentPos.z;
+            actor->curPos.x = state->curPos.x;
+            actor->curPos.y = state->curPos.y;
+            actor->curPos.z = state->curPos.z;
 
             if (gBattleStatus.flags1 & BS_FLAGS1_2000) {
                 return ApiStatus_DONE2;
@@ -251,16 +251,16 @@ API_CALLABLE(N(JumpOnTarget)) {
 API_CALLABLE(N(OnMissHeadbonk)) {
     BattleStatus* battleStatus = &gBattleStatus;
     Actor* partner = gBattleStatus.partnerActor;
-    Vec3f* pos = &partner->state.currentPos;
+    Vec3f* pos = &partner->state.curPos;
 
     if (isInitialCall) {
         script->functionTemp[0] = 0;
     }
 
     if (script->functionTemp[0] == 0) {
-        partner->state.currentPos.x = partner->currentPos.x;
-        partner->state.currentPos.y = partner->currentPos.y;
-        partner->state.currentPos.z = partner->currentPos.z;
+        partner->state.curPos.x = partner->curPos.x;
+        partner->state.curPos.y = partner->curPos.y;
+        partner->state.curPos.z = partner->curPos.z;
         script->functionTemp[0] = 1;
     }
 
@@ -272,17 +272,17 @@ API_CALLABLE(N(OnMissHeadbonk)) {
         set_animation(ACTOR_PARTNER, 0, partner->state.animJumpFall);
     }
 
-    partner->state.currentPos.y = (partner->state.currentPos.y + partner->state.vel);
+    partner->state.curPos.y = (partner->state.curPos.y + partner->state.vel);
     partner->state.vel = (partner->state.vel - partner->state.acceleration);
     add_xz_vec3f(pos, partner->state.speed, partner->state.angle);
-    partner->currentPos.x = partner->state.currentPos.x;
-    partner->currentPos.y = partner->state.currentPos.y;
-    partner->currentPos.z = partner->state.currentPos.z;
+    partner->curPos.x = partner->state.curPos.x;
+    partner->curPos.y = partner->state.curPos.y;
+    partner->curPos.z = partner->state.curPos.z;
 
-    if (partner->currentPos.y < 10.0f) {
-        partner->currentPos.y = 10.0f;
+    if (partner->curPos.y < 10.0f) {
+        partner->curPos.y = 10.0f;
 
-        play_movement_dust_effects(2, partner->currentPos.x, partner->currentPos.y, partner->currentPos.z,
+        play_movement_dust_effects(2, partner->curPos.x, partner->curPos.y, partner->curPos.z,
                                    partner->yaw);
         sfx_play_sound(SOUND_SOFT_LAND);
 

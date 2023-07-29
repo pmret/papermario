@@ -70,13 +70,13 @@ void action_update_use_munchlesia(void) {
             if (playerStatus->animNotifyValue != 0) {
                 suggest_player_anim_always_forward(ANIM_Mario1_GetUp);
                 playerStatus->actionSubstate = SUBSTATE_GET_UP;
-                playerStatus->currentStateTime = 15;
+                playerStatus->curStateTime = 15;
                 break;
             }
             break;
         case SUBSTATE_GET_UP:
-            if (playerStatus->currentStateTime != 0) {
-                playerStatus->currentStateTime--;
+            if (playerStatus->curStateTime != 0) {
+                playerStatus->curStateTime--;
                 break;
             }
             enable_player_static_collisions();

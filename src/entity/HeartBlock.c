@@ -157,7 +157,7 @@ void entity_HeartBlockContent_anim_idle(Entity* entity, s32 arg1) {
     if (entity_can_collide_with_jumping_player(get_entity_by_index(data->parentEntityIndex))) {
         exec_entity_commandlist(entity);
         disable_player_input();
-        gPlayerStatus.currentSpeed = 0;
+        gPlayerStatus.curSpeed = 0;
         gPlayerStatus.animFlags |= PA_FLAG_RAISED_ARMS;
         set_time_freeze_mode(TIME_FREEZE_PARTIAL);
         gOverrideFlags |= GLOBAL_OVERRIDES_40;

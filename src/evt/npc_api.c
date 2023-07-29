@@ -19,11 +19,11 @@ void set_npc_animation(Npc* npc, u32 animID) {
     PlayerData* playerData = &gPlayerData;
 
     if (PARTNER_ANIM_STILL <= animID && animID <= PARTNER_ANIM_HURT) {
-        npc->currentAnim = gPartnerAnimations[playerData->currentPartner].anims[animID - PARTNER_ANIM_STILL];
+        npc->curAnim = gPartnerAnimations[playerData->curPartner].anims[animID - PARTNER_ANIM_STILL];
     } else if (ENEMY_ANIM_IDLE <= animID && animID <= ENEMY_ANIM_F) {
-        npc->currentAnim = get_enemy(npc->npcID)->animList[animID - ENEMY_ANIM_IDLE];
+        npc->curAnim = get_enemy(npc->npcID)->animList[animID - ENEMY_ANIM_IDLE];
     } else {
-        npc->currentAnim = animID;
+        npc->curAnim = animID;
     }
 }
 
@@ -208,7 +208,7 @@ ApiStatus GetNpcAnimation(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    evt_set_variable(script, outVar, npc->currentAnim);
+    evt_set_variable(script, outVar, npc->curAnim);
     return ApiStatus_DONE2;
 }
 
@@ -798,7 +798,7 @@ s32 BringPartnerOut(Evt* script, s32 isInitialCall) {
 
     if (isInitialCall) {
         wExtraPartnerID = evt_get_variable(script, *args++);
-        if (playerData->currentPartner == wExtraPartnerID) {
+        if (playerData->curPartner == wExtraPartnerID) {
             wExtraPartnerID = 0;
             return ApiStatus_DONE2;
         }
@@ -841,7 +841,7 @@ s32 BringPartnerOut(Evt* script, s32 isInitialCall) {
         }
 
         npc->jumpVel = ((playerY - targetY) + (npc->jumpScale * npc->duration * npc->duration * 0.5f)) / npc->duration;
-        npc->currentAnim = gPartnerAnimations[wExtraPartnerID].walk;
+        npc->curAnim = gPartnerAnimations[wExtraPartnerID].walk;
         return ApiStatus_BLOCK;
     }
 
@@ -849,7 +849,7 @@ s32 BringPartnerOut(Evt* script, s32 isInitialCall) {
     npc->jumpVel -= npc->jumpScale;
     npc->pos.y += npc->jumpVel;
     if (npc->jumpVel <= 0.0f) {
-        npc->currentAnim = gPartnerAnimations[wExtraPartnerID].jump;
+        npc->curAnim = gPartnerAnimations[wExtraPartnerID].jump;
     }
     npc_move_heading(npc, npc->moveSpeed, npc->yaw);
     duration = npc->duration;
@@ -862,7 +862,7 @@ s32 BringPartnerOut(Evt* script, s32 isInitialCall) {
 
     npc->duration--;
     if (npc->duration < 0) {
-        npc->currentAnim = gPartnerAnimations[wExtraPartnerID].idle;
+        npc->curAnim = gPartnerAnimations[wExtraPartnerID].idle;
         npc->jumpVel = 0.0f;
         npc->pos.y = npc->moveToPos.y;
         npc->scale.x = 1.0f;
@@ -911,7 +911,7 @@ ApiStatus PutPartnerAway(Evt* script, s32 isInitialCall) {
 
             partnerY = targetY - partnerY;
             partner->jumpVel = (partnerY + (partner->jumpScale * partner->duration * partner->duration * 0.5f)) / partner->duration;
-            partner->currentAnim = gPartnerAnimations[wExtraPartnerID].walk;
+            partner->curAnim = gPartnerAnimations[wExtraPartnerID].walk;
             return ApiStatus_BLOCK;
         } else {
             return ApiStatus_DONE2;
@@ -921,7 +921,7 @@ ApiStatus PutPartnerAway(Evt* script, s32 isInitialCall) {
     partner->jumpVel -= partner->jumpScale;
     partner->pos.y += partner->jumpVel;
     if (partner->jumpVel <= 0.0f) {
-        partner->currentAnim = gPartnerAnimations[wExtraPartnerID].jump;
+        partner->curAnim = gPartnerAnimations[wExtraPartnerID].jump;
     }
     npc_move_heading(partner, partner->moveSpeed, partner->yaw);
 
@@ -936,7 +936,7 @@ ApiStatus PutPartnerAway(Evt* script, s32 isInitialCall) {
 
     partner->duration--;
     if (partner->duration < 0) {
-        partner->currentAnim = gPartnerAnimations[wExtraPartnerID].fall;
+        partner->curAnim = gPartnerAnimations[wExtraPartnerID].fall;
         partner->jumpVel = 0.0f;
         partner->pos.y = partner->moveToPos.y;
         free_npc_by_index(wExtraPartnerNpcID);
@@ -947,7 +947,7 @@ ApiStatus PutPartnerAway(Evt* script, s32 isInitialCall) {
 }
 
 ApiStatus GetCurrentPartnerID(Evt* script, s32 isInitialCall) {
-    evt_set_variable(script, *script->ptrReadPos, gPlayerData.currentPartner);
+    evt_set_variable(script, *script->ptrReadPos, gPlayerData.curPartner);
     return ApiStatus_DONE2;
 }
 

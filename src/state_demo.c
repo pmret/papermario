@@ -229,7 +229,7 @@ void state_step_demo(void) {
             gGameStatusPtr->mapID = mapID;
             gGameStatusPtr->entryID = demoSceneData->index;
             gGameStatusPtr->peachFlags = 0;
-            playerData->currentPartner = demoSceneData->partnerID;
+            playerData->curPartner = demoSceneData->partnerID;
             set_cam_viewport(0, 29, 20, -262, 177);
             evt_set_variable(NULL, GB_StoryProgress, demoSceneData->storyProgress);
 
@@ -247,7 +247,7 @@ void state_step_demo(void) {
             gGameStatusPtr->mapID = mapID;
             gGameStatusPtr->entryID = demoSceneData->index;
             gGameStatusPtr->peachFlags = PEACH_STATUS_FLAG_IS_PEACH;
-            playerData->currentPartner = demoSceneData->partnerID;
+            playerData->curPartner = demoSceneData->partnerID;
             set_cam_viewport(0, 29, 20, -262, 177);
             evt_set_variable(NULL, GB_StoryProgress, demoSceneData->storyProgress);
 

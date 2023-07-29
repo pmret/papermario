@@ -24,7 +24,7 @@ API_CALLABLE(TeleportPartnerToPlayer) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Npc* partner;
 
-    if (gPlayerData.currentPartner == PARTNER_NONE) {
+    if (gPlayerData.curPartner == PARTNER_NONE) {
         return ApiStatus_DONE2;
     }
 
@@ -44,7 +44,7 @@ API_CALLABLE(TeleportPartnerToPlayer) {
 API_CALLABLE(SetPlayerPositionFromSaveData) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     Camera* camera = &gCameras[gCurrentCameraID];
-    s32 currentPartner = gPlayerData.currentPartner;
+    s32 currentPartner = gPlayerData.curPartner;
 
     playerStatus->pos.x = gGameStatusPtr->savedPos.x;
     playerStatus->pos.y = gGameStatusPtr->savedPos.y;

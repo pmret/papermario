@@ -55,10 +55,10 @@ API_CALLABLE(N(UpdateRockingChair)) {
     physics = script->functionTempPtr[1];
     switch (script->functionTemp[0]) {
         case CHAIR_STATE_INITIAL:
-            if (collisionStatus->currentFloor == COLLIDER_i3) {
+            if (collisionStatus->curFloor == COLLIDER_i3) {
                 script->functionTemp[0] = CHAIR_STATE_PLAYER_TOUCHING;
             }
-            if (collisionStatus->currentFloor == COLLIDER_i2) {
+            if (collisionStatus->curFloor == COLLIDER_i2) {
                 script->functionTemp[0] = CHAIR_STATE_PLAYER_TOUCHING;
             }
             physics->angleDelta = 0.0f;
@@ -72,8 +72,8 @@ API_CALLABLE(N(UpdateRockingChair)) {
             break;
         case CHAIR_STATE_PLAYER_TOUCHING:
             //TODO odd match
-            currentFloor = collisionStatus->currentFloor;
-            if (currentFloor != COLLIDER_i3 && collisionStatus->currentFloor != COLLIDER_i2) {
+            currentFloor = collisionStatus->curFloor;
+            if (currentFloor != COLLIDER_i3 && collisionStatus->curFloor != COLLIDER_i2) {
                 script->functionTemp[3] = 120; // settle time
                 script->functionTemp[0] = CHAIR_STATE_PLAYER_NOT_TOUCHING;
             }
@@ -117,10 +117,10 @@ API_CALLABLE(N(UpdateRockingChair)) {
             physics->rotAngle += physics->angleDelta;
             break;
         case CHAIR_STATE_PLAYER_NOT_TOUCHING:
-            if (collisionStatus->currentFloor == COLLIDER_i3) {
+            if (collisionStatus->curFloor == COLLIDER_i3) {
                 script->functionTemp[0] = CHAIR_STATE_PLAYER_TOUCHING;
             }
-            if (collisionStatus->currentFloor == COLLIDER_i2) {
+            if (collisionStatus->curFloor == COLLIDER_i2) {
                 script->functionTemp[0] = CHAIR_STATE_PLAYER_TOUCHING;
             }
 

@@ -145,7 +145,7 @@ typedef struct Shop {
     /* 0x002 */ s16 numItems;
     /* 0x004 */ s16 numSpecialPrices;
     /* 0x006 */ char unk_06[0x2];
-    /* 0x008 */ s32 currentItemSlot;
+    /* 0x008 */ s32 curItemSlot;
     /* 0x00C */ s32 selectedStoreItemSlot;
     /* 0x010 */ ShopOwner* owner;
     /* 0x014 */ ShopItemLocation* itemDataPositions;

@@ -14,7 +14,7 @@ void N(PiranhaPlantAI_00)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
         npc->duration--;
     } else {
         enemy->varTable[0] = 0;
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
+        npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         script->functionTemp[1] = 0;
         script->functionTemp[0] = 1;
     }
@@ -29,7 +29,7 @@ void N(PiranhaPlantAI_01)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
         ai_enemy_play_sound(npc, SOUND_BURROW_DIG, 0);
         fx_emote(EMOTE_EXCLAMATION, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 10, &temp);
         ai_enemy_play_sound(npc, SOUND_2F4, SOUND_PARAM_MORE_QUIET);
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_PRE];
+        npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_PRE];
         npc->duration = enemy->varTable[8];
         script->functionTemp[0] = 10;
     }
@@ -63,9 +63,9 @@ void N(PiranhaPlantAI_10)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
 
     if (npc->duration == 0) {
         if (clamp_angle(gPlayerStatusPtr->spriteFacingAngle) < 180.0f) {
-            yaw2 = clamp_angle(gCameras[gCurrentCameraID].currentYaw - 90.0f);
+            yaw2 = clamp_angle(gCameras[gCurrentCameraID].curYaw - 90.0f);
         } else {
-            yaw2 = clamp_angle(gCameras[gCurrentCameraID].currentYaw + 90.0f);
+            yaw2 = clamp_angle(gCameras[gCurrentCameraID].curYaw + 90.0f);
         }
 
         yaw = clamp_angle(yaw2 + 180.0f);
@@ -213,7 +213,7 @@ void N(PiranhaPlantAI_10)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
 
         npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
         ai_enemy_play_sound(npc, SOUND_BURROW_SURFACE, 0);
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_HIT];
+        npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_HIT];
         npc->duration = enemy->varTable[10];
         script->functionTemp[0] = 11;
     }
@@ -228,7 +228,7 @@ void N(PiranhaPlantAI_11)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
         enemy->flags &= ~(ENEMY_FLAG_100000 | ENEMY_FLAG_IGNORE_TOUCH | ENEMY_FLAG_IGNORE_JUMP | ENEMY_FLAG_IGNORE_HAMMER | ENEMY_FLAG_CANT_INTERACT | ENEMY_FLAG_IGNORE_PARTNER);
     }
     if (npc->duration == 0) {
-        npc->currentAnim = enemy->animList[10];
+        npc->curAnim = enemy->animList[10];
         npc->duration = 0;
         script->functionTemp[0] = 12;
     }
@@ -241,7 +241,7 @@ void N(PiranhaPlantAI_12)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
 
     npc->duration++;
     if (npc->duration == enemy->varTable[13]) {
-        npc->currentAnim = enemy->animList[11];
+        npc->curAnim = enemy->animList[11];
     }
     if (npc->duration == enemy->varTable[14]) {
         enemy->varTable[0] = 3;
@@ -249,7 +249,7 @@ void N(PiranhaPlantAI_12)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
     if (npc->duration >= enemy->varTable[12]) {
         enemy->varTable[0] = 4;
         npc->duration = 8;
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
+        npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         fx_emote(EMOTE_FRUSTRATION, npc, 0, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 10, &temp);
         script->functionTemp[0] = 13;
     }
@@ -322,7 +322,7 @@ s32 N(PiranhaPlantAI_Main)(Evt* script, s32 isInitialCall) {
     if (isInitialCall || (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND)) {
         script->AI_TEMP_STATE = AI_STATE_PIRANHA_PLANT_00;
         npc->duration = 0;
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
+        npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
 
         enemy->AI_VAR_ATTACK_STATE = MELEE_HITBOX_STATE_NONE;
         if (enemy->aiFlags & ENEMY_AI_FLAG_SUSPEND) {

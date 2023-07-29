@@ -54,7 +54,7 @@ void N(sync_player_position)(void) {
     }
 
     playerStatus->pos.z -= cos_rad(DEG_TO_RAD(
-        camera->currentYaw + playerStatus->spriteFacingAngle - 90.0f + angleOffset)) * -4.0f;
+        camera->curYaw + playerStatus->spriteFacingAngle - 90.0f + angleOffset)) * -4.0f;
 }
 
 void N(get_movement_from_input)(f32* outAngle, f32* outSpeed) {
@@ -65,7 +65,7 @@ void N(get_movement_from_input)(f32* outAngle, f32* outSpeed) {
 
     N(InputStickX) = stickX;
     N(InputStickY) = stickY;
-    moveAngle = clamp_angle(atan2(0.0f, 0.0f, stickX, -stickY) + gCameras[CAM_DEFAULT].currentYaw);
+    moveAngle = clamp_angle(atan2(0.0f, 0.0f, stickX, -stickY) + gCameras[CAM_DEFAULT].curYaw);
     moveSpeed = 0.0f;
 
     if (dist2D(0.0f, 0.0f, N(InputStickX), -N(InputStickY)) >= 1.0) {
@@ -92,9 +92,9 @@ void N(test_for_water_level)(s32 ignoreFlags, f32 posX, f32 posY, f32 posZ, f32 
     depth = 200.0f;
 
     if (!npc_raycast_down_around(ignoreFlags, &posX, &posY, &posZ, &depth, yaw, radius)) {
-        collisionStatus->currentFloor = NO_COLLIDER;
+        collisionStatus->curFloor = NO_COLLIDER;
     } else {
-        collisionStatus->currentFloor = NpcHitQueryColliderID;
+        collisionStatus->curFloor = NpcHitQueryColliderID;
         N(WaterSurfaceY) = posY;
     }
 }
@@ -154,7 +154,7 @@ void N(update_riding_physics)(Npc* sushie) {
             }
         }
 
-        moveAngle = clamp_angle(atan2(0.0f, 0.0f, N(InertialStickX), -N(InertialStickY)) + gCameras[CAM_DEFAULT].currentYaw);
+        moveAngle = clamp_angle(atan2(0.0f, 0.0f, N(InertialStickX), -N(InertialStickY)) + gCameras[CAM_DEFAULT].curYaw);
         if (N(InertialMoveSpeed) <= moveSpeed) {
             N(InertialMoveSpeed) += (moveSpeed - N(InertialMoveSpeed)) / moveSpeedDamping;
             if (N(InertialMoveSpeed) > moveSpeed) {
@@ -251,7 +251,7 @@ void N(update_riding_physics)(Npc* sushie) {
         }
     }
     if (N(DiveState) == DIVE_STATE_DELAY) {
-        if ((partnerStatus->currentButtons & BUTTON_C_DOWN) && N(DiveTime) == 0) {
+        if ((partnerStatus->curButtons & BUTTON_C_DOWN) && N(DiveTime) == 0) {
             N(DiveState) = DIVE_STATE_DIVING;
         }
     }
@@ -277,7 +277,7 @@ void N(update_riding_physics)(Npc* sushie) {
         }
         if (N(DiveTime) == 1) {
             suggest_player_anim_always_forward(ANIM_MarioW2_DiveSushie);
-            sushie->currentAnim = ANIM_WorldSushie_Ride;
+            sushie->curAnim = ANIM_WorldSushie_Ride;
         }
         if (!N(IsUnderwater) && (playerStatus->pos.y + (playerStatus->colliderHeight * 0.5f) < N(WaterSurfaceY))) {
             N(IsUnderwater) = TRUE;
@@ -286,8 +286,8 @@ void N(update_riding_physics)(Npc* sushie) {
             npc_set_imgfx_params(sushie, IMGFX_SET_WAVY, 2, 0, 0, 0, 0);
         }
         if (N(DiveTime) >= 10) {
-            if (!(partnerStatus->currentButtons & BUTTON_C_DOWN) || N(DiveTime) >= 30) {
-                sushie->currentAnim = ANIM_WorldSushie_Rise;
+            if (!(partnerStatus->curButtons & BUTTON_C_DOWN) || N(DiveTime) >= 30) {
+                sushie->curAnim = ANIM_WorldSushie_Rise;
                 sfx_play_sound_at_npc(SOUND_294 | SOUND_ID_TRIGGER_CHANGE_SOUND, SOUND_SPACE_MODE_0, NPC_PARTNER);
                 N(DiveState) = DIVE_STATE_SURFACING;
             }
@@ -321,7 +321,7 @@ void N(update_riding_physics)(Npc* sushie) {
                 npc_set_imgfx_params(sushie, IMGFX_CLEAR, 0, 0, 0, 0, 0);
             }
             N(DiveState) = DIVE_STATE_NONE;
-            sushie->currentAnim = ANIM_WorldSushie_Ride;
+            sushie->curAnim = ANIM_WorldSushie_Ride;
             sushie->moveToPos.y = N(WaterSurfaceY) - (sushie->collisionHeight * 0.5f);
             suggest_player_anim_always_forward(ANIM_MarioW2_RideSushie);
         }
@@ -391,7 +391,7 @@ API_CALLABLE(N(UseAbility)) {
         case SWIM_STATE_INIT:
             if (!gGameStatusPtr->keepUsingPartnerOnMapChange) {
                 // are we colliding with a solid (non-entity) wall?
-                collider = collisionStatus->currentWall;
+                collider = collisionStatus->curWall;
                 if (collider <= NO_COLLIDER || collider & COLLISION_WITH_ENTITY_BIT) {
                     return ApiStatus_DONE1;
                 }
@@ -413,7 +413,7 @@ API_CALLABLE(N(UseAbility)) {
                 disable_player_shadow();
                 disable_npc_shadow(sushie);
                 npc_set_imgfx_params(sushie, IMGFX_SET_WAVY, 2, 0, 0, 0, 0);
-                sushie->currentAnim = ANIM_WorldSushie_Ride;
+                sushie->curAnim = ANIM_WorldSushie_Ride;
                 sushie->moveSpeed = playerStatus->runSpeed;
                 sushie->jumpScale = 0.0f;
                 partnerStatus->partnerActionState = PARTNER_ACTION_USE;
@@ -427,11 +427,11 @@ API_CALLABLE(N(UseAbility)) {
             break;
 
         case SWIM_STATE_BEGIN:
-            if (collisionStatus->currentWall <= NO_COLLIDER) {
+            if (collisionStatus->curWall <= NO_COLLIDER) {
                 return ApiStatus_DONE1;
             }
             // check for obstructions between player and center of current wall
-            get_collider_center(collisionStatus->currentWall, &x, &y, &z);
+            get_collider_center(collisionStatus->curWall, &x, &y, &z);
             angle = atan2(x, z, playerStatus->pos.x, playerStatus->pos.z);
             x = playerStatus->pos.x;
             y = playerStatus->pos.y;
@@ -465,7 +465,7 @@ API_CALLABLE(N(UseAbility)) {
             dist = 100.0f;
             collider = npc_raycast_down_around(sushie->collisionChannel, &x, &y, &z, &dist,
                     sushie->yaw, sushie->collisionDiameter);
-            sushie->currentAnim = ANIM_WorldSushie_Run;
+            sushie->curAnim = ANIM_WorldSushie_Run;
             sushie->duration = 12;
             sushie->moveToPos.y = y - (sushie->collisionHeight * 0.5f);
             suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
@@ -489,7 +489,7 @@ API_CALLABLE(N(UseAbility)) {
             sushie->flags &= ~(NPC_FLAG_GRAVITY | NPC_FLAG_IGNORE_WORLD_COLLISION);
             disable_npc_shadow(sushie);
             npc_set_imgfx_params(sushie, IMGFX_SET_WAVY, 2, 0, 0, 0, 0);
-            sushie->currentAnim = ANIM_WorldSushie_Ride;
+            sushie->curAnim = ANIM_WorldSushie_Ride;
             playerStatus->flags |= PS_FLAG_MOVEMENT_LOCKED;
             dist = dist2D(playerStatus->pos.x, playerStatus->pos.z, sushie->moveToPos.x, sushie->moveToPos.z);
             sushie->jumpVel = 5.0f;
@@ -609,18 +609,18 @@ API_CALLABLE(N(UseAbility)) {
                 if (npc_test_move_taller_with_slipping(sushie->collisionChannel, &x, &y, &z, 10.0f,
                         sushie->yaw, sushie->collisionHeight, sushie->collisionDiameter)
                 ) {
-                    collisionStatus->pushingAgainstWall = sushie->currentWall = NpcHitQueryColliderID;
+                    collisionStatus->pushingAgainstWall = sushie->curWall = NpcHitQueryColliderID;
                 } else {
                     collisionStatus->pushingAgainstWall = NO_COLLIDER;
                 }
 
-                if (sushie->currentWall < 0 || sushie->currentWall & COLLISION_WITH_ENTITY_BIT) {
+                if (sushie->curWall < 0 || sushie->curWall & COLLISION_WITH_ENTITY_BIT) {
                     if (N(DiveState) == DIVE_STATE_DIVING && N(DiveTime) == 1) {
                         sfx_play_sound_at_npc(SOUND_294, SOUND_SPACE_MODE_0, NPC_PARTNER);
                     }
                     break;
                 }
-                collider = get_collider_flags(sushie->currentWall) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
+                collider = get_collider_flags(sushie->curWall) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
                 if (collider != SURFACE_TYPE_DOCK_WALL) {
                     if (N(DiveState) == DIVE_STATE_DIVING && N(DiveTime) == 1) {
                         sfx_play_sound_at_npc(SOUND_294, SOUND_SPACE_MODE_0, NPC_PARTNER);
@@ -636,7 +636,7 @@ API_CALLABLE(N(UseAbility)) {
                 // this var is a condition here
                 collider = npc_raycast_down_around(sushie->collisionChannel, &x, &y, &z, &dist, sushie->yaw, 0.0f);
                 if (collider) {
-                    get_collider_center(sushie->currentWall, &x, &y, &z);
+                    get_collider_center(sushie->curWall, &x, &y, &z);
                     dist = dist2D(sushie->pos.x, sushie->pos.z, x, z);
                     sin_cos_rad(DEG_TO_RAD(atan2(sushie->pos.x, sushie->pos.z, x, z)), &sinAngle, &cosAngle);
                     x = sushie->pos.x + ((sinAngle * dist) * 0.6);
@@ -930,7 +930,7 @@ API_CALLABLE(N(EnterMap)) {
                                 partnerNPC->yaw, partnerNPC->collisionDiameter * 0.5f);
             partnerNPC->pos.y = N(WaterSurfaceY) - (partnerNPC->collisionHeight * 0.5f);
             partnerNPC->yaw = atan2(partnerNPC->pos.x, partnerNPC->pos.z, script->varTable[1], script->varTable[3]);
-            partnerNPC->currentAnim = ANIM_WorldSushie_Ride;
+            partnerNPC->curAnim = ANIM_WorldSushie_Ride;
             partnerNPC->jumpScale = 0.0f;
             partnerNPC->moveSpeed = 3.0f;
             partnerNPC->moveToPos.x = partnerNPC->pos.x;

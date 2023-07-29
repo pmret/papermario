@@ -134,7 +134,7 @@ void func_E0112330(s32 arg0, SpiritCardFXData* data) {
     Matrix4f sp60;
 
     if (arg0 == 0) {
-        temp = gCameras[gCurrentCameraID].currentYaw;
+        temp = gCameras[gCurrentCameraID].curYaw;
     } else {
         temp = 0.0f;
     }

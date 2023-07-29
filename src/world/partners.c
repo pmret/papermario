@@ -630,13 +630,13 @@ void _use_partner_ability(void) {
     if (partnerStatus->inputDisabledCount == 0) {
         partnerStatus->stickX = gGameStatusPtr->stickX[gGameStatusPtr->multiplayerEnabled];
         partnerStatus->stickY = gGameStatusPtr->stickY[gGameStatusPtr->multiplayerEnabled];
-        partnerStatus->currentButtons = gGameStatusPtr->currentButtons[gGameStatusPtr->multiplayerEnabled];
+        partnerStatus->curButtons = gGameStatusPtr->curButtons[gGameStatusPtr->multiplayerEnabled];
         partnerStatus->pressedButtons = gGameStatusPtr->pressedButtons[gGameStatusPtr->multiplayerEnabled];
         partnerStatus->heldButtons = gGameStatusPtr->heldButtons[gGameStatusPtr->multiplayerEnabled];
     } else {
         partnerStatus->stickX = 0;
         partnerStatus->stickY = 0;
-        partnerStatus->currentButtons = 0;
+        partnerStatus->curButtons = 0;
         partnerStatus->pressedButtons = 0;
         partnerStatus->heldButtons = 0;
     }
@@ -682,7 +682,7 @@ void _use_partner_ability(void) {
                     }
                     set_time_freeze_mode(TIME_FREEZE_NORMAL);
                     partner_free_npc();
-                    playerData->currentPartner = wCurrentPartnerId = NextPartnerID;
+                    playerData->curPartner = wCurrentPartnerId = NextPartnerID;
                     create_partner_npc();
                     sfx_play_sound(SOUND_E);
                     wPartner->init(wPartnerNpc);
@@ -718,7 +718,7 @@ void _use_partner_ability(void) {
                     PartnerCommandState += 1;
                 case 1:
                     partner_free_npc();
-                    playerData->currentPartner = wCurrentPartnerId = NextPartnerID;
+                    playerData->curPartner = wCurrentPartnerId = NextPartnerID;
                     create_partner_npc();
                     wPartnerNpc->pos.x = wSavedPartnerPosX;
                     wPartnerNpc->pos.y = wSavedPartnerPosY;
@@ -760,7 +760,7 @@ void _use_partner_ability(void) {
                     }
                     partner_free_npc();
                     PartnerCommand = PARTNER_CMD_INIT;
-                    playerData->currentPartner = wCurrentPartnerId = NextPartnerID;
+                    playerData->curPartner = wCurrentPartnerId = NextPartnerID;
                     enable_player_input();
                     break;
             }
@@ -770,7 +770,7 @@ void _use_partner_ability(void) {
                 kill_script_by_ID(wPartnerCurrentScriptID);
                 partner_free_npc();
                 PartnerCommand = PARTNER_CMD_INIT;
-                playerData->currentPartner = wCurrentPartnerId = NextPartnerID;
+                playerData->curPartner = wCurrentPartnerId = NextPartnerID;
                 break;
             }
             break;
@@ -778,7 +778,7 @@ void _use_partner_ability(void) {
             switch (PartnerCommandState) {
                 case 0: // create the new partner
                     disable_player_input();
-                    playerData->currentPartner = wCurrentPartnerId = NextPartnerID;
+                    playerData->curPartner = wCurrentPartnerId = NextPartnerID;
                     create_partner_npc();
                     wPartner->init(wPartnerNpc);
                     PartnerCommandState += 1;
@@ -808,7 +808,7 @@ void _use_partner_ability(void) {
             switch (PartnerCommandState) {
                 case 0:
                     disable_player_input();
-                    playerData->currentPartner = wCurrentPartnerId = NextPartnerID;
+                    playerData->curPartner = wCurrentPartnerId = NextPartnerID;
                     create_partner_npc();
                     wPartnerNpc->pos.x = wSavedPartnerPosX;
                     wPartnerNpc->pos.y = wSavedPartnerPosY;
@@ -826,7 +826,7 @@ void _use_partner_ability(void) {
                     wPartnerCurrentScriptID = wPartnerCurrentScript->id;
                     wPartnerCurrentScript->groupFlags = EVT_GROUP_08 | EVT_GROUP_02;
                     PartnerCommand = PARTNER_CMD_INIT;
-                    wPartnerNpc->currentAnim = gPartnerAnimations[wCurrentPartnerId].fly;
+                    wPartnerNpc->curAnim = gPartnerAnimations[wCurrentPartnerId].fly;
                     enable_player_input();
                     break;
             }
@@ -962,7 +962,7 @@ s32 partner_use_ability(void) {
         && wPartner != NULL
         && (wPartner->canUseAbility == NULL || wPartner->canUseAbility(wPartnerNpc)))
     {
-        if (gGameStatusPtr->multiplayerEnabled && (partnerStatus->currentButtons & BUTTON_B)) {
+        if (gGameStatusPtr->multiplayerEnabled && (partnerStatus->curButtons & BUTTON_B)) {
             sfx_play_sound(SOUND_MENU_ERROR);
         } else if (wCurrentPartnerId != PARTNER_NONE) {
             D_8010CFE0 = 1;
@@ -993,7 +993,7 @@ s32 partner_can_use_ability(void) {
 
 void partner_reset_data(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    s32 currentPartner = gPlayerData.currentPartner;
+    s32 currentPartner = gPlayerData.curPartner;
 
     mem_clear(&gPartnerStatus, sizeof(gPartnerStatus));
     get_worker(create_worker_frontUI(_use_partner_ability, NULL));
@@ -1088,7 +1088,7 @@ void partner_handle_after_battle(void) {
 
         NextPartnerCommand = PARTNER_CMD_INIT;
 
-        if (playerData->currentPartner != PARTNER_WATT && partnerStatus->actingPartner == PARTNER_WATT) {
+        if (playerData->curPartner != PARTNER_WATT && partnerStatus->actingPartner == PARTNER_WATT) {
             gPlayerStatusPtr->animFlags &= ~PA_FLAG_USING_WATT;
             gPlayerStatusPtr->animFlags &= ~PA_FLAG_WATT_IN_HANDS;
             partnerStatus->actingPartner = PARTNER_NONE;
@@ -1158,7 +1158,7 @@ void partner_walking_enable(Npc* partner, s32 val) {
     D_8010CFCC = 0;
     wPartnerMoveTime = 16;
     wPartnerTetherDistance = 40.0f;
-    partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].idle;
+    partner->curAnim = gPartnerAnimations[wCurrentPartnerId].idle;
     func_800EA5B8(partner);
     partner->collisionChannel = COLLISION_CHANNEL_10000;
     partner->jumpVel = 0.0f;
@@ -1252,9 +1252,9 @@ void partner_walking_follow_player(Npc* partner) {
             if (wPartnerTetherDistance < 20.0) {
                 partner->moveSpeed = 4.0f;
             }
-            partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].run;
+            partner->curAnim = gPartnerAnimations[wCurrentPartnerId].run;
             if (!(partner->flags & NPC_FLAG_GROUNDED)) {
-                partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].fall;
+                partner->curAnim = gPartnerAnimations[wCurrentPartnerId].fall;
             }
             while (TRUE) {
                 distance = dist2D(x, z, moveHistoryX, moveHistoryZ);
@@ -1285,7 +1285,7 @@ void partner_walking_follow_player(Npc* partner) {
                     partner->moveSpeed = 0.0f;
                     partner->jumpScale = 0.0f;
                     wPartnerFollowState = 5;
-                    partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].idle;
+                    partner->curAnim = gPartnerAnimations[wCurrentPartnerId].idle;
                     break;
                 } else {
                     D_8010CFBC++;
@@ -1314,11 +1314,11 @@ void partner_walking_follow_player(Npc* partner) {
             partner->yaw = yaw;
             npc_move_heading(partner, partner->moveSpeed, partner->yaw);
             spawn_surface_effects(partner, (partner->moveSpeed < 4.0) ? SURFACE_INTERACT_WALK : SURFACE_INTERACT_RUN);
-            surfaceType = get_collider_flags(partner->currentFloor);
+            surfaceType = get_collider_flags(partner->curFloor);
             if (surfaceType == SURFACE_TYPE_SPIKES ||
                 surfaceType == SURFACE_TYPE_LAVA ||
                 (partner->flags & (NPC_FLAG_GROUNDED | NPC_FLAG_COLLDING_FORWARD_WITH_WORLD)) == (NPC_FLAG_GROUNDED | NPC_FLAG_COLLDING_FORWARD_WITH_WORLD)) {
-                if (!func_800EA4B0(partner->currentWall)) {
+                if (!func_800EA4B0(partner->curWall)) {
                     D_8010CFBC++;
                     if (D_8010CFBC >= 40) {
                         D_8010CFBC = 0;
@@ -1337,7 +1337,7 @@ void partner_walking_follow_player(Npc* partner) {
             }
             break;
         case 1:
-            surfaceType = get_collider_flags(partner->currentFloor);
+            surfaceType = get_collider_flags(partner->curFloor);
             if (D_8010CFBC == gPlayerMoveHistoryIndex) {
                 if (surfaceType == SURFACE_TYPE_SPIKES || surfaceType == SURFACE_TYPE_LAVA) {
                     moveHistoryX = partner->pos.x;
@@ -1389,9 +1389,9 @@ void partner_walking_follow_player(Npc* partner) {
                 partner->jumpVel = 0.0f;
             }
             if (!(surfaceType == SURFACE_TYPE_SPIKES || surfaceType == SURFACE_TYPE_LAVA)) {
-                partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].jump;
+                partner->curAnim = gPartnerAnimations[wCurrentPartnerId].jump;
             } else {
-                partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].hurt;
+                partner->curAnim = gPartnerAnimations[wCurrentPartnerId].hurt;
             }
 
             partner->moveToPos.x = partner->pos.x;
@@ -1404,10 +1404,10 @@ void partner_walking_follow_player(Npc* partner) {
             partner->jumpVel -= partner->jumpScale;
             partner->pos.y += partner->jumpVel;
             if (partner->jumpVel <= 0.0f) {
-                partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].fall;
+                partner->curAnim = gPartnerAnimations[wCurrentPartnerId].fall;
             }
             if (partner->pos.y < -2000.0f) {
-                partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].fly;
+                partner->curAnim = gPartnerAnimations[wCurrentPartnerId].fly;
                 partner->flags &= ~NPC_FLAG_JUMPING;
                 partner->jumpVel = 0.0f;
                 partner->yaw = atan2(partner->pos.x, partner->pos.z, playerStatus->pos.x, playerStatus->pos.z);
@@ -1424,7 +1424,7 @@ void partner_walking_follow_player(Npc* partner) {
                 z = partner->pos.z;
                 if (npc_raycast_down_around(partner->collisionChannel, &x, &y, &z, &distance, partner->yaw, partner->collisionDiameter) != 0) {
                     if (distance <= fabsf(partner->jumpVel) + 22.0f) {
-                        partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].fly;
+                        partner->curAnim = gPartnerAnimations[wCurrentPartnerId].fly;
                         partner->flags &= ~NPC_FLAG_JUMPING;
                         partner->jumpVel = 0.0f;
                         partner->pos.y = y;
@@ -1436,7 +1436,7 @@ void partner_walking_follow_player(Npc* partner) {
                             partner->pos.x = playerStatus->pos.x;
                             partner->pos.y = playerStatus->pos.y;
                             partner->pos.z = playerStatus->pos.z;
-                            add_vec2D_polar(&partner->pos.x, &partner->pos.z, 5.0f, clamp_angle((cameras[CAM_DEFAULT].currentYaw + 90.0f) - playerStatus->spriteFacingAngle));
+                            add_vec2D_polar(&partner->pos.x, &partner->pos.z, 5.0f, clamp_angle((cameras[CAM_DEFAULT].curYaw + 90.0f) - playerStatus->spriteFacingAngle));
                             wPartnerFollowState = 5;
                         }
                         break;
@@ -1457,17 +1457,17 @@ void partner_walking_follow_player(Npc* partner) {
                 if (D_8010CFCA == 0) {
                     partner->moveSpeed = 0.0f;
                     partner->jumpScale = 0.0f;
-                    partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].idle;
+                    partner->curAnim = gPartnerAnimations[wCurrentPartnerId].idle;
                     if (playerStatus->actionState == ACTION_STATE_TALK) {
                         D_8010CFCA = 0;
                     }
-                    surfaceType = get_collider_flags(partner->currentFloor);
+                    surfaceType = get_collider_flags(partner->curFloor);
                     if (surfaceType == SURFACE_TYPE_SPIKES || surfaceType == SURFACE_TYPE_LAVA) {
                         wPartnerFollowState = 0;
                         return;
                     }
                 } else {
-                    temp_a3 = clamp_angle(cameras[CAM_DEFAULT].currentYaw + (playerStatus->spriteFacingAngle < 180.0f ? 90.0f : -90.0f));
+                    temp_a3 = clamp_angle(cameras[CAM_DEFAULT].curYaw + (playerStatus->spriteFacingAngle < 180.0f ? 90.0f : -90.0f));
                     partner->moveToPos.x = playerStatus->pos.x;
                     partner->moveToPos.y = playerStatus->pos.y;
                     partner->moveToPos.z = playerStatus->pos.z;
@@ -1477,7 +1477,7 @@ void partner_walking_follow_player(Npc* partner) {
                     partner->moveSpeed = 2.0f;
                     if (distance > 2.0f) {
                         partner->yaw = yaw;
-                        partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].run;
+                        partner->curAnim = gPartnerAnimations[wCurrentPartnerId].run;
                         if (!(partner->flags & NPC_FLAG_COLLDING_FORWARD_WITH_WORLD)) {
                             D_800F803A = 0;
                         } else {
@@ -1487,7 +1487,7 @@ void partner_walking_follow_player(Npc* partner) {
                                 partner->moveSpeed = 0.0f;
                                 partner->jumpScale = 0.0f;
                                 partner->renderYaw = yaw;
-                                partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].idle;
+                                partner->curAnim = gPartnerAnimations[wCurrentPartnerId].idle;
                                 if (D_8010CFCA == 2 || playerStatus->actionState == ACTION_STATE_TALK) {
                                     D_8010CFCA = 0;
                                 }
@@ -1498,7 +1498,7 @@ void partner_walking_follow_player(Npc* partner) {
                         partner->yaw = yaw;
                         partner->moveSpeed = 0.0f;
                         partner->jumpScale = 0.0f;
-                        partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].idle;
+                        partner->curAnim = gPartnerAnimations[wCurrentPartnerId].idle;
                         if (D_8010CFCA == 2 || playerStatus->actionState == ACTION_STATE_TALK) {
                             D_8010CFCA = 0;
                         }
@@ -1517,7 +1517,7 @@ void partner_walking_follow_player(Npc* partner) {
                             npc_move_heading(partner, partner->moveSpeed, partner->yaw);
                             partner->moveSpeed = 0.0f;
                             partner->jumpScale = 0.0f;
-                            partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].idle;
+                            partner->curAnim = gPartnerAnimations[wCurrentPartnerId].idle;
                             if (D_8010CFCA == 2) {
                                 D_8010CFCA = 0;
                             } else if (playerStatus->actionState == ACTION_STATE_TALK) {
@@ -1593,7 +1593,7 @@ void partner_walking_follow_player(Npc* partner) {
                     distance = dist2D(partner->pos.x, partner->pos.z, partner->moveToPos.x, partner->moveToPos.z);
                     wPartnerMoveSpeed = distance / wPartnerMoveTime;
                     partner->moveSpeed = wPartnerMoveSpeed;
-                    partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].anims[wPartnerMoveSpeed >= 4.0 ? PARTNER_ANIM_INDEX_RUN : PARTNER_ANIM_INDEX_WALK];
+                    partner->curAnim = gPartnerAnimations[wCurrentPartnerId].anims[wPartnerMoveSpeed >= 4.0 ? PARTNER_ANIM_INDEX_RUN : PARTNER_ANIM_INDEX_WALK];
                     yaw = atan2(partner->pos.x, partner->pos.z, partner->moveToPos.x, partner->moveToPos.z);
                     partner->yaw = D_800F8034 = yaw;
                     D_8010CFCE++;
@@ -1605,7 +1605,7 @@ void partner_walking_follow_player(Npc* partner) {
                             partner->jumpVel -= partner->jumpScale;
                             partner->pos.y += partner->jumpVel;
                             if (partner->jumpVel <= 0.0f) {
-                                partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].fall;
+                                partner->curAnim = gPartnerAnimations[wCurrentPartnerId].fall;
                             }
                             if (partner->jumpVel <= 0.0f) {
                                 distance = fabsf(partner->jumpVel) + 11.0f;
@@ -1613,7 +1613,7 @@ void partner_walking_follow_player(Npc* partner) {
                                 y = partner->pos.y + distance;
                                 z = partner->pos.z;
                                 if ((npc_raycast_down_around(partner->collisionChannel, &x, &y, &z, &distance, partner->yaw, partner->collisionDiameter) != 0) && (distance <= (fabsf(partner->jumpVel) + 22.0f))) {
-                                    partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].anims[partner->moveSpeed >= 4.0 ? PARTNER_ANIM_INDEX_RUN : PARTNER_ANIM_INDEX_WALK];
+                                    partner->curAnim = gPartnerAnimations[wCurrentPartnerId].anims[partner->moveSpeed >= 4.0 ? PARTNER_ANIM_INDEX_RUN : PARTNER_ANIM_INDEX_WALK];
                                     partner->jumpScale = 0.0f;
                                     partner->jumpVel = 0.0f;
                                     partner->pos.y = y;
@@ -1629,8 +1629,8 @@ void partner_walking_follow_player(Npc* partner) {
                         partner_clear_player_tracking(partner);
                         partner->moveSpeed = 0.0f;
                         partner->jumpScale = 0.0f;
-                        partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].idle;
-                        partner->yaw = clamp_angle((cameras[CAM_DEFAULT].currentYaw + 270.0f) - playerStatus->spriteFacingAngle);
+                        partner->curAnim = gPartnerAnimations[wCurrentPartnerId].idle;
+                        partner->yaw = clamp_angle((cameras[CAM_DEFAULT].curYaw + 270.0f) - playerStatus->spriteFacingAngle);
                         wPartnerMoveTime = 30;
                         D_8010CFCE++;
                     }
@@ -1650,9 +1650,9 @@ void partner_walking_follow_player(Npc* partner) {
             break;
         case 40:
             if (partner->flags & NPC_FLAG_GROUNDED) {
-                if (func_800EA4B0(partner->currentFloor)) {
+                if (func_800EA4B0(partner->curFloor)) {
                     wPartnerFollowState = 50;
-                    partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].idle;
+                    partner->curAnim = gPartnerAnimations[wCurrentPartnerId].idle;
                 } else {
                     wPartnerFollowState = 1;
                 }
@@ -1662,10 +1662,10 @@ void partner_walking_follow_player(Npc* partner) {
             partner->jumpVel -= partner->jumpScale;
             partner->pos.y += partner->jumpVel;
             if (partner->jumpVel <= 0.0f) {
-                partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].fall;
+                partner->curAnim = gPartnerAnimations[wCurrentPartnerId].fall;
             }
             if (partner->pos.y < -2000.0f) {
-                partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].idle;
+                partner->curAnim = gPartnerAnimations[wCurrentPartnerId].idle;
                 partner->flags &= ~NPC_FLAG_JUMPING;
                 partner->jumpVel = 0.0f;
                 partner->yaw = atan2(partner->pos.x, partner->pos.z, playerStatus->pos.x, playerStatus->pos.z);
@@ -1680,7 +1680,7 @@ void partner_walking_follow_player(Npc* partner) {
             y = partner->pos.y + distance;
             z = partner->pos.z;
             if (npc_raycast_down_around(partner->collisionChannel, &x, &y, &z, &distance, partner->yaw, partner->collisionDiameter) != 0) {
-                partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].idle;
+                partner->curAnim = gPartnerAnimations[wCurrentPartnerId].idle;
                 partner->flags &= ~NPC_FLAG_JUMPING;
                 partner->jumpVel = 0.0f;
                 partner->pos.y = y;
@@ -1734,7 +1734,7 @@ void partner_flying_enable(Npc* partner, s32 val) {
     D_8010CFCC = 0;
     wPartnerMoveTime = 16;
     wPartnerTetherDistance = 40.0f;
-    partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].idle;
+    partner->curAnim = gPartnerAnimations[wCurrentPartnerId].idle;
     func_800EA5B8(partner);
     partner->collisionChannel = COLLISION_CHANNEL_10000;
     partner->flags |= NPC_FLAG_IGNORE_PLAYER_COLLISION;
@@ -1818,7 +1818,7 @@ void partner_flying_update_motion(Npc* partner) {
             }
 
             if (partner->pos.y <= y + partner->collisionHeight + 2.0f) {
-                if (playerStatus->currentSpeed != 0.0f) {
+                if (playerStatus->curSpeed != 0.0f) {
                     D_800F84F8 = ((y + (partner->collisionHeight / 2) + 2.0f) - partner->pos.y) * 0.125f;
                 } else {
                     if (y < playerStatus->pos.y) {
@@ -1915,7 +1915,7 @@ void partner_flying_follow_player(Npc* partner) {
                     yaw = partner->yaw;
                     partner->moveSpeed = 0.0f;
                     partner->jumpScale = 0.0f;
-                    partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].idle;
+                    partner->curAnim = gPartnerAnimations[wCurrentPartnerId].idle;
                     break;
                 }
                 distance = dist2D(partner->pos.x, partner->pos.z, playerStatus->pos.x, playerStatus->pos.z);
@@ -1924,7 +1924,7 @@ void partner_flying_follow_player(Npc* partner) {
                     yaw = partner->yaw;
                     partner->moveSpeed = 0.0f;
                     partner->jumpScale = 0.0f;
-                    partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].idle;
+                    partner->curAnim = gPartnerAnimations[wCurrentPartnerId].idle;
                     break;
                 }
                 D_8010CFBC++;
@@ -1992,7 +1992,7 @@ void partner_flying_follow_player(Npc* partner) {
                     partner->jumpVel = 20.0f;
                 }
                 wPartnerFollowState = 2;
-                partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].jump;
+                partner->curAnim = gPartnerAnimations[wCurrentPartnerId].jump;
                 partner->moveToPos.x = partner->pos.x;
                 partner->moveToPos.y = partner->pos.y;
                 partner->moveToPos.z = partner->pos.z;
@@ -2002,12 +2002,12 @@ void partner_flying_follow_player(Npc* partner) {
             partner->jumpVel -= partner->jumpScale;
             partner->pos.y += partner->jumpVel;
             if (partner->jumpVel <= 0.0f) {
-                partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].fall;
+                partner->curAnim = gPartnerAnimations[wCurrentPartnerId].fall;
             }
             npc_move_heading(partner, partner->moveSpeed, partner->yaw);
             if (partner->jumpVel <= 0.0f) {
                 if (partner->pos.y < partner->moveToPos.y) {
-                    partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].fly;
+                    partner->curAnim = gPartnerAnimations[wCurrentPartnerId].fly;
                     partner->jumpVel = 0.0f;
                     partner->pos.y = partner->moveToPos.y;
                     partner->yaw = atan2(partner->pos.x, partner->pos.z, playerStatus->pos.x, playerStatus->pos.z);
@@ -2033,12 +2033,12 @@ void partner_flying_follow_player(Npc* partner) {
                     y = partner->pos.y;
                     partner->moveSpeed = 0.0f;
                     partner->jumpScale = 0.0f;
-                    partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].idle;
+                    partner->curAnim = gPartnerAnimations[wCurrentPartnerId].idle;
                     if (playerStatus->actionState == ACTION_STATE_TALK) {
                         D_8010CFCA = 0;
                     }
                 } else {
-                    temp_a3 = clamp_angle(camera->currentYaw + (playerStatus->spriteFacingAngle < 180.0f ? 90.0f : -90.0f));
+                    temp_a3 = clamp_angle(camera->curYaw + (playerStatus->spriteFacingAngle < 180.0f ? 90.0f : -90.0f));
                     partner->moveToPos.x = playerStatus->pos.x;
                     partner->moveToPos.y = playerStatus->pos.y;
                     partner->moveToPos.z = playerStatus->pos.z;
@@ -2048,7 +2048,7 @@ void partner_flying_follow_player(Npc* partner) {
                     partner->moveSpeed = 2.0f;
                     if (distance > 2.0f) {
                         partner->yaw = yaw;
-                        partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].run;
+                        partner->curAnim = gPartnerAnimations[wCurrentPartnerId].run;
                         if (!(partner->flags & NPC_FLAG_COLLDING_FORWARD_WITH_WORLD)) {
                             D_800F803A = 0;
                         } else {
@@ -2058,7 +2058,7 @@ void partner_flying_follow_player(Npc* partner) {
                                 partner->moveSpeed = 0.0f;
                                 partner->jumpScale = 0.0f;
                                 partner->renderYaw = yaw;
-                                partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].idle;
+                                partner->curAnim = gPartnerAnimations[wCurrentPartnerId].idle;
                                 if (D_8010CFCA == 2 || playerStatus->actionState == ACTION_STATE_TALK) {
                                     D_8010CFCA = 0;
                                 }
@@ -2069,7 +2069,7 @@ void partner_flying_follow_player(Npc* partner) {
                         partner->yaw = yaw;
                         partner->moveSpeed = 0.0f;
                         partner->jumpScale = 0.0f;
-                        partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].idle;
+                        partner->curAnim = gPartnerAnimations[wCurrentPartnerId].idle;
                         if (D_8010CFCA == 2 || playerStatus->actionState == ACTION_STATE_TALK) {
                             D_8010CFCA = 0;
                         }
@@ -2114,7 +2114,7 @@ void partner_flying_follow_player(Npc* partner) {
                         add_vec2D_polar(&partner->moveToPos.x, &partner->moveToPos.z, playerStatus->colliderDiameter, temp_f0_15);
                         distance = dist2D(partner->pos.x, partner->pos.z, partner->moveToPos.x, partner->moveToPos.z);
                         partner->moveSpeed = wPartnerMoveSpeed = distance / wPartnerMoveTime;
-                        partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].anims[(partner->moveSpeed < 4.0) ? PARTNER_ANIM_INDEX_WALK : PARTNER_ANIM_INDEX_RUN];
+                        partner->curAnim = gPartnerAnimations[wCurrentPartnerId].anims[(partner->moveSpeed < 4.0) ? PARTNER_ANIM_INDEX_WALK : PARTNER_ANIM_INDEX_RUN];
                         yaw = atan2(partner->pos.x, partner->pos.z, partner->moveToPos.x, partner->moveToPos.z);
                         partner->yaw = D_800F8034 = yaw;
                         D_8010CFCE++;
@@ -2149,11 +2149,11 @@ void partner_flying_follow_player(Npc* partner) {
                         partner_clear_player_tracking(partner);
                         partner->moveSpeed = 0.0f;
                         partner->jumpScale = 0.0f;
-                        partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].idle;
+                        partner->curAnim = gPartnerAnimations[wCurrentPartnerId].idle;
                         wPartnerFollowState = 0;
                         D_8010CFCA = 0;
                         D_8010CFCE = 0;
-                        partner->yaw = clamp_angle((camera->currentYaw + 270.0f) - playerStatus->spriteFacingAngle);
+                        partner->yaw = clamp_angle((camera->curYaw + 270.0f) - playerStatus->spriteFacingAngle);
                 }
             }
             break;
@@ -2161,7 +2161,7 @@ void partner_flying_follow_player(Npc* partner) {
             partner_move_to_goal(partner, TRUE);
             break;
         case 40:
-            partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].idle;
+            partner->curAnim = gPartnerAnimations[wCurrentPartnerId].idle;
             break;
         case 50:
             break;
@@ -2211,7 +2211,7 @@ s32 partner_put_away(Npc* partner) {
             partner->moveSpeed = partner->planarFlyDist / divisor;
             tempMoveToY = tempPosY - tempMoveToY;
             partner->jumpVel = (tempMoveToY + partner->jumpScale * partner->duration * partner->duration * 0.5f) / partner->duration;
-            partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].jump;
+            partner->curAnim = gPartnerAnimations[wCurrentPartnerId].jump;
             enable_npc_blur(partner);
             wPartnerFollowState = 1;
             break;
@@ -2219,7 +2219,7 @@ s32 partner_put_away(Npc* partner) {
             partner->jumpVel -= partner->jumpScale;
             partner->pos.y += partner->jumpVel;
             if (partner->jumpVel <= 0.0f) {
-                partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].fall;
+                partner->curAnim = gPartnerAnimations[wCurrentPartnerId].fall;
             }
             npc_move_heading(partner, partner->moveSpeed, partner->yaw);
             tempDuration = partner->duration;
@@ -2235,7 +2235,7 @@ s32 partner_put_away(Npc* partner) {
             }
             break;
         case 2:
-            partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].fly;
+            partner->curAnim = gPartnerAnimations[wCurrentPartnerId].fly;
             partner->jumpVel = 0.0f;
             partner->pos.y = partner->moveToPos.y;
             disable_npc_blur(partner);
@@ -2262,9 +2262,9 @@ s32 partner_get_out(Npc* partner) {
     switch (wPartnerFollowState) {
         case 0:
             if (clamp_angle(playerStatus->spriteFacingAngle) < 180.0f) {
-                partner->yaw = clamp_angle(camera->currentYaw + 90.0f);
+                partner->yaw = clamp_angle(camera->curYaw + 90.0f);
             } else {
-                partner->yaw = clamp_angle(camera->currentYaw - 90.0f);
+                partner->yaw = clamp_angle(camera->curYaw - 90.0f);
             }
             partner->moveToPos.x = playerStatus->pos.x;
             partner->moveToPos.y = playerStatus->pos.y;
@@ -2280,7 +2280,7 @@ s32 partner_get_out(Npc* partner) {
                 x = moveToX;
                 y = moveToY + partner->collisionHeight;
                 z = moveToZ;
-                add_vec2D_polar(&x, &z, 2.0f, gCameras[gCurrentCameraID].currentYaw);
+                add_vec2D_polar(&x, &z, 2.0f, gCameras[gCurrentCameraID].curYaw);
                 hitDepth = 1000.0f;
                 if (npc_raycast_down_around(COLLISION_CHANNEL_10000, &x, &y, &z, &hitDepth, partner->yaw, partner->collisionDiameter)) {
                     // @bug? collider flags not properly masked with COLLIDER_FLAG_SURFACE_TYPE
@@ -2290,13 +2290,13 @@ s32 partner_get_out(Npc* partner) {
                         moveToX = playerStatus->pos.x;
                         moveToY = playerStatus->pos.y;
                         moveToZ = playerStatus->pos.z;
-                        add_vec2D_polar(&x, &z, 2.0f, gCameras[gCurrentCameraID].currentYaw);
+                        add_vec2D_polar(&x, &z, 2.0f, gCameras[gCurrentCameraID].curYaw);
                     }
                 } else {
                     moveToX = playerStatus->pos.x;
                     moveToY = playerStatus->pos.y;
                     moveToZ = playerStatus->pos.z;
-                    add_vec2D_polar(&x, &z, 2.0f, gCameras[gCurrentCameraID].currentYaw);
+                    add_vec2D_polar(&x, &z, 2.0f, gCameras[gCurrentCameraID].curYaw);
                 }
             }
 
@@ -2317,7 +2317,7 @@ s32 partner_get_out(Npc* partner) {
                                     partner->duration;
             wPartnerFollowState = 1;
             y = moveToY - y;
-            partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].jump;
+            partner->curAnim = gPartnerAnimations[wCurrentPartnerId].jump;
             break;
         case 1:
             if (partner->jumpVel < 0.0f && npc_try_snap_to_ground(partner, fabsf(partner->jumpVel))) {
@@ -2327,7 +2327,7 @@ s32 partner_get_out(Npc* partner) {
             partner->jumpVel -= partner->jumpScale;
             partner->pos.y += partner->jumpVel;
             if (partner->jumpVel <= 0.0f) {
-                partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].fall;
+                partner->curAnim = gPartnerAnimations[wCurrentPartnerId].fall;
             }
             npc_move_heading(partner, partner->moveSpeed, partner->yaw);
             npc_do_world_collision(partner);
@@ -2454,21 +2454,21 @@ s32 partner_force_player_flip_done(void) {
     if (playerStatus->flipYaw[CAM_DEFAULT] == 0.0f) {
         if (!(playerStatus->spriteFacingAngle >= 90.0f) || !(playerStatus->spriteFacingAngle < 270.0f)) {
             isFacingLeft = TRUE;
-            playerStatus->targetYaw = clamp_angle(cameras[CAM_DEFAULT].currentYaw - 90.0f);
+            playerStatus->targetYaw = clamp_angle(cameras[CAM_DEFAULT].curYaw - 90.0f);
         } else {
             isFacingLeft = FALSE;
-            playerStatus->targetYaw = clamp_angle(cameras[CAM_DEFAULT].currentYaw + 90.0f);
+            playerStatus->targetYaw = clamp_angle(cameras[CAM_DEFAULT].curYaw + 90.0f);
         }
-    } else if (get_clamped_angle_diff(cameras[CAM_DEFAULT].currentYaw, playerStatus->targetYaw) < 0.0f) {
+    } else if (get_clamped_angle_diff(cameras[CAM_DEFAULT].curYaw, playerStatus->targetYaw) < 0.0f) {
         isFacingLeft = TRUE;
-        playerStatus->targetYaw = clamp_angle(cameras[CAM_DEFAULT].currentYaw - 90.0f);
+        playerStatus->targetYaw = clamp_angle(cameras[CAM_DEFAULT].curYaw - 90.0f);
 
     } else {
         isFacingLeft = FALSE;
-        playerStatus->targetYaw = clamp_angle(cameras[CAM_DEFAULT].currentYaw + 90.0f);
+        playerStatus->targetYaw = clamp_angle(cameras[CAM_DEFAULT].curYaw + 90.0f);
     }
 
-    playerStatus->currentYaw = playerStatus->targetYaw;
+    playerStatus->curYaw = playerStatus->targetYaw;
     return isFacingLeft;
 }
 
@@ -2510,7 +2510,7 @@ void partner_do_player_collision(Npc* partner) {
     {
         npc_move_heading(partner, 1.0f,
                          atan2(playerStatus->pos.x, playerStatus->pos.z, partner->pos.x, partner->pos.z));
-        add_vec2D_polar(&partner->pos.x, &partner->pos.z, 2.0f, gCameras[gCurrentCameraID].currentYaw);
+        add_vec2D_polar(&partner->pos.x, &partner->pos.z, 2.0f, gCameras[gCurrentCameraID].curYaw);
     }
 }
 
@@ -2531,7 +2531,7 @@ void partner_move_to_goal(Npc* partner, s32 isFlying) {
             wPartnerMoveTime = 18;
             temp = dist2D(partner->pos.x, partner->pos.z, partner->moveToPos.x, partner->moveToPos.z);
             partner->moveSpeed = wPartnerMoveSpeed = temp / wPartnerMoveTime;
-            partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].anims[
+            partner->curAnim = gPartnerAnimations[wCurrentPartnerId].anims[
                 (partner->moveSpeed >= 4.0) ? PARTNER_ANIM_INDEX_RUN : PARTNER_ANIM_INDEX_WALK];
         case 1:
             if (wPartnerMoveTime != 0) {
@@ -2544,7 +2544,7 @@ void partner_move_to_goal(Npc* partner, s32 isFlying) {
                         partner->jumpVel -= partner->jumpScale;
                         partner->pos.y += partner->jumpVel;
                         if (partner->jumpVel <= 0.0f) {
-                            partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].fall;
+                            partner->curAnim = gPartnerAnimations[wCurrentPartnerId].fall;
                         }
 
                         if (partner->jumpVel <= 0.0f) {
@@ -2557,7 +2557,7 @@ void partner_move_to_goal(Npc* partner, s32 isFlying) {
                                                        partner->yaw, partner->collisionDiameter) &&
                                 (temp <= fabsf(partner->jumpVel) + 22.0f))
                             {
-                                partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].anims[
+                                partner->curAnim = gPartnerAnimations[wCurrentPartnerId].anims[
                                     (partner->moveSpeed >= 4.0) ? PARTNER_ANIM_INDEX_RUN : PARTNER_ANIM_INDEX_WALK];
                                 partner->jumpScale = 0.0f;
                                 partner->jumpVel = 0.0f;
@@ -2569,7 +2569,7 @@ void partner_move_to_goal(Npc* partner, s32 isFlying) {
                     partner->moveSpeed = wPartnerMoveSpeed;
                     partner->yaw = D_800F8034;
                     npc_move_heading(partner, partner->moveSpeed, partner->yaw);
-                    partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].anims[
+                    partner->curAnim = gPartnerAnimations[wCurrentPartnerId].anims[
                         (partner->moveSpeed >= 4.0) ? PARTNER_ANIM_INDEX_RUN : PARTNER_ANIM_INDEX_WALK];
                     npc_do_world_collision(partner);
                 } else {
@@ -2584,7 +2584,7 @@ void partner_move_to_goal(Npc* partner, s32 isFlying) {
                 spawn_surface_effects(partner, (partner->moveSpeed < 4.0) ? SURFACE_INTERACT_WALK : SURFACE_INTERACT_RUN);
             } else {
                 partner->flags &= ~NPC_FLAG_IGNORE_WORLD_COLLISION;
-                partner->currentAnim = gPartnerAnimations[wCurrentPartnerId].idle;
+                partner->curAnim = gPartnerAnimations[wCurrentPartnerId].idle;
                 D_8010CFCE++;
             }
             break;

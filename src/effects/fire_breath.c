@@ -193,7 +193,7 @@ void fire_breath_appendGfx(void* effect) {
 
     if (type == FIRE_BREATH_SMALL) {
         guTranslateF(sp18, data->initPos.x, data->initPos.y, data->initPos.z);
-        guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+        guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
         guMtxCatF(sp58, sp18, sp18);
         guMtxF2L(sp18, &gDisplayContext->matrixStack[gMatrixListPos]);
 
@@ -211,7 +211,7 @@ void fire_breath_appendGfx(void* effect) {
     gDPSetTileSize(gMainGfxPos++, 1,               ((unk_5C * 32) + 32) * 4, 0, ((unk_5C * 32) + 64) * 4, 128);
 
     guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
-    guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+    guRotateF(sp58, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp58, sp18, sp18);
     guScaleF(sp58, data->scale, data->scale, 0.0f);
     guMtxCatF(sp58, sp18, sp18);

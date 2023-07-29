@@ -308,7 +308,7 @@ typedef struct TweesterData {
     /* 0x94 */ s16 outerWhirlTexOffsetX;
     /* 0x96 */ s16 outerWhirlTexOffsetY;
     /* 0x98 */ s16 frameCounter;
-    /* 0x9C */ s32* currentPath;
+    /* 0x9C */ s32* curPath;
     /* 0xA0 */ s32** paths;
     /* 0xA4 */ s16 targetX;
     /* 0xA6 */ s16 targetY;

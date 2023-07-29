@@ -2872,7 +2872,7 @@ void show_immune_bonk(f32 x, f32 y, f32 z, s32 numStars, s32 arg4, s32 arg5) {
             message->scale = D_80283690[iMod8].x * baseScale;
             message->rotZ = 0;
             message->rotVelZ = sign * 107;
-            message->rotY = clamp_angle(180.0f - gCameras[CAM_BATTLE].currentYaw);
+            message->rotY = clamp_angle(180.0f - gCameras[CAM_BATTLE].curYaw);
             message->appearTime = 14;
             message->unk_24 = arg4;
             message->deleteTime = 240;
@@ -2910,7 +2910,7 @@ void btl_bonk_update(void* data) {
                 message->pos.y += message->vel.y;
                 message->pos.z += message->vel.z;
             }
-            message->rotY = clamp_angle(180.0f - gCameras[CAM_BATTLE].currentYaw);
+            message->rotY = clamp_angle(180.0f - gCameras[CAM_BATTLE].curYaw);
             message->rotZ += message->rotVelZ;
             message->rotZ = clamp_angle(message->rotZ);
             message->rotVelZ *= 0.8;
@@ -3170,7 +3170,7 @@ void btl_update_message_popup(void* data) {
                     popup->showMsgState = 2;
                     break;
                 case 2:
-                    if (battleStatus->currentButtonsPressed & (BUTTON_A | BUTTON_B)) {
+                    if (battleStatus->curButtonsPressed & (BUTTON_A | BUTTON_B)) {
                         popup->duration = 0;
                     }
 
@@ -3523,7 +3523,7 @@ void btl_update_message_popup(void* data) {
                     popup->showMsgState = 2;
                     break;
                 case 2:
-                    if (battleStatus->currentButtonsPressed & (BUTTON_A | BUTTON_B)) {
+                    if (battleStatus->curButtonsPressed & (BUTTON_A | BUTTON_B)) {
                         popup->duration = 0;
                     }
 
@@ -4105,9 +4105,9 @@ void apply_shock_effect(Actor* actor) {
             && part->idleAnimations != NULL
             && !(part->flags & ACTOR_PART_FLAG_40000000)
         ) {
-            f32 x = part->currentPos.x;
-            f32 y = part->currentPos.y + (actor->size.y / 10);
-            f32 z = part->currentPos.z;
+            f32 x = part->curPos.x;
+            f32 y = part->curPos.y + (actor->size.y / 10);
+            f32 z = part->curPos.z;
             s32 f1 = (part->size.x + (part->size.x / 4)) * actor->scalingFactor;
             s32 f2 = (part->size.y - 2) * actor->scalingFactor;
 

@@ -8,11 +8,11 @@
 typedef struct FuzzyThread {
     /* 0x00 */ Vec3f anchorPos;
     /* 0x0C */ f32 targetLength;
-    /* 0x10 */ f32 currentLength;
+    /* 0x10 */ f32 curLength;
     /* 0x14 */ f32 overshootVel;
     /* 0x18 */ f32 targetAngle;
     /* 0x1C */ f32 overshootAngleVel;
-    /* 0x20 */ f32 currentAngle;
+    /* 0x20 */ f32 curAngle;
     /* 0x24 */ Vec3f endPoint;
     /* 0x30 */ f32 duration;
     /* 0x34 */ f32 time;
@@ -136,13 +136,13 @@ API_CALLABLE(N(SetThreadTargetLengthAngle)) {
     N(ThreadData).time = 0.0f;
 
     if (0.0f < N(ThreadData).duration) {
-        N(ThreadData).lengthStep = (N(ThreadData).targetLength - N(ThreadData).currentLength) / N(ThreadData).duration;
-        N(ThreadData).angleStep = (N(ThreadData).targetAngle - N(ThreadData).currentAngle) / N(ThreadData).duration;
+        N(ThreadData).lengthStep = (N(ThreadData).targetLength - N(ThreadData).curLength) / N(ThreadData).duration;
+        N(ThreadData).angleStep = (N(ThreadData).targetAngle - N(ThreadData).curAngle) / N(ThreadData).duration;
     }
 
     if (N(ThreadData).duration < 0.0f) {
-        N(ThreadData).currentLength = N(ThreadData).targetLength;
-        N(ThreadData).currentAngle = N(ThreadData).targetAngle;
+        N(ThreadData).curLength = N(ThreadData).targetLength;
+        N(ThreadData).curAngle = N(ThreadData).targetAngle;
         N(ThreadData).duration = 0.0f;
     }
 
@@ -153,11 +153,11 @@ API_CALLABLE(N(InitThreadData)) {
     N(ThreadData).anchorPos.x = 0;
     N(ThreadData).anchorPos.y = 0;
     N(ThreadData).anchorPos.z = 0;
-    N(ThreadData).currentLength = 0;
+    N(ThreadData).curLength = 0;
     N(ThreadData).targetLength = 0;
     N(ThreadData).overshootVel = 0;
     N(ThreadData).targetAngle = 0;
-    N(ThreadData).currentAngle = 0;
+    N(ThreadData).curAngle = 0;
     N(ThreadData).overshootAngleVel = 0;
     N(ThreadData).frontNpc = NULL;
     N(ThreadData).backNpc = NULL;
@@ -271,24 +271,24 @@ void N(build_gfx_thread)(void) {
     N(ThreadData).overshootVel += 0.2;
     if (N(ThreadData).duration != 0.0f) {
         // thread extension/retraction
-        N(ThreadData).currentLength += N(ThreadData).lengthStep;
-        if (N(ThreadData).currentLength > N(ThreadData).targetLength) {
-            N(ThreadData).overshootVel += (N(ThreadData).targetLength - N(ThreadData).currentLength) * 0.5f;
+        N(ThreadData).curLength += N(ThreadData).lengthStep;
+        if (N(ThreadData).curLength > N(ThreadData).targetLength) {
+            N(ThreadData).overshootVel += (N(ThreadData).targetLength - N(ThreadData).curLength) * 0.5f;
         }
         N(ThreadData).time += 1.0f;
-        N(ThreadData).overshootAngleVel = (N(ThreadData).overshootAngleVel + (N(ThreadData).targetAngle - N(ThreadData).currentAngle) / 10.0f) * 0.92;
-        N(ThreadData).currentAngle += N(ThreadData).angleStep;
+        N(ThreadData).overshootAngleVel = (N(ThreadData).overshootAngleVel + (N(ThreadData).targetAngle - N(ThreadData).curAngle) / 10.0f) * 0.92;
+        N(ThreadData).curAngle += N(ThreadData).angleStep;
         if (N(ThreadData).duration <= N(ThreadData).time) {
             N(ThreadData).duration = 0.0f;
         }
     } else {
         // thread overshoot
-        N(ThreadData).currentLength += N(ThreadData).overshootVel;
-        if (N(ThreadData).targetLength < N(ThreadData).currentLength) {
-            N(ThreadData).overshootVel += (N(ThreadData).targetLength - N(ThreadData).currentLength) * 0.5f;
+        N(ThreadData).curLength += N(ThreadData).overshootVel;
+        if (N(ThreadData).targetLength < N(ThreadData).curLength) {
+            N(ThreadData).overshootVel += (N(ThreadData).targetLength - N(ThreadData).curLength) * 0.5f;
         }
-        N(ThreadData).overshootAngleVel = (N(ThreadData).overshootAngleVel + (N(ThreadData).targetAngle - N(ThreadData).currentAngle) / 10.0f) * 0.92;
-        N(ThreadData).currentAngle += N(ThreadData).overshootAngleVel;
+        N(ThreadData).overshootAngleVel = (N(ThreadData).overshootAngleVel + (N(ThreadData).targetAngle - N(ThreadData).curAngle) / 10.0f) * 0.92;
+        N(ThreadData).curAngle += N(ThreadData).overshootAngleVel;
     }
     N(ThreadData).overshootVel *= 0.5;
 
@@ -296,19 +296,19 @@ void N(build_gfx_thread)(void) {
     guTranslate(&gDisplayContext->matrixStack[gMatrixListPos], N(ThreadData).anchorPos.x, N(ThreadData).anchorPos.y, N(ThreadData).anchorPos.z);
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_PUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
-    segAngle = N(ThreadData).currentAngle;
-    segLength = -N(ThreadData).currentLength;
-    x += -segLength * sin_rad(N(ThreadData).currentAngle * 0 / 180.0f * PI);
-    y +=  segLength * cos_rad(N(ThreadData).currentAngle * 0 / 180.0f * PI);
+    segAngle = N(ThreadData).curAngle;
+    segLength = -N(ThreadData).curLength;
+    x += -segLength * sin_rad(N(ThreadData).curAngle * 0 / 180.0f * PI);
+    y +=  segLength * cos_rad(N(ThreadData).curAngle * 0 / 180.0f * PI);
 
     guPosition(&gDisplayContext->matrixStack[gMatrixListPos], 0.0f, 0.0f, segAngle, 1.0f, 0.0f, segLength, 0.0f);
     gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);
 
     for (i = 1; i < NUM_THREAD_SEGMENTS; i++) {
-        segAngle = N(ThreadData).currentAngle;
-        segLength = -N(ThreadData).currentLength;
-        x += -segLength * sin_rad(N(ThreadData).currentAngle * i / 180.0f * PI);
-        y +=  segLength * cos_rad(N(ThreadData).currentAngle * i / 180.0f * PI);
+        segAngle = N(ThreadData).curAngle;
+        segLength = -N(ThreadData).curLength;
+        x += -segLength * sin_rad(N(ThreadData).curAngle * i / 180.0f * PI);
+        y +=  segLength * cos_rad(N(ThreadData).curAngle * i / 180.0f * PI);
         gSPVertex(gMainGfxPos++, N(ThreadSegmentVertices), 2, 0);
         guPosition(&gDisplayContext->matrixStack[gMatrixListPos], 0.0f, 0.0f, segAngle, 1.0f, 0.0f, segLength, 0.0f);
         gSPMatrix(gMainGfxPos++, &gDisplayContext->matrixStack[gMatrixListPos++], G_MTX_NOPUSH | G_MTX_MUL | G_MTX_MODELVIEW);

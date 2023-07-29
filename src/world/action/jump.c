@@ -34,8 +34,8 @@ void initialize_jump(void) {
     }
     suggest_player_anim_allow_backward(anim);
 
-    collisionStatus->lastTouchedFloor = collisionStatus->currentFloor;
-    collisionStatus->currentFloor = NO_COLLIDER;
+    collisionStatus->lastTouchedFloor = collisionStatus->curFloor;
+    collisionStatus->curFloor = NO_COLLIDER;
 }
 
 void action_update_jump(void) {
@@ -80,7 +80,7 @@ void action_update_landing_on_switch(void) {
     AnimID anim;
 
     if (playerStatus->flags & PS_FLAG_ACTION_STATE_CHANGED) {
-        Entity* entity = get_entity_by_index(collisionStatus->currentFloor);
+        Entity* entity = get_entity_by_index(collisionStatus->curFloor);
 
         JumpedOnSwitchX = entity->pos.x;
         JumpedOnSwitchZ = entity->pos.z;

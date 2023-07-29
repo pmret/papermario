@@ -141,14 +141,14 @@ ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
         gSpeakingActor = actor;
         gSpeakingActorPart = part;
 
-        headX = actor->currentPos.x + actor->headOffset.x;
+        headX = actor->curPos.x + actor->headOffset.x;
         if (!(actor->flags & ACTOR_FLAG_8000)) {
-            headY = actor->size.y + (actor->currentPos.y + actor->headOffset.y);
+            headY = actor->size.y + (actor->curPos.y + actor->headOffset.y);
         } else {
-            headY = actor->currentPos.y + actor->headOffset.y + (actor->size.y / 2);
+            headY = actor->curPos.y + actor->headOffset.y + (actor->size.y / 2);
         }
 
-        headZ = actor->currentPos.z + actor->headOffset.z;
+        headZ = actor->curPos.z + actor->headOffset.z;
         get_screen_coords(CAM_BATTLE, headX, headY, headZ, &screenX, &screenY, &screenZ);
 
         gSpeakingActorPrintIsDone = FALSE;
@@ -167,15 +167,15 @@ ApiStatus ActorSpeak(Evt* script, s32 isInitialCall) {
         actor = gSpeakingActor;
         part = gSpeakingActorPart;
 
-        headX = actor->currentPos.x + actor->headOffset.x;
+        headX = actor->curPos.x + actor->headOffset.x;
         if (!(actor->flags & ACTOR_FLAG_8000)) {
-            headY = actor->size.y + (actor->currentPos.y + actor->headOffset.y);
+            headY = actor->size.y + (actor->curPos.y + actor->headOffset.y);
         } else {
             headY = actor->headOffset.y;
-            headY = actor->currentPos.y + actor->headOffset.y + (actor->size.y / 2);
+            headY = actor->curPos.y + actor->headOffset.y + (actor->size.y / 2);
         }
 
-        headZ = actor->currentPos.z + actor->headOffset.z;
+        headZ = actor->curPos.z + actor->headOffset.z;
         get_screen_coords(CAM_BATTLE, headX, headY, headZ, &screenX, &screenY, &screenZ);
 
         msg_printer_set_origin_pos(gSpeakingActorPrintCtx, screenX, screenY);
@@ -235,13 +235,13 @@ ApiStatus EndActorSpeech(Evt* script, s32 isInitialCall) {
         Actor* actor = gSpeakingActor;
         ActorPart* actorPart = gSpeakingActorPart;
 
-        x = actor->currentPos.x + actor->headOffset.x;
+        x = actor->curPos.x + actor->headOffset.x;
         if (!(gSpeakingActor->flags & ACTOR_FLAG_8000)) {
-            y = actor->currentPos.y + actor->headOffset.y + actor->size.y ;
+            y = actor->curPos.y + actor->headOffset.y + actor->size.y ;
         } else {
-            y = actor->currentPos.y + actor->headOffset.y + actor->size.y / 2;
+            y = actor->curPos.y + actor->headOffset.y + actor->size.y / 2;
         }
-        z = actor->currentPos.z + actor->headOffset.z;
+        z = actor->curPos.z + actor->headOffset.z;
         get_screen_coords(CAM_BATTLE, x, y, z, &screenX, &screenY, &screenZ);
         msg_printer_set_origin_pos(gSpeakingActorPrintCtx, screenX, screenY);
 
@@ -282,9 +282,9 @@ ApiStatus ShowBattleChoice(Evt* script, s32 isInitialCall) {
     }
 
     if (script->functionTemp[1] == 1) {
-        u8 currentOption = D_8029FA64->currentOption;
+        u8 currentOption = D_8029FA64->curOption;
 
-        gSpeakingActorPrintCtx->currentOption = D_8029FA64->currentOption;
+        gSpeakingActorPrintCtx->curOption = D_8029FA64->curOption;
         script->varTable[0] = currentOption;
 
         return ApiStatus_DONE1;
@@ -401,7 +401,7 @@ ApiStatus PlaySoundAtActor(Evt* script, s32 isInitialCall) {
     }
 
     actor = get_actor(actorID);
-    sfx_play_sound_at_position(soundID, SOUND_SPACE_MODE_0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
+    sfx_play_sound_at_position(soundID, SOUND_SPACE_MODE_0, actor->curPos.x, actor->curPos.y, actor->curPos.z);
 
     return ApiStatus_DONE2;
 }
@@ -418,7 +418,7 @@ ApiStatus PlaySoundAtPart(Evt* script, s32 isInitialCall) {
     }
 
     part = get_actor_part(get_actor(actorID), partID);
-    sfx_play_sound_at_position(soundID, SOUND_SPACE_MODE_0, part->currentPos.x, part->currentPos.y, part->currentPos.z);
+    sfx_play_sound_at_position(soundID, SOUND_SPACE_MODE_0, part->curPos.x, part->curPos.y, part->curPos.z);
 
     return ApiStatus_DONE2;
 }
@@ -436,7 +436,7 @@ ApiStatus PlayLoopingSoundAtActor(Evt* script, s32 isInitialCall) {
 
     actor = get_actor(actorID);
     actor->loopingSoundID[idx] = soundID;
-    sfx_play_sound_at_position(soundID, SOUND_SPACE_MODE_0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
+    sfx_play_sound_at_position(soundID, SOUND_SPACE_MODE_0, actor->curPos.x, actor->curPos.y, actor->curPos.z);
 
     return ApiStatus_DONE2;
 }

@@ -24,7 +24,7 @@ s32 N(ShouldPauseConveyor)(void) {
     }
 
     if (gPartnerStatus.partnerActionState != PARTNER_ACTION_NONE &&
-        (playerData->currentPartner == PARTNER_GOOMBARIO || playerData->currentPartner == PARTNER_SUSHIE))
+        (playerData->curPartner == PARTNER_GOOMBARIO || playerData->curPartner == PARTNER_SUSHIE))
     {
         return TRUE;
     }
@@ -83,14 +83,14 @@ API_CALLABLE(N(AddConveyorPush)) {
         partnerStatus->partnerActionState == PARTNER_ACTION_NONE)
     {
         for (i = 0; i < ARRAY_COUNT(N(ConveyorColliders)); i++) {
-            if (gCollisionStatus.currentFloor == N(ConveyorColliders)[i] ||
+            if (gCollisionStatus.curFloor == N(ConveyorColliders)[i] ||
                 gCollisionStatus.lastTouchedFloor == N(ConveyorColliders)[i])
             {
                 playerStatus->pushVel.x = N(ConveyorPushVels)[i][0];
                 playerStatus->pushVel.z = N(ConveyorPushVels)[i][one]; // TODO needed to match
             }
 
-            if (partner->currentFloor == N(ConveyorColliders)[i] &&
+            if (partner->curFloor == N(ConveyorColliders)[i] &&
                 ((partnerStatus->actingPartner != PARTNER_KOOPER) ||
                  (partnerStatus->partnerActionState == PARTNER_ACTION_NONE)))
             {

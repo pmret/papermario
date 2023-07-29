@@ -74,7 +74,7 @@ API_CALLABLE(ActivateDefend) {
 API_CALLABLE(DoesMarioStatusPreventHappyAnimation) {
     Actor* player = gBattleStatus.playerActor;
 
-    show_action_rating(ACTION_RATING_LUCKY, player, player->currentPos.x, player->currentPos.y + 20.0f, player->currentPos.z);
+    show_action_rating(ACTION_RATING_LUCKY, player, player->curPos.x, player->curPos.y + 20.0f, player->curPos.z);
     sfx_play_sound(SOUND_3FC);
     script->varTable[0] = FALSE;
     if (player->debuff == STATUS_KEY_FEAR || player->debuff == STATUS_KEY_DIZZY || player->debuff == STATUS_KEY_PARALYZE ||
@@ -176,7 +176,7 @@ API_CALLABLE(GiveRefund) {
     f32 angle = 0.0f;
     s32 delayTime = 0;
     f32 posX, posY, posZ;
-    posY = player->currentPos.y + player->size.y;
+    posY = player->curPos.y + player->size.y;
 
     if (player_team_is_ability_active(player, ABILITY_REFUND) && sellValue > 0) {
         s32 i;
@@ -186,8 +186,8 @@ API_CALLABLE(GiveRefund) {
         sellValue = (sellValue * 75 + 99) / 100;
 
         for (i = 0; i < sellValue; i++) {
-            posX = player->currentPos.x;
-            posZ = player->currentPos.z;
+            posX = player->curPos.x;
+            posZ = player->curPos.z;
 
             make_item_entity(ITEM_COIN, posX, posY, posZ, ITEM_SPAWN_MODE_TOSS_FADE1, (i * 3) + 1, angle, 0);
             add_coins(1);
@@ -196,9 +196,9 @@ API_CALLABLE(GiveRefund) {
 
         delayTime = (i * 3) + 30;
 
-        posX = player->currentPos.x;
-        posY = player->currentPos.y;
-        posZ = player->currentPos.z;
+        posX = player->curPos.x;
+        posY = player->curPos.y;
+        posZ = player->curPos.z;
         get_screen_coords(gCurrentCameraID, posX, posY, posZ, &iconPosX, &iconPosY, &iconPosZ);
         RefundHudElem = hud_element_create(&HES_Refund);
         hud_element_set_render_pos(RefundHudElem, iconPosX + 36, iconPosY - 63);
@@ -619,16 +619,16 @@ API_CALLABLE(func_80261FB4) {
     switch (script->functionTemp[0]) {
         case 0:
             ft1 = script->functionTemp[1];
-            deltaX = player->currentPos.x - item->pos.x;
-            deltaY = player->currentPos.y + 12.0f - item->pos.y;
-            deltaZ = player->currentPos.z - 5.0f - item->pos.z;
+            deltaX = player->curPos.x - item->pos.x;
+            deltaY = player->curPos.y + 12.0f - item->pos.y;
+            deltaZ = player->curPos.z - 5.0f - item->pos.z;
 
             item->pos.x += deltaX / ft1;
             item->pos.y += deltaY / ft1;
             item->pos.z += deltaZ / ft1;
 
-            item->pos.y += dist2D(item->pos.x, item->pos.y, player->currentPos.x,
-                                       player->currentPos.y + 12.0f) / 5.0f;
+            item->pos.y += dist2D(item->pos.x, item->pos.y, player->curPos.x,
+                                       player->curPos.y + 12.0f) / 5.0f;
 
             if (script->functionTemp[1] == 1) {
                 script->functionTemp[0] = script->functionTemp[1];

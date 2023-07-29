@@ -38,13 +38,13 @@ API_CALLABLE(N(UnkFunc62)) {
     }
 
     if (script->functionTemp[0] == 0) {
-        state->currentPos.x = actor->currentPos.x;
-        state->currentPos.y = actor->currentPos.y;
+        state->curPos.x = actor->curPos.x;
+        state->curPos.y = actor->curPos.y;
         stateGoalX = state->goalPos.x;
         stateGoalZ = state->goalPos.z;
-        stateCurrentX = state->currentPos.x;
-        stateCurrentZ = actor->currentPos.z;
-        state->currentPos.z = stateCurrentZ;
+        stateCurrentX = state->curPos.x;
+        stateCurrentZ = actor->curPos.z;
+        state->curPos.z = stateCurrentZ;
         state->angle = atan2(stateCurrentX, stateCurrentZ, stateGoalX, stateGoalZ);
         state->dist = dist2D(stateCurrentX, stateCurrentZ, stateGoalX, stateGoalZ);
         if (state->moveTime == 0) {
@@ -59,9 +59,9 @@ API_CALLABLE(N(UnkFunc62)) {
             return ApiStatus_DONE2;
         }
 
-        state->unk_30.x = (state->goalPos.x - state->currentPos.x) / state->moveTime;
-        state->unk_30.y = (state->goalPos.y - state->currentPos.y) / state->moveTime;
-        state->unk_30.z = (state->goalPos.z - state->currentPos.z) / state->moveTime;
+        state->unk_30.x = (state->goalPos.x - state->curPos.x) / state->moveTime;
+        state->unk_30.y = (state->goalPos.y - state->curPos.y) / state->moveTime;
+        state->unk_30.z = (state->goalPos.z - state->curPos.z) / state->moveTime;
         state->acceleration = PI_S / state->moveTime;
         state->vel = 0.0f;
         state->speed += phi_f8 / state->moveTime;
@@ -113,21 +113,21 @@ API_CALLABLE(N(UnkFunc62)) {
             if (state->vel > PI_S / 2) {
                 set_animation(ACTOR_SELF, 1, state->animJumpFall);
             }
-            oldActorX = actor->currentPos.x;
-            oldActorY = actor->currentPos.y;
-            state->currentPos.x += state->unk_30.x;
-            state->currentPos.y = state->currentPos.y + state->unk_30.y;
-            state->currentPos.z = state->currentPos.z + state->unk_30.z;
-            state->unk_18.x = actor->currentPos.y;
-            actor->currentPos.x = state->currentPos.x;
-            actor->currentPos.y = state->currentPos.y + (state->bounceDivisor * sin_rad(state->vel));
-            actor->currentPos.z = state->currentPos.z;
-            if (state->goalPos.y > actor->currentPos.y && state->moveTime < 3) {
-                actor->currentPos.y = state->goalPos.y;
+            oldActorX = actor->curPos.x;
+            oldActorY = actor->curPos.y;
+            state->curPos.x += state->unk_30.x;
+            state->curPos.y = state->curPos.y + state->unk_30.y;
+            state->curPos.z = state->curPos.z + state->unk_30.z;
+            state->unk_18.x = actor->curPos.y;
+            actor->curPos.x = state->curPos.x;
+            actor->curPos.y = state->curPos.y + (state->bounceDivisor * sin_rad(state->vel));
+            actor->curPos.z = state->curPos.z;
+            if (state->goalPos.y > actor->curPos.y && state->moveTime < 3) {
+                actor->curPos.y = state->goalPos.y;
             }
 
-            actor->rot.z = -atan2(oldActorX, -oldActorY, actor->currentPos.x, -actor->currentPos.y);
-            state->unk_18.y = actor->currentPos.y;
+            actor->rot.z = -atan2(oldActorX, -oldActorY, actor->curPos.x, -actor->curPos.y);
+            state->unk_18.y = actor->curPos.y;
             if (state->moveArcAmplitude < 3) {
                 phi_f20_2 = state->vel;
                 temp_f22_5 = state->acceleration;
@@ -146,7 +146,7 @@ API_CALLABLE(N(UnkFunc62)) {
             state->unk_24 = clamp_angle(state->unk_24);
             state->moveTime--;
             if (state->moveTime == 0) {
-                actor->currentPos.y = state->goalPos.y;
+                actor->curPos.y = state->goalPos.y;
                 state->acceleration = 1.8f;
                 state->vel = -(state->unk_18.x - state->unk_18.y);
                 set_animation(ACTOR_SELF, 1, state->animJumpLand);
@@ -160,20 +160,20 @@ API_CALLABLE(N(UnkFunc62)) {
             state->vel = -(state->unk_18.x - state->unk_18.y);
             state->bounceDivisor = fabsf(state->unk_18.x - state->unk_18.y) / 16.5;
             state->unk_28 = 360 / state->moveTime;
-            state->currentPos.x = actor->currentPos.x;
-            state->currentPos.y = actor->currentPos.y;
-            state->currentPos.z = actor->currentPos.z;
+            state->curPos.x = actor->curPos.x;
+            state->curPos.y = actor->curPos.y;
+            state->curPos.z = actor->curPos.z;
             script->functionTemp[0] = 3;
             // fallthrough
         case 3:
-            currentPosX64 = state->currentPos.x; // required to match
-            state->currentPos.x = currentPosX64 + state->bounceDivisor * sin_rad(DEG_TO_RAD(state->unk_24)) / 33.0;
-            state->currentPos.y -= state->bounceDivisor * sin_rad(DEG_TO_RAD(state->unk_24));
+            currentPosX64 = state->curPos.x; // required to match
+            state->curPos.x = currentPosX64 + state->bounceDivisor * sin_rad(DEG_TO_RAD(state->unk_24)) / 33.0;
+            state->curPos.y -= state->bounceDivisor * sin_rad(DEG_TO_RAD(state->unk_24));
             state->unk_24 += state->unk_28;
             state->unk_24 = clamp_angle(state->unk_24);
-            actor->currentPos.x = state->currentPos.x;
-            actor->currentPos.y = state->currentPos.y;
-            actor->currentPos.z = state->currentPos.z;
+            actor->curPos.x = state->curPos.x;
+            actor->curPos.y = state->curPos.y;
+            actor->curPos.z = state->curPos.z;
 
             state->moveTime--;
             if (state->moveTime == 0) {

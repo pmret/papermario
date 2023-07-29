@@ -908,7 +908,7 @@ ApiStatus evt_handle_call(Evt* script) {
     } else {
         script->callFunction = (ApiFunc)evt_get_variable(script, *args++);
         script->ptrReadPos = args;
-        script->currentArgc--;
+        script->curArgc--;
         script->blocked = TRUE;
         isInitialCall = TRUE;
         func = script->callFunction;
@@ -976,7 +976,7 @@ ApiStatus evt_handle_exec_wait(Evt* script) {
     Bytecode* args = script->ptrReadPos;
 
     start_child_script(script, (EvtScript*) evt_get_variable(script, *args++), 0);
-    script->currentOpcode = EVT_OP_INTERNAL_FETCH;
+    script->curOpcode = EVT_OP_INTERNAL_FETCH;
     return ApiStatus_FINISH;
 }
 
@@ -1371,15 +1371,15 @@ s32 evt_execute_next_command(Evt* script) {
         s32* lines;
         s32 nargs;
 
-        switch (script->currentOpcode) {
+        switch (script->curOpcode) {
             case EVT_OP_INTERNAL_FETCH:
-                script->ptrCurrentLine = script->ptrNextLine;
+                script->ptrCurLine = script->ptrNextLine;
                 lines = script->ptrNextLine;
-                script->currentOpcode = *lines++;
+                script->curOpcode = *lines++;
                 nargs = *lines++;
                 script->ptrReadPos = lines;
                 script->blocked = FALSE;
-                script->currentArgc = nargs;
+                script->curArgc = nargs;
                 lines = &lines[nargs];
                 script->ptrNextLine = lines;
                 status = ApiStatus_REPEAT;
@@ -1684,10 +1684,10 @@ s32 evt_execute_next_command(Evt* script) {
         if (status == ApiStatus_BLOCK) {
             // return 0
         } else if (status == ApiStatus_DONE1) {
-            script->currentOpcode = EVT_OP_INTERNAL_FETCH;
+            script->curOpcode = EVT_OP_INTERNAL_FETCH;
             // return 0
         } else if (status == ApiStatus_DONE2) {
-            script->currentOpcode = EVT_OP_INTERNAL_FETCH;
+            script->curOpcode = EVT_OP_INTERNAL_FETCH;
             if (gGameStatusPtr->disableScripts != status) {
                 continue;
             }

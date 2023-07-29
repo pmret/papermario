@@ -28,14 +28,14 @@ void action_update_hit_fire(void) {
         playerStatus->gravityIntegrator[3] = -0.0987f;
         gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
         ReturnAngle = atan2(playerStatus->pos.x, playerStatus->pos.z, playerStatus->lastGoodPos.x, playerStatus->lastGoodPos.z);
-        playerStatus->currentSpeed = get_xz_dist_to_player(playerStatus->lastGoodPos.x, playerStatus->lastGoodPos.z) / 18.0f;
+        playerStatus->curSpeed = get_xz_dist_to_player(playerStatus->lastGoodPos.x, playerStatus->lastGoodPos.z) / 18.0f;
         subtract_hp(1);
         open_status_bar_long();
         gOverrideFlags |= GLOBAL_OVERRIDES_40;
     }
 
     sin_cos_rad(DEG_TO_RAD(ReturnAngle), &dx, &dy);
-    speed = playerStatus->currentSpeed;
+    speed = playerStatus->curSpeed;
 
     if (playerStatus->flags & PS_FLAG_ENTERING_BATTLE) {
         speed *= 0.5;

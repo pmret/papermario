@@ -59,7 +59,7 @@ void N(sync_player_position)(void) {
     f32 speed;
 
     if (playerStatus->flags & PS_FLAG_CUTSCENE_MOVEMENT) {
-        speed = playerStatus->currentSpeed;
+        speed = playerStatus->curSpeed;
         if (playerStatus->flags & PS_FLAG_ENTERING_BATTLE) {
             speed *= 0.5f;
         }
@@ -71,7 +71,7 @@ void N(sync_player_position)(void) {
     playerStatus->pos.x = lakilester->pos.x;
     playerStatus->pos.y = lakilester->pos.y + 10.0f + abs(N(PlayerBounceOffset)) * 0.34f;
     playerStatus->pos.z = lakilester->pos.z;
-    add_vec2D_polar(&playerStatus->pos.x, &playerStatus->pos.z, 2.0f, gCameras[gCurrentCameraID].currentYaw);
+    add_vec2D_polar(&playerStatus->pos.x, &playerStatus->pos.z, 2.0f, gCameras[gCurrentCameraID].curYaw);
 }
 
 void N(init)(Npc* lakilester) {
@@ -216,7 +216,7 @@ void N(get_movement_from_input)(f32* outAngle, f32* outSpeed) {
     PartnerStatus* partnerStatus = &gPartnerStatus;
     f32 stickX = partnerStatus->stickX;
     f32 stickY = partnerStatus->stickY;
-    f32 moveAngle = clamp_angle(atan2(0.0f, 0.0f, stickX, -stickY) + gCameras[CAM_DEFAULT].currentYaw);
+    f32 moveAngle = clamp_angle(atan2(0.0f, 0.0f, stickX, -stickY) + gCameras[CAM_DEFAULT].curYaw);
     f32 moveSpeed = 0.0f;
 
     if (dist2D(0.0f, 0.0f, stickX, -stickY) >= 1.0) {
@@ -253,7 +253,7 @@ s32 N(can_dismount)(void) {
     outX = playerStatus->pos.x;
     outZ = playerStatus->pos.z;
     currentCamera = &gCameras[gCurrentCameraID];
-    add_vec2D_polar(&outX, &outZ, 2.0f, currentCamera->currentYaw);
+    add_vec2D_polar(&outX, &outZ, 2.0f, currentCamera->curYaw);
     hitResult = player_raycast_below_cam_relative(playerStatus, &outX, &outY, &outZ, &outLength, &hitRx, &hitRz,
                                                       &hitDirX, &hitDirZ);
     temp = hitResult;
@@ -323,7 +323,7 @@ void N(apply_riding_static_collisions)(Npc* lakilester) {
 
     if (TEST_MOVE_AT_ANGLE(npc_test_move_complex_with_slipping, lakilester->yaw)) {
         lakilester->flags |= (NPC_FLAG_COLLDING_FORWARD_WITH_WORLD | NPC_FLAG_COLLDING_WITH_WORLD);
-        lakilester->currentWall = NpcHitQueryColliderID;
+        lakilester->curWall = NpcHitQueryColliderID;
         lakilester->pos.x = x;
         lakilester->pos.z = z;
     } else {
@@ -381,7 +381,7 @@ void N(update_riding_physics)(Npc* lakilester) {
     moveSpeed = 0.0f;
     N(get_movement_from_input)(&moveAngle, &moveSpeed);
 
-    currentSurfaceType = get_collider_flags(lakilester->currentFloor) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
+    currentSurfaceType = get_collider_flags(lakilester->curFloor) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
     if (currentSurfaceType == SURFACE_TYPE_LAVA) {
         moveSpeed *= 0.5f;
     }
@@ -417,7 +417,7 @@ void N(update_riding_physics)(Npc* lakilester) {
     if (npc_test_move_taller_with_slipping(lakilester->collisionChannel, &x, &y, &z,
         lakilester->collisionDiameter, lakilester->yaw, lakilester->collisionHeight, lakilester->collisionDiameter))
     {
-        collisionStatus->currentInspect = (partnerStatus->pressedButtons & BUTTON_A) ? NpcHitQueryColliderID : NO_COLLIDER;
+        collisionStatus->curInspect = (partnerStatus->pressedButtons & BUTTON_A) ? NpcHitQueryColliderID : NO_COLLIDER;
     }
 
     if (moveSpeed != 0.0f) {
@@ -494,7 +494,7 @@ void N(update_riding_physics)(Npc* lakilester) {
     y = lakilester->moveToPos.y + 12.0f;
     x = playerStatus->pos.x;
     z = playerStatus->pos.z;
-    add_vec2D_polar(&x, &z, 2.0f, gCameras[gCurrentCameraID].currentYaw);
+    add_vec2D_polar(&x, &z, 2.0f, gCameras[gCurrentCameraID].curYaw);
     raycastBelowResult = player_raycast_below_cam_relative(playerStatus, &x, &y, &z, &hitDepth, &sp40,
                                                             &sp44, &sp48, &sp4C);
     N(CurrentGroundPitch) = get_player_normal_pitch();
@@ -513,9 +513,9 @@ void N(update_riding_physics)(Npc* lakilester) {
         playerStatus->lastGoodPos.x = lakilester->pos.x;
         playerStatus->lastGoodPos.y = lakilester->pos.y;
         playerStatus->lastGoodPos.z = lakilester->pos.z;
-        collisionStatus->currentFloor = raycastBelowResult;
+        collisionStatus->curFloor = raycastBelowResult;
 
-        lakilester->currentFloor = raycastBelowResult;
+        lakilester->curFloor = raycastBelowResult;
         lakilester->moveToPos.y = y;
         lakilester->moveToPos.x = x;
         lakilester->moveToPos.z = z;
@@ -524,18 +524,18 @@ void N(update_riding_physics)(Npc* lakilester) {
 
         belowSurfaceType = get_collider_flags(raycastBelowResult) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
         if (belowSurfaceType == SURFACE_TYPE_LAVA) {
-            lakilester->currentAnim = ANIM_WorldLakilester_StrainWalk;
+            lakilester->curAnim = ANIM_WorldLakilester_StrainWalk;
             lakilester->moveSpeed = moveSpeed * 0.5f;
         } else {
-            lakilester->currentAnim = ANIM_WorldLakilester_Walk;
+            lakilester->curAnim = ANIM_WorldLakilester_Walk;
             lakilester->moveSpeed = moveSpeed;
         }
         return;
     }
 
-    collisionStatus->currentFloor = NO_COLLIDER;
+    collisionStatus->curFloor = NO_COLLIDER;
     playerStatus->timeInAir++;
-    lakilester->currentFloor = NO_COLLIDER;
+    lakilester->curFloor = NO_COLLIDER;
     lakilester->jumpScale += 1.8;
 
     if (lakilester->jumpScale > 12.0f) {
@@ -607,7 +607,7 @@ API_CALLABLE(N(UseAbility)) {
                 lakilester->flags |= NPC_FLAG_IGNORE_PLAYER_COLLISION;
                 set_action_state(ACTION_STATE_RIDE);
                 suggest_player_anim_always_forward(ANIM_MarioW2_RideLaki);
-                lakilester->currentAnim = ANIM_WorldLakilester_Walk;
+                lakilester->curAnim = ANIM_WorldLakilester_Walk;
                 N(MountState) = MOUNT_STATE_IN_PROGRESS; // unexpected
                 lakilester->flags &= ~(NPC_FLAG_IGNORE_WORLD_COLLISION | NPC_FLAG_8);
                 lakilester->flags |= (NPC_FLAG_IGNORE_PLAYER_COLLISION | NPC_FLAG_TOUCHES_GROUND);
@@ -617,7 +617,7 @@ API_CALLABLE(N(UseAbility)) {
                 lakilester->pos.x = playerStatus->pos.x;
                 lakilester->pos.y = lakilester->moveToPos.y;
                 lakilester->pos.z = playerStatus->pos.z;
-                lakilester->currentAnim = ANIM_WorldLakilester_Walk;
+                lakilester->curAnim = ANIM_WorldLakilester_Walk;
                 playerStatus->pos.y = lakilester->pos.y + 10.0f;
                 lakilester->moveSpeed = 3.0f;
                 lakilester->jumpScale = 0.0f;
@@ -719,7 +719,7 @@ API_CALLABLE(N(UseAbility)) {
 
             lakilester->yaw = atan2(lakilester->pos.x, lakilester->pos.z, lakilester->moveToPos.x, lakilester->moveToPos.z);
             lakilester->duration = 12;
-            lakilester->currentAnim = ANIM_WorldLakilester_Walk;
+            lakilester->curAnim = ANIM_WorldLakilester_Walk;
             lakilester->jumpVel = 8.0f;
             lakilester->jumpScale = 1.4f;
             suggest_player_anim_allow_backward(ANIM_Mario1_BeforeJump);
@@ -752,7 +752,7 @@ API_CALLABLE(N(UseAbility)) {
                 if (lakilester->duration > 0) {
                     if (lakilester->duration == 1) {
                         add_vec2D_polar(&lakilester->pos.x, &lakilester->pos.z, -2.0f,
-                                        gCameras[gCurrentCameraID].currentYaw);
+                                        gCameras[gCurrentCameraID].curYaw);
                     }
                 } else {
                     playerStatus->pos.y = lakilester->pos.y + 10.0f;
@@ -827,7 +827,7 @@ API_CALLABLE(N(UseAbility)) {
             lakilester->flags &= ~NPC_FLAG_IGNORE_WORLD_COLLISION;
             playerStatus->flags |= PS_FLAG_PAUSE_DISABLED;
             N(can_dismount)();
-            camYaw = camera->currentYaw;
+            camYaw = camera->curYaw;
             if (playerStatus->spriteFacingAngle >= 90.0f && playerStatus->spriteFacingAngle < 270.0f) {
                 yaw = (180.0f + camYaw) - 90.0f;
             } else {
@@ -864,7 +864,7 @@ API_CALLABLE(N(UseAbility)) {
             y = playerStatus->pos.y + (playerStatus->colliderHeight * 0.5f);
             z = playerStatus->pos.z;
 
-            yaw = playerStatus->spriteFacingAngle - 90.0f + gCameras[gCurrentCameraID].currentYaw;
+            yaw = playerStatus->spriteFacingAngle - 90.0f + gCameras[gCurrentCameraID].curYaw;
 
             if (player_raycast_up_corners(playerStatus, &x, &y, &z, &dist, yaw) >= 0) {
                 N(AbilityState) = RIDE_STATE_FINISH_1;
@@ -963,7 +963,7 @@ API_CALLABLE(N(PutAway)) {
     switch (N(PutAwayState)) {
         case PUT_AWAY_DISMOUNT_1:
             N(can_dismount)();
-            yaw = cam->currentYaw;
+            yaw = cam->curYaw;
             if ((playerStatus->spriteFacingAngle >= 90.0f) && (playerStatus->spriteFacingAngle < 270.0f)) {
                 lakilester->yaw = (yaw + 180.0f) - 90.0f;
             } else {
@@ -1118,7 +1118,7 @@ void N(offset_player_from_camera)(f32 speed) {
     Camera* currentCamera = &gCameras[gCurrentCameraID];
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    add_vec2D_polar(&playerStatus->pos.x, &playerStatus->pos.z, speed, currentCamera->currentYaw);
+    add_vec2D_polar(&playerStatus->pos.x, &playerStatus->pos.z, speed, currentCamera->curYaw);
 }
 
 API_CALLABLE(N(EnterMap)) {

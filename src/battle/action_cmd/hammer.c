@@ -196,7 +196,7 @@ void N(update)(void) {
             }
 
             actionCommandStatus->frameCounter = 0;
-            if (!(battleStatus->currentButtonsDown & BUTTON_STICK_LEFT) && battleStatus->actionCommandMode < ACTION_COMMAND_MODE_TUTORIAL) {
+            if (!(battleStatus->curButtonsDown & BUTTON_STICK_LEFT) && battleStatus->actionCommandMode < ACTION_COMMAND_MODE_TUTORIAL) {
                 actionCommandStatus->hammerMissedStart = TRUE;
             }
             actionCommandStatus->state = 11;
@@ -254,7 +254,7 @@ void N(update)(void) {
                 phi_s0 = 0;
             }
 
-            if (!(battleStatus->currentButtonsDown & BUTTON_STICK_LEFT) &&
+            if (!(battleStatus->curButtonsDown & BUTTON_STICK_LEFT) &&
                 phi_s0 == 0 &&
                 actionCommandStatus->autoSucceed == 0 &&
                 battleStatus->actionCommandMode < ACTION_COMMAND_MODE_TUTORIAL)

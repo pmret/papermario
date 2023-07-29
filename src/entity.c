@@ -111,7 +111,7 @@ void update_entities(void) {
                         }
 
                         if (entity->flags & ENTITY_FLAG_ALWAYS_FACE_CAMERA) {
-                            entity->rot.y = -gCameras[gCurrentCameraID].currentYaw;
+                            entity->rot.y = -gCameras[gCurrentCameraID].curYaw;
                         }
 
                         if (!(entity->flags & ENTITY_FLAG_SKIP_UPDATE_TRANSFORM_MATRIX)) {
@@ -150,7 +150,7 @@ void update_entities(void) {
                 }
 
                 if (entity->flags & ENTITY_FLAG_ALWAYS_FACE_CAMERA) {
-                    entity->rot.y = -gCameras[gCurrentCameraID].currentYaw;
+                    entity->rot.y = -gCameras[gCurrentCameraID].curYaw;
                 }
 
                 if (!gGameStatusPtr->disableScripts) {
@@ -214,7 +214,7 @@ void update_shadows(void) {
 
             if (!(shadow->flags & ENTITY_FLAG_SKIP_UPDATE)) {
                 if (shadow->flags & ENTITY_FLAG_ALWAYS_FACE_CAMERA) {
-                    shadow->rot.y = -gCameras[gCurrentCameraID].currentYaw;
+                    shadow->rot.y = -gCameras[gCurrentCameraID].curYaw;
                 }
 
                 update_shadow_transform_matrix(shadow);
@@ -642,7 +642,7 @@ s32 entity_get_collision_flags(Entity* entity) {
         entity->flags &= ~ENTITY_FLAG_PARTNER_COLLISION;
     }
 
-    flag = gCollisionStatus.currentFloor;
+    flag = gCollisionStatus.curFloor;
     if (flag != -1 && (flag & COLLISION_WITH_ENTITY_BIT) && listIndex == (u8)flag) {
         entityFlags |= ENTITY_COLLISION_PLAYER_TOUCH_FLOOR;
     }
@@ -652,7 +652,7 @@ s32 entity_get_collision_flags(Entity* entity) {
         entityFlags |= ENTITY_COLLISION_PLAYER_LAST_FLOOR;
     }
 
-    flag = gCollisionStatus.currentCeiling;
+    flag = gCollisionStatus.curCeiling;
     if (flag != -1 && (flag & COLLISION_WITH_ENTITY_BIT) && listIndex == (u8)flag) {
         entityFlags |= ENTITY_COLLISION_PLAYER_TOUCH_CEILING;
     }
@@ -667,7 +667,7 @@ s32 entity_get_collision_flags(Entity* entity) {
         entityFlags |= ENTITY_COLLISION_PLAYER_HAMMER;
     }
 
-    flag = gCollisionStatus.currentWall;
+    flag = gCollisionStatus.curWall;
     if (flag != -1 && (flag & COLLISION_WITH_ENTITY_BIT) && listIndex == (u8)flag && gPlayerStatusPtr->pressedButtons & BUTTON_A) {
         entityFlags |= ENTITY_COLLISION_PLAYER_TOUCH_WALL;
     }

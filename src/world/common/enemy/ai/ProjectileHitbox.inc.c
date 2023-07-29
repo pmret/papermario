@@ -17,7 +17,7 @@ s32 N(ProjectileHitbox_GetUsableProjectileID)(Evt* script) {
     s32 i;
 
     if (ai_check_player_dist(enemy, 0, aiSettings->chaseRadius, aiSettings->chaseOffsetDist)) {
-        if (clamp_angle(get_clamped_angle_diff(camera->currentYaw, npc->yaw)) < 180.0) {
+        if (clamp_angle(get_clamped_angle_diff(camera->curYaw, npc->yaw)) < 180.0) {
             facingAngle = 90.0f;
         } else {
             facingAngle = 270.0f;
@@ -58,14 +58,14 @@ void N(UnkNpcAIFunc48)(Evt* script, f32 arg1, f32 arg2, EnemyDetectVolume* terri
         EffectInstance* sp28;
 
         fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &sp28);
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
+        npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         npc->duration = 20;
         script->functionTemp[0] = 33;
     } else {
         s32 npcID = N(ProjectileHitbox_GetUsableProjectileID)(script);
 
         if (npcID != NPC_SELF && get_enemy(npcID)->varTable[0] == 0 && npc->turnAroundYawAdjustment == 0) {
-            npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_PRE];
+            npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_PRE];
             npc->duration = enemy->varTable[1];
             script->functionTemp[0] = 30;
         }
@@ -84,11 +84,11 @@ void N(ProjectileHitbox_30)(Evt* script) {
             EffectInstance* emoteTemp;
 
             fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
-            npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
+            npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         } else {
             Enemy* hitboxEnemy;
 
-            npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_HIT];
+            npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_HIT];
             hitboxEnemy = get_enemy(npcID);
             hitboxEnemy->varTable[4] = enemy->npcID;
             hitboxEnemy->varTable[0] = 1;
@@ -113,7 +113,7 @@ void N(ProjectileHitbox_32)(Evt* script) {
 
     npc->yaw = atan2(npc->pos.x, npc->pos.z, npc2->pos.x, npc2->pos.z);
     if (enemy2->varTable[0] == 0) {
-        npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
+        npc->curAnim = enemy->animList[ENEMY_ANIM_INDEX_IDLE];
         npc->duration = enemy->varTable[2];
         script->functionTemp[0] = AI_STATE_PROJECTILE_HITBOX_33;
     }
@@ -299,11 +299,11 @@ API_CALLABLE(N(ProjectileAI_Reflect)) {
     switch (script->functionTemp[0]) {
         case 0:
             fx_walking_dust(2, npc->pos.x, npc->pos.y, npc->pos.z, 0.0f, 0.0f);
-            yaw = clamp_angle(camera->currentYaw);
+            yaw = clamp_angle(camera->curYaw);
             temp_f20_2 = clamp_angle(yaw + 180.0);
             temp_f22 = clamp_angle(yaw + 90.0);
             temp_f20_3 = clamp_angle(temp_f20_2 + 90.0);
-            if (clamp_angle(get_clamped_angle_diff(camera->currentYaw, gPlayerStatusPtr->currentYaw)) < 180.0) {
+            if (clamp_angle(get_clamped_angle_diff(camera->curYaw, gPlayerStatusPtr->curYaw)) < 180.0) {
                 npc->yaw = temp_f22;
             } else {
                 npc->yaw = temp_f20_3;

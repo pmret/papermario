@@ -33,7 +33,7 @@ API_CALLABLE(N(func_80243EE0_C75360)) {
     }
 
     if (gPartnerStatus.partnerActionState != PARTNER_ACTION_NONE) {
-        if (playerData->currentPartner == PARTNER_WATT) {
+        if (playerData->curPartner == PARTNER_WATT) {
             if (!script->functionTemp[1]) {
                 script->functionTemp[1] = TRUE;
                 sfx_play_sound(SOUND_WATT_REPEL_DARKNESS);
@@ -43,7 +43,7 @@ API_CALLABLE(N(func_80243EE0_C75360)) {
                 script->functionTemp[0] = 90;
             }
         }
-    } else if (playerData->currentPartner == PARTNER_WATT) {
+    } else if (playerData->curPartner == PARTNER_WATT) {
         if (script->functionTemp[1]) {
             script->functionTemp[1] = FALSE;
             if (script->functionTemp[0] < 255) {

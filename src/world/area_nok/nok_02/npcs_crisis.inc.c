@@ -21,7 +21,7 @@ API_CALLABLE(N(IsPlayerOrKoopaNearby)) {
     s32 outVal = FALSE;
     f32 xDiff, zDiff;
 
-    if (playerStatus->currentSpeed >= 4.0f) {
+    if (playerStatus->curSpeed >= 4.0f) {
         script->varTable[2]++;
         if (script->varTable[2] > 2) {
             script->varTable[2] = 2;
@@ -53,7 +53,7 @@ API_CALLABLE(N(IsPlayerOrKoopaNearby)) {
 API_CALLABLE(N(IsPlayerWalking)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (playerStatus->currentSpeed >= 4.0f) {
+    if (playerStatus->curSpeed >= 4.0f) {
         script->varTable[2]++;
         if (script->varTable[2] > 2) {
             script->varTable[2] = 2;
@@ -66,7 +66,7 @@ API_CALLABLE(N(IsPlayerWalking)) {
     if (script->varTable[2] >= 2) {
         script->varTable[0] = FALSE;
     }
-    if (playerStatus->currentSpeed == 0.0f) {
+    if (playerStatus->curSpeed == 0.0f) {
         script->varTable[0] = FALSE;
     }
 

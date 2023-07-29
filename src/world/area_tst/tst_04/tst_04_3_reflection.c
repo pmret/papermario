@@ -40,7 +40,7 @@ void N(worker_render_player_reflection)(void) {
 
 void N(appendGfx_test_player_reflection)(void* data) {
     PlayerStatus* playerStatus = data;
-    f32 yaw = -gCameras[gCurrentCamID].currentYaw;
+    f32 yaw = -gCameras[gCurrentCamID].curYaw;
     Matrix4f main;
     Matrix4f translation;
     Matrix4f rotation;

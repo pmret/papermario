@@ -124,11 +124,11 @@ void N(update)(void) {
                  if (!actionCommandStatus->isBarFilled) {
                     if (actionCommandStatus->targetWeakness != 0) {
 
-                        if (battleStatus->currentButtonsDown & BUTTON_STICK_LEFT) {
+                        if (battleStatus->curButtonsDown & BUTTON_STICK_LEFT) {
                             actionCommandStatus->unk_5C = TRUE;
                         }
 
-                        if (!(battleStatus->currentButtonsDown & BUTTON_STICK_LEFT) && actionCommandStatus->unk_5C) {
+                        if (!(battleStatus->curButtonsDown & BUTTON_STICK_LEFT) && actionCommandStatus->unk_5C) {
                             s32 a = battleStatus->actionCmdDifficultyTable[actionCommandStatus->difficulty];
                             s32 b = actionCommandStatus->targetWeakness * 850;
 
@@ -136,18 +136,18 @@ void N(update)(void) {
                             actionCommandStatus->unk_5C = 0;
                         }
 
-                        if (battleStatus->currentButtonsPressed & BUTTON_STICK_RIGHT) {
+                        if (battleStatus->curButtonsPressed & BUTTON_STICK_RIGHT) {
                             s32 a = battleStatus->actionCmdDifficultyTable[actionCommandStatus->difficulty];
                             s32 b = actionCommandStatus->targetWeakness * 850;
 
                             actionCommandStatus->barFillLevel -= (a * b) / 10000;
                         }
                     } else {
-                        if (battleStatus->currentButtonsDown & BUTTON_STICK_LEFT) {
+                        if (battleStatus->curButtonsDown & BUTTON_STICK_LEFT) {
                             actionCommandStatus->unk_5C = TRUE;
                         }
 
-                        if (!(battleStatus->currentButtonsDown & BUTTON_STICK_LEFT) && actionCommandStatus->unk_5C) {
+                        if (!(battleStatus->curButtonsDown & BUTTON_STICK_LEFT) && actionCommandStatus->unk_5C) {
                             actionCommandStatus->barFillLevel += 100;
                             if (actionCommandStatus->barFillLevel >= 500) {
                                 actionCommandStatus->barFillLevel = 500;
@@ -155,7 +155,7 @@ void N(update)(void) {
                             actionCommandStatus->unk_5C = 0;
                         }
 
-                        if (battleStatus->currentButtonsPressed & BUTTON_STICK_RIGHT) {
+                        if (battleStatus->curButtonsPressed & BUTTON_STICK_RIGHT) {
                             actionCommandStatus->barFillLevel -= 100;
                         }
                     }

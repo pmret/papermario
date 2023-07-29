@@ -257,9 +257,9 @@ API_CALLABLE(N(UseAbility)) {
             bow->moveToPos.x = playerStatus->pos.x;
             bow->moveToPos.y = playerStatus->pos.y + (playerStatus->colliderHeight * 0.5f);
             bow->moveToPos.z = playerStatus->pos.z;
-            bow->currentAnim = ANIM_WorldBow_Walk;
+            bow->curAnim = ANIM_WorldBow_Walk;
             bow->yaw = playerStatus->targetYaw;
-            add_vec2D_polar(&bow->moveToPos.x, &bow->moveToPos.z, -2.0f, gCameras[gCurrentCameraID].currentYaw);
+            add_vec2D_polar(&bow->moveToPos.x, &bow->moveToPos.z, -2.0f, gCameras[gCurrentCameraID].curYaw);
             add_vec2D_polar(&bow->moveToPos.x, &bow->moveToPos.z, playerStatus->colliderDiameter * 0.5f, bow->yaw);
             bow->duration = 5;
             bow->yaw = atan2(bow->pos.x, bow->pos.z, playerStatus->pos.x, playerStatus->pos.z);
@@ -269,7 +269,7 @@ API_CALLABLE(N(UseAbility)) {
             break;
 
         case OUTTA_SIGHT_GATHER:
-            if (collisionStatus->currentFloor >= 0 && !(playerStatus->animFlags & PA_FLAG_CHANGING_MAP)) {
+            if (collisionStatus->curFloor >= 0 && !(playerStatus->animFlags & PA_FLAG_CHANGING_MAP)) {
                 bow->moveToPos.x = playerStatus->pos.x;
                 bow->moveToPos.y = playerStatus->pos.y + (playerStatus->colliderHeight * 0.5f);
                 bow->moveToPos.z = playerStatus->pos.z;
@@ -293,7 +293,7 @@ API_CALLABLE(N(UseAbility)) {
             return ApiStatus_DONE2;
 
         case OUTTA_SIGHT_VANISH:
-            if (collisionStatus->currentFloor >= 0) {
+            if (collisionStatus->curFloor >= 0) {
                 playerStatus->alpha1 -= 8;
                 if (playerStatus->alpha1 <= 128) {
                     playerStatus->alpha1 = 128;
@@ -314,7 +314,7 @@ API_CALLABLE(N(UseAbility)) {
             return ApiStatus_DONE2;
 
         case OUTTA_SIGHT_IDLE:
-            if (collisionStatus->currentFloor <= NO_COLLIDER) {
+            if (collisionStatus->curFloor <= NO_COLLIDER) {
                 N(end_outta_sight_cleanup)(bow);
                 return ApiStatus_DONE2;
             }
@@ -324,7 +324,7 @@ API_CALLABLE(N(UseAbility)) {
             bow->pos.z = playerStatus->pos.z - N(OuttaSightPosZ);
 
             stickInputMag = dist2D(0.0f, 0.0f, partnerStatus->stickX, partnerStatus->stickY);
-            if ((collisionStatus->currentFloor <= NO_COLLIDER)
+            if ((collisionStatus->curFloor <= NO_COLLIDER)
                 || stickInputMag > 10.0f
                 || partnerStatus->pressedButtons & (BUTTON_B | BUTTON_C_DOWN)
                 || playerStatus->flags & PS_FLAG_HIT_FIRE

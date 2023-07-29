@@ -211,7 +211,7 @@ void star_outline_appendGfx(void* effect) {
     gSPDisplayList(gMainGfxPos++, D_E0126BC8[0]);
 
     if (unk_34 != 0) {
-        guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, (f32) ((f64) data->unk_54 * 0.4), data->pos.x, data->pos.y, data->pos.z);
+        guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].curYaw, 0.0f, (f32) ((f64) data->unk_54 * 0.4), data->pos.x, data->pos.y, data->pos.z);
         guPositionF(sp60, data->unk_48, data->unk_4C, data->unk_50, 1.0f, 0.0f, 0.0f, 0.0f);
         guMtxCatF(sp60, sp20, sp20);
         guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);
@@ -230,7 +230,7 @@ void star_outline_appendGfx(void* effect) {
         gSPPopMatrix(gMainGfxPos++, G_MTX_MODELVIEW);
     }
 
-    guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].currentYaw, 0.0f, data->unk_38 * 0.4, data->pos.x, data->pos.y, data->pos.z);
+    guPositionF(sp20, 0.0f, -gCameras[gCurrentCameraID].curYaw, 0.0f, data->unk_38 * 0.4, data->pos.x, data->pos.y, data->pos.z);
     guPositionF(sp60, data->unk_3C.x, data->unk_3C.y, data->unk_3C.z, 1.0f, 0.0f, 0.0f, 0.0f);
     guMtxCatF(sp60, sp20, sp20);
     guMtxF2L(sp20, &gDisplayContext->matrixStack[gMatrixListPos]);

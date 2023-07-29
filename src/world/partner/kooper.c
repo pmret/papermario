@@ -248,7 +248,7 @@ API_CALLABLE(N(UseAbility)) {
             partnerStatus->partnerActionState = PARTNER_ACTION_KOOPER_GATHER;
             partnerStatus->actingPartner = PARTNER_KOOPER;
             script->USE_STATE = SHELL_TOSS_STATE_HOLD;
-            kooper->currentAnim = ANIM_WorldKooper_SpinShell;
+            kooper->curAnim = ANIM_WorldKooper_SpinShell;
             N(ShellTossHoldTime) = 30;
         }
     }
@@ -294,7 +294,7 @@ API_CALLABLE(N(UseAbility)) {
             kooper->moveToPos.x = N(ShellTossPosX) = playerStatus->pos.x;
             kooper->moveToPos.y = N(ShellTossPosY) = playerStatus->pos.y;
             kooper->moveToPos.z = N(ShellTossPosZ) = playerStatus->pos.z;
-            kooper->currentAnim = ANIM_WorldKooper_Run;
+            kooper->curAnim = ANIM_WorldKooper_Run;
             add_vec2D_polar(&kooper->moveToPos.x, &kooper->moveToPos.z,
                             playerStatus->colliderDiameter / 3, playerStatus->targetYaw);
             moveAngle = clamp_angle(playerStatus->targetYaw + (N(PlayerWasFacingLeft) ? 90.0f : -90.0f));
@@ -323,7 +323,7 @@ API_CALLABLE(N(UseAbility)) {
             kooper->yaw = playerStatus->targetYaw;
             kooper->jumpVel = 18.0f;
             kooper->jumpScale = 3.0f;
-            kooper->currentAnim = ANIM_WorldKooper_EnterShell;
+            kooper->curAnim = ANIM_WorldKooper_EnterShell;
             kooper->collisionHeight = 12;
 
             kooper->moveToPos.y = playerStatus->pos.y;
@@ -368,7 +368,7 @@ API_CALLABLE(N(UseAbility)) {
             testLength = hitLength = playerStatus->colliderHeight / 2;
 
             if ((npc_raycast_up(COLLISION_CHANNEL_10000, &posX, &posY, &posZ, &hitLength)) && (hitLength < testLength)) {
-                collisionStatus->currentCeiling = NpcHitQueryColliderID;
+                collisionStatus->curCeiling = NpcHitQueryColliderID;
                 playerStatus->pos.y = posY - playerStatus->colliderHeight;
                 N(vertical_hit_interactable_entity)(kooper);
             }
@@ -381,7 +381,7 @@ API_CALLABLE(N(UseAbility)) {
                 kooper->rot.z = 0.0f;
                 kooper->planarFlyDist = 0.0f;
                 kooper->moveSpeed = 8.0f;
-                kooper->currentAnim = ANIM_WorldKooper_SpinShell;
+                kooper->curAnim = ANIM_WorldKooper_SpinShell;
                 ShellTossHitboxState = SHELL_TOSS_HITBOX_ENABLED;
                 fx_damage_stars(3, kooper->pos.x, kooper->pos.y + kooper->collisionHeight, kooper->pos.z,
                         sin_deg(playerStatus->targetYaw), -1.0f, -cos_deg(playerStatus->targetYaw), 3);
@@ -627,7 +627,7 @@ API_CALLABLE(N(UseAbility)) {
         partnerStatus->partnerActionState = PARTNER_ACTION_NONE;
         kooper->jumpVel = 0.0f;
         kooper->collisionHeight = 24;
-        kooper->currentAnim = ANIM_WorldKooper_Walk;
+        kooper->curAnim = ANIM_WorldKooper_Walk;
         sfx_stop_sound(SOUND_284);
         disable_npc_blur(kooper);
 

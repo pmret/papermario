@@ -87,15 +87,15 @@ API_CALLABLE(func_802A16F4_7907C4) {
 
     dispatch_damage_event_actor_0(target, 0, 10);
 
-    x = target->currentPos.x + target->headOffset.x + (target->size.x / 2);
+    x = target->curPos.x + target->headOffset.x + (target->size.x / 2);
     if (target->flags & ACTOR_FLAG_UPSIDE_DOWN) {
-        y = target->currentPos.y + target->headOffset.y - target->size.y;
+        y = target->curPos.y + target->headOffset.y - target->size.y;
     } else if (!(target->flags & ACTOR_FLAG_8000)) {
-        y = target->currentPos.y + target->headOffset.y + target->size.y;
+        y = target->curPos.y + target->headOffset.y + target->size.y;
     } else {
-        y = target->currentPos.y + target->headOffset.y + target->size.y * 2;
+        y = target->curPos.y + target->headOffset.y + target->size.y * 2;
     }
-    z = target->currentPos.z + target->headOffset.z + 5.0f;
+    z = target->curPos.z + target->headOffset.z + 5.0f;
 
     fx_stat_change(5, x, y, z, 1.0f, 60);
     sfx_play_sound(SOUND_2106);

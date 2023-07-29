@@ -263,7 +263,7 @@ void lightning_appendGfx(void* effect) {
                 break;
             default:
                 guTranslateF(sp20, data->unk_04, data->unk_08, data->unk_0C);
-                guRotateF(sp60, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
+                guRotateF(sp60, -gCameras[gCurrentCameraID].curYaw, 0.0f, 1.0f, 0.0f);
                 guMtxCatF(sp60, sp20, sp20);
                 guTranslateF(sp60, 0.0f, 0.0f, 1.0f);
                 guMtxCatF(sp60, sp20, sp20);

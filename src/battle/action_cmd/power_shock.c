@@ -181,7 +181,7 @@ void N(update)(void) {
                 }
             }
 
-            if (battleStatus->currentButtonsPressed & BUTTON_A) {
+            if (battleStatus->curButtonsPressed & BUTTON_A) {
                 phi_a1 = actionCommandStatus->targetWeakness;
                 if (phi_a1 != 0) {
                     s32 a = battleStatus->actionCmdDifficultyTable[actionCommandStatus->difficulty];

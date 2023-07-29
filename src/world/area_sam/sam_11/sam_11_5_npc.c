@@ -35,14 +35,14 @@ API_CALLABLE(N(UpdateSentryPosition)) {
     f32 var_f2;
 
     if (*posZ == npc->pos.z) {
-        if(npc->currentAnim != ANIM_Penguin_Idle) {
-            npc->currentAnim = ANIM_Penguin_Idle;
+        if(npc->curAnim != ANIM_Penguin_Idle) {
+            npc->curAnim = ANIM_Penguin_Idle;
         }
     }
 
     if (*posZ != npc->pos.z) {
-        if (npc->currentAnim != ANIM_Penguin_Walk) {
-            npc->currentAnim = ANIM_Penguin_Walk;
+        if (npc->curAnim != ANIM_Penguin_Walk) {
+            npc->curAnim = ANIM_Penguin_Walk;
         }
     }
 

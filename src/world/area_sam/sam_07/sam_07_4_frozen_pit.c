@@ -125,7 +125,7 @@ API_CALLABLE(N(AwaitPlayerNotPoundingFloor)) {
     s32 floor1 = evt_get_variable(script, *args++);
     s32 floor2 = evt_get_variable(script, *args++);
 
-    if (gCollisionStatus.currentFloor == floor1 || gCollisionStatus.currentFloor == floor2) {
+    if (gCollisionStatus.curFloor == floor1 || gCollisionStatus.curFloor == floor2) {
         if (playerStatus->actionState == ACTION_STATE_SPIN_POUND ||
             playerStatus->actionState == ACTION_STATE_TORNADO_POUND)
         {

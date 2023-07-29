@@ -106,7 +106,7 @@ typedef struct SmashGameData {
     /* 0x014 */ s32 windowA_posX;
     /* 0x018 */ s32 windowB_posX;
     /* 0x01C */ s32 signpostEntity;
-    /* 0x020 */ s32 currentScore;
+    /* 0x020 */ s32 curScore;
     /* 0x024 */ s32 mashProgress;
     /* 0x028 */ SmashGameStunFlags stunFlags;
     /* 0x02C */ SmashGameBoxData box[NUM_BOXES];
@@ -304,7 +304,7 @@ API_CALLABLE(N(SetBoxContents)) {
     SmashGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTablePtr[SMASH_DATA_VAR_IDX];
     data->found = 0;
     data->timeLeft = PLAY_TIME + 10;
-    data->currentScore = 0;
+    data->curScore = 0;
     data->mashProgress = 0;
     data->stunFlags = 0;
 
@@ -455,7 +455,7 @@ API_CALLABLE(N(RunMinigame)) {
                 case BOX_STATE_FUZZY_IDLE:
                     data->box[i].stateTimer--;
                     if (data->box[i].stateTimer <= 0) {
-                        npc->currentAnim = ANIM_Fuzzy_Walk;
+                        npc->curAnim = ANIM_Fuzzy_Walk;
                         data->box[i].state = BOX_STATE_FUZZY_POPUP;
                         sfx_play_sound_at_position(enemy->varTable[8], SOUND_SPACE_MODE_0 | SOUND_PARAM_MOST_QUIET, npc->pos.x, npc->pos.y, npc->pos.z);
                         get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
@@ -501,7 +501,7 @@ API_CALLABLE(N(RunMinigame)) {
                     sfx_play_sound(enemy->varTable[8]);
                     data->box[i].state = BOX_STATE_FUZZY_ATTACH;
                     gPlayerStatusPtr->anim = ANIM_Mario1_TiredStill;
-                    npc->currentAnim = ANIM_Fuzzy_Run;
+                    npc->curAnim = ANIM_Fuzzy_Run;
                     get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
                     npc->pos.x = centerX;
                     npc->pos.y = centerY;
@@ -528,7 +528,7 @@ API_CALLABLE(N(RunMinigame)) {
                     gPlayerStatusPtr->anim = ANIM_Mario1_TiredStill;
                     npc->duration--;
                     if (npc->duration <= 0) {
-                        npc->currentAnim = ANIM_Fuzzy_Stunned;
+                        npc->curAnim = ANIM_Fuzzy_Stunned;
                         gPlayerStatusPtr->anim = ANIM_Mario1_PanicRun;
                         data->mashProgress = 0;
                         npc->pos.x = gPlayerStatusPtr->pos.x;
@@ -554,7 +554,7 @@ API_CALLABLE(N(RunMinigame)) {
                         hud_element_set_script(data->hudElemID_AButton, &HES_AButton);
                         hud_element_set_alpha(data->hudElemID_AButton, 160);
                         hud_element_set_alpha(data->hudElemID_Meter, 160);
-                        npc->currentAnim = ANIM_Fuzzy_Hurt;
+                        npc->curAnim = ANIM_Fuzzy_Hurt;
                         npc->pos.y += 3.0;
                     }
                     break;
@@ -619,7 +619,7 @@ API_CALLABLE(N(RunMinigame)) {
                 case BOX_STATE_BOMB_HIT:
                     enable_npc_shadow(npc);
                     npc->duration = 15;
-                    npc->currentAnim = ANIM_Bobomb_WalkLit;
+                    npc->curAnim = ANIM_Bobomb_WalkLit;
                     data->stunFlags |= (STUN_FLAG_STUNNED | STUN_FLAG_CHANGED);
                     data->box[i].state = BOX_STATE_BOMB_ATTACK;
                     get_model_center_and_size(data->box[i].modelID, &centerX, &centerY, &centerZ, &sizeX, &sizeY, &sizeZ);
@@ -855,22 +855,22 @@ API_CALLABLE(N(UpdateRecords)) {
     seconds = data->timeLeft  / FRAME_RATE;
     deciseconds = ((f32)(data->timeLeft % FRAME_RATE) * 10.0) / FRAME_RATE;
 
-    data->currentScore = (seconds * 10) + deciseconds;
-    playerData->smashGameTotal += data->currentScore;
+    data->curScore = (seconds * 10) + deciseconds;
+    playerData->smashGameTotal += data->curScore;
 
     if (playerData->smashGameTotal > 99999) {
         playerData->smashGameTotal = 99999;
     }
-    if (playerData->smashGameRecord < data->currentScore) {
-        playerData->smashGameRecord = data->currentScore;
+    if (playerData->smashGameRecord < data->curScore) {
+        playerData->smashGameRecord = data->curScore;
     }
 
     set_message_value(seconds, 0);
     set_message_value(deciseconds, 1);
-    set_message_value(data->currentScore, 2);
+    set_message_value(data->curScore, 2);
 
-    outScore = data->currentScore;
-    if (data->currentScore == 0 && data->found == NUM_PANELS) {
+    outScore = data->curScore;
+    if (data->curScore == 0 && data->found == NUM_PANELS) {
         outScore = -1;
     }
     evt_set_variable(script, LVar0, outScore);
@@ -880,7 +880,7 @@ API_CALLABLE(N(UpdateRecords)) {
 
 API_CALLABLE(N(GiveCoinReward)) {
     SmashGameData* data = get_enemy(SCOREKEEPER_ENEMY_IDX)->varTablePtr[SMASH_DATA_VAR_IDX];
-    s32 coinsLeft = data->currentScore;
+    s32 coinsLeft = data->curScore;
     s32 increment;
 
     if (coinsLeft > 100) {
@@ -899,11 +899,11 @@ API_CALLABLE(N(GiveCoinReward)) {
         increment = 1;
     }
 
-    data->currentScore -= increment;
+    data->curScore -= increment;
     add_coins(increment);
     sfx_play_sound(SOUND_211);
 
-    return (data->currentScore > 0) ? ApiStatus_BLOCK : ApiStatus_DONE2;
+    return (data->curScore > 0) ? ApiStatus_BLOCK : ApiStatus_DONE2;
 }
 
 API_CALLABLE(N(CleanupGame)) {
@@ -951,7 +951,7 @@ API_CALLABLE(N(CleanupGame)) {
                     if (data->box[i].state != BOX_STATE_FUZZY_END) {
                         data->box[i].state = BOX_STATE_FUZZY_END;
                         fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, 0.0f, 30, &writeback);
-                        npc->currentAnim = ANIM_Fuzzy_Sleep;
+                        npc->curAnim = ANIM_Fuzzy_Sleep;
                         enable_npc_shadow(npc);
                     }
                     break;
@@ -960,7 +960,7 @@ API_CALLABLE(N(CleanupGame)) {
                     if (data->box[i].state != BOX_STATE_BOMB_END) {
                         data->box[i].state = BOX_STATE_BOMB_END;
                         fx_emote(EMOTE_QUESTION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, 0.0f, 30, &writeback);
-                        npc->currentAnim = ANIM_Bobomb_Dizzy;
+                        npc->curAnim = ANIM_Bobomb_Dizzy;
                         enable_npc_shadow(npc);
                     }
                     break;

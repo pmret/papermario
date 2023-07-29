@@ -93,7 +93,7 @@ API_CALLABLE(N(IsNpcFacingRight)) {
     s32 npcID = evt_get_variable(script, *args++);
     s32 outVar = *args++;
     Npc* npc = get_npc_safe(npcID);
-    f32 angle = clamp_angle((npc->yaw + 180.0f) - gCameras[gCurrentCameraID].currentYaw);
+    f32 angle = clamp_angle((npc->yaw + 180.0f) - gCameras[gCurrentCameraID].curYaw);
     s32 outVal;
 
     outVal = FALSE;

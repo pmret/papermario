@@ -39,7 +39,7 @@ void entity_SimpleSpring_idle(Entity* entity) {
         exec_entity_commandlist(entity);
         sfx_play_sound_at_position(SOUND_2086, SOUND_SPACE_MODE_0, entity->pos.x, entity->pos.y, entity->pos.z);
         disable_player_input();
-        playerStatus->currentSpeed = 0;
+        playerStatus->curSpeed = 0;
     }
 }
 
