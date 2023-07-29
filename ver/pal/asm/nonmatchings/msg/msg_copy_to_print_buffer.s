@@ -279,9 +279,9 @@ glabel msg_copy_to_print_buffer
 /* B95C8 80123278 3C01802F */  lui        $at, %hi(gMsgCharsets)
 /* B95CC 8012327C 00220821 */  addu       $at, $at, $v0
 /* B95D0 80123280 8C2218A8 */  lw         $v0, %lo(gMsgCharsets)($at)
-/* B95D4 80123284 3C01802F */  lui        $at, %hi(D_PAL_802F1944)
+/* B95D4 80123284 3C01802F */  lui        $at, %hi(D_802EB644)
 /* B95D8 80123288 00230821 */  addu       $at, $at, $v1
-/* B95DC 8012328C 84231944 */  lh         $v1, %lo(D_PAL_802F1944)($at)
+/* B95DC 8012328C 84231944 */  lh         $v1, %lo(D_802EB644)($at)
 /* B95E0 80123290 90440003 */  lbu        $a0, 0x3($v0)
 /* B95E4 80123294 24020006 */  addiu      $v0, $zero, 0x6
 /* B95E8 80123298 A28204F8 */  sb         $v0, 0x4F8($s4)
@@ -446,10 +446,10 @@ glabel msg_copy_to_print_buffer
 /* B9838 801234E8 AE8204FC */  sw         $v0, 0x4FC($s4)
 /* B983C 801234EC 0C00AB19 */  jal        heap_malloc
 /* B9840 801234F0 A6830500 */   sh        $v1, 0x500($s4)
-/* B9844 801234F4 3C030001 */  lui        $v1, %hi(D_B290)
-/* B9848 801234F8 2463B290 */  addiu      $v1, $v1, %lo(D_B290)
-/* B984C 801234FC 3C080011 */  lui        $t0, %hi(D_110CB0)
-/* B9850 80123500 25080CB0 */  addiu      $t0, $t0, %lo(D_110CB0)
+/* B9844 801234F4 3C030001 */  lui        $v1, %hi(charset_postcard_OFFSET)
+/* B9848 801234F8 2463B290 */  addiu      $v1, $v1, %lo(charset_postcard_OFFSET)
+/* B984C 801234FC 3C080011 */  lui        $t0, %hi(charset_ROM_START)
+/* B9850 80123500 25080CB0 */  addiu      $t0, $t0, %lo(charset_ROM_START)
 /* B9854 80123504 01032021 */  addu       $a0, $t0, $v1
 /* B9858 80123508 24851EC3 */  addiu      $a1, $a0, 0x1EC3
 /* B985C 8012350C 0040302D */  daddu      $a2, $v0, $zero
@@ -459,8 +459,8 @@ glabel msg_copy_to_print_buffer
 /* B986C 8012351C 24040020 */   addiu     $a0, $zero, 0x20
 /* B9870 80123520 3C030001 */  lui        $v1, %hi(D_D158)
 /* B9874 80123524 2463D158 */  addiu      $v1, $v1, %lo(D_D158)
-/* B9878 80123528 3C080011 */  lui        $t0, %hi(D_110CB0)
-/* B987C 8012352C 25080CB0 */  addiu      $t0, $t0, %lo(D_110CB0)
+/* B9878 80123528 3C080011 */  lui        $t0, %hi(charset_ROM_START)
+/* B987C 8012352C 25080CB0 */  addiu      $t0, $t0, %lo(charset_ROM_START)
 /* B9880 80123530 01032021 */  addu       $a0, $t0, $v1
 /* B9884 80123534 24850020 */  addiu      $a1, $a0, 0x20
 /* B9888 80123538 0040302D */  daddu      $a2, $v0, $zero
@@ -472,11 +472,11 @@ glabel msg_copy_to_print_buffer
 /* B98A0 80123550 00108080 */  sll        $s0, $s0, 2
 /* B98A4 80123554 0040302D */  daddu      $a2, $v0, $zero
 /* B98A8 80123558 AE82054C */  sw         $v0, 0x54C($s4)
-/* B98AC 8012355C 3C03802F */  lui        $v1, %hi(D_PAL_802F18C0)
+/* B98AC 8012355C 3C03802F */  lui        $v1, %hi(D_802EB5C0)
 /* B98B0 80123560 00701821 */  addu       $v1, $v1, $s0
-/* B98B4 80123564 8C6318C0 */  lw         $v1, %lo(D_PAL_802F18C0)($v1)
-/* B98B8 80123568 3C080011 */  lui        $t0, %hi(D_110CB0)
-/* B98BC 8012356C 25080CB0 */  addiu      $t0, $t0, %lo(D_110CB0)
+/* B98B4 80123564 8C6318C0 */  lw         $v1, %lo(D_802EB5C0)($v1)
+/* B98B8 80123568 3C080011 */  lui        $t0, %hi(charset_ROM_START)
+/* B98BC 8012356C 25080CB0 */  addiu      $t0, $t0, %lo(charset_ROM_START)
 /* B98C0 80123570 00682021 */  addu       $a0, $v1, $t0
 /* B98C4 80123574 0C00A5AF */  jal        dma_copy
 /* B98C8 80123578 248519FA */   addiu     $a1, $a0, 0x19FA
@@ -484,11 +484,11 @@ glabel msg_copy_to_print_buffer
 /* B98D0 80123580 24040200 */   addiu     $a0, $zero, 0x200
 /* B98D4 80123584 0040302D */  daddu      $a2, $v0, $zero
 /* B98D8 80123588 AE820550 */  sw         $v0, 0x550($s4)
-/* B98DC 8012358C 3C03802F */  lui        $v1, %hi(D_PAL_802F18F0)
+/* B98DC 8012358C 3C03802F */  lui        $v1, %hi(D_802EB5F0)
 /* B98E0 80123590 00701821 */  addu       $v1, $v1, $s0
-/* B98E4 80123594 8C6318F0 */  lw         $v1, %lo(D_PAL_802F18F0)($v1)
-/* B98E8 80123598 3C080011 */  lui        $t0, %hi(D_110CB0)
-/* B98EC 8012359C 25080CB0 */  addiu      $t0, $t0, %lo(D_110CB0)
+/* B98E4 80123594 8C6318F0 */  lw         $v1, %lo(D_802EB5F0)($v1)
+/* B98E8 80123598 3C080011 */  lui        $t0, %hi(charset_ROM_START)
+/* B98EC 8012359C 25080CB0 */  addiu      $t0, $t0, %lo(charset_ROM_START)
 /* B98F0 801235A0 00682021 */  addu       $a0, $v1, $t0
 /* B98F4 801235A4 0C00A5AF */  jal        dma_copy
 /* B98F8 801235A8 24850200 */   addiu     $a1, $a0, 0x200
@@ -641,9 +641,9 @@ glabel msg_copy_to_print_buffer
 /* B9AF8 801237A8 3C01802F */  lui        $at, %hi(gMsgCharsets)
 /* B9AFC 801237AC 00220821 */  addu       $at, $at, $v0
 /* B9B00 801237B0 8C2218A8 */  lw         $v0, %lo(gMsgCharsets)($at)
-/* B9B04 801237B4 3C01802F */  lui        $at, %hi(D_PAL_802F1944)
+/* B9B04 801237B4 3C01802F */  lui        $at, %hi(D_802EB644)
 /* B9B08 801237B8 00230821 */  addu       $at, $at, $v1
-/* B9B0C 801237BC 84231944 */  lh         $v1, %lo(D_PAL_802F1944)($at)
+/* B9B0C 801237BC 84231944 */  lh         $v1, %lo(D_802EB644)($at)
 /* B9B10 801237C0 90440003 */  lbu        $a0, 0x3($v0)
 /* B9B14 801237C4 24020006 */  addiu      $v0, $zero, 0x6
 /* B9B18 801237C8 A28204F8 */  sb         $v0, 0x4F8($s4)
@@ -782,8 +782,8 @@ glabel msg_copy_to_print_buffer
 /* B9CFC 801239AC 26730001 */  addiu      $s3, $s3, 0x1
 /* B9D00 801239B0 3C068016 */  lui        $a2, %hi(D_80158710)
 /* B9D04 801239B4 24C68710 */  addiu      $a2, $a2, %lo(D_80158710)
-/* B9D08 801239B8 3C11001E */  lui        $s1, %hi(D_1DA1E0)
-/* B9D0C 801239BC 2631A1E0 */  addiu      $s1, $s1, %lo(D_1DA1E0)
+/* B9D08 801239B8 3C11001E */  lui        $s1, %hi(icon_ROM_START)
+/* B9D0C 801239BC 2631A1E0 */  addiu      $s1, $s1, %lo(icon_ROM_START)
 /* B9D10 801239C0 3C018015 */  lui        $at, %hi(D_8014FEEC)
 /* B9D14 801239C4 AC26FEEC */  sw         $a2, %lo(D_8014FEEC)($at)
 /* B9D18 801239C8 00108200 */  sll        $s0, $s0, 8
@@ -1198,8 +1198,8 @@ glabel msg_copy_to_print_buffer
 /* BA2C8 80123F78 0280202D */   daddu     $a0, $s4, $zero
 .LPAL_80123F7C:
 /* BA2CC 80123F7C 92700000 */  lbu        $s0, 0x0($s3)
-/* BA2D0 80123F80 3C04802F */  lui        $a0, %hi(D_PAL_802F1920)
-/* BA2D4 80123F84 24841920 */  addiu      $a0, $a0, %lo(D_PAL_802F1920)
+/* BA2D0 80123F80 3C04802F */  lui        $a0, %hi(D_802EB620)
+/* BA2D4 80123F84 24841920 */  addiu      $a0, $a0, %lo(D_802EB620)
 /* BA2D8 80123F88 320300FF */  andi       $v1, $s0, 0xFF
 /* BA2DC 80123F8C 00031040 */  sll        $v0, $v1, 1
 /* BA2E0 80123F90 00431021 */  addu       $v0, $v0, $v1

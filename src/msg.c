@@ -39,17 +39,24 @@ s32 D_8014C280[] = { 0x028001E0, 0x01FF0000, 0x028001E0, 0x01FF0000 };
 
 u8 MessagePlural[] = { MSG_CHAR_LOWER_S, MSG_CHAR_READ_END };
 
+#if VERSION_PAL
 u8 MessagePlural_de[] = { MSG_CHAR_LOWER_N, MSG_CHAR_READ_END };
+#endif
 
 u8 MessageSingular[] = { MSG_CHAR_READ_ENDL, MSG_CHAR_READ_END };
 
+#if VERSION_PAL
 s32 gCurrentLanguage = 0;
 
-u8 bytes[] = {0x02, 0x03, 0x00, 0x00, 0x02, 0x1B, 0x00, 0x00, 0x02, 0x33, 0x00, 0x00, 0x02, 0x4B, 0x00, 0x00};
+u32 D_PAL_8014AE50[] = {
+    [LANGUAGE_EN] = 0x2030000,
+    [LANGUAGE_DE] = 0x21B0000,
+    [LANGUAGE_FR] = 0x2330000,
+    [LANGUAGE_ES] = 0x24B0000,
+};
+#endif
 
 s16 gNextMessageBuffer = 0;
-
-u8 bytes2[]=  {0x00, 0x00};
 
 //TODO Vtx
 s32 gRewindArrowQuad[] = {
