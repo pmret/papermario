@@ -209,7 +209,7 @@ void energy_orb_wave_render(EffectInstance* effect) {
     RenderTask* renderTaskPointer = &renderTask;
 
     renderTask.appendGfx = energy_orb_wave_appendGfx;
-    renderTask.distance = 10;
+    renderTask.dist = 10;
     renderTask.appendGfxArg = effect;
     renderTask.renderMode = RENDER_MODE_2D;
     if (effect82->unk_00 >= 3) {

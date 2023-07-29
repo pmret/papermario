@@ -111,13 +111,13 @@ API_CALLABLE(N(JumpOnTarget)) {
         stateCurrentZ = actor->currentPos.z;
         state->currentPos.z = stateCurrentZ;
         state->angle = atan2(stateCurrentX, stateCurrentZ, stateGoalX, stateGoalZ);
-        state->distance = dist2D(stateCurrentX, stateCurrentZ, stateGoalX, stateGoalZ);
+        state->dist = dist2D(stateCurrentX, stateCurrentZ, stateGoalX, stateGoalZ);
         if (state->moveTime == 0) {
-            state->moveTime = state->distance / state->speed;
-            temp = state->distance - (state->moveTime * state->speed);
+            state->moveTime = state->dist / state->speed;
+            temp = state->dist - (state->moveTime * state->speed);
         } else {
-            state->speed = state->distance / state->moveTime;
-            temp = state->distance - (state->moveTime * state->speed);
+            state->speed = state->dist / state->moveTime;
+            temp = state->dist - (state->moveTime * state->speed);
         }
 
         if (state->moveTime == 0) {
@@ -134,7 +134,7 @@ API_CALLABLE(N(JumpOnTarget)) {
         if (state->moveArcAmplitude < 3) {
             state->unk_24 = 90.0f;
             state->unk_28 = 360 / state->moveTime;
-            temp = state->distance;
+            temp = state->dist;
             temp -= 20.0;
             temp /= 6.0;
             temp += 47.0;
@@ -150,7 +150,7 @@ API_CALLABLE(N(JumpOnTarget)) {
         } else {
             state->unk_24 = 90.0f;
             state->unk_28 = 360 / state->moveTime;
-            temp = state->distance;
+            temp = state->dist;
             temp -= 20.0;
             temp /= 6.0;
             temp += 47.0;

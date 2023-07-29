@@ -153,7 +153,7 @@ API_CALLABLE(N(ShellShotActionCommand)) {
             state->currentPos.z = parakarry->currentPos.z;
             state->angle = atan2(state->currentPos.x, state->currentPos.y, state->goalPos.x, state->goalPos.y);
             state->bounceDivisor = state->angle;
-            state->distance = 116.0f;
+            state->dist = 116.0f;
             state->unk_18.x = state->angle;
             i = 0;
 
@@ -163,7 +163,7 @@ API_CALLABLE(N(ShellShotActionCommand)) {
                 x = state->currentPos.x;
                 y = state->currentPos.y;
                 z = state->currentPos.z;
-                clampedAngleDiff = state->distance;
+                clampedAngleDiff = state->dist;
                 add_vec2D_polar(&x, &y, clampedAngleDiff, aimAngle);
                 get_screen_coords(gCurrentCameraID, x, y, z, &screenX, &screenY, &screenZ);
                 if (screenY > 180) {
@@ -180,7 +180,7 @@ API_CALLABLE(N(ShellShotActionCommand)) {
                 x = state->currentPos.x;
                 y = state->currentPos.y;
                 z = state->currentPos.z;
-                add_vec2D_polar(&x, &y, state->distance, aimAngle);
+                add_vec2D_polar(&x, &y, state->dist, aimAngle);
                 get_screen_coords(gCurrentCameraID, x, y, z, &screenX, &screenY, &screenZ);
                 if (screenY < 30) {
                     break;
@@ -329,7 +329,7 @@ API_CALLABLE(N(ShellShotActionCommand)) {
             aimX = state->currentPos.x;
             aimY = state->currentPos.y;
             aimZ = state->currentPos.z;
-            add_vec2D_polar(&aimX, &aimY, state->distance, aimAngle);
+            add_vec2D_polar(&aimX, &aimY, state->dist, aimAngle);
             z = state->currentPos.z;
             x = state->currentPos.x;
             y = state->currentPos.y;

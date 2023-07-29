@@ -962,7 +962,7 @@ void render_npcs(void) {
                     renderDist = 10000.0f;
                 }
 
-                renderTaskPtr->distance = -renderDist;
+                renderTaskPtr->dist = -renderDist;
                 renderTaskPtr->appendGfxArg = npc;
                 renderTaskPtr->appendGfx = appendGfx_npc;
                 renderTaskPtr->renderMode = npc->renderMode;
@@ -980,7 +980,7 @@ void render_npcs(void) {
                 }
 
                 if (npc->flags & NPC_FLAG_MOTION_BLUR) {
-                    renderTaskPtr->distance = -renderDist;
+                    renderTaskPtr->dist = -renderDist;
                     renderTaskPtr->appendGfx = appendGfx_npc_blur;
                     renderTaskPtr->appendGfxArg = npc;
                     renderTaskPtr->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;

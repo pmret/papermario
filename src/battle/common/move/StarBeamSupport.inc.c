@@ -404,9 +404,9 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
             } else {
                 N(effect) = fx_peach_star_beam(1, currentPosX, currentPosY, currentPosZ, 1.0f, 0);
             }
-            playerState->distance = 48.0f;
+            playerState->dist = 48.0f;
             N(effect)->data.peachStarBeam->unk_3C = 0;
-            N(effect)->data.peachStarBeam->circleRadius = playerState->distance;
+            N(effect)->data.peachStarBeam->circleRadius = playerState->dist;
             N(effect)->data.peachStarBeam->beamAlpha = 0;
             N(effect)->data.peachStarBeam->twinkYOffset = 30.0f;
             N(effect)->data.peachStarBeam->rotSpeed = 5.0f;
@@ -428,7 +428,7 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
             N(effect)->data.peachStarBeam->circleCenter.y = playerState->currentPos.y;
             N(effect)->data.peachStarBeam->circleCenter.z = playerState->currentPos.z;
             N(effect)->data.peachStarBeam->unk_3C = 0;
-            N(effect)->data.peachStarBeam->circleRadius = playerState->distance;
+            N(effect)->data.peachStarBeam->circleRadius = playerState->dist;
             N(effect)->data.peachStarBeam->beamAlpha = 0;
             if (script->functionTemp[1] == 0) {
                 script->functionTemp[1] = 20;
@@ -448,8 +448,8 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
             }
             break;
         case PEACH_STAR_BEAM_SHRINK_CIRCLE:
-            playerState->distance += (24.0f - playerState->distance) * 0.125f;
-            N(effect)->data.peachStarBeam->circleRadius = playerState->distance;
+            playerState->dist += (24.0f - playerState->dist) * 0.125f;
+            N(effect)->data.peachStarBeam->circleRadius = playerState->dist;
             if (script->functionTemp[1] == 0) {
                 playerState->goalPos.x = targetPosX;
                 playerState->goalPos.y = targetPosY;
@@ -470,8 +470,8 @@ API_CALLABLE(N(ProcessPeachStarBeam)) {
             break;
         case PEACH_STAR_BEAM_FLY_TO_TARGET:
             cond = FALSE;
-            playerState->distance += (48.0f - playerState->distance) * 0.25f;
-            N(effect)->data.peachStarBeam->circleRadius = playerState->distance;
+            playerState->dist += (48.0f - playerState->dist) * 0.25f;
+            N(effect)->data.peachStarBeam->circleRadius = playerState->dist;
             for (i = 0; i < 2; i++) {
                 if (i != 0) {
                     spirit = &effectData->spirits[i];

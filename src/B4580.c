@@ -712,7 +712,7 @@ void render_animated_model(s32 animatorID, Mtx* rootTransform) {
             animator->baseAddr = NULL;
             rtPtr->appendGfxArg = animator;
             rtPtr->appendGfx = (void (*)(void*))appendGfx_animator;
-            rtPtr->distance = 0;
+            rtPtr->dist = 0;
             rtPtr->renderMode = animator->renderMode;
             queue_render_task(rtPtr);
         }
@@ -736,7 +736,7 @@ void render_animated_model_with_vertices(s32 animatorID, Mtx* rootTransform, s32
             animator->baseAddr = baseAddr;
             rtPtr->appendGfxArg = animator;
             rtPtr->appendGfx = (void (*)(void*))appendGfx_animator;
-            rtPtr->distance = 0;
+            rtPtr->dist = 0;
             rtPtr->renderMode = animator->renderMode;
             queue_render_task(rtPtr);
         }

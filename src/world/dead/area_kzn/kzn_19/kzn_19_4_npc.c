@@ -337,7 +337,7 @@ void N(worker_render_piranha_vines)(void) {
 
     renderTask.appendGfx = &N(appendGfx_piranha_vines);
     renderTask.appendGfxArg = 0;
-    renderTask.distance = 10;
+    renderTask.dist = 10;
     renderTask.renderMode = RENDER_MODE_SURFACE_OPA;
 
     queue_render_task(&renderTask);

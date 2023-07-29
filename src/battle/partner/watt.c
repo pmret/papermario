@@ -254,7 +254,7 @@ API_CALLABLE(N(TurboChargeUnwindWatt)) {
     switch (script->functionTemp[0]) {
         case 0:
             script->functionTemp[2] = evt_get_variable(script, *args++);
-            partner->state.distance = dist2D(player->currentPos.x, player->currentPos.y, partner->currentPos.x, partner->currentPos.y);
+            partner->state.dist = dist2D(player->currentPos.x, player->currentPos.y, partner->currentPos.x, partner->currentPos.y);
 
             partner->state.goalPos.x = player->currentPos.x;
             partner->state.goalPos.y = player->currentPos.y + 36.0f;
@@ -278,8 +278,8 @@ API_CALLABLE(N(TurboChargeUnwindWatt)) {
             partner->state.vel += partner->state.acceleration;
             angle = partner->state.angle;
             angle += partner->state.vel;
-            deltaX = partner->state.distance * sinTheta;
-            deltaY = -partner->state.distance * cosTheta;
+            deltaX = partner->state.dist * sinTheta;
+            deltaY = -partner->state.dist * cosTheta;
             partner->state.currentPos.x = partner->state.goalPos.x + deltaX;
             partner->state.currentPos.y = partner->state.goalPos.y + deltaY;
             partner->state.angle = angle;
@@ -294,11 +294,11 @@ API_CALLABLE(N(TurboChargeUnwindWatt)) {
             theta = DEG_TO_RAD(partner->state.angle);
             sinTheta = sin_rad(theta);
             cosTheta = cos_rad(theta);
-            distance = partner->state.distance;
+            distance = partner->state.dist;
             angle = partner->state.angle;
             angle += partner->state.vel;
-            deltaX = partner->state.distance * sinTheta;
-            deltaY = -partner->state.distance * cosTheta;
+            deltaX = partner->state.dist * sinTheta;
+            deltaY = -partner->state.dist * cosTheta;
             partner->state.currentPos.x = partner->state.goalPos.x + deltaX;
             partner->state.currentPos.y = partner->state.goalPos.y + deltaY;
             partner->state.angle = angle;

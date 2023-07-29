@@ -178,7 +178,7 @@ void static_status_render(EffectInstance* effect) {
 
     renderTask.appendGfx = static_status_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 10;
+    renderTask.dist = 10;
     renderTask.renderMode = RENDER_MODE_SURFACE_OPA;
 
     retTask = queue_render_task(&renderTask);

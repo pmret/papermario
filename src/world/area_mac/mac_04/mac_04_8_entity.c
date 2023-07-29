@@ -33,7 +33,7 @@ void N(render_shrunk_player)(void) {
     renderTask.appendGfxArg = &gPlayerStatus;
     renderTask.appendGfx = N(appendGfx_shrunk_player);
     renderTask.renderMode = gPlayerStatus.renderMode;
-    renderTask.distance = screenZ;
+    renderTask.dist = screenZ;
 
     queue_render_task(&renderTask);
 }

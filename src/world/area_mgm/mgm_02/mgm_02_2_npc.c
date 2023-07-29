@@ -197,7 +197,7 @@ void N(worker_draw_score)(void) {
     task.renderMode = RENDER_MODE_2D;
     task.appendGfxArg = 0;
     task.appendGfx = &N(appendGfx_score_display);
-    task.distance = 0;
+    task.dist = 0;
 
     queue_render_task(&task);
 }

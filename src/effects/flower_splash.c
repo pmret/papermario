@@ -131,7 +131,7 @@ void flower_splash_render(EffectInstance* effect) {
 
     renderTask.appendGfx = flower_splash_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 0;
+    renderTask.dist = 0;
     renderTask.renderMode = RENDER_MODE_28;
 
     retTask = queue_render_task(&renderTask);

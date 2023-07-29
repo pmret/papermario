@@ -110,7 +110,7 @@ void snowflake_render(EffectInstance* effect) {
 
     renderTaskPtr->appendGfx = &snowflake_appendGfx;
     renderTaskPtr->appendGfxArg = effect;
-    renderTaskPtr->distance = 0;
+    renderTaskPtr->dist = 0;
     renderTaskPtr->renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(renderTaskPtr);

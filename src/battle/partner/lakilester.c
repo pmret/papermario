@@ -436,7 +436,7 @@ API_CALLABLE(N(SpinyFlipActionCommand)) {
             partnerState->goalPos.x += part->projectileTargetOffset.x;
             partnerState->goalPos.y += part->projectileTargetOffset.y;
             partnerState->goalPos.z = partnerState->goalPos.z; // required to match
-            partnerState->distance = dist2D(partnerState->currentPos.x,
+            partnerState->dist = dist2D(partnerState->currentPos.x,
                                             partnerState->currentPos.y,
                                             partnerState->goalPos.x,
                                             partnerState->goalPos.y);
@@ -547,8 +547,8 @@ API_CALLABLE(N(SpinyFlipActionCommand)) {
             script->varTable[7] = partnerState->currentPos.x;
             script->varTable[8] = partnerState->currentPos.y;
             script->varTable[9] = partnerState->currentPos.z;
-            partnerState->distance = dist2D(partnerState->currentPos.x, partnerState->currentPos.y, partnerState->goalPos.x, partnerState->goalPos.y) / partnerState->unk_24;
-            if (partnerState->distance <= 12.0) {
+            partnerState->dist = dist2D(partnerState->currentPos.x, partnerState->currentPos.y, partnerState->goalPos.x, partnerState->goalPos.y) / partnerState->unk_24;
+            if (partnerState->dist <= 12.0) {
                 script->varTable[15] = 1;
             }
             hud_element_free(hudAimTarget);

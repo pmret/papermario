@@ -144,7 +144,7 @@ void ice_pillar_render(EffectInstance* effect) {
 
     renderTask.appendGfx = ice_pillar_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 5;
+    renderTask.dist = 5;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);

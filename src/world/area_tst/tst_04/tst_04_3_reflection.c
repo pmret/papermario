@@ -33,7 +33,7 @@ void N(worker_render_player_reflection)(void) {
         renderTaskPtr->renderMode = playerStatus->renderMode;
         renderTaskPtr->appendGfxArg = playerStatus;
         renderTaskPtr->appendGfx = &N(appendGfx_test_player_reflection);
-        renderTaskPtr->distance = -screenZ;
+        renderTaskPtr->dist = -screenZ;
         queue_render_task(renderTaskPtr);
     }
 }

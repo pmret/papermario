@@ -1554,7 +1554,7 @@ void draw_item_entities(void) {
 
             rtPtr->appendGfxArg = item;
             rtPtr->appendGfx = appendGfx_item_entity;
-            rtPtr->distance = 0;
+            rtPtr->dist = 0;
 
             retTask = queue_render_task(rtPtr);
             retTask->renderMode |= RENDER_TASK_FLAG_REFLECT_FLOOR;

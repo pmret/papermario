@@ -112,7 +112,7 @@ void stars_spread_render(EffectInstance* effect) {
 
     renderTask.appendGfx = stars_spread_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 0;
+    renderTask.dist = 0;
     renderTask.renderMode = RENDER_MODE_28;
 
     retTask = queue_render_task(&renderTask);

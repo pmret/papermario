@@ -118,7 +118,7 @@ void ending_decals_render(EffectInstance* effect) {
 
     renderTask.appendGfxArg = effect;
     renderTask.appendGfx = ending_decals_appendGfx;
-    renderTask.distance = 10;
+    renderTask.dist = 10;
     if (data->type == 0) {
         renderTaskPtr->renderMode = RENDER_MODE_SURFACE_OPA;
     } else {

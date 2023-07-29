@@ -190,7 +190,7 @@ void star_render(EffectInstance* effect) {
 
     renderTask.appendGfxArg = effect;
     renderTask.appendGfx = star_appendGfx;
-    renderTask.distance = 0;
+    renderTask.dist = 0;
     if (effect15->unk_38 != 0) {
         renderModeTemp = RENDER_MODE_2D;
     } else {

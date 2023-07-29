@@ -168,7 +168,7 @@ void stop_watch_render(EffectInstance* effect) {
 
     renderTask.appendGfx = stop_watch_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 10;
+    renderTask.dist = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);

@@ -98,7 +98,7 @@ void N(worker_draw_example_player)(void) {
 
         get_screen_coords(gCurrentCamID, npc->pos.x, npc->pos.y, -npc->pos.z, &x, &y, &z);
         rtPtr->renderMode = npc->renderMode;
-        rtPtr->distance = -z;
+        rtPtr->dist = -z;
         rtPtr->appendGfxArg = npc;
         rtPtr->appendGfx = N(appendGfx_example_player);
         queue_render_task(rtPtr);

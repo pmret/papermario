@@ -211,7 +211,7 @@ void firework_rocket_render(EffectInstance* effect) {
 
     renderTask.appendGfx = firework_rocket_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 700;
+    renderTask.dist = 700;
     renderTask.renderMode =  RENDER_MODE_SURFACE_OPA;
 
     retTask = queue_render_task(&renderTask);

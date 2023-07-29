@@ -156,9 +156,9 @@ void lightning_bolt_render(EffectInstance *effect) {
     renderTask.appendGfx = lightning_bolt_appendGfx;
     renderTask.appendGfxArg = effect;
     if (gGameStatusPtr->isBattle == TRUE) {
-        renderTask.distance = data->tipPos.z + 1000.0f;
+        renderTask.dist = data->tipPos.z + 1000.0f;
     } else {
-        renderTask.distance = 10;
+        renderTask.dist = 10;
     }
 
     renderTaskPointer->renderMode = RENDER_MODE_2D;

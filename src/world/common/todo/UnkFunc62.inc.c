@@ -46,13 +46,13 @@ API_CALLABLE(N(UnkFunc62)) {
         stateCurrentZ = actor->currentPos.z;
         state->currentPos.z = stateCurrentZ;
         state->angle = atan2(stateCurrentX, stateCurrentZ, stateGoalX, stateGoalZ);
-        state->distance = dist2D(stateCurrentX, stateCurrentZ, stateGoalX, stateGoalZ);
+        state->dist = dist2D(stateCurrentX, stateCurrentZ, stateGoalX, stateGoalZ);
         if (state->moveTime == 0) {
-            state->moveTime = state->distance / state->speed;
-            phi_f8 = state->distance - (state->moveTime * state->speed);
+            state->moveTime = state->dist / state->speed;
+            phi_f8 = state->dist - (state->moveTime * state->speed);
         } else {
-            state->speed = state->distance / state->moveTime;
-            phi_f8 = state->distance - (state->moveTime * state->speed);
+            state->speed = state->dist / state->moveTime;
+            phi_f8 = state->dist - (state->moveTime * state->speed);
         }
 
         if (state->moveTime == 0) {
@@ -69,7 +69,7 @@ API_CALLABLE(N(UnkFunc62)) {
         if (state->moveArcAmplitude < 3) {
             state->unk_24 = 90.0f;
             state->unk_28 = 360 / state->moveTime;
-            phi_f8 = state->distance;
+            phi_f8 = state->dist;
             phi_f8 -= 20.0;
             phi_f8 /= 6.0;
             phi_f8 += 47.0;
@@ -87,7 +87,7 @@ API_CALLABLE(N(UnkFunc62)) {
         } else {
             state->unk_24 = 90.0f;
             state->unk_28 = 360 / state->moveTime;
-            phi_f8 = state->distance;
+            phi_f8 = state->dist;
             phi_f8 -= 20.0;
             phi_f8 /= 6.0;
             phi_f8 += 47.0;

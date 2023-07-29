@@ -168,9 +168,9 @@ void fire_breath_render(EffectInstance* effect) {
     renderTask.appendGfxArg = effect;
 
     if (gGameStatusPtr->isBattle == TRUE) {
-        renderTask.distance = data->pos.z + 1000.0f;
+        renderTask.dist = data->pos.z + 1000.0f;
     } else {
-        renderTask.distance = 0;
+        renderTask.dist = 0;
     }
 
     renderTaskPointer->renderMode = RENDER_MODE_2D;

@@ -1054,7 +1054,7 @@ ApiStatus JumpToGoal(Evt* script, s32 isInitialCall) {
         goalY = actorState->goalPos.y;
         goalZ = actorState->goalPos.z;
         actorState->angle = atan2(posX, posZ, goalX, goalZ);
-        actorState->distance = dist2D(posX, posZ, goalX, goalZ);
+        actorState->dist = dist2D(posX, posZ, goalX, goalZ);
 
         // make relative
         posX = (goalX - posX);
@@ -1062,11 +1062,11 @@ ApiStatus JumpToGoal(Evt* script, s32 isInitialCall) {
         posZ = (goalZ - posZ);
 
         if (actorState->moveTime == 0) {
-            actorState->moveTime = actorState->distance / actorState->speed;
-            moveDist = actorState->distance - (actorState->moveTime * actorState->speed);
+            actorState->moveTime = actorState->dist / actorState->speed;
+            moveDist = actorState->dist - (actorState->moveTime * actorState->speed);
         } else {
-            actorState->speed = actorState->distance / actorState->moveTime;
-            moveDist = actorState->distance - (actorState->moveTime * actorState->speed);
+            actorState->speed = actorState->dist / actorState->moveTime;
+            moveDist = actorState->dist - (actorState->moveTime * actorState->speed);
         }
 
         if (actorState->moveTime == 0) {
@@ -1159,7 +1159,7 @@ ApiStatus IdleJumpToGoal(Evt* script, s32 isInitialCall) {
         goalY = movement->goalPos.y;
         goalZ = movement->goalPos.z;
         movement->angle = atan2(posX, posZ, goalX, goalZ);
-        movement->distance = dist2D(posX, posZ, goalX, goalZ);
+        movement->dist = dist2D(posX, posZ, goalX, goalZ);
 
         // make relative
         posX = (goalX - posX);
@@ -1167,11 +1167,11 @@ ApiStatus IdleJumpToGoal(Evt* script, s32 isInitialCall) {
         posZ = (goalZ - posZ);
 
         if (movement->flyTime == 0) {
-            movement->flyTime = movement->distance / movement->speed;
-            moveDist = movement->distance - (movement->flyTime * movement->speed);
+            movement->flyTime = movement->dist / movement->speed;
+            moveDist = movement->dist - (movement->flyTime * movement->speed);
         } else {
-            movement->speed = movement->distance / movement->flyTime;
-            moveDist = movement->distance - (movement->flyTime * movement->speed);
+            movement->speed = movement->dist / movement->flyTime;
+            moveDist = movement->dist - (movement->flyTime * movement->speed);
         }
 
         if (movement->flyTime == 0) {
@@ -1244,7 +1244,7 @@ ApiStatus JumpToGoalSimple2(Evt* script, s32 isInitialCall) {
         goalY = state->goalPos.y;
         goalZ = state->goalPos.z;
         state->angle = atan2(posX, posZ, goalX, goalZ);
-        state->distance = dist2D(posX, posZ, goalX, goalZ);
+        state->dist = dist2D(posX, posZ, goalX, goalZ);
 
         // make relative (note: negated)
         posX = (posX - goalX);
@@ -1252,11 +1252,11 @@ ApiStatus JumpToGoalSimple2(Evt* script, s32 isInitialCall) {
         posZ = (posZ - goalZ);
 
         if (state->moveTime == 0) {
-            state->moveTime = state->distance / state->speed;
-            moveDist = state->distance - (state->moveTime * state->speed);
+            state->moveTime = state->dist / state->speed;
+            moveDist = state->dist - (state->moveTime * state->speed);
         } else {
-            state->speed = state->distance / state->moveTime;
-            moveDist = state->distance - (state->moveTime * state->speed);
+            state->speed = state->dist / state->moveTime;
+            moveDist = state->dist - (state->moveTime * state->speed);
         }
 
         if (state->moveTime == 0) {
@@ -1331,7 +1331,7 @@ ApiStatus JumpWithBounce(Evt* script, s32 isInitialCall) {
         goalZ = actorState->goalPos.z;
         goalY = actorState->goalPos.y;
         actorState->angle = atan2(posX, posZ, goalX, goalZ);
-        actorState->distance = dist2D(posX, posZ, goalX, goalZ);
+        actorState->dist = dist2D(posX, posZ, goalX, goalZ);
 
         // make relative
         posX = (goalX - posX);
@@ -1339,11 +1339,11 @@ ApiStatus JumpWithBounce(Evt* script, s32 isInitialCall) {
         posZ = (goalZ - posZ);
 
         if (actorState->moveTime == 0) {
-            actorState->moveTime = (s32) (actorState->distance / actorState->speed);
-            moveDist = actorState->distance - (actorState->moveTime * actorState->speed);
+            actorState->moveTime = (s32) (actorState->dist / actorState->speed);
+            moveDist = actorState->dist - (actorState->moveTime * actorState->speed);
         } else {
-            actorState->speed = actorState->distance / actorState->moveTime;
-            moveDist = actorState->distance - (actorState->moveTime * actorState->speed);
+            actorState->speed = actorState->dist / actorState->moveTime;
+            moveDist = actorState->dist - (actorState->moveTime * actorState->speed);
         }
 
         if (actorState->moveTime == 0) {
@@ -1474,7 +1474,7 @@ ApiStatus FallToGoal(Evt* script, s32 isInitialCall) {
         goalZ = actor->state.goalPos.z;
 
         actor->state.angle = atan2(posX, posZ, goalX, goalZ);
-        actor->state.distance = dist2D(posX, posZ, goalX, goalZ);
+        actor->state.dist = dist2D(posX, posZ, goalX, goalZ);
 
         // make relative
         posX = (goalX - posX);
@@ -1482,9 +1482,9 @@ ApiStatus FallToGoal(Evt* script, s32 isInitialCall) {
         posZ = (goalZ - posZ);
 
         if (actor->state.moveTime == 0) {
-            actor->state.moveTime = actor->state.distance / actor->state.speed;
+            actor->state.moveTime = actor->state.dist / actor->state.speed;
         } else {
-            actor->state.speed = actor->state.distance / actor->state.moveTime;
+            actor->state.speed = actor->state.dist / actor->state.moveTime;
         }
 
         state->vel = 0.0f;
@@ -1555,22 +1555,22 @@ ApiStatus RunToGoal(Evt* script, s32 isInitialCall) {
         actorState->unk_18.z = goalZ;
 
         actorState->angle = atan2(posX, posZ, goalX, goalZ);
-        actorState->distance = dist2D(posX, posZ, goalX, goalZ);
+        actorState->dist = dist2D(posX, posZ, goalX, goalZ);
 
         if (actorState->moveTime == 0) {
-            actorState->moveTime = actorState->distance / actorState->speed;
+            actorState->moveTime = actorState->dist / actorState->speed;
             if (actorState->moveTime == 0) {
                 actorState->moveTime = 1;
             }
-            actorState->speed += (actorState->distance - (actorState->moveTime * actorState->speed)) / actorState->moveTime;
+            actorState->speed += (actorState->dist - (actorState->moveTime * actorState->speed)) / actorState->moveTime;
         } else {
-            actorState->speed = actorState->distance / actorState->moveTime;
+            actorState->speed = actorState->dist / actorState->moveTime;
         }
 
         if (actor->actorTypeData1b[0] >= 0) {
-            actorState->distance = actor->actorTypeData1b[0] + 1;
+            actorState->dist = actor->actorTypeData1b[0] + 1;
         } else {
-            actorState->distance = ~actor->actorTypeData1b[0]; //TODO optimization?
+            actorState->dist = ~actor->actorTypeData1b[0]; //TODO optimization?
         }
         if ((actor->actorTypeData1[0] != 0) && (actor->actorTypeData1[1] == 0)) {
             sfx_play_sound_at_position(actor->actorTypeData1[0], SOUND_SPACE_MODE_0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
@@ -1594,10 +1594,10 @@ ApiStatus RunToGoal(Evt* script, s32 isInitialCall) {
 
     if ((actor->actorTypeData1[0] != 0) && (actor->actorTypeData1[1] != 0)) {
         if (actor->actorTypeData1b[0] >= 0) {
-            actorState->distance += actorState->speed;
-            if (actor->actorTypeData1b[0] < actorState->distance) {
+            actorState->dist += actorState->speed;
+            if (actor->actorTypeData1b[0] < actorState->dist) {
                 actor->footStepCounter++;
-                actorState->distance = 0.0f;
+                actorState->dist = 0.0f;
                 if (actor->footStepCounter & 1) {
                     if (actor->actorTypeData1[0] != 0) {
                         sfx_play_sound_at_position(actor->actorTypeData1[0], SOUND_SPACE_MODE_0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
@@ -1609,10 +1609,10 @@ ApiStatus RunToGoal(Evt* script, s32 isInitialCall) {
                 }
             }
         } else {
-            actorState->distance += 1.0f;
-            if (-actor->actorTypeData1b[0] <= actorState->distance) {
+            actorState->dist += 1.0f;
+            if (-actor->actorTypeData1b[0] <= actorState->dist) {
                 actor->footStepCounter++;
-                actorState->distance = 0.0f;
+                actorState->dist = 0.0f;
                 if (actor->footStepCounter & 1) {
                     if (actor->actorTypeData1[0] != 0) {
                         sfx_play_sound_at_position(actor->actorTypeData1[0], SOUND_SPACE_MODE_0, actor->currentPos.x, actor->currentPos.y, actor->currentPos.z);
@@ -1680,23 +1680,23 @@ ApiStatus IdleRunToGoal(Evt* script, s32 isInitialCall) {
         movement->unk_18.z = goalZ;
 
         movement->angle = atan2(posX, posZ, goalX, goalZ);
-        movement->distance = dist2D(posX, posZ, goalX, goalZ);
+        movement->dist = dist2D(posX, posZ, goalX, goalZ);
 
         if (movement->flyTime == 0) {
-            movement->flyTime = movement->distance / movement->speed;
+            movement->flyTime = movement->dist / movement->speed;
             if (movement->flyTime == 0) {
                 movement->flyTime = 1;
             }
             // this simplifies to: flyMotion->speed = flyMotion->distance / flyMotion->flyTime
-            movement->speed += (movement->distance - movement->flyTime * movement->speed) / movement->flyTime;
+            movement->speed += (movement->dist - movement->flyTime * movement->speed) / movement->flyTime;
         } else {
-            movement->speed = movement->distance / movement->flyTime;
+            movement->speed = movement->dist / movement->flyTime;
         }
 
         if (actor->actorTypeData1b[0] >= 0) {
-            movement->distance = actor->actorTypeData1b[0] + 1;
+            movement->dist = actor->actorTypeData1b[0] + 1;
         } else {
-            movement->distance = ~actor->actorTypeData1b[0];
+            movement->dist = ~actor->actorTypeData1b[0];
         }
         script->functionTemp[0] = TRUE;
     }
@@ -1775,7 +1775,7 @@ ApiStatus JumpPartTo(Evt* script, s32 isInitialCall) {
         posZ = movement->absolutePos.z;
 
         movement->angle = atan2(posX, posZ, goalX, goalZ);
-        movement->distance = dist2D(posX, posZ, goalX, goalZ);
+        movement->dist = dist2D(posX, posZ, goalX, goalZ);
 
         // make relative
         posX = (goalX - posX);
@@ -1783,11 +1783,11 @@ ApiStatus JumpPartTo(Evt* script, s32 isInitialCall) {
         posZ = (goalZ - posZ);
 
         if (movement->moveTime == 0) {
-            movement->moveTime = movement->distance / movement->moveSpeed;
-            deltaDist = movement->distance - movement->moveTime * movement->moveSpeed;
+            movement->moveTime = movement->dist / movement->moveSpeed;
+            deltaDist = movement->dist - movement->moveTime * movement->moveSpeed;
         } else {
-            movement->moveSpeed = movement->distance / movement->moveTime;
-            deltaDist = movement->distance - movement->moveTime * movement->moveSpeed;
+            movement->moveSpeed = movement->dist / movement->moveTime;
+            deltaDist = movement->dist - movement->moveTime * movement->moveSpeed;
         }
         movement->moveSpeed += deltaDist / movement->moveTime;
         movement->unk_2C = movement->jumpScale * movement->moveTime * 0.5f + posY / movement->moveTime;
@@ -1867,7 +1867,7 @@ ApiStatus FallPartTo(Evt* script, s32 isInitialCall) {
         posZ = movement->absolutePos.z;
 
         movement->angle = atan2(posX, posZ, goalX, goalZ);
-        movement->distance = dist2D(posX, posZ, goalX, goalZ);
+        movement->dist = dist2D(posX, posZ, goalX, goalZ);
 
         // make relative
         posX = (goalX - posX);
@@ -1875,9 +1875,9 @@ ApiStatus FallPartTo(Evt* script, s32 isInitialCall) {
         posZ = (goalZ - posZ);
 
         if (movement->moveTime == 0) {
-            movement->moveTime = movement->distance / movement->moveSpeed;
+            movement->moveTime = movement->dist / movement->moveSpeed;
         } else {
-            movement->moveSpeed = movement->distance / movement->moveTime;
+            movement->moveSpeed = movement->dist / movement->moveTime;
         }
 
         movement->unk_2C = 0.0f;
@@ -2004,17 +2004,17 @@ ApiStatus RunPartTo(Evt* script, s32 isInitialCall) {
         posZ = movement->absolutePos.z;
 
         movement->angle = atan2(posX, posZ, goalX, goalZ);
-        movement->distance = dist2D(posX, posZ, goalX, goalZ);
+        movement->dist = dist2D(posX, posZ, goalX, goalZ);
 
         if (movement->moveTime == 0) {
-            movement->moveTime = movement->distance / movement->moveSpeed;
+            movement->moveTime = movement->dist / movement->moveSpeed;
         } else {
-            movement->moveSpeed = movement->distance / movement->moveTime;
+            movement->moveSpeed = movement->dist / movement->moveTime;
         }
         if (part->actorTypeData2b[0] >= 0) {
-            movement->distance = part->actorTypeData2b[0] + 1;
+            movement->dist = part->actorTypeData2b[0] + 1;
         } else {
-            movement->distance = ~part->actorTypeData2b[0];
+            movement->dist = ~part->actorTypeData2b[0];
         }
         if (part->partTypeData[0] != 0 && part->partTypeData[1] == 0) {
             sfx_play_sound_at_position(part->partTypeData[0], SOUND_SPACE_MODE_0, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
@@ -2038,10 +2038,10 @@ ApiStatus RunPartTo(Evt* script, s32 isInitialCall) {
 
     if (part->partTypeData[0] != 0 && part->partTypeData[1] != 0) {
         if (part->actorTypeData2b[0] >= 0) {
-            movement->distance += movement->moveSpeed;
-            if (part->actorTypeData2b[0] < movement->distance) {
+            movement->dist += movement->moveSpeed;
+            if (part->actorTypeData2b[0] < movement->dist) {
                 actor->footStepCounter++;
-                movement->distance = 0;
+                movement->dist = 0;
                 if (actor->footStepCounter % 2 != 0) {
                     if (part->partTypeData[0] != 0) {
                         sfx_play_sound_at_position(part->partTypeData[0], SOUND_SPACE_MODE_0, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
@@ -2053,10 +2053,10 @@ ApiStatus RunPartTo(Evt* script, s32 isInitialCall) {
                 }
             }
         } else {
-            movement->distance += 1.0f;
-            if (-part->actorTypeData2b[0] <= movement->distance) {
+            movement->dist += 1.0f;
+            if (-part->actorTypeData2b[0] <= movement->dist) {
                 actor->footStepCounter++;
-                movement->distance = 0;
+                movement->dist = 0;
                 if (actor->footStepCounter % 2 != 0) {
                     if (part->partTypeData[0] != 0) {
                         sfx_play_sound_at_position(part->partTypeData[0], SOUND_SPACE_MODE_0, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
@@ -2195,12 +2195,12 @@ ApiStatus FlyToGoal(Evt* script, s32 isInitialCall) {
         actorState->currentPos.z = posZ;
         actorState->unk_18.z = posZ;
 
-        actorState->distance = sqrtf(SQ(deltaX) + SQ(deltaY) + SQ(deltaZ));
+        actorState->dist = sqrtf(SQ(deltaX) + SQ(deltaY) + SQ(deltaZ));
 
         if (actorState->moveTime == 0) {
-            actorState->moveTime = actorState->distance / actorState->speed;
+            actorState->moveTime = actorState->dist / actorState->speed;
         } else {
-            actorState->speed = actorState->distance / actorState->moveTime;
+            actorState->speed = actorState->dist / actorState->moveTime;
         }
         if (actorState->moveTime == 0) {
             return ApiStatus_DONE2;
@@ -2283,10 +2283,10 @@ ApiStatus FlyToGoal(Evt* script, s32 isInitialCall) {
     if (dist3D == 0.0f) {
         dist3D = 1.0f;
     }
-    if (actorState->distance == 0.0f) {
-        actorState->distance = 1.0f;
+    if (actorState->dist == 0.0f) {
+        actorState->dist = 1.0f;
     }
-    offsetY = sin_deg((1.0 - (dist3D / actorState->distance)) * 180.0);
+    offsetY = sin_deg((1.0 - (dist3D / actorState->dist)) * 180.0);
     if (actorState->moveArcAmplitude == 0) {
         offsetY = 0.0f;
     }
@@ -2344,12 +2344,12 @@ ApiStatus IdleFlyToGoal(Evt* script, s32 isInitialCall) {
         movement->currentPos.z = posZ;
         movement->unk_18.z = posZ;
 
-        movement->distance = sqrtf(SQ(deltaX) + SQ(deltaY) + SQ(deltaZ));
+        movement->dist = sqrtf(SQ(deltaX) + SQ(deltaY) + SQ(deltaZ));
 
         if (movement->flyTime == 0) {
-            movement->flyTime = movement->distance / movement->speed;
+            movement->flyTime = movement->dist / movement->speed;
         } else {
-            movement->speed = movement->distance / movement->flyTime;
+            movement->speed = movement->dist / movement->flyTime;
         }
         if (movement->flyTime == 0) {
             return ApiStatus_DONE2;
@@ -2382,11 +2382,11 @@ ApiStatus IdleFlyToGoal(Evt* script, s32 isInitialCall) {
     if (dist3D == 0.0f) {
         dist3D = 1.0f;
     }
-    if (movement->distance == 0.0f) {
-        movement->distance = 1.0f;
+    if (movement->dist == 0.0f) {
+        movement->dist = 1.0f;
     }
 
-    offsetY = sin_deg((1.0 - (dist3D / movement->distance)) * 180.0);
+    offsetY = sin_deg((1.0 - (dist3D / movement->dist)) * 180.0);
     if (movement->flyArcAmplitude == 0) {
         offsetY = 0.0f;
     }
@@ -2455,12 +2455,12 @@ ApiStatus FlyPartTo(Evt* script, s32 isInitialCall) {
         partMovement->absolutePos.z = posZ;
         partMovement->unk_18.z = posZ;
 
-        partMovement->distance = sqrtf(SQ(deltaX) + SQ(deltaY) + SQ(deltaZ));
+        partMovement->dist = sqrtf(SQ(deltaX) + SQ(deltaY) + SQ(deltaZ));
 
         if (partMovement->moveTime == 0) {
-            partMovement->moveTime = partMovement->distance / partMovement->moveSpeed;
+            partMovement->moveTime = partMovement->dist / partMovement->moveSpeed;
         } else {
-            partMovement->moveSpeed = partMovement->distance / partMovement->moveTime;
+            partMovement->moveSpeed = partMovement->dist / partMovement->moveTime;
         }
 
         if (partMovement->moveTime == 0) {
@@ -2539,11 +2539,11 @@ ApiStatus FlyPartTo(Evt* script, s32 isInitialCall) {
     if (dist3D == 0.0f) {
         dist3D = 1.0f;
     }
-    if (partMovement->distance == 0.0f) {
-        partMovement->distance = 1.0f;
+    if (partMovement->dist == 0.0f) {
+        partMovement->dist = 1.0f;
     }
 
-    offsetY = sin_deg((1.0 - dist3D / partMovement->distance) * 180.0);
+    offsetY = sin_deg((1.0 - dist3D / partMovement->dist) * 180.0);
     if (partMovement->unk_3A == 0) {
         offsetY = 0.0f;
     }

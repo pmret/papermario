@@ -135,7 +135,7 @@ void flame_render(EffectInstance* effect) {
     }
 
     renderTaskPtr->appendGfx = flame_appendGfx;
-    renderTaskPtr->distance = -outDist;
+    renderTaskPtr->dist = -outDist;
     renderTaskPtr->appendGfxArg = effect;
     renderTaskPtr->renderMode = RENDER_MODE_SURFACE_XLU_LAYER1;
 

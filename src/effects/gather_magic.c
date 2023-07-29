@@ -144,7 +144,7 @@ void gather_magic_render(EffectInstance* effect) {
 
     renderTask.appendGfx = gather_magic_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 10;
+    renderTask.dist = 10;
     renderTask.renderMode = RENDER_MODE_SURFACE_XLU_LAYER3;
 
     retTask = queue_render_task(&renderTask);

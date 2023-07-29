@@ -223,7 +223,7 @@ void windy_leaves_render(EffectInstance* effect) {
 
     renderTask.appendGfx = windy_leaves_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 0;
+    renderTask.dist = 0;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);

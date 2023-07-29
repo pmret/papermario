@@ -636,14 +636,14 @@ void btl_render_actors(void) {
                     if (actor != NULL && !(actor->flags & ACTOR_FLAG_DISABLED)) {
                         renderTaskPtr->appendGfxArg = (void*)i;
                         renderTaskPtr->appendGfx = appendGfx_enemy_actor;
-                        renderTaskPtr->distance = actor->currentPos.z;
+                        renderTaskPtr->dist = actor->currentPos.z;
                         renderTaskPtr->renderMode = actor->renderMode;
                         queue_render_task(renderTaskPtr);
 
                         if (actor->flags & ACTOR_FLAG_BLUR_ENABLED) {
                             renderTaskPtr->appendGfxArg = actor;
                             renderTaskPtr->appendGfx = appendGfx_enemy_actor_blur;
-                            renderTaskPtr->distance = actor->currentPos.z;
+                            renderTaskPtr->dist = actor->currentPos.z;
                             renderTaskPtr->renderMode = RENDER_MODE_SURFACE_XLU_LAYER3;
                             queue_render_task(renderTaskPtr);
                         }
@@ -651,7 +651,7 @@ void btl_render_actors(void) {
                         if (battleStatus->reflectFlags & BS_REFLECT_FLOOR) {
                             renderTaskPtr->appendGfxArg = actor;
                             renderTaskPtr->appendGfx = appendGfx_enemy_actor_reflection;
-                            renderTaskPtr->distance = actor->currentPos.z;
+                            renderTaskPtr->dist = actor->currentPos.z;
                             renderTaskPtr->renderMode = actor->renderMode;
                             queue_render_task(renderTaskPtr);
                         }
@@ -662,14 +662,14 @@ void btl_render_actors(void) {
                 if (actor != NULL && !(actor->flags & ACTOR_FLAG_DISABLED)) {
                     renderTaskPtr->appendGfxArg = NULL;
                     renderTaskPtr->appendGfx = appendGfx_partner_actor;
-                    renderTaskPtr->distance = actor->currentPos.z;
+                    renderTaskPtr->dist = actor->currentPos.z;
                     renderTaskPtr->renderMode = actor->renderMode;
                     queue_render_task(renderTaskPtr);
 
                     if (actor->flags & ACTOR_FLAG_BLUR_ENABLED) {
                         renderTaskPtr->appendGfxArg = actor;
                         renderTaskPtr->appendGfx = appendGfx_partner_actor_blur;
-                        renderTaskPtr->distance = actor->currentPos.z;
+                        renderTaskPtr->dist = actor->currentPos.z;
                         renderTaskPtr->renderMode = RENDER_MODE_SURFACE_XLU_LAYER3;
                         queue_render_task(renderTaskPtr);
                     }
@@ -677,7 +677,7 @@ void btl_render_actors(void) {
                     if (battleStatus->reflectFlags & BS_REFLECT_FLOOR) {
                         renderTaskPtr->appendGfxArg = NULL;
                         renderTaskPtr->appendGfx = appendGfx_partner_actor_reflection;
-                        renderTaskPtr->distance = actor->currentPos.z;
+                        renderTaskPtr->dist = actor->currentPos.z;
                         renderTaskPtr->renderMode = actor->renderMode;
                         queue_render_task(renderTaskPtr);
                     }
@@ -687,14 +687,14 @@ void btl_render_actors(void) {
                 if (actor != NULL && !(actor->flags & ACTOR_FLAG_DISABLED)) {
                     renderTaskPtr->appendGfxArg = NULL;
                     renderTaskPtr->appendGfx = appendGfx_player_actor;
-                    renderTaskPtr->distance = actor->currentPos.z;
+                    renderTaskPtr->dist = actor->currentPos.z;
                     renderTaskPtr->renderMode = actor->renderMode;
                     queue_render_task(renderTaskPtr);
 
                     if (actor->flags & ACTOR_FLAG_BLUR_ENABLED) {
                         renderTaskPtr->appendGfxArg = actor;
                         renderTaskPtr->appendGfx = (void (*) (void*)) appendGfx_player_actor_blur;
-                        renderTaskPtr->distance = actor->currentPos.z;
+                        renderTaskPtr->dist = actor->currentPos.z;
                         renderTaskPtr->renderMode = RENDER_MODE_SURFACE_XLU_LAYER3;
                         queue_render_task(renderTaskPtr);
                     }
@@ -702,7 +702,7 @@ void btl_render_actors(void) {
                     if (battleStatus->reflectFlags & BS_REFLECT_FLOOR) {
                         renderTaskPtr->appendGfxArg = NULL;
                         renderTaskPtr->appendGfx = appendGfx_player_actor_reflection;
-                        renderTaskPtr->distance = actor->currentPos.z;
+                        renderTaskPtr->dist = actor->currentPos.z;
                         renderTaskPtr->renderMode = actor->renderMode;
                         queue_render_task(renderTaskPtr);
                     }

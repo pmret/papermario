@@ -437,7 +437,7 @@ void draw_entity_model_A(s32 modelIdx, Mtx* transformMtx) {
                             rtPtr->renderMode = model->renderMode;
                             rtPtr->appendGfxArg = model;
                             rtPtr->appendGfx = (void(*)(void*))appendGfx_entity_model;
-                            rtPtr->distance = ((u32)(model->flags & 0xF000) >> 8) + inZ;
+                            rtPtr->dist = ((u32)(model->flags & 0xF000) >> 8) + inZ;
                             queue_render_task(rtPtr);
                         }
                     }
@@ -476,7 +476,7 @@ void draw_entity_model_B(s32 modelIdx, Mtx* transformMtx, s32 vertexSegment, Vec
                             rtPtr->renderMode = model->renderMode;
                             rtPtr->appendGfxArg = model;
                             rtPtr->appendGfx = (void(*)(void*))appendGfx_entity_model;
-                            rtPtr->distance = ((u32)(model->flags & 0xF000) >> 8) + inZ;
+                            rtPtr->dist = ((u32)(model->flags & 0xF000) >> 8) + inZ;
                             queue_render_task(rtPtr);
                         }
                     }
@@ -506,7 +506,7 @@ void draw_entity_model_C(s32 modelIdx, Mtx* transformMtx) {
                             rtPtr->renderMode = model->renderMode;
                             rtPtr->appendGfxArg = model;
                             rtPtr->appendGfx = (void(*)(void*))appendGfx_entity_model;
-                            rtPtr->distance = (u32)(model->flags & 0xF000) >> 8;
+                            rtPtr->dist = (u32)(model->flags & 0xF000) >> 8;
                             queue_render_task(rtPtr);
                         }
                     }
@@ -537,7 +537,7 @@ void draw_entity_model_D(s32 modelIdx, Mtx* transformMtx, s32 arg2, Vec3s* verte
                             rtPtr->renderMode = model->renderMode;
                             rtPtr->appendGfxArg = model;
                             rtPtr->appendGfx = (void(*)(void*))appendGfx_entity_model;
-                            rtPtr->distance = (u32)(model->flags & 0xF000) >> 8;
+                            rtPtr->dist = (u32)(model->flags & 0xF000) >> 8;
                             queue_render_task(rtPtr);
                         }
                     }

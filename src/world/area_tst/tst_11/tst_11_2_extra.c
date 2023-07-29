@@ -31,7 +31,7 @@ void N(test_reflection_worker_render_wall)(void) {
         renderTaskPtr->renderMode = playerStatus->renderMode;
         renderTaskPtr->appendGfxArg = playerStatus;
         renderTaskPtr->appendGfx = &N(appendGfx_test_reflection_wall);
-        renderTaskPtr->distance = -screenZ;
+        renderTaskPtr->dist = -screenZ;
         queue_render_task(renderTaskPtr);
     }
 }
@@ -82,7 +82,7 @@ void N(test_reflection_worker_render_floor)(void) {
         renderTaskPtr->renderMode = playerStatus->renderMode;
         renderTaskPtr->appendGfxArg = playerStatus;
         renderTaskPtr->appendGfx = &N(appendGfx_test_reflection_floor);
-        renderTaskPtr->distance = -screenZ;
+        renderTaskPtr->dist = -screenZ;
         queue_render_task(renderTaskPtr);
     }
 }

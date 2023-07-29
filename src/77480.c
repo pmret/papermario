@@ -1503,7 +1503,7 @@ void render_player_model(void) {
 
         if (!(playerStatus->animFlags & PA_FLAG_INVISIBLE)) {
             rtPtr->appendGfxArg = playerStatus;
-            rtPtr->distance = -z;
+            rtPtr->dist = -z;
             rtPtr->renderMode = playerStatus->renderMode;
 
 

@@ -113,7 +113,7 @@ void motion_blur_flame_render(EffectInstance* effect) {
 
     renderTask.appendGfx = motion_blur_flame_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 100;
+    renderTask.dist = 100;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);

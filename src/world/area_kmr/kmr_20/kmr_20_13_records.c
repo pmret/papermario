@@ -185,7 +185,7 @@ void N(worker_draw_game_records)(void) {
     rt.renderMode = RENDER_MODE_2D;
     rt.appendGfxArg = NULL;
     rt.appendGfx = N(appendGfx_records);
-    rt.distance = 0;
+    rt.dist = 0;
     queue_render_task(&rt);
 }
 

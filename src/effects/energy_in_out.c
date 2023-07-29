@@ -230,7 +230,7 @@ void energy_in_out_render(EffectInstance* effect) {
 
     renderTask.appendGfx = energy_in_out_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 10;
+    renderTask.dist = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);

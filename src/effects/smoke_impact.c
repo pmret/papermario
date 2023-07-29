@@ -109,7 +109,7 @@ void smoke_impact_render(EffectInstance* effect) {
 
     renderTask.appendGfx = smoke_impact_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 0;
+    renderTask.dist = 0;
     renderTask.renderMode = RENDER_MODE_28;
 
     retTask = queue_render_task(&renderTask);

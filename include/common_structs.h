@@ -1511,7 +1511,7 @@ typedef struct ItemEntityPhysicsData {
 
 typedef struct RenderTask {
     /* 0x00 */ s32 renderMode;
-    /* 0x04 */ s32 distance; /* value between 0 and -10k */
+    /* 0x04 */ s32 dist; /* value between 0 and -10k */
     /* 0x08 */ void* appendGfxArg;
     /* 0x0C */ void (*appendGfx)(void*);
 } RenderTask; // size = 0x10
@@ -1535,7 +1535,7 @@ typedef struct ActorPartMovement {
     /* 0x28 */ f32 moveSpeed;
     /* 0x2C */ f32 unk_2C;
     /* 0x30 */ f32 angle;
-    /* 0x34 */ f32 distance;
+    /* 0x34 */ f32 dist;
     /* 0x38 */ s16 moveTime;
     /* 0x3A */ s16 unk_3A;
     /* 0x3C */ s32 unk_3C;
@@ -1771,7 +1771,7 @@ typedef struct ActorMovement {
     /* 0x40 */ f32 speed;
     /* 0x44 */ f32 vel;
     /* 0x48 */ f32 angle;
-    /* 0x4C */ f32 distance;
+    /* 0x4C */ f32 dist;
     /* 0x50 */ f32 flyElapsed;
     /* 0x54 */ char unk_11C[4];
     /* 0x58 */ s16 flyTime;
@@ -1804,7 +1804,7 @@ typedef struct ActorState { // TODO: Make the first field of this an ActorMoveme
     /* 0x40 */ f32 speed;
     /* 0x44 */ f32 vel;
     /* 0x48 */ f32 angle;
-    /* 0x4C */ f32 distance;
+    /* 0x4C */ f32 dist;
     /* 0x50 */ f32 bounceDivisor;
     /* 0x54 */ char unk_54[0x4];
     /* 0x58 */ s32 animJumpRise;

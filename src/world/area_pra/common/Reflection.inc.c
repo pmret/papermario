@@ -113,7 +113,7 @@ void N(worker_reflect_player_wall)(void) {
         renderTaskPtr->renderMode = renderMode;
         renderTaskPtr->appendGfxArg = playerStatus;
         renderTaskPtr->appendGfx = (void(*))N(appendGfx_reflect_player_wall);
-        renderTaskPtr->distance = -screenZ;
+        renderTaskPtr->dist = -screenZ;
         queue_render_task(renderTaskPtr);
     }
 }
@@ -187,7 +187,7 @@ void N(worker_reflect_player_floor)(void) {
 
         renderTaskPtr->renderMode = renderMode;
         renderTaskPtr->appendGfxArg = playerStatus;
-        renderTaskPtr->distance = -screenZ;
+        renderTaskPtr->dist = -screenZ;
         renderTaskPtr->appendGfx = (void (*)(void*)) (
             !(playerStatus->flags & PS_FLAG_SPINNING)
                 ? N(appendGfx_reflect_player_floor_basic)

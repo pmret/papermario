@@ -99,7 +99,7 @@ void lens_flare_render(EffectInstance* effect) {
 
     renderTask.appendGfx = lens_flare_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 20;
+    renderTask.dist = 20;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);

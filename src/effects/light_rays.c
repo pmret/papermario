@@ -260,7 +260,7 @@ void light_rays_render(EffectInstance* effect) {
 
     renderTask.appendGfx = light_rays_appendGfx;
     renderTask.appendGfxArg = effect;
-    renderTask.distance = 10;
+    renderTask.dist = 10;
     renderTask.renderMode = RENDER_MODE_2D;
 
     retTask = queue_render_task(&renderTask);

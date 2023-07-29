@@ -153,7 +153,7 @@ void N(work_draw_record)(void) {
     task.renderMode = RENDER_MODE_2D;
     task.appendGfxArg = 0;
     task.appendGfx = &N(animate_and_draw_record);
-    task.distance = 0;
+    task.dist = 0;
 
     queue_render_task(&task);
 }

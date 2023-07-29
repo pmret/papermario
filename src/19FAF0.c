@@ -1154,16 +1154,16 @@ ApiStatus func_80273444(Evt* script, s32 isInitialCall) {
         goalZ = player->state.goalPos.z;
 
         player->state.angle = atan2(x, z, goalX, goalZ);
-        player->state.distance = dist2D(x, z, goalX, goalZ);
+        player->state.dist = dist2D(x, z, goalX, goalZ);
 
         y = goalY - y;
 
         if (player->state.moveTime == 0) {
-            player->state.moveTime = player->state.distance / player->state.speed;
-            var_f8 = player->state.distance - (player->state.moveTime * player->state.speed);
+            player->state.moveTime = player->state.dist / player->state.speed;
+            var_f8 = player->state.dist - (player->state.moveTime * player->state.speed);
         } else {
-            player->state.speed = player->state.distance / player->state.moveTime;
-            var_f8 = player->state.distance - (player->state.moveTime * player->state.speed);
+            player->state.speed = player->state.dist / player->state.moveTime;
+            var_f8 = player->state.dist - (player->state.moveTime * player->state.speed);
         }
 
         playerState->speed += var_f8 / playerState->moveTime;
@@ -1252,14 +1252,14 @@ ApiStatus PlayerFallToGoal(Evt* script, s32 isInitialCall) {
         state->moveTime = moveTime;
 
         player->state.angle = atan2(x, z, goalX, goalZ);
-        player->state.distance = dist2D(x, z, goalX, goalZ);
+        player->state.dist = dist2D(x, z, goalX, goalZ);
 
         y = goalY - y;
 
         if (state->moveTime == 0) {
-            state->moveTime = state->distance / state->speed;
+            state->moveTime = state->dist / state->speed;
         } else {
-            state->speed = state->distance / state->moveTime;
+            state->speed = state->dist / state->moveTime;
         }
 
         state->vel = 0.0f;
@@ -1363,17 +1363,17 @@ ApiStatus PlayerRunToGoal(Evt* script, s32 isInitialCall) {
         currentZ = player->state.currentPos.z;
 
         player->state.angle = atan2(currentX, currentZ, goalX, goalZ);
-        player->state.distance = dist2D(currentX, currentZ, goalX, goalZ);
+        player->state.dist = dist2D(currentX, currentZ, goalX, goalZ);
         if (player->state.moveTime == 0) {
-            player->state.moveTime = player->state.distance / player->state.speed;
+            player->state.moveTime = player->state.dist / player->state.speed;
             if (player->state.moveTime == 0) {
                 player->state.moveTime = 1;
             }
-            player->state.speed += (player->state.distance - (player->state.moveTime * player->state.speed)) / player->state.moveTime;
+            player->state.speed += (player->state.dist - (player->state.moveTime * player->state.speed)) / player->state.moveTime;
         } else {
-            player->state.speed = player->state.distance / player->state.moveTime;
+            player->state.speed = player->state.dist / player->state.moveTime;
         }
-        playerState->distance = player->actorTypeData1b[0] + 1;
+        playerState->dist = player->actorTypeData1b[0] + 1;
         script->functionTemp[0] = TRUE;
     }
 
@@ -1389,10 +1389,10 @@ ApiStatus PlayerRunToGoal(Evt* script, s32 isInitialCall) {
         play_movement_dust_effects(1, player->currentPos.x, player->currentPos.y, player->currentPos.z, player->yaw);
     }
 
-    playerState->distance += playerState->speed;
-    if (playerState->distance > player->actorTypeData1b[0]) {
+    playerState->dist += playerState->speed;
+    if (playerState->dist > player->actorTypeData1b[0]) {
         player->footStepCounter++;
-        playerState->distance = 0.0f;
+        playerState->dist = 0.0f;
         if ((player->footStepCounter % 2) != 0) {
             sfx_play_sound_at_position(SOUND_STEP_NORMAL1, SOUND_SPACE_MODE_0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
         } else {
@@ -1434,14 +1434,14 @@ ApiStatus CancelablePlayerRunToGoal(Evt* script, s32 isInitialCall) {
         currentZ = player->state.currentPos.z;
 
         player->state.angle = atan2(currentX, currentZ, goalX, goalZ);
-        player->state.distance = dist2D(currentX, currentZ, goalX, goalZ);
+        player->state.dist = dist2D(currentX, currentZ, goalX, goalZ);
         if (player->state.moveTime == 0) {
-            player->state.moveTime = player->state.distance / player->state.speed;
-            player->state.speed += (player->state.distance - (player->state.moveTime * player->state.speed)) / player->state.moveTime;
+            player->state.moveTime = player->state.dist / player->state.speed;
+            player->state.speed += (player->state.dist - (player->state.moveTime * player->state.speed)) / player->state.moveTime;
         } else {
-            player->state.speed = player->state.distance / player->state.moveTime;
+            player->state.speed = player->state.dist / player->state.moveTime;
         }
-        playerState->distance = player->actorTypeData1b[0] + 1;
+        playerState->dist = player->actorTypeData1b[0] + 1;
 
         if (playerState->moveTime == 0) {
             return ApiStatus_DONE2;
@@ -1464,10 +1464,10 @@ ApiStatus CancelablePlayerRunToGoal(Evt* script, s32 isInitialCall) {
         play_movement_dust_effects(1, player->currentPos.x, player->currentPos.y, player->currentPos.z, player->yaw);
     }
 
-    playerState->distance += playerState->speed;
-    if (playerState->distance > player->actorTypeData1b[0]) {
+    playerState->dist += playerState->speed;
+    if (playerState->dist > player->actorTypeData1b[0]) {
         player->footStepCounter++;
-        playerState->distance = 0.0f;
+        playerState->dist = 0.0f;
         if ((player->footStepCounter % 2) != 0) {
             sfx_play_sound_at_position(SOUND_STEP_NORMAL1, SOUND_SPACE_MODE_0, player->currentPos.x, player->currentPos.y, player->currentPos.z);
         } else {
@@ -1790,13 +1790,13 @@ ApiStatus func_80274A18(Evt* script, s32 isInitialCall) {
         posY = playerState->currentPos.y;
         posZ = playerState->currentPos.z;
         playerState->angle = atan2(posX, posZ, goalX, goalZ);
-        playerState->distance = dist2D(posX, posZ, goalX, goalZ);
+        playerState->dist = dist2D(posX, posZ, goalX, goalZ);
         if (playerState->moveTime == 0) {
-            playerState->moveTime = playerState->distance / playerState->speed;
-            temp = playerState->distance - (playerState->moveTime * playerState->speed);
+            playerState->moveTime = playerState->dist / playerState->speed;
+            temp = playerState->dist - (playerState->moveTime * playerState->speed);
         } else {
-            playerState->speed = playerState->distance / playerState->moveTime;
-            temp = playerState->distance - (playerState->moveTime * playerState->speed);
+            playerState->speed = playerState->dist / playerState->moveTime;
+            temp = playerState->dist - (playerState->moveTime * playerState->speed);
         }
 
         if (playerState->moveTime == 0) {
@@ -1810,7 +1810,7 @@ ApiStatus func_80274A18(Evt* script, s32 isInitialCall) {
         playerState->vel = 0.0f;
         playerState->speed += temp / playerState->moveTime;
         if (playerState->moveArcAmplitude < 3) {
-            temp = playerState->distance;
+            temp = playerState->dist;
             temp -= 20.0;
             temp /= 6.0;
             temp += 47.0;
@@ -1826,7 +1826,7 @@ ApiStatus func_80274A18(Evt* script, s32 isInitialCall) {
             acc1 = playerState->acceleration;
             playerState->vel = vel1 + ((sin_rad(DEG_TO_RAD(playerState->unk_24)) * 0.53 * acc1) + acc1);
         } else {
-            temp = playerState->distance;
+            temp = playerState->dist;
             temp -= 20.0;
             temp /= 6.0;
             temp += 47.0;
@@ -1963,14 +1963,14 @@ ApiStatus func_802752AC(Evt* script, s32 isInitialCall) {
             posY = playerState->currentPos.y;
             posZ = playerState->currentPos.z;
             playerState->angle = atan2(posX, posZ, goalX, goalZ);
-            playerState->distance = dist2D(posX, posZ, goalX, goalZ);
+            playerState->dist = dist2D(posX, posZ, goalX, goalZ);
 
             if (playerState->moveTime == 0) {
-                playerState->moveTime = playerState->distance / playerState->speed;
-                temp = playerState->distance - (playerState->moveTime * playerState->speed);
+                playerState->moveTime = playerState->dist / playerState->speed;
+                temp = playerState->dist - (playerState->moveTime * playerState->speed);
             } else {
-                playerState->speed = playerState->distance / playerState->moveTime;
-                temp = playerState->distance - (playerState->moveTime * playerState->speed);
+                playerState->speed = playerState->dist / playerState->moveTime;
+                temp = playerState->dist - (playerState->moveTime * playerState->speed);
             }
 
             if (playerState->moveTime == 0) {
@@ -2014,13 +2014,13 @@ ApiStatus func_802752AC(Evt* script, s32 isInitialCall) {
             posY = playerState->currentPos.y;
             posZ = playerState->currentPos.z;
             playerState->angle = atan2(posX, posZ, goalX, goalZ);
-            playerState->distance = dist2D(posX, posZ, goalX, goalZ);
+            playerState->dist = dist2D(posX, posZ, goalX, goalZ);
             if (playerState->moveTime == 0) {
-                playerState->moveTime = playerState->distance / playerState->speed;
-                temp = playerState->distance - (playerState->moveTime * playerState->speed);
+                playerState->moveTime = playerState->dist / playerState->speed;
+                temp = playerState->dist - (playerState->moveTime * playerState->speed);
             } else {
-                playerState->speed = playerState->distance / playerState->moveTime;
-                temp = playerState->distance - (playerState->moveTime * playerState->speed);
+                playerState->speed = playerState->dist / playerState->moveTime;
+                temp = playerState->dist - (playerState->moveTime * playerState->speed);
             }
 
             if (playerState->moveTime == 0) {
@@ -2213,13 +2213,13 @@ ApiStatus func_80275F00(Evt* script, s32 isInitialCall) {
             posY = playerState->currentPos.y;
             posZ = playerState->currentPos.z;
             playerState->angle = atan2(posX, posZ, goalX, goalZ);
-            playerState->distance = dist2D(posX, posZ, goalX, goalZ);
+            playerState->dist = dist2D(posX, posZ, goalX, goalZ);
             if (playerState->moveTime == 0) {
-                playerState->moveTime = playerState->distance / playerState->speed;
-                temp = playerState->distance - (playerState->moveTime * playerState->speed);
+                playerState->moveTime = playerState->dist / playerState->speed;
+                temp = playerState->dist - (playerState->moveTime * playerState->speed);
             } else {
-                playerState->speed = playerState->distance / playerState->moveTime;
-                temp = playerState->distance - (playerState->moveTime * playerState->speed);
+                playerState->speed = playerState->dist / playerState->moveTime;
+                temp = playerState->dist - (playerState->moveTime * playerState->speed);
             }
             playerState->acceleration = PI_S / playerState->moveTime;
             playerState->vel = 0.0f;
@@ -2234,7 +2234,7 @@ ApiStatus func_80275F00(Evt* script, s32 isInitialCall) {
             playerState->unk_18.y = 0.0f;
             playerState->unk_24 = 90.0f;
 
-            temp = playerState->distance;
+            temp = playerState->dist;
             temp -= 20.0;
             temp /= 6.0;
             temp += 47.0;
@@ -2256,14 +2256,14 @@ ApiStatus func_80275F00(Evt* script, s32 isInitialCall) {
             posY = playerState->currentPos.y;
             posZ = playerState->currentPos.z;
             playerState->angle = atan2(posX, posZ, goalX, goalZ);
-            playerState->distance = dist2D(posX, posZ, goalX, goalZ);
+            playerState->dist = dist2D(posX, posZ, goalX, goalZ);
             if (playerState->moveTime == 0) {
-                playerState->moveTime = playerState->distance / playerState->speed;
-                temp = playerState->distance - (playerState->moveTime * playerState->speed);
+                playerState->moveTime = playerState->dist / playerState->speed;
+                temp = playerState->dist - (playerState->moveTime * playerState->speed);
             } else {
-                speed = playerState->distance / playerState->moveTime;
+                speed = playerState->dist / playerState->moveTime;
                 playerState->speed = speed;
-                temp = playerState->distance - (playerState->moveTime * speed);
+                temp = playerState->dist - (playerState->moveTime * speed);
             }
             playerState->acceleration = PI_S / playerState->moveTime;
             playerState->vel = 0.0f;
@@ -2280,7 +2280,7 @@ ApiStatus func_80275F00(Evt* script, s32 isInitialCall) {
             temp_f20_2 = playerState->vel;
             temp_f22_2 = playerState->acceleration;
 
-            temp = playerState->distance;
+            temp = playerState->dist;
             temp -= 20.0;
             temp /= 6.0;
             temp += 47.0;
@@ -2312,13 +2312,13 @@ ApiStatus func_80275F00(Evt* script, s32 isInitialCall) {
             posY = playerState->currentPos.y;
             posZ = playerState->currentPos.z;
             playerState->angle = atan2(posX, posZ, goalX, goalZ);
-            playerState->distance = dist2D(posX, posZ, goalX, goalZ);
+            playerState->dist = dist2D(posX, posZ, goalX, goalZ);
             if (playerState->moveTime == 0) {
-                playerState->moveTime = playerState->distance / playerState->speed;
-                temp = playerState->distance - (playerState->moveTime * playerState->speed);
+                playerState->moveTime = playerState->dist / playerState->speed;
+                temp = playerState->dist - (playerState->moveTime * playerState->speed);
             } else {
-                playerState->speed = playerState->distance / playerState->moveTime;
-                temp = playerState->distance - (playerState->moveTime * playerState->speed);
+                playerState->speed = playerState->dist / playerState->moveTime;
+                temp = playerState->dist - (playerState->moveTime * playerState->speed);
             }
             playerState->acceleration = PI_S / (playerState->moveTime + 1);
             playerState->vel = 0.0f;
