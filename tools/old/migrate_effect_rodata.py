@@ -90,6 +90,7 @@ data_to_thing = {
     "413F20": "star_outline",
 }
 
+
 def handle_symbol(effect, symbol):
     for root, dirs, files in os.walk(asm_effects_dir + effect + "/"):
         for f_name in files:
@@ -138,6 +139,7 @@ def handle_file(f_path):
             print("skipping" + str(symbol))
             continue
         migrated = handle_symbol(data_to_thing[effect], symbol)
+
 
 # Walk through asm files and rename stuff
 print("Walking through asm files")

@@ -10,11 +10,13 @@ with open("tools/symz.txt") as f:
     for line in f.readlines():
         if line.strip() and not line.startswith("//"):
             name, addr = line.strip().strip(";").split(" = ")
-            try :
+            try:
                 addr = int(addr, 0)
             except ValueError:
                 continue
-            syms.append({"name": name, "address": addr, "found_in": set(), "dead": False})
+            syms.append(
+                {"name": name, "address": addr, "found_in": set(), "dead": False}
+            )
 
 # Search src for syms
 for root, dirs, files in os.walk("src"):
@@ -24,7 +26,9 @@ for root, dirs, files in os.walk("src"):
                 text = f.read()
                 for sym in syms:
                     if sym["name"] in text:
-                        sym["found_in"].add(os.path.join(root, file).replace("src/", ""))
+                        sym["found_in"].add(
+                            os.path.join(root, file).replace("src/", "")
+                        )
 
 # Search asm for syms
 for root, dirs, files in os.walk("ver/us/asm"):
@@ -34,7 +38,11 @@ for root, dirs, files in os.walk("ver/us/asm"):
                 text = f.read()
                 for sym in syms:
                     if sym["name"] in text:
-                        sym["found_in"].add(os.path.join(root, file).replace("ver/us/asm/nonmatchings/", ""))
+                        sym["found_in"].add(
+                            os.path.join(root, file).replace(
+                                "ver/us/asm/nonmatchings/", ""
+                            )
+                        )
                         if re.match(r"E[A-F][0-9A-F]{4}", root.split("/")[-1]):
                             sym["dead"] = True
                         else:

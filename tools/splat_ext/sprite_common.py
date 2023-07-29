@@ -217,7 +217,6 @@ class AnimComponent:
     def size(self):
         return len(self.commands)
 
-
     @staticmethod
     def parse_commands(command_list: List[int]) -> List[Animation]:
         ret: List[Animation] = []

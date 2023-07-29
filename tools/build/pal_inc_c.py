@@ -10,8 +10,8 @@ if __name__ == "__main__":
         f.write(f"unsigned short {cname}[] = {{ ")
 
         with open(infile, "rb") as i:
-            while (short := i.read(2)):
-                color = struct.unpack('>H', short)[0]
-                f.write(f'0x{color:04X}, ')
+            while short := i.read(2):
+                color = struct.unpack(">H", short)[0]
+                f.write(f"0x{color:04X}, ")
 
         f.write("};\n")

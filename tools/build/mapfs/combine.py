@@ -4,8 +4,10 @@ from sys import argv
 from pathlib import Path
 import struct
 
+
 def next_multiple(pos, multiple):
     return pos + pos % multiple
+
 
 def get_version_date(version):
     if version == "us":
@@ -16,6 +18,7 @@ def get_version_date(version):
         return "Map Ver.01/03/23 16:30"
     else:
         return "Map Ver.??/??/?? ??:??"
+
 
 def build_mapfs(out_bin, assets, version):
     # every TOC entry's name field has data after the null terminator made up from all the previous name fields.
@@ -36,14 +39,18 @@ def build_mapfs(out_bin, assets, version):
             name = decompressed.stem + "\0"
             offset = next_data_pos
             decompressed_size = decompressed.stat().st_size
-            size = next_multiple(compressed.stat().st_size, 2) if compressed.exists() else decompressed_size
+            size = (
+                next_multiple(compressed.stat().st_size, 2)
+                if compressed.exists()
+                else decompressed_size
+            )
 
-            #print(f"{name} {offset:08X} {size:08X} {decompressed_size:08X}")
+            # print(f"{name} {offset:08X} {size:08X} {decompressed_size:08X}")
 
             # write all previously-written names; required to match
-            lastname = name + lastname[len(name):]
+            lastname = name + lastname[len(name) :]
             f.seek(toc_entry_pos)
-            f.write(lastname.encode('ascii'))
+            f.write(lastname.encode("ascii"))
 
             # write TOC entry.
             f.seek(toc_entry_pos + 0x10)
@@ -51,7 +58,11 @@ def build_mapfs(out_bin, assets, version):
 
             # write data.
             f.seek(0x20 + next_data_pos)
-            f.write(compressed.read_bytes() if compressed.exists() else decompressed.read_bytes())
+            f.write(
+                compressed.read_bytes()
+                if compressed.exists()
+                else decompressed.read_bytes()
+            )
             next_data_pos += size
 
             asset_idx += 1
@@ -61,14 +72,15 @@ def build_mapfs(out_bin, assets, version):
 
         last_name_entry = "end_data\0"
         f.seek(toc_entry_pos)
-        lastname = last_name_entry + lastname[len(last_name_entry):]
-        f.write(lastname.encode('ascii'))
+        lastname = last_name_entry + lastname[len(last_name_entry) :]
+        f.write(lastname.encode("ascii"))
 
         f.seek(toc_entry_pos + 0x18)
-        f.write((0x903F0000).to_bytes(4, byteorder="big")) # TODO: figure out purpose
+        f.write((0x903F0000).to_bytes(4, byteorder="big"))  # TODO: figure out purpose
+
 
 if __name__ == "__main__":
-    argv.pop(0) # python3
+    argv.pop(0)  # python3
     version = argv.pop(0)
     out = argv.pop(0)
 
@@ -76,6 +88,6 @@ if __name__ == "__main__":
 
     # pairs
     for i in range(0, len(argv), 2):
-        assets.append((Path(argv[i]), Path(argv[i+1])))
+        assets.append((Path(argv[i]), Path(argv[i + 1])))
 
     build_mapfs(out, assets, version)

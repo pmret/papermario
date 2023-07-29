@@ -6,8 +6,8 @@ from pathlib import Path
 
 parser = argparse.ArgumentParser()
 parser.add_argument("baserom")
-parser.add_argument("start", type=lambda x:int(x, 0))
-parser.add_argument("end", type=lambda x:int(x, 0))
+parser.add_argument("start", type=lambda x: int(x, 0))
+parser.add_argument("end", type=lambda x: int(x, 0))
 args = parser.parse_args()
 
 baserom_path = Path(__file__).parent.parent / "baserom.z64"
@@ -25,9 +25,16 @@ while i < args.end:
     while unpack_from("B", baserom, i)[0] == 0:
         i += 1
 
-    #print(f"Start {hex(dis_start)} end {hex(i)}")
-    gfxdis = subprocess.run(f"{gfxdis_path.resolve()} " + f"-x " + f"-dc " + f"-d {baserom[dis_start:i].hex()}",
-                              capture_output=True, shell=True, text=True)
+    # print(f"Start {hex(dis_start)} end {hex(i)}")
+    gfxdis = subprocess.run(
+        f"{gfxdis_path.resolve()} "
+        + f"-x "
+        + f"-dc "
+        + f"-d {baserom[dis_start:i].hex()}",
+        capture_output=True,
+        shell=True,
+        text=True,
+    )
 
     commands = gfxdis.stdout.splitlines()[1:-1]
     new_commands = []

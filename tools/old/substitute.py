@@ -12,7 +12,10 @@ src_dir = root_dir + "src/"
 asm_dir = root_dir + "ver/current/asm/"
 
 parser = argparse.ArgumentParser(description="Replace many functions with one")
-parser.add_argument("from_list", help="path to line-separated file of functions to be replaced. first line is the string to replace them with")
+parser.add_argument(
+    "from_list",
+    help="path to line-separated file of functions to be replaced. first line is the string to replace them with",
+)
 
 args = parser.parse_args()
 
@@ -83,8 +86,12 @@ for root, dirs, files in os.walk(asm_dir):
             if f_text != f_text_orig:
                 if non_matching:
                     syms = sorted(set(re.findall(r"D_[0-9A-F]{8}_[0-9A-F]{6}", f_text)))
-                    to_replace.append(syms[0] + " " + namespace + "_ItemChoice_HasSelectedItem\n")
-                    to_replace.append(syms[1] + " " + namespace + "_ItemChoice_SelectedItemID\n")
+                    to_replace.append(
+                        syms[0] + " " + namespace + "_ItemChoice_HasSelectedItem\n"
+                    )
+                    to_replace.append(
+                        syms[1] + " " + namespace + "_ItemChoice_SelectedItemID\n"
+                    )
 
                 with open(f_path, "w", newline="\n") as f:
                     f.write(f_text)

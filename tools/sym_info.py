@@ -10,24 +10,25 @@ parser = argparse.ArgumentParser(
     description="Display various information about a symbol or address."
 )
 parser.add_argument(
-    "name",
-    type=str,
-    default="",
-    help="symbol name or ROM/RAM address to lookup"
+    "name", type=str, default="", help="symbol name or ROM/RAM address to lookup"
 )
 parser.add_argument(
     "-e",
     "--expected",
     dest="use_expected",
     action="store_true",
-    help="use the map file in expected/build/ instead of build/"
+    help="use the map file in expected/build/ instead of build/",
 )
+
 
 def get_map(expected: bool = False):
     mymap = os.path.join(root_dir, "ver", "current", "build", "papermario.map")
     if expected:
-        mymap = os.path.join(root_dir, "ver", "current", "expected", "build", "papermario.map")
+        mymap = os.path.join(
+            root_dir, "ver", "current", "expected", "build", "papermario.map"
+        )
     return mymap
+
 
 def search_address(target_addr, map=get_map()):
     is_ram = target_addr & 0x80000000
@@ -84,6 +85,7 @@ def search_address(target_addr, map=get_map()):
 
     return "at end of rom?"
 
+
 def search_symbol(target_sym, map=get_map()):
     ram_offset = None
     cur_file = "<no file>"
@@ -122,6 +124,7 @@ def search_symbol(target_sym, map=get_map()):
 
     return None
 
+
 if __name__ == "__main__":
     args = parser.parse_args()
 
@@ -140,6 +143,8 @@ if __name__ == "__main__":
             sym_rom = sym_info[0]
             sym_file = sym_info[1]
             sym_ram = sym_info[2]
-            print(f"Symbol {args.name} (RAM: 0x{sym_ram:08X}, ROM: 0x{sym_rom:06X}, {sym_file})")
+            print(
+                f"Symbol {args.name} (RAM: 0x{sym_ram:08X}, ROM: 0x{sym_rom:06X}, {sym_file})"
+            )
         else:
             print(f"Symbol {args.name} not found in map file {map}")

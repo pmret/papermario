@@ -9,6 +9,7 @@ import xml.etree.ElementTree as ET
 from img.build import Converter
 import png
 
+
 def get_img_file(fmt_str, img_file: str):
     def pack_color(r, g, b, a):
         r = r >> 3
@@ -34,6 +35,7 @@ def get_img_file(fmt_str, img_file: str):
 
     return (out_img, out_pal, out_w, out_h)
 
+
 def build(out_bin: Path, in_xml: Path, out_header: Path, asset_stack: Tuple[Path, ...]):
     out_bytes = bytearray()
     offsets: Dict[str, int] = {}
@@ -47,11 +49,11 @@ def build(out_bin: Path, in_xml: Path, out_header: Path, asset_stack: Tuple[Path
 
         if file is None:
             raise Exception("Icon os missing attribute: 'name'")
-        
+
         if type is None:
             raise Exception("Icon os missing attribute: 'type'")
-        
-        name = re.sub("\\W","_",file)
+
+        name = re.sub("\\W", "_", file)
 
         if type == "solo" or type == "pair":
             img_path = str(get_asset_path(Path(f"icon/{file}.png"), asset_stack))
@@ -64,9 +66,11 @@ def build(out_bin: Path, in_xml: Path, out_header: Path, asset_stack: Tuple[Path
             out_bytes += out_pal
 
             if type == "pair":
-                img_path = str(get_asset_path(Path(f"icon/{file}.disabled.png"), asset_stack))
+                img_path = str(
+                    get_asset_path(Path(f"icon/{file}.disabled.png"), asset_stack)
+                )
                 (out_img, out_pal, out_w, out_h) = get_img_file("CI4", str(img_path))
-                
+
                 offsets[name + "_disabled_raster"] = offsets[name + "_raster"]
                 offsets[name + "_disabled_palette"] = len(out_bytes)
                 out_bytes += out_pal
@@ -88,11 +92,12 @@ def build(out_bin: Path, in_xml: Path, out_header: Path, asset_stack: Tuple[Path
         f.write("#ifndef ICON_OFFSETS_H\n")
         f.write("#define ICON_OFFSETS_H\n")
         f.write(f"/* This file is auto-generated. Do not edit. */\n\n")
-        
+
         for name, offset in offsets.items():
             f.write(f"#define ICON_{name} 0x{offset:X}\n")
 
         f.write("\n#endif // ICON_OFFSETS_H\n")
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Icon archive")

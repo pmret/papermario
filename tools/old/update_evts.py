@@ -47,11 +47,18 @@ def parse_symbol_addrs():
     symbol_addrs = {}
 
     for line in lines:
-        name = line[:line.find(" ")]
+        name = line[: line.find(" ")]
 
-        attributes = line[line.find("//"):].split(" ")
-        ram_addr = int(line[:line.find(";")].split("=")[1].strip(), base=0)
-        rom_addr = next((int(attr.split(":")[1], base=0) for attr in attributes if attr.split(":")[0] == "rom"), None)
+        attributes = line[line.find("//") :].split(" ")
+        ram_addr = int(line[: line.find(";")].split("=")[1].strip(), base=0)
+        rom_addr = next(
+            (
+                int(attr.split(":")[1], base=0)
+                for attr in attributes
+                if attr.split(":")[0] == "rom"
+            ),
+            None,
+        )
 
         symbol_addrs[name] = Symbol(ram_addr, rom_addr)
 
@@ -69,11 +76,13 @@ def find_old_script_ranges(lines, filename):
 
     for line_no, line_content in enumerate(lines):
         r = re.compile(r".*\.h")
-        namespace_temp = list(filter(r.match, os.listdir(os.path.dirname(os.path.abspath(filename)))))
+        namespace_temp = list(
+            filter(r.match, os.listdir(os.path.dirname(os.path.abspath(filename))))
+        )
 
         if "#define NAMESPACE " in line_content:
             namespace = line_content.split(" ")[2].strip()
-        #elif namespace == "events" or namespace == "header":
+        # elif namespace == "events" or namespace == "header":
         #    namespace = NAMESPACES.get(filename, filename.split("/")[-2].split(".")[0])
         elif namespace_temp is not None:
             namespace = namespace_temp[0][:-2]
@@ -113,22 +122,26 @@ def replace_old_script_macros(filename, symbol_addrs):
             lines[range.start] = lines[range.start][:macro_start_idx] + "{\n"
 
             # Remove other lines
-            lines = lines[:range.start + 1] + lines[range.end + 1:]
+            lines = lines[: range.start + 1] + lines[range.end + 1 :]
 
             # Find the symbol
             try:
                 range_sym = symbol_addrs[range.symbol_name]
             except KeyError:
-                raise UserException(f"Symbol {range.symbol_name} is not in symbol_addrs")
+                raise UserException(
+                    f"Symbol {range.symbol_name} is not in symbol_addrs"
+                )
 
             if not range_sym.rom_addr:
-                raise UserException(f"Symbol {range.symbol_name} lacks a rom address in symbol_addrs")
+                raise UserException(
+                    f"Symbol {range.symbol_name} lacks a rom address in symbol_addrs"
+                )
 
             # Make local symbol map, replacing namespaced symbols with N(sym)
             local_symbol_map = {}
             for sym in symbol_addrs:
                 if sym.startswith(range.namespace):
-                    key = "N(" + sym[len(range.namespace)+1:] + ")"
+                    key = "N(" + sym[len(range.namespace) + 1 :] + ")"
                 else:
                     key = sym
 
@@ -143,7 +156,8 @@ def replace_old_script_macros(filename, symbol_addrs):
 
             # Disassemble the script
             rom.seek(range_sym.rom_addr)
-            evt_code = ScriptDisassembler(rom,
+            evt_code = ScriptDisassembler(
+                rom,
                 script_name=range.symbol_name,
                 romstart=range_sym.rom_addr,
                 prelude=False,

@@ -8,10 +8,12 @@ from pathlib import Path
 import struct
 from typing import List, Literal
 
+
 class LightMode(Enum):
     UNIFORM = 0
     LINEAR = 4
     QUADRATIC = 8
+
 
 @dataclass
 class Light:
@@ -61,7 +63,8 @@ def groups_from_json(data) -> List[SpriteShadingGroup]:
                 enabled = light.get("enabled", True)
                 lights.append(
                     Light(
-                        flags=LightMode[light["mode"].upper()].value + (1 if enabled else 0),
+                        flags=LightMode[light["mode"].upper()].value
+                        + (1 if enabled else 0),
                         rgb=light["rgb"],
                         pos=light["pos"],
                         falloff=light["falloff"],
@@ -83,8 +86,14 @@ def groups_from_json(data) -> List[SpriteShadingGroup]:
         )
     return groups
 
-def build(input: Path, bin_out: Path, header_out: Path, endian: Literal["big", "little"]="big",
-          matching: bool = True):
+
+def build(
+    input: Path,
+    bin_out: Path,
+    header_out: Path,
+    endian: Literal["big", "little"] = "big",
+    matching: bool = True,
+):
 
     END = ">" if endian == "big" else "<"
 
@@ -97,13 +106,17 @@ def build(input: Path, bin_out: Path, header_out: Path, endian: Literal["big", "
     with open(header_out, "w") as f:
         f.write("#ifndef SHADING_PROFILES_H\n")
         f.write("#define SHADING_PROFILES_H\n")
-        f.write(f"/* This file is auto-generated from {input.name}. Do not edit. */\n\n")
+        f.write(
+            f"/* This file is auto-generated from {input.name}. Do not edit. */\n\n"
+        )
         f.write("enum ShadingProfile {\n")
         f.write("    SHADING_NONE = 0xFFFFFFFF,\n")
 
         for g, group in enumerate(groups):
             for i, profile in enumerate(group.profiles):
-                f.write(f"    SHADING_{profile.name.upper()} = 0x{(g << 16) | i:08X},\n")
+                f.write(
+                    f"    SHADING_{profile.name.upper()} = 0x{(g << 16) | i:08X},\n"
+                )
         f.write("};\n")
         f.write("#endif // SHADING_PROFILES_H\n")
 
@@ -145,11 +158,11 @@ def build(input: Path, bin_out: Path, header_out: Path, endian: Literal["big", "
 
     offsets_table.extend(profile_lists)
     if matching:
-        offsets_table += b'\0' * (0x1D0 - len(offsets_table)) # Pad to 0x1D0
+        offsets_table += b"\0" * (0x1D0 - len(offsets_table))  # Pad to 0x1D0
 
     final_data = offsets_table + data_table
     if matching:
-        final_data += b'\0' * (0xE70 - len(final_data)) # Pad to 0xE70
+        final_data += b"\0" * (0xE70 - len(final_data))  # Pad to 0xE70
 
     with open(bin_out, "wb") as f:
         f.write(final_data)
@@ -160,7 +173,9 @@ if __name__ == "__main__":
     parser.add_argument("input", type=Path, help="Input JSON file")
     parser.add_argument("bin_out", type=Path, help="Output binary file path")
     parser.add_argument("header_out", type=Path, help="Output header file path")
-    parser.add_argument("--endian", choices=["big", "little"], default="big", help="Output endianness")
+    parser.add_argument(
+        "--endian", choices=["big", "little"], default="big", help="Output endianness"
+    )
     parser.add_argument("--matching", help="Pad to matching size", default=True)
     args = parser.parse_args()
 
