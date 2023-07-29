@@ -51,4 +51,4 @@ jobs:
           pip install black
       - name: Run Black
         run: |
-          black . --check --exclude tools/splat/ --exclude tools/splat_ext/ --exclude diff.py
+          black . --check --exclude tools/splat/ --exclude diff.py
