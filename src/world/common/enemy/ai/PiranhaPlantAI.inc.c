@@ -89,8 +89,8 @@ void N(PiranhaPlantAI_10)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
             }
         }
 
-        npc->pos.x = gPlayerStatusPtr->position.x;
-        npc->pos.z = gPlayerStatusPtr->position.z;
+        npc->pos.x = gPlayerStatusPtr->pos.x;
+        npc->pos.z = gPlayerStatusPtr->pos.z;
         add_vec2D_polar(&npc->pos.x, &npc->pos.z, npc->collisionDiameter, yaw);
         npc_move_heading(npc, moveSpeed + npc->collisionDiameter, yaw2);
 
@@ -122,13 +122,13 @@ void N(PiranhaPlantAI_10)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
             }
         } else {
             if (!(npc->flags & NPC_FLAG_IGNORE_WORLD_COLLISION)) {
-                sp20 = gPlayerStatusPtr->position.x;
-                sp24 = gPlayerStatusPtr->position.y + 18.0;
-                sp28 = gPlayerStatusPtr->position.z;
+                sp20 = gPlayerStatusPtr->pos.x;
+                sp24 = gPlayerStatusPtr->pos.y + 18.0;
+                sp28 = gPlayerStatusPtr->pos.z;
                 if (npc_test_move_simple_with_slipping(npc->collisionChannel, &sp20, &sp24, &sp28, moveSpeed, yaw2, npc->collisionHeight, npc->collisionDiameter)) {
-                    sp20 = gPlayerStatusPtr->position.x;
-                    sp24 = gPlayerStatusPtr->position.y + 45.0;
-                    sp28 = gPlayerStatusPtr->position.z;
+                    sp20 = gPlayerStatusPtr->pos.x;
+                    sp24 = gPlayerStatusPtr->pos.y + 45.0;
+                    sp28 = gPlayerStatusPtr->pos.z;
                     cond1 = npc_test_move_simple_with_slipping(npc->collisionChannel, &sp20, &sp24, &sp28, moveSpeed, yaw2, npc->collisionHeight, npc->collisionDiameter);
                     sp2C = npc->pos.x;
                     sp30 = npc->pos.y + 100.0;
@@ -138,26 +138,26 @@ void N(PiranhaPlantAI_10)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
                     if (!cond1 && cond2 && sp38 > 80.0 && sp38 < 120.0 && npc->pos.y != sp30) {
                         phi_fp = TRUE;
                     } else {
-                        sp20 = gPlayerStatusPtr->position.x;
-                        sp24 = gPlayerStatusPtr->position.y + 10.0;
-                        sp28 = gPlayerStatusPtr->position.z;
+                        sp20 = gPlayerStatusPtr->pos.x;
+                        sp24 = gPlayerStatusPtr->pos.y + 10.0;
+                        sp28 = gPlayerStatusPtr->pos.z;
                         npc_test_move_simple_with_slipping(npc->collisionChannel, &sp20, &sp24, &sp28, moveSpeed, yaw2, npc->collisionHeight, npc->collisionDiameter);
-                        posRadius = dist2D(gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z, sp20, sp28);
-                        npc->pos.x = gPlayerStatusPtr->position.x;
-                        npc->pos.z = gPlayerStatusPtr->position.z;
+                        posRadius = dist2D(gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z, sp20, sp28);
+                        npc->pos.x = gPlayerStatusPtr->pos.x;
+                        npc->pos.z = gPlayerStatusPtr->pos.z;
                         add_vec2D_polar(&npc->pos.x, &npc->pos.z, npc->collisionDiameter, yaw);
                         npc_move_heading(npc, posRadius + npc->collisionDiameter, yaw2);
                         phi_s7 = TRUE;
                     }
                 }
             } else {
-                sp20 = gPlayerStatusPtr->position.x;
-                sp24 = gPlayerStatusPtr->position.y + 18.0;
-                sp28 = gPlayerStatusPtr->position.z;
+                sp20 = gPlayerStatusPtr->pos.x;
+                sp24 = gPlayerStatusPtr->pos.y + 18.0;
+                sp28 = gPlayerStatusPtr->pos.z;
                 if (npc_test_move_simple_with_slipping(npc->collisionChannel, &sp20, &sp24, &sp28, moveSpeed, yaw2, npc->collisionHeight, npc->collisionDiameter)) {
-                    posRadius = dist2D(gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z, sp20, sp28);
-                    npc->pos.x = gPlayerStatusPtr->position.x;
-                    npc->pos.z = gPlayerStatusPtr->position.z;
+                    posRadius = dist2D(gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z, sp20, sp28);
+                    npc->pos.x = gPlayerStatusPtr->pos.x;
+                    npc->pos.z = gPlayerStatusPtr->pos.z;
                     add_vec2D_polar(&npc->pos.x, &npc->pos.z, npc->collisionDiameter, yaw);
                     npc_move_heading(npc, posRadius + npc->collisionDiameter, yaw2);
                 }
@@ -211,7 +211,7 @@ void N(PiranhaPlantAI_10)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
             }
         }
 
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
         ai_enemy_play_sound(npc, SOUND_BURROW_SURFACE, 0);
         npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_HIT];
         npc->duration = enemy->varTable[10];

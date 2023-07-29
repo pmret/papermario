@@ -6,7 +6,7 @@ API_CALLABLE(N(GetAngleToPlayer)) {
     Bytecode* args = script->ptrReadPos;
     s32 outVar = *args++;
 
-    evt_set_variable(script, outVar, atan2(-364.0f, -135.0f, gPlayerStatus.position.x, gPlayerStatus.position.z));
+    evt_set_variable(script, outVar, atan2(-364.0f, -135.0f, gPlayerStatus.pos.x, gPlayerStatus.pos.z));
     return ApiStatus_DONE2;
 }
 

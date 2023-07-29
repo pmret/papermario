@@ -111,9 +111,9 @@ API_CALLABLE(N(SetupDemoScene)) {
 
                 N(DemoInitState)++;
                 newScript = start_script(rideScriptSrc, EVT_PRIORITY_0, EVT_FLAG_RUN_IMMEDIATELY);
-                newScript->varTable[1] = playerStatus->position.x - 10.0f;
-                newScript->varTable[2] = playerStatus->position.y;
-                newScript->varTable[3] = playerStatus->position.z;
+                newScript->varTable[1] = playerStatus->pos.x - 10.0f;
+                newScript->varTable[2] = playerStatus->pos.y;
+                newScript->varTable[3] = playerStatus->pos.z;
                 newScript->varTable[12] = 1;
                 D_8024A290 = newScript;
             }

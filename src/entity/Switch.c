@@ -30,7 +30,7 @@ void entity_GreenStompSwitch_retract(Entity* entity) {
     u16 curTime = data->greenMotionTimer--;
 
     if (curTime != 0) {
-        entity->position.y -= 1.8625;
+        entity->pos.y -= 1.8625;
         return;
     }
     entity_start_script(entity);
@@ -43,7 +43,7 @@ void entity_GreenStompSwitch_extend(Entity* entity) {
     u16 curTime = data->greenMotionTimer--;
 
     if (curTime != 0) {
-        entity->position.y += 1.8625;
+        entity->pos.y += 1.8625;
         return;
     }
     exec_entity_commandlist(entity);
@@ -53,22 +53,22 @@ void entity_GreenStompSwitch_extend(Entity* entity) {
 void entity_switch_fall_down(Entity* entity) {
     SwitchData* data = entity->dataBuf.swtch;
     f32 hitDepth = 10.0f;
-    f32 x = entity->position.x;
-    f32 y = entity->position.y;
-    f32 z = entity->position.z;
+    f32 x = entity->pos.x;
+    f32 y = entity->pos.y;
+    f32 z = entity->pos.z;
     f32 hitYaw;
     f32 hitPitch;
 
     entity_raycast_down(&x, &y, &z, &hitYaw, &hitPitch, &hitDepth);
 
-    if (entity->position.y != y && entity->position.y > y) {
+    if (entity->pos.y != y && entity->pos.y > y) {
         f32 fallVelocity = data->fallVelocity;
 
         fallVelocity += 0.5;
         data->fallVelocity = fallVelocity;
-        entity->position.y -= fallVelocity;
-        if (entity->position.y < y) {
-            entity->position.y = y;
+        entity->pos.y -= fallVelocity;
+        if (entity->pos.y < y) {
+            entity->pos.y = y;
         }
     }
 }
@@ -430,7 +430,7 @@ void entity_base_switch_animate_scale(Entity* entity) {
 
     data->scaleAnimTimer++;
     if (data->scaleAnimTimer == 10 && data->linkedSwitch == NULL) {
-        fx_cold_breath(0, entity->position.x, entity->position.y, entity->position.z, 1.0f, 60);
+        fx_cold_breath(0, entity->pos.x, entity->pos.y, entity->pos.z, 1.0f, 60);
     }
 }
 

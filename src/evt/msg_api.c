@@ -85,8 +85,8 @@ s32 _show_message(Evt* script, s32 isInitialCall, s32 mode) {
         }
 
         if (speakerNpcID == NPC_PLAYER) {
-            get_screen_coords(gCurrentCameraID, playerStatus->position.x,
-                              playerStatus->position.y + playerStatus->colliderHeight, playerStatus->position.z,
+            get_screen_coords(gCurrentCameraID, playerStatus->pos.x,
+                              playerStatus->pos.y + playerStatus->colliderHeight, playerStatus->pos.z,
                               &screenX, &screenY, &screenZ);
             script->functionTemp[3] = playerStatus->anim;
             speakerNpc = (Npc*) NPC_PLAYER;
@@ -110,7 +110,7 @@ s32 _show_message(Evt* script, s32 isInitialCall, s32 mode) {
                 angle = atan2(speakerNpc->pos.x, speakerNpc->pos.z, targetNpc->pos.x, targetNpc->pos.z);
             } else {
                 listenerYaw = &playerStatus->targetYaw;
-                angle = atan2(speakerNpc->pos.x, speakerNpc->pos.z, playerStatus->position.x, playerStatus->position.z);
+                angle = atan2(speakerNpc->pos.x, speakerNpc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
             }
 
             reverseAngle = clamp_angle(angle + 180.0f);
@@ -151,7 +151,7 @@ s32 _show_message(Evt* script, s32 isInitialCall, s32 mode) {
             set_npc_animation(speakerNpc, animID);
         }
     } else {
-        get_screen_coords(gCurrentCameraID, playerStatus->position.x, playerStatus->position.y + playerStatus->colliderHeight, playerStatus->position.z, &screenX, &screenY, &screenZ);
+        get_screen_coords(gCurrentCameraID, playerStatus->pos.x, playerStatus->pos.y + playerStatus->colliderHeight, playerStatus->pos.z, &screenX, &screenY, &screenZ);
         if (script->varTable[13] != -1) {
             if (gCurrentPrintContext->stateFlags & MSG_STATE_FLAG_80) {
                 playerStatus->anim = script->varTable[13];

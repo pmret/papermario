@@ -4,10 +4,10 @@
 API_CALLABLE(N(MonitorPlayerAltitude)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    if (playerStatus->lastGoodPosition.y >= 0) {
+    if (playerStatus->lastGoodPos.y >= 0) {
         evt_set_variable(script, MV_PlayerHeightLevel, 0);
     }
-    if (playerStatus->lastGoodPosition.y <= -280) {
+    if (playerStatus->lastGoodPos.y <= -280) {
         evt_set_variable(script, MV_PlayerHeightLevel, 1);
     }
     return ApiStatus_BLOCK;

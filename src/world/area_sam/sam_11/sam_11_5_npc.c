@@ -48,10 +48,10 @@ API_CALLABLE(N(UpdateSentryPosition)) {
 
     *posZ = npc->pos.z;
 
-    if (!(dist2D(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z) < 30.0f) &&
-        !(dist2D(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z) > 130.0f))
+    if (!(dist2D(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z) < 30.0f) &&
+        !(dist2D(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z) > 130.0f))
     {
-        playerX = var_f2 = playerStatus->position.z;
+        playerX = var_f2 = playerStatus->pos.z;
         if (playerX > 50.0f) {
             var_f2 = 50.0f;
         }

@@ -168,7 +168,7 @@ void star_update(EffectInstance* effect) {
         }
     }
 
-    if (playerStatus->position.y - data->unk_08 > 300.0f) {
+    if (playerStatus->pos.y - data->unk_08 > 300.0f) {
         data->unk_30 = -1;
     }
 

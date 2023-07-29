@@ -29,8 +29,8 @@ void N(AvoidPlayerAI_ChaseInit)(Evt* script, MobileAISettings* npcAISettings, En
     npc->moveSpeed = npcAISettings->chaseSpeed;
     detectedPlayer = FALSE;
 
-    yawFwd = clamp_angle(atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x,
-                                 gPlayerStatusPtr->position.z) + 180.0f);
+    yawFwd = clamp_angle(atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x,
+                                 gPlayerStatusPtr->pos.z) + 180.0f);
     deltaYaw = get_clamped_angle_diff(npc->yaw, yawFwd);
     if (npcAISettings->chaseTurnRate < fabsf(deltaYaw)) {
         yawFwd = npc->yaw;
@@ -47,7 +47,7 @@ void N(AvoidPlayerAI_ChaseInit)(Evt* script, MobileAISettings* npcAISettings, En
     posYFwd = npc->pos.y;
     posZFwd = npc->pos.z;
 
-    yawFwd = clamp_angle(atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z) + 180.0f);
+    yawFwd = clamp_angle(atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z) + 180.0f);
     distFwd = 0.0f;
     distCW = 0.0f;
     distCCW = 0.0f;
@@ -78,7 +78,7 @@ void N(AvoidPlayerAI_ChaseInit)(Evt* script, MobileAISettings* npcAISettings, En
         }
 
         // unused
-        distToPlayer = dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+        distToPlayer = dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
 
         if ((distFwd < npc->moveSpeed * 1.5) && (distCW < npc->moveSpeed * 1.5) && (distCCW < npc->moveSpeed * 1.5) &&
             (basic_ai_check_player_dist(territory, enemy, npcAISettings->alertRadius, npcAISettings->alertOffsetDist, 0))) {

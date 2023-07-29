@@ -88,7 +88,7 @@ void snowflake_render(EffectInstance* effect) {
     RenderTask* renderTaskPtr = &renderTask;
     RenderTask* retTask;
     f32 effectPos = data->pos.x;
-    f32 playerPos = playerStatus->position.x;
+    f32 playerPos = playerStatus->pos.x;
 
     if (effectPos - playerPos > 200) {
         data->pos.x = effectPos - 400;
@@ -99,7 +99,7 @@ void snowflake_render(EffectInstance* effect) {
     }
 
     effectPos = data->pos.z;
-    playerPos = playerStatus->position.z;
+    playerPos = playerStatus->pos.z;
     if (effectPos - playerPos > 200) {
         data->pos.z = effectPos - 400;
     } else {

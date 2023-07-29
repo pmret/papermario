@@ -18,9 +18,9 @@ API_CALLABLE(N(CheckDripCollisionWithNPC)) {
     s32 i;
 
     script->varTable[2] = 0;
-    xDiff = playerStatus->position.x - model->center.x;
-    zDiff = playerStatus->position.z - model->center.z;
-    yVal = playerStatus->position.y + playerStatus->colliderHeight - 1.5f - model->center.y;
+    xDiff = playerStatus->pos.x - model->center.x;
+    zDiff = playerStatus->pos.z - model->center.z;
+    yVal = playerStatus->pos.y + playerStatus->colliderHeight - 1.5f - model->center.y;
     sqrtTemp = sqrtf(SQ(xDiff) + SQ(zDiff));
 
     if (yVal > 0.0f && yVal < playerStatus->colliderHeight && sqrtTemp < playerStatus->colliderDiameter * 0.5f) {

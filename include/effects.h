@@ -2332,7 +2332,7 @@ typedef struct PartnerBuffFXData {
 
 typedef struct QuizmoAssistantFXData {
     /* 0x00 */ s32 unk_00;
-    /* 0x04 */ Vec3f position;
+    /* 0x04 */ Vec3f pos;
     /* 0x10 */ s32 vanishTimer;
     /* 0x14 */ s32 lifetime;
     /* 0x18 */ s32 fadeInAmt; // 0 = all-black, FF = fully-visible

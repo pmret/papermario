@@ -7,18 +7,18 @@ API_CALLABLE(N(PreventFalling)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 x, y, z, hitDepth;
 
-    playerStatus->position.x = script->varTable[0];
-    x = playerStatus->position.x;
-    y = playerStatus->position.y + 10.0f;
-    z = playerStatus->position.z;
+    playerStatus->pos.x = script->varTable[0];
+    x = playerStatus->pos.x;
+    y = playerStatus->pos.y + 10.0f;
+    z = playerStatus->pos.z;
     hitDepth = 300.0f;
     npc_raycast_down_around(0, &x, &y, &z, &hitDepth, 270.0f, playerStatus->colliderDiameter);
 
-    playerStatus->position.x = x;
-    playerStatus->position.z = z;
+    playerStatus->pos.x = x;
+    playerStatus->pos.z = z;
     script->varTable[10] = FALSE;
-    if (playerStatus->position.y != y) {
-        playerStatus->position.y = 0.0f;
+    if (playerStatus->pos.y != y) {
+        playerStatus->pos.y = 0.0f;
         script->varTable[3]++;
         if (script->varTable[3] >= 30) {
             // player may now fall

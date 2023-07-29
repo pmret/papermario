@@ -55,9 +55,9 @@ API_CALLABLE(N(ChompChainInit)) {
         chainParts->gravAccel = 3.0f;
         chainParts->velY = 0;
         actorPart = get_actor_part(actor, baseChainPart + i);
-        actorPart->absolutePosition.x = chainParts->currentPos.x;
-        actorPart->absolutePosition.y = chainParts->currentPos.y;
-        actorPart->absolutePosition.z = chainParts->currentPos.z;
+        actorPart->absolutePos.x = chainParts->currentPos.x;
+        actorPart->absolutePos.y = chainParts->currentPos.y;
+        actorPart->absolutePos.z = chainParts->currentPos.z;
     }
     return ApiStatus_DONE2;
 }
@@ -185,9 +185,9 @@ API_CALLABLE(N(ChompChainUpdate)) {
         #endif
 
         part = get_actor_part(actor, baseChainPart + i);
-        part->absolutePosition.x = chain->currentPos.x;
-        part->absolutePosition.y = chain->currentPos.y;
-        part->absolutePosition.z = chain->currentPos.z;
+        part->absolutePos.x = chain->currentPos.x;
+        part->absolutePos.y = chain->currentPos.y;
+        part->absolutePos.z = chain->currentPos.z;
 
         if (actor->debuff == STATUS_KEY_SHRINK) {
             part->scale.x = 0.5f;

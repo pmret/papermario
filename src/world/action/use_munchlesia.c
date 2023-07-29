@@ -40,28 +40,28 @@ void action_update_use_munchlesia(void) {
             Munchlesia_LaunchYaw = playerStatus->targetYaw;
             break;
         case SUBSTATE_EJECT:
-            playerStatus->position.y += Munchlesia_LaunchVelocity;
+            playerStatus->pos.y += Munchlesia_LaunchVelocity;
             Munchlesia_LaunchVelocity -= Munchlesia_LaunchAccel;
-            add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, Munchlesia_LateralVelocity, Munchlesia_LaunchYaw);
-            gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
-            gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
-            gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
+            add_vec2D_polar(&playerStatus->pos.x, &playerStatus->pos.z, Munchlesia_LateralVelocity, Munchlesia_LaunchYaw);
+            gCameras[CAM_DEFAULT].targetPos.x = playerStatus->pos.x;
+            gCameras[CAM_DEFAULT].targetPos.y = playerStatus->pos.y;
+            gCameras[CAM_DEFAULT].targetPos.z = playerStatus->pos.z;
             if (Munchlesia_LaunchVelocity <= 0.0f) {
                 playerStatus->actionSubstate++; // SUBSTATE_FALL
             }
             break;
         case SUBSTATE_FALL:
-            playerStatus->position.y += Munchlesia_LaunchVelocity;
+            playerStatus->pos.y += Munchlesia_LaunchVelocity;
             Munchlesia_LaunchVelocity -= Munchlesia_LaunchAccel;
-            add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, Munchlesia_LateralVelocity, Munchlesia_LaunchYaw);
-            gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
-            gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
-            gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
+            add_vec2D_polar(&playerStatus->pos.x, &playerStatus->pos.z, Munchlesia_LateralVelocity, Munchlesia_LaunchYaw);
+            gCameras[CAM_DEFAULT].targetPos.x = playerStatus->pos.x;
+            gCameras[CAM_DEFAULT].targetPos.y = playerStatus->pos.y;
+            gCameras[CAM_DEFAULT].targetPos.z = playerStatus->pos.z;
             hitPosY = player_check_collision_below(Munchlesia_LaunchVelocity, &colliderID);
             if (colliderID >= 0) {
                 sfx_play_sound_at_player(SOUND_162, SOUND_SPACE_MODE_0);
                 suggest_player_anim_always_forward(ANIM_MarioW2_Collapse);
-                playerStatus->position.y = hitPosY;
+                playerStatus->pos.y = hitPosY;
                 D_802B62E0 = 10;
                 playerStatus->actionSubstate++; // SUBSTATE_CRASH
             }

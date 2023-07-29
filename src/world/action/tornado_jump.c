@@ -65,7 +65,7 @@ void action_update_tornado_jump(void) {
         }
     }
     if (playerStatus->gravityIntegrator[0] <= 0.0f) {
-        gSpinHistoryPosY[gSpinHistoryBufferPos] = playerStatus->position.y;
+        gSpinHistoryPosY[gSpinHistoryBufferPos] = playerStatus->pos.y;
     }
 
     gSpinHistoryPosAngle[gSpinHistoryBufferPos++] = playerStatus->spriteFacingAngle;
@@ -77,7 +77,7 @@ void action_update_tornado_jump(void) {
     switch (playerStatus->actionSubstate) {
         case SUBSTATE_ASCEND:
             fallVelocity = integrate_gravity();
-            playerStatus->position.y = player_check_collision_below(fallVelocity, &colliderBelow);
+            playerStatus->pos.y = player_check_collision_below(fallVelocity, &colliderBelow);
             if (colliderBelow >= 0 && collisionStatus->currentFloor & COLLISION_WITH_ENTITY_BIT ) {
                 entityType = get_entity_type(collisionStatus->currentFloor);
                 if (entityType == ENTITY_TYPE_BLUE_SWITCH || entityType == ENTITY_TYPE_RED_SWITCH) {
@@ -106,7 +106,7 @@ void action_update_tornado_jump(void) {
             break;
         case SUBSTATE_DESCEND:
             fallVelocity = integrate_gravity();
-            playerStatus->position.y = player_check_collision_below(fallVelocity, &colliderBelow);
+            playerStatus->pos.y = player_check_collision_below(fallVelocity, &colliderBelow);
             if (fallVelocity < -100.0f) {
                 playerStatus->gravityIntegrator[3] = 0.0f;
                 playerStatus->gravityIntegrator[2] = 0.0f;
@@ -128,7 +128,7 @@ void action_update_tornado_jump(void) {
                         start_rumble(256, 50);
 
                         gCurrentHiddenPanels.tryFlipTrigger = TRUE;
-                        gCurrentHiddenPanels.flipTriggerPosY = playerStatus->position.y;
+                        gCurrentHiddenPanels.flipTriggerPosY = playerStatus->pos.y;
                         playerStatus->flags |= PS_FLAG_SPECIAL_LAND;
                         return;
                     }
@@ -155,7 +155,7 @@ void action_update_tornado_jump(void) {
                 start_rumble(256, 50);
 
                 gCurrentHiddenPanels.tryFlipTrigger = TRUE;
-                gCurrentHiddenPanels.flipTriggerPosY = playerStatus->position.y;
+                gCurrentHiddenPanels.flipTriggerPosY = playerStatus->pos.y;
                 playerStatus->flags |= PS_FLAG_SPECIAL_LAND;
             }
             break;
@@ -188,9 +188,9 @@ static s32 get_collider_below_tornado_jump(void) {
     f32 posX, posY, posZ, height;
     f32 hitRx, hitRz, hitDirX, hitDirZ;
 
-    posX = gPlayerStatus.position.x;
-    posZ = gPlayerStatus.position.z;
+    posX = gPlayerStatus.pos.x;
+    posZ = gPlayerStatus.pos.z;
     height = gPlayerStatus.colliderHeight;
-    posY = gPlayerStatus.position.y + (height * 0.5f);
+    posY = gPlayerStatus.pos.y + (height * 0.5f);
     return player_raycast_below_cam_relative(&gPlayerStatus, &posX, &posY, &posZ, &height, &hitRx, &hitRz, &hitDirX, &hitDirZ);
 }

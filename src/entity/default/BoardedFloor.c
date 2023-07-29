@@ -18,8 +18,8 @@ void Entity_BoardedFloor_init_fragments(Entity* entity, Gfx** dlists, Mtx* matri
     data->fragmentsGfx = ENTITY_ADDR(entity, Gfx**, dlists);
     entity->renderSetupFunc = Entity_BoardedFloor_setupGfx;
     entity->alpha = 255;
-    entity->position.y = data->inititalY;
-    guTranslateF(mtxTrans, entity->position.x, entity->position.y, entity->position.z);
+    entity->pos.y = data->inititalY;
+    guTranslateF(mtxTrans, entity->pos.x, entity->pos.y, entity->pos.z);
 
     for (i = 0; i < 12; i++) {
         guMtxL2F(mtxFragment, ENTITY_ADDR(entity, Mtx*, matrices++));
@@ -45,7 +45,7 @@ void Entity_BoardedFloor_init_fragments(Entity* entity, Gfx** dlists, Mtx* matri
 }
 
 void Entity_BoardedFloor_init(Entity* entity) {
-    entity->dataBuf.boardedFloor->inititalY = entity->position.y;
+    entity->dataBuf.boardedFloor->inititalY = entity->pos.y;
     Entity_BoardedFloor_init_fragments(entity, Entity_BoardedFloor_FragmentsRender, Entity_BoardedFloor_FragmentMatrices);
 }
 
@@ -172,9 +172,9 @@ void Entity_BoardedFloor_setupGfx(s32 entityIndex) {
     Gfx* fragmentDlist;
     Gfx** gfx = data->fragmentsGfx;
 
-    x_inv = -entity->position.x;
-    y_inv = -entity->position.y;
-    z_inv = -entity->position.z;
+    x_inv = -entity->pos.x;
+    y_inv = -entity->pos.y;
+    z_inv = -entity->pos.z;
 
     for (i = 0; i < 12; i++) {
         if (data->fragmentRebounds[i] < 2) {

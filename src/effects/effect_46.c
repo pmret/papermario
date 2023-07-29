@@ -163,9 +163,9 @@ void effect_46_update(EffectInstance* effect) {
         }
     }
 
-    part->pos.x = part->player->position.x;
-    part->pos.y = part->player->position.y;
-    part->pos.z = part->player->position.z;
+    part->pos.x = part->player->pos.x;
+    part->pos.y = part->player->pos.y;
+    part->pos.z = part->player->pos.z;
 
     part++;
     for (i = 1; i < effect->numParts; i++, part++) {

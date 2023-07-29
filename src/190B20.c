@@ -166,9 +166,9 @@ void create_target_list(Actor* actor, s32 arg1) {
                         targetY = f2 + targetPart->targetOffset.y * targetActor->scalingFactor;
                     }
                 } else {
-                    targetY = targetPart->absolutePosition.y;
-                    targetZ = targetPart->absolutePosition.z;
-                    f12 = targetPart->absolutePosition.x;
+                    targetY = targetPart->absolutePos.y;
+                    targetZ = targetPart->absolutePos.z;
+                    f12 = targetPart->absolutePos.x;
                     f2 = targetY;
                     f14 = targetZ + 5.0f;
                     targetX = f12 + targetPart->targetOffset.x;
@@ -514,9 +514,9 @@ s32 func_80263064(Actor* actor0, Actor* actor1, s32 unused) {
                         y -= part->targetOffset.y;
                     }
                 } else {
-                    x = part->absolutePosition.x;
-                    y = part->absolutePosition.y;
-                    z = part->absolutePosition.z;
+                    x = part->absolutePos.x;
+                    y = part->absolutePos.y;
+                    z = part->absolutePos.z;
 
                     x += part->targetOffset.x;
                     if (!(actor1->flags & ACTOR_FLAG_UPSIDE_DOWN)) {
@@ -1327,9 +1327,9 @@ void load_player_actor(void) {
     part->visualOffset.x = 0;
     part->visualOffset.y = 0;
     part->visualOffset.z = 0;
-    part->absolutePosition.x = 0.0f;
-    part->absolutePosition.y = 0.0f;
-    part->absolutePosition.z = 0.0f;
+    part->absolutePos.x = 0.0f;
+    part->absolutePos.y = 0.0f;
+    part->absolutePos.z = 0.0f;
     part->defenseTable = bMarioDefenseTable;
 
     if (gBattleStatus.flags2 & BS_FLAGS2_PEACH_BATTLE) {
@@ -1561,9 +1561,9 @@ void load_partner_actor(void) {
             part->visualOffset.x = 0;
             part->visualOffset.y = 0;
             part->visualOffset.z = 0;
-            part->absolutePosition.x = 0.0f;
-            part->absolutePosition.y = 0.0f;
-            part->absolutePosition.z = 0.0f;
+            part->absolutePos.x = 0.0f;
+            part->absolutePos.y = 0.0f;
+            part->absolutePos.z = 0.0f;
             part->defenseTable = ActorPartBlueprint->defenseTable;
             part->idleAnimations = ActorPartBlueprint->idleAnimations;
             part->eventFlags = ActorPartBlueprint->eventFlags;
@@ -1819,9 +1819,9 @@ Actor* create_actor(Formation formation) {
         part->visualOffset.y = 0;
         part->visualOffset.z = 0;
 
-        part->absolutePosition.x = actor->currentPos.x;
-        part->absolutePosition.y = actor->currentPos.y;
-        part->absolutePosition.z = actor->currentPos.z;
+        part->absolutePos.x = actor->currentPos.x;
+        part->absolutePos.y = actor->currentPos.y;
+        part->absolutePos.z = actor->currentPos.z;
         part->currentPos.x = actor->currentPos.x;
         part->currentPos.y = actor->currentPos.y;
         part->currentPos.z = actor->currentPos.z;

@@ -59,13 +59,13 @@ void action_update_step_up(void) {
     integrate_gravity();
     sin_cos_rad(DEG_TO_RAD(playerStatus->targetYaw), &sinTheta, &cosTheta);
     colliderID = NO_COLLIDER;
-    playerStatus->position.x += sinTheta * 3.0f;
-    playerStatus->position.z -= cosTheta * 3.0f;
+    playerStatus->pos.x += sinTheta * 3.0f;
+    playerStatus->pos.z -= cosTheta * 3.0f;
 
     if (playerStatus->gravityIntegrator[0] < 0.0f) {
-        playerStatus->position.y = player_check_collision_below(playerStatus->gravityIntegrator[0], &colliderID);
+        playerStatus->pos.y = player_check_collision_below(playerStatus->gravityIntegrator[0], &colliderID);
     } else {
-        playerStatus->position.y += playerStatus->gravityIntegrator[0];
+        playerStatus->pos.y += playerStatus->gravityIntegrator[0];
     }
 
     if (colliderID >= 0) {

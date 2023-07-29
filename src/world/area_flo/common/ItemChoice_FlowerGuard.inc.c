@@ -8,9 +8,9 @@ API_CALLABLE(N(FlowerGuard_SetItemEntityPosition)) {
     s32 z = evt_get_variable(script, *args++);
     ItemEntity* item = get_item_entity(itemIdx);
 
-    item->position.x = x;
-    item->position.y = y;
-    item->position.z = z;
+    item->pos.x = x;
+    item->pos.y = y;
+    item->pos.z = z;
 
     return ApiStatus_DONE2;
 }

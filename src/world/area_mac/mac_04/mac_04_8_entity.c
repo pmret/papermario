@@ -27,7 +27,7 @@ void N(render_shrunk_player)(void) {
     s32 screenX, screenY, screenZ;
 
     get_screen_coords(gCurrentCamID,
-        gPlayerStatus.position.x, gPlayerStatus.position.y, gPlayerStatus.position.z,
+        gPlayerStatus.pos.x, gPlayerStatus.pos.y, gPlayerStatus.pos.z,
         &screenX, &screenY, &screenZ);
 
     renderTask.appendGfxArg = &gPlayerStatus;
@@ -47,7 +47,7 @@ void N(appendGfx_shrunk_player)(void* data) {
     guRotateF(transformMtx, playerStatus->spriteFacingAngle, 0.0f, 1.0f, 0.0f);
     guScaleF(tempMtx, shrinkScale * SPRITE_WORLD_SCALE_D, shrinkScale * SPRITE_WORLD_SCALE_D, shrinkScale * SPRITE_WORLD_SCALE_D);
     guMtxCatF(transformMtx, tempMtx, transformMtx);
-    guTranslateF(tempMtx, playerStatus->position.x, playerStatus->position.y, playerStatus->position.z);
+    guTranslateF(tempMtx, playerStatus->pos.x, playerStatus->pos.y, playerStatus->pos.z);
     guMtxCatF(transformMtx, tempMtx, transformMtx);
     playerStatus->animNotifyValue = spr_update_player_sprite(PLAYER_SPRITE_MAIN, playerStatus->trueAnimation, 1.0f);
     spr_draw_player_sprite(PLAYER_SPRITE_MAIN, 0, 0, NULL, transformMtx);

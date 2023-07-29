@@ -39,12 +39,12 @@ s32 N(CleftAI_CanSeePlayer)(Evt* script, MobileAISettings* aiSettings, EnemyDete
         angle = 270.0f;
     }
 
-    playerX = gPlayerStatusPtr->position.x;
-    playerZ = gPlayerStatusPtr->position.z;
+    playerX = gPlayerStatusPtr->pos.x;
+    playerZ = gPlayerStatusPtr->pos.z;
     if (fabsf(get_clamped_angle_diff(angle, atan2(npc->pos.x, npc->pos.z, playerX, playerZ))) > 75.0) {
         seesPlayer = FALSE;
     }
-    if (fabsf(npc->pos.y - gPlayerStatusPtr->position.y) >= 40.0f) {
+    if (fabsf(npc->pos.y - gPlayerStatusPtr->pos.y) >= 40.0f) {
         seesPlayer = FALSE;
     }
     if (gPartnerStatus.actingPartner == PARTNER_BOW) {
@@ -91,7 +91,7 @@ void N(CleftAI_PreAmbush)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
 
     npc->duration--;
     if (npc->duration <= 0) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
         enable_npc_shadow(npc);
         npc->currentAnim = enemy->animList[10];
         npc->duration = 8;
@@ -104,7 +104,7 @@ void N(CleftAI_Ambush)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVol
 
     npc->duration--;
     if (npc->duration <= 0) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
         npc->collisionHeight = 26;
         npc->collisionDiameter = 24;
         script->AI_TEMP_STATE = AI_STATE_CLEFT_FIND_PLAYER_INIT;
@@ -127,7 +127,7 @@ void N(CleftAI_FindPlayer)(Evt* script, MobileAISettings* aiSettings, EnemyDetec
     EffectInstance* var;
 
     if (basic_ai_check_player_dist(volume, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 0)) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
         script->AI_TEMP_STATE = AI_STATE_CLEFT_CHASE_INIT;
     } else {
         npc->duration--;
@@ -158,7 +158,7 @@ void N(CleftAI_RevUp)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolu
     Enemy* enemy = script->owner1.enemy;
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
-    npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+    npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
     if (npc->duration % 3 == 0) {
         fx_walking_dust(2, npc->pos.x, npc->pos.y, npc->pos.z + 2.0f, 0, 0);
     }
@@ -170,8 +170,8 @@ void N(CleftAI_RevUp)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolu
         enemy->unk_10.z = npc->pos.z;
         enemy->hitboxIsActive = TRUE;
         npc->moveSpeed = aiSettings->chaseSpeed;
-        npc->duration = dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x,
-                               gPlayerStatusPtr->position.z) / npc->moveSpeed + 0.9;
+        npc->duration = dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x,
+                               gPlayerStatusPtr->pos.z) / npc->moveSpeed + 0.9;
         if (npc->duration < 15) {
             npc->duration = 15;
         }
@@ -235,7 +235,7 @@ void N(CleftAI_ReturnHome)(Evt* script, MobileAISettings* aiSettings, EnemyDetec
     Npc* npc = get_npc_unsafe(enemy->npcID);
 
     if (basic_ai_check_player_dist(volume, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 0)) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
         script->AI_TEMP_STATE = AI_STATE_CLEFT_CHASE_INIT;
     } else if (dist2D(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x, enemy->territory->wander.centerPos.z) <= npc->moveSpeed) {
         npc->duration = 10;

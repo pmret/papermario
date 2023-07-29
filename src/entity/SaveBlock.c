@@ -91,9 +91,9 @@ void entity_SaveBlock_resume_game(void) {
 }
 
 void entity_SaveBlock_save_data(void) {
-    gGameStatusPtr->savedPos.x = gPlayerStatusPtr->position.x;
-    gGameStatusPtr->savedPos.y = gPlayerStatusPtr->position.y;
-    gGameStatusPtr->savedPos.z = gPlayerStatusPtr->position.z;
+    gGameStatusPtr->savedPos.x = gPlayerStatusPtr->pos.x;
+    gGameStatusPtr->savedPos.y = gPlayerStatusPtr->pos.y;
+    gGameStatusPtr->savedPos.z = gPlayerStatusPtr->pos.z;
     fio_save_game(gGameStatusPtr->saveSlot);
 }
 

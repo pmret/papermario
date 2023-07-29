@@ -115,7 +115,7 @@ void entity_shattering_block_init(Entity* entity) {
     Mtx* fragmentMatrices = NULL;
     Gfx** fragmentDisplayLists = NULL;
 
-    entity->dataBuf.shatteringBlock->originalPosY = entity->position.y;
+    entity->dataBuf.shatteringBlock->originalPosY = entity->pos.y;
     type = get_entity_type(entity->listIndex);
 
     if (type == ENTITY_TYPE_HAMMER1_BLOCK_TINY ||
@@ -144,7 +144,7 @@ void entity_shattering_block_init(Entity* entity) {
             fragmentMatrices = Entity_ShatteringHammer3Block_FragmentsMatrices;
             break;
         case ENTITY_TYPE_BRICK_BLOCK:
-            sfx_play_sound_at_position(SOUND_158, SOUND_SPACE_MODE_0, entity->position.x, entity->position.y, entity->position.z);
+            sfx_play_sound_at_position(SOUND_158, SOUND_SPACE_MODE_0, entity->pos.x, entity->pos.y, entity->pos.z);
             fragmentDisplayLists = Entity_ShatteringBrickBlock_FragmentsRender;
             fragmentMatrices = Entity_ShatteringBrickBlock_FragmentsMatrices;
             break;
@@ -202,5 +202,5 @@ void entity_breakable_block_create_shattering_entity(Entity* entity) {
         return;
     }
 
-    create_entity(bp, (s32)entity->position.x, (s32)entity->position.y, (s32)entity->position.z, 0, MAKE_ENTITY_END);
+    create_entity(bp, (s32)entity->pos.x, (s32)entity->pos.y, (s32)entity->pos.z, 0, MAKE_ENTITY_END);
 }

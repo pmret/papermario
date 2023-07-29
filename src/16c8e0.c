@@ -1070,12 +1070,12 @@ void btl_save_world_cameras(void) {
         D_8029DA50[i] = gCameras[i];
     }
 
-    D_8029EFB0 = playerStatus->position.x;
-    D_8029EFB4 = playerStatus->position.y;
-    D_8029EFB8 = playerStatus->position.z;
-    playerStatus->position.x = NPC_DISPOSE_POS_X;
-    playerStatus->position.y = NPC_DISPOSE_POS_Y;
-    playerStatus->position.z = NPC_DISPOSE_POS_Z;
+    D_8029EFB0 = playerStatus->pos.x;
+    D_8029EFB4 = playerStatus->pos.y;
+    D_8029EFB8 = playerStatus->pos.z;
+    playerStatus->pos.x = NPC_DISPOSE_POS_X;
+    playerStatus->pos.y = NPC_DISPOSE_POS_Y;
+    playerStatus->pos.z = NPC_DISPOSE_POS_Z;
 }
 
 void btl_restore_world_cameras(void) {
@@ -1088,9 +1088,9 @@ void btl_restore_world_cameras(void) {
     }
 
     gCurrentCameraID = CAM_DEFAULT;
-    playerStatus->position.x = D_8029EFB0;
-    playerStatus->position.y = D_8029EFB4;
-    playerStatus->position.z = D_8029EFB8;
+    playerStatus->pos.x = D_8029EFB0;
+    playerStatus->pos.y = D_8029EFB4;
+    playerStatus->pos.z = D_8029EFB8;
 
     if (bSavedOverrideFlags & GLOBAL_OVERRIDES_ENABLE_FLOOR_REFLECTION) {
         gOverrideFlags |= GLOBAL_OVERRIDES_ENABLE_FLOOR_REFLECTION;

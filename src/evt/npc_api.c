@@ -529,7 +529,7 @@ ApiStatus NpcFacePlayer(Evt* script, s32 isInitialCall) {
         }
 
         *initialYaw = npc->yaw;
-        *deltaYaw = atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z) - *initialYaw;
+        *deltaYaw = atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z) - *initialYaw;
         script->functionTempPtr[0] = npc;
         *turnTime = evt_get_variable(script, *args++);
         npc->duration = 0;
@@ -821,12 +821,12 @@ s32 BringPartnerOut(Evt* script, s32 isInitialCall) {
         npc->scale.z = 0.0f;
 
         npc->moveToPos.x = targetX = partner->pos.x;
-        playerY = playerStatus->position.y;
-        npc->moveToPos.y = playerStatus->position.y;
+        playerY = playerStatus->pos.y;
+        npc->moveToPos.y = playerStatus->pos.y;
         npc->moveToPos.z = targetZ = partner->pos.z + 30.0f;
-        npc->pos.x = playerX = playerStatus->position.x;
-        npc->pos.y = targetY = playerStatus->position.y + (playerStatus->colliderHeight / 2);
-        playerZ = playerStatus->position.z;
+        npc->pos.x = playerX = playerStatus->pos.x;
+        npc->pos.y = targetY = playerStatus->pos.y + (playerStatus->colliderHeight / 2);
+        playerZ = playerStatus->pos.z;
         npc->moveSpeed = 4.0f;
         npc->jumpScale = 1.6f;
         npc->pos.z = playerZ;
@@ -889,13 +889,13 @@ ApiStatus PutPartnerAway(Evt* script, s32 isInitialCall) {
         if (wExtraPartnerID != 0) {
             partner->flags &= ~NPC_FLAG_GRAVITY;
             partner->flags &= ~NPC_FLAG_8;
-            targetX = playerStatus->position.x;
+            targetX = playerStatus->pos.x;
             partner->moveToPos.x = targetX;
             partnerX = partner->pos.x;
-            targetY = playerStatus->position.y + (playerStatus->colliderHeight / 2);
+            targetY = playerStatus->pos.y + (playerStatus->colliderHeight / 2);
             partner->moveToPos.y = targetY;
             partnerY = partner->pos.y;
-            targetZ = playerStatus->position.z;
+            targetZ = playerStatus->pos.z;
             partner->moveToPos.z = targetZ;
             partnerZ = partner->pos.z;
             partner->moveSpeed = 4.0f;

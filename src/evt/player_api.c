@@ -72,9 +72,9 @@ ApiStatus SetPlayerPos(Evt* script, s32 isInitialCall) {
     playerNpc->pos.y = y;
     playerNpc->pos.z = z;
 
-    playerStatus->position.x = playerNpc->pos.x;
-    playerStatus->position.y = playerNpc->pos.y;
-    playerStatus->position.z = playerNpc->pos.z;
+    playerStatus->pos.x = playerNpc->pos.x;
+    playerStatus->pos.y = playerNpc->pos.y;
+    playerStatus->pos.z = playerNpc->pos.z;
 
     return ApiStatus_DONE2;
 }
@@ -145,14 +145,14 @@ ApiStatus PlayerMoveTo(Evt* script, s32 isInitialCall) {
         f32 moveSpeed;
 
         script->functionTemp[0] = evt_get_variable(script, *args++);
-        playerStatus->targetYaw = atan2(playerStatus->position.x, playerStatus->position.z, targetX, targetZ);
+        playerStatus->targetYaw = atan2(playerStatus->pos.x, playerStatus->pos.z, targetX, targetZ);
 
         if (script->functionTemp[0] == 0) {
-            script->functionTemp[0] = dist2D(playerStatus->position.x, playerStatus->position.z, targetX,
+            script->functionTemp[0] = dist2D(playerStatus->pos.x, playerStatus->pos.z, targetX,
                                                targetZ) / playerNpc->moveSpeed;
             moveSpeed = playerNpc->moveSpeed;
         } else {
-            moveSpeed = dist2D(playerStatus->position.x, playerStatus->position.z, targetX, targetZ) / script->functionTemp[0];
+            moveSpeed = dist2D(playerStatus->pos.x, playerStatus->pos.z, targetX, targetZ) / script->functionTemp[0];
         }
         move_player(script->functionTemp[0], playerStatus->targetYaw, moveSpeed);
     }
@@ -173,8 +173,8 @@ ApiStatus func_802D1270(Evt* script, s32 isInitialCall) {
         f32 dist;
         f32 moveSpeed;
 
-        playerStatus->targetYaw = atan2(playerStatus->position.x, playerStatus->position.z, targetX, targetZ);
-        dist = dist2D(playerStatus->position.x, playerStatus->position.z, targetX, targetZ);
+        playerStatus->targetYaw = atan2(playerStatus->pos.x, playerStatus->pos.z, targetX, targetZ);
+        dist = dist2D(playerStatus->pos.x, playerStatus->pos.z, targetX, targetZ);
         script->functionTemp[0] = dist / var3;
         moveSpeed = dist / script->functionTemp[0];
 
@@ -195,12 +195,12 @@ ApiStatus func_802D1380(Evt* script, s32 isInitialCall) {
         f32 targetZ = evt_get_variable(script, *args++);
 
         playerNpc->duration = evt_get_variable(script, *args++);
-        playerStatus->targetYaw = atan2(playerStatus->position.x, playerStatus->position.z, targetX, targetZ);
+        playerStatus->targetYaw = atan2(playerStatus->pos.x, playerStatus->pos.z, targetX, targetZ);
 
         if (playerNpc->duration != 0) {
-            playerNpc->moveSpeed = dist2D(playerStatus->position.x, playerStatus->position.z, targetX, targetZ) / (f32) playerNpc->duration;
+            playerNpc->moveSpeed = dist2D(playerStatus->pos.x, playerStatus->pos.z, targetX, targetZ) / (f32) playerNpc->duration;
         } else {
-            playerNpc->duration = dist2D(playerStatus->position.x, playerStatus->position.z, targetX, targetZ) / playerNpc->moveSpeed;
+            playerNpc->duration = dist2D(playerStatus->pos.x, playerStatus->pos.z, targetX, targetZ) / playerNpc->moveSpeed;
             if (playerNpc->duration == 0) {
                 playerNpc->duration = 1;
             }
@@ -233,9 +233,9 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
         zTemp = evt_get_variable(script, *args++);
         duration = evt_get_variable(script, *args++);
 
-        playerNpc->pos.x = playerStatus->position.x;
-        playerNpc->pos.y = playerStatus->position.y;
-        playerNpc->pos.z = playerStatus->position.z;
+        playerNpc->pos.x = playerStatus->pos.x;
+        playerNpc->pos.y = playerStatus->pos.y;
+        playerNpc->pos.z = playerStatus->pos.z;
         playerNpc->moveToPos.x = xTemp;
         playerNpc->moveToPos.y = yTemp;
         playerNpc->moveToPos.z = zTemp;
@@ -293,9 +293,9 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
         suggest_player_anim_allow_backward(anim);
     }
 
-    playerStatus->position.x = playerNpc->pos.x;
-    playerStatus->position.y = playerNpc->pos.y;
-    playerStatus->position.z = playerNpc->pos.z;
+    playerStatus->pos.x = playerNpc->pos.x;
+    playerStatus->pos.y = playerNpc->pos.y;
+    playerStatus->pos.z = playerNpc->pos.z;
 
     if (mode == 0) {
         playerStatus->targetYaw = playerNpc->yaw;
@@ -326,7 +326,7 @@ s32 player_jump(Evt* script, s32 isInitialCall, s32 mode) {
             yTemp = player_check_collision_below(playerNpc->jumpVelocity, &colliderID);
 
             if (colliderID >= 0) {
-                playerStatus->position.y = yTemp;
+                playerStatus->pos.y = yTemp;
                 player_handle_floor_collider_type(colliderID);
                 handle_floor_behavior();
             }
@@ -409,7 +409,7 @@ ApiStatus PlayerFaceNpc(Evt* script, s32 isInitialCall) {
         }
 
         *playerTargetYaw = playerNpc->yaw = playerStatus->targetYaw;
-        *angle = atan2(playerStatus->position.x, playerStatus->position.z, npc->pos.x, npc->pos.z) - *playerTargetYaw;
+        *angle = atan2(playerStatus->pos.x, playerStatus->pos.z, npc->pos.x, npc->pos.z) - *playerTargetYaw;
         *ft3 = evt_get_variable(script, *args++);
 
         playerNpc->duration = 0;
@@ -468,9 +468,9 @@ ApiStatus GetPlayerPos(Evt* script, s32 isInitialCall) {
     Bytecode outVar2 = *args++;
     Bytecode outVar3 = *args++;
 
-    evt_set_variable(script, outVar1, playerStatus->position.x);
-    evt_set_variable(script, outVar2, playerStatus->position.y);
-    evt_set_variable(script, outVar3, playerStatus->position.z);
+    evt_set_variable(script, outVar1, playerStatus->pos.x);
+    evt_set_variable(script, outVar2, playerStatus->pos.y);
+    evt_set_variable(script, outVar3, playerStatus->pos.z);
     return ApiStatus_DONE2;
 }
 
@@ -527,10 +527,10 @@ ApiStatus UseEntryHeading(Evt* script, s32 isInitialCall) {
     sin_cos_deg(clamp_angle((*mapSettings->entryList)[gGameStatusPtr->entryID].yaw + 180.0f), &sinTheta, &cosTheta);
 
     exitTangentFrac = gGameStatusPtr->exitTangent * 0.3f;
-    gPlayerStatus.position.x = (entryX + (var1 * sinTheta)) - (exitTangentFrac * cosTheta);
-    gPlayerStatus.position.z = (entryZ - (var1 * cosTheta)) - (exitTangentFrac * sinTheta);
+    gPlayerStatus.pos.x = (entryX + (var1 * sinTheta)) - (exitTangentFrac * cosTheta);
+    gPlayerStatus.pos.z = (entryZ - (var1 * cosTheta)) - (exitTangentFrac * sinTheta);
 
-    script->varTableF[5] = dist2D(gPlayerStatus.position.x, gPlayerStatus.position.z, entryX, entryZ) / var2;
+    script->varTableF[5] = dist2D(gPlayerStatus.pos.x, gPlayerStatus.pos.z, entryX, entryZ) / var2;
     gPlayerStatus.flags |= PS_FLAG_CAMERA_DOESNT_FOLLOW;
 
     return ApiStatus_DONE2;
@@ -553,7 +553,7 @@ ApiStatus UseExitHeading(Evt* script, s32 isInitialCall) {
         f32 entryX = (*mapSettings->entryList)[entryID].x;
         f32 entryZ = (*mapSettings->entryList)[entryID].z;
         f32 temp = (var1 + 10.0f) / 2;
-        f32 temp_f2 = dist2D(entryX, entryZ, playerStatus->position.x, playerStatus->position.z) - temp;
+        f32 temp_f2 = dist2D(entryX, entryZ, playerStatus->pos.x, playerStatus->pos.z) - temp;
         f32 sinTheta;
         f32 cosTheta;
         f32 exitTangentFrac;
@@ -566,10 +566,10 @@ ApiStatus UseExitHeading(Evt* script, s32 isInitialCall) {
         }
 
         sin_cos_deg(clamp_angle((*mapSettings->entryList)[entryID].yaw + 180.0f), &sinTheta, &cosTheta);
-        gGameStatusPtr->exitTangent = (cosTheta * (playerStatus->position.x - entryX)) - (sinTheta * (entryZ - playerStatus->position.z));
+        gGameStatusPtr->exitTangent = (cosTheta * (playerStatus->pos.x - entryX)) - (sinTheta * (entryZ - playerStatus->pos.z));
         exitTangentFrac = gGameStatusPtr->exitTangent * 0.3f;
-        script->varTable[1] = (playerStatus->position.x + (var1 * sinTheta)) - (exitTangentFrac * cosTheta);
-        script->varTable[3] = (playerStatus->position.z - (var1 * cosTheta)) - (exitTangentFrac * sinTheta);
+        script->varTable[1] = (playerStatus->pos.x + (var1 * sinTheta)) - (exitTangentFrac * cosTheta);
+        script->varTable[3] = (playerStatus->pos.z - (var1 * cosTheta)) - (exitTangentFrac * sinTheta);
         script->varTable[2] = (*mapSettings->entryList)[entryID].y;
         *varTableVar5 = var1 / 15;
         playerStatus->animFlags |= PA_FLAG_CHANGING_MAP;
@@ -723,8 +723,8 @@ ApiStatus FacePlayerTowardPoint(Evt* script, s32 isInitialCall) {
 
         *initialYaw = playerNpc->yaw = playerStatus->targetYaw;
 
-        if (playerStatus->position.x != targetX || playerStatus->position.z != targetY) {
-            targetYaw = atan2(playerStatus->position.x, playerStatus->position.z, targetX, targetY);
+        if (playerStatus->pos.x != targetX || playerStatus->pos.z != targetY) {
+            targetYaw = atan2(playerStatus->pos.x, playerStatus->pos.z, targetX, targetY);
         } else {
             targetYaw = playerStatus->targetYaw;
         }

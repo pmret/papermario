@@ -346,10 +346,10 @@ void render_entities(void) {
             if (!gGameStatusPtr->isBattle) {
                 if (gEntityHideMode != ENTITY_HIDE_MODE_0 &&
                     !(entity->flags & ENTITY_FLAG_IGNORE_DISTANCE_CULLING) &&
-                    dist2D(gPlayerStatusPtr->position.x,
-                           gPlayerStatusPtr->position.z,
-                           entity->position.x,
-                           entity->position.z) > 200.0f
+                    dist2D(gPlayerStatusPtr->pos.x,
+                           gPlayerStatusPtr->pos.z,
+                           entity->pos.x,
+                           entity->pos.z) > 200.0f
                 ) {
                     continue;
                 }
@@ -482,7 +482,7 @@ void update_entity_transform_matrix(Entity* entity) {
         return;
     }
 
-    guTranslateF(sp58, entity->position.x, entity->position.y, entity->position.z);
+    guTranslateF(sp58, entity->pos.x, entity->pos.y, entity->pos.z);
     guRotateF(spD8, entity->rotation.x, 1.0f, 0.0f, 0.0f);
     guRotateF(sp118, entity->rotation.y, 0.0f, 1.0f, 0.0f);
     guRotateF(sp158, entity->rotation.z, 0.0f, 0.0f, 1.0f);
@@ -503,7 +503,7 @@ void update_shadow_transform_matrix(Shadow* shadow) {
     Matrix4f sp158;
     Matrix4f sp198;
 
-    guTranslateF(sp58, shadow->position.x, shadow->position.y, shadow->position.z);
+    guTranslateF(sp58, shadow->pos.x, shadow->pos.y, shadow->pos.z);
     guRotateF(sp118, shadow->rotation.x, 1.0f, 0.0f, 0.0f);
     guRotateF(spD8, shadow->rotation.y, 0.0f, 1.0f, 0.0f);
     guRotateF(sp158, shadow->rotation.z, 0.0f, 0.0f, 1.0f);
@@ -733,7 +733,7 @@ s32 entity_try_partner_interaction_trigger(s32 entityIdx) {
 }
 
 s32 test_player_entity_aabb(Entity* entity) {
-    f32 yTemp = entity->position.y - (gPlayerStatus.position.y + gPlayerStatus.colliderHeight);
+    f32 yTemp = entity->pos.y - (gPlayerStatus.pos.y + gPlayerStatus.colliderHeight);
     f32 xCollRadius;
     f32 zCollRadius;
     f32 xDist;
@@ -744,9 +744,9 @@ s32 test_player_entity_aabb(Entity* entity) {
     }
 
     xCollRadius = (gPlayerStatus.colliderDiameter + entity->aabb.x) * 0.5;
-    xDist = fabsf(gPlayerStatus.position.x - entity->position.x);
+    xDist = fabsf(gPlayerStatus.pos.x - entity->pos.x);
     zCollRadius = ((gPlayerStatus.colliderDiameter + entity->aabb.z) * 0.5);
-    zDist = fabsf(gPlayerStatus.position.z - entity->position.z);
+    zDist = fabsf(gPlayerStatus.pos.z - entity->pos.z);
 
     if (xCollRadius < xDist || zCollRadius < zDist) {
         return 0;
@@ -1261,9 +1261,9 @@ s32 create_entity(EntityBlueprint* bp, ...) {
     entity->collisionFlags = 0;
     entity->collisionTimer = 0;
     entity->renderSetupFunc = NULL;
-    entity->position.x = x;
-    entity->position.y = y;
-    entity->position.z = z;
+    entity->pos.x = x;
+    entity->pos.y = y;
+    entity->pos.z = z;
     entity->rotation.x = 0.0f;
     entity->rotation.y = rotY;
     entity->rotation.z = 0.0f;
@@ -1333,9 +1333,9 @@ s32 create_shadow_from_data(ShadowBlueprint* bp, f32 x, f32 y, f32 z) {
     shadow->flags = bp->flags | ENTITY_FLAG_CREATED;
     shadow->alpha = 128;
     shadow->unk_06 = 0x80;
-    shadow->position.x = x;
-    shadow->position.y = y;
-    shadow->position.z = z;
+    shadow->pos.x = x;
+    shadow->pos.y = y;
+    shadow->pos.z = z;
     shadow->scale.x = 1.0f;
     shadow->scale.y = 1.0f;
     shadow->scale.z = 1.0f;
@@ -1607,9 +1607,9 @@ void update_entity_shadow_position(Entity* entity) {
             }
         }
 
-        rayX = entity->position.x;
-        rayY = entity->position.y;
-        rayZ = entity->position.z;
+        rayX = entity->pos.x;
+        rayY = entity->pos.y;
+        rayZ = entity->pos.z;
 
         if (!entity_raycast_down(&rayX, &rayY, &rayZ, &hitYaw, &hitPitch, &hitLength) && hitLength == 32767.0f) {
             hitLength = 0.0f;
@@ -1627,17 +1627,17 @@ void update_entity_shadow_position(Entity* entity) {
             shadow->scale.z = (entity->aabb.z / hitLength) * entity->scale.z;
         }
 
-        shadow->position.x = entity->position.x;
-        shadow->position.z = entity->position.z;
-        shadow->position.y = rayY;
+        shadow->pos.x = entity->pos.x;
+        shadow->pos.z = entity->pos.z;
+        shadow->pos.y = rayY;
         entity->shadowPosY = rayY;
         shadow->rotation.x = hitYaw;
         shadow->rotation.z = hitPitch;
         shadow->rotation.y = entity->rotation.y;
 
-        if (entity->position.y < rayY) {
+        if (entity->pos.y < rayY) {
             shadow->flags |= ENTITY_FLAG_SKIP_UPDATE;
-            entity->position.y = rayY + 10.0f;
+            entity->pos.y = rayY + 10.0f;
         } else {
             shadow->flags &= ~ENTITY_FLAG_SKIP_UPDATE;
         }
@@ -1753,9 +1753,9 @@ void set_peach_shadow_scale(Shadow* shadow, f32 scale) {
 }
 
 s32 is_block_on_ground(Entity* block) {
-    f32 x = block->position.x;
-    f32 y = block->position.y;
-    f32 z = block->position.z;
+    f32 x = block->pos.x;
+    f32 y = block->pos.y;
+    f32 z = block->pos.z;
     f32 hitYaw;
     f32 hitPitch;
     f32 hitLength;

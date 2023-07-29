@@ -60,21 +60,21 @@ API_CALLABLE(N(DetectLowerChainGrab)) {
         return ApiStatus_BLOCK;
     }
 
-    if (fabs(playerStatus->position.x - 50.0f) > 14.0) {
+    if (fabs(playerStatus->pos.x - 50.0f) > 14.0) {
         return ApiStatus_BLOCK;
     }
 
-    if (fabs(playerStatus->position.y - 150.0f) > 14.0) {
+    if (fabs(playerStatus->pos.y - 150.0f) > 14.0) {
         return ApiStatus_BLOCK;
     }
 
-    if (fabs(playerStatus->position.z - -34.0f) > 14.0) {
+    if (fabs(playerStatus->pos.z - -34.0f) > 14.0) {
         return ApiStatus_BLOCK;
     }
 
-    playerStatus->position.x = 50.0f;
-    playerStatus->position.y = 150.0f;
-    playerStatus->position.z = -34.0f;
+    playerStatus->pos.x = 50.0f;
+    playerStatus->pos.y = 150.0f;
+    playerStatus->pos.z = -34.0f;
     playerStatus->currentSpeed = 0.0f;
     return ApiStatus_DONE2;
 }
@@ -307,21 +307,21 @@ API_CALLABLE(N(DetectUpperChainGrab)) {
         return ApiStatus_BLOCK;
     }
 
-    if (fabs(playerStatus->position.x - 680.0f) > 14.0) {
+    if (fabs(playerStatus->pos.x - 680.0f) > 14.0) {
         return ApiStatus_BLOCK;
     }
 
-    if (fabs(playerStatus->position.y - 275.0f) > 14.0) {
+    if (fabs(playerStatus->pos.y - 275.0f) > 14.0) {
         return ApiStatus_BLOCK;
     }
 
-    if (fabs(playerStatus->position.z - -35.0f) > 14.0) {
+    if (fabs(playerStatus->pos.z - -35.0f) > 14.0) {
         return ApiStatus_BLOCK;
     }
 
-    playerStatus->position.x = 680.0f;
-    playerStatus->position.y = 275.0f;
-    playerStatus->position.z = -35.0f;
+    playerStatus->pos.x = 680.0f;
+    playerStatus->pos.y = 275.0f;
+    playerStatus->pos.z = -35.0f;
     playerStatus->currentSpeed = 0.0f;
     return ApiStatus_DONE2;
 }

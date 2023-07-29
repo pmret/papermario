@@ -23,9 +23,9 @@ s32 N(ProjectileHitbox_GetUsableProjectileID)(Evt* script) {
             facingAngle = 270.0f;
         }
 
-        angleToPlayer = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+        angleToPlayer = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
         deltaAngle = get_clamped_angle_diff(facingAngle, angleToPlayer);
-        if (fabsf(deltaAngle) > 75.0 || (2.0 * npc->collisionHeight <= fabsf(npc->pos.y - gPlayerStatusPtr->position.y))) {
+        if (fabsf(deltaAngle) > 75.0 || (2.0 * npc->collisionHeight <= fabsf(npc->pos.y - gPlayerStatusPtr->pos.y))) {
            return -1;
         }
         if (gPartnerStatus.actingPartner == PARTNER_BOW) {
@@ -191,7 +191,7 @@ API_CALLABLE(N(ProjectileAI_Main)) {
                         npc->rotation.y = 0.0f;
                         npc->rotation.z = 0.0f;
                         npc->moveSpeed = aiSettings->moveSpeed;
-                        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+                        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
                         npc->jumpVelocity = aiSettings->alertRadius;
                         npc->jumpScale = aiSettings->alertOffsetDist;
                         npc->moveToPos.y = npc2->pos.y;

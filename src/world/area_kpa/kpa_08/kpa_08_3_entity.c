@@ -10,7 +10,7 @@ API_CALLABLE(N(ElevatePlayer)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
     if (floor == gCollisionStatus.currentFloor) {
-        playerStatus->position.y = script->varTable[0] + yOffset;
+        playerStatus->pos.y = script->varTable[0] + yOffset;
     }
     return ApiStatus_DONE2;
 }

@@ -248,23 +248,23 @@ API_CALLABLE(N(GetPlayerPushLerpValues)) {
 
     switch ((s32)dino->angle) {
         case 0:
-            script->varTable[3] = playerStatus->position.z;
-            script->varTable[4] = playerStatus->position.z + DINO_CELL_SIZE;
+            script->varTable[3] = playerStatus->pos.z;
+            script->varTable[4] = playerStatus->pos.z + DINO_CELL_SIZE;
             script->varTable[5] = 1;
             break;
         case 90:
-            script->varTable[3] = playerStatus->position.x;
-            script->varTable[4] = playerStatus->position.x + DINO_CELL_SIZE;
+            script->varTable[3] = playerStatus->pos.x;
+            script->varTable[4] = playerStatus->pos.x + DINO_CELL_SIZE;
             script->varTable[5] = 0;
             break;
         case 180:
-            script->varTable[3] = playerStatus->position.z;
-            script->varTable[4] = playerStatus->position.z - DINO_CELL_SIZE;
+            script->varTable[3] = playerStatus->pos.z;
+            script->varTable[4] = playerStatus->pos.z - DINO_CELL_SIZE;
             script->varTable[5] = 1;
             break;
         case 270:
-            script->varTable[3] = playerStatus->position.x;
-            script->varTable[4] = playerStatus->position.x - DINO_CELL_SIZE;
+            script->varTable[3] = playerStatus->pos.x;
+            script->varTable[4] = playerStatus->pos.x - DINO_CELL_SIZE;
             script->varTable[5] = 0;
             break;
     }

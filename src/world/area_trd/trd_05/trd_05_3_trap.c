@@ -78,9 +78,9 @@ void N(appendGfx_FallingSprite)(void) {
 
 API_CALLABLE(N(InitializeFallingSprite)) {
     FallingSprite* falling = &N(Falling);
-    falling->pos.x = gPlayerStatus.position.x;
-    falling->pos.y = gPlayerStatus.position.y + (gPlayerStatus.colliderHeight * SPRITE_WORLD_SCALE_D * 0.5);
-    falling->pos.z = gPlayerStatus.position.z;
+    falling->pos.x = gPlayerStatus.pos.x;
+    falling->pos.y = gPlayerStatus.pos.y + (gPlayerStatus.colliderHeight * SPRITE_WORLD_SCALE_D * 0.5);
+    falling->pos.z = gPlayerStatus.pos.z;
     falling->rot.x = 0.0f;
     falling->rot.y = 0.0f;
     falling->rot.z = 0.0f;

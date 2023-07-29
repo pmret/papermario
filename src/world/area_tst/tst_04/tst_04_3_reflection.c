@@ -27,7 +27,7 @@ void N(worker_render_player_reflection)(void) {
         entityModel = get_entity_model(get_shadow_by_index(playerStatus->shadowID)->entityModelID);
         entityModel->flags |= ENTITY_MODEL_FLAG_REFLECT;
 
-        get_screen_coords(gCurrentCamID, playerStatus->position.x, playerStatus->position.y, -playerStatus->position.z,
+        get_screen_coords(gCurrentCamID, playerStatus->pos.x, playerStatus->pos.y, -playerStatus->pos.z,
                           &screenX, &screenY, &screenZ);
 
         renderTaskPtr->renderMode = playerStatus->renderMode;
@@ -55,7 +55,7 @@ void N(appendGfx_test_player_reflection)(void* data) {
     guMtxCatF(main, rotation, main);
     guScaleF(scale, SPRITE_WORLD_SCALE_F, SPRITE_WORLD_SCALE_F, SPRITE_WORLD_SCALE_F);
     guMtxCatF(main, scale, main);
-    guTranslateF(translation, playerStatus->position.x, playerStatus->position.y, -playerStatus->position.z);
+    guTranslateF(translation, playerStatus->pos.x, playerStatus->pos.y, -playerStatus->pos.z);
     guMtxCatF(main, translation, main);
     spr_update_player_sprite(PLAYER_SPRITE_AUX1, playerStatus->trueAnimation, 1.0f);
     spr_draw_player_sprite(PLAYER_SPRITE_AUX1, 0, 0, NULL, main);

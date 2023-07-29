@@ -129,7 +129,7 @@ API_CALLABLE(N(StarSpiritEffectFunc3)) {
         case 2:
             ptr->unk_04 = ptr->unk_24 + (2.0f * (sin_deg(ptr->unk_4C) + 1.0f));
             ptr->unk_4C = clamp_angle(ptr->unk_4C + 8);
-            if (!(dist3D(playerStatus->position.x, playerStatus->position.y + 20.0f, playerStatus->position.z,
+            if (!(dist3D(playerStatus->pos.x, playerStatus->pos.y + 20.0f, playerStatus->pos.z,
                          ptr->unk_00, ptr->unk_04, ptr->unk_08) > 30.0f)) {
                 ptr->unk_4E = 3;
             }
@@ -184,7 +184,7 @@ API_CALLABLE(N(StarSpiritEffectFunc6)) {
 
     ptr->unk_04 = ptr->unk_24 + (2.0f * (sin_deg(ptr->unk_4C) + 1.0f));
     ptr->unk_4C = clamp_angle(ptr->unk_4C + 8);
-    if (dist2D(playerStatus->position.x, playerStatus->position.z,
+    if (dist2D(playerStatus->pos.x, playerStatus->pos.z,
                ptr->unk_18, ptr->unk_20) <= 30.0f) {
         ptr->unk_4E = 3;
     }

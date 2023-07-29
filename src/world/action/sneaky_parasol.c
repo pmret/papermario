@@ -11,7 +11,7 @@ typedef struct TransformationData {
     /* 0x04 */ s32 reverted;
     /* 0x08 */ s32 disguiseTime;
     /* 0x0C */ s32 revertTime;
-    /* 0x10 */ Vec3f position;
+    /* 0x10 */ Vec3f pos;
     /* 0x1C */ f32 playerRotationRate;
     /* 0x20 */ f32 playerYawOffset;
 } TransformationData;
@@ -51,12 +51,12 @@ Npc* parasol_get_npc(void) {
             if (gGameStatusPtr->peachFlags & PEACH_STATUS_FLAG_8) {
                 gGameStatusPtr->peachFlags &= ~PEACH_STATUS_FLAG_8;
             } else {
-                ret = npc_find_closest(playerStatus->position.x, playerStatus->position.y, playerStatus->position.z, 100.0f);
+                ret = npc_find_closest(playerStatus->pos.x, playerStatus->pos.y, playerStatus->pos.z, 100.0f);
                 if (ret != 0) {
-                    if (fabs(ret->pos.y - playerStatus->position.y) - 1.0 > 0.0) {
+                    if (fabs(ret->pos.y - playerStatus->pos.y) - 1.0 > 0.0) {
                         ret = 0;
                     } else {
-                        angle = clamp_angle(atan2(playerStatus->position.x, playerStatus->position.z, ret->pos.x, ret->pos.z));
+                        angle = clamp_angle(atan2(playerStatus->pos.x, playerStatus->pos.z, ret->pos.x, ret->pos.z));
                         if (fabs(angle - func_800E5348()) > 30.0) {
                             ret = 0;
                         }
@@ -343,34 +343,34 @@ void action_update_parasol(void) {
                 angle = DEG_TO_RAD(cam->currentYaw - 90);
                 radius = 30;
             }
-            transformation->position.x = playerStatus->position.x + (radius * sin_rad(angle));
-            transformation->position.z = playerStatus->position.z - (radius * cos_rad(angle));
-            transformation->position.y = playerStatus->position.y - 20;
+            transformation->pos.x = playerStatus->pos.x + (radius * sin_rad(angle));
+            transformation->pos.z = playerStatus->pos.z - (radius * cos_rad(angle));
+            transformation->pos.y = playerStatus->pos.y - 20;
         }
         if (transformation->disguiseTime <= 10 && transformation->disguiseTime & 1) {
             f64 tempX, tempZ;
 
             fx_sparkles(FX_SPARKLES_3,
-                transformation->position.x - 8,
-                transformation->position.y + 50,
-                transformation->position.z,
+                transformation->pos.x - 8,
+                transformation->pos.y + 50,
+                transformation->pos.z,
                 2);
 
             /*
             TODO something like:
             angle = DEG_TO_RAD((cam->currentYaw + playerStatus->spriteFacingAngle) - 90);
-            transformation->position.x += (10.0 * sin_rad(angle));
-            transformation->position.z -= (10.0 * cos_rad(angle));
+            transformation->pos.x += (10.0 * sin_rad(angle));
+            transformation->pos.z -= (10.0 * cos_rad(angle));
             */
 
             angle = DEG_TO_RAD((cam->currentYaw + playerStatus->spriteFacingAngle) - 90);
 
-            tempX = transformation->position.x;
+            tempX = transformation->pos.x;
             tempX += 10.0 * sin_rad(angle);
-            transformation->position.x = tempX;
+            transformation->pos.x = tempX;
 
-            tempZ = transformation->position.z;
-            transformation->position.z = tempZ - (10.0 * cos_rad(angle));
+            tempZ = transformation->pos.z;
+            transformation->pos.z = tempZ - (10.0 * cos_rad(angle));
         }
     } else if (transformation->disguiseTime == 0) {
         transformation->disguiseTime = -1;
@@ -389,9 +389,9 @@ void action_update_parasol(void) {
             }
             if ((transformation->revertTime & 3) == 0) {
                 fx_stars_shimmer(4,
-                    playerStatus->position.x,
-                    playerStatus->position.y,
-                    playerStatus->position.z,
+                    playerStatus->pos.x,
+                    playerStatus->pos.y,
+                    playerStatus->pos.z,
                     50, 50, 40, 30);
             }
         }

@@ -25,10 +25,10 @@ API_CALLABLE(N(ItemEntityJumpToPos)) {
         jumpState->moveTime = evt_get_variable(script, *args++);
         jumpState->jumpAccel = evt_get_float_variable(script, *args++);
         item = get_item_entity(jumpState->itemEntityIndex);
-        moveDist = dist2D(item->position.x, item->position.z, jumpState->pos.x, jumpState->pos.z);
-        jumpState->moveAngle = atan2(item->position.x, item->position.z, jumpState->pos.x, jumpState->pos.z);
+        moveDist = dist2D(item->pos.x, item->pos.z, jumpState->pos.x, jumpState->pos.z);
+        jumpState->moveAngle = atan2(item->pos.x, item->pos.z, jumpState->pos.x, jumpState->pos.z);
 
-        temp_f2 = item->position.y;
+        temp_f2 = item->pos.y;
         jumpState->jumpVelocity = (jumpState->jumpAccel * jumpState->moveTime * 0.5f)
              + ((jumpState->pos.y - temp_f2) / jumpState->moveTime);
 
@@ -43,15 +43,15 @@ API_CALLABLE(N(ItemEntityJumpToPos)) {
         return ApiStatus_DONE2;
     }
 
-    item->position.x += (jumpState->moveSpeed * sin_deg(jumpState->moveAngle));
-    item->position.z -= (jumpState->moveSpeed * cos_deg(jumpState->moveAngle));
-    item->position.y +=  jumpState->jumpVelocity;
+    item->pos.x += (jumpState->moveSpeed * sin_deg(jumpState->moveAngle));
+    item->pos.z -= (jumpState->moveSpeed * cos_deg(jumpState->moveAngle));
+    item->pos.y +=  jumpState->jumpVelocity;
     jumpState->moveTime--;
     jumpState->jumpVelocity = (jumpState->jumpVelocity - jumpState->jumpAccel);
     if (jumpState->moveTime < 0) {
-        item->position.x = jumpState->pos.x;
-        item->position.y = jumpState->pos.y;
-        item->position.z = jumpState->pos.z;
+        item->pos.x = jumpState->pos.x;
+        item->pos.y = jumpState->pos.y;
+        item->pos.z = jumpState->pos.z;
         jumpState->jumpVelocity = 0.0f;
         heap_free((void*) script->functionTemp[0]);
         return ApiStatus_DONE1;

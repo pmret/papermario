@@ -568,29 +568,29 @@ API_CALLABLE(func_80261DF4) {
     switch (script->functionTemp[1]) {
         case 0:
             script->functionTemp[0]--;
-            item->position.y += script->functionTemp[0];
-            if (item->position.y < 0.0f) {
-                item->position.y = 0.0f;
+            item->pos.y += script->functionTemp[0];
+            if (item->pos.y < 0.0f) {
+                item->pos.y = 0.0f;
                 script->functionTemp[0] = 8;
                 script->functionTemp[1] = 1;
             }
             break;
         case 1:
             script->functionTemp[0]--;
-            item->position.y += script->functionTemp[0];
-            item->position.x += 1.5;
-            if (item->position.y < 0.0f) {
-                item->position.y = 0.0f;
+            item->pos.y += script->functionTemp[0];
+            item->pos.x += 1.5;
+            if (item->pos.y < 0.0f) {
+                item->pos.y = 0.0f;
                 script->functionTemp[0] = 4;
                 script->functionTemp[1] = 2;
             }
             break;
         case 2:
             script->functionTemp[0]--;
-            item->position.y += script->functionTemp[0];
-            item->position.x += 1.2;
-            if (item->position.y < 0.0f) {
-                item->position.y = 0.0f;
+            item->pos.y += script->functionTemp[0];
+            item->pos.x += 1.2;
+            if (item->pos.y < 0.0f) {
+                item->pos.y = 0.0f;
                 script->functionTemp[1] = 3;
             }
             break;
@@ -619,15 +619,15 @@ API_CALLABLE(func_80261FB4) {
     switch (script->functionTemp[0]) {
         case 0:
             ft1 = script->functionTemp[1];
-            deltaX = player->currentPos.x - item->position.x;
-            deltaY = player->currentPos.y + 12.0f - item->position.y;
-            deltaZ = player->currentPos.z - 5.0f - item->position.z;
+            deltaX = player->currentPos.x - item->pos.x;
+            deltaY = player->currentPos.y + 12.0f - item->pos.y;
+            deltaZ = player->currentPos.z - 5.0f - item->pos.z;
 
-            item->position.x += deltaX / ft1;
-            item->position.y += deltaY / ft1;
-            item->position.z += deltaZ / ft1;
+            item->pos.x += deltaX / ft1;
+            item->pos.y += deltaY / ft1;
+            item->pos.z += deltaZ / ft1;
 
-            item->position.y += dist2D(item->position.x, item->position.y, player->currentPos.x,
+            item->pos.y += dist2D(item->pos.x, item->pos.y, player->currentPos.x,
                                        player->currentPos.y + 12.0f) / 5.0f;
 
             if (script->functionTemp[1] == 1) {

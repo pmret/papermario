@@ -470,16 +470,16 @@ s32 npc_do_player_collision(Npc* npc) {
         return FALSE;
     }
 
-    if (playerStatus->position.y + playerStatus->colliderHeight < npc->pos.y) {
+    if (playerStatus->pos.y + playerStatus->colliderHeight < npc->pos.y) {
         return FALSE;
     }
 
-    if (npc->pos.y + npc->collisionHeight < playerStatus->position.y) {
+    if (npc->pos.y + npc->collisionHeight < playerStatus->pos.y) {
         return FALSE;
     }
 
-    playerX = playerStatus->position.x;
-    playerZ = playerStatus->position.z;
+    playerX = playerStatus->pos.x;
+    playerZ = playerStatus->pos.z;
 
     npcColRadius = npc->collisionDiameter / 2;
     playerColRadius = playerStatus->colliderDiameter / 2;
@@ -514,28 +514,28 @@ s32 npc_do_player_collision(Npc* npc) {
 
     if (playerStatus->animFlags & PA_FLAG_RIDING_PARTNER) {
         if (fabsf(get_clamped_angle_diff(yaw, playerYaw)) < 45.0f) {
-            playerStatus->position.x -= deltaX;
-            playerStatus->position.z -= deltaZ;
+            playerStatus->pos.x -= deltaX;
+            playerStatus->pos.z -= deltaZ;
             wPartnerNpc->pos.x -= deltaX;
             wPartnerNpc->pos.z -= deltaZ;
         } else {
-            playerStatus->position.x -= deltaX * 0.5f;
-            playerStatus->position.z -= deltaZ * 0.5f;
+            playerStatus->pos.x -= deltaX * 0.5f;
+            playerStatus->pos.z -= deltaZ * 0.5f;
             wPartnerNpc->pos.x -= deltaX * 0.5f;
             wPartnerNpc->pos.z -= deltaZ * 0.5f;
         }
     } else {
         if (playerStatus->flags & (PS_FLAG_JUMPING | PS_FLAG_FALLING)) {
-            playerStatus->position.x -= deltaX * 0.4f;
-            playerStatus->position.z -= deltaZ * 0.4f;
+            playerStatus->pos.x -= deltaX * 0.4f;
+            playerStatus->pos.z -= deltaZ * 0.4f;
         } else {
             dist = get_clamped_angle_diff(yaw, playerYaw); // required to match
             if (fabsf(dist) < 45.0f) {
-                playerStatus->position.x -= deltaX;
-                playerStatus->position.z -= deltaZ;
+                playerStatus->pos.x -= deltaX;
+                playerStatus->pos.z -= deltaZ;
             } else {
-                playerStatus->position.x -= deltaX * 0.5f;
-                playerStatus->position.z -= deltaZ * 0.5f;
+                playerStatus->pos.x -= deltaX * 0.5f;
+                playerStatus->pos.z -= deltaZ * 0.5f;
             }
         }
     }
@@ -664,7 +664,7 @@ void update_npcs(void) {
                     }
 
                     if ((npc->pos.y < -2000.0f) && !(npc->flags & NPC_FLAG_PARTNER)) {
-                        npc->pos.y = playerStatus->position.y;
+                        npc->pos.y = playerStatus->pos.y;
                         npc->jumpVelocity = 0.0f;
                         npc->moveSpeed = 0.0f;
                         npc->jumpScale = 0.0f;
@@ -707,9 +707,9 @@ void update_npcs(void) {
                                 hitLength = 1000.0f;
                                 entity_raycast_down(&x, &y, &z, &hitYaw, &hitPitch, &hitLength);
                                 set_npc_shadow_scale(shadow, hitLength, npc->collisionDiameter);
-                                shadow->position.x = x;
-                                shadow->position.y = y;
-                                shadow->position.z = z;
+                                shadow->pos.x = x;
+                                shadow->pos.y = y;
+                                shadow->pos.z = z;
                                 shadow->rotation.x = hitYaw;
                                 shadow->rotation.y = npc->renderYaw;
                                 shadow->rotation.z = hitPitch;
@@ -718,12 +718,12 @@ void update_npcs(void) {
                             }
                         } else {
                             if (npc->flags & NPC_FLAG_DONT_UPDATE_SHADOW_Y) {
-                                shadow->position.x = npc->pos.x;
-                                shadow->position.z = npc->pos.z;
+                                shadow->pos.x = npc->pos.x;
+                                shadow->pos.z = npc->pos.z;
                             } else {
-                                shadow->position.x = npc->pos.x;
-                                shadow->position.y = npc->pos.y;
-                                shadow->position.z = npc->pos.z;
+                                shadow->pos.x = npc->pos.x;
+                                shadow->pos.y = npc->pos.y;
+                                shadow->pos.z = npc->pos.z;
                             }
                         }
                     }
@@ -2015,7 +2015,7 @@ Npc* npc_find_closest_simple(f32 x, f32 y, f32 z, f32 radius) {
 
 s32 npc_find_standing_on_entity(s32 entityIndex) {
     s32 idx = entityIndex | COLLISION_WITH_ENTITY_BIT;
-    s32 y = get_entity_by_index(idx)->position.y - 10.0f;
+    s32 y = get_entity_by_index(idx)->pos.y - 10.0f;
     Npc* npc;
     s32 i;
     s32 var_v1;
@@ -2068,7 +2068,7 @@ s32 npc_get_collider_below(Npc* npc) {
     f32 yaw;
 
     if (npc->flags & NPC_FLAG_PARTNER) {
-        y = get_shadow_by_index(npc->shadowIndex)->position.y + 13.0f;
+        y = get_shadow_by_index(npc->shadowIndex)->pos.y + 13.0f;
     } else {
         y = npc->pos.y + 13.0f;
     }

@@ -506,7 +506,7 @@ API_CALLABLE(N(RunMinigame)) {
                     npc->pos.x = centerX;
                     npc->pos.y = centerY;
                     npc->pos.z = centerZ + 2.0;
-                    npc->moveToPos.y = gPlayerStatusPtr->position.y + 35.0f;
+                    npc->moveToPos.y = gPlayerStatusPtr->pos.y + 35.0f;
                     npc->jumpVelocity = 10.5f;
                     npc->jumpScale = 1.5f;
 
@@ -515,9 +515,9 @@ API_CALLABLE(N(RunMinigame)) {
                     enemy->varTable[1] = npc->pos.x * 10.0f;
                     enemy->varTable[2] = npc->pos.y * 10.0f;
                     enemy->varTable[3] = npc->pos.z * 10.0f;
-                    enemy->varTable[4] = gPlayerStatusPtr->position.x * 10.0f;
-                    enemy->varTable[5] = (gPlayerStatusPtr->position.y + 28.0f) * 10.0f;
-                    enemy->varTable[6] = (gPlayerStatusPtr->position.z + 2.0f) * 10.0f;
+                    enemy->varTable[4] = gPlayerStatusPtr->pos.x * 10.0f;
+                    enemy->varTable[5] = (gPlayerStatusPtr->pos.y + 28.0f) * 10.0f;
+                    enemy->varTable[6] = (gPlayerStatusPtr->pos.z + 2.0f) * 10.0f;
                     enemy->varTable[7] = 0;
                     break;
                 case BOX_STATE_FUZZY_ATTACH:
@@ -531,9 +531,9 @@ API_CALLABLE(N(RunMinigame)) {
                         npc->currentAnim = ANIM_Fuzzy_Stunned;
                         gPlayerStatusPtr->anim = ANIM_Mario1_PanicRun;
                         data->mashProgress = 0;
-                        npc->pos.x = gPlayerStatusPtr->position.x;
-                        npc->pos.y = gPlayerStatusPtr->position.y + 28.0;
-                        npc->pos.z = gPlayerStatusPtr->position.z + 2.0;
+                        npc->pos.x = gPlayerStatusPtr->pos.x;
+                        npc->pos.y = gPlayerStatusPtr->pos.y + 28.0;
+                        npc->pos.z = gPlayerStatusPtr->pos.z + 2.0;
                         hud_element_set_script(data->hudElemID_AButton, &HES_MashAButton);
                         hud_element_set_alpha(data->hudElemID_AButton, 255);
                         hud_element_set_alpha(data->hudElemID_Meter, 255);
@@ -627,7 +627,7 @@ API_CALLABLE(N(RunMinigame)) {
                     npc->pos.y = centerY - 10.0f;
                     npc->pos.z = centerZ + 8.0;
                     fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, 0.0f, 10, &writeback);
-                    if (npc->pos.x > gPlayerStatusPtr->position.x) {
+                    if (npc->pos.x > gPlayerStatusPtr->pos.x) {
                         npc->yaw = 270.0f;
                         gPlayerStatusPtr->targetYaw = 95.0f;
                     } else {

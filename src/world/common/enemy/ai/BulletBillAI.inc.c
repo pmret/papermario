@@ -102,7 +102,7 @@ API_CALLABLE(N(BulletBillAI_Main)) {
             script->AI_TEMP_STATE = AI_STATE_BULLET_FIRED;
             // fallthrough
         case AI_STATE_BULLET_FIRED:
-            deltaY = (npc->pos.y - gPlayerStatusPtr->position.y);
+            deltaY = (npc->pos.y - gPlayerStatusPtr->pos.y);
             if ((deltaY > 190.0) || (deltaY < -120.0)) {
                 done = TRUE;
                 break;
@@ -167,7 +167,7 @@ API_CALLABLE(N(BillBlasterAI_Main)) {
         disable_npc_shadow(npc);
     }
 
-    deltaY = npc->pos.y - gPlayerStatusPtr->position.y;
+    deltaY = npc->pos.y - gPlayerStatusPtr->pos.y;
     if ((deltaY > 190.0) || (deltaY < -80.0)) {
         return ApiStatus_BLOCK;
     }

@@ -17,9 +17,9 @@ void get_npc_pos(s32 npcID, f32* outX, f32* outY, f32* outZ, s32* outAirborne) {
     *outAirborne = FALSE;
 
     if (npcID == NPC_SELF) {
-        *outX = playerStatus->position.x;
-        *outY = playerStatus->position.y;
-        *outZ = playerStatus->position.z;
+        *outX = playerStatus->pos.x;
+        *outY = playerStatus->pos.y;
+        *outZ = playerStatus->pos.z;
         if (playerStatus->flags & (PS_FLAG_FALLING | PS_FLAG_JUMPING)) {
             *outAirborne = TRUE;
         }
@@ -44,9 +44,9 @@ void npc_follow_init(Npc* npc, s32 targetNpcID, FollowAnims* anims, f32 walkSpee
     ASSERT(followData != NULL);
 
     for (i = 0; i < ARRAY_COUNT(followData->moveHistory); i++) {
-        followData->moveHistory[i].pos.x = playerStatus->position.x;
-        followData->moveHistory[i].pos.y = playerStatus->position.y;
-        followData->moveHistory[i].pos.z = playerStatus->position.z;
+        followData->moveHistory[i].pos.x = playerStatus->pos.x;
+        followData->moveHistory[i].pos.y = playerStatus->pos.y;
+        followData->moveHistory[i].pos.z = playerStatus->pos.z;
         followData->moveHistory[i].isAirborne = FALSE;
     }
     followData->lastPointIdx = 0;

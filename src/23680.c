@@ -436,14 +436,14 @@ s32 basic_ai_check_player_dist(EnemyDetectVolume* territory, Enemy* enemy, f32 r
         return FALSE;
     }
 
-    if (territory->halfHeight <= fabsf(npc->pos.y - playerStatus->position.y)
+    if (territory->halfHeight <= fabsf(npc->pos.y - playerStatus->pos.y)
             && !(territory->detectFlags & AI_TERRITORY_IGNORE_ELEVATION)) {
         return FALSE;
     }
 
     if (territory->sizeX | territory->sizeZ && is_point_within_region(territory->shape,
             territory->pointX, territory->pointZ,
-            playerStatus->position.x, playerStatus->position.z,
+            playerStatus->pos.x, playerStatus->pos.z,
             territory->sizeX, territory->sizeZ)) {
         return FALSE;
     }
@@ -457,10 +457,10 @@ s32 basic_ai_check_player_dist(EnemyDetectVolume* territory, Enemy* enemy, f32 r
         x = npc->pos.x;
         y = npc->pos.y + npc->collisionHeight * 0.5;
         z = npc->pos.z;
-        dist = dist2D(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
+        dist = dist2D(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
         if (npc_test_move_simple_with_slipping(COLLISION_CHANNEL_10000 | COLLISION_IGNORE_ENTITIES,
                 &x, &y, &z,
-                dist, atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z),
+                dist, atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z),
                 0.1f, 0.1f)) {
             return FALSE;
         }
@@ -487,7 +487,7 @@ s32 basic_ai_check_player_dist(EnemyDetectVolume* territory, Enemy* enemy, f32 r
         } else {
             add_vec2D_polar(&x, &z, fwdPosOffset, 270.0f - npc->renderYaw);
         }
-        if (dist2D(x, z, playerStatus->position.x, playerStatus->position.z) <= radius) {
+        if (dist2D(x, z, playerStatus->pos.x, playerStatus->pos.z) <= radius) {
             return TRUE;
         }
     }
@@ -514,7 +514,7 @@ s32 ai_check_player_dist(Enemy* enemy, s32 chance, f32 radius, f32 moveSpeed) {
             posZ = npc->pos.z;
             add_vec2D_polar(&posX, &posZ, moveSpeed, 270.0f - npc->renderYaw);
 
-            if (dist2D(posX, posZ, playerStatus->position.x, playerStatus->position.z) <= radius) {
+            if (dist2D(posX, posZ, playerStatus->pos.x, playerStatus->pos.z) <= radius) {
                 return TRUE;
             }
         }
@@ -583,7 +583,7 @@ void basic_ai_wander(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolum
                 x = npc->pos.x;
                 y = npc->pos.y;
                 z = npc->pos.z;
-                yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+                yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
                 if (!npc_test_move_simple_with_slipping(npc->collisionChannel, &x, &y, &z, aiSettings->chaseSpeed, yaw, npc->collisionHeight, npc->collisionDiameter)) {
                     npc->yaw = yaw;
                     ai_enemy_play_sound(npc, SOUND_2F4, SOUND_PARAM_MORE_QUIET);
@@ -680,7 +680,7 @@ void basic_ai_loiter(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolum
             x = npc->pos.x;
             y = npc->pos.y;
             z = npc->pos.z;
-            yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+            yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
             if (!npc_test_move_simple_with_slipping(npc->collisionChannel, &x, &y, &z, aiSettings->chaseSpeed, yaw, npc->collisionHeight, npc->collisionDiameter)) {
                 npc->yaw = yaw;
                 ai_enemy_play_sound(npc, SOUND_2F4, SOUND_PARAM_MORE_QUIET);
@@ -753,13 +753,13 @@ void basic_ai_chase_init(Evt* script, MobileAISettings* npcAISettings, EnemyDete
 
     if ((gPlayerStatusPtr->actionState == ACTION_STATE_JUMP || gPlayerStatusPtr->actionState == ACTION_STATE_BOUNCE ||
         gPlayerStatusPtr->actionState == ACTION_STATE_HOP || gPlayerStatusPtr->actionState == ACTION_STATE_FALLING) &&
-        (f64)dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z) < npc->collisionDiameter)
+        (f64)dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z) < npc->collisionDiameter)
     {
         skipTurnAround = TRUE;
     }
 
     if (!skipTurnAround) {
-        f32 angle = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+        f32 angle = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
         f32 deltaAngleToPlayer = get_clamped_angle_diff(npc->yaw, angle);
 
         if (npcAISettings->chaseTurnRate < fabsf(deltaAngleToPlayer)) {
@@ -796,7 +796,7 @@ void basic_ai_chase(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolume
     }
 
     if (enemy->npcSettings->actionFlags & AI_ACTION_04) {
-        if (dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z) > (npc->moveSpeed * 5.0)) {
+        if (dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z) > (npc->moveSpeed * 5.0)) {
             x = npc->pos.x;
             y = npc->pos.y;
             z = npc->pos.z;

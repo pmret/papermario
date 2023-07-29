@@ -30,9 +30,9 @@ API_CALLABLE(N(UpdateLogShadow)) {
     entity_raycast_down(&x, &y, &z, &hitYaw, &hitPitch, &hitLength);
     set_standard_shadow_scale(shadow, hitLength);
     shadow->rotation.y = 0.0f;
-    shadow->position.x = x;
-    shadow->position.y = y;
-    shadow->position.z = z;
+    shadow->pos.x = x;
+    shadow->pos.y = y;
+    shadow->pos.z = z;
     shadow->rotation.x = hitYaw;
     shadow->rotation.z = hitPitch;
     shadow->scale.x *= 2.0f;

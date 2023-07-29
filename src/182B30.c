@@ -737,9 +737,9 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
                         z2 = z1 + actorPart->partOffset.z + actorPart->visualOffset.z;
                         yaw = actorPart->yaw = actor->yaw;
                     } else {
-                        x2 = actorPart->absolutePosition.x + actorPart->visualOffset.x;
-                        y2 = actorPart->absolutePosition.y + actorPart->visualOffset.y;
-                        z2 = actorPart->absolutePosition.z + actorPart->visualOffset.z;
+                        x2 = actorPart->absolutePos.x + actorPart->visualOffset.x;
+                        y2 = actorPart->absolutePos.y + actorPart->visualOffset.y;
+                        z2 = actorPart->absolutePos.z + actorPart->visualOffset.z;
                         yaw = actorPart->yaw;
                     }
                     actorPart->currentPos.x = x2;
@@ -763,9 +763,9 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
                         if (200.0f < dist) {
                             shadow->flags |= ENTITY_FLAG_HIDDEN;
                         }
-                        shadow->position.x = x1;
-                        shadow->position.y = y1;
-                        shadow->position.z = z1;
+                        shadow->pos.x = x1;
+                        shadow->pos.y = y1;
+                        shadow->pos.z = z1;
                         shadow->rotation.y = clamp_angle(yaw - camera->currentYaw);
                         set_standard_shadow_scale(shadow, dist);
                         shadow->scale.x *= actorPart->shadowScale;
@@ -796,9 +796,9 @@ void update_actor_shadow(s32 arg0, Actor* actor) {
             if (200.0f < dist) {
                 shadow->flags |= ENTITY_FLAG_HIDDEN;
             }
-            shadow->position.x = x1;
-            shadow->position.y = y1;
-            shadow->position.z = z1 + bActorOffsets[actor->actorType].shadow;
+            shadow->pos.x = x1;
+            shadow->pos.y = y1;
+            shadow->pos.z = z1 + bActorOffsets[actor->actorType].shadow;
             shadow->rotation.y = clamp_angle(actor->yaw - camera->currentYaw);
             set_standard_shadow_scale(shadow, dist);
             shadow->scale.x *= actor->shadowScale * actor->scalingFactor;
@@ -965,9 +965,9 @@ void appendGfx_npc_actor(s32 isPartner, s32 actorIndex) {
             partPosZ = actorPosZ + part->partOffset.z + part->visualOffset.z;
             partYaw = part->yaw = actor->yaw;
         } else {
-            partPosX = part->absolutePosition.x + part->visualOffset.x;
-            partPosY = part->absolutePosition.y + part->visualOffset.y;
-            partPosZ = part->absolutePosition.z + part->visualOffset.z;
+            partPosX = part->absolutePos.x + part->visualOffset.x;
+            partPosY = part->absolutePos.y + part->visualOffset.y;
+            partPosZ = part->absolutePos.z + part->visualOffset.z;
             guScaleF(mtxPartScale,
                 actor->scale.x * SPRITE_WORLD_SCALE_D,
                 actor->scale.y * SPRITE_WORLD_SCALE_D,
@@ -1301,9 +1301,9 @@ void appendGfx_npc_actor_reflection(s32 flipYaw, Actor* actor) {
             partPosZ = actorPosZ + part->partOffset.z + part->visualOffset.z;
             partYaw = part->yaw = actor->yaw;
         } else {
-            partPosX = part->absolutePosition.x + part->visualOffset.x;
-            partPosY = part->absolutePosition.y + part->visualOffset.y;
-            partPosZ = part->absolutePosition.z + part->visualOffset.z;
+            partPosX = part->absolutePos.x + part->visualOffset.x;
+            partPosY = part->absolutePos.y + part->visualOffset.y;
+            partPosZ = part->absolutePos.z + part->visualOffset.z;
             guScaleF(mtxPartScale,
                 actor->scale.x * SPRITE_WORLD_SCALE_D,
                 actor->scale.y * SPRITE_WORLD_SCALE_D,
@@ -1427,9 +1427,9 @@ void update_player_actor_shadow(void) {
     if (distance > 200.0f) {
         shadow->flags |= ENTITY_FLAG_HIDDEN;
     }
-    shadow->position.x = x;
-    shadow->position.y = y;
-    shadow->position.z = z;
+    shadow->pos.x = x;
+    shadow->pos.y = y;
+    shadow->pos.z = z;
     shadow->rotation.y = clamp_angle(player->yaw - camera->currentYaw);
     set_standard_shadow_scale(shadow, distance);
     shadow->scale.x *= player->shadowScale * player->scalingFactor;

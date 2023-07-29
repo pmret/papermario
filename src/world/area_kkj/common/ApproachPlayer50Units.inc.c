@@ -19,15 +19,15 @@ API_CALLABLE(N(ApproachPlayer50Units)) {
         return ApiStatus_DONE2;
     }
 
-    if (dist2D(playerStatus->position.x, playerStatus->position.z, npc->pos.x, npc->pos.z) < 50.0f) {
+    if (dist2D(playerStatus->pos.x, playerStatus->pos.z, npc->pos.x, npc->pos.z) < 50.0f) {
         phi_s4 = FALSE;
     } else {
         phi_s4 = TRUE;
     }
 
-    angle = clamp_angle(atan2(playerStatus->position.x, playerStatus->position.z, npc->pos.x, npc->pos.z));
-    x = playerStatus->position.x + (sin_deg(angle) * 50.0f);
-    z = playerStatus->position.z - (cos_deg(angle) * 50.0f);
+    angle = clamp_angle(atan2(playerStatus->pos.x, playerStatus->pos.z, npc->pos.x, npc->pos.z));
+    x = playerStatus->pos.x + (sin_deg(angle) * 50.0f);
+    z = playerStatus->pos.z - (cos_deg(angle) * 50.0f);
     evt_set_variable(script, outVar1, phi_s4);
     evt_set_variable(script, outVar2, x);
     evt_set_variable(script, outVar3, z);

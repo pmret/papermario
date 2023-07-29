@@ -14,7 +14,7 @@ API_CALLABLE(N(UpdateFollowerPosition)) {
         return ApiStatus_DONE2;
     }
 
-    npc->pos.x = (s32)(((s32)playerStatus->position.x - 700) * 0.85) + 765;
+    npc->pos.x = (s32)(((s32)playerStatus->pos.x - 700) * 0.85) + 765;
     if (playerStatus->currentSpeed == 0.0f) {
         animID = ANIM_Peach1_Idle;
     } else if (playerStatus->currentSpeed < 2.0f) {

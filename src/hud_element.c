@@ -1467,9 +1467,9 @@ void render_hud_element(HudElement* hudElement) {
     guTranslateF(sp220, -transform->pivot.x, transform->pivot.y, 0.0f);
     guTranslateF(
         sp1A0,
-        hudElement->renderPosX + hudElement->screenPosOffset.x + hudElement->worldPosOffset.x + transform->position.x,
-        -hudElement->renderPosY - hudElement->screenPosOffset.y + hudElement->worldPosOffset.y + transform->position.y,
-        - (hudElement->worldPosOffset.z / 10.0) + transform->position.z
+        hudElement->renderPosX + hudElement->screenPosOffset.x + hudElement->worldPosOffset.x + transform->pos.x,
+        -hudElement->renderPosY - hudElement->screenPosOffset.y + hudElement->worldPosOffset.y + transform->pos.y,
+        - (hudElement->worldPosOffset.z / 10.0) + transform->pos.z
     );
     guScaleF(sp260, hudElement->uniformScale * xScaleFactor * transform->scale.x,
                     hudElement->uniformScale * yScaleFactor * transform->scale.y,
@@ -2116,9 +2116,9 @@ void hud_element_create_transform_A(s32 id) {
     ASSERT(transform != NULL);
     element->flags |= HUD_ELEMENT_FLAG_TRANSFORM;
     transform->imgfxIdx = imgfx_get_free_instances(1);
-    transform->position.x = 0.0f;
-    transform->position.y = 0.0f;
-    transform->position.z = 0.0f;
+    transform->pos.x = 0.0f;
+    transform->pos.y = 0.0f;
+    transform->pos.z = 0.0f;
     transform->rotation.x = 0.0f;
     transform->rotation.y = 0.0f;
     transform->rotation.z = 0.0f;
@@ -2138,9 +2138,9 @@ void hud_element_create_transform_B(s32 id) {
     ASSERT(transform != NULL);
     element->flags |= HUD_ELEMENT_FLAG_TRANSFORM | HUD_ELEMENT_FLAG_NO_FOLD;
     transform->imgfxIdx = 0;
-    transform->position.x = 0.0f;
-    transform->position.y = 0.0f;
-    transform->position.z = 0.0f;
+    transform->pos.x = 0.0f;
+    transform->pos.y = 0.0f;
+    transform->pos.z = 0.0f;
     transform->rotation.x = 0.0f;
     transform->rotation.y = 0.0f;
     transform->rotation.z = 0.0f;
@@ -2158,9 +2158,9 @@ void hud_element_create_transform_C(s32 id) {
     ASSERT(transform != NULL);
     element->flags |= HUD_ELEMENT_FLAG_40000000 | HUD_ELEMENT_FLAG_NO_FOLD | HUD_ELEMENT_FLAG_TRANSFORM;
     transform->imgfxIdx = 0;
-    transform->position.x = 0.0f;
-    transform->position.y = 0.0f;
-    transform->position.z = 0.0f;
+    transform->pos.x = 0.0f;
+    transform->pos.y = 0.0f;
+    transform->pos.z = 0.0f;
     transform->rotation.x = 0.0f;
     transform->rotation.y = 0.0f;
     transform->rotation.z = 0.0f;
@@ -2188,9 +2188,9 @@ void hud_element_set_transform_pos(s32 id, f32 x, f32 y, f32 z) {
     HudTransform* transform = element->hudTransform;
 
     if (element->flags & HUD_ELEMENT_FLAG_TRANSFORM) {
-        transform->position.x = x;
-        transform->position.y = y;
-        transform->position.z = z;
+        transform->pos.x = x;
+        transform->pos.y = y;
+        transform->pos.z = z;
     }
 }
 

@@ -68,9 +68,9 @@ API_CALLABLE(N(UpdatePadlockPosition)) {
     }
 
     entity = get_entity_by_index(entityIdx);
-    entity->position.x = x;
-    entity->position.y = y + offset;
-    entity->position.z = z;
+    entity->pos.x = x;
+    entity->pos.y = y + offset;
+    entity->pos.z = z;
     return ApiStatus_DONE2;
 }
 

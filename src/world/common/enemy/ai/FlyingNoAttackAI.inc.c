@@ -17,7 +17,7 @@ void N(FlyingNoAttackAI_12)(Evt* script, MobileAISettings* aiSettings, EnemyDete
     npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_CHASE];
     npc->moveSpeed = aiSettings->chaseSpeed;
 
-    tempAngle = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+    tempAngle = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
     angleDiff = get_clamped_angle_diff(npc->yaw, tempAngle);
 
     if (aiSettings->chaseTurnRate < fabsf(angleDiff)) {
@@ -66,7 +66,7 @@ void N(FlyingNoAttackAI_13)(Evt* script, MobileAISettings* aiSettings, EnemyDete
     if (flag) {
         npc->pos.y = y + 1.0;
     } else {
-        temp_f6 = npc->pos.y - (gPlayerStatusPtr->position.y + 6.0);
+        temp_f6 = npc->pos.y - (gPlayerStatusPtr->pos.y + 6.0);
         if ((temp_f6 < 0.0) || (temp_f6 > 4.0)) {
             temp_f6 = -temp_f6;
             npc->pos.y += temp_f6 * 0.06;

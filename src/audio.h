@@ -701,7 +701,7 @@ typedef struct SoundInstance {
     /* 0x0C */ u8 volume;
     /* 0x0D */ u8 pan;
     /* 0x0E */ s16 pitchShift;
-    /* 0x10 */ Vec3f position;
+    /* 0x10 */ Vec3f pos;
 } SoundInstance; // size = 0x1C
 
 typedef struct AlternatingSoundSet {

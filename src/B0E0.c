@@ -36,10 +36,10 @@ void update_camera_mode_unused(Camera* camera) {
     }
 
     if (!(playerStatus->flags & (PS_FLAG_FALLING | PS_FLAG_JUMPING))) {
-        camera->lookAt_obj_target.y = playerStatus->position.y + 60.0f;
+        camera->lookAt_obj_target.y = playerStatus->pos.y + 60.0f;
     }
-    camera->lookAt_obj_target.x = playerStatus->position.x;
-    camera->lookAt_obj_target.z = playerStatus->position.z + 400.0f;
+    camera->lookAt_obj_target.x = playerStatus->pos.x;
+    camera->lookAt_obj_target.z = playerStatus->pos.z + 400.0f;
 
     if (camera->auxPitch == 0) {
         camera->lookAt_obj.x = camera->lookAt_obj_target.x;

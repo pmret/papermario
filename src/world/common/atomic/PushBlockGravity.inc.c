@@ -10,13 +10,13 @@ f32 N(PushBlockFallCurve)[] = {
 
 s32 N(push_block_handle_fall)(Entity* block, Evt* source) {
 
-    block->position.y = source->varTable[0] - (N(PushBlockFallCurve)[source->functionTemp[0]] * BLOCK_GRID_SIZE);
+    block->pos.y = source->varTable[0] - (N(PushBlockFallCurve)[source->functionTemp[0]] * BLOCK_GRID_SIZE);
     if (source->functionTemp[0] == 0) {
-        sfx_play_sound_at_position(SOUND_1DA, SOUND_SPACE_MODE_0, block->position.x, block->position.y, block->position.z);
+        sfx_play_sound_at_position(SOUND_1DA, SOUND_SPACE_MODE_0, block->pos.x, block->pos.y, block->pos.z);
     }
 
     if ((source->functionTemp[0] > 4) && (source->functionTemp[0] & 1)) {
-        fx_smoke_burst(1, block->position.x, block->position.y, block->position.z, 1.0f, 20);
+        fx_smoke_burst(1, block->pos.x, block->pos.y, block->pos.z, 1.0f, 20);
     }
 
     do {

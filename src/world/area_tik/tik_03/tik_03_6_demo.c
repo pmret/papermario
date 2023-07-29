@@ -65,7 +65,7 @@ API_CALLABLE(N(SetupDemoScene)) {
             break;
         case 3:
             partner_clear_player_tracking(wPartnerNpc);
-            partner_set_goal_pos(player->position.x, player->position.z);
+            partner_set_goal_pos(player->pos.x, player->pos.z);
             func_800EF3D4(0);
             wPartnerNpc->yaw = 270.0f;
             gPlayerStatus.targetYaw = 270.0f;

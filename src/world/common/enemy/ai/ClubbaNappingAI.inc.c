@@ -120,7 +120,7 @@ void N(ClubbaNappingAI_Loiter)(Evt* script, MobileAISettings* aiSettings, EnemyD
 
     // try to catch sight of player
     if (basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 0)) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
         script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
         return;
     }
@@ -169,7 +169,7 @@ void N(ClubbaNappingAI_ReturnHome)(Evt* script, MobileAISettings* aiSettings, En
     f32 currentYaw;
 
     if (basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 0)) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
         script->AI_TEMP_STATE = AI_STATE_CHASE_INIT;
     } else if (dist2D(npc->pos.x, npc->pos.z, enemy->territory->wander.centerPos.x,
                       enemy->territory->wander.centerPos.z) <= npc->moveSpeed) {

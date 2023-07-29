@@ -59,9 +59,9 @@ API_CALLABLE(N(AddConveyorPush)) {
     one = 1;
     if (partnerStatus->actingPartner == PARTNER_BOW) {
         if (partnerStatus->partnerActionState != PARTNER_ACTION_NONE && playerStatus->alpha1 == 128) {
-            x = playerStatus->position.x;
-            y = playerStatus->position.y;
-            z = playerStatus->position.z;
+            x = playerStatus->pos.x;
+            y = playerStatus->pos.y;
+            z = playerStatus->pos.z;
             outLength = 1000.0f;
             hit = player_raycast_below_cam_relative(playerStatus,
                 &x, &y, &z, &outLength,

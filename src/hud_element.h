@@ -168,7 +168,7 @@ typedef struct VtxRect {
 
 typedef struct HudTransform {
     /* 0x00 */ s32 imgfxIdx;
-    /* 0x04 */ Vec3f position;
+    /* 0x04 */ Vec3f pos;
     /* 0x10 */ Vec3f rotation;
     /* 0x1C */ Vec3f scale;
     /* 0x28 */ Vec2s pivot;

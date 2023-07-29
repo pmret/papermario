@@ -129,7 +129,7 @@ void N(FlyingAI_Wander)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
         if (aiSettings->playerSearchInterval >= 0) {
             if (script->functionTemp[1] <= 0) {
                 script->functionTemp[1] = aiSettings->playerSearchInterval;
-                if (gPlayerStatusPtr->position.y < (npc->pos.y + npc->collisionHeight) + 10.0 &&
+                if (gPlayerStatusPtr->pos.y < (npc->pos.y + npc->collisionHeight) + 10.0 &&
                     basic_ai_check_player_dist(territory, enemy, aiSettings->alertRadius, aiSettings->alertOffsetDist, 0) != 0)
                 {
                     EffectInstance* emoteTemp;
@@ -229,7 +229,7 @@ void N(FlyingAI_Loiter)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVo
     }
 
     if (enemy->varTable[9] <= 0) {
-        if ((gPlayerStatusPtr->position.y < npc->pos.y + npc->collisionHeight + 10.0)
+        if ((gPlayerStatusPtr->pos.y < npc->pos.y + npc->collisionHeight + 10.0)
             && basic_ai_check_player_dist(territory, enemy, aiSettings->chaseRadius, aiSettings->chaseOffsetDist, 1)) {
             fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 12, &var);
             npc->moveToPos.y = npc->pos.y;
@@ -264,7 +264,7 @@ void N(FlyingAI_JumpInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetect
     PlayerStatus* playerStatus = gPlayerStatusPtr;
 
     npc->duration = 0;
-    npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
+    npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
     npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_PRE];
     script->functionTemp[0] = AI_STATE_ALERT;
 }
@@ -289,7 +289,7 @@ void N(FlyingAI_ChaseInit)(Evt* script, MobileAISettings* aiSettings, EnemyDetec
     npc->jumpVelocity = jumpVelocity;
     npc->jumpScale = jumpScale;
     npc->moveSpeed = aiSettings->chaseSpeed;
-    npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+    npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
 
     enemy->varTable[2] = 0;
 
@@ -361,7 +361,7 @@ void N(FlyingAI_LosePlayer)(Evt* script, MobileAISettings* aiSettings, EnemyDete
         npc->duration++;
         if (npc->duration >= aiSettings->chaseUpdateInterval) {
             npc->duration = 0;
-            angle = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+            angle = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
             deltaAngle = get_clamped_angle_diff(npc->yaw, angle);
             if (aiSettings->chaseTurnRate < fabsf(deltaAngle)) {
                 angle = npc->yaw;

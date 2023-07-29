@@ -70,7 +70,7 @@ API_CALLABLE(N(HideBehindTree)) {
     f64 dist;
 
     // get a point 46 units away from the tree on the side opposite the player
-    yaw = clamp_angle(atan2(-210.0f, -183.0f, gPlayerStatus.position.x, gPlayerStatus.position.z) + 180.0f);
+    yaw = clamp_angle(atan2(-210.0f, -183.0f, gPlayerStatus.pos.x, gPlayerStatus.pos.z) + 180.0f);
     posX = -210.0f;
     posZ = -183.0f;
     add_vec2D_polar(&posX, &posZ, 46.0f, yaw);

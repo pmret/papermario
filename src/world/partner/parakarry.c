@@ -87,8 +87,8 @@ API_CALLABLE(N(Update)) {
             N(TweesterPhysicsPtr)->state++;
             N(TweesterPhysicsPtr)->prevFlags = parakarry->flags;
             N(TweesterPhysicsPtr)->radius = fabsf(dist2D(parakarry->pos.x, parakarry->pos.z,
-                                                     entity->position.x, entity->position.z));
-            N(TweesterPhysicsPtr)->angle = atan2(entity->position.x, entity->position.z,
+                                                     entity->pos.x, entity->pos.z));
+            N(TweesterPhysicsPtr)->angle = atan2(entity->pos.x, entity->pos.z,
                                               parakarry->pos.x, parakarry->pos.z);
             N(TweesterPhysicsPtr)->angularVelocity = 6.0f;
             N(TweesterPhysicsPtr)->liftoffVelocityPhase = 50.0f;
@@ -97,8 +97,8 @@ API_CALLABLE(N(Update)) {
             parakarry->flags &= ~NPC_FLAG_GRAVITY;
         case TWEESTER_PARTNER_ATTRACT:
             sin_cos_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->angle), &sinAngle, &cosAngle);
-            parakarry->pos.x = entity->position.x + (sinAngle * N(TweesterPhysicsPtr)->radius);
-            parakarry->pos.z = entity->position.z - (cosAngle * N(TweesterPhysicsPtr)->radius);
+            parakarry->pos.x = entity->pos.x + (sinAngle * N(TweesterPhysicsPtr)->radius);
+            parakarry->pos.z = entity->pos.z - (cosAngle * N(TweesterPhysicsPtr)->radius);
             N(TweesterPhysicsPtr)->angle = clamp_angle(N(TweesterPhysicsPtr)->angle - N(TweesterPhysicsPtr)->angularVelocity);
 
             if (N(TweesterPhysicsPtr)->radius > 20.0f) {
@@ -165,9 +165,9 @@ s32 N(update_current_floor)(void) {
     s32 hitResult;
     s32 surfaceType;
 
-    x = gPlayerStatus.position.x;
-    y = gPlayerStatus.position.y + (colliderBaseHeight * 0.5);
-    z = gPlayerStatus.position.z;
+    x = gPlayerStatus.pos.x;
+    y = gPlayerStatus.pos.y + (colliderBaseHeight * 0.5);
+    z = gPlayerStatus.pos.z;
     length = colliderBaseHeight / 2.0f;
 
     hitResult = player_raycast_below_cam_relative(&gPlayerStatus, &x, &y, &z, &length, &hitRx,
@@ -263,7 +263,7 @@ API_CALLABLE(N(UseAbility)) {
             partnerStatus->partnerActionState = PARTNER_ACTION_PARAKARRY_HOVER;
             N(PlayerWasFacingLeft) = partner_force_player_flip_done();
             enable_npc_blur(parakarry);
-            parakarry->yaw = atan2(parakarry->pos.x, parakarry->pos.z, playerStatus->position.x, playerStatus->position.z);
+            parakarry->yaw = atan2(parakarry->pos.x, parakarry->pos.z, playerStatus->pos.x, playerStatus->pos.z);
             parakarry->duration = 4;
             N(AbilityState)++; // AIR_LIFT_GATHER
             break;
@@ -278,9 +278,9 @@ API_CALLABLE(N(UseAbility)) {
                 N(AbilityState) = AIR_LIFT_DROP;
             } else {
                 suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
-                parakarry->moveToPos.x = playerStatus->position.x;
-                parakarry->moveToPos.y = playerStatus->position.y + 32.0f;
-                parakarry->moveToPos.z = playerStatus->position.z;
+                parakarry->moveToPos.x = playerStatus->pos.x;
+                parakarry->moveToPos.y = playerStatus->pos.y + 32.0f;
+                parakarry->moveToPos.z = playerStatus->pos.z;
                 parakarry->currentAnim = ANIM_WorldParakarry_Run;
                 add_vec2D_polar(&parakarry->moveToPos.x, &parakarry->moveToPos.z, 0.0f, playerStatus->targetYaw);
                 yaw = playerStatus->targetYaw;
@@ -334,7 +334,7 @@ API_CALLABLE(N(UseAbility)) {
             }
 
             length = fabsf(sin_rad(DEG_TO_RAD((20 - N(AbilityStateTime)) * 18))) * 1.3;
-            playerStatus->position.y += length;
+            playerStatus->pos.y += length;
             parakarry->pos.y += length;
             x = parakarry->pos.x;
             y = parakarry->pos.y + parakarry->collisionHeight / 2.0f;
@@ -349,9 +349,9 @@ API_CALLABLE(N(UseAbility)) {
             }
 
             length = playerStatus->colliderHeight / 2.0f;
-            x = playerStatus->position.x;
-            y = playerStatus->position.y + playerStatus->colliderHeight / 2.0f;
-            z = playerStatus->position.z;
+            x = playerStatus->pos.x;
+            y = playerStatus->pos.y + playerStatus->colliderHeight / 2.0f;
+            z = playerStatus->pos.z;
             halfCollisionHeight = playerStatus->spriteFacingAngle - 90.0f + gCameras[gCurrentCameraID].currentYaw;
             if (player_raycast_up_corners(playerStatus, &x, &y, &z, &length, halfCollisionHeight) >= 0) {
                 suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
@@ -359,13 +359,13 @@ API_CALLABLE(N(UseAbility)) {
                 break;
             }
 
-            x = playerStatus->position.x;
-            y = playerStatus->position.y;
-            z = playerStatus->position.z;
+            x = playerStatus->pos.x;
+            y = playerStatus->pos.y;
+            z = playerStatus->pos.z;
             hitCount = npc_test_move_complex_with_slipping(COLLISION_CHANNEL_10000, &x, &y, &z, parakarry->moveSpeed, parakarry->yaw, playerStatus->colliderHeight, playerStatus->colliderDiameter);
             if (hitCount > 1) {
-                playerStatus->position.x += (x - playerStatus->position.x) / 8.0f;
-                playerStatus->position.z += (z - playerStatus->position.z) / 8.0f;
+                playerStatus->pos.x += (x - playerStatus->pos.x) / 8.0f;
+                playerStatus->pos.z += (z - playerStatus->pos.z) / 8.0f;
                 parakarry->pos.x += (x - parakarry->pos.x) / 8.0f;
                 parakarry->pos.z += (z - parakarry->pos.z) / 8.0f;
             }
@@ -375,8 +375,8 @@ API_CALLABLE(N(UseAbility)) {
             z = parakarry->pos.z;
             hitCount = npc_test_move_complex_with_slipping(COLLISION_CHANNEL_10000, &x, &y, &z, parakarry->moveSpeed, parakarry->yaw, parakarry->collisionHeight, parakarry->collisionDiameter);
             if (hitCount > 1) {
-                playerDeltaX = (x - playerStatus->position.x) / 8.0f;
-                playerDeltaZ = (z - playerStatus->position.z) / 8.0f;
+                playerDeltaX = (x - playerStatus->pos.x) / 8.0f;
+                playerDeltaZ = (z - playerStatus->pos.z) / 8.0f;
                 parakarryDeltaX = (x - parakarry->pos.x) / 8.0f;
                 parakarryDeltaZ = (z - parakarry->pos.z) / 8.0f;
 
@@ -388,8 +388,8 @@ API_CALLABLE(N(UseAbility)) {
                 z = parakarry->pos.z;
                 hitCount = npc_test_move_complex_with_slipping(COLLISION_CHANNEL_10000, &x, &y, &z, parakarry->moveSpeed, parakarry->yaw, parakarry->collisionHeight, parakarry->collisionDiameter);
                 if (hitCount == 0) {
-                    playerStatus->position.x += playerDeltaX;
-                    playerStatus->position.z += playerDeltaZ;
+                    playerStatus->pos.x += playerDeltaX;
+                    playerStatus->pos.z += playerDeltaZ;
                     parakarry->pos.x += parakarryDeltaX;
                     parakarry->pos.z += parakarryDeltaZ;
                 }
@@ -397,13 +397,13 @@ API_CALLABLE(N(UseAbility)) {
 
             if (hitCount == 0 && !(playerStatus->animFlags & PA_FLAG_NPC_COLLIDED)) {
                 add_vec2D_polar(&parakarry->pos.x, &parakarry->pos.z, parakarry->moveSpeed, parakarry->yaw);
-                add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, parakarry->moveSpeed, parakarry->yaw);
+                add_vec2D_polar(&playerStatus->pos.x, &playerStatus->pos.z, parakarry->moveSpeed, parakarry->yaw);
                 parakarry->planarFlyDist += parakarry->moveSpeed;
             }
 
-            x = playerStatus->position.x;
-            y = playerStatus->position.y + playerStatus->colliderHeight / 2.0f;
-            z = playerStatus->position.z;
+            x = playerStatus->pos.x;
+            y = playerStatus->pos.y + playerStatus->colliderHeight / 2.0f;
+            z = playerStatus->pos.z;
             length = playerStatus->colliderHeight / 2.0f;
             if (npc_raycast_down_around(COLLISION_CHANNEL_10000, &x, &y, &z, &length, parakarry->yaw, parakarry->collisionDiameter)) {
                 s32 surfaceType = get_collider_flags(NpcHitQueryColliderID) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
@@ -413,8 +413,8 @@ API_CALLABLE(N(UseAbility)) {
                     N(AbilityState) = AIR_LIFT_DROP;
                 }
 
-                playerStatus->position.y += (y - playerStatus->position.y) / 4.0f;
-                parakarry->pos.y = playerStatus->position.y + 32.0f;
+                playerStatus->pos.y += (y - playerStatus->pos.y) / 4.0f;
+                parakarry->pos.y = playerStatus->pos.y + 32.0f;
             }
 
             if (parakarry->flags & NPC_FLAG_COLLDING_FORWARD_WITH_WORLD) {
@@ -423,15 +423,15 @@ API_CALLABLE(N(UseAbility)) {
                 break;
             }
 
-            gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
-            gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
-            gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
+            gCameras[CAM_DEFAULT].targetPos.x = playerStatus->pos.x;
+            gCameras[CAM_DEFAULT].targetPos.y = playerStatus->pos.y;
+            gCameras[CAM_DEFAULT].targetPos.z = playerStatus->pos.z;
             if (N(AbilityStateTime) != 0) {
                 N(AbilityStateTime)--;
             } else {
                 parakarry->jumpVelocity = -0.5f;
                 parakarry->jumpScale = -0.01f;
-                parakarry->moveToPos.y = playerStatus->position.y;
+                parakarry->moveToPos.y = playerStatus->pos.y;
                 parakarry->duration = 0;
                 parakarry->currentAnim = ANIM_WorldParakarry_CarryHeavy;
                 parakarry->animationSpeed = 1.8f;
@@ -476,7 +476,7 @@ API_CALLABLE(N(UseAbility)) {
             }
 
             parakarry->pos.y += parakarry->jumpVelocity;
-            playerStatus->position.y += parakarry->jumpVelocity;
+            playerStatus->pos.y += parakarry->jumpVelocity;
             if (!(playerStatus->animFlags & PA_FLAG_NPC_COLLIDED)) {
                 parakarry->moveSpeed += 0.1;
                 if (parakarry->moveSpeed > 2.0) {
@@ -484,7 +484,7 @@ API_CALLABLE(N(UseAbility)) {
                 }
 
                 add_vec2D_polar(&parakarry->pos.x, &parakarry->pos.z, parakarry->moveSpeed, parakarry->yaw);
-                add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, parakarry->moveSpeed, parakarry->yaw);
+                add_vec2D_polar(&playerStatus->pos.x, &playerStatus->pos.z, parakarry->moveSpeed, parakarry->yaw);
                 parakarry->planarFlyDist += parakarry->moveSpeed;
                 parakarry->animationSpeed -= 0.05;
                 if (parakarry->animationSpeed < 1.5) {
@@ -494,9 +494,9 @@ API_CALLABLE(N(UseAbility)) {
                     parakarry->animationSpeed += 0.5;
                 }
                 if (!(playerStatus->animFlags & PA_FLAG_NPC_COLLIDED)) {
-                    x = playerStatus->position.x;
-                    y = playerStatus->position.y;
-                    z = playerStatus->position.z;
+                    x = playerStatus->pos.x;
+                    y = playerStatus->pos.y;
+                    z = playerStatus->pos.z;
                     if (npc_test_move_complex_with_slipping(COLLISION_CHANNEL_10000,
                             &x, &y, &z, parakarry->moveSpeed, parakarry->yaw,
                             playerStatus->colliderHeight, playerStatus->colliderDiameter)
@@ -522,19 +522,19 @@ API_CALLABLE(N(UseAbility)) {
                         halfCollisionHeight = length;
                         if (npc_raycast_up(COLLISION_CHANNEL_10000, &x, &y, &z, &length) && (length < halfCollisionHeight)) {
                             parakarry->pos.y =  y - parakarry->collisionHeight;
-                            playerStatus->position.y = parakarry->pos.y - 32.0f;
+                            playerStatus->pos.y = parakarry->pos.y - 32.0f;
                             hitAbove = TRUE;
                         }
-                        x = playerStatus->position.x;
-                        y = playerStatus->position.y + playerStatus->colliderHeight / 2.0f;
-                        z = playerStatus->position.z;
+                        x = playerStatus->pos.x;
+                        y = playerStatus->pos.y + playerStatus->colliderHeight / 2.0f;
+                        z = playerStatus->pos.z;
                         length = playerStatus->colliderHeight / 2.0f;
 
                         if (npc_raycast_down_around(COLLISION_CHANNEL_10000, &x, &y, &z, &length, parakarry->yaw, parakarry->collisionDiameter)) {
-                            playerStatus->position.y += (y - playerStatus->position.y) / 4.0f;
-                            parakarry->pos.y = playerStatus->position.y + 32.0f;
+                            playerStatus->pos.y += (y - playerStatus->pos.y) / 4.0f;
+                            parakarry->pos.y = playerStatus->pos.y + 32.0f;
                             y = parakarry->pos.y;
-                            parakarry->pos.y = playerStatus->position.y;
+                            parakarry->pos.y = playerStatus->pos.y;
                             spawn_surface_effects(parakarry, SURFACE_INTERACT_WALK);
                             parakarry->pos.y = y;
 
@@ -547,9 +547,9 @@ API_CALLABLE(N(UseAbility)) {
                         if (!phys_adjust_cam_on_landing()) {
                             gCameras[CAM_DEFAULT].moveFlags &= ~CAMERA_MOVE_FLAG_2;
                         }
-                        gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
-                        gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
-                        gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
+                        gCameras[CAM_DEFAULT].targetPos.x = playerStatus->pos.x;
+                        gCameras[CAM_DEFAULT].targetPos.y = playerStatus->pos.y;
+                        gCameras[CAM_DEFAULT].targetPos.z = playerStatus->pos.z;
                         if (!(parakarry->flags & NPC_FLAG_COLLDING_FORWARD_WITH_WORLD)) {
                             parakarry->duration++;
                             if (!(parakarry->planarFlyDist < 100.0f)) {

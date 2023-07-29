@@ -581,7 +581,7 @@ typedef struct Entity {
     /* 0x3C */ void (*renderSetupFunc)(s32);
     /* 0x40 */ EntityData dataBuf;
     /* 0x44 */ void* gfxBaseAddr;
-    /* 0x48 */ Vec3f position;
+    /* 0x48 */ Vec3f pos;
     /* 0x54 */ Vec3f scale;
     /* 0x60 */ Vec3f rotation;
     /* 0x6C */ f32 shadowPosY;
@@ -618,7 +618,7 @@ typedef struct Shadow {
     /* 0x08 */ s16 entityModelID;
     /* 0x0A */ s16 vertexSegment;
     /* 0x0C */ Vec3s* vertexArray;
-    /* 0x10 */ Vec3f position;
+    /* 0x10 */ Vec3f pos;
     /* 0x1C */ Vec3f scale;
     /* 0x28 */ Vec3f rotation;
     /* 0x34 */ char unk_34[0x4];
@@ -1157,7 +1157,7 @@ typedef struct ItemEntity {
     /* 0x00 */ s32 flags;
     /* 0x04 */ s16 boundVar;
     /* 0x06 */ s16 pickupMsgFlags;
-    /* 0x08 */ Vec3f position;
+    /* 0x08 */ Vec3f pos;
     /* 0x14 */ struct ItemEntityPhysicsData* physicsData;
     /* 0x18 */ s16 itemID;
     /* 0x1A */ s8 state;
@@ -1533,7 +1533,7 @@ typedef struct SelectableTarget {
 } SelectableTarget; // size = 0x14
 
 typedef struct ActorPartMovement {
-    /* 0x00 */ Vec3f absolutePosition;
+    /* 0x00 */ Vec3f absolutePos;
     /* 0x0C */ Vec3f goalPos;
     /* 0x18 */ Vec3f unk_18;
     /* 0x24 */ f32 jumpScale;
@@ -1577,7 +1577,7 @@ typedef struct ActorPart {
     /* 0x14 */ Vec3s partOffset;
     /* 0x1A */ Vec3s visualOffset;
     /* 0x20 */ Vec3f partOffsetFloat;
-    /* 0x2C */ Vec3f absolutePosition;
+    /* 0x2C */ Vec3f absolutePos;
     /* 0x38 */ Vec3f rotation;
     /* 0x44 */ Vec3s rotationPivotOffset;
     /* 0x4A */ char unk_4A[2];
@@ -1971,9 +1971,9 @@ typedef struct PlayerStatus {
     /* 0x012 */ s16 moveFrames;
     /* 0x014 */ s8 enableCollisionOverlapsCheck;
     /* 0x015 */ s8 inputDisabledCount; /* whether the C-up menu can appear */
-    /* 0x016 */ Vec3s lastGoodPosition;
+    /* 0x016 */ Vec3s lastGoodPos;
     /* 0x01C */ Vec3f pushVelocity;
-    /* 0x028 */ Vec3f position;
+    /* 0x028 */ Vec3f pos;
     /* 0x034 */ Vec2f groundAnglesXZ; /* angles along X/Z axes of ground beneath player */
     /* 0x03C */ VecXZf jumpFromPos;
     /* 0x044 */ VecXZf landPos;

@@ -68,9 +68,9 @@ void func_E0020000(EmoteFXData* part, s32 arg1) {
     guRotateF(sp18, -(unk_1C - 20.0f + arg1 * 20), sin, 0.0f, -cos);
 
     if (npc == PTR_LIST_END) {
-        part->unk_04 = gPlayerStatus.position.x + part->unk_10 + sp18[1][0] * (unk_20 + 16.0f);
-        part->unk_08 = gPlayerStatus.position.y + part->unk_14 + sp18[1][1] * (unk_20 + 16.0f);
-        part->unk_0C = gPlayerStatus.position.z + part->unk_18 + sp18[1][2] * (unk_20 + 16.0f);
+        part->unk_04 = gPlayerStatus.pos.x + part->unk_10 + sp18[1][0] * (unk_20 + 16.0f);
+        part->unk_08 = gPlayerStatus.pos.y + part->unk_14 + sp18[1][1] * (unk_20 + 16.0f);
+        part->unk_0C = gPlayerStatus.pos.z + part->unk_18 + sp18[1][2] * (unk_20 + 16.0f);
     } else if (npc != NULL) {
         part->unk_04 = npc->pos.x + part->unk_10 + sp18[1][0] * (unk_20 + 16.0f);
         part->unk_08 = npc->pos.y + part->unk_14 + sp18[1][1] * (unk_20 + 16.0f);

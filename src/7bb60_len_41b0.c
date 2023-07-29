@@ -15,7 +15,7 @@ s32 phys_check_interactable_collision(void);
 void phys_save_ground_pos(void);
 
 void record_jump_apex(void) {
-    gPlayerStatus.jumpApexHeight = gPlayerStatus.position.y;
+    gPlayerStatus.jumpApexHeight = gPlayerStatus.pos.y;
 }
 
 s32 can_trigger_loading_zone(void) {
@@ -76,9 +76,9 @@ s32 collision_main_above(void) {
     f32 phi_f2;
 
     new_var = sp2C = playerStatus->colliderHeight * 0.5f;
-    x = playerStatus->position.x;
-    y = playerStatus->position.y + new_var;
-    z = playerStatus->position.z;
+    x = playerStatus->pos.x;
+    y = playerStatus->pos.y + new_var;
+    z = playerStatus->pos.z;
 
     player_input_to_move_vector(&moveAngle, &moveMagnitude);
 
@@ -104,7 +104,7 @@ s32 collision_main_above(void) {
                     }
                 } while (0);
 
-                playerStatus->position.y = y - ((playerStatus->colliderHeight / 5.0f) * 3.0f);
+                playerStatus->pos.y = y - ((playerStatus->colliderHeight / 5.0f) * 3.0f);
                 if (playerStatus->actionState != ACTION_STATE_TORNADO_JUMP
                     && playerStatus->actionState != ACTION_STATE_SPIN_JUMP
                 ) {
@@ -132,8 +132,8 @@ void handle_switch_hit(void) {
     }
 
     if (playerStatus->actionSubstate == LANDING_ON_SWITCH_SUBSTATE_0) {
-        if (dist2D(JumpedOnSwitchX, JumpedOnSwitchZ, playerStatus->position.x, playerStatus->position.z) <= 22.0f) {
-            add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, 5.0f, playerStatus->targetYaw);
+        if (dist2D(JumpedOnSwitchX, JumpedOnSwitchZ, playerStatus->pos.x, playerStatus->pos.z) <= 22.0f) {
+            add_vec2D_polar(&playerStatus->pos.x, &playerStatus->pos.z, 5.0f, playerStatus->targetYaw);
         }
         integrate_gravity();
         if (playerStatus->gravityIntegrator[0] <= 0.0f) {
@@ -145,14 +145,14 @@ void handle_switch_hit(void) {
         if (playerStatus->gravityIntegrator[0] > playerStatus->maxJumpSpeed) {
             playerStatus->gravityIntegrator[0] = playerStatus->maxJumpSpeed;
         }
-        playerStatus->position.y += playerStatus->gravityIntegrator[0];
+        playerStatus->pos.y += playerStatus->gravityIntegrator[0];
     } else if (playerStatus->actionSubstate == LANDING_ON_SWITCH_SUBSTATE_2) {
-        if (dist2D(JumpedOnSwitchX, JumpedOnSwitchZ, playerStatus->position.x, playerStatus->position.z) <= 22.0f) {
-            add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, 5.0f, playerStatus->targetYaw);
+        if (dist2D(JumpedOnSwitchX, JumpedOnSwitchZ, playerStatus->pos.x, playerStatus->pos.z) <= 22.0f) {
+            add_vec2D_polar(&playerStatus->pos.x, &playerStatus->pos.z, 5.0f, playerStatus->targetYaw);
         }
         groundPosY = player_check_collision_below(player_fall_distance(), &colliderID);
         player_handle_floor_collider_type(colliderID);
-        playerStatus->position.y = groundPosY;
+        playerStatus->pos.y = groundPosY;
         if (colliderID >= 0) {
             if (!(playerStatus->animFlags & PA_FLAG_USING_WATT)) {
                 anim = ANIM_Mario1_Land;
@@ -170,8 +170,8 @@ void func_800E2BB0(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 cond = FALSE;
 
-    if (playerStatus->position.y < playerStatus->gravityIntegrator[3] + playerStatus->gravityIntegrator[2]) {
-        f32 phi_f6 = (playerStatus->gravityIntegrator[3] - playerStatus->position.y) / 777.0f;
+    if (playerStatus->pos.y < playerStatus->gravityIntegrator[3] + playerStatus->gravityIntegrator[2]) {
+        f32 phi_f6 = (playerStatus->gravityIntegrator[3] - playerStatus->pos.y) / 777.0f;
 
         if (phi_f6 < -0.47) {
             phi_f6 = -0.47f;
@@ -180,7 +180,7 @@ void func_800E2BB0(void) {
             phi_f6 = 0.001f;
         }
         playerStatus->gravityIntegrator[0] += phi_f6;
-        playerStatus->position.y += playerStatus->gravityIntegrator[0];
+        playerStatus->pos.y += playerStatus->gravityIntegrator[0];
         if (playerStatus->gravityIntegrator[0] <= 0.0f) {
             cond = TRUE;
         }
@@ -189,7 +189,7 @@ void func_800E2BB0(void) {
         if (playerStatus->gravityIntegrator[0] <= 0.0f) {
             cond = TRUE;
         }
-        playerStatus->position.y += playerStatus->gravityIntegrator[0];
+        playerStatus->pos.y += playerStatus->gravityIntegrator[0];
     }
 
     if (cond) {
@@ -212,7 +212,7 @@ void phys_update_jump(void) {
                 return;
             case ACTION_STATE_BOUNCE:
                 integrate_gravity();
-                playerStatus->position.y += playerStatus->gravityIntegrator[0];
+                playerStatus->pos.y += playerStatus->gravityIntegrator[0];
                 if (playerStatus->gravityIntegrator[0] <= 0.0f) {
                     record_jump_apex();
                     if (is_starting_conversation()) {
@@ -229,7 +229,7 @@ void phys_update_jump(void) {
                 return;
             case ACTION_STATE_HOP:
                 playerStatus->gravityIntegrator[0] -= 4.5;
-                playerStatus->position.y += playerStatus->gravityIntegrator[0];
+                playerStatus->pos.y += playerStatus->gravityIntegrator[0];
                 if (playerStatus->gravityIntegrator[0] <= 0.0f) {
                     record_jump_apex();
                     gravity_use_fall_parms();
@@ -266,7 +266,7 @@ void phys_update_jump(void) {
     if (playerStatus->gravityIntegrator[0] > playerStatus->maxJumpSpeed) {
         playerStatus->gravityIntegrator[0] = playerStatus->maxJumpSpeed;
     }
-    playerStatus->position.y += playerStatus->gravityIntegrator[0];
+    playerStatus->pos.y += playerStatus->gravityIntegrator[0];
 }
 
 void phys_init_integrator_for_current_state(void) {
@@ -330,7 +330,7 @@ void phys_update_falling(void) {
     && gPlayerStatus.actionState != ACTION_STATE_BOUNCE
     ) {
         s32 colliderID;
-        gPlayerStatus.position.y = player_check_collision_below(player_fall_distance(), &colliderID);
+        gPlayerStatus.pos.y = player_check_collision_below(player_fall_distance(), &colliderID);
         player_handle_floor_collider_type(colliderID);
     }
 }
@@ -387,8 +387,8 @@ void phys_player_land(void) {
     playerStatus->timeInAir = 0;
     playerStatus->peakJumpTime = 0;
     playerStatus->flags &= ~PS_FLAG_SCRIPTED_FALL;
-    playerStatus->landPos.x = playerStatus->position.x;
-    playerStatus->landPos.z = playerStatus->position.z;
+    playerStatus->landPos.x = playerStatus->pos.x;
+    playerStatus->landPos.z = playerStatus->pos.z;
     playerStatus->flags &= ~PS_FLAG_AIRBORNE;
     sfx_play_sound_at_player(SOUND_SOFT_LAND, SOUND_SPACE_MODE_0);
     if (!(collisionStatus->currentFloor & COLLISION_WITH_ENTITY_BIT)) {
@@ -474,18 +474,18 @@ f32 player_check_collision_below(f32 offset, s32* colliderID) {
     CollisionStatus* collisionStatus = &gCollisionStatus;
     f32 temp_f4 = playerStatus->colliderHeight * 0.5f;
     f32 outLength = fabsf(offset) + temp_f4;
-    f32 x = playerStatus->position.x;
-    f32 y = playerStatus->position.y + temp_f4;
-    f32 z = playerStatus->position.z;
+    f32 x = playerStatus->pos.x;
+    f32 y = playerStatus->pos.y + temp_f4;
+    f32 z = playerStatus->pos.z;
     f32 sp38, sp3C, sp40, sp44;
     s32 hit = *colliderID = player_raycast_below_cam_relative(&gPlayerStatus, &x, &y, &z, &outLength,
                                                               &sp38, &sp3C, &sp40, &sp44);
 
     if (hit < 0) {
         if (offset >= 0.0f && collisionStatus->currentCeiling >= 0) {
-            return playerStatus->position.y;
+            return playerStatus->pos.y;
         }
-        y = playerStatus->position.y + offset;
+        y = playerStatus->pos.y + offset;
     } else {
         collisionStatus->currentFloor = hit;
         collisionStatus->lastTouchedFloor = -1;
@@ -516,7 +516,7 @@ void collision_main_lateral(void) {
         if (playerStatus->flags & PS_FLAG_ENTERING_BATTLE) {
             speed *= 0.5f;
         }
-        add_vec2D_polar(&playerStatus->position.x, &playerStatus->position.z, speed, playerStatus->heading);
+        add_vec2D_polar(&playerStatus->pos.x, &playerStatus->pos.z, speed, playerStatus->heading);
         return;
     }
 
@@ -527,17 +527,17 @@ void collision_main_lateral(void) {
             break;
         case ACTION_STATE_RIDE:
             if (get_current_partner_id() == PARTNER_BOW) {
-                playerStatus->position.x += playerStatus->pushVelocity.x;
-                playerStatus->position.y += playerStatus->pushVelocity.y;
-                playerStatus->position.z += playerStatus->pushVelocity.z;
+                playerStatus->pos.x += playerStatus->pushVelocity.x;
+                playerStatus->pos.y += playerStatus->pushVelocity.y;
+                playerStatus->pos.z += playerStatus->pushVelocity.z;
 
                 if (playerStatus->pushVelocity.x != 0.0f ||
                     playerStatus->pushVelocity.y != 0.0f ||
                     playerStatus->pushVelocity.z != 0.0f)
                 {
-                    gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
-                    gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
-                    gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
+                    gCameras[CAM_DEFAULT].targetPos.x = playerStatus->pos.x;
+                    gCameras[CAM_DEFAULT].targetPos.y = playerStatus->pos.y;
+                    gCameras[CAM_DEFAULT].targetPos.z = playerStatus->pos.z;
                     if (playerStatus->alpha1 != 128) {
                         collision_check_player_intersecting_world(0, 0,
                             atan2(0.0f, 0.0f, playerStatus->pushVelocity.x, playerStatus->pushVelocity.z));
@@ -547,16 +547,16 @@ void collision_main_lateral(void) {
             break;
         case ACTION_STATE_SPIN_POUND:
         case ACTION_STATE_TORNADO_POUND:
-            playerStatus->position.x += playerStatus->pushVelocity.x;
-            playerStatus->position.y += playerStatus->pushVelocity.y;
-            playerStatus->position.z += playerStatus->pushVelocity.z;
+            playerStatus->pos.x += playerStatus->pushVelocity.x;
+            playerStatus->pos.y += playerStatus->pushVelocity.y;
+            playerStatus->pos.z += playerStatus->pushVelocity.z;
             if (playerStatus->pushVelocity.x != 0.0f ||
                 playerStatus->pushVelocity.y != 0.0f ||
                 playerStatus->pushVelocity.z != 0.0f)
             {
-                gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
-                gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
-                gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
+                gCameras[CAM_DEFAULT].targetPos.x = playerStatus->pos.x;
+                gCameras[CAM_DEFAULT].targetPos.y = playerStatus->pos.y;
+                gCameras[CAM_DEFAULT].targetPos.z = playerStatus->pos.z;
             }
             if (playerStatus->pushVelocity.x != 0.0f ||
                 playerStatus->pushVelocity.y != 0.0f ||
@@ -567,21 +567,21 @@ void collision_main_lateral(void) {
             }
             break;
         case ACTION_STATE_HAMMER:
-            playerStatus->position.x += playerStatus->pushVelocity.x;
-            playerStatus->position.y += playerStatus->pushVelocity.y;
-            playerStatus->position.z += playerStatus->pushVelocity.z;
+            playerStatus->pos.x += playerStatus->pushVelocity.x;
+            playerStatus->pos.y += playerStatus->pushVelocity.y;
+            playerStatus->pos.z += playerStatus->pushVelocity.z;
             if (playerStatus->pushVelocity.x != 0.0f ||
                 playerStatus->pushVelocity.y != 0.0f ||
                 playerStatus->pushVelocity.z != 0.0f)
             {
-                gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
-                gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
-                gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
+                gCameras[CAM_DEFAULT].targetPos.x = playerStatus->pos.x;
+                gCameras[CAM_DEFAULT].targetPos.y = playerStatus->pos.y;
+                gCameras[CAM_DEFAULT].targetPos.z = playerStatus->pos.z;
             }
 
-            playerX = playerStatus->position.x;
-            playerY = playerStatus->position.y;
-            playerZ = playerStatus->position.z;
+            playerX = playerStatus->pos.x;
+            playerY = playerStatus->pos.y;
+            playerZ = playerStatus->pos.z;
             if (playerStatus->currentSpeed != 0.0f) {
                 yaw = playerStatus->targetYaw;
             } else {
@@ -652,10 +652,10 @@ void collision_main_lateral(void) {
                     }
                 }
 
-                playerStatus->position.x += playerStatus->pushVelocity.x;
-                playerStatus->position.z += playerStatus->pushVelocity.z;
+                playerStatus->pos.x += playerStatus->pushVelocity.x;
+                playerStatus->pos.z += playerStatus->pushVelocity.z;
                 if (playerStatus->timeInAir == 0) {
-                    playerStatus->position.y += playerStatus->pushVelocity.y;
+                    playerStatus->pos.y += playerStatus->pushVelocity.y;
                 }
 
                 if (
@@ -663,22 +663,22 @@ void collision_main_lateral(void) {
                     playerStatus->pushVelocity.y != 0.0f ||
                     playerStatus->pushVelocity.z != 0.0f)
                 {
-                    gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
-                    gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
-                    gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
+                    gCameras[CAM_DEFAULT].targetPos.x = playerStatus->pos.x;
+                    gCameras[CAM_DEFAULT].targetPos.y = playerStatus->pos.y;
+                    gCameras[CAM_DEFAULT].targetPos.z = playerStatus->pos.z;
                 }
 
-                playerX = playerStatus->position.x;
-                playerY = playerStatus->position.y;
-                playerZ = playerStatus->position.z;
+                playerX = playerStatus->pos.x;
+                playerY = playerStatus->pos.y;
+                playerZ = playerStatus->pos.z;
                 result = player_test_move_with_slipping(playerStatus, &playerX, &playerY, &playerZ,
                                                         playerStatus->colliderDiameter * 0.5f, playerStatus->targetYaw);
                 if (speed == 0.0f && result < 0) {
                     yaw2 = playerStatus->spriteFacingAngle - 90.0f + gCameras[gCurrentCameraID].currentYaw;
                     sin_cos_rad(DEG_TO_RAD(yaw2 + 180.0f), &sinTheta, &cosTheta);
-                    playerX = playerStatus->position.x + (sinTheta * playerStatus->colliderDiameter * 0.5f);
-                    playerY = playerStatus->position.y;
-                    playerZ = playerStatus->position.z - (cosTheta * playerStatus->colliderDiameter * 0.5f);
+                    playerX = playerStatus->pos.x + (sinTheta * playerStatus->colliderDiameter * 0.5f);
+                    playerY = playerStatus->pos.y;
+                    playerZ = playerStatus->pos.z - (cosTheta * playerStatus->colliderDiameter * 0.5f);
                     result = player_test_move_with_slipping(playerStatus, &playerX, &playerY, &playerZ,
                                                             playerStatus->colliderDiameter, yaw2);
                 }
@@ -690,9 +690,9 @@ void collision_main_lateral(void) {
                         break;
                     }
 
-                    playerX = playerStatus->position.x;
-                    playerZ = playerStatus->position.z;
-                    playerY = playerStatus->position.y;
+                    playerX = playerStatus->pos.x;
+                    playerZ = playerStatus->pos.z;
+                    playerY = playerStatus->pos.y;
                     yaw2 = yaw;
 
                     if (speed > 4.0f) {
@@ -719,15 +719,15 @@ void collision_main_lateral(void) {
 
                     if (test1 < 0) {
                         if (test2 < 0) {
-                            playerStatus->position.x = playerX;
-                            playerStatus->position.z = playerZ;
+                            playerStatus->pos.x = playerX;
+                            playerStatus->pos.z = playerZ;
                         } else {
-                            playerStatus->position.x = test1X;
-                            playerStatus->position.z = test1Z;
+                            playerStatus->pos.x = test1X;
+                            playerStatus->pos.z = test1Z;
                         }
                     } else if (test2 < 0) {
-                        playerStatus->position.x = test2X;
-                        playerStatus->position.z = test2Y;
+                        playerStatus->pos.x = test2X;
+                        playerStatus->pos.z = test2Y;
                     }
 
                     if (playerStatus->enableCollisionOverlapsCheck == 0) {
@@ -762,9 +762,9 @@ s32 collision_check_player_intersecting_world(s32 mode, s32 arg1, f32 yaw) {
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        f32 x = gPlayerStatusPtr->position.x;
-        f32 y = gPlayerStatusPtr->position.y + arg1;
-        f32 z = gPlayerStatusPtr->position.z;
+        f32 x = gPlayerStatusPtr->pos.x;
+        f32 y = gPlayerStatusPtr->pos.y + arg1;
+        f32 z = gPlayerStatusPtr->pos.z;
         s32 hitID, hitID2;
 
         hitID = player_test_lateral_overlap(mode, gPlayerStatusPtr, &x, &y, &z, 0.0f, angle);
@@ -783,8 +783,8 @@ s32 collision_check_player_intersecting_world(s32 mode, s32 arg1, f32 yaw) {
         }
         gPlayerStatusPtr = gPlayerStatusPtr;
 
-        gPlayerStatusPtr->position.x = x;
-        gPlayerStatusPtr->position.z = z;
+        gPlayerStatusPtr->pos.x = x;
+        gPlayerStatusPtr->pos.z = z;
         angle += 90.0f;
     }
 
@@ -819,16 +819,16 @@ void collision_check_player_overlaps(void) {
     f32 overlapPush = playerStatus->overlapPushAmount;
 
     if (overlapPush != 0.0f) {
-        f32 x = playerStatus->position.x;
-        f32 y = playerStatus->position.y;
-        f32 z = playerStatus->position.z;
+        f32 x = playerStatus->pos.x;
+        f32 y = playerStatus->pos.y;
+        f32 z = playerStatus->pos.z;
 
         player_test_lateral_overlap(0, &gPlayerStatus, &x, &y, &z, overlapPush, playerStatus->overlapPushYaw);
 
         overlapPush -= playerStatus->runSpeed / 10.0f;
-        playerStatus->position.x = x;
-        playerStatus->position.y = y;
-        playerStatus->position.z = z;
+        playerStatus->pos.x = x;
+        playerStatus->pos.y = y;
+        playerStatus->pos.z = z;
 
         if (overlapPush < 0.0f) {
             overlapPush = 0.0f;
@@ -855,7 +855,7 @@ s32 phys_should_player_be_sliding(void) {
                     }
                     break;
                 case 1:
-                    if (playerStatus->position.x >= -300.0f && playerStatus->position.x <= -140.0f) {
+                    if (playerStatus->pos.x >= -300.0f && playerStatus->pos.x <= -140.0f) {
                         ret = FALSE;
                     }
                     break;
@@ -883,9 +883,9 @@ void phys_main_collision_below(void) {
     PartnerStatus* partnerStatus = &gPartnerStatus;
     CollisionStatus* collisionStatus = &gCollisionStatus;
     f32 collHeightHalf = playerStatus->colliderHeight * 0.5f;
-    f32 playerX = playerStatus->position.x;
-    f32 playerY = playerStatus->position.y + collHeightHalf;
-    f32 playerZ = playerStatus->position.z;
+    f32 playerX = playerStatus->pos.x;
+    f32 playerY = playerStatus->pos.y + collHeightHalf;
+    f32 playerZ = playerStatus->pos.z;
     f32 outLength = playerStatus->colliderHeight;
     f32 temp_f24 = (2.0f * playerStatus->colliderHeight) / 7.0f;
     f32 hitRx, hitRz;
@@ -959,15 +959,15 @@ void phys_main_collision_below(void) {
 
                     if (playerStatus->actionState != ACTION_STATE_STEP_UP && !cond) {
                         if (!(playerStatus->animFlags & PA_FLAG_USING_PEACH_PHYSICS)) {
-                            if (playerY - playerStatus->position.y < 6.0f) {
-                                playerStatus->position.y = playerY;
+                            if (playerY - playerStatus->pos.y < 6.0f) {
+                                playerStatus->pos.y = playerY;
                             } else {
                                 set_action_state(ACTION_STATE_STEP_UP);
                                 D_8010C928 = playerY;
                                 D_8010C984 = playerStatus->targetYaw;
                             }
                         } else {
-                            playerStatus->position.y = playerY;
+                            playerStatus->pos.y = playerY;
                         }
                         phys_save_ground_pos();
                     }
@@ -1009,73 +1009,73 @@ void collision_lava_reset_check_additional_overlaps(void) {
     }
 
     temp_f0 = clamp_angle(playerStatus->targetYaw - 30.0);
-    y = playerStatus->position.y + (playerStatus->colliderHeight * 0.75f);
-    x = playerStatus->position.x;
-    z = playerStatus->position.z;
+    y = playerStatus->pos.y + (playerStatus->colliderHeight * 0.75f);
+    x = playerStatus->pos.x;
+    z = playerStatus->pos.z;
     player_test_lateral_overlap(0, &gPlayerStatus, &x, &y, &z, 0.0f, temp_f0);
-    playerStatus->position.x = x;
-    playerStatus->position.z = z;
+    playerStatus->pos.x = x;
+    playerStatus->pos.z = z;
 
     temp_f0 = clamp_angle(playerStatus->targetYaw + 30.0);
-    y = playerStatus->position.y + (playerStatus->colliderHeight * 0.75f);
-    x = playerStatus->position.x;
-    z = playerStatus->position.z;
+    y = playerStatus->pos.y + (playerStatus->colliderHeight * 0.75f);
+    x = playerStatus->pos.x;
+    z = playerStatus->pos.z;
     player_test_lateral_overlap(0, &gPlayerStatus, &x, &y, &z, 0.0f, temp_f0);
-    playerStatus->position.x = x;
-    playerStatus->position.z = z;
+    playerStatus->pos.x = x;
+    playerStatus->pos.z = z;
 
     temp_f0 = clamp_angle(playerStatus->targetYaw - 30.0);
-    x = playerStatus->position.x;
-    y = playerStatus->position.y;
-    z = playerStatus->position.z;
+    x = playerStatus->pos.x;
+    y = playerStatus->pos.y;
+    z = playerStatus->pos.z;
     player_test_lateral_overlap(0, &gPlayerStatus, &x, &y, &z, 0.0f, temp_f0);
-    playerStatus->position.x = x;
-    playerStatus->position.z = z;
+    playerStatus->pos.x = x;
+    playerStatus->pos.z = z;
 
     temp_f0 = clamp_angle(playerStatus->targetYaw + 30.0);
-    x = playerStatus->position.x;
-    y = playerStatus->position.y;
-    z = playerStatus->position.z;
+    x = playerStatus->pos.x;
+    y = playerStatus->pos.y;
+    z = playerStatus->pos.z;
     player_test_lateral_overlap(0, &gPlayerStatus, &x, &y, &z, 0.0f, temp_f0);
-    playerStatus->position.x = x;
-    playerStatus->position.z = z;
+    playerStatus->pos.x = x;
+    playerStatus->pos.z = z;
 
     temp_f0 = clamp_angle(playerStatus->targetYaw + 90.0);
-    x = playerStatus->position.x;
-    y = playerStatus->position.y;
-    z = playerStatus->position.z;
+    x = playerStatus->pos.x;
+    y = playerStatus->pos.y;
+    z = playerStatus->pos.z;
     player_test_lateral_overlap(0, &gPlayerStatus, &x, &y, &z, 0.0f, temp_f0);
-    playerStatus->position.x = x;
-    playerStatus->position.z = z;
+    playerStatus->pos.x = x;
+    playerStatus->pos.z = z;
     temp_f0 = clamp_angle(playerStatus->targetYaw - 90.0);
 
-    x = playerStatus->position.x;
-    y = playerStatus->position.y;
-    z = playerStatus->position.z;
+    x = playerStatus->pos.x;
+    y = playerStatus->pos.y;
+    z = playerStatus->pos.z;
     player_test_lateral_overlap(0, &gPlayerStatus, &x, &y, &z, 0.0f, temp_f0);
-    playerStatus->position.x = x;
-    playerStatus->position.z = z;
+    playerStatus->pos.x = x;
+    playerStatus->pos.z = z;
 
     temp_f0 = clamp_angle(playerStatus->targetYaw + 180.0);
-    x = playerStatus->position.x;
-    y = playerStatus->position.y;
-    z = playerStatus->position.z;
+    x = playerStatus->pos.x;
+    y = playerStatus->pos.y;
+    z = playerStatus->pos.z;
     player_test_lateral_overlap(0, &gPlayerStatus, &x, &y, &z, 0.0f, temp_f0);
-    playerStatus->position.x = x;
-    playerStatus->position.z = z;
+    playerStatus->pos.x = x;
+    playerStatus->pos.z = z;
 }
 
 void collision_lateral_peach(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32 climbableStep = FALSE;
     f32 yaw = playerStatus->targetYaw;
-    f32 x = playerStatus->position.x;
-    f32 y = playerStatus->position.y;
-    f32 z = playerStatus->position.z;
+    f32 x = playerStatus->pos.x;
+    f32 y = playerStatus->pos.y;
+    f32 z = playerStatus->pos.z;
     s32 wall = player_test_move_without_slipping(&gPlayerStatus, &x, &y, &z, 0, yaw, &climbableStep);
 
-    playerStatus->position.x = x;
-    playerStatus->position.z = z;
+    playerStatus->pos.x = x;
+    playerStatus->pos.z = z;
 
     // If there was a climbable step in this direction, but no wall, we can climb up it
     if (climbableStep
@@ -1150,16 +1150,16 @@ s32 phys_check_interactable_collision(void) {
 
     if (playerStatus->pressedButtons & BUTTON_A) {
         yaw = playerStatus->targetYaw;
-        x = playerStatus->position.x;
-        y = playerStatus->position.y;
-        z = playerStatus->position.z;
+        x = playerStatus->pos.x;
+        y = playerStatus->pos.y;
+        z = playerStatus->pos.z;
         ret = player_test_move_with_slipping(playerStatus, &x, &y, &z, playerStatus->colliderDiameter * 0.5f, yaw);
 
         if (ret < 0 && playerStatus->currentSpeed == 0.0f) {
             yaw = playerStatus->spriteFacingAngle - 90.0f + gCameras[gCurrentCameraID].currentYaw;
-            x = playerStatus->position.x;
-            y = playerStatus->position.y;
-            z = playerStatus->position.z;
+            x = playerStatus->pos.x;
+            y = playerStatus->pos.y;
+            z = playerStatus->pos.z;
             ret = player_test_move_with_slipping(playerStatus, &x, &y, &z, playerStatus->colliderDiameter * 0.5f, yaw);
         }
     }
@@ -1216,7 +1216,7 @@ f32 player_get_camera_facing_angle(void) {
 void phys_save_ground_pos(void) {
     PlayerStatus* playerStatus = &gPlayerStatus;
 
-    playerStatus->lastGoodPosition.x = playerStatus->position.x;
-    playerStatus->lastGoodPosition.y = playerStatus->position.y;
-    playerStatus->lastGoodPosition.z = playerStatus->position.z;
+    playerStatus->lastGoodPos.x = playerStatus->pos.x;
+    playerStatus->lastGoodPos.y = playerStatus->pos.y;
+    playerStatus->lastGoodPos.z = playerStatus->pos.z;
 }

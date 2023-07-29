@@ -138,7 +138,7 @@ API_CALLABLE(N(SpinyAI_Main)) {
                 break;
             }
             enemy->varTable[10] = 4;
-            npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+            npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
             npc->moveSpeed = 2.5f;
             npc->jumpVelocity = 8.0f;
             npc->jumpScale = 0.8f;
@@ -188,7 +188,7 @@ API_CALLABLE(N(SpinyAI_Main)) {
                     npc->flags |= NPC_FLAG_IGNORE_CAMERA_FOR_YAW;
                     npc->flags &= ~NPC_FLAG_JUMPING;
                     npc->jumpVelocity = 0.0f;
-                    npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+                    npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
                     npc->currentAnim = ANIM_Spiny_Anim1A;
                     npc->duration = 3;
                     script->AI_TEMP_STATE = 103;

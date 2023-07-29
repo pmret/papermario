@@ -52,15 +52,15 @@ API_CALLABLE(N(func_80241FB0_D3C580)) {
 
 API_CALLABLE(N(SetDraggingPlayerPosY)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
-    f32 x = playerStatus->position.x;
-    f32 y = playerStatus->position.y + 10.0f;
-    f32 z = playerStatus->position.z;
+    f32 x = playerStatus->pos.x;
+    f32 y = playerStatus->pos.y + 10.0f;
+    f32 z = playerStatus->pos.z;
     f32 hitDepth = 40.0f;
 
     npc_raycast_down_sides(0, &x, &y, &z, &hitDepth);
-    playerStatus->position.x = x;
-    playerStatus->position.y = y;
-    playerStatus->position.z = z;
+    playerStatus->pos.x = x;
+    playerStatus->pos.y = y;
+    playerStatus->pos.z = z;
     return ApiStatus_DONE2;
 }
 

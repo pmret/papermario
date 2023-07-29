@@ -129,8 +129,8 @@ void entity_Tweester_update_face_anim(Entity* entity) {
 s32 entity_Tweester_has_reached_target(Entity* entity) {
     TweesterData* data = entity->dataBuf.tweester;
     s32 count = 0;
-    f32 deltaX = fabsf(data->targetX - entity->position.x);
-    f32 deltaZ = fabsf(data->targetZ - entity->position.z);
+    f32 deltaX = fabsf(data->targetX - entity->pos.x);
+    f32 deltaZ = fabsf(data->targetZ - entity->pos.z);
 
     if (deltaX <= 10.0f) {
         count++;
@@ -181,7 +181,7 @@ void entity_Tweester_move(Entity* entity) {
     TweesterData* data = entity->dataBuf.tweester;
     f32 yawRad;
 
-    f32 temp_f4 = (atan2(entity->position.x, entity->position.z, data->targetX, data->targetZ) - data->yaw) * 0.03125f;
+    f32 temp_f4 = (atan2(entity->pos.x, entity->pos.z, data->targetX, data->targetZ) - data->yaw) * 0.03125f;
     if (temp_f4 >= 0.0f && temp_f4 < 0.01) {
         temp_f4 = 0.01f;
     }
@@ -191,8 +191,8 @@ void entity_Tweester_move(Entity* entity) {
 
     data->yaw = clamp_angle(data->yaw + temp_f4);
     yawRad = DEG_TO_RAD(data->yaw);
-    entity->position.x += sin_rad(yawRad);
-    entity->position.z -= cos_rad(yawRad);
+    entity->pos.x += sin_rad(yawRad);
+    entity->pos.z -= cos_rad(yawRad);
 
     if (entity_Tweester_has_reached_target(entity)) {
         entity_Tweester_select_target_point(entity);
@@ -267,7 +267,7 @@ void entity_Tweester_idle(Entity* entity) {
 
     if (partnerStatus->partnerActionState == PARTNER_ACTION_NONE || partnerStatus->actingPartner != PARTNER_BOW) {
         if (playerStatus->actionState == ACTION_STATE_USE_TWEESTER) {
-            Npc* npc = npc_find_closest_simple(entity->position.x, entity->position.y, entity->position.z, 50.0f);
+            Npc* npc = npc_find_closest_simple(entity->pos.x, entity->pos.y, entity->pos.z, 50.0f);
             if (npc != NULL && (npc->flags & NPC_FLAG_PARTNER)) {
                 TweesterTouchingPartner = entity;
             }
@@ -277,7 +277,7 @@ void entity_Tweester_idle(Entity* entity) {
             !(playerStatus->flags & PS_FLAG_PAUSED) &&
             playerStatus->actionState != ACTION_STATE_USE_TWEESTER &&
             playerStatus->blinkTimer == 0 &&
-            fabs(dist2D(entity->position.x, entity->position.z, playerStatus->position.x, playerStatus->position.z)) <= 50.0
+            fabs(dist2D(entity->pos.x, entity->pos.z, playerStatus->pos.x, playerStatus->pos.z)) <= 50.0
             ) {
             TweesterTouchingPlayer = entity;
             playerStatus->animFlags |= PA_FLAG_INTERRUPT_USE_PARTNER;

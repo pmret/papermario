@@ -28,9 +28,9 @@ API_CALLABLE(N(SetPassengerPos)) {
 
     switch (script->functionTemp[0]) {
         case 0:
-            gPlayerStatus.position.x = x;
-            gPlayerStatus.position.y = y;
-            gPlayerStatus.position.z = z;
+            gPlayerStatus.pos.x = x;
+            gPlayerStatus.pos.y = y;
+            gPlayerStatus.pos.z = z;
             break;
         case 1:
             partner = get_npc_safe(NPC_PARTNER);

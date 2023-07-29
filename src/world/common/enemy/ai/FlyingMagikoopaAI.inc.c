@@ -67,7 +67,7 @@ void N(FlyingMagikoopaAI_15)(Evt* arg0, MobileAISettings* arg1, EnemyDetectVolum
                 randomDist = moveDist;
             }
         } else {
-            npc->yaw  = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+            npc->yaw  = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
             if (npc->yaw  < 180.0) {
                 baseYaw = (rand_int(10) + 90.0) - 5.0;
             } else {
@@ -161,7 +161,7 @@ void N(FlyingMagikoopaAI_17)(Evt* script, MobileAISettings* aiSettings, EnemyDet
 
     npc->duration++;
     if (npc->duration == (enemy->varTable[3] - 8)) {
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
     }
     if (limitY <= npc->pos.y) {
         npc->pos.y = limitY;

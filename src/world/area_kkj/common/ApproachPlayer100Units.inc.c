@@ -18,15 +18,15 @@ ApiStatus N(ApproachPlayer100Units)(Evt* script, s32 isInitialCall) {
         return ApiStatus_DONE2;
     }
 
-    if (dist2D(playerStatus->position.x, playerStatus->position.z, npc->pos.x, npc->pos.z) < 100.0f) {
+    if (dist2D(playerStatus->pos.x, playerStatus->pos.z, npc->pos.x, npc->pos.z) < 100.0f) {
         isCloseToPlayer = FALSE;
     } else {
         isCloseToPlayer = TRUE;
     }
 
-    angle = clamp_angle(atan2(playerStatus->position.x, playerStatus->position.z, npc->pos.x, npc->pos.z));
-    posX = playerStatus->position.x + (sin_deg(angle) * 100.0f);
-    posZ = playerStatus->position.z - (cos_deg(angle) * 100.0f);
+    angle = clamp_angle(atan2(playerStatus->pos.x, playerStatus->pos.z, npc->pos.x, npc->pos.z));
+    posX = playerStatus->pos.x + (sin_deg(angle) * 100.0f);
+    posZ = playerStatus->pos.z - (cos_deg(angle) * 100.0f);
     evt_set_variable(script, outVar1, isCloseToPlayer);
     evt_set_variable(script, outVar2, posX);
     evt_set_variable(script, outVar3, posZ);

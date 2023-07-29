@@ -1766,13 +1766,13 @@ ApiStatus JumpPartTo(Evt* script, s32 isInitialCall) {
         goalY = movement->goalPos.y;
         goalZ = movement->goalPos.z;
 
-        movement->absolutePosition.x = part->absolutePosition.x;
-        movement->absolutePosition.y = part->absolutePosition.y;
-        movement->absolutePosition.z = part->absolutePosition.z;
+        movement->absolutePos.x = part->absolutePos.x;
+        movement->absolutePos.y = part->absolutePos.y;
+        movement->absolutePos.z = part->absolutePos.z;
 
-        posX = movement->absolutePosition.x;
-        posY = movement->absolutePosition.y;
-        posZ = movement->absolutePosition.z;
+        posX = movement->absolutePos.x;
+        posY = movement->absolutePos.y;
+        posZ = movement->absolutePos.z;
 
         movement->angle = atan2(posX, posZ, goalX, goalZ);
         movement->distance = dist2D(posX, posZ, goalX, goalZ);
@@ -1792,28 +1792,28 @@ ApiStatus JumpPartTo(Evt* script, s32 isInitialCall) {
         movement->moveSpeed += deltaDist / movement->moveTime;
         movement->unk_2C = movement->jumpScale * movement->moveTime * 0.5f + posY / movement->moveTime;
         if (part->partTypeData[4] != 0) {
-            sfx_play_sound_at_position(part->partTypeData[4], SOUND_SPACE_MODE_0, part->absolutePosition.x, part->absolutePosition.y, part->absolutePosition.z);
+            sfx_play_sound_at_position(part->partTypeData[4], SOUND_SPACE_MODE_0, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
         }
         script->functionTemp[0] = 1;
     }
 
     part = script->functionTempPtr[2];
     movement = part->movement;
-    movement->absolutePosition.y += movement->unk_2C;
+    movement->absolutePos.y += movement->unk_2C;
     movement->unk_2C -= movement->jumpScale;
-    add_xz_vec3f_copy1(&movement->absolutePosition, movement->moveSpeed, movement->angle);
-    part->absolutePosition.x = movement->absolutePosition.x;
-    part->absolutePosition.y = movement->absolutePosition.y;
-    part->absolutePosition.z = movement->absolutePosition.z;
+    add_xz_vec3f_copy1(&movement->absolutePos, movement->moveSpeed, movement->angle);
+    part->absolutePos.x = movement->absolutePos.x;
+    part->absolutePos.y = movement->absolutePos.y;
+    part->absolutePos.z = movement->absolutePos.z;
     movement->moveTime--;
 
     if (movement->moveTime <= 0) {
         if (script->functionTemp[3] != 0) {
             play_movement_dust_effects(2, movement->goalPos.x, movement->goalPos.y, movement->goalPos.z, movement->angle);
         }
-        part->absolutePosition.x = movement->goalPos.x;
-        part->absolutePosition.y = movement->goalPos.y;
-        part->absolutePosition.z = movement->goalPos.z;
+        part->absolutePos.x = movement->goalPos.x;
+        part->absolutePos.y = movement->goalPos.y;
+        part->absolutePos.z = movement->goalPos.z;
         return ApiStatus_DONE1;
     } else {
         return ApiStatus_BLOCK;
@@ -1858,13 +1858,13 @@ ApiStatus FallPartTo(Evt* script, s32 isInitialCall) {
         goalY = movement->goalPos.y;
         goalZ = movement->goalPos.z;
 
-        movement->absolutePosition.x = part->absolutePosition.x;
-        movement->absolutePosition.y = part->absolutePosition.y;
-        movement->absolutePosition.z = part->absolutePosition.z;
+        movement->absolutePos.x = part->absolutePos.x;
+        movement->absolutePos.y = part->absolutePos.y;
+        movement->absolutePos.z = part->absolutePos.z;
 
-        posX = movement->absolutePosition.x;
-        posY = movement->absolutePosition.y;
-        posZ = movement->absolutePosition.z;
+        posX = movement->absolutePos.x;
+        posY = movement->absolutePos.y;
+        posZ = movement->absolutePos.z;
 
         movement->angle = atan2(posX, posZ, goalX, goalZ);
         movement->distance = dist2D(posX, posZ, goalX, goalZ);
@@ -1883,26 +1883,26 @@ ApiStatus FallPartTo(Evt* script, s32 isInitialCall) {
         movement->unk_2C = 0.0f;
         movement->jumpScale = (posY / movement->moveTime - movement->unk_2C) / (-movement->moveTime * 0.5);
         if (part->partTypeData[4] != 0) {
-            sfx_play_sound_at_position(part->partTypeData[4], SOUND_SPACE_MODE_0, part->absolutePosition.x, part->absolutePosition.y, part->absolutePosition.z);
+            sfx_play_sound_at_position(part->partTypeData[4], SOUND_SPACE_MODE_0, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
         }
         script->functionTemp[0] = 1;
     }
 
     part = script->functionTempPtr[2];
     movement = part->movement;
-    movement->absolutePosition.y += movement->unk_2C;
+    movement->absolutePos.y += movement->unk_2C;
     movement->unk_2C -= movement->jumpScale;
-    add_xz_vec3f_copy1(&movement->absolutePosition, movement->moveSpeed, movement->angle);
-    part->absolutePosition.x = movement->absolutePosition.x;
-    part->absolutePosition.y = movement->absolutePosition.y;
-    part->absolutePosition.z = movement->absolutePosition.z;
+    add_xz_vec3f_copy1(&movement->absolutePos, movement->moveSpeed, movement->angle);
+    part->absolutePos.x = movement->absolutePos.x;
+    part->absolutePos.y = movement->absolutePos.y;
+    part->absolutePos.z = movement->absolutePos.z;
     movement->moveTime--;
 
     if (movement->moveTime <= 0) {
         play_movement_dust_effects(2, movement->goalPos.x, movement->goalPos.y, movement->goalPos.z, movement->angle);
-        part->absolutePosition.x = movement->goalPos.x;
-        part->absolutePosition.y = movement->goalPos.y;
-        part->absolutePosition.z = movement->goalPos.z;
+        part->absolutePos.x = movement->goalPos.x;
+        part->absolutePos.y = movement->goalPos.y;
+        part->absolutePos.z = movement->goalPos.z;
         return ApiStatus_DONE1;
     } else {
         return ApiStatus_BLOCK;
@@ -1932,24 +1932,24 @@ ApiStatus LandJumpPart(Evt* script, s32 isInitialCall) {
         script->functionTempPtr[1] = actor;
         script->functionTempPtr[2] = part;
         movement = part->movement;
-        movement->absolutePosition.x = part->absolutePosition.x;
-        movement->absolutePosition.y = part->absolutePosition.y;
-        movement->absolutePosition.z = part->absolutePosition.z;
+        movement->absolutePos.x = part->absolutePos.x;
+        movement->absolutePos.y = part->absolutePos.y;
+        movement->absolutePos.z = part->absolutePos.z;
         script->functionTemp[0] = 1;
     }
 
     part = script->functionTempPtr[2];
     movement = part->movement;
-    movement->absolutePosition.y += movement->unk_2C;
+    movement->absolutePos.y += movement->unk_2C;
     movement->unk_2C -= movement->jumpScale;
-    add_xz_vec3f_copy1(&movement->absolutePosition, movement->moveSpeed, movement->angle);
-    part->absolutePosition.x = movement->absolutePosition.x;
-    part->absolutePosition.y = movement->absolutePosition.y;
-    part->absolutePosition.z = movement->absolutePosition.z;
+    add_xz_vec3f_copy1(&movement->absolutePos, movement->moveSpeed, movement->angle);
+    part->absolutePos.x = movement->absolutePos.x;
+    part->absolutePos.y = movement->absolutePos.y;
+    part->absolutePos.z = movement->absolutePos.z;
 
-    if (part->absolutePosition.y < 0.0f) {
-        part->absolutePosition.y = 0.0f;
-        play_movement_dust_effects(2, part->absolutePosition.x, part->absolutePosition.y, part->absolutePosition.z, part->yaw);
+    if (part->absolutePos.y < 0.0f) {
+        part->absolutePos.y = 0.0f;
+        play_movement_dust_effects(2, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z, part->yaw);
         return ApiStatus_DONE1;
     }
 
@@ -1995,13 +1995,13 @@ ApiStatus RunPartTo(Evt* script, s32 isInitialCall) {
         goalY = movement->goalPos.y;
         goalZ = movement->goalPos.z;
 
-        movement->absolutePosition.x = part->absolutePosition.x;
-        movement->absolutePosition.y = part->absolutePosition.y;
-        movement->absolutePosition.z = part->absolutePosition.z;
+        movement->absolutePos.x = part->absolutePos.x;
+        movement->absolutePos.y = part->absolutePos.y;
+        movement->absolutePos.z = part->absolutePos.z;
 
-        posX = movement->absolutePosition.x;
-        posY = movement->absolutePosition.y;
-        posZ = movement->absolutePosition.z;
+        posX = movement->absolutePos.x;
+        posY = movement->absolutePos.y;
+        posZ = movement->absolutePos.z;
 
         movement->angle = atan2(posX, posZ, goalX, goalZ);
         movement->distance = dist2D(posX, posZ, goalX, goalZ);
@@ -2017,7 +2017,7 @@ ApiStatus RunPartTo(Evt* script, s32 isInitialCall) {
             movement->distance = ~part->actorTypeData2b[0];
         }
         if (part->partTypeData[0] != 0 && part->partTypeData[1] == 0) {
-            sfx_play_sound_at_position(part->partTypeData[0], SOUND_SPACE_MODE_0, part->absolutePosition.x, part->absolutePosition.y, part->absolutePosition.z);
+            sfx_play_sound_at_position(part->partTypeData[0], SOUND_SPACE_MODE_0, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
         }
         script->functionTemp[0] = 1;
     }
@@ -2026,15 +2026,15 @@ ApiStatus RunPartTo(Evt* script, s32 isInitialCall) {
     movement = part->movement;
     actor = script->functionTempPtr[1];
 
-    add_xz_vec3f_copy1(&movement->absolutePosition, movement->moveSpeed, movement->angle);
+    add_xz_vec3f_copy1(&movement->absolutePos, movement->moveSpeed, movement->angle);
     if (movement->moveSpeed < 4.0f) {
-        play_movement_dust_effects(0, movement->absolutePosition.x, movement->absolutePosition.y, movement->absolutePosition.z, movement->angle);
+        play_movement_dust_effects(0, movement->absolutePos.x, movement->absolutePos.y, movement->absolutePos.z, movement->angle);
     } else {
-        play_movement_dust_effects(1, movement->absolutePosition.x, movement->absolutePosition.y, movement->absolutePosition.z, movement->angle);
+        play_movement_dust_effects(1, movement->absolutePos.x, movement->absolutePos.y, movement->absolutePos.z, movement->angle);
     }
-    part->absolutePosition.x = movement->absolutePosition.x;
-    part->absolutePosition.y = movement->absolutePosition.y;
-    part->absolutePosition.z = movement->absolutePosition.z;
+    part->absolutePos.x = movement->absolutePos.x;
+    part->absolutePos.y = movement->absolutePos.y;
+    part->absolutePos.z = movement->absolutePos.z;
 
     if (part->partTypeData[0] != 0 && part->partTypeData[1] != 0) {
         if (part->actorTypeData2b[0] >= 0) {
@@ -2044,11 +2044,11 @@ ApiStatus RunPartTo(Evt* script, s32 isInitialCall) {
                 movement->distance = 0;
                 if (actor->footStepCounter % 2 != 0) {
                     if (part->partTypeData[0] != 0) {
-                        sfx_play_sound_at_position(part->partTypeData[0], SOUND_SPACE_MODE_0, part->absolutePosition.x, part->absolutePosition.y, part->absolutePosition.z);
+                        sfx_play_sound_at_position(part->partTypeData[0], SOUND_SPACE_MODE_0, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
                     }
                 } else {
                     if (part->partTypeData[1] != 0) {
-                        sfx_play_sound_at_position(part->partTypeData[1], SOUND_SPACE_MODE_0, part->absolutePosition.x, part->absolutePosition.y, part->absolutePosition.z);
+                        sfx_play_sound_at_position(part->partTypeData[1], SOUND_SPACE_MODE_0, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
                     }
                 }
             }
@@ -2059,11 +2059,11 @@ ApiStatus RunPartTo(Evt* script, s32 isInitialCall) {
                 movement->distance = 0;
                 if (actor->footStepCounter % 2 != 0) {
                     if (part->partTypeData[0] != 0) {
-                        sfx_play_sound_at_position(part->partTypeData[0], SOUND_SPACE_MODE_0, part->absolutePosition.x, part->absolutePosition.y, part->absolutePosition.z);
+                        sfx_play_sound_at_position(part->partTypeData[0], SOUND_SPACE_MODE_0, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
                     }
                 } else {
                     if (part->partTypeData[1] != 0) {
-                        sfx_play_sound_at_position(part->partTypeData[1], SOUND_SPACE_MODE_0, part->absolutePosition.x, part->absolutePosition.y, part->absolutePosition.z);
+                        sfx_play_sound_at_position(part->partTypeData[1], SOUND_SPACE_MODE_0, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
                     }
                 }
             }
@@ -2074,8 +2074,8 @@ ApiStatus RunPartTo(Evt* script, s32 isInitialCall) {
     if (movement->moveTime > 0) {
         return ApiStatus_BLOCK;
     } else {
-        part->absolutePosition.x = movement->goalPos.x;
-        part->absolutePosition.z = movement->goalPos.z;
+        part->absolutePos.x = movement->goalPos.x;
+        part->absolutePos.z = movement->goalPos.z;
         if (part->partTypeData[0] != 0 && part->partTypeData[1] == 0) {
             snd_stop_sound(part->partTypeData[0]);
         }
@@ -2438,21 +2438,21 @@ ApiStatus FlyPartTo(Evt* script, s32 isInitialCall) {
         script->functionTemp[3] = evt_get_variable(script, *args++);
 
         goalX = partMovement->goalPos.x;
-        posX = part->absolutePosition.x;
+        posX = part->absolutePos.x;
         deltaX = posX - goalX;
-        partMovement->absolutePosition.x = posX;
+        partMovement->absolutePos.x = posX;
         partMovement->unk_18.x = posX;
 
         goalY = partMovement->goalPos.y;
-        posY = part->absolutePosition.y;
+        posY = part->absolutePos.y;
         deltaY = posY - goalY;
-        partMovement->absolutePosition.y = posY;
+        partMovement->absolutePos.y = posY;
         partMovement->unk_18.y = posY;
 
         goalZ = partMovement->goalPos.z;
-        posZ = part->absolutePosition.z;
+        posZ = part->absolutePos.z;
         deltaZ = posZ - goalZ;
-        partMovement->absolutePosition.z = posZ;
+        partMovement->absolutePos.z = posZ;
         partMovement->unk_18.z = posZ;
 
         partMovement->distance = sqrtf(SQ(deltaX) + SQ(deltaY) + SQ(deltaZ));
@@ -2468,7 +2468,7 @@ ApiStatus FlyPartTo(Evt* script, s32 isInitialCall) {
         }
 
         if (part->partTypeData[2] != 0 && part->partTypeData[3] == 0) {
-            sfx_play_sound_at_position(part->partTypeData[2], SOUND_SPACE_MODE_0, part->absolutePosition.x, part->absolutePosition.y, part->absolutePosition.z);
+            sfx_play_sound_at_position(part->partTypeData[2], SOUND_SPACE_MODE_0, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
         }
         partMovement->unk_3C = 0;
         partMovement->angle = 0.0f;
@@ -2483,15 +2483,15 @@ ApiStatus FlyPartTo(Evt* script, s32 isInitialCall) {
     part = script->functionTempPtr[2];
     actor = script->functionTempPtr[1];
     partMovement = part->movement;
-    partMovement->absolutePosition.x = update_lerp_battle(script->functionTemp[3], partMovement->unk_18.x, partMovement->goalPos.x, partMovement->unk_3C, partMovement->moveTime);
-    partMovement->absolutePosition.y = update_lerp_battle(script->functionTemp[3], partMovement->unk_18.y, partMovement->goalPos.y, partMovement->unk_3C, partMovement->moveTime);
-    partMovement->absolutePosition.z = update_lerp_battle(script->functionTemp[3], partMovement->unk_18.z, partMovement->goalPos.z, partMovement->unk_3C, partMovement->moveTime);
+    partMovement->absolutePos.x = update_lerp_battle(script->functionTemp[3], partMovement->unk_18.x, partMovement->goalPos.x, partMovement->unk_3C, partMovement->moveTime);
+    partMovement->absolutePos.y = update_lerp_battle(script->functionTemp[3], partMovement->unk_18.y, partMovement->goalPos.y, partMovement->unk_3C, partMovement->moveTime);
+    partMovement->absolutePos.z = update_lerp_battle(script->functionTemp[3], partMovement->unk_18.z, partMovement->goalPos.z, partMovement->unk_3C, partMovement->moveTime);
     partMovement->unk_3C++;
 
     if (partMovement->moveTime < partMovement->unk_3C) {
-        part->absolutePosition.x = partMovement->goalPos.x;
-        part->absolutePosition.y = partMovement->goalPos.y;
-        part->absolutePosition.z = partMovement->goalPos.z;
+        part->absolutePos.x = partMovement->goalPos.x;
+        part->absolutePos.y = partMovement->goalPos.y;
+        part->absolutePos.z = partMovement->goalPos.z;
         if (part->partTypeData[2] != 0 && part->partTypeData[3] == 0) {
             snd_stop_sound(part->partTypeData[2]);
         }
@@ -2506,11 +2506,11 @@ ApiStatus FlyPartTo(Evt* script, s32 isInitialCall) {
                 partMovement->unk_2C = 0;
                 if (actor->footStepCounter % 2 != 0) {
                     if (part->partTypeData[2] != 0) {
-                        sfx_play_sound_at_position(part->partTypeData[2], SOUND_SPACE_MODE_0, part->absolutePosition.x, part->absolutePosition.y, part->absolutePosition.z);
+                        sfx_play_sound_at_position(part->partTypeData[2], SOUND_SPACE_MODE_0, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
                     }
                 } else {
                     if (part->partTypeData[3] != 0) {
-                        sfx_play_sound_at_position(part->partTypeData[3], SOUND_SPACE_MODE_0, part->absolutePosition.x, part->absolutePosition.y, part->absolutePosition.z);
+                        sfx_play_sound_at_position(part->partTypeData[3], SOUND_SPACE_MODE_0, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
                     }
                 }
             }
@@ -2521,20 +2521,20 @@ ApiStatus FlyPartTo(Evt* script, s32 isInitialCall) {
                 partMovement->unk_2C = 0;
                 if (actor->footStepCounter % 2 != 0) {
                     if (part->partTypeData[2] != 0) {
-                        sfx_play_sound_at_position(part->partTypeData[2], SOUND_SPACE_MODE_0, part->absolutePosition.x, part->absolutePosition.y, part->absolutePosition.z);
+                        sfx_play_sound_at_position(part->partTypeData[2], SOUND_SPACE_MODE_0, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
                     }
                 } else {
                     if (part->partTypeData[3] != 0) {
-                        sfx_play_sound_at_position(part->partTypeData[3], SOUND_SPACE_MODE_0, part->absolutePosition.x, part->absolutePosition.y, part->absolutePosition.z);
+                        sfx_play_sound_at_position(part->partTypeData[3], SOUND_SPACE_MODE_0, part->absolutePos.x, part->absolutePos.y, part->absolutePos.z);
                     }
                 }
             }
         }
     }
 
-    deltaX = partMovement->goalPos.x - partMovement->absolutePosition.x;
-    deltaY = partMovement->goalPos.y - partMovement->absolutePosition.y;
-    deltaZ = partMovement->goalPos.z - partMovement->absolutePosition.z;
+    deltaX = partMovement->goalPos.x - partMovement->absolutePos.x;
+    deltaY = partMovement->goalPos.y - partMovement->absolutePos.y;
+    deltaZ = partMovement->goalPos.z - partMovement->absolutePos.z;
     dist3D = sqrtf(SQ(deltaX) + SQ(deltaY) + SQ(deltaZ));
     if (dist3D == 0.0f) {
         dist3D = 1.0f;
@@ -2554,9 +2554,9 @@ ApiStatus FlyPartTo(Evt* script, s32 isInitialCall) {
         offsetY = offsetY * partMovement->unk_3A;
     }
 
-    part->absolutePosition.x = partMovement->absolutePosition.x;
-    part->absolutePosition.y = partMovement->absolutePosition.y + offsetY;
-    part->absolutePosition.z = partMovement->absolutePosition.z;
+    part->absolutePos.x = partMovement->absolutePos.x;
+    part->absolutePos.y = partMovement->absolutePos.y + offsetY;
+    part->absolutePos.z = partMovement->absolutePos.z;
     return ApiStatus_BLOCK;
 }
 

@@ -44,10 +44,10 @@ void interact_inspect_setup(void) {
     if (playerStatus->animFlags & PA_FLAG_INTERACT_PROMPT_AVAILABLE) {
         mem_clear(InspectIconPtr, sizeof(*InspectIconPtr));
         D_8010C950 = -1;
-        InspectIconPtr->pos.x = playerStatus->position.x;
-        InspectIconPtr->pos.y = playerStatus->position.y + playerStatus->colliderHeight +
+        InspectIconPtr->pos.x = playerStatus->pos.x;
+        InspectIconPtr->pos.y = playerStatus->pos.y + playerStatus->colliderHeight +
                                    (!(playerStatus->animFlags & PA_FLAG_USING_PEACH_PHYSICS) ? 8.0f : 2.0f);
-        InspectIconPtr->pos.z = playerStatus->position.z;
+        InspectIconPtr->pos.z = playerStatus->pos.z;
         InspectIconPtr->scale = 0.4f;
         InspectIconPtr->state = INSPECT_ICON_APPEAR;
         InspectIconPtr->yaw = -gCameras[gCurrentCameraID].currentYaw;
@@ -175,12 +175,12 @@ void update_inspect_icon_pos(void) {
         InspectIconPtr->iconBounceVel = -4;
     }
 
-    delta = (playerStatus->position.x - InspectIconPtr->pos.x) * 0.666f;
+    delta = (playerStatus->pos.x - InspectIconPtr->pos.x) * 0.666f;
     InspectIconPtr->pos.x += delta;
-    delta = (playerStatus->position.z - InspectIconPtr->pos.z) * 0.666f;
+    delta = (playerStatus->pos.z - InspectIconPtr->pos.z) * 0.666f;
     InspectIconPtr->pos.z += delta;
 
-    playerHeadY = playerStatus->position.y + playerStatus->colliderHeight;
+    playerHeadY = playerStatus->pos.y + playerStatus->colliderHeight;
     bounceDeltaY = InspectIconPtr->iconBounceVel;
     lastPosY = InspectIconPtr->pos.y;
     if (!(playerStatus->animFlags & PA_FLAG_USING_PEACH_PHYSICS)) {

@@ -25,7 +25,7 @@ void N(test_reflection_worker_render_wall)(void) {
         entityModel = get_entity_model(get_shadow_by_index(playerStatus->shadowID)->entityModelID);
         entityModel->flags |= ENTITY_MODEL_FLAG_REFLECT;
 
-        get_screen_coords(gCurrentCamID, playerStatus->position.x, playerStatus->position.y, -playerStatus->position.z,
+        get_screen_coords(gCurrentCamID, playerStatus->pos.x, playerStatus->pos.y, -playerStatus->pos.z,
                           &screenX, &screenY, &screenZ);
 
         renderTaskPtr->renderMode = playerStatus->renderMode;
@@ -53,7 +53,7 @@ void N(appendGfx_test_reflection_wall)(void* data) {
     guMtxCatF(main, rotation, main);
     guScaleF(scale, SPRITE_WORLD_SCALE_F, SPRITE_WORLD_SCALE_F, SPRITE_WORLD_SCALE_F);
     guMtxCatF(main, scale, main);
-    guTranslateF(translation, playerStatus->position.x, playerStatus->position.y, -playerStatus->position.z);
+    guTranslateF(translation, playerStatus->pos.x, playerStatus->pos.y, -playerStatus->pos.z);
     guMtxCatF(main, translation, main);
     // draw sprite is handled differently in final version
     spr_update_player_sprite(PLAYER_SPRITE_AUX1, playerStatus->trueAnimation ^ SPRITE_ID_BACK_FACING, 1.0f);
@@ -76,7 +76,7 @@ void N(test_reflection_worker_render_floor)(void) {
         entityModel = get_entity_model(get_shadow_by_index(playerStatus->shadowID)->entityModelID);
         entityModel->flags |= ENTITY_MODEL_FLAG_REFLECT;
 
-        get_screen_coords(gCurrentCamID, playerStatus->position.x, -playerStatus->position.y, playerStatus->position.z,
+        get_screen_coords(gCurrentCamID, playerStatus->pos.x, -playerStatus->pos.y, playerStatus->pos.z,
                           &screenX, &screenY, &screenZ);
 
         renderTaskPtr->renderMode = playerStatus->renderMode;
@@ -105,7 +105,7 @@ void N(appendGfx_test_reflection_floor)(void* data) {
     guMtxCatF(sp20, spA0, sp20);
     guScaleF(spE0, SPRITE_WORLD_SCALE_D, -SPRITE_WORLD_SCALE_D, SPRITE_WORLD_SCALE_D);
     guMtxCatF(sp20, spE0, sp20);
-    guTranslateF(sp60, playerStatus->position.x, -playerStatus->position.y, playerStatus->position.z);
+    guTranslateF(sp60, playerStatus->pos.x, -playerStatus->pos.y, playerStatus->pos.z);
     guMtxCatF(sp20, sp60, sp20);
     spr_draw_player_sprite(PLAYER_SPRITE_AUX1, 0, 0, 0, sp20);
     guRotateF(spA0, yaw, 0.0f, -1.0f, 0.0f);
@@ -117,7 +117,7 @@ void N(appendGfx_test_reflection_floor)(void* data) {
     guMtxCatF(sp20, spA0, sp20);
     guScaleF(spE0, SPRITE_WORLD_SCALE_D, SPRITE_WORLD_SCALE_D, SPRITE_WORLD_SCALE_D);
     guMtxCatF(sp20, spE0, sp20);
-    guTranslateF(sp60, playerStatus->position.x, playerStatus->position.y, 0.0f);
+    guTranslateF(sp60, playerStatus->pos.x, playerStatus->pos.y, 0.0f);
     guMtxCatF(sp20, sp60, sp20);
     trueAnimation = playerStatus->trueAnimation;
     set_player_imgfx_all(trueAnimation, IMGFX_SET_ALPHA, 255, 255, 255, 20, 0);

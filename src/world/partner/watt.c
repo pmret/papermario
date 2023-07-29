@@ -143,8 +143,8 @@ API_CALLABLE(N(Update)) {
             case TWEESTER_PARTNER_INIT:
                 N(TweesterPhysicsPtr)->state++;
                 N(TweesterPhysicsPtr)->prevFlags = watt->flags;
-                N(TweesterPhysicsPtr)->radius = fabsf(dist2D(watt->pos.x, watt->pos.z, entity->position.x, entity->position.z));
-                N(TweesterPhysicsPtr)->angle = atan2(entity->position.x, entity->position.z, watt->pos.x, watt->pos.z);
+                N(TweesterPhysicsPtr)->radius = fabsf(dist2D(watt->pos.x, watt->pos.z, entity->pos.x, entity->pos.z));
+                N(TweesterPhysicsPtr)->angle = atan2(entity->pos.x, entity->pos.z, watt->pos.x, watt->pos.z);
                 N(TweesterPhysicsPtr)->angularVelocity = 6.0f;
                 N(TweesterPhysicsPtr)->liftoffVelocityPhase = 50.0f;
                 N(TweesterPhysicsPtr)->countdown = 120;
@@ -152,8 +152,8 @@ API_CALLABLE(N(Update)) {
                 watt->flags &= ~NPC_FLAG_GRAVITY;
             case TWEESTER_PARTNER_ATTRACT:
                 sin_cos_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->angle), &sinAngle, &cosAngle);
-                watt->pos.x = entity->position.x + (sinAngle * N(TweesterPhysicsPtr)->radius);
-                watt->pos.z = entity->position.z - (cosAngle * N(TweesterPhysicsPtr)->radius);
+                watt->pos.x = entity->pos.x + (sinAngle * N(TweesterPhysicsPtr)->radius);
+                watt->pos.z = entity->pos.z - (cosAngle * N(TweesterPhysicsPtr)->radius);
                 N(TweesterPhysicsPtr)->angle = clamp_angle(N(TweesterPhysicsPtr)->angle - N(TweesterPhysicsPtr)->angularVelocity);
 
                 if (N(TweesterPhysicsPtr)->radius > 20.0f) {
@@ -294,9 +294,9 @@ API_CALLABLE(N(UseAbility)) {
                 gGameStatusPtr->keepUsingPartnerOnMapChange = FALSE;
                 partnerStatus->partnerActionState = PARTNER_ACTION_USE;
                 partnerStatus->actingPartner = PARTNER_WATT;
-                npc->moveToPos.x = playerStatus->position.x;
-                npc->moveToPos.y = playerStatus->position.y + 5.0f;
-                npc->moveToPos.z = playerStatus->position.z;
+                npc->moveToPos.x = playerStatus->pos.x;
+                npc->moveToPos.y = playerStatus->pos.y + 5.0f;
+                npc->moveToPos.z = playerStatus->pos.z;
                 npc->currentAnim = ANIM_WorldWatt_Walk;
                 add_vec2D_polar(&npc->moveToPos.x, &npc->moveToPos.z, 15.0f, playerStatus->targetYaw);
                 npc->yaw = playerStatus->targetYaw;
@@ -314,13 +314,13 @@ API_CALLABLE(N(UseAbility)) {
                 partnerStatus->partnerActionState = PARTNER_ACTION_USE;
                 partnerStatus->actingPartner = PARTNER_WATT;
                 partner_force_player_flip_done();
-                npc->moveToPos.x = playerStatus->position.x;
-                npc->moveToPos.y = playerStatus->position.y + 5.0f;
-                npc->moveToPos.z = playerStatus->position.z;
+                npc->moveToPos.x = playerStatus->pos.x;
+                npc->moveToPos.y = playerStatus->pos.y + 5.0f;
+                npc->moveToPos.z = playerStatus->pos.z;
                 npc->currentAnim = ANIM_WorldWatt_Walk;
                 add_vec2D_polar(&npc->moveToPos.x, &npc->moveToPos.z, 15.0f, playerStatus->targetYaw);
                 npc->duration = 8;
-                npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->position.x, playerStatus->position.z);
+                npc->yaw = atan2(npc->pos.x, npc->pos.z, playerStatus->pos.x, playerStatus->pos.z);
                 N(AbilityState)++; // SHINING_STATE_GATHER
             }
             break;
@@ -466,7 +466,7 @@ API_CALLABLE(N(EnterMap)) {
             }
 
             script->functionTemp[1] = script->varTable[4];
-            playerStatus->targetYaw = atan2(playerStatus->position.x, playerStatus->position.z,
+            playerStatus->targetYaw = atan2(playerStatus->pos.x, playerStatus->pos.z,
                     script->varTable[1], script->varTable[3]);
             playerStatus->heading = playerStatus->targetYaw;
             move_player(script->functionTemp[1], playerStatus->heading, script->varTableF[5]);
@@ -543,15 +543,15 @@ void N(sync_held_position)(void) {
 
         playerStatus = gPlayerStatusPtr;
         partnerNPC = wPartnerNpc;
-        partnerNPC->pos.x = playerStatus->position.x + (sin_rad(angle) * gPlayerStatusPtr->colliderDiameter * offsetScale);
+        partnerNPC->pos.x = playerStatus->pos.x + (sin_rad(angle) * gPlayerStatusPtr->colliderDiameter * offsetScale);
 
         new_var2 = wPartnerNpc;
         playerStatus = gPlayerStatusPtr;
         partnerNPC = new_var2;
-        partnerNPC->pos.z = playerStatus->position.z - (cos_rad(angle) * gPlayerStatusPtr->colliderDiameter * offsetScale);
+        partnerNPC->pos.z = playerStatus->pos.z - (cos_rad(angle) * gPlayerStatusPtr->colliderDiameter * offsetScale);
 
         wPartnerNpc->yaw = gPlayerStatusPtr->targetYaw;
-        wPartnerNpc->pos.y = gPlayerStatusPtr->position.y + 5.0f;
+        wPartnerNpc->pos.y = gPlayerStatusPtr->pos.y + 5.0f;
     }
 }
 

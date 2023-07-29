@@ -15,7 +15,7 @@ API_CALLABLE(N(func_80243EE0_C75360)) {
     }
 
     set_screen_overlay_center_worldpos(SCREEN_LAYER_BACK, 1,
-        playerStatus->position.x,  playerStatus->position.y + 8.0f, playerStatus->position.z);
+        playerStatus->pos.x,  playerStatus->pos.y + 8.0f, playerStatus->pos.z);
     get_model_fog_color_parameters(&primR, &primG, &primB, &primA,
         &fogR, &fogG, &fogB, &fogStart, &fogEnd);
 

@@ -71,8 +71,8 @@ API_CALLABLE(N(Update)) {
         case TWEESTER_PARTNER_INIT:
             N(TweesterPhysicsPtr)->state++;
             N(TweesterPhysicsPtr)->prevFlags = bow->flags;
-            N(TweesterPhysicsPtr)->radius = fabsf(dist2D(bow->pos.x, bow->pos.z, entity->position.x, entity->position.z));
-            N(TweesterPhysicsPtr)->angle = atan2(entity->position.x, entity->position.z, bow->pos.x, bow->pos.z);
+            N(TweesterPhysicsPtr)->radius = fabsf(dist2D(bow->pos.x, bow->pos.z, entity->pos.x, entity->pos.z));
+            N(TweesterPhysicsPtr)->angle = atan2(entity->pos.x, entity->pos.z, bow->pos.x, bow->pos.z);
             N(TweesterPhysicsPtr)->angularVelocity = 6.0f;
             N(TweesterPhysicsPtr)->liftoffVelocityPhase = 50.0f;
             N(TweesterPhysicsPtr)->countdown = 120;
@@ -80,8 +80,8 @@ API_CALLABLE(N(Update)) {
             bow->flags &= ~NPC_FLAG_GRAVITY;
         case TWEESTER_PARTNER_ATTRACT:
             sin_cos_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->angle), &sinAngle, &cosAngle);
-            bow->pos.x = entity->position.x + (sinAngle * N(TweesterPhysicsPtr)->radius);
-            bow->pos.z = entity->position.z - (cosAngle * N(TweesterPhysicsPtr)->radius);
+            bow->pos.x = entity->pos.x + (sinAngle * N(TweesterPhysicsPtr)->radius);
+            bow->pos.z = entity->pos.z - (cosAngle * N(TweesterPhysicsPtr)->radius);
             N(TweesterPhysicsPtr)->angle = clamp_angle(N(TweesterPhysicsPtr)->angle - N(TweesterPhysicsPtr)->angularVelocity);
             if (N(TweesterPhysicsPtr)->radius > 20.0f) {
                 N(TweesterPhysicsPtr)->radius -= 1.0f;
@@ -155,9 +155,9 @@ s32 N(check_for_treadmill_overlaps)(void) {
     }
 
     yaw = atan2(0.0f, 0.0f, playerStatus->pushVelocity.x, playerStatus->pushVelocity.z);
-    x = playerStatus->position.x;
-    y = playerStatus->position.y + (playerStatus->colliderHeight * 0.5f);
-    z = playerStatus->position.z;
+    x = playerStatus->pos.x;
+    y = playerStatus->pos.y + (playerStatus->colliderHeight * 0.5f);
+    z = playerStatus->pos.z;
 
     add_vec2D_polar(&x, &z, playerStatus->colliderDiameter * 0.5f, clamp_angle(yaw + 180.0f));
     return player_test_lateral_overlap(0, playerStatus, &x, &y, &z, playerStatus->colliderDiameter, yaw);
@@ -254,15 +254,15 @@ API_CALLABLE(N(UseAbility)) {
             partnerStatus->actingPartner = 9;
             playerStatus->flags |= PS_FLAG_HAZARD_INVINCIBILITY;
             partner_force_player_flip_done();
-            bow->moveToPos.x = playerStatus->position.x;
-            bow->moveToPos.y = playerStatus->position.y + (playerStatus->colliderHeight * 0.5f);
-            bow->moveToPos.z = playerStatus->position.z;
+            bow->moveToPos.x = playerStatus->pos.x;
+            bow->moveToPos.y = playerStatus->pos.y + (playerStatus->colliderHeight * 0.5f);
+            bow->moveToPos.z = playerStatus->pos.z;
             bow->currentAnim = ANIM_WorldBow_Walk;
             bow->yaw = playerStatus->targetYaw;
             add_vec2D_polar(&bow->moveToPos.x, &bow->moveToPos.z, -2.0f, gCameras[gCurrentCameraID].currentYaw);
             add_vec2D_polar(&bow->moveToPos.x, &bow->moveToPos.z, playerStatus->colliderDiameter * 0.5f, bow->yaw);
             bow->duration = 5;
-            bow->yaw = atan2(bow->pos.x, bow->pos.z, playerStatus->position.x, playerStatus->position.z);
+            bow->yaw = atan2(bow->pos.x, bow->pos.z, playerStatus->pos.x, playerStatus->pos.z);
             set_action_state(ACTION_STATE_RIDE);
             suggest_player_anim_allow_backward(ANIM_Mario1_Idle);
             script->USE_STATE++; // OUTTA_SIGHT_GATHER
@@ -270,15 +270,15 @@ API_CALLABLE(N(UseAbility)) {
 
         case OUTTA_SIGHT_GATHER:
             if (collisionStatus->currentFloor >= 0 && !(playerStatus->animFlags & PA_FLAG_CHANGING_MAP)) {
-                bow->moveToPos.x = playerStatus->position.x;
-                bow->moveToPos.y = playerStatus->position.y + (playerStatus->colliderHeight * 0.5f);
-                bow->moveToPos.z = playerStatus->position.z;
+                bow->moveToPos.x = playerStatus->pos.x;
+                bow->moveToPos.y = playerStatus->pos.y + (playerStatus->colliderHeight * 0.5f);
+                bow->moveToPos.z = playerStatus->pos.z;
                 bow->pos.x += ((bow->moveToPos.x - bow->pos.x) / bow->duration);
                 bow->pos.y += ((bow->moveToPos.y - bow->pos.y) / bow->duration);
                 bow->pos.z += ((bow->moveToPos.z - bow->pos.z) / bow->duration);
-                N(OuttaSightPosX) = playerStatus->position.x - bow->pos.x;
-                N(OuttaSightPosY) = playerStatus->position.y - bow->pos.y;
-                N(OuttaSightPosZ) = playerStatus->position.z - bow->pos.z;
+                N(OuttaSightPosX) = playerStatus->pos.x - bow->pos.x;
+                N(OuttaSightPosY) = playerStatus->pos.y - bow->pos.y;
+                N(OuttaSightPosZ) = playerStatus->pos.z - bow->pos.z;
                 bow->duration--;
                 if (bow->duration == 0) {
                     bow->yaw = playerStatus->targetYaw;
@@ -305,9 +305,9 @@ API_CALLABLE(N(UseAbility)) {
 
                 get_shadow_by_index(bow->shadowIndex)->alpha = playerStatus->alpha1 >> 1;
                 npc_set_imgfx_params(bow, IMGFX_SET_ALPHA, playerStatus->alpha1, 0, 0, 0, 0);
-                bow->pos.x = playerStatus->position.x - N(OuttaSightPosX);
-                bow->pos.y = playerStatus->position.y - N(OuttaSightPosY);
-                bow->pos.z = playerStatus->position.z - N(OuttaSightPosZ);
+                bow->pos.x = playerStatus->pos.x - N(OuttaSightPosX);
+                bow->pos.y = playerStatus->pos.y - N(OuttaSightPosY);
+                bow->pos.z = playerStatus->pos.z - N(OuttaSightPosZ);
                 break;
             }
             N(end_outta_sight_cleanup)(bow);
@@ -319,9 +319,9 @@ API_CALLABLE(N(UseAbility)) {
                 return ApiStatus_DONE2;
             }
 
-            bow->pos.x = playerStatus->position.x - N(OuttaSightPosX);
-            bow->pos.y = playerStatus->position.y - N(OuttaSightPosY);
-            bow->pos.z = playerStatus->position.z - N(OuttaSightPosZ);
+            bow->pos.x = playerStatus->pos.x - N(OuttaSightPosX);
+            bow->pos.y = playerStatus->pos.y - N(OuttaSightPosY);
+            bow->pos.z = playerStatus->pos.z - N(OuttaSightPosZ);
 
             stickInputMag = dist2D(0.0f, 0.0f, partnerStatus->stickX, partnerStatus->stickY);
             if ((collisionStatus->currentFloor <= NO_COLLIDER)

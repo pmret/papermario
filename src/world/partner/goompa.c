@@ -58,8 +58,8 @@ API_CALLABLE(N(Update)) {
             N(TweesterPhysicsPtr)->state++;
             N(TweesterPhysicsPtr)->prevFlags = goompa->flags;
             N(TweesterPhysicsPtr)->radius = fabsf(dist2D(goompa->pos.x, goompa->pos.z,
-                                                    entity->position.x, entity->position.z));
-            N(TweesterPhysicsPtr)->angle = atan2(entity->position.x, entity->position.z, goompa->pos.x, goompa->pos.z);
+                                                    entity->pos.x, entity->pos.z));
+            N(TweesterPhysicsPtr)->angle = atan2(entity->pos.x, entity->pos.z, goompa->pos.x, goompa->pos.z);
             N(TweesterPhysicsPtr)->angularVelocity = 6.0f;
             N(TweesterPhysicsPtr)->liftoffVelocityPhase = 50.0f;
             N(TweesterPhysicsPtr)->countdown = 120;
@@ -67,8 +67,8 @@ API_CALLABLE(N(Update)) {
             goompa->flags &= ~NPC_FLAG_GRAVITY;
         case TWEESTER_PARTNER_ATTRACT:
             sin_cos_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->angle), &sinAngle, &cosAngle);
-            goompa->pos.x = entity->position.x + (sinAngle * N(TweesterPhysicsPtr)->radius);
-            goompa->pos.z = entity->position.z - (cosAngle * N(TweesterPhysicsPtr)->radius);
+            goompa->pos.x = entity->pos.x + (sinAngle * N(TweesterPhysicsPtr)->radius);
+            goompa->pos.z = entity->pos.z - (cosAngle * N(TweesterPhysicsPtr)->radius);
             N(TweesterPhysicsPtr)->angle = clamp_angle(N(TweesterPhysicsPtr)->angle - N(TweesterPhysicsPtr)->angularVelocity);
 
             if (N(TweesterPhysicsPtr)->radius > 20.0f) {

@@ -19,8 +19,8 @@ void entity_shattering_init_pieces(Entity* entity, Gfx** dlists, Mtx* matrices) 
     data->fragmentDisplayLists = ENTITY_ADDR(entity, Gfx**, dlists);
     entity->renderSetupFunc = entity_shattering_setupGfx;
     entity->alpha = 255;
-    entity->position.y = data->originalPosY;
-    guTranslateF(mtxTrans, entity->position.x, entity->position.y, entity->position.z);
+    entity->pos.y = data->originalPosY;
+    guTranslateF(mtxTrans, entity->pos.x, entity->pos.y, entity->pos.z);
 
     s7 = 2;
     if (!is_block_on_ground(entity)) {
@@ -166,9 +166,9 @@ void entity_shattering_setupGfx(s32 entityIndex) {
     Gfx* fragmentDlist;
     Gfx** gfx = data->fragmentDisplayLists;
 
-    x_inv = -entity->position.x;
-    y_inv = -entity->position.y;
-    z_inv = -entity->position.z;
+    x_inv = -entity->pos.x;
+    y_inv = -entity->pos.y;
+    z_inv = -entity->pos.z;
 
     for (i = 0; i < 24; i++) {
         if (data->alpha == 255) {

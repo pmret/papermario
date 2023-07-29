@@ -125,8 +125,8 @@ API_CALLABLE(N(Update)) {
             N(TweesterPhysicsPtr)->state++;
             N(TweesterPhysicsPtr)->prevFlags = kooper->flags;
             N(TweesterPhysicsPtr)->radius = fabsf(dist2D(kooper->pos.x, kooper->pos.z,
-                                                     entity->position.x, entity->position.z));
-            N(TweesterPhysicsPtr)->angle = atan2(entity->position.x, entity->position.z, kooper->pos.x, kooper->pos.z);
+                                                     entity->pos.x, entity->pos.z));
+            N(TweesterPhysicsPtr)->angle = atan2(entity->pos.x, entity->pos.z, kooper->pos.x, kooper->pos.z);
             N(TweesterPhysicsPtr)->angularVelocity = 6.0f;
             N(TweesterPhysicsPtr)->liftoffVelocityPhase = 50.0f;
             N(TweesterPhysicsPtr)->countdown = 120;
@@ -135,8 +135,8 @@ API_CALLABLE(N(Update)) {
         case TWEESTER_PARTNER_ATTRACT:
             sin_cos_rad(DEG_TO_RAD(N(TweesterPhysicsPtr)->angle), &sinAngle, &cosAngle);
 
-            kooper->pos.x = entity->position.x + (sinAngle * N(TweesterPhysicsPtr)->radius);
-            kooper->pos.z = entity->position.z - (cosAngle * N(TweesterPhysicsPtr)->radius);
+            kooper->pos.x = entity->pos.x + (sinAngle * N(TweesterPhysicsPtr)->radius);
+            kooper->pos.z = entity->pos.z - (cosAngle * N(TweesterPhysicsPtr)->radius);
 
             N(TweesterPhysicsPtr)->angle = clamp_angle(N(TweesterPhysicsPtr)->angle - N(TweesterPhysicsPtr)->angularVelocity);
             if (N(TweesterPhysicsPtr)->radius > 20.0f) {
@@ -275,7 +275,7 @@ API_CALLABLE(N(UseAbility)) {
             enable_npc_blur(kooper);
             kooper->duration = 4;
             kooper->yaw = atan2(kooper->pos.x, kooper->pos.z,
-                                playerStatus->position.x, playerStatus->position.z);
+                                playerStatus->pos.x, playerStatus->pos.z);
             script->USE_STATE++;
             break;
 
@@ -291,9 +291,9 @@ API_CALLABLE(N(UseAbility)) {
             }
 
             suggest_player_anim_allow_backward(ANIM_Mario1_BeforeJump);
-            kooper->moveToPos.x = N(ShellTossPosX) = playerStatus->position.x;
-            kooper->moveToPos.y = N(ShellTossPosY) = playerStatus->position.y;
-            kooper->moveToPos.z = N(ShellTossPosZ) = playerStatus->position.z;
+            kooper->moveToPos.x = N(ShellTossPosX) = playerStatus->pos.x;
+            kooper->moveToPos.y = N(ShellTossPosY) = playerStatus->pos.y;
+            kooper->moveToPos.z = N(ShellTossPosZ) = playerStatus->pos.z;
             kooper->currentAnim = ANIM_WorldKooper_Run;
             add_vec2D_polar(&kooper->moveToPos.x, &kooper->moveToPos.z,
                             playerStatus->colliderDiameter / 3, playerStatus->targetYaw);
@@ -326,8 +326,8 @@ API_CALLABLE(N(UseAbility)) {
             kooper->currentAnim = ANIM_WorldKooper_EnterShell;
             kooper->collisionHeight = 12;
 
-            kooper->moveToPos.y = playerStatus->position.y;
-            kooper->moveToPos.z = playerStatus->position.y + playerStatus->colliderHeight / 3;
+            kooper->moveToPos.y = playerStatus->pos.y;
+            kooper->moveToPos.z = playerStatus->pos.y + playerStatus->colliderHeight / 3;
             playerStatus->flags |= PS_FLAG_JUMPING;
             gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
 
@@ -354,7 +354,7 @@ API_CALLABLE(N(UseAbility)) {
             }
 
             kooper->jumpVelocity -= kooper->jumpScale;
-            playerStatus->position.y += kooper->jumpVelocity;
+            playerStatus->pos.y += kooper->jumpVelocity;
             if (kooper->jumpVelocity < 0.0f) {
                 if (!N(ShellTossKickFalling)) {
                     N(ShellTossKickFalling) = TRUE;
@@ -362,18 +362,18 @@ API_CALLABLE(N(UseAbility)) {
                 }
             }
 
-            posX = playerStatus->position.x;
-            posY = (playerStatus->position.y + playerStatus->colliderHeight / 2) - kooper->jumpVelocity;
-            posZ = playerStatus->position.z;
+            posX = playerStatus->pos.x;
+            posY = (playerStatus->pos.y + playerStatus->colliderHeight / 2) - kooper->jumpVelocity;
+            posZ = playerStatus->pos.z;
             testLength = hitLength = playerStatus->colliderHeight / 2;
 
             if ((npc_raycast_up(COLLISION_CHANNEL_10000, &posX, &posY, &posZ, &hitLength)) && (hitLength < testLength)) {
                 collisionStatus->currentCeiling = NpcHitQueryColliderID;
-                playerStatus->position.y = posY - playerStatus->colliderHeight;
+                playerStatus->pos.y = posY - playerStatus->colliderHeight;
                 N(vertical_hit_interactable_entity)(kooper);
             }
 
-            if (!(kooper->jumpVelocity > 0.0f) && (playerStatus->position.y < kooper->moveToPos.z)) {
+            if (!(kooper->jumpVelocity > 0.0f) && (playerStatus->pos.y < kooper->moveToPos.z)) {
                 N(D_802BEC5C) = 0;
                 kooper->flags &= ~NPC_FLAG_IGNORE_PLAYER_COLLISION;
                 partnerStatus->actingPartner = PARTNER_KOOPER;
@@ -467,7 +467,7 @@ API_CALLABLE(N(UseAbility)) {
             }
 
             if (!(npc_try_snap_to_ground(kooper, 6.0f) || playerStatus->flags & (PS_FLAG_JUMPING | PS_FLAG_FALLING))) {
-                kooper->pos.y += (playerStatus->position.y - kooper->pos.y) / 10.0f;
+                kooper->pos.y += (playerStatus->pos.y - kooper->pos.y) / 10.0f;
             }
 
             npc_do_other_npc_collision(kooper);
@@ -568,7 +568,7 @@ API_CALLABLE(N(UseAbility)) {
             }
 
             if (npc_try_snap_to_ground(kooper, 6.0f) == 0) {
-                kooper->pos.y += (playerStatus->position.y - kooper->pos.y) / 10.0f;
+                kooper->pos.y += (playerStatus->pos.y - kooper->pos.y) / 10.0f;
             }
 
             posX = kooper->pos.x;
@@ -597,9 +597,9 @@ API_CALLABLE(N(UseAbility)) {
                     moveAngle = clamp_angle(playerStatus->targetYaw - (N(PlayerWasFacingLeft) ? 90.0f : -90.0f));
 
                     add_vec2D_polar(&posX, &posZ, 4.0f, moveAngle);
-                    heldItem->position.x = posX;
-                    heldItem->position.y = posY;
-                    heldItem->position.z = posZ;
+                    heldItem->pos.x = posX;
+                    heldItem->pos.y = posY;
+                    heldItem->pos.z = posZ;
                 }
 
                 if (kooper->planarFlyDist + 15.0f < kooper->moveSpeed) {

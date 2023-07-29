@@ -93,14 +93,14 @@ void action_update_state_23(void) {
         playerZOffset = playerOffsetTempVar;
     }
 
-    playerStatus->position.x += playerXOffset;
-    playerStatus->position.z -= playerZOffset;
-    outX = playerStatus->position.x;
-    outY = playerStatus->position.y;
-    outZ = playerStatus->position.z;
+    playerStatus->pos.x += playerXOffset;
+    playerStatus->pos.z -= playerZOffset;
+    outX = playerStatus->pos.x;
+    outY = playerStatus->pos.y;
+    outZ = playerStatus->pos.z;
     outLength = 5.0f;
     if (player_raycast_below_cam_relative(playerStatus, &outX, &outY, &outZ, &outLength, &hitRx, &hitRz, &hitDirX, &hitDirZ) >= 0) {
-        playerStatus->position.y = outY;
+        playerStatus->pos.y = outY;
     }
 
     if (gGameStatusPtr->areaID == AREA_SBK) {

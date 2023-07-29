@@ -132,9 +132,9 @@ void action_update_spin(void) {
     if (gSpinHistoryBufferPos > ARRAY_COUNT(gSpinHistoryPosX)) {
         gSpinHistoryBufferPos = 0;
     }
-    gSpinHistoryPosX[gSpinHistoryBufferPos] = playerStatus->position.x;
-    gSpinHistoryPosY[gSpinHistoryBufferPos] = playerStatus->position.y;
-    gSpinHistoryPosZ[gSpinHistoryBufferPos] = playerStatus->position.z;
+    gSpinHistoryPosX[gSpinHistoryBufferPos] = playerStatus->pos.x;
+    gSpinHistoryPosY[gSpinHistoryBufferPos] = playerStatus->pos.y;
+    gSpinHistoryPosZ[gSpinHistoryBufferPos] = playerStatus->pos.z;
     gSpinHistoryPosAngle[gSpinHistoryBufferPos] = playerStatus->spriteFacingAngle;
     gSpinHistoryBufferPos++;
     if (gSpinHistoryBufferPos > ARRAY_COUNT(gSpinHistoryPosX)) {

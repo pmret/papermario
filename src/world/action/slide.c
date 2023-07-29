@@ -61,13 +61,13 @@ void action_update_sliding(void) {
         gCameras[CAM_DEFAULT].moveFlags |= CAMERA_MOVE_IGNORE_PLAYER_Y;
     }
     speed = playerStatus->currentSpeed;
-    posX = playerStatus->position.x;
-    posY = playerStatus->position.y;
-    posZ = playerStatus->position.z;
+    posX = playerStatus->pos.x;
+    posY = playerStatus->pos.y;
+    posZ = playerStatus->pos.z;
     hitID = player_test_move_with_slipping(playerStatus, &posX, &posY, &posZ, speed, playerStatus->heading);
-    playerStatus->position.x = posX;
-    playerStatus->position.z = posZ;
-    playerStatus->position.y = posY;
+    playerStatus->pos.x = posX;
+    playerStatus->pos.z = posZ;
+    playerStatus->pos.y = posY;
 
     switch (playerStatus->actionSubstate) {
         case SUBSTATE_SLIDING:
@@ -79,11 +79,11 @@ void action_update_sliding(void) {
             if (MaxSlideVelocity <= playerStatus->currentSpeed) {
                 playerStatus->currentSpeed = MaxSlideVelocity;
             }
-            posX = playerStatus->position.x;
+            posX = playerStatus->pos.x;
             depth = 100.0f;
-            posZ = playerStatus->position.z;
+            posZ = playerStatus->pos.z;
             D_802B6794 = D_802B6798;
-            posY = playerStatus->position.y + (playerStatus->colliderHeight * 0.5f);
+            posY = playerStatus->pos.y + (playerStatus->colliderHeight * 0.5f);
             hitID = player_raycast_below_cam_relative(playerStatus, &posX, &posY, &posZ, &depth, &hitRx, &hitRy, &hitDirX, &hitDirZ);
             D_802B6798 = hitRy;
             if (hitID >= 0) {
@@ -91,7 +91,7 @@ void action_update_sliding(void) {
                 surfaceType = get_collider_flags(hitID) & COLLIDER_FLAGS_SURFACE_TYPE_MASK;
                 if (surfaceType == SURFACE_TYPE_SLIDE) {
                     collisionStatus->currentFloor = hitID;
-                    playerStatus->position.y = posY;
+                    playerStatus->pos.y = posY;
                     D_802B6790 = hitRy + 180.0f;
                     break;
                 }
@@ -104,14 +104,14 @@ void action_update_sliding(void) {
                 playerStatus->actionSubstate = SUBSTATE_LAUNCH;
             }
             sin_cos_rad(DEG_TO_RAD(D_802B6790), &sinA, &cosA);
-            playerStatus->position.y += fabsf((sinA / cosA) * playerStatus->currentSpeed);
+            playerStatus->pos.y += fabsf((sinA / cosA) * playerStatus->currentSpeed);
             snd_stop_sound(SOUND_167);
             break;
         case SUBSTATE_STOP:
-            posX = playerStatus->position.x;
+            posX = playerStatus->pos.x;
             depth = 50.0f;
-            posZ = playerStatus->position.z;
-            posY = playerStatus->position.y + (playerStatus->colliderHeight * 0.5f);
+            posZ = playerStatus->pos.z;
+            posY = playerStatus->pos.y + (playerStatus->colliderHeight * 0.5f);
             hitID = player_raycast_below_cam_relative(playerStatus, &posX, &posY, &posZ, &depth, &hitRx, &hitRy, &hitDirX, &hitDirZ);
             if (hitID >= 0) {
                 speed = playerStatus->currentSpeed / 3.0f;
@@ -125,7 +125,7 @@ void action_update_sliding(void) {
                     playerStatus->actionSubstate = SUBSTATE_DUST_OFF;
                     playerStatus->currentStateTime = 15;
                     playerStatus->currentSpeed = 0.0f;
-                    playerStatus->position.y = posY;
+                    playerStatus->pos.y = posY;
                 }
                 break;
             }
@@ -135,7 +135,7 @@ void action_update_sliding(void) {
                 playerStatus->currentSpeed = 0.0f;
             }
             playerStatus->gravityIntegrator[0] += playerStatus->gravityIntegrator[1];
-            playerStatus->position.y += playerStatus->gravityIntegrator[0];
+            playerStatus->pos.y += playerStatus->gravityIntegrator[0];
             if (playerStatus->gravityIntegrator[0] <= 0.0f) {
                 playerStatus->actionSubstate = SUBSTATE_FALL;
                 LOAD_INTEGRATOR_FALL(playerStatus->gravityIntegrator);
@@ -146,7 +146,7 @@ void action_update_sliding(void) {
             if (playerStatus->currentSpeed <= 0.0f) {
                 playerStatus->currentSpeed = 0.0f;
             }
-            playerStatus->position.y = player_check_collision_below(player_fall_distance(), &hitID);
+            playerStatus->pos.y = player_check_collision_below(player_fall_distance(), &hitID);
             if (hitID >= 0) {
                 SlideLaunchSpeed = -1;
                 suggest_player_anim_always_forward(ANIM_MarioW2_Collapse);

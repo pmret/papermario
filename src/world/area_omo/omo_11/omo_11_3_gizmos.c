@@ -93,9 +93,9 @@ API_CALLABLE(N(UpdatePlatformShadows)) {
         entity_raycast_down(&x, &y, &z, &rotX, &rotZ, &scale);
         set_standard_shadow_scale(shadow, scale);
         shadow->rotation.y = 0.0f;
-        shadow->position.x = x;
-        shadow->position.y = y;
-        shadow->position.z = z;
+        shadow->pos.x = x;
+        shadow->pos.y = y;
+        shadow->pos.z = z;
         shadow->rotation.x = rotX;
         shadow->rotation.z = rotZ;
         shadow->scale.x *= 3.0f;
@@ -211,9 +211,9 @@ API_CALLABLE(N(UpdateRotatingPlatforms)) {
     for (i = 0; i < ARRAY_COUNT(N(RotatingPlatformColliders)); i++) {
         if (gCollisionStatus.currentFloor == N(RotatingPlatformColliders)[i]) {
             if (playerStatus->flags & PS_FLAG_NO_STATIC_COLLISION) {
-                gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
-                gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
-                gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
+                gCameras[CAM_DEFAULT].targetPos.x = playerStatus->pos.x;
+                gCameras[CAM_DEFAULT].targetPos.y = playerStatus->pos.y;
+                gCameras[CAM_DEFAULT].targetPos.z = playerStatus->pos.z;
             }
             if (playerStatus->actionState == ACTION_STATE_SPIN_POUND ||
                 playerStatus->actionState == ACTION_STATE_TORNADO_POUND)

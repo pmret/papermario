@@ -9,7 +9,7 @@ MAP_STATIC_PAD(1,key_item);
 API_CALLABLE(N(GetAngleToPlayer)) {
     Npc* npc = get_npc_safe(script->owner2.npcID);
 
-    script->varTable[0] = clamp_angle(atan2(npc->pos.x, npc->pos.z, gPlayerStatus.position.x, gPlayerStatus.position.z));
+    script->varTable[0] = clamp_angle(atan2(npc->pos.x, npc->pos.z, gPlayerStatus.pos.x, gPlayerStatus.pos.z));
     return ApiStatus_DONE2;
 }
 

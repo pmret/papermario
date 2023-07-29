@@ -1,7 +1,7 @@
 #include "obk_04.h"
 
 API_CALLABLE(N(AwaitPlayerEnterHole)) {
-    if (gPlayerStatus.position.y < -50.0f) {
+    if (gPlayerStatus.pos.y < -50.0f) {
         return ApiStatus_DONE2;
     }
     return ApiStatus_BLOCK;

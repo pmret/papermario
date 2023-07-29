@@ -78,13 +78,13 @@ API_CALLABLE(N(UpdateRockingChair)) {
                 script->functionTemp[0] = CHAIR_STATE_PLAYER_NOT_TOUCHING;
             }
             if (fabsf(physics->rotationAngle) < 5.0f) {
-                physics->angularAccel = fabsf(ROCKING_CHAIR_CENTER_X - playerStatus->position.x) / 200.0f;
+                physics->angularAccel = fabsf(ROCKING_CHAIR_CENTER_X - playerStatus->pos.x) / 200.0f;
             } else {
                 physics->angularAccel = 0.1f;
             }
-            if (playerStatus->position.x <= ROCKING_CHAIR_CENTER_X) {
+            if (playerStatus->pos.x <= ROCKING_CHAIR_CENTER_X) {
                 physics->angleB += physics->angularAccel;
-                physics->equilibriumAngle = SQ(fabsf(ROCKING_CHAIR_CENTER_X - playerStatus->position.x)) / 50.0f;
+                physics->equilibriumAngle = SQ(fabsf(ROCKING_CHAIR_CENTER_X - playerStatus->pos.x)) / 50.0f;
                 if (physics->equilibriumAngle > 15.0f) {
                     physics->equilibriumAngle = 15.0f;
                 }
@@ -93,7 +93,7 @@ API_CALLABLE(N(UpdateRockingChair)) {
                 }
             } else {
                 physics->angleA += physics->angularAccel;
-                physics->equilibriumAngle = -SQ(-fabsf(ROCKING_CHAIR_CENTER_X - playerStatus->position.x) * 0.5f) / 50.0f;
+                physics->equilibriumAngle = -SQ(-fabsf(ROCKING_CHAIR_CENTER_X - playerStatus->pos.x) * 0.5f) / 50.0f;
                 if (physics->equilibriumAngle < -5.0f) {
                     physics->equilibriumAngle = -5.0f;
                 }

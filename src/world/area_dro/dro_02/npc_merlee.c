@@ -361,7 +361,7 @@ void N(card_worker_update)(void) {
             N(RitualCards)[1].pos.x += -10.0f;
             N(RitualCards)[2].pos.y += -10.0f;
             if (N(RitualStateTime) == 18) {
-                gPlayerStatus.position.y = NPC_DISPOSE_POS_Y;
+                gPlayerStatus.pos.y = NPC_DISPOSE_POS_Y;
             }
             if (N(RitualStateTime) == 20) {
                 evt_set_variable(N(CreatorScript), RITUAL_VAR_STATE, RITUAL_STATE_2);

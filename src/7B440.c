@@ -103,9 +103,9 @@ void reset_player_status(void) {
     playerStatus->overlapPushYaw = 0.0f;
     playerStatus->anim = 0;
     playerStatus->timeInAir = 0;
-    playerStatus->position.x = 0.0f;
-    playerStatus->position.y = 0.0f;
-    playerStatus->position.z = 0.0f;
+    playerStatus->pos.x = 0.0f;
+    playerStatus->pos.y = 0.0f;
+    playerStatus->pos.z = 0.0f;
     playerStatus->currentYaw = 0.0f;
     playerStatus->flipYaw[CAM_DEFAULT] = 0.0f;
     playerStatus->flipYaw[CAM_BATTLE] = 0.0f;
@@ -116,16 +116,16 @@ void reset_player_status(void) {
 
     if (mapSettings->entryList != NULL) {
         if (gGameStatusPtr->entryID < mapSettings->entryCount) {
-            playerStatus->position.x = (*mapSettings->entryList)[gGameStatusPtr->entryID].x;
-            playerStatus->position.y = (*mapSettings->entryList)[gGameStatusPtr->entryID].y;
-            playerStatus->position.z = (*mapSettings->entryList)[gGameStatusPtr->entryID].z;
+            playerStatus->pos.x = (*mapSettings->entryList)[gGameStatusPtr->entryID].x;
+            playerStatus->pos.y = (*mapSettings->entryList)[gGameStatusPtr->entryID].y;
+            playerStatus->pos.z = (*mapSettings->entryList)[gGameStatusPtr->entryID].z;
             playerStatus->currentYaw = (*mapSettings->entryList)[gGameStatusPtr->entryID].yaw;
         }
     }
 
-    gCameras[CAM_DEFAULT].targetPos.x = playerStatus->position.x;
-    gCameras[CAM_DEFAULT].targetPos.y = playerStatus->position.y;
-    gCameras[CAM_DEFAULT].targetPos.z = playerStatus->position.z;
+    gCameras[CAM_DEFAULT].targetPos.x = playerStatus->pos.x;
+    gCameras[CAM_DEFAULT].targetPos.y = playerStatus->pos.y;
+    gCameras[CAM_DEFAULT].targetPos.z = playerStatus->pos.z;
 
     phys_reset_spin_history();
     mem_clear(&gPlayerSpinState, sizeof(gPlayerSpinState));

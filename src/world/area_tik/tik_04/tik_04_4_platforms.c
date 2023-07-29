@@ -26,9 +26,9 @@ API_CALLABLE(N(UpdatePlatformShadows)) {
     hitLength = 1000.0f;
     entity_raycast_down(&x, &y, &z, &hitYaw, &hitPitch, &hitLength);
     set_standard_shadow_scale(shadow, hitLength);
-    shadow->position.x = x;
-    shadow->position.y = y;
-    shadow->position.z = z;
+    shadow->pos.x = x;
+    shadow->pos.y = y;
+    shadow->pos.z = z;
     shadow->rotation.x = hitYaw;
     shadow->rotation.y = 0.0f;
     shadow->rotation.z = hitPitch;
@@ -43,9 +43,9 @@ API_CALLABLE(N(UpdatePlatformShadows)) {
     hitLength = 1000.0f;
     entity_raycast_down(&x, &y, &z, &hitYaw, &hitPitch, &hitLength);
     set_standard_shadow_scale(shadow, hitLength);
-    shadow->position.x = x;
-    shadow->position.y = y;
-    shadow->position.z = z;
+    shadow->pos.x = x;
+    shadow->pos.y = y;
+    shadow->pos.z = z;
     shadow->rotation.x = hitYaw;
     shadow->rotation.y = 0.0f;
     shadow->rotation.z = hitPitch;

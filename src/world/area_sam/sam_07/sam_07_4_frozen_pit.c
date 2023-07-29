@@ -77,7 +77,7 @@ API_CALLABLE(N(AnimateIceShattering)) {
             it->velocityY -= 1.0f;
             it->pos.y += it->velocityY;
             if (it->velocityY < 0.0f) {
-                if (it->pos.y < playerStatus->position.y - 150.0f) {
+                if (it->pos.y < playerStatus->pos.y - 150.0f) {
                     // this shard is done, stop moving and increment the 'done' counter
                     script->functionTemp[1]++;
                     it->state = 101;

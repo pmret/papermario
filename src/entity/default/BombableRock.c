@@ -21,8 +21,8 @@ void entity_BombableRock_init_fragments(Entity* entity, Gfx** dlists, Mtx* matri
     data->fragmentsGfx = ENTITY_ADDR(entity, Gfx**, dlists);
     entity->renderSetupFunc = entity_BombableRock_setupGfx;
     entity->alpha = 255;
-    entity->position.y = data->inititalY;
-    guTranslateF(mtxTrans, entity->position.x, entity->position.y, entity->position.z);
+    entity->pos.y = data->inititalY;
+    guTranslateF(mtxTrans, entity->pos.x, entity->pos.y, entity->pos.z);
 
     for (i = 0; i < 5; i++) {
         guMtxL2F(mtxFragment, ENTITY_ADDR(entity, Mtx*, matrices++));
@@ -70,7 +70,7 @@ void entity_BombableRock_init_fragments(Entity* entity, Gfx** dlists, Mtx* matri
 }
 
 void entity_BombableRock_init(Entity* entity) {
-    entity->dataBuf.bombableRock->inititalY = entity->position.y;
+    entity->dataBuf.bombableRock->inititalY = entity->pos.y;
     entity_BombableRock_init_fragments(entity, Entity_BombableRock_FragmentsRender, Entity_BombableRock_FragmentMatrices);
 }
 
@@ -197,9 +197,9 @@ void entity_BombableRock_setupGfx(s32 entityIndex) {
     Gfx* fragmentDlist;
     Gfx** gfx = data->fragmentsGfx;
 
-    x_inv = -entity->position.x;
-    y_inv = -entity->position.y;
-    z_inv = -entity->position.z;
+    x_inv = -entity->pos.x;
+    y_inv = -entity->pos.y;
+    z_inv = -entity->pos.z;
 
     for (i = 0; i < 5; i++) {
         if (data->fragmentRebounds[i] < 2) {
@@ -232,7 +232,7 @@ void entity_BombableRock_idle(Entity* entity) {
     if (entity->collisionFlags & ENTITY_COLLISION_PARTNER) {
         entity_start_script(entity);
         exec_entity_commandlist(entity);
-        fx_big_smoke_puff(entity->position.x, entity->position.y + 25.0f, entity->position.z);
+        fx_big_smoke_puff(entity->pos.x, entity->pos.y + 25.0f, entity->pos.z);
     }
 }
 

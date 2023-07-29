@@ -4,9 +4,9 @@
 API_CALLABLE(N(UnusedSetEntityPosition)) {
     Entity* entity = get_entity_by_index(script->varTable[10]);
 
-    entity->position.x = script->varTable[0];
-    entity->position.y = script->varTable[1];
-    entity->position.z = script->varTable[2];
+    entity->pos.x = script->varTable[0];
+    entity->pos.y = script->varTable[1];
+    entity->pos.z = script->varTable[2];
     return ApiStatus_DONE2;
 }
 

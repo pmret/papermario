@@ -52,7 +52,7 @@ void N(HoppingAI_Hop)(Evt* script, MobileAISettings* aiSettings, EnemyDetectVolu
                     EffectInstance* emoteTemp;
                     fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
                     ai_enemy_play_sound(npc, SOUND_2F4, SOUND_PARAM_MORE_QUIET);
-                    npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+                    npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
                     script->AI_TEMP_STATE = 12;
                     return;
                 }
@@ -130,7 +130,7 @@ void N(HoppingAI_Loiter)(Evt* script, MobileAISettings* aiSettings, EnemyDetectV
         EffectInstance* emoteTemp;
         fx_emote(EMOTE_EXCLAMATION, npc, 0.0f, npc->collisionHeight, 1.0f, 2.0f, -20.0f, 15, &emoteTemp);
         ai_enemy_play_sound(npc, SOUND_2F4, SOUND_PARAM_MORE_QUIET);
-        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+        npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
         script->AI_TEMP_STATE = 12;
     } else if (npc->turnAroundYawAdjustment == 0) {
         npc->duration--;
@@ -153,7 +153,7 @@ void N(HoppingAI_ChaseInit)(Evt* script, MobileAISettings* aiSettings, EnemyDete
     enemy->flags |= ENEMY_FLAG_800;
     enemy->jumpVelocity = rand_int(5) + 10.0;
     enemy->jumpScale = 1.5f;
-    enemy->yaw = atan2(enemy->pos.x, enemy->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+    enemy->yaw = atan2(enemy->pos.x, enemy->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
     enemy->moveSpeed = aiSettings->chaseSpeed;
     script->AI_TEMP_STATE = 13;
     ai_enemy_play_sound(enemy, SOUND_B0000017, 0);

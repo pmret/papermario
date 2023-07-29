@@ -11,7 +11,7 @@ extern EvtScript N(EVS_BetaPanel_PoundNearby);
 API_CALLABLE(N(CheckShouldBreakFloor)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     s32* array = script->array;
-    f32 distance = dist2D(playerStatus->position.x, playerStatus->position.z, array[2], array[3]);
+    f32 distance = dist2D(playerStatus->pos.x, playerStatus->pos.z, array[2], array[3]);
 
     script->varTable[0] = 1;
     if ((playerStatus->actionState != ACTION_STATE_SPIN_POUND)
@@ -28,7 +28,7 @@ API_CALLABLE(N(CheckShouldBreakFloor)) {
 API_CALLABLE(N(CheckShouldFlipFloor)) {
     PlayerStatus* playerStatus = &gPlayerStatus;
     f32 distance = dist2D(
-        playerStatus->position.x, playerStatus->position.z,
+        playerStatus->pos.x, playerStatus->pos.z,
         script->array[2], script->array[4]);
 
     script->varTable[0] = 0;

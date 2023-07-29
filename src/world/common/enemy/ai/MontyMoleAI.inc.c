@@ -45,7 +45,7 @@ static s32 N(MontyMoleAI_CanAttack)(Evt* script, EnemyDetectVolume* territory, f
     if (clamp_angle(get_clamped_angle_diff(cam->currentYaw, npc->yaw)) < 180.0) {
         angle = 90.0f;
     }
-    if (fabsf(get_clamped_angle_diff(angle, atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z))) > 60.0) {
+    if (fabsf(get_clamped_angle_diff(angle, atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z))) > 60.0) {
         retVal = FALSE;
     }
     // check for overlap with player
@@ -53,7 +53,7 @@ static s32 N(MontyMoleAI_CanAttack)(Evt* script, EnemyDetectVolume* territory, f
         retVal = FALSE;
     }
     // check player elevation difference
-    if (fabsf(npc->pos.y - gPlayerStatusPtr->position.y) >= 40.0f) {
+    if (fabsf(npc->pos.y - gPlayerStatusPtr->pos.y) >= 40.0f) {
         retVal = FALSE;
     }
     // check for bow hiding
@@ -130,7 +130,7 @@ static void N(MontyMoleAI_PreSurface)(Evt* script, MobileAISettings* aiSettings,
 
     npc->flags &= ~NPC_FLAG_INVISIBLE;
     ai_enemy_play_sound(npc, SOUND_BURROW_SURFACE, 0);
-    npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+    npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
     npc->currentAnim = ANIM_MontyMole_Anim10; // emerge from ground
     npc->duration = 10;
     script->AI_TEMP_STATE = AI_STATE_MOLE_SURFACE;
@@ -185,7 +185,7 @@ static void N(MontyMoleAI_ThrowRock)(Evt* script, MobileAISettings* aiSettings, 
         rockEnemy->varTable[0] = 1;
     }
     if (moleNpc->duration < 8) {
-        if (dist2D(moleNpc->pos.x, moleNpc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z) > 100.0) {
+        if (dist2D(moleNpc->pos.x, moleNpc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z) > 100.0) {
             moleNpc->currentAnim = ANIM_MontyMole_Anim15; // clap
         }
     }

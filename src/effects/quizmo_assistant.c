@@ -49,9 +49,9 @@ EffectInstance* quizmo_assistant_main(s32 arg0, f32 arg1, f32 arg2, f32 arg3, f3
         data->vanishTimer = arg5;
     }
     data->fadeInAmt = 255;
-    data->position.x = arg1;
-    data->position.y = arg2;
-    data->position.z = arg3;
+    data->pos.x = arg1;
+    data->pos.y = arg2;
+    data->pos.z = arg3;
     data->anim = 0;
 
     return effect;
@@ -108,7 +108,7 @@ void quizmo_assistant_appendGfx(void* effect) {
     gDPPipeSync(gMainGfxPos++);
     gSPSegment(gMainGfxPos++, 0x09, VIRTUAL_TO_PHYSICAL(((EffectInstance*)effect)->graphics->data));
 
-    guTranslateF(sp18, data->position.x, data->position.y, data->position.z);
+    guTranslateF(sp18, data->pos.x, data->pos.y, data->pos.z);
     guRotateF(sp58, -gCameras[gCurrentCameraID].currentYaw, 0.0f, 1.0f, 0.0f);
     guMtxCatF(sp58, sp18, sp18);
     guTranslateF(sp58, 89.5f, 0.0f, 2.0f);

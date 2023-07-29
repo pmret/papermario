@@ -17,9 +17,9 @@ API_CALLABLE(N(func_802A123C_715A8C)) {
     s32 c = evt_get_variable(script, *args++);
     ItemEntity* item = get_item_entity(script->varTable[14]);
 
-    item->position.x = a;
-    item->position.y = b;
-    item->position.z = c;
+    item->pos.x = a;
+    item->pos.y = b;
+    item->pos.z = c;
 
     return ApiStatus_DONE2;
 }

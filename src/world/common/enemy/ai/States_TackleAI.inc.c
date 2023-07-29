@@ -13,7 +13,7 @@ void N(set_script_owner_npc_anim)(Evt* script, MobileAISettings* aiSettings, Ene
 
     npc->currentAnim = enemy->animList[ENEMY_ANIM_INDEX_MELEE_PRE];
     npc->duration = enemy->varTable[2];
-    npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x, gPlayerStatusPtr->position.z);
+    npc->yaw = atan2(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x, gPlayerStatusPtr->pos.z);
     script->AI_TEMP_STATE = 13;
 }
 
@@ -29,8 +29,8 @@ ApiStatus N(UnkDistFunc)(Evt* script, MobileAISettings* aiSettings, EnemyDetectV
             if ((enemy->varTable[7] == 5) || (enemy->varTable[7] == 0) || (enemy->varTable[7] == 1)) {
                 npc->collisionHeight = enemy->varTable[6] / 2;
             }
-            npc->duration = (dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->position.x,
-                                    gPlayerStatusPtr->position.z) / npc->moveSpeed) + 0.8;
+            npc->duration = (dist2D(npc->pos.x, npc->pos.z, gPlayerStatusPtr->pos.x,
+                                    gPlayerStatusPtr->pos.z) / npc->moveSpeed) + 0.8;
             if (npc->duration < enemy->varTable[3]) {
                 npc->duration = enemy->varTable[3];
             }

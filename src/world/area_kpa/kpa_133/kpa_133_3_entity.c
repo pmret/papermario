@@ -20,9 +20,9 @@ API_CALLABLE(N(SetSpringPosition)) {
     Bytecode* args = script->ptrReadPos;
     Entity* entity = get_entity_by_index(evt_get_variable(NULL, MV_SpringEntityID));
 
-    entity->position.x = evt_get_variable(script, *args++);
-    entity->position.y = evt_get_variable(script, *args++);
-    entity->position.z = evt_get_variable(script, *args++);
+    entity->pos.x = evt_get_variable(script, *args++);
+    entity->pos.y = evt_get_variable(script, *args++);
+    entity->pos.z = evt_get_variable(script, *args++);
     return ApiStatus_DONE2;
 }
 

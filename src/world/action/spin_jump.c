@@ -54,11 +54,11 @@ void action_update_spin_jump(void) {
             if (playerStatus->gravityIntegrator[0] >= 0.0f) {
                 playerStatus->gravityIntegrator[0] -= 0.54;
                 if (collisionStatus->currentCeiling < 0) {
-                    playerStatus->position.y += playerStatus->gravityIntegrator[0];
+                    playerStatus->pos.y += playerStatus->gravityIntegrator[0];
                 } else if (collisionStatus->currentCeiling & COLLISION_WITH_ENTITY_BIT) {
                     entity = get_entity_by_index(collisionStatus->currentCeiling);
                     if (entity != NULL) {
-                        playerStatus->position.y = entity->position.y - (playerStatus->colliderHeight * 0.5);
+                        playerStatus->pos.y = entity->pos.y - (playerStatus->colliderHeight * 0.5);
                     }
                 }
             }
@@ -75,7 +75,7 @@ void action_update_spin_jump(void) {
             if (playerStatus->gravityIntegrator[0] >= 0.0f) {
                 playerStatus->gravityIntegrator[0] -= 1.4;
                 if (collisionStatus->currentCeiling < 0) {
-                    playerStatus->position.y += playerStatus->gravityIntegrator[0];
+                    playerStatus->pos.y += playerStatus->gravityIntegrator[0];
                 }
             }
             if (--playerStatus->currentStateTime <= 0) {
@@ -83,7 +83,7 @@ void action_update_spin_jump(void) {
             }
             break;
         case SUBSTATE_HOVER:
-            playerStatus->position.y = player_check_collision_below(0.0f, &belowColliderID);
+            playerStatus->pos.y = player_check_collision_below(0.0f, &belowColliderID);
             RotationRate = 45.0f;
             playerStatus->pitch += RotationRate;
             if (playerStatus->pitch >= 360.0) {
@@ -98,7 +98,7 @@ void action_update_spin_jump(void) {
             break;
         case SUBSTATE_DESCEND:
             velocity = player_fall_distance();
-            playerStatus->position.y = player_check_collision_below(velocity, &belowColliderID);
+            playerStatus->pos.y = player_check_collision_below(velocity, &belowColliderID);
             if (velocity < -100.0f) {
                 playerStatus->gravityIntegrator[3] = 0.0f;
                 playerStatus->gravityIntegrator[2] = 0.0f;
@@ -140,7 +140,7 @@ void action_update_spin_jump(void) {
                         start_rumble(128, 25);
                         panels = &gCurrentHiddenPanels;
                         panels->tryFlipTrigger = TRUE;
-                        panels->flipTriggerPosY = playerStatus->position.y;
+                        panels->flipTriggerPosY = playerStatus->pos.y;
                         playerStatus->flags |= PS_FLAG_SPECIAL_LAND;
                     }
                 }
@@ -152,18 +152,18 @@ void action_update_spin_jump(void) {
                 landed = TRUE;
             } else {
                 if (playerStatus->gravityIntegrator[0] > 0.0f) {
-                    playerStatus->position.y += velocity;
+                    playerStatus->pos.y += velocity;
                 } else {
-                    playerStatus->position.y = player_check_collision_below(velocity, &belowColliderID);
+                    playerStatus->pos.y = player_check_collision_below(velocity, &belowColliderID);
                     if (playerStatus->gravityIntegrator[0] < 0.0f && belowColliderID >= 0) {
                         playerStatus->actionSubstate++;
                     }
                 }
-                playerStatus->position.y = player_check_collision_below(0.0f, &belowColliderID);
+                playerStatus->pos.y = player_check_collision_below(0.0f, &belowColliderID);
             }
             break;
         case SUBSTATE_HOLD:
-            playerStatus->position.y = player_check_collision_below(0.0f, &belowColliderID);
+            playerStatus->pos.y = player_check_collision_below(0.0f, &belowColliderID);
             if (belowColliderID >= 0) {
                 playerStatus->gravityIntegrator[0] = 0.0f;
                 playerStatus->gravityIntegrator[1] = 0.0f;
@@ -202,9 +202,9 @@ static s32 get_collider_below_spin_jump(void) {
     f32 posX, posY, posZ, height;
     f32 hitRx, hitRz, hitDirX, hitDirZ;
 
-    posX = gPlayerStatus.position.x;
-    posZ = gPlayerStatus.position.z;
+    posX = gPlayerStatus.pos.x;
+    posZ = gPlayerStatus.pos.z;
     height = gPlayerStatus.colliderHeight;
-    posY = gPlayerStatus.position.y + (height * 0.5f);
+    posY = gPlayerStatus.pos.y + (height * 0.5f);
     return player_raycast_below_cam_relative(&gPlayerStatus, &posX, &posY, &posZ, &height, &hitRx, &hitRz, &hitDirX, &hitDirZ);
 }

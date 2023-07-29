@@ -22,7 +22,7 @@ void entity_ScriptSpring_idle(Entity* entity) {
             set_action_state(ACTION_STATE_USE_SPRING);
         }
         exec_entity_commandlist(entity);
-        sfx_play_sound_at_position(SOUND_2086, SOUND_SPACE_MODE_0, entity->position.x, entity->position.y, entity->position.z);
+        sfx_play_sound_at_position(SOUND_2086, SOUND_SPACE_MODE_0, entity->pos.x, entity->pos.y, entity->pos.z);
     }
 }
 
@@ -37,7 +37,7 @@ void entity_SimpleSpring_idle(Entity* entity) {
         play_model_animation(entity->virtualModelIndex, Entity_SimpleSpring_AnimLaunch);
         entity_start_script(entity);
         exec_entity_commandlist(entity);
-        sfx_play_sound_at_position(SOUND_2086, SOUND_SPACE_MODE_0, entity->position.x, entity->position.y, entity->position.z);
+        sfx_play_sound_at_position(SOUND_2086, SOUND_SPACE_MODE_0, entity->pos.x, entity->pos.y, entity->pos.z);
         disable_player_input();
         playerStatus->currentSpeed = 0;
     }
@@ -50,7 +50,7 @@ void entity_SimpleSpring_set_jump_params(Entity* entity) {
     gPlayerStatus.gravityIntegrator[0] = 15.0f;
     gPlayerStatus.gravityIntegrator[1] = 0;
     gPlayerStatus.gravityIntegrator[2] = data->launchVelocity;
-    gPlayerStatus.gravityIntegrator[3] = entity->position.y;
+    gPlayerStatus.gravityIntegrator[3] = entity->pos.y;
 }
 
 void entity_SimpleSpring_enable_player_input(Entity* ent) {

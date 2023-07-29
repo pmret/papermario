@@ -140,7 +140,7 @@ API_CALLABLE(N(AwaitImposterHitPlayer)) {
     Npc* npc2 = get_npc_unsafe(NPC_FakeLuigi);
     Npc* npc3 = get_npc_unsafe(NPC_FakeKoopaKoot);
     Npc* npc4 = get_npc_unsafe(NPC_FakeKolorado);
-    f32 playerX = gPlayerStatus.position.x;
+    f32 playerX = gPlayerStatus.pos.x;
 
     if (npc0->pos.x < playerX) {
         return ApiStatus_DONE2;

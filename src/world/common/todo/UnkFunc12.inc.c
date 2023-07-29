@@ -6,21 +6,21 @@ API_CALLABLE(N(UnkFunc12)) {
     f32 posX, posY, posZ, hitDepth;
 
     if (script->varTable[5] == 0) {
-        playerStatus->position.x = script->varTable[0];
+        playerStatus->pos.x = script->varTable[0];
     } else {
-        playerStatus->position.z = script->varTable[0];
+        playerStatus->pos.z = script->varTable[0];
     }
 
-    posX = playerStatus->position.x;
-    posY = playerStatus->position.y + 10.0f;
-    posZ = playerStatus->position.z;
+    posX = playerStatus->pos.x;
+    posY = playerStatus->pos.y + 10.0f;
+    posZ = playerStatus->pos.z;
     hitDepth = 40.0f;
 
     npc_raycast_down_sides(0, &posX, &posY, &posZ, &hitDepth);
 
-    playerStatus->position.x = posX;
-    playerStatus->position.y = posY;
-    playerStatus->position.z = posZ;
+    playerStatus->pos.x = posX;
+    playerStatus->pos.y = posY;
+    playerStatus->pos.z = posZ;
 
     return ApiStatus_DONE2;
 }

@@ -661,9 +661,9 @@ s32 CamPresetUpdate_G(Evt* script, s32 isInitialCall) {
                 return ApiStatus_BLOCK;
             }
             actorPart = get_actor_part(targetActor, BattleCam_TargetActorPart);
-            x = actorPart->absolutePosition.x;
-            y = actorPart->absolutePosition.y + actorPart->size.y / 2 + actorPart->size.y / 4;
-            z = actorPart->absolutePosition.z;
+            x = actorPart->absolutePos.x;
+            y = actorPart->absolutePos.y + actorPart->size.y / 2 + actorPart->size.y / 4;
+            z = actorPart->absolutePos.z;
 
             sizeY = actorPart->size.y;
             sizeX = actorPart->size.x;

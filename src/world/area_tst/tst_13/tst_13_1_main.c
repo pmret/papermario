@@ -287,7 +287,7 @@ void N(build_gfx_floor)(void) {
     f32 x, y, z;
 
     N(BuildGfxCallCount)++;
-    guTranslateF(sp10, gPlayerStatus.position.x, 0.0f, gPlayerStatus.position.z);
+    guTranslateF(sp10, gPlayerStatus.pos.x, 0.0f, gPlayerStatus.pos.z);
 
     x = (sin_rad(N(BuildGfxCallCount) / 50.0f) * 0.5) + 0.5;
     y = SQ(cos_rad(N(BuildGfxCallCount) / 50.0f)) + 0.1;

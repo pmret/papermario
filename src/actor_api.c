@@ -68,13 +68,13 @@ void set_goal_pos_to_part(ActorState* state, s32 actorID, s32 partID) {
                 }
                 state->goalPos.z = actor->currentPos.z + part->partOffset.z + 10.0f;
             } else {
-                state->goalPos.x = part->absolutePosition.x + part->targetOffset.x;
+                state->goalPos.x = part->absolutePos.x + part->targetOffset.x;
                 if (!(actor->flags & ACTOR_PART_FLAG_800)) {
-                    state->goalPos.y = part->absolutePosition.y + part->targetOffset.y * actor->scalingFactor;
+                    state->goalPos.y = part->absolutePos.y + part->targetOffset.y * actor->scalingFactor;
                 } else {
-                    state->goalPos.y = part->absolutePosition.y - part->targetOffset.y * actor->scalingFactor;
+                    state->goalPos.y = part->absolutePos.y - part->targetOffset.y * actor->scalingFactor;
                 }
-                state->goalPos.z = part->absolutePosition.z + 10.0f;
+                state->goalPos.z = part->absolutePos.z + 10.0f;
             }
             break;
     }
@@ -104,13 +104,13 @@ void set_part_goal_to_actor_part(ActorPartMovement* movement, s32 actorID, s32 p
                 }
                 part->movement->goalPos.z = actor->currentPos.z + part->partOffset.z;
             } else {
-                part->movement->goalPos.x = part->absolutePosition.x + part->targetOffset.x;
+                part->movement->goalPos.x = part->absolutePos.x + part->targetOffset.x;
                 if (!(actor->flags & ACTOR_PART_FLAG_800)) {
-                    part->movement->goalPos.y = part->absolutePosition.y + part->targetOffset.y * actor->scalingFactor;
+                    part->movement->goalPos.y = part->absolutePos.y + part->targetOffset.y * actor->scalingFactor;
                 } else {
-                    part->movement->goalPos.y = part->absolutePosition.y - part->targetOffset.y * actor->scalingFactor;
+                    part->movement->goalPos.y = part->absolutePos.y - part->targetOffset.y * actor->scalingFactor;
                 }
-                part->movement->goalPos.z = part->absolutePosition.z;
+                part->movement->goalPos.z = part->absolutePos.z;
             }
             break;
     }
@@ -137,9 +137,9 @@ void set_part_absolute_position(s32 actorID, s32 partID, f32 x, f32 y, f32 z) {
         case ACTOR_CLASS_PARTNER:
         case ACTOR_CLASS_ENEMY:
             actorPart = get_actor_part(actor, partID);
-            actorPart->absolutePosition.x = x;
-            actorPart->absolutePosition.y = y;
-            actorPart->absolutePosition.z = z;
+            actorPart->absolutePos.x = x;
+            actorPart->absolutePos.y = y;
+            actorPart->absolutePos.z = z;
             break;
     }
 }
@@ -638,9 +638,9 @@ ApiStatus GetPartOffset(Evt* script, s32 isInitialCall) {
         y = actorPart->partOffset.y;
         z = actorPart->partOffset.z;
     } else {
-        x = actorPart->absolutePosition.x;
-        y = actorPart->absolutePosition.y;
-        z = actorPart->absolutePosition.z;
+        x = actorPart->absolutePos.x;
+        y = actorPart->absolutePos.y;
+        z = actorPart->absolutePos.z;
     }
 
     evt_set_variable(script, outX, x);
@@ -764,9 +764,9 @@ ApiStatus SetPartPos(Evt* script, s32 isInitialCall) {
                 actorPart->partOffset.y = y;
                 actorPart->partOffset.z = z;
             } else {
-                actorPart->absolutePosition.x = x;
-                actorPart->absolutePosition.y = y;
-                actorPart->absolutePosition.z = z;
+                actorPart->absolutePos.x = x;
+                actorPart->absolutePos.y = y;
+                actorPart->absolutePos.z = z;
             }
             break;
     }
