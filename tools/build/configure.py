@@ -273,6 +273,10 @@ def write_ninja_rules(
         command=f"$python {BUILD_TOOLS}/pm_item_hud_scripts.py $in $out",
     )
 
+    ninja.rule(
+        "world_map",
+        command=f"$python {BUILD_TOOLS}/pm_world_map.py $in $out",
+    )
 
     ninja.rule(
         "msg_combine",
@@ -578,6 +582,11 @@ class Configure:
                 "out_dir": str(effect_data_outdir),
             },
         )
+
+        build(
+            self.build_path() / "include/world_map.h",
+            [Path("src/gen/world_map.xml")],
+            "world_map",)
 
         build(
             self.build_path() / "include/item_entity_scripts.h",

@@ -1,7 +1,7 @@
 #include "pause_common.h"
 #include "message_ids.h"
 
-extern Gfx gPauseDLOrbs[];
+extern Gfx PauseGfxOrbs[];
 
 void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width, s32 height, s32 opacity, s32 darkening);
 void pause_badges_init(MenuPanel* panel);
@@ -531,7 +531,7 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
                     orbColorG1 = 255;
                     orbColorB1 = 100;
 
-                    gSPDisplayList(gMainGfxPos++, gPauseDLOrbs);
+                    gSPDisplayList(gMainGfxPos++, PauseGfxOrbs);
                     gDPSetTextureFilter(gMainGfxPos++, G_TF_BILERP);
 
                     if (isEquipped == 0) {
@@ -642,7 +642,7 @@ void pause_badges_draw_contents(MenuPanel* menu, s32 baseX, s32 baseY, s32 width
     orbColorG = 255;
     orbColorB = 100;
     maxBP = playerData->maxBP;
-    gSPDisplayList(gMainGfxPos++, gPauseDLOrbs);
+    gSPDisplayList(gMainGfxPos++, PauseGfxOrbs);
     gDPSetTextureFilter(gMainGfxPos++, G_TF_BILERP);
     for (orbIndex = 0; orbIndex < maxBP; orbIndex++) {
         gDPSetPrimColor(gMainGfxPos++, 0, 0, 227, 227, 227, 255);

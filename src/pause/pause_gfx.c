@@ -71,7 +71,7 @@ extern u8 pause_banner_boots_pal[];
 extern u8 pause_banner_star_energy_pal[];
 #endif
 
-Gfx gPauseDLBannerHp[] = {
+Gfx PauseGfxBannerHp[] = {
     gsDPPipeSync(),
     gsSPTexture(-1, -1, 0, G_TX_RENDERTILE, G_ON),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -90,7 +90,7 @@ Gfx gPauseDLBannerHp[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx gPauseDLBannerFp[] = {
+Gfx PauseGfxBannerFp[] = {
     gsDPPipeSync(),
     gsSPTexture(-1, -1, 0, G_TX_RENDERTILE, G_ON),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -109,7 +109,7 @@ Gfx gPauseDLBannerFp[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx gPauseDLBannerBp[] = {
+Gfx PauseGfxBannerBp[] = {
     gsDPPipeSync(),
     gsSPTexture(-1, -1, 0, G_TX_RENDERTILE, G_ON),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -128,7 +128,7 @@ Gfx gPauseDLBannerBp[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx gPauseDLBannerBoots[] = {
+Gfx PauseGfxBannerBoots[] = {
     gsDPPipeSync(),
     gsSPTexture(-1, -1, 0, G_TX_RENDERTILE, G_ON),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -147,7 +147,7 @@ Gfx gPauseDLBannerBoots[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx gPauseDLBannerHammer[] = {
+Gfx PauseGfxBannerHammer[] = {
     gsDPPipeSync(),
     gsSPTexture(-1, -1, 0, G_TX_RENDERTILE, G_ON),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -166,7 +166,7 @@ Gfx gPauseDLBannerHammer[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx gPauseDLBannerStarEnergy[] = {
+Gfx PauseGfxBannerStarEnergy[] = {
     gsDPPipeSync(),
     gsSPTexture(-1, -1, 0, G_TX_RENDERTILE, G_ON),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -185,7 +185,7 @@ Gfx gPauseDLBannerStarEnergy[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx gPauseDLStatsBar[] = {
+Gfx PauseGfxStatsBar[] = {
     gsDPPipeSync(),
     gsSPTexture(-1, -1, 0, G_TX_RENDERTILE, G_ON),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -204,7 +204,7 @@ Gfx gPauseDLStatsBar[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx gPauseDLWorldMap[] = {
+Gfx PauseGfxWorldMap[] = {
     gsDPPipeSync(),
     gsSPTexture(-1, -1, 0, G_TX_RENDERTILE, G_ON),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -222,7 +222,7 @@ Gfx gPauseDLWorldMap[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx gPauseDLPathPoints[] = {
+Gfx PauseGfxPathPoints[] = {
     gsDPPipeSync(),
     gsSPTexture(-1, -1, 0, G_TX_RENDERTILE, G_ON),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -242,7 +242,7 @@ Gfx gPauseDLPathPoints[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx gPauseDLArrows[] = {
+Gfx PauseGfxArrows[] = {
     gsDPPipeSync(),
     gsSPTexture(-1, -1, 0, G_TX_RENDERTILE, G_ON),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -260,7 +260,7 @@ Gfx gPauseDLArrows[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx gPauseDLOrbs[] = {
+Gfx PauseGfxOrbs[] = {
     gsDPPipeSync(),
     gsSPTexture(-1, -1, 0, G_TX_RENDERTILE, G_ON),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -278,7 +278,7 @@ Gfx gPauseDLOrbs[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx gPauseDLAvailable[] = {
+Gfx PauseGfxAvailable[] = {
     gsDPPipeSync(),
     gsSPTexture(-1, -1, 0, G_TX_RENDERTILE, G_ON),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -302,7 +302,7 @@ Gfx gPauseDLAvailable[] = {
 #define pause_prompt_check_abilities_png_height 16
 #endif
 
-Gfx gPauseDLCheckAbilities[] = {
+Gfx PauseGfxCheckAbilities[] = {
     gsDPPipeSync(),
     gsSPTexture(-1, -1, 0, G_TX_RENDERTILE, G_ON),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -321,7 +321,7 @@ Gfx gPauseDLCheckAbilities[] = {
     gsSPEndDisplayList(),
 };
 
-Gfx gPauseDLSpiritsBg[] = {
+Gfx PauseGfxSpiritsBg[] = {
     gsDPPipeSync(),
     gsSPTexture(-1, -1, 0, G_TX_RENDERTILE, G_ON),
     gsDPSetCycleType(G_CYC_1CYCLE),
@@ -567,16 +567,16 @@ s32 gPauseMessages[] = {
     [PAUSE_MSG_UNKNOWN_SPIRIT]      (s32) gPauseMsg_56,
 };
 
-Gfx* gPauseDLLabels[] = {
-    [PAUSE_LBL_HP]        gPauseDLBannerHp,
-    [PAUSE_LBL_FP]        gPauseDLBannerFp,
-    [PAUSE_LBL_BP]        gPauseDLBannerBp,
-    [PAUSE_LBL_BOOTS]     gPauseDLBannerBoots,
-    [PAUSE_LBL_HAMMER]    gPauseDLBannerHammer,
-    [PAUSE_LBL_ENERGY]    gPauseDLBannerStarEnergy,
-    [PAUSE_LBL_STATS]     gPauseDLStatsBar,
-    [PAUSE_LBL_AVAILABLE] gPauseDLAvailable,
-    [PAUSE_LBL_ABILITIES] gPauseDLCheckAbilities,
+Gfx* PauseGfxLabels[] = {
+    [PAUSE_LBL_HP]        PauseGfxBannerHp,
+    [PAUSE_LBL_FP]        PauseGfxBannerFp,
+    [PAUSE_LBL_BP]        PauseGfxBannerBp,
+    [PAUSE_LBL_BOOTS]     PauseGfxBannerBoots,
+    [PAUSE_LBL_HAMMER]    PauseGfxBannerHammer,
+    [PAUSE_LBL_ENERGY]    PauseGfxBannerStarEnergy,
+    [PAUSE_LBL_STATS]     PauseGfxStatsBar,
+    [PAUSE_LBL_AVAILABLE] PauseGfxAvailable,
+    [PAUSE_LBL_ABILITIES] PauseGfxCheckAbilities,
 };
 
 s32 pause_get_menu_msg(s32 index) {
@@ -602,7 +602,7 @@ void pause_draw_menu_label(s32 index, s32 x, s32 y) {
         xOffset = 160;
     }
 
-    gSPDisplayList(gMainGfxPos++, gPauseDLLabels[index]);
+    gSPDisplayList(gMainGfxPos++, PauseGfxLabels[index]);
     pause_draw_rect(x * 4, y * 4, (x + xOffset) * 4, (y + 16) * 4, 0, 0, 0, 0x400, 0x400);
 
 #if VERSION_PAL
