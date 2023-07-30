@@ -5,11 +5,13 @@ from pathlib import Path
 from typing import List, Dict
 import xml.etree.ElementTree as ET
 
+
 def get_required_attrib(elem: ET.Element, attrib: str) -> str:
     value = elem.attrib.get(attrib, None)
     if value == None:
         raise Exception(f"{elem.tag} is missing attribute: '{attrib}'")
     return str(value)
+
 
 class WorldMapEntry:
     def __init__(self, elem: ET.Element):
@@ -31,18 +33,17 @@ def build(in_xml: Path, out_c: Path):
     ScriptList = xml.getroot()
 
     with open(out_c, "w") as f:
-
         f.write("#ifndef WORLD_MAP_H\n")
         f.write("#define WORLD_MAP_H\n")
         f.write("/* This file is auto-generated. Do not edit. */\n\n")
-        f.write("#include \"common.h\"\n\n")
+        f.write('#include "common.h"\n\n')
 
         locations: List[WorldMapEntry] = []
 
         for elem in ScriptList.findall("Location"):
             locations.append(WorldMapEntry(elem))
 
-        loc_to_idx: Dict[str,int] = {}
+        loc_to_idx: Dict[str, int] = {}
         for idx, loc in enumerate(locations):
             loc_to_idx[loc.location] = idx
 
@@ -65,13 +66,16 @@ def build(in_xml: Path, out_c: Path):
             if loc.parent not in loc_to_idx:
                 raise Exception(f"{loc.parent} is not defined")
 
-            f.write(f"    {{ .id = {loc.location}, .parent = {loc_to_idx[loc.parent]}, .afterRequirement = {loc.requires}, " \
-                + f".pos = {{ .x = {loc.startX}, .y = {loc.startY} }}, " \
-                + f".pathLength = {len(loc.path)}, .path = PauseMapPaths[{idx}] }},\n")
+            f.write(
+                f"    {{ .id = {loc.location}, .parent = {loc_to_idx[loc.parent]}, .afterRequirement = {loc.requires}, "
+                + f".pos = {{ .x = {loc.startX}, .y = {loc.startY} }}, "
+                + f".pathLength = {len(loc.path)}, .path = PauseMapPaths[{idx}] }},\n"
+            )
 
         f.write("};\n")
 
         f.write("\n#endif // WORLD_MAP_H\n")
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generates world map data")

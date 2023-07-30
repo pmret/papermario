@@ -5,16 +5,16 @@ import argparse
 from pathlib import Path
 import xml.etree.ElementTree as ET
 
+
 def build(in_xml: Path, out_c: Path):
     xml = ET.parse(in_xml)
     ScriptList = xml.getroot()
 
     with open(out_c, "w") as f:
-
         f.write("#ifndef ITEM_HUD_SCRIPTS_H\n")
         f.write("#define ITEM_HUD_SCRIPTS_H\n")
         f.write("/* This file is auto-generated. Do not edit. */\n\n")
-        f.write("#include \"hud_element.h\"\n\n")
+        f.write('#include "hud_element.h"\n\n')
 
         for Script in ScriptList.findall("HScript"):
             name = Script.attrib.get("name", None)
@@ -24,7 +24,7 @@ def build(in_xml: Path, out_c: Path):
 
             if name is None:
                 raise Exception("HScript is missing attribute: 'name'")
-            
+
             if template is None:
                 raise Exception("HScript is missing attribute: 'name'")
 
@@ -48,6 +48,7 @@ def build(in_xml: Path, out_c: Path):
                 f.write("HudScript HES_Item_CoinSparkleRandom = HES_TEMPLATE_COIN_SPARKLE();\n")
 
         f.write("\n#endif // ITEM_HUD_SCRIPTS_H\n")
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generates item HUD scripts")

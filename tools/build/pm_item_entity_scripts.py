@@ -5,16 +5,16 @@ import argparse
 from pathlib import Path
 import xml.etree.ElementTree as ET
 
+
 def build(in_xml: Path, out_c: Path):
     xml = ET.parse(in_xml)
     ScriptList = xml.getroot()
 
     with open(out_c, "w") as f:
-
         f.write("#ifndef ITEM_ENTITY_SCRIPTS_H\n")
         f.write("#define ITEM_ENTITY_SCRIPTS_H\n")
         f.write("/* This file is auto-generated. Do not edit. */\n\n")
-        f.write("#include \"item_entity.h\"\n\n")
+        f.write('#include "item_entity.h"\n\n')
 
         for Script in ScriptList.findall("IScript"):
             name = Script.attrib.get("name", None)
@@ -23,10 +23,10 @@ def build(in_xml: Path, out_c: Path):
 
             if name is None:
                 raise Exception("IScript is missing attribute: 'name'")
-            
+
             if template is None:
                 raise Exception("IScript is missing attribute: 'template'")
-            
+
             if icon is None:
                 icon = ""
             else:
@@ -35,6 +35,7 @@ def build(in_xml: Path, out_c: Path):
             f.write(f"ItemScript IES_{name} = IES_TEMPLATE_{template}({icon});\n")
 
         f.write("\n#endif // ITEM_ENTITY_SCRIPTS_H\n")
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generates item entity scripts")

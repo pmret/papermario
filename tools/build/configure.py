@@ -566,18 +566,21 @@ class Configure:
         build(
             self.build_path() / "include/world_map.h",
             [Path("src/gen/world_map.xml")],
-            "world_map",)
+            "world_map",
+        )
 
         build(
             self.build_path() / "include/item_entity_scripts.h",
             [Path("src/gen/item_entity_scripts.xml")],
-            "item_entity_scripts",)
+            "item_entity_scripts",
+        )
 
         build(
             self.build_path() / "include/item_hud_scripts.h",
             [Path("src/gen/item_hud_scripts.xml")],
-            "item_hud_scripts",)
-        
+            "item_hud_scripts",
+        )
+
         # Build objects
         for entry in self.linker_entries:
             seg = entry.segment
