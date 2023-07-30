@@ -34,12 +34,6 @@ enum {
         is_End \
     }
 
-#define IES_TEMPLATE_BASIC(icon) \
-    { \
-        is_SetIcon(255, icon) \
-        is_End \
-    }
-
 #define IES_TEMPLATE_HEART() \
     { \
         is_SetIcon(10, anim_heart_0) \
